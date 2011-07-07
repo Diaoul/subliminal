@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 #
 # Subliminal - Subtitles, faster than your thoughts
+# Copyright (c) 2008-2011 Patrick Dessalle <patrick@dessalle.be>
 # Copyright (c) 2011 Antoine Bertin <diaoulael@gmail.com>
 #
 # This file is part of Subliminal.

@@ -19,7 +19,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-__version__ = '0.1'
+__version__ = 'master'
 
 
 from subliminal import *

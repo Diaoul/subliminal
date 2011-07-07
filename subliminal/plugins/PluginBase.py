@@ -114,7 +114,6 @@ class PluginBase(object):
     def getRevertLanguage(self, language):
         """Returns the short (two-character) representation from the long language name"""
         try:
-            self.logger.debug(language + "   " + repr(self.revertPluginLanguages))
             return self.revertPluginLanguages[language]
         except KeyError, e:
             self.logger.warn(u"Ooops, you found a missing language in the configuration file of %s: %s. Send a bug report to have it added." % (self.getClassName(), language))

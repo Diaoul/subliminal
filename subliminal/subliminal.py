@@ -217,7 +217,7 @@ class Subliminal(object):
         """Save plugins to configuration file"""
         logger.debug(u"Saving plugins %s to configuration file" % self._plugins)
         self.config.set("DEFAULT", "plugins", ",".join(self._plugins))
-        self._writeConfigFile
+        self._writeConfigFile()
 
     def _loadPluginsFromConfig(self):
         """Load plugins from configuration file"""

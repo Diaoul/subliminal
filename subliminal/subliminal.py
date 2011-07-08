@@ -251,8 +251,8 @@ class Subliminal(object):
             - filenames
         """
         search_results = []
-        if isinstance(entries, str):
-            entries = [entries]
+        if isinstance(entries, basestring):
+            entries = [ek.fixStupidEncodings(entries)]
         elif not isinstance(entries, list):
             raise TypeError('Entries should be a list or a string')
         for e in entries:
@@ -360,14 +360,14 @@ class Subliminal(object):
                 mimetype = mimetypes.guess_type(entry)[0]
                 if mimetype not in SUPPORTED_FORMATS:
                     return []
-            basepath = ek.ek(os.path.splitext, entry)[0]
+            basepath = ek.fixStupidEncodings(ek.ek(os.path.splitext, entry)[0])
             # check for .xx.srt if needed
             if self.multi and self.languages:
                 if self.force:
                     return [(self.languages, [ek.ek(os.path.normpath, entry)])]
                 needed_languages = self.languages[:]
                 for l in self.languages:
-                    if ek.ek(os.path.exists, ek.fixStupidEncodings(basepath + '.%s.srt') % l):
+                    if ek.ek(os.path.exists, basepath + '.%s.srt' % l):
                         logger.info(u"Skipping language %s for file %s as it already exists. Use the --force option to force the download" % (l, entry))
                         needed_languages.remove(l)
                 if needed_languages:

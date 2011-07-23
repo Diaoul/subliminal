@@ -133,7 +133,7 @@ class OpenSubtitles(PluginBase.PluginBase):
         if not imdbID and not moviehash and not bytesize:
             self.logger.debug(u"No search term, we'll use the filename")
             guess = guessit.guess_file_info(filepath, 'autodetect')
-            if guess['type'] == 'episode':
+            if guess['type'] == 'episode' and 'series' in guess:
                 search['query'] = guess['series']
             elif guess['type'] == 'movie':
                 search['query'] = guess['title']

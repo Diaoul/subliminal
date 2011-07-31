@@ -21,9 +21,9 @@
 #
 
 from setuptools import setup
-from subliminal import __version__
 
 
+execfile('subliminal/version.py')
 setup(name='subliminal',
     version=__version__,
     license="LGPLv3",

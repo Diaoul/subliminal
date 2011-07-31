@@ -1,0 +1,100 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+#
+# Subliminal - Subtitles, faster than your thoughts
+# Copyright (c) 2008-2011 Patrick Dessalle <patrick@dessalle.be>
+# Copyright (c) 2011 Antoine Bertin <diaoulael@gmail.com>
+#
+# This file is part of Subliminal.
+#
+# Subliminal is free software; you can redistribute it and/or modify it under
+# the terms of the Lesser GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# Subliminal is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# Lesser GNU General Public License for more details.
+#
+# You should have received a copy of the Lesser GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+from optparse import OptionParser
+import subliminal
+import logging
+import mimetypes
+import os
+import sys
+
+
+def main():
+    '''Download subtitles'''
+    # parse command line options
+    parser = OptionParser("usage: %prog [options] file1 file2", version=subliminal.__version__)
+    parser.add_option("-l", "--language", action="append", dest="languages", help="wanted language (ISO 639-1 two chars) for the subtitles (e.g. fr, en). Multiple uses allowed such that `%prog -l fr -l en file1`")
+    parser.add_option("-m", "--multi", action="store_true", dest="multi", help="download one subtitle per specified language (instead of one of them) and name them accordingly (e.g. .fr.srt, .en.srt)")
+    parser.add_option("-p", "--plugin", action="append", dest="plugins", help="plugins to activate")
+    parser.add_option("-f", "--force", action="store_true", dest="force", help="force download of a subtitle even there is already one present")
+    parser.add_option("-C", "--no-config-file", action="store_false", dest="config", help="do not use configuration file (requires -l to be specified)")
+    parser.add_option("-c", "--config-file", action="store", dest="config", help="configuration file to use")
+    parser.add_option("-w", "--workers", action="store", dest="workers", help="specify the number of threads to use")
+    parser.add_option("--cache-dir", action="store", dest="cache_dir", help="cache directory to use")
+    parser.add_option("--no-cache-dir", action="store_false", dest="cache_dir", help="do not use cache directory (some plugins may not work)")
+    parser.add_option("--list-all-plugins", action="store_true", dest="list_all_plugins", help="list all plugins available")
+    parser.add_option("--list-api-plugins", action="store_true", dest="list_api_plugins", help="list api-based plugins")
+    parser.add_option("--list-active-plugins", action="store_true", dest="list_active_plugins", help="list currently active plugins")
+    parser.add_option("-v", "--verbose", action="count", dest="verbose", help="increase verbosity (maximum 2 times)")
+    parser.set_defaults(verbose=0, cache_dir=True, config=True, workers=4)
+    (options, args) = parser.parse_args()
+    if not args:
+        print parser.print_help()
+        exit(1)
+    if options.verbose == 2:
+        logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(name)-24s %(levelname)-8s %(message)s', datefmt='%b-%d %H:%M:%S')
+    elif options.verbose == 1:
+        logging.basicConfig(level=logging.WARN, format='%(levelname)s: %(name)s %(message)s')
+    else:
+        logging.basicConfig(level=logging.ERROR)
+    if not options.config and not options.languages:
+        parser.error("Option -C (--no-config-file) is used without -l (--language)")
+    subliminal_client = subliminal.Subliminal(config=options.config, cache_dir=options.cache_dir, workers=options.workers, multi=options.multi, force=options.force, max_depth=3, autostart=False)
+    if options.plugins:
+        subliminal_client.plugins = options.plugins
+    if options.list_all_plugins:
+        plugins = subliminal_client.listExistingPlugins()
+        print ', '.join(subliminal_client.listExistingPlugins())
+        exit(0)
+    if options.list_api_plugins:
+        plugins = subliminal_client.list_api_plugins()
+        print ', '.join(subliminal_client.listExistingPlugins())
+        exit(0)
+    if options.list_active_plugins:
+        plugins = subliminal_client.plugins
+        print ', '.join(subliminal_client.listExistingPlugins())
+        exit(0)
+    if options.languages:
+        subliminal_client.languages = options.languages
+    else:
+        logging.info("No language given, looking into configuration file")
+        languages = subliminal_client.languages
+        if not languages:
+            logging.error("No language found in configuration file")
+            sys.stderr.write("No language found in configuration file")
+            exit(1)
+            parser.exit
+    subliminal_client.startWorkers()
+    subtitles = subliminal_client.downloadSubtitles(args)
+    subliminal_client.stopWorkers()
+    if len(subtitles) == 0:
+        sys.stderr.write("No subtitles found")
+        exit(1)
+    print "*" * 50
+    print "Downloaded %s subtitles" % len(subtitles)
+    for s in subtitles:
+        print s['lang'] + " - " + s['subtitlepath']
+    print "*" * 50
+
+if __name__ == "__main__":
+    main()

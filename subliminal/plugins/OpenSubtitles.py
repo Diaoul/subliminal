@@ -112,6 +112,7 @@ class OpenSubtitles(PluginBase.PluginBase):
         f = ek.ek(gzip.open, subtitleFilename + ".gz")
         dump = ek.ek(open, subtitleFilename, "wb")
         dump.write(f.read())
+        self.adjustPermissions(subtitleFilename)
         dump.close()
         f.close()
         ek.ek(os.remove, subtitleFilename + ".gz")

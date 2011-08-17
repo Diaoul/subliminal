@@ -193,7 +193,7 @@ class Subliminal(object):
 
     def set_plugins(self, value):
         """Set plugins and save to configuration file if specified by the constructor"""
-        logger.debug(u"Setting plugins to %s" % value)
+        logger.debug(u'Setting plugins to %r' % value)
         self._plugins = filter(self.isValidPlugin, value)
         if self.config:
             self._savePluginsToConfig()

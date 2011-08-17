@@ -52,7 +52,7 @@ def main():
         print parser.print_help()
         exit(1)
     if options.verbose == 2:
-        logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(name)-24s %(levelname)-8s %(message)s', datefmt='%b-%d %H:%M:%S')
+        logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(name)-24s %(levelname)-8s %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
     elif options.verbose == 1:
         logging.basicConfig(level=logging.WARN, format='%(levelname)s: %(name)s %(message)s')
     else:
@@ -77,10 +77,10 @@ def main():
     if options.languages:
         subliminal_client.languages = options.languages
     else:
-        logging.info("No language given, looking into configuration file")
+        logging.info(u"No language given, looking into configuration file")
         languages = subliminal_client.languages
         if not languages:
-            logging.error("No language found in configuration file")
+            logging.error(u"No language found in configuration file")
             sys.stderr.write("No language found in configuration file")
             exit(1)
             parser.exit

@@ -105,7 +105,7 @@ class PluginBase(object):
             self.logger.error(u"URL Error:", e.reason, url)
 
     def adjustPermissions(self, filepath):
-        if self.config_dict['files_mode'] != -1:
+        if self.config_dict and 'files_mode' in self.config_dict and self.config_dict['files_mode'] != -1:
             ek.ek(os.chmod, filepath, self.config_dict['files_mode'])
 
     @abc.abstractmethod

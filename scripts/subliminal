@@ -33,8 +33,8 @@ def main():
     '''Download subtitles'''
     # parse command line options
     parser = argparse.ArgumentParser(description='Subtitles, faster than your thoughts')
-    parser.add_argument('-l', '--language', action='append', help='wanted language (ISO 639-1)', metavar='LG')
-    parser.add_argument('-p', '--plugin', action='append', help='plugin to use', metavar='NAME')
+    parser.add_argument('-l', '--language', action='append', dest='languages', help='wanted language (ISO 639-1)', metavar='LG')
+    parser.add_argument('-p', '--plugin', action='append', dest='plugins', help='plugin to use', metavar='NAME')
     parser.add_argument('-m', '--multi', action='store_true', help='download multiple subtitle languages')
     parser.add_argument('-f', '--force', action='store_true', help='replace existing subtitle file')
     parser.add_argument('-w', '--workers', action='store', help='use N threads (default: %(default)s)', metavar='N', default=4)
@@ -56,10 +56,10 @@ def main():
 
     # Initialize the instance
     subli = subliminal.Subliminal(cache_dir=args.cache_dir, workers=args.workers, multi=args.multi, force=args.force, max_depth=3, autostart=False, files_mode=-1)
-    if args.plugin:
-        subli.plugins = args.plugin
-    if args.language:
-        subli.languages = args.language
+    if args.plugins:
+        subli.plugins = args.plugins
+    if args.languages:
+        subli.languages = args.languages
     subli.startWorkers()
     subtitles = subli.downloadSubtitles(args.paths)
     subli.stopWorkers()

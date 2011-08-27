@@ -19,6 +19,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+import threading
 from itertools import groupby
 import PluginWorker
 import Queue
@@ -33,8 +34,32 @@ import locale
 import encodingKludge as ek
 
 
-SUPPORTED_FORMATS = 'video/x-msvideo', 'video/quicktime', 'video/x-matroska', 'video/mp4'
+# be nice
+try:
+    from logging import NullHandler
+except ImportError:
+
+    class NullHandler(logging.Handler):
+        def emit(self, record):
+            pass
 logger = logging.getLogger('subliminal')
+logger.addHandler(NullHandler())
+
+# const
+FORMATS = ['video/x-msvideo', 'video/quicktime', 'video/x-matroska', 'video/mp4']
+LANGUAGES = ['aa', 'ab', 'ae', 'af', 'ak', 'am', 'an', 'ar', 'as', 'av', 'ay', 'az', 'ba', 'be', 'bg', 'bh', 'bi',
+    'bm', 'bn', 'bo', 'br', 'bs', 'ca', 'ce', 'ch', 'co', 'cr', 'cs', 'cu', 'cv', 'cy', 'da', 'de', 'dv', 'dz', 'ee',
+    'el', 'en', 'eo', 'es', 'et', 'eu', 'fa', 'ff', 'fi', 'fj', 'fo', 'fr', 'fy', 'ga', 'gd', 'gl', 'gn', 'gu', 'gv',
+    'ha', 'he', 'hi', 'ho', 'hr', 'ht', 'hu', 'hy', 'hz', 'ia', 'id', 'ie', 'ig', 'ii', 'ik', 'io', 'is', 'it', 'iu',
+    'ja', 'jv', 'ka', 'kg', 'ki', 'kj', 'kk', 'kl', 'km', 'kn', 'ko', 'kr', 'ks', 'ku', 'kv', 'kw', 'ky', 'la', 'lb',
+    'lg', 'li', 'ln', 'lo', 'lt', 'lu', 'lv', 'mg', 'mh', 'mi', 'mk', 'ml', 'mn', 'mo', 'mr', 'ms', 'mt', 'my', 'na',
+    'nb', 'nd', 'ne', 'ng', 'nl', 'nn', 'no', 'nr', 'nv', 'ny', 'oc', 'oj', 'om', 'or', 'os', 'pa', 'pi', 'pl', 'ps',
+    'pt', 'qu', 'rm', 'rn', 'ro', 'ru', 'rw', 'sa', 'sc', 'sd', 'se', 'sg', 'si', 'sk', 'sl', 'sm', 'sn', 'so', 'sq',
+    'sr', 'ss', 'st', 'su', 'sv', 'sw', 'ta', 'te', 'tg', 'th', 'ti', 'tk', 'tl', 'tn', 'to', 'tr', 'ts', 'tt', 'tw',
+    'ty', 'ug', 'uk', 'ur', 'uz', 've', 'vi', 'vo', 'wa', 'wo', 'xh', 'yi', 'yo', 'za', 'zh', 'zu']  # ISO 639-1
+PLUGINS = ['Addic7ed', 'BierDopje', 'OpenSubtitles', 'SubsWiki', 'Subtitulos', 'TheSubDB']
+API_PLUGINS = filter(lambda p: getattr(plugins, p).api_based, PLUGINS)
+
 SYS_ENCODING = None
 try:
     locale.setlocale(locale.LC_ALL, "")
@@ -58,7 +83,7 @@ class Subliminal(object):
         self.taskQueue = Queue.Queue()
         self.resultQueue = Queue.Queue()
         self._languages = None
-        self._plugins = self.listAPIPlugins()
+        self._plugins = API_PLUGINS
         self.workers = workers
         self.plugins_config = plugins_config
         self.files_mode = files_mode
@@ -75,56 +100,29 @@ class Subliminal(object):
             self.cache_dir = None
             logger.error(u'Failed to use the cache directory, continue without it')
 
-    @staticmethod
-    def listExistingPlugins():
-        """List all possible plugins"""
-        return map(lambda x: x.__name__, plugins.PluginBase.PluginBase.__subclasses__())
-
-    @staticmethod
-    def listAPIPlugins():
-        """List plugins that use API"""
-        return filter(Subliminal.isAPIBasedPlugin, Subliminal.listExistingPlugins())
-
     def get_languages(self):
         """Getter for languages"""
         return self._languages
 
-    def set_languages(self, value):
+    def set_languages(self, languages):
         """Setter for languages"""
-        logger.debug(u'Setting languages to %r' % value)
-        self._languages = filter(self.isValidLanguage, value)
-
-    @staticmethod
-    def isValidLanguage(language):
-        """Check if a language is valid"""
-        if len(language) != 2:
-            logger.error(u'Language %s is not valid' % language)
-            return False
-        return True
+        logger.debug(u'Setting languages to %r' % languages)
+        for l in languages:
+            if l not in LANGUAGES:
+                raise LanguageError(l)
+        self._languages = languages
 
     def get_plugins(self):
         """Getter for plugins"""
         return self._plugins
 
-    def set_plugins(self, value):
+    def set_plugins(self, plugins):
         """Setter for plugins"""
-        logger.debug(u'Setting plugins to %r' % value)
-        self._plugins = filter(self.isValidPlugin, value)
-
-    @staticmethod
-    def isValidPlugin(pluginName):
-        """Check if a plugin is valid (exists)"""
-        if pluginName not in Subliminal.listExistingPlugins():
-            logger.error(u'Plugin %s does not exist' % pluginName)
-            return False
-        return True
-
-    @staticmethod
-    def isAPIBasedPlugin(pluginName):
-        """Check if a plugin is API-based"""
-        if not getattr(plugins, pluginName).api_based:
-            return False
-        return True
+        logger.debug(u'Setting plugins to %r' % plugins)
+        for p in plugins:
+            if p not in PLUGINS:
+                raise PluginError(p)
+        self._plugins = plugins
 
     # getters/setters for the property _languages and _plugins
     languages = property(get_languages, set_languages)
@@ -152,18 +150,6 @@ class Subliminal(object):
         for i in range(taskCount):
             subtitles.extend(self.resultQueue.get(timeout=10))
         return subtitles
-
-    @staticmethod
-    def arrangeSubtitles(subtitles):
-        """Arrange subtitles in a handy dict by filename, language and plugin"""
-        arrangedSubtitles = {}
-        for (filename, subsByFilename) in groupby(sorted(subtitles, key=lambda x: x["filename"]), lambda x: x["filename"]):
-            arrangedSubtitles[filename] = {}
-            for (language, subsByFilenameByLanguage) in groupby(sorted(subsByFilename, key=lambda x: x["lang"]), lambda x: x["lang"]):
-                arrangedSubtitles[filename][language] = {}
-                for (plugin, subsByFilenameByLanguageByPlugin) in groupby(sorted(subsByFilenameByLanguage, key=lambda x: x["plugin"]), lambda x: x["plugin"]):
-                    arrangedSubtitles[filename][language][plugin] = sorted(list(subsByFilenameByLanguageByPlugin))
-        return arrangedSubtitles
 
     def sortSubtitlesRaw(self, subtitles):
         """Sort subtitles using user defined languages and plugins"""
@@ -246,7 +232,7 @@ class Subliminal(object):
             if depth != 0:  # only check for valid format if recursing, trust the user
                 mimetypes.add_type("video/x-matroska", ".mkv")
                 mimetype = mimetypes.guess_type(entry)[0]
-                if mimetype not in SUPPORTED_FORMATS:
+                if mimetype not in FORMATS:
                     return []
             basepath = ek.fixStupidEncodings(ek.ek(os.path.splitext, entry)[0])
             # check for .xx.srt if needed
@@ -283,7 +269,7 @@ class Subliminal(object):
         """Create a pool of workers and start them"""
         self.pool = []
         for i in range(self.workers):
-            worker = PluginWorker.PluginWorker(self.taskQueue, self.resultQueue)
+            worker = PluginWorker(self.taskQueue, self.resultQueue)
             worker.start()
             self.pool.append(worker)
             logger.debug(u"Worker %s added to the pool" % worker.name)
@@ -310,3 +296,69 @@ class Subliminal(object):
         config['force'] = self.force
         config['files_mode'] = self.files_mode
         return config
+
+
+class PluginWorker(threading.Thread):
+    """Threaded plugin worker"""
+    def __init__(self, taskQueue, resultQueue):
+        threading.Thread.__init__(self)
+        self.taskQueue = taskQueue
+        self.resultQueue = resultQueue
+        self.logger = logging.getLogger('subliminal.worker')
+
+    def run(self):
+        while True:
+            task = self.taskQueue.get()
+            result = None
+            try:
+                if not task:  # this is a poison pill
+                    break
+                elif task['task'] == 'list':  # the task is a listing
+                    # get the corresponding plugin
+                    plugin = getattr(plugins, task['plugin'])(task['config'])
+                    # split tasks if the plugin can't handle multi queries
+                    splitedTasks = plugin.splitTask(task)
+                    myTask = splitedTasks.pop()
+                    for st in splitedTasks:
+                        self.taskQueue.put(st)
+                    result = plugin.list(myTask['filenames'], myTask['languages'])
+                elif task['task'] == 'download':  # the task is to download
+                    result = None
+                    while task['subtitle']:
+                        subtitle = task['subtitle'].pop(0)
+                        # get the corresponding plugin
+                        plugin = getattr(plugins, subtitle['plugin'])(task['config'])
+                        path = plugin.download(subtitle)
+                        if path:
+                            subtitle['subtitlepath'] = path
+                            result = subtitle
+                            break
+                else:
+                    self.logger.error(u'Unknown task %s submited to worker %s' % (task['task'], self.name))
+            except:
+                self.logger.debug(traceback.print_exc())
+                self.logger.error(u"Worker couldn't do the job %s, continue anyway" % task['task'])
+            finally:
+                self.resultQueue.put(result)
+                self.taskQueue.task_done()
+        self.logger.debug(u'Thread %s terminated' % self.name)
+
+
+class LanguageError(Exception):
+    """Exception raised when invalid language is submitted
+
+    Attributes:
+        language -- language that cause the error
+    """
+    def __init__(self, language):
+        self.language = language
+
+
+class PluginError(Exception):
+    """"Exception raised when invalid plugin is submitted
+
+    Attributes:
+        plugin -- plugin that cause the error
+    """
+    def __init__(self, plugin):
+        self.plugin = plugin

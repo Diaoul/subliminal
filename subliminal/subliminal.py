@@ -20,7 +20,6 @@
 #
 
 from itertools import groupby
-import ConfigParser
 import PluginWorker
 import Queue
 import locale
@@ -50,13 +49,11 @@ if not SYS_ENCODING or SYS_ENCODING in ('ANSI_X3.4-1968', 'US-ASCII', 'ASCII'):
 class Subliminal(object):
     """Main Subliminal class"""
 
-    def __init__(self, config=True, cache_dir=True, workers=4, multi=False, force=False, max_depth=3, autostart=False, plugins_config=None, files_mode=-1):
+    def __init__(self, cache_dir=False, workers=4, multi=False, force=False, max_depth=3, autostart=False, plugins_config=None, files_mode=-1):
         # set default values
         self.multi = multi
         self.force = force
         self.max_depth = max_depth
-        self.config = None
-        self.config_file = None
         self.cache_dir = None
         self.taskQueue = Queue.Queue()
         self.resultQueue = Queue.Queue()
@@ -67,67 +64,16 @@ class Subliminal(object):
         self.files_mode = files_mode
         if autostart:
             self.startWorkers()
-        # handle configuration file preferences
-        try:
-            if config == True:  # default configuration file
-                import xdg.BaseDirectory as bd
-                self.config = ConfigParser.SafeConfigParser({"languages": "", "plugins": ""})
-                self.config_file = ek.ek(os.path.join, bd.xdg_config_home, "subliminal", "config.ini")
-                if not ek.ek(os.path.exists, self.config_file):  # configuration file doesn't exist, create it
-                    self._createConfigFile()
-                else:  # configuration file exists, load it
-                    self._loadConfigFile()
-            elif config:  # custom configuration file
-                self.config = ConfigParser.SafeConfigParser({"languages": "", "plugins": ""})
-                self.config_file = config
-                if not ek.ek(os.path.isfile, self.config_file):  # custom configuration file doesn't exist, create it
-                    self._createConfigFile()
-                else:
-                    self._loadConfigFile()
-        except:
-            self.config = None
-            self.config_file = None
-            logger.error(u"Failed to use the configuration file, continue without it")
-            raise
         # handle cache directory preferences
         try:
-            if cache_dir == True:  # default cache directory
-                import xdg.BaseDirectory as bd
-                self.cache_dir = ek.ek(os.path.join, bd.xdg_config_home, "subliminal", "cache")
-                if not ek.ek(os.path.exists, self.cache_dir):  # cache directory doesn't exist, create it
-                    ek.ek(os.mkdir, self.cache_dir)
-                    logger.debug(u'Creating cache directory: %s' % self.cache_dir)
-            elif cache_dir:  # custom configuration file
+            if cache_dir:  # custom configuration file
                 self.cache_dir = cache_dir
-                if not ek.ek(os.path.isdir, self.cache_dir):  # custom v file doesn't exist, create it
+                if not ek.ek(os.path.isdir, self.cache_dir):  # custom file doesn't exist, create it
                     ek.ek(os.mkdir, self.cache_dir)
                     logger.debug(u'Creating cache directory: %s' % self.cache_dir)
         except:
             self.cache_dir = None
-            logger.error(u"Failed to use the cache directory, continue without it")
-
-    def _loadConfigFile(self):
-        """Load a configuration file specified in self.config_file"""
-        self.config.read(self.config_file)
-        self._loadLanguagesFromConfig()
-        self._loadPluginsFromConfig()
-
-    def _createConfigFile(self):
-        """Create a configuration file specified in self.config_file"""
-        folder = ek.ek(os.path.dirname, self.config_file)
-        if not ek.ek(os.path.exists, folder):
-            logger.info(u"Creating folder: %s" % folder)
-            ek.ek(os.mkdir, folder)
-        # try to load a language from system
-        self._loadLanguageFromSystem()
-        self.config.set("DEFAULT", "languages", ",".join(self._languages))
-        self.config.set("DEFAULT", "plugins", ",".join(self._plugins))
-        self.config.add_section("SubtitleSource")
-        self.config.set("SubtitleSource", "key", "")
-        self._writeConfigFile()
-        logger.info(u"Creating configuration file: %s" % self.config_file)
-        logger.debug(u"Languages in created configuration file: %s" % self._languages)
-        logger.debug(u"Plugins in created configuration file: %s" % self._plugins)
+            logger.error(u'Failed to use the cache directory, continue without it')
 
     @staticmethod
     def listExistingPlugins():
@@ -139,71 +85,37 @@ class Subliminal(object):
         """List plugins that use API"""
         return filter(Subliminal.isAPIBasedPlugin, Subliminal.listExistingPlugins())
 
-    def _writeConfigFile(self):
-        """Write the configuration file"""
-        configfile = open(self.config_file, "w")
-        self.config.write(configfile)
-        configfile.close()
-
     def get_languages(self):
-        """Get current languages"""
+        """Getter for languages"""
         return self._languages
 
     def set_languages(self, value):
-        """Set languages and save to configuration file if specified by the constructor"""
-        logger.debug(u"Setting languages to %s" % value)
-        self._languages = value
-        if self.config:
-            self._saveLanguagesToConfig()
+        """Setter for languages"""
+        logger.debug(u'Setting languages to %r' % value)
+        self._languages = filter(self.isValidLanguage, value)
 
     @staticmethod
     def isValidLanguage(language):
         """Check if a language is valid"""
         if len(language) != 2:
-            logger.error(u"Language %s is not valid" % language)
+            logger.error(u'Language %s is not valid' % language)
             return False
         return True
 
-    def _saveLanguagesToConfig(self):
-        """Save languages to configuration file"""
-        logger.debug(u"Saving languages %s to configuration file" % self._languages)
-        self.config.set("DEFAULT", "languages", ",".join(self._languages))
-        self._writeConfigFile()
-
-    def _loadLanguagesFromConfig(self):
-        """Load languages from configuration file"""
-        configLanguages = self.config.get("DEFAULT", "languages")
-        logger.debug(u"Loading languages %s from configuration file" % configLanguages)
-        if not configLanguages:
-            self._languages = None
-            return
-        self._languages = filter(self.isValidLanguage, map(str.strip, configLanguages.split(",")))
-
-    def _loadLanguageFromSystem(self):
-        """Load language from system"""
-        logger.debug(u"Loading language from system")
-        try:
-            self._languages = [locale.getdefaultlocale()[0][:2]]
-            logger.debug(u"Language %s loaded from system" % self._languages)
-        except:
-            logger.warning(u"Could not read language from system")
-
     def get_plugins(self):
-        """Get current plugins"""
+        """Getter for plugins"""
         return self._plugins
 
     def set_plugins(self, value):
-        """Set plugins and save to configuration file if specified by the constructor"""
+        """Setter for plugins"""
         logger.debug(u'Setting plugins to %r' % value)
         self._plugins = filter(self.isValidPlugin, value)
-        if self.config:
-            self._savePluginsToConfig()
 
     @staticmethod
     def isValidPlugin(pluginName):
         """Check if a plugin is valid (exists)"""
         if pluginName not in Subliminal.listExistingPlugins():
-            logger.error(u"Plugin %s does not exist" % pluginName)
+            logger.error(u'Plugin %s does not exist' % pluginName)
             return False
         return True
 
@@ -214,34 +126,9 @@ class Subliminal(object):
             return False
         return True
 
-    def _savePluginsToConfig(self):
-        """Save plugins to configuration file"""
-        logger.debug(u"Saving plugins %s to configuration file" % self._plugins)
-        self.config.set("DEFAULT", "plugins", ",".join(self._plugins))
-        self._writeConfigFile()
-
-    def _loadPluginsFromConfig(self):
-        """Load plugins from configuration file"""
-        configPlugins = self.config.get("DEFAULT", "plugins")
-        logger.debug(u"Loading plugins %s from configuration file" % configPlugins)
-        self._plugins = filter(self.isValidPlugin, map(str.strip, configPlugins.split(",")))
-
     # getters/setters for the property _languages and _plugins
     languages = property(get_languages, set_languages)
     plugins = property(get_plugins, set_plugins)
-
-    def deactivatePlugin(self, plugin):
-        """Deactivate a plugin"""
-        self._plugins.remove(plugin)
-        if self.config:
-            self._savePluginsToConfig()
-
-    def activatePlugin(self, plugin):
-        """Activate a plugin"""
-        if self.isValidPlugin(plugin):
-            self._plugins.append(plugin)
-        if self.config:
-            self._savePluginsToConfig()
 
     def listSubtitles(self, entries):
         """
@@ -418,8 +305,6 @@ class Subliminal(object):
         config = {}
         config['multi'] = self.multi
         config['cache_dir'] = self.cache_dir
-        if self.config:
-            config['subtitlesource_key'] = self.config.get('SubtitleSource', 'key')
         if self.plugins_config and 'subtitlesource_key' in self.plugins_config:
             config['subtitlesource_key'] = self.plugins_config['subtitlesource_key']
         config['force'] = self.force

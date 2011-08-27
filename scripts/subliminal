@@ -41,19 +41,12 @@ def main():
     group_verbosity = parser.add_mutually_exclusive_group()
     group_verbosity.add_argument('-q', '--quiet', action='store_true', help='disable output')
     group_verbosity.add_argument('-v', '--verbose', action='store_true', help='verbose output')
-    group_config = parser.add_mutually_exclusive_group()
-    group_config.add_argument('-c', '--config-file', action='store', dest='config', help='configuration file to use', metavar='FILE', default=True)
-    group_config.add_argument('-C', '--no-config-file', action='store_false', dest='config', help='do not use configuration file')
     group_cache = parser.add_mutually_exclusive_group()
     group_cache.add_argument('--cache-dir', action='store', dest='cache_dir', help='cache directory to use', metavar='DIR', default=True)
     group_cache.add_argument('--no-cache-dir', action='store_false', dest='cache_dir', help='do not use cache directory (some plugins may not work)')
     parser.add_argument('--version', action='version', version=subliminal.__version__)
     parser.add_argument('paths', nargs='+', help='path to video files or folders', metavar='PATH')
     args = parser.parse_args()
-
-    # Check options
-    if not args.config and not args.language:
-        parser.error('Option -C (--no-config-file) requires -l (--language)')
 
     # Set log verbosity
     if args.verbose:
@@ -62,19 +55,11 @@ def main():
         logging.basicConfig(level=logging.WARN, format='%(levelname)s: %(name)s %(message)s')
 
     # Initialize the instance
-    subli = subliminal.Subliminal(config=args.config, cache_dir=args.cache_dir, workers=args.workers, multi=args.multi, force=args.force, max_depth=3, autostart=False, files_mode=-1)
+    subli = subliminal.Subliminal(cache_dir=args.cache_dir, workers=args.workers, multi=args.multi, force=args.force, max_depth=3, autostart=False, files_mode=-1)
     if args.plugin:
         subli.plugins = args.plugin
     if args.language:
         subli.languages = args.language
-    else:
-        logging.info(u'No language given, looking into configuration file')
-        languages = subli.languages
-        if not languages:
-            logging.error(u'No language found in configuration file')
-            if not args.quiet:
-                sys.stderr.write('No language found in configuration file')
-            exit(1)
     subli.startWorkers()
     subtitles = subli.downloadSubtitles(args.paths)
     subli.stopWorkers()

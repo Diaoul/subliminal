@@ -21,7 +21,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-from optparse import OptionParser
+import argparse
 import subliminal
 import logging
 import mimetypes
@@ -32,69 +32,62 @@ import sys
 def main():
     '''Download subtitles'''
     # parse command line options
-    parser = OptionParser("usage: %prog [options] file1 file2", version=subliminal.__version__)
-    parser.add_option("-l", "--language", action="append", dest="languages", help="wanted language (ISO 639-1 two chars) for the subtitles (e.g. fr, en). Multiple uses allowed such that `%prog -l fr -l en file1`")
-    parser.add_option("-m", "--multi", action="store_true", dest="multi", help="download one subtitle per specified language (instead of one of them) and name them accordingly (e.g. .fr.srt, .en.srt)")
-    parser.add_option("-p", "--plugin", action="append", dest="plugins", help="plugins to activate")
-    parser.add_option("-f", "--force", action="store_true", dest="force", help="force download of a subtitle even there is already one present")
-    parser.add_option("-C", "--no-config-file", action="store_false", dest="config", help="do not use configuration file (requires -l to be specified)")
-    parser.add_option("-c", "--config-file", action="store", dest="config", help="configuration file to use")
-    parser.add_option("-w", "--workers", action="store", dest="workers", help="specify the number of threads to use")
-    parser.add_option("--cache-dir", action="store", dest="cache_dir", help="cache directory to use")
-    parser.add_option("--no-cache-dir", action="store_false", dest="cache_dir", help="do not use cache directory (some plugins may not work)")
-    parser.add_option("--list-all-plugins", action="store_true", dest="list_all_plugins", help="list all plugins available")
-    parser.add_option("--list-api-plugins", action="store_true", dest="list_api_plugins", help="list api-based plugins")
-    parser.add_option("--list-active-plugins", action="store_true", dest="list_active_plugins", help="list currently active plugins")
-    parser.add_option("-v", "--verbose", action="count", dest="verbose", help="increase verbosity (maximum 2 times)")
-    parser.set_defaults(verbose=0, cache_dir=True, config=True, workers=4)
-    (options, args) = parser.parse_args()
-    if not args:
-        print parser.print_help()
-        exit(1)
-    if options.verbose == 2:
-        logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(name)-24s %(levelname)-8s %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
-    elif options.verbose == 1:
-        logging.basicConfig(level=logging.WARN, format='%(levelname)s: %(name)s %(message)s')
-    else:
-        logging.basicConfig(level=logging.ERROR)
-    if not options.config and not options.languages:
-        parser.error("Option -C (--no-config-file) is used without -l (--language)")
-    subliminal_client = subliminal.Subliminal(config=options.config, cache_dir=options.cache_dir, workers=options.workers, multi=options.multi, force=options.force, max_depth=3, autostart=False)
-    if options.plugins:
-        subliminal_client.plugins = options.plugins
-    if options.list_all_plugins:
-        plugins = subliminal_client.listExistingPlugins()
-        print ', '.join(subliminal_client.listExistingPlugins())
-        exit(0)
-    if options.list_api_plugins:
-        plugins = subliminal_client.list_api_plugins()
-        print ', '.join(subliminal_client.listExistingPlugins())
-        exit(0)
-    if options.list_active_plugins:
-        plugins = subliminal_client.plugins
-        print ', '.join(subliminal_client.listExistingPlugins())
-        exit(0)
-    if options.languages:
-        subliminal_client.languages = options.languages
-    else:
-        logging.info(u"No language given, looking into configuration file")
-        languages = subliminal_client.languages
-        if not languages:
-            logging.error(u"No language found in configuration file")
-            sys.stderr.write("No language found in configuration file")
-            exit(1)
-            parser.exit
-    subliminal_client.startWorkers()
-    subtitles = subliminal_client.downloadSubtitles(args)
-    subliminal_client.stopWorkers()
-    if len(subtitles) == 0:
-        sys.stderr.write("No subtitles found")
-        exit(1)
-    print "*" * 50
-    print "Downloaded %s subtitles" % len(subtitles)
-    for s in subtitles:
-        print s['lang'] + " - " + s['subtitlepath']
-    print "*" * 50
+    parser = argparse.ArgumentParser(description='Subtitles, faster than your thoughts')
+    parser.add_argument('-l', '--language', action='append', help='wanted language (ISO 639-1)', metavar='LG')
+    parser.add_argument('-p', '--plugin', action='append', help='plugin to use', metavar='NAME')
+    parser.add_argument('-m', '--multi', action='store_true', help='download multiple subtitle languages')
+    parser.add_argument('-f', '--force', action='store_true', help='replace existing subtitle file')
+    parser.add_argument('-w', '--workers', action='store', help='use N threads (default: %(default)s)', metavar='N', default=4)
+    group_verbosity = parser.add_mutually_exclusive_group()
+    group_verbosity.add_argument('-q', '--quiet', action='store_true', help='disable output')
+    group_verbosity.add_argument('-v', '--verbose', action='store_true', help='verbose output')
+    group_config = parser.add_mutually_exclusive_group()
+    group_config.add_argument('-c', '--config-file', action='store', dest='config', help='configuration file to use', metavar='FILE', default=True)
+    group_config.add_argument('-C', '--no-config-file', action='store_false', dest='config', help='do not use configuration file')
+    group_cache = parser.add_mutually_exclusive_group()
+    group_cache.add_argument('--cache-dir', action='store', dest='cache_dir', help='cache directory to use', metavar='DIR', default=True)
+    group_cache.add_argument('--no-cache-dir', action='store_false', dest='cache_dir', help='do not use cache directory (some plugins may not work)')
+    parser.add_argument('--version', action='version', version=subliminal.__version__)
+    parser.add_argument('paths', nargs='+', help='path to video files or folders', metavar='PATH')
+    args = parser.parse_args()
 
-if __name__ == "__main__":
+    # Check options
+    if not args.config and not args.language:
+        parser.error('Option -C (--no-config-file) requires -l (--language)')
+
+    # Set log verbosity
+    if args.verbose:
+        logging.basicConfig(level=logging.DEBUG, format='%(levelname)-8s %(asctime)s %(name)-24s %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
+    elif not args.quiet:
+        logging.basicConfig(level=logging.WARN, format='%(levelname)s: %(name)s %(message)s')
+
+    # Initialize the instance
+    subli = subliminal.Subliminal(config=args.config, cache_dir=args.cache_dir, workers=args.workers, multi=args.multi, force=args.force, max_depth=3, autostart=False, files_mode=-1)
+    if args.plugin:
+        subli.plugins = args.plugin
+    if args.language:
+        subli.languages = args.language
+    else:
+        logging.info(u'No language given, looking into configuration file')
+        languages = subli.languages
+        if not languages:
+            logging.error(u'No language found in configuration file')
+            if not args.quiet:
+                sys.stderr.write('No language found in configuration file')
+            exit(1)
+    subli.startWorkers()
+    subtitles = subli.downloadSubtitles(args.paths)
+    subli.stopWorkers()
+    if len(subtitles) == 0:
+        if not args.quiet:
+            sys.stderr.write('No subtitles found')
+        exit(1)
+    if not args.quiet:
+        print '*' * 50
+        print 'Downloaded %s subtitles' % len(subtitles)
+        for s in subtitles:
+            print s['lang'] + ' - ' + s['subtitlepath']
+        print '*' * 50
+
+if __name__ == '__main__':
     main()

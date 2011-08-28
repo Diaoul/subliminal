@@ -32,7 +32,6 @@ class TheSubDB(PluginBase.PluginBase):
     site_name = 'SubDB'
     server_url = 'http://api.thesubdb.com'  # for testing purpose, use http://sandbox.thesubdb.com instead
     multi_languages_queries = True
-    multi_filename_queries = False
     api_based = True
     user_agent = 'SubDB/1.0 (Subliminal/0.1; https://github.com/Diaoul/subliminal)'  # defined by the API
     _plugin_languages = {'cs': 'cs',  # the whole list is available with the API: http://sandbox.thesubdb.com/?action=languages
@@ -60,8 +59,6 @@ class TheSubDB(PluginBase.PluginBase):
 
     def list(self, filenames, languages):
         """Main method to call when you want to list subtitles"""
-        # as self.multi_filename_queries is false, we won't have multiple filenames in the list so pick the only one
-        # once multi-filename queries are implemented, set multi_filename_queries to true and manage a list of multiple filenames here
         filepath = filenames[0]
         if not ek.ek(os.path.isfile, filepath):
             return []

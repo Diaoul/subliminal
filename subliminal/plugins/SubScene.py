@@ -36,7 +36,6 @@ class SubScene(PluginBase.PluginBase):
     site_name = 'SubScene'
     server_url = 'http://subscene.com/s.aspx?subtitle='
     multi_languages_queries = True
-    multi_filename_queries = False
     api_based = False
     _plugin_languages = {"en": "English",
             "se": "Swedish",
@@ -79,8 +78,6 @@ class SubScene(PluginBase.PluginBase):
 
     def list(self, filenames, languages):
         """Main method to call when you want to list subtitles"""
-        # as self.multi_filename_queries is false, we won't have multiple filenames in the list so pick the only one
-        # once multi-filename queries are implemented, set multi_filename_queries to true and manage a list of multiple filenames here
         filepath = filenames[0]
         fname = self.getFileName(filepath)
         subs = self.query(fname, filepath, languages)

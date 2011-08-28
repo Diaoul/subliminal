@@ -36,7 +36,6 @@ class BierDopje(PluginBase.PluginBase):
     site_name = 'BierDopje'
     server_url = 'http://api.bierdopje.com/A2B638AC5D804C2E/'
     multi_languages_queries = True
-    multi_filename_queries = False
     api_based = True
     exceptions = {'the office': 10358,
         'the office us': 10358,
@@ -71,8 +70,6 @@ class BierDopje(PluginBase.PluginBase):
 
     def list(self, filenames, languages):
         """Main method to call when you want to list subtitles"""
-        # as self.multi_filename_queries is false, we won't have multiple filenames in the list so pick the only one
-        # once multi-filename queries are implemented, set multi_filename_queries to true and manage a list of multiple filenames here
         if not self.checkLanguages(languages):
             return []
         filepath = filenames[0]

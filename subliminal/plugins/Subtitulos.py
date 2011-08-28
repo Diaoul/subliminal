@@ -38,7 +38,6 @@ class Subtitulos(PluginBase.PluginBase):
     site_name = 'Subtitulos'
     server_url = 'http://www.subtitulos.es'
     multi_languages_queries = True
-    multi_filename_queries = False
     api_based = False
     _plugin_languages = {u"English (US)": "en",
             u"English (UK)": "en",
@@ -58,8 +57,6 @@ class Subtitulos(PluginBase.PluginBase):
 
     def list(self, filenames, languages):
         """Main method to call when you want to list subtitles"""
-        # as self.multi_filename_queries is false, we won't have multiple filenames in the list so pick the only one
-        # once multi-filename queries are implemented, set multi_filename_queries to true and manage a list of multiple filenames here
         if not self.checkLanguages(languages):
             return []
         filepath = filenames[0]

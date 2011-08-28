@@ -33,7 +33,6 @@ from subliminal import encodingKludge as ek
 class PluginBase(object):
     __metaclass__ = abc.ABCMeta
     multi_languages_queries = False
-    multi_filename_queries = False
     api_based = True
     timeout = 3
     user_agent = 'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.1.3)'
@@ -149,8 +148,6 @@ class PluginBase(object):
         if task['task'] != 'list':
             return [task]
         tasks = [task]
-        if not self.multi_filename_queries:
-            tasks = self._splitOnField(tasks, 'filenames')
         if not self.multi_languages_queries:
             tasks = self._splitOnField(tasks, 'languages')
         return tasks

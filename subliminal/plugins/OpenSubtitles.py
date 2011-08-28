@@ -35,7 +35,6 @@ class OpenSubtitles(PluginBase.PluginBase):
     server_url = 'http://api.opensubtitles.org/xml-rpc'
     user_agent = 'Subliminal v0.3'
     multi_languages_queries = True
-    multi_filename_queries = False
     api_based = True
     _plugin_languages = {"en": "eng",
             "fr": "fre",
@@ -95,8 +94,6 @@ class OpenSubtitles(PluginBase.PluginBase):
 
     def list(self, filenames, languages):
         """Main method to call when you want to list subtitles """
-        # as self.multi_filename_queries is false, we won't have multiple filenames in the list so pick the only one
-        # once multi-filename queries are implemented, set multi_filename_queries to true and manage a list of multiple filenames here
         filepath = filenames[0]
         if ek.ek(os.path.isfile, filepath):
             filehash = self.hashFile(filepath)

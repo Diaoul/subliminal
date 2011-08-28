@@ -33,7 +33,6 @@ class SubtitleSource(PluginBase.PluginBase):
     site_name = 'SubtitleSource'
     server_url = 'http://www.subtitlesource.org/api/%s/3.0/xmlsearch'
     multi_languages_queries = True
-    multi_filename_queries = False
     api_based = True
     _plugin_languages = {"en": "English",
             "sv": "Swedish",

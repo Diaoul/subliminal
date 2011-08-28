@@ -38,7 +38,6 @@ class Podnapisi(PluginBase.PluginBase):
     site_name = "Podnapisi"
     server_url = 'http://ssp.podnapisi.net:8000'
     multi_languages_queries = True
-    multi_filename_queries = False
     api_based = True
     _plugin_languages = {"sl": "1",
             "en": "2",
@@ -96,8 +95,6 @@ class Podnapisi(PluginBase.PluginBase):
 
     def list(self, filenames, languages):
         """Main method to call when you want to list subtitles"""
-        # as self.multi_filename_queries is false, we won't have multiple filenames in the list so pick the only one
-        # once multi-filename queries are implemented, set multi_filename_queries to true and manage a list of multiple filenames here
         filepath = filenames[0]
         if not ek.ek(os.path.isfile, filepath):
             return []

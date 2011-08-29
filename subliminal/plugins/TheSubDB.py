@@ -33,7 +33,7 @@ class TheSubDB(PluginBase.PluginBase):
     site_name = 'SubDB'
     server_url = 'http://api.thesubdb.com'  # for testing purpose, use http://sandbox.thesubdb.com instead
     api_based = True
-    user_agent = 'SubDB/1.0 (Subliminal/0.1; https://github.com/Diaoul/subliminal)'  # defined by the API
+    user_agent = 'SubDB/1.0 (Subliminal/0.3; https://github.com/Diaoul/subliminal)'  # defined by the API
     _plugin_languages = {'cs': 'cs',  # the whole list is available with the API: http://sandbox.thesubdb.com/?action=languages
             'da': 'da',
             'de': 'de',

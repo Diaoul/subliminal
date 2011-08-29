@@ -35,58 +35,58 @@ class OpenSubtitles(PluginBase.PluginBase):
     server_url = 'http://api.opensubtitles.org/xml-rpc'
     user_agent = 'Subliminal v0.3'
     api_based = True
-    _plugin_languages = {"en": "eng",
-            "fr": "fre",
-            "hu": "hun",
-            "cs": "cze",
-            "pl": "pol",
-            "sk": "slo",
-            "pt": "por",
-            "pt-br": "pob",
-            "es": "spa",
-            "el": "ell",
-            "ar": "ara",
-            "sq": "alb",
-            "hy": "arm",
-            "ay": "ass",
-            "bs": "bos",
-            "bg": "bul",
-            "ca": "cat",
-            "zh": "chi",
-            "hr": "hrv",
-            "da": "dan",
-            "nl": "dut",
-            "eo": "epo",
-            "et": "est",
-            "fi": "fin",
-            "gl": "glg",
-            "ka": "geo",
-            "de": "ger",
-            "he": "heb",
-            "hi": "hin",
-            "is": "ice",
-            "id": "ind",
-            "it": "ita",
-            "ja": "jpn",
-            "kk": "kaz",
-            "ko": "kor",
-            "lv": "lav",
-            "lt": "lit",
-            "lb": "ltz",
-            "mk": "mac",
-            "ms": "may",
-            "no": "nor",
-            "oc": "oci",
-            "fa": "per",
-            "ro": "rum",
-            "ru": "rus",
-            "sr": "scc",
-            "sl": "slv",
-            "sv": "swe",
-            "th": "tha",
-            "tr": "tur",
-            "uk": "ukr",
-            "vi": "vie"}
+    _plugin_languages = {'en': 'eng',
+            'fr': 'fre',
+            'hu': 'hun',
+            'cs': 'cze',
+            'pl': 'pol',
+            'sk': 'slo',
+            'pt': 'por',
+            'pt-br': 'pob',
+            'es': 'spa',
+            'el': 'ell',
+            'ar': 'ara',
+            'sq': 'alb',
+            'hy': 'arm',
+            'ay': 'ass',
+            'bs': 'bos',
+            'bg': 'bul',
+            'ca': 'cat',
+            'zh': 'chi',
+            'hr': 'hrv',
+            'da': 'dan',
+            'nl': 'dut',
+            'eo': 'epo',
+            'et': 'est',
+            'fi': 'fin',
+            'gl': 'glg',
+            'ka': 'geo',
+            'de': 'ger',
+            'he': 'heb',
+            'hi': 'hin',
+            'is': 'ice',
+            'id': 'ind',
+            'it': 'ita',
+            'ja': 'jpn',
+            'kk': 'kaz',
+            'ko': 'kor',
+            'lv': 'lav',
+            'lt': 'lit',
+            'lb': 'ltz',
+            'mk': 'mac',
+            'ms': 'may',
+            'no': 'nor',
+            'oc': 'oci',
+            'fa': 'per',
+            'ro': 'rum',
+            'ru': 'rus',
+            'sr': 'scc',
+            'sl': 'slv',
+            'sv': 'swe',
+            'th': 'tha',
+            'tr': 'tur',
+            'uk': 'ukr',
+            'vi': 'vie'}
 
     def __init__(self, config_dict=None):
         super(OpenSubtitles, self).__init__(self._plugin_languages, config_dict)
@@ -122,9 +122,9 @@ class OpenSubtitles(PluginBase.PluginBase):
         if bytesize:
             search['moviebytesize'] = str(bytesize)
         if languages:
-            search['sublanguageid'] = ",".join([self.getLanguage(l) for l in languages])
+            search['sublanguageid'] = ','.join([self.getLanguage(l) for l in languages])
         if not imdbID and not moviehash and not bytesize:
-            self.logger.debug(u"No search term, we'll use the filename")
+            self.logger.debug(u'No search term, using the filename')
             guess = guessit.guess_file_info(filepath, 'autodetect')
             if guess['type'] == 'episode' and 'series' in guess:
                 search['query'] = guess['series']
@@ -136,12 +136,12 @@ class OpenSubtitles(PluginBase.PluginBase):
         self.server = xmlrpclib.Server(self.server_url)
         socket.setdefaulttimeout(self.timeout)
         try:
-            log_result = self.server.LogIn("", "", "eng", self.user_agent)
-            if not log_result["status"] or log_result["status"] != '200 OK' or not log_result["token"]:
+            log_result = self.server.LogIn('', '', 'eng', self.user_agent)
+            if not log_result['status'] or log_result['status'] != '200 OK' or not log_result['token']:
                 raise Exception('OpenSubtitles login failed')
-            token = log_result["token"]
+            token = log_result['token']
         except Exception:
-            self.logger.error(u"Cannot login")
+            self.logger.error(u'Cannot login')
             token = None
             socket.setdefaulttimeout(None)
             return []
@@ -151,16 +151,16 @@ class OpenSubtitles(PluginBase.PluginBase):
         try:
             self.server.LogOut(token)
         except:
-            self.logger.error(u"Cannot logout")
+            self.logger.error(u'Cannot logout')
         socket.setdefaulttimeout(None)
         return sublinks
 
     def get_results(self, token, search, filepath):
-        self.logger.debug(u"Query uses token %s and search parameters %s" % (token, search))
+        self.logger.debug(u'Query uses token %s and search parameters %s' % (token, search))
         try:
             results = self.server.SearchSubtitles(token, [search])
         except Exception, e:
-            self.logger.debug(u"Cannot query the server")
+            self.logger.debug(u'Cannot query the server')
             return []
         if not results['data']:  # no subtitle found
             return []
@@ -190,3 +190,4 @@ class OpenSubtitles(PluginBase.PluginBase):
         if not xmatch and ymatch:
             return 1
         return 0
+

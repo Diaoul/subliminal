@@ -48,7 +48,7 @@ class PluginBase(object):
         else:
             self.revertPluginLanguages = pluginLanguages
             self.pluginLanguages = dict((v, k) for k, v in self.revertPluginLanguages.iteritems())
-        self.logger = logging.getLogger('subliminal.%s' % self.getClassName())
+        self.logger = logging.getLogger('subliminal.%s' % self.__class__.__name__)
 
     @staticmethod
     def getFileName(filepath):
@@ -63,11 +63,11 @@ class PluginBase(object):
         """Hash a file like OpenSubtitles"""
         longlongformat = 'q'  # long long
         bytesize = struct.calcsize(longlongformat)
-        f = open(filename, "rb")
+        f = open(filename, 'rb')
         filesize = os.path.getsize(filename)
         hash = filesize
         if filesize < 65536 * 2:
-            self.logger.error(u"File %s is too small (SizeError < 2**16)" % filename)
+            self.logger.error(u'File %s is too small (SizeError < 2**16)' % filename)
             return []
         for x in range(65536 / bytesize):
             buffer = f.read(bytesize)
@@ -81,25 +81,25 @@ class PluginBase(object):
             hash += l_value
             hash = hash & 0xFFFFFFFFFFFFFFFF
         f.close()
-        returnedhash = "%016x" % hash
+        returnedhash = '%016x' % hash
         return returnedhash
 
     def downloadFile(self, url, filepath, data=None):
-        """Donwload a subtitle file"""
+        """Download a subtitle file"""
         try:
-            self.logger.info(u"Downloading %s" % url)
+            self.logger.info(u'Downloading %s' % url)
             req = urllib2.Request(url, headers={'Referer': url, 'User-Agent': self.user_agent})
             f = urllib2.urlopen(req, data=data)
-            dump = open(filepath, "wb")
+            dump = open(filepath, 'wb')
             dump.write(f.read())
             self.adjustPermissions(filepath)
             dump.close()
             f.close()
-            self.logger.debug(u"Download finished for file %s. Size: %s" % (filepath, os.path.getsize(filepath)))
+            self.logger.debug(u'Download finished for file %s. Size: %s' % (filepath, os.path.getsize(filepath)))
         except urllib2.HTTPError, e:
-            self.logger.error(u"HTTP Error:", e.code, url)
+            self.logger.error(u'HTTP Error:', e.code, url)
         except urllib2.URLError, e:
-            self.logger.error(u"URL Error:", e.reason, url)
+            self.logger.error(u'URL Error:', e.reason, url)
 
     def adjustPermissions(self, filepath):
         if self.config_dict and 'files_mode' in self.config_dict and self.config_dict['files_mode'] != -1:
@@ -107,18 +107,18 @@ class PluginBase(object):
 
     @abc.abstractmethod
     def list(self, filepath, languages):
-        """Main method to call when you want to list subtitles"""
+        """List subtitles"""
 
     @abc.abstractmethod
     def download(self, subtitle):
-        """Main method to call when you want to download a subtitle"""
+        """Download a subtitle"""
 
     def getRevertLanguage(self, language):
-        """Returns the short (two-character) representation from the long language name"""
+        """ISO-639-1 language code from plugin language code"""
         try:
             return self.revertPluginLanguages[language]
         except KeyError, e:
-            self.logger.warn(u"Ooops, you found a missing language in the configuration file of %s: %s. Send a bug report to have it added." % (self.getClassName(), language))
+            self.logger.warn(u'Ooops, you found a missing language in the configuration file of %s: %s. Send a bug report to have it added.' % (self.__class__.__name__, language))
 
     def checkLanguages(self, languages):
         if languages and not set(languages).intersection((self._plugin_languages.values())):
@@ -127,14 +127,14 @@ class PluginBase(object):
         return True
 
     def getLanguage(self, language):
-        """Returns the long naming of the language from a two character code"""
+        """Plugin language code from ISO-639-1 language code"""
         try:
             return self.pluginLanguages[language]
         except KeyError, e:
-            self.logger.warn(u"Ooops, you found a missing language in the configuration file of %s: %s. Send a bug report to have it added." % (self.__class__.__name__, language))
+            self.logger.warn(u'Ooops, you found a missing language in the configuration file of %s: %s. Send a bug report to have it added.' % (self.__class__.__name__, language))
     
     def getSubtitlePath(self, source, language):
-        dest = source.rsplit(".", 1)[0]
+        dest = source.rsplit('.', 1)[0]
         if self.config_dict and self.config_dict['multi']:
             return dest + '.%s.srt' % language
         return dest + '.srt'

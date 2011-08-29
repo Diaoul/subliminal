@@ -62,7 +62,7 @@ class TheSubDB(PluginBase.PluginBase):
         return self.query(filepath, self.hashFile(filepath), languages)
 
     def query(self, filepath, moviehash, languages=None):
-        searchurl = "%s/?action=%s&hash=%s" % (self.server_url, "search", moviehash)
+        searchurl = '%s/?action=%s&hash=%s' % (self.server_url, 'search', moviehash)
         self.logger.debug(u'Query URL: %s' % searchurl)
         try:
             req = urllib2.Request(searchurl, headers={'User-Agent': self.user_agent})
@@ -70,10 +70,10 @@ class TheSubDB(PluginBase.PluginBase):
         except urllib2.HTTPError as inst:
             if inst.code == 404:  # no result found
                 return []
-            self.logger.error(u"Error: %s - %s" % (searchurl, inst))
+            self.logger.error(u'Error: %s - %s' % (searchurl, inst))
             return []
         except urllib2.URLError as inst:
-            self.logger.error(u"TimeOut: %s" % inst)
+            self.logger.error(u'TimeOut: %s' % inst)
             return []
         available_languages = page.readlines()[0].split(',')
         self.logger.debug(u'Available languages: %s' % available_languages)

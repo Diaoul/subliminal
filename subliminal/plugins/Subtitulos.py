@@ -38,21 +38,21 @@ class Subtitulos(PluginBase.PluginBase):
     site_name = 'Subtitulos'
     server_url = 'http://www.subtitulos.es'
     api_based = False
-    _plugin_languages = {u"English (US)": "en",
-            u"English (UK)": "en",
-            u"English": "en",
-            u"French": "fr",
-            u"Brazilian": "pt-br",
-            u"Portuguese": "pt",
-            u"Español (Latinoamérica)": "es",
-            u"Español (España)": "es",
-            u"Español": "es",
-            u"Italian": "it",
-            u"Català": "ca"}
+    _plugin_languages = {u'English (US)': 'en',
+            u'English (UK)': 'en',
+            u'English': 'en',
+            u'French': 'fr',
+            u'Brazilian': 'pt-br',
+            u'Portuguese': 'pt',
+            u'Español (Latinoamérica)': 'es',
+            u'Español (España)': 'es',
+            u'Español': 'es',
+            u'Italian': 'it',
+            u'Català': 'ca'}
 
     def __init__(self, config_dict=None):
         super(Subtitulos, self).__init__(self._plugin_languages, config_dict, True)
-        self.release_pattern = re.compile("Versi&oacute;n (.+) ([0-9]+).([0-9])+ megabytes")
+        self.release_pattern = re.compile('Versi&oacute;n (.+) ([0-9]+).([0-9])+ megabytes')
 
     def list(self, filepath, languages):
         if not self.checkLanguages(languages):
@@ -75,33 +75,32 @@ class Subtitulos(PluginBase.PluginBase):
         return self.query(guess['series'], guess['season'], guess['episodeNumber'], release_group, filepath, languages)
 
     def query(self, name, season, episode, release_group, filepath, languages=None):
-        """Make a query and returns info about found subtitles"""
         sublinks = []
-        searchname = name.lower().replace(" ", "-")
-        searchurl = "%s/%s/%sx%.2d" % (self.server_url, searchname, season, episode)
-        self.logger.debug(u"Searching in %s" % searchurl)
+        searchname = name.lower().replace(' ', '-')
+        searchurl = '%s/%s/%sx%.2d' % (self.server_url, searchname, season, episode)
+        self.logger.debug(u'Searching in %s' % searchurl)
         try:
             req = urllib2.Request(searchurl, headers={'User-Agent': self.user_agent})
             page = urllib2.urlopen(req, timeout=self.timeout)
         except urllib2.HTTPError as inst:
-            self.logger.info(u"Error: %s - %s" % (searchurl, inst))
+            self.logger.info(u'Error: %s - %s' % (searchurl, inst))
             return []
         except urllib2.URLError as inst:
-            self.logger.info(u"TimeOut: %s" % inst)
+            self.logger.info(u'TimeOut: %s' % inst)
             return []
         soup = BeautifulSoup(page.read())
-        for subs in soup("div", {"id": "version"}):
-            version = subs.find("p", {"class": "title-sub"})
-            sub_teams = self.listTeams([self.release_pattern.search("%s" % version.contents[1]).group(1).lower()], [".", "_", " ", "/"])
+        for subs in soup('div', {'id': 'version'}):
+            version = subs.find('p', {'class': 'title-sub'})
+            sub_teams = self.listTeams([self.release_pattern.search('%s' % version.contents[1]).group(1).lower()], ['.', '_', ' ', '/', '-'])
+            self.logger.debug(u'Team from website: %s' % sub_teams)
+            self.logger.debug(u'Team from file: %s' % release_group)
             if not release_group.intersection(sub_teams):  # On wrong team
                 continue
-            self.logger.debug(u"Team from website: %s" % sub_teams)
-            self.logger.debug(u"Team from file: %s" % release_group)
-            for html_language in subs.findAllNext("ul", {"class": "sslist"}):
-                sub_language = self.getRevertLanguage(html_language.findNext("li", {"class": "li-idioma"}).find("strong").contents[0].string.strip())
+            for html_language in subs.findAllNext('ul', {'class': 'sslist'}):
+                sub_language = self.getRevertLanguage(html_language.findNext('li', {'class': 'li-idioma'}).find('strong').contents[0].string.strip())
                 if languages and not sub_language in languages:  # On wrong language
                     continue
-                html_status = html_language.findNext("li", {"class": "li-estado green"})
+                html_status = html_language.findNext('li', {'class': 'li-estado green'})
                 sub_status = html_status.contents[0].string.strip()
                 if not sub_status == 'Completado':  # On not completed subtitles
                     continue

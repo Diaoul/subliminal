@@ -167,6 +167,6 @@ class SubScene(PluginBase.PluginBase):
                 result["link"] = None
                 result["page"] = self.site_url + sub_page
                 result["filename"] = filepath
-                result["plugin"] = self.getClassName()
+                result["plugin"] = self.__class__.__name__
                 sublinks.append(result)
         return sublinks

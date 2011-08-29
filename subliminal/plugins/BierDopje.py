@@ -64,7 +64,7 @@ class BierDopje(PluginBase.PluginBase):
                 f.close()
             f = open(self.showid_cache, 'r')
             self.showids = pickle.load(f)
-            self.logger.debug(u"Reading showids from cache: %s" % self.showids)
+            self.logger.debug(u'Reading showids from cache: %s' % self.showids)
             f.close()
 
     def list(self, filepath, languages):
@@ -92,13 +92,11 @@ class BierDopje(PluginBase.PluginBase):
         return subtitle.dest
 
     def query(self, name, season, episode, release_group, filepath, languages=None):
-        """Makes a query and returns info (link, lang) about found subtitles"""
         if languages:
             available_languages = list(set(languages).intersection((self._plugin_languages.values())))
         else:
             available_languages = self._plugin_languages.values()
         sublinks = []
-
         # get the show id
         show_name = name.lower()
         if show_name in self.exceptions:  # get it from exceptions
@@ -106,8 +104,8 @@ class BierDopje(PluginBase.PluginBase):
         elif show_name in self.showids:  # get it from cache
             show_id = self.showids[show_name]
         else:  # retrieve it
-            show_id_url = "%sGetShowByName/%s" % (self.server_url, urllib.quote(show_name))
-            self.logger.debug(u"Retrieving show id from web at %s" % show_id_url)
+            show_id_url = '%sGetShowByName/%s' % (self.server_url, urllib.quote(show_name))
+            self.logger.debug(u'Retrieving show id from web at %s' % show_id_url)
             page = urllib2.urlopen(show_id_url)
             dom = minidom.parse(page)
             if not dom or len(dom.getElementsByTagName('showid')) == 0:  # no proper result
@@ -117,21 +115,21 @@ class BierDopje(PluginBase.PluginBase):
             self.showids[show_name] = show_id
             with self.lock:
                 f = open(self.showid_cache, 'w')
-                self.logger.debug(u"Writing showid %s to cache file" % show_id)
+                self.logger.debug(u'Writing showid %s to cache file' % show_id)
                 pickle.dump(self.showids, f)
                 f.close()
             page.close()
 
         # get the subs for the show id we have
         for language in available_languages:
-            subs_url = "%sGetAllSubsFor/%s/%s/%s/%s" % (self.server_url, show_id, season, episode, language)
-            self.logger.debug(u"Getting subtitles at %s" % subs_url)
+            subs_url = '%sGetAllSubsFor/%s/%s/%s/%s' % (self.server_url, show_id, season, episode, language)
+            self.logger.debug(u'Getting subtitles at %s' % subs_url)
             page = urllib2.urlopen(subs_url)
             dom = minidom.parse(page)
             page.close()
             for sub in dom.getElementsByTagName('result'):
                 sub_release = sub.getElementsByTagName('filename')[0].firstChild.data
-                if sub_release.endswith(".srt"):
+                if sub_release.endswith('.srt'):
                     sub_release = sub_release[:-4]
                 sub_release = sub_release + '.avi'  # put a random extension for guessit not to fail guessing that file
                 # guess information from subtitle

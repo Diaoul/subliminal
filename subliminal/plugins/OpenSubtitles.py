@@ -26,7 +26,6 @@ import os
 import socket
 import xmlrpclib
 import guessit
-from subliminal import encodingKludge as ek
 from subliminal.classes import Subtitle
 
 

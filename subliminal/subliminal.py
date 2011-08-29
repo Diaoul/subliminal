@@ -60,16 +60,6 @@ LANGUAGES = ['aa', 'ab', 'ae', 'af', 'ak', 'am', 'an', 'ar', 'as', 'av', 'ay', '
 PLUGINS = ['Addic7ed', 'BierDopje', 'OpenSubtitles', 'SubsWiki', 'Subtitulos', 'TheSubDB']
 API_PLUGINS = filter(lambda p: getattr(plugins, p).api_based, PLUGINS)
 
-SYS_ENCODING = None
-try:
-    locale.setlocale(locale.LC_ALL, "")
-    SYS_ENCODING = locale.getpreferredencoding()
-except (locale.Error, IOError):
-    pass
-# for OSes that are poorly configured I'll just force UTF-8
-if not SYS_ENCODING or SYS_ENCODING in ('ANSI_X3.4-1968', 'US-ASCII', 'ASCII'):
-    SYS_ENCODING = 'UTF-8'
-
 
 class Subliminal(object):
     """Main Subliminal class"""
@@ -92,8 +82,8 @@ class Subliminal(object):
         try:
             if cache_dir:  # custom configuration file
                 self.cache_dir = cache_dir
-                if not ek.ek(os.path.isdir, self.cache_dir):  # custom file doesn't exist, create it
-                    ek.ek(os.mkdir, self.cache_dir)
+                if not os.path.isdir(self.cache_dir):  # custom file doesn't exist, create it
+                    os.mkdir(self.cache_dir)
                     logger.debug(u'Creating cache directory: %s' % self.cache_dir)
         except:
             self.cache_dir = None

@@ -28,7 +28,6 @@ import urllib2
 import urllib
 import traceback
 import httplib
-from subliminal import encodingKludge as ek
 
 
 class SubScene(PluginBase.PluginBase):
@@ -106,7 +105,7 @@ class SubScene(PluginBase.PluginBase):
                 extension = el.orig_filename.rsplit(".", 1)[1]
                 if extension in ("srt", "sub", "txt"):
                     subtitlefilename = srtbasefilename + "." + extension
-                    outfile = ek.ek(open, subtitlefilename, "wb")
+                    outfile = open(subtitlefilename, "wb")
                     outfile.write(zf.read(el.orig_filename))
                     outfile.flush()
                     self.adjustPermissions(subtitlefilename)
@@ -115,7 +114,7 @@ class SubScene(PluginBase.PluginBase):
                     self.logger.info(u"File %s does not seem to be valid " % el.orig_filename)
             # Deleting the zip file
             zf.close()
-            ek.ek(os.remove, archivefilename)
+            os.remove(archivefilename)
             return subtitlefilename
         elif archivefilename.endswith('.rar'):
             self.logger.warn(u'Rar is not really supported yet. Trying to call unrar')
@@ -126,13 +125,13 @@ class SubScene(PluginBase.PluginBase):
                 for el in output.splitlines():
                     extension = el.rsplit(".", 1)[1]
                     if extension in ("srt", "sub"):
-                        args = ['unrar', 'e', archivefilename, el, ek.ek(os.path.dirname, archivefilename)]
+                        args = ['unrar', 'e', archivefilename, el, os.path.dirname(archivefilename)]
                         subprocess.Popen(args)
-                        tmpsubtitlefilename = ek.ek(os.path.join, ek.ek(os.path.dirname, archivefilename), el)
-                        subtitlefilename = ek.ek(os.path.join, ek.ek(os.path.dirname, archivefilename), srtbasefilename + "." + extension)
-                        if ek.ek(os.path.exists, tmpsubtitlefilename):
+                        tmpsubtitlefilename = os.path.join(os.path.dirname(archivefilename), el)
+                        subtitlefilename = os.path.join(os.path.dirname(archivefilename), srtbasefilename + "." + extension)
+                        if os.path.exists(tmpsubtitlefilename):
                             # rename it to match the file
-                            ek.ek(os.rename, tmpsubtitlefilename, subtitlefilename)
+                            os.rename(tmpsubtitlefilename, subtitlefilename)
                             # exit
                         return subtitlefilename
             except OSError, e:

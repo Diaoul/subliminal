@@ -24,7 +24,6 @@ import PluginBase
 import hashlib
 import os
 import urllib2
-from subliminal import encodingKludge as ek
 from subliminal.classes import Subtitle
 
 
@@ -85,11 +84,11 @@ class TheSubDB(PluginBase.PluginBase):
                 subs.append(result)
         return subs
 
-    def hashFile(self, name):
-        """This hash function receives the filename and returns the hash code"""
+    def hashFile(self, filepath):
+        """TheSubDB specific hash function"""
         readsize = 64 * 1024
-        with ek.ek(open, name, 'rb') as f:
-            size = ek.ek(os.path.getsize, name)
+        with open(filepath, 'rb') as f:
+            size = os.path.getsize(filepath)
             data = f.read(readsize)
             f.seek(-readsize, os.SEEK_END)
             data += f.read(readsize)

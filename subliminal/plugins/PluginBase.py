@@ -27,7 +27,6 @@ import sys
 import urllib2
 import struct
 import threading
-from subliminal import encodingKludge as ek
 
 
 class PluginBase(object):
@@ -54,8 +53,8 @@ class PluginBase(object):
     @staticmethod
     def getFileName(filepath):
         filename = filepath
-        if ek.ek(os.path.isfile, filename):
-            filename = ek.ek(os.path.basename, filename)
+        if os.path.isfile(filename):
+            filename = os.path.basename(filename)
         if filename.endswith(('.avi', '.wmv', '.mov', '.mp4', '.mpeg', '.mpg', '.mkv')):
             filename = filename.rsplit('.', 1)[0]
         return filename
@@ -64,8 +63,8 @@ class PluginBase(object):
         """Hash a file like OpenSubtitles"""
         longlongformat = 'q'  # long long
         bytesize = struct.calcsize(longlongformat)
-        f = ek.ek(open, filename, "rb")
-        filesize = ek.ek(os.path.getsize, filename)
+        f = open(filename, "rb")
+        filesize = os.path.getsize(filename)
         hash = filesize
         if filesize < 65536 * 2:
             self.logger.error(u"File %s is too small (SizeError < 2**16)" % filename)
@@ -104,7 +103,7 @@ class PluginBase(object):
 
     def adjustPermissions(self, filepath):
         if self.config_dict and 'files_mode' in self.config_dict and self.config_dict['files_mode'] != -1:
-            ek.ek(os.chmod, filepath, self.config_dict['files_mode'])
+            os.chmod(filepath, self.config_dict['files_mode'])
 
     @abc.abstractmethod
     def list(self, filepath, languages):

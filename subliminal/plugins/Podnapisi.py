@@ -30,7 +30,6 @@ import os
 import urllib2
 import urllib
 import traceback
-from subliminal import encodingKludge as ek
 
 
 class Podnapisi(PluginBase.PluginBase):
@@ -95,7 +94,7 @@ class Podnapisi(PluginBase.PluginBase):
     def list(self, filenames, languages):
         """Main method to call when you want to list subtitles"""
         filepath = filenames[0]
-        if not ek.ek(os.path.isfile, filepath):
+        if not os.path.isfile(filepath):
             return []
         return self.query(self.hashFile(filepath), languages)
 

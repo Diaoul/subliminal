@@ -30,7 +30,6 @@ import traceback
 import httplib
 import re
 import PluginBase
-from subliminal import encodingKludge as ek
 from subliminal.classes import Subtitle
 
 

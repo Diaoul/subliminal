@@ -28,7 +28,6 @@ import pickle
 import traceback
 import urllib
 import urllib2
-from subliminal import encodingKludge as ek
 from subliminal.classes import Subtitle
 
 
@@ -55,11 +54,11 @@ class BierDopje(PluginBase.PluginBase):
         #http://api.bierdopje.com/23459DC262C0A742/GetAllSubsFor/94/5/1/en (30 rock, season 5, episode 1)
         if not config_dict or not config_dict['cache_dir']:
             raise Exception('Cache directory is mandatory for this plugin')
-        self.showid_cache = ek.ek(os.path.join, config_dict['cache_dir'], "bierdopje_showid.cache")
+        self.showid_cache = os.path.join(config_dict['cache_dir'], 'bierdopje_showid.cache')
         with self.lock:
-            if not ek.ek(os.path.exists, self.showid_cache):
-                if not ek.ek(os.path.exists, ek.ek(os.path.dirname, self.showid_cache)):
-                    raise Exception("Cache directory doesn't exists")
+            if not os.path.exists(self.showid_cache):
+                if not os.path.exists(os.path.dirname(self.showid_cache)):
+                    raise Exception('Cache directory does not exist')
                 f = open(self.showid_cache, 'w')
                 pickle.dump({}, f)
                 f.close()

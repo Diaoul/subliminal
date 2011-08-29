@@ -32,7 +32,6 @@ from subliminal import encodingKludge as ek
 
 class PluginBase(object):
     __metaclass__ = abc.ABCMeta
-    multi_languages_queries = False
     api_based = True
     timeout = 3
     user_agent = 'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.1.3)'

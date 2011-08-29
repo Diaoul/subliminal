@@ -36,7 +36,6 @@ class BierDopje(PluginBase.PluginBase):
     site_url = 'http://bierdopje.com'
     site_name = 'BierDopje'
     server_url = 'http://api.bierdopje.com/A2B638AC5D804C2E/'
-    multi_languages_queries = True
     api_based = True
     exceptions = {'the office': 10358,
         'the office us': 10358,

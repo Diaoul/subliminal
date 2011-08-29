@@ -35,7 +35,6 @@ class SubScene(PluginBase.PluginBase):
     site_url = 'http://subscene.com'
     site_name = 'SubScene'
     server_url = 'http://subscene.com/s.aspx?subtitle='
-    multi_languages_queries = True
     api_based = False
     _plugin_languages = {"en": "English",
             "se": "Swedish",

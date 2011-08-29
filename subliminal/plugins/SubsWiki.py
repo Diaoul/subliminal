@@ -38,7 +38,6 @@ class SubsWiki(PluginBase.PluginBase):
     site_url = 'http://www.subswiki.com'
     site_name = 'SubsWiki'
     server_url = 'http://www.subswiki.com'
-    multi_languages_queries = True
     api_based = False
     _plugin_languages = {u"English (US)": "en",
             u"English (UK)": "en",

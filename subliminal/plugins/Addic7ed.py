@@ -38,7 +38,6 @@ class Addic7ed(PluginBase.PluginBase):
     site_url = 'http://www.addic7ed.com'
     site_name = 'Addic7ed'
     server_url = 'http://www.addic7ed.com'
-    multi_languages_queries = True
     api_based = False
     _plugin_languages = {u"English": "en",
             u"English (US)": "en",

@@ -37,7 +37,6 @@ class Podnapisi(PluginBase.PluginBase):
     site_url = "http://www.podnapisi.net"
     site_name = "Podnapisi"
     server_url = 'http://ssp.podnapisi.net:8000'
-    multi_languages_queries = True
     api_based = True
     _plugin_languages = {"sl": "1",
             "en": "2",

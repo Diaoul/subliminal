@@ -38,7 +38,6 @@ class Subtitulos(PluginBase.PluginBase):
     site_url = 'http://www.subtitulos.es'
     site_name = 'Subtitulos'
     server_url = 'http://www.subtitulos.es'
-    multi_languages_queries = True
     api_based = False
     _plugin_languages = {u"English (US)": "en",
             u"English (UK)": "en",

@@ -86,18 +86,18 @@ class PluginBase(object):
         returnedhash = "%016x" % hash
         return returnedhash
 
-    def downloadFile(self, url, filename, data=None):
-        """Downloads the given url to the given filename"""
+    def downloadFile(self, url, filepath, data=None):
+        """Donwload a subtitle file"""
         try:
             self.logger.info(u"Downloading %s" % url)
             req = urllib2.Request(url, headers={'Referer': url, 'User-Agent': self.user_agent})
             f = urllib2.urlopen(req, data=data)
-            dump = ek.ek(open, filename, "wb")
+            dump = open(filepath, "wb")
             dump.write(f.read())
-            self.adjustPermissions(filename)
+            self.adjustPermissions(filepath)
             dump.close()
             f.close()
-            self.logger.debug(u"Download finished for file %s. Size: %s" % (filename, ek.ek(os.path.getsize, filename)))
+            self.logger.debug(u"Download finished for file %s. Size: %s" % (filepath, os.path.getsize(filepath)))
         except urllib2.HTTPError, e:
             self.logger.error(u"HTTP Error:", e.code, url)
         except urllib2.URLError, e:
@@ -108,7 +108,7 @@ class PluginBase(object):
             ek.ek(os.chmod, filepath, self.config_dict['files_mode'])
 
     @abc.abstractmethod
-    def list(self, filenames, languages):
+    def list(self, filepath, languages):
         """Main method to call when you want to list subtitles"""
 
     @abc.abstractmethod
@@ -133,43 +133,13 @@ class PluginBase(object):
         try:
             return self.pluginLanguages[language]
         except KeyError, e:
-            self.logger.warn(u"Ooops, you found a missing language in the configuration file of %s: %s. Send a bug report to have it added." % (self.getClassName(), language))
-
-    def getExtension(self, subtitle):
+            self.logger.warn(u"Ooops, you found a missing language in the configuration file of %s: %s. Send a bug report to have it added." % (self.__class__.__name__, language))
+    
+    def getSubtitlePath(self, source, language):
+        dest = source.rsplit(".", 1)[0]
         if self.config_dict and self.config_dict['multi']:
-            return ".%s.srt" % subtitle['lang']
-        return ".srt"
-
-    def getClassName(self):
-        return self.__class__.__name__
-
-    def splitTask(self, task):
-        """Determines if the plugin can handle multi-thing queries and output splited tasks for list task only"""
-        if task['task'] != 'list':
-            return [task]
-        tasks = [task]
-        if not self.multi_languages_queries:
-            tasks = self._splitOnField(tasks, 'languages')
-        return tasks
-
-    @staticmethod
-    def _splitOnField(elements, field):
-        """
-        Split a list of dict in a bigger one if the element field in the dict has multiple elements too
-        i.e. [{'a': 1, 'b': [2,3]}, {'a': 7, 'b': [4]}] => [{'a': 1, 'b': [2]}, {'a': 1, 'b': [3]}, {'a': 7, 'b': [4]}]
-        with field = 'b'
-        """
-        results = []
-        for e in elements:
-            for v in e[field]:
-                newElement = {}
-                for (key, value) in e.items():
-                    if key != field:
-                        newElement[key] = value
-                    else:
-                        newElement[key] = [v]
-                results.append(newElement)
-        return results
+            return dest + '.%s.srt' % language
+        return dest + '.srt'
 
     def listTeams(self, sub_teams, separators):
         """List teams of a given string using separators"""
@@ -183,3 +153,8 @@ class PluginBase(object):
         for t in sub_teams:
             teams += t.split(sep)
         return teams
+
+    def _cmpReleaseGroup(self, x, y):
+        """Sort based on teams matching"""
+        return -cmp(len(x.teams.intersection(self.release_group)), len(y.teams.intersection(self.release_group)))
+

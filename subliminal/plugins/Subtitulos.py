@@ -31,6 +31,7 @@ import httplib
 import re
 import PluginBase
 from subliminal import encodingKludge as ek
+from subliminal.classes import Subtitle
 
 
 class Subtitulos(PluginBase.PluginBase):
@@ -55,11 +56,9 @@ class Subtitulos(PluginBase.PluginBase):
         super(Subtitulos, self).__init__(self._plugin_languages, config_dict, True)
         self.release_pattern = re.compile("Versi&oacute;n (.+) ([0-9]+).([0-9])+ megabytes")
 
-    def list(self, filenames, languages):
-        """Main method to call when you want to list subtitles"""
+    def list(self, filepath, languages):
         if not self.checkLanguages(languages):
             return []
-        filepath = filenames[0]
         guess = guessit.guess_file_info(filepath, 'autodetect')
         if guess['type'] != 'episode':
             return []
@@ -108,40 +107,13 @@ class Subtitulos(PluginBase.PluginBase):
                 sub_status = html_status.contents[0].string.strip()
                 if not sub_status == 'Completado':  # On not completed subtitles
                     continue
-                sub_link = html_status.findNext("span", {"class": "descargar green"}).find("a")["href"]
-                result = {}
-                result["release"] = "%s.S%.2dE%.2d.%s" % (name.replace(" ", "."), int(season), int(episode), '.'.join(sub_teams))
-                result["lang"] = sub_language
-                result["link"] = sub_link
-                result["page"] = searchurl
-                result["filename"] = filepath
-                result["plugin"] = self.getClassName()
-                result["teams"] = sub_teams  # used to sort
+                sub_link = html_status.findNext('span', {'class': 'descargar green'}).find('a')['href']
+                result = Subtitle(filepath, self.getSubtitlePath(filepath, sub_language), self.__class__.__name__, sub_language, sub_link, teams=sub_teams)
                 sublinks.append(result)
-        sublinks.sort(self._cmpTeams)
+        sublinks.sort(self._cmpReleaseGroup)
         return sublinks
 
     def download(self, subtitle):
-        """
-        Pass the URL of the sub and the file it matches, will unzip it
-        and return the path to the created file
-        """
-        suburl = subtitle["link"]
-        videofilename = subtitle["filename"]
-        srtbasefilename = videofilename.rsplit(".", 1)[0]
-        srtfilename = srtbasefilename + ".srt"
-        self.downloadFile(suburl, srtfilename)
-        return srtfilename
+        self.downloadFile(subtitle.link, subtitle.dest)
+        return subtitle.dest
 
-    def downloadFile(self, url, filename):
-        """Downloads the given url to the given filename"""
-        req = urllib2.Request(url, headers={'Referer': url, 'User-Agent': 'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.1.3)'})
-        f = urllib2.urlopen(req)
-        dump = ek.ek(open, filename, "wb")
-        dump.write(f.read())
-        dump.close()
-        f.close()
-
-    def _cmpTeams(self, x, y):
-        """Sort based on teams matching"""
-        return -cmp(len(x['teams'].intersection(self.release_group)), len(y['teams'].intersection(self.release_group)))

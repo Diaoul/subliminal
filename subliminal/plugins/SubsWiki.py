@@ -31,6 +31,7 @@ import httplib
 import re
 import guessit
 from subliminal import encodingKludge as ek
+from subliminal.classes import Subtitle
 
 
 class SubsWiki(PluginBase.PluginBase):
@@ -55,9 +56,7 @@ class SubsWiki(PluginBase.PluginBase):
         super(SubsWiki, self).__init__(self._plugin_languages, config_dict, True)
         self.release_pattern = re.compile("\nVersion (.+), ([0-9]+).([0-9])+ MBs")
 
-    def list(self, filenames, languages):
-        """Main method to call when you want to list subtitles"""
-        filepath = filenames[0]
+    def list(self, filepath, languages):
         if not self.checkLanguages(languages):
             return []
         guess = guessit.guess_file_info(filepath, 'autodetect')
@@ -108,46 +107,13 @@ class SubsWiki(PluginBase.PluginBase):
                 sub_status = html_status.find('strong').string.strip()
                 if not sub_status == 'Completed':  # On not completed subtitles
                     continue
-                sub_link = html_status.findNext("td").find("a")["href"]
-                result = {}
-                result["release"] = "%s.S%.2dE%.2d.%s" % (name.replace(" ", "."), int(season), int(episode), '.'.join(sub_teams))
-                result["lang"] = sub_language
-                result["link"] = self.server_url + sub_link
-                result["page"] = searchurl
-                result["filename"] = filepath
-                result["plugin"] = self.getClassName()
-                result["teams"] = sub_teams  # used to sort
+                sub_link = html_status.findNext('td').find('a')['href']
+                result = Subtitle(filepath, self.getSubtitlePath(filepath, sub_language), self.__class__.__name__, sub_language, self.server_url + sub_link, teams=sub_teams)
                 sublinks.append(result)
-        sublinks.sort(self._cmpTeams)
+        sublinks.sort(self._cmpReleaseGroup)
         return sublinks
 
     def download(self, subtitle):
-        """Main method to call when you want to download a subtitle"""
-        subtitleFilename = subtitle["filename"].rsplit(".", 1)[0] + self.getExtension(subtitle)
-        self.downloadFile(subtitle["link"], subtitleFilename)
-        return subtitleFilename
+        self.downloadFile(subtitle.link, subtitle.dest)
+        return subtitle.dest
 
-    def listTeams(self, subteams, separators):
-        teams = []
-        for sep in separators:
-            subteams = self.splitTeam(subteams, sep)
-        return set(subteams)
-
-    def splitTeam(self, subteams, sep):
-        teams = []
-        for t in subteams:
-            teams += t.split(sep)
-        return teams
-
-    def downloadFile(self, url, filename):
-        """Downloads the given url to the given filename"""
-        req = urllib2.Request(url, headers={'Referer': url, 'User-Agent': 'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.1.3)'})
-        f = urllib2.urlopen(req)
-        dump = ek.ek(open, filename, "wb")
-        dump.write(f.read())
-        dump.close()
-        f.close()
-
-    def _cmpTeams(self, x, y):
-        """Sort based on teams matching"""
-        return -cmp(len(x['teams'].intersection(self.release_group)), len(y['teams'].intersection(self.release_group)))

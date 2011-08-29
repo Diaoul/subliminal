@@ -21,7 +21,7 @@
 
 import threading
 from itertools import groupby
-import PluginWorker
+from classes import *
 import Queue
 import locale
 import logging
@@ -130,131 +130,100 @@ class Subliminal(object):
 
     def listSubtitles(self, entries):
         """
-        Searches subtitles within the active plugins and returns all found matching subtitles.
-        entries can be:
-            - filepaths
-            - folderpaths (N.B. internal recursive search function will be used)
-            - filenames
-        """
+        Search subtitles within the plugins and return all found subtitles in a list of Subtitle object.
+        No need to worry about workers.
+
+        Attributes:
+            entries -- unicode filepath or folderpath of video file or a list of that"""
+        # valid argument
+        if isinstance(entries, unicode):
+            entries = [entries]
+        # find files and languages
         search_results = []
-        if isinstance(entries, basestring):
-            entries = [ek.fixStupidEncodings(entries)]
-        elif not isinstance(entries, list):
-            raise TypeError('Entries should be a list or a string')
         for e in entries:
             search_results.extend(self._recursiveSearch(e))
-        taskCount = 0
-        for (l, f) in search_results:
-            taskCount += self.searchSubtitlesThreaded(f, l)
+        # find subtitles
+        task_count = 0
+        for (filepath, languages) in search_results:
+            logger.debug(u'Listing subtitles for %s with languages %r in plugins %r' % (filepath, languages, self._plugins))
+            for plugin in self._plugins:
+                self.taskQueue.put(ListTask(filepath, languages, plugin, self.getConfigDict()))
+                task_count += 1
         subtitles = []
-        for i in range(taskCount):
-            subtitles.extend(self.resultQueue.get(timeout=10))
+        for i in range(task_count):
+            subtitles.extend(self.resultQueue.get(timeout=4))
         return subtitles
 
-    def sortSubtitlesRaw(self, subtitles):
-        """Sort subtitles using user defined languages and plugins"""
-        return sorted(subtitles, cmp=self._cmpSubtitles)
-
-    def _cmpSubtitles(self, x, y):
-        """
-        Compares 2 subtitles elements x and y. Returns -1 if x < y, 0 if =, 1 if >
-        Use filename, languages and plugin comparison
-        """
-        filenames = sorted([x['filename'], y['filename']])
-        if x['filename'] != y['filename'] and filenames.index(x['filename']) < filenames(y['filename']):
-            return - 1
-        if x['filename'] != y['filename'] and filenames.index(x['filename']) > filenames(y['filename']):
-            return 1
-        if self._languages and self._languages.index(x['lang']) < self._languages.index(y['lang']):
-            return - 1
-        if self._languages and self._languages.index(x['lang']) > self._languages.index(y['lang']):
-            return 1
-        if self._plugins.index(x['plugin']) < self._plugins.index(y['plugin']):
-            return - 1
-        if self._plugins.index(x['plugin']) > self._plugins.index(y['plugin']):
-            return 1
-        return 0
-
-    def searchSubtitlesThreaded(self, filenames, languages):
-        """
-        Makes workers search for subtitles in different languages for multiple filenames and puts the result in the result queue.
-        Aslo split the work in multiple tasks
-        When the function returns, all the results may not be available yet!
-        """
-        logger.info(u"Searching subtitles for %s with languages %s" % (filenames, languages))
-        tasks = []
-        for pluginName in self._plugins:
-            try:
-                plugin = getattr(plugins, pluginName)(self.getConfigDict())
-            except:
-                logger.debug(traceback.print_exc())
-                continue
-            # split tasks if the plugin can't handle multi-thing queries
-            tasks.extend(plugin.splitTask({'task': 'list', 'plugin': pluginName, 'languages': languages, 'filenames': filenames, 'config': self.getConfigDict()}))
-        for t in tasks:
-            self.taskQueue.put(t)
-        return len(tasks)
-
-    def downloadSubtitlesThreaded(self, subtitles):
-        """
-        Makes workers download subtitles and puts the result in the result queue.
-        When the function returns, all the results may not be available yet!
-        """
-        # 1 task per file if not multi, 1 task per file and per language if multi
-        taskCount = 0
-        for (filename, subsByFilename) in groupby(sorted(subtitles, key=lambda x: x["filename"]), lambda x: x["filename"]):
-            if not self.multi:
-                self.taskQueue.put({'task': 'download', 'subtitle': sorted(list(subsByFilename), cmp=self._cmpSubtitles), 'config': self.getConfigDict()})
-                taskCount += 1
-                continue
-            for (language, subsByFilenameByLanguage) in groupby(sorted(subsByFilename, key=lambda x: x["lang"]), lambda x: x["lang"]):
-                self.taskQueue.put({'task': 'download', 'subtitle': sorted(list(subsByFilenameByLanguage), cmp=self._cmpSubtitles), 'config': self.getConfigDict()})
-                taskCount += 1
-        return taskCount
-
     def downloadSubtitles(self, entries):
-        """Download subtitles recursivly in entries"""
+        """
+        Download subtitles using the plugins preferences and languages. Also use internal algorithm to find
+        the best match inside a plugin.
+        No need to worry about workers.
+
+        Attributes:
+            entries -- unicode filepath or folderpath of video file or a list of that"""
         subtitles = self.listSubtitles(entries)
-        taskCount = self.downloadSubtitlesThreaded(subtitles)
+        task_count = 0
+        for (source, subsBySource) in groupby(sorted(subtitles, key=lambda x: x.source), lambda x: x.source):
+            if not self.multi:
+                self.taskQueue.put(DownloadTask(sorted(list(subsBySource), cmp=self._cmpSubtitles)))
+                task_count += 1
+                continue
+            for (language, subsBySourceByLanguage) in groupby(sorted(subsBySource, key=lambda x: x.language), lambda x: x.language):
+                self.taskQueue.put(DownloadTask(sorted(list(subsBySourceByLanguage), cmp=self._cmpSubtitles)))
+                task_count += 1
         paths = []
-        for i in range(taskCount):
+        for i in range(task_count):
             paths.append(self.resultQueue.get(timeout=10))
         return paths
 
+    def _cmpSubtitles(self, x, y):
+        """Compares 2 subtitles elements x and y using source, languages and plugin"""
+        sources = sorted([x.source, y.source])
+        if x.source != y.source and sources.index(x.source) < sources(y.source):
+            return - 1
+        if x.source != y.source and sources.index(x.source) > sources(y.source):
+            return 1
+        if self._languages and self._languages.index(x.language) < self._languages.index(y.language):
+            return - 1
+        if self._languages and self._languages.index(x.language) > self._languages.index(y.language):
+            return 1
+        if self._plugins.index(x.plugin) < self._plugins.index(y.plugin):
+            return - 1
+        if self._plugins.index(x.plugin) > self._plugins.index(y.plugin):
+            return 1
+        return 0
+
     def _recursiveSearch(self, entry, depth=0):
-        """
-        Searches files in the entry
-        This will output a list of tuples (filename, languages)
-        """
+        """Search files in the entry and return them as a list of tuples (filename, languages)"""
         if depth > self.max_depth and self.max_depth != 0:  # we do not want to search the whole file system except if max_depth = 0
             return []
-        if ek.ek(os.path.isfile, entry):  # a file? scan it
-            if depth != 0:  # only check for valid format if recursing, trust the user
+        if os.path.isfile(entry):  # a file? scan it
+            if depth != 0:  # trust the user: only check for valid format if recursing
                 mimetypes.add_type("video/x-matroska", ".mkv")
                 mimetype = mimetypes.guess_type(entry)[0]
                 if mimetype not in FORMATS:
                     return []
-            basepath = ek.fixStupidEncodings(ek.ek(os.path.splitext, entry)[0])
+            basepath = os.path.splitext(entry)[0]
             # check for .xx.srt if needed
             if self.multi and self.languages:
                 if self.force:
-                    return [(self.languages, [ek.ek(os.path.normpath, entry)])]
+                    return [(os.path.normpath(entry), self.languages)]
                 needed_languages = self.languages[:]
                 for l in self.languages:
-                    if ek.ek(os.path.exists, basepath + '.%s.srt' % l):
-                        logger.info(u"Skipping language %s for file %s as it already exists. Use the --force option to force the download" % (l, entry))
+                    if os.path.exists(basepath + '.%s.srt' % l):
+                        logger.info(u'Skipping language %s for file %s as it already exists. Use the --force option to force the download' % (l, entry))
                         needed_languages.remove(l)
                 if needed_languages:
-                    return [(needed_languages, [ek.ek(os.path.normpath, entry)])]
+                    return [(os.path.normpath(entry), needed_languages)]
                 return []
             # single subtitle download: .srt
-            if self.force or not ek.ek(os.path.exists, basepath + '.srt'):
-                return [(self.languages, [ek.ek(os.path.normpath, entry)])]
-        if ek.ek(os.path.isdir, entry):  # a dir? recurse
-            #TODO if hidden folder, don't keep going (how to handle windows/mac/linux ?)
+            if self.force or not os.path.exists(basepath + '.srt'):
+                return [(os.path.normpath(entry), self.languages)]
+        if os.path.isdir(entry):  # a dir? recurse
             files = []
-            for e in ek.ek(os.listdir, entry):
-                files.extend(self._recursiveSearch(ek.ek(os.path.join, entry, e), depth + 1))
+            for e in os.listdir(entry):
+                files.extend(self._recursiveSearch(os.path.join(entry, e), depth + 1))
             files.sort()
             grouped_files = []
             for languages, group in groupby(files, lambda t: t[0]):
@@ -278,7 +247,7 @@ class Subliminal(object):
         """Send a stop signal the pool of workers (poison pill)"""
         logger.debug(u"Sending %d poison pills into the task queue" % self.workers)
         for i in range(self.workers):
-            self.taskQueue.put(None)
+            self.taskQueue.put(PoisonPillTask())
 
     def stopWorkers(self):
         """Stop workers using a stop signal and wait for them to terminate properly"""
@@ -291,9 +260,6 @@ class Subliminal(object):
         config = {}
         config['multi'] = self.multi
         config['cache_dir'] = self.cache_dir
-        if self.plugins_config and 'subtitlesource_key' in self.plugins_config:
-            config['subtitlesource_key'] = self.plugins_config['subtitlesource_key']
-        config['force'] = self.force
         config['files_mode'] = self.files_mode
         return config
 
@@ -309,56 +275,30 @@ class PluginWorker(threading.Thread):
     def run(self):
         while True:
             task = self.taskQueue.get()
-            result = None
+            if isinstance(task, PoisonPillTask):
+                self.logger.debug(u'Poison pill received, terminating thread %s' % self.name)
+                self.taskQueue.task_done()
+                break
+            result = []
             try:
-                if not task:  # this is a poison pill
-                    break
-                elif task['task'] == 'list':  # the task is a listing
-                    # get the corresponding plugin
-                    plugin = getattr(plugins, task['plugin'])(task['config'])
-                    # split tasks if the plugin can't handle multi queries
-                    splitedTasks = plugin.splitTask(task)
-                    myTask = splitedTasks.pop()
-                    for st in splitedTasks:
-                        self.taskQueue.put(st)
-                    result = plugin.list(myTask['filenames'], myTask['languages'])
-                elif task['task'] == 'download':  # the task is to download
-                    result = None
-                    while task['subtitle']:
-                        subtitle = task['subtitle'].pop(0)
-                        # get the corresponding plugin
-                        plugin = getattr(plugins, subtitle['plugin'])(task['config'])
-                        path = plugin.download(subtitle)
-                        if path:
-                            subtitle['subtitlepath'] = path
-                            result = subtitle
+                if isinstance(task, ListTask):
+                    plugin = getattr(plugins, task.plugin)(task.config)
+                    result = plugin.list(task.filepath, task.languages)
+                elif isinstance(task, DownloadTask):
+                    for subtitle in task.subtitles:
+                        plugin = getattr(plugins, subtitle.plugin)()
+                        try:
+                            result = plugin.download(subtitle)
                             break
-                else:
-                    self.logger.error(u'Unknown task %s submited to worker %s' % (task['task'], self.name))
+                        except:
+                            self.logger.error(u'Could not download subtitle %r, skipping' % subtitle)
+                            continue
             except:
+                self.logger.error(u'Exception raised in worker %s' % self.name)
                 self.logger.debug(traceback.print_exc())
-                self.logger.error(u"Worker couldn't do the job %s, continue anyway" % task['task'])
             finally:
                 self.resultQueue.put(result)
                 self.taskQueue.task_done()
         self.logger.debug(u'Thread %s terminated' % self.name)
 
 
-class LanguageError(Exception):
-    """Exception raised when invalid language is submitted
-
-    Attributes:
-        language -- language that cause the error
-    """
-    def __init__(self, language):
-        self.language = language
-
-
-class PluginError(Exception):
-    """"Exception raised when invalid plugin is submitted
-
-    Attributes:
-        plugin -- plugin that cause the error
-    """
-    def __init__(self, plugin):
-        self.plugin = plugin

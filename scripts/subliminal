@@ -70,8 +70,8 @@ def main():
     if not args.quiet:
         print '*' * 50
         print 'Downloaded %s subtitles' % len(subtitles)
-        for s in subtitles:
-            print s['lang'] + ' - ' + s['subtitlepath']
+        for subtitle in subtitles:
+            print subtitle.language + ' - ' + subtitle.dest
         print '*' * 50
 
 if __name__ == '__main__':

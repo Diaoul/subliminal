@@ -25,6 +25,7 @@ import hashlib
 import os
 import urllib2
 from subliminal import encodingKludge as ek
+from subliminal.classes import Subtitle
 
 
 class TheSubDB(PluginBase.PluginBase):
@@ -57,10 +58,8 @@ class TheSubDB(PluginBase.PluginBase):
     def __init__(self, config_dict=None):
         super(TheSubDB, self).__init__(self._plugin_languages, config_dict)
 
-    def list(self, filenames, languages):
-        """Main method to call when you want to list subtitles"""
-        filepath = filenames[0]
-        if not ek.ek(os.path.isfile, filepath):
+    def list(self, filepath, languages):
+        if not os.path.isfile(filepath):
             return []
         return self.query(filepath, self.hashFile(filepath), languages)
 
@@ -83,13 +82,7 @@ class TheSubDB(PluginBase.PluginBase):
         subs = []
         for l in available_languages:
             if not languages or l in languages:
-                result = {}
-                result['release'] = filepath
-                result['lang'] = l
-                result['link'] = "%s/?action=download&hash=%s&language=%s" % (self.server_url, moviehash, l)
-                result['page'] = result['link']
-                result['filename'] = filepath
-                result['plugin'] = self.getClassName()
+                result = Subtitle(filepath, self.getSubtitlePath(filepath, l), self.__class__.__name__, l, '%s/?action=download&hash=%s&language=%s' % (self.server_url, moviehash, l))
                 subs.append(result)
         return subs
 
@@ -104,19 +97,6 @@ class TheSubDB(PluginBase.PluginBase):
         return hashlib.md5(data).hexdigest()
 
     def download(self, subtitle):
-        """Main method to call when you want to download a subtitle"""
-        suburl = subtitle["link"]
-        videofilename = subtitle["filename"]
-        srtfilename = videofilename.rsplit(".", 1)[0] + self.getExtension(subtitle)
-        self.downloadFile(suburl, srtfilename)
-        return srtfilename
+        self.downloadFile(subtitle.link, subtitle.dest)
+        return subtitle.dest
 
-    def downloadFile(self, url, srtfilename):
-        """Downloads the given url to the given filename"""
-        req = urllib2.Request(url)
-        req.add_header('User-Agent', self.user_agent)
-        f = urllib2.urlopen(req)
-        dump = open(srtfilename, "wb")
-        dump.write(f.read())
-        dump.close()
-        f.close()

@@ -21,6 +21,7 @@
 #
 
 from BeautifulSoup import BeautifulSoup
+from subliminal.classes import Subtitle
 import guessit
 import PluginBase
 import zipfile
@@ -74,11 +75,9 @@ class Addic7ed(PluginBase.PluginBase):
         #http://www.addic7ed.com/serie/Smallville/9/11/Absolute_Justice
         self.release_pattern = re.compile(" \nVersion (.+), ([0-9]+).([0-9])+ MBs")
 
-    def list(self, filenames, languages):
-        ''' Main method to call when you want to list subtitles '''
+    def list(self, filepath, languages):
         if not self.checkLanguages(languages):
             return []
-        filepath = filenames[0]
         guess = guessit.guess_file_info(filepath, 'autodetect')
         if guess['type'] != 'episode':
             return []
@@ -128,28 +127,12 @@ class Addic7ed(PluginBase.PluginBase):
                 continue
             sub_link = self.server_url + html_status.findNextSibling('td', {'colspan': '3'}).find('a')['href']
             self.logger.debug(u'Found a match with teams: %s' % sub_teams)
-            result = {}
-            result["release"] = "%s.S%.2dE%.2d.%s" % (name.replace(" ", "."), int(season), int(episode), '.'.join(sub_teams))
-            result["lang"] = sub_language
-            result["link"] = sub_link
-            result["page"] = searchurl
-            result["filename"] = filepath
-            result["plugin"] = self.getClassName()
-            result["teams"] = sub_teams  # used to sort
+            result = Subtitle(filepath, self.getSubtitlePath(filepath, sub_language), self.__class__.__name__, sub_language, sub_link, teams=sub_teams)
             sublinks.append(result)
-        sublinks.sort(self._cmpTeams)
+        sublinks.sort(self._cmpReleaseGroup)
         return sublinks
 
     def download(self, subtitle):
-        '''pass the URL of the sub and the file it matches, will unzip it
-        and return the path to the created file'''
-        suburl = subtitle["link"]
-        videofilename = subtitle["filename"]
-        srtbasefilename = videofilename.rsplit(".", 1)[0]
-        srtfilename = srtbasefilename + self.getExtension(subtitle)
-        self.downloadFile(suburl, srtfilename)
-        return srtfilename
+        self.downloadFile(subtitle.link, subtitle.dest)
+        return subtitle.dest
 
-    def _cmpTeams(self, x, y):
-        ''' Sort based on teams matching '''
-        return -cmp(len(x['teams'].intersection(self.release_group)), len(y['teams'].intersection(self.release_group)))

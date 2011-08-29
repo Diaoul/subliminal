@@ -27,6 +27,7 @@ import socket
 import xmlrpclib
 import guessit
 from subliminal import encodingKludge as ek
+from subliminal.classes import Subtitle
 
 
 class OpenSubtitles(PluginBase.PluginBase):
@@ -92,28 +93,24 @@ class OpenSubtitles(PluginBase.PluginBase):
     def __init__(self, config_dict=None):
         super(OpenSubtitles, self).__init__(self._plugin_languages, config_dict)
 
-    def list(self, filenames, languages):
-        """Main method to call when you want to list subtitles """
-        filepath = filenames[0]
-        if ek.ek(os.path.isfile, filepath):
+    def list(self, filepath, languages):
+        if os.path.isfile(filepath):
             filehash = self.hashFile(filepath)
-            size = ek.ek(os.path.getsize, filepath)
+            size = os.path.getsize(filepath)
             return self.query(moviehash=filehash, languages=languages, bytesize=size, filepath=filepath)
         else:
             return self.query(languages=languages, filepath=filepath)
 
     def download(self, subtitle):
-        """Main method to call when you want to download a subtitle """
-        subtitleFilename = subtitle["filename"].rsplit(".", 1)[0] + self.getExtension(subtitle)
-        self.downloadFile(subtitle["link"], subtitleFilename + ".gz")
-        f = ek.ek(gzip.open, subtitleFilename + ".gz")
-        dump = ek.ek(open, subtitleFilename, "wb")
-        dump.write(f.read())
-        self.adjustPermissions(subtitleFilename)
-        dump.close()
-        f.close()
-        ek.ek(os.remove, subtitleFilename + ".gz")
-        return subtitleFilename
+        self.downloadFile(subtitle.link, subtitle.dest + '.gz')
+        gz = gzip.open(subtitle.dest + '.gz')
+        srt = open(subtitle.dest, 'wb')
+        srt.write(gz.read())
+        gz.close()
+        self.adjustPermissions(subtitle.dest)
+        srt.close()
+        os.remove(subtitle.dest + '.gz')
+        return subtitle.dest
 
     def query(self, filepath, imdbID=None, moviehash=None, bytesize=None, languages=None):
         """Makes a query on OpenSubtitles and returns info about found subtitles.
@@ -172,15 +169,9 @@ class OpenSubtitles(PluginBase.PluginBase):
         sublinks = []
         self.filename = self.getFileName(filepath)
         for r in sorted(results['data'], self._cmpSubFileName):
-            result = {}
-            result["release"] = r['SubFileName']
-            result["link"] = r['SubDownloadLink']
-            result["page"] = r['SubDownloadLink']
-            result["lang"] = self.getRevertLanguage(r['SubLanguageID'])
-            result["filename"] = filepath
-            result["plugin"] = self.getClassName()
-            if 'query' in search and not r["MovieReleaseName"].replace('.', ' ').startswith(search['query']):  # query mode search, filter results
-                self.logger.debug(u"Skipping %s it does not start with %s" % (r["MovieReleaseName"].replace('.', ' '), search['query']))
+            result = Subtitle(filepath, self.getSubtitlePath(filepath, self.getRevertLanguage(r['SubLanguageID'])), self.__class__.__name__, self.getRevertLanguage(r['SubLanguageID']), r['SubDownloadLink'], r['SubFileName'])
+            if 'query' in search and not r['MovieReleaseName'].replace('.', ' ').startswith(search['query']):  # query mode search, filter results
+                self.logger.debug(u'Skipping %s it does not start with %s' % (r['MovieReleaseName'].replace('.', ' '), search['query']))
                 continue
             sublinks.append(result)
         return sublinks

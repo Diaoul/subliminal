@@ -29,6 +29,7 @@ import traceback
 import urllib
 import urllib2
 from subliminal import encodingKludge as ek
+from subliminal.classes import Subtitle
 
 
 class BierDopje(PluginBase.PluginBase):
@@ -68,11 +69,9 @@ class BierDopje(PluginBase.PluginBase):
             self.logger.debug(u"Reading showids from cache: %s" % self.showids)
             f.close()
 
-    def list(self, filenames, languages):
-        """Main method to call when you want to list subtitles"""
+    def list(self, filepath, languages):
         if not self.checkLanguages(languages):
             return []
-        filepath = filenames[0]
         guess = guessit.guess_file_info(filepath, 'autodetect')
         if guess['type'] != 'episode':
             return []
@@ -91,10 +90,8 @@ class BierDopje(PluginBase.PluginBase):
         return self.query(guess['series'], guess['season'], guess['episodeNumber'], release_group, filepath, languages)
 
     def download(self, subtitle):
-        """Main method to call when you want to download a subtitle"""
-        subpath = subtitle["filename"].rsplit(".", 1)[0] + self.getExtension(subtitle)
-        self.downloadFile(subtitle["link"], subpath)
-        return subpath
+        self.downloadFile(subtitle.link, subtitle.dest)
+        return subtitle.dest
 
     def query(self, name, season, episode, release_group, filepath, languages=None):
         """Makes a query and returns info (link, lang) about found subtitles"""
@@ -150,18 +147,8 @@ class BierDopje(PluginBase.PluginBase):
                     if 'screenSize' in sub_guess:
                         sub_release_group.add(sub_guess['screenSize'].lower())
                 sub_link = sub.getElementsByTagName('downloadlink')[0].firstChild.data
-                result = {}
-                result["release"] = sub_release
-                result["link"] = sub_link
-                result["page"] = sub_link
-                result["lang"] = language
-                result["filename"] = filepath
-                result["plugin"] = self.getClassName()
-                result["releaseGroup"] = sub_release_group
+                result = Subtitle(filepath, self.getSubtitlePath(filepath, language), self.__class__.__name__, language, sub_link, sub_release, sub_release_group)
                 sublinks.append(result)
         sublinks.sort(self._cmpReleaseGroup)
         return sublinks
 
-    def _cmpReleaseGroup(self, x, y):
-        """Sort based on teams matching"""
-        return -cmp(len(x['releaseGroup'].intersection(self.release_group)), len(y['releaseGroup'].intersection(self.release_group)))

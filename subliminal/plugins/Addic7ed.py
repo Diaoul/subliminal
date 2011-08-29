@@ -85,12 +85,12 @@ class Addic7ed(PluginBase.PluginBase):
         # add multiple things to the release group set
         release_group = set()
         if 'releaseGroup' in guess:
-            release_group.add(guess['releaseGroup'])
+            release_group.add(guess['releaseGroup'].lower())
         else:
             if 'title' in guess:
-                release_group.add(guess['title'])
+                release_group.add(guess['title'].lower())
             if 'screenSize' in guess:
-                release_group.add(guess['screenSize'])
+                release_group.add(guess['screenSize'].lower())
         if 'series' not in guess or len(release_group) == 0:
             return []
         self.release_group = release_group  # used to sort results
@@ -115,7 +115,7 @@ class Addic7ed(PluginBase.PluginBase):
         for html_sub in soup("td", {"class": "NewsTitle", "colspan": "3"}):
             if not self.release_pattern.match(str(html_sub.contents[1])):  # On not needed soup td result
                 continue
-            sub_teams = self.listTeams([self.release_pattern.match(str(html_sub.contents[1])).groups()[0]], [".", "_", " "])
+            sub_teams = self.listTeams([self.release_pattern.match(str(html_sub.contents[1])).groups()[0].lower()], ['.', '_', ' ', '/', '-'])
             if not release_group.intersection(sub_teams):  # On wrong team
                 continue
             html_language = html_sub.findNext("td", {"class": "language"})

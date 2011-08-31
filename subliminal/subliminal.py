@@ -31,7 +31,6 @@ import plugins
 import sys
 import traceback
 import locale
-import encodingKludge as ek
 
 
 # be nice

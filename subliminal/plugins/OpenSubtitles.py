@@ -159,7 +159,7 @@ class OpenSubtitles(PluginBase.PluginBase):
         self.logger.debug(u'Query uses token %s and search parameters %s' % (token, search))
         try:
             results = self.server.SearchSubtitles(token, [search])
-        except Exception, e:
+        except Exception:
             self.logger.debug(u'Cannot query the server')
             return []
         if not results['data']:  # no subtitle found

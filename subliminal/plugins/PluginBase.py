@@ -22,8 +22,6 @@
 import abc
 import logging
 import os
-import re
-import sys
 import urllib2
 import struct
 import threading
@@ -69,13 +67,13 @@ class PluginBase(object):
         if filesize < 65536 * 2:
             self.logger.error(u'File %s is too small (SizeError < 2**16)' % filename)
             return []
-        for x in range(65536 / bytesize):
+        for _ in range(65536 / bytesize):
             buffer = f.read(bytesize)
             (l_value,) = struct.unpack(longlongformat, buffer)
             hash += l_value
             hash = hash & 0xFFFFFFFFFFFFFFFF  # to remain as 64bit number
         f.seek(max(0, filesize - 65536), 0)
-        for x in range(65536 / bytesize):
+        for _ in range(65536 / bytesize):
             buffer = f.read(bytesize)
             (l_value,) = struct.unpack(longlongformat, buffer)
             hash += l_value
@@ -117,7 +115,7 @@ class PluginBase(object):
         """ISO-639-1 language code from plugin language code"""
         try:
             return self.revertPluginLanguages[language]
-        except KeyError, e:
+        except KeyError:
             self.logger.warn(u'Ooops, you found a missing language in the configuration file of %s: %s. Send a bug report to have it added.' % (self.__class__.__name__, language))
 
     def checkLanguages(self, languages):
@@ -130,7 +128,7 @@ class PluginBase(object):
         """Plugin language code from ISO-639-1 language code"""
         try:
             return self.pluginLanguages[language]
-        except KeyError, e:
+        except KeyError:
             self.logger.warn(u'Ooops, you found a missing language in the configuration file of %s: %s. Send a bug report to have it added.' % (self.__class__.__name__, language))
     
     def getSubtitlePath(self, source, language):

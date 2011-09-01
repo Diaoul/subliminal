@@ -21,16 +21,13 @@
 
 import threading
 from itertools import groupby
-from classes import *
+from classes import DownloadTask, ListTask, PoisonPillTask, LanguageError, PluginError
 import Queue
-import locale
 import logging
 import mimetypes
 import os
 import plugins
-import sys
 import traceback
-import locale
 
 
 # be nice
@@ -138,7 +135,7 @@ class Subliminal(object):
                 self.taskQueue.put(ListTask(filepath, languages, plugin, self.getConfigDict()))
                 task_count += 1
         subtitles = []
-        for i in range(task_count):
+        for _ in range(task_count):
             subtitles.extend(self.resultQueue.get(timeout=4))
         return subtitles
 
@@ -152,16 +149,16 @@ class Subliminal(object):
             entries -- unicode filepath or folderpath of video file or a list of that"""
         subtitles = self.listSubtitles(entries)
         task_count = 0
-        for (source, subsBySource) in groupby(sorted(subtitles, key=lambda x: x.source), lambda x: x.source):
+        for (_, subsBySource) in groupby(sorted(subtitles, key=lambda x: x.source), lambda x: x.source):
             if not self.multi:
                 self.taskQueue.put(DownloadTask(sorted(list(subsBySource), cmp=self._cmpSubtitles)))
                 task_count += 1
                 continue
-            for (language, subsBySourceByLanguage) in groupby(sorted(subsBySource, key=lambda x: x.language), lambda x: x.language):
+            for (__, subsBySourceByLanguage) in groupby(sorted(subsBySource, key=lambda x: x.language), lambda x: x.language):
                 self.taskQueue.put(DownloadTask(sorted(list(subsBySourceByLanguage), cmp=self._cmpSubtitles)))
                 task_count += 1
         paths = []
-        for i in range(task_count):
+        for _ in range(task_count):
             paths.append(self.resultQueue.get(timeout=10))
         return paths
 
@@ -225,7 +222,7 @@ class Subliminal(object):
     def startWorkers(self):
         """Create a pool of workers and start them"""
         self.pool = []
-        for i in range(self.workers):
+        for _ in range(self.workers):
             worker = PluginWorker(self.taskQueue, self.resultQueue)
             worker.start()
             self.pool.append(worker)
@@ -234,7 +231,7 @@ class Subliminal(object):
     def sendStopSignal(self):
         """Send a stop signal the pool of workers (poison pill)"""
         logger.debug(u"Sending %d poison pills into the task queue" % self.workers)
-        for i in range(self.workers):
+        for _ in range(self.workers):
             self.taskQueue.put(PoisonPillTask())
 
     def stopWorkers(self):

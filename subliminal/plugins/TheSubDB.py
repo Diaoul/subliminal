@@ -88,7 +88,6 @@ class TheSubDB(PluginBase.PluginBase):
         """TheSubDB specific hash function"""
         readsize = 64 * 1024
         with open(filepath, 'rb') as f:
-            size = os.path.getsize(filepath)
             data = f.read(readsize)
             f.seek(-readsize, os.SEEK_END)
             data += f.read(readsize)

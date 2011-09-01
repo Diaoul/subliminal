@@ -22,12 +22,7 @@
 
 from BeautifulSoup import BeautifulSoup
 import guessit
-import zipfile
 import urllib2
-import urllib
-import logging
-import traceback
-import httplib
 import re
 import PluginBase
 from subliminal.classes import Subtitle

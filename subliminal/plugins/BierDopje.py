@@ -24,8 +24,10 @@ from xml.dom import minidom
 import guessit
 import PluginBase
 import os
-import pickle
-import traceback
+try:
+    import cPickle as pickle
+except:
+    import pickle
 import urllib
 import urllib2
 from subliminal.classes import Subtitle
@@ -48,7 +50,7 @@ class BierDopje(PluginBase.PluginBase):
         'hawaii five-0 2010': 14211}
     _plugin_languages = {'en': 'en', 'nl': 'nl'}
 
-    def __init__(self, config_dict):
+    def __init__(self, config_dict=None):
         super(BierDopje, self).__init__(self._plugin_languages, config_dict)
         #http://api.bierdopje.com/23459DC262C0A742/GetShowByName/30+Rock
         #http://api.bierdopje.com/23459DC262C0A742/GetAllSubsFor/94/5/1/en (30 rock, season 5, episode 1)

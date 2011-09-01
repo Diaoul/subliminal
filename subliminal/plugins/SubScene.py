@@ -26,8 +26,6 @@ import zipfile
 import os
 import urllib2
 import urllib
-import traceback
-import httplib
 
 
 class SubScene(PluginBase.PluginBase):

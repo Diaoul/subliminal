@@ -24,14 +24,8 @@ from BeautifulSoup import BeautifulSoup
 from subliminal.classes import Subtitle
 import guessit
 import PluginBase
-import zipfile
-import os
 import urllib2
-import urllib
-import traceback
-import httplib
 import re
-import socket
 
 
 class Addic7ed(PluginBase.PluginBase):

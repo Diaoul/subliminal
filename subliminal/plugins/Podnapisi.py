@@ -23,13 +23,8 @@
 from hashlib import md5, sha256
 import PluginBase
 import xmlrpclib
-import struct
 import socket
-import zipfile
 import os
-import urllib2
-import urllib
-import traceback
 
 
 class Podnapisi(PluginBase.PluginBase):
@@ -111,7 +106,7 @@ class Podnapisi(PluginBase.PluginBase):
             self.logger.debug(u"Result: %s" % log_result)
             token = log_result["session"]
             nonce = log_result["nonce"]
-        except Exception, e:
+        except Exception:
             self.logger.error(u"Cannot login" % log_result)
             socket.setdefaulttimeout(None)
             return []
@@ -136,6 +131,5 @@ class Podnapisi(PluginBase.PluginBase):
         subs = []
         for sub in results['results']:
             subs.append(sub)
-        d = self.server.download(token, [173793])
         self.server.terminate(token)
         return subs

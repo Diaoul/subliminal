@@ -23,7 +23,6 @@
 import unittest
 import logging
 import os
-from subliminal.classes import Subtitle
 
 
 logging.basicConfig(level=logging.DEBUG, format='%(name)-24s %(levelname)-8s %(message)s')

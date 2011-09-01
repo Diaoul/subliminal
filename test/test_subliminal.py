@@ -34,28 +34,36 @@ if not os.path.exists(cache_dir):
     os.mkdir(cache_dir)
 
 
-class ListSubtitlesFileTestCase(unittest.TestCase):
-    def runTest(self):
-        subli = subliminal.Subliminal(cache_dir=cache_dir, workers=4, multi=False, force=True, max_depth=3, autostart=False, files_mode=-1)
-        subli.languages = ['en', 'fr', 'es', 'pt']
-        subli.plugins = subliminal.PLUGINS
-        subli.startWorkers()
-        results = subli.listSubtitles(test_file)
-        subli.stopWorkers()
-        print results
-        assert len(results) > 0
+class FileTestCase(unittest.TestCase):
+    def setUp(self):
+        self.subli = subliminal.Subliminal(cache_dir=cache_dir, workers=4, multi=False, force=True, max_depth=3, autostart=False, files_mode=-1)
+        self.subli.languages = ['en', 'fr', 'es', 'pt']
+        self.subli.plugins = subliminal.PLUGINS
+        self.subli.startWorkers()
+
+    def test_list(self):
+        results = self.subli.listSubtitles(test_file)
+        self.assertTrue(len(results) > 0)
+
+    def test_download(self):
+        results = self.subli.downloadSubtitles(test_file)
+        self.assertTrue(len(results) > 0)
+
+    def tearDown(self):
+        self.subli.stopWorkers()
 
 
-class DownloadSubtitlesFileTestCase(unittest.TestCase):
-    def runTest(self):
-        subli = subliminal.Subliminal(cache_dir=cache_dir, workers=4, multi=True, force=True, max_depth=3, autostart=False, files_mode=755)
-        subli.languages = ['en', 'fr', 'es', 'pt']
-        subli.plugins = ['OpenSubtitles']
-        subli.startWorkers()
-        results = subli.downloadSubtitles(test_file)
-        subli.stopWorkers()
-        print results
-        assert len(results) > 0
+class ErrorTestCase(unittest.TestCase):
+    def setUp(self):
+        self.subli = subliminal.Subliminal(cache_dir=cache_dir, workers=4, multi=False, force=True, max_depth=3, autostart=False, files_mode=-1)
+
+    def test_language(self):
+        with self.assertRaises(subliminal.classes.LanguageError):
+            self.subli.languages = ['en', 'fr', 'zz', 'pt']
+
+    def test_plugin(self):
+        with self.assertRaises(subliminal.classes.PluginError):
+            self.subli.plugins = ['WrongPlugin']
 
 
 if __name__ == "__main__":

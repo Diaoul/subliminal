@@ -54,22 +54,23 @@ class BierDopje(PluginBase.PluginBase):
         super(BierDopje, self).__init__(self._plugin_languages, config_dict)
         #http://api.bierdopje.com/23459DC262C0A742/GetShowByName/30+Rock
         #http://api.bierdopje.com/23459DC262C0A742/GetAllSubsFor/94/5/1/en (30 rock, season 5, episode 1)
-        if not config_dict or not config_dict['cache_dir']:
-            raise Exception('Cache directory is mandatory for this plugin')
-        self.showid_cache = os.path.join(config_dict['cache_dir'], 'bierdopje_showid.cache')
-        with self.lock:
-            if not os.path.exists(self.showid_cache):
-                if not os.path.exists(os.path.dirname(self.showid_cache)):
-                    raise Exception('Cache directory does not exist')
-                f = open(self.showid_cache, 'w')
-                pickle.dump({}, f)
+        if config_dict and config_dict['cache_dir']:
+            self.showid_cache = os.path.join(config_dict['cache_dir'], 'bierdopje_showid.cache')
+            with self.lock:
+                if not os.path.exists(self.showid_cache):
+                    if not os.path.exists(os.path.dirname(self.showid_cache)):
+                        raise Exception('Cache directory does not exist')
+                    f = open(self.showid_cache, 'w')
+                    pickle.dump({}, f)
+                    f.close()
+                f = open(self.showid_cache, 'r')
+                self.showids = pickle.load(f)
+                self.logger.debug(u'Reading showids from cache: %s' % self.showids)
                 f.close()
-            f = open(self.showid_cache, 'r')
-            self.showids = pickle.load(f)
-            self.logger.debug(u'Reading showids from cache: %s' % self.showids)
-            f.close()
 
     def list(self, filepath, languages):
+        if not self.config_dict:
+            raise Exception('Cache directory is mandatory for this plugin')
         if not self.checkLanguages(languages):
             return []
         guess = guessit.guess_file_info(filepath, 'autodetect')

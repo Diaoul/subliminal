@@ -204,7 +204,10 @@ class Subliminal(object):
                 return []
             # single subtitle download: .srt
             if self.force or not os.path.exists(basepath + '.srt'):
-                return [(os.path.normpath(entry), self.languages)]
+                if self.languages:
+                    return [(os.path.normpath(entry), self.languages)]
+                else:
+                    return []
         if os.path.isdir(entry):  # a dir? recurse
             files = []
             for e in os.listdir(entry):

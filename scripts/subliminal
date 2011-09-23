@@ -67,7 +67,7 @@ def main():
         subli.stopWorkers()
     if len(subtitles) == 0:
         if not args.quiet:
-            sys.stderr.write('No subtitles found')
+            sys.stderr.write('No subtitles found\n')
         exit(1)
     if not args.quiet:
         print '*' * 50

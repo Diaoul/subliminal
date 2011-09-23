@@ -73,7 +73,7 @@ def main():
         print '*' * 50
         print 'Downloaded %s subtitles' % len(subtitles)
         for subtitle in subtitles:
-            print subtitle.language + ' - ' + subtitle.dest
+            print subtitle
         print '*' * 50
 
 if __name__ == '__main__':

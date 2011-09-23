@@ -79,7 +79,7 @@ class Subliminal(object):
             if cache_dir:  # custom configuration file
                 self.cache_dir = cache_dir
                 if not os.path.isdir(self.cache_dir):  # custom file doesn't exist, create it
-                    os.mkdir(self.cache_dir)
+                    os.makedirs(self.cache_dir)
                     logger.debug(u'Creating cache directory: %s' % self.cache_dir)
         except:
             self.cache_dir = None
@@ -204,7 +204,10 @@ class Subliminal(object):
                 return []
             # single subtitle download: .srt
             if self.force or not os.path.exists(basepath + '.srt'):
-                return [(os.path.normpath(entry), self.languages)]
+                if self.languages:
+                    return [(os.path.normpath(entry), self.languages)]
+                else:
+                    return []
         if os.path.isdir(entry):  # a dir? recurse
             files = []
             for e in os.listdir(entry):

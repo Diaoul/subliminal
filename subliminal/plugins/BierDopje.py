@@ -69,7 +69,7 @@ class BierDopje(PluginBase.PluginBase):
                 f.close()
 
     def list(self, filepath, languages):
-        if not self.config_dict:
+        if not self.config_dict['cache_dir']:
             raise Exception('Cache directory is mandatory for this plugin')
         if not self.checkLanguages(languages):
             return []

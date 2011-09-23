@@ -61,8 +61,10 @@ def main():
     if args.languages:
         subli.languages = args.languages
     subli.startWorkers()
-    subtitles = subli.downloadSubtitles(args.paths)
-    subli.stopWorkers()
+    try:
+        subtitles = subli.downloadSubtitles(args.paths)
+    finally:
+        subli.stopWorkers()
     if len(subtitles) == 0:
         if not args.quiet:
             sys.stderr.write('No subtitles found')

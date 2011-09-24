@@ -36,10 +36,9 @@ if not os.path.exists(cache_dir):
 
 class FileTestCase(unittest.TestCase):
     def setUp(self):
-        self.subli = subliminal.Subliminal(cache_dir=cache_dir, workers=4, multi=False, force=True, max_depth=3, autostart=False, files_mode=-1)
+        self.subli = subliminal.Subliminal(cache_dir=cache_dir, workers=4, multi=False, force=True, max_depth=3, files_mode=-1)
         self.subli.languages = ['en', 'fr', 'es', 'pt']
         self.subli.plugins = subliminal.PLUGINS
-        self.subli.startWorkers()
 
     def test_list(self):
         results = self.subli.listSubtitles(test_file)
@@ -49,13 +48,10 @@ class FileTestCase(unittest.TestCase):
         results = self.subli.downloadSubtitles(test_file)
         self.assertTrue(len(results) > 0)
 
-    def tearDown(self):
-        self.subli.stopWorkers()
-
 
 class ErrorTestCase(unittest.TestCase):
     def setUp(self):
-        self.subli = subliminal.Subliminal(cache_dir=cache_dir, workers=4, multi=False, force=True, max_depth=3, autostart=False, files_mode=-1)
+        self.subli = subliminal.Subliminal(cache_dir=cache_dir, workers=4, multi=False, force=True, max_depth=3, files_mode=-1)
 
     def test_language(self):
         with self.assertRaises(subliminal.classes.LanguageError):
@@ -64,6 +60,29 @@ class ErrorTestCase(unittest.TestCase):
     def test_plugin(self):
         with self.assertRaises(subliminal.classes.PluginError):
             self.subli.plugins = ['WrongPlugin']
+
+
+class PriorityQueueTestCase(unittest.TestCase):
+    def setUp(self):
+        self.subli = subliminal.Subliminal(cache_dir=cache_dir, workers=4, multi=False, force=True, max_depth=3, files_mode=-1)
+        self.subli.languages = ['en', 'fr', 'es', 'pt']
+        self.subli.plugins = subliminal.PLUGINS
+
+    def test_bad_state_error(self):
+        with self.assertRaises(subliminal.classes.BadStateError):
+            self.subli.startWorkers()
+            results = self.subli.listSubtitles(test_folder)
+        self.subli.stopWorkers()
+
+    def test_manual_list(self):
+        self.subli.taskQueue.put((5, subliminal.classes.ListTask(test_file, self.subli.languages, self.subli.plugins, self.subli.getConfigDict())))
+        self.subli.startWorkers()
+        # parallel stuff...
+        self.subli.stopWorkers()
+        result = self.subli.resultQueue.get()
+        self.assertTrue(len(result) > 0)
+        
+
 
 
 if __name__ == "__main__":

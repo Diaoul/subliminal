@@ -119,9 +119,9 @@ class Subliminal(object):
         No need to worry about workers.
 
         Attributes:
-            entries -- unicode filepath or folderpath of video file or a list of that"""
+            entries -- filepath or folderpath of video file or a list of that"""
         # valid argument
-        if isinstance(entries, unicode):
+        if isinstance(entries, basestring):
             entries = [entries]
         # find files and languages
         search_results = []
@@ -146,7 +146,7 @@ class Subliminal(object):
         No need to worry about workers.
 
         Attributes:
-            entries -- unicode filepath or folderpath of video file or a list of that"""
+            entries -- filepath or folderpath of video file or a list of that"""
         subtitles = self.listSubtitles(entries)
         task_count = 0
         for (_, subsBySource) in groupby(sorted(subtitles, key=lambda x: x.source), lambda x: x.source):

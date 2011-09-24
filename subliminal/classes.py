@@ -19,6 +19,16 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+class BadStateError(Exception):
+    """Exception raised when an invalid action is asked
+
+    Attributes:
+        state -- current state of Subliminal instance
+    """
+    def __init__(self, state):
+        self.state = state
+
+
 class LanguageError(Exception):
     """Exception raised when invalid language is submitted
 
@@ -71,5 +81,5 @@ class DownloadTask(Task):
         self.subtitles = subtitles
 
 
-class PoisonPillTask(Task):
+class StopTask(Task):
     pass

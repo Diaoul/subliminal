@@ -21,7 +21,7 @@
 
 import threading
 from itertools import groupby
-from classes import DownloadTask, ListTask, PoisonPillTask, LanguageError, PluginError
+from classes import DownloadTask, ListTask, StopTask, LanguageError, PluginError
 import Queue
 import logging
 import mimetypes
@@ -55,25 +55,27 @@ LANGUAGES = ['aa', 'ab', 'ae', 'af', 'ak', 'am', 'an', 'ar', 'as', 'av', 'ay', '
     'ty', 'ug', 'uk', 'ur', 'uz', 've', 'vi', 'vo', 'wa', 'wo', 'xh', 'yi', 'yo', 'za', 'zh', 'zu']  # ISO 639-1
 PLUGINS = ['Addic7ed', 'BierDopje', 'OpenSubtitles', 'SubsWiki', 'Subtitulos', 'TheSubDB']
 API_PLUGINS = filter(lambda p: getattr(plugins, p).api_based, PLUGINS)
+IDLE = 0
+RUNNING = 1
+PAUSED = 2
 
 
 class Subliminal(object):
     """Main Subliminal class"""
 
-    def __init__(self, cache_dir=False, workers=4, multi=False, force=False, max_depth=3, autostart=False, files_mode=-1):
+    def __init__(self, cache_dir=False, workers=4, multi=False, force=False, max_depth=3, files_mode=-1):
         # set default values
         self.multi = multi
         self.force = force
         self.max_depth = max_depth
         self.cache_dir = None
-        self.taskQueue = Queue.Queue()
+        self.taskQueue = Queue.PriorityQueue()
         self.resultQueue = Queue.Queue()
         self._languages = None
         self._plugins = API_PLUGINS
         self.workers = workers
         self.files_mode = files_mode
-        if autostart:
-            self.startWorkers()
+        self.state = IDLE
         # handle cache directory preferences
         try:
             if cache_dir:  # custom configuration file
@@ -120,6 +122,9 @@ class Subliminal(object):
 
         Attributes:
             entries -- filepath or folderpath of video file or a list of that"""
+        if self.state != IDLE:
+            raise BadStateError(self.state)
+        self.startWorkers()
         # valid argument
         if isinstance(entries, basestring):
             entries = [entries]
@@ -132,11 +137,12 @@ class Subliminal(object):
         for (filepath, languages) in search_results:
             logger.debug(u'Listing subtitles for %s with languages %r in plugins %r' % (filepath, languages, self._plugins))
             for plugin in self._plugins:
-                self.taskQueue.put(ListTask(filepath, languages, plugin, self.getConfigDict()))
+                self.taskQueue.put((5, ListTask(filepath, languages, plugin, self.getConfigDict())))
                 task_count += 1
         subtitles = []
         for _ in range(task_count):
             subtitles.extend(self.resultQueue.get(timeout=4))
+        self.stopWorkers()
         return subtitles
 
     def downloadSubtitles(self, entries):
@@ -147,19 +153,23 @@ class Subliminal(object):
 
         Attributes:
             entries -- filepath or folderpath of video file or a list of that"""
+        if self.state != IDLE:
+            raise BadStateError(self.state)
+        self.startWorkers()
         subtitles = self.listSubtitles(entries)
         task_count = 0
         for (_, subsBySource) in groupby(sorted(subtitles, key=lambda x: x.source), lambda x: x.source):
             if not self.multi:
-                self.taskQueue.put(DownloadTask(sorted(list(subsBySource), cmp=self._cmpSubtitles)))
+                self.taskQueue.put((5, DownloadTask(sorted(list(subsBySource), cmp=self._cmpSubtitles))))
                 task_count += 1
                 continue
             for (__, subsBySourceByLanguage) in groupby(sorted(subsBySource, key=lambda x: x.language), lambda x: x.language):
-                self.taskQueue.put(DownloadTask(sorted(list(subsBySourceByLanguage), cmp=self._cmpSubtitles)))
+                self.taskQueue.put((5, DownloadTask(sorted(list(subsBySourceByLanguage), cmp=self._cmpSubtitles))))
                 task_count += 1
         paths = []
         for _ in range(task_count):
             paths.append(self.resultQueue.get(timeout=10))
+        self.stopWorkers()
         return paths
 
     def _cmpSubtitles(self, x, y):
@@ -230,18 +240,25 @@ class Subliminal(object):
             worker.start()
             self.pool.append(worker)
             logger.debug(u"Worker %s added to the pool" % worker.name)
-
-    def sendStopSignal(self):
-        """Send a stop signal the pool of workers (poison pill)"""
-        logger.debug(u"Sending %d poison pills into the task queue" % self.workers)
-        for _ in range(self.workers):
-            self.taskQueue.put(PoisonPillTask())
+        self.state = RUNNING
 
     def stopWorkers(self):
-        """Stop workers using a stop signal and wait for them to terminate properly"""
-        self.sendStopSignal()
+        """Stop workers using a lowest priority stop signal and wait for them to terminate properly"""
+        for _ in range(self.workers):
+            self.taskQueue.put((10, StopTask()))
         for worker in self.pool:
             worker.join()
+        self.state = IDLE
+
+    def pauseWorkers(self):
+        """Pause workers using a highest priority stop signal and wait for them to terminate properly"""
+        for _ in range(self.workers):
+            self.taskQueue.put((0, StopTask()))
+        for worker in self.pool:
+            worker.join()
+        self.state = PAUSED
+        if self.taskQueue.empty():
+            self.state = STOPPED
 
     def getConfigDict(self):
         """Produce a dict with configuration items. Used by plugins to read configuration"""
@@ -262,8 +279,8 @@ class PluginWorker(threading.Thread):
 
     def run(self):
         while True:
-            task = self.taskQueue.get()
-            if isinstance(task, PoisonPillTask):
+            task = self.taskQueue.get()[1]
+            if isinstance(task, StopTask):
                 self.logger.debug(u'Poison pill received, terminating thread %s' % self.name)
                 self.taskQueue.task_done()
                 break

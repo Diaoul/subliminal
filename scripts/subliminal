@@ -61,7 +61,6 @@ def main():
         subli.plugins = args.plugins
     if args.languages:
         subli.languages = args.languages
-    subli.startWorkers()
     try:
         subtitles = subli.downloadSubtitles(args.paths)
     finally:

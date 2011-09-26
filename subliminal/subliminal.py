@@ -115,16 +115,17 @@ class Subliminal(object):
     languages = property(get_languages, set_languages)
     plugins = property(get_plugins, set_plugins)
 
-    def listSubtitles(self, entries):
+    def listSubtitles(self, entries, auto=True):
         """
         Search subtitles within the plugins and return all found subtitles in a list of Subtitle object.
-        No need to worry about workers.
 
         Attributes:
-            entries -- filepath or folderpath of video file or a list of that"""
-        if self.state != IDLE:
-            raise BadStateError(self.state)
-        self.startWorkers()
+            entries -- filepath or folderpath of video file or a list of that
+            auto    -- automaticaly manage workers"""
+        if auto:
+            if self.state != IDLE:
+                raise BadStateError(self.state)
+            self.startWorkers()
         # valid argument
         if isinstance(entries, basestring):
             entries = [entries]
@@ -142,21 +143,23 @@ class Subliminal(object):
         subtitles = []
         for _ in range(task_count):
             subtitles.extend(self.resultQueue.get(timeout=4))
-        self.stopWorkers()
+        if auto:
+            self.stopWorkers()
         return subtitles
 
-    def downloadSubtitles(self, entries):
+    def downloadSubtitles(self, entries, auto=True):
         """
         Download subtitles using the plugins preferences and languages. Also use internal algorithm to find
         the best match inside a plugin.
-        No need to worry about workers.
 
         Attributes:
-            entries -- filepath or folderpath of video file or a list of that"""
-        if self.state != IDLE:
-            raise BadStateError(self.state)
-        self.startWorkers()
-        subtitles = self.listSubtitles(entries)
+            entries -- filepath or folderpath of video file or a list of that
+            auto    -- automaticaly manage workers"""
+        if auto:
+            if self.state != IDLE:
+                raise BadStateError(self.state)
+            self.startWorkers()
+        subtitles = self.listSubtitles(entries, False)
         task_count = 0
         for (_, subsBySource) in groupby(sorted(subtitles, key=lambda x: x.source), lambda x: x.source):
             if not self.multi:
@@ -169,7 +172,8 @@ class Subliminal(object):
         paths = []
         for _ in range(task_count):
             paths.append(self.resultQueue.get(timeout=10))
-        self.stopWorkers()
+        if auto:
+            self.stopWorkers()
         return paths
 
     def _cmpSubtitles(self, x, y):

@@ -21,7 +21,7 @@
 
 import threading
 from itertools import groupby
-from classes import DownloadTask, ListTask, StopTask, LanguageError, PluginError
+from classes import DownloadTask, ListTask, StopTask, LanguageError, PluginError, BadStateError
 import Queue
 import logging
 import mimetypes

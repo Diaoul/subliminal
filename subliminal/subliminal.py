@@ -70,7 +70,8 @@ class Subliminal(object):
         self.max_depth = max_depth
         self.cache_dir = None
         self.taskQueue = Queue.PriorityQueue()
-        self.resultQueue = Queue.Queue()
+        self.listResultQueue = Queue.Queue()
+        self.downloadResultQueue = Queue.Queue()
         self._languages = None
         self._plugins = API_PLUGINS
         self.workers = workers
@@ -142,7 +143,7 @@ class Subliminal(object):
                 task_count += 1
         subtitles = []
         for _ in range(task_count):
-            subtitles.extend(self.resultQueue.get(timeout=4))
+            subtitles.extend(self.listResultQueue.get(timeout=4))
         if auto:
             self.stopWorkers()
         return subtitles
@@ -171,7 +172,7 @@ class Subliminal(object):
                 task_count += 1
         paths = []
         for _ in range(task_count):
-            paths.append(self.resultQueue.get(timeout=10))
+            paths.append(self.downloadResultQueue.get(timeout=10))
         if auto:
             self.stopWorkers()
         return paths
@@ -240,7 +241,7 @@ class Subliminal(object):
         """Create a pool of workers and start them"""
         self.pool = []
         for _ in range(self.workers):
-            worker = PluginWorker(self.taskQueue, self.resultQueue)
+            worker = PluginWorker(self.taskQueue, self.listResultQueue, self.downloadResultQueue)
             worker.start()
             self.pool.append(worker)
             logger.debug(u'Worker %s added to the pool' % worker.name)
@@ -280,10 +281,11 @@ class Subliminal(object):
 
 class PluginWorker(threading.Thread):
     """Threaded plugin worker"""
-    def __init__(self, taskQueue, resultQueue):
+    def __init__(self, taskQueue, listResultQueue, downloadResultQueue):
         threading.Thread.__init__(self)
         self.taskQueue = taskQueue
-        self.resultQueue = resultQueue
+        self.listResultQueue = listResultQueue
+        self.downloadResultQueue = downloadResultQueue
         self.logger = logging.getLogger('subliminal.worker')
 
     def run(self):
@@ -311,6 +313,9 @@ class PluginWorker(threading.Thread):
                 self.logger.error(u'Exception raised in worker %s' % self.name)
                 self.logger.debug(traceback.print_exc())
             finally:
-                self.resultQueue.put(result)
+                if isinstance(task, ListTask):
+                    self.listResultQueue.put(result)
+                elif isinstance(task, DownloadTask):
+                    self.downloadResultQueue.put(result)
                 self.taskQueue.task_done()
         self.logger.debug(u'Thread %s terminated' % self.name)

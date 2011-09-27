@@ -21,7 +21,7 @@
 
 import threading
 from itertools import groupby
-from classes import DownloadTask, ListTask, StopTask, LanguageError, PluginError, BadStateError
+from classes import DownloadTask, ListTask, StopTask, LanguageError, PluginError, BadStateError, WrongTaskError
 import Queue
 import logging
 import mimetypes
@@ -271,6 +271,11 @@ class Subliminal(object):
         config['cache_dir'] = self.cache_dir
         config['files_mode'] = self.files_mode
         return config
+
+    def addTask(self, task):
+        if not isinstance(task, Task) or isinstance(task, StopTask):
+            raise WrongTaskError()
+        self.taskQueue.put((5, task))
 
 
 class PluginWorker(threading.Thread):

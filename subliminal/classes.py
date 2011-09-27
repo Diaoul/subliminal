@@ -19,6 +19,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+
 class BadStateError(Exception):
     """Exception raised when an invalid action is asked
 
@@ -47,6 +48,11 @@ class PluginError(Exception):
     """
     def __init__(self, plugin):
         self.plugin = plugin
+
+
+class WrongTaskError(Exception):
+    """"Exception raised when invalid task is submitted"""
+    pass
 
 
 class Subtitle:

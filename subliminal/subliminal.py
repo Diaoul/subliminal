@@ -133,7 +133,7 @@ class Subliminal(object):
         # find files and languages
         search_results = []
         for e in entries:
-            search_results.extend(self._recursiveSearch(e))
+            search_results.extend(self.recursiveSearch(e))
         # find subtitles
         task_count = 0
         for (filepath, languages) in search_results:
@@ -164,11 +164,11 @@ class Subliminal(object):
         task_count = 0
         for (_, subsBySource) in groupby(sorted(subtitles, key=lambda x: x.source), lambda x: x.source):
             if not self.multi:
-                self.taskQueue.put((5, DownloadTask(sorted(list(subsBySource), cmp=self._cmpSubtitles))))
+                self.taskQueue.put((5, DownloadTask(sorted(list(subsBySource), cmp=self.cmpSubtitles))))
                 task_count += 1
                 continue
             for (__, subsBySourceByLanguage) in groupby(sorted(subsBySource, key=lambda x: x.language), lambda x: x.language):
-                self.taskQueue.put((5, DownloadTask(sorted(list(subsBySourceByLanguage), cmp=self._cmpSubtitles))))
+                self.taskQueue.put((5, DownloadTask(sorted(list(subsBySourceByLanguage), cmp=self.cmpSubtitles))))
                 task_count += 1
         paths = []
         for _ in range(task_count):
@@ -177,7 +177,7 @@ class Subliminal(object):
             self.stopWorkers()
         return paths
 
-    def _cmpSubtitles(self, x, y):
+    def cmpSubtitles(self, x, y):
         """Compares 2 subtitles elements x and y using source, languages and plugin"""
         sources = sorted([x.source, y.source])
         if x.source != y.source and sources.index(x.source) < sources(y.source):
@@ -194,7 +194,7 @@ class Subliminal(object):
             return 1
         return 0
 
-    def _recursiveSearch(self, entry, depth=0):
+    def recursiveSearch(self, entry, depth=0):
         """Search files in the entry and return them as a list of tuples (filename, languages)"""
         if depth > self.max_depth and self.max_depth != 0:  # we do not want to search the whole file system except if max_depth = 0
             return []
@@ -226,7 +226,7 @@ class Subliminal(object):
         if os.path.isdir(entry):  # a dir? recurse
             files = []
             for e in os.listdir(entry):
-                files.extend(self._recursiveSearch(os.path.join(entry, e), depth + 1))
+                files.extend(self.recursiveSearch(os.path.join(entry, e), depth + 1))
             files.sort()
             grouped_files = []
             for languages, group in groupby(files, lambda t: t[0]):

@@ -199,7 +199,7 @@ class Subliminal(object):
             return []
         if os.path.isfile(entry):  # a file? scan it
             if depth != 0:  # trust the user: only check for valid format if recursing
-                mimetypes.add_type("video/x-matroska", ".mkv")
+                mimetypes.add_type('video/x-matroska', '.mkv')
                 mimetype = mimetypes.guess_type(entry)[0]
                 if mimetype not in FORMATS:
                     return []
@@ -243,7 +243,7 @@ class Subliminal(object):
             worker = PluginWorker(self.taskQueue, self.resultQueue)
             worker.start()
             self.pool.append(worker)
-            logger.debug(u"Worker %s added to the pool" % worker.name)
+            logger.debug(u'Worker %s added to the pool' % worker.name)
         self.state = RUNNING
 
     def stopWorkers(self):
@@ -314,5 +314,3 @@ class PluginWorker(threading.Thread):
                 self.resultQueue.put(result)
                 self.taskQueue.task_done()
         self.logger.debug(u'Thread %s terminated' % self.name)
-
-

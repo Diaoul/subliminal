@@ -62,7 +62,7 @@ def main():
     if args.languages:
         subli.languages = args.languages
     try:
-        subtitles = subli.downloadSubtitles(args.paths)
+        subtitles = subli.downloadSubtitles([unicode(x) for x in args.paths])
     finally:
         subli.stopWorkers()
     if len(subtitles) == 0:

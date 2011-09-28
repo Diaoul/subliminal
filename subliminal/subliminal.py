@@ -133,6 +133,8 @@ class Subliminal(object):
         # find files and languages
         search_results = []
         for e in entries:
+            if not isinstance(e, unicode):
+                logger.warning(u'Entry %r is not unicode' % e)
             search_results.extend(self.recursiveSearch(e))
         # find subtitles
         task_count = 0

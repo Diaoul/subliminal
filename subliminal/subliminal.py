@@ -83,7 +83,7 @@ class Subliminal(object):
                 self.cache_dir = cache_dir
                 if not os.path.isdir(self.cache_dir):  # custom file doesn't exist, create it
                     os.makedirs(self.cache_dir)
-                    logger.debug(u'Creating cache directory: %s' % self.cache_dir)
+                    logger.debug(u'Creating cache directory: %r' % self.cache_dir)
         except:
             self.cache_dir = None
             logger.error(u'Failed to use the cache directory, continue without it')
@@ -137,7 +137,7 @@ class Subliminal(object):
         # find subtitles
         task_count = 0
         for (filepath, languages) in search_results:
-            logger.debug(u'Listing subtitles for %s with languages %r in plugins %r' % (filepath, languages, self._plugins))
+            logger.debug(u'Listing subtitles for %r with languages %r in plugins %r' % (filepath, languages, self._plugins))
             for plugin in self._plugins:
                 self.taskQueue.put((5, ListTask(filepath, languages, plugin, self.getConfigDict())))
                 task_count += 1
@@ -212,7 +212,7 @@ class Subliminal(object):
                 needed_languages = self.languages[:]
                 for l in self.languages:
                     if os.path.exists(basepath + '.%s.srt' % l):
-                        logger.info(u'Skipping language %s for file %s as it already exists. Use the --force option to force the download' % (l, entry))
+                        logger.info(u'Skipping language %s for file %r as it already exists. Use the --force option to force the download' % (l, entry))
                         needed_languages.remove(l)
                 if needed_languages:
                     return [(os.path.normpath(entry), needed_languages)]

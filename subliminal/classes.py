@@ -56,6 +56,17 @@ class WrongTaskError(Exception):
 
 
 class Subtitle:
+    """Subtitle class
+
+    Attributes:
+        source   -- path to the video file
+        dest     -- path to the subtitle file
+        plugin   -- plugin used
+        language -- language of the subtitle
+        link     -- download link
+        release  -- release group identified by guessit
+        teams    -- identified by subliminal
+    """
     def __init__(self, source=None, dest=None, plugin=None, language=None, link=None, release=None, teams=None):
         self.source = source
         self.dest = dest
@@ -71,10 +82,12 @@ class Subtitle:
 
 
 class Task:
+    """Base class for tasks to use in subliminal"""
     pass
 
 
 class ListTask(Task):
+    """List task to list subtitles"""
     def __init__(self, filepath, languages, plugin, config):
         self.filepath = filepath
         self.plugin = plugin
@@ -83,9 +96,11 @@ class ListTask(Task):
 
 
 class DownloadTask(Task):
+    """Download task to download subtitles"""
     def __init__(self, subtitles):
         self.subtitles = subtitles
 
 
 class StopTask(Task):
+    """Stop task to stop workers"""
     pass

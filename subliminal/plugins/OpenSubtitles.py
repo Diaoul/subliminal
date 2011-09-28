@@ -127,9 +127,9 @@ class OpenSubtitles(PluginBase.PluginBase):
             self.logger.debug(u'No search term, using the filename')
             guess = guessit.guess_file_info(filepath, 'autodetect')
             if guess['type'] == 'episode' and 'series' in guess:
-                search['query'] = guess['series']
+                search['query'] = guess['series'].lower()
             elif guess['type'] == 'movie':
-                search['query'] = guess['title']
+                search['query'] = guess['title'].lower()
             else:  # we don't know what we have
                 return[]
         # login
@@ -168,8 +168,8 @@ class OpenSubtitles(PluginBase.PluginBase):
         self.filename = self.getFileName(filepath)
         for r in sorted(results['data'], self._cmpSubFileName):
             result = Subtitle(filepath, self.getSubtitlePath(filepath, self.getRevertLanguage(r['SubLanguageID'])), self.__class__.__name__, self.getRevertLanguage(r['SubLanguageID']), r['SubDownloadLink'], r['SubFileName'])
-            if 'query' in search and not r['MovieReleaseName'].replace('.', ' ').startswith(search['query']):  # query mode search, filter results
-                self.logger.debug(u'Skipping %s it does not start with %s' % (r['MovieReleaseName'].replace('.', ' '), search['query']))
+            if 'query' in search and not r['MovieReleaseName'].replace('.', ' ').lower().startswith(search['query']):  # query mode search, filter results
+                self.logger.debug(u'Skipping %s it does not start with %s' % (r['MovieReleaseName'].replace('.', ' ').lower(), search['query']))
                 continue
             sublinks.append(result)
         return sublinks

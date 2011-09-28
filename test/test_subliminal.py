@@ -79,7 +79,7 @@ class PriorityQueueTestCase(unittest.TestCase):
         self.subli.startWorkers()
         # parallel stuff...
         self.subli.stopWorkers()
-        result = self.subli.resultQueue.get()
+        result = self.subli.listResultQueue.get()
         self.assertTrue(len(result) > 0)
         
 

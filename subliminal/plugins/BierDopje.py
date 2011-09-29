@@ -91,8 +91,8 @@ class BierDopje(PluginBase.PluginBase):
         return self.query(guess['series'], guess['season'], guess['episodeNumber'], release_group, filepath, languages)
 
     def download(self, subtitle):
-        self.downloadFile(subtitle.link, subtitle.dest)
-        return subtitle.dest
+        self.downloadFile(subtitle.link, subtitle.path)
+        return subtitle
 
     def query(self, name, season, episode, release_group, filepath, languages=None):
         if languages:

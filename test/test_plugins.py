@@ -46,8 +46,8 @@ class Addic7edTestCase(unittest.TestCase):
 
     def test_download(self):
         subtitle = self.plugin.list(test_file, self.languages)[0]
-        if os.path.exists(subtitle.dest):
-            os.remove(subtitle.dest)
+        if os.path.exists(subtitle.path):
+            os.remove(subtitle.path)
         download = self.plugin.download(subtitle)
         assert download
 
@@ -65,8 +65,8 @@ class BierDopjeTestCase(unittest.TestCase):
 
     def test_download(self):
         subtitle = self.plugin.list(test_file, self.languages)[0]
-        if os.path.exists(subtitle.dest):
-            os.remove(subtitle.dest)
+        if os.path.exists(subtitle.path):
+            os.remove(subtitle.path)
         download = self.plugin.download(subtitle)
         assert download
 
@@ -84,8 +84,8 @@ class OpenSubtitlesTestCase(unittest.TestCase):
 
     def test_download(self):
         subtitle = self.plugin.list(test_file, self.languages)[0]
-        if os.path.exists(subtitle.dest):
-            os.remove(subtitle.dest)
+        if os.path.exists(subtitle.path):
+            os.remove(subtitle.path)
         download = self.plugin.download(subtitle)
         assert download
 
@@ -103,8 +103,8 @@ class SubsWikiTestCase(unittest.TestCase):
 
     def test_download(self):
         subtitle = self.plugin.list(test_file, self.languages)[0]
-        if os.path.exists(subtitle.dest):
-            os.remove(subtitle.dest)
+        if os.path.exists(subtitle.path):
+            os.remove(subtitle.path)
         download = self.plugin.download(subtitle)
         assert download
 
@@ -122,8 +122,8 @@ class SubtitulosTestCase(unittest.TestCase):
 
     def test_download(self):
         subtitle = self.plugin.list(test_file, self.languages)[0]
-        if os.path.exists(subtitle.dest):
-            os.remove(subtitle.dest)
+        if os.path.exists(subtitle.path):
+            os.remove(subtitle.path)
         download = self.plugin.download(subtitle)
         assert download
 
@@ -141,8 +141,8 @@ class TheSubDBTestCase(unittest.TestCase):
 
     def test_download(self):
         subtitle = self.plugin.list(test_file, self.languages)[0]
-        if os.path.exists(subtitle.dest):
-            os.remove(subtitle.dest)
+        if os.path.exists(subtitle.path):
+            os.remove(subtitle.path)
         download = self.plugin.download(subtitle)
         assert download
 

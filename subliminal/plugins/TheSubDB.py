@@ -94,6 +94,6 @@ class TheSubDB(PluginBase.PluginBase):
         return hashlib.md5(data).hexdigest()
 
     def download(self, subtitle):
-        self.downloadFile(subtitle.link, subtitle.dest)
-        return subtitle.dest
+        self.downloadFile(subtitle.link, subtitle.path)
+        return subtitle
 

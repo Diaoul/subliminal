@@ -131,11 +131,11 @@ class PluginBase(object):
         except KeyError:
             self.logger.warn(u'Ooops, you found a missing language in the configuration file of %s: %s. Send a bug report to have it added.' % (self.__class__.__name__, language))
     
-    def getSubtitlePath(self, source, language):
-        dest = source.rsplit('.', 1)[0]
+    def getSubtitlePath(self, video_path, language):
+        path = video_path.rsplit('.', 1)[0]
         if self.config_dict and self.config_dict['multi']:
-            return dest + '.%s.srt' % language
-        return dest + '.srt'
+            return path + '.%s.srt' % language
+        return path + '.srt'
 
     def listTeams(self, sub_teams, separators):
         """List teams of a given string using separators"""

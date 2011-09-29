@@ -164,13 +164,13 @@ class Subliminal(object):
             self.startWorkers()
         subtitles = self.listSubtitles(entries, False)
         task_count = 0
-        for (_, subsBySource) in groupby(sorted(subtitles, key=lambda x: x.source), lambda x: x.source):
+        for (_, subsByVideoPath) in groupby(sorted(subtitles, key=lambda x: x.video_path), lambda x: x.video_path):
             if not self.multi:
-                self.taskQueue.put((5, DownloadTask(sorted(list(subsBySource), cmp=self.cmpSubtitles))))
+                self.taskQueue.put((5, DownloadTask(sorted(list(subsByVideoPath), cmp=self.cmpSubtitles))))
                 task_count += 1
                 continue
-            for (__, subsBySourceByLanguage) in groupby(sorted(subsBySource, key=lambda x: x.language), lambda x: x.language):
-                self.taskQueue.put((5, DownloadTask(sorted(list(subsBySourceByLanguage), cmp=self.cmpSubtitles))))
+            for (__, subsByVideoPathByLanguage) in groupby(sorted(subsByVideoPath, key=lambda x: x.language), lambda x: x.language):
+                self.taskQueue.put((5, DownloadTask(sorted(list(subsByVideoPathByLanguage), cmp=self.cmpSubtitles))))
                 task_count += 1
         paths = []
         for _ in range(task_count):
@@ -180,11 +180,11 @@ class Subliminal(object):
         return paths
 
     def cmpSubtitles(self, x, y):
-        """Compares 2 subtitles elements x and y using source, languages and plugin"""
-        sources = sorted([x.source, y.source])
-        if x.source != y.source and sources.index(x.source) < sources(y.source):
+        """Compares 2 subtitles elements x and y using video_path, languages and plugin"""
+        video_paths = sorted([x.video_path, y.video_path])
+        if x.video_path != y.video_path and video_paths.index(x.video_path) < video_paths(y.video_path):
             return - 1
-        if x.source != y.source and sources.index(x.source) > sources(y.source):
+        if x.video_path != y.video_path and video_paths.index(x.video_path) > video_paths(y.video_path):
             return 1
         if self._languages and self._languages.index(x.language) < self._languages.index(y.language):
             return - 1

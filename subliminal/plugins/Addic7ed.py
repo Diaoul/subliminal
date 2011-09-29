@@ -125,6 +125,6 @@ class Addic7ed(PluginBase.PluginBase):
         return sublinks
 
     def download(self, subtitle):
-        self.downloadFile(subtitle.link, subtitle.dest)
-        return subtitle.dest
+        self.downloadFile(subtitle.link, subtitle.path)
+        return subtitle
 

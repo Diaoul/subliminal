@@ -59,17 +59,17 @@ class Subtitle:
     """Subtitle class
 
     Attributes:
-        source   -- path to the video file
-        dest     -- path to the subtitle file
-        plugin   -- plugin used
-        language -- language of the subtitle
-        link     -- download link
-        release  -- release group identified by guessit
-        teams    -- identified by subliminal
+        video_path -- path to the video file
+        path       -- path to the subtitle file
+        plugin     -- plugin used
+        language   -- language of the subtitle
+        link       -- download link
+        release    -- release group identified by guessit
+        teams      -- identified by subliminal
     """
-    def __init__(self, source=None, dest=None, plugin=None, language=None, link=None, release=None, teams=None):
-        self.source = source
-        self.dest = dest
+    def __init__(self, video_path=None, path=None, plugin=None, language=None, link=None, release=None, teams=None):
+        self.video_path = video_path
+        self.path = path
         self.plugin = plugin
         self.language = language
         self.link = link
@@ -77,7 +77,7 @@ class Subtitle:
         self.teams = teams
 
     def __repr__(self):
-        return repr({'source': self.source, 'dest': self.dest, 'plugin': self.plugin,
+        return repr({'video_path': self.video_path, 'path': self.path, 'plugin': self.plugin,
             'language': self.language, 'link': self.link, 'release': self.release, 'teams': self.teams})
 
 

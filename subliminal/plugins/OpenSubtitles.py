@@ -100,15 +100,15 @@ class OpenSubtitles(PluginBase.PluginBase):
             return self.query(languages=languages, filepath=filepath)
 
     def download(self, subtitle):
-        self.downloadFile(subtitle.link, subtitle.dest + '.gz')
-        gz = gzip.open(subtitle.dest + '.gz')
-        srt = open(subtitle.dest, 'wb')
+        self.downloadFile(subtitle.link, subtitle.path + '.gz')
+        gz = gzip.open(subtitle.path + '.gz')
+        srt = open(subtitle.path, 'wb')
         srt.write(gz.read())
         gz.close()
-        self.adjustPermissions(subtitle.dest)
+        self.adjustPermissions(subtitle.path)
         srt.close()
-        os.remove(subtitle.dest + '.gz')
-        return subtitle.dest
+        os.remove(subtitle.path + '.gz')
+        return subtitle
 
     def query(self, filepath, imdbID=None, moviehash=None, bytesize=None, languages=None):
         """Makes a query on OpenSubtitles and returns info about found subtitles.

@@ -92,7 +92,9 @@ class Addic7ed(PluginBase.PluginBase):
 
     def query(self, name, season, episode, release_group, filepath, languages=None):
         searchname = name.lower().replace(' ', '_')
-        searchurl = '%s/serie/%s/%s/%s/%s' % (self.server_url, searchname, season, episode, searchname)
+        if isinstance(searchname, unicode):
+            searchname = searchname.encode('utf-8')
+        searchurl = '%s/serie/%s/%s/%s/%s' % (self.server_url, urllib2.quote(searchname), season, episode, urllib2.quote(searchname))
         self.logger.debug(u'Searching in %s' % searchurl)
         try:
             req = urllib2.Request(searchurl, headers={'User-Agent': self.user_agent})

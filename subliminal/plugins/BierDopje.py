@@ -26,7 +26,7 @@ import PluginBase
 import os
 try:
     import cPickle as pickle
-except:
+except ImportError:
     import pickle
 import urllib
 import urllib2

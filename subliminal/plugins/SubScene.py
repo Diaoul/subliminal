@@ -132,7 +132,7 @@ class SubScene(PluginBase.PluginBase):
                             os.rename(tmpsubtitlefilename, subtitlefilename)
                             # exit
                         return subtitlefilename
-            except OSError, e:
+            except OSError as e:
                 self.logger.error(u"Execution failed: %s" % e)
                 return None
         else:

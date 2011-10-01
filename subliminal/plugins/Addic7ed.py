@@ -73,6 +73,7 @@ class Addic7ed(PluginBase.PluginBase):
             return []
         guess = guessit.guess_file_info(filepath, 'autodetect')
         if guess['type'] != 'episode':
+            self.logger.debug(u'Not an episode')
             return []
         # add multiple things to the release group set
         release_group = set()
@@ -84,6 +85,7 @@ class Addic7ed(PluginBase.PluginBase):
             if 'screenSize' in guess:
                 release_group.add(guess['screenSize'].lower())
         if 'series' not in guess or len(release_group) == 0:
+            self.logger.debug(u'Not enough information to proceed')
             return []
         self.release_group = release_group  # used to sort results
         return self.query(guess['series'], guess['season'], guess['episodeNumber'], release_group, filepath, languages)

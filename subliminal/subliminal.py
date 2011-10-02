@@ -94,6 +94,7 @@ class Subliminal(object):
 
     def set_languages(self, languages):
         """Setter for languages"""
+        languages = list(set(languages))
         logger.debug(u'Setting languages to %r' % languages)
         for l in languages:
             if l not in LANGUAGES:
@@ -106,6 +107,7 @@ class Subliminal(object):
 
     def set_plugins(self, plugins):
         """Setter for plugins"""
+        plugins = list(set(plugins))
         logger.debug(u'Setting plugins to %r' % plugins)
         for p in plugins:
             if p not in PLUGINS:

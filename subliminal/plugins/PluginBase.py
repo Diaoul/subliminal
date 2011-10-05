@@ -25,6 +25,7 @@ import os
 import urllib2
 import struct
 import threading
+from subliminal.classes import DownloadFailedError
 
 
 class PluginBase(object):
@@ -84,20 +85,20 @@ class PluginBase(object):
 
     def downloadFile(self, url, filepath, data=None):
         """Download a subtitle file"""
+        self.logger.info(u'Downloading %s' % url)
         try:
-            self.logger.info(u'Downloading %s' % url)
             req = urllib2.Request(url, headers={'Referer': url, 'User-Agent': self.user_agent})
-            f = urllib2.urlopen(req, data=data)
-            dump = open(filepath, 'wb')
-            dump.write(f.read())
-            self.adjustPermissions(filepath)
-            dump.close()
-            f.close()
-            self.logger.debug(u'Download finished for file %s. Size: %s' % (filepath, os.path.getsize(filepath)))
-        except urllib2.HTTPError as e:
-            self.logger.error(u'HTTP Error:', e.code, url)
-        except urllib2.URLError as e:
-            self.logger.error(u'URL Error:', e.reason, url)
+            with open(filepath, 'wb') as dump:
+                f = urllib2.urlopen(req, data=data)
+                dump.write(f.read())
+                self.adjustPermissions(filepath)
+                f.close()
+        except Exception as e:
+            self.logger.error(u'Download %s failed: %s' % (url, e))
+            if os.path.exists(filepath):
+                os.remove(filepath)
+            raise DownloadFailedError(str(e))
+        self.logger.debug(u'Download finished for file %s. Size: %s' % (filepath, os.path.getsize(filepath)))
 
     def adjustPermissions(self, filepath):
         if self.config_dict and 'files_mode' in self.config_dict and self.config_dict['files_mode'] != -1:

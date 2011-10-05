@@ -27,7 +27,7 @@ import socket
 import xmlrpclib
 import guessit
 import unicodedata
-from subliminal.classes import Subtitle
+from subliminal.classes import Subtitle, DownloadFailedError
 
 
 class OpenSubtitles(PluginBase.PluginBase):
@@ -101,14 +101,17 @@ class OpenSubtitles(PluginBase.PluginBase):
             return self.query(languages=languages, filepath=filepath)
 
     def download(self, subtitle):
-        self.downloadFile(subtitle.link, subtitle.path + '.gz')
-        gz = gzip.open(subtitle.path + '.gz')
-        srt = open(subtitle.path, 'wb')
-        srt.write(gz.read())
-        gz.close()
-        self.adjustPermissions(subtitle.path)
-        srt.close()
-        os.remove(subtitle.path + '.gz')
+        try:
+            self.downloadFile(subtitle.link, subtitle.path + '.gz')
+            with open(subtitle.path, 'wb') as dump:
+                gz = gzip.open(subtitle.path + '.gz')
+                dump.write(gz.read())
+                gz.close()
+                self.adjustPermissions(subtitle.path)
+        except Exception as e:
+            if os.path.exists(subtitle.path):
+                os.remove(subtitle.path)
+            raise DownloadFailedError(str(e))
         return subtitle
 
     def query(self, filepath, imdbID=None, moviehash=None, bytesize=None, languages=None):

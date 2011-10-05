@@ -71,6 +71,11 @@ class WrongTaskError(Error):
     pass
 
 
+class DownloadFailedError(Error):
+    """"Exception raised when a download task has failed in plugin"""
+    pass
+
+
 class Subtitle:
     """Subtitle class
 

@@ -96,12 +96,13 @@ class Subliminal(object):
 
     def set_languages(self, languages):
         """Setter for languages"""
-        languages = list(set(languages))
         logger.debug(u'Setting languages to %r' % languages)
+        self._languages = []
         for l in languages:
             if l not in LANGUAGES:
                 raise LanguageError(l)
-        self._languages = languages
+            if not l in self._languages:
+                self._languages.append(l)
 
     def get_plugins(self):
         """Getter for plugins"""
@@ -109,12 +110,13 @@ class Subliminal(object):
 
     def set_plugins(self, plugins):
         """Setter for plugins"""
-        plugins = list(set(plugins))
         logger.debug(u'Setting plugins to %r' % plugins)
+        self._plugins = []
         for p in plugins:
             if p not in PLUGINS:
                 raise PluginError(p)
-        self._plugins = plugins
+            if not p in self._plugins:
+                self._plugins.append(p)
 
     # getters/setters for the property _languages and _plugins
     languages = property(get_languages, set_languages)

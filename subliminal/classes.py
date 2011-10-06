@@ -76,7 +76,7 @@ class DownloadFailedError(Error):
     pass
 
 
-class Subtitle:
+class Subtitle(object):
     """Subtitle class
 
     Attributes:
@@ -102,7 +102,7 @@ class Subtitle:
             'language': self.language, 'link': self.link, 'release': self.release, 'teams': self.teams})
 
 
-class Task:
+class Task(object):
     """Base class for tasks to use in subliminal"""
     pass
 

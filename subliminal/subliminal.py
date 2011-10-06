@@ -87,11 +87,13 @@ class Subliminal(object):
             self.cache_dir = None
             logger.error(u'Failed to use the cache directory, continue without it')
 
-    def get_languages(self):
+    @property
+    def languages(self):
         """Getter for languages"""
         return self._languages
 
-    def set_languages(self, languages):
+    @languages.setter
+    def languages(self, languages):
         """Setter for languages"""
         logger.debug(u'Setting languages to %r' % languages)
         self._languages = []
@@ -101,11 +103,13 @@ class Subliminal(object):
             if not l in self._languages:
                 self._languages.append(l)
 
-    def get_plugins(self):
+    @property
+    def plugins(self):
         """Getter for plugins"""
         return self._plugins
 
-    def set_plugins(self, plugins):
+    @plugins.setter
+    def plugins(self, plugins):
         """Setter for plugins"""
         logger.debug(u'Setting plugins to %r' % plugins)
         self._plugins = []
@@ -114,10 +118,6 @@ class Subliminal(object):
                 raise PluginError(p)
             if not p in self._plugins:
                 self._plugins.append(p)
-
-    # getters/setters for the property _languages and _plugins
-    languages = property(get_languages, set_languages)
-    plugins = property(get_plugins, set_plugins)
 
     def listSubtitles(self, entries, auto=True):
         """

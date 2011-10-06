@@ -27,7 +27,6 @@ import logging
 import mimetypes
 import os
 import plugins
-import traceback
 
 
 # be nice
@@ -284,8 +283,7 @@ class PluginWorker(threading.Thread):
                             continue
                     self.logger.error(u'No subtitles could be downloaded for file %r' % subtitle.video_path)
             except:
-                self.logger.error(u'Exception raised in worker %s' % self.name)
-                self.logger.debug(traceback.print_exc())
+                self.logger.error(u'Exception raised in worker %s' % self.name, exc_info=True)
             finally:
                 if isinstance(task, ListTask):
                     self.listResultQueue.put(result)

@@ -281,7 +281,8 @@ class PluginWorker(threading.Thread):
                         except DownloadFailedError as e:
                             self.logger.warning(u'Could not download subtitle %r, trying next' % subtitle)
                             continue
-                    self.logger.error(u'No subtitles could be downloaded for file %r' % subtitle.video_path)
+                    if not result:
+                        self.logger.error(u'No subtitles could be downloaded for file %r' % subtitle.video_path)
             except:
                 self.logger.error(u'Exception raised in worker %s' % self.name, exc_info=True)
             finally:

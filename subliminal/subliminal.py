@@ -65,7 +65,6 @@ class Subliminal(object):
     """Main Subliminal class"""
 
     def __init__(self, cache_dir=None, workers=4, multi=False, force=False, max_depth=3, files_mode=-1):
-        # set default values
         self.multi = multi
         self.force = force
         self.max_depth = max_depth
@@ -78,11 +77,10 @@ class Subliminal(object):
         self.workers = workers
         self.files_mode = files_mode
         self.state = IDLE
-        # handle cache directory preferences
         try:
-            if cache_dir:  # custom configuration file
+            if cache_dir:
                 self.cache_dir = cache_dir
-                if not os.path.isdir(self.cache_dir):  # custom file doesn't exist, create it
+                if not os.path.isdir(self.cache_dir):
                     os.makedirs(self.cache_dir)
                     logger.debug(u'Creating cache directory: %r' % self.cache_dir)
         except:

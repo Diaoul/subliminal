@@ -58,6 +58,12 @@ class PluginBase(object):
             filename = filename.rsplit('.', 1)[0]
         return filename
 
+    def possible_languages(self, languages):
+        possible_languages = languages & set(self.pluginLanguages.keys())
+        if not possible_languages:
+            self.logger.debug(u'The following requested languages are not available: %r' % languages - possible_languages)
+        return possible_languages
+
     def hashFile(self, filename):
         """Hash a file like OpenSubtitles"""
         longlongformat = 'q'  # long long

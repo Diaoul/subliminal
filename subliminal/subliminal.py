@@ -142,11 +142,11 @@ class Subliminal(object):
             scan_result.extend(scan(e))
         task_count = 0
         for filepath, languages, has_single in scan_result:
-            wanted_languages = self._languages
+            wanted_languages = set(self._languages)
             if not wanted_languages:
-                wanted_languages = list(LANGUAGES)
+                wanted_languages = LANGUAGES
             if not self.force and self.multi:
-                wanted_languages = list(set(wanted_languages) - languages)
+                wanted_languages = set(wanted_languages) - languages
                 if not wanted_languages:
                     logger.debug(u'No need to list multi subtitles %r for %r because %r subtitles detected' % (self._languages, filepath, languages))
                     continue

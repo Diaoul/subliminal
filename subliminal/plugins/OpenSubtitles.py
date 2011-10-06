@@ -108,6 +108,7 @@ class OpenSubtitles(PluginBase.PluginBase):
                 dump.write(gz.read())
                 gz.close()
                 self.adjustPermissions(subtitle.path)
+            os.remove(subtitle.path + '.gz')
         except Exception as e:
             if os.path.exists(subtitle.path):
                 os.remove(subtitle.path)

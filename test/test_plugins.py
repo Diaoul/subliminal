@@ -38,7 +38,7 @@ class Addic7edTestCase(unittest.TestCase):
         from subliminal.plugins import Addic7ed
         self.config = {'multi': True, 'cache_dir': cache_dir, 'files_mode': -1}
         self.plugin = Addic7ed(self.config)
-        self.languages = ['en', 'fr']
+        self.languages = set(['en', 'fr'])
 
     def test_list(self):
         list = self.plugin.list(test_file, self.languages)
@@ -57,7 +57,7 @@ class BierDopjeTestCase(unittest.TestCase):
         from subliminal.plugins import BierDopje
         self.config = {'multi': True, 'cache_dir': cache_dir, 'files_mode': -1}
         self.plugin = BierDopje(self.config)
-        self.languages = ['en', 'fr']
+        self.languages = set(['en', 'fr'])
 
     def test_list(self):
         list = self.plugin.list(test_file, self.languages)
@@ -76,7 +76,7 @@ class OpenSubtitlesTestCase(unittest.TestCase):
         from subliminal.plugins import OpenSubtitles
         self.config = {'multi': True, 'cache_dir': cache_dir, 'files_mode': -1}
         self.plugin = OpenSubtitles(self.config)
-        self.languages = ['en', 'fr']
+        self.languages = set(['en', 'fr'])
 
     def test_list(self):
         list = self.plugin.list(test_file, self.languages)
@@ -95,7 +95,7 @@ class SubsWikiTestCase(unittest.TestCase):
         from subliminal.plugins import SubsWiki
         self.config = {'multi': True, 'cache_dir': cache_dir, 'files_mode': -1}
         self.plugin = SubsWiki(self.config)
-        self.languages = ['en', 'fr', 'es', 'pt']
+        self.languages = set(['en', 'fr', 'es', 'pt'])
 
     def test_list(self):
         list = self.plugin.list(test_file, self.languages)
@@ -114,7 +114,7 @@ class SubtitulosTestCase(unittest.TestCase):
         from subliminal.plugins import Subtitulos
         self.config = {'multi': True, 'cache_dir': cache_dir, 'files_mode': -1}
         self.plugin = Subtitulos(self.config)
-        self.languages = ['en', 'fr', 'es', 'pt']
+        self.languages = set(['en', 'fr', 'es', 'pt'])
 
     def test_list(self):
         list = self.plugin.list(test_file, self.languages)
@@ -133,7 +133,7 @@ class TheSubDBTestCase(unittest.TestCase):
         from subliminal.plugins import TheSubDB
         self.config = {'multi': True, 'cache_dir': cache_dir, 'files_mode': -1}
         self.plugin = TheSubDB(self.config)
-        self.languages = ['en', 'fr', 'es', 'pt']
+        self.languages = set(['en', 'fr', 'es', 'pt'])
 
     def test_list(self):
         list = self.plugin.list(test_file, self.languages)

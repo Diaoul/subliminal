@@ -75,7 +75,7 @@ class PriorityQueueTestCase(unittest.TestCase):
         self.subli.stopWorkers()
 
     def test_manual_list(self):
-        self.subli.taskQueue.put((5, subliminal.classes.ListTask(test_file, self.subli.languages, 'OpenSubtitles', self.subli.getConfigDict())))
+        self.subli.taskQueue.put((5, subliminal.classes.ListTask(test_file, set(self.subli.languages), 'OpenSubtitles', self.subli.getConfigDict())))
         self.subli.startWorkers()
         # parallel stuff...
         self.subli.stopWorkers()

@@ -137,6 +137,8 @@ class PluginBase(object):
             self.logger.warn(u'Ooops, you found a missing language in the configuration file of %s: %s. Send a bug report to have it added.' % (self.__class__.__name__, language))
     
     def getSubtitlePath(self, video_path, language):
+        if not os.path.exists(video_path):
+            video_path = os.path.split(video_path)[1]
         path = video_path.rsplit('.', 1)[0]
         if self.config_dict and self.config_dict['multi']:
             return path + '.%s.srt' % language

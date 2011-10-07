@@ -136,6 +136,9 @@ class Subliminal(object):
         for e in entries:
             if not isinstance(e, unicode):
                 logger.warning(u'Entry %r is not unicode' % e)
+            if not os.path.exists(e):
+                scan_result.append((e, set(), False))
+                continue
             scan_result.extend(scan(e))
         task_count = 0
         for filepath, languages, has_single in scan_result:

@@ -25,6 +25,7 @@ import os
 import urllib2
 import struct
 import threading
+import socket
 from subliminal.classes import DownloadFailedError
 
 
@@ -92,6 +93,7 @@ class PluginBase(object):
     def downloadFile(self, url, filepath, data=None):
         """Download a subtitle file"""
         self.logger.info(u'Downloading %s' % url)
+        socket.setdefaulttimeout(self.timeout)
         try:
             req = urllib2.Request(url, headers={'Referer': url, 'User-Agent': self.user_agent})
             with open(filepath, 'wb') as dump:
@@ -104,6 +106,8 @@ class PluginBase(object):
             if os.path.exists(filepath):
                 os.remove(filepath)
             raise DownloadFailedError(str(e))
+        finally:
+            socket.setdefaulttimeout(self.timeout)
         self.logger.debug(u'Download finished for file %s. Size: %s' % (filepath, os.path.getsize(filepath)))
 
     def adjustPermissions(self, filepath):

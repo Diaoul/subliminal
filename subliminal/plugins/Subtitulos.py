@@ -26,7 +26,8 @@ import urllib2
 import unicodedata
 import re
 import PluginBase
-from subliminal.classes import Subtitle
+from subliminal.subtitle import Subtitle
+from subliminal.videos import Episode
 
 
 class Subtitulos(PluginBase.PluginBase):
@@ -42,26 +43,12 @@ class Subtitulos(PluginBase.PluginBase):
         super(Subtitulos, self).__init__(self._plugin_languages, config_dict, True)
         self.release_pattern = re.compile('Versi&oacute;n (.+) ([0-9]+).([0-9])+ megabytes')
 
-    def list(self, filepath, languages):
+    def list(self, video, languages):
         possible_languages = self.possible_languages(languages)
-        guess = guessit.guess_file_info(filepath, 'autodetect')
-        if guess['type'] != 'episode':
+        if not isinstance(video, Episode):
             self.logger.debug(u'Not an episode')
             return []
-        # add multiple things to the release group set
-        release_group = set()
-        if 'releaseGroup' in guess:
-            release_group.add(guess['releaseGroup'].lower())
-        else:
-            if 'title' in guess:
-                release_group.add(guess['title'].lower())
-            if 'screenSize' in guess:
-                release_group.add(guess['screenSize'].lower())
-        if 'series' not in guess or len(release_group) == 0:
-            self.logger.debug(u'Not enough information to proceed')
-            return []
-        self.release_group = release_group  # used to sort results
-        return self.query(guess['series'], guess['season'], guess['episodeNumber'], release_group, filepath, possible_languages)
+        return self.query(video.series, video.season, video.episode, video.keywords, video.path, possible_languages)
 
     def query(self, name, season, episode, release_group, filepath, languages):
         sublinks = []
@@ -96,7 +83,7 @@ class Subtitulos(PluginBase.PluginBase):
                 if not sub_status == 'Completado':  # On not completed subtitles
                     continue
                 sub_link = html_status.findNext('span', {'class': 'descargar green'}).find('a')['href']
-                result = Subtitle(filepath, self.getSubtitlePath(filepath, sub_language), self.__class__.__name__, sub_language, sub_link, teams=sub_teams)
+                result = Subtitle(filepath, self.getSubtitlePath(filepath, sub_language), self.__class__.__name__, sub_language, sub_link, keywords=sub_teams)
                 sublinks.append(result)
         sublinks.sort(self._cmpReleaseGroup)
         return sublinks

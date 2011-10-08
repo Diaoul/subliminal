@@ -24,7 +24,7 @@ import PluginBase
 import hashlib
 import os
 import urllib2
-from subliminal.classes import Subtitle
+from subliminal.subtitle import Subtitle
 
 
 class TheSubDB(PluginBase.PluginBase):
@@ -41,11 +41,11 @@ class TheSubDB(PluginBase.PluginBase):
     def __init__(self, config_dict=None):
         super(TheSubDB, self).__init__(self._plugin_languages, config_dict)
 
-    def list(self, filepath, languages):
+    def list(self, video, languages):
         possible_languages = self.possible_languages(languages)
-        if not os.path.isfile(filepath):
+        if not video.exists:
             return []
-        return self.query(filepath, self.hashFile(filepath), possible_languages)
+        return self.query(video.path, video.hashes['TheSubDB'], possible_languages)
 
     def query(self, filepath, moviehash, languages):
         searchurl = '%s/?action=%s&hash=%s' % (self.server_url, 'search', moviehash)
@@ -69,15 +69,6 @@ class TheSubDB(PluginBase.PluginBase):
                 result = Subtitle(filepath, self.getSubtitlePath(filepath, l), self.__class__.__name__, l, '%s/?action=download&hash=%s&language=%s' % (self.server_url, moviehash, l))
                 subs.append(result)
         return subs
-
-    def hashFile(self, filepath):
-        """TheSubDB specific hash function"""
-        readsize = 64 * 1024
-        with open(filepath, 'rb') as f:
-            data = f.read(readsize)
-            f.seek(-readsize, os.SEEK_END)
-            data += f.read(readsize)
-        return hashlib.md5(data).hexdigest()
 
     def download(self, subtitle):
         self.downloadFile(subtitle.link, subtitle.path)

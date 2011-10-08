@@ -19,7 +19,11 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-__all__ = ['FORMATS', 'LANGUAGES', 'PLUGINS', 'API_PLUGINS', 'Subliminal', 'Subtitle']
-from classes import *
-from subliminal import *
+__all__ = ['FORMATS', 'LANGUAGES', 'PLUGINS', 'API_PLUGINS', 'Subliminal', 'Subtitle', 'scan']
+from exceptions import *
+from videos import *
+from tasks import *
+from subtitle import *
+from core import *
+from api import *
 from version import __version__

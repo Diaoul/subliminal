@@ -21,7 +21,7 @@
 #
 
 from BeautifulSoup import BeautifulSoup
-from subliminal.classes import Subtitle
+from subliminal.subtitle import Subtitle
 import guessit
 import PluginBase
 import urllib2
@@ -123,7 +123,7 @@ class Addic7ed(PluginBase.PluginBase):
                 continue
             sub_link = self.server_url + html_status.findNextSibling('td', {'colspan': '3'}).find('a')['href']
             self.logger.debug(u'Found a match with teams: %s' % sub_teams)
-            result = Subtitle(filepath, self.getSubtitlePath(filepath, sub_language), self.__class__.__name__, sub_language, sub_link, teams=sub_teams)
+            result = Subtitle(filepath, self.getSubtitlePath(filepath, sub_language), self.__class__.__name__, sub_language, sub_link, keywords=sub_teams)
             sublinks.append(result)
         sublinks.sort(self._cmpReleaseGroup)
         return sublinks

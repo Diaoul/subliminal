@@ -23,7 +23,6 @@
 from hashlib import md5, sha256
 import PluginBase
 import xmlrpclib
-import socket
 import os
 
 
@@ -99,8 +98,7 @@ class Podnapisi(PluginBase.PluginBase):
     def query(self, moviehash, languages=None):
         """Makes a query on podnapisi and returns info (link, lang) about found subtitles"""
         # login
-        self.server = xmlrpclib.Server(self.server_url)
-        socket.setdefaulttimeout(self.timeout)
+        self.server = xmlrpclib.ServerProxy(self.server_url)
         try:
             log_result = self.server.initiate(self.user_agent)
             self.logger.debug(u"Result: %s" % log_result)
@@ -108,7 +106,6 @@ class Podnapisi(PluginBase.PluginBase):
             nonce = log_result["nonce"]
         except Exception:
             self.logger.error(u"Cannot login" % log_result)
-            socket.setdefaulttimeout(None)
             return []
         username = 'getmesubs'
         password = '99D31$$'

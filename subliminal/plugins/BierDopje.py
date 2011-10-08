@@ -29,7 +29,8 @@ try:
 except ImportError:
     import pickle
 import urllib2
-from subliminal.classes import Subtitle
+from subliminal.subtitle import Subtitle, EXTENSIONS
+from subliminal.videos import Episode
 
 
 class BierDopje(PluginBase.PluginBase):
@@ -67,34 +68,26 @@ class BierDopje(PluginBase.PluginBase):
                 self.logger.debug(u'Reading showids from cache: %s' % self.showids)
                 f.close()
 
-    def list(self, filepath, languages):
+    def list(self, video, languages):
         if not self.config_dict['cache_dir']:
             raise Exception('Cache directory is required for this plugin')
         possible_languages = self.possible_languages(languages)
-        guess = guessit.guess_file_info(filepath, 'autodetect')
-        if guess['type'] != 'episode':
+        #TODO: Make a list of supported instances in a class property rather than create a task that has no chance to return anything
+        #TODO: Same for languages (with isValidLanguage classmethod)
+        if not isinstance(video, Episode):
             self.logger.debug(u'Not an episode')
             return []
-        # add multiple things to the release group set
-        release_group = set()
-        if 'releaseGroup' in guess:
-            release_group.add(guess['releaseGroup'].lower())
-        else:
-            if 'title' in guess:
-                release_group.add(guess['title'].lower())
-            if 'screenSize' in guess:
-                release_group.add(guess['screenSize'].lower())
-        if 'series' not in guess or len(release_group) == 0:
-            self.logger.debug(u'Not enough information to proceed')
+        if len(video.keywords) == 0:
+            self.logger.debug(u'Not enough information')
             return []
-        self.release_group = release_group  # used to sort results
-        return self.query(guess['series'], guess['season'], guess['episodeNumber'], release_group, filepath, possible_languages)
+        self.keywords = video.keywords  # used to sort results
+        return self.query(video.series, video.season, video.episode, video.keywords, video.path, possible_languages)
 
     def download(self, subtitle):
         self.downloadFile(subtitle.link, subtitle.path)
         return subtitle
 
-    def query(self, name, season, episode, release_group, filepath, languages):
+    def query(self, name, season, episode, keywords, filepath, languages):
         sublinks = []
         # get the show id
         show_name = name.lower()
@@ -130,23 +123,15 @@ class BierDopje(PluginBase.PluginBase):
             dom = minidom.parse(page)
             page.close()
             for sub in dom.getElementsByTagName('result'):
-                sub_release = sub.getElementsByTagName('filename')[0].firstChild.data
-                if sub_release.endswith('.srt'):
-                    sub_release = sub_release[:-4]
-                sub_release = sub_release + '.avi'  # put a random extension for guessit not to fail guessing that file
-                # guess information from subtitle
-                sub_guess = guessit.guess_file_info(sub_release, 'episode')
-                sub_release_group = set()
-                if 'releaseGroup' in sub_guess:
-                    sub_release_group.add(sub_guess['releaseGroup'].lower())
-                else:
-                    if 'title' in sub_guess:
-                        sub_release_group.add(sub_guess['title'].lower())
-                    if 'screenSize' in sub_guess:
-                        sub_release_group.add(sub_guess['screenSize'].lower())
-                sub_link = sub.getElementsByTagName('downloadlink')[0].firstChild.data
-                result = Subtitle(filepath, self.getSubtitlePath(filepath, language), self.__class__.__name__, language, sub_link, sub_release, sub_release_group)
-                sublinks.append(result)
+                sub_filename = sub.getElementsByTagName('filename')[0].firstChild.data
+                if not sub_filename.endswith(tuple(EXTENSIONS)):
+                    sub_filename = sub_filename + EXTENSIONS[0]
+                subtitle = Subtitle.factory(sub_filename)
+                subtitle.link = sub.getElementsByTagName('downloadlink')[0].firstChild.data
+                subtitle.path = self.getSubtitlePath(filepath, language)
+                subtitle.plugin = self.__class__.__name__
+                subtitle.language = language
+                sublinks.append(subtitle)
         sublinks.sort(self._cmpReleaseGroup)
         return sublinks
 

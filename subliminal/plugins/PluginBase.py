@@ -23,10 +23,8 @@ import abc
 import logging
 import os
 import urllib2
-import struct
 import threading
-import socket
-from subliminal.classes import DownloadFailedError
+from subliminal.exceptions import DownloadFailedError
 
 
 class PluginBase(object):
@@ -65,35 +63,18 @@ class PluginBase(object):
             self.logger.debug(u'The following requested languages are not available: %r' % languages - possible_languages)
         return possible_languages
 
-    def hashFile(self, filename):
-        """Hash a file like OpenSubtitles"""
-        longlongformat = 'q'  # long long
-        bytesize = struct.calcsize(longlongformat)
-        f = open(filename, 'rb')
-        filesize = os.path.getsize(filename)
-        hash = filesize
-        if filesize < 65536 * 2:
-            self.logger.error(u'File %s is too small (SizeError < 2**16)' % filename)
-            return []
-        for _ in range(65536 / bytesize):
-            buffer = f.read(bytesize)
-            (l_value,) = struct.unpack(longlongformat, buffer)
-            hash += l_value
-            hash = hash & 0xFFFFFFFFFFFFFFFF  # to remain as 64bit number
-        f.seek(max(0, filesize - 65536), 0)
-        for _ in range(65536 / bytesize):
-            buffer = f.read(bytesize)
-            (l_value,) = struct.unpack(longlongformat, buffer)
-            hash += l_value
-            hash = hash & 0xFFFFFFFFFFFFFFFF
-        f.close()
-        returnedhash = '%016x' % hash
-        return returnedhash
+    #TODO: Continue that
+    @classmethod
+    def isValidLanguage(cls, language):
+        if cls.reverted_languages and language in cls.languages.values():
+            return True
+        if not cls.reverted_languages and language in cls.languages.keyx():
+            return True
+        return False
 
     def downloadFile(self, url, filepath, data=None):
         """Download a subtitle file"""
         self.logger.info(u'Downloading %s' % url)
-        socket.setdefaulttimeout(self.timeout)
         try:
             req = urllib2.Request(url, headers={'Referer': url, 'User-Agent': self.user_agent})
             with open(filepath, 'wb') as dump:
@@ -106,8 +87,6 @@ class PluginBase(object):
             if os.path.exists(filepath):
                 os.remove(filepath)
             raise DownloadFailedError(str(e))
-        finally:
-            socket.setdefaulttimeout(self.timeout)
         self.logger.debug(u'Download finished for file %s. Size: %s' % (filepath, os.path.getsize(filepath)))
 
     def adjustPermissions(self, filepath):
@@ -158,6 +137,6 @@ class PluginBase(object):
         return teams
 
     def _cmpReleaseGroup(self, x, y):
-        """Sort based on teams matching"""
-        return -cmp(len(x.teams.intersection(self.release_group)), len(y.teams.intersection(self.release_group)))
+        """Sort based on keywords matching"""
+        return -cmp(len(x.keywords.intersection(self.keywords)), len(y.keywords.intersection(self.keywords)))
 

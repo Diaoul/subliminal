@@ -21,7 +21,9 @@
 
 import threading
 from itertools import groupby
-from classes import DownloadTask, ListTask, StopTask, LanguageError, PluginError, BadStateError, WrongTaskError, DownloadFailedError
+from tasks import DownloadTask, ListTask, StopTask
+from exceptions import LanguageError, PluginError, BadStateError, WrongTaskError, DownloadFailedError
+from videos import Video
 import Queue
 import logging
 import mimetypes
@@ -42,7 +44,7 @@ logger.addHandler(NullHandler())
 
 # const
 FORMATS = ['video/x-msvideo', 'video/quicktime', 'video/x-matroska', 'video/mp4']
-EXTENSIONS = set(['srt', 'sub'])
+EXTENSIONS = ['srt', 'sub']
 LANGUAGES = set(['aa', 'ab', 'ae', 'af', 'ak', 'am', 'an', 'ar', 'as', 'av', 'ay', 'az', 'ba', 'be', 'bg', 'bh', 'bi',
                  'bm', 'bn', 'bo', 'br', 'bs', 'ca', 'ce', 'ch', 'co', 'cr', 'cs', 'cu', 'cv', 'cy', 'da', 'de', 'dv',
                  'dz', 'ee', 'el', 'en', 'eo', 'es', 'et', 'eu', 'fa', 'ff', 'fi', 'fj', 'fo', 'fr', 'fy', 'ga', 'gd',
@@ -56,9 +58,7 @@ LANGUAGES = set(['aa', 'ab', 'ae', 'af', 'ak', 'am', 'an', 'ar', 'as', 'av', 'ay
                  'ug', 'uk', 'ur', 'uz', 've', 'vi', 'vo', 'wa', 'wo', 'xh', 'yi', 'yo', 'za', 'zh', 'zu'])  # ISO 639-1
 PLUGINS = ['BierDopje', 'OpenSubtitles', 'SubsWiki', 'Subtitulos', 'TheSubDB']
 API_PLUGINS = filter(lambda p: getattr(plugins, p).api_based, PLUGINS)
-IDLE = 0
-RUNNING = 1
-PAUSED = 2
+IDLE, RUNNING, PAUSED = range(3)
 
 
 class Subliminal(object):
@@ -155,7 +155,7 @@ class Subliminal(object):
                 continue
             logger.debug(u'Listing subtitles %r for %r with %r' % (wanted_languages, filepath, self._plugins))
             for plugin in self._plugins:
-                self.taskQueue.put((5, ListTask(filepath, wanted_languages, plugin, self.getConfigDict())))
+                self.taskQueue.put((5, ListTask(Video.factory(filepath), wanted_languages, plugin, self.getConfigDict())))
                 task_count += 1
         subtitles = []
         for _ in range(task_count):
@@ -194,6 +194,8 @@ class Subliminal(object):
         return downloaded
 
     def cmpSubtitles(self, x, y):
+        #TODO: Inside a video_path, language, plugin, add a confidence item to sort even better
+        # confidence can be len(intersect(subs_keywords, video_keywords)). The higher the better
         """Compares 2 subtitles elements x and y using video_path, languages and plugin"""
         video_paths = sorted([x.video_path, y.video_path])
         if x.video_path != y.video_path and video_paths.index(x.video_path) < video_paths(y.video_path):
@@ -260,6 +262,7 @@ class PluginWorker(threading.Thread):
         self.listResultQueue = listResultQueue
         self.downloadResultQueue = downloadResultQueue
         self.logger = logging.getLogger('subliminal.worker')
+        #TODO: Add a shared data for plugins (logged in xmlrpc server for OpenSubtitles, etc.)
 
     def run(self):
         while True:

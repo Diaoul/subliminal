@@ -76,52 +76,6 @@ class DownloadFailedError(Error):
     pass
 
 
-class Subtitle(object):
-    """Subtitle class
-
-    Attributes:
-        video_path -- path to the video file
-        path       -- path to the subtitle file
-        plugin     -- plugin used
-        language   -- language of the subtitle
-        link       -- download link
-        release    -- release group identified by guessit
-        teams      -- identified by subliminal
-    """
-    def __init__(self, video_path=None, path=None, plugin=None, language=None, link=None, release=None, teams=None):
-        self.video_path = video_path
-        self.path = path
-        self.plugin = plugin
-        self.language = language
-        self.link = link
-        self.release = release
-        self.teams = teams
-
-    def __repr__(self):
-        return repr({'video_path': self.video_path, 'path': self.path, 'plugin': self.plugin,
-            'language': self.language, 'link': self.link, 'release': self.release, 'teams': self.teams})
-
-
-class Task(object):
-    """Base class for tasks to use in subliminal"""
-    pass
-
-
-class ListTask(Task):
-    """List task to list subtitles"""
-    def __init__(self, filepath, languages, plugin, config):
-        self.filepath = filepath
-        self.plugin = plugin
-        self.languages = languages
-        self.config = config
-
-
-class DownloadTask(Task):
-    """Download task to download subtitles"""
-    def __init__(self, subtitles):
-        self.subtitles = subtitles
-
-
-class StopTask(Task):
-    """Stop task to stop workers"""
+class UnknownVideoError(Error):
+    """"Exception raised when a video could not be identified"""
     pass

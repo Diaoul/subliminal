@@ -20,26 +20,8 @@
 #
 
 
-class Task(object):
-    """Base class for tasks to use in subliminal"""
-    pass
-
-
-class ListTask(Task):
-    """List task to list subtitles"""
-    def __init__(self, video, languages, plugin, config):
-        self.video = video
-        self.plugin = plugin
-        self.languages = languages
-        self.config = config
-
-
-class DownloadTask(Task):
-    """Download task to download subtitles"""
-    def __init__(self, subtitles):
-        self.subtitles = subtitles
-
-
-class StopTask(Task):
-    """Stop task to stop workers"""
-    pass
+def splitKeyword(keyword, separators):
+    split = set()
+    for sep in separators:
+        split = split | set(keyword.split(sep))
+    return split

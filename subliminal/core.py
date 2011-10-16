@@ -19,11 +19,12 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+
 import threading
 from itertools import groupby
 from tasks import DownloadTask, ListTask, StopTask
-from exceptions import LanguageError, PluginError, BadStateError, WrongTaskError, DownloadFailedError
-from videos import Video
+from exceptions import InvalidLanguageError, PluginError, BadStateError, WrongTaskError, DownloadFailedError
+import videos
 import Queue
 import logging
 import mimetypes
@@ -43,8 +44,6 @@ logger = logging.getLogger('subliminal')
 logger.addHandler(NullHandler())
 
 # const
-FORMATS = ['video/x-msvideo', 'video/quicktime', 'video/x-matroska', 'video/mp4']
-EXTENSIONS = ['srt', 'sub']
 LANGUAGES = set(['aa', 'ab', 'ae', 'af', 'ak', 'am', 'an', 'ar', 'as', 'av', 'ay', 'az', 'ba', 'be', 'bg', 'bh', 'bi',
                  'bm', 'bn', 'bo', 'br', 'bs', 'ca', 'ce', 'ch', 'co', 'cr', 'cs', 'cu', 'cv', 'cy', 'da', 'de', 'dv',
                  'dz', 'ee', 'el', 'en', 'eo', 'es', 'et', 'eu', 'fa', 'ff', 'fi', 'fj', 'fo', 'fr', 'fy', 'ga', 'gd',
@@ -99,7 +98,7 @@ class Subliminal(object):
         self._languages = []
         for l in languages:
             if l not in LANGUAGES:
-                raise LanguageError(l)
+                raise InvalidLanguageError(l)
             if not l in self._languages:
                 self._languages.append(l)
 
@@ -154,8 +153,15 @@ class Subliminal(object):
                 logger.debug(u'No need to list single subtitles %r for %r because one detected' % (self._languages, filepath))
                 continue
             logger.debug(u'Listing subtitles %r for %r with %r' % (wanted_languages, filepath, self._plugins))
-            for plugin in self._plugins:
-                self.taskQueue.put((5, ListTask(Video.factory(filepath), wanted_languages, plugin, self.getConfigDict())))
+            for plugin_name in self._plugins:
+                plugin = getattr(plugins, plugin_name)
+                wanted_languages = wanted_languages & plugin.availableLanguages()
+                if not wanted_languages:
+                    continue
+                video = videos.Video.factory(filepath)
+                if not plugin.isValidVideo(video):
+                    continue
+                self.taskQueue.put((5, ListTask(video, wanted_languages, plugin_name, self.getConfigDict())))
                 task_count += 1
         subtitles = []
         for _ in range(task_count):
@@ -242,6 +248,7 @@ class Subliminal(object):
 
     def getConfigDict(self):
         """Produce a dict with configuration items. Used by plugins to read configuration"""
+        #TODO: Use an object instead of a dict
         config = {}
         config['multi'] = self.multi
         config['cache_dir'] = self.cache_dir
@@ -275,7 +282,7 @@ class PluginWorker(threading.Thread):
             try:
                 if isinstance(task, ListTask):
                     plugin = getattr(plugins, task.plugin)(task.config)
-                    result = plugin.list(task.filepath, task.languages)
+                    result = plugin.list(task.video, task.languages)
                 elif isinstance(task, DownloadTask):
                     for subtitle in task.subtitles:
                         plugin = getattr(plugins, subtitle.plugin)()
@@ -306,8 +313,7 @@ def scan(entry, depth=0, max_depth=3):
         entry = os.path.abspath(entry)
     if os.path.isfile(entry):  # a file? scan it
         if depth != 0:  # trust the user: only check for valid format if recursing
-            mimetypes.add_type('video/x-matroska', '.mkv')
-            if mimetypes.guess_type(entry)[0] not in FORMATS:
+            if mimetypes.guess_type(entry)[0] not in videos.MIMETYPES and os.path.splitext(entry)[1] not in videos.EXTENSIONS:
                 return []
         # check for .lg.ext and .ext
         available_languages = set()

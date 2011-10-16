@@ -21,10 +21,11 @@
 
 
 import guessit
+from utils import splitKeyword
 
 
 EXTENSIONS = ['.srt', '.sub', '.txt']
-KEYWORDS_SEPARATORS = ['.', '_', ' ', '/', '-']
+KEYWORD_SEPARATORS = ['.', '_', ' ', '/', '-']
 
 
 class Subtitle(object):
@@ -42,34 +43,35 @@ class Subtitle(object):
     """
     
 
-    def __init__(self, video_path=None, path=None, plugin=None, language=None, link=None, release=None, keywords=None, confidence=0):
-        self.video_path = video_path
+    def __init__(self, path, language=None, release=None, keywords=None, plugin=None, link=None):
         self.path = path
+        self.exists = os.path.exists(self.path)
+        self.hashes = {}
+        if self.exists:
+            self._computeHashes()
+        self.keywords = keywords
         self.plugin = plugin
         self.language = language
         self.link = link
         self.release = release
         self.keywords = keywords
-        self.confidence = confidence
 
     def __repr__(self):
         return repr({'video_path': self.video_path, 'path': self.path, 'plugin': self.plugin,
             'language': self.language, 'link': self.link, 'release': self.release, 'keywords': self.keywords})
 
     @classmethod
-    def factory(cls, release):
-        #TODO: Work with lowercase
+    def fromRelease(cls, release):
         """Create a Subtitle object guessing all informations from the given subtitle release filename"""
         guess = guessit.guess_file_info(release, 'autodetect')
         keywords = set()
         for k in ['releaseGroup', 'screenSize', 'videoCodec', 'format', 'container']:
             if k in guess:
-                keywords = keywords | splitKeyword(guess[k])
+                keywords = keywords | splitKeyword(guess[k], KEYWORD_SEPARATORS)
         return Subtitle(release=release, keywords=keywords)
 
+    #TODO: Add a getSubtitlePathFromVideoPath (or something like that)
 
-def splitKeyword(keyword):
-    split = set()
-    for sep in KEYWORDS_SEPARATORS:
-        split = split | set(keyword.split(sep))
-    return split
+
+
+

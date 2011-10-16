@@ -24,22 +24,43 @@ import struct
 import os
 import hashlib
 import guessit
+import subprocess
+from utils import splitKeyword
+
+
+EXTENSIONS = ['.mkv', '.avi', '.mpg'] #TODO: Complete..
+MIMETYPES = ['video/mpeg', 'video/mp4', 'video/quicktime', 'video/x-ms-wmv', 'video/x-msvideo', 'video/x-flv', 'video/x-matroska', 'video/x-matroska-3d']
+KEYWORD_SEPARATORS = ['.', '_', ' ', '/', '-']
 
 
 class Video(object):
-    keyword_separators = ['.', '_', ' ', '/', '-']
-
     """Base class for videos"""
-    def __init__(self, path, keywords):
-        self.path = path
-        self.exists = os.path.exists(self.path)
-        self.size = os.path.getsize(self.path)
-        self.hashes = {}
-        if self.exists:
-            self._computeHashes()
+    def __init__(self, release, keywords):
+        self.release = release
         self.keywords = keywords
+        self._path = None
+        if os.path.exists(self.release):
+            self.path = self.release
+
+    @property
+    def exists(self):
+        if self.path:
+            return os.path.exists(self.path)
+        return False
+
+    @property
+    def path(self):
+        return self._path
+
+    @path.setter
+    def path(self, value):
+        if not os.path.exists(value):
+            raise ValueError('Path does not exists')
+        self._path = value
+        self._computeHashes()
 
     def _computeHashes(self):
+        self.hashes = {}
         self.hashes['OpenSubtitles'] = self._computeHashOpenSubtitles()
         self.hashes['TheSubDB'] = self._computeHashTheSubDB()
 
@@ -76,39 +97,44 @@ class Video(object):
             data += f.read(readsize)
         return hashlib.md5(data).hexdigest()
 
+    def mkvmerge(self, subtitles, out=None, mkvmerge_bin='mkvmerge', title=None):
+        """Merge the video with subtitles"""
+        if not out:
+            out = self.path + '.merged.mkv'
+        args = [mkvmerge_bin, '-o', out]
+        if title:
+            args += ['--title', title]
+        for subtitle in subtitles:
+            args += ['--language', '0:' + subtitle.language, subtitle.path]
+        p = subprocess.Popen(args)
+        p.wait()
+
     @classmethod
-    def factory(cls, path):
+    def factory(cls, release):
         #TODO: Work with lowercase
-        """Create a Video object guessing all informations from the given path"""
-        guess = guessit.guess_file_info(path, 'autodetect')
+        """Create a Video object guessing all informations from the given release/path"""
+        guess = guessit.guess_file_info(release, 'autodetect')
         keywords = set()
         for k in ['releaseGroup', 'screenSize', 'videoCodec', 'format', 'container']:
             if k in guess:
-                keywords = keywords | cls._splitKeyword(guess[k])
+                keywords = keywords | splitKeyword(guess[k], KEYWORD_SEPARATORS)
         if guess['type'] == 'episode' and 'series' in guess and 'season' in guess and 'episodeNumber' in guess:
             title = None
             if 'title' in guess:
                 title = guess['title']
-            return Episode(path, keywords, guess['series'], guess['season'], guess['episodeNumber'], title)
+            return Episode(release, keywords, guess['series'], guess['season'], guess['episodeNumber'], title)
         if guess['type'] == 'movie' and 'title' in guess:
             year = None
             if 'year' in guess:
                 year = guess['year']
-            return Movie(path, keywords, guess['title'], year)
-        return UnknownVideo(path, keywords, guess)
-
-    @classmethod
-    def _splitKeyword(cls, keyword):
-        split = set()
-        for sep in cls.keyword_separators:
-            split = split | set(keyword.split(sep))
-        return split
+            return Movie(release, keywords, guess['title'], year)
+        return UnknownVideo(release, keywords, guess)
 
 
 class Episode(Video):
     """Episode class"""
-    def __init__(self, path, keywords, series, season, episode, title=None):
-        super(Episode, self).__init__(path, keywords)
+    def __init__(self, release, keywords, series, season, episode, title=None):
+        super(Episode, self).__init__(release, keywords)
         self.series = series
         self.title = title
         self.season = season
@@ -117,14 +143,14 @@ class Episode(Video):
 
 class Movie(Video):
     """Movie class"""
-    def __init__(self, path, keywords, title, year=None):
-        super(Movie, self).__init__(path, keywords)
+    def __init__(self, release, keywords, title, year=None):
+        super(Movie, self).__init__(release, keywords)
         self.title = title
         self.year = year
 
 
 class UnknownVideo(Video):
     """Unknown video"""
-    def __init__(self, path, keywords, guess):
-        super(UnknownVideo, self).__init__(path, keywords)
+    def __init__(self, release, keywords, guess):
+        super(UnknownVideo, self).__init__(release, keywords)
         self.guess = guess

@@ -37,34 +37,69 @@ class OpenSubtitles(PluginBase.PluginBase):
     server_url = 'http://api.opensubtitles.org/xml-rpc'
     user_agent = 'Subliminal v1.0'
     api_based = True
-    _plugin_languages = {'aa': 'aar', 'ab': 'abk', 'af': 'afr', 'ak': 'aka', 'sq': 'alb', 'am': 'amh', 'ar': 'ara', 'an': 'arg', 'hy': 'arm',
-            'as': 'asm', 'av': 'ava', 'ae': 'ave', 'ay': 'aym', 'az': 'aze', 'ba': 'bak', 'bm': 'bam', 'eu': 'baq', 'be': 'bel', 'bn': 'ben',
-            'bh': 'bih', 'bi': 'bis', 'bs': 'bos', 'br': 'bre', 'bg': 'bul', 'my': 'bur', 'ca': 'cat', 'ch': 'cha', 'ce': 'che', 'zh': 'chi',
-            'cu': 'chu', 'cv': 'chv', 'kw': 'cor', 'co': 'cos', 'cr': 'cre', 'cs': 'cze', 'da': 'dan', 'dv': 'div', 'nl': 'dut', 'dz': 'dzo',
-            'en': 'eng', 'eo': 'epo', 'et': 'est', 'ee': 'ewe', 'fo': 'fao', 'fj': 'fij', 'fi': 'fin', 'fr': 'fre', 'fy': 'fry', 'ff': 'ful',
-            'ka': 'geo', 'de': 'ger', 'gd': 'gla', 'ga': 'gle', 'gl': 'glg', 'gv': 'glv', 'el': 'ell', 'gn': 'grn', 'gu': 'guj', 'ht': 'hat',
-            'ha': 'hau', 'he': 'heb', 'hz': 'her', 'hi': 'hin', 'ho': 'hmo', 'hr': 'hrv', 'hu': 'hun', 'ig': 'ibo', 'is': 'ice', 'io': 'ido',
-            'ii': 'iii', 'iu': 'iku', 'ie': 'ile', 'ia': 'ina', 'id': 'ind', 'ik': 'ipk', 'it': 'ita', 'jv': 'jav', 'ja': 'jpn', 'kl': 'kal',
-            'kn': 'kan', 'ks': 'kas', 'kr': 'kau', 'kk': 'kaz', 'km': 'khm', 'ki': 'kik', 'rw': 'kin', 'ky': 'kir', 'kv': 'kom', 'kg': 'kon',
-            'ko': 'kor', 'kj': 'kua', 'ku': 'kur', 'lo': 'lao', 'la': 'lat', 'lv': 'lav', 'li': 'lim', 'ln': 'lin', 'lt': 'lit', 'lb': 'ltz',
-            'lu': 'lub', 'lg': 'lug', 'mk': 'mac', 'mh': 'mah', 'ml': 'mal', 'mi': 'mao', 'mr': 'mar', 'ms': 'may', 'mg': 'mlg', 'mt': 'mlt',
-            'mo': 'mol', 'mn': 'mon', 'na': 'nau', 'nv': 'nav', 'nr': 'nbl', 'nd': 'nde', 'ng': 'ndo', 'ne': 'nep', 'nn': 'nno', 'nb': 'nob',
-            'no': 'nor', 'ny': 'nya', 'oc': 'oci', 'oj': 'oji', 'or': 'ori', 'om': 'orm', 'os': 'oss', 'pa': 'pan', 'fa': 'per', 'pi': 'pli',
-            'pl': 'pol', 'pt': 'por', 'ps': 'pus', 'qu': 'que', 'rm': 'roh', 'rn': 'run', 'ru': 'rus', 'sg': 'sag', 'sa': 'san', 'sr': 'scc',
-            'si': 'sin', 'sk': 'slo', 'sl': 'slv', 'se': 'sme', 'sm': 'smo', 'sn': 'sna', 'sd': 'snd', 'so': 'som', 'st': 'sot', 'es': 'spa',
-            'sc': 'srd', 'ss': 'ssw', 'su': 'sun', 'sw': 'swa', 'sv': 'swe', 'ty': 'tah', 'ta': 'tam', 'tt': 'tat', 'te': 'tel', 'tg': 'tgk',
-            'tl': 'tgl', 'th': 'tha', 'bo': 'tib', 'ti': 'tir', 'to': 'ton', 'tn': 'tsn', 'ts': 'tso', 'tk': 'tuk', 'tr': 'tur', 'tw': 'twi',
-            'ug': 'uig', 'uk': 'ukr', 'ur': 'urd', 'uz': 'uzb', 've': 'ven', 'vi': 'vie', 'vo': 'vol', 'cy': 'wel', 'wa': 'wln', 'wo': 'wol',
-            'xh': 'xho', 'yi': 'yid', 'yo': 'yor', 'za': 'zha', 'zu': 'zul', 'ro': 'rum', 'pb': 'pob', 'un': 'unk', 'ay': 'ass'}
+    languages = {'aa': 'aar', 'ab': 'abk', 'af': 'afr', 'ak': 'aka', 'sq': 'alb', 'am': 'amh', 'ar': 'ara',
+                 'an': 'arg', 'hy': 'arm', 'as': 'asm', 'av': 'ava', 'ae': 'ave', 'ay': 'aym', 'az': 'aze',
+                 'ba': 'bak', 'bm': 'bam', 'eu': 'baq', 'be': 'bel', 'bn': 'ben', 'bh': 'bih', 'bi': 'bis',
+                 'bs': 'bos', 'br': 'bre', 'bg': 'bul', 'my': 'bur', 'ca': 'cat', 'ch': 'cha', 'ce': 'che',
+                 'zh': 'chi', 'cu': 'chu', 'cv': 'chv', 'kw': 'cor', 'co': 'cos', 'cr': 'cre', 'cs': 'cze',
+                 'da': 'dan', 'dv': 'div', 'nl': 'dut', 'dz': 'dzo', 'en': 'eng', 'eo': 'epo', 'et': 'est',
+                 'ee': 'ewe', 'fo': 'fao', 'fj': 'fij', 'fi': 'fin', 'fr': 'fre', 'fy': 'fry', 'ff': 'ful',
+                 'ka': 'geo', 'de': 'ger', 'gd': 'gla', 'ga': 'gle', 'gl': 'glg', 'gv': 'glv', 'el': 'ell',
+                 'gn': 'grn', 'gu': 'guj', 'ht': 'hat', 'ha': 'hau', 'he': 'heb', 'hz': 'her', 'hi': 'hin',
+                 'ho': 'hmo', 'hr': 'hrv', 'hu': 'hun', 'ig': 'ibo', 'is': 'ice', 'io': 'ido', 'ii': 'iii',
+                 'iu': 'iku', 'ie': 'ile', 'ia': 'ina', 'id': 'ind', 'ik': 'ipk', 'it': 'ita', 'jv': 'jav',
+                 'ja': 'jpn', 'kl': 'kal', 'kn': 'kan', 'ks': 'kas', 'kr': 'kau', 'kk': 'kaz', 'km': 'khm',
+                 'ki': 'kik', 'rw': 'kin', 'ky': 'kir', 'kv': 'kom', 'kg': 'kon', 'ko': 'kor', 'kj': 'kua',
+                 'ku': 'kur', 'lo': 'lao', 'la': 'lat', 'lv': 'lav', 'li': 'lim', 'ln': 'lin', 'lt': 'lit',
+                 'lb': 'ltz', 'lu': 'lub', 'lg': 'lug', 'mk': 'mac', 'mh': 'mah', 'ml': 'mal', 'mi': 'mao',
+                 'mr': 'mar', 'ms': 'may', 'mg': 'mlg', 'mt': 'mlt', 'mo': 'mol', 'mn': 'mon', 'na': 'nau',
+                 'nv': 'nav', 'nr': 'nbl', 'nd': 'nde', 'ng': 'ndo', 'ne': 'nep', 'nn': 'nno', 'nb': 'nob',
+                 'no': 'nor', 'ny': 'nya', 'oc': 'oci', 'oj': 'oji', 'or': 'ori', 'om': 'orm', 'os': 'oss',
+                 'pa': 'pan', 'fa': 'per', 'pi': 'pli', 'pl': 'pol', 'pt': 'por', 'ps': 'pus', 'qu': 'que',
+                 'rm': 'roh', 'rn': 'run', 'ru': 'rus', 'sg': 'sag', 'sa': 'san', 'sr': 'scc', 'si': 'sin',
+                 'sk': 'slo', 'sl': 'slv', 'se': 'sme', 'sm': 'smo', 'sn': 'sna', 'sd': 'snd', 'so': 'som',
+                 'st': 'sot', 'es': 'spa', 'sc': 'srd', 'ss': 'ssw', 'su': 'sun', 'sw': 'swa', 'sv': 'swe',
+                 'ty': 'tah', 'ta': 'tam', 'tt': 'tat', 'te': 'tel', 'tg': 'tgk', 'tl': 'tgl', 'th': 'tha',
+                 'bo': 'tib', 'ti': 'tir', 'to': 'ton', 'tn': 'tsn', 'ts': 'tso', 'tk': 'tuk', 'tr': 'tur',
+                 'tw': 'twi', 'ug': 'uig', 'uk': 'ukr', 'ur': 'urd', 'uz': 'uzb', 've': 'ven', 'vi': 'vie',
+                 'vo': 'vol', 'cy': 'wel', 'wa': 'wln', 'wo': 'wol', 'xh': 'xho', 'yi': 'yid', 'yo': 'yor',
+                 'za': 'zha', 'zu': 'zul', 'ro': 'rum', 'pb': 'pob', 'un': 'unk', 'ay': 'ass'}
+    reverted_languages = False
+    videos = [Episode, Movie]
+    require_video = False
 
     def __init__(self, config_dict=None):
-        super(OpenSubtitles, self).__init__(self._plugin_languages, config_dict)
+        super(OpenSubtitles, self).__init__(config_dict)
+
+    def connect(self):
+        self.server = xmlrpclib.ServerProxy(self.server_url)
+        result = self.server.LogIn('', '', 'eng', self.user_agent)
+        if not result['status'] or result['status'] != '200 OK' or not result['token']:
+            raise PluginError('Login failed')
+        self.token = result['token']
+
+    def disconnect(self):
+        #TODO share connection in a same worker
+        self.server.LogOut(self.token)
 
     def list(self, video, languages):
-        possible_languages = self.possible_languages(languages)
-        if video.exists:
-            return self.query(moviehash=video.hashes['OpenSubtitles'], languages=possible_languages, bytesize=video.size, filepath=video.path)
-        return self.query(languages=possible_languages, filepath=video.path)
+        #TODO allow multiple videos search (list item for argument videos)
+        languages = languages & self.availableLanguages()
+        if not languages:
+            self.logger.debug(u'No language available')
+            return []
+        if not self.isValidVideo(video):
+            self.logger.debug(u'Not a valid video')
+            return []
+        self.connect()
+        #TODO: This is a problem if multiple videos search
+        self.filepath = video.path
+        self.filename = os.path.basename(video.release)
+        self.query([self.create_query(video, languages)])
+        self.disconnect()
+        return result
+        
+        return 
 
     def download(self, subtitle):
         try:
@@ -81,64 +116,35 @@ class OpenSubtitles(PluginBase.PluginBase):
         finally:
             if os.path.exists(subtitle.path + '.gz'):
                 os.remove(subtitle.path + '.gz')
-            
         return subtitle
 
-    def query(self, filepath, imdbID=None, moviehash=None, bytesize=None, languages=None):
-        """Makes a query on OpenSubtitles and returns info about found subtitles.
-            Note: if using moviehash, bytesize is required. """
-        # prepare the search
+    def create_query(self, video, languages):
+        """Create a search item or one video to submit to the server"""
         search = {}
-        if moviehash:
-            search['moviehash'] = moviehash
-        if imdbID:
-            search['imdbid'] = imdbID
-        if bytesize:
-            search['moviebytesize'] = str(bytesize)
-        if languages:
-            search['sublanguageid'] = ','.join([self.getLanguage(l) for l in languages])
-        if not imdbID and not moviehash and not bytesize:
-            self.logger.debug(u'No search term, using the filename')
-            guess = guessit.guess_file_info(filepath, 'autodetect')
-            if guess['type'] == 'episode' and 'series' in guess:
-                search['query'] = guess['series'].lower()
-            elif guess['type'] == 'movie':
-                search['query'] = guess['title'].lower()
-            else:  # we don't know what we have
-                return[]
-        # login
-        self.server = xmlrpclib.ServerProxy(self.server_url)
-        try:
-            log_result = self.server.LogIn('', '', 'eng', self.user_agent)
-            if not log_result['status'] or log_result['status'] != '200 OK' or not log_result['token']:
-                raise Exception('OpenSubtitles login failed')
-            token = log_result['token']
-        except Exception as e:
-            self.logger.error(u'Cannot login: %s' % e, exc_info=True)
-            token = None
-            return []
-        # search
-        sublinks = self.get_results(token, search, filepath)
-        # logout
-        try:
-            self.server.LogOut(token)
-        except:
-            self.logger.error(u'Cannot logout')
-        return sublinks
+        search['sublanguageid'] = ','.join([self.getLanguage(l) for l in languages])
+        if video.exists:
+            search['moviehash'] = video.hashes['OpenSubtitles']
+            search['moviebytesize'] = str(video.size)
+        elif isinstance(video, Episode):
+            search['query'] = u'%s %d %d' % (video.series, video.season, video.episode)
+        elif isinstance(video, Movie):
+            search['query'] = video.title
+        return search
 
-    def get_results(self, token, search, filepath):
-        self.logger.debug(u'Query uses token %s and search parameters %s' % (token, search))
+    def query(self, searches):
+        search = searches[0]
+        self.logger.debug(u'Query uses token %s and search parameters %s' % (self.token, search))
         try:
-            results = self.server.SearchSubtitles(token, [search])
+            results = self.server.SearchSubtitles(self.token, [search])
         except Exception:
             self.logger.debug(u'Cannot query the server')
             return []
         if not results['data']:  # no subtitle found
             return []
         sublinks = []
-        self.filename = self.getFileName(filepath)
+        #TODO: Use key function as cmp isn't working anymore for python 3.x
         for r in sorted(results['data'], self._cmpSubFileName):
-            result = Subtitle(filepath, self.getSubtitlePath(filepath, self.getRevertLanguage(r['SubLanguageID'])), self.__class__.__name__, self.getRevertLanguage(r['SubLanguageID']), r['SubDownloadLink'], r['SubFileName'])
+            result = Subtitle(self.filepath, self.getSubtitlePath(self.filepath, self.getRevertLanguage(r['SubLanguageID'])), self.__class__.__name__, self.getRevertLanguage(r['SubLanguageID']), r['SubDownloadLink'], r['SubFileName'])
             if 'query' in search:  # query mode search, filter results
                 query_encoded = search['query']
                 if isinstance(query_encoded, unicode):

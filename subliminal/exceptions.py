@@ -40,7 +40,7 @@ class BadStateError(Error):
         return 'Expected state %d but current state is %d' % (self.expected, self.current)
 
 
-class LanguageError(Error):
+class InvalidLanguageError(Error):
     """Exception raised when invalid language is submitted
 
     Attributes:
@@ -53,7 +53,20 @@ class LanguageError(Error):
         return self.language
 
 
-class PluginError(Error):
+class MissingLanguageError(Error):
+    """Exception raised when a missing language is found
+
+    Attributes:
+        language -- the missing language
+    """
+    def __init__(self, language):
+        self.language = language
+
+    def __str__(self):
+        return self.language
+
+
+class InvalidPluginError(Error):
     """"Exception raised when invalid plugin is submitted
 
     Attributes:
@@ -64,6 +77,11 @@ class PluginError(Error):
 
     def __str__(self):
         return self.plugin
+
+
+class PluginError(Error):
+    """"Exception raised by plugins"""
+    pass
 
 
 class WrongTaskError(Error):

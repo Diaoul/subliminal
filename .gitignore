@@ -1,7 +1,25 @@
-build
+*.py[co]
+
+# Packages
+*.egg
+*.egg-info
 dist
-subliminal.egg-info
-*.pyc
+build
+eggs
+parts
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
+
+# Installer logs
+pip-log.txt
+
+# PyDev
 .settings
 .project
 .pydevproject
+
+# Gedit
+*~

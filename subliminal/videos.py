@@ -38,14 +38,19 @@ class Video(object):
     def __init__(self, release, keywords):
         self.release = release
         self.keywords = keywords
+        #TODO: connect to imdb to search for the id ?
+        self.imdbid = None
         self._path = None
         if os.path.exists(self.release):
             self.path = self.release
 
+    def __eq__(self, other):
+        return self.release == other.release and self.path == other.path
+
     @property
     def exists(self):
-        if self.path:
-            return os.path.exists(self.path)
+        if self._path:
+            return os.path.exists(self._path)
         return False
 
     @property

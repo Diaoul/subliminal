@@ -100,14 +100,6 @@ class PluginBase(object):
     def adjustPermissions(self, filepath):
         if self.config_dict and 'files_mode' in self.config_dict and self.config_dict['files_mode'] != -1:
             os.chmod(filepath, self.config_dict['files_mode'])
-    
-    def getSubtitlePath(self, video_path, language):
-        if not os.path.exists(video_path):
-            video_path = os.path.split(video_path)[1]
-        path = video_path.rsplit('.', 1)[0]
-        if self.config_dict and self.config_dict['multi']:
-            return path + '.%s.srt' % language
-        return path + '.srt'
 
     def downloadFile(self, url, filepath, data=None):
         """Download a subtitle file"""

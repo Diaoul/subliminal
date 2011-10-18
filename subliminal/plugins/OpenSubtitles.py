@@ -26,7 +26,7 @@ import os
 import xmlrpclib
 import guessit
 import unicodedata
-from subliminal.subtitle import Subtitle
+from subliminal.subtitles import Subtitle, get_subtitle_path
 from subliminal.exceptions import DownloadFailedError
 from subliminal.videos import *
 
@@ -67,6 +67,7 @@ class OpenSubtitles(PluginBase.PluginBase):
     reverted_languages = False
     videos = [Episode, Movie]
     require_video = False
+    matching_order = ['moviehash', 'imdbid', 'fulltext']
 
     def __init__(self, config_dict=None):
         super(OpenSubtitles, self).__init__(config_dict)
@@ -83,7 +84,6 @@ class OpenSubtitles(PluginBase.PluginBase):
         self.server.LogOut(self.token)
 
     def list(self, video, languages):
-        #TODO allow multiple videos search (list item for argument videos)
         languages = languages & self.availableLanguages()
         if not languages:
             self.logger.debug(u'No language available')
@@ -92,14 +92,9 @@ class OpenSubtitles(PluginBase.PluginBase):
             self.logger.debug(u'Not a valid video')
             return []
         self.connect()
-        #TODO: This is a problem if multiple videos search
-        self.filepath = video.path
-        self.filename = os.path.basename(video.release)
-        self.query([self.create_query(video, languages)])
+        result = self.query(self.create_searches(video, languages), video.path or video.release)
         self.disconnect()
         return result
-        
-        return 
 
     def download(self, subtitle):
         try:
@@ -118,57 +113,33 @@ class OpenSubtitles(PluginBase.PluginBase):
                 os.remove(subtitle.path + '.gz')
         return subtitle
 
-    def create_query(self, video, languages):
-        """Create a search item or one video to submit to the server"""
-        search = {}
-        search['sublanguageid'] = ','.join([self.getLanguage(l) for l in languages])
+    def create_searches(self, video, languages):
+        """Create the search array, use fulltext search as last resort"""
+        searches = []
         if video.exists:
-            search['moviehash'] = video.hashes['OpenSubtitles']
-            search['moviebytesize'] = str(video.size)
-        elif isinstance(video, Episode):
-            search['query'] = u'%s %d %d' % (video.series, video.season, video.episode)
-        elif isinstance(video, Movie):
-            search['query'] = video.title
-        return search
+            searches.append({'moviehash': video.hashes['OpenSubtitles'], 'moviebytesize': str(video.size)})
+        if video.imdbid:
+            searches.append({'imdbid': video.imdbid})
+        if not searches and isinstance(video, Episode):
+            searches.append({'query': video.series})
+        if not searches and isinstance(video, Movie):
+            searches.append({'query': video.title})
+        for search in searches:
+            search['sublanguageid'] = ','.join([self.getLanguage(l) for l in languages])
+        return searches
 
-    def query(self, searches):
-        search = searches[0]
-        self.logger.debug(u'Query uses token %s and search parameters %s' % (self.token, search))
-        try:
-            results = self.server.SearchSubtitles(self.token, [search])
-        except Exception:
-            self.logger.debug(u'Cannot query the server')
-            return []
-        if not results['data']:  # no subtitle found
-            return []
-        sublinks = []
-        #TODO: Use key function as cmp isn't working anymore for python 3.x
-        for r in sorted(results['data'], self._cmpSubFileName):
-            result = Subtitle(self.filepath, self.getSubtitlePath(self.filepath, self.getRevertLanguage(r['SubLanguageID'])), self.__class__.__name__, self.getRevertLanguage(r['SubLanguageID']), r['SubDownloadLink'], r['SubFileName'])
-            if 'query' in search:  # query mode search, filter results
-                query_encoded = search['query']
-                if isinstance(query_encoded, unicode):
-                    query_encoded = unicodedata.normalize('NFKD', query_encoded).encode('ascii', 'ignore')
-                if not r['MovieReleaseName'].replace('.', ' ').lower().startswith(query_encoded):
-                    self.logger.debug(u'Skipping %s it does not start with %s' % (r['MovieReleaseName'].replace('.', ' ').lower(), query_encoded))
-                    continue
-            sublinks.append(result)
-        return sublinks
+    def query(self, searches, filepath):
+        self.logger.debug(u'Query uses token %s and search parameters %r' % (self.token, searches))
+        results = self.server.SearchSubtitles(self.token, searches)
+        #TODO: Put back the SubFileName comparison? Is it effective?
+        #TODO: Result can be improved thanks to the release attribute of Subtitle
+        subtitles = []
+        for result in results['data']:
+            subtitle_language = self.getRevertLanguage(result['SubLanguageID'])
+            subtitle_path = get_subtitle_path(filepath, subtitle_language, self.config_dict['multi'])
+            subtitle_confidence = 1 - self.matching_order.index(result['MatchedBy']) / len(self.matching_order)
+            subtitle = Subtitle(subtitle_path, self.__class__.__name__, subtitle_language, result['SubDownloadLink'], result['SubFileName'], subtitle_confidence)
+            subtitles.append(subtitle)
+        return subtitles
 
-    def _cmpSubFileName(self, x, y):
-        """Sort based on the SubFileName name tag """
-        #TODO add also support for subtitles release
-        xmatch = x['SubFileName'] and (x['SubFileName'].find(self.filename) > -1 or self.filename.find(x['SubFileName']) > -1)
-        ymatch = y['SubFileName'] and (y['SubFileName'].find(self.filename) > -1 or self.filename.find(y['SubFileName']) > -1)
-        if xmatch and ymatch:
-            if x['SubFileName'] == self.filename or x['SubFileName'].startswith(self.filename):
-                return - 1
-            return 0
-        if not xmatch and not ymatch:
-            return 0
-        if xmatch and not ymatch:
-            return - 1
-        if not xmatch and ymatch:
-            return 1
-        return 0
 

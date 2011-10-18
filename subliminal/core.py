@@ -22,6 +22,7 @@
 
 import threading
 from itertools import groupby
+from collections import defaultdict
 from tasks import DownloadTask, ListTask, StopTask
 from exceptions import InvalidLanguageError, PluginError, BadStateError, WrongTaskError, DownloadFailedError
 import videos
@@ -58,13 +59,20 @@ LANGUAGES = set(['aa', 'ab', 'ae', 'af', 'ak', 'am', 'an', 'ar', 'as', 'av', 'ay
 PLUGINS = ['BierDopje', 'OpenSubtitles', 'SubsWiki', 'Subtitulos', 'TheSubDB']
 API_PLUGINS = filter(lambda p: getattr(plugins, p).api_based, PLUGINS)
 IDLE, RUNNING, PAUSED = range(3)
+LANGUAGE_INDEX, PLUGIN_INDEX, PLUGIN_CONFIDENCE, MATCHING_CONFIDENCE = range(4)
 
 
 class Subliminal(object):
     """Main Subliminal class"""
 
-    def __init__(self, cache_dir=None, workers=4, multi=False, force=False, max_depth=3, files_mode=-1):
+    def __init__(self, cache_dir=None, workers=4, multi=False, force=False,
+                 max_depth=3, files_mode=-1, sort_order=None):
         self.multi = multi
+        self.sort_order = sort_order
+        if not self.sort_order:
+            self.sort_order = [LANGUAGE_INDEX, PLUGIN_INDEX, CONFIDENCE, MATCHING_CONFIDENCE]
+        #TODO if multi specified, move LANGUAGE_INDEX to first element of the list. Maybe use a specific list in the download method for that,
+        #do not change the class specified sort_order
         self.force = force
         self.max_depth = max_depth
         self.cache_dir = None
@@ -182,15 +190,17 @@ class Subliminal(object):
             if self.state != IDLE:
                 raise BadStateError(self.state, IDLE)
             self.startWorkers()
-        subtitles = self.listSubtitles(entries, False)
+        by_video = self.groupByVideo(self.listSubtitles(entries, False))
+        for video, subtitles in by_video.iteritems():
+            by_video[video] = sorted(subtitles, key=lambda s: self.keySubtitles(s, video))
         task_count = 0
-        for _, subsByVideoPath in groupby(sorted(subtitles, key=lambda x: x.video_path), lambda x: x.video_path):
+        for _, subsByVideo in groupby(sorted(subtitles, key=lambda x, y: x.path or x.release), lambda x, y: x.path or x.release):
             if not self.multi:
-                self.taskQueue.put((5, DownloadTask(sorted(list(subsByVideoPath), cmp=self.cmpSubtitles))))
+                self.taskQueue.put((5, DownloadTask(sorted(list(subsByVideo), cmp=self.cmpSubtitles))))
                 task_count += 1
                 continue
-            for __, subsByVideoPathByLanguage in groupby(sorted(subsByVideoPath, key=lambda x: x.language), lambda x: x.language):
-                self.taskQueue.put((5, DownloadTask(sorted(list(subsByVideoPathByLanguage), cmp=self.cmpSubtitles))))
+            for __, subsByVideoByLanguage in groupby(sorted(subsByVideo, key=lambda x: x[1].language), lambda x: x[1].language):
+                self.taskQueue.put((5, DownloadTask(sorted(list(subsByVideoByLanguage), cmp=self.cmpSubtitles))))
                 task_count += 1
         downloaded = []
         for _ in range(task_count):
@@ -199,24 +209,28 @@ class Subliminal(object):
             self.stopWorkers()
         return downloaded
 
-    def cmpSubtitles(self, x, y):
-        #TODO: Inside a video_path, language, plugin, add a confidence item to sort even better
-        # confidence can be len(intersect(subs_keywords, video_keywords)). The higher the better
-        """Compares 2 subtitles elements x and y using video_path, languages and plugin"""
-        video_paths = sorted([x.video_path, y.video_path])
-        if x.video_path != y.video_path and video_paths.index(x.video_path) < video_paths(y.video_path):
-            return - 1
-        if x.video_path != y.video_path and video_paths.index(x.video_path) > video_paths(y.video_path):
-            return 1
-        if self._languages and self._languages.index(x.language) < self._languages.index(y.language):
-            return - 1
-        if self._languages and self._languages.index(x.language) > self._languages.index(y.language):
-            return 1
-        if self._plugins.index(x.plugin) < self._plugins.index(y.plugin):
-            return - 1
-        if self._plugins.index(x.plugin) > self._plugins.index(y.plugin):
-            return 1
-        return 0
+    def keySubtitles(self, subtitle, video):
+        key = ''
+        for sort_item in self.sort_order:
+            if sort_item = LANGUAGE_INDEX:
+                key += "%03d" % self._languages.index(subtitle.language)
+            elif sort_item = PLUGIN_INDEX:
+                key += "%03d" % self._plugins.index(subtitle.plugin)
+            elif sort_item = PLUGIN_CONFIDENCE:
+                key += "%03d" % subtitle.confidence * 100
+            elif sort_item = MATCHING_CONFIDENCE:
+                #TODO: Compute matching confidence with video & subtitle
+                matching_confidence = 0
+                key += "%03d" % matching_confidence
+        return key
+
+    def groupByVideo(self, list_result):
+        '''Because list outputs a list of tuples from different plugins, we need to put them back
+        together under a single video key'''
+        result = defaultdict(list)
+        for video, subtitles in list_result:
+            result[video] += subtitles
+        return result
 
     def startWorkers(self):
         """Create a pool of workers and start them"""
@@ -282,7 +296,7 @@ class PluginWorker(threading.Thread):
             try:
                 if isinstance(task, ListTask):
                     plugin = getattr(plugins, task.plugin)(task.config)
-                    result = plugin.list(task.video, task.languages)
+                    result = [(task.video, plugin.list(task.video, task.languages))]
                 elif isinstance(task, DownloadTask):
                     for subtitle in task.subtitles:
                         plugin = getattr(plugins, subtitle.plugin)()

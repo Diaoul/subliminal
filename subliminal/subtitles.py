@@ -22,6 +22,7 @@
 
 import guessit
 from utils import splitKeyword
+import os.path
 
 
 EXTENSIONS = ['.srt', '.sub', '.txt']
@@ -43,7 +44,7 @@ class Subtitle(object):
     """
     
 
-    def __init__(self, path, language=None, release=None, keywords=None, plugin=None, link=None):
+    def __init__(self, path, plugin=None, language=None, link=None, release=None, confidence=1, keywords=None):
         self.path = path
         self.exists = os.path.exists(self.path)
         self.hashes = {}
@@ -55,10 +56,10 @@ class Subtitle(object):
         self.link = link
         self.release = release
         self.keywords = keywords
+        self.confidence = confidence
 
     def __repr__(self):
-        return repr({'video_path': self.video_path, 'path': self.path, 'plugin': self.plugin,
-            'language': self.language, 'link': self.link, 'release': self.release, 'keywords': self.keywords})
+        return repr({'path': self.path, 'plugin': self.plugin, 'language': self.language, 'link': self.link, 'release': self.release, 'keywords': self.keywords, 'confidence': self.confidence})
 
     @classmethod
     def fromRelease(cls, release):
@@ -70,8 +71,12 @@ class Subtitle(object):
                 keywords = keywords | splitKeyword(guess[k], KEYWORD_SEPARATORS)
         return Subtitle(release=release, keywords=keywords)
 
-    #TODO: Add a getSubtitlePathFromVideoPath (or something like that)
 
+def get_subtitle_path(video_path, language, multi):
+    subtitle_path = os.path.splitext(os.path.basename(video_path))[0]
+    if multi and language:
+        return subtitle_path + '.%s.%s' % (language, EXTENSIONS[0])
+    return subtitle_path + '.%s' % EXTENSIONS[0]
 
 
 

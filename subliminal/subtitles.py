@@ -30,33 +30,25 @@ KEYWORD_SEPARATORS = ['.', '_', ' ', '/', '-']
 
 
 class Subtitle(object):
-    """Subtitle class
-
-    Attributes:
-        video_path -- path to the video file
-        path       -- path to the subtitle file
-        plugin     -- plugin used
-        language   -- language of the subtitle
-        link       -- download link
-        release    -- release group identified by guessit
-        keywords   -- identified by guessit
-        confidence -- confidence that the subtitle matches the video
-    """
-    
+    """Subtitle class"""
 
     def __init__(self, path, plugin=None, language=None, link=None, release=None, confidence=1, keywords=None):
         self.path = path
-        self.exists = os.path.exists(self.path)
-        self.hashes = {}
-        if self.exists:
-            self._computeHashes()
-        self.keywords = keywords
         self.plugin = plugin
         self.language = language
         self.link = link
         self.release = release
-        self.keywords = keywords
         self.confidence = confidence
+        self.keywords = keywords
+
+    def __eq__(self, other):
+        return self.path == other.path and self.plugin == other.plugin and self.language == other.language
+
+    @property
+    def exists(self):
+        if self._path:
+            return os.path.exists(self._path)
+        return False
 
     def __repr__(self):
         return repr({'path': self.path, 'plugin': self.plugin, 'language': self.language, 'link': self.link, 'release': self.release, 'keywords': self.keywords, 'confidence': self.confidence})

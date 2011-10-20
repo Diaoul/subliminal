@@ -70,7 +70,7 @@ class Subliminal(object):
         self.multi = multi
         self.sort_order = sort_order
         if not self.sort_order:
-            self.sort_order = [LANGUAGE_INDEX, PLUGIN_INDEX, CONFIDENCE, MATCHING_CONFIDENCE]
+            self.sort_order = [LANGUAGE_INDEX, PLUGIN_INDEX, PLUGIN_CONFIDENCE]
         #TODO if multi specified, move LANGUAGE_INDEX to first element of the list. Maybe use a specific list in the download method for that,
         #do not change the class specified sort_order
         self.force = force
@@ -191,16 +191,19 @@ class Subliminal(object):
                 raise BadStateError(self.state, IDLE)
             self.startWorkers()
         by_video = self.groupByVideo(self.listSubtitles(entries, False))
-        for video, subtitles in by_video.iteritems():
-            by_video[video] = sorted(subtitles, key=lambda s: self.keySubtitles(s, video))
+        # Define an order with LANGUAGE_INDEX first for multi sorting
+        order = self.sort_order
+        if self.multi:
+            order.insert(0, LANGUAGE_INDEX)
         task_count = 0
-        for _, subsByVideo in groupby(sorted(subtitles, key=lambda x, y: x.path or x.release), lambda x, y: x.path or x.release):
+        for video, subtitles in by_video.iteritems():
+            ordered_subtitles = sorted(subtitles, key=lambda s: self.keySubtitles(s, video, order))
             if not self.multi:
-                self.taskQueue.put((5, DownloadTask(sorted(list(subsByVideo), cmp=self.cmpSubtitles))))
+                self.taskQueue.put((5, DownloadTask(ordered_subtitles)))
                 task_count += 1
                 continue
-            for __, subsByVideoByLanguage in groupby(sorted(subsByVideo, key=lambda x: x[1].language), lambda x: x[1].language):
-                self.taskQueue.put((5, DownloadTask(sorted(list(subsByVideoByLanguage), cmp=self.cmpSubtitles))))
+            for _, by_language in groupby(ordered_subtitles, lambda s: s.language):
+                self.taskQueue.put((5, DownloadTask(by_language)))
                 task_count += 1
         downloaded = []
         for _ in range(task_count):
@@ -209,20 +212,25 @@ class Subliminal(object):
             self.stopWorkers()
         return downloaded
 
-    def keySubtitles(self, subtitle, video):
+    def keySubtitles(self, subtitle, video, order):
         key = ''
-        for sort_item in self.sort_order:
-            if sort_item = LANGUAGE_INDEX:
-                key += "%03d" % self._languages.index(subtitle.language)
-            elif sort_item = PLUGIN_INDEX:
-                key += "%03d" % self._plugins.index(subtitle.plugin)
-            elif sort_item = PLUGIN_CONFIDENCE:
-                key += "%03d" % subtitle.confidence * 100
-            elif sort_item = MATCHING_CONFIDENCE:
+        for sort_item in order:
+            if sort_item == LANGUAGE_INDEX:
+                key += '%03d' % self._languages.index(subtitle.language)
+            elif sort_item == PLUGIN_INDEX:
+                key += '%01d' % self._plugins.index(subtitle.plugin)
+            elif sort_item == PLUGIN_CONFIDENCE:
+                key += '%03d' % subtitle.confidence * 100
+            elif sort_item == MATCHING_CONFIDENCE:
                 #TODO: Compute matching confidence with video & subtitle
                 matching_confidence = 0
-                key += "%03d" % matching_confidence
+                key += '%03d' % matching_confidence
         return key
+
+    def computeMatchingConfidence(self, video, subtitle):
+        if isinstance(video, Episode):
+            #TODO
+            pass
 
     def groupByVideo(self, list_result):
         '''Because list outputs a list of tuples from different plugins, we need to put them back

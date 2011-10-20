@@ -42,11 +42,14 @@ class FileTestCase(unittest.TestCase):
 
     def test_list(self):
         results = self.subli.listSubtitles(test_file)
+        print results
         self.assertTrue(len(results) > 0)
 
     def test_download(self):
         results = self.subli.downloadSubtitles(test_file)
+        print results
         self.assertTrue(len(results) > 0)
+
 '''
 
 class ErrorTestCase(unittest.TestCase):

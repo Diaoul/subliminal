@@ -41,6 +41,7 @@ class PluginBase(object):
     reverted_languages = False
     videos = []
     require_video = False
+    shared_support = False
 
     @abc.abstractmethod
     def __init__(self, config=None, shared=None):

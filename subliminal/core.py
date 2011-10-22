@@ -292,7 +292,9 @@ class PluginWorker(threading.Thread):
             result = []
             try:
                 if isinstance(task, ListTask):
-                    plugin = getattr(plugins, task.plugin)(task.config, self.shared)
+                    if getattr(plugins, task.plugin).shared_support and task.plugin not in self.shared:
+                        self.shared[task.plugin] = {}
+                    plugin = getattr(plugins, task.plugin)(task.config, self.shared[task.plugin])
                     result = [(task.video, plugin.list(task.video, task.languages))]
                 elif isinstance(task, DownloadTask):
                     for subtitle in task.subtitles:
@@ -313,7 +315,16 @@ class PluginWorker(threading.Thread):
                 elif isinstance(task, DownloadTask):
                     self.downloadResultQueue.put(result)
                 self.taskQueue.task_done()
+        self.terminate()
         self.logger.debug(u'Thread %s terminated' % self.name)
+    
+    def terminate(self):
+        for plugin, shared in self.shared.iteritems():
+            try:
+                getattr(plugins, plugin).terminate(shared)
+            except:
+                self.logger.error(u'Exception raised when terminating plugin %s' % plugin, exc_info=True)
+                
 
 
 def matching_confidence(video, subtitle):

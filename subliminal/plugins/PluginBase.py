@@ -24,6 +24,7 @@ import logging
 import os
 import urllib2
 import threading
+from subliminal.utils import PluginConfig
 from subliminal.exceptions import DownloadFailedError, MissingLanguageError
 
 
@@ -42,8 +43,11 @@ class PluginBase(object):
     require_video = False
 
     @abc.abstractmethod
-    def __init__(self, config_dict=None):
-        self.config_dict = config_dict
+    def __init__(self, config=None, shared=None):
+        self.config = config
+        if not self.config:
+            self.config = PluginConfig()
+        self.shared = shared
         self.logger = logging.getLogger('subliminal.%s' % self.__class__.__name__)
 
     @classmethod
@@ -98,8 +102,8 @@ class PluginBase(object):
         raise MissingLanguageError(language)
 
     def adjustPermissions(self, filepath):
-        if self.config_dict and 'files_mode' in self.config_dict and self.config_dict['files_mode'] != -1:
-            os.chmod(filepath, self.config_dict['files_mode'])
+        if self.config.filemode != None:
+            os.chmod(filepath, self.config.filemode)
 
     def downloadFile(self, url, filepath, data=None):
         """Download a subtitle file"""

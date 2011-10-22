@@ -25,6 +25,8 @@ from itertools import groupby
 from collections import defaultdict
 from tasks import DownloadTask, ListTask, StopTask
 from exceptions import InvalidLanguageError, PluginError, BadStateError, WrongTaskError, DownloadFailedError
+import utils
+import guessit
 import videos
 import Queue
 import logging
@@ -66,13 +68,11 @@ class Subliminal(object):
     """Main Subliminal class"""
 
     def __init__(self, cache_dir=None, workers=4, multi=False, force=False,
-                 max_depth=3, files_mode=-1, sort_order=None):
+                 max_depth=3, filemode=None, sort_order=None):
         self.multi = multi
         self.sort_order = sort_order
         if not self.sort_order:
             self.sort_order = [LANGUAGE_INDEX, PLUGIN_INDEX, PLUGIN_CONFIDENCE]
-        #TODO if multi specified, move LANGUAGE_INDEX to first element of the list. Maybe use a specific list in the download method for that,
-        #do not change the class specified sort_order
         self.force = force
         self.max_depth = max_depth
         self.cache_dir = None
@@ -82,7 +82,7 @@ class Subliminal(object):
         self._languages = []
         self._plugins = API_PLUGINS
         self.workers = workers
-        self.files_mode = files_mode
+        self.filemode = filemode
         self.state = IDLE
         try:
             if cache_dir:
@@ -139,6 +139,7 @@ class Subliminal(object):
             self.startWorkers()
         if isinstance(entries, basestring):
             entries = [entries]
+        config = utils.PluginConfig(self.multi, self.cache_dir, self.filemode)
         scan_result = []
         for e in entries:
             if not isinstance(e, unicode):
@@ -169,7 +170,7 @@ class Subliminal(object):
                 video = videos.Video.factory(filepath)
                 if not plugin.isValidVideo(video):
                     continue
-                self.taskQueue.put((5, ListTask(video, wanted_languages, plugin_name, self.getConfigDict())))
+                self.taskQueue.put((5, ListTask(video, wanted_languages, plugin_name, config)))
                 task_count += 1
         subtitles = []
         for _ in range(task_count):
@@ -197,7 +198,7 @@ class Subliminal(object):
             order.insert(0, LANGUAGE_INDEX)
         task_count = 0
         for video, subtitles in by_video.iteritems():
-            ordered_subtitles = sorted(subtitles, key=lambda s: self.keySubtitles(s, video, order))
+            ordered_subtitles = sorted(subtitles, key=lambda s: self.keySubtitles(s, video, order), reverse=True)
             if not self.multi:
                 self.taskQueue.put((5, DownloadTask(ordered_subtitles)))
                 task_count += 1
@@ -216,21 +217,17 @@ class Subliminal(object):
         key = ''
         for sort_item in order:
             if sort_item == LANGUAGE_INDEX:
-                key += '%03d' % self._languages.index(subtitle.language)
+                key += '{:03d}'.format(len(self._languages) - self._languages.index(subtitle.language) - 1)
             elif sort_item == PLUGIN_INDEX:
-                key += '%01d' % self._plugins.index(subtitle.plugin)
+                key += '{:02d}'.format(len(self._plugins) - self._plugins.index(subtitle.plugin) - 1)
             elif sort_item == PLUGIN_CONFIDENCE:
-                key += '%03d' % subtitle.confidence * 100
+                key += '{:04d}'.format(int(subtitle.confidence * 1000))
             elif sort_item == MATCHING_CONFIDENCE:
-                #TODO: Compute matching confidence with video & subtitle
-                matching_confidence = 0
-                key += '%03d' % matching_confidence
-        return key
-
-    def computeMatchingConfidence(self, video, subtitle):
-        if isinstance(video, Episode):
-            #TODO
-            pass
+                confidence = 0
+                if subtitle.release:
+                    confidence = matching_confidence(video, subtitle)
+                key += '{:04d}'.format(int(confidence * 1000))
+        return int(key)
 
     def groupByVideo(self, list_result):
         '''Because list outputs a list of tuples from different plugins, we need to put them back
@@ -268,15 +265,6 @@ class Subliminal(object):
         if self.taskQueue.empty():
             self.state = STOPPED
 
-    def getConfigDict(self):
-        """Produce a dict with configuration items. Used by plugins to read configuration"""
-        #TODO: Use an object instead of a dict
-        config = {}
-        config['multi'] = self.multi
-        config['cache_dir'] = self.cache_dir
-        config['files_mode'] = self.files_mode
-        return config
-
     def addTask(self, task):
         if not isinstance(task, Task) or isinstance(task, StopTask):
             raise WrongTaskError()
@@ -291,6 +279,7 @@ class PluginWorker(threading.Thread):
         self.listResultQueue = listResultQueue
         self.downloadResultQueue = downloadResultQueue
         self.logger = logging.getLogger('subliminal.worker')
+        self.shared = {}
         #TODO: Add a shared data for plugins (logged in xmlrpc server for OpenSubtitles, etc.)
 
     def run(self):
@@ -303,7 +292,7 @@ class PluginWorker(threading.Thread):
             result = []
             try:
                 if isinstance(task, ListTask):
-                    plugin = getattr(plugins, task.plugin)(task.config)
+                    plugin = getattr(plugins, task.plugin)(task.config, self.shared)
                     result = [(task.video, plugin.list(task.video, task.languages))]
                 elif isinstance(task, DownloadTask):
                     for subtitle in task.subtitles:
@@ -326,6 +315,36 @@ class PluginWorker(threading.Thread):
                 self.taskQueue.task_done()
         self.logger.debug(u'Thread %s terminated' % self.name)
 
+
+def matching_confidence(video, subtitle):
+    '''Compute the confidence that the subtitle matches the video.
+    Returns a float between 0 and 1. 1 being the perfect match.'''
+    guess = guessit.guess_file_info(subtitle.release, 'autodetect')
+    video_keywords = utils.get_keywords(video.guess)
+    subtitle_keywords = utils.get_keywords(guess) | subtitle.keywords
+    replacement = {'keywords': len(video_keywords & subtitle_keywords)}
+    if isinstance(video, videos.Episode):
+        replacement.update({'series': 0, 'season': 0, 'episode': 0})
+        matching_format = '{series:b}{season:b}{episode:b}{keywords:03b}'
+        best = matching_format.format(series=1, season=1, episode=1, keywords=len(video_keywords))
+        if guess['type'] in ['episode', 'episodesubtitle']:
+            if 'series' in guess and guess['series'].lower() == video.series.lower():
+                replacement['series'] = 1
+            if 'season' in guess and guess['season'] == video.season:
+                replacement['season'] = 1
+            if 'episodeNumber' in guess and guess['episodeNumber'] == video.episode:
+                replacement['episode'] = 1
+    if isinstance(video, videos.Movie):
+        replacement.update({'title': 0, 'year': 0})
+        matching_format = '{title:b}{year:b}{keywords:03b}'
+        best = matching_format.format(title=1, year=1, keywords=len(video_keywords))
+        if guess['type'] in ['movie', 'moviesubtitle']:
+            if 'title' in guess and guess['title'].lower() == video.title.lower():
+                replacement['title'] = 1
+            if 'year' in guess and guess['year'] == video.year:
+                replacement['year'] = 1
+    confidence = float(int(matching_format.format(**replacement), 2))/float(int(best, 2))
+    return confidence
 
 def scan(entry, depth=0, max_depth=3):
     """Scan a path and return a list of tuples (filepath, set(languages), has single)"""

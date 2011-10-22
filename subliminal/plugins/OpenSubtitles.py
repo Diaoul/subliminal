@@ -35,7 +35,7 @@ class OpenSubtitles(PluginBase.PluginBase):
     site_url = 'http://www.opensubtitles.org'
     site_name = 'OpenSubtitles'
     server_url = 'http://api.opensubtitles.org/xml-rpc'
-    user_agent = 'Subliminal v1.0'
+    user_agent = 'Subliminal v1.1'
     api_based = True
     languages = {'aa': 'aar', 'ab': 'abk', 'af': 'afr', 'ak': 'aka', 'sq': 'alb', 'am': 'amh', 'ar': 'ara',
                  'an': 'arg', 'hy': 'arm', 'as': 'asm', 'av': 'ava', 'ae': 'ave', 'ay': 'aym', 'az': 'aze',
@@ -67,21 +67,29 @@ class OpenSubtitles(PluginBase.PluginBase):
     reverted_languages = False
     videos = [Episode, Movie]
     require_video = False
-    matching_order = ['moviehash', 'imdbid', 'fulltext']
+    confidence_order = ['moviehash', 'imdbid', 'fulltext']
 
-    def __init__(self, config_dict=None):
-        super(OpenSubtitles, self).__init__(config_dict)
+    def __init__(self, config=None, shared=None):
+        super(OpenSubtitles, self).__init__(config, shared)
 
     def connect(self):
+        if self.shared and 'OpenSubtitles' in self.shared:
+            self.server = self.shared['OpenSubtitles']['server']
+            self.token = self.shared['OpenSubtitles']['token']
+            return
         self.server = xmlrpclib.ServerProxy(self.server_url)
         result = self.server.LogIn('', '', 'eng', self.user_agent)
         if not result['status'] or result['status'] != '200 OK' or not result['token']:
             raise PluginError('Login failed')
         self.token = result['token']
+        if self.shared:
+            self.shared['OpenSubtitles'] = {}
+            self.shared['OpenSubtitles']['server'] = self.server
+            self.shared['OpenSubtitles']['token'] = self.token
 
-    def disconnect(self):
-        #TODO share connection in a same worker
-        self.server.LogOut(self.token)
+    @staticmethod
+    def disconnect(server, token):
+        server.LogOut(token)
 
     def list(self, video, languages):
         languages = languages & self.availableLanguages()
@@ -93,7 +101,8 @@ class OpenSubtitles(PluginBase.PluginBase):
             return []
         self.connect()
         result = self.query(self.create_searches(video, languages), video.path or video.release)
-        self.disconnect()
+        if not self.shared:
+            self.disconnect(self.server, self.token)
         return result
 
     def download(self, subtitle):
@@ -131,14 +140,12 @@ class OpenSubtitles(PluginBase.PluginBase):
     def query(self, searches, filepath):
         self.logger.debug(u'Query uses token %s and search parameters %r' % (self.token, searches))
         results = self.server.SearchSubtitles(self.token, searches)
-        #TODO: Put back the SubFileName comparison? Is it effective?
-        #TODO: Result can be improved thanks to the release attribute of Subtitle
         subtitles = []
         for result in results['data']:
-            subtitle_language = self.getRevertLanguage(result['SubLanguageID'])
-            subtitle_path = get_subtitle_path(filepath, subtitle_language, self.config_dict['multi'])
-            subtitle_confidence = 1 - self.matching_order.index(result['MatchedBy']) / len(self.matching_order)
-            subtitle = Subtitle(subtitle_path, self.__class__.__name__, subtitle_language, result['SubDownloadLink'], result['SubFileName'], subtitle_confidence)
+            language = self.getRevertLanguage(result['SubLanguageID'])
+            path = get_subtitle_path(filepath, language, self.config.multi)
+            confidence = 1 - float(self.confidence_order.index(result['MatchedBy'])) / float(len(self.confidence_order))
+            subtitle = Subtitle(path, self.__class__.__name__, language, result['SubDownloadLink'], result['SubFileName'], confidence)
             subtitles.append(subtitle)
         return subtitles
 

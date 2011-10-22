@@ -25,19 +25,17 @@ import os
 import hashlib
 import guessit
 import subprocess
-from utils import splitKeyword
 
 
 EXTENSIONS = ['.mkv', '.avi', '.mpg'] #TODO: Complete..
 MIMETYPES = ['video/mpeg', 'video/mp4', 'video/quicktime', 'video/x-ms-wmv', 'video/x-msvideo', 'video/x-flv', 'video/x-matroska', 'video/x-matroska-3d']
-KEYWORD_SEPARATORS = ['.', '_', ' ', '/', '-']
 
 
 class Video(object):
     """Base class for videos"""
-    def __init__(self, release, keywords):
+    def __init__(self, release, guess):
         self.release = release
-        self.keywords = keywords
+        self.guess = guess
         self.tvdbid = None
         self.imdbid = None
         self._path = None
@@ -116,30 +114,25 @@ class Video(object):
 
     @classmethod
     def factory(cls, release):
-        #TODO: Work with lowercase
         """Create a Video object guessing all informations from the given release/path"""
         guess = guessit.guess_file_info(release, 'autodetect')
-        keywords = set()
-        for k in ['releaseGroup', 'screenSize', 'videoCodec', 'format', 'container']:
-            if k in guess:
-                keywords = keywords | splitKeyword(guess[k], KEYWORD_SEPARATORS)
         if guess['type'] == 'episode' and 'series' in guess and 'season' in guess and 'episodeNumber' in guess:
             title = None
             if 'title' in guess:
                 title = guess['title']
-            return Episode(release, keywords, guess['series'], guess['season'], guess['episodeNumber'], title)
+            return Episode(release, guess['series'], guess['season'], guess['episodeNumber'], title, guess)
         if guess['type'] == 'movie' and 'title' in guess:
             year = None
             if 'year' in guess:
                 year = guess['year']
-            return Movie(release, keywords, guess['title'], year)
-        return UnknownVideo(release, keywords, guess)
+            return Movie(release, guess['title'], year, guess)
+        return UnknownVideo(release, guess)
 
 
 class Episode(Video):
     """Episode class"""
-    def __init__(self, release, keywords, series, season, episode, title=None):
-        super(Episode, self).__init__(release, keywords)
+    def __init__(self, release, series, season, episode, title=None, guess=None):
+        super(Episode, self).__init__(release, guess)
         self.series = series
         self.title = title
         self.season = season
@@ -148,14 +141,14 @@ class Episode(Video):
 
 class Movie(Video):
     """Movie class"""
-    def __init__(self, release, keywords, title, year=None):
-        super(Movie, self).__init__(release, keywords)
+    def __init__(self, release, title, year=None, guess=None):
+        super(Movie, self).__init__(release, guess)
         self.title = title
         self.year = year
 
 
 class UnknownVideo(Video):
     """Unknown video"""
-    def __init__(self, release, keywords, guess):
-        super(UnknownVideo, self).__init__(release, keywords)
+    def __init__(self, release, guess):
+        super(UnknownVideo, self).__init__(release, guess)
         self.guess = guess

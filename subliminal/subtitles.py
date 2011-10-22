@@ -20,13 +20,10 @@
 #
 
 
-import guessit
-from utils import splitKeyword
 import os.path
 
 
 EXTENSIONS = ['.srt', '.sub', '.txt']
-KEYWORD_SEPARATORS = ['.', '_', ' ', '/', '-']
 
 
 class Subtitle(object):
@@ -38,8 +35,8 @@ class Subtitle(object):
         self.language = language
         self.link = link
         self.release = release
-        self.confidence = confidence
         self.keywords = keywords
+        self.confidence = confidence
 
     def __eq__(self, other):
         return self.path == other.path and self.plugin == other.plugin and self.language == other.language
@@ -53,22 +50,12 @@ class Subtitle(object):
     def __repr__(self):
         return repr({'path': self.path, 'plugin': self.plugin, 'language': self.language, 'link': self.link, 'release': self.release, 'keywords': self.keywords, 'confidence': self.confidence})
 
-    @classmethod
-    def fromRelease(cls, release):
-        """Create a Subtitle object guessing all informations from the given subtitle release filename"""
-        guess = guessit.guess_file_info(release, 'autodetect')
-        keywords = set()
-        for k in ['releaseGroup', 'screenSize', 'videoCodec', 'format', 'container']:
-            if k in guess:
-                keywords = keywords | splitKeyword(guess[k], KEYWORD_SEPARATORS)
-        return Subtitle(release=release, keywords=keywords)
-
 
 def get_subtitle_path(video_path, language, multi):
-    subtitle_path = os.path.splitext(os.path.basename(video_path))[0]
+    path = os.path.splitext(os.path.basename(video_path))[0]
     if multi and language:
-        return subtitle_path + '.%s.%s' % (language, EXTENSIONS[0])
-    return subtitle_path + '.%s' % EXTENSIONS[0]
+        return path + '.%s%s' % (language, EXTENSIONS[0])
+    return path + '%s' % EXTENSIONS[0]
 
 
 

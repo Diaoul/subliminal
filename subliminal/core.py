@@ -167,7 +167,7 @@ class Subliminal(object):
                 wanted_languages = wanted_languages & plugin.availableLanguages()
                 if not wanted_languages:
                     continue
-                video = videos.Video.factory(filepath)
+                video = videos.factory(filepath)
                 if not plugin.isValidVideo(video):
                     continue
                 self.taskQueue.put((5, ListTask(video, wanted_languages, plugin_name, config)))

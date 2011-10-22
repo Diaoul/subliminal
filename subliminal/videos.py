@@ -112,22 +112,6 @@ class Video(object):
         p = subprocess.Popen(args)
         p.wait()
 
-    @classmethod
-    def factory(cls, release):
-        """Create a Video object guessing all informations from the given release/path"""
-        guess = guessit.guess_file_info(release, 'autodetect')
-        if guess['type'] == 'episode' and 'series' in guess and 'season' in guess and 'episodeNumber' in guess:
-            title = None
-            if 'title' in guess:
-                title = guess['title']
-            return Episode(release, guess['series'], guess['season'], guess['episodeNumber'], title, guess)
-        if guess['type'] == 'movie' and 'title' in guess:
-            year = None
-            if 'year' in guess:
-                year = guess['year']
-            return Movie(release, guess['title'], year, guess)
-        return UnknownVideo(release, guess)
-
 
 class Episode(Video):
     """Episode class"""
@@ -152,3 +136,19 @@ class UnknownVideo(Video):
     def __init__(self, release, guess):
         super(UnknownVideo, self).__init__(release, guess)
         self.guess = guess
+
+
+def factory(release):
+    """Create a Video object guessing all informations from the given release/path"""
+    guess = guessit.guess_file_info(release, 'autodetect')
+    if guess['type'] == 'episode' and 'series' in guess and 'season' in guess and 'episodeNumber' in guess:
+        title = None
+        if 'title' in guess:
+            title = guess['title']
+        return Episode(release, guess['series'], guess['season'], guess['episodeNumber'], title, guess)
+    if guess['type'] == 'movie' and 'title' in guess:
+        year = None
+        if 'year' in guess:
+            year = guess['year']
+        return Movie(release, guess['title'], year, guess)
+    return UnknownVideo(release, guess)

@@ -36,7 +36,8 @@ class ListTask(Task):
 
 class DownloadTask(Task):
     """Download task to download subtitles"""
-    def __init__(self, subtitles):
+    def __init__(self, video, subtitles):
+        self.video = video
         self.subtitles = subtitles
 
 

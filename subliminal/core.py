@@ -200,11 +200,11 @@ class Subliminal(object):
         for video, subtitles in by_video.iteritems():
             ordered_subtitles = sorted(subtitles, key=lambda s: self.keySubtitles(s, video, order), reverse=True)
             if not self.multi:
-                self.taskQueue.put((5, DownloadTask(ordered_subtitles)))
+                self.taskQueue.put((5, DownloadTask(video, ordered_subtitles)))
                 task_count += 1
                 continue
             for _, by_language in groupby(ordered_subtitles, lambda s: s.language):
-                self.taskQueue.put((5, DownloadTask(by_language)))
+                self.taskQueue.put((5, DownloadTask(video, by_language)))
                 task_count += 1
         downloaded = []
         for _ in range(task_count):
@@ -304,7 +304,7 @@ class PluginWorker(threading.Thread):
                             self.logger.warning(u'Could not download subtitle %r, trying next' % subtitle)
                             continue
                     if not result:
-                        self.logger.error(u'No subtitles could be downloaded for file %r' % subtitle.video_path)
+                        self.logger.error(u'No subtitles could be downloaded for file %r' % task.video.path)
             except:
                 self.logger.error(u'Exception raised in worker %s' % self.name, exc_info=True)
             finally:

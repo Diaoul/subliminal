@@ -52,7 +52,10 @@ class Subtitle(object):
 
 
 def get_subtitle_path(video_path, language, multi):
-    path = os.path.splitext(os.path.basename(video_path))[0]
+    if not os.path.exists(video_path):
+        path = os.path.splitext(os.path.basename(video_path))[0]
+    else:
+        path = os.path.splitext(video_path)[0]
     if multi and language:
         return path + '.%s%s' % (language, EXTENSIONS[0])
     return path + '%s' % EXTENSIONS[0]

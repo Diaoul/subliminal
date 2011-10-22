@@ -39,8 +39,9 @@ class Video(object):
         self.tvdbid = None
         self.imdbid = None
         self._path = None
-        if os.path.exists(self.release):
-            self.path = self.release
+        self.hashes = {}
+        if os.path.exists(release):
+            self.path = release
 
     def __eq__(self, other):
         return self.release == other.release and self.path == other.path
@@ -60,10 +61,10 @@ class Video(object):
         if not os.path.exists(value):
             raise ValueError('Path does not exists')
         self._path = value
+        self.size = os.path.getsize(self._path)
         self._computeHashes()
 
     def _computeHashes(self):
-        self.hashes = {}
         self.hashes['OpenSubtitles'] = self._computeHashOpenSubtitles()
         self.hashes['TheSubDB'] = self._computeHashTheSubDB()
 

@@ -67,29 +67,28 @@ class OpenSubtitles(PluginBase.PluginBase):
     reverted_languages = False
     videos = [Episode, Movie]
     require_video = False
+    shared_support = True
     confidence_order = ['moviehash', 'imdbid', 'fulltext']
 
     def __init__(self, config=None, shared=None):
         super(OpenSubtitles, self).__init__(config, shared)
 
     def connect(self):
-        if self.shared and 'OpenSubtitles' in self.shared:
-            self.server = self.shared['OpenSubtitles']['server']
-            self.token = self.shared['OpenSubtitles']['token']
-            return
-        self.server = xmlrpclib.ServerProxy(self.server_url)
-        result = self.server.LogIn('', '', 'eng', self.user_agent)
-        if not result['status'] or result['status'] != '200 OK' or not result['token']:
-            raise PluginError('Login failed')
-        self.token = result['token']
         if self.shared:
-            self.shared['OpenSubtitles'] = {}
-            self.shared['OpenSubtitles']['server'] = self.server
-            self.shared['OpenSubtitles']['token'] = self.token
+            self.server = self.shared['server']
+            self.token = self.shared['token']
+        else:
+            self.server = xmlrpclib.ServerProxy(self.server_url)
+            result = self.server.LogIn('', '', 'eng', self.user_agent)
+            if result['status'] != '200 OK':
+                raise PluginError('Login failed')
+            self.token = result['token']
+            self.shared['server'] = self.server
+            self.shared['token'] = self.token
 
     @staticmethod
-    def disconnect(server, token):
-        server.LogOut(token)
+    def terminate(shared):
+        shared['server'].LogOut(shared['token'])
 
     def list(self, video, languages):
         languages = languages & self.availableLanguages()

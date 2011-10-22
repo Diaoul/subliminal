@@ -29,7 +29,7 @@ EXTENSIONS = ['.srt', '.sub', '.txt']
 class Subtitle(object):
     """Subtitle class"""
 
-    def __init__(self, path, plugin=None, language=None, link=None, release=None, confidence=1, keywords=None):
+    def __init__(self, path, plugin=None, language=None, link=None, release=None, confidence=1, keywords=set()):
         self.path = path
         self.plugin = plugin
         self.language = language

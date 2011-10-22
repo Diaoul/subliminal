@@ -361,7 +361,7 @@ def scan(entry, depth=0, max_depth=3):
         has_single = False
         basepath = os.path.splitext(entry)[0]
         for l in LANGUAGES:
-            for e in EXTENSIONS:
+            for e in videos.EXTENSIONS:
                 if os.path.exists(basepath + '.%s.%s' % (l, e)):
                     available_languages.add(l)
                 if os.path.exists(basepath + '.%s' % e):

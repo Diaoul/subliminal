@@ -121,7 +121,3 @@ class PluginBase(object):
             raise DownloadFailedError(str(e))
         self.logger.debug(u'Download finished for file %s. Size: %s' % (filepath, os.path.getsize(filepath)))
 
-    def _cmpReleaseGroup(self, x, y):
-        """Sort based on keywords matching"""
-        return -cmp(len(x.keywords.intersection(self.keywords)), len(y.keywords.intersection(self.keywords)))
-

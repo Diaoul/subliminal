@@ -67,15 +67,12 @@ LANGUAGE_INDEX, PLUGIN_INDEX, PLUGIN_CONFIDENCE, MATCHING_CONFIDENCE = range(4)
 class Subliminal(object):
     """Main Subliminal class"""
 
-    def __init__(self, cache_dir=None, workers=4, multi=False, force=False,
-                 max_depth=3, filemode=None, sort_order=None):
+    def __init__(self, cache_dir=None, workers=None, multi=False, force=False,
+                 max_depth=None, filemode=None, sort_order=None):
         self.multi = multi
-        self.sort_order = sort_order
-        if not self.sort_order:
-            self.sort_order = [LANGUAGE_INDEX, PLUGIN_INDEX, PLUGIN_CONFIDENCE]
+        self.sort_order = sort_order or [LANGUAGE_INDEX, PLUGIN_INDEX, PLUGIN_CONFIDENCE]
         self.force = force
-        self.max_depth = max_depth
-        self.cache_dir = None
+        self.max_depth = max_depth or 3
         self.taskQueue = Queue.PriorityQueue()
         self.listResultQueue = Queue.Queue()
         self.downloadResultQueue = Queue.Queue()
@@ -84,12 +81,11 @@ class Subliminal(object):
         self._workers = workers or 4
         self.filemode = filemode
         self.state = IDLE
+        self.cache_dir = cache_dir
         try:
-            if cache_dir:
-                self.cache_dir = cache_dir
-                if not os.path.isdir(self.cache_dir):
-                    os.makedirs(self.cache_dir)
-                    logger.debug(u'Creating cache directory: %r' % self.cache_dir)
+            if cache_dir and not os.path.isdir(cache_dir):
+                os.makedirs(cache_dir)
+                logger.debug(u'Creating cache directory: %r' % cache_dir)
         except:
             self.cache_dir = None
             logger.error(u'Failed to use the cache directory, continue without it')

@@ -90,6 +90,15 @@ class Subliminal(object):
             self.cache_dir = None
             logger.error(u'Failed to use the cache directory, continue without it')
 
+    def __enter__(self):
+        #TODO: Change default argument auto for list and download to True
+        #or create set another variable to indicate we use with.
+        self.startWorkers()
+        return self
+
+    def __exit__(self, *args):
+        self.stopWorkers()
+
     @property
     def workers(self):
         return self._workers

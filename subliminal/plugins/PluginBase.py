@@ -45,10 +45,8 @@ class PluginBase(object):
 
     @abc.abstractmethod
     def __init__(self, config=None, shared=None):
-        self.config = config
-        if not self.config:
-            self.config = PluginConfig()
-        self.shared = shared
+        self.config = config or PluginConfig()
+        self.shared = shared or {}
         self.logger = logging.getLogger('subliminal.%s' % self.__class__.__name__)
 
     @classmethod

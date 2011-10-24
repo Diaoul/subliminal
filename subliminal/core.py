@@ -294,8 +294,7 @@ class PluginWorker(threading.Thread):
         self.listResultQueue = listResultQueue
         self.downloadResultQueue = downloadResultQueue
         self.logger = logging.getLogger('subliminal.worker')
-        self.shared = {}
-        #TODO: Add a shared data for plugins (logged in xmlrpc server for OpenSubtitles, etc.)
+        self.shared = dict((k, {}) for k in PLUGINS)
 
     def run(self):
         while True:
@@ -307,10 +306,12 @@ class PluginWorker(threading.Thread):
             result = []
             try:
                 if isinstance(task, ListTask):
-                    if getattr(plugins, task.plugin).shared_support and task.plugin not in self.shared:
-                        self.shared[task.plugin] = {}
                     plugin = getattr(plugins, task.plugin)(task.config, self.shared[task.plugin])
-                    result = [(task.video, plugin.list(task.video, task.languages))]
+                    plugin.init()
+                    if not self.shared[task.plugin]:
+                        self.shared[task.plugin] = plugin.shared
+                    subtitles = plugin.list(task.video, task.languages)
+                    result = [(task.video, subtitles)]
                 elif isinstance(task, DownloadTask):
                     for subtitle in task.subtitles:
                         plugin = getattr(plugins, subtitle.plugin)()
@@ -335,10 +336,12 @@ class PluginWorker(threading.Thread):
     
     def terminate(self):
         for plugin, shared in self.shared.iteritems():
-            try:
-                getattr(plugins, plugin).terminate(shared)
-            except:
-                self.logger.error(u'Exception raised when terminating plugin %s' % plugin, exc_info=True)
+            if shared:
+                self.logger.debug(u'Terminating %s' % plugin)
+                try:
+                    getattr(plugins, plugin).terminate(shared)
+                except:
+                    self.logger.error(u'Exception raised when terminating plugin %s' % plugin, exc_info=True)
                 
 
 

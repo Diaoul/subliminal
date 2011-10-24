@@ -49,6 +49,26 @@ class PluginBase(object):
         self.shared = shared or {}
         self.logger = logging.getLogger('subliminal.%s' % self.__class__.__name__)
 
+    @abc.abstractmethod
+    def init(self):
+        """Initiate connexion"""
+
+    @abc.abstractmethod
+    def terminate(cls):
+        """Terminate connexion"""
+
+    @abc.abstractmethod
+    def query(self, *args):
+        """Make the actual query"""
+
+    @abc.abstractmethod
+    def list(self, video, languages):
+        """List subtitles"""
+
+    @abc.abstractmethod
+    def download(self, subtitle):
+        """Download a subtitle"""
+
     @classmethod
     def availableLanguages(cls):
         if not cls.reverted_languages:
@@ -69,18 +89,6 @@ class PluginBase(object):
         if language in cls.availableLanguages():
             return True
         return False
-
-    @abc.abstractmethod
-    def query(self, video, languages):
-        """Make the actual query"""
-
-    @abc.abstractmethod
-    def list(self, video, languages):
-        """List subtitles"""
-
-    @abc.abstractmethod
-    def download(self, subtitle):
-        """Download a subtitle"""
 
     @classmethod
     def getRevertLanguage(cls, language):

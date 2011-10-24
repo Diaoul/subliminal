@@ -81,7 +81,7 @@ class Subliminal(object):
         self.downloadResultQueue = Queue.Queue()
         self._languages = []
         self._plugins = API_PLUGINS
-        self.workers = workers
+        self._workers = workers or 4
         self.filemode = filemode
         self.state = IDLE
         try:
@@ -93,6 +93,16 @@ class Subliminal(object):
         except:
             self.cache_dir = None
             logger.error(u'Failed to use the cache directory, continue without it')
+
+    @property
+    def workers(self):
+        return self._workers
+
+    @workers.setter
+    def workers(self, value):
+        if self.state == RUNNING:
+            raise BadStateError(self.state, IDLE)
+        self._workers = value
 
     @property
     def languages(self):
@@ -240,7 +250,7 @@ class Subliminal(object):
     def startWorkers(self):
         """Create a pool of workers and start them"""
         self.pool = []
-        for _ in range(self.workers):
+        for _ in range(self._workers):
             worker = PluginWorker(self.taskQueue, self.listResultQueue, self.downloadResultQueue)
             worker.start()
             self.pool.append(worker)
@@ -249,7 +259,7 @@ class Subliminal(object):
 
     def stopWorkers(self):
         """Stop workers using a lowest priority stop signal and wait for them to terminate properly"""
-        for _ in range(self.workers):
+        for _ in range(self._workers):
             self.taskQueue.put((10, StopTask()))
         for worker in self.pool:
             worker.join()
@@ -257,7 +267,7 @@ class Subliminal(object):
 
     def pauseWorkers(self):
         """Pause workers using a highest priority stop signal and wait for them to terminate properly"""
-        for _ in range(self.workers):
+        for _ in range(self._workers):
             self.taskQueue.put((0, StopTask()))
         for worker in self.pool:
             worker.join()

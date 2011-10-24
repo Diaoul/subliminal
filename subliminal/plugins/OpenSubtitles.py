@@ -139,6 +139,8 @@ class OpenSubtitles(PluginBase.PluginBase):
     def query(self, searches, filepath):
         self.logger.debug(u'Query uses token %s and search parameters %r' % (self.token, searches))
         results = self.server.SearchSubtitles(self.token, searches)
+        if not results['data']:
+            return []
         subtitles = []
         for result in results['data']:
             language = self.getRevertLanguage(result['SubLanguageID'])

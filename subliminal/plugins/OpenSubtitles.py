@@ -72,23 +72,29 @@ class OpenSubtitles(PluginBase.PluginBase):
 
     def __init__(self, config=None, shared=None):
         super(OpenSubtitles, self).__init__(config, shared)
+        self.server = xmlrpclib.ServerProxy(self.server_url)
 
-    def connect(self):
+    def __enter__(self):
+        self.init()
+        return self
+
+    def __exit__(self, *args):
+        self.terminate(self.shared)
+
+    def init(self):
         if self.shared:
-            self.server = self.shared['server']
             self.token = self.shared['token']
-        else:
-            self.server = xmlrpclib.ServerProxy(self.server_url)
-            result = self.server.LogIn('', '', 'eng', self.user_agent)
-            if result['status'] != '200 OK':
-                raise PluginError('Login failed')
-            self.token = result['token']
-            self.shared['server'] = self.server
-            self.shared['token'] = self.token
+            return
+        self.logger.debug(u'Initiating')
+        result = self.server.LogIn('', '', 'eng', self.user_agent)
+        if result['status'] != '200 OK':
+            raise PluginError('Login failed')
+        self.token = result['token']
+        self.shared['token'] = self.token
 
-    @staticmethod
-    def terminate(shared):
-        shared['server'].LogOut(shared['token'])
+    @classmethod
+    def terminate(cls, shared):
+        xmlrpclib.ServerProxy(cls.server_url).LogOut(shared['token'])
 
     def list(self, video, languages):
         languages = languages & self.availableLanguages()
@@ -98,13 +104,12 @@ class OpenSubtitles(PluginBase.PluginBase):
         if not self.isValidVideo(video):
             self.logger.debug(u'Not a valid video')
             return []
-        self.connect()
         result = self.query(self.create_searches(video, languages), video.path or video.release)
-        if not self.shared:
-            self.disconnect(self.server, self.token)
         return result
 
     def download(self, subtitle):
+        #TODO: Use OpenSubtitles DownloadSubtitles method
+        #TODO: Accept list argument? Because OpenSubtitles allow multiple subtitles download
         try:
             self.downloadFile(subtitle.link, subtitle.path + '.gz')
             with open(subtitle.path, 'wb') as dump:

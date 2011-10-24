@@ -200,11 +200,11 @@ class Subliminal(object):
         for video, subtitles in by_video.iteritems():
             ordered_subtitles = sorted(subtitles, key=lambda s: self.keySubtitles(s, video, order), reverse=True)
             if not self.multi:
-                self.taskQueue.put((5, DownloadTask(video, ordered_subtitles)))
+                self.taskQueue.put((5, DownloadTask(video, list(ordered_subtitles))))
                 task_count += 1
                 continue
             for _, by_language in groupby(ordered_subtitles, lambda s: s.language):
-                self.taskQueue.put((5, DownloadTask(video, by_language)))
+                self.taskQueue.put((5, DownloadTask(video, list(by_language))))
                 task_count += 1
         downloaded = []
         for _ in range(task_count):

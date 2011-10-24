@@ -278,7 +278,7 @@ class Subliminal(object):
             worker.join()
         self.state = PAUSED
         if self.taskQueue.empty():
-            self.state = STOPPED
+            self.state = IDLE
 
     def addTask(self, task):
         if not isinstance(task, Task) or isinstance(task, StopTask):

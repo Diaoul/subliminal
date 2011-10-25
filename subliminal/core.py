@@ -91,13 +91,11 @@ class Subliminal(object):
             logger.error(u'Failed to use the cache directory, continue without it')
 
     def __enter__(self):
-        #TODO: Change default argument auto for list and download to True
-        #or create set another variable to indicate we use with.
         self.startWorkers()
         return self
 
     def __exit__(self, *args):
-        self.stopWorkers()
+        self.stopWorkers(0)
 
     @property
     def workers(self):
@@ -141,13 +139,13 @@ class Subliminal(object):
             if not p in self._plugins:
                 self._plugins.append(p)
 
-    def listSubtitles(self, entries, auto=True):
+    def listSubtitles(self, entries, auto=False):
         """
         Search subtitles within the plugins and return all found subtitles in a list of Subtitle object.
 
         Attributes:
             entries -- filepath or folderpath of video file or a list of that
-            auto    -- automaticaly manage workers"""
+            auto    -- automaticaly manage workers (default to False)"""
         if auto:
             if self.state != IDLE:
                 raise BadStateError(self.state, IDLE)
@@ -194,14 +192,14 @@ class Subliminal(object):
             self.stopWorkers()
         return subtitles
 
-    def downloadSubtitles(self, entries, auto=True):
+    def downloadSubtitles(self, entries, auto=False):
         """
         Download subtitles using the plugins preferences and languages. Also use internal algorithm to find
         the best match inside a plugin.
 
         Attributes:
             entries -- filepath or folderpath of video file or a list of that
-            auto    -- automaticaly manage workers"""
+            auto    -- automaticaly manage workers (default to False)"""
         if auto:
             if self.state != IDLE:
                 raise BadStateError(self.state, IDLE)
@@ -229,6 +227,7 @@ class Subliminal(object):
         return downloaded
 
     def keySubtitles(self, subtitle, video, order):
+        """Create a key to sort subtitle using preferences"""
         key = ''
         for sort_item in order:
             if sort_item == LANGUAGE_INDEX:
@@ -254,6 +253,8 @@ class Subliminal(object):
 
     def startWorkers(self):
         """Create a pool of workers and start them"""
+        if self.state == RUNNING:
+            raise BadStateError(self.state, IDLE)
         self.pool = []
         for _ in range(self._workers):
             worker = PluginWorker(self.taskQueue, self.listResultQueue, self.downloadResultQueue)
@@ -262,25 +263,22 @@ class Subliminal(object):
             logger.debug(u'Worker %s added to the pool' % worker.name)
         self.state = RUNNING
 
-    def stopWorkers(self):
+    def stopWorkers(self, priority=10):
         """Stop workers using a lowest priority stop signal and wait for them to terminate properly"""
         for _ in range(self._workers):
-            self.taskQueue.put((10, StopTask()))
+            self.taskQueue.put((priority, StopTask()))
         for worker in self.pool:
             worker.join()
         self.state = IDLE
+        if not self.taskQueue.empty():
+            self.state = PAUSED
 
     def pauseWorkers(self):
         """Pause workers using a highest priority stop signal and wait for them to terminate properly"""
-        for _ in range(self._workers):
-            self.taskQueue.put((0, StopTask()))
-        for worker in self.pool:
-            worker.join()
-        self.state = PAUSED
-        if self.taskQueue.empty():
-            self.state = IDLE
+        self.stopWorkers(0)
 
     def addTask(self, task):
+        """Add a task with default priority"""
         if not isinstance(task, Task) or isinstance(task, StopTask):
             raise WrongTaskError()
         self.taskQueue.put((5, task))
@@ -294,31 +292,37 @@ class PluginWorker(threading.Thread):
         self.listResultQueue = listResultQueue
         self.downloadResultQueue = downloadResultQueue
         self.logger = logging.getLogger('subliminal.worker')
-        self.shared = dict((k, {}) for k in PLUGINS)
+        self.plugins = {}
 
     def run(self):
         while True:
             task = self.taskQueue.get()[1]
             if isinstance(task, StopTask):
-                self.logger.debug(u'Poison pill received, terminating thread %s' % self.name)
+                self.logger.debug(u'Poison pill received in thread %s' % self.name)
                 self.taskQueue.task_done()
                 break
             result = []
             try:
                 if isinstance(task, ListTask):
-                    plugin = getattr(plugins, task.plugin)(task.config, self.shared[task.plugin])
-                    plugin.init()
-                    if not self.shared[task.plugin]:
-                        self.shared[task.plugin] = plugin.shared
+                    if task.plugin not in self.plugins:  # init the plugin
+                        self.plugins[task.plugin] = getattr(plugins, task.plugin)()
+                        self.plugins[task.plugin].init()
+                    # Retrieve the plugin list subtitles and return [(video, [subtitle])]
+                    plugin = self.plugins[task.plugin]
+                    plugin.config = task.config
                     subtitles = plugin.list(task.video, task.languages)
                     result = [(task.video, subtitles)]
                 elif isinstance(task, DownloadTask):
+                    # Attempt to download one subtitle from the given list
                     for subtitle in task.subtitles:
-                        plugin = getattr(plugins, subtitle.plugin)()
+                        if subtitle.plugin not in self.plugins:  # init the plugin
+                            self.plugins[subtitle.plugin] = getattr(plugins, subtitle.plugin)()
+                            self.plugins[subtitle.plugin].init()
+                        plugin = self.plugins[subtitle.plugin]
                         try:
                             result = [plugin.download(subtitle)]
                             break
-                        except DownloadFailedError as e:
+                        except DownloadFailedError as e:  # try the next one
                             self.logger.warning(u'Could not download subtitle %r, trying next' % subtitle)
                             continue
                     if not result:
@@ -326,6 +330,7 @@ class PluginWorker(threading.Thread):
             except:
                 self.logger.error(u'Exception raised in worker %s' % self.name, exc_info=True)
             finally:
+                # Put the result in the correct queue
                 if isinstance(task, ListTask):
                     self.listResultQueue.put(result)
                 elif isinstance(task, DownloadTask):
@@ -335,13 +340,12 @@ class PluginWorker(threading.Thread):
         self.logger.debug(u'Thread %s terminated' % self.name)
     
     def terminate(self):
-        for plugin, shared in self.shared.iteritems():
-            if shared:
-                self.logger.debug(u'Terminating %s' % plugin)
-                try:
-                    getattr(plugins, plugin).terminate(shared)
-                except:
-                    self.logger.error(u'Exception raised when terminating plugin %s' % plugin, exc_info=True)
+        """Terminate instanciated plugins"""
+        for plugin_name, plugin in self.plugins.iteritems():
+            try:
+                plugin.terminate()
+            except:
+                self.logger.error(u'Exception raised when terminating plugin %s' % plugin_name, exc_info=True)
                 
 
 

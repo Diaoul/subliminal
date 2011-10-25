@@ -68,7 +68,7 @@ class Subliminal(object):
     """Main Subliminal class"""
 
     def __init__(self, cache_dir=None, workers=None, multi=False, force=False,
-                 max_depth=None, filemode=None, sort_order=None):
+                 max_depth=None, filemode=None, sort_order=None, plugins=None, languages=None):
         self.multi = multi
         self.sort_order = sort_order or [LANGUAGE_INDEX, PLUGIN_INDEX, PLUGIN_CONFIDENCE]
         self.force = force
@@ -76,8 +76,8 @@ class Subliminal(object):
         self.taskQueue = Queue.PriorityQueue()
         self.listResultQueue = Queue.Queue()
         self.downloadResultQueue = Queue.Queue()
-        self._languages = []
-        self._plugins = API_PLUGINS
+        self.languages = languages or []
+        self.plugins = plugins or API_PLUGINS
         self._workers = workers or 4
         self.filemode = filemode
         self.state = IDLE

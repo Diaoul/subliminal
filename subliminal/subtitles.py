@@ -52,6 +52,7 @@ class Subtitle(object):
 
 
 def get_subtitle_path(video_path, language, multi):
+    """Create the subtitle path from the given video path using language if multi"""
     if not os.path.exists(video_path):
         path = os.path.splitext(os.path.basename(video_path))[0]
     else:

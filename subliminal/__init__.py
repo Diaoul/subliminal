@@ -19,11 +19,18 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-__all__ = ['FORMATS', 'LANGUAGES', 'PLUGINS', 'API_PLUGINS', 'Subliminal', 'Subtitle', 'scan']
+
+__title__ = 'subliminal'
+__version__ = '1.1'
+__author__ = 'Antoine Bertin'
+__license__ = 'LGPLv3'
+__copyright__ = 'Copyright 2010-2011 Antoine Bertin'
+
+
 from exceptions import *
 from videos import *
 from tasks import *
-from subtitle import *
+from subtitles import *
 from core import *
 from api import *
-from version import __version__
+from plugins import *

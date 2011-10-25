@@ -26,7 +26,6 @@ import subliminal
 import logging
 import mimetypes
 import os
-import os.path
 import sys
 
 
@@ -57,21 +56,16 @@ def main():
 
     # Initialize the instance
     subli = subliminal.Subliminal(cache_dir=args.cache_dir, workers=args.workers, multi=args.multi, force=args.force, max_depth=3)
-    if args.plugins:
-        subli.plugins = args.plugins
-    if args.languages:
-        subli.languages = args.languages
-    try:
+    with subliminal.Subliminal(cache_dir=args.cache_dir, workers=args.workers, multi=args.multi, force=args.force, 
+                               max_depth=3, plugins=args.plugins, languages=args.languages) as subli:
         subtitles = subli.downloadSubtitles([unicode(x) for x in args.paths])
-    finally:
-        subli.stopWorkers()
-    if len(subtitles) == 0:
+    if not subtitles:
         if not args.quiet:
             sys.stderr.write('No subtitles found\n')
         exit(1)
     if not args.quiet:
         print '*' * 50
-        print 'Downloaded %s subtitles' % len(subtitles)
+        print 'Downloaded %d subtitles' % len(subtitles)
         for subtitle in subtitles:
             print subtitle
         print '*' * 50

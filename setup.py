@@ -21,13 +21,15 @@
 #
 
 from setuptools import setup
+import subliminal
 
 
-execfile('subliminal/version.py')
 setup(name='subliminal',
-    version=__version__,
+    version=subliminal.__version__,
     license='LGPLv3',
-    description='Subliminal - Subtitles, faster than your thoughts',
+    description='Subtitles, faster than your thoughts',
+    long_description=open('README.md').read() + '\n\n' +
+                     open('NEWS.md').read(),
     classifiers=['Development Status :: 4 - Beta',
         'License :: OSI Approved :: GNU Library or Lesser General Public License (LGPL)',
         'Intended Audience :: Developers',
@@ -39,7 +41,7 @@ setup(name='subliminal',
     author='Antoine Bertin',
     author_email='diaoulael@gmail.com',
     url='https://github.com/Diaoul/subliminal',
-    packages=['subliminal', 'subliminal/plugins'],
+    packages=['subliminal'],
     scripts=['scripts/subliminal'],
     py_modules=['subliminal'],
-    install_requires=['BeautifulSoup>=3.2.0', 'guessit>=0.2'])
+    install_requires=['BeautifulSoup>=3.2.0', 'guessit>=0.2', 'requests>=0.7.3', 'suds>=0.4'])

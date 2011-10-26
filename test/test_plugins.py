@@ -25,6 +25,7 @@ import logging
 import os
 from subliminal.utils import PluginConfig
 from subliminal.plugins import *
+from subliminal import videos
 
 
 # Set up logging
@@ -41,33 +42,18 @@ if not os.path.exists(cache_dir):
     os.mkdir(cache_dir)
 
 
-class Addic7edTestCase(unittest.TestCase):
-    def setUp(self):
-        from subliminal.plugins import Addic7ed
-        self.config = {'multi': True, 'cache_dir': cache_dir, 'files_mode': -1}
-        self.plugin = Addic7ed(self.config)
-        self.languages = set(['en', 'fr'])
-
-    def test_list(self):
-        list = self.plugin.list(test_file, self.languages)
-        assert list
-
-    def test_download(self):
-        subtitle = self.plugin.list(test_file, self.languages)[0]
-        if os.path.exists(subtitle.path):
-            os.remove(subtitle.path)
-        download = self.plugin.download(subtitle)
-        assert download
-
-
 class BierDopjeTestCase(unittest.TestCase):
     query_tests = ['test_query_series', 'test_query_bad_series', 'test_query_wrong_languages',
                    'test_query_tvdbid', 'test_query_wrong_tvdbid', 'test_query_series_and_tvdbid']
+    list_tests = ['test_list_episode', 'test_list_movie', 'test_list_wrong_languages']
+    download_tests = ['test_download']
 
     def setUp(self):
         self.config = PluginConfig(multi=True, cache_dir=cache_dir)
-        self.languages = ['en', 'nl']
-        self.wrong_languages = ['zz', 'es']
+        self.episode_path = u'The Big Bang Theory/Season 05/S05E06 - The Rhinitis Revelation - HD TV.mkv'
+        self.movie_path = u'Inception (2010)/Inception - 1080p.mkv'
+        self.languages = set(['en', 'nl'])
+        self.wrong_languages = set(['zz', 'es'])
         self.fake_file = u'/tmp/fake_file'
         self.series = 'The Big Bang Theory'
         self.wrong_series = 'No Existent Show Name'
@@ -107,108 +93,122 @@ class BierDopjeTestCase(unittest.TestCase):
         self.assertTrue(len(results) == 0)
 
     def test_list_episode(self):
+        episode = videos.factory(self.episode_path)
         with BierDopje(self.config) as bierdopje:
-            results = bierdopje.list(test_file, ['en', 'nl'])
+            results = bierdopje.list(episode, self.languages)
         self.assertTrue(len(results) > 0)
 
-    def test_list_episode(self):
+    def test_list_movie(self):
+        movie = videos.factory(self.movie_path)
         with BierDopje(self.config) as bierdopje:
-            results = bierdopje.list(test_file, ['en', 'nl'])
-        self.assertTrue(len(results) > 0)
+            results = bierdopje.list(movie, self.languages)
+        self.assertTrue(len(results) == 0)
+
+    def test_list_wrong_languages(self):
+        episode = videos.factory(self.episode_path)
+        with BierDopje(self.config) as bierdopje:
+            results = bierdopje.list(episode, self.wrong_languages)
+        self.assertTrue(len(results) == 0)
 
     def test_download(self):
-        subtitle = self.plugin.list(test_file, self.languages)[0]
-        if os.path.exists(subtitle.path):
-            os.remove(subtitle.path)
-        download = self.plugin.download(subtitle)
-        assert download
+        with BierDopje(self.config) as bierdopje:
+            subtitle = bierdopje.list(self.episode_path, self.languages)[0]
+            if os.path.exists(subtitle.path):
+                os.remove(subtitle.path)
+            result = bierdopje.download(subtitle)
+        self.assertTrue(len(results) == 1)
+        self.assertTrue(os.path.exists(subtitle.path))
 
 
 class OpenSubtitlesTestCase(unittest.TestCase):
+    query_tests = ['test_query_series', 'test_query_bad_series', 'test_query_wrong_languages',
+                   'test_query_tvdbid', 'test_query_wrong_tvdbid', 'test_query_series_and_tvdbid']
+    list_tests = ['test_list_episode', 'test_list_movie', 'test_list_wrong_languages']
+    download_tests = ['test_download']
+
     def setUp(self):
-        from subliminal.plugins import OpenSubtitles
-        self.config = {'multi': True, 'cache_dir': cache_dir, 'files_mode': -1}
-        self.plugin = OpenSubtitles(self.config)
+        self.config = PluginConfig(multi=True, cache_dir=cache_dir)
+        self.episode_path = u'The Big Bang Theory/Season 05/S05E06 - The Rhinitis Revelation - HD TV.mkv'
+        self.movie_path = u'Inception (2010)/Inception - 1080p.mkv'
+        self.existing_episode_path = u'The Big Bang Theory/Season 05/S05E06 - The Rhinitis Revelation - HD TV.mkv'
+        self.existing_movie_path = u'Inception (2010)/Inception - 1080p.mkv'
         self.languages = set(['en', 'fr'])
+        self.wrong_languages = set(['zz', 'yy'])
+        self.fake_file = u'/tmp/fake_file'
+        self.series = 'The Big Bang Theory'
+        self.wrong_series = 'No Existent Show Name'
+        self.season = 5
+        self.episode = 6
+        self.tvdbid = 80379
+        self.wrong_tvdbid = 9999999999
 
-    def test_list(self):
-        list = self.plugin.list(test_file, self.languages)
-        assert list
+    def test_query_(self):
+        with OpenSubtitles(self.config) as bierdopje:
+            results = bierdopje.query(self.season, self.episode, self.languages, self.fake_file, series=self.series)
+        self.assertTrue(len(results) > 0)
 
-    def test_download(self):
-        subtitle = self.plugin.list(test_file, self.languages)[0]
-        if os.path.exists(subtitle.path):
-            os.remove(subtitle.path)
-        download = self.plugin.download(subtitle)
-        assert download
+    def test_query_bad_series(self):
+        with BierDopje(self.config) as bierdopje:
+            results = bierdopje.query(self.season, self.episode, self.languages, self.fake_file, series=self.wrong_series)
+        self.assertTrue(len(results) == 0)
 
+    def test_query_wrong_languages(self):
+        with BierDopje(self.config) as bierdopje:
+            results = bierdopje.query(self.season, self.episode, self.wrong_languages, self.fake_file, series=self.series)
+        self.assertTrue(len(results) == 0)
 
-class SubsWikiTestCase(unittest.TestCase):
-    def setUp(self):
-        from subliminal.plugins import SubsWiki
-        self.config = {'multi': True, 'cache_dir': cache_dir, 'files_mode': -1}
-        self.plugin = SubsWiki(self.config)
-        self.languages = set(['en', 'fr', 'es', 'pt'])
+    def test_query_tvdbid(self):
+        with BierDopje(self.config) as bierdopje:
+            results = bierdopje.query(self.season, self.episode, self.languages, self.fake_file, tvdbid=self.tvdbid)
+        self.assertTrue(len(results) > 0)
 
-    def test_list(self):
-        list = self.plugin.list(test_file, self.languages)
-        assert list
+    def test_query_series_and_tvdbid(self):
+        with BierDopje(self.config) as bierdopje:
+            results = bierdopje.query(self.season, self.episode, self.languages, self.fake_file, series=self.series, tvdbid=self.tvdbid)
+        self.assertTrue(len(results) > 0)
 
-    def test_download(self):
-        subtitle = self.plugin.list(test_file, self.languages)[0]
-        if os.path.exists(subtitle.path):
-            os.remove(subtitle.path)
-        download = self.plugin.download(subtitle)
-        assert download
+    def test_query_wrong_tvdbid(self):
+        with BierDopje(self.config) as bierdopje:
+            results = bierdopje.query(self.season, self.episode, self.languages, self.fake_file, tvdbid=self.wrong_tvdbid)
+        self.assertTrue(len(results) == 0)
 
+    def test_list_episode(self):
+        episode = videos.factory(self.episode_path)
+        with BierDopje(self.config) as bierdopje:
+            results = bierdopje.list(episode, self.languages)
+        self.assertTrue(len(results) > 0)
 
-class SubtitulosTestCase(unittest.TestCase):
-    def setUp(self):
-        from subliminal.plugins import Subtitulos
-        self.config = {'multi': True, 'cache_dir': cache_dir, 'files_mode': -1}
-        self.plugin = Subtitulos(self.config)
-        self.languages = set(['en', 'fr', 'es', 'pt'])
+    def test_list_movie(self):
+        movie = videos.factory(self.movie_path)
+        with BierDopje(self.config) as bierdopje:
+            results = bierdopje.list(movie, self.languages)
+        self.assertTrue(len(results) == 0)
 
-    def test_list(self):
-        list = self.plugin.list(test_file, self.languages)
-        assert list
-
-    def test_download(self):
-        subtitle = self.plugin.list(test_file, self.languages)[0]
-        if os.path.exists(subtitle.path):
-            os.remove(subtitle.path)
-        download = self.plugin.download(subtitle)
-        assert download
-
-
-class TheSubDBTestCase(unittest.TestCase):
-    def setUp(self):
-        from subliminal.plugins import TheSubDB
-        self.config = {'multi': True, 'cache_dir': cache_dir, 'files_mode': -1}
-        self.plugin = TheSubDB(self.config)
-        self.languages = set(['en', 'fr', 'es', 'pt'])
-
-    def test_list(self):
-        list = self.plugin.list(test_file, self.languages)
-        assert list
+    def test_list_wrong_languages(self):
+        episode = videos.factory(self.episode_path)
+        with BierDopje(self.config) as bierdopje:
+            results = bierdopje.list(episode, self.wrong_languages)
+        self.assertTrue(len(results) == 0)
 
     def test_download(self):
-        subtitle = self.plugin.list(test_file, self.languages)[0]
-        if os.path.exists(subtitle.path):
-            os.remove(subtitle.path)
-        download = self.plugin.download(subtitle)
-        assert download
+        with BierDopje(self.config) as bierdopje:
+            subtitle = bierdopje.list(self.episode_path, self.languages)[0]
+            result = bierdopje.download(subtitle)
+        self.assertTrue(len(results) == 1)
+
+
 
 def query_suite():
     suite = unittest.TestSuite()
     suite.addTests(map(BierDopjeTestCase, BierDopjeTestCase.query_tests))
-    #suite.addTest(BierDopjeTestCase('test_list'))
-    #suite.addTest(BierDopjeTestCase('test_download'))
-    #suite.addTest(GlobalTestCase('test_list_folder'))
-    #suite.addTest(GlobalTestCase('test_download_file'))
-    #suite.addTest(GlobalTestCase('test_download_folder'))
+    return suite
+
+def list_suite():
+    suite = unittest.TestSuite()
+    suite.addTests(map(BierDopjeTestCase, BierDopjeTestCase.list_tests))
     return suite
 
 if __name__ == '__main__':
-    unittest.TextTestRunner(verbosity=2).run(query_suite())
+    #unittest.TextTestRunner(verbosity=2).run(query_suite())
+    unittest.TextTestRunner(verbosity=2).run(list_suite())
 

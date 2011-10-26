@@ -370,6 +370,57 @@ class BierDopje(PluginBase):
         return subtitle
 
 
+class GetSubtitle(PluginBase):
+    site_url = 'http://www.subtitles.com.br/'
+    site_name = 'GetSubtitle'
+    server_url = 'http://api.getsubtitle.com/server.php?wsdl'
+    api_based = True
+    languages = {'sq': 'ALB', 'ar': 'ARA', 'hy': 'ARM', 'bs': 'BOS', 'bg': 'BUL', 'ca': 'CAT', 'zh': 'CHI', 'hr': 'HRV',
+                 'cs': 'CZE', 'da': 'DAN', 'nl': 'NLD', 'en': 'ENG', 'eo': 'ESP', 'et': 'EST', 'fi': 'FIN', 'fr': 'FRA',
+                 'gl': 'GLG', 'ka': 'GEO', 'de': 'DEU', 'el': 'GRC', 'he': 'ISR', 'hi': 'HIN', 'hu': 'HUN', 'is': 'ISL',
+                 'id': 'IND', 'it': 'ITA', 'ja': 'JPN', 'kk': 'KAZ', 'ko': 'KOR', 'lv': 'LVA', 'lt': 'LIT', 'lb': 'LTZ',
+                 'mk': 'MKD', 'ms': 'MAY', 'no': 'NOR', 'oc': 'OCC', 'pl': 'POL', 'pt': 'POR', 'ro': 'RUM', 'ru': 'RUS',
+                 'sr': 'ZAF', 'sk': 'SLK', 'sl': 'SLV', 'es': 'SPA', 'sv': 'SWE', 'th': 'THA', 'tr': 'TUR', 'uk': 'UKR',
+                 'ur': 'URD', 'vi': 'VTN'}
+    reverted_languages = False
+    videos = [Movie]
+    require_video = False
+    max_results = 100
+
+    def __init__(self, config=None):
+        super(GetSubtitle, self).__init__(config)
+
+    def __enter__(self):
+        self.init()
+        return self
+
+    def __exit__(self, *args):
+        pass
+
+    def init(self):
+        self.logger.debug(u'Initializing')
+        self.server = suds.client.Client(self.server_url)
+
+    def terminate(self):
+        self.logger.debug(u'Terminating')
+
+    def query(self, *args):
+        #TODO
+
+    def list(self, video, languages):
+        languages = languages & self.availableLanguages()
+        if not languages:
+            self.logger.debug(u'No language available')
+            return []
+        if not self.isValidVideo(video):
+            self.logger.debug(u'Not a valid video')
+            return []
+        #TODO
+
+    def download(self, subtitle):
+        #TODO
+
+
 '''
 class Addic7ed(PluginBase.PluginBase):
     site_url = 'http://www.addic7ed.com'

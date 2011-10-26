@@ -31,17 +31,18 @@ import unicodedata
 import re
 import zipfile
 import requests
+import urllib
 from hashlib import md5, sha256
 try:
     import cPickle as pickle
 except ImportError:
     import pickle
 from xml.dom import minidom
-from BeautifulSoup import BeautifulSoup
+import BeautifulSoup
 from utils import PluginConfig
 from subtitles import Subtitle, get_subtitle_path, EXTENSIONS as SUBTITLE_EXTENSIONS
 from videos import *
-from exceptions import DownloadFailedError, MissingLanguageError
+from exceptions import DownloadFailedError, MissingLanguageError, PluginError
 
 
 class PluginBase(object):
@@ -279,8 +280,15 @@ class BierDopje(PluginBase):
     def __init__(self, config=None):
         super(BierDopje, self).__init__(config)
         self.showids = {}
-        if config and config.cache_dir:
+        if self.config and self.config.cache_dir:
             self.initCache()
+
+    def __enter__(self):
+        self.init()
+        return self
+
+    def __exit__(self, *args):
+        self.terminate()
 
     def init(self):
         self.session = requests.session(timeout=10)
@@ -289,51 +297,57 @@ class BierDopje(PluginBase):
         pass
 
     def initCache(self):
-        if not self.config or self.config.cache_dir:
+        self.logger.debug(u'Initiating cache...')
+        if not self.config or not self.config.cache_dir:
             raise PluginError('Cache directory is required')
-        self.showids_cache = os.path.join(config.cache_dir, 'bierdopje_showids.cache')
+        self.showids_cache = os.path.join(self.config.cache_dir, 'bierdopje_showids.cache')
         if not os.path.exists(self.showids_cache):
             self.saveToCache()
 
     def saveToCache(self):
+        self.logger.debug(u'Saving showids to cache...')
         with self.lock:
             with open(self.showids_cache, 'w') as f:
-                self.logger.debug(u'Writing showid %d to cache for showname %s' % (showid, showname))
                 pickle.dump(self.showids, f)
 
     def loadFromCache(self):
+        self.logger.debug(u'Loading showids from cache...')
         with self.lock:
             with open(self.showids_cache, 'r') as f:
                 self.showids = pickle.load(f)
 
     def query(self, season, episode, languages, filepath, tvdbid=None, series=None):
         self.initCache()
-        showid = None
-        if series.lower() in self.showids:  # from cache
-            showid = self.showids[series]
-            confidence
-        elif tvdbid:  # from tvdbid
-            r = self.session.get('%sGetShowByTVDBID/%d' % (self.server_url, tvdbid))
-        elif series.lower() and season and episode:  # from series
-            r = self.session.get('%sGetShowByName/%s' % (self.server_url, urllib.quote(series.lower())))
+        self.loadFromCache()
+        if not tvdbid:
+            if series.lower() in self.showids:  # from cache
+                request_id = self.showids[series.lower()]
+                self.logger.debug(u'Retreived showid %d for %s from cache' % (request_id, series))
+            else:  # query to get showid
+                self.logger.debug(u'Getting showid from show name %s...' % series)
+                r = self.session.get('%sGetShowByName/%s' % (self.server_url, urllib.quote(series.lower())))
+                soup = BeautifulSoup.BeautifulStoneSoup(r.content)
+                if soup.status.contents[0] == 'false':
+                    self.logger.debug(u'Could not find show %s' % series)
+                    return []
+                request_id = int(soup.showid.contents[0])
+                showname = soup.showname.contents[0]
+                self.showids[series.lower()] = request_id
+                self.saveToCache()
+            request_source = 'showid'
+            request_is_tvdbid = 'false'
         else:
-            raise ValueError('Wrong parameters combination')
-        if not showid:
-            if r.status_code != 200:
-                self.logger.error(u'Received status code %d' % r.status_code)
-                return []
-            soup = BeautifulSoup.BeautifulStoneSoup(r.content)
-            if soup.status.contents[0] == 'false':
-                self.logger.debug(u'Could not find show from tvdbid %d' % tvdbid)
-                return []
-            showid = int(soup.showid.contents[0])
-            showname = soup.showname.contents[0]
-            self.showids[showname.lower()] = showid
-            self.saveToCache()
+            request_id = tvdbid
+            request_source = 'tvdbid'
+            request_is_tvdbid = 'true'
         subtitles = []
         for language in languages:
-            r = requests.get('%sGetAllSubsFor/%s/%s/%s/%s' % (self.server_url, showid, season, episode, language))
+            self.logger.debug(u'Getting subtitles for %s %d season %d episode %d with language %s' % (request_source, request_id, season, episode, language))
+            r = self.session.get('%sGetAllSubsFor/%s/%s/%s/%s/%s' % (self.server_url, request_id, season, episode, language, request_is_tvdbid))
             soup = BeautifulSoup.BeautifulStoneSoup(r.content)
+            if soup.status.contents[0] == 'false':
+                self.logger.debug(u'Could not get subtitles for %s %d season %d episode %d with language %s' % (request_source, request_id, season, episode, language))
+                continue
             path = get_subtitle_path(filepath, language, self.config.multi)
             for result in soup.results('result'):
                 subtitle = Subtitle(path, self.__class__.__name__, language, result.downloadlink.contents[0], result.filename.contents[0])
@@ -348,8 +362,8 @@ class BierDopje(PluginBase):
         if not self.isValidVideo(video):
             self.logger.debug(u'Not a valid video')
             return []
-        result = self.query(video.season, video.episode, languages, video.path or video.release, video.tvdbid, video.series)
-        return result
+        results = self.query(video.season, video.episode, languages, video.path or video.release, video.tvdbid, video.series)
+        return results
 
     def download(self, subtitle):
         self.downloadFile(subtitle.link, subtitle.path)

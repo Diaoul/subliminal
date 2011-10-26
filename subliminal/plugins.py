@@ -30,6 +30,7 @@ import threading
 import unicodedata
 import re
 import zipfile
+import requests
 from hashlib import md5, sha256
 try:
     import cPickle as pickle
@@ -204,6 +205,35 @@ class OpenSubtitles(PluginBase):
         self.logger.debug(u'Terminating')
         self.server.LogOut(self.token)
 
+    def create_searches(self, video, languages):
+        """Create the search array, use fulltext search as last resort"""
+        searches = []
+        if video.exists:
+            searches.append({'moviehash': video.hashes['OpenSubtitles'], 'moviebytesize': str(video.size)})
+        if video.imdbid:
+            searches.append({'imdbid': video.imdbid})
+        if not searches and isinstance(video, Episode):
+            searches.append({'query': video.series})
+        if not searches and isinstance(video, Movie):
+            searches.append({'query': video.title})
+        for search in searches:
+            search['sublanguageid'] = ','.join([self.getLanguage(l) for l in languages])
+        return searches
+
+    def query(self, searches, filepath):
+        self.logger.debug(u'Query uses token %s and search parameters %r' % (self.token, searches))
+        results = self.server.SearchSubtitles(self.token, searches)
+        if not results['data']:
+            return []
+        subtitles = []
+        for result in results['data']:
+            language = self.getRevertLanguage(result['SubLanguageID'])
+            path = get_subtitle_path(filepath, language, self.config.multi)
+            confidence = 1 - float(self.confidence_order.index(result['MatchedBy'])) / float(len(self.confidence_order))
+            subtitle = Subtitle(path, self.__class__.__name__, language, result['SubDownloadLink'], result['SubFileName'], confidence)
+            subtitles.append(subtitle)
+        return subtitles
+
     def list(self, video, languages):
         languages = languages & self.availableLanguages()
         if not languages:
@@ -234,34 +264,97 @@ class OpenSubtitles(PluginBase):
                 os.remove(subtitle.path + '.gz')
         return subtitle
 
-    def create_searches(self, video, languages):
-        """Create the search array, use fulltext search as last resort"""
-        searches = []
-        if video.exists:
-            searches.append({'moviehash': video.hashes['OpenSubtitles'], 'moviebytesize': str(video.size)})
-        if video.imdbid:
-            searches.append({'imdbid': video.imdbid})
-        if not searches and isinstance(video, Episode):
-            searches.append({'query': video.series})
-        if not searches and isinstance(video, Movie):
-            searches.append({'query': video.title})
-        for search in searches:
-            search['sublanguageid'] = ','.join([self.getLanguage(l) for l in languages])
-        return searches
 
-    def query(self, searches, filepath):
-        self.logger.debug(u'Query uses token %s and search parameters %r' % (self.token, searches))
-        results = self.server.SearchSubtitles(self.token, searches)
-        if not results['data']:
-            return []
+class BierDopje(PluginBase):
+    site_url = 'http://bierdopje.com'
+    site_name = 'BierDopje'
+    server_url = 'http://api.bierdopje.com/A2B638AC5D804C2E/'
+    api_based = True
+    languages = {'en': 'en', 'nl': 'nl'}
+    reverted_languages = False
+    videos = [Episode]
+    require_video = False
+    confidence_order = ['tvdbid', 'imdbid', 'fulltext']
+
+    def __init__(self, config=None):
+        super(BierDopje, self).__init__(config)
+        self.showids = {}
+        if config and config.cache_dir:
+            self.initCache()
+
+    def init(self):
+        self.session = requests.session(timeout=10)
+
+    def terminate(self):
+        pass
+
+    def initCache(self):
+        if not self.config or self.config.cache_dir:
+            raise PluginError('Cache directory is required')
+        self.showids_cache = os.path.join(config.cache_dir, 'bierdopje_showids.cache')
+        if not os.path.exists(self.showids_cache):
+            self.saveToCache()
+
+    def saveToCache(self):
+        with self.lock:
+            with open(self.showids_cache, 'w') as f:
+                self.logger.debug(u'Writing showid %d to cache for showname %s' % (showid, showname))
+                pickle.dump(self.showids, f)
+
+    def loadFromCache(self):
+        with self.lock:
+            with open(self.showids_cache, 'r') as f:
+                self.showids = pickle.load(f)
+
+    def query(self, season, episode, languages, filepath, tvdbid=None, series=None):
+        self.initCache()
+        showid = None
+        if series.lower() in self.showids:  # from cache
+            showid = self.showids[series]
+            confidence
+        elif tvdbid:  # from tvdbid
+            r = self.session.get('%sGetShowByTVDBID/%d' % (self.server_url, tvdbid))
+        elif series.lower() and season and episode:  # from series
+            r = self.session.get('%sGetShowByName/%s' % (self.server_url, urllib.quote(series.lower())))
+        else:
+            raise ValueError('Wrong parameters combination')
+        if not showid:
+            if r.status_code != 200:
+                self.logger.error(u'Received status code %d' % r.status_code)
+                return []
+            soup = BeautifulSoup.BeautifulStoneSoup(r.content)
+            if soup.status.contents[0] == 'false':
+                self.logger.debug(u'Could not find show from tvdbid %d' % tvdbid)
+                return []
+            showid = int(soup.showid.contents[0])
+            showname = soup.showname.contents[0]
+            self.showids[showname.lower()] = showid
+            self.saveToCache()
         subtitles = []
-        for result in results['data']:
-            language = self.getRevertLanguage(result['SubLanguageID'])
+        for language in languages:
+            r = requests.get('%sGetAllSubsFor/%s/%s/%s/%s' % (self.server_url, showid, season, episode, language))
+            soup = BeautifulSoup.BeautifulStoneSoup(r.content)
             path = get_subtitle_path(filepath, language, self.config.multi)
-            confidence = 1 - float(self.confidence_order.index(result['MatchedBy'])) / float(len(self.confidence_order))
-            subtitle = Subtitle(path, self.__class__.__name__, language, result['SubDownloadLink'], result['SubFileName'], confidence)
-            subtitles.append(subtitle)
+            for result in soup.results('result'):
+                subtitle = Subtitle(path, self.__class__.__name__, language, result.downloadlink.contents[0], result.filename.contents[0])
+                subtitles.append(subtitle)
         return subtitles
+
+    def list(self, video, languages):
+        languages = languages & self.availableLanguages()
+        if not languages:
+            self.logger.debug(u'No language available')
+            return []
+        if not self.isValidVideo(video):
+            self.logger.debug(u'Not a valid video')
+            return []
+        result = self.query(video.season, video.episode, languages, video.path or video.release, video.tvdbid, video.series)
+        return result
+
+    def download(self, subtitle):
+        self.downloadFile(subtitle.link, subtitle.path)
+        return subtitle
+
 
 '''
 class Addic7ed(PluginBase.PluginBase):
@@ -368,108 +461,6 @@ class Addic7ed(PluginBase.PluginBase):
         self.downloadFile(subtitle.link, subtitle.path)
         return subtitle
 
-
-class BierDopje(PluginBase.PluginBase):
-    site_url = 'http://bierdopje.com'
-    site_name = 'BierDopje'
-    server_url = 'http://api.bierdopje.com/A2B638AC5D804C2E/'
-    api_based = True
-    exceptions = {'the office': 10358,
-        'the office us': 10358,
-        'greys anatomy': 3733,
-        'sanctuary us': 7904,
-        'human target 2010': 12986,
-        'csi miami': 2187,
-        'castle 2009': 12708,
-        'chase 2010': 14228,
-        'the defenders 2010': 14225,
-        'hawaii five-0 2010': 14211}
-    _plugin_languages = {'en': 'en', 'nl': 'nl'}
-
-    def __init__(self, config_dict=None):
-        super(BierDopje, self).__init__(self._plugin_languages, config_dict)
-        #http://api.bierdopje.com/23459DC262C0A742/GetShowByName/30+Rock
-        #http://api.bierdopje.com/23459DC262C0A742/GetAllSubsFor/94/5/1/en (30 rock, season 5, episode 1)
-        if config_dict and config_dict['cache_dir']:
-            self.showid_cache = os.path.join(config_dict['cache_dir'], 'bierdopje_showid.cache')
-            with self.lock:
-                if not os.path.exists(self.showid_cache):
-                    if not os.path.exists(os.path.dirname(self.showid_cache)):
-                        raise Exception('Cache directory does not exist')
-                    f = open(self.showid_cache, 'w')
-                    pickle.dump({}, f)
-                    f.close()
-                f = open(self.showid_cache, 'r')
-                self.showids = pickle.load(f)
-                self.logger.debug(u'Reading showids from cache: %s' % self.showids)
-                f.close()
-
-    def list(self, video, languages):
-        if not self.config_dict['cache_dir']:
-            raise Exception('Cache directory is required for this plugin')
-        possible_languages = self.possible_languages(languages)
-        #TODO: Make a list of supported instances in a class property rather than create a task that has no chance to return anything
-        #TODO: Same for languages (with isValidLanguage classmethod)
-        if not isinstance(video, Episode):
-            self.logger.debug(u'Not an episode')
-            return []
-        if len(video.keywords) == 0:
-            self.logger.debug(u'Not enough information')
-            return []
-        self.keywords = video.keywords  # used to sort results
-        return self.query(video.series, video.season, video.episode, video.keywords, video.path, possible_languages)
-
-    def download(self, subtitle):
-        self.downloadFile(subtitle.link, subtitle.path)
-        return subtitle
-
-    def query(self, name, season, episode, keywords, filepath, languages):
-        sublinks = []
-        # get the show id
-        show_name = name.lower()
-        if show_name in self.exceptions:  # get it from exceptions
-            show_id = self.exceptions[show_name]
-        elif show_name in self.showids:  # get it from cache
-            show_id = self.showids[show_name]
-        else:  # retrieve it
-            show_name_encoded = show_name
-            if isinstance(show_name_encoded, unicode):
-                show_name_encoded = show_name_encoded.encode('utf-8')
-            show_id_url = '%sGetShowByName/%s' % (self.server_url, urllib2.quote(show_name_encoded))
-            self.logger.debug(u'Retrieving show id from web at %s' % show_id_url)
-            page = urllib2.urlopen(show_id_url)
-            dom = minidom.parse(page)
-            if not dom or len(dom.getElementsByTagName('showid')) == 0:  # no proper result
-                page.close()
-                return []
-            show_id = dom.getElementsByTagName('showid')[0].firstChild.data
-            self.showids[show_name] = show_id
-            with self.lock:
-                f = open(self.showid_cache, 'w')
-                self.logger.debug(u'Writing showid %s to cache file' % show_id)
-                pickle.dump(self.showids, f)
-                f.close()
-            page.close()
-
-        # get the subs for the show id we have
-        for language in languages:
-            subs_url = '%sGetAllSubsFor/%s/%s/%s/%s' % (self.server_url, show_id, season, episode, language)
-            self.logger.debug(u'Getting subtitles at %s' % subs_url)
-            page = urllib2.urlopen(subs_url)
-            dom = minidom.parse(page)
-            page.close()
-            for sub in dom.getElementsByTagName('result'):
-                sub_filename = sub.getElementsByTagName('filename')[0].firstChild.data
-                if not sub_filename.endswith(tuple(EXTENSIONS)):
-                    sub_filename = sub_filename + EXTENSIONS[0]
-                subtitle = Subtitle.factory(sub_filename)
-                subtitle.link = sub.getElementsByTagName('downloadlink')[0].firstChild.data
-                subtitle.path = self.getSubtitlePath(filepath, language)
-                subtitle.plugin = self.__class__.__name__
-                subtitle.language = language
-                sublinks.append(subtitle)
-        sublinks.sort(self._cmpReleaseGroup)
-        return sublinks
 
 class Podnapisi(PluginBase.PluginBase):
     site_url = "http://www.podnapisi.net"

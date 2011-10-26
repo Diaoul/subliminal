@@ -192,7 +192,7 @@ class OpenSubtitles(PluginBase):
         return self
 
     def __exit__(self, *args):
-        self.terminate(self.shared)
+        self.terminate()
 
     def init(self):
         self.logger.debug(u'Initiating')

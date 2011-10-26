@@ -23,11 +23,19 @@
 import unittest
 import logging
 import os
+from subliminal.utils import PluginConfig
+from subliminal.plugins import *
 
 
-logging.basicConfig(level=logging.DEBUG, format='%(name)-24s %(levelname)-8s %(message)s')
-test_folder = u'/your/path/here/videos/'
-test_file = u'/your/path/here/videos/the.big.bang.theory.s04e01.hdtv.xvid-fqm.avi'
+# Set up logging
+logger = logging.getLogger('subliminal')
+logger.setLevel(logging.DEBUG)
+ch = logging.StreamHandler()
+ch.setLevel(logging.DEBUG)
+formatter = logging.Formatter('%(name)-24s %(levelname)-8s %(message)s')
+ch.setFormatter(formatter)
+logger.addHandler(ch)
+
 cache_dir = u'/tmp/sublicache'
 if not os.path.exists(cache_dir):
     os.mkdir(cache_dir)
@@ -53,15 +61,60 @@ class Addic7edTestCase(unittest.TestCase):
 
 
 class BierDopjeTestCase(unittest.TestCase):
-    def setUp(self):
-        from subliminal.plugins import BierDopje
-        self.config = {'multi': True, 'cache_dir': cache_dir, 'files_mode': -1}
-        self.plugin = BierDopje(self.config)
-        self.languages = set(['en', 'fr'])
+    query_tests = ['test_query_series', 'test_query_bad_series', 'test_query_wrong_languages',
+                   'test_query_tvdbid', 'test_query_wrong_tvdbid', 'test_query_series_and_tvdbid']
 
-    def test_list(self):
-        list = self.plugin.list(test_file, self.languages)
-        assert list
+    def setUp(self):
+        self.config = PluginConfig(multi=True, cache_dir=cache_dir)
+        self.languages = ['en', 'nl']
+        self.wrong_languages = ['zz', 'es']
+        self.fake_file = u'/tmp/fake_file'
+        self.series = 'The Big Bang Theory'
+        self.wrong_series = 'No Existent Show Name'
+        self.season = 5
+        self.episode = 6
+        self.tvdbid = 80379
+        self.wrong_tvdbid = 9999999999
+
+    def test_query_series(self):
+        with BierDopje(self.config) as bierdopje:
+            results = bierdopje.query(self.season, self.episode, self.languages, self.fake_file, series=self.series)
+        self.assertTrue(len(results) > 0)
+
+    def test_query_bad_series(self):
+        with BierDopje(self.config) as bierdopje:
+            results = bierdopje.query(self.season, self.episode, self.languages, self.fake_file, series=self.wrong_series)
+        self.assertTrue(len(results) == 0)
+
+    def test_query_wrong_languages(self):
+        with BierDopje(self.config) as bierdopje:
+            results = bierdopje.query(self.season, self.episode, self.wrong_languages, self.fake_file, series=self.series)
+        self.assertTrue(len(results) == 0)
+
+    def test_query_tvdbid(self):
+        with BierDopje(self.config) as bierdopje:
+            results = bierdopje.query(self.season, self.episode, self.languages, self.fake_file, tvdbid=self.tvdbid)
+        self.assertTrue(len(results) > 0)
+
+    def test_query_series_and_tvdbid(self):
+        with BierDopje(self.config) as bierdopje:
+            results = bierdopje.query(self.season, self.episode, self.languages, self.fake_file, series=self.series, tvdbid=self.tvdbid)
+        self.assertTrue(len(results) > 0)
+
+    def test_query_wrong_tvdbid(self):
+        with BierDopje(self.config) as bierdopje:
+            results = bierdopje.query(self.season, self.episode, self.languages, self.fake_file, tvdbid=self.wrong_tvdbid)
+        self.assertTrue(len(results) == 0)
+
+    def test_list_episode(self):
+        with BierDopje(self.config) as bierdopje:
+            results = bierdopje.list(test_file, ['en', 'nl'])
+        self.assertTrue(len(results) > 0)
+
+    def test_list_episode(self):
+        with BierDopje(self.config) as bierdopje:
+            results = bierdopje.list(test_file, ['en', 'nl'])
+        self.assertTrue(len(results) > 0)
 
     def test_download(self):
         subtitle = self.plugin.list(test_file, self.languages)[0]
@@ -146,7 +199,16 @@ class TheSubDBTestCase(unittest.TestCase):
         download = self.plugin.download(subtitle)
         assert download
 
+def query_suite():
+    suite = unittest.TestSuite()
+    suite.addTests(map(BierDopjeTestCase, BierDopjeTestCase.query_tests))
+    #suite.addTest(BierDopjeTestCase('test_list'))
+    #suite.addTest(BierDopjeTestCase('test_download'))
+    #suite.addTest(GlobalTestCase('test_list_folder'))
+    #suite.addTest(GlobalTestCase('test_download_file'))
+    #suite.addTest(GlobalTestCase('test_download_folder'))
+    return suite
 
-if __name__ == "__main__":
-    unittest.main()
+if __name__ == '__main__':
+    unittest.TextTestRunner(verbosity=2).run(query_suite())
 

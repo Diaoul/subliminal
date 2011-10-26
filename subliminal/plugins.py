@@ -196,7 +196,7 @@ class OpenSubtitles(PluginBase):
         self.terminate()
 
     def init(self):
-        self.logger.debug(u'Initiating')
+        self.logger.debug(u'Initializing')
         result = self.server.LogIn('', '', 'eng', self.user_agent)
         if result['status'] != '200 OK':
             raise PluginError('Login failed')
@@ -275,7 +275,6 @@ class BierDopje(PluginBase):
     reverted_languages = False
     videos = [Episode]
     require_video = False
-    confidence_order = ['tvdbid', 'imdbid', 'fulltext']
 
     def __init__(self, config=None):
         super(BierDopje, self).__init__(config)
@@ -291,13 +290,14 @@ class BierDopje(PluginBase):
         self.terminate()
 
     def init(self):
+        self.logger.debug(u'Initializing')
         self.session = requests.session(timeout=10)
 
     def terminate(self):
-        pass
+        self.logger.debug(u'Terminating')
 
     def initCache(self):
-        self.logger.debug(u'Initiating cache...')
+        self.logger.debug(u'Initializing cache...')
         if not self.config or not self.config.cache_dir:
             raise PluginError('Cache directory is required')
         self.showids_cache = os.path.join(self.config.cache_dir, 'bierdopje_showids.cache')

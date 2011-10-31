@@ -26,6 +26,8 @@ import os
 from subliminal.utils import PluginConfig
 from subliminal.plugins import *
 from subliminal import videos
+from subliminal.exceptions import *
+from subliminal.subtitles import Subtitle
 
 
 # Set up logging
@@ -63,60 +65,61 @@ class BierDopjeTestCase(unittest.TestCase):
         self.wrong_tvdbid = 9999999999
 
     def test_query_series(self):
-        with BierDopje(self.config) as bierdopje:
-            results = bierdopje.query(self.season, self.episode, self.languages, self.fake_file, series=self.series)
+        with BierDopje(self.config) as plugin:
+            results = plugin.query(self.season, self.episode, self.languages, self.fake_file, series=self.series)
         self.assertTrue(len(results) > 0)
 
     def test_query_bad_series(self):
-        with BierDopje(self.config) as bierdopje:
-            results = bierdopje.query(self.season, self.episode, self.languages, self.fake_file, series=self.wrong_series)
+        with BierDopje(self.config) as plugin:
+            results = plugin.query(self.season, self.episode, self.languages, self.fake_file, series=self.wrong_series)
         self.assertTrue(len(results) == 0)
 
     def test_query_wrong_languages(self):
-        with BierDopje(self.config) as bierdopje:
-            results = bierdopje.query(self.season, self.episode, self.wrong_languages, self.fake_file, series=self.series)
+        with BierDopje(self.config) as plugin:
+            results = plugin.query(self.season, self.episode, self.wrong_languages, self.fake_file, series=self.series)
         self.assertTrue(len(results) == 0)
 
     def test_query_tvdbid(self):
-        with BierDopje(self.config) as bierdopje:
-            results = bierdopje.query(self.season, self.episode, self.languages, self.fake_file, tvdbid=self.tvdbid)
+        with BierDopje(self.config) as plugin:
+            results = plugin.query(self.season, self.episode, self.languages, self.fake_file, tvdbid=self.tvdbid)
         self.assertTrue(len(results) > 0)
 
     def test_query_series_and_tvdbid(self):
-        with BierDopje(self.config) as bierdopje:
-            results = bierdopje.query(self.season, self.episode, self.languages, self.fake_file, series=self.series, tvdbid=self.tvdbid)
+        with BierDopje(self.config) as plugin:
+            results = plugin.query(self.season, self.episode, self.languages, self.fake_file, series=self.series, tvdbid=self.tvdbid)
         self.assertTrue(len(results) > 0)
 
     def test_query_wrong_tvdbid(self):
-        with BierDopje(self.config) as bierdopje:
-            results = bierdopje.query(self.season, self.episode, self.languages, self.fake_file, tvdbid=self.wrong_tvdbid)
+        with BierDopje(self.config) as plugin:
+            results = plugin.query(self.season, self.episode, self.languages, self.fake_file, tvdbid=self.wrong_tvdbid)
         self.assertTrue(len(results) == 0)
 
     def test_list_episode(self):
         episode = videos.factory(self.episode_path)
-        with BierDopje(self.config) as bierdopje:
-            results = bierdopje.list(episode, self.languages)
+        with BierDopje(self.config) as plugin:
+            results = plugin.list(episode, self.languages)
         self.assertTrue(len(results) > 0)
 
     def test_list_movie(self):
         movie = videos.factory(self.movie_path)
-        with BierDopje(self.config) as bierdopje:
-            results = bierdopje.list(movie, self.languages)
+        with BierDopje(self.config) as plugin:
+            results = plugin.list(movie, self.languages)
         self.assertTrue(len(results) == 0)
 
     def test_list_wrong_languages(self):
         episode = videos.factory(self.episode_path)
-        with BierDopje(self.config) as bierdopje:
-            results = bierdopje.list(episode, self.wrong_languages)
+        with BierDopje(self.config) as plugin:
+            results = plugin.list(episode, self.wrong_languages)
         self.assertTrue(len(results) == 0)
 
     def test_download(self):
-        with BierDopje(self.config) as bierdopje:
-            subtitle = bierdopje.list(self.episode_path, self.languages)[0]
+        episode = videos.factory(self.episode_path)
+        with BierDopje(self.config) as plugin:
+            subtitle = plugin.list(episode, self.languages)[0]
             if os.path.exists(subtitle.path):
                 os.remove(subtitle.path)
-            result = bierdopje.download(subtitle)
-        self.assertTrue(len(results) == 1)
+            result = plugin.download(subtitle)
+        self.assertTrue(isinstance(result, Subtitle))
         self.assertTrue(os.path.exists(subtitle.path))
 
 
@@ -143,57 +146,57 @@ class OpenSubtitlesTestCase(unittest.TestCase):
         self.wrong_tvdbid = 9999999999
 
     def test_query_(self):
-        with OpenSubtitles(self.config) as bierdopje:
-            results = bierdopje.query(self.season, self.episode, self.languages, self.fake_file, series=self.series)
+        with OpenSubtitles(self.config) as plugin:
+            results = plugin.query(self.season, self.episode, self.languages, self.fake_file, series=self.series)
         self.assertTrue(len(results) > 0)
 
     def test_query_bad_series(self):
-        with BierDopje(self.config) as bierdopje:
-            results = bierdopje.query(self.season, self.episode, self.languages, self.fake_file, series=self.wrong_series)
+        with OpenSubtitles(self.config) as plugin:
+            results = plugin.query(self.season, self.episode, self.languages, self.fake_file, series=self.wrong_series)
         self.assertTrue(len(results) == 0)
 
     def test_query_wrong_languages(self):
-        with BierDopje(self.config) as bierdopje:
-            results = bierdopje.query(self.season, self.episode, self.wrong_languages, self.fake_file, series=self.series)
+        with OpenSubtitles(self.config) as plugin:
+            results = plugin.query(self.season, self.episode, self.wrong_languages, self.fake_file, series=self.series)
         self.assertTrue(len(results) == 0)
 
     def test_query_tvdbid(self):
-        with BierDopje(self.config) as bierdopje:
-            results = bierdopje.query(self.season, self.episode, self.languages, self.fake_file, tvdbid=self.tvdbid)
+        with OpenSubtitles(self.config) as plugin:
+            results = plugin.query(self.season, self.episode, self.languages, self.fake_file, tvdbid=self.tvdbid)
         self.assertTrue(len(results) > 0)
 
     def test_query_series_and_tvdbid(self):
-        with BierDopje(self.config) as bierdopje:
-            results = bierdopje.query(self.season, self.episode, self.languages, self.fake_file, series=self.series, tvdbid=self.tvdbid)
+        with OpenSubtitles(self.config) as plugin:
+            results = plugin.query(self.season, self.episode, self.languages, self.fake_file, series=self.series, tvdbid=self.tvdbid)
         self.assertTrue(len(results) > 0)
 
     def test_query_wrong_tvdbid(self):
-        with BierDopje(self.config) as bierdopje:
-            results = bierdopje.query(self.season, self.episode, self.languages, self.fake_file, tvdbid=self.wrong_tvdbid)
+        with OpenSubtitles(self.config) as plugin:
+            results = plugin.query(self.season, self.episode, self.languages, self.fake_file, tvdbid=self.wrong_tvdbid)
         self.assertTrue(len(results) == 0)
 
     def test_list_episode(self):
         episode = videos.factory(self.episode_path)
-        with BierDopje(self.config) as bierdopje:
-            results = bierdopje.list(episode, self.languages)
+        with OpenSubtitles(self.config) as plugin:
+            results = plugin.list(episode, self.languages)
         self.assertTrue(len(results) > 0)
 
     def test_list_movie(self):
         movie = videos.factory(self.movie_path)
-        with BierDopje(self.config) as bierdopje:
-            results = bierdopje.list(movie, self.languages)
+        with OpenSubtitles(self.config) as plugin:
+            results = plugin.list(movie, self.languages)
         self.assertTrue(len(results) == 0)
 
     def test_list_wrong_languages(self):
         episode = videos.factory(self.episode_path)
-        with BierDopje(self.config) as bierdopje:
-            results = bierdopje.list(episode, self.wrong_languages)
+        with OpenSubtitles(self.config) as plugin:
+            results = plugin.list(episode, self.wrong_languages)
         self.assertTrue(len(results) == 0)
 
     def test_download(self):
-        with BierDopje(self.config) as bierdopje:
-            subtitle = bierdopje.list(self.episode_path, self.languages)[0]
-            result = bierdopje.download(subtitle)
+        with OpenSubtitles(self.config) as plugin:
+            subtitle = plugin.list(self.episode_path, self.languages)[0]
+            result = plugin.download(subtitle)
         self.assertTrue(len(results) == 1)
 
 

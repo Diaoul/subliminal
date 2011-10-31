@@ -222,9 +222,10 @@ class OpenSubtitles(PluginBase):
         return searches
 
     def query(self, searches, filepath):
-        self.logger.debug(u'Query uses token %s and search parameters %r' % (self.token, searches))
+        self.logger.debug(u'Getting subtitles %r with token %s' % (searches, self.token))
         results = self.server.SearchSubtitles(self.token, searches)
         if not results['data']:
+            self.logger.debug(u'Could not find subtitles for %r with token %s' % (searches, self.token))
             return []
         subtitles = []
         for result in results['data']:
@@ -346,7 +347,7 @@ class BierDopje(PluginBase):
             r = self.session.get('%sGetAllSubsFor/%s/%s/%s/%s/%s' % (self.server_url, request_id, season, episode, language, request_is_tvdbid))
             soup = BeautifulSoup.BeautifulStoneSoup(r.content)
             if soup.status.contents[0] == 'false':
-                self.logger.debug(u'Could not get subtitles for %s %d season %d episode %d with language %s' % (request_source, request_id, season, episode, language))
+                self.logger.debug(u'Could not find subtitles for %s %d season %d episode %d with language %s' % (request_source, request_id, season, episode, language))
                 continue
             path = get_subtitle_path(filepath, language, self.config.multi)
             for result in soup.results('result'):

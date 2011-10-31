@@ -376,6 +376,71 @@ class BierDopje(PluginBase):
         self.downloadFile(subtitle.link, subtitle.path)
         return subtitle
 
+class TheSubDB(PluginBase):
+    site_url = 'http://thesubdb.com'
+    site_name = 'SubDB'
+    server_url = 'http://api.thesubdb.com/'  # for testing purpose, use http://sandbox.thesubdb.com/ instead
+    api_based = True
+    user_agent = 'SubDB/1.0 (Subliminal/1.1; https://github.com/Diaoul/subliminal)'  # defined by the API
+    languages = {'af': 'af', 'cs': 'cs', 'da': 'da', 'de': 'de', 'en': 'en', 'es': 'es', 'fi': 'fi',
+                 'fr': 'fr', 'hu': 'hu', 'id': 'id', 'it': 'it', 'la': 'la', 'nl': 'nl', 'no': 'no',
+                 'oc': 'oc', 'pl': 'pl', 'pt': 'pt', 'ro': 'ro', 'ru': 'ru', 'sl': 'sl', 'sr': 'sr',
+                 'sv': 'sv', 'tr': 'tr'} # list available with the API at http://sandbox.thesubdb.com/?action=languages
+    videos = [Movie, Episode, UnknownVideo]
+    require_video = True
+
+    def __init__(self, config=None):
+        super(TheSubDB, self).__init__(config)
+
+    def __enter__(self):
+        self.init()
+        return self
+
+    def __exit__(self, *args):
+        self.terminate()
+
+    def init(self):
+        self.logger.debug(u'Initializing')
+        self.session = requests.session(timeout=10, headers={'user-agent': self.user_agent})
+
+    def terminate(self):
+        self.logger.debug(u'Terminating')
+
+    def list(self, video, languages):
+        languages = languages & self.availableLanguages()
+        if not languages:
+            self.logger.debug(u'No language available')
+            return []
+        if not self.isValidVideo(video):
+            self.logger.debug(u'Not a valid video')
+            return []
+        results = self.query(video.path, video.hashes['TheSubDB'], languages)
+        return results
+
+    def query(self, filepath, moviehash, languages):
+        r = self.session.get(self.server_url, params={'action': 'search', 'hash': moviehash})
+        if r.status_code == 404:
+            self.logger.debug(u'Could not find subtitles for hash %s' % moviehash)
+            return []
+        if r.status_code != 200:
+            self.logger.error(u'Request %s returned status code %d' % (r.url, r.status_code))
+            return []
+        available_languages = set([self.getRevertLanguage(l) for l in r.content.split(',')])
+        filtered_languages = languages & available_languages
+        if not filtered_languages:
+            self.logger.debug(u'Could not find subtitles for hash %s with languages %r (only %r available)' % (moviehash, languages, available_languages))
+            return []
+        subtitles = []
+        for language in filtered_languages:
+            path = get_subtitle_path(filepath, language, self.config.multi)
+            subtitle = Subtitle(path, self.__class__.__name__, language, '%s?action=download&hash=%s&language=%s' % (self.server_url, moviehash, self.getLanguage(language)))
+            subtitles.append(subtitle)
+        return subtitles
+
+    def download(self, subtitle):
+        self.downloadFile(subtitle.link, subtitle.path)
+        return subtitle
+
 
 class GetSubtitle(PluginBase):
     site_url = 'http://www.subtitles.com.br/'

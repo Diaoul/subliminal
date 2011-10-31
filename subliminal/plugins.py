@@ -327,6 +327,9 @@ class BierDopje(PluginBase):
             else:  # query to get showid
                 self.logger.debug(u'Getting showid from show name %s...' % series)
                 r = self.session.get('%sGetShowByName/%s' % (self.server_url, urllib.quote(series.lower())))
+                if r.status_code != 200:
+                    self.logger.error(u'Request %s returned status code %d' % (r.url, r.status_code))
+                    return []
                 soup = BeautifulSoup.BeautifulStoneSoup(r.content)
                 if soup.status.contents[0] == 'false':
                     self.logger.debug(u'Could not find show %s' % series)
@@ -345,6 +348,9 @@ class BierDopje(PluginBase):
         for language in languages:
             self.logger.debug(u'Getting subtitles for %s %d season %d episode %d with language %s' % (request_source, request_id, season, episode, language))
             r = self.session.get('%sGetAllSubsFor/%s/%s/%s/%s/%s' % (self.server_url, request_id, season, episode, language, request_is_tvdbid))
+            if r.status_code != 200:
+                self.logger.error(u'Request %s returned status code %d' % (r.url, r.status_code))
+                return []
             soup = BeautifulSoup.BeautifulStoneSoup(r.content)
             if soup.status.contents[0] == 'false':
                 self.logger.debug(u'Could not find subtitles for %s %d season %d episode %d with language %s' % (request_source, request_id, season, episode, language))

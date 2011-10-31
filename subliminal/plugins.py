@@ -413,6 +413,7 @@ class GetSubtitle(PluginBase):
 
     def query(self, *args):
         #TODO
+        pass
 
     def list(self, video, languages):
         languages = languages & self.availableLanguages()
@@ -426,6 +427,7 @@ class GetSubtitle(PluginBase):
 
     def download(self, subtitle):
         #TODO
+        pass
 
 
 '''

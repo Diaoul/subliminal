@@ -200,18 +200,81 @@ class OpenSubtitlesTestCase(unittest.TestCase):
         self.assertTrue(len(results) == 1)
 
 
+class TheSubDBTestCase(unittest.TestCase):
+    query_tests = ['test_query', 'test_query_wrong_hash', 'test_query_wrong_languages']
+    list_tests = ['test_list', 'test_list_wrong_languages']
+    download_tests = ['test_download']
+
+    def setUp(self):
+        TheSubDB.server_url = 'http://sandbox.thesubdb.com/'
+        self.config = PluginConfig(multi=True, cache_dir=cache_dir)
+        self.path = u'justified.mp4'
+        self.hash = u'edc1981d6459c6111fe36205b4aff6c2'
+        self.wrong_hash = u'ffffffffffffffffffffffffffffffff'
+        self.languages = set(['en', 'nl'])
+        self.wrong_languages = set(['zz', 'cs'])
+        self.fake_file = u'/tmp/fake_file'
+
+    def test_query(self):
+        with TheSubDB(self.config) as plugin:
+            results = plugin.query(self.fake_file, self.hash, self.languages)
+        self.assertTrue(len(results) > 0)
+
+    def test_query_wrong_hash(self):
+        with TheSubDB(self.config) as plugin:
+            results = plugin.query(self.fake_file, self.wrong_hash, self.languages)
+        self.assertTrue(len(results) == 0)
+
+    def test_query_wrong_languages(self):
+        with TheSubDB(self.config) as plugin:
+            results = plugin.query(self.fake_file, self.hash, self.wrong_languages)
+        self.assertTrue(len(results) == 0)
+
+    def test_list(self):
+        video = videos.factory(self.path)
+        with TheSubDB(self.config) as plugin:
+            results = plugin.list(video, self.languages)
+        self.assertTrue(len(results) > 0)
+
+    def test_list_wrong_languages(self):
+        video = videos.factory(self.path)
+        with TheSubDB(self.config) as plugin:
+            results = plugin.list(video, self.wrong_languages)
+        self.assertTrue(len(results) == 0)
+
+    def test_download(self):
+        video = videos.factory(self.path)
+        with TheSubDB(self.config) as plugin:
+            subtitle = plugin.list(video, self.languages)[0]
+            if os.path.exists(subtitle.path):
+                os.remove(subtitle.path)
+            result = plugin.download(subtitle)
+        self.assertTrue(isinstance(result, Subtitle))
+        self.assertTrue(os.path.exists(subtitle.path))
 
 def query_suite():
     suite = unittest.TestSuite()
-    suite.addTests(map(BierDopjeTestCase, BierDopjeTestCase.query_tests))
+    #suite.addTests(map(BierDopjeTestCase, BierDopjeTestCase.query_tests))
+    #suite.addTests(map(OpenSubtitlesTestCase, OpenSubtitlesTestCase.query_tests))
+    suite.addTests(map(TheSubDBTestCase, TheSubDBTestCase.query_tests))
     return suite
 
 def list_suite():
     suite = unittest.TestSuite()
-    suite.addTests(map(BierDopjeTestCase, BierDopjeTestCase.list_tests))
+    #suite.addTests(map(BierDopjeTestCase, BierDopjeTestCase.list_tests))
+    #suite.addTests(map(OpenSubtitlesTestCase, OpenSubtitlesTestCase.list_tests))
+    suite.addTests(map(TheSubDBTestCase, TheSubDBTestCase.list_tests))
+    return suite
+
+def download_suite():
+    suite = unittest.TestSuite()
+    #suite.addTests(map(BierDopjeTestCase, BierDopjeTestCase.download_tests))
+    #suite.addTests(map(OpenSubtitlesTestCase, OpenSubtitlesTestCase.download_tests))
+    suite.addTests(map(TheSubDBTestCase, TheSubDBTestCase.download_tests))
     return suite
 
 if __name__ == '__main__':
     #unittest.TextTestRunner(verbosity=2).run(query_suite())
-    unittest.TextTestRunner(verbosity=2).run(list_suite())
+    #unittest.TextTestRunner(verbosity=2).run(list_suite())
+    unittest.TextTestRunner(verbosity=2).run(download_suite())
 

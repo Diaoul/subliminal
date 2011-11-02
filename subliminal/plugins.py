@@ -547,7 +547,7 @@ class Subtitulos(PluginBase):
                  u'Portuguese': 'pt', u'Español (Latinoamérica)': 'es', u'Español (España)': 'es', u'Español': 'es',
                  u'Italian': 'it', u'Català': 'ca'}
     reverted_languages = True
-    videos = [Episode, Movie]
+    videos = [Episode]
     require_video = True
     release_pattern = re.compile('Versi&oacute;n (.+) ([0-9]+).([0-9])+ megabytes')
 

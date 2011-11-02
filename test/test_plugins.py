@@ -252,29 +252,65 @@ class TheSubDBTestCase(unittest.TestCase):
         self.assertTrue(isinstance(result, Subtitle))
         self.assertTrue(os.path.exists(subtitle.path))
 
+
+class SubsWikiTestCase(unittest.TestCase):
+    query_tests = ['test_query_movie']
+    list_tests = ['test_list_episode', 'test_list_movie', 'test_list_wrong_languages']
+    download_tests = ['test_download']
+
+    def setUp(self):
+        self.config = PluginConfig(multi=True, cache_dir=cache_dir)
+        self.fake_file = u'/tmp/fake_file'
+        self.languages = set(['en', 'es'])
+        self.wrong_languages = set(['zz', 'ay'])
+        self.movie_path = u'Blitz (2011)/Blitz.2011.XVI.mkv'
+        self.movie_keywords = set(['xvi'])
+        self.movie = u'Blitz'
+        self.movie_year = 2011
+        self.episode_path = u'The Big Bang Theory/Season 05/S05E06.The Rhinitis Revelation.ASAP.mkv'
+        self.episode_keywords = set(['asap', 'hdtv'])
+        self.series = 'The Big Bang Theory'
+        self.wrong_series = 'No Existent Show Name'
+        self.season = 5
+        self.episode = 6
+
+    def test_query_series(self):
+        with SubsWiki(self.config) as plugin:
+            results = plugin.query(self.fake_file, self.languages, keywords=self.episode_keywords, series=self.series, season=self.season, episode=self.episode)
+        self.assertTrue(len(results) > 0)
+
+    def test_query_movie(self):
+        with SubsWiki(self.config) as plugin:
+            results = plugin.query(self.fake_file, self.languages, keywords=self.movie_keywords, movie=self.movie, year=self.movie_year)
+        self.assertTrue(len(results) > 0)
+
+
 def query_suite():
     suite = unittest.TestSuite()
     #suite.addTests(map(BierDopjeTestCase, BierDopjeTestCase.query_tests))
     #suite.addTests(map(OpenSubtitlesTestCase, OpenSubtitlesTestCase.query_tests))
-    suite.addTests(map(TheSubDBTestCase, TheSubDBTestCase.query_tests))
+    #suite.addTests(map(TheSubDBTestCase, TheSubDBTestCase.query_tests))
+    suite.addTests(map(SubsWikiTestCase, SubsWikiTestCase.query_tests))
     return suite
 
 def list_suite():
     suite = unittest.TestSuite()
     #suite.addTests(map(BierDopjeTestCase, BierDopjeTestCase.list_tests))
     #suite.addTests(map(OpenSubtitlesTestCase, OpenSubtitlesTestCase.list_tests))
-    suite.addTests(map(TheSubDBTestCase, TheSubDBTestCase.list_tests))
+    #suite.addTests(map(TheSubDBTestCase, TheSubDBTestCase.list_tests))
+    suite.addTests(map(SubsWikiTestCase, SubsWikiTestCase.list_tests))
     return suite
 
 def download_suite():
     suite = unittest.TestSuite()
     #suite.addTests(map(BierDopjeTestCase, BierDopjeTestCase.download_tests))
     #suite.addTests(map(OpenSubtitlesTestCase, OpenSubtitlesTestCase.download_tests))
-    suite.addTests(map(TheSubDBTestCase, TheSubDBTestCase.download_tests))
+    #suite.addTests(map(TheSubDBTestCase, TheSubDBTestCase.download_tests))
+    suite.addTests(map(SubsWikiTestCase, SubsWikiTestCase.download_tests))
     return suite
 
 if __name__ == '__main__':
-    #unittest.TextTestRunner(verbosity=2).run(query_suite())
+    unittest.TextTestRunner(verbosity=2).run(query_suite())
     #unittest.TextTestRunner(verbosity=2).run(list_suite())
-    unittest.TextTestRunner(verbosity=2).run(download_suite())
+    #unittest.TextTestRunner(verbosity=2).run(download_suite())
 

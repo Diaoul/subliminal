@@ -537,6 +537,86 @@ class SubsWiki(PluginBase):
         self.downloadFile(subtitle.link, subtitle.path)
         return subtitle
 
+
+class Subtitulos(PluginBase):
+    site_url = 'http://www.subtitulos.es/'
+    site_name = 'Subtitulos'
+    server_url = 'http://www.subtitulos.es'
+    api_based = False
+    languages = {u'English (US)': 'en', u'English (UK)': 'en', u'English': 'en', u'French': 'fr', u'Brazilian': 'pt-br',
+                 u'Portuguese': 'pt', u'Español (Latinoamérica)': 'es', u'Español (España)': 'es', u'Español': 'es',
+                 u'Italian': 'it', u'Català': 'ca'}
+    reverted_languages = True
+    videos = [Episode, Movie]
+    require_video = True
+    release_pattern = re.compile('Versi&oacute;n (.+) ([0-9]+).([0-9])+ megabytes')
+
+    def __init__(self, config=None):
+        super(Subtitulos, self).__init__(config)
+
+    def __enter__(self):
+        self.init()
+        return self
+
+    def __exit__(self, *args):
+        self.terminate()
+
+    def init(self):
+        self.logger.debug(u'Initializing')
+        self.session = requests.session(timeout=10, headers={'User-Agent': self.user_agent})
+
+    def terminate(self):
+        self.logger.debug(u'Terminating')
+
+    def list(self, video, languages):
+        languages = languages & self.availableLanguages()
+        if not languages:
+            self.logger.debug(u'No language available')
+            return []
+        if not self.isValidVideo(video):
+            self.logger.debug(u'Not a valid video')
+            return []
+        results = query(self, video.path, languages, get_keywords(video.guess), video.series, video.season, video.Episode)
+        return results
+
+    def query(self, filepath, languages, keywords, series, season, episode):
+        request_series = series.lower().replace(' ', '_')
+        if isinstance(request_series, unicode):
+            request_series = unicodedata.normalize('NFKD', request_series).encode('ascii','ignore')
+        self.logger.debug(u'Getting subtitles for %s season %d episode %d with languages %r' % (series, season, episode, languages))
+        r = self.session.get('%s/%s/%sx%.2d' % (self.server_url, urllib.quote(request_series), season, episode))
+        if r.status_code == 404:
+            self.logger.debug(u'Could not find subtitles for %s season %d episode %d with languages %r' % (series, season, episode, languages))
+            return []
+        if r.status_code != 200:
+            self.logger.error(u'Request %s returned status code %d' % (r.url, r.status_code))
+            return []
+        soup = BeautifulSoup.BeautifulSoup(r.content)
+        subtitles = []
+        for sub in soup('div', {'id': 'version'}):
+            sub_keywords = split_keyword(self.release_pattern.search(sub.find('p', {'class': 'title-sub'}).contents[1]).group(1).lower())
+            if not keywords & sub_keywords:
+                self.logger.debug(u'None of subtitle keywords %r in %r' % (sub_keywords, keywords))
+                continue
+            for html_language in sub.findAllNext('ul', {'class': 'sslist'}):
+                language = self.getRevertLanguage(html_language.findNext('li', {'class': 'li-idioma'}).find('strong').contents[0].string.strip())
+                if not language in languages:
+                    self.logger.debug(u'Language %r not in wanted languages %r' % (language, languages))
+                    continue
+                html_status = html_language.findNext('li', {'class': 'li-estado green'})
+                status = html_status.contents[0].string.strip()
+                if status != 'Completado':
+                    self.logger.debug(u'Wrong subtitle status %s' % status)
+                    continue
+                path = get_subtitle_path(filepath, language, self.config.multi)
+                subtitle = Subtitle(path, self.__class__.__name__, language, html_status.findNext('span', {'class': 'descargar green'}).find('a')['href'])
+                subtitles.append(subtitle)
+        return subtitles
+
+    def download(self, subtitle):
+        self.downloadFile(subtitle.link, subtitle.path)
+        return subtitle
+
 class GetSubtitle(PluginBase):
     site_url = 'http://www.subtitles.com.br/'
     site_name = 'GetSubtitle'

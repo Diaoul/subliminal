@@ -444,6 +444,96 @@ class TheSubDB(PluginBase):
         return subtitle
 
 
+class SubsWiki(PluginBase):
+    site_url = 'http://www.subswiki.com'
+    site_name = 'SubsWiki'
+    server_url = 'http://www.subswiki.com'
+    api_based = False
+    languages = {u'English (US)': 'en', u'English (UK)': 'en', u'English': 'en', u'French': 'fr', u'Brazilian': 'pt-br',
+                 u'Portuguese': 'pt', u'Español (Latinoamérica)': 'es', u'Español (España)': 'es', u'Español': 'es',
+                 u'Italian': 'it', u'Català': 'ca'}
+    reverted_languages = True
+    videos = [Episode, Movie]
+    require_video = True
+    release_pattern = re.compile('\nVersion (.+), ([0-9]+).([0-9])+ MBs')
+
+    def __init__(self, config=None):
+        super(SubsWiki, self).__init__(config)
+
+    def __enter__(self):
+        self.init()
+        return self
+
+    def __exit__(self, *args):
+        self.terminate()
+
+    def init(self):
+        self.logger.debug(u'Initializing')
+        self.session = requests.session(timeout=10, headers={'User-Agent': self.user_agent})
+
+    def terminate(self):
+        self.logger.debug(u'Terminating')
+
+    def list(self, video, languages):
+        languages = languages & self.availableLanguages()
+        if not languages:
+            self.logger.debug(u'No language available')
+            return []
+        if not self.isValidVideo(video):
+            self.logger.debug(u'Not a valid video')
+            return []
+        results = self.query(video.path, video.hashes['TheSubDB'], languages)
+        return results
+
+    def query(self, filepath, languages, keywords=None, series=None, season=None, episode=None, movie=None, year=None):
+        #TODO: Check arguments
+        if series:
+            request_series = series.lower().replace(' ', '_')
+            if isinstance(request_series, unicode):
+                request_series = request_series.encode('utf-8')
+            self.logger.debug(u'Getting subtitles for %s season %d episode %d with languages %r' % (series, season, episode, languages))
+            r = self.session.get('%s/serie/%s/%s/%s/' % (self.server_url, urllib.quote(request_series), season, episode))
+            if r.status_code == 404:
+                self.logger.debug(u'Could not find subtitles for %s season %d episode %d with languages %r' % (series, season, episode, languages))
+                return []
+        else:
+            request_movie = movie.title().replace(' ', '_')
+            if isinstance(request_movie, unicode):
+                request_movie = request_movie.encode('utf-8')
+            self.logger.debug(u'Getting subtitles for %s (%d) with languages %r' % (movie, year, languages))
+            r = self.session.get('%s/film/%s_(%d)' % (self.server_url, urllib.quote(request_movie), year))
+            if r.status_code == 404:
+                self.logger.debug(u'Could not find subtitles for %s (%d) with languages %r' % (movie, year, languages))
+                return []
+        if r.status_code != 200:
+            self.logger.error(u'Request %s returned status code %d' % (r.url, r.status_code))
+            return []
+        soup = BeautifulSoup.BeautifulSoup(r.content)
+        subtitles = []
+        for sub in soup('td', {'class': 'NewsTitle'}):
+            sub_keywords = split_keyword(self.release_pattern.search(sub.contents[1]).group(1).lower())
+            if not keywords & sub_keywords:
+                self.logger.debug(u'None of subtitle keywords %r in %r' % (sub_keywords, keywords))
+                continue
+            for html_language in sub.parent.parent.findAll('td', {'class': 'language'}):
+                language = self.getRevertLanguage(html_language.string.strip())
+                if not language in languages:
+                    self.logger.debug(u'Language %r not in wanted languages %r' % (language, languages))
+                    continue
+                html_status = html_language.findNextSibling('td')
+                status = html_status.find('strong').string.strip()
+                if status != 'Completed':
+                    self.logger.debug(u'Wrong subtitle status %s' % status)
+                    continue
+                path = get_subtitle_path(filepath, language, self.config.multi)
+                subtitle = Subtitle(path, self.__class__.__name__, language, html_status.findNext('td').find('a')['href'])
+                subtitles.append(subtitle)
+        return subtitles
+
+    def download(self, subtitle):
+        self.downloadFile(subtitle.link, subtitle.path)
+        return subtitle
+
 class GetSubtitle(PluginBase):
     site_url = 'http://www.subtitles.com.br/'
     site_name = 'GetSubtitle'
@@ -707,263 +797,4 @@ class Podnapisi(PluginBase.PluginBase):
             subs.append(sub)
         self.server.terminate(token)
         return subs
-
-
-class SubScene(PluginBase.PluginBase):
-    site_url = 'http://subscene.com'
-    site_name = 'SubScene'
-    server_url = 'http://subscene.com/s.aspx?subtitle='
-    api_based = False
-    _plugin_languages = {"en": "English",
-            "se": "Swedish",
-            "da": "Danish",
-            "fi": "Finnish",
-            "no": "Norwegian",
-            "fr": "French",
-            "es": "Spanish",
-            "is": "Icelandic",
-            "cs": "Czech",
-            "bg": "Bulgarian",
-            "de": "German",
-            "ar": "Arabic",
-            "el": "Greek",
-            "fa": "Farsi/Persian",
-            "nl": "Dutch",
-            "he": "Hebrew",
-            "id": "Indonesian",
-            "ja": "Japanese",
-            "vi": "Vietnamese",
-            "pt": "Portuguese",
-            "ro": "Romanian",
-            "tr": "Turkish",
-            "sr": "Serbian",
-            "pt-br": "Brazillian Portuguese",
-            "ru": "Russian",
-            "hr": "Croatian",
-            "sl": "Slovenian",
-            "zh": "Chinese BG code",
-            "it": "Italian",
-            "pl": "Polish",
-            "ko": "Korean",
-            "hu": "Hungarian",
-            "ku": "Kurdish",
-            "et": "Estonian"}
-
-    def __init__(self, config_dict=None):
-        super(SubScene, self).__init__(self._plugin_languages, config_dict)
-        #http://subscene.com/s.aspx?subtitle=Dexter.S04E01.HDTV.XviD-NoTV
-
-    def list(self, filenames, languages):
-        """Main method to call when you want to list subtitles"""
-        filepath = filenames[0]
-        fname = self.getFileName(filepath)
-        subs = self.query(fname, filepath, languages)
-        if not subs and fname.rfind(".[") > 0:
-            # Try to remove the [VTV] or [EZTV] at the end of the file
-            teamless_filename = fname[0:fname.rfind(".[")]
-            subs = self.query(teamless_filename, filepath, languages)
-            return subs
-        else:
-            return subs
-
-    def download(self, subtitle):
-        """Main method to call when you want to download a subtitle"""
-        subpage = subtitle["page"]
-        page = urllib2.urlopen(subpage)
-        soup = BeautifulSoup(page)
-        dlhref = soup.find("div", {"class": "download"}).find("a")["href"]
-        subtitle["link"] = self.site_url + dlhref.split('"')[7]
-        format = "zip"
-        archivefilename = subtitle["filename"].rsplit(".", 1)[0] + '.' + format
-        self.downloadFile(subtitle["link"], archivefilename)
-        subtitlefilename = None
-        if zipfile.is_zipfile(archivefilename):
-            self.logger.debug(u"Unzipping file " + archivefilename)
-            zf = zipfile.ZipFile(archivefilename, "r")
-            for el in zf.infolist():
-                extension = el.orig_filename.rsplit(".", 1)[1]
-                if extension in ("srt", "sub", "txt"):
-                    subtitlefilename = srtbasefilename + "." + extension
-                    outfile = open(subtitlefilename, "wb")
-                    outfile.write(zf.read(el.orig_filename))
-                    outfile.flush()
-                    self.adjustPermissions(subtitlefilename)
-                    outfile.close()
-                else:
-                    self.logger.info(u"File %s does not seem to be valid " % el.orig_filename)
-            # Deleting the zip file
-            zf.close()
-            os.remove(archivefilename)
-            return subtitlefilename
-        elif archivefilename.endswith('.rar'):
-            self.logger.warn(u'Rar is not really supported yet. Trying to call unrar')
-            import subprocess
-            try:
-                args = ['unrar', 'lb', archivefilename]
-                output = subprocess.Popen(args, stdout=subprocess.PIPE).communicate()[0]
-                for el in output.splitlines():
-                    extension = el.rsplit(".", 1)[1]
-                    if extension in ("srt", "sub"):
-                        args = ['unrar', 'e', archivefilename, el, os.path.dirname(archivefilename)]
-                        subprocess.Popen(args)
-                        tmpsubtitlefilename = os.path.join(os.path.dirname(archivefilename), el)
-                        subtitlefilename = os.path.join(os.path.dirname(archivefilename), srtbasefilename + "." + extension)
-                        if os.path.exists(tmpsubtitlefilename):
-                            # rename it to match the file
-                            os.rename(tmpsubtitlefilename, subtitlefilename)
-                            # exit
-                        return subtitlefilename
-            except OSError as e:
-                self.logger.error(u"Execution failed: %s" % e)
-                return None
-        else:
-            self.logger.info(u"Unexpected file type (not zip) for %s" % archivefilename)
-            return None
-
-    def downloadFile(self, url, filename):
-        """Downloads the given url to the given filename"""
-        #FIXME: Not working
-
-    def query(self, token, filepath, langs=None):
-        """Make a query on SubScene and returns info about found subtitles"""
-        sublinks = []
-        searchurl = "%s%s" % (self.server_url, urllib2.quote(token))
-        self.logger.debug(u"Query: %s" % searchurl)
-        page = urllib2.urlopen(searchurl)
-        soup = BeautifulSoup(page.read())
-        for subs in soup("a", {"class": "a1"}):
-            lang_span = subs.find("span")
-            lang = self.getRevertLanguage(lang_span.contents[0].strip())
-            release_span = lang_span.findNext("span")
-            release = release_span.contents[0].strip().split(" (")[0]
-            sub_page = subs["href"]
-            #http://subscene.com//s-dlpath-260016/78348/rar.zipx
-            if release.lower().startswith(token.lower()) and (not langs or lang in langs):
-                result = {}
-                result["release"] = release
-                result["lang"] = lang
-                result["link"] = None
-                result["page"] = self.site_url + sub_page
-                result["filename"] = filepath
-                result["plugin"] = self.__class__.__name__
-                sublinks.append(result)
-        return sublinks
-
-
-class SubsWiki(PluginBase.PluginBase):
-    site_url = 'http://www.subswiki.com'
-    site_name = 'SubsWiki'
-    server_url = 'http://www.subswiki.com'
-    api_based = False
-    _plugin_languages = {u'English (US)': 'en',
-            u'English (UK)': 'en',
-            u'English': 'en',
-            u'French': 'fr',
-            u'Brazilian': 'pt-br',
-            u'Portuguese': 'pt',
-            u'Español (Latinoamérica)': 'es',
-            u'Español (España)': 'es',
-            u'Español': 'es',
-            u'Italian': 'it',
-            u'Català': 'ca'}
-
-    def __init__(self, config_dict=None):
-        super(SubsWiki, self).__init__(self._plugin_languages, config_dict, True)
-        self.release_pattern = re.compile('\nVersion (.+), ([0-9]+).([0-9])+ MBs')
-
-    def list(self, video, languages):
-        possible_languages = self.possible_languages(languages)
-        if not isinstance(video, Episode):
-            self.logger.debug(u'Not an episode')
-            return []
-        return self.query(video.series, video.season, video.episode, video.keywords, video.path, possible_languages)
-
-    def query(self, name, season, episode, release_group, filepath, languages):
-        sublinks = []
-        searchname = name.lower().replace(' ', '_')
-        if isinstance(searchname, unicode):
-            searchname = searchname.encode('utf-8')
-        searchurl = '%s/serie/%s/%s/%s/' % (self.server_url, urllib2.quote(searchname), season, episode)
-        self.logger.debug(u'Searching in %s' % searchurl)
-        try:
-            req = urllib2.Request(searchurl, headers={'User-Agent': self.user_agent})
-            page = urllib2.urlopen(req, timeout=self.timeout)
-        except urllib2.HTTPError as inst:
-            self.logger.info(u'Error: %s - %s' % (searchurl, inst))
-            return []
-        except urllib2.URLError as inst:
-            self.logger.info(u'TimeOut: %s' % inst)
-            return []
-        soup = BeautifulSoup(page.read())
-        for subs in soup('td', {'class': 'NewsTitle'}):
-            sub_teams = self.listTeams([self.release_pattern.search('%s' % subs.contents[1]).group(1).lower()], ['.', '_', ' ', '/', '-'])
-            if not release_group.intersection(sub_teams):  # On wrong team
-                continue
-            self.logger.debug(u'Team from website: %s' % sub_teams)
-            self.logger.debug(u'Team from file: %s' % release_group)
-            for html_language in subs.parent.parent.findAll('td', {'class': 'language'}):
-                sub_language = self.getRevertLanguage(html_language.string.strip())
-                self.logger.debug(u'Subtitle reverted language: %s' % sub_language)
-                if not sub_language in languages:  # On wrong language
-                    continue
-                html_status = html_language.findNextSibling('td')
-                sub_status = html_status.find('strong').string.strip()
-                if not sub_status == 'Completed':  # On not completed subtitles
-                    continue
-                sub_link = html_status.findNext('td').find('a')['href']
-                result = Subtitle(filepath, self.getSubtitlePath(filepath, sub_language), self.__class__.__name__, sub_language, self.server_url + sub_link, keywords=sub_teams)
-                sublinks.append(result)
-        sublinks.sort(self._cmpReleaseGroup)
-        return sublinks
-
-    def download(self, subtitle):
-        self.downloadFile(subtitle.link, subtitle.path)
-        return subtitle
-
-class TheSubDB(PluginBase.PluginBase):
-    site_url = 'http://thesubdb.com'
-    site_name = 'SubDB'
-    server_url = 'http://api.thesubdb.com'  # for testing purpose, use http://sandbox.thesubdb.com instead
-    api_based = True
-    user_agent = 'SubDB/1.0 (Subliminal/1.0; https://github.com/Diaoul/subliminal)'  # defined by the API
-    _plugin_languages = {'af': 'af', 'cs': 'cs', 'da': 'da', 'de': 'de', 'en': 'en', 'es': 'es', 'fi': 'fi', 'fr': 'fr', 'hu': 'hu', 'id': 'id',
-             'it': 'it', 'la': 'la', 'nl': 'nl', 'no': 'no', 'oc': 'oc', 'pl': 'pl', 'pt': 'pt', 'ro': 'ro', 'ru': 'ru', 'sl': 'sl', 'sr': 'sr',
-             'sv': 'sv', 'tr': 'tr'} # list available with the API at http://sandbox.thesubdb.com/?action=languages
-
-
-    def __init__(self, config_dict=None):
-        super(TheSubDB, self).__init__(self._plugin_languages, config_dict)
-
-    def list(self, video, languages):
-        possible_languages = self.possible_languages(languages)
-        if not video.exists:
-            return []
-        return self.query(video.path, video.hashes['TheSubDB'], possible_languages)
-
-    def query(self, filepath, moviehash, languages):
-        searchurl = '%s/?action=%s&hash=%s' % (self.server_url, 'search', moviehash)
-        self.logger.debug(u'Query URL: %s' % searchurl)
-        try:
-            req = urllib2.Request(searchurl, headers={'User-Agent': self.user_agent})
-            page = urllib2.urlopen(req, timeout=self.timeout)
-        except urllib2.HTTPError as inst:
-            if inst.code == 404:  # no result found
-                return []
-            self.logger.error(u'Error: %s - %s' % (searchurl, inst))
-            return []
-        except urllib2.URLError as inst:
-            self.logger.error(u'TimeOut: %s' % inst)
-            return []
-        available_languages = page.readlines()[0].split(',')
-        self.logger.debug(u'Available languages: %s' % available_languages)
-        subs = []
-        for l in available_languages:
-            if l in languages:
-                result = Subtitle(filepath, self.getSubtitlePath(filepath, l), self.__class__.__name__, l, '%s/?action=download&hash=%s&language=%s' % (self.server_url, moviehash, l))
-                subs.append(result)
-        return subs
-
-    def download(self, subtitle):
-        self.downloadFile(subtitle.link, subtitle.path)
-        return subtitle
 '''

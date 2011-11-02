@@ -20,6 +20,8 @@
 #
 
 
+import re
+
 class PluginConfig(object):
     def __init__(self, multi=None, cache_dir=None, filemode=None):
         self.multi = multi
@@ -34,8 +36,6 @@ def get_keywords(guess):
     return keywords
 
 
-def split_keyword(keyword, separators=['.', '_', ' ', '/', '-']):
-    split = set()
-    for sep in separators:
-        split = split | set(keyword.split(sep))
+def split_keyword(keyword):
+    split = set(re.findall(r'\w+', keyword))
     return split

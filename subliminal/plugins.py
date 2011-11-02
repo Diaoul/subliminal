@@ -482,7 +482,10 @@ class SubsWiki(PluginBase):
         if not self.isValidVideo(video):
             self.logger.debug(u'Not a valid video')
             return []
-        results = self.query(video.path, video.hashes['TheSubDB'], languages)
+        if isinstance(video, Episode):
+            results = query(self, video.path, languages, get_keywords(video.guess), series=video.series, season=video.season, episode=video.Episode)
+        elif isinstance(video, Episode) and video.year:
+            results = query(self, video.path, languages, get_keywords(video.guess), movie=video.title, year=video.year)
         return results
 
     def query(self, filepath, languages, keywords=None, series=None, season=None, episode=None, movie=None, year=None):

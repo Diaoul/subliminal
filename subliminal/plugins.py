@@ -178,7 +178,7 @@ class OpenSubtitles(PluginBase):
                  'bo': 'tib', 'ti': 'tir', 'to': 'ton', 'tn': 'tsn', 'ts': 'tso', 'tk': 'tuk', 'tr': 'tur',
                  'tw': 'twi', 'ug': 'uig', 'uk': 'ukr', 'ur': 'urd', 'uz': 'uzb', 've': 'ven', 'vi': 'vie',
                  'vo': 'vol', 'cy': 'wel', 'wa': 'wln', 'wo': 'wol', 'xh': 'xho', 'yi': 'yid', 'yo': 'yor',
-                 'za': 'zha', 'zu': 'zul', 'ro': 'rum', 'pb': 'pob', 'un': 'unk', 'ay': 'ass'}
+                 'za': 'zha', 'zu': 'zul', 'ro': 'rum', 'pt-br': 'pob', 'un': 'unk', 'ay': 'ass'}
     reverted_languages = False
     videos = [Episode, Movie]
     require_video = False

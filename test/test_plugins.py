@@ -254,7 +254,7 @@ class TheSubDBTestCase(unittest.TestCase):
 
 
 class SubsWikiTestCase(unittest.TestCase):
-    query_tests = ['test_query_movie']
+    query_tests = ['test_query_series', 'test_query_movie']
     list_tests = ['test_list_episode', 'test_list_movie', 'test_list_wrong_languages']
     download_tests = ['test_download']
 
@@ -285,12 +285,36 @@ class SubsWikiTestCase(unittest.TestCase):
         self.assertTrue(len(results) > 0)
 
 
+class SubtitulosTestCase(unittest.TestCase):
+    query_tests = ['test_query']
+    list_tests = ['test_list_episode', 'test_list_movie', 'test_list_wrong_languages']
+    download_tests = ['test_download']
+
+    def setUp(self):
+        self.config = PluginConfig(multi=True, cache_dir=cache_dir)
+        self.fake_file = u'/tmp/fake_file'
+        self.languages = set(['en', 'es'])
+        self.wrong_languages = set(['zz', 'ay'])
+        self.path = u'The Big Bang Theory/Season 05/S05E06.The Rhinitis Revelation.ASAP.mkv'
+        self.keywords = set(['asap', 'hdtv'])
+        self.series = 'The Big Bang Theory'
+        self.wrong_series = 'No Existent Show Name'
+        self.season = 5
+        self.episode = 6
+
+    def test_query(self):
+        with Subtitulos(self.config) as plugin:
+            results = plugin.query(self.fake_file, self.languages, self.keywords, self.series, self.season, self.episode)
+        self.assertTrue(len(results) > 0)
+
+
 def query_suite():
     suite = unittest.TestSuite()
     #suite.addTests(map(BierDopjeTestCase, BierDopjeTestCase.query_tests))
     #suite.addTests(map(OpenSubtitlesTestCase, OpenSubtitlesTestCase.query_tests))
     #suite.addTests(map(TheSubDBTestCase, TheSubDBTestCase.query_tests))
-    suite.addTests(map(SubsWikiTestCase, SubsWikiTestCase.query_tests))
+    #suite.addTests(map(SubsWikiTestCase, SubsWikiTestCase.query_tests))
+    suite.addTests(map(SubtitulosTestCase, SubtitulosTestCase.query_tests))
     return suite
 
 def list_suite():
@@ -298,7 +322,8 @@ def list_suite():
     #suite.addTests(map(BierDopjeTestCase, BierDopjeTestCase.list_tests))
     #suite.addTests(map(OpenSubtitlesTestCase, OpenSubtitlesTestCase.list_tests))
     #suite.addTests(map(TheSubDBTestCase, TheSubDBTestCase.list_tests))
-    suite.addTests(map(SubsWikiTestCase, SubsWikiTestCase.list_tests))
+    #suite.addTests(map(SubsWikiTestCase, SubsWikiTestCase.list_tests))
+    suite.addTests(map(SubtitulosTestCase, SubtitulosTestCase.list_tests))
     return suite
 
 def download_suite():
@@ -306,7 +331,8 @@ def download_suite():
     #suite.addTests(map(BierDopjeTestCase, BierDopjeTestCase.download_tests))
     #suite.addTests(map(OpenSubtitlesTestCase, OpenSubtitlesTestCase.download_tests))
     #suite.addTests(map(TheSubDBTestCase, TheSubDBTestCase.download_tests))
-    suite.addTests(map(SubsWikiTestCase, SubsWikiTestCase.download_tests))
+    #suite.addTests(map(SubsWikiTestCase, SubsWikiTestCase.download_tests))
+    suite.addTests(map(SubtitulosTestCase, SubtitulosTestCase.download_tests))
     return suite
 
 if __name__ == '__main__':

@@ -39,7 +39,7 @@ except ImportError:
     import pickle
 from xml.dom import minidom
 import BeautifulSoup
-from utils import PluginConfig
+from utils import *
 from subtitles import Subtitle, get_subtitle_path, EXTENSIONS as SUBTITLE_EXTENSIONS
 from videos import *
 from exceptions import DownloadFailedError, MissingLanguageError, PluginError
@@ -318,6 +318,7 @@ class BierDopje(PluginBase):
                 self.showids = pickle.load(f)
 
     def query(self, season, episode, languages, filepath, tvdbid=None, series=None):
+        #TODO: Check arguments
         self.initCache()
         self.loadFromCache()
         if not tvdbid:
@@ -386,6 +387,7 @@ class TheSubDB(PluginBase):
                  'fr': 'fr', 'hu': 'hu', 'id': 'id', 'it': 'it', 'la': 'la', 'nl': 'nl', 'no': 'no',
                  'oc': 'oc', 'pl': 'pl', 'pt': 'pt', 'ro': 'ro', 'ru': 'ru', 'sl': 'sl', 'sr': 'sr',
                  'sv': 'sv', 'tr': 'tr'} # list available with the API at http://sandbox.thesubdb.com/?action=languages
+    reverted_languages = False
     videos = [Movie, Episode, UnknownVideo]
     require_video = True
 
@@ -401,7 +403,7 @@ class TheSubDB(PluginBase):
 
     def init(self):
         self.logger.debug(u'Initializing')
-        self.session = requests.session(timeout=10, headers={'user-agent': self.user_agent})
+        self.session = requests.session(timeout=10, headers={'User-Agent': self.user_agent})
 
     def terminate(self):
         self.logger.debug(u'Terminating')

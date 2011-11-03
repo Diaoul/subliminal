@@ -187,6 +187,7 @@ class OpenSubtitles(PluginBase):
     def __init__(self, config=None):
         super(OpenSubtitles, self).__init__(config)
         self.server = xmlrpclib.ServerProxy(self.server_url)
+        self.token = None
 
     def __enter__(self):
         self.init()
@@ -204,7 +205,8 @@ class OpenSubtitles(PluginBase):
 
     def terminate(self):
         self.logger.debug(u'Terminating')
-        self.server.LogOut(self.token)
+        if self.token:
+            self.server.LogOut(self.token)
 
     def create_searches(self, video, languages):
         """Create the search array, use fulltext search as last resort"""

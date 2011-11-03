@@ -175,12 +175,12 @@ class Subliminal(object):
                 logger.debug(u'No need to list single subtitles %r for %r because one detected' % (self._languages, filepath))
                 continue
             logger.debug(u'Listing subtitles %r for %r with %r' % (wanted_languages, filepath, self._plugins))
+            video = videos.factory(filepath)
             for plugin_name in self._plugins:
                 plugin = getattr(plugins, plugin_name)
                 wanted_languages = wanted_languages & plugin.availableLanguages()
                 if not wanted_languages:
                     continue
-                video = videos.factory(filepath)
                 if not plugin.isValidVideo(video):
                     continue
                 self.taskQueue.put((5, ListTask(video, wanted_languages, plugin_name, config)))

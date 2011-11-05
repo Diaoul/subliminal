@@ -128,16 +128,13 @@ class PluginBase(object):
         if self.config.filemode != None:
             os.chmod(filepath, self.config.filemode)
 
-    def downloadFile(self, url, filepath, data=None):
+    def downloadFile(self, url, filepath):
         """Download a subtitle file"""
         self.logger.info(u'Downloading %s' % url)
         try:
-            req = urllib2.Request(url, headers={'Referer': url, 'User-Agent': self.user_agent})
-            with open(filepath, 'wb') as dump:
-                f = urllib2.urlopen(req, data=data)
-                dump.write(f.read())
-                self.adjustPermissions(filepath)
-                f.close()
+            r = requests.get(url, headers={'Referer': url, 'User-Agent': self.user_agent})
+            with open(filepath, 'wb') as f:
+                f.write(r.content)
         except Exception as e:
             self.logger.error(u'Download %s failed: %s' % (url, e))
             if os.path.exists(filepath):

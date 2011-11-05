@@ -553,7 +553,7 @@ class Subtitulos(PluginBase):
                  u'Italian': 'it', u'Català': 'ca'}
     reverted_languages = True
     videos = [Episode]
-    require_video = True
+    require_video = False
     release_pattern = re.compile('Versi&oacute;n (.+) ([0-9]+).([0-9])+ megabytes')
 
     def __init__(self, config=None):

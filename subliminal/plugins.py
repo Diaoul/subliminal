@@ -23,24 +23,20 @@ import abc
 import logging
 import os
 import gzip
-import urllib2
 import xmlrpclib
 import guessit
 import threading
 import unicodedata
 import re
-import zipfile
 import requests
 import urllib
-from hashlib import md5, sha256
 try:
     import cPickle as pickle
 except ImportError:
     import pickle
-from xml.dom import minidom
 import BeautifulSoup
 from utils import *
-from subtitles import Subtitle, get_subtitle_path, EXTENSIONS as SUBTITLE_EXTENSIONS
+from subtitles import Subtitle, get_subtitle_path
 from videos import *
 from exceptions import DownloadFailedError, MissingLanguageError, PluginError
 

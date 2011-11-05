@@ -241,7 +241,7 @@ class OpenSubtitles(PluginBase):
             return []
         results = []
         if video.exists:
-            results = self.query(video.path or video.release, languages, moviehash=video.hashes['OpenSubtitles'], size=video.size)
+            results = self.query(video.path or video.release, languages, moviehash=video.hashes['OpenSubtitles'], size=str(video.size))
         elif video.imdbid:
             results = self.query(video.path or video.release, languages, imdbid=video.imdbid)
         elif isinstance(video, Episode):

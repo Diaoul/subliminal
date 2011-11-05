@@ -581,7 +581,7 @@ class Subtitulos(PluginBase):
         if not self.isValidVideo(video):
             self.logger.debug(u'Not a valid video')
             return []
-        results = query(self, video.path, languages, get_keywords(video.guess), video.series, video.season, video.Episode)
+        results = self.query(video.path or video.release, languages, get_keywords(video.guess), video.series, video.season, video.episode)
         return results
 
     def query(self, filepath, languages, keywords, series, season, episode):

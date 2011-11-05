@@ -457,7 +457,7 @@ class SubsWiki(PluginBase):
                  u'Italian': 'it', u'Català': 'ca'}
     reverted_languages = True
     videos = [Episode, Movie]
-    require_video = True
+    require_video = False
     release_pattern = re.compile('\nVersion (.+), ([0-9]+).([0-9])+ MBs')
 
     def __init__(self, config=None):

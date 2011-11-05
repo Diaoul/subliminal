@@ -320,10 +320,9 @@ class BierDopje(PluginBase):
                 self.showids = pickle.load(f)
 
     def query(self, season, episode, languages, filepath, tvdbid=None, series=None):
-        #TODO: Check arguments
         self.initCache()
         self.loadFromCache()
-        if not tvdbid:
+        if series:
             if series.lower() in self.showids:  # from cache
                 request_id = self.showids[series.lower()]
                 self.logger.debug(u'Retreived showid %d for %s from cache' % (request_id, series))
@@ -343,10 +342,12 @@ class BierDopje(PluginBase):
                 self.saveToCache()
             request_source = 'showid'
             request_is_tvdbid = 'false'
-        else:
+        elif tvdbid:
             request_id = tvdbid
             request_source = 'tvdbid'
             request_is_tvdbid = 'true'
+        else:
+            raise PluginError('One or more parameter missing')
         subtitles = []
         for language in languages:
             self.logger.debug(u'Getting subtitles for %s %d season %d episode %d with language %s' % (request_source, request_id, season, episode, language))

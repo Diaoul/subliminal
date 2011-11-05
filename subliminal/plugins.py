@@ -205,22 +205,18 @@ class OpenSubtitles(PluginBase):
         if self.token:
             self.server.LogOut(self.token)
 
-    def create_searches(self, video, languages):
-        """Create the search array, use fulltext search as last resort"""
+    def query(self, filepath, languages, moviehash=None, size=None, imdbid=None, query=None):
         searches = []
-        if video.exists:
-            searches.append({'moviehash': video.hashes['OpenSubtitles'], 'moviebytesize': str(video.size)})
-        if video.imdbid:
-            searches.append({'imdbid': video.imdbid})
-        if not searches and isinstance(video, Episode):
-            searches.append({'query': video.series})
-        if not searches and isinstance(video, Movie):
-            searches.append({'query': video.title})
+        if moviehash and size:
+            searches.append({'moviehash': moviehash, 'moviebytesize': size})
+        if imdbid:
+            searches.append({'imdbid': imdbid})
+        if query:
+            searches.append({'query': query})
+        if not searches:
+            raise PluginError('One or more parameter missing')
         for search in searches:
             search['sublanguageid'] = ','.join([self.getLanguage(l) for l in languages])
-        return searches
-
-    def query(self, searches, filepath):
         self.logger.debug(u'Getting subtitles %r with token %s' % (searches, self.token))
         results = self.server.SearchSubtitles(self.token, searches)
         if not results['data']:
@@ -243,12 +239,19 @@ class OpenSubtitles(PluginBase):
         if not self.isValidVideo(video):
             self.logger.debug(u'Not a valid video')
             return []
-        result = self.query(self.create_searches(video, languages), video.path or video.release)
-        return result
+        results = []
+        if video.exists:
+            results = self.query(video.path or video.release, languages, moviehash=video.hashes['OpenSubtitles'], size=video.size)
+        elif video.imdbid:
+            results = self.query(video.path or video.release, languages, imdbid=video.imdbid)
+        elif isinstance(video, Episode):
+            results = self.query(video.path or video.release, languages, query=video.series)
+        elif isinstance(video, Movie):
+            results = self.query(video.path or video.release, languages, query=video.title)
+        return results
 
     def download(self, subtitle):
         #TODO: Use OpenSubtitles DownloadSubtitles method
-        #TODO: Accept list argument? Because OpenSubtitles allow multiple subtitles download
         try:
             self.downloadFile(subtitle.link, subtitle.path + '.gz')
             with open(subtitle.path, 'wb') as dump:

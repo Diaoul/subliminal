@@ -38,6 +38,7 @@ def main():
     parser.add_argument('-m', '--multi', action='store_true', help='download multiple subtitle languages')
     parser.add_argument('-f', '--force', action='store_true', help='replace existing subtitle file')
     parser.add_argument('-w', '--workers', action='store', help='use N threads (default: %(default)s)', metavar='N', default=4)
+    parser.add_argument('-c', '--compatibility', action='store_true', help='try not to use unicode (use this if you have encoding errors)')
     group_verbosity = parser.add_mutually_exclusive_group()
     group_verbosity.add_argument('-q', '--quiet', action='store_true', help='disable output')
     group_verbosity.add_argument('-v', '--verbose', action='store_true', help='verbose output')
@@ -58,7 +59,10 @@ def main():
     subli = subliminal.Subliminal(cache_dir=args.cache_dir, workers=args.workers, multi=args.multi, force=args.force, max_depth=3)
     with subliminal.Subliminal(cache_dir=args.cache_dir, workers=args.workers, multi=args.multi, force=args.force, 
                                max_depth=3, plugins=args.plugins, languages=args.languages) as subli:
-        subtitles = subli.downloadSubtitles([unicode(x) for x in args.paths])
+        if args.compatibility:
+            subtitles = subli.downloadSubtitles(args.paths)
+        else:
+            subtitles = subli.downloadSubtitles([unicode(x) for x in args.paths])
     if not subtitles:
         if not args.quiet:
             sys.stderr.write('No subtitles found\n')

@@ -493,8 +493,7 @@ class SubsWiki(PluginBase):
         return results
 
     def query(self, filepath, languages, keywords=None, series=None, season=None, episode=None, movie=None, year=None):
-        #TODO: Check arguments
-        if series:
+        if series and season and episode:
             request_series = series.lower().replace(' ', '_')
             if isinstance(request_series, unicode):
                 request_series = request_series.encode('utf-8')
@@ -503,7 +502,7 @@ class SubsWiki(PluginBase):
             if r.status_code == 404:
                 self.logger.debug(u'Could not find subtitles for %s season %d episode %d with languages %r' % (series, season, episode, languages))
                 return []
-        else:
+        elif movie and year:
             request_movie = movie.title().replace(' ', '_')
             if isinstance(request_movie, unicode):
                 request_movie = request_movie.encode('utf-8')
@@ -512,6 +511,8 @@ class SubsWiki(PluginBase):
             if r.status_code == 404:
                 self.logger.debug(u'Could not find subtitles for %s (%d) with languages %r' % (movie, year, languages))
                 return []
+        else:
+            raise PluginError('One or more parameter missing')
         if r.status_code != 200:
             self.logger.error(u'Request %s returned status code %d' % (r.url, r.status_code))
             return []

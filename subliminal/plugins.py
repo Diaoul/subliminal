@@ -534,7 +534,7 @@ class SubsWiki(PluginBase):
                     self.logger.debug(u'Wrong subtitle status %s' % status)
                     continue
                 path = get_subtitle_path(filepath, language, self.config.multi)
-                subtitle = Subtitle(path, self.__class__.__name__, language, html_status.findNext('td').find('a')['href'])
+                subtitle = Subtitle(path, self.__class__.__name__, language, '%s%s' % (self.server_url, html_status.findNext('td').find('a')['href']))
                 subtitles.append(subtitle)
         return subtitles
 

@@ -614,7 +614,7 @@ class Subtitulos(PluginBase):
                     self.logger.debug(u'Wrong subtitle status %s' % status)
                     continue
                 path = get_subtitle_path(filepath, language, self.config.multi)
-                subtitle = Subtitle(path, self.__class__.__name__, language, html_status.findNext('span', {'class': 'descargar green'}).find('a')['href'])
+                subtitle = Subtitle(path, self.__class__.__name__, language, html_status.findNext('span', {'class': 'descargar green'}).find('a')['href'], keywords=sub_keywords)
                 subtitles.append(subtitle)
         return subtitles
 

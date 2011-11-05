@@ -28,6 +28,7 @@ from exceptions import InvalidLanguageError, PluginError, BadStateError, WrongTa
 import utils
 import guessit
 import videos
+import subtitles
 import Queue
 import logging
 import mimetypes
@@ -394,10 +395,10 @@ def scan(entry, depth=0, max_depth=3):
         has_single = False
         basepath = os.path.splitext(entry)[0]
         for l in LANGUAGES:
-            for e in videos.EXTENSIONS:
-                if os.path.exists(basepath + '.%s.%s' % (l, e)):
+            for e in subtitles.EXTENSIONS:
+                if os.path.exists(basepath + '.%s%s' % (l, e)):
                     available_languages.add(l)
-                if os.path.exists(basepath + '.%s' % e):
+                if os.path.exists(basepath + '%s' % e):
                     has_single = True
         return [(os.path.normpath(entry), available_languages, has_single)]
     if os.path.isdir(entry):  # a dir? recurse

@@ -64,6 +64,7 @@ class PluginBase(object):
     @abc.abstractmethod
     def init(self):
         """Initiate connexion"""
+        self.session = requests.session(timeout=10, headers={'User-Agent': self.user_agent})
 
     @abc.abstractmethod
     def terminate(self):
@@ -128,7 +129,7 @@ class PluginBase(object):
         """Download a subtitle file"""
         self.logger.info(u'Downloading %s' % url)
         try:
-            r = requests.get(url, headers={'Referer': url, 'User-Agent': self.user_agent})
+            r = self.session.get(url, headers={'Referer': url, 'User-Agent': self.user_agent})
             with open(filepath, 'wb') as f:
                 f.write(r.content)
         except Exception as e:
@@ -191,6 +192,7 @@ class OpenSubtitles(PluginBase):
 
     def init(self):
         self.logger.debug(u'Initializing')
+        super(OpenSubtitles, self).init()
         result = self.server.LogIn('', '', 'eng', self.user_agent)
         if result['status'] != '200 OK':
             raise PluginError('Login failed')
@@ -290,7 +292,7 @@ class BierDopje(PluginBase):
 
     def init(self):
         self.logger.debug(u'Initializing')
-        self.session = requests.session(timeout=10)
+        super(BierDopje, self).init()
 
     def terminate(self):
         self.logger.debug(u'Terminating')
@@ -402,7 +404,7 @@ class TheSubDB(PluginBase):
 
     def init(self):
         self.logger.debug(u'Initializing')
-        self.session = requests.session(timeout=10, headers={'User-Agent': self.user_agent})
+        super(TheSubDB, self).init()
 
     def terminate(self):
         self.logger.debug(u'Terminating')
@@ -468,7 +470,7 @@ class SubsWiki(PluginBase):
 
     def init(self):
         self.logger.debug(u'Initializing')
-        self.session = requests.session(timeout=10, headers={'User-Agent': self.user_agent})
+        super(SubsWiki, self).init()
 
     def terminate(self):
         self.logger.debug(u'Terminating')
@@ -564,7 +566,7 @@ class Subtitulos(PluginBase):
 
     def init(self):
         self.logger.debug(u'Initializing')
-        self.session = requests.session(timeout=10, headers={'User-Agent': self.user_agent})
+        super(Subtitulos, self).init()
 
     def terminate(self):
         self.logger.debug(u'Terminating')

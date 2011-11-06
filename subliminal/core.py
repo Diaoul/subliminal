@@ -179,12 +179,14 @@ class Subliminal(object):
             video = videos.factory(filepath)
             for plugin_name in self._plugins:
                 plugin = getattr(plugins, plugin_name)
-                wanted_languages = wanted_languages & plugin.availableLanguages()
-                if not wanted_languages:
+                list_languages = wanted_languages & plugin.availableLanguages()
+                if not list_languages:
+                    logger.debug(u'Skipping %r: none of wanted languages %r available in %r for plugin %s' % (filepath, wanted_languages, plugin.availableLanguages(), plugin_name))
                     continue
                 if not plugin.isValidVideo(video):
+                    logger.debug(u'Skipping %r: video %r is not part of supported videos %r for plugin %s' % (filepath, video, plugin.videos, plugin_name))
                     continue
-                self.taskQueue.put((5, ListTask(video, wanted_languages, plugin_name, config)))
+                self.taskQueue.put((5, ListTask(video, list_languages, plugin_name, config)))
                 task_count += 1
         subtitles = []
         for _ in range(task_count):

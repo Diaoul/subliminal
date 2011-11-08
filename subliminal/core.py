@@ -143,6 +143,7 @@ class Subliminal(object):
         if isinstance(entries, basestring):
             entries = [entries]
         config = utils.PluginConfig(self.multi, self.cache_dir, self.filemode)
+        #TODO: Fix this with new scan
         scan_result = []
         for e in entries:
             if not isinstance(e, unicode):
@@ -165,7 +166,7 @@ class Subliminal(object):
                 logger.debug(u'No need to list single subtitles %r for %r because one detected' % (self._languages, filepath))
                 continue
             logger.debug(u'Listing subtitles %r for %r with %r' % (wanted_languages, filepath, self._plugins))
-            video = videos.factory(filepath)
+            video = videos.Video.fromPath(filepath)
             for plugin_name in self._plugins:
                 plugin = getattr(plugins, plugin_name)
                 list_languages = wanted_languages & plugin.availableLanguages()

@@ -20,6 +20,7 @@
 #
 
 
+import abc
 import struct
 import os
 import hashlib
@@ -27,6 +28,7 @@ import guessit
 import subprocess
 import subtitles
 import utils
+import kaa.metadata
 
 
 EXTENSIONS = ['.mkv', '.avi', '.mpg'] #TODO: Complete..
@@ -34,19 +36,37 @@ MIMETYPES = ['video/mpeg', 'video/mp4', 'video/quicktime', 'video/x-ms-wmv', 'vi
 
 
 class Video(object):
+    __metaclass__ = abc.ABCMeta
     """Base class for videos"""
-    def __init__(self, release, guess):
+    def __init__(self, release, guess, imdbid=None):
         self.release = release
         self.guess = guess
-        self.tvdbid = None
-        self.imdbid = None
+        self.imdbid = imdbid
         self._path = None
         self.hashes = {}
         if os.path.exists(release):
             self.path = release
 
-    def __eq__(self, other):
-        return self.release == other.release and self.path == other.path
+    @classmethod
+    def fromPath(cls, path):
+        """Create a Video object guessing all informations from the given release/path"""
+        guess = guessit.guess_file_info(path, 'autodetect')
+        result = None
+        if guess['type'] == 'episode' and 'series' in guess and 'season' in guess and 'episodeNumber' in guess:
+            title = None
+            if 'title' in guess:
+                title = guess['title']
+            result = Episode(path, guess['series'], guess['season'], guess['episodeNumber'], title, guess)
+        if guess['type'] == 'movie' and 'title' in guess:
+            year = None
+            if 'year' in guess:
+                year = guess['year']
+            result = Movie(path, guess['title'], year, guess)
+        if not result:
+            result = UnknownVideo(path, guess)
+        if not isinstance(result, cls):
+            raise ValueError('Video is not of requested type')
+        return result
 
     @property
     def exists(self):
@@ -123,70 +143,50 @@ class Video(object):
         """Scan and return associated Subtitles"""
         if not self.exists:
             return []
-        scan_result = scan(self.path, max_depth=0)
-        if len(scan_result) != 1:
-            return []
-        _, languages, single = scan_result[0]
+        basepath = os.path.splitext(self.path)[0]
         results = []
-        if single:
-            for ext in subtitles.EXTENSIONS:
-                filepath = os.path.splitext(self.path)[0] + ext
-                if os.path.exists(filepath):
-                    subtitle = subtitles.factory(filepath)
-                    results.append(subtitle)
-                    break
-        for language in languages:
-            for ext in subtitles.EXTENSIONS:
-                filepath = os.path.splitext(self.path)[0] + '.' + language + ext
-                if os.path.exists(filepath):
-                    subtitle = subtitles.factory(filepath)
-                    results.append(subtitle)
-                    break
+        kaa_infos = kaa.metadata.parse(self.path)
+        if isinstance(kaa_infos, kaa.metadata.video.core.AVContainer):
+            results.extend([subtitles.Subtitle.fromKaa(self.path, s) for s in kaa_infos.subtitles])
+        for l in utils.LANGUAGES:
+            for e in subtitles.EXTENSIONS:
+                single_path = basepath + '%s' % e
+                if os.path.exists(single_path):
+                    results.append(subtitles.Subtitle(single_path, type=subtitles.SINGLE))
+                multi_path = basepath + '.%s%s' % (l, e)
+                if os.path.exists(multi_path):
+                    results.append(subtitles.Subtitle(multi_path, language=l, type=subtitles.MULTI))
         return results
 
 
 class Episode(Video):
     """Episode class"""
-    def __init__(self, release, series, season, episode, title=None, guess=None):
-        super(Episode, self).__init__(release, guess)
+    def __init__(self, release, series, season, episode, title=None, guess=None, tvdbid=None, imdbid=None):
+        super(Episode, self).__init__(release, guess, imdbid)
         self.series = series
         self.title = title
         self.season = season
         self.episode = episode
+        self.tvdbid = tvdbid
 
 
 class Movie(Video):
     """Movie class"""
-    def __init__(self, release, title, year=None, guess=None):
-        super(Movie, self).__init__(release, guess)
+    def __init__(self, release, title, year=None, guess=None, imdbid=None):
+        super(Movie, self).__init__(release, guess, imdbid)
         self.title = title
         self.year = year
 
 
 class UnknownVideo(Video):
     """Unknown video"""
-    def __init__(self, release, guess):
-        super(UnknownVideo, self).__init__(release, guess)
+    def __init__(self, release, guess, imdbid=None):
+        super(UnknownVideo, self).__init__(release, guess, imdbid)
         self.guess = guess
 
 
-def factory(entry):
-    """Create a Video object guessing all informations from the given release/path"""
-    guess = guessit.guess_file_info(entry, 'autodetect')
-    if guess['type'] == 'episode' and 'series' in guess and 'season' in guess and 'episodeNumber' in guess:
-        title = None
-        if 'title' in guess:
-            title = guess['title']
-        return Episode(entry, guess['series'], guess['season'], guess['episodeNumber'], title, guess)
-    if guess['type'] == 'movie' and 'title' in guess:
-        year = None
-        if 'year' in guess:
-            year = guess['year']
-        return Movie(entry, guess['title'], year, guess)
-    return UnknownVideo(entry, guess)
-
 def scan(entry, max_depth=3, depth=0):
-    """Scan a path and return a list of tuples (filepath, set(languages), has single)"""
+    """Scan a path and return a list of tuples (video, [subtitle])"""
     if depth > max_depth and max_depth != 0:  # we do not want to search the whole file system except if max_depth = 0
         return []
     if depth == 0:
@@ -195,17 +195,8 @@ def scan(entry, max_depth=3, depth=0):
         if depth != 0:  # trust the user: only check for valid format if recursing
             if mimetypes.guess_type(entry)[0] not in MIMETYPES and os.path.splitext(entry)[1] not in EXTENSIONS:
                 return []
-        # check for .lg.ext and .ext
-        available_languages = set()
-        has_single = False
-        basepath = os.path.splitext(entry)[0]
-        for l in utils.LANGUAGES:
-            for e in subtitles.EXTENSIONS:
-                if os.path.exists(basepath + '.%s%s' % (l, e)):
-                    available_languages.add(l)
-                if os.path.exists(basepath + '%s' % e):
-                    has_single = True
-        return [(os.path.normpath(entry), available_languages, has_single)]
+        video = Video.fromPath(entry)
+        return [(os.path.normpath(entry), video.scan())]
     if os.path.isdir(entry):  # a dir? recurse
         result = []
         for e in os.listdir(entry):

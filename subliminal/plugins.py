@@ -36,7 +36,7 @@ except ImportError:
     import pickle
 import BeautifulSoup
 from utils import *
-from subtitles import Subtitle, get_subtitle_path
+from subtitles import Subtitle, get_subtitle_path, EMBEDDED, SINGLE, MULTI
 from videos import *
 from exceptions import DownloadFailedError, MissingLanguageError, PluginError
 
@@ -224,8 +224,9 @@ class OpenSubtitles(PluginBase):
         for result in results['data']:
             language = self.getRevertLanguage(result['SubLanguageID'])
             path = get_subtitle_path(filepath, language, self.config.multi)
+            type = MULTI if self.config.multi else SINGLE
             confidence = 1 - float(self.confidence_order.index(result['MatchedBy'])) / float(len(self.confidence_order))
-            subtitle = Subtitle(path, self.__class__.__name__, language, result['SubDownloadLink'], result['SubFileName'], confidence)
+            subtitle = Subtitle(path, self.__class__.__name__, language, result['SubDownloadLink'], result['SubFileName'], confidence, type=type)
             subtitles.append(subtitle)
         return subtitles
 
@@ -358,8 +359,9 @@ class BierDopje(PluginBase):
                 self.logger.debug(u'Could not find subtitles for %s %d season %d episode %d with language %s' % (request_source, request_id, season, episode, language))
                 continue
             path = get_subtitle_path(filepath, language, self.config.multi)
+            type = MULTI if self.config.multi else SINGLE
             for result in soup.results('result'):
-                subtitle = Subtitle(path, self.__class__.__name__, language, result.downloadlink.contents[0], result.filename.contents[0])
+                subtitle = Subtitle(path, self.__class__.__name__, language, result.downloadlink.contents[0], result.filename.contents[0], type=type)
                 subtitles.append(subtitle)
         return subtitles
 
@@ -436,7 +438,8 @@ class TheSubDB(PluginBase):
         subtitles = []
         for language in filtered_languages:
             path = get_subtitle_path(filepath, language, self.config.multi)
-            subtitle = Subtitle(path, self.__class__.__name__, language, '%s?action=download&hash=%s&language=%s' % (self.server_url, moviehash, self.getLanguage(language)))
+            type = MULTI if self.config.multi else SINGLE
+            subtitle = Subtitle(path, self.__class__.__name__, language, '%s?action=download&hash=%s&language=%s' % (self.server_url, moviehash, self.getLanguage(language)), type=type)
             subtitles.append(subtitle)
         return subtitles
 
@@ -532,7 +535,8 @@ class SubsWiki(PluginBase):
                     self.logger.debug(u'Wrong subtitle status %s' % status)
                     continue
                 path = get_subtitle_path(filepath, language, self.config.multi)
-                subtitle = Subtitle(path, self.__class__.__name__, language, '%s%s' % (self.server_url, html_status.findNext('td').find('a')['href']))
+                type = MULTI if self.config.multi else SINGLE
+                subtitle = Subtitle(path, self.__class__.__name__, language, '%s%s' % (self.server_url, html_status.findNext('td').find('a')['href']), type=type)
                 subtitles.append(subtitle)
         return subtitles
 
@@ -612,7 +616,8 @@ class Subtitulos(PluginBase):
                     self.logger.debug(u'Wrong subtitle status %s' % status)
                     continue
                 path = get_subtitle_path(filepath, language, self.config.multi)
-                subtitle = Subtitle(path, self.__class__.__name__, language, html_status.findNext('span', {'class': 'descargar green'}).find('a')['href'], keywords=sub_keywords)
+                type = MULTI if self.config.multi else SINGLE
+                subtitle = Subtitle(path, self.__class__.__name__, language, html_status.findNext('span', {'class': 'descargar green'}).find('a')['href'], keywords=sub_keywords, type=type)
                 subtitles.append(subtitle)
         return subtitles
 

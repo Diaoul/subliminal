@@ -26,12 +26,14 @@ from utils import LANGUAGES
 
 
 EXTENSIONS = ['.srt', '.sub', '.txt']
+EMBEDDED, SINGLE, MULTI = range(3)
+TYPES = ['embedded', 'single', 'multi']
 
 
 class Subtitle(object):
     """Subtitle class"""
 
-    def __init__(self, path, plugin=None, language=None, link=None, release=None, confidence=1, keywords=set()):
+    def __init__(self, path, plugin=None, language=None, link=None, release=None, confidence=1, keywords=set(), type=None):
         self.path = path
         self.plugin = plugin
         self.language = language
@@ -39,6 +41,27 @@ class Subtitle(object):
         self.release = release
         self.keywords = keywords
         self.confidence = confidence
+        self.type = type
+
+    @classmethod
+    def fromPath(cls, path):
+        extension = ''
+        for e in EXTENSIONS:
+            if path.endswith(e):
+                extension = e
+                break
+        if not extension:
+            raise ValueError('Not a supported subtitle extension')
+        type = MULTI
+        language = os.path.splitext(path[:len(path) - len(extension)])[1][1:]
+        if not language in LANGUAGES:
+            language = None
+            type = SINGLE
+        return Subtitle(path, language=language, type=type)
+
+    @classmethod
+    def fromKaa(cls, path, subtitle):
+        return Subtitle(path, language=subtitle.language or None, type=EMBEDDED)
 
     @property
     def exists(self):
@@ -46,8 +69,13 @@ class Subtitle(object):
             return os.path.exists(self.path)
         return False
 
-    def __repr__(self):
-        return repr({'path': self.path, 'plugin': self.plugin, 'language': self.language, 'link': self.link, 'release': self.release, 'keywords': self.keywords, 'confidence': self.confidence})
+    def convert(self):
+        converted = {'path': self.path, 'plugin': self.plugin, 'language': self.language, 'link': self.link, 'release': self.release,
+                     'confidence': self.confidence, 'keywords': self.keywords, 'type': TYPES[self.type]}
+        return converted
+
+    def __str__(self):
+        return repr(self.convert())
 
 
 def get_subtitle_path(video_path, language, multi):
@@ -59,16 +87,3 @@ def get_subtitle_path(video_path, language, multi):
     if multi and language:
         return path + '.%s%s' % (language, EXTENSIONS[0])
     return path + '%s' % EXTENSIONS[0]
-
-def factory(path):
-    extension = ''
-    for e in EXTENSIONS:
-        if path.endswith(e):
-            extension = e
-            break
-    if not extension:
-        raise ValueError('Not a supported subtitle extension')
-    language = os.path.splitext(path[:len(path) - len(extension)])[1][1:]
-    if not language in LANGUAGES:
-        language = None
-    return Subtitle(path, language=language)

@@ -95,25 +95,25 @@ class BierDopjeTestCase(unittest.TestCase):
         self.assertTrue(len(results) == 0)
 
     def test_list_episode(self):
-        episode = videos.factory(self.episode_path)
+        episode = videos.Video.fromPath(self.episode_path)
         with BierDopje(self.config) as plugin:
             results = plugin.list(episode, self.languages)
         self.assertTrue(len(results) > 0)
 
     def test_list_movie(self):
-        movie = videos.factory(self.movie_path)
+        movie = videos.Video.fromPath(self.movie_path)
         with BierDopje(self.config) as plugin:
             results = plugin.list(movie, self.languages)
         self.assertTrue(len(results) == 0)
 
     def test_list_wrong_languages(self):
-        episode = videos.factory(self.episode_path)
+        episode = videos.Video.fromPath(self.episode_path)
         with BierDopje(self.config) as plugin:
             results = plugin.list(episode, self.wrong_languages)
         self.assertTrue(len(results) == 0)
 
     def test_download(self):
-        episode = videos.factory(self.episode_path)
+        episode = videos.Video.fromPath(self.episode_path)
         with BierDopje(self.config) as plugin:
             subtitle = plugin.list(episode, self.languages)[0]
             if os.path.exists(subtitle.path):
@@ -163,19 +163,19 @@ class OpenSubtitlesTestCase(unittest.TestCase):
                 results = plugin.query(self.fake_file, self.wrong_languages, moviehash=self.hash, size=self.size)
 
     def test_list(self):
-        video = videos.factory(self.path)
+        video = videos.Video.fromPath(self.path)
         with OpenSubtitles(self.config) as plugin:
             results = plugin.list(video, self.languages)
         self.assertTrue(len(results) > 0)
 
     def test_list_wrong_languages(self):
-        video = videos.factory(self.path)
+        video = videos.Video.fromPath(self.path)
         with OpenSubtitles(self.config) as plugin:
             results = plugin.list(video, self.wrong_languages)
         self.assertTrue(len(results) == 0)
 
     def test_download(self):
-        video = videos.factory(self.path)
+        video = videos.Video.fromPath(self.path)
         with OpenSubtitles(self.config) as plugin:
             subtitle = plugin.list(video, self.languages)[0]
             if os.path.exists(subtitle.path):
@@ -216,19 +216,19 @@ class TheSubDBTestCase(unittest.TestCase):
         self.assertTrue(len(results) == 0)
 
     def test_list(self):
-        video = videos.factory(self.path)
+        video = videos.Video.fromPath(self.path)
         with TheSubDB(self.config) as plugin:
             results = plugin.list(video, self.languages)
         self.assertTrue(len(results) > 0)
 
     def test_list_wrong_languages(self):
-        video = videos.factory(self.path)
+        video = videos.Video.fromPath(self.path)
         with TheSubDB(self.config) as plugin:
             results = plugin.list(video, self.wrong_languages)
         self.assertTrue(len(results) == 0)
 
     def test_download(self):
-        video = videos.factory(self.path)
+        video = videos.Video.fromPath(self.path)
         with TheSubDB(self.config) as plugin:
             subtitle = plugin.list(video, self.languages)[0]
             if os.path.exists(subtitle.path):
@@ -285,25 +285,25 @@ class SubsWikiTestCase(unittest.TestCase):
         self.assertTrue(len(results) == 0)
 
     def test_list_series(self):
-        video = videos.factory(self.series_path)
+        video = videos.Video.fromPath(self.series_path)
         with SubsWiki(self.config) as plugin:
             results = plugin.list(video, self.languages)
         self.assertTrue(len(results) > 0)
 
     def test_list_movie(self):
-        video = videos.factory(self.movie_path)
+        video = videos.Video.fromPath(self.movie_path)
         with SubsWiki(self.config) as plugin:
             results = plugin.list(video, self.languages)
         self.assertTrue(len(results) > 0)
 
     def test_list_series_wrong_languages(self):
-        video = videos.factory(self.series_path)
+        video = videos.Video.fromPath(self.series_path)
         with SubsWiki(self.config) as plugin:
             results = plugin.list(video, self.wrong_languages)
         self.assertTrue(len(results) == 0)
 
     def test_download(self):
-        video = videos.factory(self.series_path)
+        video = videos.Video.fromPath(self.series_path)
         with SubsWiki(self.config) as plugin:
             subtitle = plugin.list(video, self.languages)[0]
             if os.path.exists(subtitle.path):
@@ -346,19 +346,19 @@ class SubtitulosTestCase(unittest.TestCase):
         self.assertTrue(len(results) == 0)
 
     def test_list(self):
-        video = videos.factory(self.path)
+        video = videos.Video.fromPath(self.path)
         with Subtitulos(self.config) as plugin:
             results = plugin.list(video, self.languages)
         self.assertTrue(len(results) > 0)
 
     def test_list_wrong_languages(self):
-        video = videos.factory(self.path)
+        video = videos.Video.fromPath(self.path)
         with Subtitulos(self.config) as plugin:
             results = plugin.list(video, self.wrong_languages)
         self.assertTrue(len(results) == 0)
 
     def test_download(self):
-        video = videos.factory(self.path)
+        video = videos.Video.fromPath(self.path)
         with Subtitulos(self.config) as plugin:
             subtitle = plugin.list(video, self.languages)[0]
             if os.path.exists(subtitle.path):

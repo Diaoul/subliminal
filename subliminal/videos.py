@@ -115,7 +115,8 @@ class Video(object):
                 args += ['--language', '0:' + subtitle.language, subtitle.path]
             continue
             args += [subtitle.path]
-        p = subprocess.Popen(args)
+        with open(os.devnull, 'w') as devnull:
+            p = subprocess.Popen(args, stdout=devnull, stderr=devnull)
         p.wait()
 
     def scan(self):

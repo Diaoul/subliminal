@@ -31,13 +31,7 @@ from subliminal.subtitles import Subtitle
 
 
 # Set up logging
-logger = logging.getLogger('subliminal')
-logger.setLevel(logging.DEBUG)
-ch = logging.StreamHandler()
-ch.setLevel(logging.DEBUG)
-formatter = logging.Formatter('%(name)-24s %(levelname)-8s %(message)s')
-ch.setFormatter(formatter)
-logger.addHandler(ch)
+logging.getLogger('subliminal').setLevel(logging.DEBUG)
 
 cache_dir = u'/tmp/sublicache'
 if not os.path.exists(cache_dir):

@@ -26,35 +26,48 @@ import os
 import subliminal
 
 
-logging.basicConfig(level=logging.DEBUG, format='%(name)-24s %(levelname)-8s %(message)s')
-test_folder = u'/your/path/here/videos/'
-test_file = u'/your/path/here/videos/the.big.bang.theory.s04e01.hdtv.xvid-fqm.avi'
+# Set up logging
+logging.getLogger('subliminal').setLevel(logging.DEBUG)
+
+
+# Set up testing stuff
+test_folder = u'The Big Bang Theory/'
+test_file = u'The Big Bang Theory/Season 05/S05E06 - The Rhinitis Revelation - HD TV.mkv'
 cache_dir = u'/tmp/sublicache'
 if not os.path.exists(cache_dir):
     os.mkdir(cache_dir)
 
 
-class FileTestCase(unittest.TestCase):
+class GlobalTestCase(unittest.TestCase):
     def setUp(self):
-        self.subli = subliminal.Subliminal(cache_dir=cache_dir, workers=4, multi=False, force=True, max_depth=3, files_mode=-1)
-        self.subli.languages = ['en', 'fr', 'es', 'pt']
+        self.subli = subliminal.Subliminal(cache_dir=cache_dir, workers=1, multi=True, force=True, max_depth=3)
+        self.subli.languages = ['en', 'fr']
         self.subli.plugins = ['OpenSubtitles']
+        self.subli.startWorkers()
 
-    def test_list(self):
-        results = self.subli.listSubtitles(test_file)
-        print results
+    def tearDown(self):
+        self.subli.stopWorkers()
+
+    def test_list_file(self):
+        results = self.subli.listSubtitles(test_file, False)
         self.assertTrue(len(results) > 0)
 
-    def test_download(self):
-        results = self.subli.downloadSubtitles(test_file)
-        print results
+    def test_list_folder(self):
+        results = self.subli.listSubtitles(test_folder, False)
+        self.assertTrue(len(results) > 0)
+
+    def test_download_file(self):
+        results = self.subli.downloadSubtitles(test_file, False)
+        self.assertTrue(len(results) > 0)
+
+    def test_download_folder(self):
+        results = self.subli.downloadSubtitles(test_folder, False)
         self.assertTrue(len(results) > 0)
 
 '''
-
 class ErrorTestCase(unittest.TestCase):
     def setUp(self):
-        self.subli = subliminal.Subliminal(cache_dir=cache_dir, workers=4, multi=False, force=True, max_depth=3, files_mode=-1)
+        self.subli = subliminal.Subliminal(cache_dir=cache_dir, workers=4, multi=False, force=True, max_depth=3, filemode=-1)
 
     def test_language(self):
         with self.assertRaises(subliminal.exceptions.InvalidLanguageError):
@@ -64,7 +77,13 @@ class ErrorTestCase(unittest.TestCase):
         with self.assertRaises(subliminal.exceptions.PluginError):
             self.subli.plugins = ['WrongPlugin']
 
-
+    def test_badstate(self):
+        self.subli.startWorkers()
+        with self.assertRaises(subliminal.exceptions.BadStateError):
+            self.subli.workers = 5
+        self.subli.stopWorkers()
+'''
+'''
 class PriorityQueueTestCase(unittest.TestCase):
     def setUp(self):
         self.subli = subliminal.Subliminal(cache_dir=cache_dir, workers=4, multi=False, force=True, max_depth=3, files_mode=-1)
@@ -86,8 +105,14 @@ class PriorityQueueTestCase(unittest.TestCase):
         self.assertTrue(len(result) > 0)
 '''
 
-
+def suite():
+    suite = unittest.TestSuite()
+    suite.addTest(GlobalTestCase('test_list_file'))
+    #suite.addTest(GlobalTestCase('test_list_folder'))
+    suite.addTest(GlobalTestCase('test_download_file'))
+    #suite.addTest(GlobalTestCase('test_download_folder'))
+    return suite
 
 if __name__ == '__main__':
-    unittest.main()
+    unittest.TextTestRunner(verbosity=2).run(suite())
 

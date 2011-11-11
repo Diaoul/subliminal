@@ -204,6 +204,6 @@ def scan(entry, max_depth=3, depth=0):
     if os.path.isdir(entry):  # a dir? recurse
         result = []
         for e in os.listdir(entry):
-            result.extend(scan(os.path.join(entry, e), maxdepth, depth + 1))
+            result.extend(scan(os.path.join(entry, e), max_depth, depth + 1))
         return result
     return []  # anything else

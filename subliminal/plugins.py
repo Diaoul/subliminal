@@ -48,7 +48,7 @@ class PluginBase(object):
     site_url = ''
     site_name = ''
     server_url = ''
-    user_agent = 'Subliminal v1.0'
+    user_agent = 'Subliminal v0.5'
     api_based = False
     timeout = 5
     lock = threading.Lock()
@@ -146,7 +146,7 @@ class OpenSubtitles(PluginBase):
     site_url = 'http://www.opensubtitles.org'
     site_name = 'OpenSubtitles'
     server_url = 'http://api.opensubtitles.org/xml-rpc'
-    user_agent = 'Subliminal v1.1'
+    user_agent = 'Subliminal v0.5'
     api_based = True
     languages = {'aa': 'aar', 'ab': 'abk', 'af': 'afr', 'ak': 'aka', 'sq': 'alb', 'am': 'amh', 'ar': 'ara',
                  'an': 'arg', 'hy': 'arm', 'as': 'asm', 'av': 'ava', 'ae': 'ave', 'ay': 'aym', 'az': 'aze',
@@ -385,7 +385,7 @@ class TheSubDB(PluginBase):
     site_name = 'SubDB'
     server_url = 'http://api.thesubdb.com/'  # for testing purpose, use http://sandbox.thesubdb.com/ instead
     api_based = True
-    user_agent = 'SubDB/1.0 (Subliminal/1.1; https://github.com/Diaoul/subliminal)'  # defined by the API
+    user_agent = 'SubDB/1.0 (Subliminal/0.5; https://github.com/Diaoul/subliminal)'  # defined by the API
     languages = {'af': 'af', 'cs': 'cs', 'da': 'da', 'de': 'de', 'en': 'en', 'es': 'es', 'fi': 'fi',
                  'fr': 'fr', 'hu': 'hu', 'id': 'id', 'it': 'it', 'la': 'la', 'nl': 'nl', 'no': 'no',
                  'oc': 'oc', 'pl': 'pl', 'pt': 'pt', 'ro': 'ro', 'ru': 'ru', 'sl': 'sl', 'sr': 'sr',

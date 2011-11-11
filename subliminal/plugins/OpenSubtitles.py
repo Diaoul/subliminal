@@ -34,7 +34,7 @@ class OpenSubtitles(PluginBase.PluginBase):
     site_url = 'http://www.opensubtitles.org'
     site_name = 'OpenSubtitles'
     server_url = 'http://api.opensubtitles.org/xml-rpc'
-    user_agent = 'Subliminal v1.0'
+    user_agent = 'Subliminal v0.4'
     api_based = True
     _plugin_languages = {'aa': 'aar', 'ab': 'abk', 'af': 'afr', 'ak': 'aka', 'sq': 'alb', 'am': 'amh', 'ar': 'ara', 'an': 'arg', 'hy': 'arm',
             'as': 'asm', 'av': 'ava', 'ae': 'ave', 'ay': 'aym', 'az': 'aze', 'ba': 'bak', 'bm': 'bam', 'eu': 'baq', 'be': 'bel', 'bn': 'ben',

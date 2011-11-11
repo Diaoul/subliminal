@@ -20,28 +20,28 @@
 #
 
 
+import abc
 import os.path
 from exceptions import InvalidLanguageError
-from utils import LANGUAGES
+from languages import *
 
 
 EXTENSIONS = ['.srt', '.sub', '.txt']
-EMBEDDED, SINGLE, MULTI = range(3)
-TYPES = ['embedded', 'single', 'multi']
 
 
 class Subtitle(object):
-    """Subtitle class"""
+    __metaclass__ = abc.ABCMeta
+    """Base class for subtitles"""
 
-    def __init__(self, path, plugin=None, language=None, link=None, release=None, confidence=1, keywords=set(), type=None):
+    def __init__(self, path, language):
         self.path = path
-        self.plugin = plugin
         self.language = language
-        self.link = link
-        self.release = release
-        self.keywords = keywords
-        self.confidence = confidence
-        self.type = type
+
+    @property
+    def exists(self):
+        if self.path:
+            return os.path.exists(self.path)
+        return False
 
     @classmethod
     def fromPath(cls, path):
@@ -52,26 +52,47 @@ class Subtitle(object):
                 break
         if not extension:
             raise ValueError('Not a supported subtitle extension')
-        type = MULTI
         language = os.path.splitext(path[:len(path) - len(extension)])[1][1:]
-        if not language in LANGUAGES:
+        if not language in list_languages(1):
             language = None
-            type = SINGLE
-        return Subtitle(path, language=language, type=type)
+        return cls(path, language)
+
+
+class EmbeddedSubtitle(Subtitle):
+    def __init__(self, path, language, track_id):
+        super(EmbeddedSubtitle, self).__init__(path, language)
+        self.track_id = track_id
 
     @classmethod
     def fromKaa(cls, path, subtitle):
-        return Subtitle(path, language=subtitle.language or None, type=EMBEDDED)
+        language = convert_language(subtitle.language, 1, 0)
+        return cls(path, language, subtitle.track_no)
+
+
+class ExternalSubtitle(Subtitle):
+    pass
+
+
+class ResultSubtitle(ExternalSubtitle):
+    def __init__(self, path, language, plugin, link, release=None, confidence=1, keywords=set()):
+        super(ResultSubtitle, self).__init__(path, language)
+        self.plugin = plugin
+        self.link = link
+        self.release = release
+        self.confidence = confidence
+        self.keywords = keywords
 
     @property
-    def exists(self):
-        if self.path:
-            return os.path.exists(self.path)
+    def single(self):
+        extension = os.path.splitext(self.path)[0] 
+        language = os.path.splitext(self.path[:len(self.path) - len(extension)])[1][1:]
+        if not language in list_languages(1):
+            return True
         return False
 
     def convert(self):
         converted = {'path': self.path, 'plugin': self.plugin, 'language': self.language, 'link': self.link, 'release': self.release,
-                     'confidence': self.confidence, 'keywords': self.keywords, 'type': TYPES[self.type]}
+                     'confidence': self.confidence, 'keywords': self.keywords}
         return converted
 
     def __str__(self):

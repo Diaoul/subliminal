@@ -28,6 +28,7 @@ import guessit
 import subprocess
 import subtitles
 import utils
+from languages import *
 import kaa.metadata
 
 
@@ -132,7 +133,10 @@ class Video(object):
             args += ['--title', title]
         for subtitle in subtitles:
             if subtitle.language:
-                args += ['--language', '0:' + subtitle.language, subtitle.path]
+                track_id = 0
+                if isinstance(subtitle, subtitles.EmbeddedSubtitle):
+                    track_id = subtitle.track_id
+                args += ['--language', track_id + ':' + subtitle.language, subtitle.path]
             continue
             args += [subtitle.path]
         with open(os.devnull, 'w') as devnull:
@@ -147,15 +151,15 @@ class Video(object):
         results = []
         kaa_infos = kaa.metadata.parse(self.path)
         if isinstance(kaa_infos, kaa.metadata.video.core.AVContainer):
-            results.extend([subtitles.Subtitle.fromKaa(self.path, s) for s in kaa_infos.subtitles])
-        for l in utils.LANGUAGES:
+            results.extend([subtitles.EmbeddedSubtitle.fromKaa(self.path, s) for s in kaa_infos.subtitles])
+        for l in list_languages(1):
             for e in subtitles.EXTENSIONS:
                 single_path = basepath + '%s' % e
                 if os.path.exists(single_path):
-                    results.append(subtitles.Subtitle(single_path, type=subtitles.SINGLE))
+                    results.append(subtitles.ExternalSubtitle(single_path, None))
                 multi_path = basepath + '.%s%s' % (l, e)
                 if os.path.exists(multi_path):
-                    results.append(subtitles.Subtitle(multi_path, language=l, type=subtitles.MULTI))
+                    results.append(subtitles.ExternalSubtitle(multi_path, l))
         return results
 
 
@@ -196,7 +200,7 @@ def scan(entry, max_depth=3, depth=0):
             if mimetypes.guess_type(entry)[0] not in MIMETYPES and os.path.splitext(entry)[1] not in EXTENSIONS:
                 return []
         video = Video.fromPath(entry)
-        return [(os.path.normpath(entry), video.scan())]
+        return [(video, video.scan())]
     if os.path.isdir(entry):  # a dir? recurse
         result = []
         for e in os.listdir(entry):

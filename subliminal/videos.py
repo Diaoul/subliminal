@@ -24,6 +24,7 @@ import abc
 import struct
 import os
 import hashlib
+import mimetypes
 import guessit
 import subprocess
 import subtitles

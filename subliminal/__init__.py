@@ -20,13 +20,7 @@
 #
 
 
-__title__ = 'subliminal'
-__version__ = '0.5'
-__author__ = 'Antoine Bertin'
-__license__ = 'LGPLv3'
-__copyright__ = 'Copyright 2010-2011 Antoine Bertin'
-
-
+from infos import *
 from languages import *
 from utils import *
 from exceptions import *

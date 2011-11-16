@@ -21,13 +21,12 @@
 #
 
 from setuptools import setup
-import subliminal
+execfile('subliminal/infos.py')
 
-
-setup(name='subliminal',
-    version=subliminal.__version__,
-    license='LGPLv3',
-    description='Subtitles, faster than your thoughts',
+setup(name=__title__,
+    version=__version__,
+    license=__license__,
+    description=__description__,
     long_description=open('README.md').read() + '\n\n' +
                      open('NEWS.md').read(),
     classifiers=['Development Status :: 4 - Beta',
@@ -35,6 +34,7 @@ setup(name='subliminal',
         'Intended Audience :: Developers',
         'Operating System :: OS Independent',
         'Programming Language :: Python :: 2.6',
+        'Programming Language :: Python :: 2.7',
         'Topic :: Software Development :: Libraries :: Python Modules',
         'Topic :: Multimedia :: Video'],
     keywords='subliminal video movie subtitle python library',
@@ -44,4 +44,4 @@ setup(name='subliminal',
     packages=['subliminal'],
     scripts=['scripts/subliminal'],
     py_modules=['subliminal'],
-    install_requires=['BeautifulSoup>=3.2.0', 'guessit>=0.2', 'requests>=0.7.3', 'suds>=0.4'])
+    install_requires=['BeautifulSoup>=3.2.0', 'guessit>=0.2', 'requests>=0.8.1', 'suds>=0.4', 'kaa-metadata>=0.7.7'])

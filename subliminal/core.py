@@ -160,7 +160,7 @@ class Subliminal(object):
                 if not wanted_languages:
                     logger.debug(u'No need to list multi subtitles %r for %r because %r subtitles detected' % (self._languages, video.path, languages))
                     continue
-            if not self.force and not self.multi and has_single:
+            if not self.force and not self.multi and None in [s.language for s in subtitles]:
                 logger.debug(u'No need to list single subtitles %r for %r because one detected' % (self._languages, video.path))
                 continue
             logger.debug(u'Listing subtitles %r for %r with %r' % (wanted_languages, video.path, self._plugins))

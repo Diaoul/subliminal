@@ -31,6 +31,8 @@ def convert_language(language, to_iso, from_iso=None):
             from_iso = 2
         else:
             raise ValueError('Invalid input language format')
+    if isinstance(language, unicode):
+        language = language.encode('utf-8')
     converted_language = None
     for language_tuple in LANGUAGES:
         if language_tuple[from_iso] == language and language_tuple[to_iso]:

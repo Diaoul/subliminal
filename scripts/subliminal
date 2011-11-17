@@ -45,7 +45,7 @@ def main():
     group_cache = parser.add_mutually_exclusive_group()
     group_cache.add_argument('--cache-dir', action='store', dest='cache_dir', help='cache directory to use', metavar='DIR', default=os.path.expanduser('~/.config/subliminal'))
     group_cache.add_argument('--no-cache-dir', action='store_false', dest='cache_dir', help='do not use cache directory (some plugins may not work)')
-    parser.add_argument('--version', action='version', version=subliminal.__version__)
+    parser.add_argument('--version', action='version', version=subliminal.infos.__version__)
     parser.add_argument('paths', nargs='+', help='path to video files or folders', metavar='PATH')
     args = parser.parse_args()
 
@@ -56,7 +56,6 @@ def main():
         logging.basicConfig(level=logging.WARN, format='%(levelname)s: %(name)s %(message)s')
 
     # Initialize the instance
-    subli = subliminal.Subliminal(cache_dir=args.cache_dir, workers=args.workers, multi=args.multi, force=args.force, max_depth=3)
     with subliminal.Subliminal(cache_dir=args.cache_dir, workers=args.workers, multi=args.multi, force=args.force, 
                                max_depth=3, plugins=args.plugins, languages=args.languages) as subli:
         if args.compatibility:

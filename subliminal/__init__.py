@@ -28,5 +28,4 @@ from videos import *
 from tasks import *
 from subtitles import *
 from core import *
-from api import *
 from plugins import *

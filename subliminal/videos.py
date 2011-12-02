@@ -33,7 +33,7 @@ from languages import *
 import kaa.metadata
 
 
-EXTENSIONS = ['avi', 'mkv', 'mpg', 'mp4', 'm4v', 'mov', 'ogg', 'ogm', 'ogv', 'wmv', 'divx']
+EXTENSIONS = ['.avi', '.mkv', '.mpg', '.mp4', '.m4v', '.mov', '.ogm', '.ogv', '.wmv', '.divx', '.asf']
 MIMETYPES = ['video/mpeg', 'video/mp4', 'video/quicktime', 'video/x-ms-wmv', 'video/x-msvideo', 'video/x-flv', 'video/x-matroska', 'video/x-matroska-3d']
 
 

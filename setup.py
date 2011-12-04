@@ -44,4 +44,4 @@ setup(name=__title__,
     packages=['subliminal'],
     scripts=['scripts/subliminal'],
     py_modules=['subliminal'],
-    install_requires=['BeautifulSoup>=3.2.0', 'guessit>=0.2', 'requests>=0.8.1', 'suds>=0.4', 'kaa-metadata>=0.7.7'])
+    install_requires=['BeautifulSoup>=3.2.0', 'guessit>=0.2', 'requests>=0.8.1', 'suds>=0.4', 'enzyme>=0.1'])

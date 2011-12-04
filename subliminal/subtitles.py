@@ -64,7 +64,7 @@ class EmbeddedSubtitle(Subtitle):
         self.track_id = track_id
 
     @classmethod
-    def fromKaa(cls, path, subtitle):
+    def fromEnzyme(cls, path, subtitle):
         language = convert_language(subtitle.language, 1, 2)
         return cls(path, language, subtitle.trackno)
 

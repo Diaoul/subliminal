@@ -30,7 +30,7 @@ import subprocess
 import subtitles
 import utils
 from languages import *
-import kaa.metadata
+import enzyme
 
 
 EXTENSIONS = ['.avi', '.mkv', '.mpg', '.mp4', '.m4v', '.mov', '.ogm', '.ogv', '.wmv', '.divx', '.asf']
@@ -150,9 +150,13 @@ class Video(object):
             return []
         basepath = os.path.splitext(self.path)[0]
         results = []
-        kaa_infos = kaa.metadata.parse(self.path)
-        if isinstance(kaa_infos, kaa.metadata.video.core.AVContainer):
-            results.extend([subtitles.EmbeddedSubtitle.fromKaa(self.path, s) for s in kaa_infos.subtitles])
+        video_infos = None
+        try:
+            video_infos = enzyme.parse(self.path)
+        except enzyme.ParseError:
+            pass
+        if isinstance(video_infos, enzyme.core.AVContainer):
+            results.extend([subtitles.EmbeddedSubtitle.fromEnzyme(self.path, s) for s in video_infos.subtitles])
         for l in list_languages(1):
             for e in subtitles.EXTENSIONS:
                 single_path = basepath + '%s' % e

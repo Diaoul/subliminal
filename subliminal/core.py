@@ -350,7 +350,7 @@ def matching_confidence(video, subtitle):
                 replacement['season'] = 1
             if 'episodeNumber' in guess and guess['episodeNumber'] == video.episode:
                 replacement['episode'] = 1
-    if isinstance(video, videos.Movie):
+    elif isinstance(video, videos.Movie):
         replacement.update({'title': 0, 'year': 0})
         matching_format = '{title:b}{year:b}{keywords:03b}'
         best = matching_format.format(title=1, year=1, keywords=len(video_keywords))
@@ -359,5 +359,7 @@ def matching_confidence(video, subtitle):
                 replacement['title'] = 1
             if 'year' in guess and guess['year'] == video.year:
                 replacement['year'] = 1
+    else:
+        return 0
     confidence = float(int(matching_format.format(**replacement), 2)) / float(int(best, 2))
     return confidence

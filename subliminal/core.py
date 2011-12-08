@@ -18,33 +18,27 @@
 # You should have received a copy of the Lesser GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
+__all__ = ['Subliminal', 'PluginWorker', 'matching_confidence']
 
 
-import threading
-from itertools import groupby
 from collections import defaultdict
-from tasks import DownloadTask, ListTask, StopTask
-from exceptions import InvalidLanguageError, PluginError, BadStateError, WrongTaskError, DownloadFailedError
-import utils
-from languages import *
-import guessit
-import videos
-import subtitles
+from exceptions import InvalidLanguageError, PluginError, BadStateError, \
+    WrongTaskError, DownloadFailedError
+from itertools import groupby
+from languages import list_languages
+from subliminal.utils import NullHandler
+from tasks import Task, DownloadTask, ListTask, StopTask
 import Queue
+import guessit
 import logging
-import mimetypes
 import os
 import plugins
+import subtitles
+import threading
+import utils
+import videos
 
-
-# be nice
-try:
-    from logging import NullHandler
-except ImportError:
-
-    class NullHandler(logging.Handler):
-        def emit(self, record):
-            pass
+# init logger
 logger = logging.getLogger('subliminal')
 logger.addHandler(NullHandler())
 
@@ -312,7 +306,7 @@ class PluginWorker(threading.Thread):
                         try:
                             result = [plugin.download(subtitle)]
                             break
-                        except DownloadFailedError as e:  # try the next one
+                        except DownloadFailedError:  # try the next one
                             self.logger.warning(u'Could not download subtitle %r, trying next' % subtitle)
                             continue
                     if not result:
@@ -328,7 +322,7 @@ class PluginWorker(threading.Thread):
                 self.taskQueue.task_done()
         self.terminate()
         self.logger.debug(u'Thread %s terminated' % self.name)
-    
+
     def terminate(self):
         """Terminate instanciated plugins"""
         for plugin_name, plugin in self.plugins.iteritems():
@@ -336,7 +330,6 @@ class PluginWorker(threading.Thread):
                 plugin.terminate()
             except:
                 self.logger.error(u'Exception raised when terminating plugin %s' % plugin_name, exc_info=True)
-                
 
 
 def matching_confidence(video, subtitle):
@@ -366,5 +359,5 @@ def matching_confidence(video, subtitle):
                 replacement['title'] = 1
             if 'year' in guess and guess['year'] == video.year:
                 replacement['year'] = 1
-    confidence = float(int(matching_format.format(**replacement), 2))/float(int(best, 2))
+    confidence = float(int(matching_format.format(**replacement), 2)) / float(int(best, 2))
     return confidence

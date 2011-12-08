@@ -19,25 +19,24 @@
 # You should have received a copy of the Lesser GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-
-import sys
 import os
+import sys
+
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'subliminal')))
 
-import unittest
-import logging
-import os
-from subliminal.utils import PluginConfig
-from subliminal.plugins import *
+
 from subliminal import videos
-from subliminal.exceptions import *
+from subliminal.exceptions import MissingLanguageError, PluginError
+from subliminal.plugins import BierDopje, OpenSubtitles, TheSubDB, SubsWiki, \
+    Subtitulos
 from subliminal.subtitles import Subtitle
+from subliminal.utils import PluginConfig
+import logging
+import unittest
 
 
-# Set up logging
 logging.getLogger('subliminal').setLevel(logging.DEBUG)
-
 cache_dir = u'/tmp/sublicache'
 if not os.path.exists(cache_dir):
     os.mkdir(cache_dir)
@@ -159,7 +158,7 @@ class OpenSubtitlesTestCase(unittest.TestCase):
     def test_query_wrong_languages(self):
         with OpenSubtitles(self.config) as plugin:
             with self.assertRaises(MissingLanguageError):
-                results = plugin.query(self.fake_file, self.wrong_languages, moviehash=self.hash, size=self.size)
+                plugin.query(self.fake_file, self.wrong_languages, moviehash=self.hash, size=self.size)
 
     def test_list(self):
         video = videos.Video.fromPath(self.path)
@@ -271,7 +270,7 @@ class SubsWikiTestCase(unittest.TestCase):
     def test_query_wrong_parameters(self):
         with SubsWiki(self.config) as plugin:
             with self.assertRaises(PluginError):
-                results = plugin.query(self.fake_file, self.languages, keywords=self.movie_keywords, movie=self.movie, series=self.series)
+                plugin.query(self.fake_file, self.languages, keywords=self.movie_keywords, movie=self.movie, series=self.series)
 
     def test_query_wrong_series(self):
         with SubsWiki(self.config) as plugin:
@@ -376,6 +375,7 @@ def query_suite():
     suite.addTests(map(SubtitulosTestCase, SubtitulosTestCase.query_tests))
     return suite
 
+
 def list_suite():
     suite = unittest.TestSuite()
     suite.addTests(map(BierDopjeTestCase, BierDopjeTestCase.list_tests))
@@ -384,6 +384,7 @@ def list_suite():
     suite.addTests(map(SubsWikiTestCase, SubsWikiTestCase.list_tests))
     suite.addTests(map(SubtitulosTestCase, SubtitulosTestCase.list_tests))
     return suite
+
 
 def download_suite():
     suite = unittest.TestSuite()
@@ -394,10 +395,10 @@ def download_suite():
     suite.addTests(map(SubtitulosTestCase, SubtitulosTestCase.download_tests))
     return suite
 
+
 if __name__ == '__main__':
     suites = []
     suites.append(query_suite())
     suites.append(list_suite())
     suites.append(download_suite())
     unittest.TextTestRunner(verbosity=2).run(unittest.TestSuite(suites))
-

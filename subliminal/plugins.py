@@ -18,28 +18,29 @@
 # You should have received a copy of the Lesser GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
+__all__ = ['PluginBase', 'OpenSubtitles', 'BierDopje', 'TheSubDB', 'SubsWiki', 'Subtitulos']
 
+
+from exceptions import DownloadFailedError, MissingLanguageError, PluginError
+from subliminal.utils import get_keywords, PluginConfig, split_keyword
+from subliminal.videos import Episode, Movie, UnknownVideo
+from subtitles import ResultSubtitle, get_subtitle_path
+import BeautifulSoup
 import abc
+import gzip
 import logging
 import os
-import gzip
-import xmlrpclib
-import guessit
-import threading
-import unicodedata
 import re
 import requests
+import suds.client
+import threading
+import unicodedata
 import urllib
+import xmlrpclib
 try:
     import cPickle as pickle
 except ImportError:
     import pickle
-import BeautifulSoup
-from utils import *
-from languages import *
-from subtitles import ResultSubtitle, get_subtitle_path
-from videos import *
-from exceptions import DownloadFailedError, MissingLanguageError, PluginError
 
 
 #TODO: use ISO-639-2 in plugins instead of ISO-639-1
@@ -65,12 +66,12 @@ class PluginBase(object):
 
     @abc.abstractmethod
     def init(self):
-        """Initiate connexion"""
+        """Initiate connection"""
         self.session = requests.session(timeout=10, headers={'User-Agent': self.user_agent})
 
     @abc.abstractmethod
     def terminate(self):
-        """Terminate connexion"""
+        """Terminate connection"""
 
     @abc.abstractmethod
     def query(self, *args):
@@ -337,7 +338,6 @@ class BierDopje(PluginBase):
                     self.logger.debug(u'Could not find show %s' % series)
                     return []
                 request_id = int(soup.showid.contents[0])
-                showname = soup.showname.contents[0]
                 self.showids[series.lower()] = request_id
                 self.saveToCache()
             request_source = 'showid'
@@ -380,6 +380,7 @@ class BierDopje(PluginBase):
         self.downloadFile(subtitle.link, subtitle.path)
         return subtitle
 
+
 class TheSubDB(PluginBase):
     site_url = 'http://thesubdb.com'
     site_name = 'SubDB'
@@ -389,7 +390,7 @@ class TheSubDB(PluginBase):
     languages = {'af': 'af', 'cs': 'cs', 'da': 'da', 'de': 'de', 'en': 'en', 'es': 'es', 'fi': 'fi',
                  'fr': 'fr', 'hu': 'hu', 'id': 'id', 'it': 'it', 'la': 'la', 'nl': 'nl', 'no': 'no',
                  'oc': 'oc', 'pl': 'pl', 'pt': 'pt', 'ro': 'ro', 'ru': 'ru', 'sl': 'sl', 'sr': 'sr',
-                 'sv': 'sv', 'tr': 'tr'} # list available with the API at http://sandbox.thesubdb.com/?action=languages
+                 'sv': 'sv', 'tr': 'tr'}  # list available with the API at http://sandbox.thesubdb.com/?action=languages
     reverted_languages = False
     videos = [Movie, Episode, UnknownVideo]
     require_video = True
@@ -587,7 +588,7 @@ class Subtitulos(PluginBase):
     def query(self, filepath, languages, keywords, series, season, episode):
         request_series = series.lower().replace(' ', '_')
         if isinstance(request_series, unicode):
-            request_series = unicodedata.normalize('NFKD', request_series).encode('ascii','ignore')
+            request_series = unicodedata.normalize('NFKD', request_series).encode('ascii', 'ignore')
         self.logger.debug(u'Getting subtitles for %s season %d episode %d with languages %r' % (series, season, episode, languages))
         r = self.session.get('%s/%s/%sx%.2d' % (self.server_url, urllib.quote(request_series), season, episode))
         if r.status_code == 404:
@@ -621,6 +622,7 @@ class Subtitulos(PluginBase):
     def download(self, subtitle):
         self.downloadFile(subtitle.link, subtitle.path)
         return subtitle
+
 
 class GetSubtitle(PluginBase):
     site_url = 'http://www.subtitles.com.br/'

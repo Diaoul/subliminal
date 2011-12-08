@@ -105,6 +105,7 @@ class PriorityQueueTestCase(unittest.TestCase):
         self.assertTrue(len(result) > 0)
 '''
 
+
 def suite():
     suite = unittest.TestSuite()
     suite.addTest(GlobalTestCase('test_list_file'))
@@ -113,6 +114,6 @@ def suite():
     #suite.addTest(GlobalTestCase('test_download_folder'))
     return suite
 
+
 if __name__ == '__main__':
     unittest.TextTestRunner(verbosity=2).run(suite())
-

@@ -18,19 +18,19 @@
 # You should have received a copy of the Lesser GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
+__all__ = ['EXTENSIONS', 'MIMETYPES', 'Video', 'Episode', 'Movie', 'UnknownVideo', 'scan']
 
 
+from languages import list_languages
 import abc
-import struct
-import os
+import enzyme
+import guessit
 import hashlib
 import mimetypes
-import guessit
+import os
+import struct
 import subprocess
 import subtitles
-import utils
-from languages import *
-import enzyme
 
 
 EXTENSIONS = ['.avi', '.mkv', '.mpg', '.mp4', '.m4v', '.mov', '.ogm', '.ogv', '.wmv', '.divx', '.asf']

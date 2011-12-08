@@ -18,9 +18,17 @@
 # You should have received a copy of the Lesser GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
+__all__ = ['PluginConfig', 'get_keywords', 'split_keyword', 'NullHandler']
 
 
+import logging
 import re
+try:
+    from logging import NullHandler
+except ImportError:
+    class NullHandler(logging.Handler):
+        def emit(self, record):
+            pass
 
 
 class PluginConfig(object):
@@ -29,12 +37,14 @@ class PluginConfig(object):
         self.cache_dir = cache_dir
         self.filemode = filemode
 
+
 def get_keywords(guess):
     keywords = set()
     for k in ['releaseGroup', 'screenSize', 'videoCodec', 'format']:
         if k in guess:
             keywords = keywords | split_keyword(guess[k].lower())
     return keywords
+
 
 def split_keyword(keyword):
     split = set(re.findall(r'\w+', keyword))

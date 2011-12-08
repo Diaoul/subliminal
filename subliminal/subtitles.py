@@ -18,12 +18,12 @@
 # You should have received a copy of the Lesser GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
+__all__ = ['Subtitle', 'EmbeddedSubtitle', 'ExternalSubtitle', 'ResultSubtitle', 'get_subtitle_path']
 
 
+from subliminal.languages import list_languages, convert_language
 import abc
 import os.path
-from exceptions import InvalidLanguageError
-from languages import *
 
 
 EXTENSIONS = ['.srt', '.sub', '.txt']
@@ -84,7 +84,7 @@ class ResultSubtitle(ExternalSubtitle):
 
     @property
     def single(self):
-        extension = os.path.splitext(self.path)[0] 
+        extension = os.path.splitext(self.path)[0]
         language = os.path.splitext(self.path[:len(self.path) - len(extension)])[1][1:]
         if not language in list_languages(1):
             return True

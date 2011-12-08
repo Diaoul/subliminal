@@ -98,22 +98,22 @@ class Video(object):
         bytesize = struct.calcsize(longlongformat)
         f = open(self.path, 'rb')
         filesize = os.path.getsize(self.path)
-        hash = filesize
+        filehash = filesize
         if filesize < 65536 * 2:
             return []
         for _ in range(65536 / bytesize):
-            buffer = f.read(bytesize)
-            (l_value,) = struct.unpack(longlongformat, buffer)
-            hash += l_value
-            hash = hash & 0xFFFFFFFFFFFFFFFF  # to remain as 64bit number
+            filebuffer = f.read(bytesize)
+            (l_value,) = struct.unpack(longlongformat, filebuffer)
+            filehash += l_value
+            filehash = filehash & 0xFFFFFFFFFFFFFFFF  # to remain as 64bit number
         f.seek(max(0, filesize - 65536), 0)
         for _ in range(65536 / bytesize):
-            buffer = f.read(bytesize)
-            (l_value,) = struct.unpack(longlongformat, buffer)
-            hash += l_value
-            hash = hash & 0xFFFFFFFFFFFFFFFF
+            filebuffer = f.read(bytesize)
+            (l_value,) = struct.unpack(longlongformat, filebuffer)
+            filehash += l_value
+            filehash = filehash & 0xFFFFFFFFFFFFFFFF
         f.close()
-        returnedhash = '%016x' % hash
+        returnedhash = '%016x' % filehash
         return returnedhash
 
     def _computeHashTheSubDB(self):

@@ -18,7 +18,8 @@
 # You should have received a copy of the Lesser GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-__all__ = ['Subliminal', 'PluginWorker', 'matching_confidence']
+__all__ = ['PLUGINS', 'API_PLUGINS', 'IDLE', 'RUNNING', 'PAUSED', 'Subliminal', 'PluginWorker', 'matching_confidence',
+           'LANGUAGE_INDEX', 'PLUGIN_INDEX', 'PLUGIN_CONFIDENCE', 'MATCHING_CONFIDENCE']
 
 
 from collections import defaultdict

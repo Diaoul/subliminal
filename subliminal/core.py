@@ -216,16 +216,16 @@ class Subliminal(object):
         key = ''
         for sort_item in order:
             if sort_item == LANGUAGE_INDEX:
-                key += '{:03d}'.format(len(self._languages) - self._languages.index(subtitle.language) - 1)
+                key += '{0:03d}'.format(len(self._languages) - self._languages.index(subtitle.language) - 1)
             elif sort_item == PLUGIN_INDEX:
-                key += '{:02d}'.format(len(self._plugins) - self._plugins.index(subtitle.plugin) - 1)
+                key += '{0:02d}'.format(len(self._plugins) - self._plugins.index(subtitle.plugin) - 1)
             elif sort_item == PLUGIN_CONFIDENCE:
-                key += '{:04d}'.format(int(subtitle.confidence * 1000))
+                key += '{0:04d}'.format(int(subtitle.confidence * 1000))
             elif sort_item == MATCHING_CONFIDENCE:
                 confidence = 0
                 if subtitle.release:
                     confidence = matching_confidence(video, subtitle)
-                key += '{:04d}'.format(int(confidence * 1000))
+                key += '{0:04d}'.format(int(confidence * 1000))
         return int(key)
 
     def groupByVideo(self, list_result):

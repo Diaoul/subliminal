@@ -27,7 +27,7 @@ from exceptions import InvalidLanguageError, PluginError, BadStateError, \
     WrongTaskError, DownloadFailedError
 from itertools import groupby
 from languages import list_languages
-from subliminal.utils import NullHandler
+from utils import NullHandler
 from tasks import Task, DownloadTask, ListTask, StopTask
 import Queue
 import guessit

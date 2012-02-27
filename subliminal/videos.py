@@ -1,26 +1,20 @@
 # -*- coding: utf-8 -*-
-#
-# Subliminal - Subtitles, faster than your thoughts
-# Copyright (c) 2011 Antoine Bertin <diaoulael@gmail.com>
+# Copyright 2011-2012 Antoine Bertin <diaoulael@gmail.com>
 #
 # This file is part of Subliminal.
 #
 # Subliminal is free software; you can redistribute it and/or modify it under
-# the terms of the Lesser GNU General Public License as published by
+# the terms of the GNU Lesser General Public License as published by
 # the Free Software Foundation; either version 3 of the License, or
 # (at your option) any later version.
 #
 # Subliminal is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# Lesser GNU General Public License for more details.
+# GNU Lesser General Public License for more details.
 #
-# You should have received a copy of the Lesser GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-__all__ = ['EXTENSIONS', 'MIMETYPES', 'Video', 'Episode', 'Movie', 'UnknownVideo', 'scan']
-
-
+# You should have received a copy of the GNU Lesser General Public License
+# along with Subliminal.  If not, see <http://www.gnu.org/licenses/>.
 from languages import list_languages
 import abc
 import enzyme
@@ -31,6 +25,9 @@ import os
 import struct
 import subprocess
 import subtitles
+
+
+__all__ = ['EXTENSIONS', 'MIMETYPES', 'Video', 'Episode', 'Movie', 'UnknownVideo', 'scan']
 
 
 EXTENSIONS = ['.avi', '.mkv', '.mpg', '.mp4', '.m4v', '.mov', '.ogm', '.ogv', '.wmv', '.divx', '.asf']

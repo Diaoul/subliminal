@@ -1,39 +1,30 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-#
-# Subliminal - Subtitles, faster than your thoughts
-# Copyright (c) 2011 Antoine Bertin <diaoulael@gmail.com>
+# Copyright 2011-2012 Antoine Bertin <diaoulael@gmail.com>
 #
 # This file is part of Subliminal.
 #
 # Subliminal is free software; you can redistribute it and/or modify it under
-# the terms of the Lesser GNU General Public License as published by
+# the terms of the GNU Lesser General Public License as published by
 # the Free Software Foundation; either version 3 of the License, or
 # (at your option) any later version.
 #
 # Subliminal is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# Lesser GNU General Public License for more details.
+# GNU Lesser General Public License for more details.
 #
-# You should have received a copy of the Lesser GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
+# You should have received a copy of the GNU Lesser General Public License
+# along with Subliminal.  If not, see <http://www.gnu.org/licenses/>.
 import os
-import sys
-
-
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'subliminal')))
-
-
+import logging
+import unittest
 from subliminal import videos
 from subliminal.exceptions import MissingLanguageError, PluginError
 from subliminal.plugins import BierDopje, OpenSubtitles, TheSubDB, SubsWiki, \
     Subtitulos
 from subliminal.subtitles import Subtitle
 from subliminal.utils import PluginConfig
-import logging
-import unittest
 
 
 logging.getLogger('subliminal').setLevel(logging.DEBUG)

@@ -15,33 +15,51 @@
 #
 # You should have received a copy of the GNU Lesser General Public License
 # along with Subliminal.  If not, see <http://www.gnu.org/licenses/>.
-from languages import list_languages, convert_language
-import abc
+from .languages import list_languages, convert_language
 import os.path
 
 
 __all__ = ['Subtitle', 'EmbeddedSubtitle', 'ExternalSubtitle', 'ResultSubtitle', 'get_subtitle_path']
 
 
+#: Subtitles extensions
 EXTENSIONS = ['.srt', '.sub', '.txt']
 
 
 class Subtitle(object):
-    __metaclass__ = abc.ABCMeta
-    """Base class for subtitles"""
+    """Base class for subtitles
 
+    :param string path: path to the subtitle
+    :param string language: language of the subtitle (second element of :class:`~subliminal.languages.LANGUAGES`)
+
+    """
     def __init__(self, path, language):
         self.path = path
         self.language = language
 
     @property
     def exists(self):
+        """Whether the subtitle exists or not"""
         if self.path:
             return os.path.exists(self.path)
         return False
 
+
+class EmbeddedSubtitle(Subtitle):
+    def __init__(self, path, language, track_id):
+        super(EmbeddedSubtitle, self).__init__(path, language)
+        self.track_id = track_id
+
     @classmethod
-    def fromPath(cls, path):
+    def from_enzyme(cls, path, subtitle):
+        language = convert_language(subtitle.language, 1, 2)
+        return cls(path, language, subtitle.trackno)
+
+
+class ExternalSubtitle(Subtitle):
+    @classmethod
+    def from_path(cls, path):
+        """Create an :class:`ExternalSubtitle` from path"""
         extension = ''
         for e in EXTENSIONS:
             if path.endswith(e):
@@ -55,25 +73,10 @@ class Subtitle(object):
         return cls(path, language)
 
 
-class EmbeddedSubtitle(Subtitle):
-    def __init__(self, path, language, track_id):
-        super(EmbeddedSubtitle, self).__init__(path, language)
-        self.track_id = track_id
-
-    @classmethod
-    def fromEnzyme(cls, path, subtitle):
-        language = convert_language(subtitle.language, 1, 2)
-        return cls(path, language, subtitle.trackno)
-
-
-class ExternalSubtitle(Subtitle):
-    pass
-
-
 class ResultSubtitle(ExternalSubtitle):
-    def __init__(self, path, language, plugin, link, release=None, confidence=1, keywords=set()):
+    def __init__(self, path, language, service, link, release=None, confidence=1, keywords=set()):
         super(ResultSubtitle, self).__init__(path, language)
-        self.plugin = plugin
+        self.service = service
         self.link = link
         self.release = release
         self.confidence = confidence
@@ -87,13 +90,8 @@ class ResultSubtitle(ExternalSubtitle):
             return True
         return False
 
-    def convert(self):
-        converted = {'path': self.path, 'plugin': self.plugin, 'language': self.language, 'link': self.link, 'release': self.release,
-                     'confidence': self.confidence, 'keywords': self.keywords}
-        return converted
-
-    def __str__(self):
-        return repr(self.convert())
+    def __repr__(self):
+        return 'ResultSubtitle(%s, %s, %.2f, %s)' % (self.language, self.service, self.confidence, self.release)
 
 
 def get_subtitle_path(video_path, language, multi):

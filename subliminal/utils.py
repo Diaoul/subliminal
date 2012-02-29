@@ -15,27 +15,21 @@
 #
 # You should have received a copy of the GNU Lesser General Public License
 # along with Subliminal.  If not, see <http://www.gnu.org/licenses/>.
-import logging
 import re
-try:
-    from logging import NullHandler
-except ImportError:
-    class NullHandler(logging.Handler):
-        def emit(self, record):
-            pass
 
 
-__all__ = ['PluginConfig', 'get_keywords', 'split_keyword', 'NullHandler']
-
-
-class PluginConfig(object):
-    def __init__(self, multi=None, cache_dir=None, filemode=None):
-        self.multi = multi
-        self.cache_dir = cache_dir
-        self.filemode = filemode
+__all__ = ['get_keywords', 'split_keyword', 'NullHandler']
 
 
 def get_keywords(guess):
+    """Retrieve keywords from guessed informations
+
+    :param guess: guessed informations
+    :type guess: :class:`guessit.guess.Guess`
+    :return: lower case alphanumeric keywords
+    :rtype: set
+
+    """
     keywords = set()
     for k in ['releaseGroup', 'screenSize', 'videoCodec', 'format']:
         if k in guess:
@@ -44,5 +38,12 @@ def get_keywords(guess):
 
 
 def split_keyword(keyword):
+    """Split a keyword in multiple ones on any non-alphanumeric character
+
+    :param string keyword: keyword
+    :return: keywords
+    :rtype: set
+
+    """
     split = set(re.findall(r'\w+', keyword))
     return split

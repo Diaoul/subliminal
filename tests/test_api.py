@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # Copyright 2011-2012 Antoine Bertin <diaoulael@gmail.com>
 #
@@ -15,15 +16,17 @@
 #
 # You should have received a copy of the GNU Lesser General Public License
 # along with Subliminal.  If not, see <http://www.gnu.org/licenses/>.
-from .api import list_subtitles, download_subtitles
+from subliminal import *
 import logging
-try:
-    from logging import NullHandler
-except ImportError:
-    class NullHandler(logging.Handler):
-        def emit(self, record):
-            pass
+import os
+import unittest
 
 
-__all__ = ['list_subtitles', 'download_subtitles']
-logging.getLogger(__name__).addHandler(NullHandler())
+logging.getLogger('subliminal').setLevel(logging.DEBUG)
+cache_dir = u'/tmp/sublicache'
+if not os.path.exists(cache_dir):
+    os.mkdir(cache_dir)
+
+
+class ListSubtitlesTestCase(unittest.TestCase):
+    

@@ -24,8 +24,8 @@ setup(name='subliminal',
     version=__version__,
     license='LGPLv3',
     description='Subtitles, faster than your thoughts',
-    long_description=open('README.md').read() + '\n\n' +
-                     open('NEWS.md').read(),
+    long_description=open('README.rst').read() + '\n\n' +
+                     open('NEWS.rst').read(),
     classifiers=['Development Status :: 4 - Beta',
         'License :: OSI Approved :: GNU Library or Lesser General Public License (LGPL)',
         'Intended Audience :: Developers',

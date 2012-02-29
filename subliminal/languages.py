@@ -19,8 +19,16 @@ __all__ = ['convert_language', 'list_languages', 'LANGUAGES']
 
 
 def convert_language(language, to_iso, from_iso=None):
-    # if no from_iso is given, try to guess it
-    if from_iso == None:
+    """Convert a language into another format
+
+    :param string language: language
+    :param int to_iso: convert language to ISO-639-x
+    :param int from_iso: convert language from ISO-639-x
+    :return: converted language
+    :rtype: string
+
+    """
+    if from_iso == None:  # if no from_iso is given, try to guess it
         if language.startswith(language[:1].upper()):
             from_iso = 0
         elif len(language) == 2:
@@ -40,10 +48,17 @@ def convert_language(language, to_iso, from_iso=None):
 
 
 def list_languages(iso):
+    """List languages in the given ISO-639-x format
+
+    :param int iso: ISO-639-x format to list
+    :return: languages in the requested format
+    :rtype: list
+
+    """
     return [l[iso] for l in LANGUAGES if l[iso]]
 
 #: ISO-639-2 languages list from http://www.loc.gov/standards/iso639-2/ISO-639-2_utf-8.txt
-# + ('Brazilian', 'po', 'pob')
+#: + ('Brazilian', 'po', 'pob')
 LANGUAGES = [('Afar', 'aa', 'aar'),
              ('Abkhazian', 'ab', 'abk'),
              ('Achinese', '', 'ace'),

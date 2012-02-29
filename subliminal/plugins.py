@@ -18,11 +18,10 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Subliminal.  If not, see <http://www.gnu.org/licenses/>.
 from exceptions import DownloadFailedError, MissingLanguageError, PluginError
-from utils import get_keywords, PluginConfig, split_keyword
+from utils import get_keywords, split_keyword
 from videos import Episode, Movie, UnknownVideo
 from subtitles import ResultSubtitle, get_subtitle_path
 import BeautifulSoup
-import abc
 import gzip
 import logging
 import os
@@ -44,7 +43,6 @@ __all__ = ['PluginBase', 'OpenSubtitles', 'BierDopje', 'TheSubDB', 'SubsWiki', '
 
 #TODO: use ISO-639-2 in plugins instead of ISO-639-1
 class PluginBase(object):
-    __metaclass__ = abc.ABCMeta
     site_url = ''
     site_name = ''
     server_url = ''
@@ -58,29 +56,22 @@ class PluginBase(object):
     require_video = False
     shared_support = False
 
-    @abc.abstractmethod
     def __init__(self, config=None):
         self.config = config or PluginConfig()
         self.logger = logging.getLogger('subliminal.%s' % self.__class__.__name__)
 
-    @abc.abstractmethod
     def init(self):
         """Initiate connection"""
         self.session = requests.session(timeout=10, headers={'User-Agent': self.user_agent})
 
-    @abc.abstractmethod
     def terminate(self):
         """Terminate connection"""
 
-    @abc.abstractmethod
     def query(self, *args):
         """Make the actual query"""
-
-    @abc.abstractmethod
     def list(self, video, languages):
         """List subtitles"""
 
-    @abc.abstractmethod
     def download(self, subtitle):
         """Download a subtitle"""
 

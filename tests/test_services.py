@@ -16,15 +16,15 @@
 #
 # You should have received a copy of the GNU Lesser General Public License
 # along with Subliminal.  If not, see <http://www.gnu.org/licenses/>.
-import os
-import logging
-import unittest
 from subliminal import videos
 from subliminal.exceptions import MissingLanguageError, PluginError
-from subliminal.plugins import BierDopje, OpenSubtitles, TheSubDB, SubsWiki, \
-    Subtitulos
+from subliminal.services import ServiceConfig
+from subliminal.services.bierdopje import BierDopje
+from subliminal.services.opensubtitles import OpenSubtitles
 from subliminal.subtitles import Subtitle
-from subliminal.utils import PluginConfig
+import logging
+import os
+import unittest
 
 
 logging.getLogger('subliminal').setLevel(logging.DEBUG)
@@ -40,7 +40,7 @@ class BierDopjeTestCase(unittest.TestCase):
     download_tests = ['test_download']
 
     def setUp(self):
-        self.config = PluginConfig(multi=True, cache_dir=cache_dir)
+        self.config = ServiceConfig(multi=True, cache_dir=cache_dir)
         self.episode_path = u'The Big Bang Theory/Season 05/S05E06 - The Rhinitis Revelation - HD TV.mkv'
         self.movie_path = u'Inception (2010)/Inception - 1080p.mkv'
         self.languages = set(['en', 'nl'])
@@ -84,31 +84,30 @@ class BierDopjeTestCase(unittest.TestCase):
         self.assertTrue(len(results) == 0)
 
     def test_list_episode(self):
-        episode = videos.Video.fromPath(self.episode_path)
+        episode = videos.Video.from_path(self.episode_path)
         with BierDopje(self.config) as plugin:
             results = plugin.list(episode, self.languages)
         self.assertTrue(len(results) > 0)
 
     def test_list_movie(self):
-        movie = videos.Video.fromPath(self.movie_path)
+        movie = videos.Video.from_path(self.movie_path)
         with BierDopje(self.config) as plugin:
             results = plugin.list(movie, self.languages)
         self.assertTrue(len(results) == 0)
 
     def test_list_wrong_languages(self):
-        episode = videos.Video.fromPath(self.episode_path)
+        episode = videos.Video.from_path(self.episode_path)
         with BierDopje(self.config) as plugin:
             results = plugin.list(episode, self.wrong_languages)
         self.assertTrue(len(results) == 0)
 
     def test_download(self):
-        episode = videos.Video.fromPath(self.episode_path)
+        episode = videos.Video.from_path(self.episode_path)
         with BierDopje(self.config) as plugin:
             subtitle = plugin.list(episode, self.languages)[0]
             if os.path.exists(subtitle.path):
                 os.remove(subtitle.path)
-            result = plugin.download(subtitle)
-        self.assertTrue(isinstance(result, Subtitle))
+            plugin.download(subtitle)
         self.assertTrue(os.path.exists(subtitle.path))
 
 
@@ -118,7 +117,7 @@ class OpenSubtitlesTestCase(unittest.TestCase):
     download_tests = ['test_download']
 
     def setUp(self):
-        self.config = PluginConfig(multi=True, cache_dir=cache_dir)
+        self.config = ServiceConfig(multi=True, cache_dir=cache_dir)
         self.languages = set(['en', 'fr'])
         self.wrong_languages = set(['zz', 'yy'])
         self.fake_file = u'/tmp/fake_file'
@@ -152,19 +151,19 @@ class OpenSubtitlesTestCase(unittest.TestCase):
                 plugin.query(self.fake_file, self.wrong_languages, moviehash=self.hash, size=self.size)
 
     def test_list(self):
-        video = videos.Video.fromPath(self.path)
+        video = videos.Video.from_path(self.path)
         with OpenSubtitles(self.config) as plugin:
             results = plugin.list(video, self.languages)
         self.assertTrue(len(results) > 0)
 
     def test_list_wrong_languages(self):
-        video = videos.Video.fromPath(self.path)
+        video = videos.Video.from_path(self.path)
         with OpenSubtitles(self.config) as plugin:
             results = plugin.list(video, self.wrong_languages)
         self.assertTrue(len(results) == 0)
 
     def test_download(self):
-        video = videos.Video.fromPath(self.path)
+        video = videos.Video.from_path(self.path)
         with OpenSubtitles(self.config) as plugin:
             subtitle = plugin.list(video, self.languages)[0]
             if os.path.exists(subtitle.path):
@@ -181,7 +180,7 @@ class TheSubDBTestCase(unittest.TestCase):
 
     def setUp(self):
         TheSubDB.server_url = 'http://sandbox.thesubdb.com/'
-        self.config = PluginConfig(multi=True, cache_dir=cache_dir)
+        self.config = ServiceConfig(multi=True, cache_dir=cache_dir)
         self.path = u'justified.mp4'  # replace with something existing here
         self.hash = u'edc1981d6459c6111fe36205b4aff6c2'
         self.wrong_hash = u'ffffffffffffffffffffffffffffffff'
@@ -205,19 +204,19 @@ class TheSubDBTestCase(unittest.TestCase):
         self.assertTrue(len(results) == 0)
 
     def test_list(self):
-        video = videos.Video.fromPath(self.path)
+        video = videos.Video.from_path(self.path)
         with TheSubDB(self.config) as plugin:
             results = plugin.list(video, self.languages)
         self.assertTrue(len(results) > 0)
 
     def test_list_wrong_languages(self):
-        video = videos.Video.fromPath(self.path)
+        video = videos.Video.from_path(self.path)
         with TheSubDB(self.config) as plugin:
             results = plugin.list(video, self.wrong_languages)
         self.assertTrue(len(results) == 0)
 
     def test_download(self):
-        video = videos.Video.fromPath(self.path)
+        video = videos.Video.from_path(self.path)
         with TheSubDB(self.config) as plugin:
             subtitle = plugin.list(video, self.languages)[0]
             if os.path.exists(subtitle.path):
@@ -233,7 +232,7 @@ class SubsWikiTestCase(unittest.TestCase):
     download_tests = ['test_download']
 
     def setUp(self):
-        self.config = PluginConfig(multi=True, cache_dir=cache_dir)
+        self.config = ServiceConfig(multi=True, cache_dir=cache_dir)
         self.fake_file = u'/tmp/fake_file'
         self.languages = set(['en', 'es'])
         self.wrong_languages = set(['zz', 'ay'])
@@ -274,25 +273,25 @@ class SubsWikiTestCase(unittest.TestCase):
         self.assertTrue(len(results) == 0)
 
     def test_list_series(self):
-        video = videos.Video.fromPath(self.series_path)
+        video = videos.Video.from_path(self.series_path)
         with SubsWiki(self.config) as plugin:
             results = plugin.list(video, self.languages)
         self.assertTrue(len(results) > 0)
 
     def test_list_movie(self):
-        video = videos.Video.fromPath(self.movie_path)
+        video = videos.Video.from_path(self.movie_path)
         with SubsWiki(self.config) as plugin:
             results = plugin.list(video, self.languages)
         self.assertTrue(len(results) > 0)
 
     def test_list_series_wrong_languages(self):
-        video = videos.Video.fromPath(self.series_path)
+        video = videos.Video.from_path(self.series_path)
         with SubsWiki(self.config) as plugin:
             results = plugin.list(video, self.wrong_languages)
         self.assertTrue(len(results) == 0)
 
     def test_download(self):
-        video = videos.Video.fromPath(self.series_path)
+        video = videos.Video.from_path(self.series_path)
         with SubsWiki(self.config) as plugin:
             subtitle = plugin.list(video, self.languages)[0]
             if os.path.exists(subtitle.path):
@@ -308,7 +307,7 @@ class SubtitulosTestCase(unittest.TestCase):
     download_tests = ['test_download']
 
     def setUp(self):
-        self.config = PluginConfig(multi=True, cache_dir=cache_dir)
+        self.config = ServiceConfig(multi=True, cache_dir=cache_dir)
         self.fake_file = u'/tmp/fake_file'
         self.languages = set(['en', 'es'])
         self.wrong_languages = set(['zz', 'ay'])
@@ -335,19 +334,19 @@ class SubtitulosTestCase(unittest.TestCase):
         self.assertTrue(len(results) == 0)
 
     def test_list(self):
-        video = videos.Video.fromPath(self.path)
+        video = videos.Video.from_path(self.path)
         with Subtitulos(self.config) as plugin:
             results = plugin.list(video, self.languages)
         self.assertTrue(len(results) > 0)
 
     def test_list_wrong_languages(self):
-        video = videos.Video.fromPath(self.path)
+        video = videos.Video.from_path(self.path)
         with Subtitulos(self.config) as plugin:
             results = plugin.list(video, self.wrong_languages)
         self.assertTrue(len(results) == 0)
 
     def test_download(self):
-        video = videos.Video.fromPath(self.path)
+        video = videos.Video.from_path(self.path)
         with Subtitulos(self.config) as plugin:
             subtitle = plugin.list(video, self.languages)[0]
             if os.path.exists(subtitle.path):
@@ -361,9 +360,9 @@ def query_suite():
     suite = unittest.TestSuite()
     suite.addTests(map(BierDopjeTestCase, BierDopjeTestCase.query_tests))
     suite.addTests(map(OpenSubtitlesTestCase, OpenSubtitlesTestCase.query_tests))
-    suite.addTests(map(TheSubDBTestCase, TheSubDBTestCase.query_tests))
-    suite.addTests(map(SubsWikiTestCase, SubsWikiTestCase.query_tests))
-    suite.addTests(map(SubtitulosTestCase, SubtitulosTestCase.query_tests))
+#    suite.addTests(map(TheSubDBTestCase, TheSubDBTestCase.query_tests))
+#    suite.addTests(map(SubsWikiTestCase, SubsWikiTestCase.query_tests))
+#    suite.addTests(map(SubtitulosTestCase, SubtitulosTestCase.query_tests))
     return suite
 
 
@@ -371,9 +370,9 @@ def list_suite():
     suite = unittest.TestSuite()
     suite.addTests(map(BierDopjeTestCase, BierDopjeTestCase.list_tests))
     suite.addTests(map(OpenSubtitlesTestCase, OpenSubtitlesTestCase.list_tests))
-    suite.addTests(map(TheSubDBTestCase, TheSubDBTestCase.list_tests))
-    suite.addTests(map(SubsWikiTestCase, SubsWikiTestCase.list_tests))
-    suite.addTests(map(SubtitulosTestCase, SubtitulosTestCase.list_tests))
+#    suite.addTests(map(TheSubDBTestCase, TheSubDBTestCase.list_tests))
+#    suite.addTests(map(SubsWikiTestCase, SubsWikiTestCase.list_tests))
+#    suite.addTests(map(SubtitulosTestCase, SubtitulosTestCase.list_tests))
     return suite
 
 
@@ -381,9 +380,9 @@ def download_suite():
     suite = unittest.TestSuite()
     suite.addTests(map(BierDopjeTestCase, BierDopjeTestCase.download_tests))
     suite.addTests(map(OpenSubtitlesTestCase, OpenSubtitlesTestCase.download_tests))
-    suite.addTests(map(TheSubDBTestCase, TheSubDBTestCase.download_tests))
-    suite.addTests(map(SubsWikiTestCase, SubsWikiTestCase.download_tests))
-    suite.addTests(map(SubtitulosTestCase, SubtitulosTestCase.download_tests))
+#    suite.addTests(map(TheSubDBTestCase, TheSubDBTestCase.download_tests))
+#    suite.addTests(map(SubsWikiTestCase, SubsWikiTestCase.download_tests))
+#    suite.addTests(map(SubtitulosTestCase, SubtitulosTestCase.download_tests))
     return suite
 
 

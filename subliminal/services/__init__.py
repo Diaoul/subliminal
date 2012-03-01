@@ -106,6 +106,25 @@ class ServiceBase(object):
         return set(cls.languages.values())
 
     @classmethod
+    def check_validity(cls, video, languages):
+        """Check for video and languages validity in the Service
+
+        :param video: the video to check
+        :type video: :class:`~subliminal.videos.video`
+        :param set languages: languages to check
+        :rtype: bool
+
+        """
+        languages &= cls.available_languages()
+        if not languages:
+            logger.debug(u'No language available for service %s' % cls.__class__.__name__.lower())
+            return False
+        if not cls.is_valid_video(video):
+            logger.debug(u'%r is not valid for service %s' % (video, cls.__class__.__name__.lower()))
+            return False
+        return True
+
+    @classmethod
     def is_valid_video(cls, video):
         """Check if video is valid in the Service
 

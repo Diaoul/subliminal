@@ -26,14 +26,17 @@ import os
 import struct
 
 
-__all__ = ['EXTENSIONS', 'MIMETYPES', 'Video', 'Episode', 'Movie', 'UnknownVideo', 'scan']
+__all__ = ['EXTENSIONS', 'MIMETYPES', 'Video', 'Episode', 'Movie', 'UnknownVideo',
+           'scan', 'hash_opensubtitles', 'hash_thesubdb']
 logger = logging.getLogger(__name__)
 
 #: Video extensions
-EXTENSIONS = ['.avi', '.mkv', '.mpg', '.mp4', '.m4v', '.mov', '.ogm', '.ogv', '.wmv', '.divx', '.asf']
+EXTENSIONS = ['.avi', '.mkv', '.mpg', '.mp4', '.m4v', '.mov', '.ogm', '.ogv', '.wmv',
+              '.divx', '.asf']
 
 #: Video mimetypes
-MIMETYPES = ['video/mpeg', 'video/mp4', 'video/quicktime', 'video/x-ms-wmv', 'video/x-msvideo', 'video/x-flv', 'video/x-matroska', 'video/x-matroska-3d']
+MIMETYPES = ['video/mpeg', 'video/mp4', 'video/quicktime', 'video/x-ms-wmv', 'video/x-msvideo',
+             'video/x-flv', 'video/x-matroska', 'video/x-matroska-3d']
 
 
 class Video(object):

@@ -22,21 +22,6 @@ class Error(Exception):
     pass
 
 
-class BadStateError(Error):
-    """Exception raised when an invalid action is asked
-
-    Attributes:
-        current  -- current state of Subliminal instance
-        expected -- expected state of Subliminal instance
-    """
-    def __init__(self, current, expected):
-        self.current = current
-        self.expected = expected
-
-    def __str__(self):
-        return 'Expected state %d but current state is %d' % (self.expected, self.current)
-
-
 class InvalidLanguageError(Error):
     """Exception raised when invalid language is submitted
 

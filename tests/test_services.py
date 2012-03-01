@@ -17,17 +17,18 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Subliminal.  If not, see <http://www.gnu.org/licenses/>.
 from subliminal import videos
-from subliminal.exceptions import MissingLanguageError, PluginError
+from subliminal.exceptions import MissingLanguageError, ServiceError
 from subliminal.services import ServiceConfig
 from subliminal.services.bierdopje import BierDopje
 from subliminal.services.opensubtitles import OpenSubtitles
+from subliminal.services.subswiki import SubsWiki
+from subliminal.services.subtitulos import Subtitulos
+from subliminal.services.thesubdb import TheSubDB
 from subliminal.subtitles import Subtitle
-import logging
 import os
 import unittest
 
 
-logging.getLogger('subliminal').setLevel(logging.DEBUG)
 cache_dir = u'/tmp/sublicache'
 if not os.path.exists(cache_dir):
     os.mkdir(cache_dir)
@@ -54,60 +55,60 @@ class BierDopjeTestCase(unittest.TestCase):
         self.wrong_tvdbid = 9999999999
 
     def test_query_series(self):
-        with BierDopje(self.config) as plugin:
-            results = plugin.query(self.season, self.episode, self.languages, self.fake_file, series=self.series)
+        with BierDopje(self.config) as service:
+            results = service.query(self.season, self.episode, self.languages, self.fake_file, series=self.series)
         self.assertTrue(len(results) > 0)
 
     def test_query_wrong_series(self):
-        with BierDopje(self.config) as plugin:
-            results = plugin.query(self.season, self.episode, self.languages, self.fake_file, series=self.wrong_series)
+        with BierDopje(self.config) as service:
+            results = service.query(self.season, self.episode, self.languages, self.fake_file, series=self.wrong_series)
         self.assertTrue(len(results) == 0)
 
     def test_query_wrong_languages(self):
-        with BierDopje(self.config) as plugin:
-            results = plugin.query(self.season, self.episode, self.wrong_languages, self.fake_file, series=self.series)
+        with BierDopje(self.config) as service:
+            results = service.query(self.season, self.episode, self.wrong_languages, self.fake_file, series=self.series)
         self.assertTrue(len(results) == 0)
 
     def test_query_tvdbid(self):
-        with BierDopje(self.config) as plugin:
-            results = plugin.query(self.season, self.episode, self.languages, self.fake_file, tvdbid=self.tvdbid)
+        with BierDopje(self.config) as service:
+            results = service.query(self.season, self.episode, self.languages, self.fake_file, tvdbid=self.tvdbid)
         self.assertTrue(len(results) > 0)
 
     def test_query_series_and_tvdbid(self):
-        with BierDopje(self.config) as plugin:
-            results = plugin.query(self.season, self.episode, self.languages, self.fake_file, series=self.series, tvdbid=self.tvdbid)
+        with BierDopje(self.config) as service:
+            results = service.query(self.season, self.episode, self.languages, self.fake_file, series=self.series, tvdbid=self.tvdbid)
         self.assertTrue(len(results) > 0)
 
     def test_query_wrong_tvdbid(self):
-        with BierDopje(self.config) as plugin:
-            results = plugin.query(self.season, self.episode, self.languages, self.fake_file, tvdbid=self.wrong_tvdbid)
+        with BierDopje(self.config) as service:
+            results = service.query(self.season, self.episode, self.languages, self.fake_file, tvdbid=self.wrong_tvdbid)
         self.assertTrue(len(results) == 0)
 
     def test_list_episode(self):
         episode = videos.Video.from_path(self.episode_path)
-        with BierDopje(self.config) as plugin:
-            results = plugin.list(episode, self.languages)
+        with BierDopje(self.config) as service:
+            results = service.list(episode, self.languages)
         self.assertTrue(len(results) > 0)
 
     def test_list_movie(self):
         movie = videos.Video.from_path(self.movie_path)
-        with BierDopje(self.config) as plugin:
-            results = plugin.list(movie, self.languages)
+        with BierDopje(self.config) as service:
+            results = service.list(movie, self.languages)
         self.assertTrue(len(results) == 0)
 
     def test_list_wrong_languages(self):
         episode = videos.Video.from_path(self.episode_path)
-        with BierDopje(self.config) as plugin:
-            results = plugin.list(episode, self.wrong_languages)
+        with BierDopje(self.config) as service:
+            results = service.list(episode, self.wrong_languages)
         self.assertTrue(len(results) == 0)
 
     def test_download(self):
         episode = videos.Video.from_path(self.episode_path)
-        with BierDopje(self.config) as plugin:
-            subtitle = plugin.list(episode, self.languages)[0]
+        with BierDopje(self.config) as service:
+            subtitle = service.list(episode, self.languages)[0]
             if os.path.exists(subtitle.path):
                 os.remove(subtitle.path)
-            plugin.download(subtitle)
+            service.download(subtitle)
         self.assertTrue(os.path.exists(subtitle.path))
 
 
@@ -131,44 +132,44 @@ class OpenSubtitlesTestCase(unittest.TestCase):
         self.size = 882571264L
 
     def test_query_query(self):
-        with OpenSubtitles(self.config) as plugin:
-            results = plugin.query(self.fake_file, self.languages, query=self.movie)
+        with OpenSubtitles(self.config) as service:
+            results = service.query(self.fake_file, self.languages, query=self.movie)
         self.assertTrue(len(results) > 0)
 
     def test_query_imdbid(self):
-        with OpenSubtitles(self.config) as plugin:
-            results = plugin.query(self.fake_file, self.languages, imdbid=self.imdbid)
+        with OpenSubtitles(self.config) as service:
+            results = service.query(self.fake_file, self.languages, imdbid=self.imdbid)
         self.assertTrue(len(results) > 0)
 
     def test_query_hash(self):
-        with OpenSubtitles(self.config) as plugin:
-            results = plugin.query(self.fake_file, self.languages, moviehash=self.hash, size=self.size)
+        with OpenSubtitles(self.config) as service:
+            results = service.query(self.fake_file, self.languages, moviehash=self.hash, size=self.size)
         self.assertTrue(len(results) > 0)
 
     def test_query_wrong_languages(self):
-        with OpenSubtitles(self.config) as plugin:
+        with OpenSubtitles(self.config) as service:
             with self.assertRaises(MissingLanguageError):
-                plugin.query(self.fake_file, self.wrong_languages, moviehash=self.hash, size=self.size)
+                service.query(self.fake_file, self.wrong_languages, moviehash=self.hash, size=self.size)
 
     def test_list(self):
         video = videos.Video.from_path(self.path)
-        with OpenSubtitles(self.config) as plugin:
-            results = plugin.list(video, self.languages)
+        with OpenSubtitles(self.config) as service:
+            results = service.list(video, self.languages)
         self.assertTrue(len(results) > 0)
 
     def test_list_wrong_languages(self):
         video = videos.Video.from_path(self.path)
-        with OpenSubtitles(self.config) as plugin:
-            results = plugin.list(video, self.wrong_languages)
+        with OpenSubtitles(self.config) as service:
+            results = service.list(video, self.wrong_languages)
         self.assertTrue(len(results) == 0)
 
     def test_download(self):
         video = videos.Video.from_path(self.path)
-        with OpenSubtitles(self.config) as plugin:
-            subtitle = plugin.list(video, self.languages)[0]
+        with OpenSubtitles(self.config) as service:
+            subtitle = service.list(video, self.languages)[0]
             if os.path.exists(subtitle.path):
                 os.remove(subtitle.path)
-            result = plugin.download(subtitle)
+            result = service.download(subtitle)
         self.assertTrue(isinstance(result, Subtitle))
         self.assertTrue(os.path.exists(subtitle.path))
 
@@ -179,7 +180,6 @@ class TheSubDBTestCase(unittest.TestCase):
     download_tests = ['test_download']
 
     def setUp(self):
-        TheSubDB.server_url = 'http://sandbox.thesubdb.com/'
         self.config = ServiceConfig(multi=True, cache_dir=cache_dir)
         self.path = u'justified.mp4'  # replace with something existing here
         self.hash = u'edc1981d6459c6111fe36205b4aff6c2'
@@ -189,39 +189,39 @@ class TheSubDBTestCase(unittest.TestCase):
         self.fake_file = u'/tmp/fake_file'
 
     def test_query(self):
-        with TheSubDB(self.config) as plugin:
-            results = plugin.query(self.fake_file, self.hash, self.languages)
+        with TheSubDB(self.config) as service:
+            results = service.query(self.fake_file, self.hash, self.languages)
         self.assertTrue(len(results) > 0)
 
     def test_query_wrong_hash(self):
-        with TheSubDB(self.config) as plugin:
-            results = plugin.query(self.fake_file, self.wrong_hash, self.languages)
+        with TheSubDB(self.config) as service:
+            results = service.query(self.fake_file, self.wrong_hash, self.languages)
         self.assertTrue(len(results) == 0)
 
     def test_query_wrong_languages(self):
-        with TheSubDB(self.config) as plugin:
-            results = plugin.query(self.fake_file, self.hash, self.wrong_languages)
+        with TheSubDB(self.config) as service:
+            results = service.query(self.fake_file, self.hash, self.wrong_languages)
         self.assertTrue(len(results) == 0)
 
     def test_list(self):
         video = videos.Video.from_path(self.path)
-        with TheSubDB(self.config) as plugin:
-            results = plugin.list(video, self.languages)
+        with TheSubDB(self.config) as service:
+            results = service.list(video, self.languages)
         self.assertTrue(len(results) > 0)
 
     def test_list_wrong_languages(self):
         video = videos.Video.from_path(self.path)
-        with TheSubDB(self.config) as plugin:
-            results = plugin.list(video, self.wrong_languages)
+        with TheSubDB(self.config) as service:
+            results = service.list(video, self.wrong_languages)
         self.assertTrue(len(results) == 0)
 
     def test_download(self):
         video = videos.Video.from_path(self.path)
-        with TheSubDB(self.config) as plugin:
-            subtitle = plugin.list(video, self.languages)[0]
+        with TheSubDB(self.config) as service:
+            subtitle = service.list(video, self.languages)[0]
             if os.path.exists(subtitle.path):
                 os.remove(subtitle.path)
-            result = plugin.download(subtitle)
+            result = service.download(subtitle)
         self.assertTrue(isinstance(result, Subtitle))
         self.assertTrue(os.path.exists(subtitle.path))
 
@@ -248,56 +248,55 @@ class SubsWikiTestCase(unittest.TestCase):
         self.series_episode = 6
 
     def test_query_series(self):
-        with SubsWiki(self.config) as plugin:
-            results = plugin.query(self.fake_file, self.languages, keywords=self.series_keywords, series=self.series, season=self.series_season, episode=self.series_episode)
+        with SubsWiki(self.config) as service:
+            results = service.query(self.fake_file, self.languages, keywords=self.series_keywords, series=self.series, season=self.series_season, episode=self.series_episode)
         self.assertTrue(len(results) > 0)
 
     def test_query_movie(self):
-        with SubsWiki(self.config) as plugin:
-            results = plugin.query(self.fake_file, self.languages, keywords=self.movie_keywords, movie=self.movie, year=self.movie_year)
+        with SubsWiki(self.config) as service:
+            results = service.query(self.fake_file, self.languages, keywords=self.movie_keywords, movie=self.movie, year=self.movie_year)
         self.assertTrue(len(results) > 0)
 
     def test_query_wrong_parameters(self):
-        with SubsWiki(self.config) as plugin:
-            with self.assertRaises(PluginError):
-                plugin.query(self.fake_file, self.languages, keywords=self.movie_keywords, movie=self.movie, series=self.series)
+        with SubsWiki(self.config) as service:
+            with self.assertRaises(ServiceError):
+                service.query(self.fake_file, self.languages, keywords=self.movie_keywords, movie=self.movie, series=self.series)
 
     def test_query_wrong_series(self):
-        with SubsWiki(self.config) as plugin:
-            results = plugin.query(self.fake_file, self.languages, keywords=self.series_keywords, series=self.wrong_series, season=self.series_season, episode=self.series_episode)
+        with SubsWiki(self.config) as service:
+            results = service.query(self.fake_file, self.languages, keywords=self.series_keywords, series=self.wrong_series, season=self.series_season, episode=self.series_episode)
         self.assertTrue(len(results) == 0)
 
     def test_query_wrong_languages(self):
-        with SubsWiki(self.config) as plugin:
-            results = plugin.query(self.fake_file, self.wrong_languages, keywords=self.series_keywords, series=self.series, season=self.series_season, episode=self.series_episode)
+        with SubsWiki(self.config) as service:
+            results = service.query(self.fake_file, self.wrong_languages, keywords=self.series_keywords, series=self.series, season=self.series_season, episode=self.series_episode)
         self.assertTrue(len(results) == 0)
 
     def test_list_series(self):
         video = videos.Video.from_path(self.series_path)
-        with SubsWiki(self.config) as plugin:
-            results = plugin.list(video, self.languages)
+        with SubsWiki(self.config) as service:
+            results = service.list(video, self.languages)
         self.assertTrue(len(results) > 0)
 
     def test_list_movie(self):
         video = videos.Video.from_path(self.movie_path)
-        with SubsWiki(self.config) as plugin:
-            results = plugin.list(video, self.languages)
+        with SubsWiki(self.config) as service:
+            results = service.list(video, self.languages)
         self.assertTrue(len(results) > 0)
 
     def test_list_series_wrong_languages(self):
         video = videos.Video.from_path(self.series_path)
-        with SubsWiki(self.config) as plugin:
-            results = plugin.list(video, self.wrong_languages)
+        with SubsWiki(self.config) as service:
+            results = service.list(video, self.wrong_languages)
         self.assertTrue(len(results) == 0)
 
     def test_download(self):
         video = videos.Video.from_path(self.series_path)
-        with SubsWiki(self.config) as plugin:
-            subtitle = plugin.list(video, self.languages)[0]
+        with SubsWiki(self.config) as service:
+            subtitle = service.list(video, self.languages)[0]
             if os.path.exists(subtitle.path):
                 os.remove(subtitle.path)
-            result = plugin.download(subtitle)
-        self.assertTrue(isinstance(result, Subtitle))
+            service.download(subtitle)
         self.assertTrue(os.path.exists(subtitle.path))
 
 
@@ -319,40 +318,39 @@ class SubtitulosTestCase(unittest.TestCase):
         self.episode = 6
 
     def test_query(self):
-        with Subtitulos(self.config) as plugin:
-            results = plugin.query(self.fake_file, self.languages, self.keywords, self.series, self.season, self.episode)
+        with Subtitulos(self.config) as service:
+            results = service.query(self.fake_file, self.languages, self.keywords, self.series, self.season, self.episode)
         self.assertTrue(len(results) > 0)
 
     def test_query_wrong_series(self):
-        with Subtitulos(self.config) as plugin:
-            results = plugin.query(self.fake_file, self.languages, self.keywords, self.wrong_series, self.season, self.episode)
+        with Subtitulos(self.config) as service:
+            results = service.query(self.fake_file, self.languages, self.keywords, self.wrong_series, self.season, self.episode)
         self.assertTrue(len(results) == 0)
 
     def test_query_wrong_languages(self):
-        with Subtitulos(self.config) as plugin:
-            results = plugin.query(self.fake_file, self.wrong_languages, self.keywords, self.series, self.season, self.episode)
+        with Subtitulos(self.config) as service:
+            results = service.query(self.fake_file, self.wrong_languages, self.keywords, self.series, self.season, self.episode)
         self.assertTrue(len(results) == 0)
 
     def test_list(self):
         video = videos.Video.from_path(self.path)
-        with Subtitulos(self.config) as plugin:
-            results = plugin.list(video, self.languages)
+        with Subtitulos(self.config) as service:
+            results = service.list(video, self.languages)
         self.assertTrue(len(results) > 0)
 
     def test_list_wrong_languages(self):
         video = videos.Video.from_path(self.path)
-        with Subtitulos(self.config) as plugin:
-            results = plugin.list(video, self.wrong_languages)
+        with Subtitulos(self.config) as service:
+            results = service.list(video, self.wrong_languages)
         self.assertTrue(len(results) == 0)
 
     def test_download(self):
         video = videos.Video.from_path(self.path)
-        with Subtitulos(self.config) as plugin:
-            subtitle = plugin.list(video, self.languages)[0]
+        with Subtitulos(self.config) as service:
+            subtitle = service.list(video, self.languages)[0]
             if os.path.exists(subtitle.path):
                 os.remove(subtitle.path)
-            result = plugin.download(subtitle)
-        self.assertTrue(isinstance(result, Subtitle))
+            result = service.download(subtitle)
         self.assertTrue(os.path.exists(subtitle.path))
 
 
@@ -360,9 +358,9 @@ def query_suite():
     suite = unittest.TestSuite()
     suite.addTests(map(BierDopjeTestCase, BierDopjeTestCase.query_tests))
     suite.addTests(map(OpenSubtitlesTestCase, OpenSubtitlesTestCase.query_tests))
-#    suite.addTests(map(TheSubDBTestCase, TheSubDBTestCase.query_tests))
-#    suite.addTests(map(SubsWikiTestCase, SubsWikiTestCase.query_tests))
-#    suite.addTests(map(SubtitulosTestCase, SubtitulosTestCase.query_tests))
+    suite.addTests(map(TheSubDBTestCase, TheSubDBTestCase.query_tests))
+    suite.addTests(map(SubsWikiTestCase, SubsWikiTestCase.query_tests))
+    suite.addTests(map(SubtitulosTestCase, SubtitulosTestCase.query_tests))
     return suite
 
 
@@ -370,9 +368,9 @@ def list_suite():
     suite = unittest.TestSuite()
     suite.addTests(map(BierDopjeTestCase, BierDopjeTestCase.list_tests))
     suite.addTests(map(OpenSubtitlesTestCase, OpenSubtitlesTestCase.list_tests))
-#    suite.addTests(map(TheSubDBTestCase, TheSubDBTestCase.list_tests))
-#    suite.addTests(map(SubsWikiTestCase, SubsWikiTestCase.list_tests))
-#    suite.addTests(map(SubtitulosTestCase, SubtitulosTestCase.list_tests))
+    suite.addTests(map(TheSubDBTestCase, TheSubDBTestCase.list_tests))
+    suite.addTests(map(SubsWikiTestCase, SubsWikiTestCase.list_tests))
+    suite.addTests(map(SubtitulosTestCase, SubtitulosTestCase.list_tests))
     return suite
 
 
@@ -380,9 +378,9 @@ def download_suite():
     suite = unittest.TestSuite()
     suite.addTests(map(BierDopjeTestCase, BierDopjeTestCase.download_tests))
     suite.addTests(map(OpenSubtitlesTestCase, OpenSubtitlesTestCase.download_tests))
-#    suite.addTests(map(TheSubDBTestCase, TheSubDBTestCase.download_tests))
-#    suite.addTests(map(SubsWikiTestCase, SubsWikiTestCase.download_tests))
-#    suite.addTests(map(SubtitulosTestCase, SubtitulosTestCase.download_tests))
+    suite.addTests(map(TheSubDBTestCase, TheSubDBTestCase.download_tests))
+    suite.addTests(map(SubsWikiTestCase, SubsWikiTestCase.download_tests))
+    suite.addTests(map(SubtitulosTestCase, SubtitulosTestCase.download_tests))
     return suite
 
 

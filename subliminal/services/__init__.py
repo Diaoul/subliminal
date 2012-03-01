@@ -83,9 +83,11 @@ class ServiceBase(object):
 
     def query(self, *args):
         """Make the actual query"""
+        pass
 
     def list(self, video, languages):
         """List subtitles"""
+        pass
 
     def download(self, subtitle):
         """Download a subtitle"""

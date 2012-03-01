@@ -18,7 +18,7 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Subliminal.  If not, see <http://www.gnu.org/licenses/>.
 from . import ServiceBase
-from ..exceptions import PluginError, DownloadFailedError
+from ..exceptions import ServiceError, DownloadFailedError
 from ..subtitles import get_subtitle_path, ResultSubtitle
 from ..videos import Episode, Movie
 import gzip
@@ -75,7 +75,7 @@ class OpenSubtitles(ServiceBase):
         super(OpenSubtitles, self).init()
         result = self.server.LogIn('', '', 'eng', self.user_agent)
         if result['status'] != '200 OK':
-            raise PluginError('Login failed')
+            raise ServiceError('Login failed')
         self.token = result['token']
 
     def terminate(self):
@@ -92,7 +92,7 @@ class OpenSubtitles(ServiceBase):
         if query:
             searches.append({'query': query})
         if not searches:
-            raise PluginError('One or more parameter missing')
+            raise ServiceError('One or more parameter missing')
         for search in searches:
             search['sublanguageid'] = ','.join([self.get_language(l) for l in languages])
         logger.debug(u'Getting subtitles %r with token %s' % (searches, self.token))

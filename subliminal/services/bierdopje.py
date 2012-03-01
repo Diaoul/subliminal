@@ -18,7 +18,7 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with Subliminal.  If not, see <http://www.gnu.org/licenses/>.
 from . import ServiceBase
-from ..exceptions import PluginError
+from ..exceptions import ServiceError
 from ..subtitles import get_subtitle_path, ResultSubtitle
 from ..videos import Episode
 import BeautifulSoup
@@ -51,7 +51,7 @@ class BierDopje(ServiceBase):
     def init_cache(self):
         logger.debug(u'Initializing cache...')
         if not self.config or not self.config.cache_dir:
-            raise PluginError('Cache directory is required')
+            raise ServiceError('Cache directory is required')
         self.showids_cache = os.path.join(self.config.cache_dir, 'bierdopje_showids.cache')
         if not os.path.exists(self.showids_cache):
             self.save_cache()
@@ -94,7 +94,7 @@ class BierDopje(ServiceBase):
             request_source = 'tvdbid'
             request_is_tvdbid = 'true'
         else:
-            raise PluginError('One or more parameter missing')
+            raise ServiceError('One or more parameter missing')
         subtitles = []
         for language in languages:
             logger.debug(u'Getting subtitles for %s %d season %d episode %d with language %s' % (request_source, request_id, season, episode, language))

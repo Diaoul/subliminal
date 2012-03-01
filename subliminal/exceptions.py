@@ -63,21 +63,21 @@ class MissingLanguageError(Error):
         return self.language
 
 
-class InvalidPluginError(Error):
-    """"Exception raised when invalid plugin is submitted
+class InvalidServiceError(Error):
+    """Exception raised when invalid service is submitted
 
-    Attributes:
-        plugin -- plugin that cause the error
+    :param string service: service that causes the error
+
     """
-    def __init__(self, plugin):
-        self.plugin = plugin
+    def __init__(self, service):
+        self.service = service
 
     def __str__(self):
-        return self.plugin
+        return self.service
 
 
-class PluginError(Error):
-    """"Exception raised by plugins"""
+class ServiceError(Error):
+    """"Exception raised by services"""
     pass
 
 
@@ -87,7 +87,7 @@ class WrongTaskError(Error):
 
 
 class DownloadFailedError(Error):
-    """"Exception raised when a download task has failed in plugin"""
+    """"Exception raised when a download task has failed in service"""
     pass
 
 

@@ -17,8 +17,8 @@
 #
 # You should have received a copy of the GNU Lesser General Public License
 # along with Subliminal.  If not, see <http://www.gnu.org/licenses/>.
-from .core import consume_task, LANGUAGE_INDEX, PLUGIN_INDEX, PLUGIN_CONFIDENCE, \
-    MATCHING_CONFIDENCE, SERVICES, create_list_tasks, create_download_tasks
+from .core import (consume_task, LANGUAGE_INDEX, SERVICE_INDEX, SERVICE_CONFIDENCE,
+    MATCHING_CONFIDENCE, SERVICES, create_list_tasks, create_download_tasks)
 from .languages import list_languages
 from .tasks import StopTask
 import Queue
@@ -35,7 +35,7 @@ class Worker(threading.Thread):
         threading.Thread.__init__(self)
         self.tasks = tasks
         self.results = results
-        self.plugins = {}
+        self.services = {}
 
     def run(self):
         while 1:
@@ -44,7 +44,7 @@ class Worker(threading.Thread):
                 task = self.tasks.get(block=True)
                 if isinstance(task, StopTask):
                     break
-                result = consume_task(task, self.plugins)
+                result = consume_task(task, self.services)
                 self.results.put(result)
             except:
                 logger.error(u'Exception raised in worker %s' % self.name, exc_info=True)
@@ -55,7 +55,7 @@ class Worker(threading.Thread):
 
     def terminate(self):
         """Terminate instantiated services"""
-        for service_name, service in self.plugins.iteritems():
+        for service_name, service in self.services.iteritems():
             try:
                 service.terminate()
             except:
@@ -127,7 +127,7 @@ class Pool(object):
         languages = set(languages or list_languages(1))
         if isinstance(entries, basestring):
             entries = [entries]
-        order = order or [LANGUAGE_INDEX, PLUGIN_INDEX, PLUGIN_CONFIDENCE, MATCHING_CONFIDENCE]
+        order = order or [LANGUAGE_INDEX, SERVICE_INDEX, SERVICE_CONFIDENCE, MATCHING_CONFIDENCE]
         self.list_subtitles(entries, languages, services, cache_dir, max_depth, force, multi)
         self.join()
         list_results = self.collect()

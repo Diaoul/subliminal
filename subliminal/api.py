@@ -17,7 +17,7 @@
 #
 # You should have received a copy of the GNU Lesser General Public License
 # along with Subliminal.  If not, see <http://www.gnu.org/licenses/>.
-from .core import (SERVICES, LANGUAGE_INDEX, PLUGIN_INDEX, PLUGIN_CONFIDENCE,
+from .core import (SERVICES, LANGUAGE_INDEX, SERVICE_INDEX, SERVICE_CONFIDENCE,
     MATCHING_CONFIDENCE, create_list_tasks, consume_task, create_download_tasks,
     group_by_video, key_subtitles)
 from .languages import list_languages
@@ -75,7 +75,7 @@ def download_subtitles(paths, languages=None, services=None, force=True, multi=F
     :param string cache_dir: path to the cache directory to use
     :param int max_depth: maximum depth for scanning entries
     :param order: preferred order for subtitles sorting
-    :type list: list of :data:`~subliminal.core.LANGUAGE_INDEX`, :data:`~subliminal.core.PLUGIN_INDEX`, :data:`~subliminal.core.PLUGIN_CONFIDENCE`, :data:`~subliminal.core.MATCHING_CONFIDENCE`
+    :type list: list of :data:`~subliminal.core.LANGUAGE_INDEX`, :data:`~subliminal.core.SERVICE_INDEX`, :data:`~subliminal.core.SERVICE_CONFIDENCE`, :data:`~subliminal.core.MATCHING_CONFIDENCE`
     :return: found subtitles
     :rtype: list of (:class:`~subliminal.videos.Video`, [:class:`~subliminal.subtitles.ResultSubtitle`])
 
@@ -84,7 +84,7 @@ def download_subtitles(paths, languages=None, services=None, force=True, multi=F
     languages = languages or list_languages(1)
     if isinstance(paths, basestring):
         paths = [paths]
-    order = order or [LANGUAGE_INDEX, PLUGIN_INDEX, PLUGIN_CONFIDENCE, MATCHING_CONFIDENCE]
+    order = order or [LANGUAGE_INDEX, SERVICE_INDEX, SERVICE_CONFIDENCE, MATCHING_CONFIDENCE]
     subtitles_by_video = group_by_video(list_subtitles(paths, set(languages), services, force, multi, cache_dir, max_depth))
     for video, subtitles in subtitles_by_video.iteritems():
         subtitles.sort(key=lambda s: key_subtitles(s, video, languages, services, order), reverse=True)

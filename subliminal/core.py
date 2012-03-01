@@ -26,12 +26,12 @@ import guessit
 import logging
 
 
-__all__ = ['SERVICES', 'LANGUAGE_INDEX', 'PLUGIN_INDEX', 'PLUGIN_CONFIDENCE', 'MATCHING_CONFIDENCE',
+__all__ = ['SERVICES', 'LANGUAGE_INDEX', 'SERVICE_INDEX', 'SERVICE_CONFIDENCE', 'MATCHING_CONFIDENCE',
            'create_list_tasks', 'create_download_tasks', 'consume_task', 'matching_confidence',
            'key_subtitles', 'group_by_video']
 logger = logging.getLogger(__name__)
 SERVICES = ['opensubtitles', 'bierdopje']
-LANGUAGE_INDEX, PLUGIN_INDEX, PLUGIN_CONFIDENCE, MATCHING_CONFIDENCE = range(4)
+LANGUAGE_INDEX, SERVICE_INDEX, SERVICE_CONFIDENCE, MATCHING_CONFIDENCE = range(4)
 
 
 def create_list_tasks(paths, languages, services, force, multi, cache_dir, max_depth):
@@ -89,7 +89,7 @@ def create_download_tasks(subtitles_by_video, multi):
     :param subtitles_by_video: :class:`~subliminal.tasks.ListTask` results grouped by video and sorted
     :type subtitles_by_video: dict of :class:`~subliminal.videos.Video` => [:class:`~subliminal.subtitles.Subtitle`]
     :param order: preferred order for subtitles sorting
-    :type list: list of :data:`LANGUAGE_INDEX`, :data:`PLUGIN_INDEX`, :data:`PLUGIN_CONFIDENCE`, :data:`MATCHING_CONFIDENCE`
+    :type list: list of :data:`LANGUAGE_INDEX`, :data:`SERVICE_INDEX`, :data:`SERVICE_CONFIDENCE`, :data:`MATCHING_CONFIDENCE`
     :param bool multi: download multiple languages for the same video
     :return: the created tasks
     :rtype: list of :class:`~subliminal.tasks.DownloadTask`
@@ -201,7 +201,7 @@ def key_subtitles(subtitle, video, languages, services, order):
     :param list languages: languages in preferred order
     :param list services: services in preferred order
     :param order: preferred order for subtitles sorting
-    :type list: list of :data:`LANGUAGE_INDEX`, :data:`PLUGIN_INDEX`, :data:`PLUGIN_CONFIDENCE`, :data:`MATCHING_CONFIDENCE`
+    :type list: list of :data:`LANGUAGE_INDEX`, :data:`SERVICE_INDEX`, :data:`SERVICE_CONFIDENCE`, :data:`MATCHING_CONFIDENCE`
     :return: a key ready to use for subtitles sorting
     :rtype: int
 
@@ -210,9 +210,9 @@ def key_subtitles(subtitle, video, languages, services, order):
     for sort_item in order:
         if sort_item == LANGUAGE_INDEX:
             key += '{0:03d}'.format(len(languages) - languages.index(subtitle.language) - 1)
-        elif sort_item == PLUGIN_INDEX:
+        elif sort_item == SERVICE_INDEX:
             key += '{0:02d}'.format(len(services) - services.index(subtitle.service) - 1)
-        elif sort_item == PLUGIN_CONFIDENCE:
+        elif sort_item == SERVICE_CONFIDENCE:
             key += '{0:04d}'.format(int(subtitle.confidence * 1000))
         elif sort_item == MATCHING_CONFIDENCE:
             confidence = 0

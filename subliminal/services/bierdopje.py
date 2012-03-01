@@ -113,18 +113,10 @@ class BierDopje(ServiceBase):
         return subtitles
 
     def list(self, video, languages):
-        languages = languages & self.available_languages()
-        if not languages:
-            logger.debug(u'No language available')
-            return []
-        if not self.is_valid_video(video):
-            logger.debug(u'Not a valid video')
+        if not self.check_validity(video, languages):
             return []
         results = self.query(video.season, video.episode, languages, video.path or video.release, video.tvdbid, video.series)
         return results
-
-    def download(self, subtitle):
-        self.download_file(subtitle.link, subtitle.path)
 
 
 Service = BierDopje

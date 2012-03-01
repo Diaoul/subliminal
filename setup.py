@@ -16,16 +16,19 @@
 #
 # You should have received a copy of the GNU Lesser General Public License
 # along with Subliminal.  If not, see <http://www.gnu.org/licenses/>.
-from setuptools import setup
-execfile('subliminal/infos.py')
+import os.path
+from setuptools import setup, find_packages
 
 
+def read(fname):
+    return open(os.path.join(os.path.dirname(__file__), fname)).read()
+
+execfile(os.path.join(os.path.dirname(__file__), 'subliminal', 'infos.py'))
 setup(name='subliminal',
     version=__version__,
     license='LGPLv3',
     description='Subtitles, faster than your thoughts',
-    long_description=open('README.rst').read() + '\n\n' +
-                     open('NEWS.rst').read(),
+    long_description=read('README.rst') + '\n\n' + read('NEWS.rst'),
     classifiers=['Development Status :: 4 - Beta',
         'License :: OSI Approved :: GNU Library or Lesser General Public License (LGPL)',
         'Intended Audience :: Developers',
@@ -34,11 +37,13 @@ setup(name='subliminal',
         'Programming Language :: Python :: 2.7',
         'Topic :: Software Development :: Libraries :: Python Modules',
         'Topic :: Multimedia :: Video'],
-    keywords='subliminal video movie subtitle python library',
+    keywords='subliminal video movie subtitle python episode tv',
     author='Antoine Bertin',
     author_email='diaoulael@gmail.com',
     url='https://github.com/Diaoul/subliminal',
-    packages=['subliminal'],
+    packages=find_packages(),
+    include_package_data=True,
+    setup_requires=['setuptools_git'],
+    exclude_package_data={'': ['.gitignore']},
     scripts=['scripts/subliminal'],
-    py_modules=['subliminal'],
     install_requires=['BeautifulSoup>=3.2.0', 'guessit>=0.2', 'requests>=0.10.6', 'enzyme>=0.1'])

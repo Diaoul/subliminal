@@ -89,6 +89,7 @@ class ServiceBase(object):
 
     def download(self, subtitle):
         """Download a subtitle"""
+        self.download_file(subtitle.link, subtitle.path)
 
     @classmethod
     def available_languages(cls):

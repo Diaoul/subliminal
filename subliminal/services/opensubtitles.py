@@ -30,7 +30,6 @@ logger = logging.getLogger(__name__)
 
 class OpenSubtitles(ServiceBase):
     server_url = 'http://api.opensubtitles.org/xml-rpc'
-    user_agent = 'Subliminal v0.5'
     api_based = True
     languages = {'aa': 'aar', 'ab': 'abk', 'af': 'afr', 'ak': 'aka', 'sq': 'alb', 'am': 'amh', 'ar': 'ara',
                  'an': 'arg', 'hy': 'arm', 'as': 'asm', 'av': 'ava', 'ae': 'ave', 'ay': 'aym', 'az': 'aze',

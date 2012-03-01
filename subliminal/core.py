@@ -15,11 +15,11 @@
 #
 # You should have received a copy of the GNU Lesser General Public License
 # along with Subliminal.  If not, see <http://www.gnu.org/licenses/>.
-from . import videos
-from .utils import get_keywords
 from .exceptions import DownloadFailedError
 from .services import ServiceConfig
 from .tasks import DownloadTask, ListTask
+from .utils import get_keywords
+from .videos import Episode, Movie, scan
 from collections import defaultdict
 from itertools import groupby
 import guessit
@@ -51,7 +51,7 @@ def create_list_tasks(paths, languages, services, force, multi, cache_dir, max_d
     """
     scan_result = []
     for p in paths:
-        scan_result.extend(videos.scan(p, max_depth))
+        scan_result.extend(scan(p, max_depth))
     logger.debug(u'Found %d videos in %r with maximum depth %d' % (len(scan_result), paths, max_depth))
     tasks = []
     config = ServiceConfig(multi, cache_dir)
@@ -165,7 +165,7 @@ def matching_confidence(video, subtitle):
     video_keywords = get_keywords(video.guess)
     subtitle_keywords = get_keywords(guess) | subtitle.keywords
     replacement = {'keywords': len(video_keywords & subtitle_keywords)}
-    if isinstance(video, videos.Episode):
+    if isinstance(video, Episode):
         replacement.update({'series': 0, 'season': 0, 'episode': 0})
         matching_format = '{series:b}{season:b}{episode:b}{keywords:03b}'
         best = matching_format.format(series=1, season=1, episode=1, keywords=len(video_keywords))
@@ -176,7 +176,7 @@ def matching_confidence(video, subtitle):
                 replacement['season'] = 1
             if 'episodeNumber' in guess and guess['episodeNumber'] == video.episode:
                 replacement['episode'] = 1
-    elif isinstance(video, videos.Movie):
+    elif isinstance(video, Movie):
         replacement.update({'title': 0, 'year': 0})
         matching_format = '{title:b}{year:b}{keywords:03b}'
         best = matching_format.format(title=1, year=1, keywords=len(video_keywords))

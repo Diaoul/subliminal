@@ -32,6 +32,7 @@ import unittest
 cache_dir = u'/tmp/sublicache'
 if not os.path.exists(cache_dir):
     os.mkdir(cache_dir)
+existing_video = u'/something/The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.mp4'
 
 
 class BierDopjeTestCase(unittest.TestCase):
@@ -122,7 +123,7 @@ class OpenSubtitlesTestCase(unittest.TestCase):
         self.languages = set(['en', 'fr'])
         self.wrong_languages = set(['zz', 'yy'])
         self.fake_file = u'/tmp/fake_file'
-        self.path = u''  # replace with something existing here
+        self.path = existing_video
         self.series = 'The Big Bang Theory'
         self.movie = 'Inception'
         self.wrong_series = 'No Existent Show Name'
@@ -181,7 +182,7 @@ class TheSubDBTestCase(unittest.TestCase):
 
     def setUp(self):
         self.config = ServiceConfig(multi=True, cache_dir=cache_dir)
-        self.path = u'justified.mp4'  # replace with something existing here
+        self.path = existing_video
         self.hash = u'edc1981d6459c6111fe36205b4aff6c2'
         self.wrong_hash = u'ffffffffffffffffffffffffffffffff'
         self.languages = set(['en', 'nl'])
@@ -221,8 +222,7 @@ class TheSubDBTestCase(unittest.TestCase):
             subtitle = service.list(video, self.languages)[0]
             if os.path.exists(subtitle.path):
                 os.remove(subtitle.path)
-            result = service.download(subtitle)
-        self.assertTrue(isinstance(result, Subtitle))
+            service.download(subtitle)
         self.assertTrue(os.path.exists(subtitle.path))
 
 

@@ -15,8 +15,9 @@
 #
 # You should have received a copy of the GNU Lesser General Public License
 # along with subliminal.  If not, see <http://www.gnu.org/licenses/>.
-from .core import (consume_task, LANGUAGE_INDEX, SERVICE_INDEX, SERVICE_CONFIDENCE,
-    MATCHING_CONFIDENCE, SERVICES, create_list_tasks, create_download_tasks)
+from .core import (consume_task, LANGUAGE_INDEX, SERVICE_INDEX,
+    SERVICE_CONFIDENCE, MATCHING_CONFIDENCE, SERVICES, create_list_tasks,
+    create_download_tasks, group_by_video, key_subtitles)
 from .languages import list_languages
 from .tasks import StopTask
 import Queue
@@ -69,7 +70,7 @@ class Pool(object):
         for _ in range(size):
             self._workers.append(Worker(self.tasks, self.results))
 
-    def __enter(self):
+    def __enter__(self):
         self.start()
         return self
 
@@ -107,29 +108,33 @@ class Pool(object):
                 break
         return results
 
-    def list_subtitles(self, entries, languages=None, services=None, cache_dir=None, max_depth=3, force=True, multi=False):
-        #TODO: continue this
+    def list_subtitles(self, paths, languages=None, services=None, cache_dir=None, max_depth=3, force=True, multi=False):
         services = services or SERVICES
         languages = set(languages or list_languages(1))
-        if isinstance(entries, basestring):
-            entries = [entries]
-        if any([not isinstance(e, unicode) for e in entries]):
+        if isinstance(paths, basestring):
+            paths = [paths]
+        if any([not isinstance(p, unicode) for p in paths]):
             logger.warning(u'Not all entries are unicode')
-        services = {}
-        tasks = create_list_tasks(entries, languages, services, force, multi, cache_dir, max_depth)
+        tasks = create_list_tasks(paths, languages, services, force, multi, cache_dir, max_depth)
         for task in tasks:
             self.tasks.put(task)
-
-    def download_subtitles(self, entries, languages=None, services=None, cache_dir=None, max_depth=3, force=True, multi=False, order=None):
-        #TODO: continue this
-        languages = set(languages or list_languages(1))
-        if isinstance(entries, basestring):
-            entries = [entries]
-        order = order or [LANGUAGE_INDEX, SERVICE_INDEX, SERVICE_CONFIDENCE, MATCHING_CONFIDENCE]
-        self.list_subtitles(entries, languages, services, cache_dir, max_depth, force, multi)
         self.join()
-        list_results = self.collect()
-        services = {}
-        tasks = create_download_tasks(list_results, multi)
+        results = self.collect()
+        return results
+
+    def download_subtitles(self, paths, languages=None, services=None, cache_dir=None, max_depth=3, force=True, multi=False, order=None):
+        services = services or SERVICES
+        languages = languages or list_languages(1)
+        if isinstance(paths, basestring):
+            paths = [paths]
+        order = order or [LANGUAGE_INDEX, SERVICE_INDEX, SERVICE_CONFIDENCE, MATCHING_CONFIDENCE]
+        results = self.list_subtitles(paths, set(languages), services, force, multi, cache_dir, max_depth)
+        subtitles_by_video = group_by_video(results)
+        for video, subtitles in subtitles_by_video.iteritems():
+            subtitles.sort(key=lambda s: key_subtitles(s, video, languages, services, order), reverse=True)
+        tasks = create_download_tasks(subtitles_by_video, multi)
         for task in tasks:
             self.tasks.put(task)
+        self.join()
+        results = self.collect()
+        return results

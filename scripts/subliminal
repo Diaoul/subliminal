@@ -19,7 +19,6 @@
 # along with subliminal.  If not, see <http://www.gnu.org/licenses/>.
 import argparse
 import subliminal
-import subliminal.infos
 import logging
 import os
 import sys
@@ -28,7 +27,7 @@ import sys
 def main():
     parser = argparse.ArgumentParser(description='Subtitles, faster than your thoughts')
     parser.add_argument('-l', '--language', action='append', dest='languages', help='wanted language (ISO 639-1)', metavar='LG')
-    parser.add_argument('-p', '--plugin', action='append', dest='plugins', help='plugin to use', metavar='NAME')
+    parser.add_argument('-s', '--service', action='append', dest='services', help='service to use', metavar='NAME')
     parser.add_argument('-m', '--multi', action='store_true', help='download multiple subtitle languages')
     parser.add_argument('-f', '--force', action='store_true', help='replace existing subtitle file')
     parser.add_argument('-w', '--workers', action='store', help='use N threads (default: %(default)s)', metavar='N', default=4)
@@ -38,9 +37,9 @@ def main():
     group_verbosity.add_argument('-v', '--verbose', action='store_true', help='verbose output')
     group_cache = parser.add_mutually_exclusive_group()
     group_cache.add_argument('--cache-dir', action='store', dest='cache_dir', help='cache directory to use', metavar='DIR', default=os.path.expanduser('~/.config/subliminal'))
-    group_cache.add_argument('--no-cache-dir', action='store_false', dest='cache_dir', help='do not use cache directory (some plugins may not work)')
-    parser.add_argument('--version', action='version', version=subliminal.infos.__version__)
-    parser.add_argument('paths', nargs='+', help='path to video files or folders', metavar='PATH')
+    group_cache.add_argument('--no-cache-dir', action='store_false', dest='cache_dir', help='do not use cache directory (some services may not work)')
+    parser.add_argument('--version', action='version', version=subliminal.__version__)
+    parser.add_argument('paths', nargs='+', help='path to video file or folder', metavar='PATH')
     args = parser.parse_args()
 
     # Set log verbosity
@@ -50,7 +49,7 @@ def main():
         logging.basicConfig(level=logging.WARN, format='%(levelname)s: %(name)s %(message)s')
 
     # Initialize the instance
-    with subliminal.Subliminal(cache_dir=args.cache_dir, workers=args.workers, multi=args.multi, force=args.force,
+    with subliminal.subliminal(cache_dir=args.cache_dir, workers=args.workers, multi=args.multi, force=args.force,
                                max_depth=3, plugins=args.plugins, languages=args.languages) as subli:
         if args.compatibility:
             subtitles = subli.downloadSubtitles(args.paths)

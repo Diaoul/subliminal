@@ -95,3 +95,5 @@ class SubsWiki(ServiceBase):
                 subtitle = ResultSubtitle(path, language, self.__class__.__name__, '%s%s' % (self.server_url, html_status.findNext('td').find('a')['href']))
                 subtitles.append(subtitle)
         return subtitles
+
+Service = SubsWiki

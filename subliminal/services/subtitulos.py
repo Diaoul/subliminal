@@ -79,3 +79,5 @@ class Subtitulos(ServiceBase):
                 subtitle = ResultSubtitle(path, language, self.__class__.__name__, html_status.findNext('span', {'class': 'descargar green'}).find('a')['href'], keywords=sub_keywords)
                 subtitles.append(subtitle)
         return subtitles
+
+Service = Subtitulos

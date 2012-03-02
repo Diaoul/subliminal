@@ -61,3 +61,5 @@ class TheSubDB(ServiceBase):
             subtitle = ResultSubtitle(path, language, self.__class__.__name__.lower(), '%s?action=download&hash=%s&language=%s' % (self.server_url, moviehash, self.get_language(language)))
             subtitles.append(subtitle)
         return subtitles
+
+Service = TheSubDB

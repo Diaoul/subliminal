@@ -16,6 +16,7 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with subliminal.  If not, see <http://www.gnu.org/licenses/>.
 from .api import list_subtitles, download_subtitles
+from .async import Pool
 from .infos import __version__
 import logging
 try:
@@ -26,5 +27,5 @@ except ImportError:
             pass
 
 
-__all__ = ['list_subtitles', 'download_subtitles']
+__all__ = ['list_subtitles', 'download_subtitles', 'Pool']
 logging.getLogger(__name__).addHandler(NullHandler())

@@ -31,7 +31,7 @@ logger = logging.getLogger(__name__)
 class Worker(threading.Thread):
     """Consume tasks and put the result in the queue"""
     def __init__(self, tasks, results):
-        threading.Thread.__init__(self)
+        super(Worker, self).__init__()
         self.tasks = tasks
         self.results = results
         self.services = {}
@@ -66,9 +66,9 @@ class Pool(object):
     def __init__(self, size):
         self.tasks = Queue.Queue()
         self.results = Queue.Queue()
-        self._workers = []
+        self.workers = []
         for _ in range(size):
-            self._workers.append(Worker(self.tasks, self.results))
+            self.workers.append(Worker(self.tasks, self.results))
 
     def __enter__(self):
         self.start()
@@ -80,12 +80,12 @@ class Pool(object):
 
     def start(self):
         """Start workers"""
-        for worker in self._workers:
+        for worker in self.workers:
             worker.start()
 
     def stop(self):
         """Stop workers"""
-        for _ in self._workers:
+        for _ in self.workers:
             self.tasks.put(StopTask())
 
     def join(self):

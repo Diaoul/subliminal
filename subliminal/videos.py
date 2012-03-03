@@ -203,20 +203,20 @@ def scan(entry, max_depth=3, depth=0):
         return []
     if depth == 0:
         entry = os.path.abspath(entry)
-    if os.path.isfile(entry):  # a file? scan it
-        logger.debug(u'Scanning file %s with depth %d/%d' % (entry, depth, max_depth))
-        if depth != 0:  # trust the user: only check for valid format if recursing
-            if mimetypes.guess_type(entry)[0] not in MIMETYPES and os.path.splitext(entry)[1] not in EXTENSIONS:
-                return []
-        video = Video.from_path(entry)
-        return [(video, video.scan())]
     if os.path.isdir(entry):  # a dir? recurse
         logger.debug(u'Scanning directory %s with depth %d/%d' % (entry, depth, max_depth))
         result = []
         for e in os.listdir(entry):
             result.extend(scan(os.path.join(entry, e), max_depth, depth + 1))
         return result
-    logger.debug(u'Scanning entry %s failed with depth %d/%d' % (entry, depth, max_depth))
+    if os.path.isfile(entry) or depth == 0:
+        logger.debug(u'Scanning file %s with depth %d/%d' % (entry, depth, max_depth))
+        if depth != 0:  # trust the user: only check for valid format if recursing
+            if mimetypes.guess_type(entry)[0] not in MIMETYPES and os.path.splitext(entry)[1] not in EXTENSIONS:
+                return []
+        video = Video.from_path(entry)
+        return [(video, video.scan())]
+    logger.warning(u'Scanning entry %s failed with depth %d/%d' % (entry, depth, max_depth))
     return []  # anything else
 
 

@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Copyright 2008-2011 Patrick Dessalle <patrick@dessalle.be>
 # Copyright 2011-2012 Antoine Bertin <diaoulael@gmail.com>
 #
 # This file is part of subliminal.
@@ -48,13 +47,22 @@ def main():
     elif not args.quiet:
         logging.basicConfig(level=logging.WARN, format='%(levelname)s: %(name)s %(message)s')
 
-    # Initialize the instance
-    with subliminal.subliminal(cache_dir=args.cache_dir, workers=args.workers, multi=args.multi, force=args.force,
-                               max_depth=3, plugins=args.plugins, languages=args.languages) as subli:
-        if args.compatibility:
-            subtitles = subli.downloadSubtitles(args.paths)
-        else:
-            subtitles = subli.downloadSubtitles([unicode(x) for x in args.paths])
+    # Create cache directory
+    if not os.path.exists(args.cache_dir):
+        os.mkdir(args.cache_dir)
+
+    # Compatibility mode
+    if args.compatibility:
+        paths = args.paths
+    else:
+        paths = [unicode(x) for x in args.paths]
+
+    # Download subtitles
+    with subliminal.Pool(args.workers) as p:
+        subtitles = p.download_subtitles(paths, languages=args.languages,
+                             services=args.services, cache_dir=args.cache_dir,
+                             force=args.force, multi=args.multi)
+
     if not subtitles:
         if not args.quiet:
             sys.stderr.write('No subtitles found\n')

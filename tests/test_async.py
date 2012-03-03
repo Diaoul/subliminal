@@ -18,6 +18,7 @@
 # along with subliminal.  If not, see <http://www.gnu.org/licenses/>.
 from subliminal import Pool
 import os
+import time
 import unittest
 
 
@@ -28,9 +29,29 @@ existing_video = u'/something/The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.mp4'
 
 
 class AsyncTestCase(unittest.TestCase):
+    def test_pool(self):
+        p = Pool(4)
+        self.assertTrue(len(p.workers) == 4)
+        for w in p.workers:
+            self.assertTrue(w.isAlive() == False)
+        p.start()
+        for w in p.workers:
+            self.assertTrue(w.isAlive() == True)
+        p.stop()
+        p.join()
+        time.sleep(0.2)  # so terminate is finished on Worker and proper Thread methods finished
+        for w in p.workers:
+            self.assertTrue(w.isAlive() == False)
+
     def test_list_subtitles(self):
         with Pool(4) as p:
-            print p.list_subtitles(existing_video, languages=['en', 'fr'], cache_dir=cache_dir, max_depth=3)
+            results = p.list_subtitles(existing_video, languages=['en', 'fr'], cache_dir=cache_dir, max_depth=3)
+        self.assertTrue(len(results) > 0)
+
+    def test_download_subtitles(self):
+        with Pool(4) as p:
+            results = p.download_subtitles(existing_video, languages=['en', 'fr'], cache_dir=cache_dir, max_depth=3)
+        self.assertTrue(len(results) > 0)
 
 
 if __name__ == '__main__':

@@ -121,7 +121,7 @@ class Pool(object):
             self.tasks.put(task)
         self.join()
         results = self.collect()
-        return results
+        return group_by_video(results)
 
     def download_subtitles(self, paths, languages=None, services=None, cache_dir=None, max_depth=3, force=True, multi=False, order=None):
         """See :meth:`subliminal.api.download_subtitles`"""
@@ -130,7 +130,7 @@ class Pool(object):
         if isinstance(paths, basestring):
             paths = [paths]
         order = order or [LANGUAGE_INDEX, SERVICE_INDEX, SERVICE_CONFIDENCE, MATCHING_CONFIDENCE]
-        subtitles_by_video = group_by_video(self.list_subtitles(paths, set(languages), services, force, multi, cache_dir, max_depth))
+        subtitles_by_video = self.list_subtitles(paths, set(languages), services, force, multi, cache_dir, max_depth)
         for video, subtitles in subtitles_by_video.iteritems():
             subtitles.sort(key=lambda s: key_subtitles(s, video, languages, services, order), reverse=True)
         tasks = create_download_tasks(subtitles_by_video, multi)

@@ -38,7 +38,7 @@ def list_subtitles(paths, languages=None, services=None, force=True, multi=False
     :param string cache_dir: path to the cache directory to use
     :param int max_depth: maximum depth for scanning entries
     :return: found subtitles
-    :rtype: list of (:class:`~subliminal.videos.Video`, [:class:`~subliminal.subtitles.ResultSubtitle`])
+    :rtype: dict of :class:`~subliminal.videos.Video` => [:class:`~subliminal.subtitles.ResultSubtitle`]
 
     """
     services = services or SERVICES
@@ -58,7 +58,7 @@ def list_subtitles(paths, languages=None, services=None, force=True, multi=False
             logger.error(u'Error consuming task %r' % task, exc_info=True)
     for service_instance in service_instances.itervalues():
         service_instance.terminate()
-    return results
+    return group_by_video(results)
 
 
 def download_subtitles(paths, languages=None, services=None, force=True, multi=False, cache_dir=None, max_depth=3, order=None):
@@ -83,7 +83,7 @@ def download_subtitles(paths, languages=None, services=None, force=True, multi=F
     if isinstance(paths, basestring):
         paths = [paths]
     order = order or [LANGUAGE_INDEX, SERVICE_INDEX, SERVICE_CONFIDENCE, MATCHING_CONFIDENCE]
-    subtitles_by_video = group_by_video(list_subtitles(paths, set(languages), services, force, multi, cache_dir, max_depth))
+    subtitles_by_video = list_subtitles(paths, set(languages), services, force, multi, cache_dir, max_depth)
     for video, subtitles in subtitles_by_video.iteritems():
         subtitles.sort(key=lambda s: key_subtitles(s, video, languages, services, order), reverse=True)
     results = []

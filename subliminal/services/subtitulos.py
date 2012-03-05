@@ -19,7 +19,7 @@ from . import ServiceBase
 from ..subtitles import get_subtitle_path, ResultSubtitle
 from ..videos import Episode
 from subliminal.utils import get_keywords, split_keyword
-import BeautifulSoup
+from bs4 import BeautifulSoup
 import logging
 import re
 import unicodedata
@@ -38,7 +38,9 @@ class Subtitulos(ServiceBase):
     reverted_languages = True
     videos = [Episode]
     require_video = False
-    release_pattern = re.compile('Versi&oacute;n (.+) ([0-9]+).([0-9])+ megabytes')
+    # the '.*' in the pattern for Version allows us to match both '&oacute;'
+    # and the 'ó' char directly
+    release_pattern = re.compile('Versi.*n (.+) ([0-9]+).([0-9])+ megabytes')
 
     def list(self, video, languages):
         if not self.check_validity(video, languages):
@@ -58,7 +60,7 @@ class Subtitulos(ServiceBase):
         if r.status_code != 200:
             logger.error(u'Request %s returned status code %d' % (r.url, r.status_code))
             return []
-        soup = BeautifulSoup.BeautifulSoup(r.content)
+        soup = BeautifulSoup(r.content, 'lxml')
         subtitles = []
         for sub in soup('div', {'id': 'version'}):
             sub_keywords = split_keyword(self.release_pattern.search(sub.find('p', {'class': 'title-sub'}).contents[1]).group(1).lower())

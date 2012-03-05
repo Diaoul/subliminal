@@ -19,7 +19,7 @@ from . import ServiceBase
 from ..exceptions import ServiceError
 from ..subtitles import get_subtitle_path, ResultSubtitle
 from ..videos import Episode
-import BeautifulSoup
+from bs4 import BeautifulSoup
 import logging
 import os.path
 import urllib
@@ -78,7 +78,7 @@ class BierDopje(ServiceBase):
                 if r.status_code != 200:
                     logger.error(u'Request %s returned status code %d' % (r.url, r.status_code))
                     return []
-                soup = BeautifulSoup.BeautifulStoneSoup(r.content)
+                soup = BeautifulSoup(r.content, 'lxml')
                 if soup.status.contents[0] == 'false':
                     logger.debug(u'Could not find show %s' % series)
                     return []
@@ -100,7 +100,7 @@ class BierDopje(ServiceBase):
             if r.status_code != 200:
                 logger.error(u'Request %s returned status code %d' % (r.url, r.status_code))
                 return []
-            soup = BeautifulSoup.BeautifulStoneSoup(r.content)
+            soup = BeautifulSoup(r.content, 'lxml')
             if soup.status.contents[0] == 'false':
                 logger.debug(u'Could not find subtitles for %s %d season %d episode %d with language %s' % (request_source, request_id, season, episode, language))
                 continue

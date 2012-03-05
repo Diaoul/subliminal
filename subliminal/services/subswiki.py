@@ -20,7 +20,7 @@ from ..exceptions import ServiceError
 from ..subtitles import get_subtitle_path, ResultSubtitle
 from ..videos import Episode, Movie
 from subliminal.utils import get_keywords, split_keyword
-import BeautifulSoup
+from bs4 import BeautifulSoup
 import logging
 import re
 import urllib
@@ -74,7 +74,7 @@ class SubsWiki(ServiceBase):
         if r.status_code != 200:
             logger.error(u'Request %s returned status code %d' % (r.url, r.status_code))
             return []
-        soup = BeautifulSoup.BeautifulSoup(r.content)
+        soup = BeautifulSoup(r.content, 'lxml')
         subtitles = []
         for sub in soup('td', {'class': 'NewsTitle'}):
             sub_keywords = split_keyword(self.release_pattern.search(sub.contents[1]).group(1).lower())

@@ -71,9 +71,17 @@ You can have the documentation of the CLI using ``subliminal --help``::
 
 Simple module use
 -----------------
-Subliminal comes with two basic functions to search and download subtitles
+Subliminal comes with two basic functions to search and download subtitles. For example, you
+can do::
+
+    >>> subliminal.list_subtitles('The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.mp4', ['en'])
 
 .. autofunction:: subliminal.list_subtitles
+
+Or even download missing subtitles for each episodes under the given folders in two different languages::
+
+    >>> subliminal.download_subtitles(['/mnt/videos/BBT/Season 05', '/mnt/videos/HIMYM/Season 07'],
+    ...                               ['en', 'fr'], force=False, multi=True)
 
 .. autofunction:: subliminal.download_subtitles
 

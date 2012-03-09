@@ -109,7 +109,7 @@ class Pool(object):
         return results
 
     def list_subtitles(self, paths, languages=None, services=None, force=True, multi=False, cache_dir=None, max_depth=3):
-        """See :meth:`subliminal.api.list_subtitles`"""
+        """See :meth:`subliminal.list_subtitles`"""
         services = services or SERVICES
         languages = set(languages or list_languages(1))
         if isinstance(paths, basestring):
@@ -124,7 +124,7 @@ class Pool(object):
         return group_by_video(results)
 
     def download_subtitles(self, paths, languages=None, services=None, cache_dir=None, max_depth=3, force=True, multi=False, order=None):
-        """See :meth:`subliminal.api.download_subtitles`"""
+        """See :meth:`subliminal.download_subtitles`"""
         services = services or SERVICES
         languages = languages or list_languages(1)
         if isinstance(paths, basestring):

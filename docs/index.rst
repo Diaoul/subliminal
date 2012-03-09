@@ -73,7 +73,6 @@ API Documentation
 -----------------
 Most common subliminal features are listed here
 
-.. autofunction:: subliminal.list_subtitles
-
-.. autofunction:: subliminal.download_subtitles
-
+.. automodule:: subliminal
+    :members:
+    :noindex:

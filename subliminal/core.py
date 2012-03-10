@@ -97,6 +97,8 @@ def create_download_tasks(subtitles_by_video, multi):
     """
     tasks = []
     for video, subtitles in subtitles_by_video.iteritems():
+        if not subtitles:
+            continue
         if not multi:
             task = DownloadTask(video, list(subtitles))
             logger.debug(u'Created task %r' % task)

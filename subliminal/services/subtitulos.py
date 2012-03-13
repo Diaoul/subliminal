@@ -19,7 +19,7 @@ from . import ServiceBase
 from ..subtitles import get_subtitle_path, ResultSubtitle
 from ..videos import Episode
 from subliminal.utils import get_keywords, split_keyword
-from bs4 import BeautifulSoup
+from ..bs4wrapper import BeautifulSoup
 import logging
 import re
 import unicodedata
@@ -39,7 +39,8 @@ class Subtitulos(ServiceBase):
     videos = [Episode]
     require_video = False
     # the '.*' in the pattern for Version allows us to match both '&oacute;'
-    # and the 'ó' char directly
+    # and the 'ó' char directly. This is because now BS4 converts the html
+    # code chars into their equivalent unicode char
     release_pattern = re.compile('Versi.*n (.+) ([0-9]+).([0-9])+ megabytes')
 
     def list(self, video, languages):

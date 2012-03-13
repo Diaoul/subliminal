@@ -20,7 +20,7 @@ from ..exceptions import ServiceError
 from ..subtitles import get_subtitle_path, ResultSubtitle
 from ..videos import Episode, Movie
 from subliminal.utils import get_keywords, split_keyword
-from bs4 import BeautifulSoup
+from ..bs4wrapper import BeautifulSoup
 import logging
 import re
 import urllib

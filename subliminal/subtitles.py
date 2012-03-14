@@ -46,6 +46,13 @@ class Subtitle(object):
 
 
 class EmbeddedSubtitle(Subtitle):
+    """Subtitle embedded in a container
+
+    :param string path: path to the subtitle
+    :param string language: language of the subtitle (second element of :class:`~subliminal.languages.LANGUAGES`)
+    :param int track_id: id of the subtitle track in the container
+
+    """
     def __init__(self, path, language, track_id):
         super(EmbeddedSubtitle, self).__init__(path, language)
         self.track_id = track_id
@@ -57,6 +64,7 @@ class EmbeddedSubtitle(Subtitle):
 
 
 class ExternalSubtitle(Subtitle):
+    """Subtitle in a file next to the video file"""
     @classmethod
     def from_path(cls, path):
         """Create an :class:`ExternalSubtitle` from path"""
@@ -74,6 +82,17 @@ class ExternalSubtitle(Subtitle):
 
 
 class ResultSubtitle(ExternalSubtitle):
+    """Subtitle found using :mod:`~subliminal.services`
+
+    :param string path: path to the subtitle
+    :param string language: language of the subtitle (second element of :class:`~subliminal.languages.LANGUAGES`)
+    :param string service: name of the service
+    :param string link: download link for the subtitle
+    :param string release: release name of the video
+    :param float confidence: confidence that the subtitle matches the video according to the service
+    :param set keywords: keywords that describe the subtitle
+
+    """
     def __init__(self, path, language, service, link, release=None, confidence=1, keywords=set()):
         super(ResultSubtitle, self).__init__(path, language)
         self.service = service
@@ -84,6 +103,12 @@ class ResultSubtitle(ExternalSubtitle):
 
     @property
     def single(self):
+        """Whether this is a single subtitle or not. A single subtitle does not have
+        a language indicator in its file name
+
+        :rtype: bool
+
+        """
         extension = os.path.splitext(self.path)[0]
         language = os.path.splitext(self.path[:len(self.path) - len(extension)])[1][1:]
         if not language in list_languages(1):

@@ -18,7 +18,7 @@
 import re
 
 
-__all__ = ['get_keywords', 'split_keyword', 'NullHandler']
+__all__ = ['get_keywords', 'split_keyword']
 
 
 def get_keywords(guess):

@@ -24,6 +24,7 @@ from subliminal.services.opensubtitles import OpenSubtitles
 from subliminal.services.subswiki import SubsWiki
 from subliminal.services.subtitulos import Subtitulos
 from subliminal.services.thesubdb import TheSubDB
+from subliminal.services.tvsubtitles import TvSubtitles
 from subliminal.subtitles import Subtitle
 import os
 import unittest
@@ -353,6 +354,59 @@ class SubtitulosTestCase(unittest.TestCase):
             result = service.download(subtitle)
         self.assertTrue(os.path.exists(subtitle.path))
 
+class TvSubtitlesTestCase(unittest.TestCase):
+    query_tests = ['test_query', 'test_query_wrong_series', 'test_query_wrong_languages']
+    list_tests = ['test_list', 'test_list_wrong_languages']
+    download_tests = ['test_download']
+
+    def setUp(self):
+        self.config = ServiceConfig(multi=True, cache_dir=cache_dir)
+        self.fake_file = u'/tmp/fake_file'
+        self.languages = set(['en', 'es'])
+        self.wrong_languages = set(['zz', 'ay'])
+        self.path = u'The Big Bang Theory/Season 05/The.Big.Bang.Theory.S05E06.HDTV.XviD-ASAP.mkv'
+        self.keywords = set(['asap', 'hdtv'])
+        self.series = 'The Big Bang Theory'
+        self.wrong_series = 'No Existent Show Name'
+        self.season = 5
+        self.episode = 6
+
+    def test_query(self):
+        with TvSubtitles(self.config) as service:
+            results = service.query(self.fake_file, self.languages, self.keywords, self.series, self.season, self.episode)
+        self.assertTrue(len(results) > 0)
+
+    def test_query_wrong_series(self):
+        with TvSubtitles(self.config) as service:
+            results = service.query(self.fake_file, self.languages, self.keywords, self.wrong_series, self.season, self.episode)
+        self.assertTrue(len(results) == 0)
+
+    def test_query_wrong_languages(self):
+        with TvSubtitles(self.config) as service:
+            results = service.query(self.fake_file, self.wrong_languages, self.keywords, self.series, self.season, self.episode)
+        self.assertTrue(len(results) == 0)
+
+    def test_list(self):
+        video = videos.Video.from_path(self.path)
+        with TvSubtitles(self.config) as service:
+            results = service.list(video, self.languages)
+        self.assertTrue(len(results) > 0)
+
+    def test_list_wrong_languages(self):
+        video = videos.Video.from_path(self.path)
+        with TvSubtitles(self.config) as service:
+            results = service.list(video, self.wrong_languages)
+        self.assertTrue(len(results) == 0)
+
+    def test_download(self):
+        video = videos.Video.from_path(self.path)
+        with TvSubtitles(self.config) as service:
+            subtitle = service.list(video, self.languages)[0]
+            if os.path.exists(subtitle.path):
+                os.remove(subtitle.path)
+            result = service.download(subtitle)
+        self.assertTrue(os.path.exists(subtitle.path))
+
 
 def query_suite():
     suite = unittest.TestSuite()
@@ -361,6 +415,7 @@ def query_suite():
     suite.addTests(map(TheSubDBTestCase, TheSubDBTestCase.query_tests))
     suite.addTests(map(SubsWikiTestCase, SubsWikiTestCase.query_tests))
     suite.addTests(map(SubtitulosTestCase, SubtitulosTestCase.query_tests))
+    suite.addTests(map(TvSubtitlesTestCase, TvSubtitlesTestCase.query_tests))
     return suite
 
 
@@ -371,6 +426,7 @@ def list_suite():
     suite.addTests(map(TheSubDBTestCase, TheSubDBTestCase.list_tests))
     suite.addTests(map(SubsWikiTestCase, SubsWikiTestCase.list_tests))
     suite.addTests(map(SubtitulosTestCase, SubtitulosTestCase.list_tests))
+    suite.addTests(map(TvSubtitlesTestCase, TvSubtitlesTestCase.list_tests))
     return suite
 
 
@@ -381,6 +437,7 @@ def download_suite():
     suite.addTests(map(TheSubDBTestCase, TheSubDBTestCase.download_tests))
     suite.addTests(map(SubsWikiTestCase, SubsWikiTestCase.download_tests))
     suite.addTests(map(SubtitulosTestCase, SubtitulosTestCase.download_tests))
+    suite.addTests(map(TvSubtitlesTestCase, TvSubtitlesTestCase.download_tests))
     return suite
 
 

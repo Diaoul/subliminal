@@ -220,14 +220,14 @@ class ServiceBase(object):
                 # download it directly
                 raise DownloadFailedError('Downloaded file is not a zip file')
 
-            with zipfile.ZipFile(zippath) as zipsub:
-                for subfile in zipsub.namelist():
-                    if os.path.splitext(subfile)[1] in EXTENSIONS:
-                        open(filepath, 'w').write(zipsub.open(subfile).read())
-                        break
-                else:
-                    logger.debug('No subtitles found in zip file...')
-                    raise DownloadFailedError(str(e))
+            zipsub = zipfile.ZipFile(zippath)
+            for subfile in zipsub.namelist():
+                if os.path.splitext(subfile)[1] in EXTENSIONS:
+                    open(filepath, 'w').write(zipsub.open(subfile).read())
+                    break
+            else:
+                logger.debug('No subtitles found in zip file...')
+                raise DownloadFailedError(str(e))
 
             os.remove(zippath)
             logger.debug(u'Download finished for file %s. Size: %s' % (filepath, os.path.getsize(filepath)))

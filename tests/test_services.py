@@ -150,8 +150,8 @@ class OpenSubtitlesTestCase(unittest.TestCase):
 
     def test_query_wrong_languages(self):
         with OpenSubtitles(self.config) as service:
-            with self.assertRaises(MissingLanguageError):
-                service.query(self.fake_file, self.wrong_languages, moviehash=self.hash, size=self.size)
+            self.assertRaises(MissingLanguageError, service.query,
+                              self.fake_file, self.wrong_languages, moviehash=self.hash, size=self.size)
 
     def test_list(self):
         video = videos.Video.from_path(self.path)
@@ -260,8 +260,8 @@ class SubsWikiTestCase(unittest.TestCase):
 
     def test_query_wrong_parameters(self):
         with SubsWiki(self.config) as service:
-            with self.assertRaises(ServiceError):
-                service.query(self.fake_file, self.languages, keywords=self.movie_keywords, movie=self.movie, series=self.series)
+            self.assertRaises(ServiceError, service.query,
+                              self.fake_file, self.languages, keywords=self.movie_keywords, movie=self.movie, series=self.series)
 
     def test_query_wrong_series(self):
         with SubsWiki(self.config) as service:

@@ -42,12 +42,36 @@ except ImportError:
     from BeautifulSoup import BeautifulStoneSoup as bs3BeautifulStoneSoup
     from BeautifulSoup import *
 
+    def update_obj_bs4_api(o):
+        o.replace_with = o.replaceWith
+        o.replace_with_children = o.replaceWithChildren
+        o.find_all = o.findAll
+        o.find_all_next = o.findAllNext
+        o.find_all_previous = o.findAllPrevious
+        o.find_next = o.findNext
+        o.find_next_sibling = o.findNextSibling
+        o.find_next_siblings = o.findNextSiblings
+        o.find_parent = o.findParent
+        o.find_parents = o.findParents
+        o.find_previous = o.findPrevious
+        o.find_previous_sibling = o.findPreviousSibling
+        o.find_previous_siblings = o.findPreviousSiblings
+        #o.next_sibling = o.nextSibling
+        #o.previous_sibling = o.previousSibling
+        return o
+
+    update_obj_bs4_api(BeautifulSoup)
+    update_obj_bs4_api(BeautifulStoneSoup)
+    update_obj_bs4_api(Tag)
+
     def BeautifulSoup(*args, **kwargs):
         logger.debug('BS3 called with %s %s' % (args[1:], kwargs))
         text, parser = args
         if (parser == 'xml' or parser == ['lxml', 'xml']):
-            return bs3BeautifulStoneSoup(text)
+            bs3 = bs3BeautifulStoneSoup(text)
         else:
-            return bs3BeautifulSoup(text)
+            bs3 = bs3BeautifulSoup(text)
+
+        return update_obj_bs4_api(bs3)
 
     logger.debug('Imported BeautifulSoup3')

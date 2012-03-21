@@ -17,6 +17,7 @@
 # along with subliminal.  If not, see <http://www.gnu.org/licenses/>.
 from ..exceptions import MissingLanguageError, DownloadFailedError
 from ..subtitles import EXTENSIONS
+from .. import cache
 import logging
 import os
 import requests
@@ -47,9 +48,6 @@ class ServiceBase(object):
     #: Timeout for web requests
     timeout = 5
 
-    #: Lock for cache interactions
-    lock = threading.Lock()
-
     #: Mapping to Service's language codes and subliminal's
     languages = {}
 
@@ -76,6 +74,13 @@ class ServiceBase(object):
         """Initialize connection"""
         logger.debug(u'Initializing %s' % self.__class__.__name__)
         self.session = requests.session(timeout=10, headers={'User-Agent': self.user_agent})
+
+    def init_cache(self):
+        """Initialize cache, make sure it is loaded from disk"""
+        service_name = self.__class__.__name__
+        if not self.config or not self.config.cache_dir:
+            raise ServiceError('Cache directory is required')
+        cache.init_cache(self.config.cache_dir, service_name)
 
     def terminate(self):
         """Terminate connection"""

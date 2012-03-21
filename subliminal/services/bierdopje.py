@@ -20,6 +20,7 @@ from ..exceptions import ServiceError
 from ..subtitles import get_subtitle_path, ResultSubtitle
 from ..videos import Episode
 from ..bs4wrapper import BeautifulSoup
+from ..cache import cachedmethod
 import logging
 import os.path
 import urllib
@@ -40,51 +41,27 @@ class BierDopje(ServiceBase):
     videos = [Episode]
     require_video = False
 
-    def __init__(self, config=None):
-        super(BierDopje, self).__init__(config)
-        self.showids = {}
-        if self.config and self.config.cache_dir:
-            self.init_cache()
+    @cachedmethod
+    def get_show_id(self, series):
+        r = self.session.get('%sGetShowByName/%s' % (self.server_url, urllib.quote(series.lower())))
+        if r.status_code != 200:
+            logger.error(u'Request %s returned status code %d' % (r.url, r.status_code))
+            return None
 
-    def init_cache(self):
-        logger.debug(u'Initializing cache...')
-        if not self.config or not self.config.cache_dir:
-            raise ServiceError('Cache directory is required')
-        self.showids_cache = os.path.join(self.config.cache_dir, 'bierdopje_showids.cache')
-        if not os.path.exists(self.showids_cache):
-            self.save_cache()
+        soup = BeautifulSoup(r.content, ['lxml', 'xml'])
+        if soup.status.contents[0] == 'false':
+            logger.debug(u'Could not find show %s' % series)
+            return None
 
-    def save_cache(self):
-        logger.debug(u'Saving showids to cache...')
-        with self.lock:
-            with open(self.showids_cache, 'w') as f:
-                pickle.dump(self.showids, f)
+        return int(soup.showid.contents[0])
 
-    def load_cache(self):
-        logger.debug(u'Loading showids from cache...')
-        with self.lock:
-            with open(self.showids_cache, 'r') as f:
-                self.showids = pickle.load(f)
 
     def query(self, season, episode, languages, filepath, tvdbid=None, series=None):
-        self.load_cache()
+        self.init_cache()
         if series:
-            if series.lower() in self.showids:  # from cache
-                request_id = self.showids[series.lower()]
-                logger.debug(u'Retreived showid %d for %s from cache' % (request_id, series))
-            else:  # query to get showid
-                logger.debug(u'Getting showid from show name %s...' % series)
-                r = self.session.get('%sGetShowByName/%s' % (self.server_url, urllib.quote(series.lower())))
-                if r.status_code != 200:
-                    logger.error(u'Request %s returned status code %d' % (r.url, r.status_code))
-                    return []
-                soup = BeautifulSoup(r.content, ['lxml', 'xml'])
-                if soup.status.contents[0] == 'false':
-                    logger.debug(u'Could not find show %s' % series)
-                    return []
-                request_id = int(soup.showid.contents[0])
-                self.showids[series.lower()] = request_id
-                self.save_cache()
+            request_id = self.get_show_id(series.lower())
+            if request_id is None:
+                return []
             request_source = 'showid'
             request_is_tvdbid = 'false'
         elif tvdbid:
@@ -93,6 +70,7 @@ class BierDopje(ServiceBase):
             request_is_tvdbid = 'true'
         else:
             raise ServiceError('One or more parameter missing')
+
         subtitles = []
         for language in languages:
             logger.debug(u'Getting subtitles for %s %d season %d episode %d with language %s' % (request_source, request_id, season, episode, language))

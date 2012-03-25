@@ -3,7 +3,7 @@ News
 
 0.5
 ---
-**release date:** not released yet
+**release date:** 2012-03-25
 **WARNING:** Backward incompatible changes
 * Use more unicode
 * New list_subtitles and download_subtitles methods

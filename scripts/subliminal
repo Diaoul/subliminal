@@ -1,52 +1,44 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+# Copyright 2011-2012 Antoine Bertin <diaoulael@gmail.com>
 #
-# Subliminal - Subtitles, faster than your thoughts
-# Copyright (c) 2008-2011 Patrick Dessalle <patrick@dessalle.be>
-# Copyright (c) 2011 Antoine Bertin <diaoulael@gmail.com>
+# This file is part of subliminal.
 #
-# This file is part of Subliminal.
-#
-# Subliminal is free software; you can redistribute it and/or modify it under
-# the terms of the Lesser GNU General Public License as published by
+# subliminal is free software; you can redistribute it and/or modify it under
+# the terms of the GNU Lesser General Public License as published by
 # the Free Software Foundation; either version 3 of the License, or
 # (at your option) any later version.
 #
-# Subliminal is distributed in the hope that it will be useful,
+# subliminal is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# Lesser GNU General Public License for more details.
+# GNU Lesser General Public License for more details.
 #
-# You should have received a copy of the Lesser GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-
+# You should have received a copy of the GNU Lesser General Public License
+# along with subliminal.  If not, see <http://www.gnu.org/licenses/>.
 import argparse
 import subliminal
 import logging
-import mimetypes
 import os
-import os.path
 import sys
 
 
 def main():
-    '''Download subtitles'''
-    # parse command line options
     parser = argparse.ArgumentParser(description='Subtitles, faster than your thoughts')
     parser.add_argument('-l', '--language', action='append', dest='languages', help='wanted language (ISO 639-1)', metavar='LG')
-    parser.add_argument('-p', '--plugin', action='append', dest='plugins', help='plugin to use', metavar='NAME')
+    parser.add_argument('-s', '--service', action='append', dest='services', help='service to use', metavar='NAME')
     parser.add_argument('-m', '--multi', action='store_true', help='download multiple subtitle languages')
     parser.add_argument('-f', '--force', action='store_true', help='replace existing subtitle file')
     parser.add_argument('-w', '--workers', action='store', help='use N threads (default: %(default)s)', metavar='N', default=4)
+    parser.add_argument('-c', '--compatibility', action='store_true', help='try not to use unicode (use this if you have encoding errors)')
     group_verbosity = parser.add_mutually_exclusive_group()
     group_verbosity.add_argument('-q', '--quiet', action='store_true', help='disable output')
     group_verbosity.add_argument('-v', '--verbose', action='store_true', help='verbose output')
     group_cache = parser.add_mutually_exclusive_group()
     group_cache.add_argument('--cache-dir', action='store', dest='cache_dir', help='cache directory to use', metavar='DIR', default=os.path.expanduser('~/.config/subliminal'))
-    group_cache.add_argument('--no-cache-dir', action='store_false', dest='cache_dir', help='do not use cache directory (some plugins may not work)')
+    group_cache.add_argument('--no-cache-dir', action='store_false', dest='cache_dir', help='do not use cache directory (some services may not work)')
     parser.add_argument('--version', action='version', version=subliminal.__version__)
-    parser.add_argument('paths', nargs='+', help='path to video files or folders', metavar='PATH')
+    parser.add_argument('paths', nargs='+', help='path to video file or folder', metavar='PATH')
     args = parser.parse_args()
 
     # Set log verbosity
@@ -55,26 +47,33 @@ def main():
     elif not args.quiet:
         logging.basicConfig(level=logging.WARN, format='%(levelname)s: %(name)s %(message)s')
 
-    # Initialize the instance
-    subli = subliminal.Subliminal(cache_dir=args.cache_dir, workers=args.workers, multi=args.multi, force=args.force, max_depth=3, files_mode=-1)
-    if args.plugins:
-        subli.plugins = args.plugins
-    if args.languages:
-        subli.languages = args.languages
-    try:
-        subtitles = subli.downloadSubtitles([unicode(x) for x in args.paths])
-    finally:
-        subli.stopWorkers()
-    if len(subtitles) == 0:
+    # Create cache directory
+    if not os.path.exists(args.cache_dir):
+        os.mkdir(args.cache_dir)
+
+    # Compatibility mode
+    if args.compatibility:
+        paths = args.paths
+    else:
+        paths = [unicode(x) for x in args.paths]
+
+    # Download subtitles
+    with subliminal.Pool(args.workers) as p:
+        subtitles = p.download_subtitles(paths, languages=args.languages,
+                             services=args.services, cache_dir=args.cache_dir,
+                             force=args.force, multi=args.multi)
+
+    if not subtitles:
         if not args.quiet:
             sys.stderr.write('No subtitles found\n')
         exit(1)
     if not args.quiet:
         print '*' * 50
-        print 'Downloaded %s subtitles' % len(subtitles)
+        print 'Downloaded %d subtitles' % len(subtitles)
         for subtitle in subtitles:
             print subtitle
         print '*' * 50
+
 
 if __name__ == '__main__':
     main()

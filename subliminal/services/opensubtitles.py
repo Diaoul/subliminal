@@ -19,6 +19,7 @@ from . import ServiceBase
 from ..exceptions import ServiceError, DownloadFailedError
 from ..subtitles import get_subtitle_path, ResultSubtitle
 from ..videos import Episode, Movie
+from ..utils import to_unicode
 import gzip
 import logging
 import os.path
@@ -102,7 +103,8 @@ class OpenSubtitles(ServiceBase):
             language = self.get_revert_language(result['SubLanguageID'])
             path = get_subtitle_path(filepath, language, self.config.multi)
             confidence = 1 - float(self.confidence_order.index(result['MatchedBy'])) / float(len(self.confidence_order))
-            subtitle = ResultSubtitle(path, language, self.__class__.__name__.lower(), result['SubDownloadLink'], result['SubFileName'], confidence)
+            subtitle = ResultSubtitle(path, language, service=self.__class__.__name__.lower(), link=result['SubDownloadLink'],
+                                      release=to_unicode(result['SubFileName']), confidence=confidence)
             subtitles.append(subtitle)
         return subtitles
 

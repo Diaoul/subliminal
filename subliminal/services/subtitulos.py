@@ -76,7 +76,7 @@ class Subtitulos(ServiceBase):
                     logger.debug(u'Wrong subtitle status %s' % status)
                     continue
                 path = get_subtitle_path(filepath, language, self.config.multi)
-                subtitle = ResultSubtitle(path, language, self.__class__.__name__.lower(), html_status.findNext('span', {'class': 'descargar green'}).find('a')['href'], keywords=sub_keywords)
+                subtitle = ResultSubtitle(path, language, service=self.__class__.__name__.lower(), link=html_status.findNext('span', {'class': 'descargar green'}).find('a')['href'], keywords=sub_keywords)
                 subtitles.append(subtitle)
         return subtitles
 

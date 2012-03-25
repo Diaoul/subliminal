@@ -58,7 +58,7 @@ class TheSubDB(ServiceBase):
         subtitles = []
         for language in languages:
             path = get_subtitle_path(filepath, language, self.config.multi)
-            subtitle = ResultSubtitle(path, language, self.__class__.__name__.lower(), '%s?action=download&hash=%s&language=%s' % (self.server_url, moviehash, self.get_language(language)))
+            subtitle = ResultSubtitle(path, language, service=self.__class__.__name__.lower(), link='%s?action=download&hash=%s&language=%s' % (self.server_url, moviehash, self.get_language(language)))
             subtitles.append(subtitle)
         return subtitles
 

@@ -18,7 +18,7 @@
 import re
 
 
-__all__ = ['get_keywords', 'split_keyword']
+__all__ = ['get_keywords', 'split_keyword', 'to_unicode']
 
 
 def get_keywords(guess):
@@ -47,3 +47,18 @@ def split_keyword(keyword):
     """
     split = set(re.findall(r'\w+', keyword))
     return split
+
+
+def to_unicode(data):
+    """Convert a basestring to unicode
+
+    :param basestring data: data to decode
+    :return: data as unicode
+    :rtype: unicode
+
+    """
+    if not isinstance(data, basestring):
+        raise ValueError('Basestring expected')
+    if isinstance(data, unicode):
+        return data
+    return unicode(data, 'utf-8', 'replace')

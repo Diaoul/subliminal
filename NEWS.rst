@@ -5,6 +5,7 @@ News
 ---
 **release date:** not released yet
 **WARNING:** Backward incompatible changes
+* Use more unicode
 * New list_subtitles and download_subtitles methods
 * New Pool object for asynchronous work
 * Improve sort algorithm

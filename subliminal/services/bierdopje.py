@@ -19,6 +19,7 @@ from . import ServiceBase
 from ..exceptions import ServiceError
 from ..subtitles import get_subtitle_path, ResultSubtitle
 from ..videos import Episode
+from ..utils import to_unicode
 import BeautifulSoup
 import logging
 import os.path
@@ -106,7 +107,8 @@ class BierDopje(ServiceBase):
                 continue
             path = get_subtitle_path(filepath, language, self.config.multi)
             for result in soup.results('result'):
-                subtitle = ResultSubtitle(path, language, self.__class__.__name__.lower(), result.downloadlink.contents[0], result.filename.contents[0])
+                subtitle = ResultSubtitle(path, language, service=self.__class__.__name__.lower(), link=result.downloadlink.contents[0],
+                                          release=to_unicode(result.filename.contents[0]))
                 subtitles.append(subtitle)
         return subtitles
 

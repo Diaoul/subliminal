@@ -3,7 +3,6 @@ is described in a dedicated section below.
 
 First, here are some basics
 
-
 Basics
 ------
 Services

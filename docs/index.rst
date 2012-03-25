@@ -16,7 +16,6 @@ and avoid duplicates.
 
 Features
 --------
-
 Multiple subtitles services are available:
 
 * OpenSubtitles

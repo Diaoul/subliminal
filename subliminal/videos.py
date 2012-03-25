@@ -126,7 +126,7 @@ class Video(object):
         try:
             video_infos = enzyme.parse(self.path)
             logger.debug(u'Succeeded parsing %s with enzyme: %r' % (self.path, video_infos))
-        except enzyme.ParseError:
+        except:
             logger.debug(u'Failed parsing %s with enzyme' % self.path)
         if isinstance(video_infos, enzyme.core.AVContainer):
             results.extend([subtitles.EmbeddedSubtitle.from_enzyme(self.path, s) for s in video_infos.subtitles])

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2012 Nicolas Wack <wackou@gmail.com>
+# Copyright 2012 Olifozzy <olifozzy@gmail.com>
 #
 # This file is part of subliminal.
 #

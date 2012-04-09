@@ -20,7 +20,7 @@ from ..subtitles import get_subtitle_path, ResultSubtitle
 from ..videos import Episode
 from subliminal.utils import get_keywords, split_keyword
 from ..bs4wrapper import BeautifulSoup
-from ..cache import cachedmethod, cache_for, cached_value
+from ..cache import cachedmethod
 import guessit
 import logging
 import re
@@ -43,7 +43,7 @@ def matches(pattern, string):
     except AttributeError:
         logger.debug("Could not match '%s' on '%s'" % (pattern, string))
         return None
-    
+
 class Addic7ed(ServiceBase):
     server_url = 'http://www.addic7ed.com'
     api_based = False
@@ -95,10 +95,10 @@ class Addic7ed(ServiceBase):
             # we could just return the id of the queried show, but as we
             # already downloaded the whole page we might as well fill in the
             # information for all the shows
-            cache_for(self.get_likely_series_id,
-                      args = (show_name),
-                      result = show_id)
-        return cached_value(self.get_likely_series_id, args = (name))
+            self.cache_for(self.get_likely_series_id,
+                           args = (show_name),
+                           result = show_id)
+        return self.cached_value(self.get_likely_series_id, args = (name))
 
 
     @cachedmethod
@@ -112,7 +112,7 @@ class Addic7ed(ServiceBase):
         soup = BeautifulSoup(r.content, 'lxml')
         form = soup.find('form', attrs={'name': 'multidl'})
         for table in form.find_all('table'):
-            
+
             for row in table.find_all('tr'):
                 cell = row.find('td', 'MultiDldS')
                 if not cell:
@@ -126,12 +126,12 @@ class Addic7ed(ServiceBase):
                 # we could just return the url of the queried episode, but as we
                 # already downloaded the whole page we might as well fill in the
                 # information for all the episodes of the show
-                cache_for(self.get_episode_url,
-                          args = (series_id, season_number, episode_number),
-                          result = episode_url)
+                self.cache_for(self.get_episode_url,
+                               args = (series_id, season_number, episode_number),
+                               result = episode_url)
 
         # raises KeyError if not found
-        return cached_value(self.get_episode_url, args = (series_id, season, number))
+        return self.cached_value(self.get_episode_url, args = (series_id, season, number))
 
     # Do not cache this method in order to always check for the most recent
     # subtitles
@@ -152,7 +152,7 @@ class Addic7ed(ServiceBase):
                     continue
 
                 suburl = link['href']
-                
+
                 lang = row.find('td','language').text.strip()
                 result = { 'suburl': suburl, 'language': lang, 'release': release }
                 suburls.append(result)

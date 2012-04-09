@@ -20,7 +20,7 @@ from ..subtitles import get_subtitle_path, ResultSubtitle
 from ..videos import Episode
 from subliminal.utils import get_keywords, split_keyword
 from ..bs4wrapper import BeautifulSoup
-from ..cache import cachedmethod, cache_for, cached_value
+from ..cache import cachedmethod
 import guessit
 import logging
 import re
@@ -95,12 +95,12 @@ class TvSubtitles(ServiceBase):
             # we could just return the id of the queried episode, but as we
             # already downloaded the whole page we might as well fill in the
             # information for all the episodes of the season
-            cache_for(self.get_episode_id,
-                      args = (series_id, season, episode_number),
-                      result = episode_id)
+            self.cache_for(self.get_episode_id,
+                           args = (series_id, season, episode_number),
+                           result = episode_id)
 
         # raises KeyError if not found
-        return cached_value(self.get_episode_id, args = (series_id, season, number))
+        return self.cached_value(self.get_episode_id, args = (series_id, season, number))
 
     # Do not cache this method in order to always check for the most recent
     # subtitles

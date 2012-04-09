@@ -82,6 +82,12 @@ class ServiceBase(object):
             raise ServiceError('Cache directory is required')
         cache.init_cache(self.config.cache_dir, service_name)
 
+    def cache_for(self, func, args, result):
+        return cache.cache_for(self, func, args, result)
+
+    def cached_value(self, func, args):
+        return cache.cached_value(self, func, args)
+
     def terminate(self):
         """Terminate connection"""
         logger.debug(u'Terminating %s' % self.__class__.__name__)

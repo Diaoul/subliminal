@@ -96,9 +96,9 @@ class Addic7ed(ServiceBase):
             # already downloaded the whole page we might as well fill in the
             # information for all the shows
             self.cache_for(self.get_likely_series_id,
-                           args = (show_name),
+                           args = (show_name,),
                            result = show_id)
-        return self.cached_value(self.get_likely_series_id, args = (name))
+        return self.cached_value(self.get_likely_series_id, args = (name,))
 
 
     @cachedmethod
@@ -175,7 +175,12 @@ class Addic7ed(ServiceBase):
     def query(self, filepath, languages, keywords, series, season, episode):
         logger.debug(u'Getting subtitles for %s season %d episode %d with languages %r' % (series, season, episode, languages))
         self.init_cache()
-        sid = self.get_likely_series_id(series.lower())
+        try:
+            sid = self.get_likely_series_id(series.lower())
+        except KeyError:
+            logger.debug('Could not find series id for %s' % series)
+            return []
+
         try:
             ep_url = self.get_episode_url(sid, season, episode)
         except KeyError:

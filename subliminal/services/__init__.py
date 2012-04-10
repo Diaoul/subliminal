@@ -77,16 +77,19 @@ class ServiceBase(object):
 
     def init_cache(self):
         """Initialize cache, make sure it is loaded from disk"""
-        service_name = self.__class__.__name__
-        if not self.config or not self.config.cache_dir:
+        if not self.config or not self.config.cache:
             raise ServiceError('Cache directory is required')
-        cache.init_cache(self.config.cache_dir, service_name)
+
+        service_name = self.__class__.__name__
+        self.config.cache.load(service_name)
 
     def cache_for(self, func, args, result):
-        return cache.cache_for(self, func, args, result)
+        service_name = self.__class__.__name__
+        return self.config.cache.cache_for(service_name, func, args, result)
 
     def cached_value(self, func, args):
-        return cache.cached_value(self, func, args)
+        service_name = self.__class__.__name__
+        return self.config.cache.cached_value(service_name, func, args)
 
     def terminate(self):
         """Terminate connection"""
@@ -264,6 +267,9 @@ class ServiceConfig(object):
     def __init__(self, multi=False, cache_dir=None):
         self.multi = multi
         self.cache_dir = cache_dir
+        self.cache = None
+        if cache_dir is not None:
+            self.cache = cache.Cache(cache_dir)
 
     def __repr__(self):
-        return 'ServiceConfig(%r, %s)' % (self.multi, self.cache_dir)
+        return 'ServiceConfig(%r, %s)' % (self.multi, self.cache.cache_dir)

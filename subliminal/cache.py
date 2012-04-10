@@ -21,7 +21,6 @@ import os.path
 from collections import defaultdict
 import threading
 from functools import wraps
-import atexit
 import logging
 try:
     import cPickle as pickle
@@ -30,81 +29,68 @@ except ImportError:
 
 logger = logging.getLogger(__name__)
 
-global_cache = {}
-global_cache_lock = threading.RLock()
+
+class Cache(object):
+    """A Cache object contains cached values for methods. It can have
+    separate internal caches, one for each service.
+    """
+
+    def __init__(self, cache_dir):
+        self.cache_dir = cache_dir
+        self.cache = defaultdict(dict)
+        self.lock = threading.RLock()
+
+    def __del__(self):
+        for service_name in self.cache:
+            self.save(service_name)
+
+    def cache_location(self, service_name):
+        return os.path.join(self.cache_dir, 'subliminal_%s.cache' % service_name)
+
+    def load(self, service_name):
+        with self.lock:
+            if service_name in self.cache:
+                # already loaded
+                return
+
+            self.cache[service_name] = defaultdict(dict)
+            filename = self.cache_location(service_name)
+            logger.debug('Cache: loading cache from %s' % filename)
+            try:
+                self.cache[service_name] = pickle.load(open(filename, 'rb'))
+            except IOError:
+                logger.info('Cache: Cache file "%s" doesn\'t exist, creating it' % filename)
+            except EOFError:
+                logger.error('Cache: cache file "%s" is corrupted... Removing it.' % filename)
+                os.remove(filename)
+
+    def save(self, service_name):
+        filename = self.cache_location(service_name)
+        logger.debug('Cache: saving cache to %s' % filename)
+        with self.lock:
+            pickle.dump(self.cache[service_name], open(filename, 'wb'))
 
 
-def clear_cache():
-    logger.info('Cache: clearing memory cache')
-    global global_cache
-    global_cache = {}
-
-
-def destroy_cache():
-    with global_cache_lock:
-        for cache_dir, service_name in global_cache:
-            save(cache_dir, service_name)
-
-
-def init_cache(cache_dir='', service_name='unspecified'):
-    logger.debug('Initializing cache for service %s, dir = "%s"' % (service_name, cache_dir))
-    with global_cache_lock:
-        if (cache_dir, service_name) in global_cache:
-            # already loaded
-            return
-
-        # register only once, when loading the first cache
-        if not global_cache:
-            atexit.register(destroy_cache)
-
-        load(cache_dir, service_name)
-
-
-def cache_location(cache_dir, service_name):
-    return os.path.join(cache_dir, 'subliminal_%s.cache' % service_name)
-
-
-def load(cache_dir, service_name):
-    filename = cache_location(cache_dir, service_name)
-    logger.debug('Cache: loading cache from %s' % filename)
-    global_cache[(cache_dir, service_name)] = defaultdict(dict)
-    with global_cache_lock:
+    def cached_func_key(self, func, cls = None):
         try:
-            global_cache[(cache_dir, service_name)] = pickle.load(open(filename, 'rb'))
-        except IOError:
-            logger.warning('Cache: Cache file "%s" doesn\'t exist' % filename)
-        except EOFError:
-            logger.error('Cache: cache file "%s" is corrupted... Removing it.' % filename)
-            os.remove(filename)
+            cls = func.im_class
+        except:
+            pass
 
+        return ('%s.%s' % (cls.__module__, cls.__name__), func.__name__)
 
-def save(cache_dir, service_name):
-    filename = cache_location(cache_dir, service_name)
-    logger.debug('Cache: saving cache to %s' % filename)
-    with global_cache_lock:
-        pickle.dump(global_cache[(cache_dir, service_name)], open(filename, 'wb'))
+    def function_cache(self, service_name, func):
+        func_key = self.cached_func_key(func)
+        return self.cache[service_name][func_key]
 
+    def cache_for(self, service_name, func, args, result):
+        # no need to lock here, dict ops are atomic
+        self.function_cache(service_name, func)[args] = result
 
-
-def cache_key(service):
-    return (service.config.cache_dir, service.__class__.__name__)
-
-def cached_func_key(service, func):
-    cls = service.__class__
-    return ('%s.%s' % (cls.__module__, cls.__name__), func.__name__)
-
-def cache_for(service, func, args, result):
-    # no need to lock here, dict ops are atomic
-    cache_id = cache_key(service)
-    func_key = cached_func_key(service, func)
-    global_cache[cache_id][func_key][args] = result
-
-def cached_value(service, func, args):
-    """raises KeyError if not found"""
-    # no need to lock here, dict ops are atomic
-    cache_id = cache_key(service)
-    func_key = cached_func_key(service, func)
-    return global_cache[cache_id][func_key][args]
+    def cached_value(self, service_name, func, args):
+        """raises KeyError if not found"""
+        # no need to lock here, dict ops are atomic
+        return self.function_cache(service_name, func)[args]
 
 
 
@@ -116,12 +102,15 @@ def cachedmethod(function):
 
     @wraps(function)
     def cached(*args):
+        c = args[0].config.cache
+        service_name = args[0].__class__.__name__
+        func_key = c.cached_func_key(function, cls = args[0].__class__)
+
+        func_cache = c.cache[service_name][func_key]
+
         # we need to remove the first element of args for the key, as it is the
         # instance pointer and we don't want the cache to know which instance
         # called it, it is shared among all instances of the same class
-        cache_id = cache_key(args[0])
-        func_key = cached_func_key(args[0], function)
-        func_cache = global_cache[cache_id][func_key]
         key = args[1:]
 
         if key in func_cache:

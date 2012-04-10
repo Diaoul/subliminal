@@ -189,11 +189,12 @@ class UnknownVideo(Video):
     pass
 
 
-def scan(entry, max_depth=3, depth=0):
+def scan(entry, max_depth=3, scan_filter=None, depth=0):
     """Scan a path for videos and subtitles
 
     :param string entry: path
     :param int max_depth: maximum folder depth
+    :param function scan_filter: filter function that takes a path as argument and returns a boolean indicating whether it has to be filtered out (``True``) or not (``False``)
     :param int depth: starting depth
     :return: found videos and subtitles
     :rtype: list of (:class:`Video`, [:class:`~subliminal.subtitles.Subtitle`])
@@ -207,12 +208,14 @@ def scan(entry, max_depth=3, depth=0):
         logger.debug(u'Scanning directory %s with depth %d/%d' % (entry, depth, max_depth))
         result = []
         for e in os.listdir(entry):
-            result.extend(scan(os.path.join(entry, e), max_depth, depth + 1))
+            result.extend(scan(os.path.join(entry, e), max_depth, scan_filter, depth + 1))
         return result
     if os.path.isfile(entry) or depth == 0:
         logger.debug(u'Scanning file %s with depth %d/%d' % (entry, depth, max_depth))
         if depth != 0:  # trust the user: only check for valid format if recursing
             if mimetypes.guess_type(entry)[0] not in MIMETYPES and os.path.splitext(entry)[1] not in EXTENSIONS:
+                return []
+            if scan_filter is not None and scan_filter(entry):
                 return []
         video = Video.from_path(entry)
         return [(video, video.scan())]

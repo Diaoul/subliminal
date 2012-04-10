@@ -108,7 +108,7 @@ class Pool(object):
                 break
         return results
 
-    def list_subtitles(self, paths, languages=None, services=None, force=True, multi=False, cache_dir=None, max_depth=3):
+    def list_subtitles(self, paths, languages=None, services=None, force=True, multi=False, cache_dir=None, max_depth=3, scan_filter=None):
         """See :meth:`subliminal.list_subtitles`"""
         services = services or SERVICES
         languages = set(languages or list_languages(1))
@@ -116,7 +116,7 @@ class Pool(object):
             paths = [paths]
         if any([not isinstance(p, unicode) for p in paths]):
             logger.warning(u'Not all entries are unicode')
-        tasks = create_list_tasks(paths, languages, services, force, multi, cache_dir, max_depth)
+        tasks = create_list_tasks(paths, languages, services, force, multi, cache_dir, max_depth, scan_filter)
         for task in tasks:
             self.tasks.put(task)
         self.join()

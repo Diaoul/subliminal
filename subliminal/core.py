@@ -34,7 +34,7 @@ SERVICES = ['opensubtitles', 'bierdopje', 'subswiki', 'subtitulos', 'thesubdb']
 LANGUAGE_INDEX, SERVICE_INDEX, SERVICE_CONFIDENCE, MATCHING_CONFIDENCE = range(4)
 
 
-def create_list_tasks(paths, languages, services, force, multi, cache_dir, max_depth):
+def create_list_tasks(paths, languages, services, force, multi, cache_dir, max_depth, scan_filter):
     """Create a list of :class:`~subliminal.tasks.ListTask` from one or more paths using the given criteria
 
     :param paths: path(s) to video file or folder
@@ -45,13 +45,14 @@ def create_list_tasks(paths, languages, services, force, multi, cache_dir, max_d
     :param bool multi: search multiple languages for the same video
     :param string cache_dir: path to the cache directory to use
     :param int max_depth: maximum depth for scanning entries
+    :param function scan_filter: filter function that takes a path as argument and returns a boolean indicating whether it has to be filtered out (``True``) or not (``False``)
     :return: the created tasks
     :rtype: list of :class:`~subliminal.tasks.ListTask`
 
     """
     scan_result = []
     for p in paths:
-        scan_result.extend(scan(p, max_depth))
+        scan_result.extend(scan(p, max_depth, scan_filter))
     logger.debug(u'Found %d videos in %r with maximum depth %d' % (len(scan_result), paths, max_depth))
     tasks = []
     config = ServiceConfig(multi, cache_dir)

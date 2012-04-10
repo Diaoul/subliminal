@@ -43,4 +43,4 @@ setup(name='subliminal',
     url='https://github.com/Diaoul/subliminal',
     packages=find_packages(),
     scripts=['scripts/subliminal'],
-    install_requires=['BeautifulSoup >= 3.2.0', 'guessit >= 0.2', 'requests', 'enzyme >= 0.1'])
+    install_requires=['BeautifulSoup >= 3.2.0', 'guessit >= 0.2', 'requests', 'enzyme >= 0.1', 'argparse >= 1.1'])

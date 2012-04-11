@@ -33,13 +33,19 @@ All paths parameters in subliminal most commont functions can be either *a file 
 
 CLI
 ---
-Subliminal is shipped with a basic Command Line Interface that allows you to
-download subtitles for one or more videos in a multi-threaded way.
+Subliminal is shipped with a Command Line Interface that allows you to
+download subtitles for one or more videos in a multithreaded way.
 
+.. note::
+
+    The cache directory defaults to *~/.config/subliminal*. Even on Windows
+
+Usage
+^^^^^
 You can have the documentation of the CLI using ``subliminal --help``::
 
-    usage: subliminal [-h] [-l LG] [-s NAME] [-m] [-f] [-w N] [-c] [-q | -v]
-                      [--cache-dir DIR | --no-cache-dir] [--version]
+    usage: subliminal [-h] [-l LG] [-s NAME] [-m] [-f] [-w N] [-a AGE] [-c]
+                      [-q | -v] [--cache-dir DIR | --no-cache-dir] [--version]
                       PATH [PATH ...]
 
     Subtitles, faster than your thoughts
@@ -55,6 +61,8 @@ You can have the documentation of the CLI using ``subliminal --help``::
       -m, --multi           download multiple subtitle languages
       -f, --force           replace existing subtitle file
       -w N, --workers N     use N threads (default: 4)
+      -a AGE, --age AGE     scan only for files newer or older (prefix with +)
+                            than AGE (e.g. 12h, 1w2d, +3d6h)
       -c, --compatibility   try not to use unicode (use this if you have encoding
                             errors)
       -q, --quiet           disable output
@@ -64,9 +72,13 @@ You can have the documentation of the CLI using ``subliminal --help``::
                             work)
       --version             show program's version number and exit
 
-.. note::
+Cron job
+^^^^^^^^
+This CLI is well suited for automatic subtitles downloads. For example, to download english and french
+subtitles for videos newer than one week under /path/to/videos/ each day at 1:00AM with a single worker,
+you can use the following crontab line::
 
-    The cache directory defaults to *~/.config/subliminal*. Even on Windows
+    0 1 * * * user /path/to/subliminal -m -l en -l fr -w 1 -a 1w -q /path/to/videos/
 
 Simple module use
 -----------------

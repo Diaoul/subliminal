@@ -127,28 +127,34 @@ def consume_task(task, services=None):
         services = {}
     logger.info(u'Consuming %r' % task)
     result = None
+
+    def get_service(services, service_name, config = None):
+        if service_name not in services:
+            mod = __import__('services.' + service_name, globals=globals(), locals=locals(), fromlist=['Service'], level=-1)
+            services[service_name] = mod.Service()
+            services[service_name].init()
+
+        services[service_name].config = config
+        return services[service_name]
+
     if isinstance(task, ListTask):
-        if task.service not in services:
-            mod = __import__('services.' + task.service, globals=globals(), locals=locals(), fromlist=['Service'], level=-1)
-            services[task.service] = mod.Service(task.config)
-            services[task.service].init()
-        subtitles = services[task.service].list(task.video, task.languages)
-        result = subtitles
+        service = get_service(services, task.service, config=task.config)
+        result = service.list(task.video, task.languages)
+
     elif isinstance(task, DownloadTask):
         for subtitle in task.subtitles:
-            if subtitle.service not in services:
-                mod = __import__('services.' + subtitle.service, globals=globals(), locals=locals(), fromlist=['Service'], level=-1)
-                services[subtitle.service] = mod.Service()
-                services[subtitle.service].init()
+            service = get_service(services, subtitle.service)
             try:
-                services[subtitle.service].download(subtitle)
+                service.download(subtitle)
                 result = subtitle
                 break
             except DownloadFailedError:
                 logger.warning(u'Could not download subtitle %r, trying next' % subtitle)
                 continue
+
         if result is None:
             logger.error(u'No subtitles could be downloaded for video %r' % task.video)
+
     return result
 
 

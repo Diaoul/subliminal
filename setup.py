@@ -17,11 +17,16 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with subliminal.  If not, see <http://www.gnu.org/licenses/>.
 import os.path
+import sys
 from setuptools import setup, find_packages
 
 
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
+
+required = ['BeautifulSoup >= 3.2.0', 'guessit >= 0.2', 'requests', 'enzyme >= 0.1']
+if sys.hexversion < 0x20700f0:
+    required.append('argparse >= 1.1')
 
 execfile(os.path.join(os.path.dirname(__file__), 'subliminal', 'infos.py'))
 setup(name='subliminal',
@@ -43,4 +48,4 @@ setup(name='subliminal',
     url='https://github.com/Diaoul/subliminal',
     packages=find_packages(),
     scripts=['scripts/subliminal'],
-    install_requires=['BeautifulSoup >= 3.2.0', 'guessit >= 0.2', 'requests', 'enzyme >= 0.1', 'argparse >= 1.1'])
+    install_requires=required)

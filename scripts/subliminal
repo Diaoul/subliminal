@@ -20,6 +20,8 @@ import argparse
 import subliminal
 import logging
 import os
+import re
+import datetime
 import sys
 
 
@@ -30,6 +32,7 @@ def main():
     parser.add_argument('-m', '--multi', action='store_true', help='download multiple subtitle languages')
     parser.add_argument('-f', '--force', action='store_true', help='replace existing subtitle file')
     parser.add_argument('-w', '--workers', action='store', help='use N threads (default: %(default)s)', metavar='N', type=int, default=4)
+    parser.add_argument('-a', '--age', action='store', help='scan only for files newer (-) or older (+) than this AGE. (e.g. +1w3d6h, -12h)', metavar='AGE', default=None)
     parser.add_argument('-c', '--compatibility', action='store_true', help='try not to use unicode (use this if you have encoding errors)')
     group_verbosity = parser.add_mutually_exclusive_group()
     group_verbosity.add_argument('-q', '--quiet', action='store_true', help='disable output')
@@ -51,6 +54,21 @@ def main():
     if not os.path.exists(args.cache_dir):
         os.mkdir(args.cache_dir)
 
+    # Create filter function
+    if args.age:
+        regex = re.compile(r'^(?P<sign>\+?)((?P<weeks>\d+?)w)?((?P<days>\d+?)d)?((?P<hours>\d+?)h)?')
+        parts = regex.match(args.age)
+        if not parts:
+            raise ValueError('Incorrect age format')
+        time_params = {}
+        parts = parts.groupdict()
+        for name, param in parts.iteritems():
+            if param and name != 'sign':
+                time_params[name] = int(param)
+        scan_filter = lambda x: datetime.datetime.now() - datetime.datetime.fromtimestamp(os.path.getmtime(x)) > datetime.timedelta(**time_params)
+        if parts['sign'] == '+':
+            scan_filter = lambda x: datetime.datetime.now() - datetime.datetime.fromtimestamp(os.path.getmtime(x)) < datetime.timedelta(**time_params)
+
     # Compatibility mode
     if args.compatibility:
         paths = args.paths
@@ -61,7 +79,7 @@ def main():
     with subliminal.Pool(args.workers) as p:
         subtitles = p.download_subtitles(paths, languages=args.languages,
                              services=args.services, cache_dir=args.cache_dir,
-                             force=args.force, multi=args.multi)
+                             force=args.force, multi=args.multi, scan_filter=scan_filter)
 
     if not subtitles:
         if not args.quiet:

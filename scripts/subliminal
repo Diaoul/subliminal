@@ -55,6 +55,7 @@ def main():
         os.mkdir(args.cache_dir)
 
     # Create filter function
+    scan_filter = None
     if args.age:
         regex = re.compile(r'^(?P<sign>\+?)((?P<weeks>\d+?)w)?((?P<days>\d+?)d)?((?P<hours>\d+?)h)?')
         parts = regex.match(args.age)
@@ -65,9 +66,10 @@ def main():
         for name, param in parts.iteritems():
             if param and name != 'sign':
                 time_params[name] = int(param)
-        scan_filter = lambda x: datetime.datetime.now() - datetime.datetime.fromtimestamp(os.path.getmtime(x)) > datetime.timedelta(**time_params)
         if parts['sign'] == '+':
             scan_filter = lambda x: datetime.datetime.now() - datetime.datetime.fromtimestamp(os.path.getmtime(x)) < datetime.timedelta(**time_params)
+        else:
+            scan_filter = lambda x: datetime.datetime.now() - datetime.datetime.fromtimestamp(os.path.getmtime(x)) > datetime.timedelta(**time_params)
 
     # Compatibility mode
     if args.compatibility:

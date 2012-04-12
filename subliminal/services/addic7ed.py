@@ -83,7 +83,7 @@ class Addic7ed(ServiceBase):
     def guess_language(self, lang):
         if lang in Addic7ed.languages:
             return guessit.Language(Addic7ed.languages[lang])
-        return guessit.Language(lang)
+        return guessit.Language(lang, strict=False)
 
     @cachedmethod
     def get_likely_series_id(self, name):
@@ -189,15 +189,15 @@ class Addic7ed(ServiceBase):
         suburls = self.get_sub_urls(ep_url)
 
         # filter the subtitles with our queried languages
-        languages = set(guessit.Language(l) for l in languages)
+        languages = set(guessit.Language(l, strict=False) for l in languages)
         subtitles = []
         for suburl in suburls:
             language = self.guess_language(suburl['language'])
             if language not in languages:
                 continue
 
-            path = get_subtitle_path(filepath, language.lng2(), self.config.multi)
-            subtitle = ResultSubtitle(path, language.lng2(), self.__class__.__name__.lower(),
+            path = get_subtitle_path(filepath, language.alpha2, self.config.multi)
+            subtitle = ResultSubtitle(path, language.alpha2, self.__class__.__name__.lower(),
                                       '%s/%s' % (self.server_url, suburl['suburl']),
                                       keywords=[suburl['release'] ])
             subtitles.append(subtitle)

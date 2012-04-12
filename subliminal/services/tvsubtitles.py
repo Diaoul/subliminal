@@ -53,7 +53,7 @@ class TvSubtitles(ServiceBase):
     def guess_language(self, lang):
         if lang in TvSubtitles.languages:
             return guessit.Language(TvSubtitles.languages[lang])
-        return guessit.Language(lang)
+        return guessit.Language(lang, strict=False)
 
     @cachedmethod
     def get_likely_series_id(self, name):
@@ -150,15 +150,15 @@ class TvSubtitles(ServiceBase):
         subids = self.get_sub_ids(ep_id)
 
         # filter the subtitles with our queried languages
-        languages = set(guessit.Language(l) for l in languages)
+        languages = set(guessit.Language(l, strict=False) for l in languages)
         subtitles = []
         for subid in subids:
             language = self.guess_language(subid['language'])
             if language not in languages:
                 continue
 
-            path = get_subtitle_path(filepath, language.lng2(), self.config.multi)
-            subtitle = ResultSubtitle(path, language.lng2(), self.__class__.__name__.lower(),
+            path = get_subtitle_path(filepath, language.alpha2, self.config.multi)
+            subtitle = ResultSubtitle(path, language.alpha2, self.__class__.__name__.lower(),
                                       '%s/download-%d.html' % (self.server_url, subid['subid']),
                                       keywords=[ subid['rip'], subid['release'] ])
             subtitles.append(subtitle)

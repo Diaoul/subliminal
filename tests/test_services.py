@@ -59,32 +59,32 @@ class BierDopjeTestCase(unittest.TestCase):
 
     def test_query_series(self):
         with BierDopje(self.config) as service:
-            results = service.query(self.season, self.episode, self.languages, self.fake_file, series=self.series)
+            results = service.query(self.fake_file, self.season, self.episode, self.languages, series=self.series)
         self.assertTrue(len(results) > 0)
 
     def test_query_wrong_series(self):
         with BierDopje(self.config) as service:
-            results = service.query(self.season, self.episode, self.languages, self.fake_file, series=self.wrong_series)
+            results = service.query(self.fake_file, self.season, self.episode, self.languages, series=self.wrong_series)
         self.assertTrue(len(results) == 0)
 
     def test_query_wrong_languages(self):
         with BierDopje(self.config) as service:
-            results = service.query(self.season, self.episode, self.wrong_languages, self.fake_file, series=self.series)
+            results = service.query(self.fake_file, self.season, self.episode, self.wrong_languages, series=self.series)
         self.assertTrue(len(results) == 0)
 
     def test_query_tvdbid(self):
         with BierDopje(self.config) as service:
-            results = service.query(self.season, self.episode, self.languages, self.fake_file, tvdbid=self.tvdbid)
+            results = service.query(self.fake_file, self.season, self.episode, self.languages, tvdbid=self.tvdbid)
         self.assertTrue(len(results) > 0)
 
     def test_query_series_and_tvdbid(self):
         with BierDopje(self.config) as service:
-            results = service.query(self.season, self.episode, self.languages, self.fake_file, series=self.series, tvdbid=self.tvdbid)
+            results = service.query(self.fake_file, self.season, self.episode, self.languages, series=self.series, tvdbid=self.tvdbid)
         self.assertTrue(len(results) > 0)
 
     def test_query_wrong_tvdbid(self):
         with BierDopje(self.config) as service:
-            results = service.query(self.season, self.episode, self.languages, self.fake_file, tvdbid=self.wrong_tvdbid)
+            results = service.query(self.fake_file, self.season, self.episode, self.languages, tvdbid=self.wrong_tvdbid)
         self.assertTrue(len(results) == 0)
 
     def test_list_episode(self):
@@ -411,6 +411,7 @@ TESTCASES = [ BierDopjeTestCase, OpenSubtitlesTestCase, TheSubDBTestCase,
               SubsWikiTestCase, SubtitulosTestCase, TvSubtitlesTestCase,
               Addic7edTestCase ]
 
+TESTCASES = [ BierDopjeTestCase ]
 
 def query_suite():
     suite = unittest.TestSuite()

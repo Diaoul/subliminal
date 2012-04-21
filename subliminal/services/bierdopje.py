@@ -56,7 +56,7 @@ class BierDopje(ServiceBase):
         return int(soup.showid.contents[0])
 
 
-    def query(self, season, episode, languages, filepath, tvdbid=None, series=None):
+    def query(self, filepath, season, episode, languages, tvdbid=None, series=None):
         self.init_cache()
         if series:
             request_id = self.get_show_id(series.lower())
@@ -91,7 +91,7 @@ class BierDopje(ServiceBase):
     def list(self, video, languages):
         if not self.check_validity(video, languages):
             return []
-        results = self.query(video.season, video.episode, languages, video.path or video.release, video.tvdbid, video.series)
+        results = self.query(video.path or video.release, video.season, video.episode, languages, video.tvdbid, video.series)
         return results
 
 

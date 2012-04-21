@@ -37,83 +37,6 @@ if not os.path.exists(cache_dir):
 existing_video = u'/something/The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.mp4'
 
 
-class BierDopjeTestCase(unittest.TestCase):
-    query_tests = ['test_query_series', 'test_query_wrong_series', 'test_query_wrong_languages',
-                   'test_query_tvdbid', 'test_query_wrong_tvdbid', 'test_query_series_and_tvdbid']
-    list_tests = ['test_list_episode', 'test_list_movie', 'test_list_wrong_languages']
-    download_tests = ['test_download']
-
-    def setUp(self):
-        self.config = ServiceConfig(multi=True, cache_dir=cache_dir)
-        self.episode_path = u'The Big Bang Theory/Season 05/S05E06 - The Rhinitis Revelation - HD TV.mkv'
-        self.movie_path = u'Inception (2010)/Inception - 1080p.mkv'
-        self.languages = set(['en', 'nl'])
-        self.wrong_languages = set(['zz', 'es'])
-        self.fake_file = u'/tmp/fake_file'
-        self.series = 'The Big Bang Theory'
-        self.wrong_series = 'No Existent Show Name'
-        self.season = 5
-        self.episode = 6
-        self.tvdbid = 80379
-        self.wrong_tvdbid = 9999999999
-
-    def test_query_series(self):
-        with BierDopje(self.config) as service:
-            results = service.query(self.fake_file, self.season, self.episode, self.languages, series=self.series)
-        self.assertTrue(len(results) > 0)
-
-    def test_query_wrong_series(self):
-        with BierDopje(self.config) as service:
-            results = service.query(self.fake_file, self.season, self.episode, self.languages, series=self.wrong_series)
-        self.assertTrue(len(results) == 0)
-
-    def test_query_wrong_languages(self):
-        with BierDopje(self.config) as service:
-            results = service.query(self.fake_file, self.season, self.episode, self.wrong_languages, series=self.series)
-        self.assertTrue(len(results) == 0)
-
-    def test_query_tvdbid(self):
-        with BierDopje(self.config) as service:
-            results = service.query(self.fake_file, self.season, self.episode, self.languages, tvdbid=self.tvdbid)
-        self.assertTrue(len(results) > 0)
-
-    def test_query_series_and_tvdbid(self):
-        with BierDopje(self.config) as service:
-            results = service.query(self.fake_file, self.season, self.episode, self.languages, series=self.series, tvdbid=self.tvdbid)
-        self.assertTrue(len(results) > 0)
-
-    def test_query_wrong_tvdbid(self):
-        with BierDopje(self.config) as service:
-            results = service.query(self.fake_file, self.season, self.episode, self.languages, tvdbid=self.wrong_tvdbid)
-        self.assertTrue(len(results) == 0)
-
-    def test_list_episode(self):
-        episode = videos.Video.from_path(self.episode_path)
-        with BierDopje(self.config) as service:
-            results = service.list(episode, self.languages)
-        self.assertTrue(len(results) > 0)
-
-    def test_list_movie(self):
-        movie = videos.Video.from_path(self.movie_path)
-        with BierDopje(self.config) as service:
-            results = service.list(movie, self.languages)
-        self.assertTrue(len(results) == 0)
-
-    def test_list_wrong_languages(self):
-        episode = videos.Video.from_path(self.episode_path)
-        with BierDopje(self.config) as service:
-            results = service.list(episode, self.wrong_languages)
-        self.assertTrue(len(results) == 0)
-
-    def test_download(self):
-        episode = videos.Video.from_path(self.episode_path)
-        with BierDopje(self.config) as service:
-            subtitle = service.list(episode, self.languages)[0]
-            if os.path.exists(subtitle.path):
-                os.remove(subtitle.path)
-            service.download(subtitle)
-        self.assertTrue(os.path.exists(subtitle.path))
-
 
 class OpenSubtitlesTestCase(unittest.TestCase):
     query_tests = ['test_query_query', 'test_query_imdbid', 'test_query_hash', 'test_query_wrong_languages']
@@ -228,9 +151,165 @@ class TheSubDBTestCase(unittest.TestCase):
         self.assertTrue(os.path.exists(subtitle.path))
 
 
-class SubsWikiTestCase(unittest.TestCase):
+
+
+
+class EpisodeServiceTestCase(unittest.TestCase):
+    """Provides common test methods for the services.
+
+    Derived classes should define at least the self.service variable."""
+
+    def query(self, service, fake_file, languages, keywords, series, season, episode):
+        return service.query(fake_file, languages, keywords, series, season, episode)
+
+    def test_query_series(self):
+        with self.service(self.config) as service:
+            results = self.query(service, self.fake_file, self.languages, self.episode_keywords, self.series, self.season, self.episode)
+        self.assertTrue(len(results) > 0)
+
+    def test_query_wrong_series(self):
+        with self.service(self.config) as service:
+            results = self.query(service, self.fake_file, self.languages, self.episode_keywords, self.wrong_series, self.season, self.episode)
+        self.assertTrue(len(results) == 0)
+
+    def test_query_wrong_languages(self):
+        with self.service(self.config) as service:
+            results = self.query(service, self.fake_file, self.wrong_languages, self.episode_keywords, self.series, self.season, self.episode)
+        self.assertTrue(len(results) == 0)
+
+    def test_list_episode(self):
+        video = videos.Video.from_path(self.episode_path)
+        with self.service(self.config) as service:
+            results = service.list(video, self.languages)
+        self.assertTrue(len(results) > 0)
+
+    def test_list_wrong_languages(self):
+        video = videos.Video.from_path(self.episode_path)
+        with self.service(self.config) as service:
+            results = service.list(video, self.wrong_languages)
+        self.assertTrue(len(results) == 0)
+
+    def test_download(self):
+        video = videos.Video.from_path(self.episode_path)
+        with self.service(self.config) as service:
+            subtitle = service.list(video, self.languages)[0]
+            if os.path.exists(subtitle.path):
+                os.remove(subtitle.path)
+            result = service.download(subtitle)
+        self.assertTrue(os.path.exists(subtitle.path))
+
+
+
+class SubtitulosTestCase(EpisodeServiceTestCase):
+    query_tests = ['test_query_series', 'test_query_wrong_series', 'test_query_wrong_languages']
+    list_tests = ['test_list_episode', 'test_list_wrong_languages']
+    download_tests = ['test_download']
+
+    def setUp(self):
+        self.service = Subtitulos
+        self.config = ServiceConfig(multi=True, cache_dir=cache_dir)
+        self.fake_file = u'/tmp/fake_file'
+        self.languages = set(['en', 'es'])
+        self.wrong_languages = set(['zz', 'ay'])
+        self.episode_path = u'The Big Bang Theory/Season 05/The.Big.Bang.Theory.S05E06.HDTV.XviD-ASAP.mkv'
+        self.episode_keywords = set(['asap', 'hdtv'])
+        self.series = 'The Big Bang Theory'
+        self.wrong_series = 'No Existent Show Name'
+        self.season = 5
+        self.episode = 6
+
+
+class TvSubtitlesTestCase(EpisodeServiceTestCase):
+    query_tests = ['test_query_series', 'test_query_wrong_series', 'test_query_wrong_languages']
+    list_tests = ['test_list_episode', 'test_list_wrong_languages']
+    download_tests = ['test_download']
+
+    def setUp(self):
+        self.service = TvSubtitles
+        self.config = ServiceConfig(multi=True, cache_dir=cache_dir)
+        self.fake_file = u'/tmp/fake_file'
+        self.languages = set(['en', 'es'])
+        self.wrong_languages = set(['zz', 'ay'])
+        self.episode_path = u'The Big Bang Theory/Season 05/The.Big.Bang.Theory.S05E06.HDTV.XviD-ASAP.mkv'
+        self.episode_keywords = set(['asap', 'hdtv'])
+        self.series = 'The Big Bang Theory'
+        self.wrong_series = 'No Existent Show Name'
+        self.season = 5
+        self.episode = 6
+
+
+class Addic7edTestCase(EpisodeServiceTestCase):
+    query_tests = ['test_query_series', 'test_query_wrong_series', 'test_query_wrong_languages']
+    list_tests = ['test_list_episode', 'test_list_wrong_languages']
+    download_tests = ['test_download']
+
+    def setUp(self):
+        self.service = Addic7ed
+        self.config = ServiceConfig(multi=True, cache_dir=cache_dir)
+        self.fake_file = u'/tmp/fake_file'
+        self.languages = set(['en', 'fr'])
+        self.wrong_languages = set(['zz', 'ay'])
+        self.episode_path = u'The Big Bang Theory/Season 05/The.Big.Bang.Theory.S05E06.HDTV.XviD-ASAP.mkv'
+        self.episode_keywords = set(['asap', 'hdtv'])
+        self.series = 'The Big Bang Theory'
+        self.wrong_series = 'No Existent Show Name'
+        self.season = 5
+        self.episode = 6
+
+
+
+class BierDopjeTestCase(EpisodeServiceTestCase):
+    query_tests = ['test_query_series', 'test_query_wrong_series', 'test_query_wrong_languages',
+                   'test_query_tvdbid', 'test_query_wrong_tvdbid', 'test_query_series_and_tvdbid']
+    list_tests = ['test_list_episode', 'test_list_movie', 'test_list_wrong_languages']
+    download_tests = ['test_download']
+
+    def setUp(self):
+        self.service = BierDopje
+        self.config = ServiceConfig(multi=True, cache_dir=cache_dir)
+        self.episode_path = u'The Big Bang Theory/Season 05/S05E06 - The Rhinitis Revelation - HD TV.mkv'
+        self.movie_path = u'Inception (2010)/Inception - 1080p.mkv'
+        self.languages = set(['en', 'nl'])
+        self.wrong_languages = set(['zz', 'es'])
+        self.fake_file = u'/tmp/fake_file'
+        self.series = 'The Big Bang Theory'
+        self.episode_keywords = set()
+        self.wrong_series = 'No Existent Show Name'
+        self.season = 5
+        self.episode = 6
+        self.tvdbid = 80379
+        self.wrong_tvdbid = 9999999999
+
+    def query(self, service, fake_file, languages, keywords, series, season, episode):
+        return service.query(fake_file, season, episode, languages, series=series)
+
+
+    def test_query_tvdbid(self):
+        with BierDopje(self.config) as service:
+            results = service.query(self.fake_file, self.season, self.episode, self.languages, tvdbid=self.tvdbid)
+        self.assertTrue(len(results) > 0)
+
+    def test_query_series_and_tvdbid(self):
+        with BierDopje(self.config) as service:
+            results = service.query(self.fake_file, self.season, self.episode, self.languages, series=self.series, tvdbid=self.tvdbid)
+        self.assertTrue(len(results) > 0)
+
+    def test_query_wrong_tvdbid(self):
+        with BierDopje(self.config) as service:
+            results = service.query(self.fake_file, self.season, self.episode, self.languages, tvdbid=self.wrong_tvdbid)
+        self.assertTrue(len(results) == 0)
+
+    def test_list_movie(self):
+        movie = videos.Video.from_path(self.movie_path)
+        with BierDopje(self.config) as service:
+            results = service.list(movie, self.languages)
+        self.assertTrue(len(results) == 0)
+
+
+
+class SubsWikiTestCase(EpisodeServiceTestCase):
     query_tests = ['test_query_series', 'test_query_movie', 'test_query_wrong_parameters', 'test_query_wrong_series', 'test_query_wrong_languages']
-    list_tests = ['test_list_series', 'test_list_movie', 'test_list_series_wrong_languages']
+    list_tests = ['test_list_episode', 'test_list_movie', 'test_list_wrong_languages']
     download_tests = ['test_download']
 
     def setUp(self):
@@ -243,17 +322,13 @@ class SubsWikiTestCase(unittest.TestCase):
         self.movie_keywords = set(['twizted'])
         self.movie = u'Soul Surfer'
         self.movie_year = 2011
-        self.series_path = u'The Big Bang Theory/Season 05/The.Big.Bang.Theory.S05E06.HDTV.XviD-ASAP.mkv'
-        self.series_keywords = set(['asap', 'hdtv'])
+        self.episode_path = u'The Big Bang Theory/Season 05/The.Big.Bang.Theory.S05E06.HDTV.XviD-ASAP.mkv'
+        self.episode_keywords = set(['asap', 'hdtv'])
         self.series = 'The Big Bang Theory'
         self.wrong_series = 'No Existent Show Name'
-        self.series_season = 5
-        self.series_episode = 6
+        self.season = 5
+        self.episode = 6
 
-    def test_query_series(self):
-        with SubsWiki(self.config) as service:
-            results = service.query(self.fake_file, self.languages, keywords=self.series_keywords, series=self.series, season=self.series_season, episode=self.series_episode)
-        self.assertTrue(len(results) > 0)
 
     def test_query_movie(self):
         with SubsWiki(self.config) as service:
@@ -265,153 +340,17 @@ class SubsWikiTestCase(unittest.TestCase):
             self.assertRaises(ServiceError, service.query,
                               self.fake_file, self.languages, keywords=self.movie_keywords, movie=self.movie, series=self.series)
 
-    def test_query_wrong_series(self):
-        with SubsWiki(self.config) as service:
-            results = service.query(self.fake_file, self.languages, keywords=self.series_keywords, series=self.wrong_series, season=self.series_season, episode=self.series_episode)
-        self.assertTrue(len(results) == 0)
-
-    def test_query_wrong_languages(self):
-        with SubsWiki(self.config) as service:
-            results = service.query(self.fake_file, self.wrong_languages, keywords=self.series_keywords, series=self.series, season=self.series_season, episode=self.series_episode)
-        self.assertTrue(len(results) == 0)
-
-    def test_list_series(self):
-        video = videos.Video.from_path(self.series_path)
-        with SubsWiki(self.config) as service:
-            results = service.list(video, self.languages)
-        self.assertTrue(len(results) > 0)
-
     def test_list_movie(self):
         video = videos.Video.from_path(self.movie_path)
         with SubsWiki(self.config) as service:
             results = service.list(video, self.languages)
         self.assertTrue(len(results) > 0)
 
-    def test_list_series_wrong_languages(self):
-        video = videos.Video.from_path(self.series_path)
-        with SubsWiki(self.config) as service:
-            results = service.list(video, self.wrong_languages)
-        self.assertTrue(len(results) == 0)
-
-    def test_download(self):
-        video = videos.Video.from_path(self.series_path)
-        with SubsWiki(self.config) as service:
-            subtitle = service.list(video, self.languages)[0]
-            if os.path.exists(subtitle.path):
-                os.remove(subtitle.path)
-            service.download(subtitle)
-        self.assertTrue(os.path.exists(subtitle.path))
-
-
-
-
-class ServiceTestCase(unittest.TestCase):
-    """Provides common test methods for the services.
-
-    Derived classes should define at least the self.service variable."""
-
-    def test_query(self):
-        with self.service(self.config) as service:
-            results = service.query(self.fake_file, self.languages, self.keywords, self.series, self.season, self.episode)
-        self.assertTrue(len(results) > 0)
-
-    def test_query_wrong_series(self):
-        with self.service(self.config) as service:
-            results = service.query(self.fake_file, self.languages, self.keywords, self.wrong_series, self.season, self.episode)
-        self.assertTrue(len(results) == 0)
-
-    def test_query_wrong_languages(self):
-        with self.service(self.config) as service:
-            results = service.query(self.fake_file, self.wrong_languages, self.keywords, self.series, self.season, self.episode)
-        self.assertTrue(len(results) == 0)
-
-    def test_list(self):
-        video = videos.Video.from_path(self.path)
-        with self.service(self.config) as service:
-            results = service.list(video, self.languages)
-        self.assertTrue(len(results) > 0)
-
-    def test_list_wrong_languages(self):
-        video = videos.Video.from_path(self.path)
-        with self.service(self.config) as service:
-            results = service.list(video, self.wrong_languages)
-        self.assertTrue(len(results) == 0)
-
-    def test_download(self):
-        video = videos.Video.from_path(self.path)
-        with self.service(self.config) as service:
-            subtitle = service.list(video, self.languages)[0]
-            if os.path.exists(subtitle.path):
-                os.remove(subtitle.path)
-            result = service.download(subtitle)
-        self.assertTrue(os.path.exists(subtitle.path))
-
-
-
-class SubtitulosTestCase(ServiceTestCase):
-    query_tests = ['test_query', 'test_query_wrong_series', 'test_query_wrong_languages']
-    list_tests = ['test_list', 'test_list_wrong_languages']
-    download_tests = ['test_download']
-
-    def setUp(self):
-        self.service = Subtitulos
-        self.config = ServiceConfig(multi=True, cache_dir=cache_dir)
-        self.fake_file = u'/tmp/fake_file'
-        self.languages = set(['en', 'es'])
-        self.wrong_languages = set(['zz', 'ay'])
-        self.path = u'The Big Bang Theory/Season 05/The.Big.Bang.Theory.S05E06.HDTV.XviD-ASAP.mkv'
-        self.keywords = set(['asap', 'hdtv'])
-        self.series = 'The Big Bang Theory'
-        self.wrong_series = 'No Existent Show Name'
-        self.season = 5
-        self.episode = 6
-
-
-class TvSubtitlesTestCase(ServiceTestCase):
-    query_tests = ['test_query', 'test_query_wrong_series', 'test_query_wrong_languages']
-    list_tests = ['test_list', 'test_list_wrong_languages']
-    download_tests = ['test_download']
-
-    def setUp(self):
-        self.service = TvSubtitles
-        self.config = ServiceConfig(multi=True, cache_dir=cache_dir)
-        self.fake_file = u'/tmp/fake_file'
-        self.languages = set(['en', 'es'])
-        self.wrong_languages = set(['zz', 'ay'])
-        self.path = u'The Big Bang Theory/Season 05/The.Big.Bang.Theory.S05E06.HDTV.XviD-ASAP.mkv'
-        self.keywords = set(['asap', 'hdtv'])
-        self.series = 'The Big Bang Theory'
-        self.wrong_series = 'No Existent Show Name'
-        self.season = 5
-        self.episode = 6
-
-
-class Addic7edTestCase(ServiceTestCase):
-    query_tests = ['test_query', 'test_query_wrong_series', 'test_query_wrong_languages']
-    list_tests = ['test_list', 'test_list_wrong_languages']
-    download_tests = ['test_download']
-
-    def setUp(self):
-        self.service = Addic7ed
-        self.config = ServiceConfig(multi=True, cache_dir=cache_dir)
-        self.fake_file = u'/tmp/fake_file'
-        self.languages = set(['en', 'fr'])
-        self.wrong_languages = set(['zz', 'ay'])
-        self.path = u'The Big Bang Theory/Season 05/The.Big.Bang.Theory.S05E06.HDTV.XviD-ASAP.mkv'
-        self.keywords = set(['asap', 'hdtv'])
-        self.series = 'The Big Bang Theory'
-        self.wrong_series = 'No Existent Show Name'
-        self.season = 5
-        self.episode = 6
-
-
-
 
 TESTCASES = [ BierDopjeTestCase, OpenSubtitlesTestCase, TheSubDBTestCase,
               SubsWikiTestCase, SubtitulosTestCase, TvSubtitlesTestCase,
               Addic7edTestCase ]
 
-TESTCASES = [ BierDopjeTestCase ]
 
 def query_suite():
     suite = unittest.TestSuite()

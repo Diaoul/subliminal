@@ -204,11 +204,16 @@ class EpisodeServiceTestCase(unittest.TestCase):
     def test_download(self):
         video = videos.Video.from_path(self.episode_path)
         with self.service(self.config) as service:
-            subtitle = service.list(video, self.languages)[0]
+            subtitle = service.list(video, set([self.episode_sublanguage]))[0]
             if os.path.exists(subtitle.path):
                 os.remove(subtitle.path)
             result = service.download(subtitle)
         self.assertTrue(os.path.exists(subtitle.path))
+        # check the downloaded file has the expected size, to avoid errors where
+        # we download a wrong file or an html error page instead of the subtitle
+        subfilesize = os.path.getsize(subtitle.path)
+        same_size = (subfilesize == self.episode_subfilesize)
+        self.assertTrue(same_size, msg = 'expected = %d - received = %d' % (self.episode_subfilesize, subfilesize))
 
     def test_cached_series(self):
         with self.service(self.config) as service:
@@ -237,6 +242,8 @@ class SubtitulosTestCase(EpisodeServiceTestCase):
         self.languages = set(['en', 'es'])
         self.wrong_languages = set(['zz', 'ay'])
         self.episode_path = u'The Big Bang Theory/Season 05/The.Big.Bang.Theory.S05E06.HDTV.XviD-ASAP.mkv'
+        self.episode_sublanguage = 'en'
+        self.episode_subfilesize = 32986
         self.episode_keywords = set(['asap', 'hdtv'])
         self.series = 'The Big Bang Theory'
         self.wrong_series = 'No Existent Show Name'
@@ -257,6 +264,8 @@ class TvSubtitlesTestCase(EpisodeServiceTestCase):
         self.languages = set(['en', 'es'])
         self.wrong_languages = set(['zz', 'ay'])
         self.episode_path = u'The Big Bang Theory/Season 05/The.Big.Bang.Theory.S05E06.HDTV.XviD-ASAP.mkv'
+        self.episode_sublanguage = 'en'
+        self.episode_subfilesize = 33078
         self.episode_keywords = set(['asap', 'hdtv'])
         self.series = 'The Big Bang Theory'
         self.wrong_series = 'No Existent Show Name'
@@ -277,6 +286,11 @@ class Addic7edTestCase(EpisodeServiceTestCase):
         self.languages = set(['en', 'fr'])
         self.wrong_languages = set(['zz', 'ay'])
         self.episode_path = u'The Big Bang Theory/Season 05/The.Big.Bang.Theory.S05E06.HDTV.XviD-ASAP.mkv'
+        self.episode_sublanguage = 'en'
+        # FIXME: this is the size of the first subtitle that appears on the page
+        # which is the original one, not the most updated one. We should make
+        # sure the Addic7ed service picks up the most recent one instead
+        self.episode_subfilesize = 33538
         self.episode_keywords = set(['asap', 'hdtv'])
         self.series = 'The Big Bang Theory'
         self.wrong_series = 'No Existent Show Name'
@@ -296,6 +310,8 @@ class BierDopjeTestCase(EpisodeServiceTestCase):
         self.service = BierDopje
         self.config = ServiceConfig(multi=True, cache_dir=cache_dir)
         self.episode_path = u'The Big Bang Theory/Season 05/S05E06 - The Rhinitis Revelation - HD TV.mkv'
+        self.episode_sublanguage = 'en'
+        self.episode_subfilesize = 33469
         self.movie_path = u'Inception (2010)/Inception - 1080p.mkv'
         self.languages = set(['en', 'nl'])
         self.wrong_languages = set(['zz', 'es'])
@@ -352,6 +368,8 @@ class SubsWikiTestCase(EpisodeServiceTestCase):
         self.movie = u'Soul Surfer'
         self.movie_year = 2011
         self.episode_path = u'The Big Bang Theory/Season 05/The.Big.Bang.Theory.S05E06.HDTV.XviD-ASAP.mkv'
+        self.episode_sublanguage = 'es'
+        self.episode_subfilesize = 34040
         self.episode_keywords = set(['asap', 'hdtv'])
         self.series = 'The Big Bang Theory'
         self.wrong_series = 'No Existent Show Name'

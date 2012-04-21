@@ -103,6 +103,7 @@ class OpenSubtitlesTestCase(unittest.TestCase):
             result = service.download(subtitle)
         self.assertTrue(isinstance(result, Subtitle))
         self.assertTrue(os.path.exists(subtitle.path))
+        os.remove(subtitle.path)
 
 
 class TheSubDBTestCase(unittest.TestCase):
@@ -155,6 +156,7 @@ class TheSubDBTestCase(unittest.TestCase):
                 os.remove(subtitle.path)
             service.download(subtitle)
         self.assertTrue(os.path.exists(subtitle.path))
+        os.remove(subtitle.path)
 
 
 
@@ -214,6 +216,7 @@ class EpisodeServiceTestCase(unittest.TestCase):
         subfilesize = os.path.getsize(subtitle.path)
         same_size = (subfilesize == self.episode_subfilesize)
         self.assertTrue(same_size, msg = 'expected = %d - received = %d' % (self.episode_subfilesize, subfilesize))
+        os.remove(subtitle.path)
 
     def test_cached_series(self):
         with self.service(self.config) as service:

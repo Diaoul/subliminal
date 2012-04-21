@@ -83,6 +83,14 @@ class ServiceBase(object):
         service_name = self.__class__.__name__
         self.config.cache.load(service_name)
 
+    def save_cache(self):
+        service_name = self.__class__.__name__
+        self.config.cache.save(service_name)
+
+    def clear_cache(self):
+        service_name = self.__class__.__name__
+        self.config.cache.clear(service_name)
+
     def cache_for(self, func, args, result):
         service_name = self.__class__.__name__
         return self.config.cache.cache_for(service_name, func, args, result)

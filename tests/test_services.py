@@ -29,6 +29,10 @@ from subliminal.services.addic7ed import Addic7ed
 from subliminal.subtitles import Subtitle
 import os
 import unittest
+try:
+    import cPickle as pickle
+except ImportError:
+    import pickle
 
 
 cache_dir = u'/tmp/sublicache'
@@ -42,6 +46,7 @@ class OpenSubtitlesTestCase(unittest.TestCase):
     query_tests = ['test_query_query', 'test_query_imdbid', 'test_query_hash', 'test_query_wrong_languages']
     list_tests = ['test_list', 'test_list_wrong_languages']
     download_tests = ['test_download']
+    cache_tests = []
 
     def setUp(self):
         self.config = ServiceConfig(multi=True, cache_dir=cache_dir)
@@ -104,6 +109,7 @@ class TheSubDBTestCase(unittest.TestCase):
     query_tests = ['test_query', 'test_query_wrong_hash', 'test_query_wrong_languages']
     list_tests = ['test_list', 'test_list_wrong_languages']
     download_tests = ['test_download']
+    cache_tests = []
 
     def setUp(self):
         self.config = ServiceConfig(multi=True, cache_dir=cache_dir)
@@ -159,6 +165,12 @@ class EpisodeServiceTestCase(unittest.TestCase):
 
     Derived classes should define at least the self.service variable."""
 
+    def tearDown(self):
+        # setting config to None allows to delete the object, which will in
+        # turn save the cache
+        self.config = None
+
+
     def query(self, service, fake_file, languages, keywords, series, season, episode):
         return service.query(fake_file, languages, keywords, series, season, episode)
 
@@ -198,12 +210,25 @@ class EpisodeServiceTestCase(unittest.TestCase):
             result = service.download(subtitle)
         self.assertTrue(os.path.exists(subtitle.path))
 
+    def test_cached_series(self):
+        with self.service(self.config) as service:
+            service.clear_cache()
+            results = self.query(service, self.fake_file, self.languages, self.episode_keywords, self.series, self.season, self.episode)
+            service.save_cache()
 
+        c = pickle.load(open(os.path.join(cache_dir, 'subliminal_%s.cache' % self.service.__name__)))
+        found = False
+        for func_name, cached_values in c.items():
+            for args, result in cached_values.items():
+                if args == (self.series.lower(),):
+                    found = True
+        self.assertTrue(found)
 
 class SubtitulosTestCase(EpisodeServiceTestCase):
     query_tests = ['test_query_series', 'test_query_wrong_series', 'test_query_wrong_languages']
     list_tests = ['test_list_episode', 'test_list_wrong_languages']
     download_tests = ['test_download']
+    cache_tests = []
 
     def setUp(self):
         self.service = Subtitulos
@@ -223,6 +248,7 @@ class TvSubtitlesTestCase(EpisodeServiceTestCase):
     query_tests = ['test_query_series', 'test_query_wrong_series', 'test_query_wrong_languages']
     list_tests = ['test_list_episode', 'test_list_wrong_languages']
     download_tests = ['test_download']
+    cache_tests = ['test_cached_series']
 
     def setUp(self):
         self.service = TvSubtitles
@@ -242,6 +268,7 @@ class Addic7edTestCase(EpisodeServiceTestCase):
     query_tests = ['test_query_series', 'test_query_wrong_series', 'test_query_wrong_languages']
     list_tests = ['test_list_episode', 'test_list_wrong_languages']
     download_tests = ['test_download']
+    cache_tests = ['test_cached_series']
 
     def setUp(self):
         self.service = Addic7ed
@@ -263,6 +290,7 @@ class BierDopjeTestCase(EpisodeServiceTestCase):
                    'test_query_tvdbid', 'test_query_wrong_tvdbid', 'test_query_series_and_tvdbid']
     list_tests = ['test_list_episode', 'test_list_movie', 'test_list_wrong_languages']
     download_tests = ['test_download']
+    cache_tests = ['test_cached_series']
 
     def setUp(self):
         self.service = BierDopje
@@ -311,6 +339,7 @@ class SubsWikiTestCase(EpisodeServiceTestCase):
     query_tests = ['test_query_series', 'test_query_movie', 'test_query_wrong_parameters', 'test_query_wrong_series', 'test_query_wrong_languages']
     list_tests = ['test_list_episode', 'test_list_movie', 'test_list_wrong_languages']
     download_tests = ['test_download']
+    cache_tests = []
 
     def setUp(self):
         self.service = SubsWiki
@@ -372,10 +401,17 @@ def download_suite():
         suite.addTests(map(testcase, testcase.download_tests))
     return suite
 
+def cache_suite():
+    suite = unittest.TestSuite()
+    for testcase in TESTCASES:
+        suite.addTests(map(testcase, testcase.cache_tests))
+    return suite
+
 
 if __name__ == '__main__':
     suites = []
     suites.append(query_suite())
     suites.append(list_suite())
     suites.append(download_suite())
+    suites.append(cache_suite())
     unittest.TextTestRunner(verbosity=2).run(unittest.TestSuite(suites))

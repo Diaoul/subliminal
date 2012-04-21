@@ -70,6 +70,12 @@ class Cache(object):
         with self.lock:
             pickle.dump(self.cache[service_name], open(filename, 'wb'))
 
+    def clear(self, service_name):
+        try:
+            os.remove(self.cache_location(service_name))
+        except OSError:
+            pass
+        self.cache[service_name] = defaultdict(dict)
 
     def cached_func_key(self, func, cls = None):
         try:

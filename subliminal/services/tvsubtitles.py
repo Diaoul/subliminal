@@ -50,10 +50,6 @@ class TvSubtitles(ServiceBase):
     videos = [Episode]
     require_video = False
 
-    def guess_language(self, lang):
-        if lang in TvSubtitles.languages:
-            return guessit.Language(TvSubtitles.languages[lang])
-        return guessit.Language(lang, strict=False)
 
     @cachedmethod
     def get_likely_series_id(self, name):
@@ -138,6 +134,7 @@ class TvSubtitles(ServiceBase):
         self.download_zip_file(subtitle.link, subtitle.path)
 
 
+
     def query(self, filepath, languages, keywords, series, season, episode):
         logger.debug(u'Getting subtitles for %s season %d episode %d with languages %r' % (series, season, episode, languages))
         self.init_cache()
@@ -150,12 +147,12 @@ class TvSubtitles(ServiceBase):
         subids = self.get_sub_ids(ep_id)
 
         # filter the subtitles with our queried languages
-        languages = set(guessit.Language(l, strict=False) for l in languages)
         subtitles = []
         for subid in subids:
-            language = self.guess_language(subid['language'])
-            if language not in languages:
+            if not self.is_language_in(subid['language'], languages):
                 continue
+
+            language = guessit.Language(subid['language'], strict=False)
 
             path = get_subtitle_path(filepath, language.alpha2, self.config.multi)
             subtitle = ResultSubtitle(path, language.alpha2, self.__class__.__name__.lower(),

@@ -23,7 +23,7 @@ import os
 import requests
 import threading
 import zipfile
-
+import guessit
 
 __all__ = ['ServiceBase', 'ServiceConfig']
 logger = logging.getLogger(__name__)
@@ -202,6 +202,26 @@ class ServiceBase(object):
         if cls.reverted_languages and language in cls.languages.values():
             return [k for k, v in cls.languages.iteritems() if v == language][0]
         raise MissingLanguageError(language)
+
+
+    def is_language_in(self, language, list_languages):
+        """Helper function that returns whether the given language is
+        contained in a list of possible languages.
+        You can feed pretty much anything to this function and it should
+        be able to recognize the language automatically.
+
+        :param string language: the language which you want to check
+        :param list list_languages: the list of possible languages
+        :return: whether the given language is in the list
+        :rtype: boolean
+
+        """
+        lang = guessit.Language(language, strict=False)
+        list_langs = set(guessit.Language(l, strict=False) for l in list_languages)
+        if lang == guessit.Language('unknown'):
+            return False
+        return lang in list_langs
+
 
     def download_file(self, url, filepath):
         """Attempt to download a file and remove it in case of failure

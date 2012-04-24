@@ -18,8 +18,8 @@
 from . import ServiceBase
 from ..subtitles import get_subtitle_path, ResultSubtitle
 from ..videos import Episode, Movie, UnknownVideo
+import guessit
 import logging
-
 
 logger = logging.getLogger(__name__)
 
@@ -36,11 +36,8 @@ class TheSubDB(ServiceBase):
     videos = [Movie, Episode, UnknownVideo]
     require_video = True
 
-    def list(self, video, languages):
-        if not self.check_validity(video, languages):
-            return []
-        results = self.query(video.path, video.hashes['TheSubDB'], languages)
-        return results
+    def list_checked(self, video, languages):
+        return self.query(video.path, video.hashes['TheSubDB'], languages)
 
     def query(self, filepath, moviehash, languages):
         r = self.session.get(self.server_url, params={'action': 'search', 'hash': moviehash})
@@ -50,7 +47,7 @@ class TheSubDB(ServiceBase):
         if r.status_code != 200:
             logger.error(u'Request %s returned status code %d' % (r.url, r.status_code))
             return []
-        available_languages = set([self.get_revert_language(l) for l in r.content.split(',')])
+        available_languages = set(guessit.Language(l) for l in r.content.split(','))
         languages &= available_languages
         if not languages:
             logger.debug(u'Could not find subtitles for hash %s with languages %r (only %r available)' % (moviehash, languages, available_languages))
@@ -58,7 +55,7 @@ class TheSubDB(ServiceBase):
         subtitles = []
         for language in languages:
             path = get_subtitle_path(filepath, language, self.config.multi)
-            subtitle = ResultSubtitle(path, language, self.__class__.__name__.lower(), '%s?action=download&hash=%s&language=%s' % (self.server_url, moviehash, self.get_language(language)))
+            subtitle = ResultSubtitle(path, language, self.__class__.__name__.lower(), '%s?action=download&hash=%s&language=%s' % (self.server_url, moviehash, language.alpha2))
             subtitles.append(subtitle)
         return subtitles
 

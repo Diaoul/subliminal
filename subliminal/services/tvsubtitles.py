@@ -109,8 +109,8 @@ class TvSubtitles(ServiceBase):
                 continue
 
             subid = int(match('([0-9]+)', subdiv['href']))
-            lang = subdiv.div['title'].split(' ')[1]
-            result = { 'subid': subid, 'language': lang }
+            lang = guessit.Language(match('flags/(.*).gif', subdiv.img['src']))
+            result = {'subid': subid, 'language': lang}
             for p in subdiv.find_all('p'):
                 if 'alt' in p.attrs and p['alt'] == 'rip':
                     result['rip'] = p.text.strip()
@@ -122,11 +122,8 @@ class TvSubtitles(ServiceBase):
         return subids
 
 
-    def list(self, video, languages):
-        if not self.check_validity(video, languages):
-            return []
-        results = self.query(video.path or video.release, languages, get_keywords(video.guess), video.series, video.season, video.episode)
-        return results
+    def list_checked(self, video, languages):
+        return self.query(video.path or video.release, languages, get_keywords(video.guess), video.series, video.season, video.episode)
 
 
     def download(self, subtitle):
@@ -149,13 +146,12 @@ class TvSubtitles(ServiceBase):
         # filter the subtitles with our queried languages
         subtitles = []
         for subid in subids:
-            if not self.is_language_in(subid['language'], languages):
+            language = subid['language']
+            if language not in languages:
                 continue
 
-            language = guessit.Language(subid['language'], strict=False)
-
-            path = get_subtitle_path(filepath, language.alpha2, self.config.multi)
-            subtitle = ResultSubtitle(path, language.alpha2, self.__class__.__name__.lower(),
+            path = get_subtitle_path(filepath, language, self.config.multi)
+            subtitle = ResultSubtitle(path, language, self.__class__.__name__.lower(),
                                       '%s/download-%d.html' % (self.server_url, subid['subid']),
                                       keywords=[ subid['rip'], subid['release'] ])
             subtitles.append(subtitle)

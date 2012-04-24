@@ -56,7 +56,7 @@ def create_list_tasks(paths, languages, services, force, multi, cache_dir, max_d
     tasks = []
     config = ServiceConfig(multi, cache_dir)
     for video, detected_subtitles in scan_result:
-        detected_languages = set([s.language for s in detected_subtitles])
+        detected_languages = set(s.language for s in detected_subtitles)
         wanted_languages = languages.copy()
         if not force and multi:
             wanted_languages -= detected_languages

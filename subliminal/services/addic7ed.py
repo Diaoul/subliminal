@@ -149,18 +149,15 @@ class Addic7ed(ServiceBase):
 
                 suburl = link['href']
 
-                lang = row.find('td','language').text.strip()
+                lang = guessit.Language(row.find('td','language').text.strip())
                 result = { 'suburl': suburl, 'language': lang, 'release': release }
                 suburls.append(result)
 
         return suburls
 
 
-    def list(self, video, languages):
-        if not self.check_validity(video, languages):
-            return []
-        results = self.query(video.path or video.release, languages, get_keywords(video.guess), video.series, video.season, video.episode)
-        return results
+    def list_checked(self, video, languages):
+        return self.query(video.path or video.release, languages, get_keywords(video.guess), video.series, video.season, video.episode)
 
 
     def download(self, subtitle):
@@ -187,13 +184,12 @@ class Addic7ed(ServiceBase):
         # filter the subtitles with our queried languages
         subtitles = []
         for suburl in suburls:
-            if not self.is_language_in(suburl['language'],  languages):
+            language = suburl['language']
+            if language not in languages:
                 continue
 
-            language = guessit.Language(suburl['language'], strict=False)
-
-            path = get_subtitle_path(filepath, language.alpha2, self.config.multi)
-            subtitle = ResultSubtitle(path, language.alpha2, self.__class__.__name__.lower(),
+            path = get_subtitle_path(filepath, language, self.config.multi)
+            subtitle = ResultSubtitle(path, language, self.__class__.__name__.lower(),
                                       '%s/%s' % (self.server_url, suburl['suburl']),
                                       keywords=[suburl['release'] ])
             subtitles.append(subtitle)

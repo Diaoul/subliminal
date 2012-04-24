@@ -108,8 +108,16 @@ class ServiceBase(object):
         pass
 
     def list(self, video, languages):
-        """List subtitles"""
-        pass
+        """List subtitles.
+
+        As a service writer, you can either override this method or implement
+        the self.list_checked() method instead to have the languages
+        pre-filtered for you.
+        """
+        if not self.check_validity(video, languages):
+            return []
+
+        return self.list_checked(video, languages)
 
     def download(self, subtitle):
         """Download a subtitle"""
@@ -123,9 +131,7 @@ class ServiceBase(object):
         :rtype: set
 
         """
-        if not cls.reverted_languages:
-            return set(cls.languages.keys())
-        return set(cls.languages.values())
+        return set(map(guessit.Language, cls.languages.keys()))
 
     @classmethod
     def check_validity(cls, video, languages):
@@ -137,7 +143,7 @@ class ServiceBase(object):
         :rtype: bool
 
         """
-        languages &= cls.available_languages()
+        languages = (set(languages) & cls.available_languages()) - set([guessit.Language('unk')])
         if not languages:
             logger.debug(u'No language available for service %s' % cls.__class__.__name__.lower())
             return False
@@ -216,8 +222,8 @@ class ServiceBase(object):
         :rtype: boolean
 
         """
-        lang = guessit.Language(language, strict=False)
-        list_langs = set(guessit.Language(l, strict=False) for l in list_languages)
+        lang = guessit.Language(language)
+        list_langs = set(guessit.Language(l) for l in list_languages)
         if lang == guessit.Language('unknown'):
             return False
         return lang in list_langs

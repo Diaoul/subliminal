@@ -27,7 +27,11 @@ from subliminal.services.thesubdb import TheSubDB
 from subliminal.services.tvsubtitles import TvSubtitles
 from subliminal.services.addic7ed import Addic7ed
 from subliminal.subtitles import Subtitle
+from guessit.slogging import setupLogging
+import guessit
+import logging
 import os
+import sys
 import unittest
 try:
     import cPickle as pickle
@@ -40,6 +44,8 @@ if not os.path.exists(cache_dir):
     os.mkdir(cache_dir)
 existing_video = u'/something/The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.mp4'
 
+def langs(languages):
+    return set(map(guessit.Language, languages))
 
 
 class OpenSubtitlesTestCase(unittest.TestCase):
@@ -50,8 +56,8 @@ class OpenSubtitlesTestCase(unittest.TestCase):
 
     def setUp(self):
         self.config = ServiceConfig(multi=True, cache_dir=cache_dir)
-        self.languages = set(['en', 'fr'])
-        self.wrong_languages = set(['zz', 'yy'])
+        self.languages = langs(['en', 'fr'])
+        self.wrong_languages = langs(['zz', 'yy'])
         self.fake_file = u'/tmp/fake_file'
         self.path = existing_video
         self.series = 'The Big Bang Theory'
@@ -79,8 +85,8 @@ class OpenSubtitlesTestCase(unittest.TestCase):
 
     def test_query_wrong_languages(self):
         with OpenSubtitles(self.config) as service:
-            self.assertRaises(MissingLanguageError, service.query,
-                              self.fake_file, self.wrong_languages, moviehash=self.hash, size=self.size)
+            results = service.query(self.fake_file, self.wrong_languages, moviehash=self.hash, size=self.size)
+        self.assertTrue(len(results) == 0)
 
     def test_list(self):
         video = videos.Video.from_path(self.path)
@@ -117,8 +123,8 @@ class TheSubDBTestCase(unittest.TestCase):
         self.path = existing_video
         self.hash = u'edc1981d6459c6111fe36205b4aff6c2'
         self.wrong_hash = u'ffffffffffffffffffffffffffffffff'
-        self.languages = set(['en', 'nl'])
-        self.wrong_languages = set(['zz', 'cs'])
+        self.languages = langs(['en', 'nl'])
+        self.wrong_languages = langs(['zz', 'cs'])
         self.fake_file = u'/tmp/fake_file'
 
     def test_query(self):
@@ -157,7 +163,6 @@ class TheSubDBTestCase(unittest.TestCase):
             service.download(subtitle)
         self.assertTrue(os.path.exists(subtitle.path))
         os.remove(subtitle.path)
-
 
 
 
@@ -206,7 +211,7 @@ class EpisodeServiceTestCase(unittest.TestCase):
     def test_download(self):
         video = videos.Video.from_path(self.episode_path)
         with self.service(self.config) as service:
-            subtitle = service.list(video, set([self.episode_sublanguage]))[0]
+            subtitle = service.list(video, [guessit.Language(self.episode_sublanguage)])[0]
             if os.path.exists(subtitle.path):
                 os.remove(subtitle.path)
             result = service.download(subtitle)
@@ -242,8 +247,8 @@ class SubtitulosTestCase(EpisodeServiceTestCase):
         self.service = Subtitulos
         self.config = ServiceConfig(multi=True, cache_dir=cache_dir)
         self.fake_file = u'/tmp/fake_file'
-        self.languages = set(['en', 'es'])
-        self.wrong_languages = set(['zz', 'ay'])
+        self.languages = langs(['en', 'es'])
+        self.wrong_languages = langs(['zz', 'ay'])
         self.episode_path = u'The Big Bang Theory/Season 05/The.Big.Bang.Theory.S05E06.HDTV.XviD-ASAP.mkv'
         self.episode_sublanguage = 'en'
         self.episode_subfilesize = 32986
@@ -264,8 +269,8 @@ class TvSubtitlesTestCase(EpisodeServiceTestCase):
         self.service = TvSubtitles
         self.config = ServiceConfig(multi=True, cache_dir=cache_dir)
         self.fake_file = u'/tmp/fake_file'
-        self.languages = set(['en', 'es'])
-        self.wrong_languages = set(['zz', 'ay'])
+        self.languages = langs(['en', 'es'])
+        self.wrong_languages = langs(['zz', 'ay'])
         self.episode_path = u'The Big Bang Theory/Season 05/The.Big.Bang.Theory.S05E06.HDTV.XviD-ASAP.mkv'
         self.episode_sublanguage = 'en'
         self.episode_subfilesize = 33078
@@ -286,8 +291,8 @@ class Addic7edTestCase(EpisodeServiceTestCase):
         self.service = Addic7ed
         self.config = ServiceConfig(multi=True, cache_dir=cache_dir)
         self.fake_file = u'/tmp/fake_file'
-        self.languages = set(['en', 'fr'])
-        self.wrong_languages = set(['zz', 'ay'])
+        self.languages = langs(['en', 'fr'])
+        self.wrong_languages = langs(['zz', 'ay'])
         self.episode_path = u'The Big Bang Theory/Season 05/The.Big.Bang.Theory.S05E06.HDTV.XviD-ASAP.mkv'
         self.episode_sublanguage = 'en'
         # FIXME: this is the size of the first subtitle that appears on the page
@@ -316,8 +321,8 @@ class BierDopjeTestCase(EpisodeServiceTestCase):
         self.episode_sublanguage = 'en'
         self.episode_subfilesize = 33469
         self.movie_path = u'Inception (2010)/Inception - 1080p.mkv'
-        self.languages = set(['en', 'nl'])
-        self.wrong_languages = set(['zz', 'es'])
+        self.languages = langs(['en', 'nl'])
+        self.wrong_languages = langs(['zz', 'es'])
         self.fake_file = u'/tmp/fake_file'
         self.series = 'The Big Bang Theory'
         self.episode_keywords = set()
@@ -364,8 +369,8 @@ class SubsWikiTestCase(EpisodeServiceTestCase):
         self.service = SubsWiki
         self.config = ServiceConfig(multi=True, cache_dir=cache_dir)
         self.fake_file = u'/tmp/fake_file'
-        self.languages = set(['en', 'es'])
-        self.wrong_languages = set(['zz', 'ay'])
+        self.languages = langs(['en', 'es'])
+        self.wrong_languages = langs(['zz', 'ay'])
         self.movie_path = u'Soul Surfer (2011)/Soul.Surfer.(2011).DVDRip.XviD-TWiZTED.mkv'
         self.movie_keywords = set(['twizted'])
         self.movie = u'Soul Surfer'
@@ -430,6 +435,9 @@ def cache_suite():
 
 
 if __name__ == '__main__':
+    if len(sys.argv) > 1 and sys.argv[1] == '-v':
+        setupLogging()
+        logging.getLogger().setLevel(logging.DEBUG)
     suites = []
     suites.append(query_suite())
     suites.append(list_suite())

@@ -19,6 +19,7 @@ from . import ServiceBase
 from ..exceptions import ServiceError, DownloadFailedError
 from ..subtitles import get_subtitle_path, ResultSubtitle
 from ..videos import Episode, Movie
+import guessit
 import gzip
 import logging
 import os.path
@@ -46,7 +47,7 @@ class OpenSubtitles(ServiceBase):
                  'ki': 'kik', 'rw': 'kin', 'ky': 'kir', 'kv': 'kom', 'kg': 'kon', 'ko': 'kor', 'kj': 'kua',
                  'ku': 'kur', 'lo': 'lao', 'la': 'lat', 'lv': 'lav', 'li': 'lim', 'ln': 'lin', 'lt': 'lit',
                  'lb': 'ltz', 'lu': 'lub', 'lg': 'lug', 'mk': 'mac', 'mh': 'mah', 'ml': 'mal', 'mi': 'mao',
-                 'mr': 'mar', 'ms': 'may', 'mg': 'mlg', 'mt': 'mlt', 'mo': 'mol', 'mn': 'mon', 'na': 'nau',
+                 'mr': 'mar', 'ms': 'may', 'mg': 'mlg', 'mt': 'mlt',              'mn': 'mon', 'na': 'nau',
                  'nv': 'nav', 'nr': 'nbl', 'nd': 'nde', 'ng': 'ndo', 'ne': 'nep', 'nn': 'nno', 'nb': 'nob',
                  'no': 'nor', 'ny': 'nya', 'oc': 'oci', 'oj': 'oji', 'or': 'ori', 'om': 'orm', 'os': 'oss',
                  'pa': 'pan', 'fa': 'per', 'pi': 'pli', 'pl': 'pol', 'pt': 'por', 'ps': 'pus', 'qu': 'que',
@@ -58,6 +59,7 @@ class OpenSubtitles(ServiceBase):
                  'tw': 'twi', 'ug': 'uig', 'uk': 'ukr', 'ur': 'urd', 'uz': 'uzb', 've': 'ven', 'vi': 'vie',
                  'vo': 'vol', 'cy': 'wel', 'wa': 'wln', 'wo': 'wol', 'xh': 'xho', 'yi': 'yid', 'yo': 'yor',
                  'za': 'zha', 'zu': 'zul', 'ro': 'rum', 'po': 'pob', 'un': 'unk', 'ay': 'ass'}
+    REMOVED = {'mo': 'mol'}
     reverted_languages = False
     videos = [Episode, Movie]
     require_video = False
@@ -91,7 +93,7 @@ class OpenSubtitles(ServiceBase):
         if not searches:
             raise ServiceError('One or more parameter missing')
         for search in searches:
-            search['sublanguageid'] = ','.join([self.get_language(l) for l in languages])
+            search['sublanguageid'] = ','.join(l.alpha3 for l in languages)
         logger.debug(u'Getting subtitles %r with token %s' % (searches, self.token))
         results = self.server.SearchSubtitles(self.token, searches)
         if not results['data']:
@@ -99,16 +101,14 @@ class OpenSubtitles(ServiceBase):
             return []
         subtitles = []
         for result in results['data']:
-            language = self.get_revert_language(result['SubLanguageID'])
+            language = guessit.Language(result['SubLanguageID'])
             path = get_subtitle_path(filepath, language, self.config.multi)
             confidence = 1 - float(self.confidence_order.index(result['MatchedBy'])) / float(len(self.confidence_order))
             subtitle = ResultSubtitle(path, language, self.__class__.__name__.lower(), result['SubDownloadLink'], result['SubFileName'], confidence)
             subtitles.append(subtitle)
         return subtitles
 
-    def list(self, video, languages):
-        if not self.check_validity(video, languages):
-            return []
+    def list_checked(self, video, languages):
         results = []
         if video.exists:
             results = self.query(video.path or video.release, languages, moviehash=video.hashes['OpenSubtitles'], size=str(video.size))

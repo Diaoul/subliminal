@@ -73,14 +73,14 @@ class BierDopje(ServiceBase):
 
         subtitles = []
         for language in languages:
-            logger.debug(u'Getting subtitles for %s %d season %d episode %d with language %s' % (request_source, request_id, season, episode, language))
-            r = self.session.get('%sGetAllSubsFor/%s/%s/%s/%s/%s' % (self.server_url, request_id, season, episode, language, request_is_tvdbid))
+            logger.debug(u'Getting subtitles for %s %d season %d episode %d with language %s' % (request_source, request_id, season, episode, language.alpha2))
+            r = self.session.get('%sGetAllSubsFor/%s/%s/%s/%s/%s' % (self.server_url, request_id, season, episode, language.alpha2, request_is_tvdbid))
             if r.status_code != 200:
                 logger.error(u'Request %s returned status code %d' % (r.url, r.status_code))
                 return []
             soup = BeautifulSoup(r.content, ['lxml', 'xml'])
             if soup.status.contents[0] == 'false':
-                logger.debug(u'Could not find subtitles for %s %d season %d episode %d with language %s' % (request_source, request_id, season, episode, language))
+                logger.debug(u'Could not find subtitles for %s %d season %d episode %d with language %s' % (request_source, request_id, season, episode, language.alpha2))
                 continue
             path = get_subtitle_path(filepath, language, self.config.multi)
             for result in soup.results('result'):

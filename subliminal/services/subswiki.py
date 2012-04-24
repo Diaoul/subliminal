@@ -21,6 +21,7 @@ from ..subtitles import get_subtitle_path, ResultSubtitle
 from ..videos import Episode, Movie
 from subliminal.utils import get_keywords, split_keyword
 from ..bs4wrapper import BeautifulSoup
+import guessit
 import logging
 import re
 import urllib
@@ -82,7 +83,7 @@ class SubsWiki(ServiceBase):
                 logger.debug(u'None of subtitle keywords %r in %r' % (sub_keywords, keywords))
                 continue
             for html_language in sub.parent.parent.findAll('td', {'class': 'language'}):
-                language = self.get_revert_language(html_language.string.strip())
+                language = guessit.Language(html_language.string.strip())
                 if not language in languages:
                     logger.debug(u'Language %r not in wanted languages %r' % (language, languages))
                     continue

@@ -20,6 +20,7 @@ from ..subtitles import get_subtitle_path, ResultSubtitle
 from ..videos import Episode
 from subliminal.utils import get_keywords, split_keyword
 from ..bs4wrapper import BeautifulSoup
+from guessit.language import lang_set
 import guessit
 import logging
 import re
@@ -33,9 +34,9 @@ logger = logging.getLogger(__name__)
 class Subtitulos(ServiceBase):
     server_url = 'http://www.subtitulos.es'
     api_based = False
-    languages = {u'English (US)': 'en', u'English (UK)': 'en', u'English': 'en', u'French': 'fr', u'Brazilian': 'po',
-                 u'Portuguese': 'pt', u'Español (Latinoamérica)': 'es', u'Español (España)': 'es', u'Español': 'es',
-                 u'Italian': 'it', u'Català': 'ca'}
+    languages = lang_set([u'English (US)', u'English (UK)', u'English', u'French', u'Brazilian',
+                          u'Portuguese', u'Español (Latinoamérica)', u'Español (España)', u'Español',
+                          u'Italian', u'Català'], strict=True)
     reverted_languages = True
     videos = [Episode]
     require_video = False
@@ -44,11 +45,8 @@ class Subtitulos(ServiceBase):
     # code chars into their equivalent unicode char
     release_pattern = re.compile('Versi.*n (.+) ([0-9]+).([0-9])+ megabytes')
 
-    def list(self, video, languages):
-        if not self.check_validity(video, languages):
-            return []
-        results = self.query(video.path or video.release, languages, get_keywords(video.guess), video.series, video.season, video.episode)
-        return results
+    def list_checked(self, video, languages):
+        return self.query(video.path or video.release, languages, get_keywords(video.guess), video.series, video.season, video.episode)
 
     def query(self, filepath, languages, keywords, series, season, episode):
         request_series = series.lower().replace(' ', '_')

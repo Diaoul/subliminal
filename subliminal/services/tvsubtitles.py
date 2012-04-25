@@ -21,6 +21,7 @@ from ..videos import Episode
 from subliminal.utils import get_keywords, split_keyword
 from ..bs4wrapper import BeautifulSoup
 from ..cache import cachedmethod
+from guessit.language import lang_set
 import guessit
 import logging
 import re
@@ -40,13 +41,12 @@ def match(pattern, string):
 class TvSubtitles(ServiceBase):
     server_url = 'http://www.tvsubtitles.net'
     api_based = False
-    languages = {u'English (US)': 'en', u'English (UK)': 'en', u'English': 'en', u'French': 'fr', u'Brazilian': 'po',
-                 u'Portuguese': 'pt', u'Español (Latinoamérica)': 'es', u'Español (España)': 'es', u'Español': 'es',
-                 u'Italian': 'it', u'Català': 'ca',
-                 # exceptions
-                 u'Portuguese(br)': 'pt', 'Greek': 'gre'
-                 }
-    reverted_languages = True
+    languages = lang_set([u'English', u'Español', u'French', u'German',
+                          u'Brazilian', u'Russian', u'Ukrainian', u'Italian',
+                          u'Greek', u'Arabic', u'Hungarian', u'Polish',
+                          u'Turkish', u'Dutch', u'Portuguese', u'Swedish',
+                          u'Danish', u'Finnish', u'Korean', u'Chinese',
+                          u'Japanese', u'Bulgarian', u'Czech', u'Romanian'], strict = True)
     videos = [Episode]
     require_video = False
 
@@ -129,7 +129,6 @@ class TvSubtitles(ServiceBase):
     def download(self, subtitle):
         """Download a subtitle"""
         self.download_zip_file(subtitle.link, subtitle.path)
-
 
 
     def query(self, filepath, languages, keywords, series, season, episode):

@@ -21,6 +21,7 @@ from ..subtitles import get_subtitle_path, ResultSubtitle
 from ..videos import Episode
 from ..bs4wrapper import BeautifulSoup
 from ..cache import cachedmethod
+from guessit.language import lang_set
 import logging
 import os.path
 import urllib
@@ -36,7 +37,7 @@ logger = logging.getLogger(__name__)
 class BierDopje(ServiceBase):
     server_url = 'http://api.bierdopje.com/A2B638AC5D804C2E/'
     api_based = True
-    languages = {'en': 'en', 'nl': 'nl'}
+    languages = lang_set(['en', 'nl'])
     reverted_languages = False
     videos = [Episode]
     require_video = False
@@ -88,11 +89,8 @@ class BierDopje(ServiceBase):
                 subtitles.append(subtitle)
         return subtitles
 
-    def list(self, video, languages):
-        if not self.check_validity(video, languages):
-            return []
-        results = self.query(video.path or video.release, video.season, video.episode, languages, video.tvdbid, video.series)
-        return results
+    def list_checked(self, video, languages):
+        return self.query(video.path or video.release, video.season, video.episode, languages, video.tvdbid, video.series)
 
 
 Service = BierDopje

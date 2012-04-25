@@ -19,6 +19,7 @@ from . import ServiceBase
 from ..exceptions import ServiceError, DownloadFailedError
 from ..subtitles import get_subtitle_path, ResultSubtitle
 from ..videos import Episode, Movie
+from guessit.language import lang_set
 import guessit
 import gzip
 import logging
@@ -32,35 +33,34 @@ logger = logging.getLogger(__name__)
 class OpenSubtitles(ServiceBase):
     server_url = 'http://api.opensubtitles.org/xml-rpc'
     api_based = True
-    languages = {'aa': 'aar', 'ab': 'abk', 'af': 'afr', 'ak': 'aka', 'sq': 'alb', 'am': 'amh', 'ar': 'ara',
-                 'an': 'arg', 'hy': 'arm', 'as': 'asm', 'av': 'ava', 'ae': 'ave', 'ay': 'aym', 'az': 'aze',
-                 'ba': 'bak', 'bm': 'bam', 'eu': 'baq', 'be': 'bel', 'bn': 'ben', 'bh': 'bih', 'bi': 'bis',
-                 'bs': 'bos', 'br': 'bre', 'bg': 'bul', 'my': 'bur', 'ca': 'cat', 'ch': 'cha', 'ce': 'che',
-                 'zh': 'chi', 'cu': 'chu', 'cv': 'chv', 'kw': 'cor', 'co': 'cos', 'cr': 'cre', 'cs': 'cze',
-                 'da': 'dan', 'dv': 'div', 'nl': 'dut', 'dz': 'dzo', 'en': 'eng', 'eo': 'epo', 'et': 'est',
-                 'ee': 'ewe', 'fo': 'fao', 'fj': 'fij', 'fi': 'fin', 'fr': 'fre', 'fy': 'fry', 'ff': 'ful',
-                 'ka': 'geo', 'de': 'ger', 'gd': 'gla', 'ga': 'gle', 'gl': 'glg', 'gv': 'glv', 'el': 'ell',
-                 'gn': 'grn', 'gu': 'guj', 'ht': 'hat', 'ha': 'hau', 'he': 'heb', 'hz': 'her', 'hi': 'hin',
-                 'ho': 'hmo', 'hr': 'hrv', 'hu': 'hun', 'ig': 'ibo', 'is': 'ice', 'io': 'ido', 'ii': 'iii',
-                 'iu': 'iku', 'ie': 'ile', 'ia': 'ina', 'id': 'ind', 'ik': 'ipk', 'it': 'ita', 'jv': 'jav',
-                 'ja': 'jpn', 'kl': 'kal', 'kn': 'kan', 'ks': 'kas', 'kr': 'kau', 'kk': 'kaz', 'km': 'khm',
-                 'ki': 'kik', 'rw': 'kin', 'ky': 'kir', 'kv': 'kom', 'kg': 'kon', 'ko': 'kor', 'kj': 'kua',
-                 'ku': 'kur', 'lo': 'lao', 'la': 'lat', 'lv': 'lav', 'li': 'lim', 'ln': 'lin', 'lt': 'lit',
-                 'lb': 'ltz', 'lu': 'lub', 'lg': 'lug', 'mk': 'mac', 'mh': 'mah', 'ml': 'mal', 'mi': 'mao',
-                 'mr': 'mar', 'ms': 'may', 'mg': 'mlg', 'mt': 'mlt',              'mn': 'mon', 'na': 'nau',
-                 'nv': 'nav', 'nr': 'nbl', 'nd': 'nde', 'ng': 'ndo', 'ne': 'nep', 'nn': 'nno', 'nb': 'nob',
-                 'no': 'nor', 'ny': 'nya', 'oc': 'oci', 'oj': 'oji', 'or': 'ori', 'om': 'orm', 'os': 'oss',
-                 'pa': 'pan', 'fa': 'per', 'pi': 'pli', 'pl': 'pol', 'pt': 'por', 'ps': 'pus', 'qu': 'que',
-                 'rm': 'roh', 'rn': 'run', 'ru': 'rus', 'sg': 'sag', 'sa': 'san', 'sr': 'scc', 'si': 'sin',
-                 'sk': 'slo', 'sl': 'slv', 'se': 'sme', 'sm': 'smo', 'sn': 'sna', 'sd': 'snd', 'so': 'som',
-                 'st': 'sot', 'es': 'spa', 'sc': 'srd', 'ss': 'ssw', 'su': 'sun', 'sw': 'swa', 'sv': 'swe',
-                 'ty': 'tah', 'ta': 'tam', 'tt': 'tat', 'te': 'tel', 'tg': 'tgk', 'tl': 'tgl', 'th': 'tha',
-                 'bo': 'tib', 'ti': 'tir', 'to': 'ton', 'tn': 'tsn', 'ts': 'tso', 'tk': 'tuk', 'tr': 'tur',
-                 'tw': 'twi', 'ug': 'uig', 'uk': 'ukr', 'ur': 'urd', 'uz': 'uzb', 've': 'ven', 'vi': 'vie',
-                 'vo': 'vol', 'cy': 'wel', 'wa': 'wln', 'wo': 'wol', 'xh': 'xho', 'yi': 'yid', 'yo': 'yor',
-                 'za': 'zha', 'zu': 'zul', 'ro': 'rum', 'po': 'pob', 'un': 'unk', 'ay': 'ass'}
-    REMOVED = {'mo': 'mol'}
-    reverted_languages = False
+    languages = lang_set(['aar', 'abk', 'afr', 'aka', 'alb', 'amh', 'ara',
+                          'arg', 'arm', 'asm', 'ava', 'ave', 'aym', 'aze',
+                          'bak', 'bam', 'baq', 'bel', 'ben', 'bih', 'bis',
+                          'bos',        'bul', 'bur', 'cat', 'cha', 'che',
+                          'chi', 'chu', 'chv', 'cor', 'cos', 'cre', 'cze',
+                          'dan', 'div', 'dut', 'dzo', 'eng', 'epo', 'est',
+                          'ewe', 'fao', 'fij', 'fin', 'fre', 'fry', 'ful',
+                          'geo', 'ger', 'gla', 'gle', 'glg', 'glv', 'ell',
+                          'grn', 'guj', 'hat', 'hau', 'heb', 'her', 'hin',
+                          'hmo', 'hrv', 'hun', 'ibo', 'ice', 'ido', 'iii',
+                          'iku', 'ile', 'ina', 'ind', 'ipk', 'ita', 'jav',
+                          'jpn', 'kal', 'kan', 'kas', 'kau', 'kaz', 'khm',
+                          'kik', 'kin', 'kir', 'kom', 'kon', 'kor', 'kua',
+                          'kur', 'lao', 'lat', 'lav', 'lim', 'lin', 'lit',
+                          'ltz', 'lub', 'lug', 'mac', 'mah', 'mal', 'mao',
+                          'mar', 'may', 'mlg', 'mlt',        'mon', 'nau',
+                          'nav', 'nbl', 'nde', 'ndo', 'nep', 'nno', 'nob',
+                          'nor', 'nya', 'oci', 'oji', 'ori', 'orm', 'oss',
+                          'pan', 'per', 'pli', 'pol', 'por', 'pus', 'que',
+                          'roh', 'run', 'rus', 'sag', 'san',        'sin',
+                          'slo', 'slv',        'smo', 'sna', 'snd', 'som',
+                          'sot', 'spa', 'srd', 'ssw', 'sun', 'swa', 'swe',
+                          'tah', 'tam', 'tat', 'tel', 'tgk', 'tgl', 'tha',
+                          'tib', 'tir', 'ton', 'tsn', 'tso', 'tuk', 'tur',
+                          'twi', 'uig', 'ukr', 'urd', 'uzb', 'ven', 'vie',
+                          'vol', 'wel', 'wln', 'wol', 'xho', 'yid', 'yor',
+                          'zha', 'zul', 'rum', 'pob', 'unk'], strict=True)
+    REMOVED_FROM_ORIGINAL_LIST = {'mo': 'mol', 'sr': 'scc', 'se': 'sme', 'br': 'bre', 'ay': 'ass'}
     videos = [Episode, Movie]
     require_video = False
     confidence_order = ['moviehash', 'imdbid', 'fulltext']

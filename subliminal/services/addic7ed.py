@@ -21,6 +21,7 @@ from ..videos import Episode
 from subliminal.utils import get_keywords, split_keyword
 from ..bs4wrapper import BeautifulSoup
 from ..cache import cachedmethod
+from guessit.language import lang_set
 import guessit
 import logging
 import re
@@ -47,36 +48,13 @@ def matches(pattern, string):
 class Addic7ed(ServiceBase):
     server_url = 'http://www.addic7ed.com'
     api_based = False
-    languages = {u'English': 'en',
-            u'English (US)': 'en',
-            u'English (UK)': 'en',
-            u'Italian': 'it',
-            u'Portuguese': 'pt',
-            u'Portuguese (Brazilian)': 'pt',
-            u'Romanian': 'ro',
-            u'Español (Latinoamérica)': 'es',
-            u'Español (España)': 'es',
-            u'Spanish (Latin America)': 'es',
-            u'Español': 'es',
-            u'Spanish': 'es',
-            u'Spanish (Spain)': 'es',
-            u'French': 'fr',
-            u'Greek': 'el',
-            u'Arabic': 'ar',
-            u'German': 'de',
-            u'Croatian': 'hr',
-            u'Indonesian': 'id',
-            u'Hebrew': 'he',
-            u'Russian': 'ru',
-            u'Turkish': 'tr',
-            u'Swedish': 'se',
-            u'Czech': 'cs',
-            u'Dutch': 'nl',
-            u'Hungarian': 'hu',
-            u'Norwegian': 'no',
-            u'Polish': 'pl',
-            u'Persian': 'fa'}
-    reverted_languages = True
+    languages = lang_set([u'English', u'Italian', u'Portuguese',
+                          u'Portuguese (Brazilian)', u'Romanian',
+                          u'Spanish', u'French', u'Greek', u'Arabic',
+                          u'German', u'Croatian', u'Indonesian', u'Hebrew',
+                          u'Russian', u'Turkish', u'Swedish', u'Czech',
+                          u'Dutch', u'Hungarian', u'Norwegian', u'Polish',
+                          u'Persian'], strict=True)
     videos = [Episode]
     require_video = False
 

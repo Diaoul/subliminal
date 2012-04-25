@@ -70,7 +70,7 @@ def create_list_tasks(paths, languages, services, force, multi, cache_dir, max_d
         for service_name in services:
             mod = __import__('services.' + service_name, globals=globals(), locals=locals(), fromlist=['Service'], level=-1)
             service = mod.Service
-            service_languages = wanted_languages & service.available_languages()
+            service_languages = wanted_languages & service.languages
             if not service_languages:
                 logger.debug(u'Skipping %r: none of wanted languages %r available for service %s' % (video, wanted_languages, service_name))
                 continue

@@ -18,6 +18,7 @@
 from . import ServiceBase
 from ..subtitles import get_subtitle_path, ResultSubtitle
 from ..videos import Episode, Movie, UnknownVideo
+from guessit.language import lang_set
 import guessit
 import logging
 
@@ -28,11 +29,10 @@ class TheSubDB(ServiceBase):
     server_url = 'http://api.thesubdb.com/'  # for testing purpose, use http://sandbox.thesubdb.com/ instead
     user_agent = 'SubDB/1.0 (subliminal/0.5; https://github.com/Diaoul/subliminal)'  # defined by the API
     api_based = True
-    languages = {'af': 'af', 'cs': 'cs', 'da': 'da', 'de': 'de', 'en': 'en', 'es': 'es', 'fi': 'fi',
-                 'fr': 'fr', 'hu': 'hu', 'id': 'id', 'it': 'it', 'la': 'la', 'nl': 'nl', 'no': 'no',
-                 'oc': 'oc', 'pl': 'pl', 'pt': 'pt', 'ro': 'ro', 'ru': 'ru', 'sl': 'sl', 'sr': 'sr',
-                 'sv': 'sv', 'tr': 'tr'}  # list available with the API at http://sandbox.thesubdb.com/?action=languages
-    reverted_languages = False
+    languages = lang_set(['af', 'cs', 'da', 'de', 'en', 'es', 'fi',
+                          'fr', 'hu', 'id', 'it', 'la', 'nl', 'no',
+                          'oc', 'pl', 'pt', 'ro', 'ru', 'sl', 'sr',
+                          'sv', 'tr'], strict=True)  # list available with the API at http://sandbox.thesubdb.com/?action=languages
     videos = [Movie, Episode, UnknownVideo]
     require_video = True
 

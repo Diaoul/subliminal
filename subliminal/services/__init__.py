@@ -123,15 +123,6 @@ class ServiceBase(object):
         """Download a subtitle"""
         self.download_file(subtitle.link, subtitle.path)
 
-    @classmethod
-    def available_languages(cls):
-        """Available languages in the Service
-
-        :return: available languages
-        :rtype: set
-
-        """
-        return set(map(guessit.Language, cls.languages.keys()))
 
     @classmethod
     def check_validity(cls, video, languages):
@@ -143,7 +134,7 @@ class ServiceBase(object):
         :rtype: bool
 
         """
-        languages = (set(languages) & cls.available_languages()) - set([guessit.Language('unk')])
+        languages = (set(languages) & cls.languages) - set([guessit.Language('unk')])
         if not languages:
             logger.debug(u'No language available for service %s' % cls.__class__.__name__.lower())
             return False
@@ -166,67 +157,6 @@ class ServiceBase(object):
         if not isinstance(video, tuple(cls.videos)):
             return False
         return True
-
-    @classmethod
-    def is_valid_language(cls, language):
-        """Check if language is valid in the Service
-
-        :param string language: the language to check
-        :rtype: bool
-
-        """
-        if language in cls.available_languages():
-            return True
-        return False
-
-    @classmethod
-    def get_revert_language(cls, language):
-        """ISO-639-1 language code from service language code
-
-        :param string language: service language code
-        :return: ISO-639-1 language code
-        :rtype: string
-
-        """
-        if not cls.reverted_languages and language in cls.languages.values():
-            return [k for k, v in cls.languages.iteritems() if v == language][0]
-        if cls.reverted_languages and language in cls.languages.keys():
-            return cls.languages[language]
-        raise MissingLanguageError(language)
-
-    @classmethod
-    def get_language(cls, language):
-        """Service language code from ISO-639-1 language code
-
-        :param string language: ISO-639-1 language code
-        :return: service language code
-        :rtype: string
-
-        """
-        if not cls.reverted_languages and language in cls.languages.keys():
-            return cls.languages[language]
-        if cls.reverted_languages and language in cls.languages.values():
-            return [k for k, v in cls.languages.iteritems() if v == language][0]
-        raise MissingLanguageError(language)
-
-
-    def is_language_in(self, language, list_languages):
-        """Helper function that returns whether the given language is
-        contained in a list of possible languages.
-        You can feed pretty much anything to this function and it should
-        be able to recognize the language automatically.
-
-        :param string language: the language which you want to check
-        :param list list_languages: the list of possible languages
-        :return: whether the given language is in the list
-        :rtype: boolean
-
-        """
-        lang = guessit.Language(language)
-        list_langs = set(guessit.Language(l) for l in list_languages)
-        if lang == guessit.Language('unknown'):
-            return False
-        return lang in list_langs
 
 
     def download_file(self, url, filepath):

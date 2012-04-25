@@ -28,6 +28,7 @@ from subliminal.services.tvsubtitles import TvSubtitles
 from subliminal.services.addic7ed import Addic7ed
 from subliminal.subtitles import Subtitle
 from guessit.slogging import setupLogging
+from guessit.language import lang_set
 import guessit
 import logging
 import os
@@ -44,9 +45,6 @@ if not os.path.exists(cache_dir):
     os.mkdir(cache_dir)
 existing_video = u'/something/The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.mp4'
 
-def langs(languages):
-    return set(map(guessit.Language, languages))
-
 
 class OpenSubtitlesTestCase(unittest.TestCase):
     query_tests = ['test_query_query', 'test_query_imdbid', 'test_query_hash', 'test_query_wrong_languages']
@@ -56,8 +54,8 @@ class OpenSubtitlesTestCase(unittest.TestCase):
 
     def setUp(self):
         self.config = ServiceConfig(multi=True, cache_dir=cache_dir)
-        self.languages = langs(['en', 'fr'])
-        self.wrong_languages = langs(['zz', 'yy'])
+        self.languages = lang_set(['en', 'fr'])
+        self.wrong_languages = lang_set(['zz', 'yy'])
         self.fake_file = u'/tmp/fake_file'
         self.path = existing_video
         self.series = 'The Big Bang Theory'
@@ -123,8 +121,8 @@ class TheSubDBTestCase(unittest.TestCase):
         self.path = existing_video
         self.hash = u'edc1981d6459c6111fe36205b4aff6c2'
         self.wrong_hash = u'ffffffffffffffffffffffffffffffff'
-        self.languages = langs(['en', 'nl'])
-        self.wrong_languages = langs(['zz', 'cs'])
+        self.languages = lang_set(['en', 'nl'])
+        self.wrong_languages = lang_set(['zz', 'cs'])
         self.fake_file = u'/tmp/fake_file'
 
     def test_query(self):
@@ -247,8 +245,8 @@ class SubtitulosTestCase(EpisodeServiceTestCase):
         self.service = Subtitulos
         self.config = ServiceConfig(multi=True, cache_dir=cache_dir)
         self.fake_file = u'/tmp/fake_file'
-        self.languages = langs(['en', 'es'])
-        self.wrong_languages = langs(['zz', 'ay'])
+        self.languages = lang_set(['en', 'es'])
+        self.wrong_languages = lang_set(['zz', 'ay'])
         self.episode_path = u'The Big Bang Theory/Season 05/The.Big.Bang.Theory.S05E06.HDTV.XviD-ASAP.mkv'
         self.episode_sublanguage = 'en'
         self.episode_subfilesize = 32986
@@ -269,8 +267,8 @@ class TvSubtitlesTestCase(EpisodeServiceTestCase):
         self.service = TvSubtitles
         self.config = ServiceConfig(multi=True, cache_dir=cache_dir)
         self.fake_file = u'/tmp/fake_file'
-        self.languages = langs(['en', 'es'])
-        self.wrong_languages = langs(['zz', 'ay'])
+        self.languages = lang_set(['en', 'es'])
+        self.wrong_languages = lang_set(['zz', 'ay'])
         self.episode_path = u'The Big Bang Theory/Season 05/The.Big.Bang.Theory.S05E06.HDTV.XviD-ASAP.mkv'
         self.episode_sublanguage = 'en'
         self.episode_subfilesize = 33078
@@ -291,8 +289,8 @@ class Addic7edTestCase(EpisodeServiceTestCase):
         self.service = Addic7ed
         self.config = ServiceConfig(multi=True, cache_dir=cache_dir)
         self.fake_file = u'/tmp/fake_file'
-        self.languages = langs(['en', 'fr'])
-        self.wrong_languages = langs(['zz', 'ay'])
+        self.languages = lang_set(['en', 'fr'])
+        self.wrong_languages = lang_set(['zz', 'ay'])
         self.episode_path = u'The Big Bang Theory/Season 05/The.Big.Bang.Theory.S05E06.HDTV.XviD-ASAP.mkv'
         self.episode_sublanguage = 'en'
         # FIXME: this is the size of the first subtitle that appears on the page
@@ -321,8 +319,8 @@ class BierDopjeTestCase(EpisodeServiceTestCase):
         self.episode_sublanguage = 'en'
         self.episode_subfilesize = 33469
         self.movie_path = u'Inception (2010)/Inception - 1080p.mkv'
-        self.languages = langs(['en', 'nl'])
-        self.wrong_languages = langs(['zz', 'es'])
+        self.languages = lang_set(['en', 'nl'])
+        self.wrong_languages = lang_set(['zz', 'es'])
         self.fake_file = u'/tmp/fake_file'
         self.series = 'The Big Bang Theory'
         self.episode_keywords = set()
@@ -369,8 +367,8 @@ class SubsWikiTestCase(EpisodeServiceTestCase):
         self.service = SubsWiki
         self.config = ServiceConfig(multi=True, cache_dir=cache_dir)
         self.fake_file = u'/tmp/fake_file'
-        self.languages = langs(['en', 'es'])
-        self.wrong_languages = langs(['zz', 'ay'])
+        self.languages = lang_set(['en', 'es'])
+        self.wrong_languages = lang_set(['zz', 'ay'])
         self.movie_path = u'Soul Surfer (2011)/Soul.Surfer.(2011).DVDRip.XviD-TWiZTED.mkv'
         self.movie_keywords = set(['twizted'])
         self.movie = u'Soul Surfer'
@@ -405,7 +403,6 @@ class SubsWikiTestCase(EpisodeServiceTestCase):
 TESTCASES = [ BierDopjeTestCase, OpenSubtitlesTestCase, TheSubDBTestCase,
               SubsWikiTestCase, SubtitulosTestCase, TvSubtitlesTestCase,
               Addic7edTestCase ]
-
 
 def query_suite():
     suite = unittest.TestSuite()

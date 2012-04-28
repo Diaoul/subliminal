@@ -19,7 +19,7 @@ from . import ServiceBase
 from ..exceptions import ServiceError
 from ..subtitles import get_subtitle_path, ResultSubtitle
 from ..videos import Episode
-from ..bs4wrapper import BeautifulSoup
+from bs4 import BeautifulSoup
 from ..cache import cachedmethod
 from guessit.language import lang_set
 import logging
@@ -49,7 +49,7 @@ class BierDopje(ServiceBase):
             logger.error(u'Request %s returned status code %d' % (r.url, r.status_code))
             return None
 
-        soup = BeautifulSoup(r.content, ['lxml', 'xml'])
+        soup = BeautifulSoup(r.content, 'lxml')
         if soup.status.contents[0] == 'false':
             logger.debug(u'Could not find show %s' % series)
             return None
@@ -79,7 +79,7 @@ class BierDopje(ServiceBase):
             if r.status_code != 200:
                 logger.error(u'Request %s returned status code %d' % (r.url, r.status_code))
                 return []
-            soup = BeautifulSoup(r.content, ['lxml', 'xml'])
+            soup = BeautifulSoup(r.content, 'lxml')
             if soup.status.contents[0] == 'false':
                 logger.debug(u'Could not find subtitles for %s %d season %d episode %d with language %s' % (request_source, request_id, season, episode, language.alpha2))
                 continue

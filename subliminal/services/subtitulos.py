@@ -43,7 +43,7 @@ class Subtitulos(ServiceBase):
     # the '.*' in the pattern for Version allows us to match both '&oacute;'
     # and the 'ó' char directly. This is because now BS4 converts the html
     # code chars into their equivalent unicode char
-    release_pattern = re.compile('Versi.*n (.+) ([0-9]+).([0-9])+ megabytes')
+    release_pattern = re.compile('Versi.*?n (.+) ([0-9]+).([0-9])+ megabytes')
 
     def list_checked(self, video, languages):
         return self.query(video.path or video.release, languages, get_keywords(video.guess), video.series, video.season, video.episode)

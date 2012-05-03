@@ -205,7 +205,7 @@ class ServiceBase(object):
                     break
             else:
                 logger.debug('No subtitles found in zip file...')
-                raise DownloadFailedError(str(e))
+                raise DownloadFailedError('No subtitles found in zip file...')
 
             os.remove(zippath)
             logger.debug(u'Download finished for file %s. Size: %s' % (filepath, os.path.getsize(filepath)))

@@ -30,7 +30,7 @@ __all__ = ['SERVICES', 'LANGUAGE_INDEX', 'SERVICE_INDEX', 'SERVICE_CONFIDENCE', 
            'create_list_tasks', 'create_download_tasks', 'consume_task', 'matching_confidence',
            'key_subtitles', 'group_by_video']
 logger = logging.getLogger(__name__)
-SERVICES = ['opensubtitles', 'bierdopje', 'subswiki', 'subtitulos', 'thesubdb', 'addic7ed', 'tvsubtitles' ]
+SERVICES = ['opensubtitles', 'bierdopje', 'subswiki', 'subtitulos', 'thesubdb', 'addic7ed', 'tvsubtitles']
 LANGUAGE_INDEX, SERVICE_INDEX, SERVICE_CONFIDENCE, MATCHING_CONFIDENCE = range(4)
 
 
@@ -128,16 +128,6 @@ def consume_task(task, services=None):
         services = {}
     logger.info(u'Consuming %r' % task)
     result = None
-
-    def get_service(services, service_name, config = None):
-        if service_name not in services:
-            mod = __import__('services.' + service_name, globals=globals(), locals=locals(), fromlist=['Service'], level=-1)
-            services[service_name] = mod.Service()
-            services[service_name].init()
-
-        services[service_name].config = config
-        return services[service_name]
-
     if isinstance(task, ListTask):
         service = get_service(services, task.service, config=task.config)
         result = service.list(task.video, task.languages)
@@ -198,6 +188,26 @@ def matching_confidence(video, subtitle):
         return 0
     confidence = float(int(matching_format.format(**replacement), 2)) / float(int(best, 2))
     return confidence
+
+
+def get_service(services, service_name, config=None):
+    """Get a service from its name in the service dict with the specified config.
+    If the service does not exist in the service dict, it is created and added to the dict.
+
+    :param dict services: dict where to get existing services or put created ones
+    :param string service_name: name of the service to get
+    :param config: config to use for the service
+    :type config: :class:`~subliminal.services.ServiceConfig` or None
+    :return: the corresponding service
+    :rtype: :class:`~subliminal.services.ServiceBase`
+
+    """
+    if service_name not in services:
+        mod = __import__('services.' + service_name, globals=globals(), locals=locals(), fromlist=['Service'], level=-1)
+        services[service_name] = mod.Service()
+        services[service_name].init()
+    services[service_name].config = config
+    return services[service_name]
 
 
 def key_subtitles(subtitle, video, languages, services, order):

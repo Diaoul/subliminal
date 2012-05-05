@@ -15,15 +15,15 @@
 #
 # You should have received a copy of the GNU Lesser General Public License
 # along with subliminal.  If not, see <http://www.gnu.org/licenses/>.
-from ..exceptions import MissingLanguageError, DownloadFailedError
-from ..subtitles import EXTENSIONS
 from .. import cache
+from ..exceptions import MissingLanguageError, DownloadFailedError, ServiceError
+from ..subtitles import EXTENSIONS
+import guessit
 import logging
 import os
 import requests
 import threading
 import zipfile
-import guessit
 
 __all__ = ['ServiceBase', 'ServiceConfig']
 logger = logging.getLogger(__name__)
@@ -123,7 +123,6 @@ class ServiceBase(object):
         """Download a subtitle"""
         self.download_file(subtitle.link, subtitle.path)
 
-
     @classmethod
     def check_validity(cls, video, languages):
         """Check for video and languages validity in the Service
@@ -158,7 +157,6 @@ class ServiceBase(object):
             return False
         return True
 
-
     def download_file(self, url, filepath):
         """Attempt to download a file and remove it in case of failure
 
@@ -192,12 +190,10 @@ class ServiceBase(object):
             r = self.session.get(url, headers={'Referer': url, 'User-Agent': self.user_agent})
             with open(zippath, 'wb') as f:
                 f.write(r.content)
-
             if not zipfile.is_zipfile(zippath):
                 # TODO: could check if maybe we already have a text file and
                 # download it directly
                 raise DownloadFailedError('Downloaded file is not a zip file')
-
             zipsub = zipfile.ZipFile(zippath)
             for subfile in zipsub.namelist():
                 if os.path.splitext(subfile)[1] in EXTENSIONS:
@@ -206,12 +202,9 @@ class ServiceBase(object):
             else:
                 logger.debug('No subtitles found in zip file...')
                 raise DownloadFailedError('No subtitles found in zip file...')
-
             os.remove(zippath)
             logger.debug(u'Download finished for file %s. Size: %s' % (filepath, os.path.getsize(filepath)))
-
             return
-
         except Exception as e:
             logger.error(u'Download %s failed: %s' % (url, e))
             if os.path.exists(zippath):

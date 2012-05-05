@@ -19,8 +19,8 @@ import os.path
 import guessit
 from guessit.language import is_language
 
-__all__ = ['Subtitle', 'EmbeddedSubtitle', 'ExternalSubtitle', 'ResultSubtitle', 'get_subtitle_path']
 
+__all__ = ['Subtitle', 'EmbeddedSubtitle', 'ExternalSubtitle', 'ResultSubtitle', 'get_subtitle_path']
 
 #: Subtitles extensions
 EXTENSIONS = ['.srt', '.sub', '.txt']
@@ -118,7 +118,16 @@ class ResultSubtitle(ExternalSubtitle):
 
 
 def get_subtitle_path(video_path, language, multi):
-    """Create the subtitle path from the given video path using language if multi"""
+    """Create the subtitle path from the given video path using language if multi
+
+    :param string video_path: path to the video
+    :param language: language of the subtitle
+    :type language: :class:`guessit.Language`
+    :param bool multi: whether to use multi language naming or not
+    :return: path of the subtitle
+    :rtype: string
+
+    """
     if not os.path.exists(video_path):
         path = os.path.splitext(os.path.basename(video_path))[0]
     else:

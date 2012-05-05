@@ -18,25 +18,25 @@
 from . import ServiceBase
 from ..subtitles import get_subtitle_path, ResultSubtitle
 from ..videos import Episode
-from subliminal.utils import get_keywords, split_keyword
+from subliminal.utils import get_keywords
 from bs4 import BeautifulSoup
 from ..cache import cachedmethod
 from guessit.language import lang_set
 import guessit
 import logging
 import re
-import unicodedata
-import urllib
 
 
 logger = logging.getLogger(__name__)
+
 
 def match(pattern, string):
     try:
         return re.search(pattern, string).group(1)
     except AttributeError:
-        logger.debug("Could not match '%s' on '%s'" % (pattern, string))
+        logger.debug('Could not match %r on %r' % (pattern, string))
         return None
+
 
 class TvSubtitles(ServiceBase):
     server_url = 'http://www.tvsubtitles.net'
@@ -46,14 +46,13 @@ class TvSubtitles(ServiceBase):
                           u'Greek', u'Arabic', u'Hungarian', u'Polish',
                           u'Turkish', u'Dutch', u'Portuguese', u'Swedish',
                           u'Danish', u'Finnish', u'Korean', u'Chinese',
-                          u'Japanese', u'Bulgarian', u'Czech', u'Romanian'], strict = True)
+                          u'Japanese', u'Bulgarian', u'Czech', u'Romanian'], strict=True)
     videos = [Episode]
     require_video = False
 
-
     @cachedmethod
     def get_likely_series_id(self, name):
-        r = self.session.post('%s/search.php' % self.server_url, data = { 'q': name })
+        r = self.session.post('%s/search.php' % self.server_url, data={'q': name})
         soup = BeautifulSoup(r.content, 'lxml')
         maindiv = soup.find('div', 'left')
         results = []
@@ -61,10 +60,8 @@ class TvSubtitles(ServiceBase):
             sid = int(match('tvshow-([0-9]+)\.html', elem.a['href']))
             show_name = match('(.*) \(', elem.a.text)
             results.append((show_name, sid))
-
-        # TODO: pick up the best one in a smart way
+        #TODO: pick up the best one in a smart way
         result = results[0]
-
         return result[1]
 
     @cachedmethod
@@ -73,10 +70,9 @@ class TvSubtitles(ServiceBase):
         could be found."""
         # download the page of the season, contains ids for all episodes
         episode_id = None
-        subtitle_ids = []
         r = self.session.get('%s/tvshow-%d-%d.html' % (self.server_url, series_id, season))
         soup = BeautifulSoup(r.content, 'lxml')
-        table = soup.find('table', id = 'table5')
+        table = soup.find('table', id='table5')
         for row in table.find_all('tr'):
             cells = row.find_all('td')
             if not cells:
@@ -91,12 +87,9 @@ class TvSubtitles(ServiceBase):
             # we could just return the id of the queried episode, but as we
             # already downloaded the whole page we might as well fill in the
             # information for all the episodes of the season
-            self.cache_for(self.get_episode_id,
-                           args = (series_id, season, episode_number),
-                           result = episode_id)
-
+            self.cache_for(self.get_episode_id, args=(series_id, season, episode_number), result=episode_id)
         # raises KeyError if not found
-        return self.cached_value(self.get_episode_id, args = (series_id, season, number))
+        return self.cached_value(self.get_episode_id, args=(series_id, season, number))
 
     # Do not cache this method in order to always check for the most recent
     # subtitles
@@ -107,7 +100,6 @@ class TvSubtitles(ServiceBase):
         for subdiv in epsoup.find_all('a'):
             if 'href' not in subdiv.attrs or not subdiv['href'].startswith('/subtitle'):
                 continue
-
             subid = int(match('([0-9]+)', subdiv['href']))
             lang = guessit.Language(match('flags/(.*).gif', subdiv.img['src']))
             result = {'subid': subid, 'language': lang}
@@ -118,18 +110,14 @@ class TvSubtitles(ServiceBase):
                     result['release'] = p.text.strip()
 
             subids.append(result)
-
         return subids
-
 
     def list_checked(self, video, languages):
         return self.query(video.path or video.release, languages, get_keywords(video.guess), video.series, video.season, video.episode)
 
-
     def download(self, subtitle):
         """Download a subtitle"""
         self.download_zip_file(subtitle.link, subtitle.path)
-
 
     def query(self, filepath, languages, keywords, series, season, episode):
         logger.debug(u'Getting subtitles for %s season %d episode %d with languages %r' % (series, season, episode, languages))
@@ -141,7 +129,6 @@ class TvSubtitles(ServiceBase):
             logger.debug('Could not find episode id for %s season %d epnumber %d' % (series, season, episode))
             return []
         subids = self.get_sub_ids(ep_id)
-
         # filter the subtitles with our queried languages
         subtitles = []
         for subid in subids:
@@ -152,9 +139,9 @@ class TvSubtitles(ServiceBase):
             path = get_subtitle_path(filepath, language, self.config.multi)
             subtitle = ResultSubtitle(path, language, self.__class__.__name__.lower(),
                                       '%s/download-%d.html' % (self.server_url, subid['subid']),
-                                      keywords=[ subid['rip'], subid['release'] ])
+                                      keywords=[subid['rip'], subid['release']])
             subtitles.append(subtitle)
-
         return subtitles
+
 
 Service = TvSubtitles

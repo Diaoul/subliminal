@@ -18,6 +18,7 @@
 from .core import (SERVICES, LANGUAGE_INDEX, SERVICE_INDEX, SERVICE_CONFIDENCE,
     MATCHING_CONFIDENCE, create_list_tasks, consume_task, create_download_tasks,
     group_by_video, key_subtitles)
+import guessit
 from guessit.language import ALL_LANGUAGES
 import logging
 

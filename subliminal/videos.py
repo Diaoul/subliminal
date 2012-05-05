@@ -16,7 +16,6 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with subliminal.  If not, see <http://www.gnu.org/licenses/>.
 from . import subtitles
-from guessit.language import ALL_LANGUAGES_NAMES
 import enzyme
 import guessit
 import hashlib
@@ -135,11 +134,11 @@ class Video(object):
         # brackets inside the filename, so we have to use basic string
         # startswith/endswith comparisons
         folder, basename = os.path.split(basepath)
-        existing = [ f for f in os.listdir(folder) if f.startswith(basename) ]
+        existing = [f for f in os.listdir(folder) if f.startswith(basename)]
         for path in existing:
             for ext in subtitles.EXTENSIONS:
                 if path.endswith(ext):
-                    possible_lang = path[len(basename)+1:-len(ext)]
+                    possible_lang = path[len(basename) + 1:-len(ext)]
                     if possible_lang == '':
                         results.append(subtitles.ExternalSubtitle(path, None))
                     else:

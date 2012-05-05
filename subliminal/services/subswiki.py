@@ -95,4 +95,5 @@ class SubsWiki(ServiceBase):
                 subtitles.append(subtitle)
         return subtitles
 
+
 Service = SubsWiki

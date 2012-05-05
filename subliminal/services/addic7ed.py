@@ -18,32 +18,33 @@
 from . import ServiceBase
 from ..subtitles import get_subtitle_path, ResultSubtitle
 from ..videos import Episode
-from subliminal.utils import get_keywords, split_keyword
+from subliminal.utils import get_keywords
 from bs4 import BeautifulSoup
 from ..cache import cachedmethod
 from guessit.language import lang_set
 import guessit
 import logging
 import re
-import unicodedata
-import urllib
 
 
 logger = logging.getLogger(__name__)
+
 
 def match(pattern, string):
     try:
         return re.search(pattern, string).group(1)
     except AttributeError:
-        logger.debug("Could not match '%s' on '%s'" % (pattern, string))
+        logger.debug(u'Could not match %r on %r' % (pattern, string))
         return None
+
 
 def matches(pattern, string):
     try:
-        return re.search(pattern, string).group(1,2)
+        return re.search(pattern, string).group(1, 2)
     except AttributeError:
-        logger.debug("Could not match '%s' on '%s'" % (pattern, string))
+        logger.debug(u'Could not match %r on %r' % (pattern, string))
         return None
+
 
 class Addic7ed(ServiceBase):
     server_url = 'http://www.addic7ed.com'
@@ -58,7 +59,6 @@ class Addic7ed(ServiceBase):
     videos = [Episode]
     require_video = False
 
-
     @cachedmethod
     def get_likely_series_id(self, name):
         r = self.session.get('%s/shows.php' % self.server_url)
@@ -69,24 +69,20 @@ class Addic7ed(ServiceBase):
             # we could just return the id of the queried show, but as we
             # already downloaded the whole page we might as well fill in the
             # information for all the shows
-            self.cache_for(self.get_likely_series_id,
-                           args = (show_name,),
-                           result = show_id)
-        return self.cached_value(self.get_likely_series_id, args = (name,))
-
+            self.cache_for(self.get_likely_series_id, args=(show_name,), result=show_id)
+        return self.cached_value(self.get_likely_series_id, args=(name,))
 
     @cachedmethod
     def get_episode_url(self, series_id, season, number):
         """Get the Addic7ed id for the given episode. Raises KeyError if none
-        could be found."""
+        could be found
+
+        """
         # download the page of the show, contains ids for all episodes all seasons
-        episode_id = None
-        subtitle_ids = []
         r = self.session.get('%s/show/%d' % (self.server_url, series_id))
         soup = BeautifulSoup(r.content, 'lxml')
         form = soup.find('form', attrs={'name': 'multidl'})
         for table in form.find_all('table'):
-
             for row in table.find_all('tr'):
                 cell = row.find('td', 'MultiDldS')
                 if not cell:
@@ -100,12 +96,9 @@ class Addic7ed(ServiceBase):
                 # we could just return the url of the queried episode, but as we
                 # already downloaded the whole page we might as well fill in the
                 # information for all the episodes of the show
-                self.cache_for(self.get_episode_url,
-                               args = (series_id, season_number, episode_number),
-                               result = episode_url)
-
+                self.cache_for(self.get_episode_url, args=(series_id, season_number, episode_number), result=episode_url)
         # raises KeyError if not found
-        return self.cached_value(self.get_episode_url, args = (series_id, season, number))
+        return self.cached_value(self.get_episode_url, args=(series_id, season, number))
 
     # Do not cache this method in order to always check for the most recent
     # subtitles
@@ -115,7 +108,7 @@ class Addic7ed(ServiceBase):
         epsoup = BeautifulSoup(r.content, 'lxml')
         for releaseTable in epsoup.find_all('table', 'tabel95'):
             releaseRow = releaseTable.find('td', 'NewsTitle')
-            if not releaseRow :
+            if not releaseRow:
                 continue
             release = releaseRow.text.strip()
             for row in releaseTable.find_all('tr'):
@@ -124,24 +117,18 @@ class Addic7ed(ServiceBase):
                     continue
                 if 'href' not in link.attrs or not (link['href'].startswith('/original') or link['href'].startswith('/updated')):
                     continue
-
                 suburl = link['href']
-
-                lang = guessit.Language(row.find('td','language').text.strip())
-                result = { 'suburl': suburl, 'language': lang, 'release': release }
+                lang = guessit.Language(row.find('td', 'language').text.strip())
+                result = {'suburl': suburl, 'language': lang, 'release': release}
                 suburls.append(result)
-
         return suburls
-
 
     def list_checked(self, video, languages):
         return self.query(video.path or video.release, languages, get_keywords(video.guess), video.series, video.season, video.episode)
 
-
     def download(self, subtitle):
         """Download a subtitle"""
         self.download_file(subtitle.link, subtitle.path)
-
 
     def query(self, filepath, languages, keywords, series, season, episode):
         logger.debug(u'Getting subtitles for %s season %d episode %d with languages %r' % (series, season, episode, languages))
@@ -169,9 +156,9 @@ class Addic7ed(ServiceBase):
             path = get_subtitle_path(filepath, language, self.config.multi)
             subtitle = ResultSubtitle(path, language, self.__class__.__name__.lower(),
                                       '%s/%s' % (self.server_url, suburl['suburl']),
-                                      keywords=[suburl['release'] ])
+                                      keywords=[suburl['release']])
             subtitles.append(subtitle)
-
         return subtitles
+
 
 Service = Addic7ed

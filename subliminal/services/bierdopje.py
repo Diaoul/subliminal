@@ -24,7 +24,6 @@ from bs4 import BeautifulSoup
 from ..cache import cachedmethod
 from guessit.language import lang_set
 import logging
-import os.path
 import urllib
 try:
     import cPickle as pickle

@@ -60,4 +60,5 @@ class TheSubDB(ServiceBase):
             subtitles.append(subtitle)
         return subtitles
 
+
 Service = TheSubDB

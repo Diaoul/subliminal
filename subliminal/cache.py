@@ -15,8 +15,6 @@
 #
 # You should have received a copy of the GNU Lesser General Public License
 # along with subliminal.  If not, see <http://www.gnu.org/licenses/>.
-#
-
 import os.path
 from collections import defaultdict
 import threading
@@ -26,6 +24,7 @@ try:
     import cPickle as pickle
 except ImportError:
     import pickle
+
 
 logger = logging.getLogger(__name__)
 
@@ -77,12 +76,11 @@ class Cache(object):
             pass
         self.cache[service_name] = defaultdict(dict)
 
-    def cached_func_key(self, func, cls = None):
+    def cached_func_key(self, func, cls=None):
         try:
             cls = func.im_class
         except:
             pass
-
         return ('%s.%s' % (cls.__module__, cls.__name__), func.__name__)
 
     def function_cache(self, service_name, func):
@@ -94,10 +92,9 @@ class Cache(object):
         self.function_cache(service_name, func)[args] = result
 
     def cached_value(self, service_name, func, args):
-        """raises KeyError if not found"""
+        """Raises KeyError if not found"""
         # no need to lock here, dict ops are atomic
         return self.function_cache(service_name, func)[args]
-
 
 
 def cachedmethod(function):
@@ -110,8 +107,7 @@ def cachedmethod(function):
     def cached(*args):
         c = args[0].config.cache
         service_name = args[0].__class__.__name__
-        func_key = c.cached_func_key(function, cls = args[0].__class__)
-
+        func_key = c.cached_func_key(function, cls=args[0].__class__)
         func_cache = c.cache[service_name][func_key]
 
         # we need to remove the first element of args for the key, as it is the

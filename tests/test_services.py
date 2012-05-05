@@ -17,7 +17,7 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with subliminal.  If not, see <http://www.gnu.org/licenses/>.
 from subliminal import videos
-from subliminal.exceptions import MissingLanguageError, ServiceError
+from subliminal.exceptions import ServiceError
 from subliminal.services import ServiceConfig
 from subliminal.services.bierdopje import BierDopje
 from subliminal.services.opensubtitles import OpenSubtitles

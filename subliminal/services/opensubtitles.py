@@ -61,7 +61,8 @@ class OpenSubtitles(ServiceBase):
                           'twi', 'uig', 'ukr', 'urd', 'uzb', 'ven', 'vie',
                           'vol', 'wel', 'wln', 'wol', 'xho', 'yid', 'yor',
                           'zha', 'zul', 'rum', 'pob', 'unk'], strict=True)
-    REMOVED_FROM_ORIGINAL_LIST = {'mo': 'mol', 'sr': 'scc', 'se': 'sme', 'br': 'bre', 'ay': 'ass'}
+    #FIXME: Do something about those languages
+    # {'mo': 'mol', 'sr': 'scc', 'se': 'sme', 'br': 'bre', 'ay': 'ass'}
     videos = [Episode, Movie]
     require_video = False
     confidence_order = ['moviehash', 'imdbid', 'fulltext']

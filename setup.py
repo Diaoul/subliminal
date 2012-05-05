@@ -48,4 +48,5 @@ setup(name='subliminal',
     url='https://github.com/Diaoul/subliminal',
     packages=find_packages(),
     scripts=['scripts/subliminal'],
+    test_suite='tests',
     install_requires=required)

@@ -19,11 +19,8 @@ class will achieve this.
 
 Languages
 ---------
-To be able to support many languages, subliminal has a :mod:`~subliminal.languages`
-module that contains utility functions and ISO languages code (639-1 and 639-2)
-
-.. automodule:: subliminal.languages
-    :members:
+To be able to support many languages, subliminal uses :class:`guessit.Language`, refer
+to guessit's documentation for more details.
 
 Tasks
 -----

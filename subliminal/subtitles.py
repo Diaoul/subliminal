@@ -30,7 +30,8 @@ class Subtitle(object):
     """Base class for subtitles
 
     :param string path: path to the subtitle
-    :param string language: language of the subtitle (second element of :class:`~subliminal.languages.LANGUAGES`)
+    :param language: language of the subtitle
+    :type language: :class:`guessit.Language`
 
     """
     def __init__(self, path, language):
@@ -49,7 +50,8 @@ class EmbeddedSubtitle(Subtitle):
     """Subtitle embedded in a container
 
     :param string path: path to the subtitle
-    :param string language: language of the subtitle (second element of :class:`~subliminal.languages.LANGUAGES`)
+    :param language: language of the subtitle
+    :type language: :class:`guessit.Language`
     :param int track_id: id of the subtitle track in the container
 
     """
@@ -85,7 +87,8 @@ class ResultSubtitle(ExternalSubtitle):
     """Subtitle found using :mod:`~subliminal.services`
 
     :param string path: path to the subtitle
-    :param string language: language of the subtitle (second element of :class:`~subliminal.languages.LANGUAGES`)
+    :param language: language of the subtitle
+    :type language: :class:`guessit.Language`
     :param string service: name of the service
     :param string link: download link for the subtitle
     :param string release: release name of the video

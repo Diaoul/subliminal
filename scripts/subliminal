@@ -85,7 +85,7 @@ def main():
 
     if not subtitles:
         if not args.quiet:
-            sys.stderr.write('No subtitles found\n')
+            sys.stderr.write('No subtitles downloaded\n')
         exit(1)
     if not args.quiet:
         print '*' * 50

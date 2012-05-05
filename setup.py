@@ -24,7 +24,7 @@ from setuptools import setup, find_packages
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
-required = ['BeautifulSoup >= 3.2.0', 'guessit >= 0.2', 'requests', 'enzyme >= 0.1']
+required = ['beautifulsoup4 >= 4.0', 'guessit >= 0.4', 'requests', 'enzyme >= 0.1']
 if sys.hexversion < 0x20700f0:
     required.append('argparse >= 1.1')
 

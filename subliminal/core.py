@@ -30,7 +30,7 @@ __all__ = ['SERVICES', 'LANGUAGE_INDEX', 'SERVICE_INDEX', 'SERVICE_CONFIDENCE', 
            'create_list_tasks', 'create_download_tasks', 'consume_task', 'matching_confidence',
            'key_subtitles', 'group_by_video']
 logger = logging.getLogger(__name__)
-SERVICES = ['opensubtitles', 'bierdopje', 'subswiki', 'subtitulos', 'thesubdb']
+SERVICES = ['opensubtitles', 'bierdopje', 'subswiki', 'subtitulos', 'thesubdb', 'addic7ed', 'tvsubtitles' ]
 LANGUAGE_INDEX, SERVICE_INDEX, SERVICE_CONFIDENCE, MATCHING_CONFIDENCE = range(4)
 
 
@@ -57,7 +57,7 @@ def create_list_tasks(paths, languages, services, force, multi, cache_dir, max_d
     tasks = []
     config = ServiceConfig(multi, cache_dir)
     for video, detected_subtitles in scan_result:
-        detected_languages = set([s.language for s in detected_subtitles])
+        detected_languages = set(s.language for s in detected_subtitles)
         wanted_languages = languages.copy()
         if not force and multi:
             wanted_languages -= detected_languages
@@ -71,7 +71,7 @@ def create_list_tasks(paths, languages, services, force, multi, cache_dir, max_d
         for service_name in services:
             mod = __import__('services.' + service_name, globals=globals(), locals=locals(), fromlist=['Service'], level=-1)
             service = mod.Service
-            service_languages = wanted_languages & service.available_languages()
+            service_languages = wanted_languages & service.languages
             if not service_languages:
                 logger.debug(u'Skipping %r: none of wanted languages %r available for service %s' % (video, wanted_languages, service_name))
                 continue
@@ -128,28 +128,34 @@ def consume_task(task, services=None):
         services = {}
     logger.info(u'Consuming %r' % task)
     result = None
+
+    def get_service(services, service_name, config = None):
+        if service_name not in services:
+            mod = __import__('services.' + service_name, globals=globals(), locals=locals(), fromlist=['Service'], level=-1)
+            services[service_name] = mod.Service()
+            services[service_name].init()
+
+        services[service_name].config = config
+        return services[service_name]
+
     if isinstance(task, ListTask):
-        if task.service not in services:
-            mod = __import__('services.' + task.service, globals=globals(), locals=locals(), fromlist=['Service'], level=-1)
-            services[task.service] = mod.Service(task.config)
-            services[task.service].init()
-        subtitles = services[task.service].list(task.video, task.languages)
-        result = subtitles
+        service = get_service(services, task.service, config=task.config)
+        result = service.list(task.video, task.languages)
+
     elif isinstance(task, DownloadTask):
         for subtitle in task.subtitles:
-            if subtitle.service not in services:
-                mod = __import__('services.' + subtitle.service, globals=globals(), locals=locals(), fromlist=['Service'], level=-1)
-                services[subtitle.service] = mod.Service()
-                services[subtitle.service].init()
+            service = get_service(services, subtitle.service)
             try:
-                services[subtitle.service].download(subtitle)
+                service.download(subtitle)
                 result = subtitle
                 break
             except DownloadFailedError:
                 logger.warning(u'Could not download subtitle %r, trying next' % subtitle)
                 continue
+
         if result is None:
             logger.error(u'No subtitles could be downloaded for video %r' % task.video)
+
     return result
 
 

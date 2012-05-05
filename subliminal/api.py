@@ -18,7 +18,7 @@
 from .core import (SERVICES, LANGUAGE_INDEX, SERVICE_INDEX, SERVICE_CONFIDENCE,
     MATCHING_CONFIDENCE, create_list_tasks, consume_task, create_download_tasks,
     group_by_video, key_subtitles)
-from .languages import list_languages
+from guessit.language import ALL_LANGUAGES
 import logging
 
 
@@ -43,7 +43,7 @@ def list_subtitles(paths, languages=None, services=None, force=True, multi=False
 
     """
     services = services or SERVICES
-    languages = set(languages or list_languages(1))
+    languages = set(map(guessit.Language, languages or []) or ALL_LANGUAGES)
     if isinstance(paths, basestring):
         paths = [paths]
     if any([not isinstance(p, unicode) for p in paths]):
@@ -81,7 +81,7 @@ def download_subtitles(paths, languages=None, services=None, force=True, multi=F
 
     """
     services = services or SERVICES
-    languages = languages or list_languages(1)
+    languages = map(guessit.Language, languages or []) or list(ALL_LANGUAGES)
     if isinstance(paths, basestring):
         paths = [paths]
     order = order or [LANGUAGE_INDEX, SERVICE_INDEX, SERVICE_CONFIDENCE, MATCHING_CONFIDENCE]

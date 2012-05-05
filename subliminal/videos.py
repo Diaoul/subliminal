@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with subliminal.  If not, see <http://www.gnu.org/licenses/>.
 from . import subtitles
-from .languages import list_languages
+from guessit.language import ALL_LANGUAGES_NAMES
 import enzyme
 import guessit
 import hashlib
@@ -130,14 +130,23 @@ class Video(object):
             logger.debug(u'Failed parsing %s with enzyme' % self.path)
         if isinstance(video_infos, enzyme.core.AVContainer):
             results.extend([subtitles.EmbeddedSubtitle.from_enzyme(self.path, s) for s in video_infos.subtitles])
-        for l in list_languages(1):
-            for e in subtitles.EXTENSIONS:
-                single_path = basepath + '%s' % e
-                if os.path.exists(single_path):
-                    results.append(subtitles.ExternalSubtitle(single_path, None))
-                multi_path = basepath + '.%s%s' % (l, e)
-                if os.path.exists(multi_path):
-                    results.append(subtitles.ExternalSubtitle(multi_path, l))
+
+        # cannot use glob here because it chokes if there are any square
+        # brackets inside the filename, so we have to use basic string
+        # startswith/endswith comparisons
+        folder, basename = os.path.split(basepath)
+        existing = [ f for f in os.listdir(folder) if f.startswith(basename) ]
+        for path in existing:
+            for ext in subtitles.EXTENSIONS:
+                if path.endswith(ext):
+                    possible_lang = path[len(basename)+1:-len(ext)]
+                    if possible_lang == '':
+                        results.append(subtitles.ExternalSubtitle(path, None))
+                    else:
+                        lang = guessit.Language(possible_lang)
+                        if lang:
+                            results.append(subtitles.ExternalSubtitle(path, lang))
+
         return results
 
     def __repr__(self):

@@ -25,21 +25,23 @@ import requests
 import threading
 import zipfile
 
-__all__ = ['BEAUTIFULSOUP_PARSER', 'ServiceBase', 'ServiceConfig']
+__all__ = ['AVAILABLE_PARSERS', 'ServiceBase', 'ServiceConfig']
 logger = logging.getLogger(__name__)
 
 
-# Determine the default parser to use with BeautifulSoup
-BEAUTIFULSOUP_PARSER = 'html.parser'
+# Determine available parsers for BeautifulSoup
+AVAILABLE_PARSERS = []
 try:
     import lxml
-    BEAUTIFULSOUP_PARSER = 'lxml'
+    AVAILABLE_PARSERS.append('lxml')
 except ImportError:
-    try:
-        import html5lib
-        BEAUTIFULSOUP_PARSER = 'html5lib'
-    except ImportError:
-        pass
+    pass
+try:
+    import html5lib
+    AVAILABLE_PARSERS.append('html5lib')
+except ImportError:
+    pass
+AVAILABLE_PARSERS.append('html.parser')
 
 
 class ServiceBase(object):
@@ -64,14 +66,14 @@ class ServiceBase(object):
     #: Mapping to Service's language codes and subliminal's
     languages = {}
 
-    #: Whether the mapping is reverted or not
-    reverted_languages = False
-
     #: Accepted video classes (:class:`~subliminal.videos.Episode`, :class:`~subliminal.videos.Movie`, :class:`~subliminal.videos.UnknownVideo`)
     videos = []
 
     #: Whether the video has to exist or not
     require_video = False
+
+    #: List of required parsers for BeautifulSoup to parse HTML if any
+    require_parsers = None
 
     def __init__(self, config=None):
         self.config = config or ServiceConfig()
@@ -121,16 +123,14 @@ class ServiceBase(object):
         pass
 
     def list(self, video, languages):
-        """List subtitles.
+        """List subtitles
 
         As a service writer, you can either override this method or implement
-        the self.list_checked() method instead to have the languages
-        pre-filtered for you
+        :meth:`list_checked` instead to have the languages pre-filtered for you
 
         """
         if not self.check_validity(video, languages):
             return []
-
         return self.list_checked(video, languages)
 
     def download(self, subtitle):
@@ -147,27 +147,13 @@ class ServiceBase(object):
         :rtype: bool
 
         """
+        #FIXME: Hardcoded language code here. und is better than unk
         languages = (set(languages) & cls.languages) - set([guessit.Language('unk')])
         if not languages:
             logger.debug(u'No language available for service %s' % cls.__class__.__name__.lower())
             return False
-        if not cls.is_valid_video(video):
+        if cls.require_video and not video.exists or not isinstance(video, tuple(cls.videos)):
             logger.debug(u'%r is not valid for service %s' % (video, cls.__class__.__name__.lower()))
-            return False
-        return True
-
-    @classmethod
-    def is_valid_video(cls, video):
-        """Check if video is valid in the Service
-
-        :param video: the video to check
-        :type video: :class:`~subliminal.videos.Video`
-        :rtype: bool
-
-        """
-        if cls.require_video and not video.exists:
-            return False
-        if not isinstance(video, tuple(cls.videos)):
             return False
         return True
 
@@ -233,16 +219,16 @@ class ServiceConfig(object):
 
     :param bool multi: whether to download one subtitle per language or not
     :param string cache_dir: cache directory
-    :param string beautifulsoup_parser: parser to use with BeautifulSoup
+    :param string parser: parser to use with BeautifulSoup
 
     """
-    def __init__(self, multi=False, cache_dir=None, beautifulsoup_parser=BEAUTIFULSOUP_PARSER):
+    def __init__(self, multi=False, cache_dir=None, parser=None):
         self.multi = multi
         self.cache_dir = cache_dir
         self.cache = None
         if cache_dir is not None:
             self.cache = cache.Cache(cache_dir)
-        self.beautifulsoup_parser = beautifulsoup_parser
+        self.parser = parser or AVAILABLE_PARSERS[0]
 
     def __repr__(self):
-        return 'ServiceConfig(%r, %s, %s)' % (self.multi, self.cache.cache_dir, self.beautifulsoup_parser)
+        return 'ServiceConfig(%r, %s, %s)' % (self.multi, self.cache.cache_dir, self.parser)

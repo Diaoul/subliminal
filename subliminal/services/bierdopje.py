@@ -38,7 +38,6 @@ class BierDopje(ServiceBase):
     server_url = 'http://api.bierdopje.com/A2B638AC5D804C2E/'
     api_based = True
     languages = lang_set(['en', 'nl'])
-    reverted_languages = False
     videos = [Episode]
     require_video = False
 
@@ -49,7 +48,7 @@ class BierDopje(ServiceBase):
             logger.error(u'Request %s returned status code %d' % (r.url, r.status_code))
             return None
 
-        soup = BeautifulSoup(r.content, self.config.beautifulsoup_parser)
+        soup = BeautifulSoup(r.content, self.config.parser)
         if soup.status.contents[0] == 'false':
             logger.debug(u'Could not find show %s' % series)
             return None
@@ -83,7 +82,7 @@ class BierDopje(ServiceBase):
             if r.status_code != 200:
                 logger.error(u'Request %s returned status code %d' % (r.url, r.status_code))
                 return []
-            soup = BeautifulSoup(r.content, self.config.beautifulsoup_parser)
+            soup = BeautifulSoup(r.content, self.config.parser)
             if soup.status.contents[0] == 'false':
                 logger.debug(u'Could not find subtitles for %s %d season %d episode %d with language %s' % (request_source, request_id, season, episode, language.alpha2))
                 continue

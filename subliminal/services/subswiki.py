@@ -73,7 +73,7 @@ class SubsWiki(ServiceBase):
         if r.status_code != 200:
             logger.error(u'Request %s returned status code %d' % (r.url, r.status_code))
             return []
-        soup = BeautifulSoup(r.content, self.config.beautifulsoup_parser)
+        soup = BeautifulSoup(r.content, self.config.parser)
         subtitles = []
         for sub in soup('td', {'class': 'NewsTitle'}):
             sub_keywords = split_keyword(self.release_pattern.search(sub.contents[1]).group(1).lower())

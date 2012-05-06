@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with subliminal.  If not, see <http://www.gnu.org/licenses/>.
 from .exceptions import DownloadFailedError
-from .services import ServiceConfig
+from .services import AVAILABLE_PARSERS, ServiceConfig
 from .tasks import DownloadTask, ListTask
 from .utils import get_keywords
 from .videos import Episode, Movie, scan
@@ -56,6 +56,7 @@ def create_list_tasks(paths, languages, services, force, multi, cache_dir, max_d
     logger.debug(u'Found %d videos in %r with maximum depth %d' % (len(scan_result), paths, max_depth))
     tasks = []
     config = ServiceConfig(multi, cache_dir)
+    services = filter_services(services)
     for video, detected_subtitles in scan_result:
         detected_languages = set(s.language for s in detected_subtitles)
         wanted_languages = languages.copy()
@@ -71,14 +72,9 @@ def create_list_tasks(paths, languages, services, force, multi, cache_dir, max_d
         for service_name in services:
             mod = __import__('services.' + service_name, globals=globals(), locals=locals(), fromlist=['Service'], level=-1)
             service = mod.Service
-            service_languages = wanted_languages & service.languages
-            if not service_languages:
-                logger.debug(u'Skipping %r: none of wanted languages %r available for service %s' % (video, wanted_languages, service_name))
+            if not service.check_validity(video, wanted_languages):
                 continue
-            if not service.is_valid_video(video):
-                logger.debug(u'Skipping %r: not part of supported videos %r for service %s' % (video, service.videos, service_name))
-                continue
-            task = ListTask(video, service_languages, service_name, config)
+            task = ListTask(video, wanted_languages & service.languages, service_name, config)
             logger.debug(u'Created task %r' % task)
             tasks.append(task)
     return tasks
@@ -255,3 +251,21 @@ def group_by_video(list_results):
     for video, subtitles in list_results:
         result[video] += subtitles
     return result
+
+
+def filter_services(services):
+    """Filter out services that are not available because of a missing parser
+
+    :param list services: service names to filter
+    :return: a copy of the initial list of service names without unavailable services
+    :rtype: list
+
+    """
+    filtered_services = services.copy()
+    for service_name in services:
+        mod = __import__('services.' + service_name, globals=globals(), locals=locals(), fromlist=['Service'], level=-1)
+        service = mod.Service
+        if service.required_parsers is not None and len(set(service.required_parsers) & set(AVAILABLE_PARSERS)) < 1:
+            logger.warning(u'Service %s not available: none of available parsers %r could be used. One of %r required' % (service_name, AVAILABLE_PARSERS, service.required_parsers))
+            filtered_services.remove(service_name)
+    return filtered_services

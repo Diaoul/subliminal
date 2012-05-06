@@ -53,7 +53,7 @@ class TvSubtitles(ServiceBase):
     @cachedmethod
     def get_likely_series_id(self, name):
         r = self.session.post('%s/search.php' % self.server_url, data={'q': name})
-        soup = BeautifulSoup(r.content, self.config.beautifulsoup_parser)
+        soup = BeautifulSoup(r.content, self.config.parser)
         maindiv = soup.find('div', 'left')
         results = []
         for elem in maindiv.find_all('li'):
@@ -71,7 +71,7 @@ class TvSubtitles(ServiceBase):
         # download the page of the season, contains ids for all episodes
         episode_id = None
         r = self.session.get('%s/tvshow-%d-%d.html' % (self.server_url, series_id, season))
-        soup = BeautifulSoup(r.content, self.config.beautifulsoup_parser)
+        soup = BeautifulSoup(r.content, self.config.parser)
         table = soup.find('table', id='table5')
         for row in table.find_all('tr'):
             cells = row.find_all('td')
@@ -96,7 +96,7 @@ class TvSubtitles(ServiceBase):
     def get_sub_ids(self, episode_id):
         subids = []
         r = self.session.get('%s/episode-%d.html' % (self.server_url, episode_id))
-        epsoup = BeautifulSoup(r.content, self.config.beautifulsoup_parser)
+        epsoup = BeautifulSoup(r.content, self.config.parser)
         for subdiv in epsoup.find_all('a'):
             if 'href' not in subdiv.attrs or not subdiv['href'].startswith('/subtitle'):
                 continue
@@ -114,10 +114,6 @@ class TvSubtitles(ServiceBase):
 
     def list_checked(self, video, languages):
         return self.query(video.path or video.release, languages, get_keywords(video.guess), video.series, video.season, video.episode)
-
-    def download(self, subtitle):
-        """Download a subtitle"""
-        self.download_zip_file(subtitle.link, subtitle.path)
 
     def query(self, filepath, languages, keywords, series, season, episode):
         logger.debug(u'Getting subtitles for %s season %d episode %d with languages %r' % (series, season, episode, languages))

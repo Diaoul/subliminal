@@ -37,7 +37,6 @@ class Subtitulos(ServiceBase):
     languages = lang_set([u'English (US)', u'English (UK)', u'English', u'French', u'Brazilian',
                           u'Portuguese', u'Español (Latinoamérica)', u'Español (España)', u'Español',
                           u'Italian', u'Català'], strict=True)
-    reverted_languages = True
     videos = [Episode]
     require_video = False
     # the '.+' in the pattern for Version allows us to match both '&oacute;'
@@ -60,7 +59,7 @@ class Subtitulos(ServiceBase):
         if r.status_code != 200:
             logger.error(u'Request %s returned status code %d' % (r.url, r.status_code))
             return []
-        soup = BeautifulSoup(r.content, self.config.beautifulsoup_parser)
+        soup = BeautifulSoup(r.content, self.config.parser)
         subtitles = []
         for sub in soup('div', {'id': 'version'}):
             sub_keywords = split_keyword(self.release_pattern.search(sub.find('p', {'class': 'title-sub'}).contents[1]).group(1).lower())

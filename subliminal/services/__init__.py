@@ -25,8 +25,21 @@ import requests
 import threading
 import zipfile
 
-__all__ = ['ServiceBase', 'ServiceConfig']
+__all__ = ['BEAUTIFULSOUP_PARSER', 'ServiceBase', 'ServiceConfig']
 logger = logging.getLogger(__name__)
+
+
+# Determine the default parser to use with BeautifulSoup
+BEAUTIFULSOUP_PARSER = 'html.parser'
+try:
+    import lxml
+    BEAUTIFULSOUP_PARSER = 'lxml'
+except ImportError:
+    try:
+        import html5lib
+        BEAUTIFULSOUP_PARSER = 'html5lib'
+    except ImportError:
+        pass
 
 
 class ServiceBase(object):
@@ -112,7 +125,8 @@ class ServiceBase(object):
 
         As a service writer, you can either override this method or implement
         the self.list_checked() method instead to have the languages
-        pre-filtered for you.
+        pre-filtered for you
+
         """
         if not self.check_validity(video, languages):
             return []
@@ -219,14 +233,16 @@ class ServiceConfig(object):
 
     :param bool multi: whether to download one subtitle per language or not
     :param string cache_dir: cache directory
+    :param string beautifulsoup_parser: parser to use with BeautifulSoup
 
     """
-    def __init__(self, multi=False, cache_dir=None):
+    def __init__(self, multi=False, cache_dir=None, beautifulsoup_parser=BEAUTIFULSOUP_PARSER):
         self.multi = multi
         self.cache_dir = cache_dir
         self.cache = None
         if cache_dir is not None:
             self.cache = cache.Cache(cache_dir)
+        self.beautifulsoup_parser = beautifulsoup_parser
 
     def __repr__(self):
-        return 'ServiceConfig(%r, %s)' % (self.multi, self.cache.cache_dir)
+        return 'ServiceConfig(%r, %s, %s)' % (self.multi, self.cache.cache_dir, self.beautifulsoup_parser)

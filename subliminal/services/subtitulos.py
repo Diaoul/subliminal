@@ -60,7 +60,7 @@ class Subtitulos(ServiceBase):
         if r.status_code != 200:
             logger.error(u'Request %s returned status code %d' % (r.url, r.status_code))
             return []
-        soup = BeautifulSoup(r.content, 'lxml')
+        soup = BeautifulSoup(r.content, self.config.beautifulsoup_parser)
         subtitles = []
         for sub in soup('div', {'id': 'version'}):
             sub_keywords = split_keyword(self.release_pattern.search(sub.find('p', {'class': 'title-sub'}).contents[1]).group(1).lower())

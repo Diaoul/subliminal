@@ -34,7 +34,7 @@ def match(pattern, string):
     try:
         return re.search(pattern, string).group(1)
     except AttributeError:
-        logger.debug('Could not match %r on %r' % (pattern, string))
+        logger.debug(u'Could not match %r on %r' % (pattern, string))
         return None
 
 
@@ -126,7 +126,7 @@ class TvSubtitles(ServiceBase):
         try:
             ep_id = self.get_episode_id(sid, season, episode)
         except KeyError:
-            logger.debug('Could not find episode id for %s season %d epnumber %d' % (series, season, episode))
+            logger.debug(u'Could not find episode id for %s season %d episode %d' % (series, season, episode))
             return []
         subids = self.get_sub_ids(ep_id)
         # filter the subtitles with our queried languages

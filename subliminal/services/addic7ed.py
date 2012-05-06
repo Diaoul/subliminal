@@ -136,13 +136,13 @@ class Addic7ed(ServiceBase):
         try:
             sid = self.get_likely_series_id(series.lower())
         except KeyError:
-            logger.debug('Could not find series id for %s' % series)
+            logger.debug(u'Could not find series id for %s' % series)
             return []
 
         try:
             ep_url = self.get_episode_url(sid, season, episode)
         except KeyError:
-            logger.debug('Could not find episode id for %s season %d epnumber %d' % (series, season, episode))
+            logger.debug(u'Could not find episode id for %s season %d episode %d' % (series, season, episode))
             return []
         suburls = self.get_sub_urls(ep_url)
 

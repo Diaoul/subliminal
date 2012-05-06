@@ -49,4 +49,5 @@ setup(name='subliminal',
     packages=find_packages(),
     scripts=['scripts/subliminal'],
     test_suite='tests',
-    install_requires=required)
+    install_requires=required,
+    extras_require={'lxml': ['lxml']})

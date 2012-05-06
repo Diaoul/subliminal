@@ -16,12 +16,12 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with subliminal.  If not, see <http://www.gnu.org/licenses/>.
 from . import ServiceBase
+from ..cache import cachedmethod
 from ..subtitles import get_subtitle_path, ResultSubtitle
 from ..videos import Episode
-from subliminal.utils import get_keywords
 from bs4 import BeautifulSoup
-from ..cache import cachedmethod
 from guessit.language import lang_set
+from subliminal.utils import get_keywords
 import guessit
 import logging
 import re

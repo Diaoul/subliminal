@@ -19,9 +19,9 @@ from . import ServiceBase
 from ..exceptions import ServiceError
 from ..subtitles import get_subtitle_path, ResultSubtitle
 from ..videos import Episode, Movie
-from subliminal.utils import get_keywords, split_keyword
 from bs4 import BeautifulSoup
 from guessit.language import lang_set
+from subliminal.utils import get_keywords, split_keyword
 import guessit
 import logging
 import re

@@ -18,8 +18,8 @@
 from . import ServiceBase
 from ..exceptions import ServiceError, DownloadFailedError
 from ..subtitles import get_subtitle_path, ResultSubtitle
-from ..videos import Episode, Movie
 from ..utils import to_unicode
+from ..videos import Episode, Movie
 from guessit.language import lang_set
 import guessit
 import gzip

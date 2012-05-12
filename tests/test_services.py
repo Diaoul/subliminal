@@ -209,7 +209,7 @@ class EpisodeServiceTestCase(unittest.TestCase):
     def test_download(self):
         video = videos.Video.from_path(self.episode_path)
         with self.service(self.config) as service:
-            subtitle = service.list(video, set([guessit.Language(self.episode_sublanguage)]))[0]
+            subtitle = service.list(video, lang_set([self.episode_sublanguage]))[0]
             if os.path.exists(subtitle.path):
                 os.remove(subtitle.path)
             result = service.download(subtitle)

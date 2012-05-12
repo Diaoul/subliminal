@@ -139,5 +139,8 @@ class TvSubtitles(ServiceBase):
             subtitles.append(subtitle)
         return subtitles
 
+    def download(self, subtitle):
+        self.download_zip_file(subtitle.link, subtitle.path)
+
 
 Service = TvSubtitles

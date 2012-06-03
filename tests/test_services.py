@@ -30,7 +30,6 @@ from subliminal.services.podnapisi import Podnapisi
 from subliminal.subtitles import Subtitle
 from guessit.slogging import setupLogging
 from guessit.language import lang_set
-import guessit
 import logging
 import os
 import sys
@@ -265,25 +264,25 @@ class EpisodeServiceTestCase(unittest.TestCase):
             subtitle = service.list(video, lang_set([self.episode_sublanguage]))[0]
             if os.path.exists(subtitle.path):
                 os.remove(subtitle.path)
-            result = service.download(subtitle)
+            service.download(subtitle)
         self.assertTrue(os.path.exists(subtitle.path))
         # check the downloaded file has the expected size, to avoid errors where
         # we download a wrong file or an html error page instead of the subtitle
         subfilesize = os.path.getsize(subtitle.path)
         same_size = (subfilesize == self.episode_subfilesize)
-        self.assertTrue(same_size, msg = 'expected = %d - received = %d' % (self.episode_subfilesize, subfilesize))
+        self.assertTrue(same_size, msg='expected = %d - received = %d' % (self.episode_subfilesize, subfilesize))
         os.remove(subtitle.path)
 
     def test_cached_series(self):
         with self.service(self.config) as service:
             service.clear_cache()
-            results = self.query(service, self.fake_file, self.languages, self.episode_keywords, self.series, self.season, self.episode)
+            self.query(service, self.fake_file, self.languages, self.episode_keywords, self.series, self.season, self.episode)
             service.save_cache()
 
         c = pickle.load(open(os.path.join(cache_dir, 'subliminal_%s.cache' % self.service.__name__)))
         found = False
-        for func_name, cached_values in c.items():
-            for args, result in cached_values.items():
+        for _, cached_values in c.items():
+            for args, __ in cached_values.items():
                 if args == (self.series.lower(),):
                     found = True
         self.assertTrue(found)

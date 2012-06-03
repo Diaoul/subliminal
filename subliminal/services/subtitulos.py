@@ -68,7 +68,7 @@ class Subtitulos(ServiceBase):
                 continue
             for html_language in sub.findAllNext('ul', {'class': 'sslist'}):
                 language = guessit.Language(html_language.findNext('li', {'class': 'li-idioma'}).find('strong').contents[0].string.strip())
-                if not language in languages:
+                if language not in languages:
                     logger.debug(u'Language %r not in wanted languages %r' % (language, languages))
                     continue
                 html_status = html_language.findNext('li', {'class': 'li-estado green'})

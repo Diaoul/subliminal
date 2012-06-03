@@ -82,7 +82,7 @@ class SubsWiki(ServiceBase):
                 continue
             for html_language in sub.parent.parent.findAll('td', {'class': 'language'}):
                 language = guessit.Language(html_language.string.strip())
-                if not language in languages:
+                if language not in languages:
                     logger.debug(u'Language %r not in wanted languages %r' % (language, languages))
                     continue
                 html_status = html_language.findNextSibling('td')

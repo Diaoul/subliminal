@@ -261,7 +261,7 @@ def filter_services(services):
     :rtype: list
 
     """
-    filtered_services = services.copy()
+    filtered_services = services[:]
     for service_name in services:
         mod = __import__('services.' + service_name, globals=globals(), locals=locals(), fromlist=['Service'], level=-1)
         service = mod.Service

@@ -18,7 +18,7 @@
 from .. import cache
 from ..exceptions import MissingLanguageError, DownloadFailedError, ServiceError
 from ..subtitles import EXTENSIONS
-import guessit
+from guessit.language import UNDETERMINED
 import logging
 import os
 import requests
@@ -147,8 +147,7 @@ class ServiceBase(object):
         :rtype: bool
 
         """
-        #FIXME: Hardcoded language code here. und is better than unk
-        languages = (set(languages) & cls.languages) - set([guessit.Language('unk')])
+        languages = (languages & cls.languages) - set([UNDETERMINED])
         if not languages:
             logger.debug(u'No language available for service %s' % cls.__class__.__name__.lower())
             return False

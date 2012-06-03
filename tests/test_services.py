@@ -26,6 +26,7 @@ from subliminal.services.subtitulos import Subtitulos
 from subliminal.services.thesubdb import TheSubDB
 from subliminal.services.tvsubtitles import TvSubtitles
 from subliminal.services.addic7ed import Addic7ed
+from subliminal.services.podnapisi import Podnapisi
 from subliminal.subtitles import Subtitle
 from guessit.slogging import setupLogging
 from guessit.language import lang_set
@@ -163,6 +164,58 @@ class TheSubDBTestCase(unittest.TestCase):
         os.remove(subtitle.path)
 
 
+class PodnapisiTestCase(unittest.TestCase):
+    query_tests = ['test_query', 'test_query_wrong_hash'] #, 'test_query_wrong_languages'
+    list_tests = [] #'test_list', 'test_list_wrong_languages'
+    download_tests = [] #'test_download'
+    cache_tests = []
+
+    def setUp(self):
+        self.config = ServiceConfig(multi=True, cache_dir=cache_dir)
+        self.languages = lang_set(['en', 'fr'])
+        self.wrong_languages = lang_set(['zz', 'yy'])
+        self.fake_file = u'/tmp/fake_file'
+        self.path = existing_video
+        self.hash = 'e1b45885346cfa0b'
+        self.wrong_hash = u'ffffffffffffffffffffffffffffffff'
+
+    def test_query(self):
+        with Podnapisi(self.config) as service:
+            results = service.query(self.fake_file, self.languages, moviehash=self.hash)
+        self.assertTrue(len(results) > 0)
+
+    def test_query_wrong_hash(self):
+        with Podnapisi(self.config) as service:
+            results = service.query(self.fake_file, self.languages, moviehash=self.wrong_hash)
+        self.assertTrue(len(results) == 0)
+
+    def test_query_wrong_languages(self):
+        with Podnapisi(self.config) as service:
+            results = service.query(self.fake_file, self.wrong_languages, moviehash=self.hash)
+        self.assertTrue(len(results) == 0)
+
+    def test_list(self):
+        video = videos.Video.from_path(self.path)
+        with Podnapisi(self.config) as service:
+            results = service.list(video, self.languages)
+        self.assertTrue(len(results) > 0)
+
+    def test_list_wrong_languages(self):
+        video = videos.Video.from_path(self.path)
+        with Podnapisi(self.config) as service:
+            results = service.list(video, self.wrong_languages)
+        self.assertTrue(len(results) == 0)
+
+    def test_download(self):
+        video = videos.Video.from_path(self.path)
+        with Podnapisi(self.config) as service:
+            subtitle = service.list(video, self.languages)[0]
+            if os.path.exists(subtitle.path):
+                os.remove(subtitle.path)
+            result = service.download(subtitle)
+        self.assertTrue(isinstance(result, Subtitle))
+        self.assertTrue(os.path.exists(subtitle.path))
+        os.remove(subtitle.path)
 
 
 class EpisodeServiceTestCase(unittest.TestCase):

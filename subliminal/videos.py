@@ -108,7 +108,9 @@ class Video(object):
     def _compute_hashes(self):
         """Compute different hashes"""
         self.hashes['OpenSubtitles'] = hash_opensubtitles(self.path)
-        self.hashes['TheSubDB'] = hash_thesubdb(self.path)
+        h = hash_thesubdb(self.path)
+        if h:
+            self.hashes['TheSubDB'] = h
 
     def scan(self):
         """Scan and return associated subtitles
@@ -271,6 +273,10 @@ def hash_thesubdb(path):
 
     """
     readsize = 64 * 1024
+
+    if readsize > os.path.getsize(path):
+      return None
+
     with open(path, 'rb') as f:
         data = f.read(readsize)
         f.seek(-readsize, os.SEEK_END)

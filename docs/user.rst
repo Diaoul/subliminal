@@ -17,7 +17,7 @@ Languages
 Subliminal supports multiple languages that are represented with their extended ISO 639-1 code.
 The current extensions to the ISO 639-1 are:
 
-* *po* for Brazilian Portuguese
+* *pb* for Portuguese Brazilian
 
 Paths
 ^^^^^

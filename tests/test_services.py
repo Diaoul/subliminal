@@ -164,7 +164,7 @@ class TheSubDBTestCase(unittest.TestCase):
 
 
 class PodnapisiTestCase(unittest.TestCase):
-    query_tests = ['test_query', 'test_query_wrong_hash'] #, 'test_query_wrong_languages'
+    query_tests = ['test_query', 'test_query_wrong_hash', 'test_query_wrong_languages']
     list_tests = [] #'test_list', 'test_list_wrong_languages'
     download_tests = [] #'test_download'
     cache_tests = []

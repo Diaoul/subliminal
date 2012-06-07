@@ -33,11 +33,11 @@ logger = logging.getLogger(__name__)
 class Podnapisi(ServiceBase):
     server_url = 'http://ssp.podnapisi.net:8000'
     api_based = True
-    #FIXME: ag and cyr not recognized by guessit
     languages = lang_set(['sl', 'en', 'nn', 'ko', 'de', 'is', 'cs', 'fr', 'it', 'bs', 'jp', 'ar', 'ro',
                           'hu', 'gr', 'zh', 'lt', 'et', 'lv', 'he', 'nl', 'da', 'sv', 'pl', 'ru', 'es',
                           'sq', 'tr', 'fi', 'pt', 'bg', 'mk', 'sr', 'sk', 'hr', 'hi', 'th', 'ca', 'uk',
                           'pb', 'ga', 'be', 'vi', 'fa', 'ca', 'id', 'ms'])
+    #FIXME: ag and cyr not recognized by guessit
     videos = [Episode, Movie]
     require_video = True
 
@@ -75,15 +75,19 @@ class Podnapisi(ServiceBase):
             if language == guessit.language.UNDETERMINED or language not in languages:
                 continue
             path = get_subtitle_path(filepath, language, self.config.multi)
-            logger.debug('Weight: %d' % result['weight'])
             subtitle = ResultSubtitle(path, language, service=self.__class__.__name__.lower(), link=result['id'],
                                       release=to_unicode(result['release']), confidence=result['weight'])
             subtitles.append(subtitle)
         if not subtitles:
             return []
+        # Convert weight to confidence
         max_weight = float(max([s.confidence for s in subtitles]))
+        min_weight = float(min([s.confidence for s in subtitles]))
         for subtitle in subtitles:
-            subtitle.confidence = subtitle.confidence / max_weight
+            if max_weight == 0 and min_weight == 0:
+                subtitle.confidence = 1.0
+            else:
+                subtitle.confidence = (subtitle.confidence - min_weight) / (max_weight - min_weight)
         return subtitles
 
     def list_checked(self, video, languages):

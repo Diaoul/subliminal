@@ -58,9 +58,7 @@ class OpenSubtitlesTestCase(unittest.TestCase):
         self.wrong_languages = lang_set(['zz', 'yy'])
         self.fake_file = u'/tmp/fake_file'
         self.path = existing_video
-        self.series = 'The Big Bang Theory'
         self.movie = 'Inception'
-        self.wrong_series = 'No Existent Show Name'
         self.imdbid = 'tt1375666'
         self.wrong_imdbid = 'tt9999999'
         self.hash = '51e57c4e8fd77990'

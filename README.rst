@@ -11,11 +11,14 @@ Features
 --------
 Multiple subtitles services are available:
 
-* OpenSubtitles
-* TheSubDB
+* Addic7ed
 * BierDopje
+* OpenSubtitles
+* Podnapisi
 * SubsWiki
 * Subtitulos
+* TheSubDB
+* TvSubtitles
 
 You can use main subliminal's functions with a **file path**, a **file name** or a **folder path**.
 
@@ -39,5 +42,5 @@ Multi-threaded use
 ^^^^^^^^^^^^^^^^^^
 Use 4 workers to achieve the same result::
 
-    >>> with subliminal.Pool(4) as p:
-    ...     p.list_subtitles('The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.mp4', ['en'])
+	>>> with subliminal.Pool(4) as p:
+	... 	p.list_subtitles('The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.mp4', ['en'])

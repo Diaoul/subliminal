@@ -16,10 +16,12 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with subliminal.  If not, see <http://www.gnu.org/licenses/>.
 from .exceptions import DownloadFailedError
-from .services import AVAILABLE_PARSERS, ServiceConfig
+from .services import ServiceConfig
 from .tasks import DownloadTask, ListTask
 from .utils import get_keywords
 from .videos import Episode, Movie, scan
+from guessit.language import lang_set
+import bs4
 from collections import defaultdict
 from itertools import groupby
 import guessit
@@ -127,7 +129,6 @@ def consume_task(task, services=None):
     if isinstance(task, ListTask):
         service = get_service(services, task.service, config=task.config)
         result = service.list(task.video, task.languages)
-
     elif isinstance(task, DownloadTask):
         for subtitle in task.subtitles:
             service = get_service(services, subtitle.service)
@@ -141,7 +142,6 @@ def consume_task(task, services=None):
 
         if result is None:
             logger.error(u'No subtitles could be downloaded for video %r' % task.video)
-
     return result
 
 
@@ -254,10 +254,10 @@ def group_by_video(list_results):
 
 
 def filter_services(services):
-    """Filter out services that are not available because of a missing parser
+    """Filter out services that are not available because of a missing feature
 
     :param list services: service names to filter
-    :return: a copy of the initial list of service names without unavailable services
+    :return: a copy of the initial list of service names without unavailable ones
     :rtype: list
 
     """
@@ -265,7 +265,7 @@ def filter_services(services):
     for service_name in services:
         mod = __import__('services.' + service_name, globals=globals(), locals=locals(), fromlist=['Service'], level=-1)
         service = mod.Service
-        if service.required_parsers is not None and len(set(service.required_parsers) & set(AVAILABLE_PARSERS)) < 1:
-            logger.warning(u'Service %s not available: none of available parsers %r could be used. One of %r required' % (service_name, AVAILABLE_PARSERS, service.required_parsers))
+        if service.required_features is not None and bs4.builder_registry.lookup(*service.required_features) is None:
+            logger.warning(u'Service %s not available: none of available features could be used. One of %r required' % (service_name, service.required_features))
             filtered_services.remove(service_name)
     return filtered_services

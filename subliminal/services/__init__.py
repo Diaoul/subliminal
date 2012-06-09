@@ -18,30 +18,16 @@
 from .. import cache
 from ..exceptions import MissingLanguageError, DownloadFailedError, ServiceError
 from ..subtitles import EXTENSIONS
-from guessit.language import UNDETERMINED
+from guessit.language import lang_set, UNDETERMINED
 import logging
 import os
 import requests
 import threading
 import zipfile
 
-__all__ = ['AVAILABLE_PARSERS', 'ServiceBase', 'ServiceConfig']
+
+__all__ = ['ServiceBase', 'ServiceConfig']
 logger = logging.getLogger(__name__)
-
-
-# Determine available parsers for BeautifulSoup
-AVAILABLE_PARSERS = []
-try:
-    import lxml
-    AVAILABLE_PARSERS.append('lxml')
-except ImportError:
-    pass
-try:
-    import html5lib
-    AVAILABLE_PARSERS.append('html5lib')
-except ImportError:
-    pass
-AVAILABLE_PARSERS.append('html.parser')
 
 
 class ServiceBase(object):
@@ -72,8 +58,8 @@ class ServiceBase(object):
     #: Whether the video has to exist or not
     require_video = False
 
-    #: List of required parsers for BeautifulSoup to parse HTML if any
-    require_parsers = None
+    #: List of required features for BeautifulSoup
+    required_features = None
 
     def __init__(self, config=None):
         self.config = config or ServiceConfig()
@@ -147,12 +133,12 @@ class ServiceBase(object):
         :rtype: bool
 
         """
-        languages = (languages & cls.languages) - set([UNDETERMINED])
+        languages = (lang_set(languages) & cls.languages) - set([UNDETERMINED])
         if not languages:
-            logger.debug(u'No language available for service %s' % cls.__class__.__name__.lower())
+            logger.debug(u'No language available for service %s' % cls.__name__.lower())
             return False
         if cls.require_video and not video.exists or not isinstance(video, tuple(cls.videos)):
-            logger.debug(u'%r is not valid for service %s' % (video, cls.__class__.__name__.lower()))
+            logger.debug(u'%r is not valid for service %s' % (video, cls.__name__.lower()))
             return False
         return True
 
@@ -218,16 +204,14 @@ class ServiceConfig(object):
 
     :param bool multi: whether to download one subtitle per language or not
     :param string cache_dir: cache directory
-    :param string parser: parser to use with BeautifulSoup
 
     """
-    def __init__(self, multi=False, cache_dir=None, parser=None):
+    def __init__(self, multi=False, cache_dir=None):
         self.multi = multi
         self.cache_dir = cache_dir
         self.cache = None
         if cache_dir is not None:
             self.cache = cache.Cache(cache_dir)
-        self.parser = parser or AVAILABLE_PARSERS[0]
 
     def __repr__(self):
-        return 'ServiceConfig(%r, %s, %s)' % (self.multi, self.cache.cache_dir, self.parser)
+        return 'ServiceConfig(%r, %s)' % (self.multi, self.cache.cache_dir)

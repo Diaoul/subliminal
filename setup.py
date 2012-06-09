@@ -24,7 +24,7 @@ from setuptools import setup, find_packages
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
-required = ['beautifulsoup4 >= 4.0', 'guessit >= 0.4.1', 'requests', 'enzyme >= 0.1']
+required = ['beautifulsoup4 >= 4.0', 'guessit >= 0.4.1', 'requests', 'enzyme >= 0.1', 'html5lib']
 if sys.hexversion < 0x20700f0:
     required.append('argparse >= 1.1')
 
@@ -50,4 +50,4 @@ setup(name='subliminal',
     scripts=['scripts/subliminal'],
     test_suite='tests',
     install_requires=required,
-    extras_require={'lxml': ['lxml']})
+    extras_require={'full': ['lxml']})

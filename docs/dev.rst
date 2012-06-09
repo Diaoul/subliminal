@@ -8,7 +8,7 @@ combining different websites but there is no guarantee of a perfect match.
 Even if OpenSubtitles has a gigantic subtitles database, you may not be able to
 find a subtitle on it but you will find it elsewhere, say BierDopje. Sometimes,
 it just takes some time before it shows up on a website even if already available
-on another, but you don't wanna wait to watch the latest Big Bang Theory, right?
+on another, but you do not want to wait to watch the latest Big Bang Theory, right?
 
 Given this, to be reliable, subliminal has to use different :mod:`~subliminal.services`
 and use a unified method to gather them all. The :class:`~subliminal.services.ServiceBase`

@@ -18,11 +18,14 @@ Features
 --------
 Multiple subtitles services are available:
 
-* OpenSubtitles
-* TheSubDB
+* Addic7ed
 * BierDopje
+* OpenSubtitles
+* Podnapisi
 * SubsWiki
 * Subtitulos
+* TheSubDB
+* TvSubtitles
 
 You can use main subliminal's functions with a **file path**, a **file name** or a **folder path**.
 

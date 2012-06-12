@@ -39,6 +39,7 @@ class Subtitulos(ServiceBase):
                           u'Italian', u'Català'], strict=True)
     videos = [Episode]
     require_video = False
+    required_features = ['permissive']
     # the '.+' in the pattern for Version allows us to match both '&oacute;'
     # and the 'ó' char directly. This is because now BS4 converts the html
     # code chars into their equivalent unicode char
@@ -59,7 +60,7 @@ class Subtitulos(ServiceBase):
         if r.status_code != 200:
             logger.error(u'Request %s returned status code %d' % (r.url, r.status_code))
             return []
-        soup = BeautifulSoup(r.content, self.config.parser)
+        soup = BeautifulSoup(r.content, self.required_features)
         subtitles = []
         for sub in soup('div', {'id': 'version'}):
             sub_keywords = split_keyword(self.release_pattern.search(sub.find('p', {'class': 'title-sub'}).contents[1]).group(1).lower())

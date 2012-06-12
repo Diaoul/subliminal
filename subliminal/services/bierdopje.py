@@ -40,6 +40,7 @@ class BierDopje(ServiceBase):
     languages = lang_set(['en', 'nl'])
     videos = [Episode]
     require_video = False
+    required_features = ['xml']
 
     @cachedmethod
     def get_show_id(self, series):
@@ -47,7 +48,7 @@ class BierDopje(ServiceBase):
         if r.status_code != 200:
             logger.error(u'Request %s returned status code %d' % (r.url, r.status_code))
             return None
-        soup = BeautifulSoup(r.content, self.config.parser)
+        soup = BeautifulSoup(r.content, self.required_features)
         if soup.status.contents[0] == 'false':
             logger.debug(u'Could not find show %s' % series)
             return None
@@ -80,7 +81,7 @@ class BierDopje(ServiceBase):
             if r.status_code != 200:
                 logger.error(u'Request %s returned status code %d' % (r.url, r.status_code))
                 return []
-            soup = BeautifulSoup(r.content, self.config.parser)
+            soup = BeautifulSoup(r.content, self.required_features)
             if soup.status.contents[0] == 'false':
                 logger.debug(u'Could not find subtitles for %s %d season %d episode %d with language %s' % (request_source, request_id, season, episode, language.alpha2))
                 continue

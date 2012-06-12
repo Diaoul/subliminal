@@ -40,6 +40,7 @@ class SubsWiki(ServiceBase):
     videos = [Episode, Movie]
     require_video = False
     release_pattern = re.compile('\nVersion (.+), ([0-9]+).([0-9])+ MBs')
+    required_features = ['permissive']
 
     def list_checked(self, video, languages):
         results = []
@@ -73,7 +74,7 @@ class SubsWiki(ServiceBase):
         if r.status_code != 200:
             logger.error(u'Request %s returned status code %d' % (r.url, r.status_code))
             return []
-        soup = BeautifulSoup(r.content, self.config.parser)
+        soup = BeautifulSoup(r.content, self.required_features)
         subtitles = []
         for sub in soup('td', {'class': 'NewsTitle'}):
             sub_keywords = split_keyword(self.release_pattern.search(sub.contents[1]).group(1).lower())

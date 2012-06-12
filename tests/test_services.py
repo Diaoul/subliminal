@@ -47,7 +47,7 @@ existing_video = u'/something/The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.mp4'
 
 class ServiceTestCase(unittest.TestCase):
     def tearDown(self):
-        # Setting config to None allows to delete the object, which will in turn save the cache 
+        # Setting config to None allows to delete the object, which will in turn save the cache
         self.config = None
 
     def test_query_series(self):
@@ -159,7 +159,6 @@ class Addic7edTestCase(ServiceTestCase):
         self.assertTrue(len(results) == 0)
 
 
-
 class BierDopjeTestCase(ServiceTestCase):
     query_tests = ['test_query_series', 'test_query_wrong_series', 'test_query_wrong_languages',
                    'test_query_tvdbid', 'test_query_wrong_tvdbid', 'test_query_series_and_tvdbid']
@@ -245,7 +244,7 @@ class OpenSubtitlesTestCase(ServiceTestCase):
         self.fake_file = u'/tmp/fake_file'
         self.episode_path = existing_video
         self.episode_sublanguage = 'en'
-        self.episode_subfilesizes = [33547, 33563]
+        self.episode_subfilesizes = [33547, 33563, 33601]
         self.movie = 'Inception'
         self.imdbid = '1375666'
         self.wrong_imdbid = '9999999'
@@ -416,6 +415,14 @@ class TheSubDBTestCase(ServiceTestCase):
             results = service.query(self.fake_file, self.hash, self.wrong_languages)
         self.assertTrue(len(results) == 0)
 
+    @unittest.skipUnless(os.path.exists(existing_video), 'No existing video')
+    def test_list_episode(self):
+        super(TheSubDBTestCase, self).test_list_episode()
+
+    @unittest.skipUnless(os.path.exists(existing_video), 'No existing video')
+    def test_download_episode(self):
+        super(TheSubDBTestCase, self).test_download_episode()
+
 
 class TvSubtitlesTestCase(ServiceTestCase):
     query_tests = ['test_query_series', 'test_query_wrong_series', 'test_query_wrong_languages']
@@ -457,6 +464,7 @@ class TvSubtitlesTestCase(ServiceTestCase):
 TESTCASES = [Addic7edTestCase, BierDopjeTestCase, OpenSubtitlesTestCase, PodnapisiTestCase, SubsWikiTestCase,
              SubtitulosTestCase, TheSubDBTestCase, TvSubtitlesTestCase]
 
+
 def query_suite():
     suite = unittest.TestSuite()
     for testcase in TESTCASES:
@@ -476,6 +484,7 @@ def download_suite():
     for testcase in TESTCASES:
         suite.addTests(map(testcase, testcase.download_tests))
     return suite
+
 
 def cache_suite():
     suite = unittest.TestSuite()

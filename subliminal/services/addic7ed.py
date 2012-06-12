@@ -58,12 +58,12 @@ class Addic7ed(ServiceBase):
                           u'Persian'], strict=True)
     videos = [Episode]
     require_video = False
-    require_parsers = ['lxml', 'html5lib']
+    required_features = ['permissive']
 
     @cachedmethod
     def get_likely_series_id(self, name):
         r = self.session.get('%s/shows.php' % self.server_url)
-        soup = BeautifulSoup(r.content, self.config.parser)
+        soup = BeautifulSoup(r.content, self.required_features)
         for elem in soup.find_all('h3'):
             show_name = elem.a.text.lower()
             show_id = int(match('show/([0-9]+)', elem.a['href']))
@@ -81,7 +81,7 @@ class Addic7ed(ServiceBase):
         """
         # download the page of the show, contains ids for all episodes all seasons
         r = self.session.get('%s/show/%d' % (self.server_url, series_id))
-        soup = BeautifulSoup(r.content, self.config.parser)
+        soup = BeautifulSoup(r.content, self.required_features)
         form = soup.find('form', attrs={'name': 'multidl'})
         for table in form.find_all('table'):
             for row in table.find_all('tr'):
@@ -106,7 +106,7 @@ class Addic7ed(ServiceBase):
     def get_sub_urls(self, episode_url):
         suburls = []
         r = self.session.get('%s/%s' % (self.server_url, episode_url))
-        epsoup = BeautifulSoup(r.content, self.config.parser)
+        epsoup = BeautifulSoup(r.content, self.required_features)
         for releaseTable in epsoup.find_all('table', 'tabel95'):
             releaseRow = releaseTable.find('td', 'NewsTitle')
             if not releaseRow:

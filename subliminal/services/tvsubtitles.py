@@ -49,11 +49,12 @@ class TvSubtitles(ServiceBase):
                           u'Japanese', u'Bulgarian', u'Czech', u'Romanian'], strict=True)
     videos = [Episode]
     require_video = False
+    required_features = ['permissive']
 
     @cachedmethod
     def get_likely_series_id(self, name):
         r = self.session.post('%s/search.php' % self.server_url, data={'q': name})
-        soup = BeautifulSoup(r.content, self.config.parser)
+        soup = BeautifulSoup(r.content, self.required_features)
         maindiv = soup.find('div', 'left')
         results = []
         for elem in maindiv.find_all('li'):
@@ -71,7 +72,7 @@ class TvSubtitles(ServiceBase):
         # download the page of the season, contains ids for all episodes
         episode_id = None
         r = self.session.get('%s/tvshow-%d-%d.html' % (self.server_url, series_id, season))
-        soup = BeautifulSoup(r.content, self.config.parser)
+        soup = BeautifulSoup(r.content, self.required_features)
         table = soup.find('table', id='table5')
         for row in table.find_all('tr'):
             cells = row.find_all('td')
@@ -96,7 +97,7 @@ class TvSubtitles(ServiceBase):
     def get_sub_ids(self, episode_id):
         subids = []
         r = self.session.get('%s/episode-%d.html' % (self.server_url, episode_id))
-        epsoup = BeautifulSoup(r.content, self.config.parser)
+        epsoup = BeautifulSoup(r.content, self.required_features)
         for subdiv in epsoup.find_all('a'):
             if 'href' not in subdiv.attrs or not subdiv['href'].startswith('/subtitle'):
                 continue
@@ -131,7 +132,6 @@ class TvSubtitles(ServiceBase):
             language = subid['language']
             if language not in languages:
                 continue
-
             path = get_subtitle_path(filepath, language, self.config.multi)
             subtitle = ResultSubtitle(path, language, self.__class__.__name__.lower(),
                                       '%s/download-%d.html' % (self.server_url, subid['subid']),

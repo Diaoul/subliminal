@@ -19,8 +19,22 @@ class will achieve this.
 
 Languages
 ---------
-To be able to support many languages, subliminal uses :class:`guessit.Language`, refer
-to guessit's documentation for more details.
+To be able to support many languages, subliminal makes heavy use of ISO-3166 and ISO-639
+in a dedicated module.
+
+.. automodule:: subliminal.language
+    :members:
+    
+    .. data:: subliminal.language.COUNTRIES
+
+        ISO-3166-1 countries list from `Debian package iso-codes 3.36-1 <http://packages.debian.org/fr/sid/iso-codes>`_.
+        Each item of this list is a tuple like ``(‘alpha2’, ‘alpha3’, ‘numeric’, ‘name’)``
+    
+    .. data:: subliminal.language.LANGUAGES
+
+        ISO-639-2 languages list from `the official source <http://www.loc.gov/standards/iso639-2/ISO-639-2_utf-8.txt>`_.
+        Each item of this list is a tuple like ``(‘alpha3’, ‘terminologic’, ‘alpha2’, ‘name’, ‘french_name’)``
+    
 
 Tasks
 -----

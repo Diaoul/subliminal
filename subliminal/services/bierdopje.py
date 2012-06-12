@@ -47,12 +47,10 @@ class BierDopje(ServiceBase):
         if r.status_code != 200:
             logger.error(u'Request %s returned status code %d' % (r.url, r.status_code))
             return None
-
         soup = BeautifulSoup(r.content, self.config.parser)
         if soup.status.contents[0] == 'false':
             logger.debug(u'Could not find show %s' % series)
             return None
-
         return int(soup.showid.contents[0])
 
     def load_cache(self):

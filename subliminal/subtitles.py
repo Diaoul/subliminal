@@ -79,7 +79,6 @@ class ExternalSubtitle(Subtitle):
             raise ValueError('Not a supported subtitle extension')
         language = os.path.splitext(path[:len(path) - len(extension)])[1][1:]
         language = guessit.Language(language) or None
-
         return cls(path, language)
 
 

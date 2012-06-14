@@ -52,7 +52,7 @@ class LanguageListTestCase(unittest.TestCase):
 
 
 class LanguageSetTestCase(unittest.TestCase):
-    def test_set(self):
+    def test_set_contains(self):
         languages = set([Language('fr'), Language('en-US'), Language('en-GB')])
         self.assertTrue(Language('fr') in languages)
         self.assertTrue(Language('en-US') in languages)

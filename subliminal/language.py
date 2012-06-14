@@ -948,6 +948,9 @@ class language_set(set):
             if isinstance(i, Language):
                 items.append(i)
                 continue
+            if isinstance(i, tuple):
+                items.append(Language(i[0], languages=languages, strict=strict))
+                continue
             items.append(Language(i, languages=languages, strict=strict))
         super(language_set, self).__init__(items)
 

@@ -975,7 +975,6 @@ class language_set(set):
     def __sub__(self, other):
         results = language_set()
         for i in self:
-            for j in other:
-                if i not in j:
-                    results.add(i)
+            if i not in other:
+                results.add(i)
         return results

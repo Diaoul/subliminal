@@ -42,9 +42,10 @@ class LanguageSetTestCase(unittest.TestCase):
         self.assertTrue(len(languages & language_set([Language('fr')])) == 1)
 
     def test_language_set_substract(self):
-        languages = language_set([Language('fr'), Language('en-US'), Language('en-GB')])
-        self.assertTrue(len(languages - language_set([Language('en')])) == 1)
-        self.assertTrue(len(languages - language_set([Language('en-US')])) == 2)
+        languages = language_set(['fr', 'en-US', 'en-GB'])
+        self.assertTrue(len(languages - language_set(['en'])) == 1)
+        self.assertTrue(len(languages - language_set(['en-US'])) == 2)
+        self.assertTrue(len(languages - language_set(['en-US', 'fr'])) == 1)
 
 
 class LanguageTestCase(unittest.TestCase):

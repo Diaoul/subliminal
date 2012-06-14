@@ -18,7 +18,7 @@
 from .. import cache
 from ..exceptions import MissingLanguageError, DownloadFailedError, ServiceError
 from ..subtitles import EXTENSIONS
-from guessit.language import lang_set, UNDETERMINED
+from ..language import language_set, Language
 import logging
 import os
 import requests
@@ -49,8 +49,14 @@ class ServiceBase(object):
     #: Timeout for web requests
     timeout = 5
 
-    #: Mapping to Service's language codes and subliminal's
-    languages = {}
+    #: :class:`~subliminal.language.language_set` of available languages
+    languages = language_set()
+
+    #: Map between language objects and language codes used in the service
+    language_map = {}
+
+    #: Default attribute of a :class:`~subliminal.language.Language` to get with :meth:`get_code`
+    language_code = 'alpha2'
 
     #: Accepted video classes (:class:`~subliminal.videos.Episode`, :class:`~subliminal.videos.Movie`, :class:`~subliminal.videos.UnknownVideo`)
     videos = []
@@ -99,6 +105,31 @@ class ServiceBase(object):
         """Terminate connection"""
         logger.debug(u'Terminating %s' % self.__class__.__name__)
 
+    def get_code(self, language):
+        """Get the service code for a :class:`~subliminal.language.Language`
+
+        It uses the :data:`language_map` and if there's no match, falls back
+        on the :data:`language_code` attribute of the given :class:`~subliminal.language.Language`
+
+        """
+        if language in self.language_map:
+            return self.language_map[language]
+        if self.language_code is None:
+            raise ValueError('%r has no matching code' % language)
+        return getattr(language, self.language_code)
+
+    def get_language(self, code):
+        """Get a :class:`~subliminal.language.Language` from a service code
+
+        It uses the :data:`language_map` and if there's no match, uses the
+        given code as ``language`` parameter for the :class:`~subliminal.language.Language`
+        constructor
+
+        """
+        if code in self.language_map:
+            return self.language_map[code]
+        return Language(code)
+
     def query(self, *args):
         """Make the actual query"""
         raise NotImplementedError()
@@ -128,11 +159,12 @@ class ServiceBase(object):
 
         :param video: the video to check
         :type video: :class:`~subliminal.videos.video`
-        :param set languages: languages to check
+        :param languages: languages to check
+        :type languages: :class:`~subliminal.language.Language`
         :rtype: bool
 
         """
-        languages = (lang_set(languages) & cls.languages) - set([UNDETERMINED])
+        languages = (languages & cls.languages) - language_set(['Undetermined'])
         if not languages:
             logger.debug(u'No language available for service %s' % cls.__name__.lower())
             return False

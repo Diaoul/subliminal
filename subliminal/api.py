@@ -18,8 +18,7 @@
 from .core import (SERVICES, LANGUAGE_INDEX, SERVICE_INDEX, SERVICE_CONFIDENCE,
     MATCHING_CONFIDENCE, create_list_tasks, consume_task, create_download_tasks,
     group_by_video, key_subtitles)
-import guessit
-from guessit.language import ALL_LANGUAGES
+from .language import language_set, language_list, LANGUAGES
 import logging
 
 
@@ -32,7 +31,8 @@ def list_subtitles(paths, languages=None, services=None, force=True, multi=False
 
     :param paths: path(s) to video file or folder
     :type paths: string or list
-    :param list languages: languages to search for, in preferred order
+    :param languages: languages to search for, in preferred order
+    :type languages: list of :class:`~subliminal.language.Language` or string
     :param list services: services to use for the search, in preferred order
     :param bool force: force searching for subtitles even if some are detected
     :param bool multi: search multiple languages for the same video
@@ -44,7 +44,7 @@ def list_subtitles(paths, languages=None, services=None, force=True, multi=False
 
     """
     services = services or SERVICES
-    languages = set(map(guessit.Language, languages or []) or ALL_LANGUAGES)
+    languages = language_set(languages) if languages is not None else language_set(LANGUAGES)
     if isinstance(paths, basestring):
         paths = [paths]
     if any([not isinstance(p, unicode) for p in paths]):
@@ -68,7 +68,8 @@ def download_subtitles(paths, languages=None, services=None, force=True, multi=F
 
     :param paths: path(s) to video file or folder
     :type paths: string or list
-    :param list languages: languages to search for, in preferred order
+    :param languages: languages to search for, in preferred order
+    :type languages: list of :class:`~subliminal.language.Language` or string
     :param list services: services to use for the search, in preferred order
     :param bool force: force searching for subtitles even if some are detected
     :param bool multi: search multiple languages for the same video
@@ -82,11 +83,11 @@ def download_subtitles(paths, languages=None, services=None, force=True, multi=F
 
     """
     services = services or SERVICES
-    languages = map(guessit.Language, languages or []) or list(ALL_LANGUAGES)
+    languages = language_list(languages) if languages is not None else language_list(LANGUAGES)
     if isinstance(paths, basestring):
         paths = [paths]
     order = order or [LANGUAGE_INDEX, SERVICE_INDEX, SERVICE_CONFIDENCE, MATCHING_CONFIDENCE]
-    subtitles_by_video = list_subtitles(paths, set(languages), services, force, multi, cache_dir, max_depth, scan_filter)
+    subtitles_by_video = list_subtitles(paths, languages, services, force, multi, cache_dir, max_depth, scan_filter)
     for video, subtitles in subtitles_by_video.iteritems():
         subtitles.sort(key=lambda s: key_subtitles(s, video, languages, services, order), reverse=True)
     results = []

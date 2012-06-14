@@ -17,12 +17,11 @@
 # along with subliminal.  If not, see <http://www.gnu.org/licenses/>.
 from . import ServiceBase
 from ..cache import cachedmethod
+from ..language import Language, language_set
 from ..subtitles import get_subtitle_path, ResultSubtitle
+from ..utils import get_keywords
 from ..videos import Episode
 from bs4 import BeautifulSoup
-from guessit.language import lang_set
-from subliminal.utils import get_keywords
-import guessit
 import logging
 import re
 
@@ -49,13 +48,10 @@ def matches(pattern, string):
 class Addic7ed(ServiceBase):
     server_url = 'http://www.addic7ed.com'
     api_based = False
-    languages = lang_set([u'English', u'Italian', u'Portuguese',
-                          u'Portuguese (Brazilian)', u'Romanian',
-                          u'Spanish', u'French', u'Greek', u'Arabic',
-                          u'German', u'Croatian', u'Indonesian', u'Hebrew',
-                          u'Russian', u'Turkish', u'Swedish', u'Czech',
-                          u'Dutch', u'Hungarian', u'Norwegian', u'Polish',
-                          u'Persian'], strict=True)
+    #TODO: Complete this
+    languages = language_set(['ar', 'ca', 'de', 'el', 'en', 'es', 'eu', 'fr', 'ga', 'he', 'hr', 'hu', 'it',
+                              'pl', 'pt', 'ro', 'ru', 'se', 'pt-br'])
+    language_map = {Language('por-BR'): 'Portuguese (Brazilian)', 'Portuguese (Brazilian)': Language('por-BR')}
     videos = [Episode]
     require_video = False
     required_features = ['permissive']
@@ -119,7 +115,7 @@ class Addic7ed(ServiceBase):
                 if 'href' not in link.attrs or not (link['href'].startswith('/original') or link['href'].startswith('/updated')):
                     continue
                 suburl = link['href']
-                lang = guessit.Language(row.find('td', 'language').text.strip())
+                lang = self.get_language(row.find('td', 'language').text.strip())
                 result = {'suburl': suburl, 'language': lang, 'release': release}
                 suburls.append(result)
         return suburls

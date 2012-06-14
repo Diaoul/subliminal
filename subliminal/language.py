@@ -758,7 +758,7 @@ class Country(object):
 
     :param string country: country name, alpha2 code, alpha3 code or numeric code
     :param list countries: all countries
-    :type countries: list of ('alpha2', 'alpha3', 'numeric', 'name')
+    :type countries: see :data:`~subliminal.language.COUNTRIES`
 
     """
     def __init__(self, country, countries=None):
@@ -778,7 +778,7 @@ class Country(object):
 
         # Raise ValueError if nothing is found
         if country_tuple is None:
-            raise ValueError()
+            raise ValueError('Country %s does not exist' % country)
 
         # Set default attrs
         self.alpha2 = country_tuple[0]
@@ -811,12 +811,12 @@ class Language(object):
     """Language according to ISO-639
 
     :param string language: language name (english or french), alpha2 code, alpha3 code, terminologic code or numeric code, eventually with a country
-    :param country: country name, alpha2 code, alpha3 code or numeric code
+    :param country: country of the language
     :type country: :class:`Country` or string
-    :param list languages: all languages
-    :type languages: list of ('alpha3', 'terminologic', 'alpha2', 'name', 'french_name')
-    :param list countries: all countries
-    :type countries: list of ('alpha2', 'alpha3', 'numeric', 'name')
+    :param languages: all languages
+    :type languages: see :data:`~subliminal.language.LANGUAGES`
+    :param countries: all countries
+    :type countries: see :data:`~subliminal.language.COUNTRIES`
     :param bool strict: whether to raise a ValueError on unknown language or not
 
     :class:`Language` implements the inclusion test, with the ``in`` keyword::
@@ -864,7 +864,7 @@ class Language(object):
 
         # Raise ValueError if strict or continue with an empty tuple
         if strict and language_tuple is None:
-            raise ValueError()
+            raise ValueError('Language %s does not exist' % language)
         if language_tuple is None:
             language_tuple = dict((l[0].lower(), l) for l in languages).get('und')
 
@@ -917,10 +917,10 @@ class language_set(set):
     """Set of :class:`Language` with some specificities.
 
     :param iterable: where to take elements from
-    :type iterable: iterable of :class:`Languages <Language>` or strings
-    :param list languages: all languages
-    :type languages: list of ('alpha3', 'terminologic', 'alpha2', 'name', 'french_name')
-    :param bool strict: whether to raise a ValueError on unknown language or not
+    :type iterable: iterable of :class:`Languages <Language>` or string
+    :param languages: all languages
+    :type languages: see :data:`~subliminal.language.LANGUAGES`
+    :param bool strict: whether to raise a ValueError on invalid language or not
 
     The following redefinitions are meant to reflect the inclusion logic in :class:`Language`
 

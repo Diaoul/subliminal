@@ -106,7 +106,7 @@ class ServiceBase(object):
 
     def query(self, *args):
         """Make the actual query"""
-        pass
+        raise NotImplementedError()
 
     def list(self, video, languages):
         """List subtitles
@@ -118,6 +118,10 @@ class ServiceBase(object):
         if not self.check_validity(video, languages):
             return []
         return self.list_checked(video, languages)
+
+    def list_checked(self, video, languages):
+        """List subtitles without having to check parameters for validity"""
+        raise NotImplementedError()
 
     def download(self, subtitle):
         """Download a subtitle"""

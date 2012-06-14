@@ -151,6 +151,9 @@ class Video(object):
     def __repr__(self):
         return '%s(%r)' % (self.__class__.__name__, self.release)
 
+    def __hash__(self):
+        return hash(self.path or self.release)
+
 
 class Episode(Video):
     """Episode :class:`Video`

@@ -80,25 +80,19 @@ class ServiceBase(object):
         """Initialize cache, make sure it is loaded from disk"""
         if not self.config or not self.config.cache:
             raise ServiceError('Cache directory is required')
-
-        service_name = self.__class__.__name__
-        self.config.cache.load(service_name)
+        self.config.cache.load(self.__class__.__name__)
 
     def save_cache(self):
-        service_name = self.__class__.__name__
-        self.config.cache.save(service_name)
+        self.config.cache.save(self.__class__.__name__)
 
     def clear_cache(self):
-        service_name = self.__class__.__name__
-        self.config.cache.clear(service_name)
+        self.config.cache.clear(self.__class__.__name__)
 
     def cache_for(self, func, args, result):
-        service_name = self.__class__.__name__
-        return self.config.cache.cache_for(service_name, func, args, result)
+        return self.config.cache.cache_for(self.__class__.__name__, func, args, result)
 
     def cached_value(self, func, args):
-        service_name = self.__class__.__name__
-        return self.config.cache.cached_value(service_name, func, args)
+        return self.config.cache.cached_value(self.__class__.__name__, func, args)
 
     def terminate(self):
         """Terminate connection"""

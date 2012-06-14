@@ -63,6 +63,7 @@ class ServiceBase(object):
 
     def __init__(self, config=None):
         self.config = config or ServiceConfig()
+        self.session = None
 
     def __enter__(self):
         self.init()

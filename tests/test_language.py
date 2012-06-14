@@ -16,8 +16,39 @@
 #
 # You should have received a copy of the GNU Lesser General Public License
 # along with subliminal.  If not, see <http://www.gnu.org/licenses/>.
-from subliminal.language import Language, Country, language_set
+from subliminal.language import Language, Country, language_set, language_list
 import unittest
+
+
+class LanguageListTestCase(unittest.TestCase):
+    def test_list_contains(self):
+        languages = list([Language('fr'), Language('en-US'), Language('en-GB')])
+        self.assertTrue(Language('fr') in languages)
+        self.assertTrue(Language('en-US') in languages)
+        self.assertTrue(Language('en') not in languages)
+        self.assertTrue(Language('fr-BE') not in languages)
+
+    def test_language_list_contains(self):
+        languages = language_list(['fr', 'en-US', 'en-GB'])
+        self.assertTrue(Language('fr') in languages)
+        self.assertTrue(Language('en-US') in languages)
+        self.assertTrue(Language('en') not in languages)
+        self.assertTrue(Language('fr-BE') in languages)
+
+    def test_list_index(self):
+        languages = [Language('fr'), Language('en-US'), Language('en-GB')]
+        self.assertTrue(languages.index(Language('fr')) == 0)
+        self.assertTrue(languages.index(Language('en-US')) == 1)
+        self.assertTrue(languages.index(Language('en-GB')) == 2)
+        with self.assertRaises(ValueError):
+            languages.index(Language('fr-BE'))
+
+    def test_language_list_index(self):
+        languages = language_list(['fr', 'en-US', 'en-GB'])
+        self.assertTrue(languages.index(Language('fr')) == 0)
+        self.assertTrue(languages.index(Language('en-US')) == 1)
+        self.assertTrue(languages.index(Language('en-GB')) == 2)
+        self.assertTrue(languages.index(Language('fr-BE')) == 0)
 
 
 class LanguageSetTestCase(unittest.TestCase):

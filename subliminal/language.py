@@ -978,3 +978,55 @@ class language_set(set):
             if i not in other:
                 results.add(i)
         return results
+
+
+class language_list(list):
+    """List of :class:`Language` with some specificities.
+
+    :param iterable: where to take elements from
+    :type iterable: iterable of :class:`Languages <Language>` or string
+    :param languages: all languages
+    :type languages: see :data:`~subliminal.language.LANGUAGES`
+    :param bool strict: whether to raise a ValueError on invalid language or not
+
+    The following redefinitions are meant to reflect the inclusion logic in :class:`Language`
+
+    * Inclusion test, with the ``in`` keyword
+    * Index
+
+    Here is an illustration of the previous points::
+
+        >>> Language('en') in language_list(['en-US', 'en-CA'])
+        False
+        >>> Language('en-US') in language_list(['en', 'fr-BE'])
+        True
+        >>> language_list(['en', 'fr-BE']).index(Language('en-US'))
+        0
+
+    """
+    def __init__(self, iterable=None, languages=None, strict=True):
+        iterable = iterable or []
+        languages = languages or LANGUAGES
+        items = []
+        for i in iterable:
+            if isinstance(i, Language):
+                items.append(i)
+                continue
+            if isinstance(i, tuple):
+                items.append(Language(i[0], languages=languages, strict=strict))
+                continue
+            items.append(Language(i, languages=languages, strict=strict))
+        super(language_list, self).__init__(items)
+
+    def __contains__(self, item):
+        for i in self:
+            if item in i:
+                return True
+        return super(language_list, self).__contains__(item)
+
+    def index(self, x, strict=False):
+        if not strict:
+            for i in range(len(self)):
+                if x in self[i]:
+                    return i
+        return super(language_list, self).index(x)

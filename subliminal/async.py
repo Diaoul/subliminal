@@ -138,4 +138,4 @@ class Pool(object):
             self.tasks.put(task)
         self.join()
         results = self.collect()
-        return results
+        return group_by_video(results)

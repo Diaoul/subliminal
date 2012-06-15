@@ -79,7 +79,7 @@ def download_subtitles(paths, languages=None, services=None, force=True, multi=F
     :param order: preferred order for subtitles sorting
     :type list: list of :data:`~subliminal.core.LANGUAGE_INDEX`, :data:`~subliminal.core.SERVICE_INDEX`, :data:`~subliminal.core.SERVICE_CONFIDENCE`, :data:`~subliminal.core.MATCHING_CONFIDENCE`
     :return: downloaded subtitles
-    :rtype: list of (:class:`~subliminal.videos.Video`, [:class:`~subliminal.subtitles.ResultSubtitle`])
+    :rtype: dict of :class:`~subliminal.videos.Video` => [:class:`~subliminal.subtitles.ResultSubtitle`]
 
     """
     services = services or SERVICES
@@ -101,4 +101,4 @@ def download_subtitles(paths, languages=None, services=None, force=True, multi=F
             logger.error(u'Error consuming task %r' % task, exc_info=True)
     for service_instance in service_instances.itervalues():
         service_instance.terminate()
-    return results
+    return group_by_video(results)

@@ -123,18 +123,18 @@ class ServiceBase(object):
 
         It uses the :data:`language_map` and if there's no match, uses the
         given code as ``language`` parameter for the :class:`~subliminal.language.Language`
-        constructor.
+        constructor
 
         .. note::
 
             A warning is emitted if the generated :class:`~subliminal.language.Language`
-            is "Undefined"
+            is "Undetermined"
 
         """
         if code in self.language_map:
             return self.language_map[code]
         language = Language(code, strict=False)
-        if language == Language('Undefined'):
+        if language == Language('Undetermined'):
             logger.warning(u'Code %s could not be identified as a language for %s' % (code, self.__class__.__name__))
         return language
 

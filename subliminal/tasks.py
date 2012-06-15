@@ -55,7 +55,7 @@ class DownloadTask(Task):
 
     """
     def __init__(self, video, subtitles):
-        super(ListTask, self).__init__()
+        super(DownloadTask, self).__init__()
         self.video = video
         self.subtitles = subtitles
 

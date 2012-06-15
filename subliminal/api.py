@@ -78,7 +78,7 @@ def download_subtitles(paths, languages=None, services=None, force=True, multi=F
     :param function scan_filter: filter function that takes a path as argument and returns a boolean indicating whether it has to be filtered out (``True``) or not (``False``)
     :param order: preferred order for subtitles sorting
     :type list: list of :data:`~subliminal.core.LANGUAGE_INDEX`, :data:`~subliminal.core.SERVICE_INDEX`, :data:`~subliminal.core.SERVICE_CONFIDENCE`, :data:`~subliminal.core.MATCHING_CONFIDENCE`
-    :return: found subtitles
+    :return: downloaded subtitles
     :rtype: list of (:class:`~subliminal.videos.Video`, [:class:`~subliminal.subtitles.ResultSubtitle`])
 
     """
@@ -96,7 +96,7 @@ def download_subtitles(paths, languages=None, services=None, force=True, multi=F
     for task in tasks:
         try:
             result = consume_task(task, service_instances)
-            results.append(result)
+            results.append((task.video, result))
         except:
             logger.error(u'Error consuming task %r' % task, exc_info=True)
     for service_instance in service_instances.itervalues():

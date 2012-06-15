@@ -16,7 +16,7 @@
 #
 # You should have received a copy of the GNU Lesser General Public License
 # along with subliminal.  If not, see <http://www.gnu.org/licenses/>.
-from subliminal import Pool
+from subliminal import Pool, list_subtitles, download_subtitles
 import os
 import time
 import unittest
@@ -26,6 +26,17 @@ cache_dir = u'/tmp/sublicache'
 if not os.path.exists(cache_dir):
     os.mkdir(cache_dir)
 existing_video = u'/something/The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.mp4'
+
+
+class ApiTestCase(unittest.TestCase):
+    def test_list_subtitles(self):
+        results = list_subtitles(existing_video, languages=['en', 'fr'], cache_dir=cache_dir, max_depth=3)
+        self.assertTrue(len(results) > 0)
+
+    def test_download_subtitles(self):
+        subtitle = download_subtitles(existing_video, languages=['en', 'fr'], cache_dir=cache_dir, max_depth=3)[0][1]
+        self.assertTrue(os.path.exists(subtitle.path))
+        os.remove(subtitle.path)
 
 
 class AsyncTestCase(unittest.TestCase):
@@ -50,8 +61,9 @@ class AsyncTestCase(unittest.TestCase):
 
     def test_download_subtitles(self):
         with Pool(4) as p:
-            results = p.download_subtitles(existing_video, languages=['en', 'fr'], cache_dir=cache_dir, max_depth=3)
-        self.assertTrue(len(results) > 0)
+            subtitle = p.download_subtitles(existing_video, languages=['en', 'fr'], cache_dir=cache_dir, max_depth=3)[0][1]
+        self.assertTrue(os.path.exists(subtitle.path))
+        os.remove(subtitle.path)
 
 
 if __name__ == '__main__':

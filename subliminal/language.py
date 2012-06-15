@@ -804,7 +804,7 @@ class Country(object):
         return unicode(self).encode('utf-8')
 
     def __repr__(self):
-        return 'Country(%s)' % self.name
+        return 'Country(%s)' % self
 
 
 class Language(object):
@@ -909,8 +909,8 @@ class Language(object):
 
     def __repr__(self):
         if self.country is None:
-            return 'Language(%s)' % self.name
-        return 'Language(%s, country=%s)' % (self.name, self.country)
+            return 'Language(%s)' % self.name.encode('utf-8')
+        return 'Language(%s, country=%s)' % (self.name.encode('utf-8'), self.country)
 
 
 class language_set(set):

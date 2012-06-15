@@ -31,8 +31,8 @@ Download english subtitles::
 
     $ subliminal -l en The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.mp4
     **************************************************
-    Downloaded 1 subtitles
-    (Episode(u'The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.mp4'), ResultSubtitle(en, opensubtitles, 0.33, The.Big.Bang.Theory.S05E18.HDTV-LOL.srt))
+    Downloaded 1 subtitle(s) for 1 video(s)
+    The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.srt from opensubtitles
     **************************************************
 
 Module
@@ -45,5 +45,5 @@ Multi-threaded use
 ^^^^^^^^^^^^^^^^^^
 Use 4 workers to achieve the same result::
 
-	>>> with subliminal.Pool(4) as p:
-	... 	p.list_subtitles('The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.mp4', ['en'])
+    >>> with subliminal.Pool(4) as p:
+    ...     p.list_subtitles('The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.mp4', ['en'])

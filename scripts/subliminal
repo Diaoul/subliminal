@@ -17,11 +17,11 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with subliminal.  If not, see <http://www.gnu.org/licenses/>.
 import argparse
-import subliminal
+import datetime
 import logging
 import os
 import re
-import datetime
+import subliminal
 import sys
 
 
@@ -79,19 +79,19 @@ def main():
 
     # Download subtitles
     with subliminal.Pool(args.workers) as p:
-        subtitles = p.download_subtitles(paths, languages=args.languages,
-                             services=args.services, cache_dir=args.cache_dir,
-                             force=args.force, multi=args.multi, scan_filter=scan_filter)
+        results = p.download_subtitles(paths, languages=args.languages, services=args.services, cache_dir=args.cache_dir,
+                                       force=args.force, multi=args.multi, scan_filter=scan_filter)
 
-    if not subtitles:
+    if not results:
         if not args.quiet:
             sys.stderr.write('No subtitles downloaded\n')
         exit(1)
     if not args.quiet:
         print '*' * 50
-        print 'Downloaded %d subtitles' % len(subtitles)
-        for subtitle in subtitles:
-            print subtitle
+        print 'Downloaded %d subtitle(s) for %d video(s)' % (sum([len(s) for s in results.itervalues()]), len(results))
+        for _, subtitles in results.iteritems():
+            for subtitle in subtitles:
+                print '%s from %s' % (subtitle.path, subtitle.service)
         print '*' * 50
 
 

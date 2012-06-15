@@ -100,6 +100,7 @@ html_theme = 'diaoul'
 # documentation.
 html_theme_options = {'github_user': 'Diaoul',
                       'github_repo': 'subliminal',
+                      'github_branch': 'develop',
                       'fork_me': 1,
                       'flattr_href': 'http://subliminal.readthedocs.org/',
                       'flattr_thing_url': 'http://flattr.com/thing/629842/Subliminal'}
@@ -138,7 +139,7 @@ html_static_path = ['_static']
 
 # Custom sidebar templates, maps document names to template names.
 html_sidebars = {
-    'index':    ['sidebar-intro.html', 'sidebar-watch.html', 'sidebar-donate.html', 'localtoc.html', 'sidebar-links.html', 'searchbox.html'],
+    'index':    ['sidebar-intro.html', 'sidebar-watch.html', 'sidebar-travis-ci.html', 'sidebar-donate.html', 'localtoc.html', 'sidebar-links.html', 'searchbox.html'],
     '**':       ['localtoc.html', 'relations.html', 'sourcelink.html']
     }
 

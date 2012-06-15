@@ -1,6 +1,21 @@
 News
 ====
 
+0.6.0
+-----
+**release date:**
+**WARNING:** Backward incompatible changes
+
+* Fix --workers option in CLI
+* Use a dedicated module for languages
+* Use beautifulsoup4
+* Improve return types
+* Add scan_filter option
+* Add --age option in CLI
+* Add TvSubtitles service
+* Add Addic7ed service
+
+
 0.5.1
 -----
 **release date:** 2012-03-25

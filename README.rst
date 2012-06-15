@@ -1,5 +1,8 @@
 Subliminal
 ==========
+
+.. image:: https://secure.travis-ci.org/Diaoul/subliminal.png?branch=develop
+
 Subliminal is a python library to search and download subtitles.
 
 It uses video hashes and the powerful `guessit <http://guessit.readthedocs.org/>`_ library

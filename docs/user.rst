@@ -1,5 +1,4 @@
-There are 4 different ways of using subliminal and each one
-is described in a dedicated section below.
+There are 4 different ways of using subliminal and each one is described in a dedicated section below.
 
 First, here are some basics
 
@@ -14,22 +13,22 @@ Current available services are available in the :data:`subliminal.SERVICES` vari
 
 Languages
 ^^^^^^^^^
-Subliminal supports multiple languages that are represented with their extended ISO 639-1 code.
-The current extensions to the ISO 639-1 are:
-
-* *pb* for Portuguese Brazilian
+Subliminal supports multiple languages representations based on `ISO-639 <http://en.wikipedia.org/wiki/ISO_639>`_
+and `ISO-3166 <http://en.wikipedia.org/wiki/ISO_3166>`_. Any single ISO-639 string or combination of ISO-639 and
+ISO-3166 is acceptable. For example, you can use ``pt-br`` for Portuguese (Brazil) or ``en`` for English.
 
 Paths
 ^^^^^
 All paths parameters in subliminal most commont functions can be either *a file path*,
 *a file name* or a *folder path*
 
-* File path (existing): hashes of the file will be computed and used during the search for services that supports
-  this functionnality.
-* File name (or non-existing file path): the guessit python library will be used to guess informations and a text-based search will
-  be done with services.
-* Folder path (containing video files): the given folder will be searched for video files using their :data:`~subliminal.videos.MIMETYPES`
-  and/or :data:`~subliminal.videos.EXTENSIONS`. The default maximum depth to scan is 3
+* File path (existing): hashes of the file will be computed and used during the search for services that
+  supports this functionnality.
+* File name (or non-existing file path): the guessit python library will be used to guess informations
+  and a text-based search will be done with services.
+* Folder path (containing video files): the given folder will be searched for video files using their
+  :data:`~subliminal.videos.MIMETYPES` and/or :data:`~subliminal.videos.EXTENSIONS`.
+  The default maximum depth to scan is 3
 
 CLI
 ---
@@ -117,9 +116,3 @@ that takes care of that for you::
 
     >>> with subliminal.Pool(4) as p:
     ...     p.list_subtitles('The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.mp4', ['en'])
-
-
-* from the command line
-* basic functions :func:`~subliminal.list_subtitles` and :func:`~subliminal.download_subtitles`
-* multi-threaded :class:`~subliminal.async.Pool` which implements the abovementioned functions
-* using your own algorithm that produces and gather results of elementary :class:`~subliminal.tasks.Task`

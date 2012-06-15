@@ -145,7 +145,6 @@ class Video(object):
                         lang = guessit.Language(possible_lang)
                         if lang:
                             results.append(subtitles.ExternalSubtitle(path, lang))
-
         return results
 
     def __repr__(self):

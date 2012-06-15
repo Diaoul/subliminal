@@ -17,10 +17,10 @@
 # along with subliminal.  If not, see <http://www.gnu.org/licenses/>.
 from . import ServiceBase
 from ..exceptions import ServiceError, DownloadFailedError
+from ..language import language_set, Language
 from ..subtitles import get_subtitle_path, ResultSubtitle
 from ..utils import to_unicode
 from ..videos import Episode, Movie
-from ..language import language_set, Language
 from hashlib import md5, sha256
 import logging
 import xmlrpclib

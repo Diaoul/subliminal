@@ -16,9 +16,9 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with subliminal.  If not, see <http://www.gnu.org/licenses/>.
 from . import ServiceBase
+from ..language import language_set
 from ..subtitles import get_subtitle_path, ResultSubtitle
 from ..videos import Episode, Movie, UnknownVideo
-from ..language import language_set
 import logging
 
 

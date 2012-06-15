@@ -15,10 +15,10 @@
 #
 # You should have received a copy of the GNU Lesser General Public License
 # along with subliminal.  If not, see <http://www.gnu.org/licenses/>.
-from .. import cache
-from ..exceptions import MissingLanguageError, DownloadFailedError, ServiceError
-from ..subtitles import EXTENSIONS
+from ..cache import Cache
+from ..exceptions import DownloadFailedError, ServiceError
 from ..language import language_set, Language
+from ..subtitles import EXTENSIONS
 import logging
 import os
 import requests
@@ -242,7 +242,7 @@ class ServiceConfig(object):
         self.cache_dir = cache_dir
         self.cache = None
         if cache_dir is not None:
-            self.cache = cache.Cache(cache_dir)
+            self.cache = Cache(cache_dir)
 
     def __repr__(self):
         return 'ServiceConfig(%r, %s)' % (self.multi, self.cache.cache_dir)

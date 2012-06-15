@@ -20,9 +20,9 @@ from .services import ServiceConfig
 from .tasks import DownloadTask, ListTask
 from .utils import get_keywords
 from .videos import Episode, Movie, scan
-import bs4
 from collections import defaultdict
 from itertools import groupby
+import bs4
 import guessit
 import logging
 
@@ -138,7 +138,6 @@ def consume_task(task, services=None):
             except DownloadFailedError:
                 logger.warning(u'Could not download subtitle %r, trying next' % subtitle)
                 continue
-
         if result is None:
             logger.error(u'No subtitles could be downloaded for video %r' % task.video)
     return result

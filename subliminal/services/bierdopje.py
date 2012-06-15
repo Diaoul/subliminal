@@ -37,7 +37,7 @@ logger = logging.getLogger(__name__)
 class BierDopje(ServiceBase):
     server_url = 'http://api.bierdopje.com/A2B638AC5D804C2E/'
     api_based = True
-    languages = language_set(['en', 'nl'])
+    languages = language_set(['eng', 'dut'])
     videos = [Episode]
     require_video = False
     required_features = ['xml']

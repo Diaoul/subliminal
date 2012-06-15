@@ -16,19 +16,19 @@
 #
 # You should have received a copy of the GNU Lesser General Public License
 # along with subliminal.  If not, see <http://www.gnu.org/licenses/>.
+from guessit.slogging import setupLogging
 from subliminal import videos
 from subliminal.exceptions import ServiceError
+from subliminal.language import language_set, LANGUAGES
 from subliminal.services import ServiceConfig
+from subliminal.services.addic7ed import Addic7ed
 from subliminal.services.bierdopje import BierDopje
 from subliminal.services.opensubtitles import OpenSubtitles
+from subliminal.services.podnapisi import Podnapisi
 from subliminal.services.subswiki import SubsWiki
 from subliminal.services.subtitulos import Subtitulos
 from subliminal.services.thesubdb import TheSubDB
 from subliminal.services.tvsubtitles import TvSubtitles
-from subliminal.services.addic7ed import Addic7ed
-from subliminal.services.podnapisi import Podnapisi
-from guessit.slogging import setupLogging
-from guessit.language import lang_set
 import logging
 import os
 import sys
@@ -46,6 +46,9 @@ existing_video = u'/something/The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.mp4'
 
 
 class ServiceTestCase(unittest.TestCase):
+    def setUp(self):
+        self.wrong_languages = language_set(list(language_set(LANGUAGES) - self.service.languages)[:2])
+
     def tearDown(self):
         # Setting config to None allows to delete the object, which will in turn save the cache
         self.config = None
@@ -86,7 +89,7 @@ class ServiceTestCase(unittest.TestCase):
     def test_download_episode(self):
         video = videos.Video.from_path(self.episode_path)
         with self.service(self.config) as service:
-            subtitle = service.list(video, lang_set([self.episode_sublanguage]))[0]
+            subtitle = service.list(video, language_set([self.episode_sublanguage]))[0]
             if os.path.exists(subtitle.path):
                 os.remove(subtitle.path)
             service.download(subtitle)
@@ -97,7 +100,7 @@ class ServiceTestCase(unittest.TestCase):
     def test_download_movie(self):
         video = videos.Video.from_path(self.movie_path)
         with self.service(self.config) as service:
-            subtitle = service.list(video, lang_set([self.movie_sublanguage]))[0]
+            subtitle = service.list(video, language_set([self.movie_sublanguage]))[0]
             if os.path.exists(subtitle.path):
                 os.remove(subtitle.path)
             service.download(subtitle)
@@ -124,13 +127,13 @@ class Addic7edTestCase(ServiceTestCase):
     list_tests = ['test_list_episode', 'test_list_wrong_languages']
     download_tests = ['test_download_episode']
     cache_tests = ['test_cached_series']
+    service = Addic7ed
 
     def setUp(self):
-        self.service = Addic7ed
+        super(Addic7edTestCase, self).setUp()
         self.config = ServiceConfig(multi=True, cache_dir=cache_dir)
         self.fake_file = u'/tmp/fake_file'
-        self.languages = lang_set(['en', 'fr'])
-        self.wrong_languages = lang_set(['zz', 'ay'])
+        self.languages = language_set(['en', 'fr'])
         self.episode_path = u'The Big Bang Theory/Season 05/The.Big.Bang.Theory.S05E06.HDTV.XviD-ASAP.mkv'
         self.episode_sublanguage = 'en'
         # FIXME: this is the size of the first subtitle that appears on the page
@@ -165,9 +168,10 @@ class BierDopjeTestCase(ServiceTestCase):
     list_tests = ['test_list_episode', 'test_list_wrong_languages']
     download_tests = ['test_download_episode']
     cache_tests = ['test_cached_series']
+    service = BierDopje
 
     def setUp(self):
-        self.service = BierDopje
+        super(BierDopjeTestCase, self).setUp()
         self.config = ServiceConfig(multi=True, cache_dir=cache_dir)
         self.episode_path = u'The Big Bang Theory/Season 05/S05E06 - The Rhinitis Revelation - HD TV.mkv'
         self.episode_sublanguage = 'en'
@@ -175,8 +179,7 @@ class BierDopjeTestCase(ServiceTestCase):
         self.movie_path = u'Inception (2010)/Inception - 1080p.mkv'
         self.movie_sublanguage = 'en'
         self.movie_subfilesizes = []
-        self.languages = lang_set(['en', 'nl'])
-        self.wrong_languages = lang_set(['zz', 'es'])
+        self.languages = language_set(['en', 'nl'])
         self.fake_file = u'/tmp/fake_file'
         self.series = 'The Big Bang Theory'
         self.episode_keywords = set()
@@ -235,16 +238,16 @@ class OpenSubtitlesTestCase(ServiceTestCase):
     list_tests = ['test_list_episode', 'test_list_wrong_languages']
     download_tests = ['test_download_episode']
     cache_tests = []
+    service = OpenSubtitles
 
     def setUp(self):
-        self.service = OpenSubtitles
+        super(OpenSubtitlesTestCase, self).setUp()
         self.config = ServiceConfig(multi=True, cache_dir=cache_dir)
-        self.languages = lang_set(['en', 'fr'])
-        self.wrong_languages = lang_set(['zz', 'yy'])
+        self.languages = language_set(['en', 'fr'])
         self.fake_file = u'/tmp/fake_file'
         self.episode_path = existing_video
         self.episode_sublanguage = 'en'
-        self.episode_subfilesizes = [33547, 33563, 33601]
+        self.episode_subfilesizes = [33585, 33547, 33563, 33601]
         self.movie = 'Inception'
         self.imdbid = '1375666'
         self.wrong_imdbid = '9999999'
@@ -277,12 +280,12 @@ class PodnapisiTestCase(ServiceTestCase):
     list_tests = [] #'test_list', 'test_list_wrong_languages'
     download_tests = [] #'test_download'
     cache_tests = []
+    service = Podnapisi
 
     def setUp(self):
-        self.service = Podnapisi
+        super(PodnapisiTestCase, self).setUp()
         self.config = ServiceConfig(multi=True, cache_dir=cache_dir)
-        self.languages = lang_set(['en', 'fr'])
-        self.wrong_languages = lang_set(['zz', 'yy'])
+        self.languages = language_set(['en', 'fr'])
         self.fake_file = u'/tmp/fake_file'
         self.path = existing_video
         self.hash = 'e1b45885346cfa0b'
@@ -303,13 +306,13 @@ class SubsWikiTestCase(ServiceTestCase):
     list_tests = ['test_list_episode', 'test_list_movie', 'test_list_wrong_languages']
     download_tests = ['test_download_episode', 'test_download_movie']
     cache_tests = []
+    service = SubsWiki
 
     def setUp(self):
-        self.service = SubsWiki
+        super(SubsWikiTestCase, self).setUp()
         self.config = ServiceConfig(multi=True, cache_dir=cache_dir)
         self.fake_file = u'/tmp/fake_file'
-        self.languages = lang_set(['en', 'es'])
-        self.wrong_languages = lang_set(['zz', 'ay'])
+        self.languages = language_set(['en', 'es'])
         self.movie_path = u'Soul Surfer (2011)/Soul.Surfer.(2011).DVDRip.XviD-TWiZTED.mkv'
         self.movie_sublanguage = 'es'
         self.movie_subfilesizes = [87528]
@@ -356,13 +359,13 @@ class SubtitulosTestCase(ServiceTestCase):
     list_tests = ['test_list_episode', 'test_list_wrong_languages']
     download_tests = ['test_download_episode']
     cache_tests = []
+    service = Subtitulos
 
     def setUp(self):
-        self.service = Subtitulos
+        super(SubtitulosTestCase, self).setUp()
         self.config = ServiceConfig(multi=True, cache_dir=cache_dir)
         self.fake_file = u'/tmp/fake_file'
-        self.languages = lang_set(['en', 'es'])
-        self.wrong_languages = lang_set(['zz', 'ay'])
+        self.languages = language_set(['en', 'es'])
         self.episode_path = u'The Big Bang Theory/Season 05/The.Big.Bang.Theory.S05E06.HDTV.XviD-ASAP.mkv'
         self.episode_sublanguage = 'en'
         self.episode_subfilesizes = [32986]
@@ -393,16 +396,16 @@ class TheSubDBTestCase(ServiceTestCase):
     list_tests = ['test_list_episode', 'test_list_wrong_languages']
     download_tests = ['test_download_episode']
     cache_tests = []
+    service = TheSubDB
 
     def setUp(self):
-        self.service = TheSubDB
+        super(TheSubDBTestCase, self).setUp()
         self.config = ServiceConfig(multi=True, cache_dir=cache_dir)
         self.episode_path = existing_video
         self.episode_sublanguage = 'en'
         self.episode_subfilesizes = [33536]
         self.hash = u'edc1981d6459c6111fe36205b4aff6c2'
-        self.languages = lang_set(['en', 'nl'])
-        self.wrong_languages = lang_set(['zz', 'cs'])
+        self.languages = language_set(['en', 'nl'])
         self.fake_file = u'/tmp/fake_file'
 
     def test_query(self):
@@ -429,13 +432,13 @@ class TvSubtitlesTestCase(ServiceTestCase):
     list_tests = ['test_list_episode', 'test_list_wrong_languages']
     download_tests = ['test_download_episode']
     cache_tests = ['test_cached_series']
+    service = TvSubtitles
 
     def setUp(self):
-        self.service = TvSubtitles
+        super(TvSubtitlesTestCase, self).setUp()
         self.config = ServiceConfig(multi=True, cache_dir=cache_dir)
         self.fake_file = u'/tmp/fake_file'
-        self.languages = lang_set(['en', 'es'])
-        self.wrong_languages = lang_set(['zz', 'ay'])
+        self.languages = language_set(['en', 'es'])
         self.episode_path = u'The Big Bang Theory/Season 05/The.Big.Bang.Theory.S05E06.HDTV.XviD-ASAP.mkv'
         self.episode_sublanguage = 'en'
         self.episode_subfilesizes = [33078]

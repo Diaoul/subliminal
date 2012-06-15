@@ -862,10 +862,10 @@ class Language(object):
         if language_tuple is None:
             language_tuple = dict((l[4].split('; ')[0].lower(), l) for l in languages).get(language)
 
-        # Raise ValueError if strict or continue with an empty tuple
-        if strict and language_tuple is None:
-            raise ValueError('Language %s does not exist' % language)
+        # Raise ValueError if strict or continue with Undetermined
         if language_tuple is None:
+            if strict:
+                raise ValueError('Language %s does not exist' % language)
             language_tuple = dict((l[0].lower(), l) for l in languages).get('und')
 
         # Set attributes

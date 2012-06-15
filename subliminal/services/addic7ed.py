@@ -51,7 +51,7 @@ class Addic7ed(ServiceBase):
     #TODO: Complete this
     languages = language_set(['ar', 'ca', 'de', 'el', 'en', 'es', 'eu', 'fr', 'ga', 'he', 'hr', 'hu', 'it',
                               'pl', 'pt', 'ro', 'ru', 'se', 'pt-br'])
-    language_map = {Language('por-BR'): 'Portuguese (Brazilian)', 'Portuguese (Brazilian)': Language('por-BR')}
+    language_map = {'Portuguese (Brazilian)': Language('por-BR'), 'Greek': Language('gre')}
     videos = [Episode]
     require_video = False
     required_features = ['permissive']
@@ -131,21 +131,18 @@ class Addic7ed(ServiceBase):
         except KeyError:
             logger.debug(u'Could not find series id for %s' % series)
             return []
-
         try:
             ep_url = self.get_episode_url(sid, season, episode)
         except KeyError:
             logger.debug(u'Could not find episode id for %s season %d episode %d' % (series, season, episode))
             return []
         suburls = self.get_sub_urls(ep_url)
-
         # filter the subtitles with our queried languages
         subtitles = []
         for suburl in suburls:
             language = suburl['language']
             if language not in languages:
                 continue
-
             path = get_subtitle_path(filepath, language, self.config.multi)
             subtitle = ResultSubtitle(path, language, self.__class__.__name__.lower(),
                                       '%s/%s' % (self.server_url, suburl['suburl']),

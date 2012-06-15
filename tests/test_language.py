@@ -86,7 +86,7 @@ class LanguageTestCase(unittest.TestCase):
         self.assertTrue(language.alpha3 == 'fre')
         self.assertTrue(language.terminologic == 'fra')
         self.assertTrue(language.name == 'French')
-        self.assertTrue(language.french_name == 'français')
+        self.assertTrue(language.french_name == u'français')
 
     def test_eq(self):
         language = Language('French')
@@ -118,23 +118,26 @@ class LanguageTestCase(unittest.TestCase):
         self.assertTrue(Language('Portuguese') != Language('Portuguese (BR)'))
         self.assertTrue(Language('English (US)') != Language('English (GB)'))
 
+    def test_hash(self):
+        self.assertTrue(hash(Language('French')) == hash('fre'))
+
     def test_missing(self):
         with self.assertRaises(ValueError):
             Language('zzz')
 
 
 class CountryTestCase(unittest.TestCase):
-    def test_eq(self):
-        country = Country('France')
-        self.assertTrue(country == Country('FR'))
-        self.assertTrue(country == Country('FRA'))
-        self.assertTrue(country == Country('250'))
-
     def test_attrs(self):
         country = Country('France')
         self.assertTrue(country.alpha2 == 'FR')
         self.assertTrue(country.alpha3 == 'FRA')
         self.assertTrue(country.name == 'France')
+
+    def test_eq(self):
+        country = Country('France')
+        self.assertTrue(country == Country('FR'))
+        self.assertTrue(country == Country('FRA'))
+        self.assertTrue(country == Country('250'))
 
     def test_ne(self):
         self.assertTrue(Country('France') != Country('GB'))
@@ -147,5 +150,14 @@ class CountryTestCase(unittest.TestCase):
             Country('ZZ')
 
 
+def suite():
+    suite = unittest.TestSuite()
+    suite.addTest(unittest.TestLoader().loadTestsFromTestCase(CountryTestCase))
+    suite.addTest(unittest.TestLoader().loadTestsFromTestCase(LanguageTestCase))
+    suite.addTest(unittest.TestLoader().loadTestsFromTestCase(LanguageSetTestCase))
+    suite.addTest(unittest.TestLoader().loadTestsFromTestCase(LanguageListTestCase))
+    return suite
+
+
 if __name__ == '__main__':
-    unittest.main()
+    unittest.TextTestRunner().run(suite())

@@ -16,7 +16,6 @@
 #
 # You should have received a copy of the GNU Lesser General Public License
 # along with subliminal.  If not, see <http://www.gnu.org/licenses/>.
-from guessit.slogging import setupLogging
 from subliminal import videos
 from subliminal.exceptions import ServiceError
 from subliminal.language import language_set, LANGUAGES
@@ -29,7 +28,6 @@ from subliminal.services.subswiki import SubsWiki
 from subliminal.services.subtitulos import Subtitulos
 from subliminal.services.thesubdb import TheSubDB
 from subliminal.services.tvsubtitles import TvSubtitles
-import logging
 import os
 import sys
 import unittest
@@ -53,6 +51,7 @@ class ServiceTestCase(unittest.TestCase):
         # Setting config to None allows to delete the object, which will in turn save the cache
         self.config = None
 
+    @unittest.skipUnless(sys.platform.startswith("win"), "requires Windows")
     def test_query_series(self):
         with self.service(self.config) as service:
             results = service.query(service, self.fake_file, self.languages, self.episode_keywords, self.series, self.season, self.episode)
@@ -139,7 +138,7 @@ class Addic7edTestCase(ServiceTestCase):
         # FIXME: this is the size of the first subtitle that appears on the page
         # which is the original one, not the most updated one. We should make
         # sure the Addic7ed service picks up the most recent one instead
-        self.episode_subfilesizes = [33538]
+        self.episode_subfilesizes = [33538, 33643]
         self.episode_keywords = set(['asap', 'hdtv'])
         self.series = 'The Big Bang Theory'
         self.wrong_series = 'No Existent Show Name'
@@ -496,13 +495,9 @@ def cache_suite():
     return suite
 
 
+def suite():
+    return unittest.TestSuite([query_suite(), list_suite(), download_suite(), cache_suite()])
+
+
 if __name__ == '__main__':
-    if len(sys.argv) > 1 and sys.argv[1] == '-v':
-        setupLogging()
-        logging.getLogger().setLevel(logging.DEBUG)
-    suites = []
-    suites.append(query_suite())
-    suites.append(list_suite())
-    suites.append(download_suite())
-    suites.append(cache_suite())
-    unittest.TextTestRunner(verbosity=2).run(unittest.TestSuite(suites))
+    unittest.TextTestRunner(verbosity=2).run(suite())

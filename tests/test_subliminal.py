@@ -34,9 +34,24 @@ class ApiTestCase(unittest.TestCase):
         self.assertTrue(len(results) > 0)
 
     def test_download_subtitles(self):
-        subtitle = download_subtitles(existing_video, languages=['en', 'fr'], cache_dir=cache_dir, max_depth=3)[0][1]
-        self.assertTrue(os.path.exists(subtitle.path))
-        os.remove(subtitle.path)
+        results = download_subtitles(existing_video, languages=['en', 'fr'], cache_dir=cache_dir, max_depth=3)
+        self.assertTrue(len(results) == 1)
+        for video, subtitles in results.iteritems():
+            self.assertTrue(video.release == existing_video)
+            self.assertTrue(len(subtitles) == 1)
+            for subtitle in subtitles:
+                self.assertTrue(os.path.exists(subtitle.path))
+                os.remove(subtitle.path)
+
+    def test_download_multi_subtitles(self):
+        results = download_subtitles(existing_video, languages=['en', 'fr'], cache_dir=cache_dir, max_depth=3, multi=True)
+        self.assertTrue(len(results) == 1)
+        for video, subtitles in results.iteritems():
+            self.assertTrue(video.release == existing_video)
+            self.assertTrue(len(subtitles) == 2)
+            for subtitle in subtitles:
+                self.assertTrue(os.path.exists(subtitle.path))
+                os.remove(subtitle.path)
 
 
 class AsyncTestCase(unittest.TestCase):
@@ -61,10 +76,22 @@ class AsyncTestCase(unittest.TestCase):
 
     def test_download_subtitles(self):
         with Pool(4) as p:
-            subtitle = p.download_subtitles(existing_video, languages=['en', 'fr'], cache_dir=cache_dir, max_depth=3)[0][1]
-        self.assertTrue(os.path.exists(subtitle.path))
-        os.remove(subtitle.path)
+            results = p.download_subtitles(existing_video, languages=['en', 'fr'], cache_dir=cache_dir, max_depth=3)
+        self.assertTrue(len(results) == 1)
+        for video, subtitles in results.iteritems():
+            self.assertTrue(video.release == existing_video)
+            self.assertTrue(len(subtitles) == 1)
+            for subtitle in subtitles:
+                self.assertTrue(os.path.exists(subtitle.path))
+                os.remove(subtitle.path)
+
+
+def suite():
+    suite = unittest.TestSuite()
+    suite.addTest(unittest.TestLoader().loadTestsFromTestCase(ApiTestCase))
+    suite.addTest(unittest.TestLoader().loadTestsFromTestCase(AsyncTestCase))
+    return suite
 
 
 if __name__ == '__main__':
-    unittest.main()
+    unittest.TextTestRunner().run(suite())

@@ -118,7 +118,7 @@ def consume_task(task, services=None):
     :type task: :class:`~subliminal.tasks.ListTask` or :class:`~subliminal.tasks.DownloadTask`
     :param dict services: mapping between the service name and an instance of this service
     :return: the result of the task
-    :rtype: list of :class:`~subliminal.subtitles.ResultSubtitle` or :class:`~subliminal.subtitles.Subtitle`
+    :rtype: list of :class:`~subliminal.subtitles.ResultSubtitle`
 
     """
     if services is None:
@@ -133,7 +133,7 @@ def consume_task(task, services=None):
             service = get_service(services, subtitle.service)
             try:
                 service.download(subtitle)
-                result = subtitle
+                result = [subtitle]
                 break
             except DownloadFailedError:
                 logger.warning(u'Could not download subtitle %r, trying next' % subtitle)

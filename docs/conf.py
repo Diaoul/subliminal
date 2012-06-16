@@ -93,12 +93,17 @@ pygments_style = 'sphinx'
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'flask'
+html_theme = 'diaoul'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
-#html_theme_options = {}
+html_theme_options = {'github_user': 'Diaoul',
+                      'github_repo': 'subliminal',
+                      'github_branch': 'develop',
+                      'fork_me': 1,
+                      'flattr_href': 'http://subliminal.readthedocs.org/',
+                      'flattr_thing_url': 'http://flattr.com/thing/629842/Subliminal'}
 
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = ['_themes']
@@ -134,7 +139,7 @@ html_static_path = ['_static']
 
 # Custom sidebar templates, maps document names to template names.
 html_sidebars = {
-    'index':    ['sidebar-intro.html', 'sidebar-watch.html', 'localtoc.html', 'sidebar-links.html', 'searchbox.html'],
+    'index':    ['sidebar-intro.html', 'sidebar-watch.html', 'sidebar-travis-ci.html', 'sidebar-donate.html', 'localtoc.html', 'sidebar-links.html', 'searchbox.html'],
     '**':       ['localtoc.html', 'relations.html', 'sourcelink.html']
     }
 
@@ -245,3 +250,6 @@ texinfo_documents = [
 
 # How to display URL addresses: 'footnote', 'no', or 'inline'.
 #texinfo_show_urls = 'footnote'
+
+# -- Options for autodoc -------------------------------------------------------
+autodoc_member_order = 'bysource'

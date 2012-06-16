@@ -1,5 +1,4 @@
-There are 4 different ways of using subliminal and each one
-is described in a dedicated section below.
+There are 4 different ways of using subliminal and each one is described in a dedicated section below.
 
 First, here are some basics
 
@@ -14,32 +13,38 @@ Current available services are available in the :data:`subliminal.SERVICES` vari
 
 Languages
 ^^^^^^^^^
-Subliminal supports multiple languages that are represented with their extended ISO 639-1 code.
-The current extensions to the ISO 639-1 are:
-
-* *po* for Brazilian Portuguese
+Subliminal supports multiple languages representations based on `ISO-639 <http://en.wikipedia.org/wiki/ISO_639>`_
+and `ISO-3166 <http://en.wikipedia.org/wiki/ISO_3166>`_. Any single ISO-639 string or combination of ISO-639 and
+ISO-3166 is acceptable. For example, you can use ``pt-br`` for Portuguese (Brazil) or ``en`` for English.
 
 Paths
 ^^^^^
 All paths parameters in subliminal most commont functions can be either *a file path*,
 *a file name* or a *folder path*
 
-* File path (existing): hashes of the file will be computed and used during the search for services that supports
-  this functionnality.
-* File name (or non-existing file path): the guessit python library will be used to guess informations and a text-based search will
-  be done with services.
-* Folder path (containing video files): the given folder will be searched for video files using their :data:`~subliminal.videos.MIMETYPES`
-  and/or :data:`~subliminal.videos.EXTENSIONS`. The default maximum depth to scan is 3
+* File path (existing): hashes of the file will be computed and used during the search for services that
+  supports this functionnality.
+* File name (or non-existing file path): the guessit python library will be used to guess informations
+  and a text-based search will be done with services.
+* Folder path (containing video files): the given folder will be searched for video files using their
+  :data:`~subliminal.videos.MIMETYPES` and/or :data:`~subliminal.videos.EXTENSIONS`.
+  The default maximum depth to scan is 3
 
 CLI
 ---
-Subliminal is shipped with a basic Command Line Interface that allows you to
-download subtitles for one or more videos in a multi-threaded way.
+Subliminal is shipped with a Command Line Interface that allows you to
+download subtitles for one or more videos in a multithreaded way.
 
+.. note::
+
+    The cache directory defaults to *~/.config/subliminal*. Even on Windows
+
+Usage
+^^^^^
 You can have the documentation of the CLI using ``subliminal --help``::
 
-    usage: subliminal [-h] [-l LG] [-s NAME] [-m] [-f] [-w N] [-c] [-q | -v]
-                      [--cache-dir DIR | --no-cache-dir] [--version]
+    usage: subliminal [-h] [-l LG] [-s NAME] [-m] [-f] [-w N] [-a AGE] [-c]
+                      [-q | -v] [--cache-dir DIR | --no-cache-dir] [--version]
                       PATH [PATH ...]
 
     Subtitles, faster than your thoughts
@@ -55,6 +60,8 @@ You can have the documentation of the CLI using ``subliminal --help``::
       -m, --multi           download multiple subtitle languages
       -f, --force           replace existing subtitle file
       -w N, --workers N     use N threads (default: 4)
+      -a AGE, --age AGE     scan only for files newer or older (prefix with +)
+                            than AGE (e.g. 12h, 1w2d, +3d6h)
       -c, --compatibility   try not to use unicode (use this if you have encoding
                             errors)
       -q, --quiet           disable output
@@ -64,9 +71,13 @@ You can have the documentation of the CLI using ``subliminal --help``::
                             work)
       --version             show program's version number and exit
 
-.. note::
+Cron job
+^^^^^^^^
+This CLI is well suited for automatic subtitles downloads. For example, to download english and french
+subtitles for videos newer than one week under /path/to/videos/ each day at 1:00AM with a single worker,
+you can use the following crontab line::
 
-    The cache directory defaults to *~/.config/subliminal*. Even on Windows
+    0 1 * * * user /path/to/subliminal -m -l en -l fr -w 1 -a 1w -q /path/to/videos/
 
 Simple module use
 -----------------
@@ -105,9 +116,3 @@ that takes care of that for you::
 
     >>> with subliminal.Pool(4) as p:
     ...     p.list_subtitles('The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.mp4', ['en'])
-
-
-* from the command line
-* basic functions :func:`~subliminal.list_subtitles` and :func:`~subliminal.download_subtitles`
-* multi-threaded :class:`~subliminal.async.Pool` which implements the abovementioned functions
-* using your own algorithm that produces and gather results of elementary :class:`~subliminal.tasks.Task`

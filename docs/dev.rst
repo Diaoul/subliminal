@@ -8,7 +8,7 @@ combining different websites but there is no guarantee of a perfect match.
 Even if OpenSubtitles has a gigantic subtitles database, you may not be able to
 find a subtitle on it but you will find it elsewhere, say BierDopje. Sometimes,
 it just takes some time before it shows up on a website even if already available
-on another, but you don't wanna wait to watch the latest Big Bang Theory, right?
+on another, but you do not want to wait to watch the latest Big Bang Theory, right?
 
 Given this, to be reliable, subliminal has to use different :mod:`~subliminal.services`
 and use a unified method to gather them all. The :class:`~subliminal.services.ServiceBase`
@@ -19,11 +19,22 @@ class will achieve this.
 
 Languages
 ---------
-To be able to support many languages, subliminal has a :mod:`~subliminal.languages`
-module that contains utility functions and ISO languages code (639-1 and 639-2)
+To be able to support many languages, subliminal makes heavy use of ISO-3166 and ISO-639
+in a dedicated module.
 
-.. automodule:: subliminal.languages
+.. automodule:: subliminal.language
     :members:
+    
+    .. data:: subliminal.language.COUNTRIES
+
+        ISO-3166-1 countries list from `Debian package iso-codes 3.36-1 <http://packages.debian.org/fr/sid/iso-codes>`_.
+        Each item of this list is a tuple like ``(‘alpha2’, ‘alpha3’, ‘numeric’, ‘name’)``
+    
+    .. data:: subliminal.language.LANGUAGES
+
+        ISO-639-2 languages list from `the official source <http://www.loc.gov/standards/iso639-2/ISO-639-2_utf-8.txt>`_.
+        Each item of this list is a tuple like ``(‘alpha3’, ‘terminologic’, ‘alpha2’, ‘name’, ‘french_name’)``
+    
 
 Tasks
 -----

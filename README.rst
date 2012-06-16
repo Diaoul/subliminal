@@ -1,5 +1,8 @@
 Subliminal
 ==========
+
+.. image:: https://secure.travis-ci.org/Diaoul/subliminal.png?branch=develop
+
 Subliminal is a python library to search and download subtitles.
 
 It uses video hashes and the powerful `guessit <http://guessit.readthedocs.org/>`_ library
@@ -11,11 +14,14 @@ Features
 --------
 Multiple subtitles services are available:
 
-* OpenSubtitles
-* TheSubDB
+* Addic7ed
 * BierDopje
+* OpenSubtitles
+* Podnapisi
 * SubsWiki
 * Subtitulos
+* TheSubDB
+* TvSubtitles
 
 You can use main subliminal's functions with a **file path**, a **file name** or a **folder path**.
 
@@ -25,8 +31,8 @@ Download english subtitles::
 
     $ subliminal -l en The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.mp4
     **************************************************
-    Downloaded 1 subtitles
-    (Episode(u'The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.mp4'), ResultSubtitle(en, opensubtitles, 0.33, The.Big.Bang.Theory.S05E18.HDTV-LOL.srt))
+    Downloaded 1 subtitle(s) for 1 video(s)
+    The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.srt from opensubtitles
     **************************************************
 
 Module

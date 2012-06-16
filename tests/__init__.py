@@ -15,18 +15,12 @@
 #
 # You should have received a copy of the GNU Lesser General Public License
 # along with subliminal.  If not, see <http://www.gnu.org/licenses/>.
+from . import test_language, test_services, test_subliminal
+import unittest
 
 
-class Error(Exception):
-    """Base class for exceptions in subliminal"""
-    pass
+suite = unittest.TestSuite([test_language.suite(), test_services.suite(), test_subliminal.suite()])
 
 
-class ServiceError(Error):
-    """"Exception raised by services"""
-    pass
-
-
-class DownloadFailedError(Error):
-    """"Exception raised when a download task has failed in service"""
-    pass
+if __name__ == '__main__':
+    unittest.TextTestRunner().run(suite)

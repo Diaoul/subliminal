@@ -3,7 +3,7 @@ News
 
 0.6.0
 -----
-**release date:**
+**release date:** 2012-06-16
 **WARNING:** Backward incompatible changes
 
 * Fix --workers option in CLI

@@ -51,7 +51,6 @@ class ServiceTestCase(unittest.TestCase):
         # Setting config to None allows to delete the object, which will in turn save the cache
         self.config = None
 
-    @unittest.skipUnless(sys.platform.startswith("win"), "requires Windows")
     def test_query_series(self):
         with self.service(self.config) as service:
             results = service.query(service, self.fake_file, self.languages, self.episode_keywords, self.series, self.season, self.episode)

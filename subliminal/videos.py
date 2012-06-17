@@ -16,6 +16,7 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with subliminal.  If not, see <http://www.gnu.org/licenses/>.
 from . import subtitles
+from .language import Language
 import enzyme
 import guessit
 import hashlib
@@ -129,7 +130,6 @@ class Video(object):
             logger.debug(u'Failed parsing %s with enzyme' % self.path)
         if isinstance(video_infos, enzyme.core.AVContainer):
             results.extend([subtitles.EmbeddedSubtitle.from_enzyme(self.path, s) for s in video_infos.subtitles])
-
         # cannot use glob here because it chokes if there are any square
         # brackets inside the filename, so we have to use basic string
         # startswith/endswith comparisons
@@ -138,13 +138,8 @@ class Video(object):
         for path in existing:
             for ext in subtitles.EXTENSIONS:
                 if path.endswith(ext):
-                    possible_lang = path[len(basename) + 1:-len(ext)]
-                    if possible_lang == '':
-                        results.append(subtitles.ExternalSubtitle(path, None))
-                    else:
-                        lang = guessit.Language(possible_lang)
-                        if lang:
-                            results.append(subtitles.ExternalSubtitle(path, lang))
+                    language = Language(path[len(basename) + 1:-len(ext)], strict=False)
+                    results.append(subtitles.ExternalSubtitle(path, language))
         return results
 
     def __repr__(self):

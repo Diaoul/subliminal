@@ -34,6 +34,8 @@ class Subtitle(object):
 
     """
     def __init__(self, path, language):
+        if not isinstance(language, Language):
+            raise TypeError('%r is not an instance of Language')
         self.path = path
         self.language = language
 
@@ -60,7 +62,7 @@ class EmbeddedSubtitle(Subtitle):
 
     @classmethod
     def from_enzyme(cls, path, subtitle):
-        language = Language(subtitle.language) or None
+        language = Language(subtitle.language, strict=False)
         return cls(path, language, subtitle.trackno)
 
 
@@ -69,15 +71,14 @@ class ExternalSubtitle(Subtitle):
     @classmethod
     def from_path(cls, path):
         """Create an :class:`ExternalSubtitle` from path"""
-        extension = ''
+        extension = None
         for e in EXTENSIONS:
             if path.endswith(e):
                 extension = e
                 break
-        if not extension:
+        if extension is None:
             raise ValueError('Not a supported subtitle extension')
-        language = os.path.splitext(path[:len(path) - len(extension)])[1][1:]
-        language = Language(language) or None
+        language = Language(os.path.splitext(path[:len(path) - len(extension)])[1][1:], strict=False)
         return cls(path, language)
 
 
@@ -110,9 +111,7 @@ class ResultSubtitle(ExternalSubtitle):
         :rtype: bool
 
         """
-        extension = os.path.splitext(self.path)[0]
-        language = os.path.splitext(self.path[:len(self.path) - len(extension)])[1][1:]
-        return Language(language) == Language('und')
+        return self.language == Language('Undetermined')
 
     def __repr__(self):
         return 'ResultSubtitle(%s, %s, %.2f, %s)' % (self.language, self.service, self.confidence, self.release)

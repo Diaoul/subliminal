@@ -268,6 +268,8 @@ def hash_thesubdb(path):
 
     """
     readsize = 64 * 1024
+    if os.path.getsize(path) < readsize:
+        return None
     with open(path, 'rb') as f:
         data = f.read(readsize)
         f.seek(-readsize, os.SEEK_END)

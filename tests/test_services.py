@@ -29,7 +29,6 @@ from subliminal.services.subtitulos import Subtitulos
 from subliminal.services.thesubdb import TheSubDB
 from subliminal.services.tvsubtitles import TvSubtitles
 import os
-import sys
 import unittest
 try:
     import cPickle as pickle
@@ -499,4 +498,4 @@ def suite():
 
 
 if __name__ == '__main__':
-    unittest.TextTestRunner(verbosity=2).run(suite())
+    unittest.TextTestRunner().run(suite())

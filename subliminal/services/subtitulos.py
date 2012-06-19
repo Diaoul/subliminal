@@ -36,7 +36,7 @@ class Subtitulos(ServiceBase):
     languages = language_set(['eng-US', 'eng-GB', 'eng', 'fre', 'por-BR', 'por', 'spa-ES', u'spa', u'ita', u'cat'])
     language_map = {u'Español': Language('spa'), u'Español (España)': Language('spa'), u'Español (Latinoamérica)': Language('spa'),
                     u'Català': Language('cat'), u'Brazilian': Language('por-BR'), u'English (US)': Language('eng-US'),
-                    u'English (UK)': Language('eng-GB')}
+                    u'English (UK)': Language('eng-GB'), 'Galego': Language('glg')}
     language_code = 'name'
     videos = [Episode]
     require_video = False

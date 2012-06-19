@@ -188,17 +188,17 @@ class ServiceBase(object):
         :param string filepath: destination path
 
         """
-        logger.info(u'Downloading %s' % url)
+        logger.info(u'Downloading %s in %s' % (url, filepath))
         try:
             r = self.session.get(url, headers={'Referer': url, 'User-Agent': self.user_agent})
             with open(filepath, 'wb') as f:
                 f.write(r.content)
         except Exception as e:
-            logger.error(u'Download %s failed: %s' % (url, e))
+            logger.error(u'Download failed: %s' % e)
             if os.path.exists(filepath):
                 os.remove(filepath)
             raise DownloadFailedError(str(e))
-        logger.debug(u'Download finished for file %s. Size: %s' % (filepath, os.path.getsize(filepath)))
+        logger.debug(u'Download finished')
 
     def download_zip_file(self, url, filepath):
         """Attempt to download a zip file and extract any subtitle file from it, if any.
@@ -208,7 +208,7 @@ class ServiceBase(object):
         :param string filepath: destination path for the subtitle
 
         """
-        logger.info(u'Downloading %s' % url)
+        logger.info(u'Downloading %s in %s' % (url, filepath))
         try:
             zippath = filepath + '.zip'
             r = self.session.get(url, headers={'Referer': url, 'User-Agent': self.user_agent})
@@ -227,8 +227,6 @@ class ServiceBase(object):
                 logger.debug(u'No subtitles found in zip file')
                 raise DownloadFailedError('No subtitles found in zip file')
             os.remove(zippath)
-            logger.debug(u'Download finished for file %s. Size: %s' % (filepath, os.path.getsize(filepath)))
-            return
         except Exception as e:
             logger.error(u'Download %s failed: %s' % (url, e))
             if os.path.exists(zippath):
@@ -236,6 +234,7 @@ class ServiceBase(object):
             if os.path.exists(filepath):
                 os.remove(filepath)
             raise DownloadFailedError(str(e))
+        logger.debug(u'Download finished')
 
 
 class ServiceConfig(object):

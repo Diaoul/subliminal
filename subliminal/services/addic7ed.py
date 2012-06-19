@@ -17,12 +17,14 @@
 # along with subliminal.  If not, see <http://www.gnu.org/licenses/>.
 from . import ServiceBase
 from ..cache import cachedmethod
+from ..exceptions import DownloadFailedError
 from ..language import Language, language_set
 from ..subtitles import get_subtitle_path, ResultSubtitle
 from ..utils import get_keywords
 from ..videos import Episode
 from bs4 import BeautifulSoup
 import logging
+import os
 import re
 
 
@@ -149,6 +151,14 @@ class Addic7ed(ServiceBase):
                                       keywords=[suburl['release']])
             subtitles.append(subtitle)
         return subtitles
+
+    def download(self, subtitle):
+        super(Addic7ed, self).download(subtitle)
+        with open(subtitle.path, 'r') as f:
+            soup = BeautifulSoup(f, self.required_features)
+            if soup.title is not None and soup.title.text.strip() == u'Addic7ed.com - Sorry, download limit exceeded':
+                os.remove(subtitle.path)
+                raise DownloadFailedError('Download limit exceeded')
 
 
 Service = Addic7ed

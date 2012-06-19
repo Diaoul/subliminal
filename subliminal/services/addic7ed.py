@@ -156,7 +156,7 @@ class Addic7ed(ServiceBase):
         super(Addic7ed, self).download(subtitle)
         with open(subtitle.path, 'r') as f:
             soup = BeautifulSoup(f, self.required_features)
-            if soup.title is not None and soup.title.text.strip() == u'Addic7ed.com - Sorry, download limit exceeded':
+            if soup.title is not None and u'Addic7ed.com' in soup.title.text.strip():
                 os.remove(subtitle.path)
                 raise DownloadFailedError('Download limit exceeded')
 

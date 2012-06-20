@@ -53,7 +53,8 @@ class Addic7ed(ServiceBase):
     #TODO: Complete this
     languages = language_set(['ar', 'ca', 'de', 'el', 'en', 'es', 'eu', 'fr', 'ga', 'he', 'hr', 'hu', 'it',
                               'pl', 'pt', 'ro', 'ru', 'se', 'pt-br'])
-    language_map = {'Portuguese (Brazilian)': Language('por-BR'), 'Greek': Language('gre')}
+    language_map = {'Portuguese (Brazilian)': Language('por-BR'), 'Greek': Language('gre'),
+                    'Spanish (Latin America)': Language('spa'), }
     videos = [Episode]
     require_video = False
     required_features = ['permissive']

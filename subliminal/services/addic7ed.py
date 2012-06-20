@@ -153,12 +153,20 @@ class Addic7ed(ServiceBase):
         return subtitles
 
     def download(self, subtitle):
-        super(Addic7ed, self).download(subtitle)
-        with open(subtitle.path, 'r') as f:
-            soup = BeautifulSoup(f, self.required_features)
+        logger.info(u'Downloading %s in %s' % (subtitle.link, subtitle.path))
+        try:
+            r = self.session.get(subtitle.link, headers={'Referer': subtitle.link, 'User-Agent': self.user_agent})
+            soup = BeautifulSoup(r.content, self.required_features)
             if soup.title is not None and u'Addic7ed.com' in soup.title.text.strip():
-                os.remove(subtitle.path)
                 raise DownloadFailedError('Download limit exceeded')
+            with open(subtitle.path, 'wb') as f:
+                f.write(r.content)
+        except Exception as e:
+            logger.error(u'Download failed: %s' % e)
+            if os.path.exists(subtitle.path):
+                os.remove(subtitle.path)
+            raise DownloadFailedError(str(e))
+        logger.debug(u'Download finished')
 
 
 Service = Addic7ed

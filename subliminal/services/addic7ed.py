@@ -168,6 +168,7 @@ class Addic7ed(ServiceBase):
                 os.remove(subtitle.path)
             raise DownloadFailedError(str(e))
         logger.debug(u'Download finished')
+        return subtitle
 
 
 Service = Addic7ed

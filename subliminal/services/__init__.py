@@ -160,6 +160,7 @@ class ServiceBase(object):
     def download(self, subtitle):
         """Download a subtitle"""
         self.download_file(subtitle.link, subtitle.path)
+        return subtitle
 
     @classmethod
     def check_validity(cls, video, languages):

@@ -248,7 +248,7 @@ def group_by_video(list_results):
     """
     result = defaultdict(list)
     for video, subtitles in list_results:
-        result[video] += subtitles
+        result[video] += subtitles or []
     return result
 
 

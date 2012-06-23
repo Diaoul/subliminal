@@ -1,6 +1,20 @@
 News
 ====
 
+0.6.1
+-----
+**release date:** *not released yet*
+
+* Fix single download subtitles without the force option
+* Add Spanish (Latin America) exception to Addic7ed
+* Fix group_by_video when a list entry has None as subtitles
+* Add support for Galician language in Subtitulos
+* Add an integrity check after subtitles download for Addic7ed
+* Add error handling for if not strict in Language
+* Fix TheSubDB hash method to return None if the file is too small
+* Fix guessit.Language in Video.scan
+* Fix language detection of subtitles
+
 0.6.0
 -----
 **release date:** 2012-06-16

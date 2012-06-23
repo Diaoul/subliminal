@@ -20,37 +20,64 @@ from subliminal import Pool, list_subtitles, download_subtitles
 import os
 import time
 import unittest
+import requests
+import tarfile
+import StringIO
 
 
-cache_dir = u'/tmp/sublicache'
-if not os.path.exists(cache_dir):
-    os.mkdir(cache_dir)
-existing_video = u'/something/The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.mp4'
+test_dir = 'test_subliminal_files'
+cache_dir = 'test_subliminal_cache'
+test_video = 'The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.mp4'
+
+
+def setUpModule():
+    if not os.path.exists(test_dir):
+        r = requests.get('https://github.com/downloads/Diaoul/subliminal/test_subliminal_files.tar.gz')
+        with tarfile.open(fileobj=StringIO.StringIO(r.content), mode='r:gz') as f:
+            f.extractall(test_dir)
+    if not os.path.exists(cache_dir):
+        os.mkdir(cache_dir)
 
 
 class ApiTestCase(unittest.TestCase):
     def test_list_subtitles(self):
-        results = list_subtitles(existing_video, languages=['en', 'fr'], cache_dir=cache_dir, max_depth=3)
+        results = list_subtitles(test_video, languages=['en', 'fr'], cache_dir=cache_dir)
         self.assertTrue(len(results) > 0)
 
     def test_download_subtitles(self):
-        results = download_subtitles(existing_video, languages=['en', 'fr'], cache_dir=cache_dir, max_depth=3)
+        results = download_subtitles(test_video, languages=['en', 'fr'], cache_dir=cache_dir)
         self.assertTrue(len(results) == 1)
         for video, subtitles in results.iteritems():
-            self.assertTrue(video.release == existing_video)
+            self.assertTrue(video.release == test_video)
             self.assertTrue(len(subtitles) == 1)
             for subtitle in subtitles:
                 self.assertTrue(os.path.exists(subtitle.path))
                 os.remove(subtitle.path)
 
-    def test_download_multi_subtitles(self):
-        results = download_subtitles(existing_video, languages=['en', 'fr'], cache_dir=cache_dir, max_depth=3, multi=True)
+    def test_download_subtitles_noforce(self):
+        results_first = download_subtitles(test_dir, languages=['en', 'fr'], cache_dir=cache_dir, force=False, services=['thesubdb'])
+        results = download_subtitles(test_dir, languages=['en', 'fr'], cache_dir=cache_dir, force=False, services=['thesubdb'])
+        self.assertTrue(len(results) == 0)
+        for _, subtitles in results_first.iteritems():
+            for subtitle in subtitles:
+                os.remove(subtitle.path)
+
+    def test_download_subtitles_multi(self):
+        results = download_subtitles(test_video, languages=['en', 'fr'], cache_dir=cache_dir, multi=True)
         self.assertTrue(len(results) == 1)
         for video, subtitles in results.iteritems():
-            self.assertTrue(video.release == existing_video)
+            self.assertTrue(video.release == test_video)
             self.assertTrue(len(subtitles) == 2)
             for subtitle in subtitles:
                 self.assertTrue(os.path.exists(subtitle.path))
+                os.remove(subtitle.path)
+
+    def test_download_subtitles_multi_noforce(self):
+        results_first = download_subtitles(test_dir, languages=['en', 'fr'], cache_dir=cache_dir, multi=True, force=False, services=['thesubdb'])
+        results = download_subtitles(test_dir, languages=['en', 'fr'], cache_dir=cache_dir, multi=True, force=False, services=['thesubdb'])
+        self.assertTrue(len(results) == 0)
+        for _, subtitles in results_first.iteritems():
+            for subtitle in subtitles:
                 os.remove(subtitle.path)
 
 
@@ -71,15 +98,15 @@ class AsyncTestCase(unittest.TestCase):
 
     def test_list_subtitles(self):
         with Pool(4) as p:
-            results = p.list_subtitles(existing_video, languages=['en', 'fr'], cache_dir=cache_dir, max_depth=3)
+            results = p.list_subtitles(test_video, languages=['en', 'fr'], cache_dir=cache_dir)
         self.assertTrue(len(results) > 0)
 
     def test_download_subtitles(self):
         with Pool(4) as p:
-            results = p.download_subtitles(existing_video, languages=['en', 'fr'], cache_dir=cache_dir, max_depth=3)
+            results = p.download_subtitles(test_video, languages=['en', 'fr'], cache_dir=cache_dir)
         self.assertTrue(len(results) == 1)
         for video, subtitles in results.iteritems():
-            self.assertTrue(video.release == existing_video)
+            self.assertTrue(video.release == test_video)
             self.assertTrue(len(subtitles) == 1)
             for subtitle in subtitles:
                 self.assertTrue(os.path.exists(subtitle.path))

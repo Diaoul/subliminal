@@ -20,19 +20,24 @@ pip-log.txt
 .coverage
 .tox
 
-#Translations
+# Translations
 *.mo
 
-#Mr Developer
+# Mr Developer
 .mr.developer.cfg
 
-#Pydev
+# Pydev
 .project
 .pydevproject
 .settings
 
-#Rope
+# Rope
 .ropeproject
 
-#Sphinx
+# Sphinx
 docs/_build
+
+# Subliminal unittests
+tests/*.srt
+tests/*_files
+tests/*_cache

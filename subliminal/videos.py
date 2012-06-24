@@ -144,7 +144,7 @@ class Video(object):
         return results
 
     def __unicode__(self):
-        return to_unicode(self.path)
+        return to_unicode(self.path or self.release)
 
     def __str__(self):
         return unicode(self).encode('utf-8')

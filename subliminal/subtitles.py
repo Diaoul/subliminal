@@ -98,13 +98,13 @@ class ResultSubtitle(ExternalSubtitle):
     :param set keywords: keywords that describe the subtitle
 
     """
-    def __init__(self, path, language, service, link, release=None, confidence=1, keywords=set()):
+    def __init__(self, path, language, service, link, release=None, confidence=1, keywords=None):
         super(ResultSubtitle, self).__init__(path, language)
         self.service = service
         self.link = link
         self.release = release
         self.confidence = confidence
-        self.keywords = keywords
+        self.keywords = keywords or set()
 
     @property
     def single(self):

@@ -87,7 +87,7 @@ class BierDopje(ServiceBase):
                 continue
             path = get_subtitle_path(filepath, language, self.config.multi)
             for result in soup.results('result'):
-                subtitle = ResultSubtitle(path, language, service=self.__class__.__name__.lower(), link=result.downloadlink.contents[0],
+                subtitle = ResultSubtitle(path, language, self.__class__.__name__.lower(), result.downloadlink.contents[0],
                                           release=to_unicode(result.filename.contents[0]))
                 subtitles.append(subtitle)
         return subtitles

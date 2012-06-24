@@ -128,8 +128,7 @@ class TvSubtitles(ServiceBase):
             if language not in languages:
                 continue
             path = get_subtitle_path(filepath, language, self.config.multi)
-            subtitle = ResultSubtitle(path, language, self.__class__.__name__.lower(),
-                                      '%s/download-%d.html' % (self.server_url, subid['subid']),
+            subtitle = ResultSubtitle(path, language, self.__class__.__name__.lower(), '%s/download-%d.html' % (self.server_url, subid['subid']),
                                       keywords=[subid['rip'], subid['release']])
             subtitles.append(subtitle)
         return subtitles

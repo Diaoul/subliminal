@@ -147,8 +147,7 @@ class Addic7ed(ServiceBase):
             if language not in languages:
                 continue
             path = get_subtitle_path(filepath, language, self.config.multi)
-            subtitle = ResultSubtitle(path, language, self.__class__.__name__.lower(),
-                                      '%s/%s' % (self.server_url, suburl['suburl']),
+            subtitle = ResultSubtitle(path, language, self.__class__.__name__.lower(), '%s/%s' % (self.server_url, suburl['suburl']),
                                       keywords=[suburl['release']])
             subtitles.append(subtitle)
         return subtitles

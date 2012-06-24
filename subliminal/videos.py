@@ -207,8 +207,6 @@ def scan(entry, max_depth=3, scan_filter=None, depth=0):
     """
     if depth > max_depth and max_depth != 0:  # we do not want to search the whole file system except if max_depth = 0
         return []
-    if depth == 0:
-        entry = os.path.abspath(entry)
     if os.path.isdir(entry):  # a dir? recurse
         logger.debug(u'Scanning directory %s with depth %d/%d' % (entry, depth, max_depth))
         result = []

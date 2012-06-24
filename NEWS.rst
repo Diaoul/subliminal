@@ -5,6 +5,10 @@ News
 -----
 **release date:** *not released yet*
 
+* Fix subtitle release name in BierDopje
+* Fix subtitles being downloaded multiple times
+* Add Chinese support to TvSubtitles
+* Fix encoding issues
 * Fix single download subtitles without the force option
 * Add Spanish (Latin America) exception to Addic7ed
 * Fix group_by_video when a list entry has None as subtitles

@@ -158,6 +158,7 @@ def matching_confidence(video, subtitle):
     guess = guessit.guess_file_info(subtitle.release, 'autodetect')
     video_keywords = get_keywords(video.guess)
     subtitle_keywords = get_keywords(guess) | subtitle.keywords
+    logger.debug(u'Video keywords %r - Subtitle keywords %r' % (video_keywords, subtitle_keywords))
     replacement = {'keywords': len(video_keywords & subtitle_keywords)}
     if isinstance(video, Episode):
         replacement.update({'series': 0, 'season': 0, 'episode': 0})
@@ -180,8 +181,11 @@ def matching_confidence(video, subtitle):
             if 'year' in guess and guess['year'] == video.year:
                 replacement['year'] = 1
     else:
-        return 0
+        logger.debug(u'Not able to compute confidence for %r' % video)
+        return 0.0
+    logger.debug(u'Found %r' % replacement)
     confidence = float(int(matching_format.format(**replacement), 2)) / float(int(best, 2))
+    logger.info(u'Computed confidence %.4f for %r and %r' % (confidence, video, subtitle))
     return confidence
 
 

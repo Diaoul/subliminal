@@ -82,13 +82,13 @@ def create_list_tasks(paths, languages, services, force, multi, cache_dir, max_d
     return tasks
 
 
-def create_download_tasks(subtitles_by_video, multi):
+def create_download_tasks(subtitles_by_video, languages, multi):
     """Create a list of :class:`~subliminal.tasks.DownloadTask` from a list results grouped by video
 
-    :param subtitles_by_video: :class:`~subliminal.tasks.ListTask` results grouped by video and sorted
+    :param subtitles_by_video: :class:`~subliminal.tasks.ListTask` results with ordered subtitles
     :type subtitles_by_video: dict of :class:`~subliminal.videos.Video` => [:class:`~subliminal.subtitles.Subtitle`]
-    :param order: preferred order for subtitles sorting
-    :type list: list of :data:`LANGUAGE_INDEX`, :data:`SERVICE_INDEX`, :data:`SERVICE_CONFIDENCE`, :data:`MATCHING_CONFIDENCE`
+    :param languages: languages in preferred order
+    :type languages: :class:`~subliminal.language.language_list`
     :param bool multi: download multiple languages for the same video
     :return: the created tasks
     :rtype: list of :class:`~subliminal.tasks.DownloadTask`
@@ -103,7 +103,7 @@ def create_download_tasks(subtitles_by_video, multi):
             logger.debug(u'Created task %r' % task)
             tasks.append(task)
             continue
-        for _, by_language in groupby(subtitles, lambda s: s.language):
+        for _, by_language in groupby(subtitles, lambda s: languages.index(s.language)):
             task = DownloadTask(video, list(by_language))
             logger.debug(u'Created task %r' % task)
             tasks.append(task)

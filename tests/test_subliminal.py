@@ -80,6 +80,15 @@ class ApiTestCase(unittest.TestCase):
             for subtitle in subtitles:
                 os.remove(subtitle.path)
 
+    def test_download_subtitles_languages(self):
+        results = download_subtitles('Dexter/Season 04/S04E08 - Road Kill - 720p BluRay.mkv', languages=['en'],
+                                     cache_dir=cache_dir, multi=True, force=False, services=['subtitulos', 'tvsubtitles'])
+        self.assertTrue(len(results) == 1)
+        for _, subtitles in results.iteritems():
+            self.assertTrue(len(subtitles) == 1)
+            for subtitle in subtitles:
+                os.remove(subtitle.path)
+
 
 class AsyncTestCase(unittest.TestCase):
     def test_pool(self):

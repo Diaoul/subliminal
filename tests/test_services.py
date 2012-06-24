@@ -29,7 +29,6 @@ from subliminal.services.subtitulos import Subtitulos
 from subliminal.services.thesubdb import TheSubDB
 from subliminal.services.tvsubtitles import TvSubtitles
 import os
-import sys
 import unittest
 try:
     import cPickle as pickle
@@ -51,7 +50,6 @@ class ServiceTestCase(unittest.TestCase):
         # Setting config to None allows to delete the object, which will in turn save the cache
         self.config = None
 
-    @unittest.skipUnless(sys.platform.startswith("win"), "requires Windows")
     def test_query_series(self):
         with self.service(self.config) as service:
             results = service.query(service, self.fake_file, self.languages, self.episode_keywords, self.series, self.season, self.episode)
@@ -246,7 +244,7 @@ class OpenSubtitlesTestCase(ServiceTestCase):
         self.fake_file = u'/tmp/fake_file'
         self.episode_path = existing_video
         self.episode_sublanguage = 'en'
-        self.episode_subfilesizes = [33585, 33547, 33563, 33601]
+        self.episode_subfilesizes = [30374, 30358, 33585, 33547, 33563, 33601]
         self.movie = 'Inception'
         self.imdbid = '1375666'
         self.wrong_imdbid = '9999999'
@@ -500,4 +498,4 @@ def suite():
 
 
 if __name__ == '__main__':
-    unittest.TextTestRunner(verbosity=2).run(suite())
+    unittest.TextTestRunner().run(suite())

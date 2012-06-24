@@ -17,7 +17,6 @@ Multiple subtitles services are available:
 * Addic7ed
 * BierDopje
 * OpenSubtitles
-* Podnapisi
 * SubsWiki
 * Subtitulos
 * TheSubDB

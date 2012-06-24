@@ -3,7 +3,7 @@ News
 
 0.6.1
 -----
-**release date:** *not released yet*
+**release date:** 2012-06-24
 
 * Fix subtitle release name in BierDopje
 * Fix subtitles being downloaded multiple times

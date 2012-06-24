@@ -124,7 +124,9 @@ class ResultSubtitle(ExternalSubtitle):
         return self.language == Language('Undetermined')
 
     def __repr__(self):
-        return 'ResultSubtitle(%s, %s, %s, %.2f)' % (self.path, self.language, self.service, self.confidence)
+        if not self.release:
+            return 'ResultSubtitle(%s, %s, %s, %.2f)' % (self.path, self.language, self.service, self.confidence)
+        return 'ResultSubtitle(%s, %s, %s, %.2f, release=%s)' % (self.path, self.language, self.service, self.confidence, self.release.encode('ascii', 'ignore'))
 
 
 def get_subtitle_path(video_path, language, multi):

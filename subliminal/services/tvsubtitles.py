@@ -44,7 +44,8 @@ class TvSubtitles(ServiceBase):
                               'it', 'ja', 'ko', 'nl', 'pl', 'pt', 'ro', 'ru', 'sv', 'tr', 'uk',
                               'zh', 'pt-br'])
     #TODO: Find more exceptions
-    language_map = {'gr': Language('gre'), 'cz': Language('cze'), 'ua': Language('ukr')}
+    language_map = {'gr': Language('gre'), 'cz': Language('cze'), 'ua': Language('ukr'),
+                    'cn': Language('chi')}
     videos = [Episode]
     require_video = False
     required_features = ['permissive']

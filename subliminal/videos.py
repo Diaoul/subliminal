@@ -17,6 +17,7 @@
 # along with subliminal.  If not, see <http://www.gnu.org/licenses/>.
 from . import subtitles
 from .language import Language
+from .utils import to_unicode
 import enzyme
 import guessit
 import hashlib
@@ -142,8 +143,14 @@ class Video(object):
                     results.append(subtitles.ExternalSubtitle(path, language))
         return results
 
+    def __unicode__(self):
+        return to_unicode(self.path)
+
+    def __str__(self):
+        return unicode(self).encode('utf-8')
+
     def __repr__(self):
-        return '%s(%r)' % (self.__class__.__name__, self.release)
+        return '%s(%s)' % (self.__class__.__name__, self)
 
     def __hash__(self):
         return hash(self.path or self.release)

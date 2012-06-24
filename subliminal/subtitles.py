@@ -16,6 +16,7 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with subliminal.  If not, see <http://www.gnu.org/licenses/>.
 from .language import Language
+from .utils import to_unicode
 import os.path
 
 
@@ -46,8 +47,14 @@ class Subtitle(object):
             return os.path.exists(self.path)
         return False
 
+    def __unicode__(self):
+        return to_unicode(self.path)
+
+    def __str__(self):
+        return unicode(self).encode('utf-8')
+
     def __repr__(self):
-        return '%s(%s)' % (self.__class__.__name__, self.language.name)
+        return '%s(%s, %s)' % (self.__class__.__name__, self, self.language)
 
 
 class EmbeddedSubtitle(Subtitle):
@@ -117,7 +124,7 @@ class ResultSubtitle(ExternalSubtitle):
         return self.language == Language('Undetermined')
 
     def __repr__(self):
-        return 'ResultSubtitle(%s, %s, %.2f, %s)' % (self.language, self.service, self.confidence, self.release)
+        return 'ResultSubtitle(%s, %s, %.2f)' % (self.language, self.service, self.confidence)
 
 
 def get_subtitle_path(video_path, language, multi):

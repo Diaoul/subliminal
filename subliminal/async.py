@@ -110,16 +110,27 @@ class Pool(object):
                 break
         return results
 
-    def list_subtitles(self, paths, languages=None, services=None, force=True, multi=False, cache_dir=None, max_depth=3, scan_filter=None):
-        """See :meth:`subliminal.list_subtitles`"""
-        paths, languages, services, _ = get_defaults(paths, languages, services, None,
-                                                     languages_as=language_set)
-        tasks = create_list_tasks(paths, languages, services, force, multi, cache_dir, max_depth, scan_filter)
+    def consume_task_list(self, tasks):
+        """Consume the given list of tasks, multi-threaded mode.
+
+        :param tasks: the list of tasks to consume
+        :type tasks: list of :class:`~subliminal.tasks.ListTask` or :class:`~subliminal.tasks.DownloadTask`
+        :return: resulting subtitles (either list of subtitles to download or downloaded subtitles, depending on the tasks type
+        :rtype: dict of :class:`~subliminal.videos.Video` => [:class:`~subliminal.subtitles.ResultSubtitle`]
+
+        """
         for task in tasks:
             self.tasks.put(task)
         self.join()
         results = self.collect()
         return group_by_video(results)
+
+    def list_subtitles(self, paths, languages=None, services=None, force=True, multi=False, cache_dir=None, max_depth=3, scan_filter=None):
+        """See :meth:`subliminal.list_subtitles`"""
+        paths, languages, services, _ = get_defaults(paths, languages, services, None,
+                                                     languages_as=language_set)
+        tasks = create_list_tasks(paths, languages, services, force, multi, cache_dir, max_depth, scan_filter)
+        return self.consume_task_list(tasks)
 
     def download_subtitles(self, paths, languages=None, services=None, force=True, multi=False, cache_dir=None, max_depth=3, scan_filter=None, order=None):
         """See :meth:`subliminal.download_subtitles`"""
@@ -129,8 +140,4 @@ class Pool(object):
         for video, subtitles in subtitles_by_video.iteritems():
             subtitles.sort(key=lambda s: key_subtitles(s, video, languages, services, order), reverse=True)
         tasks = create_download_tasks(subtitles_by_video, languages, multi)
-        for task in tasks:
-            self.tasks.put(task)
-        self.join()
-        results = self.collect()
-        return group_by_video(results)
+        return self.consume_task_list(tasks)

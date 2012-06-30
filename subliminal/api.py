@@ -52,6 +52,28 @@ def get_defaults(paths, languages, services, order, languages_as=language_set):
     return paths, languages, services, order
 
 
+def consume_task_list(tasks):
+    """Consume the given list of tasks, single-threaded mode.
+
+    :param tasks: the list of tasks to consume
+    :type tasks: list of :class:`~subliminal.tasks.ListTask` or :class:`~subliminal.tasks.DownloadTask`
+    :return: resulting subtitles (either list of subtitles to download or downloaded subtitles, depending on the tasks type
+    :rtype: dict of :class:`~subliminal.videos.Video` => [:class:`~subliminal.subtitles.ResultSubtitle`]
+
+    """
+    results = []
+    service_instances = {}
+    for task in tasks:
+        try:
+            result = consume_task(task, service_instances)
+            results.append((task.video, result))
+        except:
+            logger.error(u'Error consuming task %r' % task, exc_info=True)
+    for service_instance in service_instances.itervalues():
+        service_instance.terminate()
+    return group_by_video(results)
+
+
 def list_subtitles(paths, languages=None, services=None, force=True, multi=False, cache_dir=None, max_depth=3, scan_filter=None):
     """List subtitles in given paths according to the criteria
 
@@ -71,18 +93,8 @@ def list_subtitles(paths, languages=None, services=None, force=True, multi=False
     """
     paths, languages, services, _ = get_defaults(paths, languages, services, None,
                                                  languages_as=language_set)
-    results = []
-    service_instances = {}
     tasks = create_list_tasks(paths, languages, services, force, multi, cache_dir, max_depth, scan_filter)
-    for task in tasks:
-        try:
-            result = consume_task(task, service_instances)
-            results.append((task.video, result))
-        except:
-            logger.error(u'Error consuming task %r' % task, exc_info=True)
-    for service_instance in service_instances.itervalues():
-        service_instance.terminate()
-    return group_by_video(results)
+    return consume_task_list(tasks)
 
 
 def download_subtitles(paths, languages=None, services=None, force=True, multi=False, cache_dir=None, max_depth=3, scan_filter=None, order=None):
@@ -114,15 +126,5 @@ def download_subtitles(paths, languages=None, services=None, force=True, multi=F
     subtitles_by_video = list_subtitles(paths, languages, services, force, multi, cache_dir, max_depth, scan_filter)
     for video, subtitles in subtitles_by_video.iteritems():
         subtitles.sort(key=lambda s: key_subtitles(s, video, languages, services, order), reverse=True)
-    results = []
-    service_instances = {}
     tasks = create_download_tasks(subtitles_by_video, languages, multi)
-    for task in tasks:
-        try:
-            result = consume_task(task, service_instances)
-            results.append((task.video, result))
-        except:
-            logger.error(u'Error consuming task %r' % task, exc_info=True)
-    for service_instance in service_instances.itervalues():
-        service_instance.terminate()
-    return group_by_video(results)
+    return consume_task_list(tasks)

@@ -35,6 +35,7 @@ class PodnapisiWeb(ServiceBase):
     api_based = False
     videos = [Episode, Movie]
     require_video = False
+    required_features = ['xml']
     language_map = {
         Language('Albanian'): '29',
         Language('Arabic'): '12',
@@ -105,7 +106,7 @@ class PodnapisiWeb(ServiceBase):
 
     def query(self, filepath, languages, title=None, season=None, episode=None, year=None):
         release, extension = os.path.splitext(os.path.basename(filepath))
-        params = {}
+        params = {'sXML': 1}
         if len(languages) == 1:
             params['sJ'] = self.get_code(list(languages)[0])
         else:
@@ -115,23 +116,26 @@ class PodnapisiWeb(ServiceBase):
         if season is not None:  params['sTS'] = season
         if episode is not None: params['sTE'] = episode
         if year is not None:    params['sY'] = year
+        # Only request the first page (30 results). This might be a problem if
+        # multiple language are requested (sJ=0 won't filter by language, so a
+        # lot of results might be returned).
         r = self.session.get(self.search_path, params=params)
         if r.status_code != 200:
             logger.error(u'Request %s returned status code %d' % (r.url, r.status_code))
             return []
 
         results = []
-        soup = BeautifulSoup(r.content)
-        for subs in soup.find_all('tr', {'class': 'a'}) + soup.find_all('tr', {'class': 'b'}):
-            lang_code = subs.find('a').find('img')['src'].rsplit('/', 1)[1][:-4]
+        soup = BeautifulSoup(r.content, self.required_features)
+        for subtitle in soup('subtitle'):
+            lang_code = subtitle.languageId.text
             language = self.get_language(lang_code)
             if language not in languages:
                 continue
-            found_title = subs.find_all('a')[1].contents[0].strip()
+            found_title = subtitle.title.text.strip()
             if not self.match_title(title, found_title):
                 continue
-            download_link = self.server_url + subs.find_all('a')[1]['href']
-            found_releases = subs.find('span', {'class' : 'opis'}).find('span')["title"].split()
+            download_link = subtitle.url.text
+            found_releases = subtitle.release.text
             for frelease in found_releases:
                 results.append(ResultSubtitle(
                         path=get_subtitle_path(filepath, language, self.config.multi),

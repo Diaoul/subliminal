@@ -19,7 +19,7 @@ from .core import (consume_task, LANGUAGE_INDEX, SERVICE_INDEX,
     SERVICE_CONFIDENCE, MATCHING_CONFIDENCE, SERVICES, create_list_tasks,
     create_download_tasks, group_by_video, key_subtitles)
 from .api import get_defaults
-from .language import language_list, language_set, LANGUAGES
+from .language import language_list, language_set
 from .tasks import StopTask
 import Queue
 import logging
@@ -134,8 +134,8 @@ class Pool(object):
 
     def download_subtitles(self, paths, languages=None, services=None, force=True, multi=False, cache_dir=None, max_depth=3, scan_filter=None, order=None):
         """See :meth:`subliminal.download_subtitles`"""
-        paths, languages, services, order = self.get_defaults(paths, languages, services, order,
-                                                              languages_as=language_list)
+        paths, languages, services, order = get_defaults(paths, languages, services, order,
+                                                         languages_as=language_list)
         subtitles_by_video = self.list_subtitles(paths, languages, services, force, multi, cache_dir, max_depth, scan_filter)
         for video, subtitles in subtitles_by_video.iteritems():
             subtitles.sort(key=lambda s: key_subtitles(s, video, languages, services, order), reverse=True)

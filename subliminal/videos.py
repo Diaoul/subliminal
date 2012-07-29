@@ -19,6 +19,7 @@ from . import subtitles
 from .language import Language
 from .utils import to_unicode
 import enzyme
+import enzyme.core
 import guessit
 import hashlib
 import logging

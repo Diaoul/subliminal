@@ -136,7 +136,7 @@ class Addic7edTestCase(ServiceTestCase):
         # FIXME: this is the size of the first subtitle that appears on the page
         # which is the original one, not the most updated one. We should make
         # sure the Addic7ed service picks up the most recent one instead
-        self.episode_subfilesizes = [33538, 33643]
+        self.episode_subfilesizes = [33469]
         self.episode_keywords = set(['asap', 'hdtv'])
         self.series = 'The Big Bang Theory'
         self.wrong_series = 'No Existent Show Name'

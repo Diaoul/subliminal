@@ -135,6 +135,8 @@ class Video(object):
         # brackets inside the filename, so we have to use basic string
         # startswith/endswith comparisons
         folder, basename = os.path.split(basepath)
+        if folder == '':
+            folder = '.'
         existing = [f for f in os.listdir(folder) if f.startswith(basename)]
         for path in existing:
             for ext in subtitles.EXTENSIONS:

@@ -28,7 +28,7 @@ import sys
 def main():
     parser = argparse.ArgumentParser(description='Subtitles, faster than your thoughts')
     parser.add_argument('-l', '--language', action='append', dest='languages', help='wanted language (ISO 639-1)', metavar='LG')
-    parser.add_argument('-s', '--service', action='append', dest='services', help='service to use', metavar='NAME')
+    parser.add_argument('-s', '--service', action='append', dest='services', help='service to use (%s)' % ', '.join(subliminal.core.filter_services(subliminal.SERVICES)), metavar='NAME')
     parser.add_argument('-m', '--multi', action='store_true', help='download multiple subtitle languages')
     parser.add_argument('-f', '--force', action='store_true', help='replace existing subtitle file')
     parser.add_argument('-w', '--workers', action='store', help='use N threads (default: %(default)s)', metavar='N', type=int, default=4)

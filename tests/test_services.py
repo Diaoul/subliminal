@@ -172,7 +172,7 @@ class BierDopjeTestCase(ServiceTestCase):
         self.config = ServiceConfig(multi=True, cache_dir=cache_dir)
         self.episode_path = u'The Big Bang Theory/Season 05/S05E06 - The Rhinitis Revelation - HD TV.mkv'
         self.episode_sublanguage = 'en'
-        self.episode_subfilesizes = [33469]
+        self.episode_subfilesizes = [28982]
         self.movie_path = u'Inception (2010)/Inception - 1080p.mkv'
         self.movie_sublanguage = 'en'
         self.movie_subfilesizes = []

@@ -1,6 +1,18 @@
 News
 ====
 
+0.6.2
+-----
+**release date:** 2012-09-15
+
+* Fix BierDopje
+* Fix Addic7ed
+* Fix SubsWiki
+* Fix missing enzyme import
+* Add Catalan and Galician languages to Addic7ed
+* Add possible services in help message of the CLI
+* Allow existing filenames to be passed without the ./ prefix
+
 0.6.1
 -----
 **release date:** 2012-06-24

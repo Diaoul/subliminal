@@ -51,6 +51,7 @@ class ApiTestCase(unittest.TestCase):
             self.assertTrue(video.release == test_video)
             self.assertTrue(len(subtitles) == 1)
             for subtitle in subtitles:
+                self.assertTrue(subtitle.path == os.path.splitext(os.path.basename(test_video))[0] + '.srt')
                 self.assertTrue(os.path.exists(subtitle.path))
                 os.remove(subtitle.path)
 
@@ -118,6 +119,7 @@ class AsyncTestCase(unittest.TestCase):
             self.assertTrue(video.release == test_video)
             self.assertTrue(len(subtitles) == 1)
             for subtitle in subtitles:
+                self.assertTrue(subtitle.path == os.path.splitext(os.path.basename(test_video))[0] + '.srt')
                 self.assertTrue(os.path.exists(subtitle.path))
                 os.remove(subtitle.path)
 

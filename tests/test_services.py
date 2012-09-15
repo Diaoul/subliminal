@@ -244,7 +244,7 @@ class OpenSubtitlesTestCase(ServiceTestCase):
         self.fake_file = u'/tmp/fake_file'
         self.episode_path = existing_video
         self.episode_sublanguage = 'en'
-        self.episode_subfilesizes = [30374, 30358, 33585, 33547, 33563, 33601]
+        self.episode_subfilesizes = [30374, 30358, 33585, 33547, 33563, 33601, 31413]
         self.movie = 'Inception'
         self.imdbid = '1375666'
         self.wrong_imdbid = '9999999'

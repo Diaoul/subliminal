@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # Copyright 2012 Olivier Leveau <olifozzy@gmail.com>
+# Copyright 2012 Antoine Bertin <diaoulael@gmail.com>
 #
 # This file is part of subliminal.
 #

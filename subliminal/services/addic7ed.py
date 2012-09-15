@@ -31,14 +31,6 @@ import re
 logger = logging.getLogger(__name__)
 
 
-def match(pattern, string):
-    try:
-        return re.search(pattern, string).group(1)
-    except AttributeError:
-        logger.debug(u'Could not match %r on %r' % (pattern, string))
-        return None
-
-
 class Addic7ed(ServiceBase):
     server_url = 'http://www.addic7ed.com'
     api_based = False

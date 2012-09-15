@@ -35,10 +35,11 @@ class Addic7ed(ServiceBase):
     server_url = 'http://www.addic7ed.com'
     api_based = False
     #TODO: Complete this
-    languages = language_set(['ar', 'ca', 'de', 'el', 'en', 'es', 'eu', 'fr', 'ga', 'he', 'hr', 'hu', 'it',
-                              'pl', 'pt', 'ro', 'ru', 'se', 'pt-br'])
+    languages = language_set(['ar', 'ca', 'de', 'el', 'en', 'es', 'eu', 'fr', 'ga', 'gl', 'he', 'hr', 'hu',
+                              'it', 'pl', 'pt', 'ro', 'ru', 'se', 'pt-br'])
     language_map = {'Portuguese (Brazilian)': Language('por-BR'), 'Greek': Language('gre'),
-                    'Spanish (Latin America)': Language('spa'), }
+                    'Spanish (Latin America)': Language('spa'), 'Galego': Language('glg'),
+                    u'Català': Language('cat')}
     videos = [Episode]
     require_video = False
     required_features = ['permissive']

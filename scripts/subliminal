@@ -23,22 +23,72 @@ import os
 import re
 import subliminal
 import sys
+import ConfigParser
 
 
 def main():
+    errorsDuringParsing = None
+    defaultServices =  argparse.SUPPRESS
+    defaultLanguages = argparse.SUPPRESS
+    defaultAge = None
+    defaultWorkers = 4
+    defaultForceoverwrite = 
+    defaultCompatmode = argparse.SUPPRESS
+    defaultMultisubs = argparse.SUPPRESS
+    defaultCachedir = os.path.expanduser('~/.config/subliminal/cache')
+    defaultOutputstyle = ''
+    defaultVerbose = False
+    defaultQuiet = False
+
+    defaultConfig = os.path.expanduser('~/.config/subliminal/config')
+
+    try:
+        config = ConfigParser.SafeConfigParser()
+        config.read(defaultConfig)
+
+        if config.has_option('subliminal','services'):
+            defaultServices = config.get('subliminal','services').split(',')
+        if config.has_option('subliminal','languages'):
+            defaultLanguages = config.get('subliminal','languages').split(',')
+        if config.has_option('subliminal','workers'):
+            defaultWorkers = config.getint('subliminal','workers')
+        if config.has_option('subliminal','multisubs'):
+            defaultMultisubs = config.getboolean('subliminal','multisubs')
+        if config.has_option('subliminal','forceoverwrite'):
+            defaultForceoverwrite =  config.getboolean('subliminal','forceoverwrite')
+        if config.has_option('subliminal','age'):
+            defaultAge = config.get('subliminal','age')
+        if config.has_option('subliminal','compatibilitymode'):
+            defaultCompatmode = config.getboolean('subliminal','compatibilitymode')
+        if config.has_option('subliminal','cachedir'):
+            defaultCachedir = config.get('subliminal','cachedir')
+            if defaultCachedir == 'none':
+              defaultCachedir = False
+            else:
+              defaultCachedir = os.path.expanduser(defaultCachedir)
+        if config.has_option('subliminal','outputstyle'):
+            defaultOutputstyle = config.get('subliminal','outputstyle')
+            if defaultOutputstyle == 'verbose':
+              defaultVerbose = True
+            elif defaultOutputstyle == 'quiet':
+              defaultQuiet = True
+    except ConfigParser.error as cpe:
+      errorsDuringParsing = "Error while parsing config file '" + defaultConfig + "' :" + cpe
+      
+
     parser = argparse.ArgumentParser(description='Subtitles, faster than your thoughts')
-    parser.add_argument('-l', '--language', action='append', dest='languages', help='wanted language (ISO 639-1)', metavar='LG')
-    parser.add_argument('-s', '--service', action='append', dest='services', help='service to use (%s)' % ', '.join(subliminal.core.filter_services(subliminal.SERVICES)), metavar='NAME')
-    parser.add_argument('-m', '--multi', action='store_true', help='download multiple subtitle languages')
-    parser.add_argument('-f', '--force', action='store_true', help='replace existing subtitle file')
-    parser.add_argument('-w', '--workers', action='store', help='use N threads (default: %(default)s)', metavar='N', type=int, default=4)
-    parser.add_argument('-a', '--age', action='store', help='scan only for files newer or older (prefix with +) than AGE (e.g. 12h, 1w2d, +3d6h)', metavar='AGE', default=None)
-    parser.add_argument('-c', '--compatibility', action='store_true', help='try not to use unicode (use this if you have encoding errors)')
+    parser.add_argument('-l', '--language', action='append', dest='languages', help='wanted language (ISO 639-1)', metavar='LG', default=defaultLanguages )
+    parser.add_argument('-s', '--service', action='append', dest='services', help='service to use (%s)' % ', '.join(subliminal.core.filter_services(subliminal.SERVICES)), default=defaultServices,metavar='NAME')
+    parser.add_argument('-m', '--multi', action='store_true', help='download multiple subtitle languages', default=defaultMultisubs)
+    parser.add_argument('-f', '--force', action='store_true', help='replace existing subtitle file', default=defaultForceoverwrite)
+    parser.add_argument('-w', '--workers', action='store', help='use N threads (default: %(default)s)', metavar='N', type=int, default=defaultWorkers)
+    parser.add_argument('-a', '--age', action='store', help='scan only for files newer or older (prefix with +) than AGE (e.g. 12h, 1w2d, +3d6h)', metavar='AGE', default=defaultAge)
+    parser.add_argument('-c', '--compatibility', action='store_true', help='try not to use unicode (use this if you have encoding errors)', default=defaultCompatmode)
     group_verbosity = parser.add_mutually_exclusive_group()
-    group_verbosity.add_argument('-q', '--quiet', action='store_true', help='disable output')
-    group_verbosity.add_argument('-v', '--verbose', action='store_true', help='verbose output')
+    group_verbosity.add_argument('-q', '--quiet', action='store_true', help='disable output', default=defaultQuiet)
+    group_verbosity.add_argument('-v', '--verbose', action='store_true', help='verbose output', default=defaultVerbose)
     group_cache = parser.add_mutually_exclusive_group()
-    group_cache.add_argument('--cache-dir', action='store', dest='cache_dir', help='cache directory to use', metavar='DIR', default=os.path.expanduser('~/.config/subliminal'))
+    group_cache.add_argument('--cache-dir', action='store', dest='cache_dir', help='cache directory to use', metavar='DIR', default=defaultCachedir)
     group_cache.add_argument('--no-cache-dir', action='store_false', dest='cache_dir', help='do not use cache directory (some services may not work)')
     parser.add_argument('--version', action='version', version=subliminal.__version__)
     parser.add_argument('paths', nargs='+', help='path to video file or folder', metavar='PATH')
@@ -50,6 +100,9 @@ def main():
     elif not args.quiet:
         logging.basicConfig(level=logging.WARN, format='%(levelname)s: %(name)s %(message)s')
 
+    if errorsDuringParsing != None:
+        Logger.warning(errorsDuringParsing)
+    
     # Create cache directory
     if not os.path.exists(args.cache_dir):
         os.mkdir(args.cache_dir)

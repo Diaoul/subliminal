@@ -74,6 +74,9 @@ class Subtitulos(ServiceBase):
                     logger.debug(u'Language %r not in wanted languages %r' % (language, languages))
                     continue
                 html_status = html_language.findNext('li', {'class': 'li-estado green'})
+                if html_status is None:
+                    logger.debug(u'Wrong subtitle status')
+                    continue
                 status = html_status.contents[0].string.strip()
                 if status != 'Completado':
                     logger.debug(u'Wrong subtitle status %s' % status)

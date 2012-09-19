@@ -228,6 +228,15 @@ class ServiceBase(object):
                 else:
                     raise DownloadFailedError('No subtitles found in zip file')
             os.remove(zippath)
+        except AttributeError as e: # fall back for python 2.6 not handling ZipFile.__exit__
+            zipsub = zipfile.ZipFile(zippath)
+            for subfile in zipsub.namelist():
+                if os.path.splitext(subfile)[1] in EXTENSIONS:
+                    open(filepath, 'w').write(zipsub.open(subfile).read())
+                    break
+            else:
+                raise DownloadFailedError('No subtitles found in zip file')
+
         except Exception as e:
             logger.error(u'Download %s failed: %s' % (url, e))
             if os.path.exists(zippath):

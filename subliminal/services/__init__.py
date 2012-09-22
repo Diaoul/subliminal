@@ -255,4 +255,4 @@ class ServiceConfig(object):
             self.cache = Cache(cache_dir)
 
     def __repr__(self):
-        return 'ServiceConfig(%r, %s)' % (self.multi, self.cache.cache_dir)
+        return 'ServiceConfig(%r, %s)' % (self.multi, self.cache_dir)

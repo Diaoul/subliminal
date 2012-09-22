@@ -24,6 +24,7 @@ from subliminal.services.addic7ed import Addic7ed
 from subliminal.services.bierdopje import BierDopje
 from subliminal.services.opensubtitles import OpenSubtitles
 from subliminal.services.podnapisi import Podnapisi
+from subliminal.services.podnapisiweb import PodnapisiWeb
 from subliminal.services.subswiki import SubsWiki
 from subliminal.services.subtitulos import Subtitulos
 from subliminal.services.thesubdb import TheSubDB
@@ -298,6 +299,27 @@ class PodnapisiTestCase(ServiceTestCase):
         self.assertTrue(len(results) == 0)
 
 
+class PodnapisiWebTestCase(ServiceTestCase):
+    query_tests = []
+    list_tests = []
+    download_tests = ['test_download_movie', 'test_download_episode']
+    cache_tests = []
+    service = PodnapisiWeb
+
+    def setUp(self):
+        super(ServiceTestCase, self).setUp()
+        self.config = ServiceConfig(multi=True, cache_dir=cache_dir)
+        self.languages = language_set(['en'])
+        self.movie_path = '/path/Ferris.Buellers.Day.Off.1986.BluRay.720p.x264.DTS-HDChina.mkv'
+        self.movie_sublanguage = 'en'
+        self.movie_subfilesizes = [89637]
+        self.episode_path = '/path/Game.of.Thrones.S01E01.720p.BluRay.DTS.x264-HDC.mkv'
+        self.episode_sublanguage = 'en'
+        self.season = 1
+        self.episode = 1
+        self.episode_subfilesizes = [44741]
+
+
 class SubsWikiTestCase(ServiceTestCase):
     query_tests = ['test_query_series', 'test_query_movie', 'test_query_wrong_parameters', 'test_query_wrong_series', 'test_query_wrong_languages']
     list_tests = ['test_list_episode', 'test_list_movie', 'test_list_wrong_languages']
@@ -461,7 +483,7 @@ class TvSubtitlesTestCase(ServiceTestCase):
         self.assertTrue(len(results) == 0)
 
 
-TESTCASES = [Addic7edTestCase, BierDopjeTestCase, OpenSubtitlesTestCase, PodnapisiTestCase, SubsWikiTestCase,
+TESTCASES = [Addic7edTestCase, BierDopjeTestCase, OpenSubtitlesTestCase, PodnapisiTestCase, PodnapisiWebTestCase, SubsWikiTestCase,
              SubtitulosTestCase, TheSubDBTestCase, TvSubtitlesTestCase]
 
 

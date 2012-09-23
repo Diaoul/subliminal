@@ -300,24 +300,51 @@ class PodnapisiTestCase(ServiceTestCase):
 
 
 class PodnapisiWebTestCase(ServiceTestCase):
-    query_tests = []
-    list_tests = []
-    download_tests = ['test_download_movie', 'test_download_episode']
+    query_tests = ['test_query_movie', 'test_query_series', 'test_query_wrong_series', 'test_query_wrong_languages']
+    list_tests = ['test_list_episode', 'test_list_movie', 'test_list_wrong_languages']
+    download_tests = ['test_download_episode', 'test_download_movie']
     cache_tests = []
     service = PodnapisiWeb
 
     def setUp(self):
-        super(ServiceTestCase, self).setUp()
+        super(PodnapisiWebTestCase, self).setUp()
         self.config = ServiceConfig(multi=True, cache_dir=cache_dir)
-        self.languages = language_set(['en'])
-        self.movie_path = '/path/Ferris.Buellers.Day.Off.1986.BluRay.720p.x264.DTS-HDChina.mkv'
+        self.fake_file = u'/tmp/fake_file'
+        self.languages = language_set(['en', 'es'])
+        self.movie_path = u'Soul Surfer (2011)/Soul.Surfer.(2011).DVDRip.XviD-TWiZTED.mkv'
         self.movie_sublanguage = 'en'
-        self.movie_subfilesizes = [89637]
-        self.episode_path = '/path/Game.of.Thrones.S01E01.720p.BluRay.DTS.x264-HDC.mkv'
-        self.episode_sublanguage = 'en'
-        self.season = 1
-        self.episode = 1
-        self.episode_subfilesizes = [44741]
+        self.movie_subfilesizes = [87528]
+        self.movie_keywords = set(['TWiZTED'])
+        self.movie = u'Soul Surfer'
+        self.movie_year = 2011
+        self.episode_path = u'The Big Bang Theory/Season 05/The.Big.Bang.Theory.S05E06.HDTV.XviD-ASAP.mkv'
+        self.episode_sublanguage = 'es'
+        self.episode_subfilesizes = [33098]
+        self.episode_keywords = set(['asap', 'hdtv'])
+        self.series = 'The Big Bang Theory'
+        self.wrong_series = 'No Existent Show Name'
+        self.season = 5
+        self.episode = 6
+
+    def test_query_series(self):
+        with self.service(self.config) as service:
+            results = service.query(self.fake_file, self.languages, self.series, self.season, self.episode, keywords=self.episode_keywords)
+        self.assertTrue(len(results) > 0)
+
+    def test_query_wrong_series(self):
+        with self.service(self.config) as service:
+            results = service.query(self.fake_file, self.languages, self.wrong_series, self.season, self.episode, keywords=self.episode_keywords)
+        self.assertTrue(len(results) == 0)
+
+    def test_query_wrong_languages(self):
+        with self.service(self.config) as service:
+            results = service.query(self.fake_file, self.wrong_languages, self.series, self.season, self.episode, keywords=self.episode_keywords)
+        self.assertTrue(len(results) == 0)
+
+    def test_query_movie(self):
+        with self.service(self.config) as service:
+            results = service.query(self.fake_file, self.languages, self.movie, year=self.movie_year, keywords=self.movie_keywords)
+        self.assertTrue(len(results) > 0)
 
 
 class SubsWikiTestCase(ServiceTestCase):

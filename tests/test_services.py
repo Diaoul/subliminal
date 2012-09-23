@@ -368,7 +368,7 @@ class SubsWikiTestCase(ServiceTestCase):
         self.assertTrue(len(results) > 0)
 
     def test_query_wrong_parameters(self):
-        with SubsWiki(self.config) as service:
+        with self.service(self.config) as service:
             self.assertRaises(ServiceError, service.query,
                               self.fake_file, self.languages, keywords=self.movie_keywords, movie=self.movie, series=self.series)
 

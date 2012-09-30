@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright 2012 Olivier Leveau <olifozzy@gmail.com>
 # Copyright 2012 Antoine Bertin <diaoulael@gmail.com>
+# Copyright 2012 Nicolas Wack <wackou@gmail.com>
 #
 # This file is part of subliminal.
 #
@@ -59,8 +60,77 @@ class Addic7ed(ServiceBase):
             self.cache_for(self.get_series_id, args=(series_name,), result=series_id)
         return self.cached_value(self.get_series_id, args=(name,))
 
+    @cachedmethod
+    def get_episode_url(self, series_id, season, episode):
+        r = self.session.get('%s/show/%d&season=%d' % (self.server_url, series_id, season))
+        soup = BeautifulSoup(r.content, self.required_features)
+
+        for row in soup('tr', {'class': 'epeven completed'}):
+            cells = row('td')
+            s = int(cells[0].text.strip())
+            ep = int(cells[1].text.strip())
+            episode_url = '%s/%s' % (self.server_url, cells[2].a['href'])
+            self.cache_for(self.get_episode_url,
+                           args=(series_id, s, ep),
+                           result=episode_url)
+        return self.cached_value(self.get_episode_url, args=(series_id, season, episode))
+
     def list_checked(self, video, languages):
         return self.query(video.path or video.release, languages, get_keywords(video.guess), video.series, video.season, video.episode)
+
+    def parse_subtitles(self, soup):
+        subs = []
+        for i, container in enumerate(soup.findAll(id='container95m')):
+            table = container.table.table
+            if not table:
+                continue
+
+            rows = table('tr')
+
+            # row 0: version
+            # row 1: "works with" metadata
+            # row N: language - completion status - download links
+            # row N+1: ? - hearing impaired - num downloads
+            title = rows[0]('td')[0].text.strip()
+            version = title.split(',')[0][7:].strip()
+            notes = rows[1]('td', {'class': 'newsDate'})[0].text.strip()
+
+            keywords = set(version.lower().split('.')) | split_keyword(notes.lower())
+            NON_KEYWORDS = ['works', 'with', 'and']
+            keywords = [ kw for kw in keywords if kw not in NON_KEYWORDS ]
+
+            for row1, row2 in zip(rows[2:], rows[3:]):
+                lang_cell = row1.find('td', {'class': 'language'})
+                if not lang_cell:
+                    continue
+
+                cells1 = row1('td')
+                cells2 = row2('td')
+
+                lang = cells1[2].text.strip()
+                status = cells1[3].text.strip()
+                dlinks = row1('a', {'class': 'buttonDownload'})
+                # if there are 2 download buttons, keep the 2nd one, which
+                # corresponds to most updated subtitle (preferred to original)
+                if len(dlinks) == 1:
+                    url = dlinks[0]['href']
+                elif len(dlinks) == 2:
+                    url = dlinks[1]['href']
+                else:
+                    logger.debug('Invalid number of download links, skipping sub...')
+                    continue
+
+                hearing_impaired = cells2[0].img.next.get('title')
+
+                subs.append(dict(version=version,
+                                 language=lang,
+                                 keywords=keywords,
+                                 status=status,
+                                 hearing_impaired=hearing_impaired,
+                                 url=url))
+
+        return subs
+
 
     def query(self, filepath, languages, keywords, series, season, episode):
         logger.debug(u'Getting subtitles for %s season %d episode %d with languages %r' % (series, season, episode, languages))
@@ -70,30 +140,40 @@ class Addic7ed(ServiceBase):
         except KeyError:
             logger.debug(u'Could not find series id for %s' % series)
             return []
-        r = self.session.get('%s/show/%d&season=%d' % (self.server_url, series_id, season))
+
+        try:
+            episode_url = self.get_episode_url(series_id, season, episode)
+        except KeyError:
+            logger.debug(u'Could not find episode id for season %d episode %s' % (season, episode))
+            return []
+
+        # first, get info for all the subtitles on the page...
+        r = self.session.get(episode_url)
         soup = BeautifulSoup(r.content, self.required_features)
+        subs = self.parse_subtitles(soup)
+
+        # ...then filter them to keep only those that we want
         subtitles = []
-        for row in soup('tr', {'class': 'epeven completed'}):
-            cells = row('td')
-            if int(cells[0].text.strip()) != season or int(cells[1].text.strip()) != episode:
-                continue
-            if cells[6].text.strip():
+        for sub in subs:
+            if sub['hearing_impaired']:
                 logger.debug(u'Skipping hearing impaired')
                 continue
-            sub_status = cells[5].text.strip()
-            if sub_status != 'Completed':
-                logger.debug(u'Wrong subtitle status %s' % sub_status)
+            if sub['status'] != 'Completed':
+                logger.debug(u'Wrong subtitle status %s' % sub['status'])
                 continue
-            sub_language = self.get_language(cells[3].text.strip())
+            sub_language = self.get_language(sub['language'])
             if sub_language not in languages:
                 logger.debug(u'Language %r not in wanted languages %r' % (sub_language, languages))
                 continue
-            sub_keywords = split_keyword(cells[4].text.strip().lower())
+
+
+            sub_keywords = set(sub['keywords'])
             #TODO: Maybe allow empty keywords here? (same in Subtitulos)
             if not keywords & sub_keywords:
                 logger.debug(u'None of subtitle keywords %r in %r' % (sub_keywords, keywords))
                 continue
-            sub_link = '%s/%s' % (self.server_url, cells[9].a['href'])
+
+            sub_link = '%s/%s' % (self.server_url, sub['url'])
             sub_path = get_subtitle_path(filepath, sub_language, self.config.multi)
             subtitle = ResultSubtitle(sub_path, sub_language, self.__class__.__name__.lower(), sub_link, keywords=sub_keywords)
             subtitles.append(subtitle)

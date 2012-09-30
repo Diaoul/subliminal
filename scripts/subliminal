@@ -52,7 +52,7 @@ def main():
 
     # Create cache directory
     if not os.path.exists(args.cache_dir):
-        os.mkdir(args.cache_dir)
+        os.makedirs(args.cache_dir)
 
     # Create filter function
     scan_filter = None

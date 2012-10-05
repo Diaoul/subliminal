@@ -95,9 +95,14 @@ class Addic7ed(ServiceBase):
             version = title.split(',')[0][7:].strip()
             notes = rows[1]('td', {'class': 'newsDate'})[0].text.strip()
 
-            keywords = set(version.lower().split('.')) | split_keyword(notes.lower())
-            NON_KEYWORDS = ['works', 'with', 'and']
-            keywords = [ kw for kw in keywords if kw not in NON_KEYWORDS ]
+            v = version.lower()
+            if v[:4] == '720p':
+                keywords = [ '720p', v[5:] ]
+            else:
+                keywords = v.split('.')
+            keywords = set(keywords) | split_keyword(notes.lower())
+            NON_KEYWORDS = set(['works', 'with', 'and', 'resynced', 'recorrected', 'for', 'the' ])
+            keywords = keywords - NON_KEYWORDS
 
             for row1, row2 in zip(rows[2:], rows[3:]):
                 lang_cell = row1.find('td', {'class': 'language'})

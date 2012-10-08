@@ -24,6 +24,9 @@ from ..language import Language, language_set
 from ..subtitles import get_subtitle_path, ResultSubtitle
 from ..utils import get_keywords, split_keyword
 from ..videos import Episode
+from guessit.date import search_year
+from guessit.matchtree import MatchTree
+from guessit.transfo import guess_properties, guess_release_group
 from bs4 import BeautifulSoup
 import logging
 import os
@@ -31,6 +34,8 @@ import re
 
 
 logger = logging.getLogger(__name__)
+
+NON_KEYWORDS = set(['works', 'with', 'and', 'resynced', 'recorrected', 'for', 'the' ])
 
 
 class Addic7ed(ServiceBase):
@@ -52,12 +57,30 @@ class Addic7ed(ServiceBase):
         r = self.session.get('%s/shows.php' % self.server_url)
         soup = BeautifulSoup(r.content, self.required_features)
         for html_series in soup.select('h3 > a'):
-            series_name = html_series.text.lower()
+            # get series ID
             match = re.search('show/([0-9]+)', html_series['href'])
             if match is None:
                 continue
             series_id = int(match.group(1))
+
+            # get series name
+            series_name = html_series.text.lower()
             self.cache_for(self.get_series_id, args=(series_name,), result=series_id)
+
+            # if we have a the year in the series name, also cache the series
+            # id for the name without the year in it
+            if (series_name != name and
+                series_name.startswith(name) and
+                search_year(series_name[len(name):])[0] is not None):
+                try:
+                    # if we already have a cached value, don't overwrite
+                    self.cached_value(self.get_series_id, args=(name,))
+                except KeyError:
+                    # if this is not cached yet, do it now
+                    logger.debug('Accepting series "%s" (queried: "%s")' % (series_name, name))
+                    self.cache_for(self.get_series_id, args=(name,), result=series_id)
+
+
         return self.cached_value(self.get_series_id, args=(name,))
 
     @cachedmethod
@@ -95,14 +118,13 @@ class Addic7ed(ServiceBase):
             version = title.split(',')[0][7:].strip()
             notes = rows[1]('td', {'class': 'newsDate'})[0].text.strip()
 
-            v = version.lower()
-            if v[:4] == '720p':
-                keywords = [ '720p', v[5:] ]
-            else:
-                keywords = v.split('.')
-            keywords = set(keywords) | split_keyword(notes.lower())
-            NON_KEYWORDS = set(['works', 'with', 'and', 'resynced', 'recorrected', 'for', 'the' ])
-            keywords = keywords - NON_KEYWORDS
+            mtree = MatchTree(version.lower())
+            guess_release_group.process(mtree)
+            guess_properties.process(mtree)
+            found = mtree.matched()
+
+            keywords = set(kw.lower() for kw in found.values()) - NON_KEYWORDS
+            keywords = keywords | split_keyword(notes.lower())
 
             for row1, row2 in zip(rows[2:], rows[3:]):
                 lang_cell = row1.find('td', {'class': 'language'})

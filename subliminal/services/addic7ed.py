@@ -182,9 +182,9 @@ class Addic7ed(ServiceBase):
         # ...then filter them to keep only those that we want
         subtitles = []
         for sub in subs:
-            if sub['hearing_impaired']:
-                logger.debug(u'Skipping hearing impaired')
-                continue
+            #if sub['hearing_impaired']:
+            #    logger.debug(u'Skipping hearing impaired')
+            #    continue
             if sub['status'] != 'Completed':
                 logger.debug(u'Wrong subtitle status %s' % sub['status'])
                 continue
@@ -199,6 +199,8 @@ class Addic7ed(ServiceBase):
             if not keywords & sub_keywords:
                 logger.debug(u'None of subtitle keywords %r in %r' % (sub_keywords, keywords))
                 continue
+
+            logger.debug(u'Accepted sub in %s with keywords asked: %s - parsed: %s' % (sub_language, keywords, sub_keywords))
 
             sub_link = '%s/%s' % (self.server_url, sub['url'])
             sub_path = get_subtitle_path(filepath, sub_language, self.config.multi)

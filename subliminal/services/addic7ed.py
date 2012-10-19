@@ -28,14 +28,13 @@ from guessit.date import search_year
 from guessit.matchtree import MatchTree
 from guessit.transfo import guess_properties, guess_release_group
 from bs4 import BeautifulSoup
+import guessit
 import logging
 import os
 import re
 
 
 logger = logging.getLogger(__name__)
-
-NON_KEYWORDS = set(['works', 'with', 'and', 'resynced', 'recorrected', 'for', 'the' ])
 
 
 class Addic7ed(ServiceBase):
@@ -123,7 +122,7 @@ class Addic7ed(ServiceBase):
             guess_properties.process(mtree)
             found = mtree.matched()
 
-            keywords = set(kw.lower() for kw in found.values()) - NON_KEYWORDS
+            keywords = get_keywords(found)
             keywords = keywords | split_keyword(notes.lower())
 
             for row1, row2 in zip(rows[2:], rows[3:]):
@@ -200,7 +199,8 @@ class Addic7ed(ServiceBase):
                 logger.debug(u'None of subtitle keywords %r in %r' % (sub_keywords, keywords))
                 continue
 
-            logger.debug(u'Accepted sub in %s with keywords asked: %s - parsed: %s' % (sub_language, keywords, sub_keywords))
+            logger.debug(u'Accepted sub in %s (HI=%s) with keywords asked: %s - parsed: %s'
+                         % (sub_language, bool(sub['hearing_impaired']), keywords, sub_keywords))
 
             sub_link = '%s/%s' % (self.server_url, sub['url'])
             sub_path = get_subtitle_path(filepath, sub_language, self.config.multi)

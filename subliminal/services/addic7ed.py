@@ -36,6 +36,9 @@ import re
 
 logger = logging.getLogger(__name__)
 
+# remove 720p too as it is a far too common keyword to be helpful
+NON_KEYWORDS = frozenset(['720p', 'also', 'works', 'with', 'of', 'and'])
+
 
 class Addic7ed(ServiceBase):
     server_url = 'http://www.addic7ed.com'
@@ -123,7 +126,7 @@ class Addic7ed(ServiceBase):
             found = mtree.matched()
 
             keywords = get_keywords(found)
-            keywords = keywords | split_keyword(notes.lower())
+            keywords = (keywords | split_keyword(notes.lower())) - NON_KEYWORDS
 
             for row1, row2 in zip(rows[2:], rows[3:]):
                 lang_cell = row1.find('td', {'class': 'language'})
@@ -192,9 +195,7 @@ class Addic7ed(ServiceBase):
                 logger.debug(u'Language %r not in wanted languages %r' % (sub_language, languages))
                 continue
 
-            # remove 720p too as it is a far too common keyword to be helpful
-            NON_KEYWORDS = set(['720p', 'also', 'works', 'with', 'of'])
-            sub_keywords = set(sub['keywords']) - NON_KEYWORDS
+            sub_keywords = sub['keywords']
             #TODO: Maybe allow empty keywords here? (same in Subtitulos)
             if keywords and not (keywords & sub_keywords):
                 logger.debug(u'None of subtitle keywords %r in %r' % (sub_keywords, keywords))

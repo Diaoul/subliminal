@@ -192,8 +192,9 @@ class Addic7ed(ServiceBase):
                 logger.debug(u'Language %r not in wanted languages %r' % (sub_language, languages))
                 continue
 
-
-            sub_keywords = set(sub['keywords'])
+            # remove 720p too as it is a far too common keyword to be helpful
+            NON_KEYWORDS = set(['720p', 'also', 'works', 'with', 'of'])
+            sub_keywords = set(sub['keywords']) - NON_KEYWORDS
             #TODO: Maybe allow empty keywords here? (same in Subtitulos)
             if keywords and not (keywords & sub_keywords):
                 logger.debug(u'None of subtitle keywords %r in %r' % (sub_keywords, keywords))

@@ -253,8 +253,12 @@ def key_subtitles(subtitle, video, languages, services, order):
     key = ''
     for sort_item in order:
         if sort_item == LANGUAGE_INDEX:
-            key += '{0:03d}'.format(len(languages) - languages.index(subtitle.language) - 1)
-            key += '{0:01d}'.format(subtitle.language == languages[languages.index(subtitle.language)])
+            try:
+                lang_idx = languages.index(subtitle.language)
+            except ValueError:
+                lang_idx = -1
+            key += '{0:03d}'.format(len(languages) - lang_idx - 1)
+            key += '{0:01d}'.format(subtitle.language == languages[lang_idx])
         elif sort_item == SERVICE_INDEX:
             key += '{0:02d}'.format(len(services) - services.index(subtitle.service) - 1)
         elif sort_item == SERVICE_CONFIDENCE:

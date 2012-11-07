@@ -197,7 +197,7 @@ class Addic7ed(ServiceBase):
 
             sub_keywords = sub['keywords']
             #TODO: Maybe allow empty keywords here? (same in Subtitulos)
-            if keywords and not (keywords & sub_keywords):
+            if keywords and not keywords & sub_keywords:
                 logger.debug(u'None of subtitle keywords %r in %r' % (sub_keywords, keywords))
                 continue
 

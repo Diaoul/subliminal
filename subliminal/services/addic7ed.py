@@ -82,6 +82,11 @@ class Addic7ed(ServiceBase):
                     logger.debug('Accepting series "%s" (queried: "%s")' % (series_name, name))
                     self.cache_for(self.get_series_id, args=(name,), result=series_id)
 
+            # other exceptions
+            if (series_name == 'don\'t trust the b---- in apartment 23' and
+                (name == 'don\'t trust the bitch in apartment 23' or
+                 name == 'dont trust the bitch in apartment 23')):
+                self.cache_for(self.get_series_id, args=(name,), result=series_id)
 
         return self.cached_value(self.get_series_id, args=(name,))
 

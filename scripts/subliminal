@@ -75,7 +75,12 @@ def main():
     if args.compatibility:
         paths = args.paths
     else:
-        paths = [unicode(x) for x in args.paths]
+        try:
+            paths = [unicode(x) for x in args.paths]
+        except UnicodeDecodeError:
+            reload(sys)
+            sys.setdefaultencoding('utf8')
+            paths = [unicode(x) for x in args.paths]
 
     # Download subtitles
     with subliminal.Pool(args.workers) as p:

@@ -137,7 +137,7 @@ class Addic7edTestCase(ServiceTestCase):
         # FIXME: this is the size of the first subtitle that appears on the page
         # which is the original one, not the most updated one. We should make
         # sure the Addic7ed service picks up the most recent one instead
-        self.episode_subfilesizes = [33469]
+        self.episode_subfilesizes = [33469, 33304]
         self.episode_keywords = set(['asap', 'hdtv'])
         self.series = 'The Big Bang Theory'
         self.wrong_series = 'No Existent Show Name'
@@ -173,7 +173,7 @@ class BierDopjeTestCase(ServiceTestCase):
         self.config = ServiceConfig(multi=True, cache_dir=cache_dir)
         self.episode_path = u'The Big Bang Theory/Season 05/S05E06 - The Rhinitis Revelation - HD TV.mkv'
         self.episode_sublanguage = 'en'
-        self.episode_subfilesizes = [28982]
+        self.episode_subfilesizes = [28982, 33469]
         self.movie_path = u'Inception (2010)/Inception - 1080p.mkv'
         self.movie_sublanguage = 'en'
         self.movie_subfilesizes = []

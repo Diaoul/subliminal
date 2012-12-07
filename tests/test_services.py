@@ -313,13 +313,13 @@ class PodnapisiWebTestCase(ServiceTestCase):
         self.languages = language_set(['en', 'es'])
         self.movie_path = u'Soul Surfer (2011)/Soul.Surfer.(2011).DVDRip.XviD-TWiZTED.mkv'
         self.movie_sublanguage = 'en'
-        self.movie_subfilesizes = [87528]
+        self.movie_subfilesizes = [112905, 87528]
         self.movie_keywords = set(['TWiZTED'])
         self.movie = u'Soul Surfer'
         self.movie_year = 2011
         self.episode_path = u'The Big Bang Theory/Season 05/The.Big.Bang.Theory.S05E06.HDTV.XviD-ASAP.mkv'
         self.episode_sublanguage = 'es'
-        self.episode_subfilesizes = [33098]
+        self.episode_subfilesizes = [33098, 32877]
         self.episode_keywords = set(['asap', 'hdtv'])
         self.series = 'The Big Bang Theory'
         self.wrong_series = 'No Existent Show Name'

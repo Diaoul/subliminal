@@ -88,8 +88,6 @@ class PodnapisiWeb(ServiceBase):
             params['sTE'] = episode
         if year is not None:
             params['sY'] = year
-        if keywords is not None:
-            params['sR'] = keywords
         r = self.session.get(self.server_url + '/ppodnapisi/search', params=params)
         if r.status_code != 200:
             logger.error(u'Request %s returned status code %d' % (r.url, r.status_code))
@@ -100,7 +98,7 @@ class PodnapisiWeb(ServiceBase):
             if 'n' in sub.flags:
                 logger.debug(u'Skipping hearing impaired')
                 continue
-            language = self.get_language(sub.languageId.text)
+            language = self.get_language(int(sub.languageId.text))
             confidence = float(sub.rating.text) / 5.0
             sub_keywords = set()
             for release in sub.release.text.split():

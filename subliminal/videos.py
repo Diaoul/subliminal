@@ -206,7 +206,7 @@ class UnknownVideo(Video):
 def scan(entry, max_depth=3, scan_filter=None, depth=0):
     """Scan a path for videos and subtitles
 
-    :param string entry: path
+    :param unicode entry: path
     :param int max_depth: maximum folder depth
     :param function scan_filter: filter function that takes a path as argument and returns a boolean indicating whether it has to be filtered out (``True``) or not (``False``)
     :param int depth: starting depth
@@ -220,6 +220,9 @@ def scan(entry, max_depth=3, scan_filter=None, depth=0):
         logger.debug(u'Scanning directory %s with depth %d/%d' % (entry, depth, max_depth))
         result = []
         for e in os.listdir(entry):
+            if not isinstance(e, unicode):
+                logger.warning(u'Skipping badly encoded entry %s' % to_unicode(e))
+                continue
             result.extend(scan(os.path.join(entry, e), max_depth, scan_filter, depth + 1))
         return result
     if os.path.isfile(entry) or depth == 0:

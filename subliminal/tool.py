@@ -21,6 +21,7 @@ import datetime
 import os
 import re
 import subliminal
+import guessit
 import sys
 import logging
 

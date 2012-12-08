@@ -51,7 +51,7 @@ def list_subtitles(paths, languages=None, services=None, force=True, multi=False
     """List subtitles in given paths according to the criteria
 
     :param paths: path(s) to video file or folder
-    :type paths: string or list
+    :type paths: unicode or list of unicode
     :param languages: languages to search for, in preferred order
     :type languages: list of :class:`~subliminal.language.Language` or string
     :param list services: services to use for the search, in preferred order
@@ -74,7 +74,7 @@ def download_subtitles(paths, languages=None, services=None, force=True, multi=F
     """Download subtitles in given paths according to the criteria
 
     :param paths: path(s) to video file or folder
-    :type paths: string or list
+    :type paths: unicode or list of unicode
     :param languages: languages to search for, in preferred order
     :type languages: list of :class:`~subliminal.language.Language` or string
     :param list services: services to use for the search, in preferred order

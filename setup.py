@@ -47,7 +47,11 @@ setup(name='subliminal',
     author_email='diaoulael@gmail.com',
     url='https://github.com/Diaoul/subliminal',
     packages=find_packages(),
-    scripts=['scripts/subliminal'],
     test_suite='tests.suite',
     install_requires=required,
+    entry_points={
+        'console_scripts': [
+            'subliminal = subliminal.tool:main'
+            ],
+    },
     extras_require={'full': ['lxml']})

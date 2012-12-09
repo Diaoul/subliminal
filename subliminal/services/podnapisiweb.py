@@ -74,13 +74,12 @@ class PodnapisiWeb(ServiceBase):
 
     def list_checked(self, video, languages):
         if isinstance(video, Movie):
-            return self.query(video.path or video.release, languages, video.title, year=video.year,
-                              keywords=get_keywords(video.guess))
+            return self.query(video.path or video.release, languages, video.title, year=video.year)
         if isinstance(video, Episode):
             return self.query(video.path or video.release, languages, video.series, season=video.season,
-                              episode=video.episode, keywords=get_keywords(video.guess))
+                              episode=video.episode)
 
-    def query(self, filepath, languages, title, season=None, episode=None, year=None, keywords=None):
+    def query(self, filepath, languages, title, season=None, episode=None, year=None):
         params = {'sXML': 1, 'sK': title, 'sJ': ','.join([str(self.get_code(l)) for l in languages])}
         if season is not None:
             params['sTS'] = season

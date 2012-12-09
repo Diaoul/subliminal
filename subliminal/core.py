@@ -38,10 +38,11 @@ LANGUAGE_INDEX, SERVICE_INDEX, SERVICE_CONFIDENCE, MATCHING_CONFIDENCE = range(4
 
 def get_defaults(paths, languages, services, order, languages_as=language_set):
     """Return default values for inputs which have not been specified and/or
-    format them into the internally required format.
+    format them into the internally required format. Unicode conversion is performed so
+    it may raise UnicodeDecodeError.
 
     :param paths: path(s) to video file or folder
-    :type paths: string or list
+    :type paths: unicode or list of unicode
     :param languages: languages to search for, in preferred order
     :type languages: list of :class:`~subliminal.language.Language` or string
     :param list services: services to use for the search, in preferred order
@@ -54,8 +55,7 @@ def get_defaults(paths, languages, services, order, languages_as=language_set):
     """
     if isinstance(paths, basestring):
         paths = [paths]
-    if any([not isinstance(p, unicode) for p in paths]):
-        logger.warning(u'Not all entries are unicode')
+    paths = map(unicode, paths)
     languages = languages_as(languages) if languages is not None else languages_as(LANGUAGES)
     services = services or SERVICES
     order = order or [LANGUAGE_INDEX, SERVICE_INDEX, SERVICE_CONFIDENCE, MATCHING_CONFIDENCE]

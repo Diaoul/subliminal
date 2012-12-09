@@ -2,9 +2,7 @@ language: python
 python:
   - "2.7"
 install:
-  - pip install -r requirements.txt --use-mirrors
-  - pip install -r optional-requirements.txt --use-mirrors
-  - pip install -r test-requirements.txt --use-mirrors
+  - pip install -r requirements.txt -r optional-requirements.txt -r test-requirements.txt --use-mirrors
 script: python setup.py test
 notifications:
   irc: "irc.freenode.org#subliminal"

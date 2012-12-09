@@ -64,8 +64,9 @@ class ServiceTestCase(unittest.TestCase):
         try:
             for _ in pysrt.SubRipFile.stream(source_file, error_handling=pysrt.SubRipFile.ERROR_RAISE):
                 pass
-        except pysrt.Error:
-            return False
+        except pysrt.Error as e:
+            if e.args[0] < 50:  # Error occurs within the 50 first lines
+                return False
         except UnicodeEncodeError:  # Workaround for https://github.com/byroot/pysrt/issues/12
             pass
         return True

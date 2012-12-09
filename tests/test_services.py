@@ -326,12 +326,10 @@ class PodnapisiWebTestCase(ServiceTestCase):
         self.languages = language_set(['en', 'es'])
         self.movie_path = u'Soul Surfer (2011)/Soul.Surfer.(2011).DVDRip.XviD-TWiZTED.mkv'
         self.movie_sublanguage = 'en'
-        self.movie_keywords = set(['TWiZTED'])
         self.movie = u'Soul Surfer'
         self.movie_year = 2011
         self.episode_path = u'The Big Bang Theory/Season 05/The.Big.Bang.Theory.S05E06.HDTV.XviD-ASAP.mkv'
         self.episode_sublanguage = 'es'
-        self.episode_keywords = set(['asap', 'hdtv'])
         self.series = 'The Big Bang Theory'
         self.wrong_series = 'No Existent Show Name'
         self.season = 5
@@ -339,22 +337,22 @@ class PodnapisiWebTestCase(ServiceTestCase):
 
     def test_query_series(self):
         with self.service(self.config) as service:
-            results = service.query(self.fake_file, self.languages, self.series, self.season, self.episode, keywords=self.episode_keywords)
+            results = service.query(self.fake_file, self.languages, self.series, self.season, self.episode)
         self.assertTrue(len(results) > 0)
 
     def test_query_wrong_series(self):
         with self.service(self.config) as service:
-            results = service.query(self.fake_file, self.languages, self.wrong_series, self.season, self.episode, keywords=self.episode_keywords)
+            results = service.query(self.fake_file, self.languages, self.wrong_series, self.season, self.episode)
         self.assertTrue(len(results) == 0)
 
     def test_query_wrong_languages(self):
         with self.service(self.config) as service:
-            results = service.query(self.fake_file, self.wrong_languages, self.series, self.season, self.episode, keywords=self.episode_keywords)
+            results = service.query(self.fake_file, self.wrong_languages, self.series, self.season, self.episode)
         self.assertTrue(len(results) == 0)
 
     def test_query_movie(self):
         with self.service(self.config) as service:
-            results = service.query(self.fake_file, self.languages, self.movie, year=self.movie_year, keywords=self.movie_keywords)
+            results = service.query(self.fake_file, self.languages, self.movie, year=self.movie_year)
         self.assertTrue(len(results) > 0)
 
 

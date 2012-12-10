@@ -78,7 +78,7 @@ class Subtitulos(ServiceBase):
                 if status != 'Completado':
                     logger.debug(u'Wrong subtitle status %s' % status)
                     continue
-                path = get_subtitle_path(filepath, language, self.config.multi)
+                path = get_subtitle_path(filepath, language, self.multi)
                 subtitle = ResultSubtitle(path, language, self.__class__.__name__.lower(), html_status.find_next('span', {'class': 'descargar green'}).find('a')['href'],
                                           keywords=sub_keywords)
                 subtitles.append(subtitle)

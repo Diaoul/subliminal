@@ -45,8 +45,8 @@ class Podnapisi(ServiceBase):
     videos = [Episode, Movie]
     require_video = True
 
-    def __init__(self, config=None):
-        super(Podnapisi, self).__init__(config)
+    def __init__(self, multi=False):
+        super(Podnapisi, self).__init__(multi)
         self.server = xmlrpclib.ServerProxy(self.server_url)
         self.token = None
 
@@ -78,7 +78,7 @@ class Podnapisi(ServiceBase):
             language = self.get_language(result['lang'])
             if language not in languages:
                 continue
-            path = get_subtitle_path(filepath, language, self.config.multi)
+            path = get_subtitle_path(filepath, language, self.multi)
             subtitle = ResultSubtitle(path, language, self.__class__.__name__.lower(), result['id'],
                                       release=to_unicode(result['release']), confidence=result['weight'])
             subtitles.append(subtitle)

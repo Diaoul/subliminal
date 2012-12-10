@@ -93,7 +93,7 @@ class SubsWiki(ServiceBase):
                 if status != 'Completado':
                     logger.debug(u'Wrong subtitle status %s' % status)
                     continue
-                path = get_subtitle_path(filepath, language, self.config.multi)
+                path = get_subtitle_path(filepath, language, self.multi)
                 subtitle = ResultSubtitle(path, language, self.__class__.__name__.lower(), '%s%s' % (self.server_url, html_status.find_next('td').find('a')['href']))
                 subtitles.append(subtitle)
         return subtitles

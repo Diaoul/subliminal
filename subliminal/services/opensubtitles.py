@@ -81,8 +81,8 @@ class OpenSubtitles(ServiceBase):
     require_video = False
     confidence_order = ['moviehash', 'imdbid', 'fulltext']
 
-    def __init__(self, config=None):
-        super(OpenSubtitles, self).__init__(config)
+    def __init__(self, multi=False):
+        super(OpenSubtitles, self).__init__(multi)
         self.server = xmlrpclib.ServerProxy(self.server_url)
         self.token = None
 
@@ -118,7 +118,7 @@ class OpenSubtitles(ServiceBase):
         subtitles = []
         for result in results['data']:
             language = self.get_language(result['SubLanguageID'])
-            path = get_subtitle_path(filepath, language, self.config.multi)
+            path = get_subtitle_path(filepath, language, self.multi)
             confidence = 1 - float(self.confidence_order.index(result['MatchedBy'])) / float(len(self.confidence_order))
             subtitle = ResultSubtitle(path, language, self.__class__.__name__.lower(), result['SubDownloadLink'],
                                       release=to_unicode(result['SubFileName']), confidence=confidence)

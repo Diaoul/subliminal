@@ -76,6 +76,9 @@ class SubsWiki(ServiceBase):
         soup = BeautifulSoup(r.content, self.required_features)
         subtitles = []
         for sub in soup('td', {'class': 'NewsTitle'}):
+            if not sub.b:
+                logger.debug(u'No keyword information')
+                continue
             sub_keywords = split_keyword(sub.b.string.lower())
             if keywords and not keywords & sub_keywords:
                 logger.debug(u'None of subtitle keywords %r in %r' % (sub_keywords, keywords))

@@ -368,7 +368,7 @@ class SubsWikiTestCase(ServiceTestCase):
         self.config = ServiceConfig(multi=True, cache_dir=cache_dir)
         self.fake_file = u'/tmp/fake_file'
         self.languages = language_set(['en', 'es'])
-        self.movie_path = u'Soul Surfer (2011)/Soul.Surfer.(2011).DVDRip.XviD-TWiZTED.mkv'
+        self.movie_path = u'Brave (2012)/Brave.2012.720p.BluRay.x264.AC3-HDChina.mkv'
         self.movie_sublanguage = 'es'
         self.movie_keywords = set(['twizted'])
         self.movie = u'Soul Surfer'

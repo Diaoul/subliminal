@@ -1,0 +1,53 @@
+movies:
+  - 1:
+      name: Brave
+      year: 2012
+      path: Brave (2012)/Brave.2012.720p.BluRay.x264.AC3-HDChina.mkv
+      size: 3856469558
+      imdbid: tt1217209
+      opensubtitles_hash: 76de24b871408e73
+      thesubdb_hash: f8a7dd509898114ab1e549d07633a98b
+  - 2:
+      name: Inception
+      year: 2010
+      path: Inception (2010)/Inception - 1080p.mkv
+      imdbid: tt1375666
+      opensubtitles_hash:
+      thesubdb_hash:
+
+episodes:
+  1:
+    series: The Big Bang Theory
+    season: 5
+    episode: 6
+    path: The Big Bang Theory/Season 05/The.Big.Bang.Theory.S05E06.HDTV.XviD-ASAP.mkv
+  2:
+    name: Something is wrong with this name
+    season: 1
+    episode: 22
+    path: Something is wrong with this name/Season 01/E22 - It does not exist.mkv
+  3:
+    series: The Big Bang Theory
+    season: 6
+    episode: 10
+    path: The.Big.Bang.Theory.S06E10.720p.HDTV.X264-DIMENSION.mkv
+    exists: True
+    size: 559298404
+    tvdbid: 80379
+    opensubtitles_hash: 6a9c2aa1f4b738b0
+    thesubdb_hash: bc4ad48f3160a9d9d754c21ff6eb7554
+
+services:
+  opensubtitles:
+    episodes:
+      1:
+        languages: [ en, fr ]
+        results: 40
+      2:
+        languages: [ es, de ]
+        results: 0
+      3:
+        languages: [ pt-BR, alb ]
+        results: 3
+    movies:
+      [ 1 ]

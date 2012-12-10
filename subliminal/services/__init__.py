@@ -15,7 +15,6 @@
 #
 # You should have received a copy of the GNU Lesser General Public License
 # along with subliminal.  If not, see <http://www.gnu.org/licenses/>.
-from ..cache import Cache
 from ..exceptions import DownloadFailedError, ServiceError
 from ..language import language_set, Language
 from ..subtitles import EXTENSIONS
@@ -33,8 +32,7 @@ logger = logging.getLogger(__name__)
 class ServiceBase(object):
     """Service base class
 
-    :param config: service configuration
-    :type config: :class:`ServiceConfig`
+    :param multi: whether to download one subtitle per language or not
 
     """
     #: URL to the service server
@@ -67,8 +65,8 @@ class ServiceBase(object):
     #: List of required features for BeautifulSoup
     required_features = None
 
-    def __init__(self, config=None):
-        self.config = config or ServiceConfig()
+    def __init__(self, multi=False):
+        self.multi = multi
         self.session = None
 
     def __enter__(self):
@@ -82,24 +80,6 @@ class ServiceBase(object):
         """Initialize connection"""
         logger.debug(u'Initializing %s' % self.__class__.__name__)
         self.session = requests.session(timeout=10, headers={'User-Agent': self.user_agent})
-
-    def init_cache(self):
-        """Initialize cache, make sure it is loaded from disk"""
-        if not self.config or not self.config.cache:
-            raise ServiceError('Cache directory is required')
-        self.config.cache.load(self.__class__.__name__)
-
-    def save_cache(self):
-        self.config.cache.save(self.__class__.__name__)
-
-    def clear_cache(self):
-        self.config.cache.clear(self.__class__.__name__)
-
-    def cache_for(self, func, args, result):
-        return self.config.cache.cache_for(self.__class__.__name__, func, args, result)
-
-    def cached_value(self, func, args):
-        return self.config.cache.cached_value(self.__class__.__name__, func, args)
 
     def terminate(self):
         """Terminate connection"""
@@ -238,21 +218,3 @@ class ServiceBase(object):
                 os.remove(filepath)
             raise DownloadFailedError(str(e))
         logger.debug(u'Download finished')
-
-
-class ServiceConfig(object):
-    """Configuration for any :class:`Service`
-
-    :param bool multi: whether to download one subtitle per language or not
-    :param string cache_dir: cache directory
-
-    """
-    def __init__(self, multi=False, cache_dir=None):
-        self.multi = multi
-        self.cache_dir = cache_dir
-        self.cache = None
-        if cache_dir is not None:
-            self.cache = Cache(cache_dir)
-
-    def __repr__(self):
-        return 'ServiceConfig(%r, %s)' % (self.multi, self.cache_dir)

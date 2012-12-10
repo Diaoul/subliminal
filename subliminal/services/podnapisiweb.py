@@ -102,7 +102,7 @@ class PodnapisiWeb(ServiceBase):
             sub_keywords = set()
             for release in sub.release.text.split():
                 sub_keywords |= get_keywords(guessit.guess_file_info(release + '.srt', 'autodetect'))
-            sub_path = get_subtitle_path(filepath, language, self.config.multi)
+            sub_path = get_subtitle_path(filepath, language, self.multi)
             subtitle = ResultSubtitle(sub_path, language, self.__class__.__name__.lower(),
                                       sub.url.text, confidence=confidence, keywords=sub_keywords)
             subtitles.append(subtitle)

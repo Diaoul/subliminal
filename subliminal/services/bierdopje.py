@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with subliminal.  If not, see <http://www.gnu.org/licenses/>.
 from . import ServiceBase
-from ..cache import cachedmethod
+from ..cache import region
 from ..exceptions import ServiceError
 from ..language import language_set
 from ..subtitles import get_subtitle_path, ResultSubtitle, EXTENSIONS
@@ -25,10 +25,6 @@ from ..videos import Episode
 from bs4 import BeautifulSoup
 import logging
 import urllib
-try:
-    import cPickle as pickle
-except ImportError:
-    import pickle
 
 
 logger = logging.getLogger(__name__)
@@ -43,7 +39,7 @@ class BierDopje(ServiceBase):
     require_video = False
     required_features = ['xml']
 
-    @cachedmethod
+    @region.cache_on_arguments()
     def get_show_id(self, series):
         r = self.session.get('%sGetShowByName/%s' % (self.server_url, urllib.quote(series.lower())))
         if r.status_code != 200:
@@ -55,14 +51,7 @@ class BierDopje(ServiceBase):
             return None
         return int(soup.showid.contents[0])
 
-    def load_cache(self):
-        logger.debug(u'Loading showids from cache...')
-        with self.lock:
-            with open(self.showids_cache, 'r') as f:
-                self.showids = pickle.load(f)
-
     def query(self, filepath, season, episode, languages, tvdbid=None, series=None):
-        self.init_cache()
         if series:
             request_id = self.get_show_id(series.lower())
             if request_id is None:
@@ -86,7 +75,7 @@ class BierDopje(ServiceBase):
             if soup.status.contents[0] == 'false':
                 logger.debug(u'Could not find subtitles for %s %d season %d episode %d with language %s' % (request_source, request_id, season, episode, language.alpha2))
                 continue
-            path = get_subtitle_path(filepath, language, self.config.multi)
+            path = get_subtitle_path(filepath, language, self.multi)
             for result in soup.results('result'):
                 release = to_unicode(result.filename.contents[0])
                 if not release.endswith(tuple(EXTENSIONS)):

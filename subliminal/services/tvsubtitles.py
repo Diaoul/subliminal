@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with subliminal.  If not, see <http://www.gnu.org/licenses/>.
 from . import ServiceBase
-from ..cache import cachedmethod
+from ..cache import region
 from ..language import language_set, Language
 from ..subtitles import get_subtitle_path, ResultSubtitle
 from ..utils import get_keywords
@@ -50,7 +50,7 @@ class TvSubtitles(ServiceBase):
     require_video = False
     required_features = ['permissive']
 
-    @cachedmethod
+    @region.cache_on_arguments()
     def get_likely_series_id(self, name):
         r = self.session.post('%s/search.php' % self.server_url, data={'q': name})
         soup = BeautifulSoup(r.content, self.required_features)
@@ -64,7 +64,7 @@ class TvSubtitles(ServiceBase):
         result = results[0]
         return result[1]
 
-    @cachedmethod
+    @region.cache_on_arguments()
     def get_episode_id(self, series_id, season, number):
         """Get the TvSubtitles id for the given episode. Raises KeyError if none
         could be found."""
@@ -114,7 +114,6 @@ class TvSubtitles(ServiceBase):
 
     def query(self, filepath, languages, keywords, series, season, episode):
         logger.debug(u'Getting subtitles for %s season %d episode %d with languages %r' % (series, season, episode, languages))
-        self.init_cache()
         sid = self.get_likely_series_id(series.lower())
         try:
             ep_id = self.get_episode_id(sid, season, episode)
@@ -128,7 +127,7 @@ class TvSubtitles(ServiceBase):
             language = subid['language']
             if language not in languages:
                 continue
-            path = get_subtitle_path(filepath, language, self.config.multi)
+            path = get_subtitle_path(filepath, language, self.multi)
             subtitle = ResultSubtitle(path, language, self.__class__.__name__.lower(), '%s/download-%d.html' % (self.server_url, subid['subid']),
                                       keywords=[subid['rip'], subid['release']])
             subtitles.append(subtitle)

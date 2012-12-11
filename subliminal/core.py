@@ -17,7 +17,6 @@
 # along with subliminal.  If not, see <http://www.gnu.org/licenses/>.
 from .exceptions import DownloadFailedError
 from .language import Language, language_set, LANGUAGES
-from .services import ServiceConfig
 from .tasks import DownloadTask, ListTask
 from .utils import get_keywords
 from .videos import Episode, Movie, scan

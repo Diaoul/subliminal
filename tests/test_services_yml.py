@@ -20,10 +20,12 @@ from subliminal.videos import Video
 from subliminal.language import language_set
 import unittest
 import yaml
+import logging
 
 
 services = {}
 config = yaml.load(open('config.yml').read())
+logger = logging.getLogger(__name__)
 
 # Override the exists property
 Video.exists = False
@@ -51,22 +53,22 @@ class ServiceTestCase(unittest.TestCase):
             raise unittest.SkipTest('No episodes to test')
 
         with self.service as service:
-            # Loop over episodes to test and service parameters to use
-            for episode_id, service_params in config['services'][self.service_name]['episodes'].items():
-                # Create a Video object from the config
-                video = Video.from_path(config['episodes'][episode_id]['path'])
-                if 'exists' in config['episodes'][episode_id]:
-                    video.exists = config['episodes'][episode_id]['exists']
-                if 'size' in config['episodes'][episode_id]:
-                    video.size = config['episodes'][episode_id]['size']
-                if 'opensubtitles_hash' in config['episodes'][episode_id]:
-                    video.hashes['OpenSubtitles'] = config['episodes'][episode_id]['opensubtitles_hash']
-                if 'thesubdb_hash' in config['episodes'][episode_id]:
-                    video.hashes['TheSubDb'] = config['episodes'][episode_id]['thesubdb_hash']
-                # List subtitles
-                results = service.list_checked(video, language_set(service_params['languages']))
+            # Loop over episodes to test
+            for episode in config['services'][self.service_name]['episodes']:
+                # Create a Video object from the episode config
+                video = Video.from_path(config['episodes'][episode['id']]['path'])
+                if 'exists' in config['episodes'][episode['id']]:
+                    video.exists = config['episodes'][episode['id']]['exists']
+                if 'size' in config['episodes'][episode['id']]:
+                    video.size = config['episodes'][episode['id']]['size']
+                if 'opensubtitles_hash' in config['episodes'][episode['id']]:
+                    video.hashes['OpenSubtitles'] = config['episodes'][episode['id']]['opensubtitles_hash']
+                if 'thesubdb_hash' in config['episodes'][episode['id']]:
+                    video.hashes['TheSubDb'] = config['episodes'][episode['id']]['thesubdb_hash']
+                # List subtitles with the appropriate languages
+                results = service.list_checked(video, language_set(episode['languages']))
                 # Compare to the service parameters
-                self.assertTrue(len(results) == service_params['results'], 'Found %d results while expecting %d' % (len(results), service_params['results']))
+                self.assertTrue(len(results) == episode['results'], 'Found %d results while expecting %d' % (len(results), episode['results']))
 
 
 class OpenSubtitlesTestCase(ServiceTestCase):

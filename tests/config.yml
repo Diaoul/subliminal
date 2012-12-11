@@ -36,18 +36,29 @@ episodes:
     tvdbid: 80379
     opensubtitles_hash: 6a9c2aa1f4b738b0
     thesubdb_hash: bc4ad48f3160a9d9d754c21ff6eb7554
+  4:
+    series: The Big Bang Theory
+    season: 6
+    episode: 10
+    path: The.Big.Bang.Theory.S06E10.720p.HDTV.X264-DIMENSION.mkv
 
 services:
   opensubtitles:
     episodes:
-      1:
+      - id: 1
         languages: [ en, fr ]
         results: 40
-      2:
+      - id: 2
         languages: [ es, de ]
         results: 0
-      3:
-        languages: [ pt-BR, alb ]
+      - id: 3
+        languages: [ pt-BR ]
         results: 3
+      - id: 3
+        languages: [ alb ]
+        results: 0
+      - id: 4
+        languages: [ pt-BR ]
+        results: 43
     movies:
       [ 1 ]

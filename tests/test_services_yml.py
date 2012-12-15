@@ -20,12 +20,10 @@ from subliminal.videos import Video
 from subliminal.language import language_set
 import unittest
 import yaml
-import logging
 
 
 services = {}
 config = yaml.load(open('config.yml').read())
-logger = logging.getLogger(__name__)
 
 # Override the exists property
 Video.exists = False
@@ -46,29 +44,37 @@ class ServiceTestCase(unittest.TestCase):
     def setUp(self):
         self.service = get_service(self.service_name)
 
-    def test_list_episodes(self):
-        """Test listing subtitles for episodes"""
-        # Skip if no episodes to test
-        if 'episodes' not in config['services'][self.service_name]:
-            raise unittest.SkipTest('No episodes to test')
+    def list(self, kind):
+        """Test listing subtitles"""
+        # Skip if nothing to test
+        if kind not in config['services'][self.service_name]:
+            raise unittest.SkipTest('No %s to test' % kind)
 
         with self.service as service:
-            # Loop over episodes to test
-            for episode in config['services'][self.service_name]['episodes']:
+            # Loop over videos to test
+            for video in config['services'][self.service_name][kind]:
                 # Create a Video object from the episode config
-                video = Video.from_path(config['episodes'][episode['id']]['path'])
-                if 'exists' in config['episodes'][episode['id']]:
-                    video.exists = config['episodes'][episode['id']]['exists']
-                if 'size' in config['episodes'][episode['id']]:
-                    video.size = config['episodes'][episode['id']]['size']
-                if 'opensubtitles_hash' in config['episodes'][episode['id']]:
-                    video.hashes['OpenSubtitles'] = config['episodes'][episode['id']]['opensubtitles_hash']
-                if 'thesubdb_hash' in config['episodes'][episode['id']]:
-                    video.hashes['TheSubDb'] = config['episodes'][episode['id']]['thesubdb_hash']
+                v = Video.from_path(config[kind][video['id']]['path'])
+                if 'exists' in config[kind][video['id']]:
+                    v.exists = config[kind][video['id']]['exists']
+                if 'size' in config[kind][video['id']]:
+                    v.size = config[kind][video['id']]['size']
+                if 'opensubtitles_hash' in config[kind][video['id']]:
+                    v.hashes['OpenSubtitles'] = config[kind][video['id']]['opensubtitles_hash']
+                if 'thesubdb_hash' in config[kind][video['id']]:
+                    v.hashes['TheSubDb'] = config[kind][video['id']]['thesubdb_hash']
                 # List subtitles with the appropriate languages
-                results = service.list_checked(video, language_set(episode['languages']))
+                results = service.list_checked(v, language_set(video['languages']))
                 # Compare to the service parameters
-                self.assertTrue(len(results) == episode['results'], 'Found %d results while expecting %d' % (len(results), episode['results']))
+                self.assertTrue(len(results) == video['results'], 'Found %d results while expecting %d' % (len(results), video['results']))
+
+    def test_list_episodes(self):
+        """Test listing subtitles for episodes"""
+        self.list('episodes')
+
+    def test_list_movies(self):
+        """Test listing subtitles for movies"""
+        self.list('movies')
 
 
 class OpenSubtitlesTestCase(ServiceTestCase):
@@ -82,7 +88,7 @@ def suite():
 
 
 if __name__ == '__main__':
-    import logging
-    logging.getLogger().setLevel(logging.DEBUG)
-    logging.basicConfig()
+#    import logging
+#    logging.getLogger().setLevel(logging.DEBUG)
+#    logging.basicConfig()
     unittest.TextTestRunner().run(suite())

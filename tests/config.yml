@@ -1,19 +1,24 @@
 movies:
-  - 1:
-      name: Brave
-      year: 2012
-      path: Brave (2012)/Brave.2012.720p.BluRay.x264.AC3-HDChina.mkv
-      size: 3856469558
-      imdbid: tt1217209
-      opensubtitles_hash: 76de24b871408e73
-      thesubdb_hash: f8a7dd509898114ab1e549d07633a98b
-  - 2:
-      name: Inception
-      year: 2010
-      path: Inception (2010)/Inception - 1080p.mkv
-      imdbid: tt1375666
-      opensubtitles_hash:
-      thesubdb_hash:
+  1:
+    name: Brave
+    year: 2012
+    path: Brave (2012)/Brave.2012.720p.BluRay.x264.AC3-HDChina.mkv
+    exists: True
+    size: 3856469558
+    imdbid: tt1217209
+    opensubtitles_hash: 76de24b871408e73
+    thesubdb_hash: f8a7dd509898114ab1e549d07633a98b
+  2:
+    name: Brave
+    year: 2012
+    path: Brave (2012)/Brave.2012.720p.BluRay.x264.AC3-HDChina.mkv
+  3:
+    name: Inception
+    year: 2010
+    path: Inception (2010)/Inception - 1080p.mkv
+    imdbid: tt1375666
+    opensubtitles_hash:
+    thesubdb_hash:
 
 episodes:
   1:
@@ -47,7 +52,7 @@ services:
     episodes:
       - id: 1
         languages: [ en, fr ]
-        results: 40
+        results: 51
       - id: 2
         languages: [ es, de ]
         results: 0
@@ -59,6 +64,14 @@ services:
         results: 0
       - id: 4
         languages: [ pt-BR ]
-        results: 43
+        results: 49
     movies:
-      [ 1 ]
+      - id: 1
+        languages: [ en, fr ]
+        results: 3
+      - id: 2
+        languages: [ fr ]
+        results: 37
+      - id: 3
+        languages: [ es ]
+        results: 40

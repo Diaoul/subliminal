@@ -75,3 +75,17 @@ services:
       - id: 3
         languages: [ es ]
         results: 40
+  bierdopje:
+    episodes:
+      - id: 1
+        languages: [ en ]
+        results: 4
+      - id: 2
+        languages: [ dut ]
+        results: 0
+      - id: 3
+        languages: [ eng, dut ]
+        results: 8
+      - id: 4
+        languages: [ eng, dut ]
+        results: 8

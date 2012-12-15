@@ -16,14 +16,16 @@
 #
 # You should have received a copy of the GNU Lesser General Public License
 # along with subliminal.  If not, see <http://www.gnu.org/licenses/>.
-from subliminal.videos import Video
+from subliminal.cache import region
 from subliminal.language import language_set
+from subliminal.videos import Video
 import unittest
 import yaml
 
 
 services = {}
 config = yaml.load(open('config.yml').read())
+region.configure('dogpile.cache.memory')
 
 # Override the exists property
 Video.exists = False
@@ -64,7 +66,7 @@ class ServiceTestCase(unittest.TestCase):
                 if 'thesubdb_hash' in config[kind][video['id']]:
                     v.hashes['TheSubDb'] = config[kind][video['id']]['thesubdb_hash']
                 # List subtitles with the appropriate languages
-                results = service.list_checked(v, language_set(video['languages']))
+                results = service.list(v, language_set(video['languages']))
                 # Compare to the service parameters
                 self.assertTrue(len(results) == video['results'], 'Found %d results while expecting %d' % (len(results), video['results']))
 
@@ -81,9 +83,14 @@ class OpenSubtitlesTestCase(ServiceTestCase):
     service_name = 'opensubtitles'
 
 
+class BierDopjeTestCase(ServiceTestCase):
+    service_name = 'bierdopje'
+
+
 def suite():
     suite = unittest.TestSuite()
     suite.addTest(unittest.TestLoader().loadTestsFromTestCase(OpenSubtitlesTestCase))
+    suite.addTest(unittest.TestLoader().loadTestsFromTestCase(BierDopjeTestCase))
     return suite
 
 

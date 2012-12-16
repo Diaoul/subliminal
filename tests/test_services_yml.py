@@ -30,6 +30,7 @@ import yaml
 
 services = {}
 config = yaml.load(open('config.yml').read())
+fake_file = u'/tmp/fake_file'
 region.configure('dogpile.cache.memory')
 
 # Override the exists property
@@ -73,7 +74,7 @@ class ServiceTestCase(unittest.TestCase):
         """Test listing subtitles"""
         # Skip if nothing to test
         if kind not in config['services'][self.service_name]:
-            raise unittest.SkipTest('No %s to test' % kind)
+            raise unittest.SkipTest('Nothing to test')
 
         with self.service as service:
             # Loop over videos to test
@@ -91,13 +92,13 @@ class ServiceTestCase(unittest.TestCase):
                 # List subtitles with the appropriate languages
                 results = service.list(v, language_set(video['languages']))
                 # Checks
-                self.assertTrue(len(results) >= video['results'], 'Found %d results while expecting %d' % (len(results), video['results']))
+                self.assertTrue(len(results) >= video['results'], 'Found %d results while expecting at least %d' % (len(results), video['results']))
 
     def download(self, kind):
         """Test downloading subtitles"""
         # Skip if nothing to test
         if kind not in config['services'][self.service_name]:
-            raise unittest.SkipTest('No %s to test' % kind)
+            raise unittest.SkipTest('Nothing to test')
 
         with self.service as service:
             # Loop over videos to test
@@ -124,6 +125,7 @@ class ServiceTestCase(unittest.TestCase):
                 if 'sha1' in video:
                     sha1 = hashlib.sha1(open(result.path).read()).hexdigest()
                     self.assertTrue(sha1 in video['sha1'], 'Found %s SHA1 while expecting %s' % (sha1, video['sha1']))
+                os.remove(result.path)
 
     def test_list_episodes(self):
         """Test listing subtitles for episodes"""
@@ -134,7 +136,7 @@ class ServiceTestCase(unittest.TestCase):
         self.list('movies')
 
     def test_download_episodes(self):
-        """Test downloading subtitles for movies"""
+        """Test downloading subtitles for episodes"""
         self.download('episodes')
 
     def test_download_movies(self):
@@ -145,9 +147,69 @@ class ServiceTestCase(unittest.TestCase):
 class OpenSubtitlesTestCase(ServiceTestCase):
     service_name = 'opensubtitles'
 
+    def test_query_query(self):
+        video = config['movies'][1]
+        with self.service as service:
+            results = service.query(fake_file, language_set(['en']), query=video['name'])
+        self.assertTrue(len(results) > 0)
+
+    def test_query_wrong_languages(self):
+        video = config['episodes'][1]
+        with self.service as service:
+            results = service.query(fake_file, language_set(['zza']), query=video['series'])
+        self.assertTrue(len(results) == 0)
+
+    def test_query_imdbid(self):
+        video = config['movies'][1]
+        with self.service as service:
+            results = service.query(fake_file, language_set(['en', 'fr']), imdbid=video['imdbid'])
+        self.assertTrue(len(results) > 0)
+
+    def test_query_hash(self):
+        video = config['movies'][1]
+        with self.service as service:
+            results = service.query(fake_file, language_set(['en']), moviehash=video['opensubtitles_hash'], size=str(video['size']))
+        self.assertTrue(len(results) > 0)
+
 
 class BierDopjeTestCase(ServiceTestCase):
     service_name = 'bierdopje'
+
+    def test_query_series(self):
+        video = config['episodes'][1]
+        with self.service as service:
+            results = service.query(fake_file, video['season'], video['episode'], language_set(['en']), series=video['series'])
+        self.assertTrue(len(results) > 0)
+
+    def test_query_wrong_series(self):
+        video = config['episodes'][2]
+        with self.service as service:
+            results = service.query(fake_file, video['season'], video['episode'], language_set(['en']), series=video['series'])
+        self.assertTrue(len(results) == 0)
+
+    def test_query_wrong_languages(self):
+        video = config['episodes'][1]
+        with self.service as service:
+            results = service.query(fake_file, video['season'], video['episode'], language_set(['fr']), series=video['series'])
+        self.assertTrue(len(results) == 0)
+
+    def test_query_tvdbid(self):
+        video = config['episodes'][3]
+        with self.service as service:
+            results = service.query(fake_file, video['season'], video['episode'], language_set(['en']), tvdbid=video['tvdbid'])
+        self.assertTrue(len(results) > 0)
+
+    def test_query_series_and_tvdbid(self):
+        video = config['episodes'][3]
+        with self.service as service:
+            results = service.query(fake_file, video['season'], video['episode'], language_set(['en']), series=video['series'], tvdbid=video['tvdbid'])
+        self.assertTrue(len(results) > 0)
+
+    def test_query_wrong_tvdbid(self):
+        video = config['episodes'][1]
+        with self.service as service:
+            results = service.query(fake_file, video['season'], video['episode'], language_set(['en']), tvdbid=9999999999)
+        self.assertTrue(len(results) == 0)
 
 
 def suite():
@@ -161,4 +223,4 @@ if __name__ == '__main__':
 #    import logging
 #    logging.getLogger().setLevel(logging.DEBUG)
 #    logging.basicConfig()
-    unittest.TextTestRunner().run(suite())
+    unittest.TextTestRunner(verbosity=2).run(suite())

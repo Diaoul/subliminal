@@ -74,13 +74,12 @@ class PodnapisiWeb(ServiceBase):
 
     def list_checked(self, video, languages):
         if isinstance(video, Movie):
-            return self.query(video.path or video.release, languages, video.title, year=video.year,
-                              keywords=get_keywords(video.guess))
+            return self.query(video.path or video.release, languages, video.title, year=video.year)
         if isinstance(video, Episode):
             return self.query(video.path or video.release, languages, video.series, season=video.season,
-                              episode=video.episode, keywords=get_keywords(video.guess))
+                              episode=video.episode)
 
-    def query(self, filepath, languages, title, season=None, episode=None, year=None, keywords=None):
+    def query(self, filepath, languages, title, season=None, episode=None, year=None):
         params = {'sXML': 1, 'sK': title, 'sJ': ','.join([str(self.get_code(l)) for l in languages])}
         if season is not None:
             params['sTS'] = season
@@ -88,8 +87,6 @@ class PodnapisiWeb(ServiceBase):
             params['sTE'] = episode
         if year is not None:
             params['sY'] = year
-        if keywords is not None:
-            params['sR'] = keywords
         r = self.session.get(self.server_url + '/ppodnapisi/search', params=params)
         if r.status_code != 200:
             logger.error(u'Request %s returned status code %d' % (r.url, r.status_code))
@@ -100,12 +97,12 @@ class PodnapisiWeb(ServiceBase):
             if 'n' in sub.flags:
                 logger.debug(u'Skipping hearing impaired')
                 continue
-            language = self.get_language(sub.languageId.text)
+            language = self.get_language(int(sub.languageId.text))
             confidence = float(sub.rating.text) / 5.0
             sub_keywords = set()
             for release in sub.release.text.split():
                 sub_keywords |= get_keywords(guessit.guess_file_info(release + '.srt', 'autodetect'))
-            sub_path = get_subtitle_path(filepath, language, self.config.multi)
+            sub_path = get_subtitle_path(filepath, language, self.multi)
             subtitle = ResultSubtitle(sub_path, language, self.__class__.__name__.lower(),
                                       sub.url.text, confidence=confidence, keywords=sub_keywords)
             subtitles.append(subtitle)

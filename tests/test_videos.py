@@ -26,7 +26,7 @@ import tarfile
 import unittest
 
 
-test_dir = 'test_videos_files'
+test_dir = u'test_videos_files'
 
 
 def setUpModule():

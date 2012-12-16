@@ -76,6 +76,9 @@ class SubsWiki(ServiceBase):
         soup = BeautifulSoup(r.content, self.required_features)
         subtitles = []
         for sub in soup('td', {'class': 'NewsTitle'}):
+            if not sub.b:
+                logger.debug(u'No keyword information')
+                continue
             sub_keywords = split_keyword(sub.b.string.lower())
             if keywords and not keywords & sub_keywords:
                 logger.debug(u'None of subtitle keywords %r in %r' % (sub_keywords, keywords))
@@ -90,7 +93,7 @@ class SubsWiki(ServiceBase):
                 if status != 'Completado':
                     logger.debug(u'Wrong subtitle status %s' % status)
                     continue
-                path = get_subtitle_path(filepath, language, self.config.multi)
+                path = get_subtitle_path(filepath, language, self.multi)
                 subtitle = ResultSubtitle(path, language, self.__class__.__name__.lower(), '%s%s' % (self.server_url, html_status.find_next('td').find('a')['href']))
                 subtitles.append(subtitle)
         return subtitles

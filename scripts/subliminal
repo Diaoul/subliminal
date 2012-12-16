@@ -34,7 +34,6 @@ def main():
     parser.add_argument('-f', '--force', action='store_true', help='replace existing subtitle file')
     parser.add_argument('-w', '--workers', action='store', help='use N threads (default: %(default)s)', metavar='N', type=int, default=4)
     parser.add_argument('-a', '--age', action='store', help='scan only for files newer or older (prefix with +) than AGE (e.g. 12h, 1w2d, +3d6h)', metavar='AGE', default=None)
-    parser.add_argument('-c', '--compatibility', action='store_true', help='try not to use unicode (use this if you have encoding errors)')
     group_verbosity = parser.add_mutually_exclusive_group()
     group_verbosity.add_argument('-q', '--quiet', action='store_true', help='disable output')
     group_verbosity.add_argument('-v', '--verbose', action='store_true', help='verbose output')
@@ -75,11 +74,8 @@ def main():
         else:
             scan_filter = lambda x: datetime.datetime.now() - datetime.datetime.fromtimestamp(os.path.getmtime(x)) > datetime.timedelta(**time_params)
 
-    # Compatibility mode
-    if args.compatibility:
-        paths = args.paths
-    else:
-        paths = [unicode(x) for x in args.paths]
+    # Convert paths to unicode
+    paths = [unicode(x, sys.stdin.encoding) for x in args.paths]
 
     # Download subtitles
     with subliminal.Pool(args.workers) as p:

@@ -18,7 +18,7 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with subliminal.  If not, see <http://www.gnu.org/licenses/>.
 from . import ServiceBase
-from ..cache import cachedmethod
+from ..cache import region
 from ..exceptions import DownloadFailedError
 from ..language import Language, language_set
 from ..subtitles import get_subtitle_path, ResultSubtitle
@@ -53,7 +53,7 @@ class Addic7ed(ServiceBase):
     require_video = False
     required_features = ['permissive']
 
-    @cachedmethod
+    @region.cache_on_arguments()
     def get_series_id(self, name):
         """Get the show page and cache every show found in it"""
         r = self.session.get('%s/shows.php' % self.server_url)
@@ -201,7 +201,6 @@ class Addic7ed(ServiceBase):
                 continue
 
             sub_keywords = sub['keywords']
-            #TODO: Maybe allow empty keywords here? (same in Subtitulos)
             if keywords and not keywords & sub_keywords:
                 logger.debug(u'None of subtitle keywords %r in %r' % (sub_keywords, keywords))
                 continue

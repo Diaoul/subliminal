@@ -28,7 +28,6 @@ from guessit.date import search_year
 from guessit.matchtree import MatchTree
 from guessit.transfo import guess_properties, guess_release_group
 from bs4 import BeautifulSoup
-import guessit
 import logging
 import os
 import re
@@ -58,6 +57,7 @@ class Addic7ed(ServiceBase):
         """Get the show page and cache every show found in it"""
         r = self.session.get('%s/shows.php' % self.server_url)
         soup = BeautifulSoup(r.content, self.required_features)
+        result = None
         for html_series in soup.select('h3 > a'):
             # get series ID
             match = re.search('show/([0-9]+)', html_series['href'])
@@ -67,7 +67,9 @@ class Addic7ed(ServiceBase):
 
             # get series name
             series_name = html_series.text.lower()
-            self.cache_for(self.get_series_id, args=(series_name,), result=series_id)
+            self.get_series_id.set(series_id, series_name)
+            if name == series_name:
+                result = series_id
 
             # if we have a the year in the series name, also cache the series
             # id for the name without the year in it
@@ -76,34 +78,43 @@ class Addic7ed(ServiceBase):
                 search_year(series_name[len(name):])[0] is not None):
                 try:
                     # if we already have a cached value, don't overwrite
-                    self.cached_value(self.get_series_id, args=(name,))
+                    self.get_series_id(name)
                 except KeyError:
                     # if this is not cached yet, do it now
                     logger.debug('Accepting series "%s" (queried: "%s")' % (series_name, name))
-                    self.cache_for(self.get_series_id, args=(name,), result=series_id)
+                    self.get_series_id.set(series_id, name)
+                    result = series_id
 
             # other exceptions
             if (series_name == 'don\'t trust the b---- in apartment 23' and
                 (name == 'don\'t trust the bitch in apartment 23' or
                  name == 'dont trust the bitch in apartment 23')):
-                self.cache_for(self.get_series_id, args=(name,), result=series_id)
+                self.get_series_id.set(series_id, name)
+                result = series_id
 
-        return self.cached_value(self.get_series_id, args=(name,))
+        if result is not None:
+            return result
+        else:
+            raise KeyError('Could not find series ID for: %s' % name)
 
-    @cachedmethod
+    @region.cache_on_arguments()
     def get_episode_url(self, series_id, season, episode):
+        episode_url = None
         r = self.session.get('%s/show/%d&season=%d' % (self.server_url, series_id, season))
         soup = BeautifulSoup(r.content, self.required_features)
-
         for row in soup('tr', {'class': 'epeven completed'}):
             cells = row('td')
             s = int(cells[0].text.strip())
             ep = int(cells[1].text.strip())
             episode_url = '%s/%s' % (self.server_url, cells[2].a['href'])
-            self.cache_for(self.get_episode_url,
-                           args=(series_id, s, ep),
-                           result=episode_url)
-        return self.cached_value(self.get_episode_url, args=(series_id, season, episode))
+            self.get_episode_url.set(episode_url,
+                                     series_id, s, ep)
+
+        if episode_url is not None:
+            return episode_url
+        else:
+            raise KeyError('Could not find episode for series ID: %s - season: %d - ep number: %d' % (series_id, season, episode))
+
 
     def list_checked(self, video, languages):
         return self.query(video.path or video.release, languages, get_keywords(video.guess), video.series, video.season, video.episode)
@@ -168,7 +179,6 @@ class Addic7ed(ServiceBase):
 
     def query(self, filepath, languages, keywords, series, season, episode):
         logger.debug(u'Getting subtitles for %s season %d episode %d with languages %r' % (series, season, episode, languages))
-        self.init_cache()
         try:
             series_id = self.get_series_id(series.lower())
         except KeyError:
@@ -209,7 +219,7 @@ class Addic7ed(ServiceBase):
                          % (sub_language, bool(sub['hearing_impaired']), keywords, sub_keywords))
 
             sub_link = '%s/%s' % (self.server_url, sub['url'])
-            sub_path = get_subtitle_path(filepath, sub_language, self.config.multi)
+            sub_path = get_subtitle_path(filepath, sub_language, self.multi)
             subtitle = ResultSubtitle(sub_path, sub_language, self.__class__.__name__.lower(), sub_link, keywords=sub_keywords)
             subtitles.append(subtitle)
         return subtitles

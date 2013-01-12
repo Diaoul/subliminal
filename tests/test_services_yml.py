@@ -212,10 +212,15 @@ class BierDopjeTestCase(ServiceTestCase):
         self.assertTrue(len(results) == 0)
 
 
+class Addic7edTestCase(ServiceTestCase):
+    service_name = 'addic7ed'
+
+
 def suite():
     suite = unittest.TestSuite()
     suite.addTest(unittest.TestLoader().loadTestsFromTestCase(OpenSubtitlesTestCase))
     suite.addTest(unittest.TestLoader().loadTestsFromTestCase(BierDopjeTestCase))
+    suite.addTest(unittest.TestLoader().loadTestsFromTestCase(Addic7edTestCase))
     return suite
 
 

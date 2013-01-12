@@ -215,6 +215,24 @@ class BierDopjeTestCase(ServiceTestCase):
 class Addic7edTestCase(ServiceTestCase):
     service_name = 'addic7ed'
 
+    def test_query_series(self):
+        video = config['episodes'][1]
+        with self.service as service:
+            results = service.query(fake_file, language_set(['en']), set(), video['series'], video['season'], video['episode'])
+        self.assertTrue(len(results) > 0)
+
+    def test_query_wrong_series(self):
+        video = config['episodes'][2]
+        with self.service as service:
+            results = service.query(fake_file, language_set(['en']), set(), video['series'], video['season'], video['episode'])
+        self.assertTrue(len(results) == 0)
+
+    def test_query_wrong_languages(self):
+        video = config['episodes'][1]
+        with self.service as service:
+            results = service.query(fake_file, language_set(['zza']), set(), video['series'], video['season'], video['episode'])
+        self.assertTrue(len(results) == 0)
+
 
 def suite():
     suite = unittest.TestSuite()

@@ -99,7 +99,7 @@ class Addic7ed(ServiceBase):
 
     @region.cache_on_arguments()
     def get_episode_url(self, series_id, season, episode):
-        episode_url = None
+        result = None
         r = self.session.get('%s/show/%d&season=%d' % (self.server_url, series_id, season))
         soup = BeautifulSoup(r.content, self.required_features)
         for row in soup('tr', {'class': 'epeven completed'}):
@@ -109,9 +109,11 @@ class Addic7ed(ServiceBase):
             episode_url = '%s/%s' % (self.server_url, cells[2].a['href'])
             self.get_episode_url.set(episode_url,
                                      series_id, s, ep)
+            if ep == episode:
+                result = episode_url
 
-        if episode_url is not None:
-            return episode_url
+        if result is not None:
+            return result
         else:
             raise KeyError('Could not find episode for series ID: %s - season: %d - ep number: %d' % (series_id, season, episode))
 

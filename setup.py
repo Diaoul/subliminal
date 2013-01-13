@@ -49,5 +49,7 @@ setup(name='subliminal',
     scripts=['scripts/subliminal'],
     test_suite='tests.suite',
     tests_require=['charade', 'pysrt'],
-    install_requires=required,
     extras_require={'full': ['lxml']})
+    entry_points={
+        'console_scripts': ['subliminal = subliminal.scripts:main'],
+    },

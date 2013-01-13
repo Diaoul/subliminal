@@ -28,9 +28,8 @@ required = ['beautifulsoup4 >= 4.0', 'guessit >= 0.4.1', 'requests', 'enzyme >= 
 if sys.hexversion < 0x20700f0:
     required.append('argparse >= 1.1')
 
-execfile(os.path.join(os.path.dirname(__file__), 'subliminal', 'infos.py'))
 setup(name='subliminal',
-    version=__version__,
+    version='0.7-dev',
     license='LGPLv3',
     description='Subtitles, faster than your thoughts',
     long_description=read('README.rst') + '\n\n' + read('NEWS.rst'),

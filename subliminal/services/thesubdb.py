@@ -40,7 +40,8 @@ class TheSubDB(ServiceBase):
         return self.query(video.path, video.hashes['TheSubDB'], languages)
 
     def query(self, filepath, moviehash, languages):
-        r = self.session.get(self.server_url, params={'action': 'search', 'hash': moviehash})
+        r = self.session.get(self.server_url, timeout=self.timeout,
+                             params={'action': 'search', 'hash': moviehash})
         if r.status_code == 404:
             logger.debug(u'Could not find subtitles for hash %s' % moviehash)
             return []

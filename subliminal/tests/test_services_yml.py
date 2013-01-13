@@ -50,8 +50,8 @@ def is_valid_subtitle(path):
     except pysrt.Error as e:
         if e.args[0] < 50:  # Error occurs within the 50 first lines
             return False
-    except UnicodeEncodeError:  # Workaround for https://github.com/byroot/pysrt/issues/12
-        pass
+#    except UnicodeEncodeError:  # Workaround for https://github.com/byroot/pysrt/issues/12
+#        pass
     return True
 
 

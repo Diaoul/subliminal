@@ -48,6 +48,35 @@ episodes:
     path: The.Big.Bang.Theory.S06E10.720p.HDTV.X264-DIMENSION.mkv
 
 services:
+  addic7ed:
+    episodes:
+      - id: 1
+        languages: [ en, fr ]
+        results: 3
+      - id: 2
+        languages: [ en ]
+        results: 0
+      - id: 3
+        languages: [ por-BR ]
+        results: 1
+      - id: 3
+        languages: [ ru ]
+        results: 0
+  bierdopje:
+    episodes:
+      - id: 1
+        languages: [ en ]
+        results: 4
+        sha1: [ 5cdee7395d31b214dce9502443de8bd3ab2d31f6, cc2bc4c8e33c246d6bc58be4bf04ddc723ad1ae8, a172de8067a3fe2b97f52d8f07f38524336c85e7 ]
+      - id: 2
+        languages: [ dut ]
+        results: 0
+      - id: 3
+        languages: [ eng, dut ]
+        results: 8
+      - id: 4
+        languages: [ eng, dut ]
+        results: 8
   opensubtitles:
     episodes:
       - id: 1
@@ -77,18 +106,3 @@ services:
       - id: 3
         languages: [ es ]
         results: 40
-  bierdopje:
-    episodes:
-      - id: 1
-        languages: [ en ]
-        results: 4
-        sha1: [ 5cdee7395d31b214dce9502443de8bd3ab2d31f6, cc2bc4c8e33c246d6bc58be4bf04ddc723ad1ae8, a172de8067a3fe2b97f52d8f07f38524336c85e7 ]
-      - id: 2
-        languages: [ dut ]
-        results: 0
-      - id: 3
-        languages: [ eng, dut ]
-        results: 8
-      - id: 4
-        languages: [ eng, dut ]
-        results: 8

@@ -31,7 +31,7 @@ import yaml
 services = {}
 config = yaml.load(open('config.yml').read())
 fake_file = u'/tmp/fake_file'
-region.configure('dogpile.cache.memory')
+region.configure('dogpile.cache.memory', expiration_time=60 * 30)
 
 # Override the exists property
 Video.exists = False
@@ -50,8 +50,8 @@ def is_valid_subtitle(path):
     except pysrt.Error as e:
         if e.args[0] < 50:  # Error occurs within the 50 first lines
             return False
-#    except UnicodeEncodeError:  # Workaround for https://github.com/byroot/pysrt/issues/12
-#        pass
+    except UnicodeEncodeError:  # Workaround for https://github.com/byroot/pysrt/issues/12
+        pass
     return True
 
 
@@ -92,7 +92,10 @@ class ServiceTestCase(unittest.TestCase):
                 # List subtitles with the appropriate languages
                 results = service.list(v, language_set(video['languages']))
                 # Checks
-                self.assertTrue(len(results) >= video['results'], 'Found %d results while expecting at least %d' % (len(results), video['results']))
+                if video['results'] == 0:
+                    self.assertTrue(len(results) == 0, 'Found %d results when no results were expected' % len(results))
+                else:
+                    self.assertTrue(len(results) >= video['results'], 'Found %d results when expecting at least %d' % (len(results), video['results']))
 
     def download(self, kind):
         """Test downloading subtitles"""
@@ -144,32 +147,26 @@ class ServiceTestCase(unittest.TestCase):
         self.download('movies')
 
 
-class OpenSubtitlesTestCase(ServiceTestCase):
-    service_name = 'opensubtitles'
+class Addic7edTestCase(ServiceTestCase):
+    service_name = 'addic7ed'
 
-    def test_query_query(self):
-        video = config['movies'][1]
+    def test_query_series(self):
+        video = config['episodes'][1]
         with self.service as service:
-            results = service.query(fake_file, language_set(['en']), query=video['name'])
+            results = service.query(fake_file, video['series'], video['season'], video['episode'], language_set(['en']))
         self.assertTrue(len(results) > 0)
+
+    def test_query_wrong_series(self):
+        video = config['episodes'][2]
+        with self.service as service:
+            results = service.query(fake_file, video['series'], video['season'], video['episode'], language_set(['en']))
+        self.assertTrue(len(results) == 0)
 
     def test_query_wrong_languages(self):
         video = config['episodes'][1]
         with self.service as service:
-            results = service.query(fake_file, language_set(['zza']), query=video['series'])
+            results = service.query(fake_file, video['series'], video['season'], video['episode'], language_set(['ar']))
         self.assertTrue(len(results) == 0)
-
-    def test_query_imdbid(self):
-        video = config['movies'][1]
-        with self.service as service:
-            results = service.query(fake_file, language_set(['en', 'fr']), imdbid=video['imdbid'])
-        self.assertTrue(len(results) > 0)
-
-    def test_query_hash(self):
-        video = config['movies'][1]
-        with self.service as service:
-            results = service.query(fake_file, language_set(['en']), moviehash=video['opensubtitles_hash'], size=str(video['size']))
-        self.assertTrue(len(results) > 0)
 
 
 class BierDopjeTestCase(ServiceTestCase):
@@ -212,10 +209,39 @@ class BierDopjeTestCase(ServiceTestCase):
         self.assertTrue(len(results) == 0)
 
 
+class OpenSubtitlesTestCase(ServiceTestCase):
+    service_name = 'opensubtitles'
+
+    def test_query_query(self):
+        video = config['movies'][1]
+        with self.service as service:
+            results = service.query(fake_file, language_set(['en']), query=video['name'])
+        self.assertTrue(len(results) > 0)
+
+    def test_query_wrong_languages(self):
+        video = config['episodes'][1]
+        with self.service as service:
+            results = service.query(fake_file, language_set(['zza']), query=video['series'])
+        self.assertTrue(len(results) == 0)
+
+    def test_query_imdbid(self):
+        video = config['movies'][1]
+        with self.service as service:
+            results = service.query(fake_file, language_set(['en', 'fr']), imdbid=video['imdbid'])
+        self.assertTrue(len(results) > 0)
+
+    def test_query_hash(self):
+        video = config['movies'][1]
+        with self.service as service:
+            results = service.query(fake_file, language_set(['en']), moviehash=video['opensubtitles_hash'], size=str(video['size']))
+        self.assertTrue(len(results) > 0)
+
+
 def suite():
     suite = unittest.TestSuite()
-    suite.addTest(unittest.TestLoader().loadTestsFromTestCase(OpenSubtitlesTestCase))
+    suite.addTest(unittest.TestLoader().loadTestsFromTestCase(Addic7edTestCase))
     suite.addTest(unittest.TestLoader().loadTestsFromTestCase(BierDopjeTestCase))
+    suite.addTest(unittest.TestLoader().loadTestsFromTestCase(OpenSubtitlesTestCase))
     return suite
 
 

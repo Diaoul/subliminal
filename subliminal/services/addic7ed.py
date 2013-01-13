@@ -21,7 +21,7 @@ from ..cache import region
 from ..exceptions import DownloadFailedError
 from ..language import Language, language_set
 from ..subtitles import get_subtitle_path, ResultSubtitle
-from ..utils import get_keywords, split_keyword
+from ..utils import split_keyword
 from ..videos import Episode
 from bs4 import BeautifulSoup
 import logging
@@ -46,33 +46,29 @@ class Addic7ed(ServiceBase):
     required_features = ['permissive']
 
     @region.cache_on_arguments()
-    def get_series_id(self, name):
-        """Get the show page and cache every show found in it"""
-        r = self.session.get('%s/shows.php' % self.server_url,
-                             timeout=self.timeout)
+    def get_show_ids(self):
+        """Load the page with all shows and cache the result"""
+        r = self.session.get('%s/shows.php' % self.server_url, timeout=self.timeout)
         soup = BeautifulSoup(r.content, self.required_features)
-        for html_series in soup.select('h3 > a'):
-            series_name = html_series.text.lower()
-            match = re.search('show/([0-9]+)', html_series['href'])
+        show_ids = {}
+        for html_show in soup.select('td.version > h3 > a'):
+            match = re.match('^/show/([0-9]+)$', html_show['href'])
             if match is None:
                 continue
-            series_id = int(match.group(1))
-            self.cache_for(self.get_series_id, args=(series_name,), result=series_id)
-        return self.cached_value(self.get_series_id, args=(name,))
+            show_ids[html_show.text.lower()] = int(match.group(1))
+        return show_ids
 
     def list_checked(self, video, languages):
-        return self.query(video.path or video.release, languages, get_keywords(video.guess), video.series, video.season, video.episode)
+        return self.query(video.path or video.release, video.series, video.season, video.episode, languages)
 
-    def query(self, filepath, languages, keywords, series, season, episode):
+    def query(self, filepath, series, season, episode, languages):
         logger.debug(u'Getting subtitles for %s season %d episode %d with languages %r' % (series, season, episode, languages))
-        self.init_cache()
-        try:
-            series_id = self.get_series_id(series.lower())
-        except KeyError:
-            logger.debug(u'Could not find series id for %s' % series)
+        show_ids = self.get_show_ids()
+        if series.lower() not in show_ids:
+            logger.debug(u'Could not find show id for %s' % series)
             return []
-        r = self.session.get('%s/show/%d&season=%d' % (self.server_url, series_id, season),
-                             timeout=self.timeout)
+        show_id = show_ids[series.lower()]
+        r = self.session.get('%s/show/%d&season=%d' % (self.server_url, show_id, season), timeout=self.timeout)
         soup = BeautifulSoup(r.content, self.required_features)
         subtitles = []
         for row in soup('tr', {'class': 'epeven completed'}):
@@ -91,11 +87,8 @@ class Addic7ed(ServiceBase):
                 logger.debug(u'Language %r not in wanted languages %r' % (sub_language, languages))
                 continue
             sub_keywords = split_keyword(cells[4].text.strip().lower())
-            if keywords and not keywords & sub_keywords:
-                logger.debug(u'None of subtitle keywords %r in %r' % (sub_keywords, keywords))
-                continue
             sub_link = '%s/%s' % (self.server_url, cells[9].a['href'])
-            sub_path = get_subtitle_path(filepath, sub_language, self.config.multi)
+            sub_path = get_subtitle_path(filepath, sub_language, self.multi)
             subtitle = ResultSubtitle(sub_path, sub_language, self.__class__.__name__.lower(), sub_link, keywords=sub_keywords)
             subtitles.append(subtitle)
         return subtitles
@@ -103,8 +96,7 @@ class Addic7ed(ServiceBase):
     def download(self, subtitle):
         logger.info(u'Downloading %s in %s' % (subtitle.link, subtitle.path))
         try:
-            r = self.session.get(subtitle.link, timeout=self.timeout,
-                                 headers={'Referer': subtitle.link})
+            r = self.session.get(subtitle.link, timeout=self.timeout, headers={'Referer': subtitle.link})
             soup = BeautifulSoup(r.content, self.required_features)
             if soup.title is not None and u'Addic7ed.com' in soup.title.text.strip():
                 raise DownloadFailedError('Download limit exceeded')

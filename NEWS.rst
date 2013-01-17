@@ -1,6 +1,12 @@
 News
 ====
 
+0.6.3
+-----
+**release date:** 2013-01-17
+
+* Fix requirements due to requests 1.0
+
 0.6.2
 -----
 **release date:** 2012-09-15

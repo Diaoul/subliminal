@@ -16,11 +16,9 @@
 #
 # You should have received a copy of the GNU Lesser General Public License
 # along with subliminal.  If not, see <http://www.gnu.org/licenses/>.
-from charade.universaldetector import UniversalDetector
 from subliminal.cache import region
 from subliminal.language import language_set
 from subliminal.videos import Video
-import codecs
 import hashlib
 import os.path
 import pysrt
@@ -39,20 +37,13 @@ Video.exists = False
 
 
 def is_valid_subtitle(path):
-    u = UniversalDetector()
-    for line in open(path, 'rb'):
-        u.feed(line)
-    u.close()
-    encoding = u.result['encoding']
-    source_file = codecs.open(path, 'rU', encoding=encoding, errors='replace')
+    source_file = pysrt.SubRipFile._open_unicode_file(path)
     try:
         for _ in pysrt.SubRipFile.stream(source_file, error_handling=pysrt.SubRipFile.ERROR_RAISE):
             pass
     except pysrt.Error as e:
         if e.args[0] < 50:  # Error occurs within the 50 first lines
             return False
-    except UnicodeEncodeError:  # Workaround for https://github.com/byroot/pysrt/issues/12
-        pass
     return True
 
 

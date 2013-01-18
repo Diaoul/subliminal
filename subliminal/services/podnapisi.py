@@ -103,7 +103,7 @@ class Podnapisi(ServiceBase):
         if results['status'] != 200:
             raise DownloadFailedError()
         subtitle.link = 'http://www.podnapisi.net/static/podnapisi/' + results['names'][0]['filename']
-        self.download_file(subtitle.link, subtitle.path)
+        self.download_zip_file(subtitle.link, subtitle.path)
         return subtitle
 
 

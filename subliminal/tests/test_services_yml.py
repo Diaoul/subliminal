@@ -230,11 +230,28 @@ class OpenSubtitlesTestCase(ServiceTestCase):
         self.assertTrue(len(results) > 0)
 
 
+class PodnapisiTestCase(ServiceTestCase):
+    service_name = 'podnapisi'
+
+    def test_query_query(self):
+        video = config['movies'][4]
+        with self.service as service:
+            results = service.query(fake_file, language_set(['en']), moviehash=video['opensubtitles_hash'])
+        self.assertTrue(len(results) > 0)
+
+    def test_query_wrong_languages(self):
+        video = config['episodes'][3]
+        with self.service as service:
+            results = service.query(fake_file, language_set(['zza']), moviehash=video['opensubtitles_hash'])
+        self.assertTrue(len(results) == 0)
+
+
 def suite():
     suite = unittest.TestSuite()
     suite.addTest(unittest.TestLoader().loadTestsFromTestCase(Addic7edTestCase))
     suite.addTest(unittest.TestLoader().loadTestsFromTestCase(BierDopjeTestCase))
     suite.addTest(unittest.TestLoader().loadTestsFromTestCase(OpenSubtitlesTestCase))
+    suite.addTest(unittest.TestLoader().loadTestsFromTestCase(PodnapisiTestCase))
     return suite
 
 

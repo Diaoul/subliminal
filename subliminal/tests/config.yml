@@ -19,6 +19,12 @@ movies:
     imdbid: 1375666
     opensubtitles_hash:
     thesubdb_hash:
+  4:
+    name: Matrix
+    year: 1999
+    path: Matrix (1999)/Matrix.mkv
+    exists: True
+    opensubtitles_hash: e1b45885346cfa0b
 
 episodes:
   1:
@@ -106,3 +112,13 @@ services:
       - id: 3
         languages: [ es ]
         results: 40
+  podnapisi:
+    movies:
+      - id: 4
+        languages: [ en, fr ]
+        results: 23
+    movies:
+      - id: 4
+        languages: [ spa-AR ]
+        results: 2
+        sha1: [ 64f17af71664376372c1b94cded2aca7a5a49fd4 ]

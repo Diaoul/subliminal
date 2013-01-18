@@ -34,6 +34,7 @@ fake_file = u'/tmp/fake_file'
 region.configure('dogpile.cache.memory', expiration_time=60 * 30)
 
 # Override the exists property
+Video.path = ''
 Video.exists = False
 
 
@@ -112,6 +113,7 @@ class ServiceTestCase(unittest.TestCase):
                 # Create a Video object from the episode config
                 v = Video.from_path(config[kind][video['id']]['path'])
                 if 'exists' in config[kind][video['id']]:
+                    v.path = config[kind][video['id']]['path']
                     v.exists = config[kind][video['id']]['exists']
                 if 'size' in config[kind][video['id']]:
                     v.size = config[kind][video['id']]['size']

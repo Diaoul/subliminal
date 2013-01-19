@@ -34,7 +34,7 @@ logger = logging.getLogger(__name__)
 class PodnapisiWeb(ServiceBase):
     server_url = 'http://simple.podnapisi.net'
     api_based = True
-    user_agent = 'Subliminal/0.6'
+    user_agent = 'Subliminal/0.7'
     videos = [Episode, Movie]
     require_video = False
     required_features = ['xml']

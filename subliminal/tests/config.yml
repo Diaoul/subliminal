@@ -122,3 +122,32 @@ services:
         languages: [ spa-AR ]
         results: 2
         sha1: [ 64f17af71664376372c1b94cded2aca7a5a49fd4 ]
+  podnapisiweb:
+    episodes:
+      - id: 1
+        languages: [ en, fr ]
+        results: 5
+        sha1: [ 1c8f86be8713e66b434eaa5abdde615a3bb16c84 ]
+      - id: 2
+        languages: [ es, de ]
+        results: 0
+      - id: 3
+        languages: [ pt-BR ]
+        results: 5
+      - id: 3
+        languages: [ alb ]
+        results: 0
+      - id: 4
+        languages: [ pt-BR ]
+        results: 5
+    movies:
+      - id: 1
+        languages: [ en, fr ]
+        results: 10
+      - id: 2
+        languages: [ fr ]
+        results: 2
+        sha1: [ 04ef1b6fb00536dbcef59f22aed7a30c4a2e6a08 ]
+      - id: 3
+        languages: [ es ]
+        results: 30

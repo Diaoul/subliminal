@@ -39,7 +39,7 @@ class ServiceBase(object):
     server_url = ''
 
     #: User Agent for any HTTP-based requests
-    user_agent = 'subliminal v0.6'
+    user_agent = 'subliminal v0.7'
 
     #: Whether based on an API or not
     api_based = False

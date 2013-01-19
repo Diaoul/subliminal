@@ -213,3 +213,22 @@ services:
         languages: [ pt ]
         results: 1
         sha1: [ faf12778f6792a3d59f98c26d4add7f9c4f7e456 ]
+  tvsubtitles:
+    episodes:
+      - id: 1
+        languages: [ es ]
+        results: 2
+        sha1: [ 5f4d1c9cd24d04a1487084a66d3d36c0211996b9 ]
+      - id: 2
+        languages: [ es, de, fr ]
+        results: 0
+      - id: 3
+        languages: [ uk, hu ]
+        results: 2
+      - id: 3
+        languages: [ alb ]
+        results: 0
+      - id: 4
+        languages: [ pt ]
+        sha1: [ c386723f7d785dde09aca4d3f1657c4b865a26d8 ]
+        results: 1

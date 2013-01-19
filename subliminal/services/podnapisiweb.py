@@ -71,6 +71,7 @@ class PodnapisiWeb(ServiceBase):
                     27: Language('Russian'), 36: Language('Serbian'), 47: Language('Serbian'), 56: Language('Sinhala'),
                     37: Language('Slovak'), 1: Language('Slovenian'), 28: Language('Spanish'), 25: Language('Swedish'),
                     44: Language('Thai'), 30: Language('Turkish'), 46: Language('Ukrainian'), Language('Vietnamese'): 51}
+    language_code = None
 
     def list_checked(self, video, languages):
         if isinstance(video, Movie):

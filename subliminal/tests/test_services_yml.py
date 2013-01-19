@@ -155,12 +155,6 @@ class Addic7edTestCase(ServiceTestCase):
             results = service.query(fake_file, video['series'], video['season'], video['episode'], language_set(['en']))
         self.assertTrue(len(results) == 0)
 
-    def test_query_wrong_languages(self):
-        video = config['episodes'][1]
-        with self.service as service:
-            results = service.query(fake_file, video['series'], video['season'], video['episode'], language_set(['ar']))
-        self.assertTrue(len(results) == 0)
-
 
 class BierDopjeTestCase(ServiceTestCase):
     service_name = 'bierdopje'
@@ -175,12 +169,6 @@ class BierDopjeTestCase(ServiceTestCase):
         video = config['episodes'][2]
         with self.service as service:
             results = service.query(fake_file, video['season'], video['episode'], language_set(['en']), series=video['series'])
-        self.assertTrue(len(results) == 0)
-
-    def test_query_wrong_languages(self):
-        video = config['episodes'][1]
-        with self.service as service:
-            results = service.query(fake_file, video['season'], video['episode'], language_set(['fr']), series=video['series'])
         self.assertTrue(len(results) == 0)
 
     def test_query_tvdbid(self):
@@ -211,12 +199,6 @@ class OpenSubtitlesTestCase(ServiceTestCase):
             results = service.query(fake_file, language_set(['en']), query=video['name'])
         self.assertTrue(len(results) > 0)
 
-    def test_query_wrong_languages(self):
-        video = config['episodes'][1]
-        with self.service as service:
-            results = service.query(fake_file, language_set(['zza']), query=video['series'])
-        self.assertTrue(len(results) == 0)
-
     def test_query_imdbid(self):
         video = config['movies'][1]
         with self.service as service:
@@ -239,12 +221,6 @@ class PodnapisiTestCase(ServiceTestCase):
             results = service.query(fake_file, language_set(['en']), moviehash=video['opensubtitles_hash'])
         self.assertTrue(len(results) > 0)
 
-    def test_query_wrong_languages(self):
-        video = config['episodes'][3]
-        with self.service as service:
-            results = service.query(fake_file, language_set(['zza']), moviehash=video['opensubtitles_hash'])
-        self.assertTrue(len(results) == 0)
-
 
 class PodnapisiWebTestCase(ServiceTestCase):
     service_name = 'podnapisiweb'
@@ -259,12 +235,6 @@ class PodnapisiWebTestCase(ServiceTestCase):
         video = config['episodes'][2]
         with self.service as service:
             results = service.query(fake_file, language_set(['en']), video['series'], video['season'], video['episode'])
-        self.assertTrue(len(results) == 0)
-
-    def test_query_wrong_languages(self):
-        video = config['episodes'][1]
-        with self.service as service:
-            results = service.query(fake_file, language_set(['zza']), video['series'], video['season'], video['episode'])
         self.assertTrue(len(results) == 0)
 
     def test_query_movie(self):
@@ -289,12 +259,6 @@ class SubsWikiTestCase(ServiceTestCase):
             results = service.query(fake_file, language_set(['es']), series=video['series'], season=video['season'], episode=video['episode'])
         self.assertTrue(len(results) == 0)
 
-    def test_query_wrong_languages(self):
-        video = config['episodes'][1]
-        with self.service as service:
-            results = service.query(fake_file, language_set(['zza']), series=video['series'], season=video['season'], episode=video['episode'])
-        self.assertTrue(len(results) == 0)
-
     def test_query_movie(self):
         video = config['movies'][1]
         with self.service as service:
@@ -317,17 +281,11 @@ class SubtitulosTestCase(ServiceTestCase):
             results = service.query(fake_file, language_set(['es']), video['series'], video['season'], video['episode'])
         self.assertTrue(len(results) == 0)
 
-    def test_query_wrong_languages(self):
-        video = config['episodes'][1]
-        with self.service as service:
-            results = service.query(fake_file, language_set(['zza']), video['series'], video['season'], video['episode'])
-        self.assertTrue(len(results) == 0)
-
 
 class TheSubDBTestCase(ServiceTestCase):
     service_name = 'thesubdb'
 
-    def test_query(self):
+    def test_query_series(self):
         video = config['episodes'][3]
         with self.service as service:
             results = service.query(fake_file, language_set(['en']), video['thesubdb_hash'])
@@ -362,6 +320,11 @@ def suite():
     suite.addTest(unittest.TestLoader().loadTestsFromTestCase(BierDopjeTestCase))
     suite.addTest(unittest.TestLoader().loadTestsFromTestCase(OpenSubtitlesTestCase))
     suite.addTest(unittest.TestLoader().loadTestsFromTestCase(PodnapisiTestCase))
+    suite.addTest(unittest.TestLoader().loadTestsFromTestCase(PodnapisiWebTestCase))
+    suite.addTest(unittest.TestLoader().loadTestsFromTestCase(SubsWikiTestCase))
+    suite.addTest(unittest.TestLoader().loadTestsFromTestCase(SubtitulosTestCase))
+    suite.addTest(unittest.TestLoader().loadTestsFromTestCase(TheSubDBTestCase))
+    suite.addTest(unittest.TestLoader().loadTestsFromTestCase(TVsubtitlesTestCase))
     return suite
 
 

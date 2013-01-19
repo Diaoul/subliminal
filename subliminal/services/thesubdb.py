@@ -27,7 +27,7 @@ logger = logging.getLogger(__name__)
 
 class TheSubDB(ServiceBase):
     server_url = 'http://api.thesubdb.com'
-    user_agent = 'SubDB/1.0 (subliminal/0.6; https://github.com/Diaoul/subliminal)'
+    user_agent = 'SubDB/1.0 (subliminal/0.7; https://github.com/Diaoul/subliminal)'
     api_based = True
     # Source: http://api.thesubdb.com/?action=languages
     languages = language_set(['af', 'cs', 'da', 'de', 'en', 'es', 'fi', 'fr', 'hu', 'id', 'it',
@@ -37,9 +37,9 @@ class TheSubDB(ServiceBase):
     require_video = True
 
     def list_checked(self, video, languages):
-        return self.query(video.path, video.hashes['TheSubDB'], languages)
+        return self.query(video.path, languages, video.hashes['TheSubDB'])
 
-    def query(self, filepath, moviehash, languages):
+    def query(self, filepath, languages, moviehash):
         r = self.session.get(self.server_url, timeout=self.timeout,
                              params={'action': 'search', 'hash': moviehash})
         if r.status_code == 404:

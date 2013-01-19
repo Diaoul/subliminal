@@ -80,7 +80,7 @@ class ServiceTestCase(unittest.TestCase):
                 if 'opensubtitles_hash' in config[kind][video['id']]:
                     v.hashes['OpenSubtitles'] = config[kind][video['id']]['opensubtitles_hash']
                 if 'thesubdb_hash' in config[kind][video['id']]:
-                    v.hashes['TheSubDb'] = config[kind][video['id']]['thesubdb_hash']
+                    v.hashes['TheSubDB'] = config[kind][video['id']]['thesubdb_hash']
                 # List subtitles with the appropriate languages
                 results = service.list(v, language_set(video['languages']))
                 # Checks
@@ -111,7 +111,7 @@ class ServiceTestCase(unittest.TestCase):
                 if 'opensubtitles_hash' in config[kind][video['id']]:
                     v.hashes['OpenSubtitles'] = config[kind][video['id']]['opensubtitles_hash']
                 if 'thesubdb_hash' in config[kind][video['id']]:
-                    v.hashes['TheSubDb'] = config[kind][video['id']]['thesubdb_hash']
+                    v.hashes['TheSubDB'] = config[kind][video['id']]['thesubdb_hash']
                 # Download the first subtitle with the appropriate languages
                 results = service.list(v, language_set(video['languages']))
                 result = service.download(results[0])
@@ -321,6 +321,22 @@ class SubtitulosTestCase(ServiceTestCase):
         video = config['episodes'][1]
         with self.service as service:
             results = service.query(fake_file, language_set(['zza']), video['series'], video['season'], video['episode'])
+        self.assertTrue(len(results) == 0)
+
+
+class TheSubDBTestCase(ServiceTestCase):
+    service_name = 'thesubdb'
+
+    def test_query(self):
+        video = config['episodes'][3]
+        with self.service as service:
+            results = service.query(fake_file, language_set(['en']), video['thesubdb_hash'])
+        self.assertTrue(len(results) > 0)
+
+    def test_query_wrong_languages(self):
+        video = config['episodes'][3]
+        with self.service as service:
+            results = service.query(fake_file, language_set(['zza']), video['thesubdb_hash'])
         self.assertTrue(len(results) == 0)
 
 

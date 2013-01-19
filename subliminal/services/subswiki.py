@@ -44,12 +44,12 @@ class SubsWiki(ServiceBase):
     def list_checked(self, video, languages):
         results = []
         if isinstance(video, Episode):
-            results = self.query(video.path or video.release, languages, get_keywords(video.guess), series=video.series, season=video.season, episode=video.episode)
+            results = self.query(video.path or video.release, languages, series=video.series, season=video.season, episode=video.episode)
         elif isinstance(video, Movie) and video.year:
-            results = self.query(video.path or video.release, languages, get_keywords(video.guess), movie=video.title, year=video.year)
+            results = self.query(video.path or video.release, languages, movie=video.title, year=video.year)
         return results
 
-    def query(self, filepath, languages, keywords=None, series=None, season=None, episode=None, movie=None, year=None):
+    def query(self, filepath, languages, series=None, season=None, episode=None, movie=None, year=None):
         if series and season and episode:
             request_series = series.lower().replace(' ', '_')
             if isinstance(request_series, unicode):
@@ -82,21 +82,22 @@ class SubsWiki(ServiceBase):
                 logger.debug(u'No keyword information')
                 continue
             sub_keywords = split_keyword(sub.b.string.lower())
-            if keywords and not keywords & sub_keywords:
-                logger.debug(u'None of subtitle keywords %r in %r' % (sub_keywords, keywords))
-                continue
             for html_language in sub.parent.parent.find_all('td', {'class': 'language'}):
                 language = self.get_language(html_language.string.strip())
                 if language not in languages:
                     logger.debug(u'Language %r not in wanted languages %r' % (language, languages))
                     continue
                 html_status = html_language.find_next_sibling('td')
+                if not html_status.strong:
+                    logger.debug(u'No status information')
+                    continue
                 status = html_status.strong.string.strip()
                 if status != 'Completado':
                     logger.debug(u'Wrong subtitle status %s' % status)
                     continue
                 path = get_subtitle_path(filepath, language, self.multi)
-                subtitle = ResultSubtitle(path, language, self.__class__.__name__.lower(), '%s%s' % (self.server_url, html_status.find_next('td').find('a')['href']))
+                subtitle = ResultSubtitle(path, language, self.__class__.__name__.lower(), '%s%s' % (self.server_url, html_status.find_next('td').find('a')['href']),
+                                          keywords=sub_keywords)
                 subtitles.append(subtitle)
         return subtitles
 

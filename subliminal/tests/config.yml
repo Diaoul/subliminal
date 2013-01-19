@@ -151,3 +151,32 @@ services:
       - id: 3
         languages: [ es ]
         results: 30
+  subswiki:
+    episodes:
+      - id: 1
+        languages: [ es ]
+        results: 1
+        sha1: [ ab84de68316ff579d72568427c48ca1347ad4e63 ]
+      - id: 2
+        languages: [ es, de ]
+        results: 0
+      - id: 3
+        languages: [ es, it ]
+        results: 1
+      - id: 3
+        languages: [ alb ]
+        results: 0
+      - id: 4
+        languages: [ es, pt-BR, ca ]
+        sha1: [ 32a9a136dbdd431d9250c0b0d30893fa823d18e0 ]
+        results: 2
+    movies:
+      - id: 1
+        languages: [ es ]
+        results: 15
+      - id: 2
+        languages: [ fr, en ]
+        results: 0
+      - id: 3
+        languages: [ es, fr, en ]
+        results: 0

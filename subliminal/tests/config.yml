@@ -180,3 +180,22 @@ services:
       - id: 3
         languages: [ es, fr, en ]
         results: 0
+  subtitulos:
+    episodes:
+      - id: 1
+        languages: [ es ]
+        results: 2
+        sha1: [ 399b8af0be22cb25949eb0fe63c2063370c6799a ]
+      - id: 2
+        languages: [ es, de ]
+        results: 0
+      - id: 3
+        languages: [ es, it ]
+        results: 2
+      - id: 3
+        languages: [ alb ]
+        results: 0
+      - id: 4
+        languages: [ es, pt-BR, ca ]
+        sha1: [ 999d3b16663f97e0d1ae97e7bc4a4b32e3c16eac ]
+        results: 3

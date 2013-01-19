@@ -47,9 +47,9 @@ class Subtitulos(ServiceBase):
     release_pattern = re.compile('Versi.+n (.+) ([0-9]+).([0-9])+ megabytes')
 
     def list_checked(self, video, languages):
-        return self.query(video.path or video.release, languages, get_keywords(video.guess), video.series, video.season, video.episode)
+        return self.query(video.path or video.release, languages, video.series, video.season, video.episode)
 
-    def query(self, filepath, languages, keywords, series, season, episode):
+    def query(self, filepath, languages, series, season, episode):
         request_series = series.lower().replace(' ', '_')
         if isinstance(request_series, unicode):
             request_series = unicodedata.normalize('NFKD', request_series).encode('ascii', 'ignore')
@@ -66,9 +66,6 @@ class Subtitulos(ServiceBase):
         subtitles = []
         for sub in soup('div', {'id': 'version'}):
             sub_keywords = split_keyword(self.release_pattern.search(sub.find('p', {'class': 'title-sub'}).contents[1]).group(1).lower())
-            if keywords and not keywords & sub_keywords:
-                logger.debug(u'None of subtitle keywords %r in %r' % (sub_keywords, keywords))
-                continue
             for html_language in sub.find_all_next('ul', {'class': 'sslist'}):
                 language = self.get_language(html_language.find_next('li', {'class': 'li-idioma'}).find('strong').contents[0].string.strip())
                 if language not in languages:

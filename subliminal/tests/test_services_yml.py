@@ -302,6 +302,28 @@ class SubsWikiTestCase(ServiceTestCase):
         self.assertTrue(len(results) > 0)
 
 
+class SubtitulosTestCase(ServiceTestCase):
+    service_name = 'subtitulos'
+
+    def test_query_series(self):
+        video = config['episodes'][1]
+        with self.service as service:
+            results = service.query(fake_file, language_set(['es']), video['series'], video['season'], video['episode'])
+        self.assertTrue(len(results) > 0)
+
+    def test_query_wrong_series(self):
+        video = config['episodes'][2]
+        with self.service as service:
+            results = service.query(fake_file, language_set(['es']), video['series'], video['season'], video['episode'])
+        self.assertTrue(len(results) == 0)
+
+    def test_query_wrong_languages(self):
+        video = config['episodes'][1]
+        with self.service as service:
+            results = service.query(fake_file, language_set(['zza']), video['series'], video['season'], video['episode'])
+        self.assertTrue(len(results) == 0)
+
+
 def suite():
     suite = unittest.TestSuite()
     suite.addTest(unittest.TestLoader().loadTestsFromTestCase(Addic7edTestCase))

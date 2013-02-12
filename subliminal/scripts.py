@@ -22,6 +22,7 @@ import logging
 import os
 import re
 import subliminal
+import guessit
 import sys
 
 
@@ -49,9 +50,12 @@ def main():
     elif not args.quiet:
         logging.basicConfig(level=logging.WARN, format='%(levelname)s: %(name)s %(message)s')
 
+    # Some debug info now that log is setup
+    logging.debug('Starting Subliminal version %s' % subliminal.__version__)
+    logging.debug('Using GuessIt version %s' % guessit.__version__)
     # Create cache directory
     if not os.path.exists(args.cache_dir):
-        os.mkdir(args.cache_dir)
+        os.makedirs(args.cache_dir)
 
     # Create filter function
     scan_filter = None

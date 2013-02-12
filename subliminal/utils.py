@@ -33,7 +33,7 @@ def get_keywords(guess):
     keywords = set()
     for k in ['releaseGroup', 'screenSize', 'videoCodec', 'format']:
         if k in guess:
-            keywords = keywords | split_keyword(guess[k].lower())
+            keywords.add(guess[k].lower())
     return keywords
 
 

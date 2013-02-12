@@ -1,0 +1,234 @@
+movies:
+  1:
+    name: Brave
+    year: 2012
+    path: Brave (2012)/Brave.2012.720p.BluRay.x264.AC3-HDChina.mkv
+    exists: True
+    size: 3856469558
+    imdbid: 1217209
+    opensubtitles_hash: 76de24b871408e73
+    thesubdb_hash: f8a7dd509898114ab1e549d07633a98b
+  2:
+    name: Brave
+    year: 2012
+    path: Brave (2012)/Brave.2012.720p.BluRay.x264.AC3-HDChina.mkv
+  3:
+    name: Inception
+    year: 2010
+    path: Inception (2010)/Inception - 1080p.mkv
+    imdbid: 1375666
+    opensubtitles_hash:
+    thesubdb_hash:
+  4:
+    name: Matrix
+    year: 1999
+    path: Matrix (1999)/Matrix.mkv
+    exists: True
+    opensubtitles_hash: e1b45885346cfa0b
+
+episodes:
+  1:
+    series: The Big Bang Theory
+    season: 5
+    episode: 6
+    path: The Big Bang Theory/Season 05/The.Big.Bang.Theory.S05E06.HDTV.XviD-ASAP.mkv
+  2:
+    series: Something is wrong with this name
+    season: 1
+    episode: 22
+    path: Something is wrong with this name/Season 01/E22 - It does not exist.mkv
+  3:
+    series: The Big Bang Theory
+    season: 6
+    episode: 10
+    path: The.Big.Bang.Theory.S06E10.720p.HDTV.X264-DIMENSION.mkv
+    exists: True
+    size: 559298404
+    tvdbid: 80379
+    opensubtitles_hash: 6a9c2aa1f4b738b0
+    thesubdb_hash: bc4ad48f3160a9d9d754c21ff6eb7554
+  4:
+    series: The Big Bang Theory
+    season: 6
+    episode: 10
+    path: The.Big.Bang.Theory.S06E10.720p.HDTV.X264-DIMENSION.mkv
+
+services:
+  addic7ed:
+    episodes:
+      - id: 1
+        languages: [ en, fr ]
+        results: 3
+      - id: 2
+        languages: [ en ]
+        results: 0
+      - id: 3
+        languages: [ por-BR ]
+        results: 1
+      - id: 3
+        languages: [ ru ]
+        results: 0
+  bierdopje:
+    episodes:
+      - id: 1
+        languages: [ en ]
+        results: 4
+        sha1: [ 5cdee7395d31b214dce9502443de8bd3ab2d31f6, cc2bc4c8e33c246d6bc58be4bf04ddc723ad1ae8, a172de8067a3fe2b97f52d8f07f38524336c85e7, 33de9931fc492158246e06840512389959ee887f ]
+      - id: 2
+        languages: [ dut ]
+        results: 0
+      - id: 3
+        languages: [ eng, dut ]
+        results: 8
+      - id: 4
+        languages: [ eng, dut ]
+        results: 8
+  opensubtitles:
+    episodes:
+      - id: 1
+        languages: [ en, fr ]
+        results: 46
+      - id: 2
+        languages: [ es, de ]
+        results: 0
+      - id: 3
+        languages: [ pt-BR ]
+        results: 3
+        sha1: [ 5cdee7395d31b214dce9502443de8bd3ab2d31f6, cc2bc4c8e33c246d6bc58be4bf04ddc723ad1ae8 ]
+      - id: 3
+        languages: [ alb ]
+        results: 0
+      - id: 4
+        languages: [ pt-BR ]
+        results: 53
+    movies:
+      - id: 1
+        languages: [ en, fr ]
+        results: 3
+        sha1: [ a172de8067a3fe2b97f52d8f07f38524336c85e7, 3c4d568692a5606ce6f39c3a4e4d57801fff902a, 09a686a7e30e74f53ec7975da4dbf22f4c103263 ]
+      - id: 2
+        languages: [ fr ]
+        results: 37
+      - id: 3
+        languages: [ es ]
+        results: 40
+  podnapisi:
+    movies:
+      - id: 4
+        languages: [ en, fr ]
+        results: 23
+    movies:
+      - id: 4
+        languages: [ spa-AR ]
+        results: 2
+        sha1: [ 64f17af71664376372c1b94cded2aca7a5a49fd4 ]
+  podnapisiweb:
+    episodes:
+      - id: 1
+        languages: [ en, fr ]
+        results: 5
+        sha1: [ 1c8f86be8713e66b434eaa5abdde615a3bb16c84 ]
+      - id: 2
+        languages: [ es, de ]
+        results: 0
+      - id: 3
+        languages: [ pt-BR ]
+        results: 5
+      - id: 3
+        languages: [ alb ]
+        results: 0
+      - id: 4
+        languages: [ pt-BR ]
+        results: 5
+    movies:
+      - id: 1
+        languages: [ en, fr ]
+        results: 10
+      - id: 2
+        languages: [ fr ]
+        results: 2
+        sha1: [ 04ef1b6fb00536dbcef59f22aed7a30c4a2e6a08 ]
+      - id: 3
+        languages: [ es ]
+        results: 30
+  subswiki:
+    episodes:
+      - id: 1
+        languages: [ es ]
+        results: 1
+        sha1: [ ab84de68316ff579d72568427c48ca1347ad4e63 ]
+      - id: 2
+        languages: [ es, de ]
+        results: 0
+      - id: 3
+        languages: [ es, it ]
+        results: 1
+      - id: 3
+        languages: [ alb ]
+        results: 0
+      - id: 4
+        languages: [ es, pt-BR, ca ]
+        sha1: [ 32a9a136dbdd431d9250c0b0d30893fa823d18e0 ]
+        results: 2
+    movies:
+      - id: 1
+        languages: [ es ]
+        results: 15
+      - id: 2
+        languages: [ fr, en ]
+        results: 0
+      - id: 3
+        languages: [ es, fr, en ]
+        results: 0
+  subtitulos:
+    episodes:
+      - id: 1
+        languages: [ es ]
+        results: 2
+        sha1: [ 399b8af0be22cb25949eb0fe63c2063370c6799a ]
+      - id: 2
+        languages: [ es, de ]
+        results: 0
+      - id: 3
+        languages: [ es, it ]
+        results: 2
+      - id: 3
+        languages: [ alb ]
+        results: 0
+      - id: 4
+        languages: [ es, pt-BR, ca ]
+        sha1: [ 999d3b16663f97e0d1ae97e7bc4a4b32e3c16eac ]
+        results: 3
+  thesubdb:
+    episodes:
+      - id: 3
+        languages: [ en ]
+        results: 1
+        sha1: [ 8694d295bb12d219a7a720cecff60e63a3386f47 ]
+      - id: 3
+        languages: [ alb ]
+        results: 0
+    movies:
+      - id: 1
+        languages: [ pt ]
+        results: 1
+        sha1: [ faf12778f6792a3d59f98c26d4add7f9c4f7e456 ]
+  tvsubtitles:
+    episodes:
+      - id: 1
+        languages: [ es ]
+        results: 2
+        sha1: [ 5f4d1c9cd24d04a1487084a66d3d36c0211996b9 ]
+      - id: 2
+        languages: [ es, de, fr ]
+        results: 0
+      - id: 3
+        languages: [ uk, hu ]
+        results: 2
+      - id: 3
+        languages: [ alb ]
+        results: 0
+      - id: 4
+        languages: [ pt ]
+        sha1: [ c386723f7d785dde09aca4d3f1657c4b865a26d8 ]
+        results: 1

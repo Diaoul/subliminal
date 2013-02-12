@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright 2012 Olivier Leveau <olifozzy@gmail.com>
 # Copyright 2012 Antoine Bertin <diaoulael@gmail.com>
-# Copyright 2012 Nicolas Wack <wackou@gmail.com>
+# Copyright 2012-2013 Nicolas Wack <wackou@gmail.com>
 #
 # This file is part of subliminal.
 #
@@ -54,8 +54,8 @@ class Addic7ed(ServiceBase):
 
     @region.cache_on_arguments()
     def get_series_id(self, name):
-        """Get the show page and cache every show found in it"""
-        r = self.session.get('%s/shows.php' % self.server_url)
+        """Load the page with all shows and cache the result"""
+        r = self.session.get('%s/shows.php' % self.server_url, timeout=self.timeout)
         soup = BeautifulSoup(r.content, self.required_features)
         result = None
         for html_series in soup.select('h3 > a'):
@@ -100,7 +100,7 @@ class Addic7ed(ServiceBase):
     @region.cache_on_arguments()
     def get_episode_url(self, series_id, season, episode):
         result = None
-        r = self.session.get('%s/show/%d&season=%d' % (self.server_url, series_id, season))
+        r = self.session.get('%s/show/%d&season=%d' % (self.server_url, series_id, season), timeout=self.timeout)
         soup = BeautifulSoup(r.content, self.required_features)
         for row in soup('tr', {'class': 'epeven completed'}):
             cells = row('td')
@@ -119,7 +119,7 @@ class Addic7ed(ServiceBase):
 
 
     def list_checked(self, video, languages):
-        return self.query(video.path or video.release, languages, get_keywords(video.guess), video.series, video.season, video.episode)
+        return self.query(video.path or video.release, video.series, video.season, video.episode, languages)
 
     def parse_subtitles(self, soup):
         subs = []
@@ -179,7 +179,7 @@ class Addic7ed(ServiceBase):
         return subs
 
 
-    def query(self, filepath, languages, keywords, series, season, episode):
+    def query(self, filepath, series, season, episode, languages):
         logger.debug(u'Getting subtitles for %s season %d episode %d with languages %r' % (series, season, episode, languages))
         try:
             series_id = self.get_series_id(series.lower())
@@ -194,7 +194,7 @@ class Addic7ed(ServiceBase):
             return []
 
         # first, get info for all the subtitles on the page...
-        r = self.session.get(episode_url)
+        r = self.session.get(episode_url, timeout=self.timeout)
         soup = BeautifulSoup(r.content, self.required_features)
         subs = self.parse_subtitles(soup)
 
@@ -213,13 +213,6 @@ class Addic7ed(ServiceBase):
                 continue
 
             sub_keywords = sub['keywords']
-            if keywords and not keywords & sub_keywords:
-                logger.debug(u'None of subtitle keywords %r in %r' % (sub_keywords, keywords))
-                continue
-
-            logger.debug(u'Accepted sub in %s (HI=%s) with keywords asked: %s - parsed: %s'
-                         % (sub_language, bool(sub['hearing_impaired']), keywords, sub_keywords))
-
             sub_link = '%s/%s' % (self.server_url, sub['url'])
             sub_path = get_subtitle_path(filepath, sub_language, self.multi)
             subtitle = ResultSubtitle(sub_path, sub_language, self.__class__.__name__.lower(), sub_link, keywords=sub_keywords)
@@ -229,7 +222,7 @@ class Addic7ed(ServiceBase):
     def download(self, subtitle):
         logger.info(u'Downloading %s in %s' % (subtitle.link, subtitle.path))
         try:
-            r = self.session.get(subtitle.link, headers={'Referer': subtitle.link, 'User-Agent': self.user_agent})
+            r = self.session.get(subtitle.link, timeout=self.timeout, headers={'Referer': subtitle.link})
             soup = BeautifulSoup(r.content, self.required_features)
             if soup.title is not None and u'Addic7ed.com' in soup.title.text.strip():
                 raise DownloadFailedError('Download limit exceeded')

@@ -39,7 +39,7 @@ class ServiceBase(object):
     server_url = ''
 
     #: User Agent for any HTTP-based requests
-    user_agent = 'subliminal v0.6'
+    user_agent = 'subliminal v0.7'
 
     #: Whether based on an API or not
     api_based = False
@@ -79,15 +79,8 @@ class ServiceBase(object):
     def init(self):
         """Initialize connection"""
         logger.debug(u'Initializing %s' % self.__class__.__name__)
-        if requests.__version__[0] >= '1':
-            self.session = requests.Session()
-            # TODO: really necessary? can't we just remove it?
-            # note: if needed, it has to go in the .get() call, in requests>=1 timeout
-            #       doesn't exist anymore as a property of the session
-            #self.session.timeout = 10
-            self.session.headers = {'User-Agent': self.user_agent}
-        else:
-            self.session = requests.session(timeout=10, headers={'User-Agent': self.user_agent})
+        self.session = requests.Session()
+        self.session.headers.update({'User-Agent': self.user_agent})
 
     def terminate(self):
         """Terminate connection"""
@@ -179,7 +172,8 @@ class ServiceBase(object):
         """
         logger.info(u'Downloading %s in %s' % (url, filepath))
         try:
-            r = self.session.get(url, headers={'Referer': url, 'User-Agent': self.user_agent})
+            r = self.session.get(url, headers={'Referer': url},
+                                 timeout=self.timeout)
             with open(filepath, 'wb') as f:
                 f.write(r.content)
         except Exception as e:
@@ -200,7 +194,8 @@ class ServiceBase(object):
         logger.info(u'Downloading %s in %s' % (url, filepath))
         try:
             zippath = filepath + '.zip'
-            r = self.session.get(url, headers={'Referer': url, 'User-Agent': self.user_agent})
+            r = self.session.get(url, headers={'Referer': url},
+                                 timeout=self.timeout)
             with open(zippath, 'wb') as f:
                 f.write(r.content)
             if not zipfile.is_zipfile(zippath):

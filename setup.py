@@ -16,24 +16,19 @@
 #
 # You should have received a copy of the GNU Lesser General Public License
 # along with subliminal.  If not, see <http://www.gnu.org/licenses/>.
-import os.path
 import sys
-from setuptools import setup, find_packages
+from setuptools import setup
 
 
-def read(fname):
-    return open(os.path.join(os.path.dirname(__file__), fname)).read()
+requirements = open('requirements.txt').readlines()
+if sys.version_info[:2] in ((2, 6), (3, 1)):
+    requirements.append('argparse>=1.2.1')
 
-required = ['beautifulsoup4 >= 4.0', 'guessit >= 0.4.1', 'requests', 'enzyme >= 0.1', 'html5lib', 'dogpile.cache']
-if sys.hexversion < 0x20700f0:
-    required.append('argparse >= 1.1')
-
-execfile(os.path.join(os.path.dirname(__file__), 'subliminal', 'infos.py'))
 setup(name='subliminal',
-    version=__version__,
+    version='0.7-dev',
     license='LGPLv3',
     description='Subtitles, faster than your thoughts',
-    long_description=read('README.rst') + '\n\n' + read('NEWS.rst'),
+    long_description=open('README.rst').read() + '\n\n' + open('NEWS.rst').read(),
     classifiers=['Development Status :: 4 - Beta',
         'License :: OSI Approved :: GNU Library or Lesser General Public License (LGPL)',
         'Intended Audience :: Developers',
@@ -46,9 +41,11 @@ setup(name='subliminal',
     author='Antoine Bertin',
     author_email='diaoulael@gmail.com',
     url='https://github.com/Diaoul/subliminal',
-    packages=find_packages(),
-    scripts=['scripts/subliminal'],
-    test_suite='tests.suite',
-    tests_require=['charade', 'pysrt'],
-    install_requires=required,
-    extras_require={'full': ['lxml']})
+    packages=['subliminal', 'subliminal.services', 'subliminal.tests'],
+    entry_points={
+        'console_scripts': ['subliminal = subliminal.scripts:main'],
+    },
+    test_suite='subliminal.tests.suite',
+    tests_require=open('test-requirements.txt').readlines(),
+    install_requires=requirements,
+    extras_require={'full': open('optional-requirements.txt').readlines()})

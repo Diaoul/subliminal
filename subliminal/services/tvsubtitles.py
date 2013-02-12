@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # Copyright 2012 Nicolas Wack <wackou@gmail.com>
+# Copyright 2013 Antoine Bertin <diaoulael@gmail.com>
 #
 # This file is part of subliminal.
 #
@@ -19,7 +20,7 @@ from . import ServiceBase
 from ..cache import region
 from ..language import language_set, Language
 from ..subtitles import get_subtitle_path, ResultSubtitle
-from ..utils import get_keywords
+from ..utils import split_keyword
 from ..videos import Episode
 from bs4 import BeautifulSoup
 import logging
@@ -29,15 +30,7 @@ import re
 logger = logging.getLogger(__name__)
 
 
-def match(pattern, string):
-    try:
-        return re.search(pattern, string).group(1)
-    except AttributeError:
-        logger.debug(u'Could not match %r on %r' % (pattern, string))
-        return None
-
-
-class TvSubtitles(ServiceBase):
+class TVsubtitles(ServiceBase):
     server_url = 'http://www.tvsubtitles.net'
     api_based = False
     languages = language_set(['ar', 'bg', 'cs', 'da', 'de', 'el', 'en', 'es', 'fi', 'fr', 'hu',
@@ -51,85 +44,92 @@ class TvSubtitles(ServiceBase):
     required_features = ['permissive']
 
     @region.cache_on_arguments()
-    def get_likely_series_id(self, name):
-        r = self.session.post('%s/search.php' % self.server_url, data={'q': name})
+    def get_show_id(self, name):
+        """Search for a show and get it's id.
+
+        :param string name: name of the show to search for
+        :return: id of the first show found
+        :rtype: int or None
+
+        """
+        r = self.session.post('%s/search.php' % self.server_url, data={'q': name}, timeout=self.timeout)
         soup = BeautifulSoup(r.content, self.required_features)
-        maindiv = soup.find('div', 'left')
-        results = []
-        for elem in maindiv.find_all('li'):
-            sid = int(match('tvshow-([0-9]+)\.html', elem.a['href']))
-            show_name = match('(.*) \(', elem.a.text)
-            results.append((show_name, sid))
-        #TODO: pick up the best one in a smart way
-        result = results[0]
-        return result[1]
+        links = soup.select('div.left li div a')
+        if not links:
+            return None
+        match = re.match('^/tvshow-(\d+)\.html$', links[0]['href'])
+        return int(match.group(1))
 
     @region.cache_on_arguments()
-    def get_episode_id(self, series_id, season, number):
-        """Get the TvSubtitles id for the given episode. Raises KeyError if none
-        could be found."""
-        # download the page of the season, contains ids for all episodes
-        episode_id = None
-        r = self.session.get('%s/tvshow-%d-%d.html' % (self.server_url, series_id, season))
+    def get_episode_ids(self, show_id, season):
+        """Get episode ids using a given show id.
+
+        :param int show_id: show id
+        :param int season: season number
+        :return: episode ids per episode number
+        :rtype: dict
+
+        """
+        r = self.session.get('%s/tvshow-%d-%d.html' % (self.server_url, show_id, season), timeout=self.timeout)
         soup = BeautifulSoup(r.content, self.required_features)
-        table = soup.find('table', id='table5')
-        for row in table.find_all('tr'):
+        episode_ids = {}
+        for row in soup.select('table#table5 tr'):
             cells = row.find_all('td')
             if not cells:
                 continue
-            episode_number = match('x([0-9]+)', cells[0].text)
-            if not episode_number:
+            match = re.match('^\d+x(\d+)$', cells[0].text)
+            if not match:
                 continue
-            episode_number = int(episode_number)
-            episode_id = int(match('episode-([0-9]+)', cells[1].a['href']))
-            # we could just return the id of the queried episode, but as we
-            # already downloaded the whole page we might as well fill in the
-            # information for all the episodes of the season
-            self.cache_for(self.get_episode_id, args=(series_id, season, episode_number), result=episode_id)
-        # raises KeyError if not found
-        return self.cached_value(self.get_episode_id, args=(series_id, season, number))
-
-    # Do not cache this method in order to always check for the most recent
-    # subtitles
-    def get_sub_ids(self, episode_id):
-        subids = []
-        r = self.session.get('%s/episode-%d.html' % (self.server_url, episode_id))
-        epsoup = BeautifulSoup(r.content, self.required_features)
-        for subdiv in epsoup.find_all('a'):
-            if 'href' not in subdiv.attrs or not subdiv['href'].startswith('/subtitle'):
-                continue
-            subid = int(match('([0-9]+)', subdiv['href']))
-            lang = self.get_language(match('flags/(.*).gif', subdiv.img['src']))
-            result = {'subid': subid, 'language': lang}
-            for p in subdiv.find_all('p'):
-                if 'alt' in p.attrs and p['alt'] == 'rip':
-                    result['rip'] = p.text.strip()
-                if 'alt' in p.attrs and p['alt'] == 'release':
-                    result['release'] = p.text.strip()
-            subids.append(result)
-        return subids
+            episode_ids[int(match.group(1))] = int(re.match('^episode-(\d+)\.html$', cells[1].a['href']).group(1))
+        return episode_ids
 
     def list_checked(self, video, languages):
-        return self.query(video.path or video.release, languages, get_keywords(video.guess), video.series, video.season, video.episode)
+        return self.query(video.path or video.release, languages, video.series, video.season, video.episode)
 
-    def query(self, filepath, languages, keywords, series, season, episode):
+    def query(self, filepath, languages, series, season, episode):
         logger.debug(u'Getting subtitles for %s season %d episode %d with languages %r' % (series, season, episode, languages))
-        sid = self.get_likely_series_id(series.lower())
-        try:
-            ep_id = self.get_episode_id(sid, season, episode)
-        except KeyError:
-            logger.debug(u'Could not find episode id for %s season %d episode %d' % (series, season, episode))
+        # find the show id
+        show_id = self.get_show_id(series.lower())
+        if not show_id:
+            logger.debug(u'Could not find show id')
             return []
-        subids = self.get_sub_ids(ep_id)
-        # filter the subtitles with our queried languages
+        # load episode ids
+        episode_ids = self.get_episode_ids(show_id, season)
+        if episode not in episode_ids:
+            logger.debug(u'Could not find episode id')
+            return []
+        episode_id = episode_ids[episode]
+        # query with the episode id
+        r = self.session.get('%s/episode-%d.html' % (self.server_url, episode_id), timeout=self.timeout)
+        soup = BeautifulSoup(r.content, self.required_features)
+        # loop over subtitles
         subtitles = []
-        for subid in subids:
-            language = subid['language']
-            if language not in languages:
+        #TODO: put this in a class attribute?
+        prog = re.compile('^/subtitle-(\d+)\.html$')
+        for a in soup.find_all('a', href=prog):
+            # filter on languages
+            sub_language = self.get_language(re.match('^images/flags/(\w+)\.gif$', a.h5.img['src']).group(1))
+            if sub_language not in languages:
+                logger.debug(u'Language %r not in wanted languages %r' % (sub_language, languages))
                 continue
-            path = get_subtitle_path(filepath, language, self.multi)
-            subtitle = ResultSubtitle(path, language, self.__class__.__name__.lower(), '%s/download-%d.html' % (self.server_url, subid['subid']),
-                                      keywords=[subid['rip'], subid['release']])
+            # get keywords
+            sub_keywords = set()
+            for p in a.find_all('p'):
+                if 'title' in p.attrs:
+                    if p['title'] == 'release':
+                        sub_keywords |= split_keyword(p.text.strip().lower())
+                    elif p['title'] == 'rip':
+                        sub_keywords |= set(p.text.lower().split())
+            # compute confidence allowing 1 bad vote per 10 good votes
+            match = re.match('^(\d+)/(\d+)$', a.span.text.strip())
+            sub_bad = int(match.group(1))
+            sub_good = int(match.group(2))
+            sub_confidence = sub_good / float(sub_good + max(sub_bad - sub_good / 10, 0)) if sub_good + sub_bad > 0 else None
+            # other stuff
+            sub_id = int(prog.match(a['href']).group(1))
+            sub_link = self.server_url + '/download-%d.html' % sub_id
+            sub_path = get_subtitle_path(filepath, sub_language, self.multi)
+            subtitle = ResultSubtitle(sub_path, sub_language, self.__class__.__name__.lower(), sub_link, confidence=sub_confidence, keywords=sub_keywords)
             subtitles.append(subtitle)
         return subtitles
 
@@ -138,4 +138,4 @@ class TvSubtitles(ServiceBase):
         return subtitle
 
 
-Service = TvSubtitles
+Service = TVsubtitles

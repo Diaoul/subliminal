@@ -53,10 +53,10 @@ class Subtitulos(ServiceBase):
         request_series = series.lower().replace(' ', '_')
         if isinstance(request_series, unicode):
             request_series = unicodedata.normalize('NFKD', request_series).encode('ascii', 'ignore')
-        logger.debug(u'Getting subtitles for %s season %d episode %d with languages %r' % (series, season, episode, languages))
+        logger.debug('Getting subtitles for %s season %d episode %d with languages %r' % (series, season, episode, languages))
         r = self.session.get('%s/%s/%sx%.2d' % (self.server_url, urllib.quote(request_series), season, episode))
         if r.status_code == 404:
-            logger.debug(u'Could not find subtitles for %s season %d episode %d with languages %r' % (series, season, episode, languages))
+            logger.debug('Could not find subtitles for %s season %d episode %d with languages %r' % (series, season, episode, languages))
             return []
         if r.status_code != 200:
             logger.error(u'Request %s returned status code %d' % (r.url, r.status_code))
@@ -66,17 +66,17 @@ class Subtitulos(ServiceBase):
         for sub in soup('div', {'id': 'version'}):
             sub_keywords = split_keyword(self.release_pattern.search(sub.find('p', {'class': 'title-sub'}).contents[1]).group(1).lower())
             if not keywords & sub_keywords:
-                logger.debug(u'None of subtitle keywords %r in %r' % (sub_keywords, keywords))
+                logger.debug('None of subtitle keywords %r in %r' % (sub_keywords, keywords))
                 continue
             for html_language in sub.findAllNext('ul', {'class': 'sslist'}):
                 language = self.get_language(html_language.findNext('li', {'class': 'li-idioma'}).find('strong').contents[0].string.strip())
                 if language not in languages:
-                    logger.debug(u'Language %r not in wanted languages %r' % (language, languages))
+                    logger.debug('Language %r not in wanted languages %r' % (language, languages))
                     continue
                 html_status = html_language.findNext('li', {'class': 'li-estado green'})
                 status = html_status.contents[0].string.strip()
                 if status != 'Completado':
-                    logger.debug(u'Wrong subtitle status %s' % status)
+                    logger.debug('Wrong subtitle status %s' % status)
                     continue
                 path = get_subtitle_path(filepath, language, self.config.multi)
                 subtitle = ResultSubtitle(path, language, self.__class__.__name__.lower(), html_status.findNext('span', {'class': 'descargar green'}).find('a')['href'],

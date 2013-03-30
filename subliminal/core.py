@@ -55,7 +55,7 @@ def create_list_tasks(paths, languages, services, force, multi, cache_dir, max_d
     scan_result = []
     for p in paths:
         scan_result.extend(scan(p, max_depth, scan_filter))
-    logger.debug(u'Found %d videos in %r with maximum depth %d' % (len(scan_result), paths, max_depth))
+    logger.debug('Found %d videos in %r with maximum depth %d' % (len(scan_result), paths, max_depth))
     tasks = []
     config = ServiceConfig(multi, cache_dir)
     services = filter_services(services)
@@ -65,19 +65,19 @@ def create_list_tasks(paths, languages, services, force, multi, cache_dir, max_d
         if not force and multi:
             wanted_languages -= detected_languages
             if not wanted_languages:
-                logger.debug(u'No need to list multi subtitles %r for %r because %r detected' % (languages, video, detected_languages))
+                logger.debug('No need to list multi subtitles %r for %r because %r detected' % (languages, video, detected_languages))
                 continue
         if not force and not multi and Language('Undetermined') in detected_languages:
-            logger.debug(u'No need to list single subtitles %r for %r because one detected' % (languages, video))
+            logger.debug('No need to list single subtitles %r for %r because one detected' % (languages, video))
             continue
-        logger.debug(u'Listing subtitles %r for %r with services %r' % (wanted_languages, video, services))
+        logger.debug('Listing subtitles %r for %r with services %r' % (wanted_languages, video, services))
         for service_name in services:
             mod = __import__('services.' + service_name, globals=globals(), locals=locals(), fromlist=['Service'], level=-1)
             service = mod.Service
             if not service.check_validity(video, wanted_languages):
                 continue
             task = ListTask(video, wanted_languages & service.languages, service_name, config)
-            logger.debug(u'Created task %r' % task)
+            logger.debug('Created task %r' % task)
             tasks.append(task)
     return tasks
 
@@ -100,12 +100,12 @@ def create_download_tasks(subtitles_by_video, languages, multi):
             continue
         if not multi:
             task = DownloadTask(video, list(subtitles))
-            logger.debug(u'Created task %r' % task)
+            logger.debug('Created task %r' % task)
             tasks.append(task)
             continue
         for _, by_language in groupby(subtitles, lambda s: languages.index(s.language)):
             task = DownloadTask(video, list(by_language))
-            logger.debug(u'Created task %r' % task)
+            logger.debug('Created task %r' % task)
             tasks.append(task)
     return tasks
 
@@ -158,7 +158,7 @@ def matching_confidence(video, subtitle):
     guess = guessit.guess_file_info(subtitle.release, 'autodetect')
     video_keywords = get_keywords(video.guess)
     subtitle_keywords = get_keywords(guess) | subtitle.keywords
-    logger.debug(u'Video keywords %r - Subtitle keywords %r' % (video_keywords, subtitle_keywords))
+    logger.debug('Video keywords %r - Subtitle keywords %r' % (video_keywords, subtitle_keywords))
     replacement = {'keywords': len(video_keywords & subtitle_keywords)}
     if isinstance(video, Episode):
         replacement.update({'series': 0, 'season': 0, 'episode': 0})
@@ -181,9 +181,9 @@ def matching_confidence(video, subtitle):
             if 'year' in guess and guess['year'] == video.year:
                 replacement['year'] = 1
     else:
-        logger.debug(u'Not able to compute confidence for %r' % video)
+        logger.debug('Not able to compute confidence for %r' % video)
         return 0.0
-    logger.debug(u'Found %r' % replacement)
+    logger.debug('Found %r' % replacement)
     confidence = float(int(matching_format.format(**replacement), 2)) / float(int(best, 2))
     logger.info(u'Computed confidence %.4f for %r and %r' % (confidence, video, subtitle))
     return confidence

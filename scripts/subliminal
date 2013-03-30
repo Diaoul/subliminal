@@ -75,7 +75,7 @@ def main():
     if args.compatibility:
         paths = args.paths
     else:
-        paths = [unicode(x) for x in args.paths]
+        paths = [unicode(x, 'utf8') for x in args.paths]
 
     # Download subtitles
     with subliminal.Pool(args.workers) as p:

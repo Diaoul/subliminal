@@ -55,7 +55,7 @@ class Cache(object):
 
             self.cache[service_name] = defaultdict(dict)
             filename = self.cache_location(service_name)
-            logger.debug(u'Cache: loading cache from %s' % filename)
+            logger.debug('Cache: loading cache from %s' % filename)
             try:
                 self.cache[service_name] = pickle.load(open(filename, 'rb'))
             except IOError:
@@ -66,7 +66,7 @@ class Cache(object):
 
     def save(self, service_name):
         filename = self.cache_location(service_name)
-        logger.debug(u'Cache: saving cache to %s' % filename)
+        logger.debug('Cache: saving cache to %s' % filename)
         with self.lock:
             pickle.dump(self.cache[service_name], open(filename, 'wb'))
 
@@ -121,7 +121,7 @@ def cachedmethod(function):
 
         if key in func_cache:
             result = func_cache[key]
-            logger.debug(u'Using cached value for %s(%s), returns: %s' % (func_key, key, result))
+            logger.debug('Using cached value for %s(%s), returns: %s' % (func_key, key, result))
             return result
 
         result = function(*args)

@@ -51,7 +51,7 @@ class Worker(threading.Thread):
             finally:
                 self.tasks.task_done()
         self.terminate()
-        logger.debug(u'Thread %s terminated' % self.name)
+        logger.debug('Thread %s terminated' % self.name)
 
     def terminate(self):
         """Terminate instantiated services"""

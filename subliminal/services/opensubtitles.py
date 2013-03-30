@@ -110,10 +110,10 @@ class OpenSubtitles(ServiceBase):
             raise ServiceError('One or more parameter missing')
         for search in searches:
             search['sublanguageid'] = ','.join(self.get_code(l) for l in languages)
-        logger.debug(u'Getting subtitles %r with token %s' % (searches, self.token))
+        logger.debug('Getting subtitles %r with token %s' % (searches, self.token))
         results = self.server.SearchSubtitles(self.token, searches)
         if not results['data']:
-            logger.debug(u'Could not find subtitles for %r with token %s' % (searches, self.token))
+            logger.debug('Could not find subtitles for %r with token %s' % (searches, self.token))
             return []
         subtitles = []
         for result in results['data']:

@@ -152,7 +152,7 @@ class Video(object):
         return unicode(self).encode('utf-8')
 
     def __repr__(self):
-        return '%s(%s)' % (self.__class__.__name__, self)
+        return '%s(%r)' % (self.__class__.__name__, str(self))
 
     def __hash__(self):
         return hash(self.path or self.release)

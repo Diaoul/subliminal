@@ -1,6 +1,12 @@
 News
 ====
 
+0.6.4
+-----
+**release date:** 2013-05-19
+
+* Fix requirements due to enzyme 0.3
+
 0.6.3
 -----
 **release date:** 2013-01-17

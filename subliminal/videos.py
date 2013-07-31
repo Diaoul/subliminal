@@ -136,7 +136,7 @@ class Video(object):
         # startswith/endswith comparisons
         folder, basename = os.path.split(basepath)
         if folder == '':
-            folder = '.'
+            folder = u'.'
         existing = [f for f in os.listdir(folder) if f.startswith(basename)]
         for path in existing:
             for ext in subtitles.EXTENSIONS:

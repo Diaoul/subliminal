@@ -19,6 +19,7 @@ from ..cache import Cache
 from ..exceptions import DownloadFailedError, ServiceError
 from ..language import language_set, Language
 from ..subtitles import EXTENSIONS
+from ..utils import to_utf8
 import logging
 import os
 import requests
@@ -178,7 +179,7 @@ class ServiceBase(object):
             logger.debug(u'No language available for service %s' % cls.__name__.lower())
             return False
         if cls.require_video and not video.exists or not isinstance(video, tuple(cls.videos)):
-            logger.debug(u'%r is not valid for service %s' % (video, cls.__name__.lower()))
+            logger.debug(to_utf8(u'%r is not valid for service %s') % (video, cls.__name__.lower()))
             return False
         return True
 

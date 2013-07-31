@@ -69,4 +69,4 @@ def to_unicode(data):
     return unicode(data, 'utf-8', 'replace')
 
 def to_utf8(text):
-    return text.decode('utf-8').encode('utf-8', errors='backslashreplace')
+    return text.encode('utf-8', errors='backslashreplace')

@@ -17,7 +17,7 @@
 # along with subliminal.  If not, see <http://www.gnu.org/licenses/>.
 from . import subtitles
 from .language import Language
-from .utils import to_unicode
+from .utils import to_unicode, to_utf8
 import enzyme.core
 import guessit
 import hashlib

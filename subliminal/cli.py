@@ -55,7 +55,7 @@ def subliminal():
         match = re.match(r'^(?:(?P<weeks>\d+?)w)?(?:(?P<days>\d+?)d)?(?:(?P<hours>\d+?)h)?$', args.age)
         if not match:
             parser.error('argument -a/--age: invalid age: %r' % args.age)
-        args.age = datetime.timedelta(**match.groupdict())
+        args.age = datetime.timedelta(**{k: int(v) for k, v in match.groupdict(0).items()})
 
     # setup verbosity
     if args.verbose:

@@ -255,7 +255,7 @@ def scan_videos(paths, subtitles=True, embedded_subtitles=True, age=None):
         try:
             videos.append(scan_video(filepath, subtitles))
         except ValueError as e:
-            logger.info('Skipping video: %s', e)
+            logger.error('Skipping video: %s', e)
             continue
     # scan directories
     for path in [p for p in paths if os.path.isdir(p)]:
@@ -280,7 +280,7 @@ def scan_videos(paths, subtitles=True, embedded_subtitles=True, age=None):
                 try:
                     video = scan_video(filepath, subtitles=subtitles)
                 except ValueError as e:
-                    logger.info('Skipping video: %s', e)
+                    logger.error('Skipping video: %s', e)
                     continue
                 videos.append(video)
     return videos

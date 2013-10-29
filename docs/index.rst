@@ -1,5 +1,5 @@
 .. subliminal documentation master file, created by
-   sphinx-quickstart on Tue Feb 28 16:33:06 2012.
+   sphinx-quickstart on Wed Oct 23 23:24:28 2013.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
@@ -8,72 +8,95 @@ Subliminal
 Release v\ |version|
 
 Subliminal is a python library to search and download subtitles.
+It comes with an easy to use :abbr:`CLI (command-line interface)` suitable for direct use or cron jobs.
 
-It uses video hashes and the powerful `guessit <http://guessit.readthedocs.org/>`_ library
-that extracts informations from filenames or filepaths to ensure you have the best subtitles.
-It also relies on `enzyme <https://github.com/Diaoul/enzyme>`_ to detect embedded subtitles
-and avoid duplicates.
 
-Features
---------
-Multiple subtitles services are available:
+Providers
+---------
+Subliminal uses multiple providers to give users a vast choice and have a better chance to find the
+best matching subtitles. Providers are extensible through a dedicated entry point.
 
 * Addic7ed
 * BierDopje
 * OpenSubtitles
-* SubsWiki
-* Subtitulos
 * TheSubDB
 * TvSubtitles
 
-You can use main subliminal's functions with a **file path**, a **file name** or a **folder path**.
 
+Usage
+-----
 CLI
 ^^^
 Download english subtitles::
 
-    $ subliminal -l en The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.mp4
-    **************************************************
-    Downloaded 1 subtitle(s) for 1 video(s)
-    The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.srt from opensubtitles
-    **************************************************
+    $ subliminal -l en -- The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.mp4
+    1 subtitle downloaded
 
-Module
-^^^^^^
-List english subtitles::
+See :mod:`subliminal.cli`
 
-	>>> subliminal.list_subtitles('The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.mp4', ['en'])
+Library
+^^^^^^^
+Download best subtitles in French and English for videos less than one week old in a video folder,
+skipping videos that already have subtitles whether they are embedded or not::
 
-Multi-threaded use
-^^^^^^^^^^^^^^^^^^
-Use 4 workers to achieve the same result::
+    from babelfish import Language
+    from datetime import timedelta
+    import subliminal
+    
+    # configure the cache
+    subliminal.cache_region.configure('dogpile.cache.dbm', arguments={'filename': '/path/to/cachefile.dbm'})
 
-	>>> with subliminal.Pool(4) as p:
-	... 	p.list_subtitles('The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.mp4', ['en'])
+    # scan for videos in the folder and their subtitles
+    videos = scan_videos(['/path/to/video/folder'], subtitles=True, embedded_subtitles=True) 
 
-User Guide
-----------
-This part of the documentation details how to use subliminal for most common tasks
+    # download
+    subliminal.download_best_subtitles(videos, {Language('eng'), Language('fra')}, age=timedelta(week=1))
 
+See :mod:`subliminal.api`, :func:`~subliminal.video.scan_videos` and :func:`~subliminal.video.scan_video`
+
+How it works
+------------
+Subliminal makes use of various libraries to achieve its goal:
+
+* `enzyme <http://enzyme.readthedocs.org>`_ to detect embedded subtitles in videos and retrieve metadata
+* `guessit <http://guessit.readthedocs.org>`_ to guess informations from filenames
+* `babelfish <http://babelfish.readthedocs.org>`_ to work with languages
+* `requests <http://docs.python-requests.org>`_ to make human readable HTTP requests
+* `BeautifulSoup <http://www.crummy.com/software/BeautifulSoup>`_ to parse HTML and XML
+* `dogpile.cache <http://dogpilecache.readthedocs.org>`_ to cache intermediate search data
+* `charade <https://github.com/sigmavirus24/charade>`_ to detect subtitles' encoding
+* `pysrt <https://github.com/byroot/pysrt>`_ to validate downloaded subtitles
+
+
+License
+-------
+MIT
+
+
+Documentation
+-------------
 .. toctree::
-   :maxdepth: 2
-   
-   user
+    :maxdepth: 2
 
-Developer Guide
----------------
-This part of the documentation explains internal behavior of subliminal and its algorithms
-
-.. toctree::
-   :maxdepth: 2
-   
-   dev
+    provider_guide
 
 
 API Documentation
 -----------------
-Most common subliminal features are listed here
+If you are looking for information on a specific function, class or method,
+this part of the documentation is for you.
 
-.. automodule:: subliminal
-    :members:
-    :noindex:
+.. toctree::
+    :maxdepth: 2
+
+    api/api
+    api/cache
+    api/cli
+    api/exceptions
+    api/providers
+    api/score
+    api/subtitle
+    api/video
+
+
+.. include:: ../HISTORY.rst

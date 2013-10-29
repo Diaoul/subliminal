@@ -1,109 +1,250 @@
 # -*- coding: utf-8 -*-
-# Copyright 2011-2012 Antoine Bertin <diaoulael@gmail.com>
-#
-# This file is part of subliminal.
-#
-# subliminal is free software; you can redistribute it and/or modify it under
-# the terms of the GNU Lesser General Public License as published by
-# the Free Software Foundation; either version 3 of the License, or
-# (at your option) any later version.
-#
-# subliminal is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU Lesser General Public License for more details.
-#
-# You should have received a copy of the GNU Lesser General Public License
-# along with subliminal.  If not, see <http://www.gnu.org/licenses/>.
-from .core import (SERVICES, LANGUAGE_INDEX, SERVICE_INDEX, SERVICE_CONFIDENCE,
-    MATCHING_CONFIDENCE, create_list_tasks, consume_task, create_download_tasks,
-    group_by_video, key_subtitles)
-from .language import language_set, language_list, LANGUAGES
+from __future__ import unicode_literals
+import collections
+import io
 import logging
+import operator
+import pkg_resources
+from .exceptions import ProviderNotAvailable, InvalidSubtitle
+from .subtitle import get_subtitle_path
 
 
-__all__ = ['list_subtitles', 'download_subtitles']
 logger = logging.getLogger(__name__)
 
+#: Entry point for the providers
+PROVIDERS_ENTRY_POINT = 'subliminal.providers'
 
-def list_subtitles(paths, languages=None, services=None, force=True, multi=False, cache_dir=None, max_depth=3, scan_filter=None):
-    """List subtitles in given paths according to the criteria
 
-    :param paths: path(s) to video file or folder
-    :type paths: string or list
-    :param languages: languages to search for, in preferred order
-    :type languages: list of :class:`~subliminal.language.Language` or string
-    :param list services: services to use for the search, in preferred order
-    :param bool force: force searching for subtitles even if some are detected
-    :param bool multi: search multiple languages for the same video
-    :param string cache_dir: path to the cache directory to use
-    :param int max_depth: maximum depth for scanning entries
-    :param function scan_filter: filter function that takes a path as argument and returns a boolean indicating whether it has to be filtered out (``True``) or not (``False``)
+def list_subtitles(videos, languages, providers=None, provider_configs=None):
+    """List subtitles for `videos` with the given `languages` using the specified `providers`
+
+    :param videos: videos to list subtitles for
+    :type videos: set of :class:`~subliminal.video.Video`
+    :param languages: languages of subtitles to search for
+    :type languages: set of :class:`babelfish.Language`
+    :param providers: providers to use for the search, if not all
+    :type providers: list of string or None
+    :param provider_configs: configuration for providers
+    :type provider_configs: dict of provider name => provider constructor kwargs
     :return: found subtitles
-    :rtype: dict of :class:`~subliminal.videos.Video` => [:class:`~subliminal.subtitles.ResultSubtitle`]
+    :rtype: dict of :class:`~subliminal.video.Video` => [:class:`~subliminal.subtitle.Subtitle`]
 
     """
-    services = services or SERVICES
-    languages = language_set(languages) if languages is not None else language_set(LANGUAGES)
-    if isinstance(paths, basestring):
-        paths = [paths]
-    if any([not isinstance(p, unicode) for p in paths]):
-        logger.warning(u'Not all entries are unicode')
-    results = []
-    service_instances = {}
-    tasks = create_list_tasks(paths, languages, services, force, multi, cache_dir, max_depth, scan_filter)
-    for task in tasks:
-        try:
-            result = consume_task(task, service_instances)
-            results.append((task.video, result))
-        except:
-            logger.error(u'Error consuming task %r' % task, exc_info=True)
-    for service_instance in service_instances.itervalues():
-        service_instance.terminate()
-    return group_by_video(results)
+    provider_configs = provider_configs or {}
+    subtitles = collections.defaultdict(list)
+    # filter videos
+    videos = [v for v in videos if v.subtitle_languages != languages]
+    if not videos:
+        logger.info('No video to download subtitles for with languages %r', languages)
+        return subtitles
+    for provider_entry_point in pkg_resources.iter_entry_points(PROVIDERS_ENTRY_POINT):
+        # filter and initialize provider
+        if providers is not None and provider_entry_point.name not in providers:
+            logger.debug('Skipping provider %r: not in the list', provider_entry_point.name)
+            continue
+        Provider = provider_entry_point.load()
+        provider_languages = Provider.languages & languages
+        if not provider_languages:
+            logger.debug('Skipping provider %r: no language to search for', provider_entry_point.name)
+            continue
+        provider_videos = [v for v in videos if Provider.check(v)]
+        if not provider_videos:
+            logger.debug('Skipping provider %r: no video to search for', provider_entry_point.name)
+            continue
+
+        # list subtitles with the provider
+        with Provider(**provider_configs.get(provider_entry_point.name, {})) as provider:
+            for provider_video in provider_videos:
+                logger.info('Listing subtitles with provider %r for video %r with languages %r',
+                            provider_entry_point.name, provider_video, provider_languages)
+                try:
+                    provider_subtitles = provider.list_subtitles(provider_video, provider_languages)
+                except ProviderNotAvailable:
+                    logger.warning('Provider %r is not available, discarding it', provider_entry_point.name)
+                    break
+                except:
+                    logger.exception('Unexpected error in provider %r', provider_entry_point.name)
+                    continue
+                logger.info('Found %d subtitles', len(provider_subtitles))
+                subtitles[provider_video].extend(provider_subtitles)
+    return subtitles
 
 
-def download_subtitles(paths, languages=None, services=None, force=True, multi=False, cache_dir=None, max_depth=3, scan_filter=None, order=None):
-    """Download subtitles in given paths according to the criteria
+def download_subtitles(subtitles, provider_configs=None, single=False):
+    """Download subtitles
 
-    :param paths: path(s) to video file or folder
-    :type paths: string or list
-    :param languages: languages to search for, in preferred order
-    :type languages: list of :class:`~subliminal.language.Language` or string
-    :param list services: services to use for the search, in preferred order
-    :param bool force: force searching for subtitles even if some are detected
-    :param bool multi: search multiple languages for the same video
-    :param string cache_dir: path to the cache directory to use
-    :param int max_depth: maximum depth for scanning entries
-    :param function scan_filter: filter function that takes a path as argument and returns a boolean indicating whether it has to be filtered out (``True``) or not (``False``)
-    :param order: preferred order for subtitles sorting
-    :type list: list of :data:`~subliminal.core.LANGUAGE_INDEX`, :data:`~subliminal.core.SERVICE_INDEX`, :data:`~subliminal.core.SERVICE_CONFIDENCE`, :data:`~subliminal.core.MATCHING_CONFIDENCE`
-    :return: downloaded subtitles
-    :rtype: dict of :class:`~subliminal.videos.Video` => [:class:`~subliminal.subtitles.ResultSubtitle`]
-
-    .. note::
-
-        If you use ``multi=True``, :data:`~subliminal.core.LANGUAGE_INDEX` has to be the first item of the ``order`` list
-        or you might get unexpected results.
+    :param subtitles: subtitles to download
+    :type subtitles: dict of :class:`~subliminal.video.Video` => [:class:`~subliminal.subtitle.Subtitle`]
+    :param provider_configs: configuration for providers
+    :type provider_configs: dict of provider name => provider constructor kwargs
+    :param bool single: download with .srt extension if `True`, add language identifier otherwise
 
     """
-    services = services or SERVICES
-    languages = language_list(languages) if languages is not None else language_list(LANGUAGES)
-    if isinstance(paths, basestring):
-        paths = [paths]
-    order = order or [LANGUAGE_INDEX, SERVICE_INDEX, SERVICE_CONFIDENCE, MATCHING_CONFIDENCE]
-    subtitles_by_video = list_subtitles(paths, languages, services, force, multi, cache_dir, max_depth, scan_filter)
-    for video, subtitles in subtitles_by_video.iteritems():
-        subtitles.sort(key=lambda s: key_subtitles(s, video, languages, services, order), reverse=True)
-    results = []
-    service_instances = {}
-    tasks = create_download_tasks(subtitles_by_video, languages, multi)
-    for task in tasks:
+    provider_configs = provider_configs or {}
+    discarded_providers = set()
+    providers_by_name = {ep.name: ep.load() for ep in pkg_resources.iter_entry_points(PROVIDERS_ENTRY_POINT)}
+    initialized_providers = {}
+    try:
+        for video, video_subtitles in subtitles.items():
+            languages = {subtitle.language for subtitle in video_subtitles}
+            downloaded_languages = set()
+            for subtitle in video_subtitles:
+                # filter
+                if subtitle.language in downloaded_languages:
+                    continue
+                if subtitle.provider_name in discarded_providers:
+                    logger.debug('Skipping subtitle from discarded provider %r', subtitle.provider_name)
+                    continue
+
+                # initialize provider
+                if subtitle.provider_name in initialized_providers:
+                    provider = initialized_providers[subtitle.provider_name]
+                else:
+                    provider = providers_by_name[subtitle.provider_name](**provider_configs.get(subtitle.provider_name, {}))
+                    try:
+                        provider.initialize()
+                    except ProviderNotAvailable:
+                        logger.warning('Provider %r is not available, discarding it', subtitle.provider_name)
+                        discarded_providers.add(subtitle.provider_name)
+                        continue
+                    initialized_providers[subtitle.provider_name] = provider
+
+                # download subtitles
+                subtitle_path = get_subtitle_path(video.name, None if single else subtitle.language)
+                logger.info('Downloading subtitle %r into %r', subtitle, subtitle_path)
+                try:
+                    subtitle_text = provider.download_subtitle(subtitle)
+                except ProviderNotAvailable:
+                    logger.warning('Provider %r is not available, discarding it', subtitle.provider_name)
+                    discarded_providers.add(subtitle.provider_name)
+                    continue
+                except InvalidSubtitle:
+                    logger.info('Invalid subtitle, skipping it')
+                    continue
+                except:
+                    logger.exception('Unexpected error in provider %r', subtitle.provider_name)
+                    continue
+                with io.open(subtitle_path, 'w') as f:
+                    f.write(subtitle_text)
+                downloaded_languages.add(subtitle.language)
+                if single or downloaded_languages == languages:
+                    break
+    finally:  # terminate providers
+        for provider in initialized_providers.values():
+            provider.terminate()
+
+
+def download_best_subtitles(videos, languages, providers=None, provider_configs=None, single=False, min_score=0,
+                            hearing_impaired=False):
+    """Download the best subtitles for `videos` with the given `languages` using the specified `providers`
+
+    :param videos: videos to download subtitles for
+    :type videos: set of :class:`~subliminal.video.Video`
+    :param languages: languages of subtitles to download
+    :type languages: set of :class:`babelfish.Language`
+    :param providers: providers to use for the search, if not all
+    :type providers: list of string or None
+    :param provider_configs: configuration for providers
+    :type provider_configs: dict of provider name => provider constructor kwargs
+    :param bool single: download with .srt extension if `True`, add language identifier otherwise
+    :param int min_score: minimum score for subtitles to download
+    :param bool hearing_impaired: download hearing impaired subtitles
+
+    """
+    provider_configs = provider_configs or {}
+    discarded_providers = set()
+    downloaded_subtitles = collections.defaultdict(list)
+    # filter videos
+    videos = [v for v in videos if v.subtitle_languages != languages]
+    if not videos:
+        logger.info('No video to download subtitles for with languages %r', languages)
+        return downloaded_subtitles
+    # filter and initialize providers
+    initialized_providers = {}
+    for provider_entry_point in pkg_resources.iter_entry_points(PROVIDERS_ENTRY_POINT):
+        if providers is not None and provider_entry_point.name not in providers:
+            logger.debug('Skipping provider %r: not in the list', provider_entry_point.name)
+            continue
+        Provider = provider_entry_point.load()
+        if not Provider.languages & languages:
+            logger.debug('Skipping provider %r: no language to search for', provider_entry_point.name)
+            continue
+        if not [v for v in videos if Provider.check(v)]:
+            logger.debug('Skipping provider %r: no video to search for', provider_entry_point.name)
+            continue
+        provider = Provider(**provider_configs.get(provider_entry_point.name, {}))
         try:
-            result = consume_task(task, service_instances)
-            results.append((task.video, result))
-        except:
-            logger.error(u'Error consuming task %r' % task, exc_info=True)
-    for service_instance in service_instances.itervalues():
-        service_instance.terminate()
-    return group_by_video(results)
+            provider.initialize()
+        except ProviderNotAvailable:
+            logger.warning('Provider %r is not available, discarding it', provider_entry_point.name)
+            continue
+        initialized_providers[provider_entry_point.name] = provider
+    try:
+        for video in videos:
+            # search for subtitles
+            subtitles = []
+            for provider_name, provider in initialized_providers.items():
+                if provider.check(video):
+                    if provider_name in discarded_providers:
+                        logger.debug('Skipping discarded provider %r', provider_name)
+                        continue
+                    provider_languages = provider.languages & languages
+                    logger.info('Listing subtitles with provider %r for video %r with languages %r',
+                                provider_name, video, provider_languages)
+                    try:
+                        provider_subtitles = provider.list_subtitles(video, provider_languages)
+                    except ProviderNotAvailable:
+                        logger.warning('Provider %r is not available, discarding it', provider_name)
+                        discarded_providers.add(provider_name)
+                        continue
+                    except:
+                        logger.exception('Unexpected error in provider %r', provider_name)
+                        continue
+                    logger.info('Found %d subtitles', len(provider_subtitles))
+                    subtitles.extend(provider_subtitles)
+
+            # find the best subtitles and download them
+            downloaded_languages = set()
+            for subtitle, score in sorted([(s, s.compute_score(video)) for s in subtitles],
+                                          key=operator.itemgetter(1), reverse=True):
+                # filter
+                if subtitle.provider_name in discarded_providers:
+                    logger.debug('Skipping subtitle from discarded provider %r', subtitle.provider_name)
+                    continue
+                if subtitle.hearing_impaired != hearing_impaired:
+                    logger.debug('Skipping subtitle: hearing impaired != %r', hearing_impaired)
+                    continue
+                if score < min_score:
+                    logger.debug('Skipping subtitle: score < %d', min_score)
+                    continue
+                if subtitle.language in downloaded_languages:
+                    logger.debug('Skipping subtitle: %r already downloaded', subtitle.language)
+                    continue
+
+                # download
+                provider = initialized_providers[subtitle.provider_name]
+                subtitle_path = get_subtitle_path(video.name, None if single else subtitle.language)
+                logger.info('Downloading subtitle %r with score %d into %r', subtitle, score, subtitle_path)
+                try:
+                    subtitle_text = provider.download_subtitle(subtitle)
+                    downloaded_subtitles[video].append(subtitle)
+                except ProviderNotAvailable:
+                    logger.warning('Provider %r is not available, discarding it', subtitle.provider_name)
+                    discarded_providers.add(subtitle.provider_name)
+                    continue
+                except InvalidSubtitle:
+                    logger.info('Invalid subtitle, skipping it')
+                    continue
+                except:
+                    logger.exception('Unexpected error in provider %r', subtitle.provider_name)
+                    continue
+                with io.open(subtitle_path, 'w') as f:
+                    f.write(subtitle_text)
+                downloaded_languages.add(subtitle.language)
+                if single or downloaded_languages == languages:
+                    logger.debug('All languages downloaded')
+                    break
+    finally:  # terminate providers
+        for provider in initialized_providers.values():
+            provider.terminate()
+    return downloaded_subtitles

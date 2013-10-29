@@ -1,48 +1,56 @@
 Subliminal
 ==========
 
-.. image:: https://secure.travis-ci.org/Diaoul/subliminal.png?branch=develop
-
 Subliminal is a python library to search and download subtitles.
+It comes with an easy to use CLI (command-line interface) suitable for direct use or cron jobs.
 
-It uses video hashes and the powerful `guessit <http://guessit.readthedocs.org/>`_ library
-that extracts informations from filenames or filepaths to ensure you have the best subtitles.
-It also relies on `enzyme <https://github.com/Diaoul/enzyme>`_ to detect embedded subtitles
-and avoid duplicates.
+.. image:: https://travis-ci.org/Diaoul/subliminal.png?branch=develop
+    :target: https://travis-ci.org/Diaoul/subliminal
 
-Features
---------
-Multiple subtitles services are available:
+.. image:: https://coveralls.io/repos/Diaoul/subliminal/badge.png?branch=develop
+    :target: https://coveralls.io/r/Diaoul/subliminal?branch=develop 
+
+
+Providers
+---------
+Subliminal uses multiple providers to give users a vast choice and have a better chance to find the
+best matching subtitles. Providers are extensible through a dedicated entry point.
 
 * Addic7ed
 * BierDopje
 * OpenSubtitles
-* SubsWiki
-* Subtitulos
 * TheSubDB
 * TvSubtitles
 
-You can use main subliminal's functions with a **file path**, a **file name** or a **folder path**.
 
+Usage
+-----
 CLI
 ^^^
 Download english subtitles::
 
-    $ subliminal -l en The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.mp4
-    **************************************************
-    Downloaded 1 subtitle(s) for 1 video(s)
-    The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.srt from opensubtitles
-    **************************************************
+    $ subliminal -l en -- The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.mp4
+    1 subtitle downloaded
 
-Module
-^^^^^^
-List english subtitles::
+Library
+^^^^^^^
+Download best subtitles in French and English for videos less than one week old in a video folder,
+skipping videos that already have subtitles whether they are embedded or not::
 
-    >>> subliminal.list_subtitles('The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.mp4', ['en'])
+    from babelfish import Language
+    from datetime import timedelta
+    import subliminal
+    
+    # configure the cache
+    subliminal.cache_region.configure('dogpile.cache.dbm', arguments={'filename': '/path/to/cachefile.dbm'})
 
-Multi-threaded use
-^^^^^^^^^^^^^^^^^^
-Use 4 workers to achieve the same result::
+    # scan for videos in the folder and their subtitles
+    videos = scan_videos(['/path/to/video/folder'], subtitles=True, embedded_subtitles=True) 
 
-    >>> with subliminal.Pool(4) as p:
-    ...     p.list_subtitles('The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.mp4', ['en'])
+    # download
+    subliminal.download_best_subtitles(videos, {Language('eng'), Language('fra')}, age=timedelta(week=1))
+
+
+License
+-------
+MIT

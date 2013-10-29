@@ -1,9 +1,24 @@
 language: python
+
 python:
   - "2.7"
+
 install:
+  - pip install coveralls --use-mirrors
   - pip install -r requirements.txt --use-mirrors
-  - pip install -r optional-requirements.txt --use-mirrors
-script: python setup.py test
+
+script:
+  - coverage run --source=subliminal setup.py test
+
+after_success:
+  - coveralls
+
 notifications:
-  irc: "irc.freenode.org#subliminal"
+  email: false
+  irc:
+    channels:
+      - "irc.freenode.org#subliminal"
+    on_success: change
+    on_failure: always
+    use_notice: true
+    skip_join: true

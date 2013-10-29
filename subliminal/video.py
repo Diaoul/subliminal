@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+import datetime
 import hashlib
 import logging
 import os
@@ -248,6 +249,9 @@ def scan_videos(paths, subtitles=True, embedded_subtitles=True, age=None):
     videos = []
     # scan files
     for filepath in [p for p in paths if os.path.isfile(p)]:
+        if age and datetime.datetime.now() - datetime.datetime.fromtimestamp(os.path.getmtime(filepath)) > age:
+            logger.info('Skipping video %r: older than %r', filepath, age)
+            continue
         try:
             videos.append(scan_video(filepath, subtitles))
         except ValueError as e:
@@ -269,8 +273,12 @@ def scan_videos(paths, subtitles=True, embedded_subtitles=True, age=None):
                 safe_filenames.append(filename)
             # scan for videos
             for video_filename in [f for f in safe_filenames if f.endswith(VIDEO_EXTENSIONS)]:
+                filepath = os.path.join(dirpath, video_filename)
+                if age and datetime.datetime.now() - datetime.datetime.fromtimestamp(os.path.getmtime(filepath)) > age:
+                    logger.info('Skipping video %r: older than %r', filepath, age)
+                    continue
                 try:
-                    video = scan_video(os.path.join(dirpath, video_filename), subtitles=subtitles)
+                    video = scan_video(filepath, subtitles=subtitles)
                 except ValueError as e:
                     logger.info('Skipping video: %s', e)
                     continue

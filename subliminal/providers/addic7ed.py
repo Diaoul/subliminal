@@ -58,7 +58,7 @@ class Addic7edProvider(Provider):
                            'fin', 'fra', 'glg', 'heb', 'hrv', 'hun', 'hye', 'ind', 'ita', 'jpn', 'kor', 'mkd', 'msa',
                            'nld', 'nor', 'pol', 'por', 'ron', 'rus', 'slk', 'slv', 'spa', 'sqi', 'srp', 'swe', 'tha',
                            'tur', 'ukr', 'vie', 'zho']}
-    videos = (Episode,)
+    video_types = (Episode,)
     server = 'http://www.addic7ed.com'
 
     def initialize(self):

@@ -8,7 +8,6 @@ from . import Provider
 from .. import __version__
 from ..exceptions import InvalidSubtitle, ProviderNotAvailable, ProviderError
 from ..subtitle import Subtitle, is_valid_subtitle
-from ..video import Episode, Movie
 
 
 logger = logging.getLogger(__name__)
@@ -31,7 +30,6 @@ class TheSubDBSubtitle(Subtitle):
 
 class TheSubDBProvider(Provider):
     languages = {babelfish.Language.fromalpha2(l) for l in ['en', 'es', 'fr', 'it', 'nl', 'pl', 'pt', 'ro', 'sv', 'tr']}
-    video_types = (Episode, Movie)
     required_hash = 'thesubdb'
 
     def initialize(self):

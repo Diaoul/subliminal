@@ -59,7 +59,7 @@ class TVsubtitlesProvider(Provider):
     languages = {babelfish.Language('por', 'BR')} | {babelfish.Language(l)
                  for l in ['ara', 'bul', 'ces', 'dan', 'deu', 'ell', 'eng', 'fin', 'fra', 'hun', 'ita', 'jpn', 'kor',
                            'nld', 'pol', 'por', 'ron', 'rus', 'spa', 'swe', 'tur', 'ukr', 'zho']}
-    videos = (Episode,)
+    video_types = (Episode,)
     server = 'http://www.tvsubtitles.net'
     episode_id_re = re.compile('^episode-(\d+)\.html$')
     subtitle_re = re.compile('^\/subtitle-(\d+)\.html$')

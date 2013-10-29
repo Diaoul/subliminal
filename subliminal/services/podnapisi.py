@@ -71,7 +71,7 @@ class Podnapisi(ServiceBase):
             logger.error('Search failed with error code %d' % results['status'])
             return []
         if not results['results'] or not results['results'][moviehash]['subtitles']:
-            logger.debug(u'Could not find subtitles for %r with token %s' % (moviehash, self.token))
+            logger.debug('Could not find subtitles for %r with token %s' % (moviehash, self.token))
             return []
         subtitles = []
         for result in results['results'][moviehash]['subtitles']:

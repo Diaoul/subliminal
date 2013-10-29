@@ -80,7 +80,7 @@ class ServiceBase(object):
 
     def init(self):
         """Initialize connection"""
-        logger.debug(u'Initializing %s' % self.__class__.__name__)
+        logger.debug('Initializing %s' % self.__class__.__name__)
         self.session = requests.session(timeout=10, headers={'User-Agent': self.user_agent})
 
     def init_cache(self):
@@ -103,7 +103,7 @@ class ServiceBase(object):
 
     def terminate(self):
         """Terminate connection"""
-        logger.debug(u'Terminating %s' % self.__class__.__name__)
+        logger.debug('Terminating %s' % self.__class__.__name__)
 
     def get_code(self, language):
         """Get the service code for a :class:`~subliminal.language.Language`
@@ -175,10 +175,10 @@ class ServiceBase(object):
         """
         languages = (languages & cls.languages) - language_set(['Undetermined'])
         if not languages:
-            logger.debug(u'No language available for service %s' % cls.__name__.lower())
+            logger.debug('No language available for service %s' % cls.__name__.lower())
             return False
         if cls.require_video and not video.exists or not isinstance(video, tuple(cls.videos)):
-            logger.debug(u'%r is not valid for service %s' % (video, cls.__name__.lower()))
+            logger.debug('%r is not valid for service %s' % (video, cls.__name__.lower()))
             return False
         return True
 
@@ -199,7 +199,7 @@ class ServiceBase(object):
             if os.path.exists(filepath):
                 os.remove(filepath)
             raise DownloadFailedError(str(e))
-        logger.debug(u'Download finished')
+        logger.debug('Download finished')
 
     def download_zip_file(self, url, filepath):
         """Attempt to download a zip file and extract any subtitle file from it, if any.
@@ -235,7 +235,7 @@ class ServiceBase(object):
             if os.path.exists(filepath):
                 os.remove(filepath)
             raise DownloadFailedError(str(e))
-        logger.debug(u'Download finished')
+        logger.debug('Download finished')
 
 
 class ServiceConfig(object):

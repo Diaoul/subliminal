@@ -34,6 +34,30 @@ Download english subtitles::
     The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.srt from opensubtitles
     **************************************************
 
+Example of configuration file ~/.config/subliminal/config::
+
+    [subliminal]
+    outputstyle = quiet     
+    workers = 4
+    compatibilitymode = False
+    languages = fi,en
+    cachedir = ~/.config/subliminal
+    forceoverwrite = False
+    services = opensubtitles,subswiki,thesubdb,addic7ed,tvsubtitles
+    multisubs = True
+
+Valid Values::
+
+    outputstyle       (quiet|verbose)
+    workers           (any integer value)
+    compatibilitymode (True|False)
+    forceoverwrite    (True|False)
+    multisubs         (True|False)
+    languages         (comma separated list of valid languages)
+    services          (comma separated list of valid services)
+    cachedir          (any directory where user has access to)
+
+
 Module
 ^^^^^^
 List english subtitles::

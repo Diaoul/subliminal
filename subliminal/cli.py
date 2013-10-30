@@ -18,7 +18,7 @@ DEFAULT_CACHE_FILE = os.path.join('~', '.config', 'subliminal.cache.dbm')
 
 def subliminal_parser():
     parser = argparse.ArgumentParser(description='Subtitles, faster than your thoughts')
-    parser.add_argument('-l', '--languages', nargs='+', metavar='LANGUAGE', help='wanted languages as alpha2 code (ISO-639-1)')
+    parser.add_argument('-l', '--languages', nargs='+', required=True, metavar='LANGUAGE', help='wanted languages as alpha2 code (ISO-639-1)')
     parser.add_argument('-p', '--providers', nargs='+', metavar='PROVIDER', help='providers to use from %s (default: all)' % ', '.join(ep.name for ep in pkg_resources.iter_entry_points(PROVIDERS_ENTRY_POINT)))
     parser.add_argument('-m', '--min-score', type=int, help='minimum score for subtitles. 0-%d for episodes, 0-%d for movies' % (Episode.scores['hash'], Movie.scores['hash']))
     parser.add_argument('-s', '--single', action='store_true', help='download without language code in subtitle\'s filename i.e. .srt only')

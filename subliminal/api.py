@@ -124,7 +124,7 @@ def download_subtitles(subtitles, provider_configs=None, single=False):
                 except:
                     logger.exception('Unexpected error in provider %r', subtitle.provider_name)
                     continue
-                with io.open(subtitle_path, 'w') as f:
+                with io.open(subtitle_path, 'w', encoding='utf-8') as f:
                     f.write(subtitle_text)
                 downloaded_languages.add(subtitle.language)
                 if single or downloaded_languages == languages:
@@ -238,7 +238,7 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
                 except:
                     logger.exception('Unexpected error in provider %r', subtitle.provider_name)
                     continue
-                with io.open(subtitle_path, 'w') as f:
+                with io.open(subtitle_path, 'w', encoding='utf-8') as f:
                     f.write(subtitle_text)
                 downloaded_languages.add(subtitle.language)
                 if single or downloaded_languages == languages:

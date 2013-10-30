@@ -8,7 +8,7 @@ import requests
 from . import Provider
 from .. import __version__
 from ..cache import region
-from ..exceptions import InvalidSubtitle, ProviderNotAvailable
+from ..exceptions import ProviderConfigurationError, ProviderNotAvailable, InvalidSubtitle
 from ..subtitle import Subtitle, is_valid_subtitle
 from ..video import Episode
 
@@ -61,11 +61,38 @@ class Addic7edProvider(Provider):
     video_types = (Episode,)
     server = 'http://www.addic7ed.com'
 
+    def __init__(self, username=None, password=None):
+        if username is not None and password is None or username is None and password is not None:
+            raise ProviderConfigurationError('Username and password must be specified')
+        self.username = username
+        self.password = password
+        self.logged_in = False
+
     def initialize(self):
         self.session = requests.Session()
         self.session.headers = {'User-Agent': 'Subliminal/%s' % __version__}
+        # login
+        if self.username is not None and self.password is not None:
+            logger.info('Logging in with username %r', self.username)
+            data = {'username': self.username, 'password': self.password, 'Submit': 'Log in'}
+            try:
+                r = self.session.post(self.server + '/dologin.php', data, timeout=10, allow_redirects=False)
+            except requests.Timeout:
+                raise ProviderNotAvailable('Timeout after 10 seconds')
+            if r.status_code == 302:
+                logger.info('Logged in')
+                self.logged_in = True
+            else:
+                logger.error('Failed to login')
 
     def terminate(self):
+        # logout
+        if self.logged_in:
+            try:
+                self.session.get(self.server + '/logout.php', timeout=10)
+                logger.info('Logged out')
+            except Exception as e:
+                logger.error('Failed to logout: %s', e)
         self.session.close()
 
     def get(self, url, params=None):

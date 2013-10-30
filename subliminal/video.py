@@ -24,9 +24,6 @@ VIDEO_EXTENSIONS = ('.3g2', '.3gp', '.3gp2', '.3gpp', '.60d', '.ajp', '.asf', '.
 #: Subtitle extensions
 SUBTITLE_EXTENSIONS = ('.srt', '.sub', '.smi', '.txt', '.ssa', '.ass', '.mpl')
 
-#: Language extensions
-LANGUAGE_EXTENSIONS = tuple('.' + c for c in babelfish.CONVERTERS['alpha2'].codes)
-
 
 class Video(object):
     """Base class for videos
@@ -159,10 +156,11 @@ def scan_subtitle_languages(path):
     :rtype: set
 
     """
+    language_extensions = tuple('.' + c for c in babelfish.CONVERTERS['alpha2'].codes)
     dirpath, filename = os.path.split(path)
     subtitles = {babelfish.Language.fromalpha2(os.path.splitext(p)[0][-2:]) for p in os.listdir(dirpath)
                  if not isinstance(p, bytes) and p.startswith(os.path.splitext(filename)[0])
-                 and os.path.splitext(p)[0].endswith(LANGUAGE_EXTENSIONS)}
+                 and os.path.splitext(p)[0].endswith(language_extensions)}
     logger.debug('Found subtitles %r', subtitles)
     return subtitles
 

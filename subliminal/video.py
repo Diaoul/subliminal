@@ -218,7 +218,7 @@ def scan_video(path, subtitles=True, embedded_subtitles=True):
         # embedded subtitles
         if embedded_subtitles:
             embedded_subtitle_languages = {babelfish.Language.fromalpha3b(st.language) for st in
-                                           mkv.subtitle_tracks if st.language != 'und'}
+                                           mkv.subtitle_tracks if st.language is not None and st.language != 'und'}
             if embedded_subtitle_languages:
                 logger.debug('Found embedded subtitle %r with enzyme', embedded_subtitle_languages)
                 video.subtitle_languages |= embedded_subtitle_languages

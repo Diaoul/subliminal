@@ -57,6 +57,13 @@ def subliminal():
             parser.error('argument -a/--age: invalid age: %r' % args.age)
         args.age = datetime.timedelta(**{k: int(v) for k, v in match.groupdict(0).items()})
 
+    # parse cache-file
+    args.cache_file = os.path.abspath(os.path.expanduser(args.cache_file))
+    if not os.path.exists(os.path.split(args.cache_file)[0]):
+        if not args.quiet:
+            sys.stderr.write('Directory %r for cache file does not exist\n' % os.path.split(args.cache_file)[0])
+        exit(1)
+
     # setup verbosity
     if args.verbose:
         logging.basicConfig(level=logging.DEBUG)
@@ -64,7 +71,7 @@ def subliminal():
         logging.basicConfig(level=logging.WARN)
 
     # configure cache
-    cache_region.configure('dogpile.cache.dbm', arguments={'filename': os.path.expanduser(args.cache_file)})
+    cache_region.configure('dogpile.cache.dbm', arguments={'filename': args.cache_file})
 
     # scan videos
     videos = scan_videos([p for p in args.paths if os.path.exists(p)], subtitles=not args.force, age=args.age)

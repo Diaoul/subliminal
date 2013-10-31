@@ -183,7 +183,7 @@ class Addic7edProvider(Provider):
             raise ProviderNotAvailable('Request failed with status code %d' % r.status_code)
         if r.headers['Content-Type'] == 'text/html':
             raise ProviderNotAvailable('Download limit exceeded')
-        subtitle_text = r.content.decode(charade.detect(r.content)['encoding'])
+        subtitle_text = r.content.decode(charade.detect(r.content)['encoding'], 'replace')
         if not is_valid_subtitle(subtitle_text):
             raise InvalidSubtitle
         return subtitle_text

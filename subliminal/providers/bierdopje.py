@@ -132,7 +132,7 @@ class BierDopjeProvider(Provider):
             raise ProviderNotAvailable('Too Many Requests')
         elif r.status_code != 200:
             raise ProviderError('Request failed with status code %d' % r.status_code)
-        subtitle_text = r.content.decode(charade.detect(r.content)['encoding'])
+        subtitle_text = r.content.decode(charade.detect(r.content)['encoding'], 'replace')
         if not is_valid_subtitle(subtitle_text):
             raise InvalidSubtitle
         return subtitle_text

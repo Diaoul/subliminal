@@ -258,7 +258,7 @@ def scan_videos(paths, subtitles=True, embedded_subtitles=True, age=None):
             logger.info('Skipping video %r: older than %r', filepath, age)
             continue
         try:
-            videos.append(scan_video(filepath, subtitles))
+            videos.append(scan_video(filepath, subtitles, embedded_subtitles))
         except ValueError as e:
             logger.error('Skipping video: %s', e)
             continue
@@ -283,7 +283,7 @@ def scan_videos(paths, subtitles=True, embedded_subtitles=True, age=None):
                     logger.info('Skipping video %r: older than %r', filepath, age)
                     continue
                 try:
-                    video = scan_video(filepath, subtitles=subtitles)
+                    video = scan_video(filepath, subtitles, embedded_subtitles)
                 except ValueError as e:
                     logger.error('Skipping video: %s', e)
                     continue

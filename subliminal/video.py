@@ -168,7 +168,7 @@ def scan_subtitle_languages(path):
 def scan_video(path, subtitles=True, embedded_subtitles=True):
     """Scan a video and its subtitle languages from a video `path`
 
-    :param string path: path to the video
+    :param string path: absolute path to the video
     :param bool subtitles: scan for subtitles with the same name
     :param bool embedded_subtitles: scan for embedded subtitles
     :return: the scanned video
@@ -241,7 +241,7 @@ def scan_video(path, subtitles=True, embedded_subtitles=True):
 def scan_videos(paths, subtitles=True, embedded_subtitles=True, age=None):
     """Scan `paths` for videos and their subtitle languages
 
-    :params paths: paths to scan for videos
+    :params paths: absolute paths to scan for videos
     :type paths: list of string
     :param bool subtitles: scan for subtitles with the same name
     :param bool embedded_subtitles: scan for embedded subtitles

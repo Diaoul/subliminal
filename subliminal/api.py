@@ -37,7 +37,7 @@ def list_subtitles(videos, languages, providers=None, provider_configs=None):
     if not videos:
         logger.info('No video to download subtitles for with languages %r', languages)
         return subtitles
-    subtitle_languages = set.intersection(v.subtitle_languages for v in videos)
+    subtitle_languages = set.intersection(*[v.subtitle_languages for v in videos])
     for provider_entry_point in pkg_resources.iter_entry_points(PROVIDERS_ENTRY_POINT):
         # filter and initialize provider
         if providers is not None and provider_entry_point.name not in providers:
@@ -166,7 +166,7 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
         logger.info('No video to download subtitles for with languages %r', languages)
         return downloaded_subtitles
     # filter and initialize providers
-    subtitle_languages = set.intersection(v.subtitle_languages for v in videos)
+    subtitle_languages = set.intersection(*[v.subtitle_languages for v in videos])
     initialized_providers = {}
     for provider_entry_point in pkg_resources.iter_entry_points(PROVIDERS_ENTRY_POINT):
         if providers is not None and provider_entry_point.name not in providers:

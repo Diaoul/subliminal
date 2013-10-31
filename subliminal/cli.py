@@ -40,7 +40,7 @@ def subliminal():
 
     # parse paths
     try:
-        args.paths = [p.decode('utf-8') for p in args.paths]
+        args.paths = [os.path.abspath(os.path.expanduser(p.decode('utf-8'))) for p in args.paths]
     except UnicodeDecodeError:
         parser.error('argument paths: encodings is not utf-8: %r' % args.paths)
 

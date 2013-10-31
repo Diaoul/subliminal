@@ -230,9 +230,8 @@ def scan_video(path, subtitles=True, embedded_subtitles=True):
                             embedded_subtitle_languages.add(babelfish.Language.fromalpha3b(st.language))
                         except babelfish.Error:
                             logger.error('Embedded subtitle language %r is not a valid language', st.language)
-                if embedded_subtitle_languages:
-                    logger.debug('Found embedded subtitle %r with enzyme', embedded_subtitle_languages)
-                    video.subtitle_languages |= embedded_subtitle_languages
+                logger.debug('Found embedded subtitle %r with enzyme', embedded_subtitle_languages)
+                video.subtitle_languages |= embedded_subtitle_languages
     except enzyme.Error:
         logger.error('Parsing video metadata with enzyme failed')
     return video

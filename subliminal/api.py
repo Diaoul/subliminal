@@ -33,17 +33,18 @@ def list_subtitles(videos, languages, providers=None, provider_configs=None):
     provider_configs = provider_configs or {}
     subtitles = collections.defaultdict(list)
     # filter videos
-    videos = [v for v in videos if v.subtitle_languages != languages]
+    videos = [v for v in videos if v.subtitle_languages < languages]
     if not videos:
         logger.info('No video to download subtitles for with languages %r', languages)
         return subtitles
+    subtitle_languages = set.intersection(v.subtitle_languages for v in videos)
     for provider_entry_point in pkg_resources.iter_entry_points(PROVIDERS_ENTRY_POINT):
         # filter and initialize provider
         if providers is not None and provider_entry_point.name not in providers:
             logger.debug('Skipping provider %r: not in the list', provider_entry_point.name)
             continue
         Provider = provider_entry_point.load()
-        provider_languages = Provider.languages & languages
+        provider_languages = Provider.languages & languages - subtitle_languages
         if not provider_languages:
             logger.debug('Skipping provider %r: no language to search for', provider_entry_point.name)
             continue
@@ -55,10 +56,15 @@ def list_subtitles(videos, languages, providers=None, provider_configs=None):
         # list subtitles with the provider
         with Provider(**provider_configs.get(provider_entry_point.name, {})) as provider:
             for provider_video in provider_videos:
+                provider_video_languages = provider_languages - provider_video.subtitle_languages
+                if not provider_video_languages:
+                    logger.debug('Skipping provider %r: no language to search for for video %r',
+                                 provider_entry_point.name, provider_video)
+                    continue
                 logger.info('Listing subtitles with provider %r for video %r with languages %r',
-                            provider_entry_point.name, provider_video, provider_languages)
+                            provider_entry_point.name, provider_video, provider_video_languages)
                 try:
-                    provider_subtitles = provider.list_subtitles(provider_video, provider_languages)
+                    provider_subtitles = provider.list_subtitles(provider_video, provider_video_languages)
                 except ProviderNotAvailable:
                     logger.warning('Provider %r is not available, discarding it', provider_entry_point.name)
                     break
@@ -155,18 +161,19 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
     discarded_providers = set()
     downloaded_subtitles = collections.defaultdict(list)
     # filter videos
-    videos = [v for v in videos if v.subtitle_languages != languages]
+    videos = [v for v in videos if v.subtitle_languages < languages]
     if not videos:
         logger.info('No video to download subtitles for with languages %r', languages)
         return downloaded_subtitles
     # filter and initialize providers
+    subtitle_languages = set.intersection(v.subtitle_languages for v in videos)
     initialized_providers = {}
     for provider_entry_point in pkg_resources.iter_entry_points(PROVIDERS_ENTRY_POINT):
         if providers is not None and provider_entry_point.name not in providers:
             logger.debug('Skipping provider %r: not in the list', provider_entry_point.name)
             continue
         Provider = provider_entry_point.load()
-        if not Provider.languages & languages:
+        if not Provider.languages & languages - subtitle_languages:
             logger.debug('Skipping provider %r: no language to search for', provider_entry_point.name)
             continue
         if not [v for v in videos if Provider.check(v)]:
@@ -188,11 +195,15 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
                     if provider_name in discarded_providers:
                         logger.debug('Skipping discarded provider %r', provider_name)
                         continue
-                    provider_languages = provider.languages & languages
+                    provider_video_languages = provider.languages & languages - video.subtitle_languages
+                    if not provider_video_languages:
+                        logger.debug('Skipping provider %r: no language to search for for video %r', provider_name,
+                                     video)
+                        continue
                     logger.info('Listing subtitles with provider %r for video %r with languages %r',
-                                provider_name, video, provider_languages)
+                                provider_name, video, provider_video_languages)
                     try:
-                        provider_subtitles = provider.list_subtitles(video, provider_languages)
+                        provider_subtitles = provider.list_subtitles(video, provider_video_languages)
                     except ProviderNotAvailable:
                         logger.warning('Provider %r is not available, discarding it', provider_name)
                         discarded_providers.add(provider_name)

@@ -33,7 +33,7 @@ def list_subtitles(videos, languages, providers=None, provider_configs=None):
     provider_configs = provider_configs or {}
     subtitles = collections.defaultdict(list)
     # filter videos
-    videos = [v for v in videos if v.subtitle_languages < languages]
+    videos = [v for v in videos if v.subtitle_languages & languages < languages]
     if not videos:
         logger.info('No video to download subtitles for with languages %r', languages)
         return subtitles
@@ -161,7 +161,7 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
     discarded_providers = set()
     downloaded_subtitles = collections.defaultdict(list)
     # filter videos
-    videos = [v for v in videos if v.subtitle_languages < languages]
+    videos = [v for v in videos if v.subtitle_languages & languages < languages]
     if not videos:
         logger.info('No video to download subtitles for with languages %r', languages)
         return downloaded_subtitles

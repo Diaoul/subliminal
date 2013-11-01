@@ -74,7 +74,8 @@ def subliminal():
     cache_region.configure('dogpile.cache.dbm', arguments={'filename': args.cache_file})
 
     # scan videos
-    videos = scan_videos([p for p in args.paths if os.path.exists(p)], subtitles=not args.force, age=args.age)
+    videos = scan_videos([p for p in args.paths if os.path.exists(p)], subtitles=not args.force,
+                         embedded_subtitles=not args.force, age=args.age)
 
     # guess videos
     videos.extend([Video.fromguess(os.path.split(p)[1], guessit.guess_file_info(p, 'autodetect')) for p in args.paths

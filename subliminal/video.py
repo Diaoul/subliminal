@@ -158,9 +158,13 @@ def scan_subtitle_languages(path):
     """
     language_extensions = tuple('.' + c for c in babelfish.CONVERTERS['alpha2'].codes)
     dirpath, filename = os.path.split(path)
-    subtitles = {babelfish.Language.fromalpha2(os.path.splitext(p)[0][-2:]) for p in os.listdir(dirpath)
-                 if not isinstance(p, bytes) and p.startswith(os.path.splitext(filename)[0])
-                 and os.path.splitext(p)[0].endswith(language_extensions)}
+    subtitles = set()
+    for p in os.listdir(dirpath):
+        if not isinstance(p, bytes) and p.startswith(os.path.splitext(filename)[0]) and p.endswith(SUBTITLE_EXTENSIONS):
+            if os.path.splitext(p)[0].endswith(language_extensions):
+                subtitles.add(babelfish.Language.fromalpha2(os.path.splitext(p)[0][-2:]))
+            else:
+                subtitles.add(babelfish.Language('und'))
     logger.debug('Found subtitles %r', subtitles)
     return subtitles
 
@@ -225,11 +229,10 @@ def scan_video(path, subtitles=True, embedded_subtitles=True):
             if embedded_subtitles:
                 embedded_subtitle_languages = set()
                 for st in mkv.subtitle_tracks:
-                    if st.language is not None and st.language != 'und':
-                        try:
-                            embedded_subtitle_languages.add(babelfish.Language.fromalpha3b(st.language))
-                        except babelfish.Error:
-                            logger.error('Embedded subtitle language %r is not a valid language', st.language)
+                    try:
+                        embedded_subtitle_languages.add(babelfish.Language.fromalpha3b(st.language or 'und'))
+                    except babelfish.Error:
+                        logger.error('Embedded subtitle language %r is not a valid language', st.language)
                 logger.debug('Found embedded subtitle %r with enzyme', embedded_subtitle_languages)
                 video.subtitle_languages |= embedded_subtitle_languages
     except enzyme.Error:

@@ -163,7 +163,7 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
     downloaded_subtitles = collections.defaultdict(list)
     # filter videos
     videos = [v for v in videos if v.subtitle_languages & languages < languages
-              or single and babelfish.Language('und') not in v.subtitle_languages]
+              and (not single or babelfish.Language('und') not in v.subtitle_languages)]
     if not videos:
         logger.info('No video to download subtitles for with languages %r', languages)
         return downloaded_subtitles

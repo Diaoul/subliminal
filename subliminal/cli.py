@@ -11,31 +11,66 @@ import guessit
 import pkg_resources
 from subliminal import (__version__, PROVIDERS_ENTRY_POINT, cache_region, Video, Episode, Movie, scan_videos,
     download_best_subtitles)
+try:
+    import colorlog
+except ImportError:
+    colorlog = None
 
 
 DEFAULT_CACHE_FILE = os.path.join('~', '.config', 'subliminal.cache.dbm')
 
 
-def subliminal_parser():
-    parser = argparse.ArgumentParser(description='Subtitles, faster than your thoughts')
-    parser.add_argument('-l', '--languages', nargs='+', required=True, metavar='LANGUAGE', help='wanted languages as alpha2 code (ISO-639-1)')
-    parser.add_argument('-p', '--providers', nargs='+', metavar='PROVIDER', help='providers to use from %s (default: all)' % ', '.join(ep.name for ep in pkg_resources.iter_entry_points(PROVIDERS_ENTRY_POINT)))
-    parser.add_argument('-m', '--min-score', type=int, help='minimum score for subtitles. 0-%d for episodes, 0-%d for movies' % (Episode.scores['hash'], Movie.scores['hash']))
-    parser.add_argument('-s', '--single', action='store_true', help='download without language code in subtitle\'s filename i.e. .srt only')
-    parser.add_argument('-f', '--force', action='store_true', help='overwrite existing subtitles')
-    parser.add_argument('-c', '--cache-file', default=DEFAULT_CACHE_FILE, help='cache file (default: %(default)s)')
-    parser.add_argument('-a', '--age', help='download subtitles for videos newer than AGE e.g. 12h, 1w2d')
-    parser.add_argument('--hearing-impaired', action='store_true', help='download hearing impaired subtitles')
-    group_verbosity = parser.add_mutually_exclusive_group()
-    group_verbosity.add_argument('-q', '--quiet', action='store_true', help='disable output')
-    group_verbosity.add_argument('-v', '--verbose', action='store_true', help='verbose output')
-    parser.add_argument('--version', action='version', version=__version__)
-    parser.add_argument('paths', nargs='+', metavar='PATH', help='path to video file or folder')
-    return parser
-
-
 def subliminal():
-    parser = subliminal_parser()
+    parser = argparse.ArgumentParser(prog='subliminal', description='Subtitles, faster than your thoughts',
+                                     epilog='Suggestions and bug reports are greatly appreciated: '
+                                     'https://github.com/Diaoul/subliminal/issues', add_help=False)
+
+    # required arguments
+    required_arguments_group = parser.add_argument_group('required arguments')
+    required_arguments_group.add_argument('paths', nargs='+', metavar='PATH', help='path to video file or folder')
+    required_arguments_group.add_argument('-l', '--languages', nargs='+', required=True, metavar='LANGUAGE',
+                                          help='wanted languages as alpha2 code (ISO-639-1)')
+
+    # configuration
+    configuration_group = parser.add_argument_group('configuration')
+    configuration_group.add_argument('-s', '--single', action='store_true',
+                                     help='download without language code in subtitle\'s filename i.e. .srt only')
+    configuration_group.add_argument('-c', '--cache-file', default=DEFAULT_CACHE_FILE,
+                                     help='cache file (default: %(default)s)')
+
+    # filtering
+    filtering_group = parser.add_argument_group('filtering')
+    providers = [ep.name for ep in pkg_resources.iter_entry_points(PROVIDERS_ENTRY_POINT)]
+    filtering_group.add_argument('-p', '--providers', nargs='+', metavar='PROVIDER',
+                                 help='providers to use (%s)' % ', '.join(providers))
+    filtering_group.add_argument('-m', '--min-score', type=int,
+                                 help='minimum score for subtitles (0-%d for episodes, 0-%d for movies)'
+                                 % (Episode.scores['hash'], Movie.scores['hash']))
+    filtering_group.add_argument('-a', '--age', help='download subtitles for videos newer than AGE e.g. 12h, 1w2d')
+    filtering_group.add_argument('-h', '--hearing-impaired', action='store_true',
+                                 help='download hearing impaired subtitles')
+    filtering_group.add_argument('-f', '--force', action='store_true',
+                                 help='force subtitle download for videos with existing subtitles')
+
+    # addic7ed
+    addic7ed_group = parser.add_argument_group('addic7ed')
+    addic7ed_group.add_argument('--addic7ed-username', metavar='USERNAME', help='username for addic7ed provider')
+    addic7ed_group.add_argument('--addic7ed-password', metavar='PASSWORD', help='password for addic7ed provider')
+
+    # output
+    output_group = parser.add_argument_group('output')
+    output_exclusive_group = output_group.add_mutually_exclusive_group()
+    output_exclusive_group.add_argument('-q', '--quiet', action='store_true', help='disable output')
+    output_exclusive_group.add_argument('-v', '--verbose', action='store_true', help='verbose output')
+    output_group.add_argument('--color', action='store_true', help='add color to console output (requires colorlog)')
+
+    # troubleshooting
+    troubleshooting_group = parser.add_argument_group('troubleshooting')
+    troubleshooting_group.add_argument('--debug', action='store_true', help='debug output')
+    troubleshooting_group.add_argument('--version', action='version', version=__version__)
+    troubleshooting_group.add_argument('--help', action='help', help='show this help message and exit')
+
+    # parse args
     args = parser.parse_args()
 
     # parse paths
@@ -60,15 +95,41 @@ def subliminal():
     # parse cache-file
     args.cache_file = os.path.abspath(os.path.expanduser(args.cache_file))
     if not os.path.exists(os.path.split(args.cache_file)[0]):
-        if not args.quiet:
-            sys.stderr.write('Directory %r for cache file does not exist\n' % os.path.split(args.cache_file)[0])
-        exit(1)
+        parser.error('argument -c/--cache-file: directory %r for cache file does not exist'
+                     % os.path.split(args.cache_file)[0])
 
-    # setup verbosity
-    if args.verbose:
-        logging.basicConfig(level=logging.DEBUG)
+    # parse provider configs
+    provider_configs = {}
+    if (args.addic7ed_username is not None and args.addic7ed_password is None
+        or args.addic7ed_username is None and args.addic7ed_password is not None):
+        parser.error('argument --addic7ed-username/--addic7ed-password: both arguments are required or none')
+    if args.addic7ed_username is not None and args.addic7ed_password is not None:
+        provider_configs['addic7ed'] = {'username': args.addic7ed_username, 'password': args.addic7ed_password}
+
+    # parse color
+    if args.color and colorlog is None:
+        parser.error('argument --color: colorlog required')
+
+    # setup output
+    if args.debug:
+        logging.basicConfig(format='%(levelname)-8s [%(name)s-%(funcName)s:%(lineno)d] %(message)s',
+                            level=logging.DEBUG)
+    elif args.verbose:
+        handler = logging.StreamHandler()
+        if args.color:
+            handler.setFormatter(colorlog.ColoredFormatter('%(log_color)s%(levelname)-8s%(reset)s [%(blue)s%(name)s%(reset)s] %(message)s'))
+        else:
+            handler.setFormatter(logging.Formatter('%(levelname)-8s [%(name)s] %(message)s'))
+        logging.getLogger('subliminal').addHandler(handler)
+        logging.getLogger('subliminal').setLevel(logging.INFO)
     elif not args.quiet:
-        logging.basicConfig(level=logging.WARN)
+        handler = logging.StreamHandler()
+        if args.color:
+            handler.setFormatter(colorlog.ColoredFormatter('[%(log_color)s%(levelname)s%(reset)s] %(message)s'))
+        else:
+            handler.setFormatter(logging.Formatter('%(levelname)s: %(message)s'))
+        logging.getLogger('subliminal.api').addHandler(handler)
+        logging.getLogger('subliminal.api').setLevel(logging.INFO)
 
     # configure cache
     cache_region.configure('dogpile.cache.dbm', arguments={'filename': args.cache_file})
@@ -82,11 +143,11 @@ def subliminal():
                    if not os.path.exists(p)])
 
     # download best subtitles
-    subtitles = download_best_subtitles(videos, args.languages, providers=args.providers, provider_configs=None,
-                                        single=args.single, min_score=args.min_score,
-                                        hearing_impaired=args.hearing_impaired)
+    subtitles = download_best_subtitles(videos, args.languages, providers=args.providers,
+                                        provider_configs=provider_configs, single=args.single,
+                                        min_score=args.min_score, hearing_impaired=args.hearing_impaired)
 
-    # output result
+    # result output
     if not subtitles:
         if not args.quiet:
             sys.stderr.write('No subtitles downloaded\n')

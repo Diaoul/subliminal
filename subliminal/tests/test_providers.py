@@ -93,6 +93,16 @@ class Addic7edProviderTestCase(ProviderTestCase):
 class BierDopjeProviderTestCase(ProviderTestCase):
     provider_name = 'bierdopje'
 
+    def test_find_show_id(self):
+        with self.Provider() as provider:
+            show_id = provider.find_show_id('The Big Bang')
+        self.assertTrue(show_id == 9203)
+
+    def test_find_show_id_error(self):
+        with self.Provider() as provider:
+            show_id = provider.find_show_id('the big how i met your mother')
+        self.assertTrue(show_id is None)
+
     def test_query_episode_0(self):
         video = EPISODES[0]
         language = Language('eng')

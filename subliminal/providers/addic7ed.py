@@ -73,7 +73,7 @@ class Addic7edProvider(Provider):
         self.session.headers = {'User-Agent': 'Subliminal/%s' % __version__}
         # login
         if self.username is not None and self.password is not None:
-            logger.info('Logging in with username %r', self.username)
+            logger.debug('Logging in')
             data = {'username': self.username, 'password': self.password, 'Submit': 'Log in'}
             try:
                 r = self.session.post(self.server + '/dologin.php', data, timeout=10, allow_redirects=False)

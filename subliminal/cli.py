@@ -112,8 +112,14 @@ def subliminal():
 
     # setup output
     if args.debug:
-        logging.basicConfig(format='%(levelname)-8s [%(name)s-%(funcName)s:%(lineno)d] %(message)s',
-                            level=logging.DEBUG)
+        handler = logging.StreamHandler()
+        if args.color:
+            handler.setFormatter(colorlog.ColoredFormatter('%(log_color)s%(levelname)-8s%(reset)s [%(blue)s%(name)s-%(funcName)s:%(lineno)d%(reset)s] %(message)s',
+                                                           log_colors=dict(colorlog.default_log_colors.items() + [('DEBUG', 'cyan')])))
+        else:
+            handler.setFormatter(logging.Formatter('%(levelname)-8s [%(name)s-%(funcName)s:%(lineno)d] %(message)s'))
+        logging.getLogger().addHandler(handler)
+        logging.getLogger().setLevel(logging.DEBUG)
     elif args.verbose:
         handler = logging.StreamHandler()
         if args.color:

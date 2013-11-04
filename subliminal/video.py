@@ -198,46 +198,55 @@ def scan_video(path, subtitles=True, embedded_subtitles=True):
         if filename.endswith('.mkv'):
             with open(path, 'rb') as f:
                 mkv = enzyme.MKV(f)
-            video_track = mkv.video_tracks[0]
-            audio_track = mkv.audio_tracks[0]
-            # resolution
-            if video_track.height in (480, 720, 1080):
-                if video_track.interlaced:
-                    video.resolution = '%di' % video_track.height
-                    logger.debug('Found resolution %s with enzyme', video.resolution)
-                else:
-                    video.resolution = '%dp' % video_track.height
-                    logger.debug('Found resolution %s with enzyme', video.resolution)
-            # video codec
-            if video_track.codec_id == 'V_MPEG4/ISO/AVC':
-                video.video_codec = 'h264'
-                logger.debug('Found video_codec %s with enzyme', video.video_codec)
-            elif video_track.codec_id == 'V_MPEG4/ISO/SP':
-                video.video_codec = 'DivX'
-                logger.debug('Found video_codec %s with enzyme', video.video_codec)
-            elif video_track.codec_id == 'V_MPEG4/ISO/ASP':
-                video.video_codec = 'XviD'
-                logger.debug('Found video_codec %s with enzyme', video.video_codec)
-            # audio codec
-            if audio_track.codec_id == 'A_AC3':
-                video.audio_codec = 'AC3'
-                logger.debug('Found audio_codec %s with enzyme', video.audio_codec)
-            elif audio_track.codec_id == 'A_DTS':
-                video.audio_codec = 'DTS'
-                logger.debug('Found audio_codec %s with enzyme', video.audio_codec)
-            elif audio_track.codec_id == 'A_AAC':
-                video.audio_codec = 'AAC'
-                logger.debug('Found audio_codec %s with enzyme', video.audio_codec)
-            # embedded subtitles
-            if embedded_subtitles:
-                embedded_subtitle_languages = set()
-                for st in mkv.subtitle_tracks:
-                    try:
-                        embedded_subtitle_languages.add(babelfish.Language.fromalpha3b(st.language or 'und'))
-                    except babelfish.Error:
-                        logger.error('Embedded subtitle language %r is not a valid language', st.language)
-                logger.debug('Found embedded subtitle %r with enzyme', embedded_subtitle_languages)
-                video.subtitle_languages |= embedded_subtitle_languages
+            if mkv.video_tracks:
+                video_track = mkv.video_tracks[0]
+                # resolution
+                if video_track.height in (480, 720, 1080):
+                    if video_track.interlaced:
+                        video.resolution = '%di' % video_track.height
+                        logger.debug('Found resolution %s with enzyme', video.resolution)
+                    else:
+                        video.resolution = '%dp' % video_track.height
+                        logger.debug('Found resolution %s with enzyme', video.resolution)
+                # video codec
+                if video_track.codec_id == 'V_MPEG4/ISO/AVC':
+                    video.video_codec = 'h264'
+                    logger.debug('Found video_codec %s with enzyme', video.video_codec)
+                elif video_track.codec_id == 'V_MPEG4/ISO/SP':
+                    video.video_codec = 'DivX'
+                    logger.debug('Found video_codec %s with enzyme', video.video_codec)
+                elif video_track.codec_id == 'V_MPEG4/ISO/ASP':
+                    video.video_codec = 'XviD'
+                    logger.debug('Found video_codec %s with enzyme', video.video_codec)
+            else:
+                logger.warning('MKV has no video track')
+            if mkv.audio_tracks:
+                audio_track = mkv.audio_tracks[0]
+                # audio codec
+                if audio_track.codec_id == 'A_AC3':
+                    video.audio_codec = 'AC3'
+                    logger.debug('Found audio_codec %s with enzyme', video.audio_codec)
+                elif audio_track.codec_id == 'A_DTS':
+                    video.audio_codec = 'DTS'
+                    logger.debug('Found audio_codec %s with enzyme', video.audio_codec)
+                elif audio_track.codec_id == 'A_AAC':
+                    video.audio_codec = 'AAC'
+                    logger.debug('Found audio_codec %s with enzyme', video.audio_codec)
+            else:
+                logger.warning('MKV has no audio track')
+            if mkv.subtitle_tracks:
+                # embedded subtitles
+                if embedded_subtitles:
+                    embedded_subtitle_languages = set()
+                    for st in mkv.subtitle_tracks:
+                        try:
+                            embedded_subtitle_languages.add(babelfish.Language.fromalpha3b(st.language or 'und'))
+                        except babelfish.Error:
+                            logger.error('Embedded subtitle language %r is not a valid language', st.language)
+                    logger.debug('Found embedded subtitle %r with enzyme', embedded_subtitle_languages)
+                    video.subtitle_languages |= embedded_subtitle_languages
+            else:
+                logger.info('MKV has no subtitle track')
     except enzyme.Error:
         logger.error('Parsing video metadata with enzyme failed')
     return video

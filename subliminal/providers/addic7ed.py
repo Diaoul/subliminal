@@ -89,10 +89,12 @@ class Addic7edProvider(Provider):
         # logout
         if self.logged_in:
             try:
-                self.session.get(self.server + '/logout.php', timeout=10)
+                r = self.session.get(self.server + '/logout.php', timeout=10)
                 logger.info('Logged out')
-            except Exception as e:
-                logger.error('Failed to logout: %s', e)
+            except requests.Timeout:
+                raise ProviderNotAvailable('Timeout after 10 seconds')
+            if r.status_code != 200:
+                raise ProviderNotAvailable('Request failed with status code %d' % r.status_code)
         self.session.close()
 
     def get(self, url, params=None):

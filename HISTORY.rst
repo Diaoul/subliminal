@@ -1,6 +1,16 @@
 Changelog
 =========
 
+0.7.1
+-----
+**release date:** 2013-11-06
+
+* Improve CLI
+* Add login support for Addic7ed
+* Remove lxml dependency
+* Many fixes
+
+
 0.7.0
 -----
 **release date:** 2013-10-29

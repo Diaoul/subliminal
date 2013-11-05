@@ -182,7 +182,7 @@ def scan_video(path, subtitles=True, embedded_subtitles=True):
     """
     dirpath, filename = os.path.split(path)
     logger.info('Scanning video %r in %r', filename, dirpath)
-    video = Video.fromguess(path, guessit.guess_file_info(filename, 'autodetect'))
+    video = Video.fromguess(path, guessit.guess_file_info(path, 'autodetect'))
     video.size = os.path.getsize(path)
     if video.size > 10485760:
         logger.debug('Size is %d', video.size)

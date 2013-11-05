@@ -279,20 +279,39 @@ def scan_videos(paths, subtitles=True, embedded_subtitles=True, age=None):
     # scan directories
     for path in [p for p in paths if os.path.isdir(p)]:
         logger.info('Scanning directory %r', path)
-        for dirpath, _, filenames in os.walk(path):
-            # skip badly encoded directories and files
+        for dirpath, dirnames, filenames in os.walk(path):
+            # skip badly encoded directories
             if isinstance(dirpath, bytes):
                 logger.error('Skipping badly encoded directory %r', dirpath.decode('utf-8', errors='replace'))
                 continue
-            safe_filenames = []
-            for filename in filenames:
-                if isinstance(filename, bytes):
-                    logger.error('Skipping badly encoded filename %r', filename.decode('utf-8', errors='replace'))
-                    continue
-                safe_filenames.append(filename)
+            # skip badly encoded and hidden sub directories
+            for dirname in list(dirnames):
+                if isinstance(dirname, bytes):
+                    logger.error('Skipping badly encoded dirname %r in %r', dirname.decode('utf-8', errors='replace'),
+                                 dirpath)
+                    dirnames.remove(dirname)
+                elif dirname.startswith('.'):
+                    logger.debug('Skipping hidden dirname %r in %r', dirname, dirpath)
+                    dirnames.remove(dirname)
             # scan for videos
-            for video_filename in [f for f in safe_filenames if f.endswith(VIDEO_EXTENSIONS)]:
-                filepath = os.path.join(dirpath, video_filename)
+            for filename in filenames:
+                # skip badly encoded files
+                if isinstance(filename, bytes):
+                    logger.error('Skipping badly encoded filename %r in %r', filename.decode('utf-8', errors='replace'),
+                                 dirpath)
+                    continue
+                # filter videos
+                if not filename.endswith(VIDEO_EXTENSIONS):
+                    continue
+                # skip hidden files
+                if filename.startswith('.'):
+                    logger.debug('Skipping hidden filename %r in %r', filename, dirpath)
+                    continue
+                filepath = os.path.join(dirpath, filename)
+                # skip links
+                if os.path.islink(filepath):
+                    logger.debug('Skipping link %r in %r', filename, dirpath)
+                    continue
                 if age and datetime.datetime.now() - datetime.datetime.fromtimestamp(os.path.getmtime(filepath)) > age:
                     logger.info('Skipping video %r: older than %r', filepath, age)
                     continue

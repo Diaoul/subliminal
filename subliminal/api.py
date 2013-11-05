@@ -140,8 +140,13 @@ def download_subtitles(subtitles, provider_configs=None, single=False):
                 if single or downloaded_languages == languages:
                     break
     finally:  # terminate providers
-        for provider in initialized_providers.values():
-            provider.terminate()
+        for (provider_name, provider) in initialized_providers.items():
+            try:
+                provider.terminate()
+            except ProviderNotAvailable:
+                logger.warning('Provider %r is not available, unable to terminate', provider_name)
+            except:
+                logger.exception('Unexpected error in provider %r', provider_name)
 
 
 def download_best_subtitles(videos, languages, providers=None, provider_configs=None, single=False, min_score=0,
@@ -261,6 +266,11 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
                     logger.debug('All languages downloaded')
                     break
     finally:  # terminate providers
-        for provider in initialized_providers.values():
-            provider.terminate()
+        for (provider_name, provider) in initialized_providers.items():
+            try:
+                provider.terminate()
+            except ProviderNotAvailable:
+                logger.warning('Provider %r is not available, unable to terminate', provider_name)
+            except:
+                logger.exception('Unexpected error in provider %r', provider_name)
     return downloaded_subtitles

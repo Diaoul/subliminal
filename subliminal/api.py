@@ -55,25 +55,28 @@ def list_subtitles(videos, languages, providers=None, provider_configs=None):
             continue
 
         # list subtitles with the provider
-        with Provider(**provider_configs.get(provider_entry_point.name, {})) as provider:
-            for provider_video in provider_videos:
-                provider_video_languages = provider_languages - provider_video.subtitle_languages
-                if not provider_video_languages:
-                    logger.debug('Skipping provider %r: no language to search for for video %r',
-                                 provider_entry_point.name, provider_video)
-                    continue
-                logger.info('Listing subtitles with provider %r for video %r with languages %r',
-                            provider_entry_point.name, provider_video, provider_video_languages)
-                try:
-                    provider_subtitles = provider.list_subtitles(provider_video, provider_video_languages)
-                except ProviderNotAvailable:
-                    logger.warning('Provider %r is not available, discarding it', provider_entry_point.name)
-                    break
-                except:
-                    logger.exception('Unexpected error in provider %r', provider_entry_point.name)
-                    continue
-                logger.info('Found %d subtitles', len(provider_subtitles))
-                subtitles[provider_video].extend(provider_subtitles)
+        try:
+            with Provider(**provider_configs.get(provider_entry_point.name, {})) as provider:
+                for provider_video in provider_videos:
+                    provider_video_languages = provider_languages - provider_video.subtitle_languages
+                    if not provider_video_languages:
+                        logger.debug('Skipping provider %r: no language to search for for video %r',
+                                     provider_entry_point.name, provider_video)
+                        continue
+                    logger.info('Listing subtitles with provider %r for video %r with languages %r',
+                                provider_entry_point.name, provider_video, provider_video_languages)
+                    try:
+                        provider_subtitles = provider.list_subtitles(provider_video, provider_video_languages)
+                    except ProviderNotAvailable:
+                        logger.warning('Provider %r is not available, discarding it', provider_entry_point.name)
+                        break
+                    except:
+                        logger.exception('Unexpected error in provider %r', provider_entry_point.name)
+                        continue
+                    logger.info('Found %d subtitles', len(provider_subtitles))
+                    subtitles[provider_video].extend(provider_subtitles)
+        except ProviderNotAvailable:
+            logger.warning('Provider %r is not available, discarding it', provider_entry_point.name)
     return subtitles
 
 

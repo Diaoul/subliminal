@@ -138,7 +138,8 @@ def subliminal():
         logging.getLogger('subliminal.api').setLevel(logging.INFO)
 
     # configure cache
-    cache_region.configure('dogpile.cache.dbm', arguments={'filename': args.cache_file})
+    cache_region.configure('dogpile.cache.dbm', expiration_time=datetime.timedelta(days=30),
+                           arguments={'filename': args.cache_file})
 
     # scan videos
     videos = scan_videos([p for p in args.paths if os.path.exists(p)], subtitles=not args.force,

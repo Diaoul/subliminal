@@ -325,6 +325,16 @@ class TVsubtitlesProviderTestCase(ProviderTestCase):
             show_id = provider.find_show_id('The Big Bang')
         self.assertTrue(show_id == 154)
 
+    def test_find_show_id_ambiguous(self):
+        with self.Provider() as provider:
+            show_id = provider.find_show_id('New Girl')
+        self.assertTrue(show_id == 977)
+
+    def test_find_show_id_no_dots(self):
+        with self.Provider() as provider:
+            show_id = provider.find_show_id('Marvel\'s Agents of S H I E L D')
+        self.assertTrue(show_id == 1340)
+
     def test_find_show_id_error(self):
         with self.Provider() as provider:
             show_id = provider.find_show_id('the big gaming')

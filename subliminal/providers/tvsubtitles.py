@@ -61,8 +61,9 @@ class TVsubtitlesProvider(Provider):
                            'nld', 'pol', 'por', 'ron', 'rus', 'spa', 'swe', 'tur', 'ukr', 'zho']}
     video_types = (Episode,)
     server = 'http://www.tvsubtitles.net'
-    episode_id_re = re.compile('^episode-(\d+)\.html$')
-    subtitle_re = re.compile('^\/subtitle-(\d+)\.html$')
+    episode_id_re = re.compile('^episode-\d+\.html$')
+    subtitle_re = re.compile('^\/subtitle-\d+\.html$')
+    link_re = re.compile('^(?P<series>.+) \(\d{4}-\d{4}\)$')
 
     def initialize(self):
         self.session = requests.Session()
@@ -106,6 +107,13 @@ class TVsubtitlesProvider(Provider):
         if not links:
             logger.info('Series %r not found', series)
             return None
+        for link in links:
+            match = self.link_re.match(link.string)
+            if not match:
+                logger.warning('Could not parse %r', link.string)
+                continue
+            if match.group('series').lower().replace('.', ' ').strip() == series.lower():
+                return int(link['href'][8:-5])
         return int(links[0]['href'][8:-5])
 
     @region.cache_on_arguments()

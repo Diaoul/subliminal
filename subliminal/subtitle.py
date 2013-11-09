@@ -73,7 +73,7 @@ class Subtitle(object):
         return score
 
     def __repr__(self):
-        return '<%s [%r]>' % (self.__class__.__name__, self.language)
+        return '<%s [%s]>' % (self.__class__.__name__, self.language)
 
 
 def get_subtitle_path(video_path, language=None):

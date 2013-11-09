@@ -118,10 +118,7 @@ class BierDopjeProvider(Provider):
                                   result.find('downloadlink').text) for result in root.find('response/results')]
 
     def list_subtitles(self, video, languages):
-        subtitles = []
-        for language in languages:
-            subtitles.extend(self.query(language, video.season, video.episode, video.tvdb_id, video.series))
-        return subtitles
+        return [s for l in languages for s in self.query(l, video.season, video.episode, video.tvdb_id, video.series)]
 
     def download_subtitle(self, subtitle):
         try:

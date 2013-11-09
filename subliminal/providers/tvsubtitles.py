@@ -78,6 +78,7 @@ class TVsubtitlesProvider(Provider):
         :param string url: part of the URL to reach with the leading slash
         :param dict params: params of the request
         :param dict data: data of the request
+        :param string method: method of the request
         :return: the response
         :rtype: :class:`bs4.BeautifulSoup`
         :raise: :class:`~subliminal.exceptions.ProviderNotAvailable`

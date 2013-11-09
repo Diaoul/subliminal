@@ -278,6 +278,54 @@ class OpenSubtitlesProviderTestCase(ProviderTestCase):
         self.assertTrue(is_valid_subtitle(subtitle_text))
 
 
+class PodnapisiProviderTestCase(ProviderTestCase):
+    provider_name = 'podnapisi'
+
+    def test_query_movie_0(self):
+        video = MOVIES[0]
+        language = Language('eng')
+        matches = {frozenset(['video_codec', 'title', 'resolution', 'year']),
+                   frozenset(['title', 'resolution', 'year']),
+                   frozenset(['video_codec', 'title', 'year']),
+                   frozenset(['title', 'year']),
+                   frozenset(['video_codec', 'title', 'resolution', 'release_group', 'year'])}
+        with self.Provider() as provider:
+            subtitles = provider.query(language, title=video.title, year=video.year)
+        self.assertTrue({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles} == matches)
+        self.assertTrue({subtitle.language for subtitle in subtitles} == {language})
+
+    def test_query_episode_0(self):
+        video = EPISODES[0]
+        language = Language('eng')
+        matches = {frozenset(['episode', 'series', 'season', 'video_codec', 'resolution', 'release_group']),
+                   frozenset(['season', 'video_codec', 'episode', 'resolution', 'series'])}
+        with self.Provider() as provider:
+            subtitles = provider.query(language, series=video.series, season=video.season, episode=video.episode)
+        self.assertTrue({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles} == matches)
+        self.assertTrue({subtitle.language for subtitle in subtitles} == {language})
+
+    def test_list_subtitles(self):
+        video = MOVIES[0]
+        languages = {Language('eng'), Language('fra')}
+        matches = {frozenset(['video_codec', 'title', 'resolution', 'year']),
+                   frozenset(['title', 'resolution', 'year']),
+                   frozenset(['video_codec', 'title', 'year']),
+                   frozenset(['title', 'year']),
+                   frozenset(['video_codec', 'title', 'resolution', 'release_group', 'year'])}
+        with self.Provider() as provider:
+            subtitles = provider.list_subtitles(video, languages)
+        self.assertTrue({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles} == matches)
+        self.assertTrue({subtitle.language for subtitle in subtitles} == languages)
+
+    def test_download_subtitle(self):
+        video = MOVIES[0]
+        languages = {Language('eng'), Language('fra')}
+        with self.Provider() as provider:
+            subtitles = provider.list_subtitles(video, languages)
+            subtitle_text = provider.download_subtitle(subtitles[0])
+        self.assertTrue(is_valid_subtitle(subtitle_text))
+
+
 class TheSubDBProviderTestCase(ProviderTestCase):
     provider_name = 'thesubdb'
 
@@ -390,6 +438,7 @@ def suite():
     suite.addTest(TestLoader().loadTestsFromTestCase(Addic7edProviderTestCase))
     suite.addTest(TestLoader().loadTestsFromTestCase(BierDopjeProviderTestCase))
     suite.addTest(TestLoader().loadTestsFromTestCase(OpenSubtitlesProviderTestCase))
+    suite.addTest(TestLoader().loadTestsFromTestCase(PodnapisiProviderTestCase))
     suite.addTest(TestLoader().loadTestsFromTestCase(TheSubDBProviderTestCase))
     suite.addTest(TestLoader().loadTestsFromTestCase(TVsubtitlesProviderTestCase))
     return suite

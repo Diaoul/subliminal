@@ -128,7 +128,6 @@ class OpenSubtitlesProvider(Provider):
         if not response['data']:
             logger.debug('No subtitle found')
             return []
-        logger.debug('Found subtitles %r', response['data'])
         return [OpenSubtitlesSubtitle(babelfish.Language.fromopensubtitles(r['SubLanguageID']),
                                       bool(int(r['SubHearingImpaired'])), r['IDSubtitleFile'], r['MatchedBy'],
                                       r['MovieKind'], r['MovieHash'], r['MovieName'], r['MovieReleaseName'],
@@ -141,7 +140,8 @@ class OpenSubtitlesProvider(Provider):
         query = None
         if ('opensubtitles' not in video.hashes or not video.size) and not video.imdb_id:
             query = video.name.split(os.sep)[-1]
-        return self.query(languages, hash=video.hashes.get('opensubtitles'), size=video.size, imdb_id=video.imdb_id, query=query)
+        return self.query(languages, hash=video.hashes.get('opensubtitles'), size=video.size, imdb_id=video.imdb_id,
+                          query=query)
 
     def download_subtitle(self, subtitle):
         try:

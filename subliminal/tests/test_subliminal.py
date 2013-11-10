@@ -5,7 +5,7 @@ import os
 import shutil
 from unittest import TestCase, TestSuite, TestLoader, TextTestRunner
 from babelfish import Language
-from subliminal import list_subtitles, download_subtitles, download_best_subtitles, scan_video, scan_videos
+from subliminal import list_subtitles, download_subtitles, download_best_subtitles, scan_video
 from subliminal.tests.common import MOVIES, EPISODES
 
 

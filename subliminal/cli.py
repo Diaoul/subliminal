@@ -29,7 +29,7 @@ def subliminal():
     required_arguments_group = parser.add_argument_group('required arguments')
     required_arguments_group.add_argument('paths', nargs='+', metavar='PATH', help='path to video file or folder')
     required_arguments_group.add_argument('-l', '--languages', nargs='+', required=True, metavar='LANGUAGE',
-                                          help='wanted languages as alpha2 code (ISO-639-1)')
+                                          help='wanted languages as IETF codes e.g. fr, pt-BR, sr-Cyrl ')
 
     # configuration
     configuration_group = parser.add_argument_group('configuration')
@@ -81,9 +81,9 @@ def subliminal():
 
     # parse languages
     try:
-        args.languages = {babelfish.Language.fromalpha2(l) for l in args.languages}
+        args.languages = {babelfish.Language.fromietf(l) for l in args.languages}
     except babelfish.Error:
-        parser.error('argument -l/--languages: codes are not ISO-639-1: %r' % args.languages)
+        parser.error('argument -l/--languages: codes are not IETF: %r' % args.languages)
 
     # parse age
     if args.age is not None:

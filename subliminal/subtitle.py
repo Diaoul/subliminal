@@ -106,7 +106,10 @@ def is_valid_subtitle(subtitle_text):
         pysrt.from_string(subtitle_text, error_handling=pysrt.ERROR_RAISE)
         return True
     except pysrt.Error:
-        return False
+        pass
+    except:
+        logger.exception('Unexpected error when validating subtitle')
+    return False
 
 
 def compute_guess_matches(video, guess):

@@ -47,11 +47,11 @@ def list_subtitles(videos, languages, providers=None, provider_configs=None):
         Provider = provider_entry_point.load()
         provider_languages = Provider.languages & languages - subtitle_languages
         if not provider_languages:
-            logger.debug('Skipping provider %r: no language to search for', provider_entry_point.name)
+            logger.info('Skipping provider %r: no language to search for', provider_entry_point.name)
             continue
         provider_videos = [v for v in videos if Provider.check(v)]
         if not provider_videos:
-            logger.debug('Skipping provider %r: no video to search for', provider_entry_point.name)
+            logger.info('Skipping provider %r: no video to search for', provider_entry_point.name)
             continue
 
         # list subtitles with the provider
@@ -184,10 +184,10 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
             continue
         Provider = provider_entry_point.load()
         if not Provider.languages & languages - subtitle_languages:
-            logger.debug('Skipping provider %r: no language to search for', provider_entry_point.name)
+            logger.info('Skipping provider %r: no language to search for', provider_entry_point.name)
             continue
         if not [v for v in videos if Provider.check(v)]:
-            logger.debug('Skipping provider %r: no video to search for', provider_entry_point.name)
+            logger.info('Skipping provider %r: no video to search for', provider_entry_point.name)
             continue
         provider = Provider(**provider_configs.get(provider_entry_point.name, {}))
         try:

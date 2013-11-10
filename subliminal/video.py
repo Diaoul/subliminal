@@ -246,7 +246,7 @@ def scan_video(path, subtitles=True, embedded_subtitles=True):
                     logger.debug('Found embedded subtitle %r with enzyme', embedded_subtitle_languages)
                     video.subtitle_languages |= embedded_subtitle_languages
             else:
-                logger.info('MKV has no subtitle track')
+                logger.debug('MKV has no subtitle track')
     except enzyme.Error:
         logger.error('Parsing video metadata with enzyme failed')
     return video

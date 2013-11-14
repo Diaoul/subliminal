@@ -105,8 +105,9 @@ def is_valid_subtitle(subtitle_text):
     try:
         pysrt.from_string(subtitle_text, error_handling=pysrt.ERROR_RAISE)
         return True
-    except pysrt.Error:
-        pass
+    except pysrt.Error as e:
+        if e.args[0] > 80:
+            return True
     except:
         logger.exception('Unexpected error when validating subtitle')
     return False

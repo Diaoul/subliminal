@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='subliminal',
-    version='0.7.2',
+    version='0.7.3-dev',
     license='MIT',
     description='Subtitles, faster than your thoughts',
     long_description=open('README.rst').read() + '\n\n' + open('HISTORY.rst').read(),

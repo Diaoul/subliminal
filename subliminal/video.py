@@ -240,7 +240,10 @@ def scan_video(path, subtitles=True, embedded_subtitles=True):
                     embedded_subtitle_languages = set()
                     for st in mkv.subtitle_tracks:
                         try:
-                            embedded_subtitle_languages.add(babelfish.Language.fromalpha3b(st.language or 'und'))
+                            if not st.language and st.name:
+                                embedded_subtitle_languages.add(babelfish.Language.fromname(st.name))
+                            else:
+                                embedded_subtitle_languages.add(babelfish.Language.fromalpha3b(st.language or 'und'))
                         except babelfish.Error:
                             logger.error('Embedded subtitle language %r is not a valid language', st.language)
                     logger.debug('Found embedded subtitle %r with enzyme', embedded_subtitle_languages)

@@ -166,6 +166,9 @@ class Addic7edProvider(Provider):
             if cells[5].string != 'Completed':
                 logger.debug('Skipping incomplete subtitle')
                 continue
+            if not cells[3].string:
+                logger.debug('Skipping empty language')
+                continue
             subtitles.append(Addic7edSubtitle(babelfish.Language.fromaddic7ed(cells[3].string), series, season,
                                               int(cells[1].string), cells[2].string, cells[4].string,
                                               bool(cells[6].string), cells[9].a['href'], link))

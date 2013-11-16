@@ -85,11 +85,11 @@ class Episode(Video):
 
     """
     scores = {'title': 12, 'video_codec': 2, 'imdb_id': 35, 'audio_codec': 1, 'tvdb_id': 23, 'resolution': 2,
-              'season': 6, 'release_group': 6, 'series': 23, 'episode': 6, 'hash': 46}
+              'season': 6, 'release_group': 6, 'series': 23, 'episode': 6, 'hash': 46, 'year':7}
 
     def __init__(self, name, series, season, episode, release_group=None, resolution=None, video_codec=None,
                  audio_codec=None, imdb_id=None, hashes=None, size=None, subtitle_languages=None, title=None,
-                 tvdb_id=None):
+                 tvdb_id=None, year=None):
         super(Episode, self).__init__(name, release_group, resolution, video_codec, audio_codec, imdb_id, hashes,
                                       size, subtitle_languages)
         self.series = series
@@ -97,6 +97,7 @@ class Episode(Video):
         self.episode = episode
         self.title = title
         self.tvdb_id = tvdb_id
+        self.year = year
 
     @classmethod
     def fromguess(cls, name, guess):
@@ -107,10 +108,10 @@ class Episode(Video):
         return cls(name, guess['series'], guess['season'], guess['episodeNumber'],
                    release_group=guess.get('releaseGroup'), resolution=guess.get('screenSize'),
                    video_codec=guess.get('videoCodec'), audio_codec=guess.get('audioCodec'),
-                   title=guess.get('title'))
+                   title=guess.get('title'), year=guess.get('year'))
 
     def __repr__(self):
-        return '<%s [%r, %rx%r]>' % (self.__class__.__name__, self.series, self.season, self.episode)
+        return '<%s [%r, %r, %rx%r]>' % (self.__class__.__name__, self.series, self.year, self.season, self.episode)
 
 
 class Movie(Video):

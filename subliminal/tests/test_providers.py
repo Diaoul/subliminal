@@ -223,8 +223,8 @@ class OpenSubtitlesProviderTestCase(ProviderTestCase):
                    frozenset(['episode', 'title', 'series', 'imdb_id', 'video_codec', 'season'])}
         with self.Provider() as provider:
             subtitles = provider.query(languages, imdb_id=video.imdb_id)
-        self.assertTrue({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles} == matches)
-        self.assertTrue({subtitle.language for subtitle in subtitles} == languages)
+        self.assertEquals({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)
+        self.assertEquals({subtitle.language for subtitle in subtitles}, languages)
 
     def test_query_movie_0_hash(self):
         video = MOVIES[0]
@@ -232,6 +232,7 @@ class OpenSubtitlesProviderTestCase(ProviderTestCase):
         matches = {frozenset(['hash', 'title', 'video_codec', 'year', 'resolution', 'imdb_id']),
                    frozenset(['hash', 'title', 'video_codec', 'year', 'resolution', 'release_group', 'imdb_id']),
                    frozenset(['year', 'video_codec', 'imdb_id', 'hash', 'title']),
+                   frozenset([]),
                    frozenset(['year', 'resolution', 'imdb_id', 'hash', 'title']),
                    frozenset(['year', 'imdb_id', 'hash', 'title'])}
         with self.Provider() as provider:
@@ -259,6 +260,7 @@ class OpenSubtitlesProviderTestCase(ProviderTestCase):
                    frozenset(['year', 'video_codec', 'imdb_id', 'resolution', 'title']),
                    frozenset(['hash', 'title', 'video_codec', 'year', 'resolution', 'release_group', 'imdb_id']),
                    frozenset(['year', 'video_codec', 'imdb_id', 'hash', 'title']),
+                   frozenset([]),
                    frozenset(['year', 'resolution', 'imdb_id', 'hash', 'title']),
                    frozenset(['hash', 'title', 'video_codec', 'year', 'resolution', 'imdb_id']),
                    frozenset(['year', 'imdb_id', 'hash', 'title']),

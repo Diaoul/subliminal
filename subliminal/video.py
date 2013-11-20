@@ -156,7 +156,7 @@ def scan_subtitle_languages(path):
     :rtype: set
 
     """
-    language_extensions = tuple('.' + c for c in babelfish.CONVERTERS['alpha2'].codes)
+    language_extensions = tuple('.' + c for c in babelfish.get_language_converter('alpha2').codes)
     dirpath, filename = os.path.split(path)
     subtitles = set()
     for p in os.listdir(dirpath):

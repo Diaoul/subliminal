@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from babelfish import ReverseConverter, ConvertError, ReverseError
+from babelfish import LanguageReverseConverter, LanguageConvertError, LanguageReverseError
 
 
-class PodnapisiConverter(ReverseConverter):
+class PodnapisiConverter(LanguageReverseConverter):
     def __init__(self):
-        super(PodnapisiConverter, self).__init__()
         self.from_podnapisi = {2: ('eng',), 28: ('spa',), 26: ('pol',), 36: ('srp',), 1: ('slv',), 38: ('hrv',),
                                9: ('ita',), 8: ('fra',), 48: ('por', 'BR'), 23: ('nld',), 12: ('ara',), 13: ('ron',),
                                33: ('bul',), 32: ('por',), 16: ('ell',), 15: ('hun',), 31: ('fin',), 30: ('tur',),
@@ -25,9 +24,9 @@ class PodnapisiConverter(ReverseConverter):
             return self.to_podnapisi[(alpha3, country)]
         if (alpha3, country, script) in self.to_podnapisi:
             return self.to_podnapisi[(alpha3, country, script)]
-        raise ConvertError(alpha3, country, script)
+        raise LanguageConvertError(alpha3, country, script)
 
     def reverse(self, podnapisi):
         if podnapisi not in self.from_podnapisi:
-            raise ReverseError(podnapisi)
+            raise LanguageReverseError(podnapisi)
         return self.from_podnapisi[podnapisi]

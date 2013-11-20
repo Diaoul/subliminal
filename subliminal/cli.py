@@ -9,8 +9,10 @@ import sys
 import babelfish
 import guessit
 import pkg_resources
-from subliminal import (__version__, PROVIDERS_ENTRY_POINT, cache_region, Video, Episode, Movie, scan_videos,
+from subliminal import (__version__, PROVIDERS_ENTRY_POINT, cache_region, MutexLock, Video, Episode, Movie, scan_videos,
     download_best_subtitles)
+
+
 try:
     import colorlog
 except ImportError:
@@ -139,7 +141,7 @@ def subliminal():
 
     # configure cache
     cache_region.configure('dogpile.cache.dbm', expiration_time=datetime.timedelta(days=30),
-                           arguments={'filename': args.cache_file})
+                           arguments={'filename': args.cache_file, 'lock_factory': MutexLock})
 
     # scan videos
     videos = scan_videos([p for p in args.paths if os.path.exists(p)], subtitles=not args.force,

@@ -23,22 +23,22 @@ class ApiTestCase(TestCase):
         videos = [MOVIES[0]]
         languages = {Language('eng')}
         subtitles = list_subtitles(videos, languages)
-        self.assertTrue(len(subtitles) == len(videos))
-        self.assertTrue(len(subtitles[videos[0]]) > 0)
+        self.assertEqual(len(subtitles), len(videos))
+        self.assertGreater(len(subtitles[videos[0]]), 0)
 
     def test_list_subtitles_movie_0_por_br(self):
         videos = [MOVIES[0]]
         languages = {Language('por', 'BR')}
         subtitles = list_subtitles(videos, languages)
-        self.assertTrue(len(subtitles) == len(videos))
-        self.assertTrue(len(subtitles[videos[0]]) > 0)
+        self.assertEqual(len(subtitles), len(videos))
+        self.assertGreater(len(subtitles[videos[0]]), 0)
 
     def test_list_subtitles_episodes(self):
         videos = [EPISODES[0], EPISODES[1]]
         languages = {Language('eng'), Language('fra')}
         subtitles = list_subtitles(videos, languages)
-        self.assertTrue(len(subtitles) == len(videos))
-        self.assertTrue(len(subtitles[videos[0]]) > 0)
+        self.assertEqual(len(subtitles), len(videos))
+        self.assertGreater(len(subtitles[videos[0]]), 0)
 
     def test_download_subtitles(self):
         videos = [EPISODES[0], EPISODES[1]]
@@ -68,7 +68,7 @@ class ApiTestCase(TestCase):
         languages = {Language('eng'), Language('fra')}
         subtitles = download_best_subtitles(videos, languages)
         for video in videos:
-            self.assertTrue(video in subtitles and len(subtitles[video]) == 2)
+            self.assertEqual(video in subtitles and len(subtitles[video]), 2)
             self.assertTrue(os.path.exists(os.path.splitext(video.name)[0] + '.en.srt'))
             self.assertTrue(os.path.exists(os.path.splitext(video.name)[0] + '.fr.srt'))
 
@@ -79,7 +79,8 @@ class ApiTestCase(TestCase):
         languages = {Language('eng'), Language('fra')}
         subtitles = download_best_subtitles(videos, languages, single=True)
         for video in videos:
-            self.assertTrue(video in subtitles and len(subtitles[video]) == 1)
+            self.assertIn(video, subtitles)
+            self.assertEqual(len(subtitles[video]), 1)
             self.assertTrue(os.path.exists(os.path.splitext(video.name)[0] + '.srt'))
 
     def test_download_best_subtitles_min_score(self):
@@ -88,7 +89,7 @@ class ApiTestCase(TestCase):
             video.name = os.path.join(TEST_DIR, video.name.split(os.sep)[-1])
         languages = {Language('eng'), Language('fra')}
         subtitles = download_best_subtitles(videos, languages, min_score=1000)
-        self.assertTrue(len(subtitles) == 0)
+        self.assertEqual(len(subtitles), 0)
 
     def test_download_best_subtitles_hearing_impaired(self):
         videos = [MOVIES[0]]
@@ -96,7 +97,7 @@ class ApiTestCase(TestCase):
             video.name = os.path.join(TEST_DIR, video.name.split(os.sep)[-1])
         languages = {Language('eng')}
         subtitles = download_best_subtitles(videos, languages, hearing_impaired=True)
-        self.assertTrue(subtitles[videos[0]][0].hearing_impaired == True)
+        self.assertTrue(subtitles[videos[0]][0].hearing_impaired)
 
 
 class VideoTestCase(TestCase):
@@ -111,47 +112,47 @@ class VideoTestCase(TestCase):
     def test_scan_video_movie(self):
         video = MOVIES[0]
         scanned_video = scan_video(os.path.join(TEST_DIR, os.path.split(video.name)[1]))
-        self.assertTrue(scanned_video.name == os.path.join(TEST_DIR, os.path.split(video.name)[1]))
-        self.assertTrue(scanned_video.title.lower() == video.title.lower())
-        self.assertTrue(scanned_video.year == video.year)
-        self.assertTrue(scanned_video.video_codec == video.video_codec)
-        self.assertTrue(scanned_video.resolution == video.resolution)
-        self.assertTrue(scanned_video.release_group == video.release_group)
-        self.assertTrue(scanned_video.subtitle_languages == set())
-        self.assertTrue(scanned_video.hashes == {})
-        self.assertTrue(scanned_video.audio_codec is None)
-        self.assertTrue(scanned_video.imdb_id is None)
-        self.assertTrue(scanned_video.size == 0)
+        self.assertEqual(scanned_video.name, os.path.join(TEST_DIR, os.path.split(video.name)[1]))
+        self.assertEqual(scanned_video.title.lower(), video.title.lower())
+        self.assertEqual(scanned_video.year, video.year)
+        self.assertEqual(scanned_video.video_codec, video.video_codec)
+        self.assertEqual(scanned_video.resolution, video.resolution)
+        self.assertEqual(scanned_video.release_group, video.release_group)
+        self.assertEqual(scanned_video.subtitle_languages, set())
+        self.assertEqual(scanned_video.hashes, {})
+        self.assertIsNone(scanned_video.audio_codec)
+        self.assertIsNone(scanned_video.imdb_id)
+        self.assertEqual(scanned_video.size, 0)
 
     def test_scan_video_episode(self):
         video = EPISODES[0]
         scanned_video = scan_video(os.path.join(TEST_DIR, os.path.split(video.name)[1]))
-        self.assertTrue(scanned_video.name == os.path.join(TEST_DIR, os.path.split(video.name)[1]))
-        self.assertTrue(scanned_video.series == video.series)
-        self.assertTrue(scanned_video.season == video.season)
-        self.assertTrue(scanned_video.episode == video.episode)
-        self.assertTrue(scanned_video.video_codec == video.video_codec)
-        self.assertTrue(scanned_video.resolution == video.resolution)
-        self.assertTrue(scanned_video.release_group == video.release_group)
-        self.assertTrue(scanned_video.subtitle_languages == set())
-        self.assertTrue(scanned_video.hashes == {})
-        self.assertTrue(scanned_video.title is None)
-        self.assertTrue(scanned_video.tvdb_id is None)
-        self.assertTrue(scanned_video.imdb_id is None)
-        self.assertTrue(scanned_video.audio_codec is None)
-        self.assertTrue(scanned_video.size == 0)
+        self.assertEqual(scanned_video.name, os.path.join(TEST_DIR, os.path.split(video.name)[1]))
+        self.assertEqual(scanned_video.series, video.series)
+        self.assertEqual(scanned_video.season, video.season)
+        self.assertEqual(scanned_video.episode, video.episode)
+        self.assertEqual(scanned_video.video_codec, video.video_codec)
+        self.assertEqual(scanned_video.resolution, video.resolution)
+        self.assertEqual(scanned_video.release_group, video.release_group)
+        self.assertEqual(scanned_video.subtitle_languages, set())
+        self.assertEqual(scanned_video.hashes, {})
+        self.assertIsNone(scanned_video.title)
+        self.assertIsNone(scanned_video.tvdb_id)
+        self.assertIsNone(scanned_video.imdb_id)
+        self.assertIsNone(scanned_video.audio_codec)
+        self.assertEqual(scanned_video.size, 0)
 
     def test_scan_video_subtitle_language_und(self):
         video = EPISODES[0]
         open(os.path.join(TEST_DIR, os.path.splitext(os.path.split(video.name)[1])[0]) + '.srt', 'w').close()
         scanned_video = scan_video(os.path.join(TEST_DIR, os.path.split(video.name)[1]))
-        self.assertTrue(scanned_video.subtitle_languages == {Language('und')})
+        self.assertEqual(scanned_video.subtitle_languages, {Language('und')})
 
     def test_scan_video_subtitles_language_eng(self):
         video = EPISODES[0]
         open(os.path.join(TEST_DIR, os.path.splitext(os.path.split(video.name)[1])[0]) + '.en.srt', 'w').close()
         scanned_video = scan_video(os.path.join(TEST_DIR, os.path.split(video.name)[1]))
-        self.assertTrue(scanned_video.subtitle_languages == {Language('eng')})
+        self.assertEqual(scanned_video.subtitle_languages, {Language('eng')})
 
     def test_scan_video_subtitles_languages(self):
         video = EPISODES[0]
@@ -159,7 +160,8 @@ class VideoTestCase(TestCase):
         open(os.path.join(TEST_DIR, os.path.splitext(os.path.split(video.name)[1])[0]) + '.fr.srt', 'w').close()
         open(os.path.join(TEST_DIR, os.path.splitext(os.path.split(video.name)[1])[0]) + '.srt', 'w').close()
         scanned_video = scan_video(os.path.join(TEST_DIR, os.path.split(video.name)[1]))
-        self.assertTrue(scanned_video.subtitle_languages == {Language('eng'), Language('fra'), Language('und')})
+        self.assertEqual(scanned_video.subtitle_languages, {Language('eng'), Language('fra'), Language('und')})
+
 
 def suite():
     suite = TestSuite()

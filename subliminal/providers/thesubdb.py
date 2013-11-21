@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 class TheSubDBSubtitle(Subtitle):
     provider_name = 'thesubdb'
 
-    def __init__(self, language, hash):
+    def __init__(self, language, hash):  # @ReservedAssignment
         super(TheSubDBSubtitle, self).__init__(language)
         self.hash = hash
 
@@ -55,7 +55,7 @@ class TheSubDBProvider(Provider):
             raise ProviderNotAvailable('Timeout after 10 seconds')
         return r
 
-    def query(self, hash):
+    def query(self, hash):  # @ReservedAssignment
         params = {'action': 'search', 'hash': hash}
         logger.debug('Searching subtitles %r', params)
         r = self.get(params)

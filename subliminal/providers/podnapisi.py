@@ -23,7 +23,7 @@ logger = logging.getLogger(__name__)
 class PodnapisiSubtitle(Subtitle):
     provider_name = 'podnapisi'
 
-    def __init__(self, language, id, releases, hearing_impaired, link, series=None, season=None, episode=None,
+    def __init__(self, language, id, releases, hearing_impaired, link, series=None, season=None, episode=None,  # @ReservedAssignment
                  title=None, year=None):
         super(PodnapisiSubtitle, self).__init__(language, hearing_impaired)
         self.id = id

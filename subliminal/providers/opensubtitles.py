@@ -23,8 +23,8 @@ class OpenSubtitlesSubtitle(Subtitle):
     provider_name = 'opensubtitles'
     series_re = re.compile('^"(?P<series_name>.*)" (?P<series_title>.*)$')
 
-    def __init__(self, language, hearing_impaired, id, matched_by, movie_kind, hash, movie_name, movie_release_name, movie_year,
-                 movie_imdb_id, series_season, series_episode):
+    def __init__(self, language, hearing_impaired, id, matched_by, movie_kind, hash, movie_name, movie_release_name,  # @ReservedAssignment
+                 movie_year, movie_imdb_id, series_season, series_episode):
         super(OpenSubtitlesSubtitle, self).__init__(language, hearing_impaired)
         self.id = id
         self.matched_by = matched_by
@@ -106,7 +106,7 @@ class OpenSubtitlesProvider(Provider):
         if response['status'] != '200 OK':
             raise ProviderError('Logout failed with status %r' % response['status'])
 
-    def query(self, languages, hash=None, size=None, imdb_id=None, query=None):
+    def query(self, languages, hash=None, size=None, imdb_id=None, query=None):  # @ReservedAssignment
         searches = []
         if hash and size:
             searches.append({'moviehash': hash, 'moviebytesize': str(size)})

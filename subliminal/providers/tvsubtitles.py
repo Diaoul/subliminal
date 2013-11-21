@@ -22,7 +22,7 @@ logger = logging.getLogger(__name__)
 class TVsubtitlesSubtitle(Subtitle):
     provider_name = 'tvsubtitles'
 
-    def __init__(self, language, series, season, episode, id, rip, release):
+    def __init__(self, language, series, season, episode, id, rip, release):  # @ReservedAssignment
         super(TVsubtitlesSubtitle, self).__init__(language)
         self.series = series
         self.season = season

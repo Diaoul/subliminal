@@ -11,8 +11,6 @@ import guessit
 import pkg_resources
 from subliminal import (__version__, PROVIDERS_ENTRY_POINT, cache_region, MutexLock, Video, Episode, Movie, scan_videos,
     download_best_subtitles)
-
-
 try:
     import colorlog
 except ImportError:
@@ -140,7 +138,7 @@ def subliminal():
         logging.getLogger('subliminal.api').setLevel(logging.INFO)
 
     # configure cache
-    cache_region.configure('dogpile.cache.dbm', expiration_time=datetime.timedelta(days=30),
+    cache_region.configure('dogpile.cache.dbm', expiration_time=datetime.timedelta(days=30),  # @UndefinedVariable
                            arguments={'filename': args.cache_file, 'lock_factory': MutexLock})
 
     # scan videos

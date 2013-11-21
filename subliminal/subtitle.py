@@ -90,7 +90,7 @@ def get_subtitle_path(video_path, language=None):
     if language is not None:
         try:
             return subtitle_path + '.%s.%s' % (language.alpha2, 'srt')
-        except babelfish.ConvertError:
+        except babelfish.LanguageConvertError:
             return subtitle_path + '.%s.%s' % (language.alpha3, 'srt')
     return subtitle_path + '.srt'
 

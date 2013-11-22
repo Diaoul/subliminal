@@ -8,7 +8,6 @@ from . import Provider
 from .. import __version__
 from ..exceptions import InvalidSubtitle, ProviderNotAvailable, ProviderError
 from ..subtitle import Subtitle, is_valid_subtitle
-from ..video import Episode, Movie
 
 
 logger = logging.getLogger(__name__)
@@ -17,7 +16,7 @@ logger = logging.getLogger(__name__)
 class TheSubDBSubtitle(Subtitle):
     provider_name = 'thesubdb'
 
-    def __init__(self, language, hash):
+    def __init__(self, language, hash):  # @ReservedAssignment
         super(TheSubDBSubtitle, self).__init__(language)
         self.hash = hash
 
@@ -31,7 +30,6 @@ class TheSubDBSubtitle(Subtitle):
 
 class TheSubDBProvider(Provider):
     languages = {babelfish.Language.fromalpha2(l) for l in ['en', 'es', 'fr', 'it', 'nl', 'pl', 'pt', 'ro', 'sv', 'tr']}
-    video_types = (Episode, Movie)
     required_hash = 'thesubdb'
 
     def initialize(self):
@@ -57,7 +55,7 @@ class TheSubDBProvider(Provider):
             raise ProviderNotAvailable('Timeout after 10 seconds')
         return r
 
-    def query(self, hash):
+    def query(self, hash):  # @ReservedAssignment
         params = {'action': 'search', 'hash': hash}
         logger.debug('Searching subtitles %r', params)
         r = self.get(params)
@@ -77,7 +75,7 @@ class TheSubDBProvider(Provider):
         r = self.get(params)
         if r.status_code != 200:
             raise ProviderError('Request failed with status code %d' % r.status_code)
-        subtitle_text = r.content.decode(charade.detect(r.content)['encoding'])
+        subtitle_text = r.content.decode(charade.detect(r.content)['encoding'], 'replace')
         if not is_valid_subtitle(subtitle_text):
             raise InvalidSubtitle
         return subtitle_text

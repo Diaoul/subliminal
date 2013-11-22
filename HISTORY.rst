@@ -1,6 +1,39 @@
 Changelog
 =========
 
+0.7.3
+-----
+**release date:** 2013-11-22
+
+* Fix windows compatibility
+* Improve subtitle validation
+* Improve embedded subtitle languages detection
+* Improve unittests
+
+
+0.7.2
+-----
+**release date:** 2013-11-10
+
+* Fix TVSubtitles for ambiguous series
+* Add a CACHE_VERSION to force cache reloading on version change
+* Set CLI default cache expiration time to 30 days
+* Add podnapisi provider
+* Support script for languages e.g. Latn, Cyrl
+* Improve logging levels
+* Fix subtitle validation in some rare cases
+
+
+0.7.1
+-----
+**release date:** 2013-11-06
+
+* Improve CLI
+* Add login support for Addic7ed
+* Remove lxml dependency
+* Many fixes
+
+
 0.7.0
 -----
 **release date:** 2013-10-29

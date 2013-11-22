@@ -3,10 +3,10 @@ from __future__ import unicode_literals
 import logging
 import urllib
 import babelfish
-import bs4
 import charade
 import guessit
 import requests
+import xml.etree.ElementTree
 from . import Provider
 from .. import __version__
 from ..cache import region
@@ -65,7 +65,7 @@ class BierDopjeProvider(Provider):
         :param string url: API part of the URL to reach without the leading slash
         :param \*\*params: format specs for the `url`
         :return: the response
-        :rtype: :class:`bs4.BeautifulSoup`
+        :rtype: :class:`xml.etree.ElementTree.Element`
         :raise: :class:`~subliminal.exceptions.ProviderNotAvailable`
 
         """
@@ -77,7 +77,7 @@ class BierDopjeProvider(Provider):
             raise ProviderNotAvailable('Too Many Requests')
         elif r.status_code != 200:
             raise ProviderError('Request failed with status code %d' % r.status_code)
-        return bs4.BeautifulSoup(r.content, ['xml'])
+        return xml.etree.ElementTree.fromstring(r.content)
 
     @region.cache_on_arguments()
     def find_show_id(self, series):
@@ -89,11 +89,11 @@ class BierDopjeProvider(Provider):
 
         """
         logger.debug('Searching for series %r', series)
-        soup = self.get('FindShowByName/{series}', series=urllib.quote(series))
-        if soup.status.contents[0] == 'false':
+        root = self.get('FindShowByName/{series}', series=urllib.quote(series))
+        if root.find('response/status').text == 'false':
             logger.info('Series %r not found', series)
             return None
-        return int(soup.showid.contents[0])
+        return int(root.find('response/results/result[1]/showid').text)
 
     def query(self, language, season, episode, tvdb_id=None, series=None):
         params = {'language': language.alpha2, 'season': season, 'episode': episode}
@@ -109,19 +109,16 @@ class BierDopjeProvider(Provider):
         else:
             raise ValueError('Missing parameter tvdb_id or series')
         logger.debug('Searching subtitles %r', params)
-        soup = self.get('GetAllSubsFor/{showid}/{season}/{episode}/{language}/{istvdbid}', **params)
-        if soup.status.contents[0] == 'false':
+        root = self.get('GetAllSubsFor/{showid}/{season}/{episode}/{language}/{istvdbid}', **params)
+        if root.find('response/status').text == 'false':
             logger.debug('No subtitle found')
             return []
-        logger.debug('Found subtitles %r', soup.results('result'))
-        return [BierDopjeSubtitle(language, season, episode, tvdb_id, series, result.filename.contents[0],
-                                  result.downloadlink.contents[0]) for result in soup.results('result')]
+        logger.debug('Found subtitles %r', root.find('response/results'))
+        return [BierDopjeSubtitle(language, season, episode, tvdb_id, series, result.find('filename').text,
+                                  result.find('downloadlink').text) for result in root.find('response/results')]
 
     def list_subtitles(self, video, languages):
-        subtitles = []
-        for language in languages:
-            subtitles.extend(self.query(language, video.season, video.episode, video.tvdb_id, video.series))
-        return subtitles
+        return [s for l in languages for s in self.query(l, video.season, video.episode, video.tvdb_id, video.series)]
 
     def download_subtitle(self, subtitle):
         try:
@@ -132,7 +129,7 @@ class BierDopjeProvider(Provider):
             raise ProviderNotAvailable('Too Many Requests')
         elif r.status_code != 200:
             raise ProviderError('Request failed with status code %d' % r.status_code)
-        subtitle_text = r.content.decode(charade.detect(r.content)['encoding'])
+        subtitle_text = r.content.decode(charade.detect(r.content)['encoding'], 'replace')
         if not is_valid_subtitle(subtitle_text):
             raise InvalidSubtitle
         return subtitle_text

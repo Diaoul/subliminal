@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+import datetime
 import hashlib
 import logging
 import os
@@ -22,9 +23,6 @@ VIDEO_EXTENSIONS = ('.3g2', '.3gp', '.3gp2', '.3gpp', '.60d', '.ajp', '.asf', '.
 
 #: Subtitle extensions
 SUBTITLE_EXTENSIONS = ('.srt', '.sub', '.smi', '.txt', '.ssa', '.ass', '.mpl')
-
-#: Language extensions
-LANGUAGE_EXTENSIONS = tuple('.' + c for c in babelfish.CONVERTERS['alpha2'].codes)
 
 
 class Video(object):
@@ -158,10 +156,15 @@ def scan_subtitle_languages(path):
     :rtype: set
 
     """
+    language_extensions = tuple('.' + c for c in babelfish.get_language_converter('alpha2').codes)
     dirpath, filename = os.path.split(path)
-    subtitles = {babelfish.Language.fromalpha2(os.path.splitext(p)[0][-2:]) for p in os.listdir(dirpath)
-                 if not isinstance(p, bytes) and p.startswith(os.path.splitext(filename)[0])
-                 and os.path.splitext(p)[0].endswith(LANGUAGE_EXTENSIONS)}
+    subtitles = set()
+    for p in os.listdir(dirpath):
+        if not isinstance(p, bytes) and p.startswith(os.path.splitext(filename)[0]) and p.endswith(SUBTITLE_EXTENSIONS):
+            if os.path.splitext(p)[0].endswith(language_extensions):
+                subtitles.add(babelfish.Language.fromalpha2(os.path.splitext(p)[0][-2:]))
+            else:
+                subtitles.add(babelfish.Language('und'))
     logger.debug('Found subtitles %r', subtitles)
     return subtitles
 
@@ -169,7 +172,7 @@ def scan_subtitle_languages(path):
 def scan_video(path, subtitles=True, embedded_subtitles=True):
     """Scan a video and its subtitle languages from a video `path`
 
-    :param string path: path to the video
+    :param string path: absolute path to the video
     :param bool subtitles: scan for subtitles with the same name
     :param bool embedded_subtitles: scan for embedded subtitles
     :return: the scanned video
@@ -179,63 +182,90 @@ def scan_video(path, subtitles=True, embedded_subtitles=True):
     """
     dirpath, filename = os.path.split(path)
     logger.info('Scanning video %r in %r', filename, dirpath)
-    video = Video.fromguess(path, guessit.guess_file_info(filename, 'autodetect'))
-    # mkv container
-    if filename.endswith('.mkv'):
-        with open(path, 'rb') as f:
-            mkv = enzyme.MKV(f)
-        video_track = mkv.video_tracks[0]
-        audio_track = mkv.audio_tracks[0]
-        # resolution
-        if video_track.height in (480, 720, 1080):
-            if video_track.interlaced:
-                video.resolution = '%di' % video_track.height
-                logger.debug('Found resolution %s with enzyme', video.resolution)
-            else:
-                video.resolution = '%dp' % video_track.height
-                logger.debug('Found resolution %s with enzyme', video.resolution)
-        # video codec
-        if video_track.codec_id == 'V_MPEG4/ISO/AVC':
-            video.video_codec = 'h264'
-            logger.debug('Found video_codec %s with enzyme', video.video_codec)
-        elif video_track.codec_id == 'V_MPEG4/ISO/SP':
-            video.video_codec = 'DivX'
-            logger.debug('Found video_codec %s with enzyme', video.video_codec)
-        elif video_track.codec_id == 'V_MPEG4/ISO/ASP':
-            video.video_codec = 'XviD'
-            logger.debug('Found video_codec %s with enzyme', video.video_codec)
-        # audio codec
-        if audio_track.codec_id == 'A_AC3':
-            video.audio_codec = 'AC3'
-            logger.debug('Found audio_codec %s with enzyme', video.audio_codec)
-        elif audio_track.codec_id == 'A_DTS':
-            video.audio_codec = 'DTS'
-            logger.debug('Found audio_codec %s with enzyme', video.audio_codec)
-        elif audio_track.codec_id == 'A_AAC':
-            video.audio_codec = 'AAC'
-            logger.debug('Found audio_codec %s with enzyme', video.audio_codec)
-        # embedded subtitles
-        if embedded_subtitles:
-            embedded_subtitle_languages = {babelfish.Language.fromalpha3b(st.language) for st in
-                                           mkv.subtitle_tracks if st.language != 'und'}
-            if embedded_subtitle_languages:
-                logger.debug('Found embedded subtitle %r with enzyme', embedded_subtitle_languages)
-                video.subtitle_languages |= embedded_subtitle_languages
+    video = Video.fromguess(path, guessit.guess_file_info(path, 'autodetect'))
     video.size = os.path.getsize(path)
-    logger.debug('Size is %d', video.size)
-    video.hashes['opensubtitles'] = hash_opensubtitles(path)
-    video.hashes['thesubdb'] = hash_thesubdb(path)
-    logger.debug('Computed hashes %r', video.hashes)
-    # add subtitles
+    if video.size > 10485760:
+        logger.debug('Size is %d', video.size)
+        video.hashes['opensubtitles'] = hash_opensubtitles(path)
+        video.hashes['thesubdb'] = hash_thesubdb(path)
+        logger.debug('Computed hashes %r', video.hashes)
+    else:
+        logger.warning('Size is lower than 10MB: hashes not computed')
     if subtitles:
         video.subtitle_languages |= scan_subtitle_languages(path)
+    # enzyme
+    try:
+        if filename.endswith('.mkv'):
+            with open(path, 'rb') as f:
+                mkv = enzyme.MKV(f)
+            if mkv.video_tracks:
+                video_track = mkv.video_tracks[0]
+                # resolution
+                if video_track.height in (480, 720, 1080):
+                    if video_track.interlaced:
+                        video.resolution = '%di' % video_track.height
+                        logger.debug('Found resolution %s with enzyme', video.resolution)
+                    else:
+                        video.resolution = '%dp' % video_track.height
+                        logger.debug('Found resolution %s with enzyme', video.resolution)
+                # video codec
+                if video_track.codec_id == 'V_MPEG4/ISO/AVC':
+                    video.video_codec = 'h264'
+                    logger.debug('Found video_codec %s with enzyme', video.video_codec)
+                elif video_track.codec_id == 'V_MPEG4/ISO/SP':
+                    video.video_codec = 'DivX'
+                    logger.debug('Found video_codec %s with enzyme', video.video_codec)
+                elif video_track.codec_id == 'V_MPEG4/ISO/ASP':
+                    video.video_codec = 'XviD'
+                    logger.debug('Found video_codec %s with enzyme', video.video_codec)
+            else:
+                logger.warning('MKV has no video track')
+            if mkv.audio_tracks:
+                audio_track = mkv.audio_tracks[0]
+                # audio codec
+                if audio_track.codec_id == 'A_AC3':
+                    video.audio_codec = 'AC3'
+                    logger.debug('Found audio_codec %s with enzyme', video.audio_codec)
+                elif audio_track.codec_id == 'A_DTS':
+                    video.audio_codec = 'DTS'
+                    logger.debug('Found audio_codec %s with enzyme', video.audio_codec)
+                elif audio_track.codec_id == 'A_AAC':
+                    video.audio_codec = 'AAC'
+                    logger.debug('Found audio_codec %s with enzyme', video.audio_codec)
+            else:
+                logger.warning('MKV has no audio track')
+            if mkv.subtitle_tracks:
+                # embedded subtitles
+                if embedded_subtitles:
+                    embedded_subtitle_languages = set()
+                    for st in mkv.subtitle_tracks:
+                        if st.language:
+                            try:
+                                embedded_subtitle_languages.add(babelfish.Language.fromalpha3b(st.language))
+                            except babelfish.Error:
+                                logger.error('Embedded subtitle track language %r is not a valid language', st.language)
+                                embedded_subtitle_languages.add(babelfish.Language('und'))
+                        elif st.name:
+                            try:
+                                embedded_subtitle_languages.add(babelfish.Language.fromname(st.name))
+                            except babelfish.Error:
+                                logger.error('Embedded subtitle track name %r is not a valid language', st.name)
+                                embedded_subtitle_languages.add(babelfish.Language('und'))
+                        else:
+                            embedded_subtitle_languages.add(babelfish.Language('und'))
+                    logger.debug('Found embedded subtitle %r with enzyme', embedded_subtitle_languages)
+                    video.subtitle_languages |= embedded_subtitle_languages
+            else:
+                logger.debug('MKV has no subtitle track')
+    except enzyme.Error:
+        logger.error('Parsing video metadata with enzyme failed')
     return video
 
 
 def scan_videos(paths, subtitles=True, embedded_subtitles=True, age=None):
     """Scan `paths` for videos and their subtitle languages
 
-    :params paths: paths to scan for videos
+    :params paths: absolute paths to scan for videos
     :type paths: list of string
     :param bool subtitles: scan for subtitles with the same name
     :param bool embedded_subtitles: scan for embedded subtitles
@@ -248,31 +278,57 @@ def scan_videos(paths, subtitles=True, embedded_subtitles=True, age=None):
     videos = []
     # scan files
     for filepath in [p for p in paths if os.path.isfile(p)]:
+        if age and datetime.datetime.now() - datetime.datetime.fromtimestamp(os.path.getmtime(filepath)) > age:
+            logger.info('Skipping video %r: older than %r', filepath, age)
+            continue
         try:
-            videos.append(scan_video(filepath, subtitles))
+            videos.append(scan_video(filepath, subtitles, embedded_subtitles))
         except ValueError as e:
-            logger.info('Skipping video: %s', e)
+            logger.error('Skipping video: %s', e)
             continue
     # scan directories
     for path in [p for p in paths if os.path.isdir(p)]:
         logger.info('Scanning directory %r', path)
-        for dirpath, _, filenames in os.walk(path):
-            # skip badly encoded directories and files
+        for dirpath, dirnames, filenames in os.walk(path):
+            # skip badly encoded directories
             if isinstance(dirpath, bytes):
                 logger.error('Skipping badly encoded directory %r', dirpath.decode('utf-8', errors='replace'))
                 continue
-            safe_filenames = []
-            for filename in filenames:
-                if isinstance(filename, bytes):
-                    logger.error('Skipping badly encoded filename %r', filename.decode('utf-8', errors='replace'))
-                    continue
-                safe_filenames.append(filename)
+            # skip badly encoded and hidden sub directories
+            for dirname in list(dirnames):
+                if isinstance(dirname, bytes):
+                    logger.error('Skipping badly encoded dirname %r in %r', dirname.decode('utf-8', errors='replace'),
+                                 dirpath)
+                    dirnames.remove(dirname)
+                elif dirname.startswith('.'):
+                    logger.debug('Skipping hidden dirname %r in %r', dirname, dirpath)
+                    dirnames.remove(dirname)
             # scan for videos
-            for video_filename in [f for f in safe_filenames if f.endswith(VIDEO_EXTENSIONS)]:
+            for filename in filenames:
+                # skip badly encoded files
+                if isinstance(filename, bytes):
+                    logger.error('Skipping badly encoded filename %r in %r', filename.decode('utf-8', errors='replace'),
+                                 dirpath)
+                    continue
+                # filter videos
+                if not filename.endswith(VIDEO_EXTENSIONS):
+                    continue
+                # skip hidden files
+                if filename.startswith('.'):
+                    logger.debug('Skipping hidden filename %r in %r', filename, dirpath)
+                    continue
+                filepath = os.path.join(dirpath, filename)
+                # skip links
+                if os.path.islink(filepath):
+                    logger.debug('Skipping link %r in %r', filename, dirpath)
+                    continue
+                if age and datetime.datetime.now() - datetime.datetime.fromtimestamp(os.path.getmtime(filepath)) > age:
+                    logger.info('Skipping video %r: older than %r', filepath, age)
+                    continue
                 try:
-                    video = scan_video(os.path.join(dirpath, video_filename), subtitles=subtitles)
+                    video = scan_video(filepath, subtitles, embedded_subtitles)
                 except ValueError as e:
-                    logger.info('Skipping video: %s', e)
+                    logger.error('Skipping video: %s', e)
                     continue
                 videos.append(video)
     return videos

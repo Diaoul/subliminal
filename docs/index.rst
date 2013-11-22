@@ -19,6 +19,7 @@ best matching subtitles. Providers are extensible through a dedicated entry poin
 * Addic7ed
 * BierDopje
 * OpenSubtitles
+* Podnapisi
 * TheSubDB
 * TvSubtitles
 
@@ -47,7 +48,7 @@ skipping videos that already have subtitles whether they are embedded or not::
     subliminal.cache_region.configure('dogpile.cache.dbm', arguments={'filename': '/path/to/cachefile.dbm'})
 
     # scan for videos in the folder and their subtitles
-    videos = scan_videos(['/path/to/video/folder'], subtitles=True, embedded_subtitles=True) 
+    videos = subliminal.scan_videos(['/path/to/video/folder'], subtitles=True, embedded_subtitles=True, age=timedelta(weeks=1))
 
     # download
     subliminal.download_best_subtitles(videos, {Language('eng'), Language('fra')}, age=timedelta(week=1))

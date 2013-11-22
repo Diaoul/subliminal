@@ -73,7 +73,7 @@ class Subtitle(object):
         return score
 
     def __repr__(self):
-        return '<%s [%r]>' % (self.__class__.__name__, self.language)
+        return '<%s [%s]>' % (self.__class__.__name__, self.language)
 
 
 def get_subtitle_path(video_path, language=None):
@@ -90,7 +90,7 @@ def get_subtitle_path(video_path, language=None):
     if language is not None:
         try:
             return subtitle_path + '.%s.%s' % (language.alpha2, 'srt')
-        except babelfish.NoConversionError:
+        except babelfish.LanguageConvertError:
             return subtitle_path + '.%s.%s' % (language.alpha3, 'srt')
     return subtitle_path + '.srt'
 
@@ -105,8 +105,12 @@ def is_valid_subtitle(subtitle_text):
     try:
         pysrt.from_string(subtitle_text, error_handling=pysrt.ERROR_RAISE)
         return True
-    except pysrt.Error:
-        return False
+    except pysrt.Error as e:
+        if e.args[0] > 80:
+            return True
+    except:
+        logger.exception('Unexpected error when validating subtitle')
+    return False
 
 
 def compute_guess_matches(video, guess):

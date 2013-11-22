@@ -6,7 +6,7 @@ from sympy import Eq, symbols, solve
 
 # Symbols
 release_group, resolution, video_codec, audio_codec = symbols('release_group resolution video_codec audio_codec')
-imdb_id, hash, title, series, tvdb_id, season, episode = symbols('imdb_id hash title series tvdb_id season episode')
+imdb_id, hash, title, series, tvdb_id, season, episode = symbols('imdb_id hash title series tvdb_id season episode')  # @ReservedAssignment
 year = symbols('year')
 
 

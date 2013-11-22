@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 
 setup(name='subliminal',
-    version='0.7.0',
+    version='0.7.3',
     license='MIT',
     description='Subtitles, faster than your thoughts',
     long_description=open('README.rst').read() + '\n\n' + open('HISTORY.rst').read(),
@@ -29,10 +29,12 @@ setup(name='subliminal',
         'subliminal.providers': ['addic7ed = subliminal.providers.addic7ed:Addic7edProvider',
                                  'bierdopje = subliminal.providers.bierdopje:BierDopjeProvider',
                                  'opensubtitles = subliminal.providers.opensubtitles:OpenSubtitlesProvider',
+                                 'podnapisi = subliminal.providers.podnapisi:PodnapisiProvider',
                                  'thesubdb = subliminal.providers.thesubdb:TheSubDBProvider',
                                  'tvsubtitles = subliminal.providers.tvsubtitles:TVsubtitlesProvider'],
-        'babelfish.converters': ['addic7ed = subliminal.converters.addic7ed:Addic7edConverter',
-                                 'tvsubtitles = subliminal.converters.tvsubtitles:TVsubtitlesConverter']
+        'babelfish.language_converters': ['addic7ed = subliminal.converters.addic7ed:Addic7edConverter',
+                                          'podnapisi = subliminal.converters.podnapisi:PodnapisiConverter',
+                                          'tvsubtitles = subliminal.converters.tvsubtitles:TVsubtitlesConverter']
     },
     install_requires=open('requirements.txt').readlines(),
     test_suite='subliminal.tests.suite')

@@ -4,7 +4,6 @@ Video
 
 .. autodata:: VIDEO_EXTENSIONS
 .. autodata:: SUBTITLE_EXTENSIONS
-.. autodata:: LANGUAGE_EXTENSIONS
 .. autoclass:: Video
     :members:
 .. autoclass:: Episode

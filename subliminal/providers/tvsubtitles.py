@@ -22,7 +22,7 @@ logger = logging.getLogger(__name__)
 class TVsubtitlesSubtitle(Subtitle):
     provider_name = 'tvsubtitles'
 
-    def __init__(self, language, series, season, episode, id, rip, release):
+    def __init__(self, language, series, season, episode, id, rip, release):  # @ReservedAssignment
         super(TVsubtitlesSubtitle, self).__init__(language)
         self.series = series
         self.season = season
@@ -59,10 +59,11 @@ class TVsubtitlesProvider(Provider):
     languages = {babelfish.Language('por', 'BR')} | {babelfish.Language(l)
                  for l in ['ara', 'bul', 'ces', 'dan', 'deu', 'ell', 'eng', 'fin', 'fra', 'hun', 'ita', 'jpn', 'kor',
                            'nld', 'pol', 'por', 'ron', 'rus', 'spa', 'swe', 'tur', 'ukr', 'zho']}
-    videos = (Episode,)
+    video_types = (Episode,)
     server = 'http://www.tvsubtitles.net'
-    episode_id_re = re.compile('^episode-(\d+)\.html$')
-    subtitle_re = re.compile('^\/subtitle-(\d+)\.html$')
+    episode_id_re = re.compile('^episode-\d+\.html$')
+    subtitle_re = re.compile('^\/subtitle-\d+\.html$')
+    link_re = re.compile('^(?P<series>.+) \(\d{4}-\d{4}\)$')
 
     def initialize(self):
         self.session = requests.Session()
@@ -77,6 +78,7 @@ class TVsubtitlesProvider(Provider):
         :param string url: part of the URL to reach with the leading slash
         :param dict params: params of the request
         :param dict data: data of the request
+        :param string method: method of the request
         :return: the response
         :rtype: :class:`bs4.BeautifulSoup`
         :raise: :class:`~subliminal.exceptions.ProviderNotAvailable`
@@ -106,6 +108,13 @@ class TVsubtitlesProvider(Provider):
         if not links:
             logger.info('Series %r not found', series)
             return None
+        for link in links:
+            match = self.link_re.match(link.string)
+            if not match:
+                logger.warning('Could not parse %r', link.string)
+                continue
+            if match.group('series').lower().replace('.', ' ').strip() == series.lower():
+                return int(link['href'][8:-5])
         return int(links[0]['href'][8:-5])
 
     @region.cache_on_arguments()
@@ -160,7 +169,7 @@ class TVsubtitlesProvider(Provider):
             if len(zf.namelist()) > 1:
                 raise ProviderError('More than one file to unzip')
             subtitle_bytes = zf.read(zf.namelist()[0])
-        subtitle_text = subtitle_bytes.decode(charade.detect(subtitle_bytes)['encoding'])
+        subtitle_text = subtitle_bytes.decode(charade.detect(subtitle_bytes)['encoding'], 'replace')
         if not is_valid_subtitle(subtitle_text):
             raise InvalidSubtitle
         return subtitle_text

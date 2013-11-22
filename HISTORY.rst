@@ -1,6 +1,16 @@
 Changelog
 =========
 
+0.7.3
+-----
+**release date:** 2013-11-22
+
+* Fix windows compatibility
+* Improve subtitle validation
+* Improve embedded subtitle languages detection
+* Improve unittests
+
+
 0.7.2
 -----
 **release date:** 2013-11-10

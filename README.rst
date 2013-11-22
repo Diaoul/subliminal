@@ -4,11 +4,11 @@ Subliminal
 Subliminal is a python library to search and download subtitles.
 It comes with an easy to use CLI (command-line interface) suitable for direct use or cron jobs.
 
-.. image:: https://travis-ci.org/Diaoul/subliminal.png?branch=develop
+.. image:: https://travis-ci.org/Diaoul/subliminal.png
     :target: https://travis-ci.org/Diaoul/subliminal
 
-.. image:: https://coveralls.io/repos/Diaoul/subliminal/badge.png?branch=develop
-    :target: https://coveralls.io/r/Diaoul/subliminal?branch=develop 
+.. image:: https://coveralls.io/repos/Diaoul/subliminal/badge.png
+    :target: https://coveralls.io/r/Diaoul/subliminal
 
 
 Providers

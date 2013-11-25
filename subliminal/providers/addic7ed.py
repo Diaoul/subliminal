@@ -7,7 +7,7 @@ import charade
 import requests
 from . import Provider
 from .. import __version__
-from ..cache import region
+from ..cache import region, SHOW_EXPIRATION_TIME
 from ..exceptions import ProviderConfigurationError, ProviderNotAvailable, InvalidSubtitle
 from ..subtitle import Subtitle, is_valid_subtitle
 from ..video import Episode
@@ -115,7 +115,7 @@ class Addic7edProvider(Provider):
             raise ProviderNotAvailable('Request failed with status code %d' % r.status_code)
         return bs4.BeautifulSoup(r.content, ['permissive'])
 
-    @region.cache_on_arguments()
+    @region.cache_on_arguments(expiration_time=SHOW_EXPIRATION_TIME)
     def get_show_ids(self):
         """Load the shows page with default series to show ids mapping
 
@@ -129,7 +129,7 @@ class Addic7edProvider(Provider):
             show_ids[html_show.string.lower()] = int(html_show['href'][6:])
         return show_ids
 
-    @region.cache_on_arguments()
+    @region.cache_on_arguments(expiration_time=SHOW_EXPIRATION_TIME)
     def find_show_id(self, series):
         """Find a show id from the series
 

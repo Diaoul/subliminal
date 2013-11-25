@@ -2,14 +2,14 @@
 from __future__ import unicode_literals
 import logging
 import urllib
+import xml.etree.ElementTree
 import babelfish
 import charade
 import guessit
 import requests
-import xml.etree.ElementTree
 from . import Provider
 from .. import __version__
-from ..cache import region
+from ..cache import region, SHOW_EXPIRATION_TIME
 from ..exceptions import InvalidSubtitle, ProviderNotAvailable, ProviderError
 from ..subtitle import Subtitle, is_valid_subtitle, compute_guess_matches
 from ..video import Episode
@@ -79,7 +79,7 @@ class BierDopjeProvider(Provider):
             raise ProviderError('Request failed with status code %d' % r.status_code)
         return xml.etree.ElementTree.fromstring(r.content)
 
-    @region.cache_on_arguments()
+    @region.cache_on_arguments(expiration_time=SHOW_EXPIRATION_TIME)
     def find_show_id(self, series):
         """Find the show id from series name
 

@@ -10,7 +10,7 @@ import charade
 import requests
 from . import Provider
 from .. import __version__
-from ..cache import region
+from ..cache import region, SHOW_EXPIRATION_TIME, EPISODE_EXPIRATION_TIME
 from ..exceptions import InvalidSubtitle, ProviderNotAvailable, ProviderError
 from ..subtitle import Subtitle, is_valid_subtitle
 from ..video import Episode
@@ -92,7 +92,7 @@ class TVsubtitlesProvider(Provider):
             raise ProviderNotAvailable('Request failed with status code %d' % r.status_code)
         return bs4.BeautifulSoup(r.content, ['permissive'])
 
-    @region.cache_on_arguments()
+    @region.cache_on_arguments(expiration_time=SHOW_EXPIRATION_TIME)
     def find_show_id(self, series):
         """Find a show id from the series
 
@@ -117,7 +117,7 @@ class TVsubtitlesProvider(Provider):
                 return int(link['href'][8:-5])
         return int(links[0]['href'][8:-5])
 
-    @region.cache_on_arguments()
+    @region.cache_on_arguments(expiration_time=EPISODE_EXPIRATION_TIME)
     def find_episode_ids(self, show_id, season):
         """Find episode ids from the show id and the season
 

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import datetime
 import inspect
 from dogpile.cache import make_region  # @UnresolvedImport
 from dogpile.cache.backends.file import AbstractFileLock  # @UnresolvedImport
@@ -8,6 +9,12 @@ from dogpile.core.readwrite_lock import ReadWriteMutex  # @UnresolvedImport
 
 #: Subliminal's cache version
 CACHE_VERSION = 1
+
+#: Expiration time for show caching
+SHOW_EXPIRATION_TIME = datetime.timedelta(weeks=3).total_seconds()
+
+#: Expiration time for episode caching
+EPISODE_EXPIRATION_TIME = datetime.timedelta(days=3).total_seconds()
 
 
 def subliminal_key_generator(namespace, fn, to_str=string_type):
@@ -49,5 +56,5 @@ class MutexLock(AbstractFileLock):
         return self.mutex.release_write_lock()
 
 
-#: The dogpile.cache region (long-lived)
+# : The dogpile.cache region (long-lived)
 region = make_region(function_key_generator=subliminal_key_generator)

@@ -4,8 +4,7 @@ from __future__ import unicode_literals
 import os
 from unittest import TestCase, TestSuite, TestLoader, TextTestRunner
 from babelfish import Language
-from pkg_resources import iter_entry_points
-from subliminal import PROVIDERS_ENTRY_POINT
+from subliminal import get_provider
 from subliminal.subtitle import is_valid_subtitle
 from subliminal.tests.common import MOVIES, EPISODES
 
@@ -14,9 +13,7 @@ class ProviderTestCase(TestCase):
     provider_name = ''
 
     def setUp(self):
-        for provider_entry_point in iter_entry_points(PROVIDERS_ENTRY_POINT, self.provider_name):
-            self.Provider = provider_entry_point.load()
-            break
+        self.Provider = get_provider(self.provider_name)
 
 
 class Addic7edProviderTestCase(ProviderTestCase):
@@ -42,7 +39,7 @@ class Addic7edProviderTestCase(ProviderTestCase):
         video = EPISODES[0]
         languages = {Language('tur'), Language('rus'), Language('heb'), Language('ita'), Language('fra'),
                      Language('ron'), Language('nld'), Language('eng'), Language('deu'), Language('ell'),
-                     Language('por', 'BR'), Language('bul'), Language('jpn')}
+                     Language('por', 'BR'), Language('bul'), Language('jpn'), Language('por'), Language('msa')}
         matches = {frozenset(['episode', 'release_group', 'title', 'series', 'resolution', 'season']),
                    frozenset(['series', 'resolution', 'season']),
                    frozenset(['series', 'episode', 'season', 'title']),
@@ -87,8 +84,9 @@ class Addic7edProviderTestCase(ProviderTestCase):
         languages = {Language('eng'), Language('fra')}
         with self.Provider() as provider:
             subtitles = provider.list_subtitles(video, languages)
-            subtitle_text = provider.download_subtitle(subtitles[0])
-        self.assertTrue(is_valid_subtitle(subtitle_text))
+            provider.download_subtitle(subtitles[0])
+        self.assertIsNotNone(subtitles[0].content)
+        self.assertTrue(is_valid_subtitle(subtitles[0].content))
 
 
 class BierDopjeProviderTestCase(ProviderTestCase):
@@ -157,8 +155,9 @@ class BierDopjeProviderTestCase(ProviderTestCase):
         languages = {Language('eng'), Language('nld')}
         with self.Provider() as provider:
             subtitles = provider.list_subtitles(video, languages)
-            subtitle_text = provider.download_subtitle(subtitles[0])
-        self.assertTrue(is_valid_subtitle(subtitle_text))
+            provider.download_subtitle(subtitles[0])
+        self.assertIsNotNone(subtitles[0].content)
+        self.assertTrue(is_valid_subtitle(subtitles[0].content))
 
 
 class OpenSubtitlesProviderTestCase(ProviderTestCase):
@@ -184,7 +183,7 @@ class OpenSubtitlesProviderTestCase(ProviderTestCase):
                    frozenset(['series', 'imdb_id', 'video_codec', 'episode', 'season']),
                    frozenset(['episode', 'title', 'series', 'imdb_id', 'video_codec', 'season'])}
         with self.Provider() as provider:
-            subtitles = provider.query(languages, query=video.name.split(os.sep)[-1])
+            subtitles = provider.query(languages, query=os.path.split(video.name)[1])
         self.assertEqual({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)
         self.assertEqual({subtitle.language for subtitle in subtitles}, languages)
 
@@ -198,7 +197,7 @@ class OpenSubtitlesProviderTestCase(ProviderTestCase):
                    frozenset(['series', 'imdb_id', 'resolution', 'episode', 'season']),
                    frozenset(['series', 'episode', 'season', 'imdb_id'])}
         with self.Provider() as provider:
-            subtitles = provider.query(languages, query=video.name.split(os.sep)[-1])
+            subtitles = provider.query(languages, query=os.path.split(video.name)[1])
         self.assertEqual({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)
         self.assertEqual({subtitle.language for subtitle in subtitles}, languages)
 
@@ -277,8 +276,9 @@ class OpenSubtitlesProviderTestCase(ProviderTestCase):
         languages = {Language('eng'), Language('fra')}
         with self.Provider() as provider:
             subtitles = provider.list_subtitles(video, languages)
-            subtitle_text = provider.download_subtitle(subtitles[0])
-        self.assertTrue(is_valid_subtitle(subtitle_text))
+            provider.download_subtitle(subtitles[0])
+        self.assertIsNotNone(subtitles[0].content)
+        self.assertTrue(is_valid_subtitle(subtitles[0].content))
 
 
 class PodnapisiProviderTestCase(ProviderTestCase):
@@ -327,8 +327,9 @@ class PodnapisiProviderTestCase(ProviderTestCase):
         languages = {Language('eng'), Language('fra')}
         with self.Provider() as provider:
             subtitles = provider.list_subtitles(video, languages)
-            subtitle_text = provider.download_subtitle(subtitles[0])
-        self.assertTrue(is_valid_subtitle(subtitle_text))
+            provider.download_subtitle(subtitles[0])
+        self.assertIsNotNone(subtitles[0].content)
+        self.assertTrue(is_valid_subtitle(subtitles[0].content))
 
 
 class TheSubDBProviderTestCase(ProviderTestCase):
@@ -366,8 +367,9 @@ class TheSubDBProviderTestCase(ProviderTestCase):
         languages = {Language('eng'), Language('por')}
         with self.Provider() as provider:
             subtitles = provider.list_subtitles(video, languages)
-            subtitle_text = provider.download_subtitle(subtitles[0])
-        self.assertTrue(is_valid_subtitle(subtitle_text))
+            provider.download_subtitle(subtitles[0])
+        self.assertIsNotNone(subtitles[0].content)
+        self.assertTrue(is_valid_subtitle(subtitles[0].content))
 
 
 class TVsubtitlesProviderTestCase(ProviderTestCase):
@@ -434,8 +436,9 @@ class TVsubtitlesProviderTestCase(ProviderTestCase):
         languages = {Language('hun')}
         with self.Provider() as provider:
             subtitles = provider.list_subtitles(video, languages)
-            subtitle_text = provider.download_subtitle(subtitles[0])
-        self.assertTrue(is_valid_subtitle(subtitle_text))
+            provider.download_subtitle(subtitles[0])
+        self.assertIsNotNone(subtitles[0].content)
+        self.assertTrue(is_valid_subtitle(subtitles[0].content))
 
 
 def suite():

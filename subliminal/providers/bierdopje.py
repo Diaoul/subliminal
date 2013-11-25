@@ -132,4 +132,4 @@ class BierDopjeProvider(Provider):
         subtitle_text = r.content.decode(charade.detect(r.content)['encoding'], 'replace')
         if not is_valid_subtitle(subtitle_text):
             raise InvalidSubtitle
-        return subtitle_text
+        subtitle.content = subtitle_text

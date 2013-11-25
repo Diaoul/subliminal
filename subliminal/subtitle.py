@@ -22,6 +22,9 @@ class Subtitle(object):
         self.language = language
         self.hearing_impaired = hearing_impaired
 
+        #: Subtitle's content once downloaded with :meth:`~subliminal.providers.Provider.download_subtitle`
+        self.content = None
+
     def compute_matches(self, video):
         """Compute the matches of the subtitle against the `video`
 

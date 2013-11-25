@@ -5,7 +5,7 @@ import os
 import shutil
 from unittest import TestCase, TestSuite, TestLoader, TextTestRunner
 from babelfish import Language
-from subliminal import list_subtitles, download_subtitles, download_best_subtitles, scan_video
+from subliminal import list_subtitles, download_subtitles, save_subtitles, download_best_subtitles, scan_video
 from subliminal.tests.common import MOVIES, EPISODES
 
 
@@ -41,52 +41,67 @@ class ApiTestCase(TestCase):
         self.assertGreater(len(subtitles[videos[0]]), 0)
 
     def test_download_subtitles(self):
-        videos = [EPISODES[0], EPISODES[1]]
+        videos = [EPISODES[0]]
         for video in videos:
-            video.name = os.path.join(TEST_DIR, video.name.split(os.sep)[-1])
-        languages = {Language('eng'), Language('fra')}
+            video.name = os.path.join(TEST_DIR, os.path.split(video.name)[1])
+        languages = {Language('eng')}
         subtitles = list_subtitles(videos, languages)
-        download_subtitles(subtitles)
-        for video in videos:
-            self.assertTrue(os.path.exists(os.path.splitext(video.name)[0] + '.en.srt'))
-            self.assertTrue(os.path.exists(os.path.splitext(video.name)[0] + '.fr.srt'))
-
-    def test_download_subtitles_single(self):
-        videos = [EPISODES[0], EPISODES[1]]
-        for video in videos:
-            video.name = os.path.join(TEST_DIR, video.name.split(os.sep)[-1])
-        languages = {Language('eng'), Language('fra')}
-        subtitles = list_subtitles(videos, languages)
-        download_subtitles(subtitles, single=True)
-        for video in videos:
-            self.assertTrue(os.path.exists(os.path.splitext(video.name)[0] + '.srt'))
+        download_subtitles(subtitles[videos[0]][:5])
+        self.assertGreaterEqual(len([s for s in subtitles[videos[0]] if s.content is not None]), 4)
 
     def test_download_best_subtitles(self):
         videos = [EPISODES[0], EPISODES[1]]
         for video in videos:
-            video.name = os.path.join(TEST_DIR, video.name.split(os.sep)[-1])
+            video.name = os.path.join(TEST_DIR, os.path.split(video.name)[1])
         languages = {Language('eng'), Language('fra')}
         subtitles = download_best_subtitles(videos, languages)
         for video in videos:
-            self.assertEqual(video in subtitles and len(subtitles[video]), 2)
+            self.assertIn(video, subtitles)
+            self.assertEqual(len(subtitles[video]), 2)
+
+    def test_save_subtitles(self):
+        videos = [EPISODES[0], EPISODES[1]]
+        for video in videos:
+            video.name = os.path.join(TEST_DIR, os.path.split(video.name)[1])
+        languages = {Language('eng'), Language('fra')}
+        subtitles = list_subtitles(videos, languages)
+
+        # make a list of subtitles to download (one per language per video)
+        subtitles_to_download = []
+        for video, video_subtitles in subtitles.items():
+            video_subtitle_languages = set()
+            for video_subtitle in video_subtitles:
+                if video_subtitle.language in video_subtitle_languages:
+                    continue
+                subtitles_to_download.append(video_subtitle)
+                video_subtitle_languages.add(video_subtitle.language)
+                if video_subtitle_languages == languages:
+                    break
+        self.assertEqual(len(subtitles_to_download), 4)
+
+        # download
+        download_subtitles(subtitles_to_download)
+        save_subtitles(subtitles)
+        for video in videos:
             self.assertTrue(os.path.exists(os.path.splitext(video.name)[0] + '.en.srt'))
             self.assertTrue(os.path.exists(os.path.splitext(video.name)[0] + '.fr.srt'))
 
-    def test_download_best_subtitles_single(self):
+    def test_save_subtitles_single(self):
         videos = [EPISODES[0], EPISODES[1]]
         for video in videos:
-            video.name = os.path.join(TEST_DIR, video.name.split(os.sep)[-1])
+            video.name = os.path.join(TEST_DIR, os.path.split(video.name)[1])
         languages = {Language('eng'), Language('fra')}
-        subtitles = download_best_subtitles(videos, languages, single=True)
+        subtitles = download_best_subtitles(videos, languages)
+        save_subtitles(subtitles, single=True)
         for video in videos:
             self.assertIn(video, subtitles)
-            self.assertEqual(len(subtitles[video]), 1)
+            self.assertEqual(len(subtitles[video]), 2)
             self.assertTrue(os.path.exists(os.path.splitext(video.name)[0] + '.srt'))
 
     def test_download_best_subtitles_min_score(self):
         videos = [MOVIES[0]]
         for video in videos:
-            video.name = os.path.join(TEST_DIR, video.name.split(os.sep)[-1])
+            video.name = os.path.join(TEST_DIR, os.path.split(video.name)[1])
         languages = {Language('eng'), Language('fra')}
         subtitles = download_best_subtitles(videos, languages, min_score=1000)
         self.assertEqual(len(subtitles), 0)
@@ -94,7 +109,7 @@ class ApiTestCase(TestCase):
     def test_download_best_subtitles_hearing_impaired(self):
         videos = [MOVIES[0]]
         for video in videos:
-            video.name = os.path.join(TEST_DIR, video.name.split(os.sep)[-1])
+            video.name = os.path.join(TEST_DIR, os.path.split(video.name)[1])
         languages = {Language('eng')}
         subtitles = download_best_subtitles(videos, languages, hearing_impaired=True)
         self.assertTrue(subtitles[videos[0]][0].hearing_impaired)

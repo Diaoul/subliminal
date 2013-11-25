@@ -50,8 +50,11 @@ skipping videos that already have subtitles whether they are embedded or not::
     # scan for videos in the folder and their subtitles
     videos = subliminal.scan_videos(['/path/to/video/folder'], subtitles=True, embedded_subtitles=True, age=timedelta(weeks=1))
 
-    # download
-    subliminal.download_best_subtitles(videos, {Language('eng'), Language('fra')}, age=timedelta(week=1))
+    # download best subtitles
+    subtitles = subliminal.download_best_subtitles(videos, {Language('eng'), Language('fra')}, age=timedelta(week=1))
+
+    # save them to disk, next to the video
+    subliminal.save_subtitles(subtitles)
 
 See :mod:`subliminal.api`, :func:`~subliminal.video.scan_videos` and :func:`~subliminal.video.scan_video`
 

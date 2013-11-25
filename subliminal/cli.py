@@ -8,9 +8,8 @@ import re
 import sys
 import babelfish
 import guessit
-import pkg_resources
-from subliminal import (__version__, PROVIDERS_ENTRY_POINT, cache_region, MutexLock, Video, Episode, Movie, scan_videos,
-    download_best_subtitles)
+from subliminal import (__version__, cache_region, MutexLock, PROVIDERS, Video, Episode, Movie, scan_videos,
+    download_best_subtitles, save_subtitles)
 try:
     import colorlog
 except ImportError:
@@ -40,9 +39,8 @@ def subliminal():
 
     # filtering
     filtering_group = parser.add_argument_group('filtering')
-    providers = [ep.name for ep in pkg_resources.iter_entry_points(PROVIDERS_ENTRY_POINT)]
     filtering_group.add_argument('-p', '--providers', nargs='+', metavar='PROVIDER',
-                                 help='providers to use (%s)' % ', '.join(providers))
+                                 help='providers to use (%s)' % ', '.join(PROVIDERS))
     filtering_group.add_argument('-m', '--min-score', type=int,
                                  help='minimum score for subtitles (0-%d for episodes, 0-%d for movies)'
                                  % (Episode.scores['hash'], Movie.scores['hash']))
@@ -151,8 +149,11 @@ def subliminal():
 
     # download best subtitles
     subtitles = download_best_subtitles(videos, args.languages, providers=args.providers,
-                                        provider_configs=provider_configs, single=args.single,
-                                        min_score=args.min_score, hearing_impaired=args.hearing_impaired)
+                                        provider_configs=provider_configs, min_score=args.min_score,
+                                        hearing_impaired=args.hearing_impaired)
+
+    # save subtitles
+    save_subtitles(subtitles)
 
     # result output
     if not subtitles:

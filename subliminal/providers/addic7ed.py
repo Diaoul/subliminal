@@ -164,10 +164,8 @@ class Addic7edProvider(Provider):
         for row in soup('tr', class_='epeven completed'):
             cells = row('td')
             if cells[5].string != 'Completed':
-                logger.debug('Skipping incomplete subtitle')
                 continue
             if not cells[3].string:
-                logger.debug('Skipping empty language')
                 continue
             subtitles.append(Addic7edSubtitle(babelfish.Language.fromaddic7ed(cells[3].string), series, season,
                                               int(cells[1].string), cells[2].string, cells[4].string,
@@ -191,4 +189,4 @@ class Addic7edProvider(Provider):
         subtitle_text = r.content.decode(charade.detect(r.content)['encoding'], 'replace')
         if not is_valid_subtitle(subtitle_text):
             raise InvalidSubtitle
-        return subtitle_text
+        subtitle.content = subtitle_text

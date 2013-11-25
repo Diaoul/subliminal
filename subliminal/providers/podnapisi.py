@@ -160,4 +160,4 @@ class PodnapisiProvider(Provider):
         subtitle_text = subtitle_bytes.decode(charade.detect(subtitle_bytes)['encoding'], 'replace')
         if not is_valid_subtitle(subtitle_text):
             raise InvalidSubtitle
-        return subtitle_text
+        subtitle.content = subtitle_text

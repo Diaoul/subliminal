@@ -51,6 +51,3 @@ class MutexLock(AbstractFileLock):
 
 #: The dogpile.cache region (long-lived)
 region = make_region(function_key_generator=subliminal_key_generator)
-
-#: The dogpile.cache region for :meth:`~subliminal.providers.Provider.query` (short-lived)
-query_region = make_region(function_key_generator=subliminal_key_generator)

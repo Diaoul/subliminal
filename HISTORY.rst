@@ -1,6 +1,20 @@
 Changelog
 =========
 
+0.8.0
+-----
+**release date:** *not released*
+
+**WARNING:** Backward incompatible changes
+
+* Add some provider utilities
+* Add a ProviderManager class to manage multiple providers
+* Add a content attribute to the Subtitle class
+* Dissociate download and save functions to give more control to the user
+* Add a fromname classmethod to Video, Episode and Movie classes
+* Update unittests
+
+
 0.7.3
 -----
 **release date:** 2013-11-22

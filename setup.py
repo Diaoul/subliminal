@@ -27,7 +27,6 @@ setup(name='subliminal',
     entry_points={
         'console_scripts': ['subliminal = subliminal.cli:subliminal'],
         'subliminal.providers': ['addic7ed = subliminal.providers.addic7ed:Addic7edProvider',
-                                 'bierdopje = subliminal.providers.bierdopje:BierDopjeProvider',
                                  'opensubtitles = subliminal.providers.opensubtitles:OpenSubtitlesProvider',
                                  'podnapisi = subliminal.providers.podnapisi:PodnapisiProvider',
                                  'thesubdb = subliminal.providers.thesubdb:TheSubDBProvider',

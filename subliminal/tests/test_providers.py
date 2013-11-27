@@ -119,92 +119,6 @@ class Addic7edProviderTestCase(ProviderTestCase):
         self.assertTrue(is_valid_subtitle(subtitles[0].content))
 
 
-class BierDopjeProviderTestCase(ProviderTestCase):
-    provider_name = 'bierdopje'
-
-    def test_find_show_id(self):
-        with self.Provider() as provider:
-            show_id = provider.find_show_id('the big bang')
-        self.assertEqual(show_id, 9203)
-
-    def test_find_show_id_no_year(self):
-        with self.Provider() as provider:
-            show_id = provider.find_show_id('dallas')
-        self.assertEqual(show_id, 2248)
-
-    def test_find_show_id_year(self):
-        with self.Provider() as provider:
-            show_id = provider.find_show_id('dallas', 2012)
-        self.assertEqual(show_id, 16345)
-
-    def test_find_show_id_wrong_year(self):
-        with self.Provider() as provider:
-            show_id = provider.find_show_id('the big bang theory', 2007)
-        self.assertEqual(show_id, 9203)
-
-    def test_find_show_id_error(self):
-        with self.Provider() as provider:
-            show_id = provider.find_show_id('the big how i met your mother')
-        self.assertIsNone(show_id)
-
-    def test_query_episode_0(self):
-        video = EPISODES[0]
-        language = Language('eng')
-        matches = {frozenset(['series', 'video_codec', 'resolution', 'episode', 'season', 'year']),
-                   frozenset(['season', 'video_codec', 'episode', 'series', 'year']),
-                   frozenset(['episode', 'video_codec', 'season', 'series', 'resolution', 'release_group', 'year'])}
-        with self.Provider() as provider:
-            subtitles = provider.query(language, video.season, video.episode, series=video.series, year=video.year)
-        self.assertEqual({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)
-        self.assertEqual({subtitle.language for subtitle in subtitles}, {language})
-
-    def test_query_episode_1(self):
-        video = EPISODES[1]
-        language = Language('nld')
-        matches = {frozenset(['series', 'video_codec', 'resolution', 'episode', 'season', 'year']),
-                   frozenset(['season', 'video_codec', 'episode', 'series', 'year']),
-                   frozenset(['series', 'episode', 'season', 'year']),
-                   frozenset(['season', 'video_codec', 'episode', 'release_group', 'series', 'year']),
-                   frozenset(['episode', 'video_codec', 'season', 'series', 'resolution', 'release_group', 'year'])}
-        with self.Provider() as provider:
-            subtitles = provider.query(language, video.season, video.episode, series=video.series, year=video.year)
-        self.assertEqual({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)
-        self.assertEqual({subtitle.language for subtitle in subtitles}, {language})
-
-    def test_query_episode_0_tvdb_id(self):
-        video = EPISODES[0]
-        language = Language('eng')
-        matches = {frozenset(['video_codec', 'tvdb_id', 'episode', 'season', 'series']),
-                   frozenset(['episode', 'video_codec', 'series', 'season', 'tvdb_id', 'resolution', 'release_group']),
-                   frozenset(['episode', 'series', 'video_codec', 'tvdb_id', 'resolution', 'season'])}
-        with self.Provider() as provider:
-            subtitles = provider.query(language, video.season, video.episode, tvdb_id=video.tvdb_id)
-        self.assertEqual({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)
-        self.assertEqual({subtitle.language for subtitle in subtitles}, {language})
-
-    def test_list_subtitles(self):
-        video = EPISODES[1]
-        languages = {Language('eng'), Language('nld')}
-        matches = {frozenset(['series', 'video_codec', 'tvdb_id', 'episode', 'season']),
-                   frozenset(['episode', 'video_codec', 'season', 'series', 'tvdb_id', 'resolution', 'release_group']),
-                   frozenset(['season', 'tvdb_id', 'episode', 'series']),
-                   frozenset(['episode', 'video_codec', 'season', 'series', 'tvdb_id', 'resolution']),
-                   frozenset(['episode', 'video_codec', 'season', 'series', 'tvdb_id', 'release_group'])}
-        with self.Provider() as provider:
-            subtitles = provider.list_subtitles(video, languages)
-        self.assertEqual({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)
-        self.assertEqual({subtitle.language for subtitle in subtitles}, languages)
-
-    def test_download_subtitle(self):
-        video = EPISODES[0]
-        languages = {Language('eng'), Language('nld')}
-        with self.Provider() as provider:
-            subtitles = provider.list_subtitles(video, languages)
-            provider.download_subtitle(subtitles[0])
-        self.assertIsNotNone(subtitles[0].content)
-        self.assertTrue(is_valid_subtitle(subtitles[0].content))
-
-
 class OpenSubtitlesProviderTestCase(ProviderTestCase):
     provider_name = 'opensubtitles'
 
@@ -533,7 +447,6 @@ class TVsubtitlesProviderTestCase(ProviderTestCase):
 def suite():
     suite = TestSuite()
     suite.addTest(TestLoader().loadTestsFromTestCase(Addic7edProviderTestCase))
-    suite.addTest(TestLoader().loadTestsFromTestCase(BierDopjeProviderTestCase))
     suite.addTest(TestLoader().loadTestsFromTestCase(OpenSubtitlesProviderTestCase))
     suite.addTest(TestLoader().loadTestsFromTestCase(PodnapisiProviderTestCase))
     suite.addTest(TestLoader().loadTestsFromTestCase(TheSubDBProviderTestCase))

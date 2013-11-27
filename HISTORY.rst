@@ -12,6 +12,8 @@ Changelog
 * Add a content attribute to the Subtitle class
 * Dissociate download and save functions to give more control to the user
 * Add a fromname classmethod to Video, Episode and Movie classes
+* Add year to Episode class to differentiate two series with the same name
+* Remove dead BierDopje provider
 * Update unittests
 
 

@@ -67,7 +67,7 @@ class Video(object):
 
     @classmethod
     def fromname(cls, name):
-        cls.fromguess(os.path.split(name)[1], guessit.guess_file_info(name, 'autodetect'))
+        return cls.fromguess(os.path.split(name)[1], guessit.guess_file_info(name, 'autodetect'))
 
     def __repr__(self):
         return '<%s [%r]>' % (self.__class__.__name__, self.name)
@@ -115,7 +115,7 @@ class Episode(Video):
 
     @classmethod
     def fromname(cls, name):
-        cls.fromguess(os.path.split(name)[1], guessit.guess_episode_info(name))
+        return cls.fromguess(os.path.split(name)[1], guessit.guess_episode_info(name))
 
     def __repr__(self):
         return '<%s [%r, %rx%r]>' % (self.__class__.__name__, self.series, self.season, self.episode)
@@ -152,7 +152,7 @@ class Movie(Video):
 
     @classmethod
     def fromname(cls, name):
-        cls.fromguess(os.path.split(name)[1], guessit.guess_movie_info(name))
+        return cls.fromguess(os.path.split(name)[1], guessit.guess_movie_info(name))
 
     def __repr__(self):
         if self.year is None:

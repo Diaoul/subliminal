@@ -85,21 +85,23 @@ class Episode(Video):
     :param int season: season number of the episode
     :param int episode: episode number of the episode
     :param string title: title of the episode
+    :param int year: year of series
     :param int tvdb_id: TheTVDB id of the episode
 
     """
-    scores = {'title': 12, 'video_codec': 2, 'imdb_id': 35, 'audio_codec': 1, 'tvdb_id': 23, 'resolution': 2,
-              'season': 6, 'release_group': 6, 'series': 23, 'episode': 6, 'hash': 46}
+    scores = {'title': 12, 'video_codec': 2, 'tvdb_id': 48, 'imdb_id': 60, 'audio_codec': 1, 'year': 24,
+              'resolution': 2, 'season': 6, 'release_group': 6, 'series': 24, 'episode': 6, 'hash': 71}
 
     def __init__(self, name, series, season, episode, release_group=None, resolution=None, video_codec=None,
                  audio_codec=None, imdb_id=None, hashes=None, size=None, subtitle_languages=None, title=None,
-                 tvdb_id=None):
+                 year=None, tvdb_id=None):
         super(Episode, self).__init__(name, release_group, resolution, video_codec, audio_codec, imdb_id, hashes,
                                       size, subtitle_languages)
         self.series = series
         self.season = season
         self.episode = episode
         self.title = title
+        self.year = year
         self.tvdb_id = tvdb_id
 
     @classmethod
@@ -111,14 +113,16 @@ class Episode(Video):
         return cls(name, guess['series'], guess['season'], guess['episodeNumber'],
                    release_group=guess.get('releaseGroup'), resolution=guess.get('screenSize'),
                    video_codec=guess.get('videoCodec'), audio_codec=guess.get('audioCodec'),
-                   title=guess.get('title'))
+                   title=guess.get('title'), year=guess.get('year'))
 
     @classmethod
     def fromname(cls, name):
         return cls.fromguess(os.path.split(name)[1], guessit.guess_episode_info(name))
 
     def __repr__(self):
-        return '<%s [%r, %rx%r]>' % (self.__class__.__name__, self.series, self.season, self.episode)
+        if self.year is None:
+            return '<%s [%r, %dx%d]>' % (self.__class__.__name__, self.series, self.season, self.episode)
+        return '<%s [%r, %d, %dx%d]>' % (self.__class__.__name__, self.series, self.year, self.season, self.episode)
 
 
 class Movie(Video):
@@ -157,7 +161,7 @@ class Movie(Video):
     def __repr__(self):
         if self.year is None:
             return '<%s [%r]>' % (self.__class__.__name__, self.title)
-        return '<%s [%r, %r]>' % (self.__class__.__name__, self.title, self.year)
+        return '<%s [%r, %d]>' % (self.__class__.__name__, self.title, self.year)
 
 
 def scan_subtitle_languages(path):

@@ -57,12 +57,12 @@ class PodnapisiSubtitle(Subtitle):
             # title
             if video.title and self.title.lower() == video.title.lower():
                 matches.add('title')
-            # year
-            if video.year and self.year == video.year:
-                matches.add('year')
             # guess
             for release in self.releases:
                 matches |= compute_guess_matches(video, guessit.guess_movie_info(release + '.mkv'))
+        # year
+        if self.year == video.year:
+            matches.add('year')
         return matches
 
 
@@ -109,10 +109,10 @@ class PodnapisiProvider(Provider):
             params['sTE'] = episode
         elif title:
             params['sK'] = title
-            if year:
-                params['sY'] = year
         else:
             raise ValueError('Missing parameters series and season and episode or title')
+        if year:
+            params['sY'] = year
         logger.debug('Searching episode %r', params)
         subtitles = []
         while True:
@@ -123,12 +123,13 @@ class PodnapisiProvider(Provider):
             if series and season and episode:
                 subtitles.extend([PodnapisiSubtitle(language, int(s.find('id').text), s.find('release').text.split(),
                                                     'h' in (s.find('flags').text or ''), s.find('url').text[38:],
-                                                    series=series, season=season, episode=episode)
+                                                    series=series, season=season, episode=episode,
+                                                    year=s.find('year').text)
                                   for s in root.findall('subtitle')])
             elif title:
                 subtitles.extend([PodnapisiSubtitle(language, int(s.find('id').text), s.find('release').text.split(),
                                                     'h' in (s.find('flags').text or ''), s.find('url').text[38:],
-                                                    title=title, year=year)
+                                                    title=title, year=s.find('year').text)
                                   for s in root.findall('subtitle')])
             if int(root.find('pagination/current').text) >= int(root.find('pagination/count').text):
                 break
@@ -138,7 +139,7 @@ class PodnapisiProvider(Provider):
     def list_subtitles(self, video, languages):
         if isinstance(video, Episode):
             return [s for l in languages for s in self.query(l, series=video.series, season=video.season,
-                                                             episode=video.episode)]
+                                                             episode=video.episode, year=video.year)]
         elif isinstance(video, Movie):
             return [s for l in languages for s in self.query(l, title=video.title, year=video.year)]
 

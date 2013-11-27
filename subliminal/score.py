@@ -15,28 +15,30 @@ def get_episode_equations():
 
     The equations are the following:
 
-    1. hash = resolution + video_codec + audio_codec + series + season + episode + release_group
-    2. series = resolution + video_codec + audio_codec + season + episode + 1
-    3. tvdb_id = series
-    4. season = resolution + video_codec + audio_codec + 1
-    5. imdb_id = series + season + episode
-    6. resolution = video_codec
-    7. video_codec = 2 * audio_codec
-    8. title = season + episode
-    9. season = episode
-    10. release_group = season
-    11. audio_codec = 1
+    1. hash = resolution + video_codec + audio_codec + series + season + episode + year + release_group
+    2. series = resolution + video_codec + audio_codec + season + episode + release_group + 1
+    3. year = series
+    4. tvdb_id = series + year
+    5. season = resolution + video_codec + audio_codec + 1
+    6. imdb_id = series + season + episode + year
+    7. resolution = video_codec
+    8. video_codec = 2 * audio_codec
+    9. title = season + episode
+    10. season = episode
+    11. release_group = season
+    12. audio_codec = 1
 
     :return: the score equations for an episode
     :rtype: list of :class:`sympy.Eq`
 
     """
     equations = []
-    equations.append(Eq(hash, resolution + video_codec + audio_codec + series + season + episode + release_group))
-    equations.append(Eq(series, resolution + video_codec + audio_codec + season + episode + release_group))
-    equations.append(Eq(tvdb_id, series))
+    equations.append(Eq(hash, resolution + video_codec + audio_codec + series + season + episode + year + release_group))
+    equations.append(Eq(series, resolution + video_codec + audio_codec + season + episode + release_group + 1))
+    equations.append(Eq(series, year))
+    equations.append(Eq(tvdb_id, series + year))
     equations.append(Eq(season, resolution + video_codec + audio_codec + 1))
-    equations.append(Eq(imdb_id, series + season + episode))
+    equations.append(Eq(imdb_id, series + season + episode + year))
     equations.append(Eq(resolution, video_codec))
     equations.append(Eq(video_codec, 2 * audio_codec))
     equations.append(Eq(title, season + episode))
@@ -79,6 +81,6 @@ def get_movie_equations():
 
 if __name__ == '__main__':
     print(solve(get_episode_equations(), [release_group, resolution, video_codec, audio_codec, imdb_id,
-                                          hash, series, tvdb_id, season, episode, title]))
+                                          hash, series, tvdb_id, season, episode, title, year]))
     print(solve(get_movie_equations(), [release_group, resolution, video_codec, audio_codec, imdb_id,
                                         hash, title, year]))

@@ -65,9 +65,9 @@ class Subtitle(object):
             # remove equivalences
             if isinstance(video, Episode):
                 if 'imdb_id' in matches:
-                    matches -= {'series', 'tvdb_id', 'season', 'episode', 'title'}
+                    matches -= {'series', 'tvdb_id', 'season', 'episode', 'title', 'year'}
                 if 'tvdb_id' in matches:
-                    matches -= {'series'}
+                    matches -= {'series', 'year'}
                 if 'title' in matches:
                     matches -= {'season', 'episode'}
             # add other scores
@@ -138,6 +138,9 @@ def compute_guess_matches(video, guess):
         # Episode
         if video.episode and 'episodeNumber' in guess and guess['episodeNumber'] == video.episode:
             matches.add('episode')
+        # Year
+        if video.year == guess.get('year'):  # count "no year" as an information
+            matches.add('year')
     elif isinstance(video, Movie):
         # Year
         if video.year and 'year' in guess and guess['year'] == video.year:

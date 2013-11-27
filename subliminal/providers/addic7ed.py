@@ -19,12 +19,14 @@ logger = logging.getLogger(__name__)
 class Addic7edSubtitle(Subtitle):
     provider_name = 'addic7ed'
 
-    def __init__(self, language, series, season, episode, title, version, hearing_impaired, download_link, referer):
+    def __init__(self, language, series, season, episode, title, year, version, hearing_impaired, download_link,
+                 referer):
         super(Addic7edSubtitle, self).__init__(language, hearing_impaired)
         self.series = series
         self.season = season
         self.episode = episode
         self.title = title
+        self.year = year
         self.version = version
         self.download_link = download_link
         self.referer = referer
@@ -43,6 +45,9 @@ class Addic7edSubtitle(Subtitle):
         # title
         if video.title and self.title.lower() == video.title.lower():
             matches.add('title')
+        # year
+        if self.year == video.year:
+            matches.add('year')
         # release_group
         if video.release_group and self.version and video.release_group.lower() in self.version.lower():
             matches.add('release_group')
@@ -130,32 +135,46 @@ class Addic7edProvider(Provider):
         return show_ids
 
     @region.cache_on_arguments(expiration_time=SHOW_EXPIRATION_TIME)
-    def find_show_id(self, series):
-        """Find a show id from the series
+    def find_show_id(self, series, year=None):
+        """Find the show id from the `series` with optional `year`
 
-        Use this only if the series is not in the dict returned by :meth:`get_show_ids`
+        Use this only if the show id cannot be found with :meth:`get_show_ids`
 
-        :param string series: series of the episode
+        :param string series: series of the episode in lowercase
+        :param year: year of the series, if any
+        :type year: int or None
         :return: the show id, if any
         :rtype: int or None
 
         """
-        params = {'search': series, 'Submit': 'Search'}
+        series_year = series
+        if year is not None:
+            series_year += ' (%d)' % year
+        params = {'search': series_year, 'Submit': 'Search'}
         logger.debug('Searching series %r', params)
         suggested_shows = self.get('/search.php', params).select('span.titulo > a[href^="/show/"]')
         if not suggested_shows:
-            logger.info('Series %r not found', series)
+            logger.info('Series %r not found', series_year)
             return None
         return int(suggested_shows[0]['href'][6:])
 
-    def query(self, series, season):
+    def query(self, series, season, year=None):
         show_ids = self.get_show_ids()
-        if series.lower() in show_ids:
-            show_id = show_ids[series.lower()]
-        else:
-            show_id = self.find_show_id(series.lower())
-            if show_id is None:
-                return []
+        show_id = None
+        if year is not None:  # search with the year
+            series_year = '%s (%d)' % (series.lower(), year)
+            if series_year in show_ids:
+                show_id = show_ids[series_year]
+            else:
+                show_id = self.find_show_id(series.lower(), year)
+        if show_id is None:  # search without the year
+            year = None
+            if series.lower() in show_ids:
+                show_id = show_ids[series.lower()]
+            else:
+                show_id = self.find_show_id(series.lower())
+        if show_id is None:
+            return []
         params = {'show_id': show_id, 'season': season}
         logger.debug('Searching subtitles %r', params)
         link = '/show/{show_id}&season={season}'.format(**params)
@@ -168,12 +187,12 @@ class Addic7edProvider(Provider):
             if not cells[3].string:
                 continue
             subtitles.append(Addic7edSubtitle(babelfish.Language.fromaddic7ed(cells[3].string), series, season,
-                                              int(cells[1].string), cells[2].string, cells[4].string,
+                                              int(cells[1].string), cells[2].string, year, cells[4].string,
                                               bool(cells[6].string), cells[9].a['href'], link))
         return subtitles
 
     def list_subtitles(self, video, languages):
-        return [s for s in self.query(video.series, video.season)
+        return [s for s in self.query(video.series, video.season, video.year)
                 if s.language in languages and s.episode == video.episode]
 
     def download_subtitle(self, subtitle):

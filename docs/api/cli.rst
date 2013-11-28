@@ -9,8 +9,9 @@ subliminal
     usage: subliminal -l LANGUAGE [LANGUAGE ...] [-s] [-c CACHE_FILE]
                       [-p PROVIDER [PROVIDER ...]] [-m MIN_SCORE] [-a AGE] [-h]
                       [-f] [--addic7ed-username USERNAME]
-                      [--addic7ed-password PASSWORD] [-q | -v] [--color] [--debug]
-                      [--version] [--help]
+                      [--addic7ed-password PASSWORD] [-q | -v]
+                      [--log-file LOG_FILE] [--color] [--debug] [--version]
+                      [--help]
                       PATH [PATH ...]
 
     Subtitles, faster than your thoughts
@@ -28,10 +29,10 @@ subliminal
 
     filtering:
       -p PROVIDER [PROVIDER ...], --providers PROVIDER [PROVIDER ...]
-                            providers to use (opensubtitles, tvsubtitles,
-                            podnapisi, addic7ed, bierdopje, thesubdb)
+                            providers to use (opensubtitles, thesubdb, podnapisi,
+                            addic7ed, tvsubtitles)
       -m MIN_SCORE, --min-score MIN_SCORE
-                            minimum score for subtitles (0-46 for episodes, 0-31
+                            minimum score for subtitles (0-71 for episodes, 0-31
                             for movies)
       -a AGE, --age AGE     download subtitles for videos newer than AGE e.g. 12h,
                             1w2d
@@ -49,6 +50,7 @@ subliminal
     output:
       -q, --quiet           disable output
       -v, --verbose         verbose output
+      --log-file LOG_FILE   log into a file instead of stdout
       --color               add color to console output (requires colorlog)
 
     troubleshooting:

@@ -32,7 +32,7 @@ def list_subtitles(videos, languages, providers=None, provider_configs=None):
         for video in videos:
             logger.info('Listing subtitles for %r', video)
             video_subtitles = pm.list_subtitles(video, languages)
-            logger.info('Found %d subtitles', len(video_subtitles))
+            logger.info('Found %d subtitles total', len(video_subtitles))
             subtitles[video].extend(video_subtitles)
     return subtitles
 
@@ -74,7 +74,7 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
             # list
             logger.info('Listing subtitles for %r', video)
             video_subtitles = pm.list_subtitles(video, languages)
-            logger.info('Found %d subtitles', len(video_subtitles))
+            logger.info('Found %d subtitles total', len(video_subtitles))
 
             # download
             downloaded_languages = set()

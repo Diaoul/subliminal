@@ -60,6 +60,7 @@ def subliminal():
     output_exclusive_group = output_group.add_mutually_exclusive_group()
     output_exclusive_group.add_argument('-q', '--quiet', action='store_true', help='disable output')
     output_exclusive_group.add_argument('-v', '--verbose', action='store_true', help='verbose output')
+    output_group.add_argument('--log-file', help='log into a file instead of stdout')
     output_group.add_argument('--color', action='store_true', help='add color to console output (requires colorlog)')
 
     # troubleshooting
@@ -109,8 +110,11 @@ def subliminal():
         parser.error('argument --color: colorlog required')
 
     # setup output
-    if args.debug:
+    if args.log_file is None:
         handler = logging.StreamHandler()
+    else:
+        handler = logging.FileHandler(args.log_file, encoding='utf-8')
+    if args.debug:
         if args.color:
             handler.setFormatter(colorlog.ColoredFormatter('%(log_color)s%(levelname)-8s%(reset)s [%(blue)s%(name)s-%(funcName)s:%(lineno)d%(reset)s] %(message)s',
                                                            log_colors=dict(colorlog.default_log_colors.items() + [('DEBUG', 'cyan')])))
@@ -119,7 +123,6 @@ def subliminal():
         logging.getLogger().addHandler(handler)
         logging.getLogger().setLevel(logging.DEBUG)
     elif args.verbose:
-        handler = logging.StreamHandler()
         if args.color:
             handler.setFormatter(colorlog.ColoredFormatter('%(log_color)s%(levelname)-8s%(reset)s [%(blue)s%(name)s%(reset)s] %(message)s'))
         else:
@@ -127,7 +130,6 @@ def subliminal():
         logging.getLogger('subliminal').addHandler(handler)
         logging.getLogger('subliminal').setLevel(logging.INFO)
     elif not args.quiet:
-        handler = logging.StreamHandler()
         if args.color:
             handler.setFormatter(colorlog.ColoredFormatter('[%(log_color)s%(levelname)s%(reset)s] %(message)s'))
         else:

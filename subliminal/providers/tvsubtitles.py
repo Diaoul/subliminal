@@ -22,8 +22,8 @@ logger = logging.getLogger(__name__)
 class TVsubtitlesSubtitle(Subtitle):
     provider_name = 'tvsubtitles'
 
-    def __init__(self, language, series, season, episode, year, id, rip, release):  # @ReservedAssignment
-        super(TVsubtitlesSubtitle, self).__init__(language)
+    def __init__(self, language, series, season, episode, year, id, rip, release, page_link):  # @ReservedAssignment
+        super(TVsubtitlesSubtitle, self).__init__(language, page_link=page_link)
         self.series = series
         self.season = season
         self.episode = episode
@@ -160,11 +160,12 @@ class TVsubtitlesProvider(Provider):
             return []
         params = {'episode_id': episode_ids[episode]}
         logger.debug('Searching episode %r', params)
-        soup = self.request('/episode-{episode_id}.html'.format(**params))
+        link = '/episode-{episode_id}.html'.format(**params)
+        soup = self.request(link)
         return [TVsubtitlesSubtitle(babelfish.Language.fromtvsubtitles(row.h5.img['src'][13:-4]), series, season,
                                     episode, year if year and show_id != self.find_show_id(series.lower()) else None,
                                     row['href'][10:-5], row.find('p', title='rip').text.strip() or None,
-                                    row.find('p', title='release').text.strip() or None)
+                                    row.find('p', title='release').text.strip() or None, link)
                 for row in soup('a', href=self.subtitle_re)]
 
     def list_subtitles(self, video, languages):

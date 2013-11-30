@@ -20,8 +20,8 @@ class Addic7edSubtitle(Subtitle):
     provider_name = 'addic7ed'
 
     def __init__(self, language, series, season, episode, title, year, version, hearing_impaired, download_link,
-                 referer):
-        super(Addic7edSubtitle, self).__init__(language, hearing_impaired)
+                 page_link):
+        super(Addic7edSubtitle, self).__init__(language, hearing_impaired, page_link)
         self.series = series
         self.season = season
         self.episode = episode
@@ -29,7 +29,6 @@ class Addic7edSubtitle(Subtitle):
         self.year = year
         self.version = version
         self.download_link = download_link
-        self.referer = referer
 
     def compute_matches(self, video):
         matches = set()
@@ -198,7 +197,7 @@ class Addic7edProvider(Provider):
     def download_subtitle(self, subtitle):
         try:
             r = self.session.get(self.server + subtitle.download_link, timeout=10,
-                                 headers={'Referer': self.server + subtitle.referer})
+                                 headers={'Referer': self.server + subtitle.page_link})
         except requests.Timeout:
             raise ProviderNotAvailable('Timeout after 10 seconds')
         if r.status_code != 200:

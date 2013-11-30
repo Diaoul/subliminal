@@ -23,13 +23,12 @@ logger = logging.getLogger(__name__)
 class PodnapisiSubtitle(Subtitle):
     provider_name = 'podnapisi'
 
-    def __init__(self, language, id, releases, hearing_impaired, link, series=None, season=None, episode=None,  # @ReservedAssignment
+    def __init__(self, language, id, releases, hearing_impaired, page_link, series=None, season=None, episode=None,  # @ReservedAssignment
                  title=None, year=None):
-        super(PodnapisiSubtitle, self).__init__(language, hearing_impaired)
+        super(PodnapisiSubtitle, self).__init__(language, hearing_impaired, page_link)
         self.id = id
         self.releases = releases
         self.hearing_impaired = hearing_impaired
-        self.link = link
         self.series = series
         self.season = season
         self.episode = episode
@@ -122,13 +121,13 @@ class PodnapisiProvider(Provider):
                 break
             if series and season and episode:
                 subtitles.extend([PodnapisiSubtitle(language, int(s.find('id').text), s.find('release').text.split(),
-                                                    'h' in (s.find('flags').text or ''), s.find('url').text[38:],
+                                                    'h' in (s.find('flags').text or ''), s.find('url').text,
                                                     series=series, season=season, episode=episode,
                                                     year=s.find('year').text)
                                   for s in root.findall('subtitle')])
             elif title:
                 subtitles.extend([PodnapisiSubtitle(language, int(s.find('id').text), s.find('release').text.split(),
-                                                    'h' in (s.find('flags').text or ''), s.find('url').text[38:],
+                                                    'h' in (s.find('flags').text or ''), s.find('url').text,
                                                     title=title, year=s.find('year').text)
                                   for s in root.findall('subtitle')])
             if int(root.find('pagination/current').text) >= int(root.find('pagination/count').text):
@@ -144,7 +143,7 @@ class PodnapisiProvider(Provider):
             return [s for l in languages for s in self.query(l, title=video.title, year=video.year)]
 
     def download_subtitle(self, subtitle):
-        soup = self.get(subtitle.link, is_xml=False)
+        soup = self.get(subtitle.link[38:], is_xml=False)
         link = soup.find('a', href=self.link_re)
         if not link:
             raise ProviderError('Cannot find the download link')

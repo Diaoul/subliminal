@@ -16,11 +16,14 @@ class Subtitle(object):
     :param language: language of the subtitle
     :type language: :class:`babelfish.Language`
     :param bool hearing_impaired: `True` if the subtitle is hearing impaired, `False` otherwise
+    :param page_link: link to the web page from which the subtitle can be downloaded, if any
+    :type page_link: string or None
 
     """
-    def __init__(self, language, hearing_impaired=False):
+    def __init__(self, language, hearing_impaired=False, page_link=None):
         self.language = language
         self.hearing_impaired = hearing_impaired
+        self.page_link = page_link
 
         #: Subtitle's content once downloaded with :meth:`~subliminal.providers.Provider.download_subtitle`
         self.content = None

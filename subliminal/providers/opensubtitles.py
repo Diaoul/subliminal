@@ -24,8 +24,8 @@ class OpenSubtitlesSubtitle(Subtitle):
     series_re = re.compile('^"(?P<series_name>.*)" (?P<series_title>.*)$')
 
     def __init__(self, language, hearing_impaired, id, matched_by, movie_kind, hash, movie_name, movie_release_name,  # @ReservedAssignment
-                 movie_year, movie_imdb_id, series_season, series_episode):
-        super(OpenSubtitlesSubtitle, self).__init__(language, hearing_impaired)
+                 movie_year, movie_imdb_id, series_season, series_episode, page_link):
+        super(OpenSubtitlesSubtitle, self).__init__(language, hearing_impaired, page_link)
         self.id = id
         self.matched_by = matched_by
         self.movie_kind = movie_kind
@@ -133,7 +133,7 @@ class OpenSubtitlesProvider(Provider):
                                       r['MovieKind'], r['MovieHash'], r['MovieName'], r['MovieReleaseName'],
                                       int(r['MovieYear']) if r['MovieYear'] else None, int(r['IDMovieImdb']),
                                       int(r['SeriesSeason']) if r['SeriesSeason'] else None,
-                                      int(r['SeriesEpisode']) if r['SeriesEpisode'] else None)
+                                      int(r['SeriesEpisode']) if r['SeriesEpisode'] else None, r['SubtitlesLink'])
                 for r in response['data']]
 
     def list_subtitles(self, video, languages):

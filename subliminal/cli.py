@@ -7,7 +7,6 @@ import os
 import re
 import sys
 import babelfish
-import guessit
 from subliminal import (__version__, cache_region, MutexLock, PROVIDERS, Video, Episode, Movie, scan_videos,
     download_best_subtitles, save_subtitles)
 try:
@@ -146,8 +145,7 @@ def subliminal():
                          embedded_subtitles=not args.force, age=args.age)
 
     # guess videos
-    videos.extend([Video.fromguess(os.path.split(p)[1], guessit.guess_file_info(p, 'autodetect')) for p in args.paths
-                   if not os.path.exists(p)])
+    videos.extend([Video.fromname(p) for p in args.paths if not os.path.exists(p)])
 
     # download best subtitles
     subtitles = download_best_subtitles(videos, args.languages, providers=args.providers,

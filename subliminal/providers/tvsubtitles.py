@@ -164,8 +164,9 @@ class TVsubtitlesProvider(Provider):
         soup = self.request(link)
         return [TVsubtitlesSubtitle(babelfish.Language.fromtvsubtitles(row.h5.img['src'][13:-4]), series, season,
                                     episode, year if year and show_id != self.find_show_id(series.lower()) else None,
-                                    row['href'][10:-5], row.find('p', title='rip').text.strip() or None,
-                                    row.find('p', title='release').text.strip() or None, link)
+                                    int(row['href'][10:-5]), row.find('p', title='rip').text.strip() or None,
+                                    row.find('p', title='release').text.strip() or None,
+                                    self.server + '/subtitle-%d.html' % int(row['href'][10:-5]))
                 for row in soup('a', href=self.subtitle_re)]
 
     def list_subtitles(self, video, languages):

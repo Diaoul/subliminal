@@ -187,7 +187,8 @@ class Addic7edProvider(Provider):
                 continue
             subtitles.append(Addic7edSubtitle(babelfish.Language.fromaddic7ed(cells[3].string), series, season,
                                               int(cells[1].string), cells[2].string, year, cells[4].string,
-                                              bool(cells[6].string), cells[9].a['href'], link))
+                                              bool(cells[6].string), cells[9].a['href'],
+                                              self.server + cells[2].a['href']))
         return subtitles
 
     def list_subtitles(self, video, languages):
@@ -197,7 +198,7 @@ class Addic7edProvider(Provider):
     def download_subtitle(self, subtitle):
         try:
             r = self.session.get(self.server + subtitle.download_link, timeout=10,
-                                 headers={'Referer': self.server + subtitle.page_link})
+                                 headers={'Referer': subtitle.page_link})
         except requests.Timeout:
             raise ProviderNotAvailable('Timeout after 10 seconds')
         if r.status_code != 200:

@@ -132,35 +132,35 @@ def compute_guess_matches(video, guess):
     """
     matches = set()
     if isinstance(video, Episode):
-        # Series
+        # series
         if video.series and 'series' in guess and guess['series'].lower() == video.series.lower():
             matches.add('series')
-        # Season
+        # season
         if video.season and 'seasonNumber' in guess and guess['seasonNumber'] == video.season:
             matches.add('season')
-        # Episode
+        # episode
         if video.episode and 'episodeNumber' in guess and guess['episodeNumber'] == video.episode:
             matches.add('episode')
-        # Year
+        # year
         if video.year == guess.get('year'):  # count "no year" as an information
             matches.add('year')
     elif isinstance(video, Movie):
-        # Year
+        # year
         if video.year and 'year' in guess and guess['year'] == video.year:
             matches.add('year')
-    # Title
+    # title
     if video.title and 'title' in guess and guess['title'].lower() == video.title.lower():
         matches.add('title')
-    # Release group
+    # release group
     if video.release_group and 'releaseGroup' in guess and guess['releaseGroup'].lower() == video.release_group.lower():
         matches.add('release_group')
-    # Screen size
+    # screen size
     if video.resolution and 'screenSize' in guess and guess['screenSize'] == video.resolution:
         matches.add('resolution')
-    # Video codec
+    # video codec
     if video.video_codec and 'videoCodec' in guess and guess['videoCodec'] == video.video_codec:
         matches.add('video_codec')
-    # Audio codec
+    # audio codec
     if video.audio_codec and 'audioCodec' in guess and guess['audioCodec'] == video.audio_codec:
         matches.add('audio_codec')
     return matches

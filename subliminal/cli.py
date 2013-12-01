@@ -158,7 +158,7 @@ def subliminal():
     # result output
     if not subtitles:
         if not args.quiet:
-            print('No subtitles downloaded\n', file=sys.stderr)
+            print('No subtitles downloaded', file=sys.stderr)
         exit(1)
     if not args.quiet:
         subtitles_count = sum([len(s) for s in subtitles.values()])

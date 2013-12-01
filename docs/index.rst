@@ -39,6 +39,7 @@ Library
 Download best subtitles in French and English for videos less than one week old in a video folder,
 skipping videos that already have subtitles whether they are embedded or not::
 
+    from __future__ import unicode_literals  # python 2 only
     from babelfish import Language
     from datetime import timedelta
     import subliminal

@@ -17,7 +17,6 @@ Subliminal uses multiple providers to give users a vast choice and have a better
 best matching subtitles. Providers are extensible through a dedicated entry point.
 
 * Addic7ed
-* BierDopje
 * OpenSubtitles
 * Podnapisi
 * TheSubDB

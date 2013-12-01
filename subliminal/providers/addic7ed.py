@@ -3,13 +3,12 @@ from __future__ import unicode_literals
 import logging
 import babelfish
 import bs4
-import charade
 import requests
 from . import Provider
 from .. import __version__
 from ..cache import region, SHOW_EXPIRATION_TIME
 from ..exceptions import ProviderConfigurationError, ProviderNotAvailable, InvalidSubtitle
-from ..subtitle import Subtitle, is_valid_subtitle
+from ..subtitle import Subtitle, decode, is_valid_subtitle
 from ..video import Episode
 
 
@@ -205,7 +204,7 @@ class Addic7edProvider(Provider):
             raise ProviderNotAvailable('Request failed with status code %d' % r.status_code)
         if r.headers['Content-Type'] == 'text/html':
             raise ProviderNotAvailable('Download limit exceeded')
-        subtitle_text = r.content.decode(charade.detect(r.content)['encoding'], 'replace')
-        if not is_valid_subtitle(subtitle_text):
+        subtitle_content = decode(r.content, subtitle.language)
+        if not is_valid_subtitle(subtitle_content):
             raise InvalidSubtitle
-        subtitle.content = subtitle_text
+        subtitle.content = subtitle_content

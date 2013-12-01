@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 import logging
 import os.path
 import babelfish
+import charade
 import pysrt
 from .video import Episode, Movie
 
@@ -164,3 +165,39 @@ def compute_guess_matches(video, guess):
     if video.audio_codec and 'audioCodec' in guess and guess['audioCodec'] == video.audio_codec:
         matches.add('audio_codec')
     return matches
+
+
+def decode(content, language):
+    """Decode subtitle `content` in a specified `language`
+
+    :param bytes content: content of the subtitle
+    :param language: language of the subtitle
+    :type language: :class:`babelfish.Language`
+    :return: the decoded `content` bytes
+    :rtype: string
+
+    """
+    # always try utf-8 first
+    encodings = ['utf-8']
+
+    # add language-specific encodings
+    if language.alpha3 == 'zho':
+        encodings.extend(['gb18030', 'big5'])
+    elif language.alpha3 == 'jpn':
+        encodings.append('shift-jis')
+    elif language.alpha3 == 'ara':
+        encodings.append('windows-1256')
+    else:
+        encodings.append('latin-1')
+
+    # try to decode
+    for encoding in encodings:
+        try:
+            print encoding
+            return content.decode(encoding)
+        except UnicodeDecodeError:
+            pass
+
+    # fallback on charade
+    logger.warning('Could not decode content with encodings %r', encodings)
+    return content.decode(charade.detect(content)['encoding'], 'replace')

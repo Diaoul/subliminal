@@ -2,12 +2,11 @@
 from __future__ import unicode_literals
 import logging
 import babelfish
-import charade
 import requests
 from . import Provider
 from .. import __version__
 from ..exceptions import InvalidSubtitle, ProviderNotAvailable, ProviderError
-from ..subtitle import Subtitle, is_valid_subtitle
+from ..subtitle import Subtitle, decode, is_valid_subtitle
 
 
 logger = logging.getLogger(__name__)
@@ -75,7 +74,7 @@ class TheSubDBProvider(Provider):
         r = self.get(params)
         if r.status_code != 200:
             raise ProviderError('Request failed with status code %d' % r.status_code)
-        subtitle_text = r.content.decode(charade.detect(r.content)['encoding'], 'replace')
-        if not is_valid_subtitle(subtitle_text):
+        subtitle_content = decode(r.content, subtitle.language)
+        if not is_valid_subtitle(subtitle_content):
             raise InvalidSubtitle
-        subtitle.content = subtitle_text
+        subtitle.content = subtitle_content

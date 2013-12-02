@@ -61,7 +61,7 @@ class Addic7edProviderTestCase(ProviderTestCase):
         video = EPISODES[0]
         languages = {Language('tur'), Language('rus'), Language('heb'), Language('ita'), Language('fra'),
                      Language('ron'), Language('nld'), Language('eng'), Language('deu'), Language('ell'),
-                     Language('por', 'BR'), Language('bul'), Language('jpn'), Language('por'), Language('msa')}
+                     Language('por', 'BR'), Language('bul'), Language('por'), Language('msa')}
         matches = {frozenset(['episode', 'release_group', 'title', 'series', 'resolution', 'season']),
                    frozenset(['series', 'resolution', 'season']),
                    frozenset(['series', 'episode', 'season', 'title']),

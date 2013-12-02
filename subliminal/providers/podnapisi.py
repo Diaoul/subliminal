@@ -142,7 +142,7 @@ class PodnapisiProvider(Provider):
             return [s for l in languages for s in self.query(l, title=video.title, year=video.year)]
 
     def download_subtitle(self, subtitle):
-        soup = self.get(subtitle.link[38:], is_xml=False)
+        soup = self.get(subtitle.page_link[38:], is_xml=False)
         link = soup.find('a', href=self.link_re)
         if not link:
             raise ProviderError('Cannot find the download link')

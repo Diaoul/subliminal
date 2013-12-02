@@ -344,9 +344,15 @@ def scan_videos(paths, subtitles=True, embedded_subtitles=True, age=None):
                 if os.path.islink(filepath):
                     logger.debug('Skipping link %r in %r', filename, dirpath)
                     continue
-                if age and datetime.datetime.now() - datetime.datetime.fromtimestamp(os.path.getmtime(filepath)) > age:
-                    logger.info('Skipping video %r: older than %r', filepath, age)
-                    continue
+                if age is not None:
+                    try:
+                        video_age = datetime.datetime.now() - datetime.datetime.fromtimestamp(os.path.getmtime(filepath))
+                    except ValueError:
+                        logger.exception('Error while getting video age, skipping it')
+                        continue
+                    if video_age > age:
+                        logger.info('Skipping video %r: older than %r', filepath, age)
+                        continue
                 try:
                     video = scan_video(filepath, subtitles, embedded_subtitles)
                 except ValueError as e:

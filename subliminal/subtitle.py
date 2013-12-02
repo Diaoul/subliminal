@@ -193,7 +193,6 @@ def decode(content, language):
     # try to decode
     for encoding in encodings:
         try:
-            print encoding
             return content.decode(encoding)
         except UnicodeDecodeError:
             pass

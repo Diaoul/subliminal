@@ -115,24 +115,47 @@ def subliminal():
         handler = logging.FileHandler(args.log_file, encoding='utf-8')
     if args.debug:
         if args.color:
-            handler.setFormatter(colorlog.ColoredFormatter('%(log_color)s%(levelname)-8s%(reset)s [%(blue)s%(name)s-%(funcName)s:%(lineno)d%(reset)s] %(message)s',
+            if args.log_file is None:
+                log_format = '%(log_color)s%(levelname)-8s%(reset)s [%(blue)s%(name)s-%(funcName)s:%(lineno)d%(reset)s] %(message)s'
+            else:
+                log_format = '%(purple)s%(asctime)s%(reset)s %(log_color)s%(levelname)-8s%(reset)s [%(blue)s%(name)s-%(funcName)s:%(lineno)d%(reset)s] %(message)s'
+            handler.setFormatter(colorlog.ColoredFormatter(log_format,
                                                            log_colors=dict(colorlog.default_log_colors.items() + [('DEBUG', 'cyan')])))
         else:
-            handler.setFormatter(logging.Formatter('%(levelname)-8s [%(name)s-%(funcName)s:%(lineno)d] %(message)s'))
+            if args.log_file is None:
+                log_format = '%(levelname)-8s [%(name)s-%(funcName)s:%(lineno)d] %(message)s'
+            else:
+                log_format = '%(asctime)s %(levelname)-8s [%(name)s-%(funcName)s:%(lineno)d] %(message)s'
+            handler.setFormatter(logging.Formatter(log_format))
         logging.getLogger().addHandler(handler)
         logging.getLogger().setLevel(logging.DEBUG)
     elif args.verbose:
         if args.color:
-            handler.setFormatter(colorlog.ColoredFormatter('%(log_color)s%(levelname)-8s%(reset)s [%(blue)s%(name)s%(reset)s] %(message)s'))
+            if args.log_file is None:
+                log_format = '%(log_color)s%(levelname)-8s%(reset)s [%(blue)s%(name)s%(reset)s] %(message)s'
+            else:
+                log_format = '%(purple)s%(asctime)s%(reset)s %(log_color)s%(levelname)-8s%(reset)s [%(blue)s%(name)s%(reset)s] %(message)s'
+            handler.setFormatter(colorlog.ColoredFormatter(log_format))
         else:
-            handler.setFormatter(logging.Formatter('%(levelname)-8s [%(name)s] %(message)s'))
+            log_format = '%(levelname)-8s [%(name)s] %(message)s'
+            if args.log_file is not None:
+                log_format = '%(asctime)s ' + log_format
+            handler.setFormatter(logging.Formatter(log_format))
         logging.getLogger('subliminal').addHandler(handler)
         logging.getLogger('subliminal').setLevel(logging.INFO)
     elif not args.quiet:
         if args.color:
-            handler.setFormatter(colorlog.ColoredFormatter('[%(log_color)s%(levelname)s%(reset)s] %(message)s'))
+            if args.log_file is None:
+                log_format = '[%(log_color)s%(levelname)s%(reset)s] %(message)s'
+            else:
+                log_format = '%(purple)s%(asctime)s%(reset)s [%(log_color)s%(levelname)s%(reset)s] %(message)s'
+            handler.setFormatter(colorlog.ColoredFormatter(log_format))
         else:
-            handler.setFormatter(logging.Formatter('%(levelname)s: %(message)s'))
+            if args.log_file is None:
+                log_format = '%(levelname)s: %(message)s'
+            else:
+                log_format = '%(asctime)s %(levelname)s: %(message)s'
+            handler.setFormatter(logging.Formatter(log_format))
         logging.getLogger('subliminal.api').addHandler(handler)
         logging.getLogger('subliminal.api').setLevel(logging.INFO)
 

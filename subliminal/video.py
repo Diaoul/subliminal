@@ -265,7 +265,7 @@ def scan_video(path, subtitles=True, embedded_subtitles=True):
                             try:
                                 embedded_subtitle_languages.add(babelfish.Language.fromname(st.name))
                             except babelfish.Error:
-                                logger.error('Embedded subtitle track name %r is not a valid language', st.name)
+                                logger.debug('Embedded subtitle track name %r is not a valid language', st.name)
                                 embedded_subtitle_languages.add(babelfish.Language('und'))
                         else:
                             embedded_subtitle_languages.add(babelfish.Language('und'))

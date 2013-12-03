@@ -56,6 +56,9 @@ def subliminal():
 
     # output
     output_group = parser.add_argument_group('output')
+    output_group.add_argument('-d', '--directory',
+                              help='save subtitles in the given directory rather than next to the video')
+    output_group.add_argument('-e', '--encoding', default='utf-8', help='subtitles encoding (default: %(default)s)')
     output_exclusive_group = output_group.add_mutually_exclusive_group()
     output_exclusive_group.add_argument('-q', '--quiet', action='store_true', help='disable output')
     output_exclusive_group.add_argument('-v', '--verbose', action='store_true', help='verbose output')
@@ -176,7 +179,7 @@ def subliminal():
                                         hearing_impaired=args.hearing_impaired)
 
     # save subtitles
-    save_subtitles(subtitles, single=args.single)
+    save_subtitles(subtitles, single=args.single, directory=args.directory, encoding=args.encoding)
 
     # result output
     if not subtitles:

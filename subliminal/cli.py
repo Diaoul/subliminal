@@ -153,7 +153,7 @@ def subliminal():
                                         hearing_impaired=args.hearing_impaired)
 
     # save subtitles
-    save_subtitles(subtitles)
+    save_subtitles(subtitles, single=args.single)
 
     # result output
     if not subtitles:

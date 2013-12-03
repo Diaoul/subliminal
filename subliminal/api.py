@@ -99,12 +99,13 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
     return downloaded_subtitles
 
 
-def save_subtitles(subtitles, single=False, folder_path=None):
+def save_subtitles(subtitles, single=False, directory=None, encoding='utf-8'):
     """Save subtitles on disk next to the video or in a specific folder if `folder_path` is specified
 
     :param bool single: download with .srt extension if ``True``, add language identifier otherwise
-    :param folder_path: path to folder where to save the subtitles, if any
-    :type folder_path: string or None
+    :param directory: path to directory where to save the subtitles, if any
+    :type directory: string or None
+    :param string encoding: subtitles encoding
 
     """
     for video, video_subtitles in subtitles.items():
@@ -117,10 +118,10 @@ def save_subtitles(subtitles, single=False, folder_path=None):
                 logger.debug('Skipping subtitle %r: language already saved', video_subtitle)
                 continue
             subtitle_path = get_subtitle_path(video.name, None if single else video_subtitle.language)
-            if folder_path is not None:
-                subtitle_path = os.path.join(folder_path, os.path.split(subtitle_path)[1])
+            if directory is not None:
+                subtitle_path = os.path.join(directory, os.path.split(subtitle_path)[1])
             logger.info('Saving %r to %r', video_subtitle, subtitle_path)
-            with io.open(subtitle_path, 'w', encoding='utf-8') as f:
+            with io.open(subtitle_path, 'w', encoding=encoding) as f:
                 f.write(video_subtitle.content)
             saved_languages.add(video_subtitle.language)
             if single:

@@ -176,7 +176,7 @@ def subliminal():
     # download best subtitles
     subtitles = download_best_subtitles(videos, args.languages, providers=args.providers,
                                         provider_configs=provider_configs, min_score=args.min_score,
-                                        hearing_impaired=args.hearing_impaired)
+                                        hearing_impaired=args.hearing_impaired, single=args.single)
 
     # save subtitles
     save_subtitles(subtitles, single=args.single, directory=args.directory, encoding=args.encoding)

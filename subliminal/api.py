@@ -5,6 +5,7 @@ import io
 import logging
 import operator
 import os.path
+import babelfish
 from .providers import ProviderManager
 from .subtitle import get_subtitle_path
 
@@ -53,7 +54,7 @@ def download_subtitles(subtitles, provider_configs=None):
 
 
 def download_best_subtitles(videos, languages, providers=None, provider_configs=None, min_score=0,
-                            hearing_impaired=False):
+                            hearing_impaired=False, single=False):
     """Download the best subtitles for `videos` with the given `languages` using the specified `providers`
 
     :param videos: videos to download subtitles for
@@ -66,11 +67,17 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
     :type provider_configs: dict of provider name => provider constructor kwargs or None
     :param int min_score: minimum score for subtitles to download
     :param bool hearing_impaired: download hearing impaired subtitles
+    :param bool single: do not download for videos with an undetermined subtitle language detected
 
     """
     downloaded_subtitles = collections.defaultdict(list)
     with ProviderManager(providers, provider_configs) as pm:
         for video in videos:
+            # filter
+            if single and babelfish.Language('und') in video.subtitle_languages:
+                logger.debug('Skipping video %r: undetermined language found')
+                continue
+
             # list
             logger.info('Listing subtitles for %r', video)
             video_subtitles = pm.list_subtitles(video, languages)
@@ -93,7 +100,7 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
                 if pm.download_subtitle(subtitle):
                     downloaded_languages.add(subtitle.language)
                     downloaded_subtitles[video].append(subtitle)
-                if downloaded_languages == languages:
+                if single or downloaded_languages == languages:
                     logger.debug('All languages downloaded')
                     break
     return downloaded_subtitles

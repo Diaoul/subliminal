@@ -49,7 +49,7 @@ skipping videos that already have subtitles whether they are embedded or not::
     videos = subliminal.scan_videos(['/path/to/video/folder'], subtitles=True, embedded_subtitles=True, age=timedelta(weeks=1))
 
     # download
-    subliminal.download_best_subtitles(videos, {Language('eng'), Language('fra')}, age=timedelta(week=1))
+    subliminal.download_best_subtitles(videos, {Language('eng'), Language('fra')}, age=timedelta(weeks=1))
 
 
 License

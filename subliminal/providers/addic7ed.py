@@ -73,7 +73,7 @@ class Addic7edProvider(Provider):
 
     def initialize(self):
         self.session = requests.Session()
-        self.session.headers = {'User-Agent': 'Subliminal/%s' % __version__}
+        self.session.headers = {'User-Agent': 'Subliminal/%s' % __version__.split('-')[0]}
         # login
         if self.username is not None and self.password is not None:
             logger.debug('Logging in')

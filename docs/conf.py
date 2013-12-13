@@ -50,7 +50,7 @@ copyright = ' '.join(subliminal.__copyright__.split()[1:])
 # built documents.
 #
 # The short X.Y version.
-version = subliminal.__version__
+version = subliminal.__version__.split('-')[0]
 # The full version, including alpha/beta/rc tags.
 release = subliminal.__version__
 

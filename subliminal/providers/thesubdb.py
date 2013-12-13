@@ -34,7 +34,7 @@ class TheSubDBProvider(Provider):
     def initialize(self):
         self.session = requests.Session()
         self.session.headers = {'User-Agent': 'SubDB/1.0 (subliminal/%s; https://github.com/Diaoul/subliminal)' %
-                                __version__}
+                                __version__.split('-')[0]}
 
     def terminate(self):
         self.session.close()

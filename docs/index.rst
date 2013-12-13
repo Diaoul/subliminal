@@ -5,7 +5,7 @@
 
 Subliminal
 ==========
-Release v\ |version|
+Release v\ |release|
 
 Subliminal is a python library to search and download subtitles.
 It comes with an easy to use :abbr:`CLI (command-line interface)` suitable for direct use or cron jobs.

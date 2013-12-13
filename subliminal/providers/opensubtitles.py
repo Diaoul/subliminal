@@ -90,7 +90,7 @@ class OpenSubtitlesProvider(Provider):
 
     def initialize(self):
         try:
-            response = self.server.LogIn('', '', 'eng', 'subliminal v%s' % __version__)
+            response = self.server.LogIn('', '', 'eng', 'subliminal v%s' % __version__.split('-')[0])
         except xmlrpclib.ProtocolError:
             raise ProviderNotAvailable
         if response['status'] != '200 OK':

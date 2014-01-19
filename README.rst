@@ -23,10 +23,22 @@ best matching subtitles. Providers are extensible through a dedicated entry poin
 * TvSubtitles
 
 
+Install
+-------
+Ubuntu
+^^^^^^
+
+Install on the latest version of Ubuntu or Mint::
+
+    $ sudo apt-get install git-core python-pip
+    $ sudo pip install beautifulsoup4 guessit requests enzyme html5lib
+    $ sudo python setup.py install
+
 Usage
 -----
 CLI
 ^^^
+
 Download english subtitles::
 
     $ subliminal -l en -- The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.mp4

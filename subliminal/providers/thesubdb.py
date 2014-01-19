@@ -59,7 +59,7 @@ class TheSubDBProvider(Provider):
         elif r.status_code != 200:
             raise ProviderError('Request failed with status code %d' % r.status_code)
         return [TheSubDBSubtitle(language, hash) for language in
-                {babelfish.Language.fromalpha2(l) for l in r.content.split(',')}]
+                {babelfish.Language.fromalpha2(l) for l in r.content.decode('utf-8').split(',')}]
 
     def list_subtitles(self, video, languages):
         return [s for s in self.query(video.hashes['thesubdb']) if s.language in languages]

@@ -3,7 +3,6 @@ from __future__ import unicode_literals
 import contextlib
 import logging
 import socket
-import xmlrpclib
 import babelfish
 import pkg_resources
 import requests
@@ -17,7 +16,7 @@ logger = logging.getLogger(__name__)
 PROVIDER_ENTRY_POINT = 'subliminal.providers'
 
 #: Available provider names
-PROVIDERS = {entry_point.name.decode('utf-8') for entry_point in pkg_resources.iter_entry_points(PROVIDER_ENTRY_POINT)}
+PROVIDERS = {entry_point.name for entry_point in pkg_resources.iter_entry_points(PROVIDER_ENTRY_POINT)}
 
 
 class Provider(object):
@@ -156,7 +155,7 @@ def get_provider(name):
 
     """
     for entry_point in pkg_resources.iter_entry_points(PROVIDER_ENTRY_POINT):
-        if entry_point.name.decode('utf-8') == name:
+        if entry_point.name == name:
             return entry_point.load()
     raise ValueError('Provider %r not found' % name)
 

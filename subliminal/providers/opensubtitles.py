@@ -4,13 +4,12 @@ import base64
 import logging
 import os
 import re
-import xmlrpclib
 import zlib
 import babelfish
 import guessit
 from . import Provider
 from .. import __version__
-from ..compat import TimeoutTransport
+from ..compat import ServerProxy, TimeoutTransport
 from ..exceptions import ProviderError, AuthenticationError, DownloadLimitExceeded, InvalidSubtitle
 from ..subtitle import Subtitle, decode, fix_line_endings, is_valid_subtitle, compute_guess_matches
 from ..video import Episode, Movie
@@ -86,7 +85,7 @@ class OpenSubtitlesProvider(Provider):
     languages = {babelfish.Language.fromopensubtitles(l) for l in babelfish.get_language_converter('opensubtitles').codes}
 
     def __init__(self):
-        self.server = xmlrpclib.ServerProxy('http://api.opensubtitles.org/xml-rpc', transport=TimeoutTransport(10))
+        self.server = ServerProxy('http://api.opensubtitles.org/xml-rpc', transport=TimeoutTransport(10))
         self.token = None
 
     def initialize(self):

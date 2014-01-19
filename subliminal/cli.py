@@ -7,6 +7,7 @@ import os
 import re
 import sys
 import babelfish
+import xdg.BaseDirectory
 from subliminal import (__version__, cache_region, MutexLock, PROVIDERS, Video, Episode, Movie, scan_videos,
     download_best_subtitles, save_subtitles)
 try:
@@ -15,7 +16,7 @@ except ImportError:
     colorlog = None
 
 
-DEFAULT_CACHE_FILE = os.path.join('~', '.config', 'subliminal.cache.dbm')
+DEFAULT_CACHE_FILE = os.path.join(xdg.BaseDirectory.save_cache_path('subliminal'), 'cli.dbm')
 
 
 def subliminal():

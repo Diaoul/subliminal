@@ -10,8 +10,9 @@ import babelfish
 import guessit
 from . import Provider
 from .. import __version__
-from ..exceptions import ProviderError, ProviderNotAvailable, InvalidSubtitle
-from ..subtitle import Subtitle, decode, is_valid_subtitle, compute_guess_matches
+from ..compat import TimeoutTransport
+from ..exceptions import ProviderError, AuthenticationError, DownloadLimitExceeded, InvalidSubtitle
+from ..subtitle import Subtitle, decode, fix_line_endings, is_valid_subtitle, compute_guess_matches
 from ..video import Episode, Movie
 
 
@@ -85,25 +86,18 @@ class OpenSubtitlesProvider(Provider):
     languages = {babelfish.Language.fromopensubtitles(l) for l in babelfish.get_language_converter('opensubtitles').codes}
 
     def __init__(self):
-        self.server = xmlrpclib.ServerProxy('http://api.opensubtitles.org/xml-rpc')
+        self.server = xmlrpclib.ServerProxy('http://api.opensubtitles.org/xml-rpc', transport=TimeoutTransport(10))
         self.token = None
 
     def initialize(self):
-        try:
-            response = self.server.LogIn('', '', 'eng', 'subliminal v%s' % __version__.split('-')[0])
-        except xmlrpclib.ProtocolError:
-            raise ProviderNotAvailable
-        if response['status'] != '200 OK':
-            raise ProviderError('Login failed with status %r' % response['status'])
+        response = checked(self.server.LogIn('', '', 'eng', 'subliminal v%s' % __version__.split('-')[0]))
         self.token = response['token']
 
     def terminate(self):
-        try:
-            response = self.server.LogOut(self.token)
-        except xmlrpclib.ProtocolError:
-            raise ProviderNotAvailable
-        if response['status'] != '200 OK':
-            raise ProviderError('Logout failed with status %r' % response['status'])
+        checked(self.server.LogOut(self.token))
+
+    def no_operation(self):
+        checked(self.server.NoOperation(self.token))
 
     def query(self, languages, hash=None, size=None, imdb_id=None, query=None):  # @ReservedAssignment
         searches = []
@@ -118,12 +112,7 @@ class OpenSubtitlesProvider(Provider):
         for search in searches:
             search['sublanguageid'] = ','.join(l.opensubtitles for l in languages)
         logger.debug('Searching subtitles %r', searches)
-        try:
-            response = self.server.SearchSubtitles(self.token, searches)
-        except xmlrpclib.ProtocolError:
-            raise ProviderNotAvailable
-        if response['status'] != '200 OK':
-            raise ProviderError('Search failed with status %r' % response['status'])
+        response = checked(self.server.SearchSubtitles(self.token, searches))
         if not response['data']:
             logger.debug('No subtitle found')
             return []
@@ -143,16 +132,71 @@ class OpenSubtitlesProvider(Provider):
                           query=query)
 
     def download_subtitle(self, subtitle):
-        try:
-            response = self.server.DownloadSubtitles(self.token, [subtitle.id])
-        except xmlrpclib.ProtocolError:
-            raise ProviderNotAvailable
-        if response['status'] != '200 OK':
-            raise ProviderError('Download failed with status %r' % response['status'])
+        response = checked(self.server.DownloadSubtitles(self.token, [subtitle.id]))
         if not response['data']:
             raise ProviderError('Nothing to download')
         subtitle_bytes = zlib.decompress(base64.b64decode(response['data'][0]['data']), 47)
-        subtitle_content = decode(subtitle_bytes, subtitle.language)
+        subtitle_content = fix_line_endings(decode(subtitle_bytes, subtitle.language))
         if not is_valid_subtitle(subtitle_content):
             raise InvalidSubtitle
         subtitle.content = subtitle_content
+
+
+class OpenSubtitlesError(ProviderError):
+    """Base class for non-generic :class:`OpenSubtitlesProvider` exceptions"""
+
+
+class Unauthorized(OpenSubtitlesError, AuthenticationError):
+    """Exception raised when status is '401 Unauthorized'"""
+
+
+class NoSession(OpenSubtitlesError, AuthenticationError):
+    """Exception raised when status is '406 No session'"""
+
+
+class DownloadLimitReached(OpenSubtitlesError, DownloadLimitExceeded):
+    """Exception raised when status is '407 Download limit reached'"""
+
+
+class InvalidImdbid(OpenSubtitlesError):
+    """Exception raised when status is '413 Invalid ImdbID'"""
+
+
+class UnknownUserAgent(OpenSubtitlesError, AuthenticationError):
+    """Exception raised when status is '414 Unknown User Agent'"""
+
+
+class DisabledUserAgent(OpenSubtitlesError, AuthenticationError):
+    """Exception raised when status is '415 Disabled user agent'"""
+
+
+class ServiceUnavailable(OpenSubtitlesError):
+    """Exception raised when status is '503 Service Unavailable'"""
+
+
+def checked(response):
+    """Check a response status before returning it
+
+    :param response: a response from a XMLRPC call to OpenSubtitles
+    :return: the response
+    :raise: :class:`OpenSubtitlesError`
+
+    """
+    status_code = int(response['status'][:3])
+    if status_code == 401:
+        raise Unauthorized
+    if status_code == 406:
+        raise NoSession
+    if status_code == 407:
+        raise DownloadLimitReached
+    if status_code == 413:
+        raise InvalidImdbid
+    if status_code == 414:
+        raise UnknownUserAgent
+    if status_code == 415:
+        raise DisabledUserAgent
+    if status_code == 503:
+        raise ServiceUnavailable
+    if status_code != 200:
+        raise OpenSubtitlesError(response['status'])
+    return response

@@ -56,5 +56,5 @@ class MutexLock(AbstractFileLock):
         return self.mutex.release_write_lock()
 
 
-# : The dogpile.cache region (long-lived)
+#: The dogpile.cache region
 region = make_region(function_key_generator=subliminal_key_generator)

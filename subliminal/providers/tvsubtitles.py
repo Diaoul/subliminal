@@ -10,8 +10,8 @@ import requests
 from . import Provider
 from .. import __version__
 from ..cache import region, SHOW_EXPIRATION_TIME, EPISODE_EXPIRATION_TIME
-from ..exceptions import InvalidSubtitle, ProviderNotAvailable, ProviderError
-from ..subtitle import Subtitle, decode, is_valid_subtitle
+from ..exceptions import InvalidSubtitle, ProviderError
+from ..subtitle import Subtitle, decode, fix_line_endings, is_valid_subtitle
 from ..video import Episode
 
 
@@ -84,15 +84,11 @@ class TVsubtitlesProvider(Provider):
         :param string method: method of the request
         :return: the response
         :rtype: :class:`bs4.BeautifulSoup`
-        :raise: :class:`~subliminal.exceptions.ProviderNotAvailable`
 
         """
-        try:
-            r = self.session.request(method, self.server + url, params=params, data=data, timeout=10)
-        except requests.Timeout:
-            raise ProviderNotAvailable('Timeout after 10 seconds')
+        r = self.session.request(method, self.server + url, params=params, data=data, timeout=10)
         if r.status_code != 200:
-            raise ProviderNotAvailable('Request failed with status code %d' % r.status_code)
+            raise ProviderError('Request failed with status code %d' % r.status_code)
         return bs4.BeautifulSoup(r.content, ['permissive'])
 
     @region.cache_on_arguments(expiration_time=SHOW_EXPIRATION_TIME)
@@ -172,18 +168,15 @@ class TVsubtitlesProvider(Provider):
         return [s for s in self.query(video.series, video.season, video.episode, video.year) if s.language in languages]
 
     def download_subtitle(self, subtitle):
-        try:
-            r = self.session.get(self.server + '/download-{subtitle_id}.html'.format(subtitle_id=subtitle.id),
-                                 timeout=10)
-        except requests.Timeout:
-            raise ProviderNotAvailable('Timeout after 10 seconds')
+        r = self.session.get(self.server + '/download-{subtitle_id}.html'.format(subtitle_id=subtitle.id),
+                             timeout=10)
         if r.status_code != 200:
-            raise ProviderNotAvailable('Request failed with status code %d' % r.status_code)
+            raise ProviderError('Request failed with status code %d' % r.status_code)
         with zipfile.ZipFile(io.BytesIO(r.content)) as zf:
             if len(zf.namelist()) > 1:
                 raise ProviderError('More than one file to unzip')
             subtitle_bytes = zf.read(zf.namelist()[0])
-        subtitle_content = decode(subtitle_bytes, subtitle.language)
+        subtitle_content = fix_line_endings(decode(subtitle_bytes, subtitle.language))
         if not is_valid_subtitle(subtitle_content):
             raise InvalidSubtitle
         subtitle.content = subtitle_content

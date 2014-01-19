@@ -5,8 +5,8 @@ import babelfish
 import requests
 from . import Provider
 from .. import __version__
-from ..exceptions import InvalidSubtitle, ProviderNotAvailable, ProviderError
-from ..subtitle import Subtitle, decode, is_valid_subtitle
+from ..exceptions import InvalidSubtitle, ProviderError
+from ..subtitle import Subtitle, decode, fix_line_endings, is_valid_subtitle
 
 
 logger = logging.getLogger(__name__)
@@ -45,14 +45,9 @@ class TheSubDBProvider(Provider):
         :param params: params of the request
         :return: the response
         :rtype: :class:`requests.Response`
-        :raise: :class:`~subliminal.exceptions.ProviderNotAvailable`
 
         """
-        try:
-            r = self.session.get('http://api.thesubdb.com', params=params, timeout=10)
-        except requests.Timeout:
-            raise ProviderNotAvailable('Timeout after 10 seconds')
-        return r
+        return self.session.get('http://api.thesubdb.com', params=params, timeout=10)
 
     def query(self, hash):  # @ReservedAssignment
         params = {'action': 'search', 'hash': hash}
@@ -74,7 +69,7 @@ class TheSubDBProvider(Provider):
         r = self.get(params)
         if r.status_code != 200:
             raise ProviderError('Request failed with status code %d' % r.status_code)
-        subtitle_content = decode(r.content, subtitle.language)
+        subtitle_content = fix_line_endings(decode(r.content, subtitle.language))
         if not is_valid_subtitle(subtitle_content):
             raise InvalidSubtitle
         subtitle.content = subtitle_content

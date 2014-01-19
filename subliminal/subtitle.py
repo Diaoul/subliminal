@@ -200,3 +200,14 @@ def decode(content, language):
     # fallback on charade
     logger.warning('Could not decode content with encodings %r', encodings)
     return content.decode(charade.detect(content)['encoding'], 'replace')
+
+
+def fix_line_endings(content):
+    """Fix line ending of `content` by changing it to \n
+
+    :param string content: content of the subtitle
+    :return: the content with fixed line endings
+    :rtype: string
+
+    """
+    return content.replace('\r\n', '\n').replace('\r', '\n')

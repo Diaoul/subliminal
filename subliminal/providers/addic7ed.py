@@ -7,8 +7,8 @@ import requests
 from . import Provider
 from .. import __version__
 from ..cache import region, SHOW_EXPIRATION_TIME
-from ..exceptions import ProviderConfigurationError, ProviderNotAvailable, InvalidSubtitle
-from ..subtitle import Subtitle, decode, is_valid_subtitle
+from ..exceptions import ConfigurationError, AuthenticationError, DownloadLimitExceeded, ProviderError, InvalidSubtitle
+from ..subtitle import Subtitle, decode, fix_line_endings, is_valid_subtitle
 from ..video import Episode
 
 
@@ -66,7 +66,7 @@ class Addic7edProvider(Provider):
 
     def __init__(self, username=None, password=None):
         if username is not None and password is None or username is None and password is not None:
-            raise ProviderConfigurationError('Username and password must be specified')
+            raise ConfigurationError('Username and password must be specified')
         self.username = username
         self.password = password
         self.logged_in = False
@@ -78,26 +78,20 @@ class Addic7edProvider(Provider):
         if self.username is not None and self.password is not None:
             logger.debug('Logging in')
             data = {'username': self.username, 'password': self.password, 'Submit': 'Log in'}
-            try:
-                r = self.session.post(self.server + '/dologin.php', data, timeout=10, allow_redirects=False)
-            except requests.Timeout:
-                raise ProviderNotAvailable('Timeout after 10 seconds')
+            r = self.session.post(self.server + '/dologin.php', data, timeout=10, allow_redirects=False)
             if r.status_code == 302:
                 logger.info('Logged in')
                 self.logged_in = True
             else:
-                logger.error('Failed to login')
+                raise AuthenticationError(self.username)
 
     def terminate(self):
         # logout
         if self.logged_in:
-            try:
-                r = self.session.get(self.server + '/logout.php', timeout=10)
-                logger.info('Logged out')
-            except requests.Timeout:
-                raise ProviderNotAvailable('Timeout after 10 seconds')
+            r = self.session.get(self.server + '/logout.php', timeout=10)
+            logger.info('Logged out')
             if r.status_code != 200:
-                raise ProviderNotAvailable('Request failed with status code %d' % r.status_code)
+                raise ProviderError('Request failed with status code %d' % r.status_code)
         self.session.close()
 
     def get(self, url, params=None):
@@ -107,15 +101,11 @@ class Addic7edProvider(Provider):
         :param params: params of the request
         :return: the response
         :rtype: :class:`bs4.BeautifulSoup`
-        :raise: :class:`~subliminal.exceptions.ProviderNotAvailable`
 
         """
-        try:
-            r = self.session.get(self.server + url, params=params, timeout=10)
-        except requests.Timeout:
-            raise ProviderNotAvailable('Timeout after 10 seconds')
+        r = self.session.get(self.server + url, params=params, timeout=10)
         if r.status_code != 200:
-            raise ProviderNotAvailable('Request failed with status code %d' % r.status_code)
+            raise ProviderError('Request failed with status code %d' % r.status_code)
         return bs4.BeautifulSoup(r.content, ['permissive'])
 
     @region.cache_on_arguments(expiration_time=SHOW_EXPIRATION_TIME)
@@ -195,16 +185,12 @@ class Addic7edProvider(Provider):
                 if s.language in languages and s.episode == video.episode]
 
     def download_subtitle(self, subtitle):
-        try:
-            r = self.session.get(self.server + subtitle.download_link, timeout=10,
-                                 headers={'Referer': subtitle.page_link})
-        except requests.Timeout:
-            raise ProviderNotAvailable('Timeout after 10 seconds')
+        r = self.session.get(self.server + subtitle.download_link, timeout=10, headers={'Referer': subtitle.page_link})
         if r.status_code != 200:
-            raise ProviderNotAvailable('Request failed with status code %d' % r.status_code)
+            raise ProviderError('Request failed with status code %d' % r.status_code)
         if r.headers['Content-Type'] == 'text/html':
-            raise ProviderNotAvailable('Download limit exceeded')
-        subtitle_content = decode(r.content, subtitle.language)
+            raise DownloadLimitExceeded
+        subtitle_content = fix_line_endings(decode(r.content, subtitle.language))
         if not is_valid_subtitle(subtitle_content):
             raise InvalidSubtitle
         subtitle.content = subtitle_content

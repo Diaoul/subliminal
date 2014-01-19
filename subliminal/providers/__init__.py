@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+import contextlib
+import logging
+import socket
+import xmlrpclib
 import babelfish
 import pkg_resources
-import logging
-from ..exceptions import ProviderNotAvailable, InvalidSubtitle
+import requests
+from ..exceptions import InvalidSubtitle
 from ..video import Episode, Movie
 
 
@@ -224,11 +228,12 @@ class ProviderManager(object):
                 provider_subtitles = provider.list_subtitles(video, provider_languages)
                 logger.info('Found %d subtitles', len(provider_subtitles))
                 subtitles.extend(provider_subtitles)
-            except ProviderNotAvailable:
-                logger.warning('Provider %r is not available, discarding it', provider_name)
+            except (requests.exceptions.Timeout, socket.timeout):
+                logger.warning('Provider %r timed out, discarding it', provider_name)
                 self.discarded_providers.add(provider_name)
             except:
-                logger.exception('Unexpected error in provider %r', provider_name)
+                logger.exception('Unexpected error in provider %r, discarding it', provider_name)
+                self.discarded_providers.add(provider_name)
         return subtitles
 
     def download_subtitle(self, subtitle):
@@ -247,13 +252,14 @@ class ProviderManager(object):
             provider = self.get_initialized_provider(subtitle.provider_name)
             provider.download_subtitle(subtitle)
             return True
-        except ProviderNotAvailable:
-            logger.warning('Provider %r is not available, discarding it', subtitle.provider_name)
+        except (requests.exceptions.Timeout, socket.timeout):
+            logger.warning('Provider %r timed out, discarding it', subtitle.provider_name)
             self.discarded_providers.add(subtitle.provider_name)
         except InvalidSubtitle:
             logger.warning('Invalid subtitle')
         except:
-            logger.exception('Unexpected error in provider %r', subtitle.provider_name)
+            logger.exception('Unexpected error in provider %r, discarding it', subtitle.provider_name)
+            self.discarded_providers.add(subtitle.provider_name)
         return False
 
     def terminate(self):
@@ -261,7 +267,7 @@ class ProviderManager(object):
         for (provider_name, provider) in self.initialized_providers.items():
             try:
                 provider.terminate()
-            except ProviderNotAvailable:
-                logger.warning('Provider %r is not available, unable to terminate', provider_name)
+            except (requests.exceptions.Timeout, socket.timeout):
+                logger.warning('Provider %r timed out, unable to terminate', provider_name)
             except:
                 logger.exception('Unexpected error in provider %r', provider_name)

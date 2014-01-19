@@ -14,6 +14,9 @@ Changelog
 * Add a fromname classmethod to Video, Episode and Movie classes
 * Add year to Episode class to differentiate two series with the same name
 * Remove dead BierDopje provider
+* Improve exceptions
+* Fix line endings of subtitles
+* Add timeout support for XMLRPC providers
 * Update unittests
 
 

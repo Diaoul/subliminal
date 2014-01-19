@@ -416,7 +416,7 @@ class TVsubtitlesProviderTestCase(ProviderTestCase):
     def test_query_episode_1(self):
         video = EPISODES[1]
         languages = {Language('fra'), Language('ell'), Language('ron'), Language('eng'), Language('hun'),
-                     Language('por'), Language('por', 'BR')}
+                     Language('por'), Language('por', 'BR'), Language('jpn')}
         matches = {frozenset(['series', 'episode', 'resolution', 'season', 'year']),
                    frozenset(['series', 'episode', 'season', 'video_codec', 'year']),
                    frozenset(['series', 'episode', 'season', 'year'])}

@@ -370,7 +370,7 @@ def hash_opensubtitles(video_path):
     :rtype: string
 
     """
-    bytesize = struct.calcsize(b'q')
+    bytesize = struct.calcsize(b'<q')
     with open(video_path, 'rb') as f:
         filesize = os.path.getsize(video_path)
         filehash = filesize

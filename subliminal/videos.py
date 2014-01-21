@@ -246,7 +246,7 @@ def hash_opensubtitles(path):
     :rtype: string
 
     """
-    longlongformat = 'q'  # long long
+    longlongformat = '<q'  # long long
     bytesize = struct.calcsize(longlongformat)
     with open(path, 'rb') as f:
         filesize = os.path.getsize(path)

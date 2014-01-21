@@ -1,103 +1,135 @@
 # -*- coding: utf-8 -*-
-# Copyright 2011-2012 Antoine Bertin <diaoulael@gmail.com>
-#
-# This file is part of subliminal.
-#
-# subliminal is free software; you can redistribute it and/or modify it under
-# the terms of the GNU Lesser General Public License as published by
-# the Free Software Foundation; either version 3 of the License, or
-# (at your option) any later version.
-#
-# subliminal is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU Lesser General Public License for more details.
-#
-# You should have received a copy of the GNU Lesser General Public License
-# along with subliminal.  If not, see <http://www.gnu.org/licenses/>.
-from .core import (get_defaults, create_list_tasks, consume_task,
-    create_download_tasks, group_by_video, key_subtitles)
-from .language import language_set, language_list
+from __future__ import unicode_literals
+import collections
+import io
 import logging
+import operator
+import os.path
+import babelfish
+from .providers import ProviderManager
+from .subtitle import get_subtitle_path
 
 
-__all__ = ['consume_task_list', 'list_subtitles', 'download_subtitles']
 logger = logging.getLogger(__name__)
 
 
-def consume_task_list(tasks):
-    """Consume the given list of tasks, single-threaded mode.
+def list_subtitles(videos, languages, providers=None, provider_configs=None):
+    """List subtitles for `videos` with the given `languages` using the specified `providers`
 
-    :param tasks: the list of tasks to consume
-    :type tasks: list of :class:`~subliminal.tasks.ListTask` or :class:`~subliminal.tasks.DownloadTask`
-    :return: resulting subtitles (either list of subtitles to download or downloaded subtitles, depending on the tasks type
-    :rtype: dict of :class:`~subliminal.videos.Video` => [:class:`~subliminal.subtitles.ResultSubtitle`]
-
-    """
-    results = []
-    service_instances = {}
-    for task in tasks:
-        try:
-            result = consume_task(task, service_instances)
-            results.append((task.video, result))
-        except:
-            logger.error(u'Error consuming task %r' % task, exc_info=True)
-    for service_instance in service_instances.itervalues():
-        service_instance.terminate()
-    return group_by_video(results)
-
-
-def list_subtitles(paths, languages=None, services=None, force=True, multi=False, cache_dir=None, max_depth=3, scan_filter=None):
-    """List subtitles in given paths according to the criteria
-
-    :param paths: path(s) to video file or folder
-    :type paths: unicode or list of unicode
-    :param languages: languages to search for, in preferred order
-    :type languages: list of :class:`~subliminal.language.Language` or string
-    :param list services: services to use for the search, in preferred order
-    :param bool force: force searching for subtitles even if some are detected
-    :param bool multi: search multiple languages for the same video
-    :param string cache_dir: path to the cache directory to use
-    :param int max_depth: maximum depth for scanning entries
-    :param function scan_filter: filter function that takes a path as argument and returns a boolean indicating whether it has to be filtered out (``True``) or not (``False``)
+    :param videos: videos to list subtitles for
+    :type videos: set of :class:`~subliminal.video.Video`
+    :param languages: languages of subtitles to search for
+    :type languages: set of :class:`babelfish.Language`
+    :param providers: providers to use, if not all
+    :type providers: list of string or None
+    :param provider_configs: configuration for providers
+    :type provider_configs: dict of provider name => provider constructor kwargs or None
     :return: found subtitles
-    :rtype: dict of :class:`~subliminal.videos.Video` => [:class:`~subliminal.subtitles.ResultSubtitle`]
+    :rtype: dict of :class:`~subliminal.video.Video` => [:class:`~subliminal.subtitle.Subtitle`]
 
     """
-    paths, languages, services, _ = get_defaults(paths, languages, services, None,
-                                                 languages_as=language_set)
-    tasks = create_list_tasks(paths, languages, services, force, multi, cache_dir, max_depth, scan_filter)
-    return consume_task_list(tasks)
+    subtitles = collections.defaultdict(list)
+    with ProviderManager(providers, provider_configs) as pm:
+        for video in videos:
+            logger.info('Listing subtitles for %r', video)
+            video_subtitles = pm.list_subtitles(video, languages)
+            logger.info('Found %d subtitles total', len(video_subtitles))
+            subtitles[video].extend(video_subtitles)
+    return subtitles
 
 
-def download_subtitles(paths, languages=None, services=None, force=True, multi=False, cache_dir=None, max_depth=3, scan_filter=None, order=None):
-    """Download subtitles in given paths according to the criteria
+def download_subtitles(subtitles, provider_configs=None):
+    """Download subtitles
 
-    :param paths: path(s) to video file or folder
-    :type paths: unicode or list of unicode
-    :param languages: languages to search for, in preferred order
-    :type languages: list of :class:`~subliminal.language.Language` or string
-    :param list services: services to use for the search, in preferred order
-    :param bool force: force searching for subtitles even if some are detected
-    :param bool multi: search multiple languages for the same video
-    :param string cache_dir: path to the cache directory to use
-    :param int max_depth: maximum depth for scanning entries
-    :param function scan_filter: filter function that takes a path as argument and returns a boolean indicating whether it has to be filtered out (``True``) or not (``False``)
-    :param order: preferred order for subtitles sorting
-    :type list: list of :data:`~subliminal.core.LANGUAGE_INDEX`, :data:`~subliminal.core.SERVICE_INDEX`, :data:`~subliminal.core.SERVICE_CONFIDENCE`, :data:`~subliminal.core.MATCHING_CONFIDENCE`
-    :return: downloaded subtitles
-    :rtype: dict of :class:`~subliminal.videos.Video` => [:class:`~subliminal.subtitles.ResultSubtitle`]
-
-    .. note::
-
-        If you use ``multi=True``, :data:`~subliminal.core.LANGUAGE_INDEX` has to be the first item of the ``order`` list
-        or you might get unexpected results.
+    :param subtitles: subtitles to download
+    :type subtitles: list of :class:`~subliminal.subtitle.Subtitle`
+    :param provider_configs: configuration for providers
+    :type provider_configs: dict of provider name => provider constructor kwargs or None
 
     """
-    paths, languages, services, order = get_defaults(paths, languages, services, order,
-                                                     languages_as=language_list)
-    subtitles_by_video = list_subtitles(paths, languages, services, force, multi, cache_dir, max_depth, scan_filter)
-    for video, subtitles in subtitles_by_video.iteritems():
-        subtitles.sort(key=lambda s: key_subtitles(s, video, languages, services, order), reverse=True)
-    tasks = create_download_tasks(subtitles_by_video, languages, multi)
-    return consume_task_list(tasks)
+    with ProviderManager(provider_configs=provider_configs) as pm:
+        for subtitle in subtitles:
+            logger.info('Downloading subtitle %r', subtitle)
+            pm.download_subtitle(subtitle)
+
+
+def download_best_subtitles(videos, languages, providers=None, provider_configs=None, min_score=0,
+                            hearing_impaired=False, single=False):
+    """Download the best subtitles for `videos` with the given `languages` using the specified `providers`
+
+    :param videos: videos to download subtitles for
+    :type videos: set of :class:`~subliminal.video.Video`
+    :param languages: languages of subtitles to download
+    :type languages: set of :class:`babelfish.Language`
+    :param providers: providers to use for the search, if not all
+    :type providers: list of string or None
+    :param provider_configs: configuration for providers
+    :type provider_configs: dict of provider name => provider constructor kwargs or None
+    :param int min_score: minimum score for subtitles to download
+    :param bool hearing_impaired: download hearing impaired subtitles
+    :param bool single: do not download for videos with an undetermined subtitle language detected
+
+    """
+    downloaded_subtitles = collections.defaultdict(list)
+    with ProviderManager(providers, provider_configs) as pm:
+        for video in videos:
+            # filter
+            if single and babelfish.Language('und') in video.subtitle_languages:
+                logger.debug('Skipping video %r: undetermined language found')
+                continue
+
+            # list
+            logger.info('Listing subtitles for %r', video)
+            video_subtitles = pm.list_subtitles(video, languages)
+            logger.info('Found %d subtitles total', len(video_subtitles))
+
+            # download
+            downloaded_languages = set()
+            for subtitle, score in sorted([(s, s.compute_score(video)) for s in video_subtitles],
+                                          key=operator.itemgetter(1), reverse=True):
+                if score < min_score:
+                    logger.info('No subtitle with score >= %d', min_score)
+                    break
+                if subtitle.hearing_impaired != hearing_impaired:
+                    logger.debug('Skipping subtitle: hearing impaired != %r', hearing_impaired)
+                    continue
+                if subtitle.language in downloaded_languages:
+                    logger.debug('Skipping subtitle: %r already downloaded', subtitle.language)
+                    continue
+                logger.info('Downloading subtitle %r with score %d', subtitle, score)
+                if pm.download_subtitle(subtitle):
+                    downloaded_languages.add(subtitle.language)
+                    downloaded_subtitles[video].append(subtitle)
+                if single or downloaded_languages == languages:
+                    logger.debug('All languages downloaded')
+                    break
+    return downloaded_subtitles
+
+
+def save_subtitles(subtitles, single=False, directory=None, encoding='utf-8'):
+    """Save subtitles on disk next to the video or in a specific folder if `folder_path` is specified
+
+    :param bool single: download with .srt extension if ``True``, add language identifier otherwise
+    :param directory: path to directory where to save the subtitles, if any
+    :type directory: string or None
+    :param string encoding: subtitles encoding
+
+    """
+    for video, video_subtitles in subtitles.items():
+        saved_languages = set()
+        for video_subtitle in video_subtitles:
+            if video_subtitle.content is None:
+                logger.debug('Skipping subtitle %r: no content', video_subtitle)
+                continue
+            if video_subtitle.language in saved_languages:
+                logger.debug('Skipping subtitle %r: language already saved', video_subtitle)
+                continue
+            subtitle_path = get_subtitle_path(video.name, None if single else video_subtitle.language)
+            if directory is not None:
+                subtitle_path = os.path.join(directory, os.path.split(subtitle_path)[1])
+            logger.info('Saving %r to %r', video_subtitle, subtitle_path)
+            with io.open(subtitle_path, 'w', encoding=encoding) as f:
+                f.write(video_subtitle.content)
+            saved_languages.add(video_subtitle.language)
+            if single:
+                break

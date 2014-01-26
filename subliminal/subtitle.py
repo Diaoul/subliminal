@@ -187,6 +187,8 @@ def decode(content, language):
         encodings.append('shift-jis')
     elif language.alpha3 == 'ara':
         encodings.append('windows-1256')
+    elif language.alpha3 == 'heb':
+        encodings.append('windows-1255')
     else:
         encodings.append('latin-1')
 

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+from __future__ import unicode_literals, division
 import datetime
 import hashlib
 import logging
@@ -376,13 +376,13 @@ def hash_opensubtitles(video_path):
         filehash = filesize
         if filesize < 65536 * 2:
             return None
-        for _ in range(65536 / bytesize):
+        for _ in range(65536 // bytesize):
             filebuffer = f.read(bytesize)
             (l_value,) = struct.unpack(b'q', filebuffer)
             filehash += l_value
             filehash = filehash & 0xFFFFFFFFFFFFFFFF  # to remain as 64bit number
         f.seek(max(0, filesize - 65536), 0)
-        for _ in range(65536 / bytesize):
+        for _ in range(65536 // bytesize):
             filebuffer = f.read(bytesize)
             (l_value,) = struct.unpack(b'q', filebuffer)
             filehash += l_value
@@ -406,4 +406,4 @@ def hash_thesubdb(video_path):
         data = f.read(readsize)
         f.seek(-readsize, os.SEEK_END)
         data += f.read(readsize)
-    return hashlib.md5(data).hexdigest().decode('ascii')
+    return hashlib.md5(data).hexdigest()

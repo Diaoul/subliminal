@@ -41,7 +41,7 @@ def subliminal():
     filtering_group = parser.add_argument_group('filtering')
     filtering_group.add_argument('-p', '--providers', nargs='+', metavar='PROVIDER',
                                  help='providers to use (%s)' % ', '.join(PROVIDERS))
-    filtering_group.add_argument('-m', '--min-score', type=int,
+    filtering_group.add_argument('-m', '--min-score', type=int, default=0,
                                  help='minimum score for subtitles (0-%d for episodes, 0-%d for movies)'
                                  % (Episode.scores['hash'], Movie.scores['hash']))
     filtering_group.add_argument('-a', '--age', help='download subtitles for videos newer than AGE e.g. 12h, 1w2d')
@@ -77,7 +77,8 @@ def subliminal():
 
     # parse paths
     try:
-        args.paths = [os.path.abspath(os.path.expanduser(p.decode('utf-8'))) for p in args.paths]
+        args.paths = [os.path.abspath(os.path.expanduser(p.decode('utf-8') if isinstance(p, bytes) else p))
+                      for p in args.paths]
     except UnicodeDecodeError:
         parser.error('argument paths: encodings is not utf-8: %r' % args.paths)
 

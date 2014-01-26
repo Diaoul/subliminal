@@ -13,6 +13,7 @@ from ..video import Episode
 
 
 logger = logging.getLogger(__name__)
+babelfish.language_converters.register('addic7ed = subliminal.converters.addic7ed:Addic7edConverter')
 
 
 class Addic7edSubtitle(Subtitle):

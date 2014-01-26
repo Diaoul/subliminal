@@ -17,6 +17,7 @@ from ..video import Episode, Movie
 
 
 logger = logging.getLogger(__name__)
+babelfish.language_converters.register('podnapisi = subliminal.converters.podnapisi:PodnapisiConverter')
 
 
 class PodnapisiSubtitle(Subtitle):
@@ -65,7 +66,7 @@ class PodnapisiSubtitle(Subtitle):
 
 
 class PodnapisiProvider(Provider):
-    languages = {babelfish.Language.frompodnapisi(l) for l in babelfish.get_language_converter('podnapisi').codes}
+    languages = {babelfish.Language.frompodnapisi(l) for l in babelfish.language_converters['podnapisi'].codes}
     video_types = (Episode, Movie)
     server = 'http://simple.podnapisi.net'
     link_re = re.compile('^.*(?P<link>/ppodnapisi/download/i/\d+/k/.*$)')

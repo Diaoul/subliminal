@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from babelfish import LanguageReverseConverter, get_language_converter
+from babelfish import LanguageReverseConverter, language_converters
 
 
 class TVsubtitlesConverter(LanguageReverseConverter):
     def __init__(self):
-        self.alpha2_converter = get_language_converter('alpha2')
+        self.alpha2_converter = language_converters['alpha2']
         self.from_tvsubtitles = {'br': ('por', 'BR'), 'ua': ('ukr',), 'gr': ('ell',), 'cn': ('zho',), 'jp': ('jpn',),
                                  'cz': ('ces',)}
         self.to_tvsubtitles = {v: k for k, v in self.from_tvsubtitles}

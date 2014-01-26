@@ -16,6 +16,7 @@ from ..video import Episode
 
 
 logger = logging.getLogger(__name__)
+babelfish.language_converters.register('tvsubtitles = subliminal.converters.tvsubtitles:TVsubtitlesConverter')
 
 
 class TVsubtitlesSubtitle(Subtitle):

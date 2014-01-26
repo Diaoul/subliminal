@@ -30,10 +30,7 @@ setup(name='subliminal',
                                  'opensubtitles = subliminal.providers.opensubtitles:OpenSubtitlesProvider',
                                  'podnapisi = subliminal.providers.podnapisi:PodnapisiProvider',
                                  'thesubdb = subliminal.providers.thesubdb:TheSubDBProvider',
-                                 'tvsubtitles = subliminal.providers.tvsubtitles:TVsubtitlesProvider'],
-        'babelfish.language_converters': ['addic7ed = subliminal.converters.addic7ed:Addic7edConverter',
-                                          'podnapisi = subliminal.converters.podnapisi:PodnapisiConverter',
-                                          'tvsubtitles = subliminal.converters.tvsubtitles:TVsubtitlesConverter']
+                                 'tvsubtitles = subliminal.providers.tvsubtitles:TVsubtitlesProvider']
     },
     install_requires=open('requirements.txt').readlines(),
     test_suite='subliminal.tests.suite')

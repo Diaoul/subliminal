@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from babelfish import LanguageReverseConverter, get_language_converter
+from babelfish import LanguageReverseConverter, language_converters
 
 
 class Addic7edConverter(LanguageReverseConverter):
     def __init__(self):
-        self.name_converter = get_language_converter('name')
+        self.name_converter = language_converters['name']
         self.from_addic7ed = {'Català': ('cat',), 'Chinese (Simplified)': ('zho',), 'Chinese (Traditional)': ('zho',),
                               'Euskera': ('eus',), 'Galego': ('glg',), 'Greek': ('ell',), 'Malay': ('msa',),
                               'Portuguese (Brazilian)': ('por', 'BR'), 'Serbian (Cyrillic)': ('srp', None, 'Cyrl'),

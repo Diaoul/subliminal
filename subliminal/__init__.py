@@ -12,6 +12,6 @@ from .exceptions import Error, ProviderError
 from .providers import PROVIDERS, Provider, get_provider, ProviderManager
 from .subtitle import Subtitle
 from .video import VIDEO_EXTENSIONS, SUBTITLE_EXTENSIONS, Video, Episode, Movie, scan_videos, scan_video
-
+from .convert import convert_videos
 
 logging.getLogger(__name__).addHandler(logging.NullHandler())

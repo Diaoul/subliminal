@@ -4,19 +4,13 @@ import contextlib
 import logging
 import socket
 import babelfish
-import pkg_resources
+from pkg_resources import iter_entry_points, EntryPoint
 import requests
 from ..exceptions import InvalidSubtitle
 from ..video import Episode, Movie
 
 
 logger = logging.getLogger(__name__)
-
-#: Entry point for the providers
-PROVIDER_ENTRY_POINT = 'subliminal.providers'
-
-#: Available provider names
-PROVIDERS = {entry_point.name for entry_point in pkg_resources.iter_entry_points(PROVIDER_ENTRY_POINT)}
 
 
 class Provider(object):
@@ -145,25 +139,98 @@ class Provider(object):
         return '<%s [%r]>' % (self.__class__.__name__, self.video_types)
 
 
-def get_provider(name):
-    """Get a :class:`Provider` class by its name from the :data:`PROVIDER_ENTRY_POINT` entry point
+class ProviderManager(object):
+    """Manager for providers behaving like a dict with lazy loading
 
-    :param string name: name of the provider
-    :return: the matching :class:`Provider`
-    :rtype: :class:`Provider` class
-    :raise: ValueError if the :class:`Provider` is not found
+    Loading is done in this order:
+
+    * Entry point providers
+    * Registered providers
+
+    .. attribute:: entry_point
+
+        The entry point where to look for providers
 
     """
-    for entry_point in pkg_resources.iter_entry_points(PROVIDER_ENTRY_POINT):
-        if entry_point.name == name:
-            return entry_point.load()
-    raise ValueError('Provider %r not found' % name)
+    entry_point = 'subliminal.providers'
+
+    def __init__(self):
+        #: Registered providers with entry point syntax
+        self.registered_providers = ['addic7ed = subliminal.providers.addic7ed:Addic7edProvider',
+                                     'opensubtitles = subliminal.providers.opensubtitles:OpenSubtitlesProvider',
+                                     'podnapisi = subliminal.providers.podnapisi:PodnapisiProvider',
+                                     'thesubdb = subliminal.providers.thesubdb:TheSubDBProvider',
+                                     'tvsubtitles = subliminal.providers.tvsubtitles:TVsubtitlesProvider']
+
+        #: Loaded providers
+        self.providers = {}
+
+    @property
+    def available_providers(self):
+        """Available providers"""
+        available_providers = set(self.providers.keys())
+        available_providers.update([ep.name for ep in iter_entry_points(self.entry_point)])
+        available_providers.update([EntryPoint.parse(c).name for c in self.registered_providers])
+        return available_providers
+
+    def __getitem__(self, name):
+        """Get a provider, lazy loading it if necessary"""
+        if name in self.providers:
+            return self.providers[name]
+        for ep in iter_entry_points(self.entry_point):
+            if ep.name == name:
+                self.providers[ep.name] = ep.load()
+                return self.providers[ep.name]
+        for ep in (EntryPoint.parse(c) for c in self.registered_providers):
+            if ep.name == name:
+                self.providers[ep.name] = ep.load(require=False)
+                return self.providers[ep.name]
+        raise KeyError(name)
+
+    def __setitem__(self, name, provider):
+        """Load a provider"""
+        self.providers[name] = provider
+
+    def __delitem__(self, name):
+        """Unload a provider"""
+        del self.providers[name]
+
+    def __iter__(self):
+        """Iterator over loaded providers"""
+        return iter(self.providers)
+
+    def register(self, entry_point):
+        """Register a provider
+
+        :param string entry_point: provider to register (entry point syntax)
+        :raise: ValueError if already registered
+
+        """
+        if entry_point in self.registered_providers:
+            raise ValueError('Entry point \'%s\' already registered' % entry_point)
+        entry_point_name = EntryPoint.parse(entry_point).name
+        if entry_point_name in self.available_providers:
+            raise ValueError('An entry point with name \'%s\' already registered' % entry_point_name)
+        self.registered_providers.insert(0, entry_point)
+
+    def unregister(self, entry_point):
+        """Unregister a provider
+
+        :param string entry_point: provider to unregister (entry point syntax)
+
+        """
+        self.registered_providers.remove(entry_point)
+
+    def __contains__(self, name):
+        return name in self.providers
+
+provider_manager = ProviderManager()
 
 
-class ProviderManager(object):
-    """A :class:`ProviderManager` makes the :class:`Provider` API available for a set of :class:`Provider`
+class ProviderPool(object):
+    """A pool of providers with the same API as a single :class:`Provider`
 
-    The :class:`ProviderManager` supports the ``with`` statement to :meth:`terminate` the providers
+    The :class:`ProviderPool` supports the ``with`` statement to :meth:`terminate` the providers
 
     :param providers: providers to use, if not all
     :type providers: list of string or None
@@ -173,7 +240,7 @@ class ProviderManager(object):
     """
     def __init__(self, providers=None, provider_configs=None):
         self.provider_configs = provider_configs or {}
-        self.providers = {provider_name: get_provider(provider_name) for provider_name in (providers or PROVIDERS)}
+        self.providers = {p: provider_manager[p] for p in (providers or provider_manager.available_providers)}
         self.initialized_providers = {}
         self.discarded_providers = set()
 

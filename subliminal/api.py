@@ -6,7 +6,7 @@ import logging
 import operator
 import os.path
 import babelfish
-from .providers import ProviderManager
+from .providers import ProviderPool
 from .subtitle import get_subtitle_path
 
 
@@ -29,7 +29,7 @@ def list_subtitles(videos, languages, providers=None, provider_configs=None):
 
     """
     subtitles = collections.defaultdict(list)
-    with ProviderManager(providers, provider_configs) as pm:
+    with ProviderPool(providers, provider_configs) as pm:
         for video in videos:
             logger.info('Listing subtitles for %r', video)
             video_subtitles = pm.list_subtitles(video, languages)
@@ -47,7 +47,7 @@ def download_subtitles(subtitles, provider_configs=None):
     :type provider_configs: dict of provider name => provider constructor kwargs or None
 
     """
-    with ProviderManager(provider_configs=provider_configs) as pm:
+    with ProviderPool(provider_configs=provider_configs) as pm:
         for subtitle in subtitles:
             logger.info('Downloading subtitle %r', subtitle)
             pm.download_subtitle(subtitle)
@@ -71,7 +71,7 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
 
     """
     downloaded_subtitles = collections.defaultdict(list)
-    with ProviderManager(providers, provider_configs) as pm:
+    with ProviderPool(providers, provider_configs) as pm:
         for video in videos:
             # filter
             if single and babelfish.Language('und') in video.subtitle_languages:

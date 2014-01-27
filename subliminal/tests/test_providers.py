@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 import os
 from unittest import TestCase, TestSuite, TestLoader, TextTestRunner
 from babelfish import Language
-from subliminal import get_provider
+from subliminal import provider_manager
 from subliminal.subtitle import is_valid_subtitle
 from subliminal.tests.common import MOVIES, EPISODES
 
@@ -13,7 +13,7 @@ class ProviderTestCase(TestCase):
     provider_name = ''
 
     def setUp(self):
-        self.Provider = get_provider(self.provider_name)
+        self.Provider = provider_manager[self.provider_name]
 
 
 class Addic7edProviderTestCase(ProviderTestCase):

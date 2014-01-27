@@ -25,12 +25,7 @@ setup(name='subliminal',
         'Topic :: Software Development :: Libraries :: Python Modules',
         'Topic :: Multimedia :: Video'],
     entry_points={
-        'console_scripts': ['subliminal = subliminal.cli:subliminal'],
-        'subliminal.providers': ['addic7ed = subliminal.providers.addic7ed:Addic7edProvider',
-                                 'opensubtitles = subliminal.providers.opensubtitles:OpenSubtitlesProvider',
-                                 'podnapisi = subliminal.providers.podnapisi:PodnapisiProvider',
-                                 'thesubdb = subliminal.providers.thesubdb:TheSubDBProvider',
-                                 'tvsubtitles = subliminal.providers.tvsubtitles:TVsubtitlesProvider']
+        'console_scripts': ['subliminal = subliminal.cli:subliminal']
     },
     install_requires=open('requirements.txt').readlines(),
     test_suite='subliminal.tests.suite')

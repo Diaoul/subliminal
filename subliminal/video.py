@@ -176,7 +176,7 @@ def scan_subtitle_languages(path):
     dirpath, filename = os.path.split(path)
     subtitles = set()
     for p in os.listdir(dirpath):
-        if not isinstance(p, bytes) and p.startswith(os.path.splitext(filename)[0]) and p.endswith(SUBTITLE_EXTENSIONS):
+        if isinstance(p, bytes) and p.startswith(os.path.splitext(filename)[0]) and p.endswith(SUBTITLE_EXTENSIONS):
             if os.path.splitext(p)[0].endswith(language_extensions):
                 subtitles.add(babelfish.Language.fromalpha2(os.path.splitext(p)[0][-2:]))
             else:
@@ -313,12 +313,12 @@ def scan_videos(paths, subtitles=True, embedded_subtitles=True, age=None):
         logger.info('Scanning directory %r', path)
         for dirpath, dirnames, filenames in os.walk(path):
             # skip badly encoded directories
-            if isinstance(dirpath, bytes):
+            if not isinstance(dirpath, bytes):
                 logger.error('Skipping badly encoded directory %r', dirpath.decode('utf-8', errors='replace'))
                 continue
             # skip badly encoded and hidden sub directories
             for dirname in list(dirnames):
-                if isinstance(dirname, bytes):
+                if not isinstance(dirname, bytes):
                     logger.error('Skipping badly encoded dirname %r in %r', dirname.decode('utf-8', errors='replace'),
                                  dirpath)
                     dirnames.remove(dirname)
@@ -328,7 +328,7 @@ def scan_videos(paths, subtitles=True, embedded_subtitles=True, age=None):
             # scan for videos
             for filename in filenames:
                 # skip badly encoded files
-                if isinstance(filename, bytes):
+                if not isinstance(filename, bytes):
                     logger.error('Skipping badly encoded filename %r in %r', filename.decode('utf-8', errors='replace'),
                                  dirpath)
                     continue

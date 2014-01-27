@@ -9,7 +9,7 @@ import sys
 import babelfish
 import xdg.BaseDirectory
 from subliminal import (__version__, cache_region, MutexLock, PROVIDERS, Video, Episode, Movie, scan_videos,
-    download_best_subtitles, save_subtitles)
+    download_best_subtitles, save_subtitles, convert_videos)
 try:
     import colorlog
 except ImportError:
@@ -36,6 +36,8 @@ def subliminal():
                                      help='download without language code in subtitle\'s filename i.e. .srt only')
     configuration_group.add_argument('-c', '--cache-file', default=DEFAULT_CACHE_FILE,
                                      help='cache file (default: %(default)s)')
+    configuration_group.add_argument('-C', '--convert', action='store_true',
+                                     help='convert videos in .mkv with embedded subtitles')
 
     # filtering
     filtering_group = parser.add_argument_group('filtering')
@@ -183,6 +185,10 @@ def subliminal():
     # save subtitles
     save_subtitles(subtitles, single=args.single, directory=args.directory, encoding=args.encoding)
 
+    # convert to .mkv including the subtitle. Alternatively, create .mkv in the `video_savepath` folder
+    if args.convert:
+        converted_videos = convert_videos(videos, languages = args.languages, single=args.single, video_savepath=None, delete_subtitles=False)
+
     # result output
     if not subtitles:
         if not args.quiet:
@@ -194,3 +200,15 @@ def subliminal():
             print('%d subtitle downloaded' % subtitles_count)
         else:
             print('%d subtitles downloaded' % subtitles_count)
+
+    if args.convert:
+        if not converted_videos:
+            if not args.quiet:
+                sys.stderr.write('No converted videos\n')
+            exit(1)
+        if not args.quiet:
+            videos_count = len(converted_videos)
+            if videos_count == 1:
+                print('%d video converted' % videos_count)
+            else:
+                print('%d videos converted' % videos_count)

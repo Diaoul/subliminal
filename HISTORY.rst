@@ -1,6 +1,13 @@
 Changelog
 =========
 
+0.7.4
+-----
+**release date:** 2014-01-27
+
+* Fix requirements for guessit and babelfish
+
+
 0.7.3
 -----
 **release date:** 2013-11-22

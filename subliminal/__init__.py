@@ -13,4 +13,5 @@ from .providers import PROVIDERS, Provider, get_provider, ProviderManager
 from .subtitle import Subtitle
 from .video import VIDEO_EXTENSIONS, SUBTITLE_EXTENSIONS, Video, Episode, Movie, scan_videos, scan_video
 
+
 logging.getLogger(__name__).addHandler(logging.NullHandler())

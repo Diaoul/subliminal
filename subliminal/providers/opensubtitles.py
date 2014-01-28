@@ -94,6 +94,7 @@ class OpenSubtitlesProvider(Provider):
 
     def terminate(self):
         checked(self.server.LogOut(self.token))
+        self.server.close()
 
     def no_operation(self):
         checked(self.server.NoOperation(self.token))

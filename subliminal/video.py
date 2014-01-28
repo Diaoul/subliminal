@@ -370,7 +370,7 @@ def hash_opensubtitles(video_path):
     :rtype: string
 
     """
-    bytesize = struct.calcsize(b'q')
+    bytesize = struct.calcsize(b'<q')
     with open(video_path, 'rb') as f:
         filesize = os.path.getsize(video_path)
         filehash = filesize
@@ -378,13 +378,13 @@ def hash_opensubtitles(video_path):
             return None
         for _ in range(65536 // bytesize):
             filebuffer = f.read(bytesize)
-            (l_value,) = struct.unpack(b'q', filebuffer)
+            (l_value,) = struct.unpack(b'<q', filebuffer)
             filehash += l_value
             filehash = filehash & 0xFFFFFFFFFFFFFFFF  # to remain as 64bit number
         f.seek(max(0, filesize - 65536), 0)
         for _ in range(65536 // bytesize):
             filebuffer = f.read(bytesize)
-            (l_value,) = struct.unpack(b'q', filebuffer)
+            (l_value,) = struct.unpack(b'<q', filebuffer)
             filehash += l_value
             filehash = filehash & 0xFFFFFFFFFFFFFFFF
     returnedhash = '%016x' % filehash

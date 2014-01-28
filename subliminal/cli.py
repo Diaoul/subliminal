@@ -9,7 +9,7 @@ import sys
 import babelfish
 import xdg.BaseDirectory
 from subliminal import (__version__, cache_region, MutexLock, PROVIDERS, Video, Episode, Movie, scan_videos,
-    download_best_subtitles, save_subtitles, convert_videos)
+    download_best_subtitles, save_subtitles)
 try:
     import colorlog
 except ImportError:

@@ -183,7 +183,6 @@ def subliminal():
     # save subtitles
     save_subtitles(subtitles, single=args.single, directory=args.directory, encoding=args.encoding)
 
-
     # result output
     if not subtitles:
         if not args.quiet:

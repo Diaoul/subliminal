@@ -8,7 +8,7 @@ import re
 import sys
 import babelfish
 import xdg.BaseDirectory
-from subliminal import (__version__, cache_region, MutexLock, PROVIDERS, Video, Episode, Movie, scan_videos,
+from subliminal import (__version__, cache_region, MutexLock, provider_manager, Video, Episode, Movie, scan_videos,
     download_best_subtitles, save_subtitles)
 try:
     import colorlog
@@ -40,7 +40,7 @@ def subliminal():
     # filtering
     filtering_group = parser.add_argument_group('filtering')
     filtering_group.add_argument('-p', '--providers', nargs='+', metavar='PROVIDER',
-                                 help='providers to use (%s)' % ', '.join(PROVIDERS))
+                                 help='providers to use (%s)' % ', '.join(provider_manager.available_providers))
     filtering_group.add_argument('-m', '--min-score', type=int, default=0,
                                  help='minimum score for subtitles (0-%d for episodes, 0-%d for movies)'
                                  % (Episode.scores['hash'], Movie.scores['hash']))

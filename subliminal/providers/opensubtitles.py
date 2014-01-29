@@ -136,10 +136,11 @@ class OpenSubtitlesProvider(Provider):
         if not response['data']:
             raise ProviderError('Nothing to download')
         subtitle_bytes = zlib.decompress(base64.b64decode(response['data'][0]['data']), 47)
-        subtitle_content = fix_line_endings(decode(subtitle_bytes, subtitle.language))
-        if not is_valid_subtitle(subtitle_content):
-            raise InvalidSubtitle
-        subtitle.content = subtitle_content
+        return subtitle_bytes
+        #subtitle_content = fix_line_endings(decode(subtitle_bytes, subtitle.language))
+        #if not is_valid_subtitle(subtitle_content):
+        #    raise InvalidSubtitle
+        #subtitle.content = subtitle_content
 
 
 class OpenSubtitlesError(ProviderError):

@@ -128,7 +128,7 @@ def save_subtitles(subtitles, single=False, directory=None, encoding='utf-8'):
             if directory is not None:
                 subtitle_path = os.path.join(directory, os.path.split(subtitle_path)[1])
             logger.info('Saving %r to %r', video_subtitle, subtitle_path)
-            with io.open(subtitle_path, 'w', encoding=encoding) as f:
+            with io.open(subtitle_path, mode='wb' if encoding=None else 'w', encoding=encoding) as f:
                 f.write(video_subtitle.content)
             saved_languages.add(video_subtitle.language)
             if single:

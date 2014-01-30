@@ -53,6 +53,9 @@ class Addic7edSubtitle(Subtitle):
         # resolution
         if video.resolution and self.version and video.resolution in self.version.lower():
             matches.add('resolution')
+        # format
+        if video.format and self.version and video.format in self.version.lower:
+            matches.add('format')
         return matches
 
 

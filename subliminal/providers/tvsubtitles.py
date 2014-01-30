@@ -56,6 +56,9 @@ class TVsubtitlesSubtitle(Subtitle):
         # resolution
         if video.resolution and self.rip and video.resolution in self.rip.lower():
             matches.add('resolution')
+        # format
+        if video.format and self.rip and video.format in self.rip.lower():
+            matches.add('format')
         return matches
 
 

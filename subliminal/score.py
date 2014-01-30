@@ -5,7 +5,7 @@ from sympy import Eq, symbols, solve
 
 
 # Symbols
-release_group, resolution, video_codec, audio_codec = symbols('release_group resolution video_codec audio_codec')
+release_group, resolution, format, video_codec, audio_codec = symbols('release_group resolution format video_codec audio_codec')
 imdb_id, hash, title, series, tvdb_id, season, episode = symbols('imdb_id hash title series tvdb_id season episode')  # @ReservedAssignment
 year = symbols('year')
 
@@ -21,12 +21,13 @@ def get_episode_equations():
     4. tvdb_id = series + year
     5. season = resolution + video_codec + audio_codec + 1
     6. imdb_id = series + season + episode + year
-    7. resolution = video_codec
-    8. video_codec = 2 * audio_codec
-    9. title = season + episode
-    10. season = episode
-    11. release_group = season
-    12. audio_codec = 1
+    7. format = video_codec + audio_codec
+    8. resolution = video_codec
+    9. video_codec = 2 * audio_codec
+    10. title = season + episode
+    11. season = episode
+    12. release_group = season
+    13. audio_codec = 1
 
     :return: the score equations for an episode
     :rtype: list of :class:`sympy.Eq`
@@ -39,6 +40,7 @@ def get_episode_equations():
     equations.append(Eq(tvdb_id, series + year))
     equations.append(Eq(season, resolution + video_codec + audio_codec + 1))
     equations.append(Eq(imdb_id, series + season + episode + year))
+    equations.append(Eq(format, video_codec + audio_codec))
     equations.append(Eq(resolution, video_codec))
     equations.append(Eq(video_codec, 2 * audio_codec))
     equations.append(Eq(title, season + episode))
@@ -80,7 +82,7 @@ def get_movie_equations():
 
 
 if __name__ == '__main__':
-    print(solve(get_episode_equations(), [release_group, resolution, video_codec, audio_codec, imdb_id,
+    print(solve(get_episode_equations(), [release_group, resolution, format, video_codec, audio_codec, imdb_id,
                                           hash, series, tvdb_id, season, episode, title, year]))
     print(solve(get_movie_equations(), [release_group, resolution, video_codec, audio_codec, imdb_id,
                                         hash, title, year]))

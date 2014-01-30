@@ -6,12 +6,13 @@ import re
 import zipfile
 import babelfish
 import bs4
+import guessit
 import requests
 from . import Provider
 from .. import __version__
 from ..cache import region, SHOW_EXPIRATION_TIME, EPISODE_EXPIRATION_TIME
 from ..exceptions import InvalidSubtitle, ProviderError
-from ..subtitle import Subtitle, decode, fix_line_endings, is_valid_subtitle
+from ..subtitle import Subtitle, decode, fix_line_endings, is_valid_subtitle, compute_guess_matches
 from ..video import Episode
 
 
@@ -46,6 +47,7 @@ class TVsubtitlesSubtitle(Subtitle):
         # year
         if self.year == video.year:
             matches.add('year')
+        """
         # release_group
         if video.release_group and self.release and video.release_group.lower() in self.release.lower():
             matches.add('release_group')
@@ -59,6 +61,10 @@ class TVsubtitlesSubtitle(Subtitle):
         # format
         if video.format and self.rip and video.format in self.rip.lower():
             matches.add('format')
+        """
+        # guess
+        matches |= compute_guess_matches(video, guessit.guess_episode_info(self.release + '.mkv'))
+        matches |= compute_guess_matches(video, guessit.guess_episode_info(self.rip + '.mkv'))
         return matches
 
 

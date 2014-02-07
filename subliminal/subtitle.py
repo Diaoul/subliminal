@@ -178,8 +178,8 @@ def compute_guess_properties_matches(video, string, propertytype):
     :type video: :class:`~subliminal.video.Video`
     :param string string: the string to check for a certain property type
     :param string propertytype: the type of property to check (as defined in guessit)
-    :return: match if a match is found in the string for the property type
-    :rtype: string
+    :return: matches of a certain property type (but will only be 1 match because we are checking for 1 property type)
+    :rtype: set
 
     Supported property types: result of guessit.transfo.guess_properties.GuessProperties().supported_properties()
     [u'audioProfile',
@@ -195,29 +195,33 @@ def compute_guess_properties_matches(video, string, propertytype):
     u'audioCodec']
 
     """
+    matches = set()
     # We only check for the property types relevant for us
     if propertytype == 'screenSize' and video.resolution:
         for prop in guess_properties(string, propertytype):
             if prop.lower() == video.resolution.lower():
-                return 'resolution'
-    if propertytype == 'format' and video.format:
+                matches.add('resolution')
+    elif propertytype == 'format' and video.format:
         for prop in guess_properties(string, propertytype):
             if prop.lower() == video.format.lower():
-                return 'format'
-    if propertytype == 'videoCodec' and video.video_codec:
+                matches.add('format')
+    elif propertytype == 'videoCodec' and video.video_codec:
         for prop in guess_properties(string, propertytype):
             if prop.lower() == video.video_codec.lower():
-                return 'video_codec'
-    if propertytype == 'audioCodec' and video.audio_codec:
+               matches.add('video_codec')
+    elif propertytype == 'audioCodec' and video.audio_codec:
         for prop in guess_properties(string, propertytype):
             if prop.lower() == video.audio_codec.lower():
-                return 'audio_codec'
+                matches.add('audio_codec')
+    return matches
 
 
 def guess_properties(string, propertytype):
-    tree = guessit.matchtree.MatchTree(string)
-    guessit.transfo.guess_properties.GuessProperties().process(tree)
-    properties = set(n.guess[propertytype] for n in tree.nodes() if propertytype in n.guess)
+    properties = set()
+    if string:
+        tree = guessit.matchtree.MatchTree(string)
+        guessit.transfo.guess_properties.GuessProperties().process(tree)
+        properties = set(n.guess[propertytype] for n in tree.nodes() if propertytype in n.guess)
     return properties
 
 

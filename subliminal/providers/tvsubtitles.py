@@ -64,11 +64,11 @@ class TVsubtitlesSubtitle(Subtitle):
         """
         # we don't have the complete filename, so we need to guess the matches separately
         # guess video_codec (videoCodec in guessit)
-        matches |= compute_guess_properties_matches(video, self.version, 'videoCodec')
+        matches |= compute_guess_properties_matches(video, self.release, 'videoCodec')
         # guess resolution (screenSize in guessit)
-        matches |= compute_guess_properties_matches(video, self.version, 'screenSize')
+        matches |= compute_guess_properties_matches(video, self.rip, 'screenSize')
         # guess format
-        matches |= compute_guess_properties_matches(video, self.version, 'format')
+        matches |= compute_guess_properties_matches(video, self.rip, 'format')
         return matches
 
 

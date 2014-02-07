@@ -59,10 +59,11 @@ def get_movie_equations():
     2. imdb_id = hash
     3. resolution = video_codec
     4. video_codec = 2 * audio_codec
-    5. title = resolution + video_codec + audio_codec + year + 1
-    6. release_group = resolution + video_codec + audio_codec + 1
-    7. year = release_group + 1
-    8. audio_codec = 1
+    5. format = video_codec + audio_codec
+    6. title = resolution + video_codec + audio_codec + year + 1
+    7. release_group = resolution + video_codec + audio_codec + 1
+    8. year = release_group + 1
+    9. audio_codec = 1
 
     :return: the score equations for a movie
     :rtype: list of :class:`sympy.Eq`
@@ -73,6 +74,7 @@ def get_movie_equations():
     equations.append(Eq(imdb_id, hash))
     equations.append(Eq(resolution, video_codec))
     equations.append(Eq(video_codec, 2 * audio_codec))
+    equations.append(Eq(format, video_codec + audio_codec))
     equations.append(Eq(title, resolution + video_codec + audio_codec + year + 1))
     equations.append(Eq(video_codec, 2 * audio_codec))
     equations.append(Eq(release_group, resolution + video_codec + audio_codec + 1))
@@ -84,5 +86,5 @@ def get_movie_equations():
 if __name__ == '__main__':
     print(solve(get_episode_equations(), [release_group, resolution, format, video_codec, audio_codec, imdb_id,
                                           hash, series, tvdb_id, season, episode, title, year]))
-    print(solve(get_movie_equations(), [release_group, resolution, video_codec, audio_codec, imdb_id,
+    print(solve(get_movie_equations(), [release_group, resolution, format, video_codec, audio_codec, imdb_id,
                                         hash, title, year]))

@@ -15,7 +15,7 @@ def get_episode_equations():
 
     The equations are the following:
 
-    1. hash = resolution + video_codec + audio_codec + series + season + episode + year + release_group
+    1. hash = resolution + format + video_codec + audio_codec + series + season + episode + year + release_group
     2. series = resolution + video_codec + audio_codec + season + episode + release_group + 1
     3. year = series
     4. tvdb_id = series + year
@@ -34,7 +34,7 @@ def get_episode_equations():
 
     """
     equations = []
-    equations.append(Eq(hash, resolution + video_codec + audio_codec + series + season + episode + year + release_group))
+    equations.append(Eq(hash, resolution + format + video_codec + audio_codec + series + season + episode + year + release_group))
     equations.append(Eq(series, resolution + video_codec + audio_codec + season + episode + release_group + 1))
     equations.append(Eq(series, year))
     equations.append(Eq(tvdb_id, series + year))
@@ -55,7 +55,7 @@ def get_movie_equations():
 
     The equations are the following:
 
-    1. hash = resolution + video_codec + audio_codec + title + year + release_group
+    1. hash = resolution + format + video_codec + audio_codec + title + year + release_group
     2. imdb_id = hash
     3. resolution = video_codec
     4. video_codec = 2 * audio_codec
@@ -70,7 +70,7 @@ def get_movie_equations():
 
     """
     equations = []
-    equations.append(Eq(hash, resolution + video_codec + audio_codec + title + year + release_group))
+    equations.append(Eq(hash, resolution + format + video_codec + audio_codec + title + year + release_group))
     equations.append(Eq(imdb_id, hash))
     equations.append(Eq(resolution, video_codec))
     equations.append(Eq(video_codec, 2 * audio_codec))

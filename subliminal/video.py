@@ -92,7 +92,7 @@ class Episode(Video):
 
     """
     scores = {'format': 3, 'video_codec': 2, 'tvdb_id': 48, 'title': 12, 'imdb_id': 60, 'audio_codec': 1, 'year': 24,
-              'resolution': 2, 'season': 6, 'release_group': 6, 'series': 24, 'episode': 6, 'hash': 71}
+              'resolution': 2, 'season': 6, 'release_group': 6, 'series': 24, 'episode': 6, 'hash': 74}
 
     def __init__(self, name, series, season, episode, format=None, release_group=None, resolution=None, video_codec=None,
                  audio_codec=None, imdb_id=None, hashes=None, size=None, subtitle_languages=None, title=None,
@@ -136,8 +136,8 @@ class Movie(Video):
     :param int year: year of the movie
 
     """
-    scores = {'format': 3, 'video_codec': 2, 'title': 13, 'imdb_id': 31, 'audio_codec': 1, 'year': 7, 'resolution': 2,
-              'release_group': 6, 'hash': 31}
+    scores = {'format': 3, 'video_codec': 2, 'title': 13, 'imdb_id': 34, 'audio_codec': 1, 'year': 7, 'resolution': 2,
+              'release_group': 6, 'hash': 34}
 
     def __init__(self, name, title, format=None, release_group=None, resolution=None, video_codec=None, audio_codec=None,
                  imdb_id=None, hashes=None, size=None, subtitle_languages=None, year=None):

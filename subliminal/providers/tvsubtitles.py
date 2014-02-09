@@ -6,12 +6,13 @@ import re
 import zipfile
 import babelfish
 import bs4
+import guessit
 import requests
 from . import Provider
 from .. import __version__
 from ..cache import region, SHOW_EXPIRATION_TIME, EPISODE_EXPIRATION_TIME
 from ..exceptions import InvalidSubtitle, ProviderError
-from ..subtitle import Subtitle, decode, fix_line_endings, is_valid_subtitle
+from ..subtitle import Subtitle, decode, fix_line_endings, is_valid_subtitle, compute_guess_properties_matches
 from ..video import Episode
 
 
@@ -49,6 +50,7 @@ class TVsubtitlesSubtitle(Subtitle):
         # release_group
         if video.release_group and self.release and video.release_group.lower() in self.release.lower():
             matches.add('release_group')
+        """
         # video_codec
         if video.video_codec and self.release and (video.video_codec in self.release.lower()
                                                    or video.video_codec == 'h264' and 'x264' in self.release.lower()):
@@ -56,6 +58,17 @@ class TVsubtitlesSubtitle(Subtitle):
         # resolution
         if video.resolution and self.rip and video.resolution in self.rip.lower():
             matches.add('resolution')
+        # format
+        if video.format and self.rip and video.format in self.rip.lower():
+            matches.add('format')
+        """
+        # we don't have the complete filename, so we need to guess the matches separately
+        # guess video_codec (videoCodec in guessit)
+        matches |= compute_guess_properties_matches(video, self.release, 'videoCodec')
+        # guess resolution (screenSize in guessit)
+        matches |= compute_guess_properties_matches(video, self.rip, 'screenSize')
+        # guess format
+        matches |= compute_guess_properties_matches(video, self.rip, 'format')
         return matches
 
 

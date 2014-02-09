@@ -5,6 +5,7 @@ import os.path
 import babelfish
 import charade
 import pysrt
+import guessit
 from .video import Episode, Movie
 
 
@@ -158,6 +159,9 @@ def compute_guess_matches(video, guess):
     # screen size
     if video.resolution and 'screenSize' in guess and guess['screenSize'] == video.resolution:
         matches.add('resolution')
+    # format
+    if video.format and 'format' in guess and guess['format'].lower() == video.format.lower():
+        matches.add('format')
     # video codec
     if video.video_codec and 'videoCodec' in guess and guess['videoCodec'] == video.video_codec:
         matches.add('video_codec')
@@ -165,6 +169,60 @@ def compute_guess_matches(video, guess):
     if video.audio_codec and 'audioCodec' in guess and guess['audioCodec'] == video.audio_codec:
         matches.add('audio_codec')
     return matches
+
+
+def compute_guess_properties_matches(video, string, propertytype):
+    """Compute matches between a `video` and properties of a certain property type
+
+    :param video: the video to compute the matches on
+    :type video: :class:`~subliminal.video.Video`
+    :param string string: the string to check for a certain property type
+    :param string propertytype: the type of property to check (as defined in guessit)
+    :return: matches of a certain property type (but will only be 1 match because we are checking for 1 property type)
+    :rtype: set
+
+    Supported property types: result of guessit.transfo.guess_properties.GuessProperties().supported_properties()
+    [u'audioProfile',
+    u'videoCodec',
+    u'container',
+    u'format',
+    u'episodeFormat',
+    u'videoApi',
+    u'screenSize',
+    u'videoProfile',
+    u'audioChannels',
+    u'other',
+    u'audioCodec']
+
+    """
+    matches = set()
+    # We only check for the property types relevant for us
+    if propertytype == 'screenSize' and video.resolution:
+        for prop in guess_properties(string, propertytype):
+            if prop.lower() == video.resolution.lower():
+                matches.add('resolution')
+    elif propertytype == 'format' and video.format:
+        for prop in guess_properties(string, propertytype):
+            if prop.lower() == video.format.lower():
+                matches.add('format')
+    elif propertytype == 'videoCodec' and video.video_codec:
+        for prop in guess_properties(string, propertytype):
+            if prop.lower() == video.video_codec.lower():
+               matches.add('video_codec')
+    elif propertytype == 'audioCodec' and video.audio_codec:
+        for prop in guess_properties(string, propertytype):
+            if prop.lower() == video.audio_codec.lower():
+                matches.add('audio_codec')
+    return matches
+
+
+def guess_properties(string, propertytype):
+    properties = set()
+    if string:
+        tree = guessit.matchtree.MatchTree(string)
+        guessit.transfo.guess_properties.GuessProperties().process(tree)
+        properties = set(n.guess[propertytype] for n in tree.nodes() if propertytype in n.guess)
+    return properties
 
 
 def decode(content, language):

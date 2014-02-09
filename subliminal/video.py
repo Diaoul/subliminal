@@ -33,6 +33,7 @@ class Video(object):
     subclasses.
 
     :param string name: name or path of the video
+    :param string format: format of the video (HDTV, WEB-DL, ...)
     :param string release_group: release group of the video
     :param string resolution: screen size of the video stream (480p, 720p, 1080p or 1080i)
     :param string video_codec: codec of the video stream
@@ -45,9 +46,10 @@ class Video(object):
     """
     scores = {}
 
-    def __init__(self, name, release_group=None, resolution=None, video_codec=None, audio_codec=None, imdb_id=None,
-                 hashes=None, size=None, subtitle_languages=None):
+    def __init__(self, name, format=None, release_group=None, resolution=None, video_codec=None, audio_codec=None,
+                 imdb_id=None, hashes=None, size=None, subtitle_languages=None):
         self.name = name
+        self.format = format
         self.release_group = release_group
         self.resolution = resolution
         self.video_codec = video_codec
@@ -89,13 +91,13 @@ class Episode(Video):
     :param int tvdb_id: TheTVDB id of the episode
 
     """
-    scores = {'title': 12, 'video_codec': 2, 'tvdb_id': 48, 'imdb_id': 60, 'audio_codec': 1, 'year': 24,
-              'resolution': 2, 'season': 6, 'release_group': 6, 'series': 24, 'episode': 6, 'hash': 71}
+    scores = {'format': 3, 'video_codec': 2, 'tvdb_id': 48, 'title': 12, 'imdb_id': 60, 'audio_codec': 1, 'year': 24,
+              'resolution': 2, 'season': 6, 'release_group': 6, 'series': 24, 'episode': 6, 'hash': 74}
 
-    def __init__(self, name, series, season, episode, release_group=None, resolution=None, video_codec=None,
+    def __init__(self, name, series, season, episode, format=None, release_group=None, resolution=None, video_codec=None,
                  audio_codec=None, imdb_id=None, hashes=None, size=None, subtitle_languages=None, title=None,
                  year=None, tvdb_id=None):
-        super(Episode, self).__init__(name, release_group, resolution, video_codec, audio_codec, imdb_id, hashes,
+        super(Episode, self).__init__(name, format, release_group, resolution, video_codec, audio_codec, imdb_id, hashes,
                                       size, subtitle_languages)
         self.series = series
         self.season = season
@@ -110,7 +112,7 @@ class Episode(Video):
             raise ValueError('The guess must be an episode guess')
         if 'series' not in guess or 'season' not in guess or 'episodeNumber' not in guess:
             raise ValueError('Insufficient data to process the guess')
-        return cls(name, guess['series'], guess['season'], guess['episodeNumber'],
+        return cls(name, guess['series'], guess['season'], guess['episodeNumber'], format=guess.get('format'),
                    release_group=guess.get('releaseGroup'), resolution=guess.get('screenSize'),
                    video_codec=guess.get('videoCodec'), audio_codec=guess.get('audioCodec'),
                    title=guess.get('title'), year=guess.get('year'))
@@ -134,12 +136,12 @@ class Movie(Video):
     :param int year: year of the movie
 
     """
-    scores = {'title': 13, 'video_codec': 2, 'resolution': 2, 'audio_codec': 1, 'year': 7, 'imdb_id': 31,
-              'release_group': 6, 'hash': 31}
+    scores = {'format': 3, 'video_codec': 2, 'title': 13, 'imdb_id': 34, 'audio_codec': 1, 'year': 7, 'resolution': 2,
+              'release_group': 6, 'hash': 34}
 
-    def __init__(self, name, title, release_group=None, resolution=None, video_codec=None, audio_codec=None,
+    def __init__(self, name, title, format=None, release_group=None, resolution=None, video_codec=None, audio_codec=None,
                  imdb_id=None, hashes=None, size=None, subtitle_languages=None, year=None):
-        super(Movie, self).__init__(name, release_group, resolution, video_codec, audio_codec, imdb_id, hashes,
+        super(Movie, self).__init__(name, format, release_group, resolution, video_codec, audio_codec, imdb_id, hashes,
                                     size, subtitle_languages)
         self.title = title
         self.year = year
@@ -150,9 +152,9 @@ class Movie(Video):
             raise ValueError('The guess must be a movie guess')
         if 'title' not in guess:
             raise ValueError('Insufficient data to process the guess')
-        return cls(name, guess['title'], release_group=guess.get('releaseGroup'), resolution=guess.get('screenSize'),
-                   video_codec=guess.get('videoCodec'), audio_codec=guess.get('audioCodec'),
-                   year=guess.get('year'))
+        return cls(name, guess['title'], format=guess.get('format'), release_group=guess.get('releaseGroup'),
+                   resolution=guess.get('screenSize'), video_codec=guess.get('videoCodec'),
+                   audio_codec=guess.get('audioCodec'),year=guess.get('year'))
 
     @classmethod
     def fromname(cls, name):

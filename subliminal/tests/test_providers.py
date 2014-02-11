@@ -5,7 +5,6 @@ import os
 from unittest import TestCase, TestSuite, TestLoader, TextTestRunner
 from babelfish import Language
 from subliminal import provider_manager
-from subliminal.subtitle import is_valid_subtitle
 from subliminal.tests.common import MOVIES, EPISODES
 
 
@@ -121,7 +120,7 @@ class Addic7edProviderTestCase(ProviderTestCase):
             subtitles = provider.list_subtitles(video, languages)
             provider.download_subtitle(subtitles[0])
         self.assertIsNotNone(subtitles[0].content)
-        self.assertTrue(is_valid_subtitle(subtitles[0].content))
+        self.assertTrue(subtitles[0].is_valid)
 
 
 class OpenSubtitlesProviderTestCase(ProviderTestCase):
@@ -262,7 +261,7 @@ class OpenSubtitlesProviderTestCase(ProviderTestCase):
             subtitles = provider.list_subtitles(video, languages)
             provider.download_subtitle(subtitles[0])
         self.assertIsNotNone(subtitles[0].content)
-        self.assertTrue(is_valid_subtitle(subtitles[0].content))
+        self.assertTrue(subtitles[0].is_valid)
 
 
 class PodnapisiProviderTestCase(ProviderTestCase):
@@ -329,7 +328,7 @@ class PodnapisiProviderTestCase(ProviderTestCase):
             subtitles = provider.list_subtitles(video, languages)
             provider.download_subtitle(subtitles[0])
         self.assertIsNotNone(subtitles[0].content)
-        self.assertTrue(is_valid_subtitle(subtitles[0].content))
+        self.assertTrue(subtitles[0].is_valid)
 
 
 class TheSubDBProviderTestCase(ProviderTestCase):
@@ -368,8 +367,9 @@ class TheSubDBProviderTestCase(ProviderTestCase):
         with self.Provider() as provider:
             subtitles = provider.list_subtitles(video, languages)
             provider.download_subtitle(subtitles[0])
+            provider.download_subtitle(subtitles[1])
         self.assertIsNotNone(subtitles[0].content)
-        self.assertTrue(is_valid_subtitle(subtitles[0].content))
+        self.assertTrue(subtitles[0].is_valid)
 
 
 class TVsubtitlesProviderTestCase(ProviderTestCase):
@@ -458,7 +458,7 @@ class TVsubtitlesProviderTestCase(ProviderTestCase):
             subtitles = provider.list_subtitles(video, languages)
             provider.download_subtitle(subtitles[0])
         self.assertIsNotNone(subtitles[0].content)
-        self.assertTrue(is_valid_subtitle(subtitles[0].content))
+        self.assertTrue(subtitles[0].is_valid)
 
 
 def suite():

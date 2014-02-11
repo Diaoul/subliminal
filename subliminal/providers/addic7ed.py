@@ -3,13 +3,12 @@ from __future__ import unicode_literals
 import logging
 import babelfish
 import bs4
-import guessit
 import requests
 from . import Provider
 from .. import __version__
 from ..cache import region, SHOW_EXPIRATION_TIME
-from ..exceptions import ConfigurationError, AuthenticationError, DownloadLimitExceeded, ProviderError, InvalidSubtitle
-from ..subtitle import Subtitle, decode, fix_line_endings, is_valid_subtitle, compute_guess_properties_matches
+from ..exceptions import ConfigurationError, AuthenticationError, DownloadLimitExceeded, ProviderError
+from ..subtitle import Subtitle, fix_line_endings, compute_guess_properties_matches
 from ..video import Episode
 
 
@@ -202,7 +201,4 @@ class Addic7edProvider(Provider):
             raise ProviderError('Request failed with status code %d' % r.status_code)
         if r.headers['Content-Type'] == 'text/html':
             raise DownloadLimitExceeded
-        subtitle_content = fix_line_endings(decode(r.content, subtitle.language))
-        if not is_valid_subtitle(subtitle_content):
-            raise InvalidSubtitle
-        subtitle.content = subtitle_content
+        subtitle.content = fix_line_endings(r.content)

@@ -3,9 +3,10 @@ from __future__ import unicode_literals
 import logging
 import os.path
 import babelfish
-import charade
+import chardet
+import guessit.matchtree
+import guessit.transfo
 import pysrt
-import guessit
 from .video import Episode, Movie
 
 
@@ -27,8 +28,65 @@ class Subtitle(object):
         self.hearing_impaired = hearing_impaired
         self.page_link = page_link
 
-        #: Subtitle's content once downloaded with :meth:`~subliminal.providers.Provider.download_subtitle`
+        #: Content as bytes
         self.content = None
+
+        #: Encoding to decode with when accessing :attr:`text`
+        self.encoding = None
+
+    @property
+    def guessed_encoding(self):
+        """Guessed encoding using the language, falling back on chardet"""
+        # always try utf-8 first
+        encodings = ['utf-8']
+
+        # add language-specific encodings
+        if self.language.alpha3 == 'zho':
+            encodings.extend(['gb18030', 'big5'])
+        elif self.language.alpha3 == 'jpn':
+            encodings.append('shift-jis')
+        elif self.language.alpha3 == 'ara':
+            encodings.append('windows-1256')
+        elif self.language.alpha3 == 'heb':
+            encodings.append('windows-1255')
+        else:
+            encodings.append('latin-1')
+
+        # try to decode
+        for encoding in encodings:
+            try:
+                self.content.decode(encoding)
+                return encoding
+            except UnicodeDecodeError:
+                pass
+
+        # fallback on chardet
+        logger.warning('Could not decode content with encodings %r', encodings)
+        return chardet.detect(self.content)['encoding']
+
+    @property
+    def text(self):
+        """Content as string
+
+        If :attr:`encoding` is None, the encoding is guessed with :attr:`guessed_encoding`
+
+        """
+        if not self.content:
+            return ''
+        return self.content.decode(self.encoding or self.guessed_encoding, errors='replace')
+
+    @property
+    def is_valid(self):
+        """Check if a subtitle text is a valid SubRip format"""
+        try:
+            pysrt.from_string(self.text, error_handling=pysrt.ERROR_RAISE)
+            return True
+        except pysrt.Error as e:
+            if e.args[0] > 80:
+                return True
+        except:
+            logger.exception('Unexpected error when validating subtitle')
+        return False
 
     def compute_matches(self, video):
         """Compute the matches of the subtitle against the `video`
@@ -101,24 +159,6 @@ def get_subtitle_path(video_path, language=None):
         except babelfish.LanguageConvertError:
             return subtitle_path + '.%s.%s' % (language.alpha3, 'srt')
     return subtitle_path + '.srt'
-
-
-def is_valid_subtitle(subtitle_text):
-    """Check if a subtitle text is a valid SubRip format
-
-    :return: `True` if the subtitle is valid, `False` otherwise
-    :rtype: bool
-
-    """
-    try:
-        pysrt.from_string(subtitle_text, error_handling=pysrt.ERROR_RAISE)
-        return True
-    except pysrt.Error as e:
-        if e.args[0] > 80:
-            return True
-    except:
-        logger.exception('Unexpected error when validating subtitle')
-    return False
 
 
 def compute_guess_matches(video, guess):
@@ -208,7 +248,7 @@ def compute_guess_properties_matches(video, string, propertytype):
     elif propertytype == 'videoCodec' and video.video_codec:
         for prop in guess_properties(string, propertytype):
             if prop.lower() == video.video_codec.lower():
-               matches.add('video_codec')
+                matches.add('video_codec')
     elif propertytype == 'audioCodec' and video.audio_codec:
         for prop in guess_properties(string, propertytype):
             if prop.lower() == video.audio_codec.lower():
@@ -225,49 +265,12 @@ def guess_properties(string, propertytype):
     return properties
 
 
-def decode(content, language):
-    """Decode subtitle `content` in a specified `language`
-
-    :param bytes content: content of the subtitle
-    :param language: language of the subtitle
-    :type language: :class:`babelfish.Language`
-    :return: the decoded `content` bytes
-    :rtype: string
-
-    """
-    # always try utf-8 first
-    encodings = ['utf-8']
-
-    # add language-specific encodings
-    if language.alpha3 == 'zho':
-        encodings.extend(['gb18030', 'big5'])
-    elif language.alpha3 == 'jpn':
-        encodings.append('shift-jis')
-    elif language.alpha3 == 'ara':
-        encodings.append('windows-1256')
-    elif language.alpha3 == 'heb':
-        encodings.append('windows-1255')
-    else:
-        encodings.append('latin-1')
-
-    # try to decode
-    for encoding in encodings:
-        try:
-            return content.decode(encoding)
-        except UnicodeDecodeError:
-            pass
-
-    # fallback on charade
-    logger.warning('Could not decode content with encodings %r', encodings)
-    return content.decode(charade.detect(content)['encoding'], 'replace')
-
-
 def fix_line_endings(content):
     """Fix line ending of `content` by changing it to \n
 
-    :param string content: content of the subtitle
+    :param bytes content: content of the subtitle
     :return: the content with fixed line endings
-    :rtype: string
+    :rtype: bytes
 
     """
-    return content.replace('\r\n', '\n').replace('\r', '\n')
+    return content.replace(b'\r\n', b'\n').replace(b'\r', b'\n')

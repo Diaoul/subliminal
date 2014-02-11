@@ -10,8 +10,8 @@ import guessit
 from . import Provider
 from .. import __version__
 from ..compat import ServerProxy, TimeoutTransport
-from ..exceptions import ProviderError, AuthenticationError, DownloadLimitExceeded, InvalidSubtitle
-from ..subtitle import Subtitle, decode, fix_line_endings, is_valid_subtitle, compute_guess_matches
+from ..exceptions import ProviderError, AuthenticationError, DownloadLimitExceeded
+from ..subtitle import Subtitle, fix_line_endings, compute_guess_matches
 from ..video import Episode, Movie
 
 
@@ -135,11 +135,7 @@ class OpenSubtitlesProvider(Provider):
         response = checked(self.server.DownloadSubtitles(self.token, [subtitle.id]))
         if not response['data']:
             raise ProviderError('Nothing to download')
-        subtitle_bytes = zlib.decompress(base64.b64decode(response['data'][0]['data']), 47)
-        subtitle_content = fix_line_endings(decode(subtitle_bytes, subtitle.language))
-        if not is_valid_subtitle(subtitle_content):
-            raise InvalidSubtitle
-        subtitle.content = subtitle_content
+        subtitle.content = fix_line_endings(zlib.decompress(base64.b64decode(response['data'][0]['data']), 47))
 
 
 class OpenSubtitlesError(ProviderError):

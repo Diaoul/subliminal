@@ -6,13 +6,12 @@ import re
 import zipfile
 import babelfish
 import bs4
-import guessit
 import requests
 from . import Provider
 from .. import __version__
 from ..cache import region, SHOW_EXPIRATION_TIME, EPISODE_EXPIRATION_TIME
-from ..exceptions import InvalidSubtitle, ProviderError
-from ..subtitle import Subtitle, decode, fix_line_endings, is_valid_subtitle, compute_guess_properties_matches
+from ..exceptions import ProviderError
+from ..subtitle import Subtitle, fix_line_endings, compute_guess_properties_matches
 from ..video import Episode
 
 
@@ -189,8 +188,4 @@ class TVsubtitlesProvider(Provider):
         with zipfile.ZipFile(io.BytesIO(r.content)) as zf:
             if len(zf.namelist()) > 1:
                 raise ProviderError('More than one file to unzip')
-            subtitle_bytes = zf.read(zf.namelist()[0])
-        subtitle_content = fix_line_endings(decode(subtitle_bytes, subtitle.language))
-        if not is_valid_subtitle(subtitle_content):
-            raise InvalidSubtitle
-        subtitle.content = subtitle_content
+            subtitle.content = fix_line_endings(zf.read(zf.namelist()[0]))

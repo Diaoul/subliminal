@@ -6,7 +6,6 @@ import socket
 import babelfish
 from pkg_resources import iter_entry_points, EntryPoint
 import requests
-from ..exceptions import InvalidSubtitle
 from ..video import Episode, Movie
 
 
@@ -129,7 +128,6 @@ class Provider(object):
         :param subtitle: subtitle to download
         :type subtitle: :class:`~subliminal.subtitle.Subtitle`
         :raise: :class:`~subliminal.exceptions.ProviderNotAvailable` if the provider is unavailable
-        :raise: :class:`~subliminal.exceptions.InvalidSubtitle` if the downloaded subtitle is invalid
         :raise: :class:`~subliminal.exceptions.ProviderError` if something unexpected occured
 
         """
@@ -317,12 +315,13 @@ class ProviderPool(object):
         try:
             provider = self.get_initialized_provider(subtitle.provider_name)
             provider.download_subtitle(subtitle)
+            if not subtitle.is_valid:
+                logger.warning('Invalid subtitle')
+                return False
             return True
         except (requests.exceptions.Timeout, socket.timeout):
             logger.warning('Provider %r timed out, discarding it', subtitle.provider_name)
             self.discarded_providers.add(subtitle.provider_name)
-        except InvalidSubtitle:
-            logger.warning('Invalid subtitle')
         except:
             logger.exception('Unexpected error in provider %r, discarding it', subtitle.provider_name)
             self.discarded_providers.add(subtitle.provider_name)

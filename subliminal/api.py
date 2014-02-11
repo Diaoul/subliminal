@@ -29,10 +29,10 @@ def list_subtitles(videos, languages, providers=None, provider_configs=None):
 
     """
     subtitles = collections.defaultdict(list)
-    with ProviderPool(providers, provider_configs) as pm:
+    with ProviderPool(providers, provider_configs) as pp:
         for video in videos:
             logger.info('Listing subtitles for %r', video)
-            video_subtitles = pm.list_subtitles(video, languages)
+            video_subtitles = pp.list_subtitles(video, languages)
             logger.info('Found %d subtitles total', len(video_subtitles))
             subtitles[video].extend(video_subtitles)
     return subtitles
@@ -47,10 +47,10 @@ def download_subtitles(subtitles, provider_configs=None):
     :type provider_configs: dict of provider name => provider constructor kwargs or None
 
     """
-    with ProviderPool(provider_configs=provider_configs) as pm:
+    with ProviderPool(provider_configs=provider_configs) as pp:
         for subtitle in subtitles:
             logger.info('Downloading subtitle %r', subtitle)
-            pm.download_subtitle(subtitle)
+            pp.download_subtitle(subtitle)
 
 
 def download_best_subtitles(videos, languages, providers=None, provider_configs=None, min_score=0,
@@ -71,7 +71,7 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
 
     """
     downloaded_subtitles = collections.defaultdict(list)
-    with ProviderPool(providers, provider_configs) as pm:
+    with ProviderPool(providers, provider_configs) as pp:
         for video in videos:
             # filter
             if single and babelfish.Language('und') in video.subtitle_languages:
@@ -80,7 +80,7 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
 
             # list
             logger.info('Listing subtitles for %r', video)
-            video_subtitles = pm.list_subtitles(video, languages)
+            video_subtitles = pp.list_subtitles(video, languages)
             logger.info('Found %d subtitles total', len(video_subtitles))
 
             # download
@@ -97,7 +97,7 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
                     logger.debug('Skipping subtitle: %r already downloaded', subtitle.language)
                     continue
                 logger.info('Downloading subtitle %r with score %d', subtitle, score)
-                if pm.download_subtitle(subtitle):
+                if pp.download_subtitle(subtitle):
                     downloaded_languages.add(subtitle.language)
                     downloaded_subtitles[video].append(subtitle)
                 if single or downloaded_languages == languages:
@@ -106,13 +106,14 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
     return downloaded_subtitles
 
 
-def save_subtitles(subtitles, single=False, directory=None, encoding='utf-8'):
+def save_subtitles(subtitles, single=False, directory=None, encoding=None):
     """Save subtitles on disk next to the video or in a specific folder if `folder_path` is specified
 
     :param bool single: download with .srt extension if ``True``, add language identifier otherwise
     :param directory: path to directory where to save the subtitles, if any
     :type directory: string or None
-    :param string encoding: subtitles encoding
+    :param encoding: encoding for the subtitles or ``None`` to use the original encoding
+    :type encoding: string or None
 
     """
     for video, video_subtitles in subtitles.items():
@@ -128,8 +129,12 @@ def save_subtitles(subtitles, single=False, directory=None, encoding='utf-8'):
             if directory is not None:
                 subtitle_path = os.path.join(directory, os.path.split(subtitle_path)[1])
             logger.info('Saving %r to %r', video_subtitle, subtitle_path)
-            with io.open(subtitle_path, 'w', encoding=encoding) as f:
-                f.write(video_subtitle.content)
+            if encoding is None:
+                with io.open(subtitle_path, 'wb') as f:
+                    f.write(video_subtitle.content)
+            else:
+                with io.open(subtitle_path, 'w', encoding=encoding) as f:
+                    f.write(video_subtitle.text)
             saved_languages.add(video_subtitle.language)
             if single:
                 break

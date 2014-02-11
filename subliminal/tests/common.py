@@ -5,7 +5,7 @@ from subliminal import Movie, Episode
 
 MOVIES = [Movie('Man of Steel (2013)/man.of.steel.2013.720p.bluray.x264-felony.mkv', 'Man of Steel',
                 format='BluRay', release_group='felony', resolution='720p', video_codec='h264', audio_codec='DTS',
-                imdb_id=770828,size=7033732714, year=2013,
+                imdb_id=770828, size=7033732714, year=2013,
                 hashes={'opensubtitles': '5b8f8f4e41ccb21e', 'thesubdb': 'ad32876133355929d814457537e12dc2'})]
 
 EPISODES = [Episode('The Big Bang Theory/Season 07/The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION.mkv',

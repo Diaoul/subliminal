@@ -5,8 +5,8 @@ import babelfish
 import requests
 from . import Provider
 from .. import __version__
-from ..exceptions import InvalidSubtitle, ProviderError
-from ..subtitle import Subtitle, decode, fix_line_endings, is_valid_subtitle
+from ..exceptions import ProviderError
+from ..subtitle import Subtitle, fix_line_endings
 
 
 logger = logging.getLogger(__name__)
@@ -69,7 +69,4 @@ class TheSubDBProvider(Provider):
         r = self.get(params)
         if r.status_code != 200:
             raise ProviderError('Request failed with status code %d' % r.status_code)
-        subtitle_content = fix_line_endings(decode(r.content, subtitle.language))
-        if not is_valid_subtitle(subtitle_content):
-            raise InvalidSubtitle
-        subtitle.content = subtitle_content
+        subtitle.content = fix_line_endings(r.content)

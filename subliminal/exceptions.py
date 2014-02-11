@@ -20,7 +20,3 @@ class AuthenticationError(ProviderError):
 
 class DownloadLimitExceeded(ProviderError):
     """Exception raised by providers when download limit is exceeded"""
-
-
-class InvalidSubtitle(Error):
-    """Exception raised by providers when the downloaded subtitle is invalid"""

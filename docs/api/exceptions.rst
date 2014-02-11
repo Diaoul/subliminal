@@ -6,8 +6,8 @@ Exceptions
 
 .. autoclass:: ProviderError
 
-.. autoclass:: ProviderConfigurationError
+.. autoclass:: ConfigurationError
 
-.. autoclass:: ProviderNotAvailable
+.. autoclass:: AuthenticationError
 
-.. autoclass:: InvalidSubtitle
+.. autoclass:: DownloadLimitExceeded

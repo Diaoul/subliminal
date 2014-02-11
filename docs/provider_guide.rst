@@ -33,11 +33,12 @@ Per-user authentication is allowed and must be configured at instantiation as ke
 will be done by the user through the `provider_configs` argument of the :func:`~subliminal.api.list_subtitles` and
 :func:`~subliminal.api.download_best_subtitles` functions. No network operation must be done during instantiation,
 only configuration. Any error in the configuration must raise a
-:class:`~subliminal.exceptions.ProviderConfigurationError`.
+:class:`~subliminal.exceptions.ConfigurationError`.
 
 
-Beyond this point, if a network error occurs, a :class:`~subliminal.exceptions.ProviderNotAvailable` exception 
-must be raised and an unexpected behavior must raise a :class:`~subliminal.exceptions.ProviderError` exception.
+Beyond this point, if an error occurs, a generic :class:`~subliminal.exceptions.ProviderError` exception 
+must be raised. You can also use more explicit exception classes :class:`~subliminal.exceptions.AuthenticationError`
+and :class:`~subliminal.exceptions.DownloadLimitExceeded`.
 
 
 Initialization / Termination
@@ -51,7 +52,9 @@ Caching policy
 --------------
 To save bandwidth and improve querying time, intermediate data should be cached when possible. Typical use case is
 when a query to retrieve show ids is required prior to the query to actually search for subtitles. In that case
-the function that gets the show id from the show name must be cached. 
+the function that gets the show id from the show name must be cached.
+Expiration time should be :data:`~subliminal.cache.SHOW_EXPIRATION_TIME` for shows and
+:data:`~subliminal.cache.EPISODE_EXPIRATION_TIME` for episodes.
 
 
 Language
@@ -92,8 +95,7 @@ for a list of possible matches.
 
 Unittesting
 -----------
-All possible uses of the :meth:`~subliminal.providers.Provider.query` method must be unittested including the uses
-that produce exceptions other than :class:`~subliminal.exceptions.ProviderNotAvailable`.
+All possible uses of the :meth:`~subliminal.providers.Provider.query` method must be unittested.
 The :meth:`~subliminal.subtitle.Subtitle.compute_matches` is used to validate the unittests.
 
 As it is not possible to unittest all uses of the :meth:`~subliminal.providers.Provider.list_subtitles`

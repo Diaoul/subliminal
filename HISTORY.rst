@@ -7,18 +7,15 @@ Changelog
 
 **WARNING:** Backward incompatible changes
 
-* Add some provider utilities
-* Add a ProviderManager class to manage multiple providers
-* Add a content attribute to the Subtitle class
-* Dissociate download and save functions to give more control to the user
-* Add a fromname classmethod to Video, Episode and Movie classes
-* Add year to Episode class to differentiate two series with the same name
+* Add format to matching
+* Add year to differentiate two series with the same name
+* Add a ProviderManager class to manage the providers
+* Add a ProviderPool to manage multiple providers like a single one
+* Add content to the Subtitle class
+* Add a save function
 * Remove dead BierDopje provider
-* Improve exceptions
 * Fix line endings of subtitles
-* Add timeout support for XMLRPC providers
-* Update unittests
-
+* And much more...
 
 0.7.3
 -----

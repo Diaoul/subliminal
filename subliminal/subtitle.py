@@ -49,6 +49,8 @@ class Subtitle(object):
             encodings.append('windows-1256')
         elif self.language.alpha3 == 'heb':
             encodings.append('windows-1255')
+        elif self.language.alpha3 == 'tur':
+            encodings.extend(['iso-8859-9', 'windows-1254'])
         else:
             encodings.append('latin-1')
 

@@ -54,7 +54,7 @@ def download_subtitles(subtitles, provider_configs=None):
 
 
 def download_best_subtitles(videos, languages, providers=None, provider_configs=None, min_score=0,
-                            hearing_impaired=False, single=False):
+                            hearing_impaired=False, skip_undetermined=False):
     """Download the best subtitles for `videos` with the given `languages` using the specified `providers`
 
     :param videos: videos to download subtitles for
@@ -74,7 +74,7 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
     with ProviderPool(providers, provider_configs) as pp:
         for video in videos:
             # filter
-            if single and babelfish.Language('und') in video.subtitle_languages:
+            if skip_undetermined and babelfish.Language('und') in video.subtitle_languages:
                 logger.debug('Skipping video %r: undetermined language found')
                 continue
 
@@ -100,7 +100,7 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
                 if pp.download_subtitle(subtitle):
                     downloaded_languages.add(subtitle.language)
                     downloaded_subtitles[video].append(subtitle)
-                if single or downloaded_languages == languages:
+                if downloaded_languages == languages:
                     logger.debug('All languages downloaded')
                     break
     return downloaded_subtitles

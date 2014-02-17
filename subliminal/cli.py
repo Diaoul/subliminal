@@ -32,8 +32,6 @@ def subliminal():
 
     # configuration
     configuration_group = parser.add_argument_group('configuration')
-    configuration_group.add_argument('-u', '--skip-undetermined', action='store_true',
-                                     help='do not download for videos with an undetermined subtitle language detected')
     configuration_group.add_argument('-s', '--single', action='store_true',
                                      help='download without language code in subtitle\'s filename i.e. .srt only')
     configuration_group.add_argument('-c', '--cache-file', default=DEFAULT_CACHE_FILE,
@@ -181,8 +179,7 @@ def subliminal():
     # download best subtitles
     subtitles = download_best_subtitles(videos, args.languages, providers=args.providers,
                                         provider_configs=provider_configs, min_score=args.min_score,
-                                        hearing_impaired=args.hearing_impaired,
-                                        skip_undetermined=args.skip_undetermined)
+                                        hearing_impaired=args.hearing_impaired, single=args.single)
 
     # save subtitles
     save_subtitles(subtitles, single=args.single, directory=args.directory, encoding=args.encoding)

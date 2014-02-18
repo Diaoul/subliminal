@@ -19,4 +19,6 @@ EPISODES = [Episode('The Big Bang Theory/Season 07/The.Big.Bang.Theory.S07E05.72
                     tvdb_id=121361,
                     hashes={'opensubtitles': 'b850baa096976c22', 'thesubdb': 'b1f899c77f4c960b84b8dbf840d4e42d'}),
             Episode('Dallas.S01E03.mkv', 'Dallas', 1, 3),
-            Episode('Dallas.2012.S01E03.mkv', 'Dallas', 1, 3, year=2012)]
+            Episode('Dallas.2012.S01E03.mkv', 'Dallas', 1, 3, year=2012),
+            Episode('The.Vampire.Diaries.S05E10.HDTV.x264-LOL.mp4', 'The Vampire Diaries', 5, 10, format='HDTV',
+                    release_group='LOL', video_codec='x264')]

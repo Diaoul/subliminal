@@ -199,7 +199,7 @@ def compute_guess_matches(video, guess):
     if video.release_group and 'releaseGroup' in guess and guess['releaseGroup'].lower() == video.release_group.lower():
         matches.add('release_group')
     # screen size
-    if video.resolution and 'screenSize' in guess and guess['screenSize'] == video.resolution:
+    if video.resolution == guess.get('screenSize'):  # count "no screenSize" as an information
         matches.add('resolution')
     # format
     if video.format and 'format' in guess and guess['format'].lower() == video.format.lower():
@@ -238,21 +238,27 @@ def compute_guess_properties_matches(video, string, propertytype):
 
     """
     matches = set()
+    properties = guess_properties(string, propertytype)
     # We only check for the property types relevant for us
-    if propertytype == 'screenSize' and video.resolution:
-        for prop in guess_properties(string, propertytype):
-            if prop.lower() == video.resolution.lower():
-                matches.add('resolution')
+    if propertytype == 'screenSize':
+        # When no resolution is found for both video and subtitle, we assume it's 'SD' add we'll add a match
+        if not video.resolution and len(properties) == 0:
+            matches.add('resolution')
+        # When a resolution is found in the video, the subtitle must contain the same resolution for a match
+        elif video.resolution:
+            for prop in properties:
+                if prop.lower() == video.resolution.lower():
+                    matches.add('resolution')
     elif propertytype == 'format' and video.format:
-        for prop in guess_properties(string, propertytype):
+        for prop in properties:
             if prop.lower() == video.format.lower():
                 matches.add('format')
     elif propertytype == 'videoCodec' and video.video_codec:
-        for prop in guess_properties(string, propertytype):
+        for prop in properties:
             if prop.lower() == video.video_codec.lower():
                 matches.add('video_codec')
     elif propertytype == 'audioCodec' and video.audio_codec:
-        for prop in guess_properties(string, propertytype):
+        for prop in properties:
             if prop.lower() == video.audio_codec.lower():
                 matches.add('audio_codec')
     return matches

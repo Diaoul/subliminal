@@ -305,6 +305,16 @@ class PodnapisiProviderTestCase(ProviderTestCase):
         self.assertEqual({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)
         self.assertEqual({subtitle.language for subtitle in subtitles}, {language})
 
+    def test_query_resolution_match_none(self):
+        video = EPISODES[4]
+        language = Language('nld')
+        matches = {frozenset(['episode', 'series', 'season', 'resolution', 'release_group', 'year', 'format'])}
+        with self.Provider() as provider:
+            subtitles = provider.query(language, series=video.series, season=video.season, episode=video.episode,
+                                       year=video.year)
+        self.assertEqual({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)
+        self.assertEqual({subtitle.language for subtitle in subtitles}, {language})
+
     def test_list_subtitles(self):
         video = MOVIES[0]
         languages = {Language('eng'), Language('fra')}
@@ -336,7 +346,7 @@ class TheSubDBProviderTestCase(ProviderTestCase):
 
     def test_query_episode_0(self):
         video = EPISODES[0]
-        languages = {Language('eng'), Language('spa'), Language('por')}
+        languages = {Language('eng'), Language('spa'), Language('por'), Language('fra')}
         matches = {frozenset(['hash'])}
         with self.Provider() as provider:
             subtitles = provider.query(video.hashes['thesubdb'])

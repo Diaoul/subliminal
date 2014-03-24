@@ -54,7 +54,7 @@ def download_subtitles(subtitles, provider_configs=None):
 
 
 def download_best_subtitles(videos, languages, providers=None, provider_configs=None, min_score=0,
-                            hearing_impaired=False, single=False):
+                            hearing_impaired=None, single=False):
     """Download the best subtitles for `videos` with the given `languages` using the specified `providers`
 
     :param videos: videos to download subtitles for
@@ -66,7 +66,7 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
     :param provider_configs: configuration for providers
     :type provider_configs: dict of provider name => provider constructor kwargs or None
     :param int min_score: minimum score for subtitles to download
-    :param bool hearing_impaired: download hearing impaired subtitles
+    :param bool hearing_impaired: download hearing impaired subtitles => None ignores the flag
     :param bool single: do not download for videos with an undetermined subtitle language detected
 
     """
@@ -90,9 +90,12 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
                 if score < min_score:
                     logger.info('No subtitle with score >= %d', min_score)
                     break
-                if subtitle.hearing_impaired != hearing_impaired:
-                    logger.debug('Skipping subtitle: hearing impaired != %r', hearing_impaired)
-                    continue
+                # Ignore hearing_impaired check if None
+                if hearing_impaired is not None:
+                    # Check if hearing_impaired flag matches and skip subtitle if not
+                    if subtitle.hearing_impaired != hearing_impaired:
+                        logger.debug('Skipping subtitle: hearing impaired != %r', hearing_impaired)
+                        continue
                 if subtitle.language in downloaded_languages:
                     logger.debug('Skipping subtitle: %r already downloaded', subtitle.language)
                     continue

@@ -118,14 +118,14 @@ class PodnapisiProvider(Provider):
             if series and season and episode:
                 subtitles.extend([PodnapisiSubtitle(language, int(s.find('id').text),
                                                     s.find('release').text.split() if s.find('release').text else [],
-                                                    'h' in (s.find('flags').text or ''), s.find('url').text,
+                                                    'n' in (s.find('flags').text or ''), s.find('url').text,
                                                     series=series, season=season, episode=episode,
                                                     year=s.find('year').text)
                                   for s in root.findall('subtitle')])
             elif title:
                 subtitles.extend([PodnapisiSubtitle(language, int(s.find('id').text),
                                                     s.find('release').text.split() if s.find('release').text else [],
-                                                    'h' in (s.find('flags').text or ''), s.find('url').text,
+                                                    'n' in (s.find('flags').text or ''), s.find('url').text,
                                                     title=title, year=s.find('year').text)
                                   for s in root.findall('subtitle')])
             if int(root.find('pagination/current').text) >= int(root.find('pagination/count').text):

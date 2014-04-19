@@ -151,11 +151,25 @@ class Addic7edProvider(Provider):
             series_year += ' (%d)' % year
         params = {'search': series_year, 'Submit': 'Search'}
         logger.debug('Searching series %r', params)
-        suggested_shows = self.get('/search.php', params).select('span.titulo > a[href^="/show/"]')
-        if not suggested_shows:
+        suggested_episodes = self.get('/search.php', params).select('#container table.tabel70 table.tabel a[href^="serie/"]')
+        # list(set()) is used to filter duplicate items
+        suggested_shownames = list(set([x.string[0:x.string.find(" - ")] for x in suggested_episodes]))
+        if len(suggested_shownames) == 0:
             logger.info('Series %r not found', series_year)
             return None
-        return int(suggested_shows[0]['href'][6:])
+        if len(suggested_shownames) > 1:
+            logger.info('Series %r ambiguous', series_year)
+            return None
+
+        show_ids = self.get_show_ids()
+        suggested_key = suggested_shownames[0].lower()
+        if year is not None:
+            suggested_key += ' (%d)' % year
+        if suggested_key in show_ids:
+            return show_ids[suggested_key]
+
+        logger.info('Series %r not found', series_year)
+        return None
 
     def query(self, series, season, year=None):
         show_ids = self.get_show_ids()

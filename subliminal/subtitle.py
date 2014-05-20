@@ -24,7 +24,7 @@ class Subtitle(object):
 
     """
     def __init__(self, language, hearing_impaired=False, page_link=None):
-        self.language = language
+        self.language = language        
         self.hearing_impaired = hearing_impaired
         self.page_link = page_link
 
@@ -51,6 +51,8 @@ class Subtitle(object):
             encodings.append('windows-1255')
         elif self.language.alpha3 == 'tur':
             encodings.extend(['iso-8859-9', 'windows-1254'])
+        elif self.language.alpha3 == 'por':
+            encodings.append('cp1252')
         else:
             encodings.append('latin-1')
 

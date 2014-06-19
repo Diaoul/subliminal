@@ -146,7 +146,7 @@ def subliminal():
                          embedded_subtitles=not args.force, age=args.age)
 
     # guess videos
-    videos.extend([Video.fromguess(os.path.split(p)[1], guessit.guess_file_info(p, 'autodetect')) for p in args.paths
+    videos.extend([Video.fromguess(os.path.split(p)[1], guessit.guess_file_info(p)) for p in args.paths
                    if not os.path.exists(p)])
 
     # download best subtitles

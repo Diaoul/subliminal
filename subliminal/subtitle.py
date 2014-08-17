@@ -51,7 +51,14 @@ class Subtitle(object):
             encodings.append('windows-1255')
         elif self.language.alpha3 == 'tur':
             encodings.extend(['iso-8859-9', 'windows-1254'])
+        elif self.language.alpha3 == 'pol':
+            # Eastern European Group 1
+            encodings.extend(['windows-1250'])
+        elif self.language.alpha3 == 'bul':
+            # Eastern European Group 2
+            encodings.extend(['windows-1251'])
         else:
+            # Western European (windows-1252)
             encodings.append('latin-1')
 
         # try to decode

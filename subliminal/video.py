@@ -205,6 +205,7 @@ def scan_video(path, subtitles=True, embedded_subtitles=True):
     if video.size > 10485760:
         logger.debug('Size is %d', video.size)
         video.hashes['opensubtitles'] = hash_opensubtitles(path)
+        video.hashes['shooter'] = hash_shooter(path)
         video.hashes['thesubdb'] = hash_thesubdb(path)
         logger.debug('Computed hashes %r', video.hashes)
     else:
@@ -391,6 +392,27 @@ def hash_opensubtitles(video_path):
             filehash = filehash & 0xFFFFFFFFFFFFFFFF
     returnedhash = '%016x' % filehash
     return returnedhash
+
+
+def hash_shooter(video_path):
+    """Compute a hash using Shooter's algorithm
+
+    :param string video_path: path of the video
+    :return: the hash
+    :rtype: string
+
+    """
+    filesize = os.path.getsize(video_path)
+    readsize = 4096
+    if os.path.getsize(video_path) < readsize * 2:
+        return None
+    offsets = (readsize, filesize / 3 * 2, filesize / 3, filesize - readsize * 2)
+    filehash = []
+    with open(video_path, 'rb') as f:
+        for offset in offsets:
+            f.seek(offset)
+            filehash.append(hashlib.md5(f.read(readsize)).hexdigest())
+    return ';'.join(filehash)
 
 
 def hash_thesubdb(video_path):

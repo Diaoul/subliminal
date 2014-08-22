@@ -6,7 +6,6 @@ import logging
 import json
 import babelfish
 import requests
-import json
 import hashlib
 from . import Provider
 from .. import __version__
@@ -62,8 +61,8 @@ class ShooterProvider(Provider):
         if r.content == b'\xff':
             logger.debug('No subtitle found')
             return []
-        content = json.loads(r.content)
-        subtitles = [ShooterSubtitle(language, page_link=t['Link'], hash=hash) for s in content for t in s['Files']]
+        raw_json = json.loads(r.text)
+        subtitles = [ShooterSubtitle(language, page_link=t['Link'], hash=hash) for s in raw_json for t in s['Files']]
         return subtitles
 
     def list_subtitles(self, video, languages):

@@ -17,6 +17,8 @@ Video
 
 .. autofunction:: hash_opensubtitles
 
+.. autofunction:: hash_shooter
+
 .. autofunction:: hash_thesubdb
 
 .. autofunction:: scan_subtitle_languages

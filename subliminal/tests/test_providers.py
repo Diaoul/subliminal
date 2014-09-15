@@ -282,7 +282,8 @@ class PodnapisiProviderTestCase(ProviderTestCase):
                    frozenset(['title', 'year']),
                    frozenset(['title']),
                    frozenset(['video_codec', 'title', 'resolution', 'release_group', 'year', 'format']),
-                   frozenset(['video_codec', 'title', 'resolution', 'audio_codec', 'year', 'format'])}
+                   frozenset(['video_codec', 'title', 'resolution', 'audio_codec', 'year', 'format']),
+                   frozenset(['video_codec', 'format', 'year', 'resolution', 'title'])}
         with self.Provider() as provider:
             subtitles = provider.query(language, title=video.title, year=video.year)
         self.assertEqual({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)
@@ -292,7 +293,8 @@ class PodnapisiProviderTestCase(ProviderTestCase):
         video = EPISODES[0]
         language = Language('eng')
         matches = {frozenset(['episode', 'series', 'season', 'video_codec', 'resolution', 'release_group', 'format']),
-                   frozenset(['season', 'video_codec', 'episode', 'resolution', 'series'])}
+                   frozenset(['season', 'video_codec', 'episode', 'resolution', 'series']),
+                   frozenset(['season', 'video_codec', 'episode', 'series'])}
         with self.Provider() as provider:
             subtitles = provider.query(language, series=video.series, season=video.season, episode=video.episode,
                                        year=video.year)
@@ -321,7 +323,8 @@ class PodnapisiProviderTestCase(ProviderTestCase):
                    frozenset(['title', 'year']),
                    frozenset(['title']),
                    frozenset(['video_codec', 'title', 'resolution', 'release_group', 'year', 'format']),
-                   frozenset(['video_codec', 'title', 'resolution', 'audio_codec', 'year', 'format'])}
+                   frozenset(['video_codec', 'title', 'resolution', 'audio_codec', 'year', 'format']),
+                   frozenset(['video_codec', 'format', 'year', 'resolution', 'title'])}
         with self.Provider() as provider:
             subtitles = provider.list_subtitles(video, languages)
         self.assertEqual({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)

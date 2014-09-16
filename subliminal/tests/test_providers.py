@@ -338,7 +338,8 @@ class TheSubDBProviderTestCase(ProviderTestCase):
 
     def test_query_episode_0(self):
         video = EPISODES[0]
-        languages = {Language('eng'), Language('spa'), Language('por')}
+        languages = {Language('eng'), Language('spa'), Language('por'),
+                     Language('fra')}
         matches = {frozenset(['hash'])}
         with self.Provider() as provider:
             subtitles = provider.query(video.hashes['thesubdb'])

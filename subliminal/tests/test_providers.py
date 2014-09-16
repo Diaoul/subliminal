@@ -172,6 +172,10 @@ class OpenSubtitlesProviderTestCase(ProviderTestCase):
                    frozenset(['episode', 'video_codec', 'series', 'imdb_id', 'resolution', 'season', 'year']),
                    frozenset(['series', 'imdb_id', 'resolution', 'episode', 'season', 'year']),
                    frozenset(['series', 'episode', 'season', 'imdb_id', 'year']),
+                   frozenset(['episode', 'audio_codec', 'season', 'series', 'video_codec', 'resolution', 'imdb_id']),
+                   frozenset(['episode', 'series', 'season', 'title', 'year', 'imdb_id']),
+                   frozenset(['episode', 'video_codec', 'format', 'series', 'year', 'season', 'imdb_id']),
+                   frozenset(['series', 'episode', 'season', 'imdb_id']),
                    frozenset(['series', 'episode', 'season', 'imdb_id', 'year', 'format'])}
         with self.Provider() as provider:
             subtitles = provider.query(languages, query=os.path.split(video.name)[1])

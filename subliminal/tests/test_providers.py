@@ -429,8 +429,9 @@ class TVsubtitlesProviderTestCase(ProviderTestCase):
 
     def test_query_episode_0(self):
         video = EPISODES[0]
-        languages = {Language('fra'), Language('por'), Language('hun'), Language('ron'), Language('eng')}
+        languages = {Language('fra'), Language('por'), Language('hun'), Language('ron'), Language('eng'), Language('ita')}
         matches = {frozenset(['series', 'episode', 'season', 'video_codec', 'format']),
+                   frozenset(['series', 'episode', 'resolution', 'season', 'video_codec']),
                    frozenset(['series', 'episode', 'season', 'format'])}
         with self.Provider() as provider:
             subtitles = provider.query(video.series, video.season, video.episode, video.year)
@@ -440,9 +441,10 @@ class TVsubtitlesProviderTestCase(ProviderTestCase):
     def test_query_episode_1(self):
         video = EPISODES[1]
         languages = {Language('fra'), Language('ell'), Language('ron'), Language('eng'), Language('hun'),
-                     Language('por'), Language('por', 'BR'), Language('jpn')}
+                     Language('por'), Language('por', 'BR'), Language('jpn'), Language('swe')}
         matches = {frozenset(['series', 'episode', 'resolution', 'season', 'year']),
                    frozenset(['series', 'episode', 'season', 'video_codec', 'year']),
+                   frozenset(['episode', 'year', 'series', 'video_codec', 'resolution', 'season']),
                    frozenset(['series', 'episode', 'season', 'year'])}
         with self.Provider() as provider:
             subtitles = provider.query(video.series, video.season, video.episode, video.year)

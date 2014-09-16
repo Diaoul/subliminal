@@ -58,7 +58,7 @@ class Addic7edProviderTestCase(ProviderTestCase):
 
     def test_query_episode_0(self):
         video = EPISODES[0]
-        languages = {Language('tur'), Language('rus'), Language('heb'), Language('ita'), Language('fra'),
+        languages = {Language('hrv'), Language('rus'), Language('heb'), Language('ita'), Language('fra'),
                      Language('ron'), Language('nld'), Language('eng'), Language('deu'), Language('ell'),
                      Language('por', 'BR'), Language('bul'), Language('por'), Language('msa')}
         matches = {frozenset(['series', 'resolution', 'season']),
@@ -66,6 +66,8 @@ class Addic7edProviderTestCase(ProviderTestCase):
                    frozenset(['series', 'release_group', 'season']),
                    frozenset(['series', 'episode', 'season', 'release_group', 'title']),
                    frozenset(['series', 'season']),
+                   frozenset(['format', 'resolution', 'season', 'series']),
+                   frozenset(['format', 'release_group', 'season', 'series']),
                    frozenset(['series', 'season', 'format'])}
         with self.Provider() as provider:
             subtitles = provider.query(video.series, video.season, video.year)

@@ -30,7 +30,7 @@ subliminal
     filtering:
       -p PROVIDER [PROVIDER ...], --providers PROVIDER [PROVIDER ...]
                             providers to use (opensubtitles, thesubdb, podnapisi,
-                            addic7ed, tvsubtitles)
+                            addic7ed, tvsubtitles, shooter)
       -m MIN_SCORE, --min-score MIN_SCORE
                             minimum score for subtitles (0-71 for episodes, 0-31
                             for movies)

@@ -19,6 +19,7 @@ best matching subtitles. Providers are extensible through a dedicated entry poin
 * Addic7ed
 * OpenSubtitles
 * Podnapisi
+* Shooter
 * TheSubDB
 * TvSubtitles
 

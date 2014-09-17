@@ -157,6 +157,7 @@ class ProviderManager(object):
         self.registered_providers = ['addic7ed = subliminal.providers.addic7ed:Addic7edProvider',
                                      'opensubtitles = subliminal.providers.opensubtitles:OpenSubtitlesProvider',
                                      'podnapisi = subliminal.providers.podnapisi:PodnapisiProvider',
+                                     'shooter = subliminal.providers.shooter:ShooterProvider',
                                      'thesubdb = subliminal.providers.thesubdb:TheSubDBProvider',
                                      'tvsubtitles = subliminal.providers.tvsubtitles:TVsubtitlesProvider']
 

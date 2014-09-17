@@ -331,6 +331,46 @@ class PodnapisiProviderTestCase(ProviderTestCase):
         self.assertTrue(subtitles[0].is_valid)
 
 
+class ShooterProviderTestCase(ProviderTestCase):
+    provider_name = 'shooter'
+
+    def test_query_movie_0_query(self):
+        video = MOVIES[0]
+        language = Language('zho')
+        matches = {frozenset(['hash'])}
+        with self.Provider() as provider:
+            subtitles = provider.query(language, video.name, video.hashes['shooter'])
+        self.assertEqual({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)
+        self.assertEqual({subtitle.language for subtitle in subtitles}, {language})
+
+    def test_query_episode_0(self):
+        video = EPISODES[0]
+        language = Language('zho')
+        matches = {frozenset(['hash'])}
+        with self.Provider() as provider:
+            subtitles = provider.query(language, video.name, video.hashes['shooter'])
+        self.assertEqual({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)
+        self.assertEqual({subtitle.language for subtitle in subtitles}, {language})
+
+    def test_query_episode_1(self):
+        video = EPISODES[1]
+        language = Language('zho')
+        matches = {frozenset(['hash'])}
+        with self.Provider() as provider:
+            subtitles = provider.query(language, video.name, video.hashes['shooter'])
+        self.assertEqual({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)
+        self.assertEqual({subtitle.language for subtitle in subtitles}, {language})
+
+    def test_download_subtitle(self):
+        video = MOVIES[0]
+        languages = {Language('zho')}
+        with self.Provider() as provider:
+            subtitles = provider.list_subtitles(video, languages)
+            provider.download_subtitle(subtitles[0])
+        self.assertIsNotNone(subtitles[0].content)
+        self.assertTrue(subtitles[0].is_valid)
+
+
 class TheSubDBProviderTestCase(ProviderTestCase):
     provider_name = 'thesubdb'
 
@@ -466,6 +506,7 @@ def suite():
     suite.addTest(TestLoader().loadTestsFromTestCase(Addic7edProviderTestCase))
     suite.addTest(TestLoader().loadTestsFromTestCase(OpenSubtitlesProviderTestCase))
     suite.addTest(TestLoader().loadTestsFromTestCase(PodnapisiProviderTestCase))
+    suite.addTest(TestLoader().loadTestsFromTestCase(ShooterProviderTestCase))
     suite.addTest(TestLoader().loadTestsFromTestCase(TheSubDBProviderTestCase))
     suite.addTest(TestLoader().loadTestsFromTestCase(TVsubtitlesProviderTestCase))
     return suite

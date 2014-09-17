@@ -99,13 +99,15 @@ class OpenSubtitlesProvider(Provider):
     def no_operation(self):
         checked(self.server.NoOperation(self.token))
 
-    def query(self, languages, hash=None, size=None, imdb_id=None, query=None):  # @ReservedAssignment
+    def query(self, languages, hash=None, size=None, imdb_id=None, query=None, season=None, episode=None):  # @ReservedAssignment
         searches = []
         if hash and size:
             searches.append({'moviehash': hash, 'moviebytesize': str(size)})
         if imdb_id:
             searches.append({'imdbid': imdb_id})
-        if query:
+        if query and season and episode:
+            searches.append({'query': query, 'season': season, 'episode': episode})
+        elif query:
             searches.append({'query': query})
         if not searches:
             raise ValueError('One or more parameter missing')
@@ -126,10 +128,16 @@ class OpenSubtitlesProvider(Provider):
 
     def list_subtitles(self, video, languages):
         query = None
+        season = None
+        episode = None
         if ('opensubtitles' not in video.hashes or not video.size) and not video.imdb_id:
             query = video.name.split(os.sep)[-1]
+        if isinstance(video, Episode):
+            query = video.series
+            season = video.season
+            episode = video.episode
         return self.query(languages, hash=video.hashes.get('opensubtitles'), size=video.size, imdb_id=video.imdb_id,
-                          query=query)
+                          query=query, season=season, episode=episode)
 
     def download_subtitle(self, subtitle):
         response = checked(self.server.DownloadSubtitles(self.token, [subtitle.id]))

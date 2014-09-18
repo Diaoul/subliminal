@@ -155,7 +155,7 @@ def download_subtitles(subtitles, provider_configs=None, single=False):
 
 
 def download_best_subtitles(videos, languages, providers=None, provider_configs=None, single=False, min_score=0,
-                            hearing_impaired=False):
+                            hearing_impaired=False, hi_score_adjust=0):
     """Download the best subtitles for `videos` with the given `languages` using the specified `providers`
 
     :param videos: videos to download subtitles for
@@ -169,6 +169,7 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
     :param bool single: download with .srt extension if `True`, add language identifier otherwise
     :param int min_score: minimum score for subtitles to download
     :param bool hearing_impaired: download hearing impaired subtitles
+    :param int hi_score_adjust: Adjust hearing_impaired_scores if matched.
 
     """
     provider_configs = provider_configs or {}
@@ -242,6 +243,10 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
                     if subtitle.hearing_impaired != hearing_impaired:
                         logger.debug('Skipping subtitle: hearing impaired != %r', hearing_impaired)
                         continue
+                elif subtitle.hearing_impaired and hi_score_adjust != 0:
+                    # Priortization (adjust score)
+                    score += hi_score_adjust
+
                 if score < min_score:
                     logger.debug('Skipping subtitle: score < %d', min_score)
                     continue

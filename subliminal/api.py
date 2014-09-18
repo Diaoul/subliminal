@@ -233,9 +233,10 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
                 if subtitle.provider_name in discarded_providers:
                     logger.debug('Skipping subtitle from discarded provider %r', subtitle.provider_name)
                     continue
-                if subtitle.hearing_impaired != hearing_impaired:
-                    logger.debug('Skipping subtitle: hearing impaired != %r', hearing_impaired)
-                    continue
+                if hearing_impaired is not None:
+                    if subtitle.hearing_impaired != hearing_impaired:
+                        logger.debug('Skipping subtitle: hearing impaired != %r', hearing_impaired)
+                        continue
                 if score < min_score:
                     logger.debug('Skipping subtitle: score < %d', min_score)
                     continue

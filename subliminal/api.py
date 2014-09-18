@@ -102,6 +102,7 @@ def download_subtitles(subtitles, provider_configs=None, single=False):
             for subtitle in video_subtitles:
                 # filter
                 if subtitle.language in downloaded_languages:
+                    logger.debug('Skipping subtitle: %r already downloaded', subtitle.language)
                     continue
                 if subtitle.provider_name in discarded_providers:
                     logger.debug('Skipping subtitle from discarded provider %r', subtitle.provider_name)
@@ -138,8 +139,11 @@ def download_subtitles(subtitles, provider_configs=None, single=False):
                 with io.open(subtitle_path, 'w', encoding='utf-8') as f:
                     f.write(subtitle_text)
                 downloaded_languages.add(subtitle.language)
-                if single or downloaded_languages == languages:
+                if single or sorted(downloaded_languages) == sorted(languages):
                     break
+            # handle outerloop
+            if single or sorted(downloaded_languages) == sorted(languages):
+                break
     finally:  # terminate providers
         for (provider_name, provider) in initialized_providers.items():
             try:
@@ -201,6 +205,7 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
         for video in videos:
             # search for subtitles
             subtitles = []
+            downloaded_languages = set()
             for provider_name, provider in initialized_providers.items():
                 if provider.check(video):
                     if provider_name in discarded_providers:
@@ -226,7 +231,7 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
                     subtitles.extend(provider_subtitles)
 
             # find the best subtitles and download them
-            downloaded_languages = video.subtitle_languages.copy()
+            languages = video.subtitle_languages.copy()
             for subtitle, score in sorted([(s, s.compute_score(video)) for s in subtitles],
                                           key=operator.itemgetter(1), reverse=True):
                 # filter
@@ -264,9 +269,12 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
                 with io.open(subtitle_path, 'w', encoding='utf-8') as f:
                     f.write(subtitle_text)
                 downloaded_languages.add(subtitle.language)
-                if single or downloaded_languages >= languages:
-                    logger.debug('All languages downloaded')
+                if single or sorted(downloaded_languages) == sorted(languages):
                     break
+            # handle outer loop (prevent second iteration if it is unnessisary)
+            if single or sorted(downloaded_languages) == sorted(languages):
+                break
+
     finally:  # terminate providers
         for (provider_name, provider) in initialized_providers.items():
             try:

@@ -53,11 +53,11 @@ class Addic7edSubtitle(Subtitle):
 
 
 class Addic7edProvider(Provider):
-    languages = {babelfish.Language('por', 'BR')} | {babelfish.Language(l)
+    languages = set([babelfish.Language('por', 'BR')]) | set([babelfish.Language(l)
                  for l in ['ara', 'aze', 'ben', 'bos', 'bul', 'cat', 'ces', 'dan', 'deu', 'ell', 'eng', 'eus', 'fas',
                            'fin', 'fra', 'glg', 'heb', 'hrv', 'hun', 'hye', 'ind', 'ita', 'jpn', 'kor', 'mkd', 'msa',
                            'nld', 'nor', 'pol', 'por', 'ron', 'rus', 'slk', 'slv', 'spa', 'sqi', 'srp', 'swe', 'tha',
-                           'tur', 'ukr', 'vie', 'zho']}
+                           'tur', 'ukr', 'vie', 'zho']])
     video_types = (Episode,)
     server = 'http://www.addic7ed.com'
 

@@ -14,7 +14,7 @@ class PodnapisiConverter(LanguageReverseConverter):
                                11: ('jpn',), 4: ('kor',), 29: ('sqi',), 6: ('isl',), 19: ('lit',), 46: ('ukr',),
                                44: ('tha',), 53: ('cat',), 56: ('sin',), 21: ('lav',), 40: ('cmn',), 55: ('msa',),
                                42: ('hin',), 50: ('bel',)}
-        self.to_podnapisi = {v: k for k, v in self.from_podnapisi.items()}
+        self.to_podnapisi = dict([(v, k) for k, v in self.from_podnapisi.items()])
         self.codes = set(self.from_podnapisi.keys())
 
     def convert(self, alpha3, country=None, script=None):

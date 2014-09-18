@@ -29,7 +29,7 @@ class TheSubDBSubtitle(Subtitle):
 
 
 class TheSubDBProvider(Provider):
-    languages = {babelfish.Language.fromalpha2(l) for l in ['en', 'es', 'fr', 'it', 'nl', 'pl', 'pt', 'ro', 'sv', 'tr']}
+    languages = set([babelfish.Language.fromalpha2(l) for l in ['en', 'es', 'fr', 'it', 'nl', 'pl', 'pt', 'ro', 'sv', 'tr']])
     required_hash = 'thesubdb'
 
     def initialize(self):
@@ -65,7 +65,7 @@ class TheSubDBProvider(Provider):
         elif r.status_code != 200:
             raise ProviderError('Request failed with status code %d' % r.status_code)
         return [TheSubDBSubtitle(language, hash) for language in
-                {babelfish.Language.fromalpha2(l) for l in r.content.split(',')}]
+                set([babelfish.Language.fromalpha2(l) for l in r.content.split(',')])]
 
     def list_subtitles(self, video, languages):
         return [s for s in self.query(video.hashes['thesubdb']) if s.language in languages]

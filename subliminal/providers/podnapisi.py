@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 import io
 import logging
 import re
+import contextlib
 import xml.etree.ElementTree
 import zipfile
 import babelfish
@@ -67,7 +68,7 @@ class PodnapisiSubtitle(Subtitle):
 
 
 class PodnapisiProvider(Provider):
-    languages = {babelfish.Language.frompodnapisi(l) for l in babelfish.get_language_converter('podnapisi').codes}
+    languages = set([babelfish.Language.frompodnapisi(l) for l in babelfish.language_converters['podnapisi'].codes])
     video_types = (Episode, Movie)
     server = 'http://simple.podnapisi.net'
     link_re = re.compile('^.*(?P<link>/ppodnapisi/download/i/\d+/k/.*$)')
@@ -153,7 +154,7 @@ class PodnapisiProvider(Provider):
             raise ProviderNotAvailable('Timeout after 10 seconds')
         if r.status_code != 200:
             raise ProviderNotAvailable('Request failed with status code %d' % r.status_code)
-        with zipfile.ZipFile(io.BytesIO(r.content)) as zf:
+        with contextlib.closing(zipfile.ZipFile(io.BytesIO(r.content))) as zf:
             if len(zf.namelist()) > 1:
                 raise ProviderError('More than one file to unzip')
             subtitle_bytes = zf.read(zf.namelist()[0])

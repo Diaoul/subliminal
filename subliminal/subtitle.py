@@ -62,13 +62,13 @@ class Subtitle(object):
             # remove equivalences
             if isinstance(video, Episode):
                 if 'imdb_id' in matches:
-                    matches -= {'series', 'tvdb_id', 'season', 'episode', 'title'}
+                    matches -= set(['series', 'tvdb_id', 'season', 'episode', 'title'])
                 if 'tvdb_id' in matches:
-                    matches -= {'series'}
+                    matches -= set(['series',])
                 if 'title' in matches:
-                    matches -= {'season', 'episode'}
+                    matches -= set(['season', 'episode'])
             # add other scores
-            score += sum((video.scores[match] for match in matches))
+            score += sum([video.scores[match] for match in matches])
         logger.info('Computed score %d with matches %r', score, initial_matches)
         return score
 

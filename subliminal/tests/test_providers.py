@@ -40,51 +40,51 @@ class Addic7edProviderTestCase(ProviderTestCase):
 
     def test_query_episode_0(self):
         video = EPISODES[0]
-        languages = {Language('tur'), Language('rus'), Language('heb'), Language('ita'), Language('fra'),
+        languages = (Language('tur'), Language('rus'), Language('heb'), Language('ita'), Language('fra'),
                      Language('ron'), Language('nld'), Language('eng'), Language('deu'), Language('ell'),
-                     Language('por', 'BR'), Language('bul')}
-        matches = {frozenset(['episode', 'release_group', 'title', 'series', 'resolution', 'season']),
+                     Language('por', 'BR'), Language('bul'))
+        matches = (frozenset(['episode', 'release_group', 'title', 'series', 'resolution', 'season']),
                    frozenset(['series', 'resolution', 'season']),
                    frozenset(['series', 'episode', 'season', 'title']),
                    frozenset(['series', 'release_group', 'season']),
                    frozenset(['series', 'episode', 'season', 'release_group', 'title']),
-                   frozenset(['series', 'season'])}
+                   frozenset(['series', 'season']))
         with self.Provider() as provider:
             subtitles = provider.query(video.series, video.season)
-        self.assertEqual({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)
-        self.assertEqual({subtitle.language for subtitle in subtitles}, languages)
+        self.assertEqual(set([frozenset(subtitle.compute_matches(video)) for subtitle in subtitles]), matches)
+        self.assertEqual(set([subtitle.language for subtitle in subtitles]), languages)
 
     def test_query_episode_1(self):
         video = EPISODES[1]
-        languages = {Language('ind'), Language('spa'), Language('hrv'), Language('ita'), Language('fra'),
+        languages = (Language('ind'), Language('spa'), Language('hrv'), Language('ita'), Language('fra'),
                      Language('cat'), Language('ell'), Language('nld'), Language('eng'), Language('fas'),
                      Language('por'), Language('nor'), Language('deu'), Language('ron'), Language('por', 'BR'),
-                     Language('bul')}
-        matches = {frozenset(['series', 'episode', 'resolution', 'season', 'title']),
+                     Language('bul'))
+        matches = (frozenset(['series', 'episode', 'resolution', 'season', 'title']),
                    frozenset(['series', 'resolution', 'season']),
                    frozenset(['series', 'episode', 'season', 'title']),
                    frozenset(['series', 'release_group', 'season']),
                    frozenset(['series', 'resolution', 'release_group', 'season']),
                    frozenset(['series', 'episode', 'season', 'release_group', 'title']),
-                   frozenset(['series', 'season'])}
+                   frozenset(['series', 'season']))
         with self.Provider() as provider:
             subtitles = provider.query(video.series, video.season)
-        self.assertEqual({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)
-        self.assertEqual({subtitle.language for subtitle in subtitles}, languages)
+        self.assertEqual(set([frozenset(subtitle.compute_matches(video)) for subtitle in subtitles]), matches)
+        self.assertEqual(set([subtitle.language for subtitle in subtitles]), languages)
 
     def test_list_subtitles(self):
         video = EPISODES[0]
-        languages = {Language('eng'), Language('fra')}
-        matches = {frozenset(['series', 'episode', 'season', 'release_group', 'title']),
-                   frozenset(['series', 'episode', 'season', 'title'])}
+        languages = (Language('eng'), Language('fra'))
+        matches = (frozenset(['series', 'episode', 'season', 'release_group', 'title']),
+                   frozenset(['series', 'episode', 'season', 'title']))
         with self.Provider() as provider:
             subtitles = provider.list_subtitles(video, languages)
-        self.assertEqual({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)
-        self.assertEqual({subtitle.language for subtitle in subtitles}, languages)
+        self.assertEqual(set([frozenset(subtitle.compute_matches(video)) for subtitle in subtitles]), matches)
+        self.assertEqual(set([subtitle.language for subtitle in subtitles]), languages)
 
     def test_download_subtitle(self):
         video = EPISODES[0]
-        languages = {Language('eng'), Language('fra')}
+        languages = (Language('eng'), Language('fra'))
         with self.Provider() as provider:
             subtitles = provider.list_subtitles(video, languages)
             subtitle_text = provider.download_subtitle(subtitles[0])
@@ -107,54 +107,54 @@ class BierDopjeProviderTestCase(ProviderTestCase):
     def test_query_episode_0(self):
         video = EPISODES[0]
         language = Language('eng')
-        matches = {frozenset(['series', 'video_codec', 'resolution', 'episode', 'season']),
+        matches = (frozenset(['series', 'video_codec', 'resolution', 'episode', 'season']),
                    frozenset(['season', 'video_codec', 'episode', 'series']),
-                   frozenset(['episode', 'video_codec', 'season', 'series', 'resolution', 'release_group'])}
+                   frozenset(['episode', 'video_codec', 'season', 'series', 'resolution', 'release_group']))
         with self.Provider() as provider:
             subtitles = provider.query(language, video.season, video.episode, series=video.series)
-        self.assertEqual({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)
-        self.assertEqual({subtitle.language for subtitle in subtitles}, {language})
+        self.assertEqual(set([frozenset(subtitle.compute_matches(video)) for subtitle in subtitles]), matches)
+        self.assertEqual(set([subtitle.language for subtitle in subtitles]), (language,))
 
     def test_query_episode_1(self):
         video = EPISODES[1]
         language = Language('nld')
-        matches = {frozenset(['series', 'video_codec', 'resolution', 'episode', 'season']),
+        matches = (frozenset(['series', 'video_codec', 'resolution', 'episode', 'season']),
                    frozenset(['season', 'video_codec', 'episode', 'series']),
                    frozenset(['series', 'episode', 'season']),
                    frozenset(['season', 'video_codec', 'episode', 'release_group', 'series']),
-                   frozenset(['episode', 'video_codec', 'season', 'series', 'resolution', 'release_group'])}
+                   frozenset(['episode', 'video_codec', 'season', 'series', 'resolution', 'release_group']))
         with self.Provider() as provider:
             subtitles = provider.query(language, video.season, video.episode, series=video.series)
-        self.assertEqual({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)
-        self.assertEqual({subtitle.language for subtitle in subtitles}, {language})
+        self.assertEqual(set([frozenset(subtitle.compute_matches(video)) for subtitle in subtitles]), matches)
+        self.assertEqual(set([subtitle.language for subtitle in subtitles]), (language,))
 
     def test_query_episode_0_tvdb_id(self):
         video = EPISODES[0]
         language = Language('eng')
-        matches = {frozenset(['video_codec', 'tvdb_id', 'episode', 'season', 'series']),
+        matches = (frozenset(['video_codec', 'tvdb_id', 'episode', 'season', 'series']),
                    frozenset(['episode', 'video_codec', 'series', 'season', 'tvdb_id', 'resolution', 'release_group']),
-                   frozenset(['episode', 'series', 'video_codec', 'tvdb_id', 'resolution', 'season'])}
+                   frozenset(['episode', 'series', 'video_codec', 'tvdb_id', 'resolution', 'season']))
         with self.Provider() as provider:
             subtitles = provider.query(language, video.season, video.episode, tvdb_id=video.tvdb_id)
-        self.assertEqual({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)
-        self.assertEqual({subtitle.language for subtitle in subtitles}, {language})
+        self.assertEqual(set([frozenset(subtitle.compute_matches(video)) for subtitle in subtitles]), matches)
+        self.assertEqual(set([subtitle.language for subtitle in subtitles]), (language,))
 
     def test_list_subtitles(self):
         video = EPISODES[1]
-        languages = {Language('eng'), Language('nld')}
-        matches = {frozenset(['series', 'video_codec', 'tvdb_id', 'episode', 'season']),
+        languages = (Language('eng'), Language('nld'))
+        matches = (frozenset(['series', 'video_codec', 'tvdb_id', 'episode', 'season']),
                    frozenset(['episode', 'video_codec', 'season', 'series', 'tvdb_id', 'resolution', 'release_group']),
                    frozenset(['season', 'tvdb_id', 'episode', 'series']),
                    frozenset(['episode', 'video_codec', 'season', 'series', 'tvdb_id', 'resolution']),
-                   frozenset(['episode', 'video_codec', 'season', 'series', 'tvdb_id', 'release_group'])}
+                   frozenset(['episode', 'video_codec', 'season', 'series', 'tvdb_id', 'release_group']))
         with self.Provider() as provider:
             subtitles = provider.list_subtitles(video, languages)
-        self.assertEqual({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)
-        self.assertEqual({subtitle.language for subtitle in subtitles}, languages)
+        self.assertEqual(set([frozenset(subtitle.compute_matches(video)) for subtitle in subtitles]), matches)
+        self.assertEqual(set([subtitle.language for subtitle in subtitles]), languages)
 
     def test_download_subtitle(self):
         video = EPISODES[0]
-        languages = {Language('eng'), Language('nld')}
+        languages = (Language('eng'), Language('nld'))
         with self.Provider() as provider:
             subtitles = provider.list_subtitles(video, languages)
             subtitle_text = provider.download_subtitle(subtitles[0])

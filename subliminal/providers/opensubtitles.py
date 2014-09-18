@@ -83,7 +83,7 @@ class OpenSubtitlesSubtitle(Subtitle):
 
 
 class OpenSubtitlesProvider(Provider):
-    languages = {babelfish.Language.fromopensubtitles(l) for l in babelfish.get_language_converter('opensubtitles').codes}
+    languages = set([babelfish.Language.fromopensubtitles(l) for l in babelfish.language_converters['opensubtitles'].codes])
 
     def __init__(self):
         self.server = xmlrpclib.ServerProxy('http://api.opensubtitles.org/xml-rpc')

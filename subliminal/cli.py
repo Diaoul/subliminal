@@ -81,7 +81,7 @@ def subliminal():
 
     # parse languages
     try:
-        args.languages = {babelfish.Language.fromietf(l) for l in args.languages}
+        args.languages = set( babelfish.Language.fromietf(l) for l in args.languages )
     except babelfish.Error:
         parser.error('argument -l/--languages: codes are not IETF: %r' % args.languages)
 
@@ -90,7 +90,7 @@ def subliminal():
         match = re.match(r'^(?:(?P<weeks>\d+?)w)?(?:(?P<days>\d+?)d)?(?:(?P<hours>\d+?)h)?$', args.age)
         if not match:
             parser.error('argument -a/--age: invalid age: %r' % args.age)
-        args.age = datetime.timedelta(**{k: int(v) for k, v in match.groupdict(0).items()})
+        args.age = datetime.timedelta(**dict([(k, int(v)) for k, v in match.groupdict(0).items()]))
 
     # parse cache-file
     args.cache_file = os.path.abspath(os.path.expanduser(args.cache_file))

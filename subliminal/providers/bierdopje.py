@@ -49,7 +49,7 @@ class BierDopjeSubtitle(Subtitle):
 
 
 class BierDopjeProvider(Provider):
-    languages = {babelfish.Language(l) for l in ['eng', 'nld']}
+    languages = set([babelfish.Language(l) for l in ['eng', 'nld']])
     video_types = (Episode,)
 
     def initialize(self):
@@ -93,7 +93,11 @@ class BierDopjeProvider(Provider):
         if root.find('response/status').text == 'false':
             logger.info('Series %r not found', series)
             return None
-        return int(root.find('response/results/result[1]/showid').text)
+        try:
+            return int(root.find('response/results/result[1]/showid').text)
+        except SyntaxError:
+            # Python < 2.7; fail gracefully
+            return None
 
     def query(self, language, season, episode, tvdb_id=None, series=None):
         params = {'language': language.alpha2, 'season': season, 'episode': episode}

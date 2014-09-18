@@ -92,11 +92,12 @@ def download_subtitles(subtitles, provider_configs=None, single=False):
     """
     provider_configs = provider_configs or {}
     discarded_providers = set()
-    providers_by_name = {ep.name: ep.load() for ep in pkg_resources.iter_entry_points(PROVIDERS_ENTRY_POINT)}
+    providers_by_name = dict([(ep.name, ep.load()) for ep in pkg_resources.iter_entry_points(PROVIDERS_ENTRY_POINT)])
+
     initialized_providers = {}
     try:
         for video, video_subtitles in subtitles.items():
-            languages = {subtitle.language for subtitle in video_subtitles}
+            languages = dict([subtitle.language for subtitle in video_subtitles])
             downloaded_languages = set()
             for subtitle in video_subtitles:
                 # filter

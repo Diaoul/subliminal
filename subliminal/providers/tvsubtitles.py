@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 import io
 import logging
 import re
+import contextlib
 import zipfile
 import babelfish
 import bs4
@@ -56,9 +57,9 @@ class TVsubtitlesSubtitle(Subtitle):
 
 
 class TVsubtitlesProvider(Provider):
-    languages = {babelfish.Language('por', 'BR')} | {babelfish.Language(l)
+    languages = set([babelfish.Language('por', 'BR')]) | set([babelfish.Language(l)
                  for l in ['ara', 'bul', 'ces', 'dan', 'deu', 'ell', 'eng', 'fin', 'fra', 'hun', 'ita', 'jpn', 'kor',
-                           'nld', 'pol', 'por', 'ron', 'rus', 'spa', 'swe', 'tur', 'ukr', 'zho']}
+                           'nld', 'pol', 'por', 'ron', 'rus', 'spa', 'swe', 'tur', 'ukr', 'zho']])
     video_types = (Episode,)
     server = 'http://www.tvsubtitles.net'
     episode_id_re = re.compile('^episode-\d+\.html$')
@@ -165,7 +166,7 @@ class TVsubtitlesProvider(Provider):
             raise ProviderNotAvailable('Timeout after 10 seconds')
         if r.status_code != 200:
             raise ProviderNotAvailable('Request failed with status code %d' % r.status_code)
-        with zipfile.ZipFile(io.BytesIO(r.content)) as zf:
+        with contextlib.closing(zipfile.ZipFile(io.BytesIO(r.content))) as zf:
             if len(zf.namelist()) > 1:
                 raise ProviderError('More than one file to unzip')
             subtitle_bytes = zf.read(zf.namelist()[0])

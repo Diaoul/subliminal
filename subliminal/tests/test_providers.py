@@ -71,8 +71,11 @@ class Addic7edProviderTestCase(ProviderTestCase):
                    frozenset(['series', 'season', 'format'])}
         with self.Provider() as provider:
             subtitles = provider.query(video.series, video.season, video.year)
-        self.assertEqual({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)
-        self.assertEqual({subtitle.language for subtitle in subtitles}, languages)
+        subtitles_set = {frozenset(subtitle.compute_matches(video))
+                         for subtitle in subtitles}
+        languages_set = {subtitle.language for subtitle in subtitles}
+        self.assertLessEqual(matches, subtitles_set)
+        self.assertLessEqual(languages, languages_set)
 
     def test_query_episode_1(self):
         video = EPISODES[1]
@@ -94,8 +97,11 @@ class Addic7edProviderTestCase(ProviderTestCase):
                    frozenset(['series', 'season', 'year', 'format'])}
         with self.Provider() as provider:
             subtitles = provider.query(video.series, video.season, video.year)
-        self.assertEqual({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)
-        self.assertEqual({subtitle.language for subtitle in subtitles}, languages)
+        subtitles_set = {frozenset(subtitle.compute_matches(video))
+                         for subtitle in subtitles}
+        languages_set = {subtitle.language for subtitle in subtitles}
+        self.assertLessEqual(matches, subtitles_set)
+        self.assertLessEqual(languages, languages_set)
 
     def test_query_episode_year(self):
         video_no_year = EPISODES[2]
@@ -112,8 +118,11 @@ class Addic7edProviderTestCase(ProviderTestCase):
                    frozenset(['series', 'episode', 'season', 'title'])}
         with self.Provider() as provider:
             subtitles = provider.list_subtitles(video, languages)
-        self.assertEqual({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)
-        self.assertEqual({subtitle.language for subtitle in subtitles}, languages)
+        subtitles_set = {frozenset(subtitle.compute_matches(video))
+                         for subtitle in subtitles}
+        languages_set = {subtitle.language for subtitle in subtitles}
+        self.assertLessEqual(matches, subtitles_set)
+        self.assertLessEqual(languages, languages_set)
 
     def test_download_subtitle(self):
         video = EPISODES[0]
@@ -141,8 +150,11 @@ class OpenSubtitlesProviderTestCase(ProviderTestCase):
                    frozenset(['imdb_id', 'title', 'year', 'video_codec', 'resolution', 'release_group', 'format'])}
         with self.Provider() as provider:
             subtitles = provider.query(languages, query=video.title)
-        self.assertEqual({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)
-        self.assertEqual({subtitle.language for subtitle in subtitles}, languages)
+        subtitles_set = {frozenset(subtitle.compute_matches(video))
+                         for subtitle in subtitles}
+        languages_set = {subtitle.language for subtitle in subtitles}
+        self.assertLessEqual(matches, subtitles_set)
+        self.assertLessEqual(languages, languages_set)
 
     def test_query_episode_0_query(self):
         video = EPISODES[0]
@@ -152,8 +164,11 @@ class OpenSubtitlesProviderTestCase(ProviderTestCase):
                    frozenset(['episode', 'title', 'series', 'imdb_id', 'video_codec', 'season'])}
         with self.Provider() as provider:
             subtitles = provider.query(languages, query=os.path.split(video.name)[1])
-        self.assertEqual({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)
-        self.assertEqual({subtitle.language for subtitle in subtitles}, languages)
+        subtitles_set = {frozenset(subtitle.compute_matches(video))
+                         for subtitle in subtitles}
+        languages_set = {subtitle.language for subtitle in subtitles}
+        self.assertLessEqual(matches, subtitles_set)
+        self.assertLessEqual(languages, languages_set)
 
     def test_query_episode_year(self):
         video_no_year = EPISODES[2]
@@ -179,8 +194,11 @@ class OpenSubtitlesProviderTestCase(ProviderTestCase):
                    frozenset(['series', 'episode', 'season', 'imdb_id', 'year', 'format'])}
         with self.Provider() as provider:
             subtitles = provider.query(languages, query=os.path.split(video.name)[1])
-        self.assertEqual({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)
-        self.assertEqual({subtitle.language for subtitle in subtitles}, languages)
+        subtitles_set = {frozenset(subtitle.compute_matches(video))
+                         for subtitle in subtitles}
+        languages_set = {subtitle.language for subtitle in subtitles}
+        self.assertLessEqual(matches, subtitles_set)
+        self.assertLessEqual(languages, languages_set)
 
     def test_query_movie_0_imdb_id(self):
         video = MOVIES[0]
@@ -195,8 +213,11 @@ class OpenSubtitlesProviderTestCase(ProviderTestCase):
                    frozenset(['imdb_id', 'resolution', 'title', 'year', 'format'])}
         with self.Provider() as provider:
             subtitles = provider.query(languages, imdb_id=video.imdb_id)
-        self.assertEqual({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)
-        self.assertEqual({subtitle.language for subtitle in subtitles}, languages)
+        subtitles_set = {frozenset(subtitle.compute_matches(video))
+                         for subtitle in subtitles}
+        languages_set = {subtitle.language for subtitle in subtitles}
+        self.assertLessEqual(matches, subtitles_set)
+        self.assertLessEqual(languages, languages_set)
 
     def test_query_episode_0_imdb_id(self):
         video = EPISODES[0]
@@ -207,8 +228,11 @@ class OpenSubtitlesProviderTestCase(ProviderTestCase):
                    frozenset(['episode', 'title', 'series', 'imdb_id', 'video_codec', 'season'])}
         with self.Provider() as provider:
             subtitles = provider.query(languages, imdb_id=video.imdb_id)
-        self.assertEqual({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)
-        self.assertEqual({subtitle.language for subtitle in subtitles}, languages)
+        subtitles_set = {frozenset(subtitle.compute_matches(video))
+                         for subtitle in subtitles}
+        languages_set = {subtitle.language for subtitle in subtitles}
+        self.assertLessEqual(matches, subtitles_set)
+        self.assertLessEqual(languages, languages_set)
 
     def test_query_movie_0_hash(self):
         video = MOVIES[0]
@@ -222,8 +246,11 @@ class OpenSubtitlesProviderTestCase(ProviderTestCase):
                    frozenset(['year', 'imdb_id', 'hash', 'title', 'format'])}
         with self.Provider() as provider:
             subtitles = provider.query(languages, hash=video.hashes['opensubtitles'], size=video.size)
-        self.assertEqual({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)
-        self.assertEqual({subtitle.language for subtitle in subtitles}, languages)
+        subtitles_set = {frozenset(subtitle.compute_matches(video))
+                         for subtitle in subtitles}
+        languages_set = {subtitle.language for subtitle in subtitles}
+        self.assertLessEqual(matches, subtitles_set)
+        self.assertLessEqual(languages, languages_set)
 
     def test_query_episode_0_hash(self):
         video = EPISODES[0]
@@ -234,8 +261,11 @@ class OpenSubtitlesProviderTestCase(ProviderTestCase):
                    frozenset(['series', 'resolution', 'hash', 'video_codec', 'format'])}
         with self.Provider() as provider:
             subtitles = provider.query(languages, hash=video.hashes['opensubtitles'], size=video.size)
-        self.assertEqual({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)
-        self.assertEqual({subtitle.language for subtitle in subtitles}, languages)
+        subtitles_set = {frozenset(subtitle.compute_matches(video))
+                         for subtitle in subtitles}
+        languages_set = {subtitle.language for subtitle in subtitles}
+        self.assertLessEqual(matches, subtitles_set)
+        self.assertLessEqual(languages, languages_set)
 
     def test_list_subtitles(self):
         video = MOVIES[0]
@@ -257,8 +287,11 @@ class OpenSubtitlesProviderTestCase(ProviderTestCase):
                    frozenset(['year', 'imdb_id', 'resolution', 'title', 'format'])}
         with self.Provider() as provider:
             subtitles = provider.list_subtitles(video, languages)
-        self.assertEqual({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)
-        self.assertEqual({subtitle.language for subtitle in subtitles}, languages)
+        subtitles_set = {frozenset(subtitle.compute_matches(video))
+                         for subtitle in subtitles}
+        languages_set = {subtitle.language for subtitle in subtitles}
+        self.assertLessEqual(matches, subtitles_set)
+        self.assertLessEqual(languages, languages_set)
 
     def test_download_subtitle(self):
         video = MOVIES[0]
@@ -286,8 +319,11 @@ class PodnapisiProviderTestCase(ProviderTestCase):
                    frozenset(['video_codec', 'format', 'year', 'resolution', 'title'])}
         with self.Provider() as provider:
             subtitles = provider.query(language, title=video.title, year=video.year)
-        self.assertEqual({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)
-        self.assertEqual({subtitle.language for subtitle in subtitles}, {language})
+        subtitles_set = {frozenset(subtitle.compute_matches(video))
+                         for subtitle in subtitles}
+        languages_set = {subtitle.language for subtitle in subtitles}
+        self.assertLessEqual(matches, subtitles_set)
+        self.assertLessEqual({language}, languages_set)
 
     def test_query_episode_0(self):
         video = EPISODES[0]
@@ -298,8 +334,11 @@ class PodnapisiProviderTestCase(ProviderTestCase):
         with self.Provider() as provider:
             subtitles = provider.query(language, series=video.series, season=video.season, episode=video.episode,
                                        year=video.year)
-        self.assertEqual({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)
-        self.assertEqual({subtitle.language for subtitle in subtitles}, {language})
+        subtitles_set = {frozenset(subtitle.compute_matches(video))
+                         for subtitle in subtitles}
+        languages_set = {subtitle.language for subtitle in subtitles}
+        self.assertLessEqual(matches, subtitles_set)
+        self.assertLessEqual({language}, languages_set)
 
     def test_query_episode_1(self):
         video = EPISODES[1]
@@ -310,8 +349,11 @@ class PodnapisiProviderTestCase(ProviderTestCase):
         with self.Provider() as provider:
             subtitles = provider.query(language, series=video.series, season=video.season, episode=video.episode,
                                        year=video.year)
-        self.assertEqual({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)
-        self.assertEqual({subtitle.language for subtitle in subtitles}, {language})
+        subtitles_set = {frozenset(subtitle.compute_matches(video))
+                         for subtitle in subtitles}
+        languages_set = {subtitle.language for subtitle in subtitles}
+        self.assertLessEqual(matches, subtitles_set)
+        self.assertLessEqual({language}, languages_set)
 
     def test_list_subtitles(self):
         video = MOVIES[0]
@@ -327,8 +369,11 @@ class PodnapisiProviderTestCase(ProviderTestCase):
                    frozenset(['video_codec', 'format', 'year', 'resolution', 'title'])}
         with self.Provider() as provider:
             subtitles = provider.list_subtitles(video, languages)
-        self.assertEqual({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)
-        self.assertEqual({subtitle.language for subtitle in subtitles}, languages)
+        subtitles_set = {frozenset(subtitle.compute_matches(video))
+                         for subtitle in subtitles}
+        languages_set = {subtitle.language for subtitle in subtitles}
+        self.assertLessEqual(matches, subtitles_set)
+        self.assertLessEqual(languages, languages_set)
 
     def test_download_subtitle(self):
         video = MOVIES[0]
@@ -350,8 +395,11 @@ class TheSubDBProviderTestCase(ProviderTestCase):
         matches = {frozenset(['hash'])}
         with self.Provider() as provider:
             subtitles = provider.query(video.hashes['thesubdb'])
-        self.assertEqual({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)
-        self.assertEqual({subtitle.language for subtitle in subtitles}, languages)
+        subtitles_set = {frozenset(subtitle.compute_matches(video))
+                         for subtitle in subtitles}
+        languages_set = {subtitle.language for subtitle in subtitles}
+        self.assertLessEqual(matches, subtitles_set)
+        self.assertLessEqual(languages, languages_set)
 
     def test_query_episode_1(self):
         video = EPISODES[1]
@@ -359,8 +407,11 @@ class TheSubDBProviderTestCase(ProviderTestCase):
         matches = {frozenset(['hash'])}
         with self.Provider() as provider:
             subtitles = provider.query(video.hashes['thesubdb'])
-        self.assertEqual({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)
-        self.assertEqual({subtitle.language for subtitle in subtitles}, languages)
+        subtitles_set = {frozenset(subtitle.compute_matches(video))
+                         for subtitle in subtitles}
+        languages_set = {subtitle.language for subtitle in subtitles}
+        self.assertLessEqual(matches, subtitles_set)
+        self.assertLessEqual(languages, languages_set)
 
     def test_list_subtitles(self):
         video = MOVIES[0]
@@ -368,8 +419,11 @@ class TheSubDBProviderTestCase(ProviderTestCase):
         matches = {frozenset(['hash'])}
         with self.Provider() as provider:
             subtitles = provider.list_subtitles(video, languages)
-        self.assertEqual({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)
-        self.assertEqual({subtitle.language for subtitle in subtitles}, languages)
+        subtitles_set = {frozenset(subtitle.compute_matches(video))
+                         for subtitle in subtitles}
+        languages_set = {subtitle.language for subtitle in subtitles}
+        self.assertLessEqual(matches, subtitles_set)
+        self.assertLessEqual(languages, languages_set)
 
     def test_download_subtitle(self):
         video = MOVIES[0]
@@ -438,8 +492,11 @@ class TVsubtitlesProviderTestCase(ProviderTestCase):
                    frozenset(['series', 'episode', 'season', 'format'])}
         with self.Provider() as provider:
             subtitles = provider.query(video.series, video.season, video.episode, video.year)
-        self.assertEqual({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)
-        self.assertEqual({subtitle.language for subtitle in subtitles}, languages)
+        subtitles_set = {frozenset(subtitle.compute_matches(video))
+                         for subtitle in subtitles}
+        languages_set = {subtitle.language for subtitle in subtitles}
+        self.assertLessEqual(matches, subtitles_set)
+        self.assertLessEqual(languages, languages_set)
 
     def test_query_episode_1(self):
         video = EPISODES[1]
@@ -451,8 +508,11 @@ class TVsubtitlesProviderTestCase(ProviderTestCase):
                    frozenset(['series', 'episode', 'season', 'year'])}
         with self.Provider() as provider:
             subtitles = provider.query(video.series, video.season, video.episode, video.year)
-        self.assertEqual({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)
-        self.assertEqual({subtitle.language for subtitle in subtitles}, languages)
+        subtitles_set = {frozenset(subtitle.compute_matches(video))
+                         for subtitle in subtitles}
+        languages_set = {subtitle.language for subtitle in subtitles}
+        self.assertLessEqual(matches, subtitles_set)
+        self.assertLessEqual(languages, languages_set)
 
     def test_list_subtitles(self):
         video = EPISODES[0]
@@ -460,8 +520,11 @@ class TVsubtitlesProviderTestCase(ProviderTestCase):
         matches = {frozenset(['series', 'episode', 'season', 'format'])}
         with self.Provider() as provider:
             subtitles = provider.list_subtitles(video, languages)
-        self.assertEqual({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)
-        self.assertEqual({subtitle.language for subtitle in subtitles}, languages)
+        subtitles_set = {frozenset(subtitle.compute_matches(video))
+                         for subtitle in subtitles}
+        languages_set = {subtitle.language for subtitle in subtitles}
+        self.assertLessEqual(matches, subtitles_set)
+        self.assertLessEqual(languages, languages_set)
 
     def test_download_subtitle(self):
         video = EPISODES[0]

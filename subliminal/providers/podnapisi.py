@@ -19,7 +19,10 @@ from ..video import Episode, Movie
 
 
 logger = logging.getLogger(__name__)
-
+URL_RE = re.compile(
+    '^((http[s]?|ftp):\/)?\/?([^:\/\s]+)(:([^\/]*))?((\/\w+)*\/)' + \
+    '([\w\-\.]+[^#?\s]+)(\?([^#]*))?(#(.*))?$',
+)
 
 class PodnapisiSubtitle(Subtitle):
     provider_name = 'podnapisi'
@@ -30,7 +33,7 @@ class PodnapisiSubtitle(Subtitle):
         self.id = id
         self.releases = releases
         self.hearing_impaired = hearing_impaired
-        self.link = link
+        self.link = '/ppodnapisi' + link
         self.series = series
         self.season = season
         self.episode = episode
@@ -71,7 +74,8 @@ class PodnapisiProvider(Provider):
     languages = set([babelfish.Language.frompodnapisi(l) for l in babelfish.language_converters['podnapisi'].codes])
     video_types = (Episode, Movie)
     server = 'http://simple.podnapisi.net'
-    link_re = re.compile('^.*(?P<link>/ppodnapisi/download/i/\d+/k/.*$)')
+    pre_link_re = re.compile('^.*(?P<link>/ppodnapisi/predownload/i/\d+/k/.*$)')
+    link_re = re.compile('^.*(?P<link>/[a-zA-Z]{2}/ppodnapisi/download/i/\d+/k/.*$)')
 
     def initialize(self):
         self.session = requests.Session()
@@ -80,19 +84,30 @@ class PodnapisiProvider(Provider):
     def terminate(self):
         self.session.close()
 
-    def get(self, url, params=None, is_xml=True):
+    def get(self, url, params=None, headers=None, is_xml=True):
         """Make a GET request on `url` with the given parameters
 
         :param string url: part of the URL to reach with the leading slash
         :param dict params: params of the request
+        :param dict headers: headers of the request
         :param bool xml: whether the response content is XML or not
         :return: the response
         :rtype: :class:`xml.etree.ElementTree.Element` or :class:`bs4.BeautifulSoup`
         :raise: :class:`~subliminal.exceptions.ProviderNotAvailable`
 
         """
+
+        prefix_url = ''
+        url_result = URL_RE.search(url)
+        if url_result and url_result.group(2) is None:
+            prefix_url = self.server
+
         try:
-            r = self.session.get(self.server + '/ppodnapisi' + url, params=params, timeout=10)
+            r = self.session.get(
+                prefix_url + url, params=params,
+                headers=headers,
+                timeout=10,
+            )
         except requests.Timeout:
             raise ProviderNotAvailable('Timeout after 10 seconds')
         if r.status_code != 200:
@@ -117,20 +132,30 @@ class PodnapisiProvider(Provider):
         logger.debug('Searching episode %r', params)
         subtitles = []
         while True:
-            root = self.get('/search', params)
+            root = self.get('/ppodnapisi/search', params)
             if not int(root.find('pagination/results').text):
                 logger.debug('No subtitle found')
                 break
             if series and season and episode:
-                subtitles.extend([PodnapisiSubtitle(language, int(s.find('id').text), s.find('release').text.split(),
+                try:
+                    subtitles.extend([PodnapisiSubtitle(language, int(s.find('id').text), s.find('release').text.split(),
                                                     'h' in (s.find('flags').text or ''), s.find('url').text[38:],
                                                     series=series, season=season, episode=episode)
                                   for s in root.findall('subtitle')])
+                except AttributeError:
+                    # there simply wasn't enough information in the TV Show
+                    # gracefully handle this instead of crashing :)
+                    break
             elif title:
-                subtitles.extend([PodnapisiSubtitle(language, int(s.find('id').text), s.find('release').text.split(),
+                try:
+                    subtitles.extend([PodnapisiSubtitle(language, int(s.find('id').text), s.find('release').text.split(),
                                                     'h' in (s.find('flags').text or ''), s.find('url').text[38:],
                                                     title=title, year=year)
                                   for s in root.findall('subtitle')])
+                except AttributeError:
+                    # there simply wasn't enough information in the movie
+                    # gracefully handle this instead of crashing :)
+                    break
             if int(root.find('pagination/current').text) >= int(root.find('pagination/count').text):
                 break
             params['page'] = int(root.find('pagination/current').text) + 1
@@ -145,6 +170,21 @@ class PodnapisiProvider(Provider):
 
     def download_subtitle(self, subtitle):
         soup = self.get(subtitle.link, is_xml=False)
+        pre_link = soup.find('a', href=self.pre_link_re)
+        if not pre_link:
+            raise ProviderError('Cannot find the pre-download link')
+        pre_link = self.server + \
+            self.pre_link_re.match(pre_link['href']).group('link')
+
+        # Continue following the link
+        soup = self.get(
+            pre_link,
+            headers={
+                'Referer': self.server,
+            },
+            is_xml=False,
+        )
+
         link = soup.find('a', href=self.link_re)
         if not link:
             raise ProviderError('Cannot find the download link')

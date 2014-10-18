@@ -12,6 +12,7 @@ import charade
 import guessit
 import requests
 from . import Provider
+from . import IGNORED_CHARACTERS_RE
 from .. import __version__
 from ..exceptions import InvalidSubtitle, ProviderNotAvailable, ProviderError
 from ..subtitle import Subtitle, is_valid_subtitle, compute_guess_matches
@@ -45,7 +46,9 @@ class PodnapisiSubtitle(Subtitle):
         # episode
         if isinstance(video, Episode):
             # series
-            if video.series and self.series.lower() == video.series.lower():
+            if video.series and \
+               IGNORED_CHARACTERS_RE.sub('', self.series).lower() == \
+               IGNORED_CHARACTERS_RE.sub('', video.series).lower():
                 matches.add('series')
             # season
             if video.season and self.season == video.season:
@@ -59,7 +62,9 @@ class PodnapisiSubtitle(Subtitle):
         # movie
         elif isinstance(video, Movie):
             # title
-            if video.title and self.title.lower() == video.title.lower():
+            if video.title and \
+               IGNORED_CHARACTERS_RE.sub('', self.title).lower() == \
+               IGNORED_CHARACTERS_RE.sub('', video.title).lower():
                 matches.add('title')
             # year
             if video.year and self.year == video.year:

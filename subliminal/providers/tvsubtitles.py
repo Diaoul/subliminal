@@ -10,6 +10,7 @@ import bs4
 import charade
 import requests
 from . import Provider
+from . import IGNORED_CHARACTERS_RE
 from .. import __version__
 from ..cache import region
 from ..exceptions import InvalidSubtitle, ProviderNotAvailable, ProviderError
@@ -114,7 +115,9 @@ class TVsubtitlesProvider(Provider):
             if not match:
                 logger.warning('Could not parse %r', link.string)
                 continue
-            if match.group('series').lower().replace('.', ' ').strip() == series.lower():
+            if IGNORED_CHARACTERS_RE.sub('', match.group('series'))\
+                    .strip().replace('.', ' ').lower() == \
+               IGNORED_CHARACTERS_RE.sub('', series).lower():
                 return int(link['href'][8:-5])
         return int(links[0]['href'][8:-5])
 
@@ -140,7 +143,7 @@ class TVsubtitlesProvider(Provider):
         return episode_ids
 
     def query(self, series, season, episode):
-        show_id = self.find_show_id(series.lower())
+        show_id = self.find_show_id(IGNORED_CHARACTERS_RE.sub('', series.lower()))
         if show_id is None:
             return []
         episode_ids = self.find_episode_ids(show_id, season)

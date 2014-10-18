@@ -3,6 +3,9 @@ from __future__ import unicode_literals
 import babelfish
 from ..video import Episode, Movie
 
+import re
+#:  The following characters are always stripped
+IGNORED_CHARACTERS_RE = re.compile('[!@#$\'"]')
 
 class Provider(object):
     """Base class for providers

@@ -4,15 +4,17 @@ import collections
 import io
 import logging
 import operator
+
 import babelfish
 import pkg_resources
+
 from .exceptions import ProviderNotAvailable, InvalidSubtitle
 from .subtitle import get_subtitle_path
 
 
 logger = logging.getLogger(__name__)
 
-#: Entry point for the providers
+# : Entry point for the providers
 PROVIDERS_ENTRY_POINT = 'subliminal.providers'
 
 
@@ -110,7 +112,8 @@ def download_subtitles(subtitles, provider_configs=None, single=False):
                 if subtitle.provider_name in initialized_providers:
                     provider = initialized_providers[subtitle.provider_name]
                 else:
-                    provider = providers_by_name[subtitle.provider_name](**provider_configs.get(subtitle.provider_name, {}))
+                    provider = providers_by_name[subtitle.provider_name](
+                        **provider_configs.get(subtitle.provider_name, {}))
                     try:
                         provider.initialize()
                     except ProviderNotAvailable:
@@ -192,8 +195,8 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
         provider = Provider(**provider_configs.get(provider_entry_point.name, {}))
         try:
             provider.initialize()
-        except ProviderNotAvailable:
-            logger.warning('Provider %r is not available, discarding it', provider_entry_point.name)
+        except ProviderNotAvailable as exc:
+            logger.warning('Provider %r is not available (%s), discarding it', provider_entry_point.name, exc.args[0])
             continue
         initialized_providers[provider_entry_point.name] = provider
     try:

@@ -1,29 +1,34 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals, print_function
-import argparse
 import datetime
 import logging
 import os
 import re
 import sys
+import ConfigParser
+
+import argparse
 import babelfish
 import guessit
 import pkg_resources
+
 from subliminal import (__version__, PROVIDERS_ENTRY_POINT, cache_region, MutexLock, Video, Episode, Movie, scan_videos,
-    download_best_subtitles)
+                        download_best_subtitles)
+
+
 try:
     import colorlog
 except ImportError:
     colorlog = None
 
-
 DEFAULT_CACHE_FILE = os.path.join('~', '.config', 'subliminal.cache.dbm')
+DEFAULT_CREDENTIAL_FILE = os.path.join('~', '.config', 'subliminal.credential.cfg')
 
 
 def subliminal():
     parser = argparse.ArgumentParser(prog='subliminal', description='Subtitles, faster than your thoughts',
                                      epilog='Suggestions and bug reports are greatly appreciated: '
-                                     'https://github.com/Diaoul/subliminal/issues', add_help=False)
+                                            'https://github.com/Diaoul/subliminal/issues', add_help=False)
 
     # required arguments
     required_arguments_group = parser.add_argument_group('required arguments')
@@ -37,6 +42,8 @@ def subliminal():
                                      help='download without language code in subtitle\'s filename i.e. .srt only')
     configuration_group.add_argument('-c', '--cache-file', default=DEFAULT_CACHE_FILE,
                                      help='cache file (default: %(default)s)')
+    configuration_group.add_argument('-cf', '--credential-file', default=DEFAULT_CREDENTIAL_FILE,
+                                     help='config file (default: %(default)s)')
 
     # filtering
     filtering_group = parser.add_argument_group('filtering')
@@ -45,7 +52,7 @@ def subliminal():
                                  help='providers to use (%s)' % ', '.join(providers))
     filtering_group.add_argument('-m', '--min-score', type=int,
                                  help='minimum score for subtitles (0-%d for episodes, 0-%d for movies)'
-                                 % (Episode.scores['hash'], Movie.scores['hash']))
+                                      % (Episode.scores['hash'], Movie.scores['hash']))
     filtering_group.add_argument('-a', '--age', help='download subtitles for videos newer than AGE e.g. 12h, 1w2d')
     filtering_group.add_argument('-h', '--hearing-impaired', action='store_true',
                                  help='download hearing impaired subtitles')
@@ -99,9 +106,24 @@ def subliminal():
                      % os.path.split(args.cache_file)[0])
 
     # parse provider configs
+    args.credential_file = os.path.abspath(os.path.expanduser(args.credential_file))
+    if not os.path.exists(os.path.split(args.credential_file)[0]):
+        parser.error('argument -cf/--config-file: directory %r for config file does not exist'
+                     % os.path.split(args.credential_file)[0])
     provider_configs = {}
-    if (args.addic7ed_username is not None and args.addic7ed_password is None
-        or args.addic7ed_username is None and args.addic7ed_password is not None):
+
+    provider_credential_file = ConfigParser.ConfigParser()
+    provider_credential_file.read(args.credential_file)
+    providers = provider_credential_file.sections()
+    for provider in providers:
+        provider_configs[provider] = {}
+        options = provider_credential_file.options(provider)
+        if options:
+            for option in options:
+                provider_configs[provider][option] = provider_credential_file.get(provider, option)
+
+    if (
+                        args.addic7ed_username is not None and args.addic7ed_password is None or args.addic7ed_username is None and args.addic7ed_password is not None):
         parser.error('argument --addic7ed-username/--addic7ed-password: both arguments are required or none')
     if args.addic7ed_username is not None and args.addic7ed_password is not None:
         provider_configs['addic7ed'] = {'username': args.addic7ed_username, 'password': args.addic7ed_password}
@@ -114,8 +136,9 @@ def subliminal():
     if args.debug:
         handler = logging.StreamHandler()
         if args.color:
-            handler.setFormatter(colorlog.ColoredFormatter('%(log_color)s%(levelname)-8s%(reset)s [%(blue)s%(name)s-%(funcName)s:%(lineno)d%(reset)s] %(message)s',
-                                                           log_colors=dict(colorlog.default_log_colors.items() + [('DEBUG', 'cyan')])))
+            handler.setFormatter(colorlog.ColoredFormatter(
+                '%(log_color)s%(levelname)-8s%(reset)s [%(blue)s%(name)s-%(funcName)s:%(lineno)d%(reset)s] %(message)s',
+                log_colors=dict(colorlog.default_log_colors.items() + [('DEBUG', 'cyan')])))
         else:
             handler.setFormatter(logging.Formatter('%(levelname)-8s [%(name)s-%(funcName)s:%(lineno)d] %(message)s'))
         logging.getLogger().addHandler(handler)
@@ -123,7 +146,8 @@ def subliminal():
     elif args.verbose:
         handler = logging.StreamHandler()
         if args.color:
-            handler.setFormatter(colorlog.ColoredFormatter('%(log_color)s%(levelname)-8s%(reset)s [%(blue)s%(name)s%(reset)s] %(message)s'))
+            handler.setFormatter(colorlog.ColoredFormatter(
+                '%(log_color)s%(levelname)-8s%(reset)s [%(blue)s%(name)s%(reset)s] %(message)s'))
         else:
             handler.setFormatter(logging.Formatter('%(levelname)-8s [%(name)s] %(message)s'))
         logging.getLogger('subliminal').addHandler(handler)

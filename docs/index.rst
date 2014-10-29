@@ -1,11 +1,11 @@
 .. subliminal documentation master file, created by
-   sphinx-quickstart on Wed Oct 23 23:24:28 2013.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+sphinx-quickstart on Wed Oct 23 23:24:28 2013.
+You can adapt this file completely to your liking, but it should at least
+contain the root `toctree` directive.
 
 Subliminal
 ==========
-Release v\ |version|
+Release v\ |revision|
 
 Subliminal is a python library to search and download subtitles.
 It comes with an easy to use :abbr:`CLI (command-line interface)` suitable for direct use or cron jobs.
@@ -22,6 +22,7 @@ best matching subtitles. Providers are extensible through a dedicated entry poin
 * Podnapisi
 * TheSubDB
 * TvSubtitles
+* Itasa
 
 
 Usage
@@ -77,9 +78,9 @@ MIT
 Documentation
 -------------
 .. toctree::
-    :maxdepth: 2
+:maxdepth: 2
 
-    provider_guide
+        provider_guide
 
 
 API Documentation
@@ -88,16 +89,16 @@ If you are looking for information on a specific function, class or method,
 this part of the documentation is for you.
 
 .. toctree::
-    :maxdepth: 2
+:maxdepth: 2
 
-    api/api
-    api/cache
-    api/cli
-    api/exceptions
-    api/providers
-    api/score
-    api/subtitle
-    api/video
+        api/api
+        api/cache
+        api/cli
+        api/exceptions
+        api/providers
+        api/score
+        api/subtitle
+        api/video
 
 
 .. include:: ../HISTORY.rst

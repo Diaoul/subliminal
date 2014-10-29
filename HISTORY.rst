@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.7.5
+-----
+**release date:** 2014-10-29
+
+* Add Itasa provider
+
 0.7.4
 -----
 **release date:** 2014-01-27

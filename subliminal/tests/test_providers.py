@@ -3,8 +3,10 @@
 from __future__ import unicode_literals
 import os
 from unittest import TestCase, TestSuite, TestLoader, TextTestRunner
+
 from babelfish import Language
 from pkg_resources import iter_entry_points
+
 from subliminal import PROVIDERS_ENTRY_POINT
 from subliminal.subtitle import is_valid_subtitle
 from subliminal.tests.common import MOVIES, EPISODES
@@ -17,6 +19,73 @@ class ProviderTestCase(TestCase):
         for provider_entry_point in iter_entry_points(PROVIDERS_ENTRY_POINT, self.provider_name):
             self.Provider = provider_entry_point.load()
             break
+
+
+class ItasaProviderTestCase(ProviderTestCase):
+    provider_name = 'itasa'
+    provider_username = '%username%'
+    provider_password = '%password%'
+
+    def test_login(self):
+        with self.Provider(self.provider_username, self.provider_password) as provider:
+            shows = provider.get_shows()
+
+    def test_get_shows(self):
+        with self.Provider(self.provider_username, self.provider_password) as provider:
+            shows = provider.get_shows()
+        self.assertIn('the big bang theory', shows)
+
+    def test_query_episode_0(self):
+        video = EPISODES[0]
+        languages = {Language('tur'), Language('rus'), Language('heb'), Language('ita'), Language('fra'),
+                     Language('ron'), Language('nld'), Language('eng'), Language('deu'), Language('ell'),
+                     Language('por', 'BR'), Language('bul')}
+        matches = {frozenset(['episode', 'release_group', 'title', 'series', 'resolution', 'season']),
+                   frozenset(['series', 'resolution', 'season']),
+                   frozenset(['series', 'episode', 'season', 'title']),
+                   frozenset(['series', 'release_group', 'season']),
+                   frozenset(['series', 'episode', 'season', 'release_group', 'title']),
+                   frozenset(['series', 'season'])}
+        with self.Provider(self.provider_username, self.provider_password) as provider:
+            subtitles = provider.query(video.series, video.season)
+        self.assertEqual({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)
+        self.assertEqual({subtitle.language for subtitle in subtitles}, languages)
+
+    def test_query_episode_1(self):
+        video = EPISODES[1]
+        languages = {Language('ind'), Language('spa'), Language('hrv'), Language('ita'), Language('fra'),
+                     Language('cat'), Language('ell'), Language('nld'), Language('eng'), Language('fas'),
+                     Language('por'), Language('nor'), Language('deu'), Language('ron'), Language('por', 'BR'),
+                     Language('bul')}
+        matches = {frozenset(['series', 'episode', 'resolution', 'season', 'title']),
+                   frozenset(['series', 'resolution', 'season']),
+                   frozenset(['series', 'episode', 'season', 'title']),
+                   frozenset(['series', 'release_group', 'season']),
+                   frozenset(['series', 'resolution', 'release_group', 'season']),
+                   frozenset(['series', 'episode', 'season', 'release_group', 'title']),
+                   frozenset(['series', 'season'])}
+        with self.Provider(self.provider_username, self.provider_password) as provider:
+            subtitles = provider.query(video.series, video.season)
+        self.assertEqual({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)
+        self.assertEqual({subtitle.language for subtitle in subtitles}, languages)
+
+    def test_list_subtitles(self):
+        video = EPISODES[0]
+        languages = {Language('eng'), Language('fra')}
+        matches = {frozenset(['series', 'episode', 'season', 'release_group', 'title']),
+                   frozenset(['series', 'episode', 'season', 'title'])}
+        with self.Provider(self.provider_username, self.provider_password) as provider:
+            subtitles = provider.list_subtitles(video, languages)
+        self.assertEqual({frozenset(subtitle.compute_matches(video)) for subtitle in subtitles}, matches)
+        self.assertEqual({subtitle.language for subtitle in subtitles}, languages)
+
+    def test_download_subtitle(self):
+        video = EPISODES[0]
+        languages = {Language('eng'), Language('fra')}
+        with self.Provider(self.provider_username, self.provider_password) as provider:
+            subtitles = provider.list_subtitles(video, languages)
+            subtitle_text = provider.download_subtitle(subtitles[0])
+        self.assertTrue(is_valid_subtitle(subtitle_text))
 
 
 class Addic7edProviderTestCase(ProviderTestCase):
@@ -440,6 +509,7 @@ class TVsubtitlesProviderTestCase(ProviderTestCase):
 
 def suite():
     suite = TestSuite()
+    suite.addTest(TestLoader().loadTestsFromTestCase(ItasaProviderTestCase))
     suite.addTest(TestLoader().loadTestsFromTestCase(Addic7edProviderTestCase))
     suite.addTest(TestLoader().loadTestsFromTestCase(BierDopjeProviderTestCase))
     suite.addTest(TestLoader().loadTestsFromTestCase(OpenSubtitlesProviderTestCase))

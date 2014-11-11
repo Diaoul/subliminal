@@ -6,6 +6,7 @@ import logging
 import operator
 import babelfish
 import pkg_resources
+from os.path import basename
 from .exceptions import ProviderNotAvailable, InvalidSubtitle
 from .subtitle import get_subtitle_path
 from socket import error as socket_error
@@ -95,9 +96,11 @@ def download_subtitles(subtitles, provider_configs=None, single=False):
     providers_by_name = dict([(ep.name, ep.load()) for ep in pkg_resources.iter_entry_points(PROVIDERS_ENTRY_POINT)])
 
     initialized_providers = {}
+    downloaded_subtitles = collections.defaultdict(list)
+    fetched_subtitles = set()
     try:
         for video, video_subtitles in subtitles.items():
-            languages = dict([subtitle.language for subtitle in video_subtitles])
+            languages = set([subtitle.language for subtitle in video_subtitles])
             downloaded_languages = set()
             for subtitle in video_subtitles:
                 # filter
@@ -132,9 +135,14 @@ def download_subtitles(subtitles, provider_configs=None, single=False):
 
                 # download subtitles
                 subtitle_path = get_subtitle_path(video.name, None if single else subtitle.language)
+                if basename(subtitle_path) in fetched_subtitles:
+                    logger.debug('Skipping subtitle already retrieved %r', basename(subtitle_path))
+                    continue
+
                 logger.info('Downloading subtitle %r into %r', subtitle, subtitle_path)
                 try:
                     subtitle_text = provider.download_subtitle(subtitle)
+                    downloaded_subtitles[video].append(subtitle)
                 except ProviderNotAvailable:
                     logger.warning('Provider %r is not available, discarding it', subtitle.provider_name)
                     discarded_providers.add(subtitle.provider_name)
@@ -147,12 +155,10 @@ def download_subtitles(subtitles, provider_configs=None, single=False):
                     continue
                 with io.open(subtitle_path, 'w', encoding='utf-8') as f:
                     f.write(subtitle_text)
-                downloaded_languages.add(subtitle.language)
+                    downloaded_languages.add(subtitle.language)
+                    fetched_subtitles.add(basename(subtitle_path))
                 if single or sorted(downloaded_languages) == sorted(languages):
                     break
-            # handle outerloop
-            if single or sorted(downloaded_languages) == sorted(languages):
-                break
     finally:  # terminate providers
         for (provider_name, provider) in initialized_providers.items():
             try:
@@ -161,6 +167,7 @@ def download_subtitles(subtitles, provider_configs=None, single=False):
                 logger.warning('Provider %r is not available, unable to terminate', provider_name)
             except:
                 logger.exception('Unexpected error in provider %r', provider_name)
+    return downloaded_subtitles
 
 
 def download_best_subtitles(videos, languages, providers=None, provider_configs=None, single=False, min_score=0,
@@ -184,6 +191,7 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
     provider_configs = provider_configs or {}
     discarded_providers = set()
     downloaded_subtitles = collections.defaultdict(list)
+    fetched_subtitles = set()
     # filter videos
     videos = [v for v in videos if v.subtitle_languages & languages < languages
               and (not single or babelfish.Language('und') not in v.subtitle_languages)]
@@ -228,6 +236,7 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
                     if provider_name in discarded_providers:
                         logger.debug('Skipping discarded provider %r', provider_name)
                         continue
+
                     provider_video_languages = provider.languages & languages - video.subtitle_languages
                     if not provider_video_languages:
                         logger.debug('Skipping provider %r: no language to search for for video %r', provider_name,
@@ -248,7 +257,6 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
                     subtitles.extend(provider_subtitles)
 
             # find the best subtitles and download them
-            languages = video.subtitle_languages.copy()
             for subtitle, score in sorted([(s, s.compute_score(video)) for s in subtitles],
                                           key=operator.itemgetter(1), reverse=True):
                 # filter
@@ -273,6 +281,10 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
                 # download
                 provider = initialized_providers[subtitle.provider_name]
                 subtitle_path = get_subtitle_path(video.name, None if single else subtitle.language)
+                if basename(subtitle_path) in fetched_subtitles:
+                    logger.debug('Skipping subtitle already retrieved %r', basename(subtitle_path))
+                    continue
+
                 logger.info('Downloading subtitle %r with score %d into %r', subtitle, score, subtitle_path)
                 try:
                     subtitle_text = provider.download_subtitle(subtitle)
@@ -289,12 +301,10 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
                     continue
                 with io.open(subtitle_path, 'w', encoding='utf-8') as f:
                     f.write(subtitle_text)
-                downloaded_languages.add(subtitle.language)
+                    downloaded_languages.add(subtitle.language)
+                    fetched_subtitles.add(basename(subtitle_path))
                 if single or sorted(downloaded_languages) == sorted(languages):
                     break
-            # handle outer loop (prevent second iteration if it is unnessisary)
-            if single or sorted(downloaded_languages) == sorted(languages):
-                break
 
     finally:  # terminate providers
         for (provider_name, provider) in initialized_providers.items():

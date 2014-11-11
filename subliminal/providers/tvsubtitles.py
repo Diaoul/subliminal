@@ -17,6 +17,7 @@ from ..exceptions import InvalidSubtitle, ProviderNotAvailable, ProviderError
 from ..subtitle import Subtitle, is_valid_subtitle
 from ..video import Episode
 
+IGNORE_DATEMATCH=re.compile('^(.*)[ \t0-9-._)(]*$')
 
 logger = logging.getLogger(__name__)
 
@@ -107,17 +108,35 @@ class TVsubtitlesProvider(Provider):
         logger.debug('Searching series %r', data)
         soup = self.request('/search.php', data=data, method='POST')
         links = soup.select('div.left li div a[href^="/tvshow-"]')
+        _series = IGNORE_DATEMATCH.match(
+            IGNORED_CHARACTERS_RE.sub('', series)\
+                .replace('.', ' ').strip().lower(),
+        )
+        if not _series:
+            _series = IGNORED_CHARACTERS_RE.sub('', series)\
+                        .replace('.', ' ').strip().lower()
+        else:
+            _series = _series.group(1)
+
         if not links:
             logger.info('Series %r not found', series)
             return None
+
         for link in links:
             match = self.link_re.match(link.string)
             if not match:
                 logger.warning('Could not parse %r', link.string)
                 continue
-            if IGNORED_CHARACTERS_RE.sub('', match.group('series'))\
-                    .strip().replace('.', ' ').lower() == \
-               IGNORED_CHARACTERS_RE.sub('', series).lower():
+            show = IGNORE_DATEMATCH.match(
+                IGNORED_CHARACTERS_RE.sub('', match.group('series'))\
+                        .replace('.', ' ').strip().lower(),
+            )
+            if not show:
+                logger.warning('Could not postparse %r', match.group('series'))
+                continue
+            show = show.group(1)
+
+            if show == _series:
                 return int(link['href'][8:-5])
         return int(links[0]['href'][8:-5])
 
@@ -143,7 +162,7 @@ class TVsubtitlesProvider(Provider):
         return episode_ids
 
     def query(self, series, season, episode):
-        show_id = self.find_show_id(IGNORED_CHARACTERS_RE.sub('', series.lower()))
+        show_id = self.find_show_id(series)
         if show_id is None:
             return []
         episode_ids = self.find_episode_ids(show_id, season)

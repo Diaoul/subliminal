@@ -312,6 +312,9 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
                 provider.terminate()
             except ProviderNotAvailable:
                 logger.warning('Provider %r is not available, unable to terminate', provider_name)
+            except socket_error as err:
+                logger.warning('Provider %r is not available, unable to terminate', provider_name)
+                logger.debug('Provider socket error: %r', str(err))
             except:
                 logger.exception('Unexpected error in provider %r', provider_name)
     return downloaded_subtitles

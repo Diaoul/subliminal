@@ -74,24 +74,24 @@ class Addic7edProvider(Provider):
         self.session.headers = {'User-Agent': 'Subliminal/%s' % __version__}
         # login
         if self.username is not None and self.password is not None:
-            logger.debug('Logging in')
+            logger.debug('Logging in to Addic7ed')
             data = {'username': self.username, 'password': self.password, 'Submit': 'Log in'}
             try:
                 r = self.session.post(self.server + '/dologin.php', data, timeout=10, allow_redirects=False)
             except requests.Timeout:
                 raise ProviderNotAvailable('Timeout after 10 seconds')
             if r.status_code == 302:
-                logger.info('Logged in')
+                logger.debug('Successfully logged in to Addic7ed.')
                 self.logged_in = True
             else:
-                logger.error('Failed to login')
+                logger.error('Failed to login to Addic7ed!')
 
     def terminate(self):
         # logout
         if self.logged_in:
             try:
                 r = self.session.get(self.server + '/logout.php', timeout=10)
-                logger.info('Logged out')
+                logger.debug('Successfully logged out of Addic7ed.')
             except requests.Timeout:
                 raise ProviderNotAvailable('Timeout after 10 seconds')
             if r.status_code != 200:

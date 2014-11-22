@@ -10,7 +10,7 @@ from ..cache import region, SHOW_EXPIRATION_TIME
 from ..exceptions import ConfigurationError, AuthenticationError, DownloadLimitExceeded, ProviderError
 from ..subtitle import Subtitle, fix_line_endings, compute_guess_properties_matches
 from ..video import Episode
-
+import re
 
 logger = logging.getLogger(__name__)
 babelfish.language_converters.register('addic7ed = subliminal.converters.addic7ed:Addic7edConverter')
@@ -74,6 +74,10 @@ class Addic7edProvider(Provider):
                            'tur', 'ukr', 'vie', 'zho']}
     video_types = (Episode,)
     server = 'http://www.addic7ed.com'
+    
+    replaces = [
+        ['[?\':]+', ''],  # Remove ?': characters
+        ['[&]+', 'and']]  # Replace & with and
 
     def __init__(self, username=None, password=None):
         if username is not None and password is None or username is None and password is not None:
@@ -130,7 +134,12 @@ class Addic7edProvider(Provider):
         soup = self.get('/shows.php')
         show_ids = {}
         for html_show in soup.select('td.version > h3 > a[href^="/show/"]'):
-            show_ids[html_show.string.lower()] = int(html_show['href'][6:])
+            lower_show = html_show.string.lower()
+            show_code = int(html_show['href'][6:])
+            show_ids[lower_show] = show_code
+            for search, replace in self.replaces:
+                lower_show = re.sub(search, replace, lower_show)
+            show_ids[lower_show] = show_code    
         return show_ids
 
     @region.cache_on_arguments(expiration_time=SHOW_EXPIRATION_TIME)

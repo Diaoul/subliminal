@@ -71,6 +71,10 @@ class Video(object):
     def __hash__(self):
         return hash(self.name)
 
+    def __eq__(self, other):
+        return self.__class__.__name__ == other.__class__.__name__\
+                and self.name == other.name
+
 
 class Episode(Video):
     """Episode :class:`Video`
@@ -112,6 +116,18 @@ class Episode(Video):
     def __repr__(self):
         return '<%s [%r, %rx%r]>' % (self.__class__.__name__, self.series, self.season, self.episode)
 
+    def __hash__(self):
+        return hash((
+            self.series,
+            self.season,
+            self.episode,
+        ))
+
+    def __eq__(self, other):
+        return self.__class__.__name__ == other.__class__.__name__\
+                and self.series == other.series\
+                and self.season == other.season\
+                and self.episode == other.episode
 
 class Movie(Video):
     """Movie :class:`Video`
@@ -147,6 +163,18 @@ class Movie(Video):
             return '<%s [%r]>' % (self.__class__.__name__, self.title)
         return '<%s [%r, %r]>' % (self.__class__.__name__, self.title, self.year)
 
+    def __hash__(self):
+        if self.year is None:
+            return hash((
+                self.title,
+                self.year,
+            ))
+        return hash(self.title)
+
+    def __eq__(self, other):
+        return self.__class__.__name__ == other.__class__.__name__\
+                and self.title == other.title\
+                and self.year == other.year
 
 def scan_subtitle_languages(path):
     """Search for subtitles with alpha2 extension from a video `path` and return their language

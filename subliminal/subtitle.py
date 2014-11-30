@@ -33,7 +33,7 @@ class Subtitle(object):
         """
         raise NotImplementedError
 
-    def compute_score(self, video):
+    def compute_score(self, video, hi_score_adjust=0):
         """Compute the score of the subtitle against the `video`
 
         There are equivalent matches so that a provider can match one element or its equivalent. This is
@@ -47,6 +47,7 @@ class Subtitle(object):
 
         :param video: the video to compute the score against
         :type video: :class:`~subliminal.video.Video`
+        :param hi_score_adjust: adjust hearing impaired matched videos by this value
         :return: score of the subtitle
         :rtype: int
 
@@ -69,7 +70,15 @@ class Subtitle(object):
                     matches -= set(['season', 'episode'])
             # add other scores
             score += sum([video.scores[match] for match in matches])
-        logger.info('Computed score %d with matches %r', score, initial_matches)
+
+            # Adjust scoring if hearing impaired subtitles are detected
+            if self.hearing_impaired and hi_score_adjust != 0:
+                logger.debug('Hearing impaired subtitle score adjusted ' + \
+                             'by %d' % hi_score_adjust)
+                # Priortization (adjust score)
+                score += hi_score_adjust
+
+        logger.debug('Computed score %d with matches %r', score, initial_matches)
         return score
 
     def __repr__(self):

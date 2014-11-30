@@ -74,7 +74,10 @@ def list_subtitles(videos, languages, providers=None, provider_configs=None):
                     except:
                         logger.exception('Unexpected error in provider %r', provider_entry_point.name)
                         continue
-                    logger.info('Found %d subtitles', len(provider_subtitles))
+                    logger.info('Found %d subtitle(s) on %s' % (
+                        len(provider_subtitles),
+                        provider_entry_point.name,
+                    ))
                     subtitles[provider_video].extend(provider_subtitles)
         except ProviderNotAvailable:
             logger.warning('Provider %r is not available, discarding it', provider_entry_point.name)
@@ -207,10 +210,10 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
             continue
         Provider = provider_entry_point.load()
         if not Provider.languages & languages - subtitle_languages:
-            logger.info('Skipping provider %r: no language to search for', provider_entry_point.name)
+            logger.debug('Skipping provider %r: no language to search for', provider_entry_point.name)
             continue
         if not [v for v in videos if Provider.check(v)]:
-            logger.info('Skipping provider %r: no video to search for', provider_entry_point.name)
+            logger.debug('Skipping provider %r: video type not hosted here.', provider_entry_point.name)
             continue
         provider = Provider(**provider_configs.get(provider_entry_point.name, {}))
         try:
@@ -253,27 +256,30 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
                     except:
                         logger.exception('Unexpected error in provider %r', provider_name)
                         continue
-                    logger.info('Found %d subtitles', len(provider_subtitles))
+                    logger.info('Found %d subtitle(s) on %s' % (
+                        len(provider_subtitles),
+                        provider_name,
+                    ))
                     subtitles.extend(provider_subtitles)
 
             # find the best subtitles and download them
-            for subtitle, score in sorted([(s, s.compute_score(video)) for s in subtitles],
-                                          key=operator.itemgetter(1), reverse=True):
+            for subtitle, score in sorted([(s, s.compute_score(video, hi_score_adjust)) \
+                    for s in subtitles], key=operator.itemgetter(1), reverse=True):
+
                 # filter
                 if subtitle.provider_name in discarded_providers:
                     logger.debug('Skipping subtitle from discarded provider %r', subtitle.provider_name)
                     continue
+
                 if hearing_impaired is not None:
                     if subtitle.hearing_impaired != hearing_impaired:
                         logger.debug('Skipping subtitle: hearing impaired != %r', hearing_impaired)
                         continue
-                elif subtitle.hearing_impaired and hi_score_adjust != 0:
-                    # Priortization (adjust score)
-                    score += hi_score_adjust
 
                 if score < min_score:
                     logger.debug('Skipping subtitle: score < %d', min_score)
                     continue
+
                 if subtitle.language in downloaded_languages:
                     logger.debug('Skipping subtitle: %r already downloaded', subtitle.language)
                     continue

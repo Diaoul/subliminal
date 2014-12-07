@@ -197,12 +197,14 @@ def scan_subtitle_languages(path):
     return subtitles
 
 
-def scan_video(path, subtitles=True, embedded_subtitles=True):
+def scan_video(path, subtitles=True, embedded_subtitles=True, video=None):
     """Scan a video and its subtitle languages from a video `path`
 
     :param string path: absolute path to the video
     :param bool subtitles: scan for subtitles with the same name
     :param bool embedded_subtitles: scan for embedded subtitles
+    :parm :class:`Video`: optionally specify a video if you've already detected on
+                          by other means.
     :return: the scanned video
     :rtype: :class:`Video`
     :raise: ValueError if cannot guess enough information from the path
@@ -210,7 +212,12 @@ def scan_video(path, subtitles=True, embedded_subtitles=True):
     """
     dirpath, filename = os.path.split(path)
     logger.info('Scanning video %r in %r', filename, dirpath)
-    video = Video.fromguess(path, guessit.guess_file_info(path, info=['filename']))
+    if not video:
+        video = Video.fromguess(
+            path,
+            guessit.guess_file_info(path, info=['filename']),
+        )
+
     video.size = os.path.getsize(path)
     if video.size > 10485760:
         logger.debug('Size is %d', video.size)

@@ -68,8 +68,9 @@ def list_subtitles(videos, languages, providers=None, provider_configs=None):
                                 provider_entry_point.name, provider_video, provider_video_languages)
                     try:
                         provider_subtitles = provider.list_subtitles(provider_video, provider_video_languages)
-                    except ProviderNotAvailable:
+                    except ProviderNotAvailable as err:
                         logger.warning('Provider %r is not available, discarding it', provider_entry_point.name)
+                        logger.debug('ProviderNotAvailable error: %r', str(err))
                         break
                     except:
                         logger.exception('Unexpected error in provider %r', provider_entry_point.name)
@@ -79,8 +80,9 @@ def list_subtitles(videos, languages, providers=None, provider_configs=None):
                         provider_entry_point.name,
                     ))
                     subtitles[provider_video].extend(provider_subtitles)
-        except ProviderNotAvailable:
+        except ProviderNotAvailable as err:
             logger.warning('Provider %r is not available, discarding it', provider_entry_point.name)
+            logger.debug('ProviderNotAvailable error: %r', str(err))
     return subtitles
 
 
@@ -121,8 +123,9 @@ def download_subtitles(subtitles, provider_configs=None, single=False):
                     provider = providers_by_name[subtitle.provider_name](**provider_configs.get(subtitle.provider_name, {}))
                     try:
                         provider.initialize()
-                    except ProviderNotAvailable:
+                    except ProviderNotAvailable as err:
                         logger.warning('Provider %r is not available, discarding it', subtitle.provider_name)
+                        logger.debug('ProviderNotAvailable error: %r', str(err))
                         discarded_providers.add(subtitle.provider_name)
                         continue
                     except socket_error as err:
@@ -146,8 +149,9 @@ def download_subtitles(subtitles, provider_configs=None, single=False):
                 try:
                     subtitle_text = provider.download_subtitle(subtitle)
                     downloaded_subtitles[video].append(subtitle)
-                except ProviderNotAvailable:
+                except ProviderNotAvailable as err:
                     logger.warning('Provider %r is not available, discarding it', subtitle.provider_name)
+                    logger.debug('ProviderNotAvailable error: %r', str(err))
                     discarded_providers.add(subtitle.provider_name)
                     continue
                 except InvalidSubtitle:
@@ -218,8 +222,9 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
         provider = Provider(**provider_configs.get(provider_entry_point.name, {}))
         try:
             provider.initialize()
-        except ProviderNotAvailable:
+        except ProviderNotAvailable as err:
             logger.warning('Provider %r is not available, discarding it', provider_entry_point.name)
+            logger.debug('ProviderNotAvailable error: %r', str(err))
             continue
         except socket_error as err:
             logger.warning('Provider %r is not responding, discarding it', provider_entry_point.name)
@@ -249,8 +254,9 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
                                 provider_name, video, provider_video_languages)
                     try:
                         provider_subtitles = provider.list_subtitles(video, provider_video_languages)
-                    except ProviderNotAvailable:
+                    except ProviderNotAvailable as err:
                         logger.warning('Provider %r is not available, discarding it', provider_name)
+                        logger.debug('ProviderNotAvailable error: %r', str(err))
                         discarded_providers.add(provider_name)
                         continue
                     except:
@@ -295,8 +301,9 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
                 try:
                     subtitle_text = provider.download_subtitle(subtitle)
                     downloaded_subtitles[video].append(subtitle)
-                except ProviderNotAvailable:
+                except ProviderNotAvailable as err:
                     logger.warning('Provider %r is not available, discarding it', subtitle.provider_name)
+                    logger.debug('ProviderNotAvailable error: %r', str(err))
                     discarded_providers.add(subtitle.provider_name)
                     continue
                 except InvalidSubtitle:
@@ -316,8 +323,9 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
         for (provider_name, provider) in initialized_providers.items():
             try:
                 provider.terminate()
-            except ProviderNotAvailable:
+            except ProviderNotAvailable as err:
                 logger.warning('Provider %r is not available, unable to terminate', provider_name)
+                logger.debug('ProviderNotAvailable error: %r', str(err))
             except socket_error as err:
                 logger.warning('Provider %r is not available, unable to terminate', provider_name)
                 logger.debug('Provider socket error: %r', str(err))

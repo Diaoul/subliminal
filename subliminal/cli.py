@@ -52,11 +52,6 @@ def subliminal():
     filtering_group.add_argument('-f', '--force', action='store_true',
                                  help='force subtitle download for videos with existing subtitles')
 
-    # addic7ed
-    addic7ed_group = parser.add_argument_group('addic7ed')
-    addic7ed_group.add_argument('--addic7ed-username', metavar='USERNAME', help='username for addic7ed provider')
-    addic7ed_group.add_argument('--addic7ed-password', metavar='PASSWORD', help='password for addic7ed provider')
-
     # output
     output_group = parser.add_argument_group('output')
     output_exclusive_group = output_group.add_mutually_exclusive_group()
@@ -100,11 +95,6 @@ def subliminal():
 
     # parse provider configs
     provider_configs = {}
-    if (args.addic7ed_username is not None and args.addic7ed_password is None
-        or args.addic7ed_username is None and args.addic7ed_password is not None):
-        parser.error('argument --addic7ed-username/--addic7ed-password: both arguments are required or none')
-    if args.addic7ed_username is not None and args.addic7ed_password is not None:
-        provider_configs['addic7ed'] = {'username': args.addic7ed_username, 'password': args.addic7ed_password}
 
     # parse color
     if args.color and colorlog is None:

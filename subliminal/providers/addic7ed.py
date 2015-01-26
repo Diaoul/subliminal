@@ -9,6 +9,7 @@ from . import Provider
 from . import IGNORED_CHARACTERS_RE
 from .. import __version__
 from ..cache import region
+from ..api import RANDOM_USER_AGENT
 from ..exceptions import ProviderConfigurationError, ProviderNotAvailable, InvalidSubtitle
 from ..subtitle import Subtitle, is_valid_subtitle
 from ..video import Episode
@@ -62,41 +63,13 @@ class Addic7edProvider(Provider):
     video_types = (Episode,)
     server = 'http://www.addic7ed.com'
 
-    def __init__(self, username=None, password=None):
-        if username is not None and password is None or username is None and password is not None:
-            raise ProviderConfigurationError('Username and password must be specified')
-        self.username = username
-        self.password = password
-        self.logged_in = False
-
     def initialize(self):
         self.session = requests.Session()
-        self.session.headers = {'User-Agent': 'Subliminal/%s' % __version__}
-        # login
-        if self.username is not None and self.password is not None:
-            logger.debug('Logging in to Addic7ed')
-            data = {'username': self.username, 'password': self.password, 'Submit': 'Log in'}
-            try:
-                r = self.session.post(self.server + '/dologin.php', data, timeout=10, allow_redirects=False)
-            except requests.Timeout:
-                raise ProviderNotAvailable('Timeout after 10 seconds')
-            if r.status_code == 302:
-                logger.debug('Successfully logged in to Addic7ed.')
-                self.logged_in = True
-            else:
-                logger.error('Failed to login to Addic7ed!')
-
-    def terminate(self):
-        # logout
-        if self.logged_in:
-            try:
-                r = self.session.get(self.server + '/logout.php', timeout=10)
-                logger.debug('Successfully logged out of Addic7ed.')
-            except requests.Timeout:
-                raise ProviderNotAvailable('Timeout after 10 seconds')
-            if r.status_code != 200:
-                raise ProviderNotAvailable('Request failed with status code %d' % r.status_code)
-        self.session.close()
+        #self.session.headers = {'User-Agent': 'Subliminal/%s' % __version__}
+        self.session.headers = {
+            'User-Agent': RANDOM_USER_AGENT,
+            'Referer': self.server,
+        }
 
     def get(self, url, params=None):
         """Make a GET request on `url` with the given parameters
@@ -109,7 +82,7 @@ class Addic7edProvider(Provider):
 
         """
         try:
-            r = self.session.get(self.server + url, params=params, timeout=10)
+            r = self.session.get(self.server + url, params=params, timeout=30)
         except requests.Timeout:
             raise ProviderNotAvailable('Timeout after 10 seconds')
         if r.status_code != 200:
@@ -184,7 +157,7 @@ class Addic7edProvider(Provider):
 
     def download_subtitle(self, subtitle):
         try:
-            r = self.session.get(self.server + subtitle.download_link, timeout=10,
+            r = self.session.get(self.server + subtitle.download_link, timeout=30,
                                  headers={'Referer': self.server + subtitle.referer})
         except requests.Timeout:
             raise ProviderNotAvailable('Timeout after 10 seconds')

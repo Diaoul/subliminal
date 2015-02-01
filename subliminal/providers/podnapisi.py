@@ -69,7 +69,7 @@ class PodnapisiProvider(Provider):
     languages = {babelfish.Language.frompodnapisi(l) for l in babelfish.language_converters['podnapisi'].codes}
     video_types = (Episode, Movie)
     server = 'http://simple.podnapisi.net'
-    link_re = re.compile('^.*(?P<link>/ppodnapisi/download/i/\d+/k/.*$)')
+    link_re = re.compile('^.*(?P<link>/ppodnapisi/(predownload|download)/i/\d+/k/.*$)')
 
     def initialize(self):
         self.session = requests.Session()
@@ -145,6 +145,7 @@ class PodnapisiProvider(Provider):
         link = soup.find('a', href=self.link_re)
         if not link:
             raise ProviderError('Cannot find the download link')
+        link['href'] = re.sub(r'predownload','download',link['href'])
         r = self.session.get(self.server + self.link_re.match(link['href']).group('link'), timeout=10)
         if r.status_code != 200:
             raise ProviderError('Request failed with status code %d' % r.status_code)

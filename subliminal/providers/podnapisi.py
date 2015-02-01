@@ -13,7 +13,6 @@ import guessit
 import requests
 from . import Provider
 from . import IGNORED_CHARACTERS_RE
-from .. import __version__
 from ..exceptions import InvalidSubtitle, ProviderNotAvailable, ProviderError
 from ..subtitle import Subtitle, is_valid_subtitle, compute_guess_matches
 from ..video import Episode, Movie
@@ -84,7 +83,7 @@ class PodnapisiProvider(Provider):
 
     def initialize(self):
         self.session = requests.Session()
-        self.session.headers = {'User-Agent': 'Subliminal/%s' % __version__}
+        self.session.headers = {'User-Agent': self.primary_user_agent }
 
     def terminate(self):
         self.session.close()

@@ -9,7 +9,6 @@ from . import Provider
 from . import IGNORED_CHARACTERS_RE
 from .. import __version__
 from ..cache import region
-from ..api import RANDOM_USER_AGENT
 from ..exceptions import ProviderConfigurationError, ProviderNotAvailable, InvalidSubtitle
 from ..subtitle import Subtitle, is_valid_subtitle
 from ..video import Episode
@@ -65,9 +64,8 @@ class Addic7edProvider(Provider):
 
     def initialize(self):
         self.session = requests.Session()
-        #self.session.headers = {'User-Agent': 'Subliminal/%s' % __version__}
         self.session.headers = {
-            'User-Agent': RANDOM_USER_AGENT,
+            'User-Agent': self.random_user_agent,
             'Referer': self.server,
         }
 

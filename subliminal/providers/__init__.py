@@ -4,10 +4,6 @@ import babelfish
 from ..video import Episode, Movie
 from .. import __version__
 from random import randint
-import re
-
-#:  The following characters are always stripped
-IGNORED_CHARACTERS_RE = re.compile('[!@#$\'"]')
 
 # Agent List
 AGENT_LIST = (

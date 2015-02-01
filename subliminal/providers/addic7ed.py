@@ -6,11 +6,9 @@ import bs4
 import charade
 import requests
 from . import Provider
-from . import IGNORED_CHARACTERS_RE
-from .. import __version__
 from ..cache import region
 from ..exceptions import ProviderConfigurationError, ProviderNotAvailable, InvalidSubtitle
-from ..subtitle import Subtitle, is_valid_subtitle
+from ..subtitle import Subtitle, is_valid_subtitle, sanitize_string
 from ..video import Episode
 
 
@@ -98,8 +96,7 @@ class Addic7edProvider(Provider):
         soup = self.get('/shows.php')
         show_ids = {}
         for html_show in soup.select('td.version > h3 > a[href^="/show/"]'):
-            show_ids[
-                IGNORED_CHARACTERS_RE.sub('', html_show.string).lower()] = \
+            show_ids[sanitize_string(html_show.string)] = \
                     int(html_show['href'][6:])
         return show_ids
 
@@ -124,11 +121,11 @@ class Addic7edProvider(Provider):
 
     def query(self, series, season):
         show_ids = self.get_show_ids()
-        _series = IGNORED_CHARACTERS_RE.sub('', series).lower()
-        if _series in show_ids:
-            show_id = show_ids[_series]
+        sanitized_series = sanitize_string(series)
+        if sanitized_series in show_ids:
+            show_id = show_ids[sanitized_series]
         else:
-            show_id = self.find_show_id(_series)
+            show_id = self.find_show_id(sanitized_series)
             if show_id is None:
                 return []
         params = {'show_id': show_id, 'season': season}

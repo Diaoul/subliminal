@@ -4,10 +4,14 @@ import logging
 import os.path
 import babelfish
 import pysrt
+import re
 from .video import Episode, Movie
 
 
 logger = logging.getLogger(__name__)
+
+#:  The following characters are always stripped
+IGNORED_CHARACTERS_RE = re.compile('[!@#$\'"]')
 
 
 class Subtitle(object):
@@ -84,6 +88,23 @@ class Subtitle(object):
     def __repr__(self):
         return '<%s [%s]>' % (self.__class__.__name__, self.language)
 
+
+def sanitize_string(str_in):
+    """
+    Sanitizes a string passed into it by eliminating characters that might
+    otherwise cause issues when attempting to locate a match on websites by
+    striping out any special characters and forcing a consistent string that
+    can be used for caching too.
+
+    :param string str_in: the string to sanitize
+    :return: sanitized string
+    :rtype: string
+    """
+    if not isinstance(str_in, basestring):
+        # handle int, float, etc
+        str_in = str(str_in)
+
+    return IGNORED_CHARACTERS_RE.sub('', str_in).lower().strip()
 
 def get_subtitle_path(video_path, language=None):
     """Create the subtitle path from the given `video_path` and `language`

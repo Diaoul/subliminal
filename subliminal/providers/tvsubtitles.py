@@ -10,10 +10,9 @@ import bs4
 import charade
 import requests
 from . import Provider
-from . import IGNORED_CHARACTERS_RE
 from ..cache import region
 from ..exceptions import InvalidSubtitle, ProviderNotAvailable, ProviderError
-from ..subtitle import Subtitle, is_valid_subtitle
+from ..subtitle import Subtitle, is_valid_subtitle, sanitize_string
 from ..video import Episode
 
 IGNORE_DATEMATCH=re.compile('^(.*)[ \t0-9-._)(]*$')
@@ -107,15 +106,14 @@ class TVsubtitlesProvider(Provider):
         logger.debug('Searching series %r', data)
         soup = self.request('/search.php', data=data, method='POST')
         links = soup.select('div.left li div a[href^="/tvshow-"]')
-        _series = IGNORE_DATEMATCH.match(
-            IGNORED_CHARACTERS_RE.sub('', series)\
-                .replace('.', ' ').strip().lower(),
+        sanitized_series = IGNORE_DATEMATCH.match(
+            sanitize_string(series).replace('.', ' ').strip(),
         )
-        if not _series:
-            _series = IGNORED_CHARACTERS_RE.sub('', series)\
-                        .replace('.', ' ').strip().lower()
+        if not sanitized_series:
+            sanitized_series = sanitize_string(series)\
+                        .replace('.', ' ').strip()
         else:
-            _series = _series.group(1)
+            sanitized_series = sanitized_series.group(1)
 
         if not links:
             logger.info('Series %r not found', series)
@@ -127,15 +125,15 @@ class TVsubtitlesProvider(Provider):
                 logger.warning('Could not parse %r', link.string)
                 continue
             show = IGNORE_DATEMATCH.match(
-                IGNORED_CHARACTERS_RE.sub('', match.group('series'))\
-                        .replace('.', ' ').strip().lower(),
+                sanitize_string(match.group('series'))\
+                        .replace('.', ' ').strip(),
             )
             if not show:
                 logger.warning('Could not postparse %r', match.group('series'))
                 continue
             show = show.group(1)
 
-            if show == _series:
+            if show == sanitized_series:
                 return int(link['href'][8:-5])
         return int(links[0]['href'][8:-5])
 

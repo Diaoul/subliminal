@@ -10,10 +10,10 @@ import babelfish
 import charade
 import guessit
 from . import Provider
-from . import IGNORED_CHARACTERS_RE
 from .. import __version__
 from ..exceptions import ProviderError, ProviderNotAvailable, InvalidSubtitle
 from ..subtitle import Subtitle, is_valid_subtitle, compute_guess_matches
+from ..subtitle import sanitize_string
 from ..video import Episode, Movie
 
 
@@ -52,8 +52,8 @@ class OpenSubtitlesSubtitle(Subtitle):
         if isinstance(video, Episode) and self.movie_kind == 'episode':
             # series
             if video.series and \
-               IGNORED_CHARACTERS_RE.sub('', self.series_name).lower() == \
-                IGNORED_CHARACTERS_RE.sub('', video.series).lower():
+                    sanitize_string(self.series_name) == \
+                    sanitize_string(video.series):
                 matches.add('series')
             # season
             if video.season and self.series_season == video.season:
@@ -81,8 +81,8 @@ class OpenSubtitlesSubtitle(Subtitle):
             matches.add('imdb_id')
         # title
         if video.title and \
-           IGNORED_CHARACTERS_RE.sub('', self.movie_name).lower() == \
-           IGNORED_CHARACTERS_RE.sub('', video.title).lower():
+                sanitize_string(self.movie_name) == \
+                sanitize_string(video.title):
             matches.add('title')
         return matches
 

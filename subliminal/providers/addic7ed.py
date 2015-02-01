@@ -80,7 +80,7 @@ class Addic7edProvider(Provider):
 
         """
         try:
-            r = self.session.get(self.server + url, params=params, timeout=30)
+            r = self.session.get(self.server + url, params=params, timeout=10)
         except requests.Timeout:
             raise ProviderNotAvailable('Timeout after 10 seconds')
         if r.status_code != 200:
@@ -155,7 +155,7 @@ class Addic7edProvider(Provider):
 
     def download_subtitle(self, subtitle):
         try:
-            r = self.session.get(self.server + subtitle.download_link, timeout=30,
+            r = self.session.get(self.server + subtitle.download_link, timeout=10,
                                  headers={'Referer': self.server + subtitle.referer})
         except requests.Timeout:
             raise ProviderNotAvailable('Timeout after 10 seconds')

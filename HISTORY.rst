@@ -1,6 +1,16 @@
 Changelog
 =========
 
+0.7.5
+-----
+**release date:** 2015-03-04
+
+* Update requirements
+* Remove BierDopje provider
+* Add pre-guessed video optional argument in scan_video
+* Improve hearing impaired support
+* Fix TVSubtitles and Podnapisi providers
+
 0.7.4
 -----
 **release date:** 2014-01-27

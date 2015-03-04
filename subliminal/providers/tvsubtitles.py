@@ -3,18 +3,19 @@ from __future__ import unicode_literals
 import io
 import logging
 import re
+import contextlib
 import zipfile
 import babelfish
 import bs4
 import charade
 import requests
 from . import Provider
-from .. import __version__
 from ..cache import region
 from ..exceptions import InvalidSubtitle, ProviderNotAvailable, ProviderError
-from ..subtitle import Subtitle, is_valid_subtitle
+from ..subtitle import Subtitle, is_valid_subtitle, sanitize_string
 from ..video import Episode
 
+IGNORE_DATEMATCH=re.compile('^(.*)[ \t0-9-._)(]*$')
 
 logger = logging.getLogger(__name__)
 
@@ -56,9 +57,9 @@ class TVsubtitlesSubtitle(Subtitle):
 
 
 class TVsubtitlesProvider(Provider):
-    languages = {babelfish.Language('por', 'BR')} | {babelfish.Language(l)
+    languages = set([babelfish.Language('por', 'BR')]) | set([babelfish.Language(l)
                  for l in ['ara', 'bul', 'ces', 'dan', 'deu', 'ell', 'eng', 'fin', 'fra', 'hun', 'ita', 'jpn', 'kor',
-                           'nld', 'pol', 'por', 'ron', 'rus', 'spa', 'swe', 'tur', 'ukr', 'zho']}
+                           'nld', 'pol', 'por', 'ron', 'rus', 'spa', 'swe', 'tur', 'ukr', 'zho']])
     video_types = (Episode,)
     server = 'http://www.tvsubtitles.net'
     episode_id_re = re.compile('^episode-\d+\.html$')
@@ -67,7 +68,7 @@ class TVsubtitlesProvider(Provider):
 
     def initialize(self):
         self.session = requests.Session()
-        self.session.headers = {'User-Agent': 'Subliminal/%s' % __version__}
+        self.session.headers = {'User-Agent': self.primary_user_agent }
 
     def terminate(self):
         self.session.close()
@@ -105,15 +106,34 @@ class TVsubtitlesProvider(Provider):
         logger.debug('Searching series %r', data)
         soup = self.request('/search.php', data=data, method='POST')
         links = soup.select('div.left li div a[href^="/tvshow-"]')
+        sanitized_series = IGNORE_DATEMATCH.match(
+            sanitize_string(series).replace('.', ' ').strip(),
+        )
+        if not sanitized_series:
+            sanitized_series = sanitize_string(series)\
+                        .replace('.', ' ').strip()
+        else:
+            sanitized_series = sanitized_series.group(1)
+
         if not links:
             logger.info('Series %r not found', series)
             return None
+
         for link in links:
             match = self.link_re.match(link.string)
             if not match:
                 logger.warning('Could not parse %r', link.string)
                 continue
-            if match.group('series').lower().replace('.', ' ').strip() == series.lower():
+            show = IGNORE_DATEMATCH.match(
+                sanitize_string(match.group('series'))\
+                        .replace('.', ' ').strip(),
+            )
+            if not show:
+                logger.warning('Could not postparse %r', match.group('series'))
+                continue
+            show = show.group(1)
+
+            if show == sanitized_series:
                 return int(link['href'][8:-5])
         return int(links[0]['href'][8:-5])
 
@@ -139,7 +159,7 @@ class TVsubtitlesProvider(Provider):
         return episode_ids
 
     def query(self, series, season, episode):
-        show_id = self.find_show_id(series.lower())
+        show_id = self.find_show_id(series)
         if show_id is None:
             return []
         episode_ids = self.find_episode_ids(show_id, season)
@@ -165,7 +185,7 @@ class TVsubtitlesProvider(Provider):
             raise ProviderNotAvailable('Timeout after 10 seconds')
         if r.status_code != 200:
             raise ProviderNotAvailable('Request failed with status code %d' % r.status_code)
-        with zipfile.ZipFile(io.BytesIO(r.content)) as zf:
+        with contextlib.closing(zipfile.ZipFile(io.BytesIO(r.content))) as zf:
             if len(zf.namelist()) > 1:
                 raise ProviderError('More than one file to unzip')
             subtitle_bytes = zf.read(zf.namelist()[0])

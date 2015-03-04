@@ -7,7 +7,7 @@ from dogpile.core.readwrite_lock import ReadWriteMutex  # @UnresolvedImport
 
 
 #: Subliminal's cache version
-CACHE_VERSION = 1
+CACHE_VERSION = 2
 
 
 def subliminal_key_generator(namespace, fn, to_str=string_type):

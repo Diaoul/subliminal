@@ -4,10 +4,14 @@ import logging
 import os.path
 import babelfish
 import pysrt
+import re
 from .video import Episode, Movie
 
 
 logger = logging.getLogger(__name__)
+
+#:  The following characters are always stripped
+IGNORED_CHARACTERS_RE = re.compile('[!@#$\'"]')
 
 
 class Subtitle(object):
@@ -33,7 +37,7 @@ class Subtitle(object):
         """
         raise NotImplementedError
 
-    def compute_score(self, video):
+    def compute_score(self, video, hi_score_adjust=0):
         """Compute the score of the subtitle against the `video`
 
         There are equivalent matches so that a provider can match one element or its equivalent. This is
@@ -47,6 +51,7 @@ class Subtitle(object):
 
         :param video: the video to compute the score against
         :type video: :class:`~subliminal.video.Video`
+        :param hi_score_adjust: adjust hearing impaired matched videos by this value
         :return: score of the subtitle
         :rtype: int
 
@@ -62,19 +67,44 @@ class Subtitle(object):
             # remove equivalences
             if isinstance(video, Episode):
                 if 'imdb_id' in matches:
-                    matches -= {'series', 'tvdb_id', 'season', 'episode', 'title'}
+                    matches -= set(['series', 'tvdb_id', 'season', 'episode', 'title'])
                 if 'tvdb_id' in matches:
-                    matches -= {'series'}
+                    matches -= set(['series',])
                 if 'title' in matches:
-                    matches -= {'season', 'episode'}
+                    matches -= set(['season', 'episode'])
             # add other scores
-            score += sum((video.scores[match] for match in matches))
-        logger.info('Computed score %d with matches %r', score, initial_matches)
+            score += sum([video.scores[match] for match in matches])
+
+            # Adjust scoring if hearing impaired subtitles are detected
+            if self.hearing_impaired and hi_score_adjust != 0:
+                logger.debug('Hearing impaired subtitle score adjusted ' + \
+                             'by %d' % hi_score_adjust)
+                # Priortization (adjust score)
+                score += hi_score_adjust
+
+        logger.debug('Computed score %d with matches %r', score, initial_matches)
         return score
 
     def __repr__(self):
         return '<%s [%s]>' % (self.__class__.__name__, self.language)
 
+
+def sanitize_string(str_in):
+    """
+    Sanitizes a string passed into it by eliminating characters that might
+    otherwise cause issues when attempting to locate a match on websites by
+    striping out any special characters and forcing a consistent string that
+    can be used for caching too.
+
+    :param string str_in: the string to sanitize
+    :return: sanitized string
+    :rtype: string
+    """
+    if not isinstance(str_in, basestring):
+        # handle int, float, etc
+        str_in = str(str_in)
+
+    return IGNORED_CHARACTERS_RE.sub('', str_in).lower().strip()
 
 def get_subtitle_path(video_path, language=None):
     """Create the subtitle path from the given `video_path` and `language`

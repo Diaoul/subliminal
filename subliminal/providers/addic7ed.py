@@ -6,10 +6,9 @@ import bs4
 import charade
 import requests
 from . import Provider
-from .. import __version__
 from ..cache import region
 from ..exceptions import ProviderConfigurationError, ProviderNotAvailable, InvalidSubtitle
-from ..subtitle import Subtitle, is_valid_subtitle
+from ..subtitle import Subtitle, is_valid_subtitle, sanitize_string
 from ..video import Episode
 
 
@@ -53,49 +52,20 @@ class Addic7edSubtitle(Subtitle):
 
 
 class Addic7edProvider(Provider):
-    languages = {babelfish.Language('por', 'BR')} | {babelfish.Language(l)
+    languages = set([babelfish.Language('por', 'BR')]) | set([babelfish.Language(l)
                  for l in ['ara', 'aze', 'ben', 'bos', 'bul', 'cat', 'ces', 'dan', 'deu', 'ell', 'eng', 'eus', 'fas',
                            'fin', 'fra', 'glg', 'heb', 'hrv', 'hun', 'hye', 'ind', 'ita', 'jpn', 'kor', 'mkd', 'msa',
                            'nld', 'nor', 'pol', 'por', 'ron', 'rus', 'slk', 'slv', 'spa', 'sqi', 'srp', 'swe', 'tha',
-                           'tur', 'ukr', 'vie', 'zho']}
+                           'tur', 'ukr', 'vie', 'zho']])
     video_types = (Episode,)
     server = 'http://www.addic7ed.com'
 
-    def __init__(self, username=None, password=None):
-        if username is not None and password is None or username is None and password is not None:
-            raise ProviderConfigurationError('Username and password must be specified')
-        self.username = username
-        self.password = password
-        self.logged_in = False
-
     def initialize(self):
         self.session = requests.Session()
-        self.session.headers = {'User-Agent': 'Subliminal/%s' % __version__}
-        # login
-        if self.username is not None and self.password is not None:
-            logger.debug('Logging in')
-            data = {'username': self.username, 'password': self.password, 'Submit': 'Log in'}
-            try:
-                r = self.session.post(self.server + '/dologin.php', data, timeout=10, allow_redirects=False)
-            except requests.Timeout:
-                raise ProviderNotAvailable('Timeout after 10 seconds')
-            if r.status_code == 302:
-                logger.info('Logged in')
-                self.logged_in = True
-            else:
-                logger.error('Failed to login')
-
-    def terminate(self):
-        # logout
-        if self.logged_in:
-            try:
-                r = self.session.get(self.server + '/logout.php', timeout=10)
-                logger.info('Logged out')
-            except requests.Timeout:
-                raise ProviderNotAvailable('Timeout after 10 seconds')
-            if r.status_code != 200:
-                raise ProviderNotAvailable('Request failed with status code %d' % r.status_code)
-        self.session.close()
+        self.session.headers = {
+            'User-Agent': self.random_user_agent,
+            'Referer': self.server,
+        }
 
     def get(self, url, params=None):
         """Make a GET request on `url` with the given parameters
@@ -126,7 +96,8 @@ class Addic7edProvider(Provider):
         soup = self.get('/shows.php')
         show_ids = {}
         for html_show in soup.select('td.version > h3 > a[href^="/show/"]'):
-            show_ids[html_show.string.lower()] = int(html_show['href'][6:])
+            show_ids[sanitize_string(html_show.string)] = \
+                    int(html_show['href'][6:])
         return show_ids
 
     @region.cache_on_arguments()
@@ -150,10 +121,11 @@ class Addic7edProvider(Provider):
 
     def query(self, series, season):
         show_ids = self.get_show_ids()
-        if series.lower() in show_ids:
-            show_id = show_ids[series.lower()]
+        sanitized_series = sanitize_string(series)
+        if sanitized_series in show_ids:
+            show_id = show_ids[sanitized_series]
         else:
-            show_id = self.find_show_id(series.lower())
+            show_id = self.find_show_id(sanitized_series)
             if show_id is None:
                 return []
         params = {'show_id': show_id, 'season': season}

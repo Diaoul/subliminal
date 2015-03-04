@@ -13,6 +13,7 @@ from . import Provider
 from .. import __version__
 from ..exceptions import ProviderError, ProviderNotAvailable, InvalidSubtitle
 from ..subtitle import Subtitle, is_valid_subtitle, compute_guess_matches
+from ..subtitle import sanitize_string
 from ..video import Episode, Movie
 
 
@@ -50,7 +51,9 @@ class OpenSubtitlesSubtitle(Subtitle):
         # episode
         if isinstance(video, Episode) and self.movie_kind == 'episode':
             # series
-            if video.series and self.series_name.lower() == video.series.lower():
+            if video.series and \
+                    sanitize_string(self.series_name) == \
+                    sanitize_string(video.series):
                 matches.add('series')
             # season
             if video.season and self.series_season == video.season:
@@ -77,13 +80,15 @@ class OpenSubtitlesSubtitle(Subtitle):
         if video.imdb_id and self.movie_imdb_id == video.imdb_id:
             matches.add('imdb_id')
         # title
-        if video.title and self.movie_name.lower() == video.title.lower():
+        if video.title and \
+                sanitize_string(self.movie_name) == \
+                sanitize_string(video.title):
             matches.add('title')
         return matches
 
 
 class OpenSubtitlesProvider(Provider):
-    languages = {babelfish.Language.fromopensubtitles(l) for l in babelfish.get_language_converter('opensubtitles').codes}
+    languages = set([babelfish.Language.fromopensubtitles(l) for l in babelfish.language_converters['opensubtitles'].codes])
 
     def __init__(self):
         self.server = xmlrpclib.ServerProxy('http://api.opensubtitles.org/xml-rpc')

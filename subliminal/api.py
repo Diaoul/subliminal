@@ -6,9 +6,10 @@ import logging
 import operator
 import babelfish
 import pkg_resources
+from os.path import basename
 from .exceptions import ProviderNotAvailable, InvalidSubtitle
 from .subtitle import get_subtitle_path
-
+from socket import error as socket_error
 
 logger = logging.getLogger(__name__)
 
@@ -67,16 +68,21 @@ def list_subtitles(videos, languages, providers=None, provider_configs=None):
                                 provider_entry_point.name, provider_video, provider_video_languages)
                     try:
                         provider_subtitles = provider.list_subtitles(provider_video, provider_video_languages)
-                    except ProviderNotAvailable:
+                    except ProviderNotAvailable as err:
                         logger.warning('Provider %r is not available, discarding it', provider_entry_point.name)
+                        logger.debug('ProviderNotAvailable error: %r', str(err))
                         break
                     except:
                         logger.exception('Unexpected error in provider %r', provider_entry_point.name)
                         continue
-                    logger.info('Found %d subtitles', len(provider_subtitles))
+                    logger.info('Found %d subtitle(s) on %s' % (
+                        len(provider_subtitles),
+                        provider_entry_point.name,
+                    ))
                     subtitles[provider_video].extend(provider_subtitles)
-        except ProviderNotAvailable:
+        except ProviderNotAvailable as err:
             logger.warning('Provider %r is not available, discarding it', provider_entry_point.name)
+            logger.debug('ProviderNotAvailable error: %r', str(err))
     return subtitles
 
 
@@ -92,15 +98,19 @@ def download_subtitles(subtitles, provider_configs=None, single=False):
     """
     provider_configs = provider_configs or {}
     discarded_providers = set()
-    providers_by_name = {ep.name: ep.load() for ep in pkg_resources.iter_entry_points(PROVIDERS_ENTRY_POINT)}
+    providers_by_name = dict([(ep.name, ep.load()) for ep in pkg_resources.iter_entry_points(PROVIDERS_ENTRY_POINT)])
+
     initialized_providers = {}
+    downloaded_subtitles = collections.defaultdict(list)
+    fetched_subtitles = set()
     try:
         for video, video_subtitles in subtitles.items():
-            languages = {subtitle.language for subtitle in video_subtitles}
+            languages = set([subtitle.language for subtitle in video_subtitles])
             downloaded_languages = set()
             for subtitle in video_subtitles:
                 # filter
                 if subtitle.language in downloaded_languages:
+                    logger.debug('Skipping subtitle: %r already downloaded', subtitle.language)
                     continue
                 if subtitle.provider_name in discarded_providers:
                     logger.debug('Skipping subtitle from discarded provider %r', subtitle.provider_name)
@@ -113,19 +123,35 @@ def download_subtitles(subtitles, provider_configs=None, single=False):
                     provider = providers_by_name[subtitle.provider_name](**provider_configs.get(subtitle.provider_name, {}))
                     try:
                         provider.initialize()
-                    except ProviderNotAvailable:
+                    except ProviderNotAvailable as err:
                         logger.warning('Provider %r is not available, discarding it', subtitle.provider_name)
+                        logger.debug('ProviderNotAvailable error: %r', str(err))
+                        discarded_providers.add(subtitle.provider_name)
+                        continue
+                    except socket_error as err:
+                        logger.warning('Provider %r is not responding, discarding it', subtitle.provider_name)
+                        logger.debug('Provider socket error: %r', str(err))
+                        discarded_providers.add(subtitle.provider_name)
+                        continue
+                    except:
+                        logger.exception('Unexpected error in provider %r', subtitle.provider_name)
                         discarded_providers.add(subtitle.provider_name)
                         continue
                     initialized_providers[subtitle.provider_name] = provider
 
                 # download subtitles
                 subtitle_path = get_subtitle_path(video.name, None if single else subtitle.language)
+                if basename(subtitle_path) in fetched_subtitles:
+                    logger.debug('Skipping subtitle already retrieved %r', basename(subtitle_path))
+                    continue
+
                 logger.info('Downloading subtitle %r into %r', subtitle, subtitle_path)
                 try:
                     subtitle_text = provider.download_subtitle(subtitle)
-                except ProviderNotAvailable:
+                    downloaded_subtitles[video].append(subtitle)
+                except ProviderNotAvailable as err:
                     logger.warning('Provider %r is not available, discarding it', subtitle.provider_name)
+                    logger.debug('ProviderNotAvailable error: %r', str(err))
                     discarded_providers.add(subtitle.provider_name)
                     continue
                 except InvalidSubtitle:
@@ -136,8 +162,9 @@ def download_subtitles(subtitles, provider_configs=None, single=False):
                     continue
                 with io.open(subtitle_path, 'w', encoding='utf-8') as f:
                     f.write(subtitle_text)
-                downloaded_languages.add(subtitle.language)
-                if single or downloaded_languages == languages:
+                    downloaded_languages.add(subtitle.language)
+                    fetched_subtitles.add(basename(subtitle_path))
+                if single or sorted(downloaded_languages) == sorted(languages):
                     break
     finally:  # terminate providers
         for (provider_name, provider) in initialized_providers.items():
@@ -147,10 +174,11 @@ def download_subtitles(subtitles, provider_configs=None, single=False):
                 logger.warning('Provider %r is not available, unable to terminate', provider_name)
             except:
                 logger.exception('Unexpected error in provider %r', provider_name)
+    return downloaded_subtitles
 
 
 def download_best_subtitles(videos, languages, providers=None, provider_configs=None, single=False, min_score=0,
-                            hearing_impaired=False):
+                            hearing_impaired=False, hi_score_adjust=0):
     """Download the best subtitles for `videos` with the given `languages` using the specified `providers`
 
     :param videos: videos to download subtitles for
@@ -164,11 +192,13 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
     :param bool single: download with .srt extension if `True`, add language identifier otherwise
     :param int min_score: minimum score for subtitles to download
     :param bool hearing_impaired: download hearing impaired subtitles
+    :param int hi_score_adjust: Adjust hearing_impaired_scores if matched.
 
     """
     provider_configs = provider_configs or {}
     discarded_providers = set()
     downloaded_subtitles = collections.defaultdict(list)
+    fetched_subtitles = set()
     # filter videos
     videos = [v for v in videos if v.subtitle_languages & languages < languages
               and (not single or babelfish.Language('und') not in v.subtitle_languages)]
@@ -184,27 +214,37 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
             continue
         Provider = provider_entry_point.load()
         if not Provider.languages & languages - subtitle_languages:
-            logger.info('Skipping provider %r: no language to search for', provider_entry_point.name)
+            logger.debug('Skipping provider %r: no language to search for', provider_entry_point.name)
             continue
         if not [v for v in videos if Provider.check(v)]:
-            logger.info('Skipping provider %r: no video to search for', provider_entry_point.name)
+            logger.debug('Skipping provider %r: video type not hosted here.', provider_entry_point.name)
             continue
         provider = Provider(**provider_configs.get(provider_entry_point.name, {}))
         try:
             provider.initialize()
-        except ProviderNotAvailable:
+        except ProviderNotAvailable as err:
             logger.warning('Provider %r is not available, discarding it', provider_entry_point.name)
+            logger.debug('ProviderNotAvailable error: %r', str(err))
+            continue
+        except socket_error as err:
+            logger.warning('Provider %r is not responding, discarding it', provider_entry_point.name)
+            logger.debug('Provider socket error: %r', str(err))
+            continue
+        except:
+            logger.exception('Unexpected error in provider %r', provider_entry_point.name)
             continue
         initialized_providers[provider_entry_point.name] = provider
     try:
         for video in videos:
             # search for subtitles
             subtitles = []
+            downloaded_languages = set()
             for provider_name, provider in initialized_providers.items():
                 if provider.check(video):
                     if provider_name in discarded_providers:
                         logger.debug('Skipping discarded provider %r', provider_name)
                         continue
+
                     provider_video_languages = provider.languages & languages - video.subtitle_languages
                     if not provider_video_languages:
                         logger.debug('Skipping provider %r: no language to search for for video %r', provider_name,
@@ -214,30 +254,38 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
                                 provider_name, video, provider_video_languages)
                     try:
                         provider_subtitles = provider.list_subtitles(video, provider_video_languages)
-                    except ProviderNotAvailable:
+                    except ProviderNotAvailable as err:
                         logger.warning('Provider %r is not available, discarding it', provider_name)
+                        logger.debug('ProviderNotAvailable error: %r', str(err))
                         discarded_providers.add(provider_name)
                         continue
                     except:
                         logger.exception('Unexpected error in provider %r', provider_name)
                         continue
-                    logger.info('Found %d subtitles', len(provider_subtitles))
+                    logger.info('Found %d subtitle(s) on %s' % (
+                        len(provider_subtitles),
+                        provider_name,
+                    ))
                     subtitles.extend(provider_subtitles)
 
             # find the best subtitles and download them
-            downloaded_languages = video.subtitle_languages.copy()
-            for subtitle, score in sorted([(s, s.compute_score(video)) for s in subtitles],
-                                          key=operator.itemgetter(1), reverse=True):
+            for subtitle, score in sorted([(s, s.compute_score(video, hi_score_adjust)) \
+                    for s in subtitles], key=operator.itemgetter(1), reverse=True):
+
                 # filter
                 if subtitle.provider_name in discarded_providers:
                     logger.debug('Skipping subtitle from discarded provider %r', subtitle.provider_name)
                     continue
-                if subtitle.hearing_impaired != hearing_impaired:
-                    logger.debug('Skipping subtitle: hearing impaired != %r', hearing_impaired)
-                    continue
+
+                if hearing_impaired is not None:
+                    if subtitle.hearing_impaired != hearing_impaired:
+                        logger.debug('Skipping subtitle: hearing impaired != %r', hearing_impaired)
+                        continue
+
                 if score < min_score:
                     logger.debug('Skipping subtitle: score < %d', min_score)
                     continue
+
                 if subtitle.language in downloaded_languages:
                     logger.debug('Skipping subtitle: %r already downloaded', subtitle.language)
                     continue
@@ -245,12 +293,17 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
                 # download
                 provider = initialized_providers[subtitle.provider_name]
                 subtitle_path = get_subtitle_path(video.name, None if single else subtitle.language)
+                if basename(subtitle_path) in fetched_subtitles:
+                    logger.debug('Skipping subtitle already retrieved %r', basename(subtitle_path))
+                    continue
+
                 logger.info('Downloading subtitle %r with score %d into %r', subtitle, score, subtitle_path)
                 try:
                     subtitle_text = provider.download_subtitle(subtitle)
                     downloaded_subtitles[video].append(subtitle)
-                except ProviderNotAvailable:
+                except ProviderNotAvailable as err:
                     logger.warning('Provider %r is not available, discarding it', subtitle.provider_name)
+                    logger.debug('ProviderNotAvailable error: %r', str(err))
                     discarded_providers.add(subtitle.provider_name)
                     continue
                 except InvalidSubtitle:
@@ -261,16 +314,21 @@ def download_best_subtitles(videos, languages, providers=None, provider_configs=
                     continue
                 with io.open(subtitle_path, 'w', encoding='utf-8') as f:
                     f.write(subtitle_text)
-                downloaded_languages.add(subtitle.language)
-                if single or downloaded_languages >= languages:
-                    logger.debug('All languages downloaded')
+                    downloaded_languages.add(subtitle.language)
+                    fetched_subtitles.add(basename(subtitle_path))
+                if single or sorted(downloaded_languages) == sorted(languages):
                     break
+
     finally:  # terminate providers
         for (provider_name, provider) in initialized_providers.items():
             try:
                 provider.terminate()
-            except ProviderNotAvailable:
+            except ProviderNotAvailable as err:
                 logger.warning('Provider %r is not available, unable to terminate', provider_name)
+                logger.debug('ProviderNotAvailable error: %r', str(err))
+            except socket_error as err:
+                logger.warning('Provider %r is not available, unable to terminate', provider_name)
+                logger.debug('Provider socket error: %r', str(err))
             except:
                 logger.exception('Unexpected error in provider %r', provider_name)
     return downloaded_subtitles

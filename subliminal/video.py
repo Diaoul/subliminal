@@ -71,6 +71,10 @@ class Video(object):
     def __hash__(self):
         return hash(self.name)
 
+    def __eq__(self, other):
+        return self.__class__.__name__ == other.__class__.__name__\
+                and self.name == other.name
+
 
 class Episode(Video):
     """Episode :class:`Video`
@@ -112,6 +116,18 @@ class Episode(Video):
     def __repr__(self):
         return '<%s [%r, %rx%r]>' % (self.__class__.__name__, self.series, self.season, self.episode)
 
+    def __hash__(self):
+        return hash((
+            self.series,
+            self.season,
+            self.episode,
+        ))
+
+    def __eq__(self, other):
+        return self.__class__.__name__ == other.__class__.__name__\
+                and self.series == other.series\
+                and self.season == other.season\
+                and self.episode == other.episode
 
 class Movie(Video):
     """Movie :class:`Video`
@@ -147,6 +163,18 @@ class Movie(Video):
             return '<%s [%r]>' % (self.__class__.__name__, self.title)
         return '<%s [%r, %r]>' % (self.__class__.__name__, self.title, self.year)
 
+    def __hash__(self):
+        if self.year is None:
+            return hash((
+                self.title,
+                self.year,
+            ))
+        return hash(self.title)
+
+    def __eq__(self, other):
+        return self.__class__.__name__ == other.__class__.__name__\
+                and self.title == other.title\
+                and self.year == other.year
 
 def scan_subtitle_languages(path):
     """Search for subtitles with alpha2 extension from a video `path` and return their language
@@ -156,7 +184,7 @@ def scan_subtitle_languages(path):
     :rtype: set
 
     """
-    language_extensions = tuple('.' + c for c in babelfish.get_language_converter('alpha2').codes)
+    language_extensions = tuple('.' + c for c in babelfish.language_converters['alpha2'].codes)
     dirpath, filename = os.path.split(path)
     subtitles = set()
     for p in os.listdir(dirpath):
@@ -169,12 +197,14 @@ def scan_subtitle_languages(path):
     return subtitles
 
 
-def scan_video(path, subtitles=True, embedded_subtitles=True):
+def scan_video(path, subtitles=True, embedded_subtitles=True, video=None):
     """Scan a video and its subtitle languages from a video `path`
 
     :param string path: absolute path to the video
     :param bool subtitles: scan for subtitles with the same name
     :param bool embedded_subtitles: scan for embedded subtitles
+    :parm :class:`Video`: optionally specify a video if you've already detected on
+                          by other means.
     :return: the scanned video
     :rtype: :class:`Video`
     :raise: ValueError if cannot guess enough information from the path
@@ -182,7 +212,12 @@ def scan_video(path, subtitles=True, embedded_subtitles=True):
     """
     dirpath, filename = os.path.split(path)
     logger.info('Scanning video %r in %r', filename, dirpath)
-    video = Video.fromguess(path, guessit.guess_file_info(path, 'autodetect'))
+    if not video:
+        video = Video.fromguess(
+            path,
+            guessit.guess_file_info(path, info=['filename']),
+        )
+
     video.size = os.path.getsize(path)
     if video.size > 10485760:
         logger.debug('Size is %d', video.size)
@@ -292,12 +327,12 @@ def scan_videos(paths, subtitles=True, embedded_subtitles=True, age=None):
         for dirpath, dirnames, filenames in os.walk(path):
             # skip badly encoded directories
             if isinstance(dirpath, bytes):
-                logger.error('Skipping badly encoded directory %r', dirpath.decode('utf-8', errors='replace'))
+                logger.error('Skipping badly encoded directory %r', dirpath.decode('utf-8', 'replace'))
                 continue
             # skip badly encoded and hidden sub directories
             for dirname in list(dirnames):
                 if isinstance(dirname, bytes):
-                    logger.error('Skipping badly encoded dirname %r in %r', dirname.decode('utf-8', errors='replace'),
+                    logger.error('Skipping badly encoded dirname %r in %r', dirname.decode('utf-8', 'replace'),
                                  dirpath)
                     dirnames.remove(dirname)
                 elif dirname.startswith('.'):
@@ -307,7 +342,7 @@ def scan_videos(paths, subtitles=True, embedded_subtitles=True, age=None):
             for filename in filenames:
                 # skip badly encoded files
                 if isinstance(filename, bytes):
-                    logger.error('Skipping badly encoded filename %r in %r', filename.decode('utf-8', errors='replace'),
+                    logger.error('Skipping badly encoded filename %r in %r', filename.decode('utf-8', 'replace'),
                                  dirpath)
                     continue
                 # filter videos

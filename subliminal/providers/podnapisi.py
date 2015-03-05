@@ -14,7 +14,7 @@ import requests
 from . import Provider
 from ..exceptions import InvalidSubtitle, ProviderNotAvailable, ProviderError
 from ..subtitle import Subtitle, is_valid_subtitle, compute_guess_matches
-from ..subtitle import sanitize_string
+from ..subtitle import sanitize_string, extract_title_year
 from ..video import Episode, Movie
 
 
@@ -46,8 +46,8 @@ class PodnapisiSubtitle(Subtitle):
         if isinstance(video, Episode):
             # series
             if video.series and \
-                sanitize_string(self.series) == \
-                sanitize_string(video.series):
+                sanitize_string(self.series, strip_date=True) == \
+                sanitize_string(video.series, strip_date=True):
                 matches.add('series')
             # season
             if video.season and self.season == video.season:
@@ -124,19 +124,28 @@ class PodnapisiProvider(Provider):
     def query(self, language, series=None, season=None, episode=None, title=None, year=None):
         params = {'sXML': 1, 'sJ': language.podnapisi}
         if series and season and episode:
-            params['sK'] = series
+            params['sK'] = sanitize_string(series, strip_date=True)
             params['sTS'] = season
             params['sTE'] = episode
+            if not year:
+                year = extract_title_year(series)
+            if year:
+                params['sY'] = year
         elif title:
-            params['sK'] = title
+            params['sK'] = sanitize_string(title)
             if year:
                 params['sY'] = year
         else:
             raise ValueError('Missing parameters series and season and episode or title')
-        logger.debug('Searching episode %r', params)
+        logger.debug('Searching series %r', params)
         subtitles = []
         while True:
             root = self.get('/ppodnapisi/search', params)
+            if not int(root.find('pagination/results').text):
+                # Before we give up, check for the year in the name and strip
+                # it out.
+                if not year:
+                    params['sY'] = year
             if not int(root.find('pagination/results').text):
                 logger.debug('No subtitle found')
                 break

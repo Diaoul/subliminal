@@ -69,7 +69,8 @@ class PodnapisiProvider(Provider):
     languages = {babelfish.Language.frompodnapisi(l) for l in babelfish.language_converters['podnapisi'].codes}
     video_types = (Episode, Movie)
     server = 'http://simple.podnapisi.net'
-    link_re = re.compile('^.*(?P<link>/ppodnapisi/download/i/\d+/k/.*$)')
+    link_re = re.compile('^.*(?P<link>/ppodnapisi/predownload/i/\d+/k/.*$)')    # pattern for predownload url
+    link_zip_re = re.compile('^.*(?P<link>/ppodnapisi/download/i/\d+/k/.*$)')   # pattern for the actual subtitle (zip)
 
     def initialize(self):
         self.session = requests.Session()
@@ -143,12 +144,21 @@ class PodnapisiProvider(Provider):
     def download_subtitle(self, subtitle):
         soup = self.get(subtitle.page_link[38:], is_xml=False)
         link = soup.find('a', href=self.link_re)
+
         if not link:
-            raise ProviderError('Cannot find the download link')
+            raise ProviderError('Cannot find the predownload link')
         r = self.session.get(self.server + self.link_re.match(link['href']).group('link'), timeout=10)
-        if r.status_code != 200:
-            raise ProviderError('Request failed with status code %d' % r.status_code)
-        with zipfile.ZipFile(io.BytesIO(r.content)) as zf:
+
+        soup_zip = bs4.BeautifulSoup(r.content)                 # get the content of the predownload page
+        link_zip = soup_zip.find('a', href=self.link_zip_re)    # get the subtitle href
+        if not link_zip:
+            raise ProviderError('Cannot find the download link')
+
+        # request to the url of the actual zip file of the subtitle
+        r_zip = self.session.get(self.server + self.link_zip_re.match(link_zip['href']).group('link'))
+        if r_zip.status_code != 200:
+            raise ProviderError('Request failed with status code %d' % r_zip.status_code)
+        with zipfile.ZipFile(io.BytesIO(r_zip.content)) as zf:
             if len(zf.namelist()) > 1:
                 raise ProviderError('More than one file to unzip')
             subtitle.content = fix_line_endings(zf.read(zf.namelist()[0]))

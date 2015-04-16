@@ -39,7 +39,7 @@ STRING_SANITIZATION = {
     'Ȕ': 'U', 'Ȗ': 'U', 'Ǔ': 'U', 'Ǖ': 'U', 'Ǘ': 'U', 'Ǚ': 'U',
     'Ǜ': 'U',
     'ȕ': 'u', 'ȗ': 'u', 'ǔ': 'u', 'ǖ': 'u', 'ǘ': 'u', 'ǚ': 'u',
-    'ǜ': 'u',
+    'ǜ': 'u', 'ū': 'u',
 }
 
 STRING_SANITIZATION_RE = re.compile(
@@ -189,6 +189,13 @@ def get_subtitle_path(video_path, language=None):
 
     """
     subtitle_path = os.path.splitext(video_path)[0]
+    if isinstance(subtitle_path, str):
+        try:
+            subtitle_path = subtitle_path.decode('utf-8', errors='ignore')
+        except TypeError:
+            # python <= 2.6
+            subtitle_path = subtitle_path.decode('utf-8', 'ignore')
+
     if language is not None:
         try:
             return subtitle_path + '.%s.%s' % (language.alpha2, 'srt')

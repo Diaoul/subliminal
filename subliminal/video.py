@@ -8,7 +8,7 @@ import struct
 import babelfish
 import enzyme
 import guessit
-
+import re
 
 logger = logging.getLogger(__name__)
 
@@ -210,11 +210,12 @@ def scan_video(path, subtitles=True, embedded_subtitles=True, video=None):
     :raise: ValueError if cannot guess enough information from the path
 
     """
+
     dirpath, filename = os.path.split(path)
     logger.info('Scanning video %r in %r', filename, dirpath)
     if not video:
         video = Video.fromguess(
-            path,
+            path.encode('utf-8'),
             guessit.guess_file_info(path, info=['filename']),
         )
 
@@ -230,7 +231,7 @@ def scan_video(path, subtitles=True, embedded_subtitles=True, video=None):
         video.subtitle_languages |= scan_subtitle_languages(path)
     # enzyme
     try:
-        if filename.endswith('.mkv'):
+        if re.match('.*\.mkv$', filename, re.IGNORECASE):
             with open(path, 'rb') as f:
                 mkv = enzyme.MKV(f)
             if mkv.video_tracks:

@@ -33,7 +33,7 @@ class PodnapisiSubtitle(Subtitle):
         self.id = id
         self.releases = releases
         self.hearing_impaired = hearing_impaired
-        self.link = '/ppodnapisi' + link
+        self.link = link
         self.series = series
         self.season = season
         self.episode = episode
@@ -75,7 +75,11 @@ class PodnapisiSubtitle(Subtitle):
 
 
 class PodnapisiProvider(Provider):
-    languages = set([babelfish.Language.frompodnapisi(l) for l in babelfish.language_converters['podnapisi'].codes])
+    languages = set([babelfish.Language('por', 'BR')]) | set([babelfish.Language(l)
+                 for l in ['ara', 'aze', 'ben', 'bos', 'bul', 'cat', 'ces', 'dan', 'deu', 'ell', 'eng', 'eus', 'fas',
+                           'fin', 'fra', 'glg', 'heb', 'hrv', 'hun', 'hye', 'ind', 'ita', 'jpn', 'kor', 'mkd', 'msa',
+                           'nld', 'nor', 'pol', 'por', 'ron', 'rus', 'slk', 'slv', 'spa', 'sqi', 'srp', 'swe', 'tha',
+                           'tur', 'ukr', 'vie', 'zho']])
     video_types = (Episode, Movie)
     server = 'http://simple.podnapisi.net'
     pre_link_re = re.compile('^.*(?P<link>/ppodnapisi/predownload/i/\d+/k/.*$)')
@@ -88,7 +92,7 @@ class PodnapisiProvider(Provider):
     def terminate(self):
         self.session.close()
 
-    def get(self, url, params=None, headers=None, is_xml=True):
+    def get(self, url, params=None, headers=None, is_xml=False):
         """Make a GET request on `url` with the given parameters
 
         :param string url: part of the URL to reach with the leading slash
@@ -106,9 +110,12 @@ class PodnapisiProvider(Provider):
         if url_result and url_result.group(2) is None:
             prefix_url = self.server
 
+        # Update url
+        url = '%s%s' % (prefix_url, url)
+
         try:
             r = self.session.get(
-                prefix_url + url, params=params,
+                url, params=params,
                 headers=headers,
                 timeout=10,
             )
@@ -122,56 +129,118 @@ class PodnapisiProvider(Provider):
             return bs4.BeautifulSoup(r.content, ['permissive'])
 
     def query(self, language, series=None, season=None, episode=None, title=None, year=None):
-        params = {'sXML': 1, 'sJ': language.podnapisi}
+        """
+        Preforms a query for a show on Podnapisi.net
+        """
+        # Track page count (for multipage fetches
+        page = 1
+        # parameter listing
+        params = {'language': language.alpha2, 'page': str(page)}
         if series and season and episode:
-            params['sK'] = sanitize_string(series, strip_date=True)
-            params['sTS'] = season
-            params['sTE'] = episode
+            params['keywords'] = sanitize_string(series, strip_date=True)
+            params['seasons'] = season
+            params['episodes'] = episode
             if not year:
                 year = extract_title_year(series)
             if year:
-                params['sY'] = year
+                params['year'] = year
         elif title:
-            params['sK'] = sanitize_string(title)
+            params['keywords'] = sanitize_string(title)
             if year:
-                params['sY'] = year
+                params['year'] = year
         else:
             raise ValueError('Missing parameters series and season and episode or title')
         logger.debug('Searching series %r', params)
         subtitles = []
-        while True:
-            root = self.get('/ppodnapisi/search', params)
-            if not int(root.find('pagination/results').text):
-                # Before we give up, check for the year in the name and strip
-                # it out.
-                if not year:
-                    params['sY'] = year
-            if not int(root.find('pagination/results').text):
-                logger.debug('No subtitle found')
+        soup = self.get('/subtitles/search/advanced', params)
+
+        # Get page information
+        pages = soup.find('div', class_='panel-body')
+        pages = pages.find('ul', class_='pagination')
+        if pages:
+            bullets = pages('li')
+            pages = int(bullets[-2][0].a.string)
+        else:
+            pages = 1
+
+        logger.warning('Podnapisi page matches: %r' % pages)
+
+        while page < 10:
+            # Set a hard cap on page count to 10, there is really
+            # no reason to turn up more content then that
+            for row in soup('tr', class_='subtitle-entry'):
+                cells = row('td')
+                # common error checking on matched results
+                if not cells:
+                    continue
+                if len(cells) < 1:
+                    continue
+
+                # Acquire flags
+                flags = []
+                flag_entries = cells[0].find_all('i')
+                for entry in flag_entries:
+                    try:
+                        if entry['data-toggle'] != 'tooltip':
+                            continue
+                    except KeyError:
+                        continue
+                    try:
+                        flags += [ e.lower() for e in entry['class'] if e != 'flag' ]
+                    except KeyError:
+                        continue
+                # convert list
+                flags = set(flags)
+
+                # Get Hearing Impared Flag
+                hearing_impaired = ('text-cc' in flags)
+
+                # Get Link
+                link = cells[0].find('a', rel='nofollow')['href']
+                # Get ID
+                id = link[11:-9]
+
+                # Get release (if defined)
+                release = cells[0].find('span', class_='release')
+                if not release:
+                    # Fall back to general name
+                    release = cells[0].find('a', href=link[:-9]).string.strip()
+
+                if series and season and episode:
+                    try:
+                        subtitles.append(
+                            PodnapisiSubtitle(
+                                language, id, release,
+                                hearing_impaired, link,
+                                series=series, season=season, episode=episode,
+                        ))
+                    except AttributeError:
+                        # there simply wasn't enough information in the TV Show
+                        # gracefully handle this instead of crashing :)
+                        continue
+                elif title:
+                    try:
+                        subtitles.append(
+                            PodnapisiSubtitle(
+                                language, id, release,
+                                hearing_impaired, link,
+                                title=title, year=year,
+                        ))
+                    except AttributeError:
+                        # there simply wasn't enough information in the movie
+                        # gracefully handle this instead of crashing :)
+                        continue
+                    pass
+
+            # Handle multiple pages
+            page += 1
+            if page > pages:
+                # We're done
                 break
-            if series and season and episode:
-                try:
-                    subtitles.extend([PodnapisiSubtitle(language, int(s.find('id').text), s.find('release').text.split(),
-                                                    'h' in (s.find('flags').text or ''), s.find('url').text[38:],
-                                                    series=series, season=season, episode=episode)
-                                  for s in root.findall('subtitle')])
-                except AttributeError:
-                    # there simply wasn't enough information in the TV Show
-                    # gracefully handle this instead of crashing :)
-                    break
-            elif title:
-                try:
-                    subtitles.extend([PodnapisiSubtitle(language, int(s.find('id').text), s.find('release').text.split(),
-                                                    'h' in (s.find('flags').text or ''), s.find('url').text[38:],
-                                                    title=title, year=year)
-                                  for s in root.findall('subtitle')])
-                except AttributeError:
-                    # there simply wasn't enough information in the movie
-                    # gracefully handle this instead of crashing :)
-                    break
-            if int(root.find('pagination/current').text) >= int(root.find('pagination/count').text):
-                break
-            params['page'] = int(root.find('pagination/current').text) + 1
+            # Store new page
+            params['page'] = str(page)
+            soup = self.get('/subtitles/search/advanced', params)
+
         return subtitles
 
     def list_subtitles(self, video, languages):
@@ -182,27 +251,8 @@ class PodnapisiProvider(Provider):
             return [s for l in languages for s in self.query(l, title=video.title, year=video.year)]
 
     def download_subtitle(self, subtitle):
-        soup = self.get(subtitle.link, is_xml=False)
-        pre_link = soup.find('a', href=self.pre_link_re)
-        if not pre_link:
-            raise ProviderError('Cannot find the pre-download link')
-        pre_link = self.server + \
-            self.pre_link_re.match(pre_link['href']).group('link')
-
-        # Continue following the link
-        soup = self.get(
-            pre_link,
-            headers={
-                'Referer': self.server,
-            },
-            is_xml=False,
-        )
-
-        link = soup.find('a', href=self.link_re)
-        if not link:
-            raise ProviderError('Cannot find the download link')
         try:
-            r = self.session.get(self.server + self.link_re.match(link['href']).group('link'), timeout=10)
+            r = self.session.get(self.server + subtitle.link, timeout=10)
         except requests.Timeout:
             raise ProviderNotAvailable('Timeout after 10 seconds')
         if r.status_code != 200:

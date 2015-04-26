@@ -16,7 +16,7 @@ from ..exceptions import InvalidSubtitle, ProviderNotAvailable, ProviderError
 from ..subtitle import Subtitle, is_valid_subtitle, compute_guess_matches
 from ..subtitle import sanitize_string, extract_title_year
 from ..video import Episode, Movie
-
+from urllib import quote
 
 logger = logging.getLogger(__name__)
 URL_RE = re.compile(
@@ -26,6 +26,8 @@ URL_RE = re.compile(
 
 class PodnapisiSubtitle(Subtitle):
     provider_name = 'podnapisi'
+    server = 'http://http://podnapisi.net'
+    last_url = None
 
     def __init__(self, language, id, releases, hearing_impaired, link, series=None, season=None, episode=None,  # @ReservedAssignment
                  title=None, year=None):
@@ -58,6 +60,7 @@ class PodnapisiSubtitle(Subtitle):
             # guess
             for release in self.releases:
                 matches |= compute_guess_matches(video, guessit.guess_episode_info(release + '.mkv'))
+
         # movie
         elif isinstance(video, Movie):
             # title
@@ -85,9 +88,14 @@ class PodnapisiProvider(Provider):
     pre_link_re = re.compile('^.*(?P<link>/ppodnapisi/predownload/i/\d+/k/.*$)')
     link_re = re.compile('^.*(?P<link>/[a-zA-Z]{2}/ppodnapisi/download/i/\d+/k/.*$)')
 
+    headers = {}
+
     def initialize(self):
         self.session = requests.Session()
-        self.session.headers = {'User-Agent': self.primary_user_agent }
+        self.headers = {
+            'User-Agent': self.random_user_agent,
+            'Referer': '%s/subtitles/search/advanced' % self.server
+        }
 
     def terminate(self):
         self.session.close()
@@ -113,16 +121,29 @@ class PodnapisiProvider(Provider):
         # Update url
         url = '%s%s' % (prefix_url, url)
 
+        # Handle Headers
+        self.session.headers = self.headers
+
+        # Apply over-ride
+        if headers:
+            self.session.headers.update(headers)
+
+        self.last_url = None
         try:
             r = self.session.get(
-                url, params=params,
+                url,
+                params=params,
                 headers=headers,
                 timeout=10,
             )
+            # store last url
+            self.last_url = r.url
+
         except requests.Timeout:
             raise ProviderNotAvailable('Timeout after 10 seconds')
         if r.status_code != 200:
             raise ProviderNotAvailable('Request failed with status code %d' % r.status_code)
+
         if is_xml:
             return xml.etree.ElementTree.fromstring(r.content)
         else:
@@ -152,7 +173,32 @@ class PodnapisiProvider(Provider):
             raise ValueError('Missing parameters series and season and episode or title')
         logger.debug('Searching series %r', params)
         subtitles = []
-        soup = self.get('/subtitles/search/advanced', params)
+
+        # Initial Fetch
+        preload = self.get(
+            '/subtitles/search/advanced',
+            params=params,
+        )
+        preload_url = self.last_url
+
+        # Fetch tracking details
+        verify = self.get(
+            '/forum/app.php/track',
+            params=dict([('path', quote('/subtitles/search/advanced', ''))] + \
+                         params.items()),
+            headers={
+                'Referer': preload_url,
+            },
+        )
+
+        # Reload page
+        soup = self.get(
+            '/subtitles/search/advanced',
+            params=params,
+            headers = {
+                'Referer': preload_url,
+            },
+        )
 
         # Get page information
         pages = soup.find('div', class_='panel-body')
@@ -200,17 +246,38 @@ class PodnapisiProvider(Provider):
                 # Get ID
                 id = link[11:-9]
 
-                # Get release (if defined)
-                release = cells[0].find('span', class_='release')
-                if not release:
+                # Get releases (if defined)
+                releases = cells[0].find('span', class_='release')
+                if not releases:
                     # Fall back to general name
-                    release = cells[0].find('a', href=link[:-9]).string.strip()
+                    releases = [ cells[0].find('a', href=link[:-9]).string.strip(), ]
+
+                # Store Title
+                elif 'title' in releases:
+                    releases = [releases['title'].string.strip(), ]
+                else:
+                    # store name
+                    releases = releases.string.strip()
+
+                # attempt to match against multi listings
+                multi_release = cells[0].find('a', role='button', tabindex='-1')
+                if multi_release:
+                    # We have a match; more soup
+                    soup = bs4.BeautifulSoup(multi_release['data-content'], ['permissive'])
+                    rels = soup.find_all('span', class_='release')
+                    if rels:
+                        releases = []
+                    for r in rels:
+                        releases.append(str(r.get_text()))
+
+                if isinstance(releases, basestring):
+                    releases = [ releases, ]
 
                 if series and season and episode:
                     try:
                         subtitles.append(
                             PodnapisiSubtitle(
-                                language, id, release,
+                                language, id, releases,
                                 hearing_impaired, link,
                                 series=series, season=season, episode=episode,
                         ))
@@ -222,7 +289,7 @@ class PodnapisiProvider(Provider):
                     try:
                         subtitles.append(
                             PodnapisiSubtitle(
-                                language, id, release,
+                                language, id, releases,
                                 hearing_impaired, link,
                                 title=title, year=year,
                         ))
@@ -245,10 +312,14 @@ class PodnapisiProvider(Provider):
 
     def list_subtitles(self, video, languages):
         if isinstance(video, Episode):
-            return [s for l in languages for s in self.query(l, series=video.series, season=video.season,
-                                                             episode=video.episode)]
+            return [s for l in languages \
+                    for s in self.query(l, series=video.series,
+                                        season=video.season,
+                                        episode=video.episode)]
         elif isinstance(video, Movie):
-            return [s for l in languages for s in self.query(l, title=video.title, year=video.year)]
+            return [s for l in languages \
+                    for s in self.query(l, title=video.title,
+                                        year=video.year)]
 
     def download_subtitle(self, subtitle):
         try:

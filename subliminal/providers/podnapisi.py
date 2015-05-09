@@ -68,8 +68,8 @@ class PodnapisiSubtitle(Subtitle):
 class PodnapisiProvider(Provider):
     languages = {babelfish.Language.frompodnapisi(l) for l in babelfish.language_converters['podnapisi'].codes}
     video_types = (Episode, Movie)
-    server = 'http://simple.podnapisi.net'
-    link_re = re.compile('^.*(?P<link>/ppodnapisi/download/i/\d+/k/.*$)')
+    search_url = 'http://simple.podnapisi.net/ppodnapisi/search'
+    download_url_suffix = '/download'
 
     def initialize(self):
         self.session = requests.Session()
@@ -81,14 +81,14 @@ class PodnapisiProvider(Provider):
     def get(self, url, params=None, is_xml=True):
         """Make a GET request on `url` with the given parameters
 
-        :param string url: part of the URL to reach with the leading slash
+        :param string url: the URL to reach
         :param dict params: params of the request
-        :param bool xml: whether the response content is XML or not
+        :param bool is_xml: whether the response content is XML or not
         :return: the response
         :rtype: :class:`xml.etree.ElementTree.Element` or :class:`bs4.BeautifulSoup`
 
         """
-        r = self.session.get(self.server + '/ppodnapisi' + url, params=params, timeout=10)
+        r = self.session.get(url, params=params, timeout=10)
         if r.status_code != 200:
             raise ProviderError('Request failed with status code %d' % r.status_code)
         if is_xml:
@@ -111,7 +111,7 @@ class PodnapisiProvider(Provider):
         logger.debug('Searching episode %r', params)
         subtitles = []
         while True:
-            root = self.get('/search', params)
+            root = self.get(self.search_url, params)
             if not int(root.find('pagination/results').text):
                 logger.debug('No subtitle found')
                 break
@@ -141,11 +141,8 @@ class PodnapisiProvider(Provider):
             return [s for l in languages for s in self.query(l, title=video.title, year=video.year)]
 
     def download_subtitle(self, subtitle):
-        soup = self.get(subtitle.page_link[38:], is_xml=False)
-        link = soup.find('a', href=self.link_re)
-        if not link:
-            raise ProviderError('Cannot find the download link')
-        r = self.session.get(self.server + self.link_re.match(link['href']).group('link'), timeout=10)
+        download_url = subtitle.page_link + self.download_url_suffix
+        r = self.session.get(download_url, timeout=10)
         if r.status_code != 200:
             raise ProviderError('Request failed with status code %d' % r.status_code)
         with zipfile.ZipFile(io.BytesIO(r.content)) as zf:

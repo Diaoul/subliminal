@@ -4,8 +4,8 @@ import logging
 import os.path
 import babelfish
 import chardet
+from guessit.plugins.transformers import get_transformer
 import guessit.matchtree
-import guessit.transfo
 import pysrt
 from .video import Episode, Movie
 
@@ -269,7 +269,8 @@ def guess_properties(string, propertytype):
     properties = set()
     if string:
         tree = guessit.matchtree.MatchTree(string)
-        guessit.transfo.guess_properties.GuessProperties().process(tree)
+        _guess_properties = get_transformer('guess_properties')
+        _guess_properties.process(tree)
         properties = set(n.guess[propertytype] for n in tree.nodes() if propertytype in n.guess)
     return properties
 

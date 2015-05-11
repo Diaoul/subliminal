@@ -65,7 +65,8 @@ class OpenSubtitlesSubtitle(Subtitle):
             if video.year and self.movie_year == video.year:
                 matches.add('year')
             # guess
-            matches |= compute_guess_matches(video, guessit.guess_movie_info(self.movie_release_name + '.mkv'))
+            if self.movie_release_name.strip():
+                matches |= compute_guess_matches(video, guessit.guess_movie_info(self.movie_release_name + '.mkv'))
         else:
             logger.info('%r is not a valid movie_kind for %r', self.movie_kind, video)
             return matches

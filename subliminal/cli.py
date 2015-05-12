@@ -27,7 +27,7 @@ def subliminal():
     # required arguments
     required_arguments_group = parser.add_argument_group('required arguments')
     required_arguments_group.add_argument('paths', nargs='+', metavar='PATH', help='path to video file or folder')
-    required_arguments_group.add_argument('-l', '--languages', nargs='+', required=True, metavar='LANGUAGE',
+    required_arguments_group.add_argument('-l', '--languages', action='append', required=True, metavar='LANGUAGE',
                                           help='wanted languages as IETF codes e.g. fr, pt-BR, sr-Cyrl ')
 
     # configuration
@@ -39,7 +39,7 @@ def subliminal():
 
     # filtering
     filtering_group = parser.add_argument_group('filtering')
-    filtering_group.add_argument('-p', '--providers', nargs='+', metavar='PROVIDER',
+    filtering_group.add_argument('-p', '--providers', action='append', metavar='PROVIDER',
                                  help='providers to use (%s)' % ', '.join(provider_manager.available_providers))
     filtering_group.add_argument('-m', '--min-score', type=int, default=0,
                                  help='minimum score for subtitles (0-%d for episodes, 0-%d for movies)'

@@ -7,11 +7,55 @@ import pysrt
 import re
 from .video import Episode, Movie
 
+STRING_SANITIZATION = {
+    'À': 'A', 'Á': 'A', 'Â': 'A', 'Ã': 'A', 'Ä': 'A', 'Å': 'A',
+    'Ǟ': 'A', 'Ǡ': 'A', 'Ȁ': 'A', 'Ȃ': 'A', 'Ǻ': 'A', 'Ǽ': 'AE',
+    'à': 'a', 'á': 'a', 'â': 'a', 'ã': 'a', 'ä': 'a', 'å': 'a',
+    'ǟ': 'a', 'ǡ': 'a', 'ȁ': 'a', 'ȃ': 'a', 'ǻ': 'a', 'ǽ': 'ae',
+    'ç': 'c', 'ć': 'c', 'ĉ': 'c', 'ċ': 'c', 'č': 'c',
+    'Ç': 'C', 'Ć': 'C', 'Ĉ': 'C', 'Ċ': 'C', 'Č': 'C',
+    'È': 'E', 'É': 'E', 'Ê': 'E', 'Ë': 'E', 'Ē': 'E', 'Ĕ': 'E',
+    'Ė': 'E', 'Ę': 'E', 'Ě': 'E', 'Ȅ': 'E', 'Ȇ': 'E',
+    'è': 'e', 'é': 'e', 'ê': 'e', 'ë': 'e', 'ē': 'e', 'ĕ': 'e',
+    'ė': 'e', 'ę': 'e', 'ě': 'e', 'ǝ': 'e', 'ȅ': 'e', 'ȇ': 'e',
+    'Ì': 'I', 'Í': 'I', 'Î': 'I', 'Ï': 'I', 'Ĩ': 'I', 'Ī': 'I',
+    'Ĭ': 'I', 'Į': 'I', 'İ': 'I',
+    'ì': 'i', 'í': 'i', 'î': 'i', 'ï': 'i', 'ĩ': 'i', 'ī': 'i',
+    'ĭ': 'i', 'į': 'i', 'ı': 'i',
+    'Ò': 'O', 'Ó': 'O', 'Ô': 'O', 'Õ': 'O', 'Ö': 'O',
+    'Ō': 'O', 'Ŏ': 'O', 'Ő': 'O', 'Ǿ': 'O',
+    'ò': 'o', 'ó': 'o', 'ô': 'o', 'õ': 'o', 'ö': 'o',
+    'ō': 'o', 'ŏ': 'o', 'ő': 'o', 'ǿ': 'o',
+    'Ƿ': 'p',
+    'Ɲ': 'N', 'ƞ': 'n', 'Ǹ': 'N', 'ǹ': 'n',
+    'Ń': 'N', 'ń': 'n', 'Ņ': 'N', 'ņ': 'n', 'Ň': 'N', 'ň': 'n',
+    'ŉ': 'n', 'Ŋ': 'N', 'ŋ': 'n',
+    'Ŕ': 'R', 'Ŗ': 'R', 'Ř': 'R',
+    'ŕ': 'r', 'ŗ': 'r', 'ř': 'r',
+    'Ś': 'S', 'Ŝ': 'S', 'Ş': 'S', 'Š': 'S',
+    'ś': 's', 'ŝ': 's', 'ş': 's', 'š': 's',
+    'Ţ': 'T', 'Ť': 'T', 'Ŧ': 'T',
+    'ţ': 't', 'ť': 't', 'ŧ': 't',
+    'Ȕ': 'U', 'Ȗ': 'U', 'Ǔ': 'U', 'Ǖ': 'U', 'Ǘ': 'U', 'Ǚ': 'U',
+    'Ǜ': 'U',
+    'ȕ': 'u', 'ȗ': 'u', 'ǔ': 'u', 'ǖ': 'u', 'ǘ': 'u', 'ǚ': 'u',
+    'ǜ': 'u', 'ū': 'u',
+}
+
+STRING_SANITIZATION_RE = re.compile(
+    r'(' + '|'.join(STRING_SANITIZATION.keys()) + r')',
+)
 
 logger = logging.getLogger(__name__)
 
-#:  The following characters are always stripped
+#  The following characters are always stripped
 IGNORED_CHARACTERS_RE = re.compile('[!@#$\'"]')
+
+# non-printable ascii characters
+PRINTABLE_ASCII_RE = re.compile(r'[^\x20-\x7E]+')
+
+# Date parsing
+STRIP_DATE_RE = re.compile('\s*(.+)\s*[\[(]?\s*([123][0-9]{3})\s*[\])]?\s*$')
 
 
 class Subtitle(object):
@@ -88,8 +132,18 @@ class Subtitle(object):
     def __repr__(self):
         return '<%s [%s]>' % (self.__class__.__name__, self.language)
 
+def extract_title_year(str_in):
+    """
+    If the year can be extracted from the title
+    as part of it's name; then it is returned by
+    this function
+    """
+    str_date_re = STRIP_DATE_RE.match(str_in)
+    if str_date_re:
+        return str(str_date_re.group(2)).strip()
+    return ""
 
-def sanitize_string(str_in):
+def sanitize_string(str_in, strip_date=False):
     """
     Sanitizes a string passed into it by eliminating characters that might
     otherwise cause issues when attempting to locate a match on websites by
@@ -97,6 +151,7 @@ def sanitize_string(str_in):
     can be used for caching too.
 
     :param string str_in: the string to sanitize
+    :param bool strip_date: Eliminates trailing dates if found in string
     :return: sanitized string
     :rtype: string
     """
@@ -104,7 +159,24 @@ def sanitize_string(str_in):
         # handle int, float, etc
         str_in = str(str_in)
 
-    return IGNORED_CHARACTERS_RE.sub('', str_in).lower().strip()
+    # First we do best guess placement of all unicode characters
+    # to their ascii equivalent (if it's possible.
+    str_out = STRING_SANITIZATION_RE.sub(
+        lambda x: STRING_SANITIZATION[x.group()], str_in)
+
+    # Now we strip out anything that isn't printable still
+    # lingering
+    str_out = PRINTABLE_ASCII_RE.sub('', str_out)
+
+    # Finally eliminate any extra printable characters that
+    # really just should't be used.
+    str_out = IGNORED_CHARACTERS_RE.sub('', str_out).lower()
+
+    str_date_re = STRIP_DATE_RE.match(str_out)
+    if str_date_re:
+        str_out = str_date_re.group(1)
+
+    return str_out.strip()
 
 def get_subtitle_path(video_path, language=None):
     """Create the subtitle path from the given `video_path` and `language`
@@ -117,6 +189,13 @@ def get_subtitle_path(video_path, language=None):
 
     """
     subtitle_path = os.path.splitext(video_path)[0]
+    if isinstance(subtitle_path, str):
+        try:
+            subtitle_path = subtitle_path.decode('utf-8', errors='ignore')
+        except TypeError:
+            # python <= 2.6
+            subtitle_path = subtitle_path.decode('utf-8', 'ignore')
+
     if language is not None:
         try:
             return subtitle_path + '.%s.%s' % (language.alpha2, 'srt')

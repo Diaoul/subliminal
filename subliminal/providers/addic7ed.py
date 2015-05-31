@@ -8,7 +8,7 @@ import requests
 from . import Provider
 from ..cache import region
 from ..exceptions import ProviderConfigurationError, ProviderNotAvailable, InvalidSubtitle
-from ..subtitle import Subtitle, is_valid_subtitle, sanitize_string
+from ..subtitle import Subtitle, is_valid_subtitle, sanitize_string, extract_title_year
 from ..video import Episode
 
 
@@ -127,7 +127,16 @@ class Addic7edProvider(Provider):
         else:
             show_id = self.find_show_id(sanitized_series)
             if show_id is None:
-                return []
+                if extract_title_year(sanitized_series):
+                    logger.debug('Date detected in series title; adjusting search.')
+                    # Attempt to search again without the date
+                    sanitized_series = sanitize_string(
+                        sanitized_series,
+                        strip_date=True,
+                    )
+                    show_id = self.find_show_id(sanitized_series)
+                    if show_id is None:
+                        return []
         params = {'show_id': show_id, 'season': season}
         logger.debug('Searching subtitles %r', params)
         link = '/show/{show_id}&season={season}'.format(**params)

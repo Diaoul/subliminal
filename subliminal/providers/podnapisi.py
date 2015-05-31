@@ -26,7 +26,7 @@ URL_RE = re.compile(
 
 class PodnapisiSubtitle(Subtitle):
     provider_name = 'podnapisi'
-    server = 'http://http://podnapisi.net'
+    server = 'http://podnapisi.net'
     last_url = None
 
     def __init__(self, language, id, releases, hearing_impaired, link, series=None, season=None, episode=None,  # @ReservedAssignment
@@ -209,8 +209,7 @@ class PodnapisiProvider(Provider):
         else:
             pages = 1
 
-        logger.warning('Podnapisi page matches: %r' % pages)
-
+        logger.debug('Podnapisi page matches: %r' % pages)
         while page < 10:
             # Set a hard cap on page count to 10, there is really
             # no reason to turn up more content then that
@@ -250,28 +249,25 @@ class PodnapisiProvider(Provider):
                 releases = cells[0].find('span', class_='release')
                 if not releases:
                     # Fall back to general name
-                    releases = [ cells[0].find('a', href=link[:-9]).string.strip(), ]
+                    releases = [ str(cells[0].find('a', href=link[:-9]).string.strip()), ]
 
                 # Store Title
                 elif 'title' in releases:
-                    releases = [releases['title'].string.strip(), ]
+                    releases = [ str(releases['title'].string.strip()), ]
                 else:
                     # store name
-                    releases = releases.string.strip()
+                    releases = [ str(releases.string.strip()), ]
 
-                # attempt to match against multi listings
-                multi_release = cells[0].find('a', role='button', tabindex='-1')
-                if multi_release:
-                    # We have a match; more soup
-                    soup = bs4.BeautifulSoup(multi_release['data-content'], ['permissive'])
-                    rels = soup.find_all('span', class_='release')
-                    if rels:
-                        releases = []
-                    for r in rels:
+                # attempt to match against multi listings (if they exist)
+                multi_release = cells[0].find_all('div', class_='release')
+                if len(multi_release):
+                    for r in multi_release:
                         releases.append(str(r.get_text()))
-
                 if isinstance(releases, basestring):
                     releases = [ releases, ]
+
+                # Simplify list by making it unique
+                releases = list(set(releases))
 
                 if series and season and episode:
                     try:

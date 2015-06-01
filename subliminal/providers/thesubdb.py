@@ -15,8 +15,8 @@ logger = logging.getLogger(__name__)
 class TheSubDBSubtitle(Subtitle):
     provider_name = 'thesubdb'
 
-    def __init__(self, language, hash):  # @ReservedAssignment
-        super(TheSubDBSubtitle, self).__init__(language)
+    def __init__(self, language, hash, page_link):  # @ReservedAssignment
+        super(TheSubDBSubtitle, self).__init__(language, page_link=page_link)
         self.hash = hash
 
     def compute_matches(self, video):
@@ -58,7 +58,7 @@ class TheSubDBProvider(Provider):
             return []
         elif r.status_code != 200:
             raise ProviderError('Request failed with status code %d' % r.status_code)
-        return [TheSubDBSubtitle(language, hash) for language in
+        return [TheSubDBSubtitle(language, hash, r.url) for language in
                 {babelfish.Language.fromalpha2(l) for l in r.content.decode('utf-8').split(',')}]
 
     def list_subtitles(self, video, languages):

@@ -1,197 +1,272 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals, print_function
-import argparse
-import datetime
+"""
+Subliminal uses `click <http://click.pocoo.org>`_ to provide a powerful :abbr:`CLI (command-line interface)`.
+
+"""
+from __future__ import unicode_literals
+from collections import defaultdict
+from datetime import timedelta
 import logging
 import os
 import re
-import sys
-import babelfish
-import xdg.BaseDirectory
-from subliminal import (__version__, cache_region, MutexLock, provider_manager, Video, Episode, Movie, scan_videos,
-    download_best_subtitles, save_subtitles)
-try:
-    import colorlog
-except ImportError:
-    colorlog = None
+
+from babelfish import Error as BabelfishError, Language
+import click
+from dogpile.cache.backends.file import AbstractFileLock
+from dogpile.core import ReadWriteMutex
+
+from subliminal import (Episode, Movie, ProviderPool, Video, __version__, check_video, provider_manager, region,
+                        save_subtitles, scan_video, scan_videos)
+from subliminal.subtitle import compute_score
 
 
-DEFAULT_CACHE_FILE = os.path.join(xdg.BaseDirectory.save_cache_path('subliminal'), 'cli.dbm')
+class MutexLock(AbstractFileLock):
+    """:class:`MutexLock` is a thread-based rw lock based on :class:`dogpile.core.ReadWriteMutex`."""
+    def __init__(self, filename):
+        self.mutex = ReadWriteMutex()
+
+    def acquire_read_lock(self, wait):
+        ret = self.mutex.acquire_read_lock(wait)
+        return wait or ret
+
+    def acquire_write_lock(self, wait):
+        ret = self.mutex.acquire_write_lock(wait)
+        return wait or ret
+
+    def release_read_lock(self):
+        return self.mutex.release_read_lock()
+
+    def release_write_lock(self):
+        return self.mutex.release_write_lock()
 
 
-def subliminal():
-    parser = argparse.ArgumentParser(prog='subliminal', description='Subtitles, faster than your thoughts',
-                                     epilog='Suggestions and bug reports are greatly appreciated: '
-                                     'https://github.com/Diaoul/subliminal/issues', add_help=False)
+class LanguageParamType(click.ParamType):
+    """:class:`~click.ParamType` for languages that returns a :class:`~babelfish.language.Language`"""
+    name = 'language'
 
-    # required arguments
-    required_arguments_group = parser.add_argument_group('required arguments')
-    required_arguments_group.add_argument('paths', nargs='+', metavar='PATH', help='path to video file or folder')
-    required_arguments_group.add_argument('-l', '--languages', nargs='+', required=True, metavar='LANGUAGE',
-                                          help='wanted languages as IETF codes e.g. fr, pt-BR, sr-Cyrl ')
+    def convert(self, value, param, ctx):
+        try:
+            return Language.fromietf(value)
+        except BabelfishError:
+            self.fail('%s is not a valid language' % value)
 
-    # configuration
-    configuration_group = parser.add_argument_group('configuration')
-    configuration_group.add_argument('-s', '--single', action='store_true',
-                                     help='download without language code in subtitle\'s filename i.e. .srt only')
-    configuration_group.add_argument('-c', '--cache-file', default=DEFAULT_CACHE_FILE,
-                                     help='cache file (default: %(default)s)')
+LANGUAGE = LanguageParamType()
 
-    # filtering
-    filtering_group = parser.add_argument_group('filtering')
-    filtering_group.add_argument('-p', '--providers', nargs='+', metavar='PROVIDER',
-                                 help='providers to use (%s)' % ', '.join(provider_manager.available_providers))
-    filtering_group.add_argument('-m', '--min-score', type=int, default=0,
-                                 help='minimum score for subtitles (0-%d for episodes, 0-%d for movies)'
-                                 % (Episode.scores['hash'], Movie.scores['hash']))
-    filtering_group.add_argument('-a', '--age', help='download subtitles for videos newer than AGE e.g. 12h, 1w2d')
-    filtering_group.add_argument('-h', '--hearing-impaired', action='store_true',
-                                 help='download hearing impaired subtitles')
-    filtering_group.add_argument('-f', '--force', action='store_true',
-                                 help='force subtitle download for videos with existing subtitles')
 
-    # addic7ed
-    addic7ed_group = parser.add_argument_group('addic7ed')
-    addic7ed_group.add_argument('--addic7ed-username', metavar='USERNAME', help='username for addic7ed provider')
-    addic7ed_group.add_argument('--addic7ed-password', metavar='PASSWORD', help='password for addic7ed provider')
+class AgeParamType(click.ParamType):
+    """:class:`~click.ParamType` for age strings that returns a :class:`~datetime.timedelta`
 
-    # output
-    output_group = parser.add_argument_group('output')
-    output_group.add_argument('-d', '--directory',
-                              help='save subtitles in the given directory rather than next to the video')
-    output_group.add_argument('-e', '--encoding', default=None,
-                              help='encoding to convert the subtitle to (default: no conversion)')
-    output_exclusive_group = output_group.add_mutually_exclusive_group()
-    output_exclusive_group.add_argument('-q', '--quiet', action='store_true', help='disable output')
-    output_exclusive_group.add_argument('-v', '--verbose', action='store_true', help='verbose output')
-    output_group.add_argument('--log-file', help='log into a file instead of stdout')
-    output_group.add_argument('--color', action='store_true', help='add color to console output (requires colorlog)')
+    An age string is in the form `number + identifier` with possible identifiers:
 
-    # troubleshooting
-    troubleshooting_group = parser.add_argument_group('troubleshooting')
-    troubleshooting_group.add_argument('--debug', action='store_true', help='debug output')
-    troubleshooting_group.add_argument('--version', action='version', version=__version__)
-    troubleshooting_group.add_argument('--help', action='help', help='show this help message and exit')
+        * ``w`` for weeks
+        * ``d`` for days
+        * ``h`` for hours
 
-    # parse args
-    args = parser.parse_args()
+    The form can be specified multiple times but only with that idenfier ordering. For example:
 
-    # parse paths
-    try:
-        args.paths = [os.path.abspath(os.path.expanduser(p.decode('utf-8') if isinstance(p, bytes) else p))
-                      for p in args.paths]
-    except UnicodeDecodeError:
-        parser.error('argument paths: encodings is not utf-8: %r' % args.paths)
+        * ``1w2d4h`` for 1 week, 2 days and 4 hours
+        * ``2w`` for 2 weeks
+        * ``3w6h`` for 3 weeks and 6 hours
 
-    # parse languages
-    try:
-        args.languages = {babelfish.Language.fromietf(l) for l in args.languages}
-    except babelfish.Error:
-        parser.error('argument -l/--languages: codes are not IETF: %r' % args.languages)
+    """
+    name = 'age'
 
-    # parse age
-    if args.age is not None:
-        match = re.match(r'^(?:(?P<weeks>\d+?)w)?(?:(?P<days>\d+?)d)?(?:(?P<hours>\d+?)h)?$', args.age)
+    def convert(self, value, param, ctx):
+        match = re.match(r'^(?:(?P<weeks>\d+?)w)?(?:(?P<days>\d+?)d)?(?:(?P<hours>\d+?)h)?$', value)
         if not match:
-            parser.error('argument -a/--age: invalid age: %r' % args.age)
-        args.age = datetime.timedelta(**{k: int(v) for k, v in match.groupdict(0).items()})
+            self.fail('%s is not a valid age' % value)
 
-    # parse cache-file
-    args.cache_file = os.path.abspath(os.path.expanduser(args.cache_file))
-    if not os.path.exists(os.path.split(args.cache_file)[0]):
-        parser.error('argument -c/--cache-file: directory %r for cache file does not exist'
-                     % os.path.split(args.cache_file)[0])
+        return timedelta(**{k: int(v) for k, v in match.groupdict(0).items()})
 
-    # parse provider configs
-    provider_configs = {}
-    if (args.addic7ed_username is not None and args.addic7ed_password is None
-        or args.addic7ed_username is None and args.addic7ed_password is not None):
-        parser.error('argument --addic7ed-username/--addic7ed-password: both arguments are required or none')
-    if args.addic7ed_username is not None and args.addic7ed_password is not None:
-        provider_configs['addic7ed'] = {'username': args.addic7ed_username, 'password': args.addic7ed_password}
+AGE = AgeParamType()
 
-    # parse color
-    if args.color and colorlog is None:
-        parser.error('argument --color: colorlog required')
+PROVIDER = click.Choice(sorted(provider_manager.names()))
 
-    # setup output
-    if args.log_file is None:
-        handler = logging.StreamHandler()
-    else:
-        handler = logging.FileHandler(args.log_file, encoding='utf-8')
-    if args.debug:
-        if args.color:
-            if args.log_file is None:
-                log_format = '%(log_color)s%(levelname)-8s%(reset)s [%(blue)s%(name)s-%(funcName)s:%(lineno)d%(reset)s] %(message)s'
-            else:
-                log_format = '%(purple)s%(asctime)s%(reset)s %(log_color)s%(levelname)-8s%(reset)s [%(blue)s%(name)s-%(funcName)s:%(lineno)d%(reset)s] %(message)s'
-            handler.setFormatter(colorlog.ColoredFormatter(log_format,
-                                                           log_colors=dict(colorlog.default_log_colors.items() + [('DEBUG', 'cyan')])))
-        else:
-            if args.log_file is None:
-                log_format = '%(levelname)-8s [%(name)s-%(funcName)s:%(lineno)d] %(message)s'
-            else:
-                log_format = '%(asctime)s %(levelname)-8s [%(name)s-%(funcName)s:%(lineno)d] %(message)s'
-            handler.setFormatter(logging.Formatter(log_format))
-        logging.getLogger().addHandler(handler)
-        logging.getLogger().setLevel(logging.DEBUG)
-    elif args.verbose:
-        if args.color:
-            if args.log_file is None:
-                log_format = '%(log_color)s%(levelname)-8s%(reset)s [%(blue)s%(name)s%(reset)s] %(message)s'
-            else:
-                log_format = '%(purple)s%(asctime)s%(reset)s %(log_color)s%(levelname)-8s%(reset)s [%(blue)s%(name)s%(reset)s] %(message)s'
-            handler.setFormatter(colorlog.ColoredFormatter(log_format))
-        else:
-            log_format = '%(levelname)-8s [%(name)s] %(message)s'
-            if args.log_file is not None:
-                log_format = '%(asctime)s ' + log_format
-            handler.setFormatter(logging.Formatter(log_format))
-        logging.getLogger('subliminal').addHandler(handler)
-        logging.getLogger('subliminal').setLevel(logging.INFO)
-    elif not args.quiet:
-        if args.color:
-            if args.log_file is None:
-                log_format = '[%(log_color)s%(levelname)s%(reset)s] %(message)s'
-            else:
-                log_format = '%(purple)s%(asctime)s%(reset)s [%(log_color)s%(levelname)s%(reset)s] %(message)s'
-            handler.setFormatter(colorlog.ColoredFormatter(log_format))
-        else:
-            if args.log_file is None:
-                log_format = '%(levelname)s: %(message)s'
-            else:
-                log_format = '%(asctime)s %(levelname)s: %(message)s'
-            handler.setFormatter(logging.Formatter(log_format))
-        logging.getLogger('subliminal.api').addHandler(handler)
-        logging.getLogger('subliminal.api').setLevel(logging.INFO)
+subliminal_cache = 'subliminal.dbm'
+
+
+@click.group(context_settings={'max_content_width': 100}, epilog='Suggestions and bug reports are greatly appreciated: '
+             'https://github.com/Diaoul/subliminal/')
+@click.option('--addic7ed', type=click.STRING, nargs=2, metavar='USERNAME PASSWORD', help='Addic7ed configuration.')
+@click.option('--cache-dir', type=click.Path(writable=True, resolve_path=True, file_okay=False),
+              default=click.get_app_dir('subliminal'), show_default=True, expose_value=True,
+              help='Path to the cache directory.')
+@click.option('--debug', is_flag=True, help='Print useful information for debugging subliminal and for reporting bugs.')
+@click.version_option(__version__)
+@click.pass_context
+def subliminal(ctx, addic7ed, cache_dir, debug):
+    """Subtitles, faster than your thoughts."""
+    # create cache directory
+    os.makedirs(cache_dir, exist_ok=True)
 
     # configure cache
-    cache_region.configure('dogpile.cache.dbm', expiration_time=datetime.timedelta(days=30),  # @UndefinedVariable
-                           arguments={'filename': args.cache_file, 'lock_factory': MutexLock})
+    region.configure('dogpile.cache.dbm', expiration_time=timedelta(days=30),
+                     arguments={'filename': os.path.join(cache_dir, subliminal_cache), 'lock_factory': MutexLock})
+
+    # configure logging
+    if debug:
+        handler = logging.StreamHandler()
+        handler.setFormatter(logging.Formatter(logging.BASIC_FORMAT))
+        logging.getLogger('subliminal').addHandler(handler)
+        logging.getLogger('subliminal').setLevel(logging.DEBUG)
+
+    # provider configs
+    ctx.obj = {'provider_configs': {}}
+    if addic7ed:
+        ctx.obj['provider_configs']['addic7ed'] = {'username': addic7ed[0], 'password': addic7ed[1]}
+
+
+@subliminal.command()
+@click.option('--clear-subliminal', is_flag=True, help='Clear subliminal\'s cache. Use this ONLY if your cache is '
+              'corrupted or if you experience issues.')
+@click.pass_context
+def cache(ctx, clear_subliminal):
+    """Cache management."""
+    if clear_subliminal:
+        os.remove(os.path.join(ctx.parent.params['cache_dir'], subliminal_cache))
+        click.echo('Subliminal\'s cache cleared.')
+    else:
+        click.echo('Nothing done.')
+
+
+@subliminal.command()
+@click.option('-l', '--language', type=LANGUAGE, required=True, multiple=True, help='Language as IETF code, '
+              'e.g. en, pt-BR (can be used multiple times).')
+@click.option('-p', '--provider', type=PROVIDER, multiple=True, help='Provider to use (can be used multiple times).')
+@click.option('-a', '--age', type=AGE, help='Filter videos newer than AGE, e.g. 12h, 1w2d.')
+@click.option('-d', '--directory', type=click.STRING, metavar='DIR', help='Directory where to save subtitles, '
+              'default is next to the video file.')
+@click.option('-e', '--encoding', type=click.STRING, metavar='ENC', help='Subtitle file encoding, default is to '
+              'preserve original encoding.')
+@click.option('-s', '--single', is_flag=True, default=False, help='Save subtitle without language code in the file '
+              'name, i.e. use .srt extension.')
+@click.option('-f', '--force', is_flag=True, default=False, help='Force download even if a subtitle already exist.')
+@click.option('-hi', '--hearing-impaired', is_flag=True, default=False, help='Prefer hearing impaired subtitles.')
+@click.option('-m', '--min-score', type=click.IntRange(0, 100), default=0, help='Minimum score for a subtitle '
+              'to be downloaded.')
+@click.option('-v', '--verbose', count=True, help='Increase verbosity.')
+@click.argument('path', type=click.Path(), required=True, nargs=-1)
+@click.pass_obj
+def download(obj, provider, language, age, directory, encoding, single, force, hearing_impaired, min_score, verbose,
+             path):
+    """Download best subtitles.
+
+    PATH can be an directory containing videos, a video file path or a video file name. It can be used multiple times.
+
+    If an existing subtitle is detected (external or embedded) in the correct language, the download is skipped for
+    the associated video.
+
+    """
+    # process parameters
+    language = set(language)
 
     # scan videos
-    videos = scan_videos([p for p in args.paths if os.path.exists(p)], subtitles=not args.force,
-                         embedded_subtitles=not args.force, age=args.age)
+    videos = []
+    ignored_videos = []
+    with click.progressbar(path, label='Collecting videos',
+                           item_show_func=lambda p: str(p) if p is not None else '') as bar:
+        for p in bar:
+            # non-existing
+            if not os.path.exists(p):
+                videos.append(Video.fromname(p))
+                continue
 
-    # guess videos
-    videos.extend([Video.fromname(p) for p in args.paths if not os.path.exists(p)])
+            # directories
+            if os.path.isdir(p):
+                for video in scan_videos(p, subtitles=not force, embedded_subtitles=not force):
+                    if check_video(video, languages=language, age=age, undefined=single):
+                        videos.append(video)
+                    else:
+                        ignored_videos.append(video)
+                continue
+
+            # other inputs
+            video = scan_video(p, subtitles=not force, embedded_subtitles=not force)
+            if check_video(video, languages=language, age=age, undefined=single):
+                videos.append(video)
+            else:
+                ignored_videos.append(video)
+
+    # output ignored videos
+    if verbose > 1:
+        for video in ignored_videos:
+            click.secho('%s ignored - subtitles: %s / age: %d day%s ' % (
+                os.path.split(video.name)[1],
+                ', '.join(str(s) for s in video.subtitle_languages) or 'none',
+                video.age.days,
+                's' if video.age.days > 1 else ''
+            ), fg='yellow')
+
+    # report collected videos
+    click.echo('%s video%s collected / %s video%s ignored' % (click.style(str(len(videos)), bold=True),
+                                                              's' if len(videos) > 1 else '',
+                                                              click.style(str(len(ignored_videos)), bold=True),
+                                                              's' if len(ignored_videos) > 1 else ''))
+
+    # exit if no video collected
+    if not videos:
+        return
 
     # download best subtitles
-    subtitles = download_best_subtitles(videos, args.languages, providers=args.providers,
-                                        provider_configs=provider_configs, min_score=args.min_score,
-                                        hearing_impaired=args.hearing_impaired, single=args.single)
+    downloaded_subtitles = defaultdict(list)
+    with ProviderPool(providers=provider, provider_configs=obj['provider_configs']) as pool:
+        with click.progressbar(videos, label='Downloading subtitles',
+                               item_show_func=lambda v: os.path.split(v.name)[1] if v is not None else '') as bar:
+            for v in bar:
+                subtitles = pool.download_best_subtitles(pool.list_subtitles(v, language - v.subtitle_languages),
+                                                         v, language, min_score=v.scores['hash'] * min_score / 100,
+                                                         hearing_impaired=hearing_impaired, only_one=single)
+                downloaded_subtitles[v] = subtitles
 
     # save subtitles
-    save_subtitles(subtitles, single=args.single, directory=args.directory, encoding=args.encoding)
+    total_subtitles = 0
+    for v, subtitles in downloaded_subtitles.items():
+        saved_subtitles = save_subtitles(v, subtitles, single=single, directory=directory, encoding=encoding)
+        total_subtitles += len(saved_subtitles)
 
-    # result output
-    if not subtitles:
-        if not args.quiet:
-            print('No subtitles downloaded', file=sys.stderr)
-        exit(1)
-    if not args.quiet:
-        subtitles_count = sum([len(s) for s in subtitles.values()])
-        if subtitles_count == 1:
-            print('%d subtitle downloaded' % subtitles_count)
-        else:
-            print('%d subtitles downloaded' % subtitles_count)
+        if verbose > 0:
+            click.echo('%s subtitle%s downloaded for %s' % (click.style(str(len(saved_subtitles)), bold=True),
+                                                            's' if len(saved_subtitles) > 1 else '',
+                                                            os.path.split(v.name)[1]))
+
+        if verbose > 1:
+            for s in saved_subtitles:
+                matches = s.get_matches(v, hearing_impaired=hearing_impaired)
+                score = compute_score(matches, v)
+
+                # score color
+                score_color = None
+                if isinstance(v, Movie):
+                    if score < v.scores['title']:
+                        score_color = 'red'
+                    elif score < v.scores['title'] + v.scores['year'] + v.scores['release_group']:
+                        score_color = 'yellow'
+                    else:
+                        score_color = 'green'
+                elif isinstance(v, Episode):
+                    if score < v.scores['series'] + v.scores['season'] + v.scores['episode']:
+                        score_color = 'red'
+                    elif score < (v.scores['series'] + v.scores['season'] + v.scores['episode'] +
+                                  v.scores['release_group']):
+                        score_color = 'yellow'
+                    else:
+                        score_color = 'green'
+
+                # scale score from 0 to 100 taking out preferences
+                scaled_score = score
+                if s.hearing_impaired == hearing_impaired:
+                    scaled_score -= v.scores['hearing_impaired']
+                scaled_score *= 100 / v.scores['hash']
+
+                # echo some nice colored output
+                click.echo('  - [{score}] - {language} subtitle from {provider_name} (match on {matches})'.format(
+                    score=click.style('{:5.1f}'.format(scaled_score), fg=score_color, bold=score >= v.scores['hash']),
+                    language=s.language.name if s.language.country is None else '%s (%s)' % (s.language.name,
+                                                                                             s.language.country.name),
+                    provider_name=s.provider_name,
+                    matches=', '.join(sorted(matches, key=v.scores.get, reverse=True))
+                ))
+
+    if verbose == 0:
+        click.echo('Downloaded %s subtitle%s' % (click.style(str(total_subtitles), bold=True),
+                                                 's' if total_subtitles > 1 else ''))

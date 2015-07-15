@@ -1,0 +1,16 @@
+interactions:
+- request:
+    body: null
+    headers:
+      User-Agent: ['SubDB/1.0 (subliminal/0.8.0; https://github.com/Diaoul/subliminal)']
+    method: GET
+    uri: http://api.thesubdb.com/?action=search&hash=9dbbfb7ba81c9a6237237dae8589fccc
+  response:
+    body: {string: 'en,es,fr,pt'}
+    headers:
+      Connection: [keep-alive]
+      Content-Type: [text/html]
+      Date: ['Sat, 04 Jul 2015 17:12:34 GMT']
+      Server: [nginx/1.6.0]
+    status: {code: 200, message: OK}
+version: 1

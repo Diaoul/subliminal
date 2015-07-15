@@ -1,0 +1,3 @@
+Subtitle
+========
+.. automodule:: subliminal.subtitle

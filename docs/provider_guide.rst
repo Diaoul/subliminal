@@ -1,6 +1,7 @@
 Provider Guide
 ==============
-This guide is going to explain how to add a :class:`~subliminal.providers.Provider` to subliminal
+This guide is going to explain how to add a :class:`~subliminal.providers.Provider` to subliminal. You are encouraged
+to take a look at the existing providers, it can be a nice base to start your own provider.
 
 
 Requirements
@@ -61,7 +62,7 @@ Language
 --------
 To be able to handle various language codes, subliminal makes use of `babelfish <http://babelfish.readthedocs.org>`_
 Language and converters. You must set the attribute :attr:`~subliminal.providers.Provider.languages` with a set of
-supported :class:`babelfish.Language`.
+supported :class:`~babelfish.language.Language`.
 
 If you cannot find a suitable converter for your provider, you can `make one of your own
 <http://babelfish.readthedocs.org/en/latest/#custom-converters>`_.
@@ -70,7 +71,7 @@ If you cannot find a suitable converter for your provider, you can `make one of 
 Querying
 --------
 The :meth:`~subliminal.providers.Provider.query` method parameters must include all aspects of provider's querying with
-simple types.
+primary types.
 
 
 Subtitle
@@ -82,12 +83,11 @@ It must have relevant attributes that can be used to compute the matches of the 
 
 Score computation
 -----------------
-
 To be able to compare subtitles coming from different providers between them, the
-:meth:`~subliminal.subtitle.Subtitle.compute_matches` method must be implemented.
+:meth:`~subliminal.subtitle.Subtitle.get_matches` method must be implemented.
 If `guessit <http://guessit.readthedocs.org>`_ is used to extract data from the
-:class:`~subliminal.subtitle.Subtitle` subclass, you can use :func:`~subliminal.subtitle.compute_guess_matches`
-as a helper to compute matches between the :class:`~subliminal.video.Video` and the :class:`guessit.Guess`.
+:class:`~subliminal.subtitle.Subtitle` subclass, you can use :func:`~subliminal.subtitle.guess_matches`
+as a helper to compute matches between the :class:`~subliminal.video.Video` and the :class:`~guessit.guess.Guess`.
 
 Refer to the `scores` attribute of  :class:`~subliminal.video.Episode` and :class:`~subliminal.video.Movie`
 for a list of possible matches.
@@ -95,11 +95,8 @@ for a list of possible matches.
 
 Unittesting
 -----------
-All possible uses of the :meth:`~subliminal.providers.Provider.query` method must be unittested.
-The :meth:`~subliminal.subtitle.Subtitle.compute_matches` is used to validate the unittests.
-
-As it is not possible to unittest all uses of the :meth:`~subliminal.providers.Provider.list_subtitles`
-and :meth:`~subliminal.providers.Provider.download_subtitle` methods, unitests are only required to cover most common
-use cases.
-
-See existing unittests for more details on how to proceed.
+All possible uses of :meth:`~subliminal.providers.Provider.query`,
+:meth:`~subliminal.providers.Provider.list_subtitles` and :meth:`~subliminal.providers.Provider.download_subtitle`
+methods must have integration tests. Use `vcrpy <https://github.com/kevin1024/vcrpy>`_ for recording and playback
+of network activity.
+Other functions must be unittested. If necessary, you can use :mod:`unittest.mock` to mock some functions.

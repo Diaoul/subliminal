@@ -1,0 +1,160 @@
+interactions:
+- request:
+    body: null
+    headers:
+      User-Agent: [Subliminal/0.8.0]
+    method: GET
+    uri: http://podnapisi.net/subtitles/search/old?sL=en&sY=2013&sXML=1&sK=Man+of+Steel
+  response:
+    body: {string: "<html>\r\n<head><title>302 Found</title></head>\r\n<body bgcolor=\"white\">\r\n<center><h1>302
+        Found</h1></center>\r\n<hr><center>nginx/1.8.0</center>\r\n</body>\r\n</html>\r\n"}
+    headers:
+      Connection: [keep-alive]
+      Content-Length: ['160']
+      Content-Type: [text/html]
+      Date: ['Thu, 09 Jul 2015 21:33:28 GMT']
+      Location: ['http://www.podnapisi.net/subtitles/search/old?sL=en&sY=2013&sXML=1&sK=Man+of+Steel']
+      Server: [nginx/1.8.0]
+    status: {code: 302, message: Moved Temporarily}
+- request:
+    body: null
+    headers:
+      User-Agent: [Subliminal/0.8.0]
+    method: GET
+    uri: http://www.podnapisi.net/subtitles/search/old?sL=en&sY=2013&sXML=1&sK=Man+of+Steel
+  response:
+    body: {string: "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>\n<!DOCTYPE
+        results [\n  <!ELEMENT results (#PCDATA|pagination|subtitle)*>\n    <!ELEMENT
+        pagination (current, count, results)>\n      <!ELEMENT current (#PCDATA)>\n
+        \     <!ELEMENT count (#PCDATA)>\n    <!ELEMENT subtitle (id, title, year,
+        movieId, url, uploaderId, uploaderName, release, languageId, languageName,
+        time, tvSeason, tvEpisode, tvSpecial, cds, format, fps, rating, flags, downloads)>\n
+        \     <!ELEMENT id (#PCDATA)>\n      <!ELEMENT pid (#PCDATA)>\n      <!ELEMENT
+        title (#PCDATA)>\n      <!ELEMENT year (#PCDATA)>\n      <!ELEMENT movieId
+        (#PCDATA)>\n      <!ELEMENT url (#PCDATA)>\n      <!ELEMENT uploaderId (#PCDATA)>\n
+        \     <!ELEMENT uploaderName (#PCDATA)>\n      <!ELEMENT release (#PCDATA)>\n
+        \     <!ELEMENT languageId (#PCDATA)>\n      <!ELEMENT languageName (#PCDATA)>\n
+        \     <!ELEMENT language (#PCDATA)>\n      <!ELEMENT time (#PCDATA)>\n      <!ELEMENT
+        tvSeason (#PCDATA)>\n      <!ELEMENT tvEpisode (#PCDATA)>\n      <!ELEMENT
+        tvSpecial (#PCDATA)>\n      <!ELEMENT cds (#PCDATA)>\n      <!ELEMENT format
+        (#PCDATA)>\n      <!ELEMENT fps (#PCDATA)>\n      <!ELEMENT rating (#PCDATA)>\n
+        \     <!ELEMENT flags (#PCDATA)>\n      <!ELEMENT new_flags (#PCDATA)>\n        <!ELEMENT
+        flag (#PCDATA)>\n      <!ELEMENT downloads (#PCDATA)>\n      <!ELEMENT exactHashes
+        (#PCDATA)>]> <results><pagination><current>1</current><count>1</count><results>12</results></pagination><subtitle><id>2738264</id><pid>WMgp</pid><title>Man
+        of Steel</title><year>2013</year><movieId>_ngG</movieId><url>http://www.podnapisi.net/subtitles/en-man-of-steel-2013/WMgp</url><uploaderId>41840</uploaderId><uploaderName>gilraen</uploaderName><release>Man.Of.Steel.2013.EXTRAS.BONUS.DISC.720p.BluRay.DTS.x264-PublicHD:
+        publichd.EXTRAS.Journey.Of.Discovery.Creating.Man.Of.Steel.720p publichd.EXTRAS.Planet.Krypton.720p</release><languageId>2</languageId><languageName>English</languageName><language>en</language><time>1385011759</time><tvSeason>0</tvSeason><tvEpisode>0</tvEpisode><tvSpecial>0</tvSpecial><cds
+        /><format>N/A</format><fps>N/A</fps><rating>0.0</rating><flags>nh</flags><new_flags><flag>hearing_impaired</flag><flag>high_definition</flag></new_flags><downloads>1766</downloads><exactHashes
+        /></subtitle><subtitle><id>2681136</id><pid>MOko</pid><title>Man of Steel</title><year>2013</year><movieId>_ngG</movieId><url>http://www.podnapisi.net/subtitles/en-man-of-steel-2013/MOko</url><uploaderId>41840</uploaderId><uploaderName>gilraen</uploaderName><release>publichd.EXTRAS</release><languageId>2</languageId><languageName>English</languageName><language>en</language><time>1382420144</time><tvSeason>0</tvSeason><tvEpisode>0</tvEpisode><tvSpecial>0</tvSpecial><cds
+        /><format>N/A</format><fps>N/A</fps><rating>0.0</rating><flags>h</flags><new_flags><flag>high_definition</flag></new_flags><downloads>4605</downloads><exactHashes
+        /></subtitle><subtitle><id>2672974</id><pid>Tsko</pid><title>Man of Steel</title><year>2013</year><movieId>_ngG</movieId><url>http://www.podnapisi.net/subtitles/en-man-of-steel-2013/Tsko</url><uploaderId>144401</uploaderId><uploaderName>flax</uploaderName><release>Man.Of.Steel.2013.720p.BRRip.x264.AAC-ViSiON
+        Man.Of.Steel.2013.720p.BluRay.x264-Felony.[PublicHD]. Man.Of.Steel.2013.1080p.BluRay.x264-SECTOR7.
+        Man.Of.Steel.2013.720p.BRRip.x264.AC3-UNDERCOVER. Man.Of.Steel.2013.BDRip.XviD.MP3-RARBG.
+        Man.Of.Steel.(2013).BDRip.600MB.Ganool. Man.of.Steel.2013.BDRip.x264.700MB-Micromkv.
+        Man.Of.Steel.2013.BRRip.AAC.x264-SSDD. Man.Of.Steel.2013.BDRip.x264-Larceny.
+        Man.Of.Steel.2013.BDRiP.XViD-NoGRP. Man.Of.Steel.2013.720p.BRRip.x264.AC3-EVO.
+        Man.of.Steel.2013.720p.BRRip.h264.AAC-RARBG. Man.Of.Steel.[2013].BRRip.XviD-ETRG.
+        Man.of.Steel.[2013].BRRip.XViD.[AC3]-ETRG. Man.Of.Steel.2013.BRRiP.XVID.AC3-MAJESTIC.
+        Man.of.steel.2013.BRRip.XviD.AC3-RARBG. Man.Of.Steel.2013.720p.BRRip.x264.AC3-SUPERM4N.
+        Man.Of.Steel.2013.720p.BRRip.XviD.AC3-ViSiON</release><languageId>2</languageId><languageName>English</languageName><language>en</language><time>1381874511</time><tvSeason>0</tvSeason><tvEpisode>0</tvEpisode><tvSpecial>0</tvSpecial><cds
+        /><format>N/A</format><fps>N/A</fps><rating>1.0</rating><flags>h</flags><new_flags><flag>high_definition</flag></new_flags><downloads>10147</downloads><exactHashes>sublight:44b92527dbc1d9a73bfb02990c41ffa1
+        sublight:391ae5c74ab8ab8f93f9875d236a672b sublight:e5c4c23d90498eb7482b1f016ff39e92</exactHashes></subtitle><subtitle><id>2672656</id><pid>EMgo</pid><title>Man
+        of Steel</title><year>2013</year><movieId>_ngG</movieId><url>http://www.podnapisi.net/subtitles/en-man-of-steel-2013/EMgo</url><uploaderId>7718</uploaderId><uploaderName>jdinic3</uploaderName><release>Man.Of.Steel.2013.720p.BRRip.x264.AAC-ViSiON
+        Man.Of.Steel.2013.720p.BluRay.x264-Felony Man.Of.Steel.2013.1080p.BluRay.x264-SECTOR7
+        Man.Of.Steel.2013.720p.BRRip.x264.AC3-UNDERCOVER Man.Of.Steel.2013.BDRip.XviD.MP3-RARBG
+        Man.Of.Steel.(2013).BDRip.600MB.Ganool Man.of.Steel.2013.BDRip.x264.700MB-Micromkv
+        Man.Of.Steel.2013.BRRip.AAC.x264-SSDD Man.Of.Steel.2013.BDRip.x264-Larceny
+        Man.Of.Steel.2013.BDRiP.XViD-NoGRP Man.Of.Steel.2013.720p.BRRip.x264.AC3-EVO
+        Man.of.Steel.2013.720p.BRRip.h264.AAC-RARBG Man.Of.Steel.[2013].BRRip.XviD-ETRG
+        Man.of.Steel.[2013].BRRip.XViD.[AC3]-ETRG Man.Of.Steel.2013.BRRiP.XVID.AC3-MAJESTIC
+        Man.of.steel.2013.BRRip.XviD.AC3-RARBG Man.Of.Steel.2013.720p.BRRip.x264.AC3-SUPERM4N
+        Man.Of.Steel.2013.720p.BRRip.XviD.AC3-ViSiON Man.Of.Steel.2013.720p.BRRip.x264.AC3-JYK
+        Man.of.Steel.[2013].DVDRIP.DIVX.[Eng]-DUQA&#9516;&#171; Man.of.Steel.2013.1080p.BluRay.x264.YIFY</release><languageId>2</languageId><languageName>English</languageName><language>en</language><time>1381852391</time><tvSeason>0</tvSeason><tvEpisode>0</tvEpisode><tvSpecial>0</tvSpecial><cds
+        /><format>N/A</format><fps>N/A</fps><rating>1.0</rating><flags>nh</flags><new_flags><flag>hearing_impaired</flag><flag>high_definition</flag></new_flags><downloads>11139</downloads><exactHashes>sublight:bb6b91e12f876eecbf86ca6a296807a7
+        sublight:e5c4c23d90498eb7482b1f016ff39e92 sublight:1858614a80929a54653e95d50f8accc1</exactHashes></subtitle><subtitle><id>2667828</id><pid>NLUo</pid><title>Man
+        of Steel</title><year>2013</year><movieId>_ngG</movieId><url>http://www.podnapisi.net/subtitles/en-man-of-steel-2013/NLUo</url><uploaderId>86327</uploaderId><uploaderName>mixi69</uploaderName><release>Man.of.Steel.[2013].INTERNAL.TS.720p.DIVX.[Eng]-DUQA</release><languageId>2</languageId><languageName>English</languageName><language>en</language><time>1381502479</time><tvSeason>0</tvSeason><tvEpisode>0</tvEpisode><tvSpecial>0</tvSpecial><cds
+        /><format>N/A</format><fps>N/A</fps><rating>0.0</rating><flags /><new_flags
+        /><downloads>1544</downloads><exactHashes /></subtitle><subtitle><id>2525113</id><pid>uYcm</pid><title>Man
+        of Steel</title><year>2013</year><movieId>_ngG</movieId><url>http://www.podnapisi.net/subtitles/en-man-of-steel-2013/uYcm</url><uploaderId>1</uploaderId><uploaderName>Anonymous</uploaderName><release>Man.of.Steel.[2013].INTERNAL.TS.720p.DIVX.[Eng]-DUQA&#9516;&#171;</release><languageId>2</languageId><languageName>English</languageName><language>en</language><time>1373611040</time><tvSeason>0</tvSeason><tvEpisode>0</tvEpisode><tvSpecial>0</tvSpecial><cds
+        /><format>N/A</format><fps>N/A</fps><rating>0.0</rating><flags /><new_flags
+        /><downloads>2770</downloads><exactHashes /></subtitle><subtitle><id>2524778</id><pid>aoYm</pid><title>Man
+        of Steel</title><year>2013</year><movieId>_ngG</movieId><url>http://www.podnapisi.net/subtitles/en-man-of-steel-2013/aoYm</url><uploaderId>1</uploaderId><uploaderName>Anonymous</uploaderName><release>Superman.Man.of.Steel.2013.480p.R6.LiNE.x264.AAC-DAMN</release><languageId>2</languageId><languageName>English</languageName><language>en</language><time>1373589100</time><tvSeason>0</tvSeason><tvEpisode>0</tvEpisode><tvSpecial>0</tvSpecial><cds
+        /><format>N/A</format><fps>N/A</fps><rating>0.0</rating><flags /><new_flags
+        /><downloads>8518</downloads><exactHashes /></subtitle><subtitle><id>2520414</id><pid>XnUm</pid><title>Man
+        of Steel</title><year>2013</year><movieId>_ngG</movieId><url>http://www.podnapisi.net/subtitles/en-man-of-steel-2013/XnUm</url><uploaderId>1</uploaderId><uploaderName>Anonymous</uploaderName><release>Man.of.Steel.(2013).720p.R6.LiNE.900MB.Ganool</release><languageId>2</languageId><languageName>English</languageName><language>en</language><time>1373391411</time><tvSeason>0</tvSeason><tvEpisode>0</tvEpisode><tvSpecial>0</tvSpecial><cds
+        /><format>N/A</format><fps>N/A</fps><rating>0.0</rating><flags /><new_flags
+        /><downloads>4222</downloads><exactHashes /></subtitle><subtitle><id>2515558</id><pid>ZmIm</pid><title>Man
+        of Steel</title><year>2013</year><movieId>_ngG</movieId><url>http://www.podnapisi.net/subtitles/en-man-of-steel-2013/ZmIm</url><uploaderId>1</uploaderId><uploaderName>Anonymous</uploaderName><release>Man.of.Steel.2013.720p.R6.LiNE.x264.AAC-DiGiTAL</release><languageId>2</languageId><languageName>English</languageName><language>en</language><time>1373141422</time><tvSeason>0</tvSeason><tvEpisode>0</tvEpisode><tvSpecial>0</tvSpecial><cds
+        /><format>N/A</format><fps>N/A</fps><rating>0.0</rating><flags /><new_flags
+        /><downloads>5565</downloads><exactHashes /></subtitle><subtitle><id>2495682</id><pid>whQm</pid><title>Man
+        of Steel</title><year>2013</year><movieId>_ngG</movieId><url>http://www.podnapisi.net/subtitles/en-man-of-steel-2013/whQm</url><uploaderId>1</uploaderId><uploaderName>Anonymous</uploaderName><release>Man.of.Steel.2013.CAM.XviD.MP3.MiLLENiUM</release><languageId>2</languageId><languageName>English</languageName><language>en</language><time>1372075950</time><tvSeason>0</tvSeason><tvEpisode>0</tvEpisode><tvSpecial>0</tvSpecial><cds
+        /><format>N/A</format><fps>N/A</fps><rating>0.0</rating><flags /><new_flags
+        /><downloads>6276</downloads><exactHashes /></subtitle><subtitle><id>2495217</id><pid>8RIm</pid><title>Man
+        of Steel</title><year>2013</year><movieId>_ngG</movieId><url>http://www.podnapisi.net/subtitles/en-man-of-steel-2013/8RIm</url><uploaderId>26933</uploaderId><uploaderName>asdasd</uploaderName><release>Man.Of.Steel.2013.CAM.XViD-CALiBRATE</release><languageId>2</languageId><languageName>English</languageName><language>en</language><time>1372047356</time><tvSeason>0</tvSeason><tvEpisode>0</tvEpisode><tvSpecial>0</tvSpecial><cds
+        /><format>N/A</format><fps>N/A</fps><rating>0.0</rating><flags /><new_flags
+        /><downloads>5048</downloads><exactHashes /></subtitle><subtitle><id>2489654</id><pid>Nv0l</pid><title>Man
+        of Steel</title><year>2013</year><movieId>_ngG</movieId><url>http://www.podnapisi.net/subtitles/en-man-of-steel-2013/Nv0l</url><uploaderId>7718</uploaderId><uploaderName>jdinic3</uploaderName><release>Man.Of.Steel.2013.CAM.NEW.AUDiO.XViD-JUSTiCE</release><languageId>2</languageId><languageName>English</languageName><language>en</language><time>1371805723</time><tvSeason>0</tvSeason><tvEpisode>0</tvEpisode><tvSpecial>0</tvSpecial><cds
+        /><format>N/A</format><fps>N/A</fps><rating>0.0</rating><flags /><new_flags
+        /><downloads>7480</downloads><exactHashes /></subtitle></results>"}
+    headers:
+      Connection: [keep-alive]
+      Content-Length: ['11082']
+      Content-Type: [text/xml;charset=utf-8]
+      Date: ['Thu, 09 Jul 2015 21:33:28 GMT']
+      Server: [nginx/1.8.0]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      User-Agent: [Subliminal/0.8.0]
+    method: GET
+    uri: http://podnapisi.net/subtitles/search/old?sL=fr&sY=2013&sXML=1&sK=Man+of+Steel
+  response:
+    body: {string: "<html>\r\n<head><title>302 Found</title></head>\r\n<body bgcolor=\"white\">\r\n<center><h1>302
+        Found</h1></center>\r\n<hr><center>nginx/1.8.0</center>\r\n</body>\r\n</html>\r\n"}
+    headers:
+      Connection: [keep-alive]
+      Content-Length: ['160']
+      Content-Type: [text/html]
+      Date: ['Thu, 09 Jul 2015 21:33:28 GMT']
+      Location: ['http://www.podnapisi.net/subtitles/search/old?sL=fr&sY=2013&sXML=1&sK=Man+of+Steel']
+      Server: [nginx/1.8.0]
+    status: {code: 302, message: Moved Temporarily}
+- request:
+    body: null
+    headers:
+      User-Agent: [Subliminal/0.8.0]
+    method: GET
+    uri: http://www.podnapisi.net/subtitles/search/old?sL=fr&sY=2013&sXML=1&sK=Man+of+Steel
+  response:
+    body: {string: "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>\n<!DOCTYPE
+        results [\n  <!ELEMENT results (#PCDATA|pagination|subtitle)*>\n    <!ELEMENT
+        pagination (current, count, results)>\n      <!ELEMENT current (#PCDATA)>\n
+        \     <!ELEMENT count (#PCDATA)>\n    <!ELEMENT subtitle (id, title, year,
+        movieId, url, uploaderId, uploaderName, release, languageId, languageName,
+        time, tvSeason, tvEpisode, tvSpecial, cds, format, fps, rating, flags, downloads)>\n
+        \     <!ELEMENT id (#PCDATA)>\n      <!ELEMENT pid (#PCDATA)>\n      <!ELEMENT
+        title (#PCDATA)>\n      <!ELEMENT year (#PCDATA)>\n      <!ELEMENT movieId
+        (#PCDATA)>\n      <!ELEMENT url (#PCDATA)>\n      <!ELEMENT uploaderId (#PCDATA)>\n
+        \     <!ELEMENT uploaderName (#PCDATA)>\n      <!ELEMENT release (#PCDATA)>\n
+        \     <!ELEMENT languageId (#PCDATA)>\n      <!ELEMENT languageName (#PCDATA)>\n
+        \     <!ELEMENT language (#PCDATA)>\n      <!ELEMENT time (#PCDATA)>\n      <!ELEMENT
+        tvSeason (#PCDATA)>\n      <!ELEMENT tvEpisode (#PCDATA)>\n      <!ELEMENT
+        tvSpecial (#PCDATA)>\n      <!ELEMENT cds (#PCDATA)>\n      <!ELEMENT format
+        (#PCDATA)>\n      <!ELEMENT fps (#PCDATA)>\n      <!ELEMENT rating (#PCDATA)>\n
+        \     <!ELEMENT flags (#PCDATA)>\n      <!ELEMENT new_flags (#PCDATA)>\n        <!ELEMENT
+        flag (#PCDATA)>\n      <!ELEMENT downloads (#PCDATA)>\n      <!ELEMENT exactHashes
+        (#PCDATA)>]> <results><pagination><current>1</current><count>1</count><results>2</results></pagination><subtitle><id>2673432</id><pid>GMso</pid><title>Man
+        of Steel</title><year>2013</year><movieId>_ngG</movieId><url>http://www.podnapisi.net/subtitles/fr-man-of-steel-2013/GMso</url><uploaderId>1</uploaderId><uploaderName>Anonymous</uploaderName><release>Man.Of.Steel.2013.BDRip.x264-Larceny</release><languageId>8</languageId><languageName>French</languageName><language>fr</language><time>1381991887</time><tvSeason>0</tvSeason><tvEpisode>0</tvEpisode><tvSpecial>0</tvSpecial><cds
+        /><format>N/A</format><fps>N/A</fps><rating>0.0</rating><flags>h</flags><new_flags><flag>high_definition</flag></new_flags><downloads>3899</downloads><exactHashes>sublight:e5c4c23d90498eb7482b1f016ff39e92</exactHashes></subtitle><subtitle><id>2552439</id><pid>d_Im</pid><title>Man
+        of Steel</title><year>2013</year><movieId>_ngG</movieId><url>http://www.podnapisi.net/subtitles/fr-man-of-steel-2013/d_Im</url><uploaderId>1</uploaderId><uploaderName>Anonymous</uploaderName><release>Man.Of.Steel.2013.TS.XviD-JUSTiCE
+        Man.of.Steel.2013.720p.R6.LiNE.x264.AAC-DiGiTAL</release><languageId>8</languageId><languageName>French</languageName><language>fr</language><time>1374819034</time><tvSeason>0</tvSeason><tvEpisode>0</tvEpisode><tvSpecial>0</tvSpecial><cds
+        /><format>N/A</format><fps>N/A</fps><rating>0.0</rating><flags /><new_flags
+        /><downloads>4279</downloads><exactHashes /></subtitle></results>"}
+    headers:
+      Connection: [keep-alive]
+      Content-Length: ['2785']
+      Content-Type: [text/xml;charset=utf-8]
+      Date: ['Thu, 09 Jul 2015 21:33:29 GMT']
+      Server: [nginx/1.8.0]
+    status: {code: 200, message: OK}
+version: 1

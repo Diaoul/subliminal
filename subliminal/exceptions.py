@@ -3,20 +3,25 @@ from __future__ import unicode_literals
 
 
 class Error(Exception):
-    """Base class for exceptions in subliminal"""
+    """Base class for exceptions in subliminal."""
+    pass
 
 
 class ProviderError(Error):
-    """Exception raised by providers"""
+    """Exception raised by providers."""
+    pass
 
 
 class ConfigurationError(ProviderError):
-    """Exception raised by providers when badly configured"""
+    """Exception raised by providers when badly configured."""
+    pass
 
 
 class AuthenticationError(ProviderError):
-    """Exception raised by providers when authentication failed"""
+    """Exception raised by providers when authentication failed."""
+    pass
 
 
 class DownloadLimitExceeded(ProviderError):
-    """Exception raised by providers when download limit is exceeded"""
+    """Exception raised by providers when download limit is exceeded."""
+    pass

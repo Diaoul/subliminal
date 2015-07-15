@@ -1,0 +1,160 @@
+interactions:
+- request:
+    body: null
+    headers:
+      User-Agent: [Subliminal/0.8.0]
+    method: GET
+    uri: http://podnapisi.net/subtitles/search/old?sTS=3&sL=en&sTE=10&sXML=1&sK=Game+of+Thrones
+  response:
+    body: {string: "<html>\r\n<head><title>302 Found</title></head>\r\n<body bgcolor=\"white\">\r\n<center><h1>302
+        Found</h1></center>\r\n<hr><center>nginx/1.8.0</center>\r\n</body>\r\n</html>\r\n"}
+    headers:
+      Connection: [keep-alive]
+      Content-Length: ['160']
+      Content-Type: [text/html]
+      Date: ['Thu, 09 Jul 2015 21:33:29 GMT']
+      Location: ['http://www.podnapisi.net/subtitles/search/old?sTS=3&sL=en&sTE=10&sXML=1&sK=Game+of+Thrones']
+      Server: [nginx/1.8.0]
+    status: {code: 302, message: Moved Temporarily}
+- request:
+    body: null
+    headers:
+      User-Agent: [Subliminal/0.8.0]
+    method: GET
+    uri: http://www.podnapisi.net/subtitles/search/old?sTS=3&sL=en&sTE=10&sXML=1&sK=Game+of+Thrones
+  response:
+    body: {string: "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>\n<!DOCTYPE
+        results [\n  <!ELEMENT results (#PCDATA|pagination|subtitle)*>\n    <!ELEMENT
+        pagination (current, count, results)>\n      <!ELEMENT current (#PCDATA)>\n
+        \     <!ELEMENT count (#PCDATA)>\n    <!ELEMENT subtitle (id, title, year,
+        movieId, url, uploaderId, uploaderName, release, languageId, languageName,
+        time, tvSeason, tvEpisode, tvSpecial, cds, format, fps, rating, flags, downloads)>\n
+        \     <!ELEMENT id (#PCDATA)>\n      <!ELEMENT pid (#PCDATA)>\n      <!ELEMENT
+        title (#PCDATA)>\n      <!ELEMENT year (#PCDATA)>\n      <!ELEMENT movieId
+        (#PCDATA)>\n      <!ELEMENT url (#PCDATA)>\n      <!ELEMENT uploaderId (#PCDATA)>\n
+        \     <!ELEMENT uploaderName (#PCDATA)>\n      <!ELEMENT release (#PCDATA)>\n
+        \     <!ELEMENT languageId (#PCDATA)>\n      <!ELEMENT languageName (#PCDATA)>\n
+        \     <!ELEMENT language (#PCDATA)>\n      <!ELEMENT time (#PCDATA)>\n      <!ELEMENT
+        tvSeason (#PCDATA)>\n      <!ELEMENT tvEpisode (#PCDATA)>\n      <!ELEMENT
+        tvSpecial (#PCDATA)>\n      <!ELEMENT cds (#PCDATA)>\n      <!ELEMENT format
+        (#PCDATA)>\n      <!ELEMENT fps (#PCDATA)>\n      <!ELEMENT rating (#PCDATA)>\n
+        \     <!ELEMENT flags (#PCDATA)>\n      <!ELEMENT new_flags (#PCDATA)>\n        <!ELEMENT
+        flag (#PCDATA)>\n      <!ELEMENT downloads (#PCDATA)>\n      <!ELEMENT exactHashes
+        (#PCDATA)>]> <results><pagination><current>1</current><count>1</count><results>10</results></pagination><subtitle><id>3953259</id><pid>a1I8</pid><title>Game
+        of Thrones</title><year>2011</year><movieId>mLUG</movieId><url>http://www.podnapisi.net/subtitles/en-game-of-thrones-2011-S03E10/a1I8</url><uploaderId>None</uploaderId><uploaderName
+        /><release>Game.of.Thrones.S03E10.720p.BluRay.450MB.ShAaNiG.com Game.of.Thrones.S03E10.1080p.WEB-DL.DD5.1.H.264-NTb
+        Game.of.Thrones.S03E10.720p.BluRay.450MB.ShAaNiG.com.srt</release><languageId>2</languageId><languageName>English</languageName><language>en</language><time>1436203578</time><tvSeason>3</tvSeason><tvEpisode>10</tvEpisode><tvSpecial>0</tvSpecial><cds
+        /><format>N/A</format><fps>N/A</fps><rating>0.0</rating><flags /><new_flags
+        /><downloads>23</downloads><exactHashes /></subtitle><subtitle><id>3740656</id><pid>8BM5</pid><title>Game
+        of Thrones</title><year>2011</year><movieId>mLUG</movieId><url>http://www.podnapisi.net/subtitles/en-game-of-thrones-2011-S03E10/8BM5</url><uploaderId>23329</uploaderId><uploaderName>jane</uploaderName><release>Game.Of.Thrones.S03E10.720p.x264-ILPruny</release><languageId>2</languageId><languageName>English</languageName><language>en</language><time>1420528825</time><tvSeason>3</tvSeason><tvEpisode>10</tvEpisode><tvSpecial>0</tvSpecial><cds
+        /><format>N/A</format><fps>N/A</fps><rating>0.0</rating><flags>h</flags><new_flags><flag>high_definition</flag></new_flags><downloads>1093</downloads><exactHashes
+        /></subtitle><subtitle><id>2911594</id><pid>am0s</pid><title>Game of Thrones</title><year>2011</year><movieId>mLUG</movieId><url>http://www.podnapisi.net/subtitles/en-game-of-thrones-2011-S03E10/am0s</url><uploaderId>1</uploaderId><uploaderName>Anonymous</uploaderName><release>game.of.thrones.s03e10.bdrip.x264-demand</release><languageId>2</languageId><languageName>English</languageName><language>en</language><time>1392415949</time><tvSeason>3</tvSeason><tvEpisode>10</tvEpisode><tvSpecial>0</tvSpecial><cds
+        /><format>N/A</format><fps>N/A</fps><rating>0.0</rating><flags>n</flags><new_flags><flag>hearing_impaired</flag></new_flags><downloads>3444</downloads><exactHashes>sublight:1253562ba785425176701686b7452a73</exactHashes></subtitle><subtitle><id>2533905</id><pid>Eaom</pid><title>Game
+        of Thrones</title><year>2011</year><movieId>mLUG</movieId><url>http://www.podnapisi.net/subtitles/en-game-of-thrones-2011-S03E10/Eaom</url><uploaderId>63492</uploaderId><uploaderName>Rafael4</uploaderName><release>Game.Of.Thrones.S03E10.1080p.WEB-RiP.x264.anoXmous</release><languageId>2</languageId><languageName>English</languageName><language>en</language><time>1373986843</time><tvSeason>3</tvSeason><tvEpisode>10</tvEpisode><tvSpecial>0</tvSpecial><cds
+        /><format>N/A</format><fps>N/A</fps><rating>0.0</rating><flags>h</flags><new_flags><flag>high_definition</flag></new_flags><downloads>4720</downloads><exactHashes>sublight:a5a45e8c236f271840123ea8268da767</exactHashes></subtitle><subtitle><id>2475668</id><pid>lMYl</pid><title>Game
+        of Thrones</title><year>2011</year><movieId>mLUG</movieId><url>http://www.podnapisi.net/subtitles/en-game-of-thrones-2011-S03E10/lMYl</url><uploaderId>1</uploaderId><uploaderName>Anonymous</uploaderName><release>Game.of.Thrones.S03E10.720p.WEB-DL.DD5.1.H.264-NTb
+        Game.of.Thrones.S03E10.1080p.WEB-DL.DD5.1.H.264-NTb Game.of.Thrones.S03E10.720p.WEB-DL.DD5.1.AAC2.0.H.264-YFN
+        Game.of.Thrones.S03E10.1080p.WEB-DL.DD5.1.AAC2.0.H.264-YFN</release><languageId>2</languageId><languageName>English</languageName><language>en</language><time>1370985771</time><tvSeason>3</tvSeason><tvEpisode>10</tvEpisode><tvSpecial>0</tvSpecial><cds
+        /><format>N/A</format><fps>N/A</fps><rating>1.0</rating><flags>h</flags><new_flags><flag>high_definition</flag></new_flags><downloads>9269</downloads><exactHashes>sublight:9f69fd76f1e5c7ab688a70f1fe463ec7
+        sublight:a5a45e8c236f271840123ea8268da767</exactHashes></subtitle><subtitle><id>2475674</id><pid>msYl</pid><title>Game
+        of Thrones</title><year>2011</year><movieId>mLUG</movieId><url>http://www.podnapisi.net/subtitles/en-game-of-thrones-2011-S03E10/msYl</url><uploaderId>1</uploaderId><uploaderName>Anonymous</uploaderName><release>Game.of.Thrones.S03E10.720p.WEB-DL.DD5.1.H.264-NTb
+        Game.of.Thrones.S03E10.1080p.WEB-DL.DD5.1.H.264-NTb Game.of.Thrones.S03E10.720p.WEB-DL.DD5.1.AAC2.0.H.264-YFN
+        Game.of.Thrones.S03E10.1080p.WEB-DL.DD5.1.AAC2.0.H.264-YFN</release><languageId>2</languageId><languageName>English</languageName><language>en</language><time>1370985492</time><tvSeason>3</tvSeason><tvEpisode>10</tvEpisode><tvSpecial>0</tvSpecial><cds
+        /><format>N/A</format><fps>N/A</fps><rating>0.0</rating><flags>nh</flags><new_flags><flag>hearing_impaired</flag><flag>high_definition</flag></new_flags><downloads>5918</downloads><exactHashes>sublight:da1ce34e0e82dd0971176d60f1f80b2e</exactHashes></subtitle><subtitle><id>2474991</id><pid>78Ml</pid><title>Game
+        of Thrones</title><year>2011</year><movieId>mLUG</movieId><url>http://www.podnapisi.net/subtitles/en-game-of-thrones-2011-S03E10/78Ml</url><uploaderId>44181</uploaderId><uploaderName>grzesiek11</uploaderName><release>Game.of.Thrones.S03E10.720p.HDTV.x264-EVOLVE
+        Game.of.Thrones.S03E10.720p.HDTV.x264-CPG Game.of.Thrones.S03E10.480p.HDTV.x264-ChameE
+        Game.of.Thrones.S03E10.480p.HDTV.x264-mSD Game.of.Thrones.S03E10.HDTV.XviD-Chivvez
+        Game.of.Thrones.S03E10.HDTV.XviD-3LT0N Game.of.Thrones.S03E10.HDTV.XviD-Snake
+        Game.of.Thrones.S03E10.HDTV.XviD-JKS Game.of.Thrones.S03E10.HDTV.XviD-AFG</release><languageId>2</languageId><languageName>English</languageName><language>en</language><time>1370850866</time><tvSeason>3</tvSeason><tvEpisode>10</tvEpisode><tvSpecial>0</tvSpecial><cds
+        /><format>N/A</format><fps>N/A</fps><rating>0.0</rating><flags>nh</flags><new_flags><flag>hearing_impaired</flag><flag>high_definition</flag></new_flags><downloads>14912</downloads><exactHashes>sublight:abb28aefd1ca56458901371447fec372</exactHashes></subtitle><subtitle><id>2474990</id><pid>7sMl</pid><title>Game
+        of Thrones</title><year>2011</year><movieId>mLUG</movieId><url>http://www.podnapisi.net/subtitles/en-game-of-thrones-2011-S03E10/7sMl</url><uploaderId>44181</uploaderId><uploaderName>grzesiek11</uploaderName><release>Game.of.Thrones.S03E10.720p.HDTV.x264-EVOLVE
+        Game.of.Thrones.S03E10.720p.HDTV.x264-CPG Game.of.Thrones.S03E10.480p.HDTV.x264-ChameE
+        Game.of.Thrones.S03E10.480p.HDTV.x264-mSD Game.of.Thrones.S03E10.HDTV.XviD-Chivvez
+        Game.of.Thrones.S03E10.HDTV.XviD-3LT0N Game.of.Thrones.S03E10.HDTV.XviD-Snake
+        Game.of.Thrones.S03E10.HDTV.XviD-JKS Game.of.Thrones.S03E10.HDTV.XviD-AFG</release><languageId>2</languageId><languageName>English</languageName><language>en</language><time>1370850847</time><tvSeason>3</tvSeason><tvEpisode>10</tvEpisode><tvSpecial>0</tvSpecial><cds
+        /><format>N/A</format><fps>N/A</fps><rating>1.0</rating><flags>h</flags><new_flags><flag>high_definition</flag></new_flags><downloads>39570</downloads><exactHashes>sublight:9b52a2dd794f64ea8262b67ee0766a88
+        sublight:1d01a67ecc7e2504b122c02a2e1ae0f2</exactHashes></subtitle><subtitle><id>2474960</id><pid>0MMl</pid><title>Game
+        of Thrones</title><year>2011</year><movieId>mLUG</movieId><url>http://www.podnapisi.net/subtitles/en-game-of-thrones-2011-S03E10/0MMl</url><uploaderId>44181</uploaderId><uploaderName>grzesiek11</uploaderName><release>Game.of.Thrones.S03E10.HDTV.x264-EVOLVE</release><languageId>2</languageId><languageName>English</languageName><language>en</language><time>1370840356</time><tvSeason>3</tvSeason><tvEpisode>10</tvEpisode><tvSpecial>0</tvSpecial><cds
+        /><format>N/A</format><fps>N/A</fps><rating>0.0</rating><flags>n</flags><new_flags><flag>hearing_impaired</flag></new_flags><downloads>12335</downloads><exactHashes>sublight:33850fc19e55ce536f5a436f90eea557
+        sublight:cea810fe8295c80c43308873d2bde5e9</exactHashes></subtitle><subtitle><id>2474959</id><pid>z8Ml</pid><title>Game
+        of Thrones</title><year>2011</year><movieId>mLUG</movieId><url>http://www.podnapisi.net/subtitles/en-game-of-thrones-2011-S03E10/z8Ml</url><uploaderId>44181</uploaderId><uploaderName>grzesiek11</uploaderName><release>Game.of.Thrones.S03E10.HDTV.x264-EVOLVE</release><languageId>2</languageId><languageName>English</languageName><language>en</language><time>1370840316</time><tvSeason>3</tvSeason><tvEpisode>10</tvEpisode><tvSpecial>0</tvSpecial><cds
+        /><format>N/A</format><fps>N/A</fps><rating>1.0</rating><flags /><new_flags
+        /><downloads>26909</downloads><exactHashes>sublight:abb28aefd1ca56458901371447fec372</exactHashes></subtitle></results>"}
+    headers:
+      Connection: [keep-alive]
+      Content-Length: ['9836']
+      Content-Type: [text/xml;charset=utf-8]
+      Date: ['Thu, 09 Jul 2015 21:33:29 GMT']
+      Server: [nginx/1.8.0]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      User-Agent: [Subliminal/0.8.0]
+    method: GET
+    uri: http://podnapisi.net/subtitles/search/old?sTS=3&sL=fr&sTE=10&sXML=1&sK=Game+of+Thrones
+  response:
+    body: {string: "<html>\r\n<head><title>302 Found</title></head>\r\n<body bgcolor=\"white\">\r\n<center><h1>302
+        Found</h1></center>\r\n<hr><center>nginx/1.8.0</center>\r\n</body>\r\n</html>\r\n"}
+    headers:
+      Connection: [keep-alive]
+      Content-Length: ['160']
+      Content-Type: [text/html]
+      Date: ['Thu, 09 Jul 2015 21:33:29 GMT']
+      Location: ['http://www.podnapisi.net/subtitles/search/old?sTS=3&sL=fr&sTE=10&sXML=1&sK=Game+of+Thrones']
+      Server: [nginx/1.8.0]
+    status: {code: 302, message: Moved Temporarily}
+- request:
+    body: null
+    headers:
+      User-Agent: [Subliminal/0.8.0]
+    method: GET
+    uri: http://www.podnapisi.net/subtitles/search/old?sTS=3&sL=fr&sTE=10&sXML=1&sK=Game+of+Thrones
+  response:
+    body: {string: "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>\n<!DOCTYPE
+        results [\n  <!ELEMENT results (#PCDATA|pagination|subtitle)*>\n    <!ELEMENT
+        pagination (current, count, results)>\n      <!ELEMENT current (#PCDATA)>\n
+        \     <!ELEMENT count (#PCDATA)>\n    <!ELEMENT subtitle (id, title, year,
+        movieId, url, uploaderId, uploaderName, release, languageId, languageName,
+        time, tvSeason, tvEpisode, tvSpecial, cds, format, fps, rating, flags, downloads)>\n
+        \     <!ELEMENT id (#PCDATA)>\n      <!ELEMENT pid (#PCDATA)>\n      <!ELEMENT
+        title (#PCDATA)>\n      <!ELEMENT year (#PCDATA)>\n      <!ELEMENT movieId
+        (#PCDATA)>\n      <!ELEMENT url (#PCDATA)>\n      <!ELEMENT uploaderId (#PCDATA)>\n
+        \     <!ELEMENT uploaderName (#PCDATA)>\n      <!ELEMENT release (#PCDATA)>\n
+        \     <!ELEMENT languageId (#PCDATA)>\n      <!ELEMENT languageName (#PCDATA)>\n
+        \     <!ELEMENT language (#PCDATA)>\n      <!ELEMENT time (#PCDATA)>\n      <!ELEMENT
+        tvSeason (#PCDATA)>\n      <!ELEMENT tvEpisode (#PCDATA)>\n      <!ELEMENT
+        tvSpecial (#PCDATA)>\n      <!ELEMENT cds (#PCDATA)>\n      <!ELEMENT format
+        (#PCDATA)>\n      <!ELEMENT fps (#PCDATA)>\n      <!ELEMENT rating (#PCDATA)>\n
+        \     <!ELEMENT flags (#PCDATA)>\n      <!ELEMENT new_flags (#PCDATA)>\n        <!ELEMENT
+        flag (#PCDATA)>\n      <!ELEMENT downloads (#PCDATA)>\n      <!ELEMENT exactHashes
+        (#PCDATA)>]> <results><pagination><current>1</current><count>1</count><results>4</results></pagination><subtitle><id>2475667</id><pid>k8Yl</pid><title>Game
+        of Thrones</title><year>2011</year><movieId>mLUG</movieId><url>http://www.podnapisi.net/subtitles/fr-game-of-thrones-2011-S03E10/k8Yl</url><uploaderId>1</uploaderId><uploaderName>Anonymous</uploaderName><release>Game.of.Thrones.S03E10.720p.WEB-DL.DD5.1.H.264-NTb
+        Game.of.Thrones.S03E10.1080p.WEB-DL.DD5.1.H.264-NTb Game.of.Thrones.S03E10.720p.WEB-DL.DD5.1.AAC2.0.H.264-YFN
+        Game.of.Thrones.S03E10.1080p.WEB-DL.DD5.1.AAC2.0.H.264-YFN</release><languageId>8</languageId><languageName>French</languageName><language>fr</language><time>1370985775</time><tvSeason>3</tvSeason><tvEpisode>10</tvEpisode><tvSpecial>0</tvSpecial><cds
+        /><format>N/A</format><fps>N/A</fps><rating>0.0</rating><flags /><new_flags
+        /><downloads>1917</downloads><exactHashes /></subtitle><subtitle><id>2475661</id><pid>jcYl</pid><title>Game
+        of Thrones</title><year>2011</year><movieId>mLUG</movieId><url>http://www.podnapisi.net/subtitles/fr-game-of-thrones-2011-S03E10/jcYl</url><uploaderId>1</uploaderId><uploaderName>Anonymous</uploaderName><release>Game.of.Thrones.S03E10.720p.HDTV.x264-EVOLVE
+        Game.of.Thrones.S03E10.720p.HDTV.x264-CPG Game.of.Thrones.S03E10.480p.HDTV.x264-ChameE
+        Game.of.Thrones.S03E10.480p.HDTV.x264-mSD Game.of.Thrones.S03E10.HDTV.XviD-Chivvez
+        Game.of.Thrones.S03E10.HDTV.XviD-3LT0N Game.of.Thrones.S03E10.HDTV.XviD-Snake
+        Game.of.Thrones.S03E10.HDTV.XviD-JKS Game.of.Thrones.S03E10.HDTV.XviD-AFG</release><languageId>8</languageId><languageName>French</languageName><language>fr</language><time>1370985506</time><tvSeason>3</tvSeason><tvEpisode>10</tvEpisode><tvSpecial>0</tvSpecial><cds
+        /><format>N/A</format><fps>N/A</fps><rating>0.0</rating><flags /><new_flags
+        /><downloads>1598</downloads><exactHashes /></subtitle><subtitle><id>2474993</id><pid>8cMl</pid><title>Game
+        of Thrones</title><year>2011</year><movieId>mLUG</movieId><url>http://www.podnapisi.net/subtitles/fr-game-of-thrones-2011-S03E10/8cMl</url><uploaderId>44181</uploaderId><uploaderName>grzesiek11</uploaderName><release>Game.of.Thrones.S03E10.720p.HDTV.x264-EVOLVE
+        Game.of.Thrones.S03E10.720p.HDTV.x264-CPG Game.of.Thrones.S03E10.480p.HDTV.x264-ChameE
+        Game.of.Thrones.S03E10.480p.HDTV.x264-mSD Game.of.Thrones.S03E10.HDTV.XviD-Chivvez
+        Game.of.Thrones.S03E10.HDTV.XviD-3LT0N Game.of.Thrones.S03E10.HDTV.XviD-Snake
+        Game.of.Thrones.S03E10.HDTV.XviD-JKS Game.of.Thrones.S03E10.HDTV.XviD-AFG</release><languageId>8</languageId><languageName>French</languageName><language>fr</language><time>1370851348</time><tvSeason>3</tvSeason><tvEpisode>10</tvEpisode><tvSpecial>0</tvSpecial><cds
+        /><format>N/A</format><fps>N/A</fps><rating>0.0</rating><flags>h</flags><new_flags><flag>high_definition</flag></new_flags><downloads>5273</downloads><exactHashes>sublight:abb28aefd1ca56458901371447fec372</exactHashes></subtitle><subtitle><id>2474984</id><pid>6MMl</pid><title>Game
+        of Thrones</title><year>2011</year><movieId>mLUG</movieId><url>http://www.podnapisi.net/subtitles/fr-game-of-thrones-2011-S03E10/6MMl</url><uploaderId>44181</uploaderId><uploaderName>grzesiek11</uploaderName><release>Game.of.Thrones.S03E10.HDTV.x264-EVOLVE</release><languageId>8</languageId><languageName>French</languageName><language>fr</language><time>1370848797</time><tvSeason>3</tvSeason><tvEpisode>10</tvEpisode><tvSpecial>0</tvSpecial><cds
+        /><format>N/A</format><fps>N/A</fps><rating>0.0</rating><flags /><new_flags
+        /><downloads>3814</downloads><exactHashes /></subtitle></results>"}
+    headers:
+      Connection: [keep-alive]
+      Content-Length: ['4874']
+      Content-Type: [text/xml;charset=utf-8]
+      Date: ['Thu, 09 Jul 2015 21:33:29 GMT']
+      Server: [nginx/1.8.0]
+    status: {code: 200, message: OK}
+version: 1

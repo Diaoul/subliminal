@@ -1,0 +1,70 @@
+interactions:
+- request:
+    body: null
+    headers:
+      User-Agent: [Subliminal/0.8.0]
+    method: GET
+    uri: http://podnapisi.net/subtitles/search/old?sTS=7&sL=en&sY=2007&sK=The+Big+Bang+Theory&sTE=5&sXML=1
+  response:
+    body: {string: "<html>\r\n<head><title>302 Found</title></head>\r\n<body bgcolor=\"white\">\r\n<center><h1>302
+        Found</h1></center>\r\n<hr><center>nginx/1.8.0</center>\r\n</body>\r\n</html>\r\n"}
+    headers:
+      Connection: [keep-alive]
+      Content-Length: ['160']
+      Content-Type: [text/html]
+      Date: ['Thu, 09 Jul 2015 21:33:28 GMT']
+      Location: ['http://www.podnapisi.net/subtitles/search/old?sTS=7&sL=en&sY=2007&sK=The+Big+Bang+Theory&sTE=5&sXML=1']
+      Server: [nginx/1.8.0]
+    status: {code: 302, message: Moved Temporarily}
+- request:
+    body: null
+    headers:
+      User-Agent: [Subliminal/0.8.0]
+    method: GET
+    uri: http://www.podnapisi.net/subtitles/search/old?sTS=7&sL=en&sY=2007&sK=The+Big+Bang+Theory&sTE=5&sXML=1
+  response:
+    body: {string: "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>\n<!DOCTYPE
+        results [\n  <!ELEMENT results (#PCDATA|pagination|subtitle)*>\n    <!ELEMENT
+        pagination (current, count, results)>\n      <!ELEMENT current (#PCDATA)>\n
+        \     <!ELEMENT count (#PCDATA)>\n    <!ELEMENT subtitle (id, title, year,
+        movieId, url, uploaderId, uploaderName, release, languageId, languageName,
+        time, tvSeason, tvEpisode, tvSpecial, cds, format, fps, rating, flags, downloads)>\n
+        \     <!ELEMENT id (#PCDATA)>\n      <!ELEMENT pid (#PCDATA)>\n      <!ELEMENT
+        title (#PCDATA)>\n      <!ELEMENT year (#PCDATA)>\n      <!ELEMENT movieId
+        (#PCDATA)>\n      <!ELEMENT url (#PCDATA)>\n      <!ELEMENT uploaderId (#PCDATA)>\n
+        \     <!ELEMENT uploaderName (#PCDATA)>\n      <!ELEMENT release (#PCDATA)>\n
+        \     <!ELEMENT languageId (#PCDATA)>\n      <!ELEMENT languageName (#PCDATA)>\n
+        \     <!ELEMENT language (#PCDATA)>\n      <!ELEMENT time (#PCDATA)>\n      <!ELEMENT
+        tvSeason (#PCDATA)>\n      <!ELEMENT tvEpisode (#PCDATA)>\n      <!ELEMENT
+        tvSpecial (#PCDATA)>\n      <!ELEMENT cds (#PCDATA)>\n      <!ELEMENT format
+        (#PCDATA)>\n      <!ELEMENT fps (#PCDATA)>\n      <!ELEMENT rating (#PCDATA)>\n
+        \     <!ELEMENT flags (#PCDATA)>\n      <!ELEMENT new_flags (#PCDATA)>\n        <!ELEMENT
+        flag (#PCDATA)>\n      <!ELEMENT downloads (#PCDATA)>\n      <!ELEMENT exactHashes
+        (#PCDATA)>]> <results><pagination><current>1</current><count>1</count><results>5</results></pagination><subtitle><id>3514331</id><pid>2581</pid><title>The
+        Big Bang Theory</title><year>2007</year><movieId>sY0G</movieId><url>http://www.podnapisi.net/subtitles/en-the-big-bang-theory-2007-S07E05/2581</url><uploaderId>23329</uploaderId><uploaderName>jane</uploaderName><release>the.big.bang.theory.s07e05.1080p.bluray.x264-rovers</release><languageId>2</languageId><languageName>English</languageName><language>en</language><time>1410069965</time><tvSeason>7</tvSeason><tvEpisode>5</tvEpisode><tvSpecial>0</tvSpecial><cds
+        /><format>N/A</format><fps>N/A</fps><rating>0.0</rating><flags>nh</flags><new_flags><flag>hearing_impaired</flag><flag>high_definition</flag></new_flags><downloads>843</downloads><exactHashes
+        /></subtitle><subtitle><id>3514307</id><pid>w581</pid><title>The Big Bang
+        Theory</title><year>2007</year><movieId>sY0G</movieId><url>http://www.podnapisi.net/subtitles/en-the-big-bang-theory-2007-S07E05/w581</url><uploaderId>23329</uploaderId><uploaderName>jane</uploaderName><release>the.big.bang.theory.s07e05.1080p.bluray.x264-rovers</release><languageId>2</languageId><languageName>English</languageName><language>en</language><time>1410069864</time><tvSeason>7</tvSeason><tvEpisode>5</tvEpisode><tvSpecial>0</tvSpecial><cds
+        /><format>N/A</format><fps>N/A</fps><rating>0.0</rating><flags>h</flags><new_flags><flag>high_definition</flag></new_flags><downloads>838</downloads><exactHashes
+        /></subtitle><subtitle><id>2676094</id><pid>ftUo</pid><title>The Big Bang
+        Theory</title><year>2007</year><movieId>sY0G</movieId><url>http://www.podnapisi.net/subtitles/en-the-big-bang-theory-2007-S07E05/ftUo</url><uploaderId>1</uploaderId><uploaderName>Anonymous</uploaderName><release>The.Big.Bang.Theory.S07E05.720p.WEB-DL.DD5.1.H.264</release><languageId>2</languageId><languageName>English</languageName><language>en</language><time>1382101941</time><tvSeason>7</tvSeason><tvEpisode>5</tvEpisode><tvSpecial>0</tvSpecial><cds
+        /><format>N/A</format><fps>N/A</fps><rating>0.0</rating><flags>nh</flags><new_flags><flag>hearing_impaired</flag><flag>high_definition</flag></new_flags><downloads>4050</downloads><exactHashes>sublight:8bf2c59b194d36229b4e88995084ec05</exactHashes></subtitle><subtitle><id>2675729</id><pid>EdQo</pid><title>The
+        Big Bang Theory</title><year>2007</year><movieId>sY0G</movieId><url>http://www.podnapisi.net/subtitles/en-the-big-bang-theory-2007-S07E05/EdQo</url><uploaderId>44181</uploaderId><uploaderName>grzesiek11</uploaderName><release>The.Big.Bang.Theory.S07E05.HDTV.x264-LOL
+        The.Big.Bang.Theory.S07E05.720p.HDTV.x264-DIMENSION The.Big.Bang.Theory.S07E05.480p.HDTV.x264-mSD
+        The.Big.Bang.Theory.S07E05.HDTV.XviD-AFG</release><languageId>2</languageId><languageName>English</languageName><language>en</language><time>1382071751</time><tvSeason>7</tvSeason><tvEpisode>5</tvEpisode><tvSpecial>0</tvSpecial><cds
+        /><format>N/A</format><fps>N/A</fps><rating>1.0</rating><flags>h</flags><new_flags><flag>high_definition</flag></new_flags><downloads>22411</downloads><exactHashes>sublight:52882d75832c3c6fe8116d26993f66c4
+        sublight:b34e0421f93bd4df512ca5458376a559 sublight:09e9dc38376b2245e9f806c106dc9928
+        sublight:fd25365147f1e59f4cfa4c283c70b22a</exactHashes></subtitle><subtitle><id>2675544</id><pid>WNMo</pid><title>The
+        Big Bang Theory</title><year>2007</year><movieId>sY0G</movieId><url>http://www.podnapisi.net/subtitles/en-the-big-bang-theory-2007-S07E05/WNMo</url><uploaderId>1</uploaderId><uploaderName>Anonymous</uploaderName><release>The.Big.Bang.Theory.S07E05.HDTV.x264-LOL
+        The.Big.Bang.Theory.S07E05.720p.HDTV.x264-DIMENSION The.Big.Bang.Theory.S07E05.480p.HDTV.x264-mSD
+        The.Big.Bang.Theory.S07E05.HDTV.XviD-AFG</release><languageId>2</languageId><languageName>English</languageName><language>en</language><time>1382058590</time><tvSeason>7</tvSeason><tvEpisode>5</tvEpisode><tvSpecial>0</tvSpecial><cds
+        /><format>N/A</format><fps>N/A</fps><rating>1.0</rating><flags>nh</flags><new_flags><flag>hearing_impaired</flag><flag>high_definition</flag></new_flags><downloads>8692</downloads><exactHashes>sublight:52882d75832c3c6fe8116d26993f66c4
+        sublight:1be0b687d8689ee0e2a094531f7da7b8</exactHashes></subtitle></results>"}
+    headers:
+      Connection: [keep-alive]
+      Content-Length: ['5559']
+      Content-Type: [text/xml;charset=utf-8]
+      Date: ['Thu, 09 Jul 2015 21:33:28 GMT']
+      Server: [nginx/1.8.0]
+    status: {code: 200, message: OK}
+version: 1

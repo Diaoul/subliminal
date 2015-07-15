@@ -23,9 +23,11 @@ class Addic7edConverter(LanguageReverseConverter):
             return self.to_addic7ed[(alpha3, country)]
         if (alpha3,) in self.to_addic7ed:
             return self.to_addic7ed[(alpha3,)]
+
         return self.name_converter.convert(alpha3, country, script)
 
     def reverse(self, addic7ed):
         if addic7ed in self.from_addic7ed:
             return self.from_addic7ed[addic7ed]
+
         return self.name_converter.reverse(addic7ed)

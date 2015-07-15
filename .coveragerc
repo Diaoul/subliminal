@@ -1,5 +1,8 @@
 [report]
 exclude_lines =
-    def __repr__
+    pragma: no cover
     raise NotImplementedError
+    def __repr__
     if __name__ == .__main__.:
+omit =
+    subliminal/cli.py

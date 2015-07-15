@@ -3,39 +3,46 @@ from __future__ import unicode_literals
 import io
 import logging
 import re
-import zipfile
-import babelfish
-import bs4
-import requests
-from . import Provider
+from zipfile import ZipFile
+
+from babelfish import Language
+from requests import Session
+
+from . import ParserBeautifulSoup, Provider, get_version
 from .. import __version__
-from ..cache import region, SHOW_EXPIRATION_TIME, EPISODE_EXPIRATION_TIME
+from ..cache import EPISODE_EXPIRATION_TIME, SHOW_EXPIRATION_TIME, region
 from ..exceptions import ProviderError
-from ..subtitle import Subtitle, fix_line_endings, compute_guess_properties_matches
+from ..subtitle import Subtitle, fix_line_ending, guess_matches, guess_properties
 from ..video import Episode
 
-
 logger = logging.getLogger(__name__)
-babelfish.language_converters.register('tvsubtitles = subliminal.converters.tvsubtitles:TVsubtitlesConverter')
+
+link_re = re.compile('^(?P<series>.+?)(?: \(?\d{4}\)?| \((?:US|UK)\))? \((?P<first_year>\d{4})-\d{4}\)$')
+episode_id_re = re.compile('^episode-\d+\.html$')
 
 
 class TVsubtitlesSubtitle(Subtitle):
     provider_name = 'tvsubtitles'
 
-    def __init__(self, language, series, season, episode, year, id, rip, release, page_link):  # @ReservedAssignment
+    def __init__(self, language, page_link, subtitle_id, series, season, episode, year, rip, release):
         super(TVsubtitlesSubtitle, self).__init__(language, page_link=page_link)
+        self.subtitle_id = subtitle_id
         self.series = series
         self.season = season
         self.episode = episode
         self.year = year
-        self.id = id
         self.rip = rip
         self.release = release
 
-    def compute_matches(self, video):
-        matches = set()
+    @property
+    def id(self):
+        return str(self.subtitle_id)
+
+    def get_matches(self, video, hearing_impaired=False):
+        matches = super(TVsubtitlesSubtitle, self).get_matches(video, hearing_impaired=hearing_impaired)
+
         # series
-        if video.series and self.series == video.series:
+        if video.series and self.series.lower() == video.series.lower():
             matches.add('series')
         # season
         if video.season and self.season == video.season:
@@ -49,143 +56,147 @@ class TVsubtitlesSubtitle(Subtitle):
         # release_group
         if video.release_group and self.release and video.release_group.lower() in self.release.lower():
             matches.add('release_group')
-        """
-        # video_codec
-        if video.video_codec and self.release and (video.video_codec in self.release.lower()
-                                                   or video.video_codec == 'h264' and 'x264' in self.release.lower()):
-            matches.add('video_codec')
-        # resolution
-        if video.resolution and self.rip and video.resolution in self.rip.lower():
-            matches.add('resolution')
-        # format
-        if video.format and self.rip and video.format in self.rip.lower():
-            matches.add('format')
-        """
-        # we don't have the complete filename, so we need to guess the matches separately
-        # guess video_codec (videoCodec in guessit)
-        matches |= compute_guess_properties_matches(video, self.release, 'videoCodec')
-        # guess resolution (screenSize in guessit)
-        matches |= compute_guess_properties_matches(video, self.rip, 'screenSize')
-        # guess format
-        matches |= compute_guess_properties_matches(video, self.rip, 'format')
+        # other properties
+        if self.release:
+            matches |= guess_matches(video, guess_properties(self.release), partial=True)
+        if self.rip:
+            matches |= guess_matches(video, guess_properties(self.rip), partial=True)
+
         return matches
 
 
 class TVsubtitlesProvider(Provider):
-    languages = {babelfish.Language('por', 'BR')} | {babelfish.Language(l)
-                 for l in ['ara', 'bul', 'ces', 'dan', 'deu', 'ell', 'eng', 'fin', 'fra', 'hun', 'ita', 'jpn', 'kor',
-                           'nld', 'pol', 'por', 'ron', 'rus', 'spa', 'swe', 'tur', 'ukr', 'zho']}
+    languages = {Language('por', 'BR')} | {Language(l) for l in [
+        'ara', 'bul', 'ces', 'dan', 'deu', 'ell', 'eng', 'fin', 'fra', 'hun', 'ita', 'jpn', 'kor', 'nld', 'pol', 'por',
+        'ron', 'rus', 'spa', 'swe', 'tur', 'ukr', 'zho'
+    ]}
     video_types = (Episode,)
-    server = 'http://www.tvsubtitles.net'
-    episode_id_re = re.compile('^episode-\d+\.html$')
-    subtitle_re = re.compile('^\/subtitle-\d+\.html$')
-    link_re = re.compile('^(?P<series>[A-Za-z0-9 \'.]+).*\((?P<first_year>\d{4})-\d{4}\)$')
+    server_url = 'http://www.tvsubtitles.net/'
 
     def initialize(self):
-        self.session = requests.Session()
-        self.session.headers = {'User-Agent': 'Subliminal/%s' % __version__.split('-')[0]}
+        self.session = Session()
+        self.session.headers = {'User-Agent': 'Subliminal/%s' % get_version(__version__)}
 
     def terminate(self):
         self.session.close()
 
-    def request(self, url, params=None, data=None, method='GET'):
-        """Make a `method` request on `url` with the given parameters
-
-        :param string url: part of the URL to reach with the leading slash
-        :param dict params: params of the request
-        :param dict data: data of the request
-        :param string method: method of the request
-        :return: the response
-        :rtype: :class:`bs4.BeautifulSoup`
-
-        """
-        r = self.session.request(method, self.server + url, params=params, data=data, timeout=10)
-        if r.status_code != 200:
-            raise ProviderError('Request failed with status code %d' % r.status_code)
-        return bs4.BeautifulSoup(r.content, ['permissive'])
-
     @region.cache_on_arguments(expiration_time=SHOW_EXPIRATION_TIME)
-    def find_show_id(self, series, year=None):
-        """Find the show id from the `series` with optional `year`
+    def search_show_id(self, series, year=None):
+        """Search the show id from the `series` and `year`.
 
-        :param string series: series of the episode in lowercase
-        :param year: year of the series, if any
+        :param string series: series of the episode.
+        :param year: year of the series, if any.
         :type year: int or None
-        :return: the show id, if any
+        :return: the show id, if any.
         :rtype: int or None
 
         """
-        data = {'q': series}
-        logger.debug('Searching series %r', data)
-        soup = self.request('/search.php', data=data, method='POST')
-        links = soup.select('div.left li div a[href^="/tvshow-"]')
-        if not links:
-            logger.info('Series %r not found', series)
-            return None
-        matched_links = [link for link in links if self.link_re.match(link.string)]
-        for link in matched_links:  # first pass with exact match on series
-            match = self.link_re.match(link.string)
-            if match.group('series').lower().replace('.', ' ').strip() == series:
+        # make the search
+        logger.info('Searching show id for %r', series)
+        r = self.session.post(self.server_url + 'search.php', data={'q': series}, timeout=10)
+        r.raise_for_status()
+
+        # get the series out of the suggestions
+        soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
+        show_id = None
+        for suggestion in soup.select('div.left li div a[href^="/tvshow-"]'):
+            match = link_re.match(suggestion.text)
+            if not match:
+                logger.error('Failed to match %s', suggestion.text)
+                continue
+
+            if match.group('series').lower() == series.lower():
                 if year is not None and int(match.group('first_year')) != year:
+                    logger.debug('Year does not match')
                     continue
-                return int(link['href'][8:-5])
-        for link in matched_links:  # less selective second pass
-            match = self.link_re.match(link.string)
-            if match.group('series').lower().replace('.', ' ').strip().startswith(series):
-                if year is not None and int(match.group('first_year')) != year:
-                    continue
-                return int(link['href'][8:-5])
-        return None
+                show_id = int(suggestion['href'][8:-5])
+                logger.debug('Found show id %d', show_id)
+                break
+
+        return show_id
 
     @region.cache_on_arguments(expiration_time=EPISODE_EXPIRATION_TIME)
-    def find_episode_ids(self, show_id, season):
-        """Find episode ids from the show id and the season
+    def get_episode_ids(self, show_id, season):
+        """Get episode ids from the show id and the season.
 
-        :param int show_id: show id
-        :param int season: season of the episode
-        :return: episode ids per episode number
+        :param int show_id: show id.
+        :param int season: season of the episode.
+        :return: episode ids per episode number.
         :rtype: dict
 
         """
-        params = {'show_id': show_id, 'season': season}
-        logger.debug('Searching episodes %r', params)
-        soup = self.request('/tvshow-{show_id}-{season}.html'.format(**params))
+        # get the page of the season of the show
+        logger.info('Getting the page of show id %d, season %d', show_id, season)
+        r = self.session.get(self.server_url + 'tvshow-%d-%d.html' % (show_id, season), timeout=10)
+        soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
+
+        # loop over episode rows
         episode_ids = {}
         for row in soup.select('table#table5 tr'):
-            if not row('a', href=self.episode_id_re):
+            # skip rows that do not have a link to the episode page
+            if not row('a', href=episode_id_re):
                 continue
+
+            # extract data from the cells
             cells = row('td')
-            episode_ids[int(cells[0].string.split('x')[1])] = int(cells[1].a['href'][8:-5])
+            episode = int(cells[0].text.split('x')[1])
+            episode_id = int(cells[1].a['href'][8:-5])
+            episode_ids[episode] = episode_id
+
+        if episode_ids:
+            logger.debug('Found episode ids %r', episode_ids)
+        else:
+            logger.warning('No episode ids found')
+
         return episode_ids
 
     def query(self, series, season, episode, year=None):
-        show_id = self.find_show_id(series.lower(), year)
+        # search the show id
+        show_id = self.search_show_id(series, year)
         if show_id is None:
+            logger.error('No show id found for %r (%r)', series, {'year': year})
             return []
-        episode_ids = self.find_episode_ids(show_id, season)
+
+        # get the episode ids
+        episode_ids = self.get_episode_ids(show_id, season)
         if episode not in episode_ids:
-            logger.info('Episode %d not found', episode)
+            logger.error('Episode %d not found', episode)
             return []
-        params = {'episode_id': episode_ids[episode]}
-        logger.debug('Searching episode %r', params)
-        link = '/episode-{episode_id}.html'.format(**params)
-        soup = self.request(link)
-        return [TVsubtitlesSubtitle(babelfish.Language.fromtvsubtitles(row.h5.img['src'][13:-4]), series, season,
-                                    episode, year if year and show_id != self.find_show_id(series.lower()) else None,
-                                    int(row['href'][10:-5]), row.find('p', title='rip').text.strip() or None,
-                                    row.find('p', title='release').text.strip() or None,
-                                    self.server + '/subtitle-%d.html' % int(row['href'][10:-5]))
-                for row in soup('a', href=self.subtitle_re)]
+
+        # get the episode page
+        logger.info('Getting the page for episode %d', episode_ids[episode])
+        r = self.session.get(self.server_url + 'episode-%d.html' % episode_ids[episode], timeout=10)
+        soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
+
+        # loop over subtitles rows
+        subtitles = []
+        for row in soup.select('.subtitlen'):
+            # read the item
+            language = Language.fromtvsubtitles(row.h5.img['src'][13:-4])
+            subtitle_id = int(row.parent['href'][10:-5])
+            page_link = self.server_url + 'subtitle-%d.html' % subtitle_id
+            rip = row.find('p', title='rip').text.strip() or None
+            release = row.find('p', title='release').text.strip() or None
+
+            subtitle = TVsubtitlesSubtitle(language, page_link, subtitle_id, series, season, episode, year, rip,
+                                           release)
+            logger.info('Found subtitle %s', subtitle)
+            subtitles.append(subtitle)
+
+        return subtitles
 
     def list_subtitles(self, video, languages):
         return [s for s in self.query(video.series, video.season, video.episode, video.year) if s.language in languages]
 
     def download_subtitle(self, subtitle):
-        r = self.session.get(self.server + '/download-{subtitle_id}.html'.format(subtitle_id=subtitle.id),
-                             timeout=10)
-        if r.status_code != 200:
-            raise ProviderError('Request failed with status code %d' % r.status_code)
-        with zipfile.ZipFile(io.BytesIO(r.content)) as zf:
+        # download as a zip
+        logger.info('Downloading subtitle %r', subtitle)
+        r = self.session.get(self.server_url + 'download-%d.html' % subtitle.subtitle_id, timeout=10)
+        r.raise_for_status()
+
+        # open the zip
+        with ZipFile(io.BytesIO(r.content)) as zf:
             if len(zf.namelist()) > 1:
                 raise ProviderError('More than one file to unzip')
-            subtitle.content = fix_line_endings(zf.read(zf.namelist()[0]))
+
+            subtitle.content = fix_line_ending(zf.read(zf.namelist()[0]))

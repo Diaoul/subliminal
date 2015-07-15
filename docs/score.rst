@@ -1,0 +1,3 @@
+Score
+=====
+.. automodule:: subliminal.score

@@ -1,26 +1,28 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 import logging
-import babelfish
-import bs4
-import requests
-from . import Provider
+import re
+
+from babelfish import Language
+from requests import Session
+
+from . import ParserBeautifulSoup, Provider, get_version
 from .. import __version__
-from ..cache import region, SHOW_EXPIRATION_TIME
-from ..exceptions import ConfigurationError, AuthenticationError, DownloadLimitExceeded, ProviderError
-from ..subtitle import Subtitle, fix_line_endings, compute_guess_properties_matches
+from ..cache import SHOW_EXPIRATION_TIME, region
+from ..exceptions import AuthenticationError, ConfigurationError, DownloadLimitExceeded
+from ..subtitle import Subtitle, fix_line_ending, guess_matches, guess_properties
 from ..video import Episode
 
-
 logger = logging.getLogger(__name__)
-babelfish.language_converters.register('addic7ed = subliminal.converters.addic7ed:Addic7edConverter')
+
+series_year_re = re.compile('^(?P<series>[ \w]+)(?: \((?P<year>\d{4})\))?$')
 
 
 class Addic7edSubtitle(Subtitle):
     provider_name = 'addic7ed'
 
-    def __init__(self, language, series, season, episode, title, year, version, hearing_impaired, download_link,
-                 page_link):
+    def __init__(self, language, hearing_impaired, page_link, series, season, episode, title, year, version,
+                 download_link):
         super(Addic7edSubtitle, self).__init__(language, hearing_impaired, page_link)
         self.series = series
         self.season = season
@@ -30,10 +32,15 @@ class Addic7edSubtitle(Subtitle):
         self.version = version
         self.download_link = download_link
 
-    def compute_matches(self, video):
-        matches = set()
+    @property
+    def id(self):
+        return self.download_link
+
+    def get_matches(self, video, hearing_impaired=False):
+        matches = super(Addic7edSubtitle, self).get_matches(video, hearing_impaired=hearing_impaired)
+
         # series
-        if video.series and self.series == video.series:
+        if video.series and self.series.lower() == video.series.lower():
             matches.add('series')
         # season
         if video.season and self.season == video.season:
@@ -45,152 +52,205 @@ class Addic7edSubtitle(Subtitle):
         if video.title and self.title.lower() == video.title.lower():
             matches.add('title')
         # year
-        if self.year == video.year:
+        if video.year == self.year:
             matches.add('year')
         # release_group
         if video.release_group and self.version and video.release_group.lower() in self.version.lower():
             matches.add('release_group')
-        """
         # resolution
         if video.resolution and self.version and video.resolution in self.version.lower():
             matches.add('resolution')
         # format
-        if video.format and self.version and video.format in self.version.lower:
+        if video.format and self.version and video.format.lower() in self.version.lower():
             matches.add('format')
-        """
-        # we don't have the complete filename, so we need to guess the matches separately
-        # guess resolution (screenSize in guessit)
-        matches |= compute_guess_properties_matches(video, self.version, 'screenSize')
-        # guess format
-        matches |= compute_guess_properties_matches(video, self.version, 'format')
-        # guess video codec
-        matches |= compute_guess_properties_matches(video, self.version, 'videoCodec')
+        # other properties
+        matches |= guess_matches(video, guess_properties(self.version), partial=True)
+
         return matches
 
 
 class Addic7edProvider(Provider):
-    languages = {babelfish.Language('por', 'BR')} | {babelfish.Language(l)
-                 for l in ['ara', 'aze', 'ben', 'bos', 'bul', 'cat', 'ces', 'dan', 'deu', 'ell', 'eng', 'eus', 'fas',
-                           'fin', 'fra', 'glg', 'heb', 'hrv', 'hun', 'hye', 'ind', 'ita', 'jpn', 'kor', 'mkd', 'msa',
-                           'nld', 'nor', 'pol', 'por', 'ron', 'rus', 'slk', 'slv', 'spa', 'sqi', 'srp', 'swe', 'tha',
-                           'tur', 'ukr', 'vie', 'zho']}
+    languages = {Language('por', 'BR')} | {Language(l) for l in [
+        'ara', 'aze', 'ben', 'bos', 'bul', 'cat', 'ces', 'dan', 'deu', 'ell', 'eng', 'eus', 'fas', 'fin', 'fra', 'glg',
+        'heb', 'hrv', 'hun', 'hye', 'ind', 'ita', 'jpn', 'kor', 'mkd', 'msa', 'nld', 'nor', 'pol', 'por', 'ron', 'rus',
+        'slk', 'slv', 'spa', 'sqi', 'srp', 'swe', 'tha', 'tur', 'ukr', 'vie', 'zho'
+    ]}
     video_types = (Episode,)
-    server = 'http://www.addic7ed.com'
+    server_url = 'http://www.addic7ed.com/'
 
     def __init__(self, username=None, password=None):
         if username is not None and password is None or username is None and password is not None:
             raise ConfigurationError('Username and password must be specified')
+
         self.username = username
         self.password = password
         self.logged_in = False
 
     def initialize(self):
-        self.session = requests.Session()
-        self.session.headers = {'User-Agent': 'Subliminal/%s' % __version__.split('-')[0]}
+        self.session = Session()
+        self.session.headers = {'User-Agent': 'Subliminal/%s' % get_version(__version__)}
+
         # login
         if self.username is not None and self.password is not None:
-            logger.debug('Logging in')
+            logger.info('Logging in')
             data = {'username': self.username, 'password': self.password, 'Submit': 'Log in'}
-            r = self.session.post(self.server + '/dologin.php', data, timeout=10, allow_redirects=False)
-            if r.status_code == 302:
-                logger.info('Logged in')
-                self.logged_in = True
-            else:
+            r = self.session.post(self.server_url + 'dologin.php', data, allow_redirects=False, timeout=10)
+
+            if r.status_code != 302:
                 raise AuthenticationError(self.username)
+
+            logger.debug('Logged in')
+            self.logged_in = True
 
     def terminate(self):
         # logout
         if self.logged_in:
-            r = self.session.get(self.server + '/logout.php', timeout=10)
-            logger.info('Logged out')
-            if r.status_code != 200:
-                raise ProviderError('Request failed with status code %d' % r.status_code)
+            logger.info('Logging out')
+            r = self.session.get(self.server_url + 'logout.php', timeout=10)
+            r.raise_for_status()
+            logger.debug('Logged out')
+            self.logged_in = False
+
         self.session.close()
 
-    def get(self, url, params=None):
-        """Make a GET request on `url` with the given parameters
-
-        :param string url: part of the URL to reach with the leading slash
-        :param params: params of the request
-        :return: the response
-        :rtype: :class:`bs4.BeautifulSoup`
-
-        """
-        r = self.session.get(self.server + url, params=params, timeout=10)
-        if r.status_code != 200:
-            raise ProviderError('Request failed with status code %d' % r.status_code)
-        return bs4.BeautifulSoup(r.content, ['permissive'])
-
     @region.cache_on_arguments(expiration_time=SHOW_EXPIRATION_TIME)
-    def get_show_ids(self):
-        """Load the shows page with default series to show ids mapping
+    def _get_show_ids(self):
+        """Get the ``dict`` of show ids per series by querying the `shows.php` page.
 
-        :return: series to show ids
+        :return: show id per series, lower case and without quotes.
         :rtype: dict
 
         """
-        soup = self.get('/shows.php')
+        # get the show page
+        logger.info('Getting show ids')
+        r = self.session.get(self.server_url + 'shows.php', timeout=10)
+        r.raise_for_status()
+        soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
+
+        # populate the show ids
         show_ids = {}
-        for html_show in soup.select('td.version > h3 > a[href^="/show/"]'):
-            show_ids[html_show.string.lower()] = int(html_show['href'][6:])
+        for show in soup.select('td.version > h3 > a[href^="/show/"]'):
+            show_ids[show.text.lower().replace('\'', '')] = int(show['href'][6:])
+        logger.debug('Found %d show ids', len(show_ids))
+
         return show_ids
 
     @region.cache_on_arguments(expiration_time=SHOW_EXPIRATION_TIME)
-    def find_show_id(self, series, year=None):
-        """Find the show id from the `series` with optional `year`
+    def _search_show_id(self, series, year=None):
+        """Search the show id from the `series` and `year`.
 
-        Use this only if the show id cannot be found with :meth:`get_show_ids`
-
-        :param string series: series of the episode in lowercase
-        :param year: year of the series, if any
+        :param string series: series of the episode.
+        :param year: year of the series, if any.
         :type year: int or None
-        :return: the show id, if any
+        :return: the show id, if found.
         :rtype: int or None
 
         """
-        series_year = series
-        if year is not None:
-            series_year += ' (%d)' % year
+        # build the params
+        series_year = '%s (%d)' % (series, year) if year is not None else series
         params = {'search': series_year, 'Submit': 'Search'}
-        logger.debug('Searching series %r', params)
-        suggested_shows = self.get('/search.php', params).select('span.titulo > a[href^="/show/"]')
-        if not suggested_shows:
-            logger.info('Series %r not found', series_year)
-            return None
-        return int(suggested_shows[0]['href'][6:])
 
-    def query(self, series, season, year=None):
-        show_ids = self.get_show_ids()
+        # make the search
+        logger.info('Searching show ids with %r', params)
+        r = self.session.get(self.server_url + 'search.php', params=params, timeout=10)
+        r.raise_for_status()
+        soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
+
+        # get the suggestion
+        suggestion = soup.select('span.titulo > a[href^="/show/"]')
+        if not suggestion:
+            logger.warning('Show id not found: no suggestion')
+            return None
+        if not suggestion[0].i.text.lower() == series_year.lower():
+            logger.warning('Show id not found: suggestion does not match')
+            return None
+        show_id = int(suggestion[0]['href'][6:])
+        logger.debug('Found show id %d', show_id)
+
+        return show_id
+
+    def get_show_id(self, series, year=None, country_code=None):
+        """Get the best matching show id for `series`, `year` and `country_code`.
+
+        First search in the result of :meth:`_get_show_ids` and fallback on a search with :meth:`_search_show_id`
+
+        :param str series: series of the episode.
+        :param year: year of the series, if any.
+        :type year: int or None
+        :param country_code: country code of the series, if any.
+        :type country_code: str or None
+        :return: the show id, if found.
+        :rtype: int or None
+
+        """
+        series_clean = series.lower().replace('\'', '')
+        show_ids = self._get_show_ids()
         show_id = None
-        if year is not None:  # search with the year
-            series_year = '%s (%d)' % (series.lower(), year)
-            if series_year in show_ids:
-                show_id = show_ids[series_year]
-            else:
-                show_id = self.find_show_id(series.lower(), year)
-        if show_id is None:  # search without the year
-            year = None
-            if series.lower() in show_ids:
-                show_id = show_ids[series.lower()]
-            else:
-                show_id = self.find_show_id(series.lower())
+
+        # attempt with country
+        if not show_id and country_code:
+            logger.debug('Getting show id with country')
+            show_id = show_ids.get('%s (%s)' % (series_clean, country_code.lower()))
+
+        # attempt with year
+        if not show_id and year:
+            logger.debug('Getting show id with year')
+            show_id = show_ids.get('%s (%d)' % (series_clean, year))
+
+        # attempt clean
+        if not show_id:
+            logger.debug('Getting show id')
+            show_id = show_ids.get(series_clean)
+
+        # search as last resort
+        if not show_id:
+            logger.warning('Series not found in show ids')
+            show_id = self._search_show_id(series)
+
+        return show_id
+
+    def query(self, series, season, year=None, country=None):
+        # get the show id
+        show_id = self.get_show_id(series, year, country)
         if show_id is None:
+            logger.error('No show id found for %r (%r)', series, {'year': year, 'country': country})
             return []
-        params = {'show_id': show_id, 'season': season}
-        logger.debug('Searching subtitles %r', params)
-        link = '/show/{show_id}&season={season}'.format(**params)
-        soup = self.get(link)
+
+        # get the page of the season of the show
+        logger.info('Getting the page of show id %d, season %d', show_id, season)
+        r = self.session.get(self.server_url + 'show/%d' % show_id, params={'season': season}, timeout=10)
+        r.raise_for_status()
+        soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
+
+        # loop over subtitle rows
+        match = series_year_re.match(soup.select('#header font')[0].text.strip()[:-10])
+        series = match.group('series')
+        year = int(match.group('year')) if match.group('year') else None
         subtitles = []
-        for row in soup('tr', class_='epeven completed'):
+        for row in soup.select('tr.epeven'):
             cells = row('td')
-            if cells[5].string != 'Completed':
+
+            # ignore incomplete subtitles
+            status = cells[5].text
+            if status != 'Completed':
+                logger.debug('Ignoring subtitle with status %s', status)
                 continue
-            if not cells[3].string:
-                continue
-            subtitles.append(Addic7edSubtitle(babelfish.Language.fromaddic7ed(cells[3].string), series, season,
-                                              int(cells[1].string), cells[2].string, year, cells[4].string,
-                                              bool(cells[6].string), cells[9].a['href'],
-                                              self.server + cells[2].a['href']))
+
+            # read the item
+            language = Language.fromaddic7ed(cells[3].text)
+            hearing_impaired = bool(cells[6].text)
+            page_link = self.server_url + cells[2].a['href'][1:]
+            season = int(cells[0].text)
+            episode = int(cells[1].text)
+            title = cells[2].text
+            version = cells[4].text
+            download_link = cells[9].a['href'][1:]
+
+            subtitle = Addic7edSubtitle(language, hearing_impaired, page_link, series, season, episode, title, year,
+                                        version, download_link)
+            logger.debug('Found subtitle %r', subtitle)
+            subtitles.append(subtitle)
+
         return subtitles
 
     def list_subtitles(self, video, languages):
@@ -198,9 +258,14 @@ class Addic7edProvider(Provider):
                 if s.language in languages and s.episode == video.episode]
 
     def download_subtitle(self, subtitle):
-        r = self.session.get(self.server + subtitle.download_link, timeout=10, headers={'Referer': subtitle.page_link})
-        if r.status_code != 200:
-            raise ProviderError('Request failed with status code %d' % r.status_code)
+        # download the subtitle
+        logger.info('Downloading subtitle %r', subtitle)
+        r = self.session.get(self.server_url + subtitle.download_link, headers={'Referer': subtitle.page_link},
+                             timeout=10)
+        r.raise_for_status()
+
+        # detect download limit exceeded
         if r.headers['Content-Type'] == 'text/html':
             raise DownloadLimitExceeded
-        subtitle.content = fix_line_endings(r.content)
+
+        subtitle.content = fix_line_ending(r.content)

@@ -1,3 +1,5 @@
+sudo: false
+
 language: python
 
 python:
@@ -8,6 +10,10 @@ python:
 env:
   - PARSER=native
   - PARSER=lxml
+
+cache:
+  directories:
+    - $HOME/.cache/pip
 
 install:
   - pip install -e .[test]

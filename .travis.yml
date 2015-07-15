@@ -10,7 +10,7 @@ env:
   - PARSER=lxml
 
 install:
-  - pip install .[test]
+  - pip install -e .[test]
   - if [ $PARSER = "lxml" ]; then pip install lxml; fi
   - pip install coveralls
 

@@ -9,8 +9,7 @@ import socket
 
 from babelfish import Language
 import requests
-from stevedore import ExtensionManager
-from stevedore.dispatch import DispatchExtensionManager
+from stevedore import EnabledExtensionManager, ExtensionManager
 
 from .subtitle import compute_score, get_subtitle_path
 
@@ -47,8 +46,8 @@ class ProviderPool(object):
         #: Discarded providers
         self.discarded_providers = set()
 
-        #: Dedicated :data:`provider_manager` as :class:`~stevedore.dispatch.DispatchExtensionManager`
-        self.manager = DispatchExtensionManager(provider_manager.namespace, lambda e: e.name in self.providers)
+        #: Dedicated :data:`provider_manager` as :class:`~stevedore.enabled.EnabledExtensionManager`
+        self.manager = EnabledExtensionManager(provider_manager.namespace, lambda e: e.name in self.providers)
 
     def __enter__(self):
         return self

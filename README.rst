@@ -19,9 +19,8 @@ Subtitles, faster than your thoughts.
    :alt: Code coverage
 
 
-Project page and bug tracker: https://github.com/Diaoul/subliminal
-
-Documentation: http://subliminal.readthedocs.org
+:Project page: https://github.com/Diaoul/subliminal
+:Documentation: http://subliminal.readthedocs.org
 
 
 Usage
@@ -38,24 +37,24 @@ Download English subtitles::
 
 Library
 ^^^^^^^
-Download best subtitles in French and English for videos less than two weeks old in a video folder,
-skipping videos that already have subtitles::
+Download best subtitles in French and English for videos less than two weeks old in a video folder:
+
+.. code:: python
 
     from datetime import timedelta
-
+    
     from babelfish import Language
     from subliminal import download_best_subtitles, region, save_subtitles, scan_videos
-
+    
     # configure the cache
     region.configure('dogpile.cache.dbm', arguments={'filename': 'cachefile.dbm'})
-
+    
     # scan for videos newer than 2 weeks and their existing subtitles in a folder
-    videos = [v for v in scan_videos('/video/folder', subtitles=True, embedded_subtitles=True)
-              if v.age < timedelta(weeks=2)]
-
+    videos = [v for v in scan_videos('/video/folder') if v.age < timedelta(weeks=2)]
+    
     # download best subtitles
     subtitles = download_best_subtitles(videos, {Language('eng'), Language('fra')})
-
+    
     # save them to disk, next to the video
     save_subtitles(subtitles)
 

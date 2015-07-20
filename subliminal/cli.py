@@ -97,7 +97,11 @@ subliminal_cache = 'subliminal.dbm'
 def subliminal(ctx, addic7ed, cache_dir, debug):
     """Subtitles, faster than your thoughts."""
     # create cache directory
-    os.makedirs(cache_dir, exist_ok=True)
+    try:
+        os.makedirs(cache_dir)
+    except OSError:
+        if not os.path.isdir(cache_dir):
+            raise
 
     # configure cache
     region.configure('dogpile.cache.dbm', expiration_time=timedelta(days=30),

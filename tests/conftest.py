@@ -6,12 +6,17 @@ from zipfile import ZipFile
 
 import pytest
 import requests
+try:
+    from unittest.mock import Mock
+except ImportError:
+    from mock import Mock
 
 from subliminal import Episode, Movie
-from subliminal.cache import region as cache_region
+from subliminal.cache import region
 
 
-cache_region.configure('dogpile.cache.null')
+region.configure('dogpile.cache.null')
+region.configure = Mock()
 
 
 @pytest.fixture

@@ -269,7 +269,6 @@ def list_subtitles(videos, languages, **kwargs):
     :type videos: set of :class:`~subliminal.video.Video`
     :param languages: languages to search for.
     :type languages: set of :class:`~babelfish.language.Language`
-    :param providers: name of providers to use, if not all.
     :return: found subtitles per video.
     :rtype: dict of :class:`~subliminal.video.Video` to list of :class:`~subliminal.subtitle.Subtitle`
 
@@ -306,8 +305,6 @@ def download_subtitles(subtitles, **kwargs):
 
     :param subtitles: subtitles to download.
     :type subtitles: list of :class:`~subliminal.subtitle.Subtitle`
-    :param dict provider_configs: provider configuration as keyword arguments per provider name to pass when.
-        instanciating the :class:`~subliminal.providers.Provider`.
 
     """
     with ProviderPool(**kwargs) as pool:
@@ -328,7 +325,6 @@ def download_best_subtitles(videos, languages, min_score=0, hearing_impaired=Fal
     :type videos: set of :class:`~subliminal.video.Video`
     :param languages: languages to download.
     :type languages: set of :class:`~babelfish.language.Language`
-    :param providers: name of providers to use, if not all.
     :param int min_score: minimum score for a subtitle to be downloaded.
     :param bool hearing_impaired: hearing impaired preference.
     :param bool only_one: download only one subtitle, not one per language.

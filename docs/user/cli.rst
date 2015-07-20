@@ -57,7 +57,7 @@ subliminal download
                                       .srt extension.
       -f, --force                     Force download even if a subtitle already exist.
       -hi, --hearing-impaired         Prefer hearing impaired subtitles.
-      -m, --min-score INTEGER RANGE   Minimum score for a subtitle to be downloaded.
+      -m, --min-score INTEGER RANGE   Minimum score for a subtitle to be downloaded (0 to 100).
       -v, --verbose                   Increase verbosity.
       --help                          Show this message and exit.
 

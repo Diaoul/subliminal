@@ -14,10 +14,10 @@ Documentation
 .. toctree::
     :maxdepth: 2
 
-    usage
-    how_it_works
-    cli
-    provider_guide
+    user/usage
+    user/how_it_works
+    user/cli
+    user/provider_guide
 
 
 API Documentation
@@ -27,13 +27,13 @@ If you are looking for information on a specific function, class or method, this
 .. toctree::
     :maxdepth: 1
 
-    api
-    video
-    subtitle
-    providers
-    cache
-    score
-    exceptions
+    api/api
+    api/video
+    api/subtitle
+    api/providers
+    api/cache
+    api/score
+    api/exceptions
 
 
 License

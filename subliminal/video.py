@@ -110,6 +110,11 @@ class Video(object):
 
     @classmethod
     def fromname(cls, name):
+        """Shortcut for :meth:`fromguess` with a `guess` guessed from the `name`.
+
+        :param str name: name of the video.
+
+        """
         return cls.fromguess(name, guess_file_info(name))
 
     def __repr__(self):

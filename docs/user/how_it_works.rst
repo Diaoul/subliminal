@@ -19,6 +19,7 @@ They are registered on the ``subliminal.providers`` entry point and are exposed 
 To make working with multiple providers seamlessly, the :class:`~subliminal.api.ProviderPool` exposes the same API but
 distributes it to its providers.
 
+.. _scoring:
 
 Scoring
 -------
@@ -43,5 +44,5 @@ Various libraries are used by subliminal and are key to its success:
 * `BeautifulSoup <http://www.crummy.com/software/BeautifulSoup>`_ to parse HTML and XML
 * `dogpile.cache <http://dogpilecache.readthedocs.org>`_ to cache intermediate search results
 * `stevedore <http://docs.openstack.org/developer/stevedore/>`_ to manage the provider entry point
-* `chardet <http://chardet.readthedocs.org/en/latest/>`_ to detect subtitles' encoding
+* `chardet <http://chardet.readthedocs.org>`_ to detect subtitles' encoding
 * `pysrt <https://github.com/byroot/pysrt>`_ to validate downloaded subtitles

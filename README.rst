@@ -18,6 +18,10 @@ Subtitles, faster than your thoughts.
    :target: https://coveralls.io/r/Diaoul/subliminal?branch=master
    :alt: Code coverage
 
+.. image:: https://img.shields.io/github/license/Diaoul/subliminal.svg
+   :target: https://github.com/Diaoul/subliminal/blob/master/LICENSE
+   :alt: License
+
 
 :Project page: https://github.com/Diaoul/subliminal
 :Documentation: http://subliminal.readthedocs.org
@@ -57,8 +61,3 @@ Download best subtitles in French and English for videos less than two weeks old
     
     # save them to disk, next to the video
     save_subtitles(subtitles)
-
-
-License
--------
-MIT

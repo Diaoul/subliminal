@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 import os
+import sys
 
 import pytest
 try:
@@ -31,3 +32,9 @@ def chdir(tmpdir, monkeypatch):
 def use_cassette(request):
     with vcr.use_cassette('test_' + request.fspath.purebasename):
         yield
+
+
+@pytest.fixture(autouse=True)
+def skip_python_2():
+    if sys.version_info < (3, 0):
+        return pytest.skip('Requires python 3')

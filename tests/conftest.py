@@ -61,7 +61,7 @@ def mkv():
     data_path = os.path.join('tests', 'data', 'mkv')
 
     # download matroska test suite
-    if not os.path.exists(data_path):
+    if not os.path.exists(data_path) or len(os.listdir(data_path)) != 8:
         r = requests.get('http://downloads.sourceforge.net/project/matroska/test_files/matroska_test_w1_1.zip')
         with ZipFile(BytesIO(r.content), 'r') as f:
             f.extractall(data_path, [m for m in f.namelist() if os.path.splitext(m)[1] == '.mkv'])

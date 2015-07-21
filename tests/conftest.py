@@ -15,8 +15,10 @@ from subliminal import Episode, Movie
 from subliminal.cache import region
 
 
-region.configure('dogpile.cache.null')
-region.configure = Mock()
+@pytest.fixture(autouse=True, scope='session')
+def configure_region():
+    region.configure('dogpile.cache.null')
+    region.configure = Mock()
 
 
 @pytest.fixture

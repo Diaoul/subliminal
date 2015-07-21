@@ -16,8 +16,10 @@ vcr = VCR(path_transformer=lambda path: path + '.yaml',
           cassette_library_dir=os.path.join('docs', 'cassettes'))
 
 
-region.configure('dogpile.cache.null')
-region.configure = Mock()
+@pytest.fixture(autouse=True, scope='session')
+def configure_region():
+    region.configure('dogpile.cache.null')
+    region.configure = Mock()
 
 
 @pytest.fixture(autouse=True)

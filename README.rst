@@ -2,20 +2,20 @@ Subliminal
 ==========
 Subtitles, faster than your thoughts.
 
-.. image:: http://img.shields.io/pypi/v/subliminal.svg
+.. image:: https://img.shields.io/pypi/v/subliminal.svg
     :target: https://pypi.python.org/pypi/subliminal
     :alt: Latest Version
 
-.. image:: https://img.shields.io/travis/Diaoul/subliminal.svg
+.. image:: https://travis-ci.org/Diaoul/subliminal.svg?branch=master
    :target: https://travis-ci.org/Diaoul/subliminal
    :alt: Travis CI build status
 
 .. image:: https://readthedocs.org/projects/subliminal/badge/?version=latest
-   :target: http://subliminal.readthedocs.org/en/latest
+   :target: https://subliminal.readthedocs.org/
    :alt: Documentation Status
 
-.. image:: https://img.shields.io/coveralls/Diaoul/subliminal.svg
-   :target: https://coveralls.io/r/Diaoul/subliminal?branch=master
+.. image:: https://coveralls.io/repos/Diaoul/subliminal/badge.svg?branch=master&service=github
+   :target: https://coveralls.io/github/Diaoul/subliminal?branch=master
    :alt: Code coverage
 
 .. image:: https://img.shields.io/github/license/Diaoul/subliminal.svg
@@ -24,7 +24,7 @@ Subtitles, faster than your thoughts.
 
 
 :Project page: https://github.com/Diaoul/subliminal
-:Documentation: http://subliminal.readthedocs.org
+:Documentation: https://subliminal.readthedocs.org/
 
 
 Usage

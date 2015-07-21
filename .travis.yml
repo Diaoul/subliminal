@@ -16,6 +16,9 @@ cache:
     - $HOME/.cache/pip
     - tests/data/mkv
 
+before_cache:
+  - rm -f $HOME/.cache/pip/log/debug.log
+
 install:
   - pip install -e .[test]
   - if [ $PARSER = "lxml" ]; then pip install lxml; fi

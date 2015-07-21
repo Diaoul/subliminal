@@ -3,7 +3,7 @@ Changelog
 
 1.0
 ^^^
-**release date:** *not released yet*
+**release date:** 2015-07-22
 
 * Many changes and fixes
 * New test suite
@@ -130,6 +130,7 @@ Changelog
 0.6.0
 ^^^^^
 **release date:** 2012-06-16
+
 **WARNING:** Backward incompatible changes
 
 * Fix --workers option in CLI

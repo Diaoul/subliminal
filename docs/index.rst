@@ -33,6 +33,7 @@ If you are looking for information on a specific function, class or method, this
     api/providers
     api/cache
     api/score
+    api/cli
     api/exceptions
 
 

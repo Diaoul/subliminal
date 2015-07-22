@@ -35,7 +35,7 @@ Download English subtitles::
 
     $ subliminal download -l en The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.mp4
     Collecting videos  [####################################]  100%
-    1 video collected / 0 video ignored
+    1 video collected / 0 video ignored / 0 error
     Downloading subtitles  [####################################]  100%
     Downloaded 1 subtitle
 

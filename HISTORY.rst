@@ -1,6 +1,16 @@
 Changelog
 ---------
 
+1.0.1
+^^^^^
+**release date:** 2015-07-23
+
+* Fix unicode issues in CLI (python 2 only)
+* Fix score scaling in CLI (python 2 only)
+* Improve error handling in CLI
+* Color collect report in CLI
+
+
 1.0
 ^^^
 **release date:** 2015-07-22

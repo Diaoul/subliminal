@@ -310,7 +310,7 @@ def download(obj, provider, language, age, directory, encoding, single, force, h
                 scaled_score *= 100 / v.scores['hash']
 
                 # echo some nice colored output
-                click.echo('  - [{score}] - {language} subtitle from {provider_name} (match on {matches})'.format(
+                click.echo('  - [{score}] {language} subtitle from {provider_name} (match on {matches})'.format(
                     score=click.style('{:5.1f}'.format(scaled_score), fg=score_color, bold=score >= v.scores['hash']),
                     language=s.language.name if s.language.country is None else '%s (%s)' % (s.language.name,
                                                                                              s.language.country.name),

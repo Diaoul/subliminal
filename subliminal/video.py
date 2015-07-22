@@ -395,8 +395,7 @@ def scan_video(path, subtitles=True, embedded_subtitles=True):
 def scan_videos(path, subtitles=True, embedded_subtitles=True):
     """Scan `path` for videos and their subtitles.
 
-    :params path: existing directory path to scan.
-    :type path: str
+    :param str path: existing directory path to scan.
     :param bool subtitles: scan for subtitles with the same name.
     :param bool embedded_subtitles: scan for embedded subtitles.
     :return: the scanned videos.

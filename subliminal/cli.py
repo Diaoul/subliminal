@@ -9,6 +9,7 @@ from datetime import timedelta
 import logging
 import os
 import re
+import sys
 
 from babelfish import Error as BabelfishError, Language
 import click
@@ -18,6 +19,8 @@ from dogpile.core import ReadWriteMutex
 from subliminal import (Episode, Movie, ProviderPool, Video, __version__, check_video, provider_manager, region,
                         save_subtitles, scan_video, scan_videos)
 from subliminal.subtitle import compute_score
+
+logger = logging.getLogger(__name__)
 
 
 class MutexLock(AbstractFileLock):
@@ -38,6 +41,22 @@ class MutexLock(AbstractFileLock):
 
     def release_write_lock(self):
         return self.mutex.release_write_lock()
+
+
+class StringPath(click.Path):
+    """A :class:`~click.Path` as :class:`str`."""
+    def convert(self, value, param, ctx):
+        if isinstance(value, bytes):
+            try:
+                enc = getattr(sys.stdin, 'encoding', None)
+                if enc is not None:
+                    value = value.decode(enc)
+            except UnicodeDecodeError:
+                try:
+                    value = value.decode(click.utils.get_filesystem_encoding())
+                except UnicodeDecodeError:
+                    self.fail('%s is not a correctly encoded path' % value.decode('utf-8', 'replace'))
+        return super(StringPath, self).convert(value, param, ctx)
 
 
 class LanguageParamType(click.ParamType):
@@ -149,7 +168,7 @@ def cache(ctx, clear_subliminal):
 @click.option('-m', '--min-score', type=click.IntRange(0, 100), default=0, help='Minimum score for a subtitle '
               'to be downloaded (0 to 100).')
 @click.option('-v', '--verbose', count=True, help='Increase verbosity.')
-@click.argument('path', type=click.Path(), required=True, nargs=-1)
+@click.argument('path', type=StringPath(), required=True, nargs=-1)
 @click.pass_obj
 def download(obj, provider, language, age, directory, encoding, single, force, hearing_impaired, min_score, verbose,
              path):
@@ -167,17 +186,31 @@ def download(obj, provider, language, age, directory, encoding, single, force, h
     # scan videos
     videos = []
     ignored_videos = []
-    with click.progressbar(path, label='Collecting videos',
-                           item_show_func=lambda p: str(p) if p is not None else '') as bar:
+    errored_paths = []
+    with click.progressbar(path, label='Collecting videos', item_show_func=lambda p: p or '') as bar:
         for p in bar:
+            logger.debug('Collecting path %s', p)
+
             # non-existing
             if not os.path.exists(p):
-                videos.append(Video.fromname(p))
+                try:
+                    video = Video.fromname(p)
+                except:
+                    logger.exception('Unexpected error while collecting non-existing path %s', p)
+                    errored_paths.append(p)
+                    continue
+                videos.append(video)
                 continue
 
             # directories
             if os.path.isdir(p):
-                for video in scan_videos(p, subtitles=not force, embedded_subtitles=not force):
+                try:
+                    scanned_videos = scan_videos(p, subtitles=not force, embedded_subtitles=not force)
+                except:
+                    logger.exception('Unexpected error while collecting directory path %s', p)
+                    errored_paths.append(p)
+                    continue
+                for video in scanned_videos:
                     if check_video(video, languages=language, age=age, undefined=single):
                         videos.append(video)
                     else:
@@ -185,16 +218,26 @@ def download(obj, provider, language, age, directory, encoding, single, force, h
                 continue
 
             # other inputs
-            video = scan_video(p, subtitles=not force, embedded_subtitles=not force)
+            try:
+                video = scan_video(p, subtitles=not force, embedded_subtitles=not force)
+            except:
+                logger.exception('Unexpected error while collecting path %s', p)
+                errored_paths.append(p)
+                continue
             if check_video(video, languages=language, age=age, undefined=single):
                 videos.append(video)
             else:
                 ignored_videos.append(video)
 
+    # output errored paths
+    if verbose > 0:
+        for p in errored_paths:
+            click.secho('%s errored' % p, fg='red')
+
     # output ignored videos
     if verbose > 1:
         for video in ignored_videos:
-            click.secho('%s ignored - subtitles: %s / age: %d day%s ' % (
+            click.secho('%s ignored - subtitles: %s / age: %d day%s' % (
                 os.path.split(video.name)[1],
                 ', '.join(str(s) for s in video.subtitle_languages) or 'none',
                 video.age.days,
@@ -202,10 +245,14 @@ def download(obj, provider, language, age, directory, encoding, single, force, h
             ), fg='yellow')
 
     # report collected videos
-    click.echo('%s video%s collected / %s video%s ignored' % (click.style(str(len(videos)), bold=True),
-                                                              's' if len(videos) > 1 else '',
-                                                              click.style(str(len(ignored_videos)), bold=True),
-                                                              's' if len(ignored_videos) > 1 else ''))
+    click.echo('%s video%s collected / %s video%s ignored / %s error%s' % (
+        click.style(str(len(videos)), bold=True, fg='green' if videos else None),
+        's' if len(videos) > 1 else '',
+        click.style(str(len(ignored_videos)), bold=True, fg='yellow' if ignored_videos else None),
+        's' if len(ignored_videos) > 1 else '',
+        click.style(str(len(errored_paths)), bold=True, fg='red' if errored_paths else None),
+        's' if len(errored_paths) > 1 else '',
+    ))
 
     # exit if no video collected
     if not videos:

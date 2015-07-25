@@ -108,7 +108,7 @@ subliminal_cache = 'subliminal.dbm'
              'https://github.com/Diaoul/subliminal/')
 @click.option('--addic7ed', type=click.STRING, nargs=2, metavar='USERNAME PASSWORD', help='Addic7ed configuration.')
 @click.option('--opensubtitles', type=click.STRING, nargs=2, metavar='USERNAME PASSWORD',
-              help='Opensubtitles configuration.')
+              help='OpenSubtitles configuration.')
 @click.option('--cache-dir', type=click.Path(writable=True, resolve_path=True, file_okay=False),
               default=click.get_app_dir('subliminal'), show_default=True, expose_value=True,
               help='Path to the cache directory.')

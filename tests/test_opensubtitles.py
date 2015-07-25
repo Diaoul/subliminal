@@ -78,8 +78,7 @@ def test_logout():
     provider = OpenSubtitlesProvider('python-subliminal', 'subliminal')
     provider.initialize()
     provider.terminate()
-    # Token is not cleared in terminate
-    assert provider.token is not None
+    assert provider.token is None
 
 
 @pytest.mark.integration

@@ -15,7 +15,7 @@ subliminal
     Options:
       --addic7ed USERNAME PASSWORD    Addic7ed configuration.
       --opensubtitles USERNAME PASSWORD
-                                      Opensubtitles configuration.
+                                      OpenSubtitles configuration.
       --cache-dir DIRECTORY           Path to the cache directory.  [default:
                                       ~/.config/subliminal]
       --debug                         Print useful information for debugging subliminal and for

@@ -100,14 +100,14 @@ class OpenSubtitlesProvider(Provider):
         if username and not password or not username and password:
             raise ConfigurationError('Username and password must be specified')
         # None values not allowed for logging in, so replace it by ''
-        self.username = username if username else ''
-        self.password = password if password else ''
+        self.username = username or ''
+        self.password = password or ''
         self.token = None
 
     def initialize(self):
         logger.info('Logging in')
-        response = checked(
-            self.server.LogIn(self.username, self.password, 'eng', 'subliminal v%s' % get_version(__version__)))
+        response = checked(self.server.LogIn(self.username, self.password, 'eng',
+                                             'subliminal v%s' % get_version(__version__)))
         self.token = response['token']
         logger.debug('Logged in with token %r', self.token)
 

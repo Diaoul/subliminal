@@ -115,6 +115,7 @@ class OpenSubtitlesProvider(Provider):
         logger.info('Logging out')
         checked(self.server.LogOut(self.token))
         self.server.close()
+        self.token = None
         logger.debug('Logged out')
 
     def no_operation(self):

@@ -27,7 +27,7 @@ class PyTest(TestCommand):
         sys.exit(errno)
 
 # requirements
-install_requirements = ['guessit>=0.9.1', 'babelfish>=0.5.2', 'enzyme>=0.4.1', 'beautifulsoup4>=4.2.0',
+install_requirements = ['guessit>=0.10.3', 'babelfish>=0.5.2', 'enzyme>=0.4.1', 'beautifulsoup4>=4.2.0',
                         'requests>=2.0', 'click>=4.0', 'dogpile.cache>=0.5.4', 'stevedore>=1.0.0',
                         'chardet>=2.3.0', 'pysrt>=1.0.1', 'six>=1.9.0']
 

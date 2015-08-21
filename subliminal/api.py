@@ -189,7 +189,7 @@ class ProviderPool(object):
         for subtitle, score in scored_subtitles:
             # check score
             if score < min_score:
-                logger.info('Score %d is below min_score (%d)', (score, min_score))
+                logger.info('Score %d is below min_score (%d)', score, min_score)
                 break
 
             # check downloaded languages

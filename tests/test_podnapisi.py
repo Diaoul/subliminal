@@ -9,6 +9,7 @@ from subliminal.providers.podnapisi import PodnapisiProvider, PodnapisiSubtitle
 
 
 vcr = VCR(path_transformer=lambda path: path + '.yaml',
+          record_mode=os.environ.get('VCR_RECORD_MODE', 'once'),
           cassette_library_dir=os.path.join('tests', 'cassettes', 'podnapisi'))
 
 

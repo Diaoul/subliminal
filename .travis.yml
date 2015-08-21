@@ -12,12 +12,14 @@ env:
   - PARSER=lxml
 
 matrix:
-  allow_failures:
+  include:
     - python: "3.4"
       env:
         - PARSER=native
         - VCR_RECORD_MODE=all
         - PYTEST_ADDOPTS="-m integration"
+  allow_failures:
+    - env: VCR_RECORD_MODE=all
 
 cache:
   directories:

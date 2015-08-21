@@ -11,6 +11,14 @@ env:
   - PARSER=native
   - PARSER=lxml
 
+matrix:
+  allow_failures:
+    - python: "3.4"
+      env:
+        - PARSER=native
+        - VCR_RECORD_MODE=all
+        - PYTEST_ADDOPTS="-m integration"
+
 cache:
   directories:
     - $HOME/.cache/pip

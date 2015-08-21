@@ -34,6 +34,6 @@ install:
   - if [ $PARSER = "lxml" ]; then pip install lxml; fi
   - pip install coveralls
 
-script: python setup.py test -a "--cov subliminal --verbose"
+script: python setup.py test -a "--cov subliminal --verbose $PYTEST_ADDOPTS"
 
 after_success: coveralls

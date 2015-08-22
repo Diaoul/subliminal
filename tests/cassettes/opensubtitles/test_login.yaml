@@ -1,0 +1,76 @@
+interactions:
+- request:
+    body: '<?xml version=''1.0''?>
+
+      <methodCall>
+
+      <methodName>LogIn</methodName>
+
+      <params>
+
+      <param>
+
+      <value><string>python-subliminal</string></value>
+
+      </param>
+
+      <param>
+
+      <value><string>subliminal</string></value>
+
+      </param>
+
+      <param>
+
+      <value><string>eng</string></value>
+
+      </param>
+
+      <param>
+
+      <value><string>subliminal v1.0</string></value>
+
+      </param>
+
+      </params>
+
+      </methodCall>
+
+      '
+    headers:
+      Accept-Encoding: [gzip]
+      Content-Length: ['344']
+      Content-Type: [text/xml]
+      User-Agent: [xmlrpclib.py/1.0.1 (by www.pythonware.com)]
+    method: POST
+    uri: https://api.opensubtitles.org/xml-rpc
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA6WRTQrCMBCF954idK9J6u9iGg/gQvAGaTNqsUlKforHt9ZARUQFd98M8+Y9ZmB7
+        1Q3p0PnamiLjM5YRNJVVtTkVWQzH6SbbigloDGerDuhbazz2jVY6qb2YkAf1QKCTTcQ7EfDBxSoM
+        THqxLtE9CgJGahTBXtAAHTj1R3Va0EcQ+TnPmeSdqXERT63ibs3nS161c6BpJMnpkx7os+U7fx9k
+        iP6XAIyR/e5PM6ysUR/dlI1lg4LNGF8BTdU3syFVOvM4BTR9JIG/0+v/bvJ249n4AQAA
+    headers:
+      accept-ranges: [bytes]
+      access-control-allow-headers: ['Origin, X-Requested-With, Content-Type, Accept']
+      access-control-allow-origin: ['*']
+      age: ['0']
+      cache-control: ['no-store, no-cache, must-revalidate, post-check=0, pre-check=0']
+      content-encoding: [gzip]
+      content-length: ['222']
+      content-type: [text/xml;charset=UTF-8]
+      date: ['Fri, 24 Jul 2015 22:13:11 GMT']
+      expires: ['Thu, 19 Nov 1981 08:52:00 GMT']
+      pragma: [no-cache]
+      server: [lighttpd/1.4.35]
+      set-cookie: [PHPSESSID=2h220a1vnie4ugpd1r71351cp3; path=/; domain=.opensubtitles.org,
+        'weblang=en; expires=Sat, 23-Jul-2016 22:13:11 GMT; Max-Age=31536000; path=/;
+          domain=.opensubtitles.org']
+      strict-transport-security: [max-age=63072000; includeSubdomains; preload]
+      x-cache: [MISS]
+      x-cache-backend: [web3]
+      x-content-type-options: [nosniff]
+      x-frame-options: [DENY]
+    status: {code: 200, message: OK}
+version: 1

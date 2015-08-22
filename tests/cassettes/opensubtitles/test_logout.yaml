@@ -1,0 +1,174 @@
+interactions:
+- request:
+    body: '<?xml version=''1.0''?>
+
+      <methodCall>
+
+      <methodName>LogIn</methodName>
+
+      <params>
+
+      <param>
+
+      <value><string>python-subliminal</string></value>
+
+      </param>
+
+      <param>
+
+      <value><string>subliminal</string></value>
+
+      </param>
+
+      <param>
+
+      <value><string>eng</string></value>
+
+      </param>
+
+      <param>
+
+      <value><string>subliminal v1.0</string></value>
+
+      </param>
+
+      </params>
+
+      </methodCall>
+
+      '
+    headers:
+      Accept-Encoding: [gzip]
+      Content-Length: ['344']
+      Content-Type: [text/xml]
+      User-Agent: [xmlrpclib.py/1.0.1 (by www.pythonware.com)]
+    method: POST
+    uri: https://api.opensubtitles.org/xml-rpc
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA6WRywoCMQxF935Fmb22PmAUYv0AF4J/UNv4wD7GphU/33EsKCIquDsJubmXBBYX
+        Z9kZIx2Cn1fDgagYeh3Mwe/mVU7b/rRayB44TPtg1khN8IRto1FROZI9dqcWGJyVzXgjBpRi1qlj
+        1ordBuO9YOCVQ5nCET3wjkv/oS4L2ghyYus6isbv9dBlbXWtTH2aUcgT4GWkyPmTHviz5Tt/Sipl
+        +iHASAi2Wv5phjp489HNhLyxKMVAjIGX4ptXF6pc+TEFvDykAN3o9X1XPafk+fcBAAA=
+    headers:
+      accept-ranges: [bytes]
+      access-control-allow-headers: ['Origin, X-Requested-With, Content-Type, Accept']
+      access-control-allow-origin: ['*']
+      age: ['0']
+      cache-control: ['no-store, no-cache, must-revalidate, post-check=0, pre-check=0']
+      content-encoding: [gzip]
+      content-length: ['221']
+      content-type: [text/xml;charset=UTF-8]
+      date: ['Fri, 24 Jul 2015 22:13:12 GMT']
+      expires: ['Thu, 19 Nov 1981 08:52:00 GMT']
+      pragma: [no-cache]
+      server: [lighttpd/1.4.35]
+      set-cookie: [PHPSESSID=4l77r0pnhc1muclc7ad7q9sou4; path=/; domain=.opensubtitles.org,
+        'weblang=en; expires=Sat, 23-Jul-2016 22:13:12 GMT; Max-Age=31536000; path=/;
+          domain=.opensubtitles.org']
+      strict-transport-security: [max-age=63072000; includeSubdomains; preload]
+      x-cache: [MISS]
+      x-cache-backend: [web3]
+      x-content-type-options: [nosniff]
+      x-frame-options: [DENY]
+    status: {code: 200, message: OK}
+- request:
+    body: '<?xml version=''1.0''?>
+
+      <methodCall>
+
+      <methodName>LogOut</methodName>
+
+      <params>
+
+      <param>
+
+      <value><string>4l77r0pnhc1muclc7ad7q9sou4</string></value>
+
+      </param>
+
+      </params>
+
+      </methodCall>
+
+      '
+    headers:
+      Accept-Encoding: [gzip]
+      Content-Length: ['176']
+      Content-Type: [text/xml]
+      User-Agent: [xmlrpclib.py/1.0.1 (by www.pythonware.com)]
+    method: POST
+    uri: https://api.opensubtitles.org/xml-rpc
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA4WQTQ6CMBCF95yi6V5ajAsXQzmACxNvUOioJLQl/SEe3wJNIMbo7nudN/OmA81L
+        D2RC53tralqVnBI0nVW9edQ0hvvhTBtRgMbwtOqGfrTGY3oYpZPai4KslIDAJIeIMxHwwcUuLExS
+        s27RrYKAkRqFDzJED2wRubC15wlpB3HknFwvwLLMVrbzAtvP/xqGnTXqZ5qysR1Q8JJXJ2BZ/Qtb
+        tsrf3FzA8kUy+Jk+7/cG04NHWngBAAA=
+    headers:
+      accept-ranges: [bytes]
+      access-control-allow-headers: ['Origin, X-Requested-With, Content-Type, Accept']
+      access-control-allow-origin: ['*']
+      age: ['0']
+      cache-control: ['no-store, no-cache, must-revalidate, post-check=0, pre-check=0']
+      content-encoding: [gzip]
+      content-length: ['194']
+      content-type: [text/xml;charset=UTF-8]
+      date: ['Fri, 24 Jul 2015 22:13:12 GMT']
+      expires: ['Thu, 19 Nov 1981 08:52:00 GMT']
+      pragma: [no-cache]
+      server: [lighttpd/1.4.35]
+      set-cookie: [PHPSESSID=4l77r0pnhc1muclc7ad7q9sou4; path=/; domain=.opensubtitles.org]
+      strict-transport-security: [max-age=63072000; includeSubdomains; preload]
+      x-cache: [MISS]
+      x-cache-backend: [web3]
+      x-content-type-options: [nosniff]
+      x-frame-options: [DENY]
+    status: {code: 200, message: OK}
+- request:
+    body: '<?xml version=''1.0''?>
+
+      <methodCall>
+
+      <methodName>close</methodName>
+
+      <params>
+
+      </params>
+
+      </methodCall>
+
+      '
+    headers:
+      Accept-Encoding: [gzip]
+      Content-Length: ['99']
+      Content-Type: [text/xml]
+      User-Agent: [xmlrpclib.py/1.0.1 (by www.pythonware.com)]
+    method: POST
+    uri: https://api.opensubtitles.org/xml-rpc
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA4WQTQrCMBCF9z3F0L1NBEGFaXoCN94gbaZaaJKSn+Lx7U+gRUR335vJmzcZrF66
+        h5Gc76wp82PBcyDTWNWZR5nH0B4ueSUy1BSeVt3JD9Z4mgqDdFJ7kcFKEwCOso80E6APLjZhYZjM
+        uia3CkAjNQkfZIge2SJSY7OnCdMO4sSvcFvCwdgArY1GIUvNZGQ7J7J92tdoaqxRP7OVjXVPghec
+        n5El9S9s2Sp9enuFLN0ngZ/p85pvZO5o2IYBAAA=
+    headers:
+      accept-ranges: [bytes]
+      access-control-allow-headers: ['Origin, X-Requested-With, Content-Type, Accept']
+      access-control-allow-origin: ['*']
+      age: ['0']
+      content-encoding: [gzip]
+      content-length: ['200']
+      content-type: [text/xml;charset=UTF-8]
+      date: ['Fri, 24 Jul 2015 22:13:12 GMT']
+      server: [lighttpd/1.4.35]
+      strict-transport-security: [max-age=63072000; includeSubdomains; preload]
+      x-cache: [MISS]
+      x-cache-backend: [web3]
+      x-content-type-options: [nosniff]
+      x-frame-options: [DENY]
+    status: {code: 200, message: OK}
+version: 1

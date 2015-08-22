@@ -13,13 +13,15 @@ subliminal
       Subtitles, faster than your thoughts.
 
     Options:
-      --addic7ed USERNAME PASSWORD  Addic7ed configuration.
-      --cache-dir DIRECTORY         Path to the cache directory.  [default:
-                                    ~/.config/subliminal]
-      --debug                       Print useful information for debugging subliminal and for
-                                    reporting bugs.
-      --version                     Show the version and exit.
-      --help                        Show this message and exit.
+      --addic7ed USERNAME PASSWORD    Addic7ed configuration.
+      --opensubtitles USERNAME PASSWORD
+                                      OpenSubtitles configuration.
+      --cache-dir DIRECTORY           Path to the cache directory.  [default:
+                                      ~/.config/subliminal]
+      --debug                         Print useful information for debugging subliminal and for
+                                      reporting bugs.
+      --version                       Show the version and exit.
+      --help                          Show this message and exit.
 
     Commands:
       cache     Cache management.

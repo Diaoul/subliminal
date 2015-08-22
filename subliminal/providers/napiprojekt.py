@@ -80,7 +80,7 @@ class NapiProjektProvider(Provider):
 
         subtitle = NapiProjektSubtitle(language, file_hash)
         subtitle.content = response.content
-        logger.info('Found subtitle %r', subtitle)
+        logger.debug('Found subtitle %r', subtitle)
         return subtitle
 
     def list_subtitles(self, video, languages):

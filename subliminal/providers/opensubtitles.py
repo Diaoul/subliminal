@@ -147,7 +147,7 @@ class OpenSubtitlesProvider(Provider):
 
         # exit if no data
         if not response['data']:
-            logger.info('No subtitles found')
+            logger.debug('No subtitles found')
             return subtitles
 
         # loop over subtitle items

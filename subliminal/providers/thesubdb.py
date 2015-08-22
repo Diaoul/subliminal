@@ -65,7 +65,7 @@ class TheSubDBProvider(Provider):
             language = Language.fromalpha2(language_code)
 
             subtitle = TheSubDBSubtitle(language, hash)
-            logger.info('Found subtitle %r', subtitle)
+            logger.debug('Found subtitle %r', subtitle)
             subtitles.append(subtitle)
 
         return subtitles

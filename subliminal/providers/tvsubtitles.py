@@ -180,7 +180,7 @@ class TVsubtitlesProvider(Provider):
 
             subtitle = TVsubtitlesSubtitle(language, page_link, subtitle_id, series, season, episode, year, rip,
                                            release)
-            logger.info('Found subtitle %s', subtitle)
+            logger.debug('Found subtitle %s', subtitle)
             subtitles.append(subtitle)
 
         return subtitles

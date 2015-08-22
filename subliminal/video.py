@@ -307,6 +307,7 @@ def scan_video(path, subtitles=True, embedded_subtitles=True):
         logger.debug('Size is %d', video.size)
         video.hashes['opensubtitles'] = hash_opensubtitles(path)
         video.hashes['thesubdb'] = hash_thesubdb(path)
+        video.hashes['napiprojekt'] = hash_napiprojekt(path)
         logger.debug('Computed hashes %r', video.hashes)
     else:
         logger.warning('Size is lower than 10MB: hashes not computed')
@@ -513,4 +514,18 @@ def hash_thesubdb(video_path):
         f.seek(-readsize, os.SEEK_END)
         data += f.read(readsize)
 
+    return hashlib.md5(data).hexdigest()
+
+
+def hash_napiprojekt(video_path):
+    """Compute a hash using NapiProjekt's algorithm.
+
+    :param str video_path: path of the video.
+    :return: the hash.
+    :rtype: str
+
+    """
+    readsize = 1024 * 1024 * 10
+    with open(video_path, 'rb') as f:
+        data = f.read(readsize)
     return hashlib.md5(data).hexdigest()

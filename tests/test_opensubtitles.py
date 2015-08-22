@@ -9,6 +9,7 @@ from vcr import VCR
 from subliminal.exceptions import ConfigurationError
 from subliminal.providers.opensubtitles import OpenSubtitlesProvider, OpenSubtitlesSubtitle, Unauthorized
 
+
 vcr = VCR(path_transformer=lambda path: path + '.yaml',
           match_on=['method', 'scheme', 'host', 'port', 'path', 'query', 'body'],
           cassette_library_dir=os.path.join('tests', 'cassettes', 'opensubtitles'))

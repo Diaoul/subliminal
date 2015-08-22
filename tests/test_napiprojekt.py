@@ -6,8 +6,7 @@ from babelfish import Language
 import pytest
 from vcr import VCR
 
-from subliminal.providers.napiprojekt import (
-    NapiProjektProvider, NapiProjektSubtitle)
+from subliminal.providers.napiprojekt import NapiProjektProvider, NapiProjektSubtitle
 
 
 vcr = VCR(path_transformer=lambda path: path + '.yaml',
@@ -41,8 +40,7 @@ def test_query(movies):
 @vcr.use_cassette
 def test_query_wrong_hash():
     with NapiProjektProvider() as provider:
-        subtitle = provider.query(
-            Language('pol'), 'abcdabdcabcd1234abcd1234abcd123')
+        subtitle = provider.query(Language('pol'), 'abcdabdcabcd1234abcd1234abcd123')
     assert subtitle is None
 
 

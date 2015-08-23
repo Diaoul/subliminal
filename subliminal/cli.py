@@ -3,13 +3,12 @@
 Subliminal uses `click <http://click.pocoo.org>`_ to provide a powerful :abbr:`CLI (command-line interface)`.
 
 """
-from __future__ import unicode_literals, division
+from __future__ import division
 from collections import defaultdict
 from datetime import timedelta
 import logging
 import os
 import re
-import sys
 
 from babelfish import Error as BabelfishError, Language
 import click
@@ -41,22 +40,6 @@ class MutexLock(AbstractFileLock):
 
     def release_write_lock(self):
         return self.mutex.release_write_lock()
-
-
-class StringPath(click.Path):
-    """A :class:`~click.Path` as :class:`str`."""
-    def convert(self, value, param, ctx):
-        if isinstance(value, bytes):
-            try:
-                enc = getattr(sys.stdin, 'encoding', None)
-                if enc is not None:
-                    value = value.decode(enc)
-            except UnicodeDecodeError:
-                try:
-                    value = value.decode(click.utils.get_filesystem_encoding())
-                except UnicodeDecodeError:
-                    self.fail('%s is not a correctly encoded path' % value.decode('utf-8', 'replace'))
-        return super(StringPath, self).convert(value, param, ctx)
 
 
 class LanguageParamType(click.ParamType):
@@ -172,7 +155,7 @@ def cache(ctx, clear_subliminal):
 @click.option('-m', '--min-score', type=click.IntRange(0, 100), default=0, help='Minimum score for a subtitle '
               'to be downloaded (0 to 100).')
 @click.option('-v', '--verbose', count=True, help='Increase verbosity.')
-@click.argument('path', type=StringPath(), required=True, nargs=-1)
+@click.argument('path', type=click.Path(), required=True, nargs=-1)
 @click.pass_obj
 def download(obj, provider, language, age, directory, encoding, single, force, hearing_impaired, min_score, verbose,
              path):

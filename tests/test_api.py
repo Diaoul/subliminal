@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
 from datetime import timedelta
 import io
 import os
@@ -277,7 +276,7 @@ def test_save_subtitles(movies, tmpdir, monkeypatch):
 
 def test_save_subtitles_single_directory_encoding(movies, tmpdir):
     subtitle = Subtitle(Language('jpn'))
-    subtitle.content = 'ハローワールド'.encode('shift-jis')
+    subtitle.content = u'ハローワールド'.encode('shift-jis')
     subtitle_pt_br = Subtitle(Language('por', 'BR'))
     subtitle_pt_br.content = b'Some brazilian content'
     subtitles = [subtitle, subtitle_pt_br]
@@ -287,4 +286,4 @@ def test_save_subtitles_single_directory_encoding(movies, tmpdir):
     # first subtitle only and correctly encoded
     path = os.path.join(str(tmpdir), os.path.splitext(os.path.split(movies['man_of_steel'].name)[1])[0] + '.srt')
     assert os.path.exists(path)
-    assert io.open(path, encoding='utf-8').read() == 'ハローワールド'
+    assert io.open(path, encoding='utf-8').read() == u'ハローワールド'

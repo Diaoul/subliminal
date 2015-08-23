@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
 from io import BytesIO
 import os
 from zipfile import ZipFile

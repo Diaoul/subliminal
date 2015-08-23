@@ -1,7 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
-
 class Error(Exception):
     """Base class for exceptions in subliminal."""
     pass

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals, division
+from __future__ import division
 from datetime import datetime, timedelta
 import hashlib
 import logging
@@ -248,11 +248,6 @@ def search_external_subtitles(path):
     fileroot, fileext = os.path.splitext(filename)
     subtitles = {}
     for p in os.listdir(dirpath):
-        # skip badly encoded filenames
-        if isinstance(p, bytes):  # pragma: no cover
-            logger.error('Skipping badly encoded filename %r in %r', p.decode('utf-8', errors='replace'), dirpath)
-            continue
-
         # keep only valid subtitle filenames
         if not p.startswith(fileroot) or not p.endswith(SUBTITLE_EXTENSIONS):
             continue
@@ -414,31 +409,16 @@ def scan_videos(path, subtitles=True, embedded_subtitles=True):
     # walk the path
     videos = []
     for dirpath, dirnames, filenames in os.walk(path):
-        # skip badly encoded directory names
-        if isinstance(dirpath, bytes):  # pragma: no cover
-            logger.error('Skipping badly encoded directory %r', dirpath.decode('utf-8', errors='replace'))
-            continue
-
         logger.debug('Walking directory %s', dirpath)
 
         # remove badly encoded and hidden dirnames
         for dirname in list(dirnames):
-            if isinstance(dirname, bytes):  # pragma: no cover
-                logger.error('Skipping badly encoded dirname %r in %r', dirname.decode('utf-8', errors='replace'),
-                             dirpath)
-                dirnames.remove(dirname)
-            elif dirname.startswith('.'):
+            if dirname.startswith('.'):
                 logger.debug('Skipping hidden dirname %r in %r', dirname, dirpath)
                 dirnames.remove(dirname)
 
         # scan for videos
         for filename in filenames:
-            # skip badly encoded filenames
-            if isinstance(filename, bytes):  # pragma: no cover
-                logger.error('Skipping badly encoded filename %r in %r', filename.decode('utf-8', errors='replace'),
-                             dirpath)
-                continue
-
             # filter on videos
             if not filename.endswith(VIDEO_EXTENSIONS):
                 continue

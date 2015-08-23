@@ -32,7 +32,7 @@ The :meth:`Subtitle.get_matches <subliminal.subtitle.Subtitle.get_matches>` meth
 :func:`~subliminal.subtitle.compute_score` computes the score.
 
 """
-from __future__ import unicode_literals, print_function
+from __future__ import print_function
 
 from sympy import Eq, solve, symbols
 

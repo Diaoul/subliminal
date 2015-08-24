@@ -19,7 +19,11 @@ matrix:
         - VCR_RECORD_MODE=all
         - PYTEST_ADDOPTS="-m integration"
   allow_failures:
-    - env: VCR_RECORD_MODE=all
+    - python: "3.4"
+      env:
+        - PARSER=native
+        - VCR_RECORD_MODE=all
+        - PYTEST_ADDOPTS="-m integration"
 
 cache:
   directories:

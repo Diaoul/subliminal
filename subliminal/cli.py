@@ -6,6 +6,7 @@ Subliminal uses `click <http://click.pocoo.org>`_ to provide a powerful :abbr:`C
 from __future__ import division
 from collections import defaultdict
 from datetime import timedelta
+import json
 import logging
 import os
 import re
@@ -14,6 +15,7 @@ from babelfish import Error as BabelfishError, Language
 import click
 from dogpile.cache.backends.file import AbstractFileLock
 from dogpile.core import ReadWriteMutex
+from six.moves import configparser
 
 from subliminal import (Episode, Movie, ProviderPool, Video, __version__, check_video, provider_manager, region,
                         save_subtitles, scan_video, scan_videos)
@@ -40,6 +42,115 @@ class MutexLock(AbstractFileLock):
 
     def release_write_lock(self):
         return self.mutex.release_write_lock()
+
+
+class Config(object):
+    """A :class:`~configparser.SafeConfigParser` wrapper to store configuration.
+
+    Interaction with the configuration is done with the properties.
+
+    :param str path: path to the configuration file.
+
+    """
+    def __init__(self, path):
+        #: Path to the configuration file
+        self.path = path
+
+        #: The underlying configuration object
+        self.config = configparser.SafeConfigParser()
+        self.config.add_section('general')
+        self.config.set('general', 'languages', json.dumps(['en']))
+        self.config.set('general', 'providers', json.dumps(sorted([p.name for p in provider_manager])))
+        self.config.set('general', 'single', str(0))
+        self.config.set('general', 'embedded_subtitles', str(1))
+        self.config.set('general', 'age', str(int(timedelta(weeks=2).total_seconds())))
+        self.config.set('general', 'hearing_impaired', str(1))
+        self.config.set('general', 'min_score', str(0))
+
+    def read(self):
+        """Read the configuration from :attr:`path`"""
+        self.config.read(self.path)
+
+    def write(self):
+        """Write the configuration to :attr:`path`"""
+        with open(self.path, 'w') as f:
+            self.config.write(f)
+
+    @property
+    def languages(self):
+        return {Language.fromietf(l) for l in json.loads(self.config.get('general', 'languages'))}
+
+    @languages.setter
+    def languages(self, value):
+        self.config.set('general', 'languages', json.dumps(sorted([str(l) for l in value])))
+
+    @property
+    def providers(self):
+        return json.loads(self.config.get('general', 'providers'))
+
+    @providers.setter
+    def providers(self, value):
+        self.config.set('general', 'providers', json.dumps(sorted([p.lower() for p in value])))
+
+    @property
+    def single(self):
+        return self.config.getboolean('general', 'single')
+
+    @single.setter
+    def single(self, value):
+        self.config.set('general', 'single', str(int(value)))
+
+    @property
+    def embedded_subtitles(self):
+        return self.config.getboolean('general', 'embedded_subtitles')
+
+    @embedded_subtitles.setter
+    def embedded_subtitles(self, value):
+        self.config.set('general', 'embedded_subtitles', str(int(value)))
+
+    @property
+    def age(self):
+        return timedelta(seconds=self.config.getint('general', 'age'))
+
+    @age.setter
+    def age(self, value):
+        self.config.set('general', 'age', str(int(value.total_seconds())))
+
+    @property
+    def hearing_impaired(self):
+        return self.config.getboolean('general', 'hearing_impaired')
+
+    @hearing_impaired.setter
+    def hearing_impaired(self, value):
+        self.config.set('general', 'hearing_impaired', str(int(value)))
+
+    @property
+    def min_score(self):
+        return self.config.getfloat('general', 'min_score')
+
+    @min_score.setter
+    def min_score(self, value):
+        self.config.set('general', 'min_score', str(value))
+
+    @property
+    def provider_configs(self):
+        rv = {}
+        for provider in provider_manager:
+            if self.config.has_section(provider.name):
+                rv[provider.name] = {k: v for k, v in self.config.items(provider.name)}
+        return rv
+
+    @provider_configs.setter
+    def provider_configs(self, value):
+        # loop over provider configurations
+        for provider, config in value.items():
+            # create the corresponding section if necessary
+            if not self.config.has_section(provider):
+                self.config.add_section(provider)
+
+            # add config options
+            for k, v in config.items():
+                self.config.set(provider, k, v)
 
 
 class LanguageParamType(click.ParamType):

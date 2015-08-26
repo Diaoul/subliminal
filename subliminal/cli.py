@@ -195,7 +195,9 @@ AGE = AgeParamType()
 
 PROVIDER = click.Choice(sorted(provider_manager.names()))
 
-subliminal_cache = 'subliminal.dbm'
+app_dir = click.get_app_dir('subliminal')
+cache_file = 'subliminal.dbm'
+config_file = 'config.ini'
 
 
 @click.group(context_settings={'max_content_width': 100}, epilog='Suggestions and bug reports are greatly appreciated: '
@@ -204,7 +206,7 @@ subliminal_cache = 'subliminal.dbm'
 @click.option('--opensubtitles', type=click.STRING, nargs=2, metavar='USERNAME PASSWORD',
               help='OpenSubtitles configuration.')
 @click.option('--cache-dir', type=click.Path(writable=True, resolve_path=True, file_okay=False),
-              default=click.get_app_dir('subliminal'), show_default=True, expose_value=True,
+              default=app_dir, show_default=True, expose_value=True,
               help='Path to the cache directory.')
 @click.option('--debug', is_flag=True, help='Print useful information for debugging subliminal and for reporting bugs.')
 @click.version_option(__version__)
@@ -220,7 +222,7 @@ def subliminal(ctx, addic7ed, opensubtitles, cache_dir, debug):
 
     # configure cache
     region.configure('dogpile.cache.dbm', expiration_time=timedelta(days=30),
-                     arguments={'filename': os.path.join(cache_dir, subliminal_cache), 'lock_factory': MutexLock})
+                     arguments={'filename': os.path.join(cache_dir, cache_file), 'lock_factory': MutexLock})
 
     # configure logging
     if debug:
@@ -244,7 +246,7 @@ def subliminal(ctx, addic7ed, opensubtitles, cache_dir, debug):
 def cache(ctx, clear_subliminal):
     """Cache management."""
     if clear_subliminal:
-        os.remove(os.path.join(ctx.parent.params['cache_dir'], subliminal_cache))
+        os.remove(os.path.join(ctx.parent.params['cache_dir'], cache_file))
         click.echo('Subliminal\'s cache cleared.')
     else:
         click.echo('Nothing done.')

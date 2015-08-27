@@ -8,8 +8,8 @@ import os
 
 from babelfish import Language
 from gi.repository import GObject, Gtk, Nautilus
-from subliminal import (VIDEO_EXTENSIONS, ProviderPool, __copyright__, __version__, check_video, provider_manager, region, save_subtitles, scan_video,
-                        scan_videos, compute_score)
+from subliminal import (VIDEO_EXTENSIONS, ProviderPool, __copyright__, __version__, check_video, compute_score,
+                        provider_manager, region, save_subtitles, scan_video, scan_videos)
 from subliminal.cli import Config, MutexLock, app_dir, cache_file, config_file
 
 locale.bindtextdomain('subliminal', os.path.join(os.path.dirname(__file__), 'subliminal', 'locale'))

@@ -1,76 +1,48 @@
 interactions:
 - request:
-    body: '<?xml version=''1.0''?>
-
-      <methodCall>
-
-      <methodName>LogIn</methodName>
-
-      <params>
-
-      <param>
-
-      <value><string>python-subliminal</string></value>
-
-      </param>
-
-      <param>
-
-      <value><string>subliminal</string></value>
-
-      </param>
-
-      <param>
-
-      <value><string>eng</string></value>
-
-      </param>
-
-      <param>
-
-      <value><string>subliminal v1.0</string></value>
-
-      </param>
-
-      </params>
-
-      </methodCall>
-
-      '
+    body: !!binary |
+      PD94bWwgdmVyc2lvbj0nMS4wJz8+CjxtZXRob2RDYWxsPgo8bWV0aG9kTmFtZT5Mb2dJbjwvbWV0
+      aG9kTmFtZT4KPHBhcmFtcz4KPHBhcmFtPgo8dmFsdWU+PHN0cmluZz5weXRob24tc3VibGltaW5h
+      bDwvc3RyaW5nPjwvdmFsdWU+CjwvcGFyYW0+CjxwYXJhbT4KPHZhbHVlPjxzdHJpbmc+c3VibGlt
+      aW5hbDwvc3RyaW5nPjwvdmFsdWU+CjwvcGFyYW0+CjxwYXJhbT4KPHZhbHVlPjxzdHJpbmc+ZW5n
+      PC9zdHJpbmc+PC92YWx1ZT4KPC9wYXJhbT4KPHBhcmFtPgo8dmFsdWU+PHN0cmluZz5zdWJsaW1p
+      bmFsIHYxLjE8L3N0cmluZz48L3ZhbHVlPgo8L3BhcmFtPgo8L3BhcmFtcz4KPC9tZXRob2RDYWxs
+      Pgo=
     headers:
       Accept-Encoding: [gzip]
       Content-Length: ['344']
       Content-Type: [text/xml]
-      User-Agent: [xmlrpclib.py/1.0.1 (by www.pythonware.com)]
+      User-Agent: [Python-xmlrpc/3.4]
     method: POST
     uri: https://api.opensubtitles.org/xml-rpc
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAA6WRTQrCMBCF954idK9J6u9iGg/gQvAGaTNqsUlKforHt9ZARUQFd98M8+Y9ZmB7
-        1Q3p0PnamiLjM5YRNJVVtTkVWQzH6SbbigloDGerDuhbazz2jVY6qb2YkAf1QKCTTcQ7EfDBxSoM
-        THqxLtE9CgJGahTBXtAAHTj1R3Va0EcQ+TnPmeSdqXERT63ibs3nS161c6BpJMnpkx7os+U7fx9k
-        iP6XAIyR/e5PM6ysUR/dlI1lg4LNGF8BTdU3syFVOvM4BTR9JIG/0+v/bvJ249n4AQAA
+        H4sIAAAAAAAAA6WR3YoCMQyF732KMvfaKuIqxPoAXgi+QWeanYrTRPojPr7jWFBk0QXvvoScnEMC
+        m4vvxBlDPDCtq+lEVQKpYXugdl3l9DteVhs9Ao/Jsd1jPDFF7BsnE4yPeiTu1IOAs+ky3khATCE3
+        aWDRi32N4V4IIONRJz4igRy49B/qsqCPoE1euB9GWjlHtqbELecmuGM7B1lGilw+6UE+W/7lH5NJ
+        Of4jwEwpsdt+aYYNk33rZjnXHWo1UWoFslSfzIZU5cyPKZDlIwXijV7/dwW9YN24+AEAAA==
     headers:
-      accept-ranges: [bytes]
-      access-control-allow-headers: ['Origin, X-Requested-With, Content-Type, Accept']
-      access-control-allow-origin: ['*']
-      age: ['0']
-      cache-control: ['no-store, no-cache, must-revalidate, post-check=0, pre-check=0']
-      content-encoding: [gzip]
-      content-length: ['222']
-      content-type: [text/xml;charset=UTF-8]
-      date: ['Fri, 24 Jul 2015 22:13:11 GMT']
-      expires: ['Thu, 19 Nov 1981 08:52:00 GMT']
-      pragma: [no-cache]
-      server: [lighttpd/1.4.35]
-      set-cookie: [PHPSESSID=2h220a1vnie4ugpd1r71351cp3; path=/; domain=.opensubtitles.org,
-        'weblang=en; expires=Sat, 23-Jul-2016 22:13:11 GMT; Max-Age=31536000; path=/;
-          domain=.opensubtitles.org']
-      strict-transport-security: [max-age=63072000; includeSubdomains; preload]
-      x-cache: [MISS]
-      x-cache-backend: [web3]
-      x-content-type-options: [nosniff]
-      x-frame-options: [DENY]
+      Accept-Ranges: [bytes]
+      Access-Control-Allow-Headers: ['Origin, X-Requested-With, Content-Type, Accept']
+      Access-Control-Allow-Origin: ['*']
+      Age: ['0']
+      Cache-Control: ['no-store, no-cache, must-revalidate, post-check=0, pre-check=0']
+      Content-Encoding: [gzip]
+      Content-Length: ['223']
+      Content-type: [text/xml;charset=UTF-8]
+      Date: ['Thu, 27 Aug 2015 15:34:25 GMT']
+      Expires: ['Thu, 19 Nov 1981 08:52:00 GMT']
+      Pragma: [no-cache]
+      Server: [lighttpd/1.4.36]
+      Set-Cookie: ['weblang=en; expires=Fri, 26-Aug-2016 15:34:25 GMT; Max-Age=31536000;
+          path=/; domain=.opensubtitles.org', PHPSESSID=au6h7oen9hhndbntogoucrhkg4;
+          path=/; domain=.opensubtitles.org]
+      Strict-Transport-Security: [max-age=63072000; includeSubdomains; preload]
+      X-Cache: [MISS]
+      X-Cache-Backend: [web3]
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [DENY]
+      X-Uncompressed-Content-Length: ['504']
     status: {code: 200, message: OK}
 version: 1

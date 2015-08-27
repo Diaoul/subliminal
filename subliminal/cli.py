@@ -262,7 +262,7 @@ def cache(ctx, clear_subliminal):
 @click.option('-e', '--encoding', type=click.STRING, metavar='ENC', help='Subtitle file encoding, default is to '
               'preserve original encoding.')
 @click.option('-s', '--single', is_flag=True, default=False, help='Save subtitle without language code in the file '
-              'name, i.e. use .srt extension.')
+              'name, i.e. use .srt extension. Do not use this unless your media player requires it.')
 @click.option('-f', '--force', is_flag=True, default=False, help='Force download even if a subtitle already exist.')
 @click.option('-hi', '--hearing-impaired', is_flag=True, default=False, help='Prefer hearing impaired subtitles.')
 @click.option('-m', '--min-score', type=click.IntRange(0, 100), default=0, help='Minimum score for a subtitle '

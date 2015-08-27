@@ -236,9 +236,10 @@ Author: Antoine Bertin
               <object class="GtkLabel" id="single_label">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="tooltip_text" translatable="yes">Do not use this unless your media player requires it</property>
                 <property name="halign">start</property>
-                <property name="label" translatable="yes">Single file download (.srt) i.e. without language
-in extension (not .en.srt)</property>
+                <property name="label" translatable="yes">Save subtitle without language code in the filename
+i.e. use .srt extension</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>

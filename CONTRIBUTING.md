@@ -12,3 +12,7 @@ Pull Requests
 -------------
 You can contribute code and documentation with pull requests. Any code contribution must be unit tested and the pull
 request open against the *develop* branch.
+
+Translations
+------------
+Contribution to translations can be made on [subliminal's transifex page](https://www.transifex.com/subliminal/subliminal/)

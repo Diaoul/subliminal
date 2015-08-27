@@ -37,7 +37,7 @@ class ChooseHandler(object):
     def __init__(self, config, video, subtitles):
         self.config = config
         self.video = video
-        self.subtitles = {s.id: s for s in subtitles}
+        self.subtitles = {s.provider_name + '-' + s.id: s for s in subtitles}
 
     def on_subtitles_treeview_row_activated(self, treeview, path, view_column):
         model = treeview.get_model()
@@ -48,7 +48,7 @@ class ChooseHandler(object):
             return
 
         # get the subtitle object
-        subtitle = self.subtitles[model.get_value(iter, 0)]
+        subtitle = self.subtitles[model.get_value(iter, 3).lower() + '-' + model.get_value(iter, 0)]
 
         # download the subtitle
         with ProviderPool(providers=self.config.providers, provider_configs=self.config.provider_configs) as pool:

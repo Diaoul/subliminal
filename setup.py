@@ -83,9 +83,9 @@ setup(name='subliminal',
               'napiprojekt = subliminal.providers.napiprojekt:NapiProjektProvider',
               'opensubtitles = subliminal.providers.opensubtitles:OpenSubtitlesProvider',
               'podnapisi = subliminal.providers.podnapisi:PodnapisiProvider',
+              'subscenter = subliminal.providers.subscenter:SubsCenterProvider',
               'thesubdb = subliminal.providers.thesubdb:TheSubDBProvider',
-              'tvsubtitles = subliminal.providers.tvsubtitles:TVsubtitlesProvider',
-              'subscenter = subliminal.providers.subscenter:SubsCenterProvider'
+              'tvsubtitles = subliminal.providers.tvsubtitles:TVsubtitlesProvider'
           ],
           'babelfish.language_converters': [
               'addic7ed = subliminal.converters.addic7ed:Addic7edConverter',

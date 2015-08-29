@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
 import io
 import json
 import logging
 import re
 import zipfile
-import guessit
+
 from babelfish import Language
+import guessit
 from requests import Session
 
 from . import Provider
@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 
 class SubsCenterSubtitle(Subtitle):
 
-    GUESSIT_EXT = '.mkv'
+    _GUESSIT_EXT = '.mkv'
 
     provider_name = 'subscenter'
 
@@ -54,11 +54,11 @@ class SubsCenterSubtitle(Subtitle):
             if video.episode and self.episode == video.episode:
                 matches.add('episode')
             # guess
-            matches |= guess_matches(video, guessit.guess_episode_info(self.release_name + self.GUESSIT_EXT))
+            matches |= guess_matches(video, guessit.guess_episode_info(self.release_name + self._GUESSIT_EXT))
         # movie
         elif isinstance(video, Movie) and self.kind == 'movie':
             # guess
-            matches |= guess_matches(video, guessit.guess_movie_info(self.release_name + self.GUESSIT_EXT))
+            matches |= guess_matches(video, guessit.guess_movie_info(self.release_name + self._GUESSIT_EXT))
         else:
             logger.info('%r is not a valid movie_kind for %r', self.kind, video)
             return matches
@@ -90,9 +90,9 @@ class SubsCenterProvider(Provider):
             url = self.server + 'subscenter/accounts/login/'
             # Retrieve CSRF token first.
             self.session.get(url)
-            csrftoken = self.session.cookies['csrftoken']
+            csrf_token = self.session.cookies['csrftoken']
             data = {'username': self.username, 'password': self.password,
-                    'next': '/he/', 'csrfmiddlewaretoken': csrftoken}
+                    'next': '/he/', 'csrfmiddlewaretoken': csrf_token}
             r = self.session.post(url, data, timeout=10, allow_redirects=False)
             if r.status_code == 302:
                 logger.info('Logged in')

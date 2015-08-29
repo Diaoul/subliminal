@@ -48,7 +48,7 @@ subliminal download
     Options:
       -l, --language LANGUAGE         Language as IETF code, e.g. en, pt-BR (can be used multiple
                                       times).  [required]
-      -p, --provider [addic7ed|napiprojekt|opensubtitles|podnapisi|thesubdb|tvsubtitles|subscenter]
+      -p, --provider [addic7ed|napiprojekt|opensubtitles|podnapisi|subscenter|thesubdb|tvsubtitles]
                                       Provider to use (can be used multiple times).
       -a, --age AGE                   Filter videos newer than AGE, e.g. 12h, 1w2d.
       -d, --directory DIR             Directory where to save subtitles, default is next to the video

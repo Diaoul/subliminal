@@ -87,7 +87,7 @@ def test_list_subtitles_movie(movies, mock_providers):
 
     # test result
     assert len(subtitles) == 1
-    assert sorted(subtitles[movies['man_of_steel']]) == ['opensubtitles', 'podnapisi', 'thesubdb', 'subscenter']
+    assert sorted(subtitles[movies['man_of_steel']]) == ['opensubtitles', 'podnapisi', 'subscenter', 'thesubdb']
 
 
 def test_list_subtitles_episode(episodes, mock_providers):
@@ -106,8 +106,8 @@ def test_list_subtitles_episode(episodes, mock_providers):
 
     # test result
     assert len(subtitles) == 1
-    assert sorted(subtitles[episodes['bbt_s07e05']]) == ['addic7ed', 'opensubtitles', 'podnapisi', 'thesubdb',
-                                                         'tvsubtitles', 'subscenter']
+    assert sorted(subtitles[episodes['bbt_s07e05']]) == ['addic7ed', 'opensubtitles', 'podnapisi', 'subscenter',
+                                                         'thesubdb', 'tvsubtitles']
 
 
 def test_list_subtitles_providers(episodes, mock_providers):
@@ -145,8 +145,8 @@ def test_list_subtitles_episode_no_hash(episodes, mock_providers):
 
     # test result
     assert len(subtitles) == 1
-    assert sorted(subtitles[episodes['dallas_s01e03']]) == ['addic7ed', 'opensubtitles', 'podnapisi', 'tvsubtitles',
-                                                            'subscenter']
+    assert sorted(subtitles[episodes['dallas_s01e03']]) == ['addic7ed', 'opensubtitles', 'podnapisi', 'subscenter',
+                                                            'tvsubtitles']
 
 
 def test_list_subtitles_no_language(episodes, mock_providers):
@@ -184,7 +184,7 @@ def test_download_subtitles(mock_providers):
     assert not provider_manager['podnapisi'].plugin.download_subtitle.called
     assert provider_manager['thesubdb'].plugin.download_subtitle.called
     assert provider_manager['tvsubtitles'].plugin.download_subtitle.called
-    assert provider_manager['subscenter'].plugin.download_subtitle.called
+    assert not provider_manager['subscenter'].plugin.download_subtitle.called
 
 
 @pytest.mark.integration

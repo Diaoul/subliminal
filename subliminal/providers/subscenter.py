@@ -107,6 +107,7 @@ class SubsCenterProvider(Provider):
             logger.info('Logged out')
             if r.status_code != 200:
                 raise ProviderError('Request failed with status code %d' % r.status_code)
+            self.logged_in = False
         self.session.close()
 
     @staticmethod

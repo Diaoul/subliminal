@@ -7,10 +7,12 @@ Subliminal uses multiple providers to give users a vast choice and have a better
 subtitles. Current supported providers are:
 
 * Addic7ed
+* NapiProjekt
 * OpenSubtitles
 * Podnapisi
 * TheSubDB
 * TvSubtitles
+* SubsCenter
 
 Providers all inherit the same :class:`~subliminal.providers.Provider` base class and thus share the same API.
 They are registered on the ``subliminal.providers`` entry point and are exposed through the

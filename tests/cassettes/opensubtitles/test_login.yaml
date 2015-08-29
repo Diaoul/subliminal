@@ -1,0 +1,48 @@
+interactions:
+- request:
+    body: !!binary |
+      PD94bWwgdmVyc2lvbj0nMS4wJz8+CjxtZXRob2RDYWxsPgo8bWV0aG9kTmFtZT5Mb2dJbjwvbWV0
+      aG9kTmFtZT4KPHBhcmFtcz4KPHBhcmFtPgo8dmFsdWU+PHN0cmluZz5weXRob24tc3VibGltaW5h
+      bDwvc3RyaW5nPjwvdmFsdWU+CjwvcGFyYW0+CjxwYXJhbT4KPHZhbHVlPjxzdHJpbmc+c3VibGlt
+      aW5hbDwvc3RyaW5nPjwvdmFsdWU+CjwvcGFyYW0+CjxwYXJhbT4KPHZhbHVlPjxzdHJpbmc+ZW5n
+      PC9zdHJpbmc+PC92YWx1ZT4KPC9wYXJhbT4KPHBhcmFtPgo8dmFsdWU+PHN0cmluZz5zdWJsaW1p
+      bmFsIHYxLjE8L3N0cmluZz48L3ZhbHVlPgo8L3BhcmFtPgo8L3BhcmFtcz4KPC9tZXRob2RDYWxs
+      Pgo=
+    headers:
+      Accept-Encoding: [gzip]
+      Content-Length: ['344']
+      Content-Type: [text/xml]
+      User-Agent: [Python-xmlrpc/3.4]
+    method: POST
+    uri: https://api.opensubtitles.org/xml-rpc
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA6WR3YoCMQyF732KMvfaKuIqxPoAXgi+QWeanYrTRPojPr7jWFBk0QXvvoScnEMC
+        m4vvxBlDPDCtq+lEVQKpYXugdl3l9DteVhs9Ao/Jsd1jPDFF7BsnE4yPeiTu1IOAs+ky3khATCE3
+        aWDRi32N4V4IIONRJz4igRy49B/qsqCPoE1euB9GWjlHtqbELecmuGM7B1lGilw+6UE+W/7lH5NJ
+        Of4jwEwpsdt+aYYNk33rZjnXHWo1UWoFslSfzIZU5cyPKZDlIwXijV7/dwW9YN24+AEAAA==
+    headers:
+      Accept-Ranges: [bytes]
+      Access-Control-Allow-Headers: ['Origin, X-Requested-With, Content-Type, Accept']
+      Access-Control-Allow-Origin: ['*']
+      Age: ['0']
+      Cache-Control: ['no-store, no-cache, must-revalidate, post-check=0, pre-check=0']
+      Content-Encoding: [gzip]
+      Content-Length: ['223']
+      Content-type: [text/xml;charset=UTF-8]
+      Date: ['Thu, 27 Aug 2015 15:34:25 GMT']
+      Expires: ['Thu, 19 Nov 1981 08:52:00 GMT']
+      Pragma: [no-cache]
+      Server: [lighttpd/1.4.36]
+      Set-Cookie: ['weblang=en; expires=Fri, 26-Aug-2016 15:34:25 GMT; Max-Age=31536000;
+          path=/; domain=.opensubtitles.org', PHPSESSID=au6h7oen9hhndbntogoucrhkg4;
+          path=/; domain=.opensubtitles.org]
+      Strict-Transport-Security: [max-age=63072000; includeSubdomains; preload]
+      X-Cache: [MISS]
+      X-Cache-Backend: [web3]
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [DENY]
+      X-Uncompressed-Content-Length: ['504']
+    status: {code: 200, message: OK}
+version: 1

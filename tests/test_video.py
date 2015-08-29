@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
 from datetime import datetime, timedelta
 import io
 import os
@@ -254,7 +253,10 @@ def test_scan_video_metadata(mkv):
     assert scanned_video.video_codec == 'h264'
     assert scanned_video.audio_codec == 'AAC'
     assert scanned_video.imdb_id is None
-    assert scanned_video.hashes == {'opensubtitles': '49e2530ea3bd0d18', 'thesubdb': '64a8b87f12daa4f31895616e6c3fd39e'}
+    assert scanned_video.hashes == {
+        'napiprojekt': 'de2e9caa58dd53a6ab9d241e6b252e35',
+        'opensubtitles': '49e2530ea3bd0d18',
+        'thesubdb': '64a8b87f12daa4f31895616e6c3fd39e'}
     assert scanned_video.size == 31762747
     assert scanned_video.subtitle_languages == {Language('spa'), Language('deu'), Language('jpn'), Language('und'),
                                                 Language('ita'), Language('fra'), Language('hun')}

@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
 import os
 
 from babelfish import Language
 import pytest
 from vcr import VCR
 
-from subliminal.providers.opensubtitles import OpenSubtitlesProvider, OpenSubtitlesSubtitle
+from subliminal.exceptions import ConfigurationError
+from subliminal.providers.opensubtitles import OpenSubtitlesProvider, OpenSubtitlesSubtitle, Unauthorized
 
 
 vcr = VCR(path_transformer=lambda path: path + '.yaml',
+          record_mode=os.environ.get('VCR_RECORD_MODE', 'once'),
           match_on=['method', 'scheme', 'host', 'port', 'path', 'query', 'body'],
           cassette_library_dir=os.path.join('tests', 'cassettes', 'opensubtitles'))
 
@@ -43,6 +44,42 @@ def test_get_matches_no_match(episodes):
                                      'man.of.steel.2013.720p.bluray.x264-felony', 2013, 770828, 0, 0)
     matches = subtitle.get_matches(episodes['got_s03e10'], hearing_impaired=True)
     assert matches == set()
+
+
+def test_configuration_error_no_username():
+    with pytest.raises(ConfigurationError):
+        OpenSubtitlesProvider(password='subliminal')
+
+
+def test_configuration_error_no_password():
+    with pytest.raises(ConfigurationError):
+        OpenSubtitlesProvider(username='subliminal')
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_login():
+    provider = OpenSubtitlesProvider('python-subliminal', 'subliminal')
+    assert provider.token is None
+    provider.initialize()
+    assert provider.token is not None
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_login_bad_password():
+    provider = OpenSubtitlesProvider('python-subliminal', 'lanimilbus')
+    with pytest.raises(Unauthorized):
+        provider.initialize()
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_logout():
+    provider = OpenSubtitlesProvider('python-subliminal', 'subliminal')
+    provider.initialize()
+    provider.terminate()
+    assert provider.token is None
 
 
 @pytest.mark.integration

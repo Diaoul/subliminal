@@ -1,0 +1,15 @@
+interactions:
+- request:
+    body: null
+    headers: []
+    method: GET
+    uri: http://napiprojekt.pl/unit_napisy/dl.php?pass=&t=a49cf&v=dreambox&l=PL&kolejka=false&napios=Linux&nick=&f=de2e9caa58dd53a6ab9d241e6b252e35
+  response:
+    body: {string: '{1}{1}23.976\r\n{559}{653}an example...'}
+    headers:
+      Connection: [keep-alive]
+      Content-Type: [text/html]
+      Date: ['Sat, 04 Jul 2015 17:12:34 GMT']
+      Server: [nginx/1.6.0]
+    status: {code: 200, message: OK}
+version: 1

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
 import os
 
 from babelfish import Language
@@ -26,32 +25,32 @@ def test_subtitle_is_valid_no_content():
 
 def test_subtitle_is_valid_valid(monkeypatch):
     subtitle = Subtitle(Language('fra'))
-    text = ('1\n'
-            '00:00:20,000 --> 00:00:24,400\n'
-            'En réponse à l\'augmentation de la criminalité\n'
-            'dans certains quartiers,\n')
+    text = (u'1\n'
+            u'00:00:20,000 --> 00:00:24,400\n'
+            u'En réponse à l\'augmentation de la criminalité\n'
+            u'dans certains quartiers,\n')
     monkeypatch.setattr(Subtitle, 'text', text)
     assert subtitle.is_valid() is True
 
 
 def test_subtitle_is_valid_invalid(monkeypatch):
     subtitle = Subtitle(Language('fra'))
-    text = ('1\n'
-            '00:00:20,000 --> 00:00:24,400\n'
-            'En réponse à l\'augmentation de la criminalité\n'
-            'dans certains quartiers,\n\n')
-    text += 'This line shouldn\'t be here'
+    text = (u'1\n'
+            u'00:00:20,000 --> 00:00:24,400\n'
+            u'En réponse à l\'augmentation de la criminalité\n'
+            u'dans certains quartiers,\n\n')
+    text += u'This line shouldn\'t be here'
     monkeypatch.setattr(Subtitle, 'text', text)
     assert subtitle.is_valid() is False
 
 
 def test_subtitle_is_valid_valid_begin(monkeypatch):
     subtitle = Subtitle(Language('fra'))
-    text = ('1\n'
-            '00:00:20,000 --> 00:00:24,400\n'
-            'En réponse à l\'augmentation de la criminalité\n'
-            'dans certains quartiers,\n\n')*20
-    text += 'This line shouldn\'t be here'
+    text = (u'1\n'
+            u'00:00:20,000 --> 00:00:24,400\n'
+            u'En réponse à l\'augmentation de la criminalité\n'
+            u'dans certains quartiers,\n\n')*20
+    text += u'This line shouldn\'t be here'
     monkeypatch.setattr(Subtitle, 'text', text)
     assert subtitle.is_valid() is True
 

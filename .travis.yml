@@ -3,13 +3,27 @@ sudo: false
 language: python
 
 python:
-  - 2.7
-  - 3.3
-  - 3.4
+  - "2.7"
+  - "3.3"
+  - "3.4"
 
 env:
   - PARSER=native
   - PARSER=lxml
+
+matrix:
+  include:
+    - python: "3.4"
+      env:
+        - PARSER=native
+        - VCR_RECORD_MODE=all
+        - PYTEST_ADDOPTS="-m integration"
+  allow_failures:
+    - python: "3.4"
+      env:
+        - PARSER=native
+        - VCR_RECORD_MODE=all
+        - PYTEST_ADDOPTS="-m integration"
 
 cache:
   directories:
@@ -24,6 +38,6 @@ install:
   - if [ $PARSER = "lxml" ]; then pip install lxml; fi
   - pip install coveralls
 
-script: python setup.py test -a "--cov subliminal --verbose"
+script: python setup.py test -a "--cov subliminal --verbose $PYTEST_ADDOPTS"
 
 after_success: coveralls

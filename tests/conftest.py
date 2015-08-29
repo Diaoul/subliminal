@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
 from io import BytesIO
 import os
 from zipfile import ZipFile
@@ -27,7 +26,8 @@ def movies():
             Movie(os.path.join('Man of Steel (2013)', 'man.of.steel.2013.720p.bluray.x264-felony.mkv'), 'Man of Steel',
                   format='BluRay', release_group='felony', resolution='720p', video_codec='h264', audio_codec='DTS',
                   imdb_id=770828, size=7033732714, year=2013,
-                  hashes={'opensubtitles': '5b8f8f4e41ccb21e', 'thesubdb': 'ad32876133355929d814457537e12dc2'}),
+                  hashes={'napiprojekt': 'de2e9caa58dd53a6ab9d241e6b252e35',
+                          'opensubtitles': '5b8f8f4e41ccb21e', 'thesubdb': 'ad32876133355929d814457537e12dc2'}),
             'enders_game':
             Movie('enders.game.2013.720p.bluray.x264-sparks.mkv', 'Ender\'s Game',
                   format='BluRay', release_group='sparks', resolution='720p', video_codec='h264', year=2013)}
@@ -41,14 +41,16 @@ def episodes():
                     'The Big Bang Theory', 7, 5, format='HDTV', release_group='DIMENSION', resolution='720p',
                     video_codec='h264', audio_codec='AC3', imdb_id=3229392, size=501910737,
                     title='The Workplace Proximity', year=2007, tvdb_id=80379,
-                    hashes={'opensubtitles': '6878b3ef7c1bd19e', 'thesubdb': '9dbbfb7ba81c9a6237237dae8589fccc'}),
+                    hashes={'napiprojekt': 'de2e9caa58dd53a6ab9d241e6b252e35',
+                            'opensubtitles': '6878b3ef7c1bd19e', 'thesubdb': '9dbbfb7ba81c9a6237237dae8589fccc'}),
             'got_s03e10':
             Episode(os.path.join('Game of Thrones', 'Season 03',
                                  'Game.of.Thrones.S03E10.Mhysa.720p.WEB-DL.DD5.1.H.264-NTb.mkv'),
                     'Game of Thrones', 3, 10, format='WEB-DL', release_group='NTb', resolution='720p',
                     video_codec='h264', audio_codec='AC3', imdb_id=2178796, size=2142810931, title='Mhysa',
                     tvdb_id=121361,
-                    hashes={'opensubtitles': 'b850baa096976c22', 'thesubdb': 'b1f899c77f4c960b84b8dbf840d4e42d'}),
+                    hashes={'napiprojekt': 'de2e9caa58dd53a6ab9d241e6b252e35',
+                            'opensubtitles': 'b850baa096976c22', 'thesubdb': 'b1f899c77f4c960b84b8dbf840d4e42d'}),
             'dallas_s01e03':
             Episode('Dallas.S01E03.mkv', 'Dallas', 1, 3),
             'dallas_2012_s01e03':

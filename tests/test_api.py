@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
 from datetime import timedelta
 import io
 import os
@@ -21,6 +20,7 @@ from subliminal.subtitle import Subtitle
 
 
 vcr = VCR(path_transformer=lambda path: path + '.yaml',
+          record_mode=os.environ.get('VCR_RECORD_MODE', 'once'),
           match_on=['method', 'scheme', 'host', 'port', 'path', 'query', 'body'],
           cassette_library_dir=os.path.join('tests', 'cassettes', 'api'))
 
@@ -83,10 +83,11 @@ def test_list_subtitles_movie(movies, mock_providers):
     assert provider_manager['podnapisi'].plugin.list_subtitles.called
     assert provider_manager['thesubdb'].plugin.list_subtitles.called
     assert not provider_manager['tvsubtitles'].plugin.list_subtitles.called
+    assert provider_manager['subscenter'].plugin.list_subtitles.called
 
     # test result
     assert len(subtitles) == 1
-    assert sorted(subtitles[movies['man_of_steel']]) == ['opensubtitles', 'podnapisi', 'thesubdb']
+    assert sorted(subtitles[movies['man_of_steel']]) == ['opensubtitles', 'podnapisi', 'thesubdb', 'subscenter']
 
 
 def test_list_subtitles_episode(episodes, mock_providers):
@@ -101,11 +102,12 @@ def test_list_subtitles_episode(episodes, mock_providers):
     assert provider_manager['podnapisi'].plugin.list_subtitles.called
     assert provider_manager['thesubdb'].plugin.list_subtitles.called
     assert provider_manager['tvsubtitles'].plugin.list_subtitles.called
+    assert provider_manager['subscenter'].plugin.list_subtitles.called
 
     # test result
     assert len(subtitles) == 1
     assert sorted(subtitles[episodes['bbt_s07e05']]) == ['addic7ed', 'opensubtitles', 'podnapisi', 'thesubdb',
-                                                         'tvsubtitles']
+                                                         'tvsubtitles', 'subscenter']
 
 
 def test_list_subtitles_providers(episodes, mock_providers):
@@ -120,6 +122,7 @@ def test_list_subtitles_providers(episodes, mock_providers):
     assert not provider_manager['podnapisi'].plugin.list_subtitles.called
     assert not provider_manager['thesubdb'].plugin.list_subtitles.called
     assert not provider_manager['tvsubtitles'].plugin.list_subtitles.called
+    assert not provider_manager['subscenter'].plugin.list_subtitles.called
 
     # test result
     assert len(subtitles) == 1
@@ -138,10 +141,12 @@ def test_list_subtitles_episode_no_hash(episodes, mock_providers):
     assert provider_manager['podnapisi'].plugin.list_subtitles.called
     assert not provider_manager['thesubdb'].plugin.list_subtitles.called
     assert provider_manager['tvsubtitles'].plugin.list_subtitles.called
+    assert provider_manager['subscenter'].plugin.list_subtitles.called
 
     # test result
     assert len(subtitles) == 1
-    assert sorted(subtitles[episodes['dallas_s01e03']]) == ['addic7ed', 'opensubtitles', 'podnapisi', 'tvsubtitles']
+    assert sorted(subtitles[episodes['dallas_s01e03']]) == ['addic7ed', 'opensubtitles', 'podnapisi', 'tvsubtitles',
+                                                            'subscenter']
 
 
 def test_list_subtitles_no_language(episodes, mock_providers):
@@ -157,6 +162,7 @@ def test_list_subtitles_no_language(episodes, mock_providers):
     assert not provider_manager['podnapisi'].plugin.list_subtitles.called
     assert not provider_manager['thesubdb'].plugin.list_subtitles.called
     assert not provider_manager['tvsubtitles'].plugin.list_subtitles.called
+    assert not provider_manager['subscenter'].plugin.list_subtitles.called
 
     # test result
     assert len(subtitles) == 0
@@ -178,6 +184,7 @@ def test_download_subtitles(mock_providers):
     assert not provider_manager['podnapisi'].plugin.download_subtitle.called
     assert provider_manager['thesubdb'].plugin.download_subtitle.called
     assert provider_manager['tvsubtitles'].plugin.download_subtitle.called
+    assert provider_manager['subscenter'].plugin.download_subtitle.called
 
 
 @pytest.mark.integration
@@ -277,7 +284,7 @@ def test_save_subtitles(movies, tmpdir, monkeypatch):
 
 def test_save_subtitles_single_directory_encoding(movies, tmpdir):
     subtitle = Subtitle(Language('jpn'))
-    subtitle.content = 'ハローワールド'.encode('shift-jis')
+    subtitle.content = u'ハローワールド'.encode('shift-jis')
     subtitle_pt_br = Subtitle(Language('por', 'BR'))
     subtitle_pt_br.content = b'Some brazilian content'
     subtitles = [subtitle, subtitle_pt_br]
@@ -287,4 +294,4 @@ def test_save_subtitles_single_directory_encoding(movies, tmpdir):
     # first subtitle only and correctly encoded
     path = os.path.join(str(tmpdir), os.path.splitext(os.path.split(movies['man_of_steel'].name)[1])[0] + '.srt')
     assert os.path.exists(path)
-    assert io.open(path, encoding='utf-8').read() == 'ハローワールド'
+    assert io.open(path, encoding='utf-8').read() == u'ハローワールド'

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
 from collections import defaultdict
 import io
 import logging
@@ -189,7 +188,7 @@ class ProviderPool(object):
         for subtitle, score in scored_subtitles:
             # check score
             if score < min_score:
-                logger.info('Score %d is below min_score (%d)', (score, min_score))
+                logger.info('Score %d is below min_score (%d)', score, min_score)
                 break
 
             # check downloaded languages

@@ -13,13 +13,15 @@ subliminal
       Subtitles, faster than your thoughts.
 
     Options:
-      --addic7ed USERNAME PASSWORD  Addic7ed configuration.
-      --cache-dir DIRECTORY         Path to the cache directory.  [default:
-                                    ~/.config/subliminal]
-      --debug                       Print useful information for debugging subliminal and for
-                                    reporting bugs.
-      --version                     Show the version and exit.
-      --help                        Show this message and exit.
+      --addic7ed USERNAME PASSWORD    Addic7ed configuration.
+      --opensubtitles USERNAME PASSWORD
+                                      OpenSubtitles configuration.
+      --cache-dir DIRECTORY           Path to the cache directory.  [default:
+                                      ~/.config/subliminal]
+      --debug                         Print useful information for debugging subliminal and for
+                                      reporting bugs.
+      --version                       Show the version and exit.
+      --help                          Show this message and exit.
 
     Commands:
       cache     Cache management.
@@ -46,7 +48,7 @@ subliminal download
     Options:
       -l, --language LANGUAGE         Language as IETF code, e.g. en, pt-BR (can be used multiple
                                       times).  [required]
-      -p, --provider [addic7ed|opensubtitles|podnapisi|thesubdb|tvsubtitles]
+      -p, --provider [addic7ed|napiprojekt|opensubtitles|podnapisi|thesubdb|tvsubtitles|subscenter]
                                       Provider to use (can be used multiple times).
       -a, --age AGE                   Filter videos newer than AGE, e.g. 12h, 1w2d.
       -d, --directory DIR             Directory where to save subtitles, default is next to the video

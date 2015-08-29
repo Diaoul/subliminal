@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 __title__ = 'subliminal'
-__version__ = '1.0.1'
+__version__ = '1.1.0.dev0'
 __author__ = 'Antoine Bertin'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2015, Antoine Bertin'

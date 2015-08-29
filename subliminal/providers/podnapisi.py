@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
 import io
 import logging
 import re
@@ -121,7 +120,9 @@ class PodnapisiProvider(Provider):
                 releases = []
                 if subtitle_xml.find('release').text:
                     for release in subtitle_xml.find('release').text.split():
-                        releases.append(re.sub(r'\.+$', '', release))  # remove trailing dots
+                        release = re.sub(r'\.+$', '', release)  # remove trailing dots
+                        release = ''.join(filter(lambda x: ord(x) < 128, release))  # remove non-ascii characters
+                        releases.append(release)
                 title = subtitle_xml.find('title').text
                 season = int(subtitle_xml.find('tvSeason').text)
                 episode = int(subtitle_xml.find('tvEpisode').text)

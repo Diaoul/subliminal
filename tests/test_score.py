@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 from subliminal.score import solve_episode_equations, solve_movie_equations
 from subliminal.video import Episode, Movie
 

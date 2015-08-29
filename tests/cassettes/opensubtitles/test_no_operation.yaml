@@ -5,7 +5,7 @@ interactions:
       aG9kTmFtZT4KPHBhcmFtcz4KPHBhcmFtPgo8dmFsdWU+PHN0cmluZz48L3N0cmluZz48L3ZhbHVl
       Pgo8L3BhcmFtPgo8cGFyYW0+Cjx2YWx1ZT48c3RyaW5nPjwvc3RyaW5nPjwvdmFsdWU+CjwvcGFy
       YW0+CjxwYXJhbT4KPHZhbHVlPjxzdHJpbmc+ZW5nPC9zdHJpbmc+PC92YWx1ZT4KPC9wYXJhbT4K
-      PHBhcmFtPgo8dmFsdWU+PHN0cmluZz5zdWJsaW1pbmFsIHYxLjA8L3N0cmluZz48L3ZhbHVlPgo8
+      PHBhcmFtPgo8dmFsdWU+PHN0cmluZz5zdWJsaW1pbmFsIHYxLjE8L3N0cmluZz48L3ZhbHVlPgo8
       L3BhcmFtPgo8L3BhcmFtcz4KPC9tZXRob2RDYWxsPgo=
     headers:
       Accept-Encoding: [gzip]
@@ -17,10 +17,10 @@ interactions:
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAA6WRTY7CMAyF95wi6n5IiAR0YcIBWIw0N0hTAxXND4mD5viUEgmEECCx+2z5+T3Z
-        sP63PTthTJ13q2o2FRVDZ3zbud2qyrT9qau1moBF2vv2D1PwLuHQCDpqm9SEXWkABifdZ7wQg0Qx
-        GxqZDWLbYLwWDJy2qMgf0AEfufRv6rJgiKAoSLld7IKp93Np9LKJdTczFI5z4GWkyPmdHvi95TP/
-        RJpy+iCAFIL9br40Q+Nd+9Kt9bnpUYmpkMBL8c5rDFWufJsCXh5SIF3o8X1nyMpjPfcBAAA=
+        H4sIAAAAAAAAA6WRTQoCMQyF956izF5bBxcjxHoAF4I3qG0cf/ojk3bw+NaxoIio4O5LyOt7aWB5
+        cZb12NEh+EU1nYiKodfBHHy7qFLcjZtqKUfgMO6D2SCdgyfMjbPqlCM5YnfKwKBXNuGNGFDsko4D
+        syx2W+zuBQOvHMoYTuiBD1z6D3V5IEeQ7dS1IR4bMk5ba+qZ7ucN2jnWwMtIkfMnPfBny3f+FFVM
+        9EOAWgi2Xv1phjp489HNhLS1KMVEiLxZqb6ZDanKNz+mgJeLFKAbvd7vCtxsStX4AQAA
     headers:
       Accept-Ranges: [bytes]
       Access-Control-Allow-Headers: ['Origin, X-Requested-With, Content-Type, Accept']
@@ -28,24 +28,25 @@ interactions:
       Age: ['0']
       Cache-Control: ['no-store, no-cache, must-revalidate, post-check=0, pre-check=0']
       Content-Encoding: [gzip]
-      Content-Length: ['224']
+      Content-Length: ['222']
       Content-type: [text/xml;charset=UTF-8]
-      Date: ['Sat, 11 Jul 2015 21:53:58 GMT']
+      Date: ['Thu, 27 Aug 2015 15:34:26 GMT']
       Expires: ['Thu, 19 Nov 1981 08:52:00 GMT']
       Pragma: [no-cache]
-      Server: [lighttpd/1.4.35]
-      Set-Cookie: [PHPSESSID=tp22f6gpc8h52ca7br8i1ctpq5; path=/; domain=.opensubtitles.org]
+      Server: [lighttpd/1.4.36]
+      Set-Cookie: [PHPSESSID=g1mgotj8sdmclld24cv98el9e2; path=/; domain=.opensubtitles.org]
       Strict-Transport-Security: [max-age=63072000; includeSubdomains; preload]
       X-Cache: [MISS]
       X-Cache-Backend: [web3]
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [DENY]
+      X-Uncompressed-Content-Length: ['504']
     status: {code: 200, message: OK}
 - request:
     body: !!binary |
       PD94bWwgdmVyc2lvbj0nMS4wJz8+CjxtZXRob2RDYWxsPgo8bWV0aG9kTmFtZT5Ob09wZXJhdGlv
-      bjwvbWV0aG9kTmFtZT4KPHBhcmFtcz4KPHBhcmFtPgo8dmFsdWU+PHN0cmluZz50cDIyZjZncGM4
-      aDUyY2E3YnI4aTFjdHBxNTwvc3RyaW5nPjwvdmFsdWU+CjwvcGFyYW0+CjwvcGFyYW1zPgo8L21l
+      bjwvbWV0aG9kTmFtZT4KPHBhcmFtcz4KPHBhcmFtPgo8dmFsdWU+PHN0cmluZz5nMW1nb3RqOHNk
+      bWNsbGQyNGN2OThlbDllMjwvc3RyaW5nPjwvdmFsdWU+CjwvcGFyYW0+CjwvcGFyYW1zPgo8L21l
       dGhvZENhbGw+Cg==
     headers:
       Accept-Encoding: [gzip]
@@ -57,13 +58,12 @@ interactions:
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAA71UQW6DMBC85xUW59Y2hEhFcsgDeqjUDyBjtolVY6fYTtvfF4gVQtKWRI16mzXj
-        2dld1mz1USu0g8ZKo5dRjGmEQAtTSb1eRt693D9Eq3zGanAbUz2D3RptoT3Y8obXNp+hPWoBYjuu
-        PHQIMesaL1yPUXu5LqHZB4hpXkNuHXfeMtIH4cNwPSi0HvKEUvT0yEgIA5UccRk51v8uWWXetTK8
-        KpSspZvKevB9pnYQXCtTclUk6aYYa4+kz9S7A6ldVxMjHRh4ZEwc1/SzEaEkaFfI7XTi0MAswUlK
-        cTJPcZykd2iBFzGe4zhdnPT4D676VhRiA+K1KD8vtuYtNH0pt/IRujMakzBeXzim+LZDOlh488bx
-        Cy1k2W1N/N8v249x2KUrV9aCMLr6dVUr40sFOcV0njISoqlkx64GFiPhEQvAduj0yfsC3Y8tfSsF
-        AAA=
+        H4sIAAAAAAAAA71Uy26DMBC85yss7sWQBimVHPIBPVTqDyBjtsGqHxTbafv3BWLxSNqSKqi3WTOe
+        nd1lTfYfUqAj1IZrtQviMAoQKKYLrg67wNmXu22wT1dEgi118Qym0spAc1DRmkqTrtAJNQCRIxUO
+        WoSIsbVjtsOouSxzqE8BIopKSI2l1hmCu8B/GK57hcZDuo4i9PRIsA89FY+4BI/1v0tW6HclNC0y
+        wSW3c1l73xdqveBB6JyKbL0ps6n2RPpCvT3gyrY1EdyCgYenxGlNPxthgoOyGa/mE/sGJmESh/dh
+        vEnOenqDi670jJXAXrP882orzkDdWV/Kh+/GZCxMO3XtWJYdSm/hzWlLr7MQP2yXNfF/v2g3xmF3
+        /riiBphWxa+rWWiXC0ijMIpign00l2zsamAR7B8tD0yLzp+4L1CKgWYbBQAA
     headers:
       Accept-Ranges: [bytes]
       Access-Control-Allow-Headers: ['Origin, X-Requested-With, Content-Type, Accept']
@@ -71,24 +71,25 @@ interactions:
       Age: ['0']
       Cache-Control: ['no-store, no-cache, must-revalidate, post-check=0, pre-check=0']
       Content-Encoding: [gzip]
-      Content-Length: ['344']
+      Content-Length: ['330']
       Content-type: [text/xml;charset=UTF-8]
-      Date: ['Sat, 11 Jul 2015 21:53:58 GMT']
+      Date: ['Thu, 27 Aug 2015 15:34:26 GMT']
       Expires: ['Thu, 19 Nov 1981 08:52:00 GMT']
       Pragma: [no-cache]
-      Server: [lighttpd/1.4.35]
-      Set-Cookie: [PHPSESSID=tp22f6gpc8h52ca7br8i1ctpq5; path=/; domain=.opensubtitles.org]
+      Server: [lighttpd/1.4.36]
+      Set-Cookie: [PHPSESSID=g1mgotj8sdmclld24cv98el9e2; path=/; domain=.opensubtitles.org]
       Strict-Transport-Security: [max-age=63072000; includeSubdomains; preload]
       X-Cache: [MISS]
       X-Cache-Backend: [web3]
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [DENY]
+      X-Uncompressed-Content-Length: ['1307']
     status: {code: 200, message: OK}
 - request:
     body: !!binary |
       PD94bWwgdmVyc2lvbj0nMS4wJz8+CjxtZXRob2RDYWxsPgo8bWV0aG9kTmFtZT5Mb2dPdXQ8L21l
-      dGhvZE5hbWU+CjxwYXJhbXM+CjxwYXJhbT4KPHZhbHVlPjxzdHJpbmc+dHAyMmY2Z3BjOGg1MmNh
-      N2JyOGkxY3RwcTU8L3N0cmluZz48L3ZhbHVlPgo8L3BhcmFtPgo8L3BhcmFtcz4KPC9tZXRob2RD
+      dGhvZE5hbWU+CjxwYXJhbXM+CjxwYXJhbT4KPHZhbHVlPjxzdHJpbmc+ZzFtZ290ajhzZG1jbGxk
+      MjRjdjk4ZWw5ZTI8L3N0cmluZz48L3ZhbHVlPgo8L3BhcmFtPgo8L3BhcmFtcz4KPC9tZXRob2RD
       YWxsPgo=
     headers:
       Accept-Encoding: [gzip]
@@ -100,10 +101,10 @@ interactions:
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAA4WQQQ6DIBBF956CuK9QV12MeIAumvQGKNPWRKBhwPT4RSXRNE27e5/5M38YaF9m
-        ZBN6GpxtymMlSoa2d3qw96aM4XY4la0swGB4OH1FejpLmB6eyitDsmArJWAwqTHiTAwo+NiHhVlq
-        Nh36VTCwyqCkoEIk4IvIha09T0g7yFoIdjkDzzJb+c4LfD//axj2zuqfadrFbkQpKlEDz+Jf1rJU
-        /uXmAp4PkoFm+jzfG9lJD213AQAA
+        H4sIAAAAAAAAA4WQQQ6DIBBF956CuK9gV12MeIAumvQGKNPWRKBhwPT4RSXRNE27e5/5M38YaF9m
+        ZBN6GpxtyroSJUPbOz3Ye1PGcDucylYWYDA8nL4iPZ0lTA9P5ZUhWbCVEjCY1BhxJgYUfOzDwiw1
+        mw79KhhYZVBSUCES8EXkwtaeJ6Qd5FEIdjkDzzJb+c4LfD//axj2zuqfadrFbkQpKiFq4Fn9C1u2
+        yt/cXMDzRTLQTJ/3ewOe39o0eAEAAA==
     headers:
       Accept-Ranges: [bytes]
       Access-Control-Allow-Headers: ['Origin, X-Requested-With, Content-Type, Accept']
@@ -111,18 +112,19 @@ interactions:
       Age: ['0']
       Cache-Control: ['no-store, no-cache, must-revalidate, post-check=0, pre-check=0']
       Content-Encoding: [gzip]
-      Content-Length: ['192']
+      Content-Length: ['193']
       Content-type: [text/xml;charset=UTF-8]
-      Date: ['Sat, 11 Jul 2015 21:53:58 GMT']
+      Date: ['Thu, 27 Aug 2015 15:34:26 GMT']
       Expires: ['Thu, 19 Nov 1981 08:52:00 GMT']
       Pragma: [no-cache]
-      Server: [lighttpd/1.4.35]
-      Set-Cookie: [PHPSESSID=tp22f6gpc8h52ca7br8i1ctpq5; path=/; domain=.opensubtitles.org]
+      Server: [lighttpd/1.4.36]
+      Set-Cookie: [PHPSESSID=g1mgotj8sdmclld24cv98el9e2; path=/; domain=.opensubtitles.org]
       Strict-Transport-Security: [max-age=63072000; includeSubdomains; preload]
       X-Cache: [MISS]
       X-Cache-Backend: [web3]
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [DENY]
+      X-Uncompressed-Content-Length: ['376']
     status: {code: 200, message: OK}
 - request:
     body: !!binary |
@@ -138,24 +140,25 @@ interactions:
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAA4WQQQ6CMBBF95xiwl5ajQtNhnICN96g0EFJaEtoSzy+UJpAjNHd+zP986eD1Uv3
-        MNHoOmvK/FjwHMg0VnXmUebBt4dLXokMNfmnVXdygzWO5sIgR6mdyGClGQAn2QdaCND5MTQ+Msxm
-        XdO4CkAjNQnnpQ8OWRSpsdnThHkHceZXuMVwMNZDa4NRyFIzGdnOiWyf9jWaGmvUz2xlQ92T4AU/
-        IUviX1ZcKv15e4UsnSeBW+jzmG8XBP1ahQEAAA==
+        H4sIAAAAAAAAA4WQSw6DMAxE95zCYl8SpC5ayYQTdNMbBGJaJJKgfFCPXz6RQFXV7t7YGY9jrF96
+        gImc762p8rLgOZBprerNo8pj6E6XvBYZagpPq+7kR2s8zYVROqm9yGCjGQAnOURaCNAHF9uwMsxm
+        3ZDbBKCRmoQPMkSPbBWpsdvThHkHceZXuK3hYGyAzkajkKVmMrKDE9kx7Ws0tdaon9nKxmYgwQvO
+        S2RJ/Qtbt0qf3l8hS/dJ4Bf6vOYbZMIxSIYBAAA=
     headers:
       Accept-Ranges: [bytes]
       Access-Control-Allow-Headers: ['Origin, X-Requested-With, Content-Type, Accept']
       Access-Control-Allow-Origin: ['*']
       Age: ['0']
       Content-Encoding: [gzip]
-      Content-Length: ['199']
+      Content-Length: ['200']
       Content-type: [text/xml;charset=UTF-8]
-      Date: ['Sat, 11 Jul 2015 21:53:58 GMT']
-      Server: [lighttpd/1.4.35]
+      Date: ['Thu, 27 Aug 2015 15:34:26 GMT']
+      Server: [lighttpd/1.4.36]
       Strict-Transport-Security: [max-age=63072000; includeSubdomains; preload]
       X-Cache: [MISS]
       X-Cache-Backend: [web3]
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [DENY]
+      X-Uncompressed-Content-Length: ['390']
     status: {code: 200, message: OK}
 version: 1

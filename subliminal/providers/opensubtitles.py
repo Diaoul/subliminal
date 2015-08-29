@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
 import base64
 import logging
 import os
@@ -12,7 +11,7 @@ from six.moves.xmlrpc_client import ServerProxy
 
 from . import Provider, TimeoutSafeTransport, get_version
 from .. import __version__
-from ..exceptions import AuthenticationError, DownloadLimitExceeded, ProviderError
+from ..exceptions import AuthenticationError, ConfigurationError, DownloadLimitExceeded, ProviderError
 from ..subtitle import Subtitle, fix_line_ending, guess_matches
 from ..video import Episode, Movie
 
@@ -95,13 +94,19 @@ class OpenSubtitlesSubtitle(Subtitle):
 class OpenSubtitlesProvider(Provider):
     languages = {Language.fromopensubtitles(l) for l in language_converters['opensubtitles'].codes}
 
-    def __init__(self):
+    def __init__(self, username=None, password=None):
         self.server = ServerProxy('https://api.opensubtitles.org/xml-rpc', TimeoutSafeTransport(10))
+        if username and not password or not username and password:
+            raise ConfigurationError('Username and password must be specified')
+        # None values not allowed for logging in, so replace it by ''
+        self.username = username or ''
+        self.password = password or ''
         self.token = None
 
     def initialize(self):
         logger.info('Logging in')
-        response = checked(self.server.LogIn('', '', 'eng', 'subliminal v%s' % get_version(__version__)))
+        response = checked(self.server.LogIn(self.username, self.password, 'eng',
+                                             'subliminal v%s' % get_version(__version__)))
         self.token = response['token']
         logger.debug('Logged in with token %r', self.token)
 
@@ -109,6 +114,7 @@ class OpenSubtitlesProvider(Provider):
         logger.info('Logging out')
         checked(self.server.LogOut(self.token))
         self.server.close()
+        self.token = None
         logger.debug('Logged out')
 
     def no_operation(self):
@@ -140,7 +146,7 @@ class OpenSubtitlesProvider(Provider):
 
         # exit if no data
         if not response['data']:
-            logger.info('No subtitles found')
+            logger.debug('No subtitles found')
             return subtitles
 
         # loop over subtitle items

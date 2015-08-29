@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
 import os
 
 from babelfish import Language
@@ -10,6 +9,7 @@ from subliminal.providers.podnapisi import PodnapisiProvider, PodnapisiSubtitle
 
 
 vcr = VCR(path_transformer=lambda path: path + '.yaml',
+          record_mode=os.environ.get('VCR_RECORD_MODE', 'once'),
           cassette_library_dir=os.path.join('tests', 'cassettes', 'podnapisi'))
 
 
@@ -24,7 +24,7 @@ def test_get_matches_movie(movies):
         'Man.Of.Steel.[2013].BRRip.XviD-ETRG', 'Man.of.Steel.[2013].BRRip.XViD.[AC3]-ETRG',
         'Man.Of.Steel.2013.BRRiP.XVID.AC3-MAJESTIC', 'Man.of.steel.2013.BRRip.XviD.AC3-RARBG',
         'Man.Of.Steel.2013.720p.BRRip.x264.AC3-SUPERM4N', 'Man.Of.Steel.2013.720p.BRRip.XviD.AC3-ViSiON',
-        'Man.Of.Steel.2013.720p.BRRip.x264.AC3-JYK', 'Man.of.Steel.[2013].DVDRIP.DIVX.[Eng]-DUQA\u252c\xab',
+        'Man.Of.Steel.2013.720p.BRRip.x264.AC3-JYK', 'Man.of.Steel.[2013].DVDRIP.DIVX.[Eng]-DUQA',
         'Man.of.Steel.2013.1080p.BluRay.x264.YIFY'
     ]
     subtitle = PodnapisiSubtitle(Language('eng'), True, None, 'EMgo', subtitle_releases, 'Man of Steel', None, None,

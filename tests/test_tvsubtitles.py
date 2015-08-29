@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
 import os
 
 from babelfish import Language, language_converters
@@ -10,6 +9,7 @@ from subliminal.providers.tvsubtitles import TVsubtitlesProvider, TVsubtitlesSub
 
 
 vcr = VCR(path_transformer=lambda path: path + '.yaml',
+          record_mode=os.environ.get('VCR_RECORD_MODE', 'once'),
           match_on=['method', 'scheme', 'host', 'port', 'path', 'query', 'body'],
           cassette_library_dir=os.path.join('tests', 'cassettes', 'tvsubtitles'))
 

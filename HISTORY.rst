@@ -1,6 +1,13 @@
 Changelog
 ---------
 
+1.0.2
+^^^^^
+**release date:** *not released*
+
+* Fix library usage example in README
+
+
 1.0.1
 ^^^^^
 **release date:** 2015-07-23
@@ -19,6 +26,7 @@ Changelog
 * New test suite
 * New documentation
 * New CLI
+* Added support for SubsCenter
 
 
 0.7.5

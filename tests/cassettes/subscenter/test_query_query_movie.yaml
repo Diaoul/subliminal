@@ -2,7 +2,7 @@ interactions:
 - request:
     body: null
     headers:
-      User-Agent: [!!python/unicode 'Subliminal/1.1.0.dev0']
+      User-Agent: [Subliminal/1.1.0.dev0]
     method: GET
     uri: http://subscenter.cinemast.com/he/cinemast/data/movie/sb/enders-game/
   response:
@@ -18,14 +18,14 @@ interactions:
         "created_by_id": 0, "created_on": "30.01.2014 ,12:09", "credits": {"4": {"\u05ea\u05e8\u05d2\u05d5\u05dd
         \u05d5\u05e1\u05e0\u05db\u05e8\u05d5\u05df \u05de\u05e9\u05de\u05d9\u05e2\u05d4":
         "\u05e4\u05d9\u05e4\u05d5  , \u05d5\u05d0\u05dc\u05db\u05e1\u05e0\u05d3\u05e8
-        \u05e4\u05df"}}, "downloaded": 1869, "files_count": 1, "hearing_impaired":
+        \u05e4\u05df"}}, "downloaded": 1871, "files_count": 1, "hearing_impaired":
         0, "id": 267140, "is_sync": 266898, "key": "abe0280c06955662b25ed48c14858c44",
         "notes": "", "sat_count": 0, "subtitle_version": "Enders.Game.2013.1080p.BluRay.x264-SPARKS",
         "vip": 0}}, "480p": {"9": {"created_by": "\u05d0\u05e0\u05d5\u05e0\u05d9\u05de\u05d9",
         "created_by_id": 0, "created_on": "30.01.2014 ,12:09", "credits": {"4": {"\u05ea\u05e8\u05d2\u05d5\u05dd
         \u05d5\u05e1\u05e0\u05db\u05e8\u05d5\u05df \u05de\u05e9\u05de\u05d9\u05e2\u05d4":
         "\u05e4\u05d9\u05e4\u05d5  , \u05d5\u05d0\u05dc\u05db\u05e1\u05e0\u05d3\u05e8
-        \u05e4\u05df"}}, "downloaded": 332, "files_count": 1, "hearing_impaired":
+        \u05e4\u05df"}}, "downloaded": 336, "files_count": 1, "hearing_impaired":
         0, "id": 267140, "is_sync": 266898, "key": "03ab6a943e732ad6d9941884bd7884c5",
         "notes": "", "sat_count": 0, "subtitle_version": "Enders.Game.2013.480p.BluRay.x264-mSD",
         "vip": 0}}, "720p": {"11": {"created_by": "\u05d0\u05e0\u05d5\u05e0\u05d9\u05de\u05d9",
@@ -321,9 +321,10 @@ interactions:
       connection: [keep-alive]
       content-length: ['26016']
       content-type: [text/html]
-      date: ['Sat, 29 Aug 2015 17:25:45 GMT']
-      last-modified: ['Sat, 29 Aug 2015 15:10:29 GMT']
-      server: [nginx/0.8.55]
+      date: ['Sun, 13 Sep 2015 20:33:21 GMT']
+      etag: ['"55f1a326-65a0"']
+      last-modified: ['Thu, 10 Sep 2015 15:35:02 GMT']
+      server: [nginx/1.8.0]
       vary: [Accept-Encoding]
     status: {code: 200, message: OK}
 version: 1

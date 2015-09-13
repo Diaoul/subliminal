@@ -2,7 +2,7 @@ interactions:
 - request:
     body: null
     headers:
-      User-Agent: [!!python/unicode 'Subliminal/1.1.0.dev0']
+      User-Agent: [Subliminal/1.1.0.dev0]
     method: GET
     uri: http://subscenter.cinemast.com/he/cinemast/data/series/sb/the-big-bang-theory/7/5/
   response:
@@ -10,19 +10,19 @@ interactions:
         {"created_by": "\u05d0\u05e0\u05d5\u05e0\u05d9\u05de\u05d9", "created_by_id":
         0, "created_on": "18.10.2013 ,16:24", "credits": {"3": {"\u05ea\u05e8\u05d2\u05d5\u05dd
         \u05d5\u05e1\u05e0\u05db\u05e8\u05d5\u05df": "\u05e1\u05d9\u05d2\u05e0\u05d8"}},
-        "downloaded": 2380, "files_count": 1, "hearing_impaired": 0, "id": 265237,
+        "downloaded": 2403, "files_count": 1, "hearing_impaired": 0, "id": 265237,
         "is_sync": 0, "key": "146367a10dcaac068ae571a53b7687f4", "notes": "", "sat_count":
         0, "subtitle_version": "The.Big.Bang.Theory.S07E05.HDTV.x264-LOL", "vip":
         0}, "2": {"created_by": "\u05d0\u05e0\u05d5\u05e0\u05d9\u05de\u05d9", "created_by_id":
         0, "created_on": "18.10.2013 ,16:24", "credits": {"3": {"\u05ea\u05e8\u05d2\u05d5\u05dd
         \u05d5\u05e1\u05e0\u05db\u05e8\u05d5\u05df": "\u05e1\u05d9\u05d2\u05e0\u05d8"}},
-        "downloaded": 1875, "files_count": 1, "hearing_impaired": 0, "id": 265237,
+        "downloaded": 1882, "files_count": 1, "hearing_impaired": 0, "id": 265237,
         "is_sync": 0, "key": "ce8e4086da2688eb6ab183c0d831e855", "notes": "", "sat_count":
         0, "subtitle_version": "The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION",
         "vip": 0}, "3": {"created_by": "\u05d0\u05e0\u05d5\u05e0\u05d9\u05de\u05d9",
         "created_by_id": 0, "created_on": "18.10.2013 ,16:24", "credits": {"3": {"\u05ea\u05e8\u05d2\u05d5\u05dd
         \u05d5\u05e1\u05e0\u05db\u05e8\u05d5\u05df": "\u05e1\u05d9\u05d2\u05e0\u05d8"}},
-        "downloaded": 272, "files_count": 1, "hearing_impaired": 0, "id": 265237,
+        "downloaded": 275, "files_count": 1, "hearing_impaired": 0, "id": 265237,
         "is_sync": 0, "key": "0e277eac84cf2bd314dcd189e38242aa", "notes": "", "sat_count":
         0, "subtitle_version": "The.Big.Bang.Theory.S07E05.HDTV.XviD-AFG", "vip":
         0}, "4": {"created_by": "\u05d0\u05e0\u05d5\u05e0\u05d9\u05de\u05d9", "created_by_id":
@@ -34,13 +34,13 @@ interactions:
         0}, "5": {"created_by": "\u05d0\u05e0\u05d5\u05e0\u05d9\u05de\u05d9", "created_by_id":
         0, "created_on": "18.10.2013 ,16:24", "credits": {"3": {"\u05ea\u05e8\u05d2\u05d5\u05dd
         \u05d5\u05e1\u05e0\u05db\u05e8\u05d5\u05df": "\u05e1\u05d9\u05d2\u05e0\u05d8"}},
-        "downloaded": 29, "files_count": 1, "hearing_impaired": 0, "id": 265237, "is_sync":
+        "downloaded": 31, "files_count": 1, "hearing_impaired": 0, "id": 265237, "is_sync":
         0, "key": "7b4535ebaabbe99d20965e9e12cb1ac3", "notes": "", "sat_count": 0,
         "subtitle_version": "The.Big.Bang.Theory.S07E05.480p.HDTV.85MB-Micromkv",
         "vip": 0}, "6": {"created_by": "\u05d0\u05e0\u05d5\u05e0\u05d9\u05de\u05d9",
         "created_by_id": 0, "created_on": "18.10.2013 ,16:24", "credits": {"3": {"\u05ea\u05e8\u05d2\u05d5\u05dd
         \u05d5\u05e1\u05e0\u05db\u05e8\u05d5\u05df": "\u05e1\u05d9\u05d2\u05e0\u05d8"}},
-        "downloaded": 59, "files_count": 1, "hearing_impaired": 0, "id": 265237, "is_sync":
+        "downloaded": 61, "files_count": 1, "hearing_impaired": 0, "id": 265237, "is_sync":
         0, "key": "2c3a61c6d73dbfe293a5d5d434a326c9", "notes": "", "sat_count": 0,
         "subtitle_version": "The.Big.Bang.Theory.S07E05.480p.HDTV.x264-mSD", "vip":
         0}}}}}'}
@@ -49,9 +49,10 @@ interactions:
       connection: [keep-alive]
       content-length: ['2994']
       content-type: [text/html]
-      date: ['Sat, 29 Aug 2015 17:25:50 GMT']
-      last-modified: ['Fri, 21 Aug 2015 13:46:54 GMT']
-      server: [nginx/0.8.55]
+      date: ['Sun, 13 Sep 2015 20:33:24 GMT']
+      etag: ['"55ef254c-bb2"']
+      last-modified: ['Tue, 08 Sep 2015 18:13:32 GMT']
+      server: [nginx/1.8.0]
       vary: [Accept-Encoding]
     status: {code: 200, message: OK}
 version: 1

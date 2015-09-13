@@ -140,7 +140,7 @@ class SubsCenterProvider(Provider):
             raise ProviderError('Request failed with status code %d' % response.status_code)
 
         subtitles = []
-        response_json = json.loads(response.content)
+        response_json = json.loads(response.content.decode('UTF-8'))
         for lang, lang_json in response_json.items():
             lang_obj = Language.fromalpha2(lang)
             if lang_obj in self.languages and lang in languages:
@@ -172,7 +172,7 @@ class SubsCenterProvider(Provider):
         if r.status_code != 200:
             raise ProviderError('Request failed with status code %d' % r.status_code)
         with zipfile.ZipFile(io.BytesIO(r.content)) as zf:
-            names_list = filter(lambda x: not x.endswith('.txt'), zf.namelist())
+            names_list = [x for x in zf.namelist() if not x.endswith('.txt')]
             if len(names_list) > 1:
                 raise ProviderError('More than one file to unzip')
             subtitle.content = fix_line_ending(zf.read(names_list[0]))

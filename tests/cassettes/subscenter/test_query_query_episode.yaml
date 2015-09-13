@@ -2,7 +2,7 @@ interactions:
 - request:
     body: null
     headers:
-      User-Agent: [!!python/unicode 'Subliminal/1.1.0.dev0']
+      User-Agent: [Subliminal/1.1.0.dev0]
     method: GET
     uri: http://subscenter.cinemast.com/he/cinemast/data/series/sb/dallas/1/3/
   response:
@@ -44,9 +44,10 @@ interactions:
       connection: [keep-alive]
       content-length: ['2651']
       content-type: [text/html]
-      date: ['Sat, 29 Aug 2015 17:25:47 GMT']
-      last-modified: ['Sat, 29 Aug 2015 15:17:08 GMT']
-      server: [nginx/0.8.55]
+      date: ['Sun, 13 Sep 2015 20:33:22 GMT']
+      etag: ['"55f5db2b-a5b"']
+      last-modified: ['Sun, 13 Sep 2015 20:23:07 GMT']
+      server: [nginx/1.8.0]
       vary: [Accept-Encoding]
     status: {code: 200, message: OK}
 version: 1

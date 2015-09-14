@@ -6,22 +6,21 @@ interactions:
     method: GET
     uri: http://subscenter.cinemast.com/he/cinemast/data/series/sb/dallas/1/3/
   response:
-    body: {string: !!python/unicode '{"he": {"1.Qsubs": {"dvdrip": {"1": {"created_by":
-        "\u05d0\u05e0\u05d5\u05e0\u05d9\u05de\u05d9", "created_by_id": 0, "created_on":
-        "06.09.2013 ,14:33", "credits": {"1": {"\u05ea\u05e8\u05d2\u05d5\u05dd": "TheInitiative
-        \u05d5-dvodvo123"}, "2": {"\u05e1\u05e0\u05db\u05e8\u05d5\u05df": "RaisingShit"}},
-        "downloaded": 5, "files_count": 1, "hearing_impaired": 0, "id": 264417, "is_sync":
-        256842, "key": "a0ed1cb02d51b74849aaf2eaa7fc65ba", "notes": "\u05e1\u05e0\u05db\u05e8\u05df
-        \u05dc\u05d2\u05e8\u05e1\u05d0 \u05d6\u05d5: dvodvo123", "sat_count": 0, "subtitle_version":
-        "Dallas.2012.S01E03.DVDRip.XviD-REWARD", "vip": 0}}, "hdtv": {"2": {"created_by":
-        "\u05d0\u05e0\u05d5\u05e0\u05d9\u05de\u05d9", "created_by_id": 0, "created_on":
-        "21.06.2012 ,13:05", "credits": {"1": {"\u05ea\u05e8\u05d2\u05d5\u05dd": "TheInitiative
-        \u05d5-dvodvo123"}, "2": {"\u05e1\u05e0\u05db\u05e8\u05d5\u05df": "RaisingShit"}},
-        "downloaded": 176, "files_count": 1, "hearing_impaired": 0, "id": 256843,
-        "is_sync": 256842, "key": "a1138da829d83763b53d2c9a6c1ed6fd", "notes": "",
-        "sat_count": 0, "subtitle_version": "Dallas.2012.S01E03.HDTV.XviD-AFG", "vip":
-        0}, "3": {"created_by": "\u05d0\u05e0\u05d5\u05e0\u05d9\u05de\u05d9", "created_by_id":
-        0, "created_on": "21.06.2012 ,13:05", "credits": {"1": {"\u05ea\u05e8\u05d2\u05d5\u05dd":
+    body: {string: '{"he": {"1.Qsubs": {"dvdrip": {"1": {"created_by": "\u05d0\u05e0\u05d5\u05e0\u05d9\u05de\u05d9",
+        "created_by_id": 0, "created_on": "06.09.2013 ,14:33", "credits": {"1": {"\u05ea\u05e8\u05d2\u05d5\u05dd":
+        "TheInitiative \u05d5-dvodvo123"}, "2": {"\u05e1\u05e0\u05db\u05e8\u05d5\u05df":
+        "RaisingShit"}}, "downloaded": 5, "files_count": 1, "hearing_impaired": 0,
+        "id": 264417, "is_sync": 256842, "key": "a0ed1cb02d51b74849aaf2eaa7fc65ba",
+        "notes": "\u05e1\u05e0\u05db\u05e8\u05df \u05dc\u05d2\u05e8\u05e1\u05d0 \u05d6\u05d5:
+        dvodvo123", "sat_count": 0, "subtitle_version": "Dallas.2012.S01E03.DVDRip.XviD-REWARD",
+        "vip": 0}}, "hdtv": {"2": {"created_by": "\u05d0\u05e0\u05d5\u05e0\u05d9\u05de\u05d9",
+        "created_by_id": 0, "created_on": "21.06.2012 ,13:05", "credits": {"1": {"\u05ea\u05e8\u05d2\u05d5\u05dd":
+        "TheInitiative \u05d5-dvodvo123"}, "2": {"\u05e1\u05e0\u05db\u05e8\u05d5\u05df":
+        "RaisingShit"}}, "downloaded": 176, "files_count": 1, "hearing_impaired":
+        0, "id": 256843, "is_sync": 256842, "key": "a1138da829d83763b53d2c9a6c1ed6fd",
+        "notes": "", "sat_count": 0, "subtitle_version": "Dallas.2012.S01E03.HDTV.XviD-AFG",
+        "vip": 0}, "3": {"created_by": "\u05d0\u05e0\u05d5\u05e0\u05d9\u05de\u05d9",
+        "created_by_id": 0, "created_on": "21.06.2012 ,13:05", "credits": {"1": {"\u05ea\u05e8\u05d2\u05d5\u05dd":
         "TheInitiative \u05d5-dvodvo123"}, "2": {"\u05e1\u05e0\u05db\u05e8\u05d5\u05df":
         "RaisingShit"}}, "downloaded": 13, "files_count": 1, "hearing_impaired": 0,
         "id": 256843, "is_sync": 256842, "key": "6afae8894c7a3a947f3ce460e3ea1cc5",
@@ -40,14 +39,14 @@ interactions:
         "notes": "", "sat_count": 0, "subtitle_version": "Dallas.2012.S01E03.720p.HDTV.X264-DIMENSION",
         "vip": 0}}}}}'}
     headers:
-      accept-ranges: [bytes]
-      connection: [keep-alive]
-      content-length: ['2651']
-      content-type: [text/html]
-      date: ['Sun, 13 Sep 2015 20:33:22 GMT']
-      etag: ['"55f5db2b-a5b"']
-      last-modified: ['Sun, 13 Sep 2015 20:23:07 GMT']
-      server: [nginx/1.8.0]
-      vary: [Accept-Encoding]
+      Accept-Ranges: [bytes]
+      Connection: [keep-alive]
+      Content-Length: ['2651']
+      Content-Type: [text/html]
+      Date: ['Mon, 14 Sep 2015 11:41:29 GMT']
+      ETag: ['"55f5db2b-a5b"']
+      Last-Modified: ['Sun, 13 Sep 2015 20:23:07 GMT']
+      Server: [nginx/1.8.0]
+      Vary: [Accept-Encoding]
     status: {code: 200, message: OK}
 version: 1

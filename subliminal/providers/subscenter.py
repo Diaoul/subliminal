@@ -154,6 +154,8 @@ class SubsCenterProvider(Provider):
                                                                 episode, title, release, kind,
                                                                 bool(sub.get('hearing_impaired', 0)),
                                                                 download_link, page_link))
+        # Sort for results consistency.
+        subtitles.sort(key=lambda x: x.download_link)
         return subtitles
 
     def list_subtitles(self, video, languages):

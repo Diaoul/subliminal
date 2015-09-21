@@ -1,0 +1,579 @@
+interactions:
+- request:
+    body: data%5BUser%5D%5Bpassword%5D=subliminal&data%5BUser%5D%5Busername%5D=subliminal&_method=POST
+    headers:
+      Content-Length: ['93']
+      Content-Type: [application/x-www-form-urlencoded]
+      User-Agent: [Subliminal/1.1]
+    method: POST
+    uri: http://legendas.tv/login
+  response:
+    body: {string: !!python/unicode ''}
+    headers:
+      accept-ranges: [bytes]
+      access-control-allow-origin: ['*']
+      age: ['0']
+      connection: [keep-alive]
+      content-length: ['0']
+      content-type: [text/html; charset=UTF-8]
+      date: ['Sat, 19 Sep 2015 14:38:21 GMT']
+      location: ['http://legendas.tv/']
+      set-cookie: [PHPSESSID=d37mobu36trv7ejvi3ksro5hk6; path=/; HttpOnly, 'PHPSESSID=deleted;
+          expires=Fri, 19-Sep-2014 14:38:20 GMT; path=/', PHPSESSID=uah7mut6p15p966ipopvtmut64;
+          path=/; HttpOnly, 'PHPSESSID=deleted; expires=Fri, 19-Sep-2014 14:38:20
+          GMT; path=/', PHPSESSID=gn4na2pr86296n9hic731cs9l6; path=/; HttpOnly]
+      vary: ['User-Agent,Accept-Encoding']
+      via: [1.1 varnish]
+      x-backend: [default_director]
+      x-cache: [MISS]
+      x-cacheable: ['YES:Forced']
+      x-varnish: ['1061158699']
+    status: {code: 302, message: Found}
+- request:
+    body: null
+    headers:
+      Cookie: [PHPSESSID=gn4na2pr86296n9hic731cs9l6]
+      User-Agent: [Subliminal/1.1]
+    method: GET
+    uri: http://legendas.tv/users/logout
+  response:
+    body: {string: !!python/unicode ''}
+    headers:
+      accept-ranges: [bytes]
+      access-control-allow-origin: ['*']
+      age: ['0']
+      connection: [keep-alive]
+      content-length: ['0']
+      content-type: [text/html; charset=UTF-8]
+      date: ['Sat, 19 Sep 2015 14:38:21 GMT']
+      location: ['http://legendas.tv/']
+      set-cookie: ['au=deleted; expires=Fri, 19-Sep-2014 14:38:20 GMT; path=/', 'PHPSESSID=deleted;
+          expires=Fri, 19-Sep-2014 14:38:20 GMT; path=/', PHPSESSID=1615cjc8i1gktrk5ph2lprdtd6;
+          path=/; HttpOnly]
+      vary: ['User-Agent,Accept-Encoding']
+      via: [1.1 varnish]
+      x-backend: [default_director]
+      x-cache: [MISS]
+      x-cacheable: ['YES:Forced']
+      x-varnish: ['1061158722']
+    status: {code: 302, message: Found}
+- request:
+    body: null
+    headers:
+      Cookie: [PHPSESSID=1615cjc8i1gktrk5ph2lprdtd6]
+      User-Agent: [Subliminal/1.1]
+    method: GET
+    uri: http://legendas.tv/
+  response:
+    body: {string: "<!doctype html>\n<html lang=\"en\">\n<head>\n\t<meta charset=\"\
+        utf-8\">\n\n    <title>Legendas TV</title>\n\n    <meta name=\"description\"\
+        \ content=\"you description\" />\n\t<meta name=\"keywords\" content=\"your\
+        \ keywords\" />\n\n\t<link href=\"/favicon.ico\" type=\"image/x-icon\" rel=\"\
+        icon\" /><link href=\"/favicon.ico\" type=\"image/x-icon\" rel=\"shortcut\
+        \ icon\" /><link href=\"http://legendas.tv/rss/destaques.rss\" type=\"application/rss+xml\"\
+        \ rel=\"alternate\" title=\"Destaques - Todos\" /><link href=\"http://legendas.tv/rss/destaques_series.rss\"\
+        \ type=\"application/rss+xml\" rel=\"alternate\" title=\"Destaques - S\xE9\
+        ries\" /><link href=\"http://legendas.tv/rss/destaques_filmes.rss\" type=\"\
+        application/rss+xml\" rel=\"alternate\" title=\"Destaques - Filmes\" /><link\
+        \ href=\"http://legendas.tv/rss/destaques_cartoons.rss\" type=\"application/rss+xml\"\
+        \ rel=\"alternate\" title=\"Destaques - Cartoons\" /><link href=\"http://legendas.tv/rss/ultimas_legendas.rss\"\
+        \ type=\"application/rss+xml\" rel=\"alternate\" title=\"\xDAltimas legendas\
+        \ enviadas\" />\n <!--   TO BE FILLED with the proper paths\n    <link rel=\"\
+        shortcut icon\" href=\"fav icon\"/>\n\t<link rel=\"canonical\" href=\"canonical\
+        \ adress\" />\n    <link rel='index' title='Nettuts+' href='http://net.tutsplus.com/'\
+        \ />\n end of TO BE FILLED -->\n\n    <!--[if lt IE 9]> <script src=\"http://html5shiv.googlecode.com/svn/trunk/html5.js\"\
+        ></script><![endif]-->\n    <link rel=\"stylesheet\" type=\"text/css\" href=\"\
+        /cache_css/css-combined.css\" />    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed'\
+        \ rel='stylesheet' type='text/css'>\n\n\t<script type=\"text/javascript\"\
+        \ src=\"/js/jquery-1.7.1.min.js\"></script>\n</head>\n<body id=\"\">\n\n<script\
+        \ type=\"text/javascript\">\n\n  var _gaq = _gaq || [];\n  _gaq.push(['_setAccount',\
+        \ 'UA-880954-1']);\n  _gaq.push(['_trackPageview']);\n\n  (function() {\n\
+        \    var ga = document.createElement('script'); ga.type = 'text/javascript';\
+        \ ga.async = true;\n    ga.src = ('https:' == document.location.protocol ?\
+        \ 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';\n    var\
+        \ s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga,\
+        \ s);\n  })();\n\n</script>\n\n    <div class=\"container\">\n\n\n    \t<header>\n\
+        \            <div class=\"upper\"></div>\n\n\t\t\t\n\t    \t\t    \t\n\n\n\
+        \            <section class=\"clearfix\">\n                <div class=\"login\"\
+        >\n                \t\n                \t<a href=\"/login\" class=\"js_entrar\"\
+        >ENTRAR</a><span>|</span><a href=\"/register\" title=\"Legendas.tv - \">REGISTRAR</a><form\
+        \ action=\"/login\" class=\"login_box\" novalidate=\"novalidate\" id=\"UserIndexForm\"\
+        \ method=\"post\" accept-charset=\"utf-8\"><div style=\"display:none;\"><input\
+        \ type=\"hidden\" name=\"_method\" value=\"POST\"/></div><a class=\"js_close\"\
+        ></a><input name=\"data[User][username]\" maxlength=\"255\" type=\"text\"\
+        \ required=\"required\"/><input name=\"data[User][password]\" type=\"password\"\
+        \ required=\"required\"/><div class=\"clearfix\"><input type=\"submit\" value=\"\
+        Entrar\" style=\"float: left;\" /><label style=\"float: left;margin:11px;\"\
+        ><input type=\"checkbox\" name=\"data[lembrar]\"> Lembrar</label></div><a\
+        \ href=\"/problemasdelogin\">&gt; Estou com problemas para <b>logar</b></a></form>\
+        \                \t\n                </div> <!-- END OF LOGIN -->\n\n    \
+        \            <a href=\"/\" class=\"logo\"><img src=\"http://i.legendas.tv/logo.png\"\
+        \ alt=\"Legendas.tv\" width=\"301\" height=\"71\" /></a>\n               \
+        \ <div class=\"menu\">\n                    <button>MENU</button>\n      \
+        \          \t\n                    <div class=\"dropdown hidden\">\n     \
+        \                   <a href=\"/meuperfil\" title=\"Legendas.tv - Meu perfil\"\
+        >Meu perfil</a><a href=\"/enviar_legenda\" title=\"Legendas.tv - Enviar Legenda\"\
+        >Enviar Legenda</a><a href=\"/meuperfil/legendas\" title=\"Legendas.tv - Legendas\
+        \ enviadas\">Legendas enviadas</a><a href=\"/meuperfil/legendas/baixadas\"\
+        \ title=\"Legendas.tv - Legendas baixadas\">Legendas baixadas</a><a href=\"\
+        /meuperfil/sugestoes\" title=\"Legendas.tv - Sugest\xF5es\">Sugest\xF5es</a>\
+        \                    </div>\n                    \n                </div>\n\
+        \n\t\t\n            \t<form action=\"/busca\" novalidate=\"novalidate\" class=\"\
+        searchbar\" data-url=\"/busca\" data-autocomplete=\"/autocomplete\" id=\"\
+        BuscaIndexForm\" method=\"post\" accept-charset=\"utf-8\"><div style=\"display:none;\"\
+        ><input type=\"hidden\" name=\"_method\" value=\"POST\"/></div><input type=\"\
+        text\" value=\"\" placeholder=\"Procurar\" id=\"search-box\"/><input type=\"\
+        submit\" class=\"icon_zoom\" value=\"\" />\n\t\t\t\t<div id=\"sugestao-legenda-box\"\
+        >\n\t\t\t\t    <ul id=\"sugestao-legenda\">\n\t\t\t\t    </ul>\n\t\t\t\t</div>\n\
+        \t\t\t\t</form>\t\t\n\t\t<!-- header .searchbar div -->\n\t\t<script>\n\t\t\
+        \    $(document).ready(function () {\n\t\t\t$(\"#search-box\").bind(\"keyup\"\
+        , function(){\n\t\t\t    remove_caracter();\n\t\t\t    sugestao();\n\t\t\t\
+        });\n\t\t\t    \n\t\t\t$(\"#search-box\").bind(\"change\", function(){\n\t\
+        \t\t    remove_caracter();\n\t\t\t    sugestao();\n\t\t\t});    \n\t\t   \
+        \ });\n\t\t    \n\t\t    function remove_caracter() {\n\t\t\tif($(\"#search-box\"\
+        ).val().indexOf(':') > -1){\n\t\t\t  $(\"#search-box\").val($(\"#search-box\"\
+        ).val().replace(/[:]/g, \" \"));\n\t\t\t}\n\t\t    }\n\t\t    \n\t\t    function\
+        \ sugestao() {\n\t\t\t\n\t\t\t    var busca = $(\"#search-box\").val();\n\t\
+        \t\t    \n\t\t\t    if (busca != \"\" && busca.length > 1) {\n\t\t\t\t$.ajax({\n\
+        \t\t\t\t    url: \"/legenda/sugestao/\" + busca,\n\t\t\t\t    success: function\
+        \ (response) {\n\t\t\t\t\t//force hide\n\t\t\t\t\t$(\"#sugestao-legenda-box\"\
+        ).hide();\n\t\t\t\t\t\n\t\t\t\t\tvar filmes = jQuery.parseJSON(response);\n\
+        \t\t\t\t\tvar count = 0;\n\t\t\t\t\tvar html = \"\";\n\t\t\t\t\tvar term =\
+        \ $(\"#search-box\").val();\n\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t$.each(filmes,\
+        \ function(p, filme){\n\t\t\t\t\t    //console.log(filme['_source']['dsc_nome'],\
+        \ filme['_score'])\n\t\t\t\t\t    count++;\n\t\t\t\t\t    \n\t\t\t\t\t   \
+        \ \n\t\t\t\t\t    if (count <= 10) {\n\t\t\t\t\t\tvar dsc_nome = filme['_source']['dsc_nome'].replace(\"\
+        :\", \"\");\n\t\t\t\t\t\t\n\t\t\t\t\t\thtml += '<li>';\n\t\t\t\t\t\thtml +=\
+        \ '<a href=\"/busca/' + dsc_nome + '/'+filme['_source']['id_filme']+'\">'\n\
+        \t\t\t\t\t\thtml += filme['_source']['dsc_nome']\n\t\t\t\t\t\t\n\t\t\t\t\t\
+        \tif (filme['_source']['temporada'] != null) {\n\t\t\t\t\t\t    if (filme['_source']['temporada']\
+        \ <= 9) {\n\t\t\t\t\t\t\thtml += ' S0' + filme['_source']['temporada'];\t\n\
+        \t\t\t\t\t\t    }else{\n\t\t\t\t\t\t\thtml += ' S' + filme['_source']['temporada'];\t\
+        \n\t\t\t\t\t\t    }   \n\t\t\t\t\t\t}\n\t\t\t\t\t\t\n\t\t\t\t\t\t//descricao\
+        \ com nome br + ano\n\t\t\t\t\t\thtml += '<span class=\"desc-legenda-search\"\
+        \ style=\"font-size: 10px;float: left;width: 100%;margin: 5px 0 10px;\">'\n\
+        \t\t\t\t\t\thtml += filme['_source']['dsc_nome_br'];\n\t\t\t\t\t\tif (filme['_source']['dsc_data_lancamento']\
+        \ != \"\") {\n\t\t\t\t\t\t    html += \" - \" + filme['_source']['dsc_data_lancamento']\n\
+        \t\t\t\t\t\t}\n\t\t\t\t\t\thtml += \"</span>\"\n\t\t\t\t\t\t\n\t\t\t\t\t\t\
+        html += '</a>';\n\t\t\t\t\t\thtml += '</li>';\n\t\t\t\t\t    }\n\t\t\t\t\t\
+        \t\n\t\t\t\t\t});\n\t\t\t\t\t\n\t\t\t\t\tif (term != \"\" && html != \"\"\
+        ) {\n\t\t\t\t\t    $(\"#sugestao-legenda\").html(html);\n\t\t\t\t\t    $(\"\
+        #sugestao-legenda-box\").show();\n\t\t\t\t\t}\n\t\t\t\t\t\n\t\t\t\t    }\n\
+        \t\t\t\t});\n\t\t\t    }else{\n\t\t\t\t$(\"#sugestao-legenda-box\").hide();\n\
+        \t\t\t    }\n\t\t    }\n\t\t</script>\n\t\t\n            </section>\n    \
+        \    </header> <!-- END OF HEADER -->\n\n    \t<div class=\"banner_728x90\"\
+        ><a href=\"http://legendas.tv/vip\">\r\n<img src=\"http://i.legendas.tv/banner_vip_728x60.jpg\"\
+        \ border=\"0\">\r\n</a></div>\n\n        <div class=\"middle \">\n\n\t\t\t\
+        \n\t\t\t\n<!-- DESTAQUE MAIS BAIXADOS-->\n<section>\n    <h2 class=\"bigtitle\"\
+        ><a href=\"/destaques_mais_baixados_da_semana\" style=\"color: #FFF;\">DESTAQUES\
+        \ MAIS BAIXADOS DA SEMANA</a></h2>\n\n    <button class=\"slider_left inactive\"\
+        ></button>\n    <div class=\"slider_wrapper\">\n\n        <div class=\"slider\
+        \ js_tooltip\">\n        \n        \t<div class=\"item\"><a href=\"/download/55f6c37e01986/Fear_The_Walking_Dead/Fear_The_Walking_Dead_S01E03_HDTV_x264_KILLERS_FUM_AFG_mSD_KILLERS_PPKORE_NTb\"\
+        ><span class=\"selo_temp\">S01E03</span><img src=\"http://i.legendas.tv/poster/214x317/legendas_tv_20150815201734.png\"\
+        \ width=\"214\" height=\"317\" alt=\"\" /><img src=\"http://i.legendas.tv/equipe/204x25/legendas_tv_20130930112213.jpg\"\
+        \ width=\"204\" height=\"25\" class=\"img_equipe\" alt=\"\" /><span>Fear The\
+        \ Walking Dead</span><p style=\"color: #333; font-size: 9pt; padding: 2px\
+        \ 0 0 5px;height: 14px; overflow: hidden;\">Fear The Walking Dead - 1\xAA\
+        \ Temporada</p></a><div class=\"tooltip\"><p>Fear.The.Walking.Dead.S01E03.HDTV.x264-KILLERS-FUM-AFG-mSD-KILLERS-PPKORE-NTb</p><p>26482\
+        \ downloads</p><p>14/09/2015 09h54</p></div></div><div class=\"item\"><a href=\"\
+        /download/55f77ef06448f/The_Strain/The_Strain_S02E10_HDTV_WEB_DL_x264_HEVC_XviD_BATV_FUM_AFG_mSD_rmteam_ShAaNiG_PSA\"\
+        ><span class=\"selo_temp\">S02E10</span><img src=\"http://i.legendas.tv/poster/214x317/legendas_tv_20150610142137.jpg\"\
+        \ width=\"214\" height=\"317\" alt=\"\" /><img src=\"http://i.legendas.tv/equipe/204x25/legendas_tv_20130930131107.png\"\
+        \ width=\"204\" height=\"25\" class=\"img_equipe\" alt=\"\" /><span>The Strain</span><p\
+        \ style=\"color: #333; font-size: 9pt; padding: 2px 0 0 5px;height: 14px;\
+        \ overflow: hidden;\">The Strain - 2\xAA Temporada</p></a><div class=\"tooltip\"\
+        ><p>The.Strain.S02E10.[HDTV.WEB-DL].[x264.HEVC.XviD]-BATV-FUM-AFG-mSD-rmteam-ShAaNiG-PSA</p><p>7403\
+        \ downloads</p><p>14/09/2015 23h14</p></div></div><div class=\"item\"><a href=\"\
+        /download/55f470b7af529/Dominion/Dominion_S02E10_HDTV_x264_FUM_AFG_RMTeam_KILLERS_PSA_mSD_ECI\"\
+        ><span class=\"selo_temp\">S02E10</span><img src=\"http://i.legendas.tv/poster/214x317/legendas_tv_20150716000815.jpg\"\
+        \ width=\"214\" height=\"317\" alt=\"\" /><img src=\"http://i.legendas.tv/equipe/204x25/legendas_tv_20140422011538.gif\"\
+        \ width=\"204\" height=\"25\" class=\"img_equipe\" alt=\"\" /><span>Dominion</span><p\
+        \ style=\"color: #333; font-size: 9pt; padding: 2px 0 0 5px;height: 14px;\
+        \ overflow: hidden;\">Dominion - 2a Temporada</p></a><div class=\"tooltip\"\
+        ><p>Dominion.S02E10.HDTV.x264-FUM-AFG-RMTeam-KILLERS-PSA-mSD-ECI</p><p>5188\
+        \ downloads</p><p>12/09/2015 15h36</p></div></div><div class=\"item\"><a href=\"\
+        /download/55f4b6340afc6/Z_Nation/Z_Nation_S02E01_HDTV_x264_KILLERS_FUM_AFG_AJAXEN_Zakh\"\
+        ><span class=\"selo_temp\">S02E01</span><img src=\"http://i.legendas.tv/poster/214x317/legendas_tv_20150911234319.jpg\"\
+        \ width=\"214\" height=\"317\" alt=\"\" /><img src=\"http://i.legendas.tv/equipe/204x25/legendas_tv_201503031607450.jpg\"\
+        \ width=\"204\" height=\"25\" class=\"img_equipe\" alt=\"\" /><span>Z Nation</span><p\
+        \ style=\"color: #333; font-size: 9pt; padding: 2px 0 0 5px;height: 14px;\
+        \ overflow: hidden;\">Z Nation - 2\xAA Temporada</p></a><div class=\"tooltip\"\
+        ><p>Z.Nation.S02E01.HDTV.x264-KILLERS-FUM-AFG-AJAXEN-[Zakh]</p><p>5026 downloads</p><p>12/09/2015\
+        \ 20h33</p></div></div><div class=\"item\"><a href=\"/download/55f7eb5f4b2da/Continuum/Continuum_S04E02_HDTV_x264_KILLERS_FUM_720p_WEBDL\"\
+        ><span class=\"selo_temp\">S04E02</span><img src=\"http://i.legendas.tv/poster/214x317/legendas_tv_20150823210639.jpg\"\
+        \ width=\"214\" height=\"317\" alt=\"\" /><img src=\"http://i.legendas.tv/equipe/204x25/legendas_tv_20130930131018.jpg\"\
+        \ width=\"204\" height=\"25\" class=\"img_equipe\" alt=\"\" /><span>Continuum</span><p\
+        \ style=\"color: #333; font-size: 9pt; padding: 2px 0 0 5px;height: 14px;\
+        \ overflow: hidden;\">Continuum - 4\xAA Temporada</p></a><div class=\"tooltip\"\
+        ><p>Continuum.S04E02.HDTV.x264-KILLERS-FUM-720p-WEBDL</p><p>4044 downloads</p><p>15/09/2015\
+        \ 06h56</p></div></div><div class=\"item\"><a href=\"/download/55f65adaddd18/Southpaw/Southpaw_2015_WEB_DL\"\
+        ><img src=\"http://i.legendas.tv/poster/214x317/legendas_tv_20150707162206.jpg\"\
+        \ width=\"214\" height=\"317\" alt=\"\" /><img src=\"http://i.legendas.tv/equipe/204x25/legendas_tv_20130930112213.jpg\"\
+        \ width=\"204\" height=\"25\" class=\"img_equipe\" alt=\"\" /><span>Southpaw</span><p\
+        \ style=\"color: #333; font-size: 9pt; padding: 2px 0 0 5px;height: 14px;\
+        \ overflow: hidden;\">Nocaute</p></a><div class=\"tooltip\"><p>Southpaw.2015.WEB-DL</p><p>3988\
+        \ downloads</p><p>14/09/2015 02h27</p></div></div><div class=\"item\"><a href=\"\
+        /download/55f48e18e26aa/Extant/Extant_S02E12E13_HDTV_x264_LOL_AFG_DIMENSION_mSD_KiNGS\"\
+        ><span class=\"selo_temp\">S02E12</span><img src=\"http://i.legendas.tv/poster/214x317/legendas_tv_20150701125815.jpg\"\
+        \ width=\"214\" height=\"317\" alt=\"\" /><img src=\"http://i.legendas.tv/equipe/204x25/legendas_tv_20130930112213.jpg\"\
+        \ width=\"204\" height=\"25\" class=\"img_equipe\" alt=\"\" /><span>Extant</span><p\
+        \ style=\"color: #333; font-size: 9pt; padding: 2px 0 0 5px;height: 14px;\
+        \ overflow: hidden;\">Extant - 2\xAA Temporada</p></a><div class=\"tooltip\"\
+        ><p>Extant.S02E12E13.HDTV.x264-LOL-AFG-DIMENSION-mSD-KiNGS</p><p>3935 downloads</p><p>12/09/2015\
+        \ 17h42</p></div></div><div class=\"item\"><a href=\"/download/55f88c5c0ae3d/Spy/Spy_2015_BDRip_BRRip_BluRay\"\
+        ><img src=\"http://i.legendas.tv/poster/214x317/legendas_tv_20150504210115.jpg\"\
+        \ width=\"214\" height=\"317\" alt=\"\" /><img src=\"http://i.legendas.tv/equipe/204x25/legendas_tv_20140422011538.gif\"\
+        \ width=\"204\" height=\"25\" class=\"img_equipe\" alt=\"\" /><span>Spy</span><p\
+        \ style=\"color: #333; font-size: 9pt; padding: 2px 0 0 5px;height: 14px;\
+        \ overflow: hidden;\">A Espi\xE3 Que Sabia de Menos</p></a><div class=\"tooltip\"\
+        ><p>Spy.2015.BDRip.BRRip.BluRay</p><p>3030 downloads</p><p>15/09/2015 18h23</p></div></div><div\
+        \ class=\"item\"><a href=\"/download/55fcb3f47513e/The_Bastard_Executioner/The_Bastard_Executioner_S01E01_E02_HDTV_WEB_DL_x264_XviD_HEVC_2HD_FUM_BATV_rmteam_NTb_PSA\"\
+        ><span class=\"selo_temp\">S01E01</span><img src=\"http://i.legendas.tv/poster/214x317/legendas_tv_20150911204311.jpg\"\
+        \ width=\"214\" height=\"317\" alt=\"\" /><img src=\"http://i.legendas.tv/equipe/204x25/legendas_tv_20130930131107.png\"\
+        \ width=\"204\" height=\"25\" class=\"img_equipe\" alt=\"\" /><span>The Bastard\
+        \ Executioner</span><p style=\"color: #333; font-size: 9pt; padding: 2px 0\
+        \ 0 5px;height: 14px; overflow: hidden;\">The Bastard Executioner - 1\xAA\
+        \ Temporada</p></a><div class=\"tooltip\"><p>The.Bastard.Executioner.S01E01-E02.[HDTV.WEB-DL].[x264.XviD.HEVC]-2HD-FUM-BATV-rmteam-NTb-PSA</p><p>2587\
+        \ downloads</p><p>18/09/2015 22h01</p></div></div><div class=\"item\"><a href=\"\
+        /download/55f9e38ab238e/Zoo/Zoo_S01E13_HDTV_x264_LOL_FUM_DIMENSION_KiNGS\"\
+        ><span class=\"selo_temp\">S01E13</span><img src=\"http://i.legendas.tv/poster/214x317/legendas_tv_20150529072340.jpg\"\
+        \ width=\"214\" height=\"317\" alt=\"\" /><img src=\"http://i.legendas.tv/equipe/204x25/legendas_tv_20130930131018.jpg\"\
+        \ width=\"204\" height=\"25\" class=\"img_equipe\" alt=\"\" /><span>Zoo</span><p\
+        \ style=\"color: #333; font-size: 9pt; padding: 2px 0 0 5px;height: 14px;\
+        \ overflow: hidden;\">Zoo - 1\xAA Temporada</p></a><div class=\"tooltip\"\
+        ><p>Zoo.S01E13.HDTV.x264-LOL-FUM-DIMENSION-KiNGS</p><p>2472 downloads</p><p>16/09/2015\
+        \ 18h47</p></div></div><div class=\"item\"><a href=\"/download/55f7877a2bc56/Awkward/Awkward_S05E03_HDTV_x264_2HD_AFG_KILLERS_mSD\"\
+        ><span class=\"selo_temp\">S05E03</span><img src=\"http://i.legendas.tv/poster/214x317/legendas_tv_20150828090305.jpg\"\
+        \ width=\"214\" height=\"317\" alt=\"\" /><img src=\"http://i.legendas.tv/equipe/204x25/legendas_tv_201310012024080.png\"\
+        \ width=\"204\" height=\"25\" class=\"img_equipe\" alt=\"\" /><span>Awkward</span><p\
+        \ style=\"color: #333; font-size: 9pt; padding: 2px 0 0 5px;height: 14px;\
+        \ overflow: hidden;\">Awkward - 5\xAA Temporada</p></a><div class=\"tooltip\"\
+        ><p>Awkward.S05E03.HDTV.x264-2HD-AFG-KILLERS-mSD</p><p>1946 downloads</p><p>14/09/2015\
+        \ 23h50</p></div></div><div class=\"item\"><a href=\"/download/55f99f882fa9c/Faking_It/Faking_It_2014_S02E13_720p_HDTV_x264_KILLERS_KILLERS_2HD_mSD_AFG_Mobile_WEB_DL\"\
+        ><span class=\"selo_temp\">S02E13</span><img src=\"http://i.legendas.tv/poster/214x317/legendas_tv_20140924140830.png\"\
+        \ width=\"214\" height=\"317\" alt=\"\" /><img src=\"http://i.legendas.tv/equipe/204x25/legendas_tv_201401191939000.jpg\"\
+        \ width=\"204\" height=\"25\" class=\"img_equipe\" alt=\"\" /><span>Faking\
+        \ It</span><p style=\"color: #333; font-size: 9pt; padding: 2px 0 0 5px;height:\
+        \ 14px; overflow: hidden;\">Faking It - 2\xAA Temporada</p></a><div class=\"\
+        tooltip\"><p>Faking.It.2014.S02E13.720p.HDTV.x264-KILLERS-KILLERS-2HD-mSD-AFG-Mobile-WEB-DL</p><p>1740\
+        \ downloads</p><p>16/09/2015 13h57</p></div></div><div class=\"item\"><a href=\"\
+        /download/55f4485c372ae/Love_and_Mercy/Love_And_Mercy_2014_1080p_BluRay_H264_AAC_RARBG_ETRG_YIFY_EVO_ShAaNiG\"\
+        ><img src=\"http://i.legendas.tv/poster/214x317/legendas_tv_20150825125507.jpg\"\
+        \ width=\"214\" height=\"317\" alt=\"\" /><img src=\"http://i.legendas.tv/equipe/204x25/legendas_tv_201505031026010.jpg\"\
+        \ width=\"204\" height=\"25\" class=\"img_equipe\" alt=\"\" /><span>Love and\
+        \ Mercy</span><p style=\"color: #333; font-size: 9pt; padding: 2px 0 0 5px;height:\
+        \ 14px; overflow: hidden;\">Love & Mercy</p></a><div class=\"tooltip\"><p>Love.And.Mercy.2014.1080p.BluRay.H264.AAC-RARBG-ETRG-YIFY-EVO-ShAaNiG</p><p>1710\
+        \ downloads</p><p>12/09/2015 12h44</p></div></div><div class=\"item\"><a href=\"\
+        /download/55fc089249513/Ray_Donovan/Ray_Donovan_S03E10_HDTV_x264_LOL_FUM_DIMENSION\"\
+        ><span class=\"selo_temp\">S03E10</span><img src=\"http://i.legendas.tv/poster/214x317/legendas_tv_20150702194758.jpg\"\
+        \ width=\"214\" height=\"317\" alt=\"\" /><img src=\"http://i.legendas.tv/equipe/204x25/legendas_tv_20131010161056.png\"\
+        \ width=\"204\" height=\"25\" class=\"img_equipe\" alt=\"\" /><span>Ray Donovan</span><p\
+        \ style=\"color: #333; font-size: 9pt; padding: 2px 0 0 5px;height: 14px;\
+        \ overflow: hidden;\">Ray Donovan - 3\xAA Temporada</p></a><div class=\"tooltip\"\
+        ><p>Ray.Donovan.S03E10.HDTV.x264-LOL/FUM/DIMENSION</p><p>1664 downloads</p><p>18/09/2015\
+        \ 09h50</p></div></div><div class=\"item\"><a href=\"/download/55f5dcf862414/Impastor/Impastor_S01E09_HDTV_x264_TASTETV_AFG_mSD_NTb\"\
+        ><span class=\"selo_temp\">S01E09</span><img src=\"http://i.legendas.tv/poster/214x317/legendas_tv_20150703154230.jpg\"\
+        \ width=\"214\" height=\"317\" alt=\"\" /><img src=\"http://i.legendas.tv/equipe/204x25/legendas_tv_20140422011538.gif\"\
+        \ width=\"204\" height=\"25\" class=\"img_equipe\" alt=\"\" /><span>Impastor</span><p\
+        \ style=\"color: #333; font-size: 9pt; padding: 2px 0 0 5px;height: 14px;\
+        \ overflow: hidden;\">Impastor - 1a Temporada</p></a><div class=\"tooltip\"\
+        ><p>Impastor.S01E09.HDTV.x264-TASTETV-AFG-mSD-NTb</p><p>1621 downloads</p><p>13/09/2015\
+        \ 17h30</p></div></div><div class=\"item\"><a href=\"/download/55fcd270a6a3c/Tomorrowland/Tomorrowland_2015_HDRip_XviD_AC3_EVO_720p_Chuck_Exclusive\"\
+        ><img src=\"http://i.legendas.tv/poster/214x317/legendas_tv_20150501150732.jpg\"\
+        \ width=\"214\" height=\"317\" alt=\"\" /><img src=\"http://i.legendas.tv/equipe/204x25/legendas_tv_201310012024080.png\"\
+        \ width=\"204\" height=\"25\" class=\"img_equipe\" alt=\"\" /><span>Tomorrowland</span><p\
+        \ style=\"color: #333; font-size: 9pt; padding: 2px 0 0 5px;height: 14px;\
+        \ overflow: hidden;\">Tomorrowland: Terra do Amanh\xE3</p></a><div class=\"\
+        tooltip\"><p>Tomorrowland.2015.HDRip.XviD.AC3-EVO-720p-Chuck-Exclusive</p><p>1543\
+        \ downloads</p><p>19/09/2015 00h11</p></div></div><div class=\"item\"><a href=\"\
+        /download/55fb566f52b85/South_Park/South_Park_S19E01_HDTV_x264_KILLERS_AFG_mSD_KILLERS_BTW_NTb\"\
+        ><span class=\"selo_temp\">S19E01</span><img src=\"http://i.legendas.tv/poster/214x317/legendas_tv_20150917151127.png\"\
+        \ width=\"214\" height=\"317\" alt=\"\" /><img src=\"http://i.legendas.tv/equipe/204x25/legendas_tv_20130930112213.jpg\"\
+        \ width=\"204\" height=\"25\" class=\"img_equipe\" alt=\"\" /><span>South\
+        \ Park</span><p style=\"color: #333; font-size: 9pt; padding: 2px 0 0 5px;height:\
+        \ 14px; overflow: hidden;\">South Park - 19\xAA Temporada</p></a><div class=\"\
+        tooltip\"><p>South.Park.S19E01.HDTV.x264-KILLERS-AFG-mSD-KILLERS-BTW-NTb</p><p>1431\
+        \ downloads</p><p>17/09/2015 21h10</p></div></div><div class=\"item\"><a href=\"\
+        /download/55fa38f3e9221/American_Ultra/American_Ultra_2015_1080p_720p_WEBRip_HDRip_CAM_AUDIO\"\
+        ><img src=\"http://i.legendas.tv/poster/214x317/legendas_tv_20150813231416.jpg\"\
+        \ width=\"214\" height=\"317\" alt=\"\" /><img src=\"http://i.legendas.tv/equipe/204x25/legendas_tv_201403041433570.gif\"\
+        \ width=\"204\" height=\"25\" class=\"img_equipe\" alt=\"\" /><span>American\
+        \ Ultra</span><p style=\"color: #333; font-size: 9pt; padding: 2px 0 0 5px;height:\
+        \ 14px; overflow: hidden;\">American Ultra: Armados e Alucinados</p></a><div\
+        \ class=\"tooltip\"><p>American.Ultra.2015.1080p.720p.WEBRip.HDRip.CAM.AUDIO</p><p>1428\
+        \ downloads</p><p>17/09/2015 00h52</p></div></div><div class=\"item\"><a href=\"\
+        /download/55f4bc8243d85/Longmire/Longmire_S04E01_WEBRip_x264_2HD_2HD\"><span\
+        \ class=\"selo_temp\">S04E01</span><img src=\"http://i.legendas.tv/poster/214x317/legendas_tv_20150831214738.jpg\"\
+        \ width=\"214\" height=\"317\" alt=\"\" /><img src=\"http://i.legendas.tv/equipe/204x25/legendas_tv_20131003214919.png\"\
+        \ width=\"204\" height=\"25\" class=\"img_equipe\" alt=\"\" /><span>Longmire</span><p\
+        \ style=\"color: #333; font-size: 9pt; padding: 2px 0 0 5px;height: 14px;\
+        \ overflow: hidden;\">Longmire - 4\xAA Temporada</p></a><div class=\"tooltip\"\
+        ><p>Longmire.S04E01.WEBRip.x264-2HD-2HD</p><p>1416 downloads</p><p>12/09/2015\
+        \ 21h00</p></div></div><div class=\"item\"><a href=\"/download/55f60e46d38b5/Longmire/Longmire_S04E02_WEBRip_x264_2HD_2HD\"\
+        ><span class=\"selo_temp\">S04E02</span><img src=\"http://i.legendas.tv/poster/214x317/legendas_tv_20150831214738.jpg\"\
+        \ width=\"214\" height=\"317\" alt=\"\" /><img src=\"http://i.legendas.tv/equipe/204x25/legendas_tv_20131003214919.png\"\
+        \ width=\"204\" height=\"25\" class=\"img_equipe\" alt=\"\" /><span>Longmire</span><p\
+        \ style=\"color: #333; font-size: 9pt; padding: 2px 0 0 5px;height: 14px;\
+        \ overflow: hidden;\">Longmire - 4\xAA Temporada</p></a><div class=\"tooltip\"\
+        ><p>Longmire.S04E02.WEBRip.x264-2HD-2HD</p><p>1275 downloads</p><p>13/09/2015\
+        \ 21h01</p></div></div><div class=\"item\"><a href=\"/download/55fb842228b2a/Zipper/Zipper_2015_HDRip_WEB_DL_BRRip_BluRay\"\
+        ><img src=\"http://i.legendas.tv/poster/214x317/legendas_tv_20150828035218.jpg\"\
+        \ width=\"214\" height=\"317\" alt=\"\" /><img src=\"http://i.legendas.tv/equipe/204x25/legendas_tv_20140422011538.gif\"\
+        \ width=\"204\" height=\"25\" class=\"img_equipe\" alt=\"\" /><span>Zipper</span></a><div\
+        \ class=\"tooltip\"><p>Zipper.2015.HDRip.WEB-DL.BRRip.BluRay</p><p>1247 downloads</p><p>18/09/2015\
+        \ 00h25</p></div></div><div class=\"item\"><a href=\"/download/55f62f3303082/Masters_of_Sex/Masters_of_Sex_S03E09_HDTV_x264_LOL_FUM_DIMENSION\"\
+        ><span class=\"selo_temp\">S03E09</span><img src=\"http://i.legendas.tv/poster/214x317/legendas_tv_20150702222030.jpg\"\
+        \ width=\"214\" height=\"317\" alt=\"\" /><img src=\"http://i.legendas.tv/equipe/204x25/legendas_tv_20131010161056.png\"\
+        \ width=\"204\" height=\"25\" class=\"img_equipe\" alt=\"\" /><span>Masters\
+        \ of Sex</span><p style=\"color: #333; font-size: 9pt; padding: 2px 0 0 5px;height:\
+        \ 14px; overflow: hidden;\">Masters of Sex - 3\xAA Temporada</p></a><div class=\"\
+        tooltip\"><p>Masters.of.Sex.S03E09.HDTV.x264-LOL-FUM-DIMENSION</p><p>1225\
+        \ downloads</p><p>13/09/2015 23h21</p></div></div><div class=\"item\"><a href=\"\
+        /download/55f8c36e18a89/Longmire/Longmire_S04E03_WEBRip_x264_2HD_2HD\"><span\
+        \ class=\"selo_temp\">S04E03</span><img src=\"http://i.legendas.tv/poster/214x317/legendas_tv_20150831214738.jpg\"\
+        \ width=\"214\" height=\"317\" alt=\"\" /><img src=\"http://i.legendas.tv/equipe/204x25/legendas_tv_20131003214919.png\"\
+        \ width=\"204\" height=\"25\" class=\"img_equipe\" alt=\"\" /><span>Longmire</span><p\
+        \ style=\"color: #333; font-size: 9pt; padding: 2px 0 0 5px;height: 14px;\
+        \ overflow: hidden;\">Longmire - 4\xAA Temporada</p></a><div class=\"tooltip\"\
+        ><p>Longmire.S04E03.WEBRip.x264-2HD-2HD</p><p>1189 downloads</p><p>15/09/2015\
+        \ 22h18</p></div></div><div class=\"item\"><a href=\"/download/55fd482c1a485/Gotham/Gotham_S02E01_Damned_If_You_Do_480p_WEBRip_x264_HERO\"\
+        ><span class=\"selo_temp\">S02E01</span><img src=\"http://i.legendas.tv/poster/214x317/legendas_tv_20150831220226.jpg\"\
+        \ width=\"214\" height=\"317\" alt=\"\" /><img src=\"http://i.legendas.tv/equipe/204x25/legendas_tv_20131002210559.jpg\"\
+        \ width=\"204\" height=\"25\" class=\"img_equipe\" alt=\"\" /><span>Gotham</span><p\
+        \ style=\"color: #333; font-size: 9pt; padding: 2px 0 0 5px;height: 14px;\
+        \ overflow: hidden;\">Gotham - 2\xAA Temporada</p></a><div class=\"tooltip\"\
+        ><p>Gotham.S02E01.Damned.If.You.Do.480p.WEBRip.x264-HERO</p><p>1128 downloads</p><p>19/09/2015\
+        \ 08h34</p></div></div>\n        </div>\n        \n    </div> <!-- END OF\
+        \ SLIDER -->\n    <button class=\"slider_right\"></button>\n\n</section><!--\
+        \ END DESTAQUE MAIS BAIXADOS-->\n\n<div class=\"banner_728x90\"><script type=\"\
+        text/javascript\" src=\"http://adrequisitor-af.lp.uol.com.br/uolaf.js\"></script>\r\
+        \n<style>\r\n.banner_728x90{\r\nheight: 185px;\r\n}\r\n</style></div><div\
+        \ id=\"banner_lateral\"><a href=\"http://legendas.tv/vip\">\r\n<img src=\"\
+        http://i.legendas.tv/banner_vip_160x600.jpg\" border=\"0\">\r\n</a></div><div\
+        \ class=\"bannerpopupuol\"> <!-- banner pop up--><script>\r\n    function\
+        \ jsPopunder(e,t){function d(){try{c=Math.floor(document.cookie.split(h+\"\
+        Cap=\")[1].split(\";\")[0]);}catch(e){}return l<=c||document.cookie.indexOf(h+\"\
+        =\")!==-1;}function v(e,t,i,s,o,u){if(d()){return;}var a=\"toolbar=no,scrollbars=yes,location=yes,statusbar=yes,menubar=no,resizable=1,width=\"\
+        +i.toString()+\",height=\"+s.toString()+\",screenX=\"+o+\",screenY=\"+u;document.onclick=function(){if(d()){return;}r=n.window.open(e,t,a);if(r){var\
+        \ i=new Date;document.cookie=h+\"=1;expires=\"+(new Date(i.setTime(i.getTime()+f))).toGMTString()+\"\
+        ;path=/\",i=new Date,document.cookie=h+\"Cap=\"+(c+1)+\";expires=\"+(new Date(i.setTime(i.getTime()+84600000))).toGMTString()+\"\
+        ;path=/\",m();}};}function m(){try{r.blur(),r.opener.window.focus(),window.self.window.blur(),window.focus(),p.firefox&&g(),p.webkit&&y();}catch(e){}}function\
+        \ g(){var e=window.open(\"about:blank\");e.focus(),e.close();}function y(){var\
+        \ e=document.createElement(\"a\");e.href=\"about:blank\",e.target=\"PopHelper\"\
+        ,document.getElementsByTagName(\"body\")[0].appendChild(e),e.parentNode.removeChild(e);var\
+        \ t=document.createEvent(\"MouseEvents\");t.initMouseEvent(\"click\",!0,!0,window,0,0,0,0,0,!0,!1,!1,!0,0,null),e.dispatchEvent(t),window.open(\"\
+        about:blank\",\"PopHelper\").close();}var n=top!=self&&typeof top.document.location.toString()==\"\
+        string\"?top:self,r=null;t=t||{};var i=t.name||Math.floor(Math.random()*1000+1),s=t.width||window.innerWidth,o=t.height||window.innerHeight,u=typeof\
+        \ t.left!=\"undefined\"?t.left.toString():window.screenX,a=typeof t.top!=\"\
+        undefined\"?t.top.toString():window.screenY,f=t.wait||6600;f*=1000;var l=t.cap||1,c=0,h=t.cookie||\"\
+        __.popunder\",p=function(){var e=navigator.userAgent.toLowerCase(),t={webkit:/webkit/.test(e),mozilla:/mozilla/.test(e)&&!/(compatible|webkit)/.test(e),chrome:/chrome/.test(e),msie:/msie/.test(e)&&!/opera/.test(e),firefox:/firefox/.test(e),safari:/safari/.test(e)&&!/chrome/.test(e),opera:/opera/.test(e)};return\
+        \ t.version=t.safari?(e.match(/.+(?:ri)[\\/: ]([\\d.]+)/)||[])[1]:(e.match(/.+(?:ox|me|ra|ie)[\\\
+        /: ]([\\d.]+)/)||[])[1],t;}();if(d()){return;}v(e,i,s,o,u,a);}\r\n</script>\r\
+        \n\r\n<script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js\"\
+        \ type=\"text/javascript\"></script>\r\n<script type=\"text/javascript\" src=\"\
+        /js/jquery.cookie.js\"></script>\r\n\r\n<script type=\"text/javascript\">\r\
+        \njQuery(document).ready(function($){\r\n    \r\n    \r\n    if($.cookie('popup-likebox')\
+        \ != 'yes'){\r\n\t$('#fanback').fadeIn('medium');\r\n\t\r\n\t$('#fanback,\
+        \ #exit').click(function(){\r\n\t    $('#fanback').stop().fadeOut('medium');\r\
+        \n\t});\r\n    }\r\n    \r\n    $.cookie('popup-likebox', 'yes', { path: '/',\
+        \ expires: 5 });\r\n    \r\n    \r\n    // MENSAGEM\r\n    // console.log(\"\
+        Mensagem\", $.cookie('popup-mensagem'));\r\n    // if($.cookie('popup-mensagem')\
+        \ != 'yes'){\r\n    //     $('#mensagem-importante').fadeIn('medium');\r\n\
+        \    //     \r\n    //     $('#fechar').click(function(){\r\n    //      \
+        \   $('#mensagem-importante').stop().fadeOut('medium');\r\n    //     });\r\
+        \n    // }\r\n    // \r\n    // var date = new Date();\r\n    // var minutes\
+        \ = 30;\r\n    // date.setTime(date.getTime() + (minutes * 60 * 1000));\r\n\
+        \    // $.cookie('popup-mensagem', 'yes', { path: '/', expires: date});\r\n\
+        \    // MENSAGEM\r\n});\r\n</script>\r\n\r\n<style>\r\n    #fanback {\r\n\t\
+        display:none;\r\n\tbackground:rgba(0,0,0,0.8);\r\n\twidth:100%;\r\n\theight:100%;\r\
+        \n\tposition:fixed;\r\n\ttop:0;\r\n\tleft:0;\r\n\tz-index:99999;\r\n    }\r\
+        \n    \r\n    #likebox{\r\n\tposition: fixed;\r\n\twidth: 300px;\r\n\theight:\
+        \ 258px;\r\n\ttop: 50%;\r\n\tleft: 50%;\r\n\tmargin-top: -130px;\r\n\tmargin-left:\
+        \ -150px;\r\n\tbackground-color: #fff;\r\n\tborder-radius: 10px;\r\n    }\r\
+        \n    \r\n    #likebox-close{\r\n\tposition: absolute;\r\n\tbackground-color:\
+        \ #3D3D3D;\r\n\tcolor: #fff;\r\n\ttop: -10px;\r\n\tright: -10px;\r\n\twidth:\
+        \ 30px;\r\n\ttext-align: center;\r\n\theight: 30px;\r\n\tline-height: 25px;\r\
+        \n\tborder: 2px solid #cecece;\r\n\tborder-radius: 15px;\r\n    }\r\n</style>\r\
+        \n\r\n<div id=\"fanback\" style=\"display: none;\">\r\n    <div id=\"likebox\"\
+        >\r\n\t<iframe src=\"//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2FLegendasTv&amp;width&amp;height=258&amp;colorscheme=light&amp;show_faces=true&amp;header=false&amp;stream=false&amp;show_border=false\"\
+        \ scrolling=\"no\" frameborder=\"0\" style=\"border:none; overflow:hidden;\
+        \ height:258px; width:300px;\" allowtransparency=\"true\">\r\n\t</iframe>\r\
+        \n\t\r\n\t<div id=\"likebox-close\">\r\n\t    X\r\n\t</div>\r\n    </div>\r\
+        \n</div>\r\n\r\n\r\n\r\n<!-- mensagem -->\r\n\r\n\r\n<style>\r\n    #mensagem-importante\
+        \ {\r\n        display:none;\r\n        background:rgba(0,0,0,0.8);\r\n  \
+        \      width:100%;\r\n        height:100%;\r\n        position:fixed;\r\n\
+        \        top:0;\r\n        left:0;\r\n        z-index:99999;\r\n    }\r\n\
+        \    \r\n    #mensagem-importante-texto{\r\n        position: fixed;\r\n \
+        \       width: 800px;\r\n        height: 550px;\r\n        top: 50%;\r\n \
+        \       left: 50%;\r\n        margin-top: -290px;\r\n        margin-left:\
+        \ -400px;\r\n        background-color: #fff;\r\n        border-radius: 10px;\r\
+        \n        padding: 20px;\r\n    }\r\n    \r\n    #fechar{\r\n        position:\
+        \ absolute;\r\n        background-color: #3D3D3D;\r\n        color: #fff;\r\
+        \n        top: -10px;\r\n        right: -10px;\r\n        width: 30px;\r\n\
+        \        text-align: center;\r\n        height: 30px;\r\n        line-height:\
+        \ 25px;\r\n        border: 2px solid #cecece;\r\n        border-radius: 15px;\r\
+        \n    }\r\n</style>\r\n\r\n<div id=\"mensagem-importante\">\r\n    \r\n  \
+        \  <div id=\"mensagem-importante-texto\">\r\n        <p>\r\n            Ol\xE1\
+        ,\r\n        </p>\r\n        <br/>\r\n        <p>\r\n            Estamos chegando\
+        \ ao 9\xAA ano de LTV. Hoje, temos mais de 200 mil visitantes di\xE1rios e\
+        \ contamos com 260 mil legendas - incluindo-se a\xED 32 mil legendas exclusivas\
+        \ feitas por legenders e equipes parceiras do LTV para centenas de s\xE9ries\
+        \ e milhares de filmes. Estes n\xFAmeros nos orgulham pois sabemos que, por\
+        \ meio das nossas legendas, conseguimos proporcionar cultura e entretenimento\
+        \ a milh\xF5es de brasileiros.\r\n        </p>\r\n        <br/>\r\n      \
+        \  <p>\r\n            Mas tamb\xE9m h\xE1 n\xFAmeros que nos preocupam, como\
+        \ os custos para manter o LTV no ar. Devido a uma conjun\xE7\xE3o de fatores\
+        \ - como a dificuldade em encontrar anunciantes, altos custos de infraestrutura\
+        \ e manuten\xE7\xE3o, bem como o aumento do d\xF3lar - o LTV perdeu a capacidade\
+        \ de se bancar financeiramente.\r\n        </p>\r\n        <br/>\r\n     \
+        \   <p>\r\n            Para manter o site no ar, j\xE1 algum tempo n\xF3s\
+        \ da administra\xE7\xE3o passamos a pagar do pr\xF3prio bolso todos os custos\
+        \ (por isso n\xE3o conseguimos investir em grandes mudan\xE7as e novas funcionalidades;\
+        \ todos nossos esfor\xE7os foram concentrados para manter o LTV no ar). Por\xE9\
+        m, chegamos a um ponto em que n\xE3o podemos mais bancar sozinhos o site.\r\
+        \n        </p>\r\n        <br/>\r\n        <p>\r\n            Por isso, pedimos\
+        \ a ajuda de voc\xEAs para manter o LTV no ar: considerem colaborar financeiramente\
+        \ com o site.\r\n        </p>\r\n        <br/>\r\n        <p>\r\n        \
+        \    Tecnicamente, o Paypal e Pagseguro n\xE3o permitem que recebamos doa\xE7\
+        \xF5es, por isso disponibilizamos a venda de 'assinaturas vip' - embora a\
+        \ assinatura n\xE3o ofere\xE7a tantas vantagens quanto gostar\xEDamos de dar\
+        \ para quem ajuda o site, acaba sendo uma forma simb\xF3lica de doa\xE7\xE3\
+        o.\r\n        </p>\r\n        <br/>\r\n        <p>\r\n            \xC9 poss\xED\
+        vel realizar a aquisi\xE7\xE3o de assinatura VIP em:\r\n            <b><a\
+        \ href=\"http://legendas.tv/vip\">http://legendas.tv/vip</a></b>\r\n     \
+        \   </p>\r\n        <br/>\r\n        <p>\r\n            Agradecemos sua ajuda,\r\
+        \n        </p>\r\n        <br/>\r\n        <p>\r\n            Equipe LTV\r\
+        \n        </p>\r\n        <br/>\r\n        \r\n        <img src=\"http://i.legendas.tv/painel/logo.png\"\
+        \ />\r\n        \r\n        <div id=\"fechar\">\r\n            X\r\n     \
+        \   </div>\r\n    </div>\r\n</div></div>\n<!-- DESTAQUES -->\n<div id=\"pagination_target\"\
+        >\n\tCarregando destaques...\n</div>\n\n<script type=\"text/javascript\">\n\
+        \    $(document).ready(function(){\n\t$('#pagination_target').load('/legenda/carrega_destaques');\n\
+        \    });\n</script>\n<!-- END DESTAQUES -->\n\n\n\n<section>\n    <article\
+        \ class=\"js_tooltip\">\n        <h2><a href=\"/legendas\" style=\"color:\
+        \ #FFF\">\xDALTIMAS LEGENDAS</a></h2>\n<div><a href=\"/download/55fd482c1a485/Gotham/Gotham_S02E01_Damned_If_You_Do_480p_WEBRip_x264_HERO\"\
+        ><img src=\"http://i.legendas.tv/idioma/icon_brazil.png\" alt=\"Portugu\xEA\
+        s-BR\" title=\"Portugu\xEAs-BR\" /><span>Gotham.S02E01.Damned.If.You.Do.480p.WEBRip.x264-HERO</span></a><div\
+        \ class=\"tooltip\"><h3><a href=\"/usuario/the_tozz\">the_tozz</a></h3><p>19/09/2015\
+        \ 08h34</p><p>\"The_Tozz\" e \"Equipe inSanos\" apresentam:\r\n\r\nGOTHAM\
+        \ - 2x01 - \"Damned if You Do\"\r\n\r\nLEGENDAS:\r\n@helde</p></div></div><div><a\
+        \ href=\"/download/55fd230171235/Papa_ou_maman/Papa_ou_Maman_2015_720p_BRRip_x264_AC3_HORiZON_ArtSubs_BluRay_DVDRip_HDRip\"\
+        ><img src=\"http://i.legendas.tv/idioma/icon_brazil.png\" alt=\"Portugu\xEA\
+        s-BR\" title=\"Portugu\xEAs-BR\" /><span>Papa.ou.Maman.2015.720p.BRRip.x264.AC3.HORiZON-ArtSubs\
+        \ + BluRay + DVDRip + HDRip</span></a><div class=\"tooltip\"><h3><a href=\"\
+        /usuario/art_subs\">art_subs</a></h3><p>19/09/2015 05h55</p><p>- Equipe Art\
+        \ Subs -\r\n7 anos fazendo Arte para voc\xEA!\r\n\r\n\xBB Legenda: Durenkian\r\
+        \n\r\n{ em branco e amare</p></div></div><div><a href=\"/download/55fcf79be33e1/Mammon/Mammon_S01E04_720p_HDTV_x264_Norwegian_DoKtor\"\
+        ><img src=\"http://i.legendas.tv/idioma/icon_brazil.png\" alt=\"Portugu\xEA\
+        s-BR\" title=\"Portugu\xEAs-BR\" /><span>Mammon.S01E04.720p.HDTV.x264.Norwegian-DoKtor</span></a><div\
+        \ class=\"tooltip\"><h3><a href=\"/usuario/drcaio\">drcaio</a></h3><p>19/09/2015\
+        \ 02h50</p><p>Miniss\xE9rie norueguesa em 6 epis\xF3dios.\r\nAs legendas ser\xE3\
+        o postadas aos s\xE1bados.\r\n\r\nMAMMON\r\nS01E04</p></div></div><div><a\
+        \ href=\"/download/55fcd6b61467c/Dag/Dag_S01E08_XviD_h264_720_Joshi990_NorTV\"\
+        ><img src=\"http://i.legendas.tv/idioma/icon_brazil.png\" alt=\"Portugu\xEA\
+        s-BR\" title=\"Portugu\xEAs-BR\" /><span>Dag.S01E08.XviD.h264.720-Joshi990-NorTV</span></a><div\
+        \ class=\"tooltip\"><h3><a href=\"/usuario/frederic\">frederic</a></h3><p>19/09/2015\
+        \ 00h29</p><p>Dag - Epis\xF3dio 8 - \"Dois \xE9 o numero mais solit\xE1rio\"\
+        \r\n\r\nReleases:\r\nDAG.S01E08\r\nDAG.S01E08.To.er.de</p></div></div><div><a\
+        \ href=\"/download/55fcd270a6a3c/Tomorrowland/Tomorrowland_2015_HDRip_XviD_AC3_EVO_720p_Chuck_Exclusive\"\
+        ><img src=\"http://i.legendas.tv/idioma/icon_brazil.png\" alt=\"Portugu\xEA\
+        s-BR\" title=\"Portugu\xEAs-BR\" /><span>Tomorrowland.2015.HDRip.XviD.AC3-EVO-720p-Chuck-Exclusive</span></a><div\
+        \ class=\"tooltip\"><h3><a href=\"/usuario/GriotsTeam\">GriotsTeam</a></h3><p>19/09/2015\
+        \ 00h11</p><p>Griots Team\r\n\"Testemunhe um novo conceito em legendas\"\r\
+        \n\r\nTOMORROWLAND\r\nUm Lugar Onde Nada \xE9 Imposs</p></div></div><div><a\
+        \ href=\"/download/55fccd8638e17/Murder_My_Sweet/Murder_My_Sweet_1944_720p_BluRay_x264_YIFY\"\
+        ><img src=\"http://i.legendas.tv/idioma/icon_brazil.png\" alt=\"Portugu\xEA\
+        s-BR\" title=\"Portugu\xEAs-BR\" /><span>Murder,.My.Sweet.1944.720p.BluRay.x264.YIFY</span></a><div\
+        \ class=\"tooltip\"><h3><a href=\"/usuario/andrerakitico75\">andrerakitico75</a></h3><p>18/09/2015\
+        \ 23h50</p><p>- 23,976 FPS \r\n\r\n- Serve para 1080p, basta renomear.</p></div></div><div><a\
+        \ href=\"/download/55fcbccfcef20/Insidious_Chapter_3/Insidious_Chapter_3_2015_1080p_WEB_DL_x264_ShAaNiG\"\
+        ><img src=\"http://i.legendas.tv/idioma/icon_brazil.png\" alt=\"Portugu\xEA\
+        s-BR\" title=\"Portugu\xEAs-BR\" /><span>Insidious.Chapter.3.2015.1080p.WEB-DL.x264.ShAaNiG</span></a><div\
+        \ class=\"tooltip\"><h3><a href=\"/usuario/CassioSanches\">CassioSanches</a></h3><p>18/09/2015\
+        \ 22h39</p><p></p></div></div><div><a href=\"/download/55fcb95ca2289/Longmire/Longmire_S04E05_WEBRip_x264_2HD_NoGRP_AFG\"\
+        ><img src=\"http://i.legendas.tv/idioma/icon_brazil.png\" alt=\"Portugu\xEA\
+        s-BR\" title=\"Portugu\xEAs-BR\" /><span>Longmire.S04E05.WEBRip.x264-2HD-NoGRP-AFG</span></a><div\
+        \ class=\"tooltip\"><h3><a href=\"/usuario/QueensOfTheLab\">QueensOfTheLab</a></h3><p>18/09/2015\
+        \ 22h24</p><p>- Equipe Queens Of The Lab:\r\nDiabolicamente Majestosas -\r\
+        \n\r\nLONGMIRE\t\t \r\n4x05 Help Wanted\r\n\r\nLegenda</p></div></div>\t</article>\
+        \ \n    <article class=\"style_1 js_tooltip\">\n    \t<h2><a href=\"/traducoes_em_andamento\"\
+        \ style=\"color: inherit\">TRADU\xC7\xD5ES EM ANDAMENTO</a></h2>\n<div><p><b>Boychoir</b>\
+        \ - inSanos</p><span class=\"number\">91%</span><span class=\"bar p_91\"></span><div\
+        \ class=\"tooltip\"><h3><a href=\"/usuario/inSanos\">inSanos</a></h3><p>26/08/2015\
+        \ 16h26</p><p>Filme muito bom com elenco de primeira.</p></div></div><div><p><b>The\
+        \ Falling</b> - WonderSubs</p><span class=\"number\">84%</span><span class=\"\
+        bar p_84\"></span><div class=\"tooltip\"><h3><a href=\"/usuario/WonderSubs\"\
+        >WonderSubs</a></h3><p>29/08/2015 02h12</p><p>Legenda com aux\xEDlio do subpack\
+        \ para os releases BluRay.</p></div></div><div><p><b>Hitman: Agent 47</b>\
+        \ - inSanos</p><span class=\"number\">82%</span><span class=\"bar p_82\"></span><div\
+        \ class=\"tooltip\"><h3><a href=\"/usuario/inSanos\">inSanos</a></h3><p>06/09/2015\
+        \ 13h56</p><p>Baseado no personagem de videogame Hitman.</p></div></div><div><p><b>1001\
+        \ Gram</b> - DanDee</p><span class=\"number\">70%</span><span class=\"bar\
+        \ p_70\"></span><div class=\"tooltip\"><h3><a href=\"/usuario/DanDee\">DanDee</a></h3><p>18/09/2015\
+        \ 12h12</p><p>Indicado da Noruega ao Oscar de Melhor Filme Estrangeiro 2015.</p></div></div><div><p><b>Self/less</b>\
+        \ - eXtremeSubs</p><span class=\"number\">69%</span><span class=\"bar p_69\"\
+        ></span><div class=\"tooltip\"><h3><a href=\"/usuario/eXtremeSubs\">eXtremeSubs</a></h3><p>05/09/2015\
+        \ 18h15</p><p>Um magnata imobili\xE1rio, morrendo, transfere sua consci\xEA\
+        ncia para um novo corpo saud\xE1vel, mas logo</p></div></div><div><p><b>Tromeo\
+        \ and Juliet</b> - WTFSubs</p><span class=\"number\">67%</span><span class=\"\
+        bar p_67\"></span><div class=\"tooltip\"><h3><a href=\"/usuario/WTFSubs\"\
+        >WTFSubs</a></h3><p>16/09/2015 21h25</p><p>Mais um classic\xE3o da TROMA.\
+        \ Tradu\xE7\xE3o do \xE1udio.</p></div></div><div><p><b>Toute premi\xE8re\
+        \ fois / I Kissed a Girl</b> - art_subs</p><span class=\"number\">66%</span><span\
+        \ class=\"bar p_66\"></span><div class=\"tooltip\"><h3><a href=\"/usuario/art_subs\"\
+        >art_subs</a></h3><p>10/09/2015 03h55</p><p>T\xEDtulo do filme no Brasil:\
+        \ \"Beijei Uma Garota\". Estaremos lan\xE7ando o release: \"I.Kissed.A.Girl.[To</p></div></div><div><p><b>Elephant\
+        \ Song</b> - art_subs</p><span class=\"number\">61%</span><span class=\"bar\
+        \ p_61\"></span><div class=\"tooltip\"><h3><a href=\"/usuario/art_subs\">art_subs</a></h3><p>08/08/2015\
+        \ 03h49</p><p>Filme com Xavier Dolan. Release: Elephant.Song.2014.DVDRip.x264.AC3.HORiZON-ArtSubs</p></div></div>\
+        \    </article>\n</section>\n\n<div class=\"clear\"></div>\n        </div>\
+        \ <!-- END OF MIDDLE -->\n\n\t\t<div class=\"clear\"></div>\n\t\t\n\t\t<div\
+        \ class=\"middle\"><section><article><div class=\"banner_300x250\"><script\
+        \ type=\"text/javascript\">\r\n<!--\r\ndescrColor=\"000000\";titleColor=\"\
+        000000\";urlColor=\"A6A6A6\";borderColor=\"FFFFFF\";bgColor=\"FFFFFF\";altColor=\"\
+        FFFFFF\";coddisplaysupplier=\"0eec387f433b43c69b8eec45dd14b5af\";formatId=\"\
+        9\";numads=\"4\";type=\"1\";\r\n-->\r\n</script>\r\n<script type=\"text/javascript\"\
+        \ src=\"http://adrequisitor-af.lp.uol.com.br/uolaf.js\"></script></div></article><article><div\
+        \ class=\"banner_300x250\"><script type=\"text/javascript\">\r\n<!--\r\ndescrColor=\"\
+        000000\";titleColor=\"000000\";urlColor=\"A6A6A6\";borderColor=\"FFFFFF\"\
+        ;bgColor=\"FFFFFF\";altColor=\"FFFFFF\";coddisplaysupplier=\"0eec387f433b43c69b8eec45dd14b5af\"\
+        ;formatId=\"9\";numads=\"4\";type=\"1\";\r\n-->\r\n</script>\r\n<script type=\"\
+        text/javascript\" src=\"http://adrequisitor-af.lp.uol.com.br/uolaf.js\"></script></div></article></section><div\
+        \ class=\"clear\"></div></div>\t\t\n\t\t<div class=\"clear\"></div>\n\n  \
+        \      <footer>\n\n            <div class=\"clear\"></div>\n            <a\
+        \ href=\"https://www.facebook.com/Legendas.TV\" title=\"Legendas.tv - Facebook\"\
+        \ class=\"icon_facebook\" target=\"_blank\"></a>\n            <a href=\"https://twitter.com/legendas\"\
+        \ title=\"Legendas.tv - Twitter\" class=\"icon_twitter\" target=\"_blank\"\
+        ></a>\n            <a href=\"/\" class=\"logo\"><img src=\"http://i.legendas.tv/logo.png\"\
+        \ alt=\"Legendas.tv\" width=\"140\" height=\"33\" /></a>\n            <div\
+        \ class=\"footer_menu\">\n                <span>|</span>\n               \
+        \ <a href=\"/legendas\">LEGENDAS</a>                <span>|</span>\n     \
+        \           <a href=\"/legenders\">LEGENDERS</a>                <span>|</span>\n\
+        \                <a href=\"/freshlogin\" target=\"_blank\">AJUDA</a>     \
+        \           <span>|</span>\n                <a href=\"/rss.html\">RSS</a>\
+        \                <span>|</span>\n\t\t<a href=\"http://www.sitepx.com\" target=\"\
+        _blank\">CRIAR SITE</a>\n\t\t<span>|</span>\n\t\t<a href=\"http://legendastv.freshdesk.com/support/solutions/articles/1000150679\"\
+        \ target=\"_blank\">LEGAL NOTICE</a>\n\t\t<span>|</span>\n            </div>\n\
+        \            <div class=\"clear\"></div>\n\n            <div class=\"footer_bg\"\
+        ></div>\n        </footer> <!-- END OF FOOTER -->\n</div>\n\n\n\n<div class=\"\
+        loading_modal\"><!-- Place at bottom of page --></div>\n\n\t<script type=\"\
+        text/javascript\" src=\"http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js\"\
+        ></script><script type=\"text/javascript\" src=\"/cache_js/js-combined.js\"\
+        ></script>    <!--[if lt IE 9]><script src=\"http://css3-mediaqueries-js.googlecode.com/files/css3-mediaqueries.js\"\
+        \ type=\"text/javascript\"></script><![endif]-->\n\n<!-- SERVER:  -->\n\n\
+        </body>\n</html>\n"}
+    headers:
+      accept-ranges: [bytes]
+      access-control-allow-origin: ['*']
+      age: ['0']
+      connection: [keep-alive]
+      content-length: ['40508']
+      content-type: [text/html; charset=UTF-8]
+      date: ['Sat, 19 Sep 2015 14:38:22 GMT']
+      vary: ['User-Agent,Accept-Encoding']
+      via: [1.1 varnish]
+      x-backend: [default_director]
+      x-cache: [MISS]
+      x-cacheable: ['YES:Forced']
+      x-varnish: ['1061158749']
+    status: {code: 200, message: OK}
+version: 1

@@ -24,20 +24,21 @@ class SubsCenterSubtitle(Subtitle):
 
     provider_name = 'subscenter'
 
-    def __init__(self, language, series, season, episode, title, release_name, kind, hearing_impaired,
-                 download_link, page_link):
+    def __init__(self, subtitle_id, subtitle_key, language, series, season, episode, title, release_name, kind,
+                 hearing_impaired, page_link):
         super(SubsCenterSubtitle, self).__init__(language, hearing_impaired, page_link)
+        self.subtitle_id = subtitle_id
+        self.subtitle_key = subtitle_key
         self.series = series
         self.season = season
         self.episode = episode
         self.title = title
         self.release_name = release_name
         self.kind = kind
-        self.download_link = download_link
 
     @property
     def id(self):
-        return self.download_link
+        return self.subtitle_id
 
     def get_matches(self, video, hearing_impaired=False):
         matches = super(SubsCenterSubtitle, self).get_matches(video, hearing_impaired=hearing_impaired)
@@ -91,8 +92,7 @@ class SubsCenterProvider(Provider):
             # Retrieve CSRF token first.
             self.session.get(url)
             csrf_token = self.session.cookies['csrftoken']
-            data = {'username': self.username, 'password': self.password,
-                    'next': '/he/', 'csrfmiddlewaretoken': csrf_token}
+            data = {'username': self.username, 'password': self.password, 'csrfmiddlewaretoken': csrf_token}
             r = self.session.post(url, data, timeout=10, allow_redirects=False)
             if r.status_code == 302:
                 logger.info('Logged in')
@@ -104,9 +104,8 @@ class SubsCenterProvider(Provider):
         # logout
         if self.logged_in:
             r = self.session.get(self.server + 'subscenter/accounts/logout/', timeout=10)
+            r.raise_for_status()
             logger.info('Logged out')
-            if r.status_code != 200:
-                raise ProviderError('Request failed with status code %d' % r.status_code)
             self.logged_in = False
         self.session.close()
 
@@ -136,11 +135,9 @@ class SubsCenterProvider(Provider):
             raise ValueError('One or more parameters are missing')
         logger.debug('Searching subtitles %r', {'title': title, 'season': season, 'episode': episode})
         response = self.session.get(url)
-        if response.status_code != 200:
-            raise ProviderError('Request failed with status code %d' % response.status_code)
-
+        response.raise_for_status()
         subtitles = []
-        response_json = json.loads(response.content.decode('UTF-8'))
+        response_json = json.loads(response.text)
         for lang, lang_json in response_json.items():
             lang_obj = Language.fromalpha2(lang)
             if lang_obj in self.languages and lang in languages:
@@ -148,14 +145,15 @@ class SubsCenterProvider(Provider):
                     for quality in group_data.values():
                         for sub in quality.values():
                             release = sub.get('subtitle_version')
-                            download_link = self.server + 'subtitle/download/' + lang + '/' + str(sub.get('id')) + \
-                                '/?v=' + release + '&key=' + str(sub.get('key'))
-                            subtitles.append(SubsCenterSubtitle(lang_obj, series, season,
-                                                                episode, title, release, kind,
-                                                                bool(sub.get('hearing_impaired', 0)),
-                                                                download_link, page_link))
+                            subtitle_id = sub.get('id')
+                            subtitle_key = sub.get('key')
+                            # We don't want to add problematic subtitles.
+                            if subtitle_id is not None and subtitle_key is not None:
+                                subtitles.append(SubsCenterSubtitle(subtitle_id, subtitle_key, lang_obj, series,
+                                                                    season, episode, title, release, kind,
+                                                                    bool(sub.get('hearing_impaired', 0)), page_link))
         # Sort for results consistency.
-        subtitles.sort(key=lambda x: x.download_link)
+        subtitles.sort(key=lambda x: x.subtitle_key)
         return subtitles
 
     def list_subtitles(self, video, languages):
@@ -170,9 +168,11 @@ class SubsCenterProvider(Provider):
         return self.query(languages, series, season, episode, title)
 
     def download_subtitle(self, subtitle):
-        r = self.session.get(subtitle.download_link, timeout=10, headers={'Referer': subtitle.page_link})
-        if r.status_code != 200:
-            raise ProviderError('Request failed with status code %d' % r.status_code)
+        # Generate the download link based on the given subtitle's properties.
+        download_link = '{0}subtitle/download/{1}/{2}/?v={3}&key={4}'.format(
+            self.server, subtitle.language, subtitle.subtitle_id, subtitle.release_name, subtitle.subtitle_key)
+        r = self.session.get(download_link, timeout=10, headers={'Referer': subtitle.page_link})
+        r.raise_for_status()
         with zipfile.ZipFile(io.BytesIO(r.content)) as zf:
             names_list = [x for x in zf.namelist() if not x.endswith('.txt')]
             if len(names_list) > 1:

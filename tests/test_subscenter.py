@@ -16,22 +16,22 @@ vcr = VCR(path_transformer=lambda path: path + '.yaml',
 
 
 def test_get_matches_movie(movies):
-    subtitle = SubsCenterSubtitle(Language('heb'), None, 0, 0, 'Man of Steel',
-                                  'Man.of.Steel.German.720p.BluRay.x264-EXQUiSiTE', 'movie', False, None, None)
+    subtitle = SubsCenterSubtitle(None, None, Language('heb'), None, 0, 0, 'Man of Steel',
+                                  'Man.of.Steel.German.720p.BluRay.x264-EXQUiSiTE', 'movie', False, None)
     matches = subtitle.get_matches(movies['man_of_steel'])
     assert matches == {'title', 'video_codec', 'resolution', 'format', 'hearing_impaired'}
 
 
 def test_get_matches_episode(episodes):
-    subtitle = SubsCenterSubtitle(Language('heb'), 'Game of Thrones', 3, 10, 'Mhysa',
-                                  'Game.of.Thrones.S03E10.HDTV.XviD-AFG', 'episode', False, None, None)
+    subtitle = SubsCenterSubtitle(None, None, Language('heb'), 'Game of Thrones', 3, 10, 'Mhysa',
+                                  'Game.of.Thrones.S03E10.HDTV.XviD-AFG', 'episode', False, None)
     matches = subtitle.get_matches(episodes['got_s03e10'])
     assert matches == {'series', 'episode', 'season', 'title', 'year', 'hearing_impaired'}
 
 
 def test_get_matches_no_match(episodes):
-    subtitle = SubsCenterSubtitle(Language('heb'), None, 0, 0, 'Man of Steel',
-                                  'man.of.steel.2013.720p.bluray.x264-felony', 'movie', False, None, None)
+    subtitle = SubsCenterSubtitle(None, None, Language('heb'), None, 0, 0, 'Man of Steel',
+                                  'man.of.steel.2013.720p.bluray.x264-felony', 'movie', False, None)
     matches = subtitle.get_matches(episodes['got_s03e10'], hearing_impaired=True)
     assert matches == set()
 
@@ -77,19 +77,16 @@ def test_logout():
 def test_query_query_movie(movies):
     video = movies['enders_game']
     languages = {Language('heb')}
-    expected_subtitles = {
-        'http://subscenter.cinemast.com/he/subtitle/download/he/267140/?v=Enders.Game.2013.480p.BluRay.x264-mSD&key='
+    expected_subtitle_keys = {
         '03ab6a943e732ad6d9941884bd7884c5',
-        'http://subscenter.cinemast.com/he/subtitle/download/he/267140/?v=Enders.Game.(2013).720p.BluRAY.800MB-Micro'
-        'mkv&key=fa7b4cd387e784b1d54289260db1e45c',
-        'http://subscenter.cinemast.com/he/subtitle/download/he/267140/?v=Enders.Game.2013.1080p.BluRay.DTS.x264-Pub'
-        'licHD&key=6fddf17ce5c7bc264e983e657a862b76',
-        'http://subscenter.cinemast.com/he/subtitle/download/he/267140/?v=Enders.Game.2013.BRRip.XviD.AC3-RARBG&key='
+        'fa7b4cd387e784b1d54289260db1e45c',
+        '6fddf17ce5c7bc264e983e657a862b76',
         'd4f8ab0d2cc32809c84ca722cad28285'
     }
     with SubsCenterProvider() as provider:
         subtitles = provider.query(languages, title=video.title)
-    assert len(expected_subtitles.intersection({subtitle.id for subtitle in subtitles})) == len(expected_subtitles)
+    assert len(expected_subtitle_keys.intersection({subtitle.subtitle_key for subtitle in subtitles})) == \
+        len(expected_subtitle_keys)
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
@@ -98,21 +95,16 @@ def test_query_query_movie(movies):
 def test_query_query_episode(episodes):
     video = episodes['dallas_2012_s01e03']
     languages = {Language('heb')}
-    expected_subtitles = {
-        'http://subscenter.cinemast.com/he/subtitle/download/he/264417/?v=Dallas.2012.S01E03.DVDRip.XviD-REWARD&key='
+    expected_subtitle_keys = {
         'a0ed1cb02d51b74849aaf2eaa7fc65ba',
-        'http://subscenter.cinemast.com/he/subtitle/download/he/256843/?v=Dallas.2012.S01E03.480p.HDTV.x264-mSD&key='
         '6afae8894c7a3a947f3ce460e3ea1cc5',
-        'http://subscenter.cinemast.com/he/subtitle/download/he/256843/?v=Dallas.2012.S01E03.HDTV.XviD-AFG&key=a1138'
-        'da829d83763b53d2c9a6c1ed6fd',
-        'http://subscenter.cinemast.com/he/subtitle/download/he/256842/?v=Dallas.2012.S01E03.720p.HDTV.X264-DIMENSIO'
-        'N&key=19596f9beba1bdbfa0232282e43baa60',
-        'http://subscenter.cinemast.com/he/subtitle/download/he/256842/?v=Dallas.2012.S01E03.HDTV.x264-LOL&key=00ee3'
-        '02fce779d97bc8654f23bb961e0'
+        'a1138da829d83763b53d2c9a6c1ed6fd',
+        '19596f9beba1bdbfa0232282e43baa60',
+        '00ee302fce779d97bc8654f23bb961e0'
     }
     with SubsCenterProvider() as provider:
         subtitles = provider.query(languages, series=video.series, season=video.season, episode=video.episode)
-    assert len(expected_subtitles.difference({subtitle.id for subtitle in subtitles})) == 0
+    assert len(expected_subtitle_keys.difference({subtitle.subtitle_key for subtitle in subtitles})) == 0
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
@@ -121,23 +113,17 @@ def test_query_query_episode(episodes):
 def test_query_query_season_episode(episodes):
     video = episodes['bbt_s07e05']
     languages = {Language('heb')}
-    expected_subtitles = {
-        'http://subscenter.cinemast.com/he/subtitle/download/he/265237/?v=The.Big.Bang.Theory.S07E05.HDTV.x264-LOL&'
-        'key=146367a10dcaac068ae571a53b7687f4',
-        'http://subscenter.cinemast.com/he/subtitle/download/he/265237/?v=The.Big.Bang.Theory.S07E05.HDTV.XviD-AFG&'
-        'key=0e277eac84cf2bd314dcd189e38242aa',
-        'http://subscenter.cinemast.com/he/subtitle/download/he/265237/?v=The.Big.Bang.Theory.S07E05.720p.HDTV.X264'
-        '-DIMENSION&key=ce8e4086da2688eb6ab183c0d831e855',
-        'http://subscenter.cinemast.com/he/subtitle/download/he/265237/?v=The.Big.Bang.Theory.S07E05.480p.HDTV.85MB'
-        '-Micromkv&key=7b4535ebaabbe99d20965e9e12cb1ac3',
-        'http://subscenter.cinemast.com/he/subtitle/download/he/265237/?v=The.Big.Bang.Theory.S07E05.HDTV.x264-Cham'
-        'eE&key=a1e13022bbff7bfe5fb073f4dd2696af',
-        'http://subscenter.cinemast.com/he/subtitle/download/he/265237/?v=The.Big.Bang.Theory.S07E05.480p.HDTV.x264'
-        '-mSD&key=2c3a61c6d73dbfe293a5d5d434a326c9'
+    expected_subtitle_keys = {
+        '146367a10dcaac068ae571a53b7687f4',
+        '0e277eac84cf2bd314dcd189e38242aa',
+        'ce8e4086da2688eb6ab183c0d831e855',
+        '7b4535ebaabbe99d20965e9e12cb1ac3',
+        'a1e13022bbff7bfe5fb073f4dd2696af',
+        '2c3a61c6d73dbfe293a5d5d434a326c9'
     }
     with SubsCenterProvider() as provider:
         subtitles = provider.query(languages, series=video.series, season=video.season, episode=video.episode)
-    assert len(expected_subtitles.difference({subtitle.id for subtitle in subtitles})) == 0
+    assert len(expected_subtitle_keys.difference({subtitle.subtitle_key for subtitle in subtitles})) == 0
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
@@ -146,19 +132,16 @@ def test_query_query_season_episode(episodes):
 def test_list_subtitles_movie(movies):
     video = movies['enders_game']
     languages = {Language('heb')}
-    expected_subtitles = {
-        'http://subscenter.cinemast.com/he/subtitle/download/he/267140/?v=Enders.Game.2013.480p.BluRay.x264-mSD&key'
-        '=03ab6a943e732ad6d9941884bd7884c5',
-        'http://subscenter.cinemast.com/he/subtitle/download/he/267140/?v=Enders.Game.(2013).720p.BluRAY.800MB-Micr'
-        'omkv&key=fa7b4cd387e784b1d54289260db1e45c',
-        'http://subscenter.cinemast.com/he/subtitle/download/he/267140/?v=Enders.Game.2013.1080p.BluRay.DTS.x264-Pu'
-        'blicHD&key=6fddf17ce5c7bc264e983e657a862b76',
-        'http://subscenter.cinemast.com/he/subtitle/download/he/267140/?v=Enders.Game.2013.BRRip.XviD.AC3-RARBG&key'
-        '=d4f8ab0d2cc32809c84ca722cad28285'
+    expected_subtitle_keys = {
+        '03ab6a943e732ad6d9941884bd7884c5',
+        'fa7b4cd387e784b1d54289260db1e45c',
+        '6fddf17ce5c7bc264e983e657a862b76',
+        'd4f8ab0d2cc32809c84ca722cad28285'
     }
     with SubsCenterProvider() as provider:
         subtitles = provider.list_subtitles(video, languages)
-    assert len(expected_subtitles.intersection({subtitle.id for subtitle in subtitles})) == len(expected_subtitles)
+    assert len(expected_subtitle_keys.intersection({subtitle.subtitle_key for subtitle in subtitles})) == \
+        len(expected_subtitle_keys)
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
@@ -167,23 +150,17 @@ def test_list_subtitles_movie(movies):
 def test_list_subtitles_episode(episodes):
     video = episodes['bbt_s07e05']
     languages = {Language('heb')}
-    expected_subtitles = {
-        'http://subscenter.cinemast.com/he/subtitle/download/he/265237/?v=The.Big.Bang.Theory.S07E05.HDTV.x264-LOL&'
-        'key=146367a10dcaac068ae571a53b7687f4',
-        'http://subscenter.cinemast.com/he/subtitle/download/he/265237/?v=The.Big.Bang.Theory.S07E05.HDTV.XviD-AFG&'
-        'key=0e277eac84cf2bd314dcd189e38242aa',
-        'http://subscenter.cinemast.com/he/subtitle/download/he/265237/?v=The.Big.Bang.Theory.S07E05.720p.HDTV.X264'
-        '-DIMENSION&key=ce8e4086da2688eb6ab183c0d831e855',
-        'http://subscenter.cinemast.com/he/subtitle/download/he/265237/?v=The.Big.Bang.Theory.S07E05.480p.HDTV.85MB'
-        '-Micromkv&key=7b4535ebaabbe99d20965e9e12cb1ac3',
-        'http://subscenter.cinemast.com/he/subtitle/download/he/265237/?v=The.Big.Bang.Theory.S07E05.HDTV.x264-Cham'
-        'eE&key=a1e13022bbff7bfe5fb073f4dd2696af',
-        'http://subscenter.cinemast.com/he/subtitle/download/he/265237/?v=The.Big.Bang.Theory.S07E05.480p.HDTV.x264'
-        '-mSD&key=2c3a61c6d73dbfe293a5d5d434a326c9'
+    expected_subtitle_keys = {
+        '146367a10dcaac068ae571a53b7687f4',
+        '0e277eac84cf2bd314dcd189e38242aa',
+        'ce8e4086da2688eb6ab183c0d831e855',
+        '7b4535ebaabbe99d20965e9e12cb1ac3',
+        'a1e13022bbff7bfe5fb073f4dd2696af',
+        '2c3a61c6d73dbfe293a5d5d434a326c9'
     }
     with SubsCenterProvider() as provider:
         subtitles = provider.list_subtitles(video, languages)
-    assert len(expected_subtitles.difference({subtitle.id for subtitle in subtitles})) == 0
+    assert len(expected_subtitle_keys.difference({subtitle.subtitle_key for subtitle in subtitles})) == 0
     assert {subtitle.language for subtitle in subtitles} == languages
 
 

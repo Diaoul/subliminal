@@ -45,19 +45,23 @@ Download best subtitles in French and English for videos less than two weeks old
 
 .. code:: python
 
+    #!/usr/bin/python2
+    # -*- coding: utf-8 -*-
+
     from datetime import timedelta
-    
     from babelfish import Language
     from subliminal import download_best_subtitles, region, save_subtitles, scan_videos
-    
+
     # configure the cache
     region.configure('dogpile.cache.dbm', arguments={'filename': 'cachefile.dbm'})
-    
+
     # scan for videos newer than 2 weeks and their existing subtitles in a folder
     videos = [v for v in scan_videos('/video/folder') if v.age < timedelta(weeks=2)]
-    
+
     # download best subtitles
     subtitles = download_best_subtitles(videos, {Language('eng'), Language('fra')})
-    
-    # save them to disk, next to the video
-    save_subtitles(subtitles)
+
+    for video in videos:
+        if subtitles[video]:
+            # save them to disk, next to the video
+            save_subtitles(video, subtitles[video])

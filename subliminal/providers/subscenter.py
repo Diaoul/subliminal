@@ -9,8 +9,9 @@ from babelfish import Language
 import guessit
 from requests import Session
 
-from . import Provider
+from . import ParserBeautifulSoup, Provider
 from .. import __version__
+from ..cache import SHOW_EXPIRATION_TIME, region
 from ..exceptions import AuthenticationError, ProviderError, ConfigurationError
 from ..subtitle import Subtitle, fix_line_ending, guess_matches
 from ..video import Episode, Movie
@@ -43,27 +44,27 @@ class SubsCenterSubtitle(Subtitle):
     def get_matches(self, video, hearing_impaired=False):
         matches = super(SubsCenterSubtitle, self).get_matches(video, hearing_impaired=hearing_impaired)
 
-        # episode
+        # Episode.
         if isinstance(video, Episode) and self.kind == 'episode':
-            # series
+            # Series.
             if video.series and self.series.lower() == video.series.lower():
                 matches.add('series')
-            # season
+            # Season.
             if video.season and self.season == video.season:
                 matches.add('season')
-            # episode
+            # Episode.
             if video.episode and self.episode == video.episode:
                 matches.add('episode')
-            # guess
+            # Guess.
             matches |= guess_matches(video, guessit.guess_episode_info(self.release_name + self._GUESSIT_EXT))
-        # movie
+        # Movie.
         elif isinstance(video, Movie) and self.kind == 'movie':
-            # guess
+            # Guess.
             matches |= guess_matches(video, guessit.guess_movie_info(self.release_name + self._GUESSIT_EXT))
         else:
             logger.info('%r is not a valid movie_kind for %r', self.kind, video)
             return matches
-        # title
+        # Title.
         if video.title and self.title and self.title.lower() == video.title.lower():
             matches.add('title')
         return matches
@@ -85,7 +86,7 @@ class SubsCenterProvider(Provider):
     def initialize(self):
         self.session = Session()
         self.session.headers = {'User-Agent': 'Subliminal/%s' % __version__.split('-')[0]}
-        # login
+        # Login.
         if self.username is not None and self.password is not None:
             logger.debug('Logging in')
             url = self.server + 'subscenter/accounts/login/'
@@ -101,7 +102,7 @@ class SubsCenterProvider(Provider):
                 raise AuthenticationError(self.username)
 
     def terminate(self):
-        # logout
+        # Logout.
         if self.logged_in:
             r = self.session.get(self.server + 'subscenter/accounts/logout/', timeout=10)
             r.raise_for_status()
@@ -115,12 +116,40 @@ class SubsCenterProvider(Provider):
         # We remove multiple spaces by using this regular expression.
         return re.sub('-+', '-', new_string)
 
+    @region.cache_on_arguments(expiration_time=SHOW_EXPIRATION_TIME)
+    def search_title_name(self, title, is_series):
+        """
+        Search the slugified title name for the given title.
+
+        :param string title: The full title name to search for.
+        :param is_series: If True, a series-related result will be returned.
+        Else, a movie-related result will be returned.
+        :return: The slugified title name, or a slugified guess if the search yielded no results.
+        """
+        # make the search
+        logger.info('Searching title name for %r', title)
+        r = self.session.get(self.server + 'subtitle/search/?q=' + title.lower().replace(' ', '+'), timeout=10)
+        r.raise_for_status()
+
+        # get the series out of the suggestions
+        soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
+        for suggestion in soup.select(
+                'div#sitePart div#content div#processes div.movieProcess div.generalWindowRight a'):
+            link_parts = suggestion.attrs['href'].split('/')
+            slugified_title = link_parts[-2]
+            if (is_series and link_parts[-3] == 'series') or (not is_series and link_parts[-3] == 'movie'):
+                logger.info('Found slugified title %r', slugified_title)
+                return slugified_title
+        slugified_title = self.slugify(title)
+        logger.info('Could not find slugified title for %r. Guessing %r', title, slugified_title)
+        return slugified_title
+
     def query(self, languages=None, series=None, season=None, episode=None, title=None):
         # Converts the title to Subscenter format by replacing whitespaces and removing specific chars.
         if series and season and episode:
             # Search for a TV show.
             kind = 'episode'
-            slugified_series = self.slugify(series)
+            slugified_series = self.search_title_name(series, True)
             url = self.server + 'cinemast/data/series/sb/' + slugified_series + '/' + str(season) + '/' + \
                 str(episode) + '/'
             page_link = self.server + 'subtitle/series/' + slugified_series + '/' + str(season) + '/' + \
@@ -128,7 +157,7 @@ class SubsCenterProvider(Provider):
         elif title:
             # Search for a movie.
             kind = 'movie'
-            slugified_title = self.slugify(title)
+            slugified_title = self.search_title_name(title, False)
             url = self.server + 'cinemast/data/movie/sb/' + slugified_title + '/'
             page_link = self.server + 'subtitle/movie/' + slugified_title + '/'
         else:

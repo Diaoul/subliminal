@@ -23,8 +23,8 @@ class OpenSubtitlesSubtitle(Subtitle):
     series_re = re.compile('^"(?P<series_name>.*)" (?P<series_title>.*)$')
 
     def __init__(self, language, hearing_impaired, page_link, subtitle_id, matched_by, movie_kind, hash, movie_name,
-                 movie_release_name, movie_year, movie_imdb_id, series_season, series_episode):
-        super(OpenSubtitlesSubtitle, self).__init__(language, hearing_impaired, page_link)
+                 movie_release_name, movie_year, movie_imdb_id, series_season, series_episode, encoding):
+        super(OpenSubtitlesSubtitle, self).__init__(language, hearing_impaired, page_link, encoding)
         self.subtitle_id = subtitle_id
         self.matched_by = matched_by
         self.movie_kind = movie_kind
@@ -165,10 +165,11 @@ class OpenSubtitlesProvider(Provider):
             movie_imdb_id = int(subtitle_item['IDMovieImdb'])
             series_season = int(subtitle_item['SeriesSeason']) if subtitle_item['SeriesSeason'] else None
             series_episode = int(subtitle_item['SeriesEpisode']) if subtitle_item['SeriesEpisode'] else None
+            encoding = subtitle_item.get('SubEncoding') or None
 
             subtitle = OpenSubtitlesSubtitle(language, hearing_impaired, page_link, subtitle_id, matched_by, movie_kind,
                                              hash, movie_name, movie_release_name, movie_year, movie_imdb_id,
-                                             series_season, series_episode)
+                                             series_season, series_episode, encoding)
             logger.debug('Found subtitle %r', subtitle)
             subtitles.append(subtitle)
 

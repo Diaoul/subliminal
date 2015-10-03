@@ -141,3 +141,18 @@ def test_guess_properties():
 def test_fix_line_ending():
     content = b'Text\r\nwith\rweird\nline ending\r\ncharacters'
     assert fix_line_ending(content) == b'Text\nwith\nweird\nline ending\ncharacters'
+
+
+def test_subtitle_valid_encoding():
+    subtitle = Subtitle(Language('deu'), False, None, 'windows-1252')
+    assert subtitle.encoding == 'cp1252'
+
+
+def test_subtitle_empty_encoding():
+    subtitle = Subtitle(Language('deu'), False, None, None)
+    assert subtitle.encoding is None
+
+
+def test_subtitle_invalid_encoding():
+    subtitle = Subtitle(Language('deu'), False, None, 'rubbish')
+    assert subtitle.encoding is None

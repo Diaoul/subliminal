@@ -2,7 +2,6 @@
 import io
 import json
 import logging
-import re
 import zipfile
 
 from babelfish import Language
@@ -110,12 +109,6 @@ class SubsCenterProvider(Provider):
             self.logged_in = False
         self.session.close()
 
-    @staticmethod
-    def slugify(string):
-        new_string = string.replace(' ', '-').replace("'", '').replace(':', '').lower()
-        # We remove multiple spaces by using this regular expression.
-        return re.sub('-+', '-', new_string)
-
     @region.cache_on_arguments(expiration_time=SHOW_EXPIRATION_TIME)
     def search_title_name(self, title, is_series):
         """
@@ -132,17 +125,19 @@ class SubsCenterProvider(Provider):
         r.raise_for_status()
 
         # get the series out of the suggestions
-        soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
-        for suggestion in soup.select(
-                'div#sitePart div#content div#processes div.movieProcess div.generalWindowRight a'):
-            link_parts = suggestion.attrs['href'].split('/')
-            slugified_title = link_parts[-2]
-            if (is_series and link_parts[-3] == 'series') or (not is_series and link_parts[-3] == 'movie'):
-                logger.info('Found slugified title %r', slugified_title)
-                return slugified_title
-        slugified_title = self.slugify(title)
-        logger.info('Could not find slugified title for %r. Guessing %r', title, slugified_title)
-        return slugified_title
+        try:
+            soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
+            for suggestion in soup.select(
+                    'div#sitePart div#content div#processes div.movieProcess div.generalWindowRight a'):
+                link_parts = suggestion.attrs['href'].split('/')
+                slugified_title = link_parts[-2]
+                if (is_series and link_parts[-3] == 'series') or (not is_series and link_parts[-3] == 'movie'):
+                    logger.info('Found slugified title %r', slugified_title)
+                    return slugified_title
+        except UnicodeDecodeError:
+            # If something went wrong with the parsing, ignore the results.
+            pass
+        logger.info('Could not find slugified title for %r.', title)
 
     def query(self, languages=None, series=None, season=None, episode=None, title=None):
         # Converts the title to Subscenter format by replacing whitespaces and removing specific chars.

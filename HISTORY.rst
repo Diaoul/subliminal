@@ -6,6 +6,7 @@ Changelog
 **release date:** *not released*
 
 * Fix library usage example in README
+* Support python 3.5
 
 
 1.0.1

@@ -74,6 +74,7 @@ setup(name='subliminal',
           'Programming Language :: Python :: 3',
           'Programming Language :: Python :: 3.3',
           'Programming Language :: Python :: 3.4',
+          'Programming Language :: Python :: 3.5',
           'Topic :: Software Development :: Libraries :: Python Modules',
           'Topic :: Multimedia :: Video'
       ],

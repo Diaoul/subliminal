@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 import hashlib
 import logging
 import os
+import re
 import struct
 
 from babelfish import Error as BabelfishError, Language
@@ -253,7 +254,12 @@ def search_external_subtitles(path):
             continue
 
         # extract the potential language code
-        language_code = p[len(fileroot):-len(os.path.splitext(p)[1])].replace(fileext, '').replace('_', '-')[1:]
+        language_lookup = os.path.splitext(p)[0][len(fileroot):]
+        match = re.search(r'[a-zA-Z]{2,3}[_-]?[a-zA-Z]{2,3}?', language_lookup)
+        if match:
+            language_code = match.group(0).replace('_', '-')
+        else:
+            language_code = None
 
         # default language is undefined
         language = Language('und')

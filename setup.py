@@ -90,6 +90,7 @@ setup(name='subliminal',
           'babelfish.language_converters': [
               'addic7ed = subliminal.converters.addic7ed:Addic7edConverter',
               'legendastv = subliminal.converters.legendastv:LegendasTvConverter',
+              'thesubdb = subliminal.converters.thesubdb:TheSubDBConverter',
               'tvsubtitles = subliminal.converters.tvsubtitles:TVsubtitlesConverter'
           ],
           'console_scripts': [

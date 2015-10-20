@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 
-from babelfish import Language
+from babelfish import Language, language_converters
 import pytest
 from vcr import VCR
 
@@ -11,6 +11,31 @@ from subliminal.providers.thesubdb import TheSubDBProvider, TheSubDBSubtitle
 vcr = VCR(path_transformer=lambda path: path + '.yaml',
           record_mode=os.environ.get('VCR_RECORD_MODE', 'once'),
           cassette_library_dir=os.path.join('tests', 'cassettes', 'thesubdb'))
+
+
+@pytest.mark.converter
+def test_converter_convert_alpha3_country():
+    assert language_converters['thesubdb'].convert('por', 'BR') == 'pt'
+
+
+@pytest.mark.converter
+def test_converter_convert_alpha3():
+    assert language_converters['thesubdb'].convert('eng') == 'en'
+
+
+@pytest.mark.converter
+def test_converter_convert_alpha3_alpha2_converter():
+    assert language_converters['thesubdb'].convert('fra') == 'fr'
+
+
+@pytest.mark.converter
+def test_converter_reverse():
+    assert language_converters['thesubdb'].reverse('en') == ('eng', )
+
+
+@pytest.mark.converter
+def test_converter_reverse_alpha3_country():
+    assert language_converters['thesubdb'].reverse('pt') == ('por', 'BR')
 
 
 def test_get_matches(movies):
@@ -29,7 +54,7 @@ def test_get_matches_no_match(episodes):
 @vcr.use_cassette
 def test_query(movies):
     video = movies['man_of_steel']
-    expected_languages = {Language('eng'), Language('por')}
+    expected_languages = {Language('eng'), Language('por', 'BR')}
     with TheSubDBProvider() as provider:
         subtitles = provider.query(video.hashes['thesubdb'])
     assert len(subtitles) == 2

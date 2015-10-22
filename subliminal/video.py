@@ -254,10 +254,12 @@ def search_external_subtitles(path):
             continue
 
         # extract the potential language code
-        language_lookup = os.path.splitext(p)[0][len(fileroot):]
-        match = re.search(r'[a-zA-Z]{2,3}([_-][a-zA-Z]{2})?', language_lookup)
+        language_lookup = os.path.splitext(p)[0][len(fileroot):].replace(fileext, '')
+        match = re.search(r'(?:[^a-zA-Z]|^)([a-zA-Z]*)([_-][a-zA-Z]{2,4})?(?:[^a-zA-Z]|$)', language_lookup)
         if match:
-            language_code = match.group(0).replace('_', '-')
+            language_code = match.group(1)
+            if match.group(2):
+                language_code += match.group(2).replace('_', '-')
         else:
             language_code = None
 

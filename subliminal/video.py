@@ -255,13 +255,12 @@ def search_external_subtitles(path):
 
         # extract the potential language code
         language_lookup = os.path.splitext(p)[0][len(fileroot):].replace(fileext, '')
-        match = re.search(r'(?:[^a-zA-Z]|^)([a-zA-Z]*)([_-][a-zA-Z]{2,4})?(?:[^a-zA-Z]|$)', language_lookup)
+        match = re.search(r'(?:[^a-zA-Z]|^)([a-zA-Z]+)([_-][a-zA-Z]{2,4})?(?:[^a-zA-Z]|$)', language_lookup)
+        language_code = None
         if match:
             language_code = match.group(1)
             if match.group(2):
                 language_code += match.group(2).replace('_', '-')
-        else:
-            language_code = None
 
         # default language is undefined
         language = Language('und')

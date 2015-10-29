@@ -220,6 +220,18 @@ def get_subtitle_path(video_path, language=None, extension='.srt'):
     return subtitle_root + extension
 
 
+def sanitize_string(string, replacement=''):
+    """Replace any special characters from a string.
+
+    :param str string: the string to sanitize.
+    :param str replacement: the replacement for special characters.
+    :return: the sanitized string.
+    :rtype: str
+
+    """
+    return re.sub('[^ a-zA-Z0-9]', replacement, string)
+
+
 def sanitized_string_equal(string1, string2):
     """Test two strings for equality case insensitively and ignoring special characters.
 
@@ -229,9 +241,7 @@ def sanitized_string_equal(string1, string2):
     :rtype: bool
 
     """
-    valid_pattern = '[^a-zA-Z0-9]'
-
-    return re.sub(valid_pattern, '', string1).lower() == re.sub(valid_pattern, '', string2).lower()
+    return sanitize_string(string1).lower() == sanitize_string(string2).lower()
 
 
 def guess_matches(video, guess, partial=False):

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import logging
 import os
+import re
 
 import chardet
 from guessit.matchtree import MatchTree
@@ -219,6 +220,20 @@ def get_subtitle_path(video_path, language=None, extension='.srt'):
     return subtitle_root + extension
 
 
+def sanitized_string_equal(string1, string2):
+    """Test two strings for equality case insensitively and ignoring special characters.
+
+    :param str string1: the first string to compare.
+    :param str string2: the second string to compare.
+    :return: `True` if the two strings are equal, `False` otherwise.
+    :rtype: bool
+
+    """
+    valid_pattern = '[^a-zA-Z0-9]'
+
+    return re.sub(valid_pattern, '', string1).lower() == re.sub(valid_pattern, '', string2).lower()
+
+
 def guess_matches(video, guess, partial=False):
     """Get matches between a `video` and a `guess`.
 
@@ -236,7 +251,7 @@ def guess_matches(video, guess, partial=False):
     matches = set()
     if isinstance(video, Episode):
         # series
-        if video.series and 'series' in guess and guess['series'].lower() == video.series.lower():
+        if video.series and 'series' in guess and sanitized_string_equal(guess['series'], video.series):
             matches.add('series')
         # season
         if video.season and 'season' in guess and guess['season'] == video.season:
@@ -255,7 +270,7 @@ def guess_matches(video, guess, partial=False):
         if video.year and 'year' in guess and guess['year'] == video.year:
             matches.add('year')
     # title
-    if video.title and 'title' in guess and guess['title'].lower() == video.title.lower():
+    if video.title and 'title' in guess and sanitized_string_equal(guess['title'], video.title):
         matches.add('title')
     # release_group
     if video.release_group and 'releaseGroup' in guess and guess['releaseGroup'].lower() == video.release_group.lower():

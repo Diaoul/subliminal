@@ -7,6 +7,7 @@ Changelog
 
 * Fix library usage example in README
 * Support python 3.5
+* Improve matching on titles
 
 
 1.0.1

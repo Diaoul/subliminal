@@ -9,7 +9,7 @@ from . import ParserBeautifulSoup, Provider, get_version
 from .. import __version__
 from ..cache import SHOW_EXPIRATION_TIME, region
 from ..exceptions import AuthenticationError, ConfigurationError, DownloadLimitExceeded
-from ..subtitle import Subtitle, fix_line_ending, guess_matches, guess_properties
+from ..subtitle import Subtitle, fix_line_ending, guess_matches, guess_properties, sanitized_string_equal
 from ..video import Episode
 
 logger = logging.getLogger(__name__)
@@ -39,7 +39,7 @@ class Addic7edSubtitle(Subtitle):
         matches = super(Addic7edSubtitle, self).get_matches(video, hearing_impaired=hearing_impaired)
 
         # series
-        if video.series and self.series.lower() == video.series.lower():
+        if video.series and sanitized_string_equal(self.series, video.series):
             matches.add('series')
         # season
         if video.season and self.season == video.season:
@@ -48,7 +48,7 @@ class Addic7edSubtitle(Subtitle):
         if video.episode and self.episode == video.episode:
             matches.add('episode')
         # title
-        if video.title and self.title.lower() == video.title.lower():
+        if video.title and sanitized_string_equal(self.title, video.title):
             matches.add('title')
         # year
         if video.year == self.year:

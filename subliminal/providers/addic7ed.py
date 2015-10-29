@@ -8,8 +8,9 @@ from requests import Session
 from . import ParserBeautifulSoup, Provider, get_version
 from .. import __version__
 from ..cache import SHOW_EXPIRATION_TIME, region
-from ..subtitle import Subtitle, fix_line_ending, guess_matches, guess_properties, sanitized_string_equal
 from ..exceptions import AuthenticationError, ConfigurationError, DownloadLimitExceeded, TooManyRequests
+from ..subtitle import (Subtitle, fix_line_ending, guess_matches, guess_properties, sanitize_string,
+                        sanitized_string_equal)
 from ..video import Episode
 
 logger = logging.getLogger(__name__)
@@ -129,7 +130,7 @@ class Addic7edProvider(Provider):
         # populate the show ids
         show_ids = {}
         for show in soup.select('td.version > h3 > a[href^="/show/"]'):
-            show_ids[show.text.lower().replace('\'', '')] = int(show['href'][6:])
+            show_ids[sanitize_string(show.text).lower()] = int(show['href'][6:])
         logger.debug('Found %d show ids', len(show_ids))
 
         return show_ids
@@ -146,8 +147,8 @@ class Addic7edProvider(Provider):
 
         """
         # build the params
-        series_year = '%s (%d)' % (series, year) if year is not None else series
-        params = {'search': series_year, 'Submit': 'Search'}
+        series_year = '%s %d' % (series, year) if year is not None else series
+        params = {'search': sanitize_string(series_year, replacement=' '), 'Submit': 'Search'}
 
         # make the search
         logger.info('Searching show ids with %r', params)
@@ -160,7 +161,7 @@ class Addic7edProvider(Provider):
         if not suggestion:
             logger.warning('Show id not found: no suggestion')
             return None
-        if not suggestion[0].i.text.lower() == series_year.lower():
+        if not sanitized_string_equal(suggestion[0].i.text, series_year):
             logger.warning('Show id not found: suggestion does not match')
             return None
         show_id = int(suggestion[0]['href'][6:])
@@ -182,24 +183,24 @@ class Addic7edProvider(Provider):
         :rtype: int or None
 
         """
-        series_clean = series.lower().replace('\'', '')
+        series_sanitized = sanitize_string(series).lower()
         show_ids = self._get_show_ids()
         show_id = None
 
         # attempt with country
         if not show_id and country_code:
             logger.debug('Getting show id with country')
-            show_id = show_ids.get('%s (%s)' % (series_clean, country_code.lower()))
+            show_id = show_ids.get('%s %s' % (series_sanitized, country_code.lower()))
 
         # attempt with year
         if not show_id and year:
             logger.debug('Getting show id with year')
-            show_id = show_ids.get('%s (%d)' % (series_clean, year))
+            show_id = show_ids.get('%s %d' % (series_sanitized, year))
 
         # attempt clean
         if not show_id:
             logger.debug('Getting show id')
-            show_id = show_ids.get(series_clean)
+            show_id = show_ids.get(series_sanitized)
 
         # search as last resort
         if not show_id:

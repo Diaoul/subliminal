@@ -129,9 +129,9 @@ class OpenSubtitlesProvider(Provider):
         if imdb_id:
             criteria.append({'imdbid': imdb_id})
         if query and season and episode:
-            criteria.append({'query': query, 'season': season, 'episode': episode})
+            criteria.append({'query': query.replace('\'', ''), 'season': season, 'episode': episode})
         elif query:
-            criteria.append({'query': query})
+            criteria.append({'query': query.replace('\'', '')})
         if not criteria:
             raise ValueError('Not enough information')
 

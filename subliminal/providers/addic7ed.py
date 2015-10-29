@@ -8,8 +8,8 @@ from requests import Session
 from . import ParserBeautifulSoup, Provider, get_version
 from .. import __version__
 from ..cache import SHOW_EXPIRATION_TIME, region
-from ..exceptions import AuthenticationError, ConfigurationError, DownloadLimitExceeded
 from ..subtitle import Subtitle, fix_line_ending, guess_matches, guess_properties, sanitized_string_equal
+from ..exceptions import AuthenticationError, ConfigurationError, DownloadLimitExceeded, TooManyRequests
 from ..video import Episode
 
 logger = logging.getLogger(__name__)
@@ -219,6 +219,8 @@ class Addic7edProvider(Provider):
         logger.info('Getting the page of show id %d, season %d', show_id, season)
         r = self.session.get(self.server_url + 'show/%d' % show_id, params={'season': season}, timeout=10)
         r.raise_for_status()
+        if r.status_code == 304:
+            raise TooManyRequests()
         soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
 
         # loop over subtitle rows

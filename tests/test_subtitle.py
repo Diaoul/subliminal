@@ -97,12 +97,12 @@ def test_get_subtitle_path(movies):
     assert get_subtitle_path(video.name, extension='.sub') == os.path.splitext(video.name)[0] + '.sub'
 
 
-def test_get_subtitle_path_with_language(movies):
+def test_get_subtitle_path_language(movies):
     video = movies['man_of_steel']
     assert get_subtitle_path(video.name, Language('por', 'BR')) == os.path.splitext(video.name)[0] + '.pt-BR.srt'
 
 
-def test_get_subtitle_path_with_language_undefined(movies):
+def test_get_subtitle_path_language_undefined(movies):
     video = movies['man_of_steel']
     assert get_subtitle_path(video.name, Language('und')) == os.path.splitext(video.name)[0] + '.srt'
 

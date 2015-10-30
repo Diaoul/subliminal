@@ -184,9 +184,9 @@ def test_download_subtitles(mock_providers):
 @vcr.use_cassette
 def test_download_best_subtitles(episodes):
     video = episodes['bbt_s07e05']
-    languages = {Language('fra'), Language('por', 'BR')}
+    languages = {Language('nld'), Language('por', 'BR')}
     providers = ['addic7ed', 'thesubdb']
-    expected_subtitles = {('thesubdb', '9dbbfb7ba81c9a6237237dae8589fccc'), ('addic7ed', 'updated/10/80254/1')}
+    expected_subtitles = {('addic7ed', 'updated/17/80254/11'), ('thesubdb', '9dbbfb7ba81c9a6237237dae8589fccc-pt-BR')}
 
     subtitles = download_best_subtitles({video}, languages, providers=providers)
 
@@ -235,9 +235,9 @@ def test_download_best_subtitles_undefined(episodes):
 @vcr.use_cassette('test_download_best_subtitles')
 def test_download_best_subtitles_only_one(episodes):
     video = episodes['bbt_s07e05']
-    languages = {Language('fra'), Language('por', 'BR')}
+    languages = {Language('nld'), Language('por', 'BR')}
     providers = ['addic7ed', 'thesubdb']
-    expected_subtitles = {('thesubdb', '9dbbfb7ba81c9a6237237dae8589fccc')}
+    expected_subtitles = {('thesubdb', '9dbbfb7ba81c9a6237237dae8589fccc-pt-BR')}
 
     subtitles = download_best_subtitles({video}, languages, only_one=True, providers=providers)
 

@@ -39,14 +39,14 @@ def test_converter_reverse_name_converter():
     assert language_converters['tvsubtitles'].reverse('en') == ('eng', None, None)
 
 
-def test_get_matches_with_format_and_release_group(episodes):
+def test_get_matches_format_release_group(episodes):
     subtitle = TVsubtitlesSubtitle(Language('fra'), None, 249518, 'The Big Bang Theory', 7, 5, 2007, 'HDTV',
                                    'lol-dimension')
     matches = subtitle.get_matches(episodes['bbt_s07e05'])
     assert matches == {'series', 'season', 'episode', 'year', 'format', 'release_group', 'hearing_impaired'}
 
 
-def test_get_matches_with_video_codec_and_resolution(episodes):
+def test_get_matches_video_codec_resolution(episodes):
     subtitle = TVsubtitlesSubtitle(Language('por'), None, 261077, 'Game of Thrones', 3, 10, None, '720p.BluRay',
                                    'x264-DEMAND')
     matches = subtitle.get_matches(episodes['got_s03e10'])

@@ -45,21 +45,21 @@ def test_converter_reverse_name_converter():
     assert language_converters['addic7ed'].reverse('English') == ('eng', None, None)
 
 
-def test_get_matches_with_release_group(episodes):
+def test_get_matches_release_group(episodes):
     subtitle = Addic7edSubtitle(Language('eng'), True, None, 'The Big Bang Theory', 7, 5, 'The Workplace Proximity',
                                 2007, 'DIMENSION', None)
     matches = subtitle.get_matches(episodes['bbt_s07e05'])
     assert matches == {'series', 'season', 'episode', 'title', 'year', 'release_group'}
 
 
-def test_get_matches_with_resolution_and_release_group(episodes):
+def test_get_matches_resolution_release_group(episodes):
     subtitle = Addic7edSubtitle(Language('heb'), True, None, 'The Big Bang Theory', 7, 5, 'The Workplace Proximity',
                                 2007, '720PDIMENSION', None)
     matches = subtitle.get_matches(episodes['bbt_s07e05'])
     assert matches == {'series', 'season', 'episode', 'title', 'year', 'release_group', 'resolution'}
 
 
-def test_get_matches_with_format_and_release_group(episodes):
+def test_get_matches_format_release_group(episodes):
     subtitle = Addic7edSubtitle(Language('eng'), True, None, 'Game of Thrones', 3, 10, 'Mhysa', None, 'WEB-DL-NTb',
                                 None)
     matches = subtitle.get_matches(episodes['got_s03e10'])
@@ -154,6 +154,14 @@ def test_search_show_id_error():
 
 
 @pytest.mark.integration
+@vcr.use_cassette
+def test_search_show_id_quote():
+    with Addic7edProvider() as provider:
+        show_id = provider._search_show_id('Grey\'s Anatomy')
+    assert show_id == 30
+
+
+@pytest.mark.integration
 @vcr.use_cassette('test_get_show_ids')
 def test_get_show_ids():
     with Addic7edProvider() as provider:
@@ -176,8 +184,17 @@ def test_get_show_ids_no_year():
 def test_get_show_ids_year():
     with Addic7edProvider() as provider:
         show_ids = provider._get_show_ids()
-    assert 'dallas (2012)' in show_ids
-    assert show_ids['dallas (2012)'] == 2559
+    assert 'dallas 2012' in show_ids
+    assert show_ids['dallas 2012'] == 2559
+
+
+@pytest.mark.integration
+@vcr.use_cassette('test_get_show_ids')
+def test_get_show_ids_dot():
+    with Addic7edProvider() as provider:
+        show_ids = provider._get_show_ids()
+    assert 'mr robot' in show_ids
+    assert show_ids['mr robot'] == 5151
 
 
 @pytest.mark.integration
@@ -185,30 +202,31 @@ def test_get_show_ids_year():
 def test_get_show_ids_country():
     with Addic7edProvider() as provider:
         show_ids = provider._get_show_ids()
-    assert 'being human (us)' in show_ids
-    assert show_ids['being human (us)'] == 1317
+    assert 'being human us' in show_ids
+    assert show_ids['being human us'] == 1317
 
 
 @pytest.mark.integration
 @vcr.use_cassette('test_get_show_ids')
-def test_get_show_ids_quoted():
+def test_get_show_ids_quote():
     with Addic7edProvider() as provider:
         show_ids = provider._get_show_ids()
-    assert 'marvels agents of s.h.i.e.l.d.' in show_ids
-    assert show_ids['marvels agents of s.h.i.e.l.d.'] == 4010
+    assert 'marvels agents of shield' in show_ids
+    assert show_ids['marvels agents of shield'] == 4010
 
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_get_show_id_with_quotes_and_mixed_case():
+def test_get_show_id_quote_dots_mixed_case(episodes):
+    video = episodes['marvels_agents_of_shield_s02e06']
     with Addic7edProvider() as provider:
-        show_id = provider.get_show_id('Marvel\'s Agents of S.H.I.E.L.D.')
+        show_id = provider.get_show_id(video.series)
     assert show_id == 4010
 
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_get_show_id_with_country():
+def test_get_show_id_country():
     with Addic7edProvider() as provider:
         show_id = provider.get_show_id('Being Human', country_code='US')
     assert show_id == 1317
@@ -216,7 +234,7 @@ def test_get_show_id_with_country():
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_get_show_id_with_year():
+def test_get_show_id_year():
     with Addic7edProvider() as provider:
         show_id = provider.get_show_id('Dallas', year=2012)
     assert show_id == 2559

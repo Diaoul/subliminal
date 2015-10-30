@@ -254,7 +254,7 @@ def test_scan_video_metadata(mkv):
     assert scanned_video.audio_codec == 'AAC'
     assert scanned_video.imdb_id is None
     assert scanned_video.hashes == {
-        'napiprojekt': 'de2e9caa58dd53a6ab9d241e6b252e35',
+        'napiprojekt': '6303e7ee6a835e9fcede9fb2fb00cb36',
         'opensubtitles': '49e2530ea3bd0d18',
         'thesubdb': '64a8b87f12daa4f31895616e6c3fd39e'}
     assert scanned_video.size == 31762747

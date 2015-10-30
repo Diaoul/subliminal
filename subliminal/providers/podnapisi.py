@@ -162,7 +162,7 @@ class PodnapisiProvider(Provider):
 
     def download_subtitle(self, subtitle):
         # download as a zip
-        logger.info('Downloading subtitle %r')
+        logger.info('Downloading subtitle %r', subtitle)
         r = self.session.get(self.server_url + subtitle.pid + '/download', params={'container': 'zip'}, timeout=10)
         r.raise_for_status()
 

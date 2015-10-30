@@ -7,15 +7,12 @@ Translations
 ------------
 This is how to generate the po template file::
 
-    # generate .pot files
+    # extract strings from ui files
     intltool-extract --type=gettext/glade ui/config.glade
-    xgettext -k_ -kN_ -o i18n/config_messages.pot ui/config.glade.h
     intltool-extract --type=gettext/glade ui/choose.glade
-    xgettext -k_ -kN_ -o i18n/choose_messages.pot ui/choose.glade.h
-    xgettext -k_ -kN_ -o i18n/nautilus_messages.pot nautilus.py
 
-    # concatenate in one .pot file
-    msgcat --use-first i18n/*.pot -o i18n/subliminal.pot
+    # generate subliminal.pot
+    xgettext -k_ -kN_ -w 120 --from-code=utf-8 -o i18n/subliminal.pot ui/config.glade.h ui/choose.glade.h nautilus.py
 
     # clean up
-    rm ui/*.h i18n/*.pot
+    rm ui/*.h

@@ -6,6 +6,7 @@ import re
 import chardet
 from guessit.matchtree import MatchTree
 from guessit.plugins.transformers import get_transformer
+from codecs import lookup
 import pysrt
 
 from .video import Episode, Movie
@@ -21,12 +22,14 @@ class Subtitle(object):
     :param bool hearing_impaired: whether or not the subtitle is hearing impaired.
     :param page_link: URL of the web page from which the subtitle can be downloaded.
     :type page_link: str
+    :param encoding: Text encoding of the subtitle
+    :type encoding: str
 
     """
     #: Name of the provider that returns that class of subtitle
     provider_name = ''
 
-    def __init__(self, language, hearing_impaired=False, page_link=None):
+    def __init__(self, language, hearing_impaired=False, page_link=None, encoding=None):
         #: Language of the subtitle
         self.language = language
 
@@ -40,7 +43,15 @@ class Subtitle(object):
         self.content = None
 
         #: Encoding to decode with when accessing :attr:`text`
-        self.encoding = None
+        if encoding:
+            try:
+                # set encoding to canonical codec name
+                self.encoding = lookup(encoding).name
+            except (TypeError, LookupError):
+                logger.debug('Unsupported encoding "%s", setting to None', encoding)
+                self.encoding = None
+        else:
+            self.encoding = None
 
     @property
     def id(self):
@@ -57,7 +68,11 @@ class Subtitle(object):
         if not self.content:
             return
 
-        return self.content.decode(self.encoding or self.guess_encoding(), errors='replace')
+        try:
+            return self.content.decode(self.encoding, errors='replace')
+        except (TypeError, LookupError):
+            # Failback to guess_encoding if empty or unknown encoding provided
+            return self.content.decode(self.guess_encoding(), errors='replace')
 
     def is_valid(self):
         """Check if a :attr:`text` is a valid SubRip format.

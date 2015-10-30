@@ -16,3 +16,4 @@ request open against the *develop* branch.
 Translations
 ------------
 Contribution to translations can be made on [subliminal's transifex page](https://www.transifex.com/subliminal/subliminal/)
+Subliminal is configured to work with [transifex-client](http://docs.transifex.com/client/)

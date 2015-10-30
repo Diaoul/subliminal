@@ -36,7 +36,7 @@ test_requirements = ['sympy', 'vcrpy>=1.6.1', 'pytest', 'pytest-pep8', 'pytest-f
 if sys.version_info < (3, 3):
     test_requirements.append('mock')
 
-dev_requirements = ['tox', 'sphinx', 'wheel']
+dev_requirements = ['tox', 'sphinx', 'transifex-client', 'wheel']
 
 # package informations
 with io.open('subliminal/__init__.py', 'r') as f:

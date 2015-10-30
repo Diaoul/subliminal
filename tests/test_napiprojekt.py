@@ -14,7 +14,7 @@ vcr = VCR(path_transformer=lambda path: path + '.yaml',
 
 
 def test_get_matches(movies):
-    subtitle = NapiProjektSubtitle(Language('pol'), 'de2e9caa58dd53a6ab9d241e6b252e35')
+    subtitle = NapiProjektSubtitle(Language('pol'), '6303e7ee6a835e9fcede9fb2fb00cb36')
     matches = subtitle.get_matches(movies['man_of_steel'])
     assert matches == {'hash', 'hearing_impaired'}
 

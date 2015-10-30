@@ -31,8 +31,7 @@ install_requirements = ['guessit>=0.9.1', 'babelfish>=0.5.2', 'enzyme>=0.4.1', '
                         'requests>=2.0', 'click>=4.0', 'dogpile.cache>=0.5.4', 'stevedore>=1.0.0',
                         'chardet>=2.3.0', 'pysrt>=1.0.1', 'six>=1.9.0']
 
-test_requirements = ['sympy', 'vcrpy>=1.6.1', 'pytest', 'pytest-pep8', 'pytest-flakes',
-                     'pytest-cov']
+test_requirements = ['sympy', 'vcrpy>=1.6.1', 'pytest', 'pytest-pep8', 'pytest-flakes', 'pytest-cov']
 if sys.version_info < (3, 3):
     test_requirements.append('mock')
 
@@ -40,8 +39,7 @@ dev_requirements = ['tox', 'sphinx', 'transifex-client', 'wheel']
 
 # package informations
 with io.open('subliminal/__init__.py', 'r') as f:
-    version = re.search(r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]$', f.read(),
-                        re.MULTILINE).group(1)
+    version = re.search(r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]$', f.read(), re.MULTILINE).group(1)
 
 if not version:
     raise RuntimeError('Cannot find version information')

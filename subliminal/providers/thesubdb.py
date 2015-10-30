@@ -21,7 +21,7 @@ class TheSubDBSubtitle(Subtitle):
 
     @property
     def id(self):
-        return self.hash
+        return self.hash + '-' + str(self.language)
 
     def get_matches(self, video, hearing_impaired=False):
         matches = super(TheSubDBSubtitle, self).get_matches(video, hearing_impaired=hearing_impaired)

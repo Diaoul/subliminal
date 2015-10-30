@@ -9,6 +9,7 @@ Changelog
 * Support python 3.5
 * Improve matching on titles
 * Fix for series name with special characters in addic7ed provider
+* Fix id property in thesubdb provider
 
 
 1.0.1

@@ -1,7 +1,7 @@
 Changelog
 ---------
 
-1.0.2
+1.1.0
 ^^^^^
 **release date:** *not released*
 
@@ -11,6 +11,7 @@ Changelog
 * Fix for series name with special characters in addic7ed provider
 * Fix id property in thesubdb provider
 * Add support for searching subtitles in a separate directory
+* Add napiprojekt provider
 
 
 1.0.1

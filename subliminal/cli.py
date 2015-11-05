@@ -304,7 +304,8 @@ def download(obj, provider, language, age, directory, encoding, single, force, h
             # directories
             if os.path.isdir(p):
                 try:
-                    scanned_videos = scan_videos(p, subtitles=not force, embedded_subtitles=not force)
+                    scanned_videos = scan_videos(p, subtitles=not force, embedded_subtitles=not force,
+                                                 subtitles_dir=directory)
                 except:
                     logger.exception('Unexpected error while collecting directory path %s', p)
                     errored_paths.append(p)
@@ -318,7 +319,7 @@ def download(obj, provider, language, age, directory, encoding, single, force, h
 
             # other inputs
             try:
-                video = scan_video(p, subtitles=not force, embedded_subtitles=not force)
+                video = scan_video(p, subtitles=not force, embedded_subtitles=not force, subtitles_dir=directory)
             except:
                 logger.exception('Unexpected error while collecting path %s', p)
                 errored_paths.append(p)

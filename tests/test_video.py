@@ -201,6 +201,22 @@ def test_search_external_subtitles_no_directory(movies, tmpdir, monkeypatch):
     assert subtitles == expected_subtitles
 
 
+def test_search_external_subtitles_in_directory(episodes, tmpdir, monkeypatch):
+    video_name = episodes['marvels_agents_of_shield_s02e06'].name
+    video_root = os.path.splitext(video_name)[0]
+    tmpdir.ensure('tvshows', video_name)
+    subtitles_directory = str(tmpdir.ensure('subtitles', dir=True))
+    expected_subtitles = {
+        video_name + '.srt': Language('und'),
+        video_root + '.en.srt': Language('eng')
+    }
+    tmpdir.ensure('tvshows', video_name + '.fr.srt')
+    for path in expected_subtitles:
+        tmpdir.ensure('subtitles', path)
+    subtitles = search_external_subtitles(video_name, directory=subtitles_directory)
+    assert subtitles == expected_subtitles
+
+
 def test_scan_video_movie(movies, tmpdir, monkeypatch):
     video = movies['man_of_steel']
     monkeypatch.chdir(str(tmpdir))
@@ -329,7 +345,7 @@ def test_scan_videos(movies, tmpdir, monkeypatch):
     monkeypatch.chdir(str(tmpdir))
     videos = scan_videos('movies')
 
-    kwargs = dict(subtitles=True, embedded_subtitles=True)
+    kwargs = dict(subtitles=True, embedded_subtitles=True, subtitles_dir=None)
     calls = [((os.path.join('movies', movies['man_of_steel'].name),), kwargs),
              ((os.path.join('movies', movies['enders_game'].name),), kwargs)]
     assert len(videos) == len(calls)

@@ -235,10 +235,13 @@ class Movie(Video):
         return '<%s [%r, %d]>' % (self.__class__.__name__, self.title, self.year)
 
 
-def search_external_subtitles(path):
+def search_external_subtitles(path, directory=None):
     """Search for external subtitles from a video `path` and their associated language.
 
+    Unless `directory` is provided, search will be made in the same directory as the video file.
+
     :param str path: path to the video.
+    :param str directory: directory to search for subtitles.
     :return: found subtitles with their languages.
     :rtype: dict
 
@@ -247,7 +250,7 @@ def search_external_subtitles(path):
     dirpath = dirpath or '.'
     fileroot, fileext = os.path.splitext(filename)
     subtitles = {}
-    for p in os.listdir(dirpath):
+    for p in os.listdir(directory or dirpath):
         # keep only valid subtitle filenames
         if not p.startswith(fileroot) or not p.endswith(SUBTITLE_EXTENSIONS):
             continue
@@ -272,12 +275,13 @@ def search_external_subtitles(path):
     return subtitles
 
 
-def scan_video(path, subtitles=True, embedded_subtitles=True):
+def scan_video(path, subtitles=True, embedded_subtitles=True, subtitles_dir=None):
     """Scan a video and its subtitle languages from a video `path`.
 
     :param str path: existing path to the video.
     :param bool subtitles: scan for subtitles with the same name.
     :param bool embedded_subtitles: scan for embedded subtitles.
+    :param str subtitles_dir: directory to search for subtitles.
     :return: the scanned video.
     :rtype: :class:`Video`
 
@@ -309,7 +313,7 @@ def scan_video(path, subtitles=True, embedded_subtitles=True):
 
     # external subtitles
     if subtitles:
-        video.subtitle_languages |= set(search_external_subtitles(path).values())
+        video.subtitle_languages |= set(search_external_subtitles(path, directory=subtitles_dir).values())
 
     # video metadata with enzyme
     try:
@@ -388,12 +392,13 @@ def scan_video(path, subtitles=True, embedded_subtitles=True):
     return video
 
 
-def scan_videos(path, subtitles=True, embedded_subtitles=True):
+def scan_videos(path, subtitles=True, embedded_subtitles=True, subtitles_dir=None):
     """Scan `path` for videos and their subtitles.
 
     :param str path: existing directory path to scan.
     :param bool subtitles: scan for subtitles with the same name.
     :param bool embedded_subtitles: scan for embedded subtitles.
+    :param str subtitles_dir: directory to search for subtitles.
     :return: the scanned videos.
     :rtype: list of :class:`Video`
 
@@ -438,7 +443,8 @@ def scan_videos(path, subtitles=True, embedded_subtitles=True):
 
             # scan video
             try:
-                video = scan_video(filepath, subtitles=subtitles, embedded_subtitles=embedded_subtitles)
+                video = scan_video(filepath, subtitles=subtitles, embedded_subtitles=embedded_subtitles,
+                                   subtitles_dir=subtitles_dir)
             except ValueError:  # pragma: no cover
                 logger.exception('Error scanning video')
                 continue

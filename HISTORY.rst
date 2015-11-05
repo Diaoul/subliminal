@@ -10,6 +10,7 @@ Changelog
 * Improve matching on titles
 * Fix for series name with special characters in addic7ed provider
 * Fix id property in thesubdb provider
+* Add support for searching subtitles in a separate directory
 
 
 1.0.1

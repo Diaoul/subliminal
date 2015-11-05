@@ -58,7 +58,9 @@ def episodes():
             'marvels_agents_of_shield_s02e06':
             Episode('Marvels.Agents.of.S.H.I.E.L.D.S02E06.720p.HDTV.x264-KILLERS.mkv',
                     'Marvel\'s Agents of S.H.I.E.L.D.', 2, 6, format='HDTV', release_group='KILLERS', resolution='720p',
-                    video_codec='h264', year=2013)}
+                    video_codec='h264', year=2013),
+            'csi_cyber_s02e03':
+            Episode('CSI.Cyber.S02E03.hdtv-lol.mp4', 'CSI: Cyber', 2, 3, format='HDTV', release_group='lol')}
 
 
 @pytest.fixture(scope='session')

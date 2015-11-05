@@ -306,6 +306,22 @@ def test_query_parsing_quote_dots_mixed_case(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
+def test_query_parsing_colon(episodes):
+    video = episodes['csi_cyber_s02e03']
+    with Addic7edProvider() as provider:
+        subtitles = provider.query(video.series, video.season)
+    subtitle = [s for s in subtitles if s.download_link == 'updated/1/105111/2'][0]
+    assert subtitle.language == Language('eng')
+    assert subtitle.hearing_impaired is False
+    assert subtitle.page_link == 'http://www.addic7ed.com/serie/CSI%3A_Cyber/2/3/Brown_Eyes%2C_Blue_Eyes'
+    assert subtitle.series == video.series
+    assert subtitle.season == video.season
+    assert subtitle.episode == video.episode
+    assert subtitle.version == 'DIMENSION'
+
+
+@pytest.mark.integration
+@vcr.use_cassette
 def test_query_year(episodes):
     video = episodes['dallas_2012_s01e03']
     with Addic7edProvider() as provider:

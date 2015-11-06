@@ -177,6 +177,8 @@ def test_search_external_subtitles(episodes, tmpdir):
         video_name + '.fra.srt': Language('fra'),
         video_root + '.pt-BR.srt': Language('por', 'BR'),
         video_name + '.sr_cyrl.sub': Language('srp', script='Cyrl'),
+        video_root + '[fra].srt': Language('fra'),
+        video_root + '[pt-BR].srt': Language('por', 'BR'),
         video_name + '.something.srt': Language('und')
     }
     tmpdir.ensure(os.path.split(episodes['got_s03e10'].name)[1] + '.srt')

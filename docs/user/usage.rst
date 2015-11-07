@@ -63,7 +63,7 @@ of this example, we're going to use a memory backend.
 
 .. warning::
 
-    Choose a cache that fits your application and prefer persistant over volatile backends. The ``file`` backend is
+    Choose a cache that fits your application and prefer persistent over volatile backends. The ``file`` backend is
     usually a good choice.
     See `dogpile.cache's documentation <http://dogpilecache.readthedocs.org>`_ for more details on backends.
 

@@ -29,7 +29,7 @@ class PyTest(TestCommand):
 # requirements
 install_requirements = ['guessit>=0.9.1,<2.0', 'babelfish>=0.5.2', 'enzyme>=0.4.1', 'beautifulsoup4>=4.2.0',
                         'requests>=2.0', 'click>=4.0', 'dogpile.cache>=0.5.4', 'stevedore>=1.0.0',
-                        'chardet>=2.3.0', 'pysrt>=1.0.1', 'six>=1.9.0']
+                        'chardet>=2.3.0', 'pysrt>=1.0.1', 'six>=1.9.0', 'rarfile>=2.6']
 
 test_requirements = ['sympy', 'vcrpy>=1.6.1', 'pytest', 'pytest-pep8', 'pytest-flakes', 'pytest-cov']
 if sys.version_info < (3, 3):
@@ -79,6 +79,7 @@ setup(name='subliminal',
       entry_points={
           'subliminal.providers': [
               'addic7ed = subliminal.providers.addic7ed:Addic7edProvider',
+              'legendastv = subliminal.providers.legendastv:LegendasTvProvider',
               'napiprojekt = subliminal.providers.napiprojekt:NapiProjektProvider',
               'opensubtitles = subliminal.providers.opensubtitles:OpenSubtitlesProvider',
               'podnapisi = subliminal.providers.podnapisi:PodnapisiProvider',
@@ -87,6 +88,7 @@ setup(name='subliminal',
           ],
           'babelfish.language_converters': [
               'addic7ed = subliminal.converters.addic7ed:Addic7edConverter',
+              'legendastv = subliminal.converters.legendastv:LegendasTvConverter',
               'thesubdb = subliminal.converters.thesubdb:TheSubDBConverter',
               'tvsubtitles = subliminal.converters.tvsubtitles:TVsubtitlesConverter'
           ],

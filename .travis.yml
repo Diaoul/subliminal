@@ -1,4 +1,4 @@
-sudo: false
+sudo: required
 
 language: python
 
@@ -33,6 +33,10 @@ cache:
 
 before_cache:
   - rm -f $HOME/.cache/pip/log/debug.log
+
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -y unrar
 
 install:
   - pip install -e .[test]

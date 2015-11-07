@@ -1,0 +1,32 @@
+interactions:
+- request:
+    body: data%5BUser%5D%5Bpassword%5D=subliminal&data%5BUser%5D%5Busername%5D=subliminal&_method=POST
+    headers:
+      Content-Length: ['93']
+      Content-Type: [application/x-www-form-urlencoded]
+      User-Agent: [Subliminal/1.1]
+    method: POST
+    uri: http://legendas.tv/login
+  response:
+    body: {string: !!python/unicode ''}
+    headers:
+      accept-ranges: [bytes]
+      access-control-allow-origin: ['*']
+      age: ['0']
+      connection: [keep-alive]
+      content-length: ['0']
+      content-type: [text/html; charset=UTF-8]
+      date: ['Sat, 19 Sep 2015 14:38:20 GMT']
+      location: ['http://legendas.tv/']
+      set-cookie: [PHPSESSID=f2fv1lag6uujipjps27q2ml2a2; path=/; HttpOnly, 'PHPSESSID=deleted;
+          expires=Fri, 19-Sep-2014 14:38:19 GMT; path=/', PHPSESSID=j150ds5vs3fuh77l2gdt8ub0c6;
+          path=/; HttpOnly, 'PHPSESSID=deleted; expires=Fri, 19-Sep-2014 14:38:19
+          GMT; path=/', PHPSESSID=8nr6u83rl20nlfks4o8heuncb3; path=/; HttpOnly]
+      vary: ['User-Agent,Accept-Encoding']
+      via: [1.1 varnish]
+      x-backend: [default_director]
+      x-cache: [MISS]
+      x-cacheable: ['YES:Forced']
+      x-varnish: ['1061158620']
+    status: {code: 302, message: Found}
+version: 1

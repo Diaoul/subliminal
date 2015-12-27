@@ -32,6 +32,7 @@ Changelog
 * New test suite
 * New documentation
 * New CLI
+* Added support for SubsCenter
 
 
 0.7.5

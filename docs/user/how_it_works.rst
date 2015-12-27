@@ -10,6 +10,7 @@ subtitles. Current supported providers are:
 * NapiProjekt
 * OpenSubtitles
 * Podnapisi
+* SubsCenter
 * TheSubDB
 * TvSubtitles
 

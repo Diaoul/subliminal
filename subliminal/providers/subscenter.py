@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import bisect
 import io
 import json
 import logging
@@ -185,7 +186,7 @@ class SubsCenterProvider(Provider):
                         # add the release and increment downloaded count if we already have the subtitle
                         if subtitle_id in subtitles:
                             logger.debug('Found additional release %r for subtitle %d', release, subtitle_id)
-                            subtitles[subtitle_id].releases.append(release)
+                            bisect.insort_left(subtitles[subtitle_id].releases, release)  # deterministic order
                             subtitles[subtitle_id].downloaded += downloaded
                             continue
 

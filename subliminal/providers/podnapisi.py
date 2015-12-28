@@ -76,7 +76,6 @@ class PodnapisiSubtitle(Subtitle):
 class PodnapisiProvider(Provider):
     languages = ({Language('por', 'BR'), Language('srp', script='Latn')} |
                  {Language.fromalpha2(l) for l in language_converters['alpha2'].codes})
-    video_types = (Episode, Movie)
     server_url = 'http://podnapisi.net/subtitles/'
 
     def initialize(self):

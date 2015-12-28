@@ -256,7 +256,7 @@ def sanitized_string_equal(string1, string2):
     :rtype: bool
 
     """
-    return sanitize_string(string1).lower() == sanitize_string(string2).lower()
+    return string1 and string2 and sanitize_string(string1).lower() == sanitize_string(string2).lower()
 
 
 def guess_matches(video, guess, partial=False):

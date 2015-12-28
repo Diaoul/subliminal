@@ -83,7 +83,7 @@ class TVsubtitlesProvider(Provider):
     def search_show_id(self, series, year=None):
         """Search the show id from the `series` and `year`.
 
-        :param string series: series of the episode.
+        :param str series: series of the episode.
         :param year: year of the series, if any.
         :type year: int or None
         :return: the show id, if any.

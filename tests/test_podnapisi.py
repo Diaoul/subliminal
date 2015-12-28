@@ -62,7 +62,6 @@ def test_query_movie(movies):
                           'MOko'}
     with PodnapisiProvider() as provider:
         subtitles = provider.query(language, video.title, year=video.year)
-    print(repr({subtitle.pid for subtitle in subtitles}))
     assert {subtitle.pid for subtitle in subtitles} == expected_subtitles
     assert {subtitle.language for subtitle in subtitles} == {language}
 

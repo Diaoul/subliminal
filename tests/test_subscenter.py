@@ -16,23 +16,28 @@ vcr = VCR(path_transformer=lambda path: path + '.yaml',
 
 
 def test_get_matches_movie(movies):
-    subtitle = SubsCenterSubtitle(None, None, Language('heb'), None, 0, 0, 'Man of Steel',
-                                  'Man.of.Steel.German.720p.BluRay.x264-EXQUiSiTE', 'movie', False, None)
-    matches = subtitle.get_matches(movies['man_of_steel'])
-    assert matches == {'title', 'video_codec', 'resolution', 'format', 'hearing_impaired'}
+    releases = ['Enders.Game.2013.HC.Webrip.x264.AC3-TiTAN', 'Enders.Game.2013.KORSUB.HDRip.XViD-NO1KNOWS',
+                'Enders.Game.2013.KORSUB.HDRip.h264.AAC-RARBG', 'Enders.Game.2013.HDRip.XViD.AC3-ReLeNTLesS',
+                'Enders.Game.2013.720p.KOR.HDRip.H264-KTH']
+    subtitle = SubsCenterSubtitle(Language('heb'), False, None, None, None, None, 'Ender\'s Game', 266898,
+                                  '54adce017db2e7fd8501b7a321451b64', 389, releases)
+    matches = subtitle.get_matches(movies['enders_game'])
+    assert matches == {'title', 'year', 'resolution', 'video_codec', 'hearing_impaired'}
 
 
 def test_get_matches_episode(episodes):
-    subtitle = SubsCenterSubtitle(None, None, Language('heb'), 'Game of Thrones', 3, 10, 'Mhysa',
-                                  'Game.of.Thrones.S03E10.HDTV.XviD-AFG', 'episode', False, None)
+    releases = ['Game.of.Thrones.S03E10.HDTV.x264-EVOLVE']
+    subtitle = SubsCenterSubtitle(Language('heb'), False, None, 'Game of Thrones', 3, 10, 'Mhysa', 263129,
+                                  '6a3129e8b9effdb8231aa6b3caf66fbe', 6706, releases)
     matches = subtitle.get_matches(episodes['got_s03e10'])
-    assert matches == {'series', 'episode', 'season', 'title', 'year', 'hearing_impaired'}
+    assert matches == {'series', 'episode', 'season', 'title', 'year', 'video_codec', 'hearing_impaired'}
 
 
-def test_get_matches_no_match(episodes):
-    subtitle = SubsCenterSubtitle(None, None, Language('heb'), None, 0, 0, 'Man of Steel',
-                                  'man.of.steel.2013.720p.bluray.x264-felony', 'movie', False, None)
-    matches = subtitle.get_matches(episodes['got_s03e10'], hearing_impaired=True)
+def test_get_matches_no_match(movies):
+    releases = ['Game.of.Thrones.S03E10.HDTV.EVOLVE']
+    subtitle = SubsCenterSubtitle(Language('heb'), False, None, 'Game of Thrones', 3, 10, 'Mhysa', 263129,
+                                  '6a3129e8b9effdb8231aa6b3caf66fbe', 6706, releases)
+    matches = subtitle.get_matches(movies['man_of_steel'], hearing_impaired=True)
     assert matches == set()
 
 
@@ -74,93 +79,68 @@ def test_logout():
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_query_query_movie(movies):
-    video = movies['enders_game']
-    languages = {Language('heb')}
-    expected_subtitle_keys = {
-        '03ab6a943e732ad6d9941884bd7884c5',
-        'fa7b4cd387e784b1d54289260db1e45c',
-        '6fddf17ce5c7bc264e983e657a862b76',
-        'd4f8ab0d2cc32809c84ca722cad28285'
-    }
-    with SubsCenterProvider() as provider:
-        subtitles = provider.query(languages, title=video.title)
-    assert len(expected_subtitle_keys.intersection({subtitle.subtitle_key for subtitle in subtitles})) == \
-        len(expected_subtitle_keys)
-    assert {subtitle.language for subtitle in subtitles} == languages
-
-
-@pytest.mark.integration
-@vcr.use_cassette
-def test_query_query_episode(episodes):
+def test_search_url_title_episode(episodes):
     video = episodes['dallas_2012_s01e03']
-    languages = {Language('heb')}
-    expected_subtitle_keys = {
-        'a0ed1cb02d51b74849aaf2eaa7fc65ba',
-        '6afae8894c7a3a947f3ce460e3ea1cc5',
-        'a1138da829d83763b53d2c9a6c1ed6fd',
-        '19596f9beba1bdbfa0232282e43baa60',
-        '00ee302fce779d97bc8654f23bb961e0'
-    }
     with SubsCenterProvider() as provider:
-        subtitles = provider.query(languages, series=video.series, season=video.season, episode=video.episode)
-    assert len(expected_subtitle_keys.difference({subtitle.subtitle_key for subtitle in subtitles})) == 0
-    assert {subtitle.language for subtitle in subtitles} == languages
+        url_title = provider._search_url_title(video.series, 'series')
+    assert url_title == 'dallas'
 
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_query_query_season_episode(episodes):
-    video = episodes['bbt_s07e05']
-    languages = {Language('heb')}
-    expected_subtitle_keys = {
-        '146367a10dcaac068ae571a53b7687f4',
-        '0e277eac84cf2bd314dcd189e38242aa',
-        'ce8e4086da2688eb6ab183c0d831e855',
-        '7b4535ebaabbe99d20965e9e12cb1ac3',
-        'a1e13022bbff7bfe5fb073f4dd2696af',
-        '2c3a61c6d73dbfe293a5d5d434a326c9'
-    }
+def test_search_url_title_movies(movies):
+    video = movies['man_of_steel']
     with SubsCenterProvider() as provider:
-        subtitles = provider.query(languages, series=video.series, season=video.season, episode=video.episode)
-    assert len(expected_subtitle_keys.difference({subtitle.subtitle_key for subtitle in subtitles})) == 0
-    assert {subtitle.language for subtitle in subtitles} == languages
+        url_title = provider._search_url_title(video.title, 'movie')
+    assert url_title == 'superman-man-of-steel'
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_query_movie(movies):
+    video = movies['enders_game']
+    expected_subtitles = {'267118', '266898', '267140'}
+    with SubsCenterProvider() as provider:
+        subtitles = provider.query(title=video.title)
+    assert len(subtitles) == len(expected_subtitles)
+    assert {subtitle.id for subtitle in subtitles} == expected_subtitles
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_query_episode(episodes):
+    video = episodes['dallas_2012_s01e03']
+    expected_subtitles = {'264417', '256843', '256842'}
+    with SubsCenterProvider() as provider:
+        subtitles = provider.query(series=video.series, season=video.season, episode=video.episode)
+    assert len(subtitles) == len(expected_subtitles)
+    assert {subtitle.id for subtitle in subtitles} == expected_subtitles
 
 
 @pytest.mark.integration
 @vcr.use_cassette
 def test_list_subtitles_movie(movies):
-    video = movies['enders_game']
+    video = movies['man_of_steel']
     languages = {Language('heb')}
-    expected_subtitle_keys = {
-        '03ab6a943e732ad6d9941884bd7884c5',
-        'fa7b4cd387e784b1d54289260db1e45c',
-        '6fddf17ce5c7bc264e983e657a862b76',
-        'd4f8ab0d2cc32809c84ca722cad28285'
-    }
+    expected_subtitles = {'263600', '263610', '263628', '263607', '263470', '263609', '263630', '263481', '263627',
+                          '263493', '265320', '263608', '263479'}
     with SubsCenterProvider() as provider:
         subtitles = provider.list_subtitles(video, languages)
-    assert len(expected_subtitle_keys.intersection({subtitle.subtitle_key for subtitle in subtitles})) == \
-        len(expected_subtitle_keys)
+    assert len(subtitles) == len(expected_subtitles)
+    assert {subtitle.id for subtitle in subtitles} == expected_subtitles
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
 @pytest.mark.integration
 @vcr.use_cassette
 def test_list_subtitles_episode(episodes):
-    video = episodes['bbt_s07e05']
+    video = episodes['got_s03e10']
     languages = {Language('heb')}
-    expected_subtitle_keys = {
-        '146367a10dcaac068ae571a53b7687f4',
-        '0e277eac84cf2bd314dcd189e38242aa',
-        'ce8e4086da2688eb6ab183c0d831e855',
-        '7b4535ebaabbe99d20965e9e12cb1ac3',
-        'a1e13022bbff7bfe5fb073f4dd2696af',
-        '2c3a61c6d73dbfe293a5d5d434a326c9'
-    }
+    expected_subtitles = {'263128', '263129', '263127', '263139', '263130'}
     with SubsCenterProvider() as provider:
         subtitles = provider.list_subtitles(video, languages)
-    assert len(expected_subtitle_keys.difference({subtitle.subtitle_key for subtitle in subtitles})) == 0
+    assert len(subtitles) == len(expected_subtitles)
+    assert {subtitle.id for subtitle in subtitles} == expected_subtitles
     assert {subtitle.language for subtitle in subtitles} == languages
 
 

@@ -97,4 +97,3 @@ Install
    ``mkdir -p ~/.local/share/nautilus-python/extensions/subliminal/locale/fr/LC_MESSAGES``
 7. (Optional) Install the translation
    ``msgfmt examples/i18n/fr.po -o ~/.local/share/nautilus-python/extensions/subliminal/locale/fr/LC_MESSAGES/subliminal.mo``
-_

@@ -1,17 +1,18 @@
 Changelog
 ---------
 
-1.1.0
-^^^^^
-**release date:** *not released*
+1.1
+^^^
+**release date:** 2015-12-29
 
 * Fix library usage example in README
-* Support python 3.5
-* Improve matching on titles
 * Fix for series name with special characters in addic7ed provider
 * Fix id property in thesubdb provider
+* Improve matching on titles
+* Add support for nautilus context menu with translations
 * Add support for searching subtitles in a separate directory
-* Add napiprojekt provider
+* Add subscenter provider
+* Add support for python 3.5
 
 
 1.0.1

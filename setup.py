@@ -83,5 +83,4 @@ setup(name='subliminal',
       extras_require={
           'test': test_requirements,
           'dev': dev_requirements
-      },
-      cmdclass={'test': PyTest})
+      })

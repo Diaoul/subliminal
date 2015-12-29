@@ -44,7 +44,7 @@ class SubsCenterSubtitle(Subtitle):
         # episode
         if isinstance(video, Episode):
             # series
-            if video.series and sanitized_string_equal(self.series,  video.series):
+            if video.series and sanitized_string_equal(self.series, video.series):
                 matches.add('series')
             # season
             if video.season and self.season == video.season:

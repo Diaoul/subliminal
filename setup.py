@@ -5,28 +5,11 @@ import re
 import sys
 
 from setuptools import setup, find_packages
-from setuptools.command.test import test as TestCommand
 
-
-class PyTest(TestCommand):
-    user_options = [('pytest-args=', 'a', 'Arguments to pass to py.test')]
-
-    def initialize_options(self):
-        TestCommand.initialize_options(self)
-        self.pytest_args = []
-
-    def finalize_options(self):
-        TestCommand.finalize_options(self)
-        self.test_args = []
-        self.test_suite = True
-
-    def run_tests(self):
-        # import here, cause outside the eggs aren't loaded
-        import pytest
-        errno = pytest.main(self.pytest_args)
-        sys.exit(errno)
 
 # requirements
+setup_requirements = ['pytest-runner'] if {'pytest', 'test', 'ptr'}.intersection(sys.argv) else []
+
 install_requirements = ['guessit>=0.9.1,<2.0', 'babelfish>=0.5.2', 'enzyme>=0.4.1', 'beautifulsoup4>=4.2.0',
                         'requests>=2.0', 'click>=4.0', 'dogpile.cache>=0.5.4', 'stevedore>=1.0.0',
                         'chardet>=2.3.0', 'pysrt>=1.0.1', 'six>=1.9.0']
@@ -94,6 +77,7 @@ setup(name='subliminal',
               'subliminal = subliminal.cli:subliminal'
           ]
       },
+      setup_requires=setup_requirements,
       install_requires=install_requirements,
       tests_require=test_requirements,
       extras_require={

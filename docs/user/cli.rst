@@ -16,6 +16,7 @@ subliminal
       --addic7ed USERNAME PASSWORD    Addic7ed configuration.
       --opensubtitles USERNAME PASSWORD
                                       OpenSubtitles configuration.
+      --subscenter USERNAME PASSWORD  SubsCenter configuration.
       --cache-dir DIRECTORY           Path to the cache directory.  [default:
                                       ~/.config/subliminal]
       --debug                         Print useful information for debugging subliminal and for
@@ -48,7 +49,7 @@ subliminal download
     Options:
       -l, --language LANGUAGE         Language as IETF code, e.g. en, pt-BR (can be used multiple
                                       times).  [required]
-      -p, --provider [addic7ed|napiprojekt|opensubtitles|podnapisi|subscenter|thesubdb|tvsubtitles]
+      -p, --provider [addic7ed|opensubtitles|podnapisi|subscenter|thesubdb|tvsubtitles]
                                       Provider to use (can be used multiple times).
       -a, --age AGE                   Filter videos newer than AGE, e.g. 12h, 1w2d.
       -d, --directory DIR             Directory where to save subtitles, default is next to the video
@@ -56,7 +57,8 @@ subliminal download
       -e, --encoding ENC              Subtitle file encoding, default is to preserve original
                                       encoding.
       -s, --single                    Save subtitle without language code in the file name, i.e. use
-                                      .srt extension.
+                                      .srt extension. Do not use this unless your media player
+                                      requires it.
       -f, --force                     Force download even if a subtitle already exist.
       -hi, --hearing-impaired         Prefer hearing impaired subtitles.
       -m, --min-score INTEGER RANGE   Minimum score for a subtitle to be downloaded (0 to 100).
@@ -74,6 +76,6 @@ subliminal cache
       Cache management.
 
     Options:
-      --clear-subliminal  Clear subliminal's cache. Use this ONLY if your cache is corrupted or if
-                          you experience issues.
+      --clear-subliminal  Clear subliminal's cache. Use this ONLY if your cache is corrupted or if you
+                          experience issues.
       --help              Show this message and exit.

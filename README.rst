@@ -70,30 +70,4 @@ Download best subtitles in French and English for videos less than two weeks old
 
 Nautilus integration
 --------------------
-Screenshots
-^^^^^^^^^^^
-.. image:: http://i.imgur.com/NCwELpB.png
-   :alt: Menu
-
-.. image:: http://i.imgur.com/Y58ky88.png
-   :alt: Configuration
-
-.. image:: http://i.imgur.com/qem3DGj.png
-   :alt: Choose subtitles
-
-Install
-^^^^^^^
-1. Install subliminal on your system
-   ``sudo pip install -U subliminal``
-2. Install nautilus-python with your package manager
-   ``sudo apt-get install nautilus-python``
-3. Create the extension directory
-   ``mkdir -p ~/.local/share/nautilus-python/extensions/subliminal``
-4. Copy the script
-   ``cp examples/nautilus.py ~/.local/share/nautilus-python/extensions/subliminal-nautilus.py``
-5. Copy UI files
-   ``cp -R examples/ui ~/.local/share/nautilus-python/extensions/subliminal/``
-6. (Optional) Create a translation directory for your language
-   ``mkdir -p ~/.local/share/nautilus-python/extensions/subliminal/locale/fr/LC_MESSAGES``
-7. (Optional) Install the translation
-   ``msgfmt examples/i18n/fr.po -o ~/.local/share/nautilus-python/extensions/subliminal/locale/fr/LC_MESSAGES/subliminal.mo``
+See the dedicated `project page <https://github.com/Diaoul/nautilus-subliminal>`_ for more information.

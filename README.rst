@@ -68,6 +68,6 @@ Download best subtitles in French and English for videos less than two weeks old
         save_subtitles(v, subtitles[v])
 
 
-Nautilus integration
---------------------
+Nautilus/Nemo integration
+-------------------------
 See the dedicated `project page <https://github.com/Diaoul/nautilus-subliminal>`_ for more information.

@@ -386,7 +386,7 @@ def scan_video(path, subtitles=True, embedded_subtitles=True, subtitles_dir=None
             else:
                 logger.debug('MKV has no subtitle track')
 
-    except EnzymeError:
+    except:
         logger.exception('Parsing video metadata with enzyme failed')
 
     return video

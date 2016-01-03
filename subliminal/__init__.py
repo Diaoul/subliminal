@@ -7,8 +7,8 @@ __copyright__ = 'Copyright 2015, Antoine Bertin'
 
 import logging
 
-from .api import (ProviderPool, check_video, provider_manager, download_best_subtitles, download_subtitles,
-                  list_subtitles, save_subtitles)
+from .api import (ProviderManager, ProviderPool, check_video, provider_manager, download_best_subtitles,
+                  download_subtitles, list_subtitles, save_subtitles)
 from .cache import region
 from .exceptions import Error, ProviderError
 from .providers import Provider

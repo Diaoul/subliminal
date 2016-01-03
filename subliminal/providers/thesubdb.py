@@ -8,8 +8,9 @@ from . import Provider, get_version
 from .. import __version__
 from ..subtitle import Subtitle, fix_line_ending
 
-
 logger = logging.getLogger(__name__)
+
+language_converters.register('thesubdb = subliminal.converters.thesubdb:TheSubDBConverter')
 
 
 class TheSubDBSubtitle(Subtitle):

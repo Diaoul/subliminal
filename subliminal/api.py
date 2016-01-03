@@ -4,17 +4,102 @@ import io
 import logging
 import operator
 import os.path
+from pkg_resources import EntryPoint
 import socket
 
 from babelfish import Language
 import requests
-from stevedore import EnabledExtensionManager, ExtensionManager
+from stevedore import ExtensionManager
 
 from .subtitle import compute_score, get_subtitle_path
 
 logger = logging.getLogger(__name__)
 
-provider_manager = ExtensionManager('subliminal.providers')
+
+class ProviderManager(ExtensionManager):
+    """Manager for providers based on :class:`~stevedore.extension.ExtensionManager`.
+
+    It allows loading of internal providers without setup and registering/unregistering additional providers.
+
+    Loading is done in this order:
+
+    * Entry point providers
+    * Internal providers
+    * Registered providers
+
+    """
+    internal_providers = [
+      'addic7ed = subliminal.providers.addic7ed:Addic7edProvider',
+      'opensubtitles = subliminal.providers.opensubtitles:OpenSubtitlesProvider',
+      'podnapisi = subliminal.providers.podnapisi:PodnapisiProvider',
+      'subscenter = subliminal.providers.subscenter:SubsCenterProvider',
+      'thesubdb = subliminal.providers.thesubdb:TheSubDBProvider',
+      'tvsubtitles = subliminal.providers.tvsubtitles:TVsubtitlesProvider'
+    ]
+
+    def __init__(self):
+        #: Registered providers with entry point syntax
+        self.registered_providers = []
+
+        super(ProviderManager, self).__init__('subliminal.providers')
+
+    def _find_entry_points(self, namespace):
+        # default entry points
+        eps = super(ProviderManager, self)._find_entry_points(namespace)
+
+        # internal entry points
+        for iep in self.internal_providers:
+            ep = EntryPoint.parse(iep)
+            if ep.name not in [e.name for e in eps]:
+                eps.append(ep)
+
+        # registered entry points
+        for rep in self.registered_providers:
+            ep = EntryPoint.parse(rep)
+            if ep.name not in [e.name for e in eps]:
+                eps.append(ep)
+
+        return eps
+
+    def register(self, entry_point):
+        """Register a provider
+
+        :param str entry_point: provider to register (entry point syntax)
+        :raise: ValueError if already registered
+
+        """
+        if entry_point in self.registered_providers:
+            raise ValueError('Entry point already registered')
+
+        ep = EntryPoint.parse(entry_point)
+        if ep.name in self.names():
+            raise ValueError('A provider with the same name already exist')
+
+        ext = self._load_one_plugin(ep, False, (), {}, False)
+        self.extensions.append(ext)
+        if self._extensions_by_name is not None:
+            self._extensions_by_name[ext.name] = ext
+        self.registered_providers.insert(0, entry_point)
+
+    def unregister(self, entry_point):
+        """Unregister a provider
+
+        :param str entry_point: provider to unregister (entry point syntax)
+
+        """
+        if entry_point not in self.registered_providers:
+            raise ValueError('Entry point not registered')
+
+        ep = EntryPoint.parse(entry_point)
+        self.registered_providers.remove(entry_point)
+        if self._extensions_by_name is not None:
+            del self._extensions_by_name[ep.name]
+        for i, ext in enumerate(self.extensions):
+            if ext.name == ep.name:
+                del self.extensions[i]
+                break
+
+provider_manager = ProviderManager()
 
 
 class ProviderPool(object):
@@ -26,8 +111,7 @@ class ProviderPool(object):
           the providers on exit.
         * Automatically discard providers on failure.
 
-    :param providers: name of providers to use, if not all.
-    :type providers: list
+    :param list providers: name of providers to use, if not all.
     :param dict provider_configs: provider configuration as keyword arguments per provider name to pass when
         instanciating the :class:`~subliminal.providers.Provider`.
 
@@ -45,9 +129,6 @@ class ProviderPool(object):
         #: Discarded providers
         self.discarded_providers = set()
 
-        #: Dedicated :data:`provider_manager` as :class:`~stevedore.enabled.EnabledExtensionManager`
-        self.manager = EnabledExtensionManager(provider_manager.namespace, lambda e: e.name in self.providers)
-
     def __enter__(self):
         return self
 
@@ -55,9 +136,11 @@ class ProviderPool(object):
         self.terminate()
 
     def __getitem__(self, name):
+        if name not in self.providers:
+            raise KeyError
         if name not in self.initialized_providers:
             logger.info('Initializing provider %s', name)
-            provider = self.manager[name].plugin(**self.provider_configs.get(name, {}))
+            provider = provider_manager[name].plugin(**self.provider_configs.get(name, {}))
             provider.initialize()
             self.initialized_providers[name] = provider
 
@@ -100,12 +183,12 @@ class ProviderPool(object):
                 continue
 
             # check video validity
-            if not self.manager[name].plugin.check(video):
+            if not provider_manager[name].plugin.check(video):
                 logger.info('Skipping provider %r: not a valid video', name)
                 continue
 
             # check supported languages
-            provider_languages = self.manager[name].plugin.languages & languages
+            provider_languages = provider_manager[name].plugin.languages & languages
             if not provider_languages:
                 logger.info('Skipping provider %r: no language to search for', name)
                 continue

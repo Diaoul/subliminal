@@ -2,6 +2,7 @@
 from datetime import timedelta
 import io
 import os
+from pkg_resources import EntryPoint, iter_entry_points
 
 from babelfish import Language
 import pytest
@@ -11,8 +12,8 @@ except ImportError:
     from mock import Mock
 from vcr import VCR
 
-from subliminal import (ProviderPool, check_video, download_best_subtitles, download_subtitles, list_subtitles,
-                        provider_manager, save_subtitles)
+from subliminal import (ProviderManager, ProviderPool, check_video, download_best_subtitles, download_subtitles,
+                        list_subtitles, provider_manager, save_subtitles)
 from subliminal.providers.addic7ed import Addic7edSubtitle
 from subliminal.providers.thesubdb import TheSubDBSubtitle
 from subliminal.providers.tvsubtitles import TVsubtitlesSubtitle
@@ -32,6 +33,33 @@ def mock_providers(monkeypatch):
         monkeypatch.setattr(provider.plugin, 'list_subtitles', Mock(return_value=[provider.name]))
         monkeypatch.setattr(provider.plugin, 'download_subtitle', Mock())
         monkeypatch.setattr(provider.plugin, 'terminate', Mock())
+
+
+def test_provider_manager_internal_providers():
+    manager = ProviderManager()
+    setup_names = {ep.name for ep in iter_entry_points(manager.namespace)}
+    internal_names = {EntryPoint.parse(iep).name for iep in manager.internal_providers}
+    assert internal_names == setup_names
+
+
+def test_provider_manager_register():
+    manager = ProviderManager()
+    manager.register('de7cidda = subliminal.providers.addic7ed:Addic7edProvider')
+    assert 'de7cidda' in manager.names()
+
+
+def test_provider_manager_unregister():
+    manager = ProviderManager()
+    old_names = manager.names()
+    manager.register('de7cidda = subliminal.providers.addic7ed:Addic7edProvider')
+    manager.unregister('de7cidda = subliminal.providers.addic7ed:Addic7edProvider')
+    assert set(old_names) == set(manager.names())
+
+
+def test_provider_pool_get_keyerror():
+    pool = ProviderPool()
+    with pytest.raises(KeyError):
+        pool['de7cidda']
 
 
 def test_provider_pool_del_keyerror():

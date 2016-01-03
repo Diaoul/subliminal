@@ -4,7 +4,7 @@ import logging
 import re
 from zipfile import ZipFile
 
-from babelfish import Language
+from babelfish import Language, language_converters
 from requests import Session
 
 from . import ParserBeautifulSoup, Provider, get_version
@@ -15,6 +15,8 @@ from ..subtitle import Subtitle, fix_line_ending, guess_matches, guess_propertie
 from ..video import Episode
 
 logger = logging.getLogger(__name__)
+
+language_converters.register('tvsubtitles = subliminal.converters.tvsubtitles:TVsubtitlesConverter')
 
 link_re = re.compile('^(?P<series>.+?)(?: \(?\d{4}\)?| \((?:US|UK)\))? \((?P<first_year>\d{4})-\d{4}\)$')
 episode_id_re = re.compile('^episode-\d+\.html$')

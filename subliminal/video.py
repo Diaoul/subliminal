@@ -7,7 +7,7 @@ import os
 import struct
 
 from babelfish import Error as BabelfishError, Language
-from enzyme import Error as EnzymeError, MKV
+from enzyme import MKV
 from guessit import guess_episode_info, guess_file_info, guess_movie_info
 
 logger = logging.getLogger(__name__)

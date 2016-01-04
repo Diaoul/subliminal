@@ -6,7 +6,7 @@ Subtitles, faster than your thoughts.
     :target: https://pypi.python.org/pypi/subliminal
     :alt: Latest Version
 
-.. image:: https://travis-ci.org/Diaoul/subliminal.svg?branch=master
+.. image:: https://travis-ci.org/Diaoul/subliminal.svg?branch=develop
    :target: https://travis-ci.org/Diaoul/subliminal
    :alt: Travis CI build status
 
@@ -14,8 +14,8 @@ Subtitles, faster than your thoughts.
    :target: https://subliminal.readthedocs.org/
    :alt: Documentation Status
 
-.. image:: https://coveralls.io/repos/Diaoul/subliminal/badge.svg?branch=master&service=github
-   :target: https://coveralls.io/github/Diaoul/subliminal?branch=master
+.. image:: https://coveralls.io/repos/Diaoul/subliminal/badge.svg?branch=develop&service=github
+   :target: https://coveralls.io/github/Diaoul/subliminal?branch=develop
    :alt: Code coverage
 
 .. image:: https://img.shields.io/github/license/Diaoul/subliminal.svg

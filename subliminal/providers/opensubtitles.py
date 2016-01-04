@@ -121,13 +121,15 @@ class OpenSubtitlesProvider(Provider):
         logger.debug('No operation')
         checked(self.server.NoOperation(self.token))
 
-    def query(self, languages, hash=None, size=None, imdb_id=None, query=None, season=None, episode=None):
+    def query(self, languages, hash=None, size=None, imdb_id=None, query=None, season=None, episode=None, tag=None):
         # fill the search criteria
         criteria = []
         if hash and size:
             criteria.append({'moviehash': hash, 'moviebytesize': str(size)})
         if imdb_id:
             criteria.append({'imdbid': imdb_id})
+        if tag:
+            criteria.append({'tag': tag})
         if query and season and episode:
             criteria.append({'query': query.replace('\'', ''), 'season': season, 'episode': episode})
         elif query:
@@ -176,16 +178,16 @@ class OpenSubtitlesProvider(Provider):
         return subtitles
 
     def list_subtitles(self, video, languages):
-        query = season = episode = None
+        season = episode = None
         if isinstance(video, Episode):
             query = video.series
             season = video.season
             episode = video.episode
-        elif ('opensubtitles' not in video.hashes or not video.size) and not video.imdb_id:
-            query = video.name.split(os.sep)[-1]
+        else:
+            query = video.title
 
         return self.query(languages, hash=video.hashes.get('opensubtitles'), size=video.size, imdb_id=video.imdb_id,
-                          query=query, season=season, episode=episode)
+                          query=query, season=season, episode=episode, tag=os.path.basename(video.name))
 
     def download_subtitle(self, subtitle):
         logger.info('Downloading subtitle %r', subtitle)

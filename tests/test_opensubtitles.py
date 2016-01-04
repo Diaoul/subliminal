@@ -125,6 +125,18 @@ def test_query_query_episode(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
+def test_query_tag_movie(movies):
+    video = movies['enders_game']
+    languages = {Language('fra')}
+    expected_subtitles = {'1954121830'}
+    with OpenSubtitlesProvider() as provider:
+        subtitles = provider.query(languages, tag=video.name)
+    assert {subtitle.id for subtitle in subtitles} == expected_subtitles
+    assert {subtitle.language for subtitle in subtitles} == languages
+
+
+@pytest.mark.integration
+@vcr.use_cassette
 def test_query_imdb_id(movies):
     video = movies['man_of_steel']
     languages = {Language('deu')}
@@ -175,7 +187,8 @@ def test_query_query_season_episode(episodes):
 def test_list_subtitles_movie(movies):
     video = movies['man_of_steel']
     languages = {Language('deu'), Language('fra')}
-    expected_subtitles = {'1953767244', '1953647841', '1953767650', '1953771409', '1953768982', '1953770526'}
+    expected_subtitles = {'1953767244', '1953647841', '1953767650', '1953771409', '1953768982', '1953770526',
+                          '1953608995', '1953608996', '1953150292', '1953600788', '1954879110'}
     with OpenSubtitlesProvider() as provider:
         subtitles = provider.list_subtitles(video, languages)
     assert {subtitle.id for subtitle in subtitles} == expected_subtitles

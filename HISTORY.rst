@@ -6,6 +6,13 @@ Changelog
 **release date:** *not released*
 
 
+1.1.1
+^^^^^
+**release date:** 2016-01-03
+
+* Fix scanning videos on bad MKV files
+
+
 1.1
 ^^^
 **release date:** 2015-12-29

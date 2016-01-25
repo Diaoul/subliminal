@@ -78,7 +78,7 @@ class NapiProjektProvider(Provider):
             'l': language.alpha2.upper(),
             'f': hash,
             't': get_subhash(hash)}
-        logger.info('Searching subtitle %r', params)
+        logger.info('Searching subtitle %r' % params)
         response = self.session.get(self.server_url, params=params, timeout=10)
         response.raise_for_status()
 
@@ -89,7 +89,7 @@ class NapiProjektProvider(Provider):
 
         subtitle = NapiProjektSubtitle(language, hash)
         subtitle.content = response.content
-        logger.debug('Found subtitle %r', subtitle)
+        logger.debug('Found subtitle %r' % subtitle)
 
         return subtitle
 

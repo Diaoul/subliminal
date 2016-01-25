@@ -125,7 +125,7 @@ class SubsCenterProvider(Provider):
 
         """
         # make the search
-        logger.info('Searching title name for %r', title)
+        logger.info('Searching title name for %r' % title)
         r = self.session.get(self.server + 'subtitle/search/', params={'q': title}, allow_redirects=False, timeout=10)
         r.raise_for_status()
 
@@ -142,7 +142,7 @@ class SubsCenterProvider(Provider):
         # otherwise, get the first valid suggestion
         soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
         suggestions = soup.select('#processes div.generalWindowTop a')
-        logger.debug('Found %d suggestions', len(suggestions))
+        logger.debug('Found %d suggestions' % len(suggestions))
         for suggestion in suggestions:
             parts = suggestion.attrs['href'].split('/')
 
@@ -185,7 +185,7 @@ class SubsCenterProvider(Provider):
 
                         # add the release and increment downloaded count if we already have the subtitle
                         if subtitle_id in subtitles:
-                            logger.debug('Found additional release %r for subtitle %d', release, subtitle_id)
+                            logger.debug('Found additional release %r for subtitle %d' % (release, subtitle_id))
                             bisect.insort_left(subtitles[subtitle_id].releases, release)  # deterministic order
                             subtitles[subtitle_id].downloaded += downloaded
                             continue
@@ -193,7 +193,7 @@ class SubsCenterProvider(Provider):
                         # otherwise create it
                         subtitle = SubsCenterSubtitle(language, hearing_impaired, page_link, series, season, episode,
                                                       title, subtitle_id, subtitle_key, downloaded, [release])
-                        logger.debug('Found subtitle %r', subtitle)
+                        logger.debug('Found subtitle %r' % subtitle)
                         subtitles[subtitle_id] = subtitle
 
         return subtitles.values()

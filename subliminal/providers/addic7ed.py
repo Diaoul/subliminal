@@ -133,7 +133,7 @@ class Addic7edProvider(Provider):
         show_ids = {}
         for show in soup.select('td.version > h3 > a[href^="/show/"]'):
             show_ids[sanitize_string(show.text).lower()] = int(show['href'][6:])
-        logger.debug('Found %d show ids', len(show_ids))
+        logger.debug('Found %d show ids' % len(show_ids))
 
         return show_ids
 
@@ -153,7 +153,7 @@ class Addic7edProvider(Provider):
         params = {'search': sanitize_string(series_year, replacement=' '), 'Submit': 'Search'}
 
         # make the search
-        logger.info('Searching show ids with %r', params)
+        logger.info('Searching show ids with %r' % params)
         r = self.session.get(self.server_url + 'search.php', params=params, timeout=10)
         r.raise_for_status()
         soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
@@ -167,7 +167,7 @@ class Addic7edProvider(Provider):
             logger.warning('Show id not found: suggestion does not match')
             return None
         show_id = int(suggestion[0]['href'][6:])
-        logger.debug('Found show id %d', show_id)
+        logger.debug('Found show id %d' % show_id)
 
         return show_id
 
@@ -215,11 +215,11 @@ class Addic7edProvider(Provider):
         # get the show id
         show_id = self.get_show_id(series, year, country)
         if show_id is None:
-            logger.error('No show id found for %r (%r)', series, {'year': year, 'country': country})
+            logger.error('No show id found for %r (%r)' % (series, {'year': year, 'country': country}))
             return []
 
         # get the page of the season of the show
-        logger.info('Getting the page of show id %d, season %d', show_id, season)
+        logger.info('Getting the page of show id %d, season %d' % (show_id, season))
         r = self.session.get(self.server_url + 'show/%d' % show_id, params={'season': season}, timeout=10)
         r.raise_for_status()
         if r.status_code == 304:
@@ -237,7 +237,7 @@ class Addic7edProvider(Provider):
             # ignore incomplete subtitles
             status = cells[5].text
             if status != 'Completed':
-                logger.debug('Ignoring subtitle with status %s', status)
+                logger.debug('Ignoring subtitle with status %s' % status)
                 continue
 
             # read the item
@@ -252,7 +252,7 @@ class Addic7edProvider(Provider):
 
             subtitle = Addic7edSubtitle(language, hearing_impaired, page_link, series, season, episode, title, year,
                                         version, download_link)
-            logger.debug('Found subtitle %r', subtitle)
+            logger.debug('Found subtitle %r' % subtitle)
             subtitles.append(subtitle)
 
         return subtitles
@@ -263,7 +263,7 @@ class Addic7edProvider(Provider):
 
     def download_subtitle(self, subtitle):
         # download the subtitle
-        logger.info('Downloading subtitle %r', subtitle)
+        logger.info('Downloading subtitle %r' % subtitle)
         r = self.session.get(self.server_url + subtitle.download_link, headers={'Referer': subtitle.page_link},
                              timeout=10)
         r.raise_for_status()

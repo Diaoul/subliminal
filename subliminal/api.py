@@ -139,7 +139,7 @@ class ProviderPool(object):
         if name not in self.providers:
             raise KeyError
         if name not in self.initialized_providers:
-            logger.info('Initializing provider %s', name)
+            logger.info('Initializing provider %s' % name)
             provider = provider_manager[name].plugin(**self.provider_configs.get(name, {}))
             provider.initialize()
             self.initialized_providers[name] = provider
@@ -151,12 +151,12 @@ class ProviderPool(object):
             raise KeyError(name)
 
         try:
-            logger.info('Terminating provider %s', name)
+            logger.info('Terminating provider %s' % name)
             self.initialized_providers[name].terminate()
         except (requests.Timeout, socket.timeout):
-            logger.error('Provider %r timed out, improperly terminated', name)
+            logger.error('Provider %r timed out, improperly terminated' % name)
         except:
-            logger.exception('Provider %r terminated unexpectedly', name)
+            logger.exception('Provider %r terminated unexpectedly' % name)
 
         del self.initialized_providers[name]
 
@@ -179,30 +179,30 @@ class ProviderPool(object):
         for name in self.providers:
             # check discarded providers
             if name in self.discarded_providers:
-                logger.debug('Skipping discarded provider %r', name)
+                logger.debug('Skipping discarded provider %r' % name)
                 continue
 
             # check video validity
             if not provider_manager[name].plugin.check(video):
-                logger.info('Skipping provider %r: not a valid video', name)
+                logger.info('Skipping provider %r: not a valid video' % name)
                 continue
 
             # check supported languages
             provider_languages = provider_manager[name].plugin.languages & languages
             if not provider_languages:
-                logger.info('Skipping provider %r: no language to search for', name)
+                logger.info('Skipping provider %r: no language to search for' % name)
                 continue
 
             # list subtitles
-            logger.info('Listing subtitles with provider %r and languages %r', name, provider_languages)
+            logger.info('Listing subtitles with provider %r and languages %r' % (name, provider_languages))
             try:
                 provider_subtitles = self[name].list_subtitles(video, provider_languages)
             except (requests.Timeout, socket.timeout):
-                logger.error('Provider %r timed out, discarding it', name)
+                logger.error('Provider %r timed out, discarding it' % name)
                 self.discarded_providers.add(name)
                 continue
             except:
-                logger.exception('Unexpected error in provider %r, discarding it', name)
+                logger.exception('Unexpected error in provider %r, discarding it' % name)
                 self.discarded_providers.add(name)
                 continue
             subtitles.extend(provider_subtitles)
@@ -220,18 +220,18 @@ class ProviderPool(object):
         """
         # check discarded providers
         if subtitle.provider_name in self.discarded_providers:
-            logger.warning('Provider %r is discarded', subtitle.provider_name)
+            logger.warning('Provider %r is discarded' % subtitle.provider_name)
             return False
 
-        logger.info('Downloading subtitle %r', subtitle)
+        logger.info('Downloading subtitle %r' % subtitle)
         try:
             self[subtitle.provider_name].download_subtitle(subtitle)
         except (requests.Timeout, socket.timeout):
-            logger.error('Provider %r timed out, discarding it', subtitle.provider_name)
+            logger.error('Provider %r timed out, discarding it' % subtitle.provider_name)
             self.discarded_providers.add(subtitle.provider_name)
             return False
         except:
-            logger.exception('Unexpected error in provider %r, discarding it', subtitle.provider_name)
+            logger.exception('Unexpected error in provider %r, discarding it' % subtitle.provider_name)
             self.discarded_providers.add(subtitle.provider_name)
             return False
 
@@ -271,16 +271,16 @@ class ProviderPool(object):
         for subtitle, score in scored_subtitles:
             # check score
             if score < min_score:
-                logger.info('Score %d is below min_score (%d)', score, min_score)
+                logger.info('Score %d is below min_score (%d)' % (score, min_score))
                 break
 
             # check downloaded languages
             if subtitle.language in set(s.language for s in downloaded_subtitles):
-                logger.debug('Skipping subtitle: %r already downloaded', subtitle.language)
+                logger.debug('Skipping subtitle: %r already downloaded' % subtitle.language)
                 continue
 
             # download
-            logger.info('Downloading subtitle %r with score %d', subtitle, score)
+            logger.info('Downloading subtitle %r with score %d' % (subtitle, score))
             if self.download_subtitle(subtitle):
                 downloaded_subtitles.append(subtitle)
 
@@ -324,12 +324,12 @@ def check_video(video, languages=None, age=None, undefined=False):
     """
     # language test
     if languages and not (languages - video.subtitle_languages):
-        logger.debug('All languages %r exist', languages)
+        logger.debug('All languages %r exist' % languages)
         return False
 
     # age test
     if age and video.age > age:
-        logger.debug('Video is older than %r', age)
+        logger.debug('Video is older than %r' % age)
         return False
 
     # undefined test
@@ -361,21 +361,21 @@ def list_subtitles(videos, languages, **kwargs):
     checked_videos = []
     for video in videos:
         if not check_video(video, languages=languages):
-            logger.info('Skipping video %r', video)
+            logger.info('Skipping video %r' % video)
             continue
         checked_videos.append(video)
 
-    # return immediatly if no video passed the checks
+    # return immediately if no video passed the checks
     if not checked_videos:
         return listed_subtitles
 
     # list subtitles
     with ProviderPool(**kwargs) as pool:
         for video in checked_videos:
-            logger.info('Listing subtitles for %r', video)
+            logger.info('Listing subtitles for %r' % video)
             subtitles = pool.list_subtitles(video, languages - video.subtitle_languages)
             listed_subtitles[video].extend(subtitles)
-            logger.info('Found %d subtitle(s)', len(subtitles))
+            logger.info('Found %d subtitle(s)' % len(subtitles))
 
     return listed_subtitles
 
@@ -391,7 +391,7 @@ def download_subtitles(subtitles, **kwargs):
     """
     with ProviderPool(**kwargs) as pool:
         for subtitle in subtitles:
-            logger.info('Downloading subtitle %r', subtitle)
+            logger.info('Downloading subtitle %r' % subtitle)
             pool.download_subtitle(subtitle)
 
 
@@ -421,7 +421,7 @@ def download_best_subtitles(videos, languages, min_score=0, hearing_impaired=Fal
     checked_videos = []
     for video in videos:
         if not check_video(video, languages=languages, undefined=only_one):
-            logger.info('Skipping video %r', video)
+            logger.info('Skipping video %r' % video)
             continue
         checked_videos.append(video)
 
@@ -432,12 +432,12 @@ def download_best_subtitles(videos, languages, min_score=0, hearing_impaired=Fal
     # download best subtitles
     with ProviderPool(**kwargs) as pool:
         for video in checked_videos:
-            logger.info('Downloading best subtitles for %r', video)
+            logger.info('Downloading best subtitles for %r' % video)
             subtitles = pool.download_best_subtitles(pool.list_subtitles(video, languages - video.subtitle_languages),
                                                      video, languages, min_score=min_score,
                                                      hearing_impaired=hearing_impaired, only_one=only_one,
                                                      scores=scores)
-            logger.info('Downloaded %d subtitle(s)', len(subtitles))
+            logger.info('Downloaded %d subtitle(s)' % len(subtitles))
             downloaded_subtitles[video].extend(subtitles)
 
     return downloaded_subtitles
@@ -467,12 +467,12 @@ def save_subtitles(video, subtitles, single=False, directory=None, encoding=None
     for subtitle in subtitles:
         # check content
         if subtitle.content is None:
-            logger.error('Skipping subtitle %r: no content', subtitle)
+            logger.error('Skipping subtitle %r: no content' % subtitle)
             continue
 
         # check language
         if subtitle.language in set(s.language for s in saved_subtitles):
-            logger.debug('Skipping subtitle %r: language already saved', subtitle)
+            logger.debug('Skipping subtitle %r: language already saved' % subtitle)
             continue
 
         # create subtitle path
@@ -481,7 +481,7 @@ def save_subtitles(video, subtitles, single=False, directory=None, encoding=None
             subtitle_path = os.path.join(directory, os.path.split(subtitle_path)[1])
 
         # save content as is or in the specified encoding
-        logger.info('Saving %r to %r', subtitle, subtitle_path)
+        logger.info('Saving %r to %r' % (subtitle, subtitle_path))
         if encoding is None:
             with io.open(subtitle_path, 'wb') as f:
                 f.write(subtitle.content)

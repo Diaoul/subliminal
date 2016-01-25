@@ -166,7 +166,10 @@ class Subtitle(object):
         return hash(self.provider_name + '-' + self.id)
 
     def __repr__(self):
-        return '<%s %r [%s]>' % (self.__class__.__name__, self.id, self.language)
+        try:
+            return '<%s %r [%s]>' % (self.__class__.__name__, self.id, self.language)
+        except NotImplementedError:
+            return '<%s [%s]>' % (self.__class__.__name__, self.language)
 
 
 def compute_score(matches, video, scores=None):

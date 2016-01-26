@@ -113,18 +113,19 @@ def test_sanitized_string_equal():
 
 def test_guess_matches_movie(movies):
     video = movies['man_of_steel']
-    guess = {'title': video.title.upper(), 'year': video.year, 'releaseGroup': video.release_group.upper(),
-             'screenSize': video.resolution, 'format': video.format.upper(), 'videoCodec': video.video_codec,
-             'audioCodec': video.audio_codec}
+    guess = {'title': video.title.upper(), 'year': video.year, 'release_group': video.release_group.upper(),
+             'screen_size': video.resolution, 'format': video.format.upper(), 'video_codec': video.video_codec,
+             'audio_codec': video.audio_codec}
     expected = {'title', 'year', 'release_group', 'resolution', 'format', 'video_codec', 'audio_codec'}
     assert guess_matches(video, guess) == expected
 
 
 def test_guess_matches_episode(episodes):
     video = episodes['bbt_s07e05']
-    guess = {'series': video.series, 'season': video.season, 'episodeNumber': video.episode, 'year': video.year,
-             'title': video.title.upper(), 'releaseGroup': video.release_group.upper(), 'screenSize': video.resolution,
-             'format': video.format.upper(), 'videoCodec': video.video_codec, 'audioCodec': video.audio_codec}
+    guess = {'title': video.series, 'season': video.season, 'episode': video.episode, 'year': video.year,
+             'episode_title': video.title.upper(), 'release_group': video.release_group.upper(),
+             'screen_size': video.resolution, 'format': video.format.upper(), 'video_codec': video.video_codec,
+             'audio_codec': video.audio_codec}
     expected = {'series', 'season', 'episode', 'title', 'year', 'release_group', 'resolution', 'format', 'video_codec',
                 'audio_codec'}
     assert guess_matches(video, guess) == expected
@@ -132,14 +133,14 @@ def test_guess_matches_episode(episodes):
 
 def test_guess_matches_episode_no_year(episodes):
     video = episodes['dallas_s01e03']
-    guess = {'series': video.series, 'season': video.season, 'episodeNumber': video.episode}
+    guess = {'title': video.series, 'season': video.season, 'episode': video.episode}
     expected = {'series', 'season', 'episode', 'year'}
     assert guess_matches(video, guess) == expected
 
 
 def test_guess_properties():
     string = '720p-BluRay'
-    assert guess_properties(string) == {'format': 'BluRay', 'screenSize': '720p'}
+    assert guess_properties(string) == {'format': 'BluRay', 'screen_size': '720p', 'type': 'movie'}
 
 
 def test_fix_line_ending():

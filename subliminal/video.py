@@ -8,7 +8,7 @@ import struct
 
 from babelfish import Error as BabelfishError, Language
 from enzyme import MKV
-from guessit import guess_episode_info, guess_file_info, guess_movie_info
+from guessit import guessit
 
 logger = logging.getLogger(__name__)
 
@@ -96,7 +96,7 @@ class Video(object):
         """Create an :class:`Episode` or a :class:`Movie` with the given `name` based on the `guess`.
 
         :param str name: name of the video.
-        :param dict guess: guessed data, like a :class:`~guessit.guess.Guess` instance.
+        :param dict guess: guessed data.
         :raise: :class:`ValueError` if the `type` of the `guess` is invalid
 
         """
@@ -115,7 +115,7 @@ class Video(object):
         :param str name: name of the video.
 
         """
-        return cls.fromguess(name, guess_file_info(name))
+        return cls.fromguess(name, guessit(name))
 
     def __repr__(self):
         return '<%s [%r]>' % (self.__class__.__name__, self.name)
@@ -170,17 +170,17 @@ class Episode(Video):
         if guess['type'] != 'episode':
             raise ValueError('The guess must be an episode guess')
 
-        if 'series' not in guess or 'season' not in guess or 'episodeNumber' not in guess:
+        if 'title' not in guess or 'season' not in guess or 'episode' not in guess:
             raise ValueError('Insufficient data to process the guess')
 
-        return cls(name, guess['series'], guess['season'], guess['episodeNumber'], format=guess.get('format'),
-                   release_group=guess.get('releaseGroup'), resolution=guess.get('screenSize'),
-                   video_codec=guess.get('videoCodec'), audio_codec=guess.get('audioCodec'),
-                   title=guess.get('title'), year=guess.get('year'))
+        return cls(name, guess['title'], guess['season'], guess['episode'], format=guess.get('format'),
+                   release_group=guess.get('release_group'), resolution=guess.get('screen_size'),
+                   video_codec=guess.get('video_codec'), audio_codec=guess.get('audio_codec'),
+                   title=guess.get('episode_title'), year=guess.get('year'))
 
     @classmethod
     def fromname(cls, name):
-        return cls.fromguess(name, guess_episode_info(name))
+        return cls.fromguess(name, guessit(name, {'type': 'episode'}))
 
     def __repr__(self):
         if self.year is None:
@@ -220,13 +220,13 @@ class Movie(Video):
         if 'title' not in guess:
             raise ValueError('Insufficient data to process the guess')
 
-        return cls(name, guess['title'], format=guess.get('format'), release_group=guess.get('releaseGroup'),
-                   resolution=guess.get('screenSize'), video_codec=guess.get('videoCodec'),
-                   audio_codec=guess.get('audioCodec'), year=guess.get('year'))
+        return cls(name, guess['title'], format=guess.get('format'), release_group=guess.get('release_group'),
+                   resolution=guess.get('screen_size'), video_codec=guess.get('video_codec'),
+                   audio_codec=guess.get('audio_codec'), year=guess.get('year'))
 
     @classmethod
     def fromname(cls, name):
-        return cls.fromguess(name, guess_movie_info(name))
+        return cls.fromguess(name, guessit(name, {'type': 'movie'}))
 
     def __repr__(self):
         if self.year is None:
@@ -298,7 +298,7 @@ def scan_video(path, subtitles=True, embedded_subtitles=True, subtitles_dir=None
     logger.info('Scanning video %r in %r', filename, dirpath)
 
     # guess
-    video = Video.fromguess(path, guess_file_info(path))
+    video = Video.fromguess(path, guessit(path))
 
     # size and hashes
     video.size = os.path.getsize(path)

@@ -4,8 +4,7 @@ import os
 import re
 
 import chardet
-from guessit.matchtree import MatchTree
-from guessit.plugins.transformers import get_transformer
+from guessit import guessit
 from codecs import lookup
 import pysrt
 
@@ -276,13 +275,16 @@ def guess_matches(video, guess, partial=False):
     matches = set()
     if isinstance(video, Episode):
         # series
-        if video.series and 'series' in guess and sanitized_string_equal(guess['series'], video.series):
+        if video.series and 'title' in guess and sanitized_string_equal(guess['title'], video.series):
             matches.add('series')
+        # series
+        if video.title and 'episode_title' in guess and sanitized_string_equal(guess['episode_title'], video.title):
+            matches.add('title')
         # season
         if video.season and 'season' in guess and guess['season'] == video.season:
             matches.add('season')
         # episode
-        if video.episode and 'episodeNumber' in guess and guess['episodeNumber'] == video.episode:
+        if video.episode and 'episode' in guess and guess['episode'] == video.episode:
             matches.add('episode')
         # year
         if video.year and 'year' in guess and guess['year'] == video.year:
@@ -294,40 +296,39 @@ def guess_matches(video, guess, partial=False):
         # year
         if video.year and 'year' in guess and guess['year'] == video.year:
             matches.add('year')
-    # title
-    if video.title and 'title' in guess and sanitized_string_equal(guess['title'], video.title):
-        matches.add('title')
+        # title
+        if video.title and 'title' in guess and sanitized_string_equal(guess['title'], video.title):
+            matches.add('title')
     # release_group
-    if video.release_group and 'releaseGroup' in guess and guess['releaseGroup'].lower() == video.release_group.lower():
+    if video.release_group and 'release_group' in guess \
+            and guess['release_group'].lower() == video.release_group.lower():
         matches.add('release_group')
     # resolution
-    if video.resolution and 'screenSize' in guess and guess['screenSize'] == video.resolution:
+    if video.resolution and 'screen_size' in guess and guess['screen_size'] == video.resolution:
         matches.add('resolution')
     # format
     if video.format and 'format' in guess and guess['format'].lower() == video.format.lower():
         matches.add('format')
     # video_codec
-    if video.video_codec and 'videoCodec' in guess and guess['videoCodec'] == video.video_codec:
+    if video.video_codec and 'video_codec' in guess and guess['video_codec'] == video.video_codec:
         matches.add('video_codec')
     # audio_codec
-    if video.audio_codec and 'audioCodec' in guess and guess['audioCodec'] == video.audio_codec:
+    if video.audio_codec and 'audio_codec' in guess and guess['audio_codec'] == video.audio_codec:
         matches.add('audio_codec')
 
     return matches
 
 
 def guess_properties(string):
-    """Extract properties from `string` using guessit's `guess_properties` transformer.
+    """Extract properties from `string` using guessit.
 
     :param str string: the string potentially containing properties.
     :return: the guessed properties.
     :rtype: dict
 
     """
-    mtree = MatchTree(string)
-    get_transformer('guess_properties').process(mtree)
-
-    return mtree.matched()
+    properties = guessit(string)
+    return properties
 
 
 def fix_line_ending(content):

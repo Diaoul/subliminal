@@ -6,7 +6,7 @@ import logging
 import zipfile
 
 from babelfish import Language
-from guessit import guess_episode_info, guess_movie_info
+from guessit import guessit
 from requests import Session
 
 from . import ParserBeautifulSoup, Provider, get_version
@@ -54,12 +54,12 @@ class SubsCenterSubtitle(Subtitle):
                 matches.add('episode')
             # guess
             for release in self.releases:
-                matches |= guess_matches(video, guess_episode_info(release + '.mkv'))
+                matches |= guess_matches(video, guessit(release, {'type': 'episode'}))
         # movie
         elif isinstance(video, Movie):
             # guess
             for release in self.releases:
-                matches |= guess_matches(video, guess_movie_info(release + '.mkv'))
+                matches |= guess_matches(video, guessit(release, {'type': 'movie'}))
 
         # title
         if video.title and sanitized_string_equal(self.title, video.title):

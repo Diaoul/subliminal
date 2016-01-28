@@ -4,7 +4,7 @@ import logging
 import re
 
 from babelfish import Language, language_converters
-from guessit import guess_episode_info, guess_movie_info
+from guessit import guessit
 try:
     from lxml import etree
 except ImportError:
@@ -57,7 +57,7 @@ class PodnapisiSubtitle(Subtitle):
                 matches.add('episode')
             # guess
             for release in self.releases:
-                matches |= guess_matches(video, guess_episode_info(release + '.mkv'))
+                matches |= guess_matches(video, guessit(release, {'type': 'episode'}))
         # movie
         elif isinstance(video, Movie):
             # title
@@ -65,7 +65,7 @@ class PodnapisiSubtitle(Subtitle):
                 matches.add('title')
             # guess
             for release in self.releases:
-                matches |= guess_matches(video, guess_movie_info(release + '.mkv'))
+                matches |= guess_matches(video, guessit(release, {'type': 'movie'}))
         # year
         if video.year and self.year == video.year:
             matches.add('year')

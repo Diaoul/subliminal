@@ -6,7 +6,7 @@ import re
 import zlib
 
 from babelfish import Language, language_converters
-from guessit import guess_episode_info, guess_movie_info
+from guessit import guessit
 from six.moves.xmlrpc_client import ServerProxy
 
 from . import Provider, TimeoutSafeTransport, get_version
@@ -66,7 +66,7 @@ class OpenSubtitlesSubtitle(Subtitle):
             if video.title and sanitized_string_equal(self.series_title, video.title):
                 matches.add('title')
             # guess
-            matches |= guess_matches(video, guess_episode_info(self.movie_release_name + '.mkv'))
+            matches |= guess_matches(video, guessit(self.movie_release_name, {'type': 'episode'}))
         # movie
         elif isinstance(video, Movie) and self.movie_kind == 'movie':
             # title
@@ -76,7 +76,7 @@ class OpenSubtitlesSubtitle(Subtitle):
             if video.year and self.movie_year == video.year:
                 matches.add('year')
             # guess
-            matches |= guess_matches(video, guess_movie_info(self.movie_release_name + '.mkv'))
+            matches |= guess_matches(video, guessit(self.movie_release_name, {'type': 'movie'}))
         else:
             logger.info('%r is not a valid movie_kind', self.movie_kind)
             return matches

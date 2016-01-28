@@ -322,6 +322,22 @@ def test_query_parsing_colon(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
+def test_query_parsing_dash(episodes):
+    video = episodes['the_x_files_s10e02']
+    with Addic7edProvider() as provider:
+        subtitles = provider.query(video.series, video.season)
+    subtitle = [s for s in subtitles if s.download_link == 'updated/8/108202/0'][0]
+    assert subtitle.language == Language('fra')
+    assert subtitle.hearing_impaired is False
+    assert subtitle.page_link == 'http://www.addic7ed.com/serie/The_X-Files/10/2/Founder%27s_Mutation'
+    assert subtitle.series == video.series
+    assert subtitle.season == video.season
+    assert subtitle.episode == video.episode
+    assert subtitle.version == 'KILLERS'
+
+
+@pytest.mark.integration
+@vcr.use_cassette
 def test_query_year(episodes):
     video = episodes['dallas_2012_s01e03']
     with Addic7edProvider() as provider:

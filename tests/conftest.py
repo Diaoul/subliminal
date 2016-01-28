@@ -60,7 +60,10 @@ def episodes():
                     'Marvel\'s Agents of S.H.I.E.L.D.', 2, 6, format='HDTV', release_group='KILLERS', resolution='720p',
                     video_codec='h264', year=2013),
             'csi_cyber_s02e03':
-            Episode('CSI.Cyber.S02E03.hdtv-lol.mp4', 'CSI: Cyber', 2, 3, format='HDTV', release_group='lol')}
+            Episode('CSI.Cyber.S02E03.hdtv-lol.mp4', 'CSI: Cyber', 2, 3, format='HDTV', release_group='lol'),
+            'the_x_files_s10e02':
+            Episode('The.X-Files.S10E02.HDTV.x264-KILLERS.mp4', 'The X-Files', 10, 2, format='HDTV',
+                    release_group='KILLERS', video_codec='h264')}
 
 
 @pytest.fixture(scope='session')

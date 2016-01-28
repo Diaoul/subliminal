@@ -392,13 +392,14 @@ def scan_video(path, subtitles=True, embedded_subtitles=True, subtitles_dir=None
     return video
 
 
-def scan_videos(path, subtitles=True, embedded_subtitles=True, subtitles_dir=None):
+def scan_videos(path, subtitles=True, embedded_subtitles=True, subtitles_dir=None, age=None):
     """Scan `path` for videos and their subtitles.
 
     :param str path: existing directory path to scan.
     :param bool subtitles: scan for subtitles with the same name.
     :param bool embedded_subtitles: scan for embedded subtitles.
     :param str subtitles_dir: directory to search for subtitles.
+    :param datetime.timedelta age: maximum age of the video.
     :return: the scanned videos.
     :rtype: list of :class:`Video`
 
@@ -439,6 +440,11 @@ def scan_videos(path, subtitles=True, embedded_subtitles=True, subtitles_dir=Non
             # skip links
             if os.path.islink(filepath):
                 logger.debug('Skipping link %r in %r', filename, dirpath)
+                continue
+
+            # skip old files
+            if datetime.utcnow() - datetime.utcfromtimestamp(os.path.getmtime(filepath)) > age:
+                logger.debug('Skipping old file %r in %r', filename, dirpath)
                 continue
 
             # scan video

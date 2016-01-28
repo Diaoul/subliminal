@@ -335,7 +335,7 @@ def test_scan_videos(movies, tmpdir, monkeypatch):
     man_of_steel = tmpdir.ensure('movies', movies['man_of_steel'].name)
     tmpdir.ensure('movies', '.private', 'sextape.mkv')
     tmpdir.ensure('movies', '.hidden_video.mkv')
-    tmpdir.ensure('movies', movies['enders_game'].name)
+    tmpdir.ensure('movies', movies['enders_game'].name).setmtime(timestamp(datetime.utcnow() - timedelta(days=10)))
     tmpdir.ensure('movies', os.path.splitext(movies['enders_game'].name)[0] + '.nfo')
     tmpdir.ensure('movies', 'watched', dir=True)
     tmpdir.join('movies', 'watched', os.path.split(movies['man_of_steel'].name)[1]).mksymlinkto(man_of_steel)
@@ -343,11 +343,10 @@ def test_scan_videos(movies, tmpdir, monkeypatch):
     mock_scan_video = Mock()
     monkeypatch.setattr('subliminal.video.scan_video', mock_scan_video)
     monkeypatch.chdir(str(tmpdir))
-    videos = scan_videos('movies')
+    videos = scan_videos('movies', age=timedelta(days=7))
 
     kwargs = dict(subtitles=True, embedded_subtitles=True, subtitles_dir=None)
-    calls = [((os.path.join('movies', movies['man_of_steel'].name),), kwargs),
-             ((os.path.join('movies', movies['enders_game'].name),), kwargs)]
+    calls = [((os.path.join('movies', movies['man_of_steel'].name),), kwargs)]
     assert len(videos) == len(calls)
     assert mock_scan_video.call_count == len(calls)
     mock_scan_video.assert_has_calls(calls, any_order=True)

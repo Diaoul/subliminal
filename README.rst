@@ -68,6 +68,15 @@ Download best subtitles in French and English for videos less than two weeks old
         save_subtitles(v, subtitles[v])
 
 
+Installation
+------------
+Subliminal can be installed as a regular python module by running::
+
+   $ [sudo] pip install subliminal
+
+For a better isolation with your system you should use a dedicated virtualenv or install for your user only using
+the ``--user`` flag.
+
 Nautilus/Nemo integration
 -------------------------
 See the dedicated `project page <https://github.com/Diaoul/nautilus-subliminal>`_ for more information.

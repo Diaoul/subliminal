@@ -443,7 +443,7 @@ def scan_videos(path, subtitles=True, embedded_subtitles=True, subtitles_dir=Non
                 continue
 
             # skip old files
-            if datetime.utcnow() - datetime.utcfromtimestamp(os.path.getmtime(filepath)) > age:
+            if age and datetime.utcnow() - datetime.utcfromtimestamp(os.path.getmtime(filepath)) > age:
                 logger.debug('Skipping old file %r in %r', filename, dirpath)
                 continue
 

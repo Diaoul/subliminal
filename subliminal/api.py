@@ -107,7 +107,7 @@ class ProviderPool(object):
 
     It has a few extra features:
 
-        * Lazy loads providers when needed and supports the :keyword:`with` statement to :meth:`terminate`
+        * Lazy loads providers when needed and supports the `with` statement to :meth:`terminate`
           the providers on exit.
         * Automatically discard providers on failure.
 

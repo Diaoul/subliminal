@@ -93,7 +93,7 @@ class Provider(object):
         or login operations.
 
         .. note::
-            This is called automatically when entering the :keyword:`with` statement
+            This is called automatically when entering the `with` statement
 
         """
         raise NotImplementedError
@@ -104,7 +104,7 @@ class Provider(object):
         Must be called when done with the provider. This is the place for network shutdown or logout operations.
 
         .. note::
-            This is called automatically when exiting the :keyword:`with` statement
+            This is called automatically when exiting the `with` statement
 
         """
         raise NotImplementedError

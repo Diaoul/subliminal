@@ -291,14 +291,14 @@ def download(obj, provider, language, age, directory, encoding, single, force, h
     errored_paths = []
     with click.progressbar(path, label='Collecting videos', item_show_func=lambda p: p or '') as bar:
         for p in bar:
-            logger.debug('Collecting path %s', p)
+            logger.debug('Collecting path %s' % p)
 
             # non-existing
             if not os.path.exists(p):
                 try:
                     video = Video.fromname(p)
                 except:
-                    logger.exception('Unexpected error while collecting non-existing path %s', p)
+                    logger.exception('Unexpected error while collecting non-existing path %s' % p)
                     errored_paths.append(p)
                     continue
                 videos.append(video)
@@ -310,7 +310,7 @@ def download(obj, provider, language, age, directory, encoding, single, force, h
                     scanned_videos = scan_videos(p, subtitles=not force, embedded_subtitles=not force,
                                                  subtitles_dir=directory, age=age)
                 except:
-                    logger.exception('Unexpected error while collecting directory path %s', p)
+                    logger.exception('Unexpected error while collecting directory path %s' % p)
                     errored_paths.append(p)
                     continue
                 for video in scanned_videos:
@@ -324,7 +324,7 @@ def download(obj, provider, language, age, directory, encoding, single, force, h
             try:
                 video = scan_video(p, subtitles=not force, embedded_subtitles=not force, subtitles_dir=directory)
             except:
-                logger.exception('Unexpected error while collecting path %s', p)
+                logger.exception('Unexpected error while collecting path %s' % p)
                 errored_paths.append(p)
                 continue
             if check_video(video, languages=language, age=age, undefined=single):

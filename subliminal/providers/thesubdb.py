@@ -50,7 +50,7 @@ class TheSubDBProvider(Provider):
     def query(self, hash):
         # make the query
         params = {'action': 'search', 'hash': hash}
-        logger.info('Searching subtitles %r', params)
+        logger.info('Searching subtitles %r' % params)
         r = self.session.get(self.server_url, params=params, timeout=10)
 
         # handle subtitles not found and errors
@@ -65,7 +65,7 @@ class TheSubDBProvider(Provider):
             language = Language.fromthesubdb(language_code)
 
             subtitle = TheSubDBSubtitle(language, hash)
-            logger.debug('Found subtitle %r', subtitle)
+            logger.debug('Found subtitle %r' % subtitle)
             subtitles.append(subtitle)
 
         return subtitles
@@ -74,7 +74,7 @@ class TheSubDBProvider(Provider):
         return [s for s in self.query(video.hashes['thesubdb']) if s.language in languages]
 
     def download_subtitle(self, subtitle):
-        logger.info('Downloading subtitle %r', subtitle)
+        logger.info('Downloading subtitle %r' % subtitle)
         params = {'action': 'download', 'hash': subtitle.hash, 'language': subtitle.language.alpha2}
         r = self.session.get(self.server_url, params=params, timeout=10)
         r.raise_for_status()

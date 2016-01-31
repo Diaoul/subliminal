@@ -97,7 +97,7 @@ class PodnapisiProvider(Provider):
             params['sY'] = year
 
         # loop over paginated results
-        logger.info('Searching subtitles %r', params)
+        logger.info('Searching subtitles %r' % params)
         subtitles = []
         pids = set()
         while True:
@@ -138,7 +138,7 @@ class PodnapisiProvider(Provider):
                 if pid in pids:
                     continue
 
-                logger.debug('Found subtitle %r', subtitle)
+                logger.debug('Found subtitle %r' % subtitle)
                 subtitles.append(subtitle)
                 pids.add(pid)
 
@@ -148,7 +148,7 @@ class PodnapisiProvider(Provider):
 
             # increment current page
             params['page'] = int(xml.find('pagination/current').text) + 1
-            logger.debug('Getting page %d', params['page'])
+            logger.debug('Getting page %d' % params['page'])
 
         return subtitles
 
@@ -161,7 +161,7 @@ class PodnapisiProvider(Provider):
 
     def download_subtitle(self, subtitle):
         # download as a zip
-        logger.info('Downloading subtitle %r', subtitle)
+        logger.info('Downloading subtitle %r' % subtitle)
         r = self.session.get(self.server_url + subtitle.pid + '/download', params={'container': 'zip'}, timeout=10)
         r.raise_for_status()
 

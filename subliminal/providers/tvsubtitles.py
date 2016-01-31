@@ -93,7 +93,7 @@ class TVsubtitlesProvider(Provider):
 
         """
         # make the search
-        logger.info('Searching show id for %r', series)
+        logger.info('Searching show id for %r' % series)
         r = self.session.post(self.server_url + 'search.php', data={'q': series}, timeout=10)
         r.raise_for_status()
 
@@ -103,7 +103,7 @@ class TVsubtitlesProvider(Provider):
         for suggestion in soup.select('div.left li div a[href^="/tvshow-"]'):
             match = link_re.match(suggestion.text)
             if not match:
-                logger.error('Failed to match %s', suggestion.text)
+                logger.error('Failed to match %s' % suggestion.text)
                 continue
 
             if match.group('series').lower() == series.lower():
@@ -111,7 +111,7 @@ class TVsubtitlesProvider(Provider):
                     logger.debug('Year does not match')
                     continue
                 show_id = int(suggestion['href'][8:-5])
-                logger.debug('Found show id %d', show_id)
+                logger.debug('Found show id %d' % show_id)
                 break
 
         return show_id
@@ -127,7 +127,7 @@ class TVsubtitlesProvider(Provider):
 
         """
         # get the page of the season of the show
-        logger.info('Getting the page of show id %d, season %d', show_id, season)
+        logger.info('Getting the page of show id %d, season %d' % (show_id, season))
         r = self.session.get(self.server_url + 'tvshow-%d-%d.html' % (show_id, season), timeout=10)
         soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
 
@@ -145,7 +145,7 @@ class TVsubtitlesProvider(Provider):
             episode_ids[episode] = episode_id
 
         if episode_ids:
-            logger.debug('Found episode ids %r', episode_ids)
+            logger.debug('Found episode ids %r' % episode_ids)
         else:
             logger.warning('No episode ids found')
 
@@ -155,17 +155,17 @@ class TVsubtitlesProvider(Provider):
         # search the show id
         show_id = self.search_show_id(series, year)
         if show_id is None:
-            logger.error('No show id found for %r (%r)', series, {'year': year})
+            logger.error('No show id found for %r (%r)' % (series, {'year': year}))
             return []
 
         # get the episode ids
         episode_ids = self.get_episode_ids(show_id, season)
         if episode not in episode_ids:
-            logger.error('Episode %d not found', episode)
+            logger.error('Episode %d not found' % episode)
             return []
 
         # get the episode page
-        logger.info('Getting the page for episode %d', episode_ids[episode])
+        logger.info('Getting the page for episode %d' % episode_ids[episode])
         r = self.session.get(self.server_url + 'episode-%d.html' % episode_ids[episode], timeout=10)
         soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
 
@@ -181,7 +181,7 @@ class TVsubtitlesProvider(Provider):
 
             subtitle = TVsubtitlesSubtitle(language, page_link, subtitle_id, series, season, episode, year, rip,
                                            release)
-            logger.debug('Found subtitle %s', subtitle)
+            logger.debug('Found subtitle %s' % subtitle)
             subtitles.append(subtitle)
 
         return subtitles
@@ -191,7 +191,7 @@ class TVsubtitlesProvider(Provider):
 
     def download_subtitle(self, subtitle):
         # download as a zip
-        logger.info('Downloading subtitle %r', subtitle)
+        logger.info('Downloading subtitle %r' % subtitle)
         r = self.session.get(self.server_url + 'download-%d.html' % subtitle.subtitle_id, timeout=10)
         r.raise_for_status()
 

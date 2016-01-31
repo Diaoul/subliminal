@@ -47,7 +47,7 @@ class Subtitle(object):
                 # set encoding to canonical codec name
                 self.encoding = lookup(encoding).name
             except (TypeError, LookupError):
-                logger.debug('Unsupported encoding "%s", setting to None', encoding)
+                logger.debug('Unsupported encoding "%s", setting to None' % encoding)
                 self.encoding = None
         else:
             self.encoding = None
@@ -98,7 +98,7 @@ class Subtitle(object):
         :rtype: str
 
         """
-        logger.info('Guessing encoding for language %s', self.language)
+        logger.info('Guessing encoding for language %s' % self.language)
 
         # always try utf-8 first
         encodings = ['utf-8']
@@ -125,21 +125,21 @@ class Subtitle(object):
             encodings.append('latin-1')
 
         # try to decode
-        logger.debug('Trying encodings %r', encodings)
+        logger.debug('Trying encodings %r' % encodings)
         for encoding in encodings:
             try:
                 self.content.decode(encoding)
             except UnicodeDecodeError:
                 pass
             else:
-                logger.info('Guessed encoding %s', encoding)
+                logger.info('Guessed encoding %s' % encoding)
                 return encoding
 
         logger.warning('Could not guess encoding from language')
 
         # fallback on chardet
         encoding = chardet.detect(self.content)['encoding']
-        logger.info('Chardet found encoding %s', encoding)
+        logger.info('Chardet found encoding %s' % encoding)
 
         return encoding
 
@@ -165,7 +165,10 @@ class Subtitle(object):
         return hash(self.provider_name + '-' + self.id)
 
     def __repr__(self):
-        return '<%s %r [%s]>' % (self.__class__.__name__, self.id, self.language)
+        try:
+            return '<%s %r [%s]>' % (self.__class__.__name__, self.id, self.language)
+        except NotImplementedError:
+            return '<%s [%s]>' % (self.__class__.__name__, self.language)
 
 
 def compute_score(matches, video, scores=None):
@@ -191,7 +194,7 @@ def compute_score(matches, video, scores=None):
     final_matches = matches.copy()
     scores = scores or video.scores
 
-    logger.info('Computing score for matches %r and %r', matches, video)
+    logger.info('Computing score for matches %r and %r' % (matches, video))
 
     # remove equivalent match combinations
     if 'hash' in final_matches:
@@ -205,9 +208,9 @@ def compute_score(matches, video, scores=None):
             final_matches -= {'season', 'episode'}
 
     # compute score
-    logger.debug('Final matches: %r', final_matches)
+    logger.debug('Final matches: %r' % final_matches)
     score = sum((scores[match] for match in final_matches))
-    logger.info('Computed score %d', score)
+    logger.info('Computed score %d' % score)
 
     # ensure score is capped by the best possible score (hash + preferences)
     assert score <= scores['hash'] + scores['hearing_impaired']

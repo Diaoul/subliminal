@@ -266,11 +266,11 @@ def search_external_subtitles(path, directory=None):
             try:
                 language = Language.fromietf(language_code)
             except ValueError:
-                logger.error('Cannot parse language code %r', language_code)
+                logger.error('Cannot parse language code %r' % language_code)
 
         subtitles[p] = language
 
-    logger.debug('Found subtitles %r', subtitles)
+    logger.debug('Found subtitles %r' % subtitles)
 
     return subtitles
 
@@ -295,7 +295,7 @@ def scan_video(path, subtitles=True, embedded_subtitles=True, subtitles_dir=None
         raise ValueError('%s is not a valid video extension' % os.path.splitext(path)[1])
 
     dirpath, filename = os.path.split(path)
-    logger.info('Scanning video %r in %r', filename, dirpath)
+    logger.info('Scanning video %r in %r' % (filename, dirpath))
 
     # guess
     video = Video.fromguess(path, guessit(path))
@@ -303,11 +303,11 @@ def scan_video(path, subtitles=True, embedded_subtitles=True, subtitles_dir=None
     # size and hashes
     video.size = os.path.getsize(path)
     if video.size > 10485760:
-        logger.debug('Size is %d', video.size)
+        logger.debug('Size is %d' % video.size)
         video.hashes['opensubtitles'] = hash_opensubtitles(path)
         video.hashes['thesubdb'] = hash_thesubdb(path)
         video.hashes['napiprojekt'] = hash_napiprojekt(path)
-        logger.debug('Computed hashes %r', video.hashes)
+        logger.debug('Computed hashes %r' % video.hashes)
     else:
         logger.warning('Size is lower than 10MB: hashes not computed')
 
@@ -331,18 +331,18 @@ def scan_video(path, subtitles=True, embedded_subtitles=True, subtitles_dir=None
                         video.resolution = '%di' % video_track.height
                     else:
                         video.resolution = '%dp' % video_track.height
-                    logger.debug('Found resolution %s with enzyme', video.resolution)
+                    logger.debug('Found resolution %s with enzyme' % video.resolution)
 
                 # video codec
                 if video_track.codec_id == 'V_MPEG4/ISO/AVC':
                     video.video_codec = 'h264'
-                    logger.debug('Found video_codec %s with enzyme', video.video_codec)
+                    logger.debug('Found video_codec %s with enzyme' % video.video_codec)
                 elif video_track.codec_id == 'V_MPEG4/ISO/SP':
                     video.video_codec = 'DivX'
-                    logger.debug('Found video_codec %s with enzyme', video.video_codec)
+                    logger.debug('Found video_codec %s with enzyme' % video.video_codec)
                 elif video_track.codec_id == 'V_MPEG4/ISO/ASP':
                     video.video_codec = 'XviD'
-                    logger.debug('Found video_codec %s with enzyme', video.video_codec)
+                    logger.debug('Found video_codec %s with enzyme' % video.video_codec)
             else:
                 logger.warning('MKV has no video track')
 
@@ -352,13 +352,13 @@ def scan_video(path, subtitles=True, embedded_subtitles=True, subtitles_dir=None
                 # audio codec
                 if audio_track.codec_id == 'A_AC3':
                     video.audio_codec = 'AC3'
-                    logger.debug('Found audio_codec %s with enzyme', video.audio_codec)
+                    logger.debug('Found audio_codec %s with enzyme' % video.audio_codec)
                 elif audio_track.codec_id == 'A_DTS':
                     video.audio_codec = 'DTS'
-                    logger.debug('Found audio_codec %s with enzyme', video.audio_codec)
+                    logger.debug('Found audio_codec %s with enzyme' % video.audio_codec)
                 elif audio_track.codec_id == 'A_AAC':
                     video.audio_codec = 'AAC'
-                    logger.debug('Found audio_codec %s with enzyme', video.audio_codec)
+                    logger.debug('Found audio_codec %s with enzyme' % video.audio_codec)
             else:
                 logger.warning('MKV has no audio track')
 
@@ -371,17 +371,18 @@ def scan_video(path, subtitles=True, embedded_subtitles=True, subtitles_dir=None
                             try:
                                 embedded_subtitle_languages.add(Language.fromalpha3b(st.language))
                             except BabelfishError:
-                                logger.error('Embedded subtitle track language %r is not a valid language', st.language)
+                                logger.error('Embedded subtitle track language %r is not a valid language' %
+                                             st.language)
                                 embedded_subtitle_languages.add(Language('und'))
                         elif st.name:
                             try:
                                 embedded_subtitle_languages.add(Language.fromname(st.name))
                             except BabelfishError:
-                                logger.debug('Embedded subtitle track name %r is not a valid language', st.name)
+                                logger.debug('Embedded subtitle track name %r is not a valid language' % st.name)
                                 embedded_subtitle_languages.add(Language('und'))
                         else:
                             embedded_subtitle_languages.add(Language('und'))
-                    logger.debug('Found embedded subtitle %r with enzyme', embedded_subtitle_languages)
+                    logger.debug('Found embedded subtitle %r with enzyme' % embedded_subtitle_languages)
                     video.subtitle_languages |= embedded_subtitle_languages
             else:
                 logger.debug('MKV has no subtitle track')
@@ -415,12 +416,12 @@ def scan_videos(path, subtitles=True, embedded_subtitles=True, subtitles_dir=Non
     # walk the path
     videos = []
     for dirpath, dirnames, filenames in os.walk(path):
-        logger.debug('Walking directory %s', dirpath)
+        logger.debug('Walking directory %s' % dirpath)
 
         # remove badly encoded and hidden dirnames
         for dirname in list(dirnames):
             if dirname.startswith('.'):
-                logger.debug('Skipping hidden dirname %r in %r', dirname, dirpath)
+                logger.debug('Skipping hidden dirname %r in %r' % (dirname, dirpath))
                 dirnames.remove(dirname)
 
         # scan for videos
@@ -431,7 +432,7 @@ def scan_videos(path, subtitles=True, embedded_subtitles=True, subtitles_dir=Non
 
             # skip hidden files
             if filename.startswith('.'):
-                logger.debug('Skipping hidden filename %r in %r', filename, dirpath)
+                logger.debug('Skipping hidden filename %r in %r' % (filename, dirpath))
                 continue
 
             # reconstruct the file path
@@ -439,7 +440,7 @@ def scan_videos(path, subtitles=True, embedded_subtitles=True, subtitles_dir=Non
 
             # skip links
             if os.path.islink(filepath):
-                logger.debug('Skipping link %r in %r', filename, dirpath)
+                logger.debug('Skipping link %r in %r' % (filename, dirpath))
                 continue
 
             # skip old files

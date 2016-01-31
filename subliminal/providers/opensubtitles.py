@@ -78,7 +78,7 @@ class OpenSubtitlesSubtitle(Subtitle):
             # guess
             matches |= guess_matches(video, guessit(self.movie_release_name, {'type': 'movie'}))
         else:
-            logger.info('%r is not a valid movie_kind', self.movie_kind)
+            logger.info('%r is not a valid movie_kind' % self.movie_kind)
             return matches
 
         # hash
@@ -108,7 +108,7 @@ class OpenSubtitlesProvider(Provider):
         response = checked(self.server.LogIn(self.username, self.password, 'eng',
                                              'subliminal v%s' % get_version(__version__)))
         self.token = response['token']
-        logger.debug('Logged in with token %r', self.token)
+        logger.debug('Logged in with token %r' % self.token)
 
     def terminate(self):
         logger.info('Logging out')
@@ -142,7 +142,7 @@ class OpenSubtitlesProvider(Provider):
             criterion['sublanguageid'] = ','.join(sorted(l.opensubtitles for l in languages))
 
         # query the server
-        logger.info('Searching subtitles %r', criteria)
+        logger.info('Searching subtitles %r' % criteria)
         response = checked(self.server.SearchSubtitles(self.token, criteria))
         subtitles = []
 
@@ -172,7 +172,7 @@ class OpenSubtitlesProvider(Provider):
             subtitle = OpenSubtitlesSubtitle(language, hearing_impaired, page_link, subtitle_id, matched_by, movie_kind,
                                              hash, movie_name, movie_release_name, movie_year, movie_imdb_id,
                                              series_season, series_episode, encoding)
-            logger.debug('Found subtitle %r', subtitle)
+            logger.debug('Found subtitle %r' % subtitle)
             subtitles.append(subtitle)
 
         return subtitles
@@ -190,7 +190,7 @@ class OpenSubtitlesProvider(Provider):
                           query=query, season=season, episode=episode, tag=os.path.basename(video.name))
 
     def download_subtitle(self, subtitle):
-        logger.info('Downloading subtitle %r', subtitle)
+        logger.info('Downloading subtitle %r' % subtitle)
         response = checked(self.server.DownloadSubtitles(self.token, [str(subtitle.subtitle_id)]))
         subtitle.content = fix_line_ending(zlib.decompress(base64.b64decode(response['data'][0]['data']), 47))
 

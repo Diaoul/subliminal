@@ -17,7 +17,7 @@ from dogpile.cache.backends.file import AbstractFileLock
 from dogpile.core import ReadWriteMutex
 from six.moves import configparser
 
-from subliminal import (Episode, Movie, ProviderPool, Video, __version__, check_video, provider_manager, region,
+from subliminal import (AsyncProviderPool, Episode, Movie, Video, __version__, check_video, provider_manager, region,
                         save_subtitles, scan_video, scan_videos)
 from subliminal.subtitle import compute_score
 
@@ -269,11 +269,12 @@ def cache(ctx, clear_subliminal):
 @click.option('-hi', '--hearing-impaired', is_flag=True, default=False, help='Prefer hearing impaired subtitles.')
 @click.option('-m', '--min-score', type=click.IntRange(0, 100), default=0, help='Minimum score for a subtitle '
               'to be downloaded (0 to 100).')
+@click.option('-w', '--max-workers', type=click.IntRange(1, 50), default=None, help='Maximum number of threads to use.')
 @click.option('-v', '--verbose', count=True, help='Increase verbosity.')
 @click.argument('path', type=click.Path(), required=True, nargs=-1)
 @click.pass_obj
-def download(obj, provider, language, age, directory, encoding, single, force, hearing_impaired, min_score, verbose,
-             path):
+def download(obj, provider, language, age, directory, encoding, single, force, hearing_impaired, min_score, max_workers,
+             verbose, path):
     """Download best subtitles.
 
     PATH can be an directory containing videos, a video file path or a video file name. It can be used multiple times.
@@ -363,13 +364,13 @@ def download(obj, provider, language, age, directory, encoding, single, force, h
 
     # download best subtitles
     downloaded_subtitles = defaultdict(list)
-    with ProviderPool(providers=provider, provider_configs=obj['provider_configs']) as pool:
+    with AsyncProviderPool(max_workers=max_workers, providers=provider, provider_configs=obj['provider_configs']) as p:
         with click.progressbar(videos, label='Downloading subtitles',
                                item_show_func=lambda v: os.path.split(v.name)[1] if v is not None else '') as bar:
             for v in bar:
-                subtitles = pool.download_best_subtitles(pool.list_subtitles(v, language - v.subtitle_languages),
-                                                         v, language, min_score=v.scores['hash'] * min_score / 100,
-                                                         hearing_impaired=hearing_impaired, only_one=single)
+                subtitles = p.download_best_subtitles(p.list_subtitles(v, language - v.subtitle_languages),
+                                                      v, language, min_score=v.scores['hash'] * min_score / 100,
+                                                      hearing_impaired=hearing_impaired, only_one=single)
                 downloaded_subtitles[v] = subtitles
 
     # save subtitles

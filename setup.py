@@ -13,6 +13,8 @@ setup_requirements = ['pytest-runner'] if {'pytest', 'test', 'ptr'}.intersection
 install_requirements = ['guessit>=2.0.1', 'babelfish>=0.5.2', 'enzyme>=0.4.1', 'beautifulsoup4>=4.2.0',
                         'requests>=2.0', 'click>=4.0', 'dogpile.cache>=0.5.4', 'stevedore>=1.0.0',
                         'chardet>=2.3.0', 'pysrt>=1.0.1', 'six>=1.9.0']
+if sys.version_info < (3, 2):
+    install_requirements.append('futures>=3.0.4')
 
 test_requirements = ['sympy', 'vcrpy>=1.6.1', 'pytest', 'pytest-pep8', 'pytest-flakes', 'pytest-cov']
 if sys.version_info < (3, 3):

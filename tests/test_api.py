@@ -12,8 +12,8 @@ except ImportError:
     from mock import Mock
 from vcr import VCR
 
-from subliminal import (ProviderManager, ProviderPool, check_video, download_best_subtitles, download_subtitles,
-                        list_subtitles, provider_manager, save_subtitles)
+from subliminal import (AsyncProviderPool, ProviderManager, ProviderPool, check_video, download_best_subtitles,
+                        download_subtitles, list_subtitles, provider_manager, save_subtitles)
 from subliminal.providers.addic7ed import Addic7edSubtitle
 from subliminal.providers.thesubdb import TheSubDBSubtitle
 from subliminal.providers.tvsubtitles import TVsubtitlesSubtitle
@@ -73,6 +73,40 @@ def test_provider_pool_iter(mock_providers):
     assert len(list(pool)) == 0
     pool['tvsubtitles']
     assert len(list(pool)) == 1
+
+
+def test_provider_pool_list_subtitles_provider(episodes, mock_providers):
+    pool = ProviderPool()
+    subtitles = pool.list_subtitles_provider('tvsubtitles', episodes['bbt_s07e05'], {Language('eng')})
+    assert subtitles == ['tvsubtitles']
+    assert provider_manager['tvsubtitles'].plugin.initialize.called
+    assert provider_manager['tvsubtitles'].plugin.list_subtitles.called
+
+
+def test_provider_pool_list_subtitles(episodes, mock_providers):
+    pool = ProviderPool()
+    subtitles = pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
+    assert sorted(subtitles) == ['addic7ed', 'opensubtitles', 'podnapisi', 'thesubdb', 'tvsubtitles']
+    for provider in subtitles:
+        assert provider_manager[provider].plugin.initialize.called
+        assert provider_manager[provider].plugin.list_subtitles.called
+
+
+def test_async_provider_pool_list_subtitles_provider(episodes, mock_providers):
+    pool = AsyncProviderPool()
+    subtitles = pool.list_subtitles_provider('tvsubtitles', episodes['bbt_s07e05'], {Language('eng')})
+    assert subtitles == ('tvsubtitles', ['tvsubtitles'])
+    assert provider_manager['tvsubtitles'].plugin.initialize.called
+    assert provider_manager['tvsubtitles'].plugin.list_subtitles.called
+
+
+def test_async_provider_pool_list_subtitles(episodes, mock_providers):
+    pool = AsyncProviderPool()
+    subtitles = pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
+    assert sorted(subtitles) == ['addic7ed', 'opensubtitles', 'podnapisi', 'thesubdb', 'tvsubtitles']
+    for provider in subtitles:
+        assert provider_manager[provider].plugin.initialize.called
+        assert provider_manager[provider].plugin.list_subtitles.called
 
 
 def test_check_video_languages(movies):

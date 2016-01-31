@@ -4,4 +4,4 @@ API
 
     .. data:: provider_manager
 
-        :class:`~stevedore.extension.ExtensionManager` based on the entry point ``subliminal.providers``
+        :class:`~stevedore.extension.ExtensionManager` based on the entry point ``subliminal.providers``.

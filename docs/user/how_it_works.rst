@@ -18,8 +18,8 @@ Providers all inherit the same :class:`~subliminal.providers.Provider` base clas
 They are registered on the ``subliminal.providers`` entry point and are exposed through the
 :data:`~subliminal.api.provider_manager` for easy access.
 
-To make working with multiple providers seamlessly, the :class:`~subliminal.api.ProviderPool` exposes the same API but
-distributes it to its providers.
+To work with multiple providers seamlessly, the :class:`~subliminal.api.ProviderPool` exposes the same API but
+distributes it to its providers and :class:`~subliminal.api.AsyncProviderPool` does it asynchronously.
 
 .. _scoring:
 
@@ -32,14 +32,14 @@ Using `guessit <http://guessit.readthedocs.org>`_ and `enzyme <http://enzyme.rea
 properties of the video and match them with the properties of the subtitles found with the providers.
 
 Equations in :mod:`subliminal.score` give a score to each property (called a match). The more matches the video and
-the subtitle have the higher the score computed with :func:`~subliminal.subtitle.compute_score` gets.
+the subtitle have, the higher the score computed with :func:`~subliminal.score.compute_score` gets.
 
 
 Libraries
 ---------
 Various libraries are used by subliminal and are key to its success:
 
-* `guessit <http://guessit.readthedocs.org>`_ to guess informations from filenames
+* `guessit <http://guessit.readthedocs.org>`_ to guess information from filenames
 * `enzyme <http://enzyme.readthedocs.org>`_ to detect embedded subtitles in videos and read other video metadata
 * `babelfish <http://babelfish.readthedocs.org>`_ to work with languages
 * `requests <http://docs.python-requests.org>`_ to make human readable HTTP requests

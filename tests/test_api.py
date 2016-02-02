@@ -17,6 +17,7 @@ from subliminal import (AsyncProviderPool, ProviderManager, ProviderPool, check_
 from subliminal.providers.addic7ed import Addic7edSubtitle
 from subliminal.providers.thesubdb import TheSubDBSubtitle
 from subliminal.providers.tvsubtitles import TVsubtitlesSubtitle
+from subliminal.score import episode_scores
 from subliminal.subtitle import Subtitle
 
 
@@ -271,7 +272,7 @@ def test_download_best_subtitles_min_score(episodes):
     languages = {Language('fra')}
     providers = ['addic7ed']
 
-    subtitles = download_best_subtitles({video}, languages, min_score=video.scores['hash'], providers=providers)
+    subtitles = download_best_subtitles({video}, languages, min_score=episode_scores['hash'], providers=providers)
 
     assert len(subtitles) == 1
     assert len(subtitles[video]) == 0
@@ -283,7 +284,7 @@ def test_download_best_subtitles_no_language(episodes):
     video.subtitle_languages = languages
     providers = ['addic7ed']
 
-    subtitles = download_best_subtitles({video}, languages, min_score=video.scores['hash'], providers=providers)
+    subtitles = download_best_subtitles({video}, languages, min_score=episode_scores['hash'], providers=providers)
 
     assert len(subtitles) == 0
 
@@ -294,7 +295,7 @@ def test_download_best_subtitles_undefined(episodes):
     video.subtitle_languages = languages
     providers = ['addic7ed']
 
-    subtitles = download_best_subtitles({video}, languages, min_score=video.scores['hash'], only_one=True,
+    subtitles = download_best_subtitles({video}, languages, min_score=episode_scores['hash'], only_one=True,
                                         providers=providers)
 
     assert len(subtitles) == 0

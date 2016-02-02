@@ -28,7 +28,6 @@ Common
 ^^^^^^
 Let's start by importing subliminal:
 
-    >>> from __future__ import unicode_literals
     >>> import os
     >>> from babelfish import *
     >>> from subliminal import *
@@ -46,7 +45,7 @@ use :func:`~subliminal.video.scan_videos` on an existing directory path to scan 
     >>> video
     <Episode ['The Big Bang Theory', 5x18]>
 
-Here video informations were guessed based on the name of the video, you can access some video attributes:
+Here video information was guessed based on the name of the video, you can access some video attributes:
 
     >>> video.video_codec
     'h264'
@@ -91,15 +90,15 @@ them to the video and tell you exactly what matches with :meth:`~subliminal.subt
 
     >>> for s in subtitles[video]:
     ...     sorted(s.get_matches(video))
-    ['episode', 'format', 'hearing_impaired', 'release_group', 'season', 'series', 'video_codec', 'year']
-    ['episode', 'format', 'hearing_impaired', 'season', 'series', 'year']
+    ['episode', 'format', 'release_group', 'season', 'series', 'video_codec', 'year']
+    ['episode', 'format', 'season', 'series', 'year']
 
 And then compute a score with those matches with :func:`~subliminal.subtitle.compute_score`:
 
     >>> for s in subtitles[video]:
-    ...     {s: compute_score(s.get_matches(video), video)}
-    {<PodnapisiSubtitle 'ZtAW' [hu]>: 132}
-    {<PodnapisiSubtitle 'ONAW' [hu]>: 117}
+    ...     {s: compute_score(s, video)}
+    {<PodnapisiSubtitle 'ZtAW' [hu]>: 365}
+    {<PodnapisiSubtitle 'ONAW' [hu]>: 348}
 
 Now you should have a better idea about which one you should choose.
 

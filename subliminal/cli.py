@@ -19,7 +19,7 @@ from six.moves import configparser
 
 from subliminal import (AsyncProviderPool, Episode, Movie, Video, __version__, check_video, provider_manager, region,
                         save_subtitles, scan_video, scan_videos)
-from subliminal.subtitle import compute_score
+from subliminal.score import compute_score, get_scores
 
 logger = logging.getLogger(__name__)
 
@@ -368,8 +368,9 @@ def download(obj, provider, language, age, directory, encoding, single, force, h
         with click.progressbar(videos, label='Downloading subtitles',
                                item_show_func=lambda v: os.path.split(v.name)[1] if v is not None else '') as bar:
             for v in bar:
+                scores = get_scores(v)
                 subtitles = p.download_best_subtitles(p.list_subtitles(v, language - v.subtitle_languages),
-                                                      v, language, min_score=v.scores['hash'] * min_score / 100,
+                                                      v, language, min_score=scores['hash'] * min_score / 100,
                                                       hearing_impaired=hearing_impaired, only_one=single)
                 downloaded_subtitles[v] = subtitles
 
@@ -386,23 +387,23 @@ def download(obj, provider, language, age, directory, encoding, single, force, h
 
         if verbose > 1:
             for s in saved_subtitles:
-                matches = s.get_matches(v, hearing_impaired=hearing_impaired)
-                score = compute_score(matches, v)
+                matches = s.get_matches(v)
+                score = compute_score(s, v)
 
                 # score color
                 score_color = None
+                scores = get_scores(v)
                 if isinstance(v, Movie):
-                    if score < v.scores['title']:
+                    if score < scores['title']:
                         score_color = 'red'
-                    elif score < v.scores['title'] + v.scores['year'] + v.scores['release_group']:
+                    elif score < scores['title'] + scores['year'] + scores['release_group']:
                         score_color = 'yellow'
                     else:
                         score_color = 'green'
                 elif isinstance(v, Episode):
-                    if score < v.scores['series'] + v.scores['season'] + v.scores['episode']:
+                    if score < scores['series'] + scores['season'] + scores['episode']:
                         score_color = 'red'
-                    elif score < (v.scores['series'] + v.scores['season'] + v.scores['episode'] +
-                                  v.scores['release_group']):
+                    elif score < scores['series'] + scores['season'] + scores['episode'] + scores['release_group']:
                         score_color = 'yellow'
                     else:
                         score_color = 'green'
@@ -410,16 +411,16 @@ def download(obj, provider, language, age, directory, encoding, single, force, h
                 # scale score from 0 to 100 taking out preferences
                 scaled_score = score
                 if s.hearing_impaired == hearing_impaired:
-                    scaled_score -= v.scores['hearing_impaired']
-                scaled_score *= 100 / v.scores['hash']
+                    scaled_score -= scores['hearing_impaired']
+                scaled_score *= 100 / scores['hash']
 
                 # echo some nice colored output
                 click.echo('  - [{score}] {language} subtitle from {provider_name} (match on {matches})'.format(
-                    score=click.style('{:5.1f}'.format(scaled_score), fg=score_color, bold=score >= v.scores['hash']),
+                    score=click.style('{:5.1f}'.format(scaled_score), fg=score_color, bold=score >= scores['hash']),
                     language=s.language.name if s.language.country is None else '%s (%s)' % (s.language.name,
                                                                                              s.language.country.name),
                     provider_name=s.provider_name,
-                    matches=', '.join(sorted(matches, key=v.scores.get, reverse=True))
+                    matches=', '.join(sorted(matches, key=scores.get, reverse=True))
                 ))
 
     if verbose == 0:

@@ -12,7 +12,8 @@ from .api import (AsyncProviderPool, ProviderManager, ProviderPool, check_video,
 from .cache import region
 from .exceptions import Error, ProviderError
 from .providers import Provider
-from .subtitle import Subtitle, compute_score
+from .score import compute_score
+from .subtitle import Subtitle
 from .video import SUBTITLE_EXTENSIONS, VIDEO_EXTENSIONS, Episode, Movie, Video, scan_video, scan_videos
 
 logging.getLogger(__name__).addHandler(logging.NullHandler())

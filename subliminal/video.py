@@ -28,8 +28,7 @@ SUBTITLE_EXTENSIONS = ('.srt', '.sub', '.smi', '.txt', '.ssa', '.ass', '.mpl')
 class Video(object):
     """Base class for videos.
 
-    Represent a video, existing or not. Attributes have an associated score based on equations defined in
-    :mod:`~subliminal.score`.
+    Represent a video, existing or not.
 
     :param str name: name or path of the video.
     :param str format: format of the video (HDTV, WEB-DL, BluRay, ...).
@@ -43,9 +42,6 @@ class Video(object):
     :param set subtitle_languages: existing subtitle languages
 
     """
-    #: Score by match property
-    scores = {}
-
     def __init__(self, name, format=None, release_group=None, resolution=None, video_codec=None, audio_codec=None,
                  imdb_id=None, hashes=None, size=None, subtitle_languages=None):
         #: Name or path of the video
@@ -127,8 +123,6 @@ class Video(object):
 class Episode(Video):
     """Episode :class:`Video`.
 
-    Scores are defined by a set of equations, see :func:`~subliminal.score.solve_episode_equations`
-
     :param str series: series of the episode.
     :param int season: season number of the episode.
     :param int episode: episode number of the episode.
@@ -137,10 +131,6 @@ class Episode(Video):
     :param int tvdb_id: TVDB id of the episode
 
     """
-    #: Score by match property
-    scores = {'hash': 137, 'imdb_id': 110, 'tvdb_id': 88, 'series': 44, 'year': 44, 'title': 22, 'season': 11,
-              'episode': 11, 'release_group': 11, 'format': 6, 'video_codec': 4, 'resolution': 4, 'audio_codec': 2,
-              'hearing_impaired': 1}
 
     def __init__(self, name, series, season, episode, format=None, release_group=None, resolution=None,
                  video_codec=None, audio_codec=None, imdb_id=None, hashes=None, size=None, subtitle_languages=None,
@@ -192,16 +182,10 @@ class Episode(Video):
 class Movie(Video):
     """Movie :class:`Video`.
 
-    Scores are defined by a set of equations, see :func:`~subliminal.score.solve_movie_equations`
-
     :param str title: title of the movie.
     :param int year: year of the movie
 
     """
-    #: Score by match property
-    scores = {'hash': 62, 'imdb_id': 62, 'title': 23, 'year': 12, 'release_group': 11, 'format': 6, 'video_codec': 4,
-              'resolution': 4, 'audio_codec': 2, 'hearing_impaired': 1}
-
     def __init__(self, name, title, format=None, release_group=None, resolution=None, video_codec=None,
                  audio_codec=None, imdb_id=None, hashes=None, size=None, subtitle_languages=None, year=None):
         super(Movie, self).__init__(name, format, release_group, resolution, video_codec, audio_codec, imdb_id, hashes,

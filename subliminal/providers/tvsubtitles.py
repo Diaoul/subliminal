@@ -5,13 +5,14 @@ import re
 from zipfile import ZipFile
 
 from babelfish import Language, language_converters
+from guessit import guessit
 from requests import Session
 
 from . import ParserBeautifulSoup, Provider, get_version
 from .. import __version__
 from ..cache import EPISODE_EXPIRATION_TIME, SHOW_EXPIRATION_TIME, region
 from ..exceptions import ProviderError
-from ..subtitle import Subtitle, fix_line_ending, guess_matches, guess_properties, sanitized_string_equal
+from ..subtitle import Subtitle, fix_line_ending, guess_matches, sanitized_string_equal
 from ..video import Episode
 
 logger = logging.getLogger(__name__)
@@ -39,8 +40,8 @@ class TVsubtitlesSubtitle(Subtitle):
     def id(self):
         return str(self.subtitle_id)
 
-    def get_matches(self, video, hearing_impaired=False):
-        matches = super(TVsubtitlesSubtitle, self).get_matches(video, hearing_impaired=hearing_impaired)
+    def get_matches(self, video):
+        matches = set()
 
         # series
         if video.series and sanitized_string_equal(self.series, video.series):
@@ -59,9 +60,9 @@ class TVsubtitlesSubtitle(Subtitle):
             matches.add('release_group')
         # other properties
         if self.release:
-            matches |= guess_matches(video, guess_properties(self.release), partial=True)
+            matches |= guess_matches(video, guessit(self.release, {'type': 'episode'}), partial=True)
         if self.rip:
-            matches |= guess_matches(video, guess_properties(self.rip), partial=True)
+            matches |= guess_matches(video, guessit(self.rip), partial=True)
 
         return matches
 

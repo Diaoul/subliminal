@@ -41,8 +41,8 @@ class PodnapisiSubtitle(Subtitle):
     def id(self):
         return self.pid
 
-    def get_matches(self, video, hearing_impaired=False):
-        matches = super(PodnapisiSubtitle, self).get_matches(video, hearing_impaired=hearing_impaired)
+    def get_matches(self, video):
+        matches = set()
 
         # episode
         if isinstance(video, Episode):

@@ -41,15 +41,14 @@ def test_get_matches_episode(episodes):
     subtitle = PodnapisiSubtitle(Language('eng'), False, None, 'EdQo', subtitle_releases, 'The Big Bang Theory', 7, 5,
                                  2007)
     matches = subtitle.get_matches(episodes['bbt_s07e05'])
-    assert matches == {'series', 'season', 'episode', 'video_codec', 'resolution', 'format', 'release_group', 'year',
-                       'hearing_impaired'}
+    assert matches == {'series', 'season', 'episode', 'video_codec', 'resolution', 'format', 'release_group', 'year'}
 
 
 def test_get_matches_no_match(episodes):
     subtitle_releases = ['The.Big.Bang.Theory.S07E05.1080p.HDTV.DIMENSION']
     subtitle = PodnapisiSubtitle(Language('eng'), False, None, 'EdQo', subtitle_releases, 'The Big Bang Theory', 7, 5,
                                  2007)
-    matches = subtitle.get_matches(episodes['got_s03e10'], hearing_impaired=True)
+    matches = subtitle.get_matches(episodes['got_s03e10'])
     assert matches == {'year'}
 
 

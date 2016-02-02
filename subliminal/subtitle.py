@@ -4,7 +4,6 @@ import os
 import re
 
 import chardet
-from guessit import guessit
 from codecs import lookup
 import pysrt
 
@@ -143,76 +142,22 @@ class Subtitle(object):
 
         return encoding
 
-    def get_matches(self, video, hearing_impaired=False):
+    def get_matches(self, video):
         """Get the matches against the `video`.
 
         :param video: the video to get the matches with.
         :type video: :class:`~subliminal.video.Video`
-        :param bool hearing_impaired: hearing impaired preference.
         :return: matches of the subtitle.
         :rtype: set
 
         """
-        matches = set()
-
-        # hearing_impaired
-        if self.hearing_impaired == hearing_impaired:
-            matches.add('hearing_impaired')
-
-        return matches
+        raise NotImplementedError
 
     def __hash__(self):
         return hash(self.provider_name + '-' + self.id)
 
     def __repr__(self):
         return '<%s %r [%s]>' % (self.__class__.__name__, self.id, self.language)
-
-
-def compute_score(matches, video, scores=None):
-    """Compute the score of the `matches` against the `video`.
-
-    Some matches count as much as a combination of others in order to level the final score:
-
-      * `hash` removes everything else
-      * For :class:`~subliminal.video.Episode`
-
-        * `imdb_id` removes `series`, `tvdb_id`, `season`, `episode`, `title` and `year`
-        * `tvdb_id` removes `series` and `year`
-        * `title` removes `season` and `episode`
-
-
-    :param video: the video to get the score with.
-    :type video: :class:`~subliminal.video.Video`
-    :param dict scores: scores to use, if `None`, the :attr:`~subliminal.video.Video.scores` from the video are used.
-    :return: score of the subtitle.
-    :rtype: int
-
-    """
-    final_matches = matches.copy()
-    scores = scores or video.scores
-
-    logger.info('Computing score for matches %r and %r', matches, video)
-
-    # remove equivalent match combinations
-    if 'hash' in final_matches:
-        final_matches &= {'hash', 'hearing_impaired'}
-    elif isinstance(video, Episode):
-        if 'imdb_id' in final_matches:
-            final_matches -= {'series', 'tvdb_id', 'season', 'episode', 'title', 'year'}
-        if 'tvdb_id' in final_matches:
-            final_matches -= {'series', 'year'}
-        if 'title' in final_matches:
-            final_matches -= {'season', 'episode'}
-
-    # compute score
-    logger.debug('Final matches: %r', final_matches)
-    score = sum((scores[match] for match in final_matches))
-    logger.info('Computed score %d', score)
-
-    # ensure score is capped by the best possible score (hash + preferences)
-    assert score <= scores['hash'] + scores['hearing_impaired']
-
-    return score
 
 
 def get_subtitle_path(video_path, language=None, extension='.srt'):
@@ -317,18 +262,6 @@ def guess_matches(video, guess, partial=False):
         matches.add('audio_codec')
 
     return matches
-
-
-def guess_properties(string):
-    """Extract properties from `string` using guessit.
-
-    :param str string: the string potentially containing properties.
-    :return: the guessed properties.
-    :rtype: dict
-
-    """
-    properties = guessit(string)
-    return properties
 
 
 def fix_line_ending(content):

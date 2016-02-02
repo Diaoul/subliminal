@@ -48,8 +48,8 @@ class OpenSubtitlesSubtitle(Subtitle):
     def series_title(self):
         return self.series_re.match(self.movie_name).group('series_title')
 
-    def get_matches(self, video, hearing_impaired=False):
-        matches = super(OpenSubtitlesSubtitle, self).get_matches(video, hearing_impaired=hearing_impaired)
+    def get_matches(self, video):
+        matches = set()
 
         # episode
         if isinstance(video, Episode) and self.movie_kind == 'episode':
@@ -67,6 +67,12 @@ class OpenSubtitlesSubtitle(Subtitle):
                 matches.add('title')
             # guess
             matches |= guess_matches(video, guessit(self.movie_release_name, {'type': 'episode'}))
+            # hash
+            if 'opensubtitles' in video.hashes and self.hash == video.hashes['opensubtitles']:
+                if 'series' in matches and 'season' in matches and 'episode' in matches:
+                    matches.add('hash')
+                else:
+                    logger.debug('Match on hash discarded')
         # movie
         elif isinstance(video, Movie) and self.movie_kind == 'movie':
             # title
@@ -77,13 +83,16 @@ class OpenSubtitlesSubtitle(Subtitle):
                 matches.add('year')
             # guess
             matches |= guess_matches(video, guessit(self.movie_release_name, {'type': 'movie'}))
+            # hash
+            if 'opensubtitles' in video.hashes and self.hash == video.hashes['opensubtitles']:
+                if 'title' in matches:
+                    matches.add('hash')
+                else:
+                    logger.debug('Match on hash discarded')
         else:
             logger.info('%r is not a valid movie_kind', self.movie_kind)
             return matches
 
-        # hash
-        if 'opensubtitles' in video.hashes and self.hash == video.hashes['opensubtitles']:
-            matches.add('hash')
         # imdb_id
         if video.imdb_id and self.movie_imdb_id == video.imdb_id:
             matches.add('imdb_id')

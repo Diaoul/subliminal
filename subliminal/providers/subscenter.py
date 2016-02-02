@@ -38,8 +38,8 @@ class SubsCenterSubtitle(Subtitle):
     def id(self):
         return str(self.subtitle_id)
 
-    def get_matches(self, video, hearing_impaired=False):
-        matches = super(SubsCenterSubtitle, self).get_matches(video, hearing_impaired=hearing_impaired)
+    def get_matches(self, video):
+        matches = set()
 
         # episode
         if isinstance(video, Episode):

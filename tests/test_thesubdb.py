@@ -41,12 +41,12 @@ def test_converter_reverse_alpha3_country():
 def test_get_matches(movies):
     subtitle = TheSubDBSubtitle(Language('eng'), 'ad32876133355929d814457537e12dc2')
     matches = subtitle.get_matches(movies['man_of_steel'])
-    assert matches == {'hash', 'hearing_impaired'}
+    assert matches == {'hash'}
 
 
 def test_get_matches_no_match(episodes):
     subtitle = TheSubDBSubtitle(Language('eng'), 'ad32876133355929d814457537e12dc2')
-    matches = subtitle.get_matches(episodes['got_s03e10'], hearing_impaired=True)
+    matches = subtitle.get_matches(episodes['got_s03e10'])
     assert matches == set()
 
 

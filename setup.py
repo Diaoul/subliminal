@@ -22,7 +22,7 @@ if sys.version_info < (3, 3):
 
 dev_requirements = ['tox', 'sphinx', 'wheel']
 
-# package informations
+# package information
 with io.open('subliminal/__init__.py', 'r') as f:
     version = re.search(r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]$', f.read(), re.MULTILINE).group(1)
 

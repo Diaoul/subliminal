@@ -20,7 +20,7 @@ def test_get_matches_movie_hash(movies):
                                      '5b8f8f4e41ccb21e', 'Man of Steel',
                                      'Man.of.Steel.German.720p.BluRay.x264-EXQUiSiTE', 2013, 770828, 0, 0, None)
     matches = subtitle.get_matches(movies['man_of_steel'])
-    assert matches == {'title', 'year', 'video_codec', 'imdb_id', 'hash', 'resolution', 'format', 'hearing_impaired'}
+    assert matches == {'title', 'year', 'video_codec', 'imdb_id', 'hash', 'resolution', 'format'}
 
 
 def test_get_matches_episode(episodes):
@@ -28,21 +28,20 @@ def test_get_matches_episode(episodes):
                                      '0', '"Game of Thrones" Mhysa',
                                      ' Game.of.Thrones.S03E10.HDTV.XviD-AFG', 2013, 2178796, 3, 10, None)
     matches = subtitle.get_matches(episodes['got_s03e10'])
-    assert matches == {'imdb_id', 'series', 'year', 'episode', 'season', 'title', 'hearing_impaired'}
+    assert matches == {'imdb_id', 'series', 'year', 'episode', 'season', 'title'}
 
 
 def test_get_matches_imdb_id(movies):
     subtitle = OpenSubtitlesSubtitle(Language('fra'), True, None, '1953767650', 'imdbid', 'movie', 0, 'Man of Steel',
                                      'man.of.steel.2013.720p.bluray.x264-felony', 2013, 770828, 0, 0, None)
-    matches = subtitle.get_matches(movies['man_of_steel'], hearing_impaired=True)
-    assert matches == {'title', 'year', 'video_codec', 'imdb_id', 'resolution', 'format', 'release_group',
-                       'hearing_impaired'}
+    matches = subtitle.get_matches(movies['man_of_steel'])
+    assert matches == {'title', 'year', 'video_codec', 'imdb_id', 'resolution', 'format', 'release_group'}
 
 
 def test_get_matches_no_match(episodes):
     subtitle = OpenSubtitlesSubtitle(Language('fra'), False, None, '1953767650', 'imdbid', 'movie', 0, 'Man of Steel',
                                      'man.of.steel.2013.720p.bluray.x264-felony', 2013, 770828, 0, 0, None)
-    matches = subtitle.get_matches(episodes['got_s03e10'], hearing_impaired=True)
+    matches = subtitle.get_matches(episodes['got_s03e10'])
     assert matches == set()
 
 

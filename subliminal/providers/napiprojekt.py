@@ -46,8 +46,8 @@ class NapiProjektSubtitle(Subtitle):
     def id(self):
         return self.hash
 
-    def get_matches(self, video, hearing_impaired=False):
-        matches = super(NapiProjektSubtitle, self).get_matches(video, hearing_impaired=hearing_impaired)
+    def get_matches(self, video):
+        matches = set()
 
         # hash
         if 'napiprojekt' in video.hashes and video.hashes['napiprojekt'] == self.hash:

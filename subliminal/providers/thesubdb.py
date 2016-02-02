@@ -24,8 +24,8 @@ class TheSubDBSubtitle(Subtitle):
     def id(self):
         return self.hash + '-' + str(self.language)
 
-    def get_matches(self, video, hearing_impaired=False):
-        matches = super(TheSubDBSubtitle, self).get_matches(video, hearing_impaired=hearing_impaired)
+    def get_matches(self, video):
+        matches = set()
 
         # hash
         if 'thesubdb' in video.hashes and video.hashes['thesubdb'] == self.hash:

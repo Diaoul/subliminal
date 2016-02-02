@@ -3,14 +3,14 @@ import logging
 import re
 
 from babelfish import Language, language_converters
+from guessit import guessit
 from requests import Session
 
 from . import ParserBeautifulSoup, Provider, get_version
 from .. import __version__
 from ..cache import SHOW_EXPIRATION_TIME, region
 from ..exceptions import AuthenticationError, ConfigurationError, DownloadLimitExceeded, TooManyRequests
-from ..subtitle import (Subtitle, fix_line_ending, guess_matches, guess_properties, sanitize_string,
-                        sanitized_string_equal)
+from ..subtitle import Subtitle, fix_line_ending, guess_matches, sanitize_string, sanitized_string_equal
 from ..video import Episode
 
 logger = logging.getLogger(__name__)
@@ -38,8 +38,8 @@ class Addic7edSubtitle(Subtitle):
     def id(self):
         return self.download_link
 
-    def get_matches(self, video, hearing_impaired=False):
-        matches = super(Addic7edSubtitle, self).get_matches(video, hearing_impaired=hearing_impaired)
+    def get_matches(self, video):
+        matches = set()
 
         # series
         if video.series and sanitized_string_equal(self.series, video.series):
@@ -66,7 +66,7 @@ class Addic7edSubtitle(Subtitle):
         if video.format and self.version and video.format.lower() in self.version.lower():
             matches.add('format')
         # other properties
-        matches |= guess_matches(video, guess_properties(self.version), partial=True)
+        matches |= guess_matches(video, guessit(self.version), partial=True)
 
         return matches
 

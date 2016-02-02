@@ -11,7 +11,8 @@ from babelfish import Language
 import requests
 from stevedore import ExtensionManager
 
-from .subtitle import compute_score, get_subtitle_path
+from .score import compute_score as default_compute_score
+from .subtitle import get_subtitle_path
 
 logger = logging.getLogger(__name__)
 
@@ -243,7 +244,7 @@ class ProviderPool(object):
         return True
 
     def download_best_subtitles(self, subtitles, video, languages, min_score=0, hearing_impaired=False, only_one=False,
-                                scores=None):
+                                compute_score=None):
         """Download the best matching subtitles.
 
         :param subtitles: the subtitles to use.
@@ -255,15 +256,16 @@ class ProviderPool(object):
         :param int min_score: minimum score for a subtitle to be downloaded.
         :param bool hearing_impaired: hearing impaired preference.
         :param bool only_one: download only one subtitle, not one per language.
-        :param dict scores: scores to use, if `None`, the :attr:`~subliminal.video.Video.scores` from the video are
-            used.
+        :param function compute_score: function that takes `subtitle` and `video` as positional arguments,
+            `hearing_impaired` as keyword argument and returns the score.
         :return: downloaded subtitles.
         :rtype: list of :class:`~subliminal.subtitle.Subtitle`
 
         """
+        compute_score = compute_score or default_compute_score
+
         # sort subtitles by score
-        scored_subtitles = sorted([(s, compute_score(s.get_matches(video, hearing_impaired=hearing_impaired), video,
-                                                     scores=scores))
+        scored_subtitles = sorted([(s, compute_score(s, video, hearing_impaired=hearing_impaired))
                                   for s in subtitles], key=operator.itemgetter(1), reverse=True)
 
         # download best subtitles, falling back on the next on error
@@ -271,7 +273,7 @@ class ProviderPool(object):
         for subtitle, score in scored_subtitles:
             # check score
             if score < min_score:
-                logger.info('Score %d is below min_score (%d)', score, min_score)
+                logger.info('Score %.4f is below min_score (%.4f)', score, min_score)
                 break
 
             # check downloaded languages
@@ -280,7 +282,7 @@ class ProviderPool(object):
                 continue
 
             # download
-            logger.info('Downloading subtitle %r with score %d', subtitle, score)
+            logger.info('Downloading subtitle %r with score %.4f', subtitle, score)
             if self.download_subtitle(subtitle):
                 downloaded_subtitles.append(subtitle)
 
@@ -395,8 +397,8 @@ def download_subtitles(subtitles, **kwargs):
             pool.download_subtitle(subtitle)
 
 
-def download_best_subtitles(videos, languages, min_score=0, hearing_impaired=False, only_one=False, scores=None,
-                            **kwargs):
+def download_best_subtitles(videos, languages, min_score=0, hearing_impaired=False, only_one=False,
+                            compute_score=None, **kwargs):
     """List and download the best matching subtitles.
 
     The `videos` must pass the `languages` and `undefined` (`only_one`) checks of :func:`check_video`.
@@ -407,10 +409,11 @@ def download_best_subtitles(videos, languages, min_score=0, hearing_impaired=Fal
     :type videos: set of :class:`~subliminal.video.Video`
     :param languages: languages to download.
     :type languages: set of :class:`~babelfish.language.Language`
-    :param int min_score: minimum score for a subtitle to be downloaded.
+    :param float min_score: minimum score for a subtitle to be downloaded from 0 to 1.
     :param bool hearing_impaired: hearing impaired preference.
     :param bool only_one: download only one subtitle, not one per language.
-    :param dict scores: scores to use, if `None`, the :attr:`~subliminal.video.Video.scores` from the video are used.
+    :param function compute_score: function that takes `subtitle` and `video` as positional arguments,
+        `hearing_impaired` as keyword argument and returns the score from 0 to 1.
     :return: downloaded subtitles per video.
     :rtype: dict of :class:`~subliminal.video.Video` to list of :class:`~subliminal.subtitle.Subtitle`
 
@@ -425,7 +428,7 @@ def download_best_subtitles(videos, languages, min_score=0, hearing_impaired=Fal
             continue
         checked_videos.append(video)
 
-    # return immediatly if no video passed the checks
+    # return immediately if no video passed the checks
     if not checked_videos:
         return downloaded_subtitles
 
@@ -436,7 +439,7 @@ def download_best_subtitles(videos, languages, min_score=0, hearing_impaired=Fal
             subtitles = pool.download_best_subtitles(pool.list_subtitles(video, languages - video.subtitle_languages),
                                                      video, languages, min_score=min_score,
                                                      hearing_impaired=hearing_impaired, only_one=only_one,
-                                                     scores=scores)
+                                                     compute_score=compute_score)
             logger.info('Downloaded %d subtitle(s)', len(subtitles))
             downloaded_subtitles[video].extend(subtitles)
 

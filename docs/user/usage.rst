@@ -19,6 +19,11 @@ Download English subtitles::
 See :ref:`cli` for more details on the available commands and options.
 
 
+Nautilus/Nemo integration
+-------------------------
+See the dedicated `project page <https://github.com/Diaoul/nautilus-subliminal>`_ for more information.
+
+
 High level API
 --------------
 You can call subliminal in many different ways depending on how much control you want over the process. For most use

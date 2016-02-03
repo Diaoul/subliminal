@@ -31,6 +31,14 @@ def test_get_matches_episode(episodes):
     assert matches == {'imdb_id', 'series', 'year', 'episode', 'season', 'title'}
 
 
+def test_get_matches_episode_year(episodes):
+    subtitle = OpenSubtitlesSubtitle(Language('spa'), False, None, '1953369959', 'tag', 'episode',
+                                     '0', '"Dallas" The Price You Pay',
+                                     ' Dallas.2012.S01E03.HDTV.x264-LOL', 2012, 2205526, 1, 3, 'cp1252')
+    matches = subtitle.get_matches(episodes['dallas_2012_s01e03'])
+    assert matches == {'series', 'year', 'episode', 'season'}
+
+
 def test_get_matches_imdb_id(movies):
     subtitle = OpenSubtitlesSubtitle(Language('fra'), True, None, '1953767650', 'imdbid', 'movie', 0, 'Man of Steel',
                                      'man.of.steel.2013.720p.bluray.x264-felony', 2013, 770828, 0, 0, None)

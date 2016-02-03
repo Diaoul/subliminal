@@ -49,6 +49,9 @@ class PodnapisiSubtitle(Subtitle):
             # series
             if video.series and sanitized_string_equal(self.title, video.series):
                 matches.add('series')
+            # year
+            if video.year == self.year:
+                matches.add('year')
             # season
             if video.season and self.season == video.season:
                 matches.add('season')
@@ -63,12 +66,12 @@ class PodnapisiSubtitle(Subtitle):
             # title
             if video.title and sanitized_string_equal(self.title, video.title):
                 matches.add('title')
+            # year
+            if video.year and self.year == video.year:
+                matches.add('year')
             # guess
             for release in self.releases:
                 matches |= guess_matches(video, guessit(release, {'type': 'movie'}))
-        # year
-        if video.year and self.year == video.year:
-            matches.add('year')
 
         return matches
 

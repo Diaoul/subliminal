@@ -44,6 +44,13 @@ def test_get_matches_episode(episodes):
     assert matches == {'series', 'season', 'episode', 'video_codec', 'resolution', 'format', 'release_group', 'year'}
 
 
+def test_get_matches_episode_year(episodes):
+    subtitle_releases = ['Dallas.2012.S01E03.HDTV.x264-LOL']
+    subtitle = PodnapisiSubtitle(Language('eng'), True, None, '-5oa', subtitle_releases, 'Dallas', 1, 3, 2012)
+    matches = subtitle.get_matches(episodes['dallas_2012_s01e03'])
+    assert matches == {'series', 'year', 'season', 'episode'}
+
+
 def test_get_matches_no_match(episodes):
     subtitle_releases = ['The.Big.Bang.Theory.S07E05.1080p.HDTV.DIMENSION']
     subtitle = PodnapisiSubtitle(Language('eng'), False, None, 'EdQo', subtitle_releases, 'The Big Bang Theory', 7, 5,

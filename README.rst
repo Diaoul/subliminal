@@ -58,7 +58,7 @@ Download best subtitles in French and English for videos less than two weeks old
     region.configure('dogpile.cache.dbm', arguments={'filename': 'cachefile.dbm'})
 
     # scan for videos newer than 2 weeks and their existing subtitles in a folder
-    videos = [v for v in scan_videos('/video/folder') if v.age < timedelta(weeks=2)]
+    videos = scan_videos('/video/folder', age=timedelta(weeks=2))
 
     # download best subtitles
     subtitles = download_best_subtitles(videos, {Language('eng'), Language('fra')})

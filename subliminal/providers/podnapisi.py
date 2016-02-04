@@ -15,8 +15,8 @@ except ImportError:
 from requests import Session
 from zipfile import ZipFile
 
-from . import Provider, get_version
-from .. import __version__
+from . import Provider
+from .. import __short_version__
 from ..exceptions import ProviderError
 from ..subtitle import Subtitle, fix_line_ending, guess_matches, sanitized_string_equal
 from ..video import Episode, Movie
@@ -83,7 +83,7 @@ class PodnapisiProvider(Provider):
 
     def initialize(self):
         self.session = Session()
-        self.session.headers = {'User-Agent': 'Subliminal/%s' % get_version(__version__)}
+        self.session.headers = {'User-Agent': 'Subliminal/%s' % __short_version__}
 
     def terminate(self):
         self.session.close()

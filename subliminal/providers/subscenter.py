@@ -9,8 +9,8 @@ from babelfish import Language
 from guessit import guessit
 from requests import Session
 
-from . import ParserBeautifulSoup, Provider, get_version
-from .. import __version__
+from . import ParserBeautifulSoup, Provider
+from .. import __short_version__
 from ..cache import SHOW_EXPIRATION_TIME, region
 from ..exceptions import AuthenticationError, ConfigurationError, ProviderError
 from ..subtitle import Subtitle, fix_line_ending, guess_matches, sanitized_string_equal
@@ -82,7 +82,7 @@ class SubsCenterProvider(Provider):
 
     def initialize(self):
         self.session = Session()
-        self.session.headers = {'User-Agent': 'Subliminal/%s' % get_version(__version__)}
+        self.session.headers = {'User-Agent': 'Subliminal/%s' % __short_version__}
 
         # login
         if self.username is not None and self.password is not None:

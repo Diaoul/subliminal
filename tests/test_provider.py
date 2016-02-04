@@ -2,7 +2,7 @@
 from bs4 import FeatureNotFound
 import pytest
 
-from subliminal.providers import ParserBeautifulSoup, Provider, get_version
+from subliminal.providers import ParserBeautifulSoup, Provider
 from subliminal.video import Episode, Movie
 
 
@@ -49,12 +49,3 @@ def test_check_required_hash(episodes, movies):
     Provider.required_hash = 'opensubtitles'
     assert Provider.check(movies['man_of_steel']) is True
     assert Provider.check(episodes['dallas_s01e03']) is False
-
-
-@pytest.mark.parametrize('input,expected', [
-    ('1.0.dev0', '1.0'),
-    ('0.7.5', '0.7'),
-    ('0.6', '0.6')
-])
-def test_get_version(input, expected):
-    assert get_version(input) == expected

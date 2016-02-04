@@ -9,8 +9,8 @@ from babelfish import Language, language_converters
 from guessit import guessit
 from six.moves.xmlrpc_client import ServerProxy
 
-from . import Provider, TimeoutSafeTransport, get_version
-from .. import __version__
+from . import Provider, TimeoutSafeTransport
+from .. import __short_version__
 from ..exceptions import AuthenticationError, ConfigurationError, DownloadLimitExceeded, ProviderError
 from ..subtitle import Subtitle, fix_line_ending, guess_matches, sanitized_string_equal
 from ..video import Episode, Movie
@@ -118,7 +118,7 @@ class OpenSubtitlesProvider(Provider):
     def initialize(self):
         logger.info('Logging in')
         response = checked(self.server.LogIn(self.username, self.password, 'eng',
-                                             'subliminal v%s' % get_version(__version__)))
+                                             'subliminal v%s' % __short_version__))
         self.token = response['token']
         logger.debug('Logged in with token %r', self.token)
 

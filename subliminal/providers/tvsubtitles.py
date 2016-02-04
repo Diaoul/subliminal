@@ -8,8 +8,8 @@ from babelfish import Language, language_converters
 from guessit import guessit
 from requests import Session
 
-from . import ParserBeautifulSoup, Provider, get_version
-from .. import __version__
+from . import ParserBeautifulSoup, Provider
+from .. import __short_version__
 from ..cache import EPISODE_EXPIRATION_TIME, SHOW_EXPIRATION_TIME, region
 from ..exceptions import ProviderError
 from ..subtitle import Subtitle, fix_line_ending, guess_matches, sanitized_string_equal
@@ -77,7 +77,7 @@ class TVsubtitlesProvider(Provider):
 
     def initialize(self):
         self.session = Session()
-        self.session.headers = {'User-Agent': 'Subliminal/%s' % get_version(__version__)}
+        self.session.headers = {'User-Agent': 'Subliminal/%s' % __short_version__}
 
     def terminate(self):
         self.session.close()

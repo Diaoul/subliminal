@@ -127,16 +127,14 @@ class Episode(Video):
     :param int season: season number of the episode.
     :param int episode: episode number of the episode.
     :param str title: title of the episode.
-    :param int year: year of series.
-    :param int tvdb_id: TVDB id of the episode
+    :param int year: year of the series.
+    :param int tvdb_id: TVD B id of the episode.
+    :param \*\*kwargs: additional parameters for the :class:`Video` constructor.
 
     """
+    def __init__(self, name, series, season, episode, title=None, year=None, tvdb_id=None, **kwargs):
+        super(Episode, self).__init__(name, **kwargs)
 
-    def __init__(self, name, series, season, episode, format=None, release_group=None, resolution=None,
-                 video_codec=None, audio_codec=None, imdb_id=None, hashes=None, size=None, subtitle_languages=None,
-                 title=None, year=None, tvdb_id=None):
-        super(Episode, self).__init__(name, format, release_group, resolution, video_codec, audio_codec, imdb_id,
-                                      hashes, size, subtitle_languages)
         #: Series of the episode
         self.series = series
 
@@ -183,13 +181,13 @@ class Movie(Video):
     """Movie :class:`Video`.
 
     :param str title: title of the movie.
-    :param int year: year of the movie
+    :param int year: year of the movie.
+    :param \*\*kwargs: additional parameters for the :class:`Video` constructor.
 
     """
-    def __init__(self, name, title, format=None, release_group=None, resolution=None, video_codec=None,
-                 audio_codec=None, imdb_id=None, hashes=None, size=None, subtitle_languages=None, year=None):
-        super(Movie, self).__init__(name, format, release_group, resolution, video_codec, audio_codec, imdb_id, hashes,
-                                    size, subtitle_languages)
+    def __init__(self, name, title, year=None, **kwargs):
+        super(Movie, self).__init__(name, **kwargs)
+
         #: Title of the movie
         self.title = title
 

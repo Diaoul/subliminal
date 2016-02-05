@@ -54,7 +54,7 @@ def test_get_matches_video_codec_resolution(episodes):
 
 
 def test_get_matches_no_match(episodes):
-    subtitle = TVsubtitlesSubtitle(Language('por'), None, 261077, 'Game of Thrones', 3, 10, None, '1080p.BluRay',
+    subtitle = TVsubtitlesSubtitle(Language('por'), None, 261077, 'Game of Thrones', 3, 10, 2011, '1080p.BluRay',
                                    'DEMAND')
     matches = subtitle.get_matches(episodes['bbt_s07e05'])
     assert matches == set()

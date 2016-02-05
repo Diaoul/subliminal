@@ -54,7 +54,7 @@ class Addic7edSubtitle(Subtitle):
         if video.title and sanitize(self.title) == sanitize(video.title):
             matches.add('title')
         # year
-        if video.year == self.year:
+        if video.original_series and self.year is None or video.year and video.year == self.year:
             matches.add('year')
         # release_group
         if video.release_group and self.version and video.release_group.lower() in self.version.lower():

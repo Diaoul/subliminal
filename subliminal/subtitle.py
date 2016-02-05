@@ -210,7 +210,7 @@ def guess_matches(video, guess, partial=False):
         if video.year and 'year' in guess and guess['year'] == video.year:
             matches.add('year')
         # count "no year" as an information
-        if not partial and video.year is None and 'year' not in guess:
+        if not partial and video.original_series and 'year' not in guess:
             matches.add('year')
     elif isinstance(video, Movie):
         # year

@@ -50,7 +50,7 @@ class PodnapisiSubtitle(Subtitle):
             if video.series and sanitize(self.title) == sanitize(video.series):
                 matches.add('series')
             # year
-            if video.year == self.year:
+            if video.original_series and self.year is None or video.year and video.year == self.year:
                 matches.add('year')
             # season
             if video.season and self.season == video.season:

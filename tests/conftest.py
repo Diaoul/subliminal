@@ -54,7 +54,7 @@ def episodes():
             'dallas_s01e03':
             Episode('Dallas.S01E03.mkv', 'Dallas', 1, 3),
             'dallas_2012_s01e03':
-            Episode('Dallas.2012.S01E03.mkv', 'Dallas', 1, 3, year=2012),
+            Episode('Dallas.2012.S01E03.mkv', 'Dallas', 1, 3, year=2012, original_series=False),
             'marvels_agents_of_shield_s02e06':
             Episode('Marvels.Agents.of.S.H.I.E.L.D.S02E06.720p.HDTV.x264-KILLERS.mkv',
                     'Marvel\'s Agents of S.H.I.E.L.D.', 2, 6, format='HDTV', release_group='KILLERS', resolution='720p',

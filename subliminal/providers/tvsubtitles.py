@@ -53,7 +53,7 @@ class TVsubtitlesSubtitle(Subtitle):
         if video.episode and self.episode == video.episode:
             matches.add('episode')
         # year
-        if self.year == video.year:
+        if video.original_series and self.year is None or video.year and video.year == self.year:
             matches.add('year')
         # release_group
         if video.release_group and self.release and video.release_group.lower() in self.release.lower():

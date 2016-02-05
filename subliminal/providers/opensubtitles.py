@@ -57,7 +57,7 @@ class OpenSubtitlesSubtitle(Subtitle):
             if video.series and sanitize(self.series_name) == sanitize(video.series):
                 matches.add('series')
             # year
-            if video.year == self.movie_year:
+            if video.original_series and self.movie_year is None or video.year and video.year == self.movie_year:
                 matches.add('year')
             # season
             if video.season and self.series_season == video.season:

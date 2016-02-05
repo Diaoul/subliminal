@@ -129,11 +129,13 @@ class Episode(Video):
     :param int episode: episode number of the episode.
     :param str title: title of the episode.
     :param int year: year of the series.
+    :param bool original_series: whether the series is the first with this name.
     :param int tvdb_id: TVDB id of the episode.
     :param \*\*kwargs: additional parameters for the :class:`Video` constructor.
 
     """
-    def __init__(self, name, series, season, episode, title=None, year=None, tvdb_id=None, **kwargs):
+    def __init__(self, name, series, season, episode, title=None, year=None, original_series=True, tvdb_id=None,
+                 **kwargs):
         super(Episode, self).__init__(name, **kwargs)
 
         #: Series of the episode
@@ -151,6 +153,9 @@ class Episode(Video):
         #: Year of series
         self.year = year
 
+        #: The series is the first with this name
+        self.original_series = original_series
+
         #: TVDB id of the episode
         self.tvdb_id = tvdb_id
 
@@ -162,10 +167,10 @@ class Episode(Video):
         if 'title' not in guess or 'season' not in guess or 'episode' not in guess:
             raise ValueError('Insufficient data to process the guess')
 
-        return cls(name, guess['title'], guess['season'], guess['episode'], format=guess.get('format'),
+        return cls(name, guess['title'], guess['season'], guess['episode'], title=guess.get('episode_title'),
+                   year=guess.get('year'), format=guess.get('format'), original_series='year' not in guess,
                    release_group=guess.get('release_group'), resolution=guess.get('screen_size'),
-                   video_codec=guess.get('video_codec'), audio_codec=guess.get('audio_codec'),
-                   title=guess.get('episode_title'), year=guess.get('year'))
+                   video_codec=guess.get('video_codec'), audio_codec=guess.get('audio_codec'))
 
     @classmethod
     def fromname(cls, name):

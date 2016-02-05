@@ -11,8 +11,8 @@ try:
 except ImportError:
     from mock import Mock
 
-from subliminal.video import (Episode, Movie, Video, hash_opensubtitles, hash_thesubdb, scan_video, scan_videos,
-                              search_external_subtitles)
+from subliminal.video import (Episode, Movie, Video, hash_opensubtitles, hash_thesubdb, sanitize, scan_video,
+                              scan_videos, search_external_subtitles)
 
 
 def timestamp(date):
@@ -385,3 +385,7 @@ def test_hash_thesubdb(mkv):
 def test_hash_thesubdb_too_small(tmpdir):
     path = tmpdir.ensure('test_too_small.mkv')
     assert hash_thesubdb(str(path)) is None
+
+
+def test_sanitize():
+    assert sanitize('Marvel\'s Agents of S.H.I.E.L.D.') == 'marvels agents of shield'

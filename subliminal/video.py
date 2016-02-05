@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 import hashlib
 import logging
 import os
+import re
 import struct
 
 from babelfish import Error as BabelfishError, Language
@@ -39,7 +40,7 @@ class Video(object):
     :param int imdb_id: IMDb id of the video.
     :param dict hashes: hashes of the video file by provider names.
     :param int size: size of the video file in bytes.
-    :param set subtitle_languages: existing subtitle languages
+    :param set subtitle_languages: existing subtitle languages.
 
     """
     def __init__(self, name, format=None, release_group=None, resolution=None, video_codec=None, audio_codec=None,
@@ -128,7 +129,7 @@ class Episode(Video):
     :param int episode: episode number of the episode.
     :param str title: title of the episode.
     :param int year: year of the series.
-    :param int tvdb_id: TVD B id of the episode.
+    :param int tvdb_id: TVDB id of the episode.
     :param \*\*kwargs: additional parameters for the :class:`Video` constructor.
 
     """
@@ -500,3 +501,28 @@ def hash_napiprojekt(video_path):
     with open(video_path, 'rb') as f:
         data = f.read(readsize)
     return hashlib.md5(data).hexdigest()
+
+
+def sanitize(string):
+    """Sanitize a string to strip special characters.
+
+    :param str string: the string to sanitize.
+    :return: the sanitized string.
+    :rtype: str
+
+    """
+    # only deal with strings
+    if string is None:
+        return
+
+    # replace some characters with one space
+    string = re.sub('[-:\(\)]', ' ', string)
+
+    # remove some characters
+    string = re.sub('[\'\.]', '', string)
+
+    # replace multiple spaces with one
+    string = re.sub('\s+', ' ', string)
+
+    # strip and lower case
+    return string.strip().lower()

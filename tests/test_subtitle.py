@@ -3,7 +3,7 @@ import os
 
 from babelfish import Language
 
-from subliminal.subtitle import Subtitle, fix_line_ending, get_subtitle_path, guess_matches, sanitized_string_equal
+from subliminal.subtitle import Subtitle, fix_line_ending, get_subtitle_path, guess_matches
 
 
 def test_subtitle_text():
@@ -67,10 +67,6 @@ def test_get_subtitle_path_language(movies):
 def test_get_subtitle_path_language_undefined(movies):
     video = movies['man_of_steel']
     assert get_subtitle_path(video.name, Language('und')) == os.path.splitext(video.name)[0] + '.srt'
-
-
-def test_sanitized_string_equal():
-    assert sanitized_string_equal('Marvel\'s Agents of S.H.I.E.L.D.', 'marvels agents of shield') is True
 
 
 def test_guess_matches_movie(movies):

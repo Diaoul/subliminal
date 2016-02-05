@@ -12,8 +12,8 @@ from . import ParserBeautifulSoup, Provider
 from .. import __short_version__
 from ..cache import EPISODE_EXPIRATION_TIME, SHOW_EXPIRATION_TIME, region
 from ..exceptions import ProviderError
-from ..subtitle import Subtitle, fix_line_ending, guess_matches, sanitized_string_equal
-from ..video import Episode
+from ..subtitle import Subtitle, fix_line_ending, guess_matches
+from ..video import Episode, sanitize
 
 logger = logging.getLogger(__name__)
 
@@ -44,7 +44,7 @@ class TVsubtitlesSubtitle(Subtitle):
         matches = set()
 
         # series
-        if video.series and sanitized_string_equal(self.series, video.series):
+        if video.series and sanitize(self.series) == sanitize(video.series):
             matches.add('series')
         # season
         if video.season and self.season == video.season:

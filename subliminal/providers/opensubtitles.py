@@ -12,8 +12,8 @@ from six.moves.xmlrpc_client import ServerProxy
 from . import Provider, TimeoutSafeTransport
 from .. import __short_version__
 from ..exceptions import AuthenticationError, ConfigurationError, DownloadLimitExceeded, ProviderError
-from ..subtitle import Subtitle, fix_line_ending, guess_matches, sanitized_string_equal
-from ..video import Episode, Movie
+from ..subtitle import Subtitle, fix_line_ending, guess_matches
+from ..video import Episode, Movie, sanitize
 
 logger = logging.getLogger(__name__)
 
@@ -54,7 +54,7 @@ class OpenSubtitlesSubtitle(Subtitle):
         # episode
         if isinstance(video, Episode) and self.movie_kind == 'episode':
             # series
-            if video.series and sanitized_string_equal(self.series_name, video.series):
+            if video.series and sanitize(self.series_name) == sanitize(video.series):
                 matches.add('series')
             # year
             if video.year == self.movie_year:
@@ -66,7 +66,7 @@ class OpenSubtitlesSubtitle(Subtitle):
             if video.episode and self.series_episode == video.episode:
                 matches.add('episode')
             # title
-            if video.title and sanitized_string_equal(self.series_title, video.title):
+            if video.title and sanitize(self.series_title) == sanitize(video.title):
                 matches.add('title')
             # guess
             matches |= guess_matches(video, guessit(self.movie_release_name, {'type': 'episode'}))
@@ -79,7 +79,7 @@ class OpenSubtitlesSubtitle(Subtitle):
         # movie
         elif isinstance(video, Movie) and self.movie_kind == 'movie':
             # title
-            if video.title and sanitized_string_equal(self.movie_name, video.title):
+            if video.title and sanitize(self.movie_name) == sanitize(video.title):
                 matches.add('title')
             # year
             if video.year and self.movie_year == video.year:

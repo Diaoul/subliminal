@@ -201,7 +201,7 @@ def test_search_external_subtitles_no_directory(movies, tmpdir, monkeypatch):
     assert subtitles == expected_subtitles
 
 
-def test_search_external_subtitles_in_directory(episodes, tmpdir, monkeypatch):
+def test_search_external_subtitles_in_directory(episodes, tmpdir):
     video_name = episodes['marvels_agents_of_shield_s02e06'].name
     video_root = os.path.splitext(video_name)[0]
     tmpdir.ensure('tvshows', video_name)

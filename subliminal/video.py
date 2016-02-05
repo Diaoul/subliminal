@@ -376,14 +376,12 @@ def scan_video(path, subtitles=True, embedded_subtitles=True, subtitles_dir=None
     return video
 
 
-def scan_videos(path, subtitles=True, embedded_subtitles=True, subtitles_dir=None, age=None):
+def scan_videos(path, age=None, **kwargs):
     """Scan `path` for videos and their subtitles.
 
     :param str path: existing directory path to scan.
-    :param bool subtitles: scan for subtitles with the same name.
-    :param bool embedded_subtitles: scan for embedded subtitles.
-    :param str subtitles_dir: directory to search for subtitles.
     :param datetime.timedelta age: maximum age of the video.
+    :param \*\*kwargs: parameters for the :func:`scan_video` function.
     :return: the scanned videos.
     :rtype: list of :class:`Video`
 
@@ -433,8 +431,7 @@ def scan_videos(path, subtitles=True, embedded_subtitles=True, subtitles_dir=Non
 
             # scan video
             try:
-                video = scan_video(filepath, subtitles=subtitles, embedded_subtitles=embedded_subtitles,
-                                   subtitles_dir=subtitles_dir)
+                video = scan_video(filepath, **kwargs)
             except ValueError:  # pragma: no cover
                 logger.exception('Error scanning video')
                 continue

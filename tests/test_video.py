@@ -345,7 +345,7 @@ def test_scan_videos(movies, tmpdir, monkeypatch):
     monkeypatch.chdir(str(tmpdir))
     videos = scan_videos('movies')
 
-    kwargs = dict(subtitles=True, embedded_subtitles=True, subtitles_dir=None)
+    kwargs = dict()
     calls = [((os.path.join('movies', movies['man_of_steel'].name),), kwargs),
              ((os.path.join('movies', movies['enders_game'].name),), kwargs)]
     assert len(videos) == len(calls)
@@ -362,7 +362,7 @@ def test_scan_videos_age(movies, tmpdir, monkeypatch):
     monkeypatch.chdir(str(tmpdir))
     videos = scan_videos('movies', age=timedelta(days=7))
 
-    kwargs = dict(subtitles=True, embedded_subtitles=True, subtitles_dir=None)
+    kwargs = dict()
     calls = [((os.path.join('movies', movies['man_of_steel'].name),), kwargs)]
     assert len(videos) == len(calls)
     assert mock_scan_video.call_count == len(calls)

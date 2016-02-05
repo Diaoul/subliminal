@@ -3,10 +3,6 @@ import datetime
 
 from dogpile.cache import make_region
 
-
-#: Subliminal's cache version
-CACHE_VERSION = 1
-
 #: Expiration time for show caching
 SHOW_EXPIRATION_TIME = datetime.timedelta(weeks=3).total_seconds()
 

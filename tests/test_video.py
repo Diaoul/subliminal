@@ -345,12 +345,66 @@ def test_scan_videos(movies, tmpdir, monkeypatch):
     monkeypatch.chdir(str(tmpdir))
     videos = scan_videos('movies')
 
-    kwargs = dict(subtitles=True, embedded_subtitles=True, subtitles_dir=None)
+    kwargs = dict(subtitles=True, embedded_subtitles=True, subtitles_dir=None, in_archive=False)
     calls = [((os.path.join('movies', movies['man_of_steel'].name),), kwargs),
              ((os.path.join('movies', movies['enders_game'].name),), kwargs)]
     assert len(videos) == len(calls)
     assert mock_scan_video.call_count == len(calls)
     mock_scan_video.assert_has_calls(calls, any_order=True)
+
+
+def test_scan_videos_in_rar(movies, tmpdir, monkeypatch):
+    tmpdir.ensure('rar-movies', os.path.splitext(movies['enders_game'].name)[0] + '.rar')
+    tmpdir.ensure('rar-movies', movies['man_of_steel'].name)
+
+    mock_scan_video = Mock()
+    monkeypatch.setattr('subliminal.video.scan_video', mock_scan_video)
+    monkeypatch.setattr('rarfile.RarFile._parse', Mock())
+    monkeypatch.setattr('rarfile.RarFile.namelist', lambda x: [movies['enders_game'].name, "anotherfile.nfo"])
+
+    monkeypatch.chdir(str(tmpdir))
+    videos = scan_videos('rar-movies', scan_archives=True)
+    kwargs_rar = dict(subtitles=True, embedded_subtitles=True, subtitles_dir=None, in_archive=True)
+    kwargs_norar = dict(subtitles=True, embedded_subtitles=True, subtitles_dir=None, in_archive=False)
+    calls = [((os.path.join('rar-movies', movies['enders_game'].name),), kwargs_rar),
+             ((os.path.join('rar-movies', movies['man_of_steel'].name),), kwargs_norar)]
+
+    assert len(videos) == len(calls)
+    mock_scan_video.assert_has_calls(calls)
+
+
+def test_dont_scan_videos_in_rar(movies, tmpdir, monkeypatch):
+    tmpdir.ensure('rar-movies', os.path.splitext(movies['enders_game'].name)[0] + '.rar')
+    tmpdir.ensure('rar-movies', movies['man_of_steel'].name)
+
+    mock_scan_video = Mock()
+    monkeypatch.setattr('subliminal.video.scan_video', mock_scan_video)
+    monkeypatch.setattr('rarfile.RarFile._parse', Mock())
+    monkeypatch.setattr('rarfile.RarFile.namelist', lambda x: [movies['enders_game'].name, "anotherfile.nfo"])
+
+    monkeypatch.chdir(str(tmpdir))
+    videos = scan_videos('rar-movies', scan_archives=False)
+    kwargs = dict(subtitles=True, embedded_subtitles=True, subtitles_dir=None, in_archive=False)
+    calls = [((os.path.join('rar-movies', movies['man_of_steel'].name),), kwargs)]
+
+    assert len(videos) == len(calls)
+    mock_scan_video.assert_has_calls(calls)
+
+
+def test_scan_videos_in_corrupt_rar(movies, tmpdir, monkeypatch):
+    tmpdir.ensure('rar-movies', os.path.splitext(movies['enders_game'].name)[0] + '.rar')
+    tmpdir.ensure('rar-movies', movies['man_of_steel'].name)
+
+    mock_scan_video = Mock()
+    monkeypatch.setattr('subliminal.video.scan_video', mock_scan_video)
+
+    monkeypatch.chdir(str(tmpdir))
+    videos = scan_videos('rar-movies', scan_archives=True)
+    kwargs = dict(subtitles=True, embedded_subtitles=True, subtitles_dir=None, in_archive=False)
+    calls = [((os.path.join('rar-movies', movies['man_of_steel'].name),), kwargs)]
+
+    assert len(videos) == len(calls)
+    mock_scan_video.assert_has_calls(calls)
 
 
 def test_scan_videos_age(movies, tmpdir, monkeypatch):
@@ -362,7 +416,7 @@ def test_scan_videos_age(movies, tmpdir, monkeypatch):
     monkeypatch.chdir(str(tmpdir))
     videos = scan_videos('movies', age=timedelta(days=7))
 
-    kwargs = dict(subtitles=True, embedded_subtitles=True, subtitles_dir=None)
+    kwargs = dict(subtitles=True, embedded_subtitles=True, subtitles_dir=None, in_archive=False)
     calls = [((os.path.join('movies', movies['man_of_steel'].name),), kwargs)]
     assert len(videos) == len(calls)
     assert mock_scan_video.call_count == len(calls)

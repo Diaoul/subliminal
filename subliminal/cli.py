@@ -271,11 +271,12 @@ def cache(ctx, clear_subliminal):
 @click.option('-m', '--min-score', type=click.IntRange(0, 100), default=0, help='Minimum score for a subtitle '
               'to be downloaded (0 to 100).')
 @click.option('-w', '--max-workers', type=click.IntRange(1, 50), default=None, help='Maximum number of threads to use.')
+@click.option('--scan-archives', is_flag=True, default=False, help='Scan archives for videos (Supported formats: Rar)')
 @click.option('-v', '--verbose', count=True, help='Increase verbosity.')
 @click.argument('path', type=click.Path(), required=True, nargs=-1)
 @click.pass_obj
-def download(obj, provider, language, age, directory, encoding, single, force, hearing_impaired, min_score, max_workers,
-             verbose, path):
+def download(obj, provider, language, age, directory, encoding, single, force, hearing_impaired,
+             min_score, max_workers, scan_archives, verbose, path):
     """Download best subtitles.
 
     PATH can be an directory containing videos, a video file path or a video file name. It can be used multiple times.
@@ -310,7 +311,7 @@ def download(obj, provider, language, age, directory, encoding, single, force, h
             if os.path.isdir(p):
                 try:
                     scanned_videos = scan_videos(p, subtitles=not force, embedded_subtitles=not force,
-                                                 subtitles_dir=directory, age=age)
+                                                 subtitles_dir=directory, age=age, scan_archives=scan_archives)
                 except:
                     logger.exception('Unexpected error while collecting directory path %s', p)
                     errored_paths.append(p)

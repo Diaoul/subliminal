@@ -9,6 +9,7 @@ import struct
 from babelfish import Error as BabelfishError, Language
 from enzyme import MKV
 from guessit import guessit
+from rarfile import RarFile, NotRarFile
 
 logger = logging.getLogger(__name__)
 
@@ -20,6 +21,9 @@ VIDEO_EXTENSIONS = ('.3g2', '.3gp', '.3gp2', '.3gpp', '.60d', '.ajp', '.asf', '.
                     '.mpe', '.mpeg', '.mpg', '.mpv', '.mpv2', '.mxf', '.nsv', '.nut', '.ogg', '.ogm', '.omf', '.ps',
                     '.qt', '.ram', '.rm', '.rmvb', '.swf', '.ts', '.vfw', '.vid', '.video', '.viv', '.vivo', '.vob',
                     '.vro', '.wm', '.wmv', '.wmx', '.wrap', '.wvx', '.wx', '.x264', '.xvid')
+
+#: Supported archive extensions
+ARCHIVE_EXTENSIONS = ('.rar')
 
 #: Subtitle extensions
 SUBTITLE_EXTENSIONS = ('.srt', '.sub', '.smi', '.txt', '.ssa', '.ass', '.mpl')
@@ -40,6 +44,7 @@ class Video(object):
     :param dict hashes: hashes of the video file by provider names.
     :param int size: size of the video file in bytes.
     :param set subtitle_languages: existing subtitle languages
+    :param str in_archive: video resides in an archive, name of parent for age computation
 
     """
     def __init__(self, name, format=None, release_group=None, resolution=None, video_codec=None, audio_codec=None,
@@ -259,19 +264,20 @@ def search_external_subtitles(path, directory=None):
     return subtitles
 
 
-def scan_video(path, subtitles=True, embedded_subtitles=True, subtitles_dir=None):
+def scan_video(path, subtitles=True, embedded_subtitles=True, subtitles_dir=None, in_archive=False):
     """Scan a video and its subtitle languages from a video `path`.
 
     :param str path: existing path to the video.
     :param bool subtitles: scan for subtitles with the same name.
     :param bool embedded_subtitles: scan for embedded subtitles.
     :param str subtitles_dir: directory to search for subtitles.
+    :param bool in_archive: the file is inside an archive
     :return: the scanned video.
     :rtype: :class:`Video`
 
     """
     # check for non-existing path
-    if not os.path.exists(path):
+    if not in_archive and not os.path.exists(path):
         raise ValueError('Path does not exist')
 
     # check video extension
@@ -285,15 +291,18 @@ def scan_video(path, subtitles=True, embedded_subtitles=True, subtitles_dir=None
     video = Video.fromguess(path, guessit(path))
 
     # size and hashes
-    video.size = os.path.getsize(path)
-    if video.size > 10485760:
-        logger.debug('Size is %d', video.size)
-        video.hashes['opensubtitles'] = hash_opensubtitles(path)
-        video.hashes['thesubdb'] = hash_thesubdb(path)
-        video.hashes['napiprojekt'] = hash_napiprojekt(path)
-        logger.debug('Computed hashes %r', video.hashes)
+    if not in_archive:
+        video.size = os.path.getsize(path)
+        if video.size > 10485760:
+            logger.debug('Size is %d', video.size)
+            video.hashes['opensubtitles'] = hash_opensubtitles(path)
+            video.hashes['thesubdb'] = hash_thesubdb(path)
+            video.hashes['napiprojekt'] = hash_napiprojekt(path)
+            logger.debug('Computed hashes %r', video.hashes)
+        else:
+            logger.warning('Size is lower than 10MB: hashes not computed')
     else:
-        logger.warning('Size is lower than 10MB: hashes not computed')
+        logger.warning('Hashes not computed for file in archive')
 
     # external subtitles
     if subtitles:
@@ -301,7 +310,7 @@ def scan_video(path, subtitles=True, embedded_subtitles=True, subtitles_dir=None
 
     # video metadata with enzyme
     try:
-        if filename.endswith('.mkv'):
+        if not in_archive and filename.endswith('.mkv'):
             with open(path, 'rb') as f:
                 mkv = MKV(f)
 
@@ -376,7 +385,7 @@ def scan_video(path, subtitles=True, embedded_subtitles=True, subtitles_dir=None
     return video
 
 
-def scan_videos(path, subtitles=True, embedded_subtitles=True, subtitles_dir=None, age=None):
+def scan_videos(path, subtitles=True, embedded_subtitles=True, subtitles_dir=None, age=None, scan_archives=False):
     """Scan `path` for videos and their subtitles.
 
     :param str path: existing directory path to scan.
@@ -384,6 +393,7 @@ def scan_videos(path, subtitles=True, embedded_subtitles=True, subtitles_dir=Non
     :param bool embedded_subtitles: scan for embedded subtitles.
     :param str subtitles_dir: directory to search for subtitles.
     :param datetime.timedelta age: maximum age of the video.
+    :param bool scan_archives: scan files in archives
     :return: the scanned videos.
     :rtype: list of :class:`Video`
 
@@ -408,9 +418,17 @@ def scan_videos(path, subtitles=True, embedded_subtitles=True, subtitles_dir=Non
                 dirnames.remove(dirname)
 
         # scan for videos
-        for filename in filenames:
+        _scan_videos_in_path(videos, dirpath, filenames, subtitles,
+                             embedded_subtitles, subtitles_dir, age, scan_archives)
+    return videos
+
+
+def _scan_videos_in_path(videos, dirpath, filenames, subtitles, embedded_subtitles,
+                         subtitles_dir, age, scan_archives, path_in_archive=False):
+    for filename in filenames:
             # filter on videos
-            if not filename.endswith(VIDEO_EXTENSIONS):
+            if not (filename.endswith(VIDEO_EXTENSIONS) or
+                    (not path_in_archive and filename.endswith(ARCHIVE_EXTENSIONS) and scan_archives)):
                 continue
 
             # skip hidden files
@@ -427,21 +445,32 @@ def scan_videos(path, subtitles=True, embedded_subtitles=True, subtitles_dir=Non
                 continue
 
             # skip old files
-            if age and datetime.utcnow() - datetime.utcfromtimestamp(os.path.getmtime(filepath)) > age:
+            if not path_in_archive \
+                    and age and datetime.utcnow() - datetime.utcfromtimestamp(os.path.getmtime(filepath)) > age:
                 logger.debug('Skipping old file %r in %r', filename, dirpath)
                 continue
 
+            # scan archive recursively
+            if not path_in_archive and scan_archives and filename.endswith(ARCHIVE_EXTENSIONS):
+                try:
+                    rar_file = RarFile(filepath)
+                    rar_content = rar_file.namelist()
+                    logger.debug('Scanning files in %r', filepath)
+                    _scan_videos_in_path(videos, dirpath, rar_content, subtitles, embedded_subtitles,
+                                         subtitles_dir, age, scan_archives, path_in_archive=True)
+
+                except NotRarFile:
+                    logger.exception('Error scanning %r, not a valid rar-file', filepath)
+
             # scan video
-            try:
-                video = scan_video(filepath, subtitles=subtitles, embedded_subtitles=embedded_subtitles,
-                                   subtitles_dir=subtitles_dir)
-            except ValueError:  # pragma: no cover
-                logger.exception('Error scanning video')
-                continue
-
-            videos.append(video)
-
-    return videos
+            else:
+                try:
+                    video = scan_video(filepath, subtitles=subtitles, embedded_subtitles=embedded_subtitles,
+                                       subtitles_dir=subtitles_dir, in_archive=path_in_archive)
+                except ValueError:  # pragma: no cover
+                    logger.exception('Error scanning video')
+                    return
+                videos.append(video)
 
 
 def hash_opensubtitles(video_path):

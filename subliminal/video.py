@@ -418,17 +418,10 @@ def scan_videos(path, subtitles=True, embedded_subtitles=True, subtitles_dir=Non
                 dirnames.remove(dirname)
 
         # scan for videos
-        _scan_videos_in_path(videos, dirpath, filenames, subtitles,
-                             embedded_subtitles, subtitles_dir, age, scan_archives)
-    return videos
-
-
-def _scan_videos_in_path(videos, dirpath, filenames, subtitles, embedded_subtitles,
-                         subtitles_dir, age, scan_archives, path_in_archive=False):
-    for filename in filenames:
+        for filename in filenames:
             # filter on videos
             if not (filename.endswith(VIDEO_EXTENSIONS) or
-                    (not path_in_archive and filename.endswith(ARCHIVE_EXTENSIONS) and scan_archives)):
+                    (filename.endswith(ARCHIVE_EXTENSIONS) and scan_archives)):
                 continue
 
             # skip hidden files
@@ -445,20 +438,24 @@ def _scan_videos_in_path(videos, dirpath, filenames, subtitles, embedded_subtitl
                 continue
 
             # skip old files
-            if not path_in_archive \
-                    and age and datetime.utcnow() - datetime.utcfromtimestamp(os.path.getmtime(filepath)) > age:
+            if age and datetime.utcnow() - datetime.utcfromtimestamp(os.path.getmtime(filepath)) > age:
                 logger.debug('Skipping old file %r in %r', filename, dirpath)
                 continue
 
-            # scan archive recursively
-            if not path_in_archive and scan_archives and filename.endswith(ARCHIVE_EXTENSIONS):
+            # scan files in archive
+            if scan_archives and filename.endswith(ARCHIVE_EXTENSIONS):
                 try:
                     rar_file = RarFile(filepath)
                     rar_content = rar_file.namelist()
                     logger.debug('Scanning files in %r', filepath)
-                    _scan_videos_in_path(videos, dirpath, rar_content, subtitles, embedded_subtitles,
-                                         subtitles_dir, age, scan_archives, path_in_archive=True)
-
+                    for name in rar_content:
+                        filepath = os.path.join(dirpath, name)
+                        try:
+                            video = scan_video(filepath, subtitles=subtitles, embedded_subtitles=embedded_subtitles,
+                                               subtitles_dir=subtitles_dir, in_archive=True)
+                            videos.append(video)
+                        except ValueError:
+                            pass  #: only raised here if file isn't a video file
                 except NotRarFile:
                     logger.exception('Error scanning %r, not a valid rar-file', filepath)
 
@@ -466,11 +463,12 @@ def _scan_videos_in_path(videos, dirpath, filenames, subtitles, embedded_subtitl
             else:
                 try:
                     video = scan_video(filepath, subtitles=subtitles, embedded_subtitles=embedded_subtitles,
-                                       subtitles_dir=subtitles_dir, in_archive=path_in_archive)
+                                       subtitles_dir=subtitles_dir)
                 except ValueError:  # pragma: no cover
                     logger.exception('Error scanning video')
                     return
                 videos.append(video)
+    return videos
 
 
 def hash_opensubtitles(video_path):

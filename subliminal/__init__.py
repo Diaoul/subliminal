@@ -4,7 +4,7 @@ __short_version__ = '1.2'
 __version__ = __short_version__ + '.dev0'
 __author__ = 'Antoine Bertin'
 __license__ = 'MIT'
-__copyright__ = 'Copyright 2015, Antoine Bertin'
+__copyright__ = 'Copyright 2016, Antoine Bertin'
 
 import logging
 

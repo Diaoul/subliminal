@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 __title__ = 'subliminal'
-__short_version__ = '1.2'
+__short_version__ = '2.0'
 __version__ = __short_version__ + '.dev0'
 __author__ = 'Antoine Bertin'
 __license__ = 'MIT'

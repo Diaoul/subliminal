@@ -2,21 +2,30 @@ interactions:
 - request:
     body: null
     headers:
-      User-Agent: ['SubDB/1.0 (subliminal/1.1; https://github.com/Diaoul/subliminal)']
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: ['SubDB/1.0 (subliminal/2.0; https://github.com/Diaoul/subliminal)']
     method: GET
     uri: http://api.thesubdb.com/?action=search&hash=9dbbfb7ba81c9a6237237dae8589fccc
   response:
-    body: {string: !!python/unicode 'en,es,fr,pt'}
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA0vN00kt1kkr0ikoAQBr9k5KCwAAAA==
     headers:
       connection: [keep-alive]
+      content-encoding: [gzip]
       content-type: [text/html]
-      date: ['Thu, 29 Oct 2015 22:52:30 GMT']
+      date: ['Tue, 09 Feb 2016 16:18:41 GMT']
       server: [nginx/1.6.0]
     status: {code: 200, message: OK}
 - request:
     body: null
     headers:
-      User-Agent: ['SubDB/1.0 (subliminal/1.1; https://github.com/Diaoul/subliminal)']
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: ['SubDB/1.0 (subliminal/2.0; https://github.com/Diaoul/subliminal)']
     method: GET
     uri: http://api.thesubdb.com/?action=download&hash=9dbbfb7ba81c9a6237237dae8589fccc&language=en
   response:
@@ -482,7 +491,7 @@ interactions:
       content-disposition: [attachment; filename=f18de9888230bcd71be8bc7be3add167.srt]
       content-length: ['30847']
       content-type: [text/plain]
-      date: ['Thu, 29 Oct 2015 22:52:30 GMT']
+      date: ['Tue, 09 Feb 2016 16:18:41 GMT']
       etag: ['"5261a4b8-787f"']
       last-modified: ['Fri, 18 Oct 2013 21:14:32 GMT']
       server: [nginx/1.6.0]

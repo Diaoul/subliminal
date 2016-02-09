@@ -82,7 +82,7 @@ class SubsCenterProvider(Provider):
 
     def initialize(self):
         self.session = Session()
-        self.session.headers = {'User-Agent': 'Subliminal/%s' % __short_version__}
+        self.session.headers['User-Agent'] = 'Subliminal/%s' % __short_version__
 
         # login
         if self.username is not None and self.password is not None:

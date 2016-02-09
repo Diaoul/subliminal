@@ -19,45 +19,39 @@ from .subtitle import get_subtitle_path
 logger = logging.getLogger(__name__)
 
 
-class ProviderManager(ExtensionManager):
-    """Manager for providers based on :class:`~stevedore.extension.ExtensionManager`.
+class RegistrableExtensionManager(ExtensionManager):
+    """:class:~stevedore.extensions.ExtensionManager` with support for registration.
 
-    It allows loading of internal providers without setup and registering/unregistering additional providers.
+    It allows loading of internal extensions without setup and registering/unregistering additional extensions.
 
     Loading is done in this order:
 
-    * Entry point providers
-    * Internal providers
-    * Registered providers
+    * Entry point extensions
+    * Internal extensions
+    * Registered extensions
 
     """
-    internal_providers = [
-      'addic7ed = subliminal.providers.addic7ed:Addic7edProvider',
-      'opensubtitles = subliminal.providers.opensubtitles:OpenSubtitlesProvider',
-      'podnapisi = subliminal.providers.podnapisi:PodnapisiProvider',
-      'subscenter = subliminal.providers.subscenter:SubsCenterProvider',
-      'thesubdb = subliminal.providers.thesubdb:TheSubDBProvider',
-      'tvsubtitles = subliminal.providers.tvsubtitles:TVsubtitlesProvider'
-    ]
+    def __init__(self, namespace, internal_extensions):
+        #: Registered extensions with entry point syntax
+        self.registered_extensions = []
 
-    def __init__(self):
-        #: Registered providers with entry point syntax
-        self.registered_providers = []
+        #: Internal extensions with entry point syntax
+        self.internal_extensions = internal_extensions
 
-        super(ProviderManager, self).__init__('subliminal.providers')
+        super(RegistrableExtensionManager, self).__init__(namespace)
 
     def _find_entry_points(self, namespace):
-        # default entry points
-        eps = super(ProviderManager, self)._find_entry_points(namespace)
+        # default extensions
+        eps = super(RegistrableExtensionManager, self)._find_entry_points(namespace)
 
-        # internal entry points
-        for iep in self.internal_providers:
+        # internal extensions
+        for iep in self.internal_extensions:
             ep = EntryPoint.parse(iep)
             if ep.name not in [e.name for e in eps]:
                 eps.append(ep)
 
-        # registered entry points
-        for rep in self.registered_providers:
+        # registered extensions
+        for rep in self.registered_extensions:
             ep = EntryPoint.parse(rep)
             if ep.name not in [e.name for e in eps]:
                 eps.append(ep)
@@ -65,24 +59,24 @@ class ProviderManager(ExtensionManager):
         return eps
 
     def register(self, entry_point):
-        """Register a provider
+        """Register an extension
 
-        :param str entry_point: provider to register (entry point syntax)
+        :param str entry_point: extension to register (entry point syntax)
         :raise: ValueError if already registered
 
         """
-        if entry_point in self.registered_providers:
-            raise ValueError('Entry point already registered')
+        if entry_point in self.registered_extensions:
+            raise ValueError('Extension already registered')
 
         ep = EntryPoint.parse(entry_point)
         if ep.name in self.names():
-            raise ValueError('A provider with the same name already exist')
+            raise ValueError('An extension with the same name already exist')
 
         ext = self._load_one_plugin(ep, False, (), {}, False)
         self.extensions.append(ext)
         if self._extensions_by_name is not None:
             self._extensions_by_name[ext.name] = ext
-        self.registered_providers.insert(0, entry_point)
+        self.registered_extensions.insert(0, entry_point)
 
     def unregister(self, entry_point):
         """Unregister a provider
@@ -90,11 +84,11 @@ class ProviderManager(ExtensionManager):
         :param str entry_point: provider to unregister (entry point syntax)
 
         """
-        if entry_point not in self.registered_providers:
-            raise ValueError('Entry point not registered')
+        if entry_point not in self.registered_extensions:
+            raise ValueError('Extension not registered')
 
         ep = EntryPoint.parse(entry_point)
-        self.registered_providers.remove(entry_point)
+        self.registered_extensions.remove(entry_point)
         if self._extensions_by_name is not None:
             del self._extensions_by_name[ep.name]
         for i, ext in enumerate(self.extensions):
@@ -102,7 +96,20 @@ class ProviderManager(ExtensionManager):
                 del self.extensions[i]
                 break
 
-provider_manager = ProviderManager()
+
+provider_manager = RegistrableExtensionManager('subliminal.providers', [
+    'addic7ed = subliminal.providers.addic7ed:Addic7edProvider',
+    'opensubtitles = subliminal.providers.opensubtitles:OpenSubtitlesProvider',
+    'podnapisi = subliminal.providers.podnapisi:PodnapisiProvider',
+    'subscenter = subliminal.providers.subscenter:SubsCenterProvider',
+    'thesubdb = subliminal.providers.thesubdb:TheSubDBProvider',
+    'tvsubtitles = subliminal.providers.tvsubtitles:TVsubtitlesProvider'
+])
+
+refiner_manager = RegistrableExtensionManager('subliminal.refiners', [
+    'tvdb = subliminal.refiners.tvdb:refine',
+    'omdb = subliminal.refiners.omdb:refine'
+])
 
 
 class ProviderPool(object):

@@ -12,8 +12,9 @@ except ImportError:
     from mock import Mock
 from vcr import VCR
 
-from subliminal import (AsyncProviderPool, ProviderManager, ProviderPool, check_video, download_best_subtitles,
-                        download_subtitles, list_subtitles, provider_manager, save_subtitles)
+from subliminal.core import (AsyncProviderPool, ProviderPool, RegistrableExtensionManager, check_video,
+                             download_best_subtitles, download_subtitles, list_subtitles, provider_manager,
+                             save_subtitles)
 from subliminal.providers.addic7ed import Addic7edSubtitle
 from subliminal.providers.thesubdb import TheSubDBSubtitle
 from subliminal.providers.tvsubtitles import TVsubtitlesSubtitle
@@ -36,21 +37,42 @@ def mock_providers(monkeypatch):
         monkeypatch.setattr(provider.plugin, 'terminate', Mock())
 
 
-def test_provider_manager_internal_providers():
-    manager = ProviderManager()
+def test_registrable_extension_manager_internal_extension():
+    manager = RegistrableExtensionManager('subliminal.providers', [
+        'addic7ed = subliminal.providers.addic7ed:Addic7edProvider',
+        'opensubtitles = subliminal.providers.opensubtitles:OpenSubtitlesProvider',
+        'podnapisi = subliminal.providers.podnapisi:PodnapisiProvider',
+        'subscenter = subliminal.providers.subscenter:SubsCenterProvider',
+        'thesubdb = subliminal.providers.thesubdb:TheSubDBProvider',
+        'tvsubtitles = subliminal.providers.tvsubtitles:TVsubtitlesProvider'
+    ])
     setup_names = {ep.name for ep in iter_entry_points(manager.namespace)}
-    internal_names = {EntryPoint.parse(iep).name for iep in manager.internal_providers}
+    internal_names = {EntryPoint.parse(iep).name for iep in manager.internal_extensions}
     assert internal_names == setup_names
 
 
-def test_provider_manager_register():
-    manager = ProviderManager()
+def test_registrable_extension_manager_register():
+    manager = RegistrableExtensionManager('subliminal.providers', [
+        'addic7ed = subliminal.providers.addic7ed:Addic7edProvider',
+        'opensubtitles = subliminal.providers.opensubtitles:OpenSubtitlesProvider',
+        'podnapisi = subliminal.providers.podnapisi:PodnapisiProvider',
+        'subscenter = subliminal.providers.subscenter:SubsCenterProvider',
+        'thesubdb = subliminal.providers.thesubdb:TheSubDBProvider',
+        'tvsubtitles = subliminal.providers.tvsubtitles:TVsubtitlesProvider'
+    ])
     manager.register('de7cidda = subliminal.providers.addic7ed:Addic7edProvider')
     assert 'de7cidda' in manager.names()
 
 
-def test_provider_manager_unregister():
-    manager = ProviderManager()
+def test_registrable_extension_manager_unregister():
+    manager = RegistrableExtensionManager('subliminal.providers', [
+        'addic7ed = subliminal.providers.addic7ed:Addic7edProvider',
+        'opensubtitles = subliminal.providers.opensubtitles:OpenSubtitlesProvider',
+        'podnapisi = subliminal.providers.podnapisi:PodnapisiProvider',
+        'subscenter = subliminal.providers.subscenter:SubsCenterProvider',
+        'thesubdb = subliminal.providers.thesubdb:TheSubDBProvider',
+        'tvsubtitles = subliminal.providers.tvsubtitles:TVsubtitlesProvider'
+    ])
     old_names = manager.names()
     manager.register('de7cidda = subliminal.providers.addic7ed:Addic7edProvider')
     manager.unregister('de7cidda = subliminal.providers.addic7ed:Addic7edProvider')

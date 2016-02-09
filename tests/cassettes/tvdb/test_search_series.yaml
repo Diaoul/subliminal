@@ -1,0 +1,72 @@
+interactions:
+- request:
+    body: '{"username": null, "password": null, "apikey": "2AE5D1E42E7194B9"}'
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Accept-Language: [en]
+      Connection: [keep-alive]
+      Content-Length: ['66']
+      Content-Type: [application/json]
+      User-Agent: [python-requests/2.9.1]
+    method: POST
+    uri: https://api-beta.thetvdb.com/login
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAwTBy7KaMAAA0P39Csc9dwIUkO6UiDeBACpEdMNABBPeKEWh03/vOX+/Vqv12FV5
+        u/69Wucz5tmBCV/gc7Qg2RPohdqTxiyko6qPqYXN73zGdf6zFX65B14YfQjcqqQkL9TUFSo7wVQq
+        skM9pheNZxZ6ocac08u9SC82QGX38WAkE7gHZEFLcfx+53fnAiZ0B1zxJJt3VUB4b0nn2XzeD8Gt
+        YOd2h6w8/oGBIP3oEKN/JycQIsQrW5Hjm9GeTOmaZXPTZcGy1MHFsV88pfIYdpkL6PMs7dpacyf8
+        SCkaKYxYx18bn215iT5ea6rpxo9d0Q3Xwh8Wh4aPPYEarbmUnfo/5C3EL0MFuVLGLY3KhOlQ897b
+        YBde40EpsLq56ViulsosxVY8TYUYGzbs7ao7hNEIuV7am5b1DBoFl2cqS31XaZKrNtGgaxHgpXl+
+        Ii9hMyYYFskkmG8eGp0BJZTn5u2miWEndVxfjw9nVN2CkCHzvQnFGodT5Qb7I3g4JLprWLewYPQp
+        2GP99e8/AAAA//8DAMVRDsrbAQAA
+    headers:
+      cf-ray: [271ef2415ee01571-CDG]
+      connection: [keep-alive]
+      content-encoding: [gzip]
+      content-type: [application/json]
+      date: ['Tue, 09 Feb 2016 10:38:44 GMT']
+      server: [cloudflare-nginx]
+      set-cookie: ['__cfduid=db8eef87ef7fa533fc5323f9d3a2711081455014323; expires=Wed,
+          08-Feb-17 10:38:43 GMT; path=/; domain=.thetvdb.com; HttpOnly']
+      x-powered-by: [Thundar!]
+      x-thetvdb-api-version: [1.2.0]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Accept-Language: [en]
+      Authorization: [!!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0NTUxMDA3MjMsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNDU1MDE0MzIzfQ.wedKW0vId0h2N-FhokPMhpC-Sy9rdGPZfcSnBICeXHDPiMptKM7pw_R0TIIhkF21XZ7nR9-YbbymobPzzlPWKFshaV1tTobL0VrS-Bnl5LvJgaVItVDUcohs8OcAhjIxNn93a8OXLioqYfOqzKVTgEMD5Vlh-bRpuMwii4730e2jXnVUj_c6D5NwAPBTYXq2fJ38Z6J1kzk9jiAir92M78cqEFkoGTUtDh6jF8ncpcD7fh1yV1-pok5-L3mUq65U0hj9SrIN_cyJMJDf_vicO9Gm6c02T1ymwLa_7F_lXlYQgKt3LfMMqbONvIX5hDvkLPEQ0gKMUd5J6CJicVricg']
+      Connection: [keep-alive]
+      Content-Type: [application/json]
+      Cookie: [__cfduid=db8eef87ef7fa533fc5323f9d3a2711081455014323]
+      User-Agent: [python-requests/2.9.1]
+    method: GET
+    uri: https://api-beta.thetvdb.com/search/series?name=The+Big+Bang+Theory
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA0ySMW/bQAyFd/+KBy1ZbNdwCqTJVmdsURRNgAxFBsqidKwlUuCdrChB/ntxSm13
+        uQMev8cjj3xbAEVFiYo7/F4AwNt8AgW1QpHjOTCLO2mwI22Kf9Lz8oSXpMpe3KFonPoge2o/fdlc
+        39yumu31+k/fFGe0Fo/pqzhXGd9uNjerze1q+/lCSI7M7rOknEbzQ3bc7x4uqB3Zj8JjDjwFSgjU
+        96wRY2BFmHp20cRtKw1rgpt1HSWOeAjcVqYgrfCdTckrdMwJP1l1WoJQO/Mq9uKSuELJNKQJnR1F
+        G4hC+SWhMvPlnMOZWnllpMATDmrjB5AMailkD5U2JLRSM2xIUSqG1ZlHS+Uav2zQKnOZyureeQT5
+        nBKxI+8mPFlro6TXJcZgyHkPEYGvIigi8suU78CQiNJJ5ka0wjezFJz6nlr5sMahrtkjarcOpBCl
+        UlpJU6449kyH3GN+uXeOrPu5WMJoHen68v+RXTj+oI7zBB4D47QjeAxsPv2HJkpDnCdomkQHOS3S
+        +wJ4Xrz/BQAA//8DAN9W78GOAgAA
+    headers:
+      cache-control: ['private, max-age=300']
+      cf-ray: [271ef245af311571-CDG]
+      connection: [keep-alive]
+      content-encoding: [gzip]
+      content-type: [application/json]
+      date: ['Tue, 09 Feb 2016 10:38:44 GMT']
+      server: [cloudflare-nginx]
+      x-powered-by: [Thundar!]
+      x-thetvdb-api-version: [1.2.0]
+    status: {code: 200, message: OK}
+version: 1

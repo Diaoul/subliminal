@@ -1,0 +1,31 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.9.1]
+    method: GET
+    uri: http://www.omdbapi.com/?r=json&v=1&s=Meen+of+Stal&page=1
+  response:
+    body: {string: !!python/unicode '{"Response":"False","Error":"Movie not found!"}'}
+    headers:
+      access-control-allow-origin: ['*']
+      cache-control: ['public, max-age=14400']
+      cf-cache-status: [MISS]
+      cf-ray: [2712a8c7932d3c53-CDG]
+      connection: [keep-alive]
+      content-length: ['47']
+      content-type: [application/json; charset=utf-8]
+      date: ['Sun, 07 Feb 2016 22:51:24 GMT']
+      expires: ['Mon, 08 Feb 2016 02:51:24 GMT']
+      last-modified: ['Sun, 07 Feb 2016 22:52:43 GMT']
+      server: [cloudflare-nginx]
+      set-cookie: ['__cfduid=dc6438db6e42c584797d29b35f3066b391454885484; expires=Mon,
+          06-Feb-17 22:51:24 GMT; path=/; domain=.omdbapi.com; HttpOnly']
+      vary: [Accept-Encoding]
+      x-aspnet-version: [4.0.30319]
+      x-powered-by: [ASP.NET]
+    status: {code: 200, message: OK}
+version: 1

@@ -1,0 +1,41 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.9.1]
+    method: GET
+    uri: http://www.omdbapi.com/?r=json&v=1&s=Man+of+Steel&page=1
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA61TTW/aQBT8K6s9u3h3/YlPwQ1ISFmTYDcyrapoC6+2wd617AWCo/z3yumlJQIU
+        2sM7zsx7M/NecAyiWeY4+PaCk0KXgAPMhUTqJ4o1QIkNvADR4AAzQi1s4KJa/Zje4gBrTTyP+MzH
+        Bk4OdQ+s1K4AbOB71WroMbnWdWCahRhUsCrEpx48WKrKLCqRQWtykz86IV9PnVmy6KL1lPDSCfsR
+        MpTpZqK/Jss97ziNbkd09nBzM3h6pE9xahEyWNcZfjUurU2Hw+HR2tQnPvXOrB2Zo5PMKE3TAI0k
+        Gj1DicJGbCW6F41aHc5ZZVHm+NT/gGa8raGphAxQkgM6FQlhf+tQ27GY88dtmajOytwVWpen+Y/v
+        YI7jeT651rtYyewsvefYLnP/Q6NG+6gb27z7Ys8m7xsVdRsaJZtLjfqcN0WrVZ1Dg+YAO7gQhn10
+        DSW+7X+kaG+CKBRLJYPTmRzJWI5LqMv+2bSoyxjvHhhPplb0zrRsH62ndJZsDjwZX/OGrnf0hsy1
+        vDfLrqnS7yQWIlcK3RU7QBMh0XgHUp99Q4t5tu1e0vxuYK20KOfQbkvd9lS9vXNoayXbHpc0W8Cv
+        vwCpm9aKPgUAAA==
+    headers:
+      access-control-allow-origin: ['*']
+      cache-control: ['public, max-age=14400']
+      cf-cache-status: [HIT]
+      cf-ray: [27129d0bbf1a3c71-CDG]
+      connection: [keep-alive]
+      content-encoding: [gzip]
+      content-type: [application/json; charset=utf-8]
+      date: ['Sun, 07 Feb 2016 22:43:24 GMT']
+      expires: ['Mon, 08 Feb 2016 02:43:24 GMT']
+      last-modified: ['Sun, 07 Feb 2016 22:39:55 GMT']
+      server: [cloudflare-nginx]
+      set-cookie: ['__cfduid=d0cfdd290e19cd8db124865c85bf89e6c1454885004; expires=Mon,
+          06-Feb-17 22:43:24 GMT; path=/; domain=.omdbapi.com; HttpOnly']
+      vary: [Accept-Encoding]
+      x-aspnet-version: [4.0.30319]
+      x-powered-by: [ASP.NET]
+    status: {code: 200, message: OK}
+version: 1

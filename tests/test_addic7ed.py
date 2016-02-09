@@ -326,7 +326,7 @@ def test_query_parsing_dash(episodes):
     video = episodes['the_x_files_s10e02']
     with Addic7edProvider() as provider:
         subtitles = provider.query(video.series, video.season)
-    subtitle = [s for s in subtitles if s.download_link == 'updated/8/108202/0'][0]
+    subtitle = [s for s in subtitles if s.download_link == 'updated/8/108202/21'][0]
     assert subtitle.language == Language('fra')
     assert subtitle.hearing_impaired is False
     assert subtitle.page_link == 'http://www.addic7ed.com/serie/The_X-Files/10/2/Founder%27s_Mutation'

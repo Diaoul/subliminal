@@ -271,7 +271,8 @@ def cache(ctx, clear_subliminal):
 @click.option('-m', '--min-score', type=click.IntRange(0, 100), default=0, help='Minimum score for a subtitle '
               'to be downloaded (0 to 100).')
 @click.option('-w', '--max-workers', type=click.IntRange(1, 50), default=None, help='Maximum number of threads to use.')
-@click.option('--scan-archives', is_flag=True, default=False, help='Scan archives for videos (Supported formats: Rar)')
+@click.option('-z', '--scan-archives', is_flag=True, default=False, help='Scan archives for videos '
+              '(Supported formats: Rar)')
 @click.option('-v', '--verbose', count=True, help='Increase verbosity.')
 @click.argument('path', type=click.Path(), required=True, nargs=-1)
 @click.pass_obj

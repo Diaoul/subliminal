@@ -139,7 +139,7 @@ class OpenSubtitlesProvider(Provider):
         if hash and size:
             criteria.append({'moviehash': hash, 'moviebytesize': str(size)})
         if imdb_id:
-            criteria.append({'imdbid': imdb_id})
+            criteria.append({'imdbid': imdb_id[2:]})
         if tag:
             criteria.append({'tag': tag})
         if query and season and episode:
@@ -176,7 +176,7 @@ class OpenSubtitlesProvider(Provider):
             movie_name = subtitle_item['MovieName']
             movie_release_name = subtitle_item['MovieReleaseName']
             movie_year = int(subtitle_item['MovieYear']) if subtitle_item['MovieYear'] else None
-            movie_imdb_id = int(subtitle_item['IDMovieImdb'])
+            movie_imdb_id = 'tt' + subtitle_item['IDMovieImdb']
             series_season = int(subtitle_item['SeriesSeason']) if subtitle_item['SeriesSeason'] else None
             series_episode = int(subtitle_item['SeriesEpisode']) if subtitle_item['SeriesEpisode'] else None
             encoding = subtitle_item.get('SubEncoding') or None

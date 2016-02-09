@@ -18,7 +18,7 @@ vcr = VCR(path_transformer=lambda path: path + '.yaml',
 def test_get_matches_movie_hash(movies):
     subtitle = OpenSubtitlesSubtitle(Language('deu'), False, None, '1953771409', 'moviehash', 'movie',
                                      '5b8f8f4e41ccb21e', 'Man of Steel',
-                                     'Man.of.Steel.German.720p.BluRay.x264-EXQUiSiTE', 2013, 770828, 0, 0, None)
+                                     'Man.of.Steel.German.720p.BluRay.x264-EXQUiSiTE', 2013, 'tt0770828', 0, 0, None)
     matches = subtitle.get_matches(movies['man_of_steel'])
     assert matches == {'title', 'year', 'video_codec', 'imdb_id', 'hash', 'resolution', 'format'}
 
@@ -26,7 +26,7 @@ def test_get_matches_movie_hash(movies):
 def test_get_matches_episode(episodes):
     subtitle = OpenSubtitlesSubtitle(Language('ell'), False, None, '1953579014', 'fulltext', 'episode',
                                      '0', '"Game of Thrones" Mhysa',
-                                     ' Game.of.Thrones.S03E10.HDTV.XviD-AFG', 2013, 2178796, 3, 10, None)
+                                     ' Game.of.Thrones.S03E10.HDTV.XviD-AFG', 2013, 'tt2178796', 3, 10, None)
     matches = subtitle.get_matches(episodes['got_s03e10'])
     assert matches == {'imdb_id', 'series', 'year', 'episode', 'season', 'title'}
 
@@ -34,14 +34,14 @@ def test_get_matches_episode(episodes):
 def test_get_matches_episode_year(episodes):
     subtitle = OpenSubtitlesSubtitle(Language('spa'), False, None, '1953369959', 'tag', 'episode',
                                      '0', '"Dallas" The Price You Pay',
-                                     ' Dallas.2012.S01E03.HDTV.x264-LOL', 2012, 2205526, 1, 3, 'cp1252')
+                                     ' Dallas.2012.S01E03.HDTV.x264-LOL', 2012, 'tt2205526', 1, 3, 'cp1252')
     matches = subtitle.get_matches(episodes['dallas_2012_s01e03'])
     assert matches == {'series', 'year', 'episode', 'season'}
 
 
 def test_get_matches_imdb_id(movies):
     subtitle = OpenSubtitlesSubtitle(Language('fra'), True, None, '1953767650', 'imdbid', 'movie', 0, 'Man of Steel',
-                                     'man.of.steel.2013.720p.bluray.x264-felony', 2013, 770828, 0, 0, None)
+                                     'man.of.steel.2013.720p.bluray.x264-felony', 2013, 'tt0770828', 0, 0, None)
     matches = subtitle.get_matches(movies['man_of_steel'])
     assert matches == {'title', 'year', 'video_codec', 'imdb_id', 'resolution', 'format', 'release_group'}
 

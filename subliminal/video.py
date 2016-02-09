@@ -37,7 +37,7 @@ class Video(object):
     :param str resolution: resolution of the video stream (480p, 720p, 1080p or 1080i).
     :param str video_codec: codec of the video stream.
     :param str audio_codec: codec of the main audio stream.
-    :param int imdb_id: IMDb id of the video.
+    :param str imdb_id: IMDb id of the video.
     :param dict hashes: hashes of the video file by provider names.
     :param int size: size of the video file in bytes.
     :param set subtitle_languages: existing subtitle languages.
@@ -135,7 +135,7 @@ class Episode(Video):
 
     """
     def __init__(self, name, series, season, episode, title=None, year=None, original_series=True, tvdb_id=None,
-                 **kwargs):
+                 series_tvdb_id=None, series_imdb_id=None, **kwargs):
         super(Episode, self).__init__(name, **kwargs)
 
         #: Series of the episode
@@ -158,6 +158,12 @@ class Episode(Video):
 
         #: TVDB id of the episode
         self.tvdb_id = tvdb_id
+
+        #: TVDB id of the series
+        self.series_tvdb_id = series_tvdb_id
+
+        #: IMDb id of the series
+        self.series_imdb_id = series_imdb_id
 
     @classmethod
     def fromguess(cls, name, guess):

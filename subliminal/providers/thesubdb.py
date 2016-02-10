@@ -4,8 +4,8 @@ import logging
 from babelfish import Language, language_converters
 from requests import Session
 
-from . import Provider, get_version
-from .. import __version__
+from . import Provider
+from .. import __short_version__
 from ..subtitle import Subtitle, fix_line_ending
 
 logger = logging.getLogger(__name__)
@@ -41,8 +41,8 @@ class TheSubDBProvider(Provider):
 
     def initialize(self):
         self.session = Session()
-        self.session.headers = {'User-Agent': 'SubDB/1.0 (subliminal/%s; https://github.com/Diaoul/subliminal)' %
-                                get_version(__version__)}
+        self.session.headers['User-Agent'] = ('SubDB/1.0 (subliminal/%s; https://github.com/Diaoul/subliminal)' %
+                                              __short_version__)
 
     def terminate(self):
         self.session.close()

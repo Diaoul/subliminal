@@ -2,7 +2,10 @@ interactions:
 - request:
     body: null
     headers:
-      User-Agent: [Subliminal/1.1]
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [Subliminal/2.0]
     method: GET
     uri: http://podnapisi.net/subtitles/search/old?sTE=5&sXML=1&sL=en&sY=2007&sK=The+Big+Bang+Theory&sTS=7
   response:
@@ -13,59 +16,72 @@ interactions:
       connection: [keep-alive]
       content-length: ['160']
       content-type: [text/html]
-      date: ['Thu, 29 Oct 2015 22:52:15 GMT']
+      date: ['Tue, 09 Feb 2016 16:16:39 GMT']
       location: ['http://www.podnapisi.net/subtitles/search/old?sTE=5&sXML=1&sL=en&sY=2007&sK=The+Big+Bang+Theory&sTS=7']
       server: [nginx/1.8.0]
     status: {code: 302, message: Moved Temporarily}
 - request:
     body: null
     headers:
-      User-Agent: [Subliminal/1.1]
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [Subliminal/2.0]
     method: GET
     uri: http://www.podnapisi.net/subtitles/search/old?sTE=5&sXML=1&sL=en&sY=2007&sK=The+Big+Bang+Theory&sTS=7
   response:
-    body: {string: !!python/unicode "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"\
-        yes\"?>\n<!DOCTYPE results [\n  <!ELEMENT results (#PCDATA|pagination|subtitle)*>\n\
-        \    <!ELEMENT pagination (current, count, results)>\n      <!ELEMENT current\
-        \ (#PCDATA)>\n      <!ELEMENT count (#PCDATA)>\n    <!ELEMENT subtitle (id,\
-        \ title, year, movieId, url, uploaderId, uploaderName, release, languageId,\
-        \ languageName, time, tvSeason, tvEpisode, tvSpecial, cds, format, fps, rating,\
-        \ flags, downloads)>\n      <!ELEMENT id (#PCDATA)>\n      <!ELEMENT pid (#PCDATA)>\n\
-        \      <!ELEMENT title (#PCDATA)>\n      <!ELEMENT year (#PCDATA)>\n     \
-        \ <!ELEMENT movieId (#PCDATA)>\n      <!ELEMENT url (#PCDATA)>\n      <!ELEMENT\
-        \ uploaderId (#PCDATA)>\n      <!ELEMENT uploaderName (#PCDATA)>\n      <!ELEMENT\
-        \ release (#PCDATA)>\n      <!ELEMENT languageId (#PCDATA)>\n      <!ELEMENT\
-        \ languageName (#PCDATA)>\n      <!ELEMENT language (#PCDATA)>\n      <!ELEMENT\
-        \ time (#PCDATA)>\n      <!ELEMENT tvSeason (#PCDATA)>\n      <!ELEMENT tvEpisode\
-        \ (#PCDATA)>\n      <!ELEMENT tvSpecial (#PCDATA)>\n      <!ELEMENT cds (#PCDATA)>\n\
-        \      <!ELEMENT format (#PCDATA)>\n      <!ELEMENT fps (#PCDATA)>\n     \
-        \ <!ELEMENT rating (#PCDATA)>\n      <!ELEMENT flags (#PCDATA)>\n      <!ELEMENT\
-        \ new_flags (#PCDATA)>\n        <!ELEMENT flag (#PCDATA)>\n      <!ELEMENT\
-        \ downloads (#PCDATA)>\n      <!ELEMENT exactHashes (#PCDATA)>]> <results><pagination><current>1</current><count>1</count><results>5</results></pagination><subtitle><id>3514331</id><pid>2581</pid><title>The\
-        \ Big Bang Theory</title><year>2007</year><movieId>sY0G</movieId><url>http://www.podnapisi.net/subtitles/en-the-big-bang-theory-2007-S07E05/2581</url><uploaderId>23329</uploaderId><uploaderName>jane</uploaderName><release>the.big.bang.theory.s07e05.1080p.bluray.x264-rovers</release><languageId>2</languageId><languageName>English</languageName><language>en</language><time>1410069965</time><tvSeason>7</tvSeason><tvEpisode>5</tvEpisode><tvSpecial>0</tvSpecial><cds\
-        \ /><format>N/A</format><fps>N/A</fps><rating>0.0</rating><flags>nh</flags><new_flags><flag>hearing_impaired</flag><flag>high_definition</flag></new_flags><downloads>3401</downloads><exactHashes\
-        \ /></subtitle><subtitle><id>3514307</id><pid>w581</pid><title>The Big Bang\
-        \ Theory</title><year>2007</year><movieId>sY0G</movieId><url>http://www.podnapisi.net/subtitles/en-the-big-bang-theory-2007-S07E05/w581</url><uploaderId>23329</uploaderId><uploaderName>jane</uploaderName><release>the.big.bang.theory.s07e05.1080p.bluray.x264-rovers</release><languageId>2</languageId><languageName>English</languageName><language>en</language><time>1410069864</time><tvSeason>7</tvSeason><tvEpisode>5</tvEpisode><tvSpecial>0</tvSpecial><cds\
-        \ /><format>N/A</format><fps>N/A</fps><rating>0.0</rating><flags>h</flags><new_flags><flag>high_definition</flag></new_flags><downloads>3426</downloads><exactHashes\
-        \ /></subtitle><subtitle><id>2676094</id><pid>ftUo</pid><title>The Big Bang\
-        \ Theory</title><year>2007</year><movieId>sY0G</movieId><url>http://www.podnapisi.net/subtitles/en-the-big-bang-theory-2007-S07E05/ftUo</url><uploaderId>1</uploaderId><uploaderName>Anonymous</uploaderName><release>The.Big.Bang.Theory.S07E05.720p.WEB-DL.DD5.1.H.264</release><languageId>2</languageId><languageName>English</languageName><language>en</language><time>1382101941</time><tvSeason>7</tvSeason><tvEpisode>5</tvEpisode><tvSpecial>0</tvSpecial><cds\
-        \ /><format>N/A</format><fps>N/A</fps><rating>0.0</rating><flags>nh</flags><new_flags><flag>hearing_impaired</flag><flag>high_definition</flag></new_flags><downloads>6586</downloads><exactHashes>sublight:8bf2c59b194d36229b4e88995084ec05</exactHashes></subtitle><subtitle><id>2675729</id><pid>EdQo</pid><title>The\
-        \ Big Bang Theory</title><year>2007</year><movieId>sY0G</movieId><url>http://www.podnapisi.net/subtitles/en-the-big-bang-theory-2007-S07E05/EdQo</url><uploaderId>44181</uploaderId><uploaderName>grzesiek11</uploaderName><release>The.Big.Bang.Theory.S07E05.HDTV.x264-LOL\
-        \ The.Big.Bang.Theory.S07E05.720p.HDTV.x264-DIMENSION The.Big.Bang.Theory.S07E05.480p.HDTV.x264-mSD\
-        \ The.Big.Bang.Theory.S07E05.HDTV.XviD-AFG</release><languageId>2</languageId><languageName>English</languageName><language>en</language><time>1382071751</time><tvSeason>7</tvSeason><tvEpisode>5</tvEpisode><tvSpecial>0</tvSpecial><cds\
-        \ /><format>N/A</format><fps>N/A</fps><rating>1.0</rating><flags>h</flags><new_flags><flag>high_definition</flag></new_flags><downloads>25324</downloads><exactHashes>sublight:52882d75832c3c6fe8116d26993f66c4\
-        \ sublight:b34e0421f93bd4df512ca5458376a559 sublight:09e9dc38376b2245e9f806c106dc9928\
-        \ sublight:fd25365147f1e59f4cfa4c283c70b22a</exactHashes></subtitle><subtitle><id>2675544</id><pid>WNMo</pid><title>The\
-        \ Big Bang Theory</title><year>2007</year><movieId>sY0G</movieId><url>http://www.podnapisi.net/subtitles/en-the-big-bang-theory-2007-S07E05/WNMo</url><uploaderId>1</uploaderId><uploaderName>Anonymous</uploaderName><release>The.Big.Bang.Theory.S07E05.HDTV.x264-LOL\
-        \ The.Big.Bang.Theory.S07E05.720p.HDTV.x264-DIMENSION The.Big.Bang.Theory.S07E05.480p.HDTV.x264-mSD\
-        \ The.Big.Bang.Theory.S07E05.HDTV.XviD-AFG</release><languageId>2</languageId><languageName>English</languageName><language>en</language><time>1382058590</time><tvSeason>7</tvSeason><tvEpisode>5</tvEpisode><tvSpecial>0</tvSpecial><cds\
-        \ /><format>N/A</format><fps>N/A</fps><rating>1.0</rating><flags>nh</flags><new_flags><flag>hearing_impaired</flag><flag>high_definition</flag></new_flags><downloads>11230</downloads><exactHashes>sublight:52882d75832c3c6fe8116d26993f66c4\
-        \ sublight:1be0b687d8689ee0e2a094531f7da7b8</exactHashes></subtitle></results>"}
+    body: {string: !!python/unicode "<html>\r\n<head><title>301 Moved Permanently</title></head>\r\
+        \n<body bgcolor=\"white\">\r\n<center><h1>301 Moved Permanently</h1></center>\r\
+        \n<hr><center>nginx/1.8.0</center>\r\n</body>\r\n</html>\r\n"}
     headers:
       connection: [keep-alive]
-      content-length: ['5562']
-      content-type: [text/xml;charset=utf-8]
-      date: ['Thu, 29 Oct 2015 22:52:15 GMT']
+      content-length: ['184']
+      content-type: [text/html]
+      date: ['Tue, 09 Feb 2016 16:16:39 GMT']
+      location: ['https://www.podnapisi.net/subtitles/search/old?sTE=5&sXML=1&sL=en&sY=2007&sK=The+Big+Bang+Theory&sTS=7']
       server: [nginx/1.8.0]
+    status: {code: 301, message: Moved Permanently}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [Subliminal/2.0]
+    method: GET
+    uri: https://www.podnapisi.net/subtitles/search/old?sTE=5&sXML=1&sL=en&sY=2007&sK=The+Big+Bang+Theory&sTS=7
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA+VYbW/bNhD+3l+hZl/SIZZI6r1gWKS11wRIkw7x1hXDEFASZWuTJUOS42Toj99R
+        73USrt2KNEC+JHx5jnc83/McbfrqepVqV6Iokzw73MM62tNEFuZRki0O9zZVPPH2tLLiWcTTPBOH
+        ezei3HvFntHn0/M384/vZ1ohyk1aldrvzzSNPp+dzt7Nzub96v4P799Mj+ZHn9Z8kWS8Ai+fyk1Q
+        JVUqXvzIwGZsNYC0/XBTFCKrDrQw38h/rZ8Xjc3YqkVqna+7IPKMXcAQbReRtp9EB1od3IF2I3hx
+        oK3yq0ScwOqmSOHPOs15JIp6oR2f8ZWQ4aWClzBIebbY8EVt040bSJVIYHV1AcA8k6PZOinzqFlc
+        izDh4CKMygMtzosVr+D/GiYFpC1bwCTlC5hG+TaTUZR33DOJdi85TtRavV3fW2UvM6Lab3OlgkAW
+        ldt9fr8EJdOqwrWfiQrSfUInysR1qH9z2OFUHmUVKPfb+lBj2spRgy6amlKBoNpU200dKhFr5QFN
+        7SoPkFWtAmRie1mX/m3QuLgl5DZi4HhPGxVIXPOwOublUoxD+oNptJUfRgeNYrRVHoap0Q1pLVf1
+        itQc1hva1OjPMMaHdOLDaBIx08aWacJ5MKbAV0ZsD2ZyRGt+svlSaK+ThfYadEaDSV7cUKPZopKg
+        jCDkUqMe0paRrPyI3lKjm1FgIVtW1fqlYWy3W32dRxkHKUr0TFRGF09piGxSLcUkSBaTALzJCXib
+        SAeTC+TOkG004cnz6KCNjJgm8akxWul3JYXYnzwTw3a9BHmqBZSBEx086tKj3njUS+QKZOsYeWit
+        B+mm4Df6NXGsSZHL1iUz2xjTjoEnkDlqjGb9Tu1tli3SpFwOiCaGDs9ENmzJxEPM2MIIOb7vwAdZ
+        L9BOyRmkux/DastNJoH9RKIbOjJUw9sJlQw0GG2Yxs6MI2q0Ywrq3y7AgDZUYkgH+3ZMa16wDC7S
+        jGhPFjgRCMGWUBHQPC6T1ZonhYgaYLeZLJaXkYiTLJGNudszRof0rGEuxnDPYU7HXIEL9HXDaFdB
+        Q0XLiuwqevu4K7oJ7wlVtOdYj66iFQX9VTVLHO+/1CxxXAf5kJauZuPql/wRq3AT3m7NQt+4V4GP
+        sjy7WeUb0M4O87kMz0GGoc3oss3oMAHh1xvN110CKvxh9noyPdWnU5Bl/VgHMX4YFTY9ghH2Lbjc
+        U1RhjEx0b0kzEN4U+FG99IKYhLYfQKIi0yHEDyzheb5vI88SIYLONFLv+7UbeGC7spN3PJhFPz9m
+        HjTh7fLAsrB8Q3V1Dk+Dz18ji+JvUSbiLzwCfTEZjqfzX5u3yOn5qXyPKVkzoKcn8D354uT8TGVj
+        yffOYLO6mKrQNfC3q2Q6Ofrp7YOxEbnYtb8zG+Fni9030TfqIMQ3MTwk7372DHyzieeRyLU9k4Rm
+        6MTCw9iJCDwXzdhxQkvrmRmYlkAWwbFvBpEVxTYmIbctsHQdbtv+gES+8KPQlBsBIZYt/NhDToiR
+        E4W+T7wBGUfENh345uDGWNh+bIUxt0LimaGLwJR/Bdtta9T1Ppy9e8xsb8LbZfuIxLeY/n+63kDD
+        p0p027N94Nn3bLt3EP1Bvvxgy3fdbykDOBAocDw38hzPFwIJwuHBaZs4diPuBtDi72vQ/a8I/wBJ
+        OYl7uxUAAA==
+    headers:
+      connection: [keep-alive]
+      content-encoding: [gzip]
+      content-type: [text/xml;charset=utf-8]
+      date: ['Tue, 09 Feb 2016 16:16:40 GMT']
+      server: [nginx/1.8.0]
+      vary: [Accept-Encoding]
     status: {code: 200, message: OK}
 version: 1

@@ -11,8 +11,8 @@ try:
 except ImportError:
     from mock import Mock
 
-from subliminal.video import (Episode, Movie, Video, hash_opensubtitles, hash_thesubdb, scan_video, scan_videos,
-                              search_external_subtitles)
+from subliminal.video import (Episode, Movie, Video, hash_opensubtitles, hash_thesubdb, sanitize, scan_video,
+                              scan_videos, search_external_subtitles)
 
 
 def timestamp(date):
@@ -201,7 +201,7 @@ def test_search_external_subtitles_no_directory(movies, tmpdir, monkeypatch):
     assert subtitles == expected_subtitles
 
 
-def test_search_external_subtitles_in_directory(episodes, tmpdir, monkeypatch):
+def test_search_external_subtitles_in_directory(episodes, tmpdir):
     video_name = episodes['marvels_agents_of_shield_s02e06'].name
     video_root = os.path.splitext(video_name)[0]
     tmpdir.ensure('tvshows', video_name)
@@ -345,7 +345,7 @@ def test_scan_videos(movies, tmpdir, monkeypatch):
     monkeypatch.chdir(str(tmpdir))
     videos = scan_videos('movies')
 
-    kwargs = dict(subtitles=True, embedded_subtitles=True, subtitles_dir=None)
+    kwargs = dict()
     calls = [((os.path.join('movies', movies['man_of_steel'].name),), kwargs),
              ((os.path.join('movies', movies['enders_game'].name),), kwargs)]
     assert len(videos) == len(calls)
@@ -417,7 +417,7 @@ def test_scan_videos_age(movies, tmpdir, monkeypatch):
     monkeypatch.chdir(str(tmpdir))
     videos = scan_videos('movies', age=timedelta(days=7))
 
-    kwargs = dict(subtitles=True, embedded_subtitles=True, subtitles_dir=None)
+    kwargs = dict()
     calls = [((os.path.join('movies', movies['man_of_steel'].name),), kwargs)]
     assert len(videos) == len(calls)
     assert mock_scan_video.call_count == len(calls)
@@ -440,3 +440,7 @@ def test_hash_thesubdb(mkv):
 def test_hash_thesubdb_too_small(tmpdir):
     path = tmpdir.ensure('test_too_small.mkv')
     assert hash_thesubdb(str(path)) is None
+
+
+def test_sanitize():
+    assert sanitize('Marvel\'s Agents of S.H.I.E.L.D.') == 'marvels agents of shield'

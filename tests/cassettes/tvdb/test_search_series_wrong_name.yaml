@@ -1,0 +1,63 @@
+interactions:
+- request:
+    body: '{"username": null, "password": null, "apikey": "2AE5D1E42E7194B9"}'
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Accept-Language: [en]
+      Connection: [keep-alive]
+      Content-Length: ['66']
+      Content-Type: [application/json]
+      User-Agent: [python-requests/2.9.1]
+    method: POST
+    uri: https://api-beta.thetvdb.com/login
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAwTByZKiMAAA0Ht/heWdLvZlbpoAhgYEm629WGEbtgASGSFT8+/z3t+Pw+H4mvpq
+        PP46HKvdaXK7aK+t8x0zJPgtomi8KQVAKurnLAGO8VntzlBdTu21M3k/ijcPniSvCykiQ4+6qS2k
+        pM3t4YVTpckBoogYO07LGqcWj7pp82EseNDkPYb4Ovz0X9UrBCVTgjjh/MpzWAzGZQVZkd8N/Jxi
+        kq79Yvc2s+4bk6hCiAY3Ufyjs0R83SNB70X4swR3S0t3w8KePYNCcRij6MvM6khqXZ48zpveDIkb
+        kHpJixzz9HfXXAxOCySBjCqrJ/qEIFlrrFKT7umFL9NlXFQhtLpeccalEnQ5mYbg9nbzSZLDkARD
+        hoLMWspGABw1zmDCqwzqt8NLcb7eIKeqaFYijzaaYVQi9CRZ80JGiQBBYvfDLuVcgFsnbZ/tmviQ
+        Kj2ZGHjb2Vy6g/7z7VYPdNln2zzH3LCcxxnDUcZqyTV+ctL3RSjkq+9WyHmE7MsUBrHrvCiLTv5a
+        Pt/Hj3//AQAA//8DAP4lBXbbAQAA
+    headers:
+      cf-ray: [271ef2472918156b-CDG]
+      connection: [keep-alive]
+      content-encoding: [gzip]
+      content-type: [application/json]
+      date: ['Tue, 09 Feb 2016 10:38:44 GMT']
+      server: [cloudflare-nginx]
+      set-cookie: ['__cfduid=d44d0f03e066043973a5ef53f0852e46a1455014324; expires=Wed,
+          08-Feb-17 10:38:44 GMT; path=/; domain=.thetvdb.com; HttpOnly']
+      x-powered-by: [Thundar!]
+      x-thetvdb-api-version: [1.2.0]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Accept-Language: [en]
+      Authorization: [!!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0NTUxMDA3MjQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNDU1MDE0MzI0fQ.NtetQCdz5PUV-NeMJzUCnruCXcbZ9aqoUmWukrGkGzFZxz3s5mm7Dx22v8zV2tZT18k2DYrPZF7Wy9FaMGpCc5JzzsIKEXfT3iL0m_Bx8hlVLPmfrWcba0sgjhH9-7P31mn6zfosqDCVufa6sEsyWH0dWrnr61QFjk5Jnre184VolPRwLbo34QQmPlXIPXFrdh1C-s9BCoau4CfwJ03UbuRD-66Ip5TMsh799e2DM347MQzsm1DCVGkly3b-PaiJWiqiuVNDs5kmozCwGXpdLl8YSLe_IHypGEBU-lrBnpaDn4a6d-hNVA8yr1c4ONLeIJ_QzKE1l2jjMTXTANudqw']
+      Connection: [keep-alive]
+      Content-Type: [application/json]
+      Cookie: [__cfduid=d44d0f03e066043973a5ef53f0852e46a1455014324]
+      User-Agent: [python-requests/2.9.1]
+    method: GET
+    uri: https://api-beta.thetvdb.com/search/series?name=The+Bing+Bag+Theory
+  response:
+    body: {string: !!python/unicode "{\n  \"Error\": \"Resource not found\"\n}"}
+    headers:
+      cache-control: ['private, max-age=300']
+      cf-ray: [271ef2485970156b-CDG]
+      connection: [keep-alive]
+      content-length: ['35']
+      content-type: [application/json]
+      date: ['Tue, 09 Feb 2016 10:38:45 GMT']
+      server: [cloudflare-nginx]
+      x-powered-by: [Thundar!]
+      x-thetvdb-api-version: [1.2.0]
+    status: {code: 404, message: Not Found}
+version: 1

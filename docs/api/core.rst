@@ -1,0 +1,3 @@
+Core
+====
+.. automodule:: subliminal.core

@@ -1,0 +1,71 @@
+interactions:
+- request:
+    body: '{"username": null, "password": null, "apikey": "2AE5D1E42E7194B9"}'
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Accept-Language: [en]
+      Connection: [keep-alive]
+      Content-Length: ['66']
+      Content-Type: [application/json]
+      User-Agent: [python-requests/2.9.1]
+    method: POST
+    uri: https://api-beta.thetvdb.com/login
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAwTBy3KqMAAA0H2/wnFPh0dA6Y6HQqJCQSDajQMYhECA8hK4c/+95/z72Gy2Q1OS
+        evu12ZIF5YmVFm6BruEKBaeAPax9OTWgAsv2FhlI/SQLqoitFS498E4QzhczFRzz0ENWlZA2RSpF
+        RWJVQ4zlPDFgD5m6xPiZxfjIQ9rMjhkKFxPOl8CbM+8TBwSQc/sCy32UxDtuErS0Kk00WZhYbo1o
+        1nnQK41KPf+JfUUsAewubIpqwA2eUcn84PdW/2v5OXMMhxB9r3ZVOJZm58YcufrzfAnzEdymCihR
+        7VIOvE1ARvSbILS/r3nmVSBex2xJn+P8StEyHRhCkfxi2sQlb4uKbjzSk0Txlc10SpPTi8z0kQWN
+        MFYqxcmeSZizB+jIR2+dIsnPHtw3BcvxVttrrMXYEBW1fZx/MLf4BrdrdvzphUyMwW6QVqXrbKa/
+        1ayvbK39dg/mkPPCKvJ3LBqm4+ttVp6wwU+ynKVnbm17orA1c4x6laqT3pwJV++n1grjoB21mLbv
+        89J524//fwAAAP//AwCpYxpv2wEAAA==
+    headers:
+      cf-ray: [271f98b32eb43be7-CDG]
+      connection: [keep-alive]
+      content-encoding: [gzip]
+      content-type: [application/json]
+      date: ['Tue, 09 Feb 2016 12:32:21 GMT']
+      server: [cloudflare-nginx]
+      set-cookie: ['__cfduid=d28881d4cd4e81aa3a0152b114cbbc24a1455021140; expires=Wed,
+          08-Feb-17 12:32:20 GMT; path=/; domain=.thetvdb.com; HttpOnly']
+      x-powered-by: [Thundar!]
+      x-thetvdb-api-version: [1.2.0]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Accept-Language: [en]
+      Authorization: [!!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0NTUxMDc1NDEsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNDU1MDIxMTQxfQ.WTe4eLpg4yYu32YWobJyp9jbA51vmhGuJxB04s6o9jQRdWR62k4IrMmvVn4-tQCl50tRsGsqGRhmNCNeeB89rlUukDrOa-eSRxxMUhu4Xvl46VnOj-4wD4euJqbJJ8YzhfQl4azufycduxgcJyvEmJJV5gmAv-bwGj2OaujK3jWSmxjvcbKgexj_fTo1ul9jWb8m3W-HtIN5FQzvV3Rf_-Pj4yFXnHzaAaWC269p_LZW-yRC-7o70KgJDWW47t3z6rrHmBw9fslHApPOEDth01z20YW2CDNRBpfkKWC0v55fcL-zpse6mzfNCnz3lKBoLe-n8vpGUaTpuAajpwLyrQ']
+      Connection: [keep-alive]
+      Content-Type: [application/json]
+      Cookie: [__cfduid=d28881d4cd4e81aa3a0152b114cbbc24a1455021140]
+      User-Agent: [python-requests/2.9.1]
+    method: GET
+    uri: https://api-beta.thetvdb.com/series/80379/episodes/query?airedEpisode=5&airedSeason=7&page=1
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA3yQQU/bQBCF7/4VT3vhYlBSKGl9A6kSFxAqlXooPUyy4+yQ9a61O7aJUP575SRy
+        QEI9zvvee7M7bwVgOKWYsqkQOu/LUfESNqPwVgCAqSVlNRXm5WH29GEM/Krv0oBpE/dHpQB2+05L
+        SqbCn73jUAwYWuboO+WHrllyGkuvZuUEJbH90UqO9mT4+hE/MeUYTIXFpNv+PyHbfxbho58aNhXM
+        L8f4HdOm9bRiPKb4Ko3o1kz+/UVuxv2j/ctsfnk+n53PFyeHjOTq+vrb5eL7JHoK647WPJ32s+Uc
+        phbAxJ5TLzwcyRHspsr3/MmxtzGg6bLC8kosw8UBTbdyeDY3zRYqDT8bSIbGeABUKydkx1DacAbh
+        JS5BCicZXZCeUxbdlqBgoY4lIbEnlRiyk3bsajuFxhFCOesF7pnC4MRzibs4ULKoJdgMJ01mXyN7
+        5lbCGjHgJ72cZazi6S2EWtZOMYg63HIKZFmVLw6/3xXA32L3DwAA//8DANoURQi7AgAA
+    headers:
+      cache-control: ['private, max-age=300']
+      cf-ray: [271f98b77ede3be7-CDG]
+      connection: [keep-alive]
+      content-encoding: [gzip]
+      content-type: [application/json]
+      date: ['Tue, 09 Feb 2016 12:32:21 GMT']
+      server: [cloudflare-nginx]
+      x-powered-by: [Thundar!]
+      x-thetvdb-api-version: [1.2.0]
+    status: {code: 200, message: OK}
+version: 1

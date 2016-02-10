@@ -2,940 +2,242 @@ interactions:
 - request:
     body: null
     headers:
-      User-Agent: [Subliminal/1.1]
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [Subliminal/2.0]
     method: GET
     uri: http://subscenter.cinemast.com/he/subtitle/search/?q=Dallas
   response:
-    body: {string: "\uFEFF <?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<!DOCTYPE\
-        \ html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"\r\n        \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\"\
-        >\r\n<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\" lang=\"\
-        en\">\r\n\r\n    \r\n\r\n\r\n\r\n\r\n<head>\r\n\r\n    <meta http-equiv=\"\
-        content-type\" content=\"text/html; charset=utf-8\" />                \r\n\
-        \    <meta http-equiv=\"cache-control\" content=\"no-cache\">\r\n\r\n    \r\
-        \n        <title> - cinemast - \u05E1\u05D9\u05E0\u05DE\u05D4-\u05E1\u05D8\
-        \ </title>            \r\n      \r\n                                     \
-        \ \r\n    <meta name=\"keywords\" content=\"   \u05DB\u05EA\u05D5\u05D1\u05D9\
-        \u05D5\u05EA, \u05DB\u05EA\u05D5\u05D1\u05D9\u05D5\u05EA \u05D1\u05E2\u05D1\
-        \u05E8\u05D9\u05EA, \u05DB\u05EA\u05D5\u05D1\u05D9\u05D5\u05EA \u05DC\u05E1\
-        \u05E8\u05D8\u05D9\u05DD, \u05DB\u05EA\u05D5\u05D1\u05D9\u05D5\u05EA \u05DC\
-        \u05E1\u05D3\u05E8\u05D5\u05EA, \u05EA\u05E8\u05D2\u05D5\u05DD, \u05E1\u05E8\
-        \u05D8\u05D9\u05DD, \u05E1\u05D3\u05E8\u05D5\u05EA,\u05E6\u05E4\u05D9\u05D9\
-        \u05D4 \u05D9\u05E9\u05D9\u05E8\u05D4, \u05D4\u05D5\u05E8\u05D3\u05D5\u05EA\
-        ,\u05D4\u05E1\u05E8\u05D8,\u05E1\u05E8\u05D8\u05D9\u05DD,\u05E1\u05D3\u05E8\
-        \u05D5\u05EA,\u05DB\u05EA\u05D5\u05D1\u05D9\u05D5\u05EA,\u05D5\u05D9\u05D3\
-        \u05D0\u05D5,\u05E1\u05E8\u05D8,\u05E1\u05D3\u05E8\u05D4,\u05EA\u05E8\u05D2\
-        \u05D5\u05DE\u05D9\u05DD,\u05DB\u05D5\u05EA\u05E8\u05D9\u05DD,\u05D8\u05E8\
-        \u05D9\u05D9\u05DC\u05E8,\u05D8\u05E8\u05D9\u05D9\u05DC\u05E8\u05D9\u05DD\
-        ,\u05E7\u05D3\u05D9\u05DE\u05D5\u05DF,\u05E7\u05D3\u05D9\u05DE\u05D5\u05E0\
-        \u05D9\u05DD,\u05D7\u05D5\u05D5\u05EA \u05D3\u05E2\u05EA,\u05D1\u05D9\u05E7\
-        \u05D5\u05E8\u05EA,\u05D1\u05D9\u05E7\u05D5\u05E8\u05D5\u05EA,\u05D1\u05E7\
-        \u05D5\u05E8\u05EA,\u05D1\u05E7\u05D5\u05E8\u05D5\u05EA,\u05D4\u05DE\u05DC\
-        \u05E6\u05D4,\u05D4\u05DE\u05DC\u05E6\u05D5\u05EA,\u05EA\u05DE\u05D5\u05E0\
-        \u05D4,\u05EA\u05DE\u05D5\u05E0\u05D5\u05EA,\u05DB\u05E8\u05D6\u05D4,\u05DB\
-        \u05E8\u05D6\u05D5\u05EA,\u05E2\u05D8\u05D9\u05E4\u05D5\u05EA,\u05D4\u05D5\
-        \u05E8\u05D3\u05D5\u05EA,\u05E7\u05D5\u05DC\u05E0\u05D5\u05E2,\u05D8\u05DC\
-        \u05D5\u05D5\u05D9\u05D6\u05D9\u05D4,\u05D1\u05D9\u05D3\u05D5\u05E8,\u05DE\
-        \u05E2\u05E8\u05D9\u05E6\u05D9\u05DD,\u05E7\u05D4\u05D9\u05DC\u05D4,\u05E7\
-        \u05D4\u05D9\u05DC\u05D5\u05EA,\u05E4\u05D5\u05E8\u05D5\u05DD,\u05E4\u05D5\
-        \u05E8\u05D5\u05DE\u05D9\u05DD,\u05E6\u05E4\u05D9\u05D9\u05D4 \u05D9\u05E9\
-        \u05D9\u05E8\u05D4,\u05E6\u05E4\u05D9\u05D9\u05D4 \u05D7\u05D9\u05E0\u05DD\
-        ,\u05D4\u05E1\u05E4\u05E8\u05D9\u05D5\u05EA \u05E9\u05DC\u05D9,\u05E9\u05D7\
-        \u05E7\u05DF,\u05E9\u05D7\u05E7\u05E0\u05D9\u05EA,\u05E9\u05D7\u05E7\u05E0\
-        \u05D9\u05DD,\u05D1\u05DE\u05D0\u05D9,\u05D1\u05D9\u05DE\u05D0\u05D9\u05EA\
-        ,\u05D1\u05D9\u05DE\u05D5\u05D9,\u05EA\u05E1\u05E8\u05D9\u05D8\u05D0\u05D9\
-        ,\u05EA\u05E1\u05E8\u05D9\u05D8\u05D0\u05D9\u05EA,\u05EA\u05E1\u05E8\u05D9\
-        \u05D8,\u05D4\u05E4\u05E7\u05D4,\u05E4\u05E1\u05E7\u05D5\u05DC,\u05D0\u05D9\
-        \u05E9\u05D9\u05DD,\u05DE\u05E4\u05D5\u05E8\u05E1\u05DE\u05D9\u05DD,\u05E1\
-        \u05DC\u05D1\u05E1,\u05DB\u05D1\u05DC\u05D9\u05DD,\u05DC\u05D5\u05D5\u05D9\
-        \u05DF,\u05E9\u05E2\u05D5\u05EA \u05D4\u05E7\u05E8\u05E0\u05D4,\u05E9\u05E2\
-        \u05D5\u05EA \u05E6\u05E4\u05D9\u05D9\u05D4,\u05D7\u05D9\u05E0\u05DD,\u05D3\
-        \u05D9\u05E8\u05D5\u05D2,\u05D7\u05D3\u05E9\u05D5\u05EA \u05E1\u05E8\u05D8\
-        \u05D9\u05DD,\u05E2\u05DB\u05E9\u05D9\u05D5 \u05D1\u05E7\u05D5\u05DC\u05E0\
-        \u05D5\u05E2,\u05D1\u05E7\u05E8\u05D5\u05D1 \u05D1\u05E7\u05D5\u05DC\u05E0\
-        \u05D5\u05E2,\u05D4\u05E9\u05D1\u05D5\u05E2 \u05D1\u05E7\u05D5\u05DC\u05E0\
-        \u05D5\u05E2,\u05D1\u05D9\u05EA \u05E7\u05D5\u05DC\u05E0\u05D5\u05E2,\u05D1\
-        \u05EA\u05D9 \u05E7\u05D5\u05DC\u05E0\u05D5\u05E2,\u05D4\u05E7\u05E8\u05E0\
-        \u05D4,\u05D4\u05E7\u05E8\u05E0\u05D5\u05EA,\u05DB\u05E8\u05D8\u05D9\u05E1\
-        ,\u05E8\u05DB\u05D9\u05E9\u05EA \u05DB\u05E8\u05D8\u05D9\u05E1,\u05DB\u05E8\
-        \u05D8\u05D9\u05E1\u05D9\u05DD,\u05E1\u05D9\u05E0\u05DE\u05D4 \u05E1\u05D9\
-        \u05D8\u05D9,\u05E8\u05D1 \u05D7\u05DF,\u05D2\u05DC\u05D5\u05D1\u05D5\u05E1\
-        \ \u05D2\u05E8\u05D5\u05E4,\u05D9\u05E1 \u05E4\u05DC\u05D0\u05E0\u05D8,\u05D9\
-        \u05E1 \u05E4\u05DC\u05E0\u05D8,\u05E1\u05D9\u05E0\u05DE\u05D8\u05E7,\u05D3\
-        \u05D5\u05D9\u05D3\u05D9,\u05D3\u05D9.\u05D5\u05D9.\u05D3\u05D9,DVD,\u05D4\
-        \u05E9\u05DB\u05E8\u05D4,\u05E8\u05DB\u05D9\u05E9\u05EA \u05D5\u05D9\u05D3\
-        \u05D0\u05D5,\u05E1\u05E4\u05E8\u05D9\u05D9\u05EA \u05D5\u05D9\u05D3\u05D0\
-        \u05D5,\u05D4\u05E0\u05D7\u05D4,\u05D4\u05E0\u05D7\u05D5\u05EA,\u05D0\u05D9\
-        \u05DE\u05D4,\u05D0\u05E0\u05D9\u05DE\u05E6\u05D9\u05D4,\u05D1\u05D9\u05D5\
-        \u05D2\u05E8\u05E4\u05D9\u05D4,\u05D3\u05D5\u05E7\u05D5\u05DE\u05E0\u05D8\u05E8\
-        \u05D9,\u05D3\u05E8\u05DE\u05D4,\u05D4\u05D9\u05E1\u05D8\u05D5\u05E8\u05D9\
-        \u05D4,\u05D4\u05E8\u05E4\u05EA\u05E7\u05D0\u05D5\u05EA,\u05D9\u05E9\u05E8\
-        \u05D0\u05DC\u05D9,\u05DE\u05D3\u05E2 \u05D1\u05D3\u05D9\u05D5\u05E0\u05D9\
-        ,\u05DE\u05D5\u05D6\u05D9\u05E7\u05DC\u05D9,\u05DE\u05D9\u05E1\u05EA\u05D5\
-        \u05E8\u05D9\u05DF,\u05DE\u05DC\u05D7\u05DE\u05D4,\u05DE\u05E2\u05E8\u05D1\
-        \u05D5\u05DF,\u05DE\u05E9\u05E4\u05D7\u05D4,\u05DE\u05EA\u05D7,\u05E4\u05E0\
-        \u05D8\u05D6\u05D9\u05D4,\u05E4\u05E2\u05D5\u05DC\u05D4,\u05E4\u05E9\u05E2\
-        ,\u05E1\u05E4\u05D5\u05E8\u05D8,\u05E1\u05E8\u05D8 \u05E7\u05E6\u05E8,\u05E7\
-        \u05D5\u05DE\u05D3\u05D9\u05D4,\u05E8\u05D5\u05DE\u05E0\u05D8\u05D9\u05E7\u05D4\
-        ,\u05E8\u05D9\u05D0\u05DC\u05D9\u05D8\u05D9,\u05D3\u05D9\u05D1\u05D5\u05D1\
-        ,\u05DE\u05D3\u05D5\u05D1\u05D1,\u05D1\u05E2\u05D1\u05E8\u05D9\u05EA,\u05EA\
-        \u05DC\u05EA \u05DE\u05D9\u05DE\u05D3,\u05EA\u05DC\u05EA \u05DE\u05DE\u05D3\
-        ,\u05D0\u05D5\u05E1\u05E7\u05E8,\u05E4\u05E1\u05D8\u05D9\u05D1\u05DC,\u05E4\
-        \u05E1\u05D8\u05D9\u05D1\u05DC\u05D9\u05DD,\u05E4\u05E8\u05E1\u05D9\u05DD\
-        ,\u05E1\u05E8\u05D8\u05D9\u05DD \u05DC\u05D9\u05DC\u05D3\u05D9\u05DD,\u05E1\
-        \u05E8\u05D8\u05D9 \u05D9\u05DC\u05D3\u05D9\u05DD,\u05E1\u05E8\u05D8\u05D9\
-        \u05DD \u05D7\u05D3\u05E9\u05D9\u05DD,\u05E1\u05E8\u05D8\u05D9\u05DD \u05D9\
-        \u05E9\u05E0\u05D9\u05DD,\u05E9\u05D5\u05D1\u05E8\u05D9 \u05E7\u05D5\u05E4\
-        \u05D5\u05EA,\u05DB\u05EA\u05D5\u05D1\u05D9\u05D5\u05EA \u05D1\u05E2\u05D1\
-        \u05E8\u05D9\u05EA,\u05DB\u05EA\u05D5\u05D1\u05D9\u05D5\u05EA \u05DC\u05E1\
-        \u05E8\u05D8\u05D9\u05DD,\u05DB\u05EA\u05D5\u05D1\u05D9\u05D5\u05EA \u05DC\
-        \u05E1\u05E8\u05D8,\u05DB\u05EA\u05D5\u05D1\u05D9\u05D5\u05EA \u05DC\u05E1\
-        \u05D3\u05E8\u05D5\u05EA,\u05DB\u05EA\u05D5\u05D1\u05D9\u05D5\u05EA \u05DC\
-        \u05E1\u05D3\u05E8\u05D4,\u05D9\u05D5\u05DD \u05D4\u05D5\u05DC\u05D3\u05EA\
-        ,\u05D9\u05D5\u05DE\u05D5\u05DC\u05D3\u05EA,\u05D9\u05DE\u05D9 \u05D4\u05D5\
-        \u05DC\u05D3\u05EA,\u05DE\u05E6\u05D0 \u05DC\u05D9 \u05E1\u05E8\u05D8,\u05D4\
-        \u05D5\u05E8\u05D3\u05D4,\u05D9\u05E9\u05E8\u05D0\u05DC,movies,series,movie,subtitles,trailer,video,trailers,shows\
-        \ times,news,find me a movie,xryho,sratim,SubsCenter,movie theater,tv,israel,seret,HOT,\u05D4\
-        \u05D5\u05D8,YES, \u05D9\u05E1,\u05D1\u05DC\u05D5\u05E7\u05D1\u05D0\u05E1\u05D8\
-        \u05E8,\u05D1\u05DC\u05D5\u05E7\u05D1\u05E1\u05D8\u05E8,BLOCKBUSTER,IMDB,VOD\u05D8\
-        \u05D5\u05E8\u05E7,\u05D0\u05D9\u05D9\u05E4\u05D5\u05DF,\u05D0\u05E0\u05D3\
-        \u05E8\u05D5\u05D0\u05D9\u05D3 \" />\r\n             \r\n        \r\n    \
-        \    \r\n            <meta name=\"description\" content=\"\u05E1\u05D9\u05E0\
-        \u05DE\u05D4-\u05E1\u05D8 \u05E1\u05D0\u05D1\u05E1\u05E0\u05D8\u05E8 \u05DB\
-        \u05EA\u05D5\u05D1\u05D9\u05D5\u05EA - \u05E4\u05D5\u05E8\u05D8\u05DC \u05D4\
-        \u05E1\u05E8\u05D8\u05D9\u05DD \u05E9\u05DC \u05D9\u05E9\u05E8\u05D0\u05DC\
-        : \u05DE\u05D0\u05D2\u05E8 \u05D4\u05DB\u05EA\u05D5\u05D1\u05D9\u05D5\u05EA\
-        \ \u05D4\u05D2\u05D3\u05D5\u05DC \u05D1\u05D9\u05E9\u05E8\u05D0\u05DC : \u05DB\
-        \u05EA\u05D5\u05D1\u05D9\u05D5\u05EA \u05E1\u05E8\u05D8\u05D9\u05DD, \u05DB\
-        \u05EA\u05D5\u05D1\u05D9\u05D5\u05EA \u05E1\u05D3\u05E8\u05D5\u05EA, \u05DB\
-        \u05EA\u05D5\u05D1\u05D9\u05D5\u05EA \u05D5\u05EA\u05E8\u05D2\u05D5\u05DE\u05D9\
-        \u05DD \u05D1\u05E2\u05D1\u05E8\u05D9\u05EA, \u05DE\u05E4\u05D5\u05E8\u05E1\
-        \u05DE\u05D9\u05DD, \u05D8\u05E8\u05D9\u05D9\u05DC\u05E8\u05D9\u05DD, \u05E9\
-        \u05D7\u05E7\u05E0\u05D9 \u05E7\u05D5\u05DC\u05E0\u05D5\u05E2, \u05D1\u05D9\
-        \u05DE\u05D0\u05D9\u05DD, \u05EA\u05E1\u05E8\u05D9\u05D8\u05D0\u05D9\u05DD\
-        , \u05EA\u05DE\u05D5\u05E0\u05D5\u05EA \u05DE\u05EA\u05D5\u05DA \u05E1\u05E8\
-        \u05D8\u05D9\u05DD, \u05E4\u05D5\u05E1\u05D8\u05E8\u05D9\u05DD \u05DC\u05E1\
-        \u05E8\u05D8\u05D9\u05DD.\" />\r\n           \r\n                        \
-        \    \r\n                               \r\n    \r\n    <meta http-equiv=\"\
-        X-UA-Compatible\" content=\"chrome=1\" />\r\n    \r\n    \r\n        <link\
-        \ rel=\"shortcut icon\" href=\"/static/images/site/cinemast/favicon.ico\"\
-        \ type=\"image/x-icon\" />\r\n            \r\n\r\n\r\n           \r\n  \r\n\
-        \r\n    \r\n        <link href=\"/static/css/all_compressed.r1391099018.css\"\
-        \ rel=\"stylesheet\" type=\"text/css\" />\r\n    \r\n         \r\n       \
-        \ \r\n    \r\n    \r\n                       \r\n    \r\n        <script type=\"\
-        text/javascript\" src=\"/static/js/all_compressed.r1446544217.js\" charset=\"\
-        utf-8\"></script>\r\n    \r\n                           \r\n             \
-        \             \r\n                                                       \
-        \ \r\n   <script type=\"text/javascript\" src=\"/he/jsi18n/\"></script>  \
-        \          \r\n   <script type=\"text/javascript\" >var site_lang = 'he';</script>\r\
-        \n                        \r\n\r\n\r\n    <script async src=\"//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js\"\
-        ></script>\r\n            \r\n<script type=\"text/javascript\">\r\n\r\n$(document).ready(function(){\r\
-        \n                                                                       \
-        \                                 \r\n            $(\"#q\").autocomplete(\
-        \                                                                 \r\n   \
-        \         \"/\"+site_lang+\"/subscenter/lookup\",\r\n              {\r\n \
-        \            \r\n                matchContains: true,\r\n                minChars:\
-        \ 2,\r\n                         \r\n                delay:2, //delay:0, \
-        \           \r\n                matchSubset:1,            \r\n           \
-        \     cacheLength:10, // cacheLength:10,\r\n                onItemSelect:selectItem,\r\
-        \n                onFindValue:findValue,\r\n                formatItem:formatItem,\r\
-        \n                autoFill:true\r\n              }\r\n            );\r\n\r\
-        \n});         \r\n         \r\n</script>         \r\n\r\n                \
-        \    \r\n</head>\r\n    \r\n<body>\r\n  \r\n\r\n\r\n\r\n\r\n\r\n         \
-        \       \r\n\r\n\r\n    <div id=\"adsenseLeft-loader\">&nbsp;</div>\r\n  \
-        \  <div id=\"bgTop\"></div>\r\n    <div id=\"aboveSite\">\r\n        <a  href=\"\
-        http://subscenter.cinemast.com/he/\" id=\"logo\">\u05E1\u05D0\u05D1\u05E1\u05E0\
-        \u05D8\u05E8</a>\r\n        \r\n\r\n        <div id=\"advert\">         \r\
-        \n        \r\n           <!-- <iframe id=\"topBanner\"  scrolling=\"no\" width=\"\
-        468\" height=\"60\" frameborder=\"0\" marginheight=\"0\" marginwidth=\"0\"\
-        ></iframe>-->\r\n\r\n            <a href=\"/he/contactus/\" id=\"advert\"\
-        ><img width=\"468\" height=\"60\" src=\"/static/images/site/banners/newsubs_old.jpg\"\
-        \ alt=\"\u05D0\u05E0\u05E9\u05D9 \u05E6\u05D5\u05D5\u05EA\" /></a>\r\n   \
-        \         \r\n            <script type=\"text/javascript\">\r\n          \
-        \      //if (jQuery.inArray(get_user_rank(), [1, 2, 3] )  == -1 )\r\n    \
-        \                //document.write('<a href=\"http://www.techitout.co.il/\"\
-        \ target=\"_blank\" id=\"advert\"><img src=\"/static/images/site/banners/techitout.jpg\"\
-        \ width=\"468\" height=\"60\" alt=\"\u05D8\u05DB\u05E0\u05D5\u05DC\u05D5\u05D2\
-        \u05D9\u05D4\" /></a>');\r\n            </script> \r\n                \r\n\
-        \    </div>            \r\n    </div>\r\n    \r\n\r\n      \r\n    <div id=\"\
-        wrapper\">\r\n    \r\n  \r\n    <script type=\"text/javascript\">\r\n    \r\
-        \n        if (jQuery.inArray(get_user_rank(), [1, 2, 3] )  == -1 )\r\n   \
-        \     {\r\n            if(screen.width > 1024)\r\n            {          \
-        \                     \r\n                document.write('<div id=\"bgLeft\"\
-        ><div style=\"position: fixed;top: 50px;margin-right:20px;height: 1800px;\"\
-        >');\r\n                //document.write('<a href=\"http://www.techitout.co.il\"\
-        \ target=\"_blank\"><img src=\"/static/images/site/banners/banner-right.jpg\"\
-        \  /></a>');               \r\n                document.write('</div></div>');\
-        \                                                                        \
-        \           \r\n            }\r\n        }\r\n    \r\n    </script>\r\n  \
-        \      \r\n        \r\n        \r\n               \r\n        <div id=\"bgLeft\"\
-        >\r\n            <div id=\"bgLeftTop\"></div>\r\n            <div id=\"bgLeftMiddle\"\
-        ></div>\r\n            <div id=\"bgLeftBottom\"></div>\r\n        </div>\r\
-        \n        \r\n\r\n            \r\n        <div id=\"siteWrapper\">\r\n   \
-        \         <div id=\"userBar\">\r\n                                 \r\n  \
-        \              <script type=\"text/javascript\">\r\n                    \r\
-        \n                    //if (document.domain != \"127.0.0.1\" && location.hostname.indexOf(\"\
-        subscenter.cinemast.com\") == -1)\r\n                    if (location.hostname.indexOf(\"\
-        subscenter.org\") != -1)\r\n                        document.write('<div id=\"\
-        userBarRight\" style=\"display:none\" >');\r\n                    else\r\n\
-        \                        document.write('<div id=\"userBarRight\" >');\r\n\
-        \                </script>\r\n                                    \r\n   \
-        \                 \u05D1\u05E8\u05D5\u05DA \u05D4\u05D1\u05D0, <span class=\"\
-        special\" id=\"userMsg\" ></span>\r\n                    <a href=\"#myAccount\"\
-        \ class=\"userBarPlace\"></a>\r\n                    <span id=\"addMov\"></span>\
-        \ \r\n                    <span id=\"userLinks\"></span>\r\n             \
-        \        \r\n                     \r\n                        \r\n       \
-        \                                 \r\n                                   \
-        \ <span class=\"userBarRed\" id=\"mobileMsg\" style=\"padding-right:20px;display:none;\"\
-        >   <a href=\"http://subscenter.cinemast.com/he/site/version/?mobile=1\">\u05D4\
-        \u05E6\u05D2 \u05D2\u05E8\u05E1\u05D4 \u05DC\u05E0\u05D9\u05D9\u05D3</a></span>\
-        \                                        \r\n                            \
-        \        <span class=\"userBarRed\" style=\"color:red;\">   <a href=\"http://subscenter.cinemast.com/he/viewpage/jobs/\"\
-        >\u05D3\u05E8\u05D5\u05E9\u05D9\u05DD !! \u05D3\u05E8\u05D5\u05E9\u05D9\u05DD\
-        \ !! \u05D3\u05E8\u05D5\u05E9\u05D9\u05DD !!</a></span>\r\n              \
-        \                      \r\n                                     \r\n     \
-        \                  <span class=\"userBarRed\">   <!--<a href=\"/he/contactus/\"\
-        \ >\u05DE\u05E7\u05D5\u05D3\u05D3 \u05D0\u05EA\u05E8\u05D9\u05DD? \u05DC\u05D7\
-        \u05E5 \u05E4\u05D4 \u05D5\u05E9\u05DC\u05D7 \u05E4\u05E8\u05D8\u05D9\u05DD\
-        </a></span>-->\r\n                           \r\n                        \
-        \                \r\n\r\n                    </div> \r\n\r\n\r\n         \
-        \       <div id=\"userBarLeft\"> \r\n                        \r\n        \
-        \            \r\n                                    \r\n                \
-        \                                                \r\n                    \
-        \                \r\n                                                    \
-        \                                                \r\n                    \
-        \                   <!-- <a href=\"/he\"  > <img src=\"/static/images/site/icon_he.jpg\"\
-        \ alt=\"\" />        </a>-->\r\n                                        <!--\
-        \  <a href=\"javascript:sitelanguage('he');\"  >    <img src=\"/static/images/site/icon_he.jpg\"\
-        \ alt=\"\" />        </a> -->\r\n                                        \
-        \                        \r\n                            \r\n            \
-        \                \r\n                    \r\n                    \r\n    \
-        \            </div>\r\n                \r\n\r\n                    \r\n  \
-        \              \r\n                <div id=\"paypal\">         \r\n      \
-        \      <a href=\"http://subscenter.cinemast.com/paypal/donation/\" ><img src=\"\
-        /static/images/site/btn_donate_LG.gif\" alt=\"paypal\"></img></a>\r\n    \
-        \              <!--  <form action=\"https://www.paypal.com/cgi-bin/webscr\"\
-        \ method=\"post\"><div style='display:none;'><input type='hidden' id='csrfmiddlewaretoken'\
-        \ name='csrfmiddlewaretoken' value='1adfdb50e3c506d2e5a6aba0f9565ba8' /></div>\r\
-        \n                        <input type=\"hidden\" name=\"cmd\" value=\"_s-xclick\"\
-        >\r\n                        <input type=\"hidden\" name=\"hosted_button_id\"\
-        \ value=\"ACBBWLFSMS9VY\">\r\n                        <input type=\"image\"\
-        \ src=\"/static/images/site/btn_donate_LG.gif\" border=\"0\" name=\"submit\"\
-        \ alt=\"PayPal - \u05EA\u05E8\u05D5\u05DE\u05D4 \u05D1\u05E7\u05DC\u05D5\u05EA\
-        \ \u05D5\u05D1\u05E4\u05E9\u05D8\u05D5\u05EA\">\r\n                      \
-        \  <img alt=\"\" border=\"0\" src=\"https://www.paypal.com/en_US/i/scr/pixel.gif\"\
-        \ width=\"1\" height=\"1\">\r\n                    </form>      -->      \
-        \              \r\n                \r\n                </div>\r\n\r\n    \
-        \    \r\n            </div>\r\n            \r\n            \r\n         <div\
-        \ style=\"font-weight: bold;height: 40px;position: relative;top: 45px;width:\
-        \ 940px;height: 50px;\">\r\n                \r\n        <ul style=\"background-image:\
-        \ url('/static/images/site/cinemast/headerBg.png');width: 100%;height: 50px;\"\
-        >\r\n\r\n        <li class=\"cstli1\" style=\"float: right;padding-left: 2.2em;padding-top:\
-        \ 15px;font-size: 15px;color:white;padding-right:15px;\">          \r\n  \
-        \      \r\n        <a href=\"http://www.cinemast.com\"  class=\"hp_links\"\
-        >\u05E1\u05E8\u05D8\u05D9\u05DD</a>\r\n        <span style=\"color:white;font-size:\
-        \ 15px;\">:</span>     \r\n        <a href=\"http://www.cinemast.com/he/cinemast/movies/discussed/\"\
-        \  >\u05DE\u05D3\u05D5\u05D1\u05E8\u05D9\u05DD</a>\r\n        <span style=\"\
-        color:white;font-size: 15px;\">/</span>       \r\n        <a href=\"http://www.cinemast.com/he/cinemast/movies/\"\
-        \  class=\"hp_links\">\u05DE\u05D5\u05DE\u05DC\u05E6\u05D9\u05DD</a>     \
-        \   \r\n         </li>\r\n         \r\n        <li class=\"cstli2\" style=\"\
-        float: right;padding-left: 2.2em;padding-top: 15px;font-size: 15px;color:white;\"\
-        >     \r\n        <a href=\"http://www.cinemast.com/he/cinemast/series/new/\"\
-        \  class=\"hp_links\">\u05E1\u05D3\u05E8\u05D5\u05EA</a>\r\n        <span\
-        \ style=\"color:white;font-size: 15px;\">:</span>                 \r\n   \
-        \     <a href=\"http://www.cinemast.com/he/cinemast/series/discussed/\"  class=\"\
-        hp_links\">\u05DE\u05D3\u05D5\u05D1\u05E8\u05D5\u05EA</a>\r\n        <span\
-        \ style=\"color:white;font-size: 15px;\">/</span>       \r\n        <a href=\"\
-        http://www.cinemast.com/he/cinemast/series/\"  class=\"hp_links\">\u05DE\u05D5\
-        \u05DE\u05DC\u05E6\u05D5\u05EA</a>    \r\n         </li>\r\n             \
-        \   \r\n        \r\n            <li class=\"cstli3\" style=\"float: right;padding-left:\
-        \ 2.2em;padding-top: 13px;font-size: 15px;color:white;\">     \r\n       \
-        \     \r\n               <a href=\"javascript: void(0);\" id=\"cinemaZone\"\
-        \ class=\"hp_links\" style=\"padding-top:0px;\" >\u05E2\u05DB\u05E9\u05D9\u05D5\
-        \ \u05D1\u05E7\u05D5\u05DC\u05E0\u05D5\u05E2:</a>\r\n               <select\
-        \  name=\"AreaID\" id=\"AreaID\"  style=\"padding-top:0px;font-size: 15px;\"\
-        \ dir=\"rtl\"     >\r\n                     <option value=\"0\" id=\"SEL0\"\
-        \ style=\"color: red\">\u05D1\u05D7\u05E8 \u05D0\u05D6\u05D5\u05E8</option>\r\
-        \n               \r\n                     <option value=\"1\" id=\"SEL1\"\
-        \  selected  style=\"color: red\">\u05D0\u05D6\u05D5\u05E8 \u05D4\u05DE\u05E8\
-        \u05DB\u05D6</option>\r\n                     <option value=\"1\" >\u05EA\u05DC\
-        \ \u05D0\u05D1\u05D9\u05D1</option>\r\n                     <option value=\"\
-        1\" >\u05EA\u05DC \u05D0\u05D1\u05D9\u05D1 - \u05E6\u05E4\u05D5\u05DF</option>\r\
-        \n                     <option value=\"1\" >\u05EA\u05DC \u05D0\u05D1\u05D9\
-        \u05D1 - \u05DE\u05E8\u05DB\u05D6</option>\r\n                     <option\
-        \ value=\"1\" >\u05EA\u05DC \u05D0\u05D1\u05D9\u05D1 - \u05D3\u05E8\u05D5\u05DD\
-        </option>\r\n                     <option value=\"1\" >\u05D1\u05E7\u05E2\u05EA\
-        \ \u05D0\u05D5\u05E0\u05D5</option>\r\n                     <option value=\"\
-        1\" >\u05D7\u05D5\u05DC\u05D5\u05DF - \u05D1\u05EA \u05D9\u05DD</option>\r\
-        \n                     <option value=\"1\" >\u05E4\u05EA\u05D7 \u05EA\u05E7\
-        \u05D5\u05D4 \u05D5\u05D4\u05E1\u05D1\u05D9\u05D1\u05D4</option>\r\n     \
-        \                <option value=\"1\" >\u05E8\u05D0\u05E9\u05DC\"\u05E6 \u05D5\
-        \u05D4\u05E1\u05D1\u05D9\u05D1\u05D4</option>\r\n                     <option\
-        \ value=\"1\" >\u05E8\u05DE\u05EA \u05D2\u05DF - \u05D2\u05D1\u05E2\u05EA\u05D9\
-        \u05D9\u05DD</option>\r\n                     <option value=\"1\" >\u05DE\u05D5\
-        \u05E9\u05D1\u05D9\u05DD \u05D1\u05DE\u05E8\u05DB\u05D6</option>\r\n     \
-        \                \r\n                     <option value=\"2\" id=\"SEL2\"\
-        \  style=\"color: red\">\u05D0\u05D6\u05D5\u05E8 \u05D4\u05E9\u05E8\u05D5\u05DF\
-        \ \u05D5\u05D4\u05E1\u05D1\u05D9\u05D1\u05D4</option>\r\n                \
-        \     <option value=\"2\" >\u05D6\u05DB\u05E8\u05D5\u05DF - \u05D1\u05E0\u05D9\
-        \u05DE\u05D9\u05E0\u05D4</option>\r\n                     <option value=\"\
-        2\" >\u05D7\u05D3\u05E8\u05D4 \u05D5\u05D9\u05E9\u05D5\u05D1\u05D9 \u05E2\u05DE\
-        \u05E7 \u05D7\u05E4\u05E8</option>\r\n                     <option value=\"\
-        2\" >\u05E4\u05E8\u05D3\u05E1 \u05D7\u05E0\u05D4 - \u05DB\u05E8\u05DB\u05D5\
-        \u05E8</option>\r\n                     <option value=\"2\" >\u05D9\u05D9\u05E9\
-        \u05D5\u05D1\u05D9 \u05D4\u05E9\u05D5\u05DE\u05E8\u05D5\u05DF</option>\r\n\
-        \                     <option value=\"2\" >\u05E0\u05EA\u05E0\u05D9\u05D4\
-        \ \u05D5\u05D4\u05E1\u05D1\u05D9\u05D1\u05D4</option>\r\n                \
-        \     <option value=\"2\" >\u05E7\u05D9\u05E1\u05E8\u05D9\u05D4 \u05D5\u05D4\
-        \u05E1\u05D1\u05D9\u05D1\u05D4</option>\r\n                     <option value=\"\
-        2\" >\u05E8\u05DE\u05EA \u05D4\u05E9\u05E8\u05D5\u05DF - \u05D4\u05E8\u05E6\
-        \u05DC\u05D9\u05D4</option>\r\n                     <option value=\"2\" >\u05E8\
-        \u05E2\u05E0\u05E0\u05D4 - \u05DB\u05E4\u05E8 \u05E1\u05D1\u05D0</option>\r\
-        \n                     <option value=\"2\" >\u05D4\u05D5\u05D3 \u05D4\u05E9\
-        \u05E8\u05D5\u05DF \u05D5\u05D4\u05E1\u05D1\u05D9\u05D1\u05D4</option>\r\n\
-        \                     <option value=\"2\" >\u05DE\u05D5\u05E9\u05D1\u05D9\u05DD\
-        \ \u05D1\u05E9\u05E8\u05D5\u05DF</option>\r\n                     \r\n   \
-        \                  <option value=\"3\" id=\"SEL3\"   style=\"color: red\"\
-        >\u05D0\u05D6\u05D5\u05E8 \u05E6\u05E4\u05D5\u05DF</option>\r\n          \
-        \           <option value=\"3\" >\u05D7\u05D9\u05E4\u05D4 \u05D5\u05D7\u05D5\
-        \u05E3 \u05D4\u05DB\u05E8\u05DE\u05DC</option>\r\n                     <option\
-        \ value=\"3\" >\u05E7\u05E8\u05D9\u05D5\u05EA</option>\r\n               \
-        \      <option value=\"3\" >\u05E2\u05DB\u05D5 - \u05E0\u05D4\u05E8\u05D9\u05D4\
-        </option>\r\n                     <option value=\"3\" >\u05D2\u05DC\u05D9\u05DC\
-        \ \u05D5\u05E2\u05DE\u05E7\u05D9\u05DD</option>\r\n                     <option\
-        \ value=\"3\" >\u05D8\u05D1\u05E8\u05D9\u05D4 \u05D5\u05D4\u05E1\u05D1\u05D9\
-        \u05D1\u05D4</option>\r\n                     <option value=\"3\" >\u05E2\u05DE\
-        \u05E7 \u05D9\u05D6\u05E8\u05E2\u05D0\u05DC</option>\r\n                 \
-        \    <option value=\"3\" >\u05DB\u05E8\u05DE\u05D9\u05D0\u05DC \u05D5\u05D4\
-        \u05E1\u05D1\u05D9\u05D1\u05D4</option>\r\n                     <option value=\"\
-        3\" >\u05DE\u05D5\u05E9\u05D1\u05D9\u05DD \u05D1\u05E6\u05E4\u05D5\u05DF</option>\r\
-        \n                                     \r\n                     <option value=\"\
-        4\" id=\"SEL4\"  style=\"color: red\">\u05D9\u05E8\u05D5\u05E9\u05DC\u05D9\
-        \u05DD \u05D5\u05D4\u05E1\u05D1\u05D9\u05D1\u05D4</option>\r\n           \
-        \          <option value=\"4\" >\u05DE\u05D5\u05D3\u05D9\u05E2\u05D9\u05DF\
-        \ \u05D5\u05D4\u05E1\u05D1\u05D9\u05D1\u05D4</option>\r\n                \
-        \     <option value=\"4\" >\u05D1\u05D9\u05EA \u05E9\u05DE\u05E9 \u05D5\u05D4\
-        \u05E1\u05D1\u05D9\u05D1\u05D4</option>\r\n                     <option value=\"\
-        4\" >\u05DE\u05D5\u05E9\u05D1\u05D9\u05DD \u05D1\u05D0\u05D6\u05D5\u05E8 \u05D9\
-        \u05E8\u05D5\u05E9\u05DC\u05D9\u05DD</option>\r\n                     \r\n\
-        \                     <option value=\"5\" id=\"SEL5\"  style=\"color: red\"\
-        >\u05D0\u05D6\u05D5\u05E8 \u05D4\u05E9\u05E4\u05DC\u05D4 \u05D5\u05D4\u05E1\
-        \u05D1\u05D9\u05D1\u05D4</option>\r\n                     <option value=\"\
-        5\" >\u05E0\u05E1 \u05E6\u05D9\u05D5\u05E0\u05D4 - \u05E8\u05D7\u05D5\u05D1\
-        \u05D5\u05EA</option>\r\n                     <option value=\"5\" >\u05D0\u05E9\
-        \u05D3\u05D5\u05D3 - \u05D0\u05E9\u05E7\u05DC\u05D5\u05DF</option>\r\n   \
-        \                  <option value=\"5\" >\u05E8\u05DE\u05DC\u05D4 - \u05DC\u05D5\
-        \u05D3</option>\r\n                     <option value=\"5\" >\u05D2\u05D3\u05E8\
-        \u05D4 \u05D9\u05D1\u05E0\u05D4 \u05D5\u05D4\u05E1\u05D1\u05D9\u05D1\u05D4\
-        </option>\r\n                     <option value=\"5\" >\u05DE\u05D5\u05E9\u05D1\
-        \u05D9\u05DD \u05D1\u05E9\u05E4\u05DC\u05D4</option>\r\n                 \
-        \    \r\n                     <option value=\"6\" id=\"SEL6\"  style=\"color:\
-        \ red\">\u05D0\u05D6\u05D5\u05E8 \u05D3\u05E8\u05D5\u05DD</option>\r\n   \
-        \                  <option value=\"6\" >\u05D1\u05D0\u05E8 \u05E9\u05D1\u05E2\
-        \ \u05D5\u05D4\u05E1\u05D1\u05D9\u05D1\u05D4</option>\r\n                \
-        \     <option value=\"6\" >\u05D0\u05D9\u05DC\u05EA \u05D5\u05D4\u05E2\u05E8\
-        \u05D1\u05D4</option>\r\n                     <option value=\"6\" >\u05DE\u05D5\
-        \u05E9\u05D1\u05D9\u05DD \u05D1\u05D3\u05E8\u05D5\u05DD</option>\r\n     \
-        \           </select>\r\n            \r\n            </li>\r\n\t\t\t\r\n \
-        \       \r\n                \r\n                \r\n        </ul>        \r\
-        \n\r\n        </div>\r\n\r\n   \r\n            \r\n            <div id=\"\
-        menuBar\">\r\n                <a href=\"/he/\" id=\"menuBarHome\"></a>\r\n\
-        \                <a href=\"http://subscenter.cinemast.com/he/subtitle/request/\"\
-        \ class=\"menuBarLink\">\u05D1\u05E7\u05E9\u05EA \u05DB\u05EA\u05D5\u05D1\u05D9\
-        \u05D5\u05EA</a>\r\n                <a href=\"http://www.subscenter.org/he/subtitle/inprogress/\"\
-        \ class=\"menuBarLink\">\u05EA\u05D4\u05DC\u05D9\u05DB\u05D9\u05DD</a>   \
-        \     \r\n\r\n                <a href=\"http://subscenter.cinemast.com/he/calendar\"\
-        \ class=\"menuBarLink\">\u05D4\u05D9\u05D5\u05DE\u05DF \u05E9\u05DC\u05D9\
-        </a>                \r\n\r\n                <a href=\"/he/contactus/\" class=\"\
-        menuBarLink\">\u05E6\u05D5\u05E8 \u05E7\u05E9\u05E8</a> \r\n             \
-        \   \r\n                  <a href=\"http://subscenter.cinemast.com/paypal/donation/\"\
-        \ class=\"menuBarLink\" style=\"background:#e2e5ec; color:black;\">\u05EA\u05DE\
-        \u05D9\u05DB\u05D4 \u05D1\u05D0\u05EA\u05E8 \u05DC\u05D7\u05E5 \u05DB\u05D0\
-        \u05DF</a> \r\n                  \r\n                <a href=\"/viewpage/search/\"\
-        \ class=\"menuBarLink\">\u05D7\u05D9\u05E4\u05D5\u05E9 \u05DE\u05EA\u05E7\u05D3\
-        \u05DD</a> \r\n                \r\n              <!-- <div class=\"menuBarLink\"\
-        \ >\r\n                     <ul id=\"p7menubar\">\r\n                    \
-        \ \r\n                        <li><a href=\"/viewpage/search/\">\u05D7\u05D9\
-        \u05E4\u05D5\u05E9 \u05DE\u05EA\u05E7\u05D3\u05DD:</a><ul>               \
-        \             \r\n                            <li><a href=\"/subtitle/search/?q=%40\u05E1\
-        \u05E8\u05D8\">\u05E1\u05E8\u05D8\u05D9\u05DD \u05D0\u05D7\u05E8\u05D5\u05E0\
-        \u05D9\u05DD</a></li>\r\n                            <li><a href=\"/subtitle/search/?q=%40\u05E1\
-        \u05D3\u05E8\u05D4\">\u05E1\u05D3\u05E8\u05D5\u05EA \u05D0\u05D7\u05E8\u05D5\
-        \u05E0\u05D5\u05EA</a></li>\r\n                            <li><a href=\"\
-        /subtitle/search/?q=%40\u05E1\u05E8\u05D8+\u05E7\u05D5\u05DE\u05D3\u05D9\u05D4\
-        \">\u05E1\u05E8\u05D8\u05D9 \u05E7\u05D5\u05DE\u05D3\u05D9\u05D4</a></li>\r\
-        \n                            <li><a href=\"/subtitle/search/?q=%40\u05E1\u05E8\
-        \u05D8+\u05DE\u05EA\u05D7+2011\">\u05E1\u05E8\u05D8\u05D9 \u05DE\u05EA\u05D7\
-        </a></li>\r\n                            <li><a href=\"/subtitle/search/?q=%40\u05E1\
-        \u05D3\u05E8\u05D4+\u05E7\u05D5\u05DE\u05D3\u05D9\u05D4\">\u05E1\u05D3\u05E8\
-        \u05D5\u05EA \u05E7\u05D5\u05DE\u05D3\u05D9\u05D4</a></li>\r\n           \
-        \                 <li><a href=\"/subtitle/search/?q=%40\u05E1\u05E8\u05D8\
-        +2011\">\u05E1\u05E8\u05D8\u05D9\u05DD \u05D12011</a></li>\r\n           \
-        \                 <li><a href=\"/subtitle/search/?q=%40\u05E1\u05D3\u05E8\u05D4\
-        +2011\">\u05E1\u05D3\u05E8\u05D5\u05EA \u05D12011</a></li>\r\n           \
-        \                 \r\n                            </ul>\r\n              \
-        \          </li>\r\n                    </ul>\r\n                </div>-->\r\
-        \n                    \r\n                                            \r\n\
-        \                    \r\n                <div id=\"menuBarLeft\"></div>\r\n\
-        \                \r\n                        <form action=\"/he/subtitle/search/\"\
-        \ method=\"get\" id=\"qform\" >\r\n                        \r\n          \
-        \                  <input type=\"submit\" value=\"\" id=\"searchBtn\" /> \
-        \                       \r\n                            <input type=\"text\"\
-        \ autocomplete=\"off\"  id=\"q\" name=\"q\" class=\"q\" x-webkit-speech />\r\
-        \n                        \r\n                        </form>\r\n        \
-        \        \r\n                <div id=\"bgSearchBox\"></div>\r\n          \
-        \                                  \r\n            </div>\r\n            \r\
-        \n              \r\n  \r\n       \r\n            \r\n              \r\n  \r\
-        \n             \r\n            \r\n            \r\n            <div id=\"\
-        sitePart\">\r\n            <!-- <div id=\"eventCalendarWeek\"></div>-->\r\n\
-        \            \r\n             <div id=\"content\">\r\n             <center>\r\
-        \n                     <div style=\"\">&nbsp;</div>\r\n                  \
-        \  \r\n\r\n                       <!--  <p><iframe id=\"centerBanner\"  scrolling=\"\
-        no\" width=\"940\" height=\"55\" frameborder=\"0\" marginheight=\"0\" marginwidth=\"\
-        0\"></iframe></p>      -->\r\n\r\n                         \r\n          \
-        \              <!-- <a href=\"/paypal/donation/\"  >    <img src=\"/static/images/site/banners/vip.jpg\"\
-        \ alt=\"\u05EA\u05E8\u05D5\u05DD \u05D5\u05D4\u05E8\u05D5\u05D5\u05D7 \u05DC\
-        \u05D7\u05E5 \u05DB\u05D0\u05DF \u05DC\u05E4\u05E8\u05D8\u05D9\u05DD\" height=\"\
-        90\" width=\"728\" />        </a>              \r\n\r\n                  \
-        \      <!-- a href=\"http://www.shiftplay.net\" id=\"advert\"><img width=\"\
-        940\" height=\"55\" src=\"/static/images/site/banners/shiftplay.jpg\" title=\"\
-        \u05DE\u05E9\u05D7\u05E7\u05D9\u05DD \u05D1\u05E8\u05E9\u05EA\" alt=\"\u05DE\
-        \u05E9\u05D7\u05E7\u05D9\u05DD \u05D1\u05E8\u05E9\u05EA\" /></a> \r\n    \
-        \                    <a href=\"/paypal/donation/\"  >    <img src=\"/static/images/site/banners/paypal2.jpg\"\
-        \ alt=\"\u05EA\u05E8\u05D5\u05DD \u05D5\u05D4\u05E8\u05D5\u05D5\u05D7 \u05DC\
-        \u05D7\u05E5 \u05DB\u05D0\u05DF \u05DC\u05E4\u05E8\u05D8\u05D9\u05DD\" height=\"\
-        55\" width=\"940\" />        </a -->             \r\n\t\t\t\t\r\n\t\t\t\t\r\
-        \n\t\t\t\t<script type=\"text/javascript\">\r\n\t\t\t\t\r\n    \t        \
-        \    if (document.domain == \"127.0.0.1\" || location.hostname.indexOf(\"\
-        subscenter.org\") != -1)\r\n    \t            {     \r\n   \t\t\t\t\t    document.write('<a\
-        \ href=\"http://subscenter.cinemast.com/\"><span style=\"font-weight:bold;font-size:\
-        \ 24px;color:red;\" > \u05D2\u05D5\u05DC\u05E9\u05D9\u05DD \u05D9\u05E7\u05E8\
-        \u05D9\u05DD , \u05D4\u05D0\u05EA\u05E8 \u05E2\u05D1\u05E8 \u05DC\u05DB\u05EA\
-        \u05D5\u05D1\u05EA subscenter.cinemast.com</span></a>');  \r\n\t\t\t\t\t\t\
-        document.write('<br /><a href=\"http://subscenter.cinemast.com/\"><span style=\"\
-        font-weight:bold;font-size: 20px;color:blue;\" > \u05E8\u05D5\u05E6\u05D9\u05DD\
-        \ \u05DC\u05E2\u05D6\u05D5\u05E8 \u05DC\u05D0\u05EA\u05E8? \u05D4\u05E7.\u05DC\
-        \u05D9.\u05E7\u05D5 \u05E4\u05E2\u05DD \u05D1\u05D9\u05D5\u05DD \u05E2\u05DC\
-        \ \u05D4\u05E4\u05E8.\u05E1\u05D5\u05DE\u05D5.\u05EA</span></a>');    \t\t\
-        \t\t\t\t\r\n                        //<br><a href=\"/he/contactus/\" ><span>\u05D2\
-        \u05D5\u05DC\u05E9\u05D9\u05DD \u05D9\u05E7\u05E8\u05D9\u05DD \u05DE\u05D9\
-        \ \u05E9\u05D7\u05D5\u05D5\u05D4 \u05D1\u05E2\u05D9\u05D5\u05EA \u05D4\u05EA\
-        \u05D7\u05D1\u05E8\u05D5\u05EA \u05D0\u05E0\u05D0 \u05E6\u05E8\u05D5 \u05E7\
-        \u05E9\u05E8 \u05D1\u05E7\u05D9\u05E9\u05D5\u05E8 \u05D4\u05D1\u05D0</span></a>\r\
-        \n                    }\r\n                    \r\n                </script>\r\
-        \n                \r\n                </center>   \r\n            \r\n\r\n\
-        \                    \r\n\r\n\r\n<link rel=\"stylesheet\" type=\"text/css\"\
-        \ media=\"screen\" href=\"/css/processes.1297197788.css\"/>\r\n<link rel=\"\
-        stylesheet\" type=\"text/css\" media=\"screen\" href=\"/css/button.1297254008.css\"\
-        />\r\n    \r\n\r\n\r\n                <center>                \r\n       \
-        \         \r\n                    <div style=\"padding-top:20px;\">\r\n  \
-        \                                                          \r\n          \
-        \                  <script type=\"text/javascript\">                 \r\n\
-        \                                if (jQuery.inArray(get_user_rank(), [1, 2,\
-        \ 3] )  == -1 )\r\n                                {                     \
-        \  \r\n                                    document.write('<!-- 72890 --><ins\
-        \ class=\"adsbygoogle\" style=\"display:inline-block;width:728px;height:90px;\"\
-        \ data-ad-client=\"ca-pub-6549364321923143\" data-ad-slot=\"2157828024\"></ins>');\r\
-        \n                                    (adsbygoogle = window.adsbygoogle ||\
-        \ []).push({});\r\n                                }\r\n                 \
-        \           </script>\r\n                            \r\n                \
-        \    \r\n                    </div>\r\n                </center>      \r\n\
-        \                <br />\r\n\r\n\r\n        \r\n<div id=\"currentPath\">\r\n\
-        \t\t<a href=\"/\">\u05E1\u05D0\u05D1\u05E1\u05E0\u05D8\u05E8</a> \xBB\r\n\t\
-        \t<span class=\"fixDirection\">\u05D7\u05D9\u05E4\u05D5\u05E9 \xBB \u05E2\u05D1\
-        \u05D5\u05E8 \u05D4\u05DE\u05D9\u05DC\u05D4 1-10 \u05D0\u05D5\u05D3\u05D5\u05EA\
-        \ 3 \u05EA\u05D5\u05E6\u05D0\u05D5\u05EA (0:00:00.007250 \u05E9\u05E0\u05D9\
-        \u05D5\u05EA) \u05E2\u05D1\u05D5\u05E8 \u05D4\u05DE\u05D9\u05DC\u05D4 <b>Dallas</b></span>\r\
-        \n</div>\r\n\t\r\n\r\n\r\n\t<div class=\"processesPages\">\r\n\t\t\n\n\n\n\
-        \n \r\n\t</div>\r\n\t\r\n\t\r\n\r\n                                \r\n  \
-        \                              \r\n\t\r\n\t<div id=\"processes\">\r\n\r\n\t\
-        \r\n\t\r\n\r\n         \r\n\r\n                                        \r\n\
-        \t\t\r\n\t\t\t<div class=\"generalWindow process movieProcess\">\r\n\t\t\t\
-        \r\n\t\t\r\n\t\t\t<div class=\"generalWindowTop\">\r\n\t\t\t\t<div class=\"\
-        generalWindowRight\">\r\n\t\t\t\t\t<img src=\"/static/images/site/generalWindowArrow.png\"\
-        \ alt=\"\" class=\"closeGeneralWindow\" />\r\n\r\n                       \
-        \ \r\n\t\t\t\t\t\t                         \t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\
-        <a href=\"http://subscenter.cinemast.com/he/subtitle/movie/raanan-on-the-morning-dallas-buyers-club/\"\
-        >\u05E8\u05E2\u05E0\u05DF \u05E2\u05DC \u05D4\u05D1\u05D5\u05E7\u05E8-\u05DE\
-        \u05D5\u05E2\u05D3\u05D5\u05DF ... / Ra&#39;Anan On The ...</a>\r\n\t\t\t\t\
-        \t\t \r\n                         \r\n                         \r\n\t\t\t\t\
-        </div>\r\n\t\t\t</div>\r\n\t\t\t<div class=\"generalWindowBottom\">\r\n\r\n\
-        \t\t\t\t   \r\n\t\t\t\t\t<a href=\"http://subscenter.cinemast.com/he/subtitle/movie/raanan-on-the-morning-dallas-buyers-club/\"\
-        >\r\n\t\t\t\t\r\n\t\t\t\t\t\t\r\n                            \r\n\t\t\t\t\t\
-        \t\t     <img src=\"/static/images/site/he/nopicturesmall.jpg\" alt=\"\u05E8\
-        \u05E2\u05E0\u05DF \u05E2\u05DC \u05D4\u05D1\u05D5\u05E7\u05E8-\u05DE\u05D5\
-        \u05E2\u05D3\u05D5\u05DF \u05D4\u05DC\u05E7\u05D5\u05D7\u05D5\u05EA \u05E9\
-        \u05DC \u05D3\u05D0\u05DC\u05D0\u05E1\" class=\"processImg\" />\r\n      \
-        \                      \r\n\t\t\t\t\t\t\r\n\t\t\t\t\t</a>\r\n\r\n\t\t\t\t\r\
-        \n\t\t\t\t<div class=\"processInfo\">\r\n\t\t\t\t\t<div class=\"processInfoField\"\
-        >\r\n\t\t\t\t\t\t<span class=\"special\">\u05D6'\u05D0\u05E0\u05E8\u05D9\u05DD\
-        : </span>.<br />\r\n\t\t\t\t\t\t<span class=\"special\">\u05E9\u05E0\u05EA\
-        \ \u05D9\u05E6\u05D9\u05D0\u05D4: </span>2014.<br />\r\n\t\t\t\t\t\t\t\r\n\
-        \t\t\t\t\t\t\t\t<span class=\"special\">\u05E1\u05E8\u05D8</span> <br />\r\
-        \n\t\t\t\t\t\t\r\n\t\t\t\t\t\t<span class=\"special\">\u05E6\u05D9\u05D5\u05DF\
-        : </span>0.0/10.<br />\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"processInfoField\"\
-        >\r\n\t\t\t\t\t\t<br /><span class=\"special\">\u05EA\u05E7\u05E6\u05D9\u05E8\
-        : </span>\u05DE\u05D1\u05D5\u05E1\u05E1 \u05E2\u05DC \u05E1\u05D9\u05E4\u05D5\
-        \u05E8 \u05D7\u05D9\u05D9\u05D5 \u05D4\u05D0\u05DE\u05D9\u05EA\u05D9 \u05E9\
-        \u05DC \u05E8\u05D5\u05DF \u05D5\u05D5\u05D3\u05E8\u05D5\u05E3 \u05E9\u05D1\
-        \u05D1\u05D3\u05D9\u05E7\u05D4 \u05E9\u05D2\u05E8\u05EA\u05D9\u05EA \u05D1\
-        \u05D1\u05D9\u05EA \u05D4\u05D7\u05D5\u05DC\u05D9\u05DD \u05DE\u05EA\u05D2\
-        \u05DC\u05D4 \u05DB\u05E0\u05E9\u05D0 \u05E0\u05D2\u05D9\u05E3\r\n\t\t\t\t\
-        \t</div>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\r\n\t\r\n\r\n\
-        \         \r\n\r\n                                        \r\n\t\t\r\n\t\t\
-        \t<div class=\"generalWindow process movieProcess\">\r\n\t\t\t\r\n\t\t\r\n\
-        \t\t\t<div class=\"generalWindowTop\">\r\n\t\t\t\t<div class=\"generalWindowRight\"\
-        >\r\n\t\t\t\t\t<img src=\"/static/images/site/generalWindowArrow.png\" alt=\"\
-        \" class=\"closeGeneralWindow\" />\r\n\r\n                        \r\n\t\t\
-        \t\t\t\t                         \t\t\t\t\t\t\r\n\t\t\t\t\t\t\t<a href=\"\
-        http://subscenter.cinemast.com/he/subtitle/movie/dallas-buyers-club/\">\u05DE\
-        \u05D5\u05E2\u05D3\u05D5\u05DF \u05D4\u05DC\u05E7\u05D5\u05D7\u05D5\u05EA\
-        \ \u05E9\u05DC ... / Dallas Buyers Club</a>\r\n\t\t\t\t\t\t \r\n         \
-        \                \r\n                         \r\n\t\t\t\t</div>\r\n\t\t\t\
-        </div>\r\n\t\t\t<div class=\"generalWindowBottom\">\r\n\r\n\t\t\t\t   \r\n\
-        \t\t\t\t\t<a href=\"http://subscenter.cinemast.com/he/subtitle/movie/dallas-buyers-club/\"\
-        >\r\n\t\t\t\t\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t<img src=\"/static/cache/images/movies/posters/movie_9433_1390863766_73_thumbnail_small.jpg\"\
-        \ alt=\"\u05DE\u05D5\u05E2\u05D3\u05D5\u05DF \u05D4\u05DC\u05E7\u05D5\u05D7\
-        \u05D5\u05EA \u05E9\u05DC \u05D3\u05D0\u05DC\u05D0\u05E1\" class=\"processImg\"\
-        \ />\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t</a>\r\n\r\n\t\t\t\t\r\n\t\t\t\t<div class=\"\
-        processInfo\">\r\n\t\t\t\t\t<div class=\"processInfoField\">\r\n\t\t\t\t\t\
-        \t<span class=\"special\">\u05D6'\u05D0\u05E0\u05E8\u05D9\u05DD: </span>\u05D1\
-        \u05D9\u05D5\u05D2\u05E8\u05E4\u05D9\u05D4 | \u05D3\u05E8\u05DE\u05D4 | \u05D4\
-        \u05D9\u05E1\u05D8\u05D5\u05E8\u05D9\u05D4 .<br />\r\n\t\t\t\t\t\t<span class=\"\
-        special\">\u05E9\u05E0\u05EA \u05D9\u05E6\u05D9\u05D0\u05D4: </span>2013.<br\
-        \ />\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t<span class=\"special\">\u05E1\u05E8\
-        \u05D8</span> <br />\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t\t<span class=\"special\"\
-        >\u05E6\u05D9\u05D5\u05DF: </span>8.1/10.<br />\r\n\t\t\t\t\t</div>\r\n\t\t\
-        \t\t\t<div class=\"processInfoField\">\r\n\t\t\t\t\t\t<br /><span class=\"\
-        special\">\u05EA\u05E7\u05E6\u05D9\u05E8: </span>\u05DE\u05D1\u05D5\u05E1\u05E1\
-        \ \u05E2\u05DC \u05E1\u05D9\u05E4\u05D5\u05E8 \u05D7\u05D9\u05D9\u05D5 \u05D4\
-        \u05D0\u05DE\u05D9\u05EA\u05D9 \u05E9\u05DC \u05E8\u05D5\u05DF \u05D5\u05D5\
-        \u05D3\u05E8\u05D5\u05E3 \u05DB\u05D0\u05E9\u05E8 \u05D1\u05D1\u05D3\u05D9\
-        \u05E7\u05D4 \u05E9\u05D2\u05E8\u05EA\u05D9\u05EA \u05D1\u05D1\u05D9\u05EA\
-        \ \u05D4\u05D7\u05D5\u05DC\u05D9\u05DD \u05DE\u05EA\u05D2\u05DC\u05D4 \u05DB\
-        \u05E0\u05E9\u05D0 \u05E0\u05D2\u05D9\u05E3 \u05D4- HIV \u05D5\u05D4\u05E8\
-        \u05D5\u05E4\u05D0\u05D9\u05DD \u05DE\u05D5\u05D3\u05D9\u05E2\u05D9\u05DD\
-        \ \u05DC\u05D5 \u05E9\u05E0\u05D5\u05EA\u05E8\u05D5 \u05DC\u05D5 30 \u05D9\
-        \u05D5\u05DD \u05DC\u05D7\u05D9\u05D5\u05EA. \u05D1\u05D0\u05D5\u05EA\u05D4\
-        \ \u05E9\u05E0\u05D4 \u05D0\u05D9\u05E9\u05E8 \u05D4\u05DE\u05DE\u05E9\u05DC\
-        \ \u05D4\u05D0\u05DE\u05E8\u05D9\u05E7\u05E0\u05D9 \u05E8\u05E7 \u05EA\u05E8\
-        \u05D5\u05E4\u05D4 \u05D0\u05D7\u05EA \u05DC\u05D8\u05D9\u05E4\u05D5\u05DC\
-        \ ...\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</div>\r\
-        \n\r\n\t\r\n\r\n         \r\n\r\n                                        \r\
-        \n\t\t\r\n\t\t\t<div class=\"generalWindow process movieProcess\">\r\n\t\t\
-        \r\n\t\t\r\n\t\t\t<div class=\"generalWindowTop\">\r\n\t\t\t\t<div class=\"\
-        generalWindowRight\">\r\n\t\t\t\t\t<img src=\"/static/images/site/generalWindowArrow.png\"\
-        \ alt=\"\" class=\"closeGeneralWindow\" />\r\n\r\n                       \
-        \ \r\n\t\t\t\t\t\t\r\n                         \r\n                      \
-        \   \r\n\t\t\t\t\t\t\t<a href=\"http://subscenter.cinemast.com/he/subtitle/series/dallas/\"\
-        >\u05D3\u05D0\u05DC\u05D0\u05E1 / Dallas</a>\r\n\t\t\t\t\t\t\r\n\t\t\t\t</div>\r\
-        \n\t\t\t</div>\r\n\t\t\t<div class=\"generalWindowBottom\">\r\n\r\n\t\t\t\t\
-        \t\t\t\t\t\t\r\n\t\t\t\t\t<a href=\"http://subscenter.cinemast.com/he/subtitle/series/dallas/\"\
-        >\r\n\t\t\t\t\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t<img src=\"/static/cache/images/movies/posters/movie_8731_1365234686_59_thumbnail_small.jpg\"\
-        \ alt=\"\u05D3\u05D0\u05DC\u05D0\u05E1\" class=\"processImg\" />\r\n\t\t\t\
-        \t\t\t\r\n\t\t\t\t\t</a>\r\n\r\n\t\t\t\t\r\n\t\t\t\t<div class=\"processInfo\"\
-        >\r\n\t\t\t\t\t<div class=\"processInfoField\">\r\n\t\t\t\t\t\t<span class=\"\
-        special\">\u05D6'\u05D0\u05E0\u05E8\u05D9\u05DD: </span>\u05D3\u05E8\u05DE\
-        \u05D4.<br />\r\n\t\t\t\t\t\t<span class=\"special\">\u05E9\u05E0\u05EA \u05D9\
-        \u05E6\u05D9\u05D0\u05D4: </span>2012.<br />\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\
-        \t\t<span class=\"special\">\u05E1\u05D3\u05E8\u05D4</span><br />\r\n\t\t\t\
-        \t\t\t\r\n\t\t\t\t\t\t<span class=\"special\">\u05E6\u05D9\u05D5\u05DF: </span>0.0/10.<br\
-        \ />\r\n\t\t\t\t\t</div>\r\n\t\t\t\t\t<div class=\"processInfoField\">\r\n\
-        \t\t\t\t\t\t<br /><span class=\"special\">\u05EA\u05E7\u05E6\u05D9\u05E8:\
-        \ </span>\u05D3\u05D0\u05DC\u05D0\u05E1 \u05D4\u05D9\u05D0 \u05E1\u05D3\u05E8\
-        \u05EA \u05D3\u05E8\u05DE\u05D4 \u05D7\u05D3\u05E9\u05D4 \u05E9\u05DC \u05E2\
-        \u05E8\u05D5\u05E5 TNT, \u05D4\u05E9\u05E7\u05D4 \u05DE\u05D7\u05D5\u05D3\u05E9\
-        \u05EA \u05E9\u05DC \u05D4\u05E1\u05D3\u05E8\u05D4 \u05D4\u05DE\u05E7\u05D5\
-        \u05E8\u05D9\u05EA, \u05D0\u05E9\u05E8 \u05E9\u05D5\u05D3\u05E8\u05D4 \u05D1\
-        \u05D9\u05DF \u05D4\u05E9\u05E0\u05D9\u05DD 1978-1991 \u05D5\u05D4\u05D9\u05EA\
-        \u05D4 \u05DC\u05D0\u05D7\u05EA \u05D4\u05E1\u05D3\u05E8\u05D5\u05EA \u05D4\
-        \u05DE\u05E6\u05DC\u05D9\u05D7\u05D5\u05EA \u05D1\u05D4\u05D9\u05E1\u05D8\u05D5\
-        \u05E8\u05D9\u05D4 \u05E9\u05DC \u05D4\u05D8\u05DC\u05D5\u05D9\u05D6\u05D9\
-        \u05D4 \u05D4\u05D0\u05DE\u05E8\u05D9\u05E7\u05D0\u05D9\u05EA. \u05D1\u05DE\
-        \u05E8\u05DB\u05D6 \u05D4\u05E2\u05DC\u05D9\u05DC\u05D4 \u05E2\u05D5\u05DE\
-        \u05D3\u05EA \u05DE\u05E9\u05E4\u05D7\u05EA \u05D9\u05D5\u05D0\u05D9\u05E0\
-        \u05D2, \u05DE\u05E9\u05E4\u05D7\u05D4 \u05D8\u05E7\u05E1\u05E0\u05D9\u05EA\
-        \ \u05E2\u05E9\u05D9\u05E8\u05D4 \u05DE\u05E2\u05E1\u05E7\u05D9 ...\r\n\t\t\
-        \t\t\t</div>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\r\n\t\r\n\
-        \t\t\r\n\t\t\r\n\r\n\t</div>\r\n\t\r\n\t<div class=\"processesPages\" id=\"\
-        bottomProcessesPages\">\r\n\t\t\n\n\n\n\n\r\n\t</div>\r\n\r\n    \r\n\r\n\r\
-        \n\r\n                </div>\r\n\r\n            </div>\r\n            \r\n\
-        \             \r\n\r\n              \r\n   \r\n            \r\n\r\n      \
-        \          \r\n                \r\n\r\n                \r\n            <div\
-        \ class=\"bottomMenu\">\r\n                <div class=\"bottomMenuPart\" id=\"\
-        bottomMenuFirst\">\r\n                    <div class=\"bottomMenuTitle\">\u05E0\
-        \u05D9\u05D5\u05D5\u05D8 \u05D1\u05D0\u05EA\u05E8</div>\r\n              \
-        \      <ul>\r\n                        <li><a href=\"http://subscenter.cinemast.com/he\"\
-        >\u05D3\u05E3 \u05D4\u05D1\u05D9\u05EA</a></li>\r\n                      \
-        \  <li><a href=\"http://subscenter.cinemast.com/he/view/2/\">\u05DB\u05EA\u05D5\
-        \u05D1\u05D9\u05D5\u05EA \u05D0\u05D7\u05E8\u05D5\u05E0\u05D5\u05EA (2)</a></li>\r\
-        \n                        <li><a href=\"http://subscenter.cinemast.com/he/view/3/\"\
-        >\u05DB\u05EA\u05D5\u05D1\u05D9\u05D5\u05EA \u05D0\u05D7\u05E8\u05D5\u05E0\
-        \u05D5\u05EA (3)</a></li>\r\n                        <li><a href=\"http://subscenter.cinemast.com/he/view/4/\"\
-        >\u05DB\u05EA\u05D5\u05D1\u05D9\u05D5\u05EA \u05D0\u05D7\u05E8\u05D5\u05E0\
-        \u05D5\u05EA (4)</a></li>\r\n                        <li><a href=\"http://subscenter.cinemast.com/he/view/5/\"\
-        >\u05DB\u05EA\u05D5\u05D1\u05D9\u05D5\u05EA \u05D0\u05D7\u05E8\u05D5\u05E0\
-        \u05D5\u05EA (5)</a></li>\r\n                        <li><a href=\"http://subscenter.cinemast.com/he/view/6/\"\
-        >\u05DB\u05EA\u05D5\u05D1\u05D9\u05D5\u05EA \u05D0\u05D7\u05E8\u05D5\u05E0\
-        \u05D5\u05EA (6)</a></li>\r\n                        <li><a href=\"http://subscenter.cinemast.com/he/view/7/\"\
-        >\u05DB\u05EA\u05D5\u05D1\u05D9\u05D5\u05EA \u05D0\u05D7\u05E8\u05D5\u05E0\
-        \u05D5\u05EA (7)</a></li>                        \r\n                    \
-        \    <li><a href=\"http://subscenter.cinemast.com/viewpage/about/\">\u05D0\
-        \u05D5\u05D3\u05D5\u05EA</a></li>\r\n                        <li><a href=\"\
-        http://subscenter.cinemast.com/viewpage/rules/\">\u05D7\u05D5\u05E7\u05D9\
-        \ \u05D4\u05D0\u05EA\u05E8</a></li>\r\n                        <li><a href=\"\
-        http://subscenter.cinemast.com/he/viewpage/translatorsguide/\">\u05D4\u05DE\
-        \u05D3\u05E8\u05D9\u05DA \u05DC\u05DE\u05EA\u05E8\u05D2\u05DD</a></li>\r\n\
-        \                        <li><a href=\"http://subscenter.cinemast.com/viewpage/agreement/\"\
-        >\u05D4\u05E1\u05DB\u05DD \u05DE\u05E9\u05EA\u05DE\u05E9</a></li>\r\n    \
-        \                     <!--<li><a href=\"#sitemap\">\u05DE\u05E4\u05EA \u05D0\
-        \u05EA\u05E8</a></li>-->\r\n                        <!--<li><a href=\"#something\"\
-        ></a>\u05E9\u05D9\u05EA\u05D5\u05E4\u05D9 \u05E4\u05E2\u05D5\u05DC\u05D4</li>-->\r\
-        \n                        <li><a href=\"http://subscenter.cinemast.com/he/contactus\"\
-        >\u05E6\u05D5\u05E8 \u05E7\u05E9\u05E8</a></li>                       \r\n\
-        \                    </ul>\r\n                </div>\r\n                <div\
-        \ class=\"bottomMenuPart\">\r\n                    <div class=\"bottomMenuTitle\"\
-        >\u05E1\u05D3\u05E8\u05D5\u05EA \u05E4\u05D5\u05E4\u05D5\u05DC\u05D0\u05E8\
-        \u05D9\u05D5\u05EA</div>\r\n                    <ul>\r\n                 \
-        \       \r\n                            <li>\r\n                         \
-        \       <a href=\"http://subscenter.cinemast.com/he/subtitle/series/homeland\"\
-        >\r\n                                    \u05D4\u05D5\u05DE\u05DC\u05E0\u05D3\
-        \ (2011)\r\n                                </a>\r\n                     \
-        \       </li>\r\n                        \r\n                            <li>\r\
-        \n                                <a href=\"http://subscenter.cinemast.com/he/subtitle/series/game-of-thrones\"\
-        >\r\n                                    \u05DE\u05E9\u05D7\u05E7\u05D9 \u05D4\
-        \u05DB\u05E1 (2010)\r\n                                </a>\r\n          \
-        \                  </li>\r\n                        \r\n                 \
-        \           <li>\r\n                                <a href=\"http://subscenter.cinemast.com/he/subtitle/series/the-blacklist\"\
-        >\r\n                                    \u05D4\u05E8\u05E9\u05D9\u05DE\u05D4\
-        \ \u05D4\u05E9\u05D7\u05D5\u05E8\u05D4 (2013)\r\n                        \
-        \        </a>\r\n                            </li>\r\n                   \
-        \     \r\n                            <li>\r\n                           \
-        \     <a href=\"http://subscenter.cinemast.com/he/subtitle/series/blindspot\"\
-        >\r\n                                    \u05E9\u05D8\u05D7 \u05DE\u05EA (2015)\r\
-        \n                                </a>\r\n                            </li>\r\
-        \n                        \r\n                            <li>\r\n       \
-        \                         <a href=\"http://subscenter.cinemast.com/he/subtitle/series/fargo-2014\"\
-        >\r\n                                    \u05E4\u05D0\u05E8\u05D2\u05D5 (2014)\r\
-        \n                                </a>\r\n                            </li>\r\
-        \n                        \r\n                            <li>\r\n       \
-        \                         <a href=\"http://subscenter.cinemast.com/he/subtitle/series/da-vincis-demons\"\
-        >\r\n                                    \u05D4\u05E1\u05D5\u05D3\u05D5\u05EA\
-        \ \u05E9\u05DC \u05D3\u05D4-\u05D5\u05D9\u05E0\u05E6&#39;\u05D9 (2013)\r\n\
-        \                                </a>\r\n                            </li>\r\
-        \n                        \r\n                            <li>\r\n       \
-        \                         <a href=\"http://subscenter.cinemast.com/he/subtitle/series/the-big-bang-theory\"\
-        >\r\n                                    \u05D4\u05DE\u05E4\u05E5 \u05D4\u05D2\
-        \u05D3\u05D5\u05DC (2007)\r\n                                </a>\r\n    \
-        \                        </li>\r\n                        \r\n           \
-        \                 <li>\r\n                                <a href=\"http://subscenter.cinemast.com/he/subtitle/series/the-good-wife\"\
-        >\r\n                                    \u05D4\u05D0\u05D9\u05E9\u05D4 \u05D4\
-        \u05D8\u05D5\u05D1\u05D4 (2009)\r\n                                </a>\r\n\
-        \                            </li>\r\n                        \r\n       \
-        \                     <li>\r\n                                <a href=\"http://subscenter.cinemast.com/he/subtitle/series/once-upon-a-time\"\
-        >\r\n                                    \u05D4\u05D9\u05D4 \u05D4\u05D9\u05D4\
-        \ \u05E4\u05E2\u05DD (2011)\r\n                                </a>\r\n  \
-        \                          </li>\r\n                        \r\n         \
-        \                   <li>\r\n                                <a href=\"http://subscenter.cinemast.com/he/subtitle/series/the-flash-2014\"\
-        >\r\n                                    \u05D4\u05E4\u05DC\u05D0\u05E9 (2014)\r\
-        \n                                </a>\r\n                            </li>\r\
-        \n                        \r\n                    </ul>\r\n              \
-        \  </div>\r\n                <div class=\"bottomMenuPart\">\r\n          \
-        \          <div class=\"bottomMenuTitle\">\u05E1\u05E8\u05D8\u05D9\u05DD \u05E4\
-        \u05D5\u05E4\u05D5\u05DC\u05D0\u05E8\u05D9\u05D9\u05DD</div>\r\n         \
-        \           <ul>\r\n                        \r\n                         \
-        \   <li>\r\n                                <a href=\"http://subscenter.cinemast.com/he/subtitle/movie/inside-out-2015\"\
-        >\r\n                                    \u05D4\u05E7\u05D5\u05DC \u05D1\u05E8\
-        \u05D0\u05E9 (2015)\r\n                                </a>\r\n          \
-        \                  </li>\r\n                        \r\n                 \
-        \           <li>\r\n                                <a href=\"http://subscenter.cinemast.com/he/subtitle/movie/san-andreas\"\
-        >\r\n                                    \u05E1\u05D0\u05DF \u05D0\u05E0\u05D3\
-        \u05E8\u05D0\u05E1 (2015)\r\n                                </a>\r\n    \
-        \                        </li>\r\n                        \r\n           \
-        \                 <li>\r\n                                <a href=\"http://subscenter.cinemast.com/he/subtitle/movie/mission-impossible-rogue-nation\"\
-        >\r\n                                    \u05DE\u05E9\u05D9\u05DE\u05D4 \u05D1\
-        \u05DC\u05EA\u05D9 \u05D0\u05E4\u05E9\u05E8\u05D9\u05EA: \u05D0\u05D5\u05DE\
-        \u05EA \u05D4\u05E0\u05D5\u05DB\u05DC\u05D9\u05DD (2015)\r\n             \
-        \                   </a>\r\n                            </li>\r\n        \
-        \                \r\n                            <li>\r\n                \
-        \                <a href=\"http://subscenter.cinemast.com/he/subtitle/movie/terminator-genisys\"\
-        >\r\n                                    \u05E9\u05DC\u05D9\u05D7\u05D5\u05EA\
-        \ \u05E7\u05D8\u05DC\u05E0\u05D9\u05EA: \u05D2&#39;\u05E0\u05E1\u05D9\u05E1\
-        \ (2015)\r\n                                </a>\r\n                     \
-        \       </li>\r\n                        \r\n                            <li>\r\
-        \n                                <a href=\"http://subscenter.cinemast.com/he/subtitle/movie/the-martian\"\
-        >\r\n                                    \u05DC\u05D4\u05E6\u05D9\u05DC \u05D0\
-        \u05EA \u05DE\u05D0\u05E8\u05E7 \u05D5\u05D5\u05D0\u05D8\u05E0\u05D9 (2015)\r\
-        \n                                </a>\r\n                            </li>\r\
-        \n                        \r\n                            <li>\r\n       \
-        \                         <a href=\"http://subscenter.cinemast.com/he/subtitle/movie/spy\"\
-        >\r\n                                    \u05DE\u05E8\u05D2\u05DC\u05EA (2015)\r\
-        \n                                </a>\r\n                            </li>\r\
-        \n                        \r\n                            <li>\r\n       \
-        \                         <a href=\"http://subscenter.cinemast.com/he/subtitle/movie/tomorrowland\"\
-        >\r\n                                    \u05D1\u05D7\u05D6\u05E8\u05D4 \u05DC\
-        \u05DE\u05D7\u05E8 (2015)\r\n                                </a>\r\n    \
-        \                        </li>\r\n                        \r\n           \
-        \                 <li>\r\n                                <a href=\"http://subscenter.cinemast.com/he/subtitle/movie/the-fast-and-the-furious-6\"\
-        >\r\n                                    \u05DE\u05D4\u05D9\u05E8 \u05D5\u05E2\
-        \u05E6\u05D1\u05E0\u05D9 6 (2013)\r\n                                </a>\r\
-        \n                            </li>\r\n                        \r\n      \
-        \                      <li>\r\n                                <a href=\"\
-        http://subscenter.cinemast.com/he/subtitle/movie/the-hunger-games\">\r\n \
-        \                                   \u05DE\u05E9\u05D7\u05E7\u05D9 \u05D4\u05E8\
-        \u05E2\u05D1 (2012)\r\n                                </a>\r\n          \
-        \                  </li>\r\n                        \r\n                 \
-        \           <li>\r\n                                <a href=\"http://subscenter.cinemast.com/he/subtitle/movie/ted-2\"\
-        >\r\n                                     \u05D8\u05D3 2 (2015)\r\n      \
-        \                          </a>\r\n                            </li>\r\n \
-        \                       \r\n                    </ul>\r\n                </div>\r\
-        \n                <div class=\"bottomMenuPart\">\r\n                    <div\
-        \ class=\"bottomMenuTitle\">\u05D4\u05D9\u05E9\u05D0\u05E8\u05D5 \u05DE\u05E2\
-        \u05D5\u05D3\u05DB\u05E0\u05D9\u05DD!</div>\r\n                    <ul id=\"\
-        withImgs\">\r\n                        <li id=\"withImgsFirst\"><a target=\"\
-        _blank\" href=\"/he/feeds/all/latest/\"><img src=\"/static/images/site/rss.png\"\
-        \ alt=\"\" /><span class=\"linkNearImgs\">\u05E2\u05D3\u05DB\u05D5\u05E0\u05D9\
-        \ RSS \u05D7\u05DE\u05D9\u05DD</span></a></li>\r\n                       \
-        \ <li>\r\n                            \r\n                            <a href=\"\
-        http://twitter.com/#!/SubsCenter\">\r\n                            \r\n  \
-        \                              <img src=\"/static/images/site/twitter.png\"\
-        \ alt=\"\" />\r\n                                <span class=\"linkNearImgs\"\
-        >\u05E2\u05E7\u05D5\u05D1 \u05D0\u05D7\u05E8\u05D9\u05E0\u05D5 \u05D1\u05D8\
-        \u05D5\u05D5\u05D9\u05D8\u05E8</span>\r\n                            </a>\r\
-        \n                        </li>\r\n                        <li>\r\n      \
-        \                      \r\n                            <a href=\"http://www.facebook.com/pages/sbsntr/176659905685579\"\
-        >\r\n                             \r\n                                <img\
-        \ src=\"/static/images/site/facebook.png\" alt=\"\" />\r\n               \
-        \                 <span class=\"linkNearImgs\">\u05E2\u05E7\u05D5\u05D1 \u05D0\
-        \u05D7\u05E8\u05D9\u05E0\u05D5 \u05D1\u05E4\u05D9\u05D9\u05E1\u05D1\u05D5\u05E7\
-        </span>\r\n                            </a>\r\n                        </li>\r\
-        \n                    </ul>\r\n                </div>\r\n            </div>\r\
-        \n            \r\n                <style>            \r\n                \
-        \    footer {\r\n                        clear: both;padding-top: 20px;background-color:\
-        \ #12a0e0;text-align: center;width: 940px;margin: 0 auto 15px;\r\n       \
-        \             }\r\n                \r\n                    footer .text {\r\
-        \n                    background-color: #ecedf2;font-size: 14px;color: #000;padding:\
-        \ 5px;\r\n                    }            \r\n                </style>\r\n\
-        \                            \r\n                \r\n                \r\n\
-        \                <footer>\r\n                     \r\n                   \
-        \ <div class=\"text\">   \r\n                                            \
-        \            \r\n                    <span style=\"font-weight: 700;color:\
-        \ #12a0e0;\" >\u05E1\u05E8\u05D8\u05D9\u05DD \u05D7\u05D3\u05E9\u05D9\u05DD\
-        :</span>\r\n                    \r\n                        \r\n         \
-        \           \r\n                         \r\n                         <span\
-        \ style=\"color:#ecedf2\" >  &nbsp; &nbsp; &nbsp; 28/12/15 09:12:42 </span>\r\
-        \n                    </div>\r\n                    <div class=\"text\">\r\
-        \n                    <span style=\"font-weight: 700;color: #12a0e0;\" >\u05E1\
-        \u05D3\u05E8\u05D5\u05EA \u05D7\u05D3\u05E9\u05D5\u05EA:</span>\r\n      \
-        \              \r\n                         \r\n                         \
-        \                       \r\n                    </div>\r\n               \
-        \     <div class=\"links\">                                     \r\n     \
-        \               <a href=\"#\">\xA9 \u05DB\u05DC \u05D4\u05D6\u05DB\u05D5\u05D9\
-        \u05D5\u05EA \u05E9\u05DE\u05D5\u05E8\u05D5\u05EA - </a>\r\n             \
-        \       \r\n                    </div>\r\n                </footer>\r\n  \
-        \                          \r\n            <div id=\"credits\">\r\n      \
-        \          <div id=\"creditsShade\"></div>\r\n                <div id=\"subscenterCredits\"\
-        >\r\n                    \u05DB\u05DC \u05D4\u05D6\u05DB\u05D5\u05D9\u05D5\
-        \u05EA \u05E9\u05DE\u05D5\u05E8\u05D5\u05EA.\r\n                    <a href=\"\
-        /he\" id=\"creditsFirst\">\u05E1\u05D0\u05D1\u05E1\u05E0\u05D8\u05E8 - \u05DB\
-        \u05EA\u05D5\u05D1\u05D9\u05D5\u05EA \u05D1\u05E2\u05D1\u05E8\u05D9\u05EA\
-        \ 2011</a><strong><a title=\"\u05DB\u05EA\u05D5\u05D1\u05D9\u05EA\" href=\"\
-        /he/viewpage/subtitle/\">\u05DB\u05EA\u05D5\u05D1\u05D9\u05EA</a><a title=\"\
-        subtitle\" href=\"/he/viewpage/subtitle/\">subtitle</a></strong><a href=\"\
-        #\">\u05E7\u05D5\u05D3\u05D3 \u05E2''\u05D9 Cokegod</a><a title=\"\u05DB\u05EA\
-        \u05D5\u05D1\u05D9\u05D5\u05EA\" href=\"http://subscenter.cinemast.com\">\u05DB\
-        \u05EA\u05D5\u05D1\u05D9\u05D5\u05EA</a>\r\n                    <a title=\"\
-        \u05DB\u05EA\u05D5\u05D1\u05D9\u05D5\u05EA\" href=\"http://subscenter.cinemast.com\"\
-        >\u05DB\u05EA\u05D5\u05D1\u05D9\u05D5\u05EA</a><a title=\"\u05DE\u05E9\u05D7\
-        \u05E7\u05D9\u05DD \u05D1\u05E8\u05E9\u05EA\" href=\"http://www.shiftplay.me\"\
-        >\u05DE\u05E9\u05D7\u05E7\u05D9\u05DD \u05D1\u05E8\u05E9\u05EA</a><a title=\"\
-        \u05DE\u05E9\u05D7\u05E7\u05D9\u05DD \u05D1\u05E8\u05E9\u05EA\" href=\"http://www.ladypedia.co.il\"\
-        >\u05D1\u05D7\u05D5\u05E8\u05D5\u05EA</a><a title=\"\u05E7\u05D1\u05D5\u05E6\
-        \u05EA Extreme Subs\" href=\"/he/viewpage/extreme_subs/\">Extreme Subs</a><a\
-        \ title=\"Qsubs\" href=\"/he/viewpage/qsubs/\">Qsubs</a><a title=\"Torec\"\
-        \ href=\"/he/viewpage/torec/\">Torec \u05D8\u05D5\u05E8\u05E7</a>\r\n    \
-        \                <a title=\"HDsubs\" href=\"/he/viewpage/hdsubs/\">HDsubs</a><a\
-        \ title=\"\u05E1\u05E8\u05D8\u05D9\u05DD\" href=\"http://www.cinemast.com\"\
-        >\u05E1\u05E8\u05D8\u05D9\u05DD</a><a title=\"\u05DB\u05EA\u05D5\u05D1\u05D9\
-        \u05D5\u05EA\" href=\"http://subscenter.cinemast.com\">\u05DB\u05EA\u05D5\u05D1\
-        \u05D9\u05D5\u05EA</a><a title=\"\u05DB\u05EA\u05D5\u05D1\u05D9\u05D5\u05EA\
-        \" href=\"http://www.cinemast.com\">\u05DB\u05EA\u05D5\u05D1\u05D9\u05D5\u05EA\
-        </a><a title=\"SubsWay\" href=\"/he/viewpage/subsway/\">subsway</a>  <a href=\"\
-        http://www.techitout.co.il/\" title=\"\u05D8\u05DB\u05E0\u05D5\u05DC\u05D5\
-        \u05D2\u05D9\u05D4 \u05D5\u05D2\u05D0\u05D3\u05D2'\u05D8\u05D9\u05DD\">\u05D8\
-        \u05DB\u05E0\u05D5\u05DC\u05D5\u05D2\u05D9\u05D4 \u05D5\u05D2\u05D0\u05D3\u05D2\
-        '\u05D8\u05D9\u05DD</a>  \r\n                    <a href=\"http://www.shift.co.il/\"\
-        \ title=\"\u05D4\u05E9\u05D5\u05D5\u05D0\u05EA \u05DE\u05D7\u05D9\u05E8\u05D9\
-        \u05DD\">\u05D4\u05E9\u05D5\u05D5\u05D0\u05EA \u05DE\u05D7\u05D9\u05E8\u05D9\
-        \u05DD</a><a href=\"http://www.nofarnews.com/\" title=\"\u05D7\u05D3\u05E9\
-        \u05D5\u05EA\">\u05D7\u05D3\u05E9\u05D5\u05EA</a>\r\n                </div>\r\
-        \n                <img src=\"/static/images/site/pythonLogo.png\" alt=\"\"\
-        \ id=\"pythonLogo\" />\r\n            </div>\r\n            \r\n         \
-        \   \r\n        </div>\r\n        \r\n        \r\n        <style> body { \
-        \ overflow-x: hidden; } </style>\r\n        <div id=\"bgRight\">        \r\
-        \n\t\t    <script type=\"text/javascript\">\r\n\t\t    \r\n\t\t        if\
-        \ (jQuery.inArray(get_user_rank(), [1, 2, 3] )  == -1 )\r\n\t\t        {\r\
-        \n\t\t            if(screen.width > 1024)\r\n\t\t            {           \
-        \                    \r\n\t\t                document.write('<div id=\"bgLeft\"\
-        \ style=\"width: 190px;\"><div style=\"position:absolute;margin-right:22px;height:\
-        \ 1800px;margin-top:45px;\">');\t\t\r\n\t\t                \t\t          \
-        \                      \r\n\t\t                //document.write('<a style=\"\
-        float:left;padding-bottom:10px;\" href=\"http://www.shift.co.il\" target=\"\
-        _blank\"><img src=\"/static/images/site/banners/shift.png\"  /></a>');\r\n\
-        \t\t                \t\t                \t\t                \r\n         \
-        \               //document.write('<!-- adscinema160-2 -->  <ins class=\"adsbygoogle\"\
-        \ style=\"display:inline-block;width:160px;height:90px;\" data-ad-client=\"\
-        ca-pub-6549364321923143\" data-ad-slot=\"3973916427\"></ins>');   \r\n   \
-        \                     //(adsbygoogle = window.adsbygoogle || []).push({});\r\
-        \n                                                                       \
-        \ \t\t                \t\t                \r\n\t\t                document.write('<div\
-        \ style=\"margin-top:50px;\"></div><!-- adscinema160 -->  <ins class=\"adsbygoogle\"\
-        \ style=\"display:inline-block;width:160px;height:600px;\" data-ad-client=\"\
-        ca-pub-6549364321923143\" data-ad-slot=\"1591016423\"></ins>');\r\n\t\t  \
-        \              (adsbygoogle = window.adsbygoogle || []).push({});\r\n\t\t\
-        \                document.write('</div></div>');             \r\n\t\t    \
-        \            \r\n\t\t                                                    \
-        \                             \r\n\t\t            }\r\n\t\t            \r\n\
-        \t\t        }\r\n\t\t    \r\n\t\t    </script>            \r\n           \
-        \ <div id=\"bgRightTop\"></div>\r\n            <div id=\"bgRightMiddle\"></div>\r\
-        \n            <div id=\"bgRightBottom\"></div>\r\n        </div>\r\n    </div>\r\
-        \n    \r\n\r\n\r\n\r\n        \r\n                                       \r\
-        \n            \r\n    <div class=\"clear\"></div>\r\n    \r\n    \r\n\r\n\
-        \        \r\n\r\n\r\n<div style=\"color: white;\" > 28/12/15 09:12:42 \r\n\
-        \                                                                        \
-        \        \r\n                    <span onclick=\"javascript:location.href='/en/'\"\
-        \  > en  </span>                                                         \
-        \       \r\n                                                             \
-        \                   \r\n                    <span onclick=\"javascript:location.href='/he/'\"\
-        \  > he  </span>                                                         \
-        \       \r\n        \r\n</div>     \r\n\r\n\r\n\r\n\r\n<script type=\"text/javascript\"\
-        >\r\n    $(document).ready(function(){    \r\n                \r\n      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){\r\
-        \n      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),\r\
-        \n      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)\r\
-        \n      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');\r\
-        \n    \r\n      ga('create', 'UA-4764432-13', 'subscenter.org');\r\n     \
-        \ ga('send', 'pageview');\r\n    \r\n                                    \
-        \             \r\n    });\r\n</script>\r\n     \r\n     \r\n\r\n<div id=\"\
-        divAdLeft\" style=\"width:100px; display: none; position: absolute; top: 0px\"\
-        ></div>\r\n\r\n\r\n<div id=\"divAdRight\" style=\"width:100px; display: none;\
-        \ position: absolute; top: 0px\">\r\n            \r\n\r\n    <!-- p><iframe\
-        \ id=\"rightBanner\"  scrolling=\"no\" width=\"120\" height=\"600\" frameborder=\"\
-        0\" marginheight=\"0\" marginwidth=\"0\"></iframe></p -->\r\n    <!-- <a href=\"\
-        http://deals.shift.co.il/store/product/seferator/\" target=\"_blank\" ><img\
-        \ id=\"rightBannerImg\"  src=\"/static/images/site/banners/sefer.gif\" scrolling=\"\
-        no\" width=\"120\" height=\"450\" frameborder=\"0\" marginheight=\"0\" marginwidth=\"\
-        0\"></a> -->\r\n\r\n</div>\r\n\r\n<SCRIPT language=\"JavaScript\">\r\nvar\
-        \ MainContentW = 1000;\r\nvar LeftBoxW = 100;\r\nvar RightBoxW = 160;\r\n\
-        var LeftAdjust = 50;\r\nvar RightAdjust = 0;\r\nvar TopAdjust = 180;\r\n\r\
-        \n//$('iframe#topBanner').attr('src', \"http://tag.tlvmedia.com/?id=102061_125402&ad_type=banner&ad_size=468x60\"\
-        );\r\n//$('iframe#rightBannerImg').attr('src', \"/static/images/site/banners/sefer.gif\"\
-        );\r\n//$('iframe#rightBanner').attr('src', \"/static/images/site/banners/sefer.gif\"\
-        );\r\n//$('iframe#centerBanner').attr('src', \"/he/banner/top/\");\r\n\r\n\
-        ShowAdDiv();\r\nwindow.onresize=ShowAdDiv;\r\n\r\n              \r\nvar adblock_on\
-        \ = true;\r\n\r\n// do not remove \r\n$.getScript(\"/static/js/ads_external.min.js\"\
-        , function() {  \r\n\r\n\t//   if (typeof jsPopunder !== 'undefined' )\r\n\
-        \t //      if (jQuery.inArray(get_user_rank(), [1, 2, 3] )  == -1 )      \
-        \                   \r\n\t //            jsPopunder('http://www.techitout.co.il');\r\
-        \n\t        \r\n   adblock_active();         \r\n});\r\n// do not remove \r\
-        \n\r\n\r\n</script>\r\n\r\n\r\n    <div id=\"uc_CinemaFloatingDiv_CinemaFloatingTab\"\
-        \ class=\"CinemaFloatingTab\" style=\"display:none;\">\r\n\r\n\t\t<div id=\"\
-        refreshBox\" align=\"center\" style=\"vertical-align:middle;display:none;\"\
-        >\r\n\t\t  <br /><br />\r\n\t\t   <img style=\"left:50%;\" src=\"/static/images/site/cinemast/loading.gif\"\
-        \ />\t\t   \r\n\t\t</div>\r\n\r\n        <div class=\"CinemaFloatingTabItems\"\
-        \ >\r\n        \r\n        \r\n        <form method=\"POST\" class=\"sendComment\"\
-        \ id=\"box_form\"><div style='display:none;'><input type='hidden'  name='csrfmiddlewaretoken'\
-        \ value='1adfdb50e3c506d2e5a6aba0f9565ba8' /></div>\r\n\t\t\r\n\t\t<div style=\"\
-        font-size: 14px;font-weight: bold;margin-bottom: 10px;\">\r\n\t\t<span id=\"\
-        box_text_about\" style=\"direction: rtl;float:right;\"></span>\r\n\t\t<span\
-        \ id=\"box_type\" style=\"direction: rtl;float:right;\"></span>\r\n\t\t<span\
-        \ id=\"box_text\" style=\"direction: rtl;float:right;\"></span>\r\n\t\t<span\
-        \ id=\"box_text_q\" style=\"direction: rtl;float:right;\"></span>\r\n\t\t\r\
-        \n\t\t<br />\r\n\t\t\t<div class=\"user\" >\r\n\t\t\t\t<a style=\"float:right;margin-left:10px;;margin-top:5px;\"\
-        \ href=\"\"><img src=\"/static/images/site/img.png\" width=\"50\" height=\"\
-        50\" id=\"box_img\" ></a>                  \r\n\t\t\t</div>\r\n\t\t\r\n\t\t\
-        \       <div style=\"vertical-align: top;\">\r\n\t                <textarea\
-        \ onblur=\"stripTextareaBox(this)\" onkeyup=\"stripTextareaBox(this)\" onclick=\"\
-        javascript:expandBox(this);\" class=\"cstext\" name=\"comment\" id=\"comment\"\
-        \  maxlength=\"500\">\u05DB\u05EA\u05D5\u05D1 \u05D4\u05DE\u05DC\u05E6\u05D4\
-        /\u05D1\u05D9\u05E7\u05D5\u05E8\u05EA...</textarea> \r\n\t        </div>\r\
-        \n\t\t\t\r\n\t\t\t<div class=\"csbut\">\r\n\t\t\t <span id=\"box_thankyou\"\
-        \ style=\"display:none;\"><br>\u05E0\u05E9\u05DC\u05D7</span>\r\n\t      \
-        \      <input type=\"button\" id=\"box_send\" value=\"\u05E9\u05DC\u05D7\"\
-        \ >\r\n\t        </div>   \r\n\t\t\r\n\t\t\r\n\t\t</div>\r\n\r\n\t\t\t</form>\r\
-        \n\t                        \r\n            \r\n        </div> \r\n      \
-        \       \r\n        <div class=\"CloseTabBtn\" onclick=\"javascript:get_download_queue('');\"\
-        \ id=\"box_close\">        \r\n        </div>\r\n    </div>\r\n    \r\n  \
-        \  \r\n<script type=\"text/javascript\">    \r\n\t$(document).ready(function(){\t\
-        \t      \r\n\t\t       \r\n\t    var wlocation = location.hostname;\t    \r\
-        \n\t    if (document.domain == \"127.0.0.1\" || wlocation.indexOf(\"subscenter.cinemast.com\"\
-        ) != -1) \r\n\t    {\t     \t\r\n\t\t\tif (get_user_name() != 'nologin' )\r\
-        \n\t\t\t     if(new Date().getDay()%2 == 0)  \r\n\t\t\t         get_download_queue_item('');\r\
-        \n\t    }           \r\n     \r\n     \r\n    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera\
-        \ Mini/i.test(navigator.userAgent))\r\n    {    \r\n        $('#mobileMsg').show();\r\
-        \n        if ($.cookie('mobile') == null)\r\n        {\r\n\t\t\tvar r = confirm(\"\
-        \u05E1\u05D0\u05D1\u05E1\u05E0\u05D8\u05E8\\n\u05D4\u05D0\u05DD \u05DC\u05D4\
-        \u05E6\u05D9\u05D2 \u05D0\u05EA\u05E8 \u05DE\u05D5\u05EA\u05D0\u05DD \u05DC\
-        \u05DE\u05DB\u05E9\u05D9\u05E8\u05DA?\");\r\n\t\t\t\r\n\t\t\tif (r == true)\
-        \ {\r\n\t\t\t    window.location = \"/he/site/version/?mobile=1\"    \r\n\t\
-        \t\t} else {\r\n\t\t\t    window.location = \"/he/site/version/?mobile=0\"\
-        \    \r\n\t\t\t}\r\n\t\t}    \r\n    }\r\n        \r\n         \t\t      \r\
-        \n\t});\r\n\t\r\n</script>\r\n\r\n</body>\r\n</html>\r\n"}
+    body:
+      string: !!binary |
+        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
+        AAA=
     headers:
       connection: [keep-alive]
+      content-encoding: [gzip]
       content-language: [he]
       content-type: [text/html; charset=utf-8]
-      date: ['Mon, 28 Dec 2015 15:18:42 GMT']
+      date: ['Tue, 09 Feb 2016 16:19:25 GMT']
       server: [nginx/1.8.0]
-      set-cookie: [csrftoken=1adfdb50e3c506d2e5a6aba0f9565ba8; Max-Age=31449600; Path=/;]
+      set-cookie: [csrftoken=4084b6d9ca1d8f9f8bae14c8aa54c343; Max-Age=31449600; Path=/;]
       vary: [Accept-Encoding, Cookie]
     status: {code: 200, message: OK}
 - request:
     body: null
     headers:
-      Cookie: [csrftoken=1adfdb50e3c506d2e5a6aba0f9565ba8]
-      User-Agent: [Subliminal/1.1]
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Cookie: [csrftoken=4084b6d9ca1d8f9f8bae14c8aa54c343]
+      User-Agent: [Subliminal/2.0]
     method: GET
     uri: http://subscenter.cinemast.com/he/cinemast/data/series/sb/dallas/1/3/
   response:
-    body: {string: !!python/unicode '{"he": {"1.Qsubs": {"dvdrip": {"1": {"created_by":
-        "\u05d0\u05e0\u05d5\u05e0\u05d9\u05de\u05d9", "created_by_id": 0, "created_on":
-        "06.09.2013 ,14:33", "credits": {"1": {"\u05ea\u05e8\u05d2\u05d5\u05dd": "TheInitiative
-        \u05d5-dvodvo123"}, "2": {"\u05e1\u05e0\u05db\u05e8\u05d5\u05df": "RaisingShit"}},
-        "downloaded": 5, "files_count": 1, "hearing_impaired": 0, "id": 264417, "is_sync":
-        256842, "key": "f43a2673d34a3b24e72816d47ebbe51a", "notes": "\u05e1\u05e0\u05db\u05e8\u05df
-        \u05dc\u05d2\u05e8\u05e1\u05d0 \u05d6\u05d5: dvodvo123", "sat_count": 0, "subtitle_version":
-        "Dallas.2012.S01E03.DVDRip.XviD-REWARD", "vip": 0}}, "hdtv": {"2": {"created_by":
-        "\u05d0\u05e0\u05d5\u05e0\u05d9\u05de\u05d9", "created_by_id": 0, "created_on":
-        "21.06.2012 ,13:05", "credits": {"1": {"\u05ea\u05e8\u05d2\u05d5\u05dd": "TheInitiative
-        \u05d5-dvodvo123"}, "2": {"\u05e1\u05e0\u05db\u05e8\u05d5\u05df": "RaisingShit"}},
-        "downloaded": 176, "files_count": 1, "hearing_impaired": 0, "id": 256843,
-        "is_sync": 256842, "key": "04baea30d36f908fde9f3a2745a9a155", "notes": "",
-        "sat_count": 0, "subtitle_version": "Dallas.2012.S01E03.HDTV.XviD-AFG", "vip":
-        0}, "3": {"created_by": "\u05d0\u05e0\u05d5\u05e0\u05d9\u05de\u05d9", "created_by_id":
-        0, "created_on": "21.06.2012 ,13:05", "credits": {"1": {"\u05ea\u05e8\u05d2\u05d5\u05dd":
-        "TheInitiative \u05d5-dvodvo123"}, "2": {"\u05e1\u05e0\u05db\u05e8\u05d5\u05df":
-        "RaisingShit"}}, "downloaded": 13, "files_count": 1, "hearing_impaired": 0,
-        "id": 256843, "is_sync": 256842, "key": "04baea30d36f908fde9f3a2745a9a155",
-        "notes": "", "sat_count": 0, "subtitle_version": "Dallas.2012.S01E03.480p.HDTV.x264-mSD",
-        "vip": 0}, "4": {"created_by": "\u05d0\u05e0\u05d5\u05e0\u05d9\u05de\u05d9",
-        "created_by_id": 0, "created_on": "21.06.2012 ,12:40", "credits": {"1": {"\u05ea\u05e8\u05d2\u05d5\u05dd":
-        "TheInitiative \u05d5-dvodvo123"}, "2": {"\u05e1\u05e0\u05db\u05e8\u05d5\u05df":
-        "RaisingShit"}}, "downloaded": 239, "files_count": 1, "hearing_impaired":
-        0, "id": 256842, "is_sync": 0, "key": "c6b6f44341121321979c450bf5ff8a74",
-        "notes": "", "sat_count": 0, "subtitle_version": "Dallas.2012.S01E03.HDTV.x264-LOL",
-        "vip": 0}, "5": {"created_by": "\u05d0\u05e0\u05d5\u05e0\u05d9\u05de\u05d9",
-        "created_by_id": 0, "created_on": "21.06.2012 ,12:40", "credits": {"1": {"\u05ea\u05e8\u05d2\u05d5\u05dd":
-        "TheInitiative \u05d5-dvodvo123"}, "2": {"\u05e1\u05e0\u05db\u05e8\u05d5\u05df":
-        "RaisingShit"}}, "downloaded": 247, "files_count": 1, "hearing_impaired":
-        0, "id": 256842, "is_sync": 0, "key": "c6b6f44341121321979c450bf5ff8a74",
-        "notes": "", "sat_count": 0, "subtitle_version": "Dallas.2012.S01E03.720p.HDTV.X264-DIMENSION",
-        "vip": 0}}}}}'}
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA+2Va2vbMBSG/0rw58bo6ku+FZxtga5lSen6YWBkS5rFXDtEirdS+t+nS7M4hQza
+        jUKgIRzkI84rnfO8Th6iRkSzyUME4y96W2m/5gPfqHVI+1hvBDOCl9W9fYy+bQHlwEXhI6ejde6j
+        COvobDKqLRW35WCU6zunB5IY5DECEE/OIJlh/FTGldGjS/hDmI+Zl0f7w7lTjq4bseiUUcyoQUzC
+        7pQPvf1ChKNHK4v2UnB062okGwSlE1wypVX3fdUoEz26ct7/7NqeceHOozYhVSt0WffbztgMtJlG
+        sI2tKdXdmqmN2LXse0cJITB1T7rU913tUjTJCLKpH8IPVxLMUJJijgnDFSIiRRlMOElFVQkKmZtN
+        1xuhdySO9iHDBOr9rMJGKOAgbCeh59lkPyd7gmbmT1Pu9tYaRplWlIPYaBWwFaxtmXbcULwCcA5w
+        XNwUS7WObwdVTJfzr+fLwokN3kvAD7DhZvAI0BsYC8HYestd0BoLzwA9EWPBNHm5tZyP8F+tBUjF
+        BMOA40TmIJNc5NKaLSWU5QxSemCtf3DBp+L6Jnjg/MPHsQHsEr9jP44dnzJ1koF1QP/L/sxN71bF
+        M/TkrdGjGQEngh7h/HXs0QF7sMdeJ1UiCcEEQgQxgnma14SCSlIpM5aS//qye+IXVxfPiNN34seJ
+        k/REiado96LfOuzF4vP8crW4ujz4q7ef311wGvtbCgAA
     headers:
-      accept-ranges: [bytes]
       connection: [keep-alive]
-      content-length: ['2651']
+      content-encoding: [gzip]
       content-type: [text/html]
-      date: ['Mon, 28 Dec 2015 15:18:43 GMT']
-      etag: ['"563de8dd-a5b"']
+      date: ['Tue, 09 Feb 2016 16:19:25 GMT']
+      etag: [W/"563de8dd-a5b"]
       last-modified: ['Sat, 07 Nov 2015 12:04:45 GMT']
       server: [nginx/1.8.0]
       vary: [Accept-Encoding]

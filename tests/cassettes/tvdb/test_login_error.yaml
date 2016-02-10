@@ -1,0 +1,29 @@
+interactions:
+- request:
+    body: '{"username": null, "password": null, "apikey": "1234"}'
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Accept-Language: [en]
+      Connection: [keep-alive]
+      Content-Length: ['54']
+      Content-Type: [application/json]
+      User-Agent: [python-requests/2.9.1]
+    method: POST
+    uri: https://api-beta.thetvdb.com/login
+  response:
+    body: {string: !!python/unicode "{\n  \"Error\": \"API Key Required\"\n}"}
+    headers:
+      cf-ray: [271ef232a04c1055-CDG]
+      connection: [keep-alive]
+      content-length: ['33']
+      content-type: [application/json]
+      date: ['Tue, 09 Feb 2016 10:38:41 GMT']
+      server: [cloudflare-nginx]
+      set-cookie: ['__cfduid=d2d5df3c8bafc1b1a20f7346140b4a8901455014321; expires=Wed,
+          08-Feb-17 10:38:41 GMT; path=/; domain=.thetvdb.com; HttpOnly']
+      www-authenticate: [JWT realm=jwt auth]
+      x-powered-by: [Thundar!]
+      x-thetvdb-api-version: [1.2.0]
+    status: {code: 401, message: Unauthorized}
+version: 1

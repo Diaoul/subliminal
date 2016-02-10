@@ -1,10 +1,27 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import io
+import os
 import re
 import sys
 
 from setuptools import setup, find_packages
+
+here = os.path.abspath(os.path.dirname(__file__))
+
+
+def read(*parts):
+    # intentionally *not* adding an encoding option to open, See:
+    #   https://github.com/pypa/virtualenv/issues/201#issuecomment-3145690
+    return io.open(os.path.join(here, *parts), 'r').read()
+
+
+def find_version(*file_paths):
+    version_file = read(*file_paths)
+    version_match = re.search(r'^__version__ = [\'"]([^\'"]*)[\'"]', version_file, re.M)
+    if version_match:
+        return version_match.group(1)
+    raise RuntimeError('Unable to find version string.')
 
 
 # requirements
@@ -22,26 +39,13 @@ if sys.version_info < (3, 3):
 
 dev_requirements = ['tox', 'sphinx', 'sphinxcontrib-programoutput', 'wheel']
 
-# package information
-with io.open('subliminal/__init__.py', 'r') as f:
-    version = re.search(r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]$', f.read(), re.MULTILINE).group(1)
-
-if not version:
-    raise RuntimeError('Cannot find version information')
-
-with io.open('README.rst', 'r', encoding='utf-8') as f:
-    readme = f.read()
-
-with io.open('HISTORY.rst', 'r', encoding='utf-8') as f:
-    history = f.read()
-
 
 setup(name='subliminal',
-      version=version,
+      version=find_version('subliminal', '__init__.py'),
       license='MIT',
       description='Subtitles, faster than your thoughts',
-      long_description=readme + '\n\n' + history,
-      keywords='subtitle subtitles video movie episode tv show',
+      long_description= read('README.rst') + '\n\n' + read('HISTORY.rst'),
+      keywords='subtitle subtitles video movie episode tv show series',
       url='https://github.com/Diaoul/subliminal',
       author='Antoine Bertin',
       author_email='diaoulael@gmail.com',

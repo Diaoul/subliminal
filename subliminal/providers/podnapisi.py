@@ -15,11 +15,11 @@ except ImportError:
 from requests import Session
 from zipfile import ZipFile
 
-from . import Provider, get_version
-from .. import __version__
+from . import Provider
+from .. import __short_version__
 from ..exceptions import ProviderError
-from ..subtitle import Subtitle, fix_line_ending, guess_matches, sanitized_string_equal
-from ..video import Episode, Movie
+from ..subtitle import Subtitle, fix_line_ending, guess_matches
+from ..video import Episode, Movie, sanitize
 
 logger = logging.getLogger(__name__)
 
@@ -47,10 +47,10 @@ class PodnapisiSubtitle(Subtitle):
         # episode
         if isinstance(video, Episode):
             # series
-            if video.series and sanitized_string_equal(self.title, video.series):
+            if video.series and sanitize(self.title) == sanitize(video.series):
                 matches.add('series')
             # year
-            if video.year == self.year:
+            if video.original_series and self.year is None or video.year and video.year == self.year:
                 matches.add('year')
             # season
             if video.season and self.season == video.season:
@@ -64,7 +64,7 @@ class PodnapisiSubtitle(Subtitle):
         # movie
         elif isinstance(video, Movie):
             # title
-            if video.title and sanitized_string_equal(self.title, video.title):
+            if video.title and sanitize(self.title) == sanitize(video.title):
                 matches.add('title')
             # year
             if video.year and self.year == video.year:
@@ -83,7 +83,7 @@ class PodnapisiProvider(Provider):
 
     def initialize(self):
         self.session = Session()
-        self.session.headers = {'User-Agent': 'Subliminal/%s' % get_version(__version__)}
+        self.session.headers['User-Agent'] = 'Subliminal/%s' % __short_version__
 
     def terminate(self):
         self.session.close()

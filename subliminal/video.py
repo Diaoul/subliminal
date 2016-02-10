@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 import hashlib
 import logging
 import os
+import re
 import struct
 
 from babelfish import Error as BabelfishError, Language
@@ -40,10 +41,10 @@ class Video(object):
     :param str resolution: resolution of the video stream (480p, 720p, 1080p or 1080i).
     :param str video_codec: codec of the video stream.
     :param str audio_codec: codec of the main audio stream.
-    :param int imdb_id: IMDb id of the video.
+    :param str imdb_id: IMDb id of the video.
     :param dict hashes: hashes of the video file by provider names.
     :param int size: size of the video file in bytes.
-    :param set subtitle_languages: existing subtitle languages
+    :param set subtitle_languages: existing subtitle languages.
     :param str in_archive: video resides in an archive, name of parent for age computation
 
     """
@@ -132,16 +133,16 @@ class Episode(Video):
     :param int season: season number of the episode.
     :param int episode: episode number of the episode.
     :param str title: title of the episode.
-    :param int year: year of series.
-    :param int tvdb_id: TVDB id of the episode
+    :param int year: year of the series.
+    :param bool original_series: whether the series is the first with this name.
+    :param int tvdb_id: TVDB id of the episode.
+    :param \*\*kwargs: additional parameters for the :class:`Video` constructor.
 
     """
+    def __init__(self, name, series, season, episode, title=None, year=None, original_series=True, tvdb_id=None,
+                 series_tvdb_id=None, series_imdb_id=None, **kwargs):
+        super(Episode, self).__init__(name, **kwargs)
 
-    def __init__(self, name, series, season, episode, format=None, release_group=None, resolution=None,
-                 video_codec=None, audio_codec=None, imdb_id=None, hashes=None, size=None, subtitle_languages=None,
-                 title=None, year=None, tvdb_id=None):
-        super(Episode, self).__init__(name, format, release_group, resolution, video_codec, audio_codec, imdb_id,
-                                      hashes, size, subtitle_languages)
         #: Series of the episode
         self.series = series
 
@@ -157,8 +158,17 @@ class Episode(Video):
         #: Year of series
         self.year = year
 
+        #: The series is the first with this name
+        self.original_series = original_series
+
         #: TVDB id of the episode
         self.tvdb_id = tvdb_id
+
+        #: TVDB id of the series
+        self.series_tvdb_id = series_tvdb_id
+
+        #: IMDb id of the series
+        self.series_imdb_id = series_imdb_id
 
     @classmethod
     def fromguess(cls, name, guess):
@@ -168,10 +178,10 @@ class Episode(Video):
         if 'title' not in guess or 'season' not in guess or 'episode' not in guess:
             raise ValueError('Insufficient data to process the guess')
 
-        return cls(name, guess['title'], guess['season'], guess['episode'], format=guess.get('format'),
+        return cls(name, guess['title'], guess['season'], guess['episode'], title=guess.get('episode_title'),
+                   year=guess.get('year'), format=guess.get('format'), original_series='year' not in guess,
                    release_group=guess.get('release_group'), resolution=guess.get('screen_size'),
-                   video_codec=guess.get('video_codec'), audio_codec=guess.get('audio_codec'),
-                   title=guess.get('episode_title'), year=guess.get('year'))
+                   video_codec=guess.get('video_codec'), audio_codec=guess.get('audio_codec'))
 
     @classmethod
     def fromname(cls, name):
@@ -188,13 +198,13 @@ class Movie(Video):
     """Movie :class:`Video`.
 
     :param str title: title of the movie.
-    :param int year: year of the movie
+    :param int year: year of the movie.
+    :param \*\*kwargs: additional parameters for the :class:`Video` constructor.
 
     """
-    def __init__(self, name, title, format=None, release_group=None, resolution=None, video_codec=None,
-                 audio_codec=None, imdb_id=None, hashes=None, size=None, subtitle_languages=None, year=None):
-        super(Movie, self).__init__(name, format, release_group, resolution, video_codec, audio_codec, imdb_id, hashes,
-                                    size, subtitle_languages)
+    def __init__(self, name, title, year=None, **kwargs):
+        super(Movie, self).__init__(name, **kwargs)
+
         #: Title of the movie
         self.title = title
 
@@ -385,15 +395,13 @@ def scan_video(path, subtitles=True, embedded_subtitles=True, subtitles_dir=None
     return video
 
 
-def scan_videos(path, subtitles=True, embedded_subtitles=True, subtitles_dir=None, age=None, scan_archives=False):
+def scan_videos(path, age=None, scan_archives=False, **kwargs):
     """Scan `path` for videos and their subtitles.
 
     :param str path: existing directory path to scan.
-    :param bool subtitles: scan for subtitles with the same name.
-    :param bool embedded_subtitles: scan for embedded subtitles.
-    :param str subtitles_dir: directory to search for subtitles.
     :param datetime.timedelta age: maximum age of the video.
     :param bool scan_archives: scan files in archives
+    :param \*\*kwargs: parameters for the :func:`scan_video` function.
     :return: the scanned videos.
     :rtype: list of :class:`Video`
 
@@ -451,8 +459,7 @@ def scan_videos(path, subtitles=True, embedded_subtitles=True, subtitles_dir=Non
                     for name in rar_content:
                         filepath = os.path.join(dirpath, name)
                         try:
-                            video = scan_video(filepath, subtitles=subtitles, embedded_subtitles=embedded_subtitles,
-                                               subtitles_dir=subtitles_dir, in_archive=True)
+                            video = scan_video(filepath, in_archive=True, **kwargs)
                             videos.append(video)
                         except ValueError:
                             pass  #: only raised here if file isn't a video file
@@ -462,11 +469,10 @@ def scan_videos(path, subtitles=True, embedded_subtitles=True, subtitles_dir=Non
             # scan video
             else:
                 try:
-                    video = scan_video(filepath, subtitles=subtitles, embedded_subtitles=embedded_subtitles,
-                                       subtitles_dir=subtitles_dir)
+                    video = scan_video(filepath, **kwargs)
                 except ValueError:  # pragma: no cover
                     logger.exception('Error scanning video')
-                    return
+                    continue
                 videos.append(video)
     return videos
 
@@ -532,3 +538,28 @@ def hash_napiprojekt(video_path):
     with open(video_path, 'rb') as f:
         data = f.read(readsize)
     return hashlib.md5(data).hexdigest()
+
+
+def sanitize(string):
+    """Sanitize a string to strip special characters.
+
+    :param str string: the string to sanitize.
+    :return: the sanitized string.
+    :rtype: str
+
+    """
+    # only deal with strings
+    if string is None:
+        return
+
+    # replace some characters with one space
+    string = re.sub('[-:\(\)]', ' ', string)
+
+    # remove some characters
+    string = re.sub('[\'\.]', '', string)
+
+    # replace multiple spaces with one
+    string = re.sub('\s+', ' ', string)
+
+    # strip and lower case
+    return string.strip().lower()

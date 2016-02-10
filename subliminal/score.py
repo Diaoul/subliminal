@@ -35,8 +35,8 @@ logger = logging.getLogger(__name__)
 
 
 #: Scores for episodes
-episode_scores = {'hash': 371, 'series': 186, 'year': 93, 'season': 31, 'episode': 31, 'release_group': 15,
-                  'format': 7, 'audio_codec': 3, 'resolution': 2, 'hearing_impaired': 2, 'video_codec': 2, 'title': 1}
+episode_scores = {'hash': 215, 'series': 108, 'year': 54, 'season': 18, 'episode': 18, 'release_group': 9,
+                  'format': 4, 'audio_codec': 2, 'resolution': 1, 'hearing_impaired': 1, 'video_codec': 1}
 
 #: Scores for movies
 movie_scores = {'hash': 71, 'title': 36, 'year': 18, 'release_group': 9,
@@ -94,12 +94,19 @@ def compute_score(subtitle, video, hearing_impaired=None):
 
     # handle equivalent matches
     if isinstance(video, Episode):
+        if 'title' in matches:
+            logger.debug('Adding title match equivalent')
+            matches.add('episode')
         if 'imdb_id' in matches:
             logger.debug('Adding imdb_id match equivalents')
-            matches |= {'series', 'year', 'season', 'episode', 'title'}
+            matches |= {'series', 'year', 'season', 'episode'}
         if 'tvdb_id' in matches:
             logger.debug('Adding tvdb_id match equivalents')
             matches |= {'series', 'year'}
+    elif isinstance(video, Movie):
+        if 'imdb_id' in matches:
+            logger.debug('Adding imdb_id match equivalents')
+            matches |= {'title', 'year'}
 
     # handle hearing impaired
     if hearing_impaired is not None and subtitle.hearing_impaired == hearing_impaired:
@@ -121,22 +128,20 @@ def solve_episode_equations():
 
     hash, series, year, season, episode, release_group = symbols('hash series year season episode release_group')
     format, audio_codec, resolution, video_codec = symbols('format audio_codec resolution video_codec')
-    title, hearing_impaired = symbols('title hearing_impaired')
+    hearing_impaired = symbols('hearing_impaired')
 
     equations = [
         # hash is best
-        Eq(hash, series + year + season + episode + release_group + format + audio_codec + resolution + video_codec +
-           title),
+        Eq(hash, series + year + season + episode + release_group + format + audio_codec + resolution + video_codec),
 
         # series counts for the most part in the total score
-        Eq(series, year + season + episode + release_group + format + audio_codec + resolution + video_codec + title +
-           1),
+        Eq(series, year + season + episode + release_group + format + audio_codec + resolution + video_codec + 1),
 
         # year is the second most important part
-        Eq(year, season + episode + release_group + format + audio_codec + resolution + video_codec + title + 1),
+        Eq(year, season + episode + release_group + format + audio_codec + resolution + video_codec + 1),
 
         # season is important too
-        Eq(season, release_group + format + audio_codec + resolution + video_codec + title + 1),
+        Eq(season, release_group + format + audio_codec + resolution + video_codec + 1),
 
         # episode is equally important to season
         Eq(episode, season),
@@ -156,15 +161,12 @@ def solve_episode_equations():
         # hearing impaired is as much as resolution
         Eq(hearing_impaired, resolution),
 
-        # video_codec counts more than the title
-        Eq(video_codec,  title + 1),
-
-        # title is that little extra boost
-        Eq(title, 1),
+        # video_codec is the least valuable match
+        Eq(video_codec,  1),
     ]
 
     return solve(equations, [hash, series, year, season, episode, release_group, format, audio_codec, resolution,
-                             hearing_impaired, video_codec, title])
+                             hearing_impaired, video_codec])
 
 
 def solve_movie_equations():
@@ -199,7 +201,7 @@ def solve_movie_equations():
         # hearing impaired is as much as resolution
         Eq(hearing_impaired, resolution),
 
-        # video_codec counts more than the title
+        # video_codec is the least valuable match
         Eq(video_codec,  1),
     ]
 

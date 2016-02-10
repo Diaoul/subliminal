@@ -9,17 +9,6 @@ from ..video import Episode, Movie
 logger = logging.getLogger(__name__)
 
 
-def get_version(version):
-    """Put the `version` in the major.minor form.
-
-    :param str version: the full version.
-    :return: the major.minor form of the `version`.
-    :rtype: str
-
-    """
-    return '.'.join(version.split('.')[:2])
-
-
 class TimeoutSafeTransport(SafeTransport):
     """Timeout support for ``xmlrpc.client.SafeTransport``."""
     def __init__(self, timeout, *args, **kwargs):

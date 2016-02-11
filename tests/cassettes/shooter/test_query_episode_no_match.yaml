@@ -1,0 +1,20 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Content-Length: ['0']
+      User-Agent: [!!python/unicode 'Subliminal/1.1']
+    method: POST
+    uri: https://www.shooter.cn/api/subapi.php?lang=chn&pathinfo=Dallas.S01E03.mkv&format=json
+  response:
+    body:
+      string: !!binary |
+        /w==
+    headers:
+      connection: [keep-alive]
+      content-type: [application/octet-stream]
+      date: ['Wed, 10 Feb 2016 19:28:21 GMT']
+      set-cookie: [SERVERID=7fad01ef5bb15ec46fb1a79d14039fc6|1455132501|1455132501;Path=/]
+      x-cache-status: [HIT]
+    status: {code: 200, message: OK}
+version: 1

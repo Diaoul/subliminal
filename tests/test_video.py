@@ -272,7 +272,9 @@ def test_scan_video_metadata(mkv):
     assert scanned_video.hashes == {
         'napiprojekt': 'de2e9caa58dd53a6ab9d241e6b252e35',
         'opensubtitles': '49e2530ea3bd0d18',
-        'thesubdb': '64a8b87f12daa4f31895616e6c3fd39e'}
+        'thesubdb': '64a8b87f12daa4f31895616e6c3fd39e',
+        'shooter': '36f3e2c50566ca01f939bf15d8031432;b6132ab62b8f7d4aaabe9d6344b90d90;'
+                   'bea6074cef7f1de85794f3941530ba8b;18db05758d5d0d96f246249e4e4b5d79'}
     assert scanned_video.size == 31762747
     assert scanned_video.subtitle_languages == {Language('spa'), Language('deu'), Language('jpn'), Language('und'),
                                                 Language('ita'), Language('fra'), Language('hun')}

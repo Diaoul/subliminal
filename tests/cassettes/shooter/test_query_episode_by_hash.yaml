@@ -2,17 +2,20 @@ interactions:
 - request:
     body: null
     headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
       Content-Length: ['0']
-      User-Agent: [!!python/unicode 'Subliminal/1.1']
+      User-Agent: [!!python/unicode 'Subliminal/2.0']
     method: POST
     uri: https://www.shooter.cn/api/subapi.php?lang=chn&pathinfo=The+Big+Bang+Theory%2FSeason+07%2FThe.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION.mkv&filehash=c13e0e5243c56d280064d344676fff94%3Bcd4184d1c0c623735f6db90841ce15fc%3B3faefd72f92b63f2504269b4f484a377%3B8c68d1ef873afb8ba0cc9f97cbac41c1&format=json
   response:
-    body: {string: !!python/unicode '[{"Desc":"","Delay":0,"Files":[{"Ext":"srt","Link":"https://www.shooter.cn/api/subapi.php?fetch=MTQ1NTEzMTY2OHxsSklfaXI5MzRfNWJiMzZfbTM2cURfVm9GWmZ3T1owSHFEQ2JmdTdnZFMyS0ZLMzFrdVdZX3B0OXcybHNDbDFmU1ZJYWs0WjJCOVY3RDlGMVVMR1V0XzRRamZSUUg0RFFVYUo1cnBxX2VNN2lzaHBsd0t2aUVkTWJkbVl2VmdSSW9jVk9xYXlsLUpNMjNvajlkU2JITWExOG8zRGxCemd1WlBpRHJITFN6Y283fIVIn0d10M6iNmrze93KRmJzxbuHjABBhIR0GNEwhVUt\u0026nonce=%CA%0Cdt%02%2FO%D3%60%29g%01%12%3E%D8y"}]},{"Desc":"","Delay":0,"Files":[{"Ext":"ass","Link":"https://www.shooter.cn/api/subapi.php?fetch=MTQ1NTEzMTY2OHxqaTNiSXZrM1plM1B2R0ptaDZwR3hudC1HcUszcWdtTVNYSXRLeU9qV0xDRkJvdFlSQWVaSm9HNWN5WWc4a2lXb0M5eHZhVF9TdVlsR21vUi1iZ0d1RktqUzhFQXdhTm83QnkteWRNNFY2ZTBKaVhLbUNpaVczUVU3SUt5T1lWTExjNjB4MkRSSFVyNmkzdTNoVVZ6RC1FQjNaYVpTb1FSemdxTldocmM2RWJofPPNiTi403a9mUmG-r-uen5_ZDkk-jZXTNRgW6d8KZYp\u0026nonce=%9D%9F%FD%5E%ED%D7Ue%06F%03%F8%28%FA2%24"}]},{"Desc":"","Delay":0,"Files":[{"Ext":"srt","Link":"https://www.shooter.cn/api/subapi.php?fetch=MTQ1NTEzMTY2OHx3ZmY0dTlNQmJaVDhFX0xES3ZuZ1Q0TzBYSGlZc2hFUmpyeDhoOW9vbE01Q3gtQWtSUHZPQXA4aXhhQjdRdW5yTG51dlBqSXRrdURHOWR5Mllyd2M3Y2lpOW1FYUtNVVVKZEZDSVpfU1JERVc1c1pKTHcxeHdIRFo0blF4NmdfTEVxY3E4VHY3ZFpGYzg1T24tZlNxb2dVamRoOS1WWTJDZExJd1B3NFd2dzF6fBHXIiynygV42EXgN27mICuebhi_lpnsQWpvooiSjYMF\u0026nonce=%C9P%CAZh%BC%B4%B6%8451%A2t%E2%C4%5B"}]}]'}
+    body: {string: !!python/unicode '[{"Desc":"","Delay":0,"Files":[{"Ext":"srt","Link":"https://www.shooter.cn/api/subapi.php?fetch=MTQ1NTE2OTQ0OXx4MXowOGtvT3pkT05pV0t4NkJVTlVxeU9PQldvaGFxUk10QzAxeDdQVTJpMlM0a0R1RzYzSGVYclV6bWxObWJqcy1Ea3k1aEU4WDlsb0t4REJiQ3doNWFKQWZFMzd4SDJFWU1QV25kRVA0am9vVDctQ3pZWmw0Mm0tVGYyZHdfM284MEhKaTByRlBpQnhvQm5uanliOW0yemhoVFFHSXRObXRHdUJhSk5YQlFlfPs46eIAb0ckoWfeLadeIE_4Q_i5pFYy8LTUPSNcn9Bw\u0026nonce=%BC%1A%8C%FA%C8M%7BZ%3C%9BD%10%16%9F%FCd"}]},{"Desc":"","Delay":0,"Files":[{"Ext":"ass","Link":"https://www.shooter.cn/api/subapi.php?fetch=MTQ1NTE2OTQ0OXxxVVgzQUNSc01UNEcxeEFzUDQzWVg3c2taek9fekt1U3drUWpfQU1QODg0WElnX3VLZE9lUkVkM0s4bmNMT1lXbW9zS01ySllXZ3hzU0p6VFJKaUVhNmJ3My02eWxVbmxMa1YxQzRNTTU2MmNXV0kwUXUySm1sYWEwRTVoVjE5YjdLVjZpTGdSQ21GYUV4QWpxZ19DVnZOVGR0eWpLOHppZ0tzdFFETlFzOWtQfGc-TUOdURU4X_LK_9QFTtL-8OZukBE8XmjN8YNE9BSn\u0026nonce=%EDPW%02%E3%189li%96%F4%C5od%A4u"}]},{"Desc":"","Delay":0,"Files":[{"Ext":"srt","Link":"https://www.shooter.cn/api/subapi.php?fetch=MTQ1NTE2OTQ0OXxpNWZnNFYyV1NyTHl1SGlRTXQ1TTBlSUJCZnhIQ1htV3hnS2hPVV9wdXkxSGFXa2E1aTYxSnJQZE1IS1JpX2kweUl6ek01Z2xMd2paTk9UVm9aYmR1UTVCcmloTXU1bW5halM2YV9VSVU1bDg2dmZhUTNwZk90RExPOHFSdVBPcThtZ1VLZ0NOek1fTzZyLWxtUWZNdGhLMEpocWRmTDVoZVpPSFhueVBhZzFsfLeOX2fktAaT44j2Uz1L1LJDfYVQ8eHK0mbw-YENE_IJ\u0026nonce=%C1%97%0F%E6%9B%A5%9B%A9%1A2%9B%27%BDD%03%D9"}]}]'}
     headers:
       connection: [keep-alive]
       content-type: [application/json; charset=utf-8]
-      date: ['Wed, 10 Feb 2016 19:28:21 GMT']
-      set-cookie: [SERVERID=7fad01ef5bb15ec46fb1a79d14039fc6|1455132501|1455132501;Path=/]
+      date: ['Thu, 11 Feb 2016 05:58:04 GMT']
+      set-cookie: [SERVERID=7fad01ef5bb15ec46fb1a79d14039fc6|1455170284|1455170284;Path=/]
       x-cache-status: [MISS]
     status: {code: 200, message: OK}
 version: 1

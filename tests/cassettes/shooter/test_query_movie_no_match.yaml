@@ -2,8 +2,11 @@ interactions:
 - request:
     body: null
     headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
       Content-Length: ['0']
-      User-Agent: [!!python/unicode 'Subliminal/1.1']
+      User-Agent: [!!python/unicode 'Subliminal/2.0']
     method: POST
     uri: https://www.shooter.cn/api/subapi.php?lang=chn&pathinfo=enders.game.2013.720p.bluray.x264-sparks.mkv&format=json
   response:
@@ -13,8 +16,8 @@ interactions:
     headers:
       connection: [keep-alive]
       content-type: [application/octet-stream]
-      date: ['Wed, 10 Feb 2016 19:28:21 GMT']
-      set-cookie: [SERVERID=7fad01ef5bb15ec46fb1a79d14039fc6|1455132501|1455132501;Path=/]
-      x-cache-status: [HIT]
+      date: ['Thu, 11 Feb 2016 05:58:03 GMT']
+      set-cookie: [SERVERID=7fad01ef5bb15ec46fb1a79d14039fc6|1455170283|1455170283;Path=/]
+      x-cache-status: [MISS]
     status: {code: 200, message: OK}
 version: 1

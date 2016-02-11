@@ -2,17 +2,20 @@ interactions:
 - request:
     body: null
     headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
       Content-Length: ['0']
-      User-Agent: [!!python/unicode 'Subliminal/1.1']
+      User-Agent: [!!python/unicode 'Subliminal/2.0']
     method: POST
     uri: https://www.shooter.cn/api/subapi.php?lang=chn&pathinfo=Dallas.2012.S01E03.mkv&format=json
   response:
-    body: {string: !!python/unicode '[{"Desc":"","Delay":0,"Files":[{"Ext":"ass","Link":"https://www.shooter.cn/api/subapi.php?fetch=MTQ1NTEzMTY2OHxIRVpSY0NhcWg3eWVSSTRzN2xUTzlFRVBMV1ByOEpUdGtVT2VpR2JBUVc2Umk5SjRYQUZNeWVUbGFHeXI1c3ZQR1BCTnRmR252cU5vejI1ZVFTVzdQWmUwakRyVzJfVi1ma2RhU3dPT0NqZGU2U2Z4eEdnRjFJdmRLZXduLVVycnzN1Ps-pBlNKBvB5z4Hs1QyU_OusFfhYp9z3HFW8wsTnw==\u0026nonce=%C0N%E7%97%A5%92%A5%25J%2C%EF%7BS%99%3C-"}]}]'}
+    body: {string: !!python/unicode '[{"Desc":"","Delay":0,"Files":[{"Ext":"ass","Link":"https://www.shooter.cn/api/subapi.php?fetch=MTQ1NTE2OTQ1MnxUM1B3NlJWR0JERTJKOFlPUk5XUlBNa01FcEMzRlJqTktqNEY1TlNCdjMySEstemY3UlRCbFc2QWcyLUlycnh5V2lFSXpWX2FLdjd0RW8yQTFFTUZpMC0xeDZGbjY2cklZUXJnRVEzbjhERzNQTEk4enFXdUk1MEpneEhhREJRbXxW83cwK7jGvxb4GLMEWIvcJEg6VCQQ_bnZ8UpUwuFDEg==\u0026nonce=%C7%95%EA%0AL%D67%B0%97-%C6Q%28%A2%D1%AA"}]}]'}
     headers:
       connection: [keep-alive]
       content-type: [application/json; charset=utf-8]
-      date: ['Wed, 10 Feb 2016 19:28:22 GMT']
-      set-cookie: [SERVERID=7fad01ef5bb15ec46fb1a79d14039fc6|1455132502|1455132502;Path=/]
-      x-cache-status: [HIT]
+      date: ['Thu, 11 Feb 2016 05:58:07 GMT']
+      set-cookie: [SERVERID=7fad01ef5bb15ec46fb1a79d14039fc6|1455170287|1455170287;Path=/]
+      x-cache-status: [MISS]
     status: {code: 200, message: OK}
 version: 1

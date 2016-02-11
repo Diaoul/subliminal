@@ -2,43 +2,52 @@ interactions:
 - request:
     body: null
     headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
       Content-Length: ['0']
-      User-Agent: [!!python/unicode 'Subliminal/1.1']
+      User-Agent: [!!python/unicode 'Subliminal/2.0']
     method: POST
     uri: https://www.shooter.cn/api/subapi.php?lang=eng&pathinfo=Man+of+Steel+%282013%29%2Fman.of.steel.2013.720p.bluray.x264-felony.mkv&filehash=314f454ab464775498ae6f1f5ad813a9%3Bfdaa8b702d8936feba2122e93ba5c44f%3B0a6935e3436aa7db5597ef67a2c494e3%3B4d269733f36ddd49f71e92732a462fe5&format=json
   response:
-    body: {string: !!python/unicode '[{"Desc":"","Delay":0,"Files":[{"Ext":"srt","Link":"https://www.shooter.cn/api/subapi.php?fetch=MTQ1NTEzNTA0M3xHeWIxWnZBMG9nM2RoY1dnQ0xVcHRhYklwRy1SQVZCQko5WVZOQzBQa0dXUEcwYmpiQUJka0xVbkdFMy1vNjFSMENXdW5ETHd3Y2hUYnhycy1HWXJIWHdKTU9lcEg2RXpvWWZlREZMWWdFY0pOUU1qQlY4RWxjUVFERlIycHFXZVVuREJKSTMtZC1xd1B6c1BwSzRvUFZBSFpvTGcxSjg9fJdDql_4EB977TnSEIVclMDL6SA7zBLhepC0lnlcSQ7J\u0026nonce=M%06%04%A7L%1D%F5%C38%FA%B3.%0F%9E%F5b"}]},{"Desc":"","Delay":0,"Files":[{"Ext":"srt","Link":"https://www.shooter.cn/api/subapi.php?fetch=MTQ1NTEzNTA0NHxjYVRHNWlsRmhyd2RoUV94ekowZDFLdGxXOGdhQVZKN1F3NHFrNEhBZFFudU8tR3dOWUg4aDVRLVhPcjQtYVlMTGpidFVOSmxnOGFwTUU2WVZvZW43dVg2VzY2SlZObFJxVkFpWUVPb0hZLVJ4SzJTS1VSQ1pRdFp3UUNmbEFDZ25tX2dXX2c3QV9MVjhlbGVHWWJSMHNOVVdQVnltTlE9fN4w8awARznsrlbYNowpVN7gp_t1ySEAQPmTN39HCJBr\u0026nonce=b%BE%5B%21%0A%EE1F%CC0%BCH%F21%C9%BF"}]},{"Desc":"","Delay":0,"Files":[{"Ext":"srt","Link":"https://www.shooter.cn/api/subapi.php?fetch=MTQ1NTEzNTA0NHxIamNmWUlHQ3FWUm9HNWYzWElxalh4b1U4VnR2NTM1ZVFLdENmb3BaN0FlOFB0T01SU1lwLW1oZlZxNmZObkp0RmMwQU1udVVRS0RCekFpUllUbnBhNlJCZXFMOVhUby13MFVFS0ttZk5pWlg4alVYQXNlM1paS3M1Z0hMemdzU0pFV1ZHdEFNXzgxVnBkdUlkZXNIdFFDb3NiSU8zbDQ9fOdFMnSSj8jPQZIyBiTRNsVGANNsr7RqpK4WbLexgShN\u0026nonce=%CDI9z%B3%E6%A4A%25%B7%11Q%DDg%0Cj"}]}]'}
+    body: {string: !!python/unicode '[{"Desc":"","Delay":0,"Files":[{"Ext":"srt","Link":"https://www.shooter.cn/api/subapi.php?fetch=MTQ1NTE2OTQ1M3xQck45Tm5Ea0Fmc1lNV3BqVDRTWDZ0dDN1ZkpUVXlrdU5obGMwXzROb0lqMVVjTWh2U3NJaXdVZ1RheXRVUzAydEFydW5qei1oa05WaHFlUWd3aUg0a0lsNUFEZVJLejEzRUQtNmJqWFNaVWE0VVRiNTRuX1c4ZHpQTG1PamR5S281QmNLR0dlSEpRNm5LRVpFaUpsaHB3dWV1UlF3Rjg9fKABrEJ7RhEXpn-o45WtfhqAIsk7qTGOtYq1pUZmGjGZ\u0026nonce=%FD%E75%C5%D2%B9%A0b%E9%F4%97o%1BXXd"}]},{"Desc":"","Delay":0,"Files":[{"Ext":"srt","Link":"https://www.shooter.cn/api/subapi.php?fetch=MTQ1NTE2OTQ1M3x3eUUyOWx6ay04T1ZHYk1fOVc1UTlkNTdEelZnNER3eWlpWkRYVWJHNVJtRVlyRHBDdTRIenYtSjNZc1ViS1hnVF92SzJhblhBM2ZybDVSYTlPNVdZQkxxOTJBc3ZnbDNiZ0UyT0pFZXp4aDU2c1FEdmlhQlhLS2ZPR0M1VjFBUFNCRG1hdmlOVl80ZkJjeDlndE05ZG1CWTktOERQRDA9fG-7gmRzHpBHcWZvtpyXcg08CRWyKubk8Um-KGAoxJA2\u0026nonce=Mx%C5g~rF8%82%C7%A0%FFL%00%15%17"}]},{"Desc":"","Delay":0,"Files":[{"Ext":"srt","Link":"https://www.shooter.cn/api/subapi.php?fetch=MTQ1NTE2OTQ1M3xHcFJpYjZ6WkxSZEV0UXk4cTBCLVhEMFl0RU9oMHJ0RUoxSi1pOXFhTEk4VVcxblBDR1BjRmZBMW5YcHhrMExhV2o2cHdQeFNrdjJpNkNHU1R5Z3lQVTNIaHdRMEJnVGFFaHZxaWU0a2JZc0FSNkMyWEY3bkZ6TlNHNVNGeVpqYW5sRlRGMUVHUDZCUWFKZjNLRnFONUpacXFNT3ZkRDg9fIrHtElbo906zZzLwJxXh9eeVLYvPjjl4iAEsv6ahmC-\u0026nonce=%8AoT%CF%80%B3%28%C8%015Rv%9C%98%40%22"}]}]'}
     headers:
       connection: [keep-alive]
       content-type: [application/json; charset=utf-8]
-      date: ['Wed, 10 Feb 2016 20:24:37 GMT']
-      set-cookie: [SERVERID=7fad01ef5bb15ec46fb1a79d14039fc6|1455135877|1455135877;Path=/]
+      date: ['Thu, 11 Feb 2016 05:58:07 GMT']
+      set-cookie: [SERVERID=7fad01ef5bb15ec46fb1a79d14039fc6|1455170287|1455170287;Path=/]
       x-cache-status: [HIT]
     status: {code: 200, message: OK}
 - request:
     body: null
     headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
       Content-Length: ['0']
-      Cookie: [SERVERID=7fad01ef5bb15ec46fb1a79d14039fc6|1455135877|1455135877]
-      User-Agent: [!!python/unicode 'Subliminal/1.1']
+      Cookie: [SERVERID=7fad01ef5bb15ec46fb1a79d14039fc6|1455170287|1455170287]
+      User-Agent: [!!python/unicode 'Subliminal/2.0']
     method: POST
     uri: https://www.shooter.cn/api/subapi.php?lang=chn&pathinfo=Man+of+Steel+%282013%29%2Fman.of.steel.2013.720p.bluray.x264-felony.mkv&filehash=314f454ab464775498ae6f1f5ad813a9%3Bfdaa8b702d8936feba2122e93ba5c44f%3B0a6935e3436aa7db5597ef67a2c494e3%3B4d269733f36ddd49f71e92732a462fe5&format=json
   response:
-    body: {string: !!python/unicode '[{"Desc":"","Delay":0,"Files":[{"Ext":"srt","Link":"https://www.shooter.cn/api/subapi.php?fetch=MTQ1NTEzNTA0NHxRaHVCUk9CSWRaazdqMndVdmxReks2YWttc3VmaG1kZURGY0JkUUszN2QzaXFHUWZUc1htLWRKQ01WRzl1NGhiWlUxRTdvS05TZWc4RngyMng3TjdXRXlZT0dPYlhydHNsbFMwb2FyWmRfd3gwbTVSYVZMZjk4NU1tc3ZkUXQ3ZmN2dlJlTzRTbk1UazBLMzI0NE92dUtNbC0yVE5hckE9fC2nWDr__sY0U-yqMDUf-SxSsgu9TH10PJxCZ9-C-UCC\u0026nonce=%7B1%EB%AD%F8%25%8B%23%5C%C2%26%AB%BD%030%FF"}]},{"Desc":"","Delay":0,"Files":[{"Ext":"srt","Link":"https://www.shooter.cn/api/subapi.php?fetch=MTQ1NTEzNTA0NHxhMm1ReDBkTmVVRHZ0WDlVQk1ENDNVbWlOaWpFLWtDdmxyUlc5aWxDZlRMN3cwa2ozWTBwYV9uUXhmeXh4Wk5oZXhGU2lpNy1TYzVvUzYtUjJDcVRiLVd2a1hlbzlKQzFEYXR5cElpNWVUTUlmM1FpLVQyTmN5ei1NM1pHbjlJbjEwS0dLUGo2dnVWdDF4VnRPd2I3dFBEc0FYOWJDWnM9fFvk5R8CGi9XdQOyTxIZJjjzEcyJMsya5iDqHP3eK0uK\u0026nonce=M%2C%1F%0AfD%3E%B2%89%8E%BB%FE%99%0C%C4%C8"}]},{"Desc":"","Delay":0,"Files":[{"Ext":"srt","Link":"https://www.shooter.cn/api/subapi.php?fetch=MTQ1NTEzNTA0NHxicHdFNzJHYVVMQ2xMUmlPdEFLd0p3MGsxSExxcnI5UzdwaTM5MjV2MWVqV2QyUEZTSXA0dTg1Wk5zbUVCVHB5V3pKdEhraHJtNm9Pcm56MVVEdjNOejVaWDR2ajd6UWZRbDkxX0JIUkwxZ0l1UXdZLXJ3NWlEbEFlMVI0V2luMExFeHVFNjBpM1dtbDM3OTJ1NXVjVWhvdmhQYUw1a3M9fILvU21Jt0UvQ7QQbCE3wlIeXdTAQLUR1-B82Mv6KC2g\u0026nonce=%8B%FF%8Ec5%A9%7D%B9%E4%13%95%A3RQq%90"}]}]'}
+    body: {string: !!python/unicode '[{"Desc":"","Delay":0,"Files":[{"Ext":"srt","Link":"https://www.shooter.cn/api/subapi.php?fetch=MTQ1NTE2OTQ1M3xPTXNaUGRaVEJ1ZU5EdXRYOUFNUmotN0V5aWlTR3lfaWlBTUlkRnBXRW1PcnlJUTZWWUEwd2ZLNWczdkMwelhuUlBBcUxjTDUtQTUxMGxpQ3lBMy16eVFxSFZVTk91UVYzVTRkVHBCWi01SWtQUGpXbFU3R1otZEhzSFBSc1JrSHdNaUFiZl9wTlJaQ3hVcTBNdHBzZWZNdTJQUzFXbW89fOVZYseXLBfP7k2-TRYAi28Hg49qsewfnFnpQVlTAB4u\u0026nonce=%2A%B4%1A8%7F%853%AFn%23%A6%FD%FAFX%5E"}]},{"Desc":"","Delay":0,"Files":[{"Ext":"srt","Link":"https://www.shooter.cn/api/subapi.php?fetch=MTQ1NTE2OTQ1M3xwLTNrRG5RX0hicThmaktuUlZhMndxYjBNUHVUcFFrSy1zWFYtWEctSFlVbVpfTWoyRm9DRDVNYS1JaUxqeXhQRmxvZlVlRkxVSGk5RlRHY3hvMnpiQzFhRXNqYTUyVDdQOWZRUlU3eEZVSHo3ZGVtUkFoYVVSOUNCaTBZLW8zMlpiU2hrYWJLZVdpVnVjSVNXcDVabEhkbEFZSGIxaW89fBzhC4nTtLS_wZWjMdLRJ2hf46mBfrBuTg74qyHY5fDG\u0026nonce=%DB%F9g%FF%9EO%5EoZ%ACH%B9%E4%0B%0F%B5"}]},{"Desc":"","Delay":0,"Files":[{"Ext":"srt","Link":"https://www.shooter.cn/api/subapi.php?fetch=MTQ1NTE2OTQ1M3xrWkRtcEJjOWYwSTItS1A3Y3RvR0g0aUx4RklVbkR1clptdUxaYnhYVkUtSWp3VWR0ZE83eExuV2VLMVJxeU0zTC12S3psTncwcXNxNHFodzdNYjFLd01YT0ZHYmlSU0w1S19TZXFBWVZrZjVPTTRxX2xGdWNFSlJycGdfSE55SGRBcGFqSngyalhHeE9EZmE0Q0VmYlJuS0hQSHJOSkE9fIElBbXT-nFF_hJ4OOJkZVHlMTPL6D4SfrP8UQQjCVdQ\u0026nonce=w%C5%84%04%0C%9C%AD%B3%E6%3A%28%8AL%94%DA%EF"}]}]'}
     headers:
       connection: [keep-alive]
       content-type: [application/json; charset=utf-8]
-      date: ['Wed, 10 Feb 2016 20:24:37 GMT']
-      set-cookie: [SERVERID=7fad01ef5bb15ec46fb1a79d14039fc6|1455135877|1455135877;Path=/]
+      date: ['Thu, 11 Feb 2016 05:58:07 GMT']
+      set-cookie: [SERVERID=7fad01ef5bb15ec46fb1a79d14039fc6|1455170287|1455170287;Path=/]
       x-cache-status: [HIT]
     status: {code: 200, message: OK}
 - request:
     body: null
     headers:
-      Cookie: [SERVERID=7fad01ef5bb15ec46fb1a79d14039fc6|1455135877|1455135877]
-      User-Agent: [!!python/unicode 'Subliminal/1.1']
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Cookie: [SERVERID=7fad01ef5bb15ec46fb1a79d14039fc6|1455170287|1455170287]
+      User-Agent: [!!python/unicode 'Subliminal/2.0']
     method: GET
-    uri: https://www.shooter.cn/api/subapi.php?fetch=MTQ1NTEzNTA0M3xHeWIxWnZBMG9nM2RoY1dnQ0xVcHRhYklwRy1SQVZCQko5WVZOQzBQa0dXUEcwYmpiQUJka0xVbkdFMy1vNjFSMENXdW5ETHd3Y2hUYnhycy1HWXJIWHdKTU9lcEg2RXpvWWZlREZMWWdFY0pOUU1qQlY4RWxjUVFERlIycHFXZVVuREJKSTMtZC1xd1B6c1BwSzRvUFZBSFpvTGcxSjg9fJdDql_4EB977TnSEIVclMDL6SA7zBLhepC0lnlcSQ7J&nonce=M%06%04%A7L%1D%F5%C38%FA%B3.%0F%9E%F5b
+    uri: https://www.shooter.cn/api/subapi.php?fetch=MTQ1NTE2OTQ1M3xQck45Tm5Ea0Fmc1lNV3BqVDRTWDZ0dDN1ZkpUVXlrdU5obGMwXzROb0lqMVVjTWh2U3NJaXdVZ1RheXRVUzAydEFydW5qei1oa05WaHFlUWd3aUg0a0lsNUFEZVJLejEzRUQtNmJqWFNaVWE0VVRiNTRuX1c4ZHpQTG1PamR5S281QmNLR0dlSEpRNm5LRVpFaUpsaHB3dWV1UlF3Rjg9fKABrEJ7RhEXpn-o45WtfhqAIsk7qTGOtYq1pUZmGjGZ&nonce=%FD%E75%C5%D2%B9%A0b%E9%F4%97o%1BXXd
   response:
     body: {string: !!python/unicode "0:01,000 --> 00:00:04,074\r\nSubtitles downloaded\
         \ from www.OpenSubtitles.org\r\n\r\n2\r\n00:00:58,525 --> 00:01:00,027\r\n\
@@ -1743,7 +1752,7 @@ interactions:
       connection: [keep-alive]
       content-disposition: [attachment; filename=man.of.steel.2013.720p.bluray.x264-felony.srt]
       content-type: [application/octet-stream]
-      date: ['Wed, 10 Feb 2016 20:24:45 GMT']
-      set-cookie: [SERVERID=7fad01ef5bb15ec46fb1a79d14039fc6|1455135877|1455135877;Path=/]
+      date: ['Thu, 11 Feb 2016 05:58:27 GMT']
+      set-cookie: [SERVERID=7fad01ef5bb15ec46fb1a79d14039fc6|1455170288|1455170287;Path=/]
     status: {code: 200, message: OK}
 version: 1

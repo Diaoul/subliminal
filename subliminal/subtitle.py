@@ -19,7 +19,7 @@ class Subtitle(object):
     :param bool hearing_impaired: whether or not the subtitle is hearing impaired.
     :param page_link: URL of the web page from which the subtitle can be downloaded.
     :type page_link: str
-    :param encoding: Text encoding of the subtitle
+    :param encoding: Text encoding of the subtitle.
     :type encoding: str
 
     """
@@ -52,12 +52,12 @@ class Subtitle(object):
 
     @property
     def id(self):
-        """Unique identifier of the subtitle."""
+        """Unique identifier of the subtitle"""
         raise NotImplementedError
 
     @property
     def text(self):
-        """Content as string.
+        """Content as string
 
         If :attr:`encoding` is None, the encoding is guessed with :meth:`guess_encoding`
 

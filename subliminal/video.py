@@ -77,12 +77,12 @@ class Video(object):
 
     @property
     def exists(self):
-        """Test whether the video exists."""
+        """Test whether the video exists"""
         return os.path.exists(self.name)
 
     @property
     def age(self):
-        """Age of the video."""
+        """Age of the video"""
         if self.exists:
             return datetime.utcnow() - datetime.utcfromtimestamp(os.path.getmtime(self.name))
 
@@ -240,9 +240,12 @@ def search_external_subtitles(path, directory=None):
     :rtype: dict
 
     """
+    # split path
     dirpath, filename = os.path.split(path)
     dirpath = dirpath or '.'
     fileroot, fileext = os.path.splitext(filename)
+
+    # search for subtitles
     subtitles = {}
     for p in os.listdir(directory or dirpath):
         # keep only valid subtitle filenames
@@ -255,7 +258,7 @@ def search_external_subtitles(path, directory=None):
         # default language is undefined
         language = Language('und')
 
-        # attempt to parse
+        # attempt to parse the language code
         if language_code:
             try:
                 language = Language.fromietf(language_code)

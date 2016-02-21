@@ -9,9 +9,10 @@ __copyright__ = 'Copyright 2016, Antoine Bertin'
 import logging
 
 from .core import (AsyncProviderPool, ProviderPool, check_video, download_best_subtitles, download_subtitles,
-                   list_subtitles, provider_manager, refiner_manager, save_subtitles)
+                   list_subtitles, save_subtitles)
 from .cache import region
 from .exceptions import Error, ProviderError
+from .extensions import provider_manager, refiner_manager
 from .providers import Provider
 from .score import compute_score
 from .subtitle import Subtitle

@@ -82,6 +82,7 @@ class RegistrableExtensionManager(ExtensionManager):
                 break
 
 
+#: Provider manager
 provider_manager = RegistrableExtensionManager('subliminal.providers', [
     'addic7ed = subliminal.providers.addic7ed:Addic7edProvider',
     'opensubtitles = subliminal.providers.opensubtitles:OpenSubtitlesProvider',
@@ -91,6 +92,7 @@ provider_manager = RegistrableExtensionManager('subliminal.providers', [
     'tvsubtitles = subliminal.providers.tvsubtitles:TVsubtitlesProvider'
 ])
 
+#: Refiner manager
 refiner_manager = RegistrableExtensionManager('subliminal.refiners', [
     'metadata = subliminal.refiners.metadata:refine',
     'tvdb = subliminal.refiners.tvdb:refine',

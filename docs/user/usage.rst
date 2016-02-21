@@ -75,7 +75,7 @@ Now that we're done with the basics, let's have some *real* fun.
 
 Listing
 ^^^^^^^
-To list subtitles, subliminal provides a :func:`~subliminal.api.list_subtitles` function that will return all found
+To list subtitles, subliminal provides a :func:`~subliminal.core.list_subtitles` function that will return all found
 subtitles:
 
     >>> subtitles = list_subtitles([video], {Language('hun')}, providers=['podnapisi'])
@@ -98,7 +98,7 @@ them to the video and tell you exactly what matches with :meth:`~subliminal.subt
     ['episode', 'format', 'release_group', 'season', 'series', 'video_codec', 'year']
     ['episode', 'format', 'season', 'series', 'year']
 
-And then compute a score with those matches with :func:`~subliminal.subtitle.compute_score`:
+And then compute a score with those matches with :func:`~subliminal.score.compute_score`:
 
     >>> for s in subtitles[video]:
     ...     {s: compute_score(s, video)}
@@ -109,7 +109,7 @@ Now you should have a better idea about which one you should choose.
 
 Downloading
 ^^^^^^^^^^^
-We can settle on the first subtitle and download its content using :func:`~subliminal.api.download_subtitles`:
+We can settle on the first subtitle and download its content using :func:`~subliminal.core.download_subtitles`:
 
     >>> subtitle = subtitles[video][0]
     >>> subtitle.content is None
@@ -127,7 +127,7 @@ If you want a string instead of bytes, you can access decoded content with the
 Downloading best subtitles
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 Downloading best subtitles is what you want to do in almost all cases, as a shortcut for listing, scoring and
-downloading you can use :func:`~subliminal.api.download_best_subtitles`:
+downloading you can use :func:`~subliminal.core.download_best_subtitles`:
 
     >>> best_subtitles = download_best_subtitles([video], {Language('hun')}, providers=['podnapisi'])
     >>> best_subtitles[video]
@@ -140,7 +140,7 @@ We end up with the same subtitle but with one line of code. Neat.
 
 Save
 ^^^^
-We got ourselves a nice subtitle now we can save it on the file system using :func:`~subliminal.api.save_subtitles`:
+We got ourselves a nice subtitle now we can save it on the file system using :func:`~subliminal.core.save_subtitles`:
 
     >>> save_subtitles(video, [best_subtitle])
     [<PodnapisiSubtitle 'ZtAW' [hu]>]

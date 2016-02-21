@@ -16,10 +16,10 @@ subtitles. Current supported providers are:
 
 Providers all inherit the same :class:`~subliminal.providers.Provider` base class and thus share the same API.
 They are registered on the ``subliminal.providers`` entry point and are exposed through the
-:data:`~subliminal.api.provider_manager` for easy access.
+:data:`~subliminal.extensions.provider_manager` for easy access.
 
-To work with multiple providers seamlessly, the :class:`~subliminal.api.ProviderPool` exposes the same API but
-distributes it to its providers and :class:`~subliminal.api.AsyncProviderPool` does it asynchronously.
+To work with multiple providers seamlessly, the :class:`~subliminal.core.ProviderPool` exposes the same API but
+distributes it to its providers and :class:`~subliminal.core.AsyncProviderPool` does it asynchronously.
 
 .. _scoring:
 

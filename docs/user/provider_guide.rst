@@ -31,8 +31,8 @@ API keys must not be configurable by the user and must remain linked to sublimin
 in the provider module.
 
 Per-user authentication is allowed and must be configured at instantiation as keyword arguments. Configuration
-will be done by the user through the `provider_configs` argument of the :func:`~subliminal.api.list_subtitles` and
-:func:`~subliminal.api.download_best_subtitles` functions. No network operation must be done during instantiation,
+will be done by the user through the `provider_configs` argument of the :func:`~subliminal.core.list_subtitles` and
+:func:`~subliminal.core.download_best_subtitles` functions. No network operation must be done during instantiation,
 only configuration. Any error in the configuration must raise a
 :class:`~subliminal.exceptions.ConfigurationError`.
 
@@ -85,12 +85,6 @@ Score computation
 -----------------
 To be able to compare subtitles coming from different providers between them, the
 :meth:`~subliminal.subtitle.Subtitle.get_matches` method must be implemented.
-If `guessit <http://guessit.readthedocs.org>`_ is used to extract data from the
-:class:`~subliminal.subtitle.Subtitle` subclass, you can use :func:`~subliminal.subtitle.guess_matches`
-as a helper to compute matches between the :class:`~subliminal.video.Video` and the :class:`~guessit.guess.Guess`.
-
-Refer to the `scores` attribute of  :class:`~subliminal.video.Episode` and :class:`~subliminal.video.Movie`
-for a list of possible matches.
 
 
 Unittesting

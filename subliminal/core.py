@@ -190,7 +190,7 @@ class ProviderPool(object):
         :param int min_score: minimum score for a subtitle to be downloaded.
         :param bool hearing_impaired: hearing impaired preference.
         :param bool only_one: download only one subtitle, not one per language.
-        :param function compute_score: function that takes `subtitle` and `video` as positional arguments,
+        :param compute_score: function that takes `subtitle` and `video` as positional arguments,
             `hearing_impaired` as keyword argument and returns the score.
         :return: downloaded subtitles.
         :rtype: list of :class:`~subliminal.subtitle.Subtitle`
@@ -385,7 +385,7 @@ def download_best_subtitles(videos, languages, min_score=0, hearing_impaired=Fal
     :param int min_score: minimum score for a subtitle to be downloaded.
     :param bool hearing_impaired: hearing impaired preference.
     :param bool only_one: download only one subtitle, not one per language.
-    :param function compute_score: function that takes `subtitle` and `video` as positional arguments,
+    :param compute_score: function that takes `subtitle` and `video` as positional arguments,
         `hearing_impaired` as keyword argument and returns the score.
     :param pool_class: class to use as provider pool.
     :type: :class:`ProviderPool`, :class:`AsyncProviderPool` or similar

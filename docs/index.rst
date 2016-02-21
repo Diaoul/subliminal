@@ -32,6 +32,7 @@ If you are looking for information on a specific function, class or method, this
     api/subtitle
     api/providers
     api/refiners
+    api/extensions
     api/cache
     api/score
     api/cli

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 This module provides the default implementation of the `compute_score` parameter in
-:meth:`~subliminal.api.ProviderPool.download_best_subtitles` and :func:`~subliminal.api.download_best_subtitles`.
+:meth:`~subliminal.core.ProviderPool.download_best_subtitles` and :func:`~subliminal.core.download_best_subtitles`.
 
 .. note::
 

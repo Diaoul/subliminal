@@ -46,7 +46,7 @@ class MutexLock(AbstractFileLock):
 
 
 class Config(object):
-    """A :class:`~configparser.SafeConfigParser` wrapper to store configuration.
+    """A :class:`~configparser.ConfigParser` wrapper to store configuration.
 
     Interaction with the configuration is done with the properties.
 

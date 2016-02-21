@@ -230,9 +230,32 @@ def get_series_episode(series_id, season, episode):
         return tvdb_client.get_episode(result['data'][0]['id'])
 
 
-def refine(video):
+def refine(video, **kwargs):
+    """Refine a video by searching `TheTVDB <http://thetvdb.com/>`_.
+
+    .. note::
+
+        This refiner only work for instances of :class:`~subliminal.video.Episode`.
+
+    Several attributes can be found:
+
+      * :attr:`~subliminal.video.Episode.series`
+      * :attr:`~subliminal.video.Episode.year`
+      * :attr:`~subliminal.video.Episode.series_imdb_id`
+      * :attr:`~subliminal.video.Episode.series_tvdb_id`
+      * :attr:`~subliminal.video.Episode.title`
+      * :attr:`~subliminal.video.Video.imdb_id`
+      * :attr:`~subliminal.video.Episode.tvdb_id`
+
+    :param video: the video to refine.
+
+    """
     # only deal with Episode videos
     if not isinstance(video, Episode):
+        return
+
+    # exit if the information is complete
+    if video.series_tvdb_id and video.tvdb_id:
         return
 
     # search the series

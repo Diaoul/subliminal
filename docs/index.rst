@@ -31,6 +31,7 @@ If you are looking for information on a specific function, class or method, this
     api/video
     api/subtitle
     api/providers
+    api/refiners
     api/cache
     api/score
     api/cli

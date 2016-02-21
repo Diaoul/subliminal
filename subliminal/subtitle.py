@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
+import codecs
 import logging
 import os
 
 import chardet
-from codecs import lookup
 import pysrt
 
 from .video import Episode, Movie, sanitize
@@ -40,15 +40,14 @@ class Subtitle(object):
         self.content = None
 
         #: Encoding to decode with when accessing :attr:`text`
+        self.encoding = None
+
+        # validate the encoding
         if encoding:
             try:
-                # set encoding to canonical codec name
-                self.encoding = lookup(encoding).name
+                self.encoding = codecs.lookup(encoding).name
             except (TypeError, LookupError):
-                logger.debug('Unsupported encoding "%s", setting to None', encoding)
-                self.encoding = None
-        else:
-            self.encoding = None
+                logger.debug('Unsupported encoding %s', encoding)
 
     @property
     def id(self):

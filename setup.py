@@ -74,6 +74,11 @@ setup(name='subliminal',
               'thesubdb = subliminal.providers.thesubdb:TheSubDBProvider',
               'tvsubtitles = subliminal.providers.tvsubtitles:TVsubtitlesProvider'
           ],
+          'subliminal.refiners': [
+              'metadata = subliminal.refiners.metadata:refine',
+              'tvdb = subliminal.refiners.tvdb:refine',
+              'omdb = subliminal.refiners.omdb:refine'
+          ],
           'babelfish.language_converters': [
               'addic7ed = subliminal.converters.addic7ed:Addic7edConverter',
               'thesubdb = subliminal.converters.thesubdb:TheSubDBConverter',

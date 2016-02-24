@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
+
 from babelfish import Language
 
 from subliminal.providers.addic7ed import Addic7edSubtitle
@@ -34,7 +35,7 @@ def test_get_score_cap(movies):
     video = movies['man_of_steel']
     subtitle = OpenSubtitlesSubtitle(Language('eng'), True, None, 1, 'hash', 'movie', '5b8f8f4e41ccb21e',
                                      'Man of Steel', 'man.of.steel.2013.720p.bluray.x264-felony.mkv', 2013, 770828,
-                                     None, None, 'utf-8')
+                                     None, None, '', 'utf-8')
     assert compute_score(subtitle, video) == movie_scores['hash']
 
 
@@ -42,7 +43,7 @@ def test_compute_score_episode_imdb_id(movies):
     video = movies['man_of_steel']
     subtitle = OpenSubtitlesSubtitle(Language('eng'), True, None, 1, 'hash', 'movie', None,
                                      'Man of Steel', 'man.of.steel.2013.720p.bluray.x264-felony.mkv', 2013, 770828,
-                                     None, None, 'utf-8')
+                                     None, None, '', 'utf-8')
     assert compute_score(subtitle, video) == sum(movie_scores.get(m, 0) for m in
                                                  ('imdb_id', 'title', 'year', 'release_group', 'format', 'resolution',
                                                   'video_codec'))
@@ -62,6 +63,6 @@ def test_compute_score_hash_hearing_impaired(movies):
     video = movies['man_of_steel']
     subtitle = OpenSubtitlesSubtitle(Language('eng'), True, None, 1, 'hash', 'movie', '5b8f8f4e41ccb21e',
                                      'Man of Steel', 'man.of.steel.2013.720p.bluray.x264-felony.mkv', 2013, 770828,
-                                     None, None, 'utf-8')
+                                     None, None, '', 'utf-8')
     assert compute_score(subtitle, video, hearing_impaired=True) == (movie_scores['hash'] +
                                                                      movie_scores['hearing_impaired'])

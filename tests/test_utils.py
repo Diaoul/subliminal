@@ -23,4 +23,4 @@ def test_hash_thesubdb_too_small(tmpdir):
 
 
 def test_sanitize():
-    assert sanitize('Marvel\'s Agents of S.H.I.E.L.D.') == 'marvels agents of shield'
+    assert sanitize('Marvel\'s Agents of S.H.I.E.L.D.') == 'marvels agents of s h i e l d'

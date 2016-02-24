@@ -82,10 +82,10 @@ def sanitize(string):
         return
 
     # replace some characters with one space
-    string = re.sub('[-:\(\)]', ' ', string)
+    string = re.sub('[-:\(\)\.]', ' ', string)
 
     # remove some characters
-    string = re.sub('[\'\.]', '', string)
+    string = re.sub('[\']', '', string)
 
     # replace multiple spaces with one
     string = re.sub('\s+', ' ', string)

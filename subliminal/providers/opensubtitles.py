@@ -184,8 +184,8 @@ class OpenSubtitlesProvider(Provider):
 
             subtitle = OpenSubtitlesSubtitle(language, hearing_impaired, page_link, subtitle_id, matched_by, movie_kind,
                                              hash, movie_name, movie_release_name, movie_year, movie_imdb_id,
-                                             series_season, series_episode, encoding)
-            logger.debug('Found subtitle %r', subtitle)
+                                             series_season, series_episode, filename, encoding)
+            logger.debug('Found subtitle %r by %s', subtitle, matched_by)
             subtitles.append(subtitle)
 
         return subtitles

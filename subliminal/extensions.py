@@ -15,6 +15,10 @@ class RegistrableExtensionManager(ExtensionManager):
     * Internal extensions
     * Registered extensions
 
+    :param str namespace: namespace argument for :class:~stevedore.extensions.ExtensionManager`.
+    :param list internal_extensions: internal extensions to use with entry point syntax.
+    :param \*\*kwargs: additional parameters for the :class:~stevedore.extensions.ExtensionManager` constructor.
+
     """
     def __init__(self, namespace, internal_extensions, **kwargs):
         #: Registered extensions with entry point syntax

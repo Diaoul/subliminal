@@ -97,4 +97,4 @@ def refine(video, embedded_subtitles=True, **kwargs):
         else:
             logger.debug('MKV has no subtitle track')
     else:
-        logger.debug('Unsupported video extension %s' % extension)
+        logger.debug('Unsupported video extension %s', extension)

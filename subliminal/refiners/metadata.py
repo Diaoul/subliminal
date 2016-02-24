@@ -27,7 +27,7 @@ def refine(video, embedded_subtitles=True, **kwargs):
         return
 
     # check extensions
-    extension = os.path.splitext(video.name)
+    extension = os.path.splitext(video.name)[1]
     if extension == '.mkv':
         with open(video.name, 'rb') as f:
             mkv = MKV(f)

@@ -140,7 +140,7 @@ We end up with the same subtitle but with one line of code. Neat.
 
 Save
 ^^^^
-We got ourselves a nice subtitle now we can save it on the file system using :func:`~subliminal.core.save_subtitles`:
+We got ourselves a nice subtitle, now we can save it on the file system using :func:`~subliminal.core.save_subtitles`:
 
     >>> save_subtitles(video, [best_subtitle])
     [<PodnapisiSubtitle 'ZtAW' [hu]>]

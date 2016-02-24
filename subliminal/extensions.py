@@ -26,8 +26,8 @@ class RegistrableExtensionManager(ExtensionManager):
         super(RegistrableExtensionManager, self).__init__(namespace)
 
     def _find_entry_points(self, namespace):
-        # default extensions
-        eps = super(RegistrableExtensionManager, self)._find_entry_points(namespace)
+        # copy of default extensions
+        eps = list(super(RegistrableExtensionManager, self)._find_entry_points(namespace))
 
         # internal extensions
         for iep in self.internal_extensions:

@@ -16,14 +16,14 @@ class RegistrableExtensionManager(ExtensionManager):
     * Registered extensions
 
     """
-    def __init__(self, namespace, internal_extensions):
+    def __init__(self, namespace, internal_extensions, **kwargs):
         #: Registered extensions with entry point syntax
         self.registered_extensions = []
 
         #: Internal extensions with entry point syntax
         self.internal_extensions = internal_extensions
 
-        super(RegistrableExtensionManager, self).__init__(namespace)
+        super(RegistrableExtensionManager, self).__init__(namespace, **kwargs)
 
     def _find_entry_points(self, namespace):
         # copy of default extensions

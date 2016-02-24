@@ -6,7 +6,8 @@ import requests
 
 from .. import __short_version__
 from ..cache import REFINER_EXPIRATION_TIME, region
-from ..video import Episode, Movie, sanitize
+from ..video import Episode, Movie
+from ..utils import sanitize
 
 logger = logging.getLogger(__name__)
 

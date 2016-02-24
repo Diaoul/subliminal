@@ -1,10 +1,7 @@
 Video
 =====
 .. automodule:: subliminal.video
-    :exclude-members: VIDEO_EXTENSIONS, SUBTITLE_EXTENSIONS
+    :exclude-members: VIDEO_EXTENSIONS
 
     .. autodata:: VIDEO_EXTENSIONS
-        :annotation:
-
-    .. autodata:: SUBTITLE_EXTENSIONS
         :annotation:

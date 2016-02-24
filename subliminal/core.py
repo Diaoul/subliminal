@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
+from datetime import datetime
 import io
 import itertools
 import logging
@@ -9,11 +10,14 @@ import os.path
 import socket
 
 from babelfish import Language
+from guessit import guessit
 import requests
 
-from .extensions import provider_manager
+from .extensions import provider_manager, refiner_manager
 from .score import compute_score as default_compute_score
-from .subtitle import get_subtitle_path
+from .subtitle import SUBTITLE_EXTENSIONS, get_subtitle_path
+from .utils import hash_napiprojekt, hash_opensubtitles, hash_thesubdb
+from .video import VIDEO_EXTENSIONS, Episode, Movie, Video
 
 logger = logging.getLogger(__name__)
 
@@ -309,6 +313,175 @@ def check_video(video, languages=None, age=None, undefined=False):
         return False
 
     return True
+
+
+def search_external_subtitles(path, directory=None):
+    """Search for external subtitles from a video `path` and their associated language.
+
+    Unless `directory` is provided, search will be made in the same directory as the video file.
+
+    :param str path: path to the video.
+    :param str directory: directory to search for subtitles.
+    :return: found subtitles with their languages.
+    :rtype: dict
+
+    """
+    # split path
+    dirpath, filename = os.path.split(path)
+    dirpath = dirpath or '.'
+    fileroot, fileext = os.path.splitext(filename)
+
+    # search for subtitles
+    subtitles = {}
+    for p in os.listdir(directory or dirpath):
+        # keep only valid subtitle filenames
+        if not p.startswith(fileroot) or not p.endswith(SUBTITLE_EXTENSIONS):
+            continue
+
+        # extract the potential language code
+        language_code = p[len(fileroot):-len(os.path.splitext(p)[1])].replace(fileext, '').replace('_', '-')[1:]
+
+        # default language is undefined
+        language = Language('und')
+
+        # attempt to parse the language code
+        if language_code:
+            try:
+                language = Language.fromietf(language_code)
+            except ValueError:
+                logger.error('Cannot parse language code %r', language_code)
+
+        subtitles[p] = language
+
+    logger.debug('Found subtitles %r', subtitles)
+
+    return subtitles
+
+
+def scan_video(path, subtitles=True, subtitles_dir=None, movie_refiners=('metadata', 'omdb'),
+               episode_refiners=('metadata', 'tvdb', 'omdb'), **kwargs):
+    """Scan a video and its subtitle languages from a video `path`.
+
+    Use the :mod:`~subliminal.refiners` to find additional information for the video.
+
+    :param str path: existing path to the video.
+    :param bool subtitles: scan for subtitles with the same name.
+    :param str subtitles_dir: directory to search for subtitles.
+    :param tuple movie_refiners: refiners to use for movies.
+    :param tuple episode_refiners: refiners to use for episodes.
+    :param \*\*kwargs: parameters for refiners.
+    :return: the scanned video.
+    :rtype: :class:`~subliminal.video.Video`
+
+    """
+    # check for non-existing path
+    if not os.path.exists(path):
+        raise ValueError('Path does not exist')
+
+    # check video extension
+    if not path.endswith(VIDEO_EXTENSIONS):
+        raise ValueError('%s is not a valid video extension' % os.path.splitext(path)[1])
+
+    dirpath, filename = os.path.split(path)
+    logger.info('Scanning video %r in %r', filename, dirpath)
+
+    # guess
+    video = Video.fromguess(path, guessit(path))
+
+    # refine
+    refiners = ()
+    if isinstance(video, Episode):
+        refiners = movie_refiners or ()
+    elif isinstance(video, Movie):
+        refiners = episode_refiners or ()
+    for refiner in refiners:
+        logger.info('Refining video with %s', refiner)
+        try:
+            refiner_manager[refiner].plugin(video, **kwargs)
+        except:
+            logger.exception('Failed to refine video')
+
+    # size and hashes
+    video.size = os.path.getsize(path)
+    if video.size > 10485760:
+        logger.debug('Size is %d', video.size)
+        video.hashes['opensubtitles'] = hash_opensubtitles(path)
+        video.hashes['thesubdb'] = hash_thesubdb(path)
+        video.hashes['napiprojekt'] = hash_napiprojekt(path)
+        logger.debug('Computed hashes %r', video.hashes)
+    else:
+        logger.warning('Size is lower than 10MB: hashes not computed')
+
+    # external subtitles
+    if subtitles:
+        video.subtitle_languages |= set(search_external_subtitles(path, directory=subtitles_dir).values())
+
+    return video
+
+
+def scan_videos(path, age=None, **kwargs):
+    """Scan `path` for videos and their subtitles.
+
+    :param str path: existing directory path to scan.
+    :param datetime.timedelta age: maximum age of the video.
+    :param \*\*kwargs: parameters for the :func:`scan_video` function.
+    :return: the scanned videos.
+    :rtype: list of :class:`~subliminal.video.Video`
+
+    """
+    # check for non-existing path
+    if not os.path.exists(path):
+        raise ValueError('Path does not exist')
+
+    # check for non-directory path
+    if not os.path.isdir(path):
+        raise ValueError('Path is not a directory')
+
+    # walk the path
+    videos = []
+    for dirpath, dirnames, filenames in os.walk(path):
+        logger.debug('Walking directory %s', dirpath)
+
+        # remove badly encoded and hidden dirnames
+        for dirname in list(dirnames):
+            if dirname.startswith('.'):
+                logger.debug('Skipping hidden dirname %r in %r', dirname, dirpath)
+                dirnames.remove(dirname)
+
+        # scan for videos
+        for filename in filenames:
+            # filter on videos
+            if not filename.endswith(VIDEO_EXTENSIONS):
+                continue
+
+            # skip hidden files
+            if filename.startswith('.'):
+                logger.debug('Skipping hidden filename %r in %r', filename, dirpath)
+                continue
+
+            # reconstruct the file path
+            filepath = os.path.join(dirpath, filename)
+
+            # skip links
+            if os.path.islink(filepath):
+                logger.debug('Skipping link %r in %r', filename, dirpath)
+                continue
+
+            # skip old files
+            if age and datetime.utcnow() - datetime.utcfromtimestamp(os.path.getmtime(filepath)) > age:
+                logger.debug('Skipping old file %r in %r', filename, dirpath)
+                continue
+
+            # scan video
+            try:
+                video = scan_video(filepath, **kwargs)
+            except ValueError:  # pragma: no cover
+                logger.exception('Error scanning video')
+                continue
+
+            videos.append(video)
+
+    return videos
 
 
 def list_subtitles(videos, languages, pool_class=ProviderPool, **kwargs):

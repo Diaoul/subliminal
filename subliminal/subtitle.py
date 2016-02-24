@@ -6,9 +6,13 @@ import os
 import chardet
 import pysrt
 
-from .video import Episode, Movie, sanitize
+from .video import Episode, Movie
+from .utils import sanitize
 
 logger = logging.getLogger(__name__)
+
+#: Subtitle extensions
+SUBTITLE_EXTENSIONS = ('.srt', '.sub', '.smi', '.txt', '.ssa', '.ass', '.mpl')
 
 
 class Subtitle(object):

@@ -14,7 +14,8 @@ from .. import __short_version__
 from ..cache import SHOW_EXPIRATION_TIME, region
 from ..exceptions import AuthenticationError, ConfigurationError, ProviderError
 from ..subtitle import Subtitle, fix_line_ending, guess_matches
-from ..video import Episode, Movie, sanitize
+from ..utils import sanitize
+from ..video import Episode, Movie
 
 logger = logging.getLogger(__name__)
 

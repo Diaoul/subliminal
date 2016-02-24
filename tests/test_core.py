@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-from datetime import timedelta
+from datetime import datetime, timedelta
 import io
 import os
-from pkg_resources import EntryPoint, iter_entry_points
 
 from babelfish import Language
 import pytest
@@ -12,14 +11,16 @@ except ImportError:
     from mock import Mock
 from vcr import VCR
 
-from subliminal.core import (AsyncProviderPool, ProviderPool, RegistrableExtensionManager, check_video,
-                             download_best_subtitles, download_subtitles, list_subtitles, provider_manager,
-                             save_subtitles)
+from subliminal.core import (AsyncProviderPool, ProviderPool, check_video, download_best_subtitles, download_subtitles,
+                             list_subtitles, save_subtitles, scan_video, scan_videos, search_external_subtitles)
+from subliminal.extensions import provider_manager
 from subliminal.providers.addic7ed import Addic7edSubtitle
 from subliminal.providers.thesubdb import TheSubDBSubtitle
 from subliminal.providers.tvsubtitles import TVsubtitlesSubtitle
 from subliminal.score import episode_scores
 from subliminal.subtitle import Subtitle
+from subliminal.utils import timestamp
+from subliminal.video import Movie
 
 
 vcr = VCR(path_transformer=lambda path: path + '.yaml',
@@ -35,48 +36,6 @@ def mock_providers(monkeypatch):
         monkeypatch.setattr(provider.plugin, 'list_subtitles', Mock(return_value=[provider.name]))
         monkeypatch.setattr(provider.plugin, 'download_subtitle', Mock())
         monkeypatch.setattr(provider.plugin, 'terminate', Mock())
-
-
-def test_registrable_extension_manager_internal_extension():
-    manager = RegistrableExtensionManager('subliminal.providers', [
-        'addic7ed = subliminal.providers.addic7ed:Addic7edProvider',
-        'opensubtitles = subliminal.providers.opensubtitles:OpenSubtitlesProvider',
-        'podnapisi = subliminal.providers.podnapisi:PodnapisiProvider',
-        'subscenter = subliminal.providers.subscenter:SubsCenterProvider',
-        'thesubdb = subliminal.providers.thesubdb:TheSubDBProvider',
-        'tvsubtitles = subliminal.providers.tvsubtitles:TVsubtitlesProvider'
-    ])
-    setup_names = {ep.name for ep in iter_entry_points(manager.namespace)}
-    internal_names = {EntryPoint.parse(iep).name for iep in manager.internal_extensions}
-    assert internal_names == setup_names
-
-
-def test_registrable_extension_manager_register():
-    manager = RegistrableExtensionManager('subliminal.providers', [
-        'addic7ed = subliminal.providers.addic7ed:Addic7edProvider',
-        'opensubtitles = subliminal.providers.opensubtitles:OpenSubtitlesProvider',
-        'podnapisi = subliminal.providers.podnapisi:PodnapisiProvider',
-        'subscenter = subliminal.providers.subscenter:SubsCenterProvider',
-        'thesubdb = subliminal.providers.thesubdb:TheSubDBProvider',
-        'tvsubtitles = subliminal.providers.tvsubtitles:TVsubtitlesProvider'
-    ])
-    manager.register('de7cidda = subliminal.providers.addic7ed:Addic7edProvider')
-    assert 'de7cidda' in manager.names()
-
-
-def test_registrable_extension_manager_unregister():
-    manager = RegistrableExtensionManager('subliminal.providers', [
-        'addic7ed = subliminal.providers.addic7ed:Addic7edProvider',
-        'opensubtitles = subliminal.providers.opensubtitles:OpenSubtitlesProvider',
-        'podnapisi = subliminal.providers.podnapisi:PodnapisiProvider',
-        'subscenter = subliminal.providers.subscenter:SubsCenterProvider',
-        'thesubdb = subliminal.providers.thesubdb:TheSubDBProvider',
-        'tvsubtitles = subliminal.providers.tvsubtitles:TVsubtitlesProvider'
-    ])
-    old_names = manager.names()
-    manager.register('de7cidda = subliminal.providers.addic7ed:Addic7edProvider')
-    manager.unregister('de7cidda = subliminal.providers.addic7ed:Addic7edProvider')
-    assert set(old_names) == set(manager.names())
 
 
 def test_provider_pool_get_keyerror():
@@ -154,6 +113,209 @@ def test_check_video_undefined(movies):
     video.subtitle_languages = {Language('und')}
     assert check_video(video, undefined=False)
     assert not check_video(video, undefined=True)
+
+
+def test_search_external_subtitles(episodes, tmpdir):
+    video_name = os.path.split(episodes['bbt_s07e05'].name)[1]
+    video_root = os.path.splitext(video_name)[0]
+    video_path = str(tmpdir.ensure(video_name))
+    expected_subtitles = {
+        video_name + '.srt': Language('und'),
+        video_root + '.srt': Language('und'),
+        video_root + '.en.srt': Language('eng'),
+        video_name + '.fra.srt': Language('fra'),
+        video_root + '.pt-BR.srt': Language('por', 'BR'),
+        video_name + '.sr_cyrl.sub': Language('srp', script='Cyrl'),
+        video_name + '.something.srt': Language('und')
+    }
+    tmpdir.ensure(os.path.split(episodes['got_s03e10'].name)[1] + '.srt')
+    for path in expected_subtitles:
+        tmpdir.ensure(path)
+    subtitles = search_external_subtitles(video_path)
+    assert subtitles == expected_subtitles
+
+
+def test_search_external_subtitles_no_directory(movies, tmpdir, monkeypatch):
+    video_name = os.path.split(movies['man_of_steel'].name)[1]
+    video_root = os.path.splitext(video_name)[0]
+    tmpdir.ensure(video_name)
+    monkeypatch.chdir(str(tmpdir))
+    expected_subtitles = {
+        video_name + '.srt': Language('und'),
+        video_root + '.en.srt': Language('eng')
+    }
+    for path in expected_subtitles:
+        tmpdir.ensure(path)
+    subtitles = search_external_subtitles(video_name)
+    assert subtitles == expected_subtitles
+
+
+def test_search_external_subtitles_in_directory(episodes, tmpdir):
+    video_name = episodes['marvels_agents_of_shield_s02e06'].name
+    video_root = os.path.splitext(video_name)[0]
+    tmpdir.ensure('tvshows', video_name)
+    subtitles_directory = str(tmpdir.ensure('subtitles', dir=True))
+    expected_subtitles = {
+        video_name + '.srt': Language('und'),
+        video_root + '.en.srt': Language('eng')
+    }
+    tmpdir.ensure('tvshows', video_name + '.fr.srt')
+    for path in expected_subtitles:
+        tmpdir.ensure('subtitles', path)
+    subtitles = search_external_subtitles(video_name, directory=subtitles_directory)
+    assert subtitles == expected_subtitles
+
+
+def test_scan_video_movie(movies, tmpdir, monkeypatch):
+    video = movies['man_of_steel']
+    monkeypatch.chdir(str(tmpdir))
+    tmpdir.ensure(video.name)
+    scanned_video = scan_video(video.name, episode_refiners=None, movie_refiners=None)
+    assert scanned_video.name == video.name
+    assert scanned_video.format == video.format
+    assert scanned_video.release_group == video.release_group
+    assert scanned_video.resolution == video.resolution
+    assert scanned_video.video_codec == video.video_codec
+    assert scanned_video.audio_codec is None
+    assert scanned_video.imdb_id is None
+    assert scanned_video.hashes == {}
+    assert scanned_video.size == 0
+    assert scanned_video.subtitle_languages == set()
+    assert scanned_video.title == video.title
+    assert scanned_video.year == video.year
+
+
+def test_scan_video_episode(episodes, tmpdir, monkeypatch):
+    video = episodes['bbt_s07e05']
+    monkeypatch.chdir(str(tmpdir))
+    tmpdir.ensure(video.name)
+    scanned_video = scan_video(video.name, episode_refiners=None, movie_refiners=None)
+    assert scanned_video.name, video.name
+    assert scanned_video.format == video.format
+    assert scanned_video.release_group == video.release_group
+    assert scanned_video.resolution == video.resolution
+    assert scanned_video.video_codec == video.video_codec
+    assert scanned_video.audio_codec is None
+    assert scanned_video.imdb_id is None
+    assert scanned_video.hashes == {}
+    assert scanned_video.size == 0
+    assert scanned_video.subtitle_languages == set()
+    assert scanned_video.series == video.series
+    assert scanned_video.season == video.season
+    assert scanned_video.episode == video.episode
+    assert scanned_video.title is None
+    assert scanned_video.year is None
+    assert scanned_video.tvdb_id is None
+
+
+def test_scan_video_metadata(mkv):
+    scanned_video = scan_video(mkv['test5'], episode_refiners=('metadata',), movie_refiners=('metadata',))
+    assert type(scanned_video) is Movie
+    assert scanned_video.name == mkv['test5']
+    assert scanned_video.format is None
+    assert scanned_video.release_group is None
+    assert scanned_video.resolution is None
+    assert scanned_video.video_codec == 'h264'
+    assert scanned_video.audio_codec == 'AAC'
+    assert scanned_video.imdb_id is None
+    assert scanned_video.hashes == {
+        'napiprojekt': 'de2e9caa58dd53a6ab9d241e6b252e35',
+        'opensubtitles': '49e2530ea3bd0d18',
+        'thesubdb': '64a8b87f12daa4f31895616e6c3fd39e'}
+    assert scanned_video.size == 31762747
+    assert scanned_video.subtitle_languages == {Language('spa'), Language('deu'), Language('jpn'), Language('und'),
+                                                Language('ita'), Language('fra'), Language('hun')}
+    assert scanned_video.title == 'test5'
+    assert scanned_video.year is None
+
+
+def test_scan_video_path_does_not_exist(movies):
+    with pytest.raises(ValueError) as excinfo:
+        scan_video(movies['man_of_steel'].name, episode_refiners=None, movie_refiners=None)
+    assert str(excinfo.value) == 'Path does not exist'
+
+
+def test_scan_video_invalid_extension(movies, tmpdir, monkeypatch):
+    monkeypatch.chdir(str(tmpdir))
+    movie_name = os.path.splitext(movies['man_of_steel'].name)[0] + '.mp3'
+    tmpdir.ensure(movie_name)
+    with pytest.raises(ValueError) as excinfo:
+        scan_video(movie_name, episode_refiners=None, movie_refiners=None)
+    assert str(excinfo.value) == '.mp3 is not a valid video extension'
+
+
+def test_scan_video_broken(mkv, tmpdir, monkeypatch):
+    broken_path = 'test1.mkv'
+    with io.open(mkv['test1'], 'rb') as original:
+        with tmpdir.join(broken_path).open('wb') as broken:
+            broken.write(original.read(512))
+    monkeypatch.chdir(str(tmpdir))
+    scanned_video = scan_video(broken_path, episode_refiners=None, movie_refiners=None)
+    assert type(scanned_video) is Movie
+    assert scanned_video.name == str(broken_path)
+    assert scanned_video.format is None
+    assert scanned_video.release_group is None
+    assert scanned_video.resolution is None
+    assert scanned_video.video_codec is None
+    assert scanned_video.audio_codec is None
+    assert scanned_video.imdb_id is None
+    assert scanned_video.hashes == {}
+    assert scanned_video.size == 512
+    assert scanned_video.subtitle_languages == set()
+    assert scanned_video.title == 'test1'
+    assert scanned_video.year is None
+
+
+def test_scan_videos_path_does_not_exist(movies):
+    with pytest.raises(ValueError) as excinfo:
+        scan_videos(movies['man_of_steel'].name)
+    assert str(excinfo.value) == 'Path does not exist'
+
+
+def test_scan_videos_path_is_not_a_directory(movies, tmpdir, monkeypatch):
+    monkeypatch.chdir(str(tmpdir))
+    tmpdir.ensure(movies['man_of_steel'].name)
+    with pytest.raises(ValueError) as excinfo:
+        scan_videos(movies['man_of_steel'].name, episode_refiners=None, movie_refiners=None)
+    assert str(excinfo.value) == 'Path is not a directory'
+
+
+def test_scan_videos(movies, tmpdir, monkeypatch):
+    man_of_steel = tmpdir.ensure('movies', movies['man_of_steel'].name)
+    tmpdir.ensure('movies', '.private', 'sextape.mkv')
+    tmpdir.ensure('movies', '.hidden_video.mkv')
+    tmpdir.ensure('movies', movies['enders_game'].name)
+    tmpdir.ensure('movies', os.path.splitext(movies['enders_game'].name)[0] + '.nfo')
+    tmpdir.ensure('movies', 'watched', dir=True)
+    tmpdir.join('movies', 'watched', os.path.split(movies['man_of_steel'].name)[1]).mksymlinkto(man_of_steel)
+
+    mock_scan_video = Mock()
+    monkeypatch.setattr('subliminal.core.scan_video', mock_scan_video)
+    monkeypatch.chdir(str(tmpdir))
+    videos = scan_videos('movies', episode_refiners=None, movie_refiners=None)
+
+    kwargs = dict(episode_refiners=None, movie_refiners=None)
+    calls = [((os.path.join('movies', movies['man_of_steel'].name),), kwargs),
+             ((os.path.join('movies', movies['enders_game'].name),), kwargs)]
+    assert len(videos) == len(calls)
+    assert mock_scan_video.call_count == len(calls)
+    mock_scan_video.assert_has_calls(calls, any_order=True)
+
+
+def test_scan_videos_age(movies, tmpdir, monkeypatch):
+    tmpdir.ensure('movies', movies['man_of_steel'].name)
+    tmpdir.ensure('movies', movies['enders_game'].name).setmtime(timestamp(datetime.utcnow() - timedelta(days=10)))
+
+    mock_scan_video = Mock()
+    monkeypatch.setattr('subliminal.core.scan_video', mock_scan_video)
+    monkeypatch.chdir(str(tmpdir))
+    videos = scan_videos('movies', age=timedelta(days=7), episode_refiners=None, movie_refiners=None)
+
+    kwargs = dict(episode_refiners=None, movie_refiners=None)
+    calls = [((os.path.join('movies', movies['man_of_steel'].name),), kwargs)]
+    assert len(videos) == len(calls)
+    assert mock_scan_video.call_count == len(calls)
+    mock_scan_video.assert_has_calls(calls, any_order=True)
 
 
 def test_list_subtitles_movie(movies, mock_providers):

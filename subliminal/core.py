@@ -220,7 +220,6 @@ class ProviderPool(object):
                 continue
 
             # download
-            logger.info('Downloading subtitle %r with score %d', subtitle, score)
             if self.download_subtitle(subtitle):
                 downloaded_subtitles.append(subtitle)
 

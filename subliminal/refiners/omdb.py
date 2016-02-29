@@ -110,6 +110,7 @@ def refine(video, **kwargs):
     if isinstance(video, Episode):
         # exit if the information is complete
         if video.series_imdb_id:
+            logger.debug('No need to search')
             return
 
         # search the series

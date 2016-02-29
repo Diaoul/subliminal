@@ -252,10 +252,12 @@ def refine(video, **kwargs):
     """
     # only deal with Episode videos
     if not isinstance(video, Episode):
+        logger.error('Cannot refine episodes')
         return
 
     # exit if the information is complete
     if video.series_tvdb_id and video.tvdb_id:
+        logger.debug('No need to search')
         return
 
     # search the series

@@ -211,8 +211,8 @@ def test_get_show_ids_country():
 def test_get_show_ids_quote():
     with Addic7edProvider() as provider:
         show_ids = provider._get_show_ids()
-    assert 'marvels agents of shield' in show_ids
-    assert show_ids['marvels agents of shield'] == 4010
+    assert 'marvels agents of s h i e l d' in show_ids
+    assert show_ids['marvels agents of s h i e l d'] == 4010
 
 
 @pytest.mark.integration

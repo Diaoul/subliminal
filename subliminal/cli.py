@@ -19,7 +19,7 @@ from dogpile.core import ReadWriteMutex
 from six.moves import configparser
 
 from subliminal import (AsyncProviderPool, Episode, Movie, Video, __version__, check_video, compute_score, get_scores,
-                        provider_manager, region, save_subtitles, scan_video, scan_videos)
+                        provider_manager, refine, region, save_subtitles, scan_video, scan_videos)
 
 logger = logging.getLogger(__name__)
 
@@ -303,6 +303,7 @@ def download(obj, provider, language, age, directory, encoding, single, force, h
                     logger.exception('Unexpected error while collecting non-existing path %s', p)
                     errored_paths.append(p)
                     continue
+                refine(video, embedded_subtitles=not force)
                 videos.append(video)
                 continue
 
@@ -317,6 +318,7 @@ def download(obj, provider, language, age, directory, encoding, single, force, h
                     continue
                 for video in scanned_videos:
                     if check_video(video, languages=language, age=age, undefined=single):
+                        refine(video, embedded_subtitles=not force)
                         videos.append(video)
                     else:
                         ignored_videos.append(video)
@@ -324,12 +326,13 @@ def download(obj, provider, language, age, directory, encoding, single, force, h
 
             # other inputs
             try:
-                video = scan_video(p, subtitles=not force, embedded_subtitles=not force, subtitles_dir=directory)
+                video = scan_video(p, subtitles=not force, subtitles_dir=directory)
             except:
                 logger.exception('Unexpected error while collecting path %s', p)
                 errored_paths.append(p)
                 continue
             if check_video(video, languages=language, age=age, undefined=single):
+                refine(video, embedded_subtitles=not force)
                 videos.append(video)
             else:
                 ignored_videos.append(video)

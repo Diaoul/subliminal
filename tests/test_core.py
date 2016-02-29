@@ -12,7 +12,7 @@ except ImportError:
 from vcr import VCR
 
 from subliminal.core import (AsyncProviderPool, ProviderPool, check_video, download_best_subtitles, download_subtitles,
-                             list_subtitles, save_subtitles, scan_video, scan_videos, search_external_subtitles)
+                             list_subtitles, refine, save_subtitles, scan_video, scan_videos, search_external_subtitles)
 from subliminal.extensions import provider_manager
 from subliminal.providers.addic7ed import Addic7edSubtitle
 from subliminal.providers.thesubdb import TheSubDBSubtitle
@@ -170,7 +170,7 @@ def test_scan_video_movie(movies, tmpdir, monkeypatch):
     video = movies['man_of_steel']
     monkeypatch.chdir(str(tmpdir))
     tmpdir.ensure(video.name)
-    scanned_video = scan_video(video.name, episode_refiners=None, movie_refiners=None)
+    scanned_video = scan_video(video.name)
     assert scanned_video.name == video.name
     assert scanned_video.format == video.format
     assert scanned_video.release_group == video.release_group
@@ -189,7 +189,7 @@ def test_scan_video_episode(episodes, tmpdir, monkeypatch):
     video = episodes['bbt_s07e05']
     monkeypatch.chdir(str(tmpdir))
     tmpdir.ensure(video.name)
-    scanned_video = scan_video(video.name, episode_refiners=None, movie_refiners=None)
+    scanned_video = scan_video(video.name)
     assert scanned_video.name, video.name
     assert scanned_video.format == video.format
     assert scanned_video.release_group == video.release_group
@@ -208,8 +208,9 @@ def test_scan_video_episode(episodes, tmpdir, monkeypatch):
     assert scanned_video.tvdb_id is None
 
 
-def test_scan_video_metadata(mkv):
-    scanned_video = scan_video(mkv['test5'], episode_refiners=('metadata',), movie_refiners=('metadata',))
+def test_refine_video_metadata(mkv):
+    scanned_video = scan_video(mkv['test5'])
+    refine(scanned_video, episode_refiners=('metadata',), movie_refiners=('metadata',))
     assert type(scanned_video) is Movie
     assert scanned_video.name == mkv['test5']
     assert scanned_video.format is None
@@ -231,7 +232,7 @@ def test_scan_video_metadata(mkv):
 
 def test_scan_video_path_does_not_exist(movies):
     with pytest.raises(ValueError) as excinfo:
-        scan_video(movies['man_of_steel'].name, episode_refiners=None, movie_refiners=None)
+        scan_video(movies['man_of_steel'].name)
     assert str(excinfo.value) == 'Path does not exist'
 
 
@@ -240,7 +241,7 @@ def test_scan_video_invalid_extension(movies, tmpdir, monkeypatch):
     movie_name = os.path.splitext(movies['man_of_steel'].name)[0] + '.mp3'
     tmpdir.ensure(movie_name)
     with pytest.raises(ValueError) as excinfo:
-        scan_video(movie_name, episode_refiners=None, movie_refiners=None)
+        scan_video(movie_name)
     assert str(excinfo.value) == '.mp3 is not a valid video extension'
 
 
@@ -250,7 +251,7 @@ def test_scan_video_broken(mkv, tmpdir, monkeypatch):
         with tmpdir.join(broken_path).open('wb') as broken:
             broken.write(original.read(512))
     monkeypatch.chdir(str(tmpdir))
-    scanned_video = scan_video(broken_path, episode_refiners=None, movie_refiners=None)
+    scanned_video = scan_video(broken_path)
     assert type(scanned_video) is Movie
     assert scanned_video.name == str(broken_path)
     assert scanned_video.format is None

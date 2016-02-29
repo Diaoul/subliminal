@@ -358,18 +358,14 @@ def search_external_subtitles(path, directory=None):
     return subtitles
 
 
-def scan_video(path, subtitles=True, subtitles_dir=None, movie_refiners=('metadata', 'omdb'),
-               episode_refiners=('metadata', 'tvdb', 'omdb'), **kwargs):
+def scan_video(path, subtitles=True, subtitles_dir=None):
     """Scan a video and its subtitle languages from a video `path`.
 
-    Use the :mod:`~subliminal.refiners` to find additional information for the video.
+    See :func:`refine` to find additional information for the video.
 
     :param str path: existing path to the video.
     :param bool subtitles: scan for subtitles with the same name.
     :param str subtitles_dir: directory to search for subtitles.
-    :param tuple movie_refiners: refiners to use for movies.
-    :param tuple episode_refiners: refiners to use for episodes.
-    :param \*\*kwargs: parameters for refiners.
     :return: the scanned video.
     :rtype: :class:`~subliminal.video.Video`
 
@@ -387,19 +383,6 @@ def scan_video(path, subtitles=True, subtitles_dir=None, movie_refiners=('metada
 
     # guess
     video = Video.fromguess(path, guessit(path))
-
-    # refine
-    refiners = ()
-    if isinstance(video, Episode):
-        refiners = movie_refiners or ()
-    elif isinstance(video, Movie):
-        refiners = episode_refiners or ()
-    for refiner in refiners:
-        logger.info('Refining video with %s', refiner)
-        try:
-            refiner_manager[refiner].plugin(video, **kwargs)
-        except:
-            logger.exception('Failed to refine video')
 
     # size and hashes
     video.size = os.path.getsize(path)
@@ -482,6 +465,33 @@ def scan_videos(path, age=None, **kwargs):
             videos.append(video)
 
     return videos
+
+
+def refine(video, episode_refiners=('metadata', 'tvdb', 'omdb'), movie_refiners=('metadata', 'omdb'), **kwargs):
+    """Refine a video using :mod:`refiners`.
+
+    .. note::
+
+        Exceptions raised in refiners are silently passed and logged.
+
+    :param video: the video to refine.
+    :type video: :class:`~subliminal.video.Video`
+    :param tuple episode_refiners: refiners to use for episodes.
+    :param tuple movie_refiners: refiners to use for movies.
+    :param \*\*kwargs: parameters for refiners.
+
+    """
+    refiners = ()
+    if isinstance(video, Episode):
+        refiners = episode_refiners or ()
+    elif isinstance(video, Movie):
+        refiners = movie_refiners or ()
+    for refiner in refiners:
+        logger.info('Refining video with %s', refiner)
+        try:
+            refiner_manager[refiner].plugin(video, **kwargs)
+        except:
+            logger.exception('Failed to refine video')
 
 
 def list_subtitles(videos, languages, pool_class=ProviderPool, **kwargs):

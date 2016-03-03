@@ -44,7 +44,7 @@ def episodes():
                     'The Big Bang Theory', 7, 5, title='The Workplace Proximity', year=2007, tvdb_id=4668379,
                     series_tvdb_id=80379, series_imdb_id='tt0898266', format='HDTV', release_group='DIMENSION',
                     resolution='720p', video_codec='h264', audio_codec='AC3', imdb_id='tt3229392', size=501910737,
-                    hashes={'napiprojekt': '6303e7ee6a835e9fcede9fb2fb00cb36',
+                    hashes={'napiprojekt': '6303e7ee6a835e9fcede9fb2fb00cb36', 'itasa': '6303e7ee6a835e9fcede9fb2fb00cb36',
                             'opensubtitles': '6878b3ef7c1bd19e', 'thesubdb': '9dbbfb7ba81c9a6237237dae8589fccc'}),
             'got_s03e10':
             Episode(os.path.join('Game of Thrones', 'Season 03',
@@ -52,7 +52,7 @@ def episodes():
                     'Game of Thrones', 3, 10, title='Mhysa', tvdb_id=4517466, series_tvdb_id=121361,
                     series_imdb_id='tt0944947', format='WEB-DL', release_group='NTb', resolution='720p',
                     video_codec='h264', audio_codec='AC3', imdb_id='tt2178796', size=2142810931,
-                    hashes={'napiprojekt': '6303e7ee6a835e9fcede9fb2fb00cb36',
+                    hashes={'napiprojekt': '6303e7ee6a835e9fcede9fb2fb00cb36', 'itasa': '6303e7ee6a835e9fcede9fb2fb00cb36',
                             'opensubtitles': 'b850baa096976c22', 'thesubdb': 'b1f899c77f4c960b84b8dbf840d4e42d'}),
             'dallas_s01e03':
             Episode('Dallas.S01E03.mkv', 'Dallas', 1, 3),

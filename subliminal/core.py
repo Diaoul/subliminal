@@ -17,7 +17,7 @@ import requests
 from .extensions import provider_manager, refiner_manager
 from .score import compute_score as default_compute_score
 from .subtitle import SUBTITLE_EXTENSIONS, get_subtitle_path
-from .utils import hash_napiprojekt, hash_opensubtitles, hash_thesubdb
+from .utils import hash_itasa, hash_napiprojekt, hash_opensubtitles, hash_thesubdb
 from .video import VIDEO_EXTENSIONS, Episode, Movie, Video
 
 #: Supported archive extensions
@@ -383,6 +383,7 @@ def scan_video(path):
     video.size = os.path.getsize(path)
     if video.size > 10485760:
         logger.debug('Size is %d', video.size)
+        video.hashes['itasa'] = hash_itasa(path)
         video.hashes['opensubtitles'] = hash_opensubtitles(path)
         video.hashes['thesubdb'] = hash_thesubdb(path)
         video.hashes['napiprojekt'] = hash_napiprojekt(path)

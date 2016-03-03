@@ -1,0 +1,98 @@
+interactions:
+- request:
+    body: null
+    headers:
+      User-Agent: [Subliminal/1.1]
+    method: GET
+    uri: https://api.italiansubs.net/api/rest/shows/search?q=Dallas&apikey=d86ad6ec041b334fac1e512174ee04d5
+  response:
+    body: {string: !!python/unicode '<?xml version="1.0" encoding="utf-8"?>
+
+        <root><data><shows><show><id>3420</id><name>Dallas</name></show></shows><page>1</page><pages>1</pages><count>1</count><next/></data><status>success</status></root>
+
+        '}
+    headers:
+      alternate-protocol: ['443:npn-spdy/3.1']
+      cache-control: ['no-store, no-cache, must-revalidate, post-check=0, pre-check=0']
+      connection: [keep-alive]
+      content-type: [text/xml;charset=utf-8]
+      date: ['Sun, 06 Mar 2016 19:56:01 GMT']
+      expires: ['Thu, 19 Nov 1981 08:52:00 GMT']
+      pragma: [no-cache]
+      server: [nginx/1.8.0]
+      set-cookie: [PHPSESSID=202eb0fce11f08c3583b21bdb2fd8ace; path=/]
+      x-powered-by: [PHP/5.6.16]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      User-Agent: [Subliminal/1.1]
+    method: GET
+    uri: https://api.italiansubs.net/api/rest/shows/search?q=Dallas&apikey=d86ad6ec041b334fac1e512174ee04d5
+  response:
+    body: {string: !!python/unicode '<?xml version="1.0" encoding="utf-8"?>
+
+        <root><data><shows><show><id>3420</id><name>Dallas</name></show></shows><page>1</page><pages>1</pages><count>1</count><next/></data><status>success</status></root>
+
+        '}
+    headers:
+      alternate-protocol: ['443:npn-spdy/3.1']
+      cache-control: ['no-store, no-cache, must-revalidate, post-check=0, pre-check=0']
+      connection: [keep-alive]
+      content-type: [text/xml;charset=utf-8]
+      date: ['Mon, 07 Mar 2016 08:31:18 GMT']
+      expires: ['Thu, 19 Nov 1981 08:52:00 GMT']
+      pragma: [no-cache]
+      server: [nginx/1.8.0]
+      set-cookie: [PHPSESSID=b3dc11fe7dd5aab04c9bdc1d53ff506c; path=/]
+      x-powered-by: [PHP/5.6.16]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      User-Agent: [Subliminal/1.1]
+    method: GET
+    uri: https://api.italiansubs.net/api/rest/shows/search?q=Dallas&apikey=d86ad6ec041b334fac1e512174ee04d5
+  response:
+    body: {string: !!python/unicode '<?xml version="1.0" encoding="utf-8"?>
+
+        <root><data><shows><show><id>3420</id><name>Dallas</name></show></shows><page>1</page><pages>1</pages><count>1</count><next/></data><status>success</status></root>
+
+        '}
+    headers:
+      alternate-protocol: ['443:npn-spdy/3.1']
+      cache-control: ['no-store, no-cache, must-revalidate, post-check=0, pre-check=0']
+      connection: [keep-alive]
+      content-type: [text/xml;charset=utf-8]
+      date: ['Mon, 07 Mar 2016 08:32:02 GMT']
+      expires: ['Thu, 19 Nov 1981 08:52:00 GMT']
+      pragma: [no-cache]
+      server: [nginx/1.8.0]
+      set-cookie: [PHPSESSID=1bd014774e0f6c57ddb5776253d96a13; path=/]
+      x-powered-by: [PHP/5.6.16]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      User-Agent: [Subliminal/1.1]
+    method: GET
+    uri: https://api.italiansubs.net/api/rest/shows/search?q=Dallas&apikey=d86ad6ec041b334fac1e512174ee04d5
+  response:
+    body: {string: !!python/unicode '<?xml version="1.0" encoding="utf-8"?>
+
+        <root><data><shows><show><id>3420</id><name>Dallas</name></show></shows><page>1</page><pages>1</pages><count>1</count><next/></data><status>success</status></root>
+
+        '}
+    headers:
+      alternate-protocol: ['443:npn-spdy/3.1']
+      cache-control: ['no-store, no-cache, must-revalidate, post-check=0, pre-check=0']
+      connection: [keep-alive]
+      content-type: [text/xml;charset=utf-8]
+      date: ['Mon, 07 Mar 2016 08:33:14 GMT']
+      expires: ['Thu, 19 Nov 1981 08:52:00 GMT']
+      pragma: [no-cache]
+      server: [nginx/1.8.0]
+      set-cookie: [PHPSESSID=1235fc5fcac86c1e7cc7ebe777df4d9c; path=/]
+      x-powered-by: [PHP/5.6.16]
+    status: {code: 200, message: OK}
+version: 1

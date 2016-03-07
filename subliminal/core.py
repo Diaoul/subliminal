@@ -371,7 +371,7 @@ def scan_video(path):
 
     # check video extension
     if not path.endswith(VIDEO_EXTENSIONS):
-        raise ValueError('%s is not a valid video extension' % os.path.splitext(path)[1])
+        raise ValueError('%r is not a valid video extension' % os.path.splitext(path)[1])
 
     dirpath, filename = os.path.split(path)
     logger.info('Scanning video %r in %r', filename, dirpath)
@@ -463,7 +463,7 @@ def scan_videos(path, age=None, archives=True, **kwargs):
     # walk the path
     videos = []
     for dirpath, dirnames, filenames in os.walk(path):
-        logger.debug('Walking directory %s', dirpath)
+        logger.debug('Walking directory %r', dirpath)
 
         # remove badly encoded and hidden dirnames
         for dirname in list(dirnames):

@@ -11,6 +11,7 @@ import socket
 
 from babelfish import Language
 from guessit import guessit
+from rarfile import NotRarFile, RarFile
 import requests
 
 from .extensions import provider_manager, refiner_manager
@@ -18,6 +19,9 @@ from .score import compute_score as default_compute_score
 from .subtitle import SUBTITLE_EXTENSIONS, get_subtitle_path
 from .utils import hash_napiprojekt, hash_opensubtitles, hash_thesubdb
 from .video import VIDEO_EXTENSIONS, Episode, Movie, Video
+
+#: Supported archive extensions
+ARCHIVE_EXTENSIONS = ('.rar',)
 
 logger = logging.getLogger(__name__)
 
@@ -357,14 +361,10 @@ def search_external_subtitles(path, directory=None):
     return subtitles
 
 
-def scan_video(path, subtitles=True, subtitles_dir=None):
-    """Scan a video and its subtitle languages from a video `path`.
-
-    See :func:`refine` to find additional information for the video.
+def scan_video(path):
+    """Scan a video from a `path`.
 
     :param str path: existing path to the video.
-    :param bool subtitles: scan for subtitles with the same name.
-    :param str subtitles_dir: directory to search for subtitles.
     :return: the scanned video.
     :rtype: :class:`~subliminal.video.Video`
 
@@ -394,19 +394,64 @@ def scan_video(path, subtitles=True, subtitles_dir=None):
     else:
         logger.warning('Size is lower than 10MB: hashes not computed')
 
-    # external subtitles
-    if subtitles:
-        video.subtitle_languages |= set(search_external_subtitles(path, directory=subtitles_dir).values())
+    return video
+
+
+def scan_archive(path):
+    """Scan an archive from a `path`.
+
+    :param str path: existing path to the archive.
+    :return: the scanned video.
+    :rtype: :class:`~subliminal.video.Video`
+
+    """
+    # check for non-existing path
+    if not os.path.exists(path):
+        raise ValueError('Path does not exist')
+
+    # check video extension
+    if not path.endswith(ARCHIVE_EXTENSIONS):
+        raise ValueError('%r is not a valid archive extension' % os.path.splitext(path)[1])
+
+    dirpath, filename = os.path.split(path)
+    logger.info('Scanning archive %r in %r', filename, dirpath)
+
+    # rar extension
+    if filename.endswith('.rar'):
+        rar = RarFile(path)
+
+        # filter on video extensions
+        rar_filenames = [f for f in rar.namelist() if f.endswith(VIDEO_EXTENSIONS)]
+
+        # no video found
+        if not rar_filenames:
+            raise ValueError('No video in archive')
+
+        # more than one video found
+        if len(rar_filenames) > 1:
+            raise ValueError('More than one video in archive')
+
+        # guess
+        rar_filename = rar_filenames[0]
+        rar_filepath = os.path.join(dirpath, rar_filename)
+        video = Video.fromguess(rar_filepath, guessit(rar_filepath))
+
+        # size
+        video.size = rar.getinfo(rar_filename).file_size
+    else:
+        raise ValueError('Unsupported extension %r' % os.path.splitext(path)[1])
 
     return video
 
 
-def scan_videos(path, age=None, **kwargs):
+def scan_videos(path, age=None, archives=True, **kwargs):
     """Scan `path` for videos and their subtitles.
 
+    See :func:`refine` to find additional information for the video.
+
     :param str path: existing directory path to scan.
-    :param datetime.timedelta age: maximum age of the video.
-    :param \*\*kwargs: parameters for the :func:`scan_video` function.
+    :param datetime.timedelta age: maximum age of the video or archive.
+    :param bool archives: scan videos in archives.
     :return: the scanned videos.
     :rtype: list of :class:`~subliminal.video.Video`
 
@@ -432,8 +477,8 @@ def scan_videos(path, age=None, **kwargs):
 
         # scan for videos
         for filename in filenames:
-            # filter on videos
-            if not filename.endswith(VIDEO_EXTENSIONS):
+            # filter on videos and archives
+            if not (filename.endswith(VIDEO_EXTENSIONS) or archives and filename.endswith(ARCHIVE_EXTENSIONS)):
                 continue
 
             # skip hidden files
@@ -454,12 +499,21 @@ def scan_videos(path, age=None, **kwargs):
                 logger.debug('Skipping old file %r in %r', filename, dirpath)
                 continue
 
-            # scan video
-            try:
-                video = scan_video(filepath, **kwargs)
-            except ValueError:  # pragma: no cover
-                logger.exception('Error scanning video')
-                continue
+            # scan
+            if filename.endswith(VIDEO_EXTENSIONS):  # video
+                try:
+                    video = scan_video(filepath)
+                except ValueError:  # pragma: no cover
+                    logger.exception('Error scanning video')
+                    continue
+            elif archives and filename.endswith(ARCHIVE_EXTENSIONS):  # archive
+                try:
+                    video = scan_archive(filepath)
+                except (NotRarFile, ValueError):  # pragma: no cover
+                    logger.exception('Error scanning archive')
+                    continue
+            else:  # pragma: no cover
+                raise ValueError('Unsupported file %r' % filename)
 
             videos.append(video)
 
@@ -467,7 +521,7 @@ def scan_videos(path, age=None, **kwargs):
 
 
 def refine(video, episode_refiners=('metadata', 'tvdb', 'omdb'), movie_refiners=('metadata', 'omdb'), **kwargs):
-    """Refine a video using :mod:`refiners`.
+    """Refine a video using :ref:`refiners`.
 
     .. note::
 

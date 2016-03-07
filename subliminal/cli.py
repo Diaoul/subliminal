@@ -20,6 +20,7 @@ from six.moves import configparser
 
 from subliminal import (AsyncProviderPool, Episode, Movie, Video, __version__, check_video, compute_score, get_scores,
                         provider_manager, refine, region, save_subtitles, scan_video, scan_videos)
+from subliminal.core import ARCHIVE_EXTENSIONS, search_external_subtitles
 
 logger = logging.getLogger(__name__)
 
@@ -271,11 +272,13 @@ def cache(ctx, clear_subliminal):
 @click.option('-m', '--min-score', type=click.IntRange(0, 100), default=0, help='Minimum score for a subtitle '
               'to be downloaded (0 to 100).')
 @click.option('-w', '--max-workers', type=click.IntRange(1, 50), default=None, help='Maximum number of threads to use.')
+@click.option('-z/-Z', '--archives/--no-archives', default=True, show_default=True, help='Scan archives for videos '
+              '(supported extensions: %s).' % ', '.join(ARCHIVE_EXTENSIONS))
 @click.option('-v', '--verbose', count=True, help='Increase verbosity.')
 @click.argument('path', type=click.Path(), required=True, nargs=-1)
 @click.pass_obj
-def download(obj, provider, language, age, directory, encoding, single, force, hearing_impaired, min_score, max_workers,
-             verbose, path):
+def download(obj, provider, language, age, directory, encoding, single, force, hearing_impaired,
+             min_score, max_workers, archives, verbose, path):
     """Download best subtitles.
 
     PATH can be an directory containing videos, a video file path or a video file name. It can be used multiple times.
@@ -303,6 +306,8 @@ def download(obj, provider, language, age, directory, encoding, single, force, h
                     logger.exception('Unexpected error while collecting non-existing path %s', p)
                     errored_paths.append(p)
                     continue
+                if not force:
+                    video.subtitle_languages |= set(search_external_subtitles(video.name, directory=directory).values())
                 refine(video, embedded_subtitles=not force)
                 videos.append(video)
                 continue
@@ -310,14 +315,17 @@ def download(obj, provider, language, age, directory, encoding, single, force, h
             # directories
             if os.path.isdir(p):
                 try:
-                    scanned_videos = scan_videos(p, subtitles=not force, embedded_subtitles=not force,
-                                                 subtitles_dir=directory, age=age)
+                    scanned_videos = scan_videos(p, age=age, archives=archives, subtitles=not force,
+                                                 subtitles_dir=directory)
                 except:
                     logger.exception('Unexpected error while collecting directory path %s', p)
                     errored_paths.append(p)
                     continue
                 for video in scanned_videos:
                     if check_video(video, languages=language, age=age, undefined=single):
+                        if not force:
+                            video.subtitle_languages |= set(search_external_subtitles(video.name,
+                                                                                      directory=directory).values())
                         refine(video, embedded_subtitles=not force)
                         videos.append(video)
                     else:
@@ -326,12 +334,14 @@ def download(obj, provider, language, age, directory, encoding, single, force, h
 
             # other inputs
             try:
-                video = scan_video(p, subtitles=not force, subtitles_dir=directory)
+                video = scan_video(p)
             except:
                 logger.exception('Unexpected error while collecting path %s', p)
                 errored_paths.append(p)
                 continue
             if check_video(video, languages=language, age=age, undefined=single):
+                if not force:
+                    video.subtitle_languages |= set(search_external_subtitles(video.name, directory=directory).values())
                 refine(video, embedded_subtitles=not force)
                 videos.append(video)
             else:

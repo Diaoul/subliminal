@@ -30,7 +30,10 @@ def movies():
                           'opensubtitles': '5b8f8f4e41ccb21e', 'thesubdb': 'ad32876133355929d814457537e12dc2'}),
             'enders_game':
             Movie('enders.game.2013.720p.bluray.x264-sparks.mkv', 'Ender\'s Game',
-                  format='BluRay', release_group='sparks', resolution='720p', video_codec='h264', year=2013)}
+                  format='BluRay', release_group='sparks', resolution='720p', video_codec='h264', year=2013),
+            'interstellar':
+            Movie('Interstellar.2014.2014.1080p.BluRay.x264.YIFY.rar', 'Interstellar',
+                  format='BluRay', release_group='YIFY', resolution='1080p', video_codec='h264', year=2014)}
 
 
 @pytest.fixture

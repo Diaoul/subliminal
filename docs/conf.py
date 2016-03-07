@@ -309,7 +309,8 @@ intersphinx_mapping = {
     'dogpilecache': ('http://dogpilecache.readthedocs.org/en/latest', None),
     'dogpilecore': ('http://dogpilecore.readthedocs.org/en/latest', None),
     'stevedore': ('http://docs.openstack.org/developer/stevedore', None),
-    'click': ('http://click.pocoo.org/4', None)
+    'click': ('http://click.pocoo.org/4', None),
+    'rarfile': ('http://rarfile.readthedocs.org/en/latest/', None)
 }
 
 

@@ -12,7 +12,8 @@ except ImportError:
 from vcr import VCR
 
 from subliminal.core import (AsyncProviderPool, ProviderPool, check_video, download_best_subtitles, download_subtitles,
-                             list_subtitles, refine, save_subtitles, scan_video, scan_videos, search_external_subtitles)
+                             list_subtitles, refine, save_subtitles, scan_archive, scan_video, scan_videos,
+                             search_external_subtitles)
 from subliminal.extensions import provider_manager
 from subliminal.providers.addic7ed import Addic7edSubtitle
 from subliminal.providers.thesubdb import TheSubDBSubtitle
@@ -129,6 +130,26 @@ def test_search_external_subtitles(episodes, tmpdir):
         video_name + '.something.srt': Language('und')
     }
     tmpdir.ensure(os.path.split(episodes['got_s03e10'].name)[1] + '.srt')
+    for path in expected_subtitles:
+        tmpdir.ensure(path)
+    subtitles = search_external_subtitles(video_path)
+    assert subtitles == expected_subtitles
+
+
+def test_search_external_subtitles_archive(movies, tmpdir):
+    video_name = os.path.split(movies['interstellar'].name)[1]
+    video_root = os.path.splitext(video_name)[0]
+    video_path = str(tmpdir.ensure(video_name))
+    expected_subtitles = {
+        video_name + '.srt': Language('und'),
+        video_root + '.srt': Language('und'),
+        video_root + '.en.srt': Language('eng'),
+        video_name + '.fra.srt': Language('fra'),
+        video_root + '.pt-BR.srt': Language('por', 'BR'),
+        video_name + '.sr_cyrl.sub': Language('srp', script='Cyrl'),
+        video_name + '.something.srt': Language('und')
+    }
+    tmpdir.ensure(os.path.split(movies['interstellar'].name)[1] + '.srt')
     for path in expected_subtitles:
         tmpdir.ensure(path)
     subtitles = search_external_subtitles(video_path)
@@ -267,6 +288,30 @@ def test_scan_video_broken(mkv, tmpdir, monkeypatch):
     assert scanned_video.year is None
 
 
+def test_scan_archive(movies, tmpdir, monkeypatch):
+    video = movies['enders_game']
+    enders_game = tmpdir.ensure(os.path.splitext(video.name)[0] + '.rar')
+
+    monkeypatch.setattr('rarfile.RarFile._parse', Mock())
+    monkeypatch.setattr('rarfile.RarFile.namelist', Mock(return_value=[video.name, 'anotherfile.nfo']))
+    monkeypatch.setattr('rarfile.RarFile.getinfo', Mock(return_value=Mock(file_size=0)))
+
+    scanned_video = scan_archive(str(enders_game))
+    assert type(scanned_video) is Movie
+    assert scanned_video.name == os.path.join(str(tmpdir), video.name)
+    assert scanned_video.format == video.format
+    assert scanned_video.release_group == video.release_group
+    assert scanned_video.resolution == video.resolution
+    assert scanned_video.video_codec == video.video_codec
+    assert scanned_video.audio_codec == video.audio_codec
+    assert scanned_video.imdb_id == video.imdb_id
+    assert scanned_video.hashes == {}
+    assert scanned_video.size == 0
+    assert scanned_video.subtitle_languages == set()
+    assert scanned_video.title == 'enders game'
+    assert scanned_video.year == 2013
+
+
 def test_scan_videos_path_does_not_exist(movies):
     with pytest.raises(ValueError) as excinfo:
         scan_videos(movies['man_of_steel'].name)
@@ -277,7 +322,7 @@ def test_scan_videos_path_is_not_a_directory(movies, tmpdir, monkeypatch):
     monkeypatch.chdir(str(tmpdir))
     tmpdir.ensure(movies['man_of_steel'].name)
     with pytest.raises(ValueError) as excinfo:
-        scan_videos(movies['man_of_steel'].name, episode_refiners=None, movie_refiners=None)
+        scan_videos(movies['man_of_steel'].name)
     assert str(excinfo.value) == 'Path is not a directory'
 
 
@@ -286,37 +331,59 @@ def test_scan_videos(movies, tmpdir, monkeypatch):
     tmpdir.ensure('movies', '.private', 'sextape.mkv')
     tmpdir.ensure('movies', '.hidden_video.mkv')
     tmpdir.ensure('movies', movies['enders_game'].name)
+    tmpdir.ensure('movies', movies['interstellar'].name)
     tmpdir.ensure('movies', os.path.splitext(movies['enders_game'].name)[0] + '.nfo')
     tmpdir.ensure('movies', 'watched', dir=True)
     tmpdir.join('movies', 'watched', os.path.split(movies['man_of_steel'].name)[1]).mksymlinkto(man_of_steel)
 
-    mock_scan_video = Mock()
+    # mock scan_video and scan_archive with the correct types
+    mock_video = Mock(subtitle_languages=set())
+    mock_scan_video = Mock(return_value=mock_video)
     monkeypatch.setattr('subliminal.core.scan_video', mock_scan_video)
+    mock_scan_archive = Mock(return_value=mock_video)
+    monkeypatch.setattr('subliminal.core.scan_archive', mock_scan_archive)
     monkeypatch.chdir(str(tmpdir))
-    videos = scan_videos('movies', episode_refiners=None, movie_refiners=None)
+    videos = scan_videos('movies')
 
-    kwargs = dict(episode_refiners=None, movie_refiners=None)
-    calls = [((os.path.join('movies', movies['man_of_steel'].name),), kwargs),
-             ((os.path.join('movies', movies['enders_game'].name),), kwargs)]
-    assert len(videos) == len(calls)
-    assert mock_scan_video.call_count == len(calls)
-    mock_scan_video.assert_has_calls(calls, any_order=True)
+    # general asserts
+    assert len(videos) == 3
+    assert mock_scan_video.call_count == 2
+    assert mock_scan_archive.call_count == 1
+
+    # scan_video calls
+    kwargs = dict()
+    scan_video_calls = [((os.path.join('movies', movies['man_of_steel'].name),), kwargs),
+                        ((os.path.join('movies', movies['enders_game'].name),), kwargs)]
+    mock_scan_video.assert_has_calls(scan_video_calls, any_order=True)
+
+    # scan_archive calls
+    kwargs = dict()
+    scan_archive_calls = [((os.path.join('movies', movies['interstellar'].name),), kwargs)]
+    mock_scan_archive.assert_has_calls(scan_archive_calls, any_order=True)
 
 
 def test_scan_videos_age(movies, tmpdir, monkeypatch):
     tmpdir.ensure('movies', movies['man_of_steel'].name)
     tmpdir.ensure('movies', movies['enders_game'].name).setmtime(timestamp(datetime.utcnow() - timedelta(days=10)))
 
-    mock_scan_video = Mock()
+    # mock scan_video and scan_archive with the correct types
+    mock_video = Mock(subtitle_languages=set())
+    mock_scan_video = Mock(return_value=mock_video)
     monkeypatch.setattr('subliminal.core.scan_video', mock_scan_video)
+    mock_scan_archive = Mock(return_value=mock_video)
+    monkeypatch.setattr('subliminal.core.scan_archive', mock_scan_archive)
     monkeypatch.chdir(str(tmpdir))
-    videos = scan_videos('movies', age=timedelta(days=7), episode_refiners=None, movie_refiners=None)
+    videos = scan_videos('movies', age=timedelta(days=7))
 
-    kwargs = dict(episode_refiners=None, movie_refiners=None)
-    calls = [((os.path.join('movies', movies['man_of_steel'].name),), kwargs)]
-    assert len(videos) == len(calls)
-    assert mock_scan_video.call_count == len(calls)
-    mock_scan_video.assert_has_calls(calls, any_order=True)
+    # general asserts
+    assert len(videos) == 1
+    assert mock_scan_video.call_count == 1
+    assert mock_scan_archive.call_count == 0
+
+    # scan_video calls
+    kwargs = dict()
+    scan_video_calls = [((os.path.join('movies', movies['man_of_steel'].name),), kwargs)]
+    mock_scan_video.assert_has_calls(scan_video_calls, any_order=True)
 
 
 def test_list_subtitles_movie(movies, mock_providers):

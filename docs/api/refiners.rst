@@ -1,3 +1,5 @@
+.. _refiners:
+
 Refiners
 ========
 .. automodule:: subliminal.refiners

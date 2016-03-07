@@ -263,7 +263,7 @@ def test_scan_video_invalid_extension(movies, tmpdir, monkeypatch):
     tmpdir.ensure(movie_name)
     with pytest.raises(ValueError) as excinfo:
         scan_video(movie_name)
-    assert str(excinfo.value) == '.mp3 is not a valid video extension'
+    assert str(excinfo.value) == '\'.mp3\' is not a valid video extension'
 
 
 def test_scan_video_broken(mkv, tmpdir, monkeypatch):
@@ -310,6 +310,15 @@ def test_scan_archive(movies, tmpdir, monkeypatch):
     assert scanned_video.subtitle_languages == set()
     assert scanned_video.title == 'enders game'
     assert scanned_video.year == 2013
+
+
+def test_scan_archive_invalid_extension(movies, tmpdir, monkeypatch):
+    monkeypatch.chdir(str(tmpdir))
+    movie_name = os.path.splitext(movies['interstellar'].name)[0] + '.mp3'
+    tmpdir.ensure(movie_name)
+    with pytest.raises(ValueError) as excinfo:
+        scan_archive(movie_name)
+    assert str(excinfo.value) == '\'.mp3\' is not a valid archive extension'
 
 
 def test_scan_videos_path_does_not_exist(movies):

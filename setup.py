@@ -76,8 +76,8 @@ setup(name='subliminal',
           ],
           'subliminal.refiners': [
               'metadata = subliminal.refiners.metadata:refine',
-              'tvdb = subliminal.refiners.tvdb:refine',
-              'omdb = subliminal.refiners.omdb:refine'
+              'omdb = subliminal.refiners.omdb:refine',
+              'tvdb = subliminal.refiners.tvdb:refine'
           ],
           'babelfish.language_converters': [
               'addic7ed = subliminal.converters.addic7ed:Addic7edConverter',

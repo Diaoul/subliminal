@@ -342,12 +342,8 @@ def search_external_subtitles(path, directory=None):
             continue
 
         # extract the potential language code
-        language_code = p[len(fileroot):-len(os.path.splitext(p)[1])].replace(fileext, '').replace('_', '-')[1:]
-
-        # default language is undefined
         language = Language('und')
-
-        # attempt to parse the language code
+        language_code = p[len(fileroot):-len(os.path.splitext(p)[1])].replace(fileext, '').replace('_', '-')[1:]
         if language_code:
             try:
                 language = Language.fromietf(language_code)

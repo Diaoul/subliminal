@@ -43,20 +43,20 @@ def test_get_matches_format_release_group(episodes):
     subtitle = TVsubtitlesSubtitle(Language('fra'), None, 249518, 'The Big Bang Theory', 7, 5, 2007, 'HDTV',
                                    'lol-dimension')
     matches = subtitle.get_matches(episodes['bbt_s07e05'])
-    assert matches == {'series', 'season', 'episode', 'year', 'format', 'release_group', 'hearing_impaired'}
+    assert matches == {'series', 'season', 'episode', 'year', 'format', 'release_group'}
 
 
 def test_get_matches_video_codec_resolution(episodes):
     subtitle = TVsubtitlesSubtitle(Language('por'), None, 261077, 'Game of Thrones', 3, 10, None, '720p.BluRay',
                                    'x264-DEMAND')
     matches = subtitle.get_matches(episodes['got_s03e10'])
-    assert matches == {'series', 'season', 'episode', 'year', 'video_codec', 'resolution', 'hearing_impaired'}
+    assert matches == {'series', 'season', 'episode', 'year', 'video_codec', 'resolution'}
 
 
 def test_get_matches_no_match(episodes):
-    subtitle = TVsubtitlesSubtitle(Language('por'), None, 261077, 'Game of Thrones', 3, 10, None, '1080p.BluRay',
+    subtitle = TVsubtitlesSubtitle(Language('por'), None, 261077, 'Game of Thrones', 3, 10, 2011, '1080p.BluRay',
                                    'DEMAND')
-    matches = subtitle.get_matches(episodes['bbt_s07e05'], hearing_impaired=True)
+    matches = subtitle.get_matches(episodes['bbt_s07e05'])
     assert matches == set()
 
 

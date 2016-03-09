@@ -1,0 +1,39 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [Subliminal/1.2]
+    method: GET
+    uri: http://www.omdbapi.com/?r=json&v=1&y=2012&s=dallas&type=series&page=1
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA6XSUU7CQBAG4Ks081zpdktp7BNt0GjiFoVKQGPM2o5SaLtNdytQYuIdvKEnMdUH
+        AiI8eIB/Z7/5Zw1D5GU0Bfd+DWGiUgQXejxNuQQdJshLcIESk36+f1BitkGHJIufLnvgglKmQy2n
+        Q0CHcFU0SYllgk3yWkiFTXaqVOEaRsJbGcYJP2nSrUhkRpLxF5QGM9jI9tnszA7Cs2XQi2x2bvss
+        tX2e+/l4fq7uwmjBZpEZ1N6if9Ptth5H5uNwbBHSmhUv8KZvPh5OUfOFmGviWfsDsQ2glmPRdqP6
+        LyC8pUE9Iay+pPsAQc2WrJ6QvncUcJvHWGJWpGKFsebFr5irqkS5QWkXGM1/1bMj6zgWoQdlgeFt
+        be9nY9pAVHlcFZr3rLCUU7E4Nskx7Q45eAS7k66qZVWu9la0o7As2j6lh/r5fvtBByUUTwcoq1RJ
+        cMEGHQYoC5HL5jDDskJ4+wKInhX07gIAAA==
+    headers:
+      access-control-allow-origin: ['*']
+      cache-control: ['public, max-age=14400']
+      cf-cache-status: [MISS]
+      cf-ray: [27206ea594073c53-CDG]
+      connection: [keep-alive]
+      content-encoding: [gzip]
+      content-type: [application/json; charset=utf-8]
+      date: ['Tue, 09 Feb 2016 14:58:24 GMT']
+      expires: ['Tue, 09 Feb 2016 18:58:24 GMT']
+      last-modified: ['Tue, 09 Feb 2016 14:59:47 GMT']
+      server: [cloudflare-nginx]
+      set-cookie: ['__cfduid=dc0b834853e0513d67106c4ca2e9fccb91455029904; expires=Wed,
+          08-Feb-17 14:58:24 GMT; path=/; domain=.omdbapi.com; HttpOnly']
+      vary: [Accept-Encoding]
+      x-aspnet-version: [4.0.30319]
+      x-powered-by: [ASP.NET]
+    status: {code: 200, message: OK}
+version: 1

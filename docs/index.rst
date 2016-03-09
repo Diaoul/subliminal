@@ -27,12 +27,15 @@ If you are looking for information on a specific function, class or method, this
 .. toctree::
     :maxdepth: 1
 
-    api/api
+    api/core
     api/video
     api/subtitle
     api/providers
-    api/cache
+    api/refiners
+    api/extensions
     api/score
+    api/utils
+    api/cache
     api/cli
     api/exceptions
 

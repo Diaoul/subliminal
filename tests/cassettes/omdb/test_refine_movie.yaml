@@ -1,0 +1,76 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [Subliminal/1.2]
+    method: GET
+    uri: http://www.omdbapi.com/?r=json&v=1&s=man+of+steel&type=movie&page=1
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA62TX2/aMBTFv4p1n1NiO3/JU5MVpEh1aCGrQqep8sBLAkmMEgMlVb/7FPa0VMDK
+        9uDHc871+d37BjPB60UG3rc3iHNVCPCA8QrJn2imhChAg7ngNXhAMTFAg7xc/gjvwAOlsONgl7qg
+        QXzYdMJS7nIBGjzIRolOkym18XQ954NSLHN+04kHC1nqeclT0ehMZ09WwFahNYnnbbQKMSusoHu8
+        CqpkPVbP8WLPWkaiO59MHm9vBy9P5GWWGBgPVpsU3rVLY5PhcNgbm7jYJc6ZsSPdP+mMkiTxkF8h
+        /1UUKKj5tkIPvJbLw7mqDEItl7ifyLzPlSoE+lsW1LIcx8XXfmomq/SsvWOZNrX/A2p/H7Ujk7Vf
+        zcn4I+qoXZMoXl9C/SWr80bJTSZqNBViJzwUZ6fLwmbvNwS7pvuZDTgGooAvZOWdZtKLMSwbE5v+
+        c2lRm1LWPlIWh0b0obR0H61CMonXBxaPrrkP2+ndB7UN51jZNav0m8ScZ1Ki+3wn0JhXaLQTlTp7
+        HwZ1TNO+MvMPZ9xjTYlFh9Yl5+8aKKl4MRXNtlDNsRjQYCqajayaThfXWwHvvwAujfHoMQUAAA==
+    headers:
+      access-control-allow-origin: ['*']
+      cache-control: ['public, max-age=14400']
+      cf-cache-status: [HIT]
+      cf-ray: [272066877f40103d-CDG]
+      connection: [keep-alive]
+      content-encoding: [gzip]
+      content-type: [application/json; charset=utf-8]
+      date: ['Tue, 09 Feb 2016 14:52:51 GMT']
+      expires: ['Tue, 09 Feb 2016 18:52:51 GMT']
+      last-modified: ['Tue, 09 Feb 2016 14:21:50 GMT']
+      server: [cloudflare-nginx]
+      set-cookie: ['__cfduid=de40c7ee8df7931c9329aa24df95910641455029571; expires=Wed,
+          08-Feb-17 14:52:51 GMT; path=/; domain=.omdbapi.com; HttpOnly']
+      vary: [Accept-Encoding]
+      x-aspnet-version: [4.0.30319]
+      x-powered-by: [ASP.NET]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Cookie: [__cfduid=de40c7ee8df7931c9329aa24df95910641455029571]
+      User-Agent: [Subliminal/1.2]
+    method: GET
+    uri: http://www.omdbapi.com/?r=json&v=1&s=man+of+steel&type=movie&page=2
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA62TwWrbQBCGX2WYiy+CSFrJkfZWxwc3qUuxDCWEHLby2F5Y7Si7KxcR8u5FPrRx
+        SBwLet1h5/u/GeYZK1Ku3qN8eMa1DoZQ4l3nAizZOf4tYaks8BaqQGQwwntSDiWmcZJjhLrZ/Po6
+        R4khpOK6EKLECNd9O3Rp+KAJI/zBPtDw5/vVF3yJ/mFed5ZwfIWKnjqyNZ2QxClJXGdFKbIRpLUy
+        5GHruIE5Hchw25ANsCBjJPxUOmi7gy27j2WztxHKssiLMRH2BAtyTB5mtNd2A6f6Q03XUAV2fSBj
+        tN2dm0GW5EUSxyMDLLXRQbkelnq3DwP9Q+H3eOn/FL7hpmU/DF79la/Z0fkU0ziP0xEpbrlzlvqB
+        O9e+5gO5XsKNI3Xc+eX60zjPspH6FVtdwzdlN75WLQ2kyWvi5BwyF0kqijHImd4tSG0uvthcTMu8
+        /HSnjxEGDsqsyHcmeJSYDFe+It+y9UdX1xG+/AFH/o2wSwQAAA==
+    headers:
+      access-control-allow-origin: ['*']
+      cache-control: ['public, max-age=14400']
+      cf-cache-status: [HIT]
+      cf-ray: [272066878f45103d-CDG]
+      connection: [keep-alive]
+      content-encoding: [gzip]
+      content-type: [application/json; charset=utf-8]
+      date: ['Tue, 09 Feb 2016 14:52:51 GMT']
+      expires: ['Tue, 09 Feb 2016 18:52:51 GMT']
+      last-modified: ['Tue, 09 Feb 2016 14:52:15 GMT']
+      server: [cloudflare-nginx]
+      vary: [Accept-Encoding]
+      x-aspnet-version: [4.0.30319]
+      x-powered-by: [ASP.NET]
+    status: {code: 200, message: OK}
+version: 1

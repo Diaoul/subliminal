@@ -2,9 +2,12 @@ interactions:
 - request:
     body: null
     headers:
-      User-Agent: [Subliminal/1.1]
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [Subliminal/2.0]
     method: GET
-    uri: http://podnapisi.net/subtitles/search/old?sK=Game+of+Thrones&sTE=10&sXML=1&sL=fr&sTS=3
+    uri: http://podnapisi.net/subtitles/search/old?sK=Game+of+Thrones&sTE=10&sXML=1&sTS=3&sL=fr
   response:
     body: {string: !!python/unicode "<html>\r\n<head><title>302 Found</title></head>\r\
         \n<body bgcolor=\"white\">\r\n<center><h1>302 Found</h1></center>\r\n<hr><center>nginx/1.8.0</center>\r\
@@ -13,69 +16,79 @@ interactions:
       connection: [keep-alive]
       content-length: ['160']
       content-type: [text/html]
-      date: ['Thu, 29 Oct 2015 22:52:16 GMT']
-      location: ['http://www.podnapisi.net/subtitles/search/old?sK=Game+of+Thrones&sTE=10&sXML=1&sL=fr&sTS=3']
+      date: ['Tue, 09 Feb 2016 16:16:40 GMT']
+      location: ['http://www.podnapisi.net/subtitles/search/old?sK=Game+of+Thrones&sTE=10&sXML=1&sTS=3&sL=fr']
       server: [nginx/1.8.0]
     status: {code: 302, message: Moved Temporarily}
 - request:
     body: null
     headers:
-      User-Agent: [Subliminal/1.1]
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [Subliminal/2.0]
     method: GET
-    uri: http://www.podnapisi.net/subtitles/search/old?sK=Game+of+Thrones&sTE=10&sXML=1&sL=fr&sTS=3
+    uri: http://www.podnapisi.net/subtitles/search/old?sK=Game+of+Thrones&sTE=10&sXML=1&sTS=3&sL=fr
   response:
-    body: {string: !!python/unicode "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"\
-        yes\"?>\n<!DOCTYPE results [\n  <!ELEMENT results (#PCDATA|pagination|subtitle)*>\n\
-        \    <!ELEMENT pagination (current, count, results)>\n      <!ELEMENT current\
-        \ (#PCDATA)>\n      <!ELEMENT count (#PCDATA)>\n    <!ELEMENT subtitle (id,\
-        \ title, year, movieId, url, uploaderId, uploaderName, release, languageId,\
-        \ languageName, time, tvSeason, tvEpisode, tvSpecial, cds, format, fps, rating,\
-        \ flags, downloads)>\n      <!ELEMENT id (#PCDATA)>\n      <!ELEMENT pid (#PCDATA)>\n\
-        \      <!ELEMENT title (#PCDATA)>\n      <!ELEMENT year (#PCDATA)>\n     \
-        \ <!ELEMENT movieId (#PCDATA)>\n      <!ELEMENT url (#PCDATA)>\n      <!ELEMENT\
-        \ uploaderId (#PCDATA)>\n      <!ELEMENT uploaderName (#PCDATA)>\n      <!ELEMENT\
-        \ release (#PCDATA)>\n      <!ELEMENT languageId (#PCDATA)>\n      <!ELEMENT\
-        \ languageName (#PCDATA)>\n      <!ELEMENT language (#PCDATA)>\n      <!ELEMENT\
-        \ time (#PCDATA)>\n      <!ELEMENT tvSeason (#PCDATA)>\n      <!ELEMENT tvEpisode\
-        \ (#PCDATA)>\n      <!ELEMENT tvSpecial (#PCDATA)>\n      <!ELEMENT cds (#PCDATA)>\n\
-        \      <!ELEMENT format (#PCDATA)>\n      <!ELEMENT fps (#PCDATA)>\n     \
-        \ <!ELEMENT rating (#PCDATA)>\n      <!ELEMENT flags (#PCDATA)>\n      <!ELEMENT\
-        \ new_flags (#PCDATA)>\n        <!ELEMENT flag (#PCDATA)>\n      <!ELEMENT\
-        \ downloads (#PCDATA)>\n      <!ELEMENT exactHashes (#PCDATA)>]> <results><pagination><current>1</current><count>1</count><results>4</results></pagination><subtitle><id>2475667</id><pid>k8Yl</pid><title>Game\
-        \ of Thrones</title><year>2011</year><movieId>mLUG</movieId><url>http://www.podnapisi.net/subtitles/fr-game-of-thrones-2011-S03E10/k8Yl</url><uploaderId>1</uploaderId><uploaderName>Anonymous</uploaderName><release>Game.of.Thrones.S03E10.720p.WEB-DL.DD5.1.H.264-NTb\
-        \ Game.of.Thrones.S03E10.1080p.WEB-DL.DD5.1.H.264-NTb Game.of.Thrones.S03E10.720p.WEB-DL.DD5.1.AAC2.0.H.264-YFN\
-        \ Game.of.Thrones.S03E10.1080p.WEB-DL.DD5.1.AAC2.0.H.264-YFN</release><languageId>8</languageId><languageName>French</languageName><language>fr</language><time>1370985775</time><tvSeason>3</tvSeason><tvEpisode>10</tvEpisode><tvSpecial>0</tvSpecial><cds\
-        \ /><format>N/A</format><fps>N/A</fps><rating>0.0</rating><flags /><new_flags\
-        \ /><downloads>2506</downloads><exactHashes /></subtitle><subtitle><id>2475661</id><pid>jcYl</pid><title>Game\
-        \ of Thrones</title><year>2011</year><movieId>mLUG</movieId><url>http://www.podnapisi.net/subtitles/fr-game-of-thrones-2011-S03E10/jcYl</url><uploaderId>1</uploaderId><uploaderName>Anonymous</uploaderName><release>Game.of.Thrones.S03E10.720p.HDTV.x264-EVOLVE\
-        \ Game.of.Thrones.S03E10.720p.HDTV.x264-CPG Game.of.Thrones.S03E10.480p.HDTV.x264-ChameE\
-        \ Game.of.Thrones.S03E10.480p.HDTV.x264-mSD Game.of.Thrones.S03E10.HDTV.XviD-Chivvez\
-        \ Game.of.Thrones.S03E10.HDTV.XviD-3LT0N Game.of.Thrones.S03E10.HDTV.XviD-Snake\
-        \ Game.of.Thrones.S03E10.HDTV.XviD-JKS Game.of.Thrones.S03E10.HDTV.XviD-AFG</release><languageId>8</languageId><languageName>French</languageName><language>fr</language><time>1370985506</time><tvSeason>3</tvSeason><tvEpisode>10</tvEpisode><tvSpecial>0</tvSpecial><cds\
-        \ /><format>N/A</format><fps>N/A</fps><rating>0.0</rating><flags /><new_flags\
-        \ /><downloads>1655</downloads><exactHashes /></subtitle><subtitle><id>2474993</id><pid>8cMl</pid><title>Game\
-        \ of Thrones</title><year>2011</year><movieId>mLUG</movieId><url>http://www.podnapisi.net/subtitles/fr-game-of-thrones-2011-S03E10/8cMl</url><uploaderId>44181</uploaderId><uploaderName>grzesiek11</uploaderName><release>Game.of.Thrones.S03E10.720p.HDTV.x264-EVOLVE\
-        \ Game.of.Thrones.S03E10.720p.HDTV.x264-CPG Game.of.Thrones.S03E10.480p.HDTV.x264-ChameE\
-        \ Game.of.Thrones.S03E10.480p.HDTV.x264-mSD Game.of.Thrones.S03E10.HDTV.XviD-Chivvez\
-        \ Game.of.Thrones.S03E10.HDTV.XviD-3LT0N Game.of.Thrones.S03E10.HDTV.XviD-Snake\
-        \ Game.of.Thrones.S03E10.HDTV.XviD-JKS Game.of.Thrones.S03E10.HDTV.XviD-AFG</release><languageId>8</languageId><languageName>French</languageName><language>fr</language><time>1370851348</time><tvSeason>3</tvSeason><tvEpisode>10</tvEpisode><tvSpecial>0</tvSpecial><cds\
-        \ /><format>N/A</format><fps>N/A</fps><rating>0.0</rating><flags>h</flags><new_flags><flag>high_definition</flag></new_flags><downloads>5355</downloads><exactHashes>sublight:abb28aefd1ca56458901371447fec372</exactHashes></subtitle><subtitle><id>2474984</id><pid>6MMl</pid><title>Game\
-        \ of Thrones</title><year>2011</year><movieId>mLUG</movieId><url>http://www.podnapisi.net/subtitles/fr-game-of-thrones-2011-S03E10/6MMl</url><uploaderId>44181</uploaderId><uploaderName>grzesiek11</uploaderName><release>Game.of.Thrones.S03E10.HDTV.x264-EVOLVE</release><languageId>8</languageId><languageName>French</languageName><language>fr</language><time>1370848797</time><tvSeason>3</tvSeason><tvEpisode>10</tvEpisode><tvSpecial>0</tvSpecial><cds\
-        \ /><format>N/A</format><fps>N/A</fps><rating>0.0</rating><flags /><new_flags\
-        \ /><downloads>3864</downloads><exactHashes /></subtitle></results>"}
+    body: {string: !!python/unicode "<html>\r\n<head><title>301 Moved Permanently</title></head>\r\
+        \n<body bgcolor=\"white\">\r\n<center><h1>301 Moved Permanently</h1></center>\r\
+        \n<hr><center>nginx/1.8.0</center>\r\n</body>\r\n</html>\r\n"}
     headers:
       connection: [keep-alive]
-      content-length: ['4874']
-      content-type: [text/xml;charset=utf-8]
-      date: ['Thu, 29 Oct 2015 22:52:16 GMT']
+      content-length: ['184']
+      content-type: [text/html]
+      date: ['Tue, 09 Feb 2016 16:16:40 GMT']
+      location: ['https://www.podnapisi.net/subtitles/search/old?sK=Game+of+Thrones&sTE=10&sXML=1&sTS=3&sL=fr']
       server: [nginx/1.8.0]
+    status: {code: 301, message: Moved Permanently}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [Subliminal/2.0]
+    method: GET
+    uri: https://www.podnapisi.net/subtitles/search/old?sK=Game+of+Thrones&sTE=10&sXML=1&sTS=3&sL=fr
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA+1XW2/aSBR+769w6UtagS9gsKkmU7FALruERoLNblRV1cQegzfGtmwDSdUfv2c8
+        HtsiMGn2IaLSvsDMme9c5vh859jo08MqUDY0Sf0oPG0Yqt5QaOhErh8uThvrzGvZDSXNSOiSIArp
+        aeORpo1P+A16O/o8nN9ej5WEpusgS5UvbxQFvR1Pxlfj6byUnry7Ho4G88GPmCz8kGTg5Ue6vsv8
+        LKDvP2DQqWtVIOXEWScJDbOm4kRr9lf4ec916loFUhG+9kGYjV1AFa2ISDnx3aaSB9dUHilJmsoq
+        2vj0EqTrJICfOIiIS5NcUKynZEVZeAElKSwCEi7WZJHriDWHZD4DZpsZAKOQrcaxn0YuF8bU8Qm4
+        cNy0qXhRsiIZ/MewSSBt4QI2AVnA1o22IYsi3XNP3929ZD1Rsfw4v7dMn2VEdl7kSgaBLEqPy/z+
+        DIqlVYYrnokMIp7QpTRxAvWcQ4GTeWRVID0v6kOOKSpHDprxmpKBoNpkx7wOpYhYaoDXrtQAq2oZ
+        IKTbb3npPwXVi5tBniIqjpe0kYHoA3GyC5IuaT2kr1hBRfvBqOpRGBWdBxtIE0uUt6tcwnoOLhVN
+        pJU2tLoR0Xww8l3cNq1ur2chDdYI+Irv7dsAaWyFcn7ic1b0kafMlwk05BRpXIwYOXFbNyCWfIkK
+        NuLV5M9zpIkdAgbiZZbFHzVtu92qceSGBNqQr4Y000QsqeYlrQV4akVeK+OeWsx4a6Z3xoau8bCY
+        LVT1RHbr2q48YbTBgzAKH1fRGiIWmFwOCco7Z34xNfLU4mIq96RabT1W/xr/1hpN1NGoqxrqhdru
+        ma3p/E5hudijYuj2i3WeuhkMhm1VL7zdnk1f4G1XlT16fkkkWsSli22k1XblSZ6VM5h9zrIC8FQJ
+        OPaS6ogVBuTX6Fh63+5aVpeVBAiQmDS4A5KiqzBp0TuwoTO52DE47xc4l4sNYi1Cw4i3AjzVBkgr
+        1gjGUyGABeJcx7oK+sUaceKCesVi2JRcxO2e1UdatUd1BgKyrEiMRG3WeAL1Jnjyj3OUPOFhvRpP
+        LkbzG/WB0WN883lyMz5Us3m1V+Dh9fkhpMmoVEMugXIHze6AV7PRIbO5xb83/qg1XPqbDf3+PLAz
+        mesHSVjZm4Xknj5v7fc/Zs+DBmfQOV+Nul299ytR17BsaDX/ibpmvw89SVDXdq6OccTxsHapa5qG
+        LRtzi+Q7TX16z+bwy+dcRbT/+btvslc0Pzb+2l2jY9pHx1+8hGnN3rBrExhmOUjw0l8sv7nU80Of
+        fZZzHEzcclLX53TXtOBy+8mOYTIHYCz7SO7u2jahnms4pNszu3Zfh9cSwzQtjzodq4202niXDnez
+        b8MLs+gQvauj7BA8rFfrELvN4bVGk23aVh8+SX6dt8pOvwejdH+1snfZ2ltl+VH2LwiJM7EKEwAA
+    headers:
+      connection: [keep-alive]
+      content-encoding: [gzip]
+      content-type: [text/xml;charset=utf-8]
+      date: ['Tue, 09 Feb 2016 16:16:41 GMT']
+      server: [nginx/1.8.0]
+      vary: [Accept-Encoding]
     status: {code: 200, message: OK}
 - request:
     body: null
     headers:
-      User-Agent: [Subliminal/1.1]
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [Subliminal/2.0]
     method: GET
-    uri: http://podnapisi.net/subtitles/search/old?sK=Game+of+Thrones&sTE=10&sXML=1&sL=en&sTS=3
+    uri: http://podnapisi.net/subtitles/search/old?sK=Game+of+Thrones&sTE=10&sXML=1&sTS=3&sL=en
   response:
     body: {string: !!python/unicode "<html>\r\n<head><title>302 Found</title></head>\r\
         \n<body bgcolor=\"white\">\r\n<center><h1>302 Found</h1></center>\r\n<hr><center>nginx/1.8.0</center>\r\
@@ -84,79 +97,80 @@ interactions:
       connection: [keep-alive]
       content-length: ['160']
       content-type: [text/html]
-      date: ['Thu, 29 Oct 2015 22:52:16 GMT']
-      location: ['http://www.podnapisi.net/subtitles/search/old?sK=Game+of+Thrones&sTE=10&sXML=1&sL=en&sTS=3']
+      date: ['Tue, 09 Feb 2016 16:16:41 GMT']
+      location: ['http://www.podnapisi.net/subtitles/search/old?sK=Game+of+Thrones&sTE=10&sXML=1&sTS=3&sL=en']
       server: [nginx/1.8.0]
     status: {code: 302, message: Moved Temporarily}
 - request:
     body: null
     headers:
-      User-Agent: [Subliminal/1.1]
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [Subliminal/2.0]
     method: GET
-    uri: http://www.podnapisi.net/subtitles/search/old?sK=Game+of+Thrones&sTE=10&sXML=1&sL=en&sTS=3
+    uri: http://www.podnapisi.net/subtitles/search/old?sK=Game+of+Thrones&sTE=10&sXML=1&sTS=3&sL=en
   response:
-    body: {string: !!python/unicode "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"\
-        yes\"?>\n<!DOCTYPE results [\n  <!ELEMENT results (#PCDATA|pagination|subtitle)*>\n\
-        \    <!ELEMENT pagination (current, count, results)>\n      <!ELEMENT current\
-        \ (#PCDATA)>\n      <!ELEMENT count (#PCDATA)>\n    <!ELEMENT subtitle (id,\
-        \ title, year, movieId, url, uploaderId, uploaderName, release, languageId,\
-        \ languageName, time, tvSeason, tvEpisode, tvSpecial, cds, format, fps, rating,\
-        \ flags, downloads)>\n      <!ELEMENT id (#PCDATA)>\n      <!ELEMENT pid (#PCDATA)>\n\
-        \      <!ELEMENT title (#PCDATA)>\n      <!ELEMENT year (#PCDATA)>\n     \
-        \ <!ELEMENT movieId (#PCDATA)>\n      <!ELEMENT url (#PCDATA)>\n      <!ELEMENT\
-        \ uploaderId (#PCDATA)>\n      <!ELEMENT uploaderName (#PCDATA)>\n      <!ELEMENT\
-        \ release (#PCDATA)>\n      <!ELEMENT languageId (#PCDATA)>\n      <!ELEMENT\
-        \ languageName (#PCDATA)>\n      <!ELEMENT language (#PCDATA)>\n      <!ELEMENT\
-        \ time (#PCDATA)>\n      <!ELEMENT tvSeason (#PCDATA)>\n      <!ELEMENT tvEpisode\
-        \ (#PCDATA)>\n      <!ELEMENT tvSpecial (#PCDATA)>\n      <!ELEMENT cds (#PCDATA)>\n\
-        \      <!ELEMENT format (#PCDATA)>\n      <!ELEMENT fps (#PCDATA)>\n     \
-        \ <!ELEMENT rating (#PCDATA)>\n      <!ELEMENT flags (#PCDATA)>\n      <!ELEMENT\
-        \ new_flags (#PCDATA)>\n        <!ELEMENT flag (#PCDATA)>\n      <!ELEMENT\
-        \ downloads (#PCDATA)>\n      <!ELEMENT exactHashes (#PCDATA)>]> <results><pagination><current>1</current><count>1</count><results>10</results></pagination><subtitle><id>3953259</id><pid>a1I8</pid><title>Game\
-        \ of Thrones</title><year>2011</year><movieId>mLUG</movieId><url>http://www.podnapisi.net/subtitles/en-game-of-thrones-2011-S03E10/a1I8</url><uploaderId>None</uploaderId><uploaderName\
-        \ /><release>Game.of.Thrones.S03E10.720p.BluRay.450MB.ShAaNiG.com Game.of.Thrones.S03E10.1080p.WEB-DL.DD5.1.H.264-NTb\
-        \ Game.of.Thrones.S03E10.720p.BluRay.450MB.ShAaNiG.com.srt</release><languageId>2</languageId><languageName>English</languageName><language>en</language><time>1436203578</time><tvSeason>3</tvSeason><tvEpisode>10</tvEpisode><tvSpecial>0</tvSpecial><cds\
-        \ /><format>N/A</format><fps>N/A</fps><rating>0.0</rating><flags /><new_flags\
-        \ /><downloads>460</downloads><exactHashes /></subtitle><subtitle><id>3740656</id><pid>8BM5</pid><title>Game\
-        \ of Thrones</title><year>2011</year><movieId>mLUG</movieId><url>http://www.podnapisi.net/subtitles/en-game-of-thrones-2011-S03E10/8BM5</url><uploaderId>23329</uploaderId><uploaderName>jane</uploaderName><release>Game.Of.Thrones.S03E10.720p.x264-ILPruny</release><languageId>2</languageId><languageName>English</languageName><language>en</language><time>1420528825</time><tvSeason>3</tvSeason><tvEpisode>10</tvEpisode><tvSpecial>0</tvSpecial><cds\
-        \ /><format>N/A</format><fps>N/A</fps><rating>0.0</rating><flags>h</flags><new_flags><flag>high_definition</flag></new_flags><downloads>1264</downloads><exactHashes\
-        \ /></subtitle><subtitle><id>2911594</id><pid>am0s</pid><title>Game of Thrones</title><year>2011</year><movieId>mLUG</movieId><url>http://www.podnapisi.net/subtitles/en-game-of-thrones-2011-S03E10/am0s</url><uploaderId>1</uploaderId><uploaderName>Anonymous</uploaderName><release>game.of.thrones.s03e10.bdrip.x264-demand</release><languageId>2</languageId><languageName>English</languageName><language>en</language><time>1392415949</time><tvSeason>3</tvSeason><tvEpisode>10</tvEpisode><tvSpecial>0</tvSpecial><cds\
-        \ /><format>N/A</format><fps>N/A</fps><rating>0.0</rating><flags>n</flags><new_flags><flag>hearing_impaired</flag></new_flags><downloads>3562</downloads><exactHashes>sublight:1253562ba785425176701686b7452a73</exactHashes></subtitle><subtitle><id>2533905</id><pid>Eaom</pid><title>Game\
-        \ of Thrones</title><year>2011</year><movieId>mLUG</movieId><url>http://www.podnapisi.net/subtitles/en-game-of-thrones-2011-S03E10/Eaom</url><uploaderId>63492</uploaderId><uploaderName>Rafael4</uploaderName><release>Game.Of.Thrones.S03E10.1080p.WEB-RiP.x264.anoXmous</release><languageId>2</languageId><languageName>English</languageName><language>en</language><time>1373986843</time><tvSeason>3</tvSeason><tvEpisode>10</tvEpisode><tvSpecial>0</tvSpecial><cds\
-        \ /><format>N/A</format><fps>N/A</fps><rating>0.0</rating><flags>h</flags><new_flags><flag>high_definition</flag></new_flags><downloads>5146</downloads><exactHashes>sublight:a5a45e8c236f271840123ea8268da767</exactHashes></subtitle><subtitle><id>2475668</id><pid>lMYl</pid><title>Game\
-        \ of Thrones</title><year>2011</year><movieId>mLUG</movieId><url>http://www.podnapisi.net/subtitles/en-game-of-thrones-2011-S03E10/lMYl</url><uploaderId>1</uploaderId><uploaderName>Anonymous</uploaderName><release>Game.of.Thrones.S03E10.720p.WEB-DL.DD5.1.H.264-NTb\
-        \ Game.of.Thrones.S03E10.1080p.WEB-DL.DD5.1.H.264-NTb Game.of.Thrones.S03E10.720p.WEB-DL.DD5.1.AAC2.0.H.264-YFN\
-        \ Game.of.Thrones.S03E10.1080p.WEB-DL.DD5.1.AAC2.0.H.264-YFN</release><languageId>2</languageId><languageName>English</languageName><language>en</language><time>1370985771</time><tvSeason>3</tvSeason><tvEpisode>10</tvEpisode><tvSpecial>0</tvSpecial><cds\
-        \ /><format>N/A</format><fps>N/A</fps><rating>1.0</rating><flags>h</flags><new_flags><flag>high_definition</flag></new_flags><downloads>10383</downloads><exactHashes>sublight:9f69fd76f1e5c7ab688a70f1fe463ec7\
-        \ sublight:a5a45e8c236f271840123ea8268da767</exactHashes></subtitle><subtitle><id>2475674</id><pid>msYl</pid><title>Game\
-        \ of Thrones</title><year>2011</year><movieId>mLUG</movieId><url>http://www.podnapisi.net/subtitles/en-game-of-thrones-2011-S03E10/msYl</url><uploaderId>1</uploaderId><uploaderName>Anonymous</uploaderName><release>Game.of.Thrones.S03E10.720p.WEB-DL.DD5.1.H.264-NTb\
-        \ Game.of.Thrones.S03E10.1080p.WEB-DL.DD5.1.H.264-NTb Game.of.Thrones.S03E10.720p.WEB-DL.DD5.1.AAC2.0.H.264-YFN\
-        \ Game.of.Thrones.S03E10.1080p.WEB-DL.DD5.1.AAC2.0.H.264-YFN</release><languageId>2</languageId><languageName>English</languageName><language>en</language><time>1370985492</time><tvSeason>3</tvSeason><tvEpisode>10</tvEpisode><tvSpecial>0</tvSpecial><cds\
-        \ /><format>N/A</format><fps>N/A</fps><rating>0.0</rating><flags>nh</flags><new_flags><flag>hearing_impaired</flag><flag>high_definition</flag></new_flags><downloads>6349</downloads><exactHashes>sublight:da1ce34e0e82dd0971176d60f1f80b2e</exactHashes></subtitle><subtitle><id>2474991</id><pid>78Ml</pid><title>Game\
-        \ of Thrones</title><year>2011</year><movieId>mLUG</movieId><url>http://www.podnapisi.net/subtitles/en-game-of-thrones-2011-S03E10/78Ml</url><uploaderId>44181</uploaderId><uploaderName>grzesiek11</uploaderName><release>Game.of.Thrones.S03E10.720p.HDTV.x264-EVOLVE\
-        \ Game.of.Thrones.S03E10.720p.HDTV.x264-CPG Game.of.Thrones.S03E10.480p.HDTV.x264-ChameE\
-        \ Game.of.Thrones.S03E10.480p.HDTV.x264-mSD Game.of.Thrones.S03E10.HDTV.XviD-Chivvez\
-        \ Game.of.Thrones.S03E10.HDTV.XviD-3LT0N Game.of.Thrones.S03E10.HDTV.XviD-Snake\
-        \ Game.of.Thrones.S03E10.HDTV.XviD-JKS Game.of.Thrones.S03E10.HDTV.XviD-AFG</release><languageId>2</languageId><languageName>English</languageName><language>en</language><time>1370850866</time><tvSeason>3</tvSeason><tvEpisode>10</tvEpisode><tvSpecial>0</tvSpecial><cds\
-        \ /><format>N/A</format><fps>N/A</fps><rating>0.0</rating><flags>nh</flags><new_flags><flag>hearing_impaired</flag><flag>high_definition</flag></new_flags><downloads>15995</downloads><exactHashes>sublight:abb28aefd1ca56458901371447fec372</exactHashes></subtitle><subtitle><id>2474990</id><pid>7sMl</pid><title>Game\
-        \ of Thrones</title><year>2011</year><movieId>mLUG</movieId><url>http://www.podnapisi.net/subtitles/en-game-of-thrones-2011-S03E10/7sMl</url><uploaderId>44181</uploaderId><uploaderName>grzesiek11</uploaderName><release>Game.of.Thrones.S03E10.720p.HDTV.x264-EVOLVE\
-        \ Game.of.Thrones.S03E10.720p.HDTV.x264-CPG Game.of.Thrones.S03E10.480p.HDTV.x264-ChameE\
-        \ Game.of.Thrones.S03E10.480p.HDTV.x264-mSD Game.of.Thrones.S03E10.HDTV.XviD-Chivvez\
-        \ Game.of.Thrones.S03E10.HDTV.XviD-3LT0N Game.of.Thrones.S03E10.HDTV.XviD-Snake\
-        \ Game.of.Thrones.S03E10.HDTV.XviD-JKS Game.of.Thrones.S03E10.HDTV.XviD-AFG</release><languageId>2</languageId><languageName>English</languageName><language>en</language><time>1370850847</time><tvSeason>3</tvSeason><tvEpisode>10</tvEpisode><tvSpecial>0</tvSpecial><cds\
-        \ /><format>N/A</format><fps>N/A</fps><rating>1.0</rating><flags>h</flags><new_flags><flag>high_definition</flag></new_flags><downloads>41062</downloads><exactHashes>sublight:9b52a2dd794f64ea8262b67ee0766a88\
-        \ sublight:1d01a67ecc7e2504b122c02a2e1ae0f2</exactHashes></subtitle><subtitle><id>2474960</id><pid>0MMl</pid><title>Game\
-        \ of Thrones</title><year>2011</year><movieId>mLUG</movieId><url>http://www.podnapisi.net/subtitles/en-game-of-thrones-2011-S03E10/0MMl</url><uploaderId>44181</uploaderId><uploaderName>grzesiek11</uploaderName><release>Game.of.Thrones.S03E10.HDTV.x264-EVOLVE</release><languageId>2</languageId><languageName>English</languageName><language>en</language><time>1370840356</time><tvSeason>3</tvSeason><tvEpisode>10</tvEpisode><tvSpecial>0</tvSpecial><cds\
-        \ /><format>N/A</format><fps>N/A</fps><rating>0.0</rating><flags>n</flags><new_flags><flag>hearing_impaired</flag></new_flags><downloads>13015</downloads><exactHashes>sublight:33850fc19e55ce536f5a436f90eea557\
-        \ sublight:cea810fe8295c80c43308873d2bde5e9</exactHashes></subtitle><subtitle><id>2474959</id><pid>z8Ml</pid><title>Game\
-        \ of Thrones</title><year>2011</year><movieId>mLUG</movieId><url>http://www.podnapisi.net/subtitles/en-game-of-thrones-2011-S03E10/z8Ml</url><uploaderId>44181</uploaderId><uploaderName>grzesiek11</uploaderName><release>Game.of.Thrones.S03E10.HDTV.x264-EVOLVE</release><languageId>2</languageId><languageName>English</languageName><language>en</language><time>1370840316</time><tvSeason>3</tvSeason><tvEpisode>10</tvEpisode><tvSpecial>0</tvSpecial><cds\
-        \ /><format>N/A</format><fps>N/A</fps><rating>1.0</rating><flags /><new_flags\
-        \ /><downloads>27639</downloads><exactHashes>sublight:abb28aefd1ca56458901371447fec372</exactHashes></subtitle></results>"}
+    body: {string: !!python/unicode "<html>\r\n<head><title>301 Moved Permanently</title></head>\r\
+        \n<body bgcolor=\"white\">\r\n<center><h1>301 Moved Permanently</h1></center>\r\
+        \n<hr><center>nginx/1.8.0</center>\r\n</body>\r\n</html>\r\n"}
     headers:
       connection: [keep-alive]
-      content-length: ['9838']
-      content-type: [text/xml;charset=utf-8]
-      date: ['Thu, 29 Oct 2015 22:52:16 GMT']
+      content-length: ['184']
+      content-type: [text/html]
+      date: ['Tue, 09 Feb 2016 16:16:41 GMT']
+      location: ['https://www.podnapisi.net/subtitles/search/old?sK=Game+of+Thrones&sTE=10&sXML=1&sTS=3&sL=en']
       server: [nginx/1.8.0]
+    status: {code: 301, message: Moved Permanently}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [Subliminal/2.0]
+    method: GET
+    uri: https://www.podnapisi.net/subtitles/search/old?sK=Game+of+Thrones&sTE=10&sXML=1&sTS=3&sL=en
+  response:
+    body:
+      string: !!binary |
+        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
+    headers:
+      connection: [keep-alive]
+      content-encoding: [gzip]
+      content-type: [text/xml;charset=utf-8]
+      date: ['Tue, 09 Feb 2016 16:16:41 GMT']
+      server: [nginx/1.8.0]
+      vary: [Accept-Encoding]
     status: {code: 200, message: OK}
 version: 1

@@ -1,0 +1,34 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.9.1]
+    method: GET
+    uri: http://www.omdbapi.com/?r=json&v=1&i=tt9999999&tomatoes=False&plot=short
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA6tWCkotLsjPK05VslJyS8wpTlXSUXItKsovUrKC0ArpqSUlmXnpCimJJYl6SrUA
+        JMuAmDIAAAA=
+    headers:
+      access-control-allow-origin: ['*']
+      cache-control: ['public, max-age=14400']
+      cf-cache-status: [MISS]
+      cf-ray: [2712a7e2713308fc-CDG]
+      connection: [keep-alive]
+      content-encoding: [gzip]
+      content-type: [application/json; charset=utf-8]
+      date: ['Sun, 07 Feb 2016 22:50:49 GMT']
+      expires: ['Mon, 08 Feb 2016 02:50:49 GMT']
+      last-modified: ['Sun, 07 Feb 2016 22:52:07 GMT']
+      server: [cloudflare-nginx]
+      set-cookie: ['__cfduid=d932bd77c5d557723a3c2cb08bc7808a51454885448; expires=Mon,
+          06-Feb-17 22:50:48 GMT; path=/; domain=.omdbapi.com; HttpOnly']
+      vary: [Accept-Encoding]
+      x-aspnet-version: [4.0.30319]
+      x-powered-by: [ASP.NET]
+    status: {code: 200, message: OK}
+version: 1

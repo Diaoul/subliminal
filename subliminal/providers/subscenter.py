@@ -6,14 +6,15 @@ import logging
 import zipfile
 
 from babelfish import Language
-from guessit import guess_episode_info, guess_movie_info
+from guessit import guessit
 from requests import Session
 
-from . import ParserBeautifulSoup, Provider, get_version
-from .. import __version__
+from . import ParserBeautifulSoup, Provider
+from .. import __short_version__
 from ..cache import SHOW_EXPIRATION_TIME, region
 from ..exceptions import AuthenticationError, ConfigurationError, ProviderError
-from ..subtitle import Subtitle, fix_line_ending, guess_matches, sanitized_string_equal
+from ..subtitle import Subtitle, fix_line_ending, guess_matches
+from ..utils import sanitize
 from ..video import Episode, Movie
 
 logger = logging.getLogger(__name__)
@@ -38,13 +39,13 @@ class SubsCenterSubtitle(Subtitle):
     def id(self):
         return str(self.subtitle_id)
 
-    def get_matches(self, video, hearing_impaired=False):
-        matches = super(SubsCenterSubtitle, self).get_matches(video, hearing_impaired=hearing_impaired)
+    def get_matches(self, video):
+        matches = set()
 
         # episode
         if isinstance(video, Episode):
             # series
-            if video.series and sanitized_string_equal(self.series, video.series):
+            if video.series and sanitize(self.series) == sanitize(video.series):
                 matches.add('series')
             # season
             if video.season and self.season == video.season:
@@ -54,15 +55,15 @@ class SubsCenterSubtitle(Subtitle):
                 matches.add('episode')
             # guess
             for release in self.releases:
-                matches |= guess_matches(video, guess_episode_info(release + '.mkv'))
+                matches |= guess_matches(video, guessit(release, {'type': 'episode'}))
         # movie
         elif isinstance(video, Movie):
             # guess
             for release in self.releases:
-                matches |= guess_matches(video, guess_movie_info(release + '.mkv'))
+                matches |= guess_matches(video, guessit(release, {'type': 'movie'}))
 
         # title
-        if video.title and sanitized_string_equal(self.title, video.title):
+        if video.title and sanitize(self.title) == sanitize(video.title):
             matches.add('title')
 
         return matches
@@ -82,7 +83,7 @@ class SubsCenterProvider(Provider):
 
     def initialize(self):
         self.session = Session()
-        self.session.headers = {'User-Agent': 'Subliminal/%s' % get_version(__version__)}
+        self.session.headers['User-Agent'] = 'Subliminal/%s' % __short_version__
 
         # login
         if self.username is not None and self.password is not None:

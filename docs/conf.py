@@ -29,6 +29,9 @@ import subliminal
 # If your documentation needs a minimal Sphinx version, state it here.
 #needs_sphinx = '1.0'
 
+# If true, Sphinx will warn about all references where the target cannot be found.
+nitpicky = True
+
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
@@ -36,6 +39,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.intersphinx',
     'sphinx.ext.viewcode',
+    'sphinxcontrib.programoutput',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -299,7 +303,7 @@ texinfo_documents = [
 
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {
-    'python': ('http://docs.python.org/3.4', None),
+    'python': ('http://docs.python.org/3.5', None),
     'guessit': ('http://guessit.readthedocs.org/en/latest', None),
     'babelfish': ('http://babelfish.readthedocs.org/en/latest', None),
     'dogpilecache': ('http://dogpilecache.readthedocs.org/en/latest', None),

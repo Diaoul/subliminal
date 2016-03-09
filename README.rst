@@ -58,7 +58,7 @@ Download best subtitles in French and English for videos less than two weeks old
     region.configure('dogpile.cache.dbm', arguments={'filename': 'cachefile.dbm'})
 
     # scan for videos newer than 2 weeks and their existing subtitles in a folder
-    videos = [v for v in scan_videos('/video/folder') if v.age < timedelta(weeks=2)]
+    videos = scan_videos('/video/folder', age=timedelta(weeks=2))
 
     # download best subtitles
     subtitles = download_best_subtitles(videos, {Language('eng'), Language('fra')})
@@ -68,32 +68,15 @@ Download best subtitles in French and English for videos less than two weeks old
         save_subtitles(v, subtitles[v])
 
 
-Nautilus integration
---------------------
-Screenshots
-^^^^^^^^^^^
-.. image:: http://i.imgur.com/NCwELpB.png
-   :alt: Menu
+Installation
+------------
+Subliminal can be installed as a regular python module by running::
 
-.. image:: http://i.imgur.com/Y58ky88.png
-   :alt: Configuration
+   $ [sudo] pip install subliminal
 
-.. image:: http://i.imgur.com/qem3DGj.png
-   :alt: Choose subtitles
+For a better isolation with your system you should use a dedicated virtualenv or install for your user only using
+the ``--user`` flag.
 
-Install
-^^^^^^^
-1. Install subliminal on your system
-   ``sudo pip install -U subliminal``
-2. Install nautilus-python with your package manager
-   ``sudo apt-get install nautilus-python``
-3. Create the extension directory
-   ``mkdir -p ~/.local/share/nautilus-python/extensions/subliminal``
-4. Copy the script
-   ``cp examples/nautilus.py ~/.local/share/nautilus-python/extensions/subliminal-nautilus.py``
-5. Copy UI files
-   ``cp -R examples/ui ~/.local/share/nautilus-python/extensions/subliminal/``
-6. (Optional) Create a translation directory for your language
-   ``mkdir -p ~/.local/share/nautilus-python/extensions/subliminal/locale/fr/LC_MESSAGES``
-7. (Optional) Install the translation
-   ``msgfmt examples/i18n/fr.po -o ~/.local/share/nautilus-python/extensions/subliminal/locale/fr/LC_MESSAGES/subliminal.mo``
+Nautilus/Nemo integration
+-------------------------
+See the dedicated `project page <https://github.com/Diaoul/nautilus-subliminal>`_ for more information.

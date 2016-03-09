@@ -1,6 +1,11 @@
 Changelog
 ---------
 
+1.2
+^^^
+**release date:** *not released*
+
+
 1.1.1
 ^^^^^
 **release date:** 2016-01-03

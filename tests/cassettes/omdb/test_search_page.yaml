@@ -1,0 +1,36 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.9.1]
+    method: GET
+    uri: http://www.omdbapi.com/?r=json&v=1&s=Man+of+Steel&page=3
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA4XPTQuCQBgE4L+yzMXLQqkZ6q3oUFAR6iWiw6ZvuaCuuGsQ4n+P7dLHpdOcZh5m
+        QEqiy0vEpwGZNBUhRlYSS1Ujc7YVTaFz0RJTV+bsRGMzNUSVA44jiQ4xvKnrg0PWxWWzQgxjAt/1
+        /HAGjuzR2sVa3SWB46C0IdvZTxYY+ZtcytuaRME+iS8h+BXmURCF/4Qzh1FGVAnpvjLaTnngSEi3
+        qtGvr11PGJ8NME4qBwEAAA==
+    headers:
+      access-control-allow-origin: ['*']
+      cache-control: ['public, max-age=14400']
+      cf-cache-status: [HIT]
+      cf-ray: [27129d0beb771055-CDG]
+      connection: [keep-alive]
+      content-encoding: [gzip]
+      content-type: [application/json; charset=utf-8]
+      date: ['Sun, 07 Feb 2016 22:43:24 GMT']
+      expires: ['Mon, 08 Feb 2016 02:43:24 GMT']
+      last-modified: ['Sun, 07 Feb 2016 22:44:12 GMT']
+      server: [cloudflare-nginx]
+      set-cookie: ['__cfduid=d0a7bfd8d0c5873d27f85d87a7ca452b01454885004; expires=Mon,
+          06-Feb-17 22:43:24 GMT; path=/; domain=.omdbapi.com; HttpOnly']
+      vary: [Accept-Encoding]
+      x-aspnet-version: [4.0.30319]
+      x-powered-by: [ASP.NET]
+    status: {code: 200, message: OK}
+version: 1

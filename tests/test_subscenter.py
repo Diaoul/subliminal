@@ -22,7 +22,7 @@ def test_get_matches_movie(movies):
     subtitle = SubsCenterSubtitle(Language('heb'), False, None, None, None, None, 'Ender\'s Game', 266898,
                                   '54adce017db2e7fd8501b7a321451b64', 389, releases)
     matches = subtitle.get_matches(movies['enders_game'])
-    assert matches == {'title', 'year', 'resolution', 'video_codec', 'hearing_impaired'}
+    assert matches == {'title', 'year', 'resolution', 'video_codec'}
 
 
 def test_get_matches_episode(episodes):
@@ -30,14 +30,14 @@ def test_get_matches_episode(episodes):
     subtitle = SubsCenterSubtitle(Language('heb'), False, None, 'Game of Thrones', 3, 10, 'Mhysa', 263129,
                                   '6a3129e8b9effdb8231aa6b3caf66fbe', 6706, releases)
     matches = subtitle.get_matches(episodes['got_s03e10'])
-    assert matches == {'series', 'episode', 'season', 'title', 'year', 'video_codec', 'hearing_impaired'}
+    assert matches == {'series', 'episode', 'season', 'title', 'year', 'video_codec'}
 
 
 def test_get_matches_no_match(movies):
     releases = ['Game.of.Thrones.S03E10.HDTV.EVOLVE']
     subtitle = SubsCenterSubtitle(Language('heb'), False, None, 'Game of Thrones', 3, 10, 'Mhysa', 263129,
                                   '6a3129e8b9effdb8231aa6b3caf66fbe', 6706, releases)
-    matches = subtitle.get_matches(movies['man_of_steel'], hearing_impaired=True)
+    matches = subtitle.get_matches(movies['man_of_steel'])
     assert matches == set()
 
 

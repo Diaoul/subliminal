@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from babelfish import LanguageReverseConverter
-from subliminal.exceptions import ConfigurationError
+
+from ..exceptions import ConfigurationError
 
 
 class TheSubDBConverter(LanguageReverseConverter):

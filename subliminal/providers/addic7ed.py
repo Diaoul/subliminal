@@ -2,20 +2,23 @@
 import logging
 import re
 
-from babelfish import Language
+from babelfish import Language, language_converters
+from guessit import guessit
 from requests import Session
 
-from . import ParserBeautifulSoup, Provider, get_version
-from .. import __version__
+from . import ParserBeautifulSoup, Provider
+from .. import __short_version__
 from ..cache import SHOW_EXPIRATION_TIME, region
 from ..exceptions import AuthenticationError, ConfigurationError, DownloadLimitExceeded, TooManyRequests
-from ..subtitle import (Subtitle, fix_line_ending, guess_matches, guess_properties, sanitize_string,
-                        sanitized_string_equal)
+from ..subtitle import Subtitle, fix_line_ending, guess_matches
+from ..utils import sanitize
 from ..video import Episode
 
 logger = logging.getLogger(__name__)
 
-series_year_re = re.compile('^(?P<series>[ \w\'.:]+)(?: \((?P<year>\d{4})\))?$')
+language_converters.register('addic7ed = subliminal.converters.addic7ed:Addic7edConverter')
+
+series_year_re = re.compile('^(?P<series>[ \w\'.:-]+)(?: \((?P<year>\d{4})\))?$')
 
 
 class Addic7edSubtitle(Subtitle):
@@ -36,11 +39,11 @@ class Addic7edSubtitle(Subtitle):
     def id(self):
         return self.download_link
 
-    def get_matches(self, video, hearing_impaired=False):
-        matches = super(Addic7edSubtitle, self).get_matches(video, hearing_impaired=hearing_impaired)
+    def get_matches(self, video):
+        matches = set()
 
         # series
-        if video.series and sanitized_string_equal(self.series, video.series):
+        if video.series and sanitize(self.series) == sanitize(video.series):
             matches.add('series')
         # season
         if video.season and self.season == video.season:
@@ -49,10 +52,10 @@ class Addic7edSubtitle(Subtitle):
         if video.episode and self.episode == video.episode:
             matches.add('episode')
         # title
-        if video.title and sanitized_string_equal(self.title, video.title):
+        if video.title and sanitize(self.title) == sanitize(video.title):
             matches.add('title')
         # year
-        if video.year == self.year:
+        if video.original_series and self.year is None or video.year and video.year == self.year:
             matches.add('year')
         # release_group
         if video.release_group and self.version and video.release_group.lower() in self.version.lower():
@@ -64,7 +67,7 @@ class Addic7edSubtitle(Subtitle):
         if video.format and self.version and video.format.lower() in self.version.lower():
             matches.add('format')
         # other properties
-        matches |= guess_matches(video, guess_properties(self.version), partial=True)
+        matches |= guess_matches(video, guessit(self.version), partial=True)
 
         return matches
 
@@ -88,7 +91,7 @@ class Addic7edProvider(Provider):
 
     def initialize(self):
         self.session = Session()
-        self.session.headers = {'User-Agent': 'Subliminal/%s' % get_version(__version__)}
+        self.session.headers['User-Agent'] = 'Subliminal/%s' % __short_version__
 
         # login
         if self.username is not None and self.password is not None:
@@ -130,7 +133,7 @@ class Addic7edProvider(Provider):
         # populate the show ids
         show_ids = {}
         for show in soup.select('td.version > h3 > a[href^="/show/"]'):
-            show_ids[sanitize_string(show.text).lower()] = int(show['href'][6:])
+            show_ids[sanitize(show.text)] = int(show['href'][6:])
         logger.debug('Found %d show ids', len(show_ids))
 
         return show_ids
@@ -146,9 +149,12 @@ class Addic7edProvider(Provider):
         :rtype: int or None
 
         """
+        # addic7ed doesn't support search with quotes
+        series = series.replace('\'', ' ')
+
         # build the params
         series_year = '%s %d' % (series, year) if year is not None else series
-        params = {'search': sanitize_string(series_year, replacement=' '), 'Submit': 'Search'}
+        params = {'search': series_year, 'Submit': 'Search'}
 
         # make the search
         logger.info('Searching show ids with %r', params)
@@ -161,7 +167,7 @@ class Addic7edProvider(Provider):
         if not suggestion:
             logger.warning('Show id not found: no suggestion')
             return None
-        if not sanitized_string_equal(suggestion[0].i.text, series_year):
+        if not sanitize(suggestion[0].i.text.replace('\'', ' ')) == sanitize(series_year):
             logger.warning('Show id not found: suggestion does not match')
             return None
         show_id = int(suggestion[0]['href'][6:])
@@ -183,7 +189,7 @@ class Addic7edProvider(Provider):
         :rtype: int or None
 
         """
-        series_sanitized = sanitize_string(series).lower()
+        series_sanitized = sanitize(series).lower()
         show_ids = self._get_show_ids()
         show_id = None
 

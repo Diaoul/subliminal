@@ -4,8 +4,8 @@ import logging
 from babelfish import Language
 from requests import Session
 
-from . import Provider, get_version
-from .. import __version__
+from . import Provider
+from .. import __short_version__
 from ..subtitle import Subtitle
 
 logger = logging.getLogger(__name__)
@@ -46,8 +46,8 @@ class NapiProjektSubtitle(Subtitle):
     def id(self):
         return self.hash
 
-    def get_matches(self, video, hearing_impaired=False):
-        matches = super(NapiProjektSubtitle, self).get_matches(video, hearing_impaired=hearing_impaired)
+    def get_matches(self, video):
+        matches = set()
 
         # hash
         if 'napiprojekt' in video.hashes and video.hashes['napiprojekt'] == self.hash:
@@ -63,7 +63,7 @@ class NapiProjektProvider(Provider):
 
     def initialize(self):
         self.session = Session()
-        self.session.headers = {'User-Agent': 'Subliminal/%s' % get_version(__version__)}
+        self.session.headers['User-Agent'] = 'Subliminal/%s' % __short_version__
 
     def terminate(self):
         self.session.close()

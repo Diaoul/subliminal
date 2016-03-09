@@ -11,15 +11,15 @@ import logging
 import os
 import re
 
+from appdirs import AppDirs
 from babelfish import Error as BabelfishError, Language
 import click
 from dogpile.cache.backends.file import AbstractFileLock
 from dogpile.core import ReadWriteMutex
 from six.moves import configparser
 
-from subliminal import (Episode, Movie, ProviderPool, Video, __version__, check_video, provider_manager, region,
-                        save_subtitles, scan_video, scan_videos)
-from subliminal.subtitle import compute_score
+from subliminal import (AsyncProviderPool, Episode, Movie, Video, __version__, check_video, compute_score, get_scores,
+                        provider_manager, region, save_subtitles, scan_video, scan_videos)
 
 logger = logging.getLogger(__name__)
 
@@ -45,7 +45,7 @@ class MutexLock(AbstractFileLock):
 
 
 class Config(object):
-    """A :class:`~configparser.SafeConfigParser` wrapper to store configuration.
+    """A :class:`~configparser.ConfigParser` wrapper to store configuration.
 
     Interaction with the configuration is done with the properties.
 
@@ -195,7 +195,7 @@ AGE = AgeParamType()
 
 PROVIDER = click.Choice(sorted(provider_manager.names()))
 
-app_dir = click.get_app_dir('subliminal')
+dirs = AppDirs('subliminal')
 cache_file = 'subliminal.dbm'
 config_file = 'config.ini'
 
@@ -203,15 +203,16 @@ config_file = 'config.ini'
 @click.group(context_settings={'max_content_width': 100}, epilog='Suggestions and bug reports are greatly appreciated: '
              'https://github.com/Diaoul/subliminal/')
 @click.option('--addic7ed', type=click.STRING, nargs=2, metavar='USERNAME PASSWORD', help='Addic7ed configuration.')
+@click.option('--itasa', type=click.STRING, nargs=2, metavar='USERNAME PASSWORD', help='ItaSA configuration.')
 @click.option('--opensubtitles', type=click.STRING, nargs=2, metavar='USERNAME PASSWORD',
               help='OpenSubtitles configuration.')
 @click.option('--subscenter', type=click.STRING, nargs=2, metavar='USERNAME PASSWORD', help='SubsCenter configuration.')
-@click.option('--cache-dir', type=click.Path(writable=True, resolve_path=True, file_okay=False), default=app_dir,
+@click.option('--cache-dir', type=click.Path(writable=True, file_okay=False), default=dirs.user_cache_dir,
               show_default=True, expose_value=True, help='Path to the cache directory.')
 @click.option('--debug', is_flag=True, help='Print useful information for debugging subliminal and for reporting bugs.')
 @click.version_option(__version__)
 @click.pass_context
-def subliminal(ctx, addic7ed, opensubtitles, subscenter, cache_dir, debug):
+def subliminal(ctx, addic7ed, itasa, opensubtitles, subscenter, cache_dir, debug):
     """Subtitles, faster than your thoughts."""
     # create cache directory
     try:
@@ -227,6 +228,7 @@ def subliminal(ctx, addic7ed, opensubtitles, subscenter, cache_dir, debug):
     # configure logging
     if debug:
         handler = logging.StreamHandler()
+        # TODO: change format to something nicer (use colorlogs + funcName)
         handler.setFormatter(logging.Formatter(logging.BASIC_FORMAT))
         logging.getLogger('subliminal').addHandler(handler)
         logging.getLogger('subliminal').setLevel(logging.DEBUG)
@@ -235,6 +237,8 @@ def subliminal(ctx, addic7ed, opensubtitles, subscenter, cache_dir, debug):
     ctx.obj = {'provider_configs': {}}
     if addic7ed:
         ctx.obj['provider_configs']['addic7ed'] = {'username': addic7ed[0], 'password': addic7ed[1]}
+    if itasa:
+        ctx.obj['provider_configs']['itasa'] = {'username': itasa[0], 'password': itasa[1]}
     if opensubtitles:
         ctx.obj['provider_configs']['opensubtitles'] = {'username': opensubtitles[0], 'password': opensubtitles[1]}
     if subscenter:
@@ -269,11 +273,12 @@ def cache(ctx, clear_subliminal):
 @click.option('-hi', '--hearing-impaired', is_flag=True, default=False, help='Prefer hearing impaired subtitles.')
 @click.option('-m', '--min-score', type=click.IntRange(0, 100), default=0, help='Minimum score for a subtitle '
               'to be downloaded (0 to 100).')
+@click.option('-w', '--max-workers', type=click.IntRange(1, 50), default=None, help='Maximum number of threads to use.')
 @click.option('-v', '--verbose', count=True, help='Increase verbosity.')
 @click.argument('path', type=click.Path(), required=True, nargs=-1)
 @click.pass_obj
-def download(obj, provider, language, age, directory, encoding, single, force, hearing_impaired, min_score, verbose,
-             path):
+def download(obj, provider, language, age, directory, encoding, single, force, hearing_impaired, min_score, max_workers,
+             verbose, path):
     """Download best subtitles.
 
     PATH can be an directory containing videos, a video file path or a video file name. It can be used multiple times.
@@ -308,7 +313,7 @@ def download(obj, provider, language, age, directory, encoding, single, force, h
             if os.path.isdir(p):
                 try:
                     scanned_videos = scan_videos(p, subtitles=not force, embedded_subtitles=not force,
-                                                 subtitles_dir=directory)
+                                                 subtitles_dir=directory, age=age)
                 except:
                     logger.exception('Unexpected error while collecting directory path %s', p)
                     errored_paths.append(p)
@@ -363,15 +368,17 @@ def download(obj, provider, language, age, directory, encoding, single, force, h
 
     # download best subtitles
     downloaded_subtitles = defaultdict(list)
-    with ProviderPool(providers=provider, provider_configs=obj['provider_configs']) as pool:
+    with AsyncProviderPool(max_workers=max_workers, providers=provider, provider_configs=obj['provider_configs']) as p:
         with click.progressbar(videos, label='Downloading subtitles',
                                item_show_func=lambda v: os.path.split(v.name)[1] if v is not None else '') as bar:
             for v in bar:
-                subtitles = pool.download_best_subtitles(pool.list_subtitles(v, language - v.subtitle_languages),
-                                                         v, language, min_score=v.scores['hash'] * min_score / 100,
-                                                         hearing_impaired=hearing_impaired, only_one=single)
+                scores = get_scores(v)
+                subtitles = p.download_best_subtitles(p.list_subtitles(v, language - v.subtitle_languages),
+                                                      v, language, min_score=scores['hash'] * min_score / 100,
+                                                      hearing_impaired=hearing_impaired, only_one=single)
                 downloaded_subtitles[v] = subtitles
 
+    # TODO: warn about discarded providers
     # save subtitles
     total_subtitles = 0
     for v, subtitles in downloaded_subtitles.items():
@@ -385,23 +392,23 @@ def download(obj, provider, language, age, directory, encoding, single, force, h
 
         if verbose > 1:
             for s in saved_subtitles:
-                matches = s.get_matches(v, hearing_impaired=hearing_impaired)
-                score = compute_score(matches, v)
+                matches = s.get_matches(v)
+                score = compute_score(s, v)
 
                 # score color
                 score_color = None
+                scores = get_scores(v)
                 if isinstance(v, Movie):
-                    if score < v.scores['title']:
+                    if score < scores['title']:
                         score_color = 'red'
-                    elif score < v.scores['title'] + v.scores['year'] + v.scores['release_group']:
+                    elif score < scores['title'] + scores['year'] + scores['release_group']:
                         score_color = 'yellow'
                     else:
                         score_color = 'green'
                 elif isinstance(v, Episode):
-                    if score < v.scores['series'] + v.scores['season'] + v.scores['episode']:
+                    if score < scores['series'] + scores['season'] + scores['episode']:
                         score_color = 'red'
-                    elif score < (v.scores['series'] + v.scores['season'] + v.scores['episode'] +
-                                  v.scores['release_group']):
+                    elif score < scores['series'] + scores['season'] + scores['episode'] + scores['release_group']:
                         score_color = 'yellow'
                     else:
                         score_color = 'green'
@@ -409,16 +416,16 @@ def download(obj, provider, language, age, directory, encoding, single, force, h
                 # scale score from 0 to 100 taking out preferences
                 scaled_score = score
                 if s.hearing_impaired == hearing_impaired:
-                    scaled_score -= v.scores['hearing_impaired']
-                scaled_score *= 100 / v.scores['hash']
+                    scaled_score -= scores['hearing_impaired']
+                scaled_score *= 100 / scores['hash']
 
                 # echo some nice colored output
                 click.echo('  - [{score}] {language} subtitle from {provider_name} (match on {matches})'.format(
-                    score=click.style('{:5.1f}'.format(scaled_score), fg=score_color, bold=score >= v.scores['hash']),
+                    score=click.style('{:5.1f}'.format(scaled_score), fg=score_color, bold=score >= scores['hash']),
                     language=s.language.name if s.language.country is None else '%s (%s)' % (s.language.name,
                                                                                              s.language.country.name),
                     provider_name=s.provider_name,
-                    matches=', '.join(sorted(matches, key=v.scores.get, reverse=True))
+                    matches=', '.join(sorted(matches, key=scores.get, reverse=True))
                 ))
 
     if verbose == 0:

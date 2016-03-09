@@ -1,0 +1,3 @@
+Extensions
+==========
+.. automodule:: subliminal.extensions

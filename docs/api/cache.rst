@@ -2,13 +2,13 @@ Cache
 =====
 .. module:: subliminal.cache
 
-.. autodata:: CACHE_VERSION
-    :annotation:
-
 .. autodata:: SHOW_EXPIRATION_TIME
     :annotation:
 
 .. autodata:: EPISODE_EXPIRATION_TIME
+    :annotation:
+
+.. autodata:: REFINER_EXPIRATION_TIME
     :annotation:
 
 .. data:: region

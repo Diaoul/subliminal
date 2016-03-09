@@ -1,125 +1,209 @@
 # -*- coding: utf-8 -*-
 """
-This module is responsible for calculating the :attr:`~subliminal.video.Video.scores` dicts
-(:attr:`Episode.scores <subliminal.video.Episode.scores>` and :attr:`Movie.scores <subliminal.video.Movie.scores>`)
-by assigning a score to a match.
+This module provides the default implementation of the `compute_score` parameter in
+:meth:`~subliminal.core.ProviderPool.download_best_subtitles` and :func:`~subliminal.core.download_best_subtitles`.
 
 .. note::
 
     To avoid unnecessary dependency on `sympy <http://www.sympy.org/>`_ and boost subliminal's import time, the
-    resulting scores are hardcoded in their respective classes and manually updated when the set of equations change.
+    resulting scores are hardcoded here and manually updated when the set of equations change.
 
 Available matches:
 
-  * hearing_impaired
-  * format
-  * release_group
-  * resolution
-  * video_codec
-  * audio_codec
-  * imdb_id
   * hash
   * title
   * year
   * series
   * season
   * episode
+  * release_group
+  * format
+  * audio_codec
+  * resolution
+  * hearing_impaired
+  * video_codec
+  * imdb_id
   * tvdb_id
 
-
-The :meth:`Subtitle.get_matches <subliminal.subtitle.Subtitle.get_matches>` method get the matches between the
-:class:`~subliminal.subtitle.Subtitle` and the :class:`~subliminal.video.Video` and
-:func:`~subliminal.subtitle.compute_score` computes the score.
-
 """
-from __future__ import print_function
+from __future__ import division, print_function
+import logging
 
-from sympy import Eq, solve, symbols
+from .video import Episode, Movie
+
+logger = logging.getLogger(__name__)
 
 
-# Symbols
-hearing_impaired, format, release_group, resolution = symbols('hearing_impaired format release_group resolution')
-video_codec, audio_codec, imdb_id, hash, title, year = symbols('video_codec audio_codec imdb_id hash title year')
-series, season, episode, tvdb_id = symbols('series season episode tvdb_id')
+#: Scores for episodes
+episode_scores = {'hash': 215, 'series': 108, 'year': 54, 'season': 18, 'episode': 18, 'release_group': 9,
+                  'format': 4, 'audio_codec': 2, 'resolution': 1, 'hearing_impaired': 1, 'video_codec': 1}
+
+#: Scores for movies
+movie_scores = {'hash': 71, 'title': 36, 'year': 18, 'release_group': 9,
+                'format': 4, 'audio_codec': 2, 'resolution': 1, 'hearing_impaired': 1, 'video_codec': 1}
+
+
+def get_scores(video):
+    """Get the scores dict for the given `video`.
+
+    This will return either :data:`episode_scores` or :data:`movie_scores` based on the type of the `video`.
+
+    :param video: the video to compute the score against.
+    :type video: :class:`~subliminal.video.Video`
+    :return: the scores dict.
+    :rtype: dict
+
+    """
+    if isinstance(video, Episode):
+        return episode_scores
+    elif isinstance(video, Movie):
+        return movie_scores
+
+    raise ValueError('video must be an instance of Episode or Movie')
+
+
+def compute_score(subtitle, video, hearing_impaired=None):
+    """Compute the score of the `subtitle` against the `video` with `hearing_impaired` preference.
+
+    :func:`compute_score` uses the :meth:`Subtitle.get_matches <subliminal.subtitle.Subtitle.get_matches>` method and
+    applies the scores (either from :data:`episode_scores` or :data:`movie_scores`) after some processing.
+
+    :param subtitle: the subtitle to compute the score of.
+    :type subtitle: :class:`~subliminal.subtitle.Subtitle`
+    :param video: the video to compute the score against.
+    :type video: :class:`~subliminal.video.Video`
+    :param bool hearing_impaired: hearing impaired preference.
+    :return: score of the subtitle.
+    :rtype: int
+
+    """
+    logger.info('Computing score of %r for video %r with %r', subtitle, video, dict(hearing_impaired=hearing_impaired))
+
+    # get the scores dict
+    scores = get_scores(video)
+    logger.debug('Using scores %r', scores)
+
+    # get the matches
+    matches = subtitle.get_matches(video)
+    logger.debug('Found matches %r', matches)
+
+    # on hash match, discard everything else
+    if 'hash' in matches:
+        logger.debug('Keeping only hash match')
+        matches &= {'hash'}
+
+    # handle equivalent matches
+    if isinstance(video, Episode):
+        if 'title' in matches:
+            logger.debug('Adding title match equivalent')
+            matches.add('episode')
+        if 'imdb_id' in matches:
+            logger.debug('Adding imdb_id match equivalents')
+            matches |= {'series', 'year', 'season', 'episode'}
+        if 'tvdb_id' in matches:
+            logger.debug('Adding tvdb_id match equivalents')
+            matches |= {'series', 'year'}
+    elif isinstance(video, Movie):
+        if 'imdb_id' in matches:
+            logger.debug('Adding imdb_id match equivalents')
+            matches |= {'title', 'year'}
+
+    # handle hearing impaired
+    if hearing_impaired is not None and subtitle.hearing_impaired == hearing_impaired:
+        logger.debug('Matched hearing_impaired')
+        matches.add('hearing_impaired')
+
+    # compute the score
+    score = sum((scores.get(match, 0) for match in matches))
+    logger.info('Computed score %r with final matches %r', score, matches)
+
+    # ensure score is within valid bounds
+    assert 0 <= score <= scores['hash'] + scores['hearing_impaired']
+
+    return score
 
 
 def solve_episode_equations():
-    """Solve the score equations for an :class:`~subliminal.video.Episode`.
+    from sympy import Eq, solve, symbols
 
-    The equations are the following:
+    hash, series, year, season, episode, release_group = symbols('hash series year season episode release_group')
+    format, audio_codec, resolution, video_codec = symbols('format audio_codec resolution video_codec')
+    hearing_impaired = symbols('hearing_impaired')
 
-    1. hash = resolution + format + video_codec + audio_codec + series + season + episode + year + release_group
-    2. series = resolution + video_codec + audio_codec + season + episode + release_group + 1
-    3. year = series
-    4. tvdb_id = series + year
-    5. season = resolution + video_codec + audio_codec + 1
-    6. imdb_id = series + season + episode + year
-    7. format = video_codec + audio_codec
-    8. resolution = video_codec
-    9. video_codec = 2 * audio_codec
-    10. title = season + episode
-    11. season = episode
-    12. release_group = season
-    13. audio_codec = 2 * hearing_impaired
-    14. hearing_impaired = 1
-
-    :return: the result of the equations.
-    :rtype: dict
-
-    """
     equations = [
-        Eq(hash, resolution + format + video_codec + audio_codec + series + season + episode + year + release_group),
-        Eq(series, resolution + video_codec + audio_codec + season + episode + release_group + 1),
-        Eq(year, series),
-        Eq(tvdb_id, series + year),
-        Eq(season, resolution + video_codec + audio_codec + 1),
-        Eq(imdb_id, series + season + episode + year),
-        Eq(format, video_codec + audio_codec),
-        Eq(resolution, video_codec),
-        Eq(video_codec, 2 * audio_codec),
-        Eq(title, season + episode),
-        Eq(season, episode),
-        Eq(release_group, season),
-        Eq(audio_codec, 2 * hearing_impaired),
-        Eq(hearing_impaired, 1)
+        # hash is best
+        Eq(hash, series + year + season + episode + release_group + format + audio_codec + resolution + video_codec),
+
+        # series counts for the most part in the total score
+        Eq(series, year + season + episode + release_group + format + audio_codec + resolution + video_codec + 1),
+
+        # year is the second most important part
+        Eq(year, season + episode + release_group + format + audio_codec + resolution + video_codec + 1),
+
+        # season is important too
+        Eq(season, release_group + format + audio_codec + resolution + video_codec + 1),
+
+        # episode is equally important to season
+        Eq(episode, season),
+
+        # release group is the next most wanted match
+        Eq(release_group, format + audio_codec + resolution + video_codec + 1),
+
+        # format counts as much as audio_codec, resolution and video_codec
+        Eq(format, audio_codec + resolution + video_codec),
+
+        # audio_codec is more valuable than video_codec
+        Eq(audio_codec, video_codec + 1),
+
+        # resolution counts as much as video_codec
+        Eq(resolution,  video_codec),
+
+        # hearing impaired is as much as resolution
+        Eq(hearing_impaired, resolution),
+
+        # video_codec is the least valuable match
+        Eq(video_codec,  1),
     ]
 
-    return solve(equations, [hearing_impaired, format, release_group, resolution, video_codec, audio_codec, imdb_id,
-                             hash, series, season, episode, title, year, tvdb_id])
+    return solve(equations, [hash, series, year, season, episode, release_group, format, audio_codec, resolution,
+                             hearing_impaired, video_codec])
 
 
 def solve_movie_equations():
-    """Solve the score equations for a :class:`~subliminal.video.Movie`.
+    from sympy import Eq, solve, symbols
 
-    The equations are the following:
+    hash, title, year, release_group = symbols('hash title year release_group')
+    format, audio_codec, resolution, video_codec = symbols('format audio_codec resolution video_codec')
+    hearing_impaired = symbols('hearing_impaired')
 
-    1. hash = resolution + format + video_codec + audio_codec + title + year + release_group
-    2. imdb_id = hash
-    3. resolution = video_codec
-    4. video_codec = 2 * audio_codec
-    5. format = video_codec + audio_codec
-    6. title = resolution + video_codec + audio_codec + year + 1
-    7. release_group = resolution + video_codec + audio_codec + 1
-    8. year = release_group + 1
-    9. audio_codec = 2 * hearing_impaired
-    10. hearing_impaired = 1
-
-    :return: the result of the equations.
-    :rtype: dict
-
-    """
     equations = [
-        Eq(hash, resolution + format + video_codec + audio_codec + title + year + release_group),
-        Eq(imdb_id, hash),
-        Eq(resolution, video_codec),
-        Eq(video_codec, 2 * audio_codec),
-        Eq(format, video_codec + audio_codec),
-        Eq(title, resolution + video_codec + audio_codec + year + 1),
-        Eq(release_group, resolution + video_codec + audio_codec + 1),
-        Eq(year, release_group + 1),
-        Eq(audio_codec, 2 * hearing_impaired),
-        Eq(hearing_impaired, 1)
+        # hash is best
+        Eq(hash, title + year + release_group + format + audio_codec + resolution + video_codec),
+
+        # title counts for the most part in the total score
+        Eq(title, year + release_group + format + audio_codec + resolution + video_codec + 1),
+
+        # year is the second most important part
+        Eq(year, release_group + format + audio_codec + resolution + video_codec + 1),
+
+        # release group is the next most wanted match
+        Eq(release_group, format + audio_codec + resolution + video_codec + 1),
+
+        # format counts as much as audio_codec, resolution and video_codec
+        Eq(format, audio_codec + resolution + video_codec),
+
+        # audio_codec is more valuable than video_codec
+        Eq(audio_codec, video_codec + 1),
+
+        # resolution counts as much as video_codec
+        Eq(resolution,  video_codec),
+
+        # hearing impaired is as much as resolution
+        Eq(hearing_impaired, resolution),
+
+        # video_codec is the least valuable match
+        Eq(video_codec,  1),
     ]
 
-    return solve(equations, [hearing_impaired, format, release_group, resolution, video_codec, audio_codec, imdb_id,
-                             hash, title, year])
+    return solve(equations, [hash, title, year, release_group, format, audio_codec, resolution, hearing_impaired,
+                             video_codec])

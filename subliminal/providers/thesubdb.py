@@ -4,12 +4,13 @@ import logging
 from babelfish import Language, language_converters
 from requests import Session
 
-from . import Provider, get_version
-from .. import __version__
+from . import Provider
+from .. import __short_version__
 from ..subtitle import Subtitle, fix_line_ending
 
-
 logger = logging.getLogger(__name__)
+
+language_converters.register('thesubdb = subliminal.converters.thesubdb:TheSubDBConverter')
 
 
 class TheSubDBSubtitle(Subtitle):
@@ -23,8 +24,8 @@ class TheSubDBSubtitle(Subtitle):
     def id(self):
         return self.hash + '-' + str(self.language)
 
-    def get_matches(self, video, hearing_impaired=False):
-        matches = super(TheSubDBSubtitle, self).get_matches(video, hearing_impaired=hearing_impaired)
+    def get_matches(self, video):
+        matches = set()
 
         # hash
         if 'thesubdb' in video.hashes and video.hashes['thesubdb'] == self.hash:
@@ -40,8 +41,8 @@ class TheSubDBProvider(Provider):
 
     def initialize(self):
         self.session = Session()
-        self.session.headers = {'User-Agent': 'SubDB/1.0 (subliminal/%s; https://github.com/Diaoul/subliminal)' %
-                                get_version(__version__)}
+        self.session.headers['User-Agent'] = ('SubDB/1.0 (subliminal/%s; https://github.com/Diaoul/subliminal)' %
+                                              __short_version__)
 
     def terminate(self):
         self.session.close()

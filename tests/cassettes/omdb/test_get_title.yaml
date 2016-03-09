@@ -1,0 +1,43 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.9.1]
+    method: GET
+    uri: http://www.omdbapi.com/?r=json&v=1&plot=short&t=Man+of+Steel&tomatoes=False
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA22TS0/cMBDHv8poDhWVzD6ALSgnll2gPAKULBS4oNlkSMw645XtZBuqfvfKgaqH
+        9hDJ8/PkP0//xIUOhjHBlATsC2SB2aDCRyaHCe6Mxruo8JYCF5jgzen2u82GyfdovAfnjcAfx0aC
+        rrnnu1BrQYWnLC6SaR60FQXTomUJjWMFJySBfIcK59pxHmyM+UT5CjLpCnao8LvTgSOeU6sLyAZw
+        ajt2sOVzxyxrQ91nBf9cBusin1VO+2DXFTu4sobk79U5O9dBprlkA1tZs2ZXk0DuOBYLy97HMmRV
+        40PU/J8LqliWdR4T/MriOphRq41RMK07mBZUewWpzitiA1lFIrEDc03CcEnCqPDG2IAJzgy5FVyw
+        BAVWOM4iVAyGfIhnEuAfQUvZaF9xAY5yhkL7aHMB5KNHI45rcitaGoaqqUkUaA8v1uVcQLDguGUy
+        UGkPumAJOnSwqVjgmFyooq+Wloq+tihIru5idN+4VrfWedhUFkLVN0Ci4tJpKftM14aEQ2TRinwV
+        fy3YB9f0ox+gwkuSsqEy7sOxlEb7ChXObCPBdZjgXTZVMCOhghTcXcT2bsgVsb37sNHi4RPs7YDY
+        WgtFTR9Fb6x/35EqhHUyHGoa1Fxo2tZ1sRzkth7qmkr2w3SY3k+O0tezyfXi8e3q9WyUmslR/EiO
+        5GF1Ep4W+SZ9S8dX8+n4+tvh4eD5fvycPeyORoPXdYkKUw7kc9tv9GSCCmOMW4qjiUkOdj7QvQ0c
+        056MxurLzsEHPZtjgiGM9vdHBz1cdOuoVNtWc/+w/NqKj2jhGsZfvwHJgDZBoQMAAA==
+    headers:
+      access-control-allow-origin: ['*']
+      cache-control: ['public, max-age=14400']
+      cf-cache-status: [MISS]
+      cf-ray: [2712a47871c53bcf-CDG]
+      connection: [keep-alive]
+      content-encoding: [gzip]
+      content-type: [application/json; charset=utf-8]
+      date: ['Sun, 07 Feb 2016 22:48:29 GMT']
+      expires: ['Mon, 08 Feb 2016 02:48:29 GMT']
+      last-modified: ['Sun, 07 Feb 2016 22:49:48 GMT']
+      server: [cloudflare-nginx]
+      set-cookie: ['__cfduid=dedfbbd1b9dc1357d4b37482f352c68fe1454885308; expires=Mon,
+          06-Feb-17 22:48:28 GMT; path=/; domain=.omdbapi.com; HttpOnly']
+      vary: [Accept-Encoding]
+      x-aspnet-version: [4.0.30319]
+      x-powered-by: [ASP.NET]
+    status: {code: 200, message: OK}
+version: 1

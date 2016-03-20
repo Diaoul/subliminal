@@ -19,7 +19,7 @@ from dogpile.core import ReadWriteMutex
 from six.moves import configparser
 
 from subliminal import (AsyncProviderPool, Episode, Movie, Video, __version__, check_video, compute_score, get_scores,
-                        provider_manager, refine, region, save_subtitles, scan_video, scan_videos)
+                        provider_manager, refine, refiner_manager, region, save_subtitles, scan_video, scan_videos)
 from subliminal.core import ARCHIVE_EXTENSIONS, search_external_subtitles
 
 logger = logging.getLogger(__name__)
@@ -196,6 +196,8 @@ AGE = AgeParamType()
 
 PROVIDER = click.Choice(sorted(provider_manager.names()))
 
+REFINER = click.Choice(sorted(refiner_manager.names()))
+
 dirs = AppDirs('subliminal')
 cache_file = 'subliminal.dbm'
 config_file = 'config.ini'
@@ -228,7 +230,6 @@ def subliminal(ctx, addic7ed, opensubtitles, subscenter, cache_dir, debug):
     # configure logging
     if debug:
         handler = logging.StreamHandler()
-        # TODO: change format to something nicer (use colorlogs + funcName)
         handler.setFormatter(logging.Formatter(logging.BASIC_FORMAT))
         logging.getLogger('subliminal').addHandler(handler)
         logging.getLogger('subliminal').setLevel(logging.DEBUG)
@@ -260,6 +261,7 @@ def cache(ctx, clear_subliminal):
 @click.option('-l', '--language', type=LANGUAGE, required=True, multiple=True, help='Language as IETF code, '
               'e.g. en, pt-BR (can be used multiple times).')
 @click.option('-p', '--provider', type=PROVIDER, multiple=True, help='Provider to use (can be used multiple times).')
+@click.option('-r', '--refiner', type=REFINER, multiple=True, help='Refiner to use (can be used multiple times).')
 @click.option('-a', '--age', type=AGE, help='Filter videos newer than AGE, e.g. 12h, 1w2d.')
 @click.option('-d', '--directory', type=click.STRING, metavar='DIR', help='Directory where to save subtitles, '
               'default is next to the video file.')
@@ -277,8 +279,8 @@ def cache(ctx, clear_subliminal):
 @click.option('-v', '--verbose', count=True, help='Increase verbosity.')
 @click.argument('path', type=click.Path(), required=True, nargs=-1)
 @click.pass_obj
-def download(obj, provider, language, age, directory, encoding, single, force, hearing_impaired,
-             min_score, max_workers, archives, verbose, path):
+def download(obj, provider, refiner, language, age, directory, encoding, single, force, hearing_impaired, min_score,
+             max_workers, archives, verbose, path):
     """Download best subtitles.
 
     PATH can be an directory containing videos, a video file path or a video file name. It can be used multiple times.
@@ -308,7 +310,7 @@ def download(obj, provider, language, age, directory, encoding, single, force, h
                     continue
                 if not force:
                     video.subtitle_languages |= set(search_external_subtitles(video.name, directory=directory).values())
-                refine(video, embedded_subtitles=not force)
+                refine(video, episode_refiners=refiner, movie_refiners=refiner, embedded_subtitles=not force)
                 videos.append(video)
                 continue
 
@@ -326,7 +328,7 @@ def download(obj, provider, language, age, directory, encoding, single, force, h
                         if not force:
                             video.subtitle_languages |= set(search_external_subtitles(video.name,
                                                                                       directory=directory).values())
-                        refine(video, embedded_subtitles=not force)
+                        refine(video, episode_refiners=refiner, movie_refiners=refiner, embedded_subtitles=not force)
                         videos.append(video)
                     else:
                         ignored_videos.append(video)
@@ -342,7 +344,7 @@ def download(obj, provider, language, age, directory, encoding, single, force, h
             if check_video(video, languages=language, age=age, undefined=single):
                 if not force:
                     video.subtitle_languages |= set(search_external_subtitles(video.name, directory=directory).values())
-                refine(video, embedded_subtitles=not force)
+                refine(video, episode_refiners=refiner, movie_refiners=refiner, embedded_subtitles=not force)
                 videos.append(video)
             else:
                 ignored_videos.append(video)

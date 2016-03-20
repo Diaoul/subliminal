@@ -527,7 +527,7 @@ def refine(video, episode_refiners=None, movie_refiners=None, **kwargs):
     :type video: :class:`~subliminal.video.Video`
     :param tuple episode_refiners: refiners to use for episodes.
     :param tuple movie_refiners: refiners to use for movies.
-    :param \*\*kwargs: parameters for refiners.
+    :param \*\*kwargs: additional parameters for the :func:`~subliminal.refiners.refine` functions.
 
     """
     refiners = ()
@@ -548,14 +548,13 @@ def list_subtitles(videos, languages, pool_class=ProviderPool, **kwargs):
 
     The `videos` must pass the `languages` check of :func:`check_video`.
 
-    All other parameters are passed onwards to the provided `pool_class` constructor.
-
     :param videos: videos to list subtitles for.
     :type videos: set of :class:`~subliminal.video.Video`
     :param languages: languages to search for.
     :type languages: set of :class:`~babelfish.language.Language`
     :param pool_class: class to use as provider pool.
     :type: :class:`ProviderPool`, :class:`AsyncProviderPool` or similar
+    :param \*\*kwargs: additional parameters for the provided `pool_class` constructor.
     :return: found subtitles per video.
     :rtype: dict of :class:`~subliminal.video.Video` to list of :class:`~subliminal.subtitle.Subtitle`
 
@@ -588,12 +587,11 @@ def list_subtitles(videos, languages, pool_class=ProviderPool, **kwargs):
 def download_subtitles(subtitles, pool_class=ProviderPool, **kwargs):
     """Download :attr:`~subliminal.subtitle.Subtitle.content` of `subtitles`.
 
-    All other parameters are passed onwards to the `pool_class` constructor.
-
     :param subtitles: subtitles to download.
     :type subtitles: list of :class:`~subliminal.subtitle.Subtitle`
     :param pool_class: class to use as provider pool.
     :type: :class:`ProviderPool`, :class:`AsyncProviderPool` or similar
+    :param \*\*kwargs: additional parameters for the provided `pool_class` constructor.
 
     """
     with pool_class(**kwargs) as pool:
@@ -608,8 +606,6 @@ def download_best_subtitles(videos, languages, min_score=0, hearing_impaired=Fal
 
     The `videos` must pass the `languages` and `undefined` (`only_one`) checks of :func:`check_video`.
 
-    All other parameters are passed onwards to the `pool_class` constructor.
-
     :param videos: videos to download subtitles for.
     :type videos: set of :class:`~subliminal.video.Video`
     :param languages: languages to download.
@@ -621,6 +617,7 @@ def download_best_subtitles(videos, languages, min_score=0, hearing_impaired=Fal
         `hearing_impaired` as keyword argument and returns the score.
     :param pool_class: class to use as provider pool.
     :type: :class:`ProviderPool`, :class:`AsyncProviderPool` or similar
+    :param \*\*kwargs: additional parameters for the provided `pool_class` constructor.
     :return: downloaded subtitles per video.
     :rtype: dict of :class:`~subliminal.video.Video` to list of :class:`~subliminal.subtitle.Subtitle`
 

@@ -516,7 +516,7 @@ def scan_videos(path, age=None, archives=True, **kwargs):
     return videos
 
 
-def refine(video, episode_refiners=('metadata', 'tvdb', 'omdb'), movie_refiners=('metadata', 'omdb'), **kwargs):
+def refine(video, episode_refiners=None, movie_refiners=None, **kwargs):
     """Refine a video using :ref:`refiners`.
 
     .. note::
@@ -532,9 +532,9 @@ def refine(video, episode_refiners=('metadata', 'tvdb', 'omdb'), movie_refiners=
     """
     refiners = ()
     if isinstance(video, Episode):
-        refiners = episode_refiners or ()
+        refiners = episode_refiners or ('metadata', 'tvdb', 'omdb')
     elif isinstance(video, Movie):
-        refiners = movie_refiners or ()
+        refiners = movie_refiners or ('metadata', 'omdb')
     for refiner in refiners:
         logger.info('Refining video with %s', refiner)
         try:

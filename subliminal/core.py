@@ -440,7 +440,7 @@ def scan_archive(path):
     return video
 
 
-def scan_videos(path, age=None, archives=True, **kwargs):
+def scan_videos(path, age=None, archives=True):
     """Scan `path` for videos and their subtitles.
 
     See :func:`refine` to find additional information for the video.

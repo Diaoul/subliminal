@@ -388,7 +388,10 @@ def download(obj, provider, language, age, directory, encoding, single, force, h
                                                       hearing_impaired=hearing_impaired, only_one=single)
                 downloaded_subtitles[v] = subtitles
 
-    # TODO: warn about discarded providers
+        if p.discarded_providers:
+            click.secho('Some providers have been discarded due to unexpected errors: %s' %
+                        ', '.join(p.discarded_providers), fg='yellow')
+
     # save subtitles
     total_subtitles = 0
     for v, subtitles in downloaded_subtitles.items():

@@ -192,14 +192,25 @@ tvdb_client = TVDBClient('5EC930FB90DA1ADA', headers={'User-Agent': 'Subliminal/
 
 @region.cache_on_arguments(expiration_time=REFINER_EXPIRATION_TIME)
 def search_series(name):
-    """Search series.
+    """Search series and sort the results by likelihood.
+
+     Prefer series with the same name and with continuing status.
 
     :param str name: name of the series.
     :return: the search results.
     :rtype: list
 
     """
-    return tvdb_client.search_series(name)
+    def match(series):
+        key = 0
+        if series['status'] != 'Continuing':
+            key += 1
+        if series['seriesName'] != name:
+            key += 2
+
+        return key
+
+    return sorted(tvdb_client.search_series(name), key=match)
 
 
 @region.cache_on_arguments(expiration_time=REFINER_EXPIRATION_TIME)

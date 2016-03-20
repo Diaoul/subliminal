@@ -66,7 +66,11 @@ def episodes():
             Episode('CSI.Cyber.S02E03.hdtv-lol.mp4', 'CSI: Cyber', 2, 3, format='HDTV', release_group='lol'),
             'the_x_files_s10e02':
             Episode('The.X-Files.S10E02.HDTV.x264-KILLERS.mp4', 'The X-Files', 10, 2, format='HDTV',
-                    release_group='KILLERS', video_codec='h264')}
+                    release_group='KILLERS', video_codec='h264'),
+            'colony_s01e09':
+            Episode('Colony.S01E09.720p.HDTV.x264-KILLERS.mkv', 'Colony', 1, 9, title='Zero Day', year=2016,
+                    tvdb_id=5463229, series_tvdb_id=284210, series_imdb_id='tt4209256', format='HDTV',
+                    release_group='KILLERS', resolution='720p', video_codec='h264', imdb_id='tt4926022')}
 
 
 @pytest.fixture(scope='session')

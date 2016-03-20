@@ -214,3 +214,18 @@ def test_refine(episodes):
     assert episode.series_imdb_id == episodes['bbt_s07e05'].series_imdb_id
     assert episode.tvdb_id == episodes['bbt_s07e05'].tvdb_id
     assert episode.series_tvdb_id == episodes['bbt_s07e05'].series_tvdb_id
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_refine_ambiguous(episodes):
+    episode = Episode(episodes['colony_s01e09'].name.lower(), episodes['colony_s01e09'].series,
+                      episodes['colony_s01e09'].season, episodes['colony_s01e09'].episode)
+    refine(episode)
+    assert episode.series == episodes['colony_s01e09'].series
+    assert episode.year == episodes['colony_s01e09'].year
+    assert episode.title == episodes['colony_s01e09'].title
+    assert episode.imdb_id == episodes['colony_s01e09'].imdb_id
+    assert episode.series_imdb_id == episodes['colony_s01e09'].series_imdb_id
+    assert episode.tvdb_id == episodes['colony_s01e09'].tvdb_id
+    assert episode.series_tvdb_id == episodes['colony_s01e09'].series_tvdb_id

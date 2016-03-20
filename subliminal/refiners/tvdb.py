@@ -258,8 +258,6 @@ def refine(video, **kwargs):
       * :attr:`~subliminal.video.Video.imdb_id`
       * :attr:`~subliminal.video.Episode.tvdb_id`
 
-    :param video: the video to refine.
-
     """
     # only deal with Episode videos
     if not isinstance(video, Episode):

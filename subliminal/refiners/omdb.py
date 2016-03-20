@@ -104,8 +104,6 @@ def refine(video, **kwargs):
       * :attr:`~subliminal.video.Movie.year`
       * :attr:`~subliminal.video.Video.imdb_id`
 
-    :param video: the video to refine.
-
     """
     if isinstance(video, Episode):
         # exit if the information is complete

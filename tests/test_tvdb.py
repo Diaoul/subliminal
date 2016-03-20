@@ -69,7 +69,7 @@ def test_token_needs_refresh(client, monkeypatch):
     assert client.token_needs_refresh
     client.login()
     assert not client.token_needs_refresh
-    time.sleep(0.2)
+    time.sleep(0.5)
     assert client.token_needs_refresh
 
 
@@ -78,7 +78,7 @@ def test_token_needs_refresh(client, monkeypatch):
 def test_refresh_token(client):
     client.login()
     old_token = client.token
-    time.sleep(0.2)
+    time.sleep(0.5)
     client.refresh_token()
     assert client.token != old_token
 

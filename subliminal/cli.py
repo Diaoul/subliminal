@@ -100,7 +100,7 @@ class Config(object):
 
     @refiners.setter
     def refiners(self, value):
-        self.config.set('general', 'refiners', json.dumps(sorted([r.lower() for r in value])))
+        self.config.set('general', 'refiners', json.dumps([r.lower() for r in value]))
 
     @property
     def single(self):

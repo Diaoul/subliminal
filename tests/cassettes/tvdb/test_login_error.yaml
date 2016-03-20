@@ -8,20 +8,20 @@ interactions:
       Connection: [keep-alive]
       Content-Length: ['54']
       Content-Type: [application/json]
-      User-Agent: [python-requests/2.9.1]
+      User-Agent: [Subliminal/2.0]
     method: POST
     uri: https://api-beta.thetvdb.com/login
   response:
     body: {string: !!python/unicode "{\n  \"Error\": \"API Key Required\"\n}"}
     headers:
-      cf-ray: [271ef232a04c1055-CDG]
+      cf-ray: [28686116d0c63bed-CDG]
       connection: [keep-alive]
       content-length: ['33']
       content-type: [application/json]
-      date: ['Tue, 09 Feb 2016 10:38:41 GMT']
+      date: ['Sun, 20 Mar 2016 10:11:18 GMT']
       server: [cloudflare-nginx]
-      set-cookie: ['__cfduid=d2d5df3c8bafc1b1a20f7346140b4a8901455014321; expires=Wed,
-          08-Feb-17 10:38:41 GMT; path=/; domain=.thetvdb.com; HttpOnly']
+      set-cookie: ['__cfduid=deb57db3449c61798712b46c9219963241458468678; expires=Mon,
+          20-Mar-17 10:11:18 GMT; path=/; domain=.thetvdb.com; HttpOnly']
       www-authenticate: [JWT realm=jwt auth]
       x-powered-by: [Thundar!]
       x-thetvdb-api-version: [1.2.0]

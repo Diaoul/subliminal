@@ -7,6 +7,7 @@ import pytest
 import requests
 from vcr import VCR
 
+from subliminal import __short_version__
 from subliminal.video import Episode
 from subliminal.refiners.tvdb import TVDBClient, refine
 
@@ -17,7 +18,7 @@ vcr = VCR(path_transformer=lambda path: path + '.yaml',
 
 @pytest.fixture()
 def client():
-    return TVDBClient('2AE5D1E42E7194B9')
+    return TVDBClient('2AE5D1E42E7194B9', headers={'User-Agent': 'Subliminal/%s' % __short_version__})
 
 
 def test_language():
@@ -45,7 +46,7 @@ def test_headers():
 @pytest.mark.integration
 @vcr.use_cassette
 def test_login_error():
-    client = TVDBClient('1234')
+    client = TVDBClient('1234', headers={'User-Agent': 'Subliminal/%s' % __short_version__})
     with pytest.raises(requests.HTTPError):
         client.login()
 

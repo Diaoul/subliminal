@@ -62,6 +62,7 @@ class Config(object):
         self.config.add_section('general')
         self.config.set('general', 'languages', json.dumps(['en']))
         self.config.set('general', 'providers', json.dumps(sorted([p.name for p in provider_manager])))
+        self.config.set('general', 'refiners', json.dumps(sorted([r.name for r in refiner_manager])))
         self.config.set('general', 'single', str(0))
         self.config.set('general', 'embedded_subtitles', str(1))
         self.config.set('general', 'age', str(int(timedelta(weeks=2).total_seconds())))
@@ -92,6 +93,14 @@ class Config(object):
     @providers.setter
     def providers(self, value):
         self.config.set('general', 'providers', json.dumps(sorted([p.lower() for p in value])))
+
+    @property
+    def refiners(self):
+        return json.loads(self.config.get('general', 'refiners'))
+
+    @refiners.setter
+    def refiners(self, value):
+        self.config.set('general', 'refiners', json.dumps(sorted([r.lower() for r in value])))
 
     @property
     def single(self):

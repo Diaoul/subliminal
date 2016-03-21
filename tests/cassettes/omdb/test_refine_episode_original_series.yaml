@@ -5,37 +5,36 @@ interactions:
       Accept: ['*/*']
       Accept-Encoding: ['gzip, deflate']
       Connection: [keep-alive]
-      User-Agent: [Subliminal/1.2]
+      Cookie: [__cfduid=d5267bf24898b7accbc5c2e18253408e71458596132]
+      User-Agent: [Subliminal/2.0]
     method: GET
     uri: http://www.omdbapi.com/?r=json&v=1&s=dallas&type=series&page=1
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAA62U307iQBjFX6WZ61rmT9uhvbJQTEycVqGo7GZDhjpbBgolnTFAjYnv4Bv6JKa7
-        brJYlDXLRS968eU7v3O+Mw9gIHiZToH//QEkUucC+CDkec4VMMFI8BL4AEOEX56eMUQ2MIFc3E3O
-        Q+ADrRHFhLoQmCDZrupJJUop6snLQmlRz061XvmtluTWQtxJflJPW2mxaMkFz4RqsRa7djps1nOi
-        pLeJwtRhZ06H5U6HLzvL2/mZ/pakazZLUVQF6/jq9NQaX6Px4JZAaM1WGXg0PxaOPNp+eXpGnod2
-        hUNIKYRHEB6HVyQKgy2bBTjaIzwO0zVLWMXehFvjbh+7JrFN7HmmTeB4MEIEj7t9ZEKz7Zn1T3Ax
-        rtEOcRrdYj0ptsroToUoc8HvRKl8g/G5XGaGngojEXzxd4zQfXl6fueE7SHqtI8R4Tlk4RCzZF41
-        I8zWcRhsWP1Vvc8iTKbCCE4upNK+secOUQMAw7btus4xAIY2q4IqrgFQEyCqMhjNDgKEYjKRwggL
-        od4ALMsygozL5U4U9F2VXOp46NOLjFrBziZWKG30cpnJSS7+0S3Upp6L6f+7FYXDbRSOcN3MeE/c
-        bBas47q5B9z6fcmDmyA5fKgUe18y6LLIZSqMm2Ihlkbxc59DsOkQdUn780K83/Onjrw0BlNezndX
-        kMYKgolHiPuVFXUtOkUx/wADN2tBKMG2fYRaJEMcVSPIqnO872mOKrZh1QjGQfNp/mECXWie94W6
-        z7WqtdbUfaFWxVL94irvBXh8BY2iqDeGBgAA
+        H4sIAAAAAAAAA61UzU7iQBx/lWbOtcxH26E9WSgmJk6rUFR2syFDnS0DhZLOGKDGxHfwDX0S0103
+        WSzKmuXQQw///L7nAQwEL9Mp8L8/gETqXAAfhDzPuQImGAleAh9giPDL0zOGyAYmkIu7yXkIfKA1
+        ophQFwITJNtVfalEKUV9eVkoLerbqdYrv9WS3FqIO8lP6msrLRYtueCZUC3WYtdOh816TpT0NlGY
+        OuzM6bDc6fBlZ3k7P9PfknTNZimKqmAdX52eWuNrNB7cEgit2SoDj+bHxJFH2y9Pz8jz0C5xCCmF
+        8AjE4/CKRGGwZbMAR3uIx2G6Zgmr2Btxa9ztY9cktok9z7QJHA9GiOBxt49MaLY9s/4JLsa1tEM6
+        jW6xnhRbZXSnQpS54HeiVL7B+FwuM0NPhZEIvvg7Rui+PD2/c8L2EHXax4jwHLJwiFkyr5oRZus4
+        DDas/qreZxEmU2EEJxdSad/Y00PUEIBh23Zd5xgChjargiquBaCmgKjKYDQ7KCAUk4kURlgI9SbA
+        siwjyLhc7kRB303JpY6HPm1k1Ap2kFihtNHLZSYnufhHt1Cbei6m/+9WFA63UTjC9TLjPXGzWbCO
+        6+UecOt3kwc3QXK4qBR7XzLosshlKoybYiGWRvFzn0Ow6RB1SfvzQbzH+TNHXhqDKS/nuxCkAUEw
+        8QhxvwJRz6JTFPMPZODmLAgl2LaPMItkiKNqBFl1jvc9zVHFNqwawThoPs0/TKALzfO+UPe5VjXX
+        unp9oVbFUv3SVd4L8PgKEyFyqIYGAAA=
     headers:
       access-control-allow-origin: ['*']
-      cache-control: ['public, max-age=14400']
+      cache-control: ['public, max-age=86400']
       cf-cache-status: [MISS]
-      cf-ray: [27206b80277f3bb1-CDG]
+      cf-ray: [287488c56bb3103d-CDG]
       connection: [keep-alive]
       content-encoding: [gzip]
       content-type: [application/json; charset=utf-8]
-      date: ['Tue, 09 Feb 2016 14:56:15 GMT']
-      expires: ['Tue, 09 Feb 2016 18:56:15 GMT']
-      last-modified: ['Tue, 09 Feb 2016 14:57:38 GMT']
+      date: ['Mon, 21 Mar 2016 21:35:32 GMT']
+      expires: ['Tue, 22 Mar 2016 21:35:32 GMT']
+      last-modified: ['Mon, 21 Mar 2016 21:36:34 GMT']
       server: [cloudflare-nginx]
-      set-cookie: ['__cfduid=d70c4783b7ebc76cb42a48811596eaee21455029775; expires=Wed,
-          08-Feb-17 14:56:15 GMT; path=/; domain=.omdbapi.com; HttpOnly']
       vary: [Accept-Encoding]
       x-aspnet-version: [4.0.30319]
       x-powered-by: [ASP.NET]
@@ -46,33 +45,33 @@ interactions:
       Accept: ['*/*']
       Accept-Encoding: ['gzip, deflate']
       Connection: [keep-alive]
-      Cookie: [__cfduid=d70c4783b7ebc76cb42a48811596eaee21455029775]
-      User-Agent: [Subliminal/1.2]
+      Cookie: [__cfduid=d5267bf24898b7accbc5c2e18253408e71458596132]
+      User-Agent: [Subliminal/2.0]
     method: GET
     uri: http://www.omdbapi.com/?r=json&v=1&s=dallas&type=series&page=2
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAA52UwW6cMBiEX8XyoSe6GGNY4NRlaZWqATVZlKStosjZdcFdsJFtsmGjSH2HvGGe
-        JCJt1SagRuTIYebTDPP7Bq4YVesSRt9uYM5NxWAEE1pVVIOEX1EN3oCEtkVpmNLQgl8YVTCCGKHw
-        /ucdtCCvN5cfExhBYxzPJYHvQwvmXdP7aKY461WfpTas12X2At5af0lL2SojWAcO5RXT4Bf4X4zj
-        DjDY9X0c/hdTGtNEts3prGYbTt/26tla1javacG0ndrpiRen+RHKkiOc5Vuc9d+VF1MRi7PtB/M1
-        L3ZpssVZsrhO9+/fzS5OnIvVmYvQ7EdTPMlwQNUGfBJyvdURyBXlgosCLGndgB03JTAl+x0MLOXu
-        UnZPe8TDHud9xPmUHlclY2qkPuQN3ZGLiB9Mcf+zh2zx0gJIELrYneKdP7bDqw7E7X4fjWUgAw4i
-        YUAwmdRQI03Fi9IAKcZ25gzDBHMHuXgK5LC9blU3Zo+fb9jFJMSv+AlUbMAp7QSLQF9dzIvvUhpw
-        0IrnF+qg4ekgRDzsTMJKIShI2FoqasZP1BnheF5IXn4Jzi1opKHVMdNtZXRv14uOmW6k0I/zUC2D
-        tw/TLNVSpgQAAA==
+        H4sIAAAAAAAAA51U3W6bMBR+FcsXu2LBGEOAq4WwqdMKahvUdpumyk088AI2sk1TUlXaO+wN9yQT
+        7aoqBa1il74439/5ju/gilG1LmH09Q7m3FQMRnApW2UE68CxvGEaJLSqqIYW/MyoghHEyHF///wF
+        LcjrzfXHBEbQGOz6Pg59aMG8a3oQzRRn/dSJ1Ib1c6UxTWTbnM5qtuH0bT89W8va5jUtmLZTOz33
+        4jQ/RVlyirN8i7P+XXkxFbG43H4wX/JilyZbnCWL23T//t3s6ty5Wl26CM1+NAW8t549PIoGCb+h
+        GrwBCW2L0jB1YAOFAxuO55LA/6eNzF4cMB1RtQGfhFxvdQRyRbngogBLWjdgx00JTMn+RgiWcnct
+        u0MNeKhh3oc5n6JhVTKmRhaFvCE6chHxgynoT1lmi9fSI0HoYncKdv6QDq86ELf7fTTmgQx4EAkD
+        gsmkhBppKl6UBkgx1mhnaCaYO8jFU0iO29tWdWPw+OW1uJiE+D+WQMUGXNBOsAj00cW8+C6lAUet
+        eNluBw2PFCHiYWcSrRSCgoStpaJm/DNwRng8LySvX9E3CxppaHXGdFsZ3cP1tT9jupFCP9RDtQze
+        /wEWxHxHpgQAAA==
     headers:
       access-control-allow-origin: ['*']
-      cache-control: ['public, max-age=14400']
+      cache-control: ['public, max-age=86400']
       cf-cache-status: [MISS]
-      cf-ray: [27206b8117ad3bb1-CDG]
+      cf-ray: [287488c68bc1103d-CDG]
       connection: [keep-alive]
       content-encoding: [gzip]
       content-type: [application/json; charset=utf-8]
-      date: ['Tue, 09 Feb 2016 14:56:15 GMT']
-      expires: ['Tue, 09 Feb 2016 18:56:15 GMT']
-      last-modified: ['Tue, 09 Feb 2016 14:57:39 GMT']
+      date: ['Mon, 21 Mar 2016 21:35:33 GMT']
+      expires: ['Tue, 22 Mar 2016 21:35:33 GMT']
+      last-modified: ['Mon, 21 Mar 2016 21:36:34 GMT']
       server: [cloudflare-nginx]
       vary: [Accept-Encoding]
       x-aspnet-version: [4.0.30319]
@@ -84,30 +83,30 @@ interactions:
       Accept: ['*/*']
       Accept-Encoding: ['gzip, deflate']
       Connection: [keep-alive]
-      Cookie: [__cfduid=d70c4783b7ebc76cb42a48811596eaee21455029775]
-      User-Agent: [Subliminal/1.2]
+      Cookie: [__cfduid=d5267bf24898b7accbc5c2e18253408e71458596132]
+      User-Agent: [Subliminal/2.0]
     method: GET
     uri: http://www.omdbapi.com/?r=json&v=1&s=dallas&type=series&page=3
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAA5XRwUrDQBCA4VdZ5uIl4GbTJDW3akA9VCTWgxQPa3dqQre7YXeitKXQd+gb9kkk
-        RZFQpeQB5v+GmQ08oXSzErLpBiYVaYQMbspKK4fmwrMxKpZLraWHAF5QOshA8DA87PaChwICqJbq
-        7T6HDIgET/gwTSGAyapuQx5dhe3ko/WE7ezD5Qi2wS+VSzOrzPtfRnzY7bv9mMdiMEj69CclfrfZ
-        WLoFEiuwto46UnIqRQmPYtFXejYKHS5rbVeo2Eh9oKHGoWd2/rPFHc4WHVyc4CJJIy4G/c54jBe2
-        Maqp2WhO6HxpP89JaRgnnPeRrrGsjGJUIruVhD5juVyv9T8/jLpexOOhuDr/wNcAyJLUBfpGk29b
-        7VCBvrbGH6/tGoTtFycCMwu+AgAA
+        H4sIAAAAAAAAA5XS3U7CMBQH8Fdpzo03S+w6uuHuUBLxAmMmXhjjRaUH11Dape0gQEh4B96QJzEz
+        JApodA9w/r/ztYZHFG5cQv6yhpEKGiGHm1Jp6dBceDJESfpCa+EhgmcUDnJgNI732x2jMYMI1Ey+
+        3fUhhxAYTWk3yyCC0bJqgjw6hU3lg/UBm9r7yx5soi9qVCJ5MhIdziptlyhJT87RhNqhJ3ZysMkA
+        x9OjBth+uzvB0yyhrNMGP4QXtjayrkhvEtD50i7+krKYp5S2ka6xVEaSUCK5FQF9TvpitdLKvP+0
+        3eTYSyjvsqu03WRm/Es4P5uHU846nbTt2Q7bGwo3xUAKrKwLR1J6LiUpTThrKxUoNBnY2uNCzb//
+        xdlgjXpC8pj9h3yNINggdIG+1sE3kc0jF+gra/xnJ65G2HwAaKp6tzEDAAA=
     headers:
       access-control-allow-origin: ['*']
-      cache-control: ['public, max-age=14400']
+      cache-control: ['public, max-age=86400']
       cf-cache-status: [MISS]
-      cf-ray: [27206b82a8043bb1-CDG]
+      cf-ray: [287488c75bd2103d-CDG]
       connection: [keep-alive]
       content-encoding: [gzip]
       content-type: [application/json; charset=utf-8]
-      date: ['Tue, 09 Feb 2016 14:56:16 GMT']
-      expires: ['Tue, 09 Feb 2016 18:56:16 GMT']
-      last-modified: ['Tue, 09 Feb 2016 14:57:39 GMT']
+      date: ['Mon, 21 Mar 2016 21:35:33 GMT']
+      expires: ['Tue, 22 Mar 2016 21:35:33 GMT']
+      last-modified: ['Mon, 21 Mar 2016 21:36:34 GMT']
       server: [cloudflare-nginx]
       vary: [Accept-Encoding]
       x-aspnet-version: [4.0.30319]

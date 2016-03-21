@@ -5,7 +5,7 @@ interactions:
       Accept: ['*/*']
       Accept-Encoding: ['gzip, deflate']
       Connection: [keep-alive]
-      User-Agent: [Subliminal/1.2]
+      User-Agent: [Subliminal/2.0]
     method: GET
     uri: http://www.omdbapi.com/?r=json&v=1&s=the+big+bang+theory&type=series&page=1
   response:
@@ -18,18 +18,18 @@ interactions:
         FvMAAAA=
     headers:
       access-control-allow-origin: ['*']
-      cache-control: ['public, max-age=14400']
-      cf-cache-status: [MISS]
-      cf-ray: [272066e56bd73bc9-CDG]
+      cache-control: ['public, max-age=86400']
+      cf-cache-status: [HIT]
+      cf-ray: [287488c544b63c35-CDG]
       connection: [keep-alive]
       content-encoding: [gzip]
       content-type: [application/json; charset=utf-8]
-      date: ['Tue, 09 Feb 2016 14:53:07 GMT']
-      expires: ['Tue, 09 Feb 2016 18:53:07 GMT']
-      last-modified: ['Tue, 09 Feb 2016 14:54:30 GMT']
+      date: ['Mon, 21 Mar 2016 21:35:32 GMT']
+      expires: ['Tue, 22 Mar 2016 21:35:32 GMT']
+      last-modified: ['Mon, 21 Mar 2016 11:25:16 GMT']
       server: [cloudflare-nginx]
-      set-cookie: ['__cfduid=da582f3ceb8336fc85d70ed9b77655c4d1455029586; expires=Wed,
-          08-Feb-17 14:53:06 GMT; path=/; domain=.omdbapi.com; HttpOnly']
+      set-cookie: ['__cfduid=d5267bf24898b7accbc5c2e18253408e71458596132; expires=Tue,
+          21-Mar-17 21:35:32 GMT; path=/; domain=.omdbapi.com; HttpOnly']
       vary: [Accept-Encoding]
       x-aspnet-version: [4.0.30319]
       x-powered-by: [ASP.NET]

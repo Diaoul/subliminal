@@ -63,7 +63,7 @@ def test_get_wrong_title(client):
 @vcr.use_cassette
 def test_search(client):
     data = client.search('Man of Steel')
-    assert data['totalResults'] == '22'
+    assert data['totalResults'] == '24'
     assert len(data['Search']) == 10
     assert data['Search'][0]['imdbID'] == 'tt0770828'
     assert data['Search'][0]['Year'] == '2013'
@@ -80,22 +80,22 @@ def test_search_wrong_title(client):
 @vcr.use_cassette
 def test_search_type(client):
     data = client.search('Man of Steel', type='movie')
-    assert data['totalResults'] == '19'
+    assert data['totalResults'] == '21'
 
 
 @pytest.mark.integration
 @vcr.use_cassette
 def test_search_year(client):
     data = client.search('Man of Steel', year=2013)
-    assert data['totalResults'] == '13'
+    assert data['totalResults'] == '14'
 
 
 @pytest.mark.integration
 @vcr.use_cassette
 def test_search_page(client):
     data = client.search('Man of Steel', page=3)
-    assert data['totalResults'] == '22'
-    assert len(data['Search']) == 2
+    assert data['totalResults'] == '24'
+    assert len(data['Search']) == 4
     assert data['Search'][0]['imdbID'] == 'tt5312384'
     assert data['Search'][0]['Title'] == 'The Sonic Landscape of \'Man of Steel\''
 

@@ -69,6 +69,25 @@ def hash_napiprojekt(video_path):
     return hashlib.md5(data).hexdigest()
 
 
+def sanitize_release_group(string):
+    """Sanitize a string that represents a `release_group` by stripping the square brackets information
+
+    :param str string: the release group to sanitize.
+    :return: the sanitized release group.
+    :rtype: str
+
+    """
+    # only deal with strings
+    if string is None:
+        return
+
+    # strip square brackets information
+    string = re.sub('\s*\[\w+\]', '', string)
+
+    # strip and lower case
+    return string.strip().lower()
+
+
 def sanitize(string):
     """Sanitize a string to strip special characters.
 

@@ -68,6 +68,7 @@ setup(name='subliminal',
       entry_points={
           'subliminal.providers': [
               'addic7ed = subliminal.providers.addic7ed:Addic7edProvider',
+              'legendastv = subliminal.providers.legendastv:LegendasTvProvider',
               'opensubtitles = subliminal.providers.opensubtitles:OpenSubtitlesProvider',
               'podnapisi = subliminal.providers.podnapisi:PodnapisiProvider',
               'shooter = subliminal.providers.shooter:ShooterProvider',

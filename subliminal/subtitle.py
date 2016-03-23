@@ -7,7 +7,8 @@ import chardet
 import pysrt
 
 from .video import Episode, Movie
-from .utils import sanitize
+from .utils import sanitize, sanitize_release_group
+
 
 logger = logging.getLogger(__name__)
 
@@ -224,7 +225,7 @@ def guess_matches(video, guess, partial=False):
             matches.add('title')
     # release_group
     if video.release_group and 'release_group' in guess \
-            and guess['release_group'].lower() == video.release_group.lower():
+            and sanitize_release_group(guess['release_group']) == sanitize_release_group(video.release_group):
         matches.add('release_group')
     # resolution
     if video.resolution and 'screen_size' in guess and guess['screen_size'] == video.resolution:

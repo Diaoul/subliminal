@@ -471,8 +471,8 @@ def test_list_subtitles_episode_no_hash(episodes, mock_providers):
 
     # test result
     assert len(subtitles) == 1
-    assert sorted(subtitles[episodes['dallas_s01e03']]) == ['addic7ed', 'opensubtitles', 'podnapisi', 'subscenter',
-                                                            'tvsubtitles']
+    assert sorted(subtitles[episodes['dallas_s01e03']]) == ['addic7ed', 'opensubtitles', 'podnapisi', 'shooter',
+                                                            'subscenter', 'tvsubtitles']
 
 
 def test_list_subtitles_no_language(episodes, mock_providers):

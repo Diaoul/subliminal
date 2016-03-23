@@ -9,7 +9,6 @@ from requests import Session
 from . import Provider
 from .. import __short_version__
 from ..subtitle import Subtitle, fix_line_ending
-from ..video import Episode, Movie
 
 logger = logging.getLogger(__name__)
 

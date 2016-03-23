@@ -27,7 +27,7 @@ from subliminal.video import Movie
 vcr = VCR(path_transformer=lambda path: path + '.yaml',
           record_mode=os.environ.get('VCR_RECORD_MODE', 'once'),
           match_on=['method', 'scheme', 'host', 'port', 'path', 'query', 'body'],
-          cassette_library_dir=os.path.join('tests', 'cassettes', 'api'))
+          cassette_library_dir=os.path.join('tests', 'cassettes', 'core'))
 
 
 @pytest.fixture

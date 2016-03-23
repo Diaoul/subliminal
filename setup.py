@@ -70,6 +70,7 @@ setup(name='subliminal',
               'addic7ed = subliminal.providers.addic7ed:Addic7edProvider',
               'opensubtitles = subliminal.providers.opensubtitles:OpenSubtitlesProvider',
               'podnapisi = subliminal.providers.podnapisi:PodnapisiProvider',
+              'shooter = subliminal.providers.shooter:ShooterProvider',
               'subscenter = subliminal.providers.subscenter:SubsCenterProvider',
               'thesubdb = subliminal.providers.thesubdb:TheSubDBProvider',
               'tvsubtitles = subliminal.providers.tvsubtitles:TVsubtitlesProvider'
@@ -81,6 +82,7 @@ setup(name='subliminal',
           ],
           'babelfish.language_converters': [
               'addic7ed = subliminal.converters.addic7ed:Addic7edConverter',
+              'shooter = subliminal.converters.shooter:ShooterConverter',
               'thesubdb = subliminal.converters.thesubdb:TheSubDBConverter',
               'tvsubtitles = subliminal.converters.tvsubtitles:TVsubtitlesConverter'
           ],

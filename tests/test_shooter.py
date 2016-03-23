@@ -11,7 +11,7 @@ from subliminal.providers.shooter import ShooterSubtitle, ShooterProvider
 vcr = VCR(path_transformer=lambda path: path + '.yaml',
           record_mode=os.environ.get('VCR_RECORD_MODE', 'once'),
           match_on=['method', 'scheme', 'host', 'port', 'path', 'body'],
-          cassette_library_dir=os.path.join('tests', 'cassettes', 'shooter'))
+          cassette_library_dir=os.path.realpath(os.path.join('tests', 'cassettes', 'shooter')))
 
 
 def test_get_matches_movie_hash(movies):

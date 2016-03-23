@@ -14,7 +14,7 @@ from subliminal.cache import region
 vcr = VCR(path_transformer=lambda path: path + '.yaml',
           record_mode=os.environ.get('VCR_RECORD_MODE', 'once'),
           match_on=['method', 'scheme', 'host', 'port', 'path', 'query', 'body'],
-          cassette_library_dir=os.path.join('docs', 'cassettes'))
+          cassette_library_dir=os.path.realpath(os.path.join('docs', 'cassettes')))
 
 
 @pytest.fixture(autouse=True, scope='session')

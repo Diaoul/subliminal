@@ -10,7 +10,7 @@ from subliminal.providers.napiprojekt import NapiProjektProvider, NapiProjektSub
 
 vcr = VCR(path_transformer=lambda path: path + '.yaml',
           record_mode=os.environ.get('VCR_RECORD_MODE', 'once'),
-          cassette_library_dir=os.path.join('tests', 'cassettes', 'napiprojekt'))
+          cassette_library_dir=os.path.realpath(os.path.join('tests', 'cassettes', 'napiprojekt')))
 
 
 def test_get_matches(movies):

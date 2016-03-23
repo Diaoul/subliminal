@@ -12,7 +12,7 @@ from subliminal.providers.subscenter import SubsCenterProvider, SubsCenterSubtit
 vcr = VCR(path_transformer=lambda path: path + '.yaml',
           record_mode=os.environ.get('VCR_RECORD_MODE', 'once'),
           match_on=['method', 'scheme', 'host', 'port', 'path', 'query', 'body'],
-          cassette_library_dir=os.path.join('tests', 'cassettes', 'subscenter'))
+          cassette_library_dir=os.path.realpath(os.path.join('tests', 'cassettes', 'subscenter')))
 
 
 def test_get_matches_movie(movies):

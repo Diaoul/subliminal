@@ -11,7 +11,7 @@ from subliminal.providers.tvsubtitles import TVsubtitlesProvider, TVsubtitlesSub
 vcr = VCR(path_transformer=lambda path: path + '.yaml',
           record_mode=os.environ.get('VCR_RECORD_MODE', 'once'),
           match_on=['method', 'scheme', 'host', 'port', 'path', 'query', 'body'],
-          cassette_library_dir=os.path.join('tests', 'cassettes', 'tvsubtitles'))
+          cassette_library_dir=os.path.realpath(os.path.realpath(os.path.join('tests', 'cassettes', 'tvsubtitles'))))
 
 
 @pytest.mark.converter

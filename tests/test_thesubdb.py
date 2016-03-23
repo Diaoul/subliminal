@@ -10,7 +10,7 @@ from subliminal.providers.thesubdb import TheSubDBProvider, TheSubDBSubtitle
 
 vcr = VCR(path_transformer=lambda path: path + '.yaml',
           record_mode=os.environ.get('VCR_RECORD_MODE', 'once'),
-          cassette_library_dir=os.path.join('tests', 'cassettes', 'thesubdb'))
+          cassette_library_dir=os.path.realpath(os.path.join('tests', 'cassettes', 'thesubdb')))
 
 
 @pytest.mark.converter

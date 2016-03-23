@@ -13,7 +13,7 @@ from subliminal.refiners.tvdb import TVDBClient, refine
 
 vcr = VCR(path_transformer=lambda path: path + '.yaml',
           record_mode=os.environ.get('VCR_RECORD_MODE', 'once'),
-          cassette_library_dir=os.path.join('tests', 'cassettes', 'tvdb'))
+          cassette_library_dir=os.path.realpath(os.path.join('tests', 'cassettes', 'tvdb')))
 
 
 @pytest.fixture()

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from pkg_resources import EntryPoint, iter_entry_points
 
-from subliminal.extensions import RegistrableExtensionManager
+from subliminal.extensions import RegistrableExtensionManager, provider_manager
 
 
 def test_registrable_extension_manager_all_extensions():
@@ -9,12 +9,13 @@ def test_registrable_extension_manager_all_extensions():
         'de7cidda = subliminal.providers.addic7ed:Addic7edProvider'
     ])
     extensions = sorted(e.name for e in manager)
-    assert len(extensions) == 7
-    assert extensions == ['addic7ed', 'de7cidda', 'opensubtitles', 'podnapisi', 'subscenter', 'thesubdb', 'tvsubtitles']
+    assert len(extensions) == 8
+    assert extensions == ['addic7ed', 'de7cidda', 'opensubtitles', 'podnapisi', 'shooter', 'subscenter', 'thesubdb',
+                          'tvsubtitles']
 
 
 def test_registrable_extension_manager_internal_extension():
-    manager = RegistrableExtensionManager('subliminal.providers', [
+    manager = RegistrableExtensionManager('subliminal.test_providers', [
         'addic7ed = subliminal.providers.addic7ed:Addic7edProvider',
         'opensubtitles = subliminal.providers.opensubtitles:OpenSubtitlesProvider',
         'podnapisi = subliminal.providers.podnapisi:PodnapisiProvider',
@@ -23,38 +24,34 @@ def test_registrable_extension_manager_internal_extension():
         'tvsubtitles = subliminal.providers.tvsubtitles:TVsubtitlesProvider'
     ])
     assert len(list(manager)) == 6
-    setup_names = {ep.name for ep in iter_entry_points(manager.namespace)}
-    internal_names = {EntryPoint.parse(iep).name for iep in manager.internal_extensions}
-    assert internal_names == setup_names
+    assert len(manager.internal_extensions) == 6
 
 
 def test_registrable_extension_manager_register():
-    manager = RegistrableExtensionManager('subliminal.providers', [
+    manager = RegistrableExtensionManager('subliminal.test_providers', [
         'addic7ed = subliminal.providers.addic7ed:Addic7edProvider',
-        'opensubtitles = subliminal.providers.opensubtitles:OpenSubtitlesProvider',
-        'podnapisi = subliminal.providers.podnapisi:PodnapisiProvider',
-        'subscenter = subliminal.providers.subscenter:SubsCenterProvider',
-        'thesubdb = subliminal.providers.thesubdb:TheSubDBProvider',
-        'tvsubtitles = subliminal.providers.tvsubtitles:TVsubtitlesProvider'
+        'opensubtitles = subliminal.providers.opensubtitles:OpenSubtitlesProvider'
     ])
-    assert len(list(manager)) == 6
+    assert len(list(manager)) == 2
     manager.register('de7cidda = subliminal.providers.addic7ed:Addic7edProvider')
-    assert len(list(manager)) == 7
+    assert len(list(manager)) == 3
     assert 'de7cidda' in manager.names()
 
 
 def test_registrable_extension_manager_unregister():
-    manager = RegistrableExtensionManager('subliminal.providers', [
-        'addic7ed = subliminal.providers.addic7ed:Addic7edProvider',
-        'opensubtitles = subliminal.providers.opensubtitles:OpenSubtitlesProvider',
-        'podnapisi = subliminal.providers.podnapisi:PodnapisiProvider',
+    manager = RegistrableExtensionManager('subliminal.test_providers', [
         'subscenter = subliminal.providers.subscenter:SubsCenterProvider',
         'thesubdb = subliminal.providers.thesubdb:TheSubDBProvider',
         'tvsubtitles = subliminal.providers.tvsubtitles:TVsubtitlesProvider'
     ])
-    assert len(list(manager)) == 6
-    old_names = manager.names()
+    assert len(list(manager)) == 3
     manager.register('de7cidda = subliminal.providers.addic7ed:Addic7edProvider')
     manager.unregister('de7cidda = subliminal.providers.addic7ed:Addic7edProvider')
-    assert len(list(manager)) == 6
-    assert set(old_names) == set(manager.names())
+    assert len(list(manager)) == 3
+    assert set(manager.names()) == {'subscenter', 'thesubdb', 'tvsubtitles'}
+
+
+def test_provider_manager():
+    setup_names = {ep.name for ep in iter_entry_points(provider_manager.namespace)}
+    internal_names = {EntryPoint.parse(iep).name for iep in provider_manager.internal_extensions}
+    assert setup_names == internal_names

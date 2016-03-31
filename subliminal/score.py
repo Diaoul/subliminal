@@ -22,6 +22,7 @@ Available matches:
   * resolution
   * hearing_impaired
   * video_codec
+  * series_imdb_id
   * imdb_id
   * tvdb_id
 
@@ -97,6 +98,9 @@ def compute_score(subtitle, video, hearing_impaired=None):
         if 'title' in matches:
             logger.debug('Adding title match equivalent')
             matches.add('episode')
+        if 'series_imdb_id' in matches:
+            logger.debug('Adding series_imdb_id match equivalent')
+            matches |= {'series', 'year'}
         if 'imdb_id' in matches:
             logger.debug('Adding imdb_id match equivalents')
             matches |= {'series', 'year', 'season', 'episode'}

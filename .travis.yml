@@ -12,6 +12,11 @@ env:
   - PARSER=native
   - PARSER=lxml
 
+addons:
+  apt:
+    packages:
+    - unrar
+
 matrix:
   include:
     - python: "3.4"

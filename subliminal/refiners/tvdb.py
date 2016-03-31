@@ -201,6 +201,10 @@ def search_series(name):
     :rtype: list
 
     """
+    results = tvdb_client.search_series(name)
+    if not results:
+        return None
+
     def match(series):
         key = 0
         if series['status'] != 'Continuing':
@@ -210,7 +214,7 @@ def search_series(name):
 
         return key
 
-    return sorted(tvdb_client.search_series(name), key=match)
+    return sorted(results, key=match)
 
 
 @region.cache_on_arguments(expiration_time=REFINER_EXPIRATION_TIME)

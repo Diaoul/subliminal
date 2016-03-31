@@ -277,7 +277,7 @@ def refine(video, **kwargs):
     logger.info('Searching series %r', video.series)
     results = search_series(video.series.lower())
     if not results:
-        logger.warning('No result for series')
+        logger.warning('No results for series')
         return
     logger.debug('Found %d results', len(results))
 
@@ -311,7 +311,7 @@ def refine(video, **kwargs):
     logger.info('Getting series episode %dx%d', video.season, video.episode)
     result = get_series_episode(video.series_tvdb_id, video.season, video.episode)
     if not result:
-        logger.warning('No result for episode')
+        logger.warning('No results for episode')
         return
 
     # add episode information

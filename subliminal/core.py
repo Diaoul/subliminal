@@ -553,7 +553,7 @@ def list_subtitles(videos, languages, pool_class=ProviderPool, **kwargs):
     :param languages: languages to search for.
     :type languages: set of :class:`~babelfish.language.Language`
     :param pool_class: class to use as provider pool.
-    :type: :class:`ProviderPool`, :class:`AsyncProviderPool` or similar
+    :type pool_class: :class:`ProviderPool`, :class:`AsyncProviderPool` or similar
     :param \*\*kwargs: additional parameters for the provided `pool_class` constructor.
     :return: found subtitles per video.
     :rtype: dict of :class:`~subliminal.video.Video` to list of :class:`~subliminal.subtitle.Subtitle`
@@ -590,7 +590,7 @@ def download_subtitles(subtitles, pool_class=ProviderPool, **kwargs):
     :param subtitles: subtitles to download.
     :type subtitles: list of :class:`~subliminal.subtitle.Subtitle`
     :param pool_class: class to use as provider pool.
-    :type: :class:`ProviderPool`, :class:`AsyncProviderPool` or similar
+    :type pool_class: :class:`ProviderPool`, :class:`AsyncProviderPool` or similar
     :param \*\*kwargs: additional parameters for the provided `pool_class` constructor.
 
     """
@@ -616,7 +616,7 @@ def download_best_subtitles(videos, languages, min_score=0, hearing_impaired=Fal
     :param compute_score: function that takes `subtitle` and `video` as positional arguments,
         `hearing_impaired` as keyword argument and returns the score.
     :param pool_class: class to use as provider pool.
-    :type: :class:`ProviderPool`, :class:`AsyncProviderPool` or similar
+    :type pool_class: :class:`ProviderPool`, :class:`AsyncProviderPool` or similar
     :param \*\*kwargs: additional parameters for the provided `pool_class` constructor.
     :return: downloaded subtitles per video.
     :rtype: dict of :class:`~subliminal.video.Video` to list of :class:`~subliminal.subtitle.Subtitle`

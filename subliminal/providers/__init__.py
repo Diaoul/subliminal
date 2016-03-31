@@ -26,7 +26,7 @@ class ParserBeautifulSoup(BeautifulSoup):
     """A ``bs4.BeautifulSoup`` that picks the first parser available in `parsers`.
 
     :param markup: markup for the ``bs4.BeautifulSoup``.
-    :param list parsers: parser names, in order of preference
+    :param list parsers: parser names, in order of preference.
 
     """
     def __init__(self, markup, parsers, **kwargs):

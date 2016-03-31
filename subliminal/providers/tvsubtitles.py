@@ -25,6 +25,7 @@ episode_id_re = re.compile('^episode-\d+\.html$')
 
 
 class TVsubtitlesSubtitle(Subtitle):
+    """TVsubtitles Subtitle."""
     provider_name = 'tvsubtitles'
 
     def __init__(self, language, page_link, subtitle_id, series, season, episode, year, rip, release):
@@ -69,6 +70,7 @@ class TVsubtitlesSubtitle(Subtitle):
 
 
 class TVsubtitlesProvider(Provider):
+    """TVsubtitles Provider."""
     languages = {Language('por', 'BR')} | {Language(l) for l in [
         'ara', 'bul', 'ces', 'dan', 'deu', 'ell', 'eng', 'fin', 'fra', 'hun', 'ita', 'jpn', 'kor', 'nld', 'pol', 'por',
         'ron', 'rus', 'spa', 'swe', 'tur', 'ukr', 'zho'
@@ -89,9 +91,9 @@ class TVsubtitlesProvider(Provider):
 
         :param str series: series of the episode.
         :param year: year of the series, if any.
-        :type year: int or None
+        :type year: int
         :return: the show id, if any.
-        :rtype: int or None
+        :rtype: int
 
         """
         # make the search

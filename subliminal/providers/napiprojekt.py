@@ -36,6 +36,7 @@ def get_subhash(hash):
 
 
 class NapiProjektSubtitle(Subtitle):
+    """NapiProjekt Subtitle."""
     provider_name = 'napiprojekt'
 
     def __init__(self, language, hash):
@@ -57,6 +58,7 @@ class NapiProjektSubtitle(Subtitle):
 
 
 class NapiProjektProvider(Provider):
+    """NapiProjekt Provider."""
     languages = {Language.fromalpha2(l) for l in ['pl']}
     required_hash = 'napiprojekt'
     server_url = 'http://napiprojekt.pl/unit_napisy/dl.php'

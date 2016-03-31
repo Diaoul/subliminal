@@ -21,6 +21,7 @@ logger = logging.getLogger(__name__)
 
 
 class SubsCenterSubtitle(Subtitle):
+    """SubsCenter Subtitle."""
     provider_name = 'subscenter'
 
     def __init__(self, language, hearing_impaired, page_link, series, season, episode, title, subtitle_id, subtitle_key,
@@ -70,6 +71,7 @@ class SubsCenterSubtitle(Subtitle):
 
 
 class SubsCenterProvider(Provider):
+    """SubsCenter Provider."""
     languages = {Language.fromalpha2(l) for l in ['he']}
     server_url = 'http://subscenter.cinemast.com/he/'
 
@@ -122,7 +124,7 @@ class SubsCenterProvider(Provider):
         :param str title: title to search for.
         :param str kind: kind of the title, ``movie`` or ``series``.
         :return: the URL version of the title.
-        :rtype: str or None
+        :rtype: str
 
         """
         # make the search

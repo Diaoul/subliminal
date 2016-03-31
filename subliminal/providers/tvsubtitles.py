@@ -13,7 +13,7 @@ from .. import __short_version__
 from ..cache import EPISODE_EXPIRATION_TIME, SHOW_EXPIRATION_TIME, region
 from ..exceptions import ProviderError
 from ..subtitle import Subtitle, fix_line_ending, guess_matches
-from ..utils import sanitize
+from ..utils import sanitize, sanitize_release_group
 from ..video import Episode
 
 logger = logging.getLogger(__name__)
@@ -58,7 +58,8 @@ class TVsubtitlesSubtitle(Subtitle):
         if video.original_series and self.year is None or video.year and video.year == self.year:
             matches.add('year')
         # release_group
-        if video.release_group and self.release and video.release_group.lower() in self.release.lower():
+        if (video.release_group and self.release and
+                sanitize_release_group(video.release_group) in sanitize_release_group(self.release)):
             matches.add('release_group')
         # other properties
         if self.release:

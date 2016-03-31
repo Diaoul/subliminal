@@ -11,7 +11,7 @@ from .. import __short_version__
 from ..cache import SHOW_EXPIRATION_TIME, region
 from ..exceptions import AuthenticationError, ConfigurationError, DownloadLimitExceeded, TooManyRequests
 from ..subtitle import Subtitle, fix_line_ending, guess_matches
-from ..utils import sanitize
+from ..utils import sanitize, sanitize_release_group
 from ..video import Episode
 
 logger = logging.getLogger(__name__)
@@ -60,7 +60,8 @@ class Addic7edSubtitle(Subtitle):
         if video.original_series and self.year is None or video.year and video.year == self.year:
             matches.add('year')
         # release_group
-        if video.release_group and self.version and video.release_group.lower() in self.version.lower():
+        if (video.release_group and self.version and
+                sanitize_release_group(video.release_group) in sanitize_release_group(self.version)):
             matches.add('release_group')
         # resolution
         if video.resolution and self.version and video.resolution in self.version.lower():

@@ -1,9 +1,21 @@
 Changelog
 ---------
 
-1.2
+2.0
 ^^^
 **release date:** *not released*
+
+* Add refiners to enrich videos with information from metadata, tvdb and omdb
+* Add asynchronous provider search for faster searches
+* Add registrable managers so subliminal can run without install
+* Add archive support
+* Add the ability to customize scoring logic
+* Add an age argument to scan_videos for faster scanning
+* Add legendas.tv provider
+* Add shooter.cn provider
+* Improve matching and scoring
+* Improve documentation
+* Split nautilus integration into its own project
 
 
 1.1.1

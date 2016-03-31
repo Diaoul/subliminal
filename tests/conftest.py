@@ -79,7 +79,11 @@ def episodes():
             'colony_s01e09':
             Episode('Colony.S01E09.720p.HDTV.x264-KILLERS.mkv', 'Colony', 1, 9, title='Zero Day', year=2016,
                     tvdb_id=5463229, series_tvdb_id=284210, series_imdb_id='tt4209256', format='HDTV',
-                    release_group='KILLERS', resolution='720p', video_codec='h264', imdb_id='tt4926022')}
+                    release_group='KILLERS', resolution='720p', video_codec='h264', imdb_id='tt4926022'),
+            'the_jinx_e05':
+            Episode('The.Jinx-The.Life.and.Deaths.of.Robert.Durst.E05.BDRip.x264-ROVERS.mkv',
+                    'The Jinx: The Life and Deaths of Robert Durst', 1, 5, year=2015, original_series=True,
+                    format='BluRay', release_group='ROVERS', video_codec='h264')}
 
 
 @pytest.fixture(scope='session')

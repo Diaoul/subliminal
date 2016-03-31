@@ -8,7 +8,7 @@ try:
 except ImportError:
     from mock import Mock
 
-from subliminal.utils import timestamp
+from subliminal.utils import sanitize, timestamp
 from subliminal.video import Episode, Movie, Video
 
 
@@ -78,6 +78,27 @@ def test_video_fromname_episode(episodes):
     assert video.series == episodes['bbt_s07e05'].series
     assert video.season == episodes['bbt_s07e05'].season
     assert video.episode == episodes['bbt_s07e05'].episode
+    assert video.title is None
+    assert video.year is None
+    assert video.tvdb_id is None
+
+
+def test_video_fromname_episode_no_season(episodes):
+    video = Video.fromname(episodes['the_jinx_e05'].name)
+    assert type(video) is Episode
+    assert video.name == episodes['the_jinx_e05'].name
+    assert video.format == episodes['the_jinx_e05'].format
+    assert video.release_group == episodes['the_jinx_e05'].release_group
+    assert video.resolution == episodes['the_jinx_e05'].resolution
+    assert video.video_codec == episodes['the_jinx_e05'].video_codec
+    assert video.audio_codec is None
+    assert video.imdb_id is None
+    assert video.hashes == {}
+    assert video.size is None
+    assert video.subtitle_languages == set()
+    assert sanitize(video.series) == sanitize(episodes['the_jinx_e05'].series)
+    assert video.season == episodes['the_jinx_e05'].season
+    assert video.episode == episodes['the_jinx_e05'].episode
     assert video.title is None
     assert video.year is None
     assert video.tvdb_id is None

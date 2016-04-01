@@ -9,9 +9,9 @@ def test_registrable_extension_manager_all_extensions():
         'de7cidda = subliminal.providers.addic7ed:Addic7edProvider'
     ])
     extensions = sorted(e.name for e in manager)
-    assert len(extensions) == 9
-    assert extensions == ['addic7ed', 'de7cidda', 'legendastv', 'opensubtitles', 'podnapisi', 'shooter', 'subscenter',
-                          'thesubdb', 'tvsubtitles']
+    assert len(extensions) == 10
+    assert extensions == ['addic7ed', 'de7cidda', 'itasa', 'legendastv', 'opensubtitles', 'podnapisi', 'shooter',
+                          'subscenter', 'thesubdb', 'tvsubtitles']
 
 
 def test_registrable_extension_manager_internal_extension():

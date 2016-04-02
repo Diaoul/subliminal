@@ -209,7 +209,7 @@ def search_series(name):
         key = 0
         if series['status'] != 'Continuing':
             key += 1
-        if series['seriesName'] != name:
+        if series['seriesName'].lower() != name and name not in [alias.lower() for alias in series['aliases']]:
             key += 2
 
         return key
@@ -288,7 +288,7 @@ def refine(video, **kwargs):
             logger.debug('Found result for original series without year')
             found = True
             break
-        if video.year == datetime.strptime(result['firstAired'], '%Y-%m-%d').year:
+        if result['firstAired'] and video.year == datetime.strptime(result['firstAired'], '%Y-%m-%d').year:
             logger.debug('Found result with matching year')
             found = True
             break
@@ -303,7 +303,8 @@ def refine(video, **kwargs):
     # add series information
     logger.debug('Found series %r', result)
     video.series = result['seriesName']
-    video.year = datetime.strptime(result['firstAired'], '%Y-%m-%d').year
+    if result['firstAired']:
+        video.year = datetime.strptime(result['firstAired'], '%Y-%m-%d').year
     video.series_imdb_id = result['imdbId']
     video.series_tvdb_id = result['id']
 

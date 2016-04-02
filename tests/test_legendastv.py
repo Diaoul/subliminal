@@ -119,6 +119,15 @@ def test_search_titles_movie(movies):
 
 @pytest.mark.integration
 @vcr.use_cassette
+def test_search_titles_dots():
+    with LegendasTVProvider() as provider:
+        titles = provider.search_titles('11.22.63')
+    assert len(titles) == 1
+    assert set(titles.keys()) == {40092}
+
+
+@pytest.mark.integration
+@vcr.use_cassette
 def test_search_titles_quote():
     with LegendasTVProvider() as provider:
         titles = provider.search_titles('Marvel\'s Jessica Jones')

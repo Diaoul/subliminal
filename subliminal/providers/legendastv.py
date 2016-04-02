@@ -311,9 +311,10 @@ class LegendasTVProvider(Provider):
         # search for titles
         titles = self.search_titles(sanitize(title))
 
-        # search for titles with the quote character
-        if '\'' in title:
-            titles.update(self.search_titles(sanitize(title, ignore_characters={'\''})))
+        # search for titles with the quote or dot character
+        ignore_characters = {'\'', '.'}
+        if any(c in title for c in ignore_characters):
+            titles.update(self.search_titles(sanitize(title, ignore_characters=ignore_characters)))
 
         subtitles = []
         # iterate over titles

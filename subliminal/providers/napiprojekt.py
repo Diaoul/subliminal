@@ -42,6 +42,7 @@ class NapiProjektSubtitle(Subtitle):
     def __init__(self, language, hash):
         super(NapiProjektSubtitle, self).__init__(language)
         self.hash = hash
+        self.content = None
 
     @property
     def id(self):
@@ -62,6 +63,9 @@ class NapiProjektProvider(Provider):
     languages = {Language.fromalpha2(l) for l in ['pl']}
     required_hash = 'napiprojekt'
     server_url = 'http://napiprojekt.pl/unit_napisy/dl.php'
+
+    def __init__(self):
+        self.session = None
 
     def initialize(self):
         self.session = Session()

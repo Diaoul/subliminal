@@ -42,6 +42,9 @@ class ShooterProvider(Provider):
     languages = {Language(l) for l in ['eng', 'zho']}
     server_url = 'https://www.shooter.cn/api/subapi.php'
 
+    def __init__(self):
+        self.session = None
+
     def initialize(self):
         self.session = Session()
         self.session.headers['User-Agent'] = 'Subliminal/%s' % __short_version__

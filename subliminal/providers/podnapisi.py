@@ -84,6 +84,9 @@ class PodnapisiProvider(Provider):
                  {Language.fromalpha2(l) for l in language_converters['alpha2'].codes})
     server_url = 'http://podnapisi.net/subtitles/'
 
+    def __init__(self):
+        self.session = None
+
     def initialize(self):
         self.session = Session()
         self.session.headers['User-Agent'] = 'Subliminal/%s' % __short_version__

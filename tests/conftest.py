@@ -83,7 +83,11 @@ def episodes():
             'the_jinx_e05':
             Episode('The.Jinx-The.Life.and.Deaths.of.Robert.Durst.E05.BDRip.x264-ROVERS.mkv',
                     'The Jinx: The Life and Deaths of Robert Durst', 1, 5, year=2015, original_series=True,
-                    format='BluRay', release_group='ROVERS', video_codec='h264')}
+                    format='BluRay', release_group='ROVERS', video_codec='h264'),
+            'the_100_s03e09':
+            Episode('The.100.S03E09.720p.HDTV.x264-AVS.mkv', 'The 100', 3, 9, title='Stealing Fire', year=2014,
+                    tvdb_id=5544536, series_tvdb_id=268592, series_imdb_id='tt2661044', format='HDTV',
+                    release_group='AVS', resolution='720p', video_codec='h264', imdb_id='tt4799896')}
 
 
 @pytest.fixture(scope='session')

@@ -204,28 +204,43 @@ def test_query_series_episodes_wrong_season(client):
 @pytest.mark.integration
 @vcr.use_cassette
 def test_refine(episodes):
-    episode = Episode(episodes['bbt_s07e05'].name.lower(), episodes['bbt_s07e05'].series, episodes['bbt_s07e05'].season,
-                      episodes['bbt_s07e05'].episode)
+    video = episodes['bbt_s07e05']
+    episode = Episode(video.name.lower(), video.series.lower(), video.season, video.episode)
     refine(episode)
-    assert episode.series == episodes['bbt_s07e05'].series
-    assert episode.year == episodes['bbt_s07e05'].year
-    assert episode.title == episodes['bbt_s07e05'].title
-    assert episode.imdb_id == episodes['bbt_s07e05'].imdb_id
-    assert episode.series_imdb_id == episodes['bbt_s07e05'].series_imdb_id
-    assert episode.tvdb_id == episodes['bbt_s07e05'].tvdb_id
-    assert episode.series_tvdb_id == episodes['bbt_s07e05'].series_tvdb_id
+    assert episode.series == video.series
+    assert episode.year == video.year
+    assert episode.title == video.title
+    assert episode.imdb_id == video.imdb_id
+    assert episode.series_imdb_id == video.series_imdb_id
+    assert episode.tvdb_id == video.tvdb_id
+    assert episode.series_tvdb_id == video.series_tvdb_id
 
 
 @pytest.mark.integration
 @vcr.use_cassette
 def test_refine_ambiguous(episodes):
-    episode = Episode(episodes['colony_s01e09'].name.lower(), episodes['colony_s01e09'].series,
-                      episodes['colony_s01e09'].season, episodes['colony_s01e09'].episode)
+    video = episodes['colony_s01e09']
+    episode = Episode(video.name.lower(), video.series.lower(), video.season, video.episode)
     refine(episode)
-    assert episode.series == episodes['colony_s01e09'].series
-    assert episode.year == episodes['colony_s01e09'].year
-    assert episode.title == episodes['colony_s01e09'].title
-    assert episode.imdb_id == episodes['colony_s01e09'].imdb_id
-    assert episode.series_imdb_id == episodes['colony_s01e09'].series_imdb_id
-    assert episode.tvdb_id == episodes['colony_s01e09'].tvdb_id
-    assert episode.series_tvdb_id == episodes['colony_s01e09'].series_tvdb_id
+    assert episode.series == video.series
+    assert episode.year == video.year
+    assert episode.title == video.title
+    assert episode.imdb_id == video.imdb_id
+    assert episode.series_imdb_id == video.series_imdb_id
+    assert episode.tvdb_id == video.tvdb_id
+    assert episode.series_tvdb_id == video.series_tvdb_id
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_refine_ambiguous_2(episodes):
+    video = episodes['the_100_s03e09']
+    episode = Episode(video.name.lower(), video.series.lower(), video.season, video.episode)
+    refine(episode)
+    assert episode.series == video.series
+    assert episode.year == video.year
+    assert episode.title == video.title
+    assert episode.imdb_id == video.imdb_id
+    assert episode.series_imdb_id == video.series_imdb_id
+    assert episode.tvdb_id == video.tvdb_id
+    assert episode.series_tvdb_id == video.series_tvdb_id

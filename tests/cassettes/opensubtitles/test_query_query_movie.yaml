@@ -1,220 +1,136 @@
 interactions:
 - request:
-    body: '<?xml version=''1.0''?>
-
-      <methodCall>
-
-      <methodName>LogIn</methodName>
-
-      <params>
-
-      <param>
-
-      <value><string></string></value>
-
-      </param>
-
-      <param>
-
-      <value><string></string></value>
-
-      </param>
-
-      <param>
-
-      <value><string>eng</string></value>
-
-      </param>
-
-      <param>
-
-      <value><string>subliminal v2.0</string></value>
-
-      </param>
-
-      </params>
-
-      </methodCall>
-
-      '
+    body: !!binary |
+      PD94bWwgdmVyc2lvbj0nMS4wJz8+CjxtZXRob2RDYWxsPgo8bWV0aG9kTmFtZT5Mb2dJbjwvbWV0
+      aG9kTmFtZT4KPHBhcmFtcz4KPHBhcmFtPgo8dmFsdWU+PHN0cmluZz48L3N0cmluZz48L3ZhbHVl
+      Pgo8L3BhcmFtPgo8cGFyYW0+Cjx2YWx1ZT48c3RyaW5nPjwvc3RyaW5nPjwvdmFsdWU+CjwvcGFy
+      YW0+CjxwYXJhbT4KPHZhbHVlPjxzdHJpbmc+ZW5nPC9zdHJpbmc+PC92YWx1ZT4KPC9wYXJhbT4K
+      PHBhcmFtPgo8dmFsdWU+PHN0cmluZz5zdWJsaW1pbmFsIHYyLjA8L3N0cmluZz48L3ZhbHVlPgo8
+      L3BhcmFtPgo8L3BhcmFtcz4KPC9tZXRob2RDYWxsPgo=
     headers:
       Accept-Encoding: [gzip]
       Content-Length: ['317']
       Content-Type: [text/xml]
-      User-Agent: [xmlrpclib.py/1.0.1 (by www.pythonware.com)]
+      User-Agent: [Python-xmlrpc/3.4]
     method: POST
     uri: https://api.opensubtitles.org/xml-rpc
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAA6WRTQrCMBCF954idK+Jf6gwjQdwIXiDtBn/2iSlmYjHN9ZARUQFd99M5s17ZGB9
-        NTW7YOtPzubZeCQyhrZ0+mQPeRZoP1xmazkAg3R0eoe+cdZjbDSqVcbLAXtQBAYXVQe8EwNPbSip
-        YxbFpsD2UTCwyqAkV6EF3nHq9+q0IEaQ8b0Ocf8knBdOLec0wxVpTdUCeBpJcv6kB/5s+c7fk6Lg
-        fwgwEYJtN3+aYems/uimXShqlGIkxBR4qr6ZdanSN/dTwNNFEvg7vd7vBrQCu274AQAA
+        H4sIAAAAAAAAA6WR3QrCMAyF732Ksnttp/gHsXsALwTfoK5xims723T4+M5ZUERU8O5LyMk5JFBc
+        TM1a9OHo7CrLRyJjaEunj7ZaZZH2w0VWyAEYpIPTWwyNswG7RqO8MkEO2J06YNCqOuKNGATysaSe
+        WSc2O/T3goFVBiW5E1rgPaf+Q50WdBHk0pxzPzPz82JKWFVT3VAUhqITwNNIkvMnPfBny3f+gRTF
+        8EOAsRBss/7TDEtn9Uc37eKuRilGQkyAp+qbWZ8qnfkxBTx9JEG40ev/rityQ3X4AQAA
     headers:
-      accept-ranges: [bytes]
-      access-control-allow-headers: ['Origin, X-Requested-With, Content-Type, Accept']
-      access-control-allow-origin: ['*']
-      age: ['0']
-      cache-control: ['no-store, no-cache, must-revalidate, post-check=0, pre-check=0']
-      content-encoding: [gzip]
-      content-length: ['222']
-      content-type: [text/xml;charset=UTF-8]
-      date: ['Tue, 09 Feb 2016 16:15:31 GMT']
-      download-quota: ['197']
-      expires: ['Thu, 19 Nov 1981 08:52:00 GMT']
-      pragma: [no-cache]
-      server: [lighttpd/1.4.39]
-      set-cookie: [PHPSESSID=ameluram2uj7oa85t4e9tddtk7; path=/; domain=.opensubtitles.org]
-      strict-transport-security: [max-age=63072000; includeSubdomains; preload]
-      vary: [Accept-Encoding]
-      x-cache: [MISS]
-      x-cache-backend: [web2]
-      x-content-type-options: [nosniff]
-      x-frame-options: [DENY]
-      x-uncompressed-content-length: ['504']
+      Accept-Ranges: [bytes]
+      Access-Control-Allow-Headers: ['Origin,X-Requested-With,Content-Type,Accept,DNT,Keep-Alive,User-Agent,If-Modified-Since,Cache-Control']
+      Access-Control-Allow-Methods: ['GET, POST, OPTIONS']
+      Access-Control-Allow-Origin: ['*']
+      Age: ['0']
+      Content-Encoding: [gzip]
+      Content-Length: ['222']
+      Content-type: [text/xml;charset=UTF-8]
+      Date: ['Fri, 08 Apr 2016 18:35:00 GMT']
+      Download-Quota: ['200']
+      Server: [lighttpd/1.4.39]
+      Set-Cookie: [PHPSESSID=9mq1r6m7q85tegg5dptu0mtuo0; path=/; domain=.opensubtitles.org;
+          HttpOnly]
+      Strict-Transport-Security: [max-age=63072000; includeSubdomains; preload]
+      Vary: [Accept-Encoding]
+      X-Cache: [MISS]
+      X-Cache-Backend: [web3]
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [DENY]
+      X-Uncompressed-Content-Length: ['504']
     status: {code: 200, message: OK}
 - request:
-    body: '<?xml version=''1.0''?>
-
-      <methodCall>
-
-      <methodName>SearchSubtitles</methodName>
-
-      <params>
-
-      <param>
-
-      <value><string>ameluram2uj7oa85t4e9tddtk7</string></value>
-
-      </param>
-
-      <param>
-
-      <value><array><data>
-
-      <value><struct>
-
-      <member>
-
-      <name>query</name>
-
-      <value><string>Man of Steel</string></value>
-
-      </member>
-
-      <member>
-
-      <name>sublanguageid</name>
-
-      <value><string>fre</string></value>
-
-      </member>
-
-      </struct></value>
-
-      </data></array></value>
-
-      </param>
-
-      </params>
-
-      </methodCall>
-
-      '
+    body: !!binary |
+      PD94bWwgdmVyc2lvbj0nMS4wJz8+CjxtZXRob2RDYWxsPgo8bWV0aG9kTmFtZT5TZWFyY2hTdWJ0
+      aXRsZXM8L21ldGhvZE5hbWU+CjxwYXJhbXM+CjxwYXJhbT4KPHZhbHVlPjxzdHJpbmc+OW1xMXI2
+      bTdxODV0ZWdnNWRwdHUwbXR1bzA8L3N0cmluZz48L3ZhbHVlPgo8L3BhcmFtPgo8cGFyYW0+Cjx2
+      YWx1ZT48YXJyYXk+PGRhdGE+Cjx2YWx1ZT48c3RydWN0Pgo8bWVtYmVyPgo8bmFtZT5xdWVyeTwv
+      bmFtZT4KPHZhbHVlPjxzdHJpbmc+TWFuIG9mIFN0ZWVsPC9zdHJpbmc+PC92YWx1ZT4KPC9tZW1i
+      ZXI+CjxtZW1iZXI+CjxuYW1lPnN1Ymxhbmd1YWdlaWQ8L25hbWU+Cjx2YWx1ZT48c3RyaW5nPmZy
+      ZTwvc3RyaW5nPjwvdmFsdWU+CjwvbWVtYmVyPgo8L3N0cnVjdD48L3ZhbHVlPgo8L2RhdGE+PC9h
+      cnJheT48L3ZhbHVlPgo8L3BhcmFtPgo8L3BhcmFtcz4KPC9tZXRob2RDYWxsPgo=
     headers:
       Accept-Encoding: [gzip]
       Content-Length: ['446']
       Content-Type: [text/xml]
-      User-Agent: [xmlrpclib.py/1.0.1 (by www.pythonware.com)]
+      User-Agent: [Python-xmlrpc/3.4]
     method: POST
     uri: https://api.opensubtitles.org/xml-rpc
   response:
     body:
       string: !!binary |
-        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
-        +UuZAAA=
+        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
+        hlRbS5kAAA==
     headers:
-      accept-ranges: [bytes]
-      access-control-allow-headers: ['Origin, X-Requested-With, Content-Type, Accept']
-      access-control-allow-origin: ['*']
-      age: ['0']
-      cache-control: ['no-store, no-cache, must-revalidate, post-check=0, pre-check=0']
-      content-encoding: [gzip]
-      content-length: ['2000']
-      content-type: [text/xml;charset=UTF-8]
-      date: ['Tue, 09 Feb 2016 16:15:31 GMT']
-      expires: ['Thu, 19 Nov 1981 08:52:00 GMT']
-      pragma: [no-cache]
-      server: [lighttpd/1.4.39]
-      set-cookie: [PHPSESSID=ameluram2uj7oa85t4e9tddtk7; path=/; domain=.opensubtitles.org]
-      strict-transport-security: [max-age=63072000; includeSubdomains; preload]
-      vary: [Accept-Encoding]
-      x-cache: [MISS]
-      x-cache-backend: [web3]
-      x-content-type-options: [nosniff]
-      x-frame-options: [DENY]
-      x-uncompressed-content-length: ['39243']
+      Accept-Ranges: [bytes]
+      Access-Control-Allow-Headers: ['Origin,X-Requested-With,Content-Type,Accept,DNT,Keep-Alive,User-Agent,If-Modified-Since,Cache-Control']
+      Access-Control-Allow-Methods: ['GET, POST, OPTIONS']
+      Access-Control-Allow-Origin: ['*']
+      Age: ['0']
+      Content-Encoding: [gzip]
+      Content-Length: ['2002']
+      Content-type: [text/xml;charset=UTF-8]
+      Date: ['Fri, 08 Apr 2016 18:35:00 GMT']
+      Server: [lighttpd/1.4.39]
+      Set-Cookie: [PHPSESSID=9mq1r6m7q85tegg5dptu0mtuo0; path=/; domain=.opensubtitles.org;
+          HttpOnly]
+      Strict-Transport-Security: [max-age=63072000; includeSubdomains; preload]
+      Vary: [Accept-Encoding]
+      X-Cache: [MISS]
+      X-Cache-Backend: [web2]
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [DENY]
+      X-Uncompressed-Content-Length: ['39243']
     status: {code: 200, message: OK}
 - request:
-    body: '<?xml version=''1.0''?>
-
-      <methodCall>
-
-      <methodName>LogOut</methodName>
-
-      <params>
-
-      <param>
-
-      <value><string>ameluram2uj7oa85t4e9tddtk7</string></value>
-
-      </param>
-
-      </params>
-
-      </methodCall>
-
-      '
+    body: !!binary |
+      PD94bWwgdmVyc2lvbj0nMS4wJz8+CjxtZXRob2RDYWxsPgo8bWV0aG9kTmFtZT5Mb2dPdXQ8L21l
+      dGhvZE5hbWU+CjxwYXJhbXM+CjxwYXJhbT4KPHZhbHVlPjxzdHJpbmc+OW1xMXI2bTdxODV0ZWdn
+      NWRwdHUwbXR1bzA8L3N0cmluZz48L3ZhbHVlPgo8L3BhcmFtPgo8L3BhcmFtcz4KPC9tZXRob2RD
+      YWxsPgo=
     headers:
       Accept-Encoding: [gzip]
       Content-Length: ['176']
       Content-Type: [text/xml]
-      User-Agent: [xmlrpclib.py/1.0.1 (by www.pythonware.com)]
+      User-Agent: [Python-xmlrpc/3.4]
     method: POST
     uri: https://api.opensubtitles.org/xml-rpc
   response:
@@ -225,46 +141,35 @@ interactions:
         Nh36VTCwyqCkoEIk4IvIha09T0g7yFoIdjkDzzJb+c4LfD//axj2zuqfadrFbkQpKiFq4Fn9C1u2
         yt/cXMDzRTLQTJ/3ewOeSfZ8eAEAAA==
     headers:
-      accept-ranges: [bytes]
-      access-control-allow-headers: ['Origin, X-Requested-With, Content-Type, Accept']
-      access-control-allow-origin: ['*']
-      age: ['0']
-      cache-control: ['no-store, no-cache, must-revalidate, post-check=0, pre-check=0']
-      content-encoding: [gzip]
-      content-length: ['193']
-      content-type: [text/xml;charset=UTF-8]
-      date: ['Tue, 09 Feb 2016 16:15:31 GMT']
-      expires: ['Thu, 19 Nov 1981 08:52:00 GMT']
-      pragma: [no-cache]
-      server: [lighttpd/1.4.39]
-      set-cookie: [PHPSESSID=ameluram2uj7oa85t4e9tddtk7; path=/; domain=.opensubtitles.org]
-      strict-transport-security: [max-age=63072000; includeSubdomains; preload]
-      vary: [Accept-Encoding]
-      x-cache: [MISS]
-      x-cache-backend: [web2]
-      x-content-type-options: [nosniff]
-      x-frame-options: [DENY]
-      x-uncompressed-content-length: ['376']
+      Accept-Ranges: [bytes]
+      Access-Control-Allow-Headers: ['Origin,X-Requested-With,Content-Type,Accept,DNT,Keep-Alive,User-Agent,If-Modified-Since,Cache-Control']
+      Access-Control-Allow-Methods: ['GET, POST, OPTIONS']
+      Access-Control-Allow-Origin: ['*']
+      Age: ['0']
+      Content-Encoding: [gzip]
+      Content-Length: ['193']
+      Content-type: [text/xml;charset=UTF-8]
+      Date: ['Fri, 08 Apr 2016 18:35:00 GMT']
+      Server: [lighttpd/1.4.39]
+      Set-Cookie: [PHPSESSID=9mq1r6m7q85tegg5dptu0mtuo0; path=/; domain=.opensubtitles.org;
+          HttpOnly]
+      Strict-Transport-Security: [max-age=63072000; includeSubdomains; preload]
+      Vary: [Accept-Encoding]
+      X-Cache: [MISS]
+      X-Cache-Backend: [web3]
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [DENY]
+      X-Uncompressed-Content-Length: ['376']
     status: {code: 200, message: OK}
 - request:
-    body: '<?xml version=''1.0''?>
-
-      <methodCall>
-
-      <methodName>close</methodName>
-
-      <params>
-
-      </params>
-
-      </methodCall>
-
-      '
+    body: !!binary |
+      PD94bWwgdmVyc2lvbj0nMS4wJz8+CjxtZXRob2RDYWxsPgo8bWV0aG9kTmFtZT5jbG9zZTwvbWV0
+      aG9kTmFtZT4KPHBhcmFtcz4KPC9wYXJhbXM+CjwvbWV0aG9kQ2FsbD4K
     headers:
       Accept-Encoding: [gzip]
       Content-Length: ['99']
       Content-Type: [text/xml]
-      User-Agent: [xmlrpclib.py/1.0.1 (by www.pythonware.com)]
+      User-Agent: [Python-xmlrpc/3.4]
     method: POST
     uri: https://api.opensubtitles.org/xml-rpc
   response:
@@ -275,21 +180,22 @@ interactions:
         3ZDbBKCRmoQPMkSPbBWpsdvThHkHceZXuK3hYGyAzkajkKVmMrKDE9kx7Ws0tdaon9nKxmYgwQvO
         S2RJ/Qtbt0qf3l8hS/dJ4Bf6vOYbZMIxSIYBAAA=
     headers:
-      accept-ranges: [bytes]
-      access-control-allow-headers: ['Origin, X-Requested-With, Content-Type, Accept']
-      access-control-allow-origin: ['*']
-      age: ['0']
-      content-encoding: [gzip]
-      content-length: ['200']
-      content-type: [text/xml;charset=UTF-8]
-      date: ['Tue, 09 Feb 2016 16:15:32 GMT']
-      server: [lighttpd/1.4.39]
-      strict-transport-security: [max-age=63072000; includeSubdomains; preload]
-      vary: [Accept-Encoding]
-      x-cache: [MISS]
-      x-cache-backend: [web2]
-      x-content-type-options: [nosniff]
-      x-frame-options: [DENY]
-      x-uncompressed-content-length: ['390']
+      Accept-Ranges: [bytes]
+      Access-Control-Allow-Headers: ['Origin,X-Requested-With,Content-Type,Accept,DNT,Keep-Alive,User-Agent,If-Modified-Since,Cache-Control']
+      Access-Control-Allow-Methods: ['GET, POST, OPTIONS']
+      Access-Control-Allow-Origin: ['*']
+      Age: ['0']
+      Content-Encoding: [gzip]
+      Content-Length: ['200']
+      Content-type: [text/xml;charset=UTF-8]
+      Date: ['Fri, 08 Apr 2016 18:35:00 GMT']
+      Server: [lighttpd/1.4.39]
+      Strict-Transport-Security: [max-age=63072000; includeSubdomains; preload]
+      Vary: [Accept-Encoding]
+      X-Cache: [MISS]
+      X-Cache-Backend: [web2]
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [DENY]
+      X-Uncompressed-Content-Length: ['390']
     status: {code: 200, message: OK}
 version: 1

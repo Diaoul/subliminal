@@ -169,9 +169,7 @@ class LegendasTVProvider(Provider):
             r.raise_for_status()
 
             soup = ParserBeautifulSoup(r.content, ['html.parser'])
-            auth_error = soup.find('div', {'class': 'alert-error'}, text=re.compile(u'.*Usuário ou senha inválidos.*'))
-
-            if auth_error:
+            if soup.find('div', {'class': 'alert-error'}, string=re.compile(u'Usuário ou senha inválidos')):
                 raise AuthenticationError(self.username)
 
             logger.debug('Logged in')
@@ -211,8 +209,10 @@ class LegendasTVProvider(Provider):
             # extract id
             title_id = int(source['id_filme'])
 
-            # extract type, title and year
+            # extract type and title
             title = {'type': type_map[source['tipo']], 'title': source['dsc_nome']}
+
+            # extract year
             if source['dsc_data_lancamento'] and source['dsc_data_lancamento'].isdigit():
                 title['year'] = int(source['dsc_data_lancamento'])
 
@@ -225,7 +225,7 @@ class LegendasTVProvider(Provider):
 
             # extract season
             if title['type'] == 'episode':
-                if source['temporada'] is not None and source['temporada'].isdigit():
+                if source['temporada'] and source['temporada'].isdigit():
                     title['season'] = int(source['temporada'])
                 else:
                     match = season_re.search(source['dsc_nome_br'])

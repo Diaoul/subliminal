@@ -87,15 +87,15 @@ def sanitize(string, ignore_characters=None):
     # replace some characters with one space
     characters = {'-', ':', '(', ')', '.'} - ignore_characters
     if characters:
-        string = re.sub('[%s]' % re.escape(''.join(characters)), ' ', string)
+        string = re.sub(r'[%s]' % re.escape(''.join(characters)), ' ', string)
 
     # remove some characters
     characters = {'\''} - ignore_characters
     if characters:
-        string = re.sub('[%s]' % re.escape(''.join(characters)), '', string)
+        string = re.sub(r'[%s]' % re.escape(''.join(characters)), '', string)
 
     # replace multiple spaces with one
-    string = re.sub('\s+', ' ', string)
+    string = re.sub(r'\s+', ' ', string)
 
     # strip and lower case
     return string.strip().lower()
@@ -114,7 +114,7 @@ def sanitize_release_group(string):
         return
 
     # remove content in square brackets
-    string = re.sub('\[\w+\]', '', string)
+    string = re.sub(r'\[\w+\]', '', string)
 
     # strip and lower case
     return string.strip().lower()

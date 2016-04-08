@@ -20,8 +20,8 @@ logger = logging.getLogger(__name__)
 
 language_converters.register('tvsubtitles = subliminal.converters.tvsubtitles:TVsubtitlesConverter')
 
-link_re = re.compile('^(?P<series>.+?)(?: \(?\d{4}\)?| \((?:US|UK)\))? \((?P<first_year>\d{4})-\d{4}\)$')
-episode_id_re = re.compile('^episode-\d+\.html$')
+link_re = re.compile(r'^(?P<series>.+?)(?: \(?\d{4}\)?| \((?:US|UK)\))? \((?P<first_year>\d{4})-\d{4}\)$')
+episode_id_re = re.compile(r'^episode-\d+\.html$')
 
 
 class TVsubtitlesSubtitle(Subtitle):

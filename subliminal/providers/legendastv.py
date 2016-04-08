@@ -31,10 +31,10 @@ rarfile.PATH_SEP = '/'
 type_map = {'M': 'movie', 'S': 'episode', 'C': 'episode'}
 
 #: BR title season parsing regex
-season_re = re.compile(' - (?P<season>\d+)(\xaa|a) temporada', re.IGNORECASE)
+season_re = re.compile(r' - (?P<season>\d+)(\xaa|a) temporada', re.IGNORECASE)
 
 #: Rating parsing regex
-rating_re = re.compile('^(?P<downloads>\d+) downloads, nota (?P<rating>\d+)?')
+rating_re = re.compile(r'^(?P<downloads>\d+) downloads, nota (?P<rating>\d+)?')
 
 #: Cache key for releases
 releases_key = __name__ + ':releases|{archive_id}'

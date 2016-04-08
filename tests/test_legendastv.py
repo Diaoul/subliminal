@@ -137,6 +137,15 @@ def test_search_titles_quote():
 
 @pytest.mark.integration
 @vcr.use_cassette
+def test_search_titles_with_invalid_year():
+    with LegendasTVProvider() as provider:
+        titles = provider.search_titles('Grave Danger')
+    assert len(titles) == 1
+    assert set(titles.keys()) == {22034}
+
+
+@pytest.mark.integration
+@vcr.use_cassette
 def test_get_archives():
     with LegendasTVProvider() as provider:
         archives = provider.get_archives(34084, 2)

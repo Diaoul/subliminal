@@ -42,7 +42,7 @@ downloads_re = re.compile(r'(?P<downloads>\d+) downloads')
 rating_re = re.compile(r'nota (?P<rating>\d+)')
 
 #: Timestamp parsing regex
-timestamp_re = re.compile(r'(?P<day>\d+)/(?P<month>\d+)/(?P<year>\d+) - (?P<minute>\d+):(?P<second>\d+)')
+timestamp_re = re.compile(r'(?P<day>\d+)/(?P<month>\d+)/(?P<year>\d+) - (?P<hour>\d+):(?P<minute>\d+)')
 
 #: Cache key for releases
 releases_key = __name__ + ':releases|{archive_id}'
@@ -251,7 +251,7 @@ class LegendasTVProvider(Provider):
 
         return titles
 
-    @region.cache_on_arguments(expiration_time=timedelta(minutes=15))
+    @region.cache_on_arguments(expiration_time=timedelta(minutes=15).total_seconds())
     def get_archives(self, title_id, language_code):
         """Get the archive list from a given `title_id` and `language_code`.
 

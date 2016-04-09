@@ -251,7 +251,7 @@ class LegendasTVProvider(Provider):
 
         return titles
 
-    @region.cache_on_arguments(expiration_time=timedelta(minutes=15))
+    @region.cache_on_arguments(expiration_time=timedelta(minutes=15).total_seconds())
     def get_archives(self, title_id, language_code):
         """Get the archive list from a given `title_id` and `language_code`.
 

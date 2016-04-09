@@ -69,6 +69,9 @@ def hash_napiprojekt(video_path):
     return hashlib.md5(data).hexdigest()
 
 
+hash_itasa = hash_napiprojekt
+
+
 def sanitize(string, ignore_characters=None):
     """Sanitize a string to strip special characters.
 

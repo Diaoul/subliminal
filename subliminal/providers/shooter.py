@@ -24,6 +24,7 @@ class ShooterSubtitle(Subtitle):
         self.hash = hash
         self.download_link = download_link
 
+    @property
     def id(self):
         return self.download_link
 

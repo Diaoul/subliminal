@@ -244,3 +244,34 @@ def test_refine_ambiguous_2(episodes):
     assert episode.series_imdb_id == video.series_imdb_id
     assert episode.tvdb_id == video.tvdb_id
     assert episode.series_tvdb_id == video.series_tvdb_id
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_refine_series_name_with_year(episodes):
+    video = episodes['once_upon_a_time_2011_s01e01']
+    episode = Episode(video.name.lower(), video.series.lower(), video.season, video.episode)
+    refine(episode)
+    assert episode.series == video.series
+    assert episode.year == video.year
+    assert episode.title == video.title
+    assert episode.imdb_id == video.imdb_id
+    assert episode.series_imdb_id == video.series_imdb_id
+    assert episode.tvdb_id == video.tvdb_id
+    assert episode.series_tvdb_id == video.series_tvdb_id
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_refine_series_name_with_year_2(episodes):
+    video = episodes['house_of_cards_2013_s04e13']
+    episode = Episode(video.name.lower(), video.series.lower(), video.season, video.episode)
+    refine(episode)
+    assert episode.series == video.series
+    assert episode.year == video.year
+    assert episode.title == video.title
+    assert episode.imdb_id == video.imdb_id
+    assert episode.series_imdb_id == video.series_imdb_id
+    assert episode.tvdb_id == video.tvdb_id
+    assert episode.series_tvdb_id == video.series_tvdb_id
+

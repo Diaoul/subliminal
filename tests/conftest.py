@@ -87,7 +87,16 @@ def episodes():
             'the_100_s03e09':
             Episode('The.100.S03E09.720p.HDTV.x264-AVS.mkv', 'The 100', 3, 9, title='Stealing Fire', year=2014,
                     tvdb_id=5544536, series_tvdb_id=268592, series_imdb_id='tt2661044', format='HDTV',
-                    release_group='AVS', resolution='720p', video_codec='h264', imdb_id='tt4799896')}
+                    release_group='AVS', resolution='720p', video_codec='h264', imdb_id='tt4799896'),
+            'once_upon_a_time_2011_s01e01':
+            Episode('Once.Upon.a.Time.S01E01.720p.HDTV.X264-DIMENSION.mkv', 'Once Upon a Time', 1, 1, title='Pilot',
+                    year=2011, tvdb_id=4105178, series_tvdb_id=248835, series_imdb_id='tt1843230', format='HDTV',
+                    release_group='DIMENSION', resolution='720p', video_codec='h264', imdb_id='tt1983723'),
+            'house_of_cards_2013_s04e13':
+            Episode('House.of.Cards.2013.S04E13.720p.WEBRip.X264-DEFLATE.mkv', 'House of Cards', 4, 13,
+                    title='Chapter 52', year=2013, tvdb_id=5440817, series_tvdb_id=262980, series_imdb_id='tt1856010',
+                    format='WEBRip', release_group='DEFLATE', resolution='720p', video_codec='h264',
+                    imdb_id='tt5095748')}
 
 
 @pytest.fixture(scope='session')

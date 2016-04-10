@@ -79,20 +79,34 @@ def test_logout():
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_search_url_title_episode(episodes):
+def test_search_url_titles_episode(episodes):
     video = episodes['dallas_2012_s01e03']
     with SubsCenterProvider() as provider:
-        url_title = provider._search_url_title(video.series, 'series')
-    assert url_title == 'dallas'
+        url_titles = provider._search_url_titles(video.series)
+    assert 'movie' in url_titles
+    assert 'series' in url_titles
+    assert len(url_titles['series']) == 1
+    assert url_titles['series'][0] == 'dallas'
 
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_search_url_title_movies(movies):
+def test_search_url_titles_movies(movies):
     video = movies['man_of_steel']
     with SubsCenterProvider() as provider:
-        url_title = provider._search_url_title(video.title, 'movie')
-    assert url_title == 'superman-man-of-steel'
+        url_titles = provider._search_url_titles(video.title)
+    assert 'movie' in url_titles
+    assert 'series' not in url_titles
+    assert len(url_titles['movie']) == 1
+    assert url_titles['movie'][0] == 'superman-man-of-steel'
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_search_url_titles_no_suggestion():
+    with SubsCenterProvider() as provider:
+        url_titles = provider._search_url_titles('DCs Legends of Tomorrow')
+    assert len(url_titles) == 0
 
 
 @pytest.mark.integration
@@ -101,7 +115,7 @@ def test_query_movie(movies):
     video = movies['enders_game']
     expected_subtitles = {'267118', '266898', '267140'}
     with SubsCenterProvider() as provider:
-        subtitles = provider.query(title=video.title)
+        subtitles = provider.query(video.title)
     assert len(subtitles) == len(expected_subtitles)
     assert {subtitle.id for subtitle in subtitles} == expected_subtitles
 
@@ -112,7 +126,7 @@ def test_query_episode(episodes):
     video = episodes['dallas_2012_s01e03']
     expected_subtitles = {'264417', '256843', '256842'}
     with SubsCenterProvider() as provider:
-        subtitles = provider.query(series=video.series, season=video.season, episode=video.episode)
+        subtitles = provider.query(video.series, season=video.season, episode=video.episode)
     assert len(subtitles) == len(expected_subtitles)
     assert {subtitle.id for subtitle in subtitles} == expected_subtitles
 

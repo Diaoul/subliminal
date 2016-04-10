@@ -58,7 +58,7 @@ class ShooterProvider(Provider):
 
         # handle subtitles not found
         if r.content == b'\xff':
-            logger.debug('No subtitle found')
+            logger.debug('No subtitles found')
             return []
 
         # parse the subtitles

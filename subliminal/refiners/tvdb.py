@@ -283,7 +283,8 @@ def refine(video, **kwargs):
 
         # discard mismatches on year
         if video.year and series_year and video.year != series_year:
-            logger.debug('Discarding series %r mismatch on year %d', series_year)
+            logger.debug('Discarding series %r mismatch on year %d', result['seriesName'], series_year)
+            continue
 
         # iterate over series names
         for series_name in series_names:

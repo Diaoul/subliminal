@@ -146,6 +146,24 @@ def test_search_titles_with_invalid_year():
 
 @pytest.mark.integration
 @vcr.use_cassette
+def test_search_titles_with_season_information_in_english():
+    with LegendasTVProvider() as provider:
+        titles = provider.search_titles('Pretty Little Liars')
+    assert len(titles) == 7
+    assert set(titles.keys()) == {20917, 24586, 27500, 28332, 30303, 33223, 38105}
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_search_titles_without_season_information():
+    with LegendasTVProvider() as provider:
+        titles = provider.search_titles('The Walking Dead Webisodes Torn Apart')
+    assert len(titles) == 1
+    assert set(titles.keys()) == {25770}
+
+
+@pytest.mark.integration
+@vcr.use_cassette
 def test_get_archives():
     with LegendasTVProvider() as provider:
         archives = provider.get_archives(34084, 2)

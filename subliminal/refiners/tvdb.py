@@ -289,7 +289,7 @@ def refine(video, **kwargs):
         for series_name in series_names:
             # match on sanitized series name
             if sanitize(series_name) == sanitize(video.series):
-                logger.debug('Found exact match on series %r (%d)', series_name, series_year or 'no year')
+                logger.debug('Found exact match on series %r (%s)', series_name, series_year or 'no year')
                 match = True
                 break
 

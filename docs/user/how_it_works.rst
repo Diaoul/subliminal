@@ -11,6 +11,7 @@ subtitles. Current supported providers are:
 * NapiProjekt
 * OpenSubtitles
 * Podnapisi
+* Shooter
 * SubsCenter
 * TheSubDB
 * TvSubtitles

@@ -64,9 +64,12 @@ def episodes():
                                        '82ce34a3bcee0c66ed3b26d900d31cca;78113770551f3efd1e2d4ec45898c59c',
                             'thesubdb': 'b1f899c77f4c960b84b8dbf840d4e42d'}),
             'dallas_s01e03':
-            Episode('Dallas.S01E03.mkv', 'Dallas', 1, 3),
+            Episode('Dallas.S01E03.mkv', 'Dallas', 1, 3, title='Spy in the House', year=1978, tvdb_id=228224,
+                    series_tvdb_id=77092, series_imdb_id='tt0077000'),
             'dallas_2012_s01e03':
-            Episode('Dallas.2012.S01E03.mkv', 'Dallas', 1, 3, year=2012, original_series=False),
+            Episode('Dallas.2012.S01E03.mkv', 'Dallas', 1, 3, title='The Price You Pay', year=2012,
+                    original_series=False, tvdb_id=4199511, series_tvdb_id=242521, series_imdb_id='tt1723760',
+                    imdb_id='tt2205526'),
             'marvels_agents_of_shield_s02e06':
             Episode('Marvels.Agents.of.S.H.I.E.L.D.S02E06.720p.HDTV.x264-KILLERS.mkv',
                     'Marvel\'s Agents of S.H.I.E.L.D.', 2, 6, year=2013, format='HDTV', release_group='KILLERS',

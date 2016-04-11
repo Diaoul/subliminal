@@ -9,7 +9,7 @@ from vcr import VCR
 
 from subliminal import __short_version__
 from subliminal.video import Episode
-from subliminal.refiners.tvdb import TVDBClient, refine
+from subliminal.refiners.tvdb import TVDBClient, refine, series_year_re
 
 vcr = VCR(path_transformer=lambda path: path + '.yaml',
           record_mode=os.environ.get('VCR_RECORD_MODE', 'once'),
@@ -19,6 +19,36 @@ vcr = VCR(path_transformer=lambda path: path + '.yaml',
 @pytest.fixture()
 def client():
     return TVDBClient('2AE5D1E42E7194B9', headers={'User-Agent': 'Subliminal/%s' % __short_version__})
+
+
+def test_series_year_re_no_year():
+    groups = series_year_re.match('Series Name').groupdict()
+    assert groups['series'] == 'Series Name'
+    assert groups['year'] is None
+
+
+def test_series_year_re_year():
+    groups = series_year_re.match('Series Name 2013').groupdict()
+    assert groups['series'] == 'Series Name'
+    assert groups['year'] == '2013'
+
+
+def test_series_year_re_year_parenthesis():
+    groups = series_year_re.match('Series Name (2013)').groupdict()
+    assert groups['series'] == 'Series Name'
+    assert groups['year'] == '2013'
+
+
+def test_series_year_re_text_parenthesis():
+    groups = series_year_re.match('Series Name (Rock)').groupdict()
+    assert groups['series'] == 'Series Name (Rock)'
+    assert groups['year'] is None
+
+
+def test_series_year_re_text_unclosed_parenthesis():
+    groups = series_year_re.match('Series Name (2013').groupdict()
+    assert groups['series'] == 'Series Name (2013'
+    assert groups['year'] is None
 
 
 def test_language():
@@ -235,6 +265,37 @@ def test_refine_ambiguous(episodes):
 @vcr.use_cassette
 def test_refine_ambiguous_2(episodes):
     video = episodes['the_100_s03e09']
+    episode = Episode(video.name.lower(), video.series.lower(), video.season, video.episode)
+    refine(episode)
+    assert episode.series == video.series
+    assert episode.year == video.year
+    assert episode.title == video.title
+    assert episode.imdb_id == video.imdb_id
+    assert episode.series_imdb_id == video.series_imdb_id
+    assert episode.tvdb_id == video.tvdb_id
+    assert episode.series_tvdb_id == video.series_tvdb_id
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_refine_episode_year(episodes):
+    video = episodes['dallas_2012_s01e03']
+    episode = Episode(video.name.lower(), video.series.lower(), video.season, video.episode, year=video.year,
+                      original_series=video.original_series)
+    refine(episode)
+    assert episode.series == video.series
+    assert episode.year == video.year
+    assert episode.title == video.title
+    assert episode.imdb_id == video.imdb_id
+    assert episode.series_imdb_id == video.series_imdb_id
+    assert episode.tvdb_id == video.tvdb_id
+    assert episode.series_tvdb_id == video.series_tvdb_id
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_refine_episode_no_year(episodes):
+    video = episodes['dallas_s01e03']
     episode = Episode(video.name.lower(), video.series.lower(), video.season, video.episode)
     refine(episode)
     assert episode.series == video.series

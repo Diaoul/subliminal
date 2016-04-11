@@ -10,29 +10,30 @@ interactions:
       Content-Type: [application/json]
       User-Agent: [Subliminal/2.0]
     method: POST
-    uri: https://api-beta.thetvdb.com/login
+    uri: https://api.thetvdb.com/login
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAAwTBR7KiQAAA0P0/heWeX6IgMjuS0Ci0IHlDkaEJTRKEqbn7vPf353A4zrjOuuOf
-        wzHb1DKWkwpW6tveAalXYAKdSScCuIK69xxBZX+zTW0yhasgkk66VZC6Za9Q1CbQNjVAuEouThXL
-        zRy5dBkLYAItu0Vumkfu/QQQ/uqiTemiT+mo2HPjF1+7O7SFdbkpLTk9huDaRQITthpx3j487DAR
-        kvU0vinio7T4Ah2QGa9LzDWojpNrPPKvVvJH3orjHYIPvMMTOe6LXWqvCnXTSWduCsON92zW9Kfa
-        w2UvWKUloeG6zPYQ/RR5fD+oingWv0Pn3czoWa+lzqtsmD1vdtCwQkoTRrMMZKJ5mcLmsSoboidJ
-        fvcRwrfA1yll+Q7N7hF++sXyFULiSrEcVWAcMCJd9qupWvo3nPNBHmWpf6EtzuR+pvDG9aRvo0lK
-        nFpBcpRMwmgm7tmTg6V0mJtpIVqLNNPclvLhiVueakXjY+hvp5YlcmdmA280uSDJkjNbwsFfDK8m
-        14lMuePPv/8AAAD//wMAocH8W9sBAAA=
+        H4sIAAAAAAAAAwTByZKiMAAA0Ht/heWdLnZhbumIEuwQBSSSC4VhERBBFASm5t/nvb9fq9X63dbZ
+        Y/1ntc5m53bd85KUjn9ekOSW6IUensYh0lHdXULomN/Z7NwzG5SkskS3AiIJog/eRi/U3GtUtSVX
+        wvK6v78Tqt2uEL1QY84JTfOE7kRUtZO7jT7uFmhuBeT89D0EMNrtCweyxdrFpXRUkHppRPiU7S7Q
+        kHweit7r1G6YbevM1AY8NhjnWe1V4aZO37/DzznmSjERTMiyFRRDzThU3EW0jx/PgIomBFYa2m6u
+        PtKieaSO37RCOKRRMlg9H0jJNnnUB6yWIV+gdTpK1PmRDVm+4JPao8PBciuKu97kQKDaMVHRSwga
+        mxQwjwMtbLejXu4Aa/2upIWezU3P/ZSMYOQk0xZlFKjp2YwNIOIjf4JN4GHRMM2DtNM7/70Ih/g6
+        x9OlocJdNy5soa3BJjwloSAq+FfAvUVCrIGx/dwL3a3TvIMOfZqTD3SWn4BUJ7m5ib23dLN6uWvZ
+        jKB9LtZf//4DAAD//wMAnm7FINsBAAA=
     headers:
-      cf-ray: [2868613296901073-CDG]
+      cf-ray: [29217b09510b3c2f-CDG]
       connection: [keep-alive]
       content-encoding: [gzip]
       content-type: [application/json]
-      date: ['Sun, 20 Mar 2016 10:11:23 GMT']
+      date: ['Mon, 11 Apr 2016 21:20:06 GMT']
       server: [cloudflare-nginx]
-      set-cookie: ['__cfduid=daf4223f282c9b1524a0a9eb7cd8131d11458468682; expires=Mon,
-          20-Mar-17 10:11:22 GMT; path=/; domain=.thetvdb.com; HttpOnly']
+      set-cookie: ['__cfduid=da4f0746a09ae8ff0d7f153b2b839adab1460409606; expires=Tue,
+          11-Apr-17 21:20:06 GMT; path=/; domain=.thetvdb.com; HttpOnly']
+      vary: [Accept-Language]
       x-powered-by: [Thundar!]
-      x-thetvdb-api-version: [1.2.0]
+      x-thetvdb-api-version: [2.0.0]
     status: {code: 200, message: OK}
 - request:
     body: null
@@ -40,25 +41,26 @@ interactions:
       Accept: ['*/*']
       Accept-Encoding: ['gzip, deflate']
       Accept-Language: [en]
-      Authorization: [!!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0NTg1NTUwODMsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNDU4NDY4NjgzfQ.o6nFOUCwv8Hm1sKqZ6naC7_mM-2yuBOno-_1ksrS4-uHmo3OVIeQP3bAljkbc6brBPmEYrBTbbzOIuOFO01rzvUhMPijns0N78H7ArFetMNLJpOvzg9Hm1OQWW7yKDYdjXBpqJHD2DxqnX8RaLkwhNBJ9_eL8UZl9Cd5-Qlvq1cMXeH9fbJGQDXEEYnuC_SCBkd4TYV59zaoLYgvxC_-649A4gooZ7D5hpwRJTNx_tfqGrGEpPjybeGpt4oyAp1YUjsEcVkHjGacsCrRcW2XGZvhV78RTj5MaMRRyvhKXDyfdMglYoOYy0m9-fVt9ZXrRAZcec29hOqYvQXk1ws1dA']
+      Authorization: [!!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0NjA0OTYwMDYsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNDYwNDA5NjA2fQ.uTCYFGgJCZzEF_i1P3I4Xm0Cq2HpT5I2UugrRp4puyHEUZ4mAn7MMfekRjV7kdtLuBU_c3gxOMOOzD-384ecC3Nz0HPwR8C35-TEdVHNf4ndgmndJSmo-VudYauErcuOiZ7fYrTZk2CczCEQP1WJB2822XMQ4rIKKENjWMpr9cA-W5Pa4Is-TmHOgCf_T5VoDv6iFAZoSpiWg6eymrcSdOvAvcOe5z3v-W9RHZZuAYcvcqA7TRM0899K1F6pStz-K_by_xXmW-l68XZzWo8ZxMxaV-03ML-MrEOVM5Avowlg6NkdfpCJWq9xSA6ZfQA1kaf97_Rt1hEr2poZyICHUg']
       Connection: [keep-alive]
       Content-Type: [application/json]
-      Cookie: [__cfduid=daf4223f282c9b1524a0a9eb7cd8131d11458468682]
+      Cookie: [__cfduid=da4f0746a09ae8ff0d7f153b2b839adab1460409606]
       User-Agent: [Subliminal/2.0]
     method: GET
-    uri: https://api-beta.thetvdb.com/search/series?imdbId=tt0898266&name=The+Big+Bang+Theory
+    uri: https://api.thetvdb.com/search/series?imdbId=tt0898266&name=The+Big+Bang+Theory
   response:
     body: {string: !!python/unicode "{\n  \"Error\": \"Requires only one of name,\
         \ imdbId, zap2itId params\"\n}"}
     headers:
       cache-control: ['private, max-age=300']
-      cf-ray: [2868613686f51073-CDG]
+      cf-ray: [29217b0a41163c2f-CDG]
       connection: [keep-alive]
       content-length: ['67']
       content-type: [application/json]
-      date: ['Sun, 20 Mar 2016 10:11:23 GMT']
+      date: ['Mon, 11 Apr 2016 21:20:06 GMT']
       server: [cloudflare-nginx]
+      vary: [Accept-Language]
       x-powered-by: [Thundar!]
-      x-thetvdb-api-version: [1.2.0]
+      x-thetvdb-api-version: [2.0.0]
     status: {code: 405, message: Method Not Allowed}
 version: 1

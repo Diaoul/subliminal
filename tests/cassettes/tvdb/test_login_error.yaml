@@ -10,20 +10,21 @@ interactions:
       Content-Type: [application/json]
       User-Agent: [Subliminal/2.0]
     method: POST
-    uri: https://api-beta.thetvdb.com/login
+    uri: https://api.thetvdb.com/login
   response:
     body: {string: !!python/unicode "{\n  \"Error\": \"API Key Required\"\n}"}
     headers:
-      cf-ray: [28686116d0c63bed-CDG]
+      cf-ray: [29217ae6d7b60902-CDG]
       connection: [keep-alive]
       content-length: ['33']
       content-type: [application/json]
-      date: ['Sun, 20 Mar 2016 10:11:18 GMT']
+      date: ['Mon, 11 Apr 2016 21:20:01 GMT']
       server: [cloudflare-nginx]
-      set-cookie: ['__cfduid=deb57db3449c61798712b46c9219963241458468678; expires=Mon,
-          20-Mar-17 10:11:18 GMT; path=/; domain=.thetvdb.com; HttpOnly']
+      set-cookie: ['__cfduid=d7de965be3841657b4cac0a5cdcf6da1c1460409601; expires=Tue,
+          11-Apr-17 21:20:01 GMT; path=/; domain=.thetvdb.com; HttpOnly']
+      vary: [Accept-Language]
       www-authenticate: [JWT realm=jwt auth]
       x-powered-by: [Thundar!]
-      x-thetvdb-api-version: [1.2.0]
+      x-thetvdb-api-version: [2.0.0]
     status: {code: 401, message: Unauthorized}
 version: 1

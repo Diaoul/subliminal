@@ -2,6 +2,7 @@
 from datetime import datetime, timedelta
 from functools import wraps
 import logging
+import re
 
 import requests
 
@@ -11,6 +12,8 @@ from ..utils import sanitize
 from ..video import Episode
 
 logger = logging.getLogger(__name__)
+
+series_year_re = re.compile(r'^(?P<series>.*?)(?: (?P<parenthesis>\()?(?P<year>\d{4})(?(parenthesis)\)))?$')
 
 
 def requires_auth(func):
@@ -39,7 +42,7 @@ class TVDBClient(object):
 
     """
     #: Base URL of the API
-    base_url = 'https://api-beta.thetvdb.com'
+    base_url = 'https://api.thetvdb.com'
 
     #: Token lifespan
     token_lifespan = timedelta(hours=1)
@@ -270,7 +273,7 @@ def refine(video, **kwargs):
     # search for exact matches
     matching_results = []
     for result in results:
-        match = False
+        matching_result = {}
 
         # use seriesName and aliases
         series_names = [result['seriesName']]
@@ -283,19 +286,31 @@ def refine(video, **kwargs):
 
         # discard mismatches on year
         if video.year and series_year and video.year != series_year:
-            logger.debug('Discarding series %r mismatch on year %d', series_year)
+            logger.debug('Discarding series %r mismatch on year %d', result['seriesName'], series_year)
+            continue
 
         # iterate over series names
         for series_name in series_names:
+            # parse as series and year
+            series, _, year = series_year_re.match(series_name).groups()
+            if year:
+                year = int(year)
+
+            # discard mismatches on year
+            if year and (video.original_series or video.year != year):
+                logger.debug('Discarding series name %r mismatch on year %d', series, year)
+                continue
+
             # match on sanitized series name
-            if sanitize(series_name) == sanitize(video.series):
-                logger.debug('Found exact match on series %r (%d)', series_name, series_year or 'no year')
-                match = True
+            if sanitize(series) == sanitize(video.series):
+                logger.debug('Found exact match on series %r (%s)', series_name, series_year or year or 'no year')
+                matching_result['match'] = {'series': series, 'year': series_year or year}
                 break
 
         # add the result on match
-        if match:
-            matching_results.append(result)
+        if matching_result:
+            matching_result['data'] = result
+            matching_results.append(matching_result)
 
     # exit if we don't have exactly 1 matching result
     if not matching_results:
@@ -306,14 +321,15 @@ def refine(video, **kwargs):
         return
 
     # get the series
-    series = get_series(matching_results[0]['id'])
+    matching_result = matching_results[0]
+    series = get_series(matching_result['data']['id'])
 
     # add series information
     logger.debug('Found series %r', series)
-    video.series = series['seriesName']
-    video.year = datetime.strptime(series['firstAired'], '%Y-%m-%d').year
-    video.series_imdb_id = series['imdbId']
+    video.series = matching_result['match']['series']
+    video.year = matching_result['match']['year']
     video.series_tvdb_id = series['id']
+    video.series_imdb_id = series['imdbId'] or None
 
     # get the episode
     logger.info('Getting series episode %dx%d', video.season, video.episode)
@@ -324,6 +340,6 @@ def refine(video, **kwargs):
 
     # add episode information
     logger.debug('Found episode %r', episode)
-    video.title = episode['episodeName']
-    video.imdb_id = episode['imdbId']
     video.tvdb_id = episode['id']
+    video.title = episode['episodeName'] or None
+    video.imdb_id = episode['imdbId'] or None

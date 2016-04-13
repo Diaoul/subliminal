@@ -13,7 +13,7 @@ from ..video import Episode
 
 logger = logging.getLogger(__name__)
 
-series_year_re = re.compile(r'^(?P<series>.*?)(?: (?P<parenthesis>\()?(?P<year>\d{4})(?(parenthesis)\)))?$')
+series_re = re.compile(r'^(?P<series>.*?)(?: \((?:(?P<year>\d{4})|(?P<country>[A-Z]{2}))\))?$')
 
 
 def requires_auth(func):
@@ -279,6 +279,9 @@ def refine(video, **kwargs):
         series_names = [result['seriesName']]
         series_names.extend(result['aliases'])
 
+        # parse the original series as series + year or country
+        original_series = series_re.match(result['seriesName']).groupdict()
+
         # parse series year
         series_year = None
         if result['firstAired']:
@@ -292,7 +295,7 @@ def refine(video, **kwargs):
         # iterate over series names
         for series_name in series_names:
             # parse as series and year
-            series, _, year = series_year_re.match(series_name).groups()
+            series, year, country = series_re.match(series_name).groups()
             if year:
                 year = int(year)
 
@@ -304,7 +307,7 @@ def refine(video, **kwargs):
             # match on sanitized series name
             if sanitize(series) == sanitize(video.series):
                 logger.debug('Found exact match on series %r (%s)', series_name, series_year or year or 'no year')
-                matching_result['match'] = {'series': series, 'year': series_year or year}
+                matching_result['match'] = original_series
                 break
 
         # add the result on match

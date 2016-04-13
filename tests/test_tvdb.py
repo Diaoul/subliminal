@@ -9,7 +9,7 @@ from vcr import VCR
 
 from subliminal import __short_version__
 from subliminal.video import Episode
-from subliminal.refiners.tvdb import TVDBClient, refine, series_year_re
+from subliminal.refiners.tvdb import TVDBClient, refine, series_re
 
 vcr = VCR(path_transformer=lambda path: path + '.yaml',
           record_mode=os.environ.get('VCR_RECORD_MODE', 'once'),
@@ -21,34 +21,38 @@ def client():
     return TVDBClient('2AE5D1E42E7194B9', headers={'User-Agent': 'Subliminal/%s' % __short_version__})
 
 
-def test_series_year_re_no_year():
-    groups = series_year_re.match('Series Name').groupdict()
+def test_series_re_no_year():
+    groups = series_re.match('Series Name').groupdict()
     assert groups['series'] == 'Series Name'
     assert groups['year'] is None
 
 
-def test_series_year_re_year():
-    groups = series_year_re.match('Series Name 2013').groupdict()
+def test_series_re_year_parenthesis():
+    groups = series_re.match('Series Name (2013)').groupdict()
     assert groups['series'] == 'Series Name'
     assert groups['year'] == '2013'
+    assert groups['country'] is None
 
 
-def test_series_year_re_year_parenthesis():
-    groups = series_year_re.match('Series Name (2013)').groupdict()
-    assert groups['series'] == 'Series Name'
-    assert groups['year'] == '2013'
-
-
-def test_series_year_re_text_parenthesis():
-    groups = series_year_re.match('Series Name (Rock)').groupdict()
+def test_series_re_text_parenthesis():
+    groups = series_re.match('Series Name (Rock)').groupdict()
     assert groups['series'] == 'Series Name (Rock)'
     assert groups['year'] is None
+    assert groups['country'] is None
 
 
-def test_series_year_re_text_unclosed_parenthesis():
-    groups = series_year_re.match('Series Name (2013').groupdict()
+def test_series_re_text_unclosed_parenthesis():
+    groups = series_re.match('Series Name (2013').groupdict()
     assert groups['series'] == 'Series Name (2013'
     assert groups['year'] is None
+    assert groups['country'] is None
+
+
+def test_series_re_country():
+    groups = series_re.match('Series Name (UK)').groupdict()
+    assert groups['series'] == 'Series Name'
+    assert groups['year'] is None
+    assert groups['country'] == 'UK'
 
 
 def test_language():
@@ -236,6 +240,21 @@ def test_query_series_episodes_wrong_season(client):
 def test_refine(episodes):
     video = episodes['bbt_s07e05']
     episode = Episode(video.name.lower(), video.series.lower(), video.season, video.episode)
+    refine(episode)
+    assert episode.series == video.series
+    assert episode.year == video.year
+    assert episode.title == video.title
+    assert episode.imdb_id == video.imdb_id
+    assert episode.series_imdb_id == video.series_imdb_id
+    assert episode.tvdb_id == video.tvdb_id
+    assert episode.series_tvdb_id == video.series_tvdb_id
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_refine_episode_partial(episodes):
+    video = episodes['csi_s15e18']
+    episode = Episode(video.name.lower(), video.series.lower().split(':')[0], video.season, video.episode)
     refine(episode)
     assert episode.series == video.series
     assert episode.year == video.year

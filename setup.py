@@ -69,13 +69,14 @@ setup(name='subliminal',
       entry_points={
           'subliminal.providers': [
               'addic7ed = subliminal.providers.addic7ed:Addic7edProvider',
+              'argenteam = subliminal.providers.argenteam:ArgenteamProvider',
               'legendastv = subliminal.providers.legendastv:LegendasTVProvider',
               'opensubtitles = subliminal.providers.opensubtitles:OpenSubtitlesProvider',
               'podnapisi = subliminal.providers.podnapisi:PodnapisiProvider',
               'shooter = subliminal.providers.shooter:ShooterProvider',
               'subscenter = subliminal.providers.subscenter:SubsCenterProvider',
               'thesubdb = subliminal.providers.thesubdb:TheSubDBProvider',
-              'tvsubtitles = subliminal.providers.tvsubtitles:TVsubtitlesProvider'
+              'tvsubtitles = subliminal.providers.tvsubtitles:TVsubtitlesProvider',
           ],
           'subliminal.refiners': [
               'metadata = subliminal.refiners.metadata:refine',

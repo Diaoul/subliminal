@@ -9,7 +9,7 @@ import operator
 import os.path
 import socket
 
-from babelfish import Language
+from babelfish import Language, LanguageReverseError
 from guessit import guessit
 from rarfile import NotRarFile, RarFile
 import requests
@@ -347,7 +347,7 @@ def search_external_subtitles(path, directory=None):
         if language_code:
             try:
                 language = Language.fromietf(language_code)
-            except ValueError:
+            except (ValueError, LanguageReverseError):
                 logger.error('Cannot parse language code %r', language_code)
 
         subtitles[p] = language

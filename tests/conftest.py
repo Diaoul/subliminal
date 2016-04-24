@@ -93,7 +93,7 @@ def episodes():
                     release_group='AVS', resolution='720p', video_codec='h264', imdb_id='tt4799896'),
             'csi_s15e18':
             Episode('CSI.S15E18.720p.HDTV.X264.DIMENSION.mkv', 'CSI: Crime Scene Investigation', 15, 18,
-                    title='The End Game', tvdb_id=5104359, series_tvdb_id=72546, series_imdb_id='tt0247082',
+                    title='The End Game', year=2000, tvdb_id=5104359, series_tvdb_id=72546, series_imdb_id='tt0247082',
                     format='HDTV', release_group='DIMENSION', resolution='720p', video_codec='h264',
                     imdb_id='tt4145952')}
 

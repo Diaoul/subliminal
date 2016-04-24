@@ -243,6 +243,7 @@ def test_refine(episodes):
     refine(episode)
     assert episode.series == video.series
     assert episode.year == video.year
+    assert episode.original_series == video.original_series
     assert episode.title == video.title
     assert episode.imdb_id == video.imdb_id
     assert episode.series_imdb_id == video.series_imdb_id
@@ -258,6 +259,7 @@ def test_refine_episode_partial(episodes):
     refine(episode)
     assert episode.series == video.series
     assert episode.year == video.year
+    assert episode.original_series == video.original_series
     assert episode.title == video.title
     assert episode.imdb_id == video.imdb_id
     assert episode.series_imdb_id == video.series_imdb_id
@@ -273,6 +275,7 @@ def test_refine_ambiguous(episodes):
     refine(episode)
     assert episode.series == video.series
     assert episode.year == video.year
+    assert episode.original_series == video.original_series
     assert episode.title == video.title
     assert episode.imdb_id == video.imdb_id
     assert episode.series_imdb_id == video.series_imdb_id
@@ -288,6 +291,7 @@ def test_refine_ambiguous_2(episodes):
     refine(episode)
     assert episode.series == video.series
     assert episode.year == video.year
+    assert episode.original_series == video.original_series
     assert episode.title == video.title
     assert episode.imdb_id == video.imdb_id
     assert episode.series_imdb_id == video.series_imdb_id
@@ -304,6 +308,7 @@ def test_refine_episode_year(episodes):
     refine(episode)
     assert episode.series == video.series
     assert episode.year == video.year
+    assert episode.original_series == video.original_series
     assert episode.title == video.title
     assert episode.imdb_id == video.imdb_id
     assert episode.series_imdb_id == video.series_imdb_id
@@ -319,6 +324,7 @@ def test_refine_episode_no_year(episodes):
     refine(episode)
     assert episode.series == video.series
     assert episode.year == video.year
+    assert episode.original_series == video.original_series
     assert episode.title == video.title
     assert episode.imdb_id == video.imdb_id
     assert episode.series_imdb_id == video.series_imdb_id

@@ -280,7 +280,7 @@ def refine(video, **kwargs):
         series_names.extend(result['aliases'])
 
         # parse the original series as series + year or country
-        original_series = series_re.match(result['seriesName']).groupdict()
+        original_match = series_re.match(result['seriesName']).groupdict()
 
         # parse series year
         series_year = None
@@ -306,8 +306,9 @@ def refine(video, **kwargs):
 
             # match on sanitized series name
             if sanitize(series) == sanitize(video.series):
-                logger.debug('Found exact match on series %r (%s)', series_name, series_year or year or 'no year')
-                matching_result['match'] = original_series
+                logger.debug('Found exact match on series %r', series_name)
+                matching_result['match'] = {'series': original_match['series'], 'year': series_year,
+                                            'original_series': original_match['year'] is None}
                 break
 
         # add the result on match
@@ -331,6 +332,7 @@ def refine(video, **kwargs):
     logger.debug('Found series %r', series)
     video.series = matching_result['match']['series']
     video.year = matching_result['match']['year']
+    video.original_series = matching_result['match']['original_series']
     video.series_tvdb_id = series['id']
     video.series_imdb_id = series['imdbId'] or None
 

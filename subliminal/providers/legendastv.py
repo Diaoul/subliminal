@@ -122,7 +122,7 @@ class LegendasTVSubtitle(Subtitle):
                 matches.add('series')
 
             # year (year is based on season air date hence the adjustment)
-            if video.original_series and self.year is None or video.year and video.year == self.year - self.season + 1:
+            if video.original_series and not self.year or video.year and video.year == self.year - self.season + 1:
                 matches.add('year')
 
             # imdb_id
@@ -163,7 +163,7 @@ class LegendasTVProvider(Provider):
     server_url = 'http://legendas.tv/'
 
     def __init__(self, username=None, password=None):
-        if username and not password or not username and password:
+        if not all([username, password]):
             raise ConfigurationError('Username and password must be specified')
 
         self.username = username
@@ -175,7 +175,7 @@ class LegendasTVProvider(Provider):
         self.session.headers['User-Agent'] = 'Subliminal/%s' % __short_version__
 
         # login
-        if self.username is not None and self.password is not None:
+        if all([self.username, self.password]):
             logger.info('Logging in')
             data = {'_method': 'POST', 'data[User][username]': self.username, 'data[User][password]': self.password}
             r = self.session.post(self.server_url + 'login', data, allow_redirects=False, timeout=10)
@@ -303,7 +303,7 @@ class LegendasTVProvider(Provider):
                 archives.append(archive)
 
             # stop on last page
-            if soup.find('a', attrs={'class': 'load_more'}, text='carregar mais') is None:
+            if not soup.find('a', attrs={'class': 'load_more'}, text='carregar mais'):
                 break
 
             # increment page count
@@ -367,7 +367,7 @@ class LegendasTVProvider(Provider):
                     continue
 
                 # discard mismatches on year
-                if year is not None and t['year'] != year:
+                if year and t['year'] != year:
                     continue
 
             # iterate over title's archives
@@ -441,7 +441,7 @@ class LegendasTVProvider(Provider):
 
     def download_subtitle(self, subtitle):
         # download archive in case we previously hit the releases cache and didn't download it
-        if subtitle.archive.content is None:
+        if not subtitle.archive.content:
             self.download_archive(subtitle.archive)
 
         # extract subtitle's content

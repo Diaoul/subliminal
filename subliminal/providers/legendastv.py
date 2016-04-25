@@ -122,7 +122,7 @@ class LegendasTVSubtitle(Subtitle):
                 matches.add('series')
 
             # year (year is based on season air date hence the adjustment)
-            if video.original_series and not self.year or video.year and video.year == self.year - self.season + 1:
+            if video.original_series and self.year is None or video.year and video.year == self.year - self.season + 1:
                 matches.add('year')
 
             # imdb_id
@@ -303,7 +303,7 @@ class LegendasTVProvider(Provider):
                 archives.append(archive)
 
             # stop on last page
-            if not soup.find('a', attrs={'class': 'load_more'}, text='carregar mais'):
+            if soup.find('a', attrs={'class': 'load_more'}, text='carregar mais') is None:
                 break
 
             # increment page count
@@ -367,7 +367,7 @@ class LegendasTVProvider(Provider):
                     continue
 
                 # discard mismatches on year
-                if year and t['year'] != year:
+                if year is not None and t['year'] != year:
                     continue
 
             # iterate over title's archives
@@ -441,7 +441,7 @@ class LegendasTVProvider(Provider):
 
     def download_subtitle(self, subtitle):
         # download archive in case we previously hit the releases cache and didn't download it
-        if not subtitle.archive.content:
+        if subtitle.archive.content is None:
             self.download_archive(subtitle.archive)
 
         # extract subtitle's content

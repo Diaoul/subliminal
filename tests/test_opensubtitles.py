@@ -39,7 +39,7 @@ def test_get_matches_episode_year(episodes):
                                      ' Dallas.2012.S01E03.HDTV.x264-LOL', 2012, 'tt2205526', 1, 3,
                                      'Dallas.2012.S01E03.HDTV.x264-LOL.srt', 'cp1252')
     matches = subtitle.get_matches(episodes['dallas_2012_s01e03'])
-    assert matches == {'series', 'year', 'episode', 'season'}
+    assert matches == {'imdb_id', 'series', 'year', 'episode', 'season', 'title'}
 
 
 def test_get_matches_episode_filename(episodes):

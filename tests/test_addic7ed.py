@@ -359,7 +359,7 @@ def test_query_no_year(episodes):
     for subtitle in subtitles:
         assert subtitle.series == video.series
         assert subtitle.season == video.season
-        assert subtitle.year == video.year
+        assert subtitle.year is None
 
 
 @pytest.mark.integration

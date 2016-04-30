@@ -164,6 +164,8 @@ class Addic7edProvider(Provider):
         logger.info('Searching show ids with %r', params)
         r = self.session.get(self.server_url + 'search.php', params=params, timeout=10)
         r.raise_for_status()
+        if r.status_code == 304:
+            raise TooManyRequests()
         soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
 
         # get the suggestion

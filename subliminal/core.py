@@ -11,7 +11,7 @@ import socket
 
 from babelfish import Language, LanguageReverseError
 from guessit import guessit
-from rarfile import NotRarFile, RarFile
+from rarfile import NotRarFile, RarCannotExec, RarFile
 import requests
 
 from .extensions import provider_manager, refiner_manager
@@ -506,7 +506,7 @@ def scan_videos(path, age=None, archives=True):
             elif archives and filename.endswith(ARCHIVE_EXTENSIONS):  # archive
                 try:
                     video = scan_archive(filepath)
-                except (NotRarFile, ValueError):  # pragma: no cover
+                except (NotRarFile, RarCannotExec, ValueError):  # pragma: no cover
                     logger.exception('Error scanning archive')
                     continue
             else:  # pragma: no cover

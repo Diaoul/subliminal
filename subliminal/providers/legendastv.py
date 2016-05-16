@@ -367,7 +367,7 @@ class LegendasTVProvider(Provider):
                     continue
 
                 # discard mismatches on year
-                if year is not None and t['year'] != year:
+                if year is not None and ('year' not in t or t['year'] != year):
                     continue
 
             # iterate over title's archives

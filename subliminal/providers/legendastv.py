@@ -367,7 +367,7 @@ class LegendasTVProvider(Provider):
                     continue
 
                 # discard mismatches on year
-                if year is not None and t['year'] != year:
+                if year is not None and 'year' in t and t['year'] != year:
                     continue
 
             # iterate over title's archives
@@ -421,7 +421,7 @@ class LegendasTVProvider(Provider):
 
                 # iterate over releases
                 for r in releases:
-                    subtitle = LegendasTVSubtitle(language, t['type'], t['title'], t['year'], t.get('imdb_id'),
+                    subtitle = LegendasTVSubtitle(language, t['type'], t['title'], t.get('year'), t.get('imdb_id'),
                                                   t.get('season'), a, r)
                     logger.debug('Found subtitle %r', subtitle)
                     subtitles.append(subtitle)

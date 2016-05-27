@@ -36,12 +36,12 @@ logger = logging.getLogger(__name__)
 
 
 #: Scores for episodes
-episode_scores = {'hash': 215, 'series': 108, 'year': 54, 'season': 18, 'episode': 18, 'release_group': 9,
-                  'format': 4, 'audio_codec': 2, 'resolution': 1, 'hearing_impaired': 1, 'video_codec': 1}
+episode_scores = {'hash': 359, 'series': 180, 'year': 90, 'season': 30, 'episode': 30, 'release_group': 15,
+                  'format': 7, 'audio_codec': 3, 'resolution': 2, 'video_codec': 2, 'hearing_impaired': 1}
 
 #: Scores for movies
-movie_scores = {'hash': 71, 'title': 36, 'year': 18, 'release_group': 9,
-                'format': 4, 'audio_codec': 2, 'resolution': 1, 'hearing_impaired': 1, 'video_codec': 1}
+movie_scores = {'hash': 119, 'title': 60, 'year': 30, 'release_group': 15,
+                'format': 7, 'audio_codec': 3, 'resolution': 2, 'video_codec': 2, 'hearing_impaired': 1}
 
 
 def get_scores(video):
@@ -160,13 +160,13 @@ def solve_episode_equations():
         Eq(audio_codec, video_codec + 1),
 
         # resolution counts as much as video_codec
-        Eq(resolution,  video_codec),
+        Eq(resolution, video_codec),
 
-        # hearing impaired is as much as resolution
-        Eq(hearing_impaired, resolution),
+        # video_codec is the least valuable match but counts more than the sum of all scoring increasing matches
+        Eq(video_codec, hearing_impaired + 1),
 
-        # video_codec is the least valuable match
-        Eq(video_codec,  1),
+        # hearing impaired is only used for score increasing, so put it to 1
+        Eq(hearing_impaired, 1),
     ]
 
     return solve(equations, [hash, series, year, season, episode, release_group, format, audio_codec, resolution,
@@ -200,13 +200,13 @@ def solve_movie_equations():
         Eq(audio_codec, video_codec + 1),
 
         # resolution counts as much as video_codec
-        Eq(resolution,  video_codec),
+        Eq(resolution, video_codec),
 
-        # hearing impaired is as much as resolution
-        Eq(hearing_impaired, resolution),
+        # video_codec is the least valuable match but counts more than the sum of all scoring increasing matches
+        Eq(video_codec, hearing_impaired + 1),
 
-        # video_codec is the least valuable match
-        Eq(video_codec,  1),
+        # hearing impaired is only used for score increasing, so put it to 1
+        Eq(hearing_impaired, 1),
     ]
 
     return solve(equations, [hash, title, year, release_group, format, audio_codec, resolution, hearing_impaired,

@@ -1,9 +1,9 @@
 Changelog
 ---------
 
-2.0
-^^^
-**release date:** *not released*
+2.0.0
+^^^^^
+**release date:** 2016-06-04
 
 * Add refiners to enrich videos with information from metadata, tvdb and omdb
 * Add asynchronous provider search for faster searches

@@ -1,6 +1,13 @@
 Changelog
 ---------
 
+2.0.1
+^^^^^
+**release date:** 2016-06-06
+
+* Fix beautifulsoup4 minimal requirement
+
+
 2.0.0
 ^^^^^
 **release date:** 2016-06-04

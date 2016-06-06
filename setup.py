@@ -38,7 +38,7 @@ test_requirements = ['sympy', 'vcrpy>=1.6.1', 'pytest', 'pytest-pep8', 'pytest-f
 if sys.version_info < (3, 3):
     test_requirements.append('mock')
 
-dev_requirements = ['tox', 'sphinx', 'sphinxcontrib-programoutput', 'wheel']
+dev_requirements = ['tox', 'sphinx', 'sphinx_rtd_theme', 'sphinxcontrib-programoutput', 'wheel']
 
 
 setup(name='subliminal',

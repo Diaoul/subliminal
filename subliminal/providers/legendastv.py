@@ -303,7 +303,7 @@ class LegendasTVProvider(Provider):
                 archives.append(archive)
 
             # stop on last page
-            if soup.find('a', attrs={'class': 'load_more'}, text='carregar mais') is None:
+            if soup.find('a', attrs={'class': 'load_more'}, string='carregar mais') is None:
                 break
 
             # increment page count

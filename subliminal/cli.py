@@ -15,7 +15,7 @@ from appdirs import AppDirs
 from babelfish import Error as BabelfishError, Language
 import click
 from dogpile.cache.backends.file import AbstractFileLock
-from dogpile.core import ReadWriteMutex
+from dogpile.util.readwrite_lock import ReadWriteMutex
 from six.moves import configparser
 
 from subliminal import (AsyncProviderPool, Episode, Movie, Video, __version__, check_video, compute_score, get_scores,

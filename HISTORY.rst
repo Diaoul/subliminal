@@ -1,6 +1,14 @@
 Changelog
 ---------
 
+2.0.2
+^^^^^
+**release date:** 2016-06-06
+
+* Fix for dogpile.cache>=0.6.0
+* Fix missing sphinx_rtd_theme dependency
+
+
 2.0.1
 ^^^^^
 **release date:** 2016-06-06

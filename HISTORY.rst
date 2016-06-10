@@ -1,6 +1,13 @@
 Changelog
 ---------
 
+2.0.3
+^^^^^
+**release date:** 2016-06-10
+
+* Fix clearing cache in CLI
+
+
 2.0.2
 ^^^^^
 **release date:** 2016-06-06

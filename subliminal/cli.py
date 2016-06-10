@@ -6,6 +6,7 @@ Subliminal uses `click <http://click.pocoo.org>`_ to provide a powerful :abbr:`C
 from __future__ import division
 from collections import defaultdict
 from datetime import timedelta
+import glob
 import json
 import logging
 import os
@@ -263,7 +264,8 @@ def subliminal(ctx, addic7ed, legendastv, opensubtitles, subscenter, cache_dir, 
 def cache(ctx, clear_subliminal):
     """Cache management."""
     if clear_subliminal:
-        os.remove(os.path.join(ctx.parent.params['cache_dir'], cache_file))
+        for file in glob.glob(os.path.join(ctx.parent.params['cache_dir'], cache_file) + '*'):
+            os.remove(file)
         click.echo('Subliminal\'s cache cleared.')
     else:
         click.echo('Nothing done.')

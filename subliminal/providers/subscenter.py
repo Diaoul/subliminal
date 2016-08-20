@@ -134,7 +134,7 @@ class SubsCenterProvider(Provider):
         r.raise_for_status()
 
         # check for redirections
-        if r.is_redirect:
+        if r.history and all([h.status_code == 302 for h in r.history]):
             logger.debug('Redirected to the subtitles page')
             links = [r.url]
         else:

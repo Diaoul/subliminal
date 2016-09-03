@@ -59,6 +59,13 @@ def test_get_matches_release_group(episodes):
     assert matches == {'series', 'season', 'episode', 'title', 'year', 'release_group'}
 
 
+def test_get_matches_equivalent_release_group(episodes):
+    subtitle = Addic7edSubtitle(Language('eng'), True, None, 'The Big Bang Theory', 7, 5, 'The Workplace Proximity',
+                                2007, 'LOL', None)
+    matches = subtitle.get_matches(episodes['bbt_s07e05'])
+    assert matches == {'series', 'season', 'episode', 'title', 'year', 'release_group'}
+
+
 def test_get_matches_resolution_release_group(episodes):
     subtitle = Addic7edSubtitle(Language('heb'), True, None, 'The Big Bang Theory', 7, 5, 'The Workplace Proximity',
                                 2007, '720PDIMENSION', None)

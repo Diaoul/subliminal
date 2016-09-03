@@ -12,6 +12,7 @@ from . import ParserBeautifulSoup, Provider
 from .. import __short_version__
 from ..cache import EPISODE_EXPIRATION_TIME, SHOW_EXPIRATION_TIME, region
 from ..exceptions import ProviderError
+from ..score import get_equivalent_release_groups
 from ..subtitle import Subtitle, fix_line_ending, guess_matches
 from ..utils import sanitize, sanitize_release_group
 from ..video import Episode
@@ -59,7 +60,8 @@ class TVsubtitlesSubtitle(Subtitle):
             matches.add('year')
         # release_group
         if (video.release_group and self.release and
-                sanitize_release_group(video.release_group) in sanitize_release_group(self.release)):
+                any(r in sanitize_release_group(self.release)
+                    for r in get_equivalent_release_groups(sanitize_release_group(video.release_group)))):
             matches.add('release_group')
         # other properties
         if self.release:

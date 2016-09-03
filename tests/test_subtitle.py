@@ -89,6 +89,17 @@ def test_guess_matches_episode(episodes):
     assert guess_matches(video, guess) == expected
 
 
+def test_guess_matches_episode_equivalent_release_group(episodes):
+    video = episodes['bbt_s07e05']
+    guess = {'title': video.series, 'season': video.season, 'episode': video.episode, 'year': video.year,
+             'episode_title': video.title.upper(), 'release_group': 'LOL',
+             'screen_size': video.resolution, 'format': video.format.upper(), 'video_codec': video.video_codec,
+             'audio_codec': video.audio_codec}
+    expected = {'series', 'season', 'episode', 'title', 'year', 'release_group', 'resolution', 'format', 'video_codec',
+                'audio_codec'}
+    assert guess_matches(video, guess) == expected
+
+
 def test_guess_matches_episode_no_year(episodes):
     video = episodes['dallas_s01e03']
     guess = {'title': video.series, 'season': video.season, 'episode': video.episode}

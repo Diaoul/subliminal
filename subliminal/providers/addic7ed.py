@@ -10,6 +10,7 @@ from . import ParserBeautifulSoup, Provider
 from .. import __short_version__
 from ..cache import SHOW_EXPIRATION_TIME, region
 from ..exceptions import AuthenticationError, ConfigurationError, DownloadLimitExceeded, TooManyRequests
+from ..score import get_equivalent_release_groups
 from ..subtitle import Subtitle, fix_line_ending, guess_matches
 from ..utils import sanitize, sanitize_release_group
 from ..video import Episode
@@ -61,7 +62,8 @@ class Addic7edSubtitle(Subtitle):
             matches.add('year')
         # release_group
         if (video.release_group and self.version and
-                sanitize_release_group(video.release_group) in sanitize_release_group(self.version)):
+                any(r in sanitize_release_group(self.version)
+                    for r in get_equivalent_release_groups(sanitize_release_group(video.release_group)))):
             matches.add('release_group')
         # resolution
         if video.resolution and self.version and video.resolution in self.version.lower():

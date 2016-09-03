@@ -137,8 +137,8 @@ def sanitize_release_group(string):
     # remove content in square brackets
     string = re.sub(r'\[\w+\]', '', string)
 
-    # strip and lower case
-    return string.strip().lower()
+    # strip and upper case
+    return string.strip().upper()
 
 
 def timestamp(date):

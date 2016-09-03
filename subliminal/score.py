@@ -124,6 +124,9 @@ def compute_score(subtitle, video, hearing_impaired=None):
             matches |= {'series', 'year', 'season', 'episode'}
         if 'tvdb_id' in matches:
             logger.debug('Adding tvdb_id match equivalents')
+            matches |= {'series', 'year', 'season', 'episode'}
+        if 'series_tvdb_id' in matches:
+            logger.debug('Adding series_tvdb_id match equivalents')
             matches |= {'series', 'year'}
     elif isinstance(video, Movie):
         if 'imdb_id' in matches:

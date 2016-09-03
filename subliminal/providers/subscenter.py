@@ -74,19 +74,20 @@ class SubsCenterSubtitle(Subtitle):
 class SubsCenterProvider(Provider):
     """SubsCenter Provider."""
     languages = {Language.fromalpha2(l) for l in ['he']}
-    server_url = 'http://subscenter.cinemast.com/he/'
+    server_url = 'http://www.subscenter.co/he/'
 
     def __init__(self, username=None, password=None):
         if username is not None and password is None or username is None and password is not None:
             raise ConfigurationError('Username and password must be specified')
 
+        self.session = None
         self.username = username
         self.password = password
         self.logged_in = False
 
     def initialize(self):
         self.session = Session()
-        self.session.headers['User-Agent'] = 'Subliminal/%s' % __short_version__
+        self.session.headers['User-Agent'] = 'Subliminal/{}'.format(__short_version__)
 
         # login
         if self.username is not None and self.password is not None:
@@ -132,13 +133,19 @@ class SubsCenterProvider(Provider):
         r = self.session.get(self.server_url + 'subtitle/search/', params={'q': title}, timeout=10)
         r.raise_for_status()
 
-        # get the suggestions
-        soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
-        links = soup.select('#processes div.generalWindowTop a')
-        logger.debug('Found %d suggestions', len(links))
+        # check for redirections
+        if r.history and all([h.status_code == 302 for h in r.history]):
+            logger.debug('Redirected to the subtitles page')
+            links = [r.url]
+        else:
+            # get the suggestions (if needed)
+            soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
+            links = [link.attrs['href'] for link in soup.select('#processes div.generalWindowTop a')]
+            logger.debug('Found %d suggestions', len(links))
+
         url_titles = defaultdict(list)
         for link in links:
-            parts = link.attrs['href'].split('/')
+            parts = link.split('/')
             url_titles[parts[-3]].append(parts[-2])
 
         return url_titles
@@ -154,7 +161,7 @@ class SubsCenterProvider(Provider):
                 return []
             url_title = url_titles['series'][0]
             logger.debug('Using series title %r', url_title)
-            url = self.server_url + 'cinemast/data/series/sb/{}/{}/{}/'.format(url_title, season, episode)
+            url = self.server_url + 'cst/data/series/sb/{}/{}/{}/'.format(url_title, season, episode)
             page_link = self.server_url + 'subtitle/series/{}/{}/{}/'.format(url_title, season, episode)
         else:
             if 'movie' not in url_titles:
@@ -162,7 +169,7 @@ class SubsCenterProvider(Provider):
                 return []
             url_title = url_titles['movie'][0]
             logger.debug('Using movie title %r', url_title)
-            url = self.server_url + 'cinemast/data/movie/sb/{}/'.format(url_title)
+            url = self.server_url + 'cst/data/movie/sb/{}/'.format(url_title)
             page_link = self.server_url + 'subtitle/movie/{}/'.format(url_title)
 
         # get the list of subtitles

@@ -1,6 +1,17 @@
 Changelog
 ---------
 
+2.0.5
+^^^^^
+**release date:** 2016-09-03
+
+* Fix addic7ed provider for some series name
+* Fix existing subtitles detection
+* Improve scoring
+* Add Docker container
+* Add .ogv video extension
+
+
 2.0.4
 ^^^^^
 **release date:** 2016-09-03

@@ -55,11 +55,11 @@ def get_equivalent_release_groups(release_group):
     :rtype: set
 
     """
-    for same_release_groups in equivalent_release_groups:
-        if release_group in same_release_groups:
-            return same_release_groups
+    for equivalent_release_group in equivalent_release_groups:
+        if release_group in equivalent_release_group:
+            return equivalent_release_group
 
-    return set(release_group)
+    return {release_group}
 
 
 def get_scores(video):

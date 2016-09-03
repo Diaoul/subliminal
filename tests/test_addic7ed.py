@@ -6,7 +6,7 @@ import pytest
 from vcr import VCR
 
 from subliminal.exceptions import AuthenticationError, ConfigurationError
-from subliminal.providers.addic7ed import Addic7edProvider, Addic7edSubtitle
+from subliminal.providers.addic7ed import Addic7edProvider, Addic7edSubtitle, series_year_re
 
 
 vcr = VCR(path_transformer=lambda path: path + '.yaml',
@@ -43,6 +43,13 @@ def test_converter_reverse():
 @pytest.mark.converter
 def test_converter_reverse_name_converter():
     assert language_converters['addic7ed'].reverse('English') == ('eng', None, None)
+
+
+def test_series_year_re():
+    match = series_year_re.match('That\'s: A-series.name!? (US) (2016)')
+    assert match
+    assert match.group('series') == 'That\'s: A-series.name!? (US)'
+    assert int(match.group('year')) == 2016
 
 
 def test_get_matches_release_group(episodes):

@@ -337,10 +337,10 @@ def download(obj, provider, refiner, language, age, directory, encoding, single,
                     errored_paths.append(p)
                     continue
                 for video in scanned_videos:
+                    if not force:
+                        video.subtitle_languages |= set(search_external_subtitles(video.name,
+                                                                                  directory=directory).values())
                     if check_video(video, languages=language, age=age, undefined=single):
-                        if not force:
-                            video.subtitle_languages |= set(search_external_subtitles(video.name,
-                                                                                      directory=directory).values())
                         refine(video, episode_refiners=refiner, movie_refiners=refiner, embedded_subtitles=not force)
                         videos.append(video)
                     else:
@@ -354,9 +354,9 @@ def download(obj, provider, refiner, language, age, directory, encoding, single,
                 logger.exception('Unexpected error while collecting path %s', p)
                 errored_paths.append(p)
                 continue
+            if not force:
+                video.subtitle_languages |= set(search_external_subtitles(video.name, directory=directory).values())
             if check_video(video, languages=language, age=age, undefined=single):
-                if not force:
-                    video.subtitle_languages |= set(search_external_subtitles(video.name, directory=directory).values())
                 refine(video, episode_refiners=refiner, movie_refiners=refiner, embedded_subtitles=not force)
                 videos.append(video)
             else:

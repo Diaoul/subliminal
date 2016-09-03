@@ -1,6 +1,13 @@
 Changelog
 ---------
 
+2.0.4
+^^^^^
+**release date:** 2016-09-03
+
+* Fix subscenter
+
+
 2.0.3
 ^^^^^
 **release date:** 2016-06-10

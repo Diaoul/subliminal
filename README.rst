@@ -7,24 +7,24 @@ Subtitles, faster than your thoughts.
     :alt: Latest Version
 
 .. image:: https://travis-ci.org/Diaoul/subliminal.svg?branch=develop
-   :target: https://travis-ci.org/Diaoul/subliminal
-   :alt: Travis CI build status
+    :target: https://travis-ci.org/Diaoul/subliminal
+    :alt: Travis CI build status
 
 .. image:: https://readthedocs.org/projects/subliminal/badge/?version=latest
-   :target: https://subliminal.readthedocs.org/
-   :alt: Documentation Status
+    :target: https://subliminal.readthedocs.org/
+    :alt: Documentation Status
 
 .. image:: https://coveralls.io/repos/Diaoul/subliminal/badge.svg?branch=develop&service=github
-   :target: https://coveralls.io/github/Diaoul/subliminal?branch=develop
-   :alt: Code coverage
+    :target: https://coveralls.io/github/Diaoul/subliminal?branch=develop
+    :alt: Code coverage
 
 .. image:: https://img.shields.io/github/license/Diaoul/subliminal.svg
-   :target: https://github.com/Diaoul/subliminal/blob/master/LICENSE
-   :alt: License
+    :target: https://github.com/Diaoul/subliminal/blob/master/LICENSE
+    :alt: License
 
 .. image:: https://img.shields.io/badge/gitter-join%20chat-1dce73.svg
-   :alt: Join the chat at https://gitter.im/Diaoul/subliminal
-   :target: https://gitter.im/Diaoul/subliminal
+    :alt: Join the chat at https://gitter.im/Diaoul/subliminal
+    :target: https://gitter.im/Diaoul/subliminal
 
 
 :Project page: https://github.com/Diaoul/subliminal
@@ -77,7 +77,7 @@ Installation
 ------------
 Subliminal can be installed as a regular python module by running::
 
-   $ [sudo] pip install subliminal
+    $ [sudo] pip install subliminal
 
 For a better isolation with your system you should use a dedicated virtualenv or install for your user only using
 the ``--user`` flag.

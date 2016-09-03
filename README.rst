@@ -67,6 +67,11 @@ Download best subtitles in French and English for videos less than two weeks old
     for v in videos:
         save_subtitles(v, subtitles[v])
 
+Docker
+^^^^^^
+Run subliminal in a docker container::
+
+    $ docker run --rm --name subliminal -v subliminal_cache:/usr/src/cache -v /tvshows:/tvshows -it diaoulael/subliminal download -l en /tvshows/The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.mp4
 
 Installation
 ------------

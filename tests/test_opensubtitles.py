@@ -134,7 +134,7 @@ def test_query_not_enough_information():
 def test_query_query_movie(movies):
     video = movies['man_of_steel']
     languages = {Language('fra')}
-    expected_subtitles = {'1953767244', '1953770526', '1953150292', '1953647841', '1953767650', '1955181172'}
+    expected_subtitles = {'1953767244', '1953770526', '1953150292', '1953647841', '1953767650'}
     with OpenSubtitlesProvider() as provider:
         subtitles = provider.query(languages, query=video.title)
     assert {subtitle.id for subtitle in subtitles} == expected_subtitles
@@ -182,9 +182,9 @@ def test_query_imdb_id(movies):
 def test_query_hash_size(movies):
     video = movies['man_of_steel']
     languages = {Language('eng')}
-    expected_subtitles = {'1953767678', '1953800590', '1953766751', '1953621994', '1953766883', '1953767330',
-                          '1953766488', '1953766413', '1953766280', '1953767141', '1953766279', '1953785668',
-                          '1953767218'}
+    expected_subtitles = {'1953767678', '1953800590', '1953766751', '1953621994', '1953766883', '1953766882',
+                          '1953767330', '1953766488', '1953766413', '1953766280', '1953767141', '1953766279',
+                          '1953785668', '1953767218'}
     with OpenSubtitlesProvider() as provider:
         subtitles = provider.query(languages, hash=video.hashes['opensubtitles'], size=video.size)
     assert {subtitle.id for subtitle in subtitles} == expected_subtitles
@@ -218,7 +218,7 @@ def test_list_subtitles_movie(movies):
     video = movies['man_of_steel']
     languages = {Language('deu'), Language('fra')}
     expected_subtitles = {'1953767244', '1953647841', '1953767650', '1953771409', '1953768982', '1953770526',
-                          '1953608995', '1953608996', '1953150292', '1953600788', '1954879110', '1955181172'}
+                          '1953608995', '1953608996', '1953150292', '1953600788', '1954879110'}
     with OpenSubtitlesProvider() as provider:
         subtitles = provider.list_subtitles(video, languages)
     assert {subtitle.id for subtitle in subtitles} == expected_subtitles

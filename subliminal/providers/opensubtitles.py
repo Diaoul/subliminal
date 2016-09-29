@@ -131,7 +131,7 @@ class OpenSubtitlesProvider(Provider):
         # None values not allowed for logging in, so replace it by ''
         self.username = username or ''
         self.password = password or ''
-        self.trusted = True if trusted in ('yes', 'y') else False 
+        self.trusted = True if trusted in ('yes', 'y') else False
         self.token = None
 
     def initialize(self):
@@ -202,7 +202,9 @@ class OpenSubtitlesProvider(Provider):
             encoding = subtitle_item.get('SubEncoding') or None
             user_rank = subtitle_item.get('UserRank') or None
 
-            if self.trusted and user_rank and user_rank not in ('trusted', 'administrator', 'platinum member', 'gold member'):
+            trusted_list = ['trusted', 'administrator', 'vip member', 'vip plus member', 'super admin', 'translator',
+                            'moderator', 'bronze member', 'platinum member', 'gold member', 'app developer']
+            if self.trusted and user_rank and user_rank not in trusted_list:
                 logger.debug('Discarding found subtitle id %s as it is not uploaded by trusted user', subtitle_id)
                 continue
 

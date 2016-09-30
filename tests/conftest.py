@@ -91,6 +91,10 @@ def episodes():
             Episode('The.100.S03E09.720p.HDTV.x264-AVS.mkv', 'The 100', 3, 9, title='Stealing Fire', year=2014,
                     tvdb_id=5544536, series_tvdb_id=268592, series_imdb_id='tt2661044', format='HDTV',
                     release_group='AVS', resolution='720p', video_codec='h264', imdb_id='tt4799896'),
+            'the fall':
+            Episode('the_fall.3x01.720p_hdtv_x264-fov.mkv', 'The Fall', 3, 1, title='The Fall', year=2013,
+                    tvdb_id=5749493, series_tvdb_id=258107, series_imdb_id='tt2294189', format='HDTV',
+                    release_group='fov', resolution='720p', video_codec='h264', imdb_id='tt4516230'),
             'csi_s15e18':
             Episode('CSI.S15E18.720p.HDTV.X264.DIMENSION.mkv', 'CSI: Crime Scene Investigation', 15, 18,
                     title='The End Game', year=2000, tvdb_id=5104359, series_tvdb_id=72546, series_imdb_id='tt0247082',

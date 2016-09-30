@@ -156,7 +156,10 @@ class OpenSubtitlesProvider(Provider):
         if hash and size:
             criteria.append({'moviehash': hash, 'moviebytesize': str(size)})
         if imdb_id:
-            criteria.append({'imdbid': imdb_id[2:]})
+            if season and episode:
+                criteria.append({'imdbid': imdb_id[2:], 'season': season, 'episode': episode})
+            else:
+                criteria.append({'imdbid': imdb_id[2:]})
         if tag:
             criteria.append({'tag': tag})
         if query and season and episode:

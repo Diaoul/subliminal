@@ -143,9 +143,6 @@ class LegendasTVSubtitle(Subtitle):
             if video.imdb_id and self.imdb_id == video.imdb_id:
                 matches.add('imdb_id')
 
-        # archive name
-        matches |= guess_matches(video, guessit(self.archive.name, {'type': self.type}))
-
         # name
         matches |= guess_matches(video, guessit(self.name, {'type': self.type}))
 

@@ -162,13 +162,14 @@ class Episode(Video):
         if guess['type'] != 'episode':
             raise ValueError('The guess must be an episode guess')
 
-        if 'title' not in guess or 'episode' not in guess:
+        if 'title' not in guess:
             raise ValueError('Insufficient data to process the guess')
 
-        return cls(name, guess['title'], guess.get('season', 1), guess['episode'], title=guess.get('episode_title'),
-                   year=guess.get('year'), format=guess.get('format'), original_series='year' not in guess,
-                   release_group=guess.get('release_group'), resolution=guess.get('screen_size'),
-                   video_codec=guess.get('video_codec'), audio_codec=guess.get('audio_codec'))
+        return cls(name, guess['title'], guess.get('season', 1), guess.get('episode', 1),
+                   title=guess.get('episode_title'), year=guess.get('year'), format=guess.get('format'),
+                   original_series='year' not in guess, release_group=guess.get('release_group'),
+                   resolution=guess.get('screen_size'), video_codec=guess.get('video_codec'),
+                   audio_codec=guess.get('audio_codec'))
 
     @classmethod
     def fromname(cls, name):

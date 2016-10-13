@@ -172,6 +172,16 @@ def test_search_titles_without_season_information():
 
 @pytest.mark.integration
 @vcr.use_cassette
+def test_search_titles_containing_year_information():
+    with LegendasTVProvider() as provider:
+        titles = provider.search_titles('Bull')
+    assert 42047 in titles.keys()
+    t = titles[42047]
+    assert (t['title'], t['year']) == ('Bull', 2016)
+
+
+@pytest.mark.integration
+@vcr.use_cassette
 def test_get_archives():
     with LegendasTVProvider() as provider:
         archives = provider.get_archives(34084, 2)

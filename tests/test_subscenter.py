@@ -20,7 +20,9 @@ def test_get_matches_movie(movies):
                 'Enders.Game.2013.KORSUB.HDRip.h264.AAC-RARBG', 'Enders.Game.2013.HDRip.XViD.AC3-ReLeNTLesS',
                 'Enders.Game.2013.720p.KOR.HDRip.H264-KTH']
     subtitle = SubsCenterSubtitle(Language('heb'), False, None, None, None, None, 'Ender\'s Game', 266898,
-                                  '54adce017db2e7fd8501b7a321451b64', 389, releases)
+                                  '54adce017db2e7fd8501b7a321451b64',
+                                  '456e646572732e47616d652e323031332e373230702e4b4f522e48445269702e483236342d4b5448',
+                                  389, releases)
     matches = subtitle.get_matches(movies['enders_game'])
     assert matches == {'title', 'year', 'resolution', 'video_codec'}
 
@@ -28,7 +30,9 @@ def test_get_matches_movie(movies):
 def test_get_matches_episode(episodes):
     releases = ['Game.of.Thrones.S03E10.HDTV.x264-EVOLVE']
     subtitle = SubsCenterSubtitle(Language('heb'), False, None, 'Game of Thrones', 3, 10, 'Mhysa', 263129,
-                                  '6a3129e8b9effdb8231aa6b3caf66fbe', 6706, releases)
+                                  '6a3129e8b9effdb8231aa6b3caf66fbe',
+                                  '47616d652e6f662e5468726f6e65732e5330334531302e484454562e783236342d45564f4c5645',
+                                  6706, releases)
     matches = subtitle.get_matches(episodes['got_s03e10'])
     assert matches == {'series', 'episode', 'season', 'title', 'year', 'video_codec'}
 
@@ -36,7 +40,9 @@ def test_get_matches_episode(episodes):
 def test_get_matches_no_match(movies):
     releases = ['Game.of.Thrones.S03E10.HDTV.EVOLVE']
     subtitle = SubsCenterSubtitle(Language('heb'), False, None, 'Game of Thrones', 3, 10, 'Mhysa', 263129,
-                                  '6a3129e8b9effdb8231aa6b3caf66fbe', 6706, releases)
+                                  '6a3129e8b9effdb8231aa6b3caf66fbe',
+                                  '47616d652e6f662e5468726f6e65732e5330334531302e484454562e783236342d45564f4c5645',
+                                  6706, releases)
     matches = subtitle.get_matches(movies['man_of_steel'])
     assert matches == set()
 

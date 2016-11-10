@@ -80,6 +80,7 @@ class TVsubtitlesProvider(Provider):
     ]}
     video_types = (Episode,)
     server_url = 'http://www.tvsubtitles.net/'
+    subtitle_class = TVsubtitlesSubtitle
 
     def initialize(self):
         self.session = Session()
@@ -186,7 +187,7 @@ class TVsubtitlesProvider(Provider):
             rip = row.find('p', title='rip').text.strip() or None
             release = row.find('p', title='release').text.strip() or None
 
-            subtitle = TVsubtitlesSubtitle(language, page_link, subtitle_id, series, season, episode, year, rip,
+            subtitle = self.subtitle_class(language, page_link, subtitle_id, series, season, episode, year, rip,
                                            release)
             logger.debug('Found subtitle %s', subtitle)
             subtitles.append(subtitle)

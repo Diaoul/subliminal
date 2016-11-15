@@ -6,8 +6,7 @@ import io
 import itertools
 import logging
 import operator
-import os.path
-import os.walk
+import os
 import socket
 
 from babelfish import Language, LanguageReverseError

@@ -217,7 +217,7 @@ config_file = 'config.ini'
              'https://github.com/Diaoul/subliminal/')
 @click.option('--addic7ed', type=click.STRING, nargs=2, metavar='USERNAME PASSWORD', help='Addic7ed configuration.')
 @click.option('--legendastv', type=click.STRING, nargs=2, metavar='USERNAME PASSWORD', help='LegendasTV configuration.')
-@click.option('--opensubtitles', type=click.STRING, nargs=2, metavar='USERNAME PASSWORD',
+@click.option('--opensubtitles', type=click.STRING, nargs=3, metavar='USERNAME PASSWORD TRUSTED',
               help='OpenSubtitles configuration.')
 @click.option('--subscenter', type=click.STRING, nargs=2, metavar='USERNAME PASSWORD', help='SubsCenter configuration.')
 @click.option('--cache-dir', type=click.Path(writable=True, file_okay=False), default=dirs.user_cache_dir,
@@ -252,7 +252,7 @@ def subliminal(ctx, addic7ed, legendastv, opensubtitles, subscenter, cache_dir, 
     if legendastv:
         ctx.obj['provider_configs']['legendastv'] = {'username': legendastv[0], 'password': legendastv[1]}
     if opensubtitles:
-        ctx.obj['provider_configs']['opensubtitles'] = {'username': opensubtitles[0], 'password': opensubtitles[1]}
+        ctx.obj['provider_configs']['opensubtitles'] = {'username': opensubtitles[0], 'password': opensubtitles[1], 'trusted': opensubtitles[2]}
     if subscenter:
         ctx.obj['provider_configs']['subscenter'] = {'username': subscenter[0], 'password': subscenter[1]}
 

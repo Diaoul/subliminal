@@ -1,259 +1,171 @@
 interactions:
 - request:
-    body: '<?xml version=''1.0''?>
-
-      <methodCall>
-
-      <methodName>LogIn</methodName>
-
-      <params>
-
-      <param>
-
-      <value><string></string></value>
-
-      </param>
-
-      <param>
-
-      <value><string></string></value>
-
-      </param>
-
-      <param>
-
-      <value><string>eng</string></value>
-
-      </param>
-
-      <param>
-
-      <value><string>subliminal v2.1</string></value>
-
-      </param>
-
-      </params>
-
-      </methodCall>
-
-      '
+    body: !!binary |
+      PD94bWwgdmVyc2lvbj0nMS4wJz8+CjxtZXRob2RDYWxsPgo8bWV0aG9kTmFtZT5Mb2dJbjwvbWV0
+      aG9kTmFtZT4KPHBhcmFtcz4KPHBhcmFtPgo8dmFsdWU+PHN0cmluZz48L3N0cmluZz48L3ZhbHVl
+      Pgo8L3BhcmFtPgo8cGFyYW0+Cjx2YWx1ZT48c3RyaW5nPjwvc3RyaW5nPjwvdmFsdWU+CjwvcGFy
+      YW0+CjxwYXJhbT4KPHZhbHVlPjxzdHJpbmc+ZW5nPC9zdHJpbmc+PC92YWx1ZT4KPC9wYXJhbT4K
+      PHBhcmFtPgo8dmFsdWU+PHN0cmluZz5zdWJsaW1pbmFsIHYyLjA8L3N0cmluZz48L3ZhbHVlPgo8
+      L3BhcmFtPgo8L3BhcmFtcz4KPC9tZXRob2RDYWxsPgo=
     headers:
       Accept-Encoding: [gzip]
       Content-Length: ['317']
       Content-Type: [text/xml]
-      User-Agent: [xmlrpclib.py/1.0.1 (by www.pythonware.com)]
+      User-Agent: [Python-xmlrpc/3.4]
     method: POST
     uri: https://api.opensubtitles.org/xml-rpc
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAA6WRTQoCMQyF956izF5bRxEXsR7AheANOtOog9MfJ+3g8Z2fgiKigrsvIS/vkcD2
-        ZmrWYkOVs5tsPhMZQ1s6XdnTJovhOF1nWzkBg+Hs9AHJO0vYNbxqlCE5YSN1wKBVdcSeGFBoYhkG
-        Zp3YFNiMBQOrDMrgLmiBD5z6D3Va0EWQ5I+Fddovw1UJrEW1qC4rPCk/B55Gkpw/6YE/W77zp6BC
-        pB8C5EKw/e5PMyyd1R/dtItFjVLMhMiBp+qb2ZAqnfkxBTx9JAH19Pq/O9ygG5X4AQAA
+        H4sIAAAAAAAAA6WRQY7CMAxF95wi6n5IgkQ1SCYcYBYjzQ3SxlMKjVPqBHH8KSUSCKEBid2z5e//
+        ZcPm5DtxxIHbQOtCz1UhkOrgWmrWRYq/H5/FxszAY9wG94PcB2IcG70drGczExcaQcDRdgnPJIDj
+        kOo4sRjFvsLhUggg69HEsEcCOXHuX9V5wRjBaGp51xxStdxa3VDZu1qvMJa6BJlHslze6EHeWj7y
+        52hj4hcCLJQS319vmmEdyP3r5kKqOjRqrtQCZK6emU2p8pmvUyDzRzLwme7/9weo00du+AEAAA==
     headers:
-      accept-ranges: [bytes]
-      access-control-allow-headers: ['Origin,X-Requested-With,Content-Type,Accept,DNT,Keep-Alive,User-Agent,If-Modified-Since,Cache-Control']
-      access-control-allow-methods: ['GET, POST, OPTIONS']
-      access-control-allow-origin: ['*']
-      age: ['0']
-      content-encoding: [gzip]
-      content-length: ['222']
-      content-type: [text/xml;charset=UTF-8]
-      date: ['Mon, 06 Jun 2016 18:13:24 GMT']
-      download-quota: ['199']
-      server: [lighttpd/1.4.39]
-      set-cookie: [PHPSESSID=spfbnodp4tqa0el0i3ik6egap1; path=/; domain=.opensubtitles.org;
+      Accept-Ranges: [bytes]
+      Access-Control-Allow-Headers: ['Origin,X-Requested-With,Content-Type,Accept,DNT,Keep-Alive,User-Agent,If-Modified-Since,Cache-Control']
+      Access-Control-Allow-Methods: ['GET, POST, OPTIONS']
+      Access-Control-Allow-Origin: ['*']
+      Age: ['0']
+      Content-Encoding: [gzip]
+      Content-Length: ['226']
+      Content-type: [text/xml;charset=UTF-8]
+      Date: ['Fri, 08 Apr 2016 18:35:01 GMT']
+      Download-Quota: ['200']
+      Server: [lighttpd/1.4.39]
+      Set-Cookie: [PHPSESSID=1nisjgqub5ha1gn6pdc19et616; path=/; domain=.opensubtitles.org;
           HttpOnly]
-      strict-transport-security: [max-age=63072000; includeSubdomains; preload]
-      vary: [Accept-Encoding]
-      x-cache: [MISS]
-      x-cache-backend: [web3]
-      x-content-type-options: [nosniff]
-      x-frame-options: [DENY]
-      x-uncompressed-content-length: ['504']
+      Strict-Transport-Security: [max-age=63072000; includeSubdomains; preload]
+      Vary: [Accept-Encoding]
+      X-Cache: [MISS]
+      X-Cache-Backend: [web3]
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [DENY]
+      X-Uncompressed-Content-Length: ['504']
     status: {code: 200, message: OK}
 - request:
-    body: '<?xml version=''1.0''?>
-
-      <methodCall>
-
-      <methodName>SearchSubtitles</methodName>
-
-      <params>
-
-      <param>
-
-      <value><string>spfbnodp4tqa0el0i3ik6egap1</string></value>
-
-      </param>
-
-      <param>
-
-      <value><array><data>
-
-      <value><struct>
-
-      <member>
-
-      <name>moviebytesize</name>
-
-      <value><string>7033732714</string></value>
-
-      </member>
-
-      <member>
-
-      <name>sublanguageid</name>
-
-      <value><string>eng</string></value>
-
-      </member>
-
-      <member>
-
-      <name>moviehash</name>
-
-      <value><string>5b8f8f4e41ccb21e</string></value>
-
-      </member>
-
-      </struct></value>
-
-      </data></array></value>
-
-      </param>
-
-      </params>
-
-      </methodCall>
-
-      '
+    body: !!binary |
+      PD94bWwgdmVyc2lvbj0nMS4wJz8+CjxtZXRob2RDYWxsPgo8bWV0aG9kTmFtZT5TZWFyY2hTdWJ0
+      aXRsZXM8L21ldGhvZE5hbWU+CjxwYXJhbXM+CjxwYXJhbT4KPHZhbHVlPjxzdHJpbmc+MW5pc2pn
+      cXViNWhhMWduNnBkYzE5ZXQ2MTY8L3N0cmluZz48L3ZhbHVlPgo8L3BhcmFtPgo8cGFyYW0+Cjx2
+      YWx1ZT48YXJyYXk+PGRhdGE+Cjx2YWx1ZT48c3RydWN0Pgo8bWVtYmVyPgo8bmFtZT5tb3ZpZWJ5
+      dGVzaXplPC9uYW1lPgo8dmFsdWU+PHN0cmluZz43MDMzNzMyNzE0PC9zdHJpbmc+PC92YWx1ZT4K
+      PC9tZW1iZXI+CjxtZW1iZXI+CjxuYW1lPm1vdmllaGFzaDwvbmFtZT4KPHZhbHVlPjxzdHJpbmc+
+      NWI4ZjhmNGU0MWNjYjIxZTwvc3RyaW5nPjwvdmFsdWU+CjwvbWVtYmVyPgo8bWVtYmVyPgo8bmFt
+      ZT5zdWJsYW5ndWFnZWlkPC9uYW1lPgo8dmFsdWU+PHN0cmluZz5lbmc8L3N0cmluZz48L3ZhbHVl
+      Pgo8L21lbWJlcj4KPC9zdHJ1Y3Q+PC92YWx1ZT4KPC9kYXRhPjwvYXJyYXk+PC92YWx1ZT4KPC9w
+      YXJhbT4KPC9wYXJhbXM+CjwvbWV0aG9kQ2FsbD4K
     headers:
       Accept-Encoding: [gzip]
       Content-Length: ['543']
       Content-Type: [text/xml]
-      User-Agent: [xmlrpclib.py/1.0.1 (by www.pythonware.com)]
+      User-Agent: [Python-xmlrpc/3.4]
     method: POST
     uri: https://api.opensubtitles.org/xml-rpc
   response:
     body:
       string: !!binary |
-        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
+        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
     headers:
-      accept-ranges: [bytes]
-      access-control-allow-headers: ['Origin,X-Requested-With,Content-Type,Accept,DNT,Keep-Alive,User-Agent,If-Modified-Since,Cache-Control']
-      access-control-allow-methods: ['GET, POST, OPTIONS']
-      access-control-allow-origin: ['*']
-      age: ['0']
-      content-encoding: [gzip]
-      content-length: ['3926']
-      content-type: [text/xml;charset=UTF-8]
-      date: ['Mon, 06 Jun 2016 18:13:24 GMT']
-      server: [lighttpd/1.4.39]
-      set-cookie: [PHPSESSID=spfbnodp4tqa0el0i3ik6egap1; path=/; domain=.opensubtitles.org;
+      Accept-Ranges: [bytes]
+      Access-Control-Allow-Headers: ['Origin,X-Requested-With,Content-Type,Accept,DNT,Keep-Alive,User-Agent,If-Modified-Since,Cache-Control']
+      Access-Control-Allow-Methods: ['GET, POST, OPTIONS']
+      Access-Control-Allow-Origin: ['*']
+      Age: ['0']
+      Content-Encoding: [gzip]
+      Content-Length: ['3908']
+      Content-type: [text/xml;charset=UTF-8]
+      Date: ['Fri, 08 Apr 2016 18:35:01 GMT']
+      Server: [lighttpd/1.4.39]
+      Set-Cookie: [PHPSESSID=1nisjgqub5ha1gn6pdc19et616; path=/; domain=.opensubtitles.org;
           HttpOnly]
-      strict-transport-security: [max-age=63072000; includeSubdomains; preload]
-      vary: [Accept-Encoding]
-      x-cache: [MISS]
-      x-cache-backend: [web3]
-      x-content-type-options: [nosniff]
-      x-frame-options: [DENY]
-      x-uncompressed-content-length: ['97696']
+      Strict-Transport-Security: [max-age=63072000; includeSubdomains; preload]
+      Vary: [Accept-Encoding]
+      X-Cache: [MISS]
+      X-Cache-Backend: [web3]
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [DENY]
+      X-Uncompressed-Content-Length: ['100653']
     status: {code: 200, message: OK}
 - request:
-    body: '<?xml version=''1.0''?>
-
-      <methodCall>
-
-      <methodName>LogOut</methodName>
-
-      <params>
-
-      <param>
-
-      <value><string>spfbnodp4tqa0el0i3ik6egap1</string></value>
-
-      </param>
-
-      </params>
-
-      </methodCall>
-
-      '
+    body: !!binary |
+      PD94bWwgdmVyc2lvbj0nMS4wJz8+CjxtZXRob2RDYWxsPgo8bWV0aG9kTmFtZT5Mb2dPdXQ8L21l
+      dGhvZE5hbWU+CjxwYXJhbXM+CjxwYXJhbT4KPHZhbHVlPjxzdHJpbmc+MW5pc2pncXViNWhhMWdu
+      NnBkYzE5ZXQ2MTY8L3N0cmluZz48L3ZhbHVlPgo8L3BhcmFtPgo8L3BhcmFtcz4KPC9tZXRob2RD
+      YWxsPgo=
     headers:
       Accept-Encoding: [gzip]
       Content-Length: ['176']
       Content-Type: [text/xml]
-      User-Agent: [xmlrpclib.py/1.0.1 (by www.pythonware.com)]
+      User-Agent: [Python-xmlrpc/3.4]
     method: POST
     uri: https://api.opensubtitles.org/xml-rpc
   response:
@@ -264,43 +176,35 @@ interactions:
         mw79KhhYZVBSUCES8EXkwtaeJ6Qd5FEIdjkDzzJb+c4LfD//axj2zuqfadrFbkQpKiFq4Fn9C1u2
         yt/cXMDzRTLQTJ/3ewOe39o0eAEAAA==
     headers:
-      accept-ranges: [bytes]
-      access-control-allow-headers: ['Origin,X-Requested-With,Content-Type,Accept,DNT,Keep-Alive,User-Agent,If-Modified-Since,Cache-Control']
-      access-control-allow-methods: ['GET, POST, OPTIONS']
-      access-control-allow-origin: ['*']
-      age: ['0']
-      content-encoding: [gzip]
-      content-length: ['193']
-      content-type: [text/xml;charset=UTF-8]
-      date: ['Mon, 06 Jun 2016 18:13:24 GMT']
-      server: [lighttpd/1.4.39]
-      strict-transport-security: [max-age=63072000; includeSubdomains; preload]
-      vary: [Accept-Encoding]
-      x-cache: [MISS]
-      x-cache-backend: [web2]
-      x-content-type-options: [nosniff]
-      x-frame-options: [DENY]
-      x-uncompressed-content-length: ['376']
+      Accept-Ranges: [bytes]
+      Access-Control-Allow-Headers: ['Origin,X-Requested-With,Content-Type,Accept,DNT,Keep-Alive,User-Agent,If-Modified-Since,Cache-Control']
+      Access-Control-Allow-Methods: ['GET, POST, OPTIONS']
+      Access-Control-Allow-Origin: ['*']
+      Age: ['0']
+      Content-Encoding: [gzip]
+      Content-Length: ['193']
+      Content-type: [text/xml;charset=UTF-8]
+      Date: ['Fri, 08 Apr 2016 18:35:01 GMT']
+      Server: [lighttpd/1.4.39]
+      Set-Cookie: [PHPSESSID=1nisjgqub5ha1gn6pdc19et616; path=/; domain=.opensubtitles.org;
+          HttpOnly]
+      Strict-Transport-Security: [max-age=63072000; includeSubdomains; preload]
+      Vary: [Accept-Encoding]
+      X-Cache: [MISS]
+      X-Cache-Backend: [web2]
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [DENY]
+      X-Uncompressed-Content-Length: ['376']
     status: {code: 200, message: OK}
 - request:
-    body: '<?xml version=''1.0''?>
-
-      <methodCall>
-
-      <methodName>close</methodName>
-
-      <params>
-
-      </params>
-
-      </methodCall>
-
-      '
+    body: !!binary |
+      PD94bWwgdmVyc2lvbj0nMS4wJz8+CjxtZXRob2RDYWxsPgo8bWV0aG9kTmFtZT5jbG9zZTwvbWV0
+      aG9kTmFtZT4KPHBhcmFtcz4KPC9wYXJhbXM+CjwvbWV0aG9kQ2FsbD4K
     headers:
       Accept-Encoding: [gzip]
       Content-Length: ['99']
       Content-Type: [text/xml]
-      User-Agent: [xmlrpclib.py/1.0.1 (by www.pythonware.com)]
+      User-Agent: [Python-xmlrpc/3.4]
     method: POST
     uri: https://api.opensubtitles.org/xml-rpc
   response:
@@ -311,22 +215,22 @@ interactions:
         3ZDbBKCRmoQPMkSPbBWpsdvThHkHceZXuK3hYGyAzkajkKVmMrKDE9kx7Ws0tdaon9nKxmYgwQvO
         S2RJ/Qtbt0qf3l8hS/dJ4Bf6vOYbZMIxSIYBAAA=
     headers:
-      accept-ranges: [bytes]
-      access-control-allow-headers: ['Origin,X-Requested-With,Content-Type,Accept,DNT,Keep-Alive,User-Agent,If-Modified-Since,Cache-Control']
-      access-control-allow-methods: ['GET, POST, OPTIONS']
-      access-control-allow-origin: ['*']
-      age: ['0']
-      content-encoding: [gzip]
-      content-length: ['200']
-      content-type: [text/xml;charset=UTF-8]
-      date: ['Mon, 06 Jun 2016 18:13:24 GMT']
-      server: [lighttpd/1.4.39]
-      strict-transport-security: [max-age=63072000; includeSubdomains; preload]
-      vary: [Accept-Encoding]
-      x-cache: [MISS]
-      x-cache-backend: [web2]
-      x-content-type-options: [nosniff]
-      x-frame-options: [DENY]
-      x-uncompressed-content-length: ['390']
+      Accept-Ranges: [bytes]
+      Access-Control-Allow-Headers: ['Origin,X-Requested-With,Content-Type,Accept,DNT,Keep-Alive,User-Agent,If-Modified-Since,Cache-Control']
+      Access-Control-Allow-Methods: ['GET, POST, OPTIONS']
+      Access-Control-Allow-Origin: ['*']
+      Age: ['0']
+      Content-Encoding: [gzip]
+      Content-Length: ['200']
+      Content-type: [text/xml;charset=UTF-8]
+      Date: ['Fri, 08 Apr 2016 18:35:01 GMT']
+      Server: [lighttpd/1.4.39]
+      Strict-Transport-Security: [max-age=63072000; includeSubdomains; preload]
+      Vary: [Accept-Encoding]
+      X-Cache: [MISS]
+      X-Cache-Backend: [web2]
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [DENY]
+      X-Uncompressed-Content-Length: ['390']
     status: {code: 200, message: OK}
 version: 1

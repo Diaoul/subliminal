@@ -186,7 +186,7 @@ class OpenSubtitlesProvider(Provider):
             language = Language.fromopensubtitles(subtitle_item['SubLanguageID'])
             hearing_impaired = bool(int(subtitle_item['SubHearingImpaired']))
             page_link = subtitle_item['SubtitlesLink']
-            subtitle_id = int(subtitle_item['IDSubtitleFile'])
+            subtitle_id = subtitle_id = subtitle_item['MovieReleaseName'] + " (" + subtitle_item['IDSubtitleFile'] + ")"
             matched_by = subtitle_item['MatchedBy']
             movie_kind = subtitle_item['MovieKind']
             hash = subtitle_item['MovieHash']

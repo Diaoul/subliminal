@@ -10,7 +10,7 @@ def test_registrable_extension_manager_all_extensions():
     ])
     extensions = sorted(e.name for e in manager)
     assert len(extensions) == 10
-    assert extensions == ['addic7ed', 'de7cidda', 'argenteam', 'legendastv', 'opensubtitles', 'podnapisi', 'shooter',
+    assert extensions == ['addic7ed', 'argenteam', 'de7cidda', 'legendastv', 'opensubtitles', 'podnapisi', 'shooter',
                           'subscenter', 'thesubdb', 'tvsubtitles']
 
 

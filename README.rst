@@ -1,5 +1,9 @@
 Subliminal
 ==========
+
+.. image:: https://badges.gitter.im/Join%20Chat.svg
+   :alt: Join the chat at https://gitter.im/Diaoul/subliminal
+   :target: https://gitter.im/Diaoul/subliminal?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 Subtitles, faster than your thoughts.
 
 .. image:: https://img.shields.io/pypi/v/subliminal.svg

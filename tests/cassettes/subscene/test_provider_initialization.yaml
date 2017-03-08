@@ -1,0 +1,48 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [Subliminal/2.1]
+    method: HEAD
+    uri: http://subscene.com/
+  response:
+    body: {string: ''}
+    headers:
+      CF-RAY: [4a47f5c1699c9b20-DFW]
+      Cache-Control: [max-age=3600]
+      Connection: [keep-alive]
+      Date: ['Tue, 05 Feb 2019 19:59:52 GMT']
+      Expires: ['Tue, 05 Feb 2019 20:59:52 GMT']
+      Location: ['https://subscene.com/']
+      Server: [cloudflare]
+      Vary: [Accept-Encoding]
+    status: {code: 301, message: Moved Permanently}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [Subliminal/2.1]
+    method: HEAD
+    uri: https://subscene.com/
+  response:
+    body: {string: ''}
+    headers:
+      CF-RAY: [4a47f5e05f5a261d-DFW]
+      Cache-Control: [private]
+      Connection: [keep-alive]
+      Content-Encoding: [gzip]
+      Content-Type: [text/html; charset=utf-8]
+      Date: ['Tue, 05 Feb 2019 19:59:57 GMT']
+      Expect-CT: ['max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"']
+      Server: [cloudflare]
+      Set-Cookie: ['__cfduid=d68c4e2951e2384ecebc666d87370c8331549396797; expires=Wed,
+          05-Feb-20 19:59:57 GMT; path=/; domain=.subscene.com; HttpOnly; Secure',
+        'cf_clearance=5a29b1456b54e12697317df8cf050a118a53235e-1549396797-31536000-220;
+          path=/; expires=Wed, 05-Feb-20 20:59:57 GMT; domain=.subscene.com; HttpOnly']
+    status: {code: 200, message: OK}
+version: 1

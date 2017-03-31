@@ -3,6 +3,13 @@ import os
 
 from babelfish import Language, language_converters
 import pytest
+import requests
+
+try:
+    from unittest.mock import Mock
+except ImportError:
+    from mock import Mock
+
 from vcr import VCR
 from subliminal.exceptions import ConfigurationError, AuthenticationError
 from subliminal.providers.legendastv import LegendasTVSubtitle, LegendasTVProvider, LegendasTVArchive
@@ -179,6 +186,26 @@ def test_get_archives_no_result():
     with LegendasTVProvider() as provider:
         archives = provider.get_archives(34084, 17)
     assert len(archives) == 0
+
+
+def test_get_archives_logged_in_as_donor(monkeypatch):
+    div = ('<!doctype html><html><body id=""><div class="gallery clearfix list_element"><article><div class="">'
+           '<span class="number number_1">1</span><a href="/downloadarquivo/5515d27a72921" class="seta"></a>'
+           '<div class="f_left"><p><a href="/download/5515d27a72921/Interstellar/Interstellar_2014_1080p_BluRay_x264_'
+           'DTS_RARBG_eng">Interstellar.2014.1080p.BluRay.x264.DTS-RARBG.eng</a></p><p class="data">412 downloads, '
+           'nota 10, enviado por <a href="/usuario/falcao10">falcao10</a> em 27/03/2015 - 18:58 </p></div></div>'
+           '</article></div></body></html>')
+
+    response = requests.Response()
+    response.__setstate__({'_content': div, 'status_code': 200})
+
+    with LegendasTVProvider() as provider:
+        monkeypatch.setattr(provider.session, 'get', Mock(return_value=response))
+        archive = provider.get_archives(34084, 2)[0]
+    assert archive.id == '5515d27a72921'
+    assert archive.name == 'Interstellar.2014.1080p.BluRay.x264.DTS-RARBG.eng'
+    assert archive.link == ('http://legendas.tv/download/5515d27a72921/Interstellar/Interstellar_2014_1080p_BluRay_'
+                            'x264_DTS_RARBG_eng')
 
 
 @pytest.mark.integration

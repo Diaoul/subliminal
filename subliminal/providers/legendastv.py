@@ -276,9 +276,9 @@ class LegendasTVProvider(Provider):
             soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
             for archive_soup in soup.select('div.list_element > article > div'):
                 # create archive
-                archive = LegendasTVArchive(archive_soup.a['href'].split('/')[2], archive_soup.a.text,
+                archive = LegendasTVArchive(archive_soup.p.a['href'].split('/')[2], archive_soup.p.a.text,
                                             'pack' in archive_soup['class'], 'destaque' in archive_soup['class'],
-                                            self.server_url + archive_soup.a['href'][1:])
+                                            self.server_url + archive_soup.p.a['href'][1:])
 
                 # extract text containing downloads, rating and timestamp
                 data_text = archive_soup.find('p', class_='data').text

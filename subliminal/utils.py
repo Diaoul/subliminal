@@ -68,6 +68,34 @@ def hash_napiprojekt(video_path):
         data = f.read(readsize)
     return hashlib.md5(data).hexdigest()
 
+def hash_napisy24(video_path):
+    """Compute a hash using Napisy24's algorithm.
+
+    :param str video_path: path of the video.
+    :return: the hash.
+    :rtype: str
+
+    """
+    filesize = os.path.getsize(video_path)
+    hash = filesize
+    
+    if filesize < 65536 * 2:
+        return
+
+    readformat = '<q'
+    readsize = struct.calcsize(readformat)
+    with open(video_path, 'rb') as f:
+        for x in range(65536 // readsize):
+            hash += struct.unpack(readformat, f.read(readsize))[0]
+            hash &= 0xFFFFFFFFFFFFFFFF
+        
+        f.seek(max(0, filesize - 65536), 0)
+        for x in range(65536 // readsize):
+            hash += struct.unpack(readformat, f.read(readsize))[0]
+            hash &= 0xFFFFFFFFFFFFFFFF
+
+    return '%016x' % hash
+
 
 def hash_shooter(video_path):
     """Compute a hash using Shooter's algorithm

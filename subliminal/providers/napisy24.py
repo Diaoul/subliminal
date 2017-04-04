@@ -48,12 +48,13 @@ class Napisy24Provider(Provider):
     required_hash = 'napisy24'
     server_url = 'http://napisy24.pl/run/CheckSubAgent.php'
 
-    def __init__(self, username=None, password=None):        
+    def __init__(self, username=None, password=None):
         if username and not password or not username and password:
             raise ConfigurationError('Username and password must be specified')
 
         self.username = username or ''
         self.password = password or ''
+        self.session = None
 
     def initialize(self):
         self.session = Session()
@@ -64,11 +65,11 @@ class Napisy24Provider(Provider):
 
     def query(self, language, size, name, hash):
         params = {
-            'postAction': 'CheckSub', 
-            'ua': self.username, 
-            'ap': self.password, 
-            'fs': size, 
-            'fh': hash, 
+            'postAction': 'CheckSub',
+            'ua': self.username,
+            'ap': self.password,
+            'fs': size,
+            'fh': hash,
             'fn': os.path.basename(name),
         }
 
@@ -78,15 +79,15 @@ class Napisy24Provider(Provider):
         if response.content[:4] != 'OK-2':
             logger.debug('No subtitles found')
             return None
-        
-        responseContent = response.content.split('||', 1)
-        responseParams = dict(p.split(':', 1) for p in responseContent[0].split('|')[1:])
 
-        logger.debug('Subtitle params: %s' % responseParams)
+        response_content = response.content.split('||', 1)
+        response_params = dict(p.split(':', 1) for p in response_content[0].split('|')[1:])
 
-        subtitle = Napisy24Subtitle(language, hash, responseParams['imdb'])
+        logger.debug('Subtitle params: %s', response_params)
 
-        with ZipFile(BytesIO(responseContent[1])) as zf:
+        subtitle = Napisy24Subtitle(language, hash, response_params['imdb'])
+
+        with ZipFile(BytesIO(response_content[1])) as zf:
             subtitle.content = fix_line_ending(zf.open(zf.namelist()[0]).read())
 
         return subtitle
@@ -97,3 +98,4 @@ class Napisy24Provider(Provider):
     def download_subtitle(self, subtitle):
         # there is no download step, content is already filled from listing subtitles
         pass
+        

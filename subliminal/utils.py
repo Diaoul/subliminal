@@ -77,24 +77,24 @@ def hash_napisy24(video_path):
 
     """
     filesize = os.path.getsize(video_path)
-    hash = filesize
-    
+    result = filesize
+
     if filesize < 65536 * 2:
         return
 
     readformat = '<q'
     readsize = struct.calcsize(readformat)
     with open(video_path, 'rb') as f:
-        for x in range(65536 // readsize):
-            hash += struct.unpack(readformat, f.read(readsize))[0]
-            hash &= 0xFFFFFFFFFFFFFFFF
-        
-        f.seek(max(0, filesize - 65536), 0)
-        for x in range(65536 // readsize):
-            hash += struct.unpack(readformat, f.read(readsize))[0]
-            hash &= 0xFFFFFFFFFFFFFFFF
+        for _ in range(65536 // readsize):
+            result += struct.unpack(readformat, f.read(readsize))[0]
+            result &= 0xFFFFFFFFFFFFFFFF
 
-    return '%016x' % hash
+        f.seek(max(0, filesize - 65536), 0)
+        for _ in range(65536 // readsize):
+            result += struct.unpack(readformat, f.read(readsize))[0]
+            result &= 0xFFFFFFFFFFFFFFFF
+
+    return '%016x' % result
 
 
 def hash_shooter(video_path):

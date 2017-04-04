@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 import logging
 import os
+from io import BytesIO
+from zipfile import ZipFile
 
 from babelfish import Language
-from io import BytesIO
 from requests import Session
-from zipfile import ZipFile
 
 from . import Provider
 from .. import __short_version__
+from ..exceptions import ConfigurationError
 from ..subtitle import Subtitle, fix_line_ending
 
 logger = logging.getLogger(__name__)

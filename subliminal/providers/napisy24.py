@@ -85,8 +85,8 @@ class Napisy24Provider(Provider):
 
         logger.debug('Subtitle params: %s', response_params)
 
-        subtitle = Napisy24Subtitle(language, hash, response_params['imdb'])
 
+        subtitle = Napisy24Subtitle(language, hash, 'tt%s' % response_params['imdb'].zfill(7))
         with ZipFile(BytesIO(response_content[1])) as zf:
             subtitle.content = fix_line_ending(zf.open(zf.namelist()[0]).read())
 

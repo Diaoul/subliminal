@@ -9,7 +9,7 @@ from requests import Session
 
 from . import Provider
 from .. import __short_version__
-from ..exceptions import ConfigurationError
+from ..exceptions import AuthenticationError, ConfigurationError
 from ..subtitle import Subtitle, fix_line_ending
 
 logger = logging.getLogger(__name__)
@@ -76,7 +76,14 @@ class Napisy24Provider(Provider):
         response = self.session.post(self.server_url, data=params, timeout=10)
         response.raise_for_status()
 
-        if response.content[:4] != 'OK-2':
+        napisy24_status = response.content[:4]
+        if napisy24_status[:2] != 'OK':
+            if response.content[:11] == 'login error':
+                raise AuthenticationError('Login failed')
+            logger.error(response.content)
+            return None
+
+        if napisy24_status == 'OK-0':
             logger.debug('No subtitles found')
             return None
 
@@ -85,6 +92,14 @@ class Napisy24Provider(Provider):
 
         logger.debug('Subtitle params: %s', response_params)
 
+        if napisy24_status == 'OK-1':
+            logger.debug('No subtitles found but got video info')
+            return None
+        elif napisy24_status == 'OK-2':
+            logger.debug('Found subtitles')
+        elif napisy24_status == 'OK-3':
+            logger.debug('Found subtitles but not from n24 database')
+            return None
 
         subtitle = Napisy24Subtitle(language, hash, 'tt%s' % response_params['imdb'].zfill(7))
         with ZipFile(BytesIO(response_content[1])) as zf:

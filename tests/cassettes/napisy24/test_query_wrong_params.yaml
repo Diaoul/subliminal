@@ -1,0 +1,23 @@
+interactions:
+- request:
+    body: !!python/unicode postAction=CheckSub&fs=0&n24pref=1&ap=lanimilbus&fh=abcdabdcabcd1234abcd1234abcd123&ua=subliminal&fn=
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['101']
+      Content-Type: [application/x-www-form-urlencoded]
+      User-Agent: [Subliminal/2.1]
+    method: POST
+    uri: http://napisy24.pl/run/CheckSubAgent.php
+  response:
+    body: {string: !!python/unicode OK-0||}
+    headers:
+      cache-control: ['no-cache, must-revalidate']
+      connection: [keep-alive]
+      content-type: [text/html]
+      date: ['Mon, 10 Apr 2017 11:42:45 GMT']
+      server: [nginx]
+      x-powered-by: [PHP/5.4.16, PleskLin]
+    status: {code: 200, message: OK}
+version: 1

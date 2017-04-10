@@ -27,6 +27,7 @@ def movies():
                   format='BluRay', release_group='felony', resolution='720p', video_codec='h264', audio_codec='DTS',
                   imdb_id='tt0770828', size=7033732714, year=2013,
                   hashes={'napiprojekt': '6303e7ee6a835e9fcede9fb2fb00cb36',
+                          'napisy24': '5b8f8f4e41ccb21e',
                           'opensubtitles': '5b8f8f4e41ccb21e',
                           'shooter': '314f454ab464775498ae6f1f5ad813a9;fdaa8b702d8936feba2122e93ba5c44f;'
                                      '0a6935e3436aa7db5597ef67a2c494e3;4d269733f36ddd49f71e92732a462fe5',
@@ -48,6 +49,7 @@ def episodes():
                     series_tvdb_id=80379, series_imdb_id='tt0898266', format='HDTV', release_group='DIMENSION',
                     resolution='720p', video_codec='h264', audio_codec='AC3', imdb_id='tt3229392', size=501910737,
                     hashes={'napiprojekt': '6303e7ee6a835e9fcede9fb2fb00cb36',
+                            'napisy24': '6878b3ef7c1bd19e',
                             'opensubtitles': '6878b3ef7c1bd19e',
                             'shooter': 'c13e0e5243c56d280064d344676fff94;cd4184d1c0c623735f6db90841ce15fc;'
                                        '3faefd72f92b63f2504269b4f484a377;8c68d1ef873afb8ba0cc9f97cbac41c1',
@@ -59,6 +61,7 @@ def episodes():
                     series_imdb_id='tt0944947', format='WEB-DL', release_group='NTb', resolution='720p',
                     video_codec='h264', audio_codec='AC3', imdb_id='tt2178796', size=2142810931,
                     hashes={'napiprojekt': '6303e7ee6a835e9fcede9fb2fb00cb36',
+                            'napisy24': 'b850baa096976c22',
                             'opensubtitles': 'b850baa096976c22',
                             'shooter': 'b02d992c04ad74b31c252bd5a097a036;ef1b32f873b2acf8f166fc266bdf011a;'
                                        '82ce34a3bcee0c66ed3b26d900d31cca;78113770551f3efd1e2d4ec45898c59c',

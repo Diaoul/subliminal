@@ -72,6 +72,7 @@ class Napisy24Provider(Provider):
             'fs': size,
             'fh': hash,
             'fn': os.path.basename(name),
+            'n24pref': 1
         }
 
         response = self.session.post(self.server_url, data=params, timeout=10)

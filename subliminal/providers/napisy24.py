@@ -48,7 +48,7 @@ class Napisy24Provider(Provider):
     required_hash = 'napisy24'
     server_url = 'http://napisy24.pl/run/CheckSubAgent.php'
 
-    def __init__(self, username=None, password=None):
+    def __init__(self, username='subliminal', password='lanimilbus'):
         if any((username, password)) and not all((username, password)):
             raise ConfigurationError('Username and password must be specified')
 

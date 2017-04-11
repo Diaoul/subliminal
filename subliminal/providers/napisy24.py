@@ -110,9 +110,9 @@ class Napisy24Provider(Provider):
         return subtitle
 
     def list_subtitles(self, video, languages):
-        return [s for s in [self.query(l, video.size, video.name, video.hashes['napisy24']) for l in languages] if s is not None]
+        subtitles = [self.query(l, video.size, video.name, video.hashes['napisy24']) for l in languages]
+        return [s for s in subtitles if s is not None]
 
     def download_subtitle(self, subtitle):
         # there is no download step, content is already filled from listing subtitles
         pass
-        

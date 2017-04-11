@@ -68,6 +68,7 @@ def hash_napiprojekt(video_path):
         data = f.read(readsize)
     return hashlib.md5(data).hexdigest()
 
+
 def hash_napisy24(video_path):
     """Compute a hash using Napisy24's algorithm.
 

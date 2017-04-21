@@ -1,0 +1,96 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.8.1]
+    method: GET
+    uri: http://api.tmdb.org/3/search/movie?api_key=f7f51775877e0bb6703520952b3c7840&query=Man%20of%20Steel&year=2013&language=en
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA3SSy27bMBBFf2Uwa8a1ZLu2tUsRJEDhNAXioijawhiLY4kOxVFJSoqanw+ouo9N
+        dwTunXs4jxdsqWIsMoWeQ2djwOLrC7YSIvtDS7HGAr+9ef5sab9zN5sP7+/3++3Hu4eb7c+V5+xx
+        Nzu3FSok3dmIxYlsYIXSs+8ND1jgNYzSuQqOMoJl8i5ArClCzVBTAH6OnsRr48iP0MrAPgA5DSaA
+        kwhyglibAEw+1jO4DkCXwIacSiln6bzjMUAU0CaUiQ1DzZ6TWlLDcPLSTKHDhTxQgMAuvT1PhTKD
+        d12EmL7FXsA4qE0DTRcicMO+YjCnVGomUKCeJ/Mg3urfAGdqYykacRPtyKU0v2xhbI5iUze1tAwn
+        8UDWph6ejNMzTOO3TIEPmiJjgfk8W1zN315lOSqs2Hk+GJ2Wk29UlqtsqTbrzXeFRmOx3K7yTKF4
+        UxlH9hBNtCnjnlwiPkZmi//ollzVTWtHdqjwP/4jlU/aS/v3DM5fdvWy0Q8/nuJibta7/W1YyDz/
+        VN7dXs6glbaz5E0csVjPssVqOd8q7CXyoZTORSxWi2ytsDea5c+5TDr1/LoisKPM9ExrY3WUSvJL
+        EnPi4anSECYCSrAgfi0A/FA/CLwCAAA=
+    headers:
+      Access-Control-Allow-Origin: ['*']
+      Access-Control-Expose-Headers: ['ETag, X-RateLimit-Limit, X-RateLimit-Remaining,
+          X-RateLimit-Reset']
+      CF-Cache-Status: [HIT]
+      CF-RAY: [353415f3033e0cb3-LHR]
+      Cache-Control: ['public, max-age=28800']
+      Connection: [keep-alive]
+      Content-Encoding: [gzip]
+      Content-Type: [application/json;charset=utf-8]
+      Date: ['Fri, 21 Apr 2017 23:22:30 GMT']
+      Expires: ['Sat, 22 Apr 2017 07:22:30 GMT']
+      Server: [cloudflare-nginx]
+      Set-Cookie: ['__cfduid=d59ce6f3d9f000bef388d11915a13440c1492816950; expires=Sat,
+          21-Apr-18 23:22:30 GMT; path=/; domain=.tmdb.org; HttpOnly']
+      Vary: [Accept-Encoding]
+      X-RateLimit-Limit: ['40']
+      X-RateLimit-Remaining: ['38']
+      X-RateLimit-Reset: ['1492765008']
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Cookie: [__cfduid=d59ce6f3d9f000bef388d11915a13440c1492816950]
+      User-Agent: [python-requests/2.8.1]
+    method: GET
+    uri: http://api.tmdb.org/3/movie/49521?api_key=f7f51775877e0bb6703520952b3c7840&language=en
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA3VUXXPaOBT9Kxo9U4JtcDBv5AMmXdpmAmy2s7PDCOtiK8iSK8k4bif/fa+MgWwz
+        y5PxOffcr3P9izJeSUcnOyYt9OiWpXtudLkpmcvphF69fF/kw4J/+7F30UBcL1YzG+lBuE7ns/5L
+        mVEMAalVZjdOb1ItJaROaEUnv6jgdBIOkiAKelSxAlDuC1NE78jSAUhye2H3aKmtA3NOa76qh+f4
+        dfkIK/GwdnZ3n8/g4Ul8/vNwSvt7pam9f6rDafTXg51Dtv8pZLyel03+Y1e3IW8YU/EMsNkwHA3a
+        X49moAxYOvm7q3d8rnV6LO2td0SC8ILwAyhXGbiAwzM4Y8ox25yh8fVFcpkKUCmQmei0/+nRXBdQ
+        sszDuXPl5Oqqrut+wZTeWT+mfqqLK+zXaw2TUYjDFAXfbvx/6tzg+nowDsdI0EZkQjG5kUxl1VER
+        /GjPgBNO/r4Fjx/AHATUvjPS6EplZKsbIoEZZYnLmSM5kJxZAq/OMG04qpmGlLoGYwlTnAhLlHZe
+        1OX4jJEu75Mpgp0g9tPzKi+6MgoalNWEC5v63KTOwYBHUxwT2RldtKJ1l7nGzBYHTlqaD9R9clM5
+        zOWjjCZCkVwUpKisI1CAyYCInQ8VbSLLDtCSa20kPyVQIheS+T202baAgz7SbFNstfTd5LrEgrQh
+        TErfw14o3m/dWlaSGeEaOon7QTQaDpIPHn59lmy1UHfjr5+/rFbJ4/zbXfJzZCBYLjoPl0bzqrUC
+        nk5RMiU6K3Z+WQDak/tZP6JjKm/UoxGSMPL+6mjPuCgc443R1hfnCXGQDN8x7m7JvcLaHBOqwFGe
+        ZJLkvc6yUakumwsYvwNvTYU36ye1VpWtmEQXy+JU0PU4Ho+8nf/TUqWcObUkrN5EQRxvAi82peej
+        uGWKcXa8l/ec+c2Fs1bCASd/CJVxXXzkrpcfuEvHHFi/xCk6QqSsvTYDaGsLG44gcsNBEH0axJ+C
+        kHoMz7rC13EcjoejUYCHa7AF4WWDYdSjttR7UOcDuzQWR0lbR3tvXR33KpPC5m1ai8VUSKdPx/wc
+        aY4hrjzzu65ILdBh+CkV0HoVnc+84fAkFNnJxu/1f873IDjo8wf8oB1s0O+m/QDE/VH3ql0GnaBR
+        o7d/AUMhNKX1BQAA
+    headers:
+      Access-Control-Allow-Origin: ['*']
+      Access-Control-Expose-Headers: ['ETag, X-RateLimit-Limit, X-RateLimit-Remaining,
+          X-RateLimit-Reset']
+      CF-Cache-Status: [HIT]
+      CF-RAY: [353415f423a20cb3-LHR]
+      Cache-Control: ['public, max-age=28800']
+      Connection: [keep-alive]
+      Content-Encoding: [gzip]
+      Content-Length: ['867']
+      Content-Type: [application/json;charset=utf-8]
+      Date: ['Fri, 21 Apr 2017 23:22:30 GMT']
+      ETag: [W/"6cea6b96e3d46abd313758cce921be90"]
+      Expires: ['Sat, 22 Apr 2017 07:22:30 GMT']
+      Server: [cloudflare-nginx]
+      Vary: [Accept-Encoding]
+      X-Memc: [HIT]
+      X-Memc-Age: ['23418']
+      X-Memc-Expires: ['5382']
+      X-Memc-Key: [c1b75bcd1cc2ff271adcb639e53e4363]
+      X-RateLimit-Limit: ['40']
+      X-RateLimit-Remaining: ['39']
+      X-RateLimit-Reset: ['1492789991']
+    status: {code: 200, message: OK}
+version: 1

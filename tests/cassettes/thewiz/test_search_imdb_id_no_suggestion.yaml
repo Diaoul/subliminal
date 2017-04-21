@@ -1,0 +1,24 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.8.1]
+    method: GET
+    uri: http://subs.thewiz.info/search.tv.php?name=DCs+Legend+of+Tomorrow
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAwAAAP//AwAAAAAAAAAAAA==
+    headers:
+      Connection: [Keep-Alive]
+      Content-Encoding: [gzip]
+      Content-Type: [text/html; charset=UTF-8]
+      Date: ['Fri, 21 Apr 2017 23:18:00 GMT']
+      Keep-Alive: ['timeout=15, max=100']
+      Server: [Apache/2.4.10 (Debian)]
+      Vary: [Accept-Encoding]
+    status: {code: 200, message: OK}
+version: 1

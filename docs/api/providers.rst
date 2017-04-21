@@ -42,6 +42,11 @@ TheSubDB
 .. automodule:: subliminal.providers.thesubdb
    :private-members:
 
+TheWiz
+------
+.. automodule:: subliminal.providers.thewiz
+   :private-members:
+
 TVsubtitles
 -----------
 .. automodule:: subliminal.providers.tvsubtitles

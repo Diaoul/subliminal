@@ -14,6 +14,7 @@ subtitles. Current supported providers are:
 * Shooter
 * SubsCenter
 * TheSubDB
+* TheWiz
 * TvSubtitles
 
 Providers all inherit the same :class:`~subliminal.providers.Provider` base class and thus share the same API.

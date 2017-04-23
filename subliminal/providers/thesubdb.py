@@ -40,6 +40,7 @@ class TheSubDBProvider(Provider):
     languages = {Language.fromthesubdb(l) for l in language_converters['thesubdb'].codes}
     required_hash = 'thesubdb'
     server_url = 'http://api.thesubdb.com/'
+    subtitle_class = TheSubDBSubtitle
 
     def initialize(self):
         self.session = Session()
@@ -66,7 +67,7 @@ class TheSubDBProvider(Provider):
         for language_code in r.text.split(','):
             language = Language.fromthesubdb(language_code)
 
-            subtitle = TheSubDBSubtitle(language, hash)
+            subtitle = self.subtitle_class(language, hash)
             logger.debug('Found subtitle %r', subtitle)
             subtitles.append(subtitle)
 

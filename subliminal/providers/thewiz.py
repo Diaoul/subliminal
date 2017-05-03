@@ -142,7 +142,10 @@ class TheWizProvider(Provider):
         logger.debug('Getting the list of subtitles')
         r = self.session.get(url)
         r.raise_for_status()
-        results = r.json()
+        try:
+            results = r.json()
+        except ValueError:
+            return {}
 
         # loop over results
         subtitles = {}

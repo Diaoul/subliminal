@@ -1,0 +1,42 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.8.1]
+    method: GET
+    uri: http://subs.thewiz.info/search.tv.php?name=The+Big+Bang+Theory
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAyopMbCwtDAyMwMAAAD//wMAJAbx2wkAAAA=
+    headers:
+      Connection: [Keep-Alive]
+      Content-Encoding: [gzip]
+      Content-Type: [text/html; charset=UTF-8]
+      Date: ['Fri, 21 Apr 2017 23:18:01 GMT']
+      Keep-Alive: ['timeout=15, max=100']
+      Server: [Apache/2.4.10 (Debian)]
+      Vary: [Accept-Encoding]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.8.1]
+    method: GET
+    uri: http://subs.thewiz.info/search.id.php?imdb=tt0898266&season=7&episode=5&version=0
+  response:
+    body: {string: '[{"versioname":"The.Big.Bang.Theory.S07E05.1080p.BluRay.x264-ROVERS","id":"64827","score":0},{"versioname":"The.Big.Bang.Theory.S07E05.1080p.WEB-DL.DD5.1.H.264","id":"74952","score":0},{"versioname":"The.Big.Bang.Theory.S07E05.480p.HDTV.85MB-Micromkv","id":"111527","score":0},{"versioname":"The.Big.Bang.Theory.S07E05.480p.HDTV.x264-mSD","id":"68821","score":0},{"versioname":"The.Big.Bang.Theory.S07E05.720p.BluRay.DD5.1.x264-EbP","id":"68933","score":0},{"versioname":"The.Big.Bang.Theory.S07E05.720p.BluRay.DTS.x264-DEMAND","id":"69621","score":0},{"versioname":"The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION","id":"63493","score":0},{"versioname":"The.Big.Bang.Theory.S07E05.720p.WEB-DL.DD5.1.H.264","id":"90479","score":0},{"versioname":"The.Big.Bang.Theory.S07E05.BDRip.x264-DEMAND","id":"68822","score":0},{"versioname":"The.Big.Bang.Theory.S07E05.HDTV.x264-ChameE","id":"71181","score":0},{"versioname":"The.Big.Bang.Theory.S07E05.HDTV.x264-LOL","id":"39895","score":0},{"versioname":"The.Big.Bang.Theory.S07E05.HDTV.XviD-AFG","id":"90478","score":0}]'}
+    headers:
+      Connection: [Keep-Alive]
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Fri, 21 Apr 2017 23:18:01 GMT']
+      Keep-Alive: ['timeout=15, max=99']
+      Server: [Apache/2.4.10 (Debian)]
+    status: {code: 200, message: OK}
+version: 1

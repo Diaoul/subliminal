@@ -1,0 +1,110 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.8.1]
+    method: GET
+    uri: http://api.tmdb.org/3/search/movie?api_key=f7f51775877e0bb6703520952b3c7840&query=Enders%20Game&language=en
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA3WSTU/bQBCG/8poLlyWNHa+HB8bpRWVIBKhFaJF1sQ7dpZudt3dsZGL+O+VTaFc
+        epxPvfM+84QN1Yx5ojBwbK1EzL8/YeOjcCgakiPm+OND195l7f5Xv7tcLNdZfxXo02r35fpydtpP
+        HpoaFZJurWBekY2s0HccOsOPmONHiqzBO5AjQ2kpRlOC8x1bOPSwC9E72JdeBDYUtIKt0xzOInym
+        E4OJ41gUH3rw1RhsKcjxLMLJR4HaVMIayqOxOrADCWSccTWIB80VOz3MmABHf+LGkmMB86IlNlQy
+        PFKIr5urVtrAExy8sEyRC03CmGM6TWbnyfQ8naHCml3gwujBqWyVqTRTSXqv0GjMs2m6miv0wdTG
+        kS3EiB0WvD8K39UtubodASA7VPif/gOVP3XwzT8g6+z2sPx6sVnfPPhvTfn7gjY319uru36++Auk
+        8U1rKRjpMZ9P0ulylc4Udl64KH3rBPNknS4UdkazfwM31qnjMIpaThbP9wrFC9ni7T+S18zwOkP8
+        /AdQRWboRgIAAA==
+    headers:
+      Access-Control-Allow-Origin: ['*']
+      Access-Control-Expose-Headers: ['ETag, X-RateLimit-Limit, X-RateLimit-Remaining,
+          X-RateLimit-Reset']
+      CF-Cache-Status: [HIT]
+      CF-RAY: [353415f96649347c-LHR]
+      Cache-Control: ['public, max-age=28800']
+      Connection: [keep-alive]
+      Content-Encoding: [gzip]
+      Content-Type: [application/json;charset=utf-8]
+      Date: ['Fri, 21 Apr 2017 23:22:31 GMT']
+      Expires: ['Sat, 22 Apr 2017 07:22:31 GMT']
+      Server: [cloudflare-nginx]
+      Set-Cookie: ['__cfduid=deb9e5d64aaec238cfd0f8712c165fbb81492816951; expires=Sat,
+          21-Apr-18 23:22:31 GMT; path=/; domain=.tmdb.org; HttpOnly']
+      Vary: [Accept-Encoding]
+      X-RateLimit-Limit: ['40']
+      X-RateLimit-Remaining: ['39']
+      X-RateLimit-Reset: ['1492814220']
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Cookie: [__cfduid=deb9e5d64aaec238cfd0f8712c165fbb81492816951]
+      User-Agent: [python-requests/2.8.1]
+    method: GET
+    uri: http://api.tmdb.org/3/movie/80274?api_key=f7f51775877e0bb6703520952b3c7840&language=en
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA3VUXW/aMBT9K5Zf9kIBJ5AQ3jpKp25rqUo7TZ2myMQ3iVvHzmwHRKv+992Ej1Jp
+        i3hIfI6Pj+89l1fKRaM8neZcOejRFc+ehTV1WnNf0ikdJJOfq+jhapbcP5kfdfZyxWf3d/Obx+1o
+        3H+qC4pbQBlduNSbNDNKQeal0XSqG6UQbEQBKM/YcPf0aAHagqPTX69UCjqdxJMe1bwCPG2ZSdAZ
+        kEu5E3nr7TjBO+X8I8KCd0SsQfvGAn373aOlqaDmRQuU3tfTwWCz2fRlfuaQJDWofmaqAdrvPAyD
+        eISvlVil7Tf1nsUhYyOGBGNlITVXqeK6aHaSoE8BL71qV+dagP3kyJfWEOJrsGsJG0Q+cweCGE18
+        CSRT3DmZEY0ERVZbsrAOoWVmvCczbkWPnCoR6bptzhu7JSbvPubc+hIJlXGeFDL3KJ+VUgkLeIjl
+        UktdEG+IgBy0aPdIS7qi4DXAE7nz4mqO9d5w6w7KedPWsI/+a1M3ilvpt3Qa9oNhFAdhu+o82GM+
+        1s3jpFn+2S6ux1Ey2d5Yfhkvvt5dh9Vyn4/aGtF0XcN8VDXXct/9Q9ObqpIer4yyHo1X2KB9X0YJ
+        axu9J85KvLTJc3J7VHR7YhgMhyfMhRDku/m3ZhhE4Qn122BBbnkN9qB6kIyDJDrhXWCvPVfkwlSo
+        d9Bik2B8QrrnCtyG1yh3wojaPH6oQqO9PVRBOpOGLIpShgIPS3rM84OWbVeXnnvounNegZUZ7+Jt
+        QQFmKhUIIjcYsvCMDc+CkLYYDkID7XCMx2HMEoZreKRsZTHUPepq8wz6GOh3I1GYdD66fO99zHWh
+        pCu7Yx2aaZBO73bnC6R5jrjurl9iVPGnsfScFLi9jdF/pmMtBZjj/87aeEg5Dkw3X1F/vF/qaoWu
+        kxF7+wvZX4bKrAQAAA==
+    headers:
+      Access-Control-Allow-Origin: ['*']
+      Access-Control-Expose-Headers: ['ETag, X-RateLimit-Limit, X-RateLimit-Remaining,
+          X-RateLimit-Reset']
+      CF-Cache-Status: [HIT]
+      CF-RAY: [353415fa569f347c-LHR]
+      Cache-Control: ['public, max-age=28800']
+      Connection: [keep-alive]
+      Content-Encoding: [gzip]
+      Content-Length: ['697']
+      Content-Type: [application/json;charset=utf-8]
+      Date: ['Fri, 21 Apr 2017 23:22:31 GMT']
+      ETag: [W/"322dd8e8b43fb212e6dd03fff54ace34"]
+      Expires: ['Sat, 22 Apr 2017 07:22:31 GMT']
+      Server: [cloudflare-nginx]
+      Vary: [Accept-Encoding]
+      X-Memc: [HIT]
+      X-Memc-Age: ['22914']
+      X-Memc-Expires: ['5886']
+      X-Memc-Key: [6a1d3bae994d627606a0771d313613ba]
+      X-RateLimit-Limit: ['40']
+      X-RateLimit-Remaining: ['39']
+      X-RateLimit-Reset: ['1492790895']
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.8.1]
+    method: GET
+    uri: http://subs.thewiz.info/search.id.php?imdb=tt1731141&season=0&episode=0&version=0
+  response:
+    body: {string: '[{"versioname":"Ender''s.Game.(2013).HDRip.AAC.X264.MP4","id":"18969","score":0},{"versioname":"Enders.Game.(2013).720p.BluRAY.800MB-Micromkv","id":"18951","score":0},{"versioname":"Enders.Game.2013.1080p.BluRay.AVC.DTS-HD.MA.7.1-PublicHD","id":"18989","score":0},{"versioname":"Enders.Game.2013.1080p.BluRay.DTS.x264-PHD","id":"18946","score":0},{"versioname":"Enders.Game.2013.1080p.BluRay.DTS.x264-PublicHD","id":"18970","score":0},{"versioname":"Enders.Game.2013.1080p.BluRay.x264-SPARKS","id":"18976","score":0},{"versioname":"Enders.Game.2013.1080p.BrRip.6CH.x264.Pimp4003","id":"18961","score":0},{"versioname":"Enders.Game.2013.1080p.WEB-DL.H264-PublicHD","id":"18950","score":0},{"versioname":"Enders.Game.2013.480p.BluRay.x264-mSD","id":"18966","score":0},{"versioname":"Enders.Game.2013.720p.BluRay.DTS.x264-PHD","id":"18948","score":0},{"versioname":"Enders.Game.2013.720p.BluRay.DTS.x264-PublicHD","id":"18979","score":0},{"versioname":"Enders.Game.2013.720p.BluRay.x264-GAnGSteR","id":"18985","score":0},{"versioname":"Enders.Game.2013.720p.BluRay.x264-SPARKS","id":"18947","score":0},{"versioname":"Enders.Game.2013.720p.BRRiP.XViD.AC3-LEGi0N","id":"18949","score":0},{"versioname":"Enders.Game.2013.720p.BRRip.XviD.AC3-MAJESTiC","id":"18977","score":0},{"versioname":"Enders.Game.2013.720p.BRRip.XviD.AC3-RARBG","id":"18983","score":0},{"versioname":"Enders.Game.2013.720p.HDRip.h264.AAC-RARBG","id":"18957","score":0},{"versioname":"Enders.Game.2013.720p.HDRip.x264.AC3-RARBG","id":"18968","score":0},{"versioname":"Enders.Game.2013.720p.HDRip.XviD.AC3-RARBG","id":"18964","score":0},{"versioname":"Enders.Game.2013.720p.KOR.HDRip.H264-KTH","id":"18988","score":0},{"versioname":"Enders.Game.2013.720p.WEB-DL.H264-PublicHD","id":"18974","score":0},{"versioname":"Enders.Game.2013.720p.WEB-DL.x264.AC3-EVO","id":"18980","score":0},{"versioname":"Enders.Game.2013.720p.WEB-DL.XviD.AC3-ELiTE","id":"18960","score":0},{"versioname":"Enders.Game.2013.720p.WEBRip.x264.AC3-FooKaS","id":"18962","score":0},{"versioname":"Enders.Game.2013.720p.WEBrip.x264.AC3-MiLLENiUM","id":"18982","score":0},{"versioname":"Enders.Game.2013.720p.WEBRiP.XViD.AC3-LEGi0N","id":"18954","score":0},{"versioname":"Enders.Game.2013.720P.WEBRiP.XVID.AC3-MAJESTIC","id":"18986","score":0},{"versioname":"Enders.Game.2013.BDRip.X264-SPARKS","id":"18987","score":0},{"versioname":"Enders.Game.2013.BRRip.XviD.AC3-RARBG","id":"18973","score":0},{"versioname":"Enders.Game.2013.BRRip.XviD.AC3-SANTi","id":"18990","score":0},{"versioname":"Enders.Game.2013.BRRip.XviD.MP3-RARBG","id":"18981","score":0},{"versioname":"Enders.Game.2013.HC.Webrip.x264.AC3-TiTAN","id":"18965","score":0},{"versioname":"Enders.Game.2013.HDRip.h264.AAC-RARBG","id":"18984","score":0},{"versioname":"Enders.Game.2013.HDRip.XviD.AC3-4PlayHD","id":"18971","score":0},{"versioname":"Enders.Game.2013.HDRip.XviD.AC3-EVO","id":"18956","score":0},{"versioname":"Enders.Game.2013.HDRip.XviD.AC3-RARBG","id":"18952","score":0},{"versioname":"Enders.Game.2013.HDRip.XViD.AC3-ReLeNTLesS","id":"18967","score":0},{"versioname":"Enders.Game.2013.HDRip.XviD.MP3-RARBG","id":"18972","score":0},{"versioname":"Enders.Game.2013.KORSUB.HDRip.h264.AAC-RARBG","id":"18978","score":0},{"versioname":"Enders.Game.2013.KORSUB.HDRip.XViD-NO1KNOWS","id":"18953","score":0},{"versioname":"Enders.Game.2013.WEBRiP.XVID-MAJESTIC","id":"18975","score":0},{"versioname":"Enders.Game.2013.WEBRip.XviD-ViP3R","id":"18955","score":0},{"versioname":"Enders.Game.2013.WEBRip.XviD.AC3-TODE","id":"18958","score":0},{"versioname":"Enders.Game.2014.WEBRip.XviD-MAXi","id":"18963","score":0}]'}
+    headers:
+      Connection: [Keep-Alive]
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Fri, 21 Apr 2017 23:18:01 GMT']
+      Keep-Alive: ['timeout=15, max=100']
+      Server: [Apache/2.4.10 (Debian)]
+    status: {code: 200, message: OK}
+version: 1

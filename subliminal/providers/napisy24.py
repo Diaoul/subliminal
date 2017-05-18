@@ -84,12 +84,12 @@ class Napisy24Provider(Provider):
         if napisy24_header[:2] != 'OK':
             if napisy24_header[:11] == 'login error':
                 raise AuthenticationError('Login failed')
-            logger.error(response.content)
+            logger.error('Unknown response: %s', response.content)
             return None
 
         napisy24_status = napisy24_header[:4]
         if napisy24_status == 'OK-0':
-            logger.debug('No subtitles found')
+            logger.info('No subtitles found')
             return None
 
         napisy24_params = dict(p.split(':', 1) for p in napisy24_header.split('|')[1:])
@@ -97,12 +97,12 @@ class Napisy24Provider(Provider):
         logger.debug('Subtitle params: %s', napisy24_params)
 
         if napisy24_status == 'OK-1':
-            logger.debug('No subtitles found but got video info')
+            logger.info('No subtitles found but got video info')
             return None
         elif napisy24_status == 'OK-2':
-            logger.debug('Found subtitles')
+            logger.info('Found subtitles')
         elif napisy24_status == 'OK-3':
-            logger.debug('Found subtitles but not from n24 database')
+            logger.info('Found subtitles but not from n24 database')
             return None
 
         napisy24_data = response_content[1]

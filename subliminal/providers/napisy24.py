@@ -78,21 +78,23 @@ class Napisy24Provider(Provider):
         response = self.session.post(self.server_url, data=params, timeout=10)
         response.raise_for_status()
 
-        napisy24_status = response.content[:4]
-        if napisy24_status[:2] != 'OK':
-            if response.content[:11] == 'login error':
+        response_content = response.content.split(b'||', 1)
+        napisy24_header = response_content[0].decode()
+
+        if napisy24_header[:2] != 'OK':
+            if napisy24_header[:11] == 'login error':
                 raise AuthenticationError('Login failed')
             logger.error(response.content)
             return None
 
+        napisy24_status = napisy24_header[:4]
         if napisy24_status == 'OK-0':
             logger.debug('No subtitles found')
             return None
 
-        response_content = response.content.split('||', 1)
-        response_params = dict(p.split(':', 1) for p in response_content[0].split('|')[1:])
+        napisy24_params = dict(p.split(':', 1) for p in napisy24_header.split('|')[1:])
 
-        logger.debug('Subtitle params: %s', response_params)
+        logger.debug('Subtitle params: %s', napisy24_params)
 
         if napisy24_status == 'OK-1':
             logger.debug('No subtitles found but got video info')
@@ -103,8 +105,9 @@ class Napisy24Provider(Provider):
             logger.debug('Found subtitles but not from n24 database')
             return None
 
-        subtitle = Napisy24Subtitle(language, hash, 'tt%s' % response_params['imdb'].zfill(7))
-        with ZipFile(BytesIO(response_content[1])) as zf:
+        napisy24_data = response_content[1]
+        subtitle = Napisy24Subtitle(language, hash, 'tt%s' % napisy24_params['imdb'].zfill(7))
+        with ZipFile(BytesIO(napisy24_data)) as zf:
             subtitle.content = fix_line_ending(zf.open(zf.namelist()[0]).read())
 
         return subtitle

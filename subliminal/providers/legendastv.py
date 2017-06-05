@@ -274,11 +274,11 @@ class LegendasTVProvider(Provider):
         """
         logger.info('Getting archives for title %d and language %d', title_id, language_code)
         archives = []
-        page = 1
+        page = 0
         while True:
             # get the archive page
-            url = self.server_url + 'util/carrega_legendas_busca_filme/{title}/{language}/-/{page}'.format(
-                title=title_id, language=language_code, page=page)
+            url = self.server_url + 'legenda/busca/-/{language}/-/{page}/{title}'.format(
+                language=language_code, page=page, title=title_id)
             r = self.session.get(url)
             r.raise_for_status()
 
@@ -308,6 +308,8 @@ class LegendasTVProvider(Provider):
                     raise ProviderError('Archive timestamp is in the future')
 
                 # add archive
+                logger.info('Found archive for title %d and language %d at page %s: %s',
+                            title_id, language_code, page, archive)
                 archives.append(archive)
 
             # stop on last page

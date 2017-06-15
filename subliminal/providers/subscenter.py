@@ -74,7 +74,7 @@ class SubsCenterSubtitle(Subtitle):
 class SubsCenterProvider(Provider):
     """SubsCenter Provider."""
     languages = {Language.fromalpha2(l) for l in ['he']}
-    server_url = 'http://www.subscenter.co/he/'
+    server_url = 'http://www.subscenter.info/he/'
 
     def __init__(self, username=None, password=None):
         if username is not None and password is None or username is None and password is not None:
@@ -190,7 +190,7 @@ class SubsCenterProvider(Provider):
                         subtitle_id = subtitle_item['id']
                         subtitle_key = subtitle_item['key']
                         downloaded = subtitle_item['downloaded']
-                        release = subtitle_item['subtitle_version']
+                        release = subtitle_item['h_version']
 
                         # add the release and increment downloaded count if we already have the subtitle
                         if subtitle_id in subtitles:
@@ -220,8 +220,8 @@ class SubsCenterProvider(Provider):
 
     def download_subtitle(self, subtitle):
         # download
-        url = self.server_url + 'subtitle/download/{}/{}/'.format(subtitle.language.alpha2, subtitle.subtitle_id)
-        params = {'v': subtitle.releases[0], 'key': subtitle.subtitle_key}
+        url = self.server_url + 'get/download/{}/'.format(subtitle.language.alpha2)
+        params = {'id': subtitle.subtitle_id, 'v': subtitle.releases[0], 'key': subtitle.subtitle_key}
         r = self.session.get(url, params=params, headers={'Referer': subtitle.page_link}, timeout=10)
         r.raise_for_status()
 

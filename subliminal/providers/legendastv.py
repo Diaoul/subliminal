@@ -48,7 +48,7 @@ timestamp_re = re.compile(r'(?P<day>\d+)/(?P<month>\d+)/(?P<year>\d+) - (?P<hour
 title_re = re.compile(r'^(?P<series>.*?)(?: \((?:(?P<year>\d{4})|(?P<country>[A-Z]{2}))\))?$')
 
 #: Cache key for releases
-releases_key = __name__ + ':releases|{archive_id}'
+releases_key = __name__ + ':releases|{archive_id}|{archive_name}'
 
 
 class LegendasTVArchive(object):
@@ -402,7 +402,8 @@ class LegendasTVProvider(Provider):
                 expiration_time = (datetime.utcnow().replace(tzinfo=pytz.utc) - a.timestamp).total_seconds()
 
                 # attempt to get the releases from the cache
-                releases = region.get(releases_key.format(archive_id=a.id), expiration_time=expiration_time)
+                cache_item = releases_key.format(archive_id=a.id, archive_name=a.name)
+                releases = region.get(cache_item, expiration_time=expiration_time)
 
                 # the releases are not in cache or cache is expired
                 if releases == NO_VALUE:
@@ -429,7 +430,7 @@ class LegendasTVProvider(Provider):
                         releases.append(name)
 
                     # cache the releases
-                    region.set(releases_key.format(archive_id=a.id), releases)
+                    region.set(cache_item, releases)
 
                 # iterate over releases
                 for r in releases:

@@ -7,6 +7,7 @@ from requests import Session
 from . import Provider
 from .. import __short_version__
 from ..subtitle import Subtitle, fix_line_ending
+from ..utils import raise_for_status
 
 logger = logging.getLogger(__name__)
 
@@ -63,7 +64,7 @@ class TheSubDBProvider(Provider):
         if r.status_code == 404:
             logger.debug('No subtitles found')
             return []
-        r.raise_for_status()
+        raise_for_status(r)
 
         # loop over languages
         subtitles = []
@@ -83,6 +84,6 @@ class TheSubDBProvider(Provider):
         logger.info('Downloading subtitle %r', subtitle)
         params = {'action': 'download', 'hash': subtitle.hash, 'language': subtitle.language.alpha2}
         r = self.session.get(self.server_url, params=params, timeout=10)
-        r.raise_for_status()
+        raise_for_status(r)
 
         subtitle.content = fix_line_ending(r.content)

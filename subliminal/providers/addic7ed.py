@@ -9,10 +9,10 @@ from requests import Session
 from . import ParserBeautifulSoup, Provider
 from .. import __short_version__
 from ..cache import SHOW_EXPIRATION_TIME, region
-from ..exceptions import AuthenticationError, ConfigurationError, DownloadLimitExceeded, TooManyRequests
+from ..exceptions import AuthenticationError, ConfigurationError, DownloadLimitExceeded
 from ..score import get_equivalent_release_groups
 from ..subtitle import Subtitle, fix_line_ending, guess_matches
-from ..utils import sanitize, sanitize_release_group
+from ..utils import raise_for_status, sanitize, sanitize_release_group
 from ..video import Episode
 
 logger = logging.getLogger(__name__)
@@ -118,7 +118,7 @@ class Addic7edProvider(Provider):
         if self.logged_in:
             logger.info('Logging out')
             r = self.session.get(self.server_url + 'logout.php', timeout=10)
-            r.raise_for_status()
+            raise_for_status(r)
             logger.debug('Logged out')
             self.logged_in = False
 
@@ -135,7 +135,7 @@ class Addic7edProvider(Provider):
         # get the show page
         logger.info('Getting show ids')
         r = self.session.get(self.server_url + 'shows.php', timeout=10)
-        r.raise_for_status()
+        raise_for_status(r)
         soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
 
         # populate the show ids
@@ -167,9 +167,7 @@ class Addic7edProvider(Provider):
         # make the search
         logger.info('Searching show ids with %r', params)
         r = self.session.get(self.server_url + 'search.php', params=params, timeout=10)
-        r.raise_for_status()
-        if r.status_code == 304:
-            raise TooManyRequests()
+        raise_for_status(r)
         soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
 
         # get the suggestion
@@ -235,9 +233,7 @@ class Addic7edProvider(Provider):
         # get the page of the season of the show
         logger.info('Getting the page of show id %d, season %d', show_id, season)
         r = self.session.get(self.server_url + 'show/%d' % show_id, params={'season': season}, timeout=10)
-        r.raise_for_status()
-        if r.status_code == 304:
-            raise TooManyRequests()
+        raise_for_status(r)
         soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
 
         # loop over subtitle rows
@@ -280,7 +276,7 @@ class Addic7edProvider(Provider):
         logger.info('Downloading subtitle %r', subtitle)
         r = self.session.get(self.server_url + subtitle.download_link, headers={'Referer': subtitle.page_link},
                              timeout=10)
-        r.raise_for_status()
+        raise_for_status(r)
 
         # detect download limit exceeded
         if r.headers['Content-Type'] == 'text/html':

@@ -14,7 +14,7 @@ from ..cache import EPISODE_EXPIRATION_TIME, SHOW_EXPIRATION_TIME, region
 from ..exceptions import ProviderError
 from ..score import get_equivalent_release_groups
 from ..subtitle import Subtitle, fix_line_ending, guess_matches
-from ..utils import sanitize, sanitize_release_group
+from ..utils import raise_for_status, sanitize, sanitize_release_group
 from ..video import Episode
 
 logger = logging.getLogger(__name__)
@@ -106,7 +106,7 @@ class TVsubtitlesProvider(Provider):
         # make the search
         logger.info('Searching show id for %r', series)
         r = self.session.post(self.server_url + 'search.php', data={'q': series}, timeout=10)
-        r.raise_for_status()
+        raise_for_status(r)
 
         # get the series out of the suggestions
         soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
@@ -204,7 +204,7 @@ class TVsubtitlesProvider(Provider):
         # download as a zip
         logger.info('Downloading subtitle %r', subtitle)
         r = self.session.get(self.server_url + 'download-%d.html' % subtitle.subtitle_id, timeout=10)
-        r.raise_for_status()
+        raise_for_status(r)
 
         # open the zip
         with ZipFile(io.BytesIO(r.content)) as zf:

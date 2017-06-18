@@ -11,10 +11,12 @@ import socket
 
 from babelfish import Language, LanguageReverseError
 from guessit import guessit
+from six.moves.xmlrpc_client import ProtocolError
 from rarfile import BadRarFile, NotRarFile, RarCannotExec, RarFile
 from zipfile import BadZipfile
 import requests
 
+from .exceptions import ServiceUnavailable
 from .extensions import provider_manager, refiner_manager
 from .score import compute_score as default_compute_score
 from .subtitle import SUBTITLE_EXTENSIONS, get_subtitle_path
@@ -80,6 +82,8 @@ class ProviderPool(object):
             self.initialized_providers[name].terminate()
         except (requests.Timeout, socket.timeout):
             logger.error('Provider %r timed out, improperly terminated', name)
+        except (ServiceUnavailable, ProtocolError):  # OpenSubtitles raises xmlrpclib.ProtocolError when unavailable
+            logger.error('Provider %r unavailable, improperly terminated', name)
         except:
             logger.exception('Provider %r terminated unexpectedly', name)
 
@@ -119,6 +123,8 @@ class ProviderPool(object):
             return self[provider].list_subtitles(video, provider_languages)
         except (requests.Timeout, socket.timeout):
             logger.error('Provider %r timed out', provider)
+        except (ServiceUnavailable, ProtocolError):  # OpenSubtitles raises xmlrpclib.ProtocolError when unavailable
+            logger.error('Provider %r unavailable', provider)
         except:
             logger.exception('Unexpected error in provider %r', provider)
 
@@ -172,6 +178,10 @@ class ProviderPool(object):
             self[subtitle.provider_name].download_subtitle(subtitle)
         except (requests.Timeout, socket.timeout):
             logger.error('Provider %r timed out, discarding it', subtitle.provider_name)
+            self.discarded_providers.add(subtitle.provider_name)
+            return False
+        except (ServiceUnavailable, ProtocolError):  # OpenSubtitles raises xmlrpclib.ProtocolError when unavailable
+            logger.error('Provider %r unavailable, discarding it', subtitle.provider_name)
             self.discarded_providers.add(subtitle.provider_name)
             return False
         except (BadRarFile, BadZipfile):

@@ -19,7 +19,7 @@ from . import Provider
 from .. import __short_version__
 from ..exceptions import ProviderError
 from ..subtitle import Subtitle, fix_line_ending, guess_matches
-from ..utils import sanitize
+from ..utils import raise_for_status, sanitize
 from ..video import Episode, Movie
 
 logger = logging.getLogger(__name__)
@@ -112,7 +112,9 @@ class PodnapisiProvider(Provider):
         pids = set()
         while True:
             # query the server
-            xml = etree.fromstring(self.session.get(self.server_url + 'search/old', params=params, timeout=10).content)
+            r = self.session.get(self.server_url + 'search/old', params=params, timeout=10)
+            raise_for_status(r)
+            xml = etree.fromstring(r.content)
 
             # exit if no results
             if not int(xml.find('pagination/results').text):
@@ -173,7 +175,7 @@ class PodnapisiProvider(Provider):
         # download as a zip
         logger.info('Downloading subtitle %r', subtitle)
         r = self.session.get(self.server_url + subtitle.pid + '/download', params={'container': 'zip'}, timeout=10)
-        r.raise_for_status()
+        raise_for_status(r)
 
         # open the zip
         with ZipFile(io.BytesIO(r.content)) as zf:

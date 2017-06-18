@@ -15,6 +15,7 @@ subtitles. Current supported providers are:
 * SubsCenter
 * TheSubDB
 * TvSubtitles
+* Wizdom
 
 Providers all inherit the same :class:`~subliminal.providers.Provider` base class and thus share the same API.
 They are registered on the ``subliminal.providers`` entry point and are exposed through the

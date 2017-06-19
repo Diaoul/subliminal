@@ -29,10 +29,7 @@ class RegistrableExtensionManager(ExtensionManager):
 
         super(RegistrableExtensionManager, self).__init__(namespace, **kwargs)
 
-    def _find_entry_points(self, namespace):
-        # copy of default extensions
-        eps = list(super(RegistrableExtensionManager, self)._find_entry_points(namespace))
-
+    def list_all_extensions(self, eps):
         # internal extensions
         for iep in self.internal_extensions:
             ep = EntryPoint.parse(iep)
@@ -46,6 +43,18 @@ class RegistrableExtensionManager(ExtensionManager):
                 eps.append(ep)
 
         return eps
+
+    def _find_entry_points(self, namespace):
+        # copy of default extensions
+        # Used in stevedore <= 1.19.1
+        eps = list(super(RegistrableExtensionManager, self)._find_entry_points(namespace))
+        return self.list_all_extensions(eps)
+
+    def list_entry_points(self):
+        # copy of default extensions
+        # Used in stevedore > 1.20.1
+        eps = list(super(RegistrableExtensionManager, self).list_entry_points())
+        return self.list_all_extensions(eps)
 
     def register(self, entry_point):
         """Register an extension

@@ -1,17 +1,15 @@
 # -*- coding: utf-8 -*-
-from pkg_resources import EntryPoint, iter_entry_points
+from pkg_resources import EntryPoint
 
 from subliminal.extensions import RegistrableExtensionManager, provider_manager
 
 
-def test_registrable_extension_manager_all_extensions():
+def test_registrable_extension_manager_single_extension():
     manager = RegistrableExtensionManager('subliminal.providers', [
         'de7cidda = subliminal.providers.addic7ed:Addic7edProvider'
     ])
     extensions = sorted(e.name for e in manager)
-    assert len(extensions) == 9
-    assert extensions == ['addic7ed', 'de7cidda', 'legendastv', 'opensubtitles', 'podnapisi', 'shooter', 'subscenter',
-                          'thesubdb', 'tvsubtitles']
+    assert 'de7cidda' in extensions
 
 
 def test_registrable_extension_manager_internal_extension():
@@ -52,6 +50,6 @@ def test_registrable_extension_manager_unregister():
 
 
 def test_provider_manager():
-    setup_names = {ep.name for ep in iter_entry_points(provider_manager.namespace)}
+    setup_names = {ep.name for ep in provider_manager.extensions}
     internal_names = {EntryPoint.parse(iep).name for iep in provider_manager.internal_extensions}
     assert setup_names == internal_names

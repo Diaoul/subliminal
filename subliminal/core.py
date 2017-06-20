@@ -361,6 +361,49 @@ def search_external_subtitles(path, directory=None):
     return subtitles
 
 
+def is_valid_file(path):
+    """Checks if is a valid file."""
+    # check for non-existing path
+    if not os.path.exists(path):
+        raise ValueError('Path does not exist')
+
+    # check that this is a file and not a directory
+    if not os.path.isfile(path):
+        raise ValueError('%r is not a file' % path)
+
+
+def get_video_from_rar(path):
+    """Get video file from rar."""
+    # make sure this is really a rar file
+    if not is_rarfile(path):
+        raise ValueError("'{0}' is not a valid archive".format(os.path.splitext(path)[1]))
+
+    rar = RarFile(path)
+
+    # check that the rar doesnt need a password
+    if rar.needs_password():
+        raise ValueError('Rar requires a password')
+
+    # raise an exception if the rar file is broken
+    # must be called to avoid a potential deadlock with some broken rars
+    rar.testrar()
+
+    # use infolist instead to filter out directories and return only video files, since namelist returns directories
+    file_info = [f for f in rar.infolist() if not f.isdir() and f.filename.endswith(VIDEO_EXTENSIONS)]
+
+    # sort by file size descending, the largest video in the archive is the one we want, there may be samples or intros
+    file_info.sort(key=operator.attrgetter('file_size'), reverse=True)
+
+    # no video found
+    if not file_info:
+        raise ValueError('No video in archive')
+
+    # Free the information about irrelevant files before guessing
+    file_info = file_info[0]
+
+    return file_info.filename, file_info.file_size
+
+
 def scan_video(path):
     """Scan a video from a `path`.
 
@@ -369,9 +412,8 @@ def scan_video(path):
     :rtype: :class:`~subliminal.video.Video`
 
     """
-    # check for non-existing path
-    if not os.path.exists(path):
-        raise ValueError('Path does not exist')
+    # Check if is a valid file and not a folder
+    is_valid_file(path)
 
     # check video extension
     if not path.endswith(VIDEO_EXTENSIONS):
@@ -406,52 +448,23 @@ def scan_archive(path):
     :rtype: :class:`~subliminal.video.Video`
 
     """
-    # check for non-existing path
-    if not os.path.exists(path):
-        raise ValueError('Path does not exist')
-
-    # check that this is a file and not a directory
-    if not os.path.isfile(path):
-        raise ValueError('%r is not a file' % path)
+    # Check if is a valid file and not a folder
+    is_valid_file(path)
 
     dir_path, filename = os.path.split(path)
 
-    # make sure this is really a rar file
-    if not is_rarfile(filename):
-        raise ValueError('File is not a rar file')
-
     logger.info('Scanning archive %r in %r', filename, dir_path)
 
-    rar = RarFile(path)
-
-    # check that the rar doesnt need a password
-    if rar.needs_password():
-        raise ValueError('Rar requires a password')
-
-    # raise an exception if the rar file is broken
-    # must be called to avoid a potential deadlock with some broken rars
-    rar.testrar()
-
-    # use infolist instead to filter out directories and return only video files, since namelist returns directories
-    file_info = [f for f in rar.infolist() if not f.isdir() and f.filename.endswith(VIDEO_EXTENSIONS)]
-
-    # sort by file size descending, the largest video in the archive is the one we want, there may be samples or intros
-    file_info.sort(key=operator.attrgetter('file_size'), reverse=True)
-
-    # no video found
-    if not file_info:
-        raise ValueError('No video in archive')
-
-    # Free the information about irrelevant files before guessing
-    file_info = file_info[0]
+    # Get filename and file size from RAR
+    video_filename, video_size = get_video_from_rar(path)
 
     # guess
-    video_filename = file_info.filename
+    video_filename = video_filename
     video_path = os.path.join(dir_path, video_filename)
     video = Video.fromguess(video_path, guessit(video_path))
 
     # size
-    video.size = file_info.file_size
+    video.size = video_size
 
     return video
 

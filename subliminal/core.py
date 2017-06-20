@@ -456,18 +456,14 @@ def scan_archive(path):
     if not os.path.exists(path):
         raise ValueError('Path does not exist')
 
-    # check that this is a file and not a directory
-    if not os.path.isfile(path):
-        raise ValueError('%r is not a file' % path)
+    if not is_rarfile(path):
+        raise ValueError("'{0}' is not a valid archive".format(os.path.splitext(path)[1]))
 
     dir_path, filename = os.path.split(path)
 
-    # make sure this is really a rar file
-    if not is_rarfile(filename):
-        raise ValueError('File is not a rar file')
-
     logger.info('Scanning archive %r in %r', filename, dir_path)
 
+    # Get filename and file size from RAR
     rar = RarFile(path)
 
     # check that the rar doesnt need a password
@@ -478,7 +474,6 @@ def scan_archive(path):
     # must be called to avoid a potential deadlock with some broken rars
     rar.testrar()
 
-    # use infolist instead to filter out directories and return only video files, since namelist returns directories
     file_info = [f for f in rar.infolist() if not f.isdir() and f.filename.endswith(VIDEO_EXTENSIONS)]
 
     # sort by file size descending, the largest video in the archive is the one we want, there may be samples or intros
@@ -582,7 +577,7 @@ def scan_videos(path, age=None, archives=True):
             elif archives and filename.lower().endswith(ARCHIVE_EXTENSIONS):  # archive
                 try:
                     video = scan_archive(filepath)
-                except (NotRarFile, RarCannotExec, Error, ValueError):  # pragma: no cover
+                except (Error, NotRarFile, RarCannotExec, ValueError):  # pragma: no cover
                     logger.exception('Error scanning archive')
                     continue
             else:  # pragma: no cover

@@ -86,6 +86,7 @@ class Addic7edProvider(Provider):
     ]}
     video_types = (Episode,)
     server_url = 'http://www.addic7ed.com/'
+    subtitle_class = Addic7edSubtitle
 
     def __init__(self, username=None, password=None):
         if username is not None and password is None or username is None and password is not None:
@@ -262,8 +263,8 @@ class Addic7edProvider(Provider):
             version = cells[4].text
             download_link = cells[9].a['href'][1:]
 
-            subtitle = Addic7edSubtitle(language, hearing_impaired, page_link, series, season, episode, title, year,
-                                        version, download_link)
+            subtitle = self.subtitle_class(language, hearing_impaired, page_link, series, season, episode, title, year,
+                                           version, download_link)
             logger.debug('Found subtitle %r', subtitle)
             subtitles.append(subtitle)
 

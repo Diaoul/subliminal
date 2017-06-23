@@ -16,6 +16,28 @@ vcr = VCR(path_transformer=lambda path: path + '.yaml',
           cassette_library_dir=os.path.join('tests', 'cassettes', 'legendastv'))
 
 
+@pytest.mark.integration
+@vcr.use_cassette()
+def test_get_archives_logged_in_as_donor():
+    with LegendasTVProvider() as provider:
+        archive = provider.get_archives(34084, 2)[0]
+    assert archive.id == '5515d27a72921'
+    assert archive.name == 'Interstellar.2014.1080p.BluRay.x264.DTS-RARBG.eng'
+    assert archive.link == ('http://legendas.tv/download/5515d27a72921/Interstellar/Interstellar_2014_1080p_BluRay_'
+                            'x264_DTS_RARBG_eng')
+
+
+@pytest.mark.integration
+@vcr.use_cassette()
+def test_get_archives_logged_in_as_not_donor():
+    with LegendasTVProvider() as provider:
+        archive = provider.get_archives(34084, 2)[0]
+    assert archive.id == '5515d27a72921'
+    assert archive.name == 'Interstellar.2014.1080p.BluRay.x264.DTS-RARBG.eng'
+    assert archive.link == ('http://legendas.tv/download/5515d27a72921/Interstellar/Interstellar_2014_1080p_BluRay_'
+                            'x264_DTS_RARBG_eng')
+
+
 @pytest.mark.converter
 def test_converter_convert_alpha3_country():
     assert language_converters['legendastv'].convert('por', 'BR') == 1
@@ -161,6 +183,16 @@ def test_search_titles_without_season_information():
         titles = provider.search_titles('The Walking Dead Webisodes Torn Apart')
     assert len(titles) == 1
     assert set(titles.keys()) == {25770}
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_search_titles_containing_year_information():
+    with LegendasTVProvider() as provider:
+        titles = provider.search_titles('Bull')
+    assert 42047 in titles.keys()
+    t = titles[42047]
+    assert (t['title'], t['year']) == ('Bull', 2016)
 
 
 @pytest.mark.integration

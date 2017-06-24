@@ -234,6 +234,13 @@ class Addic7edProvider(Provider):
         logger.info('Getting the page of show id %d, season %d', show_id, season)
         r = self.session.get(self.server_url + 'show/%d' % show_id, params={'season': season}, timeout=10)
         raise_for_status(r)
+
+        if not r.content:
+            # Provider returns a status of 304 Not Modified with an empty content
+            # raise_for_status won't raise exception for that status code
+            logger.debug('No data returned from provider')
+            return []
+
         soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
 
         # loop over subtitle rows
@@ -277,6 +284,12 @@ class Addic7edProvider(Provider):
         r = self.session.get(self.server_url + subtitle.download_link, headers={'Referer': subtitle.page_link},
                              timeout=10)
         raise_for_status(r)
+
+        if not r.content:
+            # Provider returns a status of 304 Not Modified with an empty content
+            # raise_for_status won't raise exception for that status code
+            logger.debug('Unable to download subtitle. No data returned from provider')
+            return
 
         # detect download limit exceeded
         if r.headers['Content-Type'] == 'text/html':

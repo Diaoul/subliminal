@@ -123,11 +123,12 @@ class Episode(Video):
     :param int year: year of the series.
     :param bool original_series: whether the series is the first with this name.
     :param int tvdb_id: TVDB id of the episode.
+    :param set alternative_series: alternative series of the episode
     :param \*\*kwargs: additional parameters for the :class:`Video` constructor.
 
     """
     def __init__(self, name, series, season, episode, title=None, year=None, original_series=True, tvdb_id=None,
-                 series_tvdb_id=None, series_imdb_id=None, **kwargs):
+                 series_tvdb_id=None, series_imdb_id=None, alternative_series=None, **kwargs):
         super(Episode, self).__init__(name, **kwargs)
 
         #: Series of the episode
@@ -156,6 +157,9 @@ class Episode(Video):
 
         #: IMDb id of the series
         self.series_imdb_id = series_imdb_id
+
+        #: Alternative series of the episode
+        self.alternative_series = alternative_series or set()
 
     @classmethod
     def fromguess(cls, name, guess):
@@ -186,10 +190,11 @@ class Movie(Video):
 
     :param str title: title of the movie.
     :param int year: year of the movie.
+    :param set alternative_titles: alternative title(s) of the movie
     :param \*\*kwargs: additional parameters for the :class:`Video` constructor.
 
     """
-    def __init__(self, name, title, year=None, **kwargs):
+    def __init__(self, name, title, year=None, alternative_titles=None, **kwargs):
         super(Movie, self).__init__(name, **kwargs)
 
         #: Title of the movie
@@ -197,6 +202,9 @@ class Movie(Video):
 
         #: Year of the movie
         self.year = year
+
+        #: Alternative title of the movie
+        self.alternative_titles = alternative_titles or set()
 
     @classmethod
     def fromguess(cls, name, guess):

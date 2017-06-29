@@ -281,6 +281,40 @@ def test_list_subtitles_episode(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
+def test_list_subtitles_episode_alternative_series(episodes):
+    video = episodes['turn_s04e03']
+    languages = {Language('por', 'BR')}
+    expected_subtitles = {
+        ('5953101413fcc', 'Turn.S04E03.CONVERT.1080p.HEVC.x265-MeGusta.srt'),
+        ('5953101413fcc', 'Turn.S04E03.CONVERT.720p.WEB.h264-TBS.srt'),
+        ('5953101413fcc', 'Turn.S04E03.CONVERT.AAC.MP4-Mobile.srt'),
+        ('5953101413fcc', 'Turn.S04E03.XviD-AFG.srt'),
+        ('5953101413fcc', 'Turn.S04E03.CONVERT.XviD-AFG.srt'),
+        ('5953101413fcc', 'Turn.S04E03.WEBRip.x264-RARBG.srt'),
+        ('5953101413fcc', 'Turn.S04E03.Blood.for.Blood.720p.AMZN.WEBRip.DD5.1.x264-ViSUM.srt'),
+        ('5953101413fcc', 'Turn.S04E03.1080p.HEVC.x265-MeGusta.srt'),
+        ('5953101413fcc', 'Turn.S04E03.CONVERT.WEB.h264-TBS.srt'),
+        ('5953101413fcc', 'Turn.S04E03.Blood.for.Blood.1080p.AMZN.WEBRip.DD5.1.x264-ViSUM.srt'),
+        ('5953101413fcc', 'Turn.S04E03.480p.x264-mSD.srt'),
+        ('5953101413fcc', 'Turn.S04E03.720p.HDTV.x264-SVA.srt'),
+        ('5953101413fcc', 'TURN.Washingtons.Spies.S04E03.Blood.for.Blood.1080p.AMZN.WEBRip.DDP5.1.x264-ViSUM.srt'),
+        ('5953101413fcc', 'Turn.S04E03.1080p.WEBRip.x264-MOROSE.srt'),
+        ('5953101413fcc', 'Turn.S04E03.CONVERT.480p.x264-mSD.srt'),
+        ('5953101413fcc', 'TURN.Washingtons.Spies.S04E03.Blood.for.Blood.720p.AMZN.WEBRip.DDP5.1.x264-ViSUM.srt'),
+        ('5953101413fcc', 'Turn.S04E03.AAC.MP4-Mobile.srt'),
+        ('5953101413fcc', 'Turn.S04E03.720p.HDTV.2CH.x265.HEVC-PSA.srt'),
+        ('5953101413fcc', "TURN.Washington's.Spies.S04E03.720p.WEBRip.2CH.x265.HEVC-PSA.srt"),
+        ('5953101413fcc', 'Turn.S04E03.HDTV.x264-SVA.srt'),
+        ('5953101413fcc', 'Turn.S04E03.720p.HDTV.x264-AVS.srt'),
+        ('5953101413fcc', 'Turn.S04E03.CONVERT.1080p.WEB.h264-TBS.srt')
+    }
+    with LegendasTVProvider(USERNAME, PASSWORD) as provider:
+        subtitles = provider.list_subtitles(video, languages)
+    assert {(s.archive.id, s.name) for s in subtitles} == expected_subtitles
+
+
+@pytest.mark.integration
+@vcr.use_cassette
 def test_list_subtitles_movie(movies):
     video = movies['man_of_steel']
     languages = {Language('eng')}

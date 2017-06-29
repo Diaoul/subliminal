@@ -190,7 +190,7 @@ class Movie(Video):
 
     :param str title: title of the movie.
     :param int year: year of the movie.
-    :param set alternative_titles: alternative titles of the movie
+    :param list alternative_titles: alternative titles of the movie
     :param \*\*kwargs: additional parameters for the :class:`Video` constructor.
 
     """

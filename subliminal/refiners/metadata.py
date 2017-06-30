@@ -3,7 +3,7 @@ import logging
 import os
 
 from babelfish import Error as BabelfishError, Language
-from enzyme import MKV
+from enzyme import MKV, exceptions
 
 logger = logging.getLogger(__name__)
 
@@ -29,7 +29,12 @@ def refine(video, embedded_subtitles=True, **kwargs):
     extension = os.path.splitext(video.name)[1]
     if extension == '.mkv':
         with open(video.name, 'rb') as f:
-            mkv = MKV(f)
+            try:
+                mkv = MKV(f)
+            except exceptions.Error:
+                logger.error('Unable to parse %s', video.name)
+                logger.debug('Invalid MKV: %r', video, exc_info=True)
+                return
 
         # main video track
         if mkv.video_tracks:

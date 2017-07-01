@@ -11,9 +11,9 @@ from dogpile.cache.api import NO_VALUE
 from guessit import guessit
 import pytz
 import rarfile
-from rarfile import RarFile, is_rarfile
+from rarfile import BadRarFile, RarFile, is_rarfile
 from requests import Session
-from zipfile import ZipFile, is_zipfile
+from zipfile import BadZipfile, ZipFile, is_zipfile
 
 from . import ParserBeautifulSoup, Provider
 from .. import __short_version__
@@ -449,4 +449,7 @@ class LegendasTVProvider(Provider):
             self.download_archive(subtitle.archive)
 
         # extract subtitle's content
-        subtitle.content = fix_line_ending(subtitle.archive.content.read(subtitle.name))
+        try:
+            subtitle.content = fix_line_ending(subtitle.archive.content.read(subtitle.name))
+        except (BadRarFile, BadZipfile):
+            logger.error('Bad archive for %s', subtitle.name)

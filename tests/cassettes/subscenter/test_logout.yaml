@@ -7,7 +7,7 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [Subliminal/2.1]
     method: GET
-    uri: http://www.subscenter.co/he/subscenter/accounts/login/
+    uri: http://www.subscenter.info/he/subscenter/accounts/login/
   response:
     body:
       string: !!binary |
@@ -204,7 +204,7 @@ interactions:
       Last-Modified: ['Thu, 11 Aug 2016 21:55:48 GMT']
       Server: [nginx/1.8.0]
       Set-Cookie: [csrftoken=cb8b99f6784c218844d47f393e95c6e1; Max-Age=31449600; Path=/;,
-        'sessionid=7df704694cf67e0f1cf4ff4a12db360e; Domain=.subscenter.co; expires=Thu,
+        'sessionid=7df704694cf67e0f1cf4ff4a12db360e; Domain=.subscenter.info; expires=Thu,
           25-Aug-2016 21:55:48 GMT; Max-Age=1209600; Path=/;']
       Vary: [Accept-Encoding, Cookie]
     status: {code: 200, message: OK}
@@ -219,7 +219,7 @@ interactions:
       Cookie: [sessionid=7df704694cf67e0f1cf4ff4a12db360e; csrftoken=cb8b99f6784c218844d47f393e95c6e1]
       User-Agent: [Subliminal/2.1]
     method: POST
-    uri: http://www.subscenter.co/he/subscenter/accounts/login/
+    uri: http://www.subscenter.info/he/subscenter/accounts/login/
   response:
     body: {string: ''}
     headers:
@@ -232,10 +232,10 @@ interactions:
       ETag: ['"d41d8cd98f00b204e9800998ecf8427e"']
       Expires: ['Thu, 11 Aug 2016 21:55:49 GMT']
       Last-Modified: ['Thu, 11 Aug 2016 21:55:49 GMT']
-      Location: ['http://www.subscenter.co/']
+      Location: ['http://www.subscenter.info/']
       Server: [nginx/1.8.0]
       Set-Cookie: [csrftoken=cb8b99f6784c218844d47f393e95c6e1; Max-Age=31449600; Path=/;,
-        'sessionid=06e33b88c52bd54eabeaa8be66486399; Domain=.subscenter.co; expires=Thu,
+        'sessionid=06e33b88c52bd54eabeaa8be66486399; Domain=.subscenter.info; expires=Thu,
           25-Aug-2016 21:55:49 GMT; Max-Age=1209600; Path=/;']
       Vary: [Cookie]
     status: {code: 302, message: Found}
@@ -248,7 +248,7 @@ interactions:
       Cookie: [sessionid=06e33b88c52bd54eabeaa8be66486399; csrftoken=cb8b99f6784c218844d47f393e95c6e1]
       User-Agent: [Subliminal/2.1]
     method: GET
-    uri: http://www.subscenter.co/he/subscenter/accounts/logout/
+    uri: http://www.subscenter.info/he/subscenter/accounts/logout/
   response:
     body:
       string: !!binary |
@@ -425,7 +425,7 @@ interactions:
       Date: ['Thu, 11 Aug 2016 21:55:49 GMT']
       Server: [nginx/1.8.0]
       Set-Cookie: [csrftoken=cb8b99f6784c218844d47f393e95c6e1; Max-Age=31449600; Path=/;,
-        'sessionid=0e1bb06c02bf3b617e46872eab59df6e; Domain=.subscenter.co; expires=Thu,
+        'sessionid=0e1bb06c02bf3b617e46872eab59df6e; Domain=.subscenter.info; expires=Thu,
           25-Aug-2016 21:55:49 GMT; Max-Age=1209600; Path=/;']
       Vary: [Accept-Encoding, Cookie]
     status: {code: 200, message: OK}

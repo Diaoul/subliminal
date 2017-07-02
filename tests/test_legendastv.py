@@ -290,3 +290,15 @@ def test_download_subtitle(movies):
         provider.download_subtitle(subtitles[0])
     assert subtitles[0].content is not None
     assert subtitles[0].is_valid() is True
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_download_bad_subtitle(movies):
+    video = movies['man_of_steel']
+    languages = {Language('eng')}
+    with LegendasTVProvider(USERNAME, PASSWORD) as provider:
+        subtitles = provider.list_subtitles(video, languages)
+        provider.download_subtitle(subtitles[0])
+    assert subtitles[0].content is None
+    assert subtitles[0].is_valid() is False

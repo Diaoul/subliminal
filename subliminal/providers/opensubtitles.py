@@ -125,7 +125,7 @@ class OpenSubtitlesProvider(Provider):
 
     def __init__(self, username=None, password=None):
         self.server = ServerProxy('https://api.opensubtitles.org/xml-rpc', TimeoutSafeTransport(10))
-        if username and not password or not username and password:
+        if any((username, password)) and not all((username, password)):
             raise ConfigurationError('Username and password must be specified')
         # None values not allowed for logging in, so replace it by ''
         self.username = username or ''

@@ -81,6 +81,9 @@ class TVsubtitlesProvider(Provider):
     video_types = (Episode,)
     server_url = 'http://www.tvsubtitles.net/'
 
+    def __init__(self):
+        self.session = None
+
     def initialize(self):
         self.session = Session()
         self.session.headers['User-Agent'] = 'Subliminal/%s' % __short_version__

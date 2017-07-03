@@ -632,3 +632,13 @@ def test_save_subtitles_single_directory_encoding(movies, tmpdir):
     path = os.path.join(str(tmpdir), os.path.splitext(os.path.split(movies['man_of_steel'].name)[1])[0] + '.srt')
     assert os.path.exists(path)
     assert io.open(path, encoding='utf-8').read() == u'ハローワールド'
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_download_bad_subtitle(movies):
+    pool = ProviderPool()
+    subtitles = pool.list_subtitles_provider('legendastv', movies['man_of_steel'], {Language('eng')})
+    pool.download_subtitle(subtitles[0])
+    assert subtitles[0].content is None
+    assert subtitles[0].is_valid() is False

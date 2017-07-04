@@ -361,49 +361,6 @@ def search_external_subtitles(path, directory=None):
     return subtitles
 
 
-def is_valid_file(path):
-    """Checks if is a valid file."""
-    # check for non-existing path
-    if not os.path.exists(path):
-        raise ValueError('Path does not exist')
-
-    # check that this is a file and not a directory
-    if not os.path.isfile(path):
-        raise ValueError('%r is not a file' % path)
-
-
-def get_video_from_rar(path):
-    """Get video file from rar."""
-    # make sure this is really a rar file
-    if not is_rarfile(path):
-        raise ValueError("'{0}' is not a valid archive".format(os.path.splitext(path)[1]))
-
-    rar = RarFile(path)
-
-    # check that the rar doesnt need a password
-    if rar.needs_password():
-        raise ValueError('Rar requires a password')
-
-    # raise an exception if the rar file is broken
-    # must be called to avoid a potential deadlock with some broken rars
-    rar.testrar()
-
-    # use infolist instead to filter out directories and return only video files, since namelist returns directories
-    file_info = [f for f in rar.infolist() if not f.isdir() and f.filename.endswith(VIDEO_EXTENSIONS)]
-
-    # sort by file size descending, the largest video in the archive is the one we want, there may be samples or intros
-    file_info.sort(key=operator.attrgetter('file_size'), reverse=True)
-
-    # no video found
-    if not file_info:
-        raise ValueError('No video in archive')
-
-    # Free the information about irrelevant files before guessing
-    file_info = file_info[0]
-
-    return file_info.filename, file_info.file_size
-
-
 def scan_video(path):
     """Scan a video from a `path`.
 
@@ -412,8 +369,9 @@ def scan_video(path):
     :rtype: :class:`~subliminal.video.Video`
 
     """
-    # Check if is a valid file and not a folder
-    is_valid_file(path)
+    # check for non-existing path
+    if not os.path.exists(path):
+        raise ValueError('Path does not exist')
 
     # check video extension
     if not path.endswith(VIDEO_EXTENSIONS):
@@ -448,23 +406,47 @@ def scan_archive(path):
     :rtype: :class:`~subliminal.video.Video`
 
     """
-    # Check if is a valid file and not a folder
-    is_valid_file(path)
+    # check for non-existing path
+    if not os.path.exists(path):
+        raise ValueError('Path does not exist')
+
+    if not is_rarfile(path):
+        raise ValueError("'{0}' is not a valid archive".format(os.path.splitext(path)[1]))
 
     dir_path, filename = os.path.split(path)
 
     logger.info('Scanning archive %r in %r', filename, dir_path)
 
     # Get filename and file size from RAR
-    video_filename, video_size = get_video_from_rar(path)
+    rar = RarFile(path)
+
+    # check that the rar doesnt need a password
+    if rar.needs_password():
+        raise ValueError('Rar requires a password')
+
+    # raise an exception if the rar file is broken
+    # must be called to avoid a potential deadlock with some broken rars
+    rar.testrar()
+
+    file_info = [f for f in rar.infolist() if not f.isdir() and f.filename.endswith(VIDEO_EXTENSIONS)]
+
+    # sort by file size descending, the largest video in the archive is the one we want, there may be samples or intros
+    file_info.sort(key=operator.attrgetter('file_size'), reverse=True)
+
+    # no video found
+    if not file_info:
+        raise ValueError('No video in archive')
+
+    # Free the information about irrelevant files before guessing
+    file_info = file_info[0]
 
     # guess
-    video_filename = video_filename
+    video_filename = file_info.filename
     video_path = os.path.join(dir_path, video_filename)
     video = Video.fromguess(video_path, guessit(video_path))
 
     # size
-    video.size = video_size
+    video.size = file_info.file_size
 
     return video
 
@@ -534,7 +516,7 @@ def scan_videos(path, age=None, archives=True):
             elif archives and filename.endswith(ARCHIVE_EXTENSIONS):  # archive
                 try:
                     video = scan_archive(filepath)
-                except (NotRarFile, RarCannotExec, Error, ValueError):  # pragma: no cover
+                except (Error, NotRarFile, RarCannotExec, ValueError):  # pragma: no cover
                     logger.exception('Error scanning archive')
                     continue
             else:  # pragma: no cover

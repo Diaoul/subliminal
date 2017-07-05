@@ -99,7 +99,7 @@ class LegendasTVSubtitle(Subtitle):
     provider_name = 'legendastv'
 
     def __init__(self, language, type, title, year, imdb_id, season, archive, name):
-        super(LegendasTVSubtitle, self).__init__(language, archive.link)
+        super(LegendasTVSubtitle, self).__init__(language, page_link=archive.link)
         self.type = type
         self.title = title
         self.year = year

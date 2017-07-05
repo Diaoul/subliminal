@@ -101,7 +101,7 @@ class LegendasTVSubtitle(Subtitle):
     """LegendasTV Subtitle."""
     provider_name = 'legendastv'
 
-    def __init__(self, language, type, title, year, imdb_id, season, archive, name):
+    def __init__(self, language, type, title, year, imdb_id, season, archive, name, trusted):
         super(LegendasTVSubtitle, self).__init__(language, page_link=archive.link)
         self.type = type
         self.title = title
@@ -110,6 +110,7 @@ class LegendasTVSubtitle(Subtitle):
         self.season = season
         self.archive = archive
         self.name = name
+        self.trusted = trusted
 
     @property
     def id(self):
@@ -145,6 +146,10 @@ class LegendasTVSubtitle(Subtitle):
             # imdb_id
             if video.imdb_id and self.imdb_id == video.imdb_id:
                 matches.add('imdb_id')
+
+        # Trusted uploader
+        if self.trusted:
+            matches.add('trusted')
 
         # name
         matches |= guess_matches(video, guessit(self.name, {'type': self.type}))
@@ -436,7 +441,7 @@ class LegendasTVProvider(Provider):
                 # iterate over releases
                 for r in releases:
                     subtitle = self.subtitle_class(language, t['type'], t['title'], t.get('year'), t.get('imdb_id'),
-                                                   t.get('season'), a, r)
+                                                   t.get('season'), a, r, a.featured)
                     logger.debug('Found subtitle %r', subtitle)
                     subtitles.append(subtitle)
 

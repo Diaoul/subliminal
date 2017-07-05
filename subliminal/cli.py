@@ -68,6 +68,7 @@ class Config(object):
         self.config.set('general', 'embedded_subtitles', str(1))
         self.config.set('general', 'age', str(int(timedelta(weeks=2).total_seconds())))
         self.config.set('general', 'hearing_impaired', str(1))
+        self.config.set('general', 'trusted', str(1))
         self.config.set('general', 'min_score', str(0))
 
     def read(self):
@@ -134,6 +135,14 @@ class Config(object):
     @hearing_impaired.setter
     def hearing_impaired(self, value):
         self.config.set('general', 'hearing_impaired', str(int(value)))
+
+    @property
+    def trusted(self):
+        return self.config.getboolean('general', 'trusted')
+
+    @trusted.setter
+    def trusted(self, value):
+        self.config.set('general', 'trusted', str(int(value)))
 
     @property
     def min_score(self):
@@ -282,6 +291,7 @@ def cache(ctx, clear_subliminal):
               'name, i.e. use .srt extension. Do not use this unless your media player requires it.')
 @click.option('-f', '--force', is_flag=True, default=False, help='Force download even if a subtitle already exist.')
 @click.option('-hi', '--hearing-impaired', is_flag=True, default=False, help='Prefer hearing impaired subtitles.')
+@click.option('-t', '--trusted', is_flag=True, default=False, help='Only download subtitles from trusted uploaders.')
 @click.option('-m', '--min-score', type=click.IntRange(0, 100), default=0, help='Minimum score for a subtitle '
               'to be downloaded (0 to 100).')
 @click.option('-w', '--max-workers', type=click.IntRange(1, 50), default=None, help='Maximum number of threads to use.')
@@ -291,7 +301,7 @@ def cache(ctx, clear_subliminal):
 @click.argument('path', type=click.Path(), required=True, nargs=-1)
 @click.pass_obj
 def download(obj, provider, refiner, language, age, directory, encoding, single, force, hearing_impaired, min_score,
-             max_workers, archives, verbose, path):
+             max_workers, archives, verbose, path, trusted):
     """Download best subtitles.
 
     PATH can be an directory containing videos, a video file path or a video file name. It can be used multiple times.
@@ -396,8 +406,10 @@ def download(obj, provider, refiner, language, age, directory, encoding, single,
             for v in bar:
                 scores = get_scores(v)
                 subtitles = p.download_best_subtitles(p.list_subtitles(v, language - v.subtitle_languages),
-                                                      v, language, min_score=scores['hash'] * min_score / 100,
-                                                      hearing_impaired=hearing_impaired, only_one=single)
+                                                      v, language,
+                                                      min_score=(scores['hash'] + scores['trusted'] * trusted) * min_score / 100,
+                                                      hearing_impaired=hearing_impaired, only_one=single,
+                                                      trusted=trusted)
                 downloaded_subtitles[v] = subtitles
 
         if p.discarded_providers:
@@ -442,7 +454,7 @@ def download(obj, provider, refiner, language, age, directory, encoding, single,
                 scaled_score = score
                 if s.hearing_impaired == hearing_impaired:
                     scaled_score -= scores['hearing_impaired']
-                scaled_score *= 100 / scores['hash']
+                scaled_score *= 100 / (scores['hash'] + scores['trusted'] * trusted)
 
                 # echo some nice colored output
                 click.echo('  - [{score}] {language} subtitle from {provider_name} (match on {matches})'.format(

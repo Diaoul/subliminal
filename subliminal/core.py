@@ -190,7 +190,7 @@ class ProviderPool(object):
         return True
 
     def download_best_subtitles(self, subtitles, video, languages, min_score=0, hearing_impaired=False, only_one=False,
-                                compute_score=None):
+                                trusted=False, compute_score=None):
         """Download the best matching subtitles.
 
         :param subtitles: the subtitles to use.
@@ -201,6 +201,7 @@ class ProviderPool(object):
         :type languages: set of :class:`~babelfish.language.Language`
         :param int min_score: minimum score for a subtitle to be downloaded.
         :param bool hearing_impaired: hearing impaired preference.
+        :param bool trusted trusted: subtitle uploader preference.
         :param bool only_one: download only one subtitle, not one per language.
         :param compute_score: function that takes `subtitle` and `video` as positional arguments,
             `hearing_impaired` as keyword argument and returns the score.
@@ -211,7 +212,7 @@ class ProviderPool(object):
         compute_score = compute_score or default_compute_score
 
         # sort subtitles by score
-        scored_subtitles = sorted([(s, compute_score(s, video, hearing_impaired=hearing_impaired))
+        scored_subtitles = sorted([(s, compute_score(s, video, hearing_impaired=hearing_impaired, trusted=trusted))
                                   for s in subtitles], key=operator.itemgetter(1), reverse=True)
 
         # download best subtitles, falling back on the next on error
@@ -605,8 +606,8 @@ def download_subtitles(subtitles, pool_class=ProviderPool, **kwargs):
             pool.download_subtitle(subtitle)
 
 
-def download_best_subtitles(videos, languages, min_score=0, hearing_impaired=False, only_one=False, compute_score=None,
-                            pool_class=ProviderPool, **kwargs):
+def download_best_subtitles(videos, languages, min_score=0, hearing_impaired=False, only_one=False, trusted=False,
+                            compute_score=None, pool_class=ProviderPool, **kwargs):
     """List and download the best matching subtitles.
 
     The `videos` must pass the `languages` and `undefined` (`only_one`) checks of :func:`check_video`.
@@ -618,6 +619,7 @@ def download_best_subtitles(videos, languages, min_score=0, hearing_impaired=Fal
     :param int min_score: minimum score for a subtitle to be downloaded.
     :param bool hearing_impaired: hearing impaired preference.
     :param bool only_one: download only one subtitle, not one per language.
+    :param bool trusted trusted: subtitle uploader preference.
     :param compute_score: function that takes `subtitle` and `video` as positional arguments,
         `hearing_impaired` as keyword argument and returns the score.
     :param pool_class: class to use as provider pool.
@@ -648,7 +650,7 @@ def download_best_subtitles(videos, languages, min_score=0, hearing_impaired=Fal
             subtitles = pool.download_best_subtitles(pool.list_subtitles(video, languages - video.subtitle_languages),
                                                      video, languages, min_score=min_score,
                                                      hearing_impaired=hearing_impaired, only_one=only_one,
-                                                     compute_score=compute_score)
+                                                     trusted=trusted, compute_score=compute_score)
             logger.info('Downloaded %d subtitle(s)', len(subtitles))
             downloaded_subtitles[video].extend(subtitles)
 

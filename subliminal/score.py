@@ -25,6 +25,7 @@ Available matches:
   * series_imdb_id
   * imdb_id
   * tvdb_id
+  * trusted
 
 """
 from __future__ import division, print_function
@@ -37,11 +38,13 @@ logger = logging.getLogger(__name__)
 
 #: Scores for episodes
 episode_scores = {'hash': 359, 'series': 180, 'year': 90, 'season': 30, 'episode': 30, 'release_group': 15,
-                  'format': 7, 'audio_codec': 3, 'resolution': 2, 'video_codec': 2, 'hearing_impaired': 1}
+                  'format': 7, 'audio_codec': 3, 'resolution': 2, 'video_codec': 2, 'hearing_impaired': 1,
+                  'trusted': 100}
 
 #: Scores for movies
 movie_scores = {'hash': 119, 'title': 60, 'year': 30, 'release_group': 15,
-                'format': 7, 'audio_codec': 3, 'resolution': 2, 'video_codec': 2, 'hearing_impaired': 1}
+                'format': 7, 'audio_codec': 3, 'resolution': 2, 'video_codec': 2, 'hearing_impaired': 1,
+                'trusted': 100}
 
 #: Equivalent release groups
 equivalent_release_groups = ({'LOL', 'DIMENSION'}, {'ASAP', 'IMMERSE', 'FLEET'})
@@ -81,7 +84,7 @@ def get_scores(video):
     raise ValueError('video must be an instance of Episode or Movie')
 
 
-def compute_score(subtitle, video, hearing_impaired=None):
+def compute_score(subtitle, video, hearing_impaired=None, trusted=None):
     """Compute the score of the `subtitle` against the `video` with `hearing_impaired` preference.
 
     :func:`compute_score` uses the :meth:`Subtitle.get_matches <subliminal.subtitle.Subtitle.get_matches>` method and
@@ -92,11 +95,13 @@ def compute_score(subtitle, video, hearing_impaired=None):
     :param video: the video to compute the score against.
     :type video: :class:`~subliminal.video.Video`
     :param bool hearing_impaired: hearing impaired preference.
+    :param bool trusted: trusted uploader preference.
     :return: score of the subtitle.
     :rtype: int
 
     """
-    logger.info('Computing score of %r for video %r with %r', subtitle, video, dict(hearing_impaired=hearing_impaired))
+    logger.info('Computing score of %r for video %r with %r and %r',
+                subtitle, video, dict(hearing_impaired=hearing_impaired), dict(trusted=trusted))
 
     # get the scores dict
     scores = get_scores(video)
@@ -138,12 +143,16 @@ def compute_score(subtitle, video, hearing_impaired=None):
         logger.debug('Matched hearing_impaired')
         matches.add('hearing_impaired')
 
+    if trusted and subtitle.trusted == trusted:
+        logger.debug('Matched trusted')
+        matches.add('trusted')
+
     # compute the score
     score = sum((scores.get(match, 0) for match in matches))
     logger.info('Computed score %r with final matches %r', score, matches)
 
     # ensure score is within valid bounds
-    assert 0 <= score <= scores['hash'] + scores['hearing_impaired']
+    assert 0 <= score <= scores['hash'] + scores['hearing_impaired'] + scores['trusted']
 
     return score
 
@@ -154,6 +163,7 @@ def solve_episode_equations():
     hash, series, year, season, episode, release_group = symbols('hash series year season episode release_group')
     format, audio_codec, resolution, video_codec = symbols('format audio_codec resolution video_codec')
     hearing_impaired = symbols('hearing_impaired')
+    trusted = symbols('trusted')
 
     equations = [
         # hash is best
@@ -188,10 +198,13 @@ def solve_episode_equations():
 
         # hearing impaired is only used for score increasing, so put it to 1
         Eq(hearing_impaired, 1),
+
+        # trusted subtitle uploader
+        Eq(trusted, 100),
     ]
 
     return solve(equations, [hash, series, year, season, episode, release_group, format, audio_codec, resolution,
-                             hearing_impaired, video_codec])
+                             hearing_impaired, video_codec, trusted])
 
 
 def solve_movie_equations():
@@ -200,6 +213,7 @@ def solve_movie_equations():
     hash, title, year, release_group = symbols('hash title year release_group')
     format, audio_codec, resolution, video_codec = symbols('format audio_codec resolution video_codec')
     hearing_impaired = symbols('hearing_impaired')
+    trusted = symbols('trusted')
 
     equations = [
         # hash is best
@@ -228,7 +242,10 @@ def solve_movie_equations():
 
         # hearing impaired is only used for score increasing, so put it to 1
         Eq(hearing_impaired, 1),
+
+        # trusted subtitle uploader
+        Eq(trusted, 100),
     ]
 
     return solve(equations, [hash, title, year, release_group, format, audio_codec, resolution, hearing_impaired,
-                             video_codec])
+                             video_codec, trusted])

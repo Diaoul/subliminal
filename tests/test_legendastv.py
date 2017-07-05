@@ -75,7 +75,7 @@ def test_get_matches(episodes):
                                 'http://legendas.tv/download/537a74584945b/The_Big_Bang_Theory/'
                                 'The_Big_Bang_Theory_S07_HDTV_x264', 6915, 10)
     subtitle = LegendasTVSubtitle(Language('por', 'BR'), 'episode', 'The Big Bang Theory', 2013, 'tt0898266', 7,
-                                  archive, 'TBBT S07 x264/The.Big.Bang.Theory.S07E05.HDTV.x264-LOL.srt')
+                                  archive, 'TBBT S07 x264/The.Big.Bang.Theory.S07E05.HDTV.x264-LOL.srt', False)
 
     matches = subtitle.get_matches(episodes['bbt_s07e05'])
     assert matches == {'series', 'year', 'season', 'episode', 'release_group', 'format', 'video_codec',
@@ -87,7 +87,7 @@ def test_get_matches_no_match(episodes):
                                 'http://legendas.tv/download/537a74584945b/The_Big_Bang_Theory/'
                                 'The_Big_Bang_Theory_S07_HDTV_x264', 6915, 10)
     subtitle = LegendasTVSubtitle(Language('por', 'BR'), 'episode', 'The Big Bang Theory', 2013, 'tt0898266', 7,
-                                  archive, 'TBBT S07 x264/The.Big.Bang.Theory.S07E05.HDTV.x264-LOL.srt')
+                                  archive, 'TBBT S07 x264/The.Big.Bang.Theory.S07E05.HDTV.x264-LOL.srt', False)
 
     matches = subtitle.get_matches(episodes['dallas_2012_s01e03'])
     assert matches == set()

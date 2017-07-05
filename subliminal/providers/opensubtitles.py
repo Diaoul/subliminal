@@ -25,8 +25,9 @@ class OpenSubtitlesSubtitle(Subtitle):
     series_re = re.compile(r'^"(?P<series_name>.*)" (?P<series_title>.*)$')
 
     def __init__(self, language, hearing_impaired, page_link, subtitle_id, matched_by, movie_kind, hash, movie_name,
-                 movie_release_name, movie_year, movie_imdb_id, series_season, series_episode, filename, encoding):
-        super(OpenSubtitlesSubtitle, self).__init__(language, hearing_impaired, page_link, encoding)
+                 movie_release_name, movie_year, movie_imdb_id, series_season, series_episode, filename, encoding,
+                 trusted):
+        super(OpenSubtitlesSubtitle, self).__init__(language, hearing_impaired, trusted, page_link, encoding)
         self.subtitle_id = subtitle_id
         self.matched_by = matched_by
         self.movie_kind = movie_kind
@@ -38,6 +39,7 @@ class OpenSubtitlesSubtitle(Subtitle):
         self.series_season = series_season
         self.series_episode = series_episode
         self.filename = filename
+        self.trusted = trusted
 
     @property
     def id(self):
@@ -110,6 +112,10 @@ class OpenSubtitlesSubtitle(Subtitle):
         # imdb_id
         if video.imdb_id and self.movie_imdb_id == video.imdb_id:
             matches.add('imdb_id')
+
+        # Trusted uploader
+        if self.trusted:
+            matches.add('trusted')
 
         return matches
 
@@ -199,10 +205,14 @@ class OpenSubtitlesProvider(Provider):
             series_episode = int(subtitle_item['SeriesEpisode']) if subtitle_item['SeriesEpisode'] else None
             filename = subtitle_item['SubFileName']
             encoding = subtitle_item.get('SubEncoding') or None
+            user_rank = subtitle_item.get('UserRank') or None
+
+            trusted = user_rank in ('trusted', 'administrator', 'vip member', 'platinum member',
+                                    'gold member', 'silver member', 'bronze member', 'subtranslator')
 
             subtitle = self.subtitle_class(language, hearing_impaired, page_link, subtitle_id, matched_by, movie_kind,
                                            hash, movie_name, movie_release_name, movie_year, movie_imdb_id,
-                                           series_season, series_episode, filename, encoding)
+                                           series_season, series_episode, filename, encoding, trusted)
             logger.debug('Found subtitle %r by %s', subtitle, matched_by)
             subtitles.append(subtitle)
 

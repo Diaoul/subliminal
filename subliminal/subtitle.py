@@ -32,12 +32,15 @@ class Subtitle(object):
     #: Name of the provider that returns that class of subtitle
     provider_name = ''
 
-    def __init__(self, language, hearing_impaired=False, page_link=None, encoding=None):
+    def __init__(self, language, hearing_impaired=False, trusted=False, page_link=None, encoding=None):
         #: Language of the subtitle
         self.language = language
 
         #: Whether or not the subtitle is hearing impaired
         self.hearing_impaired = hearing_impaired
+
+        #: Whether or not the subtitle is from a trusted uploader.
+        self.trusted = trusted
 
         #: URL of the web page from which the subtitle can be downloaded
         self.page_link = page_link

@@ -77,7 +77,7 @@ class WizdomProvider(Provider):
     languages = {Language.fromalpha2(l) for l in ['he']}
     server_url = 'wizdom.xyz'
 
-    _tmdb_api_key = 'f7f51775877e0bb6703520952b3c7840'
+    _tmdb_api_key = 'a51ee051bcd762543373903de296e0a3'
 
     def __init__(self):
         self.session = None

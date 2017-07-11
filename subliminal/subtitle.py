@@ -226,7 +226,8 @@ def guess_matches(video, guess, partial=False):
     # release_group
     if (video.release_group and 'release_group' in guess and
             sanitize_release_group(guess['release_group']) in
-            get_equivalent_release_groups(sanitize_release_group(video.release_group))):
+            get_equivalent_release_groups(sanitize_release_group(video.release_group))) or \
+            (not video.release_group and 'release_group' not in guess):
         matches.add('release_group')
     # resolution
     if video.resolution and 'screen_size' in guess and guess['screen_size'] == video.resolution:

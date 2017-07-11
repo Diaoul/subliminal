@@ -107,6 +107,15 @@ def test_guess_matches_episode_no_year(episodes):
     assert guess_matches(video, guess) == expected
 
 
+def test_guess_matches_unknown_release_group(episodes):
+    video = episodes['castle_s0822']
+    guess = {'title': video.series, 'season': video.season, 'episode': video.episode, 'year': video.year,
+             'episode_title': video.title.upper(), 'screen_size': video.resolution, 'format': video.format.upper(),
+             'video_codec': video.video_codec, 'audio_codec': video.audio_codec}
+    expected = {'series', 'season', 'episode', 'title', 'resolution', 'format', 'video_codec', 'release_group'}
+    assert guess_matches(video, guess) == expected
+
+
 def test_fix_line_ending():
     content = b'Text\r\nwith\rweird\nline ending\r\ncharacters'
     assert fix_line_ending(content) == b'Text\nwith\nweird\nline ending\ncharacters'

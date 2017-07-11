@@ -95,7 +95,11 @@ def episodes():
             Episode('CSI.S15E18.720p.HDTV.X264.DIMENSION.mkv', 'CSI: Crime Scene Investigation', 15, 18,
                     title='The End Game', year=2000, tvdb_id=5104359, series_tvdb_id=72546, series_imdb_id='tt0247082',
                     format='HDTV', release_group='DIMENSION', resolution='720p', video_codec='h264',
-                    imdb_id='tt4145952')}
+                    imdb_id='tt4145952'),
+            'castle_s0822':
+            Episode('Castle.S08E22.Crossfire.1080p.WEB-DL.DD5.1.H.264.mkv', 'Castle', 8, 22,
+                    title='Crossfire', tvdb_id=5557317, series_tvdb_id=83462, series_imdb_id='tt1219024',
+                    format='WEB-DL', resolution='1080p', video_codec='h264', imdb_id='tt5594914')}
 
 
 @pytest.fixture(scope='session')

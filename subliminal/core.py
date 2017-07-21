@@ -11,7 +11,7 @@ import socket
 
 from babelfish import Language, LanguageReverseError
 from guessit import guessit
-from rarfile import NotRarFile, RarCannotExec, RarFile
+from rarfile import NotRarFile, RarCannotExec, RarFile, Error, is_rarfile
 import requests
 
 from .extensions import provider_manager, refiner_manager
@@ -406,37 +406,48 @@ def scan_archive(path):
     if not os.path.exists(path):
         raise ValueError('Path does not exist')
 
-    # check video extension
-    if not path.endswith(ARCHIVE_EXTENSIONS):
-        raise ValueError('%r is not a valid archive extension' % os.path.splitext(path)[1])
+    # check that this is a file and not a directory
+    if not os.path.isfile(path):
+        raise ValueError('%r is not a file' % path)
 
-    dirpath, filename = os.path.split(path)
-    logger.info('Scanning archive %r in %r', filename, dirpath)
+    dir_path, filename = os.path.split(path)
 
-    # rar extension
-    if filename.endswith('.rar'):
-        rar = RarFile(path)
+    # make sure this is really a rar file
+    if not is_rarfile(filename):
+        raise ValueError('File is not a rar file')
 
-        # filter on video extensions
-        rar_filenames = [f for f in rar.namelist() if f.endswith(VIDEO_EXTENSIONS)]
+    logger.info('Scanning archive %r in %r', filename, dir_path)
 
-        # no video found
-        if not rar_filenames:
-            raise ValueError('No video in archive')
+    rar = RarFile(path)
 
-        # more than one video found
-        if len(rar_filenames) > 1:
-            raise ValueError('More than one video in archive')
+    # check that the rar doesnt need a password
+    if rar.needs_password():
+        raise ValueError('Rar requires a password')
 
-        # guess
-        rar_filename = rar_filenames[0]
-        rar_filepath = os.path.join(dirpath, rar_filename)
-        video = Video.fromguess(rar_filepath, guessit(rar_filepath))
+    # raise an exception if the rar file is broken
+    # must be called to avoid a potential deadlock with some broken rars
+    rar.testrar()
 
-        # size
-        video.size = rar.getinfo(rar_filename).file_size
-    else:
-        raise ValueError('Unsupported extension %r' % os.path.splitext(path)[1])
+    # use infolist instead to filter out directories and return only video files, since namelist returns directories
+    file_info = [f for f in rar.infolist() if not f.isdir() and f.filename.endswith(VIDEO_EXTENSIONS)]
+
+    # sort by file size descending, the largest video in the archive is the one we want, there may be samples or intros
+    file_info.sort(key=operator.attrgetter('file_size'), reverse=True)
+
+    # no video found
+    if not file_info:
+        raise ValueError('No video in archive')
+
+    # Free the information about irrelevant files before guessing
+    file_info = file_info[0]
+
+    # guess
+    video_filename = file_info.filename
+    video_path = os.path.join(dir_path, video_filename)
+    video = Video.fromguess(video_path, guessit(video_path))
+
+    # size
+    video.size = file_info.file_size
 
     return video
 
@@ -506,7 +517,7 @@ def scan_videos(path, age=None, archives=True):
             elif archives and filename.endswith(ARCHIVE_EXTENSIONS):  # archive
                 try:
                     video = scan_archive(filepath)
-                except (NotRarFile, RarCannotExec, ValueError):  # pragma: no cover
+                except (NotRarFile, RarCannotExec, Error, ValueError):  # pragma: no cover
                     logger.exception('Error scanning archive')
                     continue
             else:  # pragma: no cover

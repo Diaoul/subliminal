@@ -122,10 +122,11 @@ class OpenSubtitlesProvider(Provider):
 
     """
     languages = {Language.fromopensubtitles(l) for l in language_converters['opensubtitles'].codes}
+    subtitle_class = OpenSubtitlesSubtitle
 
     def __init__(self, username=None, password=None):
         self.server = ServerProxy('https://api.opensubtitles.org/xml-rpc', TimeoutSafeTransport(10))
-        if username and not password or not username and password:
+        if any((username, password)) and not all((username, password)):
             raise ConfigurationError('Username and password must be specified')
         # None values not allowed for logging in, so replace it by ''
         self.username = username or ''
@@ -199,9 +200,9 @@ class OpenSubtitlesProvider(Provider):
             filename = subtitle_item['SubFileName']
             encoding = subtitle_item.get('SubEncoding') or None
 
-            subtitle = OpenSubtitlesSubtitle(language, hearing_impaired, page_link, subtitle_id, matched_by, movie_kind,
-                                             hash, movie_name, movie_release_name, movie_year, movie_imdb_id,
-                                             series_season, series_episode, filename, encoding)
+            subtitle = self.subtitle_class(language, hearing_impaired, page_link, subtitle_id, matched_by, movie_kind,
+                                           hash, movie_name, movie_release_name, movie_year, movie_imdb_id,
+                                           series_season, series_episode, filename, encoding)
             logger.debug('Found subtitle %r by %s', subtitle, matched_by)
             subtitles.append(subtitle)
 

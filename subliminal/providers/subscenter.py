@@ -75,22 +75,24 @@ class SubsCenterProvider(Provider):
     """SubsCenter Provider."""
     languages = {Language.fromalpha2(l) for l in ['he']}
     server_url = 'http://www.subscenter.co/he/'
+    subtitle_class = SubsCenterSubtitle
 
     def __init__(self, username=None, password=None):
-        if username is not None and password is None or username is None and password is not None:
+        if any((username, password)) and not all((username, password)):
             raise ConfigurationError('Username and password must be specified')
 
         self.session = None
         self.username = username
         self.password = password
         self.logged_in = False
+        self.session = None
 
     def initialize(self):
         self.session = Session()
         self.session.headers['User-Agent'] = 'Subliminal/{}'.format(__short_version__)
 
         # login
-        if self.username is not None and self.password is not None:
+        if self.username and self.password:
             logger.debug('Logging in')
             url = self.server_url + 'subscenter/accounts/login/'
 
@@ -200,8 +202,8 @@ class SubsCenterProvider(Provider):
                             continue
 
                         # otherwise create it
-                        subtitle = SubsCenterSubtitle(language, hearing_impaired, page_link, title, season, episode,
-                                                      title, subtitle_id, subtitle_key, downloaded, [release])
+                        subtitle = self.subtitle_class(language, hearing_impaired, page_link, title, season, episode,
+                                                       title, subtitle_id, subtitle_key, downloaded, [release])
                         logger.debug('Found subtitle %r', subtitle)
                         subtitles[subtitle_id] = subtitle
 

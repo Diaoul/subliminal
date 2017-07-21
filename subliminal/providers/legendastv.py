@@ -44,6 +44,9 @@ rating_re = re.compile(r'nota (?P<rating>\d+)')
 #: Timestamp parsing regex
 timestamp_re = re.compile(r'(?P<day>\d+)/(?P<month>\d+)/(?P<year>\d+) - (?P<hour>\d+):(?P<minute>\d+)')
 
+#: Title with year/country regex
+title_re = re.compile(r'^(?P<series>.*?)(?: \((?:(?P<year>\d{4})|(?P<country>[A-Z]{2}))\))?$')
+
 #: Cache key for releases
 releases_key = __name__ + ':releases|{archive_id}|{archive_name}'
 
@@ -121,8 +124,8 @@ class LegendasTVSubtitle(Subtitle):
             if video.series and sanitize(self.title) == sanitize(video.series):
                 matches.add('series')
 
-            # year (year is based on season air date hence the adjustment)
-            if video.original_series and self.year is None or video.year and video.year == self.year - self.season + 1:
+            # year
+            if video.original_series and self.year is None or video.year and video.year == self.year:
                 matches.add('year')
 
             # imdb_id
@@ -221,12 +224,12 @@ class LegendasTVProvider(Provider):
             # extract id
             title_id = int(source['id_filme'])
 
-            # extract type and title
-            title = {'type': type_map[source['tipo']], 'title': source['dsc_nome']}
+            # extract type
+            title = {'type': type_map[source['tipo']]}
 
-            # extract year
-            if source['dsc_data_lancamento'] and source['dsc_data_lancamento'].isdigit():
-                title['year'] = int(source['dsc_data_lancamento'])
+            # extract title, year and country
+            name, year, country = title_re.match(source['dsc_nome']).groups()
+            title['title'] = name
 
             # extract imdb_id
             if source['id_imdb'] != '0':
@@ -245,6 +248,13 @@ class LegendasTVProvider(Provider):
                         title['season'] = int(match.group('season'))
                     else:
                         logger.warning('No season detected for title %d', title_id)
+
+            # extract year
+            if year:
+                title['year'] = int(year)
+            elif source['dsc_data_lancamento'] and source['dsc_data_lancamento'].isdigit():
+                # year is based on season air date hence the adjustment
+                title['year'] = int(source['dsc_data_lancamento']) - title.get('season', 1) + 1
 
             # add title
             titles[title_id] = title

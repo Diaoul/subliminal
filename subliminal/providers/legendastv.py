@@ -244,7 +244,7 @@ class LegendasTVProvider(Provider):
                     if match:
                         title['season'] = int(match.group('season'))
                     else:
-                        logger.warning('No season detected for title %d (%s)', title_id, title['title'])
+                        logger.warning('No season detected for title %d (%s)', title_id, sanitize(title['title']))
 
             # add title
             titles[title_id] = title
@@ -351,35 +351,35 @@ class LegendasTVProvider(Provider):
         subtitles = []
         # iterate over titles
         for title_id, t in titles.items():
+            sanitized_title_candidate = sanitize(t['title'])
+            logger.debug('Evaluating title candidate %d (%s)', title_id, sanitized_title_candidate)
+
             # discard mismatches on title
-            sanitized_result = sanitize(t['title'])
-            if sanitized_result != sanitized_title:
-                logger.debug("Mismatched title, discarding title %d (%s)",
-                             title_id, sanitized_result)
+            if sanitized_title_candidate != sanitized_title:
+                logger.debug('Mismatched title, discarding title')
                 continue
 
             # episode
             if season and episode:
                 # discard mismatches on type
                 if t['type'] != 'episode':
-                    logger.debug("Mismatched 'episode' type, discarding title %d (%s)", title_id, sanitized_result)
+                    logger.debug('Mismatched \'episode\' type, discarding title')
                     continue
 
                 # discard mismatches on season
                 if 'season' not in t or t['season'] != season:
-                    logger.debug('Mismatched season %s, discarding title %d (%s)',
-                                 t.get('season'), title_id, sanitized_result)
+                    logger.debug('Mismatched season %s, discarding title', t.get('season'))
                     continue
             # movie
             else:
                 # discard mismatches on type
                 if t['type'] != 'movie':
-                    logger.debug("Mismatched 'movie' type, discarding title %d (%s)", title_id, sanitized_result)
+                    logger.debug('Mismatched \'movie\' type, discarding title')
                     continue
 
                 # discard mismatches on year
                 if year is not None and 'year' in t and t['year'] != year:
-                    logger.debug("Mismatched movie year, discarding title %d (%s)", title_id, sanitized_result)
+                    logger.debug('Mismatched movie year, discarding title')
                     continue
 
             # iterate over title's archives
@@ -396,8 +396,7 @@ class LegendasTVProvider(Provider):
                 if season and episode:
                     # discard mismatches on episode in non-pack archives
                     if not a.pack and 'episode' in guess and guess['episode'] != episode:
-                        logger.debug('Mismatched episode %s, discarding archive: %s',
-                                     guess['episode'], a.name)
+                        logger.debug('Mismatched episode %s, discarding archive: %s', guess['episode'], a.name)
                         continue
 
                 # compute an expiration time based on the archive timestamp

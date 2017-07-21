@@ -175,7 +175,7 @@ class ProviderPool(object):
             self.discarded_providers.add(subtitle.provider_name)
             return False
         except (BadRarFile, BadZipfile):
-            logger.error('Bar archive for %r', subtitle)
+            logger.error('Bad archive for %r', subtitle)
             return False
         except:
             logger.exception('Unexpected error in provider %r, discarding it', subtitle.provider_name)

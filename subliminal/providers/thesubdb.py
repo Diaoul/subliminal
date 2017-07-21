@@ -42,6 +42,9 @@ class TheSubDBProvider(Provider):
     server_url = 'http://api.thesubdb.com/'
     subtitle_class = TheSubDBSubtitle
 
+    def __init__(self):
+        self.session = None
+
     def initialize(self):
         self.session = Session()
         self.session.headers['User-Agent'] = ('SubDB/1.0 (subliminal/%s; https://github.com/Diaoul/subliminal)' %

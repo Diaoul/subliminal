@@ -85,6 +85,9 @@ class PodnapisiProvider(Provider):
     server_url = 'http://podnapisi.net/subtitles/'
     subtitle_class = PodnapisiSubtitle
 
+    def __init__(self):
+        self.session = None
+
     def initialize(self):
         self.session = Session()
         self.session.headers['User-Agent'] = 'Subliminal/%s' % __short_version__

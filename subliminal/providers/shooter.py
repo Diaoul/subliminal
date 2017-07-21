@@ -44,6 +44,9 @@ class ShooterProvider(Provider):
     server_url = 'https://www.shooter.cn/api/subapi.php'
     subtitle_class = ShooterSubtitle
 
+    def __init__(self):
+        self.session = None
+
     def initialize(self):
         self.session = Session()
         self.session.headers['User-Agent'] = 'Subliminal/%s' % __short_version__

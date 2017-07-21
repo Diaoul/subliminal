@@ -9,6 +9,7 @@ import operator
 import os.path
 import socket
 
+from enzyme import exceptions
 from babelfish import Language, LanguageReverseError
 from guessit import guessit
 from rarfile import NotRarFile, RarCannotExec, RarFile
@@ -540,6 +541,9 @@ def refine(video, episode_refiners=None, movie_refiners=None, **kwargs):
         logger.info('Refining video with %s', refiner)
         try:
             refiner_manager[refiner].plugin(video, **kwargs)
+        except exceptions.Error:
+            logger.error('Failed to refine video %s', video.name)
+            logger.debug('Refiner exception:', exc_info=True)
         except:
             logger.exception('Failed to refine video')
 

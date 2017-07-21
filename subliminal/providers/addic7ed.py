@@ -86,21 +86,23 @@ class Addic7edProvider(Provider):
     ]}
     video_types = (Episode,)
     server_url = 'http://www.addic7ed.com/'
+    subtitle_class = Addic7edSubtitle
 
     def __init__(self, username=None, password=None):
-        if username is not None and password is None or username is None and password is not None:
+        if any((username, password)) and not all((username, password)):
             raise ConfigurationError('Username and password must be specified')
 
         self.username = username
         self.password = password
         self.logged_in = False
+        self.session = None
 
     def initialize(self):
         self.session = Session()
         self.session.headers['User-Agent'] = 'Subliminal/%s' % __short_version__
 
         # login
-        if self.username is not None and self.password is not None:
+        if self.username and self.password:
             logger.info('Logging in')
             data = {'username': self.username, 'password': self.password, 'Submit': 'Log in'}
             r = self.session.post(self.server_url + 'dologin.php', data, allow_redirects=False, timeout=10)
@@ -262,8 +264,8 @@ class Addic7edProvider(Provider):
             version = cells[4].text
             download_link = cells[9].a['href'][1:]
 
-            subtitle = Addic7edSubtitle(language, hearing_impaired, page_link, series, season, episode, title, year,
-                                        version, download_link)
+            subtitle = self.subtitle_class(language, hearing_impaired, page_link, series, season, episode, title, year,
+                                           version, download_link)
             logger.debug('Found subtitle %r', subtitle)
             subtitles.append(subtitle)
 

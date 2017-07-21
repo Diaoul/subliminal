@@ -99,7 +99,7 @@ class LegendasTVSubtitle(Subtitle):
     provider_name = 'legendastv'
 
     def __init__(self, language, type, title, year, imdb_id, season, archive, name):
-        super(LegendasTVSubtitle, self).__init__(language, archive.link)
+        super(LegendasTVSubtitle, self).__init__(language, page_link=archive.link)
         self.type = type
         self.title = title
         self.year = year
@@ -158,21 +158,23 @@ class LegendasTVProvider(Provider):
     """
     languages = {Language.fromlegendastv(l) for l in language_converters['legendastv'].codes}
     server_url = 'http://legendas.tv/'
+    subtitle_class = LegendasTVSubtitle
 
     def __init__(self, username=None, password=None):
-        if username and not password or not username and password:
+        if any((username, password)) and not all((username, password)):
             raise ConfigurationError('Username and password must be specified')
 
         self.username = username
         self.password = password
         self.logged_in = False
+        self.session = None
 
     def initialize(self):
         self.session = Session()
         self.session.headers['User-Agent'] = 'Subliminal/%s' % __short_version__
 
         # login
-        if self.username is not None and self.password is not None:
+        if self.username and self.password:
             logger.info('Logging in')
             data = {'_method': 'POST', 'data[User][username]': self.username, 'data[User][password]': self.password}
             r = self.session.post(self.server_url + 'login', data, allow_redirects=False, timeout=10)
@@ -418,8 +420,8 @@ class LegendasTVProvider(Provider):
 
                 # iterate over releases
                 for r in releases:
-                    subtitle = LegendasTVSubtitle(language, t['type'], t['title'], t.get('year'), t.get('imdb_id'),
-                                                  t.get('season'), a, r)
+                    subtitle = self.subtitle_class(language, t['type'], t['title'], t.get('year'), t.get('imdb_id'),
+                                                   t.get('season'), a, r)
                     logger.debug('Found subtitle %r', subtitle)
                     subtitles.append(subtitle)
 

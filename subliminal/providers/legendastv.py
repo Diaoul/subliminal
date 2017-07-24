@@ -244,7 +244,7 @@ class LegendasTVProvider(Provider):
                     if match:
                         title['season'] = int(match.group('season'))
                     else:
-                        logger.warning('No season detected for title %d (%s)', title_id, sanitize(title['title']))
+                        logger.debug('No season detected for title %d (%r)', title_id, sanitize(title['title']))
 
             # add title
             titles[title_id] = title
@@ -352,7 +352,7 @@ class LegendasTVProvider(Provider):
         # iterate over titles
         for title_id, t in titles.items():
             sanitized_title_candidate = sanitize(t['title'])
-            logger.debug('Evaluating title candidate %d (%s)', title_id, sanitized_title_candidate)
+            logger.debug('Evaluating title candidate %d (%r)', title_id, sanitized_title_candidate)
 
             # discard mismatches on title
             if sanitized_title_candidate != sanitized_title:

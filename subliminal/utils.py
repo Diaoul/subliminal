@@ -4,6 +4,7 @@ import hashlib
 import os
 import re
 import struct
+import unicodedata
 
 
 def hash_opensubtitles(video_path):
@@ -150,3 +151,8 @@ def timestamp(date):
 
     """
     return (date - datetime(1970, 1, 1)).total_seconds()
+
+
+def remove_accents(input_str):
+    nfkd_form = unicodedata.normalize('NFKD', unicode(input_str, 'utf-8'))
+    return u"".join([c for c in nfkd_form if not unicodedata.combining(c)])

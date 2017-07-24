@@ -19,7 +19,7 @@ from . import Provider
 from .. import __short_version__
 from ..exceptions import ProviderError
 from ..subtitle import Subtitle, fix_line_ending, guess_matches
-from ..utils import sanitize
+from ..utils import remove_accents, sanitize
 from ..video import Episode, Movie
 
 logger = logging.getLogger(__name__)
@@ -45,11 +45,12 @@ class PodnapisiSubtitle(Subtitle):
 
     def get_matches(self, video):
         matches = set()
-
+        # Make sure we don't compare unicode with str
+        title = self.title.encode("utf-8") if isinstance(self.title, unicode) else self.title
         # episode
         if isinstance(video, Episode):
             # series
-            if video.series and sanitize(self.title) == sanitize(video.series):
+            if video.series and sanitize(title) == sanitize(video.series):
                 matches.add('series')
             # year
             if video.original_series and self.year is None or video.year and video.year == self.year:
@@ -66,7 +67,7 @@ class PodnapisiSubtitle(Subtitle):
         # movie
         elif isinstance(video, Movie):
             # title
-            if video.title and sanitize(self.title) == sanitize(video.title):
+            if video.title and sanitize(title) == sanitize(video.title):
                 matches.add('title')
             # year
             if video.year and self.year == video.year:
@@ -97,7 +98,8 @@ class PodnapisiProvider(Provider):
 
     def query(self, language, keyword, season=None, episode=None, year=None):
         # set parameters, see http://www.podnapisi.net/forum/viewtopic.php?f=62&t=26164#p212652
-        params = {'sXML': 1, 'sL': str(language), 'sK': keyword}
+        # Provider doesn't allow search with special chars
+        params = {'sXML': 1, 'sL': str(language), 'sK': remove_accents(keyword)}
         is_episode = False
         if season and episode:
             is_episode = True
@@ -122,10 +124,14 @@ class PodnapisiProvider(Provider):
             # loop over subtitles
             for subtitle_xml in xml.findall('subtitle'):
                 # read xml elements
+                pid = subtitle_xml.find('pid').text
+                # ignore duplicates, see http://www.podnapisi.net/forum/viewtopic.php?f=62&t=26164&start=10#p213321
+                if pid in pids:
+                    continue
+
                 language = Language.fromietf(subtitle_xml.find('language').text)
                 hearing_impaired = 'n' in (subtitle_xml.find('flags').text or '')
                 page_link = subtitle_xml.find('url').text
-                pid = subtitle_xml.find('pid').text
                 releases = []
                 if subtitle_xml.find('release').text:
                     for release in subtitle_xml.find('release').text.split():
@@ -143,10 +149,6 @@ class PodnapisiProvider(Provider):
                 else:
                     subtitle = self.subtitle_class(language, hearing_impaired, page_link, pid, releases, title,
                                                    year=year)
-
-                # ignore duplicates, see http://www.podnapisi.net/forum/viewtopic.php?f=62&t=26164&start=10#p213321
-                if pid in pids:
-                    continue
 
                 logger.debug('Found subtitle %r', subtitle)
                 subtitles.append(subtitle)

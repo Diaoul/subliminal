@@ -3,6 +3,7 @@ import os
 
 from babelfish import Language, language_converters
 import pytest
+import rarfile
 from vcr import VCR
 from subliminal.exceptions import ConfigurationError, AuthenticationError
 from subliminal.providers.legendastv import LegendasTVSubtitle, LegendasTVProvider, LegendasTVArchive
@@ -300,3 +301,14 @@ def test_download_subtitle(movies):
         provider.download_subtitle(subtitles[0])
     assert subtitles[0].content is not None
     assert subtitles[0].is_valid() is True
+
+
+@pytest.mark.integration
+def test_unrar_not_available(monkeypatch):
+    monkeypatch.setattr(rarfile, 'UNRAR_TOOL', 'test')
+    try:
+        LegendasTVProvider(USERNAME, PASSWORD)
+    except ConfigurationError as error:
+        assert 'UNRAR tool not available' == error.message
+    else:
+        pytest.fail()

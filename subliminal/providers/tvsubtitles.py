@@ -85,6 +85,9 @@ class TVsubtitlesProvider(Provider):
     def __init__(self):
         self.session = None
 
+    def __init__(self):
+        self.session = None
+
     def initialize(self):
         self.session = Session()
         self.session.headers['User-Agent'] = 'Subliminal/%s' % __short_version__

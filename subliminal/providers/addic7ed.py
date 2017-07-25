@@ -2,6 +2,7 @@
 import logging
 import re
 
+import six
 from babelfish import Language, language_converters
 from guessit import guessit
 from requests import Session
@@ -20,7 +21,10 @@ logger = logging.getLogger(__name__)
 language_converters.register('addic7ed = subliminal.converters.addic7ed:Addic7edConverter')
 
 # Series cell matching regex
-show_cells_re = re.compile(r'<td class="version">.*?</td>', re.DOTALL)
+if six.PY2:
+    show_cells_re = re.compile(r'<td class="version">.*?</td>', re.DOTALL)
+else:
+    show_cells_re = re.compile(br'<td class="version">.*?</td>', re.DOTALL)
 #: Series header parsing regex
 series_year_re = re.compile(r'^(?P<series>[ \w\'.:(),&!?-]+?)(?: \((?P<year>\d{4})\))?$')
 
@@ -138,31 +142,20 @@ class Addic7edProvider(Provider):
         logger.info('Getting show ids')
         r = self.session.get(self.server_url + 'shows.php', timeout=10)
         r.raise_for_status()
-        soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
 
-        show_links = soup.select('td.version > h3 > a[href^="/show/"]')
-        if not show_links and soup.builder.NAME == 'lxml':
-            # LXML parser seems to fail when parsing Addic7ed.com HTML markup.
-            # Last known version to work properly is 3.6.4 (next version, 3.7.0, fails)
-            # This solution assumes that the site's markup is bad, and strips it down to only contain what's needed.
-            # It could fall back to html.parser whenever that fails,
-            # but that would mean not knowing it failed, and that's bad.
-            show_cells = re.findall(show_cells_re, r.content)
-            if show_cells:
-                # Re-parse stripped down HTML
-                soup = ParserBeautifulSoup(''.join(show_cells), ['lxml', 'html.parser'])
-            else:
-                # RegExp match failed
-                pass
-                # Re-parse using html.parser
-                # soup = ParserBeautifulSoup(r.content, ['html.parser'])
-
-            # Re-select elements and continue
-            show_links = soup.select('td.version > h3 > a[href^="/show/"]')
+        # LXML parser seems to fail when parsing Addic7ed.com HTML markup.
+        # Last known version to work properly is 3.6.4 (next version, 3.7.0, fails)
+        # Assuming the site's markup is bad, and stripping it down to only contain what's needed.
+        show_cells = re.findall(show_cells_re, r.content)
+        if show_cells:
+            soup = ParserBeautifulSoup(b''.join(show_cells), ['lxml', 'html.parser'])
+        else:
+            # Use original response content
+            soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
 
         # populate the show ids
         show_ids = {}
-        for show in show_links:
+        for show in soup.select('td.version > h3 > a[href^="/show/"]'):
             show_ids[sanitize(show.text)] = int(show['href'][6:])
         logger.debug('Found %d show ids', len(show_ids))
 

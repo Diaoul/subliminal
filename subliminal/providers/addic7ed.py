@@ -2,7 +2,6 @@
 import logging
 import re
 
-import six
 from babelfish import Language, language_converters
 from guessit import guessit
 from requests import Session
@@ -21,10 +20,8 @@ logger = logging.getLogger(__name__)
 language_converters.register('addic7ed = subliminal.converters.addic7ed:Addic7edConverter')
 
 # Series cell matching regex
-if six.PY2:
-    show_cells_re = re.compile(r'<td class="version">.*?</td>', re.DOTALL)
-else:
-    show_cells_re = re.compile(br'<td class="version">.*?</td>', re.DOTALL)
+show_cells_re = re.compile(b'<td class="version">.*?</td>', re.DOTALL)
+
 #: Series header parsing regex
 series_year_re = re.compile(r'^(?P<series>[ \w\'.:(),&!?-]+?)(?: \((?P<year>\d{4})\))?$')
 
@@ -150,8 +147,8 @@ class Addic7edProvider(Provider):
         if show_cells:
             soup = ParserBeautifulSoup(b''.join(show_cells), ['lxml', 'html.parser'])
         else:
-            # Use original response content
-            soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
+            # If RegEx fails, fall back to original r.content and use 'html.parser'
+            soup = ParserBeautifulSoup(r.content, ['html.parser'])
 
         # populate the show ids
         show_ids = {}

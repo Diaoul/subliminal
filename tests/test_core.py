@@ -344,7 +344,9 @@ def test_scan_videos(movies, tmpdir, monkeypatch):
     tmpdir.ensure('movies', movies['interstellar'].name)
     tmpdir.ensure('movies', os.path.splitext(movies['enders_game'].name)[0] + '.nfo')
     tmpdir.ensure('movies', 'watched', dir=True)
-    tmpdir.join('movies', 'watched', os.path.split(movies['man_of_steel'].name)[1]).mksymlinkto(man_of_steel)
+    watched_path = tmpdir.join('movies', 'watched', os.path.split(movies['man_of_steel'].name)[1])
+    if hasattr(watched_path, 'mksymlinkto'):
+        watched_path.mksymlinkto(man_of_steel)
 
     # mock scan_video and scan_archive with the correct types
     mock_video = Mock(subtitle_languages=set())

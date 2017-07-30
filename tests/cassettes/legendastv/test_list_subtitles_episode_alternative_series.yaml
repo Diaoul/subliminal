@@ -1,6 +1,6 @@
 interactions:
 - request:
-    body: data%5BUser%5D%5Busername%5D=python-subliminal&data%5BUser%5D%5Bpassword%5D=subliminal&_method=POST
+    body: _method=POST&data%5BUser%5D%5Bpassword%5D=subliminal&data%5BUser%5D%5Busername%5D=python-subliminal
     headers:
       Accept: ['*/*']
       Accept-Encoding: ['gzip, deflate']
@@ -22,18 +22,18 @@ interactions:
       Content-Encoding: [gzip]
       Content-Length: ['20']
       Content-Type: [text/html; charset=UTF-8]
-      Date: ['Thu, 29 Jun 2017 20:19:52 GMT']
+      Date: ['Sun, 30 Jul 2017 15:50:08 GMT']
       Location: ['http://legendas.tv/']
-      Set-Cookie: [PHPSESSID=5786m1r4l5lo4r0flrf68hd8s5; path=/; HttpOnly, 'PHPSESSID=deleted;
-          expires=Wed, 29-Jun-2016 20:21:53 GMT; path=/', PHPSESSID=s5vs2uv0kesv4rs8mrbr9s7m53;
-          path=/; HttpOnly, 'PHPSESSID=deleted; expires=Wed, 29-Jun-2016 20:21:53
-          GMT; path=/', PHPSESSID=8ae41jk8qo4omid6gkmduu9dg3; path=/; HttpOnly, 'au=3673290---198d5f2e1a202d0c2878ae871f911763d7cd76c0;
-          expires=Thu, 13-Jul-2017 20:21:54 GMT; path=/']
-      Vary: ['Accept-Encoding,User-Agent']
+      Set-Cookie: [PHPSESSID=o9ekkcbut6fl0bck2l4aajlsm7; path=/; HttpOnly, 'PHPSESSID=deleted;
+          expires=Sat, 30-Jul-2016 15:52:16 GMT; path=/', PHPSESSID=8ani94fqed8o3ofk4qi770uv34;
+          path=/; HttpOnly, 'PHPSESSID=deleted; expires=Sat, 30-Jul-2016 15:52:16
+          GMT; path=/', PHPSESSID=lul95b1c7b9httf11a1apk3n52; path=/; HttpOnly, 'au=3673290---198d5f2e1a202d0c2878ae871f911763d7cd76c0;
+          expires=Sun, 13-Aug-2017 15:52:17 GMT; path=/']
+      Vary: ['User-Agent,Accept-Encoding']
       Via: [1.1 varnish]
       X-Cache: [MISS]
       X-Cacheable: ['YES:Forced']
-      X-Varnish: ['1389391047']
+      X-Varnish: ['119247310']
       X-backend: [default_director]
     status: {code: 302, message: Found}
 - request:
@@ -42,7 +42,7 @@ interactions:
       Accept: ['*/*']
       Accept-Encoding: ['gzip, deflate']
       Connection: [keep-alive]
-      Cookie: [PHPSESSID=8ae41jk8qo4omid6gkmduu9dg3; au=3673290---198d5f2e1a202d0c2878ae871f911763d7cd76c0]
+      Cookie: [au=3673290---198d5f2e1a202d0c2878ae871f911763d7cd76c0; PHPSESSID=lul95b1c7b9httf11a1apk3n52]
       User-Agent: [Subliminal/2.1]
     method: GET
     uri: http://legendas.tv/legenda/sugestao/turn%20washingtons%20spies
@@ -58,12 +58,12 @@ interactions:
       Content-Encoding: [gzip]
       Content-Length: ['22']
       Content-Type: [text/html; charset=utf-8]
-      Date: ['Thu, 29 Jun 2017 20:19:54 GMT']
-      Vary: ['User-Agent,Accept-Encoding']
+      Date: ['Sun, 30 Jul 2017 15:50:09 GMT']
+      Vary: ['Accept-Encoding,User-Agent']
       Via: [1.1 varnish]
       X-Cache: [MISS]
       X-Cacheable: ['YES:Forced']
-      X-Varnish: ['1389391202']
+      X-Varnish: ['119247437']
       X-backend: [default_director]
     status: {code: 200, message: OK}
 - request:
@@ -72,7 +72,7 @@ interactions:
       Accept: ['*/*']
       Accept-Encoding: ['gzip, deflate']
       Connection: [keep-alive]
-      Cookie: [PHPSESSID=8ae41jk8qo4omid6gkmduu9dg3; au=3673290---198d5f2e1a202d0c2878ae871f911763d7cd76c0]
+      Cookie: [au=3673290---198d5f2e1a202d0c2878ae871f911763d7cd76c0; PHPSESSID=lul95b1c7b9httf11a1apk3n52]
       User-Agent: [Subliminal/2.1]
     method: GET
     uri: http://legendas.tv/legenda/sugestao/turn%20washington's%20spies
@@ -88,12 +88,12 @@ interactions:
       Content-Encoding: [gzip]
       Content-Length: ['22']
       Content-Type: [text/html; charset=utf-8]
-      Date: ['Thu, 29 Jun 2017 20:19:54 GMT']
-      Vary: ['Accept-Encoding,User-Agent']
+      Date: ['Sun, 30 Jul 2017 15:50:09 GMT']
+      Vary: ['User-Agent,Accept-Encoding']
       Via: [1.1 varnish]
       X-Cache: [MISS]
       X-Cacheable: ['YES:Forced']
-      X-Varnish: ['1389391301']
+      X-Varnish: ['119247524']
       X-backend: [default_director]
     status: {code: 200, message: OK}
 - request:
@@ -102,7 +102,7 @@ interactions:
       Accept: ['*/*']
       Accept-Encoding: ['gzip, deflate']
       Connection: [keep-alive]
-      Cookie: [PHPSESSID=8ae41jk8qo4omid6gkmduu9dg3; au=3673290---198d5f2e1a202d0c2878ae871f911763d7cd76c0]
+      Cookie: [au=3673290---198d5f2e1a202d0c2878ae871f911763d7cd76c0; PHPSESSID=lul95b1c7b9httf11a1apk3n52]
       User-Agent: [Subliminal/2.1]
     method: GET
     uri: http://legendas.tv/legenda/sugestao/turn
@@ -282,12 +282,12 @@ interactions:
       Content-Encoding: [gzip]
       Content-Length: ['9399']
       Content-Type: [text/html; charset=utf-8]
-      Date: ['Thu, 29 Jun 2017 20:19:55 GMT']
-      Vary: ['User-Agent,Accept-Encoding']
+      Date: ['Sun, 30 Jul 2017 15:50:09 GMT']
+      Vary: ['Accept-Encoding,User-Agent']
       Via: [1.1 varnish]
       X-Cache: [MISS]
       X-Cacheable: ['YES:Forced']
-      X-Varnish: ['1389391337']
+      X-Varnish: ['119247580']
       X-backend: [default_director]
     status: {code: 200, message: OK}
 - request:
@@ -296,83 +296,87 @@ interactions:
       Accept: ['*/*']
       Accept-Encoding: ['gzip, deflate']
       Connection: [keep-alive]
-      Cookie: [PHPSESSID=8ae41jk8qo4omid6gkmduu9dg3; au=3673290---198d5f2e1a202d0c2878ae871f911763d7cd76c0]
+      Cookie: [au=3673290---198d5f2e1a202d0c2878ae871f911763d7cd76c0; PHPSESSID=lul95b1c7b9httf11a1apk3n52]
       User-Agent: [Subliminal/2.1]
     method: GET
-    uri: http://legendas.tv/util/carrega_legendas_busca_filme/44435/1/-/1
+    uri: http://legendas.tv/legenda/busca/-/1/-/0/44435
   response:
     body:
       string: !!binary |
-        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
+        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
+        AA==
     headers:
       Accept-Ranges: [bytes]
       Access-Control-Allow-Origin: ['*']
       Age: ['0']
       Connection: [keep-alive]
       Content-Encoding: [gzip]
-      Content-Length: ['3182']
+      Content-Length: ['3364']
       Content-Type: [text/html; charset=UTF-8]
-      Date: ['Thu, 29 Jun 2017 20:19:55 GMT']
+      Date: ['Sun, 30 Jul 2017 15:50:10 GMT']
       Vary: ['Accept-Encoding,User-Agent']
       Via: [1.1 varnish]
       X-Cache: [MISS]
       X-Cacheable: ['YES:Forced']
-      X-Varnish: ['1389391387']
+      X-Varnish: ['119247645']
       X-backend: [default_director]
     status: {code: 200, message: OK}
 - request:
@@ -381,7 +385,7 @@ interactions:
       Accept: ['*/*']
       Accept-Encoding: ['gzip, deflate']
       Connection: [keep-alive]
-      Cookie: [PHPSESSID=8ae41jk8qo4omid6gkmduu9dg3; au=3673290---198d5f2e1a202d0c2878ae871f911763d7cd76c0]
+      Cookie: [au=3673290---198d5f2e1a202d0c2878ae871f911763d7cd76c0; PHPSESSID=lul95b1c7b9httf11a1apk3n52]
       User-Agent: [Subliminal/2.1]
     method: GET
     uri: http://legendas.tv/downloadarquivo/5953101413fcc
@@ -397,13 +401,13 @@ interactions:
       Content-Encoding: [gzip]
       Content-Length: ['20']
       Content-Type: [text/html; charset=UTF-8]
-      Date: ['Thu, 29 Jun 2017 20:19:57 GMT']
+      Date: ['Sun, 30 Jul 2017 15:50:11 GMT']
       Location: ['http://f.legendas.tv/53/d1/legendas_tv_20170627231028000000.rar']
       Vary: ['User-Agent,Accept-Encoding']
       Via: [1.1 varnish]
       X-Cache: [MISS]
       X-Cacheable: ['YES:Forced']
-      X-Varnish: ['1389391460']
+      X-Varnish: ['119247699']
       X-backend: [default_director]
     status: {code: 302, message: Found}
 - request:
@@ -412,7 +416,7 @@ interactions:
       Accept: ['*/*']
       Accept-Encoding: ['gzip, deflate']
       Connection: [keep-alive]
-      Cookie: [PHPSESSID=8ae41jk8qo4omid6gkmduu9dg3; au=3673290---198d5f2e1a202d0c2878ae871f911763d7cd76c0]
+      Cookie: [au=3673290---198d5f2e1a202d0c2878ae871f911763d7cd76c0; PHPSESSID=lul95b1c7b9httf11a1apk3n52]
       User-Agent: [Subliminal/2.1]
     method: GET
     uri: http://f.legendas.tv/53/d1/legendas_tv_20170627231028000000.rar
@@ -5934,18 +5938,18 @@ interactions:
         I95m6JZQSOB5s73atlU0h/vbLAvP7e3EPXsAQAcA
     headers:
       Accept-Ranges: [bytes]
-      Age: ['0']
+      Age: ['1']
       Connection: [keep-alive]
       Content-Disposition: [attachment]
       Content-Length: ['314214']
       Content-Type: [application/octet-stream]
-      Date: ['Thu, 29 Jun 2017 20:19:57 GMT']
+      Date: ['Sun, 30 Jul 2017 15:50:13 GMT']
       ETag: ['"893a81049115af38-4cb66-552fbb03955c5"']
       Last-Modified: ['Wed, 28 Jun 2017 02:10:30 GMT']
       Via: [1.1 varnish]
       X-Cache: [MISS]
       X-Cacheable: ['YES']
-      X-Varnish: ['1389391569']
+      X-Varnish: ['119247799']
       X-backend: [imagens]
     status: {code: 200, message: OK}
 - request:
@@ -5954,7 +5958,7 @@ interactions:
       Accept: ['*/*']
       Accept-Encoding: ['gzip, deflate']
       Connection: [keep-alive]
-      Cookie: [PHPSESSID=8ae41jk8qo4omid6gkmduu9dg3; au=3673290---198d5f2e1a202d0c2878ae871f911763d7cd76c0]
+      Cookie: [au=3673290---198d5f2e1a202d0c2878ae871f911763d7cd76c0; PHPSESSID=lul95b1c7b9httf11a1apk3n52]
       User-Agent: [Subliminal/2.1]
     method: GET
     uri: http://legendas.tv/users/logout
@@ -5970,16 +5974,16 @@ interactions:
       Content-Encoding: [gzip]
       Content-Length: ['20']
       Content-Type: [text/html; charset=UTF-8]
-      Date: ['Thu, 29 Jun 2017 20:19:59 GMT']
+      Date: ['Sun, 30 Jul 2017 15:50:13 GMT']
       Location: ['http://legendas.tv/']
-      Set-Cookie: ['au=deleted; expires=Wed, 29-Jun-2016 20:22:00 GMT; path=/', 'PHPSESSID=deleted;
-          expires=Wed, 29-Jun-2016 20:22:00 GMT; path=/', PHPSESSID=gtihgtlrb4ppilfu6068jq1553;
+      Set-Cookie: ['au=deleted; expires=Sat, 30-Jul-2016 15:52:22 GMT; path=/', 'PHPSESSID=deleted;
+          expires=Sat, 30-Jul-2016 15:52:22 GMT; path=/', PHPSESSID=l88e1e2dhh3aadh6ugbhpkg877;
           path=/; HttpOnly]
       Vary: ['User-Agent,Accept-Encoding']
       Via: [1.1 varnish]
       X-Cache: [MISS]
       X-Cacheable: ['YES:Forced']
-      X-Varnish: ['1389391723']
+      X-Varnish: ['119247989']
       X-backend: [default_director]
     status: {code: 302, message: Found}
 version: 1

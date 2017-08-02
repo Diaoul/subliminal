@@ -46,7 +46,7 @@ class PodnapisiSubtitle(Subtitle):
     def get_matches(self, video):
         matches = set()
         # Make sure we don't compare unicode with str
-        title = self.title.encode("utf-8") if isinstance(self.title, unicode) else self.title
+        title = self.title.encode("utf-8") if self.title and not isinstance(self.title, str) else self.title
         # episode
         if isinstance(video, Episode):
             # series

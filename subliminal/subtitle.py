@@ -232,7 +232,6 @@ def guess_matches(video, guess, partial=False):
     if video.resolution and 'screen_size' in guess and guess['screen_size'] == video.resolution:
         matches.add('resolution')
     # format
-    print guess
     if video.format and 'format' in guess and isinstance(guess['format'], basestring) and guess['format'].lower() == video.format.lower():
         matches.add('format')
     # video_codec

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from .exceptions import ServiceUnavailable
 from datetime import datetime
 import hashlib
 import os
@@ -151,10 +150,3 @@ def timestamp(date):
 
     """
     return (date - datetime(1970, 1, 1)).total_seconds()
-
-
-def raise_for_status(r):
-    if r.status_code == 503:
-        raise ServiceUnavailable
-    else:
-        r.raise_for_status()

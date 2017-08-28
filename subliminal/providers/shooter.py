@@ -9,7 +9,6 @@ from requests import Session
 from . import Provider
 from .. import __short_version__
 from ..subtitle import Subtitle, fix_line_ending
-from ..utils import raise_for_status
 
 logger = logging.getLogger(__name__)
 
@@ -60,7 +59,7 @@ class ShooterProvider(Provider):
         params = {'filehash': hash, 'pathinfo': os.path.realpath(filename), 'format': 'json', 'lang': language.shooter}
         logger.debug('Searching subtitles %r', params)
         r = self.session.post(self.server_url, params=params, timeout=10)
-        raise_for_status(r)
+        r.raise_for_status()
 
         # handle subtitles not found
         if r.content == b'\xff':
@@ -79,6 +78,6 @@ class ShooterProvider(Provider):
     def download_subtitle(self, subtitle):
         logger.info('Downloading subtitle %r', subtitle)
         r = self.session.get(subtitle.download_link, timeout=10)
-        raise_for_status(r)
+        r.raise_for_status()
 
         subtitle.content = fix_line_ending(r.content)

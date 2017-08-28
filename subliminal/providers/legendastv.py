@@ -464,7 +464,7 @@ class LegendasTVProvider(Provider):
 
 def raise_for_status(r):
     # When site is under maintaince and http status code 200.
-    if 'Em breve estaremos de volta' in r.text or r.status_code == 503:
+    if 'Em breve estaremos de volta' in r.text:
         raise ServiceUnavailable
     else:
         r.raise_for_status()

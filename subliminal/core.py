@@ -84,6 +84,11 @@ class ProviderPool(object):
             logger.error('Provider %r timed out, improperly terminated', name)
         except (ServiceUnavailable, ProtocolError):  # OpenSubtitles raises xmlrpclib.ProtocolError when unavailable
             logger.error('Provider %r unavailable, improperly terminated', name)
+        except requests.exceptions.HTTPError as e:
+            if e.response.status_code in range(500, 600):
+                logger.error('Provider %r unavailable, improperly terminated', name)
+            else:
+                logger.exception('Provider %r http error %r, improperly terminated', name, e.response.status_code)
         except:
             logger.exception('Provider %r terminated unexpectedly', name)
 
@@ -125,6 +130,11 @@ class ProviderPool(object):
             logger.error('Provider %r timed out', provider)
         except (ServiceUnavailable, ProtocolError):  # OpenSubtitles raises xmlrpclib.ProtocolError when unavailable
             logger.error('Provider %r unavailable', provider)
+        except requests.exceptions.HTTPError as e:
+            if e.response.status_code in range(500, 600):
+                logger.error('Provider %r unavailable', provider)
+            else:
+                logger.exception('Provider %r http error %r', provider, e.response.status_code)
         except:
             logger.exception('Unexpected error in provider %r', provider)
 
@@ -183,6 +193,13 @@ class ProviderPool(object):
         except (ServiceUnavailable, ProtocolError):  # OpenSubtitles raises xmlrpclib.ProtocolError when unavailable
             logger.error('Provider %r unavailable, discarding it', subtitle.provider_name)
             self.discarded_providers.add(subtitle.provider_name)
+            return False
+        except requests.exceptions.HTTPError as e:
+            if e.response.status_code in range(500, 600):
+                logger.error('Provider %r unavailable, improperly terminated', subtitle.provider_name)
+            else:
+                logger.exception('Provider %r http error %r, improperly terminated', subtitle.provider_name,
+                                 e.response.status_code)
             return False
         except (BadRarFile, BadZipfile):
             logger.error('Bad archive for %r', subtitle)

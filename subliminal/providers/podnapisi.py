@@ -82,7 +82,11 @@ class PodnapisiProvider(Provider):
     """Podnapisi Provider."""
     languages = ({Language('por', 'BR'), Language('srp', script='Latn')} |
                  {Language.fromalpha2(l) for l in language_converters['alpha2'].codes})
-    server_url = 'http://podnapisi.net/subtitles/'
+    server_url = 'https://podnapisi.net/subtitles/'
+    subtitle_class = PodnapisiSubtitle
+
+    def __init__(self):
+        self.session = None
 
     def initialize(self):
         self.session = Session()
@@ -134,11 +138,11 @@ class PodnapisiProvider(Provider):
                 year = int(subtitle_xml.find('year').text)
 
                 if is_episode:
-                    subtitle = PodnapisiSubtitle(language, hearing_impaired, page_link, pid, releases, title,
-                                                 season=season, episode=episode, year=year)
+                    subtitle = self.subtitle_class(language, hearing_impaired, page_link, pid, releases, title,
+                                                   season=season, episode=episode, year=year)
                 else:
-                    subtitle = PodnapisiSubtitle(language, hearing_impaired, page_link, pid, releases, title,
-                                                 year=year)
+                    subtitle = self.subtitle_class(language, hearing_impaired, page_link, pid, releases, title,
+                                                   year=year)
 
                 # ignore duplicates, see http://www.podnapisi.net/forum/viewtopic.php?f=62&t=26164&start=10#p213321
                 if pid in pids:

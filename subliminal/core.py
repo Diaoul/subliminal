@@ -11,7 +11,8 @@ import socket
 
 from babelfish import Language, LanguageReverseError
 from guessit import guessit
-from rarfile import NotRarFile, RarCannotExec, RarFile
+from rarfile import BadRarFile, NotRarFile, RarCannotExec, RarFile
+from zipfile import BadZipfile
 import requests
 
 from .extensions import provider_manager, refiner_manager
@@ -172,6 +173,9 @@ class ProviderPool(object):
         except (requests.Timeout, socket.timeout):
             logger.error('Provider %r timed out, discarding it', subtitle.provider_name)
             self.discarded_providers.add(subtitle.provider_name)
+            return False
+        except (BadRarFile, BadZipfile):
+            logger.error('Bad archive for %r', subtitle)
             return False
         except:
             logger.exception('Unexpected error in provider %r, discarding it', subtitle.provider_name)

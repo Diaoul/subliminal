@@ -50,9 +50,9 @@ def test_get_matches_format_equivalent_release_group(episodes):
 
 def test_get_matches_video_codec_resolution(episodes):
     subtitle = HosszupuskaSubtitle(Language('hun'), None, 261077, 'The 100', 3, 9, 'HDTV',
-                                   'rmteam', '720p', None)
+                                   'rmteam', '720p', '2014-05-21')
     matches = subtitle.get_matches(episodes['the_100_s03e09'])
-    assert matches == {'series', 'season', 'episode', 'format', 'resolution'}
+    assert matches == {'series', 'season', 'episode', 'format', 'resolution', 'year'}
 
 
 def test_get_matches_no_match(episodes):
@@ -60,6 +60,20 @@ def test_get_matches_no_match(episodes):
                                    'DEMAND', '2017', None)
     matches = subtitle.get_matches(episodes['bbt_s07e05'])
     assert matches == set()
+
+
+def test_print_subtitle(episodes):
+    subtitle = HosszupuskaSubtitle(Language('hun'), None, 261077, 'The 100', 3, 9, 'HDTV',
+                                   'rmteam', '720p', '2016')
+    substr = "Subtitle id: 261077 Series: The 100 Season: 3 Episode: 9 " \
+             + "Release_group: rmteam  Format: HDTV  Resolution: 720p Year: 2016"
+    assert str(subtitle) == substr
+
+
+def test_language(episodes):
+    assert HosszupuskaProvider().GetLanguage('1.gif') == 'hu'
+    assert HosszupuskaProvider().GetLanguage('2.gif') == 'en'
+    assert HosszupuskaProvider().GetLanguage('3.gif') is None
 
 
 @pytest.mark.integration

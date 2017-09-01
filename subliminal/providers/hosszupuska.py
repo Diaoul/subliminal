@@ -27,11 +27,11 @@ class HosszupuskaSubtitle(Subtitle):
     provider_name = 'hosszupuska'
 
     def __str__(self):
-        subtit = "Subtitle id: " + self.subtitle_id \
+        subtit = "Subtitle id: " + str(self.subtitle_id) \
                + " Series: " + self.series \
-               + " Season: " + self.season \
-               + " Episode: " + self.episode \
-               + " Release_group: " + self.release_group + " "
+               + " Season: " + str(self.season) \
+               + " Episode: " + str(self.episode) \
+               + " Release_group: " + str(self.release_group) + " "
         if self.format:
             subtit = subtit + " Format: " + self.format + " "
         if self.resolution:
@@ -71,7 +71,7 @@ class HosszupuskaSubtitle(Subtitle):
         if video.episode and self.episode == video.episode:
             matches.add('episode')
         # year
-        if self.year and video.year and video.year == self.year:
+        if self.year and video.year and str(video.year) == str(self.year):
             matches.add('year')
         # resolution
         if video.resolution and self.resolution and video.resolution == self.resolution:
@@ -108,7 +108,7 @@ class HosszupuskaProvider(Provider):
             return Language.fromhosszupuska('hu')
         if text == '2.gif':
             return Language.fromhosszupuska('en')
-        return Language.fromhosszupuska.hu
+        return None
 
     def query(self, series, season, episode, year=None):
 

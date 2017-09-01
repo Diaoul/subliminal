@@ -113,6 +113,8 @@ class HosszupuskaProvider(Provider):
     def query(self, series, season, episode, year=None):
 
         # Search for s01e03 instead of s1e3
+        seasona = season
+        episodea = episode
         if season < 10:
             seasona = '0'+str(season)
         else:
@@ -121,11 +123,9 @@ class HosszupuskaProvider(Provider):
             episodea = '0'+str(episode)
         else:
             episodea = str(episode)
-        season = seasona
-        episode = episodea
 
         # get the episode page
-        logger.info('Getting the page for episode %d', episode)
+        logger.info('Getting the page for episode %s', episode)
         url = self.server_url + "sorozatok.php?cim=" + series.replace(' ', '+') + "&evad="+str(seasona) + \
             "&resz="+str(episodea)+"&nyelvtipus=%25&x=24&y=8"
 
@@ -158,8 +158,10 @@ class HosszupuskaProvider(Provider):
                 if datas[1].getText().count('(') == 2:
                     sub_english_name = re.split('s(\d{1,2})e(\d{1,2})', datas[1].getText().split('(')[0] +
                                                 datas[1].getText().split('(')[1])[3]
-                sub_season = re.findall('s(\d{1,2})', datas[1].find_all('b')[0].getText(), re.VERBOSE)[0]
-                sub_episode = re.findall('e(\d{1,2})', datas[1].find_all('b')[0].getText(), re.VERBOSE)[0]
+                sub_season = int((re.findall('s(\d{1,2})', datas[1].find_all('b')[0].getText(), re.VERBOSE)[0])
+                                 .lstrip('0'))
+                sub_episode = int((re.findall('e(\d{1,2})', datas[1].find_all('b')[0].getText(), re.VERBOSE)[0])
+                                  .lstrip('0'))
                 sub_language = self.GetLanguage(datas[2].find_all('img')[0]['src'].split('/')[1])
                 sub_downloadlink = datas[6].find_all('a')[1]['href']
                 sub_id = sub_downloadlink.split('=')[1].split('.')[0]

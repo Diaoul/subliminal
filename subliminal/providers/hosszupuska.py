@@ -151,15 +151,16 @@ class HosszupuskaProvider(Provider):
 
         # Differnt way of parsing with lxml
         if self.Checklxml():
+            i = 0
             soup = ParserBeautifulSoup(r, ['lxml', 'html.parser'])
             table = soup.find_all("table")[9]
         else:
+            i = 5
             text = str('Köszönjük!')
             table = ParserBeautifulSoup(r.split(text)[1], ['lxml', 'html.parser'])
 
         subtitles = []
         # loop over subtitles rows
-        i = 0
         for row in table.find_all("tr"):
             i = i + 1
             if "this.style.backgroundImage='url(css/over2.jpg)" in str(row) and i > 5:

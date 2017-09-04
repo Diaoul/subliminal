@@ -1,5 +1,7 @@
-# -*- coding: utf-8 -*-
+# coding: iso8859_2
 import io
+import six
+from pkg_resources import require
 import logging
 import re
 from zipfile import ZipFile
@@ -38,6 +40,8 @@ class HosszupuskaSubtitle(Subtitle):
             subtit = subtit + " Resolution: " + self.resolution
         if self.date:
             subtit = subtit + " Year: " + self.year
+        if six.PY3:
+            return subtit
         return subtit.encode('utf-8')
 
     def __init__(self, language, page_link, subtitle_id, series, season, episode,
@@ -110,6 +114,14 @@ class HosszupuskaProvider(Provider):
             return Language.fromhosszupuska('en')
         return None
 
+    def Checklxml(self):
+        try:
+            require("lxml")
+        except Exception as e:
+            if e.__module__ == 'pkg_resources' and e.__class__.__name__ == 'DistributionNotFound':
+                return False
+        return True
+
     def query(self, series, season, episode, year=None):
 
         # Search for s01e03 instead of s1e3
@@ -136,11 +148,16 @@ class HosszupuskaProvider(Provider):
         # r = file.read();
 
         r = self.session.get(url, timeout=10).content
-        soup = ParserBeautifulSoup(r, ['lxml', 'html.parser'])
+
+        # Differnt way of parsing with lxml
+        if self.Checklxml():
+            soup = ParserBeautifulSoup(r, ['lxml', 'html.parser'])
+            table = soup.find_all("table")[9]
+        else:
+            text = str('Köszönjük!')
+            table = ParserBeautifulSoup(r.split(text)[1], ['lxml', 'html.parser'])
 
         subtitles = []
-        table = soup.find_all("table")[9]
-
         # loop over subtitles rows
         i = 0
         for row in table.find_all("tr"):

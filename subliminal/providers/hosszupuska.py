@@ -107,14 +107,14 @@ class HosszupuskaProvider(Provider):
     def terminate(self):
         self.session.close()
 
-    def GetLanguage(self, text):
+    def get_language(self, text):
         if text == '1.gif':
             return Language.fromhosszupuska('hu')
         if text == '2.gif':
             return Language.fromhosszupuska('en')
         return None
 
-    def Checklxml(self):
+    def check_lxml(self):
         try:
             require("lxml")
         except Exception as e:
@@ -150,7 +150,7 @@ class HosszupuskaProvider(Provider):
         r = self.session.get(url, timeout=10).content
 
         # Differnt way of parsing with lxml
-        if self.Checklxml():
+        if self.check_lxml():
             i = 0
             soup = ParserBeautifulSoup(r, ['lxml', 'html.parser'])
             table = soup.find_all("table")[9]
@@ -182,7 +182,7 @@ class HosszupuskaProvider(Provider):
                                  .lstrip('0'))
                 sub_episode = int((re.findall('e(\d{1,2})', datas[1].find_all('b')[0].getText(), re.VERBOSE)[0])
                                   .lstrip('0'))
-                sub_language = self.GetLanguage(datas[2].find_all('img')[0]['src'].split('/')[1])
+                sub_language = self.get_language(datas[2].find_all('img')[0]['src'].split('/')[1])
                 sub_downloadlink = datas[6].find_all('a')[1]['href']
                 sub_id = sub_downloadlink.split('=')[1].split('.')[0]
                 sub_date = datas[4].getText()

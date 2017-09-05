@@ -71,9 +71,9 @@ def test_print_subtitle(episodes):
 
 
 def test_language(episodes):
-    assert HosszupuskaProvider().GetLanguage('1.gif') == 'hu'
-    assert HosszupuskaProvider().GetLanguage('2.gif') == 'en'
-    assert HosszupuskaProvider().GetLanguage('3.gif') is None
+    assert HosszupuskaProvider().get_language('1.gif') == 'hu'
+    assert HosszupuskaProvider().get_language('2.gif') == 'en'
+    assert HosszupuskaProvider().get_language('3.gif') is None
 
 
 @pytest.mark.integration

@@ -156,7 +156,9 @@ class HosszupuskaProvider(Provider):
             table = soup.find_all("table")[9]
         else:
             i = 5
-            text = str('Köszönjük!')
+            text = "Köszönjük!"
+            if six.PY3:
+                text = (bytes("Köszönjük!", 'iso-8859-1'))
             table = ParserBeautifulSoup(r.split(text)[1], ['lxml', 'html.parser'])
 
         subtitles = []

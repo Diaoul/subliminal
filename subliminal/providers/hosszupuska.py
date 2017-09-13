@@ -78,12 +78,12 @@ class HosszupuskaSubtitle(Subtitle):
         if self.year and video.year and str(video.year) == str(self.year):
             matches.add('year')
         # resolution
-        if video.resolution and self.resolution and video.resolution == self.resolution:
+        if video.resolution and self.resolution and video.resolution.lower() == self.resolution.lower():
             matches.add('resolution')
         # release_group
         if (video.release_group and self.release_group and
-                any(r in sanitize_release_group(self.release_group)
-                    for r in get_equivalent_release_groups(sanitize_release_group(video.release_group)))):
+                any(r in sanitize_release_group(self.release_group.lower())
+                    for r in get_equivalent_release_groups(sanitize_release_group(video.release_group.lower())))):
                         matches.add('release_group')
         # other properties
         if video.format and self.format and video.format.lower() == self.format.lower():
@@ -127,6 +127,8 @@ class HosszupuskaProvider(Provider):
         # Search for s01e03 instead of s1e3
         seasona = season
         episodea = episode
+        seriesa = series.replace(' ', '+').replace('\'', '')
+
         if season < 10:
             seasona = '0'+str(season)
         else:
@@ -138,7 +140,7 @@ class HosszupuskaProvider(Provider):
 
         # get the episode page
         logger.info('Getting the page for episode %s', episode)
-        url = self.server_url + "sorozatok.php?cim=" + series.replace(' ', '+') + "&evad="+str(seasona) + \
+        url = self.server_url + "sorozatok.php?cim=" + seriesa + "&evad="+str(seasona) + \
             "&resz="+str(episodea)+"&nyelvtipus=%25&x=24&y=8"
 
         # scraper = cfscrape.create_scraper()  # returns a CloudflareScraper instance

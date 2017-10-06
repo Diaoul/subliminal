@@ -10,6 +10,7 @@ from guessit import guessit
 from requests import Session
 
 from . import Provider
+from .. import __short_version__
 from ..cache import SHOW_EXPIRATION_TIME, region
 from ..exceptions import ProviderError
 from ..subtitle import Subtitle, fix_line_ending, guess_matches
@@ -84,6 +85,7 @@ class WizdomProvider(Provider):
 
     def initialize(self):
         self.session = Session()
+        self.session.headers['User-Agent'] = 'Subliminal/{}'.format(__short_version__)
 
     def terminate(self):
         self.session.close()

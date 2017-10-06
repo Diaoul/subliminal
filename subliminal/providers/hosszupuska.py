@@ -38,14 +38,14 @@ class HosszupuskaSubtitle(Subtitle):
             subtit = subtit + " Format: " + self.format + " "
         if self.resolution:
             subtit = subtit + " Resolution: " + self.resolution
-        if self.date:
+        if self.year:
             subtit = subtit + " Year: " + self.year
         if six.PY3:
             return subtit
         return subtit.encode('utf-8')
 
     def __init__(self, language, page_link, subtitle_id, series, season, episode,
-                 format, release_group, resolution, date):
+                 format, release_group, resolution, year):
         super(HosszupuskaSubtitle, self).__init__(language, page_link=page_link)
         self.subtitle_id = subtitle_id
         self.series = series
@@ -54,10 +54,8 @@ class HosszupuskaSubtitle(Subtitle):
         self.format = format
         self.release_group = release_group
         self.resolution = resolution
-        self.date = date
-        self.year = None
-        if self.date:
-            self.year = date.strip().split('-')[0]
+        self.year = year
+
 
     @property
     def id(self):
@@ -75,7 +73,7 @@ class HosszupuskaSubtitle(Subtitle):
         if video.episode and self.episode == video.episode:
             matches.add('episode')
         # year
-        if self.year and video.year and str(video.year) == str(self.year):
+        if video.original_series and self.year is None or video.year and video.year == self.year:
             matches.add('year')
         # resolution
         if video.resolution and self.resolution and video.resolution.lower() == self.resolution.lower():
@@ -170,14 +168,19 @@ class HosszupuskaProvider(Provider):
             if "this.style.backgroundImage='url(css/over2.jpg)" in str(row) and i > 5:
                 datas = row.find_all("td")
 
-                # Currently subliminal only use English name but Hungarian can be parsed like this:
+                # Currently subliminal not use these params, but maybe later will come in handy
                 # hunagrian_name = re.split('s(\d{1,2})', datas[1].find_all('b')[0].getText())[0]
+                # Translator of subtitle
                 # sub_translator = datas[3].getText()
+                # Posting date of subtitle
+                # sub_date = datas[4].getText()
 
+                sub_year = None
                 # Handle the case when '(' in subtitle
                 if datas[1].getText().count('(') == 1:
                     sub_english_name = re.split('s(\d{1,2})e(\d{1,2})', datas[1].getText().split('(')[0])[3]
                 if datas[1].getText().count('(') == 2:
+                    sub_year = re.findall(r"(?<=\()(\d{4})(?=\))", datas[1].getText().strip())[0]
                     sub_english_name = re.split('s(\d{1,2})e(\d{1,2})', datas[1].getText().split('(')[0] +
                                                 datas[1].getText().split('(')[1])[3]
                 sub_season = int((re.findall('s(\d{1,2})', datas[1].find_all('b')[0].getText(), re.VERBOSE)[0])
@@ -187,7 +190,7 @@ class HosszupuskaProvider(Provider):
                 sub_language = self.get_language(datas[2].find_all('img')[0]['src'].split('/')[1])
                 sub_downloadlink = datas[6].find_all('a')[1]['href']
                 sub_id = sub_downloadlink.split('=')[1].split('.')[0]
-                sub_date = datas[4].getText()
+
                 if datas[1].getText().count('(') == 1:
                     sub_version = datas[1].getText().split('(')[1].split(')')[0]
                 if datas[1].getText().count('(') == 2:
@@ -209,7 +212,7 @@ class HosszupuskaProvider(Provider):
                         sub_resolution = None
                         sub_format = None
                     subtitle = HosszupuskaSubtitle(sub_language, sub_downloadlink, sub_id, sub_english_name, sub_season,
-                                                   sub_episode, sub_format, sub_release_group, sub_resolution, sub_date)
+                                                   sub_episode, sub_format, sub_release_group, sub_resolution, sub_year)
 
                     # Currently rar is not supported (But not commonly used on the provider)
                     if 'rar' not in sub_downloadlink and sub_season == season and sub_episode == episode:

@@ -20,9 +20,6 @@ logger = logging.getLogger(__name__)
 
 language_converters.register('hosszupuska = subliminal.converters.hosszupuska:HosszupuskaConverter')
 
-# link_re = re.compile(r'^(?P<series>.+?)(?: \(?\d{4}\)?| \((?:US|UK)\))? \((?P<first_year>\d{4})-\d{4}\)$')
-# episode_id_re = re.compile(r'^episode-\d+\.html$')
-
 
 class HosszupuskaSubtitle(Subtitle):
     """Hosszupuska Subtitle."""
@@ -56,7 +53,6 @@ class HosszupuskaSubtitle(Subtitle):
         self.resolution = resolution
         self.year = year
 
-
     @property
     def id(self):
         return str(self.subtitle_id)
@@ -73,7 +69,8 @@ class HosszupuskaSubtitle(Subtitle):
         if video.episode and self.episode == video.episode:
             matches.add('episode')
         # year
-        if video.original_series and self.year is None or video.year and video.year == self.year:
+        if ('series' in matches and video.original_series and self.year is None or
+           video.year and video.year == self.year):
             matches.add('year')
         # resolution
         if video.resolution and self.resolution and video.resolution.lower() == self.resolution.lower():

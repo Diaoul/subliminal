@@ -38,26 +38,26 @@ def test_get_matches_format_release_group(episodes):
     subtitle = HosszupuskaSubtitle(Language('hun'), None, 249518, 'The Big Bang Theory', 7, 5, 'HDTV',
                                    'lol-dimension', None, None)
     matches = subtitle.get_matches(episodes['bbt_s07e05'])
-    assert matches == {'series', 'season', 'episode', 'format', 'release_group'}
+    assert matches == {'series', 'season', 'episode', 'format', 'release_group', 'year'}
 
 
 def test_get_matches_format_equivalent_release_group(episodes):
     subtitle = HosszupuskaSubtitle(Language('fra'), None, 249518, 'The Big Bang Theory', 7, 5, 'HDTV',
                                    'lol', None, None)
     matches = subtitle.get_matches(episodes['bbt_s07e05'])
-    assert matches == {'series', 'season', 'episode', 'format', 'release_group'}
+    assert matches == {'series', 'season', 'episode', 'format', 'release_group', 'year'}
 
 
 def test_get_matches_video_codec_resolution(episodes):
     subtitle = HosszupuskaSubtitle(Language('hun'), None, 261077, 'The 100', 3, 9, 'HDTV',
-                                   'rmteam', '720p', '2014-05-21')
+                                   'rmteam', '720p', None)
     matches = subtitle.get_matches(episodes['the_100_s03e09'])
     assert matches == {'series', 'season', 'episode', 'format', 'resolution', 'year'}
 
 
 def test_get_matches_no_match(episodes):
-    subtitle = HosszupuskaSubtitle(Language('hun'), None, 261077, 'Game of Thrones', 3, 10, '1080p.BluRay',
-                                   'DEMAND', '2017', None)
+    subtitle = HosszupuskaSubtitle(Language('hun'), None, 261077, 'Game of Thrones', 3, 15, '1080p.BluRay',
+                                   'DEMAND', None, None)
     matches = subtitle.get_matches(episodes['bbt_s07e05'])
     assert matches == set()
 

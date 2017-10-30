@@ -2,7 +2,7 @@
 import logging
 import re
 
-from babelfish import Language, language_converters, LanguageReverseConverter
+from babelfish import Language, language_converters
 from guessit import guessit
 from requests import Session
 
@@ -90,8 +90,8 @@ class TuSubtituloProvider(Provider):
 
     def initialize(self):
         self.session = Session()
-#        self.session.headers['User-Agent'] = 'Subliminal/%s' % __short_version__
-        self.session.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:56.0) Gecko/20100101 Firefox/56.0'
+        self.session.headers['User-Agent'] = 'Subliminal/%s' % __short_version__
+        # self.session.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:56.0) Gecko/20100101 Firefox/56.0'
 
     def terminate(self):
         self.session.close()
@@ -126,8 +126,6 @@ class TuSubtituloProvider(Provider):
     def get_show_id(self, series, year=None):
         """Get the best matching show id for `series` and `year`.
 
-        First search in the result of :meth:`_get_show_ids` and fallback on a search with :meth:`_search_show_id`.
-
         :param str series: series of the episode.
         :param year: year of the series, if any.
         :type year: int
@@ -152,9 +150,7 @@ class TuSubtituloProvider(Provider):
         return show_id
 
     def get_episode_url(self, show_id, series, season, episode, year=None):
-        """Get the urlbest matching show id for `series` and `year`.
-
-        First search in the result of :meth:`_get_show_ids` and fallback on a search with :meth:`_search_show_id`.
+        """Get the url best matching show id for `series`, `season`, `episode` and `year`.
 
         :param int show_id: show id of the series
         :param str series: serie of the episode.
@@ -197,7 +193,7 @@ class TuSubtituloProvider(Provider):
             logger.error('No show id found for %s (%r)', series, year)
             return []
 
-         # get the episode url
+        # get the episode url
         episode_url = self.get_episode_url(show_id, series, season, episode, year)
         if episode_url is None:
             logger.error('No episode url found for %s, season %d, episode %d', series, season, episode)
@@ -236,7 +232,7 @@ class TuSubtituloProvider(Provider):
                     logger.debug('Ignoring subtitle with status %s', status)
                     continue
 
-                # Busco la versión más actualizada del subtitulo y si no existe busco la original
+                # get the most updated version of the subtitle and if it doesn't exist get the original version
                 html_status = html_language.select('a[href^="updated/"]')
                 if len(html_status) == 0:
                     html_status = html_language.select('a[href^="original/"]')
@@ -260,9 +256,5 @@ class TuSubtituloProvider(Provider):
         r = self.session.get(subtitle.download_link, headers={'Referer': subtitle.page_link},
                              timeout=10)
         r.raise_for_status()
-
-#        # detect download limit exceeded
-#        if r.headers['Content-Type'] == 'text/html':
-#            raise DownloadLimitExceeded
 
         subtitle.content = fix_line_ending(r.content)

@@ -175,7 +175,7 @@ class TuSubtituloProvider(Provider):
         r.raise_for_status()
         soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
 
-        # loop over episodes rows        
+        # loop over episodes rows
         for html_episode in soup.select('td > a[href*="/episodes/"]'):
             title = sanitize(html_episode.get_text())
 

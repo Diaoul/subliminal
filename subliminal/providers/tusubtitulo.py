@@ -9,7 +9,7 @@ from requests import Session
 from . import ParserBeautifulSoup, Provider
 from .. import __short_version__
 from ..cache import SHOW_EXPIRATION_TIME, region
-from ..exceptions import ProviderError # , DownloadLimitExceeded, TooManyRequests
+from ..exceptions import ProviderError  # , DownloadLimitExceeded, TooManyRequests
 from ..score import get_equivalent_release_groups
 from ..subtitle import Subtitle, fix_line_ending, guess_matches
 from ..utils import sanitize, sanitize_release_group
@@ -88,10 +88,14 @@ class TuSubtituloProvider(Provider):
     series_url = server_url + 'series.php'
     subtitles_url = server_url + 'ajax_loadShow.php'
 
+    def __init__(self):
+        self.session = None
+
     def initialize(self):
         self.session = Session()
         self.session.headers['User-Agent'] = 'Subliminal/%s' % __short_version__
-        # self.session.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:56.0) Gecko/20100101 Firefox/56.0'
+        # self.session.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:56.0) Gecko/20100101 ' \
+        #                                      'Firefox/56.0 '
 
     def terminate(self):
         self.session.close()
@@ -156,6 +160,7 @@ class TuSubtituloProvider(Provider):
         :param str series: serie of the episode.
         :param int season: season of the episode.
         :param int episode: number of the episode.
+        :param int year: year of the series.
         :return: the episode url, if found.
         :rtype: str
 
@@ -177,11 +182,13 @@ class TuSubtituloProvider(Provider):
             # attempt series with year
             if sanitize('{} {} {}x{:02d}'.format(series_sanitized, year, season, episode)) in title:
                 episode_url = 'https://' + html_episode['href'][2:]
-                logger.debug('Subtitle found for %s, season: %d, episode: %d. URL: %s', series, season, episode, episode_url)
+                logger.debug('Subtitle found for %s, season: %d, episode: %d. URL: %s', series, season, episode,
+                             episode_url)
                 break
             elif sanitize('{} {}x{:02d}'.format(series_sanitized, season, episode)) in title:
                 episode_url = 'https://' + html_episode['href'][2:]
-                logger.debug('Subtitle found for %s, season: %d, episode: %d. URL: %s', series, season, episode, episode_url)
+                logger.debug('Subtitle found for %s, season: %d, episode: %d. URL: %s', series, season, episode,
+                             episode_url)
                 break
 
         return episode_url
@@ -213,7 +220,8 @@ class TuSubtituloProvider(Provider):
 
         for sub in soup.find_all('div', attrs={'id': re.compile('version([0-9]+)')}):
             # read the release subtitle
-            release = sanitize_release_group(release_pattern.search(sub.find('p', class_='title-sub').contents[2]).group(1))
+            release = sanitize_release_group(release_pattern.search(sub.find('p', class_='title-sub')
+                                                                    .contents[2]).group(1))
 
             for html_language in sub.select('ul.sslist'):
                 language = Language.fromtusubtitulo(html_language.find_next('b').get_text().strip())

@@ -85,10 +85,14 @@ class SubtitulamosProvider(Provider):
     server_url = 'https://www.subtitulamos.tv/'
     search_url = server_url + 'search/query'
 
+    def __init__(self):
+        self.session = None
+
     def initialize(self):
         self.session = Session()
         self.session.headers['User-Agent'] = 'Subliminal/%s' % __short_version__
-        # self.session.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:56.0) Gecko/20100101 Firefox/56.0'
+        # self.session.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:56.0) Gecko/20100101 ' \
+        #                                      'Firefox/56.0 '
 
     def terminate(self):
         self.session.close()
@@ -155,7 +159,8 @@ class SubtitulamosProvider(Provider):
         subtitles = []
         for sub in soup.find_all('div', attrs={'id': 'progress_buttons_row'}):
             # read the language
-            language = Language.fromsubtitulamos(sub.find_previous('div', class_='subtitle_language').get_text().strip())
+            language = Language.fromsubtitulamos(sub.find_previous('div', class_='subtitle_language')
+                                                 .get_text().strip())
             hearing_impaired = False
 
             # modify spanish latino subtitle language to only spanish and set hearing_impaired = True

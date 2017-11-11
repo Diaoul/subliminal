@@ -7,35 +7,55 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [Subliminal/2.1]
     method: GET
-    uri: https://podnapisi.net/subtitles/search/old?sK=Cafe+Society&sXML=1&sY=2016&sL=fr
+    uri: https://podnapisi.net/subtitles/search/old?sK=Caf%C3%A9+Society&sXML=1&sY=2016&sL=fr
+  response:
+    body: {string: !!python/unicode "<html>\r\n<head><title>301 Moved Permanently</title></head>\r\n<body
+        bgcolor=\"white\">\r\n<center><h1>301 Moved Permanently</h1></center>\r\n<hr><center>nginx/1.8.0</center>\r\n</body>\r\n</html>\r\n"}
+    headers:
+      connection: [keep-alive]
+      content-length: ['184']
+      content-type: [text/html]
+      date: ['Sat, 11 Nov 2017 10:48:19 GMT']
+      location: ['https://www.podnapisi.net/en/subtitles/search/old?sK=Caf%C3%A9+Society&sXML=1&sY=2016&sL=fr']
+      server: [nginx/1.8.0]
+    status: {code: 301, message: Moved Permanently}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [Subliminal/2.1]
+    method: GET
+    uri: https://www.podnapisi.net/en/subtitles/search/old?sK=Caf%C3%A9+Society&sXML=1&sY=2016&sL=fr
   response:
     body:
       string: !!binary |
-        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
+        H4sIAAAAAAAAA+1YW2/iOBR+n1/hYaQVs4IEAqWw63oEhXaQoK0Ku2q1Wo08xFBLIYmSUIo0P36P
+        HefCEDzpVBqp2r4U+/g7Fx+fW4o/Pa0d9MiCkHvuWaVpNCqIuQvP5u7qrLKJlvVuBYURdW3qeC47
+        q+xYWPlE3uH3w+vz+f3NCAUs3DhRiP55hxB+P5qMpqOreUqtfrg5H/bn/W8+XXGXRqDlW7j5GvHI
+        YR9/J8CT58pAqLrYBAFzoxpaeBvxo/R8jHnyXAqJEl1FECHje0BmbWIRqnK7hqRxNbRjNKihtffI
+        2Riom8CBP77jUZsFkqDWV3TNhHkOo2G2CGvIoe5qQ1eSO1nH4IgLluhxBiyeK1Yjn4eeHRN9tuAU
+        lC1sELL0gjWN4NeHTQAOdFewcegKtra3dYU9YcGNuf39dfMu8/XH0gM6fuEb3bnymg4C/tQep54u
+        gxJu1eHU64Soqlapx/JeUWc6Qck7jrXuTVA/MivB6TSKWNGeqyjSY1R86UGzOPJ0IIhJ3XEcrVqE
+        rxUQR7hWgIh9HcBl2y8yQVBV/BS+tDjQyUgzSwdiT3QRfabhA8vb8y9BWNUqgrOCRrAqU6SJzWSJ
+        ZW2TFFGgSMrYxmYqw8wLSSoVwdwm7fZJo9PrYhPWGFKa8I0zxKZYYZnC5Jwuf/tgtVp/opm34Cza
+        YTM+wCKDidVodrApl1ilLLn7El5iM9nF5JEbBbsbqcBTZykJs6eIBS51pnGlZG7ElxwaCsHe2v6q
+        5Mkl5oLQPmm2OqdwQ7nD5nF+KBHkIYr8P0xzu90avme7FOokN1wWmcw1E2eE5jKoL+iS1cP4lnVx
+        MTP2hhCCs7qNzGwn0xP2Ku+Ft5ihHGUIEcap1fCNgbO5pTtj9tCnV/wSHaIGt7fcN+4e+dDon7fq
+        o7+vi0BDCbI67Xp/Ou4PJqMCUF7f/fjivgDSbHQzm56EuEvqep5TAM1L0yOnEyOWK2AFkvaUHjEs
+        r+1Of809cc/BqjcQ2SHbbfp2EG0J6fB98pYdlVDw+ofveqi4iO3gpUux5a0ULi7FtOfJ3BuXYs5r
+        fC7vXsSU0rZnaukL5m3MR8rzVb6M+zBukhiE0Ev6+NgmUI1zu/RElBpyAQPt4iEDSGIKIcsgOxIF
+        HDia7V6r3Wx0uj1RuIGAk6GRNICiWr+gqgYfk5ONQMc9XcHVBos2DoVvKYdLcmX2sanWGAZNRYAF
+        jvsxaRigTq1x3FyBPeu0sElbJmm1wdpsCw0i65MATMs2wUkBz3Wz01w3Y2/dTPRs1c2kN17UzX6Q
+        s9oaeoz3F2ZB6wSS69VkgQUZ87NJAEOZmOHkSHf9lgS5JJDe+D8nQcOyXlEStMDYn0gCq9eBrpcl
+        geWdDN6+a5JOEHvjRUlwbKoqGP2nf03mXH0dqC8hOStOrmfzZ8KNi6CAY3AwLheA9oZH/SSnbWPH
+        Ll5qnNS54sUCwDmlZBy6qxRbGQf+ml5+2m50ex3rNU20HQsmj1J1DFwo/x1O/gMxJ1QpWRcAAA==
     headers:
       connection: [keep-alive]
       content-encoding: [gzip]
       content-type: [text/xml;charset=utf-8]
-      date: ['Tue, 01 Aug 2017 18:01:42 GMT']
+      date: ['Sat, 11 Nov 2017 10:48:21 GMT']
       server: [nginx/1.8.0]
       vary: [Accept-Encoding]
     status: {code: 200, message: OK}
@@ -48,6 +68,26 @@ interactions:
       User-Agent: [Subliminal/2.1]
     method: GET
     uri: https://podnapisi.net/subtitles/iOlD/download?container=zip
+  response:
+    body: {string: !!python/unicode "<html>\r\n<head><title>301 Moved Permanently</title></head>\r\n<body
+        bgcolor=\"white\">\r\n<center><h1>301 Moved Permanently</h1></center>\r\n<hr><center>nginx/1.8.0</center>\r\n</body>\r\n</html>\r\n"}
+    headers:
+      connection: [keep-alive]
+      content-length: ['184']
+      content-type: [text/html]
+      date: ['Sat, 11 Nov 2017 10:48:22 GMT']
+      location: ['https://www.podnapisi.net/en/subtitles/iOlD/download?container=zip']
+      server: [nginx/1.8.0]
+    status: {code: 301, message: Moved Permanently}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [Subliminal/2.1]
+    method: GET
+    uri: https://www.podnapisi.net/en/subtitles/iOlD/download?container=zip
   response:
     body:
       string: !!binary |
@@ -920,7 +960,7 @@ interactions:
       content-disposition: [attachment; filename="fr-cafe-society-2016-SubRip-utf-8.zip"]
       content-length: ['49185']
       content-type: [application/octet-stream]
-      date: ['Tue, 01 Aug 2017 18:01:42 GMT']
+      date: ['Sat, 11 Nov 2017 10:48:22 GMT']
       etag: ['"5903b216-c021"']
       last-modified: ['Fri, 28 Apr 2017 21:20:22 GMT']
       server: [nginx/1.8.0]

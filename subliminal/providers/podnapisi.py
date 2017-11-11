@@ -19,7 +19,7 @@ from . import Provider
 from .. import __short_version__
 from ..exceptions import ProviderError
 from ..subtitle import Subtitle, fix_line_ending, guess_matches
-from ..utils import remove_accents, sanitize
+from ..utils import sanitize
 from ..video import Episode, Movie
 
 logger = logging.getLogger(__name__)
@@ -45,12 +45,11 @@ class PodnapisiSubtitle(Subtitle):
 
     def get_matches(self, video):
         matches = set()
-        # Make sure we don't compare unicode with str
-        title = self.title.encode("utf-8") if self.title and not isinstance(self.title, str) else self.title
+
         # episode
         if isinstance(video, Episode):
             # series
-            if video.series and sanitize(title) == sanitize(video.series):
+            if video.series and sanitize(self.title) == sanitize(video.series):
                 matches.add('series')
             # year
             if video.original_series and self.year is None or video.year and video.year == self.year:
@@ -67,7 +66,7 @@ class PodnapisiSubtitle(Subtitle):
         # movie
         elif isinstance(video, Movie):
             # title
-            if video.title and sanitize(title) == sanitize(video.title):
+            if video.title and sanitize(self.title) == sanitize(video.title):
                 matches.add('title')
             # year
             if video.year and self.year == video.year:
@@ -98,8 +97,7 @@ class PodnapisiProvider(Provider):
 
     def query(self, language, keyword, season=None, episode=None, year=None):
         # set parameters, see http://www.podnapisi.net/forum/viewtopic.php?f=62&t=26164#p212652
-        # Provider doesn't allow search with special chars
-        params = {'sXML': 1, 'sL': str(language), 'sK': remove_accents(keyword)}
+        params = {'sXML': 1, 'sL': str(language), 'sK': keyword}
         is_episode = False
         if season and episode:
             is_episode = True

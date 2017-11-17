@@ -82,7 +82,7 @@ class PodnapisiProvider(Provider):
     """Podnapisi Provider."""
     languages = ({Language('por', 'BR'), Language('srp', script='Latn')} |
                  {Language.fromalpha2(l) for l in language_converters['alpha2'].codes})
-    server_url = 'https://podnapisi.net/subtitles/'
+    server_url = 'https://www.podnapisi.net/subtitles/'
     subtitle_class = PodnapisiSubtitle
 
     def __init__(self):

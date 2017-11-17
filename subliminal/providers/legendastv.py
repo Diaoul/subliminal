@@ -315,16 +315,18 @@ class LegendasTVProvider(Provider):
         return titles
 
     @region.cache_on_arguments(expiration_time=timedelta(minutes=15).total_seconds())
-    def get_archives(self, title_id, language_code):
-        """Get the archive list from a given `title_id` and `language_code`.
+    def get_archives(self, title_id, language_code, title_type, season, episode):
+        """Get the archive list from a given `title_id`, `language_code`, `title_type`, `season` and `episode`.
 
         :param int title_id: title id.
         :param int language_code: language code.
+        :param str title_type: episode or movie
+        :param int season: season
+        :param int episode: episode
         :return: the archives.
         :rtype: list of :class:`LegendasTVArchive`
 
         """
-        logger.info('Getting archives for title %d and language %d', title_id, language_code)
         archives = []
         page = 0
         while True:
@@ -343,6 +345,21 @@ class LegendasTVProvider(Provider):
                                             'pack' in archive_soup.parent['class'],
                                             'destaque' in archive_soup.parent['class'],
                                             self.server_url + archive_soup.a['href'][1:])
+                # clean name of path separators and pack flags
+                clean_name = archive.name.replace('/', '-')
+                if archive.pack and clean_name.startswith('(p)'):
+                    clean_name = clean_name[3:]
+
+                # guess from name
+                guess = guessit(clean_name, {'type': title_type})
+
+                # episode
+                if season and episode:
+                    # discard mismatches on episode in non-pack archives
+                    if not archive.pack and 'episode' in guess and guess['episode'] != episode:
+                        logger.debug('Mismatched episode %s, discarding archive: %s',
+                                     guess['episode'], archive.name)
+                        continue
 
                 # extract text containing downloads, rating and timestamp
                 data_text = archive_soup.find('p', class_='data').text
@@ -407,22 +424,13 @@ class LegendasTVProvider(Provider):
         # iterate over titles
         for title_id, t in titles.items():
 
+            logger.info('Getting archives for title %d and language %d', title_id, language.legendastv)
+            archives = self.get_archives(title_id, language.legendastv, t['type'], season, episode)
+            if not archives:
+                logger.info('No archives found for title %d and language %d', title_id, language.legendastv)
+
             # iterate over title's archives
-            for a in self.get_archives(title_id, language.legendastv):
-                # clean name of path separators and pack flags
-                clean_name = a.name.replace('/', '-')
-                if a.pack and clean_name.startswith('(p)'):
-                    clean_name = clean_name[3:]
-
-                # guess from name
-                guess = guessit(clean_name, {'type': t['type']})
-
-                # episode
-                if season and episode:
-                    # discard mismatches on episode in non-pack archives
-                    if not a.pack and 'episode' in guess and guess['episode'] != episode:
-                        logger.debug('Mismatched episode %s, discarding archive: %s', guess['episode'], a.name)
-                        continue
+            for a in archives:
 
                 # compute an expiration time based on the archive timestamp
                 expiration_time = (datetime.utcnow().replace(tzinfo=pytz.utc) - a.timestamp).total_seconds()

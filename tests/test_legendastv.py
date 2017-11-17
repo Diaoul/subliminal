@@ -20,7 +20,7 @@ vcr = VCR(path_transformer=lambda path: path + '.yaml',
 @vcr.use_cassette()
 def test_get_archives_logged_in_as_donor():
     with LegendasTVProvider() as provider:
-        archive = provider.get_archives(34084, 2)[0]
+        archive = provider.get_archives(34084, 2, 'movie', None, None)[0]
     assert archive.id == '5515d27a72921'
     assert archive.name == 'Interstellar.2014.1080p.BluRay.x264.DTS-RARBG.eng'
     assert archive.link == ('http://legendas.tv/download/5515d27a72921/Interstellar/Interstellar_2014_1080p_BluRay_'
@@ -31,7 +31,7 @@ def test_get_archives_logged_in_as_donor():
 @vcr.use_cassette()
 def test_get_archives_logged_in_as_not_donor():
     with LegendasTVProvider() as provider:
-        archive = provider.get_archives(34084, 2)[0]
+        archive = provider.get_archives(34084, 2, 'movie', None, None)[0]
     assert archive.id == '5515d27a72921'
     assert archive.name == 'Interstellar.2014.1080p.BluRay.x264.DTS-RARBG.eng'
     assert archive.link == ('http://legendas.tv/download/5515d27a72921/Interstellar/Interstellar_2014_1080p_BluRay_'
@@ -183,7 +183,7 @@ def test_search_titles_containing_year_information():
 @vcr.use_cassette
 def test_get_archives():
     with LegendasTVProvider() as provider:
-        archives = provider.get_archives(34084, 2)
+        archives = provider.get_archives(34084, 2, 'movie', None, None)
     assert len(archives) == 2
     assert {a.id for a in archives} == {'5515d27a72921', '54a2e41d8cae4'}
     assert {a.content for a in archives} == {None}
@@ -193,7 +193,7 @@ def test_get_archives():
 @vcr.use_cassette
 def test_get_archives_no_result():
     with LegendasTVProvider() as provider:
-        archives = provider.get_archives(34084, 17)
+        archives = provider.get_archives(34084, 17, 'movie', None, None)
     assert len(archives) == 0
 
 
@@ -201,7 +201,7 @@ def test_get_archives_no_result():
 @vcr.use_cassette
 def test_download_archive():
     with LegendasTVProvider(USERNAME, PASSWORD) as provider:
-        archive = provider.get_archives(34084, 2)[0]
+        archive = provider.get_archives(34084, 2, 'movie', None, None)[0]
         provider.download_archive(archive)
     assert archive.content is not None
 

@@ -122,7 +122,8 @@ class LegendasTVSubtitle(Subtitle):
         # episode
         if isinstance(video, Episode) and self.type == 'episode':
             # series
-            if video.series and sanitize(self.title) == sanitize(video.series):
+            if video.series and (sanitize(self.title) in (
+                    sanitize(name) for name in [video.series] + video.alternative_series)):
                 matches.add('series')
 
             # year
@@ -136,7 +137,8 @@ class LegendasTVSubtitle(Subtitle):
         # movie
         elif isinstance(video, Movie) and self.type == 'movie':
             # title
-            if video.title and sanitize(self.title) == sanitize(video.title):
+            if video.title and (sanitize(self.title) in (
+                    sanitize(name) for name in [video.title] + video.alternative_titles)):
                 matches.add('title')
 
             # year
@@ -468,13 +470,19 @@ class LegendasTVProvider(Provider):
     def list_subtitles(self, video, languages):
         season = episode = None
         if isinstance(video, Episode):
-            title = video.series
+            titles = [video.series] + video.alternative_series
             season = video.season
             episode = video.episode
         else:
-            title = video.title
+            titles = [video.title] + video.alternative_titles
 
-        return [s for l in languages for s in self.query(l, title, season=season, episode=episode, year=video.year)]
+        for title in titles:
+            subtitles = [s for l in languages for s in
+                         self.query(l, title, season=season, episode=episode, year=video.year)]
+            if subtitles:
+                return subtitles
+
+        return []
 
     def download_subtitle(self, subtitle):
         # download archive in case we previously hit the releases cache and didn't download it

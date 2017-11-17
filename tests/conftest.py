@@ -95,7 +95,25 @@ def episodes():
             Episode('CSI.S15E18.720p.HDTV.X264.DIMENSION.mkv', 'CSI: Crime Scene Investigation', 15, 18,
                     title='The End Game', year=2000, tvdb_id=5104359, series_tvdb_id=72546, series_imdb_id='tt0247082',
                     format='HDTV', release_group='DIMENSION', resolution='720p', video_codec='h264',
-                    imdb_id='tt4145952')}
+                    imdb_id='tt4145952'),
+            'turn_s04e03':
+            Episode('Turn.S04E03.720p.HDTV.x264-AVS.mkv', "TURN: Washington's Spies", 4, 3,
+                    title='Blood for Blood', year=2014, tvdb_id=6124360, series_tvdb_id=272135,
+                    series_imdb_id='tt2543328',
+                    format='HDTV', release_group='AVS', resolution='720p', video_codec='h264',
+                    imdb_id='tt6137686', alternative_series=['Turn']),
+            'turn_s03e01':
+            Episode('Turn.S03E01.720p.HDTV.x264-AVS.mkv', "TURN: Washington's Spies", 3, 1,
+                    title='Valediction', year=2014, tvdb_id=5471384, series_tvdb_id=272135,
+                    series_imdb_id='tt2543328',
+                    format='HDTV', release_group='AVS', resolution='720p', video_codec='h264',
+                    imdb_id='tt4909774', alternative_series=['Turn']),
+            'marvels_jessica_jones_s01e13':
+            Episode('Marvels.Jessica.Jones.S01E13.720p.WEBRip.x264-2HD', "Marvels Jessica Jones", 1, 13,
+                    title='AKA Smile', year=2015, tvdb_id=5311273, series_tvdb_id=284190,
+                    series_imdb_id='tt2357547',
+                    format='WEBRip', release_group='2HD', resolution='720p', video_codec='h264',
+                    imdb_id='tt4162096', alternative_series=['Jessica Jones'])}
 
 
 @pytest.fixture(scope='session')

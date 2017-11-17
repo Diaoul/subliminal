@@ -122,29 +122,30 @@ def test_logout():
 @pytest.mark.integration
 @vcr.use_cassette
 def test_search_titles_episode(episodes):
+    video = episodes['bbt_s07e05']
     with LegendasTVProvider() as provider:
-        titles = provider.search_titles(episodes['bbt_s07e05'].series)
-    assert len(titles) == 10
-    assert set(titles.keys()) == {7623, 12620, 17710, 22056, 25314, 28507, 28900, 30730, 34546, 38908}
-    assert {t['title'] for t in titles.values()} == {episodes['bbt_s07e05'].series}
-    assert {t['season'] for t in titles.values() if t['type'] == 'episode'} == set(range(1, 10))
+        titles = provider.search_titles(video.series, video.season, video.year)
+    assert len(titles) == 1
+    assert set(titles.keys()) == {30730}
+    assert {t['title'] for t in titles.values()} == {video.series}
+    assert {t['season'] for t in titles.values() if t['type'] == 'episode'} == set([video.season])
 
 
 @pytest.mark.integration
 @vcr.use_cassette
 def test_search_titles_movie(movies):
     with LegendasTVProvider() as provider:
-        titles = provider.search_titles(movies['interstellar'].title)
-    assert len(titles) == 2
-    assert set(titles.keys()) == {34084, 37333}
-    assert {t['title'] for t in titles.values()} == {movies['interstellar'].title, 'The Science of Interstellar'}
+        titles = provider.search_titles(movies['interstellar'].title, None, movies['interstellar'].year)
+    assert len(titles) == 1
+    assert set(titles.keys()) == {34084}
+    assert {t['title'] for t in titles.values()} == {movies['interstellar'].title}
 
 
 @pytest.mark.integration
 @vcr.use_cassette
 def test_search_titles_dots():
     with LegendasTVProvider() as provider:
-        titles = provider.search_titles('11.22.63')
+        titles = provider.search_titles('11.22.63', 1, None)
     assert len(titles) == 1
     assert set(titles.keys()) == {40092}
 
@@ -153,43 +154,26 @@ def test_search_titles_dots():
 @vcr.use_cassette
 def test_search_titles_quote():
     with LegendasTVProvider() as provider:
-        titles = provider.search_titles('Marvel\'s Jessica Jones')
+        titles = provider.search_titles('Marvel\'s Jessica Jones', 1, None)
     assert len(titles) == 1
     assert set(titles.keys()) == {39376}
 
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_search_titles_with_invalid_year():
-    with LegendasTVProvider() as provider:
-        titles = provider.search_titles('Grave Danger')
-    assert len(titles) == 1
-    assert set(titles.keys()) == {22034}
-
-
-@pytest.mark.integration
-@vcr.use_cassette
 def test_search_titles_with_season_information_in_english():
     with LegendasTVProvider() as provider:
-        titles = provider.search_titles('Pretty Little Liars')
-    assert len(titles) == 7
-    assert set(titles.keys()) == {20917, 24586, 27500, 28332, 30303, 33223, 38105}
-
-
-@pytest.mark.integration
-@vcr.use_cassette
-def test_search_titles_without_season_information():
-    with LegendasTVProvider() as provider:
-        titles = provider.search_titles('The Walking Dead Webisodes Torn Apart')
+        # Season 3 uses '3rd Season'
+        titles = provider.search_titles('Pretty Little Liars', 3, 2012)
     assert len(titles) == 1
-    assert set(titles.keys()) == {25770}
+    assert set(titles.keys()) == {27500}
 
 
 @pytest.mark.integration
 @vcr.use_cassette
 def test_search_titles_containing_year_information():
     with LegendasTVProvider() as provider:
-        titles = provider.search_titles('Bull')
+        titles = provider.search_titles('Bull', 1, 2016)
     assert 42047 in titles.keys()
     t = titles[42047]
     assert t['title'], t['year'] == ('Bull', 2016)

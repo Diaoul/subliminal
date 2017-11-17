@@ -273,7 +273,7 @@ class Addic7edProvider(Provider):
         return subtitles
 
     def list_subtitles(self, video, languages):
-        titles = [video.title] + video.alternative_series
+        titles = [video.series] + video.alternative_series
         for title in titles:
             subtitles = [s for s in self.query(title, video.season, video.year)
                          if s.language in languages and s.episode == video.episode]

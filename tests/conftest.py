@@ -34,6 +34,8 @@ def movies():
             'enders_game':
             Movie('enders.game.2013.720p.bluray.x264-sparks.mkv', 'Ender\'s Game',
                   format='BluRay', release_group='sparks', resolution='720p', video_codec='h264', year=2013),
+            'café_society':
+            Movie(u'Café Society.1080p.avc1.RARBG.mp4', u'Café Society', year=2016),
             'interstellar':
             Movie('Interstellar.2014.2014.1080p.BluRay.x264.YIFY.rar', 'Interstellar',
                   format='BluRay', release_group='YIFY', resolution='1080p', video_codec='h264', year=2014)}

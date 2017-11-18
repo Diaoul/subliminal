@@ -135,3 +135,21 @@ def test_list_subtitles_episode_alternative_series(episodes):
         subtitles = provider.list_subtitles(video, languages)
     assert {subtitle.pid for subtitle in subtitles} == expected_subtitles
     assert {subtitle.language for subtitle in subtitles} == languages
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_subtitles_with_title_unicode(movies):
+    video = movies['café_society']
+    languages = {Language('fra')}
+    expected_subtitles = {'iOlD', 'iulD', '2o5B', 'ielD'}
+    with PodnapisiProvider() as provider:
+        subtitles = provider.list_subtitles(video, languages)
+        wanted_subtitle = [s for s in subtitles if s.pid == 'iOlD'][0]
+        matches = wanted_subtitle.get_matches(movies['café_society'])
+        provider.download_subtitle(wanted_subtitle)
+    assert {subtitle.pid for subtitle in subtitles} == expected_subtitles
+    assert {subtitle.language for subtitle in subtitles} == languages
+    assert matches == {'title', 'year'}
+    assert wanted_subtitle.content is not None
+    assert wanted_subtitle.is_valid() is True

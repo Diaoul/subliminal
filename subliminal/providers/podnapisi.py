@@ -126,10 +126,14 @@ class PodnapisiProvider(Provider):
             # loop over subtitles
             for subtitle_xml in xml.findall('subtitle'):
                 # read xml elements
+                pid = subtitle_xml.find('pid').text
+                # ignore duplicates, see http://www.podnapisi.net/forum/viewtopic.php?f=62&t=26164&start=10#p213321
+                if pid in pids:
+                    continue
+
                 language = Language.fromietf(subtitle_xml.find('language').text)
                 hearing_impaired = 'n' in (subtitle_xml.find('flags').text or '')
                 page_link = subtitle_xml.find('url').text
-                pid = subtitle_xml.find('pid').text
                 releases = []
                 if subtitle_xml.find('release').text:
                     for release in subtitle_xml.find('release').text.split():
@@ -147,10 +151,6 @@ class PodnapisiProvider(Provider):
                 else:
                     subtitle = self.subtitle_class(language, hearing_impaired, page_link, pid, releases, title,
                                                    year=year)
-
-                # ignore duplicates, see http://www.podnapisi.net/forum/viewtopic.php?f=62&t=26164&start=10#p213321
-                if pid in pids:
-                    continue
 
                 logger.debug('Found subtitle %r', subtitle)
                 subtitles.append(subtitle)

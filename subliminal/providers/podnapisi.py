@@ -114,7 +114,9 @@ class PodnapisiProvider(Provider):
         pids = set()
         while True:
             # query the server
-            xml = etree.fromstring(self.session.get(self.server_url + 'search/old', params=params, timeout=10).content)
+            r = self.session.get(self.server_url + 'search/old', params=params, timeout=10)
+            r.raise_for_status()
+            xml = etree.fromstring(r.content)
 
             # exit if no results
             if not int(xml.find('pagination/results').text):

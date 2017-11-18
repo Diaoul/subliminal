@@ -113,7 +113,10 @@ def episodes():
                     title='AKA Smile', year=2015, tvdb_id=5311273, series_tvdb_id=284190,
                     series_imdb_id='tt2357547',
                     format='WEBRip', release_group='2HD', resolution='720p', video_codec='h264',
-                    imdb_id='tt4162096', alternative_series=['Jessica Jones'])}
+                    imdb_id='tt4162096', alternative_series=['Jessica Jones']),
+            'fear_walking_dead_s03e10':
+            Episode('Fear.the.Walking.Dead.S03E10.1080p.WEB-DL.DD5.1.H264-RARBG', 'Fear the Walking Dead', 3, 10,
+                    resolution='1080p', format='WEB-DL', video_codec='h264', release_group='RARBG')}
 
 
 @pytest.fixture(scope='session')

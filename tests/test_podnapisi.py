@@ -126,6 +126,19 @@ def test_download_subtitle(movies):
 
 @pytest.mark.integration
 @vcr.use_cassette
+def test_list_subtitles_episode_alternative_series(episodes):
+    video = episodes['marvels_jessica_jones_s01e13']
+    languages = {Language('eng')}
+    expected_subtitles = {'JPY-', 'BURB', 'm_c-', 'wFFC', 'tVFC', 'wlFC',
+                          'iZk-', 'w_g-', 'CJw-', 'v5c-', 's1FC', 'u5c-'}
+    with PodnapisiProvider() as provider:
+        subtitles = provider.list_subtitles(video, languages)
+    assert {subtitle.pid for subtitle in subtitles} == expected_subtitles
+    assert {subtitle.language for subtitle in subtitles} == languages
+
+
+@pytest.mark.integration
+@vcr.use_cassette
 def test_subtitles_with_title_unicode(movies):
     video = movies['café_society']
     languages = {Language('fra')}

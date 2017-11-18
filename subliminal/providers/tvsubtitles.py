@@ -47,7 +47,8 @@ class TVsubtitlesSubtitle(Subtitle):
         matches = set()
 
         # series
-        if video.series and sanitize(self.series) == sanitize(video.series):
+        if video.series and (sanitize(self.series) in (
+                sanitize(name) for name in [video.series] + video.alternative_series)):
             matches.add('series')
         # season
         if video.season and self.season == video.season:
@@ -198,7 +199,14 @@ class TVsubtitlesProvider(Provider):
         return subtitles
 
     def list_subtitles(self, video, languages):
-        return [s for s in self.query(video.series, video.season, video.episode, video.year) if s.language in languages]
+        titles = [video.series] + video.alternative_series
+        for title in titles:
+            subtitles = [s for s in self.query(title, video.season, video.episode, video.year)
+                         if s.language in languages]
+            if subtitles:
+                return subtitles
+
+        return []
 
     def download_subtitle(self, subtitle):
         # download as a zip

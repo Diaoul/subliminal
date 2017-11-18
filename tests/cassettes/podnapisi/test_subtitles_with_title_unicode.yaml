@@ -7,27 +7,7 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [Subliminal/2.1]
     method: GET
-    uri: https://podnapisi.net/subtitles/search/old?sK=Caf%C3%A9+Society&sXML=1&sY=2016&sL=fr
-  response:
-    body: {string: !!python/unicode "<html>\r\n<head><title>301 Moved Permanently</title></head>\r\n<body
-        bgcolor=\"white\">\r\n<center><h1>301 Moved Permanently</h1></center>\r\n<hr><center>nginx/1.8.0</center>\r\n</body>\r\n</html>\r\n"}
-    headers:
-      connection: [keep-alive]
-      content-length: ['184']
-      content-type: [text/html]
-      date: ['Sat, 11 Nov 2017 10:48:19 GMT']
-      location: ['https://www.podnapisi.net/en/subtitles/search/old?sK=Caf%C3%A9+Society&sXML=1&sY=2016&sL=fr']
-      server: [nginx/1.8.0]
-    status: {code: 301, message: Moved Permanently}
-- request:
-    body: null
-    headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      User-Agent: [Subliminal/2.1]
-    method: GET
-    uri: https://www.podnapisi.net/en/subtitles/search/old?sK=Caf%C3%A9+Society&sXML=1&sY=2016&sL=fr
+    uri: https://www.podnapisi.net/subtitles/search/old?sK=Caf%C3%A9+Society&sXML=1&sY=2016&sL=fr
   response:
     body:
       string: !!binary |
@@ -47,15 +27,15 @@ interactions:
         r+1Of809cc/BqjcQ2SHbbfp2EG0J6fB98pYdlVDw+ofveqi4iO3gpUux5a0ULi7FtOfJ3BuXYs5r
         fC7vXsSU0rZnaukL5m3MR8rzVb6M+zBukhiE0Ev6+NgmUI1zu/RElBpyAQPt4iEDSGIKIcsgOxIF
         HDia7V6r3Wx0uj1RuIGAk6GRNICiWr+gqgYfk5ONQMc9XcHVBos2DoVvKYdLcmX2sanWGAZNRYAF
-        jvsxaRigTq1x3FyBPeu0sElbJmm1wdpsCw0i65MATMs2wUkBz3Wz01w3Y2/dTPRs1c2kN17UzX6Q
-        s9oaeoz3F2ZB6wSS69VkgQUZ87NJAEOZmOHkSHf9lgS5JJDe+D8nQcOyXlEStMDYn0gCq9eBrpcl
-        geWdDN6+a5JOEHvjRUlwbKoqGP2nf03mXH0dqC8hOStOrmfzZ8KNi6CAY3AwLheA9oZH/SSnbWPH
-        Ll5qnNS54sUCwDmlZBy6qxRbGQf+ml5+2m50ex3rNU20HQsmj1J1DFwo/x1O/gMxJ1QpWRcAAA==
+        jvsxaRigTq1x3FyBPeu0sElbJmlbYG22hQaR9UkApmWb4KSA57rZaa6bsbduJnq26mbSGy/qZj/I
+        WW0NPcb7C7OgdQLJ9WqywIKM+dkkgKFMzHBypLt+S4JcEkhv/J+ToGFZrygJWpCxP5EEVq8DXS9L
+        Ass7Gbx91ySdIPbGi5Lg2FRVMPpP/5rMufo6UF9CclacXM/mz4QbF0EBx+BgXC4A7Q2P+klO28aO
+        XbzUOKlzxYsFgHNKyTh0Vym2Mg78Nb38tN3o9jpiRnw1vbzTKtvMwYXy3+HkP83J0g5ZFwAA
     headers:
       connection: [keep-alive]
       content-encoding: [gzip]
       content-type: [text/xml;charset=utf-8]
-      date: ['Sat, 11 Nov 2017 10:48:21 GMT']
+      date: ['Sat, 18 Nov 2017 13:43:21 GMT']
       server: [nginx/1.8.0]
       vary: [Accept-Encoding]
     status: {code: 200, message: OK}
@@ -67,27 +47,7 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [Subliminal/2.1]
     method: GET
-    uri: https://podnapisi.net/subtitles/iOlD/download?container=zip
-  response:
-    body: {string: !!python/unicode "<html>\r\n<head><title>301 Moved Permanently</title></head>\r\n<body
-        bgcolor=\"white\">\r\n<center><h1>301 Moved Permanently</h1></center>\r\n<hr><center>nginx/1.8.0</center>\r\n</body>\r\n</html>\r\n"}
-    headers:
-      connection: [keep-alive]
-      content-length: ['184']
-      content-type: [text/html]
-      date: ['Sat, 11 Nov 2017 10:48:22 GMT']
-      location: ['https://www.podnapisi.net/en/subtitles/iOlD/download?container=zip']
-      server: [nginx/1.8.0]
-    status: {code: 301, message: Moved Permanently}
-- request:
-    body: null
-    headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      User-Agent: [Subliminal/2.1]
-    method: GET
-    uri: https://www.podnapisi.net/en/subtitles/iOlD/download?container=zip
+    uri: https://www.podnapisi.net/subtitles/iOlD/download?container=zip
   response:
     body:
       string: !!binary |
@@ -960,7 +920,7 @@ interactions:
       content-disposition: [attachment; filename="fr-cafe-society-2016-SubRip-utf-8.zip"]
       content-length: ['49185']
       content-type: [application/octet-stream]
-      date: ['Sat, 11 Nov 2017 10:48:22 GMT']
+      date: ['Sat, 18 Nov 2017 13:43:23 GMT']
       etag: ['"5903b216-c021"']
       last-modified: ['Fri, 28 Apr 2017 21:20:22 GMT']
       server: [nginx/1.8.0]

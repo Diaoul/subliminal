@@ -210,3 +210,15 @@ def test_download_subtitle(episodes):
         provider.download_subtitle(subtitles[0])
     assert subtitles[0].content is not None
     assert subtitles[0].is_valid() is True
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_list_subtitles_episode_alternative_series(episodes):
+    video = episodes['turn_s03e01']
+    languages = {Language('fra')}
+    expected_subtitles = {307588}
+    with TVsubtitlesProvider() as provider:
+        subtitles = provider.list_subtitles(video, languages)
+    assert {subtitle.subtitle_id for subtitle in subtitles} == expected_subtitles
+    assert {subtitle.language for subtitle in subtitles} == languages

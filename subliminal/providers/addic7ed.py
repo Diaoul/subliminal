@@ -55,7 +55,8 @@ class Addic7edSubtitle(Subtitle):
         if video.episode and self.episode == video.episode:
             matches.add('episode')
         # title
-        if video.title and sanitize(self.title) == sanitize(video.title):
+        if video.title and (sanitize(self.title) in (
+                sanitize(name) for name in [video.title] + video.alternative_series)):
             matches.add('title')
         # year
         if video.original_series and self.year is None or video.year and video.year == self.year:
@@ -275,8 +276,14 @@ class Addic7edProvider(Provider):
         return subtitles
 
     def list_subtitles(self, video, languages):
-        return [s for s in self.query(video.series, video.season, video.year)
-                if s.language in languages and s.episode == video.episode]
+        titles = [video.series] + video.alternative_series
+        for title in titles:
+            subtitles = [s for s in self.query(title, video.season, video.year)
+                         if s.language in languages and s.episode == video.episode]
+            if subtitles:
+                return subtitles
+
+        return []
 
     def download_subtitle(self, subtitle):
         # download the subtitle

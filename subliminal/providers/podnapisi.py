@@ -49,7 +49,8 @@ class PodnapisiSubtitle(Subtitle):
         # episode
         if isinstance(video, Episode):
             # series
-            if video.series and sanitize(self.title) == sanitize(video.series):
+            if video.series and (sanitize(self.title) in (
+                    sanitize(name) for name in [video.series] + video.alternative_series)):
                 matches.add('series')
             # year
             if video.original_series and self.year is None or video.year and video.year == self.year:
@@ -66,7 +67,8 @@ class PodnapisiSubtitle(Subtitle):
         # movie
         elif isinstance(video, Movie):
             # title
-            if video.title and sanitize(self.title) == sanitize(video.title):
+            if video.title and (sanitize(self.title) in (
+                    sanitize(name) for name in [video.title] + video.alternative_titles)):
                 matches.add('title')
             # year
             if video.year and self.year == video.year:
@@ -82,7 +84,7 @@ class PodnapisiProvider(Provider):
     """Podnapisi Provider."""
     languages = ({Language('por', 'BR'), Language('srp', script='Latn')} |
                  {Language.fromalpha2(l) for l in language_converters['alpha2'].codes})
-    server_url = 'https://podnapisi.net/subtitles/'
+    server_url = 'https://www.podnapisi.net/subtitles/'
     subtitle_class = PodnapisiSubtitle
 
     def __init__(self):
@@ -165,11 +167,21 @@ class PodnapisiProvider(Provider):
         return subtitles
 
     def list_subtitles(self, video, languages):
+        season = episode = None
         if isinstance(video, Episode):
-            return [s for l in languages for s in self.query(l, video.series, season=video.season,
-                                                             episode=video.episode, year=video.year)]
-        elif isinstance(video, Movie):
-            return [s for l in languages for s in self.query(l, video.title, year=video.year)]
+            titles = [video.series] + video.alternative_series
+            season = video.season
+            episode = video.episode
+        else:
+            titles = [video.title] + video.alternative_titles
+
+        for title in titles:
+            subtitles = [s for l in languages for s in
+                         self.query(l, title, season=season, episode=episode, year=video.year)]
+            if subtitles:
+                return subtitles
+
+        return []
 
     def download_subtitle(self, subtitle):
         # download as a zip

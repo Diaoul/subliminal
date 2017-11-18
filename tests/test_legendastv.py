@@ -4,7 +4,7 @@ import os
 from babelfish import Language, language_converters
 import pytest
 from vcr import VCR
-from subliminal.exceptions import ConfigurationError, AuthenticationError
+from subliminal.exceptions import ConfigurationError, AuthenticationError, ServiceUnavailable
 from subliminal.providers.legendastv import LegendasTVSubtitle, LegendasTVProvider, LegendasTVArchive
 
 USERNAME = 'python-subliminal'
@@ -318,3 +318,18 @@ def test_download_subtitle(movies):
         provider.download_subtitle(subtitles[0])
     assert subtitles[0].content is not None
     assert subtitles[0].is_valid() is True
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_under_maintenance(movies):
+    """Tests when is under maintenance and http status code 200."""
+    video = movies['man_of_steel']
+    languages = {Language('eng')}
+    with LegendasTVProvider() as provider:
+        try:
+            provider.list_subtitles(video, languages)
+        except ServiceUnavailable:
+            pass
+        else:
+            pytest.fail()

@@ -9,7 +9,7 @@ from requests import Session
 from . import ParserBeautifulSoup, Provider
 from .. import __short_version__
 from ..cache import SHOW_EXPIRATION_TIME, region
-from ..exceptions import AuthenticationError, ConfigurationError, DownloadLimitExceeded, TooManyRequests
+from ..exceptions import AuthenticationError, ConfigurationError, DownloadLimitExceeded
 from ..score import get_equivalent_release_groups
 from ..subtitle import Subtitle, fix_line_ending, guess_matches
 from ..utils import sanitize, sanitize_release_group
@@ -181,8 +181,6 @@ class Addic7edProvider(Provider):
         logger.info('Searching show ids with %r', params)
         r = self.session.get(self.server_url + 'search.php', params=params, timeout=10)
         r.raise_for_status()
-        if r.status_code == 304:
-            raise TooManyRequests()
         soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
 
         # get the suggestion
@@ -249,8 +247,13 @@ class Addic7edProvider(Provider):
         logger.info('Getting the page of show id %d, season %d', show_id, season)
         r = self.session.get(self.server_url + 'show/%d' % show_id, params={'season': season}, timeout=10)
         r.raise_for_status()
-        if r.status_code == 304:
-            raise TooManyRequests()
+
+        if not r.content:
+            # Provider returns a status of 304 Not Modified with an empty content
+            # raise_for_status won't raise exception for that status code
+            logger.debug('No data returned from provider')
+            return []
+
         soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
 
         # loop over subtitle rows
@@ -300,6 +303,12 @@ class Addic7edProvider(Provider):
         r = self.session.get(self.server_url + subtitle.download_link, headers={'Referer': subtitle.page_link},
                              timeout=10)
         r.raise_for_status()
+
+        if not r.content:
+            # Provider returns a status of 304 Not Modified with an empty content
+            # raise_for_status won't raise exception for that status code
+            logger.debug('Unable to download subtitle. No data returned from provider')
+            return
 
         # detect download limit exceeded
         if r.headers['Content-Type'] == 'text/html':

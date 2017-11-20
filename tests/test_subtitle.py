@@ -125,3 +125,12 @@ def test_subtitle_empty_encoding():
 def test_subtitle_invalid_encoding():
     subtitle = Subtitle(Language('deu'), False, None, 'rubbish')
     assert subtitle.encoding is None
+
+
+def test_guess_multiple_formats(movies):
+    video = movies['inferno']
+    guess = {'title': video.title.upper(), 'year': video.year, 'release_group': video.release_group.upper(),
+             'screen_size': video.resolution, 'format': video.format, 'video_codec': video.video_codec}
+    expected = {'title', 'year', 'release_group', 'resolution', 'video_codec'}
+    # Assert `format` is not a match
+    assert guess_matches(video, guess) == expected

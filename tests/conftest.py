@@ -38,7 +38,10 @@ def movies():
             Movie(u'Café Society.1080p.avc1.RARBG.mp4', u'Café Society', year=2016),
             'interstellar':
             Movie('Interstellar.2014.2014.1080p.BluRay.x264.YIFY.rar', 'Interstellar',
-                  format='BluRay', release_group='YIFY', resolution='1080p', video_codec='h264', year=2014)}
+                  format='BluRay', release_group='YIFY', resolution='1080p', video_codec='h264', year=2014),
+            'inferno':
+            Movie('Inferno.2016.1080p.WEB.BluRay.x264-[GROUP1.AG].mp4', 'Inferno', format=['BluRay', 'WEB-DL'],
+                  release_group='GROUP1', resolution='1080p', video_codec='h264', year=2016)}
 
 
 @pytest.fixture

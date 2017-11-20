@@ -1,80 +1,48 @@
 interactions:
 - request:
-    body: '<?xml version=''1.0''?>
-
-      <methodCall>
-
-      <methodName>LogIn</methodName>
-
-      <params>
-
-      <param>
-
-      <value><string>python-subliminal</string></value>
-
-      </param>
-
-      <param>
-
-      <value><string>subliminal</string></value>
-
-      </param>
-
-      <param>
-
-      <value><string>eng</string></value>
-
-      </param>
-
-      <param>
-
-      <value><string>subliminal v2.1</string></value>
-
-      </param>
-
-      </params>
-
-      </methodCall>
-
-      '
+    body: !!binary |
+      PD94bWwgdmVyc2lvbj0nMS4wJz8+CjxtZXRob2RDYWxsPgo8bWV0aG9kTmFtZT5Mb2dJbjwvbWV0
+      aG9kTmFtZT4KPHBhcmFtcz4KPHBhcmFtPgo8dmFsdWU+PHN0cmluZz5weXRob24tc3VibGltaW5h
+      bDwvc3RyaW5nPjwvdmFsdWU+CjwvcGFyYW0+CjxwYXJhbT4KPHZhbHVlPjxzdHJpbmc+c3VibGlt
+      aW5hbDwvc3RyaW5nPjwvdmFsdWU+CjwvcGFyYW0+CjxwYXJhbT4KPHZhbHVlPjxzdHJpbmc+ZW5n
+      PC9zdHJpbmc+PC92YWx1ZT4KPC9wYXJhbT4KPHBhcmFtPgo8dmFsdWU+PHN0cmluZz5zdWJsaW1p
+      bmFsIHYyLjA8L3N0cmluZz48L3ZhbHVlPgo8L3BhcmFtPgo8L3BhcmFtcz4KPC9tZXRob2RDYWxs
+      Pgo=
     headers:
       Accept-Encoding: [gzip]
       Content-Length: ['344']
       Content-Type: [text/xml]
-      User-Agent: [xmlrpclib.py/1.0.1 (by www.pythonware.com)]
+      User-Agent: [Python-xmlrpc/3.4]
     method: POST
     uri: https://api.opensubtitles.org/xml-rpc
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAA62UTVPCMBCG7/yKTO+QFkbkEMpBLo4OOsw4nkOylE7bpOaj6r83hQgVVMrQ27uZ
-        7L7P7iRLZh9FjipQOpViGkSDMEAgmOSpSKaBNev+JJjFPVKA2Ui+BF1KocEdlFTRQsc9tFNOIFLR
-        3EKtENFGWWa2GrnkYgVqFyAiaAGxkRkIgrfanx+yfQGHELPNSKlqnEXqbXITMZ4llUrG3CZDgv0V
-        n44b+QQ3LX/z14Yaq1sADMMQPT1cZ8apoWes9sM6KbGvcj9/0aB+1Dkp1QSfRLej4eiI/Bj+hP9v
-        /9p9kbJs4YLWFOWnezeir+0qT4tU0LxbniUVWWsWB4FyALapp9gZRZlLyu+EaY0RdjuCZwVrUMAf
-        qUgsTUC3BcHX+8/lu7iw/Q5c665fYfXdcOvB1wvn0slvMw6f89ItA0wK/u+a4dJ9DYjDQRiOCfbR
-        ObMm1eEWwX4Ve6Frdby4vwDXnMTt8QUAAA==
+        H4sIAAAAAAAAA6WRwQrCMAyG7z5F2V3bTcUdYn0AD4Jv0G1Rh2s723T4+M5ZmIio4O1LyJ//J4HN
+        VTesQ+dra9ZJOhMJQ1PaqjbHdRLoMM2TjZyARjrZao++tcZj32iVU9rLCXtQDww61QS8EwNPLpQ0
+        MOvFukD3KBgYpVGSPaMBPnDsj+q4oI8gF0tTrOqjdm2e1nPKVl2+vFB7UAJ4HIly/qQH/mz5zt+T
+        ouB/CJAJwXbbP82wtKb66FbZUDQoxUykwGPxzWsIFa88TgGPD4ng7/T6vhv4TNKJ9wEAAA==
     headers:
-      accept-ranges: [bytes]
-      access-control-allow-headers: ['Origin,X-Requested-With,Content-Type,Accept,DNT,Keep-Alive,User-Agent,If-Modified-Since,Cache-Control']
-      access-control-allow-methods: ['GET, POST, OPTIONS']
-      access-control-allow-origin: ['*']
-      age: ['0']
-      content-encoding: [gzip]
-      content-length: ['367']
-      content-type: [text/xml;charset=UTF-8]
-      date: ['Mon, 06 Jun 2016 18:13:21 GMT']
-      download-quota: ['200']
-      server: [lighttpd/1.4.39]
-      set-cookie: [PHPSESSID=ch3rrv6k1rq851cdkgvrg6dug2; path=/; domain=.opensubtitles.org;
-          HttpOnly, 'weblang=en; expires=Tue, 06-Jun-2017 18:13:21 GMT; Max-Age=31536000;
+      Accept-Ranges: [bytes]
+      Access-Control-Allow-Headers: ['Origin,X-Requested-With,Content-Type,Accept,DNT,Keep-Alive,User-Agent,If-Modified-Since,Cache-Control']
+      Access-Control-Allow-Methods: ['GET, POST, OPTIONS']
+      Access-Control-Allow-Origin: ['*']
+      Age: ['0']
+      Content-Encoding: [gzip]
+      Content-Length: ['223']
+      Content-type: [text/xml;charset=UTF-8]
+      Date: ['Fri, 08 Apr 2016 18:34:59 GMT']
+      Download-Quota: ['200']
+      Server: [lighttpd/1.4.39]
+      Set-Cookie: [PHPSESSID=45nb7igmrp81i3t27v85qtpfa0; path=/; domain=.opensubtitles.org;
+          HttpOnly, 'weblang=en; expires=Sat, 08-Apr-2017 18:34:59 GMT; Max-Age=31536000;
           path=/; domain=.opensubtitles.org']
-      strict-transport-security: [max-age=63072000; includeSubdomains; preload]
-      vary: [Accept-Encoding]
-      x-cache: [MISS]
-      x-cache-backend: [web3]
-      x-content-type-options: [nosniff]
-      x-frame-options: [DENY]
-      x-uncompressed-content-length: ['1521']
+      Strict-Transport-Security: [max-age=63072000; includeSubdomains; preload]
+      Vary: [Accept-Encoding]
+      X-Cache: [MISS]
+      X-Cache-Backend: [web3]
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [DENY]
+      X-Uncompressed-Content-Length: ['503']
     status: {code: 200, message: OK}
 version: 1

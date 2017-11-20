@@ -7,7 +7,7 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [Subliminal/2.0]
     method: GET
-    uri: http://podnapisi.net/subtitles/search/old?sK=Man+of+Steel&sXML=1&sY=2013&sL=fr
+    uri: https://www.podnapisi.net/subtitles/search/old?sK=Man+of+Steel&sXML=1&sY=2013&sL=fr
   response:
     body: {string: !!python/unicode "<html>\r\n<head><title>302 Found</title></head>\r\
         \n<body bgcolor=\"white\">\r\n<center><h1>302 Found</h1></center>\r\n<hr><center>nginx/1.8.0</center>\r\
@@ -17,7 +17,7 @@ interactions:
       content-length: ['160']
       content-type: [text/html]
       date: ['Tue, 09 Feb 2016 16:16:41 GMT']
-      location: ['http://www.podnapisi.net/subtitles/search/old?sK=Man+of+Steel&sXML=1&sY=2013&sL=fr']
+      location: ['https://www.podnapisi.net/subtitles/search/old?sK=Man+of+Steel&sXML=1&sY=2013&sL=fr']
       server: [nginx/1.8.0]
     status: {code: 302, message: Moved Temporarily}
 - request:
@@ -28,7 +28,7 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [Subliminal/2.0]
     method: GET
-    uri: http://www.podnapisi.net/subtitles/search/old?sK=Man+of+Steel&sXML=1&sY=2013&sL=fr
+    uri: https://www.podnapisi.net/subtitles/search/old?sK=Man+of+Steel&sXML=1&sY=2013&sL=fr
   response:
     body: {string: !!python/unicode "<html>\r\n<head><title>301 Moved Permanently</title></head>\r\
         \n<body bgcolor=\"white\">\r\n<center><h1>301 Moved Permanently</h1></center>\r\
@@ -85,7 +85,7 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [Subliminal/2.0]
     method: GET
-    uri: http://podnapisi.net/subtitles/search/old?sK=Man+of+Steel&sXML=1&sY=2013&sL=en
+    uri: https://www.podnapisi.net/subtitles/search/old?sK=Man+of+Steel&sXML=1&sY=2013&sL=en
   response:
     body: {string: !!python/unicode "<html>\r\n<head><title>302 Found</title></head>\r\
         \n<body bgcolor=\"white\">\r\n<center><h1>302 Found</h1></center>\r\n<hr><center>nginx/1.8.0</center>\r\
@@ -95,7 +95,7 @@ interactions:
       content-length: ['160']
       content-type: [text/html]
       date: ['Tue, 09 Feb 2016 16:16:41 GMT']
-      location: ['http://www.podnapisi.net/subtitles/search/old?sK=Man+of+Steel&sXML=1&sY=2013&sL=en']
+      location: ['https://www.podnapisi.net/subtitles/search/old?sK=Man+of+Steel&sXML=1&sY=2013&sL=en']
       server: [nginx/1.8.0]
     status: {code: 302, message: Moved Temporarily}
 - request:
@@ -106,7 +106,7 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [Subliminal/2.0]
     method: GET
-    uri: http://www.podnapisi.net/subtitles/search/old?sK=Man+of+Steel&sXML=1&sY=2013&sL=en
+    uri: https://www.podnapisi.net/subtitles/search/old?sK=Man+of+Steel&sXML=1&sY=2013&sL=en
   response:
     body: {string: !!python/unicode "<html>\r\n<head><title>301 Moved Permanently</title></head>\r\
         \n<body bgcolor=\"white\">\r\n<center><h1>301 Moved Permanently</h1></center>\r\
@@ -185,7 +185,7 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [Subliminal/2.0]
     method: GET
-    uri: http://podnapisi.net/subtitles/GMso/download?container=zip
+    uri: https://www.podnapisi.net/subtitles/GMso/download?container=zip
   response:
     body: {string: !!python/unicode "<html>\r\n<head><title>302 Found</title></head>\r\
         \n<body bgcolor=\"white\">\r\n<center><h1>302 Found</h1></center>\r\n<hr><center>nginx/1.8.0</center>\r\
@@ -195,7 +195,7 @@ interactions:
       content-length: ['160']
       content-type: [text/html]
       date: ['Tue, 09 Feb 2016 16:16:42 GMT']
-      location: ['http://www.podnapisi.net/subtitles/GMso/download?container=zip']
+      location: ['https://www.podnapisi.net/subtitles/GMso/download?container=zip']
       server: [nginx/1.8.0]
     status: {code: 302, message: Moved Temporarily}
 - request:
@@ -206,7 +206,7 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [Subliminal/2.0]
     method: GET
-    uri: http://www.podnapisi.net/subtitles/GMso/download?container=zip
+    uri: https://www.podnapisi.net/subtitles/GMso/download?container=zip
   response:
     body: {string: !!python/unicode "<html>\r\n<head><title>301 Moved Permanently</title></head>\r\
         \n<body bgcolor=\"white\">\r\n<center><h1>301 Moved Permanently</h1></center>\r\

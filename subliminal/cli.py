@@ -405,11 +405,10 @@ def download(obj, provider, refiner, language, age, directory, encoding, single,
                                item_show_func=lambda v: os.path.split(v.name)[1] if v is not None else '') as bar:
             for v in bar:
                 scores = get_scores(v)
-                subtitles = p.download_best_subtitles(p.list_subtitles(v, language - v.subtitle_languages),
-                                                      v, language,
-                                                      min_score=(scores['hash'] + scores['trusted'] * trusted) * min_score / 100,
-                                                      hearing_impaired=hearing_impaired, only_one=single,
-                                                      trusted=trusted)
+                adjusted_min_score = (scores['hash'] + scores['trusted'] * trusted) * min_score / 100
+                subtitles = p.download_best_subtitles(p.list_subtitles(v, language - v.subtitle_languages), v, language,
+                                                      min_score=adjusted_min_score, hearing_impaired=hearing_impaired,
+                                                      only_one=single, trusted=trusted)
                 downloaded_subtitles[v] = subtitles
 
         if p.discarded_providers:

@@ -113,15 +113,15 @@ def test_fix_line_ending():
 
 
 def test_subtitle_valid_encoding():
-    subtitle = Subtitle(Language('deu'), False, None, 'windows-1252')
+    subtitle = Subtitle(Language('deu'), encoding='windows-1252')
     assert subtitle.encoding == 'cp1252'
 
 
 def test_subtitle_empty_encoding():
-    subtitle = Subtitle(Language('deu'), False, None, None)
+    subtitle = Subtitle(Language('deu'))
     assert subtitle.encoding is None
 
 
 def test_subtitle_invalid_encoding():
-    subtitle = Subtitle(Language('deu'), False, None, 'rubbish')
+    subtitle = Subtitle(Language('deu'), encoding='rubbish')
     assert subtitle.encoding is None

@@ -5,7 +5,7 @@ from babelfish import Language, language_converters
 import pytest
 import rarfile
 from vcr import VCR
-from subliminal.exceptions import ConfigurationError, AuthenticationError
+from subliminal.exceptions import ConfigurationError, AuthenticationError, ServiceUnavailable
 from subliminal.providers.legendastv import LegendasTVSubtitle, LegendasTVProvider, LegendasTVArchive
 
 USERNAME = 'python-subliminal'
@@ -21,7 +21,7 @@ vcr = VCR(path_transformer=lambda path: path + '.yaml',
 @vcr.use_cassette()
 def test_get_archives_logged_in_as_donor():
     with LegendasTVProvider() as provider:
-        archive = provider.get_archives(34084, 2)[0]
+        archive = provider.get_archives(34084, 2, 'movie', None, None)[0]
     assert archive.id == '5515d27a72921'
     assert archive.name == 'Interstellar.2014.1080p.BluRay.x264.DTS-RARBG.eng'
     assert archive.link == ('http://legendas.tv/download/5515d27a72921/Interstellar/Interstellar_2014_1080p_BluRay_'
@@ -32,7 +32,7 @@ def test_get_archives_logged_in_as_donor():
 @vcr.use_cassette()
 def test_get_archives_logged_in_as_not_donor():
     with LegendasTVProvider() as provider:
-        archive = provider.get_archives(34084, 2)[0]
+        archive = provider.get_archives(34084, 2, 'movie', None, None)[0]
     assert archive.id == '5515d27a72921'
     assert archive.name == 'Interstellar.2014.1080p.BluRay.x264.DTS-RARBG.eng'
     assert archive.link == ('http://legendas.tv/download/5515d27a72921/Interstellar/Interstellar_2014_1080p_BluRay_'
@@ -123,29 +123,30 @@ def test_logout():
 @pytest.mark.integration
 @vcr.use_cassette
 def test_search_titles_episode(episodes):
+    video = episodes['bbt_s07e05']
     with LegendasTVProvider() as provider:
-        titles = provider.search_titles(episodes['bbt_s07e05'].series)
-    assert len(titles) == 10
-    assert set(titles.keys()) == {7623, 12620, 17710, 22056, 25314, 28507, 28900, 30730, 34546, 38908}
-    assert {t['title'] for t in titles.values()} == {episodes['bbt_s07e05'].series}
-    assert {t['season'] for t in titles.values() if t['type'] == 'episode'} == set(range(1, 10))
+        titles = provider.search_titles(video.series, video.season, video.year)
+    assert len(titles) == 1
+    assert set(titles.keys()) == {30730}
+    assert {t['title'] for t in titles.values()} == {video.series}
+    assert {t['season'] for t in titles.values() if t['type'] == 'episode'} == set([video.season])
 
 
 @pytest.mark.integration
 @vcr.use_cassette
 def test_search_titles_movie(movies):
     with LegendasTVProvider() as provider:
-        titles = provider.search_titles(movies['interstellar'].title)
-    assert len(titles) == 2
-    assert set(titles.keys()) == {34084, 37333}
-    assert {t['title'] for t in titles.values()} == {movies['interstellar'].title, 'The Science of Interstellar'}
+        titles = provider.search_titles(movies['interstellar'].title, None, movies['interstellar'].year)
+    assert len(titles) == 1
+    assert set(titles.keys()) == {34084}
+    assert {t['title'] for t in titles.values()} == {movies['interstellar'].title}
 
 
 @pytest.mark.integration
 @vcr.use_cassette
 def test_search_titles_dots():
     with LegendasTVProvider() as provider:
-        titles = provider.search_titles('11.22.63')
+        titles = provider.search_titles('11.22.63', 1, None)
     assert len(titles) == 1
     assert set(titles.keys()) == {40092}
 
@@ -154,43 +155,26 @@ def test_search_titles_dots():
 @vcr.use_cassette
 def test_search_titles_quote():
     with LegendasTVProvider() as provider:
-        titles = provider.search_titles('Marvel\'s Jessica Jones')
+        titles = provider.search_titles('Marvel\'s Jessica Jones', 1, None)
     assert len(titles) == 1
     assert set(titles.keys()) == {39376}
 
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_search_titles_with_invalid_year():
-    with LegendasTVProvider() as provider:
-        titles = provider.search_titles('Grave Danger')
-    assert len(titles) == 1
-    assert set(titles.keys()) == {22034}
-
-
-@pytest.mark.integration
-@vcr.use_cassette
 def test_search_titles_with_season_information_in_english():
     with LegendasTVProvider() as provider:
-        titles = provider.search_titles('Pretty Little Liars')
-    assert len(titles) == 7
-    assert set(titles.keys()) == {20917, 24586, 27500, 28332, 30303, 33223, 38105}
-
-
-@pytest.mark.integration
-@vcr.use_cassette
-def test_search_titles_without_season_information():
-    with LegendasTVProvider() as provider:
-        titles = provider.search_titles('The Walking Dead Webisodes Torn Apart')
+        # Season 3 uses '3rd Season'
+        titles = provider.search_titles('Pretty Little Liars', 3, 2012)
     assert len(titles) == 1
-    assert set(titles.keys()) == {25770}
+    assert set(titles.keys()) == {27500}
 
 
 @pytest.mark.integration
 @vcr.use_cassette
 def test_search_titles_containing_year_information():
     with LegendasTVProvider() as provider:
-        titles = provider.search_titles('Bull')
+        titles = provider.search_titles('Bull', 1, 2016)
     assert 42047 in titles.keys()
     t = titles[42047]
     assert t['title'], t['year'] == ('Bull', 2016)
@@ -200,7 +184,7 @@ def test_search_titles_containing_year_information():
 @vcr.use_cassette
 def test_get_archives():
     with LegendasTVProvider() as provider:
-        archives = provider.get_archives(34084, 2)
+        archives = provider.get_archives(34084, 2, 'movie', None, None)
     assert len(archives) == 2
     assert {a.id for a in archives} == {'5515d27a72921', '54a2e41d8cae4'}
     assert {a.content for a in archives} == {None}
@@ -210,7 +194,7 @@ def test_get_archives():
 @vcr.use_cassette
 def test_get_archives_no_result():
     with LegendasTVProvider() as provider:
-        archives = provider.get_archives(34084, 17)
+        archives = provider.get_archives(34084, 17, 'movie', None, None)
     assert len(archives) == 0
 
 
@@ -218,7 +202,7 @@ def test_get_archives_no_result():
 @vcr.use_cassette
 def test_download_archive():
     with LegendasTVProvider(USERNAME, PASSWORD) as provider:
-        archive = provider.get_archives(34084, 2)[0]
+        archive = provider.get_archives(34084, 2, 'movie', None, None)[0]
         provider.download_archive(archive)
     assert archive.content is not None
 
@@ -282,6 +266,40 @@ def test_list_subtitles_episode(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
+def test_list_subtitles_episode_alternative_series(episodes):
+    video = episodes['turn_s04e03']
+    languages = {Language('por', 'BR')}
+    expected_subtitles = {
+        ('5953101413fcc', 'Turn.S04E03.CONVERT.1080p.HEVC.x265-MeGusta.srt'),
+        ('5953101413fcc', 'Turn.S04E03.CONVERT.720p.WEB.h264-TBS.srt'),
+        ('5953101413fcc', 'Turn.S04E03.CONVERT.AAC.MP4-Mobile.srt'),
+        ('5953101413fcc', 'Turn.S04E03.XviD-AFG.srt'),
+        ('5953101413fcc', 'Turn.S04E03.CONVERT.XviD-AFG.srt'),
+        ('5953101413fcc', 'Turn.S04E03.WEBRip.x264-RARBG.srt'),
+        ('5953101413fcc', 'Turn.S04E03.Blood.for.Blood.720p.AMZN.WEBRip.DD5.1.x264-ViSUM.srt'),
+        ('5953101413fcc', 'Turn.S04E03.1080p.HEVC.x265-MeGusta.srt'),
+        ('5953101413fcc', 'Turn.S04E03.CONVERT.WEB.h264-TBS.srt'),
+        ('5953101413fcc', 'Turn.S04E03.Blood.for.Blood.1080p.AMZN.WEBRip.DD5.1.x264-ViSUM.srt'),
+        ('5953101413fcc', 'Turn.S04E03.480p.x264-mSD.srt'),
+        ('5953101413fcc', 'Turn.S04E03.720p.HDTV.x264-SVA.srt'),
+        ('5953101413fcc', 'TURN.Washingtons.Spies.S04E03.Blood.for.Blood.1080p.AMZN.WEBRip.DDP5.1.x264-ViSUM.srt'),
+        ('5953101413fcc', 'Turn.S04E03.1080p.WEBRip.x264-MOROSE.srt'),
+        ('5953101413fcc', 'Turn.S04E03.CONVERT.480p.x264-mSD.srt'),
+        ('5953101413fcc', 'TURN.Washingtons.Spies.S04E03.Blood.for.Blood.720p.AMZN.WEBRip.DDP5.1.x264-ViSUM.srt'),
+        ('5953101413fcc', 'Turn.S04E03.AAC.MP4-Mobile.srt'),
+        ('5953101413fcc', 'Turn.S04E03.720p.HDTV.2CH.x265.HEVC-PSA.srt'),
+        ('5953101413fcc', "TURN.Washington's.Spies.S04E03.720p.WEBRip.2CH.x265.HEVC-PSA.srt"),
+        ('5953101413fcc', 'Turn.S04E03.HDTV.x264-SVA.srt'),
+        ('5953101413fcc', 'Turn.S04E03.720p.HDTV.x264-AVS.srt'),
+        ('5953101413fcc', 'Turn.S04E03.CONVERT.1080p.WEB.h264-TBS.srt')
+    }
+    with LegendasTVProvider(USERNAME, PASSWORD) as provider:
+        subtitles = provider.list_subtitles(video, languages)
+    assert {(s.archive.id, s.name) for s in subtitles} == expected_subtitles
+
+
+@pytest.mark.integration
+@vcr.use_cassette
 def test_list_subtitles_movie(movies):
     video = movies['man_of_steel']
     languages = {Language('eng')}
@@ -301,6 +319,21 @@ def test_download_subtitle(movies):
         provider.download_subtitle(subtitles[0])
     assert subtitles[0].content is not None
     assert subtitles[0].is_valid() is True
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_under_maintenance(movies):
+    """Tests when is under maintenance and http status code 200."""
+    video = movies['man_of_steel']
+    languages = {Language('eng')}
+    with LegendasTVProvider() as provider:
+        try:
+            provider.list_subtitles(video, languages)
+        except ServiceUnavailable:
+            pass
+        else:
+            pytest.fail()
 
 
 @pytest.mark.integration

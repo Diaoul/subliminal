@@ -150,6 +150,6 @@ def test_subtitles_with_title_unicode(movies):
         provider.download_subtitle(wanted_subtitle)
     assert {subtitle.pid for subtitle in subtitles} == expected_subtitles
     assert {subtitle.language for subtitle in subtitles} == languages
-    assert matches == {'title', 'year'}
+    assert matches == {'title', 'year', 'release_group'}
     assert wanted_subtitle.content is not None
     assert wanted_subtitle.is_valid() is True

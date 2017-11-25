@@ -103,7 +103,7 @@ def test_guess_matches_episode_equivalent_release_group(episodes):
 def test_guess_matches_episode_no_year(episodes):
     video = episodes['dallas_s01e03']
     guess = {'title': video.series, 'season': video.season, 'episode': video.episode}
-    expected = {'series', 'season', 'episode', 'year'}
+    expected = {'series', 'season', 'episode', 'year', 'release_group'}
     assert guess_matches(video, guess) == expected
 
 

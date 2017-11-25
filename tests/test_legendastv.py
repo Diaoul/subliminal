@@ -345,3 +345,15 @@ def test_unrar_not_available(monkeypatch):
         assert 'UNRAR tool not available' == error.args[0]
     else:
         pytest.fail()
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_get_archive_multi_episode(episodes):
+    video = episodes['fear_walking_dead_s03e10']
+    languages = {Language('por', 'BR')}
+    # Archive is multi-episode: Fear_the_Walking_Dead_S03E09E10_HDTV_x264_SVA_AVS_AFG_RARBG_DEFLATE
+    expected_subtitle = ('59b88ce286178', 'Fear.the.Walking.Dead.S03E10.1080p.WEB-DL.DD5.1.H264-RARBG.srt')
+    with LegendasTVProvider(USERNAME, PASSWORD) as provider:
+        subtitles = provider.list_subtitles(video, languages)
+    assert expected_subtitle in {(s.archive.id, s.name) for s in subtitles}

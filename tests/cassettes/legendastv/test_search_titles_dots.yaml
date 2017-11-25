@@ -7,6 +7,37 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [Subliminal/2.0-rc1]
     method: GET
+    uri: http://legendas.tv/legenda/sugestao/11%2022%2063
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA4uOBQApu0wNAgAAAA==
+    headers:
+      accept-ranges: [bytes]
+      access-control-allow-origin: ['*']
+      age: ['0']
+      connection: [keep-alive]
+      content-encoding: [gzip]
+      content-length: ['22']
+      content-type: [text/html; charset=utf-8]
+      date: ['Wed, 19 Jul 2017 14:44:47 GMT']
+      set-cookie: [PHPSESSID=b5ur46eluq3s10cq1esn321f64; path=/; HttpOnly]
+      vary: ['User-Agent,Accept-Encoding']
+      via: [1.1 varnish]
+      x-backend: [default_director]
+      x-cache: [MISS]
+      x-cacheable: ['NO:Not Cacheable']
+      x-varnish: ['731501933']
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Cookie: [PHPSESSID=b5ur46eluq3s10cq1esn321f64]
+      User-Agent: [Subliminal/2.1]
+    method: GET
     uri: http://legendas.tv/legenda/sugestao/11.22.63
   response:
     body:

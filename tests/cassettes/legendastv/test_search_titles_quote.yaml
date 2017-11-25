@@ -7,7 +7,38 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [Subliminal/2.0]
     method: GET
-    uri: http://legendas.tv/legenda/sugestao/Marvel's%20Jessica%20Jones
+    uri: http://legendas.tv/legenda/sugestao/marvels%20jessica%20jones
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA4uOBQApu0wNAgAAAA==
+    headers:
+      accept-ranges: [bytes]
+      access-control-allow-origin: ['*']
+      age: ['0']
+      connection: [keep-alive]
+      content-encoding: [gzip]
+      content-length: ['22']
+      content-type: [text/html; charset=utf-8]
+      date: ['Wed, 19 Jul 2017 14:46:56 GMT']
+      set-cookie: [PHPSESSID=elmu0ulpm6tkm41hq1pm7j87e4; path=/; HttpOnly]
+      vary: ['Accept-Encoding,User-Agent']
+      via: [1.1 varnish]
+      x-backend: [default_director]
+      x-cache: [MISS]
+      x-cacheable: ['NO:Not Cacheable']
+      x-varnish: ['731513148']
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Cookie: [PHPSESSID=elmu0ulpm6tkm41hq1pm7j87e4]
+      User-Agent: [Subliminal/2.1]
+    method: GET
+    uri: http://legendas.tv/legenda/sugestao/marvel's%20jessica%20jones
   response:
     body:
       string: !!binary |

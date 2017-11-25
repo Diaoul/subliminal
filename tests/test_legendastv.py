@@ -338,10 +338,10 @@ def test_under_maintenance(movies):
 
 @pytest.mark.integration
 def test_unrar_not_available(monkeypatch):
-    monkeypatch.setattr(rarfile, 'UNRAR_TOOL', 'test')
+    monkeypatch.setattr(rarfile, 'UNRAR_TOOL', 'fake_unrar')
     try:
         LegendasTVProvider(USERNAME, PASSWORD)
     except ConfigurationError as error:
-        assert 'UNRAR tool not available' == error.message
+        assert 'UNRAR tool not available' == error.args[0]
     else:
         pytest.fail()

@@ -9,7 +9,7 @@ from requests import Session
 from . import ParserBeautifulSoup, Provider
 from .. import __short_version__
 from ..cache import SHOW_EXPIRATION_TIME, region
-from ..exceptions import AuthenticationError, ConfigurationError, DownloadLimitExceeded, TooManyRequests
+from ..exceptions import AuthenticationError, ConfigurationError, DownloadLimitExceeded
 from ..score import get_equivalent_release_groups
 from ..subtitle import Subtitle, fix_line_ending, guess_matches
 from ..utils import sanitize, sanitize_release_group
@@ -18,6 +18,9 @@ from ..video import Episode
 logger = logging.getLogger(__name__)
 
 language_converters.register('addic7ed = subliminal.converters.addic7ed:Addic7edConverter')
+
+# Series cell matching regex
+show_cells_re = re.compile(b'<td class="version">.*?</td>', re.DOTALL)
 
 #: Series header parsing regex
 series_year_re = re.compile(r'^(?P<series>[ \w\'.:(),&!?-]+?)(?: \((?P<year>\d{4})\))?$')
@@ -55,7 +58,8 @@ class Addic7edSubtitle(Subtitle):
         if video.episode and self.episode == video.episode:
             matches.add('episode')
         # title
-        if video.title and sanitize(self.title) == sanitize(video.title):
+        if video.title and (sanitize(self.title) in (
+                sanitize(name) for name in [video.title] + video.alternative_series)):
             matches.add('title')
         # year
         if video.original_series and self.year is None or video.year and video.year == self.year:
@@ -136,7 +140,16 @@ class Addic7edProvider(Provider):
         logger.info('Getting show ids')
         r = self.session.get(self.server_url + 'shows.php', timeout=10)
         r.raise_for_status()
-        soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
+
+        # LXML parser seems to fail when parsing Addic7ed.com HTML markup.
+        # Last known version to work properly is 3.6.4 (next version, 3.7.0, fails)
+        # Assuming the site's markup is bad, and stripping it down to only contain what's needed.
+        show_cells = re.findall(show_cells_re, r.content)
+        if show_cells:
+            soup = ParserBeautifulSoup(b''.join(show_cells), ['lxml', 'html.parser'])
+        else:
+            # If RegEx fails, fall back to original r.content and use 'html.parser'
+            soup = ParserBeautifulSoup(r.content, ['html.parser'])
 
         # populate the show ids
         show_ids = {}
@@ -168,8 +181,6 @@ class Addic7edProvider(Provider):
         logger.info('Searching show ids with %r', params)
         r = self.session.get(self.server_url + 'search.php', params=params, timeout=10)
         r.raise_for_status()
-        if r.status_code == 304:
-            raise TooManyRequests()
         soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
 
         # get the suggestion
@@ -236,8 +247,13 @@ class Addic7edProvider(Provider):
         logger.info('Getting the page of show id %d, season %d', show_id, season)
         r = self.session.get(self.server_url + 'show/%d' % show_id, params={'season': season}, timeout=10)
         r.raise_for_status()
-        if r.status_code == 304:
-            raise TooManyRequests()
+
+        if not r.content:
+            # Provider returns a status of 304 Not Modified with an empty content
+            # raise_for_status won't raise exception for that status code
+            logger.debug('No data returned from provider')
+            return []
+
         soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
 
         # loop over subtitle rows
@@ -272,8 +288,14 @@ class Addic7edProvider(Provider):
         return subtitles
 
     def list_subtitles(self, video, languages):
-        return [s for s in self.query(video.series, video.season, video.year)
-                if s.language in languages and s.episode == video.episode]
+        titles = [video.series] + video.alternative_series
+        for title in titles:
+            subtitles = [s for s in self.query(title, video.season, video.year)
+                         if s.language in languages and s.episode == video.episode]
+            if subtitles:
+                return subtitles
+
+        return []
 
     def download_subtitle(self, subtitle):
         # download the subtitle
@@ -281,6 +303,12 @@ class Addic7edProvider(Provider):
         r = self.session.get(self.server_url + subtitle.download_link, headers={'Referer': subtitle.page_link},
                              timeout=10)
         r.raise_for_status()
+
+        if not r.content:
+            # Provider returns a status of 304 Not Modified with an empty content
+            # raise_for_status won't raise exception for that status code
+            logger.debug('Unable to download subtitle. No data returned from provider')
+            return
 
         # detect download limit exceeded
         if r.headers['Content-Type'] == 'text/html':

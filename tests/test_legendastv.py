@@ -337,7 +337,6 @@ def test_under_maintenance(movies):
 
 
 @pytest.mark.integration
-@vcr.use_cassette
 def test_unrar_not_available(monkeypatch):
     monkeypatch.setattr(rarfile, 'UNRAR_TOOL', 'fake_unrar')
     try:

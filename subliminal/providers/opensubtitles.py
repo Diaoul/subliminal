@@ -27,7 +27,8 @@ class OpenSubtitlesSubtitle(Subtitle):
 
     def __init__(self, language, hearing_impaired, page_link, subtitle_id, matched_by, movie_kind, hash, movie_name,
                  movie_release_name, movie_year, movie_imdb_id, series_season, series_episode, filename, encoding):
-        super(OpenSubtitlesSubtitle, self).__init__(language, hearing_impaired, page_link, encoding)
+        super(OpenSubtitlesSubtitle, self).__init__(language, hearing_impaired=hearing_impaired,
+                                                    page_link=page_link, encoding=encoding)
         self.subtitle_id = subtitle_id
         self.matched_by = matched_by
         self.movie_kind = movie_kind

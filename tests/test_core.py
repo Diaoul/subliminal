@@ -596,11 +596,12 @@ def test_save_subtitles(movies, tmpdir, monkeypatch):
     subtitle_pt_br.content = b'Some brazilian content'
     subtitles = [subtitle_no_content, subtitle, subtitle_other, subtitle_pt_br]
 
-    save_subtitles(movies['man_of_steel'], subtitles)
+    saved_subtitles = save_subtitles(movies['man_of_steel'], subtitles)
 
     # subtitle without content is skipped
     path = os.path.join(str(tmpdir), os.path.splitext(movies['man_of_steel'].name)[0] + '.en.srt')
     assert not os.path.exists(path)
+    assert saved_subtitles[0].subtitle_path is not None
 
     # first subtitle with language is saved
     path = os.path.join(str(tmpdir), os.path.splitext(movies['man_of_steel'].name)[0] + '.fr.srt')

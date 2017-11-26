@@ -728,6 +728,10 @@ def save_subtitles(video, subtitles, single=False, directory=None, encoding=None
         else:
             with io.open(subtitle_path, 'w', encoding=encoding) as f:
                 f.write(subtitle.text)
+
+        # Stores in the Subtitle class the full path where subtitle was saved
+        subtitle.subtitle_path = subtitle_path
+
         saved_subtitles.append(subtitle)
 
         # check single

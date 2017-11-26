@@ -60,7 +60,8 @@ class OpenSubtitlesSubtitle(Subtitle):
         if isinstance(video, Episode) and self.movie_kind == 'episode':
             # tag match, assume series, year, season and episode matches
             if self.matched_by == 'tag':
-                matches |= {'series', 'year', 'season', 'episode'}
+                if not video.imdb_id or self.movie_imdb_id == video.imdb_id:
+                    matches |= {'series', 'year', 'season', 'episode'}
             # series
             if video.series and sanitize(self.series_name) == sanitize(video.series):
                 matches.add('series')
@@ -89,7 +90,8 @@ class OpenSubtitlesSubtitle(Subtitle):
         elif isinstance(video, Movie) and self.movie_kind == 'movie':
             # tag match, assume title and year matches
             if self.matched_by == 'tag':
-                matches |= {'title', 'year'}
+                if not video.imdb_id or self.movie_imdb_id == video.imdb_id:
+                    matches |= {'title', 'year'}
             # title
             if video.title and sanitize(self.movie_name) == sanitize(video.title):
                 matches.add('title')

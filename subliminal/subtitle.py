@@ -48,6 +48,9 @@ class Subtitle(object):
         #: Encoding to decode with when accessing :attr:`text`
         self.encoding = None
 
+        #: Location where subtitle was saved
+        self.subtitle_path = None
+
         # validate the encoding
         if encoding:
             try:

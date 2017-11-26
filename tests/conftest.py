@@ -34,6 +34,8 @@ def movies():
             'enders_game':
             Movie('enders.game.2013.720p.bluray.x264-sparks.mkv', 'Ender\'s Game',
                   format='BluRay', release_group='sparks', resolution='720p', video_codec='h264', year=2013),
+            'café_society':
+            Movie(u'Café Society.1080p.avc1.RARBG.mp4', u'Café Society', year=2016),
             'interstellar':
             Movie('Interstellar.2014.2014.1080p.BluRay.x264.YIFY.rar', 'Interstellar',
                   format='BluRay', release_group='YIFY', resolution='1080p', video_codec='h264', year=2014)}
@@ -99,7 +101,28 @@ def episodes():
             Episode('CSI.S15E18.720p.HDTV.X264.DIMENSION.mkv', 'CSI: Crime Scene Investigation', 15, 18,
                     title='The End Game', year=2000, tvdb_id=5104359, series_tvdb_id=72546, series_imdb_id='tt0247082',
                     format='HDTV', release_group='DIMENSION', resolution='720p', video_codec='h264',
-                    imdb_id='tt4145952')}
+                    imdb_id='tt4145952'),
+            'turn_s04e03':
+            Episode('Turn.S04E03.720p.HDTV.x264-AVS.mkv', "TURN: Washington's Spies", 4, 3,
+                    title='Blood for Blood', year=2014, tvdb_id=6124360, series_tvdb_id=272135,
+                    series_imdb_id='tt2543328',
+                    format='HDTV', release_group='AVS', resolution='720p', video_codec='h264',
+                    imdb_id='tt6137686', alternative_series=['Turn']),
+            'turn_s03e01':
+            Episode('Turn.S03E01.720p.HDTV.x264-AVS.mkv', "TURN: Washington's Spies", 3, 1,
+                    title='Valediction', year=2014, tvdb_id=5471384, series_tvdb_id=272135,
+                    series_imdb_id='tt2543328',
+                    format='HDTV', release_group='AVS', resolution='720p', video_codec='h264',
+                    imdb_id='tt4909774', alternative_series=['Turn']),
+            'marvels_jessica_jones_s01e13':
+            Episode('Marvels.Jessica.Jones.S01E13.720p.WEBRip.x264-2HD', "Marvels Jessica Jones", 1, 13,
+                    title='AKA Smile', year=2015, tvdb_id=5311273, series_tvdb_id=284190,
+                    series_imdb_id='tt2357547',
+                    format='WEBRip', release_group='2HD', resolution='720p', video_codec='h264',
+                    imdb_id='tt4162096', alternative_series=['Jessica Jones']),
+            'fear_walking_dead_s03e10':
+            Episode('Fear.the.Walking.Dead.S03E10.1080p.WEB-DL.DD5.1.H264-RARBG', 'Fear the Walking Dead', 3, 10,
+                    resolution='1080p', format='WEB-DL', video_codec='h264', release_group='RARBG')}
 
 
 @pytest.fixture(scope='session')

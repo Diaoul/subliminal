@@ -33,10 +33,11 @@ class Video(object):
     :param dict hashes: hashes of the video file by provider names.
     :param int size: size of the video file in bytes.
     :param set subtitle_languages: existing subtitle languages.
+    :param str country: Video country
 
     """
     def __init__(self, name, format=None, release_group=None, resolution=None, video_codec=None, audio_codec=None,
-                 imdb_id=None, hashes=None, size=None, subtitle_languages=None):
+                 imdb_id=None, hashes=None, size=None, subtitle_languages=None, country=None):
         #: Name or path of the video
         self.name = name
 
@@ -66,6 +67,9 @@ class Video(object):
 
         #: Existing subtitle languages
         self.subtitle_languages = subtitle_languages or set()
+
+        # Video country
+        self.country = country
 
     @property
     def exists(self):
@@ -172,7 +176,8 @@ class Episode(Video):
         return cls(name, guess['title'], guess.get('season', 1), guess['episode'], title=guess.get('episode_title'),
                    year=guess.get('year'), format=guess.get('format'), original_series='year' not in guess,
                    release_group=guess.get('release_group'), resolution=guess.get('screen_size'),
-                   video_codec=guess.get('video_codec'), audio_codec=guess.get('audio_codec'))
+                   video_codec=guess.get('video_codec'), audio_codec=guess.get('audio_codec'),
+                   country=guess.get('country'))
 
     @classmethod
     def fromname(cls, name):
@@ -216,7 +221,7 @@ class Movie(Video):
 
         return cls(name, guess['title'], format=guess.get('format'), release_group=guess.get('release_group'),
                    resolution=guess.get('screen_size'), video_codec=guess.get('video_codec'),
-                   audio_codec=guess.get('audio_codec'), year=guess.get('year'))
+                   audio_codec=guess.get('audio_codec'), year=guess.get('year'), country=guess.get('country'))
 
     @classmethod
     def fromname(cls, name):

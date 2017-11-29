@@ -122,7 +122,9 @@ def episodes():
                     imdb_id='tt4162096', alternative_series=['Jessica Jones']),
             'fear_walking_dead_s03e10':
             Episode('Fear.the.Walking.Dead.S03E10.1080p.WEB-DL.DD5.1.H264-RARBG', 'Fear the Walking Dead', 3, 10,
-                    resolution='1080p', format='WEB-DL', video_codec='h264', release_group='RARBG')}
+                    resolution='1080p', format='WEB-DL', video_codec='h264', release_group='RARBG'),
+            'shameless_us_s08e01':
+                Episode('Shameless.US.s08e01.web.h264-convoy', 'Shameless', 8, 1)}
 
 
 @pytest.fixture(scope='session')

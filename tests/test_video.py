@@ -2,6 +2,7 @@
 from datetime import datetime, timedelta
 
 import pytest
+from babelfish import Country
 from six import text_type as str
 try:
     from unittest.mock import Mock
@@ -171,3 +172,15 @@ def test_episode_fromname(episodes):
     assert video.title is None
     assert video.year is None
     assert video.tvdb_id is None
+
+
+def test_video_fromname_episode_no_country(episodes):
+    episode = episodes['bbt_s07e05']
+    video = Video.fromname(episode.name)
+    assert not video.country
+
+
+def test_video_fromname_episode_with_country(episodes):
+    episode = episodes['shameless_us_s08e01']
+    video = Video.fromname(episode.name)
+    assert type(video.country) is Country

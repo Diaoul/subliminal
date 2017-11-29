@@ -413,7 +413,6 @@ def test_list_subtitles_movie(movies, mock_providers):
     assert provider_manager['opensubtitles'].plugin.list_subtitles.called
     assert provider_manager['podnapisi'].plugin.list_subtitles.called
     assert provider_manager['shooter'].plugin.list_subtitles.called
-    assert not provider_manager['subscenter'].plugin.list_subtitles.called
     assert provider_manager['thesubdb'].plugin.list_subtitles.called
     assert not provider_manager['tvsubtitles'].plugin.list_subtitles.called
 
@@ -435,14 +434,13 @@ def test_list_subtitles_episode(episodes, mock_providers):
     assert provider_manager['opensubtitles'].plugin.list_subtitles.called
     assert provider_manager['podnapisi'].plugin.list_subtitles.called
     assert provider_manager['shooter'].plugin.list_subtitles.called
-    assert provider_manager['subscenter'].plugin.list_subtitles.called
     assert provider_manager['thesubdb'].plugin.list_subtitles.called
     assert provider_manager['tvsubtitles'].plugin.list_subtitles.called
 
     # test result
     assert len(subtitles) == 1
     assert sorted(subtitles[episodes['bbt_s07e05']]) == ['addic7ed', 'legendastv', 'opensubtitles', 'podnapisi',
-                                                         'shooter', 'subscenter', 'thesubdb', 'tvsubtitles']
+                                                         'shooter', 'thesubdb', 'tvsubtitles']
 
 
 def test_list_subtitles_providers(episodes, mock_providers):
@@ -455,7 +453,6 @@ def test_list_subtitles_providers(episodes, mock_providers):
     assert provider_manager['addic7ed'].plugin.list_subtitles.called
     assert not provider_manager['opensubtitles'].plugin.list_subtitles.called
     assert not provider_manager['podnapisi'].plugin.list_subtitles.called
-    assert not provider_manager['subscenter'].plugin.list_subtitles.called
     assert not provider_manager['thesubdb'].plugin.list_subtitles.called
     assert not provider_manager['tvsubtitles'].plugin.list_subtitles.called
 
@@ -475,14 +472,13 @@ def test_list_subtitles_episode_no_hash(episodes, mock_providers):
     assert provider_manager['legendastv'].plugin.list_subtitles.called
     assert provider_manager['opensubtitles'].plugin.list_subtitles.called
     assert provider_manager['podnapisi'].plugin.list_subtitles.called
-    assert provider_manager['subscenter'].plugin.list_subtitles.called
     assert not provider_manager['thesubdb'].plugin.list_subtitles.called
     assert provider_manager['tvsubtitles'].plugin.list_subtitles.called
 
     # test result
     assert len(subtitles) == 1
     assert sorted(subtitles[episodes['dallas_s01e03']]) == ['addic7ed', 'legendastv', 'opensubtitles', 'podnapisi',
-                                                            'shooter', 'subscenter', 'tvsubtitles']
+                                                            'shooter', 'tvsubtitles']
 
 
 def test_list_subtitles_no_language(episodes, mock_providers):
@@ -496,7 +492,6 @@ def test_list_subtitles_no_language(episodes, mock_providers):
     assert not provider_manager['addic7ed'].plugin.list_subtitles.called
     assert not provider_manager['opensubtitles'].plugin.list_subtitles.called
     assert not provider_manager['podnapisi'].plugin.list_subtitles.called
-    assert not provider_manager['subscenter'].plugin.list_subtitles.called
     assert not provider_manager['thesubdb'].plugin.list_subtitles.called
     assert not provider_manager['tvsubtitles'].plugin.list_subtitles.called
 
@@ -521,7 +516,6 @@ def test_download_subtitles(mock_providers):
     assert not provider_manager['podnapisi'].plugin.download_subtitle.called
     assert provider_manager['thesubdb'].plugin.download_subtitle.called
     assert provider_manager['tvsubtitles'].plugin.download_subtitle.called
-    assert not provider_manager['subscenter'].plugin.download_subtitle.called
 
 
 @pytest.mark.integration
@@ -632,3 +626,13 @@ def test_save_subtitles_single_directory_encoding(movies, tmpdir):
     path = os.path.join(str(tmpdir), os.path.splitext(os.path.split(movies['man_of_steel'].name)[1])[0] + '.srt')
     assert os.path.exists(path)
     assert io.open(path, encoding='utf-8').read() == u'ハローワールド'
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_download_bad_subtitle(movies):
+    pool = ProviderPool()
+    subtitles = pool.list_subtitles_provider('legendastv', movies['man_of_steel'], {Language('eng')})
+    pool.download_subtitle(subtitles[0])
+    assert subtitles[0].content is None
+    assert subtitles[0].is_valid() is False

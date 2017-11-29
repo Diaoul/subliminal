@@ -45,7 +45,8 @@ class CinemastSubtitle(Subtitle):
         # episode
         if isinstance(video, Episode):
             # series
-            if video.series and sanitize(self.series) == sanitize(video.series):
+            if video.series and (sanitize(self.title) in (
+                    sanitize(name) for name in [video.series] + video.alternative_series)):
                 matches.add('series')
             # season
             if video.season and self.season == video.season:
@@ -63,7 +64,8 @@ class CinemastSubtitle(Subtitle):
                 matches |= guess_matches(video, guessit(release, {'type': 'movie'}))
 
         # title
-        if video.title and sanitize(self.title) == sanitize(video.title):
+        if video.title and (sanitize(self.title) in (
+                sanitize(name) for name in [video.title] + video.alternative_titles)):
             matches.add('title')
 
         return matches
@@ -190,14 +192,20 @@ class CinemastProvider(Provider):
 
     def list_subtitles(self, video, languages):
         season = episode = None
-        title = video.title
+        titles = [video.title] + video.alternative_titles
 
         if isinstance(video, Episode):
-            title = video.series
+            titles = [video.series] + video.alternative_series
             season = video.season
             episode = video.episode
 
-        return [s for s in self.query(title, season, episode) if s.language in languages]
+        for title in titles:
+            subtitles = [s for l in languages for s in
+                         self.query(title, season, episode) if s.language in languages]
+            if subtitles:
+                return subtitles
+
+        return []
 
     def download_subtitle(self, subtitle):
         # download

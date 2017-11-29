@@ -493,12 +493,14 @@ def scan_videos(path, age=None, archives=True):
 
             # skip old files
             try:
-                if age and datetime.utcnow() - datetime.utcfromtimestamp(os.path.getmtime(filepath)) > age:
+                file_age = datetime.utcfromtimestamp(os.path.getmtime(filepath))
+            except ValueError:
+                logger.warning('Could not get age of file %r in %r', filename, dirpath)
+                continue
+            else:
+                if file_age and age and datetime.utcnow() - file_age > age:
                     logger.debug('Skipping old file %r in %r', filename, dirpath)
                     continue
-            except ValueError as e:
-                logger.debug('Skipping %r because of %r', filename, e)
-                continue
 
             # scan
             if filename.endswith(VIDEO_EXTENSIONS):  # video

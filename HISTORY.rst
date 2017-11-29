@@ -16,7 +16,7 @@ Changelog
 ^^^^^
 **release date:** 2016-09-03
 
-* Fix subscenter
+* Add Cinemast provider
 
 
 2.0.3

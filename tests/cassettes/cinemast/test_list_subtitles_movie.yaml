@@ -1,0 +1,87 @@
+interactions:
+- request:
+    body: username=subliminal%40gmail.com&password=subliminal
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['51']
+      User-Agent: [Subliminal/2.1]
+    method: POST
+    uri: http://www.cinemast.org/he/cinemast/api/login/
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA6tWKsnPTs1TslJQMinK1jWwSDZJNDezMEpNTUo2SDQwTDY2V9JRUCotTi0CqjGy
+        tDQyMQXyi1KLS3NKQLqKS5OTU4uLlWoBwG4/y0oAAAA=
+    headers:
+      Cache-Control: [no-cache]
+      Connection: [keep-alive]
+      Content-Encoding: [gzip]
+      Content-Language: [he]
+      Content-Type: [application/json]
+      Date: ['Wed, 29 Nov 2017 20:41:52 GMT']
+      Server: [nginx/1.10.2]
+      Vary: [Accept-Encoding]
+    status: {code: 200, message: OK}
+- request:
+    body: q=Man+of+Steel&user=299245&token=4rk-08c4a7682eebc0a01c37&type=movies
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['69']
+      User-Agent: [Subliminal/2.1]
+    method: POST
+    uri: http://www.cinemast.org/he/cinemast/api/search/
+  response:
+    body:
+      string: !!binary |
+        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
+        /gI939uwWS0AAA==
+    headers:
+      Cache-Control: [no-cache]
+      Connection: [keep-alive]
+      Content-Encoding: [gzip]
+      Content-Language: [he]
+      Content-Type: [application/json]
+      Date: ['Wed, 29 Nov 2017 20:41:52 GMT']
+      Server: [nginx/1.10.2]
+      Vary: [Accept-Encoding, Cookie]
+    status: {code: 200, message: OK}
+version: 1

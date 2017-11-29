@@ -19,13 +19,13 @@ from ..video import Episode, Movie
 logger = logging.getLogger(__name__)
 
 
-class SubsCenterSubtitle(Subtitle):
-    """SubsCenter Subtitle."""
-    provider_name = 'subscenter'
+class CinemastSubtitle(Subtitle):
+    """Cinemast Subtitle."""
+    provider_name = 'cinemast'
 
     def __init__(self, language, page_link, series, season, episode, title, subtitle_id, subtitle_key,
                  releases):
-        super(SubsCenterSubtitle, self).__init__(language, page_link=page_link)
+        super(CinemastSubtitle, self).__init__(language, page_link=page_link)
         self.series = series
         self.season = season
         self.episode = episode
@@ -69,11 +69,11 @@ class SubsCenterSubtitle(Subtitle):
         return matches
 
 
-class SubsCenterProvider(Provider):
-    """SubsCenter Provider."""
+class CinemastProvider(Provider):
+    """Cinemast Provider."""
     languages = {Language.fromalpha2(l) for l in ['he']}
     server_url = 'http://www.cinemast.org/he/cinemast/api/'
-    subtitle_class = SubsCenterSubtitle
+    subtitle_class = CinemastSubtitle
 
     default_username = 'subliminal@gmail.com'
     default_password = 'subliminal'

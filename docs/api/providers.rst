@@ -32,9 +32,9 @@ Shooter
 .. automodule:: subliminal.providers.shooter
    :private-members:
 
-SubsCenter
+Cinemast
 ----------
-.. automodule:: subliminal.providers.subscenter
+.. automodule:: subliminal.providers.cinemast
    :private-members:
 
 TheSubDB

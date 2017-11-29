@@ -10,16 +10,16 @@ def test_registrable_extension_manager_all_extensions():
     ])
     extensions = sorted(e.name for e in manager)
     assert len(extensions) == 9
-    assert extensions == ['addic7ed', 'de7cidda', 'legendastv', 'opensubtitles', 'podnapisi', 'shooter', 'cinemast',
+    assert extensions == ['addic7ed', 'cinemast', 'de7cidda', 'legendastv', 'opensubtitles', 'podnapisi', 'shooter',
                           'thesubdb', 'tvsubtitles']
 
 
 def test_registrable_extension_manager_internal_extension():
     manager = RegistrableExtensionManager('subliminal.test_providers', [
         'addic7ed = subliminal.providers.addic7ed:Addic7edProvider',
+        'cinemast = subliminal.providers.cinemast:CinemastProvider',
         'opensubtitles = subliminal.providers.opensubtitles:OpenSubtitlesProvider',
         'podnapisi = subliminal.providers.podnapisi:PodnapisiProvider',
-        'cinemast = subliminal.providers.cinemast:CinemastProvider',
         'thesubdb = subliminal.providers.thesubdb:TheSubDBProvider',
         'tvsubtitles = subliminal.providers.tvsubtitles:TVsubtitlesProvider'
     ])

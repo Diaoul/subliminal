@@ -529,7 +529,7 @@ def scan_videos(path, age=None, archives=True):
                 logger.warning('Could not get age of file %r in %r', filename, dirpath)
                 continue
             else:
-                if file_age and age and datetime.utcnow() - file_age > age:
+                if age and datetime.utcnow() - file_age > age:
                     logger.debug('Skipping old file %r in %r', filename, dirpath)
                     continue
 

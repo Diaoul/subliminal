@@ -2,7 +2,6 @@
 import bisect
 import io
 import logging
-from urllib.parse import urlencode
 import zipfile
 
 from babelfish import Language
@@ -102,7 +101,7 @@ class CinemastProvider(Provider):
 
             # actual login
             data = {'username': self.username, 'password': self.password}
-            r = self.session.post(url, data=urlencode(data), allow_redirects=False, timeout=10)
+            r = self.session.post(url, data=data, allow_redirects=False, timeout=10)
 
             if r.status_code != 200:
                 raise AuthenticationError(self.username)
@@ -148,7 +147,7 @@ class CinemastProvider(Provider):
         # get the list of subtitles
         logger.debug('Getting the list of subtitles')
         url = self.server_url + 'search/'
-        r = self.session.post(url, data=urlencode(query))
+        r = self.session.post(url, data=query)
         r.raise_for_status()
 
         try:
@@ -219,7 +218,7 @@ class CinemastProvider(Provider):
             'user': self.user_id,
             'token': self.token
         }
-        r = self.session.post(url, data=urlencode(data), params=params, timeout=10)
+        r = self.session.post(url, data=data, params=params, timeout=10)
         r.raise_for_status()
 
         # open the zip

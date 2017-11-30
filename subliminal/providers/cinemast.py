@@ -62,10 +62,10 @@ class CinemastSubtitle(Subtitle):
             for release in self.releases:
                 matches |= guess_matches(video, guessit(release, {'type': 'movie'}))
 
-        # title
-        if video.title and (sanitize(self.title) in (
-                sanitize(name) for name in [video.title] + video.alternative_titles)):
-            matches.add('title')
+            # title
+            if video.title and (sanitize(self.title) in (
+                    sanitize(name) for name in [video.title] + video.alternative_titles)):
+                matches.add('title')
 
         return matches
 
@@ -191,12 +191,13 @@ class CinemastProvider(Provider):
 
     def list_subtitles(self, video, languages):
         season = episode = None
-        titles = [video.title] + video.alternative_titles
 
         if isinstance(video, Episode):
             titles = [video.series] + video.alternative_series
             season = video.season
             episode = video.episode
+        else:
+            titles = [video.title] + video.alternative_titles
 
         for title in titles:
             subtitles = [s for l in languages for s in

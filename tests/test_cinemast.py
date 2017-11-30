@@ -30,7 +30,7 @@ def test_get_matches_episode(episodes):
     subtitle = CinemastSubtitle(Language('heb'), None, 'Game of Thrones', 3, 10, 'Mhysa', 263129,
                                 '6a3129e8b9effdb8231aa6b3caf66fbe', releases)
     matches = subtitle.get_matches(episodes['got_s03e10'])
-    assert matches == {'series', 'episode', 'season', 'title', 'year', 'video_codec'}
+    assert matches == {'series', 'episode', 'season', 'year', 'video_codec'}
 
 
 def test_get_matches_no_match(movies):

@@ -1,6 +1,6 @@
 interactions:
 - request:
-    body: !!python/unicode username=subliminal%40gmail.com&password=subliminal
+    body: username=subliminal%40gmail.com&password=subliminal
     headers:
       Accept: ['*/*']
       Accept-Encoding: ['gzip, deflate']
@@ -13,20 +13,20 @@ interactions:
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAA6tWKsnPTs1TslJQMinK1jWwSDZJNDezMEpNTUo2SDQwTDY2V9JRUCotTi0CqjGy
-        tDQyMQXyi1KLS3NKQLqKS5OTU4uLlWoBwG4/y0oAAAA=
+        H4sIAAAAAAAAA6tWKsnPTs1TslJQMinK0U1OTU41T0lOtkxJS040N7KwTLM0VtJRUCotTi0CqjGy
+        tDQyMQXyi1KLS3NKQLqKS5OTU4uLlWoBY7ygn0oAAAA=
     headers:
-      cache-control: [no-cache]
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-language: [he]
-      content-type: [application/json]
-      date: ['Thu, 30 Nov 2017 00:32:09 GMT']
-      server: [nginx/1.10.2]
-      vary: [Accept-Encoding]
+      Cache-Control: [no-cache]
+      Connection: [keep-alive]
+      Content-Encoding: [gzip]
+      Content-Language: [he]
+      Content-Type: [application/json]
+      Date: ['Thu, 30 Nov 2017 21:02:44 GMT']
+      Server: [nginx/1.10.2]
+      Vary: [Accept-Encoding]
     status: {code: 200, message: OK}
 - request:
-    body: !!python/unicode q=Man+of+Steel&token=4rk-08c4a7682eebc0a01c37&type=movies&user=299245
+    body: q=Man+of+Steel&user=299245&token=4rl-cece7dcc9dfca7289f93&type=movies
     headers:
       Accept: ['*/*']
       Accept-Encoding: ['gzip, deflate']
@@ -74,16 +74,16 @@ interactions:
         AHJIvefGwoaVcOQo1Ph89WXbbEGVw8kYJggUjLheQQAGzEmRQ21oU9vNiLuT45CUfLzuFBzQK1dV
         dM4T3tdtMbD280cpENXonPPWlyvNGLVr2W0POopIgHvgk2Ej8aMh102xF6I36g65KOgXu7NQ56yn
         m8mqE23nVQ86VplgWW+yF/0J6BAMUeHKIPuPDp/mfJ2mrwf3dLqcTf636c7Nj63XghcTOh6/+bVg
-        dbZ6LfjHjbjsf9b3tXmnVZLN2WI1Xqp3oVdZxhaqKF3yiXoF1/rNkv+m5Vmk7KOWjw/qF0WwaPz4
-        C/T1E4NZLQAA
+        dbZ6LfjHjbjsf9b3tXmnVZLN2WI1Xqp3oVdZxhaqKF3yiXoF1/rNkv+m5YkFlGMvHx/UL4pg0fjx
+        Fz4gi8JZLQAA
     headers:
-      cache-control: [no-cache]
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-language: [he]
-      content-type: [application/json]
-      date: ['Thu, 30 Nov 2017 00:32:09 GMT']
-      server: [nginx/1.10.2]
-      vary: [Accept-Encoding, Cookie]
+      Cache-Control: [no-cache]
+      Connection: [keep-alive]
+      Content-Encoding: [gzip]
+      Content-Language: [he]
+      Content-Type: [application/json]
+      Date: ['Thu, 30 Nov 2017 21:02:45 GMT']
+      Server: [nginx/1.10.2]
+      Vary: [Accept-Encoding, Cookie]
     status: {code: 200, message: OK}
 version: 1

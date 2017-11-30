@@ -128,6 +128,19 @@ def test_list_subtitles_episode(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
+def test_list_subtitles_episode_alternative_series(episodes):
+    video = episodes['turn_s04e03']
+    languages = {Language('heb')}
+    expected_subtitles = {'289777', '289099'}
+    with CinemastProvider() as provider:
+        subtitles = provider.list_subtitles(video, languages)
+    assert len(subtitles) == len(expected_subtitles)
+    assert {subtitle.id for subtitle in subtitles} == expected_subtitles
+    assert {subtitle.language for subtitle in subtitles} == languages
+
+
+@pytest.mark.integration
+@vcr.use_cassette
 def test_download_subtitle(movies):
     video = movies['enders_game']
     languages = {Language('heb')}

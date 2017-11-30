@@ -200,8 +200,7 @@ class CinemastProvider(Provider):
             titles = [video.title] + video.alternative_titles
 
         for title in titles:
-            subtitles = [s for l in languages for s in
-                         self.query(title, season, episode) if s.language in languages]
+            subtitles = [s for s in self.query(title, season, episode) if s.language in languages]
             if subtitles:
                 return subtitles
 

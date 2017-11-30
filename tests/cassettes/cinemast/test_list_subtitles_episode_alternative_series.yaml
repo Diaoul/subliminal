@@ -26,12 +26,12 @@ interactions:
       Vary: [Accept-Encoding]
     status: {code: 200, message: OK}
 - request:
-    body: q=Game+of+Thrones&user=299245&token=4rl-cece7dcc9dfca7289f93&type=series&season=3&episode=10
+    body: q=TURN%3A+Washington%27s+Spies&user=299245&token=4rl-cece7dcc9dfca7289f93&type=series&season=4&episode=3
     headers:
       Accept: ['*/*']
       Accept-Encoding: ['gzip, deflate']
       Connection: [keep-alive]
-      Content-Length: ['92']
+      Content-Length: ['104']
       Content-Type: [application/x-www-form-urlencoded]
       User-Agent: [Subliminal/2.1]
     method: POST
@@ -39,26 +39,22 @@ interactions:
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAA62VS3PaMBDHvwrjczB6S84tDSQ95HFIJ31mGD3W4NbY1DZpmAzfvZKgCVAOSdoZ
-        Rki72vVPf63Xj4mtF1WXHPfwUS9pQTd26hdJO58W1UPibTAv2tpBMGIUDE532q++PiYOWtsU866o
-        q+D+tkDcQRghi3MZ53F0WS/+sTia6MAhWzddzEyli3Jc6mYSHzNoO90VdmC1ncJgVt8XMJaE4DGm
-        lCBMGEVjysfPkbbt1tHp9/kkJNVF4yk3zAMkBj6MBscEKmjgCZZGDvUM7thR5ITICSja1n6xPsZ6
-        V8hV6RmMp/Dmky+92CHYs8W1F7+tq9ab+J/sEHU999Pedd77MG3qCtqwt3DeETQJcQvTFV0JIfIx
-        iUDhbupfVVlrF6yJVCRE3UPTbu4q5EzrPN3kTG8QHWGUMoXm6fvhh9v0gQjWn90Mn56WEEExkWH9
-        A5bBwIWzEvHcSC6wco4TwiGXubGYA5c8WR319kGYRC8jeYYY3V5f3I72OLItDgU5AYlAU8xcZhin
-        JnMcKCDDiBJwgENw8QqMT/fFMB32v6AruoehtjB0rgWRkgJQhXPtNOdSZ9gQLY1x/tx/Y9AMv5Dj
-        crpsdYpRuJ+Po3f94UU6HPIUpycnpyT1nGmQ6vPZ1S4g3dbJSqaN4UJYwRRWTGvlKAHrGBE52PwA
-        IEFSvVKo/snZ+f8tGszpHsNkw9BtGFpEwTOs5THlotHLde00dYjawsl8I6BbOCYnRtqM5chozXWm
-        KUfSGsKUkxJrfQjHO18oiiQ7r9PBSv5XcRB69Q1dnqq9MkHbdcxNRjEgih1WyqcnDllujEDGb+Uq
-        Wd2tdhp3O9Nl+ebGHaNj417dPXXB+HIEpp9PDbDeaYANtIuyi1+qhbXQRmNXzGI7Rsco/FLElFjX
-        TrecR08LTeETrH4DTUS1vPcGAAA=
+        H4sIAAAAAAAAA8VUTW/bMAz9K4Yvu3S2LNmWlVuKFdtph6RLD11hKBKTaPPXLLlrEOS/z2K6xN2h
+        h6FAAePBJEU+UnzQIVTt0LhwFiRXQWhB9mo3GqHtdqZ5CkcfdMa2GryTeVtLJ0fj/hBqsKo3nTNt
+        46PfB5LpFBE8QoH/FFEhCkQdYPhkKDR0dsHnACKQSY1icnLjW3G7oV430lRlJfstthhbJ51RsZJq
+        B3HdPhooRZ5mZcIET0RGmSgLUV4ylXWn7OhHt/VFpenHEbEYzWKSx5Qk3Ae20EAP50nZZEY4ze5P
+        NbKGcgfvcyH7cX/YOEmwmXGftm3s6KJ/WwPc1e3QN8GdtOOSt248ESw7A9anGD3G/Y359GHtjKvA
+        FziEOJRfe/u7qVqpLUpC+KRH6O2zCnzlaEnSG8IiTkkXffl0u4qeaJ5+nK+WZ4aQFoJzvNefsPeO
+        FJSkSc41o1pTBTQBoalkXNKc8ZyHx6vgH3L6GvmFd7mavy1vwtNXiO9urhemO1Ev5ovrzy/IiRBT
+        8k2qIaNEEF7IDWVM5JDDWkqiZMp0ER4fji+EbmtZVf8tdMxGoR8fzvLAPnxPv3CSb4uvs4k0Pky0
+        0YMdKofPw6AUWHQ6U6PayYz4LyJUiAJfCrfvMGKh9wWOfwDF3P0ybAQAAA==
     headers:
       Cache-Control: [no-cache]
       Connection: [keep-alive]
       Content-Encoding: [gzip]
       Content-Language: [he]
       Content-Type: [application/json]
-      Date: ['Thu, 30 Nov 2017 21:02:45 GMT']
+      Date: ['Thu, 30 Nov 2017 21:02:46 GMT']
       Server: [nginx/1.10.2]
       Vary: [Accept-Encoding, Cookie]
     status: {code: 200, message: OK}

@@ -27,7 +27,7 @@ def test_get_matches_episode(episodes):
     subtitle = WizdomSubtitle(Language('heb'), False, None, 'Game of Thrones', 3, 10, 'Mhysa', 'tt0944947',
                               '3748', releases)
     matches = subtitle.get_matches(episodes['got_s03e10'])
-    assert matches == {'series', 'episode', 'season', 'title', 'year', 'video_codec', 'resolution', 'series_imdb_id'}
+    assert matches == {'series', 'episode', 'season', 'year', 'video_codec', 'resolution', 'series_imdb_id'}
 
 
 def test_get_matches_no_match(movies):
@@ -114,6 +114,19 @@ def test_list_subtitles_episode(episodes):
     video = episodes['got_s03e10']
     languages = {Language('heb')}
     expected_subtitles = {'166995', '46192', '39541', '40067', '40068', '4231', '4232', '3748', '71362', '61901'}
+    with WizdomProvider() as provider:
+        subtitles = provider.list_subtitles(video, languages)
+    assert len(subtitles) == len(expected_subtitles)
+    assert {subtitle.id for subtitle in subtitles} == expected_subtitles
+    assert {subtitle.language for subtitle in subtitles} == languages
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_list_subtitles_episode_alternative_series(episodes):
+    video = episodes['turn_s04e03']
+    languages = {Language('heb')}
+    expected_subtitles = {'187862'}
     with WizdomProvider() as provider:
         subtitles = provider.list_subtitles(video, languages)
     assert len(subtitles) == len(expected_subtitles)

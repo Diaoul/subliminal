@@ -46,7 +46,8 @@ class WizdomSubtitle(Subtitle):
         # episode
         if isinstance(video, Episode):
             # series
-            if video.series and sanitize(self.series) == sanitize(video.series):
+            if video.series and (sanitize(self.title) in (
+                    sanitize(name) for name in [video.series] + video.alternative_series)):
                 matches.add('series')
             # season
             if video.season and self.season == video.season:
@@ -66,9 +67,10 @@ class WizdomSubtitle(Subtitle):
             for release in self.releases:
                 matches |= guess_matches(video, guessit(release, {'type': 'movie'}))
 
-        # title
-        if video.title and sanitize(self.title) == sanitize(video.title):
-            matches.add('title')
+            # title
+            if video.title and (sanitize(self.title) in (
+                    sanitize(name) for name in [video.title] + video.alternative_titles)):
+                matches.add('title')
 
         return matches
 
@@ -172,18 +174,25 @@ class WizdomProvider(Provider):
 
     def list_subtitles(self, video, languages):
         season = episode = None
-        title = video.title
         year = video.year
         filename = video.name
         imdb_id = video.imdb_id
 
         if isinstance(video, Episode):
-            title = video.series
+            titles = [video.series] + video.alternative_series
             season = video.season
             episode = video.episode
             imdb_id = video.series_imdb_id
+        else:
+            titles = [video.title] + video.alternative_titles
 
-        return [s for s in self.query(title, season, episode, year, filename, imdb_id) if s.language in languages]
+        for title in titles:
+            subtitles = [s for s in
+                         self.query(title, season, episode, year, filename, imdb_id) if s.language in languages]
+            if subtitles:
+                return subtitles
+
+        return []
 
     def download_subtitle(self, subtitle):
         # download

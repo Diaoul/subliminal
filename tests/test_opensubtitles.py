@@ -260,3 +260,19 @@ def test_download_subtitle(movies):
     assert subtitles[0].content is not None
     assert subtitles[0].is_valid() is True
     assert subtitles[0].encoding == 'cp1252'
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_tag_match(episodes):
+    video = episodes['the fall']
+    languages = {Language('por', 'BR')}
+    unwanted_subtitle_id = '1954369181'  # 'Doc.Martin.S03E01.(24 September 2007).[TVRip (Xvid)]-spa.srt'
+    with OpenSubtitlesProvider() as provider:
+        subtitles = provider.list_subtitles(video, languages)
+        found_subtitle = [s for s in subtitles if s.id == unwanted_subtitle_id and s.matched_by == 'tag'][0]
+        matches = found_subtitle.get_matches(video)
+    assert len(subtitles) > 0
+    assert unwanted_subtitle_id in {subtitle.id for subtitle in subtitles}
+    # Assert is not a tag match: {'series', 'year', 'season', 'episode'}
+    assert matches == {'episode', 'year', 'season'}

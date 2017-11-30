@@ -86,16 +86,16 @@ class NapiProjektProvider(Provider):
             'f': hash,
             't': get_subhash(hash)}
         logger.info('Searching subtitle %r', params)
-        response = self.session.get(self.server_url, params=params, timeout=10)
-        response.raise_for_status()
+        r = self.session.get(self.server_url, params=params, timeout=10)
+        r.raise_for_status()
 
         # handle subtitles not found and errors
-        if response.content[:4] == b'NPc0':
+        if r.content[:4] == b'NPc0':
             logger.debug('No subtitles found')
             return None
 
         subtitle = self.subtitle_class(language, hash)
-        subtitle.content = response.content
+        subtitle.content = r.content
         logger.debug('Found subtitle %r', subtitle)
 
         return subtitle

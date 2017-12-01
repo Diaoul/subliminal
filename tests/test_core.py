@@ -431,7 +431,7 @@ def test_list_subtitles_episode(episodes, mock_providers):
 
     # test providers
     assert provider_manager['addic7ed'].plugin.list_subtitles.called
-    assert provider_manager['cinemast'].plugin.list_subtitles.called
+    assert not provider_manager['cinemast'].plugin.list_subtitles.called
     assert provider_manager['legendastv'].plugin.list_subtitles.called
     assert provider_manager['opensubtitles'].plugin.list_subtitles.called
     assert provider_manager['podnapisi'].plugin.list_subtitles.called
@@ -441,7 +441,7 @@ def test_list_subtitles_episode(episodes, mock_providers):
 
     # test result
     assert len(subtitles) == 1
-    assert sorted(subtitles[episodes['bbt_s07e05']]) == ['addic7ed', 'cinemast', 'legendastv', 'opensubtitles',
+    assert sorted(subtitles[episodes['bbt_s07e05']]) == ['addic7ed', 'legendastv', 'opensubtitles',
                                                          'podnapisi', 'shooter', 'thesubdb', 'tvsubtitles']
 
 
@@ -472,7 +472,7 @@ def test_list_subtitles_episode_no_hash(episodes, mock_providers):
 
     # test providers
     assert provider_manager['addic7ed'].plugin.list_subtitles.called
-    assert provider_manager['cinemast'].plugin.list_subtitles.called
+    assert not provider_manager['cinemast'].plugin.list_subtitles.called
     assert provider_manager['legendastv'].plugin.list_subtitles.called
     assert provider_manager['opensubtitles'].plugin.list_subtitles.called
     assert provider_manager['podnapisi'].plugin.list_subtitles.called
@@ -481,7 +481,7 @@ def test_list_subtitles_episode_no_hash(episodes, mock_providers):
 
     # test result
     assert len(subtitles) == 1
-    assert sorted(subtitles[episodes['dallas_s01e03']]) == ['addic7ed', 'cinemast', 'legendastv', 'opensubtitles',
+    assert sorted(subtitles[episodes['dallas_s01e03']]) == ['addic7ed', 'legendastv', 'opensubtitles',
                                                             'podnapisi', 'shooter', 'tvsubtitles']
 
 

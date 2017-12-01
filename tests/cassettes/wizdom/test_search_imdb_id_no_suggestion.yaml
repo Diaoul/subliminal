@@ -14,23 +14,57 @@ interactions:
         H4sIAAAAAAAAA6tWKkhMT1WyMtRRKskvScyJL0otLs0pKVayMoCJgBQUg1XA5aJjawFr1jcgOQAA
         AA==
     headers:
+      access-control-allow-origin: ['*']
+      access-control-expose-headers: ['ETag, X-RateLimit-Limit, X-RateLimit-Remaining,
+          X-RateLimit-Reset, Retry-After']
+      cache-control: ['public, max-age=28800']
+      cf-cache-status: [MISS]
+      cf-ray: [3c61e5b070886779-EZE]
+      connection: [keep-alive]
+      content-encoding: [gzip]
+      content-type: [application/json;charset=utf-8]
+      date: ['Fri, 01 Dec 2017 00:23:20 GMT']
+      expires: ['Fri, 01 Dec 2017 08:23:20 GMT']
+      server: [cloudflare-nginx]
+      set-cookie: ['__cfduid=d11b938b68b2636d80e68b0a877382ff31512087800; expires=Sat,
+          01-Dec-18 00:23:20 GMT; path=/; domain=.tmdb.org; HttpOnly']
+      vary: [Accept-Encoding]
+      x-ratelimit-limit: ['40']
+      x-ratelimit-remaining: ['39']
+      x-ratelimit-reset: ['1512087810']
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [Subliminal/2.1]
+    method: GET
+    uri: http://api.tmdb.org/3/search/tv?api_key=a51ee051bcd762543373903de296e0a3&query=This%20is%20a%20test&language=en
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA6tWKkhMT1WyMtRRKskvScyJL0otLs0pKVayMoCJgBQUg1XA5aJjawFr1jcgOQAA
+        AA==
+    headers:
       Access-Control-Allow-Origin: ['*']
       Access-Control-Expose-Headers: ['ETag, X-RateLimit-Limit, X-RateLimit-Remaining,
           X-RateLimit-Reset, Retry-After']
-      CF-Cache-Status: [HIT]
-      CF-RAY: [3c60d04391956a3d-LHR]
+      CF-Cache-Status: [MISS]
+      CF-RAY: [3c61e6b7760b4b8d-GRU]
       Cache-Control: ['public, max-age=28800']
       Connection: [keep-alive]
       Content-Encoding: [gzip]
       Content-Type: [application/json;charset=utf-8]
-      Date: ['Thu, 30 Nov 2017 21:13:57 GMT']
-      Expires: ['Fri, 01 Dec 2017 05:13:57 GMT']
+      Date: ['Fri, 01 Dec 2017 00:24:02 GMT']
+      Expires: ['Fri, 01 Dec 2017 08:24:02 GMT']
       Server: [cloudflare-nginx]
-      Set-Cookie: ['__cfduid=d7bafb49d82586819cb6ee120d371dec51512076437; expires=Fri,
-          30-Nov-18 21:13:57 GMT; path=/; domain=.tmdb.org; HttpOnly']
+      Set-Cookie: ['__cfduid=d56dfc0e7bd92b47da2a888970b23d2891512087842; expires=Sat,
+          01-Dec-18 00:24:02 GMT; path=/; domain=.tmdb.org; HttpOnly']
       Vary: [Accept-Encoding]
       X-RateLimit-Limit: ['40']
       X-RateLimit-Remaining: ['39']
-      X-RateLimit-Reset: ['1512076411']
+      X-RateLimit-Reset: ['1512087852']
     status: {code: 200, message: OK}
 version: 1

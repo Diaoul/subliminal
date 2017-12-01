@@ -15,25 +15,25 @@ vcr = VCR(path_transformer=lambda path: path + '.yaml',
 
 
 def test_get_matches_movie(movies):
-    releases = ['Enders.Game.2013.720p.BluRay.x264-SPARKS']
+    release = 'Enders.Game.2013.720p.BluRay.x264-SPARKS'
     subtitle = WizdomSubtitle(Language('heb'), False, None, None, None, None, 'Ender\'s Game', 'tt1731141',
-                              '18947', releases)
+                              '18947', release)
     matches = subtitle.get_matches(movies['enders_game'])
     assert matches == {'title', 'year', 'resolution', 'video_codec', 'format', 'release_group'}
 
 
 def test_get_matches_episode(episodes):
-    releases = ['Game.of.Thrones.S03E10.720p.HDTV.x264-EVOLVE']
+    release = 'Game.of.Thrones.S03E10.720p.HDTV.x264-EVOLVE'
     subtitle = WizdomSubtitle(Language('heb'), False, None, 'Game of Thrones', 3, 10, 'Mhysa', 'tt0944947',
-                              '3748', releases)
+                              '3748', release)
     matches = subtitle.get_matches(episodes['got_s03e10'])
     assert matches == {'series', 'episode', 'season', 'year', 'video_codec', 'resolution', 'series_imdb_id'}
 
 
 def test_get_matches_no_match(movies):
-    releases = ['Game.of.Thrones.S03E10.720p.HDTV.x264-EVOLVE']
+    release = 'Game.of.Thrones.S03E10.720p.HDTV.x264-EVOLVE'
     subtitle = WizdomSubtitle(Language('heb'), False, None, 'Game of Thrones', 3, 10, 'Mhysa', 'tt0944947',
-                              '3748', releases)
+                              '3748', release)
     matches = subtitle.get_matches(movies['man_of_steel'])
     assert matches == {'video_codec', 'resolution'}
 

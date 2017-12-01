@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import bisect
 import io
 import logging
 import os
@@ -25,7 +24,7 @@ class WizdomSubtitle(Subtitle):
     provider_name = 'wizdom'
 
     def __init__(self, language, hearing_impaired, page_link, series, season, episode, title, imdb_id, subtitle_id,
-                 releases):
+                 release):
         super(WizdomSubtitle, self).__init__(language, hearing_impaired, page_link)
         self.series = series
         self.season = season
@@ -33,8 +32,7 @@ class WizdomSubtitle(Subtitle):
         self.title = title
         self.imdb_id = imdb_id
         self.subtitle_id = subtitle_id
-        self.downloaded = 0
-        self.releases = releases
+        self.release = release
 
     @property
     def id(self):
@@ -59,13 +57,11 @@ class WizdomSubtitle(Subtitle):
             if video.series_imdb_id and self.imdb_id == video.series_imdb_id:
                 matches.add('series_imdb_id')
             # guess
-            for release in self.releases:
-                matches |= guess_matches(video, guessit(release, {'type': 'episode'}))
+            matches |= guess_matches(video, guessit(self.release, {'type': 'episode'}))
         # movie
         elif isinstance(video, Movie):
             # guess
-            for release in self.releases:
-                matches |= guess_matches(video, guessit(release, {'type': 'movie'}))
+            matches |= guess_matches(video, guessit(self.release, {'type': 'movie'}))
 
             # title
             if video.title and (sanitize(self.title) in (
@@ -157,16 +153,9 @@ class WizdomProvider(Provider):
             subtitle_id = result['id']
             release = result['version']
 
-            # add the release and increment downloaded count if we already have the subtitle
-            if subtitle_id in subtitles:
-                logger.debug('Found additional release %r for subtitle %d', release, subtitle_id)
-                bisect.insort_left(subtitles[subtitle_id].releases, release)  # deterministic order
-                subtitles[subtitle_id].downloaded += 1
-                continue
-
             # otherwise create it
             subtitle = WizdomSubtitle(language, hearing_impaired, page_link, title, season, episode, title, imdb_id,
-                                      subtitle_id, [release])
+                                      subtitle_id, release)
             logger.debug('Found subtitle %r', subtitle)
             subtitles[subtitle_id] = subtitle
 

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import bisect
 import io
 import logging
 import zipfile
@@ -22,8 +21,7 @@ class CinemastSubtitle(Subtitle):
     """Cinemast Subtitle."""
     provider_name = 'cinemast'
 
-    def __init__(self, language, page_link, series, season, episode, title, subtitle_id, subtitle_key,
-                 releases):
+    def __init__(self, language, page_link, series, season, episode, title, subtitle_id, subtitle_key, release):
         super(CinemastSubtitle, self).__init__(language, page_link=page_link)
         self.series = series
         self.season = season
@@ -31,8 +29,7 @@ class CinemastSubtitle(Subtitle):
         self.title = title
         self.subtitle_id = subtitle_id
         self.subtitle_key = subtitle_key
-        self.downloaded = 0
-        self.releases = releases
+        self.release = release
 
     @property
     def id(self):
@@ -54,13 +51,11 @@ class CinemastSubtitle(Subtitle):
             if video.episode and self.episode == video.episode:
                 matches.add('episode')
             # guess
-            for release in self.releases:
-                matches |= guess_matches(video, guessit(release, {'type': 'episode'}))
+            matches |= guess_matches(video, guessit(self.release, {'type': 'episode'}))
         # movie
         elif isinstance(video, Movie):
             # guess
-            for release in self.releases:
-                matches |= guess_matches(video, guessit(release, {'type': 'movie'}))
+            matches |= guess_matches(video, guessit(self.release, {'type': 'movie'}))
 
             # title
             if video.title and (sanitize(self.title) in (
@@ -117,6 +112,10 @@ class CinemastProvider(Provider):
             except ValueError:
                 raise AuthenticationError(self.username)
 
+    @staticmethod
+    def _slugify_title(title):
+        return title.lower().replace(' ', '-').replace('\'', '').replace('"', '').replace('.', '').replace(';', '')
+
     def terminate(self):
         # logout
         if self.token or self.user_id:
@@ -159,7 +158,7 @@ class CinemastProvider(Provider):
         subtitles = {}
         for group_data in results.get('data', []):
             # create page link
-            slug_name = group_data.get('name_en').lower().replace(' ', '-').replace('\'', '').replace('"', '')
+            slug_name = self._slugify_title(group_data.get('name_en'))
             if query['type'] == 'series':
                 page_link = self.server_url + 'subtitle/series/{}/{}/{}/'.format(slug_name, season, episode)
             else:
@@ -174,16 +173,9 @@ class CinemastProvider(Provider):
                     subtitle_key = subtitle_item['key']
                     release = subtitle_item['version']
 
-                    # add the release and increment downloaded count if we already have the subtitle
-                    if subtitle_id in subtitles:
-                        logger.debug('Found additional release %r for subtitle %r', release, subtitle_id)
-                        bisect.insort_left(subtitles[subtitle_id].releases, release)  # deterministic order
-                        subtitles[subtitle_id].downloaded += 1
-                        continue
-
                     # otherwise create it
                     subtitle = self.subtitle_class(language, page_link, title, season, episode, title, subtitle_id,
-                                                   subtitle_key, [release])
+                                                   subtitle_key, release)
                     logger.debug('Found subtitle %r', subtitle)
                     subtitles[subtitle_id] = subtitle
 
@@ -210,7 +202,7 @@ class CinemastProvider(Provider):
         # download
         url = self.server_url + 'subtitle/download/{}/'.format(subtitle.language.alpha2)
         params = {
-            'v': subtitle.releases[0],
+            'v': subtitle.release,
             'key': subtitle.subtitle_key,
             'sub_id': subtitle.subtitle_id
         }

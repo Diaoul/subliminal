@@ -1,6 +1,6 @@
 interactions:
 - request:
-    body: !!python/unicode username=subliminal%40gmail.com&password=subliminal
+    body: username=subliminal%40gmail.com&password=subliminal
     headers:
       Accept: ['*/*']
       Accept-Encoding: ['gzip, deflate']
@@ -13,80 +13,20 @@ interactions:
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAA6tWKsnPTs1TslJQMinK0U1OTU41T0lOtkxJS040N7KwTLM0VtJRUCotTi0CqjGy
-        tDQyMQXyi1KLS3NKQLqKS5OTU4uLlWoBY7ygn0oAAAA=
+        H4sIAAAAAAAAA6tWKsnPTs1TslJQMinK1U0yMrEwM0sztjQzTzJOTjM0Mkg2VNJRUCotTi0CqjGy
+        tDQyMQXyi1KLS3NKQLqKS5OTU4uLlWoBGvgVvEoAAAA=
     headers:
       Cache-Control: [no-cache]
       Connection: [keep-alive]
       Content-Encoding: [gzip]
       Content-Language: [he]
       Content-Type: [application/json]
-      Date: ['Thu, 30 Nov 2017 21:02:44 GMT']
+      Date: ['Fri, 01 Dec 2017 12:25:55 GMT']
       Server: [nginx/1.10.2]
       Vary: [Accept-Encoding]
     status: {code: 200, message: OK}
 - request:
-    body: !!python/unicode q=Dallas&user=299245&token=4rl-cece7dcc9dfca7289f93&type=series&season=1&episode=3
-    headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      Content-Length: ['82']
-      Content-Type: [application/x-www-form-urlencoded]
-      User-Agent: [Subliminal/2.1]
-    method: POST
-    uri: http://www.cinemast.org/he/cinemast/api/search/
-  response:
-    body:
-      string: !!binary |
-        H4sIAAAAAAAAA61UbWvbMBD+K8GfW0dvlu1+KzjbCl0LyegKSwmyfE60+W2WnDWE/PdK6kvSUmjY
-        ZozQ3em557kTp20g26ExwdkIn4wCDaKXK2sEulup5j6wPuiUbgtwTursQhhhjR/boAAte9UZ1TYu
-        Oh9QVFC/Ir/K/R6wg5rVUOeNUNWiEv3SpxxrI4ySYynkCsZ1u1awSGKKF5jyiFDGE76I0sUeKbV5
-        RIc/u6VLKlRvJflkBI8RHxOEiQssoYEeXiuDxO/Br8ydakQNixUcV8DG9scTPVHYfum20dZFn1OB
-        70Umqkro0bwZ2W/euLOqsAFXmsMNuVGmAofcBp7d9bP901StKJw3iBxmDb1+6u5jxtAxhzOEJ4iG
-        2U02VV14u1bZ6XTy/XyavfAEhDOGY2f/go1zlCyhImVYEAAQrKQMQxyzWFIsyhJFwe5k9EYCYenH
-        ImKCuvBL9u0mvLWcp9nF18nV7OL66kBKxBNGDqQwEkGOaB5zIDyxuUqKo5InZVoyIYC8J4UeIcWr
-        uHcqLq8v/y8/juMj+f1tnH/6/IafHvBznHMSJTQRNCGISoIjihCBNE2KFOXsPX76MT1Lnm/C96Ce
-        Zf+k4W73amJ1bRn/emI92k/s7u5lbnxhTtPvfUXO7EEPlfGv0CAlaO80qvZDis6Q+0NEKeX+Usym
-        8xENvbITtXsAT/9sKNMEAAA=
-    headers:
-      Cache-Control: [no-cache]
-      Connection: [keep-alive]
-      Content-Encoding: [gzip]
-      Content-Language: [he]
-      Content-Type: [application/json]
-      Date: ['Thu, 30 Nov 2017 21:02:44 GMT']
-      Server: [nginx/1.10.2]
-      Vary: [Accept-Encoding, Cookie]
-    status: {code: 200, message: OK}
-- request:
-    body: !!python/unicode username=subliminal%40gmail.com&password=subliminal
-    headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      Content-Length: ['51']
-      Content-Type: [application/x-www-form-urlencoded]
-      User-Agent: [Subliminal/2.1]
-    method: POST
-    uri: http://www.cinemast.org/he/cinemast/api/login/
-  response:
-    body:
-      string: !!binary |
-        H4sIAAAAAAAAA6tWKsnPTs1TslJQMinK0U1OTU41T0lOtkxJS040N7KwTLM0VtJRUCotTi0CqjGy
-        tDQyMQXyi1KLS3NKQLqKS5OTU4uLlWoBY7ygn0oAAAA=
-    headers:
-      Cache-Control: [no-cache]
-      Connection: [keep-alive]
-      Content-Encoding: [gzip]
-      Content-Language: [he]
-      Content-Type: [application/json]
-      Date: ['Thu, 30 Nov 2017 22:09:42 GMT']
-      Server: [nginx/1.10.2]
-      Vary: [Accept-Encoding]
-    status: {code: 200, message: OK}
-- request:
-    body: !!python/unicode q=Dallas&user=299245&token=4rl-cece7dcc9dfca7289f93&type=series&season=1&episode=3
+    body: q=Dallas&user=299245&token=4rm-b24866f3967b3cf120c1&type=series&season=1&episode=3
     headers:
       Accept: ['*/*']
       Accept-Encoding: ['gzip, deflate']
@@ -100,83 +40,23 @@ interactions:
     body:
       string: !!binary |
         H4sIAAAAAAAAA61UbWvbMBD+K8GfW0dvtuV+KzjbCl0LyegKSwmyfE60+W2WnDWE/PdK6kvSUmjY
-        ZozQ3enuee7Eo20g26ExwdkIn4wCDaKXK2sEulup5j6wPuiUbgtwTursQhhhjR/boAAte9UZ1TYu
-        Oh9QVFC/Ir/K/R6wSzWroc4boapFJfqlLznWRhglx1LIFYzrdq1gwROKF5jGEaEs5vEiShf7TKnN
-        Y3b4s1u6okL1lpIvRvAYxWOCMHGBJTTQw2tmwP0e/MrcqUbUsFjBcQ1s7Hw80BOEnZduG21d9LkU
-        +FlkoqqEHs2bkf3mjTurChtwrbm8ITfKVOAyt4FHd/Ns/zRVKwrnDSKXs4ZeP033sWLokMMZwhNE
-        w+wmm6ouvF2r7HQ6+X4+zV5wAhIzhhNn/4KNc5SMU5EyLAgACFZShiFJWCIpFmWJomB3MnpDgbD0
-        YxIJQV34Jft2E95azNPs4uvkanZxfXVAJYo5IwdUGIkgRzRPYiAxt7VKiqMy5mVaMiGAvEeFHkHF
-        s7h3LC6vL/8vPk6SI/H9bZx/+vwGnx7gxziPScQpF5QTRCXBEUWIQJryIkU5ew+ffgzP+PNN+BnU
-        s+yfONztXilW1xbxrxXrs71id3cvuvGNOU6/9x05swc9VMa/QoOUoL3TqNqLFJ0h94eIMsS8SMym
-        8xENvbKK2j0A+DkFpdMEAAA=
+        ZozQ3em557mTz9tAtkNjgrMRPhkFGkQvV9YIdLdSzX1gfdAp3RbgnNTZhTDCGj+2QQFa9qozqm1c
+        dD6gqKB+RX6V+z1gBzWroc4boapFJfqlTznWRhglx1LIFYzrdq1gwROKF5jGEaEs5vEiShd7pNTm
+        ER3+7JYuqVC9leSTETxG8ZggTFxgCQ308FoZcL8HvzJ3qhE1LFZwXAEb2x9P9ERh+6XbRlsXfU4F
+        vheZqCqhR/NmZJ95486qwgZcaQ435EaZChxyG3h218/2T1O1onDeIHKYNfT6qbuPGUPHHM4QniAa
+        ZjfZVHXh7Vplp9PJ9/Np9sITkJgxnDj7F2yco2ScipRhQQBAsJIyDEnCEkmxKEsUBbuT0RsJhKUf
+        i0gI6sIv2beb8NZynmYXXydXs4vrqwMpUcwZOZDCSAQ5onkSA4m5zVVSHJUxL9OSCQHkPSn0CCle
+        xb1TcXl9+X/5cZIcye9v4/zT5zf89IA/xnlMIk65oJwgKgmOKEIE0pQXKcrZe/z0Y3rGn2/C96Ce
+        Zf+k4W73amJ1bRn/emI92k/s7u5lbnxhTtPvfUXO7EEPlfF/oUFK0N5pVO2HFJ0h94aI0iT1H4XZ
+        dD6ioVd2onYPLEplJ9MEAAA=
     headers:
       Cache-Control: [no-cache]
       Connection: [keep-alive]
       Content-Encoding: [gzip]
       Content-Language: [he]
       Content-Type: [application/json]
-      Date: ['Thu, 30 Nov 2017 22:09:42 GMT']
+      Date: ['Fri, 01 Dec 2017 12:25:55 GMT']
       Server: [nginx/1.10.2]
       Vary: [Accept-Encoding, Cookie]
-    status: {code: 200, message: OK}
-- request:
-    body: !!python/unicode username=subliminal%40gmail.com&password=subliminal
-    headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      Content-Length: ['51']
-      Content-Type: [application/x-www-form-urlencoded]
-      User-Agent: [Subliminal/2.1]
-    method: POST
-    uri: http://www.cinemast.org/he/cinemast/api/login/
-  response:
-    body:
-      string: !!binary |
-        H4sIAAAAAAAAA6tWKsnPTs1TslJQMinK0U1OTU41T0lOtkxJS040N7KwTLM0VtJRUCotTi0CqjGy
-        tDQyMQXyi1KLS3NKQLqKS5OTU4uLlWoBY7ygn0oAAAA=
-    headers:
-      cache-control: [no-cache]
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-language: [he]
-      content-type: [application/json]
-      date: ['Thu, 30 Nov 2017 22:10:19 GMT']
-      server: [nginx/1.10.2]
-      vary: [Accept-Encoding]
-    status: {code: 200, message: OK}
-- request:
-    body: !!python/unicode episode=3&season=1&q=Dallas&token=4rl-cece7dcc9dfca7289f93&user=299245&type=series
-    headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      Content-Length: ['82']
-      Content-Type: [application/x-www-form-urlencoded]
-      User-Agent: [Subliminal/2.1]
-    method: POST
-    uri: http://www.cinemast.org/he/cinemast/api/search/
-  response:
-    body:
-      string: !!binary |
-        H4sIAAAAAAAAA61UbWvbMBD+K8GfW0dvtuV+KzjbCl0LyegKSwmyfE60+W2WnDWE/PdK6kvSUmjY
-        ZozQ3enuee7Eo20g26ExwdkIn4wCDaKXK2sEulup5j6wPuiUbgtwTursQhhhjR/boAAte9UZ1TYu
-        Oh9QVFC/Ir/K/R6wSzWroc4boapFJfqlLznWRhglx1LIFYzrdq1gwROKF5jGEaEs5vEiShf7TKnN
-        Y3b4s1u6okL1lpIvRvAYxWOCMHGBJTTQw2tmwP0e/MrcqUbUsFjBcQ1s7Hw80BOEnZduG21d9LkU
-        +FlkoqqEHs2bkf3mjTurChtwrbm8ITfKVOAyt4FHd/Ns/zRVKwrnDSKXs4ZeP033sWLokMMZwhNE
-        w+wmm6ouvF2r7HQ6+X4+zV5wAhIzhhNn/4KNc5SMU5EyLAgACFZShiFJWCIpFmWJomB3MnpDgbD0
-        YxIJQV34Jft2E95azNPs4uvkanZxfXVAJYo5IwdUGIkgRzRPYiAxt7VKiqMy5mVaMiGAvEeFHkHF
-        s7h3LC6vL/8vPk6SI/H9bZx/+vwGnx7gxziPScQpF5QTRCXBEUWIQJryIkU5ew+ffgzP+PNN+BnU
-        s+yfONztXilW1xbxrxXrs71id3cvuvGNOU6/9x05swc9VMa/QoOUoL3TqNqLFJ0h94eIUsq9SMym
-        8xENvbKK2j0AsoIaB9MEAAA=
-    headers:
-      cache-control: [no-cache]
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-language: [he]
-      content-type: [application/json]
-      date: ['Thu, 30 Nov 2017 22:10:20 GMT']
-      server: [nginx/1.10.2]
-      vary: [Accept-Encoding, Cookie]
     status: {code: 200, message: OK}
 version: 1

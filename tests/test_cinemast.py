@@ -43,12 +43,12 @@ def test_get_matches_no_match(movies):
 
 def test_configuration_error_no_username():
     with pytest.raises(ConfigurationError):
-        CinemastProvider(username=None, password=DEFAULT_PASSWORD)
+        CinemastProvider(password=DEFAULT_PASSWORD)
 
 
 def test_configuration_error_no_password():
     with pytest.raises(ConfigurationError):
-        CinemastProvider(username=DEFAULT_USERNAME, password=None)
+        CinemastProvider(username=DEFAULT_USERNAME)
 
 
 @pytest.mark.integration

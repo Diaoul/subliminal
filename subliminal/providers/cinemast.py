@@ -71,7 +71,7 @@ class CinemastProvider(Provider):
     server_url = 'http://www.cinemast.org/he/cinemast/api/'
     subtitle_class = CinemastSubtitle
 
-    def __init__(self, username, password):
+    def __init__(self, username=None, password=None):
         if not (username and password):
             raise ConfigurationError('Username and password must be specified')
 

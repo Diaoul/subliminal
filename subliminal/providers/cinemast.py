@@ -71,16 +71,13 @@ class CinemastProvider(Provider):
     server_url = 'http://www.cinemast.org/he/cinemast/api/'
     subtitle_class = CinemastSubtitle
 
-    default_username = 'subliminal@gmail.com'
-    default_password = 'subliminal'
-
-    def __init__(self, username=None, password=None):
-        if any((username, password)) and not all((username, password)):
+    def __init__(self, username, password):
+        if not (username and password):
             raise ConfigurationError('Username and password must be specified')
 
         self.session = None
-        self.username = username or self.default_username
-        self.password = password or self.default_password
+        self.username = username
+        self.password = password
         self.user_id = None
         self.token = None
         self.session = None

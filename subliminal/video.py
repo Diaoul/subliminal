@@ -165,6 +165,11 @@ class Episode(Video):
         #: Alternative names of the series
         self.alternative_series = alternative_series or []
 
+        # most be here to avoid cyclic import
+        from subliminal.refiners.tvdb import refine
+        # Add info from TVDB
+        refine(self)
+
     @classmethod
     def fromguess(cls, name, guess):
         if guess['type'] != 'episode':

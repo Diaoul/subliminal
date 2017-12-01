@@ -264,6 +264,9 @@ def refine(video, **kwargs):
 
     # search the series
     logger.info('Searching series %r', video.series)
+    if video.country:
+        video.series += ' ({})'.format(video.country)
+
     results = search_series(video.series.lower())
     if not results:
         logger.warning('No results for series')

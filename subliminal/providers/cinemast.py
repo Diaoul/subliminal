@@ -90,27 +90,26 @@ class CinemastProvider(Provider):
         self.session.headers['User-Agent'] = 'Subliminal/{}'.format(__short_version__)
 
         # login
-        if self.username and self.password:
-            logger.debug('Logging in')
-            url = self.server_url + 'login/'
+        logger.debug('Logging in')
+        url = self.server_url + 'login/'
 
-            # actual login
-            data = {'username': self.username, 'password': self.password}
-            r = self.session.post(url, data=data, allow_redirects=False, timeout=10)
+        # actual login
+        data = {'username': self.username, 'password': self.password}
+        r = self.session.post(url, data=data, allow_redirects=False, timeout=10)
 
-            if r.status_code != 200:
+        if r.status_code != 200:
+            raise AuthenticationError(self.username)
+
+        try:
+            result = r.json()
+            if 'token' not in result:
                 raise AuthenticationError(self.username)
 
-            try:
-                result = r.json()
-                if 'token' not in result:
-                    raise AuthenticationError(self.username)
-
-                logger.info('Logged in')
-                self.user_id = r.json().get('user')
-                self.token = r.json().get('token')
-            except ValueError:
-                raise AuthenticationError(self.username)
+            logger.info('Logged in')
+            self.user_id = r.json().get('user')
+            self.token = r.json().get('token')
+        except ValueError:
+            raise AuthenticationError(self.username)
 
     @staticmethod
     def _slugify_title(title):

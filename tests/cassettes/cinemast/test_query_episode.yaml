@@ -13,20 +13,20 @@ interactions:
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAA6tWKsnPTs1TslJQMinK1U0yMrEwM0sztjQzTzJOTjM0Mkg2VNJRUCotTi0CqjGy
-        tDQyMQXyi1KLS3NKQLqKS5OTU4uLlWoBGvgVvEoAAAA=
+        H4sIAAAAAAAAA6tWKsnPTs1TslJQMinK0zUxS0tNS00xsDS0MEk1sLS0SLQwVdJRUCotTi0CqjGy
+        tDQyMQXyi1KLS3NKQLqKS5OTU4uLlWoBn9NhQkoAAAA=
     headers:
-      Cache-Control: [no-cache]
-      Connection: [keep-alive]
-      Content-Encoding: [gzip]
-      Content-Language: [he]
-      Content-Type: [application/json]
-      Date: ['Fri, 01 Dec 2017 17:14:25 GMT']
-      Server: [nginx/1.10.2]
-      Vary: [Accept-Encoding]
+      cache-control: [no-cache]
+      connection: [keep-alive]
+      content-encoding: [gzip]
+      content-language: [he]
+      content-type: [application/json]
+      date: ['Sat, 02 Dec 2017 19:39:44 GMT']
+      server: [nginx/1.10.2]
+      vary: [Accept-Encoding]
     status: {code: 200, message: OK}
 - request:
-    body: q=Dallas&user=299245&token=4rm-b24866f3967b3cf120c1&type=series&season=1&episode=3
+    body: episode=3&season=1&q=Dallas&token=4rn-46fefed09184e0998a85&user=299245&type=series
     headers:
       Accept: ['*/*']
       Accept-Encoding: ['gzip, deflate']
@@ -39,23 +39,83 @@ interactions:
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAA61UbU/bMBD+K1U+Q+q3JA7fkNJtSAykdmJIK4oc59J6y9vipKOq+t+xXaAFIVHB
-        osjy3fm557mzzhtPNkPde2cjfDLyNIhOLo3h6Xap6nvP+KBVusnBOqm1c9ELY/zaeDlo2am2V01t
-        o/MBBTl1K3Kr3O8BW2i/HKqsFqpMS9EtXMqx7kWv5FgKuYRx1awUpDyiOMU0DAhlIQ/TIE73SKn7
-        Hdr/3S5sUqE6I8klI3iMwjFBmNjAAmro4KUy4G4PbmX2VC0qSJdwXAFr0x9H9Ehh+qWbWhsXfUoF
-        rheJKEuhR/N6ZL55bc+q3ARsaRY3ZL3qS7DIjefYbT+bf3XZiNx6vcBiVtDpx+7uMvqW2Z8hPEHU
-        T26SqWr925VKTqeTn+fT5JnHIyFjOLL2H1hbR8E4FTHDggCAYAVlGKKIRZJiURQo8LYno1cSCIvf
-        FxER1Prfkh83/q3hPE0uvk+uZhfXVwdSgpAzciCFkQAyRLMoBBJyk6ugOChCXsQFEwLIW1LoEVKc
-        inur4vL68v/y4yg6kt/dxvmXr6/46QF/iLOQBJxyQTlBVBIcUIQIxDHPY5Sxt/jp+/SMP92E60E1
-        Sz6l4W77YmJ1ZRg/PLEO7SZ2e/c8N64wq+nvviJrdqCHsnev0CAlaOfsVeWGFJ0h+/uImiJ3r8q6
-        dRENnTITtX0AaR0L6tMEAAA=
+        H4sIAAAAAAAAA61UbWvbMBD+K8GfW0dvtuV+KzjbCl0LyegKSzGyfI61+W2WnTWE/PdK6kvSUmjY
+        ZozQ3em557kTp60n27EZvLMJPpl4GkQvS2N4uitVc+8ZH3RKtzlYJ7V2LgZhjB9bLwcte9UNqm1s
+        dDmiIKduRW6V+z1gCx3Ksc4aoaq0Ev3KpZzqQQxKTqWQJUzrdq0g5RHFKaZhQCgLeZgGcbpHSj08
+        ov2f3comFao3klwygqconBKEiQ2soIEeXisD7vbgVmZPNaKGtITjCtiY/jiiJwrTL9022rjocypw
+        vUhEVQk9WTYT8y0be1blJmBLs7gxG9RQgUVuPcdu+9n+aapW5NbrBRazhl4/dfcxo2+Z/QXCM0T9
+        5CaZq86/XavkdD77fj5PXng8EjKGI2v/go11FIxTETMsCAAIVlCGIYpYJCkWRYECb3cyeSOBsPhj
+        ERFBnf8l+Xbj3xrO0+Ti6+xqcXF9dSAlCDkjB1IYCSBDNItCICE3uQqKgyLkRVwwIYC8J4UeIcWp
+        uLcqLq8v/y8/jqIj+d1tnH/6/IafHvCHOAtJwCkXlBNEJcEBRYhAHPM8Rhl7j59+TM/48024HtSL
+        5J803O1eTayuDeNfT6xDu4nd3b3MjSvMavq9r8iaPeixGtwrNEoJ2jkHVbshRWfI/j6ijFHuIpvO
+        RTT0ykzU7gF4KFFo0wQAAA==
+    headers:
+      cache-control: [no-cache]
+      connection: [keep-alive]
+      content-encoding: [gzip]
+      content-language: [he]
+      content-type: [application/json]
+      date: ['Sat, 02 Dec 2017 19:39:44 GMT']
+      server: [nginx/1.10.2]
+      vary: [Accept-Encoding, Cookie]
+    status: {code: 200, message: OK}
+- request:
+    body: username=subliminal%40gmail.com&password=subliminal
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['51']
+      Content-Type: [application/x-www-form-urlencoded]
+      User-Agent: [Subliminal/2.1]
+    method: POST
+    uri: http://www.cinemast.org/he/cinemast/api/login/
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA6tWKsnPTs1TslJQMinK0zUxS0tNS00xsDS0MEk1sLS0SLQwVdJRUCotTi0CqjGy
+        tDQyMQXyi1KLS3NKQLqKS5OTU4uLlWoBn9NhQkoAAAA=
     headers:
       Cache-Control: [no-cache]
       Connection: [keep-alive]
       Content-Encoding: [gzip]
       Content-Language: [he]
       Content-Type: [application/json]
-      Date: ['Fri, 01 Dec 2017 17:14:25 GMT']
+      Date: ['Sat, 02 Dec 2017 19:40:37 GMT']
+      Server: [nginx/1.10.2]
+      Vary: [Accept-Encoding]
+    status: {code: 200, message: OK}
+- request:
+    body: q=Dallas&user=299245&token=4rn-46fefed09184e0998a85&type=series&season=1&episode=3
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['82']
+      Content-Type: [application/x-www-form-urlencoded]
+      User-Agent: [Subliminal/2.1]
+    method: POST
+    uri: http://www.cinemast.org/he/cinemast/api/search/
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA61UbWvbMBD+K8GfW0dvluV+KzjbCl0LyegKSzGKfE60+W2WnbWE/PdKStukpdCw
+        zRihu9Nzz3MnTptANUPdB2cjfDIKDMhOrawRmHal6/vA+qDVpsnBOamzc9lLa/zYBDkY1em2103t
+        ovMBRTn1K/Kr2u8BO2i/GqpFLXWZlbJb+pRj08teq7GSagXjqllryERMcYYpjwhlXPAsSrI9Upl+
+        hw5/tkuXVOrOSvLJCB4jPiYIExdYQg0dvFYGwu/Br8ydqmUF2QqOK+DB9scTPVHYfpmmNtZFn1OB
+        70Uqy1Ka0bwe2W9eu7M6twFXmsMNi173JTjkJvDsrp/Nn7psZO68QeQwa+jMU3d3GUPHHM4QniAa
+        pjfpVLfh7Vqnp9PJ9/Np+sITEM4Yjp39Cx6co2CCyoRhSQBAsoIyDHHMYkWxLAoUBduT0RsJhCUf
+        i4gJasMv6beb8NZynqYXXydXs4vrqwMpEReMHEhhJIIFoouYA+HC5ioojgouiqRgUgJ5Two9QopX
+        ce9UXF5f/l9+HMdH8vvbOP/0+Q0/PeDneMFJJKiQVBBEFcERRYhAkog8QQv2Hj/9mJ6J55vwPahm
+        6T9puNu+mlhTWca/nliP9hO7vXuZG1+Y0/R7X5EzOzBD2ftXaFAKjHf2uvJDis6Q+0NEkeC7V+Wh
+        9REDnbYTtX0EuikT8NMEAAA=
+    headers:
+      Cache-Control: [no-cache]
+      Connection: [keep-alive]
+      Content-Encoding: [gzip]
+      Content-Language: [he]
+      Content-Type: [application/json]
+      Date: ['Sat, 02 Dec 2017 19:40:38 GMT']
       Server: [nginx/1.10.2]
       Vary: [Accept-Encoding, Cookie]
     status: {code: 200, message: OK}

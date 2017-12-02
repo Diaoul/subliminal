@@ -13,20 +13,79 @@ interactions:
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAA6tWKsnPTs1TslJQMinK1U0yMrEwM0sztjQzTzJOTjM0Mkg2VNJRUCotTi0CqjGy
-        tDQyMQXyi1KLS3NKQLqKS5OTU4uLlWoBGvgVvEoAAAA=
+        H4sIAAAAAAAAA6tWKsnPTs1TslJQMinK0zUxS0tNS00xsDS0MEk1sLS0SLQwVdJRUCotTi0CqjGy
+        tDQyMQXyi1KLS3NKQLqKS5OTU4uLlWoBn9NhQkoAAAA=
+    headers:
+      cache-control: [no-cache]
+      connection: [keep-alive]
+      content-encoding: [gzip]
+      content-language: [he]
+      content-type: [application/json]
+      date: ['Sat, 02 Dec 2017 19:39:47 GMT']
+      server: [nginx/1.10.2]
+      vary: [Accept-Encoding]
+    status: {code: 200, message: OK}
+- request:
+    body: episode=3&season=4&q=TURN%3A+Washington%27s+Spies&token=4rn-46fefed09184e0998a85&user=299245&type=series
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['104']
+      Content-Type: [application/x-www-form-urlencoded]
+      User-Agent: [Subliminal/2.1]
+    method: POST
+    uri: http://www.cinemast.org/he/cinemast/api/search/
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA8VUTW/bMAz9K4Yvu3SOLNmWlVuKFdtph6RLD11hKBITa/PXLLlrEOS/z2K6xN2h
+        h6FAAePBJEU+UnzQIVTt0LhwHsRXQWhB9qocjdB2pWmewtEHnbGtBu9k3tbSydG4P4QarOpN50zb
+        +Oj3gaQ6QQSPkOM/RVSIAlEHGD4ZCg2dXvA5gAhkUiOfnNz6Vlw51JtGmqqoZL/DFmfWSWfUTElV
+        wqxuHw0UIkvSImaCxyKlTBS5KC6ZyrpTdvSj2/mi0vTjiFiMpjOSzSiJuQ/soIEezpOyyYxwmt2f
+        amQNRQnvcyH7cX/YOImxmXGftm3s6KJ/WwPc1e3QN8GdtOOSd248Eaw6A9anGD3G/Y359GHjjKvA
+        FziEOJRfe/u7qVqpLUpC+KRH6O2zCnzlaEWSG8IiTkkXffl0u46eaJZ8XKxXZ4aQ5oJzvNefsPeO
+        BJSkccY1o1pTBTQGoalkXNKM8YyHx6vgH3L6GvmFd7VevC1vzJNXiO9urpemO1EvF8vrzy/IiRBT
+        8m2iIaVEEJ7LLWVMZJDBRkqiZMJ0Hh4fji+EbmtZVf8tdMxGoR8fzvLAPnxPv3CSb8uv84k0Pky0
+        0YMdKofPw6AUWHQ6U6PayZz4LyI0j0+qcPsOIxZ6X+D4B495bPJsBAAA
+    headers:
+      cache-control: [no-cache]
+      connection: [keep-alive]
+      content-encoding: [gzip]
+      content-language: [he]
+      content-type: [application/json]
+      date: ['Sat, 02 Dec 2017 19:39:47 GMT']
+      server: [nginx/1.10.2]
+      vary: [Accept-Encoding, Cookie]
+    status: {code: 200, message: OK}
+- request:
+    body: username=subliminal%40gmail.com&password=subliminal
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['51']
+      Content-Type: [application/x-www-form-urlencoded]
+      User-Agent: [Subliminal/2.1]
+    method: POST
+    uri: http://www.cinemast.org/he/cinemast/api/login/
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA6tWKsnPTs1TslJQMinK0zUxS0tNS00xsDS0MEk1sLS0SLQwVdJRUCotTi0CqjGy
+        tDQyMQXyi1KLS3NKQLqKS5OTU4uLlWoBn9NhQkoAAAA=
     headers:
       Cache-Control: [no-cache]
       Connection: [keep-alive]
       Content-Encoding: [gzip]
       Content-Language: [he]
       Content-Type: [application/json]
-      Date: ['Fri, 01 Dec 2017 17:14:27 GMT']
+      Date: ['Sat, 02 Dec 2017 19:40:41 GMT']
       Server: [nginx/1.10.2]
       Vary: [Accept-Encoding]
     status: {code: 200, message: OK}
 - request:
-    body: q=TURN%3A+Washington%27s+Spies&user=299245&token=4rm-b24866f3967b3cf120c1&type=series&season=4&episode=3
+    body: q=TURN%3A+Washington%27s+Spies&user=299245&token=4rn-46fefed09184e0998a85&type=series&season=4&episode=3
     headers:
       Accept: ['*/*']
       Accept-Encoding: ['gzip, deflate']
@@ -47,14 +106,14 @@ interactions:
         FziEOJRfe/u7qVqpLUpC+KRH6O2zCnzlaEnSG8IiTkkXffl0u4qeaJ5+nK+WZ4aQFoJzvNefsPeO
         FJSkSc41o1pTBTQBoalkXNKc8ZyHx6vgH3L6GvmFd7mavy1vwtNXiO9urhemO1Ev5ovrzy/IiRBT
         8k2qIaNEEF7IDWVM5JDDWkqiZMp0ER4fji+EbmtZVf8tdMxGoR8fzvLAPnxPv3CSb4uvs4k0Pky0
-        0YMdKofPw6AUWHQ6U6PayYz4LyKsEAXByL7DiIXeFzj+AQ+rTW1sBAAA
+        0YMdKofPw6AUWHQ6U6PayYz4LyK0SLIcI/sOIxZ6X+D4ByGsiMxsBAAA
     headers:
       Cache-Control: [no-cache]
       Connection: [keep-alive]
       Content-Encoding: [gzip]
       Content-Language: [he]
       Content-Type: [application/json]
-      Date: ['Fri, 01 Dec 2017 17:14:27 GMT']
+      Date: ['Sat, 02 Dec 2017 19:40:42 GMT']
       Server: [nginx/1.10.2]
       Vary: [Accept-Encoding, Cookie]
     status: {code: 200, message: OK}

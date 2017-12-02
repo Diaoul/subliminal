@@ -13,20 +13,89 @@ interactions:
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAA6tWKsnPTs1TslJQMinK1U0yMrEwM0sztjQzTzJOTjM0Mkg2VNJRUCotTi0CqjGy
-        tDQyMQXyi1KLS3NKQLqKS5OTU4uLlWoBGvgVvEoAAAA=
+        H4sIAAAAAAAAA6tWKsnPTs1TslJQMinK0zUxS0tNS00xsDS0MEk1sLS0SLQwVdJRUCotTi0CqjGy
+        tDQyMQXyi1KLS3NKQLqKS5OTU4uLlWoBn9NhQkoAAAA=
+    headers:
+      cache-control: [no-cache]
+      connection: [keep-alive]
+      content-encoding: [gzip]
+      content-language: [he]
+      content-type: [application/json]
+      date: ['Sat, 02 Dec 2017 19:39:43 GMT']
+      server: [nginx/1.10.2]
+      vary: [Accept-Encoding]
+    status: {code: 200, message: OK}
+- request:
+    body: q=Ender%27s+Game&token=4rn-46fefed09184e0998a85&type=movies&user=299245
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['71']
+      Content-Type: [application/x-www-form-urlencoded]
+      User-Agent: [Subliminal/2.1]
+    method: POST
+    uri: http://www.cinemast.org/he/cinemast/api/search/
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA7VZa2/iOBT9KyhfdlcqqV9J7PkWHguzPBWYtqPZETKJKd7htSR0B1X97xs7HQpV
+        Z0iKI6EouWD75Nx7z73Gj1a43q0S60MFXlWsWPBtOE8frHgzl6vvVmqLeMJTy5dHKxJxuJWbRK5X
+        6id/74ATEX0V6iqYvvf0vVc5MoX6IQLapK8R1vdULZDMd8vpisvFZMG390JNfR0nPJHhdcjDubhe
+        rh+kmDAM6ARiyhhDDmUTACcvI8M4yUbb/2zu1aT3YiW2eq7KEUKeIbzSDxq6QNrkZDizV1LjV3wp
+        JnNh8j33KblqPgQgPiwhNJXNVSS2caWVWtQ3MkqN6n2VS3bTRCYLEaemR0sjUq5Y/7darHmkrBZz
+        HTXqIZ3i2TXZfLaaz1bL2R4CG7u22AV8b39HLqmOhn7QGR0Ws5DrQQLU8zexVwZCI0Ywdjh2GOBT
+        6IUzyhkJKWGCIYKtp6vKaxy/gvG7wvHHCxD/s00B6NWqPRlu18tvD4axkCKUNMajjJZhu2EWB/Xy
+        4QgCObTvbmTD9uu42m22JOibReJ54BwUCGiK5bZZqza6dlvzsZsuZPiaFEiPoPCpK3jEsOtFwEUh
+        4x7kM0zwbIoZI4S9BQWfQ9JuBHJj3z088xH4Qa1lFoPLcjkmJeOsZy6Gcj5IOoNg9Kn2g5YUTLU/
+        gJ3+4PYkhV3KjqFgMPWwKyKKZ8CBHpwJ5KLIcwB22RR50ZtQziHRhGSuqd7IIQ4McwEKhkbzZmAW
+        gZMvMDIY8zRJbN+vlxGhjlPAF5qL8aDRNIyB5M0SJRkvTunKsWkkOdWrtlWUuPW2FnR7KJcbAgA2
+        q6XEyy8emwyIouXP9brDR2Z5OQeFnGRsz7+Thtd3C6RLmYJO0FtAfjttPzIYacLad8opvSExDAKi
+        s/pVt2/FdHscF2M59vtmhRzTs0AIfdUTLkeGmx9M86r5j/IaiK7oj7siNlzXsFcgSg9+KSFKMUA5
+        dex1Z/pmJ3aphxAtWG7JcMH3pvtB5BZA0RuW4hh0ttqqHv3XEnaxNwgtUm5L7NARydV7qMb4o6oq
+        fzVH4491wxjSHxfKldI2tgjl3sQdBUjGiqwbxgJJoc3CzzvUy1UVAe99u+xStAwyUCR7DipvfAcB
+        WQEp+YmcXUwGhXnJOGlFerLbbfblp55hSuh7MqgUXvKVmjI3dtAjhf+va/mr1igRgWE28uTv8Fjr
+        j5TNtN7D8xveWtYGlKXzkHj54jRV2Oc40TW4M26bFVYI3EKVz7+pK3WttlM98W3PhmVJLCjaJY38
+        /liaBkHe2UJfSMfXp5PTinjJF4t3n1bo0fq04ulrOu2/RzvWwznAVsS7RaKPY3ZhKOJYH5fIpT6W
+        AB+A+tgAuTT7mybZb/Q3GkFsPf0PbZWHsNwZAAA=
+    headers:
+      cache-control: [no-cache]
+      connection: [keep-alive]
+      content-encoding: [gzip]
+      content-language: [he]
+      content-type: [application/json]
+      date: ['Sat, 02 Dec 2017 19:39:43 GMT']
+      server: [nginx/1.10.2]
+      vary: [Accept-Encoding, Cookie]
+    status: {code: 200, message: OK}
+- request:
+    body: username=subliminal%40gmail.com&password=subliminal
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['51']
+      Content-Type: [application/x-www-form-urlencoded]
+      User-Agent: [Subliminal/2.1]
+    method: POST
+    uri: http://www.cinemast.org/he/cinemast/api/login/
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA6tWKsnPTs1TslJQMinK0zUxS0tNS00xsDS0MEk1sLS0SLQwVdJRUCotTi0CqjGy
+        tDQyMQXyi1KLS3NKQLqKS5OTU4uLlWoBn9NhQkoAAAA=
     headers:
       Cache-Control: [no-cache]
       Connection: [keep-alive]
       Content-Encoding: [gzip]
       Content-Language: [he]
       Content-Type: [application/json]
-      Date: ['Fri, 01 Dec 2017 17:14:25 GMT']
+      Date: ['Sat, 02 Dec 2017 19:40:36 GMT']
       Server: [nginx/1.10.2]
       Vary: [Accept-Encoding]
     status: {code: 200, message: OK}
 - request:
-    body: q=Ender%27s+Game&user=299245&token=4rm-b24866f3967b3cf120c1&type=movies
+    body: q=Ender%27s+Game&user=299245&token=4rn-46fefed09184e0998a85&type=movies
     headers:
       Accept: ['*/*']
       Accept-Encoding: ['gzip, deflate']
@@ -53,18 +122,18 @@ interactions:
         1VJC84vHJgOiaPlzve7wkVlezkEhJxnb8++k4fXdAulSpqAT9BaQ307bjwxGmrD2nXJKb0gMg4Do
         rH7V7Vsx3R7HxViO/b5ZIcfeWSDEe9UTLkeGmx/s5VXzH+U1EF3RH3dFbLiuYVogSg9+KSFKMUA5
         dex1Z/pmJ3aph5BXsNyS4YLvTfeDyC2AojcsxTHobLVVPfqvJexibxCvSLktsUNHJFfvoRrjj6qq
-        /NUcjT/WDWPALi6UK6VtbBHKvYk7CpCMFVk3jAWSQpuFn3eol6sqAvR9u+xStAwyUCR7DipvfAcB
-        WQEp+YmcXUyGB/OScdKK9GS32+zLTz3DlHjvyaBSeMlXasrc2EFKCv9f1/JXrVEiAsNs5Mnf4bHW
-        Hymbab2H5ze8tawNKEvnIaH54jRV2Oc40TW4M26bFVYI3EKVz7+pK3WttlM98W1qw7IkFpCCXdLI
-        74+laRD4nS30hXR8fTo5rYiXfLF492mFHq1PK56+ptP+e7RjPZwDbEW8WyT6OGYXhiKO9XGJXOpj
-        CfABqI8NEGWOFvtkv9HfaASx9fQ/iCVXBdwZAAA=
+        /NUcjT/WDWNIf1woV0rb2CKUexN3FCAZK7JuGAskhTYLP+9QL1dVBOj7dtmlaBlkoEj2HFTe+A4C
+        sgJS8hM5u5gMD+Yl46QV6clut9mXn3qGKfHek0Gl8JKv1JS5sYOUFP6/ruWvWqNEBIbZyJO/w2Ot
+        P1I203oPz294a1kbUJbOQ0LzxWmqsM9xomtwZ9w2K6wQuIUqn39TV+pabad64tvUhmVJLCjaJY38
+        /liaBkHe2UJfSMfXp5PTinjJF4t3n1bo0fq04ulrOu2/RzvWwznAVsS7RaKPY3ZhKOJYH5fIpT6W
+        AB+A+tgAUeJqsU/2G/2NRhBbT/8DmjgchdwZAAA=
     headers:
       Cache-Control: [no-cache]
       Connection: [keep-alive]
       Content-Encoding: [gzip]
       Content-Language: [he]
       Content-Type: [application/json]
-      Date: ['Fri, 01 Dec 2017 17:14:25 GMT']
+      Date: ['Sat, 02 Dec 2017 19:40:37 GMT']
       Server: [nginx/1.10.2]
       Vary: [Accept-Encoding, Cookie]
     status: {code: 200, message: OK}

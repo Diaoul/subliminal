@@ -13,20 +13,20 @@ interactions:
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAA6tWKsnPTs1TslJQMinK1U0yMrEwM0sztjQzTzJOTjM0Mkg2VNJRUCotTi0CqjGy
-        tDQyMQXyi1KLS3NKQLqKS5OTU4uLlWoBGvgVvEoAAAA=
+        H4sIAAAAAAAAA6tWKsnPTs1TslJQMinK0zUxS0tNS00xsDS0MEk1sLS0SLQwVdJRUCotTi0CqjGy
+        tDQyMQXyi1KLS3NKQLqKS5OTU4uLlWoBn9NhQkoAAAA=
     headers:
-      Cache-Control: [no-cache]
-      Connection: [keep-alive]
-      Content-Encoding: [gzip]
-      Content-Language: [he]
-      Content-Type: [application/json]
-      Date: ['Fri, 01 Dec 2017 17:14:26 GMT']
-      Server: [nginx/1.10.2]
-      Vary: [Accept-Encoding]
+      cache-control: [no-cache]
+      connection: [keep-alive]
+      content-encoding: [gzip]
+      content-language: [he]
+      content-type: [application/json]
+      date: ['Sat, 02 Dec 2017 19:39:46 GMT']
+      server: [nginx/1.10.2]
+      vary: [Accept-Encoding]
     status: {code: 200, message: OK}
 - request:
-    body: q=Game+of+Thrones&user=299245&token=4rm-b24866f3967b3cf120c1&type=series&season=3&episode=10
+    body: episode=10&season=3&q=Game+of+Thrones&token=4rn-46fefed09184e0998a85&user=299245&type=series
     headers:
       Accept: ['*/*']
       Accept-Encoding: ['gzip, deflate']
@@ -50,15 +50,78 @@ interactions:
         l9OlUylG4X4+jt71hxfpcMhTnJ6cnJLUc6ZBqs9nV7uAdFsnI5jSmmeZyZjEkiklLSVgLCNZAaY4
         AEiQkK8Uqn9ydv5/iwZzuscw2TB0GwaHKHiGtTy6WrRqua6dtglRWzi5bwR0C0cXRAuTswJppbjK
         FeVIGE2YtEJgpQ7heGf+MlEE2XmdDlbyv4qD0Ktv6PJU7pUJ2q5jrnOKAVFssZQ+PbHIcK0zpP1W
-        LpPV3WqncbuZqqo3N+4YHRv36u6pC8aXIzD9fGqAzU4DbMEtqi5+qRbGgIvGrpzFdoyOUfiliPnK
-        jvp2y3n0OGhLn2D1G3bFboH3BgAA
+        LpPV3WqncbuZqqo3N+4YHRv36u6pC8aXIzD9fGqAzU4DbMEtqi5+qRbGgIvGrpzFdoyOUfiliDFO
+        Yq/ulvPocdCWPsHqNztMaND3BgAA
+    headers:
+      cache-control: [no-cache]
+      connection: [keep-alive]
+      content-encoding: [gzip]
+      content-language: [he]
+      content-type: [application/json]
+      date: ['Sat, 02 Dec 2017 19:39:46 GMT']
+      server: [nginx/1.10.2]
+      vary: [Accept-Encoding, Cookie]
+    status: {code: 200, message: OK}
+- request:
+    body: username=subliminal%40gmail.com&password=subliminal
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['51']
+      Content-Type: [application/x-www-form-urlencoded]
+      User-Agent: [Subliminal/2.1]
+    method: POST
+    uri: http://www.cinemast.org/he/cinemast/api/login/
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA6tWKsnPTs1TslJQMinK0zUxS0tNS00xsDS0MEk1sLS0SLQwVdJRUCotTi0CqjGy
+        tDQyMQXyi1KLS3NKQLqKS5OTU4uLlWoBn9NhQkoAAAA=
     headers:
       Cache-Control: [no-cache]
       Connection: [keep-alive]
       Content-Encoding: [gzip]
       Content-Language: [he]
       Content-Type: [application/json]
-      Date: ['Fri, 01 Dec 2017 17:14:27 GMT']
+      Date: ['Sat, 02 Dec 2017 19:40:40 GMT']
+      Server: [nginx/1.10.2]
+      Vary: [Accept-Encoding]
+    status: {code: 200, message: OK}
+- request:
+    body: q=Game+of+Thrones&user=299245&token=4rn-46fefed09184e0998a85&type=series&season=3&episode=10
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['92']
+      Content-Type: [application/x-www-form-urlencoded]
+      User-Agent: [Subliminal/2.1]
+    method: POST
+    uri: http://www.cinemast.org/he/cinemast/api/search/
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA62VS3PaMBDHvwrjczB6S84tDSQ95HFIJ31mGD3W4NbY1DZpmAzfvZKgCVAOSdoZ
+        Rki72vVPf63Xj4mtF1WXHPfwUS9pQTd26hdJO58W1UPibTAv2tpBMGIUDE532q++PiYOWtsU866o
+        q+D+tkDcQRghi3MZ53F0WS/+sTia6MAhWzddzEyli3Jc6mYSHzNoO90VdmC1ncJgVt8XMJaE4DGm
+        lCBMGEVjysfPkbbt1tHp9/kkJNVF4yk3zAMkBj6MBscEKmjgCZZGDvUM7thR5ITICSja1n6xPsZ6
+        V8hV6RmMp/Dmky+92CHYs8W1F7+tq9ab+J/sEHU999Pedd77MG3qCtqwt3DeETQJcQvTFV0JIfIx
+        iUDhbupfVVlrF6yJVCRE3UPTbu4q5EzrPN3kTG8QHWGUMoXm6fvhh9v0gQjWn90Mn56WEEExkWH9
+        A5bBwIWzEvHcSC6wco4TwiGXubGYA5c8WR319kGYRC8jeYYY3V5f3I72OLItDgU5AYlAU8xcZhin
+        JnMcKCDDiBJwgENw8QqMT/fFMB32v6AruoehtjB0rgWRkgJQhXPtNOdSZ9gQLY1x/tx/Y9AMv5Dj
+        crpsdYpRuJ+Po3f94UU6HPIUpycnpyT1nGmQ6vPZ1S4g3dbJSqaN4UJYwRRWTGvlKAHrGBE52PwA
+        IEFSvVKo/snZ+f8tGszpHsNkw9BtGFpEwTOs5THlotHLde00dYjawsl8I6BbOCYnRtqM5chozXWm
+        KUfSGsKUkxJrfQjHO7OXiSLJzut0sJL/VRyEXn1Dl6dqr0zQdh1zk1EMiGKHlfLpiUOWGyOQ8Vu5
+        SlZ3q53G3c50Wb65ccfo2LhXd09dML4cgennUwOsdxpgA+2i7OKXamEttNHYFbPYjtExCr8UCc5E
+        1LdbzqOnhabwCVa/AXb05333BgAA
+    headers:
+      Cache-Control: [no-cache]
+      Connection: [keep-alive]
+      Content-Encoding: [gzip]
+      Content-Language: [he]
+      Content-Type: [application/json]
+      Date: ['Sat, 02 Dec 2017 19:40:41 GMT']
       Server: [nginx/1.10.2]
       Vary: [Accept-Encoding, Cookie]
     status: {code: 200, message: OK}

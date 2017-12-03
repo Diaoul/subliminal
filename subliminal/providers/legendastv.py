@@ -245,7 +245,7 @@ class LegendasTVProvider(Provider):
                 return
         return True
 
-    @region.cache_on_arguments(expiration_time=SHOW_EXPIRATION_TIME)
+    @region.cache_on_arguments(expiration_time=SHOW_EXPIRATION_TIME, should_cache_fn=lambda value: value)
     def search_titles(self, title, season, title_year):
         """Search for titles matching the `title`.
 

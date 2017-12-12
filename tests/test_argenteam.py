@@ -26,29 +26,6 @@ def test_get_matches_no_match(episodes):
     assert matches == set()
 
 
-@vcr.use_cassette
-def test_search_show_id():
-    with ArgenteamProvider() as provider:
-        show_id = provider.search_show_id('Game Of Thrones')
-    assert show_id == 36027
-
-
-@pytest.mark.integration
-@vcr.use_cassette
-def test_search_show_id_incomplete():
-    with ArgenteamProvider() as provider:
-        show_id = provider.search_show_id('The Walking')
-    assert show_id is None
-
-
-@pytest.mark.integration
-@vcr.use_cassette
-def test_search_show_id_error():
-    with ArgenteamProvider() as provider:
-        show_id = provider.search_show_id('The Walking Undead')
-    assert show_id is None
-
-
 @pytest.mark.integration
 @vcr.use_cassette
 def test_download_subtitle(episodes):

@@ -76,24 +76,6 @@ class ArgenteamProvider(Provider):
     def terminate(self):
         self.session.close()
 
-    def search_show_id(self, series):
-        """Search the show id from the `series`.
-
-        :param str series: series of the episode.
-        :return: the show id, if any.
-        :rtype: int or None
-
-        """
-        # make the search
-        logger.info('Searching show id for %r', series)
-        r = self.session.get(self.API_URL + 'search', params={'q': series}, timeout=10)
-        r.raise_for_status()
-        results = json.loads(r.text)
-        show_id = None
-        if results['total'] == 1:
-            show_id = results['results'][0]['id']
-        return show_id
-
     def search_episode_id(self, series, season, episode):
         """Search the episode id from the `series`, `season` and `episode`.
 

@@ -1,0 +1,46 @@
+interactions:
+- request:
+    body: null
+    headers:
+      User-Agent: [Subliminal/2.0]
+    method: GET
+    uri: http://argenteam.net/api/v1/search?q=Game+Of+Thrones
+  response:
+    body: {string: "{\"results\":[{\"id\":36027,\"title\":\"Game of Thrones\",\"year\"\
+        :2011,\"type\":\"tvshow\",\"summary\":\"Juego de tronos es una nueva serie\
+        \ original de HBO basada en las novelas de George R.R. Martin. En un mundo\
+        \ donde los veranos se alargan decadas y los inviernos pueden durar toda una\
+        \ vida, la corona de Poniente tiene un precio.\\r\\n\\r\\nTraicion, lujuria,\
+        \ intriga y fuerzas sobrenaturales agitan las cuatro esquinas del Reino, desde\
+        \ el sur intrigante y las tierras salvajes del este, hasta el norte gelido\
+        \ y el viejo Muro que protege el reino de la oscuridad que hay mas alla. Reyes\
+        \ y reinas, caballeros y renegados, mentirosos y nobles compiten por el poder\
+        \ en la lucha sangrienta por el Trono de Hierro.\\r\\n\\r\\nEl reparto de\
+        \ Juego de tronos esta formado entre otros por Mark Addy (Full monty, Robin\
+        \ Hood), Sean Bean (El Se\xF1or de los anillos: La comunidad del anillo),\
+        \ Nikolaj Coster-Waldau (New Amsterdam), Peter Dinklage (Las Cr\xF3nicas de\
+        \ Narnia: El Pr\xEDncipe Caspian) y Lena Headey (300, Terminator: Las Cronicas\
+        \ de Sarah Connor).\\r\\n\\r\\nJuego de tronos se ha rodado entre Irlanda\
+        \ y Malta y en su primera temporada contara con 10 episodios. El episodio\
+        \ piloto ha tenido un coste de 10 millones de euros.\\r\\n\\r\\nHay tres l\xED\
+        neas argumentales en la serie: la cr\xF3nica de la guerra civil din\xE1stica\
+        \ por el control de Poniente entre varias familias nobles; la creciente amenaza\
+        \ de los Otros, apenas contenida por un inmenso muro de hielo que protege\
+        \ el norte de Poniente; y el viaje de Daenerys Targaryen, la hija exiliada\
+        \ del rey que fue asesinado en otra guerra civil hace quince a\xF1os, quien\
+        \ busca regresar a Poniente a reclamar sus derechos. Estas tres historias\
+        \ interact\xFAan entre s\xED y son extremadamente co-dependientes.\\r\\n\\\
+        r\\nTras la impactante inc\xF3gnita revelada al final de la quinta temporada,\
+        \ los nuevos episodios siguen ampliando el mapa de Poniente, donde ninguna\
+        \ casa da un paso en falso en su continuo intento por acercarse al poder.\
+        \ La nueva temporada cuenta con la incorporaci\xF3n al reparto de actores\
+        \ de la talla de Ian McShane (Deadwood, Ray Donovan) y Pilou Asb\xE6k (Borgen,\
+        \ 1864, Lucy), entre otros por confirmar. \",\"imdb\":\"0944947\",\"tvdb\"\
+        :\"121361\",\"poster\":\"http://www.argenteam.net/resources/covers/thumbs/2d72ee7b68930fbeb223118f75a8b09d.jpg\"\
+        ,\"seasons\":7}],\"total\":1,\"offset\":0}"}
+    headers:
+      content-type: [application/json;charset=UTF-8]
+      date: ['Fri, 01 Dec 2017 15:30:11 GMT']
+      server: [Apache-Coyote/1.1]
+    status: {code: 200, message: OK}
+version: 1

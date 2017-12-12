@@ -1,0 +1,15 @@
+interactions:
+- request:
+    body: null
+    headers:
+      User-Agent: [Subliminal/2.0]
+    method: GET
+    uri: http://argenteam.net/api/v1/search?q=The+Walking+Undead
+  response:
+    body: {string: !!python/unicode '{"results":[],"total":0,"offset":0}'}
+    headers:
+      content-type: [application/json;charset=UTF-8]
+      date: ['Fri, 01 Dec 2017 15:30:13 GMT']
+      server: [Apache-Coyote/1.1]
+    status: {code: 200, message: OK}
+version: 1

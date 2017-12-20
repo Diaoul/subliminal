@@ -6,7 +6,7 @@ import io
 import itertools
 import logging
 import operator
-import os.path
+import os
 import socket
 
 from babelfish import Language, LanguageReverseError
@@ -542,9 +542,15 @@ def scan_videos(path, age=None, archives=True):
                 continue
 
             # skip old files
-            if age and datetime.utcnow() - datetime.utcfromtimestamp(os.path.getmtime(filepath)) > age:
-                logger.debug('Skipping old file %r in %r', filename, dirpath)
+            try:
+                file_age = datetime.utcfromtimestamp(os.path.getmtime(filepath))
+            except ValueError:
+                logger.warning('Could not get age of file %r in %r', filename, dirpath)
                 continue
+            else:
+                if age and datetime.utcnow() - file_age > age:
+                    logger.debug('Skipping old file %r in %r', filename, dirpath)
+                    continue
 
             # scan
             if filename.endswith(VIDEO_EXTENSIONS):  # video

@@ -14,6 +14,7 @@ from guessit import guessit
 from six.moves.xmlrpc_client import ProtocolError
 from rarfile import BadRarFile, NotRarFile, RarCannotExec, RarFile
 from zipfile import BadZipfile
+from ssl import SSLError
 import requests
 
 from .exceptions import ServiceUnavailable
@@ -89,6 +90,11 @@ class ProviderPool(object):
                 logger.error('Provider %r unavailable, improperly terminated', name)
             else:
                 logger.exception('Provider %r http error %r, improperly terminated', name, e.response.status_code)
+        except SSLError as e:
+            if e.args[0] == 'The read operation timed out':
+                logger.error('Provider %r unavailable, improperly terminated', name)
+            else:
+                logger.exception('Provider %r SSL error %r, improperly terminated', name, e.args[0])
         except:
             logger.exception('Provider %r terminated unexpectedly', name)
 
@@ -135,6 +141,11 @@ class ProviderPool(object):
                 logger.error('Provider %r unavailable', provider)
             else:
                 logger.exception('Provider %r http error %r', provider, e.response.status_code)
+        except SSLError as e:
+            if e.args[0] == 'The read operation timed out':
+                logger.error('Provider %r unavailable', provider)
+            else:
+                logger.exception('Provider %r SSL error %r', provider, e.args[0])
         except:
             logger.exception('Unexpected error in provider %r', provider)
 
@@ -196,10 +207,18 @@ class ProviderPool(object):
             return False
         except requests.exceptions.HTTPError as e:
             if e.response.status_code in range(500, 600):
-                logger.error('Provider %r unavailable, improperly terminated', subtitle.provider_name)
+                logger.error('Provider %r unavailable, discarding it', subtitle.provider_name)
             else:
-                logger.exception('Provider %r http error %r, improperly terminated', subtitle.provider_name,
+                logger.exception('Provider %r http error %r, discarding it', subtitle.provider_name,
                                  e.response.status_code)
+            self.discarded_providers.add(subtitle.provider_name)
+            return False
+        except SSLError as e:
+            if e.args[0] == 'The read operation timed out':
+                logger.error('Provider %r unavailable, discarding it', subtitle.provider_name)
+            else:
+                logger.exception('Provider %r SSL error %r, discarding it', subtitle.provider_name, e.args[0])
+            self.discarded_providers.add(subtitle.provider_name)
             return False
         except (BadRarFile, BadZipfile):
             logger.error('Bad archive for %r', subtitle)

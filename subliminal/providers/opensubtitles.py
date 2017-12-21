@@ -220,7 +220,7 @@ class OpenSubtitlesProvider(Provider):
         if isinstance(video, Episode):
             query = video.series
             season = video.season
-            episode = video.episode
+            episode = min(video.episode) if isinstance(video.episode, list) else video.episode
         else:
             query = video.title
 

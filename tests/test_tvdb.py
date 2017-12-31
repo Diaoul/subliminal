@@ -330,3 +330,20 @@ def test_refine_episode_no_year(episodes):
     assert episode.series_imdb_id == video.series_imdb_id
     assert episode.tvdb_id == video.tvdb_id
     assert episode.series_tvdb_id == video.series_tvdb_id
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_refine_episode_alternative_series(episodes):
+    video = episodes['turn_s04e03']
+    episode = Episode(video.name.lower(), video.series.lower(), video.season, video.episode)
+    refine(episode)
+    assert episode.series == video.series
+    assert episode.year == video.year
+    assert episode.original_series == video.original_series
+    assert episode.title == video.title
+    assert episode.imdb_id == video.imdb_id
+    assert episode.series_imdb_id == video.series_imdb_id
+    assert episode.tvdb_id == video.tvdb_id
+    assert episode.series_tvdb_id == video.series_tvdb_id
+    assert episode.alternative_series == video.alternative_series

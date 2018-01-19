@@ -23,7 +23,7 @@ language_converters.register('addic7ed = subliminal.converters.addic7ed:Addic7ed
 show_cells_re = re.compile(b'<td class="version">.*?</td>', re.DOTALL)
 
 #: Series header parsing regex
-series_year_re = re.compile(r'^(?P<series>[ \w\'.:(),&!?-]+?)(?: \((?P<year>\d{4})\))?$')
+series_year_re = re.compile(r'^(?P<series>[ \w\'.:(),*&!?-]+?)(?: \((?P<year>\d{4})\))?$')
 
 
 class Addic7edSubtitle(Subtitle):

@@ -122,7 +122,11 @@ def episodes():
                     imdb_id='tt4162096', alternative_series=['Jessica Jones']),
             'fear_walking_dead_s03e10':
             Episode('Fear.the.Walking.Dead.S03E10.1080p.WEB-DL.DD5.1.H264-RARBG', 'Fear the Walking Dead', 3, 10,
-                    resolution='1080p', format='WEB-DL', video_codec='h264', release_group='RARBG')}
+                    resolution='1080p', format='WEB-DL', video_codec='h264', release_group='RARBG'),
+            'the_end_of_the_fucking_world':
+            Episode('the.end.of.the.fucking.world.s01e04.720p.web.x264-skgtv.mkv', 'The End of the Fucking World', 1, 4,
+                    resolution='720p', format='WEB-DL', video_codec='h264', release_group='skgtv',
+                    alternative_series=['The end of the f***ing world'])}
 
 
 @pytest.fixture(scope='session')

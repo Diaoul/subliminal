@@ -408,5 +408,21 @@ def test_list_subtitles_episode_alternative_series(episodes):
     expected_subtitles = {'updated/1/125243/0', 'updated/1/125243/1'}
     with Addic7edProvider() as provider:
         subtitles = provider.list_subtitles(video, languages)
+        matches = subtitles[0].get_matches(episodes['turn_s04e03'])
     assert {subtitle.download_link for subtitle in subtitles} == expected_subtitles
     assert {subtitle.language for subtitle in subtitles} == languages
+    assert matches == {'episode', 'title', 'series', 'season', 'year', 'release_group'}
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_show_with_asterisk(episodes):
+    video = episodes['the_end_of_the_fucking_world']
+    languages = {Language('eng')}
+    expected_subtitles = {u'updated/1/129156/0', u'updated/1/129156/2', u'updated/1/129156/3'}
+    with Addic7edProvider() as provider:
+        subtitles = provider.list_subtitles(video, languages)
+        matches = subtitles[0].get_matches(episodes['the_end_of_the_fucking_world'])
+    assert {subtitle.download_link for subtitle in subtitles} == expected_subtitles
+    assert {subtitle.language for subtitle in subtitles} == languages
+    assert matches == {'year', 'series', 'episode', 'season'}

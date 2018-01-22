@@ -125,7 +125,11 @@ def episodes():
                     resolution='1080p', format='WEB-DL', video_codec='h264', release_group='RARBG'),
             'Marvels.Agents.of.S.H.I.E.L.D.S05E01-E02':
             Episode('Marvels.Agents.of.S.H.I.E.L.D.S05E01-E02.720p.HDTV.x264-AVS', 'Marvels.Agents.of.S.H.I.E.L.D', 5,
-                    [1, 2], resolution='720p', format='HDTV', video_codec='h264', release_group='AVS')}
+                    [1, 2], resolution='720p', format='HDTV', video_codec='h264', release_group='AVS'),
+            'the_end_of_the_fucking_world':
+            Episode('the.end.of.the.fucking.world.s01e04.720p.web.x264-skgtv.mkv', 'The End of the Fucking World', 1, 4,
+                    resolution='720p', format='WEB-DL', video_codec='h264', release_group='skgtv',
+                    alternative_series=['The end of the f***ing world'])}
 
 
 @pytest.fixture(scope='session')

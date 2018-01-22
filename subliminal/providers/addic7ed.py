@@ -23,7 +23,7 @@ language_converters.register('addic7ed = subliminal.converters.addic7ed:Addic7ed
 show_cells_re = re.compile(b'<td class="version">.*?</td>', re.DOTALL)
 
 #: Series header parsing regex
-series_year_re = re.compile(r'^(?P<series>[ \w\'.:(),&!?-]+?)(?: \((?P<year>\d{4})\))?$')
+series_year_re = re.compile(r'^(?P<series>[ \w\'.:(),*&!?-]+?)(?: \((?P<year>\d{4})\))?$')
 
 
 class Addic7edSubtitle(Subtitle):
@@ -48,8 +48,9 @@ class Addic7edSubtitle(Subtitle):
     def get_matches(self, video):
         matches = set()
 
-        # series
-        if video.series and sanitize(self.series) == sanitize(video.series):
+        # series name
+        if video.series and sanitize(self.series) in (
+                sanitize(name) for name in [video.series] + video.alternative_series):
             matches.add('series')
         # season
         if video.season and self.season == video.season:
@@ -57,9 +58,8 @@ class Addic7edSubtitle(Subtitle):
         # episode
         if video.episode and self.episode == video.episode:
             matches.add('episode')
-        # title
-        if video.title and (sanitize(self.title) in (
-                sanitize(name) for name in [video.title] + video.alternative_series)):
+        # title of the episode
+        if video.title and sanitize(self.title) == sanitize(video.title):
             matches.add('title')
         # year
         if video.original_series and self.year is None or video.year and video.year == self.year:

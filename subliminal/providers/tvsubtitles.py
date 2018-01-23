@@ -172,6 +172,9 @@ class TVsubtitlesProvider(Provider):
 
         # get the episode ids
         episode_ids = self.get_episode_ids(show_id, season)
+        # Provider doesn't store multi episode information
+        episode = min(episode) if episode and isinstance(episode, list) else episode
+
         if episode not in episode_ids:
             logger.error('Episode %d not found', episode)
             return []

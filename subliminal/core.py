@@ -388,7 +388,7 @@ def search_external_subtitles(path, directory=None):
     subtitles = {}
     for p in os.listdir(directory or dirpath):
         # keep only valid subtitle filenames
-        if not p.startswith(fileroot) or not p.endswith(SUBTITLE_EXTENSIONS):
+        if not p.startswith(fileroot) or not os.path.splitext(p)[1].lower() in SUBTITLE_EXTENSIONS:
             continue
 
         # extract the potential language code
@@ -420,7 +420,7 @@ def scan_video(path):
         raise ValueError('Path does not exist')
 
     # check video extension
-    if not path.endswith(VIDEO_EXTENSIONS):
+    if not os.path.splitext(path)[1].lower() in VIDEO_EXTENSIONS:
         raise ValueError('%r is not a valid video extension' % os.path.splitext(path)[1])
 
     dirpath, filename = os.path.split(path)
@@ -468,7 +468,7 @@ def scan_archive(path):
         rar = RarFile(path)
 
         # filter on video extensions
-        rar_filenames = [f for f in rar.namelist() if f.endswith(VIDEO_EXTENSIONS)]
+        rar_filenames = [f for f in rar.namelist() if os.path.splitext(f)[1].lower() in VIDEO_EXTENSIONS]
 
         # no video found
         if not rar_filenames:
@@ -529,7 +529,8 @@ def scan_videos(path, age=None, archives=True):
         # scan for videos
         for filename in filenames:
             # filter on videos and archives
-            if not (filename.endswith(VIDEO_EXTENSIONS) or archives and filename.endswith(ARCHIVE_EXTENSIONS)):
+            if not (os.path.splitext(filename)[1].lower() in VIDEO_EXTENSIONS or
+                    archives and os.path.splitext(filename)[1].lower() in ARCHIVE_EXTENSIONS):
                 continue
 
             # skip hidden files
@@ -561,13 +562,13 @@ def scan_videos(path, age=None, archives=True):
                     continue
 
             # scan
-            if filename.endswith(VIDEO_EXTENSIONS):  # video
+            if os.path.splitext(filename)[1].lower() in VIDEO_EXTENSIONS:  # video
                 try:
                     video = scan_video(filepath)
                 except ValueError:  # pragma: no cover
                     logger.exception('Error scanning video')
                     continue
-            elif archives and filename.endswith(ARCHIVE_EXTENSIONS):  # archive
+            elif archives and os.path.splitext(filename)[1].lower() in ARCHIVE_EXTENSIONS:  # archive
                 try:
                     video = scan_archive(filepath)
                 except (NotRarFile, RarCannotExec, ValueError):  # pragma: no cover

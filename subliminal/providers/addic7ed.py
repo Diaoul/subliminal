@@ -240,7 +240,7 @@ class Addic7edProvider(Provider):
         # get the show id
         show_id = self.get_show_id(series, year, country)
         if show_id is None:
-            logger.info('No show id found for %r (%r)', series, {'year': year, 'country': country})
+            logger.warning('No show id found for %r (%r)', series, {'year': year, 'country': country})
             return []
 
         # get the page of the season of the show

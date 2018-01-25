@@ -235,4 +235,4 @@ def test_multi_episode(episodes):
         matches = subtitles[0].get_matches(video)
     assert {subtitle.subtitle_id for subtitle in subtitles} == expected_subtitles
     # Assert episode not in matches
-    assert matches == {'series', 'format', 'year', 'season'}
+    assert matches == {'episode', 'series', 'format', 'year', 'season'}

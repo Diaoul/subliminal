@@ -169,7 +169,11 @@ class Episode(Video):
         if 'title' not in guess or 'episode' not in guess:
             raise ValueError('Insufficient data to process the guess')
 
-        return cls(name, guess['title'], guess.get('season', 1), guess['episode'], title=guess.get('episode_title'),
+        # guess can return a list of episodes, which we don't support for the moment -> return first (min) value instead
+        episode_guess = guess.get('episode')
+        episode = min(episode_guess) if episode_guess and isinstance(episode_guess, list) else episode_guess
+
+        return cls(name, guess['title'], guess.get('season', 1), episode, title=guess.get('episode_title'),
                    year=guess.get('year'), format=guess.get('format'), original_series='year' not in guess,
                    release_group=guess.get('release_group'), resolution=guess.get('screen_size'),
                    video_codec=guess.get('video_codec'), audio_codec=guess.get('audio_codec'))

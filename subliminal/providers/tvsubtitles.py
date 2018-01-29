@@ -192,7 +192,7 @@ class TVsubtitlesProvider(Provider):
             subtitle_id = int(row.parent['href'][10:-5])
             page_link = self.server_url + 'subtitle-%d.html' % subtitle_id
             rip = row.find('p', title='rip').text.strip() or None
-            release = row.find('p', title='release').text.strip() or None
+            release = row.find('h5').text.strip() or None
 
             subtitle = self.subtitle_class(language, page_link, subtitle_id, series, season, episode, year, rip,
                                            release)

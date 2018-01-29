@@ -208,7 +208,7 @@ class TVsubtitlesProvider(Provider):
             if subtitles:
                 return subtitles
         if show_id is None:
-            logger.warning('No show id found for %r (%r)', video.series, {'year': video.year})
+            logger.error('No show id found for %r (%r)', video.series, {'year': video.year})
 
         return []
 

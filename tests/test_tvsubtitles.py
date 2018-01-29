@@ -198,6 +198,7 @@ def test_list_subtitles(episodes):
         subtitles = provider.list_subtitles(video, languages)
     assert {subtitle.subtitle_id for subtitle in subtitles} == expected_subtitles
     assert {subtitle.language for subtitle in subtitles} == languages
+    assert subtitles[0].release == 'The Big Bang Theory 7x05 (HDTV.LOL)'
 
 
 @pytest.mark.integration

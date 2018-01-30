@@ -129,11 +129,7 @@ def episodes():
             'the_end_of_the_fucking_world':
             Episode('the.end.of.the.fucking.world.s01e04.720p.web.x264-skgtv.mkv', 'The End of the Fucking World', 1, 4,
                     resolution='720p', format='WEB-DL', video_codec='h264', release_group='skgtv',
-                    alternative_series=['The end of the f***ing world']),
-            'the_gifted_S01E12E13':
-            Episode('The.Gifted.S01E12E13.eXtraction.and.X-roads.1080p.WEB-DL.h264-AJP69', 'The Gifted', 1, [12, 13],
-                    resolution='1080p', format='WEB-DL', video_codec='h265', release_group='AJP69'),
-            }
+                    alternative_series=['The end of the f***ing world'])}
 
 
 @pytest.fixture(scope='session')

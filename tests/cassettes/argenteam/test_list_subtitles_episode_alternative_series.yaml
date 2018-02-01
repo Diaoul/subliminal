@@ -1,0 +1,44 @@
+interactions:
+- request:
+    body: null
+    headers:
+      User-Agent: [Subliminal/2.1]
+    method: GET
+    uri: http://argenteam.net/api/v1/search?q=TURN%3A+Washington%27s+Spies+S04E03
+  response:
+    body: {string: "{\"results\":[{\"id\":99785,\"title\":\"TURN: Washington's Spies\
+        \ (2014)  [S04E03] - Blood for Blood\",\"type\":\"episode\",\"summary\":\"\
+        La estrategia de Abe para rescatar a Caleb da un giro mortal. Anna debe tomar\
+        \ una dif\xEDcil decisi\xF3n. Arnold sospecha que Peggy le oculta un secreto.\"\
+        ,\"imdb\":\"\",\"poster\":\"\"}],\"total\":1,\"offset\":0}"}
+    headers:
+      content-type: [application/json;charset=UTF-8]
+      date: ['Thu, 01 Feb 2018 17:27:49 GMT']
+      server: [Apache-Coyote/1.1]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      User-Agent: [Subliminal/2.1]
+    method: GET
+    uri: http://argenteam.net/api/v1/episode?id=99785
+  response:
+    body: {string: "{\"id\":99785,\"tvdb\":\"6124360\",\"season\":4,\"number\":\"\
+        03\",\"title\":\"Blood for Blood\",\"summary\":\"La estrategia de Abe para\
+        \ rescatar a Caleb da un giro mortal. Anna debe tomar una dif\xEDcil decisi\xF3\
+        n. Arnold sospecha que Peggy le oculta un secreto.\",\"releases\":[{\"source\"\
+        :\"HDTV\",\"codec\":\"x264\",\"team\":\"SVA\",\"tags\":\"\",\"size\":\"325\
+        \ MB\",\"torrents\":[{\"uri\":\"magnet:?xt=urn:btih:ae2d0c63ea8fb271d0d4f52c211ddf1549bb235c&dn=Turn.S04E03.HDTV.x264-SVA%5Brartv%5D&tr=http%3A%2F%2Ftracker.trackerfix.com%3A80%2Fannounce&tr=udp%3A%2F%2F9.rarbg.me%3A2710&tr=udp%3A%2F%2F9.rarbg.to%3A2710\"\
+        }],\"elinks\":[{\"uri\":\"ed2k://|file|Turn.S04E03.Blood.For.Blood.HDTV.x264-SVA.mkv|330335305|14423C97EA2DAC4F9E6D7E77B8B856B7|h=ZAK3EXPBRJS63UNRFAK3YHS7XPYBLDIE|/\"\
+        }],\"subtitles\":[{\"uri\":\"http://www.argenteam.net/subtitles/67263/TURN.Washingtons.Spies.%282014%29.S04E03-Blood.for.Blood.HDTV.x264-SVA\"\
+        ,\"count\":70674}]},{\"source\":\"HDTV\",\"codec\":\"x264\",\"team\":\"AVS\"\
+        ,\"tags\":\"720p\",\"size\":\"1.1 GB\",\"torrents\":[{\"uri\":\"magnet:?xt=urn:btih:0c0f9aceca2042dde6287d688c220996567f9101&dn=Turn.S04E03.720p.HDTV.x264-AVS%5Brartv%5D&tr=http%3A%2F%2Ftracker.trackerfix.com%3A80%2Fannounce&tr=udp%3A%2F%2F9.rarbg.me%3A2710&tr=udp%3A%2F%2F9.rarbg.to%3A2710\"\
+        }],\"elinks\":[{\"uri\":\"ed2k://|file|Turn.S04E03.Blood.For.Blood.720p.HDTV.x264-AVS.mkv|1128279550|C414AB93C029A1A02B21C56466B97E48|h=IUBTJAYYBKUTKRKAFY3S4JKUCP5VCEB2|/\"\
+        }],\"subtitles\":[{\"uri\":\"http://www.argenteam.net/subtitles/67264/TURN.Washingtons.Spies.%282014%29.S04E03-Blood.for.Blood.HDTV.x264.720p-AVS\"\
+        ,\"count\":70674}]}]}"}
+    headers:
+      content-type: [application/json;charset=UTF-8]
+      date: ['Thu, 01 Feb 2018 17:27:49 GMT']
+      server: [Apache-Coyote/1.1]
+    status: {code: 200, message: OK}
+version: 1

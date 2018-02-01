@@ -106,9 +106,9 @@ class ArgenteamProvider(Provider):
         if episode_id is None:
             return []
 
-        r = self.session.get(self.API_URL + 'episode', params={'id': episode_id}, timeout=10)
-        r.raise_for_status()
-        content = json.loads(r.text)
+        response = self.session.get(self.API_URL + 'episode', params={'id': episode_id}, timeout=10)
+        response.raise_for_status()
+        content = json.loads(response.text)
         language = Language.fromalpha2('es')
         subtitles = []
         for r in content['releases']:

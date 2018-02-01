@@ -38,7 +38,9 @@ class ArgenteamSubtitle(Subtitle):
     def get_matches(self, video):
         matches = set()
         # series
-        if video.series and sanitize(self.series) == sanitize(video.series):
+        if video.series and (sanitize(self.series) in (
+                 sanitize(name) for name in [video.series] + video.alternative_series)):
+#        if video.series and sanitize(self.series) == sanitize(video.series):
             matches.add('series')
         # season
         if video.season and self.season == video.season:
@@ -119,7 +121,14 @@ class ArgenteamProvider(Provider):
         return subtitles
 
     def list_subtitles(self, video, languages):
-        return self.query(video.series, video.season, video.episode)
+        titles = [video.series] + video.alternative_series
+        for title in titles:
+            subs = self.query(title, video.season, video.episode)
+            if subs:
+                return subs
+
+        return []
+#        return self.query(video.series, video.season, video.episode)
 
     def download_subtitle(self, subtitle):
         # download as a zip

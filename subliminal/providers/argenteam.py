@@ -40,7 +40,6 @@ class ArgenteamSubtitle(Subtitle):
         # series
         if video.series and (sanitize(self.series) in (
                  sanitize(name) for name in [video.series] + video.alternative_series)):
-#        if video.series and sanitize(self.series) == sanitize(video.series):
             matches.add('series')
         # season
         if video.season and self.season == video.season:
@@ -128,7 +127,6 @@ class ArgenteamProvider(Provider):
                 return subs
 
         return []
-#        return self.query(video.series, video.season, video.episode)
 
     def download_subtitle(self, subtitle):
         # download as a zip

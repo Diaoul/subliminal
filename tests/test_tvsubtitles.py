@@ -223,17 +223,3 @@ def test_list_subtitles_episode_alternative_series(episodes):
         subtitles = provider.list_subtitles(video, languages)
     assert {subtitle.subtitle_id for subtitle in subtitles} == expected_subtitles
     assert {subtitle.language for subtitle in subtitles} == languages
-
-
-@pytest.mark.integration
-@vcr.use_cassette
-def test_multi_episode(episodes):
-    video = episodes['the_gifted_S01E12E13']
-    languages = {Language('eng')}
-    expected_subtitles = {333368}
-    with TVsubtitlesProvider() as provider:
-        subtitles = provider.list_subtitles(video, languages)
-        matches = subtitles[0].get_matches(video)
-    assert {subtitle.subtitle_id for subtitle in subtitles} == expected_subtitles
-    # Assert episode not in matches
-    assert matches == {'series', 'format', 'year', 'season'}

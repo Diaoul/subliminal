@@ -338,14 +338,15 @@ def refine(video, **kwargs):
     video.series_imdb_id = series['imdbId'] or None
 
     # get the episode
-    logger.info('Getting series episode %dx%d', video.season, video.episode)
-    episode = get_series_episode(video.series_tvdb_id, video.season, video.episode)
+    video_episode = min(video.episode) if video.episode and isinstance(video.episode, list) else video.episode
+    logger.info('Getting series episode %dx%d', video.season, video_episode)
+    episode = get_series_episode(video.series_tvdb_id, video.season, video_episode)
     if not episode:
         logger.warning('No results for episode')
         return
 
     # add episode information
-    logger.debug('Found episode %r', episode)
+    logger.debug('Found episode %r', video_episode)
     video.tvdb_id = episode['id']
     video.title = episode['episodeName'] or None
     video.imdb_id = episode['imdbId'] or None

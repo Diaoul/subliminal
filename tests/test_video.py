@@ -109,6 +109,12 @@ def test_video_hash(episodes):
     assert hash(video) == hash(video.name)
 
 
+def test_episode_from_guess_multi_episode(episodes):
+    video = Video.fromname(episodes['Marvels.Agents.of.S.H.I.E.L.D.S05E01-E02'].name)
+    # Multi-ep is converted to single-ep by taking the lowest episode number
+    assert video.episode == episodes['Marvels.Agents.of.S.H.I.E.L.D.S05E01-E02'].episode
+
+
 def test_episode_fromguess_wrong_type(episodes):
     guess = {'type': 'subtitle'}
     with pytest.raises(ValueError) as excinfo:

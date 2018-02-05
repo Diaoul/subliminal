@@ -276,17 +276,3 @@ def test_tag_match(episodes):
     assert unwanted_subtitle_id in {subtitle.id for subtitle in subtitles}
     # Assert is not a tag match: {'series', 'year', 'season', 'episode'}
     assert matches == {'episode', 'year', 'season'}
-
-
-@pytest.mark.integration
-@vcr.use_cassette
-def test_multi_episode(episodes):
-    video = episodes['Marvels.Agents.of.S.H.I.E.L.D.S05E01-E02']
-    wanted_subtitle_id = '1955759264'
-    languages = {Language('eng')}
-    with OpenSubtitlesProvider() as provider:
-        subtitles = provider.list_subtitles(video, languages)
-        found_subtitle = [s for s in subtitles if s.id == wanted_subtitle_id][0]
-        matches = found_subtitle.get_matches(video)
-        assert found_subtitle.filename == 'Marvels.Agents.of.S.H.I.E.L.D.S05E01-E02.HDTV.x264-SVA.srt'
-        assert matches == {'episode', 'format', 'series', 'year', 'season', 'video_codec', 'release_group'}

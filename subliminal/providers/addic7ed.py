@@ -231,18 +231,12 @@ class Addic7edProvider(Provider):
 
         # search as last resort
         if not show_id:
-            logger.warning('Series not found in show ids')
+            logger.warning('Series %s not found in show ids', series)
             show_id = self._search_show_id(series)
 
         return show_id
 
-    def query(self, series, season, year=None, country=None):
-        # get the show id
-        show_id = self.get_show_id(series, year, country)
-        if show_id is None:
-            logger.error('No show id found for %r (%r)', series, {'year': year, 'country': country})
-            return []
-
+    def query(self, show_id, series, season, year=None, country=None):
         # get the page of the season of the show
         logger.info('Getting the page of show id %d, season %d', show_id, season)
         r = self.session.get(self.server_url + 'show/%d' % show_id, params={'season': season}, timeout=10)
@@ -288,12 +282,22 @@ class Addic7edProvider(Provider):
         return subtitles
 
     def list_subtitles(self, video, languages):
+        # lookup show_id
         titles = [video.series] + video.alternative_series
+        show_id = None
         for title in titles:
-            subtitles = [s for s in self.query(title, video.season, video.year)
+            show_id = self.get_show_id(title, video.year)
+            if show_id is not None:
+                break
+
+        # query for subtitles with the show_id
+        if show_id is not None:
+            subtitles = [s for s in self.query(show_id, title, video.season, video.year)
                          if s.language in languages and s.episode == video.episode]
             if subtitles:
                 return subtitles
+        else:
+            logger.error('No show id found for %r (%r)', video.series, {'year': video.year})
 
         return []
 

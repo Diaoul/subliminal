@@ -174,12 +174,11 @@ class HosszupuskaProvider(Provider):
 
                 sub_year = None
                 # Handle the case when '(' in subtitle
-                if datas[1].getText().count('(') == 1:
-                    sub_english_name = re.split('s(\d{1,2})e(\d{1,2})', datas[1].getText().split('(')[0])[3]
                 if datas[1].getText().count('(') == 2:
+                    sub_english_name = re.split('s(\d{1,2})e(\d{1,2})', datas[1].getText().split('(')[0])[3]
+                if datas[1].getText().count('(') == 3:
                     sub_year = re.findall(r"(?<=\()(\d{4})(?=\))", datas[1].getText().strip())[0]
-                    sub_english_name = re.split('s(\d{1,2})e(\d{1,2})', datas[1].getText().split('(')[0] +
-                                                datas[1].getText().split('(')[1])[3]
+                    sub_english_name = re.split('s(\d{1,2})e(\d{1,2})', datas[1].getText().split('(')[0])[3]
                 sub_season = int((re.findall('s(\d{1,2})', datas[1].find_all('b')[0].getText(), re.VERBOSE)[0])
                                  .lstrip('0'))
                 sub_episode = int((re.findall('e(\d{1,2})', datas[1].find_all('b')[0].getText(), re.VERBOSE)[0])
@@ -188,9 +187,9 @@ class HosszupuskaProvider(Provider):
                 sub_downloadlink = datas[6].find_all('a')[1]['href']
                 sub_id = sub_downloadlink.split('=')[1].split('.')[0]
 
-                if datas[1].getText().count('(') == 1:
-                    sub_version = datas[1].getText().split('(')[1].split(')')[0]
                 if datas[1].getText().count('(') == 2:
+                    sub_version = datas[1].getText().split('(')[1].split(')')[0]
+                if datas[1].getText().count('(') == 3:
                     sub_version = datas[1].getText().split('(')[2].split(')')[0]
 
                 # One subtitle can be used for sevearl relase add both of them.

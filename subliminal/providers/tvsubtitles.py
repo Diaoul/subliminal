@@ -163,13 +163,7 @@ class TVsubtitlesProvider(Provider):
 
         return episode_ids
 
-    def query(self, series, season, episode, year=None):
-        # search the show id
-        show_id = self.search_show_id(series, year)
-        if show_id is None:
-            logger.error('No show id found for %r (%r)', series, {'year': year})
-            return []
-
+    def query(self, show_id, series, season, episode, year=None):
         # get the episode ids
         episode_ids = self.get_episode_ids(show_id, season)
         if episode not in episode_ids:
@@ -199,12 +193,22 @@ class TVsubtitlesProvider(Provider):
         return subtitles
 
     def list_subtitles(self, video, languages):
+        # lookup show_id
         titles = [video.series] + video.alternative_series
+        show_id = None
         for title in titles:
-            subtitles = [s for s in self.query(title, video.season, video.episode, video.year)
-                         if s.language in languages]
+            show_id = self.search_show_id(title, video.year)
+            if show_id is not None:
+                break
+
+        # query for subtitles with the show_id
+        if show_id is not None:
+            subtitles = [s for s in self.query(show_id, title, video.season, video.episode, video.year)
+                         if s.language in languages and s.episode == video.episode]
             if subtitles:
                 return subtitles
+        else:
+            logger.error('No show id found for %r (%r)', video.series, {'year': video.year})
 
         return []
 

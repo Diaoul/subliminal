@@ -36,7 +36,7 @@ class HosszupuskaSubtitle(Subtitle):
         if self.resolution:
             subtit = subtit + " Resolution: " + self.resolution
         if self.year:
-            subtit = subtit + " Year: " + self.year
+            subtit = subtit + " Year: " + str(self.year)
         if six.PY3:
             return subtit
         return subtit.encode('utf-8')
@@ -52,6 +52,8 @@ class HosszupuskaSubtitle(Subtitle):
         self.release_group = release_group
         self.resolution = resolution
         self.year = year
+        if year:
+            self.year = int(year)
 
     @property
     def id(self):
@@ -72,6 +74,7 @@ class HosszupuskaSubtitle(Subtitle):
         if ('series' in matches and video.original_series and self.year is None or
            video.year and video.year == self.year):
             matches.add('year')
+        
         # resolution
         if video.resolution and self.resolution and video.resolution.lower() == self.resolution.lower():
             matches.add('resolution')
@@ -175,10 +178,10 @@ class HosszupuskaProvider(Provider):
                 sub_year = None
                 # Handle the case when '(' in subtitle
                 if datas[1].getText().count('(') == 2:
-                    sub_english_name = re.split('s(\d{1,2})e(\d{1,2})', datas[1].getText().split('(')[0])[3]
+                    sub_english_name = re.split('s(\d{1,2})e(\d{1,2})', datas[1].getText())[3]
                 if datas[1].getText().count('(') == 3:
                     sub_year = re.findall(r"(?<=\()(\d{4})(?=\))", datas[1].getText().strip())[0]
-                    sub_english_name = re.split('s(\d{1,2})e(\d{1,2})', datas[1].getText().split('(')[0])[3]
+                    sub_english_name = re.split('s(\d{1,2})e(\d{1,2})', datas[1].getText().split('(')[0])[0]
                 sub_season = int((re.findall('s(\d{1,2})', datas[1].find_all('b')[0].getText(), re.VERBOSE)[0])
                                  .lstrip('0'))
                 sub_episode = int((re.findall('e(\d{1,2})', datas[1].find_all('b')[0].getText(), re.VERBOSE)[0])
@@ -187,6 +190,7 @@ class HosszupuskaProvider(Provider):
                 sub_downloadlink = datas[6].find_all('a')[1]['href']
                 sub_id = sub_downloadlink.split('=')[1].split('.')[0]
 
+                sub_version = None
                 if datas[1].getText().count('(') == 2:
                     sub_version = datas[1].getText().split('(')[1].split(')')[0]
                 if datas[1].getText().count('(') == 3:

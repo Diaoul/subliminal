@@ -74,7 +74,7 @@ class HosszupuskaSubtitle(Subtitle):
         if ('series' in matches and video.original_series and self.year is None or
            video.year and video.year == self.year):
             matches.add('year')
-        
+
         # resolution
         if video.resolution and self.resolution and video.resolution.lower() == self.resolution.lower():
             matches.add('resolution')

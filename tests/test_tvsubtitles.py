@@ -156,8 +156,7 @@ def test_query(episodes):
     video = episodes['bbt_s07e05']
     expected_subtitles = {268673, 249733, 249518, 249519, 249714, 32596, 249590, 249592, 249499, 261214}
     with TVsubtitlesProvider() as provider:
-        show_id = provider.search_show_id(video.series, video.year)
-        subtitles = provider.query(show_id, video.series, video.season, video.episode, video.year)
+        subtitles = provider.query(video.series, video.season, video.episode, video.year)
     assert {subtitle.subtitle_id for subtitle in subtitles} == expected_subtitles
 
 
@@ -167,8 +166,7 @@ def test_query_no_year(episodes):
     video = episodes['dallas_s01e03']
     expected_subtitles = {124753}
     with TVsubtitlesProvider() as provider:
-        show_id = provider.search_show_id(video.series, video.year)
-        subtitles = provider.query(show_id, video.series, video.season, video.episode, video.year)
+        subtitles = provider.query(video.series, video.season, video.episode, video.year)
     assert {subtitle.subtitle_id for subtitle in subtitles} == expected_subtitles
 
 
@@ -177,7 +175,7 @@ def test_query_no_year(episodes):
 def test_query_wrong_series(episodes):
     video = episodes['bbt_s07e05']
     with TVsubtitlesProvider() as provider:
-        subtitles = provider.query(155, video.series[:12], video.season, video.episode, video.year)
+        subtitles = provider.query(video.series[:12], video.season, video.episode, video.year)
     assert len(subtitles) == 0
 
 
@@ -186,8 +184,7 @@ def test_query_wrong_series(episodes):
 def test_query_wrong_episode(episodes):
     video = episodes['bbt_s07e05']
     with TVsubtitlesProvider() as provider:
-        show_id = provider.search_show_id(video.series, video.year)
-        subtitles = provider.query(show_id, video.series, video.season, 55, video.year)
+        subtitles = provider.query(video.series, video.season, 55, video.year)
     assert len(subtitles) == 0
 
 

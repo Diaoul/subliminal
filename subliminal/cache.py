@@ -30,7 +30,7 @@ def _to_native_str(s):
             return s
 
 
-def _to_byte_str_key_generator(namespace, fn, to_str=_to_native_str()):
+def _to_byte_str_key_generator(namespace, fn, to_str=_to_native_str):
     return function_key_generator(namespace, fn, to_str)
 
 

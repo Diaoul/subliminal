@@ -15,14 +15,22 @@ EPISODE_EXPIRATION_TIME = datetime.timedelta(days=3).total_seconds()
 REFINER_EXPIRATION_TIME = datetime.timedelta(weeks=1).total_seconds()
 
 
-def _to_byte_str(value):
-    if isinstance(value, six.text_type):
-        return value.encode('utf-8')
+def _to_native_str(s):
+    if six.PY2:
+        # In Python 2, the native string type is bytes
+        if isinstance(s, six.text_type):  # unicode for Python 2
+            return s.encode('utf-8')
+        else:
+            return s
     else:
-        return six.binary_type(value)
+        # In Python 3, the native string type is unicode
+        if isinstance(s, six.binary_type):  # bytes for Python 3
+            return s.decode('utf-8')
+        else:
+            return s
 
 
-def _to_byte_str_key_generator(namespace, fn, to_str=_to_byte_str):
+def _to_byte_str_key_generator(namespace, fn, to_str=_to_native_str()):
     return function_key_generator(namespace, fn, to_str)
 
 

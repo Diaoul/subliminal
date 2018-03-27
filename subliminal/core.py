@@ -521,6 +521,10 @@ def scan_videos(path, age=None, archives=True):
             if dirname.startswith('.'):
                 logger.debug('Skipping hidden dirname %r in %r', dirname, dirpath)
                 dirnames.remove(dirname)
+            # Skip Sample folder
+            if dirname.lower() == 'sample':
+                logger.debug('Skipping sample dirname %r in %r', dirname, dirpath)
+                dirnames.remove(dirname)
 
         # scan for videos
         for filename in filenames:
@@ -531,6 +535,10 @@ def scan_videos(path, age=None, archives=True):
             # skip hidden files
             if filename.startswith('.'):
                 logger.debug('Skipping hidden filename %r in %r', filename, dirpath)
+                continue
+            # skip 'sample' media files
+            if os.path.splitext(filename)[0].lower() == 'sample':
+                logger.debug('Skipping sample filename %r in %r', filename, dirpath)
                 continue
 
             # reconstruct the file path

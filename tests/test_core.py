@@ -345,6 +345,8 @@ def test_scan_videos(movies, tmpdir, monkeypatch):
     man_of_steel = tmpdir.ensure('movies', movies['man_of_steel'].name)
     tmpdir.ensure('movies', '.private', 'sextape.mkv')
     tmpdir.ensure('movies', '.hidden_video.mkv')
+    tmpdir.ensure('movies', 'Sample', 'video.mkv')
+    tmpdir.ensure('movies', 'sample.mkv')
     tmpdir.ensure('movies', movies['enders_game'].name)
     tmpdir.ensure('movies', movies['interstellar'].name)
     tmpdir.ensure('movies', os.path.splitext(movies['enders_game'].name)[0] + '.nfo')

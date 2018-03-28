@@ -23,8 +23,11 @@ def test_dogpile_cache_on_arguments_unicode_failure():
         search_default(u'The Simpsons-S12E09-HOMЯ')
 
 
-def test_dogpile_cache_on_arguments__unicode_to_native_str():
+def test_dogpile_cache_on_arguments_unicode_to_native_str():
     value = u'The Simpsons-S12E09-HOMЯ'
     search(value)
-    value_bytes = b'The Simpsons-S12E09-HOMЯ'
+
+
+def test_dogpile_cache_on_arguments_bytestring_to_native_str():
+    value_bytes = b'The Simpsons-S12E09-HOM\xd0\xaf'
     search(value_bytes)

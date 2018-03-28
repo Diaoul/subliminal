@@ -30,8 +30,8 @@ def _to_native_str(value):
             return six.text_type(value)
 
 
-def _to_native_str_key_generator(namespace, fn, to_str=_to_native_str):
+def to_native_str_key_generator(namespace, fn, to_str=_to_native_str):
     return function_key_generator(namespace, fn, to_str)
 
 
-region = make_region(function_key_generator=_to_native_str_key_generator)
+region = make_region(function_key_generator=to_native_str_key_generator)

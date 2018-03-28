@@ -1,33 +1,56 @@
 # coding=utf-8
 
-import pytest
+from datetime import timedelta
 
+import pytest
+import six
 from dogpile.cache import make_region
+
+try:
+    from unittest.mock import Mock
+except ImportError:
+    from mock import Mock
+
 from subliminal.cache import region
 
-region_default = make_region()
+# Configure default dogpile cache
+region_dogpile = make_region()
+region_dogpile.configure('dogpile.cache.null')
+region_dogpile.configure = Mock()
+
+unicode_string = u'The Simpsons-S12E09-HOMЯ'
+byte_string = b'The Simpsons-S12E09-HOM\xd0\xaf'
 
 
-@region_default.cache_on_arguments()
-def search_default(value):
+@region_dogpile.cache_on_arguments(expiration_time=timedelta(seconds=10).total_seconds())
+def dogpile_cache(value):
     return value
 
 
-@region.cache_on_arguments()
-def search(value):
+@region.cache_on_arguments(expiration_time=timedelta(seconds=10).total_seconds())
+def custom_cache(value):
     return value
 
 
-def test_dogpile_cache_on_arguments_unicode_failure():
-    with pytest.raises(UnicodeEncodeError):
-        search_default(u'The Simpsons-S12E09-HOMЯ')
+def test_dogpile_cache_on_arguments_unicode_string():
+    if six.PY2:
+        with pytest.raises(UnicodeEncodeError):
+            dogpile_cache(unicode_string)
+    else:
+        dogpile_cache(unicode_string)
 
 
-def test_dogpile_cache_on_arguments_unicode_to_native_str():
-    value = u'The Simpsons-S12E09-HOMЯ'
-    search(value)
+def test_dogpile_cache_on_arguments_byte_string():
+    if six.PY2:
+        dogpile_cache(byte_string)
+    else:
+        with pytest.raises(UnicodeEncodeError):
+            dogpile_cache(byte_string)
 
 
-def test_dogpile_cache_on_arguments_bytestring_to_native_str():
-    value_bytes = b'The Simpsons-S12E09-HOM\xd0\xaf'
-    search(value_bytes)
+def test_custom_cache_on_arguments_unicode_string():
+    custom_cache(unicode_string)
+
+
+def test_custom_cache_on_arguments_byte_string():
+    custom_cache(byte_string)

@@ -58,3 +58,16 @@ def test_list_subtitles_movie(movies):
 
     assert {subtitle.id for subtitle in subtitles} == expected_subtitles
     assert {subtitle.language for subtitle in subtitles} == languages
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_download_subtitle(movies):
+
+    with WizdomProvider() as provider:
+        subtitles = provider.list_subtitles(
+            movies['man_of_steel'], {Language('heb')})
+        provider.download_subtitle(subtitles[0])
+
+    assert subtitles[0].content is not None
+    assert subtitles[0].is_valid() is True

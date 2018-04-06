@@ -28,8 +28,6 @@ class WizdomSubtitle(Subtitle):
     def __init__(self, imdb_id, api_dict):
         super(WizdomSubtitle, self).__init__(Language('heb'))
 
-        print("Wizdom subtitle created")
-
         self._imdb_id = imdb_id
         self._api_dict = api_dict
 
@@ -113,7 +111,7 @@ class WizdomProvider(Provider):
 
         logger.info('Downloading subtitle %r', subtitle)
 
-        response = self._sesson.get(subtitle.download_url)
+        response = self._session.get(subtitle.download_url)
         response.raise_for_status()
 
         with zipfile.ZipFile(io.BytesIO(response.content)) as f:

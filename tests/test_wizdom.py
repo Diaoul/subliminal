@@ -20,6 +20,24 @@ def test_get_matches_no_match(episodes):
     assert matches == set()
 
 
+def test_get_matches_episode(episodes):
+
+    subtitle = WizdomSubtitle("tt0944947", dict(versioname="Game.of.Thrones.S03E10.Mhysa.720p.WEB-DL.DD5.1.H.264-NTb",
+                                                id="166995", score=9))
+    matches = subtitle.get_matches(episodes['got_s03e10'])
+    assert matches == {"title", "series", "year", "episode", "season",
+                       "episode", "video_codec", "resolution", "release_group", "format"}
+
+
+def test_get_matches_movie(movies):
+
+    subtitle = WizdomSubtitle("tt0770828", dict(versioname="man.of.steel.2013.720p.bluray.x264-felony",
+                                                id="77724", score=9))
+    matches = subtitle.get_matches(movies['man_of_steel'])
+    assert matches == {'title', 'year', 'video_codec',
+                       'resolution', 'format', 'release_group', 'imdb_id'}
+
+
 @pytest.mark.integration
 @vcr.use_cassette
 def test_query_file_name_series_imdb_id_season_episode(episodes):

@@ -1,0 +1,29 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [Subliminal/2.0]
+    method: GET
+    uri: http://api.wizdom.xyz/search.id.php?imdb=tt0944947&version=Game.of.Thrones.S03E10.Mhysa.720p.WEB-DL.DD5.1.H.264-NTb.mkv&episode=10&season=3
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA6TR3U6DQBAF4HfZa5jMsMvCcke7tL0AmliCf/ECFVMuKA0kjcb47sYfYDWpRX2B
+        75yZc/3MDmXbVc2uqEsWsGVRl9A8QLZtm13ZwQZ5RAjJ9qkrwHNwD+fRzNYxaO0CwQocKew0u2UW
+        q+5ZwEhKpVxmse6uaUsWqBfrNwmE/veIMJw7gJ9Jl4u0TxIOd8YcMTXn/YaVznJ4fAOjfB3nUW9y
+        T/ijyaeawv9i1hs9lESUhkhTxaMFlSvopLc+8t2ZPqv2H6yOkjDVxi/pry0vDpW2w8VysCQpYxic
+        WnHEeJzhMLNHXJ7mfuqWzH1zDu8/GGj7ClPee5IUkundvAIAAP//AwAXtKb5UAMAAA==
+    headers:
+      CF-RAY: [4074eff685da6a3d-LHR]
+      Connection: [keep-alive]
+      Content-Encoding: [gzip]
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Fri, 06 Apr 2018 14:27:49 GMT']
+      Server: [cloudflare]
+      Set-Cookie: ['__cfduid=d988b7a247654b6f9400ebdffba8317211523024868; expires=Sat,
+          06-Apr-19 14:27:48 GMT; path=/; domain=.wizdom.xyz; HttpOnly']
+    status: {code: 200, message: OK}
+version: 1

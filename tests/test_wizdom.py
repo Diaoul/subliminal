@@ -22,6 +22,50 @@ def test_get_matches_no_match(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
+def test_query_file_name_series_imdb_id_season_episode(episodes):
+
+    languages = {Language('heb')}
+    expected_subtitles = {"166995", "4232", "3748", "40068",
+                          "39541", "4231", "46192", "71362",
+                          "40067", "61901"}
+
+    with WizdomProvider() as provider:
+        subtitles = provider.query(os.path.basename(episodes['got_s03e10'].name),
+                                   episodes['got_s03e10'].series_imdb_id,
+                                   episodes['got_s03e10'].season,
+                                   episodes['got_s03e10'].episode)
+
+    assert {subtitle.id for subtitle in subtitles} == expected_subtitles
+    assert {subtitle.language for subtitle in subtitles} == languages
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_query_file_name_imdb_id(movies):
+
+    languages = {Language('heb')}
+    expected_subtitles = {"77724", "24384", "24382", "24368",
+                          "24355", "24386", "24372", "24396",
+                          "24394", "24404", "24351", "24378",
+                          "185106", "24402", "24366", "24400",
+                          "24405", "95805", "62797", "134088",
+                          "155340", "62796", "24359", "24398",
+                          "66283", "24370", "114837", "75722",
+                          "90978", "24380", "24390", "24363",
+                          "24374", "134091", "24361", "24408",
+                          "64634", "134085", "24388", "24357",
+                          "24392", "24353", "24376", "24410"}
+
+    with WizdomProvider() as provider:
+        subtitles = provider.query(os.path.basename(
+            movies['man_of_steel'].name), movies['man_of_steel'].imdb_id)
+
+    assert {subtitle.id for subtitle in subtitles} == expected_subtitles
+    assert {subtitle.language for subtitle in subtitles} == languages
+
+
+@pytest.mark.integration
+@vcr.use_cassette
 def test_list_subtitle_episode(episodes):
 
     languages = {Language('heb')}

@@ -78,6 +78,10 @@ Installation
 Subliminal can be installed as a regular python module by running::
 
     $ [sudo] pip install subliminal
+    
+Installation on Mac OSX
+-----------------------
+    $ [sudo] python setup.py install
 
 For a better isolation with your system you should use a dedicated virtualenv or install for your user only using
 the ``--user`` flag.

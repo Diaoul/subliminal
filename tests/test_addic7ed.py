@@ -73,11 +73,11 @@ def test_get_matches_resolution_release_group(episodes):
     assert matches == {'series', 'season', 'episode', 'title', 'year', 'release_group', 'resolution'}
 
 
-def test_get_matches_format_release_group(episodes):
+def test_get_matches_source_release_group(episodes):
     subtitle = Addic7edSubtitle(Language('eng'), True, None, 'Game of Thrones', 3, 10, 'Mhysa', None, 'WEB-DL-NTb',
                                 None)
     matches = subtitle.get_matches(episodes['got_s03e10'])
-    assert matches == {'series', 'season', 'episode', 'title', 'year', 'release_group', 'format'}
+    assert matches == {'series', 'season', 'episode', 'title', 'year', 'release_group', 'source'}
 
 
 def test_get_matches_no_match(episodes):

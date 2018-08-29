@@ -30,7 +30,7 @@ def test_get_matches_movie(movies):
     subtitle = PodnapisiSubtitle(Language('eng'), True, None, 'EMgo', subtitle_releases, 'Man of Steel', None, None,
                                  2013)
     matches = subtitle.get_matches(movies['man_of_steel'])
-    assert matches == {'title', 'year', 'video_codec', 'resolution', 'format', 'release_group'}
+    assert matches == {'title', 'year', 'video_codec', 'resolution', 'source', 'release_group'}
 
 
 def test_get_matches_episode(episodes):
@@ -41,7 +41,7 @@ def test_get_matches_episode(episodes):
     subtitle = PodnapisiSubtitle(Language('eng'), False, None, 'EdQo', subtitle_releases, 'The Big Bang Theory', 7, 5,
                                  2007)
     matches = subtitle.get_matches(episodes['bbt_s07e05'])
-    assert matches == {'series', 'season', 'episode', 'video_codec', 'resolution', 'format', 'release_group', 'year'}
+    assert matches == {'series', 'season', 'episode', 'video_codec', 'resolution', 'source', 'release_group', 'year'}
 
 
 def test_get_matches_episode_year(episodes):

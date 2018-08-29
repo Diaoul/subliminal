@@ -43,14 +43,14 @@ def test_get_matches_format_release_group(episodes):
     subtitle = TVsubtitlesSubtitle(Language('fra'), None, 249518, 'The Big Bang Theory', 7, 5, 2007, 'HDTV',
                                    'lol-dimension')
     matches = subtitle.get_matches(episodes['bbt_s07e05'])
-    assert matches == {'series', 'season', 'episode', 'year', 'format', 'release_group'}
+    assert matches == {'series', 'season', 'episode', 'year', 'source', 'release_group'}
 
 
 def test_get_matches_format_equivalent_release_group(episodes):
     subtitle = TVsubtitlesSubtitle(Language('fra'), None, 249518, 'The Big Bang Theory', 7, 5, 2007, 'HDTV',
                                    'lol')
     matches = subtitle.get_matches(episodes['bbt_s07e05'])
-    assert matches == {'series', 'season', 'episode', 'year', 'format', 'release_group'}
+    assert matches == {'series', 'season', 'episode', 'year', 'source', 'release_group'}
 
 
 def test_get_matches_video_codec_resolution(episodes):

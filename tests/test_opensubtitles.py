@@ -21,7 +21,7 @@ def test_get_matches_movie_hash(movies):
                                      'Man.of.Steel.German.720p.BluRay.x264-EXQUiSiTE', 2013, 'tt0770828', 0, 0,
                                      'Man.of.Steel.German.720p.BluRay.x264-EXQUiSiTE.srt', None)
     matches = subtitle.get_matches(movies['man_of_steel'])
-    assert matches == {'title', 'year', 'video_codec', 'imdb_id', 'hash', 'resolution', 'format'}
+    assert matches == {'title', 'year', 'video_codec', 'imdb_id', 'hash', 'resolution', 'source'}
 
 
 def test_get_matches_episode(episodes):
@@ -48,7 +48,7 @@ def test_get_matches_episode_filename(episodes):
                                      'HDTV.x264-KILLERS-mSD-AFG-EVO-KILLERS', 2014, 'tt4078580', 2, 6,
                                      'Marvels.Agents.of.S.H.I.E.L.D.S02E06.720p.HDTV.x264-KILLERS.srt', 'cp1252')
     matches = subtitle.get_matches(episodes['marvels_agents_of_shield_s02e06'])
-    assert matches == {'series', 'year', 'season', 'episode', 'release_group', 'format', 'resolution', 'video_codec'}
+    assert matches == {'series', 'year', 'season', 'episode', 'release_group', 'source', 'resolution', 'video_codec'}
 
 
 def test_get_matches_episode_tag(episodes):
@@ -57,7 +57,7 @@ def test_get_matches_episode_tag(episodes):
                                      'HDTV.x264-KILLERS-mSD-AFG-EVO-KILLERS', 2014, 'tt4078580', 2, 6,
                                      '', 'cp1252')
     matches = subtitle.get_matches(episodes['marvels_agents_of_shield_s02e06'])
-    assert matches == {'series', 'year', 'season', 'episode', 'format', 'video_codec'}
+    assert matches == {'series', 'year', 'season', 'episode', 'source', 'video_codec'}
 
 
 def test_get_matches_imdb_id(movies):
@@ -65,7 +65,7 @@ def test_get_matches_imdb_id(movies):
                                      'man.of.steel.2013.720p.bluray.x264-felony', 2013, 'tt0770828', 0, 0,
                                      'man.of.steel.2013.720p.bluray.x264-felony.srt', None)
     matches = subtitle.get_matches(movies['man_of_steel'])
-    assert matches == {'title', 'year', 'video_codec', 'imdb_id', 'resolution', 'format', 'release_group'}
+    assert matches == {'title', 'year', 'video_codec', 'imdb_id', 'resolution', 'source', 'release_group'}
 
 
 def test_get_matches_no_match(episodes):

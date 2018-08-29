@@ -45,7 +45,7 @@ def test_compute_score_episode_imdb_id(movies):
                                      'Man of Steel', 'man.of.steel.2013.720p.bluray.x264-felony.mkv', 2013, 770828,
                                      None, None, '', 'utf-8')
     assert compute_score(subtitle, video) == sum(movie_scores.get(m, 0) for m in
-                                                 ('imdb_id', 'title', 'year', 'release_group', 'format', 'resolution',
+                                                 ('imdb_id', 'title', 'year', 'release_group', 'source', 'resolution',
                                                   'video_codec'))
 
 
@@ -55,7 +55,7 @@ def test_compute_score_episode_title(episodes):
                                  ['The.Big.Bang.Theory.S07E05.The.Workplace.Proximity.720p.HDTV.x264-DIMENSION.mkv'],
                                  None, 7, 5, None)
     assert compute_score(subtitle, video) == sum(episode_scores.get(m, 0) for m in
-                                                 ('series', 'year', 'season', 'episode', 'release_group', 'format',
+                                                 ('series', 'year', 'season', 'episode', 'release_group', 'source',
                                                   'resolution', 'video_codec', 'title'))
 
 

@@ -53,7 +53,7 @@ use :func:`~subliminal.core.scan_videos` on an existing directory path to scan a
 Here video information was guessed based on the name of the video, you can access some video attributes:
 
     >>> video.video_codec
-    'h264'
+    'H.264'
     >>> video.release_group
     'LOL'
 
@@ -95,8 +95,8 @@ them to the video and tell you exactly what matches with :meth:`~subliminal.subt
 
     >>> for s in subtitles[video]:
     ...     sorted(s.get_matches(video))
-    ['episode', 'format', 'release_group', 'season', 'series', 'video_codec', 'year']
-    ['episode', 'format', 'season', 'series', 'year']
+    ['episode', 'release_group', 'season', 'series', 'source', 'video_codec', 'year']
+    ['episode', 'season', 'series', 'source', 'year']
 
 And then compute a score with those matches with :func:`~subliminal.score.compute_score`:
 

@@ -41,3 +41,8 @@ TVsubtitles
 -----------
 .. automodule:: subliminal.providers.tvsubtitles
    :private-members:
+
+XSubs
+-----------
+.. automodule:: subliminal.providers.xsubs
+   :private-members:

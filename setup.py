@@ -72,6 +72,7 @@ setup(name='subliminal',
               'opensubtitles = subliminal.providers.opensubtitles:OpenSubtitlesProvider',
               'podnapisi = subliminal.providers.podnapisi:PodnapisiProvider',
               'shooter = subliminal.providers.shooter:ShooterProvider',
+              'subs4free = subliminal.providers.subs4free:Subs4FreeProvider',
               'thesubdb = subliminal.providers.thesubdb:TheSubDBProvider',
               'tvsubtitles = subliminal.providers.tvsubtitles:TVsubtitlesProvider'
           ],

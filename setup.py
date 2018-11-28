@@ -27,7 +27,7 @@ def find_version(*file_paths):
 # requirements
 setup_requirements = ['pytest-runner'] if {'pytest', 'test', 'ptr'}.intersection(sys.argv) else []
 
-install_requirements = ['guessit>=2.0.1', 'babelfish>=0.5.2', 'enzyme>=0.4.1', 'beautifulsoup4>=4.4.0',
+install_requirements = ['guessit>=3.0.0', 'babelfish>=0.5.2', 'enzyme>=0.4.1', 'beautifulsoup4>=4.4.0',
                         'requests>=2.0', 'click>=4.0', 'dogpile.cache>=0.6.0', 'stevedore>=1.20.0',
                         'chardet>=2.3.0', 'pysrt>=1.0.1', 'six>=1.9.0', 'appdirs>=1.3', 'rarfile>=2.7',
                         'pytz>=2012c']

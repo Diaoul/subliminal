@@ -197,7 +197,7 @@ def test_scan_video_movie(movies, tmpdir, monkeypatch):
     tmpdir.ensure(video.name)
     scanned_video = scan_video(video.name)
     assert scanned_video.name == video.name
-    assert scanned_video.format == video.format
+    assert scanned_video.source == video.source
     assert scanned_video.release_group == video.release_group
     assert scanned_video.resolution == video.resolution
     assert scanned_video.video_codec == video.video_codec
@@ -216,7 +216,7 @@ def test_scan_video_episode(episodes, tmpdir, monkeypatch):
     tmpdir.ensure(video.name)
     scanned_video = scan_video(video.name)
     assert scanned_video.name, video.name
-    assert scanned_video.format == video.format
+    assert scanned_video.source == video.source
     assert scanned_video.release_group == video.release_group
     assert scanned_video.resolution == video.resolution
     assert scanned_video.video_codec == video.video_codec
@@ -238,10 +238,10 @@ def test_refine_video_metadata(mkv):
     refine(scanned_video, episode_refiners=('metadata',), movie_refiners=('metadata',))
     assert type(scanned_video) is Movie
     assert scanned_video.name == mkv['test5']
-    assert scanned_video.format is None
+    assert scanned_video.source is None
     assert scanned_video.release_group is None
     assert scanned_video.resolution is None
-    assert scanned_video.video_codec == 'h264'
+    assert scanned_video.video_codec == 'H.264'
     assert scanned_video.audio_codec == 'AAC'
     assert scanned_video.imdb_id is None
     assert scanned_video.hashes == {
@@ -281,7 +281,7 @@ def test_scan_video_broken(mkv, tmpdir, monkeypatch):
     scanned_video = scan_video(broken_path)
     assert type(scanned_video) is Movie
     assert scanned_video.name == str(broken_path)
-    assert scanned_video.format is None
+    assert scanned_video.source is None
     assert scanned_video.release_group is None
     assert scanned_video.resolution is None
     assert scanned_video.video_codec is None
@@ -305,7 +305,7 @@ def test_scan_archive(movies, tmpdir, monkeypatch):
     scanned_video = scan_archive(str(enders_game))
     assert type(scanned_video) is Movie
     assert scanned_video.name == os.path.join(str(tmpdir), video.name)
-    assert scanned_video.format == video.format
+    assert scanned_video.source == video.source
     assert scanned_video.release_group == video.release_group
     assert scanned_video.resolution == video.resolution
     assert scanned_video.video_codec == video.video_codec

@@ -10,6 +10,7 @@ from .score import get_equivalent_release_groups
 from .video import Episode, Movie
 from .utils import sanitize, sanitize_release_group
 
+from six import text_type
 
 logger = logging.getLogger(__name__)
 
@@ -70,10 +71,12 @@ class Subtitle(object):
         if not self.content:
             return
 
-        if self.encoding:
-            return self.content.decode(self.encoding, errors='replace')
+        if not isinstance(self.content, text_type):
+            if self.encoding:
+                return self.content.decode(self.encoding, errors='replace')
+            return self.content.decode(self.guess_encoding(), errors='replace')
 
-        return self.content.decode(self.guess_encoding(), errors='replace')
+        return self.content
 
     def is_valid(self):
         """Check if a :attr:`text` is a valid SubRip format.

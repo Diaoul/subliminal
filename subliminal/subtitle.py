@@ -241,7 +241,7 @@ def guess_matches(video, guess, partial=False):
     if video.resolution and 'screen_size' in guess and guess['screen_size'] == video.resolution:
         matches.add('resolution')
     # source
-    if video.source and 'source' in guess and guess['source'].lower() == video.source.lower():
+    if video.source and 'source' in guess and [x for x in guess['source'] if x.lower() == video.source.lower()]:
         matches.add('source')
     # video_codec
     if video.video_codec and 'video_codec' in guess and guess['video_codec'] == video.video_codec:

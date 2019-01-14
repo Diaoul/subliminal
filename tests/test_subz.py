@@ -6,7 +6,6 @@ import pytest
 from vcr import VCR
 
 from subliminal import Episode
-from subliminal.exceptions import ConfigurationError, AuthenticationError
 from subliminal.providers.subz import SubzSubtitle, SubzProvider
 
 vcr = VCR(path_transformer=lambda path: path + '.yaml',
@@ -40,46 +39,6 @@ def test_get_matches_movie_no_match(movies):
                             'man-of-steel-2013-720p-bluray-x264-felony', '')
     matches = subtitle.get_matches(movies['enders_game'])
     assert matches == {'resolution', 'year', 'video_codec', 'source'}
-
-
-def test_configuration_error_no_username():
-    with pytest.raises(ConfigurationError):
-        SubzProvider(password='subliminal')
-
-
-def test_configuration_error_no_password():
-    with pytest.raises(ConfigurationError):
-        SubzProvider(username='subliminal')
-
-
-@pytest.mark.integration
-@vcr.use_cassette
-def test_login():
-    provider = SubzProvider('subliminal', 'subliminal')
-    assert provider.logged_in is False
-    provider.initialize()
-    assert provider.logged_in is True
-    r = provider.session.get(provider.server_url + '/xforum/search/?action=show_24h', allow_redirects=False)
-    assert r.status_code == 200
-
-
-@pytest.mark.integration
-@vcr.use_cassette
-def test_login_bad_password():
-    provider = SubzProvider('subliminal', 'lanimilbus')
-    with pytest.raises(AuthenticationError):
-        provider.initialize()
-
-
-@pytest.mark.integration
-@vcr.use_cassette
-def test_logout():
-    provider = SubzProvider('subliminal', 'subliminal')
-    provider.initialize()
-    provider.terminate()
-    assert provider.logged_in is False
-    r = provider.session.get(provider.server_url + '/xforum/search/?action=show_24h', allow_redirects=False)
-    assert r.status_code == 302
 
 
 @pytest.mark.integration

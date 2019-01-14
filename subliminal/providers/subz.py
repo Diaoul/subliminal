@@ -15,7 +15,6 @@ from requests import Session
 from . import ParserBeautifulSoup, Provider
 from .. import __short_version__
 from ..cache import SHOW_EXPIRATION_TIME, region
-from ..exceptions import AuthenticationError, ConfigurationError
 from ..score import get_equivalent_release_groups
 from ..subtitle import SUBTITLE_EXTENSIONS, Subtitle, fix_line_ending, guess_matches
 from ..utils import sanitize, sanitize_release_group
@@ -108,12 +107,7 @@ class SubzProvider(Provider):
     movie_link = '/movies/%s'
     subtitle_class = SubzSubtitle
 
-    def __init__(self, username=None, password=None):
-        if any((username, password)) and not all((username, password)):
-            raise ConfigurationError('Username and password must be specified')
-
-        self.username = username
-        self.password = password
+    def __init__(self):
         self.logged_in = False
         self.session = None
 
@@ -121,40 +115,7 @@ class SubzProvider(Provider):
         self.session = Session()
         self.session.headers['User-Agent'] = 'Subliminal/%s' % __short_version__
 
-        # login
-        if all((self.username, self.password)):
-            logger.info('Logging in')
-            r = self.session.get(self.server_url + '/login')
-            r.raise_for_status()
-
-            if not r.content:
-                logger.debug('No data returned from provider')
-                return
-
-            soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
-            token = soup.select_one('form.form-signin > input[name="_token"]')['value']
-
-            data = {'_token': token,
-                    'username': self.username,
-                    'password': self.password}
-            r = self.session.post(self.server_url + self.sign_in_url, data,
-                                  headers={'Referer': self.server_url + '/login'}, allow_redirects=False, timeout=10)
-
-            if r.status_code != 302 or r.url != self.server_url:
-                raise AuthenticationError(self.username)
-
-            logger.debug('Logged in')
-            self.logged_in = True
-
     def terminate(self):
-        # logout
-        if self.logged_in:
-            logger.info('Logging out')
-            r = self.session.get(self.server_url + self.sign_out_url, timeout=10)
-            r.raise_for_status()
-            logger.debug('Logged out')
-            self.logged_in = False
-
         self.session.close()
 
     def get_show_ids(self, title, year=None, is_episode=True, country_code=None):

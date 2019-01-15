@@ -102,7 +102,7 @@ class Subs4SeriesProvider(Provider):
 
         """
         title_sanitized = sanitize(title).lower()
-        show_ids = self._get_suggestions(title)
+        show_ids = self._get_suggestions(title.encode('utf-8'))
 
         matched_show_ids = []
         for show in show_ids:

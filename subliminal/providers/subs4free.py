@@ -103,7 +103,7 @@ class Subs4FreeProvider(Provider):
 
         """
         title_sanitized = sanitize(title).lower()
-        show_ids = self._get_suggestions(title)
+        show_ids = self._get_suggestions(title.encode('utf-8'))
 
         matched_show_ids = []
         for show in show_ids:
@@ -200,7 +200,7 @@ class Subs4FreeProvider(Provider):
 
         show_ids = None
         for title in titles:
-            show_ids = self.get_show_ids(title.encode('utf-8'), video.year)
+            show_ids = self.get_show_ids(title, video.year)
             if show_ids is not None:
                 break
 

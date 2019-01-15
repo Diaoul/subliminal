@@ -135,7 +135,7 @@ class SubzProvider(Provider):
 
         """
         title_sanitized = sanitize(title).lower()
-        show_ids = self._get_suggestions(title, is_episode)
+        show_ids = self._get_suggestions(title.encode('utf-8'), is_episode)
 
         matched_show_ids = []
         for show in show_ids:

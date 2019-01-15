@@ -135,7 +135,7 @@ class SubzProvider(Provider):
 
         """
         title_sanitized = sanitize(title).lower()
-        show_ids = self._get_suggestions(title.encode('utf-8'), is_episode)
+        show_ids = self._get_suggestions(title, is_episode)
 
         matched_show_ids = []
         for show in show_ids:
@@ -162,7 +162,7 @@ class SubzProvider(Provider):
 
         return matched_show_ids
 
-    @region.cache_on_arguments(expiration_time=SHOW_EXPIRATION_TIME)
+    @region.cache_on_arguments(expiration_time=SHOW_EXPIRATION_TIME, to_str=unicode)
     def _get_suggestions(self, title, is_episode=True):
         """Search the show or movie id from the `title` and `year`.
 

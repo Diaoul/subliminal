@@ -101,7 +101,7 @@ class GreekSubtitlesProvider(Provider):
                 logger.debug('Found subtitle %r', subtitle)
                 subtitles.append(subtitle)
 
-            anchors = soup.select('td > a')
+            anchors = soup.select('td a')
             next_page_available = False
             for anchor in anchors:
                 if 'Next' in anchor.text and 'search.php' in anchor['href']:

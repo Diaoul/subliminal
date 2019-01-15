@@ -136,7 +136,7 @@ class XSubsProvider(Provider):
             logger.debug('No data returned from provider')
             return []
 
-        soup = ParserBeautifulSoup(r.content, ['lxml'])
+        soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
 
         # populate the show ids
         show_ids = {}
@@ -197,7 +197,7 @@ class XSubsProvider(Provider):
             logger.debug('No data returned from provider')
             return []
 
-        soup = ParserBeautifulSoup(r.content, ['lxml'])
+        soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
 
         series_title = soup.find('name').text
 
@@ -222,7 +222,7 @@ class XSubsProvider(Provider):
             logger.debug('No data returned from provider')
             return []
 
-        soup = ParserBeautifulSoup(r.content, ['lxml'])
+        soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
 
         subtitles = []
         # loop over episode rows

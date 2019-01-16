@@ -61,6 +61,15 @@ def test_get_show_ids_movie(movies):
 
 @pytest.mark.integration
 @vcr.use_cassette
+def test_get_show_ids_unicode(movies):
+    video = movies['café_society']
+    with SubzProvider() as provider:
+        show_ids = provider.get_show_ids(video.title, video.year, isinstance(video, Episode))
+    assert show_ids == ['73644-cafe-society']
+
+
+@pytest.mark.integration
+@vcr.use_cassette
 def test_query_series(episodes):
     video = episodes['got_s03e10']
     expected_languages = {Language.fromalpha2('el')}

@@ -10,6 +10,7 @@ import zipfile
 from babelfish import Language
 from guessit import guessit
 from requests import Session
+from six import text_type
 
 from . import ParserBeautifulSoup, Provider
 from .. import __short_version__
@@ -124,7 +125,7 @@ class Subs4SeriesProvider(Provider):
 
         return matched_show_ids
 
-    @region.cache_on_arguments(expiration_time=SHOW_EXPIRATION_TIME, to_str=unicode)
+    @region.cache_on_arguments(expiration_time=SHOW_EXPIRATION_TIME, to_str=text_type)
     def _get_suggestions(self, title):
         """Search the show or movie id from the `title` and `year`.
 

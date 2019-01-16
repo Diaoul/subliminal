@@ -37,6 +37,14 @@ def test_get_show_ids_episode(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
+def test_get_show_ids_unicode():
+    with Subs4SeriesProvider() as provider:
+        show_ids = provider.get_show_ids(u'Ófærð')
+    assert show_ids == []
+
+
+@pytest.mark.integration
+@vcr.use_cassette
 def test_query_series(episodes):
     video = episodes['got_s03e10']
     expected_languages = {Language.fromalpha2(l) for l in ['el', 'en']}

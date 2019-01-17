@@ -184,7 +184,7 @@ class SubzProvider(Provider):
             return {}
 
         show_type = 'series' if is_episode else 'movie'
-        parsed_suggestions = [s for s in json.loads(r.content) if 'type' in s and s['type'] == show_type]
+        parsed_suggestions = [s for s in json.loads(r.text) if 'type' in s and s['type'] == show_type]
         logger.debug('Found suggestions: %r', parsed_suggestions)
 
         return parsed_suggestions

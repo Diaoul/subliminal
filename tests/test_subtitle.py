@@ -72,7 +72,7 @@ def test_get_subtitle_path_language_undefined(movies):
 def test_guess_matches_movie(movies):
     video = movies['man_of_steel']
     guess = {'title': video.title.upper(), 'year': video.year, 'release_group': video.release_group.upper(),
-             'screen_size': video.resolution, 'source': video.source.upper(), 'video_codec': video.video_codec,
+             'screen_size': video.resolution, 'source': video.source, 'video_codec': video.video_codec,
              'audio_codec': video.audio_codec}
     expected = {'title', 'year', 'release_group', 'resolution', 'source', 'video_codec', 'audio_codec'}
     assert guess_matches(video, guess) == expected

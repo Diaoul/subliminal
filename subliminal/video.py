@@ -5,6 +5,7 @@ import logging
 import os
 
 from guessit import guessit
+from rebulk.loose import ensure_list
 
 logger = logging.getLogger(__name__)
 
@@ -118,7 +119,7 @@ class Episode(Video):
 
     :param str series: series of the episode.
     :param int season: season number of the episode.
-    :param int episode: episode number of the episode.
+    :param int or list episodes: episode numbers of the episode.
     :param str title: title of the episode.
     :param int year: year of the series.
     :param bool original_series: whether the series is the first with this name.
@@ -127,7 +128,7 @@ class Episode(Video):
     :param \*\*kwargs: additional parameters for the :class:`Video` constructor.
 
     """
-    def __init__(self, name, series, season, episode, title=None, year=None, original_series=True, tvdb_id=None,
+    def __init__(self, name, series, season, episodes, title=None, year=None, original_series=True, tvdb_id=None,
                  series_tvdb_id=None, series_imdb_id=None, alternative_series=None, **kwargs):
         super(Episode, self).__init__(name, **kwargs)
 
@@ -137,8 +138,8 @@ class Episode(Video):
         #: Season number of the episode
         self.season = season
 
-        #: Episode number of the episode
-        self.episode = episode
+        #: Episode numbers of the episode
+        self.episodes = ensure_list(episodes)
 
         #: Title of the episode
         self.title = title
@@ -161,6 +162,10 @@ class Episode(Video):
         #: Alternative names of the series
         self.alternative_series = alternative_series or []
 
+    @property
+    def episode(self):
+        return min(self.episodes) if self.episodes else None
+
     @classmethod
     def fromguess(cls, name, guess):
         if guess['type'] != 'episode':
@@ -169,13 +174,7 @@ class Episode(Video):
         if 'title' not in guess or 'episode' not in guess:
             raise ValueError('Insufficient data to process the guess')
 
-        # Currently we only have single-ep support (guessit returns a multi-ep as a list with int values)
-        # Most providers only support single-ep, so make sure it contains only 1 episode
-        # In case of multi-ep, take the lowest episode (subtitles will normally be available on lowest episode number)
-        episode_guess = guess.get('episode')
-        episode = min(episode_guess) if episode_guess and isinstance(episode_guess, list) else episode_guess
-
-        return cls(name, guess['title'], guess.get('season', 1), episode, title=guess.get('episode_title'),
+        return cls(name, guess['title'], guess.get('season', 1), guess.get('episode'), title=guess.get('episode_title'),
                    year=guess.get('year'), source=guess.get('source'), original_series='year' not in guess,
                    release_group=guess.get('release_group'), resolution=guess.get('screen_size'),
                    video_codec=guess.get('video_codec'), audio_codec=guess.get('audio_codec'))
@@ -186,9 +185,11 @@ class Episode(Video):
 
     def __repr__(self):
         if self.year is None:
-            return '<%s [%r, %dx%d]>' % (self.__class__.__name__, self.series, self.season, self.episode)
+            return '<%s [%r, %dx%s]>' % (self.__class__.__name__,
+                                         self.series, self.season, '-'.join(map(str, self.episodes)))
 
-        return '<%s [%r, %d, %dx%d]>' % (self.__class__.__name__, self.series, self.year, self.season, self.episode)
+        return '<%s [%r, %d, %dx%s]>' % (self.__class__.__name__,
+                                         self.series, self.year, self.season, '-'.join(map(str, self.episodes)))
 
 
 class Movie(Video):

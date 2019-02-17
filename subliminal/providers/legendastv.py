@@ -12,6 +12,7 @@ from guessit import guessit
 import pytz
 import rarfile
 from rarfile import RarFile, is_rarfile
+from rebulk.loose import ensure_list
 from requests import Session
 from zipfile import ZipFile, is_zipfile
 
@@ -322,14 +323,14 @@ class LegendasTVProvider(Provider):
         return titles
 
     @region.cache_on_arguments(expiration_time=timedelta(minutes=15).total_seconds())
-    def get_archives(self, title_id, language_code, title_type, season, episode):
+    def get_archives(self, title_id, language_code, title_type, season, episodes):
         """Get the archive list from a given `title_id`, `language_code`, `title_type`, `season` and `episode`.
 
         :param int title_id: title id.
         :param int language_code: language code.
         :param str title_type: episode or movie
         :param int season: season
-        :param int episode: episode
+        :param list episodes: episodes
         :return: the archives.
         :rtype: list of :class:`LegendasTVArchive`
 
@@ -361,14 +362,14 @@ class LegendasTVProvider(Provider):
                 guess = guessit(clean_name, {'type': title_type})
 
                 # episode
-                if season and episode:
+                if season and episodes:
                     # discard mismatches on episode in non-pack archives
 
                     # Guessit may return int for single episode or list for multi-episode
                     # Check if archive name has multiple episodes releases on it
                     if not archive.pack and 'episode' in guess:
-                        wanted_episode = set(episode) if isinstance(episode, list) else {episode}
-                        archive_episode = guess['episode'] if isinstance(guess['episode'], list) else {guess['episode']}
+                        wanted_episode = set(episodes)
+                        archive_episode = set(ensure_list(guess['episode']))
 
                         if not wanted_episode.intersection(archive_episode):
                             logger.debug('Mismatched episode %s, discarding archive: %s', guess['episode'], clean_name)
@@ -429,7 +430,7 @@ class LegendasTVProvider(Provider):
         else:
             raise ValueError('Not a valid archive')
 
-    def query(self, language, title, season=None, episode=None, year=None):
+    def query(self, language, title, season=None, episodes=None, year=None):
         # search for titles
         titles = self.search_titles(title, season, year)
 
@@ -438,7 +439,7 @@ class LegendasTVProvider(Provider):
         for title_id, t in titles.items():
 
             logger.info('Getting archives for title %d and language %d', title_id, language.legendastv)
-            archives = self.get_archives(title_id, language.legendastv, t['type'], season, episode)
+            archives = self.get_archives(title_id, language.legendastv, t['type'], season, episodes or [])
             if not archives:
                 logger.info('No archives found for title %d and language %d', title_id, language.legendastv)
 
@@ -489,17 +490,18 @@ class LegendasTVProvider(Provider):
         return subtitles
 
     def list_subtitles(self, video, languages):
-        season = episode = None
+        season = None
+        episodes = []
         if isinstance(video, Episode):
             titles = [video.series] + video.alternative_series
             season = video.season
-            episode = video.episode
+            episodes = video.episodes
         else:
             titles = [video.title] + video.alternative_titles
 
         for title in titles:
             subtitles = [s for l in languages for s in
-                         self.query(l, title, season=season, episode=episode, year=video.year)]
+                         self.query(l, title, season=season, episodes=episodes, year=video.year)]
             if subtitles:
                 return subtitles
 

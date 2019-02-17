@@ -75,7 +75,9 @@ class Subtitle(object):
         if not isinstance(self.content, text_type):
             if self.encoding:
                 return self.content.decode(self.encoding, errors='replace')
-            return self.content.decode(self.guess_encoding(), errors='replace')
+            guessed_encoding = self.guess_encoding()
+            if guessed_encoding:
+                return self.content.decode(guessed_encoding, errors='replace')
 
         return self.content
 

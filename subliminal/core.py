@@ -21,7 +21,7 @@ from .exceptions import ServiceUnavailable
 from .extensions import provider_manager, refiner_manager
 from .score import compute_score as default_compute_score
 from .subtitle import SUBTITLE_EXTENSIONS, get_subtitle_path
-from .utils import hash_napiprojekt, hash_opensubtitles, hash_shooter, hash_thesubdb
+from .utils import hash_napiprojekt, hash_napisy24, hash_opensubtitles, hash_shooter, hash_thesubdb
 from .video import VIDEO_EXTENSIONS, Episode, Movie, Video
 
 #: Supported archive extensions
@@ -437,6 +437,7 @@ def scan_video(path):
         video.hashes['shooter'] = hash_shooter(path)
         video.hashes['thesubdb'] = hash_thesubdb(path)
         video.hashes['napiprojekt'] = hash_napiprojekt(path)
+        video.hashes['napisy24'] = hash_napisy24(path)
         logger.debug('Computed hashes %r', video.hashes)
     else:
         logger.warning('Size is lower than 10MB: hashes not computed')

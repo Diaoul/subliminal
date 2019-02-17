@@ -23,11 +23,12 @@ class XSubsSubtitle(Subtitle):
     """XSubs Subtitle."""
     provider_name = 'xsubs'
 
-    def __init__(self, language, page_link, series, season, episode, title, version, download_link):
+    def __init__(self, language, page_link, series, season, episode, year, title, version, download_link):
         super(XSubsSubtitle, self).__init__(language, page_link=page_link)
         self.series = series
         self.season = season
         self.episode = episode
+        self.year = year
         self.title = title
         self.version = version
         self.download_link = download_link
@@ -55,6 +56,9 @@ class XSubsSubtitle(Subtitle):
             # title of the episode
             if video.title and sanitize(self.title) == sanitize(video.title):
                 matches.add('title')
+            # year
+            if video.original_series and self.year is None or video.year and video.year == self.year:
+                matches.add('year')
             # release_group
             if (video.release_group and self.version and
                     any(r in sanitize_release_group(self.version)
@@ -251,7 +255,7 @@ class XSubsProvider(Provider):
                 download_link = self.server_url + self.download_link % int(subtitle['rlsid'])
 
                 subtitle = self.subtitle_class(Language.fromalpha2('el'), page_link, series_title, season_num,
-                                               episode_num, episode_title, version, download_link)
+                                               episode_num, year, episode_title, version, download_link)
                 logger.debug('Found subtitle %r', subtitle)
                 subtitles.append(subtitle)
 

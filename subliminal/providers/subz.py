@@ -97,9 +97,9 @@ class SubzProvider(Provider):
     server_url = 'https://subz.xyz'
     sign_in_url = '/sessions'
     sign_out_url = '/logout'
-    search_url = '/typeahead/%s'
-    episode_link = '/series/%s/seasons/%d/episodes/%d'
-    movie_link = '/movies/%s'
+    search_url = '/typeahead/{}'
+    episode_link = '/series/{show_id}/seasons/{season:d}/episodes/{episode:d}'
+    movie_link = '/movies/{}'
     subtitle_class = SubzSubtitle
 
     def __init__(self):
@@ -108,7 +108,7 @@ class SubzProvider(Provider):
 
     def initialize(self):
         self.session = Session()
-        self.session.headers['User-Agent'] = 'Subliminal/%s' % __short_version__
+        self.session.headers['User-Agent'] = 'Subliminal/{}'.format(__short_version__)
 
     def terminate(self):
         self.session.close()
@@ -138,14 +138,15 @@ class SubzProvider(Provider):
             # attempt with country
             if not show_id and country_code:
                 logger.debug('Getting show id with country')
-                show_id = show['link'].split('/')[-1] if sanitize(show['title']) == '%s %s' % (
-                    title_sanitized, country_code.lower()) else None
+                if sanitize(show['title']) == text_type('{title} {country}').format(title=title_sanitized,
+                                                                                    country=country_code.lower()):
+                    show_id = show['link'].split('/')[-1]
 
             # attempt with year
             if not show_id and year:
                 logger.debug('Getting show id with year')
-                show_id = show['link'].split('/')[-1] if sanitize(show['title']) == '%s %d' % (
-                    title_sanitized, year) else None
+                if sanitize(show['title']) == text_type('{title} {year}').format(title=title_sanitized, year=year):
+                    show_id = show['link'].split('/')[-1]
 
             # attempt clean
             if not show_id:
@@ -170,8 +171,8 @@ class SubzProvider(Provider):
 
         """
         # make the search
-        logger.info('Searching show ids with %r', title)
-        r = self.session.get(self.server_url + self.search_url % title, timeout=10)
+        logger.info('Searching show ids with {!r}'.format(title))
+        r = self.session.get(self.server_url + text_type(self.search_url).format(title), timeout=10)
         r.raise_for_status()
 
         if not r.content:
@@ -180,19 +181,19 @@ class SubzProvider(Provider):
 
         show_type = 'series' if is_episode else 'movie'
         parsed_suggestions = [s for s in json.loads(r.text) if 'type' in s and s['type'] == show_type]
-        logger.debug('Found suggestions: %r', parsed_suggestions)
+        logger.debug('Found suggestions: {!r}', parsed_suggestions)
 
         return parsed_suggestions
 
     def query(self, show_id, series, season, episode, title):
         # get the season list of the show
-        logger.info('Getting the subtitle list of show id %s', show_id)
+        logger.info('Getting the subtitle list of show id {}', show_id)
         is_episode = False
         if all((show_id, season, episode)):
             is_episode = True
-            page_link = self.server_url + self.episode_link % (show_id, season, episode)
+            page_link = self.server_url + self.episode_link.format(show_id=show_id, season=season, episode=episode)
         elif all((show_id, title)):
-            page_link = self.server_url + self.movie_link % show_id
+            page_link = self.server_url + self.movie_link.format(show_id)
         else:
             return []
 
@@ -236,7 +237,7 @@ class SubzProvider(Provider):
                 subtitle = self.subtitle_class(Language.fromalpha2('el'), page_link, None, None, None, show_title,
                                                year_num, version, download_link)
 
-            logger.debug('Found subtitle %r', subtitle)
+            logger.debug('Found subtitle {!r}'.format(subtitle))
             subtitles.append(subtitle)
 
         return subtitles
@@ -271,7 +272,7 @@ class SubzProvider(Provider):
     def download_subtitle(self, subtitle):
         if isinstance(subtitle, SubzSubtitle):
             # download the subtitle
-            logger.info('Downloading subtitle %r', subtitle)
+            logger.info('Downloading subtitle {!r}'.format(subtitle))
             r = self.session.get(subtitle.download_link, headers={'Referer': subtitle.page_link}, timeout=10)
             r.raise_for_status()
 
@@ -285,7 +286,7 @@ class SubzProvider(Provider):
             if subtitle_content:
                 subtitle.content = fix_line_ending(subtitle_content)
             else:
-                logger.debug('Could not extract subtitle from %r', archive)
+                logger.debug('Could not extract subtitle from {!r}'.format(archive))
 
 
 def _get_archive(content):

@@ -73,7 +73,7 @@ class Subs4FreeProvider(Provider):
     languages = {Language.fromalpha2(l) for l in {'el', 'en'}}
     server_url = 'https://www.sf4-industry.com'
     download_url = '/getSub.html'
-    search_url = '/search_report.php?search=%s&searchType=1'
+    search_url = '/search_report.php?search={}&searchType=1'
     subtitle_class = Subs4FreeSubtitle
 
     def __init__(self):
@@ -81,7 +81,7 @@ class Subs4FreeProvider(Provider):
 
     def initialize(self):
         self.session = Session()
-        self.session.headers['User-Agent'] = 'Subliminal/%s' % __short_version__
+        self.session.headers['User-Agent'] = 'Subliminal/{}'.format(__short_version__)
 
     def terminate(self):
         self.session.close()
@@ -108,8 +108,8 @@ class Subs4FreeProvider(Provider):
             # attempt with year
             if not show_id and year:
                 logger.debug('Getting show id with year')
-                show_id = show['link'].split('?p=')[-1] if show_title == '%s %d' % (
-                    title_sanitized, year) else None
+                show_id = show['link'].split('?p=')[-1] if show_title == '{title} {year:d}'.format(
+                    title=title_sanitized, year=year) else None
 
             # attempt clean
             if not show_id:
@@ -132,9 +132,9 @@ class Subs4FreeProvider(Provider):
 
         """
         # make the search
-        logger.info('Searching show ids with %r', title)
-        r = self.session.get(self.server_url + self.search_url % title, headers={'Referer': self.server_url},
-                             timeout=10)
+        logger.info('Searching show ids with {!r}'.format(title))
+        r = self.session.get(self.server_url + text_type(self.search_url).format(title),
+                             headers={'Referer': self.server_url}, timeout=10)
         r.raise_for_status()
 
         if not r.content:
@@ -144,17 +144,17 @@ class Subs4FreeProvider(Provider):
         soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
         suggestions = [{'link': l.attrs['value'], 'title': l.text}
                        for l in soup.select('select[name="Mov_sel"] > option[value]')]
-        logger.debug('Found suggestions: %r', suggestions)
+        logger.debug('Found suggestions: {!r}'.format(suggestions))
 
         return suggestions
 
     def query(self, movie_id, title, year):
         # get the season list of the show
-        logger.info('Getting the subtitle list of show id %s', movie_id)
+        logger.info('Getting the subtitle list of show id {}'.format(movie_id))
         if movie_id:
             page_link = self.server_url + '/' + movie_id
         else:
-            page_link = self.server_url + self.search_url % ' '.join([title, str(year)])
+            page_link = self.server_url + text_type(self.search_url).format(' '.join([title, str(year)]))
 
         r = self.session.get(page_link, timeout=10)
         r.raise_for_status()
@@ -186,7 +186,7 @@ class Subs4FreeProvider(Provider):
 
             subtitle = self.subtitle_class(language, page_link, show_title, year_num, version, download_link)
 
-            logger.debug('Found subtitle %r', subtitle)
+            logger.debug('Found subtitle {!r}'.format(subtitle))
             subtitles.append(subtitle)
 
         return subtitles
@@ -214,7 +214,7 @@ class Subs4FreeProvider(Provider):
     def download_subtitle(self, subtitle):
         if isinstance(subtitle, Subs4FreeSubtitle):
             # download the subtitle
-            logger.info('Downloading subtitle %r', subtitle)
+            logger.info('Downloading subtitle {!r}'.format(subtitle))
             r = self.session.get(subtitle.download_link, headers={'Referer': subtitle.page_link}, timeout=10)
             r.raise_for_status()
 
@@ -250,7 +250,7 @@ class Subs4FreeProvider(Provider):
             if subtitle_content:
                 subtitle.content = fix_line_ending(subtitle_content)
             else:
-                logger.debug('Could not extract subtitle from %r', archive)
+                logger.debug('Could not extract subtitle from {!r}'.format(archive))
 
 
 def _get_archive(content):

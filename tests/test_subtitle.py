@@ -165,4 +165,5 @@ def test_subtitle_text_guess_encoding_none():
     subtitle.content = content
 
     assert subtitle.guess_encoding() is None
+    assert not subtitle.is_valid()
     assert not isinstance(subtitle.text, six.text_type)

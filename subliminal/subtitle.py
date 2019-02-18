@@ -154,6 +154,18 @@ class Subtitle(object):
 
         return encoding
 
+    def get_path(self, video, single=False):
+        """Get the subtitle path using the `video`, `language` and `extension`.
+
+        :param video: path to the video.
+        :type video: :class:`~subliminal.video.Video`
+        :param bool single: save a single subtitle, default is to save one subtitle per language.
+        :return: path of the subtitle.
+        :rtype: str
+
+        """
+        return get_subtitle_path(video.name, None if single else self.language)
+
     def get_matches(self, video):
         """Get the matches against the `video`.
 

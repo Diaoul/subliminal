@@ -20,7 +20,7 @@ import requests
 from .exceptions import ServiceUnavailable
 from .extensions import provider_manager, refiner_manager
 from .score import compute_score as default_compute_score
-from .subtitle import SUBTITLE_EXTENSIONS, get_subtitle_path
+from .subtitle import SUBTITLE_EXTENSIONS
 from .utils import hash_napiprojekt, hash_opensubtitles, hash_shooter, hash_thesubdb
 from .video import VIDEO_EXTENSIONS, Episode, Movie, Video
 
@@ -756,7 +756,7 @@ def save_subtitles(video, subtitles, single=False, directory=None, encoding=None
             continue
 
         # create subtitle path
-        subtitle_path = get_subtitle_path(video.name, None if single else subtitle.language)
+        subtitle_path = subtitle.get_path(video, single=single)
         if directory is not None:
             subtitle_path = os.path.join(directory, os.path.split(subtitle_path)[1])
 

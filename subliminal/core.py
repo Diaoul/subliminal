@@ -41,7 +41,7 @@ class ProviderPool(object):
 
     :param list providers: name of providers to use, if not all.
     :param dict provider_configs: provider configuration as keyword arguments per provider name to pass when
-        instanciating the :class:`~subliminal.providers.Provider`.
+        instantiating the :class:`~subliminal.providers.Provider`.
 
     """
     def __init__(self, providers=None, provider_configs=None):
@@ -588,7 +588,7 @@ def scan_videos(path, age=None, archives=True):
     return videos
 
 
-def refine(video, episode_refiners=None, movie_refiners=None, **kwargs):
+def refine(video, episode_refiners=None, movie_refiners=None, refiner_configs=None, **kwargs):
     """Refine a video using :ref:`refiners`.
 
     .. note::
@@ -599,6 +599,8 @@ def refine(video, episode_refiners=None, movie_refiners=None, **kwargs):
     :type video: :class:`~subliminal.video.Video`
     :param tuple episode_refiners: refiners to use for episodes.
     :param tuple movie_refiners: refiners to use for movies.
+    :param dict refiner_configs: refiner configuration as keyword arguments per refiner name to pass when
+        calling the refine method
     :param \*\*kwargs: additional parameters for the :func:`~subliminal.refiners.refine` functions.
 
     """
@@ -610,7 +612,7 @@ def refine(video, episode_refiners=None, movie_refiners=None, **kwargs):
     for refiner in refiners:
         logger.info('Refining video with %s', refiner)
         try:
-            refiner_manager[refiner].plugin(video, **kwargs)
+            refiner_manager[refiner].plugin(video, **dict((refiner_configs or {}).get(refiner, {}), **kwargs))
         except:
             logger.error('Failed to refine video %r', video.name)
             logger.debug('Refiner exception:', exc_info=True)

@@ -121,7 +121,8 @@ class Subs4FreeProvider(Provider):
 
         return matched_show_ids
 
-    @region.cache_on_arguments(expiration_time=SHOW_EXPIRATION_TIME, to_str=text_type)
+    @region.cache_on_arguments(expiration_time=SHOW_EXPIRATION_TIME, to_str=text_type,
+                               should_cache_fn=lambda value: value)
     def _get_suggestions(self, title):
         """Search the show or movie id from the `title` and `year`.
 

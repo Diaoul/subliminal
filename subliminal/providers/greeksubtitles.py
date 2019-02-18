@@ -7,8 +7,8 @@ import zipfile
 import rarfile
 from babelfish import Language
 from guessit import guessit
-
 from requests import Session
+from six import text_type
 
 from subliminal import __short_version__
 from ..providers import ParserBeautifulSoup, Provider
@@ -52,8 +52,8 @@ class GreekSubtitlesProvider(Provider):
     """GreekSubtitles Provider."""
     languages = {Language.fromalpha2(l) for l in {'en', 'el'}}
     server_url = 'http://gr.greek-subtitles.com/'
-    search_url = 'search.php?name=%s'
-    download_url = 'http://www.greeksubtitles.info/getp.php?id=%d'
+    search_url = 'search.php?name={}'
+    download_url = 'http://www.greeksubtitles.info/getp.php?id={:d}'
     subtitle_class = GreekSubtitlesSubtitle
 
     def __init__(self):
@@ -61,7 +61,7 @@ class GreekSubtitlesProvider(Provider):
 
     def initialize(self):
         self.session = Session()
-        self.session.headers['User-Agent'] = 'Subliminal/%s' % __short_version__
+        self.session.headers['User-Agent'] = 'Subliminal/{}'.format(__short_version__)
 
     def terminate(self):
         self.session.close()
@@ -69,13 +69,13 @@ class GreekSubtitlesProvider(Provider):
     def query(self, keyword, season=None, episode=None, year=None):
         params = keyword
         if season and episode:
-            params += ' S%02dE%02d' % (season, episode)
+            params += ' S{season:02d}E{episode:02d}'.format(season=season, episode=episode)
         elif year:
-            params += ' %4d' % year
+            params += ' {:4d}'.format(year)
 
-        logger.debug('Searching subtitles %r', params)
+        logger.debug('Searching subtitles {!r}'.format(params))
         subtitles = []
-        search_link = self.server_url + self.search_url % params
+        search_link = self.server_url + text_type(self.search_url).format(params)
         while True:
             r = self.session.get(search_link, timeout=30)
             r.raise_for_status()
@@ -96,9 +96,9 @@ class GreekSubtitlesProvider(Provider):
                 if version is None:
                     version = ""
 
-                subtitle = self.subtitle_class(language, page_link, version, self.download_url % subtitle_id)
+                subtitle = self.subtitle_class(language, page_link, version, self.download_url.format(subtitle_id))
 
-                logger.debug('Found subtitle %r', subtitle)
+                logger.debug('Found subtitle {!r}'.format(subtitle))
                 subtitles.append(subtitle)
 
             anchors = soup.select('td a')
@@ -137,7 +137,7 @@ class GreekSubtitlesProvider(Provider):
     def download_subtitle(self, subtitle):
         if isinstance(subtitle, GreekSubtitlesSubtitle):
             # download the subtitle
-            logger.info('Downloading subtitle %r', subtitle)
+            logger.info('Downloading subtitle {!r}'.format(subtitle))
             r = self.session.get(subtitle.download_link, headers={'Referer': subtitle.page_link},
                                  timeout=30)
             r.raise_for_status()
@@ -152,7 +152,7 @@ class GreekSubtitlesProvider(Provider):
             if subtitle_content:
                 subtitle.content = fix_line_ending(subtitle_content)
             else:
-                logger.debug('Could not extract subtitle from %r', archive)
+                logger.debug('Could not extract subtitle from {!r}'.format(archive))
 
 
 def _get_archive(content):

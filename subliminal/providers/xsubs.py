@@ -64,12 +64,6 @@ class XSubsSubtitle(Subtitle):
                     any(r in sanitize_release_group(self.version)
                         for r in get_equivalent_release_groups(sanitize_release_group(video.release_group)))):
                 matches.add('release_group')
-            # resolution
-            if video.resolution and self.version and video.resolution in self.version.lower():
-                matches.add('resolution')
-            # format
-            if video.source and self.version and sanitize(video.source) in sanitize(self.version):
-                matches.add('source')
             # other properties
             matches |= guess_matches(video, guessit(self.version, {'type': 'episode'}), partial=True)
 

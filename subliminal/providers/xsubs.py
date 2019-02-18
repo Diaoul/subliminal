@@ -129,7 +129,7 @@ class XSubsProvider(Provider):
 
         self.session.close()
 
-    @region.cache_on_arguments(expiration_time=SHOW_EXPIRATION_TIME)
+    @region.cache_on_arguments(expiration_time=SHOW_EXPIRATION_TIME, should_cache_fn=lambda value: value)
     def _get_show_ids(self):
         # get the shows page
         logger.info('Getting show ids')

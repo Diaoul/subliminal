@@ -2,11 +2,14 @@ sudo: false
 
 language: python
 
+dist: xenial
+
 python:
   - "2.7"
   - "3.4"
   - "3.5"
   - "3.6"
+  - "3.7"
 
 env:
   - PARSER=native
@@ -16,16 +19,17 @@ addons:
   apt:
     packages:
     - unrar
+    - rar
 
 matrix:
   include:
-    - python: "3.6"
+    - python: "3.7"
       env:
         - PARSER=native
         - VCR_RECORD_MODE=all
         - PYTEST_ADDOPTS="-m integration"
   allow_failures:
-    - python: "3.6"
+    - python: "3.7"
       env:
         - PARSER=native
         - VCR_RECORD_MODE=all

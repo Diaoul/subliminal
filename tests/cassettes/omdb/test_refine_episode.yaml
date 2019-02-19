@@ -5,32 +5,34 @@ interactions:
       Accept: ['*/*']
       Accept-Encoding: ['gzip, deflate']
       Connection: [keep-alive]
-      User-Agent: [Subliminal/2.0]
+      User-Agent: [Subliminal/2.1]
     method: GET
-    uri: http://www.omdbapi.com/?r=json&v=1&s=the+big+bang+theory&type=series&page=1
+    uri: http://www.omdbapi.com/?apikey=00000000&r=json&v=1&s=the+big+bang+theory&type=series&page=1
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAAx3P3UrDMByG8Vsp73Hsx7Rz5khDFXoQlS0bU5ERuz9tar9IMuY2Bt6Dd+iVSL2A
-        3wPPCQvStqjA305QxjcEDlVRIEwZCN2VgaqotwcwvJC24JjE8fXv9w8YTLv9yDNweB/PbmaT6RQM
-        6jCMCUfWkAPDc+88ja7yfuBRZHTY0tboi1GHRd9GptUluUhGcpUKWeeJPBZXMlvuH5tUyCYVuhPd
-        +vPBv6pyL7O745PKv2R9fxtuVslmsb6M47AeSpzfGXzvdTMnt2u8A0cChjm5oe/c/5fdEc5//Rcm
-        FvMAAAA=
+        H4sIAAAAAAAAA33PUWrCQBSF4a2E+zxNxtRYzVMjahFqrHHQJKXINN4moxknzYyURITuoTvsSop9
+        KhRcwPk53wmWyOusAP/5BEyYEsEHVqA1FLk15IfcYgWqugECCfIafHApvfv+/AICQm5fpyPwwRja
+        H/TdXg8IsKa6JDTWAjUQeFLa4GVXGFNp33GkLXEr+A2XvFUHO1PSEZLnqJ2ZM1t5w8SdyJQlXsL2
+        Zr6OyqShNJTT5nE9pqlcmHSUu8mulLM2a9NRKuL9uIn3k/fsYYuLeNWEu7wbtkEzZ8G9vVl1Nsv4
+        llJ7V+VwJleNVvBmsLaWhfr4y+14/7her+P2B91r3NAJ4PxCwCjDywj1sTT6kgMCEepKHfTvi/qI
+        cP4BRXJWxoUBAAA=
     headers:
       access-control-allow-origin: ['*']
       cache-control: ['public, max-age=86400']
-      cf-cache-status: [EXPIRED]
-      cf-ray: [29ba4153c74914c1-CDG]
+      cf-cache-status: [MISS]
+      cf-ray: [4ab3e6d8b8853e98-ZRH]
       connection: [keep-alive]
       content-encoding: [gzip]
       content-type: [application/json; charset=utf-8]
-      date: ['Sat, 30 Apr 2016 10:19:25 GMT']
-      expires: ['Sun, 01 May 2016 10:19:25 GMT']
-      last-modified: ['Sat, 30 Apr 2016 10:19:23 GMT']
-      server: [cloudflare-nginx]
-      set-cookie: ['__cfduid=d4ffb0be16a0f18905b3f68a6c5b6fc041462011564; expires=Sun,
-          30-Apr-17 10:19:24 GMT; path=/; domain=.omdbapi.com; HttpOnly']
-      vary: [Accept-Encoding]
+      date: ['Mon, 18 Feb 2019 22:24:04 GMT']
+      expires: ['Tue, 19 Feb 2019 22:24:04 GMT']
+      last-modified: ['Mon, 18 Feb 2019 22:24:04 GMT']
+      server: [cloudflare]
+      set-cookie: ['__cfduid=d87e6df7c3be383e7e771d6fcc7089c191550528643; expires=Tue,
+          18-Feb-20 22:24:03 GMT; path=/; domain=.omdbapi.com; HttpOnly']
+      transfer-encoding: [chunked]
+      vary: ['*, Accept-Encoding']
       x-aspnet-version: [4.0.30319]
       x-powered-by: [ASP.NET]
     status: {code: 200, message: OK}

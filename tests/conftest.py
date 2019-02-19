@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import subprocess
 from io import BytesIO
 import os
 from zipfile import ZipFile
@@ -148,5 +149,37 @@ def mkv():
     for path in os.listdir(data_path):
         name, _ = os.path.splitext(path)
         files[name] = os.path.join(data_path, path)
+
+    return files
+
+
+@pytest.fixture(scope='session')
+def rar(mkv):
+    data_path = os.path.join('tests', 'data', 'rar')
+    if not os.path.exists(data_path):
+        os.makedirs(data_path)
+
+    downloaded_files = {
+        'pwd-protected': 'https://github.com/markokr/rarfile/blob/master/test/files/rar5-psw.rar?raw=true',
+        'simple': 'https://github.com/markokr/rarfile/blob/master/test/files/rar5-quick-open.rar?raw=true'
+    }
+
+    generated_files = {
+        'video': [mkv['test1']],
+        'videos': [mkv['test3'], mkv['test4'], mkv['test5']],
+    }
+
+    files = {}
+    for filename, download_url in downloaded_files.items():
+        files[filename] = os.path.join(data_path, filename) + '.rar'
+        if not os.path.exists(files[filename]):
+            r = requests.get(download_url)
+            with open(files[filename], 'wb') as f:
+                f.write(r.content)
+
+    for filename, videos in generated_files.items():
+        files[filename] = os.path.join(data_path, filename) + '.rar'
+        if not os.path.exists(files[filename]):
+            subprocess.call(['rar', 'a', files[filename]] + videos)
 
     return files

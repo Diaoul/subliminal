@@ -294,37 +294,13 @@ def test_scan_video_broken(mkv, tmpdir, monkeypatch):
     assert scanned_video.year is None
 
 
-def test_scan_archive(movies, tmpdir, monkeypatch):
-    video = movies['enders_game']
-    enders_game = tmpdir.ensure(os.path.splitext(video.name)[0] + '.rar')
-
-    monkeypatch.setattr('rarfile.RarFile._parse', Mock())
-    monkeypatch.setattr('rarfile.RarFile.namelist', Mock(return_value=[video.name, 'anotherfile.nfo']))
-    monkeypatch.setattr('rarfile.RarFile.getinfo', Mock(return_value=Mock(file_size=0)))
-
-    scanned_video = scan_archive(str(enders_game))
-    assert type(scanned_video) is Movie
-    assert scanned_video.name == os.path.join(str(tmpdir), video.name)
-    assert scanned_video.source == video.source
-    assert scanned_video.release_group == video.release_group
-    assert scanned_video.resolution == video.resolution
-    assert scanned_video.video_codec == video.video_codec
-    assert scanned_video.audio_codec == video.audio_codec
-    assert scanned_video.imdb_id == video.imdb_id
-    assert scanned_video.hashes == {}
-    assert scanned_video.size == 0
-    assert scanned_video.subtitle_languages == set()
-    assert scanned_video.title == 'enders game'
-    assert scanned_video.year == 2013
-
-
 def test_scan_archive_invalid_extension(movies, tmpdir, monkeypatch):
     monkeypatch.chdir(str(tmpdir))
     movie_name = os.path.splitext(movies['interstellar'].name)[0] + '.mp3'
     tmpdir.ensure(movie_name)
     with pytest.raises(ValueError) as excinfo:
         scan_archive(movie_name)
-    assert str(excinfo.value) == '\'.mp3\' is not a valid archive extension'
+    assert str(excinfo.value) == '\'.mp3\' is not a valid archive'
 
 
 def test_scan_videos_path_does_not_exist(movies):
@@ -351,7 +327,9 @@ def test_scan_videos(movies, tmpdir, monkeypatch):
     tmpdir.ensure('movies', movies['interstellar'].name)
     tmpdir.ensure('movies', os.path.splitext(movies['enders_game'].name)[0] + '.nfo')
     tmpdir.ensure('movies', 'watched', dir=True)
-    tmpdir.join('movies', 'watched', os.path.split(movies['man_of_steel'].name)[1]).mksymlinkto(man_of_steel)
+    watched_path = tmpdir.join('movies', 'watched', os.path.split(movies['man_of_steel'].name)[1])
+    if hasattr(watched_path, 'mksymlinkto'):
+        watched_path.mksymlinkto(man_of_steel)
 
     # mock scan_video and scan_archive with the correct types
     mock_video = Mock(subtitle_languages=set())
@@ -638,3 +616,35 @@ def test_download_bad_subtitle(movies):
     pool.download_subtitle(subtitles[0])
     assert subtitles[0].content is None
     assert subtitles[0].is_valid() is False
+
+
+def test_scan_archive_with_one_video(rar, mkv):
+    rar_file = rar['video']
+    actual = scan_archive(rar_file)
+
+    assert actual.name == os.path.join(os.path.split(rar_file)[0], mkv['test1'])
+
+
+def test_scan_archive_with_multiple_videos(rar, mkv):
+    rar_file = rar['videos']
+    actual = scan_archive(rar_file)
+
+    assert actual.name == os.path.join(os.path.split(rar_file)[0], mkv['test5'])
+
+
+def test_scan_archive_with_no_video(rar):
+    with pytest.raises(ValueError) as excinfo:
+        scan_archive(rar['simple'])
+    assert excinfo.value.args == ('No video in archive', )
+
+
+def test_scan_bad_archive(mkv):
+    with pytest.raises(ValueError) as excinfo:
+        scan_archive(mkv['test1'])
+    assert excinfo.value.args == ("'.mkv' is not a valid archive", )
+
+
+def test_scan_password_protected_archive(rar):
+    with pytest.raises(ValueError) as excinfo:
+        scan_archive(rar['pwd-protected'])
+    assert excinfo.value.args == ('Rar requires a password', )

@@ -69,6 +69,7 @@ class Subs4SeriesSubtitle(Subtitle):
 class Subs4SeriesProvider(Provider):
     """Subs4Series Provider."""
     languages = {Language.fromalpha2(l) for l in {'el', 'en'}}
+    video_types = (Episode,)
     server_url = 'https://www.subs4series.com'
     search_url = '/search_report.php?search={}&searchType=1'
     episode_link = '/tv-series/{show_id}/season-{season:d}/episode-{episode:d}'

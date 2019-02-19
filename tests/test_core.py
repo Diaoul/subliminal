@@ -421,7 +421,7 @@ def test_list_subtitles_movie(movies, mock_providers):
     # test result
     assert len(subtitles) == 1
     assert sorted(subtitles[movies['man_of_steel']]) == ['legendastv', 'opensubtitles', 'podnapisi', 'shooter',
-                                                         'subs4series', 'thesubdb']
+                                                         'thesubdb']
 
 
 def test_list_subtitles_episode(episodes, mock_providers):

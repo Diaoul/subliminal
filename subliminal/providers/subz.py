@@ -171,7 +171,7 @@ class SubzProvider(Provider):
 
         """
         # make the search
-        logger.info('Searching show ids with {!r}'.format(title))
+        logger.info('Searching show ids with %r', title)
         r = self.session.get(self.server_url + text_type(self.search_url).format(title), timeout=10)
         r.raise_for_status()
 
@@ -181,13 +181,13 @@ class SubzProvider(Provider):
 
         show_type = 'series' if is_episode else 'movie'
         parsed_suggestions = [s for s in json.loads(r.text) if 'type' in s and s['type'] == show_type]
-        logger.debug('Found suggestions: {!r}', parsed_suggestions)
+        logger.debug('Found suggestions: %r', parsed_suggestions)
 
         return parsed_suggestions
 
     def query(self, show_id, series, season, episode, title):
         # get the season list of the show
-        logger.info('Getting the subtitle list of show id {}', show_id)
+        logger.info('Getting the subtitle list of show id %s', show_id)
         is_episode = False
         if all((show_id, season, episode)):
             is_episode = True
@@ -237,7 +237,7 @@ class SubzProvider(Provider):
                 subtitle = self.subtitle_class(Language.fromalpha2('el'), page_link, None, None, None, show_title,
                                                year_num, version, download_link)
 
-            logger.debug('Found subtitle {!r}'.format(subtitle))
+            logger.debug('Found subtitle %r', subtitle)
             subtitles.append(subtitle)
 
         return subtitles
@@ -272,7 +272,7 @@ class SubzProvider(Provider):
     def download_subtitle(self, subtitle):
         if isinstance(subtitle, SubzSubtitle):
             # download the subtitle
-            logger.info('Downloading subtitle {!r}'.format(subtitle))
+            logger.info('Downloading subtitle %r', subtitle)
             r = self.session.get(subtitle.download_link, headers={'Referer': subtitle.page_link}, timeout=10)
             r.raise_for_status()
 
@@ -286,7 +286,7 @@ class SubzProvider(Provider):
             if subtitle_content:
                 subtitle.content = fix_line_ending(subtitle_content)
             else:
-                logger.debug('Could not extract subtitle from {!r}'.format(archive))
+                logger.debug('Could not extract subtitle from %r', archive)
 
 
 def _get_archive(content):

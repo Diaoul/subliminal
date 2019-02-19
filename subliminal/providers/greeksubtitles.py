@@ -73,7 +73,7 @@ class GreekSubtitlesProvider(Provider):
         elif year:
             params += ' {:4d}'.format(year)
 
-        logger.debug('Searching subtitles {!r}'.format(params))
+        logger.debug('Searching subtitles %r', params)
         subtitles = []
         search_link = self.server_url + text_type(self.search_url).format(params)
         while True:
@@ -98,7 +98,7 @@ class GreekSubtitlesProvider(Provider):
 
                 subtitle = self.subtitle_class(language, page_link, version, self.download_url.format(subtitle_id))
 
-                logger.debug('Found subtitle {!r}'.format(subtitle))
+                logger.debug('Found subtitle %r', subtitle)
                 subtitles.append(subtitle)
 
             anchors = soup.select('td a')
@@ -137,7 +137,7 @@ class GreekSubtitlesProvider(Provider):
     def download_subtitle(self, subtitle):
         if isinstance(subtitle, GreekSubtitlesSubtitle):
             # download the subtitle
-            logger.info('Downloading subtitle {!r}'.format(subtitle))
+            logger.info('Downloading subtitle %r', subtitle)
             r = self.session.get(subtitle.download_link, headers={'Referer': subtitle.page_link},
                                  timeout=30)
             r.raise_for_status()
@@ -152,7 +152,7 @@ class GreekSubtitlesProvider(Provider):
             if subtitle_content:
                 subtitle.content = fix_line_ending(subtitle_content)
             else:
-                logger.debug('Could not extract subtitle from {!r}'.format(archive))
+                logger.debug('Could not extract subtitle from %r', archive)
 
 
 def _get_archive(content):

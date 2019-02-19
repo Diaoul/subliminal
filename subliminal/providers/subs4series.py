@@ -192,7 +192,7 @@ class Subs4SeriesProvider(Provider):
         show_ids = None
         for title in titles:
             show_ids = self.get_show_ids(title, video.year)
-            if show_ids is not None:
+            if show_ids and len(show_ids) > 0:
                 break
 
         subtitles = []

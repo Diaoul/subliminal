@@ -5,33 +5,33 @@ interactions:
       Accept: ['*/*']
       Accept-Encoding: ['gzip, deflate']
       Connection: [keep-alive]
-      Cookie: [__cfduid=d4ffb0be16a0f18905b3f68a6c5b6fc041462011564]
-      User-Agent: [Subliminal/2.0]
+      Cookie: [__cfduid=d87e6df7c3be383e7e771d6fcc7089c191550528643]
+      User-Agent: [Subliminal/2.1]
     method: GET
-    uri: http://www.omdbapi.com/?r=json&v=1&y=2012&s=dallas&type=series&page=1
+    uri: http://www.omdbapi.com/?apikey=00000000&r=json&v=1&y=2012&s=dallas&type=series&page=1
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAA62RUU6DQBRFt0LeN8IwlBL5KqQaTRzUlhqrMWaE10ILDGEG29I0cQ/u0JWYGpOm
-        Rm1MXMC595131zBEXscpePdriDKVI3jQ53nOJegwRl6DB5RY9O3llRKrAzpkRfJ03gcPlLJcartd
-        AjpEq2pLSqwz3JJXQircsqlSlWeaGTcKTDJ+tKWNWBRmVvApSpOZ7MYJ2OzECaOTZdiPHXbqBCx3
-        Al4G5e38VN1F8YLNYits/cXlda9nPN5Yj8NbmxBjVk1ho+8Oj1LUAiHmmphoP0jsC1DbtWmn8w8C
-        0YiG7Ziw9px+JxC2bMnaMbn0DwqMygRrLKpcrDDR/OQZS9XUKHdS2hnG80NmXdcm9Fez0PT3yj/D
-        B6Ipk6bS/InCWqZicajJtZwuIX9pumiWTb36dqKv+9i0c0wPZj/ooITi+QBlkysJHjigwwBlJUr5
-        8di6Qdi8A4ieFfTuAgAA
+        H4sIAAAAAAAAA4XQXU7CQBQF4K0097n2Z9pC7BNtgEjiFIVCQGPI2F6h0HaazlShhMQ9uENXYmpM
+        CAZlAefe8509jJGV0Qrcxz2EiUwRXOiyNGUCVJgjK8EFYpjk8/2DGKYNKiRZ/DzoggtSmm1itVsG
+        qBDuiiYpsEywSd5xIbHJrqQshKvrmZZhnLArlrGa51rEMz3J2BKFTnU6dXy67jlB2NsG3cihfcen
+        qeOz3M9nm758CKM3uo7MoPbehvedjraYmovxzDIMbV0s4aAeq4crVHzONwp/Uf5gnBKI1baIbV8i
+        uLqesB9Ckz4DCCckqOcGrQfkHCCo6ZbWc2PoXQRM8hhLzIqU7zBWvPgVc1mVKI4o5QajzSVZq20Z
+        5F9ZoHsnz2+rbVXuzg73ezWL2Nfk4u0nFSSXLB2hqFIpwIWmzwhFwXPxzS0rhMMXtF/LlIYCAAA=
     headers:
       access-control-allow-origin: ['*']
       cache-control: ['public, max-age=86400']
       cf-cache-status: [MISS]
-      cf-ray: [29ba416eb79b3c35-CDG]
+      cf-ray: [4ab3e6e268e93e92-ZRH]
       connection: [keep-alive]
       content-encoding: [gzip]
       content-type: [application/json; charset=utf-8]
-      date: ['Sat, 30 Apr 2016 10:19:29 GMT']
-      expires: ['Sun, 01 May 2016 10:19:29 GMT']
-      last-modified: ['Sat, 30 Apr 2016 10:19:27 GMT']
-      server: [cloudflare-nginx]
-      vary: [Accept-Encoding]
+      date: ['Mon, 18 Feb 2019 22:24:05 GMT']
+      expires: ['Tue, 19 Feb 2019 22:24:05 GMT']
+      last-modified: ['Mon, 18 Feb 2019 22:24:05 GMT']
+      server: [cloudflare]
+      transfer-encoding: [chunked]
+      vary: ['*, Accept-Encoding']
       x-aspnet-version: [4.0.30319]
       x-powered-by: [ASP.NET]
     status: {code: 200, message: OK}

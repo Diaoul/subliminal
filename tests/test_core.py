@@ -70,8 +70,8 @@ def test_provider_pool_list_subtitles_provider(episodes, mock_providers):
 def test_provider_pool_list_subtitles(episodes, mock_providers):
     pool = ProviderPool()
     subtitles = pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
-    assert sorted(subtitles) == ['addic7ed', 'legendastv', 'opensubtitles', 'podnapisi', 'shooter', 'subs4free',
-                                 'thesubdb', 'tvsubtitles']
+    assert sorted(subtitles) == ['addic7ed', 'legendastv', 'opensubtitles', 'podnapisi', 'shooter', 'thesubdb',
+                                 'tvsubtitles']
     for provider in subtitles:
         assert provider_manager[provider].plugin.initialize.called
         assert provider_manager[provider].plugin.list_subtitles.called
@@ -88,8 +88,8 @@ def test_async_provider_pool_list_subtitles_provider(episodes, mock_providers):
 def test_async_provider_pool_list_subtitles(episodes, mock_providers):
     pool = AsyncProviderPool()
     subtitles = pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
-    assert sorted(subtitles) == ['addic7ed', 'legendastv', 'opensubtitles', 'podnapisi', 'shooter', 'subs4free',
-                                 'thesubdb', 'tvsubtitles']
+    assert sorted(subtitles) == ['addic7ed', 'legendastv', 'opensubtitles', 'podnapisi', 'shooter', 'thesubdb',
+                                 'tvsubtitles']
     for provider in subtitles:
         assert provider_manager[provider].plugin.initialize.called
         assert provider_manager[provider].plugin.list_subtitles.called
@@ -442,7 +442,7 @@ def test_list_subtitles_episode(episodes, mock_providers):
     # test result
     assert len(subtitles) == 1
     assert sorted(subtitles[episodes['bbt_s07e05']]) == ['addic7ed', 'legendastv', 'opensubtitles', 'podnapisi',
-                                                         'shooter', 'subs4free', 'thesubdb', 'tvsubtitles']
+                                                         'shooter', 'thesubdb', 'tvsubtitles']
 
 
 def test_list_subtitles_providers(episodes, mock_providers):
@@ -480,7 +480,7 @@ def test_list_subtitles_episode_no_hash(episodes, mock_providers):
     # test result
     assert len(subtitles) == 1
     assert sorted(subtitles[episodes['dallas_s01e03']]) == ['addic7ed', 'legendastv', 'opensubtitles', 'podnapisi',
-                                                            'shooter', 'subs4free', 'tvsubtitles']
+                                                            'shooter', 'tvsubtitles']
 
 
 def test_list_subtitles_no_language(episodes, mock_providers):

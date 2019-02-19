@@ -71,6 +71,7 @@ class Subs4FreeSubtitle(Subtitle):
 class Subs4FreeProvider(Provider):
     """Subs4Free Provider."""
     languages = {Language.fromalpha2(l) for l in {'el', 'en'}}
+    video_types = (Movie,)
     server_url = 'https://www.sf4-industry.com'
     download_url = '/getSub.html'
     search_url = '/search_report.php?search={}&searchType=1'

@@ -254,7 +254,7 @@ class SubzProvider(Provider):
         show_ids = None
         for title in titles:
             show_ids = self.get_show_ids(title, video.year, isinstance(video, Episode))
-            if show_ids is not None:
+            if show_ids is not None and len(show_ids) > 0:
                 break
 
         subtitles = []

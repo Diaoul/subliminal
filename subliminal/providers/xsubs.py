@@ -203,10 +203,15 @@ class XSubsProvider(Provider):
         # loop over season rows
         seasons = soup.findAll('series_group')
         season_id = None
+
         for season_row in seasons:
-            if int(season_row['ssnnum']) == season:
-                season_id = int(season_row['ssnid'])
-                break
+            try:
+                parsed_season = int(season_row['ssnnum'])
+                if parsed_season == season:
+                    season_id = int(season_row['ssnid'])
+                    break
+            except (ValueError, TypeError):
+                continue
 
         if season_id is None:
             logger.debug('Season not found in provider')

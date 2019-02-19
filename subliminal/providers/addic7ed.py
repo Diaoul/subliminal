@@ -72,9 +72,6 @@ class Addic7edSubtitle(Subtitle):
         # resolution
         if video.resolution and self.version and video.resolution in self.version.lower():
             matches.add('resolution')
-        # source
-        if video.source and self.version and video.source.lower() in self.version.lower():
-            matches.add('source')
         # other properties
         matches |= guess_matches(video, guessit(self.version), partial=True)
 

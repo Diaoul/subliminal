@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 
+import six
 from babelfish import Language
 
 from subliminal.subtitle import Subtitle, fix_line_ending, get_subtitle_path, guess_matches
@@ -72,7 +73,7 @@ def test_get_subtitle_path_language_undefined(movies):
 def test_guess_matches_movie(movies):
     video = movies['man_of_steel']
     guess = {'title': video.title.upper(), 'year': video.year, 'release_group': video.release_group.upper(),
-             'screen_size': video.resolution, 'source': video.source.upper(), 'video_codec': video.video_codec,
+             'screen_size': video.resolution, 'source': video.source, 'video_codec': video.video_codec,
              'audio_codec': video.audio_codec}
     expected = {'title', 'year', 'release_group', 'resolution', 'source', 'video_codec', 'audio_codec'}
     assert guess_matches(video, guess) == expected
@@ -82,7 +83,7 @@ def test_guess_matches_episode(episodes):
     video = episodes['bbt_s07e05']
     guess = {'title': video.series, 'season': video.season, 'episode': video.episode, 'year': video.year,
              'episode_title': video.title.upper(), 'release_group': video.release_group.upper(),
-             'screen_size': video.resolution, 'source': video.source.upper(), 'video_codec': video.video_codec,
+             'screen_size': video.resolution, 'source': video.source, 'video_codec': video.video_codec,
              'audio_codec': video.audio_codec}
     expected = {'series', 'season', 'episode', 'title', 'year', 'release_group', 'resolution', 'source', 'video_codec',
                 'audio_codec'}
@@ -93,9 +94,32 @@ def test_guess_matches_episode_equivalent_release_group(episodes):
     video = episodes['bbt_s07e05']
     guess = {'title': video.series, 'season': video.season, 'episode': video.episode, 'year': video.year,
              'episode_title': video.title.upper(), 'release_group': 'LOL',
-             'screen_size': video.resolution, 'source': video.source.upper(), 'video_codec': video.video_codec,
+             'screen_size': video.resolution, 'source': video.source, 'video_codec': video.video_codec,
              'audio_codec': video.audio_codec}
     expected = {'series', 'season', 'episode', 'title', 'year', 'release_group', 'resolution', 'source', 'video_codec',
+                'audio_codec'}
+    assert guess_matches(video, guess) == expected
+
+
+def test_guess_matches_multiple_sources(episodes):
+    video = episodes['bbt_s07e05']
+    video.source = [video.source, 'Blu-ray']
+    guess = {'title': video.series, 'season': video.season, 'episode': video.episode, 'year': video.year,
+             'episode_title': video.title.upper(), 'release_group': 'LOL',
+             'screen_size': video.resolution, 'source': video.source, 'video_codec': video.video_codec,
+             'audio_codec': video.audio_codec}
+    expected = {'series', 'season', 'episode', 'title', 'year', 'release_group', 'resolution', 'source', 'video_codec',
+                'audio_codec'}
+    assert guess_matches(video, guess) == expected
+
+
+def test_guess_matches_multiple_sources_no_match(episodes):
+    video = episodes['bbt_s07e05']
+    guess = {'title': video.series, 'season': video.season, 'episode': video.episode, 'year': video.year,
+             'episode_title': video.title.upper(), 'release_group': 'LOL',
+             'screen_size': video.resolution, 'source': [video.source, 'Blu-ray'], 'video_codec': video.video_codec,
+             'audio_codec': video.audio_codec}
+    expected = {'series', 'season', 'episode', 'title', 'year', 'release_group', 'resolution', 'video_codec',
                 'audio_codec'}
     assert guess_matches(video, guess) == expected
 
@@ -125,3 +149,21 @@ def test_subtitle_empty_encoding():
 def test_subtitle_invalid_encoding():
     subtitle = Subtitle(Language('deu'), False, None, 'rubbish')
     assert subtitle.encoding is None
+
+
+def test_subtitle_guess_encoding_utf8():
+    subtitle = Subtitle(Language('zho'), False, None, None)
+    subtitle.content = b'Something here'
+    assert subtitle.guess_encoding() == 'utf-8'
+    assert isinstance(subtitle.text, six.text_type)
+
+
+# regression for #921
+def test_subtitle_text_guess_encoding_none():
+    content = b'\x00d\x00\x80\x00\x00\xff\xff\xff\xff\xff\xff,\x00\x00\x00\x00d\x00d\x00\x00\x02s\x84\x8f\xa9'
+    subtitle = Subtitle(Language('zho'), False, None, None)
+    subtitle.content = content
+
+    assert subtitle.guess_encoding() is None
+    assert not subtitle.is_valid()
+    assert not isinstance(subtitle.text, six.text_type)

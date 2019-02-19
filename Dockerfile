@@ -1,7 +1,8 @@
-FROM python:3
+FROM python:3-alpine
 
 MAINTAINER Antoine Bertin <diaoulael@gmail.com>
 
+RUN apk add --no-cache unrar
 RUN mkdir -p /usr/src/app /usr/src/cache
 WORKDIR /usr/src/app
 VOLUME /usr/src/cache

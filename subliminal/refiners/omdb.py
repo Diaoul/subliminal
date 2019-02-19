@@ -89,7 +89,7 @@ def search(title, type, year):
     return all_results
 
 
-def refine(video, **kwargs):
+def refine(video, apikey=None, **kwargs):
     """Refine a video by searching `OMDb API <http://omdbapi.com/>`_.
 
     Several :class:`~subliminal.video.Episode` attributes can be found:
@@ -105,6 +105,12 @@ def refine(video, **kwargs):
       * :attr:`~subliminal.video.Video.imdb_id`
 
     """
+    if not apikey:
+        logger.warning('No apikey. Skipping omdb refiner.')
+        return
+
+    omdb_client.session.params['apikey'] = apikey
+
     if isinstance(video, Episode):
         # exit if the information is complete
         if video.series_imdb_id:

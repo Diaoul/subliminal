@@ -249,7 +249,7 @@ def test_query_episode(episodes):
         ('56e442ddbb615', 'Colony.S01E09.720p.HDTV.x264-KILLERS.srt')
     }
     with LegendasTVProvider(USERNAME, PASSWORD) as provider:
-        subtitles = provider.query(language, video.series, video.season, video.episode, video.year)
+        subtitles = provider.query(language, video.series, video.season, video.episodes, video.year)
     assert {(s.archive.id, s.name) for s in subtitles} == expected_subtitles
 
 

@@ -131,7 +131,7 @@ class Subs4SeriesProvider(Provider):
 
         """
         # make the search
-        logger.info('Searching show ids with {!r}'.format(title))
+        logger.info('Searching show ids with %r', title)
         r = self.session.get(self.server_url + text_type(self.search_url).format(title),
                              headers={'Referer': self.server_url}, timeout=10)
         r.raise_for_status()
@@ -143,13 +143,13 @@ class Subs4SeriesProvider(Provider):
         soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
         series = [{'link': l.attrs['value'], 'title': l.text}
                   for l in soup.select('select[name="Mov_sel"] > option[value]')]
-        logger.debug('Found suggestions: {!r}'.format(series))
+        logger.debug('Found suggestions: %r', series)
 
         return series
 
     def query(self, show_id, series, season, episode, title):
         # get the season list of the show
-        logger.info('Getting the subtitle list of show id {}'.format(show_id))
+        logger.info('Getting the subtitle list of show id %s', show_id)
         if all((show_id, season, episode)):
             page_link = self.server_url + self.episode_link.format(show_id=show_id, season=season, episode=episode)
         else:
@@ -180,7 +180,7 @@ class Subs4SeriesProvider(Provider):
 
             subtitle = self.subtitle_class(language, page_link, show_title, year_num, version, download_link)
 
-            logger.debug('Found subtitle {!r}'.format(subtitle))
+            logger.debug('Found subtitle %r', subtitle)
             subtitles.append(subtitle)
 
         return subtitles
@@ -206,7 +206,7 @@ class Subs4SeriesProvider(Provider):
     def download_subtitle(self, subtitle):
         if isinstance(subtitle, Subs4SeriesSubtitle):
             # download the subtitle
-            logger.info('Downloading subtitle {!r}'.format(subtitle))
+            logger.info('Downloading subtitle %r', subtitle)
             r = self.session.get(subtitle.download_link, headers={'Referer': subtitle.page_link}, timeout=10)
             r.raise_for_status()
 
@@ -240,7 +240,7 @@ class Subs4SeriesProvider(Provider):
             if subtitle_content:
                 subtitle.content = fix_line_ending(subtitle_content)
             else:
-                logger.debug('Could not extract subtitle from {!r}'.format(archive))
+                logger.debug('Could not extract subtitle from %r', archive)
 
 
 def _get_archive(content):

@@ -150,3 +150,25 @@ def timestamp(date):
 
     """
     return (date - datetime(1970, 1, 1)).total_seconds()
+
+
+def matches_title(actual, title, alternative_titles):
+    """Whether `actual` matches the `title` or `alternative_titles`
+
+    :param str actual: the actual title to check
+    :param str title: the expected title
+    :param list alternative_titles: the expected alternative_titles
+    :return: whether the actual title matches the title or alternative_titles.
+    :rtype: bool
+
+    """
+    actual = sanitize(actual)
+    title = sanitize(title)
+    if actual == title:
+        return True
+
+    alternative_titles = set(sanitize(t) for t in alternative_titles)
+    if actual in alternative_titles:
+        return True
+
+    return actual.startswith(title) and actual[len(title):].strip() in alternative_titles

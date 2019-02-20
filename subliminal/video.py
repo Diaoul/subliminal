@@ -7,6 +7,8 @@ import os
 from guessit import guessit
 from rebulk.loose import ensure_list
 
+from subliminal.utils import matches_title
+
 logger = logging.getLogger(__name__)
 
 #: Video extensions
@@ -166,6 +168,9 @@ class Episode(Video):
     def episode(self):
         return min(self.episodes) if self.episodes else None
 
+    def matches(self, series):
+        return matches_title(series, self.series, self.alternative_series)
+
     @classmethod
     def fromguess(cls, name, guess):
         if guess['type'] != 'episode':
@@ -176,6 +181,7 @@ class Episode(Video):
 
         return cls(name, guess['title'], guess.get('season', 1), guess.get('episode'), title=guess.get('episode_title'),
                    year=guess.get('year'), source=guess.get('source'), original_series='year' not in guess,
+                   alternative_series=ensure_list(guess.get('alternative_title')),
                    release_group=guess.get('release_group'), resolution=guess.get('screen_size'),
                    video_codec=guess.get('video_codec'), audio_codec=guess.get('audio_codec'))
 
@@ -213,6 +219,9 @@ class Movie(Video):
         #: Alternative titles of the movie
         self.alternative_titles = alternative_titles or []
 
+    def matches(self, title):
+        return matches_title(title, self.title, self.alternative_titles)
+
     @classmethod
     def fromguess(cls, name, guess):
         if guess['type'] != 'movie':
@@ -223,6 +232,7 @@ class Movie(Video):
 
         return cls(name, guess['title'], source=guess.get('source'), release_group=guess.get('release_group'),
                    resolution=guess.get('screen_size'), video_codec=guess.get('video_codec'),
+                   alternative_titles=ensure_list(guess.get('alternative_title')),
                    audio_codec=guess.get('audio_codec'), year=guess.get('year'))
 
     @classmethod

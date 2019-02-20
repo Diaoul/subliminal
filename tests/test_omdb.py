@@ -144,3 +144,13 @@ def test_refine_movie(movies):
     assert movie.title == movies['man_of_steel'].title
     assert movie.year == movies['man_of_steel'].year
     assert movie.imdb_id == movies['man_of_steel'].imdb_id
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_refine_movie_guess_alternative_title(movies):
+    movie = Movie.fromname(movies['jack_reacher_never_go_back'].name)
+    refine(movie, apikey=APIKEY)
+    assert movie.title == movies['jack_reacher_never_go_back'].title
+    assert movie.year == movies['jack_reacher_never_go_back'].year
+    assert movie.imdb_id == movies['jack_reacher_never_go_back'].imdb_id

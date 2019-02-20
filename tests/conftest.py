@@ -39,7 +39,14 @@ def movies():
             Movie(u'Café Society.1080p.avc1.RARBG.mp4', u'Café Society', year=2016),
             'interstellar':
             Movie('Interstellar.2014.2014.1080p.BluRay.x264.YIFY.rar', 'Interstellar',
-                  source='Blu-ray', release_group='YIFY', resolution='1080p', video_codec='H.264', year=2014)}
+                  source='Blu-ray', release_group='YIFY', resolution='1080p', video_codec='H.264', year=2014),
+            'jack_reacher_never_go_back':
+            Movie(os.path.join('Jack Reacher- Never Go Back (2016)',
+                               'Jack.Reacher.Never.Go.Back.2016.1080p.WEBDL.AC3.x264-FGT.mkv'),
+                  'Jack Reacher: Never Go Back',
+                  source='Web', release_group='FGT', resolution='1080p', video_codec='H.264',
+                  audio_codec='Dolby Digital', imdb_id='tt3393786', year=2016)
+            }
 
 
 @pytest.fixture

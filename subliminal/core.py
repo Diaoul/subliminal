@@ -21,7 +21,6 @@ from .exceptions import ServiceUnavailable
 from .extensions import provider_manager, refiner_manager
 from .score import compute_score as default_compute_score
 from .subtitle import SUBTITLE_EXTENSIONS
-from .utils import hash_napiprojekt, hash_opensubtitles, hash_shooter, hash_thesubdb
 from .video import VIDEO_EXTENSIONS, Episode, Movie, Video
 
 #: Supported archive extensions
@@ -123,7 +122,7 @@ class ProviderPool(object):
             return []
 
         # check supported languages
-        provider_languages = provider_manager[provider].plugin.languages & languages
+        provider_languages = provider_manager[provider].plugin.check_languages(languages)
         if not provider_languages:
             logger.info('Skipping provider %r: no language to search for', provider)
             return []
@@ -429,17 +428,9 @@ def scan_video(path):
     # guess
     video = Video.fromguess(path, guessit(path))
 
-    # size and hashes
+    # size
     video.size = os.path.getsize(path)
-    if video.size > 10485760:
-        logger.debug('Size is %d', video.size)
-        video.hashes['opensubtitles'] = hash_opensubtitles(path)
-        video.hashes['shooter'] = hash_shooter(path)
-        video.hashes['thesubdb'] = hash_thesubdb(path)
-        video.hashes['napiprojekt'] = hash_napiprojekt(path)
-        logger.debug('Computed hashes %r', video.hashes)
-    else:
-        logger.warning('Size is lower than 10MB: hashes not computed')
+    logger.debug('Size is %d', video.size)
 
     return video
 
@@ -609,7 +600,7 @@ def refine(video, episode_refiners=None, movie_refiners=None, refiner_configs=No
         refiners = episode_refiners or ('metadata', 'tvdb', 'omdb')
     elif isinstance(video, Movie):
         refiners = movie_refiners or ('metadata', 'omdb')
-    for refiner in refiners:
+    for refiner in ('hash', ) + refiners:
         logger.info('Refining video with %s', refiner)
         try:
             refiner_manager[refiner].plugin(video, **dict((refiner_configs or {}).get(refiner, {}), **kwargs))

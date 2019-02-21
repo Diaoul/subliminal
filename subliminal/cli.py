@@ -352,9 +352,12 @@ def download(obj, provider, refiner, language, age, directory, encoding, single,
                     continue
                 if not force:
                     video.subtitle_languages |= set(search_external_subtitles(video.name, directory=directory).values())
-                refine(video, episode_refiners=refiner, movie_refiners=refiner, refiner_configs=obj['refiner_configs'],
-                       embedded_subtitles=not force, providers=provider, languages=language)
-                videos.append(video)
+
+                if check_video(video, languages=language, age=age, undefined=single):
+                    refine(video, episode_refiners=refiner, movie_refiners=refiner,
+                           refiner_configs=obj['refiner_configs'],
+                           embedded_subtitles=not force, providers=provider, languages=language)
+                    videos.append(video)
                 continue
 
             # directories

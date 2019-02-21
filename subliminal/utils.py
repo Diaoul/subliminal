@@ -117,7 +117,7 @@ def sanitize(string, ignore_characters=None):
     ignore_characters = ignore_characters or set()
 
     # replace some characters with one space
-    characters = {'-', ':', '(', ')', '.'} - ignore_characters
+    characters = {'-', ':', '(', ')', '.', ','} - ignore_characters
     if characters:
         string = re.sub(r'[%s]' % re.escape(''.join(characters)), ' ', string)
 

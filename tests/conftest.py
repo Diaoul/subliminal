@@ -138,7 +138,12 @@ def episodes():
                     alternative_series=['The end of the f***ing world']),
             'Marvels.Agents.of.S.H.I.E.L.D.S05E01-E02':
             Episode('Marvels.Agents.of.S.H.I.E.L.D.S05E01-E02.720p.HDTV.x264-AVS', 'Marvels.Agents.of.S.H.I.E.L.D', 5,
-                    1, resolution='720p', source='HDTV', video_codec='H.264', release_group='AVS')}
+                    1, resolution='720p', source='HDTV', video_codec='H.264', release_group='AVS'),
+            'alex_inc_s01e04':
+            Episode('Alex.Inc.S01E04.HDTV.x264-SVA.mkv', 'Alex, Inc.', 1, 4, source='HDTV', video_codec='H.264',
+                    release_group='SVA', year=2018, title='The Nanny', series_imdb_id='tt6466948', tvdb_id=6627151,
+                    series_tvdb_id=328635)
+            }
 
 
 @pytest.fixture(scope='session')

@@ -240,6 +240,15 @@ def test_get_show_id_quote_dots_mixed_case(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
+def test_get_show_id_with_comma(episodes):
+    video = episodes['alex_inc_s01e04']
+    with Addic7edProvider() as provider:
+        show_id = provider.get_show_id(video.series)
+    assert show_id == 6388
+
+
+@pytest.mark.integration
+@vcr.use_cassette
 def test_get_show_id_country():
     with Addic7edProvider() as provider:
         show_id = provider.get_show_id('Being Human', country_code='US')

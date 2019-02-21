@@ -347,3 +347,20 @@ def test_refine_episode_alternative_series(episodes):
     assert episode.tvdb_id == video.tvdb_id
     assert episode.series_tvdb_id == video.series_tvdb_id
     assert episode.alternative_series == video.alternative_series
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_refine_episode_with_comma(episodes):
+    video = episodes['alex_inc_s01e04']
+    episode = Episode.fromname(video.name)
+    refine(episode)
+    assert episode.series == video.series
+    assert episode.year == video.year
+    assert episode.original_series == video.original_series
+    assert episode.title == video.title
+    assert episode.imdb_id == video.imdb_id
+    assert episode.series_imdb_id == video.series_imdb_id
+    assert episode.tvdb_id == video.tvdb_id
+    assert episode.series_tvdb_id == video.series_tvdb_id
+    assert episode.alternative_series == video.alternative_series

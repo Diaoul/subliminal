@@ -154,3 +154,25 @@ def test_refine_movie_guess_alternative_title(movies):
     assert movie.title == movies['jack_reacher_never_go_back'].title
     assert movie.year == movies['jack_reacher_never_go_back'].year
     assert movie.imdb_id == movies['jack_reacher_never_go_back'].imdb_id
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_refine_episode_with_country(episodes):
+    episode = Episode.fromname(episodes['shameless_us_s08e01'].name)
+    video_series = episode.series
+    refine(episode, apikey=APIKEY)
+    # omdb has no country info. No match
+    assert episode.series == video_series
+    assert episode.series_imdb_id is None
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_refine_episode_with_country_hoc_us(episodes):
+    episode = Episode.fromname(episodes['house_of_cards_us_s06e01'].name)
+    video_series = episode.series
+    refine(episode, apikey=APIKEY)
+    # omdb has no country info. No match
+    assert episode.series == video_series
+    assert episode.series_imdb_id is None

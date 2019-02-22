@@ -6,6 +6,8 @@ from zipfile import ZipFile
 
 import pytest
 import requests
+from babelfish import Country
+
 try:
     from unittest.mock import Mock
 except ImportError:
@@ -142,7 +144,17 @@ def episodes():
             'alex_inc_s01e04':
             Episode('Alex.Inc.S01E04.HDTV.x264-SVA.mkv', 'Alex, Inc.', 1, 4, source='HDTV', video_codec='H.264',
                     release_group='SVA', year=2018, title='The Nanny', series_imdb_id='tt6466948', tvdb_id=6627151,
-                    series_tvdb_id=328635)
+                    series_tvdb_id=328635),
+            'shameless_us_s08e01':
+                Episode('Shameless.US.s08e01.web.h264-convoy', 'Shameless', 8, 1, source='Web', video_codec='H.264',
+                        country=Country('US'), original_series=False, release_group='convoy', year=2011,
+                        alternative_series=['Shameless US'], title='We Become What We... Frank!',
+                        series_imdb_id='tt1586680', series_tvdb_id=161511, imdb_id='tt6347410', tvdb_id=6227949),
+            'house_of_cards_us_s06e01':
+                Episode('house.of.cards.us.s06e01.720p.web-dl.x264', 'House of Cards', 6, 1, source='Web',
+                        video_codec='H.264', country=Country('US'), year=2013, original_series=False,
+                        alternative_series=['House of Cards (2013)'], title='Chapter 66', series_imdb_id='tt1856010',
+                        series_tvdb_id=262980, imdb_id='tt7538918', tvdb_id=6553109)
             }
 
 

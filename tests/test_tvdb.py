@@ -364,3 +364,37 @@ def test_refine_episode_with_comma(episodes):
     assert episode.tvdb_id == video.tvdb_id
     assert episode.series_tvdb_id == video.series_tvdb_id
     assert episode.alternative_series == video.alternative_series
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_refine_episode_with_country(episodes):
+    video = episodes['shameless_us_s08e01']
+    episode = Episode.fromname(video.name)
+    refine(episode)
+    assert episode.series == video.series
+    assert episode.year == video.year
+    assert episode.original_series == video.original_series
+    assert episode.title == video.title
+    assert episode.imdb_id == video.imdb_id
+    assert episode.series_imdb_id == video.series_imdb_id
+    assert episode.tvdb_id == video.tvdb_id
+    assert episode.series_tvdb_id == video.series_tvdb_id
+    assert episode.alternative_series == video.alternative_series
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_refine_episode_with_country_hoc_us(episodes):
+    video = episodes['house_of_cards_us_s06e01']
+    episode = Episode.fromname(video.name)
+    refine(episode)
+    assert episode.series == video.series
+    assert episode.year == video.year
+    assert episode.original_series == video.original_series
+    assert episode.title == video.title
+    assert episode.imdb_id == video.imdb_id
+    assert episode.series_imdb_id == video.series_imdb_id
+    assert episode.tvdb_id == video.tvdb_id
+    assert episode.series_tvdb_id == video.series_tvdb_id
+    assert episode.alternative_series == video.alternative_series

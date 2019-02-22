@@ -234,16 +234,27 @@ def guess_matches(video, guess, partial=False):
         # year
         if video.year and 'year' in guess and guess['year'] == video.year:
             matches.add('year')
-        # count "no year" as an information
-        if not partial and video.original_series and 'year' not in guess:
-            matches.add('year')
+        if not partial and video.original_series:
+            # count "no year" as an information
+            if 'year' not in guess:
+                matches.add('year')
+            # count "no country" as an information
+            if 'country' not in guess:
+                matches.add('country')
     elif isinstance(video, Movie):
         # year
         if video.year and 'year' in guess and guess['year'] == video.year:
             matches.add('year')
+        # count "no country" as an information
+        if not video.country and 'country' not in guess:
+            matches.add('country')
         # title
         if video.title and 'title' in guess and sanitize(guess['title']) == sanitize(video.title):
             matches.add('title')
+
+    # country
+    if video.country and 'country' in guess and guess['country'] == video.country:
+        matches.add('country')
     # release_group
     if (video.release_group and 'release_group' in guess and
             sanitize_release_group(guess['release_group']) in

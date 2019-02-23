@@ -20,7 +20,9 @@ from . import ParserBeautifulSoup, Provider
 from .. import __short_version__
 from ..cache import SHOW_EXPIRATION_TIME, region
 from ..exceptions import AuthenticationError, ConfigurationError, ProviderError, ServiceUnavailable
-from ..subtitle import SUBTITLE_EXTENSIONS, Subtitle, fix_line_ending, guess_matches, sanitize
+from ..matches import guess_matches
+from ..subtitle import SUBTITLE_EXTENSIONS, Subtitle, fix_line_ending
+from ..utils import sanitize
 from ..video import Episode, Movie
 
 logger = logging.getLogger(__name__)
@@ -122,34 +124,19 @@ class LegendasTVSubtitle(Subtitle):
         return self.name
 
     def get_matches(self, video, hearing_impaired=False):
-        matches = set()
+        matches = guess_matches(video, {
+            'title': self.title,
+            'year': self.year
+        })
 
         # episode
         if isinstance(video, Episode) and self.type == 'episode':
-            # series
-            if video.series and (sanitize(self.title) in (
-                    sanitize(name) for name in [video.series] + video.alternative_series)):
-                matches.add('series')
-
-            # year
-            if video.original_series and self.year is None or video.year and video.year == self.year:
-                matches.add('year')
-
             # imdb_id
             if video.series_imdb_id and self.imdb_id == video.series_imdb_id:
                 matches.add('series_imdb_id')
 
         # movie
         elif isinstance(video, Movie) and self.type == 'movie':
-            # title
-            if video.title and (sanitize(self.title) in (
-                    sanitize(name) for name in [video.title] + video.alternative_titles)):
-                matches.add('title')
-
-            # year
-            if video.year and self.year == video.year:
-                matches.add('year')
-
             # imdb_id
             if video.imdb_id and self.imdb_id == video.imdb_id:
                 matches.add('imdb_id')

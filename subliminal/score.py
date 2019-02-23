@@ -46,6 +46,9 @@ episode_scores = {'hash': 809, 'series': 405, 'year': 135, 'country': 135, 'seas
 movie_scores = {'hash': 269, 'title': 135, 'year': 45, 'country': 45, 'release_group': 15, 'streaming_service': 15,
                 'source': 7, 'audio_codec': 3, 'resolution': 2, 'video_codec': 2, 'hearing_impaired': 1}
 
+#: All scores names
+score_keys = set([s for s in episode_scores.keys()] + [s for s in movie_scores.keys()])
+
 #: Equivalent release groups
 equivalent_release_groups = ({'LOL', 'DIMENSION'}, {'ASAP', 'IMMERSE', 'FLEET'}, {'AVS', 'SVA'})
 

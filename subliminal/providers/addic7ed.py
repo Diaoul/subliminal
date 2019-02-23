@@ -10,9 +10,9 @@ from . import ParserBeautifulSoup, Provider
 from .. import __short_version__
 from ..cache import SHOW_EXPIRATION_TIME, region
 from ..exceptions import AuthenticationError, ConfigurationError, DownloadLimitExceeded
-from ..score import get_equivalent_release_groups
-from ..subtitle import Subtitle, fix_line_ending, guess_matches
-from ..utils import sanitize, sanitize_release_group
+from ..matches import guess_matches
+from ..subtitle import Subtitle, fix_line_ending
+from ..utils import sanitize
 from ..video import Episode
 
 logger = logging.getLogger(__name__)
@@ -54,35 +54,22 @@ class Addic7edSubtitle(Subtitle):
         )
 
     def get_matches(self, video):
-        matches = set()
-
         # series name
-        if video.series and sanitize(self.series) in (
-                sanitize(name) for name in [video.series] + video.alternative_series):
-            matches.add('series')
-        # season
-        if video.season and self.season == video.season:
-            matches.add('season')
-        # episode
-        if video.episode and self.episode == video.episode:
-            matches.add('episode')
-        # title of the episode
-        if video.title and sanitize(self.title) == sanitize(video.title):
-            matches.add('title')
-        # year
-        if video.original_series and self.year is None or video.year and video.year == self.year:
-            matches.add('year')
-        # release_group
-        if (video.release_group and self.version and
-                any(r in sanitize_release_group(self.version)
-                    for r in get_equivalent_release_groups(sanitize_release_group(video.release_group)))):
-            matches.add('release_group')
+        matches = guess_matches(video, {
+            'title': self.series,
+            'season': self.season,
+            'episode': self.episode,
+            'episode_title': self.title,
+            'year': self.year,
+            'release_group': self.version,
+        })
+
         # resolution
         if video.resolution and self.version and video.resolution in self.version.lower():
             matches.add('resolution')
         # other properties
         if self.version:
-            matches |= guess_matches(video, guessit(self.version), partial=True)
+            matches |= guess_matches(video, guessit(self.version, {'type': 'episode'}), partial=True)
 
         return matches
 

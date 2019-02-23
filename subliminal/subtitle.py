@@ -5,11 +5,6 @@ import os
 
 import chardet
 import pysrt
-from rebulk.loose import ensure_list
-
-from .score import get_equivalent_release_groups
-from .video import Episode, Movie
-from .utils import sanitize, sanitize_release_group
 
 from six import text_type
 
@@ -206,83 +201,6 @@ def get_subtitle_path(video_path, language=None, extension='.srt'):
         subtitle_root += '.' + str(language)
 
     return subtitle_root + extension
-
-
-def guess_matches(video, guess, partial=False):
-    """Get matches between a `video` and a `guess`.
-
-    If a guess is `partial`, the absence information won't be counted as a match.
-
-    :param video: the video.
-    :type video: :class:`~subliminal.video.Video`
-    :param guess: the guess.
-    :type guess: dict
-    :param bool partial: whether or not the guess is partial.
-    :return: matches between the `video` and the `guess`.
-    :rtype: set
-
-    """
-    matches = set()
-    if isinstance(video, Episode):
-        # series
-        if video.series and 'title' in guess and sanitize(guess['title']) == sanitize(video.series):
-            matches.add('series')
-        # title
-        if video.title and 'episode_title' in guess and sanitize(guess['episode_title']) == sanitize(video.title):
-            matches.add('title')
-        # season
-        if video.season and 'season' in guess and guess['season'] == video.season:
-            matches.add('season')
-        # episode
-        if video.episodes and 'episode' in guess and ensure_list(guess['episode']) == video.episodes:
-            matches.add('episode')
-        # year
-        if video.year and 'year' in guess and guess['year'] == video.year:
-            matches.add('year')
-        if not partial and video.original_series:
-            # count "no year" as an information
-            if 'year' not in guess:
-                matches.add('year')
-            # count "no country" as an information
-            if 'country' not in guess:
-                matches.add('country')
-    elif isinstance(video, Movie):
-        # year
-        if video.year and 'year' in guess and guess['year'] == video.year:
-            matches.add('year')
-        # count "no country" as an information
-        if not video.country and 'country' not in guess:
-            matches.add('country')
-        # title
-        if video.title and 'title' in guess and sanitize(guess['title']) == sanitize(video.title):
-            matches.add('title')
-
-    # country
-    if video.country and 'country' in guess and guess['country'] == video.country:
-        matches.add('country')
-    # release_group
-    if (video.release_group and 'release_group' in guess and
-            sanitize_release_group(guess['release_group']) in
-            get_equivalent_release_groups(sanitize_release_group(video.release_group))):
-        matches.add('release_group')
-    # streaming_service
-    if video.streaming_service and 'streaming_service' in guess and (
-            guess['streaming_service'] == video.streaming_service):
-        matches.add('streaming_service')
-    # resolution
-    if video.resolution and 'screen_size' in guess and guess['screen_size'] == video.resolution:
-        matches.add('resolution')
-    # source
-    if video.source and 'source' in guess and guess['source'] == video.source:
-        matches.add('source')
-    # video_codec
-    if video.video_codec and 'video_codec' in guess and guess['video_codec'] == video.video_codec:
-        matches.add('video_codec')
-    # audio_codec
-    if video.audio_codec and 'audio_codec' in guess and guess['audio_codec'] == video.audio_codec:
-        matches.add('audio_codec')
-
-    return matches
 
 
 def fix_line_ending(content):

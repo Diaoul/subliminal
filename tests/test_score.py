@@ -28,7 +28,8 @@ def test_movie_equations():
 def test_compute_score(episodes):
     video = episodes['bbt_s07e05']
     subtitle = Addic7edSubtitle(Language('eng'), True, None, 'the big BANG theory', 6, 4, None, None, '1080p', None)
-    assert compute_score(subtitle, video) == episode_scores['series'] + episode_scores['year']
+    expected_score = episode_scores['series'] + episode_scores['year'] + episode_scores['country']
+    assert compute_score(subtitle, video) == expected_score
 
 
 def test_get_score_cap(movies):

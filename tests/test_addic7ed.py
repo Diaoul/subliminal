@@ -56,41 +56,48 @@ def test_get_matches_release_group(episodes):
     subtitle = Addic7edSubtitle(Language('eng'), True, None, 'The Big Bang Theory', 7, 5, 'The Workplace Proximity',
                                 2007, 'DIMENSION', None)
     matches = subtitle.get_matches(episodes['bbt_s07e05'])
-    assert matches == {'series', 'season', 'episode', 'title', 'year', 'release_group'}
+    assert matches == {'series', 'season', 'episode', 'title', 'year', 'country', 'release_group'}
 
 
 def test_get_matches_equivalent_release_group(episodes):
     subtitle = Addic7edSubtitle(Language('eng'), True, None, 'The Big Bang Theory', 7, 5, 'The Workplace Proximity',
                                 2007, 'LOL', None)
     matches = subtitle.get_matches(episodes['bbt_s07e05'])
-    assert matches == {'series', 'season', 'episode', 'title', 'year', 'release_group'}
+    assert matches == {'series', 'season', 'episode', 'title', 'year', 'country', 'release_group'}
 
 
 def test_get_matches_resolution_release_group(episodes):
     subtitle = Addic7edSubtitle(Language('heb'), True, None, 'The Big Bang Theory', 7, 5, 'The Workplace Proximity',
                                 2007, '720PDIMENSION', None)
     matches = subtitle.get_matches(episodes['bbt_s07e05'])
-    assert matches == {'series', 'season', 'episode', 'title', 'year', 'release_group', 'resolution'}
+    assert matches == {'series', 'season', 'episode', 'title', 'year', 'country', 'release_group', 'resolution'}
 
 
 def test_get_matches_source_release_group(episodes):
     subtitle = Addic7edSubtitle(Language('eng'), True, None, 'Game of Thrones', 3, 10, 'Mhysa', None, 'WEB-DL-NTb',
                                 None)
     matches = subtitle.get_matches(episodes['got_s03e10'])
-    assert matches == {'series', 'season', 'episode', 'title', 'year', 'release_group', 'source'}
+    assert matches == {'series', 'season', 'episode', 'title', 'year', 'country', 'release_group', 'source'}
 
 
 def test_get_matches_streaming_service(episodes):
     subtitle = Addic7edSubtitle(Language('nld'), True, None, 'The Walking Dead', 8, 7, None, None,
                                 'AMZN.WEB-DL-CasStudio', None)
     matches = subtitle.get_matches(episodes['walking_dead_s08e07'])
-    assert matches == {'series', 'season', 'episode', 'year', 'release_group', 'streaming_service', 'source'}
+    assert matches == {'series', 'season', 'episode', 'year', 'country', 'release_group', 'streaming_service', 'source'}
+
+
+def test_get_matches_only_year_country(episodes):
+    subtitle = Addic7edSubtitle(Language('eng'), True, None, 'The Big Bang Theory', 7, 5, 'The Workplace Proximity',
+                                None, 'DIMENSION', None)
+    matches = subtitle.get_matches(episodes['got_s03e10'])
+    assert matches == {'year', 'country'}
 
 
 def test_get_matches_no_match(episodes):
     subtitle = Addic7edSubtitle(Language('eng'), True, None, 'The Big Bang Theory', 7, 5, 'The Workplace Proximity',
                                 2007, 'DIMENSION', None)
-    matches = subtitle.get_matches(episodes['got_s03e10'])
+    matches = subtitle.get_matches(episodes['house_of_cards_us_s06e01'])
     assert matches == set()
 
 
@@ -434,7 +441,7 @@ def test_list_subtitles_episode_alternative_series(episodes):
         matches = subtitles[0].get_matches(episodes['turn_s04e03'])
     assert {subtitle.download_link for subtitle in subtitles} == expected_subtitles
     assert {subtitle.language for subtitle in subtitles} == languages
-    assert matches == {'episode', 'title', 'series', 'season', 'year', 'release_group'}
+    assert matches == {'episode', 'title', 'series', 'season', 'year', 'country', 'release_group'}
 
 
 @pytest.mark.integration
@@ -448,4 +455,4 @@ def test_show_with_asterisk(episodes):
         matches = subtitles[0].get_matches(episodes['the_end_of_the_fucking_world'])
     assert {subtitle.download_link for subtitle in subtitles} == expected_subtitles
     assert {subtitle.language for subtitle in subtitles} == languages
-    assert matches == {'year', 'series', 'episode', 'season'}
+    assert matches == {'year', 'country', 'series', 'episode', 'season'}

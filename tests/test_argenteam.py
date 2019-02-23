@@ -14,7 +14,7 @@ vcr = VCR(path_transformer=lambda path: path + '.yaml',
 def test_get_matches_episode(episodes):
     subtitle = ArgenteamSubtitle(Language.fromalpha2('es'), None, 'Game of Thrones', 3, 10, 'EVOLVE', '720p')
     matches = subtitle.get_matches(episodes['got_s03e10'])
-    assert matches == {'resolution', 'series', 'season', 'episode'}
+    assert matches == {'resolution', 'series', 'season', 'episode', 'year', 'country'}
 
 
 def test_get_matches_no_match(episodes):
@@ -22,7 +22,7 @@ def test_get_matches_no_match(episodes):
                                  None,
                                  'Marvels Agents Of S.H.I.E.L.D.',
                                  2, 6, 'KILLERS', '1080p')
-    matches = subtitle.get_matches(episodes['got_s03e10'])
+    matches = subtitle.get_matches(episodes['house_of_cards_us_s06e01'])
     assert matches == set()
 
 

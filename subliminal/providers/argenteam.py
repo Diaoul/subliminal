@@ -5,16 +5,16 @@ import logging
 from zipfile import ZipFile
 
 from babelfish import Language
+from guessit import guessit
 from requests import Session
+from six.moves import urllib
 
 from . import Provider
 from .. import __short_version__
 from ..exceptions import ProviderError
-from ..subtitle import (Subtitle, fix_line_ending, guess_matches)
-from ..score import get_equivalent_release_groups
-from ..utils import sanitize, sanitize_release_group
+from ..matches import guess_matches
+from ..subtitle import Subtitle, fix_line_ending
 from ..video import Episode
-from guessit import guessit
 
 logger = logging.getLogger(__name__)
 
@@ -35,40 +35,35 @@ class ArgenteamSubtitle(Subtitle):
     def id(self):
         return self.download_link
 
-    def get_matches(self, video):
-        matches = set()
-        # series
-        if video.series and (sanitize(self.series) in (
-                 sanitize(name) for name in [video.series] + video.alternative_series)):
-            matches.add('series')
-        # season
-        if video.season and self.season == video.season:
-            matches.add('season')
-        # episode
-        if video.episode and self.episode == video.episode:
-            matches.add('episode')
+    @property
+    def info(self):
+        return urllib.parse.unquote(self.download_link.rsplit('/')[-1])
 
-        # release_group
-        if (video.release_group and self.version):
-            rg = sanitize_release_group(video.release_group)
-            if any(r in sanitize_release_group(self.version) for r in get_equivalent_release_groups(rg)):
-                matches.add('release_group')
+    def get_matches(self, video):
+        matches = guess_matches(video, {
+            'title': self.series,
+            'season': self.season,
+            'episode': self.episode,
+            'release_group': self.version
+        })
 
         # resolution
         if video.resolution and self.version and video.resolution in self.version.lower():
             matches.add('resolution')
-        # format
-        if video.format and self.version and video.format.lower() in self.version.lower():
-            matches.add('format')
-        matches |= guess_matches(video, guessit(self.version), partial=True)
+
+        matches |= guess_matches(video, guessit(self.version, {'type': 'episode'}), partial=True)
         return matches
 
 
 class ArgenteamProvider(Provider):
     provider_name = 'argenteam'
-    languages = {Language.fromalpha2(l) for l in ['es']}
+    language = Language.fromalpha2('es')
+    languages = {language}
     video_types = (Episode,)
-    API_URL = "http://argenteam.net/api/v1/"
+    api_url = "http://argenteam.net/api/v1/"
+
+    def __init__(self):
+        self.session = None
 
     def initialize(self):
         self.session = Session()
@@ -90,31 +85,26 @@ class ArgenteamProvider(Provider):
         # make the search
         query = '%s S%#02dE%#02d' % (series, season, episode)
         logger.info('Searching episode id for %r', query)
-        r = self.session.get(self.API_URL + 'search', params={'q': query}, timeout=10)
+        r = self.session.get(self.api_url + 'search', params={'q': query}, timeout=10)
         r.raise_for_status()
         results = json.loads(r.text)
-        episode_id = None
         if results['total'] == 1:
-            episode_id = results['results'][0]['id']
-        else:
-            logger.error('No episode id found for %r', series)
+            return results['results'][0]['id']
 
-        return episode_id
+        logger.error('No episode id found for %r', series)
 
     def query(self, series, season, episode):
-
         episode_id = self.search_episode_id(series, season, episode)
         if episode_id is None:
             return []
 
-        response = self.session.get(self.API_URL + 'episode', params={'id': episode_id}, timeout=10)
+        response = self.session.get(self.api_url + 'episode', params={'id': episode_id}, timeout=10)
         response.raise_for_status()
         content = json.loads(response.text)
-        language = Language.fromalpha2('es')
         subtitles = []
         for r in content['releases']:
             for s in r['subtitles']:
-                sub = ArgenteamSubtitle(language, s['uri'], series, season, episode, r['team'], r['tags'])
+                sub = ArgenteamSubtitle(self.language, s['uri'], series, season, episode, r['team'], r['tags'])
                 subtitles.append(sub)
 
         return subtitles

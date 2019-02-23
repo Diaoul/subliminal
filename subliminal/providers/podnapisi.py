@@ -43,6 +43,10 @@ class PodnapisiSubtitle(Subtitle):
     def id(self):
         return self.pid
 
+    @property
+    def info(self):
+        return ' '.join(self.releases) or self.pid
+
     def get_matches(self, video):
         matches = set()
 

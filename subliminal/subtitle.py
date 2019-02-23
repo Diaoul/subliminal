@@ -63,6 +63,11 @@ class Subtitle(object):
         raise NotImplementedError
 
     @property
+    def info(self):
+        """Info of the subtitle, human readable. Usually the subtitle name for GUI rendering"""
+        raise NotImplementedError
+
+    @property
     def text(self):
         """Content as string
 

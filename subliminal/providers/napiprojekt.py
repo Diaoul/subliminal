@@ -48,6 +48,10 @@ class NapiProjektSubtitle(Subtitle):
     def id(self):
         return self.hash
 
+    @property
+    def info(self):
+        return self.hash
+
     def get_matches(self, video):
         matches = set()
 

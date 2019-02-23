@@ -43,6 +43,10 @@ class TVsubtitlesSubtitle(Subtitle):
     def id(self):
         return str(self.subtitle_id)
 
+    @property
+    def info(self):
+        return self.release or self.rip
+
     def get_matches(self, video):
         matches = set()
 

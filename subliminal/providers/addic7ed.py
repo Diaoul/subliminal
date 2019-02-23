@@ -45,6 +45,14 @@ class Addic7edSubtitle(Subtitle):
     def id(self):
         return self.download_link
 
+    @property
+    def info(self):
+        return '{series}{yopen}{year}{yclose} s{season:02d}e{episode:02d}{topen}{title}{tclose}{version}'.format(
+            series=self.series, season=self.season, episode=self.episode, title=self.title, year=self.year or '',
+            version=self.version, yopen=' (' if self.year else '', yclose=')' if self.year else '',
+            topen=' - ' if self.title else '', tclose=' - ' if self.version else ''
+        )
+
     def get_matches(self, video):
         matches = set()
 

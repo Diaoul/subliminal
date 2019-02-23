@@ -46,6 +46,14 @@ class OpenSubtitlesSubtitle(Subtitle):
         return str(self.subtitle_id)
 
     @property
+    def info(self):
+        if not self.filename and not self.movie_release_name:
+            return self.subtitle_id
+        if self.movie_release_name and len(self.movie_release_name) > len(self.filename):
+            return self.movie_release_name
+        return self.filename
+
+    @property
     def series_name(self):
         return self.series_re.match(self.movie_name).group('series_name')
 

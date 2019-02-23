@@ -80,6 +80,13 @@ def test_get_matches_source_release_group(episodes):
     assert matches == {'series', 'season', 'episode', 'title', 'year', 'release_group', 'source'}
 
 
+def test_get_matches_streaming_service(episodes):
+    subtitle = Addic7edSubtitle(Language('nld'), True, None, 'The Walking Dead', 8, 7, None, None,
+                                'AMZN.WEB-DL-CasStudio', None)
+    matches = subtitle.get_matches(episodes['walking_dead_s08e07'])
+    assert matches == {'series', 'season', 'episode', 'year', 'release_group', 'streaming_service', 'source'}
+
+
 def test_get_matches_no_match(episodes):
     subtitle = Addic7edSubtitle(Language('eng'), True, None, 'The Big Bang Theory', 7, 5, 'The Workplace Proximity',
                                 2007, 'DIMENSION', None)

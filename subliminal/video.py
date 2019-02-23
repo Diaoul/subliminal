@@ -29,6 +29,7 @@ class Video(object):
     :param str name: name or path of the video.
     :param str source: source of the video (HDTV, Web, Blu-ray, ...).
     :param str release_group: release group of the video.
+    :param str streaming_service: streaming_service of the video.
     :param str resolution: resolution of the video stream (480p, 720p, 1080p or 1080i).
     :param str video_codec: codec of the video stream.
     :param str audio_codec: codec of the main audio stream.
@@ -38,8 +39,8 @@ class Video(object):
     :param set subtitle_languages: existing subtitle languages.
 
     """
-    def __init__(self, name, source=None, release_group=None, resolution=None, video_codec=None, audio_codec=None,
-                 imdb_id=None, hashes=None, size=None, subtitle_languages=None):
+    def __init__(self, name, source=None, release_group=None, resolution=None, streaming_service=None,
+                 video_codec=None, audio_codec=None, imdb_id=None, hashes=None, size=None, subtitle_languages=None):
         #: Name or path of the video
         self.name = name
 
@@ -48,6 +49,9 @@ class Video(object):
 
         #: Release group of the video
         self.release_group = release_group
+
+        #: Streaming service of the video
+        self.streaming_service = streaming_service
 
         #: Resolution of the video stream (480p, 720p, 1080p or 1080i)
         self.resolution = resolution
@@ -187,9 +191,9 @@ class Episode(Video):
         return cls(name, guess['title'], guess.get('season', 1), guess.get('episode'), title=guess.get('episode_title'),
                    year=guess.get('year'), country=guess.get('country'),
                    original_series='year' not in guess and 'country' not in guess,
-                   source=guess.get('source'),
-                   alternative_series=ensure_list(guess.get('alternative_title')),
-                   release_group=guess.get('release_group'), resolution=guess.get('screen_size'),
+                   source=guess.get('source'), alternative_series=ensure_list(guess.get('alternative_title')),
+                   release_group=guess.get('release_group'), streaming_service=guess.get('streaming_service'),
+                   resolution=guess.get('screen_size'),
                    video_codec=guess.get('video_codec'), audio_codec=guess.get('audio_codec'))
 
     @classmethod
@@ -244,6 +248,7 @@ class Movie(Video):
             raise ValueError('Insufficient data to process the guess')
 
         return cls(name, guess['title'], source=guess.get('source'), release_group=guess.get('release_group'),
+                   streaming_service=guess.get('streaming_service'),
                    resolution=guess.get('screen_size'), video_codec=guess.get('video_codec'),
                    alternative_titles=ensure_list(guess.get('alternative_title')),
                    audio_codec=guess.get('audio_codec'), year=guess.get('year'), country=guess.get('country'))

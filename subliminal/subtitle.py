@@ -260,6 +260,10 @@ def guess_matches(video, guess, partial=False):
             sanitize_release_group(guess['release_group']) in
             get_equivalent_release_groups(sanitize_release_group(video.release_group))):
         matches.add('release_group')
+    # streaming_service
+    if video.streaming_service and 'streaming_service' in guess and (
+            guess['streaming_service'] == video.streaming_service):
+        matches.add('streaming_service')
     # resolution
     if video.resolution and 'screen_size' in guess and guess['screen_size'] == video.resolution:
         matches.add('resolution')

@@ -79,7 +79,7 @@ def test_get_matches(episodes):
                                   archive, 'TBBT S07 x264/The.Big.Bang.Theory.S07E05.HDTV.x264-LOL.srt')
 
     matches = subtitle.get_matches(episodes['bbt_s07e05'])
-    assert matches == {'series', 'year', 'season', 'episode', 'release_group', 'format', 'video_codec',
+    assert matches == {'series', 'year', 'country', 'season', 'episode', 'release_group', 'source', 'video_codec',
                        'series_imdb_id'}
 
 
@@ -249,7 +249,7 @@ def test_query_episode(episodes):
         ('56e442ddbb615', 'Colony.S01E09.720p.HDTV.x264-KILLERS.srt')
     }
     with LegendasTVProvider(USERNAME, PASSWORD) as provider:
-        subtitles = provider.query(language, video.series, video.season, video.episode, video.year)
+        subtitles = provider.query(language, video.series, video.season, video.episodes, video.year)
     assert {(s.archive.id, s.name) for s in subtitles} == expected_subtitles
 
 

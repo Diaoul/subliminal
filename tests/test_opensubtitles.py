@@ -21,7 +21,7 @@ def test_get_matches_movie_hash(movies):
                                      'Man.of.Steel.German.720p.BluRay.x264-EXQUiSiTE', 2013, 'tt0770828', 0, 0,
                                      'Man.of.Steel.German.720p.BluRay.x264-EXQUiSiTE.srt', None)
     matches = subtitle.get_matches(movies['man_of_steel'])
-    assert matches == {'title', 'year', 'video_codec', 'imdb_id', 'hash', 'resolution', 'format'}
+    assert matches == {'title', 'year', 'country', 'video_codec', 'imdb_id', 'hash', 'resolution', 'source'}
 
 
 def test_get_matches_episode(episodes):
@@ -30,7 +30,7 @@ def test_get_matches_episode(episodes):
                                      ' Game.of.Thrones.S03E10.HDTV.XviD-AFG', 2013, 'tt2178796', 3, 10,
                                      'Game.of.Thrones.S03E10.HDTV.XviD-AFG.srt', None)
     matches = subtitle.get_matches(episodes['got_s03e10'])
-    assert matches == {'imdb_id', 'series', 'year', 'episode', 'season', 'title'}
+    assert matches == {'imdb_id', 'series', 'year', 'country', 'episode', 'season', 'title'}
 
 
 def test_get_matches_episode_year(episodes):
@@ -48,7 +48,8 @@ def test_get_matches_episode_filename(episodes):
                                      'HDTV.x264-KILLERS-mSD-AFG-EVO-KILLERS', 2014, 'tt4078580', 2, 6,
                                      'Marvels.Agents.of.S.H.I.E.L.D.S02E06.720p.HDTV.x264-KILLERS.srt', 'cp1252')
     matches = subtitle.get_matches(episodes['marvels_agents_of_shield_s02e06'])
-    assert matches == {'series', 'year', 'season', 'episode', 'release_group', 'format', 'resolution', 'video_codec'}
+    assert matches == {'series', 'year', 'country', 'season', 'episode', 'release_group', 'source', 'resolution',
+                       'video_codec'}
 
 
 def test_get_matches_episode_tag(episodes):
@@ -57,7 +58,7 @@ def test_get_matches_episode_tag(episodes):
                                      'HDTV.x264-KILLERS-mSD-AFG-EVO-KILLERS', 2014, 'tt4078580', 2, 6,
                                      '', 'cp1252')
     matches = subtitle.get_matches(episodes['marvels_agents_of_shield_s02e06'])
-    assert matches == {'series', 'year', 'season', 'episode', 'format', 'video_codec'}
+    assert matches == {'series', 'year', 'country', 'season', 'episode', 'source', 'video_codec'}
 
 
 def test_get_matches_imdb_id(movies):
@@ -65,7 +66,7 @@ def test_get_matches_imdb_id(movies):
                                      'man.of.steel.2013.720p.bluray.x264-felony', 2013, 'tt0770828', 0, 0,
                                      'man.of.steel.2013.720p.bluray.x264-felony.srt', None)
     matches = subtitle.get_matches(movies['man_of_steel'])
-    assert matches == {'title', 'year', 'video_codec', 'imdb_id', 'resolution', 'format', 'release_group'}
+    assert matches == {'title', 'year', 'country', 'video_codec', 'imdb_id', 'resolution', 'source', 'release_group'}
 
 
 def test_get_matches_no_match(episodes):
@@ -275,18 +276,4 @@ def test_tag_match(episodes):
     assert len(subtitles) > 0
     assert unwanted_subtitle_id in {subtitle.id for subtitle in subtitles}
     # Assert is not a tag match: {'series', 'year', 'season', 'episode'}
-    assert matches == {'episode', 'year', 'season'}
-
-
-@pytest.mark.integration
-@vcr.use_cassette
-def test_multi_episode(episodes):
-    video = episodes['Marvels.Agents.of.S.H.I.E.L.D.S05E01-E02']
-    wanted_subtitle_id = '1955759264'
-    languages = {Language('eng')}
-    with OpenSubtitlesProvider() as provider:
-        subtitles = provider.list_subtitles(video, languages)
-        found_subtitle = [s for s in subtitles if s.id == wanted_subtitle_id][0]
-        matches = found_subtitle.get_matches(video)
-        assert found_subtitle.filename == 'Marvels.Agents.of.S.H.I.E.L.D.S05E01-E02.HDTV.x264-SVA.srt'
-        assert matches == {'episode', 'format', 'series', 'year', 'season', 'video_codec', 'release_group'}
+    assert matches == {'episode', 'year', 'country', 'season'}

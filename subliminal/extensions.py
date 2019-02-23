@@ -100,6 +100,7 @@ provider_manager = RegistrableExtensionManager('subliminal.providers', [
 
 #: Refiner manager
 refiner_manager = RegistrableExtensionManager('subliminal.refiners', [
+    'hash = subliminal.refiners.hash:refine',
     'metadata = subliminal.refiners.metadata:refine',
     'omdb = subliminal.refiners.omdb:refine',
     'tvdb = subliminal.refiners.tvdb:refine'

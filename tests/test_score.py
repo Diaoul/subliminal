@@ -28,7 +28,8 @@ def test_movie_equations():
 def test_compute_score(episodes):
     video = episodes['bbt_s07e05']
     subtitle = Addic7edSubtitle(Language('eng'), True, None, 'the big BANG theory', 6, 4, None, None, '1080p', None)
-    assert compute_score(subtitle, video) == episode_scores['series'] + episode_scores['year']
+    expected_score = episode_scores['series'] + episode_scores['year'] + episode_scores['country']
+    assert compute_score(subtitle, video) == expected_score
 
 
 def test_get_score_cap(movies):
@@ -45,8 +46,8 @@ def test_compute_score_episode_imdb_id(movies):
                                      'Man of Steel', 'man.of.steel.2013.720p.bluray.x264-felony.mkv', 2013, 770828,
                                      None, None, '', 'utf-8')
     assert compute_score(subtitle, video) == sum(movie_scores.get(m, 0) for m in
-                                                 ('imdb_id', 'title', 'year', 'release_group', 'format', 'resolution',
-                                                  'video_codec'))
+                                                 ('imdb_id', 'title', 'year', 'country', 'release_group', 'source',
+                                                  'resolution', 'video_codec'))
 
 
 def test_compute_score_episode_title(episodes):
@@ -55,8 +56,8 @@ def test_compute_score_episode_title(episodes):
                                  ['The.Big.Bang.Theory.S07E05.The.Workplace.Proximity.720p.HDTV.x264-DIMENSION.mkv'],
                                  None, 7, 5, None)
     assert compute_score(subtitle, video) == sum(episode_scores.get(m, 0) for m in
-                                                 ('series', 'year', 'season', 'episode', 'release_group', 'format',
-                                                  'resolution', 'video_codec', 'title'))
+                                                 ('series', 'year', 'country', 'season', 'episode', 'release_group',
+                                                  'source', 'resolution', 'video_codec', 'title'))
 
 
 def test_compute_score_hash_hearing_impaired(movies):

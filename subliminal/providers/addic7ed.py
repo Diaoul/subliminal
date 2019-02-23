@@ -10,9 +10,9 @@ from . import ParserBeautifulSoup, Provider
 from .. import __short_version__
 from ..cache import SHOW_EXPIRATION_TIME, region
 from ..exceptions import AuthenticationError, ConfigurationError, DownloadLimitExceeded
-from ..score import get_equivalent_release_groups
-from ..subtitle import Subtitle, fix_line_ending, guess_matches
-from ..utils import sanitize, sanitize_release_group
+from ..matches import guess_matches
+from ..subtitle import Subtitle, fix_line_ending
+from ..utils import sanitize
 from ..video import Episode
 
 logger = logging.getLogger(__name__)
@@ -45,38 +45,31 @@ class Addic7edSubtitle(Subtitle):
     def id(self):
         return self.download_link
 
-    def get_matches(self, video):
-        matches = set()
+    @property
+    def info(self):
+        return '{series}{yopen}{year}{yclose} s{season:02d}e{episode:02d}{topen}{title}{tclose}{version}'.format(
+            series=self.series, season=self.season, episode=self.episode, title=self.title, year=self.year or '',
+            version=self.version, yopen=' (' if self.year else '', yclose=')' if self.year else '',
+            topen=' - ' if self.title else '', tclose=' - ' if self.version else ''
+        )
 
+    def get_matches(self, video):
         # series name
-        if video.series and sanitize(self.series) in (
-                sanitize(name) for name in [video.series] + video.alternative_series):
-            matches.add('series')
-        # season
-        if video.season and self.season == video.season:
-            matches.add('season')
-        # episode
-        if video.episode and self.episode == video.episode:
-            matches.add('episode')
-        # title of the episode
-        if video.title and sanitize(self.title) == sanitize(video.title):
-            matches.add('title')
-        # year
-        if video.original_series and self.year is None or video.year and video.year == self.year:
-            matches.add('year')
-        # release_group
-        if (video.release_group and self.version and
-                any(r in sanitize_release_group(self.version)
-                    for r in get_equivalent_release_groups(sanitize_release_group(video.release_group)))):
-            matches.add('release_group')
+        matches = guess_matches(video, {
+            'title': self.series,
+            'season': self.season,
+            'episode': self.episode,
+            'episode_title': self.title,
+            'year': self.year,
+            'release_group': self.version,
+        })
+
         # resolution
         if video.resolution and self.version and video.resolution in self.version.lower():
             matches.add('resolution')
-        # format
-        if video.format and self.version and video.format.lower() in self.version.lower():
-            matches.add('format')
         # other properties
-        matches |= guess_matches(video, guessit(self.version), partial=True)
+        if self.version:
+            matches |= guess_matches(video, guessit(self.version, {'type': 'episode'}), partial=True)
 
         return matches
 
@@ -179,7 +172,7 @@ class Addic7edProvider(Provider):
 
         # make the search
         logger.info('Searching show ids with %r', params)
-        r = self.session.get(self.server_url + 'search.php', params=params, timeout=10)
+        r = self.session.get(self.server_url + 'srch.php', params=params, timeout=10)
         r.raise_for_status()
         soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
 
@@ -231,18 +224,12 @@ class Addic7edProvider(Provider):
 
         # search as last resort
         if not show_id:
-            logger.warning('Series not found in show ids')
+            logger.warning('Series %s not found in show ids', series)
             show_id = self._search_show_id(series)
 
         return show_id
 
-    def query(self, series, season, year=None, country=None):
-        # get the show id
-        show_id = self.get_show_id(series, year, country)
-        if show_id is None:
-            logger.error('No show id found for %r (%r)', series, {'year': year, 'country': country})
-            return []
-
+    def query(self, show_id, series, season, year=None, country=None):
         # get the page of the season of the show
         logger.info('Getting the page of show id %d, season %d', show_id, season)
         r = self.session.get(self.server_url + 'show/%d' % show_id, params={'season': season}, timeout=10)
@@ -288,12 +275,22 @@ class Addic7edProvider(Provider):
         return subtitles
 
     def list_subtitles(self, video, languages):
+        # lookup show_id
         titles = [video.series] + video.alternative_series
+        show_id = None
         for title in titles:
-            subtitles = [s for s in self.query(title, video.season, video.year)
+            show_id = self.get_show_id(title, video.year)
+            if show_id is not None:
+                break
+
+        # query for subtitles with the show_id
+        if show_id is not None:
+            subtitles = [s for s in self.query(show_id, title, video.season, video.year)
                          if s.language in languages and s.episode == video.episode]
             if subtitles:
                 return subtitles
+        else:
+            logger.error('No show id found for %r (%r)', video.series, {'year': video.year})
 
         return []
 

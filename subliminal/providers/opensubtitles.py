@@ -13,8 +13,8 @@ from . import Provider, TimeoutSafeTransport
 from .. import __short_version__
 from ..exceptions import (AuthenticationError, ConfigurationError, DownloadLimitExceeded, ProviderError,
                           ServiceUnavailable)
-from ..subtitle import Subtitle, fix_line_ending, guess_matches
-from ..utils import sanitize
+from ..matches import guess_matches
+from ..subtitle import Subtitle, fix_line_ending
 from ..video import Episode, Movie
 
 logger = logging.getLogger(__name__)
@@ -46,6 +46,14 @@ class OpenSubtitlesSubtitle(Subtitle):
         return str(self.subtitle_id)
 
     @property
+    def info(self):
+        if not self.filename and not self.movie_release_name:
+            return self.subtitle_id
+        if self.movie_release_name and len(self.movie_release_name) > len(self.filename):
+            return self.movie_release_name
+        return self.filename
+
+    @property
     def series_name(self):
         return self.series_re.match(self.movie_name).group('series_name')
 
@@ -54,62 +62,39 @@ class OpenSubtitlesSubtitle(Subtitle):
         return self.series_re.match(self.movie_name).group('series_title')
 
     def get_matches(self, video):
-        matches = set()
-
-        # episode
-        if isinstance(video, Episode) and self.movie_kind == 'episode':
-            # tag match, assume series, year, season and episode matches
-            if self.matched_by == 'tag':
-                if not video.imdb_id or self.movie_imdb_id == video.imdb_id:
-                    matches |= {'series', 'year', 'season', 'episode'}
-            # series
-            if video.series and sanitize(self.series_name) == sanitize(video.series):
-                matches.add('series')
-            # year
-            if video.original_series and self.movie_year is None or video.year and video.year == self.movie_year:
-                matches.add('year')
-            # season
-            if video.season and self.series_season == video.season:
-                matches.add('season')
-            # episode
-            if video.episode and self.series_episode == video.episode:
-                matches.add('episode')
-            # title
-            if video.title and sanitize(self.series_title) == sanitize(video.title):
-                matches.add('title')
-            # guess
-            matches |= guess_matches(video, guessit(self.movie_release_name, {'type': 'episode'}))
-            matches |= guess_matches(video, guessit(self.filename, {'type': 'episode'}))
-            # hash
-            if 'opensubtitles' in video.hashes and self.hash == video.hashes['opensubtitles']:
-                if 'series' in matches and 'season' in matches and 'episode' in matches:
-                    matches.add('hash')
-                else:
-                    logger.debug('Match on hash discarded')
-        # movie
-        elif isinstance(video, Movie) and self.movie_kind == 'movie':
-            # tag match, assume title and year matches
-            if self.matched_by == 'tag':
-                if not video.imdb_id or self.movie_imdb_id == video.imdb_id:
-                    matches |= {'title', 'year'}
-            # title
-            if video.title and sanitize(self.movie_name) == sanitize(video.title):
-                matches.add('title')
-            # year
-            if video.year and self.movie_year == video.year:
-                matches.add('year')
-            # guess
-            matches |= guess_matches(video, guessit(self.movie_release_name, {'type': 'movie'}))
-            matches |= guess_matches(video, guessit(self.filename, {'type': 'movie'}))
-            # hash
-            if 'opensubtitles' in video.hashes and self.hash == video.hashes['opensubtitles']:
-                if 'title' in matches:
-                    matches.add('hash')
-                else:
-                    logger.debug('Match on hash discarded')
-        else:
+        if (isinstance(video, Episode) and self.movie_kind != 'episode') or (
+                isinstance(video, Movie) and self.movie_kind != 'movie'):
             logger.info('%r is not a valid movie_kind', self.movie_kind)
-            return matches
+            return set()
+
+        matches = guess_matches(video, {
+            'title': self.series_name if self.movie_kind == 'episode' else self.movie_name,
+            'episode_title': self.series_title if self.movie_kind == 'episode' else None,
+            'year': self.movie_year,
+            'season': self.series_season,
+            'episode': self.series_episode
+        })
+
+        # tag
+        if self.matched_by == 'tag':
+            if not video.imdb_id or self.movie_imdb_id == video.imdb_id:
+                if self.movie_kind == 'episode':
+                    matches |= {'series', 'year', 'season', 'episode'}
+                elif self.movie_kind == 'movie':
+                    matches |= {'title', 'year'}
+
+        # guess
+        matches |= guess_matches(video, guessit(self.movie_release_name, {'type': self.movie_kind}))
+        matches |= guess_matches(video, guessit(self.filename, {'type': self.movie_kind}))
+
+        # hash
+        if 'opensubtitles' in video.hashes and self.hash == video.hashes['opensubtitles']:
+            if self.movie_kind == 'movie' and 'title' in matches:
+                matches.add('hash')
+            elif self.movie_kind == 'episode' and 'series' in matches and 'season' in matches and 'episode' in matches:
+                matches.add('hash')
+            else:
+                logger.debug('Match on hash discarded')
 
         # imdb_id
         if video.imdb_id and self.movie_imdb_id == video.imdb_id:
@@ -220,7 +205,7 @@ class OpenSubtitlesProvider(Provider):
         if isinstance(video, Episode):
             query = video.series
             season = video.season
-            episode = min(video.episode) if isinstance(video.episode, list) else video.episode
+            episode = video.episode
         else:
             query = video.title
 

@@ -6,10 +6,7 @@ import os
 import chardet
 import pysrt
 
-from .score import get_equivalent_release_groups
-from .video import Episode, Movie
-from .utils import sanitize, sanitize_release_group
-
+from six import text_type
 
 logger = logging.getLogger(__name__)
 
@@ -61,6 +58,11 @@ class Subtitle(object):
         raise NotImplementedError
 
     @property
+    def info(self):
+        """Info of the subtitle, human readable. Usually the subtitle name for GUI rendering"""
+        raise NotImplementedError
+
+    @property
     def text(self):
         """Content as string
 
@@ -70,10 +72,17 @@ class Subtitle(object):
         if not self.content:
             return
 
-        if self.encoding:
-            return self.content.decode(self.encoding, errors='replace')
+        if not isinstance(self.content, text_type):
+            if self.encoding:
+                return self.content.decode(self.encoding, errors='replace')
 
-        return self.content.decode(self.guess_encoding(), errors='replace')
+            guessed_encoding = self.guess_encoding()
+            if guessed_encoding:
+                return self.content.decode(guessed_encoding, errors='replace')
+
+            return None
+
+        return self.content
 
     def is_valid(self):
         """Check if a :attr:`text` is a valid SubRip format.
@@ -145,6 +154,18 @@ class Subtitle(object):
 
         return encoding
 
+    def get_path(self, video, single=False):
+        """Get the subtitle path using the `video`, `language` and `extension`.
+
+        :param video: path to the video.
+        :type video: :class:`~subliminal.video.Video`
+        :param bool single: save a single subtitle, default is to save one subtitle per language.
+        :return: path of the subtitle.
+        :rtype: str
+
+        """
+        return get_subtitle_path(video.name, None if single else self.language)
+
     def get_matches(self, video):
         """Get the matches against the `video`.
 
@@ -180,68 +201,6 @@ def get_subtitle_path(video_path, language=None, extension='.srt'):
         subtitle_root += '.' + str(language)
 
     return subtitle_root + extension
-
-
-def guess_matches(video, guess, partial=False):
-    """Get matches between a `video` and a `guess`.
-
-    If a guess is `partial`, the absence information won't be counted as a match.
-
-    :param video: the video.
-    :type video: :class:`~subliminal.video.Video`
-    :param guess: the guess.
-    :type guess: dict
-    :param bool partial: whether or not the guess is partial.
-    :return: matches between the `video` and the `guess`.
-    :rtype: set
-
-    """
-    matches = set()
-    if isinstance(video, Episode):
-        # series
-        if video.series and 'title' in guess and sanitize(guess['title']) == sanitize(video.series):
-            matches.add('series')
-        # title
-        if video.title and 'episode_title' in guess and sanitize(guess['episode_title']) == sanitize(video.title):
-            matches.add('title')
-        # season
-        if video.season and 'season' in guess and guess['season'] == video.season:
-            matches.add('season')
-        # episode
-        if video.episode and 'episode' in guess and guess['episode'] == video.episode:
-            matches.add('episode')
-        # year
-        if video.year and 'year' in guess and guess['year'] == video.year:
-            matches.add('year')
-        # count "no year" as an information
-        if not partial and video.original_series and 'year' not in guess:
-            matches.add('year')
-    elif isinstance(video, Movie):
-        # year
-        if video.year and 'year' in guess and guess['year'] == video.year:
-            matches.add('year')
-        # title
-        if video.title and 'title' in guess and sanitize(guess['title']) == sanitize(video.title):
-            matches.add('title')
-    # release_group
-    if (video.release_group and 'release_group' in guess and
-            sanitize_release_group(guess['release_group']) in
-            get_equivalent_release_groups(sanitize_release_group(video.release_group))):
-        matches.add('release_group')
-    # resolution
-    if video.resolution and 'screen_size' in guess and guess['screen_size'] == video.resolution:
-        matches.add('resolution')
-    # format
-    if video.format and 'format' in guess and guess['format'].lower() == video.format.lower():
-        matches.add('format')
-    # video_codec
-    if video.video_codec and 'video_codec' in guess and guess['video_codec'] == video.video_codec:
-        matches.add('video_codec')
-    # audio_codec
-    if video.audio_codec and 'audio_codec' in guess and guess['audio_codec'] == video.audio_codec:
-        matches.add('audio_codec')
-
-    return matches
 
 
 def fix_line_ending(content):

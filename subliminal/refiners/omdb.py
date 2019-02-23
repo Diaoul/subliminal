@@ -7,7 +7,6 @@ import requests
 from .. import __short_version__
 from ..cache import REFINER_EXPIRATION_TIME, region
 from ..video import Episode, Movie
-from ..utils import sanitize
 
 logger = logging.getLogger(__name__)
 
@@ -89,7 +88,7 @@ def search(title, type, year):
     return all_results
 
 
-def refine(video, **kwargs):
+def refine(video, apikey=None, **kwargs):
     """Refine a video by searching `OMDb API <http://omdbapi.com/>`_.
 
     Several :class:`~subliminal.video.Episode` attributes can be found:
@@ -105,6 +104,12 @@ def refine(video, **kwargs):
       * :attr:`~subliminal.video.Video.imdb_id`
 
     """
+    if not apikey:
+        logger.warning('No apikey. Skipping omdb refiner.')
+        return
+
+    omdb_client.session.params['apikey'] = apikey
+
     if isinstance(video, Episode):
         # exit if the information is complete
         if video.series_imdb_id:
@@ -119,7 +124,7 @@ def refine(video, **kwargs):
         logger.debug('Found %d results', len(results))
 
         # filter the results
-        results = [r for r in results if sanitize(r['Title']) == sanitize(video.series)]
+        results = [r for r in results if video.matches(r['Title'])]
         if not results:
             logger.warning('No matching series found')
             return
@@ -154,12 +159,12 @@ def refine(video, **kwargs):
         # search the movie
         results = search(video.title, 'movie', video.year)
         if not results:
-            logger.warning('No results')
+            logger.warning('No results for movie')
             return
         logger.debug('Found %d results', len(results))
 
         # filter the results
-        results = [r for r in results if sanitize(r['Title']) == sanitize(video.title)]
+        results = [r for r in results if video.matches(r['Title'])]
         if not results:
             logger.warning('No matching movie found')
             return

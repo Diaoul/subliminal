@@ -28,6 +28,10 @@ class ShooterSubtitle(Subtitle):
     def id(self):
         return self.download_link
 
+    @property
+    def info(self):
+        return self.hash
+
     def get_matches(self, video):
         matches = set()
 

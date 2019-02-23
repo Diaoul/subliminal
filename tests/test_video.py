@@ -49,7 +49,7 @@ def test_video_fromname_movie(movies):
     video = Video.fromname(movies['man_of_steel'].name)
     assert type(video) is Movie
     assert video.name == movies['man_of_steel'].name
-    assert video.format == movies['man_of_steel'].format
+    assert video.source == movies['man_of_steel'].source
     assert video.release_group == movies['man_of_steel'].release_group
     assert video.resolution == movies['man_of_steel'].resolution
     assert video.video_codec == movies['man_of_steel'].video_codec
@@ -66,7 +66,7 @@ def test_video_fromname_episode(episodes):
     video = Video.fromname(episodes['bbt_s07e05'].name)
     assert type(video) is Episode
     assert video.name == episodes['bbt_s07e05'].name
-    assert video.format == episodes['bbt_s07e05'].format
+    assert video.source == episodes['bbt_s07e05'].source
     assert video.release_group == episodes['bbt_s07e05'].release_group
     assert video.resolution == episodes['bbt_s07e05'].resolution
     assert video.video_codec == episodes['bbt_s07e05'].video_codec
@@ -87,7 +87,7 @@ def test_video_fromname_episode_no_season(episodes):
     video = Video.fromname(episodes['the_jinx_e05'].name)
     assert type(video) is Episode
     assert video.name == episodes['the_jinx_e05'].name
-    assert video.format == episodes['the_jinx_e05'].format
+    assert video.source == episodes['the_jinx_e05'].source
     assert video.release_group == episodes['the_jinx_e05'].release_group
     assert video.resolution == episodes['the_jinx_e05'].resolution
     assert video.video_codec == episodes['the_jinx_e05'].video_codec
@@ -107,6 +107,12 @@ def test_video_fromname_episode_no_season(episodes):
 def test_video_hash(episodes):
     video = episodes['bbt_s07e05']
     assert hash(video) == hash(video.name)
+
+
+def test_episode_from_guess_multi_episode(episodes):
+    video = Video.fromname(episodes['Marvels.Agents.of.S.H.I.E.L.D.S05E01-E02'].name)
+    # Multi-ep is converted to single-ep by taking the lowest episode number
+    assert video.episode == episodes['Marvels.Agents.of.S.H.I.E.L.D.S05E01-E02'].episode
 
 
 def test_episode_fromguess_wrong_type(episodes):
@@ -140,7 +146,7 @@ def test_movie_fromguess_insufficient_data(movies):
 def test_movie_fromname(movies):
     video = Movie.fromname(movies['man_of_steel'].name)
     assert video.name == movies['man_of_steel'].name
-    assert video.format == movies['man_of_steel'].format
+    assert video.source == movies['man_of_steel'].source
     assert video.release_group == movies['man_of_steel'].release_group
     assert video.resolution == movies['man_of_steel'].resolution
     assert video.video_codec == movies['man_of_steel'].video_codec
@@ -156,7 +162,7 @@ def test_movie_fromname(movies):
 def test_episode_fromname(episodes):
     video = Episode.fromname(episodes['bbt_s07e05'].name)
     assert video.name == episodes['bbt_s07e05'].name
-    assert video.format == episodes['bbt_s07e05'].format
+    assert video.source == episodes['bbt_s07e05'].source
     assert video.release_group == episodes['bbt_s07e05'].release_group
     assert video.resolution == episodes['bbt_s07e05'].resolution
     assert video.video_codec == episodes['bbt_s07e05'].video_codec

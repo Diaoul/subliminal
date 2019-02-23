@@ -43,27 +43,34 @@ def test_get_matches_format_release_group(episodes):
     subtitle = TVsubtitlesSubtitle(Language('fra'), None, 249518, 'The Big Bang Theory', 7, 5, 2007, 'HDTV',
                                    'lol-dimension')
     matches = subtitle.get_matches(episodes['bbt_s07e05'])
-    assert matches == {'series', 'season', 'episode', 'year', 'format', 'release_group'}
+    assert matches == {'series', 'season', 'episode', 'year', 'country', 'source', 'release_group'}
 
 
 def test_get_matches_format_equivalent_release_group(episodes):
     subtitle = TVsubtitlesSubtitle(Language('fra'), None, 249518, 'The Big Bang Theory', 7, 5, 2007, 'HDTV',
                                    'lol')
     matches = subtitle.get_matches(episodes['bbt_s07e05'])
-    assert matches == {'series', 'season', 'episode', 'year', 'format', 'release_group'}
+    assert matches == {'series', 'season', 'episode', 'year', 'country', 'source', 'release_group'}
 
 
 def test_get_matches_video_codec_resolution(episodes):
     subtitle = TVsubtitlesSubtitle(Language('por'), None, 261077, 'Game of Thrones', 3, 10, None, '720p.BluRay',
                                    'x264-DEMAND')
     matches = subtitle.get_matches(episodes['got_s03e10'])
-    assert matches == {'series', 'season', 'episode', 'year', 'video_codec', 'resolution'}
+    assert matches == {'series', 'season', 'episode', 'year', 'country', 'video_codec', 'resolution'}
+
+
+def test_get_matches_only_year_country(episodes):
+    subtitle = TVsubtitlesSubtitle(Language('por'), None, 261077, 'Game of Thrones', 3, 10, None, '1080p.BluRay',
+                                   'DEMAND')
+    matches = subtitle.get_matches(episodes['bbt_s07e05'])
+    assert matches == {'year', 'country'}
 
 
 def test_get_matches_no_match(episodes):
     subtitle = TVsubtitlesSubtitle(Language('por'), None, 261077, 'Game of Thrones', 3, 10, 2011, '1080p.BluRay',
                                    'DEMAND')
-    matches = subtitle.get_matches(episodes['bbt_s07e05'])
+    matches = subtitle.get_matches(episodes['house_of_cards_us_s06e01'])
     assert matches == set()
 
 
@@ -156,7 +163,8 @@ def test_query(episodes):
     video = episodes['bbt_s07e05']
     expected_subtitles = {268673, 249733, 249518, 249519, 249714, 32596, 249590, 249592, 249499, 261214}
     with TVsubtitlesProvider() as provider:
-        subtitles = provider.query(video.series, video.season, video.episode, video.year)
+        show_id = provider.search_show_id(video.series, video.year)
+        subtitles = provider.query(show_id, video.series, video.season, video.episode, video.year)
     assert {subtitle.subtitle_id for subtitle in subtitles} == expected_subtitles
 
 
@@ -166,7 +174,8 @@ def test_query_no_year(episodes):
     video = episodes['dallas_s01e03']
     expected_subtitles = {124753}
     with TVsubtitlesProvider() as provider:
-        subtitles = provider.query(video.series, video.season, video.episode, video.year)
+        show_id = provider.search_show_id(video.series, video.year)
+        subtitles = provider.query(show_id, video.series, video.season, video.episode, video.year)
     assert {subtitle.subtitle_id for subtitle in subtitles} == expected_subtitles
 
 
@@ -175,7 +184,7 @@ def test_query_no_year(episodes):
 def test_query_wrong_series(episodes):
     video = episodes['bbt_s07e05']
     with TVsubtitlesProvider() as provider:
-        subtitles = provider.query(video.series[:12], video.season, video.episode, video.year)
+        subtitles = provider.query(155, video.series[:12], video.season, video.episode, video.year)
     assert len(subtitles) == 0
 
 
@@ -184,7 +193,8 @@ def test_query_wrong_series(episodes):
 def test_query_wrong_episode(episodes):
     video = episodes['bbt_s07e05']
     with TVsubtitlesProvider() as provider:
-        subtitles = provider.query(video.series, video.season, 55, video.year)
+        show_id = provider.search_show_id(video.series, video.year)
+        subtitles = provider.query(show_id, video.series, video.season, 55, video.year)
     assert len(subtitles) == 0
 
 
@@ -223,17 +233,3 @@ def test_list_subtitles_episode_alternative_series(episodes):
         subtitles = provider.list_subtitles(video, languages)
     assert {subtitle.subtitle_id for subtitle in subtitles} == expected_subtitles
     assert {subtitle.language for subtitle in subtitles} == languages
-
-
-@pytest.mark.integration
-@vcr.use_cassette
-def test_multi_episode(episodes):
-    video = episodes['the_gifted_S01E12E13']
-    languages = {Language('eng')}
-    expected_subtitles = {333368}
-    with TVsubtitlesProvider() as provider:
-        subtitles = provider.list_subtitles(video, languages)
-        matches = subtitles[0].get_matches(video)
-    assert {subtitle.subtitle_id for subtitle in subtitles} == expected_subtitles
-    # Assert episode not in matches
-    assert matches == {'series', 'format', 'year', 'season'}

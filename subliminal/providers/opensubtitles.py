@@ -219,6 +219,17 @@ class OpenSubtitlesProvider(Provider):
         subtitle.content = fix_line_ending(zlib.decompress(base64.b64decode(response['data'][0]['data']), 47))
 
 
+class OpenSubtitlesVipSubtitle(OpenSubtitlesSubtitle):
+    """OpenSubtitles Subtitle."""
+    provider_name = 'opensubtitlesvip'
+
+
+class OpenSubtitlesVipProvider(OpenSubtitlesProvider):
+    """OpenSubtitles Provider using VIP url."""
+    server_url = 'https://vip-api.opensubtitles.org/xml-rpc'
+    subtitle_class = OpenSubtitlesVipSubtitle
+
+
 class OpenSubtitlesError(ProviderError):
     """Base class for non-generic :class:`OpenSubtitlesProvider` exceptions."""
     pass

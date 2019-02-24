@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import logging
 
-from ..extensions import provider_manager
+from ..extensions import provider_manager, default_providers
 from ..utils import hash_napiprojekt, hash_opensubtitles, hash_shooter, hash_thesubdb
 
 logger = logging.getLogger(__name__)
@@ -9,6 +9,7 @@ logger = logging.getLogger(__name__)
 hash_functions = {
     'napiprojekt': hash_napiprojekt,
     'opensubtitles': hash_opensubtitles,
+    'opensubtitlesvip': hash_opensubtitles,
     'shooter': hash_shooter,
     'thesubdb': hash_thesubdb
 }
@@ -27,7 +28,7 @@ def refine(video, providers=None, languages=None, **kwargs):
         return
 
     logger.debug('Computing hashes for %r', video.name)
-    for name in providers or provider_manager.names():
+    for name in providers or default_providers:
         provider = provider_manager[name].plugin
         if name not in hash_functions:
             continue

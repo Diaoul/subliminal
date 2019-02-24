@@ -6,7 +6,9 @@ import pytest
 from vcr import VCR
 
 from subliminal.exceptions import ConfigurationError
-from subliminal.providers.opensubtitles import OpenSubtitlesProvider, OpenSubtitlesSubtitle, Unauthorized
+from subliminal.providers.opensubtitles import (
+    OpenSubtitlesProvider, OpenSubtitlesVipProvider, OpenSubtitlesSubtitle, Unauthorized
+)
 
 
 vcr = VCR(path_transformer=lambda path: path + '.yaml',
@@ -100,6 +102,22 @@ def test_login():
 @vcr.use_cassette
 def test_login_bad_password():
     provider = OpenSubtitlesProvider('python-subliminal', 'lanimilbus')
+    with pytest.raises(Unauthorized):
+        provider.initialize()
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_login_vip_login():
+    provider = OpenSubtitlesVipProvider('python-subliminal', 'subliminal')
+    with pytest.raises(Unauthorized):
+        provider.initialize()
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_login_vip_bad_password():
+    provider = OpenSubtitlesVipProvider('python-subliminal', 'lanimilbus')
     with pytest.raises(Unauthorized):
         provider.initialize()
 

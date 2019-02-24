@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from pkg_resources import EntryPoint, iter_entry_points
 
-from subliminal.extensions import RegistrableExtensionManager, provider_manager
+from subliminal.extensions import RegistrableExtensionManager, provider_manager, default_providers, disabled_providers
 
 
 def test_registrable_extension_manager_all_extensions():
@@ -52,4 +52,7 @@ def test_registrable_extension_manager_unregister():
 def test_provider_manager():
     setup_names = {ep.name for ep in iter_entry_points(provider_manager.namespace)}
     internal_names = {EntryPoint.parse(iep).name for iep in provider_manager.internal_extensions}
-    assert setup_names == internal_names
+    enabled_names = set(default_providers)
+    disabled_names = set(disabled_providers)
+    assert setup_names == enabled_names
+    assert internal_names == enabled_names | disabled_names

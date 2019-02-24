@@ -9,7 +9,6 @@ from guessit import guessit
 from requests import Session
 
 from . import ParserBeautifulSoup, Provider
-from .. import __short_version__
 from ..cache import EPISODE_EXPIRATION_TIME, SHOW_EXPIRATION_TIME, region
 from ..exceptions import ProviderError
 from ..matches import guess_matches
@@ -79,7 +78,7 @@ class TVsubtitlesProvider(Provider):
 
     def initialize(self):
         self.session = Session()
-        self.session.headers['User-Agent'] = 'Subliminal/%s' % __short_version__
+        self.session.headers['User-Agent'] = self.user_agent
 
     def terminate(self):
         self.session.close()

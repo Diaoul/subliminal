@@ -17,7 +17,6 @@ from requests import Session
 from zipfile import ZipFile, is_zipfile
 
 from . import ParserBeautifulSoup, Provider
-from .. import __short_version__
 from ..cache import SHOW_EXPIRATION_TIME, region
 from ..exceptions import AuthenticationError, ConfigurationError, ProviderError, ServiceUnavailable
 from ..matches import guess_matches
@@ -176,7 +175,7 @@ class LegendasTVProvider(Provider):
 
     def initialize(self):
         self.session = Session()
-        self.session.headers['User-Agent'] = 'Subliminal/%s' % __short_version__
+        self.session.headers['User-Agent'] = self.user_agent
 
         # login
         if self.username and self.password:

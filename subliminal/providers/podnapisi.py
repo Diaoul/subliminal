@@ -16,7 +16,6 @@ from requests import Session
 from zipfile import ZipFile
 
 from . import Provider
-from .. import __short_version__
 from ..exceptions import ProviderError
 from ..matches import guess_matches
 from ..subtitle import Subtitle, fix_line_ending
@@ -74,7 +73,7 @@ class PodnapisiProvider(Provider):
 
     def initialize(self):
         self.session = Session()
-        self.session.headers['User-Agent'] = 'Subliminal/%s' % __short_version__
+        self.session.headers['User-Agent'] = self.user_agent
 
     def terminate(self):
         self.session.close()

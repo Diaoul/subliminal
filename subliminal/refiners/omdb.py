@@ -67,7 +67,8 @@ class OMDBClient(object):
         return j
 
 
-omdb_client = OMDBClient(headers={'User-Agent': 'Subliminal/%s' % __short_version__})
+user_agent = 'Subliminal/%s' % __short_version__
+omdb_client = OMDBClient(headers={'User-Agent': user_agent})
 
 
 @region.cache_on_arguments(expiration_time=REFINER_EXPIRATION_TIME)

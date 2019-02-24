@@ -7,7 +7,6 @@ from babelfish import Language, language_converters
 from requests import Session
 
 from . import Provider
-from .. import __short_version__
 from ..subtitle import Subtitle, fix_line_ending
 
 logger = logging.getLogger(__name__)
@@ -53,7 +52,7 @@ class ShooterProvider(Provider):
 
     def initialize(self):
         self.session = Session()
-        self.session.headers['User-Agent'] = 'Subliminal/%s' % __short_version__
+        self.session.headers['User-Agent'] = self.user_agent
 
     def terminate(self):
         self.session.close()

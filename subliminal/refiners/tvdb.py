@@ -192,8 +192,11 @@ class TVDBClient(object):
         return r.json()['data']
 
 
+#: User-Agent to use
+user_agent = 'Subliminal/%s' % __short_version__
+
 #: Configured instance of :class:`TVDBClient`
-tvdb_client = TVDBClient('5EC930FB90DA1ADA', headers={'User-Agent': 'Subliminal/%s' % __short_version__})
+tvdb_client = TVDBClient('5EC930FB90DA1ADA', headers={'User-Agent': user_agent})
 
 #: Configure guessit in order to use GuessitCountryConverter
 guessit.api.configure()

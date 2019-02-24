@@ -10,7 +10,6 @@ from requests import Session
 from six.moves import urllib
 
 from . import Provider
-from .. import __short_version__
 from ..cache import EPISODE_EXPIRATION_TIME, region
 from ..exceptions import ProviderError
 from ..matches import guess_matches
@@ -61,14 +60,15 @@ class ArgenteamProvider(Provider):
     language = Language.fromalpha2('es')
     languages = {language}
     video_types = (Episode,)
-    api_url = "http://argenteam.net/api/v1/"
+    server_url = "http://argenteam.net/api/v1/"
+    subtitle_class = ArgenteamSubtitle
 
     def __init__(self):
         self.session = None
 
     def initialize(self):
         self.session = Session()
-        self.session.headers = {'User-Agent': 'Subliminal/%s' % __short_version__}
+        self.session.headers['User-Agent'] = self.user_agent
 
     def terminate(self):
         self.session.close()
@@ -87,7 +87,7 @@ class ArgenteamProvider(Provider):
         # make the search
         query = '%s S%#02dE%#02d' % (series, season, episode)
         logger.info('Searching episode id for %r', query)
-        r = self.session.get(self.api_url + 'search', params={'q': query}, timeout=10)
+        r = self.session.get(self.server_url + 'search', params={'q': query}, timeout=10)
         r.raise_for_status()
         results = json.loads(r.text)
         if results['total'] == 1:
@@ -100,13 +100,13 @@ class ArgenteamProvider(Provider):
         if episode_id is None:
             return []
 
-        response = self.session.get(self.api_url + 'episode', params={'id': episode_id}, timeout=10)
+        response = self.session.get(self.server_url + 'episode', params={'id': episode_id}, timeout=10)
         response.raise_for_status()
         content = json.loads(response.text)
         subtitles = []
         for r in content['releases']:
             for s in r['subtitles']:
-                subtitle = ArgenteamSubtitle(self.language, s['uri'], series, season, episode, r['team'], r['tags'])
+                subtitle = self.subtitle_class(self.language, s['uri'], series, season, episode, r['team'], r['tags'])
                 logger.debug('Found subtitle %r', subtitle)
                 subtitles.append(subtitle)
 

@@ -7,7 +7,6 @@ from guessit import guessit
 from requests import Session
 
 from . import ParserBeautifulSoup, Provider
-from .. import __short_version__
 from ..cache import SHOW_EXPIRATION_TIME, region
 from ..exceptions import AuthenticationError, ConfigurationError, DownloadLimitExceeded
 from ..matches import guess_matches
@@ -96,7 +95,7 @@ class Addic7edProvider(Provider):
 
     def initialize(self):
         self.session = Session()
-        self.session.headers['User-Agent'] = 'Subliminal/%s' % __short_version__
+        self.session.headers['User-Agent'] = self.user_agent
 
         # login
         if self.username and self.password:

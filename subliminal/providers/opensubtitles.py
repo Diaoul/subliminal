@@ -111,10 +111,12 @@ class OpenSubtitlesProvider(Provider):
 
     """
     languages = {Language.fromopensubtitles(l) for l in language_converters['opensubtitles'].codes}
+    server_url = 'https://api.opensubtitles.org/xml-rpc'
     subtitle_class = OpenSubtitlesSubtitle
+    user_agent = 'subliminal v%s' % __short_version__
 
     def __init__(self, username=None, password=None):
-        self.server = ServerProxy('https://api.opensubtitles.org/xml-rpc', TimeoutSafeTransport(10))
+        self.server = ServerProxy(self.server_url, TimeoutSafeTransport(10))
         if any((username, password)) and not all((username, password)):
             raise ConfigurationError('Username and password must be specified')
         # None values not allowed for logging in, so replace it by ''
@@ -124,8 +126,7 @@ class OpenSubtitlesProvider(Provider):
 
     def initialize(self):
         logger.info('Logging in')
-        response = checked(self.server.LogIn(self.username, self.password, 'eng',
-                                             'subliminal v%s' % __short_version__))
+        response = checked(self.server.LogIn(self.username, self.password, 'eng', self.user_agent))
         self.token = response['token']
         logger.debug('Logged in with token %r', self.token)
 

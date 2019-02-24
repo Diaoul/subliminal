@@ -4,6 +4,7 @@ import logging
 from bs4 import BeautifulSoup, FeatureNotFound
 from six.moves.xmlrpc_client import SafeTransport
 
+from .. import __short_version__
 from ..video import Episode, Movie
 
 logger = logging.getLogger(__name__)
@@ -70,6 +71,9 @@ class Provider(object):
 
     #: Subtitle class to use
     subtitle_class = None
+
+    #: User Agent to use
+    user_agent = 'Subliminal/%s' % __short_version__
 
     def __enter__(self):
         self.initialize()

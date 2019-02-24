@@ -2,81 +2,335 @@ interactions:
 - request:
     body: null
     headers:
-      Accept: ['*/*']
+      Accept: [application/json]
       Accept-Encoding: ['gzip, deflate']
       Connection: [keep-alive]
       User-Agent: [Subliminal/2.1]
     method: GET
-    uri: https://www.podnapisi.net/subtitles/search/old?sTE=13&sXML=1&sL=en&sY=2015&sK=Marvels+Jessica+Jones&sTS=1
+    uri: https://www.podnapisi.net/subtitles/search/advanced?keywords=Marvels+Jessica+Jones&language=en&seasons=1&episodes=13&movie_type=tv-series&movie_type=mini-series&year=2015
   response:
-    body:
-      string: !!binary |
-        H4sIAAAAAAAAA41UTU/DMAy98yu8culQYXDj0BVNWyUm8TFpuyCEUGizEilLqiQdTNqPJ2nTD6HJ
-        cGkc+z3bfXES333vOOyp0kyKaXBzdR0AFZnMmSimQWW2l7cBaENETrgUdBocqA7ukrN4tHieb15W
-        KSiqK240vJ4BxKP0IX1MnzadNzxfzRezzexYkoIJYmyVo64+DDOcji8SyxmyehCEWaUUFSaCTFZu
-        8XXGDWfI8khoa52CuBy/AX23bUcQsjyCurkIDpSoCHZyz+jSeivF7afkkuRU1Q5vP5Edde1xSnRv
-        6Ag4EUVFiprd2g3YMEcx+7WlSOGstGRa5o2zpBkjtliW2yRbqXbE2LW0G2UFFIXdcFLYbS6/hOtH
-        n/hjlv/+3aFkJR6uFcD4Thss7lXDIFZPNNwp/R+UkxXD+dPREHqrU2yoio9hidpzXKLytqi/2mpx
-        WEU3K2jcTxGO8fOFg9bN5GEgO5NYuJlWFFGiCZoJRxO42ccAgn691xcEQrecPGkXwHJ0NwsD0W+S
-        mXuiP+mwn7cEYv9WJXH/oCWxf6aSm3jSmnH9tiXX1uMeqKQjWk+XYzJM0rl/AKiU7DO5BQAA
+    body: {string: "{\n  \"all_pages\": 0,\n  \"data\": [],\n  \"page\": 1,\n  \"\
+        per_page\": 50,\n  \"status\": \"ok\"\n}"}
     headers:
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-type: [text/xml;charset=utf-8]
-      date: ['Fri, 17 Nov 2017 14:04:57 GMT']
-      server: [nginx/1.8.0]
-      vary: [Accept-Encoding]
+      Connection: [keep-alive]
+      Content-Length: ['83']
+      Content-Type: [application/json]
+      Date: ['Sun, 24 Feb 2019 11:54:38 GMT']
+      Server: [nginx/1.8.0]
     status: {code: 200, message: OK}
 - request:
     body: null
     headers:
-      Accept: ['*/*']
+      Accept: [application/json]
       Accept-Encoding: ['gzip, deflate']
       Connection: [keep-alive]
       User-Agent: [Subliminal/2.1]
     method: GET
-    uri: https://www.podnapisi.net/subtitles/search/old?sTE=13&sXML=1&sL=en&sY=2015&sK=Jessica+Jones&sTS=1
+    uri: https://www.podnapisi.net/subtitles/search/advanced?keywords=Jessica+Jones&language=en&seasons=1&episodes=13&movie_type=tv-series&movie_type=mini-series&year=2015
   response:
-    body:
-      string: !!binary |
-        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
+    body: {string: "{\n  \"all_pages\": 1,\n  \"data\": [\n    {\n      \"audited\"\
+        : false,\n      \"contributions\": [],\n      \"contributor\": null,\n   \
+        \   \"created\": \"2016-12-06T14:53:11.034000+00:00\",\n      \"custom_releases\"\
+        : [\n        \"marvels.jessica.jones.s01e13.dvdrip.x264-bravery\",\n     \
+        \   \"Marvels.Jessica.Jones.S01.DVDRip.x264-BRAVERY\"\n      ],\n      \"\
+        download\": \"/en/subtitles/en-jessica-jones-2015-S01E13-O/s1FC/download\"\
+        ,\n      \"flags\": [\n        \"hearing_impaired\"\n      ],\n      \"fps\"\
+        : \"\",\n      \"id\": \"s1FC\",\n      \"language\": \"en\",\n      \"movie\"\
+        : {\n        \"aliases\": [],\n        \"episode_info\": {\n          \"episode\"\
+        : 13,\n          \"id\": null,\n          \"season\": 1,\n          \"slug\"\
+        : \"S01E13-O\",\n          \"title\": null,\n          \"type\": \"ordinary\"\
+        ,\n          \"year\": null\n        },\n        \"id\": \"HOY\",\n      \
+        \  \"posters\": {\n          \"inline\": \"/thumbnails/moviedb/inline/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        ,\n          \"normal\": \"/thumbnails/moviedb/normal/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        ,\n          \"small\": \"/thumbnails/moviedb/small/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        ,\n          \"title\": \"/thumbnails/moviedb/title/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        \n        },\n        \"providers\": [\n          \"omdb:AvQG\",\n       \
+        \   \"imdb:2357547\"\n        ],\n        \"slug\": \"jessica-jones-2015-S01E13-O\"\
+        ,\n        \"title\": \"Jessica Jones\",\n        \"type\": \"tv-series\"\
+        ,\n        \"year\": 2015\n      },\n      \"notes\": null,\n      \"num_cds\"\
+        : 1,\n      \"rejected\": null,\n      \"releases\": [],\n      \"state\"\
+        : \"\",\n      \"stats\": {\n        \"characters\": 19925,\n        \"characters_per_line\"\
+        : 22.362514029180694,\n        \"downloads\": 55,\n        \"lines\": 891,\n\
+        \        \"lines_per_unit\": 1.3239227340267459,\n        \"parts\": 1,\n\
+        \        \"units\": 673\n      },\n      \"url\": \"/en/subtitles/en-jessica-jones-2015-S01E13-O/s1FC\"\
+        \n    },\n    {\n      \"audited\": false,\n      \"contributions\": [],\n\
+        \      \"contributor\": null,\n      \"created\": \"2016-12-06T14:49:00.457000+00:00\"\
+        ,\n      \"custom_releases\": [\n        \"marvels.jessica.jones.s01e13.dvdrip.x264-bravery\"\
+        ,\n        \"Marvels.Jessica.Jones.S01.DVDRip.x264-BRAVERY\"\n      ],\n \
+        \     \"download\": \"/en/subtitles/en-jessica-jones-2015-S01E13-O/tVFC/download\"\
+        ,\n      \"flags\": [],\n      \"fps\": \"\",\n      \"id\": \"tVFC\",\n \
+        \     \"language\": \"en\",\n      \"movie\": {\n        \"aliases\": [],\n\
+        \        \"episode_info\": {\n          \"episode\": 13,\n          \"id\"\
+        : null,\n          \"season\": 1,\n          \"slug\": \"S01E13-O\",\n   \
+        \       \"title\": null,\n          \"type\": \"ordinary\",\n          \"\
+        year\": null\n        },\n        \"id\": \"HOY\",\n        \"posters\": {\n\
+        \          \"inline\": \"/thumbnails/moviedb/inline/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        ,\n          \"normal\": \"/thumbnails/moviedb/normal/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        ,\n          \"small\": \"/thumbnails/moviedb/small/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        ,\n          \"title\": \"/thumbnails/moviedb/title/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        \n        },\n        \"providers\": [\n          \"omdb:AvQG\",\n       \
+        \   \"imdb:2357547\"\n        ],\n        \"slug\": \"jessica-jones-2015-S01E13-O\"\
+        ,\n        \"title\": \"Jessica Jones\",\n        \"type\": \"tv-series\"\
+        ,\n        \"year\": 2015\n      },\n      \"notes\": null,\n      \"num_cds\"\
+        : 1,\n      \"rejected\": null,\n      \"releases\": [],\n      \"state\"\
+        : \"\",\n      \"stats\": {\n        \"characters\": 17740,\n        \"characters_per_line\"\
+        : 22.77278562259307,\n        \"downloads\": 65,\n        \"lines\": 779,\n\
+        \        \"lines_per_unit\": 1.3431034482758621,\n        \"parts\": 1,\n\
+        \        \"units\": 580\n      },\n      \"url\": \"/en/subtitles/en-jessica-jones-2015-S01E13-O/tVFC\"\
+        \n    },\n    {\n      \"audited\": false,\n      \"contributions\": [],\n\
+        \      \"contributor\": null,\n      \"created\": \"2016-12-06T14:47:31.366000+00:00\"\
+        ,\n      \"custom_releases\": [\n        \"Marvels.Jessica.Jones.S01.720p.BluRay.x264-DEMAND\"\
+        ,\n        \"Marvels.Jessica.Jones.S01E13.720p.BluRay.x264-DEMAND\"\n    \
+        \  ],\n      \"download\": \"/en/subtitles/en-jessica-jones-2015-S01E13-O/wFFC/download\"\
+        ,\n      \"flags\": [\n        \"hearing_impaired\"\n      ],\n      \"fps\"\
+        : \"23.976\",\n      \"id\": \"wFFC\",\n      \"language\": \"en\",\n    \
+        \  \"movie\": {\n        \"aliases\": [],\n        \"episode_info\": {\n \
+        \         \"episode\": 13,\n          \"id\": null,\n          \"season\"\
+        : 1,\n          \"slug\": \"S01E13-O\",\n          \"title\": null,\n    \
+        \      \"type\": \"ordinary\",\n          \"year\": null\n        },\n   \
+        \     \"id\": \"HOY\",\n        \"posters\": {\n          \"inline\": \"/thumbnails/moviedb/inline/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        ,\n          \"normal\": \"/thumbnails/moviedb/normal/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        ,\n          \"small\": \"/thumbnails/moviedb/small/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        ,\n          \"title\": \"/thumbnails/moviedb/title/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        \n        },\n        \"providers\": [\n          \"omdb:AvQG\",\n       \
+        \   \"imdb:2357547\"\n        ],\n        \"slug\": \"jessica-jones-2015-S01E13-O\"\
+        ,\n        \"title\": \"Jessica Jones\",\n        \"type\": \"tv-series\"\
+        ,\n        \"year\": 2015\n      },\n      \"notes\": null,\n      \"num_cds\"\
+        : 1,\n      \"rejected\": null,\n      \"releases\": [],\n      \"state\"\
+        : \"\",\n      \"stats\": {\n        \"characters\": 19925,\n        \"characters_per_line\"\
+        : 22.362514029180694,\n        \"downloads\": 92,\n        \"lines\": 891,\n\
+        \        \"lines_per_unit\": 1.3239227340267459,\n        \"parts\": 1,\n\
+        \        \"units\": 673\n      },\n      \"url\": \"/en/subtitles/en-jessica-jones-2015-S01E13-O/wFFC\"\
+        \n    },\n    {\n      \"audited\": false,\n      \"contributions\": [],\n\
+        \      \"contributor\": null,\n      \"created\": \"2016-12-06T14:42:02.594000+00:00\"\
+        ,\n      \"custom_releases\": [\n        \"Marvels.Jessica.Jones.S01.720p.BluRay.x264-DEMAND\"\
+        ,\n        \"Marvels.Jessica.Jones.S01E13.720p.BluRay.x264-DEMAND\"\n    \
+        \  ],\n      \"download\": \"/en/subtitles/en-jessica-jones-2015-S01E13-O/wlFC/download\"\
+        ,\n      \"flags\": [],\n      \"fps\": \"23.976\",\n      \"id\": \"wlFC\"\
+        ,\n      \"language\": \"en\",\n      \"movie\": {\n        \"aliases\": [],\n\
+        \        \"episode_info\": {\n          \"episode\": 13,\n          \"id\"\
+        : null,\n          \"season\": 1,\n          \"slug\": \"S01E13-O\",\n   \
+        \       \"title\": null,\n          \"type\": \"ordinary\",\n          \"\
+        year\": null\n        },\n        \"id\": \"HOY\",\n        \"posters\": {\n\
+        \          \"inline\": \"/thumbnails/moviedb/inline/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        ,\n          \"normal\": \"/thumbnails/moviedb/normal/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        ,\n          \"small\": \"/thumbnails/moviedb/small/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        ,\n          \"title\": \"/thumbnails/moviedb/title/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        \n        },\n        \"providers\": [\n          \"omdb:AvQG\",\n       \
+        \   \"imdb:2357547\"\n        ],\n        \"slug\": \"jessica-jones-2015-S01E13-O\"\
+        ,\n        \"title\": \"Jessica Jones\",\n        \"type\": \"tv-series\"\
+        ,\n        \"year\": 2015\n      },\n      \"notes\": null,\n      \"num_cds\"\
+        : 1,\n      \"rejected\": null,\n      \"releases\": [],\n      \"state\"\
+        : \"\",\n      \"stats\": {\n        \"characters\": 17740,\n        \"characters_per_line\"\
+        : 22.77278562259307,\n        \"downloads\": 405,\n        \"lines\": 779,\n\
+        \        \"lines_per_unit\": 1.3431034482758621,\n        \"parts\": 1,\n\
+        \        \"units\": 580\n      },\n      \"url\": \"/en/subtitles/en-jessica-jones-2015-S01E13-O/wlFC\"\
+        \n    },\n    {\n      \"audited\": false,\n      \"contributions\": [],\n\
+        \      \"contributor\": null,\n      \"created\": \"2016-08-06T16:59:20.461000+00:00\"\
+        ,\n      \"custom_releases\": [\n        \"Marvel's Jessica Jones Season 1\
+        \ (1080p x265 10bit Joy)\",\n        \"Marvel's Jessica Jones S01E13 Smile\
+        \ (1080p x265 10bit Joy)\"\n      ],\n      \"download\": \"/en/subtitles/en-jessica-jones-2015-S01E13-O/BURB/download\"\
+        ,\n      \"flags\": [],\n      \"fps\": \"\",\n      \"id\": \"BURB\",\n \
+        \     \"language\": \"en\",\n      \"movie\": {\n        \"aliases\": [],\n\
+        \        \"episode_info\": {\n          \"episode\": 13,\n          \"id\"\
+        : null,\n          \"season\": 1,\n          \"slug\": \"S01E13-O\",\n   \
+        \       \"title\": null,\n          \"type\": \"ordinary\",\n          \"\
+        year\": null\n        },\n        \"id\": \"HOY\",\n        \"posters\": {\n\
+        \          \"inline\": \"/thumbnails/moviedb/inline/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        ,\n          \"normal\": \"/thumbnails/moviedb/normal/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        ,\n          \"small\": \"/thumbnails/moviedb/small/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        ,\n          \"title\": \"/thumbnails/moviedb/title/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        \n        },\n        \"providers\": [\n          \"omdb:AvQG\",\n       \
+        \   \"imdb:2357547\"\n        ],\n        \"slug\": \"jessica-jones-2015-S01E13-O\"\
+        ,\n        \"title\": \"Jessica Jones\",\n        \"type\": \"tv-series\"\
+        ,\n        \"year\": 2015\n      },\n      \"notes\": null,\n      \"num_cds\"\
+        : 1,\n      \"rejected\": null,\n      \"releases\": [],\n      \"state\"\
+        : \"\",\n      \"stats\": {\n        \"characters\": 20450,\n        \"characters_per_line\"\
+        : 23.13348416289593,\n        \"downloads\": 124,\n        \"lines\": 884,\n\
+        \        \"lines_per_unit\": 1.311572700296736,\n        \"parts\": 1,\n \
+        \       \"units\": 674\n      },\n      \"url\": \"/en/subtitles/en-jessica-jones-2015-S01E13-O/BURB\"\
+        \n    },\n    {\n      \"audited\": false,\n      \"contributions\": [],\n\
+        \      \"contributor\": null,\n      \"created\": \"2016-01-01T13:32:40.192000+00:00\"\
+        ,\n      \"custom_releases\": [\n        \"Marvels.Jessica.Jones.S01E13.720p.WEBRip.x264-2HD\"\
+        ,\n        \"Marvels.Jessica.Jones.S01E13.WEBRip.x264-2HD\",\n        \"Marvels.Jessica.Jones.S01.1080p.NF.WEBRip.DD5.1.x264-SNEAkY\"\
+        ,\n        \"Marvels.Jessica.Jones.S01E13.AKA.Smile.1080p.NF.WEBRip.DD5.1.x264-SNEAkY\"\
+        \n      ],\n      \"download\": \"/en/subtitles/en-jessica-jones-2015-S01E13-O/w_g-/download\"\
+        ,\n      \"flags\": [],\n      \"fps\": \"\",\n      \"id\": \"w_g-\",\n \
+        \     \"language\": \"en\",\n      \"movie\": {\n        \"aliases\": [],\n\
+        \        \"episode_info\": {\n          \"episode\": 13,\n          \"id\"\
+        : null,\n          \"season\": 1,\n          \"slug\": \"S01E13-O\",\n   \
+        \       \"title\": null,\n          \"type\": \"ordinary\",\n          \"\
+        year\": null\n        },\n        \"id\": \"HOY\",\n        \"posters\": {\n\
+        \          \"inline\": \"/thumbnails/moviedb/inline/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        ,\n          \"normal\": \"/thumbnails/moviedb/normal/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        ,\n          \"small\": \"/thumbnails/moviedb/small/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        ,\n          \"title\": \"/thumbnails/moviedb/title/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        \n        },\n        \"providers\": [\n          \"omdb:AvQG\",\n       \
+        \   \"imdb:2357547\"\n        ],\n        \"slug\": \"jessica-jones-2015-S01E13-O\"\
+        ,\n        \"title\": \"Jessica Jones\",\n        \"type\": \"tv-series\"\
+        ,\n        \"year\": 2015\n      },\n      \"notes\": null,\n      \"num_cds\"\
+        : 1,\n      \"rejected\": null,\n      \"releases\": [],\n      \"state\"\
+        : \"\",\n      \"stats\": {\n        \"characters\": 17853,\n        \"characters_per_line\"\
+        : 30.362244897959183,\n        \"downloads\": 1168,\n        \"lines\": 588,\n\
+        \        \"lines_per_unit\": 1.0,\n        \"parts\": 1,\n        \"units\"\
+        : 588\n      },\n      \"url\": \"/en/subtitles/en-jessica-jones-2015-S01E13-O/w_g-\"\
+        \n    },\n    {\n      \"audited\": false,\n      \"contributions\": [],\n\
+        \      \"contributor\": null,\n      \"created\": \"2016-01-01T07:31:47.004000+00:00\"\
+        ,\n      \"custom_releases\": [\n        \"Marvel's Jessica Jones.S01E01-13.720p/1080p.QCF\"\
+        ,\n        \"Marvel's Jessica Jones Season 1 Complete (x265, 720p, 1080p)\"\
+        ,\n        \"Marvel's Jessica Jones.S01E01-13.720p/1080p.2HD\",\n        \"\
+        Marvel's Jessica Jones.S01E01-13.720p/1080p.WEBRip\",\n        \"Marvel's\
+        \ Jessica Jones.S01E01-13.720p/1080p.WEBRip.HEVC.x265.RMTteam\",\n       \
+        \ \"Marvels.Jessica.Jones.S01E013.AKA.Smile.WEBRip.x264-WR\"\n      ],\n \
+        \     \"download\": \"/en/subtitles/en-jessica-jones-2015-S01E13-O/m_c-/download\"\
+        ,\n      \"flags\": [],\n      \"fps\": \"\",\n      \"id\": \"m_c-\",\n \
+        \     \"language\": \"en\",\n      \"movie\": {\n        \"aliases\": [],\n\
+        \        \"episode_info\": {\n          \"episode\": 13,\n          \"id\"\
+        : null,\n          \"season\": 1,\n          \"slug\": \"S01E13-O\",\n   \
+        \       \"title\": null,\n          \"type\": \"ordinary\",\n          \"\
+        year\": null\n        },\n        \"id\": \"HOY\",\n        \"posters\": {\n\
+        \          \"inline\": \"/thumbnails/moviedb/inline/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        ,\n          \"normal\": \"/thumbnails/moviedb/normal/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        ,\n          \"small\": \"/thumbnails/moviedb/small/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        ,\n          \"title\": \"/thumbnails/moviedb/title/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        \n        },\n        \"providers\": [\n          \"omdb:AvQG\",\n       \
+        \   \"imdb:2357547\"\n        ],\n        \"slug\": \"jessica-jones-2015-S01E13-O\"\
+        ,\n        \"title\": \"Jessica Jones\",\n        \"type\": \"tv-series\"\
+        ,\n        \"year\": 2015\n      },\n      \"notes\": null,\n      \"num_cds\"\
+        : 1,\n      \"rejected\": null,\n      \"releases\": [],\n      \"state\"\
+        : \"\",\n      \"stats\": {\n        \"characters\": 18236,\n        \"characters_per_line\"\
+        : 23.5,\n        \"downloads\": 327,\n        \"lines\": 776,\n        \"\
+        lines_per_unit\": 1.3356282271944921,\n        \"parts\": 1,\n        \"units\"\
+        : 581\n      },\n      \"url\": \"/en/subtitles/en-jessica-jones-2015-S01E13-O/m_c-\"\
+        \n    },\n    {\n      \"audited\": false,\n      \"contributions\": [],\n\
+        \      \"contributor\": null,\n      \"created\": \"2016-01-01T00:46:00.360000+00:00\"\
+        ,\n      \"custom_releases\": [\n        \"Marvels.Jessica.Jones.S01E013.AKA.Smile.WEBRip.x264-WR\"\
+        ,\n        \"Marvels.Jessica.Jones.S01E13.AKA.Smile.1080p.NF.WEBRip.DD5.1.x264-NTb\"\
+        ,\n        \"Marvels.Jessica.Jones.S01.1080p.NF.WEBRip.DD5.1.x264-NTb\"\n\
+        \      ],\n      \"download\": \"/en/subtitles/en-jessica-jones-2015-S01E13-O/JPY-/download\"\
+        ,\n      \"flags\": [],\n      \"fps\": \"\",\n      \"id\": \"JPY-\",\n \
+        \     \"language\": \"en\",\n      \"movie\": {\n        \"aliases\": [],\n\
+        \        \"episode_info\": {\n          \"episode\": 13,\n          \"id\"\
+        : null,\n          \"season\": 1,\n          \"slug\": \"S01E13-O\",\n   \
+        \       \"title\": null,\n          \"type\": \"ordinary\",\n          \"\
+        year\": null\n        },\n        \"id\": \"HOY\",\n        \"posters\": {\n\
+        \          \"inline\": \"/thumbnails/moviedb/inline/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        ,\n          \"normal\": \"/thumbnails/moviedb/normal/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        ,\n          \"small\": \"/thumbnails/moviedb/small/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        ,\n          \"title\": \"/thumbnails/moviedb/title/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        \n        },\n        \"providers\": [\n          \"omdb:AvQG\",\n       \
+        \   \"imdb:2357547\"\n        ],\n        \"slug\": \"jessica-jones-2015-S01E13-O\"\
+        ,\n        \"title\": \"Jessica Jones\",\n        \"type\": \"tv-series\"\
+        ,\n        \"year\": 2015\n      },\n      \"notes\": null,\n      \"num_cds\"\
+        : 1,\n      \"rejected\": null,\n      \"releases\": [],\n      \"state\"\
+        : \"\",\n      \"stats\": {\n        \"characters\": 17704,\n        \"characters_per_line\"\
+        : 22.552866242038217,\n        \"downloads\": 136,\n        \"lines\": 785,\n\
+        \        \"lines_per_unit\": 1.353448275862069,\n        \"parts\": 1,\n \
+        \       \"units\": 580\n      },\n      \"url\": \"/en/subtitles/en-jessica-jones-2015-S01E13-O/JPY-\"\
+        \n    },\n    {\n      \"audited\": true,\n      \"contributions\": [],\n\
+        \      \"contributor\": null,\n      \"created\": \"2015-11-23T05:56:13.267000+00:00\"\
+        ,\n      \"custom_releases\": [\n        \"Marvels.Jessica.Jones.S01E13.720p.WEBRip.x264-2HD\"\
+        ,\n        \"Marvels.Jessica.Jones.S01E13.WEBRip.x264-2HD\"\n      ],\n  \
+        \    \"download\": \"/en/subtitles/en-jessica-jones-2015-S01E13-O/CJw-/download\"\
+        ,\n      \"flags\": [\n        \"hearing_impaired\",\n        \"high_definition\"\
+        \n      ],\n      \"fps\": \"23.976\",\n      \"id\": \"CJw-\",\n      \"\
+        language\": \"en\",\n      \"movie\": {\n        \"aliases\": [],\n      \
+        \  \"episode_info\": {\n          \"episode\": 13,\n          \"id\": null,\n\
+        \          \"season\": 1,\n          \"slug\": \"S01E13-O\",\n          \"\
+        title\": null,\n          \"type\": \"ordinary\",\n          \"year\": null\n\
+        \        },\n        \"id\": \"HOY\",\n        \"posters\": {\n          \"\
+        inline\": \"/thumbnails/moviedb/inline/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        ,\n          \"normal\": \"/thumbnails/moviedb/normal/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        ,\n          \"small\": \"/thumbnails/moviedb/small/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        ,\n          \"title\": \"/thumbnails/moviedb/title/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        \n        },\n        \"providers\": [\n          \"omdb:AvQG\",\n       \
+        \   \"imdb:2357547\"\n        ],\n        \"slug\": \"jessica-jones-2015-S01E13-O\"\
+        ,\n        \"title\": \"Jessica Jones\",\n        \"type\": \"tv-series\"\
+        ,\n        \"year\": 2015\n      },\n      \"notes\": \"\",\n      \"num_cds\"\
+        : 1,\n      \"rejected\": null,\n      \"releases\": [],\n      \"state\"\
+        : \"\",\n      \"stats\": {\n        \"characters\": 20504,\n        \"characters_per_line\"\
+        : 23.168361581920905,\n        \"downloads\": 1600,\n        \"lines\": 885,\n\
+        \        \"lines_per_unit\": 1.3130563798219586,\n        \"parts\": 1,\n\
+        \        \"units\": 674\n      },\n      \"url\": \"/en/subtitles/en-jessica-jones-2015-S01E13-O/CJw-\"\
+        \n    },\n    {\n      \"audited\": true,\n      \"contributions\": [],\n\
+        \      \"contributor\": null,\n      \"created\": \"2015-11-22T08:51:12+00:00\"\
+        ,\n      \"custom_releases\": [\n        \"Marvels.Jessica.Jones.S01E13.WEBRiP.x264-QCF\"\
+        ,\n        \"Marvels.Jessica.Jones.S01E13.720p.WEBRiP.x264-QCF\",\n      \
+        \  \"Marvels.Jessica.Jones.S01E13.1080p.WEBRiP.x264-QCF\"\n      ],\n    \
+        \  \"download\": \"/en/subtitles/en-jessica-jones-2015-S01E13-O/iZk-/download\"\
+        ,\n      \"flags\": [\n        \"high_definition\"\n      ],\n      \"fps\"\
+        : \"\",\n      \"id\": \"iZk-\",\n      \"language\": \"en\",\n      \"movie\"\
+        : {\n        \"aliases\": [],\n        \"episode_info\": {\n          \"episode\"\
+        : 13,\n          \"id\": null,\n          \"season\": 1,\n          \"slug\"\
+        : \"S01E13-O\",\n          \"title\": null,\n          \"type\": \"ordinary\"\
+        ,\n          \"year\": null\n        },\n        \"id\": \"HOY\",\n      \
+        \  \"posters\": {\n          \"inline\": \"/thumbnails/moviedb/inline/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        ,\n          \"normal\": \"/thumbnails/moviedb/normal/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        ,\n          \"small\": \"/thumbnails/moviedb/small/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        ,\n          \"title\": \"/thumbnails/moviedb/title/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        \n        },\n        \"providers\": [\n          \"omdb:AvQG\",\n       \
+        \   \"imdb:2357547\"\n        ],\n        \"slug\": \"jessica-jones-2015-S01E13-O\"\
+        ,\n        \"title\": \"Jessica Jones\",\n        \"type\": \"tv-series\"\
+        ,\n        \"year\": 2015\n      },\n      \"notes\": \"\",\n      \"num_cds\"\
+        : 1,\n      \"rejected\": null,\n      \"releases\": [],\n      \"state\"\
+        : \"\",\n      \"stats\": {\n        \"characters\": 17914,\n        \"characters_per_line\"\
+        : 30.36271186440678,\n        \"downloads\": 1400,\n        \"lines\": 590,\n\
+        \        \"lines_per_unit\": 1.0,\n        \"parts\": 1,\n        \"units\"\
+        : 590\n      },\n      \"url\": \"/en/subtitles/en-jessica-jones-2015-S01E13-O/iZk-\"\
+        \n    },\n    {\n      \"audited\": true,\n      \"contributions\": [],\n\
+        \      \"contributor\": null,\n      \"created\": \"2015-11-21T16:05:54.800000+00:00\"\
+        ,\n      \"custom_releases\": [\n        \"Marvels.Jessica.Jones.S01E013.AKA.Smile.WEBRip.x264-WR\"\
+        \n      ],\n      \"download\": \"/en/subtitles/en-jessica-jones-2015-S01E13-O/v5c-/download\"\
+        ,\n      \"flags\": [\n        \"hearing_impaired\"\n      ],\n      \"fps\"\
+        : \"23.976\",\n      \"id\": \"v5c-\",\n      \"language\": \"en\",\n    \
+        \  \"movie\": {\n        \"aliases\": [],\n        \"episode_info\": {\n \
+        \         \"episode\": 13,\n          \"id\": null,\n          \"season\"\
+        : 1,\n          \"slug\": \"S01E13-O\",\n          \"title\": null,\n    \
+        \      \"type\": \"ordinary\",\n          \"year\": null\n        },\n   \
+        \     \"id\": \"HOY\",\n        \"posters\": {\n          \"inline\": \"/thumbnails/moviedb/inline/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        ,\n          \"normal\": \"/thumbnails/moviedb/normal/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        ,\n          \"small\": \"/thumbnails/moviedb/small/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        ,\n          \"title\": \"/thumbnails/moviedb/title/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        \n        },\n        \"providers\": [\n          \"omdb:AvQG\",\n       \
+        \   \"imdb:2357547\"\n        ],\n        \"slug\": \"jessica-jones-2015-S01E13-O\"\
+        ,\n        \"title\": \"Jessica Jones\",\n        \"type\": \"tv-series\"\
+        ,\n        \"year\": 2015\n      },\n      \"notes\": \"\",\n      \"num_cds\"\
+        : 1,\n      \"rejected\": null,\n      \"releases\": [],\n      \"state\"\
+        : \"\",\n      \"stats\": {\n        \"characters\": 20450,\n        \"characters_per_line\"\
+        : 23.13348416289593,\n        \"downloads\": 695,\n        \"lines\": 884,\n\
+        \        \"lines_per_unit\": 1.311572700296736,\n        \"parts\": 1,\n \
+        \       \"units\": 674\n      },\n      \"url\": \"/en/subtitles/en-jessica-jones-2015-S01E13-O/v5c-\"\
+        \n    },\n    {\n      \"audited\": true,\n      \"contributions\": [],\n\
+        \      \"contributor\": {\n        \"id\": 260899,\n        \"name\": \"favian89\"\
+        ,\n        \"type\": \"user\"\n      },\n      \"created\": \"2015-11-21T15:52:25.760000+00:00\"\
+        ,\n      \"custom_releases\": [\n        \"Marvels.Jessica.Jones.S01E013.AKA.Smile.WEBRip.x264-WR\"\
+        \n      ],\n      \"download\": \"/en/subtitles/en-jessica-jones-2015-S01E13-O/u5c-/download\"\
+        ,\n      \"flags\": [],\n      \"fps\": \"23.976\",\n      \"id\": \"u5c-\"\
+        ,\n      \"language\": \"en\",\n      \"movie\": {\n        \"aliases\": [],\n\
+        \        \"episode_info\": {\n          \"episode\": 13,\n          \"id\"\
+        : null,\n          \"season\": 1,\n          \"slug\": \"S01E13-O\",\n   \
+        \       \"title\": null,\n          \"type\": \"ordinary\",\n          \"\
+        year\": null\n        },\n        \"id\": \"HOY\",\n        \"posters\": {\n\
+        \          \"inline\": \"/thumbnails/moviedb/inline/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        ,\n          \"normal\": \"/thumbnails/moviedb/normal/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        ,\n          \"small\": \"/thumbnails/moviedb/small/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        ,\n          \"title\": \"/thumbnails/moviedb/title/47/4b/ef/23/5f/46/a8bfc0ced3e9bfcfa929/HOY.jpg\"\
+        \n        },\n        \"providers\": [\n          \"omdb:AvQG\",\n       \
+        \   \"imdb:2357547\"\n        ],\n        \"slug\": \"jessica-jones-2015-S01E13-O\"\
+        ,\n        \"title\": \"Jessica Jones\",\n        \"type\": \"tv-series\"\
+        ,\n        \"year\": 2015\n      },\n      \"notes\": \"\",\n      \"num_cds\"\
+        : 1,\n      \"rejected\": null,\n      \"releases\": [],\n      \"state\"\
+        : \"\",\n      \"stats\": {\n        \"characters\": 18189,\n        \"characters_per_line\"\
+        : 23.469677419354838,\n        \"downloads\": 1282,\n        \"lines\": 775,\n\
+        \        \"lines_per_unit\": 1.333907056798623,\n        \"parts\": 1,\n \
+        \       \"units\": 581\n      },\n      \"url\": \"/en/subtitles/en-jessica-jones-2015-S01E13-O/u5c-\"\
+        \n    }\n  ],\n  \"page\": 1,\n  \"per_page\": 50,\n  \"status\": \"ok\"\n\
+        }"}
     headers:
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-type: [text/xml;charset=utf-8]
-      date: ['Fri, 17 Nov 2017 14:04:57 GMT']
-      server: [nginx/1.8.0]
-      vary: [Accept-Encoding]
+      Connection: [keep-alive]
+      Content-Length: ['22219']
+      Content-Type: [application/json]
+      Date: ['Sun, 24 Feb 2019 11:54:38 GMT']
+      Server: [nginx/1.8.0]
     status: {code: 200, message: OK}
 version: 1

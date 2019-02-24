@@ -120,9 +120,11 @@ def test_download_subtitle(movies):
     with PodnapisiProvider() as provider:
         subtitles = provider.list_subtitles(video, languages)
         subtitle = [s for s in subtitles if s.pid == 'GMso'][0]
+        matches = subtitle.get_matches(video)
         provider.download_subtitle(subtitle)
     assert subtitle.content is not None
     assert subtitle.is_valid() is True
+    assert matches == {'title', 'year', 'country', 'source', 'video_codec'}
 
 
 @pytest.mark.integration

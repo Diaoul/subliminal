@@ -1,17 +1,10 @@
 # -*- coding: utf-8 -*-
 import io
+import json
 import logging
-import re
 
 from babelfish import Language, language_converters
 from guessit import guessit
-try:
-    from lxml import etree
-except ImportError:
-    try:
-        import xml.etree.cElementTree as etree
-    except ImportError:
-        import xml.etree.ElementTree as etree
 from requests import Session
 from zipfile import ZipFile
 
@@ -74,20 +67,24 @@ class PodnapisiProvider(Provider):
     def initialize(self):
         self.session = Session()
         self.session.headers['User-Agent'] = self.user_agent
+        self.session.headers['Accept'] = 'application/json'
 
     def terminate(self):
         self.session.close()
 
     def query(self, language, keyword, season=None, episode=None, year=None):
         # set parameters, see http://www.podnapisi.net/forum/viewtopic.php?f=62&t=26164#p212652
-        params = {'sXML': 1, 'sL': str(language), 'sK': keyword}
+        params = {'keywords': keyword, 'language': str(language)}
         is_episode = False
-        if season and episode:
+        if season is not None and episode:
             is_episode = True
-            params['sTS'] = season
-            params['sTE'] = episode
+            params['seasons'] = season
+            params['episodes'] = episode
+            params['movie_type'] = ['tv-series', 'mini-series']
+        else:
+            params['movie_type'] = 'movie'
         if year:
-            params['sY'] = year
+            params['year'] = year
 
         # loop over paginated results
         logger.info('Searching subtitles %r', params)
@@ -95,36 +92,31 @@ class PodnapisiProvider(Provider):
         pids = set()
         while True:
             # query the server
-            r = self.session.get(self.server_url + 'search/old', params=params, timeout=10)
+            r = self.session.get(self.server_url + 'search/advanced', params=params, timeout=10)
             r.raise_for_status()
-            xml = etree.fromstring(r.content)
-
-            # exit if no results
-            if not int(xml.find('pagination/results').text):
-                logger.debug('No subtitles found')
-                break
+            result = json.loads(r.text)
 
             # loop over subtitles
-            for subtitle_xml in xml.findall('subtitle'):
+            for data in result['data']:
                 # read xml elements
-                pid = subtitle_xml.find('pid').text
+                pid = data['id']
                 # ignore duplicates, see http://www.podnapisi.net/forum/viewtopic.php?f=62&t=26164&start=10#p213321
                 if pid in pids:
+                    logger.debug('Ignoring duplicate %r', pid)
                     continue
 
-                language = Language.fromietf(subtitle_xml.find('language').text)
-                hearing_impaired = 'n' in (subtitle_xml.find('flags').text or '')
-                page_link = subtitle_xml.find('url').text
-                releases = []
-                if subtitle_xml.find('release').text:
-                    for release in subtitle_xml.find('release').text.split():
-                        release = re.sub(r'\.+$', '', release)  # remove trailing dots
-                        release = ''.join(filter(lambda x: ord(x) < 128, release))  # remove non-ascii characters
-                        releases.append(release)
-                title = subtitle_xml.find('title').text
-                season = int(subtitle_xml.find('tvSeason').text)
-                episode = int(subtitle_xml.find('tvEpisode').text)
-                year = int(subtitle_xml.find('year').text)
+                if is_episode and data['movie']['type'] == 'movie':
+                    logger.error('Wrong type detected: movie for episode')
+                    continue
+
+                language = Language.fromietf(data['language'])
+                hearing_impaired = 'hearing_impaired' in data['flags']
+                page_link = data['url']
+                releases = data['releases'] + data['custom_releases']
+                title = data['movie']['title']
+                season = int(data['movie']['episode_info']['season']) if is_episode else None
+                episode = int(data['movie']['episode_info']['episode']) if is_episode else None
+                year = int(data['movie']['year'])
 
                 if is_episode:
                     subtitle = self.subtitle_class(language, hearing_impaired, page_link, pid, releases, title,
@@ -138,11 +130,11 @@ class PodnapisiProvider(Provider):
                 pids.add(pid)
 
             # stop on last page
-            if int(xml.find('pagination/current').text) >= int(xml.find('pagination/count').text):
+            if int(result['page']) >= int(result['all_pages']):
                 break
 
             # increment current page
-            params['page'] = int(xml.find('pagination/current').text) + 1
+            params['page'] = int(result['page']) + 1
             logger.debug('Getting page %d', params['page'])
 
         return subtitles

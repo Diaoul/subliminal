@@ -73,6 +73,9 @@ class Subs4FreeProvider(Provider):
     server_url = 'https://www.sf4-industry.com'
     download_url = '/getSub.html'
     search_url = '/search_report.php?search={}&searchType=1'
+    anti_block_1 = 'https://images.subs4free.info/favicon.ico'
+    anti_block_2 = 'https://www.subs4series.com/includes/anti-block-layover.php?launch=1'
+    anti_block_3 = 'https://www.subs4series.com/includes/anti-block.php'
     subtitle_class = Subs4FreeSubtitle
 
     def __init__(self):
@@ -221,6 +224,8 @@ class Subs4FreeProvider(Provider):
                 logger.debug('Unable to download subtitle. No download link found')
                 return
 
+            self.apply_anti_block(subtitle)
+
             download_url = self.server_url + self.download_url
             r = self.session.post(download_url, data={'id': subtitle_id, 'x': random.randint(0, width),
                                                       'y': random.randint(0, height)},
@@ -239,6 +244,11 @@ class Subs4FreeProvider(Provider):
                 subtitle.content = fix_line_ending(subtitle_content)
             else:
                 logger.debug('Could not extract subtitle from %r', archive)
+
+    def apply_anti_block(self, subtitle):
+        self.session.get(self.anti_block_1, headers={'Referer': subtitle.download_link}, timeout=10)
+        self.session.get(self.anti_block_2, headers={'Referer': subtitle.download_link}, timeout=10)
+        self.session.get(self.anti_block_3, headers={'Referer': subtitle.download_link}, timeout=10)
 
 
 def _get_archive(content):

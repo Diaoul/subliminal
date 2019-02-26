@@ -13,7 +13,7 @@ from guessit import guessit
 from rarfile import BadRarFile, NotRarFile, RarCannotExec, RarFile, Error, is_rarfile
 from zipfile import BadZipfile
 
-from .extensions import provider_manager, refiner_manager
+from .extensions import provider_manager, default_providers, refiner_manager
 from .score import compute_score as default_compute_score
 from .subtitle import SUBTITLE_EXTENSIONS
 from .utils import handle_exception
@@ -41,7 +41,7 @@ class ProviderPool(object):
     """
     def __init__(self, providers=None, provider_configs=None):
         #: Name of providers to use
-        self.providers = providers or provider_manager.names()
+        self.providers = providers or default_providers
 
         #: Provider configuration
         self.provider_configs = provider_configs or {}

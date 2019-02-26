@@ -72,6 +72,8 @@ class Subs4SeriesProvider(Provider):
     server_url = 'https://www.subs4series.com'
     search_url = '/search_report.php?search={}&searchType=1'
     episode_link = '/tv-series/{show_id}/season-{season:d}/episode-{episode:d}'
+    anti_block_1 = '/includes/anti-block-layover.php?launch=1'
+    anti_block_2 = '/includes/anti-block.php'
     subtitle_class = Subs4SeriesSubtitle
 
     def __init__(self):
@@ -214,6 +216,8 @@ class Subs4SeriesProvider(Provider):
                 logger.debug('Unable to download subtitle. No download link found')
                 return
 
+            self.apply_anti_block(subtitle)
+
             download_url = self.server_url + target
             r = self.session.get(download_url, headers={'Referer': subtitle.download_link}, timeout=10)
             r.raise_for_status()
@@ -229,6 +233,10 @@ class Subs4SeriesProvider(Provider):
                 subtitle.content = fix_line_ending(subtitle_content)
             else:
                 logger.debug('Could not extract subtitle from %r', archive)
+
+    def apply_anti_block(self, subtitle):
+        self.session.get(self.server_url + self.anti_block_1, headers={'Referer': subtitle.download_link}, timeout=10)
+        self.session.get(self.server_url + self.anti_block_2, headers={'Referer': subtitle.download_link}, timeout=10)
 
 
 def _get_archive(content):

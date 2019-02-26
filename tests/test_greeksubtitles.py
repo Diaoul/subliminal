@@ -64,17 +64,6 @@ def test_query_series(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_query_movie_unicode(movies):
-    video = movies['café_society']
-    expected_languages = {Language.fromalpha2(l) for l in ['el']}
-    with GreekSubtitlesProvider() as provider:
-        subtitles = provider.query(video.title, year=video.year)
-    assert len(subtitles) == 18
-    assert {subtitle.language for subtitle in subtitles} == expected_languages
-
-
-@pytest.mark.integration
-@vcr.use_cassette
 def test_list_subtitles_episode(episodes):
     video = episodes['dallas_s01e03']
     languages = {Language.fromalpha2('el')}
@@ -88,7 +77,7 @@ def test_list_subtitles_episode(episodes):
 @pytest.mark.integration
 @vcr.use_cassette
 def test_list_subtitles_movie(movies):
-    video = movies['café_society']
+    video = movies['enders_game']
     languages = {Language.fromalpha2('el')}
     expected_subtitles = {'http://www.greeksubtitles.info/getp.php?id=1579958',
                           'http://www.greeksubtitles.info/getp.php?id=1907640',

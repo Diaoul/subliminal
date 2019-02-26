@@ -28,19 +28,11 @@ def test_get_matches_episode_no_match(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_get_show_ids_episode(episodes):
+def test_get_show_links_episode(episodes):
     video = episodes['bbt_s07e05']
     with Subs4SeriesProvider() as provider:
-        show_ids = provider.get_show_ids(video.series, video.year)
-    assert show_ids == ['the-big-bang-theory/s5ab151fda0']
-
-
-@pytest.mark.integration
-@vcr.use_cassette
-def test_get_show_ids_unicode():
-    with Subs4SeriesProvider() as provider:
-        show_ids = provider.get_show_ids(u'Ófærð')
-    assert show_ids == []
+        show_links = provider.get_show_links(video.series, video.year)
+    assert show_links == ['the-big-bang-theory/s5ab151fda0']
 
 
 @pytest.mark.integration

@@ -30,7 +30,7 @@ def test_get_matches_movie(movies):
     subtitle = PodnapisiSubtitle(Language('eng'), True, None, 'EMgo', subtitle_releases, 'Man of Steel', None, None,
                                  2013)
     matches = subtitle.get_matches(movies['man_of_steel'])
-    assert matches == {'title', 'year', 'video_codec', 'resolution', 'source', 'release_group'}
+    assert matches == {'title', 'year', 'country', 'video_codec', 'resolution', 'source', 'release_group'}
 
 
 def test_get_matches_episode(episodes):
@@ -41,7 +41,8 @@ def test_get_matches_episode(episodes):
     subtitle = PodnapisiSubtitle(Language('eng'), False, None, 'EdQo', subtitle_releases, 'The Big Bang Theory', 7, 5,
                                  2007)
     matches = subtitle.get_matches(episodes['bbt_s07e05'])
-    assert matches == {'series', 'season', 'episode', 'video_codec', 'resolution', 'source', 'release_group', 'year'}
+    assert matches == {'series', 'season', 'episode', 'video_codec', 'resolution', 'source', 'release_group', 'year',
+                       'country'}
 
 
 def test_get_matches_episode_year(episodes):
@@ -56,7 +57,7 @@ def test_get_matches_no_match(episodes):
     subtitle = PodnapisiSubtitle(Language('eng'), False, None, 'EdQo', subtitle_releases, 'The Big Bang Theory', 7, 5,
                                  2007)
     matches = subtitle.get_matches(episodes['got_s03e10'])
-    assert matches == {'year'}
+    assert matches == {'year', 'country'}
 
 
 @pytest.mark.integration
@@ -150,6 +151,6 @@ def test_subtitles_with_title_unicode(movies):
         provider.download_subtitle(wanted_subtitle)
     assert {subtitle.pid for subtitle in subtitles} == expected_subtitles
     assert {subtitle.language for subtitle in subtitles} == languages
-    assert matches == {'title', 'year'}
+    assert matches == {'title', 'year', 'country'}
     assert wanted_subtitle.content is not None
     assert wanted_subtitle.is_valid() is True

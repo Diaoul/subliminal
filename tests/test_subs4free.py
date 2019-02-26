@@ -16,14 +16,14 @@ def test_get_matches_movie(movies):
     subtitle = Subs4FreeSubtitle(Language.fromalpha2('el'), '', 'Man of Steel', 2013,
                                  'Man Of Steel 2013 720p BluRay x264-Felony', '')
     matches = subtitle.get_matches(movies['man_of_steel'])
-    assert matches == {'release_group', 'resolution', 'source', 'year', 'video_codec', 'title'}
+    assert matches == {'release_group', 'resolution', 'source', 'year', 'video_codec', 'title', 'country'}
 
 
 def test_get_matches_movie_no_match(movies):
     subtitle = Subs4FreeSubtitle(Language.fromalpha2('el'), '', 'Man of Steel', 2013,
                                  'Man Of Steel 2013 720p BluRay x264-Felony', '')
     matches = subtitle.get_matches(movies['café_society'])
-    assert matches == set()
+    assert matches == {'country'}
 
 
 @pytest.mark.integration

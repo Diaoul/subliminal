@@ -6,7 +6,9 @@ import pytest
 from vcr import VCR
 
 from subliminal.exceptions import ConfigurationError
-from subliminal.providers.opensubtitles import OpenSubtitlesProvider, OpenSubtitlesSubtitle, Unauthorized
+from subliminal.providers.opensubtitles import (
+    OpenSubtitlesProvider, OpenSubtitlesVipProvider, OpenSubtitlesSubtitle, Unauthorized
+)
 
 
 vcr = VCR(path_transformer=lambda path: path + '.yaml',
@@ -21,7 +23,7 @@ def test_get_matches_movie_hash(movies):
                                      'Man.of.Steel.German.720p.BluRay.x264-EXQUiSiTE', 2013, 'tt0770828', 0, 0,
                                      'Man.of.Steel.German.720p.BluRay.x264-EXQUiSiTE.srt', None)
     matches = subtitle.get_matches(movies['man_of_steel'])
-    assert matches == {'title', 'year', 'video_codec', 'imdb_id', 'hash', 'resolution', 'source'}
+    assert matches == {'title', 'year', 'country', 'video_codec', 'imdb_id', 'hash', 'resolution', 'source'}
 
 
 def test_get_matches_episode(episodes):
@@ -30,7 +32,7 @@ def test_get_matches_episode(episodes):
                                      ' Game.of.Thrones.S03E10.HDTV.XviD-AFG', 2013, 'tt2178796', 3, 10,
                                      'Game.of.Thrones.S03E10.HDTV.XviD-AFG.srt', None)
     matches = subtitle.get_matches(episodes['got_s03e10'])
-    assert matches == {'imdb_id', 'series', 'year', 'episode', 'season', 'title'}
+    assert matches == {'imdb_id', 'series', 'year', 'country', 'episode', 'season', 'title'}
 
 
 def test_get_matches_episode_year(episodes):
@@ -48,7 +50,8 @@ def test_get_matches_episode_filename(episodes):
                                      'HDTV.x264-KILLERS-mSD-AFG-EVO-KILLERS', 2014, 'tt4078580', 2, 6,
                                      'Marvels.Agents.of.S.H.I.E.L.D.S02E06.720p.HDTV.x264-KILLERS.srt', 'cp1252')
     matches = subtitle.get_matches(episodes['marvels_agents_of_shield_s02e06'])
-    assert matches == {'series', 'year', 'season', 'episode', 'release_group', 'source', 'resolution', 'video_codec'}
+    assert matches == {'series', 'year', 'country', 'season', 'episode', 'release_group', 'source', 'resolution',
+                       'video_codec'}
 
 
 def test_get_matches_episode_tag(episodes):
@@ -57,7 +60,7 @@ def test_get_matches_episode_tag(episodes):
                                      'HDTV.x264-KILLERS-mSD-AFG-EVO-KILLERS', 2014, 'tt4078580', 2, 6,
                                      '', 'cp1252')
     matches = subtitle.get_matches(episodes['marvels_agents_of_shield_s02e06'])
-    assert matches == {'series', 'year', 'season', 'episode', 'source', 'video_codec'}
+    assert matches == {'series', 'year', 'country', 'season', 'episode', 'source', 'video_codec'}
 
 
 def test_get_matches_imdb_id(movies):
@@ -65,7 +68,7 @@ def test_get_matches_imdb_id(movies):
                                      'man.of.steel.2013.720p.bluray.x264-felony', 2013, 'tt0770828', 0, 0,
                                      'man.of.steel.2013.720p.bluray.x264-felony.srt', None)
     matches = subtitle.get_matches(movies['man_of_steel'])
-    assert matches == {'title', 'year', 'video_codec', 'imdb_id', 'resolution', 'source', 'release_group'}
+    assert matches == {'title', 'year', 'country', 'video_codec', 'imdb_id', 'resolution', 'source', 'release_group'}
 
 
 def test_get_matches_no_match(episodes):
@@ -99,6 +102,22 @@ def test_login():
 @vcr.use_cassette
 def test_login_bad_password():
     provider = OpenSubtitlesProvider('python-subliminal', 'lanimilbus')
+    with pytest.raises(Unauthorized):
+        provider.initialize()
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_login_vip_login():
+    provider = OpenSubtitlesVipProvider('python-subliminal', 'subliminal')
+    with pytest.raises(Unauthorized):
+        provider.initialize()
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_login_vip_bad_password():
+    provider = OpenSubtitlesVipProvider('python-subliminal', 'lanimilbus')
     with pytest.raises(Unauthorized):
         provider.initialize()
 
@@ -275,4 +294,4 @@ def test_tag_match(episodes):
     assert len(subtitles) > 0
     assert unwanted_subtitle_id in {subtitle.id for subtitle in subtitles}
     # Assert is not a tag match: {'series', 'year', 'season', 'episode'}
-    assert matches == {'episode', 'year', 'season'}
+    assert matches == {'episode', 'year', 'country', 'season'}

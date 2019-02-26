@@ -28,20 +28,11 @@ def test_get_matches_movie_no_match(movies):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_get_show_ids_movie(movies):
+def test_get_show_links_movie(movies):
     video = movies['man_of_steel']
     with Subs4FreeProvider() as provider:
-        show_ids = provider.get_show_ids(video.title, video.year)
-    assert show_ids == ['movie-m712248b6cf.html']
-
-
-@pytest.mark.integration
-@vcr.use_cassette
-def test_get_show_ids_unicode(movies):
-    video = movies['café_society']
-    with Subs4FreeProvider() as provider:
-        show_ids = provider.get_show_ids(video.title, video.year)
-    assert show_ids == []
+        show_links = provider.get_show_links(video.title, video.year)
+    assert show_links == ['movie-m712248b6cf.html']
 
 
 @pytest.mark.integration
@@ -58,7 +49,7 @@ def test_query_movie(movies):
 @pytest.mark.integration
 @vcr.use_cassette
 def test_query_movie_no_results(movies):
-    video = movies['café_society']
+    video = movies['enders_game']
     with Subs4FreeProvider() as provider:
         subtitles = provider.query(None, video.title, video.year)
     assert len(subtitles) == 0
@@ -94,7 +85,7 @@ def test_list_subtitles_movie(movies):
 @pytest.mark.integration
 @vcr.use_cassette
 def test_list_subtitles_movie_no_results(movies):
-    video = movies['café_society']
+    video = movies['enders_game']
     languages = {Language.fromalpha2('el')}
     with Subs4FreeProvider() as provider:
         subtitles = provider.list_subtitles(video, languages)

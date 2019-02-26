@@ -9,12 +9,10 @@ from guessit import guessit
 from requests import Session
 
 from . import ParserBeautifulSoup, Provider
-from .. import __short_version__
 from ..cache import EPISODE_EXPIRATION_TIME, SHOW_EXPIRATION_TIME, region
 from ..exceptions import ProviderError
-from ..score import get_equivalent_release_groups
-from ..subtitle import Subtitle, fix_line_ending, guess_matches
-from ..utils import sanitize, sanitize_release_group
+from ..matches import guess_matches
+from ..subtitle import Subtitle, fix_line_ending
 from ..video import Episode
 
 logger = logging.getLogger(__name__)
@@ -43,32 +41,24 @@ class TVsubtitlesSubtitle(Subtitle):
     def id(self):
         return str(self.subtitle_id)
 
-    def get_matches(self, video):
-        matches = set()
+    @property
+    def info(self):
+        return self.release or self.rip
 
-        # series
-        if video.series and (sanitize(self.series) in (
-                sanitize(name) for name in [video.series] + video.alternative_series)):
-            matches.add('series')
-        # season
-        if video.season and self.season == video.season:
-            matches.add('season')
-        # episode
-        if video.episode and self.episode == video.episode:
-            matches.add('episode')
-        # year
-        if video.original_series and self.year is None or video.year and video.year == self.year:
-            matches.add('year')
-        # release_group
-        if (video.release_group and self.release and
-                any(r in sanitize_release_group(self.release)
-                    for r in get_equivalent_release_groups(sanitize_release_group(video.release_group)))):
-            matches.add('release_group')
+    def get_matches(self, video):
+        matches = guess_matches(video, {
+            'title': self.series,
+            'season': self.season,
+            'episode': self.episode,
+            'year': self.year,
+            'release_group': self.release
+        })
+
         # other properties
         if self.release:
             matches |= guess_matches(video, guessit(self.release, {'type': 'episode'}), partial=True)
         if self.rip:
-            matches |= guess_matches(video, guessit(self.rip), partial=True)
+            matches |= guess_matches(video, guessit(self.rip, {'type': 'episode'}), partial=True)
 
         return matches
 
@@ -88,7 +78,7 @@ class TVsubtitlesProvider(Provider):
 
     def initialize(self):
         self.session = Session()
-        self.session.headers['User-Agent'] = 'Subliminal/%s' % __short_version__
+        self.session.headers['User-Agent'] = self.user_agent
 
     def terminate(self):
         self.session.close()

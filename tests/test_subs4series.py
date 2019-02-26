@@ -16,14 +16,14 @@ def test_get_matches_episode(episodes):
     subtitle = Subs4SeriesSubtitle(Language.fromalpha2('el'), '', 'The Big Bang Theory', 2007,
                                    'The Big Bang Theory-07x05-The Workplace Proximity DIMENSION 720p.HDTV', '')
     matches = subtitle.get_matches(episodes['bbt_s07e05'])
-    assert matches == {'series', 'season', 'episode', 'release_group', 'resolution', 'source', 'year'}
+    assert matches == {'series', 'season', 'episode', 'release_group', 'resolution', 'source', 'year', 'country'}
 
 
 def test_get_matches_episode_no_match(episodes):
     subtitle = Subs4SeriesSubtitle(Language.fromalpha2('el'), '', 'The Big Bang Theory', 2007,
                                    'The Big Bang Theory-07x05-The Workplace Proximity DIMENSION 720p.HDTV', '')
     matches = subtitle.get_matches(episodes['got_s03e10'])
-    assert matches == {'resolution'}
+    assert matches == {'resolution', 'country'}
 
 
 @pytest.mark.integration

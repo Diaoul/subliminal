@@ -14,9 +14,9 @@ from requests import Session
 from . import ParserBeautifulSoup, Provider
 from .. import __short_version__
 from ..cache import SHOW_EXPIRATION_TIME, region
-from ..score import get_equivalent_release_groups
-from ..subtitle import SUBTITLE_EXTENSIONS, Subtitle, fix_line_ending, guess_matches
-from ..utils import sanitize, sanitize_release_group
+from ..matches import guess_matches
+from ..subtitle import SUBTITLE_EXTENSIONS, Subtitle, fix_line_ending
+from ..utils import sanitize
 from ..video import Episode
 
 logger = logging.getLogger(__name__)
@@ -41,24 +41,17 @@ class Subs4SeriesSubtitle(Subtitle):
     def id(self):
         return self.download_link
 
+    @property
+    def info(self):
+        return self.version or self.download_link
+
     def get_matches(self, video):
-        matches = set()
+        matches = guess_matches(video, {
+            'title': self.series,
+            'year': self.year,
+            'release_group': self.version
+        })
 
-        # episode
-        if isinstance(video, Episode):
-            # series name
-            if video.series and sanitize(self.series) in (
-                    sanitize(name) for name in [video.series] + video.alternative_series):
-                matches.add('series')
-            # year
-            if video.original_series and self.year is None or video.year and video.year == self.year:
-                matches.add('year')
-
-        # release_group
-        if (video.release_group and self.version and
-                any(r in sanitize_release_group(self.version)
-                    for r in get_equivalent_release_groups(sanitize_release_group(video.release_group)))):
-            matches.add('release_group')
         # other properties
         matches |= guess_matches(video, guessit(self.version, {'type': 'episode'}), partial=True)
 

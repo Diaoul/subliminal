@@ -1,0 +1,82 @@
+interactions:
+- request:
+    body: !!python/unicode '<?xml version=''1.0''?>
+
+      <methodCall>
+
+      <methodName>LogIn</methodName>
+
+      <params>
+
+      <param>
+
+      <value><string>python-subliminal</string></value>
+
+      </param>
+
+      <param>
+
+      <value><string>subliminal</string></value>
+
+      </param>
+
+      <param>
+
+      <value><string>eng</string></value>
+
+      </param>
+
+      <param>
+
+      <value><string>subliminal v2.1</string></value>
+
+      </param>
+
+      </params>
+
+      </methodCall>
+
+      '
+    headers:
+      Accept-Encoding: [gzip]
+      Content-Length: ['344']
+      Content-Type: [text/xml]
+      User-Agent: [xmlrpclib.py/1.0.1 (by www.pythonware.com)]
+    method: POST
+    uri: https://vip-api.opensubtitles.org/xml-rpc
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA42QyQrCMBRFf6V0bU2LFhRiRPALHHDYpclTi82LZCji11slFa0uXL3pvsPl0ulV
+        VVENxpYaJ3HWT+MIUGhZ4nESe3dIRvGUUQXupOUC7EWjBUYv3HBlQ2W05pVvttYZL9xDrQowjCJX
+        wJw+A1Ly7N+EDZ/NpcyT7Wooq32C+W5uNj2RzcR4uR5QEjSUhB/SUj/o1nHn7W/8MM2iNXLfWDfl
+        DeTfTBAaZRcqtS8qYGk/zRp3YfomkTaE1yVkRNrMSCfMO7e3JkeDAQAA
+    headers:
+      accept-ranges: [bytes]
+      access-control-allow-headers: ['Origin,X-Requested-With,Content-Type,Accept,DNT,Keep-Alive,User-Agent,If-Modified-Since,Cache-Control']
+      access-control-allow-methods: ['GET, POST, OPTIONS']
+      access-control-allow-origin: ['*']
+      age: ['0']
+      cf-ray: [4ae2119caddb3eaa-ZRH]
+      connection: [keep-alive]
+      content-encoding: [gzip]
+      content-length: ['213']
+      content-type: [text/xml;charset=UTF-8]
+      date: ['Sun, 24 Feb 2019 12:52:20 GMT']
+      expect-ct: ['max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"']
+      server: [cloudflare]
+      set-cookie: ['__cfduid=da5e0dea44f1740bccab1c0a8457a5b7a1551012740; expires=Mon,
+          24-Feb-20 12:52:20 GMT; path=/; domain=.opensubtitles.org; HttpOnly', 'weblang=en;
+          expires=Mon, 24-Feb-2020 12:52:20 GMT; Max-Age=31536000; path=/; domain=.opensubtitles.org',
+        'PHPSESSID=Ddd5-XT4dlZ-n5YDrW%2Cc1Ac9SU3; expires=Sun, 24-Feb-2019 18:52:20
+          GMT; Max-Age=21600; path=/; domain=.opensubtitles.org; HttpOnly']
+      vary: [Accept-Encoding]
+      x-cache: [MISS]
+      x-cache-backend: [web5]
+      x-compressed-content-length: ['213']
+      x-content-encoding: [gzip]
+      x-ratelimit-remaining: ['39']
+      x-uncompressed-content-length: ['387']
+      x-via: [fw2.int.opensubtitles.org]
+    status: {code: 200, message: OK}
+version: 1

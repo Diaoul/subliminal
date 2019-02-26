@@ -4,6 +4,7 @@ import logging
 from bs4 import BeautifulSoup, FeatureNotFound
 from six.moves.xmlrpc_client import SafeTransport
 
+from .. import __short_version__
 from ..video import Episode, Movie
 
 logger = logging.getLogger(__name__)
@@ -71,6 +72,9 @@ class Provider(object):
     #: Subtitle class to use
     subtitle_class = None
 
+    #: User Agent to use
+    user_agent = 'Subliminal/%s' % __short_version__
+
     def __enter__(self):
         self.initialize()
         return self
@@ -114,12 +118,40 @@ class Provider(object):
         :rtype: bool
 
         """
-        if not isinstance(video, cls.video_types):
+        if not cls.check_types(video):
             return False
         if cls.required_hash is not None and cls.required_hash not in video.hashes:
             return False
 
         return True
+
+    @classmethod
+    def check_types(cls, video):
+        """Check if the `video` type is supported by the provider.
+
+        The `video` is considered invalid if not an instance of :attr:`video_types`.
+
+        :param video: the video to check.
+        :type video: :class:`~subliminal.video.Video`
+        :return: `True` if the `video` is valid, `False` otherwise.
+        :rtype: bool
+
+        """
+        return isinstance(video, cls.video_types)
+
+    @classmethod
+    def check_languages(cls, languages):
+        """Check if the `languages` are supported by the provider.
+
+        A subset of the supported languages is returned.
+
+        :param languages: the languages to check.
+        :type languages: set of :class:`~babelfish.language.Language`
+        :return: subset of the supported languages.
+        :rtype: set of :class:`~babelfish.language.Language`
+
+        """
+        return cls.languages & languages
 
     def query(self, *args, **kwargs):
         """Query the provider for subtitles.

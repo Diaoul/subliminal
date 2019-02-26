@@ -79,7 +79,7 @@ def test_get_matches(episodes):
                                   archive, 'TBBT S07 x264/The.Big.Bang.Theory.S07E05.HDTV.x264-LOL.srt')
 
     matches = subtitle.get_matches(episodes['bbt_s07e05'])
-    assert matches == {'series', 'year', 'season', 'episode', 'release_group', 'source', 'video_codec',
+    assert matches == {'series', 'year', 'country', 'season', 'episode', 'release_group', 'source', 'video_codec',
                        'series_imdb_id'}
 
 

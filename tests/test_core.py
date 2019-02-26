@@ -245,7 +245,6 @@ def test_refine_video_metadata(mkv):
     assert scanned_video.audio_codec == 'AAC'
     assert scanned_video.imdb_id is None
     assert scanned_video.hashes == {
-        'napiprojekt': 'de2e9caa58dd53a6ab9d241e6b252e35',
         'opensubtitles': '49e2530ea3bd0d18',
         'shooter': '36f3e2c50566ca01f939bf15d8031432;b6132ab62b8f7d4aaabe9d6344b90d90;'
                    'bea6074cef7f1de85794f3941530ba8b;18db05758d5d0d96f246249e4e4b5d79',

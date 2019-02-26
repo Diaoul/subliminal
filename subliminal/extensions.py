@@ -89,17 +89,26 @@ class RegistrableExtensionManager(ExtensionManager):
 #: Provider manager
 provider_manager = RegistrableExtensionManager('subliminal.providers', [
     'addic7ed = subliminal.providers.addic7ed:Addic7edProvider',
+    'argenteam = subliminal.providers.argenteam:ArgenteamProvider',
     'greeksubtitles = subliminal.providers.greeksubtitles:GreekSubtitlesProvider',
     'legendastv = subliminal.providers.legendastv:LegendasTVProvider',
     'opensubtitles = subliminal.providers.opensubtitles:OpenSubtitlesProvider',
+    'opensubtitlesvip = subliminal.providers.opensubtitles:OpenSubtitlesVipProvider',
     'podnapisi = subliminal.providers.podnapisi:PodnapisiProvider',
     'shooter = subliminal.providers.shooter:ShooterProvider',
     'thesubdb = subliminal.providers.thesubdb:TheSubDBProvider',
     'tvsubtitles = subliminal.providers.tvsubtitles:TVsubtitlesProvider'
 ])
 
+#: Disabled providers
+disabled_providers = ['opensubtitlesvip']
+
+#: Default enabled providers
+default_providers = [p for p in provider_manager.names() if p not in disabled_providers]
+
 #: Refiner manager
 refiner_manager = RegistrableExtensionManager('subliminal.refiners', [
+    'hash = subliminal.refiners.hash:refine',
     'metadata = subliminal.refiners.metadata:refine',
     'omdb = subliminal.refiners.omdb:refine',
     'tvdb = subliminal.refiners.tvdb:refine'

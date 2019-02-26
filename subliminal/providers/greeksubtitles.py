@@ -10,8 +10,9 @@ from guessit import guessit
 from requests import Session
 
 from subliminal import __short_version__
+from ..matches import guess_matches
 from ..providers import ParserBeautifulSoup, Provider
-from ..subtitle import SUBTITLE_EXTENSIONS, Subtitle, fix_line_ending, guess_matches
+from ..subtitle import SUBTITLE_EXTENSIONS, Subtitle, fix_line_ending
 from ..video import Episode, Movie
 
 logger = logging.getLogger(__name__)
@@ -31,6 +32,10 @@ class GreekSubtitlesSubtitle(Subtitle):
     @property
     def id(self):
         return self.download_link
+
+    @property
+    def info(self):
+        return self.version or self.download_link
 
     def get_matches(self, video):
         matches = set()

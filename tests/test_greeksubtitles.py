@@ -23,7 +23,7 @@ def test_get_matches_movie(movies):
     subtitle = GreekSubtitlesSubtitle(Language.fromalpha2('el'), '',
                                       'Man Of Steel 2013 720p BluRay x264 Felony', '')
     matches = subtitle.get_matches(movies['man_of_steel'])
-    assert matches == {'release_group', 'title', 'resolution', 'source', 'video_codec', 'year'}
+    assert matches == {'release_group', 'title', 'resolution', 'source', 'video_codec', 'year', 'country'}
 
 
 def test_get_matches_episode_no_match(episodes):
@@ -37,7 +37,7 @@ def test_get_matches_movie_no_match(movies):
     subtitle = GreekSubtitlesSubtitle(Language.fromalpha2('el'), '',
                                       'Man Of Steel 2013 720p BluRay x264 Felony', '')
     matches = subtitle.get_matches(movies['interstellar'])
-    assert matches == {'source', 'video_codec'}
+    assert matches == {'source', 'video_codec', 'country'}
 
 
 @pytest.mark.integration

@@ -25,6 +25,10 @@ class TheSubDBSubtitle(Subtitle):
     def id(self):
         return self.hash + '-' + str(self.language)
 
+    @property
+    def info(self):
+        return self.hash
+
     def get_matches(self, video):
         matches = set()
 
@@ -41,14 +45,14 @@ class TheSubDBProvider(Provider):
     required_hash = 'thesubdb'
     server_url = 'http://api.thesubdb.com/'
     subtitle_class = TheSubDBSubtitle
+    user_agent = 'SubDB/1.0 (subliminal/%s; https://github.com/Diaoul/subliminal)' % __short_version__
 
     def __init__(self):
         self.session = None
 
     def initialize(self):
         self.session = Session()
-        self.session.headers['User-Agent'] = ('SubDB/1.0 (subliminal/%s; https://github.com/Diaoul/subliminal)' %
-                                              __short_version__)
+        self.session.headers['User-Agent'] = self.user_agent
 
     def terminate(self):
         self.session.close()

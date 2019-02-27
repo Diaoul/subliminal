@@ -1,0 +1,39 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Cookie: [__cfduid=d87e6df7c3be383e7e771d6fcc7089c191550528643]
+      User-Agent: [Subliminal/2.1]
+    method: GET
+    uri: http://www.omdbapi.com/?apikey=00000000&r=json&v=1&s=Shameless&type=series&page=1
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA63RQWrbQBgF4KuEf61aIzlyUq1iIzkY8su1PbYllRKm8mDNSGO5mgnOKARyh9ww
+        JynKIhAM7SbLt3jwPt4TrDhrixLCn09Ahak5hLAqmeI11xocyDhrIQSfeN7byys4INTu9yyCEIzx
+        guvR6JqAA9Qe+6LmreB960ejDe97pTFHHbquGii+E+wbU6xrDoOiUa5QbM+1iy5ugglKDLAbdwld
+        2Hmf62DCDpNDWk1NTvenRGYEZWETiTeD+413v0qHhAzkcQ/Pzn+Wk8u3l1efeMPP68nw6soffcn6
+        XM06lONTtl2bpKsFWkJQLcgdrUhOZwa7iUA67jJ/KpEmIq1im1bTP8Xtji/SjU3o2M6j6jRf3PxL
+        R0t+8SG8oGXL+Senf/YQuSTfg+BLjImflKjWQSZnBqNa5CtCMCrs3Ta2Cd0b7JZVfrv2cRsHvfXM
+        KOPHeRR7GBVnxl8OmMawesn1Q200hNB/teT62Bz0u7x94PD8F7I407WtAgAA
+    headers:
+      access-control-allow-origin: ['*']
+      cache-control: ['public, max-age=86400']
+      cf-cache-status: [HIT]
+      cf-ray: [4ad399daed6bcc48-ZRH]
+      connection: [keep-alive]
+      content-encoding: [gzip]
+      content-type: [application/json; charset=utf-8]
+      date: ['Fri, 22 Feb 2019 18:43:54 GMT']
+      expires: ['Sat, 23 Feb 2019 18:43:54 GMT']
+      last-modified: ['Fri, 22 Feb 2019 05:25:03 GMT']
+      server: [cloudflare]
+      transfer-encoding: [chunked]
+      vary: ['*, Accept-Encoding']
+      x-aspnet-version: [4.0.30319]
+      x-powered-by: [ASP.NET]
+    status: {code: 200, message: OK}
+version: 1

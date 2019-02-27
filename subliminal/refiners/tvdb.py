@@ -4,6 +4,8 @@ from functools import wraps
 import logging
 import re
 
+from babelfish import Country
+import guessit
 import requests
 
 from .. import __short_version__
@@ -190,8 +192,14 @@ class TVDBClient(object):
         return r.json()['data']
 
 
+#: User-Agent to use
+user_agent = 'Subliminal/%s' % __short_version__
+
 #: Configured instance of :class:`TVDBClient`
-tvdb_client = TVDBClient('5EC930FB90DA1ADA', headers={'User-Agent': 'Subliminal/%s' % __short_version__})
+tvdb_client = TVDBClient('5EC930FB90DA1ADA', headers={'User-Agent': user_agent})
+
+#: Configure guessit in order to use GuessitCountryConverter
+guessit.api.configure()
 
 
 @region.cache_on_arguments(expiration_time=REFINER_EXPIRATION_TIME)
@@ -294,21 +302,33 @@ def refine(video, **kwargs):
 
         # iterate over series names
         for series_name in series_names:
-            # parse as series and year
+            # parse as series, year and country
             series, year, country = series_re.match(series_name).groups()
             if year:
                 year = int(year)
+
+            if country:
+                country = Country.fromguessit(country)
 
             # discard mismatches on year
             if year and (video.original_series or video.year != year):
                 logger.debug('Discarding series name %r mismatch on year %d', series, year)
                 continue
 
+            # discard mismatches on country
+            if video.country and video.country != country:
+                logger.debug('Discarding series name %r mismatch on country %r', series, country)
+                continue
+
             # match on sanitized series name
             if sanitize(series) == sanitize(video.series):
                 logger.debug('Found exact match on series %r', series_name)
-                matching_result['match'] = {'series': original_match['series'], 'year': series_year,
-                                            'original_series': original_match['year'] is None}
+                matching_result['match'] = {
+                    'series': original_match['series'],
+                    'year': series_year or year,
+                    'country': country,
+                    'original_series': original_match['year'] is None and country is None
+                }
                 break
 
         # add the result on match
@@ -333,6 +353,7 @@ def refine(video, **kwargs):
     video.series = matching_result['match']['series']
     video.alternative_series.extend(series['aliases'])
     video.year = matching_result['match']['year']
+    video.country = matching_result['match']['country']
     video.original_series = matching_result['match']['original_series']
     video.series_tvdb_id = series['id']
     video.series_imdb_id = series['imdbId'] or None

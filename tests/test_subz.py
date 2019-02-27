@@ -17,28 +17,29 @@ def test_get_matches_episode(episodes):
     subtitle = SubzSubtitle(Language.fromalpha2('el'), '', 'The Big Bang Theory', 7, 5, 'The Workplace Proximity', None,
                             'The Big Bang Theory-07x05-The Workplace Proximity DIMENSION 720p.HDTV', '')
     matches = subtitle.get_matches(episodes['bbt_s07e05'])
-    assert matches == {'series', 'season', 'episode', 'release_group', 'title', 'resolution', 'source', 'year'}
+    assert matches == {'series', 'season', 'episode', 'release_group', 'resolution', 'source', 'year', 'country',
+                       'title'}
 
 
 def test_get_matches_episode_no_match(episodes):
     subtitle = SubzSubtitle(Language.fromalpha2('el'), '', 'The Big Bang Theory', 7, 5, 'The Workplace Proximity', None,
                             'The Big Bang Theory-07x05-The Workplace Proximity DIMENSION 720p.HDTV', '')
     matches = subtitle.get_matches(episodes['got_s03e10'])
-    assert matches == {'resolution', 'year'}
+    assert matches == {'resolution', 'year', 'country'}
 
 
 def test_get_matches_movie(movies):
     subtitle = SubzSubtitle(Language.fromalpha2('el'), '', None, None, None, 'Man of Steel', 2013,
                             'man-of-steel-2013-720p-bluray-x264-felony', '')
     matches = subtitle.get_matches(movies['man_of_steel'])
-    assert matches == {'release_group', 'title', 'resolution', 'source', 'year', 'video_codec'}
+    assert matches == {'release_group', 'title', 'resolution', 'source', 'year', 'video_codec', 'country'}
 
 
 def test_get_matches_movie_no_match(movies):
     subtitle = SubzSubtitle(Language.fromalpha2('el'), '', None, None, None, 'Man of Steel', 2013,
                             'man-of-steel-2013-720p-bluray-x264-felony', '')
     matches = subtitle.get_matches(movies['enders_game'])
-    assert matches == {'resolution', 'year', 'video_codec', 'source'}
+    assert matches == {'resolution', 'year', 'video_codec', 'source', 'country'}
 
 
 @pytest.mark.integration

@@ -15,9 +15,9 @@ from requests import Session
 from . import ParserBeautifulSoup, Provider
 from .. import __short_version__
 from ..cache import SHOW_EXPIRATION_TIME, region
-from ..score import get_equivalent_release_groups
-from ..subtitle import SUBTITLE_EXTENSIONS, Subtitle, fix_line_ending, guess_matches
-from ..utils import sanitize, sanitize_release_group
+from ..matches import guess_matches
+from ..subtitle import SUBTITLE_EXTENSIONS, Subtitle, fix_line_ending
+from ..utils import sanitize
 from ..video import Episode, Movie
 
 logger = logging.getLogger(__name__)
@@ -45,46 +45,39 @@ class SubzSubtitle(Subtitle):
     def id(self):
         return self.download_link
 
+    @property
+    def info(self):
+        return self.version or self.download_link
+
     def get_matches(self, video):
         matches = set()
         video_type = None
 
+        guess = {
+            'year': self.year,
+            'release_group': self.version
+        }
+
         # episode
         if isinstance(video, Episode):
             video_type = 'episode'
-            # series name
-            if video.series and sanitize(self.series) in (
-                    sanitize(name) for name in [video.series] + video.alternative_series):
-                matches.add('series')
-            # season
-            if video.season and self.season == video.season:
-                matches.add('season')
-            # episode
-            if video.episode and self.episode == video.episode:
-                matches.add('episode')
-            # title of the episode
-            if video.title and sanitize(self.title) == sanitize(video.title):
-                matches.add('title')
-            # year
-            if video.original_series and self.year is None or video.year and video.year == self.year:
-                matches.add('year')
+
+            guess.update({
+                'title': self.series,
+                'season': self.season,
+                'episode': self.episode,
+                'episode_title': self.title
+            })
         # movie
         elif isinstance(video, Movie):
             video_type = 'movie'
-            # title
-            if video.title and (sanitize(self.title) in (
-                    sanitize(name) for name in [video.title] + video.alternative_titles)):
-                matches.add('title')
-            # year
-            if video.year and self.year == video.year:
-                matches.add('year')
 
-        # release_group
-        if (video.release_group and self.version and
-                any(r in sanitize_release_group(self.version)
-                    for r in get_equivalent_release_groups(sanitize_release_group(video.release_group)))):
-            matches.add('release_group')
+            guess.update({
+                'title': self.title
+            })
+
         # other properties
+        matches |= guess_matches(video, guess)
         matches |= guess_matches(video, guessit(self.version, {'type': video_type}), partial=True)
 
         return matches

@@ -5,7 +5,6 @@ from babelfish import Language
 from requests import Session
 
 from . import Provider
-from .. import __short_version__
 from ..subtitle import Subtitle
 
 logger = logging.getLogger(__name__)
@@ -48,6 +47,10 @@ class NapiProjektSubtitle(Subtitle):
     def id(self):
         return self.hash
 
+    @property
+    def info(self):
+        return self.hash
+
     def get_matches(self, video):
         matches = set()
 
@@ -70,7 +73,7 @@ class NapiProjektProvider(Provider):
 
     def initialize(self):
         self.session = Session()
-        self.session.headers['User-Agent'] = 'Subliminal/%s' % __short_version__
+        self.session.headers['User-Agent'] = self.user_agent
 
     def terminate(self):
         self.session.close()

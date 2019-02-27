@@ -6,6 +6,8 @@ from zipfile import ZipFile
 
 import pytest
 import requests
+from babelfish import Country
+
 try:
     from unittest.mock import Mock
 except ImportError:
@@ -39,7 +41,14 @@ def movies():
             Movie(u'Café Society.1080p.avc1.RARBG.mp4', u'Café Society', year=2016),
             'interstellar':
             Movie('Interstellar.2014.2014.1080p.BluRay.x264.YIFY.rar', 'Interstellar',
-                  source='Blu-ray', release_group='YIFY', resolution='1080p', video_codec='H.264', year=2014)}
+                  source='Blu-ray', release_group='YIFY', resolution='1080p', video_codec='H.264', year=2014),
+            'jack_reacher_never_go_back':
+            Movie(os.path.join('Jack Reacher- Never Go Back (2016)',
+                               'Jack.Reacher.Never.Go.Back.2016.1080p.WEBDL.AC3.x264-FGT.mkv'),
+                  'Jack Reacher: Never Go Back',
+                  source='Web', release_group='FGT', resolution='1080p', video_codec='H.264',
+                  audio_codec='Dolby Digital', imdb_id='tt3393786', year=2016)
+            }
 
 
 @pytest.fixture
@@ -131,7 +140,25 @@ def episodes():
                     alternative_series=['The end of the f***ing world']),
             'Marvels.Agents.of.S.H.I.E.L.D.S05E01-E02':
             Episode('Marvels.Agents.of.S.H.I.E.L.D.S05E01-E02.720p.HDTV.x264-AVS', 'Marvels.Agents.of.S.H.I.E.L.D', 5,
-                    1, resolution='720p', source='HDTV', video_codec='H.264', release_group='AVS')}
+                    1, resolution='720p', source='HDTV', video_codec='H.264', release_group='AVS'),
+            'alex_inc_s01e04':
+            Episode('Alex.Inc.S01E04.HDTV.x264-SVA.mkv', 'Alex, Inc.', 1, 4, source='HDTV', video_codec='H.264',
+                    release_group='SVA', year=2018, title='The Nanny', series_imdb_id='tt6466948', tvdb_id=6627151,
+                    series_tvdb_id=328635),
+            'shameless_us_s08e01':
+            Episode('Shameless.US.s08e01.web.h264-convoy', 'Shameless', 8, 1, source='Web', video_codec='H.264',
+                    country=Country('US'), original_series=False, release_group='convoy', year=2011,
+                    alternative_series=['Shameless US'], title='We Become What We... Frank!',
+                    series_imdb_id='tt1586680', series_tvdb_id=161511, imdb_id='tt6347410', tvdb_id=6227949),
+            'house_of_cards_us_s06e01':
+            Episode('house.of.cards.us.s06e01.720p.web-dl.x264', 'House of Cards', 6, 1, source='Web',
+                    video_codec='H.264', country=Country('US'), year=2013, original_series=False,
+                    alternative_series=['House of Cards (2013)'], title='Chapter 66', series_imdb_id='tt1856010',
+                    series_tvdb_id=262980, imdb_id='tt7538918', tvdb_id=6553109),
+            'walking_dead_s08e07':
+            Episode('The Walking Dead - 08x07 - Time for After.AMZN.WEB-DL-CasStudio.mkv', 'The Walking Dead',
+                    8, 7, source='Web', streaming_service='Amazon Prime', release_group='CasStudio')
+            }
 
 
 @pytest.fixture(scope='session')

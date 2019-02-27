@@ -280,6 +280,7 @@ def subliminal(ctx, addic7ed, legendastv, opensubtitles, xsubs, omdb, cache_dir,
         ctx.obj['provider_configs']['legendastv'] = {'username': legendastv[0], 'password': legendastv[1]}
     if opensubtitles:
         ctx.obj['provider_configs']['opensubtitles'] = {'username': opensubtitles[0], 'password': opensubtitles[1]}
+        ctx.obj['provider_configs']['opensubtitlesvip'] = {'username': opensubtitles[0], 'password': opensubtitles[1]}
     if xsubs:
         ctx.obj['provider_configs']['xsubs'] = {'username': xsubs[0], 'password': xsubs[1]}
 
@@ -355,9 +356,12 @@ def download(obj, provider, refiner, language, age, directory, encoding, single,
                     continue
                 if not force:
                     video.subtitle_languages |= set(search_external_subtitles(video.name, directory=directory).values())
-                refine(video, episode_refiners=refiner, movie_refiners=refiner, refiner_configs=obj['refiner_configs'],
-                       embedded_subtitles=not force)
-                videos.append(video)
+
+                if check_video(video, languages=language, age=age, undefined=single):
+                    refine(video, episode_refiners=refiner, movie_refiners=refiner,
+                           refiner_configs=obj['refiner_configs'],
+                           embedded_subtitles=not force, providers=provider, languages=language)
+                    videos.append(video)
                 continue
 
             # directories
@@ -374,7 +378,8 @@ def download(obj, provider, refiner, language, age, directory, encoding, single,
                                                                                   directory=directory).values())
                     if check_video(video, languages=language, age=age, undefined=single):
                         refine(video, episode_refiners=refiner, movie_refiners=refiner,
-                               refiner_configs=obj['refiner_configs'], embedded_subtitles=not force)
+                               refiner_configs=obj['refiner_configs'], embedded_subtitles=not force,
+                               providers=provider, languages=language)
                         videos.append(video)
                     else:
                         ignored_videos.append(video)
@@ -391,7 +396,8 @@ def download(obj, provider, refiner, language, age, directory, encoding, single,
                 video.subtitle_languages |= set(search_external_subtitles(video.name, directory=directory).values())
             if check_video(video, languages=language, age=age, undefined=single):
                 refine(video, episode_refiners=refiner, movie_refiners=refiner,
-                       refiner_configs=obj['refiner_configs'], embedded_subtitles=not force)
+                       refiner_configs=obj['refiner_configs'], embedded_subtitles=not force,
+                       providers=provider, languages=language)
                 videos.append(video)
             else:
                 ignored_videos.append(video)

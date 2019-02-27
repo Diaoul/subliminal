@@ -17,14 +17,15 @@ def test_get_matches_episode(episodes):
     subtitle = XSubsSubtitle(Language.fromalpha2('el'), '', 'The Big Bang Theory', 7, 5, 2007,
                              'The Workplace Proximity', '720p.HDTV DIMENSION', '')
     matches = subtitle.get_matches(episodes['bbt_s07e05'])
-    assert matches == {'series', 'season', 'episode', 'year', 'release_group', 'title', 'resolution', 'source'}
+    assert matches == {'series', 'season', 'episode', 'year', 'release_group', 'title', 'resolution', 'source',
+                       'country'}
 
 
 def test_get_matches_episode_no_match(episodes):
     subtitle = XSubsSubtitle(Language.fromalpha2('el'), '', 'The Big Bang Theory', 7, 5, 2007,
                              'The Workplace Proximity', '720p.HDTV DIMENSION', '')
     matches = subtitle.get_matches(episodes['got_s03e10'])
-    assert matches == {'resolution'}
+    assert matches == {'resolution', 'country'}
 
 
 def test_configuration_error_no_username():

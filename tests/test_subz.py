@@ -43,29 +43,20 @@ def test_get_matches_movie_no_match(movies):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_get_show_ids_episode(episodes):
+def test_get_show_links_episode(episodes):
     video = episodes['bbt_s07e05']
     with SubzProvider() as provider:
-        show_ids = provider.get_show_ids(video.series, video.year, isinstance(video, Episode))
-    assert show_ids == ['25376-the-big-bang-theory']
+        show_links = provider.get_show_links(video.series, video.year, isinstance(video, Episode))
+    assert show_links == ['25376-the-big-bang-theory']
 
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_get_show_ids_movie(movies):
+def test_get_show_links_movie(movies):
     video = movies['man_of_steel']
     with SubzProvider() as provider:
-        show_ids = provider.get_show_ids(video.title, video.year, isinstance(video, Episode))
-    assert show_ids == ['20376-man-of-steel', '1661939-man-of-steel']
-
-
-@pytest.mark.integration
-@vcr.use_cassette
-def test_get_show_ids_unicode(movies):
-    video = movies['café_society']
-    with SubzProvider() as provider:
-        show_ids = provider.get_show_ids(video.title, video.year, isinstance(video, Episode))
-    assert show_ids == ['73644-cafe-society']
+        show_links = provider.get_show_links(video.title, video.year, isinstance(video, Episode))
+    assert show_links == ['20376-man-of-steel', '1661939-man-of-steel']
 
 
 @pytest.mark.integration

@@ -147,7 +147,7 @@ class XSubsProvider(Provider):
 
         return show_ids
 
-    def get_show_id(self, series_names, year=None, country_code=None):
+    def get_show_id(self, series_names, year=None):
         series_sanitized_names = []
         for name in series_names:
             sanitized_name = sanitize(name)
@@ -160,14 +160,8 @@ class XSubsProvider(Provider):
         show_id = None
 
         for series_sanitized in series_sanitized_names:
-            # attempt with country
-            if not show_id and country_code:
-                logger.debug('Getting show id with country')
-                show_id = show_ids.get('{series} {country}'.format(series=series_sanitized,
-                                                                   country=country_code.lower()))
-
             # attempt with year
-            if not show_id and year:
+            if year:
                 logger.debug('Getting show id with year')
                 show_id = show_ids.get('{series} {year:d}'.format(series=series_sanitized, year=year))
 
@@ -245,15 +239,15 @@ class XSubsProvider(Provider):
             season_num = int(sgt['ssnnum'])
 
             # filter out unreleased subtitles
-            for subtitle in episode.findAll('sr'):
-                if subtitle['published_on'] == '':
+            for subs_tag in episode.findAll('sr'):
+                if subs_tag['published_on'] == '':
                     continue
 
                 page_link = self.server_url + self.page_link.format(show_id=show_id, season_id=season_id,
                                                                     season=season_num)
                 episode_title = etitle['title']
-                version = subtitle.fmt.text + ' ' + subtitle.team.text
-                download_link = self.server_url + self.download_link.format(int(subtitle['rlsid']))
+                version = subs_tag.fmt.text + ' ' + subs_tag.team.text
+                download_link = self.server_url + self.download_link.format(int(subs_tag['rlsid']))
 
                 subtitle = self.subtitle_class(Language.fromalpha2('el'), page_link, series_title, season_num,
                                                episode_num, year, episode_title, version, download_link)

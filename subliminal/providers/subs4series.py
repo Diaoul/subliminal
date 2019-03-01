@@ -123,7 +123,7 @@ class Subs4SeriesProvider(Provider):
             logger.debug('No data returned from provider')
             return []
 
-        soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
+        soup = ParserBeautifulSoup(r.content, ['html.parser'])
         series = [{'link': l.attrs['value'], 'title': l.text}
                   for l in soup.select('select[name="Mov_sel"] > option[value]')]
         logger.debug('Found suggestions: %r', series)

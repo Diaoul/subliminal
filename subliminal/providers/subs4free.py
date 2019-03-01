@@ -190,7 +190,7 @@ class Subs4FreeProvider(Provider):
             for show_link in show_links:
                 subtitles += [s for s in self.query(show_link, video.title, video.year) if s.language in languages]
         else:
-            subtitles += [s for s in self.query(None, video.title, video.year) if s.language in languages]
+            subtitles += [s for s in self.query(None, sanitize(video.title), video.year) if s.language in languages]
 
         return subtitles
 

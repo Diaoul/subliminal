@@ -453,7 +453,7 @@ def download(obj, provider, refiner, language, age, directory, encoding, single,
                     language=s.language.name if s.language.country is None else '%s (%s)' % (s.language.name,
                                                                                              s.language.country.name),
                     provider_name=s.provider_name,
-                    matches=', '.join(sorted(matches, key=scores.get, reverse=True))
+                    matches=', '.join(sorted(matches, key=lambda m: scores.get(m, 0), reverse=True))
                 ))
 
     if verbose == 0:

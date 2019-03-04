@@ -181,7 +181,6 @@ class SubzProvider(Provider):
         year = None
         if not is_episode:
             year = int(soup.select_one('span.year').text)
-        show_title = str(soup.select_one('#summary-wrapper > div.summary h1').contents[0]).strip()
 
         subtitles = []
         # loop over episode rows
@@ -193,21 +192,23 @@ class SubzProvider(Provider):
             # read the episode info
             if is_episode:
                 episode_numbers = soup.select_one('#summary-wrapper > div.container.summary span.main-title-sxe').text
-                season_num = None
-                episode_num = None
+                season = None
+                episode = None
                 matches = episode_re.match(episode_numbers.strip())
                 if matches:
-                    season_num = int(matches.group(1))
-                    episode_num = int(matches.group(2))
+                    season = int(matches.group(1))
+                    episode = int(matches.group(2))
 
-                episode_title = soup.select_one('#summary-wrapper > div.container.summary span.main-title').text
+                series = soup.select_one('#summary-wrapper > div.summary h2 > a').string.strip()
+                title = soup.select_one('#summary-wrapper > div.container.summary span.main-title').text
 
-                subtitle = self.subtitle_class(Language.fromalpha2('el'), page_link, show_title, season_num,
-                                               episode_num, episode_title, year, version, download_link)
+                subtitle = self.subtitle_class(Language.fromalpha2('el'), page_link, series, season, episode, title,
+                                               year, version, download_link)
             # read the movie info
             else:
-                subtitle = self.subtitle_class(Language.fromalpha2('el'), page_link, None, None, None, show_title,
-                                               year, version, download_link)
+                title = str(soup.select_one('#summary-wrapper > div.summary h1').contents[0]).strip()
+                subtitle = self.subtitle_class(Language.fromalpha2('el'), page_link, None, None, None, title, year,
+                                               version, download_link)
 
             logger.debug('Found subtitle %r', subtitle)
             subtitles.append(subtitle)

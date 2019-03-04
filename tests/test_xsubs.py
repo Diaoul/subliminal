@@ -84,9 +84,17 @@ def test_query_series(episodes):
     video = episodes['bbt_s07e05']
     expected_languages = {Language.fromalpha2('el')}
     with XSubsProvider() as provider:
-        subtitles = provider.query(14, video.season, video.episode)
-    assert len(subtitles) == 126
+        subtitles = provider.query(14, video.series, video.season)
+    assert len(subtitles) == 237
     assert {subtitle.language for subtitle in subtitles} == expected_languages
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_query_series_with_invalid_season_number():
+    with XSubsProvider() as provider:
+        subtitles = provider.query(622, "", 3)
+    assert len(subtitles) == 0
 
 
 @pytest.mark.integration

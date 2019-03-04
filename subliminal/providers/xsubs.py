@@ -181,7 +181,7 @@ class XSubsProvider(Provider):
 
         soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
 
-        series_title = soup.find('name').text
+        series = soup.find('name').text
 
         # loop over season rows
         seasons = soup.findAll('series_group')
@@ -213,33 +213,33 @@ class XSubsProvider(Provider):
 
         subtitles = []
         # loop over episode rows
-        for episode in soup.findAll('subg'):
+        for subtitle_group in soup.findAll('subg'):
             # read the episode info
-            etitle = episode.find('etitle')
-            if etitle is None:
+            episode_info = subtitle_group.find('etitle')
+            if episode_info is None:
                 continue
 
-            episode_num = int(etitle['number'].split('-')[0])
+            episode = int(episode_info['number'].split('-')[0])
 
-            sgt = episode.find('sgt')
-            if sgt is None:
+            subtitle_info = subtitle_group.find('sgt')
+            if subtitle_info is None:
                 continue
 
-            season_num = int(sgt['ssnnum'])
+            season = int(subtitle_info['ssnnum'])
 
             # filter out unreleased subtitles
-            for subs_tag in episode.findAll('sr'):
+            for subs_tag in subtitle_group.findAll('sr'):
                 if subs_tag['published_on'] == '':
                     continue
 
                 page_link = self.server_url + self.page_link.format(show_id=show_id, season_id=season_id,
-                                                                    season=season_num)
-                episode_title = etitle['title']
+                                                                    season=season)
+                title = episode_info['title']
                 version = subs_tag.fmt.text + ' ' + subs_tag.team.text
                 download_link = self.server_url + self.download_link.format(int(subs_tag['rlsid']))
 
-                subtitle = self.subtitle_class(Language.fromalpha2('el'), page_link, series_title, season_num,
-                                               episode_num, year, episode_title, version, download_link)
+                subtitle = self.subtitle_class(Language.fromalpha2('el'), page_link, series, season, episode, year,
+                                               title, version, download_link)
                 logger.debug('Found subtitle %r', subtitle)
                 subtitles.append(subtitle)
 

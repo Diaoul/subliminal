@@ -17,6 +17,7 @@ from ..video import Episode
 
 logger = logging.getLogger(__name__)
 article_re = re.compile(r'^([A-Za-z]{1,3}) (.*)$')
+episode_re = re.compile(r'^(\d+)(-(\d+))*$')
 
 
 class XSubsSubtitle(Subtitle):
@@ -219,7 +220,10 @@ class XSubsProvider(Provider):
             if episode_info is None:
                 continue
 
-            episode = int(episode_info['number'].split('-')[0])
+            episodes = []
+            episode_match = episode_re.match(episode_info['number'])
+            if episode_match:
+                episodes = [int(e) for e in [episode_match.group(1), episode_match.group(3)] if e]
 
             subtitle_info = subtitle_group.find('sgt')
             if subtitle_info is None:
@@ -238,10 +242,11 @@ class XSubsProvider(Provider):
                 version = subs_tag.fmt.text + ' ' + subs_tag.team.text
                 download_link = self.server_url + self.download_link.format(int(subs_tag['rlsid']))
 
-                subtitle = self.subtitle_class(Language.fromalpha2('el'), page_link, series, season, episode, year,
-                                               title, version, download_link)
-                logger.debug('Found subtitle %r', subtitle)
-                subtitles.append(subtitle)
+                for episode in episodes:
+                    subtitle = self.subtitle_class(Language.fromalpha2('el'), page_link, series, season, episode, year,
+                                                   title, version, download_link)
+                    logger.debug('Found subtitle %r', subtitle)
+                    subtitles.append(subtitle)
 
         return subtitles
 

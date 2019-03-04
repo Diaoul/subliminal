@@ -170,6 +170,9 @@ class SubzProvider(Provider):
             return []
 
         r = self.session.get(page_link, timeout=10)
+        if r.status_code == 404:
+            return []
+
         r.raise_for_status()
 
         if not r.content:

@@ -77,6 +77,7 @@ class SubsceneSubtitle(Subtitle):
     @property
     def info(self):
         return self.desc
+
     def get_matches(self, video):
         matches = set()
 

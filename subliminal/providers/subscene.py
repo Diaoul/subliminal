@@ -52,12 +52,12 @@ class SubsceneSubtitle(Subtitle):
     provider_name = "subscene"
 
     def __init__(self, language, hearing_impaired=False, page_link=None,
-                 encoding=None, info=None, zip_link=None, release_name=None,
+                 encoding=None, desc=None, zip_link=None, release_name=None,
                  release_type=None, imdb_id=None, num_files=None, year=None):
         super(SubsceneSubtitle, self).__init__(language, hearing_impaired,
                                                page_link, encoding)
 
-        self.info = info
+        self.desc = desc
         self.zip_link = zip_link
         self.release_name = release_name
         self.release_type = release_type
@@ -65,9 +65,7 @@ class SubsceneSubtitle(Subtitle):
         self.num_files = num_files
         self.year = year
 
-        self._info_guess = {}
-        if self.info is not None:
-            self._info_guess = guessit(self.info)
+        self._desc_guess = {} if self.desc is None else guessit(self.desc)
 
     @property
     def id(self):
@@ -76,13 +74,16 @@ class SubsceneSubtitle(Subtitle):
             assert link.startswith("/subtitles/")
             return link[11:]
 
+    @property
+    def info(self):
+        return self.desc
     def get_matches(self, video):
         matches = set()
 
-        if self.info:
+        if self.desc:
             if video.name:
-                info = (self.info, self.release_name)
-                if video.name in info or self.info in video.name:
+                name = (self.desc, self.release_name)
+                if video.name in name or self.desc in video.name:
                     matches.add("name")
 
             self._check_guess(video, matches, "release_group")
@@ -96,13 +97,13 @@ class SubsceneSubtitle(Subtitle):
             self._check_guess(video, matches, "title")
             self._check_guess(video, matches, "screen_size", "resolution")
 
-        kind = self._info_guess.get("type")
+        kind = self._desc_guess.get("type")
         if isinstance(video, Movie) and kind != "episode":
             if self.release_name and video.title and \
                     sanitize(self.release_name) == sanitize(video.title):
                 matches.add("title")
         elif isinstance(video, Episode) and kind != "movie":
-            if self.info:
+            if self.desc:
                 self._check_guess(video, matches, "title", "series")
                 self._check_guess(video, matches, "season")
                 self._check_guess(video, matches, "episode")
@@ -121,7 +122,7 @@ class SubsceneSubtitle(Subtitle):
     def _check_guess(self, video, matches, self_prop, video_prop=None):
         if video_prop is None:
             video_prop = self_prop
-        mine = self._info_guess.get(self_prop)
+        mine = self._desc_guess.get(self_prop)
         if mine:
             her = getattr(video, video_prop)
             if (isinstance(mine, str) and sanitize(mine) ==
@@ -252,13 +253,13 @@ class SubsceneProvider(Provider):
                     continue
 
             page_link = a["href"]
-            info = a.contents[1].string.strip()
+            desc = a.contents[1].string.strip()
             num_files = tr.find("td", class_="a3").string.strip()
             num_files = int(num_files) if num_files else None
             hearing_impaired = tr.find("td", class_="a41") is not None
 
             subtitles.add(SubsceneSubtitle(lang, hearing_impaired, page_link,
-                                           None, info, None, release_name,
+                                           None, desc, None, release_name,
                                            None, imdb_id, num_files, year))
 
         return subtitles

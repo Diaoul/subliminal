@@ -19,7 +19,7 @@ vcr = VCR(path_transformer=lambda path: path + '.yaml',
 
 
 def test_get_matches_movie_resolution(movies):
-    subtitle = SubsceneSubtitle(Language('deu'), year=2013, info='Man.of.Steel'
+    subtitle = SubsceneSubtitle(Language('deu'), year=2013, desc='Man.of.Steel'
                                 '.German.720p.BluRay.x264',
                                 imdb_id='tt0770828')
     matches = subtitle.get_matches(movies['man_of_steel'])
@@ -29,13 +29,13 @@ def test_get_matches_movie_resolution(movies):
 
 def test_get_matches_episode_year(episodes):
     subtitle = SubsceneSubtitle(Language('eng'), imdb_id='tt2178796',
-                                info='Game.of.Thrones.S03E10.WEBDL.XviD-AFG')
+                                desc='Game.of.Thrones.S03E10.WEBDL.XviD-AFG')
     matches = subtitle.get_matches(episodes['got_s03e10'])
     assert matches == {'imdb_id', 'series', 'episode', 'season', 'source'}
 
 
 def test_get_matches_episode_title(episodes):
-    subtitle = SubsceneSubtitle(Language('spa'), year=2012, info='Dallas.2012.'
+    subtitle = SubsceneSubtitle(Language('spa'), year=2012, desc='Dallas.2012.'
                                 'The.Price.You.Pay.S01E03.HDTV.x264-LOL',
                                 imdb_id='tt2205526')
     matches = subtitle.get_matches(episodes['dallas_2012_s01e03'])
@@ -44,7 +44,7 @@ def test_get_matches_episode_title(episodes):
 
 
 def test_get_matches_episode_release_type(episodes):
-    subtitle = SubsceneSubtitle(Language('spa'), year=2012, info='CSI.Cyber.S0'
+    subtitle = SubsceneSubtitle(Language('spa'), year=2012, desc='CSI.Cyber.S0'
                                 '2E03.lol.mp4', imdb_id='tt2205526',
                                 release_type='HDTV')
     matches = subtitle.get_matches(episodes['csi_cyber_s02e03'])
@@ -53,7 +53,7 @@ def test_get_matches_episode_release_type(episodes):
 
 def test_get_matches_episode_filename(episodes):
     subtitle = SubsceneSubtitle(Language('por', country='BR'), year=2014,
-                                imdb_id='tt4078580', info='Marvels.Agents.of.S'
+                                imdb_id='tt4078580', desc='Marvels.Agents.of.S'
                                 '.H.I.E.L.D.S02E06.720p.HDTV.x264-KILLERS.mkv')
     matches = subtitle.get_matches(episodes['marvels_agents_of_shield_s02e06'])
     assert matches == {'name', 'series', 'season', 'episode', 'release_group',
@@ -67,7 +67,7 @@ def test_get_matches_movie_release_name(movies):
 
 
 def test_get_matches_imdb_id(movies):
-    subtitle = SubsceneSubtitle(Language('fra'), year=2013, info='man.of.steel'
+    subtitle = SubsceneSubtitle(Language('fra'), year=2013, desc='man.of.steel'
                                 '.2013.720p.bluray.x264-felony',
                                 imdb_id='tt0770828')
     matches = subtitle.get_matches(movies['man_of_steel'])
@@ -76,7 +76,7 @@ def test_get_matches_imdb_id(movies):
 
 
 def test_get_matches_no_match(episodes):
-    subtitle = SubsceneSubtitle(Language('fra'), year=2013, info='man.of.steel'
+    subtitle = SubsceneSubtitle(Language('fra'), year=2013, desc='man.of.steel'
                                 '.2013.720i.HDCAM.Xvid-felony',
                                 imdb_id='tt0770828')
     matches = subtitle.get_matches(episodes['got_s03e10'])

@@ -120,7 +120,7 @@ def test_provider_query_movie(movies):
     video = movies['man_of_steel']
     with SubsceneProvider() as provider:
         subtitles = provider.query(video.title, video.year)
-    assert len(subtitles) == 626
+    assert len(subtitles) == 668
     subtitle = subtitles.pop()
     assert subtitle.imdb_id == video.imdb_id
     assert subtitle.year == video.year

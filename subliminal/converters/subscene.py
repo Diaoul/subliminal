@@ -15,6 +15,12 @@ from_subscene = {
 
 to_subscene = {val: key for key, val in from_subscene.items()}
 
+from_subscene_with_country = {
+    'Brazillian Portuguese': ('por', 'BR')
+}
+
+to_subscene_with_country = {val: key for key, val in from_subscene_with_country.items()}
+
 exact_languages_alpha3 = [
         'ara', 'aze', 'bel', 'ben', 'bos', 'bul', 'cat', 'ces', 'dan', 'deu',
         'eng', 'epo', 'est', 'eus', 'fin', 'fra', 'heb', 'hin', 'hrv', 'hun',
@@ -26,9 +32,8 @@ exact_languages_alpha3 = [
 
 # TODO: specify codes for unspecified_languages
 unspecified_languages = [
-        'Big 5 code', 'Brazillian Portuguese', 'Bulgarian/ English',
-        'Chinese BG code', 'Dutch/ English', 'English/ German',
-        'Hungarian/ English', 'Rohingya'
+        'Big 5 code', 'Bulgarian/ English', 'Chinese BG code',
+        'Dutch/ English', 'English/ German', 'Hungarian/ English', 'Rohingya'
 ]
 
 supported_languages = {Language(lang) for lang in exact_languages_alpha3}
@@ -36,6 +41,8 @@ supported_languages = {Language(lang) for lang in exact_languages_alpha3}
 alpha3_of_code = {lang.name: lang.alpha3 for lang in supported_languages}
 
 supported_languages.update({Language(lang) for lang in to_subscene})
+
+supported_languages.update({Language(lang, cr) for lang, cr in to_subscene_with_country})
 
 
 class SubsceneConverter(LanguageReverseConverter):
@@ -48,11 +55,17 @@ class SubsceneConverter(LanguageReverseConverter):
         if alpha3 in to_subscene:
             return to_subscene[alpha3]
 
+        if (alpha3, country) in to_subscene_with_country:
+            to_subscene_with_country[(alpha3, country)]
+
         message = "unsupported language for subscene: %s, %s, %s" \
             % (alpha3, country, script)
         raise ConfigurationError(message)
 
     def reverse(self, code):
+        if code in from_subscene_with_country:
+            return from_subscene_with_country[code]
+
         if code in from_subscene:
             return (from_subscene[code],)
 

@@ -70,7 +70,8 @@ def test_provider_pool_list_subtitles_provider(episodes, mock_providers):
 def test_provider_pool_list_subtitles(episodes, mock_providers):
     pool = ProviderPool()
     subtitles = pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
-    assert sorted(subtitles) == ['addic7ed', 'opensubtitles', 'podnapisi', 'shooter', 'thesubdb', 'tvsubtitles']
+    assert sorted(subtitles) == ['addic7ed', 'legendastv', 'opensubtitles', 'podnapisi', 'shooter', 'thesubdb',
+                                 'tvsubtitles']
     for provider in subtitles:
         assert provider_manager[provider].plugin.initialize.called
         assert provider_manager[provider].plugin.list_subtitles.called
@@ -87,7 +88,8 @@ def test_async_provider_pool_list_subtitles_provider(episodes, mock_providers):
 def test_async_provider_pool_list_subtitles(episodes, mock_providers):
     pool = AsyncProviderPool()
     subtitles = pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
-    assert sorted(subtitles) == ['addic7ed', 'opensubtitles', 'podnapisi', 'shooter', 'thesubdb', 'tvsubtitles']
+    assert sorted(subtitles) == ['addic7ed', 'legendastv', 'opensubtitles', 'podnapisi', 'shooter', 'thesubdb',
+                                 'tvsubtitles']
     for provider in subtitles:
         assert provider_manager[provider].plugin.initialize.called
         assert provider_manager[provider].plugin.list_subtitles.called
@@ -387,6 +389,7 @@ def test_list_subtitles_movie(movies, mock_providers):
     # test providers
     assert not provider_manager['addic7ed'].plugin.list_subtitles.called
     assert not provider_manager['cinemast'].plugin.list_subtitles.called
+    assert provider_manager['legendastv'].plugin.list_subtitles.called
     assert provider_manager['opensubtitles'].plugin.list_subtitles.called
     assert provider_manager['podnapisi'].plugin.list_subtitles.called
     assert provider_manager['shooter'].plugin.list_subtitles.called
@@ -395,7 +398,8 @@ def test_list_subtitles_movie(movies, mock_providers):
 
     # test result
     assert len(subtitles) == 1
-    assert sorted(subtitles[movies['man_of_steel']]) == ['opensubtitles', 'podnapisi', 'shooter', 'thesubdb']
+    assert sorted(subtitles[movies['man_of_steel']]) == ['legendastv', 'opensubtitles', 'podnapisi', 'shooter',
+                                                         'thesubdb']
 
 
 def test_list_subtitles_episode(episodes, mock_providers):
@@ -407,6 +411,7 @@ def test_list_subtitles_episode(episodes, mock_providers):
     # test providers
     assert provider_manager['addic7ed'].plugin.list_subtitles.called
     assert not provider_manager['cinemast'].plugin.list_subtitles.called
+    assert provider_manager['legendastv'].plugin.list_subtitles.called
     assert provider_manager['opensubtitles'].plugin.list_subtitles.called
     assert provider_manager['podnapisi'].plugin.list_subtitles.called
     assert provider_manager['shooter'].plugin.list_subtitles.called
@@ -415,8 +420,8 @@ def test_list_subtitles_episode(episodes, mock_providers):
 
     # test result
     assert len(subtitles) == 1
-    assert sorted(subtitles[episodes['bbt_s07e05']]) == ['addic7ed', 'opensubtitles', 'podnapisi', 'shooter',
-                                                         'thesubdb', 'tvsubtitles']
+    assert sorted(subtitles[episodes['bbt_s07e05']]) == ['addic7ed', 'legendastv', 'opensubtitles', 'podnapisi',
+                                                         'shooter', 'thesubdb', 'tvsubtitles']
 
 
 def test_list_subtitles_providers(episodes, mock_providers):
@@ -447,6 +452,7 @@ def test_list_subtitles_episode_no_hash(episodes, mock_providers):
     # test providers
     assert provider_manager['addic7ed'].plugin.list_subtitles.called
     assert not provider_manager['cinemast'].plugin.list_subtitles.called
+    assert provider_manager['legendastv'].plugin.list_subtitles.called
     assert provider_manager['opensubtitles'].plugin.list_subtitles.called
     assert provider_manager['podnapisi'].plugin.list_subtitles.called
     assert not provider_manager['thesubdb'].plugin.list_subtitles.called
@@ -454,8 +460,8 @@ def test_list_subtitles_episode_no_hash(episodes, mock_providers):
 
     # test result
     assert len(subtitles) == 1
-    assert sorted(subtitles[episodes['dallas_s01e03']]) == ['addic7ed', 'opensubtitles', 'podnapisi', 'shooter',
-                                                            'tvsubtitles']
+    assert sorted(subtitles[episodes['dallas_s01e03']]) == ['addic7ed', 'legendastv', 'opensubtitles', 'podnapisi',
+                                                            'shooter', 'tvsubtitles']
 
 
 def test_list_subtitles_no_language(episodes, mock_providers):
@@ -605,3 +611,45 @@ def test_save_subtitles_single_directory_encoding(movies, tmpdir):
     path = os.path.join(str(tmpdir), os.path.splitext(os.path.split(movies['man_of_steel'].name)[1])[0] + '.srt')
     assert os.path.exists(path)
     assert io.open(path, encoding='utf-8').read() == u'ハローワールド'
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_download_bad_subtitle(movies):
+    pool = ProviderPool()
+    subtitles = pool.list_subtitles_provider('legendastv', movies['man_of_steel'], {Language('eng')})
+    pool.download_subtitle(subtitles[0])
+    assert subtitles[0].content is None
+    assert subtitles[0].is_valid() is False
+
+
+def test_scan_archive_with_one_video(rar, mkv):
+    rar_file = rar['video']
+    actual = scan_archive(rar_file)
+
+    assert actual.name == os.path.join(os.path.split(rar_file)[0], mkv['test1'])
+
+
+def test_scan_archive_with_multiple_videos(rar, mkv):
+    rar_file = rar['videos']
+    actual = scan_archive(rar_file)
+
+    assert actual.name == os.path.join(os.path.split(rar_file)[0], mkv['test5'])
+
+
+def test_scan_archive_with_no_video(rar):
+    with pytest.raises(ValueError) as excinfo:
+        scan_archive(rar['simple'])
+    assert excinfo.value.args == ('No video in archive', )
+
+
+def test_scan_bad_archive(mkv):
+    with pytest.raises(ValueError) as excinfo:
+        scan_archive(mkv['test1'])
+    assert excinfo.value.args == ("'.mkv' is not a valid archive", )
+
+
+def test_scan_password_protected_archive(rar):
+    with pytest.raises(ValueError) as excinfo:
+        scan_archive(rar['pwd-protected'])
+    assert excinfo.value.args == ('Rar requires a password', )

@@ -16,11 +16,10 @@ from requests import Session
 from zipfile import ZipFile
 
 from . import Provider
-from .. import __short_version__
 from ..exceptions import ProviderError
-from ..subtitle import Subtitle, fix_line_ending, guess_matches
-from ..utils import sanitize
-from ..video import Episode, Movie
+from ..matches import guess_matches
+from ..subtitle import Subtitle, fix_line_ending
+from ..video import Episode
 
 logger = logging.getLogger(__name__)
 
@@ -43,39 +42,21 @@ class PodnapisiSubtitle(Subtitle):
     def id(self):
         return self.pid
 
-    def get_matches(self, video):
-        matches = set()
+    @property
+    def info(self):
+        return ' '.join(self.releases) or self.pid
 
-        # episode
-        if isinstance(video, Episode):
-            # series
-            if video.series and (sanitize(self.title) in (
-                    sanitize(name) for name in [video.series] + video.alternative_series)):
-                matches.add('series')
-            # year
-            if video.original_series and self.year is None or video.year and video.year == self.year:
-                matches.add('year')
-            # season
-            if video.season and self.season == video.season:
-                matches.add('season')
-            # episode
-            if video.episode and self.episode == video.episode:
-                matches.add('episode')
-            # guess
-            for release in self.releases:
-                matches |= guess_matches(video, guessit(release, {'type': 'episode'}))
-        # movie
-        elif isinstance(video, Movie):
-            # title
-            if video.title and (sanitize(self.title) in (
-                    sanitize(name) for name in [video.title] + video.alternative_titles)):
-                matches.add('title')
-            # year
-            if video.year and self.year == video.year:
-                matches.add('year')
-            # guess
-            for release in self.releases:
-                matches |= guess_matches(video, guessit(release, {'type': 'movie'}))
+    def get_matches(self, video):
+        matches = guess_matches(video, {
+            'title': self.title,
+            'year': self.year,
+            'season': self.season,
+            'episode': self.episode
+        })
+
+        video_type = 'episode' if isinstance(video, Episode) else 'movie'
+        for release in self.releases:
+            matches |= guess_matches(video, guessit(release, {'type': video_type}))
 
         return matches
 
@@ -92,7 +73,7 @@ class PodnapisiProvider(Provider):
 
     def initialize(self):
         self.session = Session()
-        self.session.headers['User-Agent'] = 'Subliminal/%s' % __short_version__
+        self.session.headers['User-Agent'] = self.user_agent
 
     def terminate(self):
         self.session.close()

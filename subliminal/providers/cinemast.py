@@ -10,7 +10,8 @@ from requests import Session
 from . import Provider
 from .. import __short_version__
 from ..exceptions import AuthenticationError, ConfigurationError, ProviderError
-from ..subtitle import Subtitle, fix_line_ending, guess_matches
+from ..matches import guess_matches
+from ..subtitle import Subtitle, fix_line_ending
 from ..utils import sanitize
 from ..video import Episode, Movie
 
@@ -51,16 +52,16 @@ class CinemastSubtitle(Subtitle):
             if video.episode and self.episode == video.episode:
                 matches.add('episode')
             # guess
-            matches |= guess_matches(video, guessit(self.release, {'type': 'episode'}))
+            matches |= guess_matches(video, guessit(self.release, {'type': 'episode'}), partial=True)
         # movie
         elif isinstance(video, Movie):
-            # guess
-            matches |= guess_matches(video, guessit(self.release, {'type': 'movie'}))
-
             # title
             if video.title and (sanitize(self.title) in (
                     sanitize(name) for name in [video.title] + video.alternative_titles)):
                 matches.add('title')
+
+            # guess
+            matches |= guess_matches(video, guessit(self.release, {'type': 'movie'}), partial=True)
 
         return matches
 

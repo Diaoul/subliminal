@@ -9,6 +9,8 @@ from subliminal.video import Episode, Movie
 from subliminal.refiners.omdb import OMDBClient, refine
 
 
+APIKEY = '00000000'
+
 vcr = VCR(path_transformer=lambda path: path + '.yaml',
           record_mode=os.environ.get('VCR_RECORD_MODE', 'once'),
           cassette_library_dir=os.path.realpath(os.path.join('tests', 'cassettes', 'omdb')))
@@ -105,7 +107,7 @@ def test_search_page(client):
 def test_refine_episode(episodes):
     episode = Episode(episodes['bbt_s07e05'].name, episodes['bbt_s07e05'].series.lower(), episodes['bbt_s07e05'].season,
                       episodes['bbt_s07e05'].episode)
-    refine(episode)
+    refine(episode, apikey=APIKEY)
     assert episode.series == episodes['bbt_s07e05'].series
     assert episode.year == episodes['bbt_s07e05'].year
     assert episode.series_imdb_id == episodes['bbt_s07e05'].series_imdb_id
@@ -116,7 +118,7 @@ def test_refine_episode(episodes):
 def test_refine_episode_original_series(episodes):
     episode = Episode(episodes['dallas_s01e03'].name, episodes['dallas_s01e03'].series.lower(),
                       episodes['dallas_s01e03'].season, episodes['dallas_s01e03'].episode)
-    refine(episode)
+    refine(episode, apikey=APIKEY)
     assert episode.series == episodes['dallas_s01e03'].series
     assert episode.year == 1978
     assert episode.series_imdb_id == 'tt0077000'
@@ -128,7 +130,7 @@ def test_refine_episode_year(episodes):
     episode = Episode(episodes['dallas_2012_s01e03'].name, episodes['dallas_2012_s01e03'].series.lower(),
                       episodes['dallas_2012_s01e03'].season, episodes['dallas_2012_s01e03'].episode,
                       year=episodes['dallas_2012_s01e03'].year, original_series=False)
-    refine(episode)
+    refine(episode, apikey=APIKEY)
     assert episode.series == episodes['dallas_2012_s01e03'].series
     assert episode.year == episodes['dallas_2012_s01e03'].year
     assert episode.series_imdb_id == 'tt1723760'
@@ -138,7 +140,39 @@ def test_refine_episode_year(episodes):
 @vcr.use_cassette
 def test_refine_movie(movies):
     movie = Movie(movies['man_of_steel'].name, movies['man_of_steel'].title.lower())
-    refine(movie)
+    refine(movie, apikey=APIKEY)
     assert movie.title == movies['man_of_steel'].title
     assert movie.year == movies['man_of_steel'].year
     assert movie.imdb_id == movies['man_of_steel'].imdb_id
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_refine_movie_guess_alternative_title(movies):
+    movie = Movie.fromname(movies['jack_reacher_never_go_back'].name)
+    refine(movie, apikey=APIKEY)
+    assert movie.title == movies['jack_reacher_never_go_back'].title
+    assert movie.year == movies['jack_reacher_never_go_back'].year
+    assert movie.imdb_id == movies['jack_reacher_never_go_back'].imdb_id
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_refine_episode_with_country(episodes):
+    episode = Episode.fromname(episodes['shameless_us_s08e01'].name)
+    video_series = episode.series
+    refine(episode, apikey=APIKEY)
+    # omdb has no country info. No match
+    assert episode.series == video_series
+    assert episode.series_imdb_id is None
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_refine_episode_with_country_hoc_us(episodes):
+    episode = Episode.fromname(episodes['house_of_cards_us_s06e01'].name)
+    video_series = episode.series
+    refine(episode, apikey=APIKEY)
+    # omdb has no country info. No match
+    assert episode.series == video_series
+    assert episode.series_imdb_id is None

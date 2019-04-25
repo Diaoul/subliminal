@@ -18,26 +18,23 @@ vcr = VCR(path_transformer=lambda path: path + '.yaml',
 
 
 def test_get_matches_movie(movies):
-    release = 'Enders.Game.2013.HC.Webrip.x264.AC3-TiTAN'
     subtitle = CinemastSubtitle(Language('heb'), None, None, None, None, 'Ender\'s Game', 266898,
-                                '54adce017db2e7fd8501b7a321451b64', release)
+                                '54adce017db2e7fd8501b7a321451b64', 'Enders.Game.2013.HC.Webrip.x264.AC3-TiTAN')
     matches = subtitle.get_matches(movies['enders_game'])
-    assert matches == {'title', 'year', 'video_codec'}
+    assert matches == {'country', 'title', 'video_codec', 'year'}
 
 
 def test_get_matches_episode(episodes):
-    release = 'Game.of.Thrones.S03E10.HDTV.x264-EVOLVE'
     subtitle = CinemastSubtitle(Language('heb'), None, 'Game of Thrones', 3, 10, 'Mhysa', 263129,
-                                '6a3129e8b9effdb8231aa6b3caf66fbe', release)
+                                '6a3129e8b9effdb8231aa6b3caf66fbe', 'Game.of.Thrones.S03E10.HDTV.x264-EVOLVE')
     matches = subtitle.get_matches(episodes['got_s03e10'])
-    assert matches == {'series', 'episode', 'season', 'year', 'video_codec'}
+    assert matches == {'episode', 'season', 'series', 'video_codec'}
 
 
-def test_get_matches_no_match(movies):
-    release = 'Game.of.Thrones.S03E10.HDTV.EVOLVE'
-    subtitle = CinemastSubtitle(Language('heb'), None, 'Game of Thrones', 3, 10, 'Mhysa', 263129,
-                                '6a3129e8b9effdb8231aa6b3caf66fbe', release)
-    matches = subtitle.get_matches(movies['man_of_steel'])
+def test_get_matches_no_match(episodes):
+    subtitle = CinemastSubtitle(Language('heb'), None, None, None, None, 'Ender\'s Game', 266898,
+                                '54adce017db2e7fd8501b7a321451b64', 'Enders.Game.2013-TiTAN')
+    matches = subtitle.get_matches(episodes['got_s03e10'])
     assert matches == set()
 
 

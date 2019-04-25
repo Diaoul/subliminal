@@ -49,6 +49,8 @@ Download best subtitles in French and English for videos less than two weeks old
 
 .. code:: python
 
+    #!/usr/bin/env python
+    
     from datetime import timedelta
 
     from babelfish import Language

@@ -56,34 +56,48 @@ def test_get_matches_release_group(episodes):
     subtitle = Addic7edSubtitle(Language('eng'), True, None, 'The Big Bang Theory', 7, 5, 'The Workplace Proximity',
                                 2007, 'DIMENSION', None)
     matches = subtitle.get_matches(episodes['bbt_s07e05'])
-    assert matches == {'series', 'season', 'episode', 'title', 'year', 'release_group'}
+    assert matches == {'series', 'season', 'episode', 'title', 'year', 'country', 'release_group'}
 
 
 def test_get_matches_equivalent_release_group(episodes):
     subtitle = Addic7edSubtitle(Language('eng'), True, None, 'The Big Bang Theory', 7, 5, 'The Workplace Proximity',
                                 2007, 'LOL', None)
     matches = subtitle.get_matches(episodes['bbt_s07e05'])
-    assert matches == {'series', 'season', 'episode', 'title', 'year', 'release_group'}
+    assert matches == {'series', 'season', 'episode', 'title', 'year', 'country', 'release_group'}
 
 
 def test_get_matches_resolution_release_group(episodes):
     subtitle = Addic7edSubtitle(Language('heb'), True, None, 'The Big Bang Theory', 7, 5, 'The Workplace Proximity',
                                 2007, '720PDIMENSION', None)
     matches = subtitle.get_matches(episodes['bbt_s07e05'])
-    assert matches == {'series', 'season', 'episode', 'title', 'year', 'release_group', 'resolution'}
+    assert matches == {'series', 'season', 'episode', 'title', 'year', 'country', 'release_group', 'resolution'}
 
 
-def test_get_matches_format_release_group(episodes):
+def test_get_matches_source_release_group(episodes):
     subtitle = Addic7edSubtitle(Language('eng'), True, None, 'Game of Thrones', 3, 10, 'Mhysa', None, 'WEB-DL-NTb',
                                 None)
     matches = subtitle.get_matches(episodes['got_s03e10'])
-    assert matches == {'series', 'season', 'episode', 'title', 'year', 'release_group', 'format'}
+    assert matches == {'series', 'season', 'episode', 'title', 'year', 'country', 'release_group', 'source'}
+
+
+def test_get_matches_streaming_service(episodes):
+    subtitle = Addic7edSubtitle(Language('nld'), True, None, 'The Walking Dead', 8, 7, None, None,
+                                'AMZN.WEB-DL-CasStudio', None)
+    matches = subtitle.get_matches(episodes['walking_dead_s08e07'])
+    assert matches == {'series', 'season', 'episode', 'year', 'country', 'release_group', 'streaming_service', 'source'}
+
+
+def test_get_matches_only_year_country(episodes):
+    subtitle = Addic7edSubtitle(Language('eng'), True, None, 'The Big Bang Theory', 7, 5, 'The Workplace Proximity',
+                                None, 'DIMENSION', None)
+    matches = subtitle.get_matches(episodes['got_s03e10'])
+    assert matches == {'year', 'country'}
 
 
 def test_get_matches_no_match(episodes):
     subtitle = Addic7edSubtitle(Language('eng'), True, None, 'The Big Bang Theory', 7, 5, 'The Workplace Proximity',
                                 2007, 'DIMENSION', None)
-    matches = subtitle.get_matches(episodes['got_s03e10'])
+    matches = subtitle.get_matches(episodes['house_of_cards_us_s06e01'])
     assert matches == set()
 
 
@@ -240,6 +254,15 @@ def test_get_show_id_quote_dots_mixed_case(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
+def test_get_show_id_with_comma(episodes):
+    video = episodes['alex_inc_s01e04']
+    with Addic7edProvider() as provider:
+        show_id = provider.get_show_id(video.series)
+    assert show_id == 6388
+
+
+@pytest.mark.integration
+@vcr.use_cassette
 def test_get_show_id_country():
     with Addic7edProvider() as provider:
         show_id = provider.get_show_id('Being Human', country_code='US')
@@ -267,7 +290,8 @@ def test_get_show_id():
 def test_query(episodes):
     video = episodes['bbt_s07e05']
     with Addic7edProvider() as provider:
-        subtitles = provider.query(video.series, video.season, video.year)
+        show_id = provider.get_show_id(video.series, video.year)
+        subtitles = provider.query(show_id, video.series, video.season, video.year)
     assert len(subtitles) == 474
     for subtitle in subtitles:
         assert subtitle.series == video.series
@@ -280,7 +304,7 @@ def test_query(episodes):
 def test_query_wrong_series(episodes):
     video = episodes['bbt_s07e05']
     with Addic7edProvider() as provider:
-        subtitles = provider.query(video.series[:12], video.season, video.year)
+        subtitles = provider.query(0, video.series[:12], video.season, video.year)
     assert len(subtitles) == 0
 
 
@@ -289,7 +313,8 @@ def test_query_wrong_series(episodes):
 def test_query_parsing(episodes):
     video = episodes['got_s03e10']
     with Addic7edProvider() as provider:
-        subtitles = provider.query(video.series, video.season)
+        show_id = provider.get_show_id(video.series, video.year)
+        subtitles = provider.query(show_id, video.series, video.season)
     subtitle = [s for s in subtitles if s.download_link == 'updated/1/76311/1'][0]
     assert subtitle.language == Language('eng')
     assert subtitle.hearing_impaired is True
@@ -307,7 +332,8 @@ def test_query_parsing(episodes):
 def test_query_parsing_quote_dots_mixed_case(episodes):
     video = episodes['marvels_agents_of_shield_s02e06']
     with Addic7edProvider() as provider:
-        subtitles = provider.query(video.series, video.season)
+        show_id = provider.get_show_id(video.series, video.year)
+        subtitles = provider.query(show_id, video.series, video.season)
     subtitle = [s for s in subtitles if s.download_link == 'updated/10/93279/9'][0]
     assert subtitle.language == Language('por', country='BR')
     assert subtitle.hearing_impaired is False
@@ -323,7 +349,8 @@ def test_query_parsing_quote_dots_mixed_case(episodes):
 def test_query_parsing_colon(episodes):
     video = episodes['csi_cyber_s02e03']
     with Addic7edProvider() as provider:
-        subtitles = provider.query(video.series, video.season)
+        show_id = provider.get_show_id(video.series, video.year)
+        subtitles = provider.query(show_id, video.series, video.season)
     subtitle = [s for s in subtitles if s.download_link == 'updated/1/105111/2'][0]
     assert subtitle.language == Language('eng')
     assert subtitle.hearing_impaired is False
@@ -339,7 +366,8 @@ def test_query_parsing_colon(episodes):
 def test_query_parsing_dash(episodes):
     video = episodes['the_x_files_s10e02']
     with Addic7edProvider() as provider:
-        subtitles = provider.query(video.series, video.season)
+        show_id = provider.get_show_id(video.series, video.year)
+        subtitles = provider.query(show_id, video.series, video.season)
     subtitle = [s for s in subtitles if s.download_link == 'updated/8/108202/21'][0]
     assert subtitle.language == Language('fra')
     assert subtitle.hearing_impaired is False
@@ -355,7 +383,8 @@ def test_query_parsing_dash(episodes):
 def test_query_year(episodes):
     video = episodes['dallas_2012_s01e03']
     with Addic7edProvider() as provider:
-        subtitles = provider.query(video.series, video.season, video.year)
+        show_id = provider.get_show_id(video.series, video.year)
+        subtitles = provider.query(show_id, video.series, video.season, video.year)
     assert len(subtitles) == 123
     for subtitle in subtitles:
         assert subtitle.series == video.series
@@ -368,7 +397,8 @@ def test_query_year(episodes):
 def test_query_no_year(episodes):
     video = episodes['dallas_s01e03']
     with Addic7edProvider() as provider:
-        subtitles = provider.query(video.series, video.season)
+        show_id = provider.get_show_id(video.series, video.year)
+        subtitles = provider.query(show_id, video.series, video.season)
     assert len(subtitles) == 7
     for subtitle in subtitles:
         assert subtitle.series == video.series
@@ -408,5 +438,21 @@ def test_list_subtitles_episode_alternative_series(episodes):
     expected_subtitles = {'updated/1/125243/0', 'updated/1/125243/1'}
     with Addic7edProvider() as provider:
         subtitles = provider.list_subtitles(video, languages)
+        matches = subtitles[0].get_matches(episodes['turn_s04e03'])
     assert {subtitle.download_link for subtitle in subtitles} == expected_subtitles
     assert {subtitle.language for subtitle in subtitles} == languages
+    assert matches == {'episode', 'title', 'series', 'season', 'year', 'country', 'release_group'}
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_show_with_asterisk(episodes):
+    video = episodes['the_end_of_the_fucking_world']
+    languages = {Language('eng')}
+    expected_subtitles = {u'updated/1/129156/0', u'updated/1/129156/2', u'updated/1/129156/3'}
+    with Addic7edProvider() as provider:
+        subtitles = provider.list_subtitles(video, languages)
+        matches = subtitles[0].get_matches(episodes['the_end_of_the_fucking_world'])
+    assert {subtitle.download_link for subtitle in subtitles} == expected_subtitles
+    assert {subtitle.language for subtitle in subtitles} == languages
+    assert matches == {'year', 'country', 'series', 'episode', 'season'}

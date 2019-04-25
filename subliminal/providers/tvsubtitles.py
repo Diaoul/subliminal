@@ -9,12 +9,10 @@ from guessit import guessit
 from requests import Session
 
 from . import ParserBeautifulSoup, Provider
-from .. import __short_version__
 from ..cache import EPISODE_EXPIRATION_TIME, SHOW_EXPIRATION_TIME, region
 from ..exceptions import ProviderError
-from ..score import get_equivalent_release_groups
-from ..subtitle import Subtitle, fix_line_ending, guess_matches
-from ..utils import sanitize, sanitize_release_group
+from ..matches import guess_matches
+from ..subtitle import Subtitle, fix_line_ending
 from ..video import Episode
 
 logger = logging.getLogger(__name__)
@@ -43,32 +41,24 @@ class TVsubtitlesSubtitle(Subtitle):
     def id(self):
         return str(self.subtitle_id)
 
-    def get_matches(self, video):
-        matches = set()
+    @property
+    def info(self):
+        return self.release or self.rip
 
-        # series
-        if video.series and (sanitize(self.series) in (
-                sanitize(name) for name in [video.series] + video.alternative_series)):
-            matches.add('series')
-        # season
-        if video.season and self.season == video.season:
-            matches.add('season')
-        # episode
-        if video.episode and self.episode == video.episode:
-            matches.add('episode')
-        # year
-        if video.original_series and self.year is None or video.year and video.year == self.year:
-            matches.add('year')
-        # release_group
-        if (video.release_group and self.release and
-                any(r in sanitize_release_group(self.release)
-                    for r in get_equivalent_release_groups(sanitize_release_group(video.release_group)))):
-            matches.add('release_group')
+    def get_matches(self, video):
+        matches = guess_matches(video, {
+            'title': self.series,
+            'season': self.season,
+            'episode': self.episode,
+            'year': self.year,
+            'release_group': self.release
+        })
+
         # other properties
         if self.release:
             matches |= guess_matches(video, guessit(self.release, {'type': 'episode'}), partial=True)
         if self.rip:
-            matches |= guess_matches(video, guessit(self.rip), partial=True)
+            matches |= guess_matches(video, guessit(self.rip, {'type': 'episode'}), partial=True)
 
         return matches
 
@@ -88,7 +78,7 @@ class TVsubtitlesProvider(Provider):
 
     def initialize(self):
         self.session = Session()
-        self.session.headers['User-Agent'] = 'Subliminal/%s' % __short_version__
+        self.session.headers['User-Agent'] = self.user_agent
 
     def terminate(self):
         self.session.close()
@@ -163,13 +153,7 @@ class TVsubtitlesProvider(Provider):
 
         return episode_ids
 
-    def query(self, series, season, episode, year=None):
-        # search the show id
-        show_id = self.search_show_id(series, year)
-        if show_id is None:
-            logger.error('No show id found for %r (%r)', series, {'year': year})
-            return []
-
+    def query(self, show_id, series, season, episode, year=None):
         # get the episode ids
         episode_ids = self.get_episode_ids(show_id, season)
         if episode not in episode_ids:
@@ -189,7 +173,7 @@ class TVsubtitlesProvider(Provider):
             subtitle_id = int(row.parent['href'][10:-5])
             page_link = self.server_url + 'subtitle-%d.html' % subtitle_id
             rip = row.find('p', title='rip').text.strip() or None
-            release = row.find('p', title='release').text.strip() or None
+            release = row.find('h5').text.strip() or None
 
             subtitle = self.subtitle_class(language, page_link, subtitle_id, series, season, episode, year, rip,
                                            release)
@@ -199,12 +183,22 @@ class TVsubtitlesProvider(Provider):
         return subtitles
 
     def list_subtitles(self, video, languages):
+        # lookup show_id
         titles = [video.series] + video.alternative_series
+        show_id = None
         for title in titles:
-            subtitles = [s for s in self.query(title, video.season, video.episode, video.year)
-                         if s.language in languages]
+            show_id = self.search_show_id(title, video.year)
+            if show_id is not None:
+                break
+
+        # query for subtitles with the show_id
+        if show_id is not None:
+            subtitles = [s for s in self.query(show_id, title, video.season, video.episode, video.year)
+                         if s.language in languages and s.episode == video.episode]
             if subtitles:
                 return subtitles
+        else:
+            logger.error('No show id found for %r (%r)', video.series, {'year': video.year})
 
         return []
 

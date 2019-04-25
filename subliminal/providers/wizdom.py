@@ -12,7 +12,8 @@ from . import Provider
 from .. import __short_version__
 from ..cache import SHOW_EXPIRATION_TIME, region
 from ..exceptions import ProviderError
-from ..subtitle import Subtitle, fix_line_ending, guess_matches
+from ..matches import guess_matches
+from ..subtitle import Subtitle, fix_line_ending
 from ..utils import sanitize
 from ..video import Episode, Movie
 

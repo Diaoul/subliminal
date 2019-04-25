@@ -1,9 +1,20 @@
 # -*- coding: utf-8 -*-
+import logging
 from datetime import datetime
 import hashlib
 import os
 import re
+import socket
 import struct
+
+import requests
+from requests.exceptions import SSLError
+from six.moves.xmlrpc_client import ProtocolError
+
+from .exceptions import ServiceUnavailable
+
+
+logger = logging.getLogger(__name__)
 
 
 def hash_opensubtitles(video_path):
@@ -106,7 +117,7 @@ def sanitize(string, ignore_characters=None):
     ignore_characters = ignore_characters or set()
 
     # replace some characters with one space
-    characters = {'-', ':', '(', ')', '.'} - ignore_characters
+    characters = {'-', ':', '(', ')', '.', ','} - ignore_characters
     if characters:
         string = re.sub(r'[%s]' % re.escape(''.join(characters)), ' ', string)
 
@@ -150,3 +161,48 @@ def timestamp(date):
 
     """
     return (date - datetime(1970, 1, 1)).total_seconds()
+
+
+def matches_title(actual, title, alternative_titles):
+    """Whether `actual` matches the `title` or `alternative_titles`
+
+    :param str actual: the actual title to check
+    :param str title: the expected title
+    :param list alternative_titles: the expected alternative_titles
+    :return: whether the actual title matches the title or alternative_titles.
+    :rtype: bool
+
+    """
+    actual = sanitize(actual)
+    title = sanitize(title)
+    if actual == title:
+        return True
+
+    alternative_titles = set(sanitize(t) for t in alternative_titles)
+    if actual in alternative_titles:
+        return True
+
+    return actual.startswith(title) and actual[len(title):].strip() in alternative_titles
+
+
+def handle_exception(e, msg):
+    """Handle exception, logging the proper error message followed by `msg`.
+
+    Exception traceback is only logged for specific cases.
+
+    :param exception e: The exception to handle.
+    :param str msg: The message to log.
+    """
+    if isinstance(e, (requests.Timeout, socket.timeout)):
+        logger.error('Request timed out. %s', msg)
+    elif isinstance(e, (ServiceUnavailable, ProtocolError)):
+        # OpenSubtitles raises xmlrpclib.ProtocolError when unavailable
+        logger.error('Service unavailable. %s', msg)
+    elif isinstance(e, requests.exceptions.HTTPError):
+        logger.error('HTTP error %r. %s', e.response.status_code, msg,
+                     exc_info=e.response.status_code not in range(500, 600))
+    elif isinstance(e, SSLError):
+        logger.error('SSL error %r. %s', e.args[0], msg,
+                     exc_info=e.args[0] != 'The read operation timed out')
+    else:
+        logger.exception('Unexpected error. %s', msg)

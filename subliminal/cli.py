@@ -163,6 +163,26 @@ class Config(object):
             for k, v in config.items():
                 self.config.set(provider, k, v)
 
+    @property
+    def refiner_configs(self):
+        rv = {}
+        for refiner in refiner_manager:
+            if self.config.has_section(refiner.name):
+                rv[refiner.name] = {k: v for k, v in self.config.items(refiner.name)}
+        return rv
+
+    @refiner_configs.setter
+    def refiner_configs(self, value):
+        # loop over refiner configurations
+        for refiner, config in value.items():
+            # create the corresponding section if necessary
+            if not self.config.has_section(refiner):
+                self.config.add_section(refiner)
+
+            # add config options
+            for k, v in config.items():
+                self.config.set(refiner, k, v)
+
 
 class LanguageParamType(click.ParamType):
     """:class:`~click.ParamType` for languages that returns a :class:`~babelfish.language.Language`"""
@@ -173,6 +193,7 @@ class LanguageParamType(click.ParamType):
             return Language.fromietf(value)
         except BabelfishError:
             self.fail('%s is not a valid language' % value)
+
 
 LANGUAGE = LanguageParamType()
 
@@ -202,6 +223,7 @@ class AgeParamType(click.ParamType):
 
         return timedelta(**{k: int(v) for k, v in match.groupdict(0).items()})
 
+
 AGE = AgeParamType()
 
 PROVIDER = click.Choice(sorted(provider_manager.names()))
@@ -219,12 +241,13 @@ config_file = 'config.ini'
 @click.option('--legendastv', type=click.STRING, nargs=2, metavar='USERNAME PASSWORD', help='LegendasTV configuration.')
 @click.option('--opensubtitles', type=click.STRING, nargs=2, metavar='USERNAME PASSWORD',
               help='OpenSubtitles configuration.')
+@click.option('--omdb', type=click.STRING, nargs=1, metavar='APIKEY', help='OMDB API key.')
 @click.option('--cache-dir', type=click.Path(writable=True, file_okay=False), default=dirs.user_cache_dir,
               show_default=True, expose_value=True, help='Path to the cache directory.')
 @click.option('--debug', is_flag=True, help='Print useful information for debugging subliminal and for reporting bugs.')
 @click.version_option(__version__)
 @click.pass_context
-def subliminal(ctx, addic7ed, legendastv, opensubtitles, cache_dir, debug):
+def subliminal(ctx, addic7ed, legendastv, opensubtitles, omdb, cache_dir, debug):
     """Subtitles, faster than your thoughts."""
     # create cache directory
     try:
@@ -244,14 +267,23 @@ def subliminal(ctx, addic7ed, legendastv, opensubtitles, cache_dir, debug):
         logging.getLogger('subliminal').addHandler(handler)
         logging.getLogger('subliminal').setLevel(logging.DEBUG)
 
+    ctx.obj = {
+        'provider_configs': {},
+        'refiner_configs': {}
+    }
+
     # provider configs
-    ctx.obj = {'provider_configs': {}}
     if addic7ed:
         ctx.obj['provider_configs']['addic7ed'] = {'username': addic7ed[0], 'password': addic7ed[1]}
     if legendastv:
         ctx.obj['provider_configs']['legendastv'] = {'username': legendastv[0], 'password': legendastv[1]}
     if opensubtitles:
         ctx.obj['provider_configs']['opensubtitles'] = {'username': opensubtitles[0], 'password': opensubtitles[1]}
+        ctx.obj['provider_configs']['opensubtitlesvip'] = {'username': opensubtitles[0], 'password': opensubtitles[1]}
+
+    # refiner configs
+    if omdb:
+        ctx.obj['refiner_configs']['omdb'] = {'apikey': omdb}
 
 
 @subliminal.command()
@@ -321,8 +353,12 @@ def download(obj, provider, refiner, language, age, directory, encoding, single,
                     continue
                 if not force:
                     video.subtitle_languages |= set(search_external_subtitles(video.name, directory=directory).values())
-                refine(video, episode_refiners=refiner, movie_refiners=refiner, embedded_subtitles=not force)
-                videos.append(video)
+
+                if check_video(video, languages=language, age=age, undefined=single):
+                    refine(video, episode_refiners=refiner, movie_refiners=refiner,
+                           refiner_configs=obj['refiner_configs'],
+                           embedded_subtitles=not force, providers=provider, languages=language)
+                    videos.append(video)
                 continue
 
             # directories
@@ -338,7 +374,9 @@ def download(obj, provider, refiner, language, age, directory, encoding, single,
                         video.subtitle_languages |= set(search_external_subtitles(video.name,
                                                                                   directory=directory).values())
                     if check_video(video, languages=language, age=age, undefined=single):
-                        refine(video, episode_refiners=refiner, movie_refiners=refiner, embedded_subtitles=not force)
+                        refine(video, episode_refiners=refiner, movie_refiners=refiner,
+                               refiner_configs=obj['refiner_configs'], embedded_subtitles=not force,
+                               providers=provider, languages=language)
                         videos.append(video)
                     else:
                         ignored_videos.append(video)
@@ -354,7 +392,9 @@ def download(obj, provider, refiner, language, age, directory, encoding, single,
             if not force:
                 video.subtitle_languages |= set(search_external_subtitles(video.name, directory=directory).values())
             if check_video(video, languages=language, age=age, undefined=single):
-                refine(video, episode_refiners=refiner, movie_refiners=refiner, embedded_subtitles=not force)
+                refine(video, episode_refiners=refiner, movie_refiners=refiner,
+                       refiner_configs=obj['refiner_configs'], embedded_subtitles=not force,
+                       providers=provider, languages=language)
                 videos.append(video)
             else:
                 ignored_videos.append(video)

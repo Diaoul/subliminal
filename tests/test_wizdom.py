@@ -19,7 +19,7 @@ def test_get_matches_movie(movies):
     subtitle = WizdomSubtitle(Language('heb'), False, None, None, None, None, 'Ender\'s Game', 'tt1731141',
                               '18947', release)
     matches = subtitle.get_matches(movies['enders_game'])
-    assert matches == {'title', 'year', 'resolution', 'video_codec', 'format', 'release_group'}
+    assert matches == {'country', 'title', 'year', 'resolution', 'video_codec', 'source', 'release_group'}
 
 
 def test_get_matches_episode(episodes):
@@ -27,7 +27,7 @@ def test_get_matches_episode(episodes):
     subtitle = WizdomSubtitle(Language('heb'), False, None, 'Game of Thrones', 3, 10, 'Mhysa', 'tt0944947',
                               '3748', release)
     matches = subtitle.get_matches(episodes['got_s03e10'])
-    assert matches == {'series', 'episode', 'season', 'year', 'video_codec', 'resolution', 'series_imdb_id'}
+    assert matches == {'series', 'episode', 'season', 'video_codec', 'resolution', 'series_imdb_id'}
 
 
 def test_get_matches_no_match(movies):
@@ -35,7 +35,7 @@ def test_get_matches_no_match(movies):
     subtitle = WizdomSubtitle(Language('heb'), False, None, 'Game of Thrones', 3, 10, 'Mhysa', 'tt0944947',
                               '3748', release)
     matches = subtitle.get_matches(movies['man_of_steel'])
-    assert matches == {'video_codec', 'resolution'}
+    assert matches == {'country', 'video_codec', 'resolution'}
 
 
 @pytest.mark.integration

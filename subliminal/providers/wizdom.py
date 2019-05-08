@@ -58,11 +58,11 @@ class WizdomSubtitle(Subtitle):
             if video.series_imdb_id and self.imdb_id == video.series_imdb_id:
                 matches.add('series_imdb_id')
             # guess
-            matches |= guess_matches(video, guessit(self.release, {'type': 'episode'}))
+            matches |= guess_matches(video, guessit(self.release, {'type': 'episode'}), partial=True)
         # movie
         elif isinstance(video, Movie):
             # guess
-            matches |= guess_matches(video, guessit(self.release, {'type': 'movie'}))
+            matches |= guess_matches(video, guessit(self.release, {'type': 'movie'}), partial=True)
 
             # title
             if video.title and (sanitize(self.title) in (
@@ -142,7 +142,13 @@ class WizdomProvider(Provider):
 
         # filter irrelevant results
         if not is_movie:
-            results = results.get('subs', {}).get(str(season), {}).get(str(episode), [])
+            results = results.get('subs', [])
+            # there are two formats of result jsons - seasons list and seasons dict
+            if isinstance(results, list):
+                results = results[season] if len(results) >= season else {}
+            else:
+                results = results.get(str(season), {})
+            results = results.get(str(episode), [])
         else:
             results = results.get('subs', [])
 

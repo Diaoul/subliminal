@@ -17,20 +17,21 @@ interactions:
       Access-Control-Allow-Origin: ['*']
       Access-Control-Expose-Headers: ['ETag, X-RateLimit-Limit, X-RateLimit-Remaining,
           X-RateLimit-Reset, Retry-After']
-      CF-Cache-Status: [REVALIDATED]
-      CF-RAY: [3c660d83f5d534b8-LHR]
+      Age: ['929']
+      CF-Cache-Status: [HIT]
+      CF-RAY: [4d3a6728da4aad67-TLV]
       Cache-Control: ['public, max-age=28800']
       Connection: [keep-alive]
       Content-Encoding: [gzip]
       Content-Type: [application/json;charset=utf-8]
-      Date: ['Fri, 01 Dec 2017 12:29:34 GMT']
-      Expires: ['Fri, 01 Dec 2017 20:29:34 GMT']
-      Server: [cloudflare-nginx]
-      Set-Cookie: ['__cfduid=dbf7e19fe944669dd018da98234ca75401512131374; expires=Sat,
-          01-Dec-18 12:29:34 GMT; path=/; domain=.tmdb.org; HttpOnly']
+      Date: ['Wed, 08 May 2019 09:28:20 GMT']
+      Expires: ['Wed, 08 May 2019 17:28:20 GMT']
+      Server: [cloudflare]
+      Set-Cookie: ['__cfduid=db3d932bcc37103d084daa663efcff4891557307700; expires=Thu,
+          07-May-20 09:28:20 GMT; path=/; domain=.tmdb.org; HttpOnly']
       Vary: [Accept-Encoding]
       X-RateLimit-Limit: ['40']
       X-RateLimit-Remaining: ['39']
-      X-RateLimit-Reset: ['1512076411']
+      X-RateLimit-Reset: ['1557306781']
     status: {code: 200, message: OK}
 version: 1

@@ -74,7 +74,7 @@ class SubsCenterSubtitle(Subtitle):
 class SubsCenterProvider(Provider):
     """SubsCenter Provider."""
     languages = {Language.fromalpha2(l) for l in ['he']}
-    server_url = 'http://www.subscenter.co/he/'
+    server_url = 'http://www.subscenter.biz/he/'
 
     def __init__(self, username=None, password=None):
         if username is not None and password is None or username is None and password is not None:

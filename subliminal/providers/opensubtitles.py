@@ -208,10 +208,14 @@ class OpenSubtitlesProvider(Provider):
             season = video.season
             episode = video.episode
         else:
+            # if the video doesn't have a title, then the query will be empty
             query = video.title
 
+        # if the query is empty, empty the tag and don't use the base name of the file to search
+        tag = os.path.basename(video.name) if query else None
+
         return self.query(languages, hash=video.hashes.get('opensubtitles'), size=video.size, imdb_id=video.imdb_id,
-                          query=query, season=season, episode=episode, tag=os.path.basename(video.name))
+                          query=query, season=season, episode=episode, tag=tag)
 
     def download_subtitle(self, subtitle):
         logger.info('Downloading subtitle %r', subtitle)

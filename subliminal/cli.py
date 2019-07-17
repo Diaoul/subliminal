@@ -247,8 +247,6 @@ def subliminal(ctx, addic7ed, legendastv, opensubtitles, subscenter, cache_dir, 
     region.configure('dogpile.cache.dbm', expiration_time=timedelta(days=30),
                      arguments={'filename': os.path.join(cache_dir, cache_file), 'lock_factory': MutexLock})
 
-    debug = True
-
     # configure logging
     if debug:
         handler = logging.StreamHandler()

@@ -21,6 +21,7 @@ Available matches:
   * audio_codec
   * resolution
   * hearing_impaired
+  * foreign_only
   * video_codec
   * series_imdb_id
   * imdb_id
@@ -37,11 +38,11 @@ logger = logging.getLogger(__name__)
 
 #: Scores for episodes
 episode_scores = {'hash': 359, 'series': 180, 'year': 90, 'season': 30, 'episode': 30, 'release_group': 15,
-                  'format': 7, 'audio_codec': 3, 'resolution': 2, 'video_codec': 2, 'hearing_impaired': 1}
+                  'format': 7, 'audio_codec': 3, 'resolution': 2, 'video_codec': 2, 'hearing_impaired': 1, 'foreign_only': 40}
 
 #: Scores for movies
 movie_scores = {'hash': 119, 'title': 60, 'year': 30, 'release_group': 15,
-                'format': 7, 'audio_codec': 3, 'resolution': 2, 'video_codec': 2, 'hearing_impaired': 1}
+                'format': 7, 'audio_codec': 3, 'resolution': 2, 'video_codec': 2, 'hearing_impaired': 1, 'foreign_only': 40}
 
 #: Equivalent release groups
 equivalent_release_groups = ({'LOL', 'DIMENSION'}, {'ASAP', 'IMMERSE', 'FLEET'})
@@ -81,8 +82,8 @@ def get_scores(video):
     raise ValueError('video must be an instance of Episode or Movie')
 
 
-def compute_score(subtitle, video, hearing_impaired=None):
-    """Compute the score of the `subtitle` against the `video` with `hearing_impaired` preference.
+def compute_score(subtitle, video, hearing_impaired=None, foreign_only=None):
+    """Compute the score of the `subtitle` against the `video` with `hearing_impaired` and/or `foreign_only` preference.
 
     :func:`compute_score` uses the :meth:`Subtitle.get_matches <subliminal.subtitle.Subtitle.get_matches>` method and
     applies the scores (either from :data:`episode_scores` or :data:`movie_scores`) after some processing.
@@ -92,11 +93,12 @@ def compute_score(subtitle, video, hearing_impaired=None):
     :param video: the video to compute the score against.
     :type video: :class:`~subliminal.video.Video`
     :param bool hearing_impaired: hearing impaired preference.
+    :param bool foreign_only: foreign parts only preference.
     :return: score of the subtitle.
     :rtype: int
 
     """
-    logger.info('Computing score of %r for video %r with %r', subtitle, video, dict(hearing_impaired=hearing_impaired))
+    logger.info('Computing score of %r for video %r with %r', subtitle, video, dict(hearing_impaired=hearing_impaired, foreign_only=foreign_only))
 
     # get the scores dict
     scores = get_scores(video)
@@ -138,12 +140,17 @@ def compute_score(subtitle, video, hearing_impaired=None):
         logger.debug('Matched hearing_impaired')
         matches.add('hearing_impaired')
 
+    # handle foreign only
+    if foreign_only is not None and subtitle.foreign_only == foreign_only:
+        logger.debug('Matched foreign_only')
+        matches.add('foreign_only')
+
     # compute the score
     score = sum((scores.get(match, 0) for match in matches))
     logger.info('Computed score %r with final matches %r', score, matches)
 
     # ensure score is within valid bounds
-    assert 0 <= score <= scores['hash'] + scores['hearing_impaired']
+    assert 0 <= score <= scores['hash'] + scores['hearing_impaired'] + scores['foreign_only']
 
     return score
 
@@ -154,6 +161,7 @@ def solve_episode_equations():
     hash, series, year, season, episode, release_group = symbols('hash series year season episode release_group')
     format, audio_codec, resolution, video_codec = symbols('format audio_codec resolution video_codec')
     hearing_impaired = symbols('hearing_impaired')
+    foreign_only = symbols('foreign_only')
 
     equations = [
         # hash is best
@@ -184,14 +192,17 @@ def solve_episode_equations():
         Eq(resolution, video_codec),
 
         # video_codec is the least valuable match but counts more than the sum of all scoring increasing matches
-        Eq(video_codec, hearing_impaired + 1),
+        Eq(video_codec, (hearing_impaired + foreign_only) + 1),
 
         # hearing impaired is only used for score increasing, so put it to 1
         Eq(hearing_impaired, 1),
+
+        # foreign only is only used for score increasing, so put it to 1
+        Eq(foreign_only, 1),
     ]
 
     return solve(equations, [hash, series, year, season, episode, release_group, format, audio_codec, resolution,
-                             hearing_impaired, video_codec])
+                             hearing_impaired, foreign_only, video_codec])
 
 
 def solve_movie_equations():
@@ -200,6 +211,7 @@ def solve_movie_equations():
     hash, title, year, release_group = symbols('hash title year release_group')
     format, audio_codec, resolution, video_codec = symbols('format audio_codec resolution video_codec')
     hearing_impaired = symbols('hearing_impaired')
+    foreign_only = symbols('foreign_only')
 
     equations = [
         # hash is best
@@ -224,11 +236,14 @@ def solve_movie_equations():
         Eq(resolution, video_codec),
 
         # video_codec is the least valuable match but counts more than the sum of all scoring increasing matches
-        Eq(video_codec, hearing_impaired + 1),
+        Eq(video_codec, (hearing_impaired + foreign_only) + 1),
 
         # hearing impaired is only used for score increasing, so put it to 1
         Eq(hearing_impaired, 1),
+
+        # foreign only is only used for score increasing, so put it to 1
+        Eq(foreign_only, 1),
     ]
 
-    return solve(equations, [hash, title, year, release_group, format, audio_codec, resolution, hearing_impaired,
+    return solve(equations, [hash, title, year, release_group, format, audio_codec, resolution, hearing_impaired, foreign_only,
                              video_codec])

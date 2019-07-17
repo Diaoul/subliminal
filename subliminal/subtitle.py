@@ -23,6 +23,7 @@ class Subtitle(object):
     :param language: language of the subtitle.
     :type language: :class:`~babelfish.language.Language`
     :param bool hearing_impaired: whether or not the subtitle is hearing impaired.
+    :param bool foreign_only: whether or not the subtitle is foreign parts only.
     :param page_link: URL of the web page from which the subtitle can be downloaded.
     :type page_link: str
     :param encoding: Text encoding of the subtitle.
@@ -32,12 +33,15 @@ class Subtitle(object):
     #: Name of the provider that returns that class of subtitle
     provider_name = ''
 
-    def __init__(self, language, hearing_impaired=False, page_link=None, encoding=None):
+    def __init__(self, language, hearing_impaired=False, foreign_only=False, page_link=None, encoding=None):
         #: Language of the subtitle
         self.language = language
 
         #: Whether or not the subtitle is hearing impaired
         self.hearing_impaired = hearing_impaired
+
+        #: Whether or not the subtitle is foreign parts only
+        self.foreign_only = foreign_only
 
         #: URL of the web page from which the subtitle can be downloaded
         self.page_link = page_link
@@ -163,13 +167,14 @@ class Subtitle(object):
         return '<%s %r [%s]>' % (self.__class__.__name__, self.id, self.language)
 
 
-def get_subtitle_path(video_path, language=None, extension='.srt'):
+def get_subtitle_path(video_path, language=None, forced=False, extension='.srt'):
     """Get the subtitle path using the `video_path` and `language`.
 
     :param str video_path: path to the video.
     :param language: language of the subtitle to put in the path.
     :type language: :class:`~babelfish.language.Language`
     :param str extension: extension of the subtitle.
+    :param forced: is this a forced subtitle file
     :return: path of the subtitle.
     :rtype: str
 
@@ -178,6 +183,9 @@ def get_subtitle_path(video_path, language=None, extension='.srt'):
 
     if language:
         subtitle_root += '.' + str(language)
+
+    if forced:
+        subtitle_root += '.forced'
 
     return subtitle_root + extension
 

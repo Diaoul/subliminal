@@ -27,9 +27,9 @@ class Addic7edSubtitle(Subtitle):
     """Addic7ed Subtitle."""
     provider_name = 'addic7ed'
 
-    def __init__(self, language, hearing_impaired, page_link, series, season, episode, title, year, version,
+    def __init__(self, language, hearing_impaired, foreign_only, page_link, series, season, episode, title, year, version,
                  download_link):
-        super(Addic7edSubtitle, self).__init__(language, hearing_impaired, page_link)
+        super(Addic7edSubtitle, self).__init__(language, hearing_impaired, foreign_only, page_link)
         self.series = series
         self.season = season
         self.episode = episode
@@ -255,6 +255,7 @@ class Addic7edProvider(Provider):
             # read the item
             language = Language.fromaddic7ed(cells[3].text)
             hearing_impaired = bool(cells[6].text)
+            foreign_only = False
             page_link = self.server_url + cells[2].a['href'][1:]
             season = int(cells[0].text)
             episode = int(cells[1].text)
@@ -262,7 +263,7 @@ class Addic7edProvider(Provider):
             version = cells[4].text
             download_link = cells[9].a['href'][1:]
 
-            subtitle = Addic7edSubtitle(language, hearing_impaired, page_link, series, season, episode, title, year,
+            subtitle = Addic7edSubtitle(language, hearing_impaired, foreign_only, page_link, series, season, episode, title, year,
                                         version, download_link)
             logger.debug('Found subtitle %r', subtitle)
             subtitles.append(subtitle)

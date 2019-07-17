@@ -24,9 +24,9 @@ class OpenSubtitlesSubtitle(Subtitle):
     provider_name = 'opensubtitles'
     series_re = re.compile(r'^"(?P<series_name>.*)" (?P<series_title>.*)$')
 
-    def __init__(self, language, hearing_impaired, page_link, subtitle_id, matched_by, movie_kind, hash, movie_name,
+    def __init__(self, language, hearing_impaired, foreign_only, page_link, subtitle_id, matched_by, movie_kind, hash, movie_name,
                  movie_release_name, movie_year, movie_imdb_id, series_season, series_episode, filename, encoding):
-        super(OpenSubtitlesSubtitle, self).__init__(language, hearing_impaired, page_link, encoding)
+        super(OpenSubtitlesSubtitle, self).__init__(language, hearing_impaired, foreign_only, page_link, encoding)
         self.subtitle_id = subtitle_id
         self.matched_by = matched_by
         self.movie_kind = movie_kind
@@ -185,6 +185,7 @@ class OpenSubtitlesProvider(Provider):
             # read the item
             language = Language.fromopensubtitles(subtitle_item['SubLanguageID'])
             hearing_impaired = bool(int(subtitle_item['SubHearingImpaired']))
+            foreign_only = bool(int(subtitle_item['SubForeignPartsOnly']))
             page_link = subtitle_item['SubtitlesLink']
             subtitle_id = int(subtitle_item['IDSubtitleFile'])
             matched_by = subtitle_item['MatchedBy']
@@ -199,7 +200,7 @@ class OpenSubtitlesProvider(Provider):
             filename = subtitle_item['SubFileName']
             encoding = subtitle_item.get('SubEncoding') or None
 
-            subtitle = OpenSubtitlesSubtitle(language, hearing_impaired, page_link, subtitle_id, matched_by, movie_kind,
+            subtitle = OpenSubtitlesSubtitle(language, hearing_impaired, foreign_only, page_link, subtitle_id, matched_by, movie_kind,
                                              hash, movie_name, movie_release_name, movie_year, movie_imdb_id,
                                              series_season, series_episode, filename, encoding)
             logger.debug('Found subtitle %r by %s', subtitle, matched_by)

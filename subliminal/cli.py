@@ -65,6 +65,7 @@ class Config(object):
         self.config.set('general', 'providers', json.dumps(sorted([p.name for p in provider_manager])))
         self.config.set('general', 'refiners', json.dumps(sorted([r.name for r in refiner_manager])))
         self.config.set('general', 'single', str(0))
+        self.config.set('general', 'foreign_only', str(0))
         self.config.set('general', 'embedded_subtitles', str(1))
         self.config.set('general', 'age', str(int(timedelta(weeks=2).total_seconds())))
         self.config.set('general', 'hearing_impaired', str(1))
@@ -134,6 +135,14 @@ class Config(object):
     @hearing_impaired.setter
     def hearing_impaired(self, value):
         self.config.set('general', 'hearing_impaired', str(int(value)))
+
+    @property
+    def foreign_only(self):
+        return self.config.getboolean('general', 'foreign_only')
+
+    @foreign_only.setter
+    def foreign_only(self, value):
+        self.config.set('general', 'foreign_only', str(int(value)))
 
     @property
     def min_score(self):
@@ -238,6 +247,8 @@ def subliminal(ctx, addic7ed, legendastv, opensubtitles, subscenter, cache_dir, 
     region.configure('dogpile.cache.dbm', expiration_time=timedelta(days=30),
                      arguments={'filename': os.path.join(cache_dir, cache_file), 'lock_factory': MutexLock})
 
+    debug = True
+
     # configure logging
     if debug:
         handler = logging.StreamHandler()
@@ -285,6 +296,7 @@ def cache(ctx, clear_subliminal):
               'name, i.e. use .srt extension. Do not use this unless your media player requires it.')
 @click.option('-f', '--force', is_flag=True, default=False, help='Force download even if a subtitle already exist.')
 @click.option('-hi', '--hearing-impaired', is_flag=True, default=False, help='Prefer hearing impaired subtitles.')
+@click.option('-fo', '--foreign-only', is_flag=True, default=False, help='Prefer foreign parts only subtitles.')
 @click.option('-m', '--min-score', type=click.IntRange(0, 100), default=0, help='Minimum score for a subtitle '
               'to be downloaded (0 to 100).')
 @click.option('-w', '--max-workers', type=click.IntRange(1, 50), default=None, help='Maximum number of threads to use.')
@@ -293,7 +305,7 @@ def cache(ctx, clear_subliminal):
 @click.option('-v', '--verbose', count=True, help='Increase verbosity.')
 @click.argument('path', type=click.Path(), required=True, nargs=-1)
 @click.pass_obj
-def download(obj, provider, refiner, language, age, directory, encoding, single, force, hearing_impaired, min_score,
+def download(obj, provider, refiner, language, age, directory, encoding, single, force, hearing_impaired, foreign_only, min_score,
              max_workers, archives, verbose, path):
     """Download best subtitles.
 
@@ -400,7 +412,7 @@ def download(obj, provider, refiner, language, age, directory, encoding, single,
                 scores = get_scores(v)
                 subtitles = p.download_best_subtitles(p.list_subtitles(v, language - v.subtitle_languages),
                                                       v, language, min_score=scores['hash'] * min_score / 100,
-                                                      hearing_impaired=hearing_impaired, only_one=single)
+                                                      hearing_impaired=hearing_impaired, foreign_only=foreign_only, only_one=single)
                 downloaded_subtitles[v] = subtitles
 
         if p.discarded_providers:
@@ -445,6 +457,8 @@ def download(obj, provider, refiner, language, age, directory, encoding, single,
                 scaled_score = score
                 if s.hearing_impaired == hearing_impaired:
                     scaled_score -= scores['hearing_impaired']
+                if s.foreign_only == foreign_only:
+                    scaled_score -= scores['foreign_only']
                 scaled_score *= 100 / scores['hash']
 
                 # echo some nice colored output

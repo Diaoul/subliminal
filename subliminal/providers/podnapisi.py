@@ -29,9 +29,9 @@ class PodnapisiSubtitle(Subtitle):
     """Podnapisi Subtitle."""
     provider_name = 'podnapisi'
 
-    def __init__(self, language, hearing_impaired, page_link, pid, releases, title, season=None, episode=None,
+    def __init__(self, language, hearing_impaired, foreign_only, page_link, pid, releases, title, season=None, episode=None,
                  year=None):
-        super(PodnapisiSubtitle, self).__init__(language, hearing_impaired, page_link)
+        super(PodnapisiSubtitle, self).__init__(language, hearing_impaired, foreign_only, page_link)
         self.pid = pid
         self.releases = releases
         self.title = title
@@ -120,6 +120,7 @@ class PodnapisiProvider(Provider):
                 # read xml elements
                 language = Language.fromietf(subtitle_xml.find('language').text)
                 hearing_impaired = 'n' in (subtitle_xml.find('flags').text or '')
+                foreign_only = False
                 page_link = subtitle_xml.find('url').text
                 pid = subtitle_xml.find('pid').text
                 releases = []
@@ -134,10 +135,10 @@ class PodnapisiProvider(Provider):
                 year = int(subtitle_xml.find('year').text)
 
                 if is_episode:
-                    subtitle = PodnapisiSubtitle(language, hearing_impaired, page_link, pid, releases, title,
+                    subtitle = PodnapisiSubtitle(language, hearing_impaired, foreign_only, page_link, pid, releases, title,
                                                  season=season, episode=episode, year=year)
                 else:
-                    subtitle = PodnapisiSubtitle(language, hearing_impaired, page_link, pid, releases, title,
+                    subtitle = PodnapisiSubtitle(language, hearing_impaired, foreign_only, page_link, pid, releases, title,
                                                  year=year)
 
                 # ignore duplicates, see http://www.podnapisi.net/forum/viewtopic.php?f=62&t=26164&start=10#p213321

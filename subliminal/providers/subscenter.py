@@ -25,9 +25,9 @@ class SubsCenterSubtitle(Subtitle):
     """SubsCenter Subtitle."""
     provider_name = 'subscenter'
 
-    def __init__(self, language, hearing_impaired, page_link, series, season, episode, title, subtitle_id, subtitle_key,
+    def __init__(self, language, hearing_impaired, foreign_only, page_link, series, season, episode, title, subtitle_id, subtitle_key,
                  downloaded, releases):
-        super(SubsCenterSubtitle, self).__init__(language, hearing_impaired, page_link)
+        super(SubsCenterSubtitle, self).__init__(language, hearing_impaired, foreign_only, page_link)
         self.series = series
         self.season = season
         self.episode = episode
@@ -187,6 +187,7 @@ class SubsCenterProvider(Provider):
                         # read the item
                         language = Language.fromalpha2(language_code)
                         hearing_impaired = bool(subtitle_item['hearing_impaired'])
+                        foreign_only = False
                         subtitle_id = subtitle_item['id']
                         subtitle_key = subtitle_item['key']
                         downloaded = subtitle_item['downloaded']
@@ -200,7 +201,7 @@ class SubsCenterProvider(Provider):
                             continue
 
                         # otherwise create it
-                        subtitle = SubsCenterSubtitle(language, hearing_impaired, page_link, title, season, episode,
+                        subtitle = SubsCenterSubtitle(language, hearing_impaired, foreign_only, page_link, title, season, episode,
                                                       title, subtitle_id, subtitle_key, downloaded, [release])
                         logger.debug('Found subtitle %r', subtitle)
                         subtitles[subtitle_id] = subtitle

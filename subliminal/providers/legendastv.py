@@ -112,7 +112,7 @@ class LegendasTVSubtitle(Subtitle):
     def id(self):
         return '%s-%s' % (self.archive.id, self.name.lower())
 
-    def get_matches(self, video, hearing_impaired=False):
+    def get_matches(self, video, hearing_impaired=False, foreign_only=False):
         matches = set()
 
         # episode

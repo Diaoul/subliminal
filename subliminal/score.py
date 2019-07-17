@@ -38,11 +38,11 @@ logger = logging.getLogger(__name__)
 
 #: Scores for episodes
 episode_scores = {'hash': 359, 'series': 180, 'year': 90, 'season': 30, 'episode': 30, 'release_group': 15,
-                  'format': 7, 'audio_codec': 3, 'resolution': 2, 'video_codec': 2, 'hearing_impaired': 1, 'foreign_only': 40}
+                  'format': 7, 'audio_codec': 3, 'resolution': 2, 'video_codec': 2, 'hearing_impaired': 1, 'foreign_only': 80}
 
 #: Scores for movies
 movie_scores = {'hash': 119, 'title': 60, 'year': 30, 'release_group': 15,
-                'format': 7, 'audio_codec': 3, 'resolution': 2, 'video_codec': 2, 'hearing_impaired': 1, 'foreign_only': 40}
+                'format': 7, 'audio_codec': 3, 'resolution': 2, 'video_codec': 2, 'hearing_impaired': 1, 'foreign_only': 80}
 
 #: Equivalent release groups
 equivalent_release_groups = ({'LOL', 'DIMENSION'}, {'ASAP', 'IMMERSE', 'FLEET'})

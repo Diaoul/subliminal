@@ -20,7 +20,9 @@ language_converters.register('addic7ed = subliminal.converters.addic7ed:Addic7ed
 
 # Series cell matching regex
 show_cells_re = re.compile(b'<td class="version">.*?</td>', re.DOTALL)
-ajax_show_cells_re = re.compile(b'<select name="qsShow" id="qsShow" onchange="showChange\(0\);">.*?</select>', re.DOTALL)
+ajax_show_cells_re = re.compile(
+    b'<select name="qsShow" id="qsShow" onchange="showChange\(0\);">.*?</select>',
+    re.DOTALL)
 
 #: Series header parsing regex
 series_year_re = re.compile(r'^(?P<series>[ \w\'.:(),*&!?-]+?)(?: \((?P<year>\d{4})\))?$')

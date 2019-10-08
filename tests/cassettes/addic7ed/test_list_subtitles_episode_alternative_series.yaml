@@ -7,7 +7,7 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [Subliminal/2.1]
     method: GET
-    uri: http://www.addic7ed.com/shows.php
+    uri: https://www.addic7ed.com/ajax_getShows.php
   response:
     body:
       string: !!binary |
@@ -2153,7 +2153,7 @@ interactions:
       Cookie: [PHPSESSID=kb66pjhlo6jnnbghtqmnk4d184]
       User-Agent: [Subliminal/2.1]
     method: GET
-    uri: http://www.addic7ed.com/shows.php
+    uri: https://www.addic7ed.com/ajax_getShows.php
   response:
     body:
       string: !!binary |

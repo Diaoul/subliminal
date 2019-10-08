@@ -84,7 +84,7 @@ class Addic7edProvider(Provider):
         'slk', 'slv', 'spa', 'sqi', 'srp', 'swe', 'tha', 'tur', 'ukr', 'vie', 'zho'
     ]}
     video_types = (Episode,)
-    server_url = 'http://www.addic7ed.com/'
+    server_url = 'https://www.addic7ed.com/'
     subtitle_class = Addic7edSubtitle
 
     def __init__(self, username=None, password=None, alternative=None):

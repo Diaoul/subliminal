@@ -7,6 +7,11 @@ Addic7ed
 .. automodule:: subliminal.providers.addic7ed
    :private-members:
 
+BSPlayer
+--------
+.. automodule:: subliminal.providers.bsplayer:BSPlayerProvider
+   :private-members:
+
 LegendasTv
 ----------
 .. automodule:: subliminal.providers.legendastv

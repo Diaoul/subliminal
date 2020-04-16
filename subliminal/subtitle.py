@@ -73,7 +73,11 @@ class Subtitle(object):
         if self.encoding:
             return self.content.decode(self.encoding, errors='replace')
 
-        return self.content.decode(self.guess_encoding(), errors='replace')
+        guessed_encoding = self.guess_encoding()
+        if not guessed_encoding:
+            return
+
+        return self.content.decode(guessed_encoding, errors='replace')
 
     def is_valid(self):
         """Check if a :attr:`text` is a valid SubRip format.

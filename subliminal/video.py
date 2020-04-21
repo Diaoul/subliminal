@@ -132,6 +132,8 @@ class Episode(Video):
 
         #: Series of the episode
         self.series = series
+        if isinstance(self.series, list):
+            self.series = '-'.join(self.series)
 
         #: Season number of the episode
         self.season = season

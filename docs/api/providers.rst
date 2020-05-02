@@ -7,6 +7,11 @@ Addic7ed
 .. automodule:: subliminal.providers.addic7ed
    :private-members:
 
+GreekSubtitles
+--------
+.. automodule:: subliminal.providers.greeksubtitles
+   :private-members:
+
 LegendasTv
 ----------
 .. automodule:: subliminal.providers.legendastv

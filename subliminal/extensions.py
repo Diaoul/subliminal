@@ -90,6 +90,7 @@ class RegistrableExtensionManager(ExtensionManager):
 provider_manager = RegistrableExtensionManager('subliminal.providers', [
     'addic7ed = subliminal.providers.addic7ed:Addic7edProvider',
     'argenteam = subliminal.providers.argenteam:ArgenteamProvider',
+    'greeksubtitles = subliminal.providers.greeksubtitles:GreekSubtitlesProvider',
     'legendastv = subliminal.providers.legendastv:LegendasTVProvider',
     'opensubtitles = subliminal.providers.opensubtitles:OpenSubtitlesProvider',
     'opensubtitlesvip = subliminal.providers.opensubtitles:OpenSubtitlesVipProvider',

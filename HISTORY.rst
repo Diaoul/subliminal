@@ -1,6 +1,43 @@
 Changelog
 ---------
 
+2.1.0
+^^^^^
+**release date:** 2020-05-02
+
+* Improve legendastv provider matches
+* Fix video extensions (.mk3d .ogm .ogv)
+* Use new url to search for titles in legendastv provider
+* Fix stevedore incompatibility
+* Add support to webm video extension
+* Make providers easier to be extended and customized
+* Update podnapisi URL
+* Add support to VIP/Donor accounts in legendastv provider
+* Proper handling titles with year / country in legendastv provider
+* Several minor enhancements in legendastv provider
+* Add support for python 3.6, 3.7 and 3.8
+* Drop support for python 3.3 and 3.4
+* Do not discard providers bad zip/rar is downloaded
+* SubsCenter provider removal
+* Fix lxml parsing for Addic7ed provider
+* Support titles with asterics in Addic7ed provider
+* Add support to multi-episode search in Opensubtitles provider
+* Fix multi-episode search in TVSubtitles provider
+* Update to guessit 3
+* Improve archive scanning
+* Add Opensubtitles VIP provider
+* Add country to Movie and Episode
+* Add streaming_service to Video
+* Add info property to Subtitle
+* Do not search for subtitles if all required languages is already present
+* Improve TVDB refiner to support series with comma
+* Add alternative_titles to Video and enhance OMDB refiner to use alternative_titles
+* Only compute video hashes when required
+* Add apikey to OMDB refiner
+* Fix Subtitle validation when unable to guess encoding
+* Add support to rar in Dockerfile
+
+
 2.0.5
 ^^^^^
 **release date:** 2016-09-03

@@ -12,6 +12,7 @@ subtitles. Current supported providers are:
 * OpenSubtitles
 * Podnapisi
 * Shooter
+* Subs4Free
 * TheSubDB
 * TvSubtitles
 

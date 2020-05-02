@@ -32,6 +32,11 @@ Shooter
 .. automodule:: subliminal.providers.shooter
    :private-members:
 
+Subs4Free
+-----------
+.. automodule:: subliminal.providers.subs4free
+   :private-members:
+
 TheSubDB
 --------
 .. automodule:: subliminal.providers.thesubdb

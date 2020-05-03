@@ -96,7 +96,8 @@ provider_manager = RegistrableExtensionManager('subliminal.providers', [
     'podnapisi = subliminal.providers.podnapisi:PodnapisiProvider',
     'shooter = subliminal.providers.shooter:ShooterProvider',
     'thesubdb = subliminal.providers.thesubdb:TheSubDBProvider',
-    'tvsubtitles = subliminal.providers.tvsubtitles:TVsubtitlesProvider'
+    'tvsubtitles = subliminal.providers.tvsubtitles:TVsubtitlesProvider',
+    'wizdom = subliminal.providers.wizdom:WizdomProvider'
 ])
 
 #: Disabled providers

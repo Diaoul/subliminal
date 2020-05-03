@@ -41,3 +41,8 @@ TVsubtitles
 -----------
 .. automodule:: subliminal.providers.tvsubtitles
    :private-members:
+
+Wizdom
+------
+.. automodule:: subliminal.providers.wizdom
+   :private-members:

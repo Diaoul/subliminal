@@ -1,0 +1,37 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [Subliminal/2.1]
+    method: GET
+    uri: http://api.tmdb.org/3/search/tv?api_key=a51ee051bcd762543373903de296e0a3&query=This%20is%20a%20test&language=en
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA6tWKkhMT1WyMtRRKskvScyJL0otLs0pKVayMoCJgBQUg1XA5aJjawFr1jcgOQAA
+        AA==
+    headers:
+      Access-Control-Allow-Origin: ['*']
+      Access-Control-Expose-Headers: ['ETag, X-RateLimit-Limit, X-RateLimit-Remaining,
+          X-RateLimit-Reset, Retry-After']
+      Age: ['929']
+      CF-Cache-Status: [HIT]
+      CF-RAY: [4d3a6728da4aad67-TLV]
+      Cache-Control: ['public, max-age=28800']
+      Connection: [keep-alive]
+      Content-Encoding: [gzip]
+      Content-Type: [application/json;charset=utf-8]
+      Date: ['Wed, 08 May 2019 09:28:20 GMT']
+      Expires: ['Wed, 08 May 2019 17:28:20 GMT']
+      Server: [cloudflare]
+      Set-Cookie: ['__cfduid=db3d932bcc37103d084daa663efcff4891557307700; expires=Thu,
+          07-May-20 09:28:20 GMT; path=/; domain=.tmdb.org; HttpOnly']
+      Vary: [Accept-Encoding]
+      X-RateLimit-Limit: ['40']
+      X-RateLimit-Remaining: ['39']
+      X-RateLimit-Reset: ['1557306781']
+    status: {code: 200, message: OK}
+version: 1

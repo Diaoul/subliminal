@@ -2,20 +2,41 @@ interactions:
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      Content-Length: ['0']
-      User-Agent: [Subliminal/2.0]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '0'
+      User-Agent:
+      - Subliminal/2.1
     method: POST
-    uri: https://www.shooter.cn/api/subapi.php?lang=chn&pathinfo=%2Fhome%2Fantoine%2FPycharmProjects%2Fsubliminal%2FDallas.2012.S01E03.mkv&format=json
+    uri: https://www.shooter.cn/api/subapi.php?pathinfo=%2Fhome%2Fjones%2Fworkspace%2Fsubliminal%2FDallas.2012.S01E03.mkv&format=json&lang=chn
   response:
-    body: {string: !!python/unicode '[{"Desc":"","Delay":0,"Files":[{"Ext":"ass","Link":"https://www.shooter.cn/api/subapi.php?fetch=MTQ1ODcyMTkwM3xiQXc4UUVnUWZfajNxVzFjS2NRY2tEXzc0VHhDR2FVbkcxa3g3VHIxbXpLRkZsRFJSUjl0LW0zV18zZXZVa29xcVRFMHg2SVlfV2hMUC1ZakJFd2lIcC1VbkgyNFBUdUpZZHJza2dqenVsb0piejFiRU5TallRQXdra0tkTUNYenzjTRyGX-ecqUwizeYU2ylO2UC9SFO6Y6ob489XwZ1YFg==\u0026nonce=%ED%E5%A5%BD%0D%EA%B9%D3%03%A4%23%ED%A4%B7%A2%18"}]}]'}
+    body:
+      string: '[{"Desc":"","Delay":0,"Files":[{"Ext":"ass","Link":"https://www.shooter.cn/api/subapi.php?fetch=MTU4OTAyNzA4OHx6R1VMNkRTcTh3aE5ZUWJDVm83VVA4RjJUVldnd1UxQ3FBa0oya0hzbGVZejJnTVZnOGxZRnlHanRsUHg2MGx1NHR5X2NFSjczU2I5dVpBUkk3WFZhb2NxTVFkRUVZN1diMXFHMEQxVE84RjB2VWVwTU02aU1WaGUwN0NBcWhtMXzE8Gsdhu3qxIDJ0lUDhGOwUjTsIB4gQZbzqZZEmsMGtA==\u0026nonce=Q%81%DA%9F%9D%26%9C%07.%8D%82q%07N%C1%3F"}]}]'
     headers:
-      connection: [keep-alive]
-      content-type: [application/json; charset=utf-8]
-      date: ['Wed, 23 Mar 2016 08:47:29 GMT']
-      set-cookie: [SERVERID=7fad01ef5bb15ec46fb1a79d14039fc6|1458722849|1458722849;Path=/]
-      x-cache-status: [MISS]
-    status: {code: 200, message: OK}
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sat, 09 May 2020 12:25:21 GMT
+      EagleId:
+      - 2ff62b9515890271207675574e
+      Server:
+      - Tengine
+      Timing-Allow-Origin:
+      - '*'
+      Transfer-Encoding:
+      - chunked
+      Via:
+      - cache3.l2ot7-1[237,0], cache1.de2[394,0]
+      X-Cache-Status:
+      - MISS
+    status:
+      code: 200
+      message: OK
 version: 1

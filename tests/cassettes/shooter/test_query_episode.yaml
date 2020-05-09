@@ -2,20 +2,41 @@ interactions:
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      Content-Length: ['0']
-      User-Agent: [Subliminal/2.0]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '0'
+      User-Agent:
+      - Subliminal/2.1
     method: POST
-    uri: https://www.shooter.cn/api/subapi.php?lang=chn&pathinfo=%2Fhome%2Fantoine%2FPycharmProjects%2Fsubliminal%2FThe+Big+Bang+Theory%2FSeason+07%2FThe.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION.mkv&filehash=c13e0e5243c56d280064d344676fff94%3Bcd4184d1c0c623735f6db90841ce15fc%3B3faefd72f92b63f2504269b4f484a377%3B8c68d1ef873afb8ba0cc9f97cbac41c1&format=json
+    uri: https://www.shooter.cn/api/subapi.php?filehash=c13e0e5243c56d280064d344676fff94%3Bcd4184d1c0c623735f6db90841ce15fc%3B3faefd72f92b63f2504269b4f484a377%3B8c68d1ef873afb8ba0cc9f97cbac41c1&pathinfo=%2Fhome%2Fjones%2Fworkspace%2Fsubliminal%2FThe+Big+Bang+Theory%2FSeason+07%2FThe.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION.mkv&format=json&lang=chn
   response:
-    body: {string: !!python/unicode '[{"Desc":"","Delay":0,"Files":[{"Ext":"srt","Link":"https://www.shooter.cn/api/subapi.php?fetch=MTQ1ODcyMTkwMHxsUHc0VkpXR3owLVpCZHVmOGsyRURGNi1GaE5nTG1faF9TVGJKUFdMZEQzQld6UUg0Q0VpYkJ2MG40elJRX0ZYcFllX0d2Vm51c0cxNWE5NjZQakNiMzFvaW95cmk1ZmtLcy0yWlF6aDFZenJETkVYemczampaQkZtZF9KeVFFdjQ2QVNLTnhIRnd4VkY0QjlNZEk0enRUeldJYVJ5YnlVMHhPTmdFODByQUs1fOCIHR1wHlMc5oZ5jTjJs4cflBTsdvZFjqU-Obnvkex2\u0026nonce=%AD%D0%94%FA%27%22%AB%04r%FB%26%AF_%7F%B75"}]},{"Desc":"","Delay":0,"Files":[{"Ext":"ass","Link":"https://www.shooter.cn/api/subapi.php?fetch=MTQ1ODcyMTkwMHxSYllDNVFha0NROE1sXzRITGU4MmZVTlZ4TmNJUHVRRV8ySjl2cWhpZGd5dUlpbmw0anFOdW9qTlF4WlpVWXNJZDV1aEliT1hrUGtUZVdsS3Rmb1NiYmRrLVpub2pZSzdscDFUeURweWJYX1BMNGtfanYxVnVDXzdYVlI4VTkycE1INzN5ZHJRVG16ZDVkQmlrbTNwYXlFbVZzcktueUFDek1hV0pnT2E0RTlvfMU1bjPjd9wzx7dGBMgmHr3lcpTEjGAPJels9N_96Z0q\u0026nonce=%F62%A8%12%E5%5E%E0%04%F3%BBf%98%B9%1C%C8%7C"}]},{"Desc":"","Delay":0,"Files":[{"Ext":"srt","Link":"https://www.shooter.cn/api/subapi.php?fetch=MTQ1ODcyMTkwMHxncDJoU1RRajJGcHc5SHkyY1ZZblZqS0IzR2ZmZUhhbld1VE1mZm1GSVUtRVA5anZ2VDNQM2ZvYzV3bGI4d185Mm12eGtVRlZ6SUdqN1E5QldyWTI1MEdUR0ZPMVlxNExsVENUTllUSG5ibXdTektFWjFTT3hsdmFQMHFqRHh6UDJNSVZ1c0hkRHFpOGlLdkE5MlFER2lnNWhYbDdNaHh1UUp4SWZLYjkyWjJCfKMFw2TUKUxrmFkieysqqzBXYfw-s6USwhJdtnudJu0X\u0026nonce=%DD%C6%BF%8Dy%BD+%EF.i%C7j%83%C5%00%08"}]}]'}
+    body:
+      string: '[{"Desc":"","Delay":0,"Files":[{"Ext":"srt","Link":"https://www.shooter.cn/api/subapi.php?fetch=MTU4OTAyNzA4N3xqRzFNdGhhLXR3MTdkcHFIRmxVQTQ0YVg4ZGZDT3RBT2dQOFBiV1hiUDk1VEZ6N1FXUUFGbDNBU1BrMGJPSjNoWHQ2NW5lRm42MjNDZFh1d1pMMDhOQW5ueWtOSVA3eG1Del9tV0MzcWdjTmRuaG1NblhsTHdDeUpxcFpxcldYcjV4NEcxZVR2ei1XeGJEX29VLXhnckViQ0JhbmFxQnB5RmtvNXBoMmttcVRrfJ1X2-csbjLeVip_5t1bBfpY1ecMBFhJSsW6qxQCFZdq\u0026nonce=4%BD1r%E9%16%D8%5C%A2Z%DAp%9B%C6%60%8B"}]},{"Desc":"","Delay":0,"Files":[{"Ext":"ass","Link":"https://www.shooter.cn/api/subapi.php?fetch=MTU4OTAyNzA4N3xJc2U3NmhZcl80anFVYlc3R1hVZmhwUndJZjdRZEhicFBZbUx0LW1ZUlpPU0h5RWFQcmRQY2N0ZjFNYXVyYU12RVlxR1FvUnVidVBwazQtN1RVVFpaS21Wc1ZWckNjWFRGV0tsY0V0M0VTWWxjMFpaaVpSMzJwUzQ0cWlQdWpPdkx3TjVqRzl0c01KU0lrNC1wLURBVnp1OHNSaG52ZjJvdV9qUmpNb2lOc2tCfMfaSlHJrn1KA_7I3WZ9OXjvGbKW83WQFVjIAdZN1Q1v\u0026nonce=-7%D9s%B5%E6%E1%D7%5E%A9h8Z%0C%E2%FB"}]},{"Desc":"","Delay":0,"Files":[{"Ext":"srt","Link":"https://www.shooter.cn/api/subapi.php?fetch=MTU4OTAyNzA4N3wyNFVrY2Y3Mi03cUhicnNhTHlqM2tVT2dGanhHZnpSS0lSLWVaNmx0YXdpQmZjdVRYMXUtZ1hhdU4wRkZRZlVaTG1HVjlRczFHS0tRdTViVUFidXhBdlNsRDlNbWJLd2NEMmY0UFNpRk9IeTNuNkpHY3JGWlZzUkFZZFNXcWFlQmZqQVlxUWJlUEd2Nk9sVWtNTU95Z1o1T2NFNWtGVk1udWhReGkxR2ozZ3ZlfLTGqM0vmUOxM7goSd64T0VklvqB4cgIkFbeWSRPrXO3\u0026nonce=%BF%A1%3C%C8%82%D5I%7C%22%8A%9D%94%11%08%A3%C7"}]}]'
     headers:
-      connection: [keep-alive]
-      content-type: [application/json; charset=utf-8]
-      date: ['Wed, 23 Mar 2016 08:47:26 GMT']
-      set-cookie: [SERVERID=7fad01ef5bb15ec46fb1a79d14039fc6|1458722846|1458722846;Path=/]
-      x-cache-status: [MISS]
-    status: {code: 200, message: OK}
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sat, 09 May 2020 12:25:20 GMT
+      EagleId:
+      - 2ff62b9615890271201531930e
+      Server:
+      - Tengine
+      Timing-Allow-Origin:
+      - '*'
+      Transfer-Encoding:
+      - chunked
+      Via:
+      - cache7.l2ot7-1[242,0], cache2.de2[401,0]
+      X-Cache-Status:
+      - MISS
+    status:
+      code: 200
+      message: OK
 version: 1

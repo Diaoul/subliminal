@@ -38,43 +38,82 @@ interactions:
 
       '
     headers:
-      Accept-Encoding: [gzip]
-      Content-Length: ['344']
-      Content-Type: [text/xml]
-      User-Agent: [xmlrpclib.py/1.0.1 (by www.pythonware.com)]
+      Accept-Encoding:
+      - gzip
+      Content-Length:
+      - '344'
+      Content-Type:
+      - text/xml
+      User-Agent:
+      - Python-xmlrpc/3.8
     method: POST
     uri: https://api.opensubtitles.org/xml-rpc
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAA62UTVPCMBCG7/yKTO+QFkbkEMpBLo4OOsw4nkOylE7bpOaj6r83hQgVVMrQ27uZ
-        7L7P7iRLZh9FjipQOpViGkSDMEAgmOSpSKaBNev+JJjFPVKA2Ui+BF1KocEdlFTRQsc9tFNOIFLR
-        3EKtENFGWWa2GrnkYgVqFyAiaAGxkRkIgrfanx+yfQGHELPNSKlqnEXqbXITMZ4llUrG3CZDgv0V
-        n44b+QQ3LX/z14Yaq1sADMMQPT1cZ8apoWes9sM6KbGvcj9/0aB+1Dkp1QSfRLej4eiI/Bj+hP9v
-        /9p9kbJs4YLWFOWnezeir+0qT4tU0LxbniUVWWsWB4FyALapp9gZRZlLyu+EaY0RdjuCZwVrUMAf
-        qUgsTUC3BcHX+8/lu7iw/Q5c665fYfXdcOvB1wvn0slvMw6f89ItA0wK/u+a4dJ9DYjDQRiOCfbR
-        ObMm1eEWwX4Ve6Frdby4vwDXnMTt8QUAAA==
+        H4sIAAAAAAAAA5XTUU+DMBAA4L9CeGcF9uBMuu7BaTJnppmZi74dcLIGuCIt29yvFwwkujFlT6XN
+        9btcueOTfZZaWyy0VDS2vYFrW0ihiiTFY7s0787IngieodmoaIk6V6RR8BwKyHSzCr6FtKxOtSnK
+        0NTRWYCF4AQZCqMSJM6+v38EVr74MHJ9668PKrl/2z3PD3fx3nlNElhRwFkTw1lzh7XqL10bMKXu
+        5n3XtR7nfaUIDJw6p/XMpiuNxZmMI+9q6A/7pqyhhQyTRbXpBvPP6t3J0WWQykwSpJfQS6Ckm608
+        K0UMN3UhPcE8VRDdkOkW3b7OVO3oT8m7pMQ1Bg9AcQnxmQesW68fN9Mvs6cjRJKpK6uX09usbY9/
+        OhRDRdFxi0aq+qUo3IHnX3PW7PrkaCaOtRPIjkbzCz86v9nRAwAA
     headers:
-      accept-ranges: [bytes]
-      access-control-allow-headers: ['Origin,X-Requested-With,Content-Type,Accept,DNT,Keep-Alive,User-Agent,If-Modified-Since,Cache-Control']
-      access-control-allow-methods: ['GET, POST, OPTIONS']
-      access-control-allow-origin: ['*']
-      age: ['0']
-      content-encoding: [gzip]
-      content-length: ['367']
-      content-type: [text/xml;charset=UTF-8]
-      date: ['Mon, 06 Jun 2016 18:13:21 GMT']
-      download-quota: ['200']
-      server: [lighttpd/1.4.39]
-      set-cookie: [PHPSESSID=ch3rrv6k1rq851cdkgvrg6dug2; path=/; domain=.opensubtitles.org;
-          HttpOnly, 'weblang=en; expires=Tue, 06-Jun-2017 18:13:21 GMT; Max-Age=31536000;
-          path=/; domain=.opensubtitles.org']
-      strict-transport-security: [max-age=63072000; includeSubdomains; preload]
-      vary: [Accept-Encoding]
-      x-cache: [MISS]
-      x-cache-backend: [web3]
-      x-content-type-options: [nosniff]
-      x-frame-options: [DENY]
-      x-uncompressed-content-length: ['1521']
-    status: {code: 200, message: OK}
+      Accept-Ranges:
+      - bytes
+      Access-Control-Allow-Headers:
+      - Origin,X-Requested-With,Content-Type,Accept,DNT,Keep-Alive,User-Agent,If-Modified-Since,Cache-Control
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Age:
+      - '0'
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 590b79d3399bcda3-CDG
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '324'
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Date:
+      - Sat, 09 May 2020 12:38:09 GMT
+      Download-Quota:
+      - '199'
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cfduid=d9715f4e158336e720e181c49dd927bbb1589027889; expires=Mon, 08-Jun-20
+        12:38:09 GMT; path=/; domain=.opensubtitles.org; HttpOnly; SameSite=Lax
+      - weblang=en; expires=Sun, 09-May-2021 12:38:09 GMT; Max-Age=31536000; path=/;
+        domain=.opensubtitles.org
+      - PHPSESSID=qtiWE2WzokJZwSKzFgx-YkkaUnb; expires=Sat, 09-May-2020 18:38:09 GMT;
+        Max-Age=21600; path=/; domain=.opensubtitles.org; HttpOnly
+      Vary:
+      - Accept-Encoding
+      X-Cache:
+      - MISS
+      X-Cache-Backend:
+      - web3
+      X-Compressed-Content-Length:
+      - '324'
+      X-Content-Encoding:
+      - gzip
+      X-RateLimit-Remaining:
+      - '39'
+      X-Uncompressed-Content-Length:
+      - '977'
+      X-Via:
+      - fw1.int.opensubtitles.org
+      cf-request-id:
+      - 029b0a78010000cda30d8b5200000001
+    status:
+      code: 200
+      message: OK
 version: 1

@@ -2,10 +2,14 @@ interactions:
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      User-Agent: ['SubDB/1.0 (subliminal/2.0; https://github.com/Diaoul/subliminal)']
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - SubDB/1.0 (subliminal/2.1; https://github.com/Diaoul/subliminal)
     method: GET
     uri: http://api.thesubdb.com/?action=search&hash=11223344556677899877665544332211
   response:
@@ -13,10 +17,19 @@ interactions:
       string: !!binary |
         H4sIAAAAAAAAAwMAAAAAAAAAAAA=
     headers:
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-type: [text/html]
-      date: ['Tue, 09 Feb 2016 16:18:40 GMT']
-      server: [nginx/1.6.0]
-    status: {code: 404, message: Not Found}
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - text/html
+      Date:
+      - Sat, 09 May 2020 12:24:11 GMT
+      Server:
+      - nginx/1.6.0
+      Transfer-Encoding:
+      - chunked
+    status:
+      code: 404
+      message: Not Found
 version: 1

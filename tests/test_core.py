@@ -16,7 +16,6 @@ from subliminal.core import (AsyncProviderPool, ProviderPool, check_video, downl
                              list_subtitles, refine, save_subtitles, scan_archive, scan_video, scan_videos,
                              search_external_subtitles)
 from subliminal.extensions import provider_manager
-from subliminal.providers.addic7ed import Addic7edSubtitle
 from subliminal.providers.thesubdb import TheSubDBSubtitle
 from subliminal.providers.tvsubtitles import TVsubtitlesSubtitle
 from subliminal.score import episode_scores
@@ -70,8 +69,7 @@ def test_provider_pool_list_subtitles_provider(episodes, mock_providers):
 def test_provider_pool_list_subtitles(episodes, mock_providers):
     pool = ProviderPool()
     subtitles = pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
-    assert sorted(subtitles) == ['addic7ed', 'legendastv', 'opensubtitles', 'podnapisi', 'shooter', 'thesubdb',
-                                 'tvsubtitles']
+    assert sorted(subtitles) == ['legendastv', 'opensubtitles', 'podnapisi', 'shooter', 'thesubdb', 'tvsubtitles']
     for provider in subtitles:
         assert provider_manager[provider].plugin.initialize.called
         assert provider_manager[provider].plugin.list_subtitles.called
@@ -88,8 +86,7 @@ def test_async_provider_pool_list_subtitles_provider(episodes, mock_providers):
 def test_async_provider_pool_list_subtitles(episodes, mock_providers):
     pool = AsyncProviderPool()
     subtitles = pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
-    assert sorted(subtitles) == ['addic7ed', 'legendastv', 'opensubtitles', 'podnapisi', 'shooter', 'thesubdb',
-                                 'tvsubtitles']
+    assert sorted(subtitles) == ['legendastv', 'opensubtitles', 'podnapisi', 'shooter', 'thesubdb', 'tvsubtitles']
     for provider in subtitles:
         assert provider_manager[provider].plugin.initialize.called
         assert provider_manager[provider].plugin.list_subtitles.called
@@ -387,13 +384,11 @@ def test_list_subtitles_movie(movies, mock_providers):
     subtitles = list_subtitles({video}, languages)
 
     # test providers
-    assert not provider_manager['addic7ed'].plugin.list_subtitles.called
-    assert provider_manager['legendastv'].plugin.list_subtitles.called
-    assert provider_manager['opensubtitles'].plugin.list_subtitles.called
-    assert provider_manager['podnapisi'].plugin.list_subtitles.called
-    assert provider_manager['shooter'].plugin.list_subtitles.called
-    assert provider_manager['thesubdb'].plugin.list_subtitles.called
-    assert not provider_manager['tvsubtitles'].plugin.list_subtitles.called
+    for name in ('addic7ed', 'napiprojekt', 'opensubtitlesvip', 'tvsubtitles'):
+        assert not provider_manager[name].plugin.list_subtitles.called
+
+    for name in ('legendastv', 'opensubtitles', 'podnapisi', 'shooter', 'thesubdb'):
+        assert provider_manager[name].plugin.list_subtitles.called
 
     # test result
     assert len(subtitles) == 1
@@ -408,17 +403,15 @@ def test_list_subtitles_episode(episodes, mock_providers):
     subtitles = list_subtitles({video}, languages)
 
     # test providers
-    assert provider_manager['addic7ed'].plugin.list_subtitles.called
-    assert provider_manager['legendastv'].plugin.list_subtitles.called
-    assert provider_manager['opensubtitles'].plugin.list_subtitles.called
-    assert provider_manager['podnapisi'].plugin.list_subtitles.called
-    assert provider_manager['shooter'].plugin.list_subtitles.called
-    assert provider_manager['thesubdb'].plugin.list_subtitles.called
-    assert provider_manager['tvsubtitles'].plugin.list_subtitles.called
+    for name in ('addic7ed', 'napiprojekt', 'opensubtitlesvip'):
+        assert not provider_manager[name].plugin.list_subtitles.called
+
+    for name in ('legendastv', 'opensubtitles', 'podnapisi', 'shooter', 'thesubdb', 'tvsubtitles'):
+        assert provider_manager[name].plugin.list_subtitles.called
 
     # test result
     assert len(subtitles) == 1
-    assert sorted(subtitles[episodes['bbt_s07e05']]) == ['addic7ed', 'legendastv', 'opensubtitles', 'podnapisi',
+    assert sorted(subtitles[episodes['bbt_s07e05']]) == ['legendastv', 'opensubtitles', 'podnapisi',
                                                          'shooter', 'thesubdb', 'tvsubtitles']
 
 
@@ -426,18 +419,19 @@ def test_list_subtitles_providers(episodes, mock_providers):
     video = episodes['bbt_s07e05']
     languages = {Language('eng')}
 
-    subtitles = list_subtitles({video}, languages, providers=['addic7ed'])
+    subtitles = list_subtitles({video}, languages, providers=['opensubtitles'])
 
     # test providers
-    assert provider_manager['addic7ed'].plugin.list_subtitles.called
-    assert not provider_manager['opensubtitles'].plugin.list_subtitles.called
-    assert not provider_manager['podnapisi'].plugin.list_subtitles.called
-    assert not provider_manager['thesubdb'].plugin.list_subtitles.called
-    assert not provider_manager['tvsubtitles'].plugin.list_subtitles.called
+    for name in ('addic7ed', 'legendastv', 'napiprojekt', 'opensubtitlesvip', 'podnapisi', 'shooter', 'tvsubtitles',
+                 'thesubdb'):
+        assert not provider_manager[name].plugin.list_subtitles.called
+
+    for name in ('opensubtitles', ):
+        assert provider_manager[name].plugin.list_subtitles.called
 
     # test result
     assert len(subtitles) == 1
-    assert sorted(subtitles[episodes['bbt_s07e05']]) == ['addic7ed']
+    assert sorted(subtitles[episodes['bbt_s07e05']]) == ['opensubtitles']
 
 
 def test_list_subtitles_episode_no_hash(episodes, mock_providers):
@@ -447,16 +441,15 @@ def test_list_subtitles_episode_no_hash(episodes, mock_providers):
     subtitles = list_subtitles({video}, languages)
 
     # test providers
-    assert provider_manager['addic7ed'].plugin.list_subtitles.called
-    assert provider_manager['legendastv'].plugin.list_subtitles.called
-    assert provider_manager['opensubtitles'].plugin.list_subtitles.called
-    assert provider_manager['podnapisi'].plugin.list_subtitles.called
-    assert not provider_manager['thesubdb'].plugin.list_subtitles.called
-    assert provider_manager['tvsubtitles'].plugin.list_subtitles.called
+    for name in ('addic7ed', 'napiprojekt', 'opensubtitlesvip', 'thesubdb'):
+        assert not provider_manager[name].plugin.list_subtitles.called
+
+    for name in ('legendastv', 'opensubtitles', 'podnapisi', 'shooter', 'tvsubtitles'):
+        assert provider_manager[name].plugin.list_subtitles.called
 
     # test result
     assert len(subtitles) == 1
-    assert sorted(subtitles[episodes['dallas_s01e03']]) == ['addic7ed', 'legendastv', 'opensubtitles', 'podnapisi',
+    assert sorted(subtitles[episodes['dallas_s01e03']]) == ['legendastv', 'opensubtitles', 'podnapisi',
                                                             'shooter', 'tvsubtitles']
 
 
@@ -468,11 +461,9 @@ def test_list_subtitles_no_language(episodes, mock_providers):
     subtitles = list_subtitles({video}, languages)
 
     # test providers
-    assert not provider_manager['addic7ed'].plugin.list_subtitles.called
-    assert not provider_manager['opensubtitles'].plugin.list_subtitles.called
-    assert not provider_manager['podnapisi'].plugin.list_subtitles.called
-    assert not provider_manager['thesubdb'].plugin.list_subtitles.called
-    assert not provider_manager['tvsubtitles'].plugin.list_subtitles.called
+    for name in ('addic7ed', 'legendastv', 'napiprojekt', 'opensubtitles', 'opensubtitlesvip', 'podnapisi', 'shooter',
+                 'thesubdb', 'tvsubtitles'):
+        assert not provider_manager[name].plugin.list_subtitles.called
 
     # test result
     assert len(subtitles) == 0
@@ -480,8 +471,8 @@ def test_list_subtitles_no_language(episodes, mock_providers):
 
 def test_download_subtitles(mock_providers):
     subtitles = [
-        Addic7edSubtitle(Language('eng'), True, None, 'The Big Bang Theory', 7, 5, 'The Workplace Proximity', 2007,
-                         'DIMENSION', None),
+        # Addic7edSubtitle(Language('eng'), True, None, 'The Big Bang Theory', 7, 5, 'The Workplace Proximity', 2007,
+        #                 'DIMENSION', None),
         TheSubDBSubtitle(Language('eng'), 'ad32876133355929d814457537e12dc2'),
         TVsubtitlesSubtitle(Language('por'), None, 261077, 'Game of Thrones', 3, 10, None, '1080p.BluRay', 'DEMAND')
     ]
@@ -489,21 +480,23 @@ def test_download_subtitles(mock_providers):
     download_subtitles(subtitles)
 
     # test providers
-    assert provider_manager['addic7ed'].plugin.download_subtitle.called
-    assert not provider_manager['legendastv'].plugin.download_subtitle.called
-    assert not provider_manager['opensubtitles'].plugin.download_subtitle.called
-    assert not provider_manager['podnapisi'].plugin.download_subtitle.called
-    assert provider_manager['thesubdb'].plugin.download_subtitle.called
-    assert provider_manager['tvsubtitles'].plugin.download_subtitle.called
+    for name in ('addic7ed', 'legendastv', 'napiprojekt', 'opensubtitles', 'opensubtitlesvip', 'podnapisi', 'shooter'):
+        assert not provider_manager[name].plugin.download_subtitle.called
+
+    for name in ('thesubdb', 'tvsubtitles'):
+        assert provider_manager[name].plugin.download_subtitle.called
 
 
 @pytest.mark.integration
 @vcr.use_cassette
 def test_download_best_subtitles(episodes):
     video = episodes['bbt_s07e05']
-    languages = {Language('nld'), Language('por', 'BR')}
-    providers = ['addic7ed', 'thesubdb']
-    expected_subtitles = {('addic7ed', 'updated/17/80254/11'), ('thesubdb', '9dbbfb7ba81c9a6237237dae8589fccc-pt-BR')}
+    languages = {Language('eng'), Language('por', 'BR')}
+    providers = ['podnapisi', 'thesubdb']
+    expected_subtitles = {
+        ('thesubdb', '9dbbfb7ba81c9a6237237dae8589fccc-en'),
+        ('thesubdb', '9dbbfb7ba81c9a6237237dae8589fccc-pt-BR')
+    }
 
     subtitles = download_best_subtitles({video}, languages, providers=providers)
 
@@ -610,11 +603,15 @@ def test_save_subtitles_single_directory_encoding(movies, tmpdir):
 @pytest.mark.integration
 @vcr.use_cassette
 def test_download_bad_subtitle(movies):
-    pool = ProviderPool()
+    pool = ProviderPool(provider_configs={'legendastv': {'username': 'python-subliminal', 'password': 'subliminal'}})
     subtitles = pool.list_subtitles_provider('legendastv', movies['man_of_steel'], {Language('eng')})
-    pool.download_subtitle(subtitles[0])
-    assert subtitles[0].content is None
-    assert subtitles[0].is_valid() is False
+    subtitle = subtitles[0]
+    subtitle.archive.content._rarfile.truncate(200)
+
+    pool.download_subtitle(subtitle)
+
+    assert subtitle.content is None
+    assert subtitle.is_valid() is False
 
 
 def test_scan_archive_with_one_video(rar, mkv):

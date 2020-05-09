@@ -203,37 +203,57 @@ class LegendasTVProvider(Provider):
         self.session.close()
 
     @staticmethod
-    def is_valid_title(title, title_id, sanitized_title, season, year):
+    def title_matches(title, title_id, sanitized_title, season, year):
         """Check if is a valid title."""
         sanitized_result = sanitize(title['title'])
         if sanitized_result != sanitized_title:
             logger.debug("Mismatched title, discarding title %d (%s)",
                          title_id, sanitized_result)
-            return
+            return False
 
         # episode type
-        if season:
+        if season is not None:
             # discard mismatches on type
             if title['type'] != 'episode':
                 logger.debug("Mismatched 'episode' type, discarding title %d (%s)", title_id, sanitized_result)
-                return
+                return False
 
             # discard mismatches on season
             if 'season' not in title or title['season'] != season:
                 logger.debug('Mismatched season %s, discarding title %d (%s)',
                              title.get('season'), title_id, sanitized_result)
-                return
+                return False
         # movie type
         else:
             # discard mismatches on type
             if title['type'] != 'movie':
                 logger.debug("Mismatched 'movie' type, discarding title %d (%s)", title_id, sanitized_result)
-                return
+                return False
 
             # discard mismatches on year
             if year is not None and 'year' in title and title['year'] != year:
                 logger.debug("Mismatched movie year, discarding title %d (%s)", title_id, sanitized_result)
-                return
+                return False
+
+        return True
+
+    @staticmethod
+    def episode_matches(name, season, episodes):
+        if season is None or not episodes:
+            return True
+
+        guess = guessit(name, {'type': 'episode'})
+
+        for prop, value in (('season', season), ('episode', episodes)):
+            if prop not in guess:
+                continue
+
+            wanted = set(ensure_list(value))
+            actual = set(ensure_list(guess[prop]))
+            if not wanted.intersection(actual):
+                logger.debug('Mismatched %s (wanted: %s, actual %s), discarding %s', prop, wanted, actual, name)
+                return False
+
         return True
 
     @region.cache_on_arguments(expiration_time=SHOW_EXPIRATION_TIME, should_cache_fn=lambda value: value)
@@ -305,7 +325,7 @@ class LegendasTVProvider(Provider):
 
                 # add title only if is valid
                 # Check against title without ignored chars
-                if self.is_valid_title(title, title_id, sanitized_titles[0], season, title_year):
+                if self.title_matches(title, title_id, sanitized_titles[0], season, title_year):
                     titles[title_id] = title
 
             logger.debug('Found %d titles', len(titles))
@@ -348,22 +368,10 @@ class LegendasTVProvider(Provider):
                 if archive.pack and clean_name.startswith('(p)'):
                     clean_name = clean_name[3:]
 
-                # guess from name
-                guess = guessit(clean_name, {'type': title_type})
-
-                # episode
-                if season and episodes:
-                    # discard mismatches on episode in non-pack archives
-
-                    # Guessit may return int for single episode or list for multi-episode
-                    # Check if archive name has multiple episodes releases on it
-                    if not archive.pack and 'episode' in guess:
-                        wanted_episode = set(episodes)
-                        archive_episode = set(ensure_list(guess['episode']))
-
-                        if not wanted_episode.intersection(archive_episode):
-                            logger.debug('Mismatched episode %s, discarding archive: %s', guess['episode'], clean_name)
-                            continue
+                if (title_type == 'episode'
+                        and not archive.pack
+                        and not self.episode_matches(clean_name, season, episodes)):
+                    continue
 
                 # extract text containing downloads, rating and timestamp
                 data_text = archive_soup.find('p', class_='data').text
@@ -465,6 +473,10 @@ class LegendasTVProvider(Provider):
                         if not name.lower().endswith(SUBTITLE_EXTENSIONS):
                             continue
 
+                        # discard wrong episodes
+                        if t['type'] == 'episode' and not self.episode_matches(name, season, episodes):
+                            continue
+
                         releases.append(name)
 
                     # cache the releases
@@ -504,6 +516,7 @@ class LegendasTVProvider(Provider):
 
         # extract subtitle's content
         subtitle.content = fix_line_ending(subtitle.archive.content.read(subtitle.name))
+        subtitle.archive.content = None
 
 
 def raise_for_status(r):

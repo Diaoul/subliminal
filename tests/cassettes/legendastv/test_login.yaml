@@ -1,13 +1,19 @@
 interactions:
 - request:
-    body: data%5BUser%5D%5Bpassword%5D=subliminal&data%5BUser%5D%5Busername%5D=python-subliminal&_method=POST
+    body: _method=POST&data%5BUser%5D%5Busername%5D=python-subliminal&data%5BUser%5D%5Bpassword%5D=subliminal
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      Content-Length: ['99']
-      Content-Type: [application/x-www-form-urlencoded]
-      User-Agent: [Subliminal/2.0]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '99'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Subliminal/2.1
     method: POST
     uri: http://legendas.tv/login
   response:
@@ -15,25 +21,45 @@ interactions:
       string: !!binary |
         H4sIAAAAAAAAAwMAAAAAAAAAAAA=
     headers:
-      accept-ranges: [bytes]
-      access-control-allow-origin: ['*']
-      age: ['0']
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-length: ['20']
-      content-type: [text/html; charset=UTF-8]
-      date: ['Thu, 31 Mar 2016 13:46:09 GMT']
-      location: ['http://legendas.tv/']
-      set-cookie: [PHPSESSID=fvail7n84rqpqp9bq3ra8cgt02; path=/; HttpOnly, 'PHPSESSID=deleted;
-          expires=Wed, 01-Apr-2015 13:47:06 GMT; path=/', PHPSESSID=j626ehdap93eup52d3it5tcr53;
-          path=/; HttpOnly, 'PHPSESSID=deleted; expires=Wed, 01-Apr-2015 13:47:06
-          GMT; path=/', PHPSESSID=0nvpqelmc4anb3q4ftkuis7eb2; path=/; HttpOnly, 'au=3673290---198d5f2e1a202d0c2878ae871f911763d7cd76c0;
-          expires=Thu, 14-Apr-2016 13:47:07 GMT; path=/']
-      vary: ['User-Agent,Accept-Encoding']
-      via: [1.1 varnish]
-      x-backend: [default_director]
-      x-cache: [MISS]
-      x-cacheable: ['YES:Forced']
-      x-varnish: ['2027369830']
-    status: {code: 302, message: Found}
+      Accept-Ranges:
+      - bytes
+      Access-Control-Allow-Origin:
+      - '*'
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '20'
+      Content-Type:
+      - text/html; charset=UTF-8
+      Date:
+      - Sat, 09 May 2020 11:43:54 GMT
+      Location:
+      - http://legendas.tv/
+      Set-Cookie:
+      - PHPSESSID=kj2gc11odf54r60ndc65t8b273; path=/; HttpOnly
+      - PHPSESSID=deleted; expires=Fri, 10-May-2019 12:01:05 GMT; path=/
+      - PHPSESSID=ouahtugkm1e43iojfu65ag8605; path=/; HttpOnly
+      - PHPSESSID=deleted; expires=Fri, 10-May-2019 12:01:05 GMT; path=/
+      - PHPSESSID=uh3qhcfg6s8fipuqadbponpqi3; path=/; HttpOnly
+      - au=3673290---198d5f2e1a202d0c2878ae871f911763d7cd76c0; expires=Sat, 23-May-2020
+        12:01:06 GMT; path=/
+      Vary:
+      - Accept-Encoding,User-Agent
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cacheable:
+      - YES:Forced
+      X-Varnish:
+      - '824656644'
+      X-backend:
+      - default_director
+    status:
+      code: 302
+      message: Found
 version: 1

@@ -1,0 +1,62 @@
+interactions:
+- request:
+    body: username=subliminal%40gmail.com&password=subliminal
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['51']
+      Content-Type: [application/x-www-form-urlencoded]
+      User-Agent: [Subliminal/2.1]
+    method: POST
+    uri: http://www.cinemast.org/he/cinemast/api/login/
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA6tWKsnPTs1TslJQMjUz1bW0tExJTrQ0NrBISbMwMDBJTTJIU9JRUCotTi0CqjGy
+        tDQyMQXyi1KLS3NKQLqKS5OTU4uLlWoBJq+CA0oAAAA=
+    headers:
+      Cache-Control: [no-cache]
+      Connection: [keep-alive]
+      Content-Encoding: [gzip]
+      Content-Language: [he]
+      Content-Type: [application/json]
+      Date: ['Wed, 08 May 2019 09:29:27 GMT']
+      Server: [nginx/1.10.2]
+      Vary: [Accept-Encoding]
+    status: {code: 200, message: OK}
+- request:
+    body: q=Dallas&user=299245&token=565-999dca9308df8004eb0f&type=series&season=1&episode=3
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['82']
+      Content-Type: [application/x-www-form-urlencoded]
+      User-Agent: [Subliminal/2.1]
+    method: POST
+    uri: http://www.cinemast.org/he/cinemast/api/search/
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA61UbWvbMBD+K8GfW0dvtuV+KzjbCl0LyegKSzGyfI61+W2WnTWE/PdK6kvSUkjZ
+        ZozQ3em557kTp60n27EZvLMJPpl4GkQvS2N4uitVc+8ZH3RKtzlYJ7V2LgZhjB9bLwcte9UNqm1s
+        dDmiIKduRW6V+z1gCx3Ksc4aoaq0Ev3KpZzqQQxKTqWQJUzrdq0g5RHFKaZhQCgLeZgGcbpHSj08
+        ov2f3comFao3klwygqconBKEiQ2soIEeXisD7vbgVmZPNaKGtISPFbAx/XFETxSmX7pttHHR51Tg
+        epGIqhJ6smwm5ls29qzKTcCWZnFjNqihAovceo7d9rP901StyK3XiyxmDb1+6u5jRt8y+wuEZ4j6
+        yU0yV51/u1bJ6Xz2/XyevPB4JGQMuxy/YGMdBeNUxAwLAgCCFZRhiCIWSYpFUaDA251M3kggATsu
+        IiKo878k3278W8N5mlx8nV0tLq6vDqQEIWfkQAojAWSIZlEIJOQmV0FxUIS8iAsmBJD3pDB0XIpT
+        cW9VXF5f/l9+zD/K727j/NPnN/z0gD/EWUgCTrmgnCAqCQ4oQgTimOcxyth7/PQ4PePPN+F6UC+S
+        f9Jwt3s1sbo2jH89sQ7tJnZ39zI3rjCr6fe+Imv2oMdqcK/QKCVo5xxU7YYUnSH7+4gSQ+Uim85F
+        NPTKTNTuARYlajHTBAAA
+    headers:
+      Cache-Control: [no-cache]
+      Connection: [keep-alive]
+      Content-Encoding: [gzip]
+      Content-Language: [he]
+      Content-Type: [application/json]
+      Date: ['Wed, 08 May 2019 09:29:27 GMT']
+      Server: [nginx/1.10.2]
+      Vary: [Accept-Encoding, Cookie]
+    status: {code: 200, message: OK}
+version: 1

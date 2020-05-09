@@ -7,6 +7,11 @@ Addic7ed
 .. automodule:: subliminal.providers.addic7ed
    :private-members:
 
+Cinemast
+----------
+.. automodule:: subliminal.providers.cinemast
+   :private-members:
+
 LegendasTv
 ----------
 .. automodule:: subliminal.providers.legendastv

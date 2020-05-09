@@ -2,201 +2,551 @@ interactions:
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Accept-Language: [en]
-      Authorization: [!!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0NjA0OTYwMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNDYwNDA5NjE0fQ.heRtvsk6Hz-XcgpcFdSnjwXYsyq3LqH3efNxHPZOhrDjhOb3sEH4xb1hVzJKV_5s8-klM2BoYROG7Gj4zEmM5ff4hgihajs3t-pdbz_vRMTjv2H29X6Ag1eT5aT1whVXzkH99wfH1bintNxGfFBkvy5KICaLBsnB-0tjFH5WriQ0h0XC2ye21qiyC83CzXcYQpMnIabSHrfsKO8wipjkRlmMkdQhrz5YwLb43lCOmS9TxJ6YH6MvL8LslhPm87pWmBJm2Tak752uHsRLZeHufGl-pjuxyPZdCGSO5DFXqOg_lSJDE1Vu6HjJlJH19yOcB0bgyYWnFQc-YW7pt1M_CQ']
-      Connection: [keep-alive]
-      Content-Type: [application/json]
-      Cookie: [__cfduid=da5fbb51392caf8691545fb0698a565d81460409614]
-      User-Agent: [Subliminal/2.0]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en
+      Authorization:
+      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Subliminal/2.1
     method: GET
     uri: https://api.thetvdb.com/search/series?name=dallas
   response:
     body:
-      string: !!binary |
-        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
-        ABfFF1TXIQAA
+      string: "{\"data\":[{\"aliases\":[],\"banner\":\"/banners/graphical/77092-g.jpg\"\
+        ,\"firstAired\":\"1978-4-2\",\"id\":77092,\"image\":\"/banners/posters/77092-1.jpg\"\
+        ,\"network\":\"CBS\",\"overview\":\"The world's first mega-soap, and one of\
+        \ the most popular ever produced, Dallas had it all. Beautiful women, expensive\
+        \ cars, and men playing Monopoly with real buildings. Famous for one of the\
+        \ best cliffhangers in TV history, as the world asked \\\"Who shot J.R.?\\\
+        \" \\r\\nA slow-burner to begin with, Dallas hit its stride in the 2nd season,\
+        \ with long storylines and expert character development. Dallas ruled the\
+        \ airwaves in the 1980's.\",\"poster\":\"/banners/posters/77092-1.jpg\",\"\
+        seriesName\":\"Dallas\",\"slug\":\"dallas\",\"status\":\"Ended\"},{\"aliases\"\
+        :[],\"banner\":\"/banners/graphical/242521-g5.jpg\",\"firstAired\":\"2012-6-13\"\
+        ,\"id\":242521,\"image\":\"/banners/posters/242521-6.jpg\",\"network\":\"\
+        TNT (US)\",\"overview\":\"The next generation of the Ewing family - cousins\
+        \ John Ross Ewing and Christopher Ewing - clash over the family's oil business\
+        \ and vast fortune. Roll on drama, sabotage, secrets and betrayal. Everyone\
+        \ is back and then some!\",\"poster\":\"/banners/posters/242521-6.jpg\",\"\
+        seriesName\":\"Dallas (2012)\",\"slug\":\"dallas-2012\",\"status\":\"Ended\"\
+        },{\"aliases\":[],\"banner\":null,\"firstAired\":\"2006-1-5\",\"id\":80341,\"\
+        image\":\"/banners/posters/80341-1.jpg\",\"network\":\"A\\u0026E\",\"overview\"\
+        :\"Dallas SWAT follows the action-packed, high-stress line of work and the\
+        \ elite team of law enforcement officers that make up the Dallas SWAT team.\
+        \ Every day the officers on this team must be at the top of their game, waiting\
+        \ for the next mission. Follow the officers to their homes and see what they\
+        \ do on their down time and how the rigors of their job affect their life\
+        \ out side of the team.\",\"poster\":null,\"seriesName\":\"Dallas SWAT\",\"\
+        slug\":\"dallas-swat\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"\
+        firstAired\":\"2006-9-29\",\"id\":79395,\"image\":\"/banners/posters/79395-2.jpg\"\
+        ,\"network\":\"CMT\",\"overview\":\"It takes a lot more than pompoms and a\
+        \ winning smile to become a member of one of the nation's most iconic cheerleading\
+        \ teams in the world as CMT discovers in the two-hour special, Dallas Cowboys\
+        \ Cheerleaders: Making the Team. \\r\\n\\r\\nCMT cameras document the audition\
+        \ process as 1,000 women descend upon Texas Stadium for Dallas Cowboys Cheerleaders\
+        \ open auditions. CMT cameras will capture the entire journey of the 2005-2006\
+        \ squad from auditions, through training camp, all the way to the first home\
+        \ game, with unprecedented access. \\r\\n\\r\\n\\\"Through the years, I have\
+        \ found that most people don't truly understand what it takes to be a cheerleader,\\\
+        \" says Dallas Cowboys Cheerleaders director Kelli McGonagill Finglass. \\\
+        \"This CMT special breaks through the mystique of the organization to reveal\
+        \ a group of women with extraordinary talent, sacrifice and diversity. I am\
+        \ proud for the nation to see how truly impressive the ladies are while always\
+        \ embracing a humble, hometown girl spirit.\\\" \\r\\n\\r\\nWith unlimited\
+        \ access, CMT's original special will take viewers every step of the way,\
+        \ as the field of candidates is whittled down from more than 1,000 to just\
+        \ 38. CMT will go behind the scenes throughout the three audition phases --\
+        \ preliminaries, semifinals and finals. Then it's off with the 45 remaining\
+        \ candidates for a grueling three-month training camp to learn more than 50\
+        \ song-and-dance routines for the upcoming football season. Ultimately 38\
+        \ women will be selected for the 2005-2006 Dallas Cowboys Cheerleaders squad,\
+        \ and CMT will be there as they perform at the first home game against their\
+        \ rivals, the Washington Redskins.\",\"poster\":null,\"seriesName\":\"Dallas\
+        \ Cowboys Cheerleaders: Making the Team\",\"slug\":\"dallas-cowboys-cheerleaders-making-the-team\"\
+        ,\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":null,\"firstAired\"\
+        :null,\"id\":357811,\"image\":\"/banners/posters/5c331ccbd15fd.jpg\",\"network\"\
+        :null,\"poster\":null,\"seriesName\":\"Dallas DNA\",\"slug\":\"dallas-dna\"\
+        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/5bef731022dd6.jpg\"\
+        ,\"firstAired\":\"2018-5-30\",\"id\":347972,\"image\":\"/banners/posters/5b18113f7a921.jpg\"\
+        ,\"network\":\"YouTube Premium\",\"overview\":\"DALLAS \\u0026 ROBO is an\
+        \ animated comedy from YouTube Originals about best friends and dysfunctional\
+        \ space truckers Dallas Moonshiner, a boozy ex-stock car racer (Kat Dennings)\
+        \ and Robo, a hulking A.I. with a sensitive side (John Cena.) As they haul\
+        \ their cargo all over the galaxy, they also run out on bar tabs, bicker with\
+        \ rival truckers,and tussle with outlaw cannibal bikers who terrorize the\
+        \ space lanes.\\r\\n\",\"poster\":\"/banners/posters/5b18113f7a921.jpg\",\"\
+        seriesName\":\"Dallas \\u0026 Robo\",\"slug\":\"dallas-and-robo\",\"status\"\
+        :\"Continuing\"},{\"aliases\":[],\"banner\":\"/banners/graphical/5af2a3181aa19.jpg\"\
+        ,\"firstAired\":\"2017-11-28\",\"id\":345215,\"image\":\"/banners/posters/5b2348800f9f3.jpg\"\
+        ,\"network\":\"Food Network\",\"overview\":\"Dallas Cakes, follows talented,\
+        \ Dallas-based bakers as they conceive, create and deliver incredible, customized\
+        \ confections to their customers.\",\"poster\":\"/banners/posters/5b2348800f9f3.jpg\"\
+        ,\"seriesName\":\"Dallas Cakes\",\"slug\":\"345215\",\"status\":\"Ended\"\
+        },{\"aliases\":[],\"banner\":null,\"firstAired\":null,\"id\":330483,\"image\"\
+        :\"/banners/images/missing/series.jpg\",\"network\":null,\"poster\":null,\"\
+        seriesName\":\"Dallas 2\",\"slug\":\"330483\",\"status\":\"Ended\"},{\"aliases\"\
+        :[],\"banner\":null,\"firstAired\":\"2009-10-4\",\"id\":293986,\"image\":\"\
+        /banners/images/missing/series.jpg\",\"network\":\"Style\",\"overview\":\"\
+        This show follows the wealthiest mothers and daughters from Dallas' most well-off\
+        \ neighborhoods. See how their relationships fair in the lives of the super-rich.\
+        \ Starring Pamela Martin Duarte and her daughter Hannah Martin Duarte.\",\"\
+        poster\":null,\"seriesName\":\"Dallas Divas \\u0026 Daughters\",\"slug\":\"\
+        dallas-divas-and-daughters\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\"\
+        :null,\"firstAired\":\"2013-7-23\",\"id\":271452,\"image\":\"/banners/posters/271452-3.jpg\"\
+        ,\"network\":\"Velocity\",\"overview\":\"Car enthusiasts battle one another\
+        \ at automobile auctions, then try to flip their purchases.\",\"poster\":null,\"\
+        seriesName\":\"Dallas Car Sharks\",\"slug\":\"dallas-car-sharks\",\"status\"\
+        :\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"2007-3-9\",\"\
+        id\":79949,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"\
+        Showtime\",\"overview\":\"This seven-part documentary series from the producers\
+        \ of \\\"Inside Deep Throat\\\" tracks the production of \\\"Debbie Does Dallas\
+        \ Again,\\\" a sequel to the legendary porn feature, as director Paul Thomas\
+        \ and star Stefani Morgan bring their erotic film to life. \",\"poster\":null,\"\
+        seriesName\":\"Debbie Does Dallas Again\",\"slug\":\"debbie-does-dallas-again\"\
+        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"2016-11-2\"\
+        ,\"id\":319215,\"image\":\"/banners/posters/319215-1.jpg\",\"network\":null,\"\
+        overview\":\"Follow the lives of Bri Barlup, Emily Fernandez, Asta Young,\
+        \ Amanda Loy, Tiffany Chance and Caylea Woodbury as they take on new adventures,\
+        \ friendships, fights and (of course!) all the drama. Everything is not always\
+        \ bigger in Texas!\",\"poster\":null,\"seriesName\":\"Little Women: Dallas\"\
+        ,\"slug\":\"little-women-dallas\",\"status\":\"Ended\"},{\"aliases\":[],\"\
+        banner\":null,\"firstAired\":null,\"id\":292986,\"image\":\"/banners/images/missing/series.jpg\"\
+        ,\"network\":\"HGTV\",\"poster\":null,\"seriesName\":\"Donna Decorates Dallas\"\
+        ,\"slug\":\"donna-decorates-dallas\",\"status\":\"Ended\"},{\"aliases\":[],\"\
+        banner\":null,\"firstAired\":\"2013-12-5\",\"id\":274997,\"image\":\"/banners/posters/274997-2.jpg\"\
+        ,\"network\":\"Bravo\",\"overview\":\"Courtney Kerr, breakout star of Most\
+        \ Eligible Dallas, navigates the lively Dallas social scene, while building\
+        \ a brand new career in this docu-series. This season follows Courtney through\
+        \ an emotional rollercoaster ride as she juggles her search for the perfect\
+        \ southern gentleman and a fast moving fashion career filled with amazing\
+        \ opportunities. \",\"poster\":null,\"seriesName\":\"Courtney Loves Dallas\"\
+        ,\"slug\":\"courtney-loves-dallas\",\"status\":\"Ended\"},{\"aliases\":[],\"\
+        banner\":null,\"firstAired\":null,\"id\":269228,\"image\":\"/banners/images/missing/series.jpg\"\
+        ,\"network\":null,\"overview\":\"A glossy, cheeky and occasionally outrageous\
+        \ behind-the-scenes look at the new Dallas\",\"poster\":null,\"seriesName\"\
+        :\"John Borrowman's Dallas\",\"slug\":\"john-borrowmans-dallas\",\"status\"\
+        :\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"2011-8-15\",\"\
+        id\":250374,\"image\":\"/banners/posters/250374-1.jpg\",\"network\":\"Bravo\"\
+        ,\"overview\":\"They\u2019re young, they\u2019re hot, they\u2019re single\
+        \ \u2013- they\u2019re Dallas\u2019 Most Eligible. From beauty queens to pro-football\
+        \ players, this group of Texas socialites proves that everything\u2019s bigger\
+        \ in Texas \u2013- including the drama. Some are looking for true love while\
+        \ others have perfected the art of the one-night stand, and somehow their\
+        \ love lives have all crossed paths at one time or another. Dallas serves\
+        \ as the sexy backdrop for this jaw-dropping series that follows a group of\
+        \ successful friends living it up in the lone star state. \",\"poster\":null,\"\
+        seriesName\":\"Most Eligible Dallas\",\"slug\":\"most-eligible-dallas\",\"\
+        status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":null,\"\
+        id\":347832,\"image\":\"/banners/images/missing/series.jpg\",\"network\":null,\"\
+        poster\":null,\"seriesName\":\"Children's Medical Centre Dallas\",\"slug\"\
+        :\"childrens-medical-centre-dallas\",\"status\":\"Ended\"},{\"aliases\":[],\"\
+        banner\":null,\"firstAired\":\"2011-10-10\",\"id\":252679,\"image\":\"/banners/posters/252679-1.jpg\"\
+        ,\"network\":\"LOGO\",\"overview\":\"Logo goes where everything is bigger,\
+        \ including the drama. The A-List: Dallas is dishing up a Texas-sized serving\
+        \ of larger-than-life personalities and their high-living lifestyles.\",\"\
+        poster\":null,\"seriesName\":\"The A-List: Dallas\",\"slug\":\"the-a-list-dallas\"\
+        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"2010-10-28\"\
+        ,\"id\":203581,\"image\":\"/banners/posters/203581-1.jpg\",\"network\":\"\
+        TLC\",\"overview\":\"Police Women of Dallas is the fourth installment of TLC's\
+        \ Police Women reality documentary series, which follows three police officers\
+        \ and a detective of the Dallas Police Department in Dallas, Texas.\",\"poster\"\
+        :null,\"seriesName\":\"Police Women of Dallas\",\"slug\":\"police-women-of-dallas\"\
+        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/307475-g2.jpg\"\
+        ,\"firstAired\":\"2016-4-11\",\"id\":307475,\"image\":\"/banners/posters/307475-1.jpg\"\
+        ,\"network\":\"Bravo\",\"overview\":\"An exclusive look into the glamorous\
+        \ galas, scintillating scandals and enormous egos of a group of women as they\
+        \ navigate the social scene of Dallas\u2019 elite, all while juggling their\
+        \ husbands, boyfriends and families.\",\"poster\":\"/banners/posters/307475-1.jpg\"\
+        ,\"seriesName\":\"The Real Housewives of Dallas\",\"slug\":\"the-real-housewives-of-dallas\"\
+        ,\"status\":\"Continuing\"},{\"aliases\":[\"Storage Wars: Dallas\"],\"banner\"\
+        :null,\"firstAired\":\"2011-12-6\",\"id\":251596,\"image\":\"/banners/posters/251596-1.jpg\"\
+        ,\"network\":\"A\\u0026E\",\"overview\":\"Storage Wars: Texas (Originally\
+        \ Storage Wars Dallas) is a reality television series on the A\\u0026E Network\
+        \ that premiered in 2011. It is a regionalized spin-off of the highly-popular\
+        \ series Storage Wars.\",\"poster\":null,\"seriesName\":\"Storage Wars: Texas\"\
+        ,\"slug\":\"storage-wars-texas\",\"status\":\"Ended\"},{\"aliases\":[\"All\
+        \ or Nothing: A Season with the Arizona Cardinals\",\"All or Nothing: A Season\
+        \ with the Los Angeles Rams\",\"All or Nothing: The Dallas Cowboys\"],\"banner\"\
+        :\"/banners/graphical/313828-g.jpg\",\"firstAired\":\"2016-6-30\",\"id\":313828,\"\
+        image\":\"/banners/posters/313828-1.jpg\",\"network\":\"Amazon\",\"overview\"\
+        :\"For the first time in history, Amazon and NFL Films present an unprecedented\
+        \ inside look at the lives of players, coaches and owners of a franchise over\
+        \ the course of an entire NFL season. Witness the real life, behind the scenes\
+        \ journey on the field, off the field, and everything in between.\",\"poster\"\
+        :\"/banners/posters/313828-1.jpg\",\"seriesName\":\"All or Nothing\",\"slug\"\
+        :\"all-or-nothing\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\"\
+        :\"/banners/graphical/262312-g.jpg\",\"firstAired\":\"1983-12-21\",\"id\"\
+        :262312,\"image\":\"/banners/posters/262312-1.jpg\",\"network\":\"Anime OAV\"\
+        ,\"overview\":\"In a near future, mankind has moved from a drained Earth to\
+        \ the Moon. Rebel acts of terrorism lead to conflicts with the Earth Federal\
+        \ Government. A mysterious entity called Dallos appears to restore hope.\"\
+        ,\"poster\":\"/banners/posters/262312-1.jpg\",\"seriesName\":\"Dallos\",\"\
+        slug\":\"dallos\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"\
+        firstAired\":null,\"id\":251784,\"image\":\"/banners/images/missing/series.jpg\"\
+        ,\"network\":\"ITV4\",\"overview\":\"Dallaglio's World Cup is presented by\
+        \ Lawrence Dallaglio and Craig Doyle. He takes a look at the fates of the\
+        \ world\u2019s leading rugby nations from the inaugural Rugby World Cup in\
+        \ 1987 through to France in 2007. He talks to Craig Doyle as he examines what\
+        \ it takes for a country to be able to succeed at the highest level\",\"poster\"\
+        :null,\"seriesName\":\"Dallaglio's World Cup\",\"slug\":\"dallaglios-world-cup\"\
+        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2015-3-16\"\
+        ,\"id\":369339,\"image\":\"/banners/posters/5d74c867a0e26.jpg\",\"network\"\
+        :\"Rai 3\",\"overview\":\"Cronache dall'antichit\xE0 \xE8 un programma di\
+        \ approfondimento storico, in onda su Rai Storia. Come un inviato nel mondo\
+        \ antico, Cristoforo Gorno guida il telespettatore ora dopo ora nei luoghi\
+        \ dell'azione, non tralasciando il contesto in cui quell'avvenimento si \xE8\
+        \ determinato.\",\"poster\":\"/banners/posters/5d74c867a0e26.jpg\",\"seriesName\"\
+        :\"Cronache dall'antichit\xE0\",\"slug\":\"cronache-dallantichita\",\"status\"\
+        :\"Continuing\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"2013-10-4\"\
+        ,\"id\":281815,\"image\":\"/banners/posters/281815-2.jpg\",\"network\":\"\
+        YouTube\",\"poster\":null,\"seriesName\":\"Fuga dalla morte\",\"slug\":\"\
+        281815\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/text/260116.jpg\"\
+        ,\"firstAired\":null,\"id\":260116,\"image\":\"/banners/posters/260116-1.jpg\"\
+        ,\"network\":null,\"poster\":\"/banners/posters/260116-1.jpg\",\"seriesName\"\
+        :\"In the Beginning: The Bible Stories\",\"slug\":\"260116\",\"status\":\"\
+        Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"2011-11-15\",\"\
+        id\":256421,\"image\":\"/banners/posters/256421-2.jpg\",\"network\":\"Canale\
+        \ 5\",\"poster\":null,\"seriesName\":\"Baciati dall'amore\",\"slug\":\"256421\"\
+        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":null,\"\
+        id\":320148,\"image\":\"/banners/images/missing/series.jpg\",\"network\":null,\"\
+        overview\":\"Lawrence Dallaglio and Freddie Flintoff cycle from Olympia to\
+        \ London\",\"poster\":null,\"seriesName\":\"Flintoff and Dallaglio's Big Ride\"\
+        ,\"slug\":\"flintoff-and-dallaglios-big-ride\",\"status\":\"Ended\"},{\"aliases\"\
+        :[],\"banner\":null,\"firstAired\":null,\"id\":258261,\"image\":\"/banners/posters/258261-1.jpg\"\
+        ,\"network\":null,\"poster\":null,\"seriesName\":\"Le frontiere dell'Astronomia\"\
+        ,\"slug\":\"258261\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"\
+        firstAired\":null,\"id\":368159,\"image\":\"/banners/posters/5d721a0e2deec.jpg\"\
+        ,\"network\":null,\"poster\":null,\"seriesName\":\"Khalilullah, Ibrahim l\u2019\
+        ami intime d\u2019Allah (\u0627\u0628\u0631\u0627\u0647\u064A\u0645 \u062E\
+        \u0644\u064A\u0644 \u0627\u0644\u0644\u0647)\",\"slug\":\"khalilullah\",\"\
+        status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/5c7072b6f29eb.jpg\"\
+        ,\"firstAired\":\"2019-2-15\",\"id\":360017,\"image\":\"/banners/posters/5c706f9410fe3.jpg\"\
+        ,\"network\":\"V LIVE\",\"poster\":\"/banners/posters/5c706f9410fe3.jpg\"\
+        ,\"seriesName\":\"ITZY \\\"DALLA DALLA\\\" M/V BEHIND\",\"slug\":\"itzy-dalla-dalla-mv-behind\"\
+        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"2019-6-14\"\
+        ,\"id\":364471,\"image\":\"/banners/posters/5d06ab22a6f8d.jpg\",\"network\"\
+        :\"Netflix\",\"overview\":\"New interviews and an up-to-date analysis of evidence\
+        \ shed light on the 1992 murders of three girls in Spain and their profound\
+        \ impact on the nation.\",\"poster\":null,\"seriesName\":\"The Alc\xE0sser\
+        \ Murders\",\"slug\":\"the-alcasser-murders\",\"status\":\"Ended\"},{\"aliases\"\
+        :[\"Bugs Bunny\",\"Daffy Duck\",\"Foghorn Leghorn\",\"Road Runner\",\"Speedy\
+        \ Gonzales\",\"Sylvester\",\"Tweety\"],\"banner\":\"/banners/graphical/72514-g2.jpg\"\
+        ,\"firstAired\":\"1929-5-1\",\"id\":72514,\"image\":\"/banners/posters/72514-2.jpg\"\
+        ,\"network\":\"Cartoon Network\",\"overview\":\"Looney Tunes is an American\
+        \ animated series of comedy short films produced by Warner Bros. from 1929\
+        \ to 1969 during the golden age of American animation, alongside its sister\
+        \ series Merrie Melodies\",\"poster\":\"/banners/posters/72514-2.jpg\",\"\
+        seriesName\":\"Looney Tunes\",\"slug\":\"looney-tunes\",\"status\":\"Ended\"\
+        },{\"aliases\":[],\"banner\":\"/banners/graphical/71301-g.jpg\",\"firstAired\"\
+        :\"2002-9-7\",\"id\":71301,\"image\":\"/banners/posters/71301-3.jpg\",\"network\"\
+        :\"Cartoon Network\",\"overview\":\"The characters of Looney Tunes are all\
+        \ babies and live with Granny.\",\"poster\":\"/banners/posters/71301-3.jpg\"\
+        ,\"seriesName\":\"Baby Looney Tunes\",\"slug\":\"baby-looney-tunes\",\"status\"\
+        :\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/84303-g2.jpg\"\
+        ,\"firstAired\":\"2006-5-3\",\"id\":84303,\"image\":\"/banners/posters/84303-1.jpg\"\
+        ,\"network\":\"Cuatro\",\"poster\":\"/banners/posters/84303-1.jpg\",\"seriesName\"\
+        :\"Genesis: Inside The Killer's Mind\",\"slug\":\"genesis-inside-the-killers-mind\"\
+        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"2007-1-18\"\
+        ,\"id\":81379,\"image\":\"/banners/posters/81379-1.jpg\",\"network\":\"RTL\"\
+        ,\"overview\":\"Doctor Daniel Koch works at the forensic in Cologne and tries\
+        \ to solve the many crimes taking place there.\",\"poster\":null,\"seriesName\"\
+        :\"Post Mortem\",\"slug\":\"post-mortem\",\"status\":\"Ended\"},{\"aliases\"\
+        :[],\"banner\":\"/banners/graphical/80115-g.jpg\",\"firstAired\":\"1966-9-17\"\
+        ,\"id\":80115,\"image\":\"/banners/posters/80115-3.jpg\",\"network\":\"NDR\"\
+        ,\"overview\":\"What seems like a fairy tale today may be reality tomorrow.\
+        \ Here we have a fairy tale of the day after tomorrow. There are no more national\
+        \ states, only mankind and her colonies in outer space. We settle on stars\
+        \ far-off, the bottom of the sea is developed as living place. With what are\
+        \ today unimaginable speeds, the starships of tomorrow transverse the Milky\
+        \ Way. One of this starships is the Orion, a little piece in the giant security\
+        \ system which protects the Earth from outer space threats. Let's accompany\
+        \ the Orion and her crew at their patrols-service on the edge of infinity...\
+        \ \",\"poster\":\"/banners/posters/80115-3.jpg\",\"seriesName\":\"Raumpatrouille\
+        \ Orion\",\"slug\":\"raumpatrouille-orion\",\"status\":\"Ended\"},{\"aliases\"\
+        :[\"Az Apoll\xF3-program\"],\"banner\":\"/banners/graphical/77831-g3.jpg\"\
+        ,\"firstAired\":\"1998-4-1\",\"id\":77831,\"image\":\"/banners/posters/77831-3.jpg\"\
+        ,\"network\":\"HBO\",\"overview\":\"The story of the United States' space\
+        \ program, from its beginnings in 1961 to the final moon mission in 1972.\"\
+        ,\"poster\":\"/banners/posters/77831-3.jpg\",\"seriesName\":\"From the Earth\
+        \ to the Moon\",\"slug\":\"from-the-earth-to-the-moon\",\"status\":\"Ended\"\
+        },{\"aliases\":[],\"banner\":\"/banners/graphical/5ba5e211cd57f.jpg\",\"firstAired\"\
+        :\"2018-9-14\",\"id\":352862,\"image\":\"/banners/series/352862/posters/62114833.jpg\"\
+        ,\"network\":\"Netflix\",\"overview\":\"The colorful crew at Gotham Garage\
+        \ overhauls an eclectic collection of cars and trucks, trading up to a showstopper\
+        \ they can sell for big bucks.\",\"poster\":\"/banners/series/352862/posters/62114833.jpg\"\
+        ,\"seriesName\":\"Car Masters: Rust to Riches\",\"slug\":\"car-masters-rust-to-riches\"\
+        ,\"status\":\"Continuing\"},{\"aliases\":[\"earthflight\",\"\xC0 vol d'oiseau\"\
+        ],\"banner\":\"/banners/text/254572.jpg\",\"firstAired\":\"2011-12-29\",\"\
+        id\":254572,\"image\":\"/banners/posters/254572-3.jpg\",\"network\":\"BBC\
+        \ One\",\"overview\":\"Bird's-eye view of the natural world, joining the journeys\
+        \ of snow geese, cranes, albatrosses, eagles and other birds across six continents.\
+        \ Beginning in North America, snow geese face their biggest predator, pelicans\
+        \ glide under San Francisco's Golden Gate Bridge, bald eagles in Alaska swoop\
+        \ among brown bears, and on the Great Plains, cowbirds dive under the feet\
+        \ of fighting bison. Narrated by David Tennant.\",\"poster\":\"/banners/posters/254572-3.jpg\"\
+        ,\"seriesName\":\"Earthflight\",\"slug\":\"earthflight\",\"status\":\"Ended\"\
+        },{\"aliases\":[],\"banner\":null,\"firstAired\":null,\"id\":359698,\"image\"\
+        :\"/banners/images/missing/series.jpg\",\"network\":null,\"poster\":null,\"\
+        seriesName\":\"Pallas\",\"slug\":\"pallas\",\"status\":\"Ended\"},{\"aliases\"\
+        :[],\"banner\":null,\"firstAired\":\"2005-11-6\",\"id\":327530,\"image\":\"\
+        /banners/posters/327530-1.jpg\",\"network\":\"Canale 5\",\"poster\":null,\"\
+        seriesName\":\"Callas e Onassis\",\"slug\":\"327530\",\"status\":\"Ended\"\
+        },{\"aliases\":[],\"banner\":null,\"firstAired\":\"2016-4-7\",\"id\":313788,\"\
+        image\":\"/banners/images/missing/series.jpg\",\"network\":null,\"poster\"\
+        :null,\"seriesName\":\"Vi Kallas Tiggare\",\"slug\":\"313788\",\"status\"\
+        :\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":null,\"id\":296294,\"\
+        image\":\"/banners/posters/296294-1.jpg\",\"network\":null,\"poster\":null,\"\
+        seriesName\":\"Gafas e Pallaso\",\"slug\":\"296294\",\"status\":\"Ended\"\
+        },{\"aliases\":[],\"banner\":null,\"firstAired\":\"2014-02-05\",\"id\":278401,\"\
+        image\":\"/banners/images/missing/movie.jpg\",\"network\":null,\"overview\"\
+        :\"Here's your choice: would you rather get electrocuted by an electric eel\
+        \ or a Taser? Or your house is on fire, what's the best way to escape: through\
+        \ the window or down the stairs? Or the engine of your aircraft fails, what\
+        \ would you rather be in: a helicopter or a plane? \\r\\n\\r\\nDeadly Dilemmas\
+        \ gives you a load of hypothetical situations in every episode, and all you\
+        \ have to is decide which is the more survivable. Then we'll tell you the\
+        \ science behind why! \\r\\n\\r\\nThink of it as a kind of dangerous version\
+        \ of Play Your Cards Right, where the decision between higher or lower will\
+        \ make the difference between life or death!\",\"poster\":null,\"seriesName\"\
+        :\"Deadly Dilemmas\",\"slug\":\"deadly-dilemmas\",\"status\":\"Ended\"},{\"\
+        aliases\":[],\"banner\":null,\"firstAired\":null,\"id\":159161,\"image\":\"\
+        /banners/posters/159161-1.jpg\",\"network\":null,\"overview\":\"Narrated by\
+        \ Academy Award-winner Ben Kingsley, this series objectively documents Judaism,\
+        \ Islam, Hinduism, Buddhism, Catholicism, and Protestantism worldwide with\
+        \ interviews from experts. Explore issues that probe the very core of our\
+        \ existence and gain new understanding about humanity. Travel to exotic locations\
+        \ and observe how religions have shaped cultures, changed history, brought\
+        \ us closer together and thrust us into war.\",\"poster\":null,\"seriesName\"\
+        :\"Religions of the World\",\"slug\":\"religions-of-the-world\",\"status\"\
+        :\"Ended\"}]}"
     headers:
-      cache-control: ['private, max-age=300']
-      cf-ray: [29217b5ee4f10902-CDG]
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-type: [application/json]
-      date: ['Mon, 11 Apr 2016 21:20:20 GMT']
-      server: [cloudflare-nginx]
-      vary: [Accept-Language]
-      x-powered-by: [Thundar!]
-      x-thetvdb-api-version: [2.0.0]
-    status: {code: 200, message: OK}
+      cache-control:
+      - private, max-age=86400
+      connection:
+      - keep-alive
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 09 May 2020 14:40:05 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Language
+      via:
+      - 1.1 0c476b4e93e7b13a5f68b185a8e9753c.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - Ockq5sRP4iiluP5LSk4OnOUwCK_29Nl1okNeNUk1jUenS1rp6nf7Pw==
+      x-amz-cf-pop:
+      - ZRH50-C1
+      x-cache:
+      - Hit from cloudfront
+      x-powered-by:
+      - Thundar!
+      x-thetvdb-api-version:
+      - 3.0.0
+    status:
+      code: 200
+      message: OK
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Accept-Language: [en]
-      Authorization: [!!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0NjA0OTYwMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNDYwNDA5NjE0fQ.heRtvsk6Hz-XcgpcFdSnjwXYsyq3LqH3efNxHPZOhrDjhOb3sEH4xb1hVzJKV_5s8-klM2BoYROG7Gj4zEmM5ff4hgihajs3t-pdbz_vRMTjv2H29X6Ag1eT5aT1whVXzkH99wfH1bintNxGfFBkvy5KICaLBsnB-0tjFH5WriQ0h0XC2ye21qiyC83CzXcYQpMnIabSHrfsKO8wipjkRlmMkdQhrz5YwLb43lCOmS9TxJ6YH6MvL8LslhPm87pWmBJm2Tak752uHsRLZeHufGl-pjuxyPZdCGSO5DFXqOg_lSJDE1Vu6HjJlJH19yOcB0bgyYWnFQc-YW7pt1M_CQ']
-      Connection: [keep-alive]
-      Content-Type: [application/json]
-      Cookie: [__cfduid=da5fbb51392caf8691545fb0698a565d81460409614]
-      User-Agent: [Subliminal/2.0]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en
+      Authorization:
+      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Subliminal/2.1
     method: GET
     uri: https://api.thetvdb.com/series/77092
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAA1yQT2/TQBDF7/0UT3vhEqchTRWaC2opSCDBAapyaDhMsmN76HrXmlnHRP3yyE7N
-        nx7n92bfm7dPZ4DzlMlt8HQGAE6822C9XlwtZydgrML2hRp2G7hbCoHMPWsUhIzNbfDw4xntKEbW
-        YbVSamvZUzgf7YrqYv6zrdx/th+HNHe5uviDM+VuMHTvo2c/4VLU8rUoj/uvr9ZvisWqWCwnPXLu
-        kz4O4rubby/oKWSC2sUspzKrywlWHHVAD+MIuFulhtw4Tc3SgfUg3A8v72pGnzT4V4bxNjRcUWGJ
-        2hkoeqTISCVyzWiSZbSp7QIp+MCKVpPv9uxnOH0navKQDAphjhumLkvZBfSp4TgD/2o5mhwYe1I7
-        2Tcc0QY6SqzwOcXUpnBEL7mGMgXsOgleYmVzfKAmdYYy6b837dgy9kHKsqZYsRok4u4etVhOepyB
-        bNwbO4LskT227nudYHXK+DT/On+7ddjqNl7DQuqLXaeRFTlhx5XE8Zi//SRDssGyiuchazBfRv8b
-        AAD//1STzQoCMQyE7z5F8eJFlnRR63oUES+i+IPnaKMWandpo7KC7y52reg1A5kZ8kUEwlC6bpPd
-        lu4kYgBrHIXY9N3eszic0eOByQtNN7JldSHHWdrvr5Z03InG3/FGIXnIYgidkKU7Wwy8rTRyBEn2
-        +koV/VzJxLPxYYL14rgjijBNvdFYt3/kzYedYgQglvMvVcjGnX45Mxe9b8hjBlAKAJL0wCo33Ijr
-        GYCUvcHXQ2v64zUOxnV7JNzV2vQmhmmVLIssbwnxbD1fAAAA//8DADagI+rPAwAA
+      string: !!python/unicode '{"data":{"id":77092,"seriesId":"543","seriesName":"Dallas","aliases":[],"season":"14","poster":"posters/77092-1.jpg","banner":"graphical/77092-g.jpg","fanart":"fanart/original/77092-5.jpg","status":"Ended","firstAired":"1978-04-02","network":"CBS","networkId":"57","runtime":"45","language":"en","genre":["Drama"],"overview":"The
+        world''s first mega-soap, and one of the most popular ever produced, Dallas
+        had it all. Beautiful women, expensive cars, and men playing Monopoly with
+        real buildings. Famous for one of the best cliffhangers in TV history, as
+        the world asked \"Who shot J.R.?\" \r\nA slow-burner to begin with, Dallas
+        hit its stride in the 2nd season, with long storylines and expert character
+        development. Dallas ruled the airwaves in the 1980''s.","lastUpdated":1588644831,"airsDayOfWeek":"Friday","airsTime":"9:00
+        PM","rating":null,"imdbId":"tt0077000","zap2itId":"SH001146","added":"2008-02-04
+        00:00:00","addedBy":1,"siteRating":9.3,"siteRatingCount":348,"slug":"dallas"}}'
     headers:
-      cache-control: ['private, max-age=300']
-      cf-ray: [29217b6285330902-CDG]
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-type: [application/json]
-      date: ['Mon, 11 Apr 2016 21:20:21 GMT']
-      last-modified: ['Sat, 12 Mar 2016 15:07:51 GMT']
-      server: [cloudflare-nginx]
-      vary: [Accept-Language]
-      x-powered-by: [Thundar!]
-      x-thetvdb-api-version: [2.0.0]
-    status: {code: 200, message: OK}
+      age:
+      - '17586'
+      cache-control:
+      - private, max-age=86400
+      connection:
+      - keep-alive
+      content-length:
+      - '986'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 09 May 2020 09:46:59 GMT
+      last-modified:
+      - Tue, 05 May 2020 02:13:51 GMT
+      vary:
+      - Accept-Language
+      via:
+      - 1.1 0c476b4e93e7b13a5f68b185a8e9753c.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - AaPEZCRQadbANtY063i-WR0wE0QM_x95yJ6Dudf9ClFfSHRvdg3rCA==
+      x-amz-cf-pop:
+      - ZRH50-C1
+      x-cache:
+      - Hit from cloudfront
+      x-powered-by:
+      - Thundar!
+      x-thetvdb-api-version:
+      - 3.0.0
+    status:
+      code: 200
+      message: OK
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Accept-Language: [en]
-      Authorization: [!!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0NjA0OTYwMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNDYwNDA5NjE0fQ.heRtvsk6Hz-XcgpcFdSnjwXYsyq3LqH3efNxHPZOhrDjhOb3sEH4xb1hVzJKV_5s8-klM2BoYROG7Gj4zEmM5ff4hgihajs3t-pdbz_vRMTjv2H29X6Ag1eT5aT1whVXzkH99wfH1bintNxGfFBkvy5KICaLBsnB-0tjFH5WriQ0h0XC2ye21qiyC83CzXcYQpMnIabSHrfsKO8wipjkRlmMkdQhrz5YwLb43lCOmS9TxJ6YH6MvL8LslhPm87pWmBJm2Tak752uHsRLZeHufGl-pjuxyPZdCGSO5DFXqOg_lSJDE1Vu6HjJlJH19yOcB0bgyYWnFQc-YW7pt1M_CQ']
-      Connection: [keep-alive]
-      Content-Type: [application/json]
-      Cookie: [__cfduid=da5fbb51392caf8691545fb0698a565d81460409614]
-      User-Agent: [Subliminal/2.0]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en
+      Authorization:
+      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Subliminal/2.1
     method: GET
     uri: https://api.thetvdb.com/series/77092/episodes/query?airedEpisode=3&airedSeason=1&page=1
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAA3yQzU7DMBCE73mKkS9cAqIBQckFlR8JLoDEEXHY4G1j4diR1wlUqO+OnFYpRYWb
-        PTP+dj1fGaA4BB9ElXCdtXlSrHHvSfjKAEDNTZCoSkzy9d3SztXxZ/zxGlBt4H6jZMBqYGqKpEq8
-        DIk1GFBUibdd5IeuqTioEif5aJnA+rY14vWf9jOTeLfdZVe/v0lOcTw9HV3d/4PU/T4gb/LUsCqh
-        ntsljEOsGXe+E1ZjcKhplsan3OTifHp4fHo4OdsmTHKKYloU240suUVHCx7r3jeU3QgBlO859IY/
-        Ns7GWI3In/61NfM5rig4lhxP1BwIquBjzQFG4HxEa5mENWJNEbURiJHIATUJGgrBsAbh9sO4xREw
-        g/ZvXcMu4spX1RIk76wTGdGjCsYt0mGI49FYsNOCrk2lDcscCGpyWnKIB1k7VDnEBZWlhhPrCPcC
-        qRmE34Vfrj+8yoDXbPUNAAD//wMAQx5VmcICAAA=
+        H4sIAAAAAAAAA3RUTW/bMAz9K4Quuzip7cRp6suQj2LtsHZDi2KHogfGUmytsmRIcrIgyH8fZcdA
+        umE38fFJfCSffWRK6nfH8iPbSus8y5OIKTwftPhNB90qFbHGil1/PkWMo0eWvx6Z5CxP03maTiOG
+        0gr+LNAZ3d2+iO/XhKTxfGDdNtIZLh7beiMsyycRE2cEa8Fy9twcQGrwlYA70zrBol7eIlymfHJz
+        PR/F01Eyo0zZCuefPVpq45UtzQYeitK2nF6O2Bp3ksO3MayN7WKjNcKS2jDFO8V3bVnBegxfKC1R
+        E/IgiwqFgq940MIR8GhsjRoWigvN3qh5ElF405d7MtSBhzUeQmpvpRd9YmF91VpYCqvRkgKxly5Q
+        zE7YnRR76mKl5HYLS7RUJ4IfWH9ysLGGurYgHWjjoVE0P8FpEuihItBJRxWgQgc1kmTKIdzupS7H
+        AAvgpmhroT3QGDYHQPdOBHoZvKGniRUOHR2+SwVCcwdtE2bdiSEBFRIWgTOASnUb6OikTNFuwltj
+        uCcdlED4e0+fWXCPLlssRfDUx62KMN6L/ik+BWMZ3hZeGr0ialjufJ5lKVFdZfYvVhHEelO+NGS8
+        YIAkm2ZZnE4yshnf8bV0RXBi4FF44UGK/vUagasKGx/C3ty4cUa1/pK0lUros+7+BXd1fR3fpFe9
+        38e/mjJoFLQDd0/Fu+QHncvD8B24xZaqDbrONQleiq2x4n/4WfmQkDXfhELM+zjLJtM0o/qF0Z72
+        /YSeljQwyXn1ZtH6ythOQR9z3n07aZzcjJJklEwgmeSTWZ5N2ZnyU3JfEWU2jQfoTsiyop8Am8wC
+        5sjfQ63ZOLsEVqbVRMzmpNQ9GNoxy+PT2+kPAAAA//8DAD29ivtjBAAA
     headers:
-      cache-control: ['private, max-age=300']
-      cf-ray: [29217b65f5760902-CDG]
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-type: [application/json]
-      date: ['Mon, 11 Apr 2016 21:20:21 GMT']
-      server: [cloudflare-nginx]
-      vary: [Accept-Language]
-      x-powered-by: [Thundar!]
-      x-thetvdb-api-version: [2.0.0]
-    status: {code: 200, message: OK}
+      age:
+      - '44931'
+      cache-control:
+      - private, max-age=86400
+      connection:
+      - keep-alive
+      content-encoding:
+      - gzip
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 09 May 2020 02:11:15 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding,Accept-Language
+      via:
+      - 1.1 0c476b4e93e7b13a5f68b185a8e9753c.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - SWaDj0EiwHUFYhYJTY-8-ii1gsnAkYSVRiRNdNF_44ctxfavxPc6fA==
+      x-amz-cf-pop:
+      - ZRH50-C1
+      x-cache:
+      - Hit from cloudfront
+      x-powered-by:
+      - Thundar!
+      x-thetvdb-api-version:
+      - 3.0.0
+    status:
+      code: 200
+      message: OK
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Accept-Language: [en]
-      Authorization: [!!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0NjA0OTYwMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNDYwNDA5NjE0fQ.heRtvsk6Hz-XcgpcFdSnjwXYsyq3LqH3efNxHPZOhrDjhOb3sEH4xb1hVzJKV_5s8-klM2BoYROG7Gj4zEmM5ff4hgihajs3t-pdbz_vRMTjv2H29X6Ag1eT5aT1whVXzkH99wfH1bintNxGfFBkvy5KICaLBsnB-0tjFH5WriQ0h0XC2ye21qiyC83CzXcYQpMnIabSHrfsKO8wipjkRlmMkdQhrz5YwLb43lCOmS9TxJ6YH6MvL8LslhPm87pWmBJm2Tak752uHsRLZeHufGl-pjuxyPZdCGSO5DFXqOg_lSJDE1Vu6HjJlJH19yOcB0bgyYWnFQc-YW7pt1M_CQ']
-      Connection: [keep-alive]
-      Content-Type: [application/json]
-      Cookie: [__cfduid=da5fbb51392caf8691545fb0698a565d81460409614]
-      User-Agent: [Subliminal/2.0]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en
+      Authorization:
+      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Subliminal/2.1
     method: GET
     uri: https://api.thetvdb.com/episodes/228224
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAA3xTy27bMBC8+ysGvOSSOJYfsaNLYcdBkyJNiwRBD0UPlLkW2VCkwKVsGEH+vZAi
-        v2q0N2JmOdzZ5bx1AKFklCLFWwcAhFEiRb8/6feH5x+INIHUM0n2TqRITtH7uUjhKmsPqdvSsFf0
-        WBUZBZFi0JLU4rIgkUI8lxsYh6gJd75iEm3Z0gSO01qorkqux5OL3vAiudryeUUcn6MMLFL8bDBA
-        PPpQSIepVeTaSkDMvXMSs8pav3jdw1/NQkuy+CI3jniPz3yGr4s8VIrCgYhcGYWHLuY+HMB3Va4x
-        7+KzD8FIJxr8V9ukMoEW0df2xZPPKETM5WZrYR1MpOP+pyHqKmBGwcmg8EBrw8eSfkVhZWhdS95Y
-        s1xiJoMjPsd3WZwxsuCjpgDDcD6itCSZFKKWEdow2HCkAC0ZhQzBkILE7dq4vAtMofyiKshFzHyW
-        bSD5lVStjOiRBePy+tCU45uxIKcYVVlvsGnmjKGlU3wO9pDWNnttyhmZlQXVWl3cM1gTJP7e/qft
-        bKx0eSVz2v3L059zuOHDqVC7hPdWqgxeVYtovLvxqrmZTCajUX/7FGu/fgm2Jvavc3wplYzN70uG
-        gyQZDXvDq+1aV2pueNEkZXdHrU4zolb/jIFaqRsty9iAh9nJ2Nsqnl5YGktua/1DlC/H4951//Ij
-        rd3fZb7zRMEQ39cNNiWnvmYbkWKYDMaT631qebqMFHY2jiPNM1r6QP9nW7vHdNRVkU2rqJsk9JPJ
-        6IhQio4m2aA/jIq6Roe93hFxRybXsWYGe8YUKrs/EmET6UlG43KR4qo76gDvnfc/AAAA//8DALAN
-        SPHwBAAA
+        H4sIAAAAAAAAA3RTy27bMBD8lQUvvciOJFuOo0vhR9CkaNoiQdBD0QMl0hIbiRRIyoYR5N87lC3A
+        adGbd3a8M9wdvTLBPWf5K1OC5Wm6TNN5xLiyUjxJ7oxmefKuvt8CSePlyLrtlDNCfu3bQlqWzyIm
+        zwhvJcvZU3ckpcnXku5M7ySL2E5Z51fhz+gnN9fLSTyfJAt0ql46/+S5dSz/ydamoIeysr3A5Iht
+        +V4J+jKlrbFDbbTmtO6bxpQvqO/6qqbtlD6hrbgG8qDKmsuGPvOjlg7AV2NbrmnVCKnZr4gJmCi9
+        Ock9GrzA05YfQ+tglZenxsr6ure0llZzCwfyoFygmL20eyUPeMWmUbsdrbmFTkTfefvBUWENXm1J
+        OdLGU9dgf1JgE9xTDdApBwWquaOWwzJ6nG4PSldTohUJU/at1J6whuJI3L2AgMnkDUaDFX4MdPqm
+        GpJaOOq7sOvBDAzUHFhEzhBvmuECAx3OGtwmzJrSPXygwenvO33Euhquq55XMsTj/VVlWO/F+1G/
+        RayzRvSlV0ZvQA3HXS6zLAXV1ebwbBtAw1jnnzvkLgQgyeZZFqezDDETe7FVrgxJDDyUFxlE9W/W
+        AG5q3vlQaiQBoSycaXp/SdqpRuqz79MEd3V9Hd+kV6e8T393VfAocQN3D/Gh+c7n+jh+B261g9ro
+        66wJeC13xsr/4WfnY0O1oghCzPs4y2bzNIN+abTHvR+5x5FGJpLXFqve18YODk61EMO3k8bJzSRJ
+        JsmMklk+W+TZnJ0pP5TwNSiLeTxCd1JVtQc2WwTMId+j1mKaXQIb02sQsyWcugeDG7M8fnv7AwAA
+        //8DAAUhcE0sBAAA
     headers:
-      cache-control: ['private, max-age=300']
-      cf-ray: [29217b66f5860902-CDG]
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-type: [application/json]
-      date: ['Mon, 11 Apr 2016 21:20:21 GMT']
-      last-modified: ['Sat, 09 May 2015 06:47:26 GMT']
-      server: [cloudflare-nginx]
-      vary: [Accept-Language]
-      x-powered-by: [Thundar!]
-      x-thetvdb-api-version: [2.0.0]
-    status: {code: 200, message: OK}
+      cache-control:
+      - private, max-age=86400
+      connection:
+      - keep-alive
+      content-encoding:
+      - gzip
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 09 May 2020 14:40:06 GMT
+      last-modified:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding,Accept-Language
+      via:
+      - 1.1 0c476b4e93e7b13a5f68b185a8e9753c.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - JREBUDJutxHgNMB_a1LnK0SfljLHPZ9j7JYseSH_HlZXS5kmrhLapg==
+      x-amz-cf-pop:
+      - ZRH50-C1
+      x-cache:
+      - Miss from cloudfront
+      x-powered-by:
+      - Thundar!
+      x-thetvdb-api-version:
+      - 3.0.0
+    status:
+      code: 200
+      message: OK
 version: 1

@@ -1,30 +1,52 @@
 interactions:
 - request:
-    body: '{"username": null, "password": null, "apikey": "1234"}'
+    body: !!python/unicode '{"username": null, "password": null, "apikey": "1234"}'
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Accept-Language: [en]
-      Connection: [keep-alive]
-      Content-Length: ['54']
-      Content-Type: [application/json]
-      User-Agent: [Subliminal/2.0]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '54'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Subliminal/2.1
     method: POST
     uri: https://api.thetvdb.com/login
   response:
-    body: {string: !!python/unicode "{\n  \"Error\": \"API Key Required\"\n}"}
+    body:
+      string: !!python/unicode '{"Error":"API Key Required"}'
     headers:
-      cf-ray: [29217ae6d7b60902-CDG]
-      connection: [keep-alive]
-      content-length: ['33']
-      content-type: [application/json]
-      date: ['Mon, 11 Apr 2016 21:20:01 GMT']
-      server: [cloudflare-nginx]
-      set-cookie: ['__cfduid=d7de965be3841657b4cac0a5cdcf6da1c1460409601; expires=Tue,
-          11-Apr-17 21:20:01 GMT; path=/; domain=.thetvdb.com; HttpOnly']
-      vary: [Accept-Language]
-      www-authenticate: [JWT realm=jwt auth]
-      x-powered-by: [Thundar!]
-      x-thetvdb-api-version: [2.0.0]
-    status: {code: 401, message: Unauthorized}
+      connection:
+      - keep-alive
+      content-length:
+      - '28'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 09 May 2020 14:39:45 GMT
+      vary:
+      - Accept-Language
+      via:
+      - 1.1 376bac901e689131d2a41914df1245d9.cloudfront.net (CloudFront)
+      www-authenticate:
+      - JWT realm=jwt auth
+      x-amz-cf-id:
+      - ZNdnnrIf0BlvddiX-VHuQIukfqD3sQMl6O6-KAfNbkceow5BW2D4OQ==
+      x-amz-cf-pop:
+      - ZRH50-C1
+      x-cache:
+      - Error from cloudfront
+      x-powered-by:
+      - Thundar!
+      x-thetvdb-api-version:
+      - 3.0.0
+    status:
+      code: 401
+      message: Unauthorized
 version: 1

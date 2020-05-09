@@ -1,78 +1,110 @@
 interactions:
 - request:
-    body: '{"username": null, "password": null, "apikey": "2AE5D1E42E7194B9"}'
+    body: !!python/unicode '{"username": null, "password": null, "apikey": "2AE5D1E42E7194B9"}'
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Accept-Language: [en]
-      Connection: [keep-alive]
-      Content-Length: ['66']
-      Content-Type: [application/json]
-      User-Agent: [Subliminal/2.0]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '66'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Subliminal/2.1
     method: POST
     uri: https://api.thetvdb.com/login
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAAwTByZKiMAAA0Ht/heXdLkSWztwQVILdwchqXyiWQAJhURaBqfn3ee/vx2azHdqK
-        NNs/my1ZLJpcUmYzy/FWuEcM9rC5y6kOFVh1oa9b4JMsFiemxuzyJKBSE2z38f4x0h7WvIJly9KD
-        z5ILH+JApokOe1iDJQ6yPA7OAizbGRmPNzI0GZXaIcefDtLMp7uXFtZVavZVqFdpvL7clYK0vdVz
-        eBs8YHZliRQcqKI4noaQMrnvrjFZAfMm+ooWLQ5byuNfY8JjzmuepWjVDEueRXhyB9A27r7nM7n4
-        L5N10iC4hWRKU350dnpxno/HTmPCOafN4b1XJpF4q7lIkpvZizOG6NY/xd3IWR4Q/96Yd44Y5jr+
-        rhQtt4/Z89zgKhrGsq7Hqzp/kTlMqGveKBOH+9RiZ8I+ULVxBD6ITZF0uHrIhXDopxoVXpTYLYpn
-        esiYhxTbdoG5TvR0Tmja13kC9RwTBxf3/esZyEC6GGpEBlxNRqf7FOzilJPTK0ybnW1Fv0rv0Shq
-        gc6K7ce//wAAAP//AwBt+s5f2wEAAA==
+      string: !!python/unicode '{"token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2Mzk5OTIsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MTkyfQ.hXvXjJbUdkECwEldg_fR-8oxAJd3oX5cj1vU-sULGcuvTYoQuXxOau7NO0O2a8-7EjsaaObyQrnsEg08ejzF8RTRrhgXyIpfyw-qsf2LKMXzswejlKR3fAgFns6oBzZ9bGsji04xxawxdtt_pwsTxQU11HjecwZpN4TynMd806RK8k4iEx4Djl6RTsfcT6IN_r0oZj9COSxwxWrOlXmx7qtTipWwS2UIVzmq4hyIi-0ZeOmJ8Fn5s3LfCei_-nzuHGEtckIK99vm23RUge__VJ_CJfLo3ZFP5cyhKiywD34A_0ZPvadGizYtnSfu-7dlxtJ4ExUlDkJ8G5EWShpL_g"}'
     headers:
-      cf-ray: [29217b0b775c14cd-CDG]
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-type: [application/json]
-      date: ['Mon, 11 Apr 2016 21:20:07 GMT']
-      server: [cloudflare-nginx]
-      set-cookie: ['__cfduid=d0d41fe43b24f761f2ab42982b42e4c871460409606; expires=Tue,
-          11-Apr-17 21:20:06 GMT; path=/; domain=.thetvdb.com; HttpOnly']
-      vary: [Accept-Language]
-      x-powered-by: [Thundar!]
-      x-thetvdb-api-version: [2.0.0]
-    status: {code: 200, message: OK}
+      connection:
+      - keep-alive
+      content-length:
+      - '470'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 09 May 2020 14:39:52 GMT
+      vary:
+      - Accept-Language
+      via:
+      - 1.1 ebbd7f31e48ea8cf77f6021cdd92bf62.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - kf4oXecY6T0QeVWK-iKiSVbaMfLn9BMvMd6wqzOhsPIbqXzTkWQ0Tw==
+      x-amz-cf-pop:
+      - ZRH50-C1
+      x-cache:
+      - Miss from cloudfront
+      x-powered-by:
+      - Thundar!
+      x-thetvdb-api-version:
+      - 3.0.0
+    status:
+      code: 200
+      message: OK
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Accept-Language: [en]
-      Authorization: [!!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0NjA0OTYwMDcsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNDYwNDA5NjA3fQ.SNAHqT14yipk7d8g7K4uKrTzh9coPmxXPtU9HpjjN6QW722uEtXhi5spKaez9iUvhr_yAaXohlaZDvQuflmldcNzADJ5x2IETt9onT1slxeGVrHip4t0Tg4H4vfBS-CgFxBBpAi0Ffhn3w16v2eUzHy44TdOySuXNPsq2-ulifWeVRnHRlNiQlCQLk6AfOBdqFnQk_tujmmuK7x8exXbhTHPhi2tRvoQSvQV97Auu9V9aH2epQkY5g03svmNgU_bOoNaxh3diUN6OOT9HzvhEFbhcsmfbICfQeSQgR1rqW594GD7_etQkvDpCVh9-acleErXcn-OJ_Z6sUh__o9Cig']
-      Connection: [keep-alive]
-      Content-Type: [application/json]
-      Cookie: [__cfduid=d0d41fe43b24f761f2ab42982b42e4c871460409606]
-      User-Agent: [Subliminal/2.0]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en
+      Authorization:
+      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2Mzk5OTIsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MTkyfQ.hXvXjJbUdkECwEldg_fR-8oxAJd3oX5cj1vU-sULGcuvTYoQuXxOau7NO0O2a8-7EjsaaObyQrnsEg08ejzF8RTRrhgXyIpfyw-qsf2LKMXzswejlKR3fAgFns6oBzZ9bGsji04xxawxdtt_pwsTxQU11HjecwZpN4TynMd806RK8k4iEx4Djl6RTsfcT6IN_r0oZj9COSxwxWrOlXmx7qtTipWwS2UIVzmq4hyIi-0ZeOmJ8Fn5s3LfCei_-nzuHGEtckIK99vm23RUge__VJ_CJfLo3ZFP5cyhKiywD34A_0ZPvadGizYtnSfu-7dlxtJ4ExUlDkJ8G5EWShpL_g'
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Subliminal/2.1
     method: GET
     uri: https://api.thetvdb.com/series/80379
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAA1xSy27bQAy8+ysIXXqxXUVOHNm3Oi2Koi8jSZtD0QOVpSTWElfYpaIoQf49WCly
-        m54WGM5wONh5nAFEBhWjLTzOAAAiNtEW0nh1vpmPgCfH5L9hTdEWouuSYMcF7FAKuC7Juj56IWLF
-        6MlHW/g1AADRxIwG4PcLMUMRcmFb4bAp+Rart4PjokhWyz9NEb2y/hQuis7S+Gx9HChqG5yiCyvK
-        0rIcRTk7r+/Y0SBL4vh8EW8Wyek0F9LOusMg3l39h45eE+haUR5zJ2cTWJA4+jfkha3J9K8j2jty
-        d0xdkN6UqFBi05B46EoSKPuGHItSVXFBouCsrWtU8nBVUmWsAIqBL2QFnYGaSGFPIv0cEHJHtPAN
-        O1YykBG22kNt71gKYAGhewVjrZsPOxxhxQ8EWlIPB7HdSFALYrUMGsxsq1BxTmBb9WwIbB74UGG2
-        hEvbigm8wAroraMO0A0rwdfo6h5ubGU71oc5dKWFsPfgoaQ3HtCDp/s+vCUBe8gc8hBEDHy2VkuH
-        TYMVj1Lf5jk5D7mzNaAAC2ZcsfbhYt8QHkLG4Nw48iS3w7EIna1RltMXVej1R2NQhw6cnK7j1eZ8
-        vUmnorLz77H/nt8QHcZSt84b/Ntkdv765ePTbRzD/uuxEqiha0H0c7H/OMFcm2zsjmqcbtJkfezq
-        AzYJ6zj8sI/jzerkJE2OVsbQq84NwK6PtiBtVU19Z6XLyTldpjOAp9nTMwAAAP//AwDY+uXBvgMA
-        AA==
+      string: !!python/unicode '{"data":{"id":80379,"seriesId":"58053","seriesName":"The
+        Big Bang Theory","aliases":[],"season":"12","poster":"posters/80379-18.jpg","banner":"graphical/80379-g13.jpg","fanart":"fanart/original/80379-2.jpg","status":"Ended","firstAired":"2007-09-24","network":"CBS","networkId":"57","runtime":"25","language":"en","genre":["Comedy"],"overview":"A
+        woman who moves into an apartment across the hall from two brilliant but socially
+        awkward physicists shows them how little they know about life outside of the
+        laboratory.","lastUpdated":1588972609,"airsDayOfWeek":"Thursday","airsTime":"8:00
+        PM","rating":"TV-14","imdbId":"tt0898266","zap2itId":"EP00931182","added":"2008-02-04
+        00:00:00","addedBy":1,"siteRating":8.8,"siteRatingCount":41886,"slug":"the-big-bang-theory"}}'
     headers:
-      cache-control: ['private, max-age=300']
-      cf-ray: [29217b0c876714cd-CDG]
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-type: [application/json]
-      date: ['Mon, 11 Apr 2016 21:20:07 GMT']
-      last-modified: ['Mon, 11 Apr 2016 18:01:38 GMT']
-      server: [cloudflare-nginx]
-      vary: [Accept-Language]
-      x-powered-by: [Thundar!]
-      x-thetvdb-api-version: [2.0.0]
-    status: {code: 200, message: OK}
+      age:
+      - '62279'
+      cache-control:
+      - private, max-age=86400
+      connection:
+      - keep-alive
+      content-length:
+      - '767'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Fri, 08 May 2020 21:21:53 GMT
+      last-modified:
+      - Fri, 08 May 2020 21:16:49 GMT
+      vary:
+      - Accept-Language
+      via:
+      - 1.1 ebbd7f31e48ea8cf77f6021cdd92bf62.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - 35PPUfwUUA3oh5bcscbACmpb9abdMBtdB0Cu6FyfBTsWpIGs8FK5pQ==
+      x-amz-cf-pop:
+      - ZRH50-C1
+      x-cache:
+      - Hit from cloudfront
+      x-powered-by:
+      - Thundar!
+      x-thetvdb-api-version:
+      - 3.0.0
+    status:
+      code: 200
+      message: OK
 version: 1

@@ -1,215 +1,378 @@
 interactions:
 - request:
-    body: '{"apikey": "5EC930FB90DA1ADA", "username": null, "password": null}'
-    headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Accept-Language: [en]
-      Connection: [keep-alive]
-      Content-Length: ['66']
-      Content-Type: [application/json]
-      User-Agent: [Subliminal/2.1]
-    method: POST
-    uri: https://api.thetvdb.com/login
-  response:
-    body:
-      string: !!binary |
-        H4sIAAAAAAAAAwTBy5KiMAAAwH/x7pQIqNmbCmKCgEACyoUSJIEQHiNvt/bft/vvqm/KrF79WWUL
-        yhMjLZwC+eQLJbuAHaw9NT3DHSzbR3BG4CdbkMiux8LhumTjo2prRLI562AlSsibIpWDIjFE/wrV
-        PDnDDlZgeYVv+govG8ib2cZkcjSiWvipUPcHwsW5v1zfzIuEgSn5OhqOfPPRRP3t/FG8421frze+
-        U/SKAPe1TG07PjECTnLVsmDYkjdYzNzC9Ri9TRnXv5fXbszX4sqBrLnWA7gOj60BVZ01cmY8UNYO
-        bNJgMPojY2cwaMoHp/YesuunKIg/X+Z4z5rTPsblN8wC4SU8IltxyPSJfI6ZO4SRVKMYjZRyw5nd
-        00zILapau2rHpCLZTYgDVRM4IertKC1dSQjv6XPQ41A8jaoEPOhdy5nUzUn027SBCvQmZdNW+KLj
-        RD+MRtmpD+3exTJTWoNX1Ol0Ld6nSIENWOhTDqT01moSPF6uueyZUR9wdWNKC8p0OiAS/06rf/8B
-        AAD//wMAa7L+R9YBAAA=
-    headers:
-      CF-RAY: [4ad36c4c2b4bcc40-ZRH]
-      Connection: [keep-alive]
-      Content-Encoding: [gzip]
-      Content-Type: [application/json; charset=utf-8]
-      Date: ['Fri, 22 Feb 2019 18:12:48 GMT']
-      Expect-CT: ['max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"']
-      Server: [cloudflare]
-      Set-Cookie: ['__cfduid=db8d4d6c3d42639d0198872b6bf731b681550859168; expires=Sat,
-          22-Feb-20 18:12:48 GMT; path=/; domain=.thetvdb.com; HttpOnly']
-      Transfer-Encoding: [chunked]
-      Vary: [Accept-Language]
-      X-Powered-By: [Thundar!]
-      X-Thetvdb-Api-Version: [2.2.0]
-    status: {code: 200, message: OK}
-- request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Accept-Language: [en]
-      Authorization: [Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1NTA5NDU1NjgsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTUwODU5MTY4fQ.IIyOPaQSKhibg9wbzODTZSKXoZtLCr4RAL7n-0SOit4l9P-3fNN_BgU9B3mpgVu2Ud9yKhMTnvZdK3TnqFa6vh-lHj93DQMX9QOj_MuJmsMvjgGXJepugwDIVvSvggC9uD4rTcN7IgHriiUSxFx_7goB7_TkzWeVlRbjZU2l8eEwUrAeQuWZ1nJ_JvffjGOxQBxUULZmpNmpvbmUeLll8f5bIwJfR6ffkQ1llRYSj9tTWlYGmk9jVtQMOw50Blt2coI4IRw40pmTFETbE8vGks5XDPs_3g4pGjmfOsED_7cJ4Io9yfY3V1cLpD1IAFHh3RKZtVj50K1yJeEfuJU_qw]
-      Connection: [keep-alive]
-      Content-Type: [application/json]
-      Cookie: [__cfduid=db8d4d6c3d42639d0198872b6bf731b681550859168]
-      User-Agent: [Subliminal/2.1]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en
+      Authorization:
+      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Subliminal/2.1
     method: GET
     uri: https://api.thetvdb.com/search/series?name=shameless
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAA5xUTW/cNhD9Kw+8eBfQqiuvHdt7c5ymKGAnBew0hySHkTQS2aU4AkmtIgT57wW1
-        rj8KB0F7ESRx5vHNx3vfVE2R1PbTN0XWUOCgtp++ZKok59irrWo99dpUZH85Oz8/ebVqT/K/+lZl
-        qjE+xEvjuVZbdbxen6zWxarYqEyZWm3n4Ew5jqP4ndqqK50QLU5UpmTPfm94VFv12poQ2RvX2gnN
-        4NyUQZqmZIqoPXWERqyV0bgWUTO8WMu+EkpZsGbPAeRqWElv0oAcyJGvtKnQUGcSrJcON+QqzSkr
-        xw1znNF+I2up1exDjpuhw8gu4vLj+2tMTD6AWsnwhmqESBPXoAgtHWM0Uc8AwXxFpY2tPTuIsxOi
-        QJsDeikxWs5x6WoE6TiajsN8sjN1yPMcd6kiJgvNVCf26fCetQkoTYsw9wdvjTjC4ni9zDBqgRXZ
-        BVCTzq7IWyyKYpnhDZelYSwulnNXSionXBvqsNgsc9xqTrBSVRQSnrUTNNue6wydeIY0kR20cTX7
-        9LOc4NkOVSQXsTe+NQ5H16Y/wqJ4dbgiMaYqmj3bCS1NGcohYs9+Qu/NniJn+J0cFsXpMv/sPzuk
-        x0e2VWpkFBA0V9FUGMXbuQmBvw5kQfWeXRw8hwzRm6HrdcjmQWcIFXWHwRMaMh6liSm18qZjiAPB
-        y9DqJ2OHliGkNeIQZ1ajZs/pyXZlOQRU88g9zzU58d1DgZ3sU6Y4PgSEKJZdDpWpwN5weEcdq626
-        1dRxwkoHdmjVVoWnvyLFIait+tXVXKvv2c9Fd765uDhbtT/Q3PmqOF6tz+41N8c+1dzt5V1ePNOb
-        G6z9F+e0gw+8cac98yP7GfK/MH+B5NlqfbFaX9yT3Gwu1pviKcu7P9/9D45Y/HG9fCR6gP0Z08cB
-        4cOternjp9X67Ox4Q+fn6xN+ue9FkbzuoaTiVXFaPCvpVsuY1P7c667SBa2Qw1tPbvfoPkmUac16
-        L0ONtKSWUR8cITlM6MjHDMbVQ4jeyBDmD+7Z1cmxkp0cbCEZkwwR2nQYZbA1Sk5G07PX1AeUHJMU
-        pGlyfNR8z+QowElM7jbbFnmEBJ1WftQUYU0yMnTieEohEzQlFWo+CugpBK6RbhV3MDAr4nO8HuKD
-        2c0JaGRwNUaaQhJ+62XE0MM4hN7E5D6J9+yKEzqaZlIlw5odg9z0jzNOMmDnZDxYTTxE75JkQb1Y
-        aQ0HNOJR8qz3r1RFO839mYPJc/5D5WLx4Xb5gnxXwzMFX4mLxg3Gter7l+9/AwAA//8DAMHRcklG
-        BwAA
+      string: "{\"data\":[{\"aliases\":[],\"banner\":\"/banners/graphical/78846-g4.jpg\"\
+        ,\"firstAired\":\"2004-1-13\",\"id\":78846,\"image\":\"/banners/posters/78846-2.jpg\"\
+        ,\"network\":\"Channel 4\",\"overview\":\"Blisteringly funny, offbeat drama\
+        \ following the rollercoaster lives and loves of an anarchic family from Manchester.\
+        \ Meet the Gallaghers. Mum went AWOL years ago, Dad stayed at home with the\
+        \ six children only to hit the bottle. And sometimes the kids... The real\
+        \ head of the family is big sister Fiona (20), who looks after Carl (11),\
+        \ Debbie (9) and baby Liam (3). She is occasionally helped, more often hindered,\
+        \ by reluctant virgin 'Lip' (16) and the actively gay, but very private, Ian\
+        \ (15).\\r\\n \\r\\nWelcome to a hectic world of sexual adventures, triumphs,\
+        \ love, scams and a fair bit of crime on a rough Manchester housing estate,\
+        \ where wheel-less cars are the norm and the moving ones are stolen. \",\"\
+        poster\":\"/banners/posters/78846-2.jpg\",\"seriesName\":\"Shameless\",\"\
+        slug\":\"shameless\",\"status\":\"Ended\"},{\"aliases\":[\"\u05DC\u05DC\u05D0\
+        \ \u05D1\u05D5\u05E9\u05D4\",\"\u65E0\u803B\u4E4B\u5F92\",\"Shameless - Nicht\
+        \ ganz n\xFCchtern\"],\"banner\":\"/banners/graphical/161511-g3.jpg\",\"firstAired\"\
+        :\"2010-12-12\",\"id\":161511,\"image\":\"/banners/posters/161511-1.jpg\"\
+        ,\"network\":\"Showtime\",\"overview\":\"Chicagoan Frank Gallagher is the\
+        \ proud single dad of six smart, industrious, independent kids, who without\
+        \ him would be... franco, perhaps better off. When Frank's not at the bar\
+        \ spending what little money they have, he's passed out on the floor. But\
+        \ the kids have found ways to grow up in spite of him. They may not be like\
+        \ any family you know, but they make no apologies for being exactly who they\
+        \ are.\",\"poster\":\"/banners/posters/161511-1.jpg\",\"seriesName\":\"Shameless\
+        \ (US)\",\"slug\":\"shameless-us\",\"status\":\"Continuing\"},{\"aliases\"\
+        :[],\"banner\":null,\"firstAired\":\"2007-9-9\",\"id\":339031,\"image\":\"\
+        /banners/images/missing/series.jpg\",\"network\":\"TVN\",\"poster\":null,\"\
+        seriesName\":\"The Shameless Three (PL)\",\"slug\":\"339031\",\"status\":\"\
+        Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"2003-1-10\",\"id\"\
+        :83997,\"image\":\"/banners/posters/83997-1.jpg\",\"network\":\"SAT.1\",\"\
+        poster\":null,\"seriesName\":\"The Shameless Three\",\"slug\":\"83997\",\"\
+        status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2017-9-14\"\
+        ,\"id\":334846,\"image\":\"/banners/series/334846/posters/62040119.jpg\",\"\
+        network\":\"FOX T\xFCrkiye\",\"overview\":\"Filiz is the eldest of the 6 siblings\
+        \ whose father, Fikri, is an alcoholic. All the responsibility of managing\
+        \ the house and raising her siblings falls on her shoulders. Baris falls in\
+        \ love with Filiz for who she is but can she fall in love with someone else\
+        \ when her life is not her own but her family's?\",\"poster\":\"/banners/series/334846/posters/62040119.jpg\"\
+        ,\"seriesName\":\"Our Story\",\"slug\":\"shameless-TR\",\"status\":\"Ended\"\
+        },{\"aliases\":[],\"banner\":\"/banners/series/368855/banners/62096861.jpg\"\
+        ,\"firstAired\":\"2020-3-1\",\"id\":368855,\"image\":\"/banners/series/368855/posters/62093300.jpg\"\
+        ,\"network\":\"ABC (AU)\",\"overview\":\"Inspired by true events; a woman\
+        \ escaping a cult, a refugee fleeing with his family, a father trapped in\
+        \ a dead-end job, and a bureaucrat on the verge of a national scandal find\
+        \ their lives intertwined in an immigration detention centre.\",\"poster\"\
+        :\"/banners/series/368855/posters/62093300.jpg\",\"seriesName\":\"Stateless\"\
+        ,\"slug\":\"stateless\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"\
+        firstAired\":\"2004-10-6\",\"id\":301715,\"image\":\"/banners/posters/301715-1.jpg\"\
+        ,\"network\":\"C31\",\"overview\":\"The Shambles was an Australian television\
+        \ sketch comedy program shown on the community television across Australia.\
+        \ It was written by and stars Sean Lynch, Nathan Valvo and Anthony Ziella,\
+        \ known on the show as Lynchy, Valvo and Sos respectively.\",\"poster\":null,\"\
+        seriesName\":\"The Shambles With Sos, Valvo \\u0026 Lynchy \",\"slug\":\"\
+        the-shambles-with-sos-valvo-and-lynchy\",\"status\":\"Ended\"},{\"aliases\"\
+        :[],\"banner\":null,\"firstAired\":\"2016-1-21\",\"id\":359820,\"image\":\"\
+        /banners/images/missing/series.jpg\",\"network\":null,\"overview\":\"More\
+        \ than 50 million people are currently on the run worldwide. They flee war,\
+        \ oppression and hunger, hoping to find a new home. Large numbers of refugees\
+        \ have been in the past again and again. In the 20th century alone, more than\
+        \ 60 million people lost their homes in Europe. Victims of flight and displacement\
+        \ also became about 14 million Germans at the end of the Second World War.\
+        \ They had to give up everything, leave behind everything they had. Many families\
+        \ were torn apart, lost sight of the dangerous escape.\",\"poster\":null,\"\
+        seriesName\":\"Homeless - people on the run\",\"slug\":\"heimatlos-menschen-auf-der-flucht\"\
+        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"2015-7-29\"\
+        ,\"id\":298445,\"image\":\"/banners/posters/298445-1.jpg\",\"network\":\"\
+        truTV\",\"overview\":\"An unsuspecting group of wannabe stars think they have\
+        \ been cast on an actual reality show.\",\"poster\":null,\"seriesName\":\"\
+        Fameless\",\"slug\":\"fameless\",\"status\":\"Ended\"},{\"aliases\":[],\"\
+        banner\":null,\"firstAired\":\"2018-11-25\",\"id\":356239,\"image\":\"/banners/images/missing/series.jpg\"\
+        ,\"network\":null,\"poster\":null,\"seriesName\":\"\\\"Fake Homeless\\\":\
+        \ Who's Begging on the Streets?\",\"slug\":\"fake-homeless-whos-begging-on-the-streets\"\
+        ,\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":null,\"firstAired\"\
+        :\"2017-1-17\",\"id\":323517,\"image\":\"/banners/images/missing/series.jpg\"\
+        ,\"network\":\"NPO 3\",\"poster\":null,\"seriesName\":\"The Homeless Experience\"\
+        ,\"slug\":\"323517\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"\
+        firstAired\":\"2019-7-15\",\"id\":367585,\"image\":\"/banners/images/missing/series.jpg\"\
+        ,\"network\":\"BBC One\",\"overview\":\"Series following the Warriors as they\
+        \ attempt to reach the Homeless World Cup.\",\"poster\":null,\"seriesName\"\
+        :\"Warriors: Our Homeless World Cup\",\"slug\":\"warriors-our-homeless-world-cup\"\
+        ,\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\"\
+        :\"2019-4-17\",\"id\":362724,\"image\":\"/banners/posters/5cc0539108d08.jpg\"\
+        ,\"network\":\"5Star\",\"overview\":\"Six young privileged Brits, who believe\
+        \ that homelessness is often the result of the victim's own actions, agree\
+        \ to live on the streets of London for three nights.\",\"poster\":\"/banners/posters/5cc0539108d08.jpg\"\
+        ,\"seriesName\":\"Rich Kids Go Homeless\",\"slug\":\"rich-kids-go-homeless\"\
+        ,\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":null,\"firstAired\"\
+        :\"2017-6-27\",\"id\":331603,\"image\":\"/banners/posters/5cedcc4b01521.jpg\"\
+        ,\"network\":\"SBS (AU)\",\"overview\":\"There\u2019s a crisis in Australia.\
+        \ One in 200 of us are homeless on any given night. Almost one third are families\
+        \ and the numbers are on the rise. Public housing stock is shrinking while\
+        \ rents are skyrocketing. Domestic violence and relationship breakdown sets\
+        \ families adrift in a strange and unfamiliar world of emergency shelters\
+        \ and life on the streets. Those from culturally diverse backgrounds, refugees,\
+        \ asylum seekers and Indigenous people are most at risk. More than half the\
+        \ entire homeless population are migrants or Aboriginal and Torres Strait\
+        \ Islander people. The spiralling population of new homeless are often workers\
+        \ or single older women. And then there are the 3,000 Aussie veterans who\
+        \ fought for their country and now have no roof over their heads. The myths\
+        \ are exposed, the realities explored \u2013 homelessness can happen to anybody.\
+        \ It could be you\u2026 But Australians don\u2019t care. Four in ten think\
+        \ the homeless are \u2018lazy freeloaders\u2019, \u2018stupid failures\u2019\
+        \ or \u2018not working hard enough\u2019. One in five think it\u2019s a choice\
+        \ to be homeless. With the gap between the haves and the have-nots ever widening,\
+        \ and attitudes hardening, we take five wealthy Australians away from their\
+        \ privileged and pampered lives, and for ten days and nights immerse them\
+        \ into the world of homelessness.\",\"poster\":null,\"seriesName\":\"Filthy\
+        \ Rich and Homeless (AU)\",\"slug\":\"filthy-rich-and-homeless-au\",\"status\"\
+        :\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":null,\"id\":262159,\"\
+        image\":\"/banners/posters/262159-1.jpg\",\"network\":\"BBC Three\",\"overview\"\
+        :\"Social experiment, based on a real course that takes place in the US, in\
+        \ which five wealthy Britons swap their expensive cars and luxury homes for\
+        \ ten days of living alongside homeless people.\",\"poster\":null,\"seriesName\"\
+        :\"Filthy Rich and Homeless\",\"slug\":\"filthy-rich-and-homeless\",\"status\"\
+        :\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"2009-6-24\",\"\
+        id\":100901,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"\
+        BBC One\",\"overview\":\"In 2009 recession and repossession mean homelessness\
+        \ is a frightening possibility for almost everyone. But for five famous volunteers,\
+        \ it's about to become a terrifying reality.\\r\\n\\r\\nFormer tennis star\
+        \ Annabel Croft, The One Show's Hardeep Singh Kohli, journalist and writer\
+        \ Rosie Boycott, former Coronation Street actor Bruce Jones and the Marquis\
+        \ of Blandford put homelessness in the spotlight by agreeing to swap their\
+        \ lavish lifestyles, fame and fortune for a world of sleeping rough, soup\
+        \ runs and hostels.\",\"poster\":null,\"seriesName\":\"Famous, Rich and Homeless\"\
+        ,\"slug\":\"famous-rich-and-homeless\",\"status\":\"Ended\"}]}"
     headers:
-      CF-RAY: [4ad36c4eeb6acc40-ZRH]
-      Cache-Control: ['private, max-age=600']
-      Connection: [keep-alive]
-      Content-Encoding: [gzip]
-      Content-Type: [application/json; charset=utf-8]
-      Date: ['Fri, 22 Feb 2019 18:12:49 GMT']
-      Expect-CT: ['max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"']
-      Server: [cloudflare]
-      Transfer-Encoding: [chunked]
-      Vary: [Accept-Language]
-      X-Powered-By: [Thundar!]
-      X-Thetvdb-Api-Version: [2.2.0]
-    status: {code: 200, message: OK}
+      cache-control:
+      - private, max-age=86400
+      connection:
+      - keep-alive
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 09 May 2020 14:40:09 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Language
+      via:
+      - 1.1 449f2b51e83bf8ba5fa5e65ce60bc277.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - sOqvebbUsqGIDB93iUcTFcZV2wmg1ELWQL04rT8r_NkjLsZE2xcxBw==
+      x-amz-cf-pop:
+      - ZRH50-C1
+      x-cache:
+      - Miss from cloudfront
+      x-powered-by:
+      - Thundar!
+      x-thetvdb-api-version:
+      - 3.0.0
+    status:
+      code: 200
+      message: OK
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Accept-Language: [en]
-      Authorization: [Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1NTA5NDU1NjgsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTUwODU5MTY4fQ.IIyOPaQSKhibg9wbzODTZSKXoZtLCr4RAL7n-0SOit4l9P-3fNN_BgU9B3mpgVu2Ud9yKhMTnvZdK3TnqFa6vh-lHj93DQMX9QOj_MuJmsMvjgGXJepugwDIVvSvggC9uD4rTcN7IgHriiUSxFx_7goB7_TkzWeVlRbjZU2l8eEwUrAeQuWZ1nJ_JvffjGOxQBxUULZmpNmpvbmUeLll8f5bIwJfR6ffkQ1llRYSj9tTWlYGmk9jVtQMOw50Blt2coI4IRw40pmTFETbE8vGks5XDPs_3g4pGjmfOsED_7cJ4Io9yfY3V1cLpD1IAFHh3RKZtVj50K1yJeEfuJU_qw]
-      Connection: [keep-alive]
-      Content-Type: [application/json]
-      Cookie: [__cfduid=db8d4d6c3d42639d0198872b6bf731b681550859168]
-      User-Agent: [Subliminal/2.1]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en
+      Authorization:
+      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Subliminal/2.1
     method: GET
     uri: https://api.thetvdb.com/series/161511
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAA0xTy27bMBD8lcVe0gK0KtmWLeuWB/o4pC3qpDkUPazDlcSaIgU+oqhB/r2gEqM5
-        7u5wZkjOPqGkQFg/oZJYF5uiLAqBnp1i/5V6xhr3HfWs2Xt4d7t/jwJJK/Lssf71Zna7x98CD2QM
-        O6yxdTR06p70h/I+326XK6qqfM3Zn6HFE/8XiTVuq2K9Sq1AIXqs8dKaoExUJgEb5Xw4V44TdJkX
-        xSIvFvkOBRoOo3XH2Z8dg+r5f3MmRoEumnlQY1miwJaN4+T60vYsJxR45ain5Ns+sHtQPCb9ZLu1
-        ZOCjI3OET6Q1tR07UB5CxzA4GyV4ZVrNIEmCbcCrR/A9uSBAGRl9cMpGPxc8sJFsAhyV9ALGzsKo
-        QmdjgE71MNqoJRw4yzIY2HU0eDhwCOzANk0Gdx2/OjnzYGwACrOLAznwiVqZFsaOAmgVgmboreEp
-        QSbo6IEFdHzmYSDvWUJStWYmaLS1LoOL+MKX3M0HoLHRSBhp8hAstM6OEAdQBvygAqfbdqrP4CYp
-        9DTNpg4MWh0ZyEzQUK/0BJONcDR2FHB4kUjoI4OxQIPVtlXsobEODpyuwI90H/Q0v88MJscZCtTk
-        w+0gKaQIFGWZV+siXxcCSTl/RdO35o55jkE0ktKnpsHNy7fv6jyH79cpChRSomq8+bm4PkeBqpeH
-        OSchFGW12VQ5CvxLw1KFub3/nBer9bbaVIlSylMC80VeLvINFKt6uanL3Wl6MWG9XJUCvQr841Vt
-        97a8tNGEtGO5QK9jMuNP67OIHp+f/wEAAP//AwBBC2mRjQMAAA==
+        H4sIAAAAAAAAA0xT226cMBD9lREvbaVdgpcsS3jLRb08pK2apHmI+jAbBnAXbORLCI3y7x17d5tK
+        CJgzxzNn7OOXpEaHSfWSyDqpRCHWQiwSS0aS/cJIsinFaZ4coa84EIM3HX97shbe39184Cz2Ei3Z
+        pHr4FahotWKaEJwatXVkONr/2JN9k6VIf48t57eoVMy3BsdOPmJ/ZLT5gdKgQuOYsv850Ua2Ur0R
+        RXEgWofOs4rkUisnlZcqLpfGunNpKMyzykS2FCt+OKPITdrs4kR6cpKH+wfG6VeRZryKuSopMg57
+        VK3HNsSkOG5JGQ4euOtA9czIlcEBE94K/UTmSdIUJIXZWo0KPhpUO/iEfY9tRwakBdcRjEb7Gixr
+        7glqrEE3HD2DHXjmBUhVe+uM1N7GgEbil3KwkzUjU6dhkq7T3kEnB5i072vYUpqm0HDDR72AkUyH
+        o2XU8Ulw/SaF+44Oit5ZUNoBuqhmiwZsaMF6uDijvXSOlQ1a0RwoM3T4RAvoiFeOaC2xZO6uVSzQ
+        9FqbFC78vl5QGRdAo72qYcKZx9bQGj2BH3kibicdhalZfwq3ocOAcxS1JW6/I0A1Q4OD7GeYtYed
+        0tMCtvsWgc0UpQFH3euW7cq9DK8NI9AzPjpeFvYpktFQGg/TuruRL0Fwh1iXZZ7n5aZgS7NrrnD+
+        1twTRYewagyHGxK3ezucVVkG36+DRdAFs1XJ7c/l9TkDcqi30ULOcdWiKINz/uC4ki7CN58zkZ9u
+        yqIMJev6zZzZepkVIPJqVVTrs2P2YmZ5m3A3eZN+HLqd/R9e8r7yJTldbQLc+6DGHi/qkq/F6+tf
+        AAAA//8DAMAxIZ/uAwAA
     headers:
-      CF-RAY: [4ad36c517b9ecc40-ZRH]
-      Cache-Control: ['private, max-age=600']
-      Connection: [keep-alive]
-      Content-Encoding: [gzip]
-      Content-Type: [application/json; charset=utf-8]
-      Date: ['Fri, 22 Feb 2019 18:12:49 GMT']
-      Expect-CT: ['max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"']
-      Last-Modified: ['Fri, 22 Feb 2019 13:10:41 GMT']
-      Server: [cloudflare]
-      Transfer-Encoding: [chunked]
-      Vary: [Accept-Language]
-      X-Powered-By: [Thundar!]
-      X-Thetvdb-Api-Version: [2.2.0]
-    status: {code: 200, message: OK}
+      age:
+      - '60317'
+      cache-control:
+      - private, max-age=86400
+      connection:
+      - keep-alive
+      content-encoding:
+      - gzip
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Fri, 08 May 2020 21:54:52 GMT
+      last-modified:
+      - Fri, 01 May 2020 11:51:16 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding,Accept-Language
+      via:
+      - 1.1 449f2b51e83bf8ba5fa5e65ce60bc277.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - DLu1rLWYMIjKtpjO8O0-4Tx5UQ2vM6Z46Ivc0V05h2KtNT3LHXVrSA==
+      x-amz-cf-pop:
+      - ZRH50-C1
+      x-cache:
+      - Hit from cloudfront
+      x-powered-by:
+      - Thundar!
+      x-thetvdb-api-version:
+      - 3.0.0
+    status:
+      code: 200
+      message: OK
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Accept-Language: [en]
-      Authorization: [Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1NTA5NDU1NjgsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTUwODU5MTY4fQ.IIyOPaQSKhibg9wbzODTZSKXoZtLCr4RAL7n-0SOit4l9P-3fNN_BgU9B3mpgVu2Ud9yKhMTnvZdK3TnqFa6vh-lHj93DQMX9QOj_MuJmsMvjgGXJepugwDIVvSvggC9uD4rTcN7IgHriiUSxFx_7goB7_TkzWeVlRbjZU2l8eEwUrAeQuWZ1nJ_JvffjGOxQBxUULZmpNmpvbmUeLll8f5bIwJfR6ffkQ1llRYSj9tTWlYGmk9jVtQMOw50Blt2coI4IRw40pmTFETbE8vGks5XDPs_3g4pGjmfOsED_7cJ4Io9yfY3V1cLpD1IAFHh3RKZtVj50K1yJeEfuJU_qw]
-      Connection: [keep-alive]
-      Content-Type: [application/json]
-      Cookie: [__cfduid=db8d4d6c3d42639d0198872b6bf731b681550859168]
-      User-Agent: [Subliminal/2.1]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en
+      Authorization:
+      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Subliminal/2.1
     method: GET
-    uri: https://api.thetvdb.com/series/161511/episodes/query?airedSeason=8&airedEpisode=1&page=1
+    uri: https://api.thetvdb.com/series/161511/episodes/query?airedEpisode=1&airedSeason=8&page=1
   response:
     body:
       string: !!binary |
-        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
+        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
     headers:
-      CF-RAY: [4ad36c53fb7acc40-ZRH]
-      Cache-Control: ['private, max-age=600']
-      Connection: [keep-alive]
-      Content-Encoding: [gzip]
-      Content-Type: [application/json; charset=utf-8]
-      Date: ['Fri, 22 Feb 2019 18:12:50 GMT']
-      Expect-CT: ['max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"']
-      Server: [cloudflare]
-      Transfer-Encoding: [chunked]
-      Vary: [Accept-Language]
-      X-Powered-By: [Thundar!]
-      X-Thetvdb-Api-Version: [2.2.0]
-    status: {code: 200, message: OK}
+      age:
+      - '50943'
+      cache-control:
+      - private, max-age=86400
+      connection:
+      - keep-alive
+      content-encoding:
+      - gzip
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 09 May 2020 00:31:06 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding,Accept-Language
+      via:
+      - 1.1 449f2b51e83bf8ba5fa5e65ce60bc277.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - 6fzW3dPzkozSpgEstE52zPHXq2_HysJlE1cicOBFLGt1jjgUkQnr4A==
+      x-amz-cf-pop:
+      - ZRH50-C1
+      x-cache:
+      - Hit from cloudfront
+      x-powered-by:
+      - Thundar!
+      x-thetvdb-api-version:
+      - 3.0.0
+    status:
+      code: 200
+      message: OK
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Accept-Language: [en]
-      Authorization: [Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1NTA5NDU1NjgsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTUwODU5MTY4fQ.IIyOPaQSKhibg9wbzODTZSKXoZtLCr4RAL7n-0SOit4l9P-3fNN_BgU9B3mpgVu2Ud9yKhMTnvZdK3TnqFa6vh-lHj93DQMX9QOj_MuJmsMvjgGXJepugwDIVvSvggC9uD4rTcN7IgHriiUSxFx_7goB7_TkzWeVlRbjZU2l8eEwUrAeQuWZ1nJ_JvffjGOxQBxUULZmpNmpvbmUeLll8f5bIwJfR6ffkQ1llRYSj9tTWlYGmk9jVtQMOw50Blt2coI4IRw40pmTFETbE8vGks5XDPs_3g4pGjmfOsED_7cJ4Io9yfY3V1cLpD1IAFHh3RKZtVj50K1yJeEfuJU_qw]
-      Connection: [keep-alive]
-      Content-Type: [application/json]
-      Cookie: [__cfduid=db8d4d6c3d42639d0198872b6bf731b681550859168]
-      User-Agent: [Subliminal/2.1]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en
+      Authorization:
+      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Subliminal/2.1
     method: GET
     uri: https://api.thetvdb.com/episodes/6227949
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAA3RTwXLTMBD9lWXPromdxEl9a1IKZSgHSicHpoeNtbZEbckjrZMJnf47o9aBhinH
-        fe9p9bR6+4iKhLB8RKOwLPJ8cT47T5CMZ3XLFJzFcnlSX19iucjzoihG+ENvglP8dei27LHMEuQR
-        oY6xxA3DiivXMWw0CWw4TVO48mQf3mGCtfFBLmIfLDGfZIuzLDubzDHBZuAgt0I+YPnjPkFlPFfi
-        PJZ4TcbCKoUbqi6dpVbhXzqq3xDcJ7j3RviF/+y0hQ23bYiE27HfGd5jid81w0dqW2o0+wC1sQpE
-        cxe43XGAvRENnbN8AHGwHbwFCrAm30KI3aLWeDBWszdCtmKovevgxllTUQpXxlmCsGfyAVxdgyer
-        XAfauYehD7Fp7aohgLOg2YPlPVBPXjq2AtvBtMrYJoUvpgfF1I6ORDMEqrypTcUgccxx4CMb3NYb
-        lsM4deCOfcMB3CDgaiDoWPSZsWqoWIGmXxx9dPTAQB1bFaB2HhRXpOKpGhT3nnZGDikm2JJtBmo4
-        Zuj049niyWzZ4lOCvXdqqMQ4u3YqyjDBoN3+zrcvRUtB7npFEiORzaezvCim8zxBtVOXJlQxqFGn
-        dq8TqnZvBFHt1FpTL7G0Q9smSNvg2kH+iJbzGMGW7Wj5pUV4nxXZPMvejwuR/uybaJO94XAdbT3T
-        J15XBywnzysRLmphf/Q23mt8WHHtPP8PH90fCdFDt70YRMfAz6bL8yI/gkr9syyQLcv5rMwLHCUb
-        o0RjibPJ5Ah9YtNoicfyuFymU9v4EBQpprPFLIvCYIS/kRjbYLl4Xa7dYAXL+dPTbwAAAP//AwDA
-        1YqKMAQAAA==
+        H4sIAAAAAAAAA3RTy3LbMAz8FZRn2zH9kGPdbKePdOoemqY+dHqARUhiQ5EakrInzeTfC8ZyJp5O
+        bwKwxC6A1ZNQGFHkT0IrkWeTyWI5Ww4Eak/qjjA4K/Lri/j2RuSLySTLsj79vtXBKfraNXvyIpcD
+        QX0GGxK52BGsqXANwa7GCDsajUbwwaN9eCcGotQ+xFXqw9DJWC6GUg7Hc65UHYV4F9EHkf/8NRCK
+        QUV0L6G4RW1hPYItFjfOolGCEUevI53qn11tmcqYkAruQP6g6cgU32uCj2gMVjVDodRWQaypCWQO
+        FOCoYw2Ns/QI0cG+8xYwwAa9gZC6Jaz2oC2/1hFtQVB618DWWV0gz6VZDYQjsWxwZQk8p+J67dxD
+        14bUtHRFxzUL3AIsHQFb9LEhG5lPG6VtNYIvugVFaHpFzAoBC69LzYwx7TFttK8Gt/ea4mO/VqCG
+        fMVF10XWAAgNxXrIk3YFKajxDyUdDT4Q8Ims4jU4z3QFqvSq5M/W40FzR76DQVt1WFEyyeVlyYqL
+        3XL8PBCtd0wUeREbhnKaQaF2x3tvToHBEO9b9l26uZxn47lcLOWCL3xQNzoUyYkJx+EbC3L0r9M4
+        uamxjSm0nTFsyX1wpouvoOt58pgh20s+tQhXMpNzKa96x49+t1WSyUelcJtkvZQvtK4fXyjZ82FV
+        MuNZW8/L6TXxHul/+V79uaAbtU9MIsZsOlvM5JgFFM5GNsI3jOyC5NYfw+2K87HmcVZdrN1p7lOs
+        1PmvWaa/Rk5BTvL5Mp+Mz092WsWaIdnsNfWJdFVHzk2zlAv8y5zpFm/Djessw+SUF6jD1vGNRT5+
+        fv4LAAD//wMA134xOzIEAAA=
     headers:
-      CF-RAY: [4ad36c568b9ccc40-ZRH]
-      Cache-Control: ['private, max-age=600']
-      Connection: [keep-alive]
-      Content-Encoding: [gzip]
-      Content-Type: [application/json; charset=utf-8]
-      Date: ['Fri, 22 Feb 2019 18:12:50 GMT']
-      Expect-CT: ['max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"']
-      Last-Modified: ['Tue, 14 Aug 2018 17:05:52 GMT']
-      Server: [cloudflare]
-      Transfer-Encoding: [chunked]
-      Vary: [Accept-Language]
-      X-Powered-By: [Thundar!]
-      X-Thetvdb-Api-Version: [2.2.0]
-    status: {code: 200, message: OK}
+      age:
+      - '77510'
+      cache-control:
+      - private, max-age=86400
+      connection:
+      - keep-alive
+      content-encoding:
+      - gzip
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Fri, 08 May 2020 17:08:19 GMT
+      last-modified:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding,Accept-Language
+      via:
+      - 1.1 449f2b51e83bf8ba5fa5e65ce60bc277.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - z5HowkL_jDb9XFQE-yXYoVHidd0hu8m6XfOZc4myl65k2wlFgpyn5w==
+      x-amz-cf-pop:
+      - ZRH50-C1
+      x-cache:
+      - Hit from cloudfront
+      x-powered-by:
+      - Thundar!
+      x-thetvdb-api-version:
+      - 3.0.0
+    status:
+      code: 200
+      message: OK
 version: 1

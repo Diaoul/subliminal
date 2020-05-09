@@ -78,7 +78,7 @@ def episodes():
                             'thesubdb': 'b1f899c77f4c960b84b8dbf840d4e42d'}),
             'dallas_s01e03':
             Episode('Dallas.S01E03.mkv', 'Dallas', 1, 3, title='Spy in the House', year=1978, tvdb_id=228224,
-                    series_tvdb_id=77092, series_imdb_id='tt0077000'),
+                    imdb_id='tt0553425', series_tvdb_id=77092, series_imdb_id='tt0077000'),
             'dallas_2012_s01e03':
             Episode('Dallas.2012.S01E03.mkv', 'Dallas', 1, 3, title='The Price You Pay', year=2012,
                     original_series=False, tvdb_id=4199511, series_tvdb_id=242521, series_imdb_id='tt1723760',
@@ -147,8 +147,8 @@ def episodes():
                     series_tvdb_id=328635),
             'shameless_us_s08e01':
             Episode('Shameless.US.s08e01.web.h264-convoy', 'Shameless', 8, 1, source='Web', video_codec='H.264',
-                    country=Country('US'), original_series=False, release_group='convoy', year=2011,
-                    alternative_series=['Shameless US'], title='We Become What We... Frank!',
+                    country=Country('US'), original_series=False, release_group='convoy', year=2010,
+                    alternative_series=[], title='We Become What We... Frank!',
                     series_imdb_id='tt1586680', series_tvdb_id=161511, imdb_id='tt6347410', tvdb_id=6227949),
             'house_of_cards_us_s06e01':
             Episode('house.of.cards.us.s06e01.720p.web-dl.x264', 'House of Cards', 6, 1, source='Web',

@@ -1,13 +1,30 @@
 # -*- coding: utf-8 -*-
 import logging
+import ssl
 
 from bs4 import BeautifulSoup, FeatureNotFound
 from six.moves.xmlrpc_client import SafeTransport
+from requests import adapters
+from urllib3 import poolmanager
 
 from .. import __short_version__
 from ..video import Episode, Movie
 
 logger = logging.getLogger(__name__)
+
+
+class SecLevelOneTLSAdapter(adapters.HTTPAdapter):
+
+    def init_poolmanager(self, connections, maxsize, block=False):
+        """Create and initialize the urllib3 PoolManager."""
+        ctx = ssl.create_default_context()
+        ctx.set_ciphers('DEFAULT@SECLEVEL=1')
+        self.poolmanager = poolmanager.PoolManager(
+                num_pools=connections,
+                maxsize=maxsize,
+                block=block,
+                ssl_version=ssl.PROTOCOL_TLS,
+                ssl_context=ctx)
 
 
 class TimeoutSafeTransport(SafeTransport):

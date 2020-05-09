@@ -101,7 +101,7 @@ provider_manager = RegistrableExtensionManager('subliminal.providers', [
 ])
 
 #: Disabled providers
-disabled_providers = ['addic7ed', 'napiprojekt', 'opensubtitlesvip']
+disabled_providers = ['addic7ed', 'napiprojekt', 'opensubtitlesvip', 'shooter']
 
 #: Default enabled providers
 default_providers = [p for p in provider_manager.names() if p not in disabled_providers]

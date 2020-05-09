@@ -8,11 +8,12 @@ from guessit import guessit
 from requests import Session
 from zipfile import ZipFile
 
-from . import Provider
+from . import Provider, SecLevelOneTLSAdapter
 from ..exceptions import ProviderError
 from ..matches import guess_matches
 from ..subtitle import Subtitle, fix_line_ending
 from ..video import Episode
+
 
 logger = logging.getLogger(__name__)
 
@@ -66,6 +67,7 @@ class PodnapisiProvider(Provider):
 
     def initialize(self):
         self.session = Session()
+        self.session.mount('https://', SecLevelOneTLSAdapter())
         self.session.headers['User-Agent'] = self.user_agent
         self.session.headers['Accept'] = 'application/json'
 
@@ -114,8 +116,8 @@ class PodnapisiProvider(Provider):
                 page_link = data['url']
                 releases = data['releases'] + data['custom_releases']
                 title = data['movie']['title']
-                season = int(data['movie']['episode_info']['season']) if is_episode else None
-                episode = int(data['movie']['episode_info']['episode']) if is_episode else None
+                season = int(data['movie']['episode_info'].get('season')) if is_episode else None
+                episode = int(data['movie']['episode_info'].get('episode')) if is_episode else None
                 year = int(data['movie']['year'])
 
                 if is_episode:

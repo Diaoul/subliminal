@@ -2,20 +2,177 @@ interactions:
 - request:
     body: null
     headers:
-      Accept: [application/json]
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      User-Agent: [Subliminal/2.1]
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.1
     method: GET
-    uri: https://www.podnapisi.net/subtitles/search/advanced?keywords=Game+of+Thrones&language=en&seasons=3&episodes=10&movie_type=tv-series&movie_type=mini-series
+    uri: https://www.podnapisi.net/subtitles/search/advanced?keywords=Game+of+Thrones&seasons=3&episodes=10&language=fr&movie_type=tv-series&movie_type=mini-series
   response:
-    body: {string: "{\n  \"all_pages\": 1, \n  \"data\": [\n    {\n      \"audited\"\
-        : false, \n      \"contributions\": [], \n      \"contributor\": null, \n\
-        \      \"created\": \"2015-07-06T18:26:18.279000+00:00\", \n      \"custom_releases\"\
-        : [\n        \"Game.of.Thrones.S03E10.720p.BluRay.450MB.ShAaNiG.com\", \n\
-        \        \"Game.of.Thrones.S03E10.1080p.WEB-DL.DD5.1.H.264-NTb\", \n     \
-        \   \"Game.of.Thrones.S03E10.720p.BluRay.450MB.ShAaNiG.com.srt\"\n      ],\
-        \ \n      \"download\": \"/en/subtitles/en-game-of-thrones-2011-S03E10-O-mhysa/a1I8/download\"\
+    body:
+      string: !!python/unicode "{\n  \"all_pages\": 1, \n  \"data\": [\n    {\n  \
+        \    \"audited\": false, \n      \"contributions\": [\n        {\n       \
+        \   \"contributor\": {\n            \"id\": 1, \n            \"name\": \"\
+        Anonymous\", \n            \"type\": \"user\"\n          }, \n          \"\
+        role\": \"uploader\", \n          \"share\": 0.0\n        }\n      ], \n \
+        \     \"contributor\": {\n        \"id\": 1, \n        \"name\": \"Anonymous\"\
+        , \n        \"type\": \"user\"\n      }, \n      \"created\": \"2013-06-11T22:22:55+00:00\"\
+        , \n      \"custom_releases\": [\n        \"Game.of.Thrones.S03E10.720p.WEB-DL.DD5.1.H.264-NTb\"\
+        , \n        \"Game.of.Thrones.S03E10.1080p.WEB-DL.DD5.1.H.264-NTb\", \n  \
+        \      \"Game.of.Thrones.S03E10.720p.WEB-DL.DD5.1.AAC2.0.H.264-YFN\", \n \
+        \       \"Game.of.Thrones.S03E10.1080p.WEB-DL.DD5.1.AAC2.0.H.264-YFN\"\n \
+        \     ], \n      \"download\": \"/en/subtitles/fr-game-of-thrones-2011-S03E10-O-mhysa/k8Yl/download\"\
+        , \n      \"flags\": [], \n      \"fps\": \"\", \n      \"id\": \"k8Yl\",\
+        \ \n      \"language\": \"fr\", \n      \"movie\": {\n        \"aliases\"\
+        : [], \n        \"episode_info\": {\n          \"episode\": 10, \n       \
+        \   \"id\": null, \n          \"season\": 3, \n          \"slug\": \"S03E10-O-mhysa\"\
+        , \n          \"title\": \"Mhysa\", \n          \"type\": \"ordinary\", \n\
+        \          \"year\": null\n        }, \n        \"id\": \"rLI\", \n      \
+        \  \"posters\": {\n          \"inline\": \"/thumbnails/moviedb/inline/b6/c7/4f/17/db/65/8368be2232bb0bdcc53e/rLI.jpg\"\
+        , \n          \"normal\": \"/thumbnails/moviedb/normal/b6/c7/4f/17/db/65/8368be2232bb0bdcc53e/rLI.jpg\"\
+        , \n          \"small\": \"/thumbnails/moviedb/small/b6/c7/4f/17/db/65/8368be2232bb0bdcc53e/rLI.jpg\"\
+        , \n          \"title\": \"/thumbnails/moviedb/title/b6/c7/4f/17/db/65/8368be2232bb0bdcc53e/rLI.jpg\"\
+        \n        }, \n        \"providers\": [\n          \"omdb:mLUG\"\n       \
+        \ ], \n        \"slug\": \"game-of-thrones-2011-S03E10-O-mhysa\", \n     \
+        \   \"title\": \"Game of Thrones\", \n        \"type\": \"tv-series\", \n\
+        \        \"year\": 2011\n      }, \n      \"notes\": null, \n      \"num_cds\"\
+        : 1, \n      \"rejected\": null, \n      \"releases\": [], \n      \"state\"\
+        : \"migration\", \n      \"stats\": {\n        \"downloads\": 7924, \n   \
+        \     \"lines\": 758\n      }, \n      \"url\": \"/en/subtitles/fr-game-of-thrones-2011-S03E10-O-mhysa/k8Yl\"\
+        \n    }, \n    {\n      \"audited\": false, \n      \"contributions\": [\n\
+        \        {\n          \"contributor\": {\n            \"id\": 1, \n      \
+        \      \"name\": \"Anonymous\", \n            \"type\": \"user\"\n       \
+        \   }, \n          \"role\": \"uploader\", \n          \"share\": 0.0\n  \
+        \      }\n      ], \n      \"contributor\": {\n        \"id\": 1, \n     \
+        \   \"name\": \"Anonymous\", \n        \"type\": \"user\"\n      }, \n   \
+        \   \"created\": \"2013-06-11T22:18:26+00:00\", \n      \"custom_releases\"\
+        : [\n        \"Game.of.Thrones.S03E10.720p.HDTV.x264-EVOLVE\", \n        \"\
+        Game.of.Thrones.S03E10.720p.HDTV.x264-CPG\", \n        \"Game.of.Thrones.S03E10.480p.HDTV.x264-ChameE\"\
+        , \n        \"Game.of.Thrones.S03E10.480p.HDTV.x264-mSD\", \n        \"Game.of.Thrones.S03E10.HDTV.XviD-Chivvez\"\
+        , \n        \"Game.of.Thrones.S03E10.HDTV.XviD-3LT0N\", \n        \"Game.of.Thrones.S03E10.HDTV.XviD-Snake\"\
+        , \n        \"Game.of.Thrones.S03E10.HDTV.XviD-JKS\", \n        \"Game.of.Thrones.S03E10.HDTV.XviD-AFG\"\
+        \n      ], \n      \"download\": \"/en/subtitles/fr-game-of-thrones-2011-S03E10-O-mhysa/jcYl/download\"\
+        , \n      \"flags\": [], \n      \"fps\": \"\", \n      \"id\": \"jcYl\",\
+        \ \n      \"language\": \"fr\", \n      \"movie\": {\n        \"aliases\"\
+        : [], \n        \"episode_info\": {\n          \"episode\": 10, \n       \
+        \   \"id\": null, \n          \"season\": 3, \n          \"slug\": \"S03E10-O-mhysa\"\
+        , \n          \"title\": \"Mhysa\", \n          \"type\": \"ordinary\", \n\
+        \          \"year\": null\n        }, \n        \"id\": \"rLI\", \n      \
+        \  \"posters\": {\n          \"inline\": \"/thumbnails/moviedb/inline/b6/c7/4f/17/db/65/8368be2232bb0bdcc53e/rLI.jpg\"\
+        , \n          \"normal\": \"/thumbnails/moviedb/normal/b6/c7/4f/17/db/65/8368be2232bb0bdcc53e/rLI.jpg\"\
+        , \n          \"small\": \"/thumbnails/moviedb/small/b6/c7/4f/17/db/65/8368be2232bb0bdcc53e/rLI.jpg\"\
+        , \n          \"title\": \"/thumbnails/moviedb/title/b6/c7/4f/17/db/65/8368be2232bb0bdcc53e/rLI.jpg\"\
+        \n        }, \n        \"providers\": [\n          \"omdb:mLUG\"\n       \
+        \ ], \n        \"slug\": \"game-of-thrones-2011-S03E10-O-mhysa\", \n     \
+        \   \"title\": \"Game of Thrones\", \n        \"type\": \"tv-series\", \n\
+        \        \"year\": 2011\n      }, \n      \"notes\": null, \n      \"num_cds\"\
+        : 1, \n      \"rejected\": null, \n      \"releases\": [], \n      \"state\"\
+        : \"migration\", \n      \"stats\": {\n        \"downloads\": 3954, \n   \
+        \     \"lines\": 789\n      }, \n      \"url\": \"/en/subtitles/fr-game-of-thrones-2011-S03E10-O-mhysa/jcYl\"\
+        \n    }, \n    {\n      \"audited\": true, \n      \"contributions\": [\n\
+        \        {\n          \"contributor\": {\n            \"id\": 44181, \n  \
+        \          \"name\": \"grzesiek11\", \n            \"type\": \"user\"\n  \
+        \        }, \n          \"role\": \"uploader\", \n          \"share\": 0.0\n\
+        \        }\n      ], \n      \"contributor\": {\n        \"id\": 44181, \n\
+        \        \"name\": \"grzesiek11\", \n        \"type\": \"user\"\n      },\
+        \ \n      \"created\": \"2013-06-10T09:02:28+00:00\", \n      \"custom_releases\"\
+        : [\n        \"Game.of.Thrones.S03E10.720p.HDTV.x264-EVOLVE\", \n        \"\
+        Game.of.Thrones.S03E10.720p.HDTV.x264-CPG\", \n        \"Game.of.Thrones.S03E10.480p.HDTV.x264-ChameE\"\
+        , \n        \"Game.of.Thrones.S03E10.480p.HDTV.x264-mSD\", \n        \"Game.of.Thrones.S03E10.HDTV.XviD-Chivvez\"\
+        , \n        \"Game.of.Thrones.S03E10.HDTV.XviD-3LT0N\", \n        \"Game.of.Thrones.S03E10.HDTV.XviD-Snake\"\
+        , \n        \"Game.of.Thrones.S03E10.HDTV.XviD-JKS\", \n        \"Game.of.Thrones.S03E10.HDTV.XviD-AFG\"\
+        \n      ], \n      \"download\": \"/en/subtitles/fr-game-of-thrones-2011-S03E10-O-mhysa/8cMl/download\"\
+        , \n      \"flags\": [\n        \"high_definition\"\n      ], \n      \"fps\"\
+        : \"23.976\", \n      \"id\": \"8cMl\", \n      \"language\": \"fr\", \n \
+        \     \"movie\": {\n        \"aliases\": [\n          \"Gra o tron\", \n \
+        \         \"Juego de tronos\", \n          \"Le tr\\u00f4ne de fer: Game of\
+        \ Thrones\", \n          \"Tr\\u00f3nok harca\", \n          \"Igra prestolov\"\
+        \n        ], \n        \"episode_info\": {\n          \"episode\": 10, \n\
+        \          \"id\": null, \n          \"season\": 3, \n          \"slug\":\
+        \ \"S03E10-O-mhysa\", \n          \"title\": \"Mhysa\", \n          \"type\"\
+        : \"ordinary\", \n          \"year\": null\n        }, \n        \"id\": \"\
+        rLI\", \n        \"posters\": {\n          \"inline\": \"/thumbnails/moviedb/inline/b6/c7/4f/17/db/65/8368be2232bb0bdcc53e/rLI.jpg\"\
+        , \n          \"normal\": \"/thumbnails/moviedb/normal/b6/c7/4f/17/db/65/8368be2232bb0bdcc53e/rLI.jpg\"\
+        , \n          \"small\": \"/thumbnails/moviedb/small/b6/c7/4f/17/db/65/8368be2232bb0bdcc53e/rLI.jpg\"\
+        , \n          \"title\": \"/thumbnails/moviedb/title/b6/c7/4f/17/db/65/8368be2232bb0bdcc53e/rLI.jpg\"\
+        \n        }, \n        \"providers\": [\n          \"omdb:mLUG\"\n       \
+        \ ], \n        \"slug\": \"game-of-thrones-2011-S03E10-O-mhysa\", \n     \
+        \   \"title\": \"Game of Thrones\", \n        \"type\": \"tv-series\", \n\
+        \        \"year\": 2011\n      }, \n      \"notes\": \"\", \n      \"num_cds\"\
+        : 1, \n      \"rejected\": null, \n      \"releases\": [], \n      \"state\"\
+        : \"migration\", \n      \"stats\": {\n        \"downloads\": 7382, \n   \
+        \     \"lines\": 867\n      }, \n      \"url\": \"/en/subtitles/fr-game-of-thrones-2011-S03E10-O-mhysa/8cMl\"\
+        \n    }, \n    {\n      \"audited\": true, \n      \"contributions\": [\n\
+        \        {\n          \"contributor\": {\n            \"id\": 44181, \n  \
+        \          \"name\": \"grzesiek11\", \n            \"type\": \"user\"\n  \
+        \        }, \n          \"role\": \"uploader\", \n          \"share\": 0.0\n\
+        \        }\n      ], \n      \"contributor\": {\n        \"id\": 44181, \n\
+        \        \"name\": \"grzesiek11\", \n        \"type\": \"user\"\n      },\
+        \ \n      \"created\": \"2013-06-10T08:19:57+00:00\", \n      \"custom_releases\"\
+        : [\n        \"Game.of.Thrones.S03E10.HDTV.x264-EVOLVE\"\n      ], \n    \
+        \  \"download\": \"/en/subtitles/fr-game-of-thrones-2011-S03E10-O-mhysa/6MMl/download\"\
+        , \n      \"flags\": [], \n      \"fps\": \"23.976\", \n      \"id\": \"6MMl\"\
+        , \n      \"language\": \"fr\", \n      \"movie\": {\n        \"aliases\"\
+        : [\n          \"Gra o tron\", \n          \"Juego de tronos\", \n       \
+        \   \"Le tr\\u00f4ne de fer: Game of Thrones\", \n          \"Tr\\u00f3nok\
+        \ harca\", \n          \"Igra prestolov\"\n        ], \n        \"episode_info\"\
+        : {\n          \"episode\": 10, \n          \"id\": null, \n          \"season\"\
+        : 3, \n          \"slug\": \"S03E10-O-mhysa\", \n          \"title\": \"Mhysa\"\
+        , \n          \"type\": \"ordinary\", \n          \"year\": null\n       \
+        \ }, \n        \"id\": \"rLI\", \n        \"posters\": {\n          \"inline\"\
+        : \"/thumbnails/moviedb/inline/b6/c7/4f/17/db/65/8368be2232bb0bdcc53e/rLI.jpg\"\
+        , \n          \"normal\": \"/thumbnails/moviedb/normal/b6/c7/4f/17/db/65/8368be2232bb0bdcc53e/rLI.jpg\"\
+        , \n          \"small\": \"/thumbnails/moviedb/small/b6/c7/4f/17/db/65/8368be2232bb0bdcc53e/rLI.jpg\"\
+        , \n          \"title\": \"/thumbnails/moviedb/title/b6/c7/4f/17/db/65/8368be2232bb0bdcc53e/rLI.jpg\"\
+        \n        }, \n        \"providers\": [\n          \"omdb:mLUG\"\n       \
+        \ ], \n        \"slug\": \"game-of-thrones-2011-S03E10-O-mhysa\", \n     \
+        \   \"title\": \"Game of Thrones\", \n        \"type\": \"tv-series\", \n\
+        \        \"year\": 2011\n      }, \n      \"notes\": \"\", \n      \"num_cds\"\
+        : 1, \n      \"rejected\": null, \n      \"releases\": [], \n      \"state\"\
+        : \"migration\", \n      \"stats\": {\n        \"downloads\": 5087, \n   \
+        \     \"lines\": 867\n      }, \n      \"url\": \"/en/subtitles/fr-game-of-thrones-2011-S03E10-O-mhysa/6MMl\"\
+        \n    }\n  ], \n  \"page\": 1, \n  \"per_page\": 50, \n  \"status\": \"ok\"\
+        \n}"
+    headers:
+      connection:
+      - keep-alive
+      content-length:
+      - '9063'
+      content-type:
+      - application/json
+      date:
+      - Sat, 09 May 2020 10:24:43 GMT
+      server:
+      - nginx
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.1
+    method: GET
+    uri: https://www.podnapisi.net/subtitles/search/advanced?keywords=Game+of+Thrones&seasons=3&episodes=10&language=en&movie_type=tv-series&movie_type=mini-series
+  response:
+    body:
+      string: !!python/unicode "{\n  \"all_pages\": 1, \n  \"data\": [\n    {\n  \
+        \    \"audited\": false, \n      \"contributions\": [], \n      \"contributor\"\
+        : null, \n      \"created\": \"2015-07-06T18:26:18.279000+00:00\", \n    \
+        \  \"custom_releases\": [\n        \"Game.of.Thrones.S03E10.720p.BluRay.450MB.ShAaNiG.com\"\
+        , \n        \"Game.of.Thrones.S03E10.1080p.WEB-DL.DD5.1.H.264-NTb\", \n  \
+        \      \"Game.of.Thrones.S03E10.720p.BluRay.450MB.ShAaNiG.com.srt\"\n    \
+        \  ], \n      \"download\": \"/en/subtitles/en-game-of-thrones-2011-S03E10-O-mhysa/a1I8/download\"\
         , \n      \"flags\": [], \n      \"fps\": \"\", \n      \"id\": \"a1I8\",\
         \ \n      \"language\": \"en\", \n      \"movie\": {\n        \"aliases\"\
         : [\n          \"Le tr\\u00f4ne de fer: Game of Thrones\", \n          \"\
@@ -38,7 +195,7 @@ interactions:
         : 2011\n      }, \n      \"notes\": null, \n      \"num_cds\": 1, \n     \
         \ \"rejected\": null, \n      \"releases\": [], \n      \"state\": \"\", \n\
         \      \"stats\": {\n        \"characters\": 24581, \n        \"characters_per_line\"\
-        : 24.9553299492, \n        \"downloads\": 23288, \n        \"lines\": 985,\
+        : 24.9553299492, \n        \"downloads\": 38841, \n        \"lines\": 985,\
         \ \n        \"lines_per_unit\": 1.2628205128, \n        \"parts\": 1, \n \
         \       \"units\": 780\n      }, \n      \"url\": \"/en/subtitles/en-game-of-thrones-2011-S03E10-O-mhysa/a1I8\"\
         \n    }, \n    {\n      \"audited\": true, \n      \"contributions\": [],\
@@ -69,7 +226,7 @@ interactions:
         : 2011\n      }, \n      \"notes\": \"\", \n      \"num_cds\": 1, \n     \
         \ \"rejected\": null, \n      \"releases\": [], \n      \"state\": \"\", \n\
         \      \"stats\": {\n        \"characters\": 24583, \n        \"characters_per_line\"\
-        : 20.3165289256, \n        \"downloads\": 2649, \n        \"lines\": 1210,\
+        : 20.3165289256, \n        \"downloads\": 3082, \n        \"lines\": 1210,\
         \ \n        \"lines_per_unit\": 1.4268867925, \n        \"parts\": 1, \n \
         \       \"units\": 848\n      }, \n      \"url\": \"/en/subtitles/en-game-of-thrones-2011-S03E10-O-mhysa/8BM5\"\
         \n    }, \n    {\n      \"audited\": true, \n      \"contributions\": [],\
@@ -100,7 +257,7 @@ interactions:
         : 2011\n      }, \n      \"notes\": \"\", \n      \"num_cds\": 1, \n     \
         \ \"rejected\": null, \n      \"releases\": [], \n      \"state\": \"\", \n\
         \      \"stats\": {\n        \"characters\": 26190, \n        \"characters_per_line\"\
-        : 24.2724745134, \n        \"downloads\": 5063, \n        \"lines\": 1079,\
+        : 24.2724745134, \n        \"downloads\": 5765, \n        \"lines\": 1079,\
         \ \n        \"lines_per_unit\": 1.2388059701, \n        \"parts\": 1, \n \
         \       \"units\": 871\n      }, \n      \"url\": \"/en/subtitles/en-game-of-thrones-2011-S03E10-O-mhysa/am0s\"\
         \n    }, \n    {\n      \"audited\": true, \n      \"contributions\": [],\
@@ -131,7 +288,7 @@ interactions:
         : 2011\n      }, \n      \"notes\": \"\", \n      \"num_cds\": 1, \n     \
         \ \"rejected\": null, \n      \"releases\": [], \n      \"state\": \"\", \n\
         \      \"stats\": {\n        \"characters\": 26436, \n        \"characters_per_line\"\
-        : 20.3353846154, \n        \"downloads\": 14511, \n        \"lines\": 1300,\
+        : 20.3353846154, \n        \"downloads\": 14925, \n        \"lines\": 1300,\
         \ \n        \"lines_per_unit\": 1.4285714286, \n        \"parts\": 1, \n \
         \       \"units\": 910\n      }, \n      \"url\": \"/en/subtitles/en-game-of-thrones-2011-S03E10-O-mhysa/Eaom\"\
         \n    }, \n    {\n      \"audited\": true, \n      \"contributions\": [],\
@@ -165,7 +322,7 @@ interactions:
         : 2011\n      }, \n      \"notes\": \"\", \n      \"num_cds\": 1, \n     \
         \ \"rejected\": null, \n      \"releases\": [], \n      \"state\": \"\", \n\
         \      \"stats\": {\n        \"characters\": 25135, \n        \"characters_per_line\"\
-        : 20.535130719, \n        \"downloads\": 42470, \n        \"lines\": 1224,\
+        : 20.535130719, \n        \"downloads\": 42667, \n        \"lines\": 1224,\
         \ \n        \"lines_per_unit\": 1.4282380397, \n        \"parts\": 1, \n \
         \       \"units\": 857\n      }, \n      \"url\": \"/en/subtitles/en-game-of-thrones-2011-S03E10-O-mhysa/lMYl\"\
         \n    }, \n    {\n      \"audited\": true, \n      \"contributions\": [],\
@@ -199,7 +356,7 @@ interactions:
         : 2011\n      }, \n      \"notes\": \"\", \n      \"num_cds\": 1, \n     \
         \ \"rejected\": null, \n      \"releases\": [], \n      \"state\": \"\", \n\
         \      \"stats\": {\n        \"characters\": 26814, \n        \"characters_per_line\"\
-        : 20.4375, \n        \"downloads\": 15772, \n        \"lines\": 1312, \n \
+        : 20.4375, \n        \"downloads\": 16109, \n        \"lines\": 1312, \n \
         \       \"lines_per_unit\": 1.4260869565, \n        \"parts\": 1, \n     \
         \   \"units\": 920\n      }, \n      \"url\": \"/en/subtitles/en-game-of-thrones-2011-S03E10-O-mhysa/msYl\"\
         \n    }, \n    {\n      \"audited\": true, \n      \"contributions\": [],\
@@ -236,7 +393,7 @@ interactions:
         r\\nSeason finale.\", \n      \"num_cds\": 1, \n      \"rejected\": null,\
         \ \n      \"releases\": [], \n      \"state\": \"\", \n      \"stats\": {\n\
         \        \"characters\": 27599, \n        \"characters_per_line\": 20.2933823529,\
-        \ \n        \"downloads\": 47337, \n        \"lines\": 1360, \n        \"\
+        \ \n        \"downloads\": 47819, \n        \"lines\": 1360, \n        \"\
         lines_per_unit\": 1.4300736067, \n        \"parts\": 1, \n        \"units\"\
         : 951\n      }, \n      \"url\": \"/en/subtitles/en-game-of-thrones-2011-S03E10-O-mhysa/78Ml\"\
         \n    }, \n    {\n      \"audited\": true, \n      \"contributions\": [],\
@@ -273,7 +430,7 @@ interactions:
         r\\nSeason finale.\", \n      \"num_cds\": 1, \n      \"rejected\": null,\
         \ \n      \"releases\": [], \n      \"state\": \"\", \n      \"stats\": {\n\
         \        \"characters\": 25923, \n        \"characters_per_line\": 20.3957513769,\
-        \ \n        \"downloads\": 77744, \n        \"lines\": 1271, \n        \"\
+        \ \n        \"downloads\": 80088, \n        \"lines\": 1271, \n        \"\
         lines_per_unit\": 1.429696288, \n        \"parts\": 1, \n        \"units\"\
         : 889\n      }, \n      \"url\": \"/en/subtitles/en-game-of-thrones-2011-S03E10-O-mhysa/7sMl\"\
         \n    }, \n    {\n      \"audited\": true, \n      \"contributions\": [],\
@@ -305,7 +462,7 @@ interactions:
         : 2011\n      }, \n      \"notes\": \"Season finale.\", \n      \"num_cds\"\
         : 1, \n      \"rejected\": null, \n      \"releases\": [], \n      \"state\"\
         : \"\", \n      \"stats\": {\n        \"characters\": 27858, \n        \"\
-        characters_per_line\": 20.4838235294, \n        \"downloads\": 35185, \n \
+        characters_per_line\": 20.4838235294, \n        \"downloads\": 35310, \n \
         \       \"lines\": 1360, \n        \"lines_per_unit\": 1.4300736067, \n  \
         \      \"parts\": 1, \n        \"units\": 951\n      }, \n      \"url\": \"\
         /en/subtitles/en-game-of-thrones-2011-S03E10-O-mhysa/0MMl\"\n    }, \n   \
@@ -336,156 +493,23 @@ interactions:
         : 2011\n      }, \n      \"notes\": \"Season finale.\", \n      \"num_cds\"\
         : 1, \n      \"rejected\": null, \n      \"releases\": [], \n      \"state\"\
         : \"\", \n      \"stats\": {\n        \"characters\": 26154, \n        \"\
-        characters_per_line\": 20.577498033, \n        \"downloads\": 50210, \n  \
+        characters_per_line\": 20.577498033, \n        \"downloads\": 50443, \n  \
         \      \"lines\": 1271, \n        \"lines_per_unit\": 1.429696288, \n    \
         \    \"parts\": 1, \n        \"units\": 889\n      }, \n      \"url\": \"\
         /en/subtitles/en-game-of-thrones-2011-S03E10-O-mhysa/z8Ml\"\n    }\n  ], \n\
-        \  \"page\": 1, \n  \"per_page\": 50, \n  \"status\": \"ok\"\n}"}
+        \  \"page\": 1, \n  \"per_page\": 50, \n  \"status\": \"ok\"\n}"
     headers:
-      Connection: [keep-alive]
-      Content-Length: ['24121']
-      Content-Type: [application/json]
-      Date: ['Sun, 24 Feb 2019 11:54:36 GMT']
-      Server: [nginx/1.8.0]
-    status: {code: 200, message: OK}
-- request:
-    body: null
-    headers:
-      Accept: [application/json]
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      User-Agent: [Subliminal/2.1]
-    method: GET
-    uri: https://www.podnapisi.net/subtitles/search/advanced?keywords=Game+of+Thrones&language=fr&seasons=3&episodes=10&movie_type=tv-series&movie_type=mini-series
-  response:
-    body: {string: "{\n  \"all_pages\": 1, \n  \"data\": [\n    {\n      \"audited\"\
-        : false, \n      \"contributions\": [\n        {\n          \"contributor\"\
-        : {\n            \"id\": 1, \n            \"name\": \"Anonymous\", \n    \
-        \        \"type\": \"user\"\n          }, \n          \"role\": \"uploader\"\
-        , \n          \"share\": 0.0\n        }\n      ], \n      \"contributor\"\
-        : {\n        \"id\": 1, \n        \"name\": \"Anonymous\", \n        \"type\"\
-        : \"user\"\n      }, \n      \"created\": \"2013-06-11T22:22:55+00:00\", \n\
-        \      \"custom_releases\": [\n        \"Game.of.Thrones.S03E10.720p.WEB-DL.DD5.1.H.264-NTb\"\
-        , \n        \"Game.of.Thrones.S03E10.1080p.WEB-DL.DD5.1.H.264-NTb\", \n  \
-        \      \"Game.of.Thrones.S03E10.720p.WEB-DL.DD5.1.AAC2.0.H.264-YFN\", \n \
-        \       \"Game.of.Thrones.S03E10.1080p.WEB-DL.DD5.1.AAC2.0.H.264-YFN\"\n \
-        \     ], \n      \"download\": \"/en/subtitles/fr-game-of-thrones-2011-S03E10-O-mhysa/k8Yl/download\"\
-        , \n      \"flags\": [], \n      \"fps\": \"\", \n      \"id\": \"k8Yl\",\
-        \ \n      \"language\": \"fr\", \n      \"movie\": {\n        \"aliases\"\
-        : [], \n        \"episode_info\": {\n          \"episode\": 10, \n       \
-        \   \"id\": null, \n          \"season\": 3, \n          \"slug\": \"S03E10-O-mhysa\"\
-        , \n          \"title\": \"Mhysa\", \n          \"type\": \"ordinary\", \n\
-        \          \"year\": null\n        }, \n        \"id\": \"rLI\", \n      \
-        \  \"posters\": {\n          \"inline\": \"/thumbnails/moviedb/inline/b6/c7/4f/17/db/65/8368be2232bb0bdcc53e/rLI.jpg\"\
-        , \n          \"normal\": \"/thumbnails/moviedb/normal/b6/c7/4f/17/db/65/8368be2232bb0bdcc53e/rLI.jpg\"\
-        , \n          \"small\": \"/thumbnails/moviedb/small/b6/c7/4f/17/db/65/8368be2232bb0bdcc53e/rLI.jpg\"\
-        , \n          \"title\": \"/thumbnails/moviedb/title/b6/c7/4f/17/db/65/8368be2232bb0bdcc53e/rLI.jpg\"\
-        \n        }, \n        \"providers\": [\n          \"omdb:mLUG\"\n       \
-        \ ], \n        \"slug\": \"game-of-thrones-2011-S03E10-O-mhysa\", \n     \
-        \   \"title\": \"Game of Thrones\", \n        \"type\": \"tv-series\", \n\
-        \        \"year\": 2011\n      }, \n      \"notes\": null, \n      \"num_cds\"\
-        : 1, \n      \"rejected\": null, \n      \"releases\": [], \n      \"state\"\
-        : \"migration\", \n      \"stats\": {\n        \"downloads\": 6330, \n   \
-        \     \"lines\": 758\n      }, \n      \"url\": \"/en/subtitles/fr-game-of-thrones-2011-S03E10-O-mhysa/k8Yl\"\
-        \n    }, \n    {\n      \"audited\": false, \n      \"contributions\": [\n\
-        \        {\n          \"contributor\": {\n            \"id\": 1, \n      \
-        \      \"name\": \"Anonymous\", \n            \"type\": \"user\"\n       \
-        \   }, \n          \"role\": \"uploader\", \n          \"share\": 0.0\n  \
-        \      }\n      ], \n      \"contributor\": {\n        \"id\": 1, \n     \
-        \   \"name\": \"Anonymous\", \n        \"type\": \"user\"\n      }, \n   \
-        \   \"created\": \"2013-06-11T22:18:26+00:00\", \n      \"custom_releases\"\
-        : [\n        \"Game.of.Thrones.S03E10.720p.HDTV.x264-EVOLVE\", \n        \"\
-        Game.of.Thrones.S03E10.720p.HDTV.x264-CPG\", \n        \"Game.of.Thrones.S03E10.480p.HDTV.x264-ChameE\"\
-        , \n        \"Game.of.Thrones.S03E10.480p.HDTV.x264-mSD\", \n        \"Game.of.Thrones.S03E10.HDTV.XviD-Chivvez\"\
-        , \n        \"Game.of.Thrones.S03E10.HDTV.XviD-3LT0N\", \n        \"Game.of.Thrones.S03E10.HDTV.XviD-Snake\"\
-        , \n        \"Game.of.Thrones.S03E10.HDTV.XviD-JKS\", \n        \"Game.of.Thrones.S03E10.HDTV.XviD-AFG\"\
-        \n      ], \n      \"download\": \"/en/subtitles/fr-game-of-thrones-2011-S03E10-O-mhysa/jcYl/download\"\
-        , \n      \"flags\": [], \n      \"fps\": \"\", \n      \"id\": \"jcYl\",\
-        \ \n      \"language\": \"fr\", \n      \"movie\": {\n        \"aliases\"\
-        : [], \n        \"episode_info\": {\n          \"episode\": 10, \n       \
-        \   \"id\": null, \n          \"season\": 3, \n          \"slug\": \"S03E10-O-mhysa\"\
-        , \n          \"title\": \"Mhysa\", \n          \"type\": \"ordinary\", \n\
-        \          \"year\": null\n        }, \n        \"id\": \"rLI\", \n      \
-        \  \"posters\": {\n          \"inline\": \"/thumbnails/moviedb/inline/b6/c7/4f/17/db/65/8368be2232bb0bdcc53e/rLI.jpg\"\
-        , \n          \"normal\": \"/thumbnails/moviedb/normal/b6/c7/4f/17/db/65/8368be2232bb0bdcc53e/rLI.jpg\"\
-        , \n          \"small\": \"/thumbnails/moviedb/small/b6/c7/4f/17/db/65/8368be2232bb0bdcc53e/rLI.jpg\"\
-        , \n          \"title\": \"/thumbnails/moviedb/title/b6/c7/4f/17/db/65/8368be2232bb0bdcc53e/rLI.jpg\"\
-        \n        }, \n        \"providers\": [\n          \"omdb:mLUG\"\n       \
-        \ ], \n        \"slug\": \"game-of-thrones-2011-S03E10-O-mhysa\", \n     \
-        \   \"title\": \"Game of Thrones\", \n        \"type\": \"tv-series\", \n\
-        \        \"year\": 2011\n      }, \n      \"notes\": null, \n      \"num_cds\"\
-        : 1, \n      \"rejected\": null, \n      \"releases\": [], \n      \"state\"\
-        : \"migration\", \n      \"stats\": {\n        \"downloads\": 3597, \n   \
-        \     \"lines\": 789\n      }, \n      \"url\": \"/en/subtitles/fr-game-of-thrones-2011-S03E10-O-mhysa/jcYl\"\
-        \n    }, \n    {\n      \"audited\": true, \n      \"contributions\": [\n\
-        \        {\n          \"contributor\": {\n            \"id\": 44181, \n  \
-        \          \"name\": \"grzesiek11\", \n            \"type\": \"user\"\n  \
-        \        }, \n          \"role\": \"uploader\", \n          \"share\": 0.0\n\
-        \        }\n      ], \n      \"contributor\": {\n        \"id\": 44181, \n\
-        \        \"name\": \"grzesiek11\", \n        \"type\": \"user\"\n      },\
-        \ \n      \"created\": \"2013-06-10T09:02:28+00:00\", \n      \"custom_releases\"\
-        : [\n        \"Game.of.Thrones.S03E10.720p.HDTV.x264-EVOLVE\", \n        \"\
-        Game.of.Thrones.S03E10.720p.HDTV.x264-CPG\", \n        \"Game.of.Thrones.S03E10.480p.HDTV.x264-ChameE\"\
-        , \n        \"Game.of.Thrones.S03E10.480p.HDTV.x264-mSD\", \n        \"Game.of.Thrones.S03E10.HDTV.XviD-Chivvez\"\
-        , \n        \"Game.of.Thrones.S03E10.HDTV.XviD-3LT0N\", \n        \"Game.of.Thrones.S03E10.HDTV.XviD-Snake\"\
-        , \n        \"Game.of.Thrones.S03E10.HDTV.XviD-JKS\", \n        \"Game.of.Thrones.S03E10.HDTV.XviD-AFG\"\
-        \n      ], \n      \"download\": \"/en/subtitles/fr-game-of-thrones-2011-S03E10-O-mhysa/8cMl/download\"\
-        , \n      \"flags\": [\n        \"high_definition\"\n      ], \n      \"fps\"\
-        : \"23.976\", \n      \"id\": \"8cMl\", \n      \"language\": \"fr\", \n \
-        \     \"movie\": {\n        \"aliases\": [\n          \"Gra o tron\", \n \
-        \         \"Juego de tronos\", \n          \"Le tr\\u00f4ne de fer: Game of\
-        \ Thrones\", \n          \"Tr\\u00f3nok harca\", \n          \"Igra prestolov\"\
-        \n        ], \n        \"episode_info\": {\n          \"episode\": 10, \n\
-        \          \"id\": null, \n          \"season\": 3, \n          \"slug\":\
-        \ \"S03E10-O-mhysa\", \n          \"title\": \"Mhysa\", \n          \"type\"\
-        : \"ordinary\", \n          \"year\": null\n        }, \n        \"id\": \"\
-        rLI\", \n        \"posters\": {\n          \"inline\": \"/thumbnails/moviedb/inline/b6/c7/4f/17/db/65/8368be2232bb0bdcc53e/rLI.jpg\"\
-        , \n          \"normal\": \"/thumbnails/moviedb/normal/b6/c7/4f/17/db/65/8368be2232bb0bdcc53e/rLI.jpg\"\
-        , \n          \"small\": \"/thumbnails/moviedb/small/b6/c7/4f/17/db/65/8368be2232bb0bdcc53e/rLI.jpg\"\
-        , \n          \"title\": \"/thumbnails/moviedb/title/b6/c7/4f/17/db/65/8368be2232bb0bdcc53e/rLI.jpg\"\
-        \n        }, \n        \"providers\": [\n          \"omdb:mLUG\"\n       \
-        \ ], \n        \"slug\": \"game-of-thrones-2011-S03E10-O-mhysa\", \n     \
-        \   \"title\": \"Game of Thrones\", \n        \"type\": \"tv-series\", \n\
-        \        \"year\": 2011\n      }, \n      \"notes\": \"\", \n      \"num_cds\"\
-        : 1, \n      \"rejected\": null, \n      \"releases\": [], \n      \"state\"\
-        : \"migration\", \n      \"stats\": {\n        \"downloads\": 7178, \n   \
-        \     \"lines\": 867\n      }, \n      \"url\": \"/en/subtitles/fr-game-of-thrones-2011-S03E10-O-mhysa/8cMl\"\
-        \n    }, \n    {\n      \"audited\": true, \n      \"contributions\": [\n\
-        \        {\n          \"contributor\": {\n            \"id\": 44181, \n  \
-        \          \"name\": \"grzesiek11\", \n            \"type\": \"user\"\n  \
-        \        }, \n          \"role\": \"uploader\", \n          \"share\": 0.0\n\
-        \        }\n      ], \n      \"contributor\": {\n        \"id\": 44181, \n\
-        \        \"name\": \"grzesiek11\", \n        \"type\": \"user\"\n      },\
-        \ \n      \"created\": \"2013-06-10T08:19:57+00:00\", \n      \"custom_releases\"\
-        : [\n        \"Game.of.Thrones.S03E10.HDTV.x264-EVOLVE\"\n      ], \n    \
-        \  \"download\": \"/en/subtitles/fr-game-of-thrones-2011-S03E10-O-mhysa/6MMl/download\"\
-        , \n      \"flags\": [], \n      \"fps\": \"23.976\", \n      \"id\": \"6MMl\"\
-        , \n      \"language\": \"fr\", \n      \"movie\": {\n        \"aliases\"\
-        : [\n          \"Gra o tron\", \n          \"Juego de tronos\", \n       \
-        \   \"Le tr\\u00f4ne de fer: Game of Thrones\", \n          \"Tr\\u00f3nok\
-        \ harca\", \n          \"Igra prestolov\"\n        ], \n        \"episode_info\"\
-        : {\n          \"episode\": 10, \n          \"id\": null, \n          \"season\"\
-        : 3, \n          \"slug\": \"S03E10-O-mhysa\", \n          \"title\": \"Mhysa\"\
-        , \n          \"type\": \"ordinary\", \n          \"year\": null\n       \
-        \ }, \n        \"id\": \"rLI\", \n        \"posters\": {\n          \"inline\"\
-        : \"/thumbnails/moviedb/inline/b6/c7/4f/17/db/65/8368be2232bb0bdcc53e/rLI.jpg\"\
-        , \n          \"normal\": \"/thumbnails/moviedb/normal/b6/c7/4f/17/db/65/8368be2232bb0bdcc53e/rLI.jpg\"\
-        , \n          \"small\": \"/thumbnails/moviedb/small/b6/c7/4f/17/db/65/8368be2232bb0bdcc53e/rLI.jpg\"\
-        , \n          \"title\": \"/thumbnails/moviedb/title/b6/c7/4f/17/db/65/8368be2232bb0bdcc53e/rLI.jpg\"\
-        \n        }, \n        \"providers\": [\n          \"omdb:mLUG\"\n       \
-        \ ], \n        \"slug\": \"game-of-thrones-2011-S03E10-O-mhysa\", \n     \
-        \   \"title\": \"Game of Thrones\", \n        \"type\": \"tv-series\", \n\
-        \        \"year\": 2011\n      }, \n      \"notes\": \"\", \n      \"num_cds\"\
-        : 1, \n      \"rejected\": null, \n      \"releases\": [], \n      \"state\"\
-        : \"migration\", \n      \"stats\": {\n        \"downloads\": 5040, \n   \
-        \     \"lines\": 867\n      }, \n      \"url\": \"/en/subtitles/fr-game-of-thrones-2011-S03E10-O-mhysa/6MMl\"\
-        \n    }\n  ], \n  \"page\": 1, \n  \"per_page\": 50, \n  \"status\": \"ok\"\
-        \n}"}
-    headers:
-      Connection: [keep-alive]
-      Content-Length: ['9063']
-      Content-Type: [application/json]
-      Date: ['Sun, 24 Feb 2019 11:54:36 GMT']
-      Server: [nginx/1.8.0]
-    status: {code: 200, message: OK}
+      connection:
+      - keep-alive
+      content-length:
+      - '24121'
+      content-type:
+      - application/json
+      date:
+      - Sat, 09 May 2020 10:24:44 GMT
+      server:
+      - nginx
+    status:
+      code: 200
+      message: OK
 version: 1

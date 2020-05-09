@@ -2,35 +2,62 @@ interactions:
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      User-Agent: [python-requests/2.9.1]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.23.0
     method: GET
-    uri: http://www.omdbapi.com/?r=json&v=1&s=Man+of+Steel&page=3
+    uri: http://www.omdbapi.com/?apikey=00000000&r=json&v=1&s=Man+of+Steel&page=3
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAA5XNwUoDMRRG4Ve5/OuAZjLTOtkpVRRUpB0opbiInasTSJOSpCNS+u6SlVYQ8QHO
-        +Q5YsImbAXp9QGezY2hc2bdbNj09GE/hlRaZ2UFgxSZCozqXDQTstn+5m0Ej50ZN2qa9gED3sSuD
-        bRgtQ+AppMyleTy7xFF8CcsQXU9LE6l7D5pkW0syvqc88O+q/KE2aiqryT/U72dN3cC0MkMIdG9H
-        phvj6Xpkn09MdWoqVU3r+k/zWSCHbNyc097lVFZlNOe0Cz6Vrot7xvET2O4mvn4BAAA=
+        H4sIAAAAAAAAA5XQ3W6CQBQE4Fch55rys0iqXNUGNY0utoKINo1Z8RRQlrWwtoLx3Rt607RJTfoA
+        M19mzuAjK+MUnOczBJnMERygrFDEq+JLxBxUWCIrwQFimAaokPHt5sEFB6QkxLRJzwYVgvrQBrl4
+        zxBUeBSVxDbj6X24qN/N42MpFSrKUnw4yp+M/YuxbruW1fsHE6SoTDBhcd0CoyzfYCmVcZ4VCeZX
+        4O5PuGvZPWKRK3Aq5aFydJ1rHLcZu2GcNaLQYsH1jLMEK53qNLTvl4sne+oOd14wkCtOG883DErm
+        nUmQnKg7l9PFktCgf/KaMPUWq320H9TRfvgWj7b4FIX11I07XpOYtKF32jo0135kGYa2OyRweVFB
+        CsnyGVbHXFbtEgtUmGF1EEX1dUd5RLh8AidFRZTrAQAA
     headers:
-      access-control-allow-origin: ['*']
-      cache-control: ['public, max-age=86400']
-      cf-cache-status: [MISS]
-      cf-ray: [29ba414c75c10914-CDG]
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-type: [application/json; charset=utf-8]
-      date: ['Sat, 30 Apr 2016 10:19:24 GMT']
-      expires: ['Sun, 01 May 2016 10:19:24 GMT']
-      last-modified: ['Sat, 30 Apr 2016 10:19:22 GMT']
-      server: [cloudflare-nginx]
-      set-cookie: ['__cfduid=dc6257a543e7d0673c6822c2d0a412dfd1462011562; expires=Sun,
-          30-Apr-17 10:19:22 GMT; path=/; domain=.omdbapi.com; HttpOnly']
-      vary: [Accept-Encoding]
-      x-aspnet-version: [4.0.30319]
-      x-powered-by: [ASP.NET]
-    status: {code: 200, message: OK}
+      access-control-allow-origin:
+      - '*'
+      cache-control:
+      - public, max-age=86400
+      cf-cache-status:
+      - MISS
+      cf-ray:
+      - 590c4ebb688ecc5a-ZRH
+      cf-request-id:
+      - 029b8f89240000cc5a3630f200000001
+      connection:
+      - keep-alive
+      content-encoding:
+      - gzip
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 09 May 2020 15:03:30 GMT
+      expires:
+      - Sat, 09 May 2020 16:03:30 GMT
+      last-modified:
+      - Sat, 09 May 2020 15:03:30 GMT
+      server:
+      - cloudflare
+      set-cookie:
+      - __cfduid=d71802a8035a73edff801ffd1d0095c2d1589036609; expires=Mon, 08-Jun-20
+        15:03:29 GMT; path=/; domain=.omdbapi.com; HttpOnly; SameSite=Lax
+      transfer-encoding:
+      - chunked
+      vary:
+      - '*, Accept-Encoding'
+      x-aspnet-version:
+      - 4.0.30319
+      x-powered-by:
+      - ASP.NET
+    status:
+      code: 200
+      message: OK
 version: 1

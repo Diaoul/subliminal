@@ -2,38 +2,64 @@ interactions:
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      User-Agent: [Subliminal/2.1]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.1
     method: GET
     uri: http://www.omdbapi.com/?apikey=00000000&r=json&v=1&s=the+big+bang+theory&type=series&page=1
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAA33PUWrCQBSF4a2E+zxNxtRYzVMjahFqrHHQJKXINN4moxknzYyURITuoTvsSop9
-        KhRcwPk53wmWyOusAP/5BEyYEsEHVqA1FLk15IfcYgWqugECCfIafHApvfv+/AICQm5fpyPwwRja
-        H/TdXg8IsKa6JDTWAjUQeFLa4GVXGFNp33GkLXEr+A2XvFUHO1PSEZLnqJ2ZM1t5w8SdyJQlXsL2
-        Zr6OyqShNJTT5nE9pqlcmHSUu8mulLM2a9NRKuL9uIn3k/fsYYuLeNWEu7wbtkEzZ8G9vVl1Nsv4
-        llJ7V+VwJleNVvBmsLaWhfr4y+14/7her+P2B91r3NAJ4PxCwCjDywj1sTT6kgMCEepKHfTvi/qI
-        cP4BRXJWxoUBAAA=
+        H4sIAAAAAAAAA33PUW6CQBSF4a2Q+0xhoGKVp2LUxqRi1YkCTWOmeAujjFBmjBmMiXtwh66ksU/t
+        iws4f853hDmyOs3Bfz8C5apA8IHmaPR4ZvTYLjNojmWtwYQYWQ0+uIQ8Xc8XlzhdMIGL9eeoDz4o
+        RTrdjttugwlUV7eMxJqjBBPeSqnwts2VqqRv28ISuObsgQnWlDsrLYXNBctQ2mN7vPB6sTsUCY29
+        mG7VZDkrYk1IKEb6dTkgiZiqpJ+58aYQ4yZtkn7Co+1AR9vhd/qyxmm00OEma4VNoCc0eLZWC2c1
+        jx4JsTZVBifzrtMIvhTWxjwvD3/Jjnc9X/5zvbbjdrqte9zQDuD0YYIqFStmKPeFkrccmDBDWZU7
+        +fui3iOcfgA9TlK1iQEAAA==
     headers:
-      access-control-allow-origin: ['*']
-      cache-control: ['public, max-age=86400']
-      cf-cache-status: [MISS]
-      cf-ray: [4ab3e6d8b8853e98-ZRH]
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-type: [application/json; charset=utf-8]
-      date: ['Mon, 18 Feb 2019 22:24:04 GMT']
-      expires: ['Tue, 19 Feb 2019 22:24:04 GMT']
-      last-modified: ['Mon, 18 Feb 2019 22:24:04 GMT']
-      server: [cloudflare]
-      set-cookie: ['__cfduid=d87e6df7c3be383e7e771d6fcc7089c191550528643; expires=Tue,
-          18-Feb-20 22:24:03 GMT; path=/; domain=.omdbapi.com; HttpOnly']
-      transfer-encoding: [chunked]
-      vary: ['*, Accept-Encoding']
-      x-aspnet-version: [4.0.30319]
-      x-powered-by: [ASP.NET]
-    status: {code: 200, message: OK}
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '389'
+      cache-control:
+      - public, max-age=86400
+      cf-cache-status:
+      - HIT
+      cf-ray:
+      - 590c4ebedf22cc3e-ZRH
+      cf-request-id:
+      - 029b8f8b450000cc3ecf33c200000001
+      connection:
+      - keep-alive
+      content-encoding:
+      - gzip
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 09 May 2020 15:03:30 GMT
+      expires:
+      - Sat, 09 May 2020 15:57:01 GMT
+      last-modified:
+      - Sat, 09 May 2020 14:57:01 GMT
+      server:
+      - cloudflare
+      set-cookie:
+      - __cfduid=d7e2ffb3c8ccaf23fa22fe8a9901de6ec1589036610; expires=Mon, 08-Jun-20
+        15:03:30 GMT; path=/; domain=.omdbapi.com; HttpOnly; SameSite=Lax
+      transfer-encoding:
+      - chunked
+      vary:
+      - '*, Accept-Encoding'
+      x-aspnet-version:
+      - 4.0.30319
+      x-powered-by:
+      - ASP.NET
+    status:
+      code: 200
+      message: OK
 version: 1

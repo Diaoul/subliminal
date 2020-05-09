@@ -2,41 +2,67 @@ interactions:
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      User-Agent: [python-requests/2.9.1]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.23.0
     method: GET
-    uri: http://www.omdbapi.com/?r=json&v=1&s=Man+of+Steel&page=1
+    uri: http://www.omdbapi.com/?apikey=00000000&r=json&v=1&s=Man+of+Steel&page=1
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAA61US3PaMBj8Kx5dcnFBkp/4FCjQcSaSA1aoodPJqKAav6ktAnYm/73jHDqFDNAk
-        Peiimd39dr+VnoAveLlcA+fbE2CRTAVwAOG5UvxUfClEClQwF7wEDsAQaUAFUbb64Q6BA6SElgVt
-        bAMVsHrTArPiMRJABXdFJUWLWUu5cbrdiHcysYr4pxbcWRZZN8p4KKou6ZKZMSCxa3hs3tDYhSQ1
-        Bu3h+SAPkrFcsOWONATRYR95k+vrzsMMPfiBBmEn3oTgWb00Nur1ekdjIxvayPrw2IthaBA2i7xh
-        KD0WYlJDuMhG+9uv7n6eEUnjm2TBbrIFW8eUzZsgGdVBMv61/LISk2BW0+H9nsZLg8bzf7WlBEHg
-        KP1c6e9FqgxKvs2VO14Wq/rcnjSEDRud2xPt9g80/e1GlBnPHYWthXKqDxAf6iDd0LDxV7Ahz87K
-        3EZSpqf5j31gw7AsG77Bx0F2fpGHZ+ktQzex+R/q3N/RZqST5l73xq/rTJsEUZZcqvPndRlVstis
-        RalMhXgUF5ahH7lB0NZt6w1hvQgqA74scuf0To5kNMOEyMQfDo02ISbNBBPmavRVaOGOxi7yWFIT
-        NnrPH2BaR38ANjXrJbJ3VenKL9JVJMo/N1dni9VDCGN44V18V4EsJE+notqmsmqZWp6pqDZFXrUw
-        Vm4FeP4NAJju6LMFAAA=
+        H4sIAAAAAAAAA62UX3OiMBTFvwqTZ1cTIII8VQt27Ji41vgHdnY6LGaRQMCFWJFOv/uOfWrtVrsz
+        vmbmntzfPefeZzDjYRltgPPjGbBEZRw4gIS5VvzWZorzDLSAz8MSOECHyAAtkMj1r5ELHKAUtCxo
+        6zZoAXbYHgtl8ZRw0ALfi0rxY81GqW3ldDqyLfk6Cb+FMmyKvB0VspPIMOZVh3TIAg8IS/HETRF1
+        05oM8YBkeBDmg3yVDlXAoj1lfTxhPpxMb27ajwv0OFsZELbFNgYvrUuNo16vd9I4sqGNrCs0Hrgx
+        JmyRTNxYTViskwOEgfTq8XJU+5IoKu7TgN3LgG0EZX6zSr3DKh3+ie7WfLpaHKg7r6mIMBX+ObBl
+        UWZrbRmWGtsXjoZ6JtLCfK2pDdc+dQu9h8bYsJDevQK0L0fQF8M0YL4i0jPo7RE6kGOW1sGdr8hy
+        XgdikFJ9kRGX6B+gGTGISw7EnZ6DHidKZWf4TtKoY2xZNryGqcJDRHgmYSMViHtBbiGk7lCMl15N
+        RV8RsUhIM2181jeD5fyDqaTxG9pE6IKps92WlzLMHY2dsRHq7zGRiQ0dv8luHMp3lLTT/9JSdK2T
+        pdC7hgXNM/M7Vb7dlEmliu2Gl9oD50/8Aol5YhiCtmlb//HhW2VtVuTx2TxY2OxeJe9E9Pe08UzS
+        zM3Jv65TkyLKUnThOr2OSxuEUZE7n6f6ZEgG7kLU1a9AQZtYJ81UJ2xk0A8U8Z6KEZqw9ECY99Ub
+        62ivr9qM/9nxPOLn7DAs0+4ZF+P1swVUocLsgVe7TFVHqaPQA6+2RV4d61i54+DlL4SPWu25BgAA
     headers:
-      access-control-allow-origin: ['*']
-      cache-control: ['public, max-age=86400']
-      cf-cache-status: [MISS]
-      cf-ray: [29ba4131b8cc3bb1-CDG]
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-type: [application/json; charset=utf-8]
-      date: ['Sat, 30 Apr 2016 10:19:19 GMT']
-      expires: ['Sun, 01 May 2016 10:19:19 GMT']
-      last-modified: ['Sat, 30 Apr 2016 10:19:17 GMT']
-      server: [cloudflare-nginx]
-      set-cookie: ['__cfduid=d4d4d3a27b2100f7ed739d3c70e9212e11462011558; expires=Sun,
-          30-Apr-17 10:19:18 GMT; path=/; domain=.omdbapi.com; HttpOnly']
-      vary: [Accept-Encoding]
-      x-aspnet-version: [4.0.30319]
-      x-powered-by: [ASP.NET]
-    status: {code: 200, message: OK}
+      access-control-allow-origin:
+      - '*'
+      cache-control:
+      - public, max-age=86400
+      cf-cache-status:
+      - MISS
+      cf-ray:
+      - 590c4ea91830cc3e-ZRH
+      cf-request-id:
+      - 029b8f7db10000cc3eca8cd200000001
+      connection:
+      - keep-alive
+      content-encoding:
+      - gzip
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 09 May 2020 15:03:27 GMT
+      expires:
+      - Sat, 09 May 2020 16:03:27 GMT
+      last-modified:
+      - Sat, 09 May 2020 15:03:27 GMT
+      server:
+      - cloudflare
+      set-cookie:
+      - __cfduid=dc36d3caf0a1426153217b8f0777545361589036606; expires=Mon, 08-Jun-20
+        15:03:26 GMT; path=/; domain=.omdbapi.com; HttpOnly; SameSite=Lax
+      transfer-encoding:
+      - chunked
+      vary:
+      - '*, Accept-Encoding'
+      x-aspnet-version:
+      - 4.0.30319
+      x-powered-by:
+      - ASP.NET
+    status:
+      code: 200
+      message: OK
 version: 1

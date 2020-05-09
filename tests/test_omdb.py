@@ -18,7 +18,10 @@ vcr = VCR(path_transformer=lambda path: path + '.yaml',
 
 @pytest.fixture()
 def client():
-    return OMDBClient()
+    omdb_client = OMDBClient()
+    omdb_client.session.params['apikey'] = APIKEY
+
+    return omdb_client
 
 
 def test_session():
@@ -89,7 +92,7 @@ def test_search_type(client):
 @vcr.use_cassette
 def test_search_year(client):
     data = client.search('Man of Steel', year=2013)
-    assert data['totalResults'] == '13'
+    assert data['totalResults'] == '12'
 
 
 @pytest.mark.integration
@@ -98,8 +101,8 @@ def test_search_page(client):
     data = client.search('Man of Steel', page=3)
     assert data['totalResults'] == '23'
     assert len(data['Search']) == 3
-    assert data['Search'][0]['imdbID'] == 'tt5369598'
-    assert data['Search'][0]['Title'] == 'BigHead Man of Steel'
+    assert data['Search'][0]['imdbID'] == 'tt2215295'
+    assert data['Search'][0]['Title'] == 'Man of Steel'
 
 
 @pytest.mark.integration

@@ -2,30 +2,56 @@ interactions:
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      User-Agent: [python-requests/2.9.1]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.23.0
     method: GET
-    uri: http://www.omdbapi.com/?r=json&v=1&s=Meen+of+Stal&page=1
+    uri: http://www.omdbapi.com/?apikey=00000000&r=json&v=1&s=Meen+of+Stal&page=1
   response:
-    body: {string: !!python/unicode '{"Response":"False","Error":"Movie not found!"}'}
+    body:
+      string: !!python/unicode '{"Response":"False","Error":"Movie not found!"}'
     headers:
-      access-control-allow-origin: ['*']
-      cache-control: ['public, max-age=86400']
-      cf-cache-status: [MISS]
-      cf-ray: [29ba4137e6723c11-CDG]
-      connection: [keep-alive]
-      content-length: ['47']
-      content-type: [application/json; charset=utf-8]
-      date: ['Sat, 30 Apr 2016 10:19:20 GMT']
-      expires: ['Sun, 01 May 2016 10:19:20 GMT']
-      last-modified: ['Sat, 30 Apr 2016 10:19:19 GMT']
-      server: [cloudflare-nginx]
-      set-cookie: ['__cfduid=df89627430fe53aee40a2d576a42cfb5a1462011559; expires=Sun,
-          30-Apr-17 10:19:19 GMT; path=/; domain=.omdbapi.com; HttpOnly']
-      vary: [Accept-Encoding]
-      x-aspnet-version: [4.0.30319]
-      x-powered-by: [ASP.NET]
-    status: {code: 200, message: OK}
+      accept-ranges:
+      - bytes
+      access-control-allow-origin:
+      - '*'
+      cache-control:
+      - public, max-age=86400
+      cf-cache-status:
+      - MISS
+      cf-ray:
+      - 590c4eb0ee1acc62-ZRH
+      cf-request-id:
+      - 029b8f828e0000cc62e039d200000001
+      connection:
+      - keep-alive
+      content-length:
+      - '47'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 09 May 2020 15:03:28 GMT
+      expires:
+      - Sat, 09 May 2020 16:03:28 GMT
+      last-modified:
+      - Sat, 09 May 2020 15:03:28 GMT
+      server:
+      - cloudflare
+      set-cookie:
+      - __cfduid=db89b708fab77b7d74a829f7b40b423e51589036608; expires=Mon, 08-Jun-20
+        15:03:28 GMT; path=/; domain=.omdbapi.com; HttpOnly; SameSite=Lax
+      vary:
+      - '*, Accept-Encoding'
+      x-aspnet-version:
+      - 4.0.30319
+      x-powered-by:
+      - ASP.NET
+    status:
+      code: 200
+      message: OK
 version: 1

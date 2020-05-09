@@ -2,42 +2,69 @@ interactions:
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      User-Agent: [python-requests/2.9.1]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.23.0
     method: GET
-    uri: http://www.omdbapi.com/?r=json&v=1&i=tt0770828&tomatoes=False&plot=short
+    uri: http://www.omdbapi.com/?apikey=00000000&r=json&v=1&i=tt0770828&tomatoes=False&plot=short
   response:
     body:
       string: !!binary |
-        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
+        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
     headers:
-      access-control-allow-origin: ['*']
-      cache-control: ['public, max-age=86400']
-      cf-cache-status: [MISS]
-      cf-ray: [29ba4112ffe33c11-CDG]
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-type: [application/json; charset=utf-8]
-      date: ['Sat, 30 Apr 2016 10:19:14 GMT']
-      expires: ['Sun, 01 May 2016 10:19:14 GMT']
-      last-modified: ['Sat, 30 Apr 2016 10:19:13 GMT']
-      server: [cloudflare-nginx]
-      set-cookie: ['__cfduid=d0d0ea11be89185de2c0b977fe0debdbe1462011553; expires=Sun,
-          30-Apr-17 10:19:13 GMT; path=/; domain=.omdbapi.com; HttpOnly']
-      vary: [Accept-Encoding]
-      x-aspnet-version: [4.0.30319]
-      x-powered-by: [ASP.NET]
-    status: {code: 200, message: OK}
+      access-control-allow-origin:
+      - '*'
+      cache-control:
+      - public, max-age=86400
+      cf-cache-status:
+      - MISS
+      cf-ray:
+      - 590c4e9d7d81cc52-ZRH
+      cf-request-id:
+      - 029b8f766b0000cc522ea96200000001
+      connection:
+      - keep-alive
+      content-encoding:
+      - gzip
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 09 May 2020 15:03:25 GMT
+      expires:
+      - Sat, 09 May 2020 16:03:25 GMT
+      last-modified:
+      - Sat, 09 May 2020 15:03:25 GMT
+      server:
+      - cloudflare
+      set-cookie:
+      - __cfduid=d8192b3d5f057792d95a22ff253b71dd51589036605; expires=Mon, 08-Jun-20
+        15:03:25 GMT; path=/; domain=.omdbapi.com; HttpOnly; SameSite=Lax
+      transfer-encoding:
+      - chunked
+      vary:
+      - '*, Accept-Encoding'
+      x-aspnet-version:
+      - 4.0.30319
+      x-powered-by:
+      - ASP.NET
+    status:
+      code: 200
+      message: OK
 version: 1

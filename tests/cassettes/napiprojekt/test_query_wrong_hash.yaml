@@ -2,19 +2,42 @@ interactions:
 - request:
     body: null
     headers:
-      User-Agent: [Subliminal/1.1]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.1
     method: GET
-    uri: http://napiprojekt.pl/unit_napisy/dl.php?f=abcdabdcabcd1234abcd1234abcd123&pass=&l=PL&nick=&kolejka=false&t=4afc4&napios=Linux&v=dreambox
+    uri: http://napiprojekt.pl/unit_napisy/dl.php?nick=&f=abcdabdcabcd1234abcd1234abcd123&kolejka=false&t=4afc4&napios=Linux&v=dreambox&pass=&l=PL
   response:
-    body: {string: !!python/unicode 'NPc0'}
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA/MLSDYAAGrWOl4EAAAA
     headers:
-      cache-control: [public]
-      connection: [close]
-      content-length: ['4']
-      content-type: [text/html]
-      date: ['Fri, 30 Oct 2015 08:02:30 GMT']
-      server: [Apache]
-      vary: [Accept-Encoding]
-      x-powered-by: [PleskLin]
-    status: {code: 200, message: OK}
+      cache-control:
+      - max-age=1296000
+      connection:
+      - Keep-Alive
+      content-encoding:
+      - gzip
+      content-length:
+      - '24'
+      content-type:
+      - text/html; charset=UTF-8
+      date:
+      - Sat, 09 May 2020 12:13:45 GMT
+      expires:
+      - Sun, 24 May 2020 12:13:45 GMT
+      keep-alive:
+      - timeout=5, max=1000
+      server:
+      - Apache
+      vary:
+      - Accept-Encoding
+    status:
+      code: 200
+      message: OK
 version: 1

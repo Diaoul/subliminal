@@ -1,6 +1,14 @@
 Changelog
 ---------
 
+2.1.1
+^^^^^
+**release date:** *not released*
+
+* Switch podnapisi provider to use JSON API
+* Add support for episodes with season 0 in podnapisi provider
+
+
 2.1.0
 ^^^^^
 **release date:** 2020-05-02

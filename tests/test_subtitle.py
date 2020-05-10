@@ -71,8 +71,16 @@ def test_get_subtitle_path_language_undefined(movies):
 
 
 def test_fix_line_ending():
-    content = b'Text\r\nwith\rweird\nline ending\r\ncharacters'
+    content = b'Text\r\nwith\r\nweird\nline ending\r\ncharacters'
     assert fix_line_ending(content) == b'Text\nwith\nweird\nline ending\ncharacters'
+
+
+# https://github.com/pannal/Sub-Zero.bundle/issues/646 replaced all Chinese character “不” with “上”
+def test_fix_line_ending_chinese_characters():
+    character = bytes('不') if six.PY2 else bytes('不', 'utf16')
+    content = b''.join([character, b'\r\n', character, b'\n', character])
+    expected = b''.join([character, b'\n', character, b'\n', character])
+    assert fix_line_ending(content) == expected
 
 
 def test_subtitle_valid_encoding():

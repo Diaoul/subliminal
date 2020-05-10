@@ -54,5 +54,5 @@ def test_provider_manager():
     internal_names = {EntryPoint.parse(iep).name for iep in provider_manager.internal_extensions}
     enabled_names = set(default_providers)
     disabled_names = set(disabled_providers)
-    assert setup_names == enabled_names
+    assert enabled_names == setup_names - disabled_names
     assert internal_names == enabled_names | disabled_names

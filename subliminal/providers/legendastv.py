@@ -333,12 +333,12 @@ class LegendasTVProvider(Provider):
         return titles
 
     @region.cache_on_arguments(expiration_time=timedelta(minutes=15).total_seconds())
-    def get_archives(self, title_id, language_code, title_type, season, episodes):
-        """Get the archive list from a given `title_id`, `language_code`, `title_type`, `season` and `episode`.
+    def get_archives(self, title_id, language_code, type, season, episodes):
+        """Get the archive list from a given `title_id`, `language_code`, `type`, `season` and `episode`.
 
         :param int title_id: title id.
         :param int language_code: language code.
-        :param str title_type: episode or movie
+        :param str type: episode or movie
         :param int season: season
         :param list episodes: episodes
         :return: the archives.
@@ -368,9 +368,7 @@ class LegendasTVProvider(Provider):
                 if archive.pack and clean_name.startswith('(p)'):
                     clean_name = clean_name[3:]
 
-                if (title_type == 'episode'
-                        and not archive.pack
-                        and not self.episode_matches(clean_name, season, episodes)):
+                if type == 'episode' and not archive.pack and not self.episode_matches(clean_name, season, episodes):
                     continue
 
                 # extract text containing downloads, rating and timestamp

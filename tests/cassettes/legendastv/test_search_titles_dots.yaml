@@ -2,10 +2,14 @@ interactions:
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      User-Agent: [Subliminal/2.0-rc1]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.1
     method: GET
     uri: http://legendas.tv/legenda/sugestao/11%2022%2063
   response:
@@ -13,63 +17,100 @@ interactions:
       string: !!binary |
         H4sIAAAAAAAAA4uOBQApu0wNAgAAAA==
     headers:
-      accept-ranges: [bytes]
-      access-control-allow-origin: ['*']
-      age: ['0']
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-length: ['22']
-      content-type: [text/html; charset=utf-8]
-      date: ['Wed, 19 Jul 2017 14:44:47 GMT']
-      set-cookie: [PHPSESSID=b5ur46eluq3s10cq1esn321f64; path=/; HttpOnly]
-      vary: ['User-Agent,Accept-Encoding']
-      via: [1.1 varnish]
-      x-backend: [default_director]
-      x-cache: [MISS]
-      x-cacheable: ['NO:Not Cacheable']
-      x-varnish: ['731501933']
-    status: {code: 200, message: OK}
+      Accept-Ranges:
+      - bytes
+      Access-Control-Allow-Origin:
+      - '*'
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '22'
+      Content-Type:
+      - text/html; charset=utf-8
+      Date:
+      - Sat, 09 May 2020 11:43:57 GMT
+      Set-Cookie:
+      - PHPSESSID=27jiurupv2ftjfj9d46r89b811; path=/; HttpOnly
+      Vary:
+      - Accept-Encoding,User-Agent
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cacheable:
+      - NO:Not Cacheable
+      X-Varnish:
+      - '824656914'
+      X-backend:
+      - default_director
+    status:
+      code: 200
+      message: OK
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      Cookie: [PHPSESSID=b5ur46eluq3s10cq1esn321f64]
-      User-Agent: [Subliminal/2.1]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - PHPSESSID=27jiurupv2ftjfj9d46r89b811
+      User-Agent:
+      - Subliminal/2.1
     method: GET
     uri: http://legendas.tv/legenda/sugestao/11.22.63
   response:
     body:
       string: !!binary |
-        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
+        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
     headers:
-      accept-ranges: [bytes]
-      access-control-allow-origin: ['*']
-      age: ['0']
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-length: ['715']
-      content-type: [text/html; charset=utf-8]
-      date: ['Sat, 02 Apr 2016 17:26:03 GMT']
-      set-cookie: [PHPSESSID=kb2g8g0h8bejqu4eh1cul775f6; path=/; HttpOnly]
-      vary: ['User-Agent,Accept-Encoding']
-      via: [1.1 varnish]
-      x-backend: [default_director]
-      x-cache: [MISS]
-      x-cacheable: ['NO:Not Cacheable']
-      x-varnish: ['2052096046']
-    status: {code: 200, message: OK}
+      Accept-Ranges:
+      - bytes
+      Access-Control-Allow-Origin:
+      - '*'
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '720'
+      Content-Type:
+      - text/html; charset=utf-8
+      Date:
+      - Sat, 09 May 2020 11:43:57 GMT
+      Vary:
+      - Accept-Encoding,User-Agent
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cacheable:
+      - YES:Forced
+      X-Varnish:
+      - '824656932'
+      X-backend:
+      - default_director
+    status:
+      code: 200
+      message: OK
 version: 1

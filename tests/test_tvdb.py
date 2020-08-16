@@ -125,7 +125,7 @@ def test_search_series(client):
     assert len(data) == 1
     series = data[0]
     assert series['id'] == 80379
-    assert series['firstAired'] == '2007-09-24'
+    assert series['firstAired'] == '2007-9-24'
 
 
 @pytest.mark.integration
@@ -169,7 +169,7 @@ def test_get_series_wrong_id(client):
 @vcr.use_cassette
 def test_get_series_actors(client):
     actors = client.get_series_actors(80379)
-    assert len(actors) == 8
+    assert len(actors) == 12
     assert 'Jim Parsons' in {a['name'] for a in actors}
 
 

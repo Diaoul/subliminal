@@ -5,7 +5,7 @@ from babelfish import Language, language_converters
 import pytest
 import rarfile
 from vcr import VCR
-from subliminal.exceptions import ConfigurationError, AuthenticationError, ServiceUnavailable
+from subliminal.exceptions import ConfigurationError, AuthenticationError
 from subliminal.providers.legendastv import LegendasTVSubtitle, LegendasTVProvider, LegendasTVArchive
 
 USERNAME = 'python-subliminal'
@@ -156,8 +156,8 @@ def test_search_titles_dots():
 def test_search_titles_quote():
     with LegendasTVProvider() as provider:
         titles = provider.search_titles('Marvel\'s Jessica Jones', 1, None)
-    assert len(titles) == 1
-    assert set(titles.keys()) == {39376}
+    assert len(titles) == 2
+    assert set(titles.keys()) == {39376, 47071}
 
 
 @pytest.mark.integration
@@ -246,7 +246,9 @@ def test_query_episode(episodes):
         ('56ed8159e36ec', 'Colony.S01E09.1080p.WEB-DL.DD5.1.H264-RARBG.srt'),
         ('56ed8159e36ec', 'Colony.S01E09.HDTV.x264-FUM.srt'),
         ('56ed8159e36ec', 'Colony.S01E09.720p.WEB-DL.DD5.1.H264-RARBG.srt'),
-        ('56e442ddbb615', 'Colony.S01E09.720p.HDTV.x264-KILLERS.srt')
+        ('56e442ddbb615', 'Colony.S01E09.720p.HDTV.x264-KILLERS.srt'),
+        ('571410ca0e970', 'Colony.S01E09.Zero.Day.1080p.WEB-DL.DD5.1.H265-LGC.srt'),
+        ('5740614b168fd', 'Colony.S01E09.HDTV.x264-FUM.srt')
     }
     with LegendasTVProvider(USERNAME, PASSWORD) as provider:
         subtitles = provider.query(language, video.series, video.season, video.episodes, video.year)
@@ -291,7 +293,24 @@ def test_list_subtitles_episode_alternative_series(episodes):
         ('5953101413fcc', "TURN.Washington's.Spies.S04E03.720p.WEBRip.2CH.x265.HEVC-PSA.srt"),
         ('5953101413fcc', 'Turn.S04E03.HDTV.x264-SVA.srt'),
         ('5953101413fcc', 'Turn.S04E03.720p.HDTV.x264-AVS.srt'),
-        ('5953101413fcc', 'Turn.S04E03.CONVERT.1080p.WEB.h264-TBS.srt')
+        ('5953101413fcc', 'Turn.S04E03.CONVERT.1080p.WEB.h264-TBS.srt'),
+        ('59ac8079e7434', 'Turn.S04.HDTV.x264/Turn.S04E03.480p.x264-mSD.srt'),
+        ('59ac8079e7434', 'Turn.S04.HDTV.x264/Turn.S04E03.CONVERT.480p.x264-mSD.srt'),
+        ('59ac8079e7434', 'Turn.S04.HDTV.x264/Turn.S04E03.HDTV.x264-SVA.srt'),
+        ('59ac80cdd055c', 'Turn.S04.XviD/Turn.S04E03.CONVERT.XviD-AFG.srt'),
+        ('59ac80cdd055c', 'Turn.S04.XviD/Turn.S04E03.XviD-AFG.srt'),
+        ('59ac812db673c', 'Turn.S04.720p.HDTV/Turn.S04E03.720p.HDTV.x264-AVS.srt'),
+        ('59ac812db673c', 'Turn.S04.720p.HDTV/Turn.S04E03.720p.HDTV.x264-SVA.srt'),
+        ('59ac818e7657b',
+         'Turn.S04.720p.AMZN.WEBRip/'
+         'TURN.Washingtons.Spies.S04E03.Blood.for.Blood.720p.AMZN.WEBRip.DDP5.1.x264-ViSUM.srt'),
+        ('59ac818e7657b',
+         'Turn.S04.720p.AMZN.WEBRip/Turn.S04E03.Blood.for.Blood.720p.AMZN.WEBRip.DD5.1.x264-ViSUM.srt'),
+        ('59ac81ed7d73a',
+         'Turn.S04.1080p.AMZN.WEBRip/'
+         'TURN.Washingtons.Spies.S04E03.Blood.for.Blood.1080p.AMZN.WEBRip.DDP5.1.x264-ViSUM.srt'),
+        ('59ac81ed7d73a',
+         'Turn.S04.1080p.AMZN.WEBRip/Turn.S04E03.Blood.for.Blood.1080p.AMZN.WEBRip.DD5.1.x264-ViSUM.srt')
     }
     with LegendasTVProvider(USERNAME, PASSWORD) as provider:
         subtitles = provider.list_subtitles(video, languages)
@@ -319,21 +338,6 @@ def test_download_subtitle(movies):
         provider.download_subtitle(subtitles[0])
     assert subtitles[0].content is not None
     assert subtitles[0].is_valid() is True
-
-
-@pytest.mark.integration
-@vcr.use_cassette
-def test_under_maintenance(movies):
-    """Tests when is under maintenance and http status code 200."""
-    video = movies['man_of_steel']
-    languages = {Language('eng')}
-    with LegendasTVProvider() as provider:
-        try:
-            provider.list_subtitles(video, languages)
-        except ServiceUnavailable:
-            pass
-        else:
-            pytest.fail()
 
 
 @pytest.mark.integration

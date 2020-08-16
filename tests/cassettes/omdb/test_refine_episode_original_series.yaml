@@ -2,128 +2,267 @@ interactions:
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      Cookie: [__cfduid=d87e6df7c3be383e7e771d6fcc7089c191550528643]
-      User-Agent: [Subliminal/2.1]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - __cfduid=d7e2ffb3c8ccaf23fa22fe8a9901de6ec1589036610
+      User-Agent:
+      - Subliminal/2.1
     method: GET
     uri: http://www.omdbapi.com/?apikey=00000000&r=json&v=1&s=dallas&type=series&page=1
   response:
     body:
       string: !!binary |
-        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
+        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
+        Uehf/gVu1A5G4QgAAA==
     headers:
-      access-control-allow-origin: ['*']
-      cache-control: ['public, max-age=86400']
-      cf-cache-status: [MISS]
-      cf-ray: [4ab3e6dba4fccc40-ZRH]
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-type: [application/json; charset=utf-8]
-      date: ['Mon, 18 Feb 2019 22:24:04 GMT']
-      expires: ['Tue, 19 Feb 2019 22:24:04 GMT']
-      last-modified: ['Mon, 18 Feb 2019 22:24:04 GMT']
-      server: [cloudflare]
-      transfer-encoding: [chunked]
-      vary: ['*, Accept-Encoding']
-      x-aspnet-version: [4.0.30319]
-      x-powered-by: [ASP.NET]
-    status: {code: 200, message: OK}
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '389'
+      cache-control:
+      - public, max-age=86400
+      cf-cache-status:
+      - HIT
+      cf-ray:
+      - 590c4ebf6e553e90-ZRH
+      cf-request-id:
+      - 029b8f8b9d00003e9061bd6200000001
+      connection:
+      - keep-alive
+      content-encoding:
+      - gzip
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 09 May 2020 15:03:30 GMT
+      expires:
+      - Sat, 09 May 2020 15:57:01 GMT
+      last-modified:
+      - Sat, 09 May 2020 14:57:01 GMT
+      server:
+      - cloudflare
+      transfer-encoding:
+      - chunked
+      vary:
+      - '*, Accept-Encoding'
+      x-aspnet-version:
+      - 4.0.30319
+      x-powered-by:
+      - ASP.NET
+    status:
+      code: 200
+      message: OK
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      Cookie: [__cfduid=d87e6df7c3be383e7e771d6fcc7089c191550528643]
-      User-Agent: [Subliminal/2.1]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - __cfduid=d7e2ffb3c8ccaf23fa22fe8a9901de6ec1589036610
+      User-Agent:
+      - Subliminal/2.1
     method: GET
     uri: http://www.omdbapi.com/?apikey=00000000&r=json&v=1&s=dallas&type=series&page=2
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAA62U3W7aMBiGb8XyQY8oGDvQwFFDDR1abQpkQJimyk09EvJjlpgCrirtHnaHu5Ip
-        /dFEoaWVeuCDOPrez4/f9/MdHEqR+QFsfr+DbqhjCZvwUsWhL8FYJTIF6iegIo5FDkvQkyKDTYhR
-        Ff39/QeWYJjcXHcpbEKtqyd1YtdsWILuZlGo5DILZVF1qXIti7pA60XerFTCRMxkfpyKcp7Hx09f
-        IhFGpWVfJU//K6zCRrUWp3HIkkHM3UhPEx7wIUIe9vDFuI0f9zoJo10zHbfXUzcIJ1F7M4k6v/zz
-        G9mfjDZ8HhlmvBoz/mn5alS9Gk4IQuX5YgbvS/+ZHxnBmcjAMBBZtI1LdnAJJg1C6p+Oy9xvhFG/
-        xilDLK61iiXSVjqJOnrqzlacOhan0YbR7ls4biBBS6noFfvwDg8mJwRb1iGeAkeUE3kTiuOiei8A
-        5sZDzHQx67wE8FfcsDUzHuo5p28BnKllplO5ARfqVub7GMgehnodN97nySGIPuK0XwQM89GuC4xG
-        mFNnzUz7HaGi4a3IwRGgYjkLtMy2OFBjd5RqxLLrn5+tKe1bnLYxN45mlJneECHuRujCjQNOHd1z
-        RwE3Duqddw2nnd1Rcn3CzMzic+cd1EdgoK7VlmX2DuqJ3aiTBn4PavLk2Gt0XtK3PMMMO2d66vKE
-        nyHkjQfzCzeqctrX3I3WfNyZs7m/YnO2eknHqL/qUZ8cCOYXkd2Ar6nyo7wJ3EyEaZjOwJlIFmAV
-        6gDoQILnx0StrtVm22285+Escnvy1hXwirN1hmEgZbZnJlBtVx0RZNXtj6g/p5Y7h3Jq2Q2CyUe0
-        3YfbCeMNaC2Nae5jsHb6IKthW9g62OdHCWqlRTyQ+TLWeSHXgCU4kPlCpflD+2wp4f0/ooOPm/UG
-        AAA=
+        H4sIAAAAAAAAA63U3W7aMBgG4FuxfLAjVoxN+DtqwLCx1aYUl0KmaXKDl/+YJW5pPE3aPewOdyUT
+        W6uJwegmcRrJn/zkfT9/hjMlCz+EvXefoYhMqmAPMl0aMEyjILpNVQ9QmaayhDW4VLKAPYhRo/H9
+        6zdYg1G2uh1T2IPGNDrtbgu3YQ2Kar0dUqoiUttTl7o0ansuNGZd9ur17CxTq0i+lJm0Oj/zdVaP
+        Mhmoss7qbO70Ob2uOF1iFvuNycjps9Tpy7yfL5KR8USwYbG7mQh/w+zw/OzDvPFhtiAIncXrAH6p
+        /VZc6jTyFbjRmcqB/niIgfYZ7RbpOJ1TMDzxJmTZ1PGya+Pd8IxXCHliaC9E4Czt9tsoXMbjyhMJ
+        XsZDskiG1SIZffJfrdR0Ma+4YIRRVjE6Pcb8xQIDWYBZKItkV0j2hASTLiGtUwiZuCaM+g6nDG1D
+        +jMoTt0mp0nF6PiYQIQK9LVO/hIS3iNg0ia42TwRAXO7RMyOMdvrmr/hlj0wu0QT9/wYYaDvCpOr
+        Clzoe1UeUpADilYLd/8piEg+MrbHDyGmiNMp5iLBfH5gYWiCOXUfnlmYxybR6F6W4AWg8i4IjSp2
+        HKi7vzIOaXZaJymUR6dNToeYW9cwyuxkhhAXCboQacipayZiHnLrosmrseV0FO2vjE+YDZo8dp8r
+        3CBMtao9JgVegKtK5mAW6s1Oap09bdfptLFzku5xPEXcjjJmh2YiXOtttfEqurgZxR5lxouHlZd5
+        2dIGlsfT6k8tEwlm1nW4SI5pX8tiBd7m2k/KHhCFjPIoD8BAZmuwiUwITKiefsNAb251tRs4PvBG
+        bqt79KnndXfnDrNQqeLAWiBnfzoiqNnq/M/0p+Jy97mqNjtdgsmzs9/XoNFGpleqvEtNCXuQYFiD
+        V6pc67z8WaHiTsEvPwCmWngbPgcAAA==
     headers:
-      access-control-allow-origin: ['*']
-      cache-control: ['public, max-age=86400']
-      cf-cache-status: [MISS]
-      cf-ray: [4ab3e6dde604cc40-ZRH]
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-type: [application/json; charset=utf-8]
-      date: ['Mon, 18 Feb 2019 22:24:04 GMT']
-      expires: ['Tue, 19 Feb 2019 22:24:04 GMT']
-      last-modified: ['Mon, 18 Feb 2019 22:24:04 GMT']
-      server: [cloudflare]
-      transfer-encoding: [chunked]
-      vary: ['*, Accept-Encoding']
-      x-aspnet-version: [4.0.30319]
-      x-powered-by: [ASP.NET]
-    status: {code: 200, message: OK}
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '388'
+      cache-control:
+      - public, max-age=86400
+      cf-cache-status:
+      - HIT
+      cf-ray:
+      - 590c4ebfae6c3e90-ZRH
+      cf-request-id:
+      - 029b8f8bcb00003e9061bd7200000001
+      connection:
+      - keep-alive
+      content-encoding:
+      - gzip
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 09 May 2020 15:03:30 GMT
+      expires:
+      - Sat, 09 May 2020 15:57:02 GMT
+      last-modified:
+      - Sat, 09 May 2020 14:57:02 GMT
+      server:
+      - cloudflare
+      transfer-encoding:
+      - chunked
+      vary:
+      - '*, Accept-Encoding'
+      x-aspnet-version:
+      - 4.0.30319
+      x-powered-by:
+      - ASP.NET
+    status:
+      code: 200
+      message: OK
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      Cookie: [__cfduid=d87e6df7c3be383e7e771d6fcc7089c191550528643]
-      User-Agent: [Subliminal/2.1]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - __cfduid=d7e2ffb3c8ccaf23fa22fe8a9901de6ec1589036610
+      User-Agent:
+      - Subliminal/2.1
     method: GET
     uri: http://www.omdbapi.com/?apikey=00000000&r=json&v=1&s=dallas&type=series&page=3
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAA5WT327TMBjFX8XyDTdZ6zhJ/+SKlXRd0RKg/1uEJpN8S9ImdmY7QDJN4h14Q54E
-        BYpQaTfopWV95+dzvuMHPAUmwwS77x/wLNUZYBdPC6GzNE40Ehx5LMuYwgZeA5PYxZSY5vev37CB
-        0zz6OPawi7U2e12TWBQbeFYVjYQCmUIz9VYoDc1c0L7Ej8YfyE35pZTVKXl6qE0ti9r9s7R/iSLG
-        I7RkFQcXzRJAgzS+E0Kj65JrkIdMcmSJEmI71DwLKzhnyINQSKZB/V90lDhO3+48x0m0LpTbbqc5
-        i0FdcNZSKrvYn1jOasFbocj3922/7S+cwXo5/PzGe50Hdaz9ek6CKSHBdu7czJI8GI31ZnmVrGdD
-        EtSTdONt8tVuWK12V/fhKIJ3q0Xlb8e2X4d2sI1ftm4X5u10ZRHS2hbxgedXSZpFEvgLhXyInrJ8
-        YqukQ3rd7nlb5WHK41MM5yhWhzjUfj7Wv/Wbjuyb4zO5A40mUAipD0idY5LVIZZDzyXNeQQS8iIT
-        FUToMvoEXJcSFBJ3v19xDeHu8Gcct6fTtQi1z4EPIEl5hHQCaNTU1EUeq+vsiWStQ55FnB7t/zvW
-        DwbWQrNsAqrMtGq0+tjAE1CF4OpnBrIE/PgDckdjMoAEAAA=
+        H4sIAAAAAAAAA5WU7W7TMBSGb8XyH/6Uxvlq2vxiXbquaAnQ7xahySRnibvEDrYDJNMk7oE75EpQ
+        BhKq2gG5gPM8el+f4we8ACrjDPvvH/CS6Rywj5cZoICyvEbjqml8FNA8pwr38A6oxD62CHF+fPuO
+        e5gVycdZgH2sNXFGQ8dycA8v67KlKJAM2qm3Qmlo5yLjAj/2/ngWpdA5SzONBD8jMc0TiTn0TGJb
+        XSQ31ddK1ufw1jHbsm3LGXVi/4IiyhO0oTUHH7XVjVl6J4RG1xXXII+d5CRSW6ZrmZ20gnOKAoiF
+        pBrU/1VnEdcdOYO/eTKtS+UbRtEvIGH0JS1oI3g/FoXBCpqCMkIjXLvj3Wby5U3wuoiaVIfNikQL
+        QqLDyr1ZZkU0nen95irbLSckauZsH+yL7f2k3t5ffYqnCbzbruvwMHPCJnaiQ/qqf7s2bxdbm5D+
+        oUyPYl5mLE8k8BcKhZA8l/LMQ5IBGXpel0YvaQHy/BLaJ00OPcfy7EEXfrsWK56AhKLMRQ0Jukg+
+        A9eVBIXE3W8vuob4/nhFT59x4Nmk25mNIWM8QToDNG33pT3opskZT8/mPfbZxB1ao0G3q+DxM3D3
+        JI9LXMtx/s3/0MNaaJrPQVW5VtjHT9/AHFQpuHrqWFaAH38CP4o/hNEEAAA=
     headers:
-      access-control-allow-origin: ['*']
-      cache-control: ['public, max-age=86400']
-      cf-cache-status: [MISS]
-      cf-ray: [4ab3e6dee687cc40-ZRH]
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-type: [application/json; charset=utf-8]
-      date: ['Mon, 18 Feb 2019 22:24:05 GMT']
-      expires: ['Tue, 19 Feb 2019 22:24:05 GMT']
-      last-modified: ['Mon, 18 Feb 2019 22:24:05 GMT']
-      server: [cloudflare]
-      transfer-encoding: [chunked]
-      vary: ['*, Accept-Encoding']
-      x-aspnet-version: [4.0.30319]
-      x-powered-by: [ASP.NET]
-    status: {code: 200, message: OK}
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '388'
+      cache-control:
+      - public, max-age=86400
+      cf-cache-status:
+      - HIT
+      cf-ray:
+      - 590c4ebfee8e3e90-ZRH
+      cf-request-id:
+      - 029b8f8bf100003e9061bdc200000001
+      connection:
+      - keep-alive
+      content-encoding:
+      - gzip
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 09 May 2020 15:03:30 GMT
+      expires:
+      - Sat, 09 May 2020 15:57:02 GMT
+      last-modified:
+      - Sat, 09 May 2020 14:57:02 GMT
+      server:
+      - cloudflare
+      transfer-encoding:
+      - chunked
+      vary:
+      - '*, Accept-Encoding'
+      x-aspnet-version:
+      - 4.0.30319
+      x-powered-by:
+      - ASP.NET
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - __cfduid=d7e2ffb3c8ccaf23fa22fe8a9901de6ec1589036610
+      User-Agent:
+      - Subliminal/2.1
+    method: GET
+    uri: http://www.omdbapi.com/?apikey=00000000&r=json&v=1&s=dallas&type=series&page=4
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA4WQQUoDQRREr9LUusFkxhmldzJBEHSUcTYiLn7M1zTpdA+/f4ghBLyDN/QkMiKI
+        ZOEBqt6r2uOeSZ6XcI979F4Dw6FfsplRCJTNDcmK1XQ8JFFYPDAJHIrJtP58/4CFXy/mVzM4qFZl
+        PSmrAhb9bhh7MovnDIu7lJXHXHtygYP9Jf1QmrSdp102vZCPPr6ahtaDuX2LJAvTUPAvSaIn015e
+        m5Z1m2T1x6U8cjmr6mJ6fvqvy5OFJqXQcd4EzXAoxwEd5yHF/H2GbBiHL1iUvg0oAQAA
+    headers:
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '388'
+      cache-control:
+      - public, max-age=86400
+      cf-cache-status:
+      - HIT
+      cf-ray:
+      - 590c4ec04f0f3e90-ZRH
+      cf-request-id:
+      - 029b8f8c3100003e9061be0200000001
+      connection:
+      - keep-alive
+      content-encoding:
+      - gzip
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 09 May 2020 15:03:30 GMT
+      expires:
+      - Sat, 09 May 2020 15:57:02 GMT
+      last-modified:
+      - Sat, 09 May 2020 14:57:02 GMT
+      server:
+      - cloudflare
+      transfer-encoding:
+      - chunked
+      vary:
+      - '*, Accept-Encoding'
+      x-aspnet-version:
+      - 4.0.30319
+      x-powered-by:
+      - ASP.NET
+    status:
+      code: 200
+      message: OK
 version: 1

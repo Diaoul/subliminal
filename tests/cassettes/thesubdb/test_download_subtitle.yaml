@@ -2,10 +2,14 @@ interactions:
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      User-Agent: ['SubDB/1.0 (subliminal/2.0; https://github.com/Diaoul/subliminal)']
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - SubDB/1.0 (subliminal/2.1; https://github.com/Diaoul/subliminal)
     method: GET
     uri: http://api.thesubdb.com/?action=search&hash=9dbbfb7ba81c9a6237237dae8589fccc
   response:
@@ -13,136 +17,150 @@ interactions:
       string: !!binary |
         H4sIAAAAAAAAA0vN00kt1kkr0ikoAQBr9k5KCwAAAA==
     headers:
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-type: [text/html]
-      date: ['Tue, 09 Feb 2016 16:18:41 GMT']
-      server: [nginx/1.6.0]
-    status: {code: 200, message: OK}
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - text/html
+      Date:
+      - Sat, 09 May 2020 12:24:12 GMT
+      Server:
+      - nginx/1.6.0
+      Transfer-Encoding:
+      - chunked
+    status:
+      code: 200
+      message: OK
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      User-Agent: ['SubDB/1.0 (subliminal/2.0; https://github.com/Diaoul/subliminal)']
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - SubDB/1.0 (subliminal/2.1; https://github.com/Diaoul/subliminal)
     method: GET
     uri: http://api.thesubdb.com/?action=download&hash=9dbbfb7ba81c9a6237237dae8589fccc&language=en
   response:
-    body: {string: "\uFEFF1\r\n00:00:05,532 --> 00:00:07,400\r\nAwkward silence.\r\
-        \n\r\n2\r\n00:00:07,402 --> 00:00:08,684\r\nSheldon on his phone.\r\n\r\n\
-        3\r\n00:00:08,686 --> 00:00:09,719\r\nNo touching.\r\n\r\n4\r\n00:00:09,721\
-        \ --> 00:00:13,122\r\nSomebody's having date night.\r\n\r\n5\r\n00:00:13,124\
-        \ --> 00:00:15,208\r\nIt's actually steamier\r\nthan it looks.\r\n\r\n6\r\n\
-        00:00:15,210 --> 00:00:18,077\r\nSheldon's looking up the phallic\r\nsymbolism\
-        \ of root vegetables\r\n\r\n7\r\n00:00:18,079 --> 00:00:19,796\r\nin Renaissance\
-        \ paintings.\r\n\r\n8\r\n00:00:19,798 --> 00:00:21,447\r\nOh, no, I got bored\r\
-        \nwith that.\r\n\r\n9\r\n00:00:21,449 --> 00:00:25,418\r\nI'm just browsing\r\
-        \ncuticle scissors on Amazon.\r\n\r\n10\r\n00:00:26,370 --> 00:00:28,004\r\
-        \nHow do you\r\nnot tear off his clothes\r\n\r\n11\r\n00:00:28,006 --> 00:00:30,556\r\
-        \nand take him right here\r\non this table?\r\n\r\n12\r\n00:00:30,558 -->\
-        \ 00:00:33,259\r\nIf you do that, I'll scream.\r\n\r\n13\r\n00:00:36,430 -->\
-        \ 00:00:38,631\r\nSheldon, I have some\r\nexciting news to tell you.\r\n\r\
-        \n14\r\n00:00:38,633 --> 00:00:39,782\r\nThat makes two of us.\r\n\r\n15\r\
-        \n00:00:39,784 --> 00:00:41,267\r\nMy new cuticle scissors\r\nwill be here\r\
-        \n\r\n16\r\n00:00:41,269 --> 00:00:43,152\r\nin one to two business days.\r\
-        \n\r\n17\r\n00:00:43,154 --> 00:00:45,721\r\nCome on, one.\r\n\r\n18\r\n00:00:45,723\
-        \ --> 00:00:47,824\r\nI've been invited to\r\nconsult on an experiment\r\n\
-        \r\n19\r\n00:00:47,826 --> 00:00:50,193\r\nat your university\r\nfor a few\
-        \ months.\r\n\r\n20\r\n00:00:50,195 --> 00:00:51,327\r\nIsn't that great?\r\
-        \n\r\n21\r\n00:00:51,329 --> 00:00:52,912\r\nWe could have lunch together.\r\
-        \n\r\n22\r\n00:00:52,914 --> 00:00:54,314\r\nWe could carpool.\r\n\r\n23\r\
-        \n00:00:54,316 --> 00:00:56,466\r\nYou know, riding with Leonard\r\n\r\n24\r\
-        \n00:00:56,468 --> 00:00:58,735\r\nhas gotten\r\na little tedious lately.\r\
-        \n\r\n25\r\n00:00:58,737 --> 00:01:02,205\r\nTh-The only car game he ever\r\
-        \nwants to play is the Quiet Game.\r\n\r\n26\r\n00:01:02,207 --> 00:01:03,306\r\
-        \nAnd he's terrible at it.\r\n\r\n27\r\n00:01:03,308 --> 00:01:05,458\r\n\
-        I always win.\r\n\r\n28\r\n00:01:06,844 --> 00:01:08,728\r\nSo, you're okay\
-        \ with this?\r\n\r\n29\r\n00:01:08,730 --> 00:01:10,396\r\nWell, why wouldn't\
-        \ I be?\r\n\r\n30\r\n00:01:10,398 --> 00:01:12,432\r\nWell, this project\r\
-        \nwould have us working\r\n\r\n31\r\n00:01:12,434 --> 00:01:14,467\r\nin close\
-        \ proximity\r\nto one another.\r\n\r\n32\r\n00:01:14,469 --> 00:01:15,968\r\
-        \nAnd there's the vulgar adage\r\n\r\n33\r\n00:01:15,970 --> 00:01:19,639\r\
-        \nthat one should not\r\ndefecate where one eats.\r\n\r\n34\r\n00:01:19,641\
-        \ --> 00:01:21,974\r\nMy father used to say\r\nthat all the time.\r\n\r\n\
-        35\r\n00:01:21,976 --> 00:01:25,161\r\nThat and, um, \"Who does one\r\nhave\
-        \ to orally gratify\r\n\r\n36\r\n00:01:25,163 --> 00:01:27,880\r\nto get a\
-        \ drink around here?\"\r\n\r\n37\r\n00:01:29,233 --> 00:01:31,718\r\nBut what\
-        \ does that have to do\r\n\r\n38\r\n00:01:31,720 --> 00:01:33,636\r\nwith\
-        \ you working\r\nat the university?\r\n\r\n39\r\n00:01:33,638 --> 00:01:36,239\r\
-        \nSheldon, \"Don't defecate\r\nwhere you eat,\"\r\n\r\n40\r\n00:01:36,241\
-        \ --> 00:01:38,274\r\nmeans don't have a\r\nromantic relationship\r\n\r\n\
-        41\r\n00:01:38,276 --> 00:01:39,876\r\nin the workplace.\r\n\r\n42\r\n00:01:41,078\
-        \ --> 00:01:43,062\r\nReally?\r\n\r\n43\r\n00:01:45,766 --> 00:01:47,383\r\
-        \nYes.\r\n\r\n44\r\n00:01:47,385 --> 00:01:48,468\r\nHuh.\r\n\r\n45\r\n00:01:48,470\
-        \ --> 00:01:50,787\r\nYeah, I always\r\ntook it literally.\r\n\r\n46\r\n00:01:50,789\
-        \ --> 00:01:53,622\r\nThat's why I have never\r\nonce moved my bowels\r\n\r\
-        \n47\r\n00:01:53,624 --> 00:01:55,992\r\nin this or any restaurant.\r\n\r\n\
-        48\r\n00:01:55,994 --> 00:01:57,944\r\nHmm.\r\n\r\n49\r\n00:01:57,946 -->\
-        \ 00:01:59,979\r\nI'm relieved that you\r\ndon't have a problem\r\n\r\n50\r\
-        \n00:01:59,981 --> 00:02:01,264\r\nwith us working together.\r\n\r\n51\r\n\
-        00:02:01,266 --> 00:02:03,516\r\nNot as relieved\r\nas I'm about to be.\r\n\
-        \r\n52\r\n00:02:04,518 --> 00:02:06,753\r\nIt's a brave new world,\r\nlittle\
-        \ lady.\r\n\r\n53\r\n00:02:09,189 --> 00:02:12,825\r\n\u266A Our whole universe\r\
-        \nwas in a hot, dense state \u266A\r\n\r\n54\r\n00:02:12,827 --> 00:02:16,162\r\
-        \n\u266A Then nearly 14 billion years\r\nago expansion started... Wait! \u266A\
-        \r\n\r\n55\r\n00:02:16,164 --> 00:02:17,813\r\n\u266A The Earth began to cool\r\
-        \n\r\n56\r\n00:02:17,815 --> 00:02:20,333\r\n\u266A The autotrophs began to\
-        \ drool,\r\nNeanderthals developed tools \u266A\r\n\r\n57\r\n00:02:20,335\
-        \ --> 00:02:23,002\r\n\u266A We built the Wall\r\n\u266A <i>We built the pyramids</i>\
-        \ \u266A\r\n\r\n58\r\n00:02:23,004 --> 00:02:25,688\r\n\u266A Math, Science,\
-        \ History,\r\nunraveling the mystery \u266A\r\n\r\n59\r\n00:02:25,690 -->\
-        \ 00:02:27,573\r\n\u266A That all started\r\nwith a big bang \u266A\r\n\r\n\
-        60\r\n00:02:27,575 --> 00:02:28,341\r\n\u266A <i>Bang!</i> \u266A\r\n\r\n\
-        61\r\n00:02:28,342 --> 00:02:32,342\r\n<font color=#00FF00>\u266A The Big\
-        \ Bang Theory 7x05 \u266A</font>\r\n<font color=#00FFFF>The Workplace Proximity</font>\r\
-        \nOriginal Air Date on October 17, 2013\r\n\r\n62\r\n00:02:32,367 --> 00:02:37,367\r\
-        \n== sync, corrected by <font color=#00FF00>elderman</font> ==\r\n<font color=#00FFFF>@elder_man</font>\r\
-        \n\r\n63\r\n00:02:37,818 --> 00:02:39,385\r\nAre you crazy?\r\n\r\n64\r\n\
-        00:02:39,387 --> 00:02:40,436\r\nYou don't want\r\n\r\n65\r\n00:02:40,438\
-        \ --> 00:02:42,305\r\nyour girlfriend\r\nat work with you.\r\n\r\n66\r\n00:02:42,307\
-        \ --> 00:02:45,007\r\nHell Clam.\r\n\r\n67\r\n00:02:45,009 --> 00:02:46,526\r\
-        \nWhy not?\r\n\r\n68\r\n00:02:46,528 --> 00:02:49,112\r\nHairy Fairy.\r\n\r\
-        \n69\r\n00:02:49,114 --> 00:02:50,680\r\nI think it could be romantic.\r\n\
-        \r\n70\r\n00:02:50,682 --> 00:02:52,649\r\nYou know, my parents met\r\nat\
-        \ his place of work.\r\n\r\n71\r\n00:02:52,651 --> 00:02:55,685\r\nYour father's\
-        \ a gynecologist.\r\n\r\n72\r\n00:02:55,687 --> 00:02:56,869\r\nI know.\r\n\
-        \r\n73\r\n00:02:56,871 --> 00:02:59,822\r\nWhat started as a pap smear\r\n\
-        turned into a date.\r\n\r\n74\r\n00:03:01,292 --> 00:03:02,675\r\nWhich turned\r\
-        \ninto her working there,\r\n\r\n75\r\n00:03:02,677 --> 00:03:04,644\r\nwhich\
-        \ turned into marriage,\r\nwhich then turned into hatred,\r\n\r\n76\r\n00:03:04,646\
-        \ --> 00:03:07,196\r\nwhich continues to this day.\r\n\r\n77\r\n00:03:07,298\
-        \ --> 00:03:10,066\r\nTwo-Eyed Cyclops.\r\n\r\n78\r\n00:03:10,068 --> 00:03:12,902\r\
-        \nWould you please tell him\r\nthis isn't a good idea?\r\n\r\n79\r\n00:03:12,904\
-        \ --> 00:03:14,270\r\nNo, no, I think it'll be great.\r\n\r\n80\r\n00:03:14,272\
-        \ --> 00:03:15,888\r\nMaybe next time he gets\r\nconjunctivitis at work,\r\
-        \n\r\n81\r\n00:03:15,890 --> 00:03:19,942\r\nshe can hold his head and try\r\
-        \nto put the drops in his eyes.\r\n\r\n82\r\n00:03:19,944 --> 00:03:22,428\r\
-        \nGiant baby.\r\n\r\n83\r\n00:03:22,430 --> 00:03:24,280\r\nThat's a Raging\
-        \ Ogre.\r\n\r\n84\r\n00:03:24,282 --> 00:03:26,516\r\nYeah, I know.\r\n\r\n\
-        85\r\n00:03:28,519 --> 00:03:30,686\r\nI'm just saying, I'd never want\r\n\
-        to work with Bernadette.\r\n\r\n86\r\n00:03:30,688 --> 00:03:32,655\r\nCan\
-        \ you imagine seeing\r\nsomeone all day long\r\n\r\n87\r\n00:03:32,657 -->\
-        \ 00:03:34,123\r\nand then you're\r\nsupposed to hang out\r\n\r\n88\r\n00:03:34,125\
-        \ --> 00:03:35,825\r\nwith them after work, too?\r\n\r\n89\r\n00:03:35,827\
-        \ --> 00:03:37,493\r\nHold on. We do\r\nthat all the time.\r\n\r\n90\r\n00:03:37,495\
-        \ --> 00:03:39,228\r\nYou and I work together\r\nand play together.\r\n\r\n\
-        91\r\n00:03:39,230 --> 00:03:42,882\r\nYeah, I know, and it drove me\r\ninto\
-        \ the arms of another woman.\r\n\r\n92\r\n00:03:44,701 --> 00:03:46,719\r\n\
-        Bipolar Bear.\r\n\r\n93\r\n00:03:46,721 --> 00:03:49,605\r\nWell, I appreciate\
-        \ your concern,\r\n\r\n94\r\n00:03:49,607 --> 00:03:52,809\r\nbut I won't\
-        \ be seeing any more\r\nof Amy than I already do.\r\n\r\n95\r\n00:03:52,811\
-        \ --> 00:03:55,094\r\nI assume we'll deduct\r\nany extra time we spend together\r\
-        \n\r\n96\r\n00:03:55,096 --> 00:03:57,964\r\nat work from our weekly quota.\r\
-        \n\r\n97\r\n00:03:59,883 --> 00:04:02,552\r\nPlease let me be there\r\nwhen\
-        \ you tell her that.\r\n\r\n98\r\n00:04:03,520 --> 00:04:05,688\r\nWhy? So\
-        \ you can see the\r\nlook on Amy's face\r\n\r\n99\r\n00:04:05,690 --> 00:04:07,990\r\
-        \nwhen she hears\r\nmy top-notch idea?\r\n\r\n100\r\n00:04:07,992 --> 00:04:10,576\r\
-        \nPlease, oh, please,\r\njust let me be there.\r\n\r\n101\r\n00:04:12,546\
-        \ --> 00:04:15,681\r\nSo, Amy, what are you gonna\r\nbe working on at Caltech?\r\
-        \n\r\n102\r\n00:04:15,683 --> 00:04:17,467\r\nI'm leading a study to see\r\
-        \n\r\n103\r\n00:04:17,469 --> 00:04:19,368\r\nif deficiency of the\r\nmonoamine\
-        \ oxidase enzyme\r\n\r\n104\r\n00:04:19,370 --> 00:04:21,444\r\nleads to paralyzing\r\
+    body:
+      string: "\uFEFF1\r\n00:00:05,532 --> 00:00:07,400\r\nAwkward silence.\r\n\r\n\
+        2\r\n00:00:07,402 --> 00:00:08,684\r\nSheldon on his phone.\r\n\r\n3\r\n00:00:08,686\
+        \ --> 00:00:09,719\r\nNo touching.\r\n\r\n4\r\n00:00:09,721 --> 00:00:13,122\r\
+        \nSomebody's having date night.\r\n\r\n5\r\n00:00:13,124 --> 00:00:15,208\r\
+        \nIt's actually steamier\r\nthan it looks.\r\n\r\n6\r\n00:00:15,210 --> 00:00:18,077\r\
+        \nSheldon's looking up the phallic\r\nsymbolism of root vegetables\r\n\r\n\
+        7\r\n00:00:18,079 --> 00:00:19,796\r\nin Renaissance paintings.\r\n\r\n8\r\
+        \n00:00:19,798 --> 00:00:21,447\r\nOh, no, I got bored\r\nwith that.\r\n\r\
+        \n9\r\n00:00:21,449 --> 00:00:25,418\r\nI'm just browsing\r\ncuticle scissors\
+        \ on Amazon.\r\n\r\n10\r\n00:00:26,370 --> 00:00:28,004\r\nHow do you\r\n\
+        not tear off his clothes\r\n\r\n11\r\n00:00:28,006 --> 00:00:30,556\r\nand\
+        \ take him right here\r\non this table?\r\n\r\n12\r\n00:00:30,558 --> 00:00:33,259\r\
+        \nIf you do that, I'll scream.\r\n\r\n13\r\n00:00:36,430 --> 00:00:38,631\r\
+        \nSheldon, I have some\r\nexciting news to tell you.\r\n\r\n14\r\n00:00:38,633\
+        \ --> 00:00:39,782\r\nThat makes two of us.\r\n\r\n15\r\n00:00:39,784 -->\
+        \ 00:00:41,267\r\nMy new cuticle scissors\r\nwill be here\r\n\r\n16\r\n00:00:41,269\
+        \ --> 00:00:43,152\r\nin one to two business days.\r\n\r\n17\r\n00:00:43,154\
+        \ --> 00:00:45,721\r\nCome on, one.\r\n\r\n18\r\n00:00:45,723 --> 00:00:47,824\r\
+        \nI've been invited to\r\nconsult on an experiment\r\n\r\n19\r\n00:00:47,826\
+        \ --> 00:00:50,193\r\nat your university\r\nfor a few months.\r\n\r\n20\r\n\
+        00:00:50,195 --> 00:00:51,327\r\nIsn't that great?\r\n\r\n21\r\n00:00:51,329\
+        \ --> 00:00:52,912\r\nWe could have lunch together.\r\n\r\n22\r\n00:00:52,914\
+        \ --> 00:00:54,314\r\nWe could carpool.\r\n\r\n23\r\n00:00:54,316 --> 00:00:56,466\r\
+        \nYou know, riding with Leonard\r\n\r\n24\r\n00:00:56,468 --> 00:00:58,735\r\
+        \nhas gotten\r\na little tedious lately.\r\n\r\n25\r\n00:00:58,737 --> 00:01:02,205\r\
+        \nTh-The only car game he ever\r\nwants to play is the Quiet Game.\r\n\r\n\
+        26\r\n00:01:02,207 --> 00:01:03,306\r\nAnd he's terrible at it.\r\n\r\n27\r\
+        \n00:01:03,308 --> 00:01:05,458\r\nI always win.\r\n\r\n28\r\n00:01:06,844\
+        \ --> 00:01:08,728\r\nSo, you're okay with this?\r\n\r\n29\r\n00:01:08,730\
+        \ --> 00:01:10,396\r\nWell, why wouldn't I be?\r\n\r\n30\r\n00:01:10,398 -->\
+        \ 00:01:12,432\r\nWell, this project\r\nwould have us working\r\n\r\n31\r\n\
+        00:01:12,434 --> 00:01:14,467\r\nin close proximity\r\nto one another.\r\n\
+        \r\n32\r\n00:01:14,469 --> 00:01:15,968\r\nAnd there's the vulgar adage\r\n\
+        \r\n33\r\n00:01:15,970 --> 00:01:19,639\r\nthat one should not\r\ndefecate\
+        \ where one eats.\r\n\r\n34\r\n00:01:19,641 --> 00:01:21,974\r\nMy father\
+        \ used to say\r\nthat all the time.\r\n\r\n35\r\n00:01:21,976 --> 00:01:25,161\r\
+        \nThat and, um, \"Who does one\r\nhave to orally gratify\r\n\r\n36\r\n00:01:25,163\
+        \ --> 00:01:27,880\r\nto get a drink around here?\"\r\n\r\n37\r\n00:01:29,233\
+        \ --> 00:01:31,718\r\nBut what does that have to do\r\n\r\n38\r\n00:01:31,720\
+        \ --> 00:01:33,636\r\nwith you working\r\nat the university?\r\n\r\n39\r\n\
+        00:01:33,638 --> 00:01:36,239\r\nSheldon, \"Don't defecate\r\nwhere you eat,\"\
+        \r\n\r\n40\r\n00:01:36,241 --> 00:01:38,274\r\nmeans don't have a\r\nromantic\
+        \ relationship\r\n\r\n41\r\n00:01:38,276 --> 00:01:39,876\r\nin the workplace.\r\
+        \n\r\n42\r\n00:01:41,078 --> 00:01:43,062\r\nReally?\r\n\r\n43\r\n00:01:45,766\
+        \ --> 00:01:47,383\r\nYes.\r\n\r\n44\r\n00:01:47,385 --> 00:01:48,468\r\n\
+        Huh.\r\n\r\n45\r\n00:01:48,470 --> 00:01:50,787\r\nYeah, I always\r\ntook\
+        \ it literally.\r\n\r\n46\r\n00:01:50,789 --> 00:01:53,622\r\nThat's why I\
+        \ have never\r\nonce moved my bowels\r\n\r\n47\r\n00:01:53,624 --> 00:01:55,992\r\
+        \nin this or any restaurant.\r\n\r\n48\r\n00:01:55,994 --> 00:01:57,944\r\n\
+        Hmm.\r\n\r\n49\r\n00:01:57,946 --> 00:01:59,979\r\nI'm relieved that you\r\
+        \ndon't have a problem\r\n\r\n50\r\n00:01:59,981 --> 00:02:01,264\r\nwith\
+        \ us working together.\r\n\r\n51\r\n00:02:01,266 --> 00:02:03,516\r\nNot as\
+        \ relieved\r\nas I'm about to be.\r\n\r\n52\r\n00:02:04,518 --> 00:02:06,753\r\
+        \nIt's a brave new world,\r\nlittle lady.\r\n\r\n53\r\n00:02:09,189 --> 00:02:12,825\r\
+        \n\u266A Our whole universe\r\nwas in a hot, dense state \u266A\r\n\r\n54\r\
+        \n00:02:12,827 --> 00:02:16,162\r\n\u266A Then nearly 14 billion years\r\n\
+        ago expansion started... Wait! \u266A\r\n\r\n55\r\n00:02:16,164 --> 00:02:17,813\r\
+        \n\u266A The Earth began to cool\r\n\r\n56\r\n00:02:17,815 --> 00:02:20,333\r\
+        \n\u266A The autotrophs began to drool,\r\nNeanderthals developed tools \u266A\
+        \r\n\r\n57\r\n00:02:20,335 --> 00:02:23,002\r\n\u266A We built the Wall\r\n\
+        \u266A <i>We built the pyramids</i> \u266A\r\n\r\n58\r\n00:02:23,004 --> 00:02:25,688\r\
+        \n\u266A Math, Science, History,\r\nunraveling the mystery \u266A\r\n\r\n\
+        59\r\n00:02:25,690 --> 00:02:27,573\r\n\u266A That all started\r\nwith a big\
+        \ bang \u266A\r\n\r\n60\r\n00:02:27,575 --> 00:02:28,341\r\n\u266A <i>Bang!</i>\
+        \ \u266A\r\n\r\n61\r\n00:02:28,342 --> 00:02:32,342\r\n<font color=#00FF00>\u266A\
+        \ The Big Bang Theory 7x05 \u266A</font>\r\n<font color=#00FFFF>The Workplace\
+        \ Proximity</font>\r\nOriginal Air Date on October 17, 2013\r\n\r\n62\r\n\
+        00:02:32,367 --> 00:02:37,367\r\n== sync, corrected by <font color=#00FF00>elderman</font>\
+        \ ==\r\n<font color=#00FFFF>@elder_man</font>\r\n\r\n63\r\n00:02:37,818 -->\
+        \ 00:02:39,385\r\nAre you crazy?\r\n\r\n64\r\n00:02:39,387 --> 00:02:40,436\r\
+        \nYou don't want\r\n\r\n65\r\n00:02:40,438 --> 00:02:42,305\r\nyour girlfriend\r\
+        \nat work with you.\r\n\r\n66\r\n00:02:42,307 --> 00:02:45,007\r\nHell Clam.\r\
+        \n\r\n67\r\n00:02:45,009 --> 00:02:46,526\r\nWhy not?\r\n\r\n68\r\n00:02:46,528\
+        \ --> 00:02:49,112\r\nHairy Fairy.\r\n\r\n69\r\n00:02:49,114 --> 00:02:50,680\r\
+        \nI think it could be romantic.\r\n\r\n70\r\n00:02:50,682 --> 00:02:52,649\r\
+        \nYou know, my parents met\r\nat his place of work.\r\n\r\n71\r\n00:02:52,651\
+        \ --> 00:02:55,685\r\nYour father's a gynecologist.\r\n\r\n72\r\n00:02:55,687\
+        \ --> 00:02:56,869\r\nI know.\r\n\r\n73\r\n00:02:56,871 --> 00:02:59,822\r\
+        \nWhat started as a pap smear\r\nturned into a date.\r\n\r\n74\r\n00:03:01,292\
+        \ --> 00:03:02,675\r\nWhich turned\r\ninto her working there,\r\n\r\n75\r\n\
+        00:03:02,677 --> 00:03:04,644\r\nwhich turned into marriage,\r\nwhich then\
+        \ turned into hatred,\r\n\r\n76\r\n00:03:04,646 --> 00:03:07,196\r\nwhich\
+        \ continues to this day.\r\n\r\n77\r\n00:03:07,298 --> 00:03:10,066\r\nTwo-Eyed\
+        \ Cyclops.\r\n\r\n78\r\n00:03:10,068 --> 00:03:12,902\r\nWould you please\
+        \ tell him\r\nthis isn't a good idea?\r\n\r\n79\r\n00:03:12,904 --> 00:03:14,270\r\
+        \nNo, no, I think it'll be great.\r\n\r\n80\r\n00:03:14,272 --> 00:03:15,888\r\
+        \nMaybe next time he gets\r\nconjunctivitis at work,\r\n\r\n81\r\n00:03:15,890\
+        \ --> 00:03:19,942\r\nshe can hold his head and try\r\nto put the drops in\
+        \ his eyes.\r\n\r\n82\r\n00:03:19,944 --> 00:03:22,428\r\nGiant baby.\r\n\r\
+        \n83\r\n00:03:22,430 --> 00:03:24,280\r\nThat's a Raging Ogre.\r\n\r\n84\r\
+        \n00:03:24,282 --> 00:03:26,516\r\nYeah, I know.\r\n\r\n85\r\n00:03:28,519\
+        \ --> 00:03:30,686\r\nI'm just saying, I'd never want\r\nto work with Bernadette.\r\
+        \n\r\n86\r\n00:03:30,688 --> 00:03:32,655\r\nCan you imagine seeing\r\nsomeone\
+        \ all day long\r\n\r\n87\r\n00:03:32,657 --> 00:03:34,123\r\nand then you're\r\
+        \nsupposed to hang out\r\n\r\n88\r\n00:03:34,125 --> 00:03:35,825\r\nwith\
+        \ them after work, too?\r\n\r\n89\r\n00:03:35,827 --> 00:03:37,493\r\nHold\
+        \ on. We do\r\nthat all the time.\r\n\r\n90\r\n00:03:37,495 --> 00:03:39,228\r\
+        \nYou and I work together\r\nand play together.\r\n\r\n91\r\n00:03:39,230\
+        \ --> 00:03:42,882\r\nYeah, I know, and it drove me\r\ninto the arms of another\
+        \ woman.\r\n\r\n92\r\n00:03:44,701 --> 00:03:46,719\r\nBipolar Bear.\r\n\r\
+        \n93\r\n00:03:46,721 --> 00:03:49,605\r\nWell, I appreciate your concern,\r\
+        \n\r\n94\r\n00:03:49,607 --> 00:03:52,809\r\nbut I won't be seeing any more\r\
+        \nof Amy than I already do.\r\n\r\n95\r\n00:03:52,811 --> 00:03:55,094\r\n\
+        I assume we'll deduct\r\nany extra time we spend together\r\n\r\n96\r\n00:03:55,096\
+        \ --> 00:03:57,964\r\nat work from our weekly quota.\r\n\r\n97\r\n00:03:59,883\
+        \ --> 00:04:02,552\r\nPlease let me be there\r\nwhen you tell her that.\r\n\
+        \r\n98\r\n00:04:03,520 --> 00:04:05,688\r\nWhy? So you can see the\r\nlook\
+        \ on Amy's face\r\n\r\n99\r\n00:04:05,690 --> 00:04:07,990\r\nwhen she hears\r\
+        \nmy top-notch idea?\r\n\r\n100\r\n00:04:07,992 --> 00:04:10,576\r\nPlease,\
+        \ oh, please,\r\njust let me be there.\r\n\r\n101\r\n00:04:12,546 --> 00:04:15,681\r\
+        \nSo, Amy, what are you gonna\r\nbe working on at Caltech?\r\n\r\n102\r\n\
+        00:04:15,683 --> 00:04:17,467\r\nI'm leading a study to see\r\n\r\n103\r\n\
+        00:04:17,469 --> 00:04:19,368\r\nif deficiency of the\r\nmonoamine oxidase\
+        \ enzyme\r\n\r\n104\r\n00:04:19,370 --> 00:04:21,444\r\nleads to paralyzing\r\
         \nfear in monkeys.\r\n\r\n105\r\n00:04:21,469 --> 00:04:22,339\r\nOh.\r\n\r\
         \n106\r\n00:04:22,340 --> 00:04:25,158\r\nIf they're anything like humans,\r\
         \nthe answer's yes.\r\n\r\n107\r\n00:04:25,160 --> 00:04:27,577\r\nWait, you've-you've\
@@ -484,16 +502,27 @@ interactions:
         and set them straight.\r\n\r\n428\r\n00:18:38,803 --> 00:18:40,820\r\nLaser's\
         \ warmed up.\r\n\r\n429\r\n00:18:40,896 --> 00:18:41,928\r\nPull!\r\n\r\n\
         430\r\n00:18:44,274 --> 00:18:49,274\r\n== sync, corrected by <font color=#00FF00>elderman</font>\
-        \ ==\r\n<font color=#00FFFF>@elder_man</font>\r\n\r\n"}
+        \ ==\r\n<font color=#00FFFF>@elder_man</font>\r\n\r\n"
     headers:
-      accept-ranges: [bytes]
-      connection: [keep-alive]
-      content-disposition: [attachment; filename=f18de9888230bcd71be8bc7be3add167.srt]
-      content-length: ['30847']
-      content-type: [text/plain]
-      date: ['Tue, 09 Feb 2016 16:18:41 GMT']
-      etag: ['"5261a4b8-787f"']
-      last-modified: ['Fri, 18 Oct 2013 21:14:32 GMT']
-      server: [nginx/1.6.0]
-    status: {code: 200, message: OK}
+      Accept-Ranges:
+      - bytes
+      Connection:
+      - keep-alive
+      Content-Disposition:
+      - attachment; filename=f18de9888230bcd71be8bc7be3add167.srt
+      Content-Length:
+      - '30847'
+      Content-Type:
+      - text/plain
+      Date:
+      - Sat, 09 May 2020 12:24:12 GMT
+      ETag:
+      - '"5261a4b8-787f"'
+      Last-Modified:
+      - Fri, 18 Oct 2013 21:14:32 GMT
+      Server:
+      - nginx/1.6.0
+    status:
+      code: 200
+      message: OK
 version: 1

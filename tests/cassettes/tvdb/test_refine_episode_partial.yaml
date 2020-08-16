@@ -1,212 +1,511 @@
 interactions:
 - request:
-    body: '{"username": null, "password": null, "apikey": "5EC930FB90DA1ADA"}'
-    headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Accept-Language: [en]
-      Connection: [keep-alive]
-      Content-Length: ['66']
-      Content-Type: [application/json]
-      User-Agent: [Subliminal/2.0]
-    method: POST
-    uri: https://api.thetvdb.com/login
-  response:
-    body:
-      string: !!binary |
-        H4sIAAAAAAAAAxTDy66iMAAA0P39CuOeG1AQmV15KK8pLyngxogWLPRSRLDCZP59Mic5f75Wq/XI
-        Wtytf63WeHYf5fFGAuIm6eJIkDgvp4uVm+HsnLbPkeFq33h2KbYBCRpLhA2Q4BLJgVm/nB/aOg0j
-        ty0i5ZGO10x5lIbzcn60+Zrdq2t2EJ2GfaBZcGjW8v9V9O0OJGvEE8pd/nhpKE0oweIGb06ufGX3
-        M3vLT8xt49zd+SZJAkOcqjq70UMxPsOZ2pEwMxzNXlDvpsFW86JKdV/BElWtqN5+ZtNMcmXnDv7w
-        6MOM5QeUylSP9Q/k+anQ4ufWSAtTHTtGjSL0PPZBRiaCi943Pgax5y9hciBBJAkK4QFVzhK2olPd
-        tnmBOtZIx+MZ2KVQC3ff67Wh0SEYGzwIUC/lsd45+0dB4YyvgZaOYLGmXXjW1TDtstYuuarCPjHi
-        ZHvaRqx8I/zW68rle8/6LMpy4Wh0Vb/iQ1ugPp6XaVDkuwkAqjKpA0dK0ud+4kvxbOGltNtEkAzr
-        N6HjRQHrr7//AAAA//8DALfDvCXbAQAA
-    headers:
-      cf-ray: [292900d92996024b-CDG]
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-type: [application/json]
-      date: ['Tue, 12 Apr 2016 19:14:48 GMT']
-      server: [cloudflare-nginx]
-      set-cookie: ['__cfduid=dff8455d043d625c41282d2cd77b7c93f1460488487; expires=Wed,
-          12-Apr-17 19:14:47 GMT; path=/; domain=.thetvdb.com; HttpOnly']
-      vary: [Accept-Language]
-      x-powered-by: [Thundar!]
-      x-thetvdb-api-version: [2.0.0]
-    status: {code: 200, message: OK}
-- request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Accept-Language: [en]
-      Authorization: [!!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0NjA1NzQ4ODgsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNDYwNDg4NDg4fQ.JriWj0TVXJwhs9VUSlie02e2TJ4aodZov4qewHCZndw2SSOC0ufgWclFYtqPylHQ-yoeQyKOg6urH7XYfUBL5e1l7EQg3xyDDSX56JrLrhpPWoXFVU4lBRBxNwXTY9Rq3CUYD7tnolCYPKKoxVCW0A_BpjLeARKLzPSFiOQ1-5iwOl5Z1eEQTgkkXYVnoj1GGZAHb-g-dLKp9rjBNAtjer-NBb4tg6I8hYlNyeaO9UtAzEu6PZB7PUnWkHbw77NpSCRS3T3QobvVevBgfJw8KExz5z_wVtJ7LfwrkYVpRyzur54dDAAVfW1nAGliUq8uwzYqkN_bHkS-1CEMilt_5A']
-      Connection: [keep-alive]
-      Content-Type: [application/json]
-      Cookie: [__cfduid=dff8455d043d625c41282d2cd77b7c93f1460488487]
-      User-Agent: [Subliminal/2.0]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en
+      Authorization:
+      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Subliminal/2.1
     method: GET
     uri: https://api.thetvdb.com/search/series?name=csi
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAA7RXwW4bRwy95ysIXewAkiLJliP7JqtJ4DY22sgNENQ9ULPULqvZmcVwVooQ9N8L
-        zkqW48h2jCYXA94dDpd85HtPX14AtDKM2DqDv14AAHxJfwFaaBmF5PZFejiZXrTaX/17Bu9R4CPl
-        KK3Ni7+3J1ozdI5C6wxaecCqYIP21evB8Pikk/ePuv9U+e1lrTkHiWMOlOnxQa/X6/R7nd7J7gTr
-        mxR9+8hRXPmw0IjJ+XR31C8pLJlW6cX0AlgAwQQuCbKAJQI7WBVsCogFgSkwoIkUBGohMHWM7PIO
-        ZTnB3Adywgai91YgeqDPWLKjFElLzsgZ0ufi7bJ5alCoC/ABY0EBYoEOUBbscjhYFT6rneN4AIfs
-        liSRc9RssOLoSITkldRSkYnysg367fS5sj6QpKsPCr/aXNDdlSsUmOQKS9oUfAaTVOzUkCO42CXy
-        7k5UxFgrvq03LqOsQe/f9oNTsA/Wh/C7h9roaHQ62otaoVdZGO7HbgwnUGGI0FSoaMA25C0vCXDm
-        69g03ddBEl4boCXVvmuyDwLYnL1KnUALb7fojg1mVK51Ln5z/vOSraU2XJNLmNBjvd7G/tjG7vZl
-        MDwa9Ead/Il1GXV6p51e/17jm+B9nb/+CFd+iQ/sTOCSt01nJ5UmgtkaAqFN8y2Pt8RlZPc1ZOJd
-        ZFezy5/syj2WuaIVfNJv/z6SOTo5Penkx0807Xhv01LwszjmutDN55ABZayzBX6eJu1GP/6mBfOA
-        zhQsBEJRoK5ACl/puOmpc85hXFU6cquCAkFEw7EODn6hSCbqpF+igWtcWx/g8B2GNUzZsdBLQJdB
-        wZL2xFFo34mZRrIW4dw7FAoIh5dk2SH8hg4XGCgjJRlLmG3psaMspnQUCcsuvOcFpcuNr12koDl0
-        IHacn9JfMpbc3n7ewvmVshVGqMhXlqDENVimNsw2y3rLmwED2TVk/vGBOoOrTz9rv16Pjvq9p0dl
-        0NEVG94fFQ1+rhwdCOSBY1wDVlXwqDLkN6ylzVO52AmPGE6tKnGhyxgFVriGefDlHRSiT32VGEjn
-        y8/hrfWBs6R0qYEJoy6MYVV4S+BolTDWow/zJQt4B4ViHD1Uwc8ahRPCcg21yygIZ6SXNPc/imE6
-        8tNoctQfDvtP4tgfdnpH3+LYRD97529lyVqdeXRAliPddvbt+QVMKzKMFsY5uSgQURaUqdwX8LUD
-        MOsZbcQr7diVD7GAcUmBDXbhHIUyULnzc/ijRhfZ+HaCI6VjAakr/T5puHq8pLCGD2u1HzCjApfs
-        A1qoZG0Kb33OEkFZhrJNbikCu4VOCJBEnFmWgrKUQiuZpEONs8h4yaJEl+iHMFOHddMq0Cw6cx86
-        uffZTUtHJg9YtgFBTEEl3XNeqjMOrYAk3xRNQQIGHWj7k5irhWKn9FFr4YEMcWIohCqweAdCLuqG
-        PGGI9OP/pyQ9xwE1o3baGRzfH7Xj0bB/um/U9s6Zq619oK7rUBPcdeR3qvrBtahS9r9dm/7x0bDX
-        328vzqfwRjUjIruSXNwat+dW+REDU1zDtPCrRDShCxPv4Kbu9QYncCldmMhPo5X+cHB83H/Kfekv
-        lVGnN7rfnhS8rz23DvQd+U0yOPxz+nI/1UwLbxbNjwSbUVBPCrWbe6tbJ6AVJw5Wp7zVjUaZq8LH
-        JoF6t6W6N9272m10xjRi4esA6LhEC5on82UX3lFUn2KsF2roqgqUbXy0y0CIQCGJBbGuqER2ep3q
-        lD4sU6Y5x0gS1dc44AjGK7s1csUBpA5LXqJ9cHd/3+R8aM6/D+Odl/y1Digqq5PutHvRbf0HAAD/
-        /6SYvW4bMQyA9zwFH8AxnBp5gywZChTokA7pQJ+YO8E8ShV1NjwE8Dtkyuv5SQpStntFUaRAh1tO
-        f/znJ/0TTX66X6/Wqw+D4M7y/e7+TwRfrVf/HwSPAr+E//q4gBAlQbjC3kNZwpchMnxGEQsWxkm8
-        niK8TMy32iHPG7xV75pgEkJrNOZL21JxKuqgzwfglKxbmb857igs4bk8i31zWaBP3rLOFDJGCbpo
-        eNBwYRtbo4jiuGD/NklIL5i8iX1PWhcwJq0Qx1xI1ZTaEGpVoJ3tlGCPvPUFmVGoLl3pi74GkXI6
-        vlfQGrutM1WSHYlrejq+QSq2kzjRWviHqF3MbLd5H24jmUqmOiHDj8lC1+/82cTfG9PuG6Sdr55X
-        iy3hqeVI3EWm3ozWdZao/jQw0kXVfSocTsd3bbpqykM0ebFap6VuEG/NpC6SY96cz9YPMGLODdHP
-        kw92BgrEEXvjxG4wjZKYJ5jdzc4UWkuS/vokARYcFb7dFjz4Yb+5tBuQmaQnBU7S+4SBOACqTmM2
-        m55LTFJSKBgsVZrJ2pjbxypL48SKEkzs9DIz2t/Sfi7KR2l/A/D95vUnAAAA//8DAEQls0rKEgAA
+      string: "{\"data\":[{\"aliases\":[\"CSI: Vegas\",\"CSI\",\"CSI: Las Vegas\"\
+        ,\"CSI: Crime Scene Investigation\",\"CSI\u6EC5\u7F6A\u9451\u8B49\u79D1\"\
+        ],\"banner\":\"/banners/graphical/19-g2.jpg\",\"firstAired\":\"2000-10-6\"\
+        ,\"id\":72546,\"image\":\"/banners/posters/72546-5.jpg\",\"network\":\"CBS\"\
+        ,\"overview\":\"CSI is a crime drama in which the characters use cutting-edge\
+        \ forensic tools to examine the evidence to solve the case.  Rather than asking\
+        \ 'whodunnit' (investigating witnesses/suspects), CSI explores the 'howdunnit'.\"\
+        ,\"poster\":\"/banners/posters/72546-5.jpg\",\"seriesName\":\"CSI: Crime Scene\
+        \ Investigation\",\"slug\":\"csi-crime-scene-investigation\",\"status\":\"\
+        Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":null,\"id\":83898,\"\
+        image\":\"/banners/posters/5b5e08fdcd284.jpg\",\"network\":null,\"overview\"\
+        :\"A 6 part series for Channel Five about the course for crime scene investigators\
+        \ at the National Forensic Academy in Knoxville, Tennessee.\",\"poster\":null,\"\
+        seriesName\":\"CSI Academy\",\"slug\":\"csi-academy\",\"status\":\"Ended\"\
+        },{\"aliases\":[\"CSI: Miami\",\"\u9451\u8B49\u884C\u52D5\u7D44\"],\"banner\"\
+        :\"/banners/graphical/78310-g4.jpg\",\"firstAired\":\"2002-5-9\",\"id\":78310,\"\
+        image\":\"/banners/posters/78310-3.jpg\",\"network\":\"CBS\",\"overview\"\
+        :\"CSI's gritty approach to crime known as forensic science makes its way\
+        \ from Las Vegas to the streets of Florida in CSI: Miami. A whole new team\
+        \ of crime scene investigators is on hand to probe the seamy underside of\
+        \ Miami.\",\"poster\":\"/banners/posters/78310-3.jpg\",\"seriesName\":\"CSI:\
+        \ Miami\",\"slug\":\"csi-miami\",\"status\":\"Ended\"},{\"aliases\":[\"CSI:\
+        \ New York\"],\"banner\":\"/banners/graphical/24125-g.jpg\",\"firstAired\"\
+        :\"2004-5-17\",\"id\":73696,\"image\":\"/banners/posters/73696-3.jpg\",\"\
+        network\":\"CBS\",\"overview\":\"The third edition of the \\\"CSI\\\" franchise\
+        \ sets up shop in the Big Apple, where taciturn Detective Mac Taylor (Gary\
+        \ Sinise) and his partner, Detective Stella Bonasera (Melina Kanakaredes),\
+        \ lead a crime-solving team. Like his counterparts in Las Vegas and Miami,\
+        \ Taylor knows that people may lie, but the evidence rarely does.\",\"poster\"\
+        :\"/banners/posters/73696-3.jpg\",\"seriesName\":\"CSI: NY\",\"slug\":\"csi-ny\"\
+        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":null,\"\
+        id\":363278,\"image\":\"/banners/images/missing/series.jpg\",\"network\":null,\"\
+        poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"CSI: Las\
+        \ Vegas\",\"slug\":\"csi-las-vegas\",\"status\":\"Ended\"},{\"aliases\":[],\"\
+        banner\":null,\"firstAired\":\"2017-12-2\",\"id\":342048,\"image\":\"/banners/posters/342048-1.jpg\"\
+        ,\"network\":\"TVQ (Australia)\",\"poster\":null,\"seriesName\":\"CSI:\uC18C\
+        \uBE44\uC790 \uD0D0\uC0AC\uB300\",\"slug\":\"342048\",\"status\":\"Continuing\"\
+        },{\"aliases\":[],\"banner\":null,\"firstAired\":null,\"id\":338516,\"image\"\
+        :\"/banners/posters/338516-1.jpg\",\"network\":null,\"poster\":null,\"seriesName\"\
+        :\"Csillag\xF6sv\xE9nyen\",\"slug\":\"338516\",\"status\":\"Ended\"},{\"aliases\"\
+        :[],\"banner\":\"/banners/blank/281551.jpg\",\"firstAired\":\"2015-3-4\",\"\
+        id\":281551,\"image\":\"/banners/posters/281551-1.jpg\",\"network\":\"CBS\"\
+        ,\"overview\":\"The series follows an elite team of FBI Special Agents tasked\
+        \ with investigating cyber crimes in North America. Based out of Quantico,\
+        \ the team is supervised by Avery Ryan a behavioral psychologist turned cyber\
+        \ shrink who established the FBI Cyber Crime division and heads a \\\"hack-for-good\\\
+        \" program, a scheme in which the criminals she catches can work for her in\
+        \ lieu of receiving a prison sentence.\",\"poster\":\"/banners/posters/281551-1.jpg\"\
+        ,\"seriesName\":\"CSI: Cyber\",\"slug\":\"csi-cyber\",\"status\":\"Ended\"\
+        },{\"aliases\":[],\"banner\":null,\"firstAired\":\"2008-9-1\",\"id\":253208,\"\
+        image\":\"/banners/posters/253208-1.jpg\",\"network\":\"TV Nova\",\"overview\"\
+        :\"Crimi series inspired by real cases.\",\"poster\":null,\"seriesName\":\"\
+        CSI Andel\",\"slug\":\"csi-andel\",\"status\":\"Ended\"},{\"aliases\":[],\"\
+        banner\":\"/banners/graphical/249250-g.jpg\",\"firstAired\":\"2011-4-13\"\
+        ,\"id\":249250,\"image\":\"/banners/posters/5b65766f488dd.jpg\",\"network\"\
+        :\"TV Asahi\",\"overview\":\"\\\"CSI: Crime Scene Talks\\\" depicts the work\
+        \ of a group of detectives who solve murder cases by looking for clues in\
+        \ the articles left by victims.\",\"poster\":\"/banners/posters/5b65766f488dd.jpg\"\
+        ,\"seriesName\":\"CSI: Crime Scene Talks\",\"slug\":\"iryu-sosa\",\"status\"\
+        :\"Continuing\"},{\"aliases\":[\"Jurassic C.S.I.\"],\"banner\":\"/banners/graphical/253030-g.jpg\"\
+        ,\"firstAired\":\"2011-7-7\",\"id\":253030,\"image\":\"/banners/posters/253030-1.jpg\"\
+        ,\"network\":\"National Geographic\",\"overview\":\"In Jurassic CSI, dino\
+        \ detective Dr. Phil Manning launches a full-scale investigation to unearth\
+        \ how dinosaurs really looked and lived. \\r\\n\\r\\nJurassic CSI goes into\
+        \ the minds, under the skin and inside the bones of the biggest, most impressive\
+        \ beasts ever to walk the planet. Dr. Manning doesn\u2019t stick to convention\
+        \ \u2013 or even his own discipline \u2013 on his perpetual quest to expand\
+        \ what we know about dinosaurs. With privileged access to some of the world\u2019\
+        s most sophisticated technologies \u2013 from crime scene 3D mapping technology\
+        \ to an image machine one million times stronger than a chest X-ray \u2013\
+        \ Jurassic CSI challenges long \u2013 held assumptions and poses radical questions\
+        \ about our understanding of dinosaurs.\",\"poster\":\"/banners/posters/253030-1.jpg\"\
+        ,\"seriesName\":\"Jurassic CSI\",\"slug\":\"jurassic-csi\",\"status\":\"Ended\"\
+        },{\"aliases\":[],\"banner\":null,\"firstAired\":\"2011-6-29\",\"id\":248519,\"\
+        image\":\"/banners/posters/248519-1.jpg\",\"network\":null,\"poster\":null,\"\
+        seriesName\":\"True CSI\",\"slug\":\"true-csi\",\"status\":\"Ended\"},{\"\
+        aliases\":[],\"banner\":null,\"firstAired\":\"2006-1-12\",\"id\":152441,\"\
+        image\":\"/banners/posters/152441-1.jpg\",\"network\":\"National Geographic\"\
+        ,\"overview\":\"Shocking wilderness unfolds as state of art forensics and\
+        \ photography reveal the unknown acts of our animal kingdom. Get up close\
+        \ with predators and see how their instincts make them the fittest when it\
+        \ comes to their survival.\",\"poster\":null,\"seriesName\":\"Predator CSI\"\
+        ,\"slug\":\"predator-csi\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\"\
+        :null,\"firstAired\":\"2019-5-1\",\"id\":362856,\"image\":\"/banners/posters/5ccac40deb2eb.jpg\"\
+        ,\"network\":\"BBC Two\",\"overview\":\"Multiple cameras follow serious crime\
+        \ investigations in real time, revealing the crucial role cutting-edge forensic\
+        \ science now plays in bringing criminals to justice.\",\"poster\":null,\"\
+        seriesName\":\"Forensics: The Real CSI\",\"slug\":\"forensics-the-real-csi\"\
+        ,\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":null,\"firstAired\"\
+        :\"2004-1-5\",\"id\":143501,\"image\":\"/banners/posters/143501-1.jpg\",\"\
+        network\":\"TVBS Entertainment Channel\",\"poster\":null,\"seriesName\":\"\
+        Variety Show of Mr. Con \\u0026 Ms. Csi\",\"slug\":\"variety-show-of-mr-con-and-ms-csi\"\
+        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"2005-8-17\"\
+        ,\"id\":262278,\"image\":\"/banners/posters/262278-2.jpg\",\"network\":\"\
+        BBC One\",\"overview\":\"David Attenborough narrates a murder mystery series\
+        \ with a twist - forensic science techniques are used to find out who or what\
+        \ killed an animal.\",\"poster\":null,\"seriesName\":\"Animal Crime Scene\"\
+        ,\"slug\":\"animal-crime-scene\",\"status\":\"Ended\"},{\"aliases\":[],\"\
+        banner\":null,\"firstAired\":\"2015-10-1\",\"id\":307245,\"image\":\"/banners/posters/307245-1.jpg\"\
+        ,\"network\":\"Disney Channel\",\"overview\":\"As far back as anyone can remember,\
+        \ Starlings have granted wishes for Earthlings. But when an evil force suddenly\
+        \ threatens Starland, twelve Star-Charmed girls are sent on the most magical\
+        \ adventures of their lives\u2026as THE STAR DARLINGS!\\r\\n\\r\\nOur Starlings\
+        \ believe in making wishes from the heart, dreaming big and embracing your\
+        \ inner star, because anything is possible! Wish upon your Star! \",\"poster\"\
+        :null,\"seriesName\":\"Star Darlings\",\"slug\":\"star-darlings\",\"status\"\
+        :\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"2008-01-07\"\
+        ,\"id\":81938,\"image\":\"/banners/posters/81938-1.jpg\",\"network\":null,\"\
+        overview\":\"In three hard-hitting programmes, Hugh Fearnley-Whittingstall\
+        \ explores the horrors of intensive chicken farming. The journey takes him\
+        \ far from the cosy lifestyle of River Cottage and into the harrowing conditions\
+        \ of running his own modern poultry production line.\",\"poster\":null,\"\
+        seriesName\":\"Hugh's Chicken Run\",\"slug\":\"hughs-chicken-run\",\"status\"\
+        :\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"2008-1-10\",\"\
+        id\":85236,\"image\":\"/banners/posters/85236-1.jpg\",\"network\":\"Five\"\
+        ,\"overview\":\"Robert Llewellyn presents a series examining the feats of\
+        \ science and engineering behind everyday life.\",\"poster\":null,\"seriesName\"\
+        :\"How Do They Do It? (UK)\",\"slug\":\"how-do-they-do-it-uk\",\"status\"\
+        :\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"2004-6-28\",\"\
+        id\":174241,\"image\":\"/banners/posters/174241-1.jpg\",\"network\":\"TF1\"\
+        ,\"poster\":null,\"seriesName\":\"Zodiac (2004)\",\"slug\":\"zodiac-2004\"\
+        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/17291-g.jpg\"\
+        ,\"firstAired\":\"2003-11-7\",\"id\":72244,\"image\":\"/banners/posters/72244-1.jpg\"\
+        ,\"network\":\"Cartoon Network\",\"overview\":\"Star Wars: Clone Wars picks\
+        \ up where the theatrical feature Star Wars: Episode II: Attack of the Clones\
+        \ left off as an epic civil war pits the Republic against the separatist movement\
+        \ led by the Dark Side of the Force's mastermind Darth Sidious.\",\"poster\"\
+        :\"/banners/posters/72244-1.jpg\",\"seriesName\":\"Star Wars: Clone Wars\"\
+        ,\"slug\":\"star-wars-clone-wars\",\"status\":\"Ended\"},{\"aliases\":[],\"\
+        banner\":\"/banners/graphical/311810-g2.jpg\",\"firstAired\":\"2016-5-16\"\
+        ,\"id\":311810,\"image\":\"/banners/posters/311810-5.jpg\",\"network\":\"\
+        FOX\",\"overview\":\"This musical drama revolves around Star, her sister Simone\
+        \ and their friend Alex, three talented young singers who navigate the music\
+        \ business on their road to success in Atlanta, where Star and Simone's long\
+        \ lost godmother Carlotta lives. They'll soon learn that success is not only\
+        \ about the music, but also drama, sacrifice and pain.\",\"poster\":\"/banners/posters/311810-5.jpg\"\
+        ,\"seriesName\":\"Star\",\"slug\":\"star\",\"status\":\"Ended\"},{\"aliases\"\
+        :[],\"banner\":null,\"firstAired\":\"2012-3-31\",\"id\":257504,\"image\":\"\
+        /banners/images/missing/series.jpg\",\"network\":\"National Geographic\",\"\
+        overview\":\"Ghostly sounds in a haunted wood in Wales, silver stolen in a\
+        \ canyon in California and pets disappearing in Vermont \u2013 are the suspects\
+        \ human or could animals be involved? Just as smart-phone cameras have revolutionised\
+        \ the way news footage is captured around the globe, so the increasing sophistication\
+        \ of camera trapping technology has led to a surge in the recording of unusual\
+        \ animal behaviours. Big cats, small rats, freaky dogs and scary hogs are\
+        \ all under investigation, but who has committed the crimes and why?\",\"\
+        poster\":null,\"seriesName\":\"Wild Scene Investigation\",\"slug\":\"wild-scene-investigation\"\
+        ,\"status\":\"Ended\"},{\"aliases\":[\"Ester vs. M\xF6rkrets Makter\"],\"\
+        banner\":\"/banners/graphical/282994-g.jpg\",\"firstAired\":\"2015-1-18\"\
+        ,\"id\":282994,\"image\":\"/banners/posters/282994-2.jpg\",\"network\":\"\
+        Disney Channel\",\"overview\":\"After having skirmished with a number of dangerous\
+        \ monsters, Star Butterfly arrives on Earth to live with the Diaz family.\
+        \ However, rather than living a normal life, Star continues on having to battle\
+        \ villains both throughout the universe and in their high school, although\
+        \ if only to protect her extremely powerful wand, an object which she is still\
+        \ confused with.\",\"poster\":\"/banners/posters/282994-2.jpg\",\"seriesName\"\
+        :\"Star vs. the Forces of Evil\",\"slug\":\"star-vs-the-forces-of-evil\",\"\
+        status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/5b9bf0636b205.jpg\"\
+        ,\"firstAired\":\"1983-4-4\",\"id\":131361,\"image\":\"/banners/posters/5cdc205cd5a30.jpg\"\
+        ,\"network\":\"NCRV\",\"overview\":\"Mrs. Pepper Pot always wears a golden\
+        \ spoon around her neck. She lives with her husband, a painter, in a small\
+        \ village. Mrs. Pepper can quickly shrink her body as small as the spoon around\
+        \ her neck! When she becomes small, she can communicate with animals and enjoy\
+        \ wonderful adventures in the woods.\",\"poster\":\"/banners/posters/5cdc205cd5a30.jpg\"\
+        ,\"seriesName\":\"Mrs. Pepperpot\",\"slug\":\"mrs-pepperpot\",\"status\":\"\
+        Ended\"},{\"aliases\":[\"Farscape - Verschollen im All\",\"Farscape: The Peacekeeper\
+        \ Wars\"],\"banner\":\"/banners/graphical/70522-g.jpg\",\"firstAired\":\"\
+        1999-3-19\",\"id\":70522,\"image\":\"/banners/posters/70522-5.jpg\",\"network\"\
+        :\"Syfy\",\"overview\":\"Astronaut John Crichton attempts to use the Earth's\
+        \ atmosphere to propel his ship, Farscape 1, at great speeds across the solar\
+        \ system. He went much further though and was sucked down a wormhole to a\
+        \ distant part of the galaxy and into the middle of a battle. He is rescued\
+        \ by a group of escaping prisoners and taken aboard their living ship. As\
+        \ the years went by, Crichton has made enemies, powerful and dangerous enemies.\
+        \ On his journey to find a way back home, he freed other captives who became\
+        \ part of the crew on Moya.\",\"poster\":\"/banners/posters/70522-5.jpg\"\
+        ,\"seriesName\":\"Farscape\",\"slug\":\"farscape\",\"status\":\"Ended\"},{\"\
+        aliases\":[\"Star Crossed\",\"\u041A\u0438\u0441\u043B\u043E\u0440\u043E\u0434\
+        \"],\"banner\":\"/banners/graphical/269604-g.jpg\",\"firstAired\":\"2014-2-17\"\
+        ,\"id\":269604,\"image\":\"/banners/posters/269604-3.jpg\",\"network\":\"\
+        The CW\",\"overview\":\"Passion and politics threaten the peace and an epic\
+        \ romance ignites between a human girl and an alien boy when he and eight\
+        \ others of his kind (The Orion 9) are integrated into a suburban high school\
+        \ 10 years after they and hundreds of others landed on Earth and were immediately\
+        \ consigned to an internment camp where they\u2019ve been imprisoned ever\
+        \ since.\",\"poster\":\"/banners/posters/269604-3.jpg\",\"seriesName\":\"\
+        Star-Crossed\",\"slug\":\"star-crossed\",\"status\":\"Ended\"},{\"aliases\"\
+        :[\"\u0417\u0432\u0435\u0437\u0434\u043D\u044B\u0439 \u043A\u0440\u0435\u0439\
+        \u0441\u0435\u0440 \",\"\u592A\u7A7A\u5821\u58D8\u5361\u62C9\u72C4\u52A0\"\
+        ,\"Battlestar Galactica: The Resistance\",\"Battlestar Galactica: The Miniseries\"\
+        ,\"Battlestar Galactica: Razor\",\"Battlestar Galactica: Face of the Enemy\"\
+        ,\"Battlestar Galactica: The Miniseries (1)\",\"Battlestar Galactica: Razor\
+        \ Minisode\"],\"banner\":\"/banners/graphical/73545-g11.jpg\",\"firstAired\"\
+        :\"2003-11-26\",\"id\":73545,\"image\":\"/banners/posters/73545-2.jpg\",\"\
+        network\":\"Syfy\",\"overview\":\"In a distant part of the universe, a civilization\
+        \ of humans live on planets known as the Twelve Colonies. In the past, the\
+        \ Colonies have been at war with a cybernetic race known as the Cylons. 40\
+        \ years after the first war the Cylons launch a devastating attack on the\
+        \ Colonies. The only military ship that survived the attack takes up the task\
+        \ of leading a small fugitive fleet of survivors into space in search of a\
+        \ fabled refuge known as Earth.\",\"poster\":\"/banners/posters/73545-2.jpg\"\
+        ,\"seriesName\":\"Battlestar Galactica (2003)\",\"slug\":\"battlestar-galactica-2003\"\
+        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/325720-g.jpg\"\
+        ,\"firstAired\":\"2017-9-7\",\"id\":325720,\"image\":\"/banners/posters/325720-1.jpg\"\
+        ,\"network\":\"Sky Atlantic (UK)\",\"overview\":\"A brand-new oil refinery\
+        \ is bringing more to the remote Canadian mountain town Little Big Bear than\
+        \ just new workers and new money. Along with them, this once-idyllic community\
+        \ begins to see an incursion of drugs, prostitution, and organized crime.\
+        \ \\r\\nIn the midst of this, the new police chief, Jim Worth, has just arrived\
+        \ from London with his family looking for a more peaceful setting to help\
+        \ him stay on the wagon. Instead, a deliberate, violent act tears the family\
+        \ apart, setting Jim's sights on whiskey and revenge. \",\"poster\":\"/banners/posters/325720-1.jpg\"\
+        ,\"seriesName\":\"Tin Star\",\"slug\":\"tin-star\",\"status\":\"Continuing\"\
+        },{\"aliases\":[\"Der gestiefelte Kater - Abenteuer in San Lorenzo\"],\"banner\"\
+        :\"/banners/graphical/290174-g.jpg\",\"firstAired\":\"2015-1-16\",\"id\":290174,\"\
+        image\":\"/banners/posters/290174-2.jpg\",\"network\":\"Netflix\",\"overview\"\
+        :\"The world's greatest fighter, lover (and milk connoisseur) springs to action\
+        \ with mystical, comical tales that take him to exotic locations filled with\
+        \ unforgettable characters.\",\"poster\":\"/banners/posters/290174-2.jpg\"\
+        ,\"seriesName\":\"The Adventures of Puss in Boots\",\"slug\":\"the-adventures-of-puss-in-boots\"\
+        ,\"status\":\"Ended\"},{\"aliases\":[\"Stargate SG1\",\"Stargate SG1\"],\"\
+        banner\":\"/banners/graphical/72449-g6.jpg\",\"firstAired\":\"1994-10-28\"\
+        ,\"id\":72449,\"image\":\"/banners/posters/72449-4.jpg\",\"network\":\"Syfy\"\
+        ,\"overview\":\"This sequel to the 1994 movie Stargate chronicles the further\
+        \ adventures of SGC (Stargate Command). It turned out that the Goa'uld Ra\
+        \ was only one of many alien System Lords who used the Stargates to conquer\
+        \ much of the universe. When Earth uncovers a working cartouche to decipher\
+        \ the coding system of their own Stargate, they find they can now travel anywhere.\
+        \ Earth's military sends out SG teams to explore new planets, find technology,\
+        \ and oppose the Goa'uld. Jack O'Neill and Daniel Jackson from the original\
+        \ movie are part of SG-1. They are joined by Sam Carter, a scientist, and\
+        \ Teal'c, a Jaffa who is convinced the Goa'uld are not gods.\",\"poster\"\
+        :\"/banners/posters/72449-4.jpg\",\"seriesName\":\"Stargate SG-1\",\"slug\"\
+        :\"stargate-sg-1\",\"status\":\"Ended\"},{\"aliases\":[\"\u661F\u9645\u4E4B\
+        \u95E8\uFF1A\u4E9A\u7279\u5170\u8482\u65AF\"],\"banner\":\"/banners/graphical/70851-g9.jpg\"\
+        ,\"firstAired\":\"2004-7-5\",\"id\":70851,\"image\":\"/banners/posters/70851-1.jpg\"\
+        ,\"network\":\"Syfy\",\"overview\":\"The story of Stargate Atlantis follows\
+        \ the cliffhanger episode on Stargate SG-1's seventh season finale \\\"Lost\
+        \ City\\\", where SG-1 found an outpost made by the race known as the Ancients\
+        \ in Antarctica. After the events of Stargate SG-1 season eight premiere \\\
+        \"New Order\\\", the Stargate Command sends an international team to investigate\
+        \ the outpost. Soon, Dr. Daniel Jackson discovers the location of the greatest\
+        \ city created by the Ancients, Atlantis. The story unfolds when the members\
+        \ of the expedition encounter the Wraith, the race that defeated the Ancients\
+        \ ten thousand years ago.\",\"poster\":\"/banners/posters/70851-1.jpg\",\"\
+        seriesName\":\"Stargate Atlantis\",\"slug\":\"stargate-atlantis\",\"status\"\
+        :\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/83237-g4.jpg\"\
+        ,\"firstAired\":\"2009-10-2\",\"id\":83237,\"image\":\"/banners/posters/83237-5.jpg\"\
+        ,\"network\":\"Syfy\",\"overview\":\"The previously unknown purpose of the\
+        \ ninth chevron is revealed and takes a group of refugees on a one-way trip\
+        \ to a millions of years old Ancient-built ship. Led by Dr. Nicolas Rush and\
+        \ Colonel Everett Young, the refugees are trapped on the ship, unable to change\
+        \ its programmed mission.\",\"poster\":\"/banners/posters/83237-5.jpg\",\"\
+        seriesName\":\"Stargate Universe\",\"slug\":\"stargate-universe\",\"status\"\
+        :\"Ended\"},{\"aliases\":[\"Tiku ja Taku pelastajat\",\"Chip \xE9s Dale -\
+        \ A Csipet Csapat\"],\"banner\":\"/banners/graphical/75477-g.jpg\",\"firstAired\"\
+        :\"1989-3-5\",\"id\":75477,\"image\":\"/banners/posters/75477-6.jpg\",\"network\"\
+        :\"Disney Channel\",\"overview\":\"Chip and Dale, two chipmunks with a nose\
+        \ for trouble, start a detective agency, Rescue Rangers, along with their\
+        \ new friends Gadget, Monterey Jack, and Zipper. The pint-sized detectives\
+        \ deal with crimes that are often \\\"too small\\\" for the police to handle,\
+        \ usually with other animals as their clients. The gang frequently finds itself\
+        \ going up against two particular arch villains: Mafia-style tabby cat Fat\
+        \ Cat and mad scientist Norton Nimnul (both voiced by Jim Cummings).\",\"\
+        poster\":\"/banners/posters/75477-6.jpg\",\"seriesName\":\"Chip 'n Dale Rescue\
+        \ Rangers\",\"slug\":\"chip-n-dale-rescue-rangers\",\"status\":\"Ended\"}]}"
     headers:
-      cache-control: ['private, max-age=300']
-      cf-ray: [292900dd39c1024b-CDG]
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-type: [application/json]
-      date: ['Tue, 12 Apr 2016 19:14:49 GMT']
-      server: [cloudflare-nginx]
-      vary: [Accept-Language]
-      x-powered-by: [Thundar!]
-      x-thetvdb-api-version: [2.0.0]
-    status: {code: 200, message: OK}
+      cache-control:
+      - private, max-age=86400
+      connection:
+      - keep-alive
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 09 May 2020 14:40:02 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Language
+      via:
+      - 1.1 d4ab4520827d99650a0d233539c37425.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - ANORi0OjMKLtni6Qyfv9cVEkINkSMBG-TnSmqYeedbm0Eqa9z0qCwA==
+      x-amz-cf-pop:
+      - ZRH50-C1
+      x-cache:
+      - Miss from cloudfront
+      x-powered-by:
+      - Thundar!
+      x-thetvdb-api-version:
+      - 3.0.0
+    status:
+      code: 200
+      message: OK
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Accept-Language: [en]
-      Authorization: [!!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0NjA1NzQ4ODgsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNDYwNDg4NDg4fQ.JriWj0TVXJwhs9VUSlie02e2TJ4aodZov4qewHCZndw2SSOC0ufgWclFYtqPylHQ-yoeQyKOg6urH7XYfUBL5e1l7EQg3xyDDSX56JrLrhpPWoXFVU4lBRBxNwXTY9Rq3CUYD7tnolCYPKKoxVCW0A_BpjLeARKLzPSFiOQ1-5iwOl5Z1eEQTgkkXYVnoj1GGZAHb-g-dLKp9rjBNAtjer-NBb4tg6I8hYlNyeaO9UtAzEu6PZB7PUnWkHbw77NpSCRS3T3QobvVevBgfJw8KExz5z_wVtJ7LfwrkYVpRyzur54dDAAVfW1nAGliUq8uwzYqkN_bHkS-1CEMilt_5A']
-      Connection: [keep-alive]
-      Content-Type: [application/json]
-      Cookie: [__cfduid=dff8455d043d625c41282d2cd77b7c93f1460488487]
-      User-Agent: [Subliminal/2.0]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en
+      Authorization:
+      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Subliminal/2.1
     method: GET
     uri: https://api.thetvdb.com/series/72546
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAA1ySTW/aQBCG7/yK0V7SSoGswSHUt+bjgNSPKKTpoeph4h3sacwa7YwhJMp/r7zY
-        pPT6vDtf77uvAwDjUNFk8DoAADDsTAYX4/N0eroHQoFJvuGKTAbmajHP4CrwimCRkyeY+w2JcoHK
-        tTddDVaMQmIy+BUBxMJOha7LFxR4oALFRPy7q31E7ym0s4qA65JzrM7iPsMimYz+rAtztNi83dck
-        nw5UUZt2srnxjlyPlxxEP3Og+HxsrR0mdminve5Jt3V4iideLv6j+xk9DI1X3ruRnvewIB/o6N7W
-        o/eLrwOu8PjQekNhw7TtbAUWQMijta59DexhW3JegpYEeYkBc6Ug0AhB3qiyL4bkCoJlHcgL56B1
-        XQloDfSMK/YUK2nDjnxOLZe62uxpjkIjgDvUkgJoiR5QntgXcLIta9d4z3oCH/g9Xl/AltWTCMmZ
-        NLKmXOXjKbS70/O6qgNJbH1S1tuuwaj3p0LRH2uHGgNI0qlNZzObJP2H4SDXuPu+/EkUQ1g03uHO
-        /CPfd54nNrMWbr8e4oirtcr9wzBJe8wr97jPTdWO0ws7G/fSC67HrHvx5tbaycxO0uQwyzk6yjuC
-        y53JwDdV1X8zVrrrJ89G6QDgbfD2FwAA//8DAA0inPJQAwAA
+      string: !!python/unicode '{"data":{"id":72546,"seriesId":"19","seriesName":"CSI:
+        Crime Scene Investigation","aliases":["CSI","CSI: Las Vegas"],"season":"15","poster":"posters/72546-5.jpg","banner":"graphical/19-g2.jpg","fanart":"fanart/original/72546-2.jpg","status":"Ended","firstAired":"2000-10-06","network":"CBS","networkId":"57","runtime":"45","language":"en","genre":["Crime","Drama"],"overview":"CSI
+        is a crime drama in which the characters use cutting-edge forensic tools to
+        examine the evidence to solve the case.  Rather than asking ''whodunnit''
+        (investigating witnesses/suspects), CSI explores the ''howdunnit''.","lastUpdated":1588878522,"airsDayOfWeek":"Sunday","airsTime":"10:00
+        PM","rating":"TV-14","imdbId":"tt0247082","zap2itId":"EP00380341","added":"2008-02-04
+        00:00:00","addedBy":1,"siteRating":8.4,"siteRatingCount":6457,"slug":"csi-crime-scene-investigation"}}'
     headers:
-      cache-control: ['private, max-age=300']
-      cf-ray: [292900e0e9f1024b-CDG]
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-type: [application/json]
-      date: ['Tue, 12 Apr 2016 19:14:49 GMT']
-      last-modified: ['Tue, 12 Apr 2016 19:06:51 GMT']
-      server: [cloudflare-nginx]
-      vary: [Accept-Language]
-      x-powered-by: [Thundar!]
-      x-thetvdb-api-version: [2.0.0]
-    status: {code: 200, message: OK}
+      age:
+      - '67756'
+      cache-control:
+      - private, max-age=86400
+      connection:
+      - keep-alive
+      content-length:
+      - '852'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Fri, 08 May 2020 19:50:46 GMT
+      last-modified:
+      - Thu, 07 May 2020 19:08:42 GMT
+      vary:
+      - Accept-Language
+      via:
+      - 1.1 d4ab4520827d99650a0d233539c37425.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - K7ceHTAl8i1inraoAuKQFbl8zfPfQ3xKpveqszPp7LVNZboMiKGRFg==
+      x-amz-cf-pop:
+      - ZRH50-C1
+      x-cache:
+      - Hit from cloudfront
+      x-powered-by:
+      - Thundar!
+      x-thetvdb-api-version:
+      - 3.0.0
+    status:
+      code: 200
+      message: OK
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Accept-Language: [en]
-      Authorization: [!!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0NjA1NzQ4ODgsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNDYwNDg4NDg4fQ.JriWj0TVXJwhs9VUSlie02e2TJ4aodZov4qewHCZndw2SSOC0ufgWclFYtqPylHQ-yoeQyKOg6urH7XYfUBL5e1l7EQg3xyDDSX56JrLrhpPWoXFVU4lBRBxNwXTY9Rq3CUYD7tnolCYPKKoxVCW0A_BpjLeARKLzPSFiOQ1-5iwOl5Z1eEQTgkkXYVnoj1GGZAHb-g-dLKp9rjBNAtjer-NBb4tg6I8hYlNyeaO9UtAzEu6PZB7PUnWkHbw77NpSCRS3T3QobvVevBgfJw8KExz5z_wVtJ7LfwrkYVpRyzur54dDAAVfW1nAGliUq8uwzYqkN_bHkS-1CEMilt_5A']
-      Connection: [keep-alive]
-      Content-Type: [application/json]
-      Cookie: [__cfduid=dff8455d043d625c41282d2cd77b7c93f1460488487]
-      User-Agent: [Subliminal/2.0]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en
+      Authorization:
+      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Subliminal/2.1
     method: GET
     uri: https://api.thetvdb.com/series/72546/episodes/query?airedEpisode=18&airedSeason=15&page=1
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAA2yQQU/jMBCF7/kVTz4XlFCCIDe0i1gOy6XcEIdpPWlGdWxkOwkI9b8jp1FKRS+W
-        5n1v3oznKwMUe+98UBVsZ8wiKUbsLglfGQCoWnyIqkKxONSGTkrLH/FHN6DePfeTkgH7MVNTJFXh
-        dXQcggFF6+BMF/m5a9fsVYXlslzMUDzrh3cJTh8Nxe0pXzEFZxMoz4Gnv6pCeZff5Ncz1v2v1OPy
-        Bz6nngCeuqhlVUG9NIwHq/GY6tk0Xus+bZA8V3lRXuRXF0V5dEgiZZFfL8u7WTRktx1teT77uYls
-        5xRAuZ59LzxMZAL7OfInT7v+WT2hsxJR04YDYsOoxZJBaNyg3WAxSGxG/VG2+Ed+7Tx2Ygx7DI0L
-        jNZF6TmA/NRrPuG5ZzKsL/GfyQ6NGF7gWTY7rKLbcUBL6SVo3kgQZxEbihjEGFBd8yaOI9lG8YzI
-        1KJ1vdgtaucH8vry8LV9Brxl+28AAAD//wMAE8Geh7QCAAA=
+        H4sIAAAAAAAAA3RTUW/iMAz+K1GegbW0ZaNvwKZtOjFNx233MO3BNKbNkSYoSemhif9+Di27cdK9
+        VPZnO/5sf/3gSuqt4/kH30jrPM/jAVfQGxp/k6EbpQZ8Z3Hf2ccBF+CB528fXAqeZ3GUJtl0wEFa
+        FCsEZzSVZxfA4y0lTqNJlPbw3U46I/CpqddoKf1mwLGHoEae8x8Vsjst2H1wBx29Waik2DiKs2E0
+        HsYZRcoGnV95sDTGG5+DtQc2N863sthSeG5BC6PZ84jNUSlC7qws2HdDfb0j9xv4yh40WxYLY+uu
+        aAm2YK+gdWdvyVYKD703fIZGsXvjHCoAy99pI8Ss8KbjMFNYsFUty8qHWGulxy6yqKx03uwqtIyY
+        rk1zqjZ7tHuJbT/2YvXIGi0920CBjnmCNlKDYq4yrTCtZq301Qm/lyV7CA9ZtpVE0bK2Mg5Zbbzc
+        Uy3YvlYdGF0QQaEYsSWCbiupcMCeaGC28mZLyTWELzCBhXSSduYr8NRLKQabDc13aona07DMI9TU
+        Zi91yTbGtmDFiAfx6LKBEoOkLg+KYZlfJiX/GHRlRFN46ragVIIpKYz5YlXnBDW+7Ehx4fIxKW08
+        TbIbkovYi1vpiiDBkEfuWXudYgn4R2Sf+KKCnf+LwNoZ1fjPvCTJguAU6p5594y7uh5n6eSqF/zo
+        164MZNFKdI/E4hS9IDw/nP4jErybbajhJcEAz5F2h//De/7ngKzFOjTi3qdxmk2zMfUvjPZ0ku/g
+        6RJBQK/DOCXcVzTNrPGVsScSnS/E+QeaDuN4GCcsTvJxnCc355KfUviKUiZpdIYe8CTlnCeTgDmS
+        87nd9WjyFViYRlNiEhEq3ZLUQeSj4/vxDwAAAP//AwDjA3UJaQQAAA==
     headers:
-      cache-control: ['private, max-age=300']
-      cf-ray: [292900e1e9fe024b-CDG]
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-type: [application/json]
-      date: ['Tue, 12 Apr 2016 19:14:49 GMT']
-      server: [cloudflare-nginx]
-      vary: [Accept-Language]
-      x-powered-by: [Thundar!]
-      x-thetvdb-api-version: [2.0.0]
-    status: {code: 200, message: OK}
+      age:
+      - '26836'
+      cache-control:
+      - private, max-age=86400
+      connection:
+      - keep-alive
+      content-encoding:
+      - gzip
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 09 May 2020 07:12:46 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding,Accept-Language
+      via:
+      - 1.1 d4ab4520827d99650a0d233539c37425.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - iPYmcKpZAzb2zNHRsqQzNTSPiEeJFJ6lhltcJq8NGALVTHDbLxmFuw==
+      x-amz-cf-pop:
+      - ZRH50-C1
+      x-cache:
+      - Hit from cloudfront
+      x-powered-by:
+      - Thundar!
+      x-thetvdb-api-version:
+      - 3.0.0
+    status:
+      code: 200
+      message: OK
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Accept-Language: [en]
-      Authorization: [!!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0NjA1NzQ4ODgsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNDYwNDg4NDg4fQ.JriWj0TVXJwhs9VUSlie02e2TJ4aodZov4qewHCZndw2SSOC0ufgWclFYtqPylHQ-yoeQyKOg6urH7XYfUBL5e1l7EQg3xyDDSX56JrLrhpPWoXFVU4lBRBxNwXTY9Rq3CUYD7tnolCYPKKoxVCW0A_BpjLeARKLzPSFiOQ1-5iwOl5Z1eEQTgkkXYVnoj1GGZAHb-g-dLKp9rjBNAtjer-NBb4tg6I8hYlNyeaO9UtAzEu6PZB7PUnWkHbw77NpSCRS3T3QobvVevBgfJw8KExz5z_wVtJ7LfwrkYVpRyzur54dDAAVfW1nAGliUq8uwzYqkN_bHkS-1CEMilt_5A']
-      Connection: [keep-alive]
-      Content-Type: [application/json]
-      Cookie: [__cfduid=dff8455d043d625c41282d2cd77b7c93f1460488487]
-      User-Agent: [Subliminal/2.0]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en
+      Authorization:
+      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Subliminal/2.1
     method: GET
     uri: https://api.thetvdb.com/episodes/5104359
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAA3xUy27iQBC88xUtnwMBPxLwDUiURKtEUdhkD6s9NJ62Pct4Bs20baEo/x7ZMWDC
-        ai9Iruouu0pdvA8APIGMXgzvAwAATwovhmgyDoNodvEFobQkVoTOaC+GSXQOP9x4MehSqT51u5XO
-        CHoqizXZZnHasdQRWJAXg/czJ7jVAu6a524kldbxvFFpJvzxJBqO/eEk2vNZSY5XjNZ5MfxuMQDv
-        1soEXsyaLLtuEsBboLU7WBjHtUw2R/wR7QbeUCna9YYtamE0PMOClDriP5Bzu9PwmCyNLb7rJPCG
-        Wp9KD5+xVHBnnCOFaL2W+9N9v5CWEjZNLN5cUQKrQmY57+3VVjKdelvmVjo225wsLNCuTflN0lRk
-        K0n1PtLl6gFKLRlSTMgB5wSp1KjA5aYWptZQS85b/E5mcN9oWthIpchCnRtHUBiWFTlA2+2qHViq
-        CBWJETwS6jqXii7gSSYbWLHZkIMCm18EQYl00mjgHBlqqRRgmlLC7StJs7QETFhAYSqpM0iNrdGK
-        0T4EhTorMaPDbZ6fDvUy7/sn/ZXNRye1tUaUCUujl0a0m/uXNGG8WtWHFDp+3Qrk9vgmYRD5syCa
-        7q9XVOJGuqTtyWFHVMeC9HogqrMWnLLLHLf8Hce1M6rk404QRIdeKNJ781/K7vLaj8Kry66zo7/b
-        7GCOrCT30HxpO3NucLFr5GfXV+H4WF03T5nsv/w05IJSY+n/bGf6lOa8LNbzkvP27IMwugrCE0qI
-        ft3DoT+D8SwO/Diaev3BX1Jw3gyG4/EJcU9tiRoJ//BXIQuxbiPwmMNJGM0i/5CPZHpBljprEhpN
-        BwAfg49PAAAA//8DAIMvcakVBQAA
+        H4sIAAAAAAAAA3RTwW7iMBD9FctnoAkhtOQGtGqrFVVVtt3Dag9DPBAvxkb2hAhV/fcdh9AtK+0l
+        yrx5k/fGfnmXCghk8S61kkWeJqMsn/QkaI9qiRCclUWaXwCPt0ycJONk1MF3ex2cwqd6t0LP9Jue
+        xA6CHcpCfq9Q3Fkl7mPZk2vtA03jJPeGSZr3k2E/zbmzqTHQksAHWfyUM/D+KGYuUKPLLbdnHqxy
+        VjwPxAyNYeTO61K8ONalwOU3oMofrViUc+d3p6EF+FK8gbWn9y2/G4PHruo/Q23EvQsBDYCXv3pS
+        sbOS3MnD1GAplju9qSj2Gq8JT5155XUgt6/QC3a6cnU77Q7oDxqbbu358lHUVpNYQ4lBEENrbcGI
+        ULlGucaKRlPV4vd6Ix7ih7zYarboRVO5gGLnSB94Fnw3a47C4wHBoBqIBYJtKm2wJ554YbEkt2Xy
+        DuIThMJSB81nRhUQaxkjYL3m/VpJtMTLCkLYscxB241YO9+AVwM+HwN2U8MGYzouLxTjYX7ZlOuP
+        ntx7p+qSWG3OVIaZFNd89eZUGAj0uufAxZtPOWnDSZbfcFzUQd3qUMYIRh6X5+zZ2pgW+Cdkn/i8
+        gj39RWAVnKnpk5dleQycQds5P30mXF0P89H4qgv84Pd+E82i1xge2UXbvTA8O7LlNvBhumbBS4MR
+        niGfHf4P7/yfG3qnVlFIEo3SUT7Jh6xfOkt8JS9AfBMxQG/9dMQ4VbzNtKbK+dbEqVbq/ANN+mna
+        TzORZsUwLbKb88gPrahiyniUnKEHbKNcyGwcscBxPstdD8ZfgbmrLROzhFEdFpwONp98fPwBAAD/
+        /wMA+oz46jIEAAA=
     headers:
-      cache-control: ['private, max-age=300']
-      cf-ray: [292900e2da11024b-CDG]
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-type: [application/json]
-      date: ['Tue, 12 Apr 2016 19:14:49 GMT']
-      last-modified: ['Fri, 26 Jun 2015 04:39:48 GMT']
-      server: [cloudflare-nginx]
-      vary: [Accept-Language]
-      x-powered-by: [Thundar!]
-      x-thetvdb-api-version: [2.0.0]
-    status: {code: 200, message: OK}
+      age:
+      - '9163'
+      cache-control:
+      - private, max-age=86400
+      connection:
+      - keep-alive
+      content-encoding:
+      - gzip
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 09 May 2020 12:07:19 GMT
+      last-modified:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding,Accept-Language
+      via:
+      - 1.1 d4ab4520827d99650a0d233539c37425.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - Np1ZX8nRwAhX9zFgwQSfCDuef8w8HoL0FxH-WUdtWtcx7O_6ZlmIEA==
+      x-amz-cf-pop:
+      - ZRH50-C1
+      x-cache:
+      - Hit from cloudfront
+      x-powered-by:
+      - Thundar!
+      x-thetvdb-api-version:
+      - 3.0.0
+    status:
+      code: 200
+      message: OK
 version: 1

@@ -2,374 +2,538 @@ interactions:
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Accept-Language: [en]
-      Authorization: [!!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0NjA0OTYwMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNDYwNDA5NjE0fQ.heRtvsk6Hz-XcgpcFdSnjwXYsyq3LqH3efNxHPZOhrDjhOb3sEH4xb1hVzJKV_5s8-klM2BoYROG7Gj4zEmM5ff4hgihajs3t-pdbz_vRMTjv2H29X6Ag1eT5aT1whVXzkH99wfH1bintNxGfFBkvy5KICaLBsnB-0tjFH5WriQ0h0XC2ye21qiyC83CzXcYQpMnIabSHrfsKO8wipjkRlmMkdQhrz5YwLb43lCOmS9TxJ6YH6MvL8LslhPm87pWmBJm2Tak752uHsRLZeHufGl-pjuxyPZdCGSO5DFXqOg_lSJDE1Vu6HjJlJH19yOcB0bgyYWnFQc-YW7pt1M_CQ']
-      Connection: [keep-alive]
-      Content-Type: [application/json]
-      Cookie: [__cfduid=da5fbb51392caf8691545fb0698a565d81460409614]
-      User-Agent: [Subliminal/2.0]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en
+      Authorization:
+      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Subliminal/2.1
     method: GET
     uri: https://api.thetvdb.com/search/series?name=the+100
   response:
     body:
-      string: !!binary |
-        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
-        R8WCJ/LqfX4BAAD//wMAim94SYKOAAA=
+      string: "{\"data\":[{\"aliases\":[],\"banner\":null,\"firstAired\":\"1991-3-31\"\
+        ,\"id\":76615,\"image\":\"/banners/posters/76615-1.jpg\",\"network\":\"NBC\"\
+        ,\"overview\":\"This action adventure series was a joint effort from Disney\
+        \ and Steven J. Cannell productions.The story goes that Black Jack Savage\
+        \ a 17th century pirate was hung in the courtyard of his castle for his treacherous\
+        \ deeds,in order for him to escape hell he must save a life for every one\
+        \ he's taken.Now in modern day NY surfaces another Pirate of sorts \\\"Barry\
+        \ Tarberry\\\", hes been bad, swindiling the IRS out of funds and they want\
+        \ him, now to escape his purgatory Barry flies out of the country to a little\
+        \ island that will grant him immunity called San Pietro.He Buys an estate,sight\
+        \ unseen that just happened to belong to Black Jack Savage.The ghost wants\
+        \ to strike a deal with Barry,for every life saved Barry can have half credit\
+        \ toward his own impending fate- the agreement sealed the 2 pirates start\
+        \ trying to save lives on this small carribean island.\",\"poster\":null,\"\
+        seriesName\":\"The 100 Lives of Black Jack Savage\",\"slug\":\"the-100-lives-of-black-jack-savage\"\
+        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2018-2-12\"\
+        ,\"id\":363890,\"image\":\"/banners/images/missing/series.jpg\",\"network\"\
+        :\"V LIVE\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\"\
+        :\"The 100 (2018)\",\"slug\":\"the-100-the-boyz\",\"status\":\"Ended\"},{\"\
+        aliases\":[],\"banner\":\"/banners/graphical/5cb232ca82c4d.jpg\",\"firstAired\"\
+        :\"2018-12-20\",\"id\":360144,\"image\":\"/banners/posters/5cb232e618987.jpg\"\
+        ,\"network\":\"YouTube\",\"overview\":\"Kelsey Impicciche plays the Sims 4\
+        \ and begins the very long, and very popular 100-baby challenge!\",\"poster\"\
+        :\"/banners/posters/5cb232e618987.jpg\",\"seriesName\":\"The 100 Baby Challenge\"\
+        ,\"slug\":\"100-baby-challenge\",\"status\":\"Continuing\"},{\"aliases\":[],\"\
+        banner\":null,\"firstAired\":null,\"id\":351517,\"image\":\"/banners/images/missing/series.jpg\"\
+        ,\"network\":null,\"poster\":null,\"seriesName\":\"The 100 Funniest Moments\
+        \ of the 20th Century \",\"slug\":\"the-100-funniest-moments-of-the-20th-century\"\
+        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/268592-g2.jpg\"\
+        ,\"firstAired\":\"2014-3-19\",\"id\":268592,\"image\":\"/banners/posters/268592-2.jpg\"\
+        ,\"network\":\"The CW\",\"overview\":\"Set ninety-seven years after a nuclear\
+        \ war has destroyed civilization, when a spaceship housing humanity's lone\
+        \ survivors sends one hundred juvenile delinquents back to Earth, in hopes\
+        \ of possibly re-populating the planet.\\r\\n\",\"poster\":\"/banners/posters/268592-2.jpg\"\
+        ,\"seriesName\":\"The 100\",\"slug\":\"the-100\",\"status\":\"Continuing\"\
+        },{\"aliases\":[],\"banner\":null,\"firstAired\":null,\"id\":215101,\"image\"\
+        :\"/banners/posters/215101-1.jpg\",\"network\":null,\"poster\":null,\"seriesName\"\
+        :\"The 100th Bride\",\"slug\":\"the-100th-bride\",\"status\":\"Ended\"},{\"\
+        aliases\":[],\"banner\":null,\"firstAired\":\"2004-10-27\",\"id\":201711,\"\
+        image\":\"/banners/posters/201711-1.jpg\",\"network\":\"Bravo\",\"overview\"\
+        :\"Film-makers, performers, genre authorities and selected high-profile fans\
+        \ count down the most chilling moments in cinematic history. Not just from\
+        \ horror films, but from such thrillers as Wait Until Dark (1967) and Jaws\
+        \ (1975) and such science-fiction films as _Terminator, The (1984)_ and Invasion\
+        \ of the Body Snatchers (1956). This entertaining and authoritative special,\
+        \ originally telecast for 5 nights leading up to Halloween 2004, has gone\
+        \ beyond seasonal programming to become one of the Bravo cable network's most\
+        \ popular and oft-encored specials.\",\"poster\":null,\"seriesName\":\"The\
+        \ 100 Scariest Movie Moments\",\"slug\":\"the-100-scariest-movie-moments\"\
+        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"2019-9-23\"\
+        ,\"id\":375630,\"image\":\"/banners/series/375630/posters/62049736.jpg\",\"\
+        network\":\"BBC\",\"overview\":\"The new A1 class steam engine Tornado tries\
+        \ to achieve 100mph on the main line. The secret speed attempt will be made\
+        \ in the dead of night. If it tops the ton it will be the first time in 50\
+        \ years that steam has gone this fast. Tornado was built over two decades\
+        \ and financed by enthusiasts who want to show steam has a viable future on\
+        \ Britain's railways.\",\"poster\":null,\"seriesName\":\"Tornado: The 100\
+        \ MPH Steam Engine\",\"slug\":\"tornado-the-100-mph-steam-engine\",\"status\"\
+        :\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":null,\"id\":358341,\"\
+        image\":\"/banners/images/missing/series.jpg\",\"network\":\"V LIVE\",\"poster\"\
+        :null,\"seriesName\":\"Imfact the 100\",\"slug\":\"imfact-the-100\",\"status\"\
+        :\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2018-2-12\",\"\
+        id\":356823,\"image\":\"/banners/posters/5c8537d7be6a6.jpg\",\"network\":\"\
+        V LIVE\",\"poster\":\"/banners/posters/5c8537d7be6a6.jpg\",\"seriesName\"\
+        :\"The Boyz (The 100)\",\"slug\":\"the-boyz-the-100\",\"status\":\"Ended\"\
+        },{\"aliases\":[],\"banner\":null,\"firstAired\":\"2018-4-30\",\"id\":347057,\"\
+        image\":\"/banners/posters/5aec35fac15a7.jpg\",\"network\":\"V LIVE\",\"overview\"\
+        :\"The 100 is the new reality featuring the idol group Fromis_9\",\"poster\"\
+        :null,\"seriesName\":\"Fromis 9 - The 100\",\"slug\":\"347057\",\"status\"\
+        :\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"2018-10-7\",\"\
+        id\":353731,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"\
+        Seven Network\",\"overview\":\"It's time to get up and sing with Julia Zemiro!\\\
+        r\\n\\r\\nJulia has a new home on Seven as host of \\\"All Together Now\\\"\
+        \\r\\n\\r\\nThe multi-talented Julia Zemiro will get the whole of Australia\
+        \ singing when she presents \\\"All Together Now\\\".\\r\\n\\r\\nChannel Seven's\
+        \ brand new singing show sees a range of talented singers (solos and groups)\
+        \ perform in front of the biggest judging panel Australia has ever seen. The\
+        \ 100 will be made up of great singers and industry professionals with big\
+        \ voices and even bigger opinions.\\r\\n\\r\\nIf any of The 100 like what\
+        \ they hear, they can stand up, join in and sing along. The greater the number\
+        \ that join in, the higher the act's score.\\r\\n\\r\\nWho can get them ALL\
+        \ on their feet singing along? The urge to join in at home will be irresistible.\"\
+        ,\"poster\":null,\"seriesName\":\"All Together Now - The 100\",\"slug\":\"\
+        all-together-now-the-100\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\"\
+        :null,\"firstAired\":null,\"id\":369896,\"image\":\"/banners/images/missing/series.jpg\"\
+        ,\"network\":null,\"poster\":null,\"seriesName\":\"The100_fromis_9\",\"slug\"\
+        :\"the100fromis9\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"\
+        firstAired\":\"2018-2-12\",\"id\":346249,\"image\":\"/banners/posters/5aeabc2d3427e.jpg\"\
+        ,\"network\":\"V LIVE\",\"overview\":\"A new reality show that shows rookie\
+        \ group THE BOYZ as they prepare for a showcase in 100 hours. \",\"poster\"\
+        :null,\"seriesName\":\"THE100\",\"slug\":\"346249\",\"status\":\"Ended\"},{\"\
+        aliases\":[],\"banner\":null,\"firstAired\":\"2017-11-27\",\"id\":339364,\"\
+        image\":\"/banners/posters/339364-1.jpg\",\"network\":\"NBCSN\",\"overview\"\
+        :\"The NHL: 100 Years brings our history to life through rare footage, exclusive\
+        \ interviews and expert commentary,\\\" NHL Commissioner Gary Bettman said.\
+        \ \\\"For fans who lived through any of the eras covered, this groundbreaking\
+        \ documentary will refresh some vivid hockey memories. For those newer to\
+        \ our sport, or any sports fan or history buff, The NHL: 100 Years details\
+        \ an important historical record and sets the stage for the future of a great\
+        \ sport.\\\"\",\"poster\":null,\"seriesName\":\"The NHL: 100 Years\",\"slug\"\
+        :\"339364\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\"\
+        :\"2010-9-3\",\"id\":188471,\"image\":\"/banners/posters/188471-1.jpg\",\"\
+        network\":null,\"overview\":\"On Friday, Sept. 3, NFL Network debuts a new\
+        \ 10-episode series produced by NFL Films entitled, The Top 100: NFL\u2019\
+        s Greatest Players. The one-hour shows feature a countdown of the top 100\
+        \ players in history as determined by a blue-ribbon panel comprised of more\
+        \ than 100 NFL experts, historians and all-time great players and coaches.\
+        \ There will be 10 players unveiled in each episode. Each player is presented\
+        \ by a noteworthy individual in the world of sports and entertainment talking\
+        \ about what made that player one of the greats.\",\"poster\":null,\"seriesName\"\
+        :\"The Top 100: NFL's Greatest Players\",\"slug\":\"the-top-100-nfls-greatest-players\"\
+        ,\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":null,\"firstAired\"\
+        :\"2009-7-5\",\"id\":320290,\"image\":\"/banners/posters/320290-2.jpg\",\"\
+        network\":\"Spike TV\",\"overview\":\"For 16 years, the Ultimate Fighting\
+        \ Championship has been the gold standard in combat sports. Now you can re-live\
+        \ the 100 greatest fights in UFC history with this exciting countdown show.\
+        \ Featuring all the greats of the Octagon, from Royce Gracie and Chuck Liddell\
+        \ to Matt Hughes and Randy Couture, this five episode special has the most\
+        \ dramatic, explosive, and memorable battles of the UFC from 100 down to the\
+        \ greatest UFC fight of all time.\",\"poster\":null,\"seriesName\":\"UFC:\
+        \ The Ultimate 100 Greatest Fights\",\"slug\":\"ufc-the-ultimate-100-greatest-fights\"\
+        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":null,\"\
+        id\":292204,\"image\":\"/banners/posters/292204-2.jpg\",\"network\":\"Channel\
+        \ 4\",\"overview\":\"A ground-breaking and provocative fictional documentary,\
+        \ from the makers of Cyberbully, set in a fabricated future where UKIP have\
+        \ won the 2015 general election and Nigel Farage is Prime Minister\\r\\n\"\
+        ,\"poster\":null,\"seriesName\":\"UKIP The First 100 Days\",\"slug\":\"ukip-the-first-100-days\"\
+        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":null,\"\
+        id\":111851,\"image\":\"/banners/images/missing/series.jpg\",\"network\":null,\"\
+        overview\":\"Rocked the Nation counts down the 100 most seminal moments in\
+        \ NZ music in a six part series. Hosted by Karyn Hay, Rocked the Nation will\
+        \ take viewers on a ride through the top 100 moments in Kiwi music. Rocked\
+        \ the Nation features interviews with New Zealand's most influential musicians\
+        \ including Neil Finn.\",\"poster\":null,\"seriesName\":\"Rocked the Nation:\
+        \ 100 NZ Music Moments\",\"slug\":\"rocked-the-nation-100-nz-music-moments\"\
+        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"2016-10-19\"\
+        ,\"id\":329178,\"image\":\"/banners/posters/329178-1.jpg\",\"network\":\"\
+        Blackpills\",\"overview\":\"First 100 days of Donald Trump at the white house\"\
+        ,\"poster\":null,\"seriesName\":\"You Got Trumped: The First 100 Days\",\"\
+        slug\":\"you-got-trumped-the-first-100-days\",\"status\":\"Ended\"},{\"aliases\"\
+        :[],\"banner\":null,\"firstAired\":\"2012-1-1\",\"id\":364708,\"image\":\"\
+        /banners/images/missing/series.jpg\",\"network\":\"CCTV\",\"poster\":null,\"\
+        seriesName\":\"The Forbidden City 100\",\"slug\":\"the-forbidden-city-100\"\
+        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"2018-1-16\"\
+        ,\"id\":359345,\"image\":\"/banners/posters/5c5facf0e53c5.jpg\",\"network\"\
+        :\"YouTube\",\"poster\":null,\"seriesName\":\"100 Thieves: The Heist\",\"\
+        slug\":\"100-thieves-the-heist\",\"status\":\"Continuing\"},{\"aliases\":[],\"\
+        banner\":null,\"firstAired\":\"2001-3-14\",\"id\":186611,\"image\":\"/banners/images/missing/series.jpg\"\
+        ,\"network\":\"ABC (AU)\",\"overview\":\"\u2018100 Years: The Australian Story\u2019\
+        , ABC TV, traces the big themes in twentieth-century political history, from\
+        \ 1901 to 2001.\",\"poster\":null,\"seriesName\":\"100 Years: The Australian\
+        \ Story\",\"slug\":\"100-years-the-australian-story\",\"status\":\"Ended\"\
+        },{\"aliases\":[],\"banner\":null,\"firstAired\":\"2009-7-6\",\"id\":111841,\"\
+        image\":\"/banners/images/missing/series.jpg\",\"network\":null,\"poster\"\
+        :null,\"seriesName\":\"Rocked the Nation 2: 100 NZ Pop Culture Stories\",\"\
+        slug\":\"rocked-the-nation-2-100-nz-pop-culture-stories\",\"status\":\"Ended\"\
+        },{\"aliases\":[],\"banner\":null,\"firstAired\":\"1999-9-13\",\"id\":92111,\"\
+        image\":\"/banners/posters/92111-2.jpg\",\"network\":\"ZDF\",\"overview\"\
+        :\"100 Jahre \u2013 Der Countdown (English - 100 Years - The Countdown) is\
+        \ a German documentary television series produced from Zolcer TV. It was first\
+        \ broadcast in 1999 on ZDF. The host of the series is Guido Knopp. The documentaries\
+        \ are usually focusing on a single event in a given year. The total length\
+        \ of the series was about 15 \xBD hours. The series was first broadcast on\
+        \ the last 100 days of 1999, one episode after each of the daily news cast\
+        \ ZDF Heute-Journal. Since New Year's Eve 1999 the full length of \\\"100\
+        \ Jahre\\\" is broadcast several times a year by Phoenix.\",\"poster\":null,\"\
+        seriesName\":\"100 Years \u2013 The Countdown\",\"slug\":\"100-years-the-countdown\"\
+        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2014-1-1\"\
+        ,\"id\":376461,\"image\":\"/banners/series/376461/posters/62068248.jpg\",\"\
+        network\":\"#0\",\"overview\":\"100th Anniversary Commemorative Series! Prepare\
+        \ to embark on a historic journey starting in 1914 Germany through the end\
+        \ of the global conflict in 1918. Compelling and unique, this definitive 5-part\
+        \ series profiles the cause, the players, the trenches and the outcome of\
+        \ the war, year-by-year. Extensive and riveting, The Great War is the most\
+        \ complete and factual series about World War I. Go 'Over The Top' with The\
+        \ Doughboys!\",\"poster\":\"/banners/series/376461/posters/62068248.jpg\"\
+        ,\"seriesName\":\"The Great War 100th Anniversary Commemorative Series\",\"\
+        slug\":\"the-great-war-100th-anniversary-commemorative-series\",\"status\"\
+        :\"Upcoming\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"1964-9-22\"\
+        ,\"id\":364243,\"image\":\"/banners/posters/5ce0e09b6ff69.jpg\",\"network\"\
+        :\"CBS\",\"overview\":\"It began as a regional conflict and escalated into\
+        \ a war of Empires that covered the Earth.  World War I - The Complete Story,\
+        \ is a comprehensive look at \\\"The War to End All Wars.\\\"  Produced by\
+        \ CBS television in the early 1960s in anticipation of the 50th anniversary\
+        \ of the onset of World War I, this unflinching 26 episode series is more\
+        \ than just the history of this global conflict; it is also a photo album\
+        \ of the early twentieth century.  From the political intrigues that led nations\
+        \ to war to Armistice day more than four years later, you'll meet the men\
+        \ and machines that fought the war and witness every major battle and event\
+        \ of this global struggle.  No other collection offers such a complete overview\
+        \ of one of history's most destructive conflicts.\\r\\n\\r\\nSpecial Bonus\
+        \ Disc:\\r\\nCentury of Warfare: A History of the United States at War in\
+        \ the 20th Century, including WWII, Korea, Vietnam and Desert Storm.\\r\\\
+        n\\r\\nB\\u0026W and Color\",\"poster\":null,\"seriesName\":\"WWI: The Complete\
+        \ Story (100th Memorial Edition)\",\"slug\":\"wwi-the-complete-story\",\"\
+        status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"2014-03-04\"\
+        ,\"id\":367836,\"image\":\"/banners/posters/5d4c4c4a86664.jpg\",\"network\"\
+        :null,\"poster\":null,\"seriesName\":\"100 wonders of the world\",\"slug\"\
+        :\"100-wonders-of-the-world\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\"\
+        :null,\"firstAired\":\"2018-7-5\",\"id\":349498,\"image\":\"/banners/posters/5b301f20f32f9.jpg\"\
+        ,\"network\":\"AT-X\",\"overview\":\"The heroine is a normal girl, until one\
+        \ day she is invited to another world and becomes the princess of the dream\
+        \ world, where people use dreams as the energy to live. One day, the dream\
+        \ world is being attacked by something called \\\"yumekui\\\" (\\\"dream eater\\\
+        \"), and many princes are being attacked by it. The heroine must wake them\
+        \ up to save the dream world, as the princes are unable to wake up due to\
+        \ having their dreams stolen.\",\"poster\":null,\"seriesName\":\"100 Sleeping\
+        \ Princes \\u0026 The Kingdom of Dreams\",\"slug\":\"100-sleeping-princes-\\\
+        u0026-the-kingdom-of-dreams\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\"\
+        :null,\"firstAired\":\"2014-3-9\",\"id\":337417,\"image\":\"/banners/posters/337417-1.jpg\"\
+        ,\"network\":\"PBS\",\"overview\":\"Before the Interstate Highway System,\
+        \ before famed Route 66, before highways were even numbered, there was one\
+        \ road that started it all, one road that changed America forever: The Lincoln\
+        \ Highway. \u201C100 Years on the Lincoln Highway\u201D is the story of the\
+        \ first coast to coast automobile road in the United States and its impact\
+        \ on Wyoming.\",\"poster\":null,\"seriesName\":\"100 Years on the Lincoln\
+        \ Highway\",\"slug\":\"100-years-on-the-lincoln-highway\",\"status\":\"Ended\"\
+        },{\"aliases\":[],\"banner\":null,\"firstAired\":\"2018-5-1\",\"id\":347087,\"\
+        image\":\"/banners/posters/5af22573d5afd.jpg\",\"network\":\"Channel 5 (UK)\"\
+        ,\"overview\":\"Two-part documentary charting the highs and lows of British\
+        \ Airways as it approaches its centenary. Former pilots, crew and customers\
+        \ reveal their tales, combined with incredible archive footage.\\r\\n\",\"\
+        poster\":null,\"seriesName\":\"British Airways: 100 Years in the Sky\",\"\
+        slug\":\"347087\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"\
+        firstAired\":\"2013-4-25\",\"id\":291981,\"image\":\"/banners/images/missing/series.jpg\"\
+        ,\"network\":\"CBC (CA)\",\"overview\":\"A crew of mariners, scientists and\
+        \ filmmakers are followed as they cast off on the Sedna IV, an oceanographic\
+        \ schooner, to sail around the world exploring the beauty of nature, how ecosystems\
+        \ work and conservation challenges facing the planet.\",\"poster\":null,\"\
+        seriesName\":\"1000 Days for the Planet: Human Adventure\",\"slug\":\"1000-days-for-the-planet-human-adventure\"\
+        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":null,\"\
+        id\":347085,\"image\":\"/banners/images/missing/series.jpg\",\"network\":null,\"\
+        poster\":null,\"seriesName\":\"100 Greatest Songs of the 80's\",\"slug\":\"\
+        347085\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\"\
+        :\"2015-7-27\",\"id\":323053,\"image\":\"/banners/posters/323053-1.jpg\",\"\
+        network\":\"PBS\",\"overview\":\"1000 Days of Fear is the inside-the-barbed-wire\
+        \ story of the brilliant men and women who worked on the Manhattan Project\
+        \ at Los Alamos.The fascinating personalities behind the creation of the world\u2019\
+        s first atomic bomb were as extraordinary, and often as explosive, as the\
+        \ science they were working in. Through first-hand accounts, never-before-seen\
+        \ interviews, and Los Alamos lore, this documentary looks inside these atomic\
+        \ insiders\u2019 hearts and minds, their triumphs and failures, their bravery\
+        \ in the face of paralyzing fear and, ultimately, their war-winning and world-changing\
+        \ accomplishments.\",\"poster\":null,\"seriesName\":\"1000 Days of Fear: The\
+        \ Deadly Race at Los Alamos\",\"slug\":\"1000-days-of-fear-the-deadly-race-at-los-alamos\"\
+        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/310590-g.jpg\"\
+        ,\"firstAired\":\"2016-6-26\",\"id\":310590,\"image\":\"/banners/series/310590/posters/62097291.jpg\"\
+        ,\"network\":\"ABC (US)\",\"overview\":\"Players compete in teams of two,\
+        \ with one celebrity player and one public contestant on each team. The goal\
+        \ of the game is to help your partner guess answers in a particular topic\
+        \ using lists of clues. In the money rounds, the clue-giver has their hands\
+        \ strapped to their chair, so they\u2019re unable to gesture in order to help\
+        \ the guessing process. The show is hosted by Michael Strahan.\",\"poster\"\
+        :\"/banners/series/310590/posters/62097291.jpg\",\"seriesName\":\"The $100,000\
+        \ Pyramid\",\"slug\":\"100-000-pyramid\",\"status\":\"Continuing\"},{\"aliases\"\
+        :[\"100 Code\"],\"banner\":\"/banners/graphical/286193-g2.jpg\",\"firstAired\"\
+        :\"2015-9-10\",\"id\":286193,\"image\":\"/banners/posters/286193-2.jpg\",\"\
+        network\":\"HBO Nordic\",\"overview\":\"New York. Stockholm. Over the course\
+        \ of the last 12 months, young, blonde and blue-eyed women have been turning\
+        \ up dead in a field of asphodel flowers. Through a special dispensation from\
+        \ the NYPD, Detective Tommy Conley is permitted to observe and advise the\
+        \ Stockholm PD. Upon his arrival in Sweden, he is paired with Mikael Eklund,\
+        \ a by-the-book, Swedish cop with an aversion to American grab-and-go culture.\
+        \ Both hate each other, but the two better straighten out their differences\
+        \ as the killings continue.\\r\\n\\r\\nA.K.A.: 100 Code\",\"poster\":\"/banners/posters/286193-2.jpg\"\
+        ,\"seriesName\":\"The Hundred Code\",\"slug\":\"the-hundred-code\",\"status\"\
+        :\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":null,\"id\":254597,\"\
+        image\":\"/banners/posters/254597-1.jpg\",\"network\":\"CBS\",\"overview\"\
+        :\"Based on the novel by Sidney Sheldon, the story spans six generations in\
+        \ the lives of the fictional MacGregor/Blackwell family.\\r\\n\\r\\nElderly\
+        \ Kate Blackwell looks back at her family's life beginning with her Scottish\
+        \ father Jamie McGregor's journey to South Africa to make his fortune in diamonds.\
+        \ The family history is littered with revenge, lust, betrayal, manipulation,\
+        \ and murder.\",\"poster\":null,\"seriesName\":\"Master of the game\",\"slug\"\
+        :\"master-of-the-game\",\"status\":\"Ended\"},{\"aliases\":[\"Hito wa Mita\
+        \ Me ga 100%\",\"Hito wa Mitame ga 100 Percent\",\"Hito wa Mita Me ga 100%\"\
+        ,\"Hito wa Mitame ga 100 Percent\",\"\u4EBA100%\u9760\u5916\u8868\"],\"banner\"\
+        :\"/banners/graphical/326526-g.jpg\",\"firstAired\":\"2017-4-13\",\"id\":326526,\"\
+        image\":\"/banners/posters/326526-4.jpg\",\"network\":\"Fuji TV\",\"overview\"\
+        :\"Jun Jonochi works at a paper manufacturing company. She is earnest, but\
+        \ clueless about her own appearance. She doesn't have any interest in making\
+        \ herself look good. One day, she realizes that people don't view her as other\
+        \ women. She begins to read up on things like make-up and fashion trends with\
+        \ her two female colleagues. \",\"poster\":\"/banners/posters/326526-4.jpg\"\
+        ,\"seriesName\":\"It's All About The Looks\",\"slug\":\"its-all-about-the-looks\"\
+        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"2017-12-6\"\
+        ,\"id\":335509,\"image\":\"/banners/posters/335509-1.jpg\",\"network\":null,\"\
+        overview\":\"In an epic tale of courage and friendship, the brave Sherazade\
+        \ is on a quest to help her friend Karim get back to his rightful place on\
+        \ the Sultan\u2019s throne, encountering such legendary characters as Aladdin,\
+        \ Sinbad and Ali Baba.\\r\\n\",\"poster\":null,\"seriesName\":\"Sherazade:\
+        \ The Untold Stories\",\"slug\":\"sherazade-the-untold-stories\",\"status\"\
+        :\"Continuing\"},{\"aliases\":[\"L'Empire de 1000 ans : Le plan d'Hitler\"\
+        ],\"banner\":\"/banners/graphical/341193-g.jpg\",\"firstAired\":\"2017-12-27\"\
+        ,\"id\":341193,\"image\":\"/banners/series/341193/posters/62039627.jpg\",\"\
+        network\":\"AHC\",\"overview\":\"Journalist and Nazi expert Guy Walters hunts\
+        \ down the alarming truth about how the world would have looked had Hitler\
+        \ and his Nazi regime not been defeated. This series, in unsettling detail,\
+        \ presents the Nazi blueprint for a world that had most races enslaved by\
+        \ the Third Reich.\",\"poster\":\"/banners/series/341193/posters/62039627.jpg\"\
+        ,\"seriesName\":\"Hitler's Empire: The Post War Plan\",\"slug\":\"341193\"\
+        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/5c18dd4bd9240.jpg\"\
+        ,\"firstAired\":\"2018-11-16\",\"id\":355593,\"image\":\"/banners/posters/5bf929005db56.jpg\"\
+        ,\"network\":\"SBS (KR)\",\"overview\":\"Village Survival, the Eight is a\
+        \ mystery thriller variety show that is set in the countryside. The stars\
+        \ have to stay together for 24 hours and try to solve a mystery that lies\
+        \ within the village. During their time there, they play different games and\
+        \ compete with one another.\",\"poster\":\"/banners/posters/5bf929005db56.jpg\"\
+        ,\"seriesName\":\"Village Survival, The Eight\",\"slug\":\"village-survival-the-eight\"\
+        ,\"status\":\"Ended\"}]}"
     headers:
-      cache-control: ['private, max-age=300']
-      cf-ray: [29217b4e21690920-CDG]
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-type: [application/json]
-      date: ['Mon, 11 Apr 2016 21:20:17 GMT']
-      server: [cloudflare-nginx]
-      vary: [Accept-Language]
-      x-powered-by: [Thundar!]
-      x-thetvdb-api-version: [2.0.0]
-    status: {code: 200, message: OK}
+      cache-control:
+      - private, max-age=86400
+      connection:
+      - keep-alive
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 09 May 2020 14:40:04 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Language
+      via:
+      - 1.1 a63182cf51dce7998774e112bf9ee7c6.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - 7FwP1WEaUzOGRaay5XMg-Dhg8-_Lw7_JkoHCI0Df4cwvmh4dZqEy1w==
+      x-amz-cf-pop:
+      - ZRH50-C1
+      x-cache:
+      - Miss from cloudfront
+      x-powered-by:
+      - Thundar!
+      x-thetvdb-api-version:
+      - 3.0.0
+    status:
+      code: 200
+      message: OK
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Accept-Language: [en]
-      Authorization: [!!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0NjA0OTYwMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNDYwNDA5NjE0fQ.heRtvsk6Hz-XcgpcFdSnjwXYsyq3LqH3efNxHPZOhrDjhOb3sEH4xb1hVzJKV_5s8-klM2BoYROG7Gj4zEmM5ff4hgihajs3t-pdbz_vRMTjv2H29X6Ag1eT5aT1whVXzkH99wfH1bintNxGfFBkvy5KICaLBsnB-0tjFH5WriQ0h0XC2ye21qiyC83CzXcYQpMnIabSHrfsKO8wipjkRlmMkdQhrz5YwLb43lCOmS9TxJ6YH6MvL8LslhPm87pWmBJm2Tak752uHsRLZeHufGl-pjuxyPZdCGSO5DFXqOg_lSJDE1Vu6HjJlJH19yOcB0bgyYWnFQc-YW7pt1M_CQ']
-      Connection: [keep-alive]
-      Content-Type: [application/json]
-      Cookie: [__cfduid=da5fbb51392caf8691545fb0698a565d81460409614]
-      User-Agent: [Subliminal/2.0]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en
+      Authorization:
+      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Subliminal/2.1
     method: GET
     uri: https://api.thetvdb.com/series/268592
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAA1xTy3LTQBC8+yumdOESm5WlGFs38qCgqJAUCeRAcRh5x9LE8qzYXcmYVKr4CL6Q
-        L6FWshyHo7rn0d07ehwBRBo9Rhk8jgAAItZRBtPZ/HQxPekRR5bJfcINRRlEdyVBrFS0J7FidOSi
-        DL51APQV7xvRlvS+ag9eyzPR4d/3Q3IUIRumFxbrkpdYve4ljIvp5KEuohdSPgSJUTxP4iQ5MB59
-        E2RE50Y8S8Ny6Fqxdf4th7UZRFMVp2OVjOPFwAv5rbHrwd35/X9Ev28AbSOe+yzS0wEsSCwdh3Bh
-        cYPP9m+XTLKk8TteejZyRDSuJnF0nJTlqiL7MiLTkm2ZtmHtGTrSYAR8SZAbs3aQ7+AjOgdXxhYo
-        J+BLduBKswWPa3JQV7js3g12hNYB982rxjeWTmBbUg9covUllOggJxLAHEUbIQ26IfAGLGo2uPTc
-        st9NIMRVofPgGttyy1JA2WxQHFTcUpCIAmjXYGzOPtBhSV2hkIe/v/9A3vgOCjVbI698P25lLLVk
-        J3BrOtpSbcm5MNNSwRuCmpdr1xminzWJxrwieGhaEq4INFUsPxoS74JqR6JBm62Ej95ihxLw6lhR
-        yMxzVUGJOfswcjI8cJD1pdbouyOK05lKVawW8fAbsHUXuLte3RPtD6mxTuMuOiq425/NIlMKbq4O
-        B4Uhma7p6zhOB5g3Ou8vz/vpbBar9ED9wnrKvicvb1T8JlXJYn5YpfXh0pOxSsdqAfE8O02zJH1R
-        c7brrMQLNdhw7OnzIGc+AngaPf0DAAD//wMA6UhuDyQEAAA=
+      string: !!python/unicode '{"data":{"id":268592,"seriesId":"183133","seriesName":"The
+        100","aliases":[],"season":"7","poster":"posters/268592-2.jpg","banner":"graphical/268592-g2.jpg","fanart":"fanart/original/268592-5.jpg","status":"Continuing","firstAired":"2014-03-19","network":"The
+        CW","networkId":"267","runtime":"45","language":"en","genre":["Action","Drama","Science
+        Fiction","Suspense","Thriller"],"overview":"Set ninety-seven years after a
+        nuclear war has destroyed civilization, when a spaceship housing humanity''s
+        lone survivors sends one hundred juvenile delinquents back to Earth, in hopes
+        of possibly re-populating the planet.\r\n","lastUpdated":1588962318,"airsDayOfWeek":"Wednesday","airsTime":"8:00
+        PM","rating":"TV-14","imdbId":"tt2661044","zap2itId":"SH01740398","added":"2013-04-09
+        18:54:34","addedBy":22600,"siteRating":8.3,"siteRatingCount":4203,"slug":"the-100"}}'
     headers:
-      cache-control: ['private, max-age=300']
-      cf-ray: [29217b51918b0920-CDG]
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-type: [application/json]
-      date: ['Mon, 11 Apr 2016 21:20:18 GMT']
-      last-modified: ['Mon, 11 Apr 2016 18:58:11 GMT']
-      server: [cloudflare-nginx]
-      vary: [Accept-Language]
-      x-powered-by: [Thundar!]
-      x-thetvdb-api-version: [2.0.0]
-    status: {code: 200, message: OK}
+      age:
+      - '49770'
+      cache-control:
+      - private, max-age=86400
+      connection:
+      - keep-alive
+      content-length:
+      - '860'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 09 May 2020 00:50:34 GMT
+      last-modified:
+      - Fri, 08 May 2020 18:25:18 GMT
+      vary:
+      - Accept-Language
+      via:
+      - 1.1 a63182cf51dce7998774e112bf9ee7c6.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - xCxjAyo2GfeRMFqmf0gOlCy1eihDdq7CNiHW0pS6p46CyuSUxc1XJA==
+      x-amz-cf-pop:
+      - ZRH50-C1
+      x-cache:
+      - Hit from cloudfront
+      x-powered-by:
+      - Thundar!
+      x-thetvdb-api-version:
+      - 3.0.0
+    status:
+      code: 200
+      message: OK
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Accept-Language: [en]
-      Authorization: [!!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0NjA0OTYwMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNDYwNDA5NjE0fQ.heRtvsk6Hz-XcgpcFdSnjwXYsyq3LqH3efNxHPZOhrDjhOb3sEH4xb1hVzJKV_5s8-klM2BoYROG7Gj4zEmM5ff4hgihajs3t-pdbz_vRMTjv2H29X6Ag1eT5aT1whVXzkH99wfH1bintNxGfFBkvy5KICaLBsnB-0tjFH5WriQ0h0XC2ye21qiyC83CzXcYQpMnIabSHrfsKO8wipjkRlmMkdQhrz5YwLb43lCOmS9TxJ6YH6MvL8LslhPm87pWmBJm2Tak752uHsRLZeHufGl-pjuxyPZdCGSO5DFXqOg_lSJDE1Vu6HjJlJH19yOcB0bgyYWnFQc-YW7pt1M_CQ']
-      Connection: [keep-alive]
-      Content-Type: [application/json]
-      Cookie: [__cfduid=da5fbb51392caf8691545fb0698a565d81460409614]
-      User-Agent: [Subliminal/2.0]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en
+      Authorization:
+      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Subliminal/2.1
     method: GET
     uri: https://api.thetvdb.com/series/268592/episodes/query?airedEpisode=9&airedSeason=3&page=1
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAA3yQy27CMBBF9/mKK68DAgJIzQ71IVVV2wXLqotJPBALx6a2E1oh/r1yiEKRUJe+
-        5/rMaI4JINg567zIYRqt05hoZXYxOCYAIDbK+SByTNPzW9PV0/B3+PMbEHvHbZ8kwKlzSgokcnx0
-        jbMYEFR4q5vAb01dsLuyRKocy8e98lZeGnfXeM3krRE5slv584PIscxm8+V8wLL9xynbW0bu+1Sz
-        yCHWgUkrs8WTciyGVnenVRweS7PJdDmaZKNsemmoSBaL+XyRLYdQk9k2tOXh4LdGshksgLAtu1bx
-        oSc9OA3Kv/xek9sxpPJljD0IvrLlLu4fXBOqFGQk3stArSIoj411JUsEi5p2DILkUnllDUJFAaVt
-        tERFLUNySz5QiK7SGs9fDZuS/RivTOZQKc0pXshwN2JVFD/wFbnorG3NJozPu58S4DM5/QIAAP//
-        AwCGTdrtjwIAAA==
+      string: !!python/unicode '{"links":{"first":1,"last":1,"next":null,"prev":null},"data":[{"id":5544536,"airedSeason":3,"airedSeasonID":632464,"airedEpisodeNumber":9,"episodeName":"Stealing
+        Fire","firstAired":"2016-03-31","guestStars":[],"directors":["Uta Briesewitz"],"writers":["Heidi
+        Cole McAdams"],"overview":"Clarke discovers a shocking truth. Octavia is forced
+        to make a decision that could have devastating consequences. Kane and Abby
+        share a moment.","language":{"episodeName":"en","overview":"en"},"productionCode":"","showUrl":"","lastUpdated":1541772208,"dvdDiscid":"","dvdSeason":3,"dvdEpisodeNumber":9,"dvdChapter":null,"absoluteNumber":38,"filename":"episodes/268592/5544536.jpg","seriesId":268592,"lastUpdatedBy":1,"airsAfterSeason":null,"airsBeforeSeason":null,"airsBeforeEpisode":null,"imdbId":"tt4799896","contentRating":"TV-14","thumbAuthor":1,"thumbAdded":"2019-11-13
+        11:16:24","thumbWidth":"640","thumbHeight":"360","siteRating":7.9,"siteRatingCount":416,"isMovie":0}]}'
     headers:
-      cache-control: ['private, max-age=300']
-      cf-ray: [29217b5531c10920-CDG]
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-type: [application/json]
-      date: ['Mon, 11 Apr 2016 21:20:18 GMT']
-      server: [cloudflare-nginx]
-      vary: [Accept-Language]
-      x-powered-by: [Thundar!]
-      x-thetvdb-api-version: [2.0.0]
-    status: {code: 200, message: OK}
+      age:
+      - '35691'
+      cache-control:
+      - private, max-age=86400
+      connection:
+      - keep-alive
+      content-length:
+      - '962'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 09 May 2020 04:45:13 GMT
+      vary:
+      - Accept-Language
+      via:
+      - 1.1 a63182cf51dce7998774e112bf9ee7c6.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - -IUV0Yx8IdEqr0t7ZHJp1GgzmR5U0IZdgVZy5cIgfEpRAhtdb9fPNw==
+      x-amz-cf-pop:
+      - ZRH50-C1
+      x-cache:
+      - Hit from cloudfront
+      x-powered-by:
+      - Thundar!
+      x-thetvdb-api-version:
+      - 3.0.0
+    status:
+      code: 200
+      message: OK
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Accept-Language: [en]
-      Authorization: [!!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0NjA0OTYwMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNDYwNDA5NjE0fQ.heRtvsk6Hz-XcgpcFdSnjwXYsyq3LqH3efNxHPZOhrDjhOb3sEH4xb1hVzJKV_5s8-klM2BoYROG7Gj4zEmM5ff4hgihajs3t-pdbz_vRMTjv2H29X6Ag1eT5aT1whVXzkH99wfH1bintNxGfFBkvy5KICaLBsnB-0tjFH5WriQ0h0XC2ye21qiyC83CzXcYQpMnIabSHrfsKO8wipjkRlmMkdQhrz5YwLb43lCOmS9TxJ6YH6MvL8LslhPm87pWmBJm2Tak752uHsRLZeHufGl-pjuxyPZdCGSO5DFXqOg_lSJDE1Vu6HjJlJH19yOcB0bgyYWnFQc-YW7pt1M_CQ']
-      Connection: [keep-alive]
-      Content-Type: [application/json]
-      Cookie: [__cfduid=da5fbb51392caf8691545fb0698a565d81460409614]
-      User-Agent: [Subliminal/2.0]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en
+      Authorization:
+      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Subliminal/2.1
     method: GET
     uri: https://api.thetvdb.com/episodes/5544536
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAA3xTwW7aQBC98xWjPSfEgG1i34C0SlSllYqiHqoeBu+Ap9i7dHdslEb598jGJhDU
-        Xt+bebNv5u3LAEBpFFQpvAwAABRrlUIUhWE0ia8OELIjvST01qgUJpfow51KwVRFcUp92rG3mr5W
-        5YqcSiHpSOpwLEmloJZCWLDZwGd2pLqaNTsvs0alKRkHo/g6mFxPRj2/qcjLUtB5lcLPXx2q2VEm
-        thmmngRh7pg87Vn+9n17x0KHphYAUPfEmmFhC4LHbKax9KqlelFbk6uZ9o3ookC3JdDsswb2gOBz
-        m22b54urJL8CNBq+ZYI1I7CHtXUZaRALJW4JEDRl7NkakBwFMlsVGnKsCTTV6AWl0cqs8fSnIpOR
-        H8IjodnnXNAVfEFD7YjZavUMPkfXaJa2JCPD3mSBZlPhho43vVw6ma74g0EyB/OvndTOWV1lwtYs
-        rG47+yE+t/snV5xCBXp52mmU9mqjMA5GcRQFQX+dWt+xz9p8HXt0fRksXf8zO7rWixx30oKngVt5
-        W1Ty3nDCrbkg0/s+6PqbcXwbJeObLufD37vN0Rg1qXloXnkounQ3f1YphFGYjIP3wPvZWsgdzZz/
-        Bj+ntXX0f7YzfU5LXpWrWSV5G+swTJJ4ckZp/eGTBBDEaThNo6k6LfzBWvKmMAyCM+KeeJNLKzGO
-        eoZLvWp3oETCaZLcJvFxQSz0vc2pSmE6jAYAr4PXNwAAAP//AwCj8JUcSgQAAA==
+      string: !!python/unicode '{"data":{"id":5544536,"airedSeason":3,"airedSeasonID":632464,"airedEpisodeNumber":9,"episodeName":"Stealing
+        Fire","firstAired":"2016-03-31","guestStars":[],"directors":["Uta Briesewitz"],"writers":["Heidi
+        Cole McAdams"],"overview":"Clarke discovers a shocking truth. Octavia is forced
+        to make a decision that could have devastating consequences. Kane and Abby
+        share a moment.","language":{"episodeName":"en","overview":"en"},"productionCode":"","showUrl":"","lastUpdated":1541772208,"dvdDiscid":"","dvdSeason":3,"dvdEpisodeNumber":9,"dvdChapter":null,"absoluteNumber":38,"filename":"episodes/268592/5544536.jpg","seriesId":268592,"lastUpdatedBy":1,"airsAfterSeason":null,"airsBeforeSeason":null,"airsBeforeEpisode":null,"imdbId":"tt4799896","contentRating":"TV-14","thumbAuthor":1,"thumbAdded":"2019-11-13
+        11:16:24","thumbWidth":"640","thumbHeight":"360","siteRating":7.9,"siteRatingCount":416,"isMovie":0}}'
     headers:
-      cache-control: ['private, max-age=300']
-      cf-ray: [29217b5631e90920-CDG]
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-type: [application/json]
-      date: ['Mon, 11 Apr 2016 21:20:19 GMT']
-      last-modified: ['Sat, 09 Apr 2016 01:31:40 GMT']
-      server: [cloudflare-nginx]
-      vary: [Accept-Language]
-      x-powered-by: [Thundar!]
-      x-thetvdb-api-version: [2.0.0]
-    status: {code: 200, message: OK}
+      age:
+      - '44470'
+      cache-control:
+      - private, max-age=86400
+      connection:
+      - keep-alive
+      content-length:
+      - '907'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 09 May 2020 02:18:54 GMT
+      last-modified:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      vary:
+      - Accept-Language
+      via:
+      - 1.1 a63182cf51dce7998774e112bf9ee7c6.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - OLUvqsXtff24KV_LLkhG7n1yELVX6hwqugbP_b0xfmE1ZiiwNcSIFQ==
+      x-amz-cf-pop:
+      - ZRH50-C1
+      x-cache:
+      - Hit from cloudfront
+      x-powered-by:
+      - Thundar!
+      x-thetvdb-api-version:
+      - 3.0.0
+    status:
+      code: 200
+      message: OK
 version: 1

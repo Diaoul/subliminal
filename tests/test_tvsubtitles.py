@@ -161,7 +161,7 @@ def test_get_episode_ids_wrong_season():
 @vcr.use_cassette
 def test_query(episodes):
     video = episodes['bbt_s07e05']
-    expected_subtitles = {268673, 249733, 249518, 249519, 249714, 32596, 249590, 249592, 249499, 261214}
+    expected_subtitles = {268673, 249733, 249518, 249519, 249714, 32596, 249590, 249592, 249499, 261214, 318868}
     with TVsubtitlesProvider() as provider:
         show_id = provider.search_show_id(video.series, video.year)
         subtitles = provider.query(show_id, video.series, video.season, video.episode, video.year)

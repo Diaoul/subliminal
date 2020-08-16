@@ -2,38 +2,64 @@ interactions:
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      Cookie: [__cfduid=d87e6df7c3be383e7e771d6fcc7089c191550528643]
-      User-Agent: [Subliminal/2.1]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - __cfduid=d7e2ffb3c8ccaf23fa22fe8a9901de6ec1589036610
+      User-Agent:
+      - Subliminal/2.1
     method: GET
     uri: http://www.omdbapi.com/?apikey=00000000&r=json&v=1&s=Shameless&type=series&page=1
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAA63RQWrbQBgF4KuEf61aIzlyUq1iIzkY8su1PbYllRKm8mDNSGO5mgnOKARyh9ww
-        JynKIhAM7SbLt3jwPt4TrDhrixLCn09Ahak5hLAqmeI11xocyDhrIQSfeN7byys4INTu9yyCEIzx
-        guvR6JqAA9Qe+6LmreB960ejDe97pTFHHbquGii+E+wbU6xrDoOiUa5QbM+1iy5ugglKDLAbdwld
-        2Hmf62DCDpNDWk1NTvenRGYEZWETiTeD+413v0qHhAzkcQ/Pzn+Wk8u3l1efeMPP68nw6soffcn6
-        XM06lONTtl2bpKsFWkJQLcgdrUhOZwa7iUA67jJ/KpEmIq1im1bTP8Xtji/SjU3o2M6j6jRf3PxL
-        R0t+8SG8oGXL+Senf/YQuSTfg+BLjImflKjWQSZnBqNa5CtCMCrs3Ta2Cd0b7JZVfrv2cRsHvfXM
-        KOPHeRR7GBVnxl8OmMawesn1Q200hNB/teT62Bz0u7x94PD8F7I407WtAgAA
+        H4sIAAAAAAAAA63RQW6bQBSA4atEb03NgIOTsoojcITkN9T2YBtXVUTxyAwwwWUmcmeiSLlDbpiT
+        VHRRKbXUbnKAf/Hpf4IVL/qygvDrEzChWw4hrKpC8pYrBQ7kvOghBJ943tvLKzgg5P57EkEIWnvB
+        9WRyTcABZo5DqHgv+FB96ZTmQ1dpfVSh68qR5HtRfCpkYbuHUdlJV8jiwJWLLq6D29zOZBrRhkao
+        U3awaAihduHNN/GJRommNvNQ5iZnVZXb7LRtYrNtZj/Kuz1fbNcmZdMxMjQpa25G92vvfrUdEzKq
+        jwd4dv4jI5dvL68+8cbvdWR8deVPPkS3k4nFenrKN5mmthWDDuWCzFlDdizRaG8FsqnN/VmNjIq/
+        dZRNTRo1p3Rx8y8dq/jFH+EFq3rO3zn9s4PkknwOgg8xUp9WKLMgrxONUSt2K0IwKs18ExvKDhrt
+        stndZT5u4mCwnhnr+GcaxR5G5ZnxmwO600W75Oqx1QpCGF4tuTp2D+q3vH/k8PwLH9omZM0CAAA=
     headers:
-      access-control-allow-origin: ['*']
-      cache-control: ['public, max-age=86400']
-      cf-cache-status: [HIT]
-      cf-ray: [4ad399daed6bcc48-ZRH]
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-type: [application/json; charset=utf-8]
-      date: ['Fri, 22 Feb 2019 18:43:54 GMT']
-      expires: ['Sat, 23 Feb 2019 18:43:54 GMT']
-      last-modified: ['Fri, 22 Feb 2019 05:25:03 GMT']
-      server: [cloudflare]
-      transfer-encoding: [chunked]
-      vary: ['*, Accept-Encoding']
-      x-aspnet-version: [4.0.30319]
-      x-powered-by: [ASP.NET]
-    status: {code: 200, message: OK}
+      access-control-allow-origin:
+      - '*'
+      age:
+      - '386'
+      cache-control:
+      - public, max-age=86400
+      cf-cache-status:
+      - HIT
+      cf-ray:
+      - 590c4ec4feb8cc3e-ZRH
+      cf-request-id:
+      - 029b8f8f1f0000cc3ecb1c9200000001
+      connection:
+      - keep-alive
+      content-encoding:
+      - gzip
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 09 May 2020 15:03:31 GMT
+      expires:
+      - Sat, 09 May 2020 15:57:05 GMT
+      last-modified:
+      - Sat, 09 May 2020 14:57:05 GMT
+      server:
+      - cloudflare
+      transfer-encoding:
+      - chunked
+      vary:
+      - '*, Accept-Encoding'
+      x-aspnet-version:
+      - 4.0.30319
+      x-powered-by:
+      - ASP.NET
+    status:
+      code: 200
+      message: OK
 version: 1

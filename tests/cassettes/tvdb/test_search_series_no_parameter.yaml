@@ -1,66 +1,101 @@
 interactions:
 - request:
-    body: '{"username": null, "password": null, "apikey": "2AE5D1E42E7194B9"}'
+    body: !!python/unicode '{"username": null, "password": null, "apikey": "2AE5D1E42E7194B9"}'
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Accept-Language: [en]
-      Connection: [keep-alive]
-      Content-Length: ['66']
-      Content-Type: [application/json]
-      User-Agent: [Subliminal/2.0]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '66'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Subliminal/2.1
     method: POST
     uri: https://api.thetvdb.com/login
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAAwTByZKiMAAA0Ht/heWdrmAAtW9pUAxq2GW5TLETFgEJIkzNv897f782my3r6uy5
-        /dlss0UrYzWhOtVsd8U8oXjET0tMZCzhuvcfsnb8zhatyS6I6tUJkAoB3Qnmu+KOuG1qXHU0gQ8a
-        qw2LPLGMZTzi9rhEXppH3hngqvsQJZiJgkRSIT43v80ogbg1cIum0nRYHNvKDHY+AwWJXSIfJ+nk
-        uIwbe/uTtlIPwrmE+SCaqBf8pAmtCLw9UdEuxq7nroVM+Bdp1r0mcLfwpGcnKJwtWx2euSWl9Al/
-        C3W8C/6iGobNOb02EidKIVcOKrOORBaX3oxL070Fxq/fuCviIy6zta6rwsbqD6mwgsdDTyB09t14
-        +/xx7HkdQ6Ae6HU4sHfRssL1252rCLlVr0d80Pe7pUiGvIjU24g8q1HOr27M7vmLJ59uZggOjxW4
-        QW9basCEevKvfOBJ0p2mOP6EuQOgoqs73yRi3EaXQqmCdzrROsvpdBLPHkkhSmipT7TIg0haQpud
-        syZA269//wEAAP//AwC1aKkM2wEAAA==
+      string: !!python/unicode '{"token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2Mzk5OTEsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MTkxfQ.Cj7XrwNr9Q6dkhD8-XJTA1R2tOeBhBdpTAsjEG2Y7jbK3Kb8LBi7RHGpmpqNPoSJOnVl3L__7xiaC7lbI1zEyocMS7TxpSYWTSMSoOgO5Rn-SDUsdLE1K1EezBcr94Sux8Jubq5RQfK9XKk_l92Ff7gKoQqKCk0uOFk5EP7UquOGqyIxAwQe8azMbqeui7gp5j9o8yqSYj76g6T6hNsXjBj1PhmEJAmVpQUIPQ3BxjN8FiS86xvHdrNk-jH_hL5mlWPFTjrs-T1TXkgNB7ILe1pjU4EuefAqnOIWJKlp2libxK95YwCzMKJ3epFrcV_UvULjbQOlr1RIcoohfEBLkg"}'
     headers:
-      cf-ray: [29217b04644408de-CDG]
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-type: [application/json]
-      date: ['Mon, 11 Apr 2016 21:20:05 GMT']
-      server: [cloudflare-nginx]
-      set-cookie: ['__cfduid=def25e09c5c91358524bcd7f843adc85d1460409605; expires=Tue,
-          11-Apr-17 21:20:05 GMT; path=/; domain=.thetvdb.com; HttpOnly']
-      vary: [Accept-Language]
-      x-powered-by: [Thundar!]
-      x-thetvdb-api-version: [2.0.0]
-    status: {code: 200, message: OK}
+      connection:
+      - keep-alive
+      content-length:
+      - '470'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 09 May 2020 14:39:51 GMT
+      vary:
+      - Accept-Language
+      via:
+      - 1.1 e6b325a976b10aa826ec63757afbdedb.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - 5skVmSTvLEJ6GbSamKrRtlk26l2GcZw_oSAyDq7TdiClEt-mET13ww==
+      x-amz-cf-pop:
+      - ZRH50-C1
+      x-cache:
+      - Miss from cloudfront
+      x-powered-by:
+      - Thundar!
+      x-thetvdb-api-version:
+      - 3.0.0
+    status:
+      code: 200
+      message: OK
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Accept-Language: [en]
-      Authorization: [!!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0NjA0OTYwMDUsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNDYwNDA5NjA1fQ.Qac3ImPImAuhQTtbbSDw02Xt0gNbUNC9u6ETUt-spSxdm6p0Zwh3fq5QAp4XclZRa0vW5DJHP2p-KgCN1rNlz7J4-LZEOeE34FRSGqnfR6din3BgGsM4XyGPPS-TpJsNTad3-hqGtR9NC5ypQbhQULYPBXlUzA1a-eSJoojZlRp8d4z0VVOc33T7osLx_TSwzsZ0G8iKq8tvgmtgUXm2UD4fRkz9I8O72ygcqfgaGLsAWRlDFroseMfr1NxowtA3qVz0UYpSRGYt4kuXK1YW66MidIbxZfT03DOG2XQN5bmaHgDjYvduikefiuE5FWNd3AcihOuigfYa6yZStFelYA']
-      Connection: [keep-alive]
-      Content-Type: [application/json]
-      Cookie: [__cfduid=def25e09c5c91358524bcd7f843adc85d1460409605]
-      User-Agent: [Subliminal/2.0]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en
+      Authorization:
+      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2Mzk5OTEsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MTkxfQ.Cj7XrwNr9Q6dkhD8-XJTA1R2tOeBhBdpTAsjEG2Y7jbK3Kb8LBi7RHGpmpqNPoSJOnVl3L__7xiaC7lbI1zEyocMS7TxpSYWTSMSoOgO5Rn-SDUsdLE1K1EezBcr94Sux8Jubq5RQfK9XKk_l92Ff7gKoQqKCk0uOFk5EP7UquOGqyIxAwQe8azMbqeui7gp5j9o8yqSYj76g6T6hNsXjBj1PhmEJAmVpQUIPQ3BxjN8FiS86xvHdrNk-jH_hL5mlWPFTjrs-T1TXkgNB7ILe1pjU4EuefAqnOIWJKlp2libxK95YwCzMKJ3epFrcV_UvULjbQOlr1RIcoohfEBLkg'
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Subliminal/2.1
     method: GET
     uri: https://api.thetvdb.com/search/series
   response:
-    body: {string: !!python/unicode "{\n  \"Error\": \"Requires only one of name,\
-        \ imdbId, zap2itId params\"\n}"}
+    body:
+      string: !!python/unicode '{"Error":"Requires only one of name, imdbId, zap2itId,
+        slug params"}'
     headers:
-      cache-control: ['private, max-age=300']
-      cf-ray: [29217b05845c08de-CDG]
-      connection: [keep-alive]
-      content-length: ['67']
-      content-type: [application/json]
-      date: ['Mon, 11 Apr 2016 21:20:06 GMT']
-      server: [cloudflare-nginx]
-      vary: [Accept-Language]
-      x-powered-by: [Thundar!]
-      x-thetvdb-api-version: [2.0.0]
-    status: {code: 405, message: Method Not Allowed}
+      cache-control:
+      - private, max-age=86400
+      connection:
+      - keep-alive
+      content-length:
+      - '68'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 09 May 2020 14:39:51 GMT
+      vary:
+      - Accept-Language
+      via:
+      - 1.1 e6b325a976b10aa826ec63757afbdedb.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - cB2UrEFFQHMNL852NUef2mDn--MULPf9DR9ylYISHmfGZmyyTbUF3w==
+      x-amz-cf-pop:
+      - ZRH50-C1
+      x-cache:
+      - Error from cloudfront
+      x-powered-by:
+      - Thundar!
+      x-thetvdb-api-version:
+      - 3.0.0
+    status:
+      code: 405
+      message: Method Not Allowed
 version: 1

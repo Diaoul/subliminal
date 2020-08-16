@@ -1,76 +1,126 @@
 interactions:
 - request:
-    body: '{"username": null, "password": null, "apikey": "2AE5D1E42E7194B9"}'
+    body: !!python/unicode '{"username": null, "password": null, "apikey": "2AE5D1E42E7194B9"}'
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Accept-Language: [en]
-      Connection: [keep-alive]
-      Content-Length: ['66']
-      Content-Type: [application/json]
-      User-Agent: [Subliminal/2.0]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '66'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Subliminal/2.1
     method: POST
     uri: https://api.thetvdb.com/login
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAAwTByZKiMAAA0Ht/heXdLkSWztwQVILdwchqXyiWQAJhURaBqfn3ee/vx2azHdqK
-        NNs/my1ZLJpcUmYzy/FWuEcM9rC5y6kOFVh1oa9b4JMsFiemxuzyJKBSE2z38f4x0h7WvIJly9KD
-        z5ILH+JApokOe1iDJQ6yPA7OAizbGRmPNzI0GZXaIcefDtLMp7uXFtZVavZVqFdpvL7clYK0vdVz
-        eBs8YHZliRQcqKI4noaQMrnvrjFZAfMm+ooWLQ5byuNfY8JjzmuepWjVDEueRXhyB9A27r7nM7n4
-        L5N10iC4hWRKU350dnpxno/HTmPCOafN4b1XJpF4q7lIkpvZizOG6NY/xd3IWR4Q/96Yd44Y5jr+
-        rhQtt4/Z89zgKhrGsq7Hqzp/kTlMqGveKBOH+9RiZ8I+ULVxBD6ITZF0uHrIhXDopxoVXpTYLYpn
-        esiYhxTbdoG5TvR0Tmja13kC9RwTBxf3/esZyEC6GGpEBlxNRqf7FOzilJPTK0ybnW1Fv0rv0Shq
-        gc6K7ce//wAAAP//AwBt+s5f2wEAAA==
+      string: !!python/unicode '{"token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2Mzk5OTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MTk0fQ.QVI2zHJ7ZQe7mcEAO6Mdq32tslw-muwlY36Jk7SZ6t_54CixEM0-FFGVVNlQH1jPDtnOdfgDKQN8KxAQvNPcS64vxK4VeZT4F2HQVbXIo1p3ccsZ5ZVWbT3FhGazOl7Rh1ZYLBai2rePh2BFj8BQD1CSXhYP4Cygp0MJTLZLR7KTpDqFOJ0tNJ1DEXdS0uT31swoJ7UZjbrtbRWLR_hzOzWMDrOpwrdF6zMolUwFkG8W2BZraRIoHxnx2BDiy117M_N9TO0oGs8BStbgJgBBuqvMLXB-5FmEajzgIol3GUoFKLNbpg_rONtBQIHJaOa5Ve2lOqZWAOqcyavTlaefgw"}'
     headers:
-      cf-ray: [29217b0fb3b73bff-CDG]
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-type: [application/json]
-      date: ['Mon, 11 Apr 2016 21:20:07 GMT']
-      server: [cloudflare-nginx]
-      set-cookie: ['__cfduid=dd6e1f1f6e49dbb7b5adb63816556129d1460409607; expires=Tue,
-          11-Apr-17 21:20:07 GMT; path=/; domain=.thetvdb.com; HttpOnly']
-      vary: [Accept-Language]
-      x-powered-by: [Thundar!]
-      x-thetvdb-api-version: [2.0.0]
-    status: {code: 200, message: OK}
+      connection:
+      - keep-alive
+      content-length:
+      - '470'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 09 May 2020 14:39:54 GMT
+      vary:
+      - Accept-Language
+      via:
+      - 1.1 792f70324a941726ce7e749514e6fc3c.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - M4TrU1r3FdQbpGAG1kReiEfxFhisX-700QD8UOuJgqMu_MXK96FQFw==
+      x-amz-cf-pop:
+      - ZRH50-C1
+      x-cache:
+      - Miss from cloudfront
+      x-powered-by:
+      - Thundar!
+      x-thetvdb-api-version:
+      - 3.0.0
+    status:
+      code: 200
+      message: OK
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Accept-Language: [en]
-      Authorization: [!!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0NjA0OTYwMDcsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNDYwNDA5NjA3fQ.SNAHqT14yipk7d8g7K4uKrTzh9coPmxXPtU9HpjjN6QW722uEtXhi5spKaez9iUvhr_yAaXohlaZDvQuflmldcNzADJ5x2IETt9onT1slxeGVrHip4t0Tg4H4vfBS-CgFxBBpAi0Ffhn3w16v2eUzHy44TdOySuXNPsq2-ulifWeVRnHRlNiQlCQLk6AfOBdqFnQk_tujmmuK7x8exXbhTHPhi2tRvoQSvQV97Auu9V9aH2epQkY5g03svmNgU_bOoNaxh3diUN6OOT9HzvhEFbhcsmfbICfQeSQgR1rqW594GD7_etQkvDpCVh9-acleErXcn-OJ_Z6sUh__o9Cig']
-      Connection: [keep-alive]
-      Content-Type: [application/json]
-      Cookie: [__cfduid=dd6e1f1f6e49dbb7b5adb63816556129d1460409607]
-      User-Agent: [Subliminal/2.0]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en
+      Authorization:
+      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2Mzk5OTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MTk0fQ.QVI2zHJ7ZQe7mcEAO6Mdq32tslw-muwlY36Jk7SZ6t_54CixEM0-FFGVVNlQH1jPDtnOdfgDKQN8KxAQvNPcS64vxK4VeZT4F2HQVbXIo1p3ccsZ5ZVWbT3FhGazOl7Rh1ZYLBai2rePh2BFj8BQD1CSXhYP4Cygp0MJTLZLR7KTpDqFOJ0tNJ1DEXdS0uT31swoJ7UZjbrtbRWLR_hzOzWMDrOpwrdF6zMolUwFkG8W2BZraRIoHxnx2BDiy117M_N9TO0oGs8BStbgJgBBuqvMLXB-5FmEajzgIol3GUoFKLNbpg_rONtBQIHJaOa5Ve2lOqZWAOqcyavTlaefgw'
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Subliminal/2.1
     method: GET
     uri: https://api.thetvdb.com/series/80379/actors
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAA6zUTW/TQBAG4Ht+xWjPNXjXH0l9aytKoAWqRIgD4jDEQ7zNetfaXSsyVf97ZQOp
-        wPlwSi4+7MxYq0fvzsMIgOXokWXwdQQA8NB9AZjMWQaRSOI0Oftz5shKcu/ayiSMxuebgsaSWAbs
-        BhU1cFWbhWGbojWqK96R1g1MzQ/nMfdknzucsf6TzcmyDMLNqSxx2Q3iwhvrXv+6zKv7asn+7rmo
-        fWHaWREl/1TynNrbMhHyNAhFwCfA44zzLImff6LQ+c9Vjn53b9f6eLaLKB5ONJel0TAl9Z3sso80
-        NWu0OXwxyqyl/7ndiO83ik9kFInhRpE4ZCSGG30gJZ1DmGG9KPpGl2Q15uQ9wcw4T3pl1m4lg/1o
-        Yj+aOAlamPHJULSu9wBadMTbqzUq+IhNg7ZvNsN7cgXcGOMLi1WFSr4oW9GJssXD4dni4SEmfkS2
-        sJElXEpUctVnuigbuEZrsYBrs1a7ltSBLPETZSlOh2cpTg8hpcOR3pui3dVvUdFiJftMt2R0u6b+
-        c5mnJ3ESWTT4zXW9B5zGRzjJEu7QOqNdH2lekMqNhitjqhcCjU8ExMfDgfh4H1Ay4ZPJcKBbrC3C
-        vCK9oC1b6U0pVQPzNZGmZrtQtFuou8s+oVikybnYjZQEPAxECIJnSZiFe5GSgPMgHLdIscji6DfS
-        COBbO8XIWmMdy0DXSo0enwAAAP//AwB55BpYWgkAAA==
+      string: !!python/unicode '{"data":[{"id":64621184,"seriesId":80379,"name":"Jim
+        Parsons","role":"Sheldon Cooper","sortOrder":1,"image":"actors/325467.jpg","imageAuthor":171,"imageAdded":"2019-06-09
+        10:15:15","lastUpdated":"2019-06-09 10:15:15"},{"id":64621179,"seriesId":80379,"name":"Johnny
+        Galecki","role":"Leonard Hofstadter","sortOrder":2,"image":"actors/325466.jpg","imageAuthor":171,"imageAdded":"2019-06-09
+        10:16:14","lastUpdated":"2019-06-09 10:16:14"},{"id":64621175,"seriesId":80379,"name":"Kaley
+        Cuoco","role":"Penny","sortOrder":3,"image":"actors/325465.jpg","imageAuthor":171,"imageAdded":"2019-06-09
+        10:18:24","lastUpdated":"2019-06-09 10:18:24"},{"id":64621164,"seriesId":80379,"name":"Kunal
+        Nayyar","role":"Rajesh Koothrappali","sortOrder":4,"image":"actors/325463.jpg","imageAuthor":171,"imageAdded":"2019-06-09
+        10:22:36","lastUpdated":"2019-06-09 10:22:36"},{"id":64621170,"seriesId":80379,"name":"Simon
+        Helberg","role":"Howard Wolowitz","sortOrder":5,"image":"actors/325464.jpg","imageAuthor":171,"imageAdded":"2019-06-09
+        10:20:33","lastUpdated":"2019-06-09 10:20:33"},{"id":64621160,"seriesId":80379,"name":"Melissa
+        Rauch","role":"Bernadette Rostenkowski","sortOrder":6,"image":"actors/325462.jpg","imageAuthor":171,"imageAdded":"2019-06-09
+        10:26:07","lastUpdated":"2019-06-09 10:26:07"},{"id":64621157,"seriesId":80379,"name":"Mayim
+        Bialik","role":"Amy Farrah Fowler","sortOrder":7,"image":"actors/325461.jpg","imageAuthor":171,"imageAdded":"2019-06-09
+        10:24:19","lastUpdated":"2019-06-09 10:24:19"},{"id":64621188,"seriesId":80379,"name":"Laura
+        Spencer","role":"Emily Sweeney","sortOrder":8,"image":"actors/358188.jpg","imageAuthor":123690,"imageAdded":"2015-10-20
+        21:50:07","lastUpdated":"2015-10-20 21:50:07"},{"id":64621192,"seriesId":80379,"name":"Sara
+        Gilbert","role":"Leslie Winkle","sortOrder":9,"image":"actors/378343.jpg","imageAuthor":153951,"imageAdded":"2016-06-08
+        06:29:31","lastUpdated":"2016-06-08 06:29:31"},{"id":64621196,"seriesId":80379,"name":"Kevin
+        Sussman","role":"Stuart Bloom","sortOrder":10,"image":"actors/378344.jpg","imageAuthor":122513,"imageAdded":"2016-05-17
+        08:36:29","lastUpdated":"2016-05-17 08:36:29"},{"id":64621200,"seriesId":80379,"name":"John
+        Ross Bowie","role":"Barry Kripke","sortOrder":11,"image":"actors/382566.jpg","imageAuthor":153951,"imageAdded":"2016-06-08
+        06:26:32","lastUpdated":"2016-06-08 06:26:32"},{"id":64621204,"seriesId":80379,"name":"Carol
+        Ann Susi","role":"Debbie Wolowitz","sortOrder":12,"image":"actors/403186.jpg","imageAuthor":161470,"imageAdded":"2016-12-08
+        17:03:27","lastUpdated":"2016-12-08 17:03:27"}]}'
     headers:
-      cache-control: ['private, max-age=300']
-      cf-ray: [29217b10b3ce3bff-CDG]
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-type: [application/json]
-      date: ['Mon, 11 Apr 2016 21:20:07 GMT']
-      server: [cloudflare-nginx]
-      vary: [Accept-Language]
-      x-powered-by: [Thundar!]
-      x-thetvdb-api-version: [2.0.0]
-    status: {code: 200, message: OK}
+      age:
+      - '46333'
+      cache-control:
+      - private, max-age=86400
+      connection:
+      - keep-alive
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 09 May 2020 01:47:41 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Language
+      via:
+      - 1.1 792f70324a941726ce7e749514e6fc3c.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - OzcLsNW0IJjkNunuHpefYv_oo-pGnimzoL_RsHEVfgHP2Tos25DRxA==
+      x-amz-cf-pop:
+      - ZRH50-C1
+      x-cache:
+      - Hit from cloudfront
+      x-powered-by:
+      - Thundar!
+      x-thetvdb-api-version:
+      - 3.0.0
+    status:
+      code: 200
+      message: OK
 version: 1

@@ -1,66 +1,100 @@
 interactions:
 - request:
-    body: '{"username": null, "password": null, "apikey": "2AE5D1E42E7194B9"}'
+    body: !!python/unicode '{"username": null, "password": null, "apikey": "2AE5D1E42E7194B9"}'
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Accept-Language: [en]
-      Connection: [keep-alive]
-      Content-Length: ['66']
-      Content-Type: [application/json]
-      User-Agent: [Subliminal/2.0]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '66'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Subliminal/2.1
     method: POST
     uri: https://api.thetvdb.com/login
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAAwTByZKiMAAA0Ht/heXdLkSWztwQVILdwchqXyiWQAJhURaBqfn3ee/vx2azHdqK
-        NNs/my1ZLJpcUmYzy/FWuEcM9rC5y6kOFVh1oa9b4JMsFiemxuzyJKBSE2z38f4x0h7WvIJly9KD
-        z5ILH+JApokOe1iDJQ6yPA7OAizbGRmPNzI0GZXaIcefDtLMp7uXFtZVavZVqFdpvL7clYK0vdVz
-        eBs8YHZliRQcqKI4noaQMrnvrjFZAfMm+ooWLQ5byuNfY8JjzmuepWjVDEueRXhyB9A27r7nM7n4
-        L5N10iC4hWRKU350dnpxno/HTmPCOafN4b1XJpF4q7lIkpvZizOG6NY/xd3IWR4Q/96Yd44Y5jr+
-        rhQtt4/Z89zgKhrGsq7Hqzp/kTlMqGveKBOH+9RiZ8I+ULVxBD6ITZF0uHrIhXDopxoVXpTYLYpn
-        esiYhxTbdoG5TvR0Tmja13kC9RwTBxf3/esZyEC6GGpEBlxNRqf7FOzilJPTK0ybnW1Fv0rv0Shq
-        gc6K7ce//wAAAP//AwBt+s5f2wEAAA==
+      string: !!python/unicode '{"token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2Mzk5OTMsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MTkzfQ.wyibb6tS5kK2CxkKjOkOwYO5i6FYDcathuYeGwBTgyuqkEqXOq8sB4gi3Q1FxII3ql5fsQM_DjAY96LIgJcXIhvrJ59zbXbTzje0EEofRxEjDpCrIyT5RVKO9QfTnt6V0HB5b4yawS5HnjOzO5BHenogTagtCAkaKqM9OZqJz66Eiv3j0gBHhGc45Am_63FEKGb5ZYote-iCh3ol-dpAQnfGxp9WaGT_SPnTXWHmRatR2KdTNKbd0id2t-1qJkBbAcRYSLGO2pKzwKa370j_btxui5U7YA8jrCoSFsdtTdalq90GjBGFvskyj6I8Tm_L9WftFuTtKOfNglGj-qBH-A"}'
     headers:
-      cf-ray: [29217b0da19014d3-CDG]
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-type: [application/json]
-      date: ['Mon, 11 Apr 2016 21:20:07 GMT']
-      server: [cloudflare-nginx]
-      set-cookie: ['__cfduid=d8c45667d180b5ac95e95e911bb116edd1460409607; expires=Tue,
-          11-Apr-17 21:20:07 GMT; path=/; domain=.thetvdb.com; HttpOnly']
-      vary: [Accept-Language]
-      x-powered-by: [Thundar!]
-      x-thetvdb-api-version: [2.0.0]
-    status: {code: 200, message: OK}
+      connection:
+      - keep-alive
+      content-length:
+      - '470'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 09 May 2020 14:39:53 GMT
+      vary:
+      - Accept-Language
+      via:
+      - 1.1 e8a7e21f51478f02a6e51b69e3450928.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - 4L4hpo9FR3sii4vz_VBRSr3U6c3ku-cVkzwAkQlf8w1O0d2zP4KVZw==
+      x-amz-cf-pop:
+      - ZRH50-C1
+      x-cache:
+      - Miss from cloudfront
+      x-powered-by:
+      - Thundar!
+      x-thetvdb-api-version:
+      - 3.0.0
+    status:
+      code: 200
+      message: OK
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Accept-Language: [en]
-      Authorization: [!!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE0NjA0OTYwMDcsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNDYwNDA5NjA3fQ.SNAHqT14yipk7d8g7K4uKrTzh9coPmxXPtU9HpjjN6QW722uEtXhi5spKaez9iUvhr_yAaXohlaZDvQuflmldcNzADJ5x2IETt9onT1slxeGVrHip4t0Tg4H4vfBS-CgFxBBpAi0Ffhn3w16v2eUzHy44TdOySuXNPsq2-ulifWeVRnHRlNiQlCQLk6AfOBdqFnQk_tujmmuK7x8exXbhTHPhi2tRvoQSvQV97Auu9V9aH2epQkY5g03svmNgU_bOoNaxh3diUN6OOT9HzvhEFbhcsmfbICfQeSQgR1rqW594GD7_etQkvDpCVh9-acleErXcn-OJ_Z6sUh__o9Cig']
-      Connection: [keep-alive]
-      Content-Type: [application/json]
-      Cookie: [__cfduid=d8c45667d180b5ac95e95e911bb116edd1460409607]
-      User-Agent: [Subliminal/2.0]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en
+      Authorization:
+      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2Mzk5OTMsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MTkzfQ.wyibb6tS5kK2CxkKjOkOwYO5i6FYDcathuYeGwBTgyuqkEqXOq8sB4gi3Q1FxII3ql5fsQM_DjAY96LIgJcXIhvrJ59zbXbTzje0EEofRxEjDpCrIyT5RVKO9QfTnt6V0HB5b4yawS5HnjOzO5BHenogTagtCAkaKqM9OZqJz66Eiv3j0gBHhGc45Am_63FEKGb5ZYote-iCh3ol-dpAQnfGxp9WaGT_SPnTXWHmRatR2KdTNKbd0id2t-1qJkBbAcRYSLGO2pKzwKa370j_btxui5U7YA8jrCoSFsdtTdalq90GjBGFvskyj6I8Tm_L9WftFuTtKOfNglGj-qBH-A'
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Subliminal/2.1
     method: GET
     uri: https://api.thetvdb.com/series/999999999
   response:
-    body: {string: !!python/unicode "{\n  \"Error\": \"ID: 999999999 not found\"\n\
-        }"}
+    body:
+      string: !!python/unicode '{"Error":"ID: 999999999 not found"}'
     headers:
-      cache-control: ['private, max-age=300']
-      cf-ray: [29217b0ea19e14d3-CDG]
-      connection: [keep-alive]
-      content-length: ['40']
-      content-type: [application/json]
-      date: ['Mon, 11 Apr 2016 21:20:07 GMT']
-      server: [cloudflare-nginx]
-      vary: [Accept-Language]
-      x-powered-by: [Thundar!]
-      x-thetvdb-api-version: [2.0.0]
-    status: {code: 404, message: Not Found}
+      cache-control:
+      - private, max-age=86400
+      connection:
+      - keep-alive
+      content-length:
+      - '35'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 09 May 2020 14:39:53 GMT
+      vary:
+      - Accept-Language
+      via:
+      - 1.1 e8a7e21f51478f02a6e51b69e3450928.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - mctGDmL7-GjfLZs0FqMEY7a0PNpHDA8VnLxRQjR6b17oPb_eTE8hrw==
+      x-amz-cf-pop:
+      - ZRH50-C1
+      x-cache:
+      - Error from cloudfront
+      x-powered-by:
+      - Thundar!
+      x-thetvdb-api-version:
+      - 3.0.0
+    status:
+      code: 404
+      message: Not Found
 version: 1

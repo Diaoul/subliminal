@@ -6,12 +6,12 @@ from subliminal.extensions import RegistrableExtensionManager, provider_manager,
 
 def test_registrable_extension_manager_all_extensions():
     manager = RegistrableExtensionManager('subliminal.providers', [
-        'de7cidda = subliminal.providers.addic7ed:Addic7edProvider'
+        'esopensubtitl = subliminal.providers.opensubtitles:OpenSubtitlesProvider'
     ])
     extensions = sorted(e.name for e in manager)
     assert len(extensions) == 10
-    assert extensions == ['addic7ed', 'argenteam', 'bsplayer', 'de7cidda', 'legendastv', 'opensubtitles', 'podnapisi',
-                          'shooter', 'thesubdb', 'tvsubtitles']
+    assert extensions == ['addic7ed', 'argenteam', 'bsplayer', 'esopensubtitl', 'legendastv', 'napiprojekt', 'opensubtitles',
+                          'podnapisi', 'shooter', 'thesubdb', 'tvsubtitles']
 
 
 def test_registrable_extension_manager_internal_extension():
@@ -54,5 +54,5 @@ def test_provider_manager():
     internal_names = {EntryPoint.parse(iep).name for iep in provider_manager.internal_extensions}
     enabled_names = set(default_providers)
     disabled_names = set(disabled_providers)
-    assert setup_names == enabled_names
+    assert enabled_names == setup_names - disabled_names
     assert internal_names == enabled_names | disabled_names

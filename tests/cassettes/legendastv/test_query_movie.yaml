@@ -1,13 +1,19 @@
 interactions:
 - request:
-    body: data%5BUser%5D%5Bpassword%5D=subliminal&data%5BUser%5D%5Busername%5D=python-subliminal&_method=POST
+    body: _method=POST&data%5BUser%5D%5Busername%5D=python-subliminal&data%5BUser%5D%5Bpassword%5D=subliminal
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      Content-Length: ['99']
-      Content-Type: [application/x-www-form-urlencoded]
-      User-Agent: [Subliminal/2.0]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '99'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - Subliminal/2.1
     method: POST
     uri: http://legendas.tv/login
   response:
@@ -15,170 +21,234 @@ interactions:
       string: !!binary |
         H4sIAAAAAAAAAwMAAAAAAAAAAAA=
     headers:
-      accept-ranges: [bytes]
-      access-control-allow-origin: ['*']
-      age: ['0']
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-length: ['20']
-      content-type: [text/html; charset=UTF-8]
-      date: ['Thu, 31 Mar 2016 13:46:15 GMT']
-      location: ['http://legendas.tv/']
-      set-cookie: [PHPSESSID=7qev23usp123q79j0t40fl65q7; path=/; HttpOnly, 'PHPSESSID=deleted;
-          expires=Wed, 01-Apr-2015 13:47:12 GMT; path=/', PHPSESSID=jpfoah1q4j7moi2lgmfod8el62;
-          path=/; HttpOnly, 'PHPSESSID=deleted; expires=Wed, 01-Apr-2015 13:47:12
-          GMT; path=/', PHPSESSID=1cfnmb097ph6d9ou3h6lah56r7; path=/; HttpOnly, 'au=3673290---198d5f2e1a202d0c2878ae871f911763d7cd76c0;
-          expires=Thu, 14-Apr-2016 13:47:13 GMT; path=/']
-      vary: ['User-Agent,Accept-Encoding']
-      via: [1.1 varnish]
-      x-backend: [default_director]
-      x-cache: [MISS]
-      x-cacheable: ['YES:Forced']
-      x-varnish: ['2027370712']
-    status: {code: 302, message: Found}
+      Accept-Ranges:
+      - bytes
+      Access-Control-Allow-Origin:
+      - '*'
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '20'
+      Content-Type:
+      - text/html; charset=UTF-8
+      Date:
+      - Sat, 09 May 2020 11:44:03 GMT
+      Location:
+      - http://legendas.tv/
+      Set-Cookie:
+      - PHPSESSID=r6nkndcu9cujsd7d6ik8h8ths1; path=/; HttpOnly
+      - PHPSESSID=deleted; expires=Fri, 10-May-2019 12:01:15 GMT; path=/
+      - PHPSESSID=uf3gcrjn8sff0fhd3ng2s7sfb6; path=/; HttpOnly
+      - PHPSESSID=deleted; expires=Fri, 10-May-2019 12:01:15 GMT; path=/
+      - PHPSESSID=pt93ef4ppiqavs3d3okma7g936; path=/; HttpOnly
+      - au=3673290---198d5f2e1a202d0c2878ae871f911763d7cd76c0; expires=Sat, 23-May-2020
+        12:01:16 GMT; path=/
+      Vary:
+      - Accept-Encoding,User-Agent
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cacheable:
+      - YES:Forced
+      X-Varnish:
+      - '824657470'
+      X-backend:
+      - default_director
+    status:
+      code: 302
+      message: Found
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      Cookie: [au=3673290---198d5f2e1a202d0c2878ae871f911763d7cd76c0; PHPSESSID=1cfnmb097ph6d9ou3h6lah56r7]
-      User-Agent: [Subliminal/2.0]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - PHPSESSID=pt93ef4ppiqavs3d3okma7g936; au=3673290---198d5f2e1a202d0c2878ae871f911763d7cd76c0
+      User-Agent:
+      - Subliminal/2.1
     method: GET
     uri: http://legendas.tv/legenda/sugestao/interstellar
   response:
     body:
       string: !!binary |
-        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
+        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
     headers:
-      accept-ranges: [bytes]
-      access-control-allow-origin: ['*']
-      age: ['0']
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-length: ['952']
-      content-type: [text/html; charset=utf-8]
-      date: ['Thu, 31 Mar 2016 13:46:16 GMT']
-      vary: ['User-Agent,Accept-Encoding']
-      via: [1.1 varnish]
-      x-backend: [default_director]
-      x-cache: [MISS]
-      x-cacheable: ['YES:Forced']
-      x-varnish: ['2027370769']
-    status: {code: 200, message: OK}
+      Accept-Ranges:
+      - bytes
+      Access-Control-Allow-Origin:
+      - '*'
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '964'
+      Content-Type:
+      - text/html; charset=utf-8
+      Date:
+      - Sat, 09 May 2020 11:44:03 GMT
+      Vary:
+      - Accept-Encoding,User-Agent
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cacheable:
+      - YES:Forced
+      X-Varnish:
+      - '824657500'
+      X-backend:
+      - default_director
+    status:
+      code: 200
+      message: OK
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      Cookie: [au=3673290---198d5f2e1a202d0c2878ae871f911763d7cd76c0; PHPSESSID=1cfnmb097ph6d9ou3h6lah56r7]
-      User-Agent: [Subliminal/2.0]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - PHPSESSID=pt93ef4ppiqavs3d3okma7g936; au=3673290---198d5f2e1a202d0c2878ae871f911763d7cd76c0
+      User-Agent:
+      - Subliminal/2.1
     method: GET
     uri: http://legendas.tv/legenda/busca/-/2/-/0/34084
   response:
     body:
       string: !!binary |
-        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
-        zo4pPhyR35HILxD/AybDrs6SKAAA
+        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
     headers:
-      accept-ranges: [bytes]
-      access-control-allow-origin: ['*']
-      age: ['0']
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-length: ['3384']
-      content-type: [text/html; charset=UTF-8]
-      date: ['Thu, 31 Mar 2016 13:46:16 GMT']
-      vary: ['Accept-Encoding,User-Agent']
-      via: [1.1 varnish]
-      x-backend: [default_director]
-      x-cache: [MISS]
-      x-cacheable: ['YES:Forced']
-      x-varnish: ['2027370799']
-    status: {code: 200, message: OK}
+      Accept-Ranges:
+      - bytes
+      Access-Control-Allow-Origin:
+      - '*'
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '3230'
+      Content-Type:
+      - text/html; charset=UTF-8
+      Date:
+      - Sat, 09 May 2020 11:44:04 GMT
+      Vary:
+      - Accept-Encoding,User-Agent
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cacheable:
+      - YES:Forced
+      X-Varnish:
+      - '824657525'
+      X-backend:
+      - default_director
+    status:
+      code: 200
+      message: OK
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      Cookie: [au=3673290---198d5f2e1a202d0c2878ae871f911763d7cd76c0; PHPSESSID=1cfnmb097ph6d9ou3h6lah56r7]
-      User-Agent: [Subliminal/2.0]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - PHPSESSID=pt93ef4ppiqavs3d3okma7g936; au=3673290---198d5f2e1a202d0c2878ae871f911763d7cd76c0
+      User-Agent:
+      - Subliminal/2.1
     method: GET
     uri: http://legendas.tv/downloadarquivo/5515d27a72921
   response:
@@ -186,32 +256,52 @@ interactions:
       string: !!binary |
         H4sIAAAAAAAAAwMAAAAAAAAAAAA=
     headers:
-      accept-ranges: [bytes]
-      access-control-allow-origin: ['*']
-      age: ['0']
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-length: ['20']
-      content-type: [text/html; charset=UTF-8]
-      date: ['Thu, 31 Mar 2016 13:46:17 GMT']
-      location: ['http://f.legendas.tv/l/legendas_tv_20150327185818.rar']
-      vary: ['User-Agent,Accept-Encoding']
-      via: [1.1 varnish]
-      x-backend: [default_director]
-      x-cache: [MISS]
-      x-cacheable: ['YES:Forced']
-      x-varnish: ['2027370852']
-    status: {code: 302, message: Found}
+      Accept-Ranges:
+      - bytes
+      Access-Control-Allow-Origin:
+      - '*'
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '20'
+      Content-Type:
+      - text/html; charset=UTF-8
+      Date:
+      - Sat, 09 May 2020 11:44:05 GMT
+      Location:
+      - https://ltv-backup.ams3.cdn.digitaloceanspaces.com/files/25/c8/legendas_tv_20150327185818.rar
+      Vary:
+      - Accept-Encoding,User-Agent
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cacheable:
+      - YES:Forced
+      X-Varnish:
+      - '824657548'
+      X-backend:
+      - default_director
+    status:
+      code: 302
+      message: Found
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      Cookie: [au=3673290---198d5f2e1a202d0c2878ae871f911763d7cd76c0; PHPSESSID=1cfnmb097ph6d9ou3h6lah56r7]
-      User-Agent: [Subliminal/2.0]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.1
     method: GET
-    uri: http://f.legendas.tv/l/legendas_tv_20150327185818.rar
+    uri: https://ltv-backup.ams3.cdn.digitaloceanspaces.com/files/25/c8/legendas_tv_20150327185818.rar
   response:
     body:
       string: !!binary |
@@ -1165,29 +1255,48 @@ interactions:
         dbZWvIDOdSnliUMLkmGqvkU0VtQLiOZiovS+ElXnDk36ZfGdlqbEoyPeZuiWUEjgebO92rZVNIf7
         2ywLz+3txD17AEAHAA==
     headers:
-      accept-ranges: [bytes]
-      age: ['3']
-      connection: [keep-alive]
-      content-disposition: [attachment]
-      content-length: ['54049']
-      content-type: [application/octet-stream]
-      date: ['Thu, 31 Mar 2016 13:46:17 GMT']
-      etag: ['"bf0edd47d4a80be0-d321-5124c3aee75a1"']
-      last-modified: ['Fri, 27 Mar 2015 21:58:19 GMT']
-      via: [1.1 varnish]
-      x-backend: [imagens]
-      x-cache: [HIT]
-      x-cacheable: ['YES']
-      x-varnish: [2027370911 2027370637]
-    status: {code: 200, message: OK}
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - max-age=56
+      Connection:
+      - Keep-Alive
+      Content-Length:
+      - '54049'
+      Content-Type:
+      - binary/octet-stream
+      Date:
+      - Sat, 09 May 2020 12:01:17 GMT
+      ETag:
+      - '"72227ef8a0f9df48d51835c0e13ad890"'
+      Last-Modified:
+      - Mon, 01 Oct 2018 10:01:18 GMT
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
+      Vary:
+      - Access-Control-Request-Headers,Access-Control-Request-Method,Origin
+      X-HW:
+      - 1589025677.dop034.am5.t,1589025677.cds110.am5.shn,1589025677.dop034.am5.t,1589025677.cds005.am5.c
+      x-amz-meta-s3cmd-attrs:
+      - atime:1538217820/ctime:1538217147/gid:48/gname:apache/md5:72227ef8a0f9df48d51835c0e13ad890/mode:33188/mtime:1459856348/uid:48/uname:apache
+      x-amz-request-id:
+      - tx00000000000003068c01b-005eb69b89-1ad2854-ams3a
+    status:
+      code: 200
+      message: OK
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      Cookie: [au=3673290---198d5f2e1a202d0c2878ae871f911763d7cd76c0; PHPSESSID=1cfnmb097ph6d9ou3h6lah56r7]
-      User-Agent: [Subliminal/2.0]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - PHPSESSID=pt93ef4ppiqavs3d3okma7g936; au=3673290---198d5f2e1a202d0c2878ae871f911763d7cd76c0
+      User-Agent:
+      - Subliminal/2.1
     method: GET
     uri: http://legendas.tv/downloadarquivo/54a2e41d8cae4
   response:
@@ -1195,32 +1304,52 @@ interactions:
       string: !!binary |
         H4sIAAAAAAAAAwMAAAAAAAAAAAA=
     headers:
-      accept-ranges: [bytes]
-      access-control-allow-origin: ['*']
-      age: ['0']
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-length: ['20']
-      content-type: [text/html; charset=UTF-8]
-      date: ['Thu, 31 Mar 2016 13:46:17 GMT']
-      location: ['http://f.legendas.tv/07/ba/legendas_tv_20141230154253.rar']
-      vary: ['User-Agent,Accept-Encoding']
-      via: [1.1 varnish]
-      x-backend: [default_director]
-      x-cache: [MISS]
-      x-cacheable: ['YES:Forced']
-      x-varnish: ['2027370924']
-    status: {code: 302, message: Found}
+      Accept-Ranges:
+      - bytes
+      Access-Control-Allow-Origin:
+      - '*'
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '20'
+      Content-Type:
+      - text/html; charset=UTF-8
+      Date:
+      - Sat, 09 May 2020 11:44:06 GMT
+      Location:
+      - https://ltv-backup.ams3.cdn.digitaloceanspaces.com/files/07/ba/legendas_tv_20141230154253.rar
+      Vary:
+      - Accept-Encoding,User-Agent
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cacheable:
+      - YES:Forced
+      X-Varnish:
+      - '824657642'
+      X-backend:
+      - default_director
+    status:
+      code: 302
+      message: Found
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      Cookie: [au=3673290---198d5f2e1a202d0c2878ae871f911763d7cd76c0; PHPSESSID=1cfnmb097ph6d9ou3h6lah56r7]
-      User-Agent: [Subliminal/2.0]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.1
     method: GET
-    uri: http://f.legendas.tv/07/ba/legendas_tv_20141230154253.rar
+    uri: https://ltv-backup.ams3.cdn.digitaloceanspaces.com/files/07/ba/legendas_tv_20141230154253.rar
   response:
     body:
       string: !!binary |
@@ -2089,29 +2218,48 @@ interactions:
         VryAznUp5YlDC5Jhqr5FNFbUC4jmYqL0vhJV5w5N+mXxnZamxKMj3mbollBI4Hmzvdq2VTSH+9ss
         C8/t7cQ9ewBABwA=
     headers:
-      accept-ranges: [bytes]
-      age: ['0']
-      connection: [keep-alive]
-      content-disposition: [attachment]
-      content-length: ['49202']
-      content-type: [application/octet-stream]
-      date: ['Thu, 31 Mar 2016 13:46:18 GMT']
-      etag: ['"955924de69867982-c032-52ec72c98281c"']
-      last-modified: ['Thu, 24 Mar 2016 08:24:25 GMT']
-      via: [1.1 varnish]
-      x-backend: [imagens]
-      x-cache: [MISS]
-      x-cacheable: ['YES']
-      x-varnish: ['2027370965']
-    status: {code: 200, message: OK}
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - max-age=60
+      Connection:
+      - Keep-Alive
+      Content-Length:
+      - '49202'
+      Content-Type:
+      - binary/octet-stream
+      Date:
+      - Sat, 09 May 2020 12:01:18 GMT
+      ETag:
+      - '"8a53be57eddcc8ee3e621af755aa8c7d"'
+      Last-Modified:
+      - Mon, 01 Oct 2018 08:02:43 GMT
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
+      Vary:
+      - Access-Control-Request-Headers,Access-Control-Request-Method,Origin
+      X-HW:
+      - 1589025677.dop034.am5.t,1589025677.cds110.am5.shn,1589025678.dop034.am5.t,1589025678.cds109.am5.c
+      x-amz-meta-s3cmd-attrs:
+      - atime:1538218226/ctime:1538217040/gid:48/gname:apache/md5:8a53be57eddcc8ee3e621af755aa8c7d/mode:33188/mtime:1458807865/uid:48/uname:apache
+      x-amz-request-id:
+      - tx00000000000003068c8bd-005eb69b8e-1ad2854-ams3a
+    status:
+      code: 200
+      message: OK
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      Cookie: [au=3673290---198d5f2e1a202d0c2878ae871f911763d7cd76c0; PHPSESSID=1cfnmb097ph6d9ou3h6lah56r7]
-      User-Agent: [Subliminal/2.0]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - PHPSESSID=pt93ef4ppiqavs3d3okma7g936; au=3673290---198d5f2e1a202d0c2878ae871f911763d7cd76c0
+      User-Agent:
+      - Subliminal/2.1
     method: GET
     uri: http://legendas.tv/users/logout
   response:
@@ -2119,23 +2267,41 @@ interactions:
       string: !!binary |
         H4sIAAAAAAAAAwMAAAAAAAAAAAA=
     headers:
-      accept-ranges: [bytes]
-      access-control-allow-origin: ['*']
-      age: ['0']
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-length: ['20']
-      content-type: [text/html; charset=UTF-8]
-      date: ['Thu, 31 Mar 2016 13:46:18 GMT']
-      location: ['http://legendas.tv/']
-      set-cookie: ['au=deleted; expires=Wed, 01-Apr-2015 13:47:15 GMT; path=/', 'PHPSESSID=deleted;
-          expires=Wed, 01-Apr-2015 13:47:15 GMT; path=/', PHPSESSID=6k3pl9jqk6e48v3n8rk2rlp1l4;
-          path=/; HttpOnly]
-      vary: ['Accept-Encoding,User-Agent']
-      via: [1.1 varnish]
-      x-backend: [default_director]
-      x-cache: [MISS]
-      x-cacheable: ['YES:Forced']
-      x-varnish: ['2027371001']
-    status: {code: 302, message: Found}
+      Accept-Ranges:
+      - bytes
+      Access-Control-Allow-Origin:
+      - '*'
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '20'
+      Content-Type:
+      - text/html; charset=UTF-8
+      Date:
+      - Sat, 09 May 2020 11:44:07 GMT
+      Location:
+      - http://legendas.tv/
+      Set-Cookie:
+      - au=deleted; expires=Fri, 10-May-2019 12:01:18 GMT; path=/
+      - PHPSESSID=deleted; expires=Fri, 10-May-2019 12:01:18 GMT; path=/
+      - PHPSESSID=q46hga45k1h1eshnjbm926v2b5; path=/; HttpOnly
+      Vary:
+      - Accept-Encoding,User-Agent
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cacheable:
+      - YES:Forced
+      X-Varnish:
+      - '824657729'
+      X-backend:
+      - default_director
+    status:
+      code: 302
+      message: Found
 version: 1

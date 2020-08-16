@@ -2,60 +2,165 @@ interactions:
 - request:
     body: null
     headers:
-      User-Agent: [Subliminal/2.1]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.1
     method: GET
     uri: http://argenteam.net/api/v1/search?q=The+Big+Bang+Theory+S07E05
   response:
-    body: {string: !!python/unicode '{"results":[{"id":73114,"title":"The Big Bang
-        Theory (2007)  [S07E05] - The Workplace Proximity","type":"episode","summary":"Sheldon
-        must decide how much \"Amy time\" is too much after she takes a job at his
-        university. Meanwhile, Howard finds himself sleeping on Raj''s couch after
-        a fight with Bernadette. \r\n","imdb":"","poster":""}],"total":1,"offset":0}'}
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA0SNzUrDQBRGX+XjblSIJfWHQnYWBDeC2IKLpotp5iZz28xMmLkxhtJ3l+LC3YED
+        55wpcR57zVTtziSWqtXjcvlUkIr2TBVtHWMtHdYmdNg6jmnG7UNZru6A3aZcvZbPe9xfDb5iOg29
+        aRgfKf6IF52pIJ2Ha4cHydEyFZRH702aqaKN497GAD9mheVGLMPFCX5sHGp68TNUPNcEydAY/4Rp
+        lROyY6g5cYbBMR5gFE4yxiDfnLLovMA7mzA56bnAW5xMsmgl2AwnPnPfIvfMg4QOMeDTHG8ymvg/
+        MGilc4pJ1GHNKRjLqrxAnepABYm3B6qIChpiVk5XvuwL0qimp2pZUGzbzEpVefkFAAD//wMAf2pc
+        cmYBAAA=
     headers:
-      content-type: [application/json;charset=UTF-8]
-      date: ['Thu, 01 Feb 2018 13:42:07 GMT']
-      server: [Apache-Coyote/1.1]
-    status: {code: 200, message: OK}
+      cf-cache-status:
+      - DYNAMIC
+      cf-ray:
+      - 590af2f988830618-FRA
+      cf-request-id:
+      - 029ab62ff2000006186c176200000001
+      connection:
+      - keep-alive
+      content-encoding:
+      - gzip
+      content-type:
+      - application/json;charset=UTF-8
+      date:
+      - Sat, 09 May 2020 11:06:05 GMT
+      server:
+      - cloudflare
+      set-cookie:
+      - __cfduid=d2dbd2261becb3ba0c2b717fdc0ebc90c1589022365; expires=Mon, 08-Jun-20
+        11:06:05 GMT; path=/; domain=.argenteam.net; HttpOnly; SameSite=Lax
+      transfer-encoding:
+      - chunked
+    status:
+      code: 200
+      message: OK
 - request:
     body: null
     headers:
-      User-Agent: [Subliminal/2.1]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - __cfduid=d2dbd2261becb3ba0c2b717fdc0ebc90c1589022365
+      User-Agent:
+      - Subliminal/2.1
     method: GET
     uri: http://argenteam.net/api/v1/episode?id=73114
   response:
-    body: {string: !!python/unicode '{"id":73114,"tvdb":"4668379","season":7,"number":"05","title":"The
-        Workplace Proximity","summary":"Sheldon must decide how much \"Amy time\"
-        is too much after she takes a job at his university. Meanwhile, Howard finds
-        himself sleeping on Raj''s couch after a fight with Bernadette. \r\n","releases":[{"source":"HDTV","codec":"x264","team":"LOL","tags":"","size":"125
-        MB","torrents":[{"uri":"http://torrent.zoink.it/The.Big.Bang.Theory.S07E05.HDTV.x264-LOL.[eztv].torrent","alt":"magnet:?xt=urn:btih:33NEBBRSE7EIEEI37UHCHGWKKEA3FNDI&dn=The.Big.Bang.Theory.S07E05.HDTV.x264-LOL&tr=udp://tracker.openbittorrent.com:80&tr=udp://tracker.publicbt.com:80&tr=udp://tracker.istole.it:80&tr=udp://open.demonii.com:80&tr=udp://tracker.coppersurfer.tk:80"}],"elinks":[{"uri":"ed2k://|file|The.Big.Bang.Theory.S07E05.The.Workplace.Proximity.HDTV.x264-LOL.mp4|132021998|416AD1B4AC8503FADBFB361A92041163|h=YX35KXULZF6CXCRY72CVMAILL6R34RAU|/"}],"subtitles":[{"uri":"http://www.argenteam.net/subtitles/48309/The.Big.Bang.Theory.%282007%29.S07E05-The.Workplace.Proximity.HDTV.x264-LOL","count":70672}]},{"source":"HDTV","codec":"x264","team":"DIMENSION","tags":"720p","size":"475
-        MB","torrents":[{"uri":"http://proxy.piratenpartij.nl/piratebaytorrents.info/9063357/The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION.torrent","alt":"magnet:?xt=urn:btih:8455a30263bd444b10d223ea661b5a09990998db&dn=The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION+%5BPublicHD%5D&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Ftracker.publicbt.com%3A80&tr=udp%3A%2F%2Ftracker.istole.it%3A6969&tr=udp%3A%2F%2Ftracker.ccc.de%3A80&tr=udp%3A%2F%2Fopen.demonii.com%3A1337"}],"elinks":[{"uri":"ed2k://|file|The.Big.Bang.Theory.S07E05.The.Workplace.Proximity.720p.HDTV.x264-DIMENSION.mkv|501910737|9AADEBB9D784ACE6C9C2148622B315CC|h=SFTDPTCPBTQFO66BFWOBH2ZG4NUJIXYS|/"}],"subtitles":[{"uri":"http://www.argenteam.net/subtitles/48310/The.Big.Bang.Theory.%282007%29.S07E05-The.Workplace.Proximity.HDTV.x264.720p-DIMENSION","count":70672}]},{"source":"WEB-DL","codec":"H.264","team":"NoGRP","tags":"720p","size":"600
-        MB","torrents":[{"uri":"magnet:?xt=urn:btih:700b7e974061bd77a2e05b3a2e2dd1038ea9bf0d&dn=The.Big.Bang.Theory.S07E05.The.Workplace.Proximity.720p.WEB-DL.D&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Ftracker.publicbt.com%3A80&tr=udp%3A%2F%2Ftracker.istole.it%3A6969&tr=udp%3A%2F%2Ftracker.ccc.de%3A80&tr=udp%3A%2F%2Fopen.demonii.com%3A1337"}],"elinks":[{"uri":"ed2k://|file|The.Big.Bang.Theory.S07E05.The.Workplace.Proximity.720p.WEB-DL.DD5.1.H.264.mkv|636672337|A2F5F6AA74DE882C475274ACA62D344C|h=JHJIE74DVCLLFEP4UGKWUOSU446HIKUR|/"}],"subtitles":[{"uri":"http://www.argenteam.net/subtitles/48311/The.Big.Bang.Theory.%282007%29.S07E05-The.Workplace.Proximity.WEB-DL.H.264.720p-NoGRP","count":70672}]},{"source":"WEB-DL","codec":"H.264","team":"NoGRP","tags":"1080p","size":"775
-        MB","torrents":[{"uri":"magnet:?xt=urn:btih:eabcd99e7ff2ccff2a720629b0da5368ce577156&dn=The.Big.Bang.Theory.S07E05.The.Workplace.Proximity.1080p.WEB-DL.&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Ftracker.publicbt.com%3A80&tr=udp%3A%2F%2Ftracker.istole.it%3A6969&tr=udp%3A%2F%2Ftracker.ccc.de%3A80&tr=udp%3A%2F%2Fopen.demonii.com%3A1337"}],"elinks":[{"uri":"ed2k://|file|The.Big.Bang.Theory.S07E05.The.Workplace.Proximity.1080p.WEB-DL.DD5.1.H.264.mkv|811209513|F9A15405E6D77DE9D6AFE980F64F09AE|h=CVT3VK57O2V6Z6EWCBIVI55T5MYQB7KR|/"}],"subtitles":[{"uri":"http://www.argenteam.net/subtitles/48312/The.Big.Bang.Theory.%282007%29.S07E05-The.Workplace.Proximity.WEB-DL.H.264.1080p-NoGRP","count":70672}]},{"source":"BDRip","codec":"x264","team":"DEMAND","tags":"","size":"150
-        MB","torrents":[],"elinks":[{"uri":"ed2k://|file|The.Big.Bang.Theory.S07E05.The.Workplace.Proximity.BDRip.x264-DEMAND.mkv|154139276|06D8D01D2981B4EECEC6E06C4FC82DDC|h=BNB5LZOL3ZSS2YV6KXVHDARLIS3HYGLF|/"}],"subtitles":[{"uri":"http://www.argenteam.net/subtitles/56633/The.Big.Bang.Theory.%282007%29.S07E05-The.Workplace.Proximity.BDRip.x264-DEMAND","count":70672}]}]}'}
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA+yT2W7bOBSGX4Ug4M7FODRFUisQDLQ5duMs46VJ2/SCkmiLtRZDouK4dd99ICdN
+        0jZOU3Tmbi6ls/D85/zfZygT6JhU01gXquskgg5khmFR04ZdWAtelwV0zC4smjwSFXQg1mEXKqky
+        AR04TQW4KKvlKuOxAOdVeSNzqTZtaZPnvNpAB05SkSVlAfKmViARsUwESMs1yJs4BVfQzTdAyVxc
+        QSBroMryNsDnSlSgTgVQfClqwMHHMgJcgVTWoCnktahqqTYInAherFOZiS4YlGteJWAui6QGqcxr
+        kc1BnQmxksUClAUY849/1CAuHx7gYC4XqQJrqVLgiargiVBKIHBVXRWwCyuRCV6LGjrvP8O6bKq4
+        lT0Ipm9gF8ZlImLowBtisHYpgufQgaOzUfvBFzV0YLsJ+amt0YgOTrw2UlaVKNRty6aS0IGpUiun
+        17uLoE+lLJZIqt40FciTC+TxYoGmqSirDZpgM8Q6akdA7cMHo7MRei8+qesP6K4B7EKeKejAnC8K
+        oZy/btRhUxVOpGTqUHoaet54EprhMAyH1JwN/MHRxfFx6NL+aTB8lRSHL333laoOm2Q3esXjpahQ
+        uRJFJNVXJXGZOxb+MW3VRJmMo/0JslZlJpBU30Tb7igReVlIubc0LlcrUdVNNRcVUkvHwvDLhy4U
+        mSyWj5cuErJ0er3tXGZi+4ziNnTvcXTv8e8ukK/YVqMEE822rS3TDDfQPOb6lo5p3w28vkcNzbUJ
+        Zppm0G16+PaS6seXs9G7vuFf+uO3JvHfnLjD0cgYUzZ2Z9vebuy6iXawPWGX9XqNeLUQRWs8VAjV
+        u0/uMYti+0n/dIhFMDY7xL4TePAigTu7N4WCjoUJJV8+fOm+FIhgeBKeToZnpw9YmASvHtBg5k/R
+        WFXlzQatZMWVKFa8UvIjKrLe7Y+Ib75WIlnMy56NDUp18zl+2gluFV62Cu9nfBFDFtN1TjExaJQw
+        xiINJ4RQwQ1Di3SObdvGtm0l0U9Y2jfDnx3dO98RMgg6enBn8Q51O6TfIf39rHWoe0/ED+mPmXs2
+        8Z69DnUN27D35cVxjBLxZKvvQe1QV6PU/G9AfFjjzbenzJfXWx1rtoZNam5t1w1Cz7MD02KuHxq+
+        7RONWQYhHtV039+mh5P+NDif+ufe9O/+mWF4/Yszb0DeHbHT2evh5dvJbzOp4X+LyZ3qg8doPYPn
+        RegdBKNHgA7QN4Selkfj8310GhjvpfMpOEyMI1PYJsOGFiWmyYnAekQ5ESRJNEwtwe1ojpOfwPHs
+        tW8Fof/R+JVlBTrS0O7yOzIMahgmodTcuqSv9w3XNVkQWhbxmakTk7m+a5CAMtaS8XrwehiaLHjj
+        j0b98JzNjo4vZmeTGWPGYHg8G/8+GdovkfEPAAAA///sl01OwzAQha9kjzNje8Ei/qNR0lY0lSGR
+        WKRpIthxgHB3hGklRAoCWnbc4L15882z51YPLt/8JTiOW305MDhT78mQX/TWKTKGbtfvtR7kOELf
+        jyN0EhiB3rF9h4JUP6CUHOmXZCR1xzn8k/GDYX1EQ3EOTCMXU9A5x4yhJyel89pRHrxWLFAWmM79
+        9HBl41bEEuUaIrXkb60pYoG4xWVzY2R5ATTgkmgk499hw7jN49Pnjzq/zFfu5EcH533xFwkmfYfK
+        T2JSdBwzLjRImhg55Rh3oBU3mffWW/KMbBasAuder5pZGazadSXauoYmUnkXFy7fVEUtFs11Fc6L
+        DomEODO6mcl5ZvfPLwAAAP//AwDZm2i+xQ8AAA==
     headers:
-      content-type: [application/json;charset=UTF-8]
-      date: ['Thu, 01 Feb 2018 13:42:07 GMT']
-      server: [Apache-Coyote/1.1]
-    status: {code: 200, message: OK}
+      cf-cache-status:
+      - DYNAMIC
+      cf-ray:
+      - 590af2facdd30618-FRA
+      cf-request-id:
+      - 029ab630c0000006186c19d200000001
+      connection:
+      - keep-alive
+      content-encoding:
+      - gzip
+      content-type:
+      - application/json;charset=UTF-8
+      date:
+      - Sat, 09 May 2020 11:06:06 GMT
+      server:
+      - cloudflare
+      transfer-encoding:
+      - chunked
+    status:
+      code: 200
+      message: OK
 - request:
     body: null
     headers:
-      User-Agent: [Subliminal/2.1]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - __cfduid=d2dbd2261becb3ba0c2b717fdc0ebc90c1589022365
+      User-Agent:
+      - Subliminal/2.1
     method: GET
     uri: http://www.argenteam.net/subtitles/48309/The.Big.Bang.Theory.%282007%29.S07E05-The.Workplace.Proximity.HDTV.x264-LOL
   response:
-    body: {string: !!python/unicode ''}
+    body:
+      string: !!python/unicode ''
     headers:
-      content-length: ['0']
-      content-type: [text/plain; charset=ISO-8859-1]
-      date: ['Thu, 01 Feb 2018 13:42:09 GMT']
-      location: ['http://subs.argenteam.net/The.Big.Bang.Theory.(2007).S07E05-The.Workplace.Proximity-aRGENTeaM-48309.zip']
-      server: [Apache-Coyote/1.1]
-    status: {code: 302, message: Moved Temporarily}
+      cf-cache-status:
+      - DYNAMIC
+      cf-ray:
+      - 590af2fd29289784-FRA
+      cf-request-id:
+      - 029ab6323a00009784962fd200000001
+      connection:
+      - keep-alive
+      content-length:
+      - '0'
+      date:
+      - Sat, 09 May 2020 11:06:06 GMT
+      location:
+      - http://subs.argenteam.net/The.Big.Bang.Theory.(2007).S07E05-The.Workplace.Proximity-aRGENTeaM-48309.zip
+      server:
+      - cloudflare
+    status:
+      code: 302
+      message: Moved Temporarily
 - request:
     body: null
     headers:
-      User-Agent: [Subliminal/2.1]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - __cfduid=d2dbd2261becb3ba0c2b717fdc0ebc90c1589022365
+      User-Agent:
+      - Subliminal/2.1
     method: GET
     uri: http://subs.argenteam.net/The.Big.Bang.Theory.(2007).S07E05-The.Workplace.Proximity-aRGENTeaM-48309.zip
   response:
@@ -269,12 +374,29 @@ interactions:
         QmFuZy5UaGVvcnkuUzA3RTA1LlRoZS5Xb3JrcGxhY2UuUHJveGltaXR5LkhEVFYueDI2NC1MT0wu
         c3J0UEsFBgAAAAABAAEAcgAAAG8tAAAAAA==
     headers:
-      accept-ranges: [bytes]
-      content-length: ['11767']
-      content-type: [application/zip]
-      date: ['Thu, 01 Feb 2018 13:42:10 GMT']
-      etag: ['"ab18-2df7-4e91e2dc4b740"']
-      last-modified: ['Sat, 19 Oct 2013 20:48:53 GMT']
-      server: [Apache/2.2.22 (Debian)]
-    status: {code: 200, message: OK}
+      accept-ranges:
+      - bytes
+      cf-cache-status:
+      - DYNAMIC
+      cf-ray:
+      - 590af2ff0d301f55-FRA
+      cf-request-id:
+      - 029ab6336800001f5556323200000001
+      connection:
+      - keep-alive
+      content-length:
+      - '11767'
+      content-type:
+      - application/zip
+      date:
+      - Sat, 09 May 2020 11:06:06 GMT
+      etag:
+      - '"2df7-4e91e2dc4b740"'
+      last-modified:
+      - Sat, 19 Oct 2013 20:48:53 GMT
+      server:
+      - cloudflare
+    status:
+      code: 200
+      message: OK
 version: 1

@@ -1,6 +1,6 @@
 interactions:
 - request:
-    body: !!python/unicode '<?xml version=''1.0''?>
+    body: '<?xml version=''1.0''?>
 
       <methodCall>
 
@@ -38,45 +38,78 @@ interactions:
 
       '
     headers:
-      Accept-Encoding: [gzip]
-      Content-Length: ['344']
-      Content-Type: [text/xml]
-      User-Agent: [xmlrpclib.py/1.0.1 (by www.pythonware.com)]
+      Accept-Encoding:
+      - gzip
+      Content-Length:
+      - '344'
+      Content-Type:
+      - text/xml
+      User-Agent:
+      - Python-xmlrpc/3.8
     method: POST
     uri: https://vip-api.opensubtitles.org/xml-rpc
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAA42QyQrCMBRFf6V0bU2LFhRiRPALHHDYpclTi82LZCji11slFa0uXL3pvsPl0ulV
-        VVENxpYaJ3HWT+MIUGhZ4nESe3dIRvGUUQXupOUC7EWjBUYv3HBlQ2W05pVvttYZL9xDrQowjCJX
-        wJw+A1Ly7N+EDZ/NpcyT7Wooq32C+W5uNj2RzcR4uR5QEjSUhB/SUj/o1nHn7W/8MM2iNXLfWDfl
-        DeTfTBAaZRcqtS8qYGk/zRp3YfomkTaE1yVkRNrMSCfMO7e3JkeDAQAA
+        H4sIAAAAAAAAA42Quw7CMAxFf6XqXtIKBgY37AgxgGDoljYGCo0DeRTE11NQingNTHHs6yPrwOSi
+        mqhFY2tNeZwN0jhCqrSsaZvH3m2ScTzhoNDttFygPWqyyOEojFA2vBxa0fiua53xlbunVYmGAwmF
+        3OkDErBH/RLs+FwuD6dWFef1flrME9Jbe0qG5Syp2hJYyAALO6ynvtGtE87b3/hRmkUrEr473dRX
+        lH8zsdIkP6FS+7JBng7SDFj4fINY7+A5CYpYr4x9uLwBxDlZMIIBAAA=
     headers:
-      accept-ranges: [bytes]
-      access-control-allow-headers: ['Origin,X-Requested-With,Content-Type,Accept,DNT,Keep-Alive,User-Agent,If-Modified-Since,Cache-Control']
-      access-control-allow-methods: ['GET, POST, OPTIONS']
-      access-control-allow-origin: ['*']
-      age: ['0']
-      cf-ray: [4ae2119caddb3eaa-ZRH]
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-length: ['213']
-      content-type: [text/xml;charset=UTF-8]
-      date: ['Sun, 24 Feb 2019 12:52:20 GMT']
-      expect-ct: ['max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"']
-      server: [cloudflare]
-      set-cookie: ['__cfduid=da5e0dea44f1740bccab1c0a8457a5b7a1551012740; expires=Mon,
-          24-Feb-20 12:52:20 GMT; path=/; domain=.opensubtitles.org; HttpOnly', 'weblang=en;
-          expires=Mon, 24-Feb-2020 12:52:20 GMT; Max-Age=31536000; path=/; domain=.opensubtitles.org',
-        'PHPSESSID=Ddd5-XT4dlZ-n5YDrW%2Cc1Ac9SU3; expires=Sun, 24-Feb-2019 18:52:20
-          GMT; Max-Age=21600; path=/; domain=.opensubtitles.org; HttpOnly']
-      vary: [Accept-Encoding]
-      x-cache: [MISS]
-      x-cache-backend: [web5]
-      x-compressed-content-length: ['213']
-      x-content-encoding: [gzip]
-      x-ratelimit-remaining: ['39']
-      x-uncompressed-content-length: ['387']
-      x-via: [fw2.int.opensubtitles.org]
-    status: {code: 200, message: OK}
+      Accept-Ranges:
+      - bytes
+      Access-Control-Allow-Headers:
+      - Origin,X-Requested-With,Content-Type,Accept,DNT,Keep-Alive,User-Agent,If-Modified-Since,Cache-Control
+      Access-Control-Allow-Methods:
+      - GET, POST, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Age:
+      - '0'
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 590b79d7cfadcdbf-CDG
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '212'
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Date:
+      - Sat, 09 May 2020 12:38:09 GMT
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cfduid=d10d9d7a19368fd6a4a22269deb0f56af1589027889; expires=Mon, 08-Jun-20
+        12:38:09 GMT; path=/; domain=.opensubtitles.org; HttpOnly; SameSite=Lax
+      - weblang=en; expires=Sun, 09-May-2021 12:38:10 GMT; Max-Age=31536000; path=/;
+        domain=.opensubtitles.org
+      - PHPSESSID=dSkqvmZwVjJZN-nogsq-3bL-cvb; expires=Sat, 09-May-2020 18:38:10 GMT;
+        Max-Age=21600; path=/; domain=.opensubtitles.org; HttpOnly
+      Vary:
+      - Accept-Encoding
+      X-Cache:
+      - MISS
+      X-Cache-Backend:
+      - web5
+      X-Compressed-Content-Length:
+      - '212'
+      X-Content-Encoding:
+      - gzip
+      X-RateLimit-Remaining:
+      - '39'
+      X-Uncompressed-Content-Length:
+      - '386'
+      X-Via:
+      - fw2.int.opensubtitles.org
+      cf-request-id:
+      - 029b0a7ae10000cdbf86ae3200000001
+    status:
+      code: 200
+      message: OK
 version: 1

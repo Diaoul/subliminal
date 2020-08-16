@@ -1,38 +1,50 @@
 interactions:
 - request:
-    body: '{"username": null, "password": null, "apikey": "2AE5D1E42E7194B9"}'
+    body: !!python/unicode '{"username": null, "password": null, "apikey": "2AE5D1E42E7194B9"}'
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Accept-Language: [en]
-      Connection: [keep-alive]
-      Content-Length: ['66']
-      Content-Type: [application/json]
-      User-Agent: [Subliminal/2.0]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Accept-Language:
+      - en
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '66'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Subliminal/2.1
     method: POST
     uri: https://api.thetvdb.com/login
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAAxTIy3KqMAAA0H2/wnFPB6RA0h3yDNUgVCCycXiWgAZQnt65/97pWZ5/b5vNdmib
-        gm0/N9tidarUyqhLne/ghQRM0RMxX8o0JKOmI6HmwPdidW6FrVK3Nnhcq7x7vsxHHT3R/daguqWZ
-        GNLUug1JJFWp9vdwTaK8TCKTR3W7YP0yY12VcK2upfd+Fn6YdFHEG8KxqO3UbGXBVacW1OS0NI8W
-        N1pfh4GcX9BNW9Uw/ckcgE18BLCpcI3nc7RFDfxK/CW21eP9uXvE8elOD+mgdhLjkr5Ppl6EeV+0
-        2X7GnSUTP6MeOy0rWhK+cCElle4ZUzTC0hjOchm0TidQxVG7K+EhDoerILSE6S0JTWFvj8t3zygN
-        GoFKP+M+mx56HfDcAshHDl2UH2aRPC9ad5XNUAhfkrccl7ky9sO97AsnapRReYQFcnTKqsTepUNn
-        3xp7dx9ZAE4KsGsn1055palgBifs48557oNoBC/08KR8AWyG8lphMS6tCX4orWj1IuXAkuoStcFB
-        C4k+b9/+/wIAAP//AwB/GLRJ2wEAAA==
+      string: !!python/unicode '{"token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2Mzk5ODYsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MTg2fQ.ygLAQiJNo26mrNlnhOoR7ehiT3nayf7YOPAcu_Huca0DQsNiIwYWncM1lD1BO5YawCrj17WxReYV4M3Rxej1GrpyCRwod2vUoCKC6m326d1zGqdWBEinWxd7sndD25IPiIPUfjp12W5m_0eGOhTautEsdEvEiCn0AFVNwx6_1VO5GyHpRM_YeKevCAziaUsrlZV36BulxEuQsxffoYJVQAbB-362hXBOOU6vqmeZn9yUJhZL3ufP4NrhnGm4yWNi0WXXwzNC3u-xhII0aqyR-9rn8qc3ibb9aD1DJgMwZf0TUM3W0jK5JtmMPRrYgyRcWTE709DZvsUlketC7OXHxw"}'
     headers:
-      cf-ray: [29217aee8d3e3bdb-CDG]
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-type: [application/json]
-      date: ['Mon, 11 Apr 2016 21:20:02 GMT']
-      server: [cloudflare-nginx]
-      set-cookie: ['__cfduid=d8f4403e54831e62398b398105f9b9bcb1460409602; expires=Tue,
-          11-Apr-17 21:20:02 GMT; path=/; domain=.thetvdb.com; HttpOnly']
-      vary: [Accept-Language]
-      x-powered-by: [Thundar!]
-      x-thetvdb-api-version: [2.0.0]
-    status: {code: 200, message: OK}
+      connection:
+      - keep-alive
+      content-length:
+      - '470'
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Sat, 09 May 2020 14:39:46 GMT
+      vary:
+      - Accept-Language
+      via:
+      - 1.1 c76347c8ef1f3a2b6fb69cd7d1c6f749.cloudfront.net (CloudFront)
+      x-amz-cf-id:
+      - V-Qx3Ixt4mtw8LAyJGD4pMPHMBPyuMqDclLH3GSPHCwiJh4fL6O9nQ==
+      x-amz-cf-pop:
+      - ZRH50-C1
+      x-cache:
+      - Miss from cloudfront
+      x-powered-by:
+      - Thundar!
+      x-thetvdb-api-version:
+      - 3.0.0
+    status:
+      code: 200
+      message: OK
 version: 1

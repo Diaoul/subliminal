@@ -2,130 +2,84 @@ interactions:
 - request:
     body: null
     headers:
-      Accept: ['*/*']
+      Accept: [application/json]
       Accept-Encoding: ['gzip, deflate']
       Connection: [keep-alive]
-      User-Agent: [Subliminal/2.0]
+      User-Agent: [Subliminal/2.1]
     method: GET
-    uri: https://podnapisi.net/subtitles/search/old?sTS=5&sL=hu&sTE=18&sK=The+Big+Bang+Theory&sXML=1
+    uri: https://www.podnapisi.net/subtitles/search/advanced?keywords=The+Big+Bang+Theory&language=hu&seasons=5&episodes=18&movie_type=tv-series&movie_type=mini-series
   response:
-    body: {string: "<html>\r\n<head><title>302 Found</title></head>\r\n<body bgcolor=\"\
-        white\">\r\n<center><h1>302 Found</h1></center>\r\n<hr><center>nginx/1.8.0</center>\r\
-        \n</body>\r\n</html>\r\n"}
+    body: {string: "{\n  \"all_pages\": 1, \n  \"data\": [\n    {\n      \"audited\"\
+        : true, \n      \"contributions\": [\n        {\n          \"contributor\"\
+        : {\n            \"id\": 40156, \n            \"name\": \"kvrle\", \n    \
+        \        \"type\": \"user\"\n          }, \n          \"role\": \"uploader\"\
+        , \n          \"share\": 0.0\n        }\n      ], \n      \"contributor\"\
+        : {\n        \"id\": 40156, \n        \"name\": \"kvrle\", \n        \"type\"\
+        : \"user\"\n      }, \n      \"created\": \"2012-02-26T00:42:49+00:00\", \n\
+        \      \"custom_releases\": [\n        \"The.Big.Bang.Theory.S05E18.HDTV-LOL\"\
+        , \n        \"The.Big.Bang.Theory.S05E18.720p.HDTV.x264-DIMENSION\"\n    \
+        \  ], \n      \"download\": \"/en/subtitles/hu-the-big-bang-theory-2007-S05E18-O/ZtAW/download\"\
+        , \n      \"flags\": [\n        \"high_definition\"\n      ], \n      \"fps\"\
+        : \"23.976\", \n      \"id\": \"ZtAW\", \n      \"language\": \"hu\", \n \
+        \     \"movie\": {\n        \"aliases\": [\n          \"Veliki pokovci\"\n\
+        \        ], \n        \"episode_info\": {\n          \"episode\": 18, \n \
+        \         \"id\": null, \n          \"season\": 5, \n          \"slug\": \"\
+        S05E18-O\", \n          \"title\": \"\", \n          \"type\": \"ordinary\"\
+        , \n          \"year\": null\n        }, \n        \"id\": \"uJE\", \n   \
+        \     \"posters\": {\n          \"inline\": \"/thumbnails/moviedb/inline/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
+        , \n          \"normal\": \"/thumbnails/moviedb/normal/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
+        , \n          \"small\": \"/thumbnails/moviedb/small/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
+        , \n          \"title\": \"/thumbnails/moviedb/title/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
+        \n        }, \n        \"providers\": [\n          \"omdb:sY0G\"\n       \
+        \ ], \n        \"slug\": \"the-big-bang-theory-2007-S05E18-O\", \n       \
+        \ \"title\": \"The Big Bang Theory\", \n        \"type\": \"tv-series\", \n\
+        \        \"year\": 2007\n      }, \n      \"notes\": \"\", \n      \"num_cds\"\
+        : 1, \n      \"rejected\": null, \n      \"releases\": [], \n      \"state\"\
+        : \"migration\", \n      \"stats\": {\n        \"downloads\": 4118, \n   \
+        \     \"lines\": 323\n      }, \n      \"url\": \"/en/subtitles/hu-the-big-bang-theory-2007-S05E18-O/ZtAW\"\
+        \n    }, \n    {\n      \"audited\": false, \n      \"contributions\": [\n\
+        \        {\n          \"contributor\": {\n            \"id\": 1, \n      \
+        \      \"name\": \"Anonymous\", \n            \"type\": \"user\"\n       \
+        \   }, \n          \"role\": \"uploader\", \n          \"share\": 0.0\n  \
+        \      }\n      ], \n      \"contributor\": {\n        \"id\": 1, \n     \
+        \   \"name\": \"Anonymous\", \n        \"type\": \"user\"\n      }, \n   \
+        \   \"created\": \"2012-02-25T02:49:35+00:00\", \n      \"custom_releases\"\
+        : [\n        \"The.Big.Bang.Theory.S05E18.HDTV.XviD-FQM\"\n      ], \n   \
+        \   \"download\": \"/en/subtitles/hu-the-big-bang-theory-2007-S05E18-O/ONAW/download\"\
+        , \n      \"flags\": [], \n      \"fps\": \"\", \n      \"id\": \"ONAW\",\
+        \ \n      \"language\": \"hu\", \n      \"movie\": {\n        \"aliases\"\
+        : [\n          \"Veliki pokovci\"\n        ], \n        \"episode_info\":\
+        \ {\n          \"episode\": 18, \n          \"id\": null, \n          \"season\"\
+        : 5, \n          \"slug\": \"S05E18-O\", \n          \"title\": \"\", \n \
+        \         \"type\": \"ordinary\", \n          \"year\": null\n        }, \n\
+        \        \"id\": \"uJE\", \n        \"posters\": {\n          \"inline\":\
+        \ \"/thumbnails/moviedb/inline/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
+        , \n          \"normal\": \"/thumbnails/moviedb/normal/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
+        , \n          \"small\": \"/thumbnails/moviedb/small/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
+        , \n          \"title\": \"/thumbnails/moviedb/title/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
+        \n        }, \n        \"providers\": [\n          \"omdb:sY0G\"\n       \
+        \ ], \n        \"slug\": \"the-big-bang-theory-2007-S05E18-O\", \n       \
+        \ \"title\": \"The Big Bang Theory\", \n        \"type\": \"tv-series\", \n\
+        \        \"year\": 2007\n      }, \n      \"notes\": null, \n      \"num_cds\"\
+        : 1, \n      \"rejected\": null, \n      \"releases\": [], \n      \"state\"\
+        : \"migration\", \n      \"stats\": {\n        \"downloads\": 421, \n    \
+        \    \"lines\": 323\n      }, \n      \"url\": \"/en/subtitles/hu-the-big-bang-theory-2007-S05E18-O/ONAW\"\
+        \n    }\n  ], \n  \"page\": 1, \n  \"per_page\": 50, \n  \"status\": \"ok\"\
+        \n}"}
     headers:
       Connection: [keep-alive]
-      Content-Length: ['160']
-      Content-Type: [text/html]
-      Date: ['Wed, 23 Mar 2016 09:34:06 GMT']
-      Location: ['https://www.podnapisi.net/subtitles/search/old?sTS=5&sL=hu&sTE=18&sK=The+Big+Bang+Theory&sXML=1']
+      Content-Length: ['3982']
+      Content-Type: [application/json]
+      Date: ['Sun, 24 Feb 2019 11:52:04 GMT']
       Server: [nginx/1.8.0]
-    status: {code: 302, message: Moved Temporarily}
-- request:
-    body: null
-    headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      User-Agent: [Subliminal/2.0]
-    method: GET
-    uri: https://www.podnapisi.net/subtitles/search/old?sTS=5&sL=hu&sTE=18&sK=The+Big+Bang+Theory&sXML=1
-  response:
-    body: {string: "<html>\r\n<head><title>301 Moved Permanently</title></head>\r\n\
-        <body bgcolor=\"white\">\r\n<center><h1>301 Moved Permanently</h1></center>\r\
-        \n<hr><center>nginx/1.8.0</center>\r\n</body>\r\n</html>\r\n"}
-    headers:
-      Connection: [keep-alive]
-      Content-Length: ['184']
-      Content-Type: [text/html]
-      Date: ['Wed, 23 Mar 2016 09:34:07 GMT']
-      Location: ['https://www.podnapisi.net/subtitles/search/old?sTS=5&sL=hu&sTE=18&sK=The+Big+Bang+Theory&sXML=1']
-      Server: [nginx/1.8.0]
-    status: {code: 301, message: Moved Permanently}
-- request:
-    body: null
-    headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      User-Agent: [Subliminal/2.0]
-    method: GET
-    uri: https://www.podnapisi.net/subtitles/search/old?sTS=5&sL=hu&sTE=18&sK=The+Big+Bang+Theory&sXML=1
-  response:
-    body:
-      string: !!binary |
-        H4sIAAAAAAAAA81VWW/bRhB+z6/YKC9OIXJJHT6C8QZKpNYCHDmFhbZJUARrcU0uSi0JHpIN5Md3
-        hjecZNu+FHmRZma/2Tn2myG8ftjH7KCyXCfmcuS73ogps0sCbcLLUVncO+cjlhfSBDJOjLocPap8
-        9Fo8g+fLm7fbD+9XLFN5GRc5+/SMMXi+ul69W222nfXkxfu3y8V28SWVoTaywChf8vKu0EWsXv4k
-        0Gfo1YPYya7MMmWKMdslJf01cV7WPkOvBsnaWN+C0B1PAX22bUbsRAdjViU3Zo9KZmO2Tw5ardFa
-        ZjH+pHEiA5VVhkbeyL2i9GIlcxRiacJShpVPK9eQQhOwONwiMDEkrVKdJ0FtTNVOSwyxC/Ixu0+y
-        vcSi71NUMmybCVGJZYhqkBwNZZF/o04dPC1y2KjUflzVbfOnjtjOm17ZINhF63HX33+DorbacM2b
-        2CDtC62tjWtR/xSwxdkiEgus5w0/7JiGOXbQbc0pGwjZZjuueWhFpNYLau5aLyBW2wBGHT9X1P8a
-        NCQ3Qb5G9DPejY0NpB7krriSeaSGKf0pGDTrR0C/owQ0m0f4wFsRqnVVWWjniM5xAry7gw8vaZeP
-        AB0If3Yx92eIRRlwXsXHYvE7cJKgmk+xjRR7o0P2BvcMQyXJHoHXR0ADKiaedwa8EqGZSJF/8H4B
-        3mqAUyiiokhfcX48Ht00CYzEVaRdowre5pPzqHSKSDl3OnTuMBopGM2hAM6tN1/557xOj+6DfjeK
-        mefPT4EPLN0pjZD465DFqj+vbNioaoNSgS4W6FKBbl2gW0dzr5bb35zrm2uq+3uYs4mXVkD3YXI6
-        c5Zr/B7drm821P46ALRjusZ+z4EP1O6oSumqNKHMtDQ9pk619RBR2R/RA2Ft/nTqTfDn9IKeBQ3Q
-        bnyBsToZrc0MC/+c7K1G8HpuhVfhGwVoVLmAeiTFhi+ANzLgZ6IxoAD1zAnPRf9GhmqARIQuNG4C
-        uqHCC9EiIh1GnwN1r42mb3SNE8AHuG6AxPSCUu51GI4NpthRSEBLpo7c3gUSg9hMlL7Z/NDkrtN7
-        Sm4c9u8Se2ES87hPyrzH/Cdyu38c9NL5+dd3/ydb/elsfkbc/LHYSmTv6EdKT7jpHB+hVy3863bu
-        37blw93pCgAA
-    headers:
-      Connection: [keep-alive]
-      Content-Encoding: [gzip]
-      Content-Type: [text/xml;charset=utf-8]
-      Date: ['Wed, 23 Mar 2016 09:34:07 GMT']
-      Server: [nginx/1.8.0]
-      Vary: [Accept-Encoding]
     status: {code: 200, message: OK}
 - request:
     body: null
     headers:
-      Accept: ['*/*']
+      Accept: [application/json]
       Accept-Encoding: ['gzip, deflate']
       Connection: [keep-alive]
-      User-Agent: [Subliminal/2.0]
-    method: GET
-    uri: https://podnapisi.net/subtitles/ZtAW/download?container=zip
-  response:
-    body: {string: "<html>\r\n<head><title>302 Found</title></head>\r\n<body bgcolor=\"\
-        white\">\r\n<center><h1>302 Found</h1></center>\r\n<hr><center>nginx/1.8.0</center>\r\
-        \n</body>\r\n</html>\r\n"}
-    headers:
-      Connection: [keep-alive]
-      Content-Length: ['160']
-      Content-Type: [text/html]
-      Date: ['Wed, 23 Mar 2016 09:34:07 GMT']
-      Location: ['https://www.podnapisi.net/subtitles/ZtAW/download?container=zip']
-      Server: [nginx/1.8.0]
-    status: {code: 302, message: Moved Temporarily}
-- request:
-    body: null
-    headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      User-Agent: [Subliminal/2.0]
-    method: GET
-    uri: https://www.podnapisi.net/subtitles/ZtAW/download?container=zip
-  response:
-    body: {string: "<html>\r\n<head><title>301 Moved Permanently</title></head>\r\n\
-        <body bgcolor=\"white\">\r\n<center><h1>301 Moved Permanently</h1></center>\r\
-        \n<hr><center>nginx/1.8.0</center>\r\n</body>\r\n</html>\r\n"}
-    headers:
-      Connection: [keep-alive]
-      Content-Length: ['184']
-      Content-Type: [text/html]
-      Date: ['Wed, 23 Mar 2016 09:34:07 GMT']
-      Location: ['https://www.podnapisi.net/subtitles/ZtAW/download?container=zip']
-      Server: [nginx/1.8.0]
-    status: {code: 301, message: Moved Permanently}
-- request:
-    body: null
-    headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      User-Agent: [Subliminal/2.0]
+      User-Agent: [Subliminal/2.1]
     method: GET
     uri: https://www.podnapisi.net/subtitles/ZtAW/download?container=zip
   response:
@@ -322,7 +276,7 @@ interactions:
       Content-Disposition: [attachment; filename="e638ea178f406cb584f48051501e2cb4db4fce1d.zip"]
       Content-Length: ['10541']
       Content-Type: [application/octet-stream]
-      Date: ['Wed, 23 Mar 2016 09:34:07 GMT']
+      Date: ['Sun, 24 Feb 2019 11:52:04 GMT']
       ETag: ['"4f497ffb-292d"']
       Last-Modified: ['Sun, 26 Feb 2012 00:42:35 GMT']
       Server: [nginx/1.8.0]
@@ -330,130 +284,84 @@ interactions:
 - request:
     body: null
     headers:
-      Accept: ['*/*']
+      Accept: [application/json]
       Accept-Encoding: ['gzip, deflate']
       Connection: [keep-alive]
-      User-Agent: [Subliminal/2.0]
+      User-Agent: [Subliminal/2.1]
     method: GET
-    uri: https://podnapisi.net/subtitles/search/old?sTS=5&sL=hu&sTE=18&sK=The+Big+Bang+Theory&sXML=1
+    uri: https://www.podnapisi.net/subtitles/search/advanced?keywords=The+Big+Bang+Theory&language=hu&seasons=5&episodes=18&movie_type=tv-series&movie_type=mini-series
   response:
-    body: {string: "<html>\r\n<head><title>302 Found</title></head>\r\n<body bgcolor=\"\
-        white\">\r\n<center><h1>302 Found</h1></center>\r\n<hr><center>nginx/1.8.0</center>\r\
-        \n</body>\r\n</html>\r\n"}
+    body: {string: "{\n  \"all_pages\": 1, \n  \"data\": [\n    {\n      \"audited\"\
+        : true, \n      \"contributions\": [\n        {\n          \"contributor\"\
+        : {\n            \"id\": 40156, \n            \"name\": \"kvrle\", \n    \
+        \        \"type\": \"user\"\n          }, \n          \"role\": \"uploader\"\
+        , \n          \"share\": 0.0\n        }\n      ], \n      \"contributor\"\
+        : {\n        \"id\": 40156, \n        \"name\": \"kvrle\", \n        \"type\"\
+        : \"user\"\n      }, \n      \"created\": \"2012-02-26T00:42:49+00:00\", \n\
+        \      \"custom_releases\": [\n        \"The.Big.Bang.Theory.S05E18.HDTV-LOL\"\
+        , \n        \"The.Big.Bang.Theory.S05E18.720p.HDTV.x264-DIMENSION\"\n    \
+        \  ], \n      \"download\": \"/en/subtitles/hu-the-big-bang-theory-2007-S05E18-O/ZtAW/download\"\
+        , \n      \"flags\": [\n        \"high_definition\"\n      ], \n      \"fps\"\
+        : \"23.976\", \n      \"id\": \"ZtAW\", \n      \"language\": \"hu\", \n \
+        \     \"movie\": {\n        \"aliases\": [\n          \"Veliki pokovci\"\n\
+        \        ], \n        \"episode_info\": {\n          \"episode\": 18, \n \
+        \         \"id\": null, \n          \"season\": 5, \n          \"slug\": \"\
+        S05E18-O\", \n          \"title\": \"\", \n          \"type\": \"ordinary\"\
+        , \n          \"year\": null\n        }, \n        \"id\": \"uJE\", \n   \
+        \     \"posters\": {\n          \"inline\": \"/thumbnails/moviedb/inline/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
+        , \n          \"normal\": \"/thumbnails/moviedb/normal/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
+        , \n          \"small\": \"/thumbnails/moviedb/small/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
+        , \n          \"title\": \"/thumbnails/moviedb/title/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
+        \n        }, \n        \"providers\": [\n          \"omdb:sY0G\"\n       \
+        \ ], \n        \"slug\": \"the-big-bang-theory-2007-S05E18-O\", \n       \
+        \ \"title\": \"The Big Bang Theory\", \n        \"type\": \"tv-series\", \n\
+        \        \"year\": 2007\n      }, \n      \"notes\": \"\", \n      \"num_cds\"\
+        : 1, \n      \"rejected\": null, \n      \"releases\": [], \n      \"state\"\
+        : \"migration\", \n      \"stats\": {\n        \"downloads\": 4118, \n   \
+        \     \"lines\": 323\n      }, \n      \"url\": \"/en/subtitles/hu-the-big-bang-theory-2007-S05E18-O/ZtAW\"\
+        \n    }, \n    {\n      \"audited\": false, \n      \"contributions\": [\n\
+        \        {\n          \"contributor\": {\n            \"id\": 1, \n      \
+        \      \"name\": \"Anonymous\", \n            \"type\": \"user\"\n       \
+        \   }, \n          \"role\": \"uploader\", \n          \"share\": 0.0\n  \
+        \      }\n      ], \n      \"contributor\": {\n        \"id\": 1, \n     \
+        \   \"name\": \"Anonymous\", \n        \"type\": \"user\"\n      }, \n   \
+        \   \"created\": \"2012-02-25T02:49:35+00:00\", \n      \"custom_releases\"\
+        : [\n        \"The.Big.Bang.Theory.S05E18.HDTV.XviD-FQM\"\n      ], \n   \
+        \   \"download\": \"/en/subtitles/hu-the-big-bang-theory-2007-S05E18-O/ONAW/download\"\
+        , \n      \"flags\": [], \n      \"fps\": \"\", \n      \"id\": \"ONAW\",\
+        \ \n      \"language\": \"hu\", \n      \"movie\": {\n        \"aliases\"\
+        : [\n          \"Veliki pokovci\"\n        ], \n        \"episode_info\":\
+        \ {\n          \"episode\": 18, \n          \"id\": null, \n          \"season\"\
+        : 5, \n          \"slug\": \"S05E18-O\", \n          \"title\": \"\", \n \
+        \         \"type\": \"ordinary\", \n          \"year\": null\n        }, \n\
+        \        \"id\": \"uJE\", \n        \"posters\": {\n          \"inline\":\
+        \ \"/thumbnails/moviedb/inline/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
+        , \n          \"normal\": \"/thumbnails/moviedb/normal/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
+        , \n          \"small\": \"/thumbnails/moviedb/small/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
+        , \n          \"title\": \"/thumbnails/moviedb/title/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
+        \n        }, \n        \"providers\": [\n          \"omdb:sY0G\"\n       \
+        \ ], \n        \"slug\": \"the-big-bang-theory-2007-S05E18-O\", \n       \
+        \ \"title\": \"The Big Bang Theory\", \n        \"type\": \"tv-series\", \n\
+        \        \"year\": 2007\n      }, \n      \"notes\": null, \n      \"num_cds\"\
+        : 1, \n      \"rejected\": null, \n      \"releases\": [], \n      \"state\"\
+        : \"migration\", \n      \"stats\": {\n        \"downloads\": 421, \n    \
+        \    \"lines\": 323\n      }, \n      \"url\": \"/en/subtitles/hu-the-big-bang-theory-2007-S05E18-O/ONAW\"\
+        \n    }\n  ], \n  \"page\": 1, \n  \"per_page\": 50, \n  \"status\": \"ok\"\
+        \n}"}
     headers:
       Connection: [keep-alive]
-      Content-Length: ['160']
-      Content-Type: [text/html]
-      Date: ['Wed, 23 Mar 2016 09:34:07 GMT']
-      Location: ['https://www.podnapisi.net/subtitles/search/old?sTS=5&sL=hu&sTE=18&sK=The+Big+Bang+Theory&sXML=1']
+      Content-Length: ['3982']
+      Content-Type: [application/json]
+      Date: ['Sun, 24 Feb 2019 11:52:05 GMT']
       Server: [nginx/1.8.0]
-    status: {code: 302, message: Moved Temporarily}
-- request:
-    body: null
-    headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      User-Agent: [Subliminal/2.0]
-    method: GET
-    uri: https://www.podnapisi.net/subtitles/search/old?sTS=5&sL=hu&sTE=18&sK=The+Big+Bang+Theory&sXML=1
-  response:
-    body: {string: "<html>\r\n<head><title>301 Moved Permanently</title></head>\r\n\
-        <body bgcolor=\"white\">\r\n<center><h1>301 Moved Permanently</h1></center>\r\
-        \n<hr><center>nginx/1.8.0</center>\r\n</body>\r\n</html>\r\n"}
-    headers:
-      Connection: [keep-alive]
-      Content-Length: ['184']
-      Content-Type: [text/html]
-      Date: ['Wed, 23 Mar 2016 09:34:08 GMT']
-      Location: ['https://www.podnapisi.net/subtitles/search/old?sTS=5&sL=hu&sTE=18&sK=The+Big+Bang+Theory&sXML=1']
-      Server: [nginx/1.8.0]
-    status: {code: 301, message: Moved Permanently}
-- request:
-    body: null
-    headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      User-Agent: [Subliminal/2.0]
-    method: GET
-    uri: https://www.podnapisi.net/subtitles/search/old?sTS=5&sL=hu&sTE=18&sK=The+Big+Bang+Theory&sXML=1
-  response:
-    body:
-      string: !!binary |
-        H4sIAAAAAAAAA81VWW/bRhB+z6/YKC9OIXJJHT6C8QZKpNYCHDmFhbZJUARrcU0uSi0JHpIN5Md3
-        hjecZNu+FHmRZma/2Tn2myG8ftjH7KCyXCfmcuS73ogps0sCbcLLUVncO+cjlhfSBDJOjLocPap8
-        9Fo8g+fLm7fbD+9XLFN5GRc5+/SMMXi+ul69W222nfXkxfu3y8V28SWVoTaywChf8vKu0EWsXv4k
-        0Gfo1YPYya7MMmWKMdslJf01cV7WPkOvBsnaWN+C0B1PAX22bUbsRAdjViU3Zo9KZmO2Tw5ardFa
-        ZjH+pHEiA5VVhkbeyL2i9GIlcxRiacJShpVPK9eQQhOwONwiMDEkrVKdJ0FtTNVOSwyxC/Ixu0+y
-        vcSi71NUMmybCVGJZYhqkBwNZZF/o04dPC1y2KjUflzVbfOnjtjOm17ZINhF63HX33+DorbacM2b
-        2CDtC62tjWtR/xSwxdkiEgus5w0/7JiGOXbQbc0pGwjZZjuueWhFpNYLau5aLyBW2wBGHT9X1P8a
-        NCQ3Qb5G9DPejY0NpB7krriSeaSGKf0pGDTrR0C/owQ0m0f4wFsRqnVVWWjniM5xAry7gw8vaZeP
-        AB0If3Yx92eIRRlwXsXHYvE7cJKgmk+xjRR7o0P2BvcMQyXJHoHXR0ADKiaedwa8EqGZSJF/8H4B
-        3mqAUyiiokhfcX48Ht00CYzEVaRdowre5pPzqHSKSDl3OnTuMBopGM2hAM6tN1/557xOj+6DfjeK
-        mefPT4EPLN0pjZD465DFqj+vbNioaoNSgS4W6FKBbl2gW0dzr5bb35zrm2uq+3uYs4mXVkD3YXI6
-        c5Zr/B7drm821P46ALRjusZ+z4EP1O6oSumqNKHMtDQ9pk619RBR2R/RA2Ft/nTqTfDn9IKeBQ3Q
-        bnyBsToZrc0MC/+c7K1G8HpuhVfhGwVoVLmAeiTFhi+ANzLgZ6IxoAD1zAnPRf9GhmqARIQuNG4C
-        uqHCC9EiIh1GnwN1r42mb3SNE8AHuG6AxPSCUu51GI4NpthRSEBLpo7c3gUSg9hMlL7Z/NDkrtN7
-        Sm4c9u8Se2ES87hPyrzH/Cdyu38c9NL5+dd3/ydb/elsfkbc/LHYSmTv6EdKT7jpHB+hVy3863bu
-        37blw93pCgAA
-    headers:
-      Connection: [keep-alive]
-      Content-Encoding: [gzip]
-      Content-Type: [text/xml;charset=utf-8]
-      Date: ['Wed, 23 Mar 2016 09:34:08 GMT']
-      Server: [nginx/1.8.0]
-      Vary: [Accept-Encoding]
     status: {code: 200, message: OK}
 - request:
     body: null
     headers:
-      Accept: ['*/*']
+      Accept: [application/json]
       Accept-Encoding: ['gzip, deflate']
       Connection: [keep-alive]
-      User-Agent: [Subliminal/2.0]
-    method: GET
-    uri: https://podnapisi.net/subtitles/ZtAW/download?container=zip
-  response:
-    body: {string: "<html>\r\n<head><title>302 Found</title></head>\r\n<body bgcolor=\"\
-        white\">\r\n<center><h1>302 Found</h1></center>\r\n<hr><center>nginx/1.8.0</center>\r\
-        \n</body>\r\n</html>\r\n"}
-    headers:
-      Connection: [keep-alive]
-      Content-Length: ['160']
-      Content-Type: [text/html]
-      Date: ['Wed, 23 Mar 2016 09:34:08 GMT']
-      Location: ['https://www.podnapisi.net/subtitles/ZtAW/download?container=zip']
-      Server: [nginx/1.8.0]
-    status: {code: 302, message: Moved Temporarily}
-- request:
-    body: null
-    headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      User-Agent: [Subliminal/2.0]
-    method: GET
-    uri: https://www.podnapisi.net/subtitles/ZtAW/download?container=zip
-  response:
-    body: {string: "<html>\r\n<head><title>301 Moved Permanently</title></head>\r\n\
-        <body bgcolor=\"white\">\r\n<center><h1>301 Moved Permanently</h1></center>\r\
-        \n<hr><center>nginx/1.8.0</center>\r\n</body>\r\n</html>\r\n"}
-    headers:
-      Connection: [keep-alive]
-      Content-Length: ['184']
-      Content-Type: [text/html]
-      Date: ['Wed, 23 Mar 2016 09:34:08 GMT']
-      Location: ['https://www.podnapisi.net/subtitles/ZtAW/download?container=zip']
-      Server: [nginx/1.8.0]
-    status: {code: 301, message: Moved Permanently}
-- request:
-    body: null
-    headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      User-Agent: [Subliminal/2.0]
+      User-Agent: [Subliminal/2.1]
     method: GET
     uri: https://www.podnapisi.net/subtitles/ZtAW/download?container=zip
   response:
@@ -650,7 +558,7 @@ interactions:
       Content-Disposition: [attachment; filename="e638ea178f406cb584f48051501e2cb4db4fce1d.zip"]
       Content-Length: ['10541']
       Content-Type: [application/octet-stream]
-      Date: ['Wed, 23 Mar 2016 09:34:08 GMT']
+      Date: ['Sun, 24 Feb 2019 11:52:05 GMT']
       ETag: ['"4f497ffb-292d"']
       Last-Modified: ['Sun, 26 Feb 2012 00:42:35 GMT']
       Server: [nginx/1.8.0]

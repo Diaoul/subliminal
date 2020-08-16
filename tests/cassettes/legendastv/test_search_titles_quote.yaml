@@ -2,73 +2,126 @@ interactions:
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      User-Agent: [Subliminal/2.0]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.1
     method: GET
     uri: http://legendas.tv/legenda/sugestao/marvels%20jessica%20jones
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAA4uOBQApu0wNAgAAAA==
+        H4sIAAAAAAAAA3VTy24bMQz8FcGnFvBj/YoT3wr0UCRoD20uRRws6BVtK9VKW0pyEgT594720aSH
+        XnbBEamZIam7l1FpnOan0XZ0MLbmMBqPyvjc8ADk2GhEq02xmecoVF5w7JK1OfJJKoQvI6PLruIt
+        F5Cp9R7IYrnerFcbYNE0HsCPfOxieWTHkoECgA4VCggYAMv4awplPJeLYn5ZLBfz+XKFm6YPzbHP
+        dr4l/EpyZhvUNYdgKlLX3rVWckowzjchZ33moFn9TqxCIlUliaQevDjSiHztATcskxME7VJRsHak
+        IkuNC5LiWkWhY3twpQ2N/yVTH27kOUR26ruJKPqozqgQrrwLURKa7FvWswFZg0pPVrGqSISN9Pyp
+        zoQ1RFDNLrYZgaRqSechZjbNkaM5s2pIACRLkrV9YWt3CX26CurGxOrEbqz2ZEQ8StQ3fyb108uv
+        qfoUvbS3ZyFeFKXoNTeQaqgl2rTfpQd5qtXBS8w6Q3sPwwzEgz0nHZZhgqakuhMIOf6tLTbFbMsh
+        AZVtymHljA8Kc2cx2KIACn4agrFKgfo+hYwLedHGdZeLAXiivbHooEYp/JMiTNMiyENtLQSqcxsW
+        F5DaZEs2e0UbwZQTYWCwp01ofIgQhEbQEX3s9NK03xxNkUpLrmqnkZc072F/mMQOy32KsdnuZrvZ
+        4+PjNGNTTHM3iyZaxi/2y7+bvVvaci//21s1UQtSt9gDLxgSivDIukfaPbr492g76p9ZQs/QxQxs
+        1sV6cQH4YI+lNXssk37/wDpXLV6RH+4cTnqTk2I5KS5vi812vdi27zYn1BypOUEj+N4XvuHZVYdz
+        Y4LXGPcAZDkBo27VdJClEHEV60EeRhRzdCAb+DUblzja3sHl/ev9H16E/BmtBAAA
     headers:
-      accept-ranges: [bytes]
-      access-control-allow-origin: ['*']
-      age: ['0']
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-length: ['22']
-      content-type: [text/html; charset=utf-8]
-      date: ['Wed, 19 Jul 2017 14:46:56 GMT']
-      set-cookie: [PHPSESSID=elmu0ulpm6tkm41hq1pm7j87e4; path=/; HttpOnly]
-      vary: ['Accept-Encoding,User-Agent']
-      via: [1.1 varnish]
-      x-backend: [default_director]
-      x-cache: [MISS]
-      x-cacheable: ['NO:Not Cacheable']
-      x-varnish: ['731513148']
-    status: {code: 200, message: OK}
+      Accept-Ranges:
+      - bytes
+      Access-Control-Allow-Origin:
+      - '*'
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '675'
+      Content-Type:
+      - text/html; charset=utf-8
+      Date:
+      - Sat, 09 May 2020 11:43:57 GMT
+      Set-Cookie:
+      - PHPSESSID=vb4psah424ufqmce89n8pu6887; path=/; HttpOnly
+      Vary:
+      - Accept-Encoding,User-Agent
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cacheable:
+      - NO:Not Cacheable
+      X-Varnish:
+      - '824656950'
+      X-backend:
+      - default_director
+    status:
+      code: 200
+      message: OK
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      Cookie: [PHPSESSID=elmu0ulpm6tkm41hq1pm7j87e4]
-      User-Agent: [Subliminal/2.1]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - PHPSESSID=vb4psah424ufqmce89n8pu6887
+      User-Agent:
+      - Subliminal/2.1
     method: GET
     uri: http://legendas.tv/legenda/sugestao/marvel's%20jessica%20jones
   response:
     body:
       string: !!binary |
-        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
+        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
+        AA==
     headers:
-      accept-ranges: [bytes]
-      access-control-allow-origin: ['*']
-      age: ['0']
-      connection: [keep-alive]
-      content-encoding: [gzip]
-      content-length: ['678']
-      content-type: [text/html; charset=utf-8]
-      date: ['Thu, 31 Mar 2016 13:46:12 GMT']
-      set-cookie: [PHPSESSID=cdotucclci62i2t1ous11m0h91; path=/; HttpOnly]
-      vary: ['Accept-Encoding,User-Agent']
-      via: [1.1 varnish]
-      x-backend: [default_director]
-      x-cache: [MISS]
-      x-cacheable: ['NO:Not Cacheable']
-      x-varnish: ['2027370334']
-    status: {code: 200, message: OK}
+      Accept-Ranges:
+      - bytes
+      Access-Control-Allow-Origin:
+      - '*'
+      Age:
+      - '0'
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '685'
+      Content-Type:
+      - text/html; charset=utf-8
+      Date:
+      - Sat, 09 May 2020 11:43:57 GMT
+      Vary:
+      - Accept-Encoding,User-Agent
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cacheable:
+      - YES:Forced
+      X-Varnish:
+      - '824656968'
+      X-backend:
+      - default_director
+    status:
+      code: 200
+      message: OK
 version: 1

@@ -92,6 +92,7 @@ provider_manager = RegistrableExtensionManager('subliminal.providers', [
     'argenteam = subliminal.providers.argenteam:ArgenteamProvider',
     'bsplayer = subliminal.providers.bsplayer:BSPlayerProvider',
     'legendastv = subliminal.providers.legendastv:LegendasTVProvider',
+    'napiprojekt = subliminal.providers.napiprojekt:NapiProjektProvider',
     'opensubtitles = subliminal.providers.opensubtitles:OpenSubtitlesProvider',
     'opensubtitlesvip = subliminal.providers.opensubtitles:OpenSubtitlesVipProvider',
     'podnapisi = subliminal.providers.podnapisi:PodnapisiProvider',
@@ -101,7 +102,7 @@ provider_manager = RegistrableExtensionManager('subliminal.providers', [
 ])
 
 #: Disabled providers
-disabled_providers = ['opensubtitlesvip']
+disabled_providers = ['addic7ed', 'napiprojekt', 'opensubtitlesvip', 'shooter']
 
 #: Default enabled providers
 default_providers = [p for p in provider_manager.names() if p not in disabled_providers]

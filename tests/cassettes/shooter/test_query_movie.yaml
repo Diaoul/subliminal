@@ -2,20 +2,41 @@ interactions:
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      Content-Length: ['0']
-      User-Agent: [Subliminal/2.0]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '0'
+      User-Agent:
+      - Subliminal/2.1
     method: POST
-    uri: https://www.shooter.cn/api/subapi.php?lang=chn&pathinfo=%2Fhome%2Fantoine%2FPycharmProjects%2Fsubliminal%2FMan+of+Steel+%282013%29%2Fman.of.steel.2013.720p.bluray.x264-felony.mkv&filehash=314f454ab464775498ae6f1f5ad813a9%3Bfdaa8b702d8936feba2122e93ba5c44f%3B0a6935e3436aa7db5597ef67a2c494e3%3B4d269733f36ddd49f71e92732a462fe5&format=json
+    uri: https://www.shooter.cn/api/subapi.php?filehash=314f454ab464775498ae6f1f5ad813a9%3Bfdaa8b702d8936feba2122e93ba5c44f%3B0a6935e3436aa7db5597ef67a2c494e3%3B4d269733f36ddd49f71e92732a462fe5&pathinfo=%2Fhome%2Fjones%2Fworkspace%2Fsubliminal%2FMan+of+Steel+%282013%29%2Fman.of.steel.2013.720p.bluray.x264-felony.mkv&format=json&lang=chn
   response:
-    body: {string: !!python/unicode '[{"Desc":"","Delay":0,"Files":[{"Ext":"srt","Link":"https://www.shooter.cn/api/subapi.php?fetch=MTQ1ODcyMTg5MnxXbFdxWWRDNG1POF93SXJzRkdGSFRJWXhpZE5wQnBHVmxzM2Y5Zm1UeS0zUnpjbk83NHN4Y3FqOHBOTjc2Q0t5ZGN1Q1Y3aTlWejl3YXVKQ3o2TWR3WFJKdEZaQzRRcWJhVFdZQWlraDF0djQ5UmkwOFlHTkFQcTFsNDQyelBvMl9iNzRGbWpndnJlY2JYZlU4SVlPM3Q2Z1RVcUFTWjQ9fFFeCvqKhZjgdvhExlxdmD7shy_lFtJn_j1gAG0GLlOU\u0026nonce=K%8D%ED%23%8CI%F1%D45%BEAOz%8B%14%8B"}]},{"Desc":"","Delay":0,"Files":[{"Ext":"srt","Link":"https://www.shooter.cn/api/subapi.php?fetch=MTQ1ODcyMTg5MnxUcFNfTnlvNVdKenpUVkZOTnhzVFJqUWd0OXZuRnlPand6aTctN0xmaHNQcENaWjVHTlNJWnhkVTExM2lQcnlULXZPMl9Kc0gycE9IdlN3Mk5scmdncjY5ZVU5b0R6amRqdVNkenJ6eEpsVmo3N2gyUXlkbVQ0Q2J6NjV4LXh0SS16TGc1dnZIZDI0bDdUVS1TSVR5WmdnaXdtck5HTlE9fC4QpBWJxXXp7kl1PwIAVu72mlUN_7OJcYl7d1JJfnbG\u0026nonce=%0F%3F%0A%F89%09%08W%1E%80%0E%C6%1EZ%FBp"}]},{"Desc":"","Delay":0,"Files":[{"Ext":"srt","Link":"https://www.shooter.cn/api/subapi.php?fetch=MTQ1ODcyMTg5Mnx3T0NvVHRZUmtiT2RsbWdIeHZNR3pOMEhaRHYzT2NsU1U2RFpRZmFQeDFJMmItNm1xeHQ1UzMtMnlDcTE4YXpkTmpUazRuMzY0UGlWanhwNEx4aENKRVNhUGFaU3h4akpwR2ZocXJGb0JGM182LW9oSkFqZDZZVkItM040TEloRTViVkJwTWdSX0xYQzNia3FwSDZsLW0xRFZ1bjgwRWc9fB6lPdkQyF7hpKrocMevZsYa-9pXwZzTtUvd9NroFLep\u0026nonce=%2C%CD%F8v%E6%1E%D3%0B3%3F5%C3%FDmo%13"}]}]'}
+    body:
+      string: '[{"Desc":"","Delay":0,"Files":[{"Ext":"srt","Link":"https://www.shooter.cn/api/subapi.php?fetch=MTU4OTAyNzA4Nnw2T2xZTTV2a256VUlVYzVFUWhxRGlkTFotUDIzc09SWFBZUTZNUHp4WDhQTHhXNXFzMzlIRFd4ZUNXeFFPbGRNUHo0VzRMcEFtRTNaaTJHZ3Nzd2Y1enE3YmhUUWhYck9heFFpdFBKWE1tWGtrRzdmMGRtZElwMUZZTkRQcmtRWDRXZExhekthaFNoeUJleFpTc0tUQkZqU0VubEhYOG89fJCHyQSlEJ3LH2drDugn2iEEUaMPjwCaM3LFbaolC0SC\u0026nonce=K%B2O0bx%F4%5Bd%80%8E%BF%15%92%B8%F9"}]},{"Desc":"","Delay":0,"Files":[{"Ext":"srt","Link":"https://www.shooter.cn/api/subapi.php?fetch=MTU4OTAyNzA4NnxhYVJrOUZYb0QtQ0R4ZjdGbExjczJtWFdKT3dmdjF2dmVOSmV0TDZ6UzUyQjJIR0Y2SzRVdlhOOGVWVlRkeDd5VGF6T1RyVUNtaFlPamZ4Z1M2R2VULXpUNDBkaHp2STdvNU5jaGRFakZRQ0JmU3lXQ1Bmd1p3b3RWZmxHNXc1Ty1uVjZUMEZYcklVUS1ZTkZaODlRUS1OMmJ4VU50N0k9fHmq0i5ZOIU0aF-TWbK2fHJmP2Mcz3qBPkaTdFe38fES\u0026nonce=%7C%15b%B8%BE%FE%AC%DE%15_%ADNt1r%84"}]},{"Desc":"","Delay":0,"Files":[{"Ext":"srt","Link":"https://www.shooter.cn/api/subapi.php?fetch=MTU4OTAyNzA4NnxwQlplb1hpeDBZbW8wTFU0QUNqbVBIVUxpT1N2dUR2VFNxNk4waVg5U2VzbURDUHU4QWtJTGVFbS1OekFqMkRpTUxxM3FCV2FNSnZMX2djTGJDb3VmSHI4Z2J3N1NMdkVrV0M4MHFYOXJSMzdRZDlBQTVzbGIwUTVZVU1qNVV6Q1NGTlNYTThQOXVoa24wWE5ORElZeHN0ajNVbnpXQVU9fNo0humJuS1XivtW2555xTV22u0PA120YtYzsGK3CXyq\u0026nonce=i%D8%CFTZ%3F%FE%D9O8%60%F9%B4%A8%5E%16"}]}]'
     headers:
-      connection: [keep-alive]
-      content-type: [application/json; charset=utf-8]
-      date: ['Wed, 23 Mar 2016 08:47:18 GMT']
-      set-cookie: [SERVERID=7fad01ef5bb15ec46fb1a79d14039fc6|1458722838|1458722838;Path=/]
-      x-cache-status: [MISS]
-    status: {code: 200, message: OK}
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sat, 09 May 2020 12:25:18 GMT
+      EagleId:
+      - 2ff62b9815890271185944413e
+      Server:
+      - Tengine
+      Timing-Allow-Origin:
+      - '*'
+      Transfer-Encoding:
+      - chunked
+      Via:
+      - cache27.l2ot7-1[266,0], cache4.de2[421,0]
+      X-Cache-Status:
+      - MISS
+    status:
+      code: 200
+      message: OK
 version: 1

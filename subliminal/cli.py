@@ -319,11 +319,13 @@ def cache(ctx, clear_subliminal):
 @click.option('-w', '--max-workers', type=click.IntRange(1, 50), default=None, help='Maximum number of threads to use.')
 @click.option('-z/-Z', '--archives/--no-archives', default=True, show_default=True, help='Scan archives for videos '
               '(supported extensions: %s).' % ', '.join(ARCHIVE_EXTENSIONS))
+@click.option('-o', '--offset', type=click.IntRange(0), default=0, help='Number of subtitles to skip'
+                                                                        'in a score-sorted list')
 @click.option('-v', '--verbose', count=True, help='Increase verbosity.')
 @click.argument('path', type=click.Path(), required=True, nargs=-1)
 @click.pass_obj
 def download(obj, provider, refiner, language, age, directory, encoding, single, force, hearing_impaired, min_score,
-             max_workers, archives, verbose, path):
+             max_workers, archives, offset, verbose, path):
     """Download best subtitles.
 
     PATH can be an directory containing videos, a video file path or a video file name. It can be used multiple times.
@@ -437,7 +439,7 @@ def download(obj, provider, refiner, language, age, directory, encoding, single,
                 scores = get_scores(v)
                 subtitles = p.download_best_subtitles(p.list_subtitles(v, language - v.subtitle_languages),
                                                       v, language, min_score=scores['hash'] * min_score / 100,
-                                                      hearing_impaired=hearing_impaired, only_one=single)
+                                                      hearing_impaired=hearing_impaired, only_one=single, offset=offset)
                 downloaded_subtitles[v] = subtitles
 
         if p.discarded_providers:

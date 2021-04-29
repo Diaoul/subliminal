@@ -30,7 +30,7 @@ setup_requirements = ['pytest-runner'] if {'pytest', 'test', 'ptr'}.intersection
 install_requirements = ['guessit>=3.0.0', 'babelfish>=0.5.2', 'enzyme>=0.4.1', 'beautifulsoup4>=4.4.0',
                         'requests>=2.0', 'click>=4.0', 'dogpile.cache>=0.6.0', 'stevedore>=1.20.0',
                         'chardet>=2.3.0', 'srt>=3.5.0', 'six>=1.9.0', 'appdirs>=1.3', 'rarfile>=2.7',
-                        'pytz>=2012c']
+                        'pytz>=2012c', 'setuptools']
 if sys.version_info < (3, 2):
     install_requirements.append('futures>=3.0')
 

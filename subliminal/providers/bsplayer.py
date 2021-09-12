@@ -114,11 +114,11 @@ class BSPlayerProvider(Provider):
             '<ns1:{func_name}>{params}</ns1:{func_name}></SOAP-ENV:Body></SOAP-ENV:Envelope>'
         ).format(search_url=self.search_url, func_name=func_name, params=params)
 
-        for i in xrange(tries):
+        for i in range(tries):
             try:
                 res = self.session.post(self.search_url, data=data, headers=headers)
                 return ElementTree.fromstring(res.content)
-            except Exception, ex:
+            except Exception as ex:
                 logger.error("[BSPlayer] ERROR: %s." % ex)
                 if func_name == 'logIn':
                     self.search_url = get_sub_domain()

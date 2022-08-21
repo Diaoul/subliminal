@@ -18,14 +18,26 @@ from ..video import Episode
 
 logger = logging.getLogger(__name__)
 
+# Mostly a copy of the logic from `legendastv.py`. TODO:
+# [ ] Check tests
+# [ ] Add some logging lines
+# How to quick test:
+# cd ~/.local/lib/python3.8/site-packages/subliminal
+# mv providers/argenteam.py{,.old}
+# ln -s ~/subliminal/subliminal/providers/argenteam.py providers/argenteam.py
+# touch Little.Miss.Sunshine.2006.720p.BluRay.x264.YIFY.mp4
+# touch "Curb Your Enthusiasm S11E02 720p HEVC x265-MeGusta[eztv.re].mkv"
+# subliminal --debug download --language es --provider argenteam Curb\ Your\ Enthusiasm\ S11E02\ 720p\ HEVC\ x265-MeGusta\[eztv.re\].mkv
 
 class ArgenteamSubtitle(Subtitle):
     provider_name = 'argenteam'
 
-    def __init__(self, language, download_link, series, season, episode, release, version):
+    def __init__(self, language, download_link, type, title, year, season, episode, release, version):
         super(ArgenteamSubtitle, self).__init__(language, download_link)
         self.download_link = download_link
-        self.series = series
+        self.type = type
+        self.title = title
+        self.year = year
         self.season = season
         self.episode = episode
         self.release = release
@@ -40,27 +52,35 @@ class ArgenteamSubtitle(Subtitle):
         return urllib.parse.unquote(self.download_link.rsplit('/')[-1])
 
     def get_matches(self, video):
-        matches = guess_matches(video, {
-            'title': self.series,
-            'season': self.season,
-            'episode': self.episode,
-            'release_group': self.version
-        })
+        if isinstance(video, Episode) and self.type == 'episode':
+            matches = guess_matches(video, {
+                'title': self.title,
+                'season': self.season,
+                'episode': self.episode,
+                'release_group': self.version
+            })
+        else:
+            matches = guess_matches(video, {
+                'title': self.title,
+                'year': self.year,
+                'release_group': self.version
+            })
 
         # resolution
         if video.resolution and self.version and video.resolution in self.version.lower():
             matches.add('resolution')
 
-        matches |= guess_matches(video, guessit(self.version, {'type': 'episode'}), partial=True)
+        if isinstance(video, Episode) and self.type == 'episode':
+            matches |= guess_matches(video, guessit(self.version, {'type': 'episode'}), partial=True)
+        else:
+            matches |= guess_matches(video, guessit(self.version, {'type': 'movie'}))
         return matches
-
 
 class ArgenteamProvider(Provider):
     provider_name = 'argenteam'
     language = Language.fromalpha2('es')
     languages = {language}
-    video_types = (Episode,)
-    server_url = "http://argenteam.net/api/v1/"
+    server_url = "https://argenteam.net/api/v1/"
     subtitle_class = ArgenteamSubtitle
 
     def __init__(self):
@@ -73,53 +93,57 @@ class ArgenteamProvider(Provider):
     def terminate(self):
         self.session.close()
 
-    @region.cache_on_arguments(expiration_time=EPISODE_EXPIRATION_TIME, should_cache_fn=lambda value: value)
-    def search_episode_id(self, series, season, episode):
-        """Search the episode id from the `series`, `season` and `episode`.
-
-        :param str series: series of the episode.
-        :param int season: season of the episode.
-        :param int episode: episode number.
-        :return: the episode id, if any.
-        :rtype: int or None
-
-        """
-        # make the search
-        query = '%s S%#02dE%#02d' % (series, season, episode)
-        logger.info('Searching episode id for %r', query)
-        r = self.session.get(self.server_url + 'search', params={'q': query}, timeout=10)
+    def search_first_ocurrence(self, query_str):
+        r = self.session.get(self.server_url + 'search', params={'q': query_str}, timeout=10)
         r.raise_for_status()
         results = json.loads(r.text)
         if results['total'] == 1:
             return results['results'][0]['id']
 
-        logger.error('No episode id found for %r', series)
+        logger.error('No media id found for %r', query_str)
 
-    def query(self, series, season, episode):
-        episode_id = self.search_episode_id(series, season, episode)
-        if episode_id is None:
+    def query(self, language, title, season=None, episodes=None, year=None):
+        query = '%s' % (title)
+        r = self.session.get(self.server_url + 'search', params={'q': query}, timeout=10)
+        r.raise_for_status()
+        results = json.loads(r.text)
+        search_first_ocurrence
+
+    def get_media_by_id(self, endpoint, id):
+        if id is None:
             return []
-
-        response = self.session.get(self.server_url + 'episode', params={'id': episode_id}, timeout=10)
+        response = self.session.get(self.server_url + endpoint, params={'id': id}, timeout=10)
         response.raise_for_status()
         content = json.loads(response.text)
-        subtitles = []
-        for r in content['releases']:
-            for s in r['subtitles']:
-                subtitle = self.subtitle_class(self.language, s['uri'], series, season, episode, r['team'], r['tags'])
-                logger.debug('Found subtitle %r', subtitle)
-                subtitles.append(subtitle)
-
-        return subtitles
+        return content
 
     def list_subtitles(self, video, languages):
-        titles = [video.series] + video.alternative_series
-        for title in titles:
-            subs = self.query(title, video.season, video.episode)
-            if subs:
-                return subs
+        season = None
+        episode = []
+        subtitles = []
+        if isinstance(video, Episode):
+            series = video.series
+            season = video.season
+            episode = video.episode
+            query = '%s S%#02dE%#02d' % (series, season, episode)
+            content = self.get_media_by_id('episode', self.search_first_ocurrence(query))
+            for r in content['releases']:
+                for s in r['subtitles']:
+                    subtitle = self.subtitle_class(self.language, s['uri'], 'episode', series, video.year, season, episode, r['team'], r['tags'])
+                    logger.debug('Found subtitle %r', subtitle)
+                    subtitles.append(subtitle)
+        else:
+            title = video.title
+            year = video.year
+            query = '%s %s' % (title, year)
+            content = self.get_media_by_id('movie', self.search_first_ocurrence(query))
+            for r in content['releases']:
+                for s in r['subtitles']:
+                    subtitle = self.subtitle_class(self.language, s['uri'], 'movie', title, year, None, None, r['team'], r['tags'])
+                    logger.debug('Found subtitle %r', subtitle)
+                    subtitles.append(subtitle)
 
-        return []
+        return subtitles
 
     def download_subtitle(self, subtitle):
         # download as a zip

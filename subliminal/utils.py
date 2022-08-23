@@ -63,7 +63,7 @@ def hash_thesubdb(video_path):
         f.seek(-readsize, os.SEEK_END)
         data += f.read(readsize)
 
-    return hashlib.md5(data).hexdigest()
+    return hashlib.md5(data, usedforsecurity=False).hexdigest()
 
 
 def hash_napiprojekt(video_path):
@@ -77,7 +77,7 @@ def hash_napiprojekt(video_path):
     readsize = 1024 * 1024 * 10
     with open(video_path, 'rb') as f:
         data = f.read(readsize)
-    return hashlib.md5(data).hexdigest()
+    return hashlib.md5(data, usedforsecurity=False).hexdigest()
 
 
 def hash_shooter(video_path):
@@ -97,7 +97,7 @@ def hash_shooter(video_path):
     with open(video_path, 'rb') as f:
         for offset in offsets:
             f.seek(offset)
-            filehash.append(hashlib.md5(f.read(readsize)).hexdigest())
+            filehash.append(hashlib.md5(f.read(readsize), usedforsecurity=False).hexdigest())
     return ';'.join(filehash)
 
 

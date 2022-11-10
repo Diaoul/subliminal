@@ -4,7 +4,7 @@ import logging
 import os
 
 import chardet
-import pysrt
+import srt
 
 from six import text_type
 
@@ -95,10 +95,9 @@ class Subtitle(object):
             return False
 
         try:
-            pysrt.from_string(self.text, error_handling=pysrt.ERROR_RAISE)
-        except pysrt.Error as e:
-            if e.args[0] < 80:
-                return False
+            srt.parse(self.text)
+        except srt.SRTParseError:
+            return False
 
         return True
 

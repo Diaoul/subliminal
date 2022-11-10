@@ -48,4 +48,4 @@ Various libraries are used by subliminal and are key to its success:
 * `dogpile.cache <http://dogpilecache.readthedocs.org>`_ to cache intermediate search results
 * `stevedore <http://docs.openstack.org/developer/stevedore/>`_ to manage the provider entry point
 * `chardet <http://chardet.readthedocs.org>`_ to detect subtitles' encoding
-* `pysrt <https://github.com/byroot/pysrt>`_ to validate downloaded subtitles
+* `srt <https://github.com/cdown/srt>`_ to validate downloaded subtitles

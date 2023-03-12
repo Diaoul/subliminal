@@ -1,0 +1,23 @@
+name: lint_python
+on: [pull_request, push]
+jobs:
+  lint_python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - run: pip install --upgrade pip wheel
+      - run: pip install bandit black codespell flake8 flake8-2020 flake8-bugbear
+                         flake8-comprehensions isort mypy pytest pyupgrade safety
+      - run: bandit --recursive --skip B101,B105,B106,B303,B314,B404,B405,B410,B603 .
+      - run: black --check . || true
+      - run: codespell --ignore-words-list=nd,reacher,serie --skip="*.yaml"
+      - run: flake8 --ignore=B001,C401,C405,C408,C416,E122,E127,E128,E226,E265,E402,E722,E741,F401,R502,R503,R504,W504,W605
+                    --count --max-complexity=36 --max-line-length=120 --show-source --statistics .
+      - run: isort --check-only --profile black . || true
+      - run: pip install -r dev-requirements.txt -r requirements.txt
+      - run: mkdir --parents --verbose .mypy_cache
+      - run: mypy --ignore-missing-imports --install-types --non-interactive . || true
+      - run: pytest --doctest-modules . || true
+      - run: shopt -s globstar && pyupgrade --py36-plus **/*.py || true
+      - run: safety check

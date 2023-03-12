@@ -400,7 +400,7 @@ def scan_archive(path):
     # Get filename and file size from RAR
     rar = RarFile(path)
 
-    # check that the rar doesnt need a password
+    # check that the rar doesn't need a password
     if rar.needs_password():
         raise ValueError('Rar requires a password')
 

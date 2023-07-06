@@ -2,6 +2,8 @@
 import io
 import logging
 import re
+import ssl
+import requests
 
 from babelfish import Language, language_converters
 from guessit import guessit
@@ -23,6 +25,13 @@ from ..video import Episode
 
 logger = logging.getLogger(__name__)
 
+class TLSAdapter(requests.adapters.HTTPAdapter):
+
+    def init_poolmanager(self, *args, **kwargs):
+        ctx = ssl.create_default_context()
+        ctx.set_ciphers('DEFAULT@SECLEVEL=1')
+        kwargs['ssl_context'] = ctx
+        return super(TLSAdapter, self).init_poolmanager(*args, **kwargs)
 
 class PodnapisiSubtitle(Subtitle):
     """Podnapisi Subtitle."""
@@ -74,6 +83,7 @@ class PodnapisiProvider(Provider):
     def initialize(self):
         self.session = Session()
         self.session.headers['User-Agent'] = self.user_agent
+        self.session.mount('https://', TLSAdapter())
 
     def terminate(self):
         self.session.close()

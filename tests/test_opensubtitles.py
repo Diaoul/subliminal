@@ -91,6 +91,7 @@ def test_configuration_error_no_password():
         OpenSubtitlesProvider(username=USERNAME)
 
 
+@pytest.mark.skip('authorization no longer works on the old API')
 @pytest.mark.integration
 @vcr.use_cassette
 def test_login():
@@ -124,6 +125,7 @@ def test_login_vip_bad_password():
         provider.initialize()
 
 
+@pytest.mark.skip('authorization no longer works on the old API')
 @pytest.mark.integration
 @vcr.use_cassette
 def test_logout():
@@ -136,7 +138,7 @@ def test_logout():
 @pytest.mark.integration
 @vcr.use_cassette
 def test_no_operation():
-    with OpenSubtitlesProvider(USERNAME, PASSWORD) as provider:
+    with OpenSubtitlesProvider() as provider:
         provider.no_operation()
 
 
@@ -144,7 +146,7 @@ def test_no_operation():
 @vcr.use_cassette
 def test_query_not_enough_information():
     languages = {Language('eng')}
-    with OpenSubtitlesProvider(USERNAME, PASSWORD) as provider:
+    with OpenSubtitlesProvider() as provider:
         with pytest.raises(ValueError) as excinfo:
             provider.query(languages)
     assert str(excinfo.value) == 'Not enough information'
@@ -167,7 +169,7 @@ def test_query_query_movie(movies):
         '1955260793',
         '1956104848'
     }
-    with OpenSubtitlesProvider(USERNAME, PASSWORD) as provider:
+    with OpenSubtitlesProvider() as provider:
         subtitles = provider.query(languages, query=video.title)
     assert {subtitle.id for subtitle in subtitles} == expected_subtitles
     assert {subtitle.language for subtitle in subtitles} == languages
@@ -179,19 +181,20 @@ def test_query_query_episode(episodes):
     video = episodes['dallas_2012_s01e03']
     languages = {Language('fra')}
     expected_subtitles = {'1953147577'}
-    with OpenSubtitlesProvider(USERNAME, PASSWORD) as provider:
+    with OpenSubtitlesProvider() as provider:
         subtitles = provider.query(languages, query=video.series, season=video.season, episode=video.episode)
     assert {subtitle.id for subtitle in subtitles} == expected_subtitles
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
+@pytest.mark.skip('query by tag currently broken on opensubtitles')
 @pytest.mark.integration
 @vcr.use_cassette
 def test_query_tag_movie(movies):
-    video = movies['enders_game']
+    video = movies['interstellar']
     languages = {Language('fra')}
     expected_subtitles = {'1954121830'}
-    with OpenSubtitlesProvider(USERNAME, PASSWORD) as provider:
+    with OpenSubtitlesProvider() as provider:
         subtitles = provider.query(languages, tag=video.name)
     assert {subtitle.id for subtitle in subtitles} == expected_subtitles
     assert {subtitle.language for subtitle in subtitles} == languages
@@ -208,9 +211,10 @@ def test_query_imdb_id(movies):
         '1955278518',
         '1955279635',
         '1955742626',
-        '1956717408'
+        '1956717408',
+        '1957720375'
     }
-    with OpenSubtitlesProvider(USERNAME, PASSWORD) as provider:
+    with OpenSubtitlesProvider() as provider:
         subtitles = provider.query(languages, imdb_id=video.imdb_id)
     assert {subtitle.id for subtitle in subtitles} == expected_subtitles
     assert {subtitle.language for subtitle in subtitles} == languages
@@ -234,7 +238,7 @@ def test_query_hash_size(movies):
         '1953767678',
         '1953785668'
     }
-    with OpenSubtitlesProvider(USERNAME, PASSWORD) as provider:
+    with OpenSubtitlesProvider() as provider:
         subtitles = provider.query(languages, hash=video.hashes['opensubtitles'], size=video.size)
     assert {subtitle.id for subtitle in subtitles} == expected_subtitles
     assert {subtitle.language for subtitle in subtitles} == languages
@@ -244,7 +248,7 @@ def test_query_hash_size(movies):
 @vcr.use_cassette
 def test_query_wrong_hash_wrong_size():
     languages = {Language('eng')}
-    with OpenSubtitlesProvider(USERNAME, PASSWORD) as provider:
+    with OpenSubtitlesProvider() as provider:
         subtitles = provider.query(languages, hash='123456787654321', size=99999)
     assert len(subtitles) == 0
 
@@ -255,7 +259,7 @@ def test_query_query_season_episode(episodes):
     video = episodes['bbt_s07e05']
     languages = {Language('deu')}
     expected_subtitles = {'1953771908', '1956168972'}
-    with OpenSubtitlesProvider(USERNAME, PASSWORD) as provider:
+    with OpenSubtitlesProvider() as provider:
         subtitles = provider.query(languages, query=video.series, season=video.season, episode=video.episode)
     assert {subtitle.id for subtitle in subtitles} == expected_subtitles
     assert {subtitle.language for subtitle in subtitles} == languages
@@ -296,9 +300,13 @@ def test_list_subtitles_movie(movies):
         '1956683278',
         '1956683279',
         '1956717408',
-        '1956717410'
+        '1956717410',
+        '1958112113',
+        '1957400516',
+        '1957720375',
+        '1957200647'
     }
-    with OpenSubtitlesProvider(USERNAME, PASSWORD) as provider:
+    with OpenSubtitlesProvider() as provider:
         subtitles = provider.list_subtitles(video, languages)
     assert {subtitle.id for subtitle in subtitles} == expected_subtitles
     assert {subtitle.language for subtitle in subtitles} == languages
@@ -310,7 +318,7 @@ def test_list_subtitles_movie_no_hash(movies):
     video = movies['enders_game']
     languages = {Language('deu')}
     expected_subtitles = {'1954157398', '1954156756', '1954443141'}
-    with OpenSubtitlesProvider(USERNAME, PASSWORD) as provider:
+    with OpenSubtitlesProvider() as provider:
         subtitles = provider.list_subtitles(video, languages)
     assert {subtitle.id for subtitle in subtitles} == expected_subtitles
     assert {subtitle.language for subtitle in subtitles} == languages
@@ -322,7 +330,7 @@ def test_list_subtitles_episode(episodes):
     video = episodes['marvels_agents_of_shield_s02e06']
     languages = {Language('hun')}
     expected_subtitles = {'1954464403', '1955344515', '1954454544'}
-    with OpenSubtitlesProvider(USERNAME, PASSWORD) as provider:
+    with OpenSubtitlesProvider() as provider:
         subtitles = provider.list_subtitles(video, languages)
     assert {subtitle.id for subtitle in subtitles} == expected_subtitles
     assert {subtitle.language for subtitle in subtitles} == languages
@@ -333,7 +341,7 @@ def test_list_subtitles_episode(episodes):
 def test_download_subtitle(movies):
     video = movies['man_of_steel']
     languages = {Language('deu'), Language('fra')}
-    with OpenSubtitlesProvider(USERNAME, PASSWORD) as provider:
+    with OpenSubtitlesProvider() as provider:
         subtitles = provider.list_subtitles(video, languages)
         provider.download_subtitle(subtitles[0])
     assert subtitles[0].content is not None
@@ -341,13 +349,14 @@ def test_download_subtitle(movies):
     assert subtitles[0].encoding == 'cp1252'
 
 
+@pytest.mark.skip('query by tag currently broken on opensubtitles')
 @pytest.mark.integration
 @vcr.use_cassette
 def test_tag_match(episodes):
     video = episodes['the fall']
     languages = {Language('por', 'BR')}
     unwanted_subtitle_id = '1954369181'  # 'Doc.Martin.S03E01.(24 September 2007).[TVRip (Xvid)]-spa.srt'
-    with OpenSubtitlesProvider(USERNAME, PASSWORD) as provider:
+    with OpenSubtitlesProvider() as provider:
         subtitles = provider.list_subtitles(video, languages)
         found_subtitle = [s for s in subtitles if s.id == unwanted_subtitle_id and s.matched_by == 'tag'][0]
         matches = found_subtitle.get_matches(video)

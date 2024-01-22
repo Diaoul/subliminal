@@ -69,7 +69,7 @@ def test_provider_pool_list_subtitles_provider(episodes, mock_providers):
 def test_provider_pool_list_subtitles(episodes, mock_providers):
     pool = ProviderPool()
     subtitles = pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
-    assert sorted(subtitles) == ['legendastv', 'opensubtitles', 'podnapisi', 'thesubdb', 'tvsubtitles']
+    assert sorted(subtitles) == ['opensubtitles', 'podnapisi', 'thesubdb', 'tvsubtitles']
     for provider in subtitles:
         assert provider_manager[provider].plugin.initialize.called
         assert provider_manager[provider].plugin.list_subtitles.called
@@ -86,7 +86,7 @@ def test_async_provider_pool_list_subtitles_provider(episodes, mock_providers):
 def test_async_provider_pool_list_subtitles(episodes, mock_providers):
     pool = AsyncProviderPool()
     subtitles = pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
-    assert sorted(subtitles) == ['legendastv', 'opensubtitles', 'podnapisi', 'thesubdb', 'tvsubtitles']
+    assert sorted(subtitles) == ['opensubtitles', 'podnapisi', 'thesubdb', 'tvsubtitles']
     for provider in subtitles:
         assert provider_manager[provider].plugin.initialize.called
         assert provider_manager[provider].plugin.list_subtitles.called
@@ -387,12 +387,12 @@ def test_list_subtitles_movie(movies, mock_providers):
     for name in ('addic7ed', 'napiprojekt', 'opensubtitlesvip', 'shooter', 'tvsubtitles'):
         assert not provider_manager[name].plugin.list_subtitles.called
 
-    for name in ('legendastv', 'opensubtitles', 'podnapisi', 'thesubdb'):
+    for name in ('opensubtitles', 'podnapisi', 'thesubdb'):
         assert provider_manager[name].plugin.list_subtitles.called
 
     # test result
     assert len(subtitles) == 1
-    assert sorted(subtitles[movies['man_of_steel']]) == ['legendastv', 'opensubtitles', 'podnapisi', 'thesubdb']
+    assert sorted(subtitles[movies['man_of_steel']]) == ['opensubtitles', 'podnapisi', 'thesubdb']
 
 
 def test_list_subtitles_episode(episodes, mock_providers):
@@ -405,12 +405,12 @@ def test_list_subtitles_episode(episodes, mock_providers):
     for name in ('addic7ed', 'napiprojekt', 'opensubtitlesvip', 'shooter'):
         assert not provider_manager[name].plugin.list_subtitles.called
 
-    for name in ('legendastv', 'opensubtitles', 'podnapisi', 'thesubdb', 'tvsubtitles'):
+    for name in ('opensubtitles', 'podnapisi', 'thesubdb', 'tvsubtitles'):
         assert provider_manager[name].plugin.list_subtitles.called
 
     # test result
     assert len(subtitles) == 1
-    assert sorted(subtitles[episodes['bbt_s07e05']]) == ['legendastv', 'opensubtitles', 'podnapisi', 'thesubdb',
+    assert sorted(subtitles[episodes['bbt_s07e05']]) == ['opensubtitles', 'podnapisi', 'thesubdb',
                                                          'tvsubtitles']
 
 
@@ -421,7 +421,7 @@ def test_list_subtitles_providers(episodes, mock_providers):
     subtitles = list_subtitles({video}, languages, providers=['opensubtitles'])
 
     # test providers
-    for name in ('addic7ed', 'legendastv', 'napiprojekt', 'opensubtitlesvip', 'podnapisi', 'shooter', 'tvsubtitles',
+    for name in ('addic7ed', 'napiprojekt', 'opensubtitlesvip', 'podnapisi', 'shooter', 'tvsubtitles',
                  'thesubdb'):
         assert not provider_manager[name].plugin.list_subtitles.called
 
@@ -443,12 +443,12 @@ def test_list_subtitles_episode_no_hash(episodes, mock_providers):
     for name in ('addic7ed', 'napiprojekt', 'opensubtitlesvip', 'shooter', 'thesubdb'):
         assert not provider_manager[name].plugin.list_subtitles.called
 
-    for name in ('legendastv', 'opensubtitles', 'podnapisi', 'tvsubtitles'):
+    for name in ('opensubtitles', 'podnapisi', 'tvsubtitles'):
         assert provider_manager[name].plugin.list_subtitles.called
 
     # test result
     assert len(subtitles) == 1
-    assert sorted(subtitles[episodes['dallas_s01e03']]) == ['legendastv', 'opensubtitles', 'podnapisi', 'tvsubtitles']
+    assert sorted(subtitles[episodes['dallas_s01e03']]) == ['opensubtitles', 'podnapisi', 'tvsubtitles']
 
 
 def test_list_subtitles_no_language(episodes, mock_providers):
@@ -459,7 +459,7 @@ def test_list_subtitles_no_language(episodes, mock_providers):
     subtitles = list_subtitles({video}, languages)
 
     # test providers
-    for name in ('addic7ed', 'legendastv', 'napiprojekt', 'opensubtitles', 'opensubtitlesvip', 'podnapisi', 'shooter',
+    for name in ('addic7ed', 'napiprojekt', 'opensubtitles', 'opensubtitlesvip', 'podnapisi', 'shooter',
                  'thesubdb', 'tvsubtitles'):
         assert not provider_manager[name].plugin.list_subtitles.called
 
@@ -478,7 +478,7 @@ def test_download_subtitles(mock_providers):
     download_subtitles(subtitles)
 
     # test providers
-    for name in ('addic7ed', 'legendastv', 'napiprojekt', 'opensubtitles', 'opensubtitlesvip', 'podnapisi', 'shooter'):
+    for name in ('addic7ed', 'napiprojekt', 'opensubtitles', 'opensubtitlesvip', 'podnapisi', 'shooter'):
         assert not provider_manager[name].plugin.download_subtitle.called
 
     for name in ('thesubdb', 'tvsubtitles'):
@@ -601,10 +601,10 @@ def test_save_subtitles_single_directory_encoding(movies, tmpdir):
 @pytest.mark.integration
 @vcr.use_cassette
 def test_download_bad_subtitle(movies):
-    pool = ProviderPool(provider_configs={'legendastv': {'username': 'python-subliminal', 'password': 'subliminal'}})
-    subtitles = pool.list_subtitles_provider('legendastv', movies['man_of_steel'], {Language('eng')})
+    pool = ProviderPool()
+    subtitles = pool.list_subtitles_provider('opensubtitles', movies['man_of_steel'], {Language('eng')})
     subtitle = subtitles[0]
-    subtitle.archive.content._rarfile.truncate(200)
+    subtitle.subtitle_id = -1
 
     pool.download_subtitle(subtitle)
 

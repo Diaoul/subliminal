@@ -9,6 +9,7 @@ Changelog
 * Add support for episodes with season 0 in podnapisi provider
 * Disabled addic7ed provider due to required captcha for authentication
 * Disabled shooter provider since it doesn't filter by language
+* Remove legendastv provider
 
 
 2.1.0

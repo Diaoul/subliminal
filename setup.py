@@ -71,6 +71,7 @@ setup(name='subliminal',
           'subliminal.providers': [
               'addic7ed = subliminal.providers.addic7ed:Addic7edProvider',
               'argenteam = subliminal.providers.argenteam:ArgenteamProvider',
+              'bsplayer = subliminal.providers.bsplayer:BSPlayerProvider',
               'legendastv = subliminal.providers.legendastv:LegendasTVProvider',
               'napiprojekt = subliminal.providers.napiprojekt:NapiProjektProvider',
               'opensubtitles = subliminal.providers.opensubtitles:OpenSubtitlesProvider',

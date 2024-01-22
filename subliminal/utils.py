@@ -66,6 +66,41 @@ def hash_thesubdb(video_path):
     return hashlib.md5(data).hexdigest()
 
 
+def hash_bsplayer(video_path):
+    """Compute a hash using BSPlayer's algorithm.
+
+    :param str video_path: path of the video.
+    :return: the hash.
+    :rtype: str
+
+    """
+    little_endian_long_long = '<q'  # little-endian long long
+    byte_size = struct.calcsize(little_endian_long_long)
+
+    with open(video_path, 'rb') as f:
+        file_size = os.path.getsize(video_path)
+        file_hash = file_size
+
+        if file_size < 65536 * 2:
+            return
+
+        for _ in range(65536 // byte_size):
+            buff = f.read(byte_size)
+            (l_value,) = struct.unpack(little_endian_long_long, buff)
+            file_hash += l_value
+            file_hash &= 0xFFFFFFFFFFFFFFFF  # to remain as 64bit number
+
+        f.seek(max(0, file_size - 65536), 0)
+
+        for x in range(65536 // byte_size):
+            buff = f.read(byte_size)
+            (l_value,) = struct.unpack(little_endian_long_long, buff)
+            file_hash += l_value
+            file_hash &= 0xFFFFFFFFFFFFFFFF
+
+    return "%016x" % file_hash
+
+
 def hash_napiprojekt(video_path):
     """Compute a hash using NapiProjekt's algorithm.
 

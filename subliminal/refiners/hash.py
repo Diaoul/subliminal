@@ -2,11 +2,12 @@
 import logging
 
 from ..extensions import provider_manager, default_providers
-from ..utils import hash_napiprojekt, hash_opensubtitles, hash_shooter, hash_thesubdb
+from ..utils import hash_bsplayer, hash_napiprojekt, hash_opensubtitles, hash_shooter, hash_thesubdb
 
 logger = logging.getLogger(__name__)
 
 hash_functions = {
+    'bsplayer': hash_bsplayer,
     'napiprojekt': hash_napiprojekt,
     'opensubtitles': hash_opensubtitles,
     'opensubtitlesvip': hash_opensubtitles,

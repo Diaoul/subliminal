@@ -20,6 +20,16 @@ from ..video import Episode, Movie
 logger = logging.getLogger(__name__)
 
 
+class UATimeoutSafeTransport(TimeoutSafeTransport):
+    def set_user_agent(self, user_agent):
+        self._user_agent = user_agent
+
+    def send_headers(self, connection, headers):
+        if self._user_agent:
+            connection.putheader("User-Agent", self.user_agent)
+        super().send_headers(connection, headers)
+
+
 class OpenSubtitlesSubtitle(Subtitle):
     """OpenSubtitles Subtitle."""
     provider_name = 'opensubtitles'
@@ -113,10 +123,13 @@ class OpenSubtitlesProvider(Provider):
     languages = {Language.fromopensubtitles(l) for l in language_converters['opensubtitles'].codes}
     server_url = 'https://api.opensubtitles.org/xml-rpc'
     subtitle_class = OpenSubtitlesSubtitle
-    user_agent = 'subliminal v%s' % __short_version__
+    user_agent = 'VLSub 0.11.1'
+    # user_agent = 'subliminal v%s' % __short_version__
 
     def __init__(self, username=None, password=None):
-        self.server = ServerProxy(self.server_url, TimeoutSafeTransport(10))
+        transport = UATimeoutSafeTransport(10)
+        transport.set_user_agent('VLSub')
+        self.server = ServerProxy(self.server_url, transport)
         if any((username, password)) and not all((username, password)):
             raise ConfigurationError('Username and password must be specified')
         # None values not allowed for logging in, so replace it by ''

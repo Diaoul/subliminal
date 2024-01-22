@@ -71,7 +71,6 @@ setup(name='subliminal',
           'subliminal.providers': [
               'addic7ed = subliminal.providers.addic7ed:Addic7edProvider',
               'argenteam = subliminal.providers.argenteam:ArgenteamProvider',
-              'legendastv = subliminal.providers.legendastv:LegendasTVProvider',
               'napiprojekt = subliminal.providers.napiprojekt:NapiProjektProvider',
               'opensubtitles = subliminal.providers.opensubtitles:OpenSubtitlesProvider',
               'podnapisi = subliminal.providers.podnapisi:PodnapisiProvider',
@@ -87,7 +86,6 @@ setup(name='subliminal',
           ],
           'babelfish.language_converters': [
               'addic7ed = subliminal.converters.addic7ed:Addic7edConverter',
-              'legendastv = subliminal.converters.legendastv:LegendasTVConverter',
               'shooter = subliminal.converters.shooter:ShooterConverter',
               'thesubdb = subliminal.converters.thesubdb:TheSubDBConverter',
               'tvsubtitles = subliminal.converters.tvsubtitles:TVsubtitlesConverter'

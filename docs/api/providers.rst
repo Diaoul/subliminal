@@ -7,11 +7,6 @@ Addic7ed
 .. automodule:: subliminal.providers.addic7ed
    :private-members:
 
-LegendasTv
-----------
-.. automodule:: subliminal.providers.legendastv
-   :private-members:
-
 NapiProjekt
 -----------
 .. automodule:: subliminal.providers.napiprojekt

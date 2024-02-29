@@ -7,6 +7,10 @@ import itertools
 import logging
 import operator
 import os
+import os.path
+import socket
+from pathlib import Path
+from pprint import pprint
 
 from babelfish import Language, LanguageReverseError
 from guessit import guessit
@@ -217,6 +221,11 @@ class ProviderPool(object):
 
             # download
             if self.download_subtitle(subtitle):
+                subtitle_data = subtitle.__dict__.copy()
+                subtitle_data.pop('content', None)
+                str_stream = io.StringIO()
+                pprint(subtitle_data, stream=str_stream)
+                logger.debug('Subtitle data: %s', str_stream.getvalue())
                 downloaded_subtitles.append(subtitle)
 
             # stop when all languages are downloaded
@@ -344,15 +353,16 @@ def search_external_subtitles(path, directory=None):
 
         subtitles[p] = language
 
-    logger.debug('Found subtitles %r', subtitles)
+    logger.debug('Found subtitles %r on directory %s or dirpath %s', subtitles, directory, dirpath)
 
     return subtitles
 
 
-def scan_video(path):
+def scan_video(path, fix_filename=False):
     """Scan a video from a `path`.
 
     :param str path: existing path to the video.
+    :param bool fix_filename: fix the video file name from the subtitle.
     :return: the scanned video.
     :rtype: :class:`~subliminal.video.Video`
 
@@ -368,8 +378,11 @@ def scan_video(path):
     dirpath, filename = os.path.split(path)
     logger.info('Scanning video %r in %r', filename, dirpath)
 
-    # guess
-    video = Video.fromguess(path, guessit(path))
+    if fix_filename:
+        video = Movie(path, '')
+    else:
+        # guess
+        video = Video.fromguess(path, guessit(path))
 
     # size
     video.size = os.path.getsize(path)
@@ -431,7 +444,7 @@ def scan_archive(path):
     return video
 
 
-def scan_videos(path, age=None, archives=True):
+def scan_videos(path, age=None, archives=True, fix_filename=False):
     """Scan `path` for videos and their subtitles.
 
     See :func:`refine` to find additional information for the video.
@@ -439,6 +452,7 @@ def scan_videos(path, age=None, archives=True):
     :param str path: existing directory path to scan.
     :param datetime.timedelta age: maximum age of the video or archive.
     :param bool archives: scan videos in archives.
+    :param bool fix_filename: fix the video file name from the subtitle.
     :return: the scanned videos.
     :rtype: list of :class:`~subliminal.video.Video`
 
@@ -504,7 +518,7 @@ def scan_videos(path, age=None, archives=True):
             # scan
             if filename.lower().endswith(VIDEO_EXTENSIONS):  # video
                 try:
-                    video = scan_video(filepath)
+                    video = scan_video(filepath, fix_filename)
                 except ValueError:  # pragma: no cover
                     logger.exception('Error scanning video')
                     continue
@@ -658,7 +672,7 @@ def download_best_subtitles(videos, languages, min_score=0, hearing_impaired=Fal
     return downloaded_subtitles
 
 
-def save_subtitles(video, subtitles, single=False, directory=None, encoding=None):
+def save_subtitles(video, subtitles, single=False, directory=None, encoding=None, fix_filename=False):
     """Save subtitles on filesystem.
 
     Subtitles are saved in the order of the list. If a subtitle with a language has already been saved, other subtitles
@@ -674,11 +688,14 @@ def save_subtitles(video, subtitles, single=False, directory=None, encoding=None
     :param bool single: save a single subtitle, default is to save one subtitle per language.
     :param str directory: path to directory where to save the subtitles, default is next to the video.
     :param str encoding: encoding in which to save the subtitles, default is to keep original encoding.
+    :param bool fix_filename: fix the video file name from the subtitle.
     :return: the saved subtitles
     :rtype: list of :class:`~subliminal.subtitle.Subtitle`
 
     """
     saved_subtitles = []
+    release_names = []
+    subtitles_to_rename = []
     for subtitle in subtitles:
         # check content
         if subtitle.content is None:
@@ -689,6 +706,13 @@ def save_subtitles(video, subtitles, single=False, directory=None, encoding=None
         if subtitle.language in set(s.language for s in saved_subtitles):
             logger.debug('Skipping subtitle %r: language already saved', subtitle)
             continue
+
+        # rename the video file according to the subtitle release name
+        full_video_path = video.name
+        if fix_filename:
+            release_name = getattr(subtitle, 'movie_release_name', '').strip()
+            logger.debug('Release name: %s', release_name)
+            release_names.append(release_name)
 
         # create subtitle path
         subtitle_path = subtitle.get_path(video, single=single)
@@ -704,9 +728,52 @@ def save_subtitles(video, subtitles, single=False, directory=None, encoding=None
             with io.open(subtitle_path, 'w', encoding=encoding) as f:
                 f.write(subtitle.text)
         saved_subtitles.append(subtitle)
+        if fix_filename:
+            subtitles_to_rename.append(subtitle_path)
 
         # check single
         if single:
             break
 
+    if not fix_filename or not release_names:
+        return saved_subtitles
+
+    # rename all subtitles using the first release name
+    chosen_release_name = release_names[0]
+    video_path = Path(video.name)
+    for old_path in subtitles_to_rename:
+        rename_file(old_path, video_path.stem, chosen_release_name)
+
+    # rename the video file
+    new_video_path = rename_file(video.name, video_path.stem, chosen_release_name)
+
+    # save all release names to a .txt file
+    txt_file = new_video_path.with_name(new_video_path.stem + '-releases.txt')
+    txt_file.write_text('\n'.join(release_names))
+
     return saved_subtitles
+
+
+def rename_file(old_path, video_basename, release_name):
+    """Rename a file using a release name.
+
+    :param str old_path: path to the old file (video or subtitle).
+    :param str video_basename: base name of the video file.
+    :param str release_name: release name.
+    :return: path to the new file
+    :rtype: Path
+    """
+    old_path_obj = Path(old_path)
+    filename, extension = os.path.splitext(old_path)
+
+    if str(old_path_obj.parent.name) != release_name:
+        parent_dir = old_path_obj.parent / release_name  # type: Path
+        parent_dir.mkdir(parents=True, exist_ok=True)
+    else:
+        parent_dir = old_path_obj.parent
+
+    new_name = old_path_obj.stem.replace(video_basename, release_name) + extension
+    new_path = parent_dir / new_name
+    old_path_obj.rename(new_path)
+    logger.debug('File %r renamed to %r', old_path, new_path)
+    return new_path

@@ -320,10 +320,12 @@ def cache(ctx, clear_subliminal):
 @click.option('-z/-Z', '--archives/--no-archives', default=True, show_default=True, help='Scan archives for videos '
               '(supported extensions: %s).' % ', '.join(ARCHIVE_EXTENSIONS))
 @click.option('-v', '--verbose', count=True, help='Increase verbosity.')
+@click.option('-ff', '--fix-filename', is_flag=True, default=False, help='Fix video file name according to the release '
+              'name of the subtitle. Works only if the provider allows searching by file hash and has release names.')
 @click.argument('path', type=click.Path(), required=True, nargs=-1)
 @click.pass_obj
 def download(obj, provider, refiner, language, age, directory, encoding, single, force, hearing_impaired, min_score,
-             max_workers, archives, verbose, path):
+             max_workers, archives, verbose, fix_filename, path):
     """Download best subtitles.
 
     PATH can be an directory containing videos, a video file path or a video file name. It can be used multiple times.
@@ -364,7 +366,7 @@ def download(obj, provider, refiner, language, age, directory, encoding, single,
             # directories
             if os.path.isdir(p):
                 try:
-                    scanned_videos = scan_videos(p, age=age, archives=archives)
+                    scanned_videos = scan_videos(p, age=age, archives=archives, fix_filename=fix_filename)
                 except:
                     logger.exception('Unexpected error while collecting directory path %s', p)
                     errored_paths.append(p)
@@ -384,7 +386,7 @@ def download(obj, provider, refiner, language, age, directory, encoding, single,
 
             # other inputs
             try:
-                video = scan_video(p)
+                video = scan_video(p, fix_filename)
             except:
                 logger.exception('Unexpected error while collecting path %s', p)
                 errored_paths.append(p)
@@ -447,7 +449,8 @@ def download(obj, provider, refiner, language, age, directory, encoding, single,
     # save subtitles
     total_subtitles = 0
     for v, subtitles in downloaded_subtitles.items():
-        saved_subtitles = save_subtitles(v, subtitles, single=single, directory=directory, encoding=encoding)
+        saved_subtitles = save_subtitles(v, subtitles, single=single, directory=directory, encoding=encoding,
+                                         fix_filename=fix_filename)
         total_subtitles += len(saved_subtitles)
 
         if verbose > 0:

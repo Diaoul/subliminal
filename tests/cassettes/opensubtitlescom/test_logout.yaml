@@ -1,0 +1,203 @@
+interactions:
+- request:
+    body: '{"username": "python-subliminal-test", "password": "subliminal"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Api-Key:
+      - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '64'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Subliminal v2.1
+    method: POST
+    uri: https://api.opensubtitles.com/api/v1/login
+  response:
+    body:
+      string: '{"user":{"allowed_translations":1,"allowed_downloads":20,"level":"Sub
+        leecher","user_id":699022,"ext_installed":false,"vip":false},"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPdThucThpZFIzek0wd0ttR01zSkw1U0ZTeFpCY2MydiIsImV4cCI6MTcxNDU2MTA5OH0.RWMl_Zdfw95jL7mfEijK6DHKvaD01wDvIK71O66apyE","status":200,"base_url":"api.opensubtitles.com"}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, Authorization, Accept, Api-Key, Content-Type, X-User-Agent
+      Access-Control-Allow-Methods:
+      - GET, HEAD, POST, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Age:
+      - '0'
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 87c704248ef2776c-LHR
+      Cache-Control:
+      - max-age=0, private, must-revalidate, s-maxage=600
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 30 Apr 2024 10:58:21 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      RateLimit-Limit:
+      - '1'
+      RateLimit-Remaining:
+      - '0'
+      RateLimit-Reset:
+      - '1'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=pMciJfEElB0I52cd3EWJG%2BbyXLHrB8X%2FznPTzT0L3PHMMIwzir2Q1lVZXqAYo%2BdI%2FEw05IJj1iHvcJq7lyTbi63uGT4QvAxlX6Hh5fBr0PoXtCd7LWxs%2FQMmJhXCvQgoa3VaKpIjvyE%3D"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      X-Cache-Backend:
+      - apigw1_8000 rb11
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Kong-Proxy-Latency:
+      - '0'
+      X-Kong-Upstream-Latency:
+      - '340'
+      X-RateLimit-Limit-Hour:
+      - '60'
+      X-RateLimit-Limit-Second:
+      - '1'
+      X-RateLimit-Remaining-Hour:
+      - '57'
+      X-RateLimit-Remaining-Second:
+      - '0'
+      X-Request-Id:
+      - f954af7e-20c9-4bde-8089-8048a53375fd
+      X-Runtime:
+      - '0.337885'
+      X-Var-Cache:
+      - MISS
+      X-Via:
+      - fw1
+      X-Vip-Consumer:
+      - 'false'
+      X-Vip-User:
+      - 'false'
+      X-XSS-Protection:
+      - 1; mode=block
+      alt-svc:
+      - h3=":443"; ma=86400
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Api-Key:
+      - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
+      Authorization:
+      - Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPdThucThpZFIzek0wd0ttR01zSkw1U0ZTeFpCY2MydiIsImV4cCI6MTcxNDU2MTA5OH0.RWMl_Zdfw95jL7mfEijK6DHKvaD01wDvIK71O66apyE
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '0'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Subliminal v2.1
+    method: DELETE
+    uri: https://api.opensubtitles.com/api/v1/logout
+  response:
+    body:
+      string: '{"message":"token successfully destroyed","status":200}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, Authorization, Accept, Api-Key, Content-Type, X-User-Agent
+      Access-Control-Allow-Methods:
+      - GET, HEAD, POST, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Age:
+      - '0'
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 87c704287df248cb-LHR
+      Cache-Control:
+      - max-age=0, private, must-revalidate, s-maxage=600
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 30 Apr 2024 10:58:22 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      RateLimit-Limit:
+      - '5'
+      RateLimit-Remaining:
+      - '4'
+      RateLimit-Reset:
+      - '1'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=bLkZnL2b7rBeqpbH4wMewMbFIDsOizwKm4VoIfeaNmTxpCe9%2F%2B6crtRBDetuF1jAGLyOIZd6ta8S3iJ2J15GBCltWVk1c1%2FsOf6mI%2BMQeQbW0jl3wI%2F%2Fjqf3X9sXw6M9t0jnZ8Ttx%2Fg%3D"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      X-Cache-Backend:
+      - apigw1_8000 rb1-temp
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Kong-Proxy-Latency:
+      - '0'
+      X-Kong-Upstream-Latency:
+      - '72'
+      X-RateLimit-Limit-Second:
+      - '5'
+      X-RateLimit-Remaining-Second:
+      - '4'
+      X-Request-Id:
+      - a4c25696-158c-4c9c-a98e-2f56be890f6c
+      X-Runtime:
+      - '0.068948'
+      X-Var-Cache:
+      - MISS
+      X-Via:
+      - fw1
+      X-Vip:
+      - 'false'
+      X-Vip-Consumer:
+      - 'false'
+      X-Vip-User:
+      - 'false'
+      X-XSS-Protection:
+      - 1; mode=block
+      alt-svc:
+      - h3=":443"; ma=86400
+    status:
+      code: 200
+      message: OK
+version: 1

@@ -10,11 +10,16 @@ from ..video import Episode, Movie
 
 logger = logging.getLogger(__name__)
 
+#: OMDB subliminal API key
+OMDB_API_KEY = '44d5b275'
+
 
 class OMDBClient(object):
     base_url = 'http://www.omdbapi.com'
 
-    def __init__(self, version=1, session=None, headers=None, timeout=10):
+    def __init__(self, apikey=None, version=1, session=None, headers=None, timeout=10):
+        self.apikey = apikey or OMDB_API_KEY
+
         #: Session for the requests
         self.session = session or requests.Session()
         self.session.timeout = timeout
@@ -24,7 +29,7 @@ class OMDBClient(object):
 
     def get(self, id=None, title=None, type=None, year=None, plot='short', tomatoes=False):
         # build the params
-        params = {}
+        params = {"apikey": self.apikey}
         if id:
             params['i'] = id
         if title:
@@ -105,12 +110,6 @@ def refine(video, apikey=None, **kwargs):
       * :attr:`~subliminal.video.Video.imdb_id`
 
     """
-    if not apikey:
-        logger.warning('No apikey. Skipping omdb refiner.')
-        return
-
-    omdb_client.session.params['apikey'] = apikey
-
     if isinstance(video, Episode):
         # exit if the information is complete
         if video.series_imdb_id:

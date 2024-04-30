@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from functools import wraps
 import logging
 import re
@@ -64,7 +64,7 @@ class TVDBClient(object):
         self.password = password
 
         #: Last token acquisition date
-        self.token_date = datetime.utcnow() - self.token_lifespan
+        self.token_date = datetime.now(timezone.utc) - self.token_lifespan
 
         #: Session for the requests
         self.session = session or requests.Session()
@@ -89,11 +89,11 @@ class TVDBClient(object):
 
     @property
     def token_expired(self):
-        return datetime.utcnow() - self.token_date > self.token_lifespan
+        return datetime.now(timezone.utc) - self.token_date > self.token_lifespan
 
     @property
     def token_needs_refresh(self):
-        return datetime.utcnow() - self.token_date > self.refresh_token_every
+        return datetime.now(timezone.utc) - self.token_date > self.refresh_token_every
 
     def login(self):
         """Login"""
@@ -106,7 +106,7 @@ class TVDBClient(object):
         self.session.headers['Authorization'] = 'Bearer ' + r.json()['token']
 
         # update token_date
-        self.token_date = datetime.utcnow()
+        self.token_date = datetime.now(timezone.utc)
 
     def refresh_token(self):
         """Refresh token"""
@@ -118,7 +118,7 @@ class TVDBClient(object):
         self.session.headers['Authorization'] = 'Bearer ' + r.json()['token']
 
         # update token_date
-        self.token_date = datetime.utcnow()
+        self.token_date = datetime.now(timezone.utc)
 
     @requires_auth
     def search_series(self, name=None, imdb_id=None, zap2it_id=None):

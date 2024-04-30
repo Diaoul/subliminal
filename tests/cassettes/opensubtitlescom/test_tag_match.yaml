@@ -1,0 +1,371 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Api-Key:
+      - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Subliminal v2.1
+    method: GET
+    uri: https://api.opensubtitles.com/api/v1/subtitles?episode_number=1&imdb_id=4516230&languages=pt-br&query=the+fall&season_number=3
+  response:
+    body:
+      string: '{"total_pages":0,"total_count":0,"per_page":60,"page":1,"data":[]}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, Authorization, Accept, Api-Key, Content-Type, X-User-Agent
+      Access-Control-Allow-Methods:
+      - GET, HEAD, POST, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-Cache-Status:
+      - MISS
+      CF-RAY:
+      - 87c704709bbb4913-LHR
+      Cache-Control:
+      - public, max-age=86400
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 30 Apr 2024 10:58:33 GMT
+      Last-Modified:
+      - Tue, 30 Apr 2024 10:58:33 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      RateLimit-Limit:
+      - '5'
+      RateLimit-Remaining:
+      - '3'
+      RateLimit-Reset:
+      - '1'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=JyooNchtoHo0BbCSWHZF4o8Q0%2FROFwY%2FQxiEa6Lh4ZiBIvVFoU3y1cOeKQhEo2iUi2gpVaEbAHMkfPbaeLuBAreUSjfCDuIpjjb6QnJAfi%2BvBHIgSBDIAhbTrNxKhxxtXCxXWjuzC9M%3D"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Cache-Backend:
+      - apigw1_8000 rb1
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Kong-Proxy-Latency:
+      - '1'
+      X-Kong-Upstream-Latency:
+      - '39'
+      X-RateLimit-Limit-Second:
+      - '5'
+      X-RateLimit-Remaining-Second:
+      - '3'
+      X-Request-Id:
+      - 525f3da6-96b9-4661-a7db-873d85d8c15e
+      X-Runtime:
+      - '0.034994'
+      X-StackifyID:
+      - V1|d47e51ed-ee75-4d56-ac9a-61a2009bd936|C98184|CD5
+      X-Var-Cache:
+      - MISS
+      X-Via:
+      - fw1
+      X-Vip:
+      - 'false'
+      X-Vip-Consumer:
+      - 'false'
+      X-Vip-User:
+      - 'false'
+      X-XSS-Protection:
+      - 1; mode=block
+      alt-svc:
+      - h3=":443"; ma=86400
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Api-Key:
+      - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Subliminal v2.1
+    method: GET
+    uri: https://api.opensubtitles.com/api/v1/subtitles?imdb_id=4516230&languages=pt-br
+  response:
+    body:
+      string: '{"total_pages":1,"total_count":2,"per_page":60,"page":1,"data":[{"id":"3936502","type":"subtitle","attributes":{"subtitle_id":"3936502","language":"pt-BR","download_count":2817,"new_download_count":32,"hearing_impaired":false,"hd":true,"fps":50.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2016-10-03T21:13:57Z","ai_translated":false,"nb_cd":1,"machine_translated":false,"release":"The.Fall.S03E01.720p.HDTV.x264-FoV[eztv]","comments":"","legacy_subtitle_id":6753582,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":374751,"feature_type":"Episode","year":2016,"title":"Episode
+        One","movie_name":"The Fall - S03E01  Episode One","imdb_id":4516230,"tmdb_id":1223686,"season_number":3,"episode_number":1,"parent_imdb_id":2294189,"parent_title":"The
+        Fall","parent_tmdb_id":49010,"parent_feature_id":13091},"url":"https://www.opensubtitles.com/pt-BR/subtitles/legacy/6753582","related_links":[{"label":"All
+        subtitles for Tv Show The Fall","url":"https://www.opensubtitles.com/pt-BR/features/redirect/13091","img_url":"https://s9.opensubtitles.com/features/1/5/7/374751.jpg"},{"label":"All
+        subtitles for Episode episode one","url":"https://www.opensubtitles.com/pt-BR/features/redirect/374751"}],"files":[{"file_id":4014152,"cd_number":1,"file_name":"The.Fall.S03E01.720p.HDTV.x264-FoV[eztv]"}]}},{"id":"3937531","type":"subtitle","attributes":{"subtitle_id":"3937531","language":"pt-BR","download_count":866,"new_download_count":10,"hearing_impaired":false,"hd":true,"fps":25.0,"votes":0,"ratings":0.0,"from_trusted":true,"foreign_parts_only":false,"upload_date":"2016-10-20T02:41:08Z","ai_translated":false,"nb_cd":1,"machine_translated":false,"release":"The.Fall.S03E01.HDTV.x264-TLA-AFG-FoV-mSD-RBB","comments":"","legacy_subtitle_id":6769109,"legacy_uploader_id":1267974,"uploader":{"uploader_id":55587,"name":"marocas62","rank":"subtranslator"},"feature_details":{"feature_id":374751,"feature_type":"Episode","year":2016,"title":"Episode
+        One","movie_name":"The Fall - S3E1 \"The Fall\" Silence and Suffering","imdb_id":4516230,"tmdb_id":1223686,"season_number":3,"episode_number":1,"parent_imdb_id":2294189,"parent_title":"The
+        Fall","parent_tmdb_id":49010,"parent_feature_id":13091},"url":"https://www.opensubtitles.com/pt-BR/subtitles/legacy/6769109","related_links":[{"label":"All
+        subtitles for Tv Show The Fall","url":"https://www.opensubtitles.com/pt-BR/features/redirect/13091","img_url":"https://s9.opensubtitles.com/features/1/5/7/374751.jpg"},{"label":"All
+        subtitles for Episode episode one","url":"https://www.opensubtitles.com/pt-BR/features/redirect/374751"}],"files":[{"file_id":4015178,"cd_number":1,"file_name":"The
+        Fall S03E01 HDTV x264-RBB BR-PORT"}]}}]}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, Authorization, Accept, Api-Key, Content-Type, X-User-Agent
+      Access-Control-Allow-Methods:
+      - GET, HEAD, POST, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-Cache-Status:
+      - MISS
+      CF-RAY:
+      - 87c70472df6748af-LHR
+      Cache-Control:
+      - public, max-age=86400
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 30 Apr 2024 10:58:34 GMT
+      Last-Modified:
+      - Tue, 30 Apr 2024 10:58:34 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      RateLimit-Limit:
+      - '5'
+      RateLimit-Remaining:
+      - '4'
+      RateLimit-Reset:
+      - '1'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=wxUZTUQbk8zKLQXjt2XBdihIVSbKV7dxLTEF4igGAZiKahXuBS%2BOaEvvSpf03ZJdr0xLCwBhcNW%2FNagZRvQknR8x4bfLPuyAVZ%2BZMBFS5df9H%2ByX0WgHEL3kpnhCJ9zvrz0G5Lx7Rg8%3D"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Cache-Backend:
+      - apigw1_8000 rb1
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Kong-Proxy-Latency:
+      - '1'
+      X-Kong-Upstream-Latency:
+      - '40'
+      X-RateLimit-Limit-Second:
+      - '5'
+      X-RateLimit-Remaining-Second:
+      - '4'
+      X-Request-Id:
+      - 5c9502f8-7b48-45a1-959e-da98182a3f7c
+      X-Runtime:
+      - '0.038722'
+      X-StackifyID:
+      - V1|23c787dd-72bc-4cc4-af7d-cd992a36adc4|C98184|CD5
+      X-Var-Cache:
+      - MISS
+      X-Via:
+      - fw1
+      X-Vip:
+      - 'false'
+      X-Vip-Consumer:
+      - 'false'
+      X-Vip-User:
+      - 'false'
+      X-XSS-Protection:
+      - 1; mode=block
+      alt-svc:
+      - h3=":443"; ma=86400
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Api-Key:
+      - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Subliminal v2.1
+    method: GET
+    uri: https://api.opensubtitles.com/api/v1/subtitles?episode_number=1&languages=pt-br&query=the+fall&season_number=3
+  response:
+    body:
+      string: '{"total_pages":1,"total_count":11,"per_page":60,"page":1,"data":[{"id":"3004905","type":"subtitle","attributes":{"subtitle_id":"3004905","language":"pt-BR","download_count":5865,"new_download_count":11,"hearing_impaired":false,"hd":true,"fps":23.976,"votes":0,"ratings":0.0,"from_trusted":true,"foreign_parts_only":false,"upload_date":"2016-11-10T04:21:09Z","ai_translated":false,"nb_cd":1,"machine_translated":false,"release":"HDTV.x264-KILLERS-FUM-KILLERS","comments":"","legacy_subtitle_id":6791294,"legacy_uploader_id":378614,"uploader":{"uploader_id":40309,"name":"clazevedo","rank":"translator"},"feature_details":{"feature_id":401839,"feature_type":"Episode","year":2016,"title":"After
+        the Fall","movie_name":"Salem - S03E01  After the Fall","imdb_id":4853240,"tmdb_id":1217259,"season_number":3,"episode_number":1,"parent_imdb_id":2963254,"parent_title":"Salem","parent_tmdb_id":60905,"parent_feature_id":14405},"url":"https://www.opensubtitles.com/pt-BR/subtitles/legacy/6791294","related_links":[{"label":"All
+        subtitles for Tv Show Salem","url":"https://www.opensubtitles.com/pt-BR/features/redirect/14405","img_url":"https://s9.opensubtitles.com/features/9/3/8/401839.jpg"},{"label":"All
+        subtitles for Episode after the fall","url":"https://www.opensubtitles.com/pt-BR/features/redirect/401839"}],"files":[{"file_id":3075098,"cd_number":1,"file_name":"Salem.S03E01.720p.HDTV.x264-KILLERS"}]}},{"id":"3936502","type":"subtitle","attributes":{"subtitle_id":"3936502","language":"pt-BR","download_count":2817,"new_download_count":32,"hearing_impaired":false,"hd":true,"fps":50.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2016-10-03T21:13:57Z","ai_translated":false,"nb_cd":1,"machine_translated":false,"release":"The.Fall.S03E01.720p.HDTV.x264-FoV[eztv]","comments":"","legacy_subtitle_id":6753582,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":374751,"feature_type":"Episode","year":2016,"title":"Episode
+        One","movie_name":"The Fall - S03E01  Episode One","imdb_id":4516230,"tmdb_id":1223686,"season_number":3,"episode_number":1,"parent_imdb_id":2294189,"parent_title":"The
+        Fall","parent_tmdb_id":49010,"parent_feature_id":13091},"url":"https://www.opensubtitles.com/pt-BR/subtitles/legacy/6753582","related_links":[{"label":"All
+        subtitles for Tv Show The Fall","url":"https://www.opensubtitles.com/pt-BR/features/redirect/13091","img_url":"https://s9.opensubtitles.com/features/1/5/7/374751.jpg"},{"label":"All
+        subtitles for Episode episode one","url":"https://www.opensubtitles.com/pt-BR/features/redirect/374751"}],"files":[{"file_id":4014152,"cd_number":1,"file_name":"The.Fall.S03E01.720p.HDTV.x264-FoV[eztv]"}]}},{"id":"2852678","type":"subtitle","attributes":{"subtitle_id":"2852678","language":"pt-BR","download_count":1206,"new_download_count":34,"hearing_impaired":false,"hd":false,"fps":25.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2014-08-17T05:17:21Z","ai_translated":false,"nb_cd":1,"machine_translated":false,"release":"Doc.Martin.S03E01.(24
+        September 2007).[TVRip (Xvid)]","comments":"","legacy_subtitle_id":5790997,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":217864,"feature_type":"Episode","year":2007,"title":"The
+        Apple Doesn''t Fall","movie_name":"Doc Martin - S03E01  The Apple Doesn''t
+        Fall","imdb_id":1111524,"tmdb_id":183215,"season_number":3,"episode_number":1,"parent_imdb_id":408381,"parent_title":"Doc
+        Martin","parent_tmdb_id":2430,"parent_feature_id":9526},"url":"https://www.opensubtitles.com/pt-BR/subtitles/legacy/5790997","related_links":[{"label":"All
+        subtitles for Tv Show Doc Martin","url":"https://www.opensubtitles.com/pt-BR/features/redirect/9526","img_url":"https://s9.opensubtitles.com/features/4/6/8/217864.jpg"},{"label":"All
+        subtitles for Episode the apple doesn''t fall","url":"https://www.opensubtitles.com/pt-BR/features/redirect/217864"}],"files":[{"file_id":2924588,"cd_number":1,"file_name":"Doc.Martin.S03E01.(24
+        September 2007).[TVRip (Xvid)]-spa"}]}},{"id":"3004939","type":"subtitle","attributes":{"subtitle_id":"3004939","language":"pt-BR","download_count":1127,"new_download_count":11,"hearing_impaired":false,"hd":true,"fps":23.976,"votes":0,"ratings":0.0,"from_trusted":true,"foreign_parts_only":false,"upload_date":"2016-11-10T04:24:45Z","ai_translated":false,"nb_cd":1,"machine_translated":false,"release":"720p-1080p.WEB-DL.DD5.1.H.264-DRACULA","comments":"","legacy_subtitle_id":6791295,"legacy_uploader_id":378614,"uploader":{"uploader_id":40309,"name":"clazevedo","rank":"translator"},"feature_details":{"feature_id":401839,"feature_type":"Episode","year":2016,"title":"After
+        the Fall","movie_name":"Salem - S03E01  \"Salem\" After the Fall","imdb_id":4853240,"tmdb_id":1217259,"season_number":3,"episode_number":1,"parent_imdb_id":2963254,"parent_title":"Salem","parent_tmdb_id":60905,"parent_feature_id":14405},"url":"https://www.opensubtitles.com/pt-BR/subtitles/legacy/6791295","related_links":[{"label":"All
+        subtitles for Tv Show Salem","url":"https://www.opensubtitles.com/pt-BR/features/redirect/14405","img_url":"https://s9.opensubtitles.com/features/9/3/8/401839.jpg"},{"label":"All
+        subtitles for Episode after the fall","url":"https://www.opensubtitles.com/pt-BR/features/redirect/401839"}],"files":[{"file_id":3075133,"cd_number":1,"file_name":"Salem.S03E01.1080p.WEB-DL.DD5.1.H.264-DRACULA"}]}},{"id":"3937531","type":"subtitle","attributes":{"subtitle_id":"3937531","language":"pt-BR","download_count":866,"new_download_count":10,"hearing_impaired":false,"hd":true,"fps":25.0,"votes":0,"ratings":0.0,"from_trusted":true,"foreign_parts_only":false,"upload_date":"2016-10-20T02:41:08Z","ai_translated":false,"nb_cd":1,"machine_translated":false,"release":"The.Fall.S03E01.HDTV.x264-TLA-AFG-FoV-mSD-RBB","comments":"","legacy_subtitle_id":6769109,"legacy_uploader_id":1267974,"uploader":{"uploader_id":55587,"name":"marocas62","rank":"subtranslator"},"feature_details":{"feature_id":374751,"feature_type":"Episode","year":2016,"title":"Episode
+        One","movie_name":"The Fall - S3E1 \"The Fall\" Silence and Suffering","imdb_id":4516230,"tmdb_id":1223686,"season_number":3,"episode_number":1,"parent_imdb_id":2294189,"parent_title":"The
+        Fall","parent_tmdb_id":49010,"parent_feature_id":13091},"url":"https://www.opensubtitles.com/pt-BR/subtitles/legacy/6769109","related_links":[{"label":"All
+        subtitles for Tv Show The Fall","url":"https://www.opensubtitles.com/pt-BR/features/redirect/13091","img_url":"https://s9.opensubtitles.com/features/1/5/7/374751.jpg"},{"label":"All
+        subtitles for Episode episode one","url":"https://www.opensubtitles.com/pt-BR/features/redirect/374751"}],"files":[{"file_id":4015178,"cd_number":1,"file_name":"The
+        Fall S03E01 HDTV x264-RBB BR-PORT"}]}},{"id":"7046307","type":"subtitle","attributes":{"subtitle_id":"7046307","language":"pt-BR","download_count":860,"new_download_count":1,"hearing_impaired":false,"hd":true,"fps":0.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2016-11-04T10:31:37Z","ai_translated":false,"nb_cd":1,"machine_translated":false,"release":"Salem.S03E01.720p.HDTV.x264-KILLERS[ettv]","comments":"","legacy_subtitle_id":6784308,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":401839,"feature_type":"Episode","year":2016,"title":"After
+        the Fall","movie_name":"Salem - S03E01  After the Fall","imdb_id":4853240,"tmdb_id":1217259,"season_number":3,"episode_number":1,"parent_imdb_id":2963254,"parent_title":"Salem","parent_tmdb_id":60905,"parent_feature_id":14405},"url":"https://www.opensubtitles.com/pt-BR/subtitles/legacy/6784308","related_links":[{"label":"All
+        subtitles for Tv Show Salem","url":"https://www.opensubtitles.com/pt-BR/features/redirect/14405","img_url":"https://s9.opensubtitles.com/features/9/3/8/401839.jpg"},{"label":"All
+        subtitles for Episode after the fall","url":"https://www.opensubtitles.com/pt-BR/features/redirect/401839"}],"files":[{"file_id":7987169,"cd_number":1,"file_name":"Salem.S03E01.720p.HDTV.x264-KILLERS[ettv]"}]}},{"id":"7046347","type":"subtitle","attributes":{"subtitle_id":"7046347","language":"pt-BR","download_count":365,"new_download_count":4,"hearing_impaired":false,"hd":true,"fps":0.0,"votes":1,"ratings":5.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2016-11-04T12:05:40Z","ai_translated":false,"nb_cd":1,"machine_translated":false,"release":"Salem.S03E01.720p.HDTV.x264-KILLERS[ettv]","comments":"","legacy_subtitle_id":6784338,"legacy_uploader_id":1441666,"uploader":{"uploader_id":59468,"name":"slayer999","rank":"Sub
+        leecher"},"feature_details":{"feature_id":401839,"feature_type":"Episode","year":2016,"title":"After
+        the Fall","movie_name":"Salem - S03E01  After the Fall","imdb_id":4853240,"tmdb_id":1217259,"season_number":3,"episode_number":1,"parent_imdb_id":2963254,"parent_title":"Salem","parent_tmdb_id":60905,"parent_feature_id":14405},"url":"https://www.opensubtitles.com/pt-BR/subtitles/legacy/6784338","related_links":[{"label":"All
+        subtitles for Tv Show Salem","url":"https://www.opensubtitles.com/pt-BR/features/redirect/14405","img_url":"https://s9.opensubtitles.com/features/9/3/8/401839.jpg"},{"label":"All
+        subtitles for Episode after the fall","url":"https://www.opensubtitles.com/pt-BR/features/redirect/401839"}],"files":[{"file_id":7987192,"cd_number":1,"file_name":"Salem.S03E01.720p.HDTV.x264-KILLERS[ettv]"}]}},{"id":"5043877","type":"subtitle","attributes":{"subtitle_id":"5043877","language":"pt-BR","download_count":263,"new_download_count":7,"hearing_impaired":false,"hd":false,"fps":0.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2019-03-09T03:33:46Z","ai_translated":false,"nb_cd":1,"machine_translated":false,"release":"Doc
+        Martin S03E01 The Apple Doesnt Fall","comments":"","legacy_subtitle_id":7680735,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":217864,"feature_type":"Episode","year":2007,"title":"The
+        Apple Doesn''t Fall","movie_name":"Doc Martin - S03E01  \"Doc Martin\" The
+        Apple Doesn''t Fall","imdb_id":1111524,"tmdb_id":183215,"season_number":3,"episode_number":1,"parent_imdb_id":408381,"parent_title":"Doc
+        Martin","parent_tmdb_id":2430,"parent_feature_id":9526},"url":"https://www.opensubtitles.com/pt-BR/subtitles/legacy/7680735","related_links":[{"label":"All
+        subtitles for Tv Show Doc Martin","url":"https://www.opensubtitles.com/pt-BR/features/redirect/9526","img_url":"https://s9.opensubtitles.com/features/4/6/8/217864.jpg"},{"label":"All
+        subtitles for Episode the apple doesn''t fall","url":"https://www.opensubtitles.com/pt-BR/features/redirect/217864"}],"files":[{"file_id":5161591,"cd_number":1,"file_name":"Doc
+        Martin S03E01 The Apple Doesnt Fall"}]}},{"id":"7046329","type":"subtitle","attributes":{"subtitle_id":"7046329","language":"pt-BR","download_count":169,"new_download_count":1,"hearing_impaired":false,"hd":true,"fps":0.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2016-11-04T10:41:16Z","ai_translated":false,"nb_cd":1,"machine_translated":false,"release":"Salem.S03E01.720p.HDTV.x264-KILLERS[ettv]","comments":"there
+        is an error code in the previous , i correct in this one","legacy_subtitle_id":6784309,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":401839,"feature_type":"Episode","year":2016,"title":"After
+        the Fall","movie_name":"Salem - S03E01  After the Fall","imdb_id":4853240,"tmdb_id":1217259,"season_number":3,"episode_number":1,"parent_imdb_id":2963254,"parent_title":"Salem","parent_tmdb_id":60905,"parent_feature_id":14405},"url":"https://www.opensubtitles.com/pt-BR/subtitles/legacy/6784309","related_links":[{"label":"All
+        subtitles for Tv Show Salem","url":"https://www.opensubtitles.com/pt-BR/features/redirect/14405","img_url":"https://s9.opensubtitles.com/features/9/3/8/401839.jpg"},{"label":"All
+        subtitles for Episode after the fall","url":"https://www.opensubtitles.com/pt-BR/features/redirect/401839"}],"files":[{"file_id":7987180,"cd_number":1,"file_name":"Salem.S03E01.720p.HDTV.x264-KILLERS[ettv]"}]}},{"id":"5125331","type":"subtitle","attributes":{"subtitle_id":"5125331","language":"pt-BR","download_count":168,"new_download_count":10,"hearing_impaired":false,"hd":false,"fps":0.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2020-06-10T01:23:32Z","ai_translated":false,"nb_cd":1,"machine_translated":false,"release":"Doc
+        Martin - 3x01 - The Apple Doesn''t Fall.port","comments":"","legacy_subtitle_id":8241276,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":217864,"feature_type":"Episode","year":2007,"title":"The
+        Apple Doesn''t Fall","movie_name":"Doc Martin - S03E01  \"Doc Martin\" The
+        Apple Doesn''t Fall","imdb_id":1111524,"tmdb_id":183215,"season_number":3,"episode_number":1,"parent_imdb_id":408381,"parent_title":"Doc
+        Martin","parent_tmdb_id":2430,"parent_feature_id":9526},"url":"https://www.opensubtitles.com/pt-BR/subtitles/legacy/8241276","related_links":[{"label":"All
+        subtitles for Tv Show Doc Martin","url":"https://www.opensubtitles.com/pt-BR/features/redirect/9526","img_url":"https://s9.opensubtitles.com/features/4/6/8/217864.jpg"},{"label":"All
+        subtitles for Episode the apple doesn''t fall","url":"https://www.opensubtitles.com/pt-BR/features/redirect/217864"}],"files":[{"file_id":5236106,"cd_number":1,"file_name":"Doc
+        Martin - 3x01 - The Apple Doesnt Fall.port.br"}]}},{"id":"5118726","type":"subtitle","attributes":{"subtitle_id":"5118726","language":"pt-BR","download_count":52,"new_download_count":45,"hearing_impaired":false,"hd":false,"fps":60.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2020-05-01T14:58:08Z","ai_translated":false,"nb_cd":1,"machine_translated":false,"release":"Renegado
+        3 temporada ep1","comments":"","legacy_subtitle_id":8192907,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":372940,"feature_type":"Episode","year":1994,"title":"Dutch
+        On the Run (1)","movie_name":"O Renegado - S03E01  Dutch On the Run (1)","imdb_id":685053,"tmdb_id":956021,"season_number":3,"episode_number":1,"parent_imdb_id":103524,"parent_title":"Renegade","parent_tmdb_id":600,"parent_feature_id":12976},"url":"https://www.opensubtitles.com/pt-BR/subtitles/legacy/8192907","related_links":[{"label":"All
+        subtitles for Tv Show Renegade","url":"https://www.opensubtitles.com/pt-BR/features/redirect/12976","img_url":"https://s9.opensubtitles.com/features/0/4/9/372940.jpg"},{"label":"All
+        subtitles for Episode dutch on the run (1)","url":"https://www.opensubtitles.com/pt-BR/features/redirect/372940"}],"files":[{"file_id":5229907,"cd_number":1,"file_name":"Renegado
+        3 temporada ep1"}]}}]}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, Authorization, Accept, Api-Key, Content-Type, X-User-Agent
+      Access-Control-Allow-Methods:
+      - GET, HEAD, POST, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-Cache-Status:
+      - MISS
+      CF-RAY:
+      - 87c70474cabe0639-LHR
+      Cache-Control:
+      - public, max-age=86400
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 30 Apr 2024 10:58:34 GMT
+      Last-Modified:
+      - Tue, 30 Apr 2024 10:58:34 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      RateLimit-Limit:
+      - '5'
+      RateLimit-Remaining:
+      - '3'
+      RateLimit-Reset:
+      - '1'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=BbNEKFEIze7e9LXVLbYqUz8LVFtA1dhNz7epVErLZd678G2XhXIiy%2Bby2DgLRhCV%2BLUiUaI2m7jZ0N2oqE74GMfwwfo%2Bq0jxfOsiGqaieJjdPj5nImLGtIC6vmb8i3RErAhYw1bZHfU%3D"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Cache-Backend:
+      - apigw1_8000 rb1
+      X-Content-Type-Options:
+      - nosniff
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Kong-Proxy-Latency:
+      - '0'
+      X-Kong-Upstream-Latency:
+      - '86'
+      X-RateLimit-Limit-Second:
+      - '5'
+      X-RateLimit-Remaining-Second:
+      - '3'
+      X-Request-Id:
+      - cd9047d4-863a-4bb6-891b-f493c2c59498
+      X-Runtime:
+      - '0.083538'
+      X-StackifyID:
+      - V1|ed52b294-9079-4d33-b9b0-d531f36d6d83|C98184|CD5
+      X-Var-Cache:
+      - MISS
+      X-Via:
+      - fw1
+      X-Vip:
+      - 'false'
+      X-Vip-Consumer:
+      - 'false'
+      X-Vip-User:
+      - 'false'
+      X-XSS-Protection:
+      - 1; mode=block
+      alt-svc:
+      - h3=":443"; ma=86400
+    status:
+      code: 200
+      message: OK
+version: 1

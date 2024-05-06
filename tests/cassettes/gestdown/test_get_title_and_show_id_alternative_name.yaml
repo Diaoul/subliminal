@@ -1,0 +1,110 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.1
+      accept:
+      - application/json
+    method: GET
+    uri: https://api.gestdown.info/shows/search/The%20End%20of%20the%20Fucking%20World
+  response:
+    body:
+      string: !!binary |
+        gxgAAETdlup4MXSraEiCdK9cOD+oYsqCDValri8lf8oWLuYyxhH/EVUGsjEcry2vxxdpvpXJAAM=
+    headers:
+      Age:
+      - '1501'
+      CF-Cache-Status:
+      - HIT
+      CF-RAY:
+      - 87f87d9facc1f0a7-CDG
+      Cache-Control:
+      - public, max-age=43200
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - br
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Mon, 06 May 2024 11:04:39 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=ZY1%2B%2BWgCogk%2BrnIsBQTe6MvXtfez8BjfXJjKSvDrosBrJokMAa3av%2BbBhgeHwvDhZU3Tt2dLXB8s7wf1%2B2f8Wnos4uSRc2Ai9TFFOHqaFsKhunigBkRnNw2XMj8KLQuuP3EN7Q%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      alt-svc:
+      - h3=":443"; ma=86400
+      vary:
+      - Accept-Encoding
+    status:
+      code: 404
+      message: Not Found
+- request:
+    body: null
+    headers:
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.1
+      accept:
+      - application/json
+    method: GET
+    uri: https://api.gestdown.info/shows/search/The%20end%20of%20the%20f***ing%20world
+  response:
+    body:
+      string: !!binary |
+        A18AAMSqOZXNrMz8BehBF3XrAvRXAIANOFKOJMkGoHOllp9fXFfH5xUm/2JtYcBS6UUsQ2o5kJTY
+        LqFOty1lXZywZM2yCyBwaPcMg/mKneHBOscFlxFGruuuD0tHdiAgcOhm3F6PhytMJHAt5KGISoHb
+        Y9BNLUwcZ2kUCdz29i1lkkopcN3dlzC4rZj4YOm4oNuKabE+LOl5vOws/uXfAAM=
+    headers:
+      CF-Cache-Status:
+      - MISS
+      CF-RAY:
+      - 87f87d9ffd0cf0a7-CDG
+      Cache-Control:
+      - public, max-age=14400
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - br
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Mon, 06 May 2024 11:04:39 GMT
+      Last-Modified:
+      - Mon, 06 May 2024 11:04:39 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=%2FQnUClaW5usf0ati%2BQAAZ5R0r0VvlrXh5dtIDoYEIL9GBNA1lQ3Hicdei80ZfJGRc%2Fr3dSDw20W7FJgfz7gvLSj4T%2F9Xv4pfU1jEcMMlBGfq7oQ8b2eCcw0WXYUzBQBHzzmiIA%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      alt-svc:
+      - h3=":443"; ma=86400
+      vary:
+      - Accept-Encoding
+    status:
+      code: 200
+      message: OK
+version: 1

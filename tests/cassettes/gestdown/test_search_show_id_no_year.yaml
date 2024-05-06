@@ -1,0 +1,58 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.1
+      accept:
+      - application/json
+    method: GET
+    uri: https://api.gestdown.info/shows/search/Dallas
+  response:
+    body:
+      string: !!binary |
+        g54AAGTVltNaeSo4UmwHPpmLc0c+pCfQyYnQTU7nE55awJEFGFrgHDMoYng/u3yBTT0dNhC/LtDk
+        EIHZ5b4Uo5JQWmXKglVY5V4VWRmMYSOeDCCMyVBAhOek75MNIIzpZ5FspnEDkTTCpkg2t/lFyCho
+        0KLDFQYkRpIfhO3+Of3IIXqvAyNsh7yj0QibfldBhPw/bkj3oimsS4xzSigRZVJtVXDBKecpoSx3
+        wZpCnbt71sQPkF6sTAUbtkxJ4r0NY8WaGG4/NwMD
+    headers:
+      CF-Cache-Status:
+      - MISS
+      CF-RAY:
+      - 87f858f05e5af14c-CDG
+      Cache-Control:
+      - public, max-age=14400
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - br
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Mon, 06 May 2024 10:39:37 GMT
+      Last-Modified:
+      - Mon, 06 May 2024 10:39:37 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=%2BSyu6csVDWDJ%2FwYDCqKjx1Yb2QsMoTqzMCbHfABhd1tqURyeKbvXtNtOsQB4o602aX9yo%2FlfW6MWx2maYQdI9KoOJ5p5gxDd3%2FMHoBwx%2B%2Br%2FehVr19PL4n0z6PO8Qs6SWMBvGQ%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      alt-svc:
+      - h3=":443"; ma=86400
+      vary:
+      - Accept-Encoding
+    status:
+      code: 200
+      message: OK
+version: 1

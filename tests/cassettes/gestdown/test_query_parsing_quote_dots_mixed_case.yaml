@@ -1,0 +1,124 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.1
+      accept:
+      - application/json
+    method: GET
+    uri: https://api.gestdown.info/shows/search/Marvel's%20Agents%20of%20S.H.I.E.L.D.
+  response:
+    body:
+      string: !!binary |
+        g8cAAORUl9MaXYHOMVCSrURTxqJd+58d6S8FcoxzHoCuRQZdZQDZAIaJHBUd5Ouy+QWaDZ8E3cMv
+        zBN00LTeJR0jC0pqZpQUrA1Cs4mJLkn/lq0RgFDCOkMH92HzkVd7VB1PcxmpGiZVX1/V1/V5fVef
+        1YBQYp8DDYWg8wiUAw2FoHuQqFCjQYsO/RPC+HEWrxN0ymntLMK4TvE6QSeN0Ai0ep9CB+uw+cgr
+        YmGay0hsmDCazfMqwT/+wjxBB63QbfQqs6bNkRkhM2uT0EwY2caJT1J5nbDoqn41L1OaDWMNiJzL
+        +2qFllwrmgYhox/9P/0bAw==
+    headers:
+      Age:
+      - '3658'
+      CF-Cache-Status:
+      - HIT
+      CF-RAY:
+      - 87f8b2443bb3f104-CDG
+      Cache-Control:
+      - public, max-age=14400
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - br
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Mon, 06 May 2024 11:40:35 GMT
+      Last-Modified:
+      - Mon, 06 May 2024 10:39:37 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=gOCvdMCGMUY4I5RrG8RsGJLqPM8QoIIZk%2BWfHslcaSne3OS8dveu7nnJiqsF2VKF24zQXbn%2BAgViyZes9iyC69siz%2Bj9wLdJ2tdWcdJRvdrB0Ke1CxbyDI3icXM7OM%2BHKTp04Q%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      alt-svc:
+      - h3=":443"; ma=86400
+      vary:
+      - Accept-Encoding
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.1
+      accept:
+      - application/json
+    method: GET
+    uri: https://api.gestdown.info/subtitles/get/8976d3bb-a213-4210-9a03-f4b6d17ce540/2/6/eng
+  response:
+    body:
+      string: !!binary |
+        gxUFAGTfnO/p2qe/cZQaZLwNEGxLbvOBkm7s//9N9z6GOpYnUjRBOr3b2NbJIKECTTyhwrbFnqVO
+        18Gu7vBSIY1pTqfD/8JRWdp2Ot682tVlWg5lhvzpL8zHpA8YMhiWop3WqGowSIorxlQdSvVd9Wp0
+        LA4G2EFuBGQIRp3iowePH995+QoGQLA+Q17OdzLAVsr5dLx5cHRapnNhyL0czjLA1rexdrF8m1Sq
+        /835BBnWGI15fbKINVKp9BZk+L96HwzA0/wOeV1KXkIZgyqhNq+VypayC6PSPqjwEcDMdetkd7xA
+        1vr/QNkjqJqnVHpHI94ikfFYYujoo3AX6kGRDYEWXFIARQ1WSjZzk+RYeWoBTROLlLTGGpJCMa5z
+        s1xjUvEX92+/fjv+Mp5YE/UXUmQUcEG08WnDTY905ETJW0ZjakEKLmJs3LASd4o+WUk1sva+pFkU
+        eFGDZTu0DWLbYlDappBQlLFIunssyRaMvUbWpTmvdfT43Z2bePsx3mRMIDmsyAhgoggLdDGGe6Rc
+        kZ40BbRORaRkPaZEBTkQh95cr1GlwAkuKVCitJU/9uMeNFNiFSGsXVsk4oTFeI/BBa0KMZP4vXXz
+        9svpdH3Eyzvvbry8zRoFWlA3ploHazZRYI+0941JR4+RlULS1WLSzOhrsDVE4eKFNnhTUsBF8Rbs
+        YIs4+//LAHI6zScskP/CLGU+OYZsBvhKZROyH8Df3hXIcGN197y0ZXcuvLp/spsFBpi3Jz8hw5Ny
+        /kMOL8+rGxs5XubVSV+9Gu+PD8Y74+Px9vh4bcp9hP//DQM=
+    headers:
+      CF-Cache-Status:
+      - MISS
+      CF-RAY:
+      - 87f8b2448c11f104-CDG
+      Cache-Control:
+      - public, max-age=7200
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - br
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Mon, 06 May 2024 11:40:35 GMT
+      Last-Modified:
+      - Mon, 06 May 2024 11:40:35 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=nzfbadmzqJnDSrqaeRorolPa1bXvBW6p9nYSKn8JZdD53EjfSdffCVN%2Fg1PS9OaGquHS5yglm33aiCiMBfojpYcljDyj5ZQ8DXV1CAlkXe410srqBUHNvGxaNecjlj9SJ%2BaW%2Bg%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      alt-svc:
+      - h3=":443"; ma=86400
+      vary:
+      - Accept-Encoding
+    status:
+      code: 200
+      message: OK
+version: 1

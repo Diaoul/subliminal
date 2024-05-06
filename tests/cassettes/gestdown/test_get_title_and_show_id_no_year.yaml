@@ -1,0 +1,59 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.1
+      accept:
+      - application/json
+    method: GET
+    uri: https://api.gestdown.info/shows/external/tvdb/77092
+  response:
+    body:
+      string: !!binary |
+        A1IAAMTCOZU//UkKrId6kgsEa00IGmkmeTTYeUef1HMP57kjDeBAUYzAjFSNuXakMy0KFWZbgclC
+        P7I1TdFUU9ZAqNwyhIOTWxRuD0LlPUK3r6sejiwR+tDtK58yKaSSRjoZZJFNskKy+iYM08m7B3BM
+        U7IVwlAGVJMIfTHGcBD8+b//Aw==
+    headers:
+      Age:
+      - '386600'
+      CF-Cache-Status:
+      - HIT
+      CF-RAY:
+      - 87f858fa7b3d22af-CDG
+      Cache-Control:
+      - public, max-age=14400
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - br
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Mon, 06 May 2024 10:39:38 GMT
+      Last-Modified:
+      - Wed, 01 May 2024 23:16:18 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=0JsgXYKsPYxdvPD9PaFgZspT7x0Fxqbptn1GnU3SuCYHDOjy5JpZ99BsqxldSVP1N5baQ5EB%2BdDpiTh3gwZZRt3H5WwrscflMlJ3aNKQe6EDHiYQsueLHyxg7YTzsTf2SStBLw%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      alt-svc:
+      - h3=":443"; ma=86400
+      vary:
+      - Accept-Encoding
+    status:
+      code: 200
+      message: OK
+version: 1

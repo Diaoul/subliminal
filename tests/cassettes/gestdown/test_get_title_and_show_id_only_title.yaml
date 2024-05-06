@@ -1,0 +1,59 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.1
+      accept:
+      - application/json
+    method: GET
+    uri: https://api.gestdown.info/shows/search/Marvel's%20Agents%20of%20S.H.I.E.L.D.
+  response:
+    body:
+      string: !!binary |
+        g8cAAORUl9MaXYHOMVCSrURTxqJd+58d6S8FcoxzHoCuRQZdZQDZAIaJHBUd5Ouy+QWaDZ8E3cMv
+        zBN00LTeJR0jC0pqZpQUrA1Cs4mJLkn/lq0RgFDCOkMH92HzkVd7VB1PcxmpGiZVX1/V1/V5fVef
+        1YBQYp8DDYWg8wiUAw2FoHuQqFCjQYsO/RPC+HEWrxN0ymntLMK4TvE6QSeN0Ai0ep9CB+uw+cgr
+        YmGay0hsmDCazfMqwT/+wjxBB63QbfQqs6bNkRkhM2uT0EwY2caJT1J5nbDoqn41L1OaDWMNiJzL
+        +2qFllwrmgYhox/9P/0bAw==
+    headers:
+      CF-Cache-Status:
+      - MISS
+      CF-RAY:
+      - 87f858f56f992292-CDG
+      Cache-Control:
+      - public, max-age=14400
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - br
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Mon, 06 May 2024 10:39:37 GMT
+      Last-Modified:
+      - Mon, 06 May 2024 10:39:37 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=MgzcC6lAUR2PCalEJBjJigJC1rUQCoDWdzbs5xoCPuKA5qBQOfjkhivXJfklKRHv2jSSvCKcdcERQhpMtOq3HoXIEXnm5Wfc3BK3KVAytguonjCMInizbahtTPbiE%2BV23sBoOQ%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      alt-svc:
+      - h3=":443"; ma=86400
+      vary:
+      - Accept-Encoding
+    status:
+      code: 200
+      message: OK
+version: 1

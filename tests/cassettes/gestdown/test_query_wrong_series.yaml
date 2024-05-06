@@ -1,0 +1,48 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.1
+      accept:
+      - application/json
+    method: GET
+    uri: https://api.gestdown.info/subtitles/get/0/7/5/eng
+  response:
+    body:
+      string: ''
+    headers:
+      CF-Cache-Status:
+      - MISS
+      CF-RAY:
+      - 87f858fe3d003c8d-CDG
+      Cache-Control:
+      - max-age=7200
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '0'
+      Date:
+      - Mon, 06 May 2024 10:39:39 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=6odD0UJ2lg05gW9nVH3%2F7%2FDAhBmsbf%2F%2BAqG3WKppcdNKXz2Bp0mYfNmQFx5m2hV%2BBg88ORxclcBi8jKWfJOyEYNprCVta8PORscr7MURAVt5fkM4%2BBslSkfrMxTsXdIoYaN7Qw%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      alt-svc:
+      - h3=":443"; ma=86400
+    status:
+      code: 404
+      message: Not Found
+version: 1

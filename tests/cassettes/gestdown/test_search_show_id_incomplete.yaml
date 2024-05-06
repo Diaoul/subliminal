@@ -1,0 +1,57 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.1
+      accept:
+      - application/json
+    method: GET
+    uri: https://api.gestdown.info/shows/search/The%20Big%20Bang
+  response:
+    body:
+      string: !!binary |
+        g2IAAMT/dHNauTe/3PERG1ufy1YPCVQ8VCyUC4Dwhducnw7F9IutQYFcrM6DNFNZVccqMsaoXERU
+        Wie+ljiPs0qDOK2PFgXKjfU628brrE+NV27s+fYGcdITu3bnk0MhAeHs2p1PDsVUGDBkxJgJU2bM
+        KT5FKMGcaB89PTYoMj9Mc6I9Gj02KCSSjHCHe4MC7cYqvW2UXp8a1W7s+fbGf/43AAM=
+    headers:
+      CF-Cache-Status:
+      - MISS
+      CF-RAY:
+      - 87f858eedbb9f138-CDG
+      Cache-Control:
+      - public, max-age=14400
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - br
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Mon, 06 May 2024 10:39:36 GMT
+      Last-Modified:
+      - Mon, 06 May 2024 10:39:36 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=kRR5jGV26EsqDHIyjeowmuY9k%2FquD%2BE9I6i%2BqGp1S9ULadvQPtp3OSbNH76HfFL4bKilvmr3wO9d2SCXhzR5S7vBTF%2BHWeQ9DhaXGuv8tm0Fj6CmkEn5TZa93sdTl%2BCTHLIQmA%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      alt-svc:
+      - h3=":443"; ma=86400
+      vary:
+      - Accept-Encoding
+    status:
+      code: 200
+      message: OK
+version: 1

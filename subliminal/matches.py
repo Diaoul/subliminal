@@ -1,4 +1,5 @@
-# -*- coding: utf-8 -*-
+from __future__ import annotations
+
 from rebulk.loose import ensure_list
 
 from .score import get_equivalent_release_groups, score_keys

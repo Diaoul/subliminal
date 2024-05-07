@@ -1,12 +1,11 @@
-# -*- coding: utf-8 -*-
+from __future__ import annotations
+
 import codecs
 import logging
 import os
 
 import chardet
 import srt
-
-from six import text_type
 
 logger = logging.getLogger(__name__)
 
@@ -72,7 +71,7 @@ class Subtitle(object):
         if not self.content:
             return
 
-        if not isinstance(self.content, text_type):
+        if isinstance(self.content, bytes):
             if self.encoding:
                 return self.content.decode(self.encoding, errors='replace')
 

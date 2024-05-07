@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 class Error(Exception):
     """Base class for exceptions in subliminal."""
     pass
@@ -6,6 +5,11 @@ class Error(Exception):
 
 class ProviderError(Error):
     """Exception raised by providers."""
+    pass
+
+
+class NotInitializedProviderError(ProviderError):
+    """Exception raised by providers when not initialized."""
     pass
 
 

@@ -1,7 +1,8 @@
-# -*- coding: utf-8 -*-
+from __future__ import annotations
+
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
-from datetime import datetime
+from datetime import datetime, timezone
 import io
 import itertools
 import logging
@@ -492,12 +493,12 @@ def scan_videos(path, age=None, archives=True):
 
             # skip old files
             try:
-                file_age = datetime.utcfromtimestamp(os.path.getmtime(filepath))
+                file_age = datetime.fromtimestamp(os.path.getmtime(filepath), timezone.utc)
             except ValueError:
                 logger.warning('Could not get age of file %r in %r', filename, dirpath)
                 continue
             else:
-                if age and datetime.utcnow() - file_age > age:
+                if age and datetime.now(timezone.utc) - file_age > age:
                     logger.debug('Skipping old file %r in %r', filename, dirpath)
                     continue
 

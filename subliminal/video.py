@@ -1,6 +1,6 @@
-# -*- coding: utf-8 -*-
-from __future__ import division
-from datetime import datetime, timedelta
+from __future__ import annotations
+
+from datetime import datetime, timedelta, timezone
 import logging
 import os
 
@@ -83,7 +83,10 @@ class Video(object):
     def age(self):
         """Age of the video"""
         if self.exists:
-            return datetime.utcnow() - datetime.utcfromtimestamp(os.path.getmtime(self.name))
+            return (
+                datetime.now(timezone.utc)
+                - datetime.fromtimestamp(os.path.getmtime(self.name), timezone.utc)
+            )
 
         return timedelta()
 
@@ -133,7 +136,7 @@ class Episode(Video):
     :param bool original_series: whether the series is the first with this name.
     :param int tvdb_id: TVDB id of the episode.
     :param list alternative_series: alternative names of the series
-    :param \*\*kwargs: additional parameters for the :class:`Video` constructor.
+    :param kwargs: additional parameters for the :class:`Video` constructor.
 
     """
     def __init__(self, name, series, season, episodes, title=None, year=None, country=None, original_series=True,
@@ -218,7 +221,7 @@ class Movie(Video):
     :param country: Country of the movie.
     :type country: :class:`~babelfish.country.Country`
     :param list alternative_titles: alternative titles of the movie
-    :param \*\*kwargs: additional parameters for the :class:`Video` constructor.
+    :param kwargs: additional parameters for the :class:`Video` constructor.
 
     """
     def __init__(self, name, title, year=None, country=None, alternative_titles=None, **kwargs):

@@ -1,15 +1,16 @@
-# -*- coding: utf-8 -*-
+from __future__ import annotations
+
 import logging
-from datetime import datetime
 import hashlib
 import os
 import re
 import socket
 import struct
+from datetime import datetime
 
 import requests
 from requests.exceptions import SSLError
-from six.moves.xmlrpc_client import ProtocolError
+from xmlrpc.client import ProtocolError
 
 from .exceptions import ServiceUnavailable
 

@@ -1,4 +1,5 @@
-# -*- coding: utf-8 -*-
+from __future__ import annotations
+
 from datetime import datetime, timedelta, timezone
 from functools import wraps
 import logging
@@ -30,7 +31,7 @@ def requires_auth(func):
     return wrapper
 
 
-class TVDBClient(object):
+class TVDBClient:
     """TVDB REST API Client
 
     :param str apikey: API key to use.

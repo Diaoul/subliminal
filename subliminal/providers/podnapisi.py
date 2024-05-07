@@ -1,4 +1,5 @@
-# -*- coding: utf-8 -*-
+from __future__ import annotations
+
 import io
 import json
 import logging
@@ -24,7 +25,7 @@ class PodnapisiSubtitle(Subtitle):
 
     def __init__(self, language, hearing_impaired, page_link, pid, releases, title, season=None, episode=None,
                  year=None):
-        super(PodnapisiSubtitle, self).__init__(language, hearing_impaired=hearing_impaired, page_link=page_link)
+        super().__init__(language, hearing_impaired=hearing_impaired, page_link=page_link)
         self.pid = pid
         self.releases = releases
         self.title = title

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from pkg_resources import EntryPoint, iter_entry_points
 
 from subliminal.extensions import RegistrableExtensionManager, provider_manager, default_providers, disabled_providers

@@ -1,4 +1,5 @@
-# -*- coding: utf-8 -*-
+from __future__ import annotations
+
 import codecs
 import logging
 import os
@@ -6,15 +7,13 @@ import os
 import chardet
 import srt
 
-from six import text_type
-
 logger = logging.getLogger(__name__)
 
 #: Subtitle extensions
 SUBTITLE_EXTENSIONS = ('.srt', '.sub', '.smi', '.txt', '.ssa', '.ass', '.mpl')
 
 
-class Subtitle(object):
+class Subtitle:
     """Base class for subtitle.
 
     :param language: language of the subtitle.
@@ -72,7 +71,7 @@ class Subtitle(object):
         if not self.content:
             return
 
-        if not isinstance(self.content, text_type):
+        if isinstance(self.content, bytes):
             if self.encoding:
                 return self.content.decode(self.encoding, errors='replace')
 

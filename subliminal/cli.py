@@ -1,9 +1,9 @@
-# -*- coding: utf-8 -*-
 """
 Subliminal uses `click <http://click.pocoo.org>`_ to provide a powerful :abbr:`CLI (command-line interface)`.
 
 """
-from __future__ import division
+from __future__ import annotations
+
 from collections import defaultdict
 from datetime import timedelta
 import glob
@@ -17,7 +17,7 @@ from babelfish import Error as BabelfishError, Language
 import click
 from dogpile.cache.backends.file import AbstractFileLock
 from dogpile.util.readwrite_lock import ReadWriteMutex
-from six.moves import configparser
+from configparser import ConfigParser
 
 from subliminal import (AsyncProviderPool, Episode, Movie, Video, __version__, check_video, compute_score, get_scores,
                         provider_manager, refine, refiner_manager, region, save_subtitles, scan_video, scan_videos)
@@ -46,7 +46,7 @@ class MutexLock(AbstractFileLock):
         return self.mutex.release_write_lock()
 
 
-class Config(object):
+class Config:
     """A :class:`~configparser.ConfigParser` wrapper to store configuration.
 
     Interaction with the configuration is done with the properties.
@@ -59,7 +59,7 @@ class Config(object):
         self.path = path
 
         #: The underlying configuration object
-        self.config = configparser.SafeConfigParser()
+        self.config = ConfigParser()
         self.config.add_section('general')
         self.config.set('general', 'languages', json.dumps(['en']))
         self.config.set('general', 'providers', json.dumps(sorted([p.name for p in provider_manager])))

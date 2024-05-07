@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from babelfish import Language
 import os
 import pytest

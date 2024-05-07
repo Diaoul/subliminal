@@ -1,4 +1,5 @@
-# -*- coding: utf-8 -*-
+from __future__ import annotations
+
 import logging
 
 from babelfish import Language
@@ -39,7 +40,7 @@ class NapiProjektSubtitle(Subtitle):
     provider_name = 'napiprojekt'
 
     def __init__(self, language, hash):
-        super(NapiProjektSubtitle, self).__init__(language)
+        super().__init__(language)
         self.hash = hash
         self.content = None
 

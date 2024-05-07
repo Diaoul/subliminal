@@ -1,4 +1,5 @@
-# -*- coding: utf-8 -*-
+from __future__ import annotations
+
 import logging
 
 from babelfish import Language, language_converters
@@ -18,7 +19,7 @@ class TheSubDBSubtitle(Subtitle):
     provider_name = 'thesubdb'
 
     def __init__(self, language, hash):
-        super(TheSubDBSubtitle, self).__init__(language)
+        super().__init__(language)
         self.hash = hash
 
     @property

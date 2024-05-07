@@ -1,7 +1,8 @@
-# -*- coding: utf-8 -*-
+from __future__ import annotations
+
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
-from datetime import datetime
+from datetime import datetime, timezone
 import io
 import itertools
 import logging
@@ -25,7 +26,7 @@ ARCHIVE_EXTENSIONS = ('.rar',)
 logger = logging.getLogger(__name__)
 
 
-class ProviderPool(object):
+class ProviderPool:
     """A pool of providers with the same API as a single :class:`~subliminal.providers.Provider`.
 
     It has a few extra features:
@@ -246,13 +247,13 @@ class AsyncProviderPool(ProviderPool):
 
     """
     def __init__(self, max_workers=None, *args, **kwargs):
-        super(AsyncProviderPool, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         #: Maximum number of threads to use
         self.max_workers = max_workers or len(self.providers)
 
     def list_subtitles_provider(self, provider, video, languages):
-        return provider, super(AsyncProviderPool, self).list_subtitles_provider(provider, video, languages)
+        return provider, super().list_subtitles_provider(provider, video, languages)
 
     def list_subtitles(self, video, languages):
         subtitles = []
@@ -492,12 +493,12 @@ def scan_videos(path, age=None, archives=True):
 
             # skip old files
             try:
-                file_age = datetime.utcfromtimestamp(os.path.getmtime(filepath))
+                file_age = datetime.fromtimestamp(os.path.getmtime(filepath), timezone.utc)
             except ValueError:
                 logger.warning('Could not get age of file %r in %r', filename, dirpath)
                 continue
             else:
-                if age and datetime.utcnow() - file_age > age:
+                if age and datetime.now(timezone.utc) - file_age > age:
                     logger.debug('Skipping old file %r in %r', filename, dirpath)
                     continue
 
@@ -535,7 +536,7 @@ def refine(video, episode_refiners=None, movie_refiners=None, refiner_configs=No
     :param tuple movie_refiners: refiners to use for movies.
     :param dict refiner_configs: refiner configuration as keyword arguments per refiner name to pass when
         calling the refine method
-    :param \*\*kwargs: additional parameters for the :func:`~subliminal.refiners.refine` functions.
+    :param kwargs: additional parameters for the :func:`~subliminal.refiners.refine` functions.
 
     """
     refiners = ()
@@ -562,7 +563,7 @@ def list_subtitles(videos, languages, pool_class=ProviderPool, **kwargs):
     :type languages: set of :class:`~babelfish.language.Language`
     :param pool_class: class to use as provider pool.
     :type pool_class: :class:`ProviderPool`, :class:`AsyncProviderPool` or similar
-    :param \*\*kwargs: additional parameters for the provided `pool_class` constructor.
+    :param kwargs: additional parameters for the provided `pool_class` constructor.
     :return: found subtitles per video.
     :rtype: dict of :class:`~subliminal.video.Video` to list of :class:`~subliminal.subtitle.Subtitle`
 
@@ -599,7 +600,7 @@ def download_subtitles(subtitles, pool_class=ProviderPool, **kwargs):
     :type subtitles: list of :class:`~subliminal.subtitle.Subtitle`
     :param pool_class: class to use as provider pool.
     :type pool_class: :class:`ProviderPool`, :class:`AsyncProviderPool` or similar
-    :param \*\*kwargs: additional parameters for the provided `pool_class` constructor.
+    :param kwargs: additional parameters for the provided `pool_class` constructor.
 
     """
     with pool_class(**kwargs) as pool:
@@ -625,7 +626,7 @@ def download_best_subtitles(videos, languages, min_score=0, hearing_impaired=Fal
         `hearing_impaired` as keyword argument and returns the score.
     :param pool_class: class to use as provider pool.
     :type pool_class: :class:`ProviderPool`, :class:`AsyncProviderPool` or similar
-    :param \*\*kwargs: additional parameters for the provided `pool_class` constructor.
+    :param kwargs: additional parameters for the provided `pool_class` constructor.
     :return: downloaded subtitles per video.
     :rtype: dict of :class:`~subliminal.video.Video` to list of :class:`~subliminal.subtitle.Subtitle`
 

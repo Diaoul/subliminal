@@ -1,4 +1,5 @@
-# -*- coding: utf-8 -*-
+from __future__ import annotations
+
 import json
 import logging
 import os
@@ -19,7 +20,7 @@ class ShooterSubtitle(Subtitle):
     provider_name = 'shooter'
 
     def __init__(self, language, hash, download_link):
-        super(ShooterSubtitle, self).__init__(language)
+        super().__init__(language)
         self.hash = hash
         self.download_link = download_link
 

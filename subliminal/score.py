@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 This module provides the default implementation of the `compute_score` parameter in
 :meth:`~subliminal.core.ProviderPool.download_best_subtitles` and :func:`~subliminal.core.download_best_subtitles`.
@@ -29,7 +28,8 @@ Available matches:
   * tvdb_id
 
 """
-from __future__ import division, print_function
+from __future__ import annotations
+
 import logging
 
 from .video import Episode, Movie

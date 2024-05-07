@@ -1,4 +1,5 @@
-# -*- coding: utf-8 -*-
+from __future__ import annotations
+
 import logging
 
 from ..extensions import provider_manager, default_providers

@@ -1,5 +1,7 @@
-# -*- coding: utf-8 -*-
-from pkg_resources import EntryPoint
+from __future__ import annotations
+
+import re
+from importlib.metadata import EntryPoint
 
 from stevedore import ExtensionManager
 
@@ -17,7 +19,7 @@ class RegistrableExtensionManager(ExtensionManager):
 
     :param str namespace: namespace argument for :class:~stevedore.extensions.ExtensionManager`.
     :param list internal_extensions: internal extensions to use with entry point syntax.
-    :param \*\*kwargs: additional parameters for the :class:~stevedore.extensions.ExtensionManager` constructor.
+    :param kwargs: additional parameters for the :class:~stevedore.extensions.ExtensionManager` constructor.
 
     """
     def __init__(self, namespace, internal_extensions, **kwargs):
@@ -25,23 +27,23 @@ class RegistrableExtensionManager(ExtensionManager):
         self.registered_extensions = []
 
         #: Internal extensions with entry point syntax
-        self.internal_extensions = internal_extensions
+        self.internal_extensions = list(internal_extensions)
 
-        super(RegistrableExtensionManager, self).__init__(namespace, **kwargs)
+        super().__init__(namespace, **kwargs)
 
     def list_entry_points(self):
         # copy of default extensions
-        eps = list(super(RegistrableExtensionManager, self).list_entry_points())
+        eps = list(super().list_entry_points())
 
         # internal extensions
         for iep in self.internal_extensions:
-            ep = EntryPoint.parse(iep)
+            ep = parse_entry_point(iep, self.namespace)
             if ep.name not in [e.name for e in eps]:
                 eps.append(ep)
 
         # registered extensions
         for rep in self.registered_extensions:
-            ep = EntryPoint.parse(rep)
+            ep = parse_entry_point(rep, self.namespace)
             if ep.name not in [e.name for e in eps]:
                 eps.append(ep)
 
@@ -57,7 +59,7 @@ class RegistrableExtensionManager(ExtensionManager):
         if entry_point in self.registered_extensions:
             raise ValueError('Extension already registered')
 
-        ep = EntryPoint.parse(entry_point)
+        ep = parse_entry_point(entry_point, self.namespace)
         if ep.name in self.names():
             raise ValueError('An extension with the same name already exist')
 
@@ -76,7 +78,7 @@ class RegistrableExtensionManager(ExtensionManager):
         if entry_point not in self.registered_extensions:
             raise ValueError('Extension not registered')
 
-        ep = EntryPoint.parse(entry_point)
+        ep = parse_entry_point(entry_point, self.namespace)
         self.registered_extensions.remove(entry_point)
         if self._extensions_by_name is not None:
             del self._extensions_by_name[ep.name]
@@ -84,6 +86,16 @@ class RegistrableExtensionManager(ExtensionManager):
             if ext.name == ep.name:
                 del self.extensions[i]
                 break
+
+
+def parse_entry_point(src: str, group: str) -> EntryPoint:
+    pattern = re.compile(r"\s*(?P<name>.+?)\s*=\s*(?P<value>.+)")
+    m = pattern.match(src)
+    if not m:
+        msg = "EntryPoint must be in the 'name = module:attrs' format"
+        raise ValueError(msg, src)
+    res = m.groupdict()
+    return EntryPoint(res["name"], res["value"], group)
 
 
 #: Provider manager

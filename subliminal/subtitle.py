@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 SUBTITLE_EXTENSIONS = ('.srt', '.sub', '.smi', '.txt', '.ssa', '.ass', '.mpl')
 
 
-class Subtitle(object):
+class Subtitle:
     """Base class for subtitle.
 
     :param language: language of the subtitle.

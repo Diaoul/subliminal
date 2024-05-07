@@ -1,4 +1,5 @@
-# -*- coding: utf-8 -*-
+from __future__ import annotations
+
 import io
 import json
 import logging
@@ -7,7 +8,7 @@ from zipfile import ZipFile
 from babelfish import Language
 from guessit import guessit
 from requests import Session
-from six.moves import urllib
+from urllib.parse import unquote
 
 from . import Provider
 from ..cache import EPISODE_EXPIRATION_TIME, region
@@ -23,7 +24,7 @@ class ArgenteamSubtitle(Subtitle):
     provider_name = 'argenteam'
 
     def __init__(self, language, download_link, series, season, episode, release, version):
-        super(ArgenteamSubtitle, self).__init__(language, download_link)
+        super().__init__(language, download_link)
         self.download_link = download_link
         self.series = series
         self.season = season
@@ -37,7 +38,7 @@ class ArgenteamSubtitle(Subtitle):
 
     @property
     def info(self):
-        return urllib.parse.unquote(self.download_link.rsplit('/')[-1])
+        return unquote(self.download_link.rsplit('/')[-1])
 
     def get_matches(self, video):
         matches = guess_matches(video, {

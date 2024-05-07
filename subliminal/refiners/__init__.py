@@ -7,6 +7,6 @@ A refiner is a simple function:
 
     :param video: the video to refine.
     :type video: :class:`~subliminal.video.Video`
-    :param \*\*kwargs: additional parameters for refiners.
+    :param kwargs: additional parameters for refiners.
 
 """

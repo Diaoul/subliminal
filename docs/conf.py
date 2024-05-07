@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 #
 # subliminal documentation build configuration file, created by
 # sphinx-quickstart on Sat Jul 11 00:40:28 2015.

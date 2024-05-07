@@ -1,4 +1,5 @@
-# -*- coding: utf-8 -*-
+from __future__ import annotations
+
 import logging
 import operator
 
@@ -14,7 +15,7 @@ logger = logging.getLogger(__name__)
 OMDB_API_KEY = '44d5b275'
 
 
-class OMDBClient(object):
+class OMDBClient:
     base_url = 'http://www.omdbapi.com'
 
     def __init__(self, apikey=None, version=1, session=None, headers=None, timeout=10):

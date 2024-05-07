@@ -46,7 +46,7 @@ class MutexLock(AbstractFileLock):
         return self.mutex.release_write_lock()
 
 
-class Config(object):
+class Config:
     """A :class:`~configparser.ConfigParser` wrapper to store configuration.
 
     Interaction with the configuration is done with the properties.

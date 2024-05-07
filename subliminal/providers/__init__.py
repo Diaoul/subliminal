@@ -1,9 +1,10 @@
-# -*- coding: utf-8 -*-
+from __future__ import annotations
+
 import logging
 import ssl
+from xmlrpc.client import SafeTransport
 
 from bs4 import BeautifulSoup, FeatureNotFound
-from six.moves.xmlrpc_client import SafeTransport
 from requests import adapters
 from urllib3 import poolmanager
 
@@ -30,7 +31,7 @@ class SecLevelOneTLSAdapter(adapters.HTTPAdapter):
 class TimeoutSafeTransport(SafeTransport):
     """Timeout support for ``xmlrpc.client.SafeTransport``."""
     def __init__(self, timeout, *args, **kwargs):
-        SafeTransport.__init__(self, *args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.timeout = timeout
 
     def make_connection(self, host):
@@ -61,7 +62,7 @@ class ParserBeautifulSoup(BeautifulSoup):
         # pick the first parser available
         for parser in parsers:
             try:
-                super(ParserBeautifulSoup, self).__init__(markup, parser, **kwargs)
+                super().__init__(markup, parser, **kwargs)
                 return
             except FeatureNotFound:
                 pass
@@ -69,7 +70,7 @@ class ParserBeautifulSoup(BeautifulSoup):
         raise FeatureNotFound
 
 
-class Provider(object):
+class Provider:
     """Base class for providers.
 
     If any configuration is possible for the provider, like credentials, it must take place during instantiation.

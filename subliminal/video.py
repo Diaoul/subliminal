@@ -21,7 +21,7 @@ VIDEO_EXTENSIONS = ('.3g2', '.3gp', '.3gp2', '.3gpp', '.60d', '.ajp', '.asf', '.
                     '.vivo', '.vob', '.vro', '.webm', '.wm', '.wmv', '.wmx', '.wrap', '.wvx', '.wx', '.x264', '.xvid')
 
 
-class Video(object):
+class Video:
     """Base class for videos.
 
     Represent a video, existing or not.
@@ -141,7 +141,7 @@ class Episode(Video):
     """
     def __init__(self, name, series, season, episodes, title=None, year=None, country=None, original_series=True,
                  tvdb_id=None, series_tvdb_id=None, series_imdb_id=None, alternative_series=None, **kwargs):
-        super(Episode, self).__init__(name, **kwargs)
+        super().__init__(name, **kwargs)
 
         #: Series of the episode
         self.series = series
@@ -225,7 +225,7 @@ class Movie(Video):
 
     """
     def __init__(self, name, title, year=None, country=None, alternative_titles=None, **kwargs):
-        super(Movie, self).__init__(name, **kwargs)
+        super().__init__(name, **kwargs)
 
         #: Title of the movie
         self.title = title

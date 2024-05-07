@@ -1,16 +1,16 @@
-# -*- coding: utf-8 -*-
+from __future__ import annotations
+
 import base64
 import logging
 import os
 import re
 import zlib
+from xmlrpc.client import ServerProxy
 
 from babelfish import Language, language_converters
 from guessit import guessit
-from six.moves.xmlrpc_client import ServerProxy
 
 from . import Provider, TimeoutSafeTransport
-from .. import __short_version__
 from ..exceptions import (AuthenticationError, ConfigurationError, DownloadLimitExceeded, ProviderError,
                           ServiceUnavailable)
 from ..matches import guess_matches
@@ -37,7 +37,7 @@ class OpenSubtitlesSubtitle(Subtitle):
 
     def __init__(self, language, hearing_impaired, page_link, subtitle_id, matched_by, movie_kind, hash, movie_name,
                  movie_release_name, movie_year, movie_imdb_id, series_season, series_episode, filename, encoding):
-        super(OpenSubtitlesSubtitle, self).__init__(language, hearing_impaired=hearing_impaired,
+        super().__init__(language, hearing_impaired=hearing_impaired,
                                                     page_link=page_link, encoding=encoding)
         self.subtitle_id = subtitle_id
         self.matched_by = matched_by

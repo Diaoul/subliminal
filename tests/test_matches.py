@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from subliminal.matches import guess_matches
 
 

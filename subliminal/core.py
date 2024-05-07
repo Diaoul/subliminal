@@ -26,7 +26,7 @@ ARCHIVE_EXTENSIONS = ('.rar',)
 logger = logging.getLogger(__name__)
 
 
-class ProviderPool(object):
+class ProviderPool:
     """A pool of providers with the same API as a single :class:`~subliminal.providers.Provider`.
 
     It has a few extra features:
@@ -247,13 +247,13 @@ class AsyncProviderPool(ProviderPool):
 
     """
     def __init__(self, max_workers=None, *args, **kwargs):
-        super(AsyncProviderPool, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         #: Maximum number of threads to use
         self.max_workers = max_workers or len(self.providers)
 
     def list_subtitles_provider(self, provider, video, languages):
-        return provider, super(AsyncProviderPool, self).list_subtitles_provider(provider, video, languages)
+        return provider, super().list_subtitles_provider(provider, video, languages)
 
     def list_subtitles(self, video, languages):
         subtitles = []

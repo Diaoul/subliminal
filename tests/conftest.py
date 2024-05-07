@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import subprocess
 from io import BytesIO
 import os

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from six import text_type as str
 
 from subliminal.utils import hash_opensubtitles, hash_thesubdb, sanitize

@@ -1,4 +1,5 @@
-# -*- coding: utf-8 -*-
+from __future__ import annotations
+
 import logging
 import re
 
@@ -25,7 +26,7 @@ class GestdownSubtitle(Subtitle):
         self, language, hearing_impaired, series, season, episode, title, version,
         download_link,
     ):
-        super(GestdownSubtitle, self).__init__(language, hearing_impaired=hearing_impaired)
+        super().__init__(language, hearing_impaired=hearing_impaired)
         self.series = series
         self.season = season
         self.episode = episode

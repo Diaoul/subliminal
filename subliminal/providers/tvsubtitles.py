@@ -1,4 +1,5 @@
-# -*- coding: utf-8 -*-
+from __future__ import annotations
+
 import io
 import logging
 import re
@@ -28,7 +29,7 @@ class TVsubtitlesSubtitle(Subtitle):
     provider_name = 'tvsubtitles'
 
     def __init__(self, language, page_link, subtitle_id, series, season, episode, year, rip, release):
-        super(TVsubtitlesSubtitle, self).__init__(language, page_link=page_link)
+        super().__init__(language, page_link=page_link)
         self.subtitle_id = subtitle_id
         self.series = series
         self.season = season

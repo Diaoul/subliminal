@@ -28,14 +28,10 @@ setup_requirements = ['pytest-runner'] if {'pytest', 'test', 'ptr'}.intersection
 
 install_requirements = ['guessit>=3.0.0', 'babelfish>=0.5.2', 'enzyme>=0.4.1', 'beautifulsoup4>=4.4.0',
                         'requests>=2.0', 'requests_cache', 'click>=4.0', 'dogpile.cache>=0.6.0',
-                        'chardet>=2.3.0', 'srt>=3.5.0', 'six>=1.9.0', 'appdirs>=1.3', 'rarfile>=2.7',
+                        'chardet>=2.3.0', 'srt>=3.5.0', 'appdirs>=1.3', 'rarfile>=2.7',
                         'pytz>=2012c', 'stevedore>=1.20.0', 'setuptools']
-if sys.version_info < (3, 2):
-    install_requirements.append('futures>=3.0')
 
 test_requirements = ['sympy', 'vcrpy>=1.6.1', 'pytest', 'pytest-pep8', 'pytest-flakes', 'pytest-cov']
-if sys.version_info < (3, 3):
-    test_requirements.append('mock')
 
 dev_requirements = ['tox', 'sphinx', 'sphinx_rtd_theme', 'sphinxcontrib-programoutput', 'wheel']
 
@@ -56,13 +52,12 @@ setup(name='subliminal',
           'License :: OSI Approved :: MIT License',
           'Operating System :: OS Independent',
           'Programming Language :: Python',
-          'Programming Language :: Python :: 2',
-          'Programming Language :: Python :: 2.7',
           'Programming Language :: Python :: 3',
-          'Programming Language :: Python :: 3.5',
-          'Programming Language :: Python :: 3.6',
-          'Programming Language :: Python :: 3.7',
           'Programming Language :: Python :: 3.8',
+          'Programming Language :: Python :: 3.9',
+          'Programming Language :: Python :: 3.10',
+          'Programming Language :: Python :: 3.11',
+          'Programming Language :: Python :: 3.12',
           'Topic :: Software Development :: Libraries :: Python Modules',
           'Topic :: Multimedia :: Video'
       ],

@@ -1,4 +1,5 @@
-# -*- coding: utf-8 -*-
+from __future__ import annotations
+
 from datetime import datetime, timedelta, timezone
 import logging
 import time
@@ -76,12 +77,7 @@ class OpenSubtitlesComSubtitle(Subtitle):
         file_id = None,
         file_name = None,
     ):
-        super(OpenSubtitlesComSubtitle, self).__init__(
-            language,
-            hearing_impaired=hearing_impaired,
-            page_link="",
-            encoding="utf-8",
-        )
+        super().__init__(language, hearing_impaired=hearing_impaired, page_link="", encoding="utf-8")
         self.subtitle_id = subtitle_id
         self.movie_kind = movie_kind
         self.movie_hash = movie_hash

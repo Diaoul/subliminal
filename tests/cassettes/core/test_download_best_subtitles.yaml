@@ -2,1188 +2,1096 @@ interactions:
 - request:
     body: null
     headers:
-      Accept:
-      - application/json
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br
       Connection:
       - keep-alive
       User-Agent:
       - Subliminal/2.1
-    method: GET
-    uri: https://www.podnapisi.net/subtitles/search/advanced?keywords=The+Big+Bang+Theory&language=en&seasons=7&episodes=5&movie_type=tv-series&movie_type=mini-series&year=2007
-  response:
-    body:
-      string: "{\n  \"all_pages\": 1, \n  \"data\": [\n    {\n      \"audited\": true,\
-        \ \n      \"contributions\": [\n        {\n          \"contributor\": {\n\
-        \            \"id\": 23329, \n            \"name\": \"jane\", \n         \
-        \   \"type\": \"user\"\n          }, \n          \"role\": \"uploader\", \n\
-        \          \"share\": 0.0\n        }\n      ], \n      \"contributor\": {\n\
-        \        \"id\": 23329, \n        \"name\": \"jane\", \n        \"type\":\
-        \ \"user\"\n      }, \n      \"created\": \"2014-09-07T07:06:05+00:00\", \n\
-        \      \"custom_releases\": [\n        \"the.big.bang.theory.s07e05.1080p.bluray.x264-rovers\"\
-        \n      ], \n      \"download\": \"/en/subtitles/en-the-big-bang-theory-2007-S07E05-O/2581/download\"\
-        , \n      \"flags\": [\n        \"hearing_impaired\", \n        \"high_definition\"\
-        \n      ], \n      \"fps\": \"\", \n      \"id\": \"2581\", \n      \"language\"\
-        : \"en\", \n      \"movie\": {\n        \"aliases\": [\n          \"Veliki\
-        \ pokovci\"\n        ], \n        \"episode_info\": {\n          \"episode\"\
-        : 5, \n          \"id\": null, \n          \"season\": 7, \n          \"slug\"\
-        : \"S07E05-O\", \n          \"title\": \"\", \n          \"type\": \"ordinary\"\
-        , \n          \"year\": null\n        }, \n        \"id\": \"uJE\", \n   \
-        \     \"posters\": {\n          \"inline\": \"/thumbnails/moviedb/inline/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        , \n          \"normal\": \"/thumbnails/moviedb/normal/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        , \n          \"small\": \"/thumbnails/moviedb/small/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        , \n          \"title\": \"/thumbnails/moviedb/title/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        \n        }, \n        \"providers\": [\n          \"omdb:sY0G\"\n       \
-        \ ], \n        \"slug\": \"the-big-bang-theory-2007-S07E05-O\", \n       \
-        \ \"title\": \"The Big Bang Theory\", \n        \"type\": \"tv-series\", \n\
-        \        \"year\": 2007\n      }, \n      \"notes\": \"\", \n      \"num_cds\"\
-        : 1, \n      \"rejected\": null, \n      \"releases\": [], \n      \"state\"\
-        : \"migration\", \n      \"stats\": {\n        \"downloads\": 31744, \n  \
-        \      \"lines\": 348\n      }, \n      \"url\": \"/en/subtitles/en-the-big-bang-theory-2007-S07E05-O/2581\"\
-        \n    }, \n    {\n      \"audited\": true, \n      \"contributions\": [\n\
-        \        {\n          \"contributor\": {\n            \"id\": 23329, \n  \
-        \          \"name\": \"jane\", \n            \"type\": \"user\"\n        \
-        \  }, \n          \"role\": \"uploader\", \n          \"share\": 0.0\n   \
-        \     }\n      ], \n      \"contributor\": {\n        \"id\": 23329, \n  \
-        \      \"name\": \"jane\", \n        \"type\": \"user\"\n      }, \n     \
-        \ \"created\": \"2014-09-07T07:04:24+00:00\", \n      \"custom_releases\"\
-        : [\n        \"the.big.bang.theory.s07e05.1080p.bluray.x264-rovers\"\n   \
-        \   ], \n      \"download\": \"/en/subtitles/en-the-big-bang-theory-2007-S07E05-O/w581/download\"\
-        , \n      \"flags\": [\n        \"high_definition\"\n      ], \n      \"fps\"\
-        : \"\", \n      \"id\": \"w581\", \n      \"language\": \"en\", \n      \"\
-        movie\": {\n        \"aliases\": [\n          \"Veliki pokovci\"\n       \
-        \ ], \n        \"episode_info\": {\n          \"episode\": 5, \n         \
-        \ \"id\": null, \n          \"season\": 7, \n          \"slug\": \"S07E05-O\"\
-        , \n          \"title\": \"\", \n          \"type\": \"ordinary\", \n    \
-        \      \"year\": null\n        }, \n        \"id\": \"uJE\", \n        \"\
-        posters\": {\n          \"inline\": \"/thumbnails/moviedb/inline/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        , \n          \"normal\": \"/thumbnails/moviedb/normal/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        , \n          \"small\": \"/thumbnails/moviedb/small/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        , \n          \"title\": \"/thumbnails/moviedb/title/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        \n        }, \n        \"providers\": [\n          \"omdb:sY0G\"\n       \
-        \ ], \n        \"slug\": \"the-big-bang-theory-2007-S07E05-O\", \n       \
-        \ \"title\": \"The Big Bang Theory\", \n        \"type\": \"tv-series\", \n\
-        \        \"year\": 2007\n      }, \n      \"notes\": \"\", \n      \"num_cds\"\
-        : 1, \n      \"rejected\": null, \n      \"releases\": [], \n      \"state\"\
-        : \"migration\", \n      \"stats\": {\n        \"downloads\": 42579, \n  \
-        \      \"lines\": 335\n      }, \n      \"url\": \"/en/subtitles/en-the-big-bang-theory-2007-S07E05-O/w581\"\
-        \n    }, \n    {\n      \"audited\": true, \n      \"contributions\": [\n\
-        \        {\n          \"contributor\": {\n            \"id\": 1, \n      \
-        \      \"name\": \"Anonymous\", \n            \"type\": \"user\"\n       \
-        \   }, \n          \"role\": \"uploader\", \n          \"share\": 0.0\n  \
-        \      }\n      ], \n      \"contributor\": {\n        \"id\": 1, \n     \
-        \   \"name\": \"Anonymous\", \n        \"type\": \"user\"\n      }, \n   \
-        \   \"created\": \"2013-10-18T14:12:21+00:00\", \n      \"custom_releases\"\
-        : [\n        \"The.Big.Bang.Theory.S07E05.720p.WEB-DL.DD5.1.H.264\"\n    \
-        \  ], \n      \"download\": \"/en/subtitles/en-the-big-bang-theory-2007-S07E05-O/ftUo/download\"\
-        , \n      \"flags\": [\n        \"hearing_impaired\", \n        \"high_definition\"\
-        \n      ], \n      \"fps\": \"23.976\", \n      \"id\": \"ftUo\", \n     \
-        \ \"language\": \"en\", \n      \"movie\": {\n        \"aliases\": [\n   \
-        \       \"Veliki pokovci\"\n        ], \n        \"episode_info\": {\n   \
-        \       \"episode\": 5, \n          \"id\": null, \n          \"season\":\
-        \ 7, \n          \"slug\": \"S07E05-O\", \n          \"title\": \"\", \n \
-        \         \"type\": \"ordinary\", \n          \"year\": null\n        }, \n\
-        \        \"id\": \"uJE\", \n        \"posters\": {\n          \"inline\":\
-        \ \"/thumbnails/moviedb/inline/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        , \n          \"normal\": \"/thumbnails/moviedb/normal/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        , \n          \"small\": \"/thumbnails/moviedb/small/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        , \n          \"title\": \"/thumbnails/moviedb/title/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        \n        }, \n        \"providers\": [\n          \"omdb:sY0G\"\n       \
-        \ ], \n        \"slug\": \"the-big-bang-theory-2007-S07E05-O\", \n       \
-        \ \"title\": \"The Big Bang Theory\", \n        \"type\": \"tv-series\", \n\
-        \        \"year\": 2007\n      }, \n      \"notes\": \"\", \n      \"num_cds\"\
-        : 1, \n      \"rejected\": null, \n      \"releases\": [], \n      \"state\"\
-        : \"migration\", \n      \"stats\": {\n        \"downloads\": 39427, \n  \
-        \      \"lines\": 347\n      }, \n      \"url\": \"/en/subtitles/en-the-big-bang-theory-2007-S07E05-O/ftUo\"\
-        \n    }, \n    {\n      \"audited\": true, \n      \"contributions\": [\n\
-        \        {\n          \"contributor\": {\n            \"id\": 44181, \n  \
-        \          \"name\": \"grzesiek11\", \n            \"type\": \"user\"\n  \
-        \        }, \n          \"role\": \"uploader\", \n          \"share\": 0.0\n\
-        \        }\n      ], \n      \"contributor\": {\n        \"id\": 44181, \n\
-        \        \"name\": \"grzesiek11\", \n        \"type\": \"user\"\n      },\
-        \ \n      \"created\": \"2013-10-18T05:49:11+00:00\", \n      \"custom_releases\"\
-        : [\n        \"The.Big.Bang.Theory.S07E05.HDTV.x264-LOL\", \n        \"The.Big.Bang.Theory.S07E05.720p.HDTV.x264-DIMENSION\"\
-        , \n        \"The.Big.Bang.Theory.S07E05.480p.HDTV.x264-mSD\", \n        \"\
-        The.Big.Bang.Theory.S07E05.HDTV.XviD-AFG\"\n      ], \n      \"download\"\
-        : \"/en/subtitles/en-the-big-bang-theory-2007-S07E05-O/EdQo/download\", \n\
-        \      \"flags\": [\n        \"high_definition\"\n      ], \n      \"fps\"\
-        : \"23.976\", \n      \"id\": \"EdQo\", \n      \"language\": \"en\", \n \
-        \     \"movie\": {\n        \"aliases\": [\n          \"Veliki pokovci\"\n\
-        \        ], \n        \"episode_info\": {\n          \"episode\": 5, \n  \
-        \        \"id\": null, \n          \"season\": 7, \n          \"slug\": \"\
-        S07E05-O\", \n          \"title\": \"\", \n          \"type\": \"ordinary\"\
-        , \n          \"year\": null\n        }, \n        \"id\": \"uJE\", \n   \
-        \     \"posters\": {\n          \"inline\": \"/thumbnails/moviedb/inline/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        , \n          \"normal\": \"/thumbnails/moviedb/normal/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        , \n          \"small\": \"/thumbnails/moviedb/small/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        , \n          \"title\": \"/thumbnails/moviedb/title/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        \n        }, \n        \"providers\": [\n          \"omdb:sY0G\"\n       \
-        \ ], \n        \"slug\": \"the-big-bang-theory-2007-S07E05-O\", \n       \
-        \ \"title\": \"The Big Bang Theory\", \n        \"type\": \"tv-series\", \n\
-        \        \"year\": 2007\n      }, \n      \"notes\": \"\", \n      \"num_cds\"\
-        : 1, \n      \"rejected\": null, \n      \"releases\": [], \n      \"state\"\
-        : \"migration\", \n      \"stats\": {\n        \"downloads\": 64986, \n  \
-        \      \"lines\": 430\n      }, \n      \"url\": \"/en/subtitles/en-the-big-bang-theory-2007-S07E05-O/EdQo\"\
-        \n    }, \n    {\n      \"audited\": true, \n      \"contributions\": [\n\
-        \        {\n          \"contributor\": {\n            \"id\": 1, \n      \
-        \      \"name\": \"Anonymous\", \n            \"type\": \"user\"\n       \
-        \   }, \n          \"role\": \"uploader\", \n          \"share\": 0.0\n  \
-        \      }\n      ], \n      \"contributor\": {\n        \"id\": 1, \n     \
-        \   \"name\": \"Anonymous\", \n        \"type\": \"user\"\n      }, \n   \
-        \   \"created\": \"2013-10-18T02:09:50+00:00\", \n      \"custom_releases\"\
-        : [\n        \"The.Big.Bang.Theory.S07E05.HDTV.x264-LOL\", \n        \"The.Big.Bang.Theory.S07E05.720p.HDTV.x264-DIMENSION\"\
-        , \n        \"The.Big.Bang.Theory.S07E05.480p.HDTV.x264-mSD\", \n        \"\
-        The.Big.Bang.Theory.S07E05.HDTV.XviD-AFG\"\n      ], \n      \"download\"\
-        : \"/en/subtitles/en-the-big-bang-theory-2007-S07E05-O/WNMo/download\", \n\
-        \      \"flags\": [\n        \"hearing_impaired\", \n        \"high_definition\"\
-        \n      ], \n      \"fps\": \"23.976\", \n      \"id\": \"WNMo\", \n     \
-        \ \"language\": \"en\", \n      \"movie\": {\n        \"aliases\": [\n   \
-        \       \"Veliki pokovci\"\n        ], \n        \"episode_info\": {\n   \
-        \       \"episode\": 5, \n          \"id\": null, \n          \"season\":\
-        \ 7, \n          \"slug\": \"S07E05-O\", \n          \"title\": \"\", \n \
-        \         \"type\": \"ordinary\", \n          \"year\": null\n        }, \n\
-        \        \"id\": \"uJE\", \n        \"posters\": {\n          \"inline\":\
-        \ \"/thumbnails/moviedb/inline/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        , \n          \"normal\": \"/thumbnails/moviedb/normal/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        , \n          \"small\": \"/thumbnails/moviedb/small/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        , \n          \"title\": \"/thumbnails/moviedb/title/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        \n        }, \n        \"providers\": [\n          \"omdb:sY0G\"\n       \
-        \ ], \n        \"slug\": \"the-big-bang-theory-2007-S07E05-O\", \n       \
-        \ \"title\": \"The Big Bang Theory\", \n        \"type\": \"tv-series\", \n\
-        \        \"year\": 2007\n      }, \n      \"notes\": \"\", \n      \"num_cds\"\
-        : 1, \n      \"rejected\": null, \n      \"releases\": [], \n      \"state\"\
-        : \"migration\", \n      \"stats\": {\n        \"downloads\": 39202, \n  \
-        \      \"lines\": 439\n      }, \n      \"url\": \"/en/subtitles/en-the-big-bang-theory-2007-S07E05-O/WNMo\"\
-        \n    }\n  ], \n  \"page\": 1, \n  \"per_page\": 50, \n  \"status\": \"ok\"\
-        \n}"
-    headers:
-      Connection:
-      - keep-alive
-      Content-Length:
-      - '10231'
-      Content-Type:
+      accept:
       - application/json
-      Date:
-      - Sat, 09 May 2020 16:23:18 GMT
-      Server:
-      - nginx
-    status:
-      code: 200
-      message: OK
-- request:
-    body: null
-    headers:
-      Accept:
-      - application/json
-      Accept-Encoding:
-      - gzip, deflate
-      Connection:
-      - keep-alive
-      User-Agent:
-      - Subliminal/2.1
     method: GET
-    uri: https://www.podnapisi.net/subtitles/search/advanced?keywords=The+Big+Bang+Theory&language=pt-BR&seasons=7&episodes=5&movie_type=tv-series&movie_type=mini-series&year=2007
-  response:
-    body:
-      string: "{\n  \"all_pages\": 0, \n  \"data\": [], \n  \"page\": 1, \n  \"per_page\"\
-        : 50, \n  \"status\": \"ok\"\n}"
-    headers:
-      Connection:
-      - keep-alive
-      Content-Length:
-      - '87'
-      Content-Type:
-      - application/json
-      Date:
-      - Sat, 09 May 2020 16:23:18 GMT
-      Server:
-      - nginx
-    status:
-      code: 200
-      message: OK
-- request:
-    body: null
-    headers:
-      Accept:
-      - '*/*'
-      Accept-Encoding:
-      - gzip, deflate
-      Connection:
-      - keep-alive
-      User-Agent:
-      - SubDB/1.0 (subliminal/2.1; https://github.com/Diaoul/subliminal)
-    method: GET
-    uri: http://api.thesubdb.com/?action=search&hash=9dbbfb7ba81c9a6237237dae8589fccc
+    uri: https://api.gestdown.info/shows/external/tvdb/80379
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAA0vN00kt1kkr0ikoAQBr9k5KCwAAAA==
+        g2IAAMT/dHNauTe/3PERG1ufy1YPCVQ8VCyUC4Dwhducnw7F9IutQYFcrM6DNFNZVccqMsaoXERU
+        Wie+ljiPs0qDOK2PFgXKjfU628brrE+NV27s+fYGcdITu3bnk0MhAeHs2p1PDsVUGDBkxJgJU2bM
+        KT5FKMGcaB89PTYoMj9Mc6I9Gj02KCSSjHCHe4MC7cYqvW2UXp8a1W7s+fbGf/43AAM=
     headers:
+      Age:
+      - '73873'
+      CF-Cache-Status:
+      - HIT
+      CF-RAY:
+      - 88149ccdbd0699f3-CDG
+      Cache-Control:
+      - public, max-age=14400
       Connection:
       - keep-alive
       Content-Encoding:
-      - gzip
+      - br
       Content-Type:
-      - text/html
+      - application/json; charset=utf-8
       Date:
-      - Sat, 09 May 2020 16:23:18 GMT
+      - Thu, 09 May 2024 20:59:18 GMT
+      Last-Modified:
+      - Thu, 09 May 2024 00:28:05 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=tJWgGmSIm%2Fn4aiGBLGDQSxPIbQR39qgCTWKYGmMnpcUstSTslbHyOs2t15ErhJWDzxNHUh5qPSqrVvURVHG3S1Fl4YDOQEOp5HqUU0W0bfWx2CnxRLcCo13uB%2Bl4t5ANgULMYg%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
-      - nginx/1.6.0
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
       Transfer-Encoding:
       - chunked
+      X-Content-Type-Options:
+      - nosniff
+      alt-svc:
+      - h3=":443"; ma=86400
+      vary:
+      - Accept-Encoding
     status:
       code: 200
       message: OK
 - request:
     body: null
     headers:
-      Accept:
-      - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br
       Connection:
       - keep-alive
       User-Agent:
-      - SubDB/1.0 (subliminal/2.1; https://github.com/Diaoul/subliminal)
+      - Subliminal/2.1
+      accept:
+      - application/json
     method: GET
-    uri: http://api.thesubdb.com/?action=download&hash=9dbbfb7ba81c9a6237237dae8589fccc&language=en
+    uri: https://api.gestdown.info/subtitles/get/91eb9278-8cf5-4ddd-9111-7f60b15958cb/7/5/eng
   response:
     body:
-      string: "\uFEFF1\r\n00:00:05,532 --> 00:00:07,400\r\nAwkward silence.\r\n\r\n\
-        2\r\n00:00:07,402 --> 00:00:08,684\r\nSheldon on his phone.\r\n\r\n3\r\n00:00:08,686\
-        \ --> 00:00:09,719\r\nNo touching.\r\n\r\n4\r\n00:00:09,721 --> 00:00:13,122\r\
-        \nSomebody's having date night.\r\n\r\n5\r\n00:00:13,124 --> 00:00:15,208\r\
-        \nIt's actually steamier\r\nthan it looks.\r\n\r\n6\r\n00:00:15,210 --> 00:00:18,077\r\
-        \nSheldon's looking up the phallic\r\nsymbolism of root vegetables\r\n\r\n\
-        7\r\n00:00:18,079 --> 00:00:19,796\r\nin Renaissance paintings.\r\n\r\n8\r\
-        \n00:00:19,798 --> 00:00:21,447\r\nOh, no, I got bored\r\nwith that.\r\n\r\
-        \n9\r\n00:00:21,449 --> 00:00:25,418\r\nI'm just browsing\r\ncuticle scissors\
-        \ on Amazon.\r\n\r\n10\r\n00:00:26,370 --> 00:00:28,004\r\nHow do you\r\n\
-        not tear off his clothes\r\n\r\n11\r\n00:00:28,006 --> 00:00:30,556\r\nand\
-        \ take him right here\r\non this table?\r\n\r\n12\r\n00:00:30,558 --> 00:00:33,259\r\
-        \nIf you do that, I'll scream.\r\n\r\n13\r\n00:00:36,430 --> 00:00:38,631\r\
-        \nSheldon, I have some\r\nexciting news to tell you.\r\n\r\n14\r\n00:00:38,633\
-        \ --> 00:00:39,782\r\nThat makes two of us.\r\n\r\n15\r\n00:00:39,784 -->\
-        \ 00:00:41,267\r\nMy new cuticle scissors\r\nwill be here\r\n\r\n16\r\n00:00:41,269\
-        \ --> 00:00:43,152\r\nin one to two business days.\r\n\r\n17\r\n00:00:43,154\
-        \ --> 00:00:45,721\r\nCome on, one.\r\n\r\n18\r\n00:00:45,723 --> 00:00:47,824\r\
-        \nI've been invited to\r\nconsult on an experiment\r\n\r\n19\r\n00:00:47,826\
-        \ --> 00:00:50,193\r\nat your university\r\nfor a few months.\r\n\r\n20\r\n\
-        00:00:50,195 --> 00:00:51,327\r\nIsn't that great?\r\n\r\n21\r\n00:00:51,329\
-        \ --> 00:00:52,912\r\nWe could have lunch together.\r\n\r\n22\r\n00:00:52,914\
-        \ --> 00:00:54,314\r\nWe could carpool.\r\n\r\n23\r\n00:00:54,316 --> 00:00:56,466\r\
-        \nYou know, riding with Leonard\r\n\r\n24\r\n00:00:56,468 --> 00:00:58,735\r\
-        \nhas gotten\r\na little tedious lately.\r\n\r\n25\r\n00:00:58,737 --> 00:01:02,205\r\
-        \nTh-The only car game he ever\r\nwants to play is the Quiet Game.\r\n\r\n\
-        26\r\n00:01:02,207 --> 00:01:03,306\r\nAnd he's terrible at it.\r\n\r\n27\r\
-        \n00:01:03,308 --> 00:01:05,458\r\nI always win.\r\n\r\n28\r\n00:01:06,844\
-        \ --> 00:01:08,728\r\nSo, you're okay with this?\r\n\r\n29\r\n00:01:08,730\
-        \ --> 00:01:10,396\r\nWell, why wouldn't I be?\r\n\r\n30\r\n00:01:10,398 -->\
-        \ 00:01:12,432\r\nWell, this project\r\nwould have us working\r\n\r\n31\r\n\
-        00:01:12,434 --> 00:01:14,467\r\nin close proximity\r\nto one another.\r\n\
-        \r\n32\r\n00:01:14,469 --> 00:01:15,968\r\nAnd there's the vulgar adage\r\n\
-        \r\n33\r\n00:01:15,970 --> 00:01:19,639\r\nthat one should not\r\ndefecate\
-        \ where one eats.\r\n\r\n34\r\n00:01:19,641 --> 00:01:21,974\r\nMy father\
-        \ used to say\r\nthat all the time.\r\n\r\n35\r\n00:01:21,976 --> 00:01:25,161\r\
-        \nThat and, um, \"Who does one\r\nhave to orally gratify\r\n\r\n36\r\n00:01:25,163\
-        \ --> 00:01:27,880\r\nto get a drink around here?\"\r\n\r\n37\r\n00:01:29,233\
-        \ --> 00:01:31,718\r\nBut what does that have to do\r\n\r\n38\r\n00:01:31,720\
-        \ --> 00:01:33,636\r\nwith you working\r\nat the university?\r\n\r\n39\r\n\
-        00:01:33,638 --> 00:01:36,239\r\nSheldon, \"Don't defecate\r\nwhere you eat,\"\
-        \r\n\r\n40\r\n00:01:36,241 --> 00:01:38,274\r\nmeans don't have a\r\nromantic\
-        \ relationship\r\n\r\n41\r\n00:01:38,276 --> 00:01:39,876\r\nin the workplace.\r\
-        \n\r\n42\r\n00:01:41,078 --> 00:01:43,062\r\nReally?\r\n\r\n43\r\n00:01:45,766\
-        \ --> 00:01:47,383\r\nYes.\r\n\r\n44\r\n00:01:47,385 --> 00:01:48,468\r\n\
-        Huh.\r\n\r\n45\r\n00:01:48,470 --> 00:01:50,787\r\nYeah, I always\r\ntook\
-        \ it literally.\r\n\r\n46\r\n00:01:50,789 --> 00:01:53,622\r\nThat's why I\
-        \ have never\r\nonce moved my bowels\r\n\r\n47\r\n00:01:53,624 --> 00:01:55,992\r\
-        \nin this or any restaurant.\r\n\r\n48\r\n00:01:55,994 --> 00:01:57,944\r\n\
-        Hmm.\r\n\r\n49\r\n00:01:57,946 --> 00:01:59,979\r\nI'm relieved that you\r\
-        \ndon't have a problem\r\n\r\n50\r\n00:01:59,981 --> 00:02:01,264\r\nwith\
-        \ us working together.\r\n\r\n51\r\n00:02:01,266 --> 00:02:03,516\r\nNot as\
-        \ relieved\r\nas I'm about to be.\r\n\r\n52\r\n00:02:04,518 --> 00:02:06,753\r\
-        \nIt's a brave new world,\r\nlittle lady.\r\n\r\n53\r\n00:02:09,189 --> 00:02:12,825\r\
-        \n\u266A Our whole universe\r\nwas in a hot, dense state \u266A\r\n\r\n54\r\
-        \n00:02:12,827 --> 00:02:16,162\r\n\u266A Then nearly 14 billion years\r\n\
-        ago expansion started... Wait! \u266A\r\n\r\n55\r\n00:02:16,164 --> 00:02:17,813\r\
-        \n\u266A The Earth began to cool\r\n\r\n56\r\n00:02:17,815 --> 00:02:20,333\r\
-        \n\u266A The autotrophs began to drool,\r\nNeanderthals developed tools \u266A\
-        \r\n\r\n57\r\n00:02:20,335 --> 00:02:23,002\r\n\u266A We built the Wall\r\n\
-        \u266A <i>We built the pyramids</i> \u266A\r\n\r\n58\r\n00:02:23,004 --> 00:02:25,688\r\
-        \n\u266A Math, Science, History,\r\nunraveling the mystery \u266A\r\n\r\n\
-        59\r\n00:02:25,690 --> 00:02:27,573\r\n\u266A That all started\r\nwith a big\
-        \ bang \u266A\r\n\r\n60\r\n00:02:27,575 --> 00:02:28,341\r\n\u266A <i>Bang!</i>\
-        \ \u266A\r\n\r\n61\r\n00:02:28,342 --> 00:02:32,342\r\n<font color=#00FF00>\u266A\
-        \ The Big Bang Theory 7x05 \u266A</font>\r\n<font color=#00FFFF>The Workplace\
-        \ Proximity</font>\r\nOriginal Air Date on October 17, 2013\r\n\r\n62\r\n\
-        00:02:32,367 --> 00:02:37,367\r\n== sync, corrected by <font color=#00FF00>elderman</font>\
-        \ ==\r\n<font color=#00FFFF>@elder_man</font>\r\n\r\n63\r\n00:02:37,818 -->\
-        \ 00:02:39,385\r\nAre you crazy?\r\n\r\n64\r\n00:02:39,387 --> 00:02:40,436\r\
-        \nYou don't want\r\n\r\n65\r\n00:02:40,438 --> 00:02:42,305\r\nyour girlfriend\r\
-        \nat work with you.\r\n\r\n66\r\n00:02:42,307 --> 00:02:45,007\r\nHell Clam.\r\
-        \n\r\n67\r\n00:02:45,009 --> 00:02:46,526\r\nWhy not?\r\n\r\n68\r\n00:02:46,528\
-        \ --> 00:02:49,112\r\nHairy Fairy.\r\n\r\n69\r\n00:02:49,114 --> 00:02:50,680\r\
-        \nI think it could be romantic.\r\n\r\n70\r\n00:02:50,682 --> 00:02:52,649\r\
-        \nYou know, my parents met\r\nat his place of work.\r\n\r\n71\r\n00:02:52,651\
-        \ --> 00:02:55,685\r\nYour father's a gynecologist.\r\n\r\n72\r\n00:02:55,687\
-        \ --> 00:02:56,869\r\nI know.\r\n\r\n73\r\n00:02:56,871 --> 00:02:59,822\r\
-        \nWhat started as a pap smear\r\nturned into a date.\r\n\r\n74\r\n00:03:01,292\
-        \ --> 00:03:02,675\r\nWhich turned\r\ninto her working there,\r\n\r\n75\r\n\
-        00:03:02,677 --> 00:03:04,644\r\nwhich turned into marriage,\r\nwhich then\
-        \ turned into hatred,\r\n\r\n76\r\n00:03:04,646 --> 00:03:07,196\r\nwhich\
-        \ continues to this day.\r\n\r\n77\r\n00:03:07,298 --> 00:03:10,066\r\nTwo-Eyed\
-        \ Cyclops.\r\n\r\n78\r\n00:03:10,068 --> 00:03:12,902\r\nWould you please\
-        \ tell him\r\nthis isn't a good idea?\r\n\r\n79\r\n00:03:12,904 --> 00:03:14,270\r\
-        \nNo, no, I think it'll be great.\r\n\r\n80\r\n00:03:14,272 --> 00:03:15,888\r\
-        \nMaybe next time he gets\r\nconjunctivitis at work,\r\n\r\n81\r\n00:03:15,890\
-        \ --> 00:03:19,942\r\nshe can hold his head and try\r\nto put the drops in\
-        \ his eyes.\r\n\r\n82\r\n00:03:19,944 --> 00:03:22,428\r\nGiant baby.\r\n\r\
-        \n83\r\n00:03:22,430 --> 00:03:24,280\r\nThat's a Raging Ogre.\r\n\r\n84\r\
-        \n00:03:24,282 --> 00:03:26,516\r\nYeah, I know.\r\n\r\n85\r\n00:03:28,519\
-        \ --> 00:03:30,686\r\nI'm just saying, I'd never want\r\nto work with Bernadette.\r\
-        \n\r\n86\r\n00:03:30,688 --> 00:03:32,655\r\nCan you imagine seeing\r\nsomeone\
-        \ all day long\r\n\r\n87\r\n00:03:32,657 --> 00:03:34,123\r\nand then you're\r\
-        \nsupposed to hang out\r\n\r\n88\r\n00:03:34,125 --> 00:03:35,825\r\nwith\
-        \ them after work, too?\r\n\r\n89\r\n00:03:35,827 --> 00:03:37,493\r\nHold\
-        \ on. We do\r\nthat all the time.\r\n\r\n90\r\n00:03:37,495 --> 00:03:39,228\r\
-        \nYou and I work together\r\nand play together.\r\n\r\n91\r\n00:03:39,230\
-        \ --> 00:03:42,882\r\nYeah, I know, and it drove me\r\ninto the arms of another\
-        \ woman.\r\n\r\n92\r\n00:03:44,701 --> 00:03:46,719\r\nBipolar Bear.\r\n\r\
-        \n93\r\n00:03:46,721 --> 00:03:49,605\r\nWell, I appreciate your concern,\r\
-        \n\r\n94\r\n00:03:49,607 --> 00:03:52,809\r\nbut I won't be seeing any more\r\
-        \nof Amy than I already do.\r\n\r\n95\r\n00:03:52,811 --> 00:03:55,094\r\n\
-        I assume we'll deduct\r\nany extra time we spend together\r\n\r\n96\r\n00:03:55,096\
-        \ --> 00:03:57,964\r\nat work from our weekly quota.\r\n\r\n97\r\n00:03:59,883\
-        \ --> 00:04:02,552\r\nPlease let me be there\r\nwhen you tell her that.\r\n\
-        \r\n98\r\n00:04:03,520 --> 00:04:05,688\r\nWhy? So you can see the\r\nlook\
-        \ on Amy's face\r\n\r\n99\r\n00:04:05,690 --> 00:04:07,990\r\nwhen she hears\r\
-        \nmy top-notch idea?\r\n\r\n100\r\n00:04:07,992 --> 00:04:10,576\r\nPlease,\
-        \ oh, please,\r\njust let me be there.\r\n\r\n101\r\n00:04:12,546 --> 00:04:15,681\r\
-        \nSo, Amy, what are you gonna\r\nbe working on at Caltech?\r\n\r\n102\r\n\
-        00:04:15,683 --> 00:04:17,467\r\nI'm leading a study to see\r\n\r\n103\r\n\
-        00:04:17,469 --> 00:04:19,368\r\nif deficiency of the\r\nmonoamine oxidase\
-        \ enzyme\r\n\r\n104\r\n00:04:19,370 --> 00:04:21,444\r\nleads to paralyzing\r\
-        \nfear in monkeys.\r\n\r\n105\r\n00:04:21,469 --> 00:04:22,339\r\nOh.\r\n\r\
-        \n106\r\n00:04:22,340 --> 00:04:25,158\r\nIf they're anything like humans,\r\
-        \nthe answer's yes.\r\n\r\n107\r\n00:04:25,160 --> 00:04:27,577\r\nWait, you've-you've\
-        \ done\r\nthis experiment on humans?\r\n\r\n108\r\n00:04:27,579 --> 00:04:30,263\r\
-        \nYou mean like death row inmates\r\nwith nothing to lose?\r\n\r\n109\r\n\
-        00:04:30,365 --> 00:04:33,082\r\nNo, that would be unethical.\r\n\r\n110\r\
-        \n00:04:34,618 --> 00:04:36,586\r\nYou know,\r\nnot a lot of people know this,\r\
-        \n\r\n111\r\n00:04:36,588 --> 00:04:37,837\r\nbut the monoamine oxidase enzyme\r\
-        \n\r\n112\r\n00:04:37,839 --> 00:04:39,789\r\nwas discovered by a woman,\r\
-        \nMary Bernheim.\r\n\r\n113\r\n00:04:42,276 --> 00:04:43,542\r\nThat's right.\r\
-        \n\r\n114\r\n00:04:43,544 --> 00:04:46,545\r\nMy phone is just\r\nas smart\
-        \ as you guys.\r\n\r\n115\r\n00:04:48,316 --> 00:04:49,448\r\nAmy, Bernadette,\
-        \ Penny.\r\n\r\n116\r\n00:04:49,450 --> 00:04:51,150\r\nAmy, Bernadette,\r\
-        \nPenny.\r\n\r\n117\r\n00:04:51,152 --> 00:04:53,536\r\nAmy, Bernadette, Penny.\r\
-        \n\r\n118\r\n00:04:53,538 --> 00:04:56,305\r\nHe's never gonna\r\nstop doing\
-        \ that, is he?\r\n\r\n119\r\n00:04:56,307 --> 00:04:57,440\r\nI don't mind.\r\
-        \n\r\n120\r\n00:04:57,442 --> 00:04:59,108\r\nI'm hoping to put\r\nhis love\
-        \ of repetition\r\n\r\n121\r\n00:04:59,110 --> 00:05:00,860\r\nto good use\
-        \ someday.\r\n\r\n122\r\n00:05:03,246 --> 00:05:05,231\r\nHi. Um...\r\n\r\n\
-        123\r\n00:05:05,233 --> 00:05:06,399\r\nI've reconsidered.\r\n\r\n124\r\n\
-        00:05:06,401 --> 00:05:07,900\r\nUh, you can't work\r\nwhere I work.\r\n\r\
-        \n125\r\n00:05:07,902 --> 00:05:09,268\r\nEnjoy the rest\r\nof your evening.\r\
-        \n\r\n126\r\n00:05:09,270 --> 00:05:10,903\r\nSheldon.\r\n\r\n127\r\n00:05:10,905\
-        \ --> 00:05:13,122\r\nI-I already signed\r\nthe contract.\r\n\r\n128\r\n00:05:13,124\
-        \ --> 00:05:14,523\r\nI cashed a check.\r\n\r\n129\r\n00:05:14,525 --> 00:05:16,575\r\
-        \nMmm... you are not going\r\n\r\n130\r\n00:05:16,577 --> 00:05:18,427\r\n\
-        to come out of\r\nthis looking good.\r\n\r\n131\r\n00:05:18,429 --> 00:05:19,662\r\
-        \nSheldon,\r\nI don't understand.\r\n\r\n132\r\n00:05:19,664 --> 00:05:21,580\r\
-        \nI thought you said\r\nyou were fine with it.\r\n\r\n133\r\n00:05:21,582\
-        \ --> 00:05:22,698\r\nWell, I was.\r\n\r\n134\r\n00:05:22,700 --> 00:05:24,333\r\
-        \nBut that was before\r\nHoward explained to me\r\n\r\n135\r\n00:05:24,335\
-        \ --> 00:05:26,469\r\nhow awful it would be\r\nif he had to work\r\n\r\n136\r\
-        \n00:05:26,471 --> 00:05:28,137\r\nwith his significant other.\r\n\r\n137\r\
-        \n00:05:28,139 --> 00:05:30,723\r\nHe said what?\r\n\r\n138\r\n00:05:30,725\
-        \ --> 00:05:32,675\r\nNow, don't be insulted.\r\n\r\n139\r\n00:05:32,677 -->\
-        \ 00:05:36,896\r\nHe just thinks too much of you\r\nwould be mind-numbingly\
-        \ tedious.\r\n\r\n140\r\n00:05:36,898 --> 00:05:40,066\r\nExcuse me, I need\
-        \ to have\r\na chat with my husband.\r\n\r\n141\r\n00:05:40,068 --> 00:05:41,901\r\
-        \nYeah, well, now,\r\nwell... keep it short.\r\n\r\n142\r\n00:05:41,903 -->\
-        \ 00:05:45,438\r\nFr-From what I gather,\r\nbrevity is your friend.\r\n\r\n\
-        143\r\n00:05:46,573 --> 00:05:48,741\r\nSo, are we good here?\r\n\r\n144\r\
-        \n00:05:48,743 --> 00:05:50,326\r\nNo, we're not good here.\r\n\r\n145\r\n\
-        00:05:50,328 --> 00:05:51,827\r\nI am working on this project.\r\n\r\n146\r\
-        \n00:05:51,829 --> 00:05:54,080\r\nYeah, and you can't tell her\r\nwhat she\
-        \ can and cannot do.\r\n\r\n147\r\n00:05:54,082 --> 00:05:56,098\r\nLast week,\
-        \ you told Leonard\r\nhe couldn't wear\r\n\r\n148\r\n00:05:56,100 --> 00:05:58,300\r\
-        \nhis Wookiee jacket\r\nout in public.\r\n\r\n149\r\n00:05:58,302 --> 00:05:59,518\r\
-        \nThat's different.\r\n\r\n150\r\n00:05:59,520 --> 00:06:01,454\r\nI'm not\
-        \ going to the mall\r\nwith someone dressed\r\n\r\n151\r\n00:06:01,456 -->\
-        \ 00:06:03,539\r\ndumb space bear.\r\n\r\n152\r\n00:06:05,575 --> 00:06:07,626\r\
-        \nSheldon, you don't have to worry\r\nabout me bothering you.\r\n\r\n153\r\
-        \n00:06:07,628 --> 00:06:08,878\r\nI'll be in a different building.\r\n\r\n\
-        154\r\n00:06:08,880 --> 00:06:10,746\r\nAnd we don't even have\r\nto have\
-        \ lunch together.\r\n\r\n155\r\n00:06:10,748 --> 00:06:11,864\r\nReally?\r\
-        \n\r\n156\r\n00:06:11,866 --> 00:06:14,517\r\nYes. Before all things,\r\n\
-        I'm a scientist.\r\n\r\n157\r\n00:06:14,519 --> 00:06:16,969\r\nI'm just there\
-        \ to do my work\r\nand, with a little luck,\r\n\r\n158\r\n00:06:16,971 -->\
-        \ 00:06:19,605\r\nscare the living crap\r\nout of some monkeys.\r\n\r\n159\r\
-        \n00:06:19,607 --> 00:06:23,142\r\nHmm.\r\n\r\n160\r\n00:06:23,144 --> 00:06:25,811\r\
-        \nYou sure your mothlike\r\npersonality won't be drawn\r\n\r\n161\r\n00:06:25,813\
-        \ --> 00:06:28,564\r\nto this blazing fire\r\nthat is myself?\r\n\r\n162\r\
-        \n00:06:31,535 --> 00:06:33,786\r\nMore and more sure.\r\n\r\n163\r\n00:06:33,788\
-        \ --> 00:06:36,872\r\nWell, then, you\r\nhave my permission.\r\n\r\n164\r\n\
-        00:06:36,874 --> 00:06:37,957\r\nI didn't ask\r\nfor your permission.\r\n\r\
-        \n165\r\n00:06:37,959 --> 00:06:39,158\r\nToo late. No backsies.\r\n\r\n166\r\
-        \n00:06:41,611 --> 00:06:44,413\r\nNo, no, listen to me.\r\nSheldon misunderstood.\r\
-        \n\r\n167\r\n00:06:44,415 --> 00:06:45,381\r\nWhat I meant was,\r\n\r\n168\r\
-        \n00:06:45,383 --> 00:06:46,448\r\nif we worked together,\r\n\r\n169\r\n00:06:46,450\
-        \ --> 00:06:48,117\r\nthere'd be too much\r\nof me for you,\r\n\r\n170\r\n\
-        00:06:48,119 --> 00:06:50,252\r\nnot the other way around.\r\n\r\n171\r\n\
-        00:06:50,254 --> 00:06:52,722\r\nHoward, if you're going\r\nto lie to your\
-        \ wife,\r\n\r\n172\r\n00:06:52,724 --> 00:06:55,324\r\ndon't start the sentence\r\
-        \nwith \"Sheldon misunderstood.\"\r\n\r\n173\r\n00:06:56,877 --> 00:06:58,010\r\
-        \nThat's a dead giveaway.\r\n\r\n174\r\n00:06:58,012 --> 00:06:59,929\r\n\
-        Well?\r\n\r\n175\r\n00:06:59,931 --> 00:07:01,130\r\nOkay, fine.\r\n\r\n176\r\
-        \n00:07:01,132 --> 00:07:02,898\r\nI did say that,\r\nand I think it's true.\r\
-        \n\r\n177\r\n00:07:02,900 --> 00:07:05,017\r\nI think if we worked together\r\
-        \nand lived together,\r\n\r\n178\r\n00:07:05,019 --> 00:07:06,519\r\nwe'd\
-        \ get sick of each other.\r\n\r\n179\r\n00:07:06,521 --> 00:07:08,104\r\n\
-        Yeah, but to be fair,\r\nhe only said the part\r\n\r\n180\r\n00:07:08,106\
-        \ --> 00:07:09,188\r\nabout him\r\ngetting sick of you.\r\n\r\n181\r\n00:07:09,190\
-        \ --> 00:07:11,023\r\nFor the love of God, why?!\r\n\r\n182\r\n00:07:15,212\
-        \ --> 00:07:17,863\r\nWhat exactly do you\r\nthink you'd get sick of?\r\n\r\
-        \n183\r\n00:07:17,865 --> 00:07:20,015\r\nHis only options here\r\nare to\
-        \ fake a heart attack\r\n\r\n184\r\n00:07:20,017 --> 00:07:22,384\r\nor have\
-        \ a real one.\r\n\r\n185\r\n00:07:22,386 --> 00:07:25,654\r\nIt-it's nothing\r\
-        \nin particular. I...\r\n\r\n186\r\n00:07:25,656 --> 00:07:27,823\r\nIs it\
-        \ my voice?\r\nAm I too bossy?\r\n\r\n187\r\n00:07:27,825 --> 00:07:28,958\r\
-        \nWhat...?\r\n\r\n188\r\n00:07:28,960 --> 00:07:31,877\r\nMy arm is feeling\
-        \ numb.\r\n\r\n189\r\n00:07:32,796 --> 00:07:35,781\r\nNailed it.\r\n\r\n\
-        190\r\n00:07:35,783 --> 00:07:39,385\r\nThat's the wrong arm for\r\na heart\
-        \ attack, doofus.\r\n\r\n191\r\n00:07:41,221 --> 00:07:44,356\r\nMy point\
-        \ is, I'm sure\r\nthere are things about me\r\n\r\n192\r\n00:07:44,358 -->\
-        \ 00:07:46,642\r\nthat would drive you crazy\r\nif you had to deal\r\n\r\n\
-        193\r\n00:07:46,644 --> 00:07:48,394\r\nwith them all day long.\r\n\r\n194\r\
-        \n00:07:48,396 --> 00:07:50,596\r\nLike looking me in the\r\neye and lying\
-        \ to me?\r\n\r\n195\r\n00:07:50,598 --> 00:07:52,148\r\nOh, well, come on,\
-        \ I just...\r\n\r\n196\r\n00:07:52,150 --> 00:07:55,401\r\nWhere am I supposed\
-        \ to\r\nlook when I lie to you?\r\n\r\n197\r\n00:07:55,403 --> 00:07:57,753\r\
-        \nFind somewhere else \r\nto sleep tonight.\r\n\r\n198\r\n00:07:57,755 -->\
-        \ 00:07:59,905\r\nOh, Bernie...\r\n\r\n199\r\n00:08:06,863 --> 00:08:10,466\r\
-        \nIf it makes you feel any better,\r\nAmy and I are fine.\r\n\r\n200\r\n00:08:13,069\
-        \ --> 00:08:15,237\r\nI mean, really good.\r\n\r\n201\r\n00:08:17,474 -->\
-        \ 00:08:19,842\r\nSo, boys, how was\r\nthe pajama party?\r\n\r\n202\r\n00:08:19,844\
-        \ --> 00:08:23,729\r\nYou guys jump on the bed\r\nand sing into hair brushes?\r\
-        \n\r\n203\r\n00:08:23,731 --> 00:08:25,931\r\nIt wasn't a pajama party.\r\n\
-        \r\n204\r\n00:08:25,933 --> 00:08:28,434\r\nIt was just a couple of bros\r\
-        \nhanging out, giggling,\r\n\r\n205\r\n00:08:28,436 --> 00:08:31,520\r\neating\
-        \ cookie dough\r\nand watching <i>Princess Bride.</i>\r\n\r\n206\r\n00:08:33,073\
-        \ --> 00:08:34,607\r\nPlease, stop talking.\r\n\r\n207\r\n00:08:36,243 -->\
-        \ 00:08:38,861\r\nAs you wish.\r\n\r\n208\r\n00:08:42,666 --> 00:08:44,733\r\
-        \nI mean, you know, Sheldon,\r\nnone of this would've happened\r\n\r\n209\r\
-        \n00:08:44,735 --> 00:08:46,202\r\nif I hadn't tried\r\nto help you.\r\n\r\
-        \n210\r\n00:08:46,204 --> 00:08:48,787\r\nUh, it also wouldn't\r\nhave happened\r\
-        \n\r\n211\r\n00:08:48,789 --> 00:08:50,289\r\nif, in the early universe,\r\
-        \n\r\n212\r\n00:08:50,291 --> 00:08:53,792\r\nhydrogen was a little more\r\
-        \ncommon or a little less common.\r\n\r\n213\r\n00:08:53,794 --> 00:08:56,278\r\
-        \nThis is fun. Your turn.\r\n\r\n214\r\n00:08:57,264 --> 00:08:58,597\r\n\
-        Gentlemen.\r\nHey, Amy.\r\n\r\n215\r\n00:08:58,599 --> 00:09:00,282\r\nHello.\r\
-        \n\r\n216\r\n00:09:00,284 --> 00:09:01,684\r\nThat was kind of icy.\r\n\r\n\
-        217\r\n00:09:01,686 --> 00:09:03,335\r\nYou two okay?\r\n\r\n218\r\n00:09:03,337\
-        \ --> 00:09:04,353\r\nOh, we're fine.\r\n\r\n219\r\n00:09:04,355 --> 00:09:05,771\r\
-        \nAs Howard advised,\r\n\r\n220\r\n00:09:05,773 --> 00:09:07,973\r\nshe's\
-        \ merely respecting our\r\nprofessional boundaries.\r\n\r\n221\r\n00:09:07,975\
-        \ --> 00:09:08,941\r\nSmart.\r\n\r\n222\r\n00:09:08,943 --> 00:09:10,543\r\
-        \nTake relationship advice\r\nfrom a man\r\n\r\n223\r\n00:09:10,545 --> 00:09:12,962\r\
-        \nwho spent last night\r\nbraiding Raj's hair.\r\n\r\n224\r\n00:09:15,431\
-        \ --> 00:09:18,450\r\nYeah, you make\r\na good point.\r\n\r\n225\r\n00:09:18,452\
-        \ --> 00:09:20,653\r\nIt would appear\r\nI was worried for nothing.\r\n\r\n\
-        226\r\n00:09:20,655 --> 00:09:22,204\r\nLook at her, desperately wishing\r\
-        \n\r\n227\r\n00:09:22,206 --> 00:09:24,156\r\nshe was over here\r\nat the\
-        \ cool table.\r\n\r\n228\r\n00:09:26,576 --> 00:09:28,327\r\nDon't worry,\
-        \ little moth.\r\n\r\n229\r\n00:09:28,329 --> 00:09:30,629\r\nThe flame will\
-        \ come to you.\r\n\r\n230\r\n00:09:32,832 --> 00:09:34,567\r\nOh, uh...\r\n\
-        \r\n231\r\n00:09:34,569 --> 00:09:36,385\r\non the off chance that\r\nBernadette\
-        \ doesn't call back\r\n\r\n232\r\n00:09:36,387 --> 00:09:37,770\r\nand apologize,\r\
-        \nhow do you feel\r\n\r\n233\r\n00:09:37,772 --> 00:09:39,672\r\nabout Mexican\
-        \ food\r\nfor dinner tonight?\r\n\r\n234\r\n00:09:39,674 --> 00:09:41,840\r\
-        \nI-I don't know.\r\nSounds kind of heavy.\r\n\r\n235\r\n00:09:41,842 -->\
-        \ 00:09:44,810\r\nThat's 'cause you always\r\nfill up on chips.\r\n\r\n236\r\
-        \n00:09:44,812 --> 00:09:47,479\r\nAnd this is Dr. Gunderson\r\nfrom Stockholm.\r\
-        \n\r\n237\r\n00:09:47,481 --> 00:09:49,031\r\nAh, Sweden.\r\n\r\n238\r\n00:09:49,033\
-        \ --> 00:09:50,733\r\nYeah, home of my favorite Muppet\r\n\r\n239\r\n00:09:50,735\
-        \ --> 00:09:53,719\r\nand, uh,\r\nsecond favorite meatball.\r\n\r\n240\r\n\
-        00:09:57,140 --> 00:10:01,343\r\nOkay, the Nordic reputation for\r\nlack of\
-        \ humor is well-founded.\r\n\r\n241\r\n00:10:02,812 --> 00:10:05,581\r\nBoy,\
-        \ is his name Gunderson\r\nor No-Funderson?\r\n\r\n242\r\n00:10:06,833 -->\
-        \ 00:10:09,068\r\nWhere are we going\r\nwith this, Dr. Cooper?\r\n\r\n243\r\
-        \n00:10:09,070 --> 00:10:11,103\r\nOh, please, I'm your boyfriend.\r\n\r\n\
-        244\r\n00:10:11,105 --> 00:10:13,555\r\nYou call me Sheldon.\r\n\r\n245\r\n\
-        00:10:13,557 --> 00:10:16,158\r\nThat's right,\r\nI am in a boy-girl relationship\r\
-        \n\r\n246\r\n00:10:16,160 --> 00:10:18,928\r\nwith this cute little\r\nlump\
-        \ of wool.\r\n\r\n247\r\n00:10:18,930 --> 00:10:20,045\r\nSheldon...\r\n\r\
-        \n248\r\n00:10:20,047 --> 00:10:21,764\r\nIt's a physical\r\nrelationship,\
-        \ too.\r\n\r\n249\r\n00:10:21,766 --> 00:10:25,517\r\nHand-holding, hugging...\r\
-        \neven on hot days.\r\n\r\n250\r\n00:10:25,519 --> 00:10:27,386\r\nOw.\r\n\
-        \r\n251\r\n00:10:28,171 --> 00:10:29,538\r\nOkay, here's a new one.\r\n\r\n\
-        252\r\n00:10:29,540 --> 00:10:31,140\r\nApparently now\r\nwe kick each other\r\
-        \n\r\n253\r\n00:10:31,142 --> 00:10:32,775\r\nin the shin under the table.\r\
-        \n\r\n254\r\n00:10:34,477 --> 00:10:37,012\r\nHow do you like it\r\nwhen I\
-        \ do it to you?\r\n\r\n255\r\n00:10:38,398 --> 00:10:41,066\r\nNot so much,\
-        \ huh?\r\n\r\n256\r\n00:10:53,498 --> 00:10:55,883\r\nTest subject D7,\r\n\
-        \r\n257\r\n00:10:55,885 --> 00:10:58,535\r\naka Betsy, fear response study.\r\
-        \n\r\n258\r\n00:10:58,537 --> 00:11:02,389\r\nImage number one: Frenchman\r\
-        \non bicycle carrying baguettes.\r\n\r\n259\r\n00:11:05,393 --> 00:11:08,395\r\
-        \nNo visible reaction.\r\n\r\n260\r\n00:11:08,397 --> 00:11:10,764\r\nImage\
-        \ number two: sousaphone.\r\n\r\n261\r\n00:11:13,234 --> 00:11:14,735\r\n\
-        Still no reaction.\r\n\r\n262\r\n00:11:14,737 --> 00:11:15,736\r\nOkay.\r\n\
-        \r\n263\r\n00:11:15,738 --> 00:11:17,371\r\nLet's kick things up a notch.\r\
-        \n\r\n264\r\n00:11:17,373 --> 00:11:20,090\r\nImage number three: crocodile\r\
-        \nwith a mouthful of monkeys.\r\n\r\n265\r\n00:11:24,078 --> 00:11:27,131\r\
-        \nOkay, now we're talking.\r\n\r\n266\r\n00:11:27,133 --> 00:11:29,066\r\n\
-        Dr. Fowler?\r\n\r\n267\r\n00:11:29,068 --> 00:11:31,135\r\nWhat do you want,\
-        \ Sheldon?\r\n\r\n268\r\n00:11:31,137 --> 00:11:33,220\r\nWell, I'm done\r\
-        \nwith work, so...\r\n\r\n269\r\n00:11:34,423 --> 00:11:36,357\r\nOh, sorry,\
-        \ sorry, sorry.\r\n\r\n270\r\n00:11:36,359 --> 00:11:39,092\r\nSorry. Uh...\r\
-        \n\r\n271\r\n00:11:39,094 --> 00:11:40,527\r\nBetter?\r\n\r\n272\r\n00:11:40,529\
-        \ --> 00:11:41,695\r\nOh, baguettes.\r\n\r\n273\r\n00:11:41,697 --> 00:11:43,897\r\
-        \nYes, I like baguettes.\r\n\r\n274\r\n00:11:43,899 --> 00:11:46,099\r\nWhat\
-        \ exactly\r\nare you doing?\r\n\r\n275\r\n00:11:46,101 --> 00:11:48,535\r\n\
-        Determining baseline fear levels\r\nin capuchin monkeys\r\n\r\n276\r\n00:11:48,537\
-        \ --> 00:11:50,871\r\nby measuring their response\r\nto visual stimuli.\r\n\
-        \r\n277\r\n00:11:50,873 --> 00:11:52,339\r\nSo, goofing off.\r\n\r\n278\r\n\
-        00:11:54,909 --> 00:11:57,578\r\nAs I was saying, I'm done\r\nwith work and\
-        \ Leonard's not.\r\n\r\n279\r\n00:11:57,580 --> 00:12:00,214\r\nSo good news,\r\
-        \nyou get to take me home.\r\n\r\n280\r\n00:12:00,216 --> 00:12:01,248\r\n\
-        Play your cards right,\r\n\r\n281\r\n00:12:01,250 --> 00:12:02,750\r\nI'll\
-        \ let you drive me\r\n\r\n282\r\n00:12:02,752 --> 00:12:05,836\r\npast the\
-        \ lot\r\nwhere the buses park at night.\r\n\r\n283\r\n00:12:05,838 --> 00:12:07,638\r\
-        \nI can't leave now, Sheldon.\r\n\r\n284\r\n00:12:07,640 --> 00:12:08,756\r\
-        \nI'm very busy.\r\n\r\n285\r\n00:12:08,758 --> 00:12:10,557\r\nBesides, why\
-        \ would I want\r\nto do you a favor\r\n\r\n286\r\n00:12:10,559 --> 00:12:12,576\r\
-        \nafter the way you treated\r\nme in the cafeteria?\r\n\r\n287\r\n00:12:12,578\
-        \ --> 00:12:15,128\r\nImage number four:\r\nboa constrictor.\r\n\r\n288\r\n\
-        00:12:18,967 --> 00:12:21,935\r\nWhat on earth\r\nare you talking about?\r\
-        \n\r\n289\r\n00:12:21,937 --> 00:12:23,487\r\nMy behavior\r\nin the cafeteria\r\
-        \n\r\n290\r\n00:12:23,489 --> 00:12:25,305\r\nwas delightful.\r\n\r\n291\r\
-        \n00:12:25,307 --> 00:12:27,491\r\nMaybe your friend\r\nGunderson needs\r\n\
-        \r\n292\r\n00:12:27,493 --> 00:12:29,443\r\nto head over\r\nto IKEA and assemble\r\
-        \n\r\n293\r\n00:12:29,445 --> 00:12:32,379\r\na sense of humor.\r\n\r\n294\r\
-        \n00:12:32,381 --> 00:12:34,364\r\nYou embarrassed me\r\nin front of my colleagues\r\
-        \n\r\n295\r\n00:12:34,366 --> 00:12:35,982\r\non my first day here.\r\n\r\n\
-        296\r\n00:12:36,684 --> 00:12:37,785\r\nImage number five:\r\n\r\n297\r\n\
-        00:12:37,787 --> 00:12:39,186\r\nkitten in a teacup.\r\n\r\n298\r\n00:12:39,188\
-        \ --> 00:12:41,388\r\nOh.\r\n\r\n299\r\n00:12:44,959 --> 00:12:47,528\r\n\
-        Oh... embarrassed you?\r\nYou know what?\r\n\r\n300\r\n00:12:47,530 --> 00:12:50,431\r\
-        \nI don't have time for this.\r\nFind another way home.\r\n\r\n301\r\n00:12:50,433\
-        \ --> 00:12:53,450\r\nI'm starting to get the sense\r\nthat you're angry with\
-        \ me.\r\n\r\n302\r\n00:12:53,452 --> 00:12:55,001\r\nReally?\r\nWhat tipped\
-        \ you off?\r\n\r\n303\r\n00:12:55,003 --> 00:12:56,053\r\nCouple things, actually.\r\
-        \n\r\n304\r\n00:12:56,055 --> 00:12:57,170\r\nYour tone of voice,\r\nyour\
-        \ body language...\r\n\r\n305\r\n00:12:57,172 --> 00:12:58,806\r\nGet out.\r\
-        \nWell, now, that.\r\n\r\n306\r\n00:13:00,675 --> 00:13:03,310\r\nImage number\
-        \ six:\r\nwoman giving birth.\r\n\r\n307\r\n00:13:12,570 --> 00:13:14,187\r\
-        \nIt's 9:00.\r\nWhere you been?\r\n\r\n308\r\n00:13:14,189 --> 00:13:17,307\r\
-        \nOh, I had to take\r\nthe bus home.\r\n\r\n309\r\n00:13:17,309 --> 00:13:20,844\r\
-        \nFell asleep and missed my stop.\r\n\r\n310\r\n00:13:20,846 --> 00:13:22,646\r\
-        \nOh, no.\r\n\r\n311\r\n00:13:22,648 --> 00:13:26,633\r\nDid you know that\
-        \ Los Angeles\r\nhas a Little Sri Lanka?\r\n\r\n312\r\n00:13:26,635 --> 00:13:28,986\r\
-        \nI did not.\r\n\r\n313\r\n00:13:28,988 --> 00:13:31,004\r\nWell, I do...\
-        \ now.\r\n\r\n314\r\n00:13:31,006 --> 00:13:33,707\r\nThey're a lovely people.\r\
-        \n\r\n315\r\n00:13:33,709 --> 00:13:37,377\r\nAlthough terrifying when you\r\
-        \nwake up face-to-face with them.\r\n\r\n316\r\n00:13:38,379 --> 00:13:39,646\r\
-        \nIf you're hungry, I brought home\r\n\r\n317\r\n00:13:39,648 --> 00:13:41,632\r\
-        \nsome mutton and coconut milk.\r\n\r\n318\r\n00:13:41,634 --> 00:13:43,617\r\
-        \nWhy'd you get that?\r\nYou hate lamb.\r\n\r\n319\r\n00:13:43,619 --> 00:13:45,686\r\
-        \nI was asking for directions.\r\n\r\n320\r\n00:13:45,688 --> 00:13:49,206\r\
-        \nApparently, there was\r\na communication problem.\r\n\r\n321\r\n00:13:49,208\
-        \ --> 00:13:52,326\r\nI thought Amy was gonna\r\ndrive you home.\r\n\r\n322\r\
-        \n00:13:52,328 --> 00:13:53,610\r\nYeah, I thought so, too,\r\n\r\n323\r\n\
-        00:13:53,612 --> 00:13:55,779\r\nbut she's acting very strangely.\r\n\r\n\
-        324\r\n00:13:55,781 --> 00:13:58,782\r\nI was discussing it with\r\na Sri\
-        \ Lankan fellow on the bus,\r\n\r\n325\r\n00:13:58,784 --> 00:14:01,869\r\n\
-        and he hypothesized\r\nthat a tiger may have\r\n\r\n326\r\n00:14:01,871 -->\
-        \ 00:14:04,054\r\nrecently run across her shadow.\r\n\r\n327\r\n00:14:05,907\
-        \ --> 00:14:08,342\r\nAlthough he may have just been\r\ntrying to drum up\
-        \ business\r\n\r\n328\r\n00:14:08,344 --> 00:14:11,345\r\nfor his brother-in-law's\r\
-        \nwitch doctor practice.\r\n\r\n329\r\n00:14:14,265 --> 00:14:16,834\r\nOkay,\
-        \ Sheldon, what happened\r\nbetween you and Amy?\r\n\r\n330\r\n00:14:16,836\
-        \ --> 00:14:20,571\r\nWell, can you believe\r\nshe said I embarrassed her?\r\
-        \n\r\n331\r\n00:14:20,573 --> 00:14:22,656\r\nYeah.\r\n\r\n332\r\n00:14:22,658\
-        \ --> 00:14:25,442\r\nBut you didn't\r\neven hear the details.\r\n\r\n333\r\
-        \n00:14:25,444 --> 00:14:27,477\r\nSheldon...\r\n\r\n334\r\n00:14:29,247 -->\
-        \ 00:14:31,865\r\nI've known you\r\na long time,\r\n\r\n335\r\n00:14:31,867\
-        \ --> 00:14:33,283\r\nand I'm going\r\nto tell you this\r\n\r\n336\r\n00:14:33,285\
-        \ --> 00:14:37,154\r\nwith all the love\r\nI can possibly muster.\r\n\r\n\
-        337\r\n00:14:37,156 --> 00:14:38,155\r\nAmy's right.\r\n\r\n338\r\n00:14:38,157\
-        \ --> 00:14:39,606\r\nYou're wrong.\r\n\r\n339\r\n00:14:40,458 --> 00:14:41,658\r\
-        \nBut you don't even know...\r\n\r\n340\r\n00:14:41,660 --> 00:14:43,076\r\
-        \nDoesn't matter.\r\n\r\n341\r\n00:14:43,078 --> 00:14:45,696\r\nBut, now,\
-        \ but in my defense...\r\nDoesn't matter.\r\n\r\n342\r\n00:14:45,698 --> 00:14:47,931\r\
-        \nYou're not listening\r\nto my side of it.\r\n\r\n343\r\n00:14:47,933 -->\
-        \ 00:14:50,267\r\nOkay, fine, Sheldon.\r\nWhat is your side?\r\n\r\n344\r\n\
-        00:14:50,269 --> 00:14:52,285\r\nWell...\r\n\r\n345\r\n00:14:52,287 --> 00:14:54,788\r\
-        \nNope, got to go with\r\nAmy on this one.\r\n\r\n346\r\n00:15:00,629 -->\
-        \ 00:15:01,678\r\nShrimp was spicy.\r\n\r\n347\r\n00:15:01,680 --> 00:15:03,113\r\
-        \nYou want a TUMS?\r\n\r\n348\r\n00:15:03,115 --> 00:15:04,431\r\nYou got\r\
-        \nthe tropical fruit kind?\r\n\r\n349\r\n00:15:04,433 --> 00:15:06,950\r\n\
-        No, if I buy those, I just\r\ngo through them like candy.\r\n\r\n350\r\n00:15:06,952\
-        \ --> 00:15:08,385\r\nTell me about it.\r\n\r\n351\r\n00:15:08,387 --> 00:15:11,104\r\
-        \nOne time, I swear\r\nI pooped out a stick of chalk.\r\n\r\n352\r\n00:15:13,141\
-        \ --> 00:15:15,359\r\nI'll get it.\r\nThanks.\r\n\r\n353\r\n00:15:17,278 -->\
-        \ 00:15:18,362\r\nHi.\r\n\r\n354\r\n00:15:18,364 --> 00:15:19,529\r\nOh, hi.\r\
-        \n\r\n355\r\n00:15:19,531 --> 00:15:21,698\r\nI may have overreacted.\r\n\r\
-        \n356\r\n00:15:21,700 --> 00:15:25,619\r\nYeah, well, I didn't\r\nhandle it\
-        \ so great, either.\r\n\r\n357\r\n00:15:25,621 --> 00:15:28,038\r\nIt's just\
-        \ sometimes I feel\r\nlike you enjoy spending time\r\n\r\n358\r\n00:15:28,040\
-        \ --> 00:15:30,090\r\nwith your friends\r\nmore than with me.\r\n\r\n359\r\
-        \n00:15:30,092 --> 00:15:31,909\r\nThat's not true.\r\nIt's not?\r\n\r\n360\r\
-        \n00:15:31,911 --> 00:15:33,594\r\nYou spend all day\r\ntogether at work,\r\
-        \n\r\n361\r\n00:15:33,596 --> 00:15:35,712\r\nand then you all hang out\r\n\
-        at night playing games,\r\n\r\n362\r\n00:15:35,714 --> 00:15:37,230\r\ngoing\
-        \ to the comic book store.\r\n\r\n363\r\n00:15:37,232 --> 00:15:39,850\r\n\
-        Last week, you two got\r\na couples massage.\r\n\r\n364\r\n00:15:42,487 -->\
-        \ 00:15:45,055\r\nSo, when you said you wouldn't\r\nwant to spend that much\
-        \ time\r\n\r\n365\r\n00:15:45,057 --> 00:15:48,025\r\nwith me, it really\r\
-        \nhurt my feelings.\r\n\r\n366\r\n00:15:48,027 --> 00:15:49,643\r\nOh, wow.\r\
-        \n\r\n367\r\n00:15:49,645 --> 00:15:50,978\r\nYeah, no, I get that.\r\n\r\n\
-        368\r\n00:15:50,980 --> 00:15:52,112\r\nI'm so sorry.\r\n\r\n369\r\n00:15:52,114\
-        \ --> 00:15:54,865\r\nStarting tomorrow, I am\r\nturning over a new leaf.\r\
-        \n\r\n370\r\n00:15:54,867 --> 00:15:57,985\r\nTime with you is my\r\nnumber\
-        \ one priority.\r\n\r\n371\r\n00:15:59,989 --> 00:16:01,688\r\nWhy tomorrow?\r\
-        \n\r\n372\r\n00:16:03,190 --> 00:16:05,509\r\nWell, we're real close\r\nto\
-        \ finishing off\r\n\r\n373\r\n00:16:05,511 --> 00:16:07,377\r\nthe new Batman\
-        \ game.\r\n\r\n374\r\n00:16:08,513 --> 00:16:11,665\r\nIt is awesome.\r\n\r\
-        \n375\r\n00:16:13,968 --> 00:16:16,003\r\nUh, you should probably\r\ngo after\
-        \ her.\r\n\r\n376\r\n00:16:16,005 --> 00:16:17,754\r\nShould I go after you?\r\
-        \n\r\n377\r\n00:16:17,756 --> 00:16:19,923\r\nNo!\r\n\r\n378\r\n00:16:21,592\
-        \ --> 00:16:24,094\r\nThanks for getting me\r\nin trouble.\r\n\r\n379\r\n\
-        00:16:26,898 --> 00:16:28,265\r\nAmy.\r\n\r\n380\r\n00:16:29,067 --> 00:16:30,283\r\
-        \nAmy.\r\n\r\n381\r\n00:16:31,069 --> 00:16:33,103\r\nAmy.\r\n\r\n382\r\n\
-        00:16:34,722 --> 00:16:37,324\r\nSheldon, what are you\r\ndoing here so late?\r\
-        \n\r\n383\r\n00:16:37,326 --> 00:16:39,192\r\nI couldn't sleep\r\nbecause\
-        \ I kept thinking\r\n\r\n384\r\n00:16:39,194 --> 00:16:41,445\r\nabout what\
-        \ happened\r\nearlier between us.\r\n\r\n385\r\n00:16:42,246 --> 00:16:45,615\r\
-        \nAlso, I had one heck\r\nof a bus nap.\r\n\r\n386\r\n00:16:46,751 --> 00:16:47,901\r\
-        \nOh, speaking of which,\r\n\r\n387\r\n00:16:47,903 --> 00:16:50,787\r\ndo\
-        \ you want some mutton\r\nand coconut milk?\r\n\r\n388\r\n00:16:50,789 -->\
-        \ 00:16:51,855\r\nNo.\r\n\r\n389\r\n00:16:51,857 --> 00:16:54,624\r\nWell,\
-        \ I cannot give\r\nthis stuff away.\r\n\r\n390\r\n00:16:54,626 --> 00:16:57,077\r\
-        \nWhat do you want?\r\n\r\n391\r\n00:16:57,079 --> 00:17:00,647\r\nAmy, this\
-        \ isn't easy to say.\r\n\r\n392\r\n00:17:01,766 --> 00:17:04,751\r\nAll relationships\
-        \ are difficult,\r\n\r\n393\r\n00:17:04,753 --> 00:17:07,688\r\nbut even more\
-        \ so\r\nwhen you're in one\r\n\r\n394\r\n00:17:07,690 --> 00:17:09,523\r\n\
-        with a person who struggles\r\n\r\n395\r\n00:17:09,525 --> 00:17:11,858\r\n\
-        with everyday\r\nsocial interactions.\r\n\r\n396\r\n00:17:11,860 --> 00:17:13,527\r\
-        \nAnd frankly...\r\n\r\n397\r\n00:17:13,529 --> 00:17:15,145\r\nwho can strike\
-        \ some people\r\n\r\n398\r\n00:17:15,147 --> 00:17:17,664\r\nas being kind\
-        \ of a weirdo.\r\n\r\n399\r\n00:17:17,666 --> 00:17:19,649\r\nSheldon...\r\
-        \n\r\n400\r\n00:17:19,651 --> 00:17:21,651\r\nyou're not a weirdo.\r\n\r\n\
-        401\r\n00:17:21,653 --> 00:17:24,271\r\nI wasn't speaking about me.\r\n\r\n\
-        402\r\n00:17:26,307 --> 00:17:28,441\r\nI mean, honestly,\r\nthere's no telling\r\
-        \n\r\n403\r\n00:17:28,443 --> 00:17:30,077\r\nwhat will set you off.\r\n\r\
-        \n404\r\n00:17:30,079 --> 00:17:32,295\r\nYou know, introducing\r\nmyself\
-        \ as your boyfriend.\r\n\r\n405\r\n00:17:32,297 --> 00:17:35,549\r\nGiving\
-        \ you the opportunity\r\nto drive me home.\r\n\r\n406\r\n00:17:35,551 -->\
-        \ 00:17:37,617\r\nBreaking the ice\r\nwith your colleagues\r\n\r\n407\r\n\
-        00:17:37,619 --> 00:17:40,787\r\nusing ethnic humor,\r\nthe funniest kind\
-        \ of humor.\r\n\r\n408\r\n00:17:42,557 --> 00:17:44,224\r\nWhat's your point?\r\
-        \n\r\n409\r\n00:17:44,226 --> 00:17:46,626\r\nMy point is, we're a couple.\r\
-        \n\r\n410\r\n00:17:46,628 --> 00:17:48,361\r\nAnd...\r\n\r\n411\r\n00:17:48,363\
-        \ --> 00:17:50,480\r\nI like you for who you are.\r\n\r\n412\r\n00:17:50,482\
-        \ --> 00:17:52,365\r\nQuirks and all.\r\n\r\n413\r\n00:17:54,102 --> 00:17:55,652\r\
-        \nI like you, too.\r\n\r\n414\r\n00:17:55,654 --> 00:17:58,188\r\nWell, I\
-        \ should hope so.\r\n\r\n415\r\n00:17:58,190 --> 00:18:00,323\r\nI don't see\
-        \ anyone else\r\nbanging on this door\r\n\r\n416\r\n00:18:00,325 --> 00:18:02,826\r\
-        \nto put up with your nonsense.\r\n\r\n417\r\n00:18:06,981 --> 00:18:09,583\r\
-        \nNot even a good-bye?\r\n\r\n418\r\n00:18:09,585 --> 00:18:11,084\r\nYou\
-        \ see,\r\nthat's the kind of thing\r\n\r\n419\r\n00:18:11,086 --> 00:18:13,620\r\
-        \nthat makes people\r\nthink you're weird.\r\n\r\n420\r\n00:18:13,622 -->\
-        \ 00:18:15,422\r\nPoor kid.\r\n\r\n421\r\n00:18:15,424 --> 00:18:17,507\r\n\
-        She just doesn't see it.\r\n\r\n422\r\n00:18:27,608 --> 00:18:28,691\r\nI'm\
-        \ not apologizing\r\nto Howard.\r\n\r\n423\r\n00:18:28,693 --> 00:18:30,342\r\
-        \nHe can come beg me\r\non his knees.\r\n\r\n424\r\n00:18:30,344 --> 00:18:31,694\r\
-        \nSheldon, too.\r\n\r\n425\r\n00:18:31,696 --> 00:18:34,196\r\nIf I see him\
-        \ at work,\r\nI'm just going to ignore him.\r\n\r\n426\r\n00:18:34,198 -->\
-        \ 00:18:36,032\r\nAll right, don't worry.\r\nI talked to Leonard.\r\n\r\n\
-        427\r\n00:18:36,034 --> 00:18:38,801\r\nHe is gonna sit the guys down\r\n\
-        and set them straight.\r\n\r\n428\r\n00:18:38,803 --> 00:18:40,820\r\nLaser's\
-        \ warmed up.\r\n\r\n429\r\n00:18:40,896 --> 00:18:41,928\r\nPull!\r\n\r\n\
-        430\r\n00:18:44,274 --> 00:18:49,274\r\n== sync, corrected by <font color=#00FF00>elderman</font>\
-        \ ==\r\n<font color=#00FFFF>@elder_man</font>\r\n\r\n"
+      string: !!binary |
+        A0ADAGRfnf209mmOWpNM2wcEmZoUKOkd/7+z93LsW5rpBZZAeX7uuHxAM5sNxxPf8wPTKOeZu0Yp
+        D+W1ldu1ecLxW9jylPtht/x0TtMwbeoI8dctjPPSFwUisDLUdJMYlGhoZCNMgRt6Z9lqnbMvBTq4
+        QW4PIjx+8ebJ208v3r2FDpb/qECcTufaQV/5NOyWL7YHHk4q99rbXraVauGm/eU0QIQFPjUuxhIL
+        lMLtFUT4W70FHZRhPD8e5QEllEJBqMVnaSLJKMTcKmmD/Qlg7n60P+8miEbfd3RVqEAkKSMbK9CY
+        yhgSe/RFu5RTSMRWNm68GVs6zLYK6IFQohBEgQU2kgJNcw1TDoTCyVKLK54Uy498e/IQH7/uDWBs
+        J7CoTmi8rSLZUxPKC2w6KzREHhMXi84LrQ1nV5WsjMP2ErAJiG1xBRFZyiIDZU0yadTeBzRBMHIu
+        GoNiL6zzwTSS9334+ONwmF8pa+aPn7x58PZxIvIkTSSuCbwtBdioysQ8ZMT9nw7qYRj3pUK8hbHy
+        uN9BdB08gNdApA54PQ8RPvd19m1/Wh82nOvs/Wl/NWyH6Ro6GPv9pdHTPByWs4e8W84+93V/ut5W
+        tfkJ9/cD
     headers:
-      Accept-Ranges:
-      - bytes
+      Age:
+      - '404'
+      CF-Cache-Status:
+      - HIT
+      CF-RAY:
+      - 88149cce0d8499f3-CDG
+      Cache-Control:
+      - public, max-age=7200
       Connection:
       - keep-alive
-      Content-Disposition:
-      - attachment; filename=f18de9888230bcd71be8bc7be3add167.srt
-      Content-Length:
-      - '30847'
+      Content-Encoding:
+      - br
       Content-Type:
-      - text/plain
+      - application/json; charset=utf-8
       Date:
-      - Sat, 09 May 2020 16:23:19 GMT
-      ETag:
-      - '"5261a4b8-787f"'
+      - Thu, 09 May 2024 20:59:18 GMT
       Last-Modified:
-      - Fri, 18 Oct 2013 21:14:32 GMT
+      - Thu, 09 May 2024 20:52:34 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=tgxSV4lFl8vT4E%2BQcYkj9QNw6V%2FLzC%2FmjM5%2BWyCPysf0zfR1lCSQKwDz4fS%2BvDyKQcXjbgk2pDOWHP1cWXyVVlilUmxpKYIJiFN%2F33hIGf2luGWZ6xjXc9dnyewc%2BJVmUZhCbQ%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
-      - nginx/1.6.0
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      alt-svc:
+      - h3=":443"; ma=86400
+      vary:
+      - Accept-Encoding
     status:
       code: 200
       message: OK
 - request:
     body: null
     headers:
-      Accept:
-      - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br
       Connection:
       - keep-alive
       User-Agent:
-      - SubDB/1.0 (subliminal/2.1; https://github.com/Diaoul/subliminal)
+      - Subliminal/2.1
+      accept:
+      - application/json
     method: GET
-    uri: http://api.thesubdb.com/?action=download&hash=9dbbfb7ba81c9a6237237dae8589fccc&language=pt
+    uri: https://api.gestdown.info/subtitles/get/91eb9278-8cf5-4ddd-9111-7f60b15958cb/7/5/fra
   response:
     body:
-      string: "\uFEFF1\r\n00:00:05,532 --> 00:00:07,400\r\nSil\xEAncio constrangedor.\r\
-        \n\r\n2\r\n00:00:07,402 --> 00:00:08,684\r\nSheldon no celular.\r\n\r\n3\r\
-        \n00:00:08,686 --> 00:00:09,719\r\nSem toques.\r\n\r\n4\r\n00:00:09,721 -->\
-        \ 00:00:11,813\r\nAlgu\xE9m est\xE1 tendo um encontro hoje.\r\n\r\n5\r\n00:00:13,124\
-        \ --> 00:00:15,208\r\n\xC9 mais quente do que parece.\r\n\r\n6\r\n00:00:15,210\
-        \ --> 00:00:18,077\r\nSheldon est\xE1 olhando o f\xE1lico\r\nsimbolismo de\
-        \ ra\xEDzes vegetais\r\n\r\n7\r\n00:00:18,079 --> 00:00:19,796\r\nem pinturas\
-        \ renascentistas.\r\n\r\n8\r\n00:00:19,798 --> 00:00:21,447\r\nAh, n\xE3o,\
-        \ enjoei disso\r\n\r\n9\r\n00:00:21,449 --> 00:00:25,418\r\nEstou pesquisando\
-        \ alicates de cut\xEDcula\r\nna Amazon\r\n\r\n10\r\n00:00:26,370 --> 00:00:29,247\r\
-        \nComo voc\xEA n\xE3o tira as roupas dele\r\ne pega ele bem aqui nessa mesa?\r\
-        \n\r\n11\r\n00:00:30,558 --> 00:00:33,259\r\nSe voc\xEA fizer isso, eu vou\
-        \ gritar.\r\n\r\n12\r\n00:00:36,430 --> 00:00:38,089\r\nSheldon, tenho novidades.\r\
-        \n\r\n13\r\n00:00:38,356 --> 00:00:39,782\r\nSomos dois.\r\n\r\n14\r\n00:00:39,784\
-        \ --> 00:00:41,267\r\nMeu alicate de cut\xEDcula\r\nvai chegar\r\n\r\n15\r\
-        \n00:00:41,269 --> 00:00:43,152\r\nem um ou dois dias \xFAteis.\r\n\r\n16\r\
-        \n00:00:43,154 --> 00:00:45,721\r\nPor favor, um\r\n\r\n17\r\n00:00:45,723\
-        \ --> 00:00:47,824\r\nEu fui convidada para consultar\r\num experimento\r\n\
-        \r\n18\r\n00:00:47,826 --> 00:00:50,193\r\nna sua universidade\r\npor uns\
-        \ meses\r\n\r\n19\r\n00:00:50,195 --> 00:00:51,327\r\nN\xE3o \xE9 incr\xED\
-        vel?\r\n\r\n20\r\n00:00:51,329 --> 00:00:54,314\r\nN\xF3s podemos almo\xE7\
-        ar juntos.\r\nPodemos ir juntos de carro.\r\n\r\n21\r\n00:00:54,316 --> 00:00:58,170\r\
-        \nSabe, andar com o Leonard tem\r\nsido tedioso ultimamente.\r\n\r\n22\r\n\
-        00:00:58,737 --> 00:01:02,006\r\nO \xFAnico jogo de carro que ele sempre\r\
-        \nquer jogar \xE9 o de sil\xEAncio.\r\n\r\n23\r\n00:01:02,207 --> 00:01:05,141\r\
-        \nE ele \xE9 horrivel nesse.\r\nEu sempre ven\xE7o.\r\n\r\n24\r\n00:01:06,844\
-        \ --> 00:01:08,728\r\nEnt\xE3o, voc\xEA est\xE1 bem com isso?\r\n\r\n25\r\n\
-        00:01:08,730 --> 00:01:10,396\r\nPor que n\xE3o estaria?\r\n\r\n26\r\n00:01:10,398\
-        \ --> 00:01:12,432\r\nBem, esse projeto nos faria trabalhar\r\n\r\n27\r\n\
-        00:01:12,434 --> 00:01:14,467\r\nmuito pr\xF3ximos\r\n\r\n28\r\n00:01:14,469\
-        \ --> 00:01:15,968\r\nE tem esse ditado popular\r\n\r\n29\r\n00:01:15,970\
-        \ --> 00:01:19,639\r\nn\xE3o se deve defecar onde outro come\r\n\r\n30\r\n\
-        00:01:19,641 --> 00:01:21,974\r\nMeu pai costumava falar isso sempre\r\n\r\
-        \n31\r\n00:01:21,976 --> 00:01:27,880\r\nisso e \"Quem devo gratificar oralmente\r\
-        \npara ganhar uma bebida aqui?\"\r\n\r\n32\r\n00:01:29,233 --> 00:01:33,636\r\
-        \nMas o que isso tem a ver com voc\xEA\r\ntrabalhando na universidade?\r\n\
-        \r\n33\r\n00:01:33,638 --> 00:01:36,239\r\nSheldon, \" N\xE3o defecar onde\
-        \ voc\xEA come,\"\r\n\r\n34\r\n00:01:36,241 --> 00:01:39,876\r\nsignifica\
-        \ n\xE3o ter relacionamentos\r\namorosos no lugar de trabalho.\r\n\r\n35\r\
-        \n00:01:40,570 --> 00:01:42,140\r\nS\xE9rio?\r\n\r\n36\r\n00:01:45,766 -->\
-        \ 00:01:47,383\r\nSim.\r\n\r\n37\r\n00:01:48,470 --> 00:01:50,787\r\n\xC9\
-        , eu sempre pensei literalmente.\r\n\r\n38\r\n00:01:50,789 --> 00:01:55,992\r\
-        \nPor isso eu nunca mexi meu intestino\r\nnesse ou em qualquer outro restaurante.\r\
-        \n\r\n39\r\n00:01:57,946 --> 00:02:01,264\r\n\xC9 um alivio que voc\xEA n\xE3\
-        o tenha problema\r\ncom n\xF3s dois trabalhando juntos.\r\n\r\n40\r\n00:02:01,266\
-        \ --> 00:02:03,516\r\nN\xE3o t\xE3o aliviada quanto\r\neu estou prestes a\
-        \ estar.\r\n\r\n41\r\n00:02:04,518 --> 00:02:06,753\r\n\xC9 um mundo novo,\
-        \ mocinha.\r\n\r\n42\r\n00:02:09,189 --> 00:02:12,500\r\n\u266A Our whole\
-        \ universe\r\nwas in a hot, dense state \u266A\r\n\r\n43\r\n00:02:12,665 -->\
-        \ 00:02:16,000\r\n\u266A Then nearly 14 billion years\r\nago expansion started...\
-        \ Wait! \u266A\r\n\r\n44\r\n00:02:16,164 --> 00:02:17,597\r\n\u266A The Earth\
-        \ began to cool\r\n\r\n45\r\n00:02:17,773 --> 00:02:20,663\r\n\u266A The autotrophs\
-        \ began to drool,\r\nNeanderthals developed tools \u266A\r\n\r\n46\r\n00:02:20,810\
-        \ --> 00:02:22,521\r\n\u266A We built the Wall\r\n\u266A <i>We built the pyramids</i>\
-        \ \u266A\r\n\r\n47\r\n00:02:22,674 --> 00:02:25,430\r\n\u266A Math, Science,\
-        \ History,\r\nunraveling the mystery \u266A\r\n\r\n48\r\n00:02:25,565 -->\
-        \ 00:02:27,509\r\n\u266A That all started\r\nwith a big bang \u266A\r\n\r\n\
-        49\r\n00:02:27,694 --> 00:02:28,460\r\n\u266A <i>Bang!</i> \u266A\r\n\r\n\
-        50\r\n00:02:28,756 --> 00:02:30,220\r\nThe Big Bang Theory 7x05\r\nThe Workplace\
-        \ Proximity\r\n\r\n51\r\n00:02:32,367 --> 00:02:37,367\r\nEquipe Li4rs\r\n\
-        \ Lucas | Vanessa\r\n\r\n52\r\n00:02:37,818 --> 00:02:39,385\r\nVoc\xEA est\xE1\
-        \ louco?\r\n\r\n53\r\n00:02:39,387 --> 00:02:42,305\r\nVoc\xEA n\xE3o vai\
-        \ querer sua\r\nnamorada no seu trabalho.\r\n\r\n54\r\n00:02:42,307 --> 00:02:45,007\r\
-        \nMolusco infernal.\r\n\r\n55\r\n00:02:45,009 --> 00:02:46,526\r\nPor que\
-        \ n\xE3o?\r\n\r\n56\r\n00:02:46,528 --> 00:02:49,112\r\nFada cabeluda.\r\n\
-        \r\n57\r\n00:02:49,114 --> 00:02:50,680\r\nAcho que pode ser rom\xE2ntico.\r\
-        \n\r\n58\r\n00:02:50,682 --> 00:02:52,649\r\nSabe, meus pais se\r\nconheceram\
-        \ no trabalho.\r\n\r\n59\r\n00:02:52,651 --> 00:02:55,685\r\nSeu pai \xE9\
-        \ um ginecologista.\r\n\r\n60\r\n00:02:55,687 --> 00:02:56,869\r\nEu sei.\r\
-        \n\r\n61\r\n00:02:56,871 --> 00:02:59,822\r\nO que come\xE7ou com um simples\
-        \ papanicolau\r\nse transformou em um encontro.\r\n\r\n62\r\n00:03:01,292\
-        \ --> 00:03:02,675\r\nO que levou ela a trabalhar l\xE1.\r\n\r\n63\r\n00:03:02,677\
-        \ --> 00:03:07,196\r\nque levou ao casamento, que levou ao\r\n\xF3dio, que\
-        \ continua at\xE9 os dias de hoje\r\n\r\n64\r\n00:03:07,298 --> 00:03:10,066\r\
-        \nCiclope de dois olhos.\r\n\r\n65\r\n00:03:10,068 --> 00:03:12,902\r\nPor\
-        \ favor, diga a ele\r\nque \xE9 uma m\xE1 ideia.\r\n\r\n66\r\n00:03:12,904\
-        \ --> 00:03:14,270\r\nN\xE3o, n\xE3o, acho que vai ser \xF3timo\r\n\r\n67\r\
-        \n00:03:14,272 --> 00:03:15,888\r\nNa pr\xF3xima que ele pegar conjuntivite\r\
-        \nno trabalho,\r\n\r\n68\r\n00:03:15,890 --> 00:03:19,942\r\nEla pode segurar\
-        \ a cabe\xE7a dele e\r\ntentar colocar o col\xEDrio\r\n\r\n69\r\n00:03:19,944\
-        \ --> 00:03:22,428\r\nBeb\xEA gigante.\r\n\r\n70\r\n00:03:22,430 --> 00:03:24,280\r\
-        \nIsso \xE9 um ogro feroz.\r\n\r\n71\r\n00:03:24,282 --> 00:03:26,516\r\n\
-        Sim, eu sei.\r\n\r\n72\r\n00:03:28,519 --> 00:03:30,686\r\nS\xF3 estou dizendo,\
-        \ eu nao gostaria\r\nde trabalhar com a Bernadette\r\n\r\n73\r\n00:03:30,688\
-        \ --> 00:03:32,655\r\nPode imaginar ver algu\xE9m o dia todo\r\n\r\n74\r\n\
-        00:03:32,657 --> 00:03:35,825\r\ne voc\xEA ainda ter que ficar com\r\nela\
-        \ depois do trabalho tamb\xE9m?\r\n\r\n75\r\n00:03:35,827 --> 00:03:37,493\r\
-        \nPera ai. N\xF3s fazemos isso sempre.\r\n\r\n76\r\n00:03:37,495 --> 00:03:39,228\r\
-        \nVoc\xEA e eu trabalhamos\r\ne jogamos juntos.\r\n\r\n77\r\n00:03:39,230\
-        \ --> 00:03:42,882\r\n\xC9, eu sei, e isso me levou aos bra\xE7os\r\nde outra\
-        \ mulher\r\n\r\n78\r\n00:03:44,701 --> 00:03:46,719\r\nUrso bipolar.\r\n\r\
-        \n79\r\n00:03:46,721 --> 00:03:49,605\r\nBem, aprecio sua preocuoa\xE7\xE3\
-        o,\r\n\r\n80\r\n00:03:49,607 --> 00:03:52,809\r\nMas eu n\xE3o vou ver Amy\
-        \ mais\r\ndo que eu j\xE1 vejo.\r\n\r\n81\r\n00:03:52,811 --> 00:03:55,094\r\
-        \nPresumo que vamos deduzir todo\r\ntempo extra que passarmos juntos\r\n\r\
-        \n82\r\n00:03:55,096 --> 00:03:57,964\r\nno trabalho de nossa cota semanal\r\
-        \n\r\n83\r\n00:03:59,883 --> 00:04:02,552\r\nPor favor deixe eu estar junto\r\
-        \nquando voc\xEA falar isso pra ela.\r\n\r\n84\r\n00:04:03,520 --> 00:04:05,688\r\
-        \nPor que? Para ver o olhar no\r\nrosto da Amy\r\n\r\n85\r\n00:04:05,690 -->\
-        \ 00:04:07,990\r\nquando ela ouvir minha grande ideia?\r\n\r\n86\r\n00:04:07,992\
-        \ --> 00:04:10,576\r\nPor favor, oh, por favor, apenas\r\ndeixe eu estar l\xE1\
-        \r\n\r\n87\r\n00:04:12,546 --> 00:04:15,681\r\nEnt\xE3o, Amy, com o que voc\xEA\
-        \ estar\xE1\r\ntrabalhando na Caltech?\r\n\r\n88\r\n00:04:15,683 --> 00:04:17,467\r\
-        \nEstou liderando um estudo para ver\r\n\r\n89\r\n00:04:17,469 --> 00:04:19,368\r\
-        \nse a defici\xEAncia de\r\nenzima monoamina oxidase\r\n\r\n90\r\n00:04:19,370\
-        \ --> 00:04:21,444\r\nfaz macacos sentirem\r\num medo paralisante\r\n\r\n\
-        91\r\n00:04:21,469 --> 00:04:22,339\r\nAh.\r\n\r\n92\r\n00:04:22,340 --> 00:04:25,158\r\
-        \nse ele forem mesmo parecidos\r\ncom humanos, a resposta \xE9 sim\r\n\r\n\
-        93\r\n00:04:25,160 --> 00:04:27,577\r\nPera, voc\xEA-voc\xEA fez esse experimentos\r\
-        \nem humanos?\r\n\r\n94\r\n00:04:27,579 --> 00:04:30,263\r\nVoc\xEA quis dizer\
-        \ condenados \xE0 morte\r\nsem nada a perder?\r\n\r\n95\r\n00:04:30,365 -->\
-        \ 00:04:33,082\r\nN\xE3o, isso seria anti\xE9tico\r\n\r\n96\r\n00:04:34,618\
-        \ --> 00:04:36,586\r\nSabe, muitas pessoas n\xE3o sabem disso,\r\n\r\n97\r\
-        \n00:04:36,588 --> 00:04:37,837\r\nmas a enzima monoamina oxidase\r\n\r\n\
-        98\r\n00:04:37,839 --> 00:04:39,789\r\nfoi descoberta por uma mulher chamada\r\
-        \nMary Bernheim\r\n\r\n99\r\n00:04:42,276 --> 00:04:43,542\r\nIsso mesmo.\r\
-        \n\r\n100\r\n00:04:43,544 --> 00:04:46,545\r\nMeu celular \xE9 t\xE3o esperto\
-        \ quanto voc\xEAs.\r\n\r\n101\r\n00:04:48,316 --> 00:04:49,448\r\nAmy, Bernadette,\
-        \ Penny.\r\n\r\n102\r\n00:04:49,450 --> 00:04:51,150\r\nAmy, Bernadette, Penny.\r\
-        \n\r\n103\r\n00:04:51,152 --> 00:04:53,536\r\nAmy, Bernadette, Penny.\r\n\r\
-        \n104\r\n00:04:53,538 --> 00:04:56,305\r\nEle nunca vai parar de fazer isso,\
-        \ n\xE9?\r\n\r\n105\r\n00:04:56,307 --> 00:04:57,440\r\nEu n\xE3o me importo.\r\
-        \n\r\n106\r\n00:04:57,442 --> 00:04:59,108\r\nEspero fazer essa mania de repeti\xE7\
-        \xE3o\r\n\r\n107\r\n00:04:59,110 --> 00:05:00,860\r\n\xFAtil algum dia.\r\n\
-        \r\n108\r\n00:05:03,246 --> 00:05:05,231\r\nHi, Um...\r\n\r\n109\r\n00:05:05,233\
-        \ --> 00:05:06,399\r\nEu reconsiderei.\r\n\r\n110\r\n00:05:06,401 --> 00:05:07,900\r\
-        \nVoc\xEA n\xE3o pode trabalhar no\r\nmesmo lugar\r\n\r\n111\r\n00:05:07,902\
-        \ --> 00:05:09,268\r\nAproveitem o resto da noite.\r\n\r\n112\r\n00:05:09,270\
-        \ --> 00:05:10,903\r\nSheldon.\r\n\r\n113\r\n00:05:10,905 --> 00:05:13,122\r\
-        \nE-eu j\xE1 assinei o contrato.\r\n\r\n114\r\n00:05:13,124 --> 00:05:14,523\r\
-        \nEu descontei o cheque.\r\n\r\n115\r\n00:05:14,525 --> 00:05:16,575\r\nHm...\
-        \ Voc\xEA  n\xE3o vai\r\n\r\n116\r\n00:05:16,577 --> 00:05:18,427\r\nsair\
-        \ dessa bem\r\n\r\n117\r\n00:05:18,429 --> 00:05:19,662\r\nSheldon, eu n\xE3\
-        o entendo.\r\n\r\n118\r\n00:05:19,664 --> 00:05:21,580\r\nAchei que voc\xEA\
-        \ estava de acordo.\r\n\r\n119\r\n00:05:21,582 --> 00:05:22,698\r\nBem, eu\
-        \ estava.\r\n\r\n120\r\n00:05:22,700 --> 00:05:24,333\r\nMas isso foi antes\
-        \ do Howard explicar\r\n\r\n121\r\n00:05:24,335 --> 00:05:26,469\r\ncomo horr\xED\
-        vel seria se ele tivesse\r\nque trabalhar\r\n\r\n122\r\n00:05:26,471 --> 00:05:28,137\r\
-        \ncom algu\xE9m pr\xF3ximo.\r\n\r\n123\r\n00:05:28,139 --> 00:05:30,723\r\n\
-        Ele disse o que?\r\n\r\n124\r\n00:05:30,725 --> 00:05:32,675\r\nN\xE3o se\
-        \ ofenda.\r\n\r\n125\r\n00:05:32,677 --> 00:05:36,896\r\nEle s\xF3 acha que\
-        \ passar muito tempo\r\ncom voc\xEA, seria muito tedioso\r\n\r\n126\r\n00:05:36,898\
-        \ --> 00:05:40,066\r\nCom licen\xE7a, preciso ter uma conversinha\r\ncom meu\
-        \ marido\r\n\r\n127\r\n00:05:40,068 --> 00:05:41,901\r\n\xC9, bem, seja r\xE1\
-        pida\r\n\r\n128\r\n00:05:41,903 --> 00:05:45,438\r\nPelo que eu pude perceber,\r\
-        \na brevidade \xE9 sua amiga.\r\n\r\n129\r\n00:05:46,573 --> 00:05:48,741\r\
-        \nEnt\xE3o, estamos bem aqui?\r\n\r\n130\r\n00:05:48,743 --> 00:05:50,326\r\
-        \nN\xE3o, n\xE3o estamos.\r\n\r\n131\r\n00:05:50,328 --> 00:05:51,827\r\n\
-        Eu vou trabalhar nesse projeto.\r\n\r\n132\r\n00:05:51,829 --> 00:05:54,080\r\
-        \nE voc\xEA n\xE3o pode dizer o que ela pode\r\nou n\xE3o fazer\r\n\r\n133\r\
-        \n00:05:54,082 --> 00:05:56,098\r\nSemana passada, voc\xEA disse ao Leonard\r\
-        \npra n\xE3o usar\r\n\r\n134\r\n00:05:56,100 --> 00:05:58,300\r\na jaqueta\
-        \ Wookiee em p\xFAblico\r\n\r\n135\r\n00:05:58,302 --> 00:05:59,518\r\n\xC9\
-        \ diferente.\r\n\r\n136\r\n00:05:59,520 --> 00:06:01,454\r\nN\xE3o vou ao\
-        \ shopping com algu\xE9m vestido\r\n\r\n137\r\n00:06:01,456 --> 00:06:03,539\r\
-        \ncomo um urso espacial idiota.\r\n\r\n138\r\n00:06:05,575 --> 00:06:07,626\r\
-        \nSheldon, n\xE3o se preocupe sobre\r\neu te incomodar\r\n\r\n139\r\n00:06:07,628\
-        \ --> 00:06:08,878\r\nEstarei em um pr\xE9dio diferente\r\n\r\n140\r\n00:06:08,880\
-        \ --> 00:06:10,746\r\nE nem precisamos almo\xE7ar juntos.\r\n\r\n141\r\n00:06:10,748\
-        \ --> 00:06:11,864\r\nS\xE9rio?\r\n\r\n142\r\n00:06:11,866 --> 00:06:14,517\r\
-        \nSim, antes de tudo, eu sou uma cientista.\r\n\r\n143\r\n00:06:14,519 -->\
-        \ 00:06:16,969\r\nEstarei la  para fazer o meu trabalho e\r\ncom um pouco\
-        \ de sorte,\r\n\r\n144\r\n00:06:16,971 --> 00:06:19,605\r\nassustar pra caramba\
-        \ alguns macacos.\r\n\r\n145\r\n00:06:23,144 --> 00:06:25,811\r\nTem certeza\
-        \ que esta personalidade\r\nde mariposa n\xE3o ser\xE1 atra\xEDda\r\n\r\n\
-        146\r\n00:06:25,813 --> 00:06:28,564\r\npara esse fogo ardente que sou?\r\n\
-        \r\n147\r\n00:06:31,535 --> 00:06:33,786\r\nAbsoluta certeza.\r\n\r\n148\r\
-        \n00:06:33,788 --> 00:06:36,872\r\nBem, nesse caso voc\xEA tem minha permiss\xE3\
-        o\r\n\r\n149\r\n00:06:36,874 --> 00:06:37,957\r\nN\xE3o pedi sua permiss\xE3\
-        o.\r\n\r\n150\r\n00:06:37,959 --> 00:06:39,158\r\nTarde demais. Sem retrucar.\r\
-        \n\r\n151\r\n00:06:41,611 --> 00:06:44,413\r\nN\xE3o, n\xE3o, ou\xE7a. Sheldon\r\
-        \nentendeu errado\r\n\r\n152\r\n00:06:44,415 --> 00:06:45,381\r\nO que eu\
-        \ quis dizer foi,\r\n\r\n153\r\n00:06:45,383 --> 00:06:46,448\r\nse trabalhassemos\
-        \ juntos,\r\n\r\n154\r\n00:06:46,450 --> 00:06:48,117\r\nteria muito de mim\
-        \ para voc\xEA\r\n\r\n155\r\n00:06:48,119 --> 00:06:50,252\r\nn\xE3o ao contr\xE1\
-        rio.\r\n\r\n156\r\n00:06:50,254 --> 00:06:52,722\r\nHoward, se vai mentir\
-        \ para sua esposa,\r\n\r\n157\r\n00:06:52,724 --> 00:06:55,324\r\nN\xE3o comece\
-        \ a frase com\r\n\"O Sheldon entendeu errado\"\r\n\r\n158\r\n00:06:56,877\
-        \ --> 00:06:58,010\r\nIsso te entrega.\r\n\r\n159\r\n00:06:58,012 --> 00:06:59,929\r\
-        \nEnt\xE3o?\r\n\r\n160\r\n00:06:59,931 --> 00:07:01,130\r\nOk, t\xE1 bom.\r\
-        \n\r\n161\r\n00:07:01,132 --> 00:07:02,898\r\nEu disse isso, e acho que \xE9\
-        \ verdade.\r\n\r\n162\r\n00:07:02,900 --> 00:07:05,017\r\nAcho que se trabalhassemos\
-        \ juntos\r\ne morassemos juntos\r\n\r\n163\r\n00:07:05,019 --> 00:07:06,519\r\
-        \nenjoariamos um do outro.\r\n\r\n164\r\n00:07:06,521 --> 00:07:08,104\r\n\
-        \xC9, mas para ser justo\r\nele s\xF3 disse\r\n\r\n165\r\n00:07:08,106 -->\
-        \ 00:07:09,188\r\nsobre ele enjoando de voc\xEA.\r\n\r\n166\r\n00:07:09,190\
-        \ --> 00:07:11,023\r\nPelo amor de Deus, Por qu\xEA?!\r\n\r\n167\r\n00:07:15,212\
-        \ --> 00:07:17,863\r\nDo que exatamente voc\xEA iria enjoar?\r\n\r\n168\r\n\
-        00:07:17,865 --> 00:07:20,015\r\nAs \xFAnicas op\xE7\xF5es dele s\xE3o:\r\n\
-        fingir um ataque do cora\xE7\xE3o\r\n\r\n169\r\n00:07:20,017 --> 00:07:22,384\r\
-        \nou ter um de verdade.\r\n\r\n170\r\n00:07:22,386 --> 00:07:25,654\r\nN\xE3\
-        -n\xE3o \xE9 nada em particular. Eu...\r\n\r\n171\r\n00:07:25,656 --> 00:07:27,823\r\
-        \n\xC9 minha voz? Sou mandona?\r\n\r\n172\r\n00:07:28,960 --> 00:07:31,877\r\
-        \nMeu bra\xE7o est\xE1 dormente.\r\n\r\n173\r\n00:07:32,796 --> 00:07:35,781\r\
-        \nAcertou em cheio.\r\n\r\n174\r\n00:07:35,783 --> 00:07:39,385\r\nEsse \xE9\
-        \ o bra\xE7o errado para um\r\nataque do cora\xE7\xE3o, idiota.\r\n\r\n175\r\
-        \n00:07:41,221 --> 00:07:44,356\r\nMeu ponto \xE9, eu tenho certeza que h\xE1\
-        \r\ncoisas sobre mim\r\n\r\n176\r\n00:07:44,358 --> 00:07:46,642\r\nque te\
-        \ deixariam louca se tivesse\r\nque lidar\r\n\r\n177\r\n00:07:46,644 --> 00:07:48,394\r\
-        \ncom elas o dia todo.\r\n\r\n178\r\n00:07:48,396 --> 00:07:50,596\r\nComo\
-        \ me olhar nos olhos e mentir?\r\n\r\n179\r\n00:07:50,598 --> 00:07:52,148\r\
-        \nOh,  bem, qual \xE9, eu s\xF3...\r\n\r\n180\r\n00:07:52,150 --> 00:07:55,401\r\
-        \nPara onde eu devo olhar quando\r\nminto para voc\xEA?\r\n\r\n181\r\n00:07:55,403\
-        \ --> 00:07:57,753\r\nAche outro lugar para passar a noite.\r\n\r\n182\r\n\
-        00:07:57,755 --> 00:07:59,905\r\nOh, Bernie...\r\n\r\n183\r\n00:08:06,863\
-        \ --> 00:08:10,466\r\nSe isso te fazer sentir melhor,\r\nAmy e eu estamos\
-        \ bem.\r\n\r\n184\r\n00:08:13,069 --> 00:08:15,237\r\nDigo, muito bem.\r\n\
-        \r\n185\r\n00:08:17,474 --> 00:08:19,842\r\nEnt\xE3o, como foi a festa do\
-        \ pijama?\r\n\r\n186\r\n00:08:19,844 --> 00:08:23,729\r\nPularam na cama e\
-        \ cantaram com\r\nescovas de cabelo ?\r\n\r\n187\r\n00:08:23,731 --> 00:08:25,931\r\
-        \nN\xE3o foi uma festa do pijama.\r\n\r\n188\r\n00:08:25,933 --> 00:08:28,434\r\
-        \nFoi s\xF3 um casal de colegas, jogando\r\nconversa fora, rindo,\r\n\r\n\
-        189\r\n00:08:28,436 --> 00:08:31,520\r\ncomendo biscoitos e assistindo\r\n\
-        A Princesa Prometida\r\n\r\n190\r\n00:08:33,073 --> 00:08:34,607\r\nPor favor,\
-        \ parem de falar.\r\n\r\n191\r\n00:08:36,243 --> 00:08:38,861\r\nComo desejar.\r\
-        \n\r\n192\r\n00:08:42,666 --> 00:08:44,733\r\nSabe, Sheldon, nada disso\r\n\
-        teria acontecido\r\n\r\n193\r\n00:08:44,735 --> 00:08:46,202\r\nse eu n\xE3\
-        o tivesse tentado\r\nte ajudar\r\n\r\n194\r\n00:08:46,204 --> 00:08:48,787\r\
-        \ntamb\xE9m n\xE3o teria acontecido\r\n\r\n195\r\n00:08:48,789 --> 00:08:50,289\r\
-        \nse, e em um universo primitivo\r\n\r\n196\r\n00:08:50,291 --> 00:08:53,792\r\
-        \nhidrog\xEAnio fosse um pouco mais comum\r\nou um pouco menos.\r\n\r\n197\r\
-        \n00:08:53,794 --> 00:08:56,278\r\n\xC9 divertido. Sua vez.\r\n\r\n198\r\n\
-        00:08:57,264 --> 00:08:58,597\r\nCavalheiros. Ei, Amy.\r\n\r\n199\r\n00:08:58,599\
-        \ --> 00:09:00,282\r\nOl\xE1.\r\n\r\n200\r\n00:09:00,284 --> 00:09:01,684\r\
-        \nIsso foi um pouco frio.\r\n\r\n201\r\n00:09:01,686 --> 00:09:04,353\r\n\
-        -Voc\xEAs dois est\xE3o bem?\r\n-Sim, estamos.\r\n\r\n202\r\n00:09:04,355\
-        \ --> 00:09:05,771\r\nComo Howard aconselhou,\r\n\r\n203\r\n00:09:05,773 -->\
-        \ 00:09:07,973\r\nela est\xE1 apenas respeitando\r\nnossos limites profissionais.\r\
-        \n\r\n204\r\n00:09:07,975 --> 00:09:10,543\r\nInteligente. Pegar\r\nconselhos\
-        \ de um homem\r\n\r\n205\r\n00:09:10,545 --> 00:09:12,962\r\nque passou a\
-        \ noite passada\r\ntran\xE7ando o cabelo do Raj.\r\n\r\n206\r\n00:09:15,431\
-        \ --> 00:09:18,450\r\nBom argumento.\r\n\r\n207\r\n00:09:18,452 --> 00:09:20,653\r\
-        \nEstava preocupado por nada.\r\n\r\n208\r\n00:09:20,655 --> 00:09:24,156\r\
-        \nOlhe para ela, desejando\r\nestar aqui, na mesa legal.\r\n\r\n209\r\n00:09:26,576\
-        \ --> 00:09:30,629\r\nN\xE3o se preocupe, pequena mariposa.\r\nA chama vai\
-        \ chegar at\xE9 voc\xEA.\r\n\r\n210\r\n00:09:34,569 --> 00:09:37,058\r\nSe\
-        \ a Bernadette n\xE3o\r\nligar e te perdoar,\r\n\r\n211\r\n00:09:37,059 -->\
-        \ 00:09:39,264\r\no que acha de comida mexicana\r\npara o jantar de hoje?\r\
-        \n\r\n212\r\n00:09:39,674 --> 00:09:41,840\r\nEu n\xE3o sei.\r\nParece pesada.\r\
-        \n\r\n213\r\n00:09:41,842 --> 00:09:44,810\r\nPorque voc\xEA sempre\r\nenche\
-        \ com fritas.\r\n\r\n214\r\n00:09:44,812 --> 00:09:47,479\r\nE esse \xE9 o\
-        \ Dr. Gunderson\r\nde Estocolmo.\r\n\r\n215\r\n00:09:47,481 --> 00:09:49,031\r\
-        \nAh, Su\xE9cia.\r\n\r\n216\r\n00:09:49,033 --> 00:09:50,733\r\nLar do meu\
-        \ Muppet favorito\r\n\r\n217\r\n00:09:50,735 --> 00:09:53,719\r\ne, segunda\
-        \ alm\xF4ndega favorita.\r\n\r\n218\r\n00:09:57,140 --> 00:10:01,343\r\nTudo\
-        \ bem, a reputa\xE7\xE3o n\xF3rdica pela\r\nfalta de humor \xE9 bem fundada.\r\
-        \n\r\n219\r\n00:10:02,812 --> 00:10:05,581\r\nCara, o nome dele \xE9 Gunderson\r\
-        \nou No-Funderson?\r\n\r\n220\r\n00:10:06,833 --> 00:10:09,068\r\nAonde estamos\
-        \ indo com isso, Dr. Cooper?\r\n\r\n221\r\n00:10:09,070 --> 00:10:13,555\r\
-        \nOh, por favor, sou seu namorado.\r\nVoc\xEA me chama de Sheldon.\r\n\r\n\
-        222\r\n00:10:13,557 --> 00:10:16,158\r\nIsso mesmo, estou em uma rela\xE7\xE3\
-        o\r\nmenino-menina\r\n\r\n223\r\n00:10:16,160 --> 00:10:18,928\r\ncom esse\
-        \ fofo pedacinho de l\xE3.\r\n\r\n224\r\n00:10:18,930 --> 00:10:20,045\r\n\
-        Sheldon...\r\n\r\n225\r\n00:10:20,047 --> 00:10:21,764\r\n\xC9 uma rela\xE7\
-        \xE3o f\xEDsica, tamb\xE9m.\r\n\r\n226\r\n00:10:21,766 --> 00:10:25,517\r\n\
-        Segurar m\xE3os, abra\xE7os...\r\nmesmo em dias quentes.\r\n\r\n227\r\n00:10:28,171\
-        \ --> 00:10:29,538\r\nTudo bem, aqui est\xE1 mais uma.\r\n\r\n228\r\n00:10:29,540\
-        \ --> 00:10:32,775\r\nAparentemente, nos chutamos\r\npor debaixo da mesa.\r\
-        \n\r\n229\r\n00:10:34,477 --> 00:10:37,012\r\nGosta quando eu fa\xE7o em voc\xEA\
-        ?\r\n\r\n230\r\n00:10:38,398 --> 00:10:41,066\r\nN\xE3o, n\xE3o muito n\xE9\
-        ?\r\n\r\n231\r\n00:10:53,498 --> 00:10:55,883\r\nSujeito de teste D7,\r\n\r\
-        \n232\r\n00:10:55,885 --> 00:10:58,535\r\ntamb\xE9m conhecida como Betsy,\r\
-        \nestudo de resposta de medo.\r\n\r\n233\r\n00:10:58,537 --> 00:11:02,389\r\
-        \nPrimeira imagem: Um franc\xEAs em\r\numa bicicleta carregando baguetes.\r\
-        \n\r\n234\r\n00:11:06,429 --> 00:11:08,045\r\nSem rea\xE7\xE3o vis\xEDvel.\r\
-        \n\r\n235\r\n00:11:08,397 --> 00:11:10,764\r\nSegunda imagem: Uma tuba\r\n\
-        \r\n236\r\n00:11:13,234 --> 00:11:14,735\r\nAinda sem rea\xE7\xE3o.\r\n\r\n\
-        237\r\n00:11:14,737 --> 00:11:17,371\r\nTudo bem, vamos\r\nagitar as coisas.\r\
-        \n\r\n238\r\n00:11:17,373 --> 00:11:20,090\r\nTerceira imagem: Crocodilo com\
-        \ a\r\nboca cheia de macacos.\r\n\r\n239\r\n00:11:24,078 --> 00:11:27,131\r\
-        \nAgora sim.\r\n\r\n240\r\n00:11:27,133 --> 00:11:29,066\r\nDra. Fowler?\r\
-        \n\r\n241\r\n00:11:29,068 --> 00:11:31,135\r\nO que voc\xEA quer, Sheldon?\r\
-        \n\r\n242\r\n00:11:31,137 --> 00:11:33,220\r\nBem, terminei meu trabalho,\
-        \ ent\xE3o..\r\n\r\n243\r\n00:11:34,423 --> 00:11:36,357\r\nOh, desculpa,\
-        \ desculpa.\r\n\r\n244\r\n00:11:36,359 --> 00:11:39,092\r\nDesculpa.\r\n\r\
-        \n245\r\n00:11:39,094 --> 00:11:40,527\r\nMelhor?\r\n\r\n246\r\n00:11:40,529\
-        \ --> 00:11:43,897\r\nOh, baguetes. Eu\r\ngosto de baguetes.\r\n\r\n247\r\n\
-        00:11:43,899 --> 00:11:46,099\r\nO que est\xE1 fazendo exatamente?\r\n\r\n\
-        248\r\n00:11:46,101 --> 00:11:48,535\r\nDeterminando n\xEDveis de medo\r\n\
-        em macacos-pregos\r\n\r\n249\r\n00:11:48,537 --> 00:11:50,871\r\nmedindo as\
-        \ respostas \xE0 estimulos visuais.\r\n\r\n250\r\n00:11:50,873 --> 00:11:52,339\r\
-        \nEnt\xE3o, passando o tempo.\r\n\r\n251\r\n00:11:54,909 --> 00:11:57,578\r\
-        \nComo eu dizia, terminei meu trabalho\r\nmas Leonard n\xE3o.\r\n\r\n252\r\
-        \n00:11:57,580 --> 00:12:00,214\r\nEnt\xE3o boas not\xEDcias, voc\xEA tem\r\
-        \nque me levar para casa.\r\n\r\n253\r\n00:12:00,216 --> 00:12:01,248\r\n\
-        Jogue as cartas certas,\r\n\r\n254\r\n00:12:01,250 --> 00:12:05,836\r\ne eu\
-        \ deixo voc\xEA me levar at\xE9\r\naonde os \xF4nibus estacionam \xE0 noite\r\
-        \n\r\n255\r\n00:12:05,838 --> 00:12:08,756\r\nN\xE3o posso sair agora, Sheldon.\r\
-        \nEstou muito ocupada.\r\n\r\n256\r\n00:12:08,758 --> 00:12:12,576\r\nE por\
-        \ que eu faria um favor a voc\xEA,\r\ndepois daquilo na cafeteria?\r\n\r\n\
-        257\r\n00:12:12,578 --> 00:12:15,128\r\nQuarta imagem: Jib\xF3ia.\r\n\r\n\
-        258\r\n00:12:18,967 --> 00:12:21,935\r\nDo que diabos voc\xEA est\xE1 falando?\r\
-        \n\r\n259\r\n00:12:21,937 --> 00:12:25,305\r\nMeu comportamento na\r\ncafeteria\
-        \ foi encantador.\r\n\r\n260\r\n00:12:25,307 --> 00:12:27,491\r\nTalvez seu\
-        \ amigo\r\nGunderson precisa\r\n\r\n261\r\n00:12:27,493 --> 00:12:32,379\r\
-        \nir at\xE9 na IKEA e comprar\r\nalgum senso de humor.\r\n\r\n262\r\n00:12:32,381\
-        \ --> 00:12:34,364\r\nVoc\xEA me envergonhou\r\nna frente dos meus colegas.\r\
-        \n\r\n263\r\n00:12:34,366 --> 00:12:35,982\r\nNo meu primeiro dia aqui.\r\n\
-        \r\n264\r\n00:12:36,684 --> 00:12:39,186\r\nQuarta imagem: gatinho em\r\n\
-        uma x\xEDcara de ch\xE1.\r\n\r\n265\r\n00:12:44,959 --> 00:12:47,447\r\nEnvergonhei\
-        \ voc\xEA?\r\n\r\n266\r\n00:12:47,448 --> 00:12:50,431\r\nQuer saber? N\xE3\
-        o tenho tempo para isso.\r\nAche outro jeito de ir para casa.\r\n\r\n267\r\
-        \n00:12:50,433 --> 00:12:53,450\r\nEstou come\xE7ando a achar\r\nque voc\xEA\
-        \ est\xE1 com raiva de mim.\r\n\r\n268\r\n00:12:53,452 --> 00:12:55,001\r\n\
-        S\xE9rio? O que te faz pensar isso?\r\n\r\n269\r\n00:12:55,003 --> 00:12:57,170\r\
-        \nCertas coisas, na verdade. Seu tom\r\nde voz, linguaguem corporal.\r\n\r\
-        \n270\r\n00:12:57,172 --> 00:12:58,806\r\n-Sai fora!\r\n-E agora isso.\r\n\
-        \r\n271\r\n00:13:00,675 --> 00:13:03,310\r\nSexta imagem: Mulher dando a luz.\r\
-        \n\r\n272\r\n00:13:12,570 --> 00:13:14,187\r\nS\xE3o 9 horas. Onde estava?\r\
-        \n\r\n273\r\n00:13:15,230 --> 00:13:17,634\r\nTive que pegar o \xF4nibus.\r\
-        \n\r\n274\r\n00:13:17,847 --> 00:13:20,089\r\nDormi e perdi a parada.\r\n\r\
-        \n275\r\n00:13:20,846 --> 00:13:22,646\r\nOh, n\xE3o.\r\n\r\n276\r\n00:13:22,648\
-        \ --> 00:13:26,153\r\nVoc\xEA sabia que Los Angeles\r\ntem um pequeno Sri\
-        \ Lanka?\r\n\r\n277\r\n00:13:27,985 --> 00:13:29,229\r\nN\xE3o, n\xE3o sabia.\r\
-        \n\r\n278\r\n00:13:29,230 --> 00:13:31,171\r\nBem, eu sei... agora\r\n\r\n\
-        279\r\n00:13:32,025 --> 00:13:33,727\r\nEles s\xE3o pessoas ador\xE1veis.\r\
-        \n\r\n280\r\n00:13:33,932 --> 00:13:37,600\r\nEmbora terr\xEDveis quando voc\xEA\
-        \r\nacorda cara-a-cara com eles.\r\n\r\n281\r\n00:13:38,379 --> 00:13:41,632\r\
-        \nSe estiver com fome, trouxe\r\ncarneiro e leite de coco.\r\n\r\n282\r\n\
-        00:13:41,634 --> 00:13:43,617\r\nPor que trouxe isso?\r\nVoc\xEA odeia carneiro.\r\
-        \n\r\n283\r\n00:13:43,619 --> 00:13:45,686\r\nEstava pedindo por dire\xE7\xF5\
-        es.\r\n\r\n284\r\n00:13:45,688 --> 00:13:49,206\r\nAparentemente, houve um\r\
-        \nproblema de comunica\xE7\xE3o.\r\n\r\n285\r\n00:13:49,208 --> 00:13:52,326\r\
-        \nAchei que Amy iria te dar carona.\r\n\r\n286\r\n00:13:52,328 --> 00:13:55,779\r\
-        \nTamb\xE9m achei. Mas ela\r\nanda muito estranha.\r\n\r\n287\r\n00:13:55,781\
-        \ --> 00:13:58,782\r\nEu estava discutindo isso com\r\num cara do Sri Lanka\
-        \ no \xF4nibus,\r\n\r\n288\r\n00:13:59,543 --> 00:14:01,864\r\ne ele deu a\
-        \ hip\xF3tese\r\nque um tigre\r\n\r\n289\r\n00:14:02,031 --> 00:14:04,214\r\
-        \npode ter invadido a alma dela.\r\n\r\n290\r\n00:14:05,907 --> 00:14:08,342\r\
-        \nMas acho que ele est\xE1 apenas\r\ntentando ajudar o irm\xE3o\r\n\r\n291\r\
-        \n00:14:08,344 --> 00:14:11,345\r\nno neg\xF3cio de m\xE9dico dele.\r\n\r\n\
-        292\r\n00:14:15,112 --> 00:14:17,681\r\nSheldon, o que aconteceu\r\nentre\
-        \ voc\xEA e a Amy?\r\n\r\n293\r\n00:14:17,975 --> 00:14:20,642\r\nVoc\xEA\
-        \ pode acreditar que ela falou\r\nque eu envergonhei ela?\r\n\r\n294\r\n00:14:21,238\
-        \ --> 00:14:22,265\r\nSim.\r\n\r\n295\r\n00:14:22,658 --> 00:14:25,442\r\n\
-        Mas voc\xEA ainda n\xE3o\r\nouviu os detalhes.\r\n\r\n296\r\n00:14:25,444\
-        \ --> 00:14:27,477\r\nSheldon...\r\n\r\n297\r\n00:14:29,247 --> 00:14:31,865\r\
-        \nConhen\xE7o voc\xEA h\xE1 muito tempo\r\n\r\n298\r\n00:14:31,867 --> 00:14:37,154\r\
-        \ne vou te dizer isso com\r\ntodo o amor poss\xEDvel.\r\n\r\n299\r\n00:14:37,156\
-        \ --> 00:14:39,606\r\nAmy est\xE1 certa e voc\xEA errado.\r\n\r\n300\r\n00:14:40,458\
-        \ --> 00:14:43,076\r\n- Mas voc\xEA nem...\r\n- N\xE3o importa.\r\n\r\n301\r\
-        \n00:14:43,078 --> 00:14:45,696\r\n-Mas, em minha defesa...\r\n-N\xE3o importa.\r\
-        \n\r\n302\r\n00:14:45,698 --> 00:14:47,931\r\nVoc\xEA n\xE3o est\xE1 escutando\
-        \ o\r\nmeu lado da hist\xF3ria.\r\n\r\n303\r\n00:14:47,933 --> 00:14:50,267\r\
-        \nTudo bem Sheldon, qual seu\r\nlado da hist\xF3ria?\r\n\r\n304\r\n00:14:51,327\
-        \ --> 00:14:52,201\r\nBem...\r\n\r\n305\r\n00:14:52,287 --> 00:14:54,269\r\
-        \nN\xE3o, vou ficar com Amy nessa.\r\n\r\n306\r\n00:15:00,629 --> 00:15:03,113\r\
-        \n-O camar\xE3o estava picante.\r\n-Quer um anti\xE1cido?\r\n\r\n307\r\n00:15:03,115\
-        \ --> 00:15:04,431\r\nVoc\xEA tem o de frutas tropicais?\r\n\r\n308\r\n00:15:04,433\
-        \ --> 00:15:06,950\r\nN\xE3o, se eu comprar aqueles,\r\ncomeria como doce.\r\
-        \n\r\n309\r\n00:15:07,634 --> 00:15:11,104\r\nNem me conte. Eu juro que uma\
-        \ vez\r\neu caguei um bast\xE3o de giz.\r\n\r\n310\r\n00:15:13,141 --> 00:15:15,359\r\
-        \n-Eu atendo\r\n-Obrigado.\r\n\r\n311\r\n00:15:17,278 --> 00:15:19,529\r\n\
-        - Oi.\r\n- Oh, oi.\r\n\r\n312\r\n00:15:19,531 --> 00:15:21,698\r\nTalvez eu\
-        \ tenha exagerado.\r\n\r\n313\r\n00:15:21,700 --> 00:15:25,619\r\nBem, eu\
-        \ tamb\xE9m n\xE3o lidei muito bem.\r\n\r\n314\r\n00:15:25,621 --> 00:15:30,090\r\
-        \n\xC0s vezes, acho que voc\xEA prefere passar\r\nmais tempo com os amigos\
-        \ do que comigo.\r\n\r\n315\r\n00:15:30,092 --> 00:15:31,909\r\n-N\xE3o \xE9\
-        \ verdade.\r\n-N\xE3o \xE9?\r\n\r\n316\r\n00:15:31,911 --> 00:15:33,594\r\n\
-        Voc\xEAs passam o dia todo\r\njuntos no trabalho,\r\n\r\n317\r\n00:15:33,596\
-        \ --> 00:15:37,230\r\ne depois se divertem jogando,\r\nindo \xE0 loja de quadrinhos.\r\
-        \n\r\n318\r\n00:15:37,232 --> 00:15:39,850\r\nNa semana passada, voc\xEAs\
-        \ dois\r\nfizeram massagem de casal.\r\n\r\n319\r\n00:15:42,487 --> 00:15:45,868\r\
-        \nEnt\xE3o, quando disse que n\xE3o\r\nqueria gastar tanto tempo comigo,\r\
-        \n\r\n320\r\n00:15:46,074 --> 00:15:48,347\r\nme magoou muito.\r\n\r\n321\r\
-        \n00:15:49,645 --> 00:15:52,112\r\nSim, eu entendo. Sinto muito.\r\n\r\n322\r\
-        \n00:15:52,114 --> 00:15:54,865\r\nA partir de amanh\xE3,\r\nirei mudar isso.\r\
-        \n\r\n323\r\n00:15:54,867 --> 00:15:57,985\r\nTempo com voc\xEA \xE9 a\r\n\
-        prioridade n\xFAmero um.\r\n\r\n324\r\n00:15:59,989 --> 00:16:01,688\r\nPor\
-        \ que amanh\xE3?\r\n\r\n325\r\n00:16:03,190 --> 00:16:07,377\r\nBem, estamos\
-        \ perto de finalizar\r\no novo jogo do Batman.\r\n\r\n326\r\n00:16:08,513\
-        \ --> 00:16:11,665\r\n\xC9 irado.\r\n\r\n327\r\n00:16:13,968 --> 00:16:16,003\r\
-        \nVoc\xEA deveria ir atr\xE1s dela.\r\n\r\n328\r\n00:16:16,701 --> 00:16:20,619\r\
-        \n-Deveria ir atr\xE1s de voc\xEA?\r\n-N\xE3o!\r\n\r\n329\r\n00:16:22,237\
-        \ --> 00:16:24,739\r\nObrigado por me colocar\r\nem problemas.\r\n\r\n330\r\
-        \n00:16:27,353 --> 00:16:32,009\r\nAmy... Amy... Amy\r\n\r\n331\r\n00:16:34,722\
-        \ --> 00:16:37,324\r\nSheldon, o que est\xE1 fazendo\r\naqui t\xE3o tarde.\r\
-        \n\r\n332\r\n00:16:37,326 --> 00:16:41,445\r\nN\xE3o consegui dormir. Pois\
-        \ continuo\r\npensando no que aconteceu mais cedo.\r\n\r\n333\r\n00:16:42,246\
-        \ --> 00:16:45,615\r\nAl\xE9m do mais, tive uma\r\nlonga soneca no \xF4nibus.\r\
-        \n\r\n334\r\n00:16:46,751 --> 00:16:50,787\r\nFalando nisso, voc\xEA quer\
-        \ um pouco\r\nde carneiro e leite de coco?\r\n\r\n335\r\n00:16:50,789 -->\
-        \ 00:16:54,624\r\n-N\xE3o\r\n-Bem, n\xE3o posso jogar isso fora.\r\n\r\n336\r\
-        \n00:16:54,626 --> 00:16:57,077\r\nO que voc\xEA quer?\r\n\r\n337\r\n00:16:57,079\
-        \ --> 00:17:00,647\r\nAmy, isso n\xE3o \xE9 facil de dizer.\r\n\r\n338\r\n\
-        00:17:01,766 --> 00:17:04,751\r\nTodos relacionamentos s\xE3o dif\xEDceis,\r\
-        \n\r\n339\r\n00:17:04,753 --> 00:17:07,688\r\nmas ainda mais quando\r\nvoc\xEA\
-        \ est\xE1 em um\r\n\r\n340\r\n00:17:07,690 --> 00:17:11,858\r\ncom uma pessoa\
-        \ que reluta \xE0s\r\nintera\xE7\xF5es sociais do dia a dia\r\n\r\n341\r\n\
-        00:17:11,860 --> 00:17:17,664\r\nE sinceramente, que pode ser\r\nconsiderado\
-        \ pelos outros como esquisit\xE3o.\r\n\r\n342\r\n00:17:17,666 --> 00:17:19,649\r\
-        \nSheldon...\r\n\r\n343\r\n00:17:19,651 --> 00:17:21,651\r\nVoc\xEA n\xE3\
-        o \xE9 um esquisit\xE3o.\r\n\r\n344\r\n00:17:21,653 --> 00:17:24,271\r\nEu\
-        \ n\xE3o estava falando sobre mim.\r\n\r\n345\r\n00:17:26,307 --> 00:17:30,077\r\
-        \nDigo, n\xE3o sei o que\r\nmais posso fazer.\r\n\r\n346\r\n00:17:30,079 -->\
-        \ 00:17:32,295\r\nVoc\xEA sabe, me apresentando\r\ncomo seu namorado.\r\n\r\
-        \n347\r\n00:17:32,297 --> 00:17:35,549\r\nDando a oportunidade de\r\nme deixar\
-        \ em casa.\r\n\r\n348\r\n00:17:35,551 --> 00:17:37,617\r\nQuebrando o gelo\
-        \ com seus colegas\r\n\r\n349\r\n00:17:37,619 --> 00:17:40,787\r\nusando humor\
-        \ \xE9tnico,\r\no tipo de humor mais engra\xE7ado.\r\n\r\n350\r\n00:17:42,557\
-        \ --> 00:17:44,224\r\nO que quer dizer?\r\n\r\n351\r\n00:17:44,226 --> 00:17:46,626\r\
-        \nQuero dizer que somos um casal.\r\n\r\n352\r\n00:17:46,628 --> 00:17:48,361\r\
-        \nE...\r\n\r\n353\r\n00:17:48,363 --> 00:17:50,480\r\nGosto de voc\xEA pelo\r\
-        \no que voc\xEA \xE9.\r\n\r\n354\r\n00:17:50,482 --> 00:17:52,365\r\nManias\
-        \ e tudo.\r\n\r\n355\r\n00:17:54,102 --> 00:17:58,188\r\n- Gosto de voc\xEA\
-        \ tamb\xE9m.\r\n- Bem, esperava que sim.\r\n\r\n356\r\n00:17:58,190 --> 00:18:00,323\r\
-        \nN\xE3o vejo mais ningu\xE9m\r\nbatendo nesta porta\r\n\r\n357\r\n00:18:00,325\
-        \ --> 00:18:02,134\r\naguentando essa\r\n sua falta de senso.\r\n\r\n358\r\
-        \n00:18:06,981 --> 00:18:09,583\r\nNem mesmo um 'tchau'?\r\n\r\n359\r\n00:18:09,585\
-        \ --> 00:18:13,620\r\nEsse \xE9 o tipo de coisa que faz\r\npessoas te acharem\
-        \ esquisita.\r\n\r\n360\r\n00:18:13,622 --> 00:18:15,422\r\nPobre garota.\r\
-        \n\r\n361\r\n00:18:15,424 --> 00:18:17,507\r\nEla apenas n\xE3o enxerga isso.\r\
-        \n\r\n362\r\n00:18:27,608 --> 00:18:28,691\r\nN\xE3o irei perdoar Howard.\r\
-        \n\r\n363\r\n00:18:28,693 --> 00:18:30,342\r\nEle pode vir me\r\nimplorar\
-        \ de joelhos.\r\n\r\n364\r\n00:18:30,344 --> 00:18:31,694\r\nSheldon tamb\xE9\
-        m.\r\n\r\n365\r\n00:18:31,696 --> 00:18:33,829\r\nSe eu v\xEA-lo no trabalho,\r\
-        \nEu s\xF3 vou ignor\xE1-lo.\r\n\r\n366\r\n00:18:33,830 --> 00:18:35,415\r\
-        \nTudo bem, n\xE3o se preocupem.\r\nEu conversei com Leonard.\r\n\r\n367\r\
-        \n00:18:35,416 --> 00:18:38,119\r\nEle vai falar com os meninos\r\ne coloc\xE1\
-        -los na linha.\r\n\r\n368\r\n00:18:38,757 --> 00:18:39,938\r\nO laser est\xE1\
-        \ aquecido.\r\n\r\n369\r\n00:18:40,896 --> 00:18:41,705\r\nDisparar!\r\n\r\
-        \n370\r\n00:18:43,775 --> 00:18:45,552\r\n@EquipeLi4rs\r\n\r\n"
+      string: !!binary |
+        A+cAAMTvp6uqzfs1MZvyxJwNE/GFnNgHF3/EmeDFG51OaneaA3WyECVv7q0j/4tBLkXdjNXl+2pp
+        lp4N6PEXJlr3FQi5V7IfJrldSq+wIz+O7JXyIluFKgwDxUWcpRC4IBeBsLV/vH1yuX96AoH29wq0
+        6HcWqFnqZqz2h1k2mhWolL1hgbu3phBjGfjU17oBwQUk4yY9XEzwHYGwo3ksagioxuyP32MFQuAF
+        ge3Fduhd+RHFPnmekwR+kucPYHmxOb2PC8gP8v9nAZ4bMykG/cKwNNMISgXeSRVQLDDbOghXNVu3
+        k+7mXhZsnenpqxma5RsCpp4+RdNsNJW1IcfKuqp50t+QHD3g/98AAw==
     headers:
-      Accept-Ranges:
-      - bytes
+      Age:
+      - '113'
+      CF-Cache-Status:
+      - HIT
+      CF-RAY:
+      - 88149cce6de899f3-CDG
+      Cache-Control:
+      - public, max-age=7200
       Connection:
       - keep-alive
-      Content-Disposition:
-      - attachment; filename=cb23a63029838e26c2bf7603477bca9f.srt
-      Content-Length:
-      - '28113'
+      Content-Encoding:
+      - br
       Content-Type:
-      - text/plain
+      - application/json; charset=utf-8
       Date:
-      - Sat, 09 May 2020 16:23:19 GMT
-      ETag:
-      - '"52bd7c65-6dd1"'
+      - Thu, 09 May 2024 20:59:18 GMT
       Last-Modified:
-      - Fri, 27 Dec 2013 13:11:01 GMT
+      - Thu, 09 May 2024 20:57:25 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=tmRzQ1wzF41B4zO9CNoxG8p0Z%2Bub%2Br%2B7R3RR0jbhhD1%2BEZ%2FWjobX9SdBdN8L8exZcPP0vmBD%2FDGujxS%2FVu8fdlW%2FGFpmPqYhzEfGv4zhMj%2FDBm%2F1%2FpmyOOSrlVXF0brLoU0prw%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
-      - nginx/1.6.0
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      alt-svc:
+      - h3=":443"; ma=86400
+      vary:
+      - Accept-Encoding
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.1
+      accept:
+      - application/json
+    method: GET
+    uri: https://api.gestdown.info/subtitles/download/a295515c-a460-44ea-9ba8-8d37bcb9b5a6
+  response:
+    body:
+      string: "\uFEFF1\r\n00:00:05,532 --> 00:00:07,400\r\nAwkward silence.\r\n\r\n2\r\n00:00:07,402
+        --> 00:00:08,684\r\nSheldon on his phone.\r\n\r\n3\r\n00:00:08,686 --> 00:00:09,719\r\nNo
+        touching.\r\n\r\n4\r\n00:00:09,721 --> 00:00:13,122\r\nSomebody's having date
+        night.\r\n\r\n5\r\n00:00:13,124 --> 00:00:15,208\r\nIt's actually steamier\r\nthan
+        it looks.\r\n\r\n6\r\n00:00:15,210 --> 00:00:18,077\r\nSheldon's looking up
+        the phallic\r\nsymbolism of root vegetables\r\n\r\n7\r\n00:00:18,079 --> 00:00:19,796\r\nin
+        Renaissance paintings.\r\n\r\n8\r\n00:00:19,798 --> 00:00:21,447\r\nOh, no,
+        I got bored\r\nwith that.\r\n\r\n9\r\n00:00:21,449 --> 00:00:25,418\r\nI'm
+        just browsing\r\ncuticle scissors on Amazon.\r\n\r\n10\r\n00:00:26,370 -->
+        00:00:28,004\r\nHow do you\r\nnot tear off his clothes\r\n\r\n11\r\n00:00:28,006
+        --> 00:00:30,556\r\nand take him right here\r\non this table?\r\n\r\n12\r\n00:00:30,558
+        --> 00:00:33,259\r\nIf you do that, I'll scream.\r\n\r\n13\r\n00:00:36,430
+        --> 00:00:38,631\r\nSheldon, I have some\r\nexciting news to tell you.\r\n\r\n14\r\n00:00:38,633
+        --> 00:00:39,782\r\nThat makes two of us.\r\n\r\n15\r\n00:00:39,784 --> 00:00:41,267\r\nMy
+        new cuticle scissors\r\nwill be here\r\n\r\n16\r\n00:00:41,269 --> 00:00:43,152\r\nin
+        one to two business days.\r\n\r\n17\r\n00:00:43,154 --> 00:00:45,721\r\nCome
+        on, one.\r\n\r\n18\r\n00:00:45,723 --> 00:00:47,824\r\nI've been invited to\r\nconsult
+        on an experiment\r\n\r\n19\r\n00:00:47,826 --> 00:00:50,193\r\nat your university\r\nfor
+        a few months.\r\n\r\n20\r\n00:00:50,195 --> 00:00:51,327\r\nIsn't that great?\r\n\r\n21\r\n00:00:51,329
+        --> 00:00:52,912\r\nWe could have lunch together.\r\n\r\n22\r\n00:00:52,914
+        --> 00:00:54,314\r\nWe could carpool.\r\n\r\n23\r\n00:00:54,316 --> 00:00:56,466\r\nYou
+        know, riding with Leonard\r\n\r\n24\r\n00:00:56,468 --> 00:00:58,735\r\nhas
+        gotten\r\na little tedious lately.\r\n\r\n25\r\n00:00:58,737 --> 00:01:02,205\r\nTh-The
+        only car game he ever\r\nwants to play is the Quiet Game.\r\n\r\n26\r\n00:01:02,207
+        --> 00:01:03,306\r\nAnd he's terrible at it.\r\n\r\n27\r\n00:01:03,308 -->
+        00:01:05,458\r\nI always win.\r\n\r\n28\r\n00:01:06,844 --> 00:01:08,728\r\nSo,
+        you're okay with this?\r\n\r\n29\r\n00:01:08,730 --> 00:01:10,396\r\nWell,
+        why wouldn't I be?\r\n\r\n30\r\n00:01:10,398 --> 00:01:12,432\r\nWell, this
+        project\r\nwould have us working\r\n\r\n31\r\n00:01:12,434 --> 00:01:14,467\r\nin
+        close proximity\r\nto one another.\r\n\r\n32\r\n00:01:14,469 --> 00:01:15,968\r\nAnd
+        there's the vulgar adage\r\n\r\n33\r\n00:01:15,970 --> 00:01:19,639\r\nthat
+        one should not\r\ndefecate where one eats.\r\n\r\n34\r\n00:01:19,641 --> 00:01:21,974\r\nMy
+        father used to say\r\nthat all the time.\r\n\r\n35\r\n00:01:21,976 --> 00:01:25,161\r\nThat
+        and, um, \"Who does one\r\nhave to orally gratify\r\n\r\n36\r\n00:01:25,163
+        --> 00:01:27,880\r\nto get a drink around here?\"\r\n\r\n37\r\n00:01:29,233
+        --> 00:01:31,718\r\nBut what does that have to do\r\n\r\n38\r\n00:01:31,720
+        --> 00:01:33,636\r\nwith you working\r\nat the university?\r\n\r\n39\r\n00:01:33,638
+        --> 00:01:36,239\r\nSheldon, \"Don't defecate\r\nwhere you eat,\"\r\n\r\n40\r\n00:01:36,241
+        --> 00:01:38,274\r\nmeans don't have a\r\nromantic relationship\r\n\r\n41\r\n00:01:38,276
+        --> 00:01:39,876\r\nin the workplace.\r\n\r\n42\r\n00:01:41,078 --> 00:01:43,062\r\nReally?\r\n\r\n43\r\n00:01:45,766
+        --> 00:01:47,383\r\nYes.\r\n\r\n44\r\n00:01:47,385 --> 00:01:48,468\r\nHuh.\r\n\r\n45\r\n00:01:48,470
+        --> 00:01:50,787\r\nYeah, I always\r\ntook it literally.\r\n\r\n46\r\n00:01:50,789
+        --> 00:01:53,622\r\nThat's why I have never\r\nonce moved my bowels\r\n\r\n47\r\n00:01:53,624
+        --> 00:01:55,992\r\nin this or any restaurant.\r\n\r\n48\r\n00:01:55,994 -->
+        00:01:57,944\r\nHmm.\r\n\r\n49\r\n00:01:57,946 --> 00:01:59,979\r\nI'm relieved
+        that you\r\ndon't have a problem\r\n\r\n50\r\n00:01:59,981 --> 00:02:01,264\r\nwith
+        us working together.\r\n\r\n51\r\n00:02:01,266 --> 00:02:03,516\r\nNot as
+        relieved\r\nas I'm about to be.\r\n\r\n52\r\n00:02:04,518 --> 00:02:06,753\r\nIt's
+        a brave new world,\r\nlittle lady.\r\n\r\n53\r\n00:02:09,189 --> 00:02:12,825\r\n\u266A
+        Our whole universe\r\nwas in a hot, dense state \u266A\r\n\r\n54\r\n00:02:12,827
+        --> 00:02:16,162\r\n\u266A Then nearly 14 billion years\r\nago expansion started...
+        Wait! \u266A\r\n\r\n55\r\n00:02:16,164 --> 00:02:17,813\r\n\u266A The Earth
+        began to cool\r\n\r\n56\r\n00:02:17,815 --> 00:02:20,333\r\n\u266A The autotrophs
+        began to drool,\r\nNeanderthals developed tools \u266A\r\n\r\n57\r\n00:02:20,335
+        --> 00:02:23,002\r\n\u266A We built the Wall\r\n\u266A <i>We built the pyramids</i>
+        \u266A\r\n\r\n58\r\n00:02:23,004 --> 00:02:25,688\r\n\u266A Math, Science,
+        History,\r\nunraveling the mystery \u266A\r\n\r\n59\r\n00:02:25,690 --> 00:02:27,573\r\n\u266A
+        That all started\r\nwith a big bang \u266A\r\n\r\n60\r\n00:02:27,575 --> 00:02:28,341\r\n\u266A
+        <i>Bang!</i> \u266A\r\n\r\n61\r\n00:02:28,342 --> 00:02:32,342\r\n<font color=#00FF00>\u266A
+        The Big Bang Theory 7x05 \u266A</font>\r\n<font color=#00FFFF>The Workplace
+        Proximity</font>\r\nOriginal Air Date on October 17, 2013\r\n\r\n62\r\n00:02:32,367
+        --> 00:02:37,367\r\n== sync, corrected by <font color=#00FF00>elderman</font>
+        ==\r\n<font color=#00FFFF>@elder_man</font>\r\n\r\n63\r\n00:02:37,818 -->
+        00:02:39,385\r\nAre you crazy?\r\n\r\n64\r\n00:02:39,387 --> 00:02:40,436\r\nYou
+        don't want\r\n\r\n65\r\n00:02:40,438 --> 00:02:42,305\r\nyour girlfriend\r\nat
+        work with you.\r\n\r\n66\r\n00:02:42,307 --> 00:02:45,007\r\nHell Clam.\r\n\r\n67\r\n00:02:45,009
+        --> 00:02:46,526\r\nWhy not?\r\n\r\n68\r\n00:02:46,528 --> 00:02:49,112\r\nHairy
+        Fairy.\r\n\r\n69\r\n00:02:49,114 --> 00:02:50,680\r\nI think it could be romantic.\r\n\r\n70\r\n00:02:50,682
+        --> 00:02:52,649\r\nYou know, my parents met\r\nat his place of work.\r\n\r\n71\r\n00:02:52,651
+        --> 00:02:55,685\r\nYour father's a gynecologist.\r\n\r\n72\r\n00:02:55,687
+        --> 00:02:56,869\r\nI know.\r\n\r\n73\r\n00:02:56,871 --> 00:02:59,822\r\nWhat
+        started as a pap smear\r\nturned into a date.\r\n\r\n74\r\n00:03:01,292 -->
+        00:03:02,675\r\nWhich turned\r\ninto her working there,\r\n\r\n75\r\n00:03:02,677
+        --> 00:03:04,644\r\nwhich turned into marriage,\r\nwhich then turned into
+        hatred,\r\n\r\n76\r\n00:03:04,646 --> 00:03:07,196\r\nwhich continues to this
+        day.\r\n\r\n77\r\n00:03:07,298 --> 00:03:10,066\r\nTwo-Eyed Cyclops.\r\n\r\n78\r\n00:03:10,068
+        --> 00:03:12,902\r\nWould you please tell him\r\nthis isn't a good idea?\r\n\r\n79\r\n00:03:12,904
+        --> 00:03:14,270\r\nNo, no, I think it'll be great.\r\n\r\n80\r\n00:03:14,272
+        --> 00:03:15,888\r\nMaybe next time he gets\r\nconjunctivitis at work,\r\n\r\n81\r\n00:03:15,890
+        --> 00:03:19,942\r\nshe can hold his head and try\r\nto put the drops in his
+        eyes.\r\n\r\n82\r\n00:03:19,944 --> 00:03:22,428\r\nGiant baby.\r\n\r\n83\r\n00:03:22,430
+        --> 00:03:24,280\r\nThat's a Raging Ogre.\r\n\r\n84\r\n00:03:24,282 --> 00:03:26,516\r\nYeah,
+        I know.\r\n\r\n85\r\n00:03:28,519 --> 00:03:30,686\r\nI'm just saying, I'd
+        never want\r\nto work with Bernadette.\r\n\r\n86\r\n00:03:30,688 --> 00:03:32,655\r\nCan
+        you imagine seeing\r\nsomeone all day long\r\n\r\n87\r\n00:03:32,657 --> 00:03:34,123\r\nand
+        then you're\r\nsupposed to hang out\r\n\r\n88\r\n00:03:34,125 --> 00:03:35,825\r\nwith
+        them after work, too?\r\n\r\n89\r\n00:03:35,827 --> 00:03:37,493\r\nHold on.
+        We do\r\nthat all the time.\r\n\r\n90\r\n00:03:37,495 --> 00:03:39,228\r\nYou
+        and I work together\r\nand play together.\r\n\r\n91\r\n00:03:39,230 --> 00:03:42,882\r\nYeah,
+        I know, and it drove me\r\ninto the arms of another woman.\r\n\r\n92\r\n00:03:44,701
+        --> 00:03:46,719\r\nBipolar Bear.\r\n\r\n93\r\n00:03:46,721 --> 00:03:49,605\r\nWell,
+        I appreciate your concern,\r\n\r\n94\r\n00:03:49,607 --> 00:03:52,809\r\nbut
+        I won't be seeing any more\r\nof Amy than I already do.\r\n\r\n95\r\n00:03:52,811
+        --> 00:03:55,094\r\nI assume we'll deduct\r\nany extra time we spend together\r\n\r\n96\r\n00:03:55,096
+        --> 00:03:57,964\r\nat work from our weekly quota.\r\n\r\n97\r\n00:03:59,883
+        --> 00:04:02,552\r\nPlease let me be there\r\nwhen you tell her that.\r\n\r\n98\r\n00:04:03,520
+        --> 00:04:05,688\r\nWhy? So you can see the\r\nlook on Amy's face\r\n\r\n99\r\n00:04:05,690
+        --> 00:04:07,990\r\nwhen she hears\r\nmy top-notch idea?\r\n\r\n100\r\n00:04:07,992
+        --> 00:04:10,576\r\nPlease, oh, please,\r\njust let me be there.\r\n\r\n101\r\n00:04:12,546
+        --> 00:04:15,681\r\nSo, Amy, what are you gonna\r\nbe working on at Caltech?\r\n\r\n102\r\n00:04:15,683
+        --> 00:04:17,467\r\nI'm leading a study to see\r\n\r\n103\r\n00:04:17,469
+        --> 00:04:19,368\r\nif deficiency of the\r\nmonoamine oxidase enzyme\r\n\r\n104\r\n00:04:19,370
+        --> 00:04:21,444\r\nleads to paralyzing\r\nfear in monkeys.\r\n\r\n105\r\n00:04:21,469
+        --> 00:04:22,339\r\nOh.\r\n\r\n106\r\n00:04:22,340 --> 00:04:25,158\r\nIf
+        they're anything like humans,\r\nthe answer's yes.\r\n\r\n107\r\n00:04:25,160
+        --> 00:04:27,577\r\nWait, you've-you've done\r\nthis experiment on humans?\r\n\r\n108\r\n00:04:27,579
+        --> 00:04:30,263\r\nYou mean like death row inmates\r\nwith nothing to lose?\r\n\r\n109\r\n00:04:30,365
+        --> 00:04:33,082\r\nNo, that would be unethical.\r\n\r\n110\r\n00:04:34,618
+        --> 00:04:36,586\r\nYou know,\r\nnot a lot of people know this,\r\n\r\n111\r\n00:04:36,588
+        --> 00:04:37,837\r\nbut the monoamine oxidase enzyme\r\n\r\n112\r\n00:04:37,839
+        --> 00:04:39,789\r\nwas discovered by a woman,\r\nMary Bernheim.\r\n\r\n113\r\n00:04:42,276
+        --> 00:04:43,542\r\nThat's right.\r\n\r\n114\r\n00:04:43,544 --> 00:04:46,545\r\nMy
+        phone is just\r\nas smart as you guys.\r\n\r\n115\r\n00:04:48,316 --> 00:04:49,448\r\nAmy,
+        Bernadette, Penny.\r\n\r\n116\r\n00:04:49,450 --> 00:04:51,150\r\nAmy, Bernadette,\r\nPenny.\r\n\r\n117\r\n00:04:51,152
+        --> 00:04:53,536\r\nAmy, Bernadette, Penny.\r\n\r\n118\r\n00:04:53,538 -->
+        00:04:56,305\r\nHe's never gonna\r\nstop doing that, is he?\r\n\r\n119\r\n00:04:56,307
+        --> 00:04:57,440\r\nI don't mind.\r\n\r\n120\r\n00:04:57,442 --> 00:04:59,108\r\nI'm
+        hoping to put\r\nhis love of repetition\r\n\r\n121\r\n00:04:59,110 --> 00:05:00,860\r\nto
+        good use someday.\r\n\r\n122\r\n00:05:03,246 --> 00:05:05,231\r\nHi. Um...\r\n\r\n123\r\n00:05:05,233
+        --> 00:05:06,399\r\nI've reconsidered.\r\n\r\n124\r\n00:05:06,401 --> 00:05:07,900\r\nUh,
+        you can't work\r\nwhere I work.\r\n\r\n125\r\n00:05:07,902 --> 00:05:09,268\r\nEnjoy
+        the rest\r\nof your evening.\r\n\r\n126\r\n00:05:09,270 --> 00:05:10,903\r\nSheldon.\r\n\r\n127\r\n00:05:10,905
+        --> 00:05:13,122\r\nI-I already signed\r\nthe contract.\r\n\r\n128\r\n00:05:13,124
+        --> 00:05:14,523\r\nI cashed a check.\r\n\r\n129\r\n00:05:14,525 --> 00:05:16,575\r\nMmm...
+        you are not going\r\n\r\n130\r\n00:05:16,577 --> 00:05:18,427\r\nto come out
+        of\r\nthis looking good.\r\n\r\n131\r\n00:05:18,429 --> 00:05:19,662\r\nSheldon,\r\nI
+        don't understand.\r\n\r\n132\r\n00:05:19,664 --> 00:05:21,580\r\nI thought
+        you said\r\nyou were fine with it.\r\n\r\n133\r\n00:05:21,582 --> 00:05:22,698\r\nWell,
+        I was.\r\n\r\n134\r\n00:05:22,700 --> 00:05:24,333\r\nBut that was before\r\nHoward
+        explained to me\r\n\r\n135\r\n00:05:24,335 --> 00:05:26,469\r\nhow awful it
+        would be\r\nif he had to work\r\n\r\n136\r\n00:05:26,471 --> 00:05:28,137\r\nwith
+        his significant other.\r\n\r\n137\r\n00:05:28,139 --> 00:05:30,723\r\nHe said
+        what?\r\n\r\n138\r\n00:05:30,725 --> 00:05:32,675\r\nNow, don't be insulted.\r\n\r\n139\r\n00:05:32,677
+        --> 00:05:36,896\r\nHe just thinks too much of you\r\nwould be mind-numbingly
+        tedious.\r\n\r\n140\r\n00:05:36,898 --> 00:05:40,066\r\nExcuse me, I need
+        to have\r\na chat with my husband.\r\n\r\n141\r\n00:05:40,068 --> 00:05:41,901\r\nYeah,
+        well, now,\r\nwell... keep it short.\r\n\r\n142\r\n00:05:41,903 --> 00:05:45,438\r\nFr-From
+        what I gather,\r\nbrevity is your friend.\r\n\r\n143\r\n00:05:46,573 --> 00:05:48,741\r\nSo,
+        are we good here?\r\n\r\n144\r\n00:05:48,743 --> 00:05:50,326\r\nNo, we're
+        not good here.\r\n\r\n145\r\n00:05:50,328 --> 00:05:51,827\r\nI am working
+        on this project.\r\n\r\n146\r\n00:05:51,829 --> 00:05:54,080\r\nYeah, and
+        you can't tell her\r\nwhat she can and cannot do.\r\n\r\n147\r\n00:05:54,082
+        --> 00:05:56,098\r\nLast week, you told Leonard\r\nhe couldn't wear\r\n\r\n148\r\n00:05:56,100
+        --> 00:05:58,300\r\nhis Wookiee jacket\r\nout in public.\r\n\r\n149\r\n00:05:58,302
+        --> 00:05:59,518\r\nThat's different.\r\n\r\n150\r\n00:05:59,520 --> 00:06:01,454\r\nI'm
+        not going to the mall\r\nwith someone dressed\r\n\r\n151\r\n00:06:01,456 -->
+        00:06:03,539\r\ndumb space bear.\r\n\r\n152\r\n00:06:05,575 --> 00:06:07,626\r\nSheldon,
+        you don't have to worry\r\nabout me bothering you.\r\n\r\n153\r\n00:06:07,628
+        --> 00:06:08,878\r\nI'll be in a different building.\r\n\r\n154\r\n00:06:08,880
+        --> 00:06:10,746\r\nAnd we don't even have\r\nto have lunch together.\r\n\r\n155\r\n00:06:10,748
+        --> 00:06:11,864\r\nReally?\r\n\r\n156\r\n00:06:11,866 --> 00:06:14,517\r\nYes.
+        Before all things,\r\nI'm a scientist.\r\n\r\n157\r\n00:06:14,519 --> 00:06:16,969\r\nI'm
+        just there to do my work\r\nand, with a little luck,\r\n\r\n158\r\n00:06:16,971
+        --> 00:06:19,605\r\nscare the living crap\r\nout of some monkeys.\r\n\r\n159\r\n00:06:19,607
+        --> 00:06:23,142\r\nHmm.\r\n\r\n160\r\n00:06:23,144 --> 00:06:25,811\r\nYou
+        sure your mothlike\r\npersonality won't be drawn\r\n\r\n161\r\n00:06:25,813
+        --> 00:06:28,564\r\nto this blazing fire\r\nthat is myself?\r\n\r\n162\r\n00:06:31,535
+        --> 00:06:33,786\r\nMore and more sure.\r\n\r\n163\r\n00:06:33,788 --> 00:06:36,872\r\nWell,
+        then, you\r\nhave my permission.\r\n\r\n164\r\n00:06:36,874 --> 00:06:37,957\r\nI
+        didn't ask\r\nfor your permission.\r\n\r\n165\r\n00:06:37,959 --> 00:06:39,158\r\nToo
+        late. No backsies.\r\n\r\n166\r\n00:06:41,611 --> 00:06:44,413\r\nNo, no,
+        listen to me.\r\nSheldon misunderstood.\r\n\r\n167\r\n00:06:44,415 --> 00:06:45,381\r\nWhat
+        I meant was,\r\n\r\n168\r\n00:06:45,383 --> 00:06:46,448\r\nif we worked together,\r\n\r\n169\r\n00:06:46,450
+        --> 00:06:48,117\r\nthere'd be too much\r\nof me for you,\r\n\r\n170\r\n00:06:48,119
+        --> 00:06:50,252\r\nnot the other way around.\r\n\r\n171\r\n00:06:50,254 -->
+        00:06:52,722\r\nHoward, if you're going\r\nto lie to your wife,\r\n\r\n172\r\n00:06:52,724
+        --> 00:06:55,324\r\ndon't start the sentence\r\nwith \"Sheldon misunderstood.\"\r\n\r\n173\r\n00:06:56,877
+        --> 00:06:58,010\r\nThat's a dead giveaway.\r\n\r\n174\r\n00:06:58,012 -->
+        00:06:59,929\r\nWell?\r\n\r\n175\r\n00:06:59,931 --> 00:07:01,130\r\nOkay,
+        fine.\r\n\r\n176\r\n00:07:01,132 --> 00:07:02,898\r\nI did say that,\r\nand
+        I think it's true.\r\n\r\n177\r\n00:07:02,900 --> 00:07:05,017\r\nI think
+        if we worked together\r\nand lived together,\r\n\r\n178\r\n00:07:05,019 -->
+        00:07:06,519\r\nwe'd get sick of each other.\r\n\r\n179\r\n00:07:06,521 -->
+        00:07:08,104\r\nYeah, but to be fair,\r\nhe only said the part\r\n\r\n180\r\n00:07:08,106
+        --> 00:07:09,188\r\nabout him\r\ngetting sick of you.\r\n\r\n181\r\n00:07:09,190
+        --> 00:07:11,023\r\nFor the love of God, why?!\r\n\r\n182\r\n00:07:15,212
+        --> 00:07:17,863\r\nWhat exactly do you\r\nthink you'd get sick of?\r\n\r\n183\r\n00:07:17,865
+        --> 00:07:20,015\r\nHis only options here\r\nare to fake a heart attack\r\n\r\n184\r\n00:07:20,017
+        --> 00:07:22,384\r\nor have a real one.\r\n\r\n185\r\n00:07:22,386 --> 00:07:25,654\r\nIt-it's
+        nothing\r\nin particular. I...\r\n\r\n186\r\n00:07:25,656 --> 00:07:27,823\r\nIs
+        it my voice?\r\nAm I too bossy?\r\n\r\n187\r\n00:07:27,825 --> 00:07:28,958\r\nWhat...?\r\n\r\n188\r\n00:07:28,960
+        --> 00:07:31,877\r\nMy arm is feeling numb.\r\n\r\n189\r\n00:07:32,796 -->
+        00:07:35,781\r\nNailed it.\r\n\r\n190\r\n00:07:35,783 --> 00:07:39,385\r\nThat's
+        the wrong arm for\r\na heart attack, doofus.\r\n\r\n191\r\n00:07:41,221 -->
+        00:07:44,356\r\nMy point is, I'm sure\r\nthere are things about me\r\n\r\n192\r\n00:07:44,358
+        --> 00:07:46,642\r\nthat would drive you crazy\r\nif you had to deal\r\n\r\n193\r\n00:07:46,644
+        --> 00:07:48,394\r\nwith them all day long.\r\n\r\n194\r\n00:07:48,396 -->
+        00:07:50,596\r\nLike looking me in the\r\neye and lying to me?\r\n\r\n195\r\n00:07:50,598
+        --> 00:07:52,148\r\nOh, well, come on, I just...\r\n\r\n196\r\n00:07:52,150
+        --> 00:07:55,401\r\nWhere am I supposed to\r\nlook when I lie to you?\r\n\r\n197\r\n00:07:55,403
+        --> 00:07:57,753\r\nFind somewhere else \r\nto sleep tonight.\r\n\r\n198\r\n00:07:57,755
+        --> 00:07:59,905\r\nOh, Bernie...\r\n\r\n199\r\n00:08:06,863 --> 00:08:10,466\r\nIf
+        it makes you feel any better,\r\nAmy and I are fine.\r\n\r\n200\r\n00:08:13,069
+        --> 00:08:15,237\r\nI mean, really good.\r\n\r\n201\r\n00:08:17,474 --> 00:08:19,842\r\nSo,
+        boys, how was\r\nthe pajama party?\r\n\r\n202\r\n00:08:19,844 --> 00:08:23,729\r\nYou
+        guys jump on the bed\r\nand sing into hair brushes?\r\n\r\n203\r\n00:08:23,731
+        --> 00:08:25,931\r\nIt wasn't a pajama party.\r\n\r\n204\r\n00:08:25,933 -->
+        00:08:28,434\r\nIt was just a couple of bros\r\nhanging out, giggling,\r\n\r\n205\r\n00:08:28,436
+        --> 00:08:31,520\r\neating cookie dough\r\nand watching <i>Princess Bride.</i>\r\n\r\n206\r\n00:08:33,073
+        --> 00:08:34,607\r\nPlease, stop talking.\r\n\r\n207\r\n00:08:36,243 --> 00:08:38,861\r\nAs
+        you wish.\r\n\r\n208\r\n00:08:42,666 --> 00:08:44,733\r\nI mean, you know,
+        Sheldon,\r\nnone of this would've happened\r\n\r\n209\r\n00:08:44,735 -->
+        00:08:46,202\r\nif I hadn't tried\r\nto help you.\r\n\r\n210\r\n00:08:46,204
+        --> 00:08:48,787\r\nUh, it also wouldn't\r\nhave happened\r\n\r\n211\r\n00:08:48,789
+        --> 00:08:50,289\r\nif, in the early universe,\r\n\r\n212\r\n00:08:50,291
+        --> 00:08:53,792\r\nhydrogen was a little more\r\ncommon or a little less
+        common.\r\n\r\n213\r\n00:08:53,794 --> 00:08:56,278\r\nThis is fun. Your turn.\r\n\r\n214\r\n00:08:57,264
+        --> 00:08:58,597\r\nGentlemen.\r\nHey, Amy.\r\n\r\n215\r\n00:08:58,599 -->
+        00:09:00,282\r\nHello.\r\n\r\n216\r\n00:09:00,284 --> 00:09:01,684\r\nThat
+        was kind of icy.\r\n\r\n217\r\n00:09:01,686 --> 00:09:03,335\r\nYou two okay?\r\n\r\n218\r\n00:09:03,337
+        --> 00:09:04,353\r\nOh, we're fine.\r\n\r\n219\r\n00:09:04,355 --> 00:09:05,771\r\nAs
+        Howard advised,\r\n\r\n220\r\n00:09:05,773 --> 00:09:07,973\r\nshe's merely
+        respecting our\r\nprofessional boundaries.\r\n\r\n221\r\n00:09:07,975 -->
+        00:09:08,941\r\nSmart.\r\n\r\n222\r\n00:09:08,943 --> 00:09:10,543\r\nTake
+        relationship advice\r\nfrom a man\r\n\r\n223\r\n00:09:10,545 --> 00:09:12,962\r\nwho
+        spent last night\r\nbraiding Raj's hair.\r\n\r\n224\r\n00:09:15,431 --> 00:09:18,450\r\nYeah,
+        you make\r\na good point.\r\n\r\n225\r\n00:09:18,452 --> 00:09:20,653\r\nIt
+        would appear\r\nI was worried for nothing.\r\n\r\n226\r\n00:09:20,655 -->
+        00:09:22,204\r\nLook at her, desperately wishing\r\n\r\n227\r\n00:09:22,206
+        --> 00:09:24,156\r\nshe was over here\r\nat the cool table.\r\n\r\n228\r\n00:09:26,576
+        --> 00:09:28,327\r\nDon't worry, little moth.\r\n\r\n229\r\n00:09:28,329 -->
+        00:09:30,629\r\nThe flame will come to you.\r\n\r\n230\r\n00:09:32,832 -->
+        00:09:34,567\r\nOh, uh...\r\n\r\n231\r\n00:09:34,569 --> 00:09:36,385\r\non
+        the off chance that\r\nBernadette doesn't call back\r\n\r\n232\r\n00:09:36,387
+        --> 00:09:37,770\r\nand apologize,\r\nhow do you feel\r\n\r\n233\r\n00:09:37,772
+        --> 00:09:39,672\r\nabout Mexican food\r\nfor dinner tonight?\r\n\r\n234\r\n00:09:39,674
+        --> 00:09:41,840\r\nI-I don't know.\r\nSounds kind of heavy.\r\n\r\n235\r\n00:09:41,842
+        --> 00:09:44,810\r\nThat's 'cause you always\r\nfill up on chips.\r\n\r\n236\r\n00:09:44,812
+        --> 00:09:47,479\r\nAnd this is Dr. Gunderson\r\nfrom Stockholm.\r\n\r\n237\r\n00:09:47,481
+        --> 00:09:49,031\r\nAh, Sweden.\r\n\r\n238\r\n00:09:49,033 --> 00:09:50,733\r\nYeah,
+        home of my favorite Muppet\r\n\r\n239\r\n00:09:50,735 --> 00:09:53,719\r\nand,
+        uh,\r\nsecond favorite meatball.\r\n\r\n240\r\n00:09:57,140 --> 00:10:01,343\r\nOkay,
+        the Nordic reputation for\r\nlack of humor is well-founded.\r\n\r\n241\r\n00:10:02,812
+        --> 00:10:05,581\r\nBoy, is his name Gunderson\r\nor No-Funderson?\r\n\r\n242\r\n00:10:06,833
+        --> 00:10:09,068\r\nWhere are we going\r\nwith this, Dr. Cooper?\r\n\r\n243\r\n00:10:09,070
+        --> 00:10:11,103\r\nOh, please, I'm your boyfriend.\r\n\r\n244\r\n00:10:11,105
+        --> 00:10:13,555\r\nYou call me Sheldon.\r\n\r\n245\r\n00:10:13,557 --> 00:10:16,158\r\nThat's
+        right,\r\nI am in a boy-girl relationship\r\n\r\n246\r\n00:10:16,160 --> 00:10:18,928\r\nwith
+        this cute little\r\nlump of wool.\r\n\r\n247\r\n00:10:18,930 --> 00:10:20,045\r\nSheldon...\r\n\r\n248\r\n00:10:20,047
+        --> 00:10:21,764\r\nIt's a physical\r\nrelationship, too.\r\n\r\n249\r\n00:10:21,766
+        --> 00:10:25,517\r\nHand-holding, hugging...\r\neven on hot days.\r\n\r\n250\r\n00:10:25,519
+        --> 00:10:27,386\r\nOw.\r\n\r\n251\r\n00:10:28,171 --> 00:10:29,538\r\nOkay,
+        here's a new one.\r\n\r\n252\r\n00:10:29,540 --> 00:10:31,140\r\nApparently
+        now\r\nwe kick each other\r\n\r\n253\r\n00:10:31,142 --> 00:10:32,775\r\nin
+        the shin under the table.\r\n\r\n254\r\n00:10:34,477 --> 00:10:37,012\r\nHow
+        do you like it\r\nwhen I do it to you?\r\n\r\n255\r\n00:10:38,398 --> 00:10:41,066\r\nNot
+        so much, huh?\r\n\r\n256\r\n00:10:53,498 --> 00:10:55,883\r\nTest subject
+        D7,\r\n\r\n257\r\n00:10:55,885 --> 00:10:58,535\r\naka Betsy, fear response
+        study.\r\n\r\n258\r\n00:10:58,537 --> 00:11:02,389\r\nImage number one: Frenchman\r\non
+        bicycle carrying baguettes.\r\n\r\n259\r\n00:11:05,393 --> 00:11:08,395\r\nNo
+        visible reaction.\r\n\r\n260\r\n00:11:08,397 --> 00:11:10,764\r\nImage number
+        two: sousaphone.\r\n\r\n261\r\n00:11:13,234 --> 00:11:14,735\r\nStill no reaction.\r\n\r\n262\r\n00:11:14,737
+        --> 00:11:15,736\r\nOkay.\r\n\r\n263\r\n00:11:15,738 --> 00:11:17,371\r\nLet's
+        kick things up a notch.\r\n\r\n264\r\n00:11:17,373 --> 00:11:20,090\r\nImage
+        number three: crocodile\r\nwith a mouthful of monkeys.\r\n\r\n265\r\n00:11:24,078
+        --> 00:11:27,131\r\nOkay, now we're talking.\r\n\r\n266\r\n00:11:27,133 -->
+        00:11:29,066\r\nDr. Fowler?\r\n\r\n267\r\n00:11:29,068 --> 00:11:31,135\r\nWhat
+        do you want, Sheldon?\r\n\r\n268\r\n00:11:31,137 --> 00:11:33,220\r\nWell,
+        I'm done\r\nwith work, so...\r\n\r\n269\r\n00:11:34,423 --> 00:11:36,357\r\nOh,
+        sorry, sorry, sorry.\r\n\r\n270\r\n00:11:36,359 --> 00:11:39,092\r\nSorry.
+        Uh...\r\n\r\n271\r\n00:11:39,094 --> 00:11:40,527\r\nBetter?\r\n\r\n272\r\n00:11:40,529
+        --> 00:11:41,695\r\nOh, baguettes.\r\n\r\n273\r\n00:11:41,697 --> 00:11:43,897\r\nYes,
+        I like baguettes.\r\n\r\n274\r\n00:11:43,899 --> 00:11:46,099\r\nWhat exactly\r\nare
+        you doing?\r\n\r\n275\r\n00:11:46,101 --> 00:11:48,535\r\nDetermining baseline
+        fear levels\r\nin capuchin monkeys\r\n\r\n276\r\n00:11:48,537 --> 00:11:50,871\r\nby
+        measuring their response\r\nto visual stimuli.\r\n\r\n277\r\n00:11:50,873
+        --> 00:11:52,339\r\nSo, goofing off.\r\n\r\n278\r\n00:11:54,909 --> 00:11:57,578\r\nAs
+        I was saying, I'm done\r\nwith work and Leonard's not.\r\n\r\n279\r\n00:11:57,580
+        --> 00:12:00,214\r\nSo good news,\r\nyou get to take me home.\r\n\r\n280\r\n00:12:00,216
+        --> 00:12:01,248\r\nPlay your cards right,\r\n\r\n281\r\n00:12:01,250 -->
+        00:12:02,750\r\nI'll let you drive me\r\n\r\n282\r\n00:12:02,752 --> 00:12:05,836\r\npast
+        the lot\r\nwhere the buses park at night.\r\n\r\n283\r\n00:12:05,838 --> 00:12:07,638\r\nI
+        can't leave now, Sheldon.\r\n\r\n284\r\n00:12:07,640 --> 00:12:08,756\r\nI'm
+        very busy.\r\n\r\n285\r\n00:12:08,758 --> 00:12:10,557\r\nBesides, why would
+        I want\r\nto do you a favor\r\n\r\n286\r\n00:12:10,559 --> 00:12:12,576\r\nafter
+        the way you treated\r\nme in the cafeteria?\r\n\r\n287\r\n00:12:12,578 -->
+        00:12:15,128\r\nImage number four:\r\nboa constrictor.\r\n\r\n288\r\n00:12:18,967
+        --> 00:12:21,935\r\nWhat on earth\r\nare you talking about?\r\n\r\n289\r\n00:12:21,937
+        --> 00:12:23,487\r\nMy behavior\r\nin the cafeteria\r\n\r\n290\r\n00:12:23,489
+        --> 00:12:25,305\r\nwas delightful.\r\n\r\n291\r\n00:12:25,307 --> 00:12:27,491\r\nMaybe
+        your friend\r\nGunderson needs\r\n\r\n292\r\n00:12:27,493 --> 00:12:29,443\r\nto
+        head over\r\nto IKEA and assemble\r\n\r\n293\r\n00:12:29,445 --> 00:12:32,379\r\na
+        sense of humor.\r\n\r\n294\r\n00:12:32,381 --> 00:12:34,364\r\nYou embarrassed
+        me\r\nin front of my colleagues\r\n\r\n295\r\n00:12:34,366 --> 00:12:35,982\r\non
+        my first day here.\r\n\r\n296\r\n00:12:36,684 --> 00:12:37,785\r\nImage number
+        five:\r\n\r\n297\r\n00:12:37,787 --> 00:12:39,186\r\nkitten in a teacup.\r\n\r\n298\r\n00:12:39,188
+        --> 00:12:41,388\r\nOh.\r\n\r\n299\r\n00:12:44,959 --> 00:12:47,528\r\nOh...
+        embarrassed you?\r\nYou know what?\r\n\r\n300\r\n00:12:47,530 --> 00:12:50,431\r\nI
+        don't have time for this.\r\nFind another way home.\r\n\r\n301\r\n00:12:50,433
+        --> 00:12:53,450\r\nI'm starting to get the sense\r\nthat you're angry with
+        me.\r\n\r\n302\r\n00:12:53,452 --> 00:12:55,001\r\nReally?\r\nWhat tipped
+        you off?\r\n\r\n303\r\n00:12:55,003 --> 00:12:56,053\r\nCouple things, actually.\r\n\r\n304\r\n00:12:56,055
+        --> 00:12:57,170\r\nYour tone of voice,\r\nyour body language...\r\n\r\n305\r\n00:12:57,172
+        --> 00:12:58,806\r\nGet out.\r\nWell, now, that.\r\n\r\n306\r\n00:13:00,675
+        --> 00:13:03,310\r\nImage number six:\r\nwoman giving birth.\r\n\r\n307\r\n00:13:12,570
+        --> 00:13:14,187\r\nIt's 9:00.\r\nWhere you been?\r\n\r\n308\r\n00:13:14,189
+        --> 00:13:17,307\r\nOh, I had to take\r\nthe bus home.\r\n\r\n309\r\n00:13:17,309
+        --> 00:13:20,844\r\nFell asleep and missed my stop.\r\n\r\n310\r\n00:13:20,846
+        --> 00:13:22,646\r\nOh, no.\r\n\r\n311\r\n00:13:22,648 --> 00:13:26,633\r\nDid
+        you know that Los Angeles\r\nhas a Little Sri Lanka?\r\n\r\n312\r\n00:13:26,635
+        --> 00:13:28,986\r\nI did not.\r\n\r\n313\r\n00:13:28,988 --> 00:13:31,004\r\nWell,
+        I do... now.\r\n\r\n314\r\n00:13:31,006 --> 00:13:33,707\r\nThey're a lovely
+        people.\r\n\r\n315\r\n00:13:33,709 --> 00:13:37,377\r\nAlthough terrifying
+        when you\r\nwake up face-to-face with them.\r\n\r\n316\r\n00:13:38,379 -->
+        00:13:39,646\r\nIf you're hungry, I brought home\r\n\r\n317\r\n00:13:39,648
+        --> 00:13:41,632\r\nsome mutton and coconut milk.\r\n\r\n318\r\n00:13:41,634
+        --> 00:13:43,617\r\nWhy'd you get that?\r\nYou hate lamb.\r\n\r\n319\r\n00:13:43,619
+        --> 00:13:45,686\r\nI was asking for directions.\r\n\r\n320\r\n00:13:45,688
+        --> 00:13:49,206\r\nApparently, there was\r\na communication problem.\r\n\r\n321\r\n00:13:49,208
+        --> 00:13:52,326\r\nI thought Amy was gonna\r\ndrive you home.\r\n\r\n322\r\n00:13:52,328
+        --> 00:13:53,610\r\nYeah, I thought so, too,\r\n\r\n323\r\n00:13:53,612 -->
+        00:13:55,779\r\nbut she's acting very strangely.\r\n\r\n324\r\n00:13:55,781
+        --> 00:13:58,782\r\nI was discussing it with\r\na Sri Lankan fellow on the
+        bus,\r\n\r\n325\r\n00:13:58,784 --> 00:14:01,869\r\nand he hypothesized\r\nthat
+        a tiger may have\r\n\r\n326\r\n00:14:01,871 --> 00:14:04,054\r\nrecently run
+        across her shadow.\r\n\r\n327\r\n00:14:05,907 --> 00:14:08,342\r\nAlthough
+        he may have just been\r\ntrying to drum up business\r\n\r\n328\r\n00:14:08,344
+        --> 00:14:11,345\r\nfor his brother-in-law's\r\nwitch doctor practice.\r\n\r\n329\r\n00:14:14,265
+        --> 00:14:16,834\r\nOkay, Sheldon, what happened\r\nbetween you and Amy?\r\n\r\n330\r\n00:14:16,836
+        --> 00:14:20,571\r\nWell, can you believe\r\nshe said I embarrassed her?\r\n\r\n331\r\n00:14:20,573
+        --> 00:14:22,656\r\nYeah.\r\n\r\n332\r\n00:14:22,658 --> 00:14:25,442\r\nBut
+        you didn't\r\neven hear the details.\r\n\r\n333\r\n00:14:25,444 --> 00:14:27,477\r\nSheldon...\r\n\r\n334\r\n00:14:29,247
+        --> 00:14:31,865\r\nI've known you\r\na long time,\r\n\r\n335\r\n00:14:31,867
+        --> 00:14:33,283\r\nand I'm going\r\nto tell you this\r\n\r\n336\r\n00:14:33,285
+        --> 00:14:37,154\r\nwith all the love\r\nI can possibly muster.\r\n\r\n337\r\n00:14:37,156
+        --> 00:14:38,155\r\nAmy's right.\r\n\r\n338\r\n00:14:38,157 --> 00:14:39,606\r\nYou're
+        wrong.\r\n\r\n339\r\n00:14:40,458 --> 00:14:41,658\r\nBut you don't even know...\r\n\r\n340\r\n00:14:41,660
+        --> 00:14:43,076\r\nDoesn't matter.\r\n\r\n341\r\n00:14:43,078 --> 00:14:45,696\r\nBut,
+        now, but in my defense...\r\nDoesn't matter.\r\n\r\n342\r\n00:14:45,698 -->
+        00:14:47,931\r\nYou're not listening\r\nto my side of it.\r\n\r\n343\r\n00:14:47,933
+        --> 00:14:50,267\r\nOkay, fine, Sheldon.\r\nWhat is your side?\r\n\r\n344\r\n00:14:50,269
+        --> 00:14:52,285\r\nWell...\r\n\r\n345\r\n00:14:52,287 --> 00:14:54,788\r\nNope,
+        got to go with\r\nAmy on this one.\r\n\r\n346\r\n00:15:00,629 --> 00:15:01,678\r\nShrimp
+        was spicy.\r\n\r\n347\r\n00:15:01,680 --> 00:15:03,113\r\nYou want a TUMS?\r\n\r\n348\r\n00:15:03,115
+        --> 00:15:04,431\r\nYou got\r\nthe tropical fruit kind?\r\n\r\n349\r\n00:15:04,433
+        --> 00:15:06,950\r\nNo, if I buy those, I just\r\ngo through them like candy.\r\n\r\n350\r\n00:15:06,952
+        --> 00:15:08,385\r\nTell me about it.\r\n\r\n351\r\n00:15:08,387 --> 00:15:11,104\r\nOne
+        time, I swear\r\nI pooped out a stick of chalk.\r\n\r\n352\r\n00:15:13,141
+        --> 00:15:15,359\r\nI'll get it.\r\nThanks.\r\n\r\n353\r\n00:15:17,278 -->
+        00:15:18,362\r\nHi.\r\n\r\n354\r\n00:15:18,364 --> 00:15:19,529\r\nOh, hi.\r\n\r\n355\r\n00:15:19,531
+        --> 00:15:21,698\r\nI may have overreacted.\r\n\r\n356\r\n00:15:21,700 -->
+        00:15:25,619\r\nYeah, well, I didn't\r\nhandle it so great, either.\r\n\r\n357\r\n00:15:25,621
+        --> 00:15:28,038\r\nIt's just sometimes I feel\r\nlike you enjoy spending
+        time\r\n\r\n358\r\n00:15:28,040 --> 00:15:30,090\r\nwith your friends\r\nmore
+        than with me.\r\n\r\n359\r\n00:15:30,092 --> 00:15:31,909\r\nThat's not true.\r\nIt's
+        not?\r\n\r\n360\r\n00:15:31,911 --> 00:15:33,594\r\nYou spend all day\r\ntogether
+        at work,\r\n\r\n361\r\n00:15:33,596 --> 00:15:35,712\r\nand then you all hang
+        out\r\nat night playing games,\r\n\r\n362\r\n00:15:35,714 --> 00:15:37,230\r\ngoing
+        to the comic book store.\r\n\r\n363\r\n00:15:37,232 --> 00:15:39,850\r\nLast
+        week, you two got\r\na couples massage.\r\n\r\n364\r\n00:15:42,487 --> 00:15:45,055\r\nSo,
+        when you said you wouldn't\r\nwant to spend that much time\r\n\r\n365\r\n00:15:45,057
+        --> 00:15:48,025\r\nwith me, it really\r\nhurt my feelings.\r\n\r\n366\r\n00:15:48,027
+        --> 00:15:49,643\r\nOh, wow.\r\n\r\n367\r\n00:15:49,645 --> 00:15:50,978\r\nYeah,
+        no, I get that.\r\n\r\n368\r\n00:15:50,980 --> 00:15:52,112\r\nI'm so sorry.\r\n\r\n369\r\n00:15:52,114
+        --> 00:15:54,865\r\nStarting tomorrow, I am\r\nturning over a new leaf.\r\n\r\n370\r\n00:15:54,867
+        --> 00:15:57,985\r\nTime with you is my\r\nnumber one priority.\r\n\r\n371\r\n00:15:59,989
+        --> 00:16:01,688\r\nWhy tomorrow?\r\n\r\n372\r\n00:16:03,190 --> 00:16:05,509\r\nWell,
+        we're real close\r\nto finishing off\r\n\r\n373\r\n00:16:05,511 --> 00:16:07,377\r\nthe
+        new Batman game.\r\n\r\n374\r\n00:16:08,513 --> 00:16:11,665\r\nIt is awesome.\r\n\r\n375\r\n00:16:13,968
+        --> 00:16:16,003\r\nUh, you should probably\r\ngo after her.\r\n\r\n376\r\n00:16:16,005
+        --> 00:16:17,754\r\nShould I go after you?\r\n\r\n377\r\n00:16:17,756 -->
+        00:16:19,923\r\nNo!\r\n\r\n378\r\n00:16:21,592 --> 00:16:24,094\r\nThanks
+        for getting me\r\nin trouble.\r\n\r\n379\r\n00:16:26,898 --> 00:16:28,265\r\nAmy.\r\n\r\n380\r\n00:16:29,067
+        --> 00:16:30,283\r\nAmy.\r\n\r\n381\r\n00:16:31,069 --> 00:16:33,103\r\nAmy.\r\n\r\n382\r\n00:16:34,722
+        --> 00:16:37,324\r\nSheldon, what are you\r\ndoing here so late?\r\n\r\n383\r\n00:16:37,326
+        --> 00:16:39,192\r\nI couldn't sleep\r\nbecause I kept thinking\r\n\r\n384\r\n00:16:39,194
+        --> 00:16:41,445\r\nabout what happened\r\nearlier between us.\r\n\r\n385\r\n00:16:42,246
+        --> 00:16:45,615\r\nAlso, I had one heck\r\nof a bus nap.\r\n\r\n386\r\n00:16:46,751
+        --> 00:16:47,901\r\nOh, speaking of which,\r\n\r\n387\r\n00:16:47,903 -->
+        00:16:50,787\r\ndo you want some mutton\r\nand coconut milk?\r\n\r\n388\r\n00:16:50,789
+        --> 00:16:51,855\r\nNo.\r\n\r\n389\r\n00:16:51,857 --> 00:16:54,624\r\nWell,
+        I cannot give\r\nthis stuff away.\r\n\r\n390\r\n00:16:54,626 --> 00:16:57,077\r\nWhat
+        do you want?\r\n\r\n391\r\n00:16:57,079 --> 00:17:00,647\r\nAmy, this isn't
+        easy to say.\r\n\r\n392\r\n00:17:01,766 --> 00:17:04,751\r\nAll relationships
+        are difficult,\r\n\r\n393\r\n00:17:04,753 --> 00:17:07,688\r\nbut even more
+        so\r\nwhen you're in one\r\n\r\n394\r\n00:17:07,690 --> 00:17:09,523\r\nwith
+        a person who struggles\r\n\r\n395\r\n00:17:09,525 --> 00:17:11,858\r\nwith
+        everyday\r\nsocial interactions.\r\n\r\n396\r\n00:17:11,860 --> 00:17:13,527\r\nAnd
+        frankly...\r\n\r\n397\r\n00:17:13,529 --> 00:17:15,145\r\nwho can strike some
+        people\r\n\r\n398\r\n00:17:15,147 --> 00:17:17,664\r\nas being kind of a weirdo.\r\n\r\n399\r\n00:17:17,666
+        --> 00:17:19,649\r\nSheldon...\r\n\r\n400\r\n00:17:19,651 --> 00:17:21,651\r\nyou're
+        not a weirdo.\r\n\r\n401\r\n00:17:21,653 --> 00:17:24,271\r\nI wasn't speaking
+        about me.\r\n\r\n402\r\n00:17:26,307 --> 00:17:28,441\r\nI mean, honestly,\r\nthere's
+        no telling\r\n\r\n403\r\n00:17:28,443 --> 00:17:30,077\r\nwhat will set you
+        off.\r\n\r\n404\r\n00:17:30,079 --> 00:17:32,295\r\nYou know, introducing\r\nmyself
+        as your boyfriend.\r\n\r\n405\r\n00:17:32,297 --> 00:17:35,549\r\nGiving you
+        the opportunity\r\nto drive me home.\r\n\r\n406\r\n00:17:35,551 --> 00:17:37,617\r\nBreaking
+        the ice\r\nwith your colleagues\r\n\r\n407\r\n00:17:37,619 --> 00:17:40,787\r\nusing
+        ethnic humor,\r\nthe funniest kind of humor.\r\n\r\n408\r\n00:17:42,557 -->
+        00:17:44,224\r\nWhat's your point?\r\n\r\n409\r\n00:17:44,226 --> 00:17:46,626\r\nMy
+        point is, we're a couple.\r\n\r\n410\r\n00:17:46,628 --> 00:17:48,361\r\nAnd...\r\n\r\n411\r\n00:17:48,363
+        --> 00:17:50,480\r\nI like you for who you are.\r\n\r\n412\r\n00:17:50,482
+        --> 00:17:52,365\r\nQuirks and all.\r\n\r\n413\r\n00:17:54,102 --> 00:17:55,652\r\nI
+        like you, too.\r\n\r\n414\r\n00:17:55,654 --> 00:17:58,188\r\nWell, I should
+        hope so.\r\n\r\n415\r\n00:17:58,190 --> 00:18:00,323\r\nI don't see anyone
+        else\r\nbanging on this door\r\n\r\n416\r\n00:18:00,325 --> 00:18:02,826\r\nto
+        put up with your nonsense.\r\n\r\n417\r\n00:18:06,981 --> 00:18:09,583\r\nNot
+        even a good-bye?\r\n\r\n418\r\n00:18:09,585 --> 00:18:11,084\r\nYou see,\r\nthat's
+        the kind of thing\r\n\r\n419\r\n00:18:11,086 --> 00:18:13,620\r\nthat makes
+        people\r\nthink you're weird.\r\n\r\n420\r\n00:18:13,622 --> 00:18:15,422\r\nPoor
+        kid.\r\n\r\n421\r\n00:18:15,424 --> 00:18:17,507\r\nShe just doesn't see it.\r\n\r\n422\r\n00:18:27,608
+        --> 00:18:28,691\r\nI'm not apologizing\r\nto Howard.\r\n\r\n423\r\n00:18:28,693
+        --> 00:18:30,342\r\nHe can come beg me\r\non his knees.\r\n\r\n424\r\n00:18:30,344
+        --> 00:18:31,694\r\nSheldon, too.\r\n\r\n425\r\n00:18:31,696 --> 00:18:34,196\r\nIf
+        I see him at work,\r\nI'm just going to ignore him.\r\n\r\n426\r\n00:18:34,198
+        --> 00:18:36,032\r\nAll right, don't worry.\r\nI talked to Leonard.\r\n\r\n427\r\n00:18:36,034
+        --> 00:18:38,801\r\nHe is gonna sit the guys down\r\nand set them straight.\r\n\r\n428\r\n00:18:38,803
+        --> 00:18:40,820\r\nLaser's warmed up.\r\n\r\n429\r\n00:18:40,896 --> 00:18:41,928\r\nPull!\r\n\r\n430\r\n00:18:44,274
+        --> 00:18:49,274\r\n== sync, corrected by <font color=#00FF00>elderman</font>
+        ==\r\n<font color=#00FFFF>@elder_man</font>\r\n\r\n"
+    headers:
+      Age:
+      - '403'
+      CF-Cache-Status:
+      - HIT
+      CF-RAY:
+      - 88149d0db9ce99f3-CDG
+      Cache-Control:
+      - public, max-age=691200
+      Connection:
+      - keep-alive
+      Content-Type:
+      - text/srt
+      Date:
+      - Thu, 09 May 2024 20:59:28 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=hTyKIMlAq1F0pzBXbpKJ6h6yQjJigJusj3zxXBu6B1P4YtW29c51TanTRzTwGGxhrxT69zRjnsOR1mf6f0ndymjZqpf5g2erwvPOZ%2BHHRqaTCHKXoyWSA6piHlODx8Wn7%2Bk4vQ%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      alt-svc:
+      - h3=":443"; ma=86400
+      content-disposition:
+      - attachment; filename=The.Big.Bang.Theory.S07E05.en.srt; filename*=UTF-8''The.Big.Bang.Theory.S07E05.en.srt
+      etag:
+      - W/"a295515c-a460-44ea-9ba8-8d37bcb9b5a6-637943171648031930"
+      last-modified:
+      - Mon, 25 Jul 2022 03:39:24 GMT
+      vary:
+      - Accept-Encoding
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept-Encoding:
+      - gzip, deflate, br
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.1
+      accept:
+      - application/json
+    method: GET
+    uri: https://api.gestdown.info/subtitles/download/90fe1369-fa0c-4154-bd04-d3d332dec587
+  response:
+    body:
+      string: "\uFEFF1\r\n00:00:05,532 --> 00:00:07,400\r\nSilence g\xEAnant.\r\n\r\n2\r\n00:00:07,402
+        --> 00:00:08,684\r\nSheldon sur son t\xE9l\xE9phone.\r\n\r\n3\r\n00:00:08,686
+        --> 00:00:09,719\r\nOn ne se touche pas.\r\n\r\n4\r\n00:00:09,721 --> 00:00:13,122\r\nQuelqu'un
+        a un rencard.\r\n\r\n5\r\n00:00:13,124 --> 00:00:15,208\r\nC'est encore plus
+        chaud\r\nque \xE7a en a l'air.\r\n\r\n6\r\n00:00:15,210 --> 00:00:18,077\r\nSheldon
+        observe le symbolisme\r\nphallique des l\xE9gumes-racines\r\n\r\n7\r\n00:00:18,079
+        --> 00:00:19,796\r\ndans les tableaux de la renaissance.\r\n\r\n8\r\n00:00:19,798
+        --> 00:00:21,447\r\nNon, \xE7a m'a ennuy\xE9.\r\n\r\n9\r\n00:00:21,449 -->
+        00:00:25,418\r\nJe recherche des ciseaux \r\n\xE0 cuticules sur Amazon.\r\n\r\n10\r\n00:00:26,370
+        --> 00:00:28,004\r\nComment peux-tu\r\nne pas arracher ses v\xEAtements\r\n\r\n11\r\n00:00:28,006
+        --> 00:00:30,556\r\net le prendre, ici, sur cette table ?\r\n\r\n12\r\n00:00:30,558
+        --> 00:00:33,259\r\nSi tu fais \xE7a, je hurle.\r\n\r\n13\r\n00:00:36,430
+        --> 00:00:38,631\r\nSheldon, j'ai des nouvelles\r\nexcitantes \xE0 t'annoncer.\r\n\r\n14\r\n00:00:38,633
+        --> 00:00:39,782\r\nComme \xE7a, on est deux.\r\n\r\n15\r\n00:00:39,784 -->
+        00:00:41,267\r\nMes nouveaux ciseaux\r\n\xE0 cuticules seront l\xE0\r\n\r\n16\r\n00:00:41,269
+        --> 00:00:43,152\r\ndans un jour ouvrable ou deux.\r\n\r\n17\r\n00:00:43,154
+        --> 00:00:45,721\r\nEsp\xE9rons, dans un seul.\r\n\r\n18\r\n00:00:45,723 -->
+        00:00:47,824\r\nJe suis invit\xE9e comme consultante\r\ndans une exp\xE9rience\r\n\r\n19\r\n00:00:47,826
+        --> 00:00:50,193\r\nau sein de ton universit\xE9\r\npour quelques mois.\r\n\r\n20\r\n00:00:50,195
+        --> 00:00:51,327\r\nN'est-ce pas g\xE9nial ?\r\n\r\n21\r\n00:00:51,329 -->
+        00:00:52,912\r\nOn pourra d\xE9jeuner ensemble.\r\n\r\n22\r\n00:00:52,914
+        --> 00:00:54,314\r\nFaire du covoiturage.\r\n\r\n23\r\n00:00:54,316 --> 00:00:56,466\r\nTu
+        sais, voyager avec L\xE9onard\r\n\r\n24\r\n00:00:56,468 --> 00:00:58,735\r\nest
+        devenu un peu \r\nennuyeux derni\xE8rement.\r\n\r\n25\r\n00:00:58,737 -->
+        00:01:02,205\r\nIl ne veut plus jouer\r\nqu'au jeu du silence.\r\n\r\n26\r\n00:01:02,207
+        --> 00:01:03,306\r\nEt il est vraiment mauvais.\r\n\r\n27\r\n00:01:03,308
+        --> 00:01:05,458\r\nJe gagne tout le temps.\r\n\r\n28\r\n00:01:06,844 -->
+        00:01:08,728\r\nAlors, tu es d'accord avec \xE7a ?\r\n\r\n29\r\n00:01:08,730
+        --> 00:01:10,396\r\nPourquoi je ne le serais pas ?\r\n\r\n30\r\n00:01:10,398
+        --> 00:01:12,432\r\nCe projet nous fera travailler\r\n\r\n31\r\n00:01:12,434
+        --> 00:01:14,467\r\n\xE0 proximit\xE9 l'un de l'autre.\r\n\r\n32\r\n00:01:14,469
+        --> 00:01:15,968\r\nEt il y a cet adage\r\ngrossier qui dit\r\n\r\n33\r\n00:01:15,970
+        --> 00:01:19,639\r\nque l'on ne doit pas d\xE9f\xE9quer \r\nl\xE0 o\xF9 l'on
+        mange.\r\n\r\n34\r\n00:01:19,641 --> 00:01:21,974\r\nC'est ce que mon p\xE8re
+        \r\ndisait toujours.\r\n\r\n35\r\n00:01:21,976 --> 00:01:25,161\r\n\xC7a et
+        \"Qui doit-on\r\nsatisfaire oralement\r\n\r\n36\r\n00:01:25,163 --> 00:01:27,880\r\npour
+        avoir un verre par ici ?\"\r\n\r\n37\r\n00:01:29,233 --> 00:01:31,718\r\nMais
+        qu'est-ce que \xE7a a \xE0 voir\r\n\r\n38\r\n00:01:31,720 --> 00:01:33,636\r\navec
+        ton travail \xE0 l'universit\xE9 ?\r\n\r\n39\r\n00:01:33,638 --> 00:01:36,239\r\n\"Ne
+        d\xE9f\xE8que pas \r\nl\xE0 o\xF9 tu manges\"\r\n\r\n40\r\n00:01:36,241 -->
+        00:01:38,274\r\nsignifie de ne pas\r\navoir d'histoire d'amour\r\n\r\n41\r\n00:01:38,276
+        --> 00:01:39,876\r\nsur le lieu de travail.\r\n\r\n42\r\n00:01:41,078 -->
+        00:01:43,062\r\nVraiment ?\r\n\r\n43\r\n00:01:48,470 --> 00:01:50,787\r\nJe
+        l'ai toujours pris\r\nau premier degr\xE9.\r\n\r\n44\r\n00:01:50,789 --> 00:01:53,622\r\nC'est
+        pourquoi je n'ai\r\njamais fait mes besoins\r\n\r\n45\r\n00:01:53,624 -->
+        00:01:55,992\r\nici ou dans tout autre restaurant.\r\n\r\n46\r\n00:01:57,946
+        --> 00:01:59,979\r\nJe suis soulag\xE9e que\r\ntu n'aies pas de probl\xE8me\r\n\r\n47\r\n00:01:59,981
+        --> 00:02:01,264\r\navec le fait que nous \r\ntravaillions ensemble.\r\n\r\n48\r\n00:02:01,266
+        --> 00:02:03,516\r\nPas aussi soulag\xE9\r\nque je vais l'\xEAtre.\r\n\r\n49\r\n00:02:04,518
+        --> 00:02:06,753\r\nC'est un tout nouveau monde,\r\npetite madame.\r\n\r\n50\r\n00:02:28,342
+        --> 00:02:32,342\r\n\u266A The Big Bang Theory 7x05 \u266A\r\nLa Proximit\xE9
+        du Lieu de Travail\r\nPremi\xE8re diffusion le 17-10-2013\r\n\r\n51\r\n00:02:32,367
+        --> 00:02:37,367\r\n-= Synchro par elderman =-\r\n-= www.addic7ed.com =-\r\n\r\n52\r\n00:02:37,818
+        --> 00:02:39,385\r\nTu es malade ?\r\n\r\n53\r\n00:02:39,387 --> 00:02:40,436\r\nTu
+        ne veux pas\r\n\r\n54\r\n00:02:40,438 --> 00:02:42,305\r\nque ta petite amie\r\ntravaille
+        avec toi.\r\n\r\n55\r\n00:02:42,307 --> 00:02:45,007\r\nPalourde de l'Enfer.\r\n\r\n56\r\n00:02:45,009
+        --> 00:02:46,526\r\nPourquoi pas ?\r\n\r\n57\r\n00:02:46,528 --> 00:02:49,112\r\nF\xE9e
+        Chevelue.\r\n\r\n58\r\n00:02:49,114 --> 00:02:50,680\r\n\xC7a pourrait \xEAtre
+        romantique.\r\n\r\n59\r\n00:02:50,682 --> 00:02:52,649\r\nTu sais, mes parents
+        \r\nse sont rencontr\xE9s au travail.\r\n\r\n60\r\n00:02:52,651 --> 00:02:55,685\r\nTon
+        p\xE8re est gyn\xE9cologue.\r\n\r\n61\r\n00:02:55,687 --> 00:02:56,869\r\nJe
+        sais.\r\n\r\n62\r\n00:02:56,871 --> 00:02:59,822\r\nCe qui a commenc\xE9 comme
+        un frottis,\r\ns'est transform\xE9 en un rencard.\r\n\r\n63\r\n00:03:01,292
+        --> 00:03:02,675\r\nPuis elle a travaill\xE9 l\xE0-bas,\r\n\r\n64\r\n00:03:02,677
+        --> 00:03:04,644\r\nils se sont mari\xE9s,\r\net \xE7a s'est transform\xE9
+        en haine,\r\n\r\n65\r\n00:03:04,646 --> 00:03:07,196\r\nqui continue encore
+        \xE0 ce jour.\r\n\r\n66\r\n00:03:07,298 --> 00:03:10,066\r\nCyclopes \xE0
+        deux yeux.\r\n\r\n67\r\n00:03:10,068 --> 00:03:12,902\r\nPeux-tu lui expliquer\r\npourquoi
+        c'est une mauvaise id\xE9e ?\r\n\r\n68\r\n00:03:12,904 --> 00:03:14,270\r\nNon,
+        \xE7a sera g\xE9nial.\r\n\r\n69\r\n00:03:14,272 --> 00:03:15,888\r\nLa prochaine
+        fois qu'il aura\r\nune conjonctivite au travail,\r\n\r\n70\r\n00:03:15,890
+        --> 00:03:19,942\r\npeut-\xEAtre que c'est elle qui tiendra\r\nsa t\xEAte
+        pour lui mettre ses gouttes.\r\n\r\n71\r\n00:03:19,944 --> 00:03:22,428\r\nB\xE9b\xE9
+        G\xE9ant.\r\n\r\n72\r\n00:03:22,430 --> 00:03:24,280\r\nC'est un Ogre Furieux.\r\n\r\n73\r\n00:03:24,282
+        --> 00:03:26,516\r\nJe sais.\r\n\r\n74\r\n00:03:28,519 --> 00:03:30,686\r\nJe
+        dis juste que je ne voudrais pas\r\ntravailler avec Bernadette.\r\n\r\n75\r\n00:03:30,688
+        --> 00:03:32,655\r\nPeux-tu imaginer\r\nvoir quelqu'un toute la journ\xE9e\r\n\r\n76\r\n00:03:32,657
+        --> 00:03:34,123\r\net devoir aussi la voir\r\n\r\n77\r\n00:03:34,125 -->
+        00:03:35,825\r\napr\xE8s le travail ?\r\n\r\n78\r\n00:03:35,827 --> 00:03:37,493\r\nAttends.
+        On fait \xE7a tout le temps.\r\n\r\n79\r\n00:03:37,495 --> 00:03:39,228\r\nOn
+        travaille ensemble \r\net on joue ensemble.\r\n\r\n80\r\n00:03:39,230 -->
+        00:03:42,882\r\nOui, je sais, et \xE7a m'a conduit\r\ndans les bras d'une
+        autre femme.\r\n\r\n81\r\n00:03:44,701 --> 00:03:46,719\r\nOurs Bipolaire.\r\n\r\n82\r\n00:03:46,721
+        --> 00:03:49,605\r\nJ'appr\xE9cie votre inqui\xE9tude,\r\n\r\n83\r\n00:03:49,607
+        --> 00:03:52,809\r\nmais je n'escompte pas voir\r\nAmy davantage qu'actuellement.\r\n\r\n84\r\n00:03:52,811
+        --> 00:03:55,094\r\nNous d\xE9duirons le temps \r\npass\xE9 en plus ensemble\r\n\r\n85\r\n00:03:55,096
+        --> 00:03:57,964\r\nau travail de notre quota \r\nhebdomadaire.\r\n\r\n86\r\n00:03:59,883
+        --> 00:04:02,552\r\nLaisse-moi \xEAtre l\xE0 \r\nquand tu lui diras \xE7a.\r\n\r\n87\r\n00:04:03,520
+        --> 00:04:05,688\r\nPourquoi ? Pour voir \r\nla t\xEAte d'Amy\r\n\r\n88\r\n00:04:05,690
+        --> 00:04:07,990\r\nquand elle entendra\r\nmon excellente id\xE9e ?\r\n\r\n89\r\n00:04:07,992
+        --> 00:04:10,576\r\nS'il te plait,\r\nlaisse-moi juste \xEAtre l\xE0.\r\n\r\n90\r\n00:04:12,546
+        --> 00:04:15,681\r\nAlors, Amy, sur quoi\r\ntravailles-tu \xE0 Caltech ?\r\n\r\n91\r\n00:04:15,683
+        --> 00:04:17,467\r\nJe dirige une \xE9tude pour voir\r\n\r\n92\r\n00:04:17,469
+        --> 00:04:19,368\r\nsi une carence de \r\nl'enzyme monoamine-oxydase\r\n\r\n93\r\n00:04:19,370
+        --> 00:04:21,444\r\nm\xE8ne \xE0 annihiler \r\nla peur chez les singes.\r\n\r\n94\r\n00:04:22,340
+        --> 00:04:25,158\r\nS'ils sont comme les humains,\r\nla r\xE9ponse est oui.\r\n\r\n95\r\n00:04:25,160
+        --> 00:04:27,577\r\nAttends, tu as d\xE9j\xE0 r\xE9alis\xE9e\r\ncette exp\xE9rience
+        sur des humains ?\r\n\r\n96\r\n00:04:27,579 --> 00:04:30,263\r\nComme des
+        d\xE9tenus dans le couloir \r\nde la mort avec plus rien \xE0 perdre ?\r\n\r\n97\r\n00:04:30,365
+        --> 00:04:33,082\r\nNon, \xE7a ne serait pas \xE9thique.\r\n\r\n98\r\n00:04:34,618
+        --> 00:04:36,586\r\nVous savez,\r\npeu de gens le savent,\r\n\r\n99\r\n00:04:36,588
+        --> 00:04:37,837\r\nmais l'enzyme monoamine-oxydase\r\n\r\n100\r\n00:04:37,839
+        --> 00:04:39,789\r\na \xE9t\xE9 d\xE9couvert par une femme,\r\nMary Bernheim.\r\n\r\n101\r\n00:04:42,276
+        --> 00:04:43,542\r\nC'est exact.\r\n\r\n102\r\n00:04:43,544 --> 00:04:46,545\r\nMon
+        t\xE9l\xE9phone est aussi\r\nintelligent que vous, les filles.\r\n\r\n103\r\n00:04:48,316
+        --> 00:04:49,448\r\nAmy, Bernadette, Penny.\r\n\r\n104\r\n00:04:53,538 -->
+        00:04:56,305\r\nIl n'arr\xEAtera jamais\r\nde faire \xE7a, hein ?\r\n\r\n105\r\n00:04:56,307
+        --> 00:04:57,440\r\n\xC7a ne me d\xE9range pas.\r\n\r\n106\r\n00:04:57,442
+        --> 00:04:59,108\r\nJ'esp\xE8re mettre son\r\namour de la r\xE9p\xE9tition\r\n\r\n107\r\n00:04:59,110
+        --> 00:05:00,860\r\n\xE0 profit un jour.\r\n\r\n108\r\n00:05:05,233 --> 00:05:06,399\r\nJ'ai
+        chang\xE9 d'avis.\r\n\r\n109\r\n00:05:06,401 --> 00:05:07,900\r\nTu ne peux
+        pas travailler\r\nau m\xEAme endroit que moi.\r\n\r\n110\r\n00:05:07,902 -->
+        00:05:09,268\r\nProfite du reste de ta soir\xE9e.\r\n\r\n111\r\n00:05:10,905
+        --> 00:05:13,122\r\nJ'ai d\xE9j\xE0 sign\xE9 le contrat.\r\n\r\n112\r\n00:05:13,124
+        --> 00:05:14,523\r\nJ'ai encaiss\xE9 un ch\xE8que.\r\n\r\n113\r\n00:05:14,525
+        --> 00:05:16,575\r\nTu ne vas pas pouvoir\r\n\r\n114\r\n00:05:16,577 --> 00:05:18,427\r\nbien
+        te sortir de \xE7a.\r\n\r\n115\r\n00:05:18,429 --> 00:05:19,662\r\nJe ne comprends
+        pas.\r\n\r\n116\r\n00:05:19,664 --> 00:05:21,580\r\nJe croyais que tu avais
+        dit\r\nque \xE7a ne te posait pas de probl\xE8me.\r\n\r\n117\r\n00:05:21,582
+        --> 00:05:22,698\r\nC'est vrai.\r\n\r\n118\r\n00:05:22,700 --> 00:05:24,333\r\nMais
+        c'\xE9tait avant \r\nque Howard m'explique\r\n\r\n119\r\n00:05:24,335 -->
+        00:05:26,469\r\ncomment \xE7a serait horrible \r\ns'il devait travailler\r\n\r\n120\r\n00:05:26,471
+        --> 00:05:28,137\r\navec sa moiti\xE9.\r\n\r\n121\r\n00:05:28,139 --> 00:05:30,723\r\nIl
+        a dit quoi ?\r\n\r\n122\r\n00:05:30,725 --> 00:05:32,675\r\nNe te sens pas
+        insult\xE9e.\r\n\r\n123\r\n00:05:32,677 --> 00:05:36,896\r\nIl a juste dit
+        que trop de toi\r\nserait ennuyeux \xE0 mourir.\r\n\r\n124\r\n00:05:36,898
+        --> 00:05:40,066\r\nExcuse-moi, j'ai besoin d'avoir\r\nune discussion avec
+        mon mari.\r\n\r\n125\r\n00:05:40,068 --> 00:05:41,901\r\nOui, fais vite.\r\n\r\n126\r\n00:05:41,903
+        --> 00:05:45,438\r\nDe ce que j'ai compris,\r\nla bri\xE8vet\xE9 est ton amie.\r\n\r\n127\r\n00:05:46,573
+        --> 00:05:48,741\r\nDonc, sans rancune ?\r\n\r\n128\r\n00:05:48,743 --> 00:05:50,326\r\nNon,
+        on n'est pas d'accord.\r\n\r\n129\r\n00:05:50,328 --> 00:05:51,827\r\nJe vais
+        travailler \r\nsur ce projet.\r\n\r\n130\r\n00:05:51,829 --> 00:05:54,080\r\nEt
+        tu ne peux pas lui dire \r\nce qu'elle peut et ne peut pas faire.\r\n\r\n131\r\n00:05:54,082
+        --> 00:05:56,098\r\nLa semaine derni\xE8re,\r\ntu as dit \xE0 L\xE9onard\r\n\r\n132\r\n00:05:56,100
+        --> 00:05:58,300\r\nqu'il ne pouvait pas porter\r\nsa veste Wookiee en public.\r\n\r\n133\r\n00:05:58,302
+        --> 00:05:59,518\r\nC'est diff\xE9rent.\r\n\r\n134\r\n00:05:59,520 --> 00:06:01,454\r\nJe
+        ne vais pas au centre commercial\r\navec quelqu'un habill\xE9\r\n\r\n135\r\n00:06:01,456
+        --> 00:06:03,539\r\nen stupide ours de l'espace.\r\n\r\n136\r\n00:06:05,575
+        --> 00:06:07,626\r\nTu n'as pas \xE0 t\u2019inqui\xE9ter\r\nque je t'importune.\r\n\r\n137\r\n00:06:07,628
+        --> 00:06:08,878\r\nJe serai dans un autre b\xE2timent.\r\n\r\n138\r\n00:06:08,880
+        --> 00:06:10,746\r\nEt on n'a m\xEAme pas\r\n\xE0 d\xE9jeuner ensemble.\r\n\r\n139\r\n00:06:10,748
+        --> 00:06:11,864\r\nVraiment ?\r\n\r\n140\r\n00:06:11,866 --> 00:06:14,517\r\nOui.
+        Avant tout, je suis\r\nune scientifique.\r\n\r\n141\r\n00:06:14,519 --> 00:06:16,969\r\nJe
+        suis juste l\xE0 pour faire mon\r\nboulot et avec un peu de chance,\r\n\r\n142\r\n00:06:16,971
+        --> 00:06:19,605\r\nfaire flipper leur race\r\n\xE0 quelques singes.\r\n\r\n143\r\n00:06:23,144
+        --> 00:06:25,811\r\nTu es s\xFBre que ta personnalit\xE9\r\nd'insecte ne sera
+        pas attir\xE9e\r\n\r\n144\r\n00:06:25,813 --> 00:06:28,564\r\nvers le feu
+        incandescent\r\nqui me caract\xE9rise ?\r\n\r\n145\r\n00:06:31,535 --> 00:06:33,786\r\nDe
+        plus en plus s\xFBre.\r\n\r\n146\r\n00:06:33,788 --> 00:06:36,872\r\nAlors
+        tu as ma permission.\r\n\r\n147\r\n00:06:36,874 --> 00:06:37,957\r\nJe ne
+        te l'ai pas demand\xE9.\r\n\r\n148\r\n00:06:37,959 --> 00:06:39,158\r\nTrop
+        tard. \r\nPas de retour en arri\xE8re.\r\n\r\n149\r\n00:06:41,611 --> 00:06:44,413\r\nNon,
+        \xE9coute-moi.\r\nSheldon a mal compris.\r\n\r\n150\r\n00:06:44,415 --> 00:06:45,381\r\nCe
+        que je voulais dire,\r\n\r\n151\r\n00:06:45,383 --> 00:06:46,448\r\nc'est
+        que si on travaillait \r\nensemble,\r\n\r\n152\r\n00:06:46,450 --> 00:06:48,117\r\nil
+        y aurait trop de moi pour toi,\r\n\r\n153\r\n00:06:48,119 --> 00:06:50,252\r\net
+        non pas l'inverse.\r\n\r\n154\r\n00:06:50,254 --> 00:06:52,722\r\nSi tu veux
+        mentir \xE0 ta femme,\r\n\r\n155\r\n00:06:52,724 --> 00:06:55,324\r\nne commence
+        pas une phrase avec\r\n\"Sheldon a mal compris\".\r\n\r\n156\r\n00:06:56,877
+        --> 00:06:58,010\r\nC'est un indice r\xE9v\xE9lateur.\r\n\r\n157\r\n00:06:58,012
+        --> 00:06:59,929\r\nEh bien ?\r\n\r\n158\r\n00:06:59,931 --> 00:07:01,130\r\nD'accord,
+        bien.\r\n\r\n159\r\n00:07:01,132 --> 00:07:02,898\r\nJ'ai dit \xE7a,\r\net
+        je pense que c'est vrai.\r\n\r\n160\r\n00:07:02,900 --> 00:07:05,017\r\nJe
+        pense que si on travaillait\r\net vivait ensemble,\r\n\r\n161\r\n00:07:05,019
+        --> 00:07:06,519\r\non en aurait marre l'un de l'autre.\r\n\r\n162\r\n00:07:06,521
+        --> 00:07:08,104\r\nOui, mais pour \xEAtre honn\xEAte,\r\nil a juste parl\xE9
+        du fait\r\n\r\n163\r\n00:07:08,106 --> 00:07:09,188\r\nque lui en aurait marre
+        de toi.\r\n\r\n164\r\n00:07:09,190 --> 00:07:11,023\r\nPour l'amour de Dieu,
+        \r\npourquoi ?\r\n\r\n165\r\n00:07:15,212 --> 00:07:17,863\r\nQu'est-ce qui
+        te fait penser \r\nque tu en aurais marre ?\r\n\r\n166\r\n00:07:17,865 -->
+        00:07:20,015\r\nSes seules options c'est \r\nde feindre une crise cardiaque\r\n\r\n167\r\n00:07:20,017
+        --> 00:07:22,384\r\nou en avoir une vraie.\r\n\r\n168\r\n00:07:22,386 -->
+        00:07:25,654\r\nC'est rien de particulier. Je...\r\n\r\n169\r\n00:07:25,656
+        --> 00:07:27,823\r\nEst-ce que c'est ma voix ?\r\nEst-ce que je suis trop
+        autoritaire ?\r\n\r\n170\r\n00:07:27,825 --> 00:07:28,958\r\nQuoi... ?\r\n\r\n171\r\n00:07:28,960
+        --> 00:07:31,877\r\nMon bras est engourdi.\r\n\r\n172\r\n00:07:32,796 -->
+        00:07:35,781\r\nDans le mille.\r\n\r\n173\r\n00:07:35,783 --> 00:07:39,385\r\nC'est
+        le mauvais bras \r\npour une crise cardiaque, imb\xE9cile.\r\n\r\n174\r\n00:07:41,221
+        --> 00:07:44,356\r\nLe fait est que je suis s\xFBr\r\nque certaines choses\r\n\r\n175\r\n00:07:44,358
+        --> 00:07:46,642\r\nte rendraient folle\r\nsi tu devais les supporter\r\n\r\n176\r\n00:07:46,644
+        --> 00:07:48,394\r\ntoute la journ\xE9e.\r\n\r\n177\r\n00:07:48,396 --> 00:07:50,596\r\nComme
+        me regarder dans les yeux \r\nquand tu me mens ?\r\n\r\n178\r\n00:07:50,598
+        --> 00:07:52,148\r\nAllez, j'ai juste...\r\n\r\n179\r\n00:07:52,150 --> 00:07:55,401\r\nO\xF9
+        est-ce que je dois regarder\r\nquand je te mens ?\r\n\r\n180\r\n00:07:55,403
+        --> 00:07:57,753\r\nTrouve un autre endroit \r\npour dormir ce soir.\r\n\r\n181\r\n00:08:06,863
+        --> 00:08:10,466\r\nSi \xE7a peut te faire te sentir mieux,\r\nAmy et moi
+        \xE7a va bien.\r\n\r\n182\r\n00:08:13,069 --> 00:08:15,237\r\nJe dirais m\xEAme,
+        tr\xE8s bien.\r\n\r\n183\r\n00:08:17,474 --> 00:08:19,842\r\nAlors, les gar\xE7ons,
+        comment\r\n\xE9tait la soir\xE9e pyjama ?\r\n\r\n184\r\n00:08:19,844 --> 00:08:23,729\r\nVous
+        avez saut\xE9 sur le lit en chantant\r\ndans vos brosses \xE0 cheveux ?\r\n\r\n185\r\n00:08:23,731
+        --> 00:08:25,931\r\nCe n'\xE9tait pas une soir\xE9e pyjama.\r\n\r\n186\r\n00:08:25,933
+        --> 00:08:28,434\r\nC'\xE9tait juste un couple de potes\r\n\xE0 trainer, rigoler,\r\n\r\n187\r\n00:08:28,436
+        --> 00:08:31,520\r\nqui mangent des cookies et\r\nregardent <i>Princess Bride</i>.\r\n\r\n188\r\n00:08:33,073
+        --> 00:08:34,607\r\nS'il te plait, arr\xEAte de parler.\r\n\r\n189\r\n00:08:36,243
+        --> 00:08:38,861\r\nComme tu veux.\r\n\r\n190\r\n00:08:42,666 --> 00:08:44,733\r\nRien
+        ne serait arriv\xE9\r\n\r\n191\r\n00:08:44,735 --> 00:08:46,202\r\nsi je n'avais
+        pas \r\nessay\xE9 de t'aider.\r\n\r\n192\r\n00:08:46,204 --> 00:08:48,787\r\n\xC7a
+        ne serait aussi pas arriv\xE9\r\n\r\n193\r\n00:08:48,789 --> 00:08:50,289\r\nsi
+        dans l'Univers primitif,\r\n\r\n194\r\n00:08:50,291 --> 00:08:53,792\r\nl'hydrog\xE8ne
+        \xE9tait un peu plus\r\nou un peu moins commun.\r\n\r\n195\r\n00:08:53,794
+        --> 00:08:56,278\r\nC'est marrant. \xC0 toi.\r\n\r\n196\r\n00:08:57,264 -->
+        00:08:58,597\r\nMessieurs.\r\n\r\n197\r\n00:08:58,599 --> 00:09:00,282\r\nBonjour.\r\n\r\n198\r\n00:09:00,284
+        --> 00:09:01,684\r\nC'\xE9tait un peu glacial.\r\n\r\n199\r\n00:09:01,686
+        --> 00:09:03,335\r\nVous avez des soucis ?\r\n\r\n200\r\n00:09:03,337 -->
+        00:09:04,353\r\nNon, \xE7a va.\r\n\r\n201\r\n00:09:04,355 --> 00:09:05,771\r\nComme
+        Howard l'a conseill\xE9,\r\n\r\n202\r\n00:09:05,773 --> 00:09:07,973\r\nelle
+        respecte tout juste\r\nnos fronti\xE8res professionnelles.\r\n\r\n203\r\n00:09:07,975
+        --> 00:09:08,941\r\nBien vu.\r\n\r\n204\r\n00:09:08,943 --> 00:09:10,543\r\nPrendre
+        des conseils amoureux\r\nde la part de celui\r\n\r\n205\r\n00:09:10,545 -->
+        00:09:12,962\r\nqui a tress\xE9 les cheveux de Raj \r\nla nuit derni\xE8re.\r\n\r\n206\r\n00:09:15,431
+        --> 00:09:18,450\r\nOui, tu marques un point.\r\n\r\n207\r\n00:09:18,452 -->
+        00:09:20,653\r\nIl semblerait \r\nque je m'inqui\xE9tais pour rien.\r\n\r\n208\r\n00:09:20,655
+        --> 00:09:22,204\r\nRegardez-la, qui cherche \r\nd\xE9sesp\xE9r\xE9ment\r\n\r\n209\r\n00:09:22,206
+        --> 00:09:24,156\r\n\xEAtre ici, \xE0 la table cool.\r\n\r\n210\r\n00:09:26,576
+        --> 00:09:28,327\r\nNe t'inqui\xE8te pas,\r\npetit papillon de nuit.\r\n\r\n211\r\n00:09:28,329
+        --> 00:09:30,629\r\nLa flamme viendra \xE0 toi.\r\n\r\n212\r\n00:09:34,569
+        --> 00:09:36,385\r\nAu cas o\xF9 Bernadette \r\nne rappelle pas\r\n\r\n213\r\n00:09:36,387
+        --> 00:09:37,770\r\npour s'excuser, \r\nque dirais-tu\r\n\r\n214\r\n00:09:37,772
+        --> 00:09:39,672\r\nde manger mexicain ce soir ?\r\n\r\n215\r\n00:09:39,674
+        --> 00:09:41,840\r\nJe ne sais pas.\r\n\xC7a a l'air lourd.\r\n\r\n216\r\n00:09:41,842
+        --> 00:09:44,810\r\nC'est parce que tu te bourres\r\ntoujours de chips.\r\n\r\n217\r\n00:09:44,812
+        --> 00:09:47,479\r\nEt voici le Dr. Gunderson\r\nde Stockholm.\r\n\r\n218\r\n00:09:47,481
+        --> 00:09:49,031\r\nLa Su\xE8de.\r\n\r\n219\r\n00:09:49,033 --> 00:09:50,733\r\nLa
+        patrie de mon Muppet pr\xE9f\xE9r\xE9\r\n\r\n220\r\n00:09:50,735 --> 00:09:53,719\r\net
+        ma seconde boulette\r\nde viande pr\xE9f\xE9r\xE9e.\r\n\r\n221\r\n00:09:57,140
+        --> 00:10:01,343\r\nLa r\xE9putation du manque d'humour\r\ndes gens du nord
+        est bien fond\xE9e.\r\n\r\n222\r\n00:10:02,812 --> 00:10:05,581\r\nDis donc,
+        son nom est Gunderson\r\nou Pasdr\xF4lson ?\r\n\r\n223\r\n00:10:06,833 -->
+        00:10:09,068\r\nO\xF9 allons-nous avec \xE7a,\r\nDr Cooper ?\r\n\r\n224\r\n00:10:09,070
+        --> 00:10:11,103\r\nJe suis ton petit ami.\r\n\r\n225\r\n00:10:11,105 -->
+        00:10:13,555\r\nTu m'appelles Sheldon.\r\n\r\n226\r\n00:10:13,557 --> 00:10:16,158\r\nC'est
+        vrai. Je suis dans \r\nune relation homme-femme\r\n\r\n227\r\n00:10:16,160
+        --> 00:10:18,928\r\navec ce petit morceau de laine.\r\n\r\n228\r\n00:10:20,047
+        --> 00:10:21,764\r\nC'est aussi une relation physique.\r\n\r\n229\r\n00:10:21,766
+        --> 00:10:25,517\r\nOn se tient la main, se prend dans\r\nnos bras... m\xEAme
+        quand il fait chaud.\r\n\r\n230\r\n00:10:28,171 --> 00:10:29,538\r\n\xC7a
+        c'est nouveau.\r\n\r\n231\r\n00:10:29,540 --> 00:10:31,140\r\nApparemment,
+        maintenant\r\non se donne aussi des coups de pieds\r\n\r\n232\r\n00:10:31,142
+        --> 00:10:32,775\r\ndans le tibia sous la table.\r\n\r\n233\r\n00:10:34,477
+        --> 00:10:37,012\r\nTu aimes \xE7a aussi\r\nsi je te le fais ?\r\n\r\n234\r\n00:10:38,398
+        --> 00:10:41,066\r\nPas vraiment, n'est-ce pas ?\r\n\r\n235\r\n00:10:53,498
+        --> 00:10:55,883\r\nSujet test D7,\r\n\r\n236\r\n00:10:55,885 --> 00:10:58,535\r\nalias
+        Betsy, \xE9tude \r\nsur la r\xE9ponse \xE0 la peur.\r\n\r\n237\r\n00:10:58,537
+        --> 00:11:02,389\r\nImage n\xB01 : un fran\xE7ais \xE0 bicyclette\r\ntransportant
+        des baguettes.\r\n\r\n238\r\n00:11:05,393 --> 00:11:08,395\r\nPas de r\xE9action
+        notable.\r\n\r\n239\r\n00:11:08,397 --> 00:11:10,764\r\nImage n\xB02 : soubassophone.\r\n\r\n240\r\n00:11:13,234
+        --> 00:11:14,735\r\nToujours pas de r\xE9action.\r\n\r\n241\r\n00:11:15,738
+        --> 00:11:17,371\r\nMontons d'un cran.\r\n\r\n242\r\n00:11:17,373 --> 00:11:20,090\r\nImage
+        n\xB03 : crocodile avec\r\nla gueule pleine de singes.\r\n\r\n243\r\n00:11:24,078
+        --> 00:11:27,131\r\nOk, on est sur la bonne voie.\r\n\r\n244\r\n00:11:27,133
+        --> 00:11:29,066\r\nDr. Fowler ?\r\n\r\n245\r\n00:11:29,068 --> 00:11:31,135\r\nQue
+        veux-tu Sheldon ?\r\n\r\n246\r\n00:11:31,137 --> 00:11:33,220\r\nJ'ai fini
+        de travailler donc...\r\n\r\n247\r\n00:11:34,423 --> 00:11:36,357\r\nD\xE9sol\xE9e.\r\n\r\n248\r\n00:11:39,094
+        --> 00:11:40,527\r\nMieux ?\r\n\r\n249\r\n00:11:40,529 --> 00:11:41,695\r\nBaguettes.\r\n\r\n250\r\n00:11:41,697
+        --> 00:11:43,897\r\nOui j'aime les baguettes.\r\n\r\n251\r\n00:11:43,899 -->
+        00:11:46,099\r\nQue fais-tu au juste ?\r\n\r\n252\r\n00:11:46,101 --> 00:11:48,535\r\nD\xE9terminer
+        la base des niveaux de \r\npeurs chez les singes capucins\r\n\r\n253\r\n00:11:48,537
+        --> 00:11:50,871\r\nen mesurant leurs r\xE9ponses\r\naux stimuli visuels.\r\n\r\n254\r\n00:11:50,873
+        --> 00:11:52,339\r\nAlors, tr\xEAve de plaisanterie.\r\n\r\n255\r\n00:11:54,909
+        --> 00:11:57,578\r\nComme je le disais, j'ai fini de\r\ntravailler et pas
+        L\xE9onard.\r\n\r\n256\r\n00:11:57,580 --> 00:12:00,214\r\nBonne nouvelle,
+        tu me ram\xE8nes \r\n\xE0 la maison.\r\n\r\n257\r\n00:12:00,216 --> 00:12:01,248\r\nAbats
+        tes cartes finement,\r\n\r\n258\r\n00:12:01,250 --> 00:12:02,750\r\nje te
+        laisserai me conduire\r\n\r\n259\r\n00:12:02,752 --> 00:12:05,836\r\nau-del\xE0
+        du terrain\r\no\xF9 les bus se garent la nuit.\r\n\r\n260\r\n00:12:05,838
+        --> 00:12:07,638\r\nJe ne peux pas partir maintenant.\r\n\r\n261\r\n00:12:07,640
+        --> 00:12:08,756\r\nJe suis tr\xE8s occup\xE9e.\r\n\r\n262\r\n00:12:08,758
+        --> 00:12:10,557\r\nDe plus, pourquoi voudrais-je \r\nte rendre service\r\n\r\n263\r\n00:12:10,559
+        --> 00:12:12,576\r\napr\xE8s la fa\xE7on dont tu m'as trait\xE9e\r\n\xE0 la
+        caf\xE9t\xE9ria ?\r\n\r\n264\r\n00:12:12,578 --> 00:12:15,128\r\nImage n\xB04
+        : boa constrictor.\r\n\r\n265\r\n00:12:18,967 --> 00:12:21,935\r\nDe quoi
+        tu parles ?\r\n\r\n266\r\n00:12:21,937 --> 00:12:23,487\r\nMon comportement
+        \xE0 la caf\xE9t\xE9ria\r\n\r\n267\r\n00:12:23,489 --> 00:12:25,305\r\n\xE9tait
+        parfait.\r\n\r\n268\r\n00:12:25,307 --> 00:12:27,491\r\nPeut-\xEAtre que ton
+        ami\r\nGunderson a besoin\r\n\r\n269\r\n00:12:27,493 --> 00:12:29,443\r\nd'aller
+        chez Ikea\r\net d'assembler\r\n\r\n270\r\n00:12:29,445 --> 00:12:32,379\r\nun
+        sens de l'humour.\r\n\r\n271\r\n00:12:32,381 --> 00:12:34,364\r\nTu m'as embarrass\xE9e\r\ndevant
+        mes coll\xE8gues\r\n\r\n272\r\n00:12:34,366 --> 00:12:35,982\r\npour mon premier
+        jour.\r\n\r\n273\r\n00:12:36,684 --> 00:12:37,785\r\nImage n\xB05 :\r\n\r\n274\r\n00:12:37,787
+        --> 00:12:39,186\r\nchaton dans une tasse de th\xE9.\r\n\r\n275\r\n00:12:44,959
+        --> 00:12:47,528\r\nT'embarrasser ?\r\nTu sais quoi ?\r\n\r\n276\r\n00:12:47,530
+        --> 00:12:50,431\r\nJe n'ai pas le temps pour \xE7a. \r\nTrouve un autre moyen
+        de rentrer.\r\n\r\n277\r\n00:12:50,433 --> 00:12:53,450\r\nJe commence \xE0
+        comprendre pourquoi\r\ntu es f\xE2ch\xE9e apr\xE8s moi.\r\n\r\n278\r\n00:12:53,452
+        --> 00:12:55,001\r\nVraiment ?\r\nQu'est-ce qui t'a mis sur la voie ?\r\n\r\n279\r\n00:12:55,003
+        --> 00:12:56,053\r\nDeux choses, en fait.\r\n\r\n280\r\n00:12:56,055 --> 00:12:57,170\r\nLe
+        ton de ta voix,\r\nton langage corporel...\r\n\r\n281\r\n00:12:57,172 -->
+        00:12:58,806\r\n- Dehors.\r\n- Maintenant, \xE7a.\r\n\r\n282\r\n00:13:00,675
+        --> 00:13:03,310\r\nImage n\xB06 : femme\r\ndonnant naissance.\r\n\r\n283\r\n00:13:12,570
+        --> 00:13:14,187\r\nIl est 21 heures.\r\nO\xF9 \xE9tais-tu ?\r\n\r\n284\r\n00:13:14,189
+        --> 00:13:17,307\r\nJ'ai du prendre le bus\r\npour rentrer.\r\n\r\n285\r\n00:13:17,309
+        --> 00:13:20,844\r\nJe me suis endormi \r\net j'ai rat\xE9 mon arr\xEAt.\r\n\r\n286\r\n00:13:22,648
+        --> 00:13:26,633\r\nTu savais que Los Angeles avait\r\nun petit Sri Lanka
+        ?\r\n\r\n287\r\n00:13:26,635 --> 00:13:28,986\r\nJe ne savais pas.\r\n\r\n288\r\n00:13:28,988
+        --> 00:13:31,004\r\nMaintenant... oui.\r\n\r\n289\r\n00:13:31,006 --> 00:13:33,707\r\nIls
+        sont adorables.\r\n\r\n290\r\n00:13:33,709 --> 00:13:37,377\r\nM\xEAme si
+        c'est terrifiant de se r\xE9veiller\r\nen face d'eux.\r\n\r\n291\r\n00:13:38,379
+        --> 00:13:39,646\r\nSi tu as faim, j'ai ramen\xE9\r\n\r\n292\r\n00:13:39,648
+        --> 00:13:41,632\r\ndu mouton et du lait de coco.\r\n\r\n293\r\n00:13:41,634
+        --> 00:13:43,617\r\nPourquoi tu as pris \xE7a ?\r\nTu d\xE9testes l'agneau.\r\n\r\n294\r\n00:13:43,619
+        --> 00:13:45,686\r\nJe demandais mon chemin.\r\n\r\n295\r\n00:13:45,688 -->
+        00:13:49,206\r\nApparemment, il y a eu des \r\nprobl\xE8mes de communications.\r\n\r\n296\r\n00:13:49,208
+        --> 00:13:52,326\r\nJe pensais qu'Amy te ram\xE8nerait\r\n\xE0 la maison.\r\n\r\n297\r\n00:13:52,328
+        --> 00:13:53,610\r\nOui, je le pensais aussi,\r\n\r\n298\r\n00:13:53,612 -->
+        00:13:55,779\r\nmais elle agit tr\xE8s \xE9trangement.\r\n\r\n299\r\n00:13:55,781
+        --> 00:13:58,782\r\nJ'en discutais avec un Sri lankais \r\ndans le bus,\r\n\r\n300\r\n00:13:58,784
+        --> 00:14:01,869\r\net il a suppos\xE9 qu'un tigre\r\npouvait\r\n\r\n301\r\n00:14:01,871
+        --> 00:14:04,054\r\nse cacher dans son ombre.\r\n\r\n302\r\n00:14:05,907 -->
+        00:14:08,342\r\nBien qu'il ait peut-\xEAtre \r\nessay\xE9 de m'attirer\r\n\r\n303\r\n00:14:08,344
+        --> 00:14:11,345\r\nchez son beau-fr\xE8re \r\nqui est m\xE9decin-sorcier.\r\n\r\n304\r\n00:14:14,265
+        --> 00:14:16,834\r\nQue s'est-il pass\xE9\r\nentre toi et Amy ?\r\n\r\n305\r\n00:14:16,836
+        --> 00:14:20,571\r\nTu peux croire qu'elle dise\r\nque je l'ai embarrass\xE9e
+        ?\r\n\r\n306\r\n00:14:22,658 --> 00:14:25,442\r\nMais tu n'as m\xEAme pas
+        \r\nentendu les d\xE9tails.\r\n\r\n307\r\n00:14:29,247 --> 00:14:31,865\r\nJe
+        te connais depuis longtemps,\r\n\r\n308\r\n00:14:31,867 --> 00:14:33,283\r\net
+        je vais te dire ceci\r\n\r\n309\r\n00:14:33,285 --> 00:14:37,154\r\navec tout
+        l'amour que \r\nje puisse rassembler.\r\n\r\n310\r\n00:14:37,156 --> 00:14:38,155\r\nAmy
+        a raison.\r\n\r\n311\r\n00:14:38,157 --> 00:14:39,606\r\nTu as tort.\r\n\r\n312\r\n00:14:40,458
+        --> 00:14:41,658\r\nMais tu ne sais m\xEAme pas...\r\n\r\n313\r\n00:14:41,660
+        --> 00:14:43,076\r\nPas d'importance.\r\n\r\n314\r\n00:14:43,078 --> 00:14:45,696\r\n-
+        Mais, pour ma d\xE9fense...\r\n- Pas d'importance.\r\n\r\n315\r\n00:14:45,698
+        --> 00:14:47,931\r\nTu n'\xE9coutes m\xEAme pas \r\nma version de l'histoire.\r\n\r\n316\r\n00:14:47,933
+        --> 00:14:50,267\r\nQuelle est ta version ?\r\n\r\n317\r\n00:14:52,287 -->
+        00:14:54,788\r\nNon, je suis pour Amy\r\nsur ce coup-l\xE0.\r\n\r\n318\r\n00:15:00,629
+        --> 00:15:01,678\r\nLes crevettes \xE9taient \xE9pic\xE9es.\r\n\r\n319\r\n00:15:01,680
+        --> 00:15:03,113\r\nTu veux un Spasfon ?\r\n\r\n320\r\n00:15:03,115 --> 00:15:04,431\r\nTu
+        as celui au parfum \r\nde fruit tropical ?\r\n\r\n321\r\n00:15:04,433 -->
+        00:15:06,950\r\nNon si je prends ceux-l\xE0, \r\nje les mange tous comme des
+        bonbons.\r\n\r\n322\r\n00:15:06,952 --> 00:15:08,385\r\nM'en parle pas.\r\n\r\n323\r\n00:15:08,387
+        --> 00:15:11,104\r\nUne fois, je le jure\r\nj'ai fais caca un baton de craie.\r\n\r\n324\r\n00:15:13,141
+        --> 00:15:15,359\r\nJ'y vais.\r\nMerci.\r\n\r\n325\r\n00:15:19,531 --> 00:15:21,698\r\nJ'ai
+        peut-\xEAtre exag\xE9r\xE9.\r\n\r\n326\r\n00:15:21,700 --> 00:15:25,619\r\nJe
+        n'ai pas tr\xE8s bien \r\nr\xE9agi non plus.\r\n\r\n327\r\n00:15:25,621 -->
+        00:15:28,038\r\nParfois j'ai l'impression\r\nque tu pr\xE9f\xE8res \xEAtre\r\n\r\n328\r\n00:15:28,040
+        --> 00:15:30,090\r\navec tes amis plut\xF4t\r\nqu'avec moi.\r\n\r\n329\r\n00:15:30,092
+        --> 00:15:31,909\r\nC'est pas vrai.\r\nVraiment ?\r\n\r\n330\r\n00:15:31,911
+        --> 00:15:33,594\r\nTu passes toute la journ\xE9e \r\nau travail,\r\n\r\n331\r\n00:15:33,596
+        --> 00:15:35,712\r\net tu passes tes nuits\r\n\xE0 jouer \xE0 des jeux,\r\n\r\n332\r\n00:15:35,714
+        --> 00:15:37,230\r\naller au magasin de BD.\r\n\r\n333\r\n00:15:37,232 -->
+        00:15:39,850\r\nLa semaine derni\xE8re, vous \xEAtes all\xE9s\r\nvous faire
+        masser deux fois.\r\n\r\n334\r\n00:15:42,487 --> 00:15:45,055\r\nDonc quand
+        tu as dit que\r\ntu ne voudrais pas passer\r\n\r\n335\r\n00:15:45,057 -->
+        00:15:48,025\r\ntant de temps avec moi, \r\n\xE7a m'a vraiment bless\xE9e.\r\n\r\n336\r\n00:15:49,645
+        --> 00:15:50,978\r\nOui je comprends.\r\n\r\n337\r\n00:15:50,980 --> 00:15:52,112\r\nJe
+        suis vraiment d\xE9sol\xE9.\r\n\r\n338\r\n00:15:52,114 --> 00:15:54,865\r\n\xC0
+        partir de demain,\r\nje tourne une nouvelle page.\r\n\r\n339\r\n00:15:54,867
+        --> 00:15:57,985\r\nPasser du temps avec toi \r\nsera ma priorit\xE9.\r\n\r\n340\r\n00:15:59,989
+        --> 00:16:01,688\r\nPourquoi demain ?\r\n\r\n341\r\n00:16:03,190 --> 00:16:05,509\r\nOn
+        est \xE0 presque terminer\r\n\r\n342\r\n00:16:05,511 --> 00:16:07,377\r\nle
+        nouveau jeu Batman.\r\n\r\n343\r\n00:16:08,513 --> 00:16:11,665\r\nIl est
+        g\xE9nial.\r\n\r\n344\r\n00:16:13,968 --> 00:16:16,003\r\nTu devrais probablement\r\nlui
+        courir apr\xE8s.\r\n\r\n345\r\n00:16:16,005 --> 00:16:17,754\r\nEst-ce que
+        je dois \r\nte courir apr\xE8s ?\r\n\r\n346\r\n00:16:21,592 --> 00:16:24,094\r\nMerci
+        de m'avoir \r\nattir\xE9 des ennuis.\r\n\r\n347\r\n00:16:34,722 --> 00:16:37,324\r\nQu'est-ce
+        que tu fais \r\nici \xE0 cette heure l\xE0 ?\r\n\r\n348\r\n00:16:37,326 -->
+        00:16:39,192\r\nJe ne pouvais par dormir \r\nparce que je r\xE9fl\xE9chissais\r\n\r\n349\r\n00:16:39,194
+        --> 00:16:41,445\r\n\xE0 ce qui nous \xE9tait arriv\xE9 plus t\xF4t.\r\n\r\n350\r\n00:16:42,246
+        --> 00:16:45,615\r\nAussi, j'ai fait une sieste\r\nd'enfer dans le bus.\r\n\r\n351\r\n00:16:46,751
+        --> 00:16:47,901\r\nEn parlant de \xE7a,\r\n\r\n352\r\n00:16:47,903 --> 00:16:50,787\r\ntu
+        veux un peu de mouton\r\net de lait de coco ?\r\n\r\n353\r\n00:16:51,857 -->
+        00:16:54,624\r\nJe ne peux pas me\r\nd\xE9barrasser de \xE7a.\r\n\r\n354\r\n00:16:54,626
+        --> 00:16:57,077\r\nQu'est-ce que tu veux ?\r\n\r\n355\r\n00:16:57,079 -->
+        00:17:00,647\r\nCe n'est pas facile \xE0 dire.\r\n\r\n356\r\n00:17:01,766
+        --> 00:17:04,751\r\nToutes les relations sont difficiles,\r\n\r\n357\r\n00:17:04,753
+        --> 00:17:07,688\r\net encore plus quand tu es\r\n\r\n358\r\n00:17:07,690
+        --> 00:17:09,523\r\navec quelqu'un qui peine\r\n\r\n359\r\n00:17:09,525 -->
+        00:17:11,858\r\navec les interactions sociales\r\nde tous les jours.\r\n\r\n360\r\n00:17:11,860
+        --> 00:17:13,527\r\nEt franchement...\r\n\r\n361\r\n00:17:13,529 --> 00:17:15,145\r\nqui
+        peut reprocher \xE0 des gens\r\n\r\n362\r\n00:17:15,147 --> 00:17:17,664\r\nd'\xEAtre
+        un peu bizarres.\r\n\r\n363\r\n00:17:19,651 --> 00:17:21,651\r\nTu n'es pas
+        bizarre.\r\n\r\n364\r\n00:17:21,653 --> 00:17:24,271\r\nJe ne parlais pas
+        de moi.\r\n\r\n365\r\n00:17:26,307 --> 00:17:28,441\r\nJe veux dire, honn\xEAtement,\r\nil
+        n'y a rien\r\n\r\n366\r\n00:17:28,443 --> 00:17:30,077\r\nsur ce qui te lancerai.\r\n\r\n367\r\n00:17:30,079
+        --> 00:17:32,295\r\nTu sais, me pr\xE9senter comme\r\nton petit ami.\r\n\r\n368\r\n00:17:32,297
+        --> 00:17:35,549\r\nTe donner l'opportunit\xE9\r\nde me ramener chez moi.\r\n\r\n369\r\n00:17:35,551
+        --> 00:17:37,617\r\nBriser la glace avec\r\ntes coll\xE8gues\r\n\r\n370\r\n00:17:37,619
+        --> 00:17:40,787\r\nen utilisant de l'humour ethnique,\r\nle plus dr\xF4le
+        des humours.\r\n\r\n371\r\n00:17:42,557 --> 00:17:44,224\r\nO\xF9 veux-tu
+        en venir ?\r\n\r\n372\r\n00:17:44,226 --> 00:17:46,626\r\nNous sommes un couple.\r\n\r\n373\r\n00:17:48,363
+        --> 00:17:50,480\r\nJe t'aime bien \r\npour ce que tu es.\r\n\r\n374\r\n00:17:50,482
+        --> 00:17:52,365\r\nTon excentricit\xE9 et tout.\r\n\r\n375\r\n00:17:54,102
+        --> 00:17:55,652\r\nJe t'aime bien, aussi.\r\n\r\n376\r\n00:17:55,654 -->
+        00:17:58,188\r\nJe l'esp\xE8re bien.\r\n\r\n377\r\n00:17:58,190 --> 00:18:00,323\r\nJe
+        ne vois personne d'autre\r\nfrappant \xE0 cette porte\r\n\r\n378\r\n00:18:00,325
+        --> 00:18:02,826\r\ncomposer avec ton non-sense.\r\n\r\n379\r\n00:18:06,981
+        --> 00:18:09,583\r\nM\xEAme pas un au revoir ?\r\n\r\n380\r\n00:18:09,585
+        --> 00:18:11,084\r\nC'est le genre de chose\r\n\r\n381\r\n00:18:11,086 -->
+        00:18:13,620\r\nqui te font passer \r\npour bizarre.\r\n\r\n382\r\n00:18:13,622
+        --> 00:18:15,422\r\nPauvre enfant.\r\n\r\n383\r\n00:18:15,424 --> 00:18:17,507\r\nElle
+        ne le voit juste pas.\r\n\r\n384\r\n00:18:27,608 --> 00:18:28,691\r\nJe ne
+        m'excuse pas \r\naupr\xE8s d'Howard.\r\n\r\n385\r\n00:18:28,693 --> 00:18:30,342\r\nIl
+        peut venir\r\nme supplier \xE0 genoux.\r\n\r\n386\r\n00:18:30,344 --> 00:18:31,694\r\nSheldon,
+        \xE9galement.\r\n\r\n387\r\n00:18:31,696 --> 00:18:34,196\r\nSi je le vois
+        au boulot,\r\nje vais l'ignorer.\r\n\r\n388\r\n00:18:34,198 --> 00:18:36,032\r\nTr\xE8s
+        bien, ne t'inqui\xE8te pas.\r\nJ'ai parl\xE9 \xE0 Leonard.\r\n\r\n389\r\n00:18:36,034
+        --> 00:18:38,801\r\nIl va s'asseoir avec les mecs\r\net les remettre \xE0
+        leur place.\r\n\r\n390\r\n00:18:38,803 --> 00:18:40,820\r\nLe laser est pr\xEAt.\r\n\r\n391\r\n00:18:40,896
+        --> 00:18:41,928\r\nFeu !\r\n\r\n392\r\n00:18:44,274 --> 00:18:49,274\r\n-=
+        Synchro par elderman =-\r\n-= www.addic7ed.com =-\r\n\r\n"
+    headers:
+      CF-Cache-Status:
+      - MISS
+      CF-RAY:
+      - 88149d0e6a7899f3-CDG
+      Cache-Control:
+      - public, max-age=691200
+      Connection:
+      - keep-alive
+      Content-Type:
+      - text/srt
+      Date:
+      - Thu, 09 May 2024 20:59:28 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=catpwIOso7a5xKd1rdfQPIAJb2zltnkxduNtb1JBzMD%2FRIz%2BIf5Cjz7eNEB88Cc6FAlHzdswyC3ajG3%2FvsP%2BVpNSPYk8hGLopWS0UDMR%2BFpA5sJJP9oggZ2afZQk3p0GwLEMEQ%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      alt-svc:
+      - h3=":443"; ma=86400
+      content-disposition:
+      - attachment; filename=The.Big.Bang.Theory.S07E05.fr.srt; filename*=UTF-8''The.Big.Bang.Theory.S07E05.fr.srt
+      etag:
+      - W/"90fe1369-fa0c-4154-bd04-d3d332dec587-637949927070602570"
+      last-modified:
+      - Mon, 01 Aug 2022 23:18:27 GMT
+      vary:
+      - Accept-Encoding
     status:
       code: 200
       message: OK

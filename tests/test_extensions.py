@@ -1,16 +1,23 @@
-from pkg_resources import EntryPoint, iter_entry_points
+from importlib.metadata import entry_points
 
-from subliminal.extensions import RegistrableExtensionManager, provider_manager, default_providers, disabled_providers
+from subliminal.extensions import (
+    RegistrableExtensionManager,
+    provider_manager,
+    default_providers,
+    disabled_providers,
+    parse_entry_point,
+)
 
 
 def test_registrable_extension_manager_all_extensions():
+    native_extensions = sorted(e.name for e in provider_manager)
+
     manager = RegistrableExtensionManager('subliminal.providers', [
         'esopensubtitl = subliminal.providers.opensubtitles:OpenSubtitlesProvider'
     ])
     extensions = sorted(e.name for e in manager)
-    assert len(extensions) == 10
-    assert extensions == ['addic7ed', 'argenteam', 'esopensubtitl', 'napiprojekt', 'opensubtitles',
-                          'podnapisi', 'shooter', 'thesubdb', 'tvsubtitles']
+    assert len(extensions) == len(native_extensions) + 1
+    assert extensions == sorted(name for name in ('esopensubtitl', *native_extensions))
 
 
 def test_registrable_extension_manager_internal_extension():
@@ -49,8 +56,8 @@ def test_registrable_extension_manager_unregister():
 
 
 def test_provider_manager():
-    setup_names = {ep.name for ep in iter_entry_points(provider_manager.namespace)}
-    internal_names = {EntryPoint.parse(iep).name for iep in provider_manager.internal_extensions}
+    setup_names = {ep.name for ep in entry_points() if ep.group == provider_manager.namespace}
+    internal_names = {parse_entry_point(iep, provider_manager.namespace).name for iep in provider_manager.internal_extensions}
     enabled_names = set(default_providers)
     disabled_names = set(disabled_providers)
     assert enabled_names == setup_names - disabled_names

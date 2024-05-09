@@ -54,12 +54,12 @@ class Subtitle:
     @property
     def id(self):
         """Unique identifier of the subtitle"""
-        raise NotImplementedError
+        return ""
 
     @property
     def info(self):
         """Info of the subtitle, human readable. Usually the subtitle name for GUI rendering"""
-        raise NotImplementedError
+        return ""
 
     @property
     def text(self):
@@ -94,11 +94,17 @@ class Subtitle:
             return False
 
         try:
-            srt.parse(self.text)
+            self.parsed()
         except srt.SRTParseError:
             return False
 
         return True
+
+    def parsed(self):
+        """Text content parsed to a valid subtitle.
+
+        """
+        return srt.compose(srt.parse(self.text))
 
     def guess_encoding(self):
         """Guess encoding using the language, falling back on chardet.

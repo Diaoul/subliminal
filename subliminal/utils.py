@@ -6,7 +6,7 @@ import os
 import re
 import socket
 import struct
-from datetime import datetime
+from datetime import datetime, timezone
 
 import requests
 from requests.exceptions import SSLError
@@ -154,14 +154,14 @@ def sanitize_release_group(string):
 
 
 def timestamp(date):
-    """Get the timestamp of the `date`, python2/3 compatible
+    """Get the timestamp of the `date` (with timezone).
 
     :param datetime.datetime date: the utc date.
     :return: the timestamp of the date.
     :rtype: float
 
     """
-    return (date - datetime(1970, 1, 1)).total_seconds()
+    return (date - datetime(1970, 1, 1, tzinfo=timezone.utc)).total_seconds()
 
 
 def matches_title(actual, title, alternative_titles):

@@ -117,6 +117,8 @@ class ProviderPool:
         except Exception as e:
             handle_exception(e, 'Provider {}'.format(provider))
 
+        return []
+
     def list_subtitles(self, video, languages):
         """List subtitles.
 

@@ -1,20 +1,17 @@
 import subprocess
-from io import BytesIO
 import os
+from io import BytesIO
+from unittest.mock import Mock
 from zipfile import ZipFile
 
 import pytest
 import requests
 from babelfish import Country
 
-try:
-    from unittest.mock import Mock
-except ImportError:
-    from mock import Mock
-
 from subliminal import Episode, Movie
 from subliminal.cache import region
 
+TESTS = os.path.dirname(__file__)
 
 @pytest.fixture(autouse=True, scope='session')
 def configure_region():
@@ -162,7 +159,7 @@ def episodes():
 
 @pytest.fixture(scope='session')
 def mkv():
-    data_path = os.path.join('tests', 'data', 'mkv')
+    data_path = os.path.join(TESTS, 'data', 'mkv')
 
     # download matroska test suite
     if not os.path.exists(data_path) or len(os.listdir(data_path)) != 8:
@@ -181,7 +178,7 @@ def mkv():
 
 @pytest.fixture(scope='session')
 def rar(mkv):
-    data_path = os.path.join('tests', 'data', 'rar')
+    data_path = os.path.join(TESTS, 'data', 'rar')
     if not os.path.exists(data_path):
         os.makedirs(data_path)
 
@@ -191,21 +188,27 @@ def rar(mkv):
     }
 
     generated_files = {
-        'video': [mkv['test1']],
-        'videos': [mkv['test3'], mkv['test4'], mkv['test5']],
+        'video': [mkv.get('test1')],
+        'videos': [mkv.get('test3'), mkv.get('test4'), mkv.get('test5')],
     }
 
     files = {}
-    for filename, download_url in downloaded_files.items():
-        files[filename] = os.path.join(data_path, filename) + '.rar'
-        if not os.path.exists(files[filename]):
+    # Add downloaded files
+    for name, download_url in downloaded_files.items():
+        filename = os.path.join(data_path, name + ".rar")
+        if not os.path.exists(filename):
             r = requests.get(download_url)
-            with open(files[filename], 'wb') as f:
+            with open(filename, 'wb') as f:
                 f.write(r.content)
+        files[name] = filename
 
-    for filename, videos in generated_files.items():
-        files[filename] = os.path.join(data_path, filename) + '.rar'
-        if not os.path.exists(files[filename]):
-            subprocess.call(['rar', 'a', files[filename]] + videos)
+    # Add generated files
+    for name, videos in generated_files.items():
+        existing_videos = [v for v in videos if v and os.path.isfile(v)]
+        filename = os.path.join(data_path, name + ".rar")
+        if not os.path.exists(filename):
+            subprocess.run(["rar", "a", filename, *existing_videos], shell=True)
+        if os.path.exists(filename):
+            files[name] = filename
 
     return files

@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import os
 import time
 
@@ -88,11 +88,11 @@ def test_login_error():
 @vcr.use_cassette
 def test_login(client):
     assert client.token is None
-    assert client.token_date <= datetime.utcnow() - timedelta(hours=1)
+    assert client.token_date <= datetime.now(timezone.utc) - timedelta(hours=1)
     assert client.token_expired
     client.login()
     assert client.token is not None
-    assert client.token_date > datetime.utcnow() - timedelta(seconds=1)
+    assert client.token_date > datetime.now(timezone.utc) - timedelta(seconds=1)
     assert client.token_expired is False
 
 

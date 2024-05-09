@@ -1,11 +1,7 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
+from unittest.mock import Mock
 
 import pytest
-from six import text_type as str
-try:
-    from unittest.mock import Mock
-except ImportError:
-    from mock import Mock
 
 from subliminal.utils import sanitize, timestamp
 from subliminal.video import Episode, Movie, Video
@@ -14,7 +10,7 @@ from subliminal.video import Episode, Movie, Video
 def test_video_exists_age(movies, tmpdir, monkeypatch):
     monkeypatch.chdir(str(tmpdir))
     video = movies['man_of_steel']
-    tmpdir.ensure(video.name).setmtime(timestamp(datetime.utcnow() - timedelta(days=3)))
+    tmpdir.ensure(video.name).setmtime(timestamp(datetime.now(timezone.utc) - timedelta(days=3)))
     assert video.exists
     assert timedelta(days=3) < video.age < timedelta(days=3, seconds=1)
 

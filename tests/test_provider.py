@@ -1,7 +1,6 @@
-from bs4 import FeatureNotFound
 import pytest
 
-from subliminal.providers import ParserBeautifulSoup, Provider
+from subliminal.providers import ParserBeautifulSoup, Provider, FeatureNotFound
 from subliminal.video import Episode, Movie
 
 

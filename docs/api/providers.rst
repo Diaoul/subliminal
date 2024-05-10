@@ -7,6 +7,11 @@ Addic7ed
 .. automodule:: subliminal.providers.addic7ed
    :private-members:
 
+Gestdown
+--------
+.. automodule:: subliminal.providers.gestdown
+   :private-members:
+
 NapiProjekt
 -----------
 .. automodule:: subliminal.providers.napiprojekt

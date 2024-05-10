@@ -241,13 +241,15 @@ config_file = 'config.ini'
 @click.option('--legendastv', type=click.STRING, nargs=2, metavar='USERNAME PASSWORD', help='LegendasTV configuration.', hidden=True)
 @click.option('--opensubtitles', type=click.STRING, nargs=2, metavar='USERNAME PASSWORD',
               help='OpenSubtitles configuration.')
+@click.option('--opensubtitlescom', type=click.STRING, nargs=2, metavar='USERNAME PASSWORD',
+              help='OpenSubtitles.com configuration.')
 @click.option('--omdb', type=click.STRING, nargs=1, metavar='APIKEY', help='OMDB API key.')
 @click.option('--cache-dir', type=click.Path(writable=True, file_okay=False), default=dirs.user_cache_dir,
               show_default=True, expose_value=True, help='Path to the cache directory.')
 @click.option('--debug', is_flag=True, help='Print useful information for debugging subliminal and for reporting bugs.')
 @click.version_option(__version__)
 @click.pass_context
-def subliminal(ctx, addic7ed, legendastv, opensubtitles, omdb, cache_dir, debug):
+def subliminal(ctx, addic7ed, legendastv, opensubtitles, opensubtitlescom, omdb, cache_dir, debug):
     """Subtitles, faster than your thoughts."""
     # create cache directory
     try:
@@ -280,6 +282,15 @@ def subliminal(ctx, addic7ed, legendastv, opensubtitles, omdb, cache_dir, debug)
     if opensubtitles:
         ctx.obj['provider_configs']['opensubtitles'] = {'username': opensubtitles[0], 'password': opensubtitles[1]}
         ctx.obj['provider_configs']['opensubtitlesvip'] = {'username': opensubtitles[0], 'password': opensubtitles[1]}
+    if opensubtitlescom:
+        ctx.obj['provider_configs']['opensubtitlescom'] = {
+            'username': opensubtitlescom[0],
+            'password': opensubtitlescom[1],
+        }
+        ctx.obj['provider_configs']['opensubtitlescomvip'] = {
+            'username': opensubtitlescom[0],
+            'password': opensubtitlescom[1],
+        }
 
     # refiner configs
     if omdb:

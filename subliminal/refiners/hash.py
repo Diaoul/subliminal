@@ -10,6 +10,8 @@ hash_functions = {
     'napiprojekt': hash_napiprojekt,
     'opensubtitles': hash_opensubtitles,
     'opensubtitlesvip': hash_opensubtitles,
+    'opensubtitlescom': hash_opensubtitles,
+    'opensubtitlescomvip': hash_opensubtitles,
     'shooter': hash_shooter,
     'thesubdb': hash_thesubdb
 }

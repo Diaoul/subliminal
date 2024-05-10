@@ -10,6 +10,7 @@ subtitles. Current supported providers are:
 * LegendasTV
 * NapiProjekt
 * OpenSubtitles
+* OpenSubtitles.com
 * Podnapisi
 * Shooter
 * TheSubDB

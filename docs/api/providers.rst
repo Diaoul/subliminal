@@ -17,6 +17,11 @@ OpenSubtitles
 .. automodule:: subliminal.providers.opensubtitles
    :private-members:
 
+OpenSubtitles.com
+-----------------
+.. automodule:: subliminal.providers.opensubtitlescom
+   :private-members:
+
 Podnapisi
 ---------
 .. automodule:: subliminal.providers.podnapisi

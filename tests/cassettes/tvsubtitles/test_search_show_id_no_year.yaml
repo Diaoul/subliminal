@@ -1,129 +1,221 @@
 interactions:
 - request:
-    body: q=Dallas
+    body: qs=Dallas
     headers:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br
       Connection:
       - keep-alive
       Content-Length:
-      - '8'
+      - '9'
       Content-Type:
       - application/x-www-form-urlencoded
+      Referer:
+      - https://www.tvsubtitles.net/
       User-Agent:
       - Subliminal/2.1
+      X-Requested-With:
+      - XMLHttpRequest
     method: POST
-    uri: http://www.tvsubtitles.net/search.php
+    uri: https://www.tvsubtitles.net/search.php
   response:
     body:
-      string: !!binary |
-        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
+      string: "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n\t<html
+        xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\" lang=\"en\">\n\t<head>\n\n\t<meta
+        name=\"viewport\" content=\"width=device-width; initial-scale=1.0\">\n   <meta
+        http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" />\n   <link
+        href=\"favicon.ico\" rel=\"shortcut icon\">\n   <link rel=\"stylesheet\" href=\"style.css\"
+        type=\"text/css\" />\n   <title>TVsubtitles.net - Search</title>\n   <script
+        type='text/javascript'>\nvar googletag = googletag || {};\ngoogletag.cmd =
+        googletag.cmd || [];\n(function() {\nvar gads = document.createElement('script');\ngads.async
+        = true;\ngads.type = 'text/javascript';\nvar useSSL = 'https:' == document.location.protocol;\ngads.src
+        = (useSSL ? 'https:' : 'http:') +\n'//www.googletagservices.com/tag/js/gpt.js';\nvar
+        node = document.getElementsByTagName('script')[0];\nnode.parentNode.insertBefore(gads,
+        node);\n})();\n</script>\n\n<script type='text/javascript'>\ngoogletag.cmd.push(function()
+        {\ngoogletag.defineSlot('/18481727/tvsubtitles.net', [468, 60], 'div-gpt-ad-1370109197777-0').addService(googletag.pubads());\ngoogletag.pubads().enableSingleRequest();\ngoogletag.enableServices();\n});\n</script>\n<link
+        href=\"media-queries.css\" rel=\"stylesheet\" type=\"text/css\">\n<!-- html5.js
+        for IE less than 9 -->\n<!--[if lt IE 9]>\n\t<script src=\"http://html5shim.googlecode.com/svn/trunk/html5.js\"></script>\n<![endif]-->\n\n<!--
+        css3-mediaqueries.js for IE less than 9 -->\n<!--[if lt IE 9]>\n\t<script
+        src=\"http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js\"></script>\n<![endif]-->\n</head>\n\n\n\t<body>\n\t\n\t<div
+        id=\"content\">\n      <div id=\"header\">\n         <p id=\"top_info\"><noindex><a
+        href=\"http://www.tvsubtitles.net/search.php\"><img src=\"images/flag-english.png\"
+        width=\"30\" height=\"16\" alt=\"english\" border=0 hspace=2></a>\n         <a
+        href=\"https://es.tvsubtitles.net/search.php\"><img src=\"images/flag-spanish.png\"
+        width=\"30\" height=\"16\" alt=\"spanish\" border=0 hspace=2></a>\n         <a
+        href=\"https://fr.tvsubtitles.net/search.php\"><img src=\"images/flag-french.png\"
+        width=\"30\" height=\"16\" alt=\"french\" border=0 hspace=2></a>\n         <a
+        href=\"https://www.tvsubtitles.ru/search.php\"><img src=\"images/flag-russian.png\"
+        width=\"30\" height=\"16\" alt=\"russian\" border=0 hspace=2></a><br />\n
+        \        <a><img src=\"images/flag-none.png\" width=\"30\" height=\"16\" alt=\"ukrainian\"
+        border=0 hspace=2></a>\n         <a href=\"https://ua.tvsubtitles.net/search.php\"><img
+        src=\"images/flag-ukrainian.png\" width=\"30\" height=\"16\" alt=\"ukrainian\"
+        border=0 hspace=2></a>\n         <a href=\"https://hu.tvsubtitles.net/search.php\"><img
+        src=\"images/flag-hungarian.png\" width=\"30\" height=\"16\" alt=\"hungarian\"
+        border=0 hspace=2></a>\n         <a href=\"https://gr.tvsubtitles.net/search.php\"><img
+        src=\"images/flag-greek.png\" width=\"30\" height=\"16\" alt=\"greek\" border=0
+        hspace=2></a><br />\n         <a href=\"http://www.moviesubtitles.org\" class=\"othersite\">Movie
+        subtitles</a></noindex></p><div id=\"logo\">\n            <h1><a href=\"/\"
+        title=\"Download latest TV Show and TV Series subtitles\">TVsubtitles<span
+        class=\"title\">.net</span></a></h1>\n            <p>Download latest TV Show
+        and TV Series subtitles</p>\n         </div><div style=\"float:left\"></div></div><div
+        id=\"tabs\">\n         <ul>\n            <li><a  href=\"/\" accesskey=\"m\">Home</li><li><a
+        \ href=\"/tvshows.html\" accesskey=\"v\">TV Shows</a></li><li><a  href=\"/new.html\"
+        accesskey=\"r\">New</li><li><a class=\"current\" href=\"/top.html\" accesskey=\"i\">Top</li><li><a
+        \ href=\"/add.html\" accesskey=\"d\">Add</li><li><a  href=\"/feedback.html\"
+        accesskey=\"a\">Feedback</a></li><li><a  href=\"http://www.msubs.net/\" accesskey=\"a\">Movies</a></li>\n
+        \        </ul>\n\t<span style=\"position: relative; left: -790px;top:67px;\"
+        class=\"selecto\">Show subtitles <select size=\"1\" name=\"setlang\" style=\"font:
+        0.95em Tahoma, Arial, sans-serif;\" onchange=\"javascript: window.location
+        = 'setlang.php?page=/search.php&setlang1=' + this.value;\">\n\t<option value=\"all\">all</option><option
+        value=\"en\" >english</option><option value=\"es\" >spanish</option><option
+        value=\"fr\" >french</option><option value=\"de\" >german</option><option
+        value=\"br\" >portuguese(br)</option><option value=\"ru\" >russian</option><option
+        value=\"ua\" >ukrainian</option><option value=\"it\" >italian</option><option
+        value=\"gr\" >greek</option><option value=\"ar\" >arabic</option><option value=\"hu\"
+        >hungarian</option><option value=\"pl\" >polish</option><option value=\"tr\"
+        >turkish</option><option value=\"nl\" >dutch </option><option value=\"pt\"
+        >portuguese</option><option value=\"sv\" >swedish</option><option value=\"da\"
+        >danish</option><option value=\"fi\" >finnish</option><option value=\"ko\"
+        >korean</option><option value=\"cn\" >chinese</option><option value=\"jp\"
+        >japanese</option><option value=\"bg\" >bulgarian</option><option value=\"cz\"
+        >czech</option><option value=\"ro\" >romanian</option></select><img src=\"images/spacer.gif\"
+        width=\"18\" height=\"12\" alt=\"\" border=\"0\" style=\"margin:2px 5px;\"
+        align=\"top\">\n</span>\n         <div id=\"search\">\n            <form method=\"post\"
+        action=\"search.php\">\n               <p><input type=\"text\" name=\"qs\"
+        class=\"search\" value=\"\" /> <input type=\"submit\" value=\"Search\" class=\"button\"
+        /></p>\n            </form>\n         </div>\n      </div><div style=\"clear:both\"
+        class=\"littlevspace\"></div>\n      <div class=\"left\">\n<div class=\"left_articles\">\n
+        \           <div style=\"background: #fff url(images/search.png) no-repeat;
+        width: 48px; height:55px; padding: 0 0 0 9px; float: left;\"></div>\n            <h2>Search</h2>\n
+        \           <p class=\"description\">Search results</p><p><ul style=\"margin-left:2em\"><li
+        style=\"font-size: 120%; font-weight:bold; margin:10px 0\"><div  style=\"\"><a
+        href=\"/tvshow-646.html\">Dallas (1978-1991)</a>&nbsp;&nbsp;&nbsp;<img src=\"images/flags/br.gif\"
+        width=\"18\" height=\"12\" alt=\"br\" border=0 align=absmiddle>&nbsp;<img
+        src=\"images/flags/en.gif\" width=\"18\" height=\"12\" alt=\"en\" border=0
+        align=absmiddle>&nbsp;<img src=\"images/flags/fr.gif\" width=\"18\" height=\"12\"
+        alt=\"fr\" border=0 align=absmiddle>&nbsp;<img src=\"images/flags/hu.gif\"
+        width=\"18\" height=\"12\" alt=\"hu\" border=0 align=absmiddle>&nbsp;<img
+        src=\"images/flags/ro.gif\" width=\"18\" height=\"12\" alt=\"ro\" border=0
+        align=absmiddle>&nbsp;<img src=\"images/flags/ru.gif\" width=\"18\" height=\"12\"
+        alt=\"ru\" border=0 align=absmiddle>&nbsp;</div></li><li style=\"font-size:
+        120%; font-weight:bold; margin:10px 0\"><div  style=\"\"><a href=\"/tvshow-1127.html\">Dallas
+        2012 (2012-2014)</a>&nbsp;&nbsp;&nbsp;<img src=\"images/flags/bg.gif\" width=\"18\"
+        height=\"12\" alt=\"bg\" border=0 align=absmiddle>&nbsp;<img src=\"images/flags/br.gif\"
+        width=\"18\" height=\"12\" alt=\"br\" border=0 align=absmiddle>&nbsp;<img
+        src=\"images/flags/en.gif\" width=\"18\" height=\"12\" alt=\"en\" border=0
+        align=absmiddle>&nbsp;<img src=\"images/flags/fr.gif\" width=\"18\" height=\"12\"
+        alt=\"fr\" border=0 align=absmiddle>&nbsp;<img src=\"images/flags/hu.gif\"
+        width=\"18\" height=\"12\" alt=\"hu\" border=0 align=absmiddle>&nbsp;<img
+        src=\"images/flags/pt.gif\" width=\"18\" height=\"12\" alt=\"pt\" border=0
+        align=absmiddle>&nbsp;<img src=\"images/flags/ro.gif\" width=\"18\" height=\"12\"
+        alt=\"ro\" border=0 align=absmiddle>&nbsp;</div></li></ul><br></div>\n</div>\n<div
+        id=\"right\"><div style=\"width:300px; height: 250px;\"><script async=\"async\"
+        data-cfasync=\"false\" src=\"//acquaintedpostman.com/984bb3acd60a61f2e29a4c2e9694e6ff/invoke.js\"></script>\n<div
+        id=\"container-984bb3acd60a61f2e29a4c2e9694e6ff\"></div></div>\n\n<div align=\"center\"
+        style=\"font-size:10px; overflow:hidden\"></div><div class=\"boxtop\"></div>\n
+        \        \t<div class=\"box\">\n            <p><img src=\"images/statistics.png\"
+        alt=\"Site statistics\" title=\"Site statistics\" class=\"image\" />\n            <b>Site
+        statistics</b><br /><table cellspacing=0 cellpadding=0><tr><td align=right>Total
+        subtitles:</td><td> 305222</td></tr><tr><td align=right>TV Shows:</td><td>
+        2219</td></tr><tr><td align=right>TV Episodes:</td><td> 72846</td></tr><tr><td
+        align=right>Downloads:</td><td> 500 522 215</td></tr></table><p style=\"margin-top:0.5em\"><b>Amount
+        subtitles in languages:</b></p>\n<table cellspacing=0 cellpadding=0 width=100%
+        style=\"margin-top:0.5em\"><td class=\"stat\"><img src=\"images/flags/en.gif\"
+        width=\"18\" height=\"12\" alt=\"english\" title=\"english\" border=0> - 61
+        921</td><td class=\"stat\"><img src=\"images/flags/fr.gif\" width=\"18\" height=\"12\"
+        alt=\"french\" title=\"french\" border=0> - 43 292</td><td class=\"stat\"><img
+        src=\"images/flags/gr.gif\" width=\"18\" height=\"12\" alt=\"greek\" title=\"greek\"
+        border=0> - 42 822</td></tr>\n<tr><td class=\"stat\"><img src=\"images/flags/pt.gif\"
+        width=\"18\" height=\"12\" alt=\"portuguese\" title=\"portuguese\" border=0>
+        - 28 085</td><td class=\"stat\"><img src=\"images/flags/hu.gif\" width=\"18\"
+        height=\"12\" alt=\"hungarian\" title=\"hungarian\" border=0> - 19 871</td><td
+        class=\"stat\"><img src=\"images/flags/br.gif\" width=\"18\" height=\"12\"
+        alt=\"portuguese(br)\" title=\"portuguese(br)\" border=0> - 19 276</td></tr>\n<tr><td
+        class=\"stat\"><img src=\"images/flags/ru.gif\" width=\"18\" height=\"12\"
+        alt=\"russian\" title=\"russian\" border=0> - 16 328</td><td class=\"stat\"><img
+        src=\"images/flags/es.gif\" width=\"18\" height=\"12\" alt=\"spanish\" title=\"spanish\"
+        border=0> - 14 477</td><td class=\"stat\"><img src=\"images/flags/ro.gif\"
+        width=\"18\" height=\"12\" alt=\"romanian\" title=\"romanian\" border=0> -
+        13 484</td></tr>\n<tr><td class=\"stat\"><img src=\"images/flags/pl.gif\"
+        width=\"18\" height=\"12\" alt=\"polish\" title=\"polish\" border=0> - 12
+        977</td><td class=\"stat\"><img src=\"images/flags/it.gif\" width=\"18\" height=\"12\"
+        alt=\"italian\" title=\"italian\" border=0> - 7 490</td><td class=\"stat\"><img
+        src=\"images/flags/bg.gif\" width=\"18\" height=\"12\" alt=\"bulgarian\" title=\"bulgarian\"
+        border=0> - 5 910</td></tr>\n<tr><td class=\"stat\"><img src=\"images/flags/nl.gif\"
+        width=\"18\" height=\"12\" alt=\"dutch \" title=\"dutch \" border=0> - 5 414</td><td
+        class=\"stat\"><img src=\"images/flags/tr.gif\" width=\"18\" height=\"12\"
+        alt=\"turkish\" title=\"turkish\" border=0> - 4 364</td><td class=\"stat\"><img
+        src=\"images/flags/de.gif\" width=\"18\" height=\"12\" alt=\"german\" title=\"german\"
+        border=0> - 3 849</td></tr>\n<tr><td class=\"stat\"><img src=\"images/flags/ar.gif\"
+        width=\"18\" height=\"12\" alt=\"arabic\" title=\"arabic\" border=0> - 2 273</td><td
+        class=\"stat\"><img src=\"images/flags/ua.gif\" width=\"18\" height=\"12\"
+        alt=\"ukrainian\" title=\"ukrainian\" border=0> - 1 183</td><td class=\"stat\"><img
+        src=\"images/flags/ko.gif\" width=\"18\" height=\"12\" alt=\"korean\" title=\"korean\"
+        border=0> - 736</td></tr>\n<tr></tr></table></p><p style=\"margin-top:0.5em\"><b>Downloads:</b></p>\n<table
+        cellspacing=0 cellpadding=0 width=90% style=\"margin-top:0.5em\"><td class=\"stat\"><img
+        src=\"images/flags/en.gif\" width=\"18\" height=\"12\" alt=\"english\" title=\"english\"
+        border=0> - 190.7 mil</td><td class=\"stat\"><img src=\"images/flags/fr.gif\"
+        width=\"18\" height=\"12\" alt=\"french\" title=\"french\" border=0> - 122.7
+        mil</td><td class=\"stat\"><img src=\"images/flags/gr.gif\" width=\"18\" height=\"12\"
+        alt=\"greek\" title=\"greek\" border=0> - 58.12 mil</td></tr><tr><td class=\"stat\"><img
+        src=\"images/flags/ru.gif\" width=\"18\" height=\"12\" alt=\"russian\" title=\"russian\"
+        border=0> - 18.9 mil</td><td class=\"stat\"><img src=\"images/flags/br.gif\"
+        width=\"18\" height=\"12\" alt=\"portuguese(br)\" title=\"portuguese(br)\"
+        border=0> - 17.87 mil</td><td class=\"stat\"><img src=\"images/flags/es.gif\"
+        width=\"18\" height=\"12\" alt=\"spanish\" title=\"spanish\" border=0> - 13.61
+        mil</td></tr><tr><td class=\"stat\"><img src=\"images/flags/pt.gif\" width=\"18\"
+        height=\"12\" alt=\"portuguese\" title=\"portuguese\" border=0> - 13.42 mil</td><td
+        class=\"stat\"><img src=\"images/flags/hu.gif\" width=\"18\" height=\"12\"
+        alt=\"hungarian\" title=\"hungarian\" border=0> - 13.21 mil</td><td class=\"stat\"><img
+        src=\"images/flags/pl.gif\" width=\"18\" height=\"12\" alt=\"polish\" title=\"polish\"
+        border=0> - 8.84 mil</td></tr><tr><td class=\"stat\"><img src=\"images/flags/it.gif\"
+        width=\"18\" height=\"12\" alt=\"italian\" title=\"italian\" border=0> - 7.85
+        mil</td><td class=\"stat\"><img src=\"images/flags/ro.gif\" width=\"18\" height=\"12\"
+        alt=\"romanian\" title=\"romanian\" border=0> - 7.3 mil</td><td class=\"stat\"><img
+        src=\"images/flags/bg.gif\" width=\"18\" height=\"12\" alt=\"bulgarian\" title=\"bulgarian\"
+        border=0> - 5.02 mil</td></tr><tr><td class=\"stat\"><img src=\"images/flags/nl.gif\"
+        width=\"18\" height=\"12\" alt=\"dutch \" title=\"dutch \" border=0> - 4.92
+        mil</td><td class=\"stat\"><img src=\"images/flags/de.gif\" width=\"18\" height=\"12\"
+        alt=\"german\" title=\"german\" border=0> - 4.61 mil</td><td class=\"stat\"><img
+        src=\"images/flags/ua.gif\" width=\"18\" height=\"12\" alt=\"ukrainian\" title=\"ukrainian\"
+        border=0> - 4.46 mil</td></tr><tr><td class=\"stat\"><img src=\"images/flags/tr.gif\"
+        width=\"18\" height=\"12\" alt=\"turkish\" title=\"turkish\" border=0> - 3.13
+        mil</td><td class=\"stat\"><img src=\"images/flags/ar.gif\" width=\"18\" height=\"12\"
+        alt=\"arabic\" title=\"arabic\" border=0> - 1.94 mil</td><td class=\"stat\"><img
+        src=\"images/flags/cz.gif\" width=\"18\" height=\"12\" alt=\"czech\" title=\"czech\"
+        border=0> - 1.33 mil</td></tr><tr></tr></table></p>\n         </div><center><a
+        href=\"showrss.php\"><img src=\"images/rss.png\" width=\"55\" height=\"24\"
+        alt=\"rss channel\" border=\"0\"></a><br />\n<!--LiveInternet counter--><script
+        type=\"text/javascript\"><!--\ndocument.write(\"<a style='border:0' href='https://www.liveinternet.ru/click'
+        \"+\n\"target=_blank><img  style='border:0' src='https://counter.yadro.ru/hit?t14.5;r\"+\nescape(document.referrer)+((typeof(screen)==\"undefined\")?\"\":\n\";s\"+screen.width+\"*\"+screen.height+\"*\"+(screen.colorDepth?\nscreen.colorDepth:screen.pixelDepth))+\";u\"+escape(document.URL)+\n\";h\"+escape(document.title.substring(0,80))+\";\"+Math.random()+\n\"'
+        alt='' title='' \"+\n\"border=0 width=88 height=31><\\/a>\")//--></script><!--/LiveInternet-->\n</center></div>\n<div
+        class=\"footer\"><div style=\"font-size:10px; line-height:10px; color:#C0C0C0;
+        height:10px; overflow:hidden \"><a href=\"https://www.dodurango.net/ducts_and_outlets-1821.html\">Ducts
+        and outlets\n</a></div>&copy; Copyright 2024 TVsubtitles.net. Page generation
+        0.006 seconds.\n      </div>\n   </div>\n\t</body>\n\t</html>\n"
     headers:
       Cache-Control:
       - no-cache
       Connection:
-      - close
-      Content-Length:
-      - '4761'
+      - Keep-Alive
       Content-Type:
       - text/html; charset=utf-8
       Date:
-      - Sat, 09 May 2020 10:28:11 GMT
+      - Mon, 13 May 2024 10:51:43 GMT
+      Keep-Alive:
+      - timeout=5, max=100
       Server:
-      - Apache/2.2.15 (CentOS)
+      - Apache/2.4.6 (CentOS) OpenSSL/1.0.2k-fips mod_fcgid/2.3.9 PHP/5.3.29
       Set-Cookie:
-      - visited=1; expires=Sat, 09-May-2020 22:28:11 GMT
+      - visited=1; expires=Mon, 13-May-2024 22:51:43 GMT
+      Strict-Transport-Security:
+      - max-age=31536000; preload
+      Transfer-Encoding:
+      - chunked
       X-Powered-By:
-      - PHP/5.3.3
-      content-encoding:
-      - gzip
-      vary:
-      - accept-encoding
+      - PHP/5.3.29
     status:
       code: 200
       message: OK

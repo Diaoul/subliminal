@@ -2,22 +2,81 @@ interactions:
 - request:
     body: null
     headers:
-      Accept: ['*/*']
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      User-Agent: [Subliminal/2.1]
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br, zstd
+      Accept-Language:
+      - en-US,en;q=1.0
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:56.0) Gecko/20100101 Firefox/56.0
+      X-Requested-With:
+      - XMLHttpRequest
+      referer:
+      - https://www.addic7ed.com//show/0
     method: GET
-    uri: http://www.addic7ed.com/show/0?season=7
+    uri: https://www.addic7ed.com/ajax_loadShow.php?show=0&season=7&langs=%7C
   response:
-    body: {string: !!python/unicode ''}
+    body:
+      string: " <form name=\"multidl\" action=\"/downloadmultiple.php\" method=\"post\">\n\t<table>\n\t<tr><td
+        valign=\"top\">\n\t<div id=\"season\"><table><thead>\n\t\t<tr><th>S</th><th>E</th><th>Title</th><th>Language</th><th
+        class=\"c\">Version</th><th class=\"c\">Completed</th><th class=\"c\"><img
+        title=\"Hearing Impaired\" alt=\"HI\" src=\"https://www.addic7ed.com/images/hi.PNG\"
+        width=\"20\" height=\"20\"></th><th class=\"c\"><img title=\"Corrected\" alt=\"Crctd\"
+        src=\"https://www.addic7ed.com/images/bullet_go.png\" width=\"20\" height=\"20\"></th><th
+        class=\"c\"><img title=\"720/1080\" alt=\"HD\" src=\"https://www.addic7ed.com/images/hdicon.png\"
+        width=\"20\" height=\"20\"></th><th class=\"c\"><img title=\"Download\" alt=\"DL\"
+        src=\"https://www.addic7ed.com/images/download.png\" width=\"20\" height=\"20\"></th>\n<th
+        class=\"c\">\n<b>All</b><INPUT TYPE=\"CHECKBOX\" id=\"chk_all\" onclick=\"javascript:toggleall();\"></th>\n</tr></thead>\n\t<tbody>\n\t\t<tr><td
+        colspan=6><a href=\"/shows.php\">All shows</a></td><td colspan=3><input name=\"Submit\"
+        type=\"submit\" class=\"coolBoton\" value=\"Multi Download\" /></td></tr>\n\t</tbody></table>\n\t</div>\n\t<input
+        type=\"hidden\" name=\"showID\" value=\"0\"/>\n\t<input type=\"hidden\" name=\"season\"
+        value=\"7\"/>\n\t</td><td valign=\"top\" align=\"left\">\n\t&nbsp;</td><td
+        valign=\"top\" align=\"left\">\n\t<div id=\"langs\">\n\t<table>\n\t<thead><tr><th>Language</th><th
+        class=\"c\" onclick=\"javascript:loadShow(0,7,'||',0,0);\" >Show</th></tr></thead>\n\t\t
+        \ <tbody></tbody>\n\t\t</table></div>\n\t\t<br/>&nbsp;<br/><div id=\"langs\">\n\t\t<table>\n\t\t<thead><tr><th>Filter</th><th>Only</th></tr></thead>\n\t\t<tbody>\n\t\t<tr><td>Hearing
+        Impaired (HI)</td><td class=\"c\"><input  id=\"hicheck\" value=\"hi\" onclick=\"javascript:loadShow(0,7,'|',0,1);\"
+        type=\"checkbox\"></td></tr>\n\t\t<tr><td>No Hearing Impaired (HI)</td><td
+        class=\"c\"><input  id=\"noncheck\" value=\"hi\" onclick=\"javascript:loadShow(0,7,'|',0,-1);\"
+        type=\"checkbox\"></td></tr><tr><td>720/1080 (HD)</td><td class=\"c\"><input
+        \ id=\"hdcheck\" value=\"hd\" onclick=\"javascript:loadShow(0,7,'|',1,0);\"
+        type=\"checkbox\"></td></tr>\n\t</tbody></table>\n\t</div>\n\t</td></tr></table>\n\t</form>"
     headers:
-      cache-control: ['no-store, no-cache, must-revalidate, post-check=0, pre-check=0']
-      connection: [keep-alive]
-      date: ['Tue, 30 Jan 2018 18:19:29 GMT']
-      expires: ['Thu, 19 Nov 1981 08:52:00 GMT']
-      pragma: [no-cache]
-      server: [nginx]
-      set-cookie: [PHPSESSID=u9ag2ghsc2ovdpl989a2hv0344; path=/]
-      x-powered-by: [PHP/5.3.3]
-    status: {code: 304, message: Not Modified}
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - text/html
+      Date:
+      - Sat, 01 Jun 2024 07:19:36 GMT
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Permissions-Policy:
+      - geolocation=(),midi=(),sync-xhr=(),microphone=(),camera=(),magnetometer=(),gyroscope=(),fullscreen=(self),payment=()
+      Pragma:
+      - no-cache
+      Referrer-Policy:
+      - strict-origin
+      Server:
+      - nginx
+      Set-Cookie:
+      - PHPSESSID=0q2h2vqj008g7797ilttnsfdb3; path=/
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubdomains; preload
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Powered-By:
+      - PHP/5.4.16
+    status:
+      code: 200
+      message: OK
 version: 1

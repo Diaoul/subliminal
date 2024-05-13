@@ -5,7 +5,7 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br
       Api-Key:
       - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
       Connection:
@@ -18,26 +18,31 @@ interactions:
     uri: https://api.opensubtitles.com/api/v1/subtitles?languages=fr&query=man+of+steel
   response:
     body:
-      string: "{\"total_pages\":1,\"total_count\":6,\"per_page\":60,\"page\":1,\"data\":[{\"id\":\"880511\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"880511\",\"language\":\"fr\",\"download_count\":35322,\"new_download_count\":264,\"hearing_impaired\":false,\"hd\":true,\"fps\":0.0,\"votes\":0,\"ratings\":0.0,\"from_trusted\":true,\"foreign_parts_only\":false,\"upload_date\":\"2013-10-18T14:26:47Z\",\"ai_translated\":false,\"nb_cd\":1,\"machine_translated\":false,\"release\":\"man.of.steel.2013.720p.bluray.x264-felony.www.subsynchro.com\",\"comments\":\"\",\"legacy_subtitle_id\":5229112,\"legacy_uploader_id\":1430515,\"uploader\":{\"uploader_id\":59162,\"name\":\"smailpouri\",\"rank\":\"Trusted
-        member\"},\"feature_details\":{\"feature_id\":580760,\"feature_type\":\"Movie\",\"year\":2013,\"title\":\"Man
-        of Steel\",\"movie_name\":\"2013 - Man of Steel\",\"imdb_id\":770828,\"tmdb_id\":49521},\"url\":\"https://www.opensubtitles.com/fr/subtitles/legacy/5229112\",\"related_links\":[{\"label\":\"All
-        subtitles for man of steel\",\"url\":\"https://www.opensubtitles.com/fr/movies/2013-man-of-steel\",\"img_url\":\"https://s9.opensubtitles.com/features/0/6/7/580760.jpg\"}],\"files\":[{\"file_id\":962144,\"cd_number\":1,\"file_name\":\"man.of.steel.2013.720p.bluray.x264-felony.www.subsynchro.com\"}]}},{\"id\":\"870964\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"870964\",\"language\":\"fr\",\"download_count\":22032,\"new_download_count\":89,\"hearing_impaired\":false,\"hd\":true,\"fps\":0.0,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2013-07-26T08:47:00Z\",\"ai_translated\":false,\"nb_cd\":1,\"machine_translated\":false,\"release\":\"Man.of.Steel.2013.720p.R6.LiNE.x264.AAC-DiGiTAL\",\"comments\":\"\",\"legacy_subtitle_id\":5105960,\"legacy_uploader_id\":0,\"uploader\":{\"uploader_id\":3282,\"name\":\"os-auto\",\"rank\":\"Application
-        Developers\"},\"feature_details\":{\"feature_id\":580760,\"feature_type\":\"Movie\",\"year\":2013,\"title\":\"Man
-        of Steel\",\"movie_name\":\"2013 - Man of Steel\",\"imdb_id\":770828,\"tmdb_id\":49521},\"url\":\"https://www.opensubtitles.com/fr/subtitles/legacy/5105960\",\"related_links\":[{\"label\":\"All
-        subtitles for man of steel\",\"url\":\"https://www.opensubtitles.com/fr/movies/2013-man-of-steel\",\"img_url\":\"https://s9.opensubtitles.com/features/0/6/7/580760.jpg\"}],\"files\":[{\"file_id\":952177,\"cd_number\":1,\"file_name\":\"Man.of.Steel.2013.R6.LiNE.All.Version-fr\"}]}},{\"id\":\"879122\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"879122\",\"language\":\"fr\",\"download_count\":20172,\"new_download_count\":203,\"hearing_impaired\":false,\"hd\":true,\"fps\":23.976,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2013-10-16T16:56:06Z\",\"ai_translated\":false,\"nb_cd\":1,\"machine_translated\":false,\"release\":\"man.of.steel.2013.720p.bluray.x264-felony\",\"comments\":\"\",\"legacy_subtitle_id\":5226251,\"legacy_uploader_id\":0,\"uploader\":{\"uploader_id\":3282,\"name\":\"os-auto\",\"rank\":\"Application
-        Developers\"},\"feature_details\":{\"feature_id\":580760,\"feature_type\":\"Movie\",\"year\":2013,\"title\":\"Man
-        of Steel\",\"movie_name\":\"2013 - Man of Steel\",\"imdb_id\":770828,\"tmdb_id\":49521},\"url\":\"https://www.opensubtitles.com/fr/subtitles/legacy/5226251\",\"related_links\":[{\"label\":\"All
-        subtitles for man of steel\",\"url\":\"https://www.opensubtitles.com/fr/movies/2013-man-of-steel\",\"img_url\":\"https://s9.opensubtitles.com/features/0/6/7/580760.jpg\"}],\"files\":[{\"file_id\":960683,\"cd_number\":1,\"file_name\":\"man.of.steel.2013.720p.bluray.x264-felony.www.subsynchro.com\"}]}},{\"id\":\"877697\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"877697\",\"language\":\"fr\",\"download_count\":17037,\"new_download_count\":130,\"hearing_impaired\":false,\"hd\":true,\"fps\":0.0,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2013-10-16T09:35:02Z\",\"ai_translated\":false,\"nb_cd\":1,\"machine_translated\":false,\"release\":\"man.of.steel.2013.1080p.bluray.x264-sector7\",\"comments\":\"\",\"legacy_subtitle_id\":5225852,\"legacy_uploader_id\":0,\"uploader\":{\"uploader_id\":3282,\"name\":\"os-auto\",\"rank\":\"Application
-        Developers\"},\"feature_details\":{\"feature_id\":580760,\"feature_type\":\"Movie\",\"year\":2013,\"title\":\"Man
-        of Steel\",\"movie_name\":\"2013 - Man of Steel\",\"imdb_id\":770828,\"tmdb_id\":49521},\"url\":\"https://www.opensubtitles.com/fr/subtitles/legacy/5225852\",\"related_links\":[{\"label\":\"All
-        subtitles for man of steel\",\"url\":\"https://www.opensubtitles.com/fr/movies/2013-man-of-steel\",\"img_url\":\"https://s9.opensubtitles.com/features/0/6/7/580760.jpg\"}],\"files\":[{\"file_id\":959227,\"cd_number\":1,\"file_name\":\"man.of.steel.2013.1080p.bluray.x264-sector7\"}]}},{\"id\":\"4614499\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"4614499\",\"language\":\"fr\",\"download_count\":4213,\"new_download_count\":98,\"hearing_impaired\":false,\"hd\":true,\"fps\":23.976,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2018-11-01T17:26:02Z\",\"ai_translated\":false,\"nb_cd\":1,\"machine_translated\":false,\"release\":\"Supergirl.S04E03.720p.HDTV.x264-AVS\",\"comments\":\"\",\"legacy_subtitle_id\":7528072,\"legacy_uploader_id\":2592971,\"uploader\":{\"uploader_id\":69404,\"name\":\"maxoudela\",\"rank\":\"Gold
-        member\"},\"feature_details\":{\"feature_id\":429415,\"feature_type\":\"Episode\",\"year\":2015,\"title\":\"Man
-        of Steel\",\"movie_name\":\"Supergirl - S04E03  L'\xE2ge de l'acier\",\"imdb_id\":8685330,\"tmdb_id\":1593206,\"season_number\":4,\"episode_number\":3,\"parent_imdb_id\":4016454,\"parent_title\":\"Supergirl\",\"parent_tmdb_id\":62688,\"parent_feature_id\":15301},\"url\":\"https://www.opensubtitles.com/fr/subtitles/legacy/7528072\",\"related_links\":[{\"label\":\"All
-        subtitles for Tv Show Supergirl\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/15301\",\"img_url\":\"https://s9.opensubtitles.com/features/5/1/4/429415.jpg\"},{\"label\":\"All
-        subtitles for Episode man of steel\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/429415\"}],\"files\":[{\"file_id\":4737481,\"cd_number\":1,\"file_name\":\"Supergirl.S04E03.720p.HDTV.x264-AVS\"}]}},{\"id\":\"1546744\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"1546744\",\"language\":\"fr\",\"download_count\":87,\"new_download_count\":3,\"hearing_impaired\":false,\"hd\":true,\"fps\":0.0,\"votes\":0,\"ratings\":0.0,\"from_trusted\":true,\"foreign_parts_only\":false,\"upload_date\":\"2012-05-11T12:51:44Z\",\"ai_translated\":false,\"nb_cd\":1,\"machine_translated\":false,\"release\":\"Standoff[1].S01E07.hdtv.xvid-xor.VF\",\"comments\":\"\",\"legacy_subtitle_id\":4545822,\"legacy_uploader_id\":1465168,\"uploader\":{\"uploader_id\":60242,\"name\":\"subth1ck\",\"rank\":\"trusted\"},\"feature_details\":{\"feature_id\":116746,\"feature_type\":\"Episode\",\"year\":2006,\"title\":\"Man
-        of Steele\",\"movie_name\":\"Standoff - S1E7 \\\"Standoff\\\" Man of Steele\",\"imdb_id\":852891,\"tmdb_id\":1210425,\"season_number\":1,\"episode_number\":7,\"parent_imdb_id\":756582,\"parent_title\":\"Standoff\",\"parent_tmdb_id\":630,\"parent_feature_id\":8050},\"url\":\"https://www.opensubtitles.com/fr/subtitles/legacy/4545822\",\"related_links\":[{\"label\":\"All
-        subtitles for Tv Show Standoff\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/8050\",\"img_url\":\"https://s9.opensubtitles.com/features/6/4/7/116746.jpg\"},{\"label\":\"All
-        subtitles for Episode man of steele\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/116746\"}],\"files\":[{\"file_id\":1638900,\"cd_number\":1,\"file_name\":\"Standoff[1].S01E07.hdtv.xvid-xor.VF\"}]}}]}"
+      string: !!binary |
+        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
     headers:
       Access-Control-Allow-Headers:
       - Origin, Authorization, Accept, Api-Key, Content-Type, X-User-Agent
@@ -45,32 +50,34 @@ interactions:
       - GET, HEAD, POST, OPTIONS
       Access-Control-Allow-Origin:
       - '*'
+      Age:
+      - '48860'
       CF-Cache-Status:
-      - MISS
+      - HIT
       CF-RAY:
-      - 87c7043829fa527a-LHR
+      - 883aac489fcf3cb9-CDG
       Cache-Control:
       - public, max-age=86400
       Connection:
       - keep-alive
       Content-Encoding:
-      - gzip
+      - br
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Tue, 30 Apr 2024 10:58:24 GMT
+      - Tue, 14 May 2024 11:50:50 GMT
       Last-Modified:
-      - Tue, 30 Apr 2024 10:58:24 GMT
+      - Mon, 13 May 2024 22:16:30 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       RateLimit-Limit:
       - '5'
       RateLimit-Remaining:
-      - '2'
+      - '4'
       RateLimit-Reset:
       - '1'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=FPC1gARU3W6zQKdeI9Mxh%2BrYpHCuVz%2BnsMe%2Bu3VmOuHaiqh61jVIalYx%2BQmaKiZ7mOz9OxrS8oR3U3mkNQTcJI6MY1qiX0XQdN9tvl%2FW1XKKz2YVG6fCEyAhodISZytNiRpn3jRBddg%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=WNBLGkxYQCdpjgJhNezupVA%2FQQJn6g2MLlsNex44Npa63TT6zDgOkqclYgSybW7DdcRHld1KWxAFUEpkTGSOh0wmdMdMeulH6U20w7ErfGLI24U8wFOW8Z%2FJ5I9YF9oxUu7anpz5Xuw%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -80,7 +87,7 @@ interactions:
       Vary:
       - Accept-Encoding
       X-Cache-Backend:
-      - apigw1_8000 rb1-temp
+      - apigw1_8000 rb11
       X-Content-Type-Options:
       - nosniff
       X-Download-Options:
@@ -90,15 +97,15 @@ interactions:
       X-Kong-Proxy-Latency:
       - '0'
       X-Kong-Upstream-Latency:
-      - '69'
+      - '347'
       X-RateLimit-Limit-Second:
       - '5'
       X-RateLimit-Remaining-Second:
-      - '2'
+      - '4'
       X-Request-Id:
-      - 2aea613e-c1a6-465f-a838-b4064e1337af
+      - 18208fa7-8bdb-4594-8c6b-4e0369ccf613
       X-Runtime:
-      - '0.066170'
+      - '0.185281'
       X-Var-Cache:
       - MISS
       X-Via:
@@ -122,7 +129,7 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br
       Api-Key:
       - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
       Connection:
@@ -135,26 +142,31 @@ interactions:
     uri: https://api.opensubtitles.com/api/v1/subtitles?languages=fr&query=man+of+steel
   response:
     body:
-      string: "{\"total_pages\":1,\"total_count\":6,\"per_page\":60,\"page\":1,\"data\":[{\"id\":\"880511\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"880511\",\"language\":\"fr\",\"download_count\":35322,\"new_download_count\":264,\"hearing_impaired\":false,\"hd\":true,\"fps\":0.0,\"votes\":0,\"ratings\":0.0,\"from_trusted\":true,\"foreign_parts_only\":false,\"upload_date\":\"2013-10-18T14:26:47Z\",\"ai_translated\":false,\"nb_cd\":1,\"machine_translated\":false,\"release\":\"man.of.steel.2013.720p.bluray.x264-felony.www.subsynchro.com\",\"comments\":\"\",\"legacy_subtitle_id\":5229112,\"legacy_uploader_id\":1430515,\"uploader\":{\"uploader_id\":59162,\"name\":\"smailpouri\",\"rank\":\"Trusted
-        member\"},\"feature_details\":{\"feature_id\":580760,\"feature_type\":\"Movie\",\"year\":2013,\"title\":\"Man
-        of Steel\",\"movie_name\":\"2013 - Man of Steel\",\"imdb_id\":770828,\"tmdb_id\":49521},\"url\":\"https://www.opensubtitles.com/fr/subtitles/legacy/5229112\",\"related_links\":[{\"label\":\"All
-        subtitles for man of steel\",\"url\":\"https://www.opensubtitles.com/fr/movies/2013-man-of-steel\",\"img_url\":\"https://s9.opensubtitles.com/features/0/6/7/580760.jpg\"}],\"files\":[{\"file_id\":962144,\"cd_number\":1,\"file_name\":\"man.of.steel.2013.720p.bluray.x264-felony.www.subsynchro.com\"}]}},{\"id\":\"870964\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"870964\",\"language\":\"fr\",\"download_count\":22032,\"new_download_count\":89,\"hearing_impaired\":false,\"hd\":true,\"fps\":0.0,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2013-07-26T08:47:00Z\",\"ai_translated\":false,\"nb_cd\":1,\"machine_translated\":false,\"release\":\"Man.of.Steel.2013.720p.R6.LiNE.x264.AAC-DiGiTAL\",\"comments\":\"\",\"legacy_subtitle_id\":5105960,\"legacy_uploader_id\":0,\"uploader\":{\"uploader_id\":3282,\"name\":\"os-auto\",\"rank\":\"Application
-        Developers\"},\"feature_details\":{\"feature_id\":580760,\"feature_type\":\"Movie\",\"year\":2013,\"title\":\"Man
-        of Steel\",\"movie_name\":\"2013 - Man of Steel\",\"imdb_id\":770828,\"tmdb_id\":49521},\"url\":\"https://www.opensubtitles.com/fr/subtitles/legacy/5105960\",\"related_links\":[{\"label\":\"All
-        subtitles for man of steel\",\"url\":\"https://www.opensubtitles.com/fr/movies/2013-man-of-steel\",\"img_url\":\"https://s9.opensubtitles.com/features/0/6/7/580760.jpg\"}],\"files\":[{\"file_id\":952177,\"cd_number\":1,\"file_name\":\"Man.of.Steel.2013.R6.LiNE.All.Version-fr\"}]}},{\"id\":\"879122\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"879122\",\"language\":\"fr\",\"download_count\":20172,\"new_download_count\":203,\"hearing_impaired\":false,\"hd\":true,\"fps\":23.976,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2013-10-16T16:56:06Z\",\"ai_translated\":false,\"nb_cd\":1,\"machine_translated\":false,\"release\":\"man.of.steel.2013.720p.bluray.x264-felony\",\"comments\":\"\",\"legacy_subtitle_id\":5226251,\"legacy_uploader_id\":0,\"uploader\":{\"uploader_id\":3282,\"name\":\"os-auto\",\"rank\":\"Application
-        Developers\"},\"feature_details\":{\"feature_id\":580760,\"feature_type\":\"Movie\",\"year\":2013,\"title\":\"Man
-        of Steel\",\"movie_name\":\"2013 - Man of Steel\",\"imdb_id\":770828,\"tmdb_id\":49521},\"url\":\"https://www.opensubtitles.com/fr/subtitles/legacy/5226251\",\"related_links\":[{\"label\":\"All
-        subtitles for man of steel\",\"url\":\"https://www.opensubtitles.com/fr/movies/2013-man-of-steel\",\"img_url\":\"https://s9.opensubtitles.com/features/0/6/7/580760.jpg\"}],\"files\":[{\"file_id\":960683,\"cd_number\":1,\"file_name\":\"man.of.steel.2013.720p.bluray.x264-felony.www.subsynchro.com\"}]}},{\"id\":\"877697\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"877697\",\"language\":\"fr\",\"download_count\":17037,\"new_download_count\":130,\"hearing_impaired\":false,\"hd\":true,\"fps\":0.0,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2013-10-16T09:35:02Z\",\"ai_translated\":false,\"nb_cd\":1,\"machine_translated\":false,\"release\":\"man.of.steel.2013.1080p.bluray.x264-sector7\",\"comments\":\"\",\"legacy_subtitle_id\":5225852,\"legacy_uploader_id\":0,\"uploader\":{\"uploader_id\":3282,\"name\":\"os-auto\",\"rank\":\"Application
-        Developers\"},\"feature_details\":{\"feature_id\":580760,\"feature_type\":\"Movie\",\"year\":2013,\"title\":\"Man
-        of Steel\",\"movie_name\":\"2013 - Man of Steel\",\"imdb_id\":770828,\"tmdb_id\":49521},\"url\":\"https://www.opensubtitles.com/fr/subtitles/legacy/5225852\",\"related_links\":[{\"label\":\"All
-        subtitles for man of steel\",\"url\":\"https://www.opensubtitles.com/fr/movies/2013-man-of-steel\",\"img_url\":\"https://s9.opensubtitles.com/features/0/6/7/580760.jpg\"}],\"files\":[{\"file_id\":959227,\"cd_number\":1,\"file_name\":\"man.of.steel.2013.1080p.bluray.x264-sector7\"}]}},{\"id\":\"4614499\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"4614499\",\"language\":\"fr\",\"download_count\":4213,\"new_download_count\":98,\"hearing_impaired\":false,\"hd\":true,\"fps\":23.976,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2018-11-01T17:26:02Z\",\"ai_translated\":false,\"nb_cd\":1,\"machine_translated\":false,\"release\":\"Supergirl.S04E03.720p.HDTV.x264-AVS\",\"comments\":\"\",\"legacy_subtitle_id\":7528072,\"legacy_uploader_id\":2592971,\"uploader\":{\"uploader_id\":69404,\"name\":\"maxoudela\",\"rank\":\"Gold
-        member\"},\"feature_details\":{\"feature_id\":429415,\"feature_type\":\"Episode\",\"year\":2015,\"title\":\"Man
-        of Steel\",\"movie_name\":\"Supergirl - S04E03  L'\xE2ge de l'acier\",\"imdb_id\":8685330,\"tmdb_id\":1593206,\"season_number\":4,\"episode_number\":3,\"parent_imdb_id\":4016454,\"parent_title\":\"Supergirl\",\"parent_tmdb_id\":62688,\"parent_feature_id\":15301},\"url\":\"https://www.opensubtitles.com/fr/subtitles/legacy/7528072\",\"related_links\":[{\"label\":\"All
-        subtitles for Tv Show Supergirl\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/15301\",\"img_url\":\"https://s9.opensubtitles.com/features/5/1/4/429415.jpg\"},{\"label\":\"All
-        subtitles for Episode man of steel\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/429415\"}],\"files\":[{\"file_id\":4737481,\"cd_number\":1,\"file_name\":\"Supergirl.S04E03.720p.HDTV.x264-AVS\"}]}},{\"id\":\"1546744\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"1546744\",\"language\":\"fr\",\"download_count\":87,\"new_download_count\":3,\"hearing_impaired\":false,\"hd\":true,\"fps\":0.0,\"votes\":0,\"ratings\":0.0,\"from_trusted\":true,\"foreign_parts_only\":false,\"upload_date\":\"2012-05-11T12:51:44Z\",\"ai_translated\":false,\"nb_cd\":1,\"machine_translated\":false,\"release\":\"Standoff[1].S01E07.hdtv.xvid-xor.VF\",\"comments\":\"\",\"legacy_subtitle_id\":4545822,\"legacy_uploader_id\":1465168,\"uploader\":{\"uploader_id\":60242,\"name\":\"subth1ck\",\"rank\":\"trusted\"},\"feature_details\":{\"feature_id\":116746,\"feature_type\":\"Episode\",\"year\":2006,\"title\":\"Man
-        of Steele\",\"movie_name\":\"Standoff - S1E7 \\\"Standoff\\\" Man of Steele\",\"imdb_id\":852891,\"tmdb_id\":1210425,\"season_number\":1,\"episode_number\":7,\"parent_imdb_id\":756582,\"parent_title\":\"Standoff\",\"parent_tmdb_id\":630,\"parent_feature_id\":8050},\"url\":\"https://www.opensubtitles.com/fr/subtitles/legacy/4545822\",\"related_links\":[{\"label\":\"All
-        subtitles for Tv Show Standoff\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/8050\",\"img_url\":\"https://s9.opensubtitles.com/features/6/4/7/116746.jpg\"},{\"label\":\"All
-        subtitles for Episode man of steele\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/116746\"}],\"files\":[{\"file_id\":1638900,\"cd_number\":1,\"file_name\":\"Standoff[1].S01E07.hdtv.xvid-xor.VF\"}]}}]}"
+      string: !!binary |
+        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
     headers:
       Access-Control-Allow-Headers:
       - Origin, Authorization, Accept, Api-Key, Content-Type, X-User-Agent
@@ -163,33 +175,33 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Age:
-      - '1'
+      - '48861'
       CF-Cache-Status:
       - HIT
       CF-RAY:
-      - 87c7043a8bda0666-LHR
+      - 883aac48e82a3cb9-CDG
       Cache-Control:
       - public, max-age=86400
       Connection:
       - keep-alive
       Content-Encoding:
-      - gzip
+      - br
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Tue, 30 Apr 2024 10:58:25 GMT
+      - Tue, 14 May 2024 11:50:51 GMT
       Last-Modified:
-      - Tue, 30 Apr 2024 10:58:24 GMT
+      - Mon, 13 May 2024 22:16:30 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       RateLimit-Limit:
       - '5'
       RateLimit-Remaining:
-      - '2'
+      - '4'
       RateLimit-Reset:
       - '1'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=3afkawid%2BUzYoppedmwWR8%2FxQPqgRVaa9ponHrmHcKDRlv%2FMPbUYFGo7xE8Gv0ulbEbfvN76d79t6RN8wcE%2Faxxgs8bGXPUL6PVctoewhAuTaoi8hII99Fvgr3fwZrGNhSuJClI8GZc%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=%2BQpz1Tmnr%2F3c86Yzfwib4jBkfXKn5SB9fh3rtRsDHb4tB9crgDKgZ1prv8tJscq%2BVVZWsi8GYmhBYrJOVlf%2B73r4N5NQ46g5S3r6ers3BUbDufaIeWursac0zLGWUwhYOweQgqdfu%2F0%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -199,7 +211,7 @@ interactions:
       Vary:
       - Accept-Encoding
       X-Cache-Backend:
-      - apigw1_8000 rb1-temp
+      - apigw1_8000 rb11
       X-Content-Type-Options:
       - nosniff
       X-Download-Options:
@@ -209,15 +221,15 @@ interactions:
       X-Kong-Proxy-Latency:
       - '0'
       X-Kong-Upstream-Latency:
-      - '69'
+      - '347'
       X-RateLimit-Limit-Second:
       - '5'
       X-RateLimit-Remaining-Second:
-      - '2'
+      - '4'
       X-Request-Id:
-      - 2aea613e-c1a6-465f-a838-b4064e1337af
+      - 18208fa7-8bdb-4594-8c6b-4e0369ccf613
       X-Runtime:
-      - '0.066170'
+      - '0.185281'
       X-Var-Cache:
       - MISS
       X-Via:

@@ -5,7 +5,7 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br
       Api-Key:
       - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
       Connection:
@@ -18,15 +18,21 @@ interactions:
     uri: https://api.opensubtitles.com/api/v1/subtitles?languages=fr&query=enders.game.2013.720p.bluray.x264-sparks.mkv
   response:
     body:
-      string: "{\"total_pages\":1,\"total_count\":2,\"per_page\":60,\"page\":1,\"data\":[{\"id\":\"938965\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"938965\",\"language\":\"fr\",\"download_count\":21081,\"new_download_count\":653,\"hearing_impaired\":false,\"hd\":true,\"fps\":23.976,\"votes\":1,\"ratings\":10.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2014-02-09T15:28:46Z\",\"ai_translated\":false,\"nb_cd\":1,\"machine_translated\":false,\"release\":\"Enders.Game.2013.BDRip.X264-SPARKS\",\"comments\":\"\",\"legacy_subtitle_id\":5532921,\"legacy_uploader_id\":1656162,\"uploader\":{\"uploader_id\":65416,\"name\":\"dumbojet\",\"rank\":\"Bronze
-        Member\"},\"feature_details\":{\"feature_id\":586791,\"feature_type\":\"Movie\",\"year\":2013,\"title\":\"Ender's
-        Game\",\"movie_name\":\"2013 - La Strat\xE9gie Ender\",\"imdb_id\":1731141,\"tmdb_id\":80274},\"url\":\"https://www.opensubtitles.com/fr/subtitles/legacy/5532921\",\"related_links\":[{\"label\":\"All
-        subtitles for ender's game\",\"url\":\"https://www.opensubtitles.com/fr/movies/2013-ender-s-game\",\"img_url\":\"https://s9.opensubtitles.com/features/1/9/7/586791.jpg\"}],\"files\":[{\"file_id\":1023065,\"cd_number\":1,\"file_name\":\"Enders.Game.2013.BDRip.X264-SPARKS\"}]}},{\"id\":\"940630\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"940630\",\"language\":\"fr\",\"download_count\":1713,\"new_download_count\":23,\"hearing_impaired\":false,\"hd\":false,\"fps\":0.0,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2014-12-29T03:32:34Z\",\"ai_translated\":false,\"nb_cd\":1,\"machine_translated\":false,\"release\":\"Ender's
-        Game 2013 KORSUB HDRip XViD NO1KNOWS\",\"comments\":\"\",\"legacy_subtitle_id\":5982036,\"legacy_uploader_id\":0,\"uploader\":{\"uploader_id\":3282,\"name\":\"os-auto\",\"rank\":\"Application
-        Developers\"},\"feature_details\":{\"feature_id\":586791,\"feature_type\":\"Movie\",\"year\":2013,\"title\":\"Ender's
-        Game\",\"movie_name\":\"2013 - Ender's Game\",\"imdb_id\":1731141,\"tmdb_id\":80274},\"url\":\"https://www.opensubtitles.com/fr/subtitles/legacy/5982036\",\"related_links\":[{\"label\":\"All
-        subtitles for ender's game\",\"url\":\"https://www.opensubtitles.com/fr/movies/2013-ender-s-game\",\"img_url\":\"https://s9.opensubtitles.com/features/1/9/7/586791.jpg\"}],\"files\":[{\"file_id\":1024868,\"cd_number\":1,\"file_name\":\"Enders
-        Game 2013 KORSUB HDRip XViD NO1KNOWS-fre\"}]}}]}"
+      string: !!binary |
+        wXBFACD+p6pOK++lNFBEoSASm0spqTzI/JSRsB0A2WkchyxzJi4HEmjmkaRRYD83h2sOkDYW6LRo
+        WpgFPoDCqItwCQVoPdfKxSu3PioSl/xaUs0fZNS/oBrtigKMYCeyO9AgGMkwksdwgdGcofVUgqG2
+        0cJ8/gNXw6BURannYIi/RoJBWC+jiy2BwQYamD+DBaqpMD8RMGg8GARDeLmi4IVg6Om5Gj6Z1oLh
+        kax3/apy3WidpxqmsW0ghscaJvo1MTRjgJFqVi40w9MQRb69t9H1qwAj+IwzNH7oqujXIRLaoxk8
+        uVVfjdbHUA19++sZwnrk5/61jQQDyUWecpny8lrMjSxMrj+Bwboq4cK61lI29svqoVY7/PpJUsRj
+        e2rJBoLBTl+TD7M929FMcqFmm9uXbpzdS52nV+cbl0dXYLD05TAAQ0sr+/Crqt7zuZKlFAigEAL5
+        4in0XAstRZtIHuYPsI6v57nQDL3tCAb1ulsO3ymCwdv+Bww2/dD/puSEuiV5TAwvm9DVB/EAP4C7
+        AZZGCr0oBSrkQxudDE+OwPCLrIeRXCgGp4KUsfJNSPZsR2DohidHFVPrSS5UkibHNrmK3sb//1aO
+        Eu05g8F19VKQJWKhhMgFQ+w9sOBykU8Ma9/C4DHGMZgse35+ng0j9UrMCb+JQNP47CIzTVKZZgkY
+        bYaNVFet63+ERRKbm6M3DDbaNqGWm6QbCUkjW2WCAUBo55BJLlRKRZ6GtIPrVhWlpqGUArRLSMhE
+        VmaLzA6x+UCGTF8ZGtcS91LjHOcswaXies7wUFfbpAV8F8CBtJ+ui1qmr9PEgoaKc64Vh6emVXoQ
+        C6GgHakAagIViAvQrchfAv4gIVNZXnNllDQqP6Bl8mgkkguVHJ1dXt1sJvvbl25M7m/ddnJ6Jo5O
+        z+4ihxrKQnKlS+UxQ6tkIWHcEFK7jgOcvTGOrXuw0Q19sp3d3yQfQkcitJeNGaBOv5WiZF7oIn0v
+        nZY2njB9naavEw==
     headers:
       Access-Control-Allow-Headers:
       - Origin, Authorization, Accept, Api-Key, Content-Type, X-User-Agent
@@ -37,29 +43,29 @@ interactions:
       CF-Cache-Status:
       - MISS
       CF-RAY:
-      - 87c7043e09a45280-LHR
+      - 883aac4b4d3e2294-CDG
       Cache-Control:
       - public, max-age=86400
       Connection:
       - keep-alive
       Content-Encoding:
-      - gzip
+      - br
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Tue, 30 Apr 2024 10:58:25 GMT
+      - Tue, 14 May 2024 11:50:51 GMT
       Last-Modified:
-      - Tue, 30 Apr 2024 10:58:25 GMT
+      - Tue, 14 May 2024 11:50:51 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       RateLimit-Limit:
       - '5'
       RateLimit-Remaining:
-      - '3'
+      - '4'
       RateLimit-Reset:
       - '1'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=oyzq6f8gRUJMSCBiTSrmOf9sDUlO1fqnhKlAt%2B4iwzSxfSDvr5uRHCPFbQbckQe7HJs2%2BofxAmI33m463I3IYbXgh18AO6587Th9NlGjQazayX%2FVEI%2Bsq1W0R8%2FHAPzkiFmyAgRRWrk%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=yfwkL4SfmrQlbJz9uSLYO4dZhNI8RTiC19LPlJlIedl6TUER3mPAPETuAsLgQf1x%2BJMaC1RziOKCXOciVxUQkKNsjfz5TRdX7YNtYSAzK18XLsdl2IriaQRRD%2BFUpuCu2TTiORA7pxM%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -69,7 +75,7 @@ interactions:
       Vary:
       - Accept-Encoding
       X-Cache-Backend:
-      - apigw1_8000 rb1-temp
+      - apigw1_8000 rb8
       X-Content-Type-Options:
       - nosniff
       X-Download-Options:
@@ -77,17 +83,19 @@ interactions:
       X-Frame-Options:
       - SAMEORIGIN
       X-Kong-Proxy-Latency:
-      - '0'
+      - '1'
       X-Kong-Upstream-Latency:
-      - '50'
+      - '27'
       X-RateLimit-Limit-Second:
       - '5'
       X-RateLimit-Remaining-Second:
-      - '3'
+      - '4'
       X-Request-Id:
-      - 19d58ba0-03a8-4cfa-8c8e-af99e77b47e8
+      - 5d21a066-d15a-4b76-9ee2-be0d34b51d03
       X-Runtime:
-      - '0.045539'
+      - '0.025066'
+      X-StackifyID:
+      - V1|0f155088-2fce-47ef-81d8-d4f821cf3874|C98087|CD1
       X-Var-Cache:
       - MISS
       X-Via:
@@ -111,7 +119,7 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br
       Api-Key:
       - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
       Connection:
@@ -124,15 +132,21 @@ interactions:
     uri: https://api.opensubtitles.com/api/v1/subtitles?languages=fr&query=enders.game.2013.720p.bluray.x264-sparks.mkv
   response:
     body:
-      string: "{\"total_pages\":1,\"total_count\":2,\"per_page\":60,\"page\":1,\"data\":[{\"id\":\"938965\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"938965\",\"language\":\"fr\",\"download_count\":21081,\"new_download_count\":653,\"hearing_impaired\":false,\"hd\":true,\"fps\":23.976,\"votes\":1,\"ratings\":10.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2014-02-09T15:28:46Z\",\"ai_translated\":false,\"nb_cd\":1,\"machine_translated\":false,\"release\":\"Enders.Game.2013.BDRip.X264-SPARKS\",\"comments\":\"\",\"legacy_subtitle_id\":5532921,\"legacy_uploader_id\":1656162,\"uploader\":{\"uploader_id\":65416,\"name\":\"dumbojet\",\"rank\":\"Bronze
-        Member\"},\"feature_details\":{\"feature_id\":586791,\"feature_type\":\"Movie\",\"year\":2013,\"title\":\"Ender's
-        Game\",\"movie_name\":\"2013 - La Strat\xE9gie Ender\",\"imdb_id\":1731141,\"tmdb_id\":80274},\"url\":\"https://www.opensubtitles.com/fr/subtitles/legacy/5532921\",\"related_links\":[{\"label\":\"All
-        subtitles for ender's game\",\"url\":\"https://www.opensubtitles.com/fr/movies/2013-ender-s-game\",\"img_url\":\"https://s9.opensubtitles.com/features/1/9/7/586791.jpg\"}],\"files\":[{\"file_id\":1023065,\"cd_number\":1,\"file_name\":\"Enders.Game.2013.BDRip.X264-SPARKS\"}]}},{\"id\":\"940630\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"940630\",\"language\":\"fr\",\"download_count\":1713,\"new_download_count\":23,\"hearing_impaired\":false,\"hd\":false,\"fps\":0.0,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2014-12-29T03:32:34Z\",\"ai_translated\":false,\"nb_cd\":1,\"machine_translated\":false,\"release\":\"Ender's
-        Game 2013 KORSUB HDRip XViD NO1KNOWS\",\"comments\":\"\",\"legacy_subtitle_id\":5982036,\"legacy_uploader_id\":0,\"uploader\":{\"uploader_id\":3282,\"name\":\"os-auto\",\"rank\":\"Application
-        Developers\"},\"feature_details\":{\"feature_id\":586791,\"feature_type\":\"Movie\",\"year\":2013,\"title\":\"Ender's
-        Game\",\"movie_name\":\"2013 - Ender's Game\",\"imdb_id\":1731141,\"tmdb_id\":80274},\"url\":\"https://www.opensubtitles.com/fr/subtitles/legacy/5982036\",\"related_links\":[{\"label\":\"All
-        subtitles for ender's game\",\"url\":\"https://www.opensubtitles.com/fr/movies/2013-ender-s-game\",\"img_url\":\"https://s9.opensubtitles.com/features/1/9/7/586791.jpg\"}],\"files\":[{\"file_id\":1024868,\"cd_number\":1,\"file_name\":\"Enders
-        Game 2013 KORSUB HDRip XViD NO1KNOWS-fre\"}]}}]}"
+      string: !!binary |
+        wXBFACD+p6pOK++lNFBEoSASm0spqTzI/JSRsB0A2WkchyxzJi4HEmjmkaRRYD83h2sOkDYW6LRo
+        WpgFPoDCqItwCQVoPdfKxSu3PioSl/xaUs0fZNS/oBrtigKMYCeyO9AgGMkwksdwgdGcofVUgqG2
+        0cJ8/gNXw6BURannYIi/RoJBWC+jiy2BwQYamD+DBaqpMD8RMGg8GARDeLmi4IVg6Om5Gj6Z1oLh
+        kax3/apy3WidpxqmsW0ghscaJvo1MTRjgJFqVi40w9MQRb69t9H1qwAj+IwzNH7oqujXIRLaoxk8
+        uVVfjdbHUA19++sZwnrk5/61jQQDyUWecpny8lrMjSxMrj+Bwboq4cK61lI29svqoVY7/PpJUsRj
+        e2rJBoLBTl+TD7M929FMcqFmm9uXbpzdS52nV+cbl0dXYLD05TAAQ0sr+/Crqt7zuZKlFAigEAL5
+        4in0XAstRZtIHuYPsI6v57nQDL3tCAb1ulsO3ymCwdv+Bww2/dD/puSEuiV5TAwvm9DVB/EAP4C7
+        AZZGCr0oBSrkQxudDE+OwPCLrIeRXCgGp4KUsfJNSPZsR2DohidHFVPrSS5UkibHNrmK3sb//1aO
+        Eu05g8F19VKQJWKhhMgFQ+w9sOBykU8Ma9/C4DHGMZgse35+ng0j9UrMCb+JQNP47CIzTVKZZgkY
+        bYaNVFet63+ERRKbm6M3DDbaNqGWm6QbCUkjW2WCAUBo55BJLlRKRZ6GtIPrVhWlpqGUArRLSMhE
+        VmaLzA6x+UCGTF8ZGtcS91LjHOcswaXies7wUFfbpAV8F8CBtJ+ui1qmr9PEgoaKc64Vh6emVXoQ
+        C6GgHakAagIViAvQrchfAv4gIVNZXnNllDQqP6Bl8mgkkguVHJ1dXt1sJvvbl25M7m/ddnJ6Jo5O
+        z+4ihxrKQnKlS+UxQ6tkIWHcEFK7jgOcvTGOrXuw0Q19sp3d3yQfQkcitJeNGaBOv5WiZF7oIn0v
+        nZY2njB9naavEw==
     headers:
       Access-Control-Allow-Headers:
       - Origin, Authorization, Accept, Api-Key, Content-Type, X-User-Agent
@@ -145,29 +159,29 @@ interactions:
       CF-Cache-Status:
       - HIT
       CF-RAY:
-      - 87c704404b3252d0-LHR
+      - 883aac4c1e0b2294-CDG
       Cache-Control:
       - public, max-age=86400
       Connection:
       - keep-alive
       Content-Encoding:
-      - gzip
+      - br
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Tue, 30 Apr 2024 10:58:25 GMT
+      - Tue, 14 May 2024 11:50:51 GMT
       Last-Modified:
-      - Tue, 30 Apr 2024 10:58:25 GMT
+      - Tue, 14 May 2024 11:50:51 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       RateLimit-Limit:
       - '5'
       RateLimit-Remaining:
-      - '3'
+      - '4'
       RateLimit-Reset:
       - '1'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=sLTQU%2BINU%2FzCvhiHwZFB%2BRCyAfILupMt9BZ5kMuLbGiNMNDwr4AZiZhMLuDb0AmDLRUpMMqW%2BJhuJisZbgnbyBJtY8wInLYXwrODXE49OHVWCAgITD7dg530SYEqITKp6lPlwQe4RiE%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=C4C7dYicDVs%2B1UozSwWr%2BUBnf2R%2Fl5ofInihNepi5sVQFCDszqKcyeN4topj1%2BBBdbkVtxHDYyht79XVX9%2BAm8y%2B8xZ5cw6RywZFmVUTt5jtDKZuCePiprB%2FoNPH6%2FObCxrgpSZqHPc%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -177,7 +191,7 @@ interactions:
       Vary:
       - Accept-Encoding
       X-Cache-Backend:
-      - apigw1_8000 rb1-temp
+      - apigw1_8000 rb8
       X-Content-Type-Options:
       - nosniff
       X-Download-Options:
@@ -185,17 +199,19 @@ interactions:
       X-Frame-Options:
       - SAMEORIGIN
       X-Kong-Proxy-Latency:
-      - '0'
+      - '1'
       X-Kong-Upstream-Latency:
-      - '50'
+      - '27'
       X-RateLimit-Limit-Second:
       - '5'
       X-RateLimit-Remaining-Second:
-      - '3'
+      - '4'
       X-Request-Id:
-      - 19d58ba0-03a8-4cfa-8c8e-af99e77b47e8
+      - 5d21a066-d15a-4b76-9ee2-be0d34b51d03
       X-Runtime:
-      - '0.045539'
+      - '0.025066'
+      X-StackifyID:
+      - V1|0f155088-2fce-47ef-81d8-d4f821cf3874|C98087|CD1
       X-Var-Cache:
       - MISS
       X-Via:

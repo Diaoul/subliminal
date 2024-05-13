@@ -5,7 +5,7 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br
       Api-Key:
       - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
       Connection:
@@ -18,36 +18,34 @@ interactions:
     uri: https://api.opensubtitles.com/api/v1/subtitles?imdb_id=770828&languages=de
   response:
     body:
-      string: "{\"total_pages\":1,\"total_count\":6,\"per_page\":60,\"page\":1,\"data\":[{\"id\":\"880332\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"880332\",\"language\":\"de\",\"download_count\":7182,\"new_download_count\":216,\"hearing_impaired\":true,\"hd\":true,\"fps\":23.976,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2013-10-17T13:26:46Z\",\"ai_translated\":false,\"nb_cd\":1,\"machine_translated\":false,\"release\":\"Man.of.Steel.German.DL.1080p.BluRay.x264-EXQUiSiTE\",\"comments\":\"\",\"legacy_subtitle_id\":5227599,\"legacy_uploader_id\":0,\"uploader\":{\"uploader_id\":3282,\"name\":\"os-auto\",\"rank\":\"Application
-        Developers\"},\"feature_details\":{\"feature_id\":580760,\"feature_type\":\"Movie\",\"year\":2013,\"title\":\"Man
-        of Steel\",\"movie_name\":\"2013 - Man of Steel\",\"imdb_id\":770828,\"tmdb_id\":49521},\"url\":\"https://www.opensubtitles.com/de/subtitles/legacy/5227599\",\"related_links\":[{\"label\":\"All
-        subtitles for man of steel\",\"url\":\"https://www.opensubtitles.com/de/movies/2013-man-of-steel\",\"img_url\":\"https://s9.opensubtitles.com/features/0/6/7/580760.jpg\"}],\"files\":[{\"file_id\":961964,\"cd_number\":1,\"file_name\":\"Man.of.Steel.German.DL.1080p.BluRay.x264-EXQUiSiTE\"}]}},{\"id\":\"883552\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"883552\",\"language\":\"de\",\"download_count\":4283,\"new_download_count\":10,\"hearing_impaired\":false,\"hd\":true,\"fps\":25.0,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2016-07-31T14:29:17Z\",\"ai_translated\":false,\"nb_cd\":1,\"machine_translated\":false,\"release\":\"Man
-        of Steel (2013) Dtv 2h07min\",\"comments\":\"\",\"legacy_subtitle_id\":6698593,\"legacy_uploader_id\":2563175,\"uploader\":{\"uploader_id\":69315,\"name\":\"bergert_\",\"rank\":\"Trusted
-        member\"},\"feature_details\":{\"feature_id\":580760,\"feature_type\":\"Movie\",\"year\":2013,\"title\":\"Man
-        of Steel\",\"movie_name\":\"2013 - Man of Steel\",\"imdb_id\":770828,\"tmdb_id\":49521},\"url\":\"https://www.opensubtitles.com/de/subtitles/legacy/6698593\",\"related_links\":[{\"label\":\"All
-        subtitles for man of steel\",\"url\":\"https://www.opensubtitles.com/de/movies/2013-man-of-steel\",\"img_url\":\"https://s9.opensubtitles.com/features/0/6/7/580760.jpg\"}],\"files\":[{\"file_id\":965287,\"cd_number\":1,\"file_name\":\"Man
-        of Steel (DT-2013)\"}]}},{\"id\":\"880717\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"880717\",\"language\":\"de\",\"download_count\":2670,\"new_download_count\":194,\"hearing_impaired\":false,\"hd\":true,\"fps\":23.976,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2013-10-19T00:53:25Z\",\"ai_translated\":false,\"nb_cd\":1,\"machine_translated\":false,\"release\":\"Man.of.Steel.German.720p.BluRay.x264-EXQUiSiTE\",\"comments\":\"\",\"legacy_subtitle_id\":5229998,\"legacy_uploader_id\":0,\"uploader\":{\"uploader_id\":3282,\"name\":\"os-auto\",\"rank\":\"Application
-        Developers\"},\"feature_details\":{\"feature_id\":580760,\"feature_type\":\"Movie\",\"year\":2013,\"title\":\"Man
-        of Steel\",\"movie_name\":\"2013 - Man of Steel\",\"imdb_id\":770828,\"tmdb_id\":49521},\"url\":\"https://www.opensubtitles.com/de/subtitles/legacy/5229998\",\"related_links\":[{\"label\":\"All
-        subtitles for man of steel\",\"url\":\"https://www.opensubtitles.com/de/movies/2013-man-of-steel\",\"img_url\":\"https://s9.opensubtitles.com/features/0/6/7/580760.jpg\"}],\"files\":[{\"file_id\":962352,\"cd_number\":1,\"file_name\":\"Man.of.Steel.German.720p.BluRay.x264-EXQUiSiTE\"}]}},{\"id\":\"5166256\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"5166256\",\"language\":\"de\",\"download_count\":1794,\"new_download_count\":14,\"hearing_impaired\":false,\"hd\":true,\"fps\":23.976,\"votes\":1,\"ratings\":10.0,\"from_trusted\":true,\"foreign_parts_only\":false,\"upload_date\":\"2020-03-29T11:40:37Z\",\"ai_translated\":false,\"nb_cd\":1,\"machine_translated\":false,\"release\":\"Man.of.Steel.2013.720p.german.srt\",\"comments\":\"--\\u003e
-        HI-Items entfernt, Timing teilweise korrigiert, Kursivsetzung korrigiert\\r\\n--\\u003e
-        passend f\xFCr Versionen mit Laufzeit 2h 23min 2s 688ms\",\"legacy_subtitle_id\":8148911,\"legacy_uploader_id\":1189705,\"uploader\":{\"uploader_id\":54111,\"name\":\"arcchancellor\",\"rank\":\"translator\"},\"feature_details\":{\"feature_id\":580760,\"feature_type\":\"Movie\",\"year\":2013,\"title\":\"Man
-        of Steel\",\"movie_name\":\"2013 - Man of Steel\",\"imdb_id\":770828,\"tmdb_id\":49521},\"url\":\"https://www.opensubtitles.com/de/subtitles/legacy/8148911\",\"related_links\":[{\"label\":\"All
-        subtitles for man of steel\",\"url\":\"https://www.opensubtitles.com/de/movies/2013-man-of-steel\",\"img_url\":\"https://s9.opensubtitles.com/features/0/6/7/580760.jpg\"}],\"files\":[{\"file_id\":5276290,\"cd_number\":1,\"file_name\":\"Man.of.Steel.2013.720p.german\"}]}},{\"id\":\"883560\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"883560\",\"language\":\"de\",\"download_count\":938,\"new_download_count\":9,\"hearing_impaired\":true,\"hd\":true,\"fps\":23.976,\"votes\":2,\"ratings\":10.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2016-08-01T19:13:17Z\",\"ai_translated\":false,\"nb_cd\":1,\"machine_translated\":false,\"release\":\"Man
-        of Steel German DL 1080p BluRay x264-EXQUiSiTE\",\"comments\":\"Duration:
-        2:23:03\\r\\nvia SubTools from idx to srt\\r\\nFull German\\r\\nHandmade corrected\",\"legacy_subtitle_id\":6699712,\"legacy_uploader_id\":1471910,\"uploader\":{\"uploader_id\":60439,\"name\":\"PissPott\",\"rank\":\"Silver
-        Member\"},\"feature_details\":{\"feature_id\":580760,\"feature_type\":\"Movie\",\"year\":2013,\"title\":\"Man
-        of Steel\",\"movie_name\":\"2013 - Man of Steel\",\"imdb_id\":770828,\"tmdb_id\":49521},\"url\":\"https://www.opensubtitles.com/de/subtitles/legacy/6699712\",\"related_links\":[{\"label\":\"All
-        subtitles for man of steel\",\"url\":\"https://www.opensubtitles.com/de/movies/2013-man-of-steel\",\"img_url\":\"https://s9.opensubtitles.com/features/0/6/7/580760.jpg\"}],\"files\":[{\"file_id\":965292,\"cd_number\":1,\"file_name\":\"exq-manofsteel-1080p.idx.mkv\"}]}},{\"id\":\"6632511\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"6632511\",\"language\":\"de\",\"download_count\":61,\"new_download_count\":7,\"hearing_impaired\":false,\"hd\":true,\"fps\":23.976,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2022-06-26T19:32:54Z\",\"ai_translated\":false,\"nb_cd\":1,\"machine_translated\":false,\"release\":\"Should
-        work with 4k BD rips\",\"comments\":\"Source German Retail 4k BD\\r\\nRetail
-        PGS to SSA + improvements\\r\\n\\r\\ncoloured parts\\r\\n\\r\\nIf the timing
-        is off, just correct it with SubtitleEdit.\\r\\n-\\u003e Synchronization \\r\\n-\\u003e
-        Adjust all times \\r\\n-\\u003e all lines\\r\\n\\r\\nWorks best with MPC-BE
-        + XySubFilter + madvr\\r\\nbecause there the font is not in the image,\\r\\nbut
-        at the bottom in the black bars.\",\"legacy_subtitle_id\":9150443,\"legacy_uploader_id\":9372469,\"uploader\":{\"uploader_id\":null,\"name\":\"Anonymous\",\"rank\":\"anonymous\"},\"feature_details\":{\"feature_id\":580760,\"feature_type\":\"Movie\",\"year\":2013,\"title\":\"Man
-        of Steel\",\"movie_name\":\"2013 - Man of Steel\",\"imdb_id\":770828,\"tmdb_id\":49521},\"url\":\"https://www.opensubtitles.com/de/subtitles/legacy/9150443\",\"related_links\":[{\"label\":\"All
-        subtitles for man of steel\",\"url\":\"https://www.opensubtitles.com/de/movies/2013-man-of-steel\",\"img_url\":\"https://s9.opensubtitles.com/features/0/6/7/580760.jpg\"}],\"files\":[{\"file_id\":7601680,\"cd_number\":1,\"file_name\":\"Man
-        of Steel.Full - German\"}]}}]}"
+      string: !!binary |
+        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
+        WfbaKp2kTPb0rK2Bgb7CIZnxenO93lwB
     headers:
       Access-Control-Allow-Headers:
       - Origin, Authorization, Accept, Api-Key, Content-Type, X-User-Agent
@@ -55,22 +53,24 @@ interactions:
       - GET, HEAD, POST, OPTIONS
       Access-Control-Allow-Origin:
       - '*'
+      Age:
+      - '48860'
       CF-Cache-Status:
-      - MISS
+      - HIT
       CF-RAY:
-      - 87c7044168fe532c-LHR
+      - 883aac4d1e0e229d-CDG
       Cache-Control:
       - public, max-age=86400
       Connection:
       - keep-alive
       Content-Encoding:
-      - gzip
+      - br
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Tue, 30 Apr 2024 10:58:26 GMT
+      - Tue, 14 May 2024 11:50:51 GMT
       Last-Modified:
-      - Tue, 30 Apr 2024 10:58:26 GMT
+      - Mon, 13 May 2024 22:16:31 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       RateLimit-Limit:
@@ -80,7 +80,7 @@ interactions:
       RateLimit-Reset:
       - '1'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=tb375khS32Wrgo2818DrYgihpgrZ09ouDBgjKtjbi19qQEOTn134Wd%2B7T7bM%2FY%2BwUWk2rQEFvX4woJ2NGhf9B5hQcj11eN8%2BGnGOoIFtQw7eZjJsAbz84sEQVRipwe13sFqx67JMtTw%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=HbpMTEncxpkhD4DML0DAbECncHJHyejVu%2BGh51YS1XRKdj4jTHuSwS2bwoU2KQUSTCuKJwkbSdhsIuL8f8OFYgMg34frwbGtnWEF8zNbhCdDyiggLmzBr5WM0TXUyFYjoucpyetKCqY%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -90,7 +90,7 @@ interactions:
       Vary:
       - Accept-Encoding
       X-Cache-Backend:
-      - apigw1_8000 rb1
+      - apigw1_8000 rb7
       X-Content-Type-Options:
       - nosniff
       X-Download-Options:
@@ -98,19 +98,19 @@ interactions:
       X-Frame-Options:
       - SAMEORIGIN
       X-Kong-Proxy-Latency:
-      - '1'
+      - '0'
       X-Kong-Upstream-Latency:
-      - '438'
+      - '208'
       X-RateLimit-Limit-Second:
       - '5'
       X-RateLimit-Remaining-Second:
       - '4'
       X-Request-Id:
-      - e9997384-351c-48ab-b614-708c0d06f97c
+      - 30a4a3f7-ed8c-4f76-8071-900c99162faa
       X-Runtime:
-      - '0.263838'
+      - '0.044903'
       X-StackifyID:
-      - V1|aff90fee-934c-4f29-819f-ed60e5fc8c75|C98184|CD5
+      - V1|57d97910-3604-48f0-b9d8-bb48c1f474e8|C98087|CD1
       X-Var-Cache:
       - MISS
       X-Via:
@@ -134,7 +134,7 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br
       Api-Key:
       - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
       Connection:
@@ -147,36 +147,34 @@ interactions:
     uri: https://api.opensubtitles.com/api/v1/subtitles?imdb_id=770828&languages=de
   response:
     body:
-      string: "{\"total_pages\":1,\"total_count\":6,\"per_page\":60,\"page\":1,\"data\":[{\"id\":\"880332\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"880332\",\"language\":\"de\",\"download_count\":7182,\"new_download_count\":216,\"hearing_impaired\":true,\"hd\":true,\"fps\":23.976,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2013-10-17T13:26:46Z\",\"ai_translated\":false,\"nb_cd\":1,\"machine_translated\":false,\"release\":\"Man.of.Steel.German.DL.1080p.BluRay.x264-EXQUiSiTE\",\"comments\":\"\",\"legacy_subtitle_id\":5227599,\"legacy_uploader_id\":0,\"uploader\":{\"uploader_id\":3282,\"name\":\"os-auto\",\"rank\":\"Application
-        Developers\"},\"feature_details\":{\"feature_id\":580760,\"feature_type\":\"Movie\",\"year\":2013,\"title\":\"Man
-        of Steel\",\"movie_name\":\"2013 - Man of Steel\",\"imdb_id\":770828,\"tmdb_id\":49521},\"url\":\"https://www.opensubtitles.com/de/subtitles/legacy/5227599\",\"related_links\":[{\"label\":\"All
-        subtitles for man of steel\",\"url\":\"https://www.opensubtitles.com/de/movies/2013-man-of-steel\",\"img_url\":\"https://s9.opensubtitles.com/features/0/6/7/580760.jpg\"}],\"files\":[{\"file_id\":961964,\"cd_number\":1,\"file_name\":\"Man.of.Steel.German.DL.1080p.BluRay.x264-EXQUiSiTE\"}]}},{\"id\":\"883552\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"883552\",\"language\":\"de\",\"download_count\":4283,\"new_download_count\":10,\"hearing_impaired\":false,\"hd\":true,\"fps\":25.0,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2016-07-31T14:29:17Z\",\"ai_translated\":false,\"nb_cd\":1,\"machine_translated\":false,\"release\":\"Man
-        of Steel (2013) Dtv 2h07min\",\"comments\":\"\",\"legacy_subtitle_id\":6698593,\"legacy_uploader_id\":2563175,\"uploader\":{\"uploader_id\":69315,\"name\":\"bergert_\",\"rank\":\"Trusted
-        member\"},\"feature_details\":{\"feature_id\":580760,\"feature_type\":\"Movie\",\"year\":2013,\"title\":\"Man
-        of Steel\",\"movie_name\":\"2013 - Man of Steel\",\"imdb_id\":770828,\"tmdb_id\":49521},\"url\":\"https://www.opensubtitles.com/de/subtitles/legacy/6698593\",\"related_links\":[{\"label\":\"All
-        subtitles for man of steel\",\"url\":\"https://www.opensubtitles.com/de/movies/2013-man-of-steel\",\"img_url\":\"https://s9.opensubtitles.com/features/0/6/7/580760.jpg\"}],\"files\":[{\"file_id\":965287,\"cd_number\":1,\"file_name\":\"Man
-        of Steel (DT-2013)\"}]}},{\"id\":\"880717\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"880717\",\"language\":\"de\",\"download_count\":2670,\"new_download_count\":194,\"hearing_impaired\":false,\"hd\":true,\"fps\":23.976,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2013-10-19T00:53:25Z\",\"ai_translated\":false,\"nb_cd\":1,\"machine_translated\":false,\"release\":\"Man.of.Steel.German.720p.BluRay.x264-EXQUiSiTE\",\"comments\":\"\",\"legacy_subtitle_id\":5229998,\"legacy_uploader_id\":0,\"uploader\":{\"uploader_id\":3282,\"name\":\"os-auto\",\"rank\":\"Application
-        Developers\"},\"feature_details\":{\"feature_id\":580760,\"feature_type\":\"Movie\",\"year\":2013,\"title\":\"Man
-        of Steel\",\"movie_name\":\"2013 - Man of Steel\",\"imdb_id\":770828,\"tmdb_id\":49521},\"url\":\"https://www.opensubtitles.com/de/subtitles/legacy/5229998\",\"related_links\":[{\"label\":\"All
-        subtitles for man of steel\",\"url\":\"https://www.opensubtitles.com/de/movies/2013-man-of-steel\",\"img_url\":\"https://s9.opensubtitles.com/features/0/6/7/580760.jpg\"}],\"files\":[{\"file_id\":962352,\"cd_number\":1,\"file_name\":\"Man.of.Steel.German.720p.BluRay.x264-EXQUiSiTE\"}]}},{\"id\":\"5166256\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"5166256\",\"language\":\"de\",\"download_count\":1794,\"new_download_count\":14,\"hearing_impaired\":false,\"hd\":true,\"fps\":23.976,\"votes\":1,\"ratings\":10.0,\"from_trusted\":true,\"foreign_parts_only\":false,\"upload_date\":\"2020-03-29T11:40:37Z\",\"ai_translated\":false,\"nb_cd\":1,\"machine_translated\":false,\"release\":\"Man.of.Steel.2013.720p.german.srt\",\"comments\":\"--\\u003e
-        HI-Items entfernt, Timing teilweise korrigiert, Kursivsetzung korrigiert\\r\\n--\\u003e
-        passend f\xFCr Versionen mit Laufzeit 2h 23min 2s 688ms\",\"legacy_subtitle_id\":8148911,\"legacy_uploader_id\":1189705,\"uploader\":{\"uploader_id\":54111,\"name\":\"arcchancellor\",\"rank\":\"translator\"},\"feature_details\":{\"feature_id\":580760,\"feature_type\":\"Movie\",\"year\":2013,\"title\":\"Man
-        of Steel\",\"movie_name\":\"2013 - Man of Steel\",\"imdb_id\":770828,\"tmdb_id\":49521},\"url\":\"https://www.opensubtitles.com/de/subtitles/legacy/8148911\",\"related_links\":[{\"label\":\"All
-        subtitles for man of steel\",\"url\":\"https://www.opensubtitles.com/de/movies/2013-man-of-steel\",\"img_url\":\"https://s9.opensubtitles.com/features/0/6/7/580760.jpg\"}],\"files\":[{\"file_id\":5276290,\"cd_number\":1,\"file_name\":\"Man.of.Steel.2013.720p.german\"}]}},{\"id\":\"883560\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"883560\",\"language\":\"de\",\"download_count\":938,\"new_download_count\":9,\"hearing_impaired\":true,\"hd\":true,\"fps\":23.976,\"votes\":2,\"ratings\":10.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2016-08-01T19:13:17Z\",\"ai_translated\":false,\"nb_cd\":1,\"machine_translated\":false,\"release\":\"Man
-        of Steel German DL 1080p BluRay x264-EXQUiSiTE\",\"comments\":\"Duration:
-        2:23:03\\r\\nvia SubTools from idx to srt\\r\\nFull German\\r\\nHandmade corrected\",\"legacy_subtitle_id\":6699712,\"legacy_uploader_id\":1471910,\"uploader\":{\"uploader_id\":60439,\"name\":\"PissPott\",\"rank\":\"Silver
-        Member\"},\"feature_details\":{\"feature_id\":580760,\"feature_type\":\"Movie\",\"year\":2013,\"title\":\"Man
-        of Steel\",\"movie_name\":\"2013 - Man of Steel\",\"imdb_id\":770828,\"tmdb_id\":49521},\"url\":\"https://www.opensubtitles.com/de/subtitles/legacy/6699712\",\"related_links\":[{\"label\":\"All
-        subtitles for man of steel\",\"url\":\"https://www.opensubtitles.com/de/movies/2013-man-of-steel\",\"img_url\":\"https://s9.opensubtitles.com/features/0/6/7/580760.jpg\"}],\"files\":[{\"file_id\":965292,\"cd_number\":1,\"file_name\":\"exq-manofsteel-1080p.idx.mkv\"}]}},{\"id\":\"6632511\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"6632511\",\"language\":\"de\",\"download_count\":61,\"new_download_count\":7,\"hearing_impaired\":false,\"hd\":true,\"fps\":23.976,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2022-06-26T19:32:54Z\",\"ai_translated\":false,\"nb_cd\":1,\"machine_translated\":false,\"release\":\"Should
-        work with 4k BD rips\",\"comments\":\"Source German Retail 4k BD\\r\\nRetail
-        PGS to SSA + improvements\\r\\n\\r\\ncoloured parts\\r\\n\\r\\nIf the timing
-        is off, just correct it with SubtitleEdit.\\r\\n-\\u003e Synchronization \\r\\n-\\u003e
-        Adjust all times \\r\\n-\\u003e all lines\\r\\n\\r\\nWorks best with MPC-BE
-        + XySubFilter + madvr\\r\\nbecause there the font is not in the image,\\r\\nbut
-        at the bottom in the black bars.\",\"legacy_subtitle_id\":9150443,\"legacy_uploader_id\":9372469,\"uploader\":{\"uploader_id\":null,\"name\":\"Anonymous\",\"rank\":\"anonymous\"},\"feature_details\":{\"feature_id\":580760,\"feature_type\":\"Movie\",\"year\":2013,\"title\":\"Man
-        of Steel\",\"movie_name\":\"2013 - Man of Steel\",\"imdb_id\":770828,\"tmdb_id\":49521},\"url\":\"https://www.opensubtitles.com/de/subtitles/legacy/9150443\",\"related_links\":[{\"label\":\"All
-        subtitles for man of steel\",\"url\":\"https://www.opensubtitles.com/de/movies/2013-man-of-steel\",\"img_url\":\"https://s9.opensubtitles.com/features/0/6/7/580760.jpg\"}],\"files\":[{\"file_id\":7601680,\"cd_number\":1,\"file_name\":\"Man
-        of Steel.Full - German\"}]}}]}"
+      string: !!binary |
+        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
+        WfbaKp2kTPb0rK2Bgb7CIZnxenO93lwB
     headers:
       Access-Control-Allow-Headers:
       - Origin, Authorization, Accept, Api-Key, Content-Type, X-User-Agent
@@ -185,23 +183,23 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Age:
-      - '0'
+      - '48860'
       CF-Cache-Status:
       - HIT
       CF-RAY:
-      - 87c70445fa564999-LHR
+      - 883aac4d5e89229d-CDG
       Cache-Control:
       - public, max-age=86400
       Connection:
       - keep-alive
       Content-Encoding:
-      - gzip
+      - br
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Tue, 30 Apr 2024 10:58:26 GMT
+      - Tue, 14 May 2024 11:50:51 GMT
       Last-Modified:
-      - Tue, 30 Apr 2024 10:58:26 GMT
+      - Mon, 13 May 2024 22:16:31 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       RateLimit-Limit:
@@ -211,7 +209,7 @@ interactions:
       RateLimit-Reset:
       - '1'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=h5StGPlDJjDmZ3QHVWzhDphUCWmYm%2B9XOMrouOtEKL9bC5Zy2Fiw5ICKItGHlCmX6ANKTXYwv1KOtql8cF%2BfUDgcndG1IVg1Pz41NZOkFYWep0IRnNgP8%2FdAD5%2B3VZuv7RxrBC7gyno%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=llbTzuGTqF5nDc8a2xkwO%2FH5M2oGUiebcoOzULefsTDfjSj0dpgBj8X8XAioeLwcvTMmuAQuKQ8wEjVeyy4ycJrhTITbiu8KnrVfqXv2E1W9zdtZa7JIkU6cmvT%2BUIX9JDxdr9DJQeQ%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -221,7 +219,7 @@ interactions:
       Vary:
       - Accept-Encoding
       X-Cache-Backend:
-      - apigw1_8000 rb1
+      - apigw1_8000 rb7
       X-Content-Type-Options:
       - nosniff
       X-Download-Options:
@@ -229,19 +227,19 @@ interactions:
       X-Frame-Options:
       - SAMEORIGIN
       X-Kong-Proxy-Latency:
-      - '1'
+      - '0'
       X-Kong-Upstream-Latency:
-      - '438'
+      - '208'
       X-RateLimit-Limit-Second:
       - '5'
       X-RateLimit-Remaining-Second:
       - '4'
       X-Request-Id:
-      - e9997384-351c-48ab-b614-708c0d06f97c
+      - 30a4a3f7-ed8c-4f76-8071-900c99162faa
       X-Runtime:
-      - '0.263838'
+      - '0.044903'
       X-StackifyID:
-      - V1|aff90fee-934c-4f29-819f-ed60e5fc8c75|C98184|CD5
+      - V1|57d97910-3604-48f0-b9d8-bb48c1f474e8|C98087|CD1
       X-Var-Cache:
       - MISS
       X-Via:

@@ -36,6 +36,7 @@ def test_get_matches_movie_hash(movies):
         movie_imdb_id="tt0770828",
         series_season=0,
         series_episode=0,
+        moviehash_match=True,
         file_name="Man.of.Steel.German.720p.BluRay.x264-EXQUiSiTE.srt",
     )
     matches = subtitle.get_matches(movies["man_of_steel"])
@@ -44,9 +45,9 @@ def test_get_matches_movie_hash(movies):
         "year",
         "country",
         "video_codec",
-        "imdb_id",
         "resolution",
         "source",
+        "hash",
     }
 
 
@@ -67,7 +68,6 @@ def test_get_matches_episode(episodes):
     )
     matches = subtitle.get_matches(episodes["got_s03e10"])
     assert matches == {
-        "imdb_id",
         "series",
         "year",
         "country",
@@ -93,7 +93,7 @@ def test_get_matches_episode_year(episodes):
         file_name="Dallas.2012.S01E03.HDTV.x264-LOL.srt",
     )
     matches = subtitle.get_matches(episodes["dallas_2012_s01e03"])
-    assert matches == {"imdb_id", "series", "year", "episode", "season", "title"}
+    assert matches == {"series", "year", "episode", "season", "title"}
 
 
 def test_get_matches_episode_filename(episodes):
@@ -162,6 +162,7 @@ def test_get_matches_imdb_id(movies):
         release="man.of.steel.2013.720p.bluray.x264-felony",
         movie_year=2013,
         movie_imdb_id="tt0770828",
+        imdb_match=True,
         series_season=0,
         series_episode=0,
         file_name="man.of.steel.2013.720p.bluray.x264-felony.srt",
@@ -199,18 +200,18 @@ def test_get_matches_no_match(episodes):
 
 def test_configuration_error_no_username():
     with pytest.raises(ConfigurationError):
-        OpenSubtitlesComProvider(password=PASSWORD, cached=False)
+        OpenSubtitlesComProvider(password=PASSWORD)
 
 
 def test_configuration_error_no_password():
     with pytest.raises(ConfigurationError):
-        OpenSubtitlesComProvider(username=USERNAME, cached=False)
+        OpenSubtitlesComProvider(username=USERNAME)
 
 
 @pytest.mark.integration
 @vcr.use_cassette
 def test_login():
-    provider = OpenSubtitlesComProvider(USERNAME, PASSWORD, cached=False)
+    provider = OpenSubtitlesComProvider(USERNAME, PASSWORD)
     assert provider.token is None
     provider.initialize()
     provider.login(wait=True)
@@ -220,7 +221,7 @@ def test_login():
 @pytest.mark.integration
 @vcr.use_cassette
 def test_login_bad_password():
-    provider = OpenSubtitlesComProvider(USERNAME, "lanimilbus", cached=False)
+    provider = OpenSubtitlesComProvider(USERNAME, "lanimilbus")
     with pytest.raises(Unauthorized):
         provider.initialize()
         provider.login(wait=True)
@@ -229,7 +230,7 @@ def test_login_bad_password():
 @pytest.mark.integration
 @vcr.use_cassette
 def test_logout():
-    provider = OpenSubtitlesComProvider(USERNAME, PASSWORD, cached=False)
+    provider = OpenSubtitlesComProvider(USERNAME, PASSWORD)
     provider.initialize()
     provider.login(wait=True)
     provider.terminate()
@@ -239,7 +240,7 @@ def test_logout():
 @pytest.mark.integration
 @vcr.use_cassette
 def test_user_infos():
-    with OpenSubtitlesComProvider(USERNAME, PASSWORD, cached=False) as provider:
+    with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
         provider.login(wait=True)
         ret = provider.user_infos()
         assert ret
@@ -249,7 +250,7 @@ def test_user_infos():
 @vcr.use_cassette
 def test_query_not_enough_information():
     languages = {Language("eng")}
-    with OpenSubtitlesComProvider(USERNAME, PASSWORD, cached=False) as provider:
+    with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
         with pytest.raises(ValueError) as excinfo:
             provider.query(languages)
     assert str(excinfo.value) == "Not enough information"
@@ -268,7 +269,7 @@ def test_query_query_movie(movies):
         "1546744",
         "4614499",
     }
-    with OpenSubtitlesComProvider(USERNAME, PASSWORD, cached=False) as provider:
+    with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
         subtitles = provider.query(languages, query=video.title)
     assert {subtitle.id for subtitle in subtitles} == expected_subtitles
     assert {subtitle.language for subtitle in subtitles} == languages
@@ -285,7 +286,7 @@ def test_query_query_episode(episodes):
         "3829531",
         "6915085",
     }
-    with OpenSubtitlesComProvider(USERNAME, PASSWORD, cached=False) as provider:
+    with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
         subtitles = provider.query(
             languages, query=video.series, season=video.season, episode=video.episode
         )
@@ -299,7 +300,7 @@ def test_query_tag_movie(movies):
     video = movies["enders_game"]
     languages = {Language("fra")}
     expected_subtitles = {"938965", "940630"}
-    with OpenSubtitlesComProvider(USERNAME, PASSWORD, cached=False) as provider:
+    with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
         subtitles = provider.query(languages, query=video.name)
     assert {subtitle.id for subtitle in subtitles} == expected_subtitles
     assert {subtitle.language for subtitle in subtitles} == languages
@@ -318,7 +319,7 @@ def test_query_imdb_id(movies):
         "5166256",
         "6632511",
     }
-    with OpenSubtitlesComProvider(USERNAME, PASSWORD, cached=False) as provider:
+    with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
         subtitles = provider.query(languages, imdb_id=video.imdb_id)
     assert {subtitle.id for subtitle in subtitles} == expected_subtitles
     assert {subtitle.language for subtitle in subtitles} == languages
@@ -343,7 +344,7 @@ def test_query_hash_size(movies):
         "882182",
         "3178800",
     }
-    with OpenSubtitlesComProvider(USERNAME, PASSWORD, cached=False) as provider:
+    with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
         subtitles = provider.query(
             languages, hash=video.hashes["opensubtitles"]
         )
@@ -355,7 +356,7 @@ def test_query_hash_size(movies):
 @vcr.use_cassette
 def test_query_wrong_hash_wrong_size():
     languages = {Language("eng")}
-    with OpenSubtitlesComProvider(USERNAME, PASSWORD, cached=False) as provider:
+    with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
         subtitles = provider.query(languages, hash="123456787654321")
     assert len(subtitles) == 0
 
@@ -366,7 +367,7 @@ def test_query_query_season_episode(episodes):
     video = episodes["bbt_s07e05"]
     languages = {Language("deu")}
     expected_subtitles = {"2748964", "4662161"}
-    with OpenSubtitlesComProvider(USERNAME, PASSWORD, cached=False) as provider:
+    with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
         subtitles = provider.query(
             languages, query=video.series, season=video.season, episode=video.episode
         )
@@ -399,7 +400,7 @@ def test_list_subtitles_movie(movies):
         "823209",
         "2627042",
     }
-    with OpenSubtitlesComProvider(USERNAME, PASSWORD, cached=False) as provider:
+    with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
         subtitles = provider.list_subtitles(video, languages)
     assert {subtitle.id for subtitle in subtitles} == expected_subtitles
     assert {subtitle.language for subtitle in subtitles} == languages
@@ -411,7 +412,7 @@ def test_list_subtitles_movie_no_hash(movies):
     video = movies["enders_game"]
     languages = {Language("deu")}
     expected_subtitles = {"939532", "939553", "940426"}
-    with OpenSubtitlesComProvider(USERNAME, PASSWORD, cached=False) as provider:
+    with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
         subtitles = provider.list_subtitles(video, languages)
     assert {subtitle.id for subtitle in subtitles} == expected_subtitles
     assert {subtitle.language for subtitle in subtitles} == languages
@@ -423,7 +424,7 @@ def test_list_subtitles_episode(episodes):
     video = episodes["marvels_agents_of_shield_s02e06"]
     languages = {Language("hun")}
     expected_subtitles = {"2491535", "2492310", "2493688"}
-    with OpenSubtitlesComProvider(USERNAME, PASSWORD, cached=False) as provider:
+    with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
         subtitles = provider.list_subtitles(video, languages)
     assert {subtitle.id for subtitle in subtitles} == expected_subtitles
     assert {subtitle.language for subtitle in subtitles} == languages
@@ -434,7 +435,7 @@ def test_list_subtitles_episode(episodes):
 def test_download_subtitle(movies):
     video = movies['man_of_steel']
     languages = {Language('deu'), Language('fra')}
-    with OpenSubtitlesComProvider(USERNAME, PASSWORD, cached=False) as provider:
+    with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
         subtitles = provider.list_subtitles(video, languages)
         provider.download_subtitle(subtitles[0])
     assert subtitles[0].content is not None
@@ -447,7 +448,7 @@ def test_download_subtitle(movies):
 def test_tag_match(episodes):
     video = episodes["the fall"]
     languages = {Language("por", "BR")}
-    with OpenSubtitlesComProvider(USERNAME, PASSWORD, cached=False) as provider:
+    with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
         subtitles = provider.list_subtitles(video, languages)
 
     assert len(subtitles) > 0

@@ -5,63 +5,7 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
-      Api-Key:
-      - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
-      Connection:
-      - keep-alive
-      Content-Type:
-      - application/json
-      User-Agent:
-      - Subliminal v2.1
-    method: GET
-    uri: https://api.opensubtitles.com/api/v1/subtitles?languages=en&moviehash=123456787654321
-  response:
-    body:
-      string: ''
-    headers:
-      Access-Control-Allow-Origin:
-      - '*'
-      CF-Cache-Status:
-      - MISS
-      CF-RAY:
-      - 87c7044a3d3e48ca-LHR
-      Cache-Control:
-      - public, max-age=86400
-      Connection:
-      - keep-alive
-      Content-Length:
-      - '0'
-      Date:
-      - Tue, 30 Apr 2024 10:58:27 GMT
-      NEL:
-      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
-      Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=zKZBICuY4IWfGTA4LKfgKw9lqG3mpufoAhQE2cYWWC6K1DdRGKEUg0sJltF6xwbo0N1UcMRYFDnT%2FxGUY5BEUdXnsxz7Vx8ANeO0H9irH%2FMrAUbKvGPZ1PwShGjY1PGc0tIdFD2KD7A%3D"}],"group":"cf-nel","max_age":604800}'
-      Server:
-      - cloudflare
-      Strict-Transport-Security:
-      - max-age=15552000; includeSubDomains; preload
-      Vary:
-      - Accept-Encoding
-      X-Content-Type-Options:
-      - nosniff
-      X-Reason:
-      - Request parameters does not make sense, moviehash is wrong
-      X-Varnish:
-      - '167903389'
-      alt-svc:
-      - h3=":443"; ma=86400
-    status:
-      code: 400
-      message: Bad Request
-- request:
-    body: null
-    headers:
-      Accept:
-      - '*/*'
-      Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br
       Api-Key:
       - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
       Connection:
@@ -79,11 +23,11 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Age:
-      - '0'
+      - '48860'
       CF-Cache-Status:
       - HIT
       CF-RAY:
-      - 87c7044b6fcb073a-LHR
+      - 883aac4fafbb3cad-CDG
       Cache-Control:
       - public, max-age=86400
       Connection:
@@ -91,11 +35,11 @@ interactions:
       Content-Length:
       - '0'
       Date:
-      - Tue, 30 Apr 2024 10:58:27 GMT
+      - Tue, 14 May 2024 11:50:52 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=nlmHZjCsvHKFtlNqrOGLLCLR5a4gsURp%2BJ9dI%2FysXUI2q9X2eCz9leNDT2iWWWnbfoNdGc2A2i7%2FTOhSSSC1qM%2FxeVpsImjzjkOXKZjdyecDnyzHM9mN1VcUOB66iOgpENi%2B05cqrw8%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=CqiykDB2mvzFut%2FOrrpDc5QZHdEqD296XJXBAZju1NFCr7elUt1OUCBf%2BJPG9IIPn6nXGMRPPdOH2jZUgsmrgmxW9wULI6jOutI7cXkBfYjtuAaL7Ek45JSXo8ygPmjZAv0A%2FkEmHvo%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -107,7 +51,65 @@ interactions:
       X-Reason:
       - Request parameters does not make sense, moviehash is wrong
       X-Varnish:
-      - '167903389'
+      - '5104067'
+      alt-svc:
+      - h3=":443"; ma=86400
+    status:
+      code: 400
+      message: Bad Request
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br
+      Api-Key:
+      - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Subliminal v2.1
+    method: GET
+    uri: https://api.opensubtitles.com/api/v1/subtitles?languages=en&moviehash=123456787654321
+  response:
+    body:
+      string: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Age:
+      - '48860'
+      CF-Cache-Status:
+      - HIT
+      CF-RAY:
+      - 883aac4fffff3cad-CDG
+      Cache-Control:
+      - public, max-age=86400
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '0'
+      Date:
+      - Tue, 14 May 2024 11:50:52 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=7ORzJp2vZ%2FlBWaM8d9hQhB2a2%2FIAcnRxNQVvKBj1ihyL2yn3M%2Fk2CS5ToUNcL%2FV3bmLedgosFRLz8d4dVlJ3s8gBhah9F7D%2FISNGL2rnkZpj0tLTQf8zKtR%2BZkdE9jJqCA8%2Bq3DMwJ8%3D"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Reason:
+      - Request parameters does not make sense, moviehash is wrong
+      X-Varnish:
+      - '5104067'
       alt-svc:
       - h3=":443"; ma=86400
     status:

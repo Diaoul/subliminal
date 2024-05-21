@@ -1,13 +1,38 @@
+"""Get matches between a :class:`~subliminal.video.Video` object and a dict of guesses.
+
+.. py:function:: guess_matches(video, guess, *, partial = False)
+
+    :param video: the video.
+    :type video: :class:`~subliminal.video.Video`
+    :param guess: the guess.
+    :type guess: dict[str, Any]
+    :param bool partial: whether or not the guess is partial.
+    :return: matches between the `video` and the `guess`.
+    :rtype: set[str]
+
+"""
+
 from __future__ import annotations
 
-from rebulk.loose import ensure_list
+from typing import TYPE_CHECKING, Any
+
+from babelfish import Country
 
 from .score import get_equivalent_release_groups, score_keys
-from .video import Episode, Movie
-from .utils import sanitize, sanitize_release_group
+from .utils import ensure_list, sanitize, sanitize_release_group
+from .video import Episode, Movie, Video
+
+if TYPE_CHECKING:
+    from collections.abc import Mapping
+    from typing import Protocol
+
+    class MatchingFunc(Protocol):
+        """Match a :class:`~subliminal.video.Video` to criteria."""
+
+        def __call__(self, video: Video, **kwargs: Any) -> bool: ...  # noqa: D102
 
 
-def series_matches(video, title=None, **kwargs):
+def series_matches(video: Video, *, title: str | None = None, **kwargs: Any) -> bool:
     """Whether the `video` matches the series title.
 
     :param video: the video.
@@ -17,13 +42,17 @@ def series_matches(video, title=None, **kwargs):
     :rtype: bool
 
     """
-    if isinstance(video, Episode):
-        return video.series and sanitize(title) in (
-            sanitize(name) for name in [video.series] + video.alternative_series
-        )
+    if not isinstance(video, Episode):
+        return False
+    sanitized_title = sanitize(title)
+    return (
+        video.series is not None
+        and sanitized_title is not None
+        and sanitized_title in (sanitize(name) for name in [video.series, *video.alternative_series])
+    )
 
 
-def title_matches(video, title=None, episode_title=None, **kwargs):
+def title_matches(video: Video, *, title: str | None = None, episode_title: str | None = None, **kwargs: Any) -> bool:
     """Whether the movie matches the movie `title` or the series matches the `episode_title`.
 
     :param video: the video.
@@ -35,12 +64,13 @@ def title_matches(video, title=None, episode_title=None, **kwargs):
 
     """
     if isinstance(video, Episode):
-        return video.title and sanitize(episode_title) == sanitize(video.title)
+        return video.title is not None and sanitize(episode_title) == sanitize(video.title)
     if isinstance(video, Movie):
-        return video.title and sanitize(title) == sanitize(video.title)
+        return video.title is not None and sanitize(title) == sanitize(video.title)
+    return False
 
 
-def season_matches(video, season=None, **kwargs):
+def season_matches(video: Video, *, season: int | None = None, **kwargs: Any) -> bool:
     """Whether the episode matches the `season`.
 
     :param video: the video.
@@ -50,11 +80,12 @@ def season_matches(video, season=None, **kwargs):
     :rtype: bool
 
     """
-    if isinstance(video, Episode):
-        return video.season and season == video.season
+    if not isinstance(video, Episode):
+        return False
+    return video.season is not None and season == video.season
 
 
-def episode_matches(video, episode=None, **kwargs):
+def episode_matches(video: Video, *, episode: int | None = None, **kwargs: Any) -> bool:
     """Whether the episode matches the `episode`.
 
     :param video: the video.
@@ -65,11 +96,12 @@ def episode_matches(video, episode=None, **kwargs):
     :rtype: bool
 
     """
-    if isinstance(video, Episode):
-        return video.episodes and ensure_list(episode) == video.episodes
+    if not isinstance(video, Episode):
+        return False
+    return video.episodes is not None and ensure_list(episode) == video.episodes
 
 
-def year_matches(video, year=None, partial=False, **kwargs):
+def year_matches(video: Video, *, year: int | None = None, partial: bool = False, **kwargs: Any) -> bool:
     """Whether the video matches the `year`.
 
     :param video: the video.
@@ -80,14 +112,15 @@ def year_matches(video, year=None, partial=False, **kwargs):
     :rtype: bool
 
     """
-    if video.year and year == video.year:
+    if video.year is not None and year == video.year:
         return True
     if isinstance(video, Episode):
         # count "no year" as an information
-        return not partial and video.original_series and not year
+        return not partial and video.original_series and year is None
+    return False
 
 
-def country_matches(video, country=None, partial=False, **kwargs):
+def country_matches(video: Video, *, country: Country | None = None, partial: bool = False, **kwargs: Any) -> bool:
     """Whether the video matches the `country`.
 
     :param video: the video.
@@ -99,19 +132,20 @@ def country_matches(video, country=None, partial=False, **kwargs):
     :rtype: bool
 
     """
-    if video.country and country == video.country:
+    if video.country is not None and country == video.country:
         return True
 
     if isinstance(video, Episode):
         # count "no country" as an information
-        return not partial and video.original_series and not country
+        return not partial and video.original_series and country is None
 
     if isinstance(video, Movie):
         # count "no country" as an information
-        return not video.country and not country
+        return video.country is None and country is None
+    return False
 
 
-def release_group_matches(video, release_group=None, **kwargs):
+def release_group_matches(video: Video, *, release_group: str | None = None, **kwargs: Any) -> bool:
     """Whether the video matches the `release_group`.
 
     :param video: the video.
@@ -121,12 +155,17 @@ def release_group_matches(video, release_group=None, **kwargs):
     :rtype: bool
 
     """
-    return (video.release_group and release_group and
-            any(r in sanitize_release_group(release_group)
-                for r in get_equivalent_release_groups(sanitize_release_group(video.release_group))))
+    return (
+        video.release_group is not None
+        and release_group is not None
+        and any(
+            r in sanitize_release_group(release_group)
+            for r in get_equivalent_release_groups(sanitize_release_group(video.release_group))
+        )
+    )
 
 
-def streaming_service_matches(video, streaming_service=None, **kwargs):
+def streaming_service_matches(video: Video, *, streaming_service: str | None = None, **kwargs: Any) -> bool:
     """Whether the video matches the `streaming_service`.
 
     :param video: the video.
@@ -136,10 +175,10 @@ def streaming_service_matches(video, streaming_service=None, **kwargs):
     :rtype: bool
 
     """
-    return video.streaming_service and streaming_service == video.streaming_service
+    return video.streaming_service is not None and streaming_service == video.streaming_service
 
 
-def resolution_matches(video, screen_size=None, **kwargs):
+def resolution_matches(video: Video, *, screen_size: str | None = None, **kwargs: Any) -> bool:
     """Whether the video matches the `resolution`.
 
     :param video: the video.
@@ -149,10 +188,10 @@ def resolution_matches(video, screen_size=None, **kwargs):
     :rtype: bool
 
     """
-    return video.resolution and screen_size == video.resolution
+    return video.resolution is not None and screen_size == video.resolution
 
 
-def source_matches(video, source=None, **kwargs):
+def source_matches(video: Video, *, source: str | None = None, **kwargs: Any) -> bool:
     """Whether the video matches the `source`.
 
     :param video: the video.
@@ -162,10 +201,10 @@ def source_matches(video, source=None, **kwargs):
     :rtype: bool
 
     """
-    return video.source and source == video.source
+    return video.source is not None and source == video.source
 
 
-def video_codec_matches(video, video_codec=None, **kwargs):
+def video_codec_matches(video: Video, *, video_codec: str | None = None, **kwargs: Any) -> bool:
     """Whether the video matches the `video_codec`.
 
     :param video: the video.
@@ -175,10 +214,10 @@ def video_codec_matches(video, video_codec=None, **kwargs):
     :rtype: bool
 
     """
-    return video.video_codec and video_codec == video.video_codec
+    return video.video_codec is not None and video_codec == video.video_codec
 
 
-def audio_codec_matches(video, audio_codec=None, **kwargs):
+def audio_codec_matches(video: Video, *, audio_codec: str | None = None, **kwargs: Any) -> bool:
     """Whether the video matches the `audio_codec`.
 
     :param video: the video.
@@ -188,11 +227,11 @@ def audio_codec_matches(video, audio_codec=None, **kwargs):
     :rtype: bool
 
     """
-    return video.audio_codec and audio_codec == video.audio_codec
+    return video.audio_codec is not None and audio_codec == video.audio_codec
 
 
 #: Available matches functions
-matches_manager = {
+matches_manager: dict[str, MatchingFunc] = {
     'series': series_matches,
     'title': title_matches,
     'season': season_matches,
@@ -204,11 +243,11 @@ matches_manager = {
     'resolution': resolution_matches,
     'source': source_matches,
     'video_codec': video_codec_matches,
-    'audio_codec': audio_codec_matches
+    'audio_codec': audio_codec_matches,
 }
 
 
-def guess_matches(video, guess, partial=False):
+def guess_matches(video: Video, guess: Mapping[str, Any], *, partial: bool = False) -> set[str]:
     """Get matches between a `video` and a `guess`.
 
     If a guess is `partial`, the absence information won't be counted as a match.

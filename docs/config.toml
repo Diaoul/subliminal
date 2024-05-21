@@ -1,0 +1,26 @@
+[default]
+cache_dir = "~/.cache/subliminal"
+
+[provider.opensubtitlescom]
+username = "python-subliminal-test"
+password = "subliminal"
+apikey = "mij33pjc3kOlup1qOKxnWWxvle2kFbMH"
+
+[provider.addic7ed]
+username = "subliminal"
+password = "subliminal"
+
+[refiner.omdb]
+apikey = "44d5b275"
+
+[refiner.tmdb]
+apikey = "xxxxxxxxx"
+
+[download]
+provider = ["addic7ed", "opensubtitlescom", "opensubtitles"]
+refiner = ["metadata", "hash", "omdb", "tvdb"]
+language = ["fr", "en", "pt-br"]
+encoding = "utf-8"
+min_score = 50
+archives = true
+verbose = 3

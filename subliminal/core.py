@@ -1,24 +1,34 @@
+"""Core functions."""
+
 from __future__ import annotations
 
-from collections import defaultdict
-from concurrent.futures import ThreadPoolExecutor
-from datetime import datetime, timezone
-import io
 import itertools
 import logging
 import operator
 import os
-
-from babelfish import Language, LanguageReverseError
-from guessit import guessit
-from rarfile import BadRarFile, NotRarFile, RarCannotExec, RarFile, Error, is_rarfile
+from collections import defaultdict
+from concurrent.futures import ThreadPoolExecutor
+from datetime import datetime, timedelta, timezone
+from typing import TYPE_CHECKING, Any
 from zipfile import BadZipfile
 
-from .extensions import provider_manager, default_providers, refiner_manager
+from babelfish import Language, LanguageReverseError  # type: ignore[import-untyped]
+from guessit import guessit  # type: ignore[import-untyped]
+from rarfile import BadRarFile, Error, NotRarFile, RarCannotExec, RarFile, is_rarfile  # type: ignore[import-untyped]
+
+from .extensions import default_providers, provider_manager, refiner_manager
 from .score import compute_score as default_compute_score
-from .subtitle import SUBTITLE_EXTENSIONS
+from .subtitle import SUBTITLE_EXTENSIONS, Subtitle
 from .utils import handle_exception
 from .video import VIDEO_EXTENSIONS, Episode, Movie, Video
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator, Mapping, Sequence, Set
+    from types import TracebackType
+
+    from subliminal.providers import Provider
+    from subliminal.score import ComputeScore
+
 
 #: Supported archive extensions
 ARCHIVE_EXTENSIONS = ('.rar',)
@@ -40,28 +50,41 @@ class ProviderPool:
         instantiating the :class:`~subliminal.providers.Provider`.
 
     """
-    def __init__(self, providers=None, provider_configs=None):
-        #: Name of providers to use
+
+    #: Name of providers to use
+    providers: Sequence[str]
+    #: Provider configuration
+    provider_configs: Mapping[str, Any]
+    #: Initialized providers
+    initialized_providers: dict[str, Provider]
+    #: Discarded providers
+    discarded_providers: set[str]
+
+    def __init__(
+        self,
+        providers: Sequence[str] | None = None,
+        provider_configs: Mapping[str, Any] | None = None,
+    ) -> None:
         self.providers = providers or default_providers
-
-        #: Provider configuration
         self.provider_configs = provider_configs or {}
-
-        #: Initialized providers
         self.initialized_providers = {}
-
-        #: Discarded providers
         self.discarded_providers = set()
 
-    def __enter__(self):
+    def __enter__(self) -> ProviderPool:
         return self
 
-    def __exit__(self, exc_type, exc_value, traceback):
+    def __exit__(
+        self,
+        exc_type: type[BaseException],
+        exc_value: BaseException | None,
+        traceback: TracebackType | None,
+    ) -> None:
         self.terminate()
 
-    def __getitem__(self, name):
+    def __getitem__(self, name: str) -> Provider:
         if name not in self.providers:
             raise KeyError
+
         if name not in self.initialized_providers:
             logger.info('Initializing provider %s', name)
             provider = provider_manager[name].plugin(**self.provider_configs.get(name, {}))
@@ -70,22 +93,22 @@ class ProviderPool:
 
         return self.initialized_providers[name]
 
-    def __delitem__(self, name):
+    def __delitem__(self, name: str) -> None:
         if name not in self.initialized_providers:
             raise KeyError(name)
 
         try:
             logger.info('Terminating provider %s', name)
             self.initialized_providers[name].terminate()
-        except Exception as e:
-            handle_exception(e, 'Provider {} improperly terminated'.format(name))
+        except Exception as e:  # noqa: BLE001
+            handle_exception(e, f'Provider {name} improperly terminated')
 
         del self.initialized_providers[name]
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[str]:
         return iter(self.initialized_providers)
 
-    def list_subtitles_provider(self, provider, video, languages):
+    def list_subtitles_provider(self, provider: str, video: Video, languages: Set[Language]) -> list[Subtitle]:
         """List subtitles with a single provider.
 
         The video and languages are checked against the provider.
@@ -114,12 +137,12 @@ class ProviderPool:
         logger.info('Listing subtitles with provider %r and languages %r', provider, provider_languages)
         try:
             return self[provider].list_subtitles(video, provider_languages)
-        except Exception as e:
-            handle_exception(e, 'Provider {}'.format(provider))
+        except Exception as e:  # noqa: BLE001
+            handle_exception(e, 'Provider {provider}')
 
         return []
 
-    def list_subtitles(self, video, languages):
+    def list_subtitles(self, video: Video, languages: Set[Language]) -> list[Subtitle]:
         """List subtitles.
 
         :param video: video to list subtitles for.
@@ -150,7 +173,7 @@ class ProviderPool:
 
         return subtitles
 
-    def download_subtitle(self, subtitle):
+    def download_subtitle(self, subtitle: Subtitle) -> bool:
         """Download `subtitle`'s :attr:`~subliminal.subtitle.Subtitle.content`.
 
         :param subtitle: subtitle to download.
@@ -168,9 +191,9 @@ class ProviderPool:
         try:
             self[subtitle.provider_name].download_subtitle(subtitle)
         except (BadZipfile, BadRarFile):
-            logger.error('Bad archive for subtitle %r', subtitle)
-        except Exception as e:
-            handle_exception(e, 'Discarding provider {}'.format(subtitle.provider_name))
+            logger.exception('Bad archive for subtitle %r', subtitle)
+        except Exception as e:  # noqa: BLE001
+            handle_exception(e, f'Discarding provider {subtitle.provider_name}')
             self.discarded_providers.add(subtitle.provider_name)
 
         # check subtitle validity
@@ -180,8 +203,17 @@ class ProviderPool:
 
         return True
 
-    def download_best_subtitles(self, subtitles, video, languages, min_score=0, hearing_impaired=False, only_one=False,
-                                compute_score=None):
+    def download_best_subtitles(
+        self,
+        subtitles: Sequence[Subtitle],
+        video: Video,
+        languages: Set[Language],
+        *,
+        min_score: int = 0,
+        hearing_impaired: bool = False,
+        only_one: bool = False,
+        compute_score: ComputeScore | None = None,
+    ) -> list[Subtitle]:
         """Download the best matching subtitles.
 
         :param subtitles: the subtitles to use.
@@ -202,11 +234,14 @@ class ProviderPool:
         compute_score = compute_score or default_compute_score
 
         # sort subtitles by score
-        scored_subtitles = sorted([(s, compute_score(s, video, hearing_impaired=hearing_impaired))
-                                  for s in subtitles], key=operator.itemgetter(1), reverse=True)
+        scored_subtitles = sorted(
+            [(s, compute_score(s, video, hearing_impaired=hearing_impaired)) for s in subtitles],
+            key=operator.itemgetter(1),
+            reverse=True,
+        )
 
         # download best subtitles, falling back on the next on error
-        downloaded_subtitles = []
+        downloaded_subtitles: list[Subtitle] = []
         for subtitle, score in scored_subtitles:
             # check score
             if score < min_score:
@@ -214,7 +249,7 @@ class ProviderPool:
                 break
 
             # check downloaded languages
-            if subtitle.language in set(s.language for s in downloaded_subtitles):
+            if subtitle.language in {s.language for s in downloaded_subtitles}:
                 logger.debug('Skipping subtitle: %r already downloaded', subtitle.language)
                 continue
 
@@ -223,7 +258,7 @@ class ProviderPool:
                 downloaded_subtitles.append(subtitle)
 
             # stop when all languages are downloaded
-            if set(s.language for s in downloaded_subtitles) == languages:
+            if {s.language for s in downloaded_subtitles} == languages:
                 logger.debug('All languages downloaded')
                 break
 
@@ -234,7 +269,7 @@ class ProviderPool:
 
         return downloaded_subtitles
 
-    def terminate(self):
+    def terminate(self) -> None:
         """Terminate all the :attr:`initialized_providers`."""
         logger.debug('Terminating initialized providers')
         for name in list(self.initialized_providers):
@@ -248,22 +283,36 @@ class AsyncProviderPool(ProviderPool):
         to the number of :attr:`~ProviderPool.providers`.
 
     """
-    def __init__(self, max_workers=None, *args, **kwargs):
+
+    max_workers: int
+
+    def __init__(self, max_workers: int | None = None, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
 
         #: Maximum number of threads to use
         self.max_workers = max_workers or len(self.providers)
 
-    def list_subtitles_provider(self, provider, video, languages):
+    def list_subtitles_provider_tuple(
+        self,
+        provider: str,
+        video: Video,
+        languages: Set[Language],
+    ) -> tuple[str, list[Subtitle]]:
+        """List subtitles with a single provider, multi-threaded."""
         return provider, super().list_subtitles_provider(provider, video, languages)
 
-    def list_subtitles(self, video, languages):
+    def list_subtitles(self, video: Video, languages: Set[Language]) -> list[Subtitle]:
+        """List subtitles, multi-threaded."""
         subtitles = []
 
         with ThreadPoolExecutor(self.max_workers) as executor:
-            for provider, provider_subtitles in executor.map(self.list_subtitles_provider, self.providers,
-                                                             itertools.repeat(video, len(self.providers)),
-                                                             itertools.repeat(languages, len(self.providers))):
+            executor_map = executor.map(
+                self.list_subtitles_provider_tuple,
+                self.providers,
+                itertools.repeat(video, len(self.providers)),
+                itertools.repeat(languages, len(self.providers)),
+            )
+            for provider, provider_subtitles in executor_map:
                 # discard provider that failed
                 if provider_subtitles is None:
                     logger.info('Discarding provider %s', provider)
@@ -276,7 +325,13 @@ class AsyncProviderPool(ProviderPool):
         return subtitles
 
 
-def check_video(video, languages=None, age=None, undefined=False):
+def check_video(
+    video: Video,
+    *,
+    languages: Set[Language] | None = None,
+    age: timedelta | None = None,
+    undefined: bool = False,
+) -> bool:
     """Perform some checks on the `video`.
 
     All the checks are optional. Return `False` if any of this check fails:
@@ -313,7 +368,11 @@ def check_video(video, languages=None, age=None, undefined=False):
     return True
 
 
-def search_external_subtitles(path, directory=None):
+def search_external_subtitles(
+    path: str | os.PathLike,
+    *,
+    directory: str | os.PathLike | None = None,
+) -> dict[str, Language]:
     """Search for external subtitles from a video `path` and their associated language.
 
     Unless `directory` is provided, search will be made in the same directory as the video file.
@@ -338,12 +397,12 @@ def search_external_subtitles(path, directory=None):
 
         # extract the potential language code
         language = Language('und')
-        language_code = p[len(fileroot):-len(os.path.splitext(p)[1])].replace(fileext, '').replace('_', '-')[1:]
+        language_code = p[len(fileroot) : -len(os.path.splitext(p)[1])].replace(fileext, '').replace('_', '-')[1:]
         if language_code:
             try:
                 language = Language.fromietf(language_code)
             except (ValueError, LanguageReverseError):
-                logger.error('Cannot parse language code %r', language_code)
+                logger.exception('Cannot parse language code %r', language_code)
 
         subtitles[p] = language
 
@@ -352,21 +411,24 @@ def search_external_subtitles(path, directory=None):
     return subtitles
 
 
-def scan_video(path):
+def scan_video(path: str | os.PathLike) -> Video:
     """Scan a video from a `path`.
 
     :param str path: existing path to the video.
     :return: the scanned video.
     :rtype: :class:`~subliminal.video.Video`
-
+    :raises: :class:`ValueError`: video path is not well defined.
     """
+    path = os.fspath(path)
     # check for non-existing path
     if not os.path.exists(path):
-        raise ValueError('Path does not exist')
+        msg = 'Path does not exist'
+        raise ValueError(msg)
 
     # check video extension
     if not path.lower().endswith(VIDEO_EXTENSIONS):
-        raise ValueError('%r is not a valid video extension' % os.path.splitext(path)[1])
+        msg = f'{os.path.splitext(path)[1]!r} is not a valid video extension'
+        raise ValueError(msg)
 
     dirpath, filename = os.path.split(path)
     logger.info('Scanning video %r in %r', filename, dirpath)
@@ -381,20 +443,23 @@ def scan_video(path):
     return video
 
 
-def scan_archive(path):
+def scan_archive(path: str | os.PathLike) -> Video:
     """Scan an archive from a `path`.
 
     :param str path: existing path to the archive.
     :return: the scanned video.
     :rtype: :class:`~subliminal.video.Video`
-
+    :raises: :class:`ValueError`: video path is not well defined.
     """
+    path = os.fspath(path)
     # check for non-existing path
     if not os.path.exists(path):
-        raise ValueError('Path does not exist')
+        msg = 'Path does not exist'
+        raise ValueError(msg)
 
     if not is_rarfile(path):
-        raise ValueError("'{0}' is not a valid archive".format(os.path.splitext(path)[1]))
+        msg = f'{os.path.splitext(path)[1]!r} is not a valid archive'
+        raise ValueError(msg)
 
     dir_path, filename = os.path.split(path)
 
@@ -405,23 +470,25 @@ def scan_archive(path):
 
     # check that the rar doesnt need a password
     if rar.needs_password():
-        raise ValueError('Rar requires a password')
+        msg = 'Rar requires a password'
+        raise ValueError(msg)
 
     # raise an exception if the rar file is broken
     # must be called to avoid a potential deadlock with some broken rars
     rar.testrar()
 
-    file_info = [f for f in rar.infolist() if not f.isdir() and f.filename.endswith(VIDEO_EXTENSIONS)]
+    file_infos = [f for f in rar.infolist() if not f.isdir() and f.filename.endswith(VIDEO_EXTENSIONS)]
 
     # sort by file size descending, the largest video in the archive is the one we want, there may be samples or intros
-    file_info.sort(key=operator.attrgetter('file_size'), reverse=True)
+    file_infos.sort(key=operator.attrgetter('file_size'), reverse=True)
 
     # no video found
-    if not file_info:
-        raise ValueError('No video in archive')
+    if not file_infos:
+        msg = 'No video in archive'
+        raise ValueError(msg)
 
     # Free the information about irrelevant files before guessing
-    file_info = file_info[0]
+    file_info = file_infos[0]
 
     # guess
     video_filename = file_info.filename
@@ -434,7 +501,7 @@ def scan_archive(path):
     return video
 
 
-def scan_videos(path, age=None, archives=True):
+def scan_videos(path: str | os.PathLike, *, age: timedelta | None = None, archives: bool = True) -> list[Video]:
     """Scan `path` for videos and their subtitles.
 
     See :func:`refine` to find additional information for the video.
@@ -444,15 +511,18 @@ def scan_videos(path, age=None, archives=True):
     :param bool archives: scan videos in archives.
     :return: the scanned videos.
     :rtype: list of :class:`~subliminal.video.Video`
-
+    :raises: :class:`ValueError`: video path is not well defined.
     """
+    path = os.fspath(path)
     # check for non-existing path
     if not os.path.exists(path):
-        raise ValueError('Path does not exist')
+        msg = 'Path does not exist'
+        raise ValueError(msg)
 
     # check for non-directory path
     if not os.path.isdir(path):
-        raise ValueError('Path is not a directory')
+        msg = 'Path is not a directory'
+        raise ValueError(msg)
 
     # walk the path
     videos = []
@@ -472,8 +542,9 @@ def scan_videos(path, age=None, archives=True):
         # scan for videos
         for filename in filenames:
             # filter on videos and archives
-            if not (filename.lower().endswith(VIDEO_EXTENSIONS) or
-                    archives and filename.lower().endswith(ARCHIVE_EXTENSIONS)):
+            if not filename.lower().endswith(VIDEO_EXTENSIONS) and not (
+                archives and filename.lower().endswith(ARCHIVE_EXTENSIONS)
+            ):
                 continue
 
             # skip hidden files
@@ -518,14 +589,22 @@ def scan_videos(path, age=None, archives=True):
                     logger.exception('Error scanning archive')
                     continue
             else:  # pragma: no cover
-                raise ValueError('Unsupported file %r' % filename)
+                msg = f'Unsupported file {filename!r}'
+                raise ValueError(msg)
 
             videos.append(video)
 
     return videos
 
 
-def refine(video, episode_refiners=None, movie_refiners=None, refiner_configs=None, **kwargs):
+def refine(
+    video: Video,
+    *,
+    episode_refiners: Sequence[str] | None = None,
+    movie_refiners: Sequence[str] | None = None,
+    refiner_configs: Mapping[str, Any] | None = None,
+    **kwargs: Any,
+) -> Video:
     """Refine a video using :ref:`refiners`.
 
     .. note::
@@ -541,20 +620,28 @@ def refine(video, episode_refiners=None, movie_refiners=None, refiner_configs=No
     :param kwargs: additional parameters for the :func:`~subliminal.refiners.refine` functions.
 
     """
-    refiners = ()
+    refiners: tuple[str, ...] = ()
     if isinstance(video, Episode):
-        refiners = episode_refiners or ('metadata', 'tvdb', 'omdb')
+        refiners = tuple(episode_refiners) if episode_refiners is not None else ('metadata', 'tvdb', 'omdb')
     elif isinstance(video, Movie):
-        refiners = movie_refiners or ('metadata', 'omdb')
-    for refiner in ('hash', ) + refiners:
+        refiners = tuple(movie_refiners) if movie_refiners is not None else ('metadata', 'omdb')
+
+    for refiner in ('hash', *refiners):
         logger.info('Refining video with %s', refiner)
         try:
             refiner_manager[refiner].plugin(video, **dict((refiner_configs or {}).get(refiner, {}), **kwargs))
-        except Exception as e:
-            handle_exception(e, 'Failed to refine video {0!r}'.format(video.name))
+        except Exception as e:  # noqa: BLE001
+            handle_exception(e, f'Failed to refine video {video.name!r}')
+    return video
 
 
-def list_subtitles(videos, languages, pool_class=ProviderPool, **kwargs):
+def list_subtitles(
+    videos: Set[Video],
+    languages: Set[Language],
+    *,
+    pool_class: type[ProviderPool] = ProviderPool,
+    **kwargs: Any,
+) -> dict[Video, list[Subtitle]]:
     """List subtitles.
 
     The `videos` must pass the `languages` check of :func:`check_video`.
@@ -570,7 +657,7 @@ def list_subtitles(videos, languages, pool_class=ProviderPool, **kwargs):
     :rtype: dict of :class:`~subliminal.video.Video` to list of :class:`~subliminal.subtitle.Subtitle`
 
     """
-    listed_subtitles = defaultdict(list)
+    listed_subtitles: dict[Video, list[Subtitle]] = defaultdict(list)
 
     # check videos
     checked_videos = []
@@ -595,7 +682,12 @@ def list_subtitles(videos, languages, pool_class=ProviderPool, **kwargs):
     return listed_subtitles
 
 
-def download_subtitles(subtitles, pool_class=ProviderPool, **kwargs):
+def download_subtitles(
+    subtitles: Sequence[Subtitle],
+    *,
+    pool_class: type[ProviderPool] = ProviderPool,
+    **kwargs: Any,
+) -> None:
     """Download :attr:`~subliminal.subtitle.Subtitle.content` of `subtitles`.
 
     :param subtitles: subtitles to download.
@@ -611,8 +703,17 @@ def download_subtitles(subtitles, pool_class=ProviderPool, **kwargs):
             pool.download_subtitle(subtitle)
 
 
-def download_best_subtitles(videos, languages, min_score=0, hearing_impaired=False, only_one=False, compute_score=None,
-                            pool_class=ProviderPool, **kwargs):
+def download_best_subtitles(
+    videos: Set[Video],
+    languages: Set[Language],
+    *,
+    min_score: int = 0,
+    hearing_impaired: bool = False,
+    only_one: bool = False,
+    compute_score: ComputeScore | None = None,
+    pool_class: type[ProviderPool] = ProviderPool,
+    **kwargs: Any,
+) -> dict[Video, list[Subtitle]]:
     """List and download the best matching subtitles.
 
     The `videos` must pass the `languages` and `undefined` (`only_one`) checks of :func:`check_video`.
@@ -633,7 +734,7 @@ def download_best_subtitles(videos, languages, min_score=0, hearing_impaired=Fal
     :rtype: dict of :class:`~subliminal.video.Video` to list of :class:`~subliminal.subtitle.Subtitle`
 
     """
-    downloaded_subtitles = defaultdict(list)
+    downloaded_subtitles: dict[Video, list[Subtitle]] = defaultdict(list)
 
     # check videos
     checked_videos = []
@@ -651,17 +752,30 @@ def download_best_subtitles(videos, languages, min_score=0, hearing_impaired=Fal
     with pool_class(**kwargs) as pool:
         for video in checked_videos:
             logger.info('Downloading best subtitles for %r', video)
-            subtitles = pool.download_best_subtitles(pool.list_subtitles(video, languages - video.subtitle_languages),
-                                                     video, languages, min_score=min_score,
-                                                     hearing_impaired=hearing_impaired, only_one=only_one,
-                                                     compute_score=compute_score)
+            subtitles = pool.download_best_subtitles(
+                pool.list_subtitles(video, languages - video.subtitle_languages),
+                video,
+                languages,
+                min_score=min_score,
+                hearing_impaired=hearing_impaired,
+                only_one=only_one,
+                compute_score=compute_score,
+            )
             logger.info('Downloaded %d subtitle(s)', len(subtitles))
             downloaded_subtitles[video].extend(subtitles)
 
     return downloaded_subtitles
 
 
-def save_subtitles(video, subtitles, single=False, directory=None, encoding=None, extension=None):
+def save_subtitles(
+    video: Video,
+    subtitles: Sequence[Subtitle],
+    *,
+    single: bool = False,
+    directory: str | os.PathLike | None = None,
+    encoding: str | None = None,
+    extension: str | None = None,
+) -> list[Subtitle]:
     """Save subtitles on filesystem.
 
     Subtitles are saved in the order of the list. If a subtitle with a language has already been saved, other subtitles
@@ -682,7 +796,7 @@ def save_subtitles(video, subtitles, single=False, directory=None, encoding=None
     :rtype: list of :class:`~subliminal.subtitle.Subtitle`
 
     """
-    saved_subtitles = []
+    saved_subtitles: list[Subtitle] = []
     for subtitle in subtitles:
         # check content
         if not subtitle.content:
@@ -690,7 +804,7 @@ def save_subtitles(video, subtitles, single=False, directory=None, encoding=None
             continue
 
         # check language
-        if subtitle.language in set(s.language for s in saved_subtitles):
+        if subtitle.language in {s.language for s in saved_subtitles}:
             logger.debug('Skipping subtitle %r: language already saved', subtitle)
             continue
 
@@ -702,10 +816,10 @@ def save_subtitles(video, subtitles, single=False, directory=None, encoding=None
         # save content as is or in the specified encoding
         logger.info('Saving %r to %r', subtitle, subtitle_path)
         if encoding is None:
-            with io.open(subtitle_path, 'wb') as f:
+            with open(subtitle_path, 'wb') as f:
                 f.write(subtitle.content)
         else:
-            with io.open(subtitle_path, 'w', encoding=encoding) as f:
+            with open(subtitle_path, 'w', encoding=encoding) as f:
                 f.write(subtitle.text)
         saved_subtitles.append(subtitle)
 

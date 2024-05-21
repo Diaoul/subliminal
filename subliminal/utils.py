@@ -1,108 +1,54 @@
+"""Hash and sanitize functions."""
+
 from __future__ import annotations
 
+import functools
 import logging
-import hashlib
 import os
 import re
 import socket
 import struct
 from datetime import datetime, timezone
+from types import GeneratorType
+from typing import TYPE_CHECKING, Any, Callable, Generic, Iterable, TypeVar, cast, overload
+from xmlrpc.client import ProtocolError
 
 import requests
 from requests.exceptions import SSLError
-from xmlrpc.client import ProtocolError
 
 from .exceptions import ServiceUnavailable
 
+if TYPE_CHECKING:
+    from collections.abc import Sequence, Set
+    from typing import TypeGuard
+
+T = TypeVar('T')
+R = TypeVar('R')
 
 logger = logging.getLogger(__name__)
 
 
-def hash_opensubtitles(video_path):
-    """Compute a hash using OpenSubtitles' algorithm.
+class none_passthrough(Generic[T, R]):
+    """Decorator to pass-through None input values."""
 
-    :param str video_path: path of the video.
-    :return: the hash.
-    :rtype: str
+    def __init__(self, func: Callable[[T], R]) -> None:
+        self.func = func
+        functools.update_wrapper(self, func)
 
-    """
-    bytesize = struct.calcsize(b'<q')
-    with open(video_path, 'rb') as f:
-        filesize = os.path.getsize(video_path)
-        filehash = filesize
-        if filesize < 65536 * 2:
-            return
-        for _ in range(65536 // bytesize):
-            filebuffer = f.read(bytesize)
-            (l_value,) = struct.unpack(b'<q', filebuffer)
-            filehash += l_value
-            filehash &= 0xFFFFFFFFFFFFFFFF  # to remain as 64bit number
-        f.seek(max(0, filesize - 65536), 0)
-        for _ in range(65536 // bytesize):
-            filebuffer = f.read(bytesize)
-            (l_value,) = struct.unpack(b'<q', filebuffer)
-            filehash += l_value
-            filehash &= 0xFFFFFFFFFFFFFFFF
-    returnedhash = '%016x' % filehash
+    @overload
+    def __call__(self, arg: T, *args: Any, **kwargs: Any) -> R: ...
 
-    return returnedhash
+    @overload
+    def __call__(self, arg: None, *args: Any, **kwargs: Any) -> None: ...
+
+    def __call__(self, arg: T | None, *args: Any, **kwargs: Any) -> R | None:  # noqa: D102
+        if arg is None:
+            return None
+        return self.func(arg, *args, **kwargs)
 
 
-def hash_thesubdb(video_path):
-    """Compute a hash using TheSubDB's algorithm.
-
-    :param str video_path: path of the video.
-    :return: the hash.
-    :rtype: str
-
-    """
-    readsize = 64 * 1024
-    if os.path.getsize(video_path) < readsize:
-        return
-    with open(video_path, 'rb') as f:
-        data = f.read(readsize)
-        f.seek(-readsize, os.SEEK_END)
-        data += f.read(readsize)
-
-    return hashlib.md5(data).hexdigest()
-
-
-def hash_napiprojekt(video_path):
-    """Compute a hash using NapiProjekt's algorithm.
-
-    :param str video_path: path of the video.
-    :return: the hash.
-    :rtype: str
-
-    """
-    readsize = 1024 * 1024 * 10
-    with open(video_path, 'rb') as f:
-        data = f.read(readsize)
-    return hashlib.md5(data).hexdigest()
-
-
-def hash_shooter(video_path):
-    """Compute a hash using Shooter's algorithm
-
-    :param string video_path: path of the video
-    :return: the hash
-    :rtype: string
-
-    """
-    filesize = os.path.getsize(video_path)
-    readsize = 4096
-    if os.path.getsize(video_path) < readsize * 2:
-        return None
-    offsets = (readsize, filesize // 3 * 2, filesize // 3, filesize - readsize * 2)
-    filehash = []
-    with open(video_path, 'rb') as f:
-        for offset in offsets:
-            f.seek(offset)
-            filehash.append(hashlib.md5(f.read(readsize)).hexdigest())
-    return ';'.join(filehash)
-
-
-def sanitize(string, ignore_characters=None):
+@none_passthrough
+def sanitize(string: str, ignore_characters: Set[str] | None = None) -> str:
     """Sanitize a string to strip special characters.
 
     :param str string: the string to sanitize.
@@ -111,21 +57,17 @@ def sanitize(string, ignore_characters=None):
     :rtype: str
 
     """
-    # only deal with strings
-    if string is None:
-        return
-
-    ignore_characters = ignore_characters or set()
+    ignore_characters = set(ignore_characters) if ignore_characters is not None else set()
 
     # replace some characters with one space
     characters = {'-', ':', '(', ')', '.', ','} - ignore_characters
     if characters:
-        string = re.sub(r'[%s]' % re.escape(''.join(characters)), ' ', string)
+        string = re.sub(r'[{}]'.format(re.escape(''.join(characters))), ' ', string)
 
     # remove some characters
-    characters = {'\''} - ignore_characters
+    characters = {"'"} - ignore_characters
     if characters:
-        string = re.sub(r'[%s]' % re.escape(''.join(characters)), '', string)
+        string = re.sub(r'[{}]'.format(re.escape(''.join(characters))), '', string)
 
     # replace multiple spaces with one
     string = re.sub(r'\s+', ' ', string)
@@ -134,7 +76,8 @@ def sanitize(string, ignore_characters=None):
     return string.strip().lower()
 
 
-def sanitize_release_group(string):
+@none_passthrough
+def sanitize_release_group(string: str) -> str:
     """Sanitize a `release_group` string to remove content in square brackets.
 
     :param str string: the release group to sanitize.
@@ -142,10 +85,6 @@ def sanitize_release_group(string):
     :rtype: str
 
     """
-    # only deal with strings
-    if string is None:
-        return
-
     # remove content in square brackets
     string = re.sub(r'\[\w+\]', '', string)
 
@@ -153,7 +92,20 @@ def sanitize_release_group(string):
     return string.strip().upper()
 
 
-def timestamp(date):
+@none_passthrough
+def sanitize_id(id_: str | int) -> int:
+    """Sanitize the IMDB (or other) id and transform it to a string (without leading 'tt' or zeroes)."""
+    id_ = str(id_).lower().lstrip('t')
+    return int(id_)
+
+
+@none_passthrough
+def decorate_imdb_id(imdb_id: str | int, *, ndigits: int = 7) -> str:
+    """Convert the IMDB id to add the leading 'tt' and the leading zeroes."""
+    return 'tt' + str(int(imdb_id)).rjust(ndigits, "0")
+
+
+def timestamp(date: datetime) -> float:
     """Get the timestamp of the `date` (with timezone).
 
     :param datetime.datetime date: the utc date.
@@ -164,8 +116,12 @@ def timestamp(date):
     return (date - datetime(1970, 1, 1, tzinfo=timezone.utc)).total_seconds()
 
 
-def matches_title(actual, title, alternative_titles):
-    """Whether `actual` matches the `title` or `alternative_titles`
+def matches_title(
+    actual: str | None,
+    title: str | None,
+    alternative_titles: Sequence[str],
+) -> bool:
+    """Whether `actual` matches the `title` or `alternative_titles`.
 
     :param str actual: the actual title to check
     :param str title: the expected title
@@ -174,19 +130,21 @@ def matches_title(actual, title, alternative_titles):
     :rtype: bool
 
     """
+    if actual is None or title is None:
+        return False
     actual = sanitize(actual)
     title = sanitize(title)
     if actual == title:
         return True
 
-    alternative_titles = set(sanitize(t) for t in alternative_titles)
-    if actual in alternative_titles:
-        return True
+    if alternative_titles is not None:
+        alternative_titles_set = {sanitize(t) for t in alternative_titles if t}
+        if actual in alternative_titles_set:
+            return True
 
-    return actual.startswith(title) and actual[len(title):].strip() in alternative_titles
+    return False
 
-
-def handle_exception(e, msg):
+def handle_exception(e: Exception, msg: str) -> None:
     """Handle exception, logging the proper error message followed by `msg`.
 
     Exception traceback is only logged for specific cases.
@@ -200,10 +158,27 @@ def handle_exception(e, msg):
         # OpenSubtitles raises xmlrpclib.ProtocolError when unavailable
         logger.error('Service unavailable. %s', msg)
     elif isinstance(e, requests.exceptions.HTTPError):
-        logger.error('HTTP error %r. %s', e.response.status_code, msg,
-                     exc_info=e.response.status_code not in range(500, 600))
+        logger.error(
+            'HTTP error %r. %s', e.response.status_code, msg, exc_info=e.response.status_code not in range(500, 600)
+        )
     elif isinstance(e, SSLError):
-        logger.error('SSL error %r. %s', e.args[0], msg,
-                     exc_info=e.args[0] != 'The read operation timed out')
+        logger.error('SSL error %r. %s', e.args[0], msg, exc_info=e.args[0] != 'The read operation timed out')
     else:
         logger.exception('Unexpected error. %s', msg)
+
+
+def is_iterable(obj: Any) -> TypeGuard[Iterable]:
+    """Check that the object is iterable (but not a string)."""
+    return (isinstance(obj, Iterable) and not isinstance(obj, (str, bytes))) or isinstance(obj, GeneratorType)
+
+
+def ensure_list(value: T | Sequence[T] | None) -> list[T]:
+    """Ensure to return a list of values.
+
+    From rebulk.loose.ensure_list
+    """
+    if value is None:
+        return []
+    if not is_iterable(value):
+        return [cast(T, value)]
+    return list(value)

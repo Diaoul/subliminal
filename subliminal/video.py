@@ -1,24 +1,106 @@
+"""Video class and subclasses Episode and Movie."""
+
 from __future__ import annotations
 
-from datetime import datetime, timedelta, timezone
 import logging
 import os
+from datetime import datetime, timedelta, timezone
+from typing import TYPE_CHECKING, Any, Sequence
 
-from guessit import guessit
-from rebulk.loose import ensure_list
+from guessit import guessit  # type: ignore[import-untyped]
 
-from subliminal.utils import matches_title
+from subliminal.utils import ensure_list, matches_title
+
+if TYPE_CHECKING:
+    from collections.abc import Mapping, Set
+
+    from babelfish import Country, Language  # type: ignore[import-untyped]
 
 logger = logging.getLogger(__name__)
 
 #: Video extensions
-VIDEO_EXTENSIONS = ('.3g2', '.3gp', '.3gp2', '.3gpp', '.60d', '.ajp', '.asf', '.asx', '.avchd', '.avi', '.bik',
-                    '.bix', '.box', '.cam', '.dat', '.divx', '.dmf', '.dv', '.dvr-ms', '.evo', '.flc', '.fli',
-                    '.flic', '.flv', '.flx', '.gvi', '.gvp', '.h264', '.m1v', '.m2p', '.m2ts', '.m2v', '.m4e',
-                    '.m4v', '.mjp', '.mjpeg', '.mjpg', '.mk3d', '.mkv', '.moov', '.mov', '.movhd', '.movie', '.movx',
-                    '.mp4', '.mpe', '.mpeg', '.mpg', '.mpv', '.mpv2', '.mxf', '.nsv', '.nut', '.ogg', '.ogm', '.ogv',
-                    '.omf', '.ps', '.qt', '.ram', '.rm', '.rmvb', '.swf', '.ts', '.vfw', '.vid', '.video', '.viv',
-                    '.vivo', '.vob', '.vro', '.webm', '.wm', '.wmv', '.wmx', '.wrap', '.wvx', '.wx', '.x264', '.xvid')
+VIDEO_EXTENSIONS = (
+    '.3g2',
+    '.3gp',
+    '.3gp2',
+    '.3gpp',
+    '.60d',
+    '.ajp',
+    '.asf',
+    '.asx',
+    '.avchd',
+    '.avi',
+    '.bik',
+    '.bix',
+    '.box',
+    '.cam',
+    '.dat',
+    '.divx',
+    '.dmf',
+    '.dv',
+    '.dvr-ms',
+    '.evo',
+    '.flc',
+    '.fli',
+    '.flic',
+    '.flv',
+    '.flx',
+    '.gvi',
+    '.gvp',
+    '.h264',
+    '.m1v',
+    '.m2p',
+    '.m2ts',
+    '.m2v',
+    '.m4e',
+    '.m4v',
+    '.mjp',
+    '.mjpeg',
+    '.mjpg',
+    '.mk3d',
+    '.mkv',
+    '.moov',
+    '.mov',
+    '.movhd',
+    '.movie',
+    '.movx',
+    '.mp4',
+    '.mpe',
+    '.mpeg',
+    '.mpg',
+    '.mpv',
+    '.mpv2',
+    '.mxf',
+    '.nsv',
+    '.nut',
+    '.ogg',
+    '.ogm',
+    '.ogv',
+    '.omf',
+    '.ps',
+    '.qt',
+    '.ram',
+    '.rm',
+    '.rmvb',
+    '.swf',
+    '.ts',
+    '.vfw',
+    '.vid',
+    '.video',
+    '.viv',
+    '.vivo',
+    '.vob',
+    '.vro',
+    '.webm',
+    '.wm',
+    '.wmv',
+    '.wmx',
+    '.wrap',
+    '.wvx',
+    '.wx',
+    '.x264',
+    '.xvid',
+)
 
 
 class Video:
@@ -33,65 +115,111 @@ class Video:
     :param str resolution: resolution of the video stream (480p, 720p, 1080p or 1080i).
     :param str video_codec: codec of the video stream.
     :param str audio_codec: codec of the main audio stream.
-    :param str imdb_id: IMDb id of the video.
     :param dict hashes: hashes of the video file by provider names.
     :param int size: size of the video file in bytes.
     :param set subtitle_languages: existing subtitle languages.
+    :param int year: year of the video.
+    :param country: Country of the video.
+    :type country: :class:`~babelfish.country.Country`
+    :param str imdb_id: IMDb id of the video.
+    :param str tmdb_id: TMDB id of the video.
 
     """
-    def __init__(self, name, source=None, release_group=None, resolution=None, streaming_service=None,
-                 video_codec=None, audio_codec=None, imdb_id=None, hashes=None, size=None, subtitle_languages=None):
-        #: Name or path of the video
+
+    #: Name or path of the video
+    name: str
+
+    #: Source of the video (HDTV, Web, Blu-ray, ...)
+    source: str | None
+
+    #: Release group of the video
+    release_group: str | None
+
+    #: Streaming service of the video
+    streaming_service: str | None
+
+    #: Resolution of the video stream (480p, 720p, 1080p or 1080i)
+    resolution: str | None
+
+    #: Codec of the video stream
+    video_codec: str | None
+
+    #: Codec of the main audio stream
+    audio_codec: str | None
+
+    #: Hashes of the video file by provider names
+    hashes: dict[str, str]
+
+    #: Size of the video file in bytes
+    size: int | None
+
+    #: Existing subtitle languages
+    subtitle_languages: set[Language]
+
+    #: Title of the video
+    title: str | None
+
+    #: Year of the video
+    year: int | None
+
+    #: Country of the video
+    country: Country | None
+
+    #: IMDb id of the video
+    imdb_id: str | None
+
+    #: TMDB id of the video
+    tmdb_id: str | None
+
+    def __init__(
+        self,
+        name: str,
+        *,
+        source: str | None = None,
+        release_group: str | None = None,
+        resolution: str | None = None,
+        streaming_service: str | None = None,
+        video_codec: str | None = None,
+        audio_codec: str | None = None,
+        hashes: Mapping[str, str] | None = None,
+        size: int | None = None,
+        subtitle_languages: Set[Language] | None = None,
+        title: str | None = None,
+        year: int | None = None,
+        country: Country | None = None,
+        imdb_id: str | None = None,
+        tmdb_id: str | None = None,
+    ) -> None:
         self.name = name
-
-        #: Source of the video (HDTV, Web, Blu-ray, ...)
         self.source = source
-
-        #: Release group of the video
         self.release_group = release_group
-
-        #: Streaming service of the video
         self.streaming_service = streaming_service
-
-        #: Resolution of the video stream (480p, 720p, 1080p or 1080i)
         self.resolution = resolution
-
-        #: Codec of the video stream
         self.video_codec = video_codec
-
-        #: Codec of the main audio stream
         self.audio_codec = audio_codec
-
-        #: IMDb id of the video
-        self.imdb_id = imdb_id
-
-        #: Hashes of the video file by provider names
-        self.hashes = hashes or {}
-
-        #: Size of the video file in bytes
+        self.hashes = dict(hashes) if hashes is not None else {}
         self.size = size
-
-        #: Existing subtitle languages
-        self.subtitle_languages = subtitle_languages or set()
+        self.subtitle_languages = set(subtitle_languages) if subtitle_languages is not None else set()
+        self.title = title
+        self.year = year
+        self.country = country
+        self.imdb_id = imdb_id
+        self.tmdb_id = tmdb_id
 
     @property
-    def exists(self):
-        """Test whether the video exists"""
+    def exists(self) -> bool:
+        """Test whether the video exists."""
         return os.path.exists(self.name)
 
     @property
-    def age(self):
-        """Age of the video"""
-        if self.exists:
-            return (
-                datetime.now(timezone.utc)
-                - datetime.fromtimestamp(os.path.getmtime(self.name), timezone.utc)
-            )
-
-        return timedelta()
+    def age(self) -> timedelta:
+        """Age of the video."""
+        if not self.exists:
+            return timedelta()
+        return datetime.now(timezone.utc) - datetime.fromtimestamp(os.path.getmtime(self.name), timezone.utc)
 
     @classmethod
-    def fromguess(cls, name, guess):
+    def fromguess(cls, name: str, guess: dict[str, Any]) -> Video:
         """Create an :class:`Episode` or a :class:`Movie` with the given `name` based on the `guess`.
 
         :param str name: name of the video.
@@ -105,10 +233,11 @@ class Video:
         if guess['type'] == 'movie':
             return Movie.fromguess(name, guess)
 
-        raise ValueError('The guess must be an episode or a movie guess')
+        msg = 'The guess must be an episode or a movie guess'  # pragma: no-cover
+        raise ValueError(msg)
 
     @classmethod
-    def fromname(cls, name):
+    def fromname(cls, name: str) -> Video:
         """Shortcut for :meth:`fromguess` with a `guess` guessed from the `name`.
 
         :param str name: name of the video.
@@ -116,10 +245,10 @@ class Video:
         """
         return cls.fromguess(name, guessit(name))
 
-    def __repr__(self):
-        return '<%s [%r]>' % (self.__class__.__name__, self.name)
+    def __repr__(self) -> str:
+        return f'<{self.__class__.__name__} [{self.name!r}]>'
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         return hash(self.name)
 
 
@@ -130,86 +259,136 @@ class Episode(Video):
     :param int season: season number of the episode.
     :param int or list episodes: episode numbers of the episode.
     :param str title: title of the episode.
-    :param int year: year of the series.
-    :param country: Country of the series.
-    :type country: :class:`~babelfish.country.Country`
     :param bool original_series: whether the series is the first with this name.
     :param int tvdb_id: TVDB id of the episode.
     :param list alternative_series: alternative names of the series
     :param kwargs: additional parameters for the :class:`Video` constructor.
 
     """
-    def __init__(self, name, series, season, episodes, title=None, year=None, country=None, original_series=True,
-                 tvdb_id=None, series_tvdb_id=None, series_imdb_id=None, alternative_series=None, **kwargs):
+
+    #: Series of the episode
+    series: str
+
+    #: Season number of the episode
+    season: int
+
+    #: Episode numbers of the episode
+    episodes: list[int]
+
+    #: Title of the episode
+    title: str | None
+
+    #: Year of series
+    year: int | None
+
+    #: The series is the first with this name
+    original_series: bool
+
+    #: TVDB id of the episode
+    tvdb_id: str | None
+
+    #: TVDB id of the series
+    series_tvdb_id: str | None
+
+    #: IMDb id of the episode
+    imdb_id: str | None
+
+    #: IMDb id of the series
+    series_imdb_id: str | None
+
+    #: TMDB id of the episode
+    tmdb_id: str | None
+
+    #: TMDB id of the series
+    series_tmdb_id: str | None
+
+    #: Alternative names of the series
+    alternative_series: list[str]
+
+    def __init__(
+        self,
+        name: str,
+        series: str,
+        season: int,
+        episodes: int | Sequence[int],
+        *,
+        original_series: bool = True,
+        tvdb_id: str | None = None,
+        series_tvdb_id: str | None = None,
+        series_imdb_id: str | None = None,
+        series_tmdb_id: str | None = None,
+        alternative_series: Sequence[str] | None = None,
+        **kwargs: Any,
+    ) -> None:
         super().__init__(name, **kwargs)
 
-        #: Series of the episode
         self.series = series
-
-        #: Season number of the episode
         self.season = season
-
-        #: Episode numbers of the episode
         self.episodes = ensure_list(episodes)
-
-        #: Title of the episode
-        self.title = title
-
-        #: Year of series
-        self.year = year
-
-        #: The series is the first with this name
         self.original_series = original_series
-
-        #: Country of the series
-        self.country = country
-
-        #: TVDB id of the episode
         self.tvdb_id = tvdb_id
-
-        #: TVDB id of the series
         self.series_tvdb_id = series_tvdb_id
-
-        #: IMDb id of the series
         self.series_imdb_id = series_imdb_id
-
-        #: Alternative names of the series
-        self.alternative_series = alternative_series or []
+        self.series_tmdb_id = series_tmdb_id
+        self.alternative_series = list(alternative_series) if alternative_series is not None else []
 
     @property
-    def episode(self):
+    def episode(self) -> int | None:
+        """Episode number.
+
+        With various episodes, return the minimum.
+        """
         return min(self.episodes) if self.episodes else None
 
-    def matches(self, series):
+    def matches(self, series: str | None) -> bool:
+        """Match the name to the series name, using alternative series names also.."""
         return matches_title(series, self.series, self.alternative_series)
 
     @classmethod
-    def fromguess(cls, name, guess):
-        if guess['type'] != 'episode':
-            raise ValueError('The guess must be an episode guess')
+    def fromguess(cls, name: str, guess: Mapping[str, Any]) -> Episode:
+        """Return an :class:`Episode` from a dict guess."""
+        if guess['type'] != 'episode':  # pragma: no-cover
+            msg = 'The guess must be an episode guess'
+            raise ValueError(msg)
 
         if 'title' not in guess or 'episode' not in guess:
-            raise ValueError('Insufficient data to process the guess')
+            msg = 'Insufficient data to process the guess'
+            raise ValueError(msg)
 
-        return cls(name, guess['title'], guess.get('season', 1), guess.get('episode'), title=guess.get('episode_title'),
-                   year=guess.get('year'), country=guess.get('country'),
-                   original_series='year' not in guess and 'country' not in guess,
-                   source=guess.get('source'), alternative_series=ensure_list(guess.get('alternative_title')),
-                   release_group=guess.get('release_group'), streaming_service=guess.get('streaming_service'),
-                   resolution=guess.get('screen_size'),
-                   video_codec=guess.get('video_codec'), audio_codec=guess.get('audio_codec'))
+        return cls(
+            name,
+            guess['title'],
+            guess.get('season', 1),
+            guess.get('episode', []),
+            title=guess.get('episode_title'),
+            year=guess.get('year'),
+            country=guess.get('country'),
+            original_series='year' not in guess and 'country' not in guess,
+            source=guess.get('source'),
+            alternative_series=ensure_list(guess.get('alternative_title')),
+            release_group=guess.get('release_group'),
+            streaming_service=guess.get('streaming_service'),
+            resolution=guess.get('screen_size'),
+            video_codec=guess.get('video_codec'),
+            audio_codec=guess.get('audio_codec'),
+        )
 
     @classmethod
-    def fromname(cls, name):
+    def fromname(cls, name: str) -> Episode:
+        """Return an :class:`Episode` from the file name."""
         return cls.fromguess(name, guessit(name, {'type': 'episode'}))
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return '<{cn} [{series}{open}{country}{sep}{year}{close} s{season:02d}e{episodes}]>'.format(
-            cn=self.__class__.__name__, series=self.series, year=self.year or '', country=self.country or '',
-            season=self.season, episodes='-'.join(map(lambda v: '{:02d}'.format(v), self.episodes)),
+            cn=self.__class__.__name__,
+            series=self.series,
+            year=self.year or '',
+            country=self.country or '',
+            season=self.season,
+            episodes='-'.join(f'{num:02d}' for num in self.episodes),
             open=' (' if not self.original_series else '',
             sep=') (' if self.year and self.country else '',
-            close=')' if not self.original_series else ''
+            close=')' if not self.original_series else '',
         )
 
 
@@ -224,46 +403,77 @@ class Movie(Video):
     :param kwargs: additional parameters for the :class:`Video` constructor.
 
     """
-    def __init__(self, name, title, year=None, country=None, alternative_titles=None, **kwargs):
-        super().__init__(name, **kwargs)
 
-        #: Title of the movie
-        self.title = title
+    #: Title of the movie
+    title: str
 
-        #: Year of the movie
-        self.year = year
+    #: Year of the movie
+    year: int | None
 
-        #: Country of the movie
-        self.country = country
+    #: Country of the movie
+    country: Country | None
 
-        #: Alternative titles of the movie
-        self.alternative_titles = alternative_titles or []
+    #: IMDb id of the episode
+    imdb_id: str | None
 
-    def matches(self, title):
+    #: TMDB id of the episode
+    tmdb_id: str | None
+
+    #: Alternative titles of the movie
+    alternative_titles: list[str]
+
+    def __init__(
+        self,
+        name: str,
+        title: str,
+        *,
+        alternative_titles: Sequence[str] | None = None,
+        **kwargs: Any,
+    ) -> None:
+        super().__init__(name, title=title, **kwargs)
+        self.alternative_titles = list(alternative_titles) if alternative_titles is not None else []
+
+    def matches(self, title: str) -> bool:
+        """Match the name to the movie title, using alternative titles also.."""
         return matches_title(title, self.title, self.alternative_titles)
 
     @classmethod
-    def fromguess(cls, name, guess):
-        if guess['type'] != 'movie':
-            raise ValueError('The guess must be a movie guess')
+    def fromguess(cls, name: str, guess: Mapping[str, Any]) -> Movie:
+        """Return an :class:`Movie` from a dict guess."""
+        if guess['type'] != 'movie':  # pragma: no-cover
+            msg = 'The guess must be a movie guess'
+            raise ValueError(msg)
 
         if 'title' not in guess:
-            raise ValueError('Insufficient data to process the guess')
+            msg = 'Insufficient data to process the guess'
+            raise ValueError(msg)
 
-        return cls(name, guess['title'], source=guess.get('source'), release_group=guess.get('release_group'),
-                   streaming_service=guess.get('streaming_service'),
-                   resolution=guess.get('screen_size'), video_codec=guess.get('video_codec'),
-                   alternative_titles=ensure_list(guess.get('alternative_title')),
-                   audio_codec=guess.get('audio_codec'), year=guess.get('year'), country=guess.get('country'))
+        return cls(
+            name,
+            title=guess['title'],
+            source=guess.get('source'),
+            release_group=guess.get('release_group'),
+            streaming_service=guess.get('streaming_service'),
+            resolution=guess.get('screen_size'),
+            video_codec=guess.get('video_codec'),
+            alternative_titles=ensure_list(guess.get('alternative_title')),
+            audio_codec=guess.get('audio_codec'),
+            year=guess.get('year'),
+            country=guess.get('country'),
+        )
 
     @classmethod
-    def fromname(cls, name):
+    def fromname(cls, name: str) -> Movie:
+        """Return an :class:`Movie` from the file name."""
         return cls.fromguess(name, guessit(name, {'type': 'movie'}))
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return '<{cn} [{title}{open}{country}{sep}{year}{close}]>'.format(
-            cn=self.__class__.__name__, title=self.title, year=self.year or '', country=self.country or '',
+            cn=self.__class__.__name__,
+            title=self.title,
+            year=self.year or '',
+            country=self.country or '',
             open=' (' if self.year or self.country else '',
             sep=') (' if self.year and self.country else '',
-            close=')' if self.year or self.country else ''
+            close=')' if self.year or self.country else '',
         )

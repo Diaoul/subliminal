@@ -1,0 +1,72 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br, zstd
+      Accept-Language:
+      - en
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Subliminal/2.1
+    method: GET
+    uri: https://api.themoviedb.org/3/search/tv?api_key=3dac925d5d494853ea6ef9161011fbb3&query=The+Big+Bang+Theory&language=en-US&page=1
+  response:
+    body:
+      string: '{"page":1,"results":[{"adult":false,"backdrop_path":"/7RySzFeK3LPVMXcPtqfZnl6u4p1.jpg","genre_ids":[35],"id":1418,"origin_country":["US"],"original_language":"en","original_name":"The
+        Big Bang Theory","overview":"Physicists Leonard and Sheldon find their nerd-centric
+        social circle with pals Howard and Raj expanding when aspiring actress Penny
+        moves in next door.","popularity":845.1,"poster_path":"/ooBGRQBdbGzBxAVfExiO8r7kloA.jpg","first_air_date":"2007-09-24","name":"The
+        Big Bang Theory","vote_average":7.896,"vote_count":10910},{"adult":false,"backdrop_path":null,"genre_ids":[35],"id":239645,"origin_country":["US"],"original_language":"en","original_name":"Untitled
+        ''The Big Bang Theory'' spinoff","overview":"This will be a spinoff for the
+        popular TV series \"The Big Bang Theory\".","popularity":1.839,"poster_path":null,"first_air_date":"","name":"Untitled
+        ''The Big Bang Theory'' spinoff","vote_average":0.0,"vote_count":0}],"total_pages":1,"total_results":2}'
+    headers:
+      Age:
+      - '553'
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      Cache-Control:
+      - public, max-age=24165
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - br
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Wed, 22 May 2024 14:53:58 GMT
+      ETag:
+      - W/"e893d04fd9263f507384818375d22587"
+      Server:
+      - openresty
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding,accept-encoding
+      - Origin
+      Via:
+      - 1.1 f355844b811a4a5ec94df0918f0fb80c.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - qGjVy2w_Gbk14WegdJKQ2c-OQpIk8sFn4Ts4O5YSBPoH_gCceBvRBA==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
+      - Hit from cloudfront
+      x-memc:
+      - HIT
+      x-memc-age:
+      - '3225'
+      x-memc-expires:
+      - '24165'
+      x-memc-key:
+      - c709f17d5f15d43bc80cad8e740ddd85
+    status:
+      code: 200
+      message: OK
+version: 1

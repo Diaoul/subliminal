@@ -1,0 +1,244 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br, zstd
+      Accept-Language:
+      - en
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Subliminal/2.1
+    method: GET
+    uri: https://api.themoviedb.org/3/search/tv?api_key=3dac925d5d494853ea6ef9161011fbb3&query=house+of+cards&language=en-US&page=1
+  response:
+    body:
+      string: '{"page":1,"results":[{"adult":false,"backdrop_path":"/yJjxO44EvaMYeeM9VHXHzdZ1kYL.jpg","genre_ids":[18],"id":1425,"origin_country":["US"],"original_language":"en","original_name":"House
+        of Cards","overview":"Set in present day Washington, D.C., House of Cards
+        is the story of Frank Underwood, a ruthless and cunning politician, and his
+        wife Claire who will stop at nothing to conquer everything. This wicked political
+        drama penetrates the shadowy world of greed, sex and corruption in modern
+        D.C.","popularity":649.259,"poster_path":"/hKWxWjFwnMvkWQawbhvC0Y7ygQ8.jpg","first_air_date":"2013-02-01","name":"House
+        of Cards","vote_average":8.023,"vote_count":2592},{"adult":false,"backdrop_path":"/1gsHQidvviNE8QKOOfPAZndWAJw.jpg","genre_ids":[10768,35,18],"id":21720,"origin_country":["GB"],"original_language":"en","original_name":"House
+        of Cards","overview":"Frustrated at a new moderate Conservative government
+        and deprived of a promotion to a senior position, chief whip Francis Urquhart
+        prepares a meticulous plot to bring down the Prime Minister then to take his
+        place.","popularity":43.969,"poster_path":"/evQlyXJtIjI9QiZUu180RsyWVCV.jpg","first_air_date":"1990-11-18","name":"House
+        of Cards","vote_average":8.171,"vote_count":129},{"adult":false,"backdrop_path":"/CENwWZighra483aTJMAixGUtm0.jpg","genre_ids":[18,35,10768],"id":77041,"origin_country":["GB"],"original_language":"en","original_name":"The
+        Final Cut","overview":"Urquhart aims to secure his legacy on the international
+        stage, but faces threats both from abroad and closer to home.","popularity":55.188,"poster_path":"/7lQ6roAFARdKe9qGPF0KigYPASZ.jpg","first_air_date":"1995-11-05","name":"The
+        Final Cut","vote_average":7.8,"vote_count":35},{"adult":false,"backdrop_path":"/csjHEM3cc852KLm18eKRdl1qaQj.jpg","genre_ids":[18,35,10768],"id":13868,"origin_country":["GB"],"original_language":"en","original_name":"To
+        Play the King","overview":"Francis Urquhart''s survival at the top is threatened
+        by the new king''s populist agenda.","popularity":36.659,"poster_path":"/uyTPnSlh7NKic8MgYn2GzD7s0La.jpg","first_air_date":"1993-11-21","name":"To
+        Play the King","vote_average":8.1,"vote_count":48}],"total_pages":1,"total_results":4}'
+    headers:
+      Age:
+      - '6150'
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      Cache-Control:
+      - public, max-age=16164
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - br
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Wed, 22 May 2024 20:43:39 GMT
+      ETag:
+      - W/"36a07a91b1d5740422911bc6b9abb658"
+      Server:
+      - openresty
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - accept-encoding
+      - Origin
+      Via:
+      - 1.1 c6ccd07e1e50408d404ed1f9dd2506ce.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - 5kq2Lz3yB-bTCNDF2j71g6hysZAR3BLhicFr6WXs2rzEPxY-uI1hsw==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
+      - Hit from cloudfront
+      x-memc:
+      - HIT
+      x-memc-age:
+      - '13803'
+      x-memc-expires:
+      - '13308'
+      x-memc-key:
+      - 67939338f0acaf6c20e8a2c1ae32c40f
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br, zstd
+      Accept-Language:
+      - en
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Subliminal/2.1
+    method: GET
+    uri: https://api.themoviedb.org/3/tv/1425?api_key=3dac925d5d494853ea6ef9161011fbb3&append_to_response=external_ids
+  response:
+    body:
+      string: "{\"adult\":false,\"backdrop_path\":\"/yJjxO44EvaMYeeM9VHXHzdZ1kYL.jpg\",\"created_by\":[{\"id\":64817,\"credit_id\":\"526e4221760ee34c42101dfe\",\"name\":\"Beau
+        Willimon\",\"original_name\":\"Beau Willimon\",\"gender\":2,\"profile_path\":\"/8BTQK12ibYIWPAPSkQktsTnrX99.jpg\"}],\"episode_run_time\":[],\"first_air_date\":\"2013-02-01\",\"genres\":[{\"id\":18,\"name\":\"Drama\"}],\"homepage\":\"http://www.netflix.com/title/70178217\",\"id\":1425,\"in_production\":false,\"languages\":[\"en\"],\"last_air_date\":\"2018-11-02\",\"last_episode_to_air\":{\"id\":1605355,\"overview\":\"Claire
+        tries to tarnish Frank's legacy. Doug provokes Claire by releasing excerpts
+        from Frank's diary. A rift develops between the Shepherds.\",\"name\":\"Chapter
+        73\",\"vote_average\":4.9,\"vote_count\":19,\"air_date\":\"2018-11-02\",\"episode_number\":8,\"episode_type\":\"finale\",\"production_code\":\"\",\"runtime\":55,\"season_number\":6,\"show_id\":1425,\"still_path\":\"/mELYyfjn4VlGndH6dUb8wHf5Pnq.jpg\"},\"name\":\"House
+        of Cards\",\"next_episode_to_air\":null,\"networks\":[{\"id\":213,\"logo_path\":\"/wwemzKWzjKYJFfCeiB57q3r4Bcm.png\",\"name\":\"Netflix\",\"origin_country\":\"\"}],\"number_of_episodes\":73,\"number_of_seasons\":6,\"origin_country\":[\"US\"],\"original_language\":\"en\",\"original_name\":\"House
+        of Cards\",\"overview\":\"Set in present day Washington, D.C., House of Cards
+        is the story of Frank Underwood, a ruthless and cunning politician, and his
+        wife Claire who will stop at nothing to conquer everything. This wicked political
+        drama penetrates the shadowy world of greed, sex and corruption in modern
+        D.C.\",\"popularity\":649.259,\"poster_path\":\"/hKWxWjFwnMvkWQawbhvC0Y7ygQ8.jpg\",\"production_companies\":[{\"id\":2531,\"logo_path\":\"/9MfCJ2G6Nrf9yyRj4tAgPmMiDcn.png\",\"name\":\"MRC\",\"origin_country\":\"US\"},{\"id\":7626,\"logo_path\":\"/4839MGss4pPAalhqqYH1AD1CnEj.png\",\"name\":\"Trigger
+        Street Productions\",\"origin_country\":\"US\"}],\"production_countries\":[{\"iso_3166_1\":\"US\",\"name\":\"United
+        States of America\"}],\"seasons\":[{\"air_date\":null,\"episode_count\":7,\"id\":142396,\"name\":\"Specials\",\"overview\":\"Additional
+        extras for the House of Cards series.\",\"poster_path\":\"/eowAtyuf9tZ56WugCZTt9HALfeq.jpg\",\"season_number\":0,\"vote_average\":0.0},{\"air_date\":\"2013-02-01\",\"episode_count\":13,\"id\":3768,\"name\":\"Season
+        1\",\"overview\":\"Betrayed by the White House, Congressman Francis Underwood
+        embarks on a ruthless rise to power. Blackmail, seduction and ambition are
+        his weapons.\",\"poster_path\":\"/oUfT2AbMVCYbVA3GIBbPqA6ZpUC.jpg\",\"season_number\":1,\"vote_average\":7.5},{\"air_date\":\"2014-02-14\",\"episode_count\":13,\"id\":3767,\"name\":\"Season
+        2\",\"overview\":\"In their ruthless rise to power, Francis and Claire battle
+        threats past and present, and form new alliances while old ones succumb to
+        betrayal.\",\"poster_path\":\"/e5WNFWA1ZLnHxpr9xQdZMhEpvNo.jpg\",\"season_number\":2,\"vote_average\":7.5},{\"air_date\":\"2015-02-27\",\"episode_count\":13,\"id\":63599,\"name\":\"Season
+        3\",\"overview\":\"President Underwood fights to secure his legacy. Claire
+        wants more than being First Lady. The biggest threat they face is contending
+        with each other.\",\"poster_path\":\"/za2XGEr1BWAuZkI0veLEwVxy30S.jpg\",\"season_number\":3,\"vote_average\":7.7},{\"air_date\":\"2016-03-04\",\"episode_count\":13,\"id\":72724,\"name\":\"Season
+        4\",\"overview\":\"They've always been a great team. But now in season four,
+        Frank and Claire become even greater adversaries as their marriage stumbles
+        and their ambitions are at odds. In an election year, the stakes are now higher
+        than ever, and the biggest threat they face is contending with each other.\",\"poster_path\":\"/1GeYr0qAYpxIGiIabzu1WqzKgtQ.jpg\",\"season_number\":4,\"vote_average\":8.0},{\"air_date\":\"2017-05-30\",\"episode_count\":13,\"id\":84188,\"name\":\"Season
+        5\",\"overview\":\"Season five picks up where season four left off: in the
+        midst of a tense presidential election that puts the Underwoods on the same
+        ticket against energetic Republican upstart Will Conway. Viewers will see
+        how their heated campaigns play out as well as which alliances dissolve in
+        the aftermath. Perhaps the biggest question is if Frank and Claire\u2019s
+        relationship is among them.\",\"poster_path\":\"/xaYAGAQwpsYhLdX9JKTaGI2zgCE.jpg\",\"season_number\":5,\"vote_average\":7.8},{\"air_date\":\"2018-11-02\",\"episode_count\":8,\"id\":99023,\"name\":\"Season
+        6\",\"overview\":\"With Frank out of the picture, Claire Underwood steps fully
+        into her own as the first woman president, but faces formidable threats to
+        her legacy.\",\"poster_path\":\"/AuXh9yFdtppv7GpoisnDnPkBjKU.jpg\",\"season_number\":6,\"vote_average\":5.5}],\"spoken_languages\":[{\"english_name\":\"English\",\"iso_639_1\":\"en\",\"name\":\"English\"}],\"status\":\"Ended\",\"tagline\":\"There
+        are two kinds of pain.\",\"type\":\"Scripted\",\"vote_average\":8.023,\"vote_count\":2592,\"external_ids\":{\"imdb_id\":\"tt1856010\",\"freebase_mid\":\"/m/0h3rv9x\",\"freebase_id\":\"0h3rv9x\",\"tvdb_id\":262980,\"tvrage_id\":27822,\"wikidata_id\":\"Q3330940\",\"facebook_id\":\"HouseofCards\",\"instagram_id\":\"houseofcards\",\"twitter_id\":\"HouseofCards\"}}"
+    headers:
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      Cache-Control:
+      - public, max-age=21753
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - br
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Wed, 22 May 2024 22:26:09 GMT
+      ETag:
+      - W/"2090a22df6b8bd07b327841e887c47ff"
+      Server:
+      - openresty
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding,accept-encoding
+      - Origin
+      Via:
+      - 1.1 4c13f73e83aaf9d7bee2c3b379c641d6.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - WXIsgYQxIHLBjR1Ubj5JVS_UOVutmwBlolzWn36OZB-34AxD5JUQrQ==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
+      - Miss from cloudfront
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br, zstd
+      Accept-Language:
+      - en
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Subliminal/2.1
+    method: GET
+    uri: https://api.themoviedb.org/3/tv/1425/season/6/episode/1?api_key=3dac925d5d494853ea6ef9161011fbb3&append_to_response=external_ids
+  response:
+    body:
+      string: '{"air_date":"2018-11-02","crew":[],"episode_number":1,"guest_stars":[{"character":"Marcy
+        Siegerson","credit_id":"5cc26cf5c3a3687f8f8dab1d","order":523,"adult":false,"gender":1,"id":143237,"known_for_department":"Acting","name":"Linda
+        Powell","original_name":"Linda Powell","popularity":14.555,"profile_path":"/giYwxYnuw6nfpLAfcbdZMlzZ3sT.jpg"},{"character":"Tabitha
+        Peters","credit_id":"5cc26e8f9251415cd2f3db45","order":524,"adult":false,"gender":0,"id":1220815,"known_for_department":"Acting","name":"Beth
+        Chamberlin","original_name":"Beth Chamberlin","popularity":4.866,"profile_path":null},{"character":"Melody
+        Cruz","credit_id":"5cc26c300e0a264d93ed074b","order":525,"adult":false,"gender":1,"id":51037,"known_for_department":"Acting","name":"Athena
+        Karkanis","original_name":"Athena Karkanis","popularity":33.681,"profile_path":"/bxKJJWXfnTfWVpsD5Y5H8g4vFUq.jpg"},{"character":"Dr.
+        Charles Rosen","credit_id":"5cc26dfdc3a3686b0b95e208","order":581,"adult":false,"gender":2,"id":90039,"known_for_department":"Acting","name":"Chip
+        Zien","original_name":"Chip Zien","popularity":10.5,"profile_path":"/6bExDPk8oOYWOXzx5a9IM9CwCOY.jpg"},{"character":"Nathan
+        Green","credit_id":"5cc26bf90e0a265b0ff138d0","order":584,"adult":false,"gender":2,"id":1595506,"known_for_department":"Acting","name":"Jeremy
+        Holm","original_name":"Jeremy Holm","popularity":8.658,"profile_path":"/cOOu1DOY6s59oAMMjtXJ70RicNU.jpg"},{"character":"Rick
+        Bowman","credit_id":"5cc41180c3a36814588aebc6","order":593,"adult":false,"gender":2,"id":1696797,"known_for_department":"Acting","name":"Chris
+        Agos","original_name":"Chris Agos","popularity":4.904,"profile_path":"/dtHpwxYVigz9f3zDF4RlonTjje1.jpg"},{"character":"Young
+        Claire","credit_id":"5cc411b60e0a260b0ff0b901","order":594,"adult":false,"gender":1,"id":2297951,"known_for_department":"Acting","name":"Ann
+        Charles Sutton","original_name":"Ann Charles Sutton","popularity":1.028,"profile_path":null},{"character":"Lynn
+        Phang","credit_id":"5cc410f792514151ca02b19d","order":598,"adult":false,"gender":1,"id":1831430,"known_for_department":"Acting","name":"Nini
+        Le Huynh","original_name":"Nini Le Huynh","popularity":2.231,"profile_path":null},{"character":"Staff","credit_id":"6199a10e70b444006702fd95","order":617,"adult":false,"gender":1,"id":2818526,"known_for_department":"Acting","name":"Gina
+        Jun","original_name":"Gina Jun","popularity":10.995,"profile_path":"/kIbJ3TTGdYVShC7K8tE5OueZ1wQ.jpg"}],"name":"Chapter
+        66","overview":"As the first woman president, Claire faces increased scrutiny
+        and threats. Sibling power couple Annette and Bill Shepherd attempt to influence
+        policy.","id":1542492,"production_code":"","runtime":53,"season_number":6,"still_path":"/qtsv3uWX8MMOsBaFwtyE9sxVvBY.jpg","vote_average":5.5,"vote_count":26,"external_ids":{"imdb_id":"tt7538918","freebase_mid":null,"freebase_id":null,"tvdb_id":6553109,"tvrage_id":null,"wikidata_id":"Q58836716"}}'
+    headers:
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      Cache-Control:
+      - public, max-age=15943
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - br
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Wed, 22 May 2024 22:26:09 GMT
+      ETag:
+      - W/"6860f4d26b34da9125e58e5d9300f318"
+      Server:
+      - openresty
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding,accept-encoding
+      - Origin
+      Via:
+      - 1.1 55f14075e1cb487de38b7e615fd21a96.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - rlpzrQVqka_8ktP3dkgBpSoYX5jPrKSXjgj0f4W2k-G3KXA93QdNuQ==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
+      - Miss from cloudfront
+    status:
+      code: 200
+      message: OK
+version: 1

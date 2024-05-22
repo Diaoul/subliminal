@@ -1,11 +1,11 @@
 interactions:
 - request:
-    body: !!python/unicode '{"username": null, "password": null, "apikey": "2AE5D1E42E7194B9"}'
+    body: '{"apikey": "5EC930FB90DA1ADA", "username": null, "password": null}'
     headers:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Accept-Language:
       - en
       Connection:
@@ -20,29 +20,29 @@ interactions:
     uri: https://api.thetvdb.com/login
   response:
     body:
-      string: !!python/unicode '{"token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2Mzk5ODYsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MTg2fQ.ygLAQiJNo26mrNlnhOoR7ehiT3nayf7YOPAcu_Huca0DQsNiIwYWncM1lD1BO5YawCrj17WxReYV4M3Rxej1GrpyCRwod2vUoCKC6m326d1zGqdWBEinWxd7sndD25IPiIPUfjp12W5m_0eGOhTautEsdEvEiCn0AFVNwx6_1VO5GyHpRM_YeKevCAziaUsrlZV36BulxEuQsxffoYJVQAbB-362hXBOOU6vqmeZn9yUJhZL3ufP4NrhnGm4yWNi0WXXwzNC3u-xhII0aqyR-9rn8qc3ibb9aD1DJgMwZf0TUM3W0jK5JtmMPRrYgyRcWTE709DZvsUlketC7OXHxw"}'
+      string: '{"token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMDcsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDA3fQ.HKr4eY9wkRLS-OTtKmP02bVVMfm01DcoW1zLjGehgVHLPFnGBS8jxkTov9UwCgv9FAHtNfWlhWtXyeM1t0yaEPvMan87ASvGQo8ffeMr_r6rOv45yVn0VAznjcBOvI8HmdHcF_gXXJKGK5asCfRMXkb09xZCCdx19Xu--F885pBXfn79LWg3dJv5ykTLTFfYX_yy3MWTdn4qlNYR3QoZ4UGhsuPE-Bdh1IvQJa0x4LM_vQ61nsM1DdtNHoD7nyfUxDQ8uNwf8B-Tt6nK2oEecQVXkUEFPbKglr788A47KF3UzOvjF8AJFGYlVGLgGAiOMzcChEa9b-0JD8eU6WViQw"}'
     headers:
-      connection:
+      Connection:
       - keep-alive
-      content-length:
+      Content-Length:
       - '470'
-      content-type:
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Sat, 09 May 2020 14:39:46 GMT
-      vary:
+      Date:
+      - Wed, 22 May 2024 14:33:27 GMT
+      Vary:
       - Accept-Language
-      via:
-      - 1.1 4e0fd86f7afa735e772d6f7fe5e91f5b.cloudfront.net (CloudFront)
-      x-amz-cf-id:
-      - 9ptnrrOo9-ugdrD-qo8UkYn4HjT0_eb40Ha0gozhhW0PZRjAyADfaQ==
-      x-amz-cf-pop:
-      - ZRH50-C1
-      x-cache:
+      Via:
+      - 1.1 ebe6a6f6a4dd1a63623021825f18f4f8.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - RtI1N_ZMCeIqRzR7I_gwRk76_JO0MgV556MWgJU5VYwwPF8bcSHVWg==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
       - Miss from cloudfront
-      x-powered-by:
+      X-Powered-By:
       - Thundar!
-      x-thetvdb-api-version:
+      X-Thetvdb-Api-Version:
       - 3.0.0
     status:
       code: 200

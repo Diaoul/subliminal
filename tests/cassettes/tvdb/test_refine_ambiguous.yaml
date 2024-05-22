@@ -5,11 +5,11 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Accept-Language:
       - en
       Authorization:
-      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
       Connection:
       - keep-alive
       Content-Type:
@@ -20,235 +20,267 @@ interactions:
     uri: https://api.thetvdb.com/search/series?name=colony
   response:
     body:
-      string: "{\"data\":[{\"aliases\":[],\"banner\":\"/banners/graphical/284210-g2.jpg\"\
-        ,\"firstAired\":\"2016-1-14\",\"id\":284210,\"image\":\"/banners/posters/284210-10.jpg\"\
-        ,\"network\":\"USA Network\",\"overview\":\"Set in the near future, Los Angeles\
-        \ has been walled-off and isolated by a mysterious occupying force. \u201C\
-        Colony\u201D centers on a family torn by opposing forces, struggling to balance\
-        \ difficult decisions to stay together while trying to survive in the new\
-        \ world order.\\r\\n\\r\\nWhile some people choose to collaborate with the\
-        \ authorities and benefit from the occupation, others rebel and suffer the\
-        \ consequences. Former FBI agent Will Bowman has a more complicated role:\
-        \ he's being forced to collaborate with the proxy government in order to protect\
-        \ his family and recover his son, who was separated during the initial invasion.\"\
-        ,\"poster\":\"/banners/posters/284210-10.jpg\",\"seriesName\":\"Colony\",\"\
-        slug\":\"colony\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"\
-        firstAired\":\"2007-1-11\",\"id\":95181,\"image\":\"/banners/images/missing/series.jpg\"\
-        ,\"network\":\"TVNorge\",\"poster\":null,\"seriesName\":\"Vacation Colony\"\
-        ,\"slug\":\"95181\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"\
-        firstAired\":\"2012-5-29\",\"id\":259064,\"image\":\"/banners/posters/259064-1.jpg\"\
-        ,\"network\":\"National Geographic\",\"overview\":\"Meet the Hutterites\u2014\
-        a small religious colony in rural Montana who holds desperately to their sacred\
-        \ traditions while fighting the modern temptations of the outside world. King\
-        \ Colony is made up of 59 people and they are almost all related. This family\
-        \ lives together, works together, and worships God together, 7 days a week,\
-        \ 365 days a year, for their entire lives. And, like any family, this one\
-        \ doesn\u2019t always agree. Most of the colony is holding tight to the age-old\
-        \ traditions of their ancestors, while others are flirting with modern society.\
-        \ Some feel that bringing modern technology, education, and ideas into the\
-        \ colony will only help it, while others fear that this modern way of thinking\
-        \ threatens their very existence. We follow the men, the women, the young,\
-        \ and the old, as they strive to live as proper Hutterites. Some will succeed,\
-        \ some will fail, and everyone will have a choice to make. This is the very\
-        \ first glimpse into the world of the Hutterites. \",\"poster\":null,\"seriesName\"\
-        :\"American Colony Meet the Hutterites\",\"slug\":\"american-colony-meet-the-hutterites\"\
-        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"2005-1-25\"\
-        ,\"id\":142011,\"image\":\"/banners/images/missing/series.jpg\",\"network\"\
-        :null,\"overview\":\"Australia\u2019s first living history series is a blend\
-        \ of historical discovery, social jeopardy, adventure challenge and experiential\
-        \ learning as pampered 21st Century \u2018pioneers\u2019 attempt to prove\
-        \ they\u2019re tough enough to survive their historical ordeal. Against this\
-        \ backdrop, the series explores the gripping story of the first settlements.\\\
-        r\\n\\r\\nThis six-part series transports a group of English, Irish and Australians,\
-        \ both Indigenous and European, back in time to the Australia of their ancestors.\
-        \ Living the life of free settlers, convicts and local Aboriginal people,\
-        \ they experience the unforgiving toughness of the colony of New South Wales\
-        \ as it was 200 years ago.\",\"poster\":null,\"seriesName\":\"The Colony (Australia)\"\
-        ,\"slug\":\"the-colony-australia\",\"status\":\"Ended\"},{\"aliases\":[],\"\
-        banner\":\"/banners/graphical/105521-g2.jpg\",\"firstAired\":\"2009-7-21\"\
-        ,\"id\":105521,\"image\":\"/banners/posters/105521-2.jpg\",\"network\":null,\"\
-        overview\":\"The Colony is a controlled experiment to see exactly what it\
-        \ would take to survive and rebuild under these circumstances. For 10 weeks,\
-        \ a group of 10 volunteers, whose backgrounds and expertise represent a cross-section\
-        \ of modern society, are isolated in an urban environment outside Los Angeles\
-        \ and tasked with creating a livable society\\r\\n\\r\\nWith no electricity\
-        \ from the grid, no running water and no communication with the outside world,\
-        \ all the volunteers have to work with are their skills and whatever tools\
-        \ and supplies they can scavenge from their surroundings.\\r\\n\\r\\nExperts\
-        \ from the fields of homeland security, engineering and psychology have helped\
-        \ design the world of The Colony to reflect elements from both real-life disasters\
-        \ and models of what the future could look like after a global viral outbreak.\"\
-        ,\"poster\":\"/banners/posters/105521-2.jpg\",\"seriesName\":\"The Colony\"\
-        ,\"slug\":\"the-colony\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\"\
-        :null,\"firstAired\":\"2019-3-11\",\"id\":360904,\"image\":\"/banners/posters/5c9396c380ce9.jpg\"\
-        ,\"network\":\"BBC One\",\"overview\":\"Wales: England's Colony? is designed\
-        \ to stimulate debate about the past story of Wales, and will also challenge\
-        \ the audience to think afresh about some of the future constitutional choices\
-        \ facing Wales as it leaves the European Union.\\r\\n\\r\\nFocussing on how\
-        \ Wales' relationship with England has shaped both the nation's development\
-        \ and how Wales sees itself, the programmes will tell the story of an uneasy\
-        \ and unequal relationship between two nations living side-by-side. It examines\
-        \ Wales' story from its creation to the present day, examining key moments\
-        \ such as medieval conquest, industrial exploitation, the Blue Books, the\
-        \ 1919 race riots and the flooding of Cwm Tryweryn.\\r\\n\",\"poster\":null,\"\
-        seriesName\":\"Wales: England's Colony?\",\"slug\":\"wales-englands-colony\"\
-        ,\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"/banners/graphical/5bf50db16915b.jpg\"\
-        ,\"firstAired\":\"2018-11-20\",\"id\":355758,\"image\":\"/banners/posters/5bf6fdc99e1a3.jpg\"\
-        ,\"network\":\"Canvas/Ketnet\",\"poster\":\"/banners/posters/5bf6fdc99e1a3.jpg\"\
-        ,\"seriesName\":\"Children of the Colony\",\"slug\":\"kinderen-van-de-kolonie\"\
-        ,\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\"\
-        :\"1956-2-22\",\"id\":78711,\"image\":\"/banners/posters/78711-2.jpg\",\"\
-        network\":null,\"overview\":\"Colonel March of Scotland Yard is based on the\
-        \ character created by John Dickson Carr under the pen name Carter Dickson.\
-        \  Boris Karloff, famous for his affiliation with Universal Studios during\
-        \ the \\\"Golden Age of Hollywood Horror Movies,\\\" portrays Colonel March,\
-        \ of the Department of Queer Complaints who investigates unusual cases, locked-room\
-        \ murders, and mysteries concerning the supernatural. The British series was\
-        \ filmed at Southhall Studios, Middlesex, England from December 1954 - Spring\
-        \  1955. Boris, 65 years old at the time, as Colonel March is not afraid to\
-        \ get right into the thick of things, often confronting the perpetrators directly.\
-        \ In 1953, a film called Colonel March Investigates was made by Fountain Films\
-        \ Production.  It combined three episodes (Hot Money, Death in the Dressing\
-        \ Room, and The New Invisible Man) Karloff narrates the three segments and\
-        \ stars as the lead.\",\"poster\":\"/banners/posters/78711-2.jpg\",\"seriesName\"\
-        :\"Colonel March of Scotland Yard\",\"slug\":\"colonel-march-of-scotland-yard\"\
-        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"1958-10-5\"\
-        ,\"id\":78709,\"image\":\"/banners/images/missing/series.jpg\",\"network\"\
-        :null,\"overview\":\"Welcome to the Colonel Flack guide at TV Tome.\",\"poster\"\
-        :null,\"seriesName\":\"Colonel Flack\",\"slug\":\"colonel-flack\",\"status\"\
-        :\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"2004-5-17\",\"\
-        id\":71913,\"image\":\"/banners/posters/71913-2.jpg\",\"network\":\"PBS\"\
-        ,\"overview\":\"\\\"Colonial House\\\" is PBS's answer to reality television.\
-        \  Over the course of five months, \\\"settlers\\\" are forced to adapt to\
-        \ life as it was in the year 1628, on a desolate stretch of coastal Maine.\
-        \  As the group strains to establish a working colony with only the equipment\
-        \ and knowledge of the time period, viewers get a glimpse at life as the Pilgrims\
-        \ experienced it.  It's like a living slice of history!\",\"poster\":null,\"\
-        seriesName\":\"Colonial House\",\"slug\":\"colonial-house\",\"status\":\"\
-        Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2017-5-4\",\"id\"\
-        :380106,\"image\":\"/banners/series/380106/posters/5e934d21e1cc6.jpg\",\"\
-        network\":\"Canal Off\",\"poster\":\"/banners/series/380106/posters/5e934d21e1cc6.jpg\"\
-        ,\"seriesName\":\"Col\xF4nia de f\xE9rias\",\"slug\":\"colonia-de-ferias\"\
-        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2020-3-10\"\
-        ,\"id\":378279,\"image\":\"/banners/series/378279/posters/62104855.jpg\",\"\
-        network\":\"Arte\",\"poster\":\"/banners/series/378279/posters/62104855.jpg\"\
-        ,\"seriesName\":\"Colonia Dignidad\",\"slug\":\"colonia-dignidad-une-secte-allemande-au-chili\"\
-        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"1913-11-23\"\
-        ,\"id\":362519,\"image\":\"/banners/images/missing/series.jpg\",\"network\"\
-        :null,\"overview\":\"Colonel Heeza Liar is the star of the first animated\
-        \ series featuring a recurring character. He was created by J. R. Bray and\
-        \ is mainly based on Theodore Roosevelt and the general stereotype of the\
-        \ 19th and early 20th century former adventurer and lion hunter. The series\
-        \ ran from 1913 to 1917 and restarted in 1922 until 1924. It was produced\
-        \ by Bray Productions and directed by Vernon Stallings. The series was animated\
-        \ by Walter Lantz from 1922 to 1924 and featured live-action segments interacting\
-        \ with the animation, much like the popular contemporary series Out of the\
-        \ Inkwell.\",\"poster\":null,\"seriesName\":\"Colonel Heeza Liar\",\"slug\"\
-        :\"colonel-heeza-liar\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"\
-        firstAired\":null,\"id\":335494,\"image\":\"/banners/images/missing/series.jpg\"\
-        ,\"network\":null,\"poster\":null,\"seriesName\":\"Colonial Life For Children\"\
-        ,\"slug\":\"colonial-life-for-children\",\"status\":\"Ended\"},{\"aliases\"\
-        :[],\"banner\":null,\"firstAired\":null,\"id\":329606,\"image\":\"/banners/images/missing/series.jpg\"\
-        ,\"network\":null,\"poster\":null,\"seriesName\":\"Colonel Failure: Transport\
-        \ Fever -  The Alps - Gotthard Pass\",\"slug\":\"colonel-failure-transport-fever-the-alps-gotthard-pass\"\
-        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/324478-g.jpg\"\
-        ,\"firstAired\":\"2012-5-31\",\"id\":324478,\"image\":\"/banners/posters/324478-2.jpg\"\
-        ,\"network\":\"YouTube\",\"poster\":\"/banners/posters/324478-2.jpg\",\"seriesName\"\
-        :\"Col\xF4nia Contra-Ataca\",\"slug\":\"colonia-contra-ataca\",\"status\"\
-        :\"Continuing\"},{\"aliases\":[],\"banner\":null,\"firstAired\":null,\"id\"\
-        :259921,\"image\":\"/banners/posters/259921-2.jpg\",\"network\":null,\"overview\"\
-        :\"Alcatraz... Devil's Island... Botany Bay: these prisons, among the most\
-        \ feared on Earth, give a whole new meaning to the term \\\"hard time.\\\"\
-        \ They didn't merely cage societiety's worst, they shattered their spirits.\
-        \ Many cracked under the torment, but some fought desperately to survive -\
-        \ even escape. This is the closest you'll get - or would want to! - to these\
-        \ notorious lockups.\",\"poster\":null,\"seriesName\":\"Colonies of the Condemned\"\
-        ,\"slug\":\"colonies-of-the-condemned\",\"status\":\"Ended\"},{\"aliases\"\
-        :[],\"banner\":null,\"firstAired\":null,\"id\":254376,\"image\":\"/banners/posters/254376-1.jpg\"\
-        ,\"network\":null,\"overview\":\"Colonel Bleep, Squeak and Scratch solve mysteries\
-        \ and fight crime from their base on Zero Zero Island. \",\"poster\":null,\"\
-        seriesName\":\"Colonel Bleep\",\"slug\":\"colonel-bleep\",\"status\":\"Ended\"\
-        },{\"aliases\":[],\"banner\":null,\"firstAired\":null,\"id\":361726,\"image\"\
-        :\"/banners/images/missing/series.jpg\",\"network\":null,\"poster\":null,\"\
-        seriesName\":\"Space Colonies\",\"slug\":\"space-colonies\",\"status\":\"\
-        Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"2016-6-16\",\"id\"\
-        :349122,\"image\":\"/banners/series/349122/posters/62040863.jpg\",\"network\"\
-        :\"Arte\",\"overview\":\"An intimate look at life inside the Jewish settlements\
-        \ in the West Bank.\",\"poster\":null,\"seriesName\":\"The Settlers (2016)\"\
-        ,\"slug\":\"the-settlers\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\"\
-        :null,\"firstAired\":null,\"id\":346581,\"image\":\"/banners/images/missing/series.jpg\"\
-        ,\"network\":\"TF1\",\"poster\":null,\"seriesName\":\"Les Colonnes du ciel\"\
-        ,\"slug\":\"346581\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"\
-        firstAired\":\"1962-9-23\",\"id\":77433,\"image\":\"/banners/posters/77433-1.jpg\"\
-        ,\"network\":\"NBC\",\"overview\":\"A young cadet at a boys' military academy\
-        \ is always getting into trouble and driving his superior officer crazy. \"\
-        ,\"poster\":null,\"seriesName\":\"McKeever and the Colonel\",\"slug\":\"mckeever-and-the-colonel\"\
-        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"1961-10-3\"\
-        ,\"id\":75025,\"image\":\"/banners/posters/75025-1.jpg\",\"network\":\"ABC\
-        \ (US)\",\"overview\":\"Calvin and the Colonel is an animated cartoon television\
-        \ series in 1961 about Colonel Montgomery J. Klaxon, a shrewd fox and Calvin\
-        \ T. Burnside, a dumb bear. Their lawyer was Oliver Wendell Clutch, who was\
-        \ a weasel. The colonel lived with his wife Maggie Belle and her sister Sue,\
-        \ who did not trust the colonel at all. Colonel Klaxon was in the real estate\
-        \ business, but always tried get-rich-quick schemes with Calvin's unwitting\
-        \ help.\\r\\n\\r\\nThe series was an animated remake of Amos 'n' Andy [or,\
-        \ more or less, \\\"Andy and The Kingfish\\\"] and featured the voices of\
-        \ Freeman Gosden and Charles Correll from the radio series. Using animals\
-        \ avoided the touchy racial issues which had led to the downfall of Amos 'n'\
-        \ Andy.\\r\\n\\r\\nBecause of low ratings, the show was cancelled after two\
-        \ months, but returned two months later to complete the first season contract.\
-        \ For a year afterward reruns were seen on Saturday mornings, and eventually\
-        \ syndicated through the 1960s. It was also adapted as a comic book by Dell\
-        \ Comics, and as such the first of two issues was the final installment in\
-        \ the company's extremely prolific Four Color anthology series.\",\"poster\"\
-        :null,\"seriesName\":\"Calvin and the Colonel\",\"slug\":\"calvin-and-the-colonel\"\
-        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"2007-10-1\"\
-        ,\"id\":352929,\"image\":\"/banners/posters/5b9d788646963.jpg\",\"network\"\
-        :null,\"poster\":null,\"seriesName\":\"Kolobkov. The Real Colonel!\",\"slug\"\
-        :\"kolobkov-nastoyaschiy-polkovnik\",\"status\":\"Ended\"},{\"aliases\":[],\"\
-        banner\":null,\"firstAired\":\"2010-1-1\",\"id\":348868,\"image\":\"/banners/series/348868/posters/62038976.jpg\"\
-        ,\"network\":\"Toute l'histoire\",\"poster\":null,\"seriesName\":\"Au temps\
-        \ des colonies\",\"slug\":\"au-temps-des-colonies\",\"status\":\"Ended\"},{\"\
-        aliases\":[],\"banner\":null,\"firstAired\":null,\"id\":336619,\"image\":\"\
-        /banners/posters/336619-1.jpg\",\"network\":\"Comedy Central\",\"overview\"\
-        :\"An animated series featuring two ignorant, foul-mouthed fish, Vinny Gill\
-        \ and Colonel Peppersnacks; overly confident best friends who have left the\
-        \ ocean behind to conquer the rap game. \",\"poster\":null,\"seriesName\"\
-        :\"Vinny And The Colonel\",\"slug\":\"vinny-and-the-colonel\",\"status\":\"\
-        Continuing\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"2017-7-18\"\
-        ,\"id\":330557,\"image\":\"/banners/posters/330557-1.jpg\",\"network\":\"\
-        Comedy Central\",\"poster\":null,\"seriesName\":\"La Culpa es de Col\xF3n\"\
-        ,\"slug\":\"330557\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\"\
-        :\"/banners/graphical/133271-g.jpg\",\"firstAired\":\"2003-10-15\",\"id\"\
-        :133271,\"image\":\"/banners/posters/133271-1.jpg\",\"network\":\"ZDF\",\"\
-        overview\":\"SOKO K\xF6ln is a German police procedural television programme,\
-        \ a spin-off of the earlier German police programme SOKO 5113.\",\"poster\"\
-        :\"/banners/posters/133271-1.jpg\",\"seriesName\":\"SOKO K\xF6ln\",\"slug\"\
-        :\"soko-koln\",\"status\":\"Continuing\"}]}"
+      string: "{\"data\":[{\"aliases\":[\"Colonie\"],\"banner\":\"/banners/graphical/284210-g.jpg\",\"firstAired\":\"2016-01-14\",\"id\":284210,\"image\":\"/banners/posters/284210-2.jpg\",\"network\":\"USA
+        Network\",\"overview\":\"In 2015, Los Angeles exists in a state of occupation.
+        Some collaborate with the alien authorities and benefit from the new order,
+        while others rebel and suffer the consequences. A family is torn by those
+        opposing forces, making difficult choices as they balance keeping their family
+        together with the struggle of the human race.\\r\\n\",\"poster\":\"/banners/posters/284210-2.jpg\",\"seriesName\":\"Colony\",\"slug\":\"colony\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/105521-g4.jpg\",\"firstAired\":\"2009-07-21\",\"id\":105521,\"image\":\"/banners/v4/series/105521/posters/609db96ca73a9.jpg\",\"network\":\"Discovery\",\"overview\":\"The
+        Colony is a controlled experiment to see exactly what it would take to survive
+        and rebuild under these circumstances. For 10 weeks, a group of 10 volunteers,
+        whose backgrounds and expertise represent a cross-section of modern society,
+        are isolated in an urban environment outside Los Angeles and tasked with creating
+        a livable society\\r\\n\\r\\nWith no electricity from the grid, no running
+        water and no communication with the outside world, all the volunteers have
+        to work with are their skills and whatever tools and supplies they can scavenge
+        from their surroundings.\\r\\n\\r\\nExperts from the fields of homeland security,
+        engineering and psychology have helped design the world of The Colony to reflect
+        elements from both real-life disasters and models of what the future could
+        look like after a global viral outbreak.\",\"poster\":\"/banners/v4/series/105521/posters/609db96ca73a9.jpg\",\"seriesName\":\"The
+        Colony\",\"slug\":\"the-colony\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2019-08-25\",\"id\":415272,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"Netflix\",\"overview\":\"Delves
+        into the untold stories and unsung heroes that paved Nigeria's road to independence.
+        Based on the books by host Olasupo Shasore.\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Journey
+        of an African Colony\",\"slug\":\"journey-of-an-african-colony\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/259064-g.jpg\",\"firstAired\":\"2012-05-29\",\"id\":259064,\"image\":\"/banners/posters/259064-1.jpg\",\"network\":\"National
+        Geographic\",\"overview\":\"Meet the Hutterites\u2014a small religious colony
+        in rural Montana who holds desperately to their sacred traditions while fighting
+        the modern temptations of the outside world. King Colony is made up of 59
+        people and they are almost all related. This family lives together, works
+        together, and worships God together, 7 days a week, 365 days a year, for their
+        entire lives. And, like any family, this one doesn\u2019t always agree. Most
+        of the colony is holding tight to the age-old traditions of their ancestors,
+        while others are flirting with modern society. Some feel that bringing modern
+        technology, education, and ideas into the colony will only help it, while
+        others fear that this modern way of thinking threatens their very existence.
+        We follow the men, the women, the young, and the old, as they strive to live
+        as proper Hutterites. Some will succeed, some will fail, and everyone will
+        have a choice to make. This is the very first glimpse into the world of the
+        Hutterites.\",\"poster\":\"/banners/posters/259064-1.jpg\",\"seriesName\":\"American
+        Colony Meet the Hutterites\",\"slug\":\"american-colony-meet-the-hutterites\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/142011-g.jpg\",\"firstAired\":\"2005-01-25\",\"id\":142011,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"\",\"overview\":\"Australia\u2019s
+        first living history series is a blend of historical discovery, social jeopardy,
+        adventure challenge and experiential learning as pampered 21st Century \u2018pioneers\u2019
+        attempt to prove they\u2019re tough enough to survive their historical ordeal.
+        Against this backdrop, the series explores the gripping story of the first
+        settlements.\\r\\n\\r\\nThis six-part series transports a group of English,
+        Irish and Australians, both Indigenous and European, back in time to the Australia
+        of their ancestors. Living the life of free settlers, convicts and local Aboriginal
+        people, they experience the unforgiving toughness of the colony of New South
+        Wales as it was 200 years ago.\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"The
+        Colony\",\"slug\":\"the-colony-australia\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2022-04-15\",\"id\":422893,\"image\":\"/banners/v4/series/422893/posters/62e7f39a0c54d.jpg\",\"network\":\"YouTube\",\"overview\":\"Today
+        the boys use the nuclear option.\",\"poster\":\"/banners/v4/series/422893/posters/62e7f39a0c54d.jpg\",\"seriesName\":\"Neebs
+        Gaming: Pulsar - Lost Colony\",\"slug\":\"neebs-gaming-pulsar-lost-colony\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"/banners/graphical/95181-g.jpg\",\"firstAired\":\"2007-01-11\",\"id\":95181,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"TVNorge\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Vacation
+        Colony\",\"slug\":\"95181-show\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/5c93a00937dfd.jpg\",\"firstAired\":\"2019-03-11\",\"id\":360904,\"image\":\"/banners/posters/5c9396c380ce9.jpg\",\"network\":\"BBC
+        One\",\"overview\":\"Wales: England's Colony? is designed to stimulate debate
+        about the past story of Wales, and will also challenge the audience to think
+        afresh about some of the future constitutional choices facing Wales as it
+        leaves the European Union.\\r\\n\\r\\nFocussing on how Wales' relationship
+        with England has shaped both the nation's development and how Wales sees itself,
+        the programmes will tell the story of an uneasy and unequal relationship between
+        two nations living side-by-side. It examines Wales' story from its creation
+        to the present day, examining key moments such as medieval conquest, industrial
+        exploitation, the Blue Books, the 1919 race riots and the flooding of Cwm
+        Tryweryn.\\r\\n\",\"poster\":\"/banners/posters/5c9396c380ce9.jpg\",\"seriesName\":\"Wales:
+        England's Colony?\",\"slug\":\"wales-englands-colony\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"\",\"id\":392408,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Col\xF3n
+        y la era del descubrimiento\",\"slug\":\"colon-y-la-era-del-descubrimiento\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/5bf50db16915b.jpg\",\"firstAired\":\"2018-11-20\",\"id\":355758,\"image\":\"/banners/posters/5bf6fdc99e1a3.jpg\",\"network\":\"VRT
+        CANVAS\",\"overview\":\"In 1960 Congo became independent after a short political
+        struggle. For Belgium it was the end of more than 75 years of presence in
+        the Central African country. In the six-part series Children of the Colony,
+        twenty witnesses look back on that period and on the way in which the colonial
+        legacy determined their lives. For the first time, Flemish television is also
+        allowing the Congolese voice to speak extensively, always paying attention
+        to its relevance today. For five weeks, people who have experienced it up
+        close will talk about colonial and postcolonial Congo. In the sixth episode,
+        six Congo experts delve deeper into the postcolonial image and unravel truth
+        and myths about Belgian Congo.\",\"poster\":\"/banners/posters/5bf6fdc99e1a3.jpg\",\"seriesName\":\"Children
+        of the Colony\",\"slug\":\"kinderen-van-de-kolonie\",\"status\":\"Ended\"},{\"aliases\":[\"A
+        Sinister Sect: Colonia Dignidad (2021)\"],\"banner\":\"/banners/v4/series/410898/banners/616d8e38dc511.jpg\",\"firstAired\":\"2021-10-01\",\"id\":410898,\"image\":\"/banners/v4/series/410898/posters/6163e9f8e6894.jpg\",\"network\":\"Netflix\",\"overview\":\"A
+        colony of German Christians with a charismatic and manipulative leader establishes
+        itself in Chile and becomes instrumental to the dictatorship.\",\"poster\":\"/banners/v4/series/410898/posters/6163e9f8e6894.jpg\",\"seriesName\":\"A
+        Sinister Sect: Colonia Dignidad\",\"slug\":\"voyage-au-bout-de-lemprise-colonia-dignidad\",\"status\":\"Ended\"},{\"aliases\":[\"Colonia
+        Dignidad\"],\"banner\":\"/banners/v4/series/378279/banners/6156edae657a5.jpg\",\"firstAired\":\"2020-03-10\",\"id\":378279,\"image\":\"/banners/v4/series/378279/posters/61640826edc69.jpg\",\"network\":\"Arte\",\"overview\":\"This
+        documentary series plunges into the abyss of German sect, Colonia Dignidad.
+        It shows the way of life of an isolated community that, far from the world,
+        even influenced international politics.\",\"poster\":\"/banners/v4/series/378279/posters/61640826edc69.jpg\",\"seriesName\":\"Colonia
+        Dignidad\",\"slug\":\"colonia-dignidad-une-secte-allemande-au-chili\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2021-06-25\",\"id\":405460,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"Canal
+        Brasil\",\"overview\":\"Elisa (Fernanda Marques), uma jovem de vinte anos
+        que chega ao Hosp\xEDcio Col\xF4nia no come\xE7o dos anos setenta. Ela est\xE1
+        gr\xE1vida de quatro meses de sua grande paix\xE3o juvenil e foi enviada para
+        o local pelo pai, J\xFAlio (Henrique Schafer), que fica enfurecido ao descobrir
+        que a filha arruinara seus projetos de cas\xE1-la com um rico vizinho de fazendas.
+        Elisa logo se depara com a verdadeira loucura ali presente, mas rapidamente
+        consegue descobrir que, assim como ela, muitas outras pessoas sem nenhum tipo
+        de diagnostico de doen\xE7a mental est\xE3o internadas: o alco\xF3latra Raimundo
+        (Bukassa Kabengele), a prostituta Valeska (Andr\xE9ia Horta), o homossexual
+        Gilberto (Arlindo Lopes) e dona Wanda (Rejane Faria), todos para l\xE1 enviados
+        por serem considerados inc\xF4modos para a sociedade.\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Col\xF4nia\",\"slug\":\"colonia\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2017-05-04\",\"id\":380106,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"Canal
+        Off\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Col\xF4nia
+        de f\xE9rias\",\"slug\":\"colonia-de-ferias\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2017-07-18\",\"id\":330557,\"image\":\"/banners/posters/330557-1.jpg\",\"network\":\"Comedy
+        Central\",\"poster\":\"/banners/posters/330557-1.jpg\",\"seriesName\":\"La
+        Culpa es de Col\xF3n\",\"slug\":\"330557-show\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/71913-g.jpg\",\"firstAired\":\"2004-05-17\",\"id\":71913,\"image\":\"/banners/posters/71913-2.jpg\",\"network\":\"PBS\",\"overview\":\"A
+        group of ordinary people arrive on a boat to 1628 and have to build a functioning
+        colony, using only time appropriate resources. Their goal: survive for 4 months
+        and pass the final evaluation.\\r\\n\",\"poster\":\"/banners/posters/71913-2.jpg\",\"seriesName\":\"Colonial
+        House\",\"slug\":\"colonial-house\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/410111/banners/61855b98ed566.jpg\",\"firstAired\":\"2021-10-04\",\"id\":410111,\"image\":\"/banners/v4/series/410111/posters/61635e399c44f.jpg\",\"network\":\"France
+        3\",\"poster\":\"/banners/v4/series/410111/posters/61635e399c44f.jpg\",\"seriesName\":\"Colonisation,
+        une histoire fran\xE7aise\",\"slug\":\"colonisation-une-histoire-francaise\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/78711/banners/6644eb9bc9481.jpg\",\"firstAired\":\"1956-02-22\",\"id\":78711,\"image\":\"/banners/posters/78711-2.jpg\",\"network\":\"\",\"overview\":\"Colonel
+        March of Scotland Yard is based on the character created by John Dickson Carr
+        under the pen name Carter Dickson.  Boris Karloff, famous for his affiliation
+        with Universal Studios during the \\\"Golden Age of Hollywood Horror Movies,\\\"
+        portrays Colonel March, of the Department of Queer Complaints who investigates
+        unusual cases, locked-room murders, and mysteries concerning the supernatural.
+        The British series was filmed at Southhall Studios, Middlesex, England from
+        December 1954 - Spring  1955. Boris, 65 years old at the time, as Colonel
+        March is not afraid to get right into the thick of things, often confronting
+        the perpetrators directly. In 1953, a film called Colonel March Investigates
+        was made by Fountain Films Production.  It combined three episodes (Hot Money,
+        Death in the Dressing Room, and The New Invisible Man) Karloff narrates the
+        three segments and stars as the lead.\",\"poster\":\"/banners/posters/78711-2.jpg\",\"seriesName\":\"Colonel
+        March of Scotland Yard\",\"slug\":\"colonel-march-of-scotland-yard\",\"status\":\"Ended\"},{\"aliases\":[\"The
+        Survivors,  Colonia Dignidad\"],\"banner\":\"\",\"firstAired\":\"2022-09-30\",\"id\":426523,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"Prime
+        Video\",\"overview\":\"Explores the hidden truths behind the idyllic German-themed
+        amusement park that was once home to Nazis, torture chambers, extreme medical
+        experiments, and Chile's most dangerous sect.\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Los
+        Sobrevivientes, Colonia Dignidad\",\"slug\":\"los-sobrevivientes-colonia-dignidad\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"/banners/graphical/254376-g.jpg\",\"firstAired\":\"\",\"id\":254376,\"image\":\"/banners/posters/254376-1.jpg\",\"network\":\"\",\"overview\":\"Colonel
+        Bleep, Squeak and Scratch solve mysteries and fight crime from their base
+        on Zero Zero Island.\",\"poster\":\"/banners/posters/254376-1.jpg\",\"seriesName\":\"Colonel
+        Bleep\",\"slug\":\"colonel-bleep\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"1961-10-03\",\"id\":75025,\"image\":\"/banners/posters/75025-1.jpg\",\"network\":\"ABC
+        (US)\",\"overview\":\"Calvin and the Colonel is an animated cartoon television
+        series in 1961 about Colonel Montgomery J. Klaxon, a shrewd fox and Calvin
+        T. Burnside, a dumb bear. Their lawyer was Oliver Wendell Clutch, who was
+        a weasel. The colonel lived with his wife Maggie Belle and her sister Sue,
+        who did not trust the colonel at all. Colonel Klaxon was in the real estate
+        business, but always tried get-rich-quick schemes with Calvin's unwitting
+        help.\\r\\n\\r\\nThe series was an animated remake of Amos 'n' Andy [or, more
+        or less, \\\"Andy and The Kingfish\\\"] and featured the voices of Freeman
+        Gosden and Charles Correll from the radio series. Using animals avoided the
+        touchy racial issues which had led to the downfall of Amos 'n' Andy.\\r\\n\\r\\nBecause
+        of low ratings, the show was cancelled after two months, but returned two
+        months later to complete the first season contract. For a year afterward reruns
+        were seen on Saturday mornings, and eventually syndicated through the 1960s.
+        It was also adapted as a comic book by Dell Comics, and as such the first
+        of two issues was the final installment in the company's extremely prolific
+        Four Color anthology series.\",\"poster\":\"/banners/posters/75025-1.jpg\",\"seriesName\":\"Calvin
+        and the Colonel\",\"slug\":\"calvin-and-the-colonel\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/324478-g.jpg\",\"firstAired\":\"2012-05-31\",\"id\":324478,\"image\":\"/banners/posters/324478-1.jpg\",\"network\":\"YouTube\",\"poster\":\"/banners/posters/324478-1.jpg\",\"seriesName\":\"Col\xF4nia
+        Contra-Ataca\",\"slug\":\"colonia-contra-ataca\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/259921-g.jpg\",\"firstAired\":\"\",\"id\":259921,\"image\":\"/banners/posters/259921-2.jpg\",\"network\":\"\",\"overview\":\"Alcatraz...
+        Devil's Island... Botany Bay: these prisons, among the most feared on Earth,
+        give a whole new meaning to the term \\\"hard time.\\\" They didn't merely
+        cage societiety's worst, they shattered their spirits. Many cracked under
+        the torment, but some fought desperately to survive - even escape. This is
+        the closest you'll get - or would want to! - to these notorious lockups.\",\"poster\":\"/banners/posters/259921-2.jpg\",\"seriesName\":\"Colonies
+        of the Condemned\",\"slug\":\"colonies-of-the-condemned\",\"status\":\"Ended\"},{\"aliases\":[\"The
+        Settlers (2016)\"],\"banner\":\"\",\"firstAired\":\"2016-09-27\",\"id\":349122,\"image\":\"/banners/series/349122/posters/60022d079da07.jpg\",\"network\":\"Arte\",\"overview\":\"An
+        intimate look at life inside the Jewish settlements in the West Bank.\",\"poster\":\"/banners/series/349122/posters/60022d079da07.jpg\",\"seriesName\":\"The
+        Settlers\",\"slug\":\"the-settlers\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2018-04-27\",\"id\":361726,\"image\":\"/banners/series/361726/posters/5ec0f934a5390.jpg\",\"network\":\"\",\"overview\":\"In
+        view of climate change and the threat of global overpopulation, it is possible
+        that the earth could become uninhabitable in the near future. Colonies in
+        space therefore seem to be a suitable alternative to create new habitat. But
+        what is available - the moon, an asteroid or Mars? This three-part documentation
+        shows three possibilities.\",\"poster\":\"/banners/series/361726/posters/5ec0f934a5390.jpg\",\"seriesName\":\"Space
+        Colonies\",\"slug\":\"space-colonies\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/336619-g.jpg\",\"firstAired\":\"2017-10-16\",\"id\":336619,\"image\":\"/banners/posters/336619-1.jpg\",\"network\":\"Comedy
+        Central\",\"overview\":\"An animated series featuring two ignorant, foul-mouthed
+        fish, Vinny Gill and Colonel Peppersnacks; overly confident best friends who
+        have left the ocean behind to conquer the rap game.\",\"poster\":\"/banners/posters/336619-1.jpg\",\"seriesName\":\"Vinny
+        And The Colonel\",\"slug\":\"vinny-and-the-colonel\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"\",\"id\":419518,\"image\":\"/banners/images/missing/series.jpg\",\"network\":null,\"overview\":\"Set
+        in colonial Chile in the 19th century. It had three seasons broadcast from
+        Monday to Friday during 2010 and 2011, with a total of approximately 100 chapters.
+        The plot of the episode usually contains two stories, a main story and a secondary
+        story, which begins and ends with the denouement of the main story. The chapters
+        always end with the credits and joke scenes.\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"La
+        colonia\",\"slug\":\"la-colonia\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"1953-10-07\",\"id\":78709,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"\",\"overview\":\"Welcome
+        to the Colonel Flack guide at TV Tome.\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Colonel
+        Flack\",\"slug\":\"colonel-flack\",\"status\":\"Ended\"},{\"aliases\":[\"The
+        Great Courses - American Military History\"],\"banner\":\"\",\"firstAired\":\"\",\"id\":433105,\"image\":\"/banners/v4/series/433105/posters/6463f64ed135e.jpg\",\"network\":null,\"overview\":\"Wars
+        have played a crucial role in defining the United States and its place in
+        the world. No one is better equipped to analyze this subject in depth than
+        retired U.S. Army Gen. Wesley K. Clark. In this 24-lecture course, Gen. Clark
+        explores the full scope of America\u2019s armed conflicts, from the French
+        and Indian War in the mid 18th century to the Global War on Terrorism in the
+        21st. Gen. Clark sheds light on the tactics and strategy behind such famous
+        battles as Yorktown, New Orleans, Gettysburg, D-Day, Inchon, and Operation
+        Desert Storm, plus many others. He also recounts his own experiences in combat
+        during the Vietnam War, which he barely survived.\",\"poster\":\"/banners/v4/series/433105/posters/6463f64ed135e.jpg\",\"seriesName\":\"American
+        Military History: From Colonials to Counterinsurgents\",\"slug\":\"the-great-courses-american-military-history\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2007-10-01\",\"id\":352929,\"image\":\"/banners/posters/5b9d788646963.jpg\",\"network\":\"\",\"poster\":\"/banners/posters/5b9d788646963.jpg\",\"seriesName\":\"Kolobkov.
+        The Real Colonel!\",\"slug\":\"kolobkov-nastoyaschiy-polkovnik\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/77433-g.jpg\",\"firstAired\":\"1962-09-23\",\"id\":77433,\"image\":\"/banners/posters/77433-1.jpg\",\"network\":\"NBC\",\"overview\":\"A
+        young cadet at a boys' military academy is always getting into trouble and
+        driving his superior officer crazy.\",\"poster\":\"/banners/posters/77433-1.jpg\",\"seriesName\":\"McKeever
+        and the Colonel\",\"slug\":\"mckeever-and-the-colonel\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2010-01-01\",\"id\":348868,\"image\":\"/banners/series/348868/posters/62038976.jpg\",\"network\":\"Toute
+        l'histoire\",\"poster\":\"/banners/series/348868/posters/62038976.jpg\",\"seriesName\":\"Au
+        temps des colonies\",\"slug\":\"au-temps-des-colonies\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"\",\"id\":335494,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Colonial
+        Life For Children\",\"slug\":\"colonial-life-for-children\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"\",\"id\":419631,\"image\":\"/banners/v4/series/419631/posters/626f1f5fc2a37.jpg\",\"network\":null,\"overview\":\"The
+        history of colonial America is a story of extraordinary scope, with Europeans,
+        Africans, and the native peoples of North America interacting in a drama of
+        settlement and conflict that lasted nearly three centuries. In the midst of
+        it, no one would have predicted that the profoundly different English colonies
+        along the East Coast, separated by religion, politics, economics, and many
+        other factors, would eventually join to form the United States of America.\\r\\n\\r\\n\\\"Before
+        1776: Life in the American Colonies\\\" tells this epic story in 36 spellbinding
+        lectures by Professor Robert J. Allison of Suffolk University in Boston. An
+        acclaimed teacher, Professor Allison is also an eminent scholar who has served
+        as an advisor to several prestigious museums and historical societies in Massachusetts,
+        including the Commonwealth Museum at the State Archives in Boston.\",\"poster\":\"/banners/v4/series/419631/posters/626f1f5fc2a37.jpg\",\"seriesName\":\"Before
+        1776: Life in the American Colonies\",\"slug\":\"before-1776-life-in-the-american-colonies\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2020-08-27\",\"id\":414102,\"image\":\"/banners/v4/series/414102/posters/624ac7b566c1e.jpg\",\"network\":\"TVNZ\",\"overview\":\"Colonial
+        Combat takes a laugh at our unofficial NZ colonial history. It's a dog eat
+        dog world, where colourful characters compete inside and outside of the ring.\",\"poster\":\"/banners/v4/series/414102/posters/624ac7b566c1e.jpg\",\"seriesName\":\"Colonial
+        Combat\",\"slug\":\"colonial-combat\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"\",\"id\":346581,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"TF1\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Les
+        Colonnes du ciel\",\"slug\":\"346581-show\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"1913-11-23\",\"id\":362519,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"\",\"overview\":\"Colonel
+        Heeza Liar is the star of the first animated series featuring a recurring
+        character. In this story he comes to the rescue of a baseball team and becomes
+        the star pitcher and hitter.\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Colonel
+        Heeza Liar\",\"slug\":\"colonel-heeza-liar\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2024-01-30\",\"id\":446101,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"Multishow\",\"overview\":\"Nicole
+        Bahls always welcomes guests to her place.\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Col\xF4nia
+        Bahls\",\"slug\":\"colonia-bahls\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/403227/banners/62ad9f2816a1c.jpg\",\"firstAired\":\"2021-06-16\",\"id\":403227,\"image\":\"/banners/v4/series/403227/posters/60c9ed9da4757.jpg\",\"network\":\"Netflix\",\"overview\":\"In
+        a picturesque South African town, an eclectic group of endangered penguins
+        flock together to find mates, raise families and mix with the locals.\",\"poster\":\"/banners/v4/series/403227/posters/60c9ed9da4757.jpg\",\"seriesName\":\"Penguin
+        Town\",\"slug\":\"penguin-town\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/133271/banners/63fa97b8e7bb9.jpg\",\"firstAired\":\"2003-10-15\",\"id\":133271,\"image\":\"/banners/series/133271/posters/5f6b1bd0759bd.jpg\",\"network\":\"ZDF\",\"overview\":\"SOKO
+        K\xF6ln is a German police procedural television programme, a spin-off of
+        the earlier German police programme SOKO 5113.\",\"poster\":\"/banners/series/133271/posters/5f6b1bd0759bd.jpg\",\"seriesName\":\"SOKO
+        K\xF6ln\",\"slug\":\"soko-koln\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/435320/banners/647d2d4bb3bba.jpg\",\"firstAired\":\"2023-05-24\",\"id\":435320,\"image\":\"/banners/v4/series/435320/posters/647cccf6aa647.jpg\",\"network\":\"TLC\",\"overview\":\"With
+        groundbreaking chiropractic methods, Dr. Alessandra Col\xF3n and her staff
+        tackle extreme and debilitating physical conditions; through every snap, crack
+        and pop, she provides relief when no one else can.\",\"poster\":\"/banners/v4/series/435320/posters/647cccf6aa647.jpg\",\"seriesName\":\"Crack
+        Addicts\",\"slug\":\"crack-addicts\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2017-11-08\",\"id\":337870,\"image\":\"/banners/posters/5b193c8e925d9.jpg\",\"network\":\"APTN\",\"overview\":\"1491:
+        The Untold Story of the Americas before Columbus is based on the book \u201C1491:
+        New Revelations of the Americas Before Columbus\u201D by Charles C. Mann (Knopf,
+        2005). It brings to life the complexity, diversity and interconnectedness
+        of Indigenous peoples in the Americas before the arrival of Columbus. Presented
+        from an Indigenous-perspective the series is a journey along a timeline that
+        dates from 20,000 years ago to 1491. The origins and history of ancient Indigenous
+        societies in North, Central and South America are interpreted by leading Indigenous
+        scholars and cultural leaders in the fields of archaeology, art history, ethnology,
+        genetics, geology, and linguistics.\",\"poster\":\"/banners/posters/5b193c8e925d9.jpg\",\"seriesName\":\"1491:
+        The Untold Story of the Americas before Columbus\",\"slug\":\"1491-the-untold-story-of-the-americas-before-columbus\",\"status\":\"Ended\"},{\"aliases\":[\"Die
+        gro\xDFen Spione: Oberst Wennerstr\xF6m\"],\"banner\":\"\",\"firstAired\":\"1965-10-26\",\"id\":399389,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"ZDF\",\"overview\":\"The
+        Swedish military attach\xE9 Stig Wennerstr\xF6m comes into contact with the
+        American secret service. After a trip to Moscow, he provided the Americans
+        with valuable information about the Soviet jet plane. But Wennerstr\xF6m plays
+        a double game.\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Colonel
+        Wennerstr\xF6m\",\"slug\":\"oberst-wennerstroem\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"\",\"id\":284037,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"dk4\",\"overview\":\"Katrine
+        Orleman Thrane visits colonial ministers everywhere in Denmark from Sydhavnen
+        in Copenhagen to Haderslev in S\xF8nderjylland.\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Colonial
+        Garden Life\",\"slug\":\"284037-show\",\"status\":\"Continuing\"}]}"
     headers:
-      cache-control:
+      Cache-Control:
       - private, max-age=86400
-      connection:
+      Connection:
       - keep-alive
-      content-type:
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Sat, 09 May 2020 14:40:03 GMT
-      transfer-encoding:
+      Date:
+      - Wed, 22 May 2024 14:33:36 GMT
+      Transfer-Encoding:
       - chunked
-      vary:
+      Vary:
       - Accept-Language
-      via:
-      - 1.1 cd66c5a89ae3376f15c155e3b52a758d.cloudfront.net (CloudFront)
-      x-amz-cf-id:
-      - Gb06g8od12FHRl8WbqGkeQL8UWHMoNJQAGUBnBa92H5LgJJu2qhrog==
-      x-amz-cf-pop:
-      - ZRH50-C1
-      x-cache:
+      Via:
+      - 1.1 ca3702c84b0e2f2daaf573cabe88ad8c.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - 3fn9d610EjI3aLbTA5JI02TPVMRwDnAYVQrH1ri7z4fBj_wzQqmodQ==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
       - Miss from cloudfront
-      x-powered-by:
+      X-Powered-By:
       - Thundar!
-      x-thetvdb-api-version:
+      X-Thetvdb-Api-Version:
       - 3.0.0
     status:
       code: 200
@@ -259,11 +291,11 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Accept-Language:
       - en
       Authorization:
-      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
       Connection:
       - keep-alive
       Content-Type:
@@ -274,51 +306,43 @@ interactions:
     uri: https://api.thetvdb.com/series/284210
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAA3RUwXLbRgz9FQwvvVgKSUm2rJud1JPMtGknTuJDkgPEBcltlgt2d2mFzWQmH9L8
-        XL4kwMpyeumBw8XDwxJ4APi5MJiw2H0urCl29XZdV+VZESlYii8EKarLzbasixP2EgcS9Ck79rOg
-        6CxGisXu3QelYGQv7pV4Ro6JghjHQ3xyvHxRlcu/xk4Ie/Q+E7qAY28bdCdKVz9QWvQYklCOhycc
-        bGf9T+KJFxOmSZIofvWGjAbaENOVDaQl1GV1viirRbUWj6d04PBR4De3V/DywXrEc82r8lyQMPlk
-        c7XrjZgOfTdhpzZ5sTvyQYx3xbOAAwpw21jyDcGNbZIVGUQQvqdwb+kgMbeUwHpIPYEnDNBOaQp0
-        Br9xhCvfkaMIPUbYE3k4oHNkFty2gN6AjewwkYH9DAjDrHpaniJw00zjbH0HLYeGlvD967/H1nz/
-        +g0a8io8sJeoFgfrZkgcvF7Do7TlMTCeQUxh6jqnUGLYo5QrtRjbtraZXAJDjY1SVlS36K1XdSTl
-        BDj01hGkMD8Ex0mKvqef5R5ApHUGOBgKy/fhvdfnLodFHghG4lHOTc8cSa9o2Dncc5Cq4WBTny/C
-        KfUyAUnGMMuyJ0+tTdAGHjIhy4Eq/hmwphYh0J5cZsepbSVZ5TVSBv09abfiEm44DOK4uX4B0l6f
-        4M46B9d8GNDnlojkHDRqGJ2MqTYisKMd9PSLNuxRRvO/qY+BP83Q6Tz4Qb8h2mQ1NEKciZoEvY2n
-        NmnCgRrlZzhqSYeeZTLEoBFDTsNMIWveq9giDDp536P2aZlHNqY3o1Fqsas22+35ZludX8jWyno8
-        w/mP9o5IV+F1P4VoMC+0uF4fx74qd2UJf/6uuyCq+k6Zb49rZAezz7uS0rouL+uNbsw/ONY2Zfj2
-        eVnXm3JdK47GnBZxvSgvFvUllBe71Wa3Xp2817NkKItsE716+NZ2ufov8JRlH4VU5h+UmzSb5vgb
-        +vLlBwAAAP//AwC15YG6xwQAAA==
+      string: '{"data":{"id":284210,"seriesId":"","seriesName":"Colony","aliases":[],"season":"3","poster":"posters/284210-2.jpg","banner":"graphical/284210-g.jpg","fanart":"fanart/original/284210-2.jpg","status":"Ended","firstAired":"2016-01-14","network":"USA
+        Network","networkId":"306","runtime":"42","language":"en","genre":["Action","Adventure","Drama","Science
+        Fiction"],"overview":"In 2015, Los Angeles exists in a state of occupation.
+        Some collaborate with the alien authorities and benefit from the new order,
+        while others rebel and suffer the consequences. A family is torn by those
+        opposing forces, making difficult choices as they balance keeping their family
+        together with the struggle of the human race.\r\n","lastUpdated":1703997737,"airsDayOfWeek":"Thursday","airsTime":"10:00
+        PM","rating":"TV-14","imdbId":"tt4209256","zap2itId":"","added":"2014-07-29
+        07:35:43","addedBy":1,"siteRating":8.3,"siteRatingCount":1010,"slug":"colony"}}'
     headers:
-      age:
-      - '71490'
-      cache-control:
+      Age:
+      - '51173'
+      Cache-Control:
       - private, max-age=86400
-      connection:
+      Connection:
       - keep-alive
-      content-encoding:
-      - gzip
-      content-type:
+      Content-Length:
+      - '933'
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Fri, 08 May 2020 18:48:33 GMT
-      last-modified:
-      - Tue, 05 May 2020 05:56:07 GMT
-      transfer-encoding:
-      - chunked
-      vary:
-      - Accept-Encoding,Accept-Language
-      via:
-      - 1.1 cd66c5a89ae3376f15c155e3b52a758d.cloudfront.net (CloudFront)
-      x-amz-cf-id:
-      - cXZO3HKWtP_HFjoLCeWYRpNHNVeDrCQdLLWRlwetsGBG-iJj838d7Q==
-      x-amz-cf-pop:
-      - ZRH50-C1
-      x-cache:
+      Date:
+      - Wed, 22 May 2024 00:20:42 GMT
+      Last-Modified:
+      - Sun, 31 Dec 2023 04:42:17 GMT
+      Vary:
+      - Accept-Language
+      Via:
+      - 1.1 a48f09960f130cb6049f12b379cf591e.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - Ipskt6lkgBE65Lhc8l690C0r7QADB09l6jowEQcf9DtmAx4pnoiPCg==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
       - Hit from cloudfront
-      x-powered-by:
+      X-Powered-By:
       - Thundar!
-      x-thetvdb-api-version:
+      X-Thetvdb-Api-Version:
       - 3.0.0
     status:
       code: 200
@@ -329,11 +353,11 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Accept-Language:
       - en
       Authorization:
-      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
       Connection:
       - keep-alive
       Content-Type:
@@ -341,50 +365,46 @@ interactions:
       User-Agent:
       - Subliminal/2.1
     method: GET
-    uri: https://api.thetvdb.com/series/284210/episodes/query?airedEpisode=9&airedSeason=1&page=1
+    uri: https://api.thetvdb.com/series/284210/episodes/query?airedSeason=1&airedEpisode=9&page=1
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAA3RTXW8aMRD8K5afgdwHoeHyBKRq0ypVRD6QGuXBnBfOxdgn2wchEf+9YzgkoqrS
-        PXhnZ72z3rkPrpVZeV588IVyPvAi7XAt2oOhNxxMo3WH1442x/O+w6UIghcvH1xJXlz2B3mWDTtc
-        KEfygYS35lB+Ft/e8AIs8Fr4a628lfSrWc/J8QLV1CJiTbzgv8lZdiN2vHMUNopFwLMkHXSTvJsm
-        yCwb8uEhCIcBXvhIOiUMuxdeCofsSOsdmwm9ohhNhNNsRiJUBDriCoAiNqatptjmmzXvQlt2R4aM
-        pHdAP8HWRIZNrSd2T26lTKx9rKwTbKxcWSF6VmWwjk2Fb1b8FY8DqRE5iJraN2EMJtnGV0F261Sg
-        NreD3B89NrFGCh2TdkNuo2iLQWdKa7YVJngWLHO0Ro5BPFuItcJgC2fXh9iWZVOLoKy5ZhCMkYSR
-        bOxs471wkmFxtXCog0b0szW5lv1gdpIcC07RoUntbIByVinP7GKhSrpmd0JKXLkWK3AEm1stWZTS
-        49EnZtmIJUX3fN4eGf5pGMT7aCErmzL2noAKOE2G4PnKbp+cRsyP3nuq4a+47fQyz9Lh5TDr41U3
-        8kb5Mhou8hCeOQ3Rv4YCiCXXIYZHD4u5t7oJ56SF0mRa0ccb/EV21c/S5KL1de9PvYwqKT7TLdof
-        05+kjncnw/vRAg1P0tq2gMeE96f/4a34U0Kt5Tx24iH0h9kgyTIIKK0JZMIUyzNL5B6fu2kfeKgw
-        zagJ8ORBxDGW8vS7DLtp2k1zluYFvuzLqWSmZKhAGfSTE/Sd1LLCH8/zQcQ8nHpqd9XLz4GJbQyI
-        ef8Kav2dxZ55kexf938BAAD//wMAtaWsjlEEAAA=
+      string: '{"links":{"first":1,"last":1,"next":null,"prev":null},"data":[{"id":5463229,"airedSeason":1,"airedSeasonID":632322,"airedEpisodeNumber":9,"episodeName":"Zero
+        Day","firstAired":"2016-03-10","guestStars":["Adrian Pasdar","Ally Walker","Ben
+        Levin","Carl Weathers","Charles Rahi Chun","Charlie Bewley","Gonzalo Menendez","Jennifer
+        Marshall","Kathleen Rose Perkins","Kathryn Morris","Thora Birch","Victor Rasuk"],"directors":["Roxann
+        Dawson"],"writers":["Anna Fishko","Dre Ryan","Ryan J. Condal"],"overview":"Will
+        wants to remove the family from the occupation; Katie and Broussard prepare
+        for an operation; Snyder tries to protect his office; Maddie makes a bold
+        move.\r\n","language":{"episodeName":"en","overview":"en"},"productionCode":"","showUrl":"","lastUpdated":1599565295,"dvdDiscid":"","dvdSeason":1,"dvdEpisodeNumber":9,"dvdChapter":null,"absoluteNumber":9,"filename":"series/284210/episodes/5f4ff0afceff3.jpg","seriesId":284210,"lastUpdatedBy":2302046,"airsAfterSeason":null,"airsBeforeSeason":null,"airsBeforeEpisode":null,"imdbId":"tt4926022","contentRating":"TV-14","thumbAuthor":2302046,"thumbAdded":"2019-11-13
+        13:13:27","thumbWidth":"640","thumbHeight":"360","siteRating":8.3,"siteRatingCount":348,"isMovie":0}]}'
     headers:
-      age:
-      - '32654'
-      cache-control:
+      Age:
+      - '42186'
+      Cache-Control:
       - private, max-age=86400
-      connection:
+      Connection:
       - keep-alive
-      content-encoding:
+      Content-Encoding:
       - gzip
-      content-type:
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Sat, 09 May 2020 05:35:49 GMT
-      transfer-encoding:
+      Date:
+      - Wed, 22 May 2024 02:50:30 GMT
+      Transfer-Encoding:
       - chunked
-      vary:
+      Vary:
       - Accept-Encoding,Accept-Language
-      via:
-      - 1.1 cd66c5a89ae3376f15c155e3b52a758d.cloudfront.net (CloudFront)
-      x-amz-cf-id:
-      - lSJRiUeLmbKP_4K9xMzT3Zk8E2-VwF6zBS0Vzzy_QVdQPAGnI7nKbQ==
-      x-amz-cf-pop:
-      - ZRH50-C1
-      x-cache:
+      Via:
+      - 1.1 68c9162ccc29f8f3ca30be36950cea58.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - yyo-gRSoee5mVRENgSz8pV-n2QP1dNFdHtR3glI6KvcKgeRcGmp-Vg==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
       - Hit from cloudfront
-      x-powered-by:
+      X-Powered-By:
       - Thundar!
-      x-thetvdb-api-version:
+      X-Thetvdb-Api-Version:
       - 3.0.0
     status:
       code: 200
@@ -395,11 +415,11 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Accept-Language:
       - en
       Authorization:
-      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
       Connection:
       - keep-alive
       Content-Type:
@@ -410,48 +430,45 @@ interactions:
     uri: https://api.thetvdb.com/episodes/5463229
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAA3RTXW8aMRD8K5afgdxXaLg8AanatEoVkQ+kVn0w54Vz8dkn2xdKovz3jMkhBVWV
-        7mVmx95Z79wLlyIIXr5wJXl5XozzLJsMuFCO5B0Jbw0v0xN8fcVLqKDr6c+t8lbSj65ZkeMlTlPP
-        iIZ4yX+Ss+xK7PmAr5XzYRoPgc+SdDxM8mGaoLLpyIe7IJzn5S8+lU4Jw26Fl8KhOtV6z5ZCbymi
-        uXCaLUmEmiAHrkEoYjPaaYptvljzLLRlN2TISHoG9R1qTWTYwnpit+S2ysSz97V1gs2Uq2qgR1UF
-        69hC+G7Lfw+4hNXIHEwt7F9hDCbZxVdBdedUoL62h91vIza3Rgodi/aJ3JOiHQZdKq3ZTpjgWbDM
-        UYMag3m2Fo3CYGtnmwO2VdW1IihrLhkMYyRhJJs523kvnGSto1Y4nINH9LMtuV59Z/aSHAtO0aFJ
-        62yAc1Yrz+x6rSq6ZDdCSlzZiC00gq2slixaGWFwLcymExuKQTjdHhl+Mgzw64DjftlVsfccUtBp
-        MoHO13b34DTw4U4fHlrEK247Pc+zdHI+yQq86pO8Ur6KgYs6wA9JA/o3UCCx5DZEaDqtkbyVt7oL
-        H0Vrpcn0pt9v8GfZRZGlyVmf69GfdhNdUnyma7R/L59Yne2PgffTNRoerfVtQc8I70//43vzx4Jq
-        5Cp24iEUk2ycZBkMVNYEMmGB5ZkNavePw7QAH2pMM+0CMnkw8Y6lPP4uk2GaDtOcpXmJL/t0PLJU
-        MtSQjIvkSH0ltakDuHwcOY+kHttdjPKPxNx2BsK8uIBbf2OxZ14mr69vAAAA//8DAMbl32oaBAAA
+      string: '{"data":{"id":5463229,"airedSeason":1,"airedSeasonID":632322,"airedEpisodeNumber":9,"episodeName":"Zero
+        Day","firstAired":"2016-03-10","guestStars":["Adrian Pasdar","Ally Walker","Ben
+        Levin","Carl Weathers","Charles Rahi Chun","Charlie Bewley","Gonzalo Menendez","Jennifer
+        Marshall","Kathleen Rose Perkins","Kathryn Morris","Thora Birch","Victor Rasuk"],"directors":["Roxann
+        Dawson"],"writers":["Anna Fishko","Dre Ryan","Ryan J. Condal"],"overview":"Will
+        wants to remove the family from the occupation; Katie and Broussard prepare
+        for an operation; Snyder tries to protect his office; Maddie makes a bold
+        move.\r\n","language":{"episodeName":"en","overview":"en"},"productionCode":"","showUrl":"","lastUpdated":1599565295,"dvdDiscid":"","dvdSeason":1,"dvdEpisodeNumber":9,"dvdChapter":null,"absoluteNumber":9,"filename":"series/284210/episodes/5f4ff0afceff3.jpg","seriesId":284210,"lastUpdatedBy":2302046,"airsAfterSeason":null,"airsBeforeSeason":null,"airsBeforeEpisode":null,"imdbId":"tt4926022","contentRating":"TV-14","thumbAuthor":2302046,"thumbAdded":"2019-11-13
+        13:13:27","thumbWidth":"640","thumbHeight":"360","siteRating":8.3,"siteRatingCount":348,"isMovie":0}}'
     headers:
-      age:
-      - '46672'
-      cache-control:
+      Age:
+      - '42187'
+      Cache-Control:
       - private, max-age=86400
-      connection:
+      Connection:
       - keep-alive
-      content-encoding:
+      Content-Encoding:
       - gzip
-      content-type:
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Sat, 09 May 2020 01:42:11 GMT
-      last-modified:
+      Date:
+      - Wed, 22 May 2024 02:50:30 GMT
+      Last-Modified:
       - Thu, 01 Jan 1970 00:00:00 GMT
-      transfer-encoding:
+      Transfer-Encoding:
       - chunked
-      vary:
+      Vary:
       - Accept-Encoding,Accept-Language
-      via:
-      - 1.1 cd66c5a89ae3376f15c155e3b52a758d.cloudfront.net (CloudFront)
-      x-amz-cf-id:
-      - _ityjv3UsGkQrjsc4rjBxBmV1Cxz5onfgyAHgSlRocZK1CMjR9HURw==
-      x-amz-cf-pop:
-      - ZRH50-C1
-      x-cache:
+      Via:
+      - 1.1 f13924e40949c7e0a5bd0c7e333695f2.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - m9GtA9Ealf1UCH9punlkvpWgIV5qbyGUUPePClE5CmxMe9DYVHbGXg==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
       - Hit from cloudfront
-      x-powered-by:
+      X-Powered-By:
       - Thundar!
-      x-thetvdb-api-version:
+      X-Thetvdb-Api-Version:
       - 3.0.0
     status:
       code: 200

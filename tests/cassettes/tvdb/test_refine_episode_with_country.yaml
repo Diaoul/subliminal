@@ -5,11 +5,11 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Accept-Language:
       - en
       Authorization:
-      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
       Connection:
       - keep-alive
       Content-Type:
@@ -20,155 +20,115 @@ interactions:
     uri: https://api.thetvdb.com/search/series?name=shameless
   response:
     body:
-      string: "{\"data\":[{\"aliases\":[],\"banner\":\"/banners/graphical/78846-g4.jpg\"\
-        ,\"firstAired\":\"2004-1-13\",\"id\":78846,\"image\":\"/banners/posters/78846-2.jpg\"\
-        ,\"network\":\"Channel 4\",\"overview\":\"Blisteringly funny, offbeat drama\
-        \ following the rollercoaster lives and loves of an anarchic family from Manchester.\
-        \ Meet the Gallaghers. Mum went AWOL years ago, Dad stayed at home with the\
-        \ six children only to hit the bottle. And sometimes the kids... The real\
-        \ head of the family is big sister Fiona (20), who looks after Carl (11),\
-        \ Debbie (9) and baby Liam (3). She is occasionally helped, more often hindered,\
-        \ by reluctant virgin 'Lip' (16) and the actively gay, but very private, Ian\
-        \ (15).\\r\\n \\r\\nWelcome to a hectic world of sexual adventures, triumphs,\
-        \ love, scams and a fair bit of crime on a rough Manchester housing estate,\
-        \ where wheel-less cars are the norm and the moving ones are stolen. \",\"\
-        poster\":\"/banners/posters/78846-2.jpg\",\"seriesName\":\"Shameless\",\"\
-        slug\":\"shameless\",\"status\":\"Ended\"},{\"aliases\":[\"\u05DC\u05DC\u05D0\
-        \ \u05D1\u05D5\u05E9\u05D4\",\"\u65E0\u803B\u4E4B\u5F92\",\"Shameless - Nicht\
-        \ ganz n\xFCchtern\"],\"banner\":\"/banners/graphical/161511-g3.jpg\",\"firstAired\"\
-        :\"2010-12-12\",\"id\":161511,\"image\":\"/banners/posters/161511-1.jpg\"\
-        ,\"network\":\"Showtime\",\"overview\":\"Chicagoan Frank Gallagher is the\
-        \ proud single dad of six smart, industrious, independent kids, who without\
-        \ him would be... franco, perhaps better off. When Frank's not at the bar\
-        \ spending what little money they have, he's passed out on the floor. But\
-        \ the kids have found ways to grow up in spite of him. They may not be like\
-        \ any family you know, but they make no apologies for being exactly who they\
-        \ are.\",\"poster\":\"/banners/posters/161511-1.jpg\",\"seriesName\":\"Shameless\
-        \ (US)\",\"slug\":\"shameless-us\",\"status\":\"Continuing\"},{\"aliases\"\
-        :[],\"banner\":null,\"firstAired\":\"2007-9-9\",\"id\":339031,\"image\":\"\
-        /banners/images/missing/series.jpg\",\"network\":\"TVN\",\"poster\":null,\"\
-        seriesName\":\"The Shameless Three (PL)\",\"slug\":\"339031\",\"status\":\"\
-        Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"2003-1-10\",\"id\"\
-        :83997,\"image\":\"/banners/posters/83997-1.jpg\",\"network\":\"SAT.1\",\"\
-        poster\":null,\"seriesName\":\"The Shameless Three\",\"slug\":\"83997\",\"\
-        status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2017-9-14\"\
-        ,\"id\":334846,\"image\":\"/banners/series/334846/posters/62040119.jpg\",\"\
-        network\":\"FOX T\xFCrkiye\",\"overview\":\"Filiz is the eldest of the 6 siblings\
-        \ whose father, Fikri, is an alcoholic. All the responsibility of managing\
-        \ the house and raising her siblings falls on her shoulders. Baris falls in\
-        \ love with Filiz for who she is but can she fall in love with someone else\
-        \ when her life is not her own but her family's?\",\"poster\":\"/banners/series/334846/posters/62040119.jpg\"\
-        ,\"seriesName\":\"Our Story\",\"slug\":\"shameless-TR\",\"status\":\"Ended\"\
-        },{\"aliases\":[],\"banner\":\"/banners/series/368855/banners/62096861.jpg\"\
-        ,\"firstAired\":\"2020-3-1\",\"id\":368855,\"image\":\"/banners/series/368855/posters/62093300.jpg\"\
-        ,\"network\":\"ABC (AU)\",\"overview\":\"Inspired by true events; a woman\
-        \ escaping a cult, a refugee fleeing with his family, a father trapped in\
-        \ a dead-end job, and a bureaucrat on the verge of a national scandal find\
-        \ their lives intertwined in an immigration detention centre.\",\"poster\"\
-        :\"/banners/series/368855/posters/62093300.jpg\",\"seriesName\":\"Stateless\"\
-        ,\"slug\":\"stateless\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"\
-        firstAired\":\"2004-10-6\",\"id\":301715,\"image\":\"/banners/posters/301715-1.jpg\"\
-        ,\"network\":\"C31\",\"overview\":\"The Shambles was an Australian television\
-        \ sketch comedy program shown on the community television across Australia.\
-        \ It was written by and stars Sean Lynch, Nathan Valvo and Anthony Ziella,\
-        \ known on the show as Lynchy, Valvo and Sos respectively.\",\"poster\":null,\"\
-        seriesName\":\"The Shambles With Sos, Valvo \\u0026 Lynchy \",\"slug\":\"\
-        the-shambles-with-sos-valvo-and-lynchy\",\"status\":\"Ended\"},{\"aliases\"\
-        :[],\"banner\":null,\"firstAired\":\"2016-1-21\",\"id\":359820,\"image\":\"\
-        /banners/images/missing/series.jpg\",\"network\":null,\"overview\":\"More\
-        \ than 50 million people are currently on the run worldwide. They flee war,\
-        \ oppression and hunger, hoping to find a new home. Large numbers of refugees\
-        \ have been in the past again and again. In the 20th century alone, more than\
-        \ 60 million people lost their homes in Europe. Victims of flight and displacement\
-        \ also became about 14 million Germans at the end of the Second World War.\
-        \ They had to give up everything, leave behind everything they had. Many families\
-        \ were torn apart, lost sight of the dangerous escape.\",\"poster\":null,\"\
-        seriesName\":\"Homeless - people on the run\",\"slug\":\"heimatlos-menschen-auf-der-flucht\"\
-        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"2015-7-29\"\
-        ,\"id\":298445,\"image\":\"/banners/posters/298445-1.jpg\",\"network\":\"\
-        truTV\",\"overview\":\"An unsuspecting group of wannabe stars think they have\
-        \ been cast on an actual reality show.\",\"poster\":null,\"seriesName\":\"\
-        Fameless\",\"slug\":\"fameless\",\"status\":\"Ended\"},{\"aliases\":[],\"\
-        banner\":null,\"firstAired\":\"2018-11-25\",\"id\":356239,\"image\":\"/banners/images/missing/series.jpg\"\
-        ,\"network\":null,\"poster\":null,\"seriesName\":\"\\\"Fake Homeless\\\":\
-        \ Who's Begging on the Streets?\",\"slug\":\"fake-homeless-whos-begging-on-the-streets\"\
-        ,\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":null,\"firstAired\"\
-        :\"2017-1-17\",\"id\":323517,\"image\":\"/banners/images/missing/series.jpg\"\
-        ,\"network\":\"NPO 3\",\"poster\":null,\"seriesName\":\"The Homeless Experience\"\
-        ,\"slug\":\"323517\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"\
-        firstAired\":\"2019-7-15\",\"id\":367585,\"image\":\"/banners/images/missing/series.jpg\"\
-        ,\"network\":\"BBC One\",\"overview\":\"Series following the Warriors as they\
-        \ attempt to reach the Homeless World Cup.\",\"poster\":null,\"seriesName\"\
-        :\"Warriors: Our Homeless World Cup\",\"slug\":\"warriors-our-homeless-world-cup\"\
-        ,\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\"\
-        :\"2019-4-17\",\"id\":362724,\"image\":\"/banners/posters/5cc0539108d08.jpg\"\
-        ,\"network\":\"5Star\",\"overview\":\"Six young privileged Brits, who believe\
-        \ that homelessness is often the result of the victim's own actions, agree\
-        \ to live on the streets of London for three nights.\",\"poster\":\"/banners/posters/5cc0539108d08.jpg\"\
-        ,\"seriesName\":\"Rich Kids Go Homeless\",\"slug\":\"rich-kids-go-homeless\"\
-        ,\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":null,\"firstAired\"\
-        :\"2017-6-27\",\"id\":331603,\"image\":\"/banners/posters/5cedcc4b01521.jpg\"\
-        ,\"network\":\"SBS (AU)\",\"overview\":\"There\u2019s a crisis in Australia.\
-        \ One in 200 of us are homeless on any given night. Almost one third are families\
-        \ and the numbers are on the rise. Public housing stock is shrinking while\
-        \ rents are skyrocketing. Domestic violence and relationship breakdown sets\
-        \ families adrift in a strange and unfamiliar world of emergency shelters\
-        \ and life on the streets. Those from culturally diverse backgrounds, refugees,\
-        \ asylum seekers and Indigenous people are most at risk. More than half the\
-        \ entire homeless population are migrants or Aboriginal and Torres Strait\
-        \ Islander people. The spiralling population of new homeless are often workers\
-        \ or single older women. And then there are the 3,000 Aussie veterans who\
-        \ fought for their country and now have no roof over their heads. The myths\
-        \ are exposed, the realities explored \u2013 homelessness can happen to anybody.\
-        \ It could be you\u2026 But Australians don\u2019t care. Four in ten think\
-        \ the homeless are \u2018lazy freeloaders\u2019, \u2018stupid failures\u2019\
-        \ or \u2018not working hard enough\u2019. One in five think it\u2019s a choice\
-        \ to be homeless. With the gap between the haves and the have-nots ever widening,\
-        \ and attitudes hardening, we take five wealthy Australians away from their\
-        \ privileged and pampered lives, and for ten days and nights immerse them\
-        \ into the world of homelessness.\",\"poster\":null,\"seriesName\":\"Filthy\
-        \ Rich and Homeless (AU)\",\"slug\":\"filthy-rich-and-homeless-au\",\"status\"\
-        :\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":null,\"id\":262159,\"\
-        image\":\"/banners/posters/262159-1.jpg\",\"network\":\"BBC Three\",\"overview\"\
-        :\"Social experiment, based on a real course that takes place in the US, in\
-        \ which five wealthy Britons swap their expensive cars and luxury homes for\
-        \ ten days of living alongside homeless people.\",\"poster\":null,\"seriesName\"\
-        :\"Filthy Rich and Homeless\",\"slug\":\"filthy-rich-and-homeless\",\"status\"\
-        :\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"2009-6-24\",\"\
-        id\":100901,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"\
-        BBC One\",\"overview\":\"In 2009 recession and repossession mean homelessness\
-        \ is a frightening possibility for almost everyone. But for five famous volunteers,\
-        \ it's about to become a terrifying reality.\\r\\n\\r\\nFormer tennis star\
-        \ Annabel Croft, The One Show's Hardeep Singh Kohli, journalist and writer\
-        \ Rosie Boycott, former Coronation Street actor Bruce Jones and the Marquis\
-        \ of Blandford put homelessness in the spotlight by agreeing to swap their\
-        \ lavish lifestyles, fame and fortune for a world of sleeping rough, soup\
-        \ runs and hostels.\",\"poster\":null,\"seriesName\":\"Famous, Rich and Homeless\"\
-        ,\"slug\":\"famous-rich-and-homeless\",\"status\":\"Ended\"}]}"
+      string: "{\"data\":[{\"aliases\":[\"Shameless - Nicht ganz n\xFCchtern\",\"Shameless:
+        Hall of Shame\",\"\u05DC\u05DC\u05D0 \u05D1\u05D5\u05E9\u05D4\",\"Shameless
+        \u2013 Niepokorni\",\"\u65E0\u803B\u4E4B\u5F92\"],\"banner\":\"/banners/graphical/161511-g5.jpg\",\"firstAired\":\"2011-01-09\",\"id\":161511,\"image\":\"/banners/posters/161511-1.jpg\",\"network\":\"Showtime\",\"overview\":\"Chicagoan
+        Frank Gallagher is the proud single dad of six smart, industrious, independent
+        kids, who without him would be... frankly, perhaps better off. When Frank's
+        not at the bar spending what little money they have, he's passed out on the
+        floor. But the kids have found ways to grow up in spite of him. They may not
+        be like any family you know, but they make no apologies for being exactly
+        who they are.\",\"poster\":\"/banners/posters/161511-1.jpg\",\"seriesName\":\"Shameless
+        (US)\",\"slug\":\"shameless-us\",\"status\":\"Ended\"},{\"aliases\":[\"Shameless
+        (UK)\",\"Shameless (UK)\"],\"banner\":\"/banners/graphical/78846-g4.jpg\",\"firstAired\":\"2004-01-13\",\"id\":78846,\"image\":\"/banners/posters/78846-2.jpg\",\"network\":\"Channel
+        4\",\"overview\":\"The lives and relationships of a group of siblings and
+        their estranged father Frank Gallagher on a rough Manchester estate.\",\"poster\":\"/banners/posters/78846-2.jpg\",\"seriesName\":\"Shameless\",\"slug\":\"shameless\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/336588-g.jpg\",\"firstAired\":\"2017-09-01\",\"id\":336588,\"image\":\"/banners/posters/336588-1.jpg\",\"network\":\"\u041D\u0422\u0412\",\"poster\":\"/banners/posters/336588-1.jpg\",\"seriesName\":\"Shameless
+        (2017)\",\"slug\":\"336588-show\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/416717/banners/6270d43ca9f39.jpg\",\"firstAired\":\"2022-02-19\",\"id\":416717,\"image\":\"/banners/v4/series/416717/posters/64bdb4bc4a793.jpg\",\"network\":\"TNT
+        (US)\",\"overview\":\"Fame. Power. Respect. Money can bring it all. And drain
+        it all away. Rich \\u0026 Shameless tells the true stories of the successes,
+        failures, thrills and miseries that accompany the kind of wealth that ordinary
+        people can never understand. Using a combination of powerful interviews, unique
+        archive and atmospheric visuals, Rich \\u0026 Shameless goes behind the public
+        facade to reveal the dangers of great prosperity. Subjects include the mysterious
+        death of crypto millionaire and suspected con artist Gerald Cotton, Seagrams
+        heiress Clare Bronfman and her involvement in a nefarious sex cult, the unlikely
+        battle between Martin Shkreli and The Wu-Tang Clan, the disappearance of NBA
+        great Bison Dele (formerly Brian Williams) at sea, fashion mogul Peter Nygard\u2019s
+        quest for eternal youth, and more.\",\"poster\":\"/banners/v4/series/416717/posters/64bdb4bc4a793.jpg\",\"seriesName\":\"Rich
+        \\u0026 Shameless\",\"slug\":\"rich-shameless\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2007-09-09\",\"id\":339031,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"TVN\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"The
+        Shameless Three (PL)\",\"slug\":\"339031-show\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"\",\"id\":439469,\"image\":\"/banners/images/missing/series.jpg\",\"network\":null,\"overview\":\"Shameless
+        Hall of Shame is a mini series that airs during the eleventh season of Shameless
+        (US). The series contains new and original scenes that are juxtaposed with
+        flashbacks of the series' lead characters throughout the past ten seasons.
+        Six episodes are set to air, with the final episode airing on February 28,
+        2021.\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Shameless
+        Hall of Shame\",\"slug\":\"hall-of-shame\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/411567/banners/63c58effc8c52.jpg\",\"firstAired\":\"2021-03-07\",\"id\":411567,\"image\":\"/banners/v4/series/411567/posters/63c58ed2ead05.jpg\",\"network\":\"DR
+        P3\",\"overview\":\"Is it SHAMELESS to feel like having a lot of sex when
+        you are a young woman? In DR3\u2019s new reportage series, we follow three
+        strong young women who defy prejudice and shame and set their sexual desires
+        free. Here it is Inger, Asmita and Sofie who \\\"take and give\\\" as the
+        most natural. They refuse to degrade female sexuality into something that
+        should be overlooked, suppressed, or felt wrong. We open the door to the most
+        intimate of their lives and experience all that is not normally said out loud.
+        For Inger, Asmita and Sofie insist that it should be possible to have an open
+        sex life as a woman in 2021 without being labeled \\\"cheap\\\".\",\"poster\":\"/banners/v4/series/411567/posters/63c58ed2ead05.jpg\",\"seriesName\":\"Shameless
+        (2021)\",\"slug\":\"411567-skamlos\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/388209/banners/63c591e19c61b.jpg\",\"firstAired\":\"2020-09-09\",\"id\":388209,\"image\":\"/banners/v4/series/388209/posters/643b2a6865ea4.jpg\",\"network\":\"NRK1\",\"overview\":\"How
+        to live without shame? Two young minority women want to free today's young
+        people from negative social control and honor culture.\",\"poster\":\"/banners/v4/series/388209/posters/643b2a6865ea4.jpg\",\"seriesName\":\"Shameless
+        (2020)\",\"slug\":\"skamlos\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/83997-g.jpg\",\"firstAired\":\"2003-01-10\",\"id\":83997,\"image\":\"/banners/v4/series/83997/posters/6170453d858b4.jpg\",\"network\":\"SAT.1\",\"overview\":\"Die
+        Dreisten Drei play skits in everyday situations, for example in the supermarket,
+        in the park, on the bench, in the bookstore. As a framework, the three can
+        be seen in their shared apartment, where they watch TV together on their yellow
+        couch.\",\"poster\":\"/banners/v4/series/83997/posters/6170453d858b4.jpg\",\"seriesName\":\"The
+        Shameless Three\",\"slug\":\"83997-show\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/318975-g.jpg\",\"firstAired\":\"1980-07-13\",\"id\":318975,\"image\":\"/banners/v4/series/318975/posters/640cbb149235a.jpg\",\"network\":\"Egyptian
+        Television Network\",\"overview\":\"A story based on real events from the
+        Egyptian spy files of one of the Egyptian intelligence operations against
+        the Israeli Mossad, whose hero was in fact (Ahmed Muhammad Abdel Rahman El-Hwan),
+        who became in the series (Gomaa Al-Shawan).\",\"poster\":\"/banners/v4/series/318975/posters/640cbb149235a.jpg\",\"seriesName\":\"Tears
+        in Shameless Eyes\",\"slug\":\"dumou-fi-oyoun-waqiha\",\"status\":\"Ended\"},{\"aliases\":[\"Shameless
+        (TR)\"],\"banner\":\"\",\"firstAired\":\"2017-09-14\",\"id\":334846,\"image\":\"/banners/series/334846/posters/62040119.jpg\",\"network\":\"FOX
+        T\xFCrkiye\",\"overview\":\"Filiz is the eldest of the 6 siblings whose father,
+        Fikri, is an alcoholic. All the responsibility of managing the house and raising
+        her siblings falls on her shoulders. Baris falls in love with Filiz for who
+        she is but can she fall in love with someone else when her life is not her
+        own but her family's?\",\"poster\":\"/banners/series/334846/posters/62040119.jpg\",\"seriesName\":\"Our
+        Story\",\"slug\":\"shameless-TR\",\"status\":\"Ended\"},{\"aliases\":[\"\u5FC3\u52D5\u4E0D\u53EF\u6065
+        \u9084\u5F88\u53EF\u611B\",\"Xin Dong Bu Ke Chi Hai Hen Ke Ai\",\"Shameless
+        and Cute\",\"Countdown to Love\"],\"banner\":\"\",\"firstAired\":\"2022-04-19\",\"id\":419332,\"image\":\"/banners/v4/series/419332/posters/6264862a4cdb2.jpg\",\"network\":\"iQiyi\",\"overview\":\"A
+        watch that is ticking in reverse and a 30-day cohabitation contract puts the
+        domineering female CEO together with a pet mortician. Can the countdown on
+        her life be changed?\",\"poster\":\"/banners/v4/series/419332/posters/6264862a4cdb2.jpg\",\"seriesName\":\"Don't
+        Be Shy (2022)\",\"slug\":\"419332-\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/series/368855/banners/62096861.jpg\",\"firstAired\":\"2020-03-01\",\"id\":368855,\"image\":\"/banners/v4/series/368855/posters/60a93af8dafc5.jpg\",\"network\":\"ABC
+        (AU)\",\"overview\":\"Inspired by true events; a woman escaping a cult, a
+        refugee fleeing with his family, a father trapped in a dead-end job, and a
+        bureaucrat on the verge of a national scandal find their lives intertwined
+        in an immigration detention centre.\",\"poster\":\"/banners/v4/series/368855/posters/60a93af8dafc5.jpg\",\"seriesName\":\"Stateless\",\"slug\":\"stateless\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/301715-g2.jpg\",\"firstAired\":\"2004-10-06\",\"id\":301715,\"image\":\"/banners/posters/301715-1.jpg\",\"network\":\"C31\",\"overview\":\"The
+        Shambles was an Australian television sketch comedy program shown on the community
+        television across Australia. It was written by and stars Sean Lynch, Nathan
+        Valvo and Anthony Ziella, known on the show as Lynchy, Valvo and Sos respectively.\",\"poster\":\"/banners/posters/301715-1.jpg\",\"seriesName\":\"The
+        Shambles With Sos, Valvo \\u0026 Lynchy\",\"slug\":\"the-shambles-with-sos-valvo-and-lynchy\",\"status\":\"Ended\"},{\"aliases\":[\"Shambles\"],\"banner\":\"/banners/v4/series/420062/banners/633d234ab44ca.jpg\",\"firstAired\":\"2022-10-03\",\"id\":420062,\"image\":\"/banners/v4/series/420062/posters/633d229cf1c8a.jpg\",\"network\":\"Canal+\",\"overview\":\"When
+        she is not on stage, Florence Foresti is a woman like the others. Worse. A
+        public figure, she is also a mother in joint custody, a drifting bachelor,
+        an artist in search of inspiration, and a chronic anguish. D\xC9SORDRES invites
+        you to enter the daily life of Florence Foresti, every other week, when she
+        does not have her daughter to support, during the creation of her show \\\"Epilogue\\\",
+        in 2017. Like her dual life, where the routine rubs shoulders with glamour,
+        laughter flirts with the serious, and parody invites itself into reality.
+        A beautiful mess.\",\"poster\":\"/banners/v4/series/420062/posters/633d229cf1c8a.jpg\",\"seriesName\":\"D\xE9sordres\",\"slug\":\"desordres\",\"status\":\"Continuing\"}]}"
     headers:
-      cache-control:
+      Cache-Control:
       - private, max-age=86400
-      connection:
+      Connection:
       - keep-alive
-      content-type:
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Sat, 09 May 2020 14:40:09 GMT
-      transfer-encoding:
+      Date:
+      - Wed, 22 May 2024 14:33:42 GMT
+      Transfer-Encoding:
       - chunked
-      vary:
+      Vary:
       - Accept-Language
-      via:
-      - 1.1 449f2b51e83bf8ba5fa5e65ce60bc277.cloudfront.net (CloudFront)
-      x-amz-cf-id:
-      - sOqvebbUsqGIDB93iUcTFcZV2wmg1ELWQL04rT8r_NkjLsZE2xcxBw==
-      x-amz-cf-pop:
-      - ZRH50-C1
-      x-cache:
+      Via:
+      - 1.1 68c9162ccc29f8f3ca30be36950cea58.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - _EMd4fBsoi5MiBhCQJGlOtNRekyq6k_W3RlWu8btzh3jr-WOwYNlMQ==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
       - Miss from cloudfront
-      x-powered-by:
+      X-Powered-By:
       - Thundar!
-      x-thetvdb-api-version:
+      X-Thetvdb-Api-Version:
       - 3.0.0
     status:
       code: 200
@@ -179,11 +139,11 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Accept-Language:
       - en
       Authorization:
-      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
       Connection:
       - keep-alive
       Content-Type:
@@ -194,49 +154,46 @@ interactions:
     uri: https://api.thetvdb.com/series/161511
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAA0xT226cMBD9lREvbaVdgpcsS3jLRb08pK2apHmI+jAbBnAXbORLCI3y7x17d5tK
-        CJgzxzNn7OOXpEaHSfWSyDqpRCHWQiwSS0aS/cJIsinFaZ4coa84EIM3HX97shbe39184Cz2Ei3Z
-        pHr4FahotWKaEJwatXVkONr/2JN9k6VIf48t57eoVMy3BsdOPmJ/ZLT5gdKgQuOYsv850Ua2Ur0R
-        RXEgWofOs4rkUisnlZcqLpfGunNpKMyzykS2FCt+OKPITdrs4kR6cpKH+wfG6VeRZryKuSopMg57
-        VK3HNsSkOG5JGQ4euOtA9czIlcEBE94K/UTmSdIUJIXZWo0KPhpUO/iEfY9tRwakBdcRjEb7Gixr
-        7glqrEE3HD2DHXjmBUhVe+uM1N7GgEbil3KwkzUjU6dhkq7T3kEnB5i072vYUpqm0HDDR72AkUyH
-        o2XU8Ulw/SaF+44Oit5ZUNoBuqhmiwZsaMF6uDijvXSOlQ1a0RwoM3T4RAvoiFeOaC2xZO6uVSzQ
-        9FqbFC78vl5QGRdAo72qYcKZx9bQGj2BH3kibicdhalZfwq3ocOAcxS1JW6/I0A1Q4OD7GeYtYed
-        0tMCtvsWgc0UpQFH3euW7cq9DK8NI9AzPjpeFvYpktFQGg/TuruRL0Fwh1iXZZ7n5aZgS7NrrnD+
-        1twTRYewagyHGxK3ezucVVkG36+DRdAFs1XJ7c/l9TkDcqi30ULOcdWiKINz/uC4ki7CN58zkZ9u
-        yqIMJev6zZzZepkVIPJqVVTrs2P2YmZ5m3A3eZN+HLqd/R9e8r7yJTldbQLc+6DGHi/qkq/F6+tf
-        AAAA//8DAMAxIZ/uAwAA
+      string: '{"data":{"id":161511,"seriesId":"","seriesName":"Shameless (US)","aliases":["Shameless:
+        Hall of Shame"],"season":"11","poster":"posters/161511-1.jpg","banner":"graphical/161511-g3.jpg","fanart":"fanart/original/161511-28.jpg","status":"Ended","firstAired":"2011-01-09","network":"Showtime","networkId":"212","runtime":"55","language":"en","genre":["Comedy","Drama"],"overview":"Chicagoan
+        Frank Gallagher is the proud single dad of six smart, industrious, independent
+        kids, who without him would be... frankly, perhaps better off. When Frank''s
+        not at the bar spending what little money they have, he''s passed out on the
+        floor. But the kids have found ways to grow up in spite of him. They may not
+        be like any family you know, but they make no apologies for being exactly
+        who they are.","lastUpdated":1709675824,"airsDayOfWeek":"Sunday","airsTime":"9:00
+        PM","rating":"TV-MA","imdbId":"tt1586680","zap2itId":"","added":"2010-05-06
+        13:26:59","addedBy":171,"siteRating":9,"siteRatingCount":4279,"slug":"shameless-us"}}'
     headers:
-      age:
-      - '60317'
-      cache-control:
+      Age:
+      - '6719'
+      Cache-Control:
       - private, max-age=86400
-      connection:
+      Connection:
       - keep-alive
-      content-encoding:
+      Content-Encoding:
       - gzip
-      content-type:
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Fri, 08 May 2020 21:54:52 GMT
-      last-modified:
-      - Fri, 01 May 2020 11:51:16 GMT
-      transfer-encoding:
+      Date:
+      - Wed, 22 May 2024 12:41:43 GMT
+      Last-Modified:
+      - Tue, 05 Mar 2024 21:57:04 GMT
+      Transfer-Encoding:
       - chunked
-      vary:
+      Vary:
       - Accept-Encoding,Accept-Language
-      via:
-      - 1.1 449f2b51e83bf8ba5fa5e65ce60bc277.cloudfront.net (CloudFront)
-      x-amz-cf-id:
-      - DLu1rLWYMIjKtpjO8O0-4Tx5UQ2vM6Z46Ivc0V05h2KtNT3LHXVrSA==
-      x-amz-cf-pop:
-      - ZRH50-C1
-      x-cache:
+      Via:
+      - 1.1 c6ccd07e1e50408d404ed1f9dd2506ce.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - CDs-JnWF3elE_ZI5hwwinz7L4BLBdmlBfPBq_ZClENPr3r0B8_CukA==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
       - Hit from cloudfront
-      x-powered-by:
+      X-Powered-By:
       - Thundar!
-      x-thetvdb-api-version:
+      X-Thetvdb-Api-Version:
       - 3.0.0
     status:
       code: 200
@@ -247,11 +204,11 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Accept-Language:
       - en
       Authorization:
-      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
       Connection:
       - keep-alive
       Content-Type:
@@ -259,50 +216,45 @@ interactions:
       User-Agent:
       - Subliminal/2.1
     method: GET
-    uri: https://api.thetvdb.com/series/161511/episodes/query?airedEpisode=1&airedSeason=8&page=1
+    uri: https://api.thetvdb.com/series/161511/episodes/query?airedSeason=8&airedEpisode=1&page=1
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAA3RUS3PaMBD+K1udgWIeJvgGpI90Sg9NUw6ZHBZrjVVkySPJ0DTDf+8Km0yYTm/a
-        h/b7dveTXoRWZu9F9iIK5XwQWdITGruDod98MI3WPVE7OrTnU09IDCiyxxehpMjS0Wg2n8x7ApUj
-        eU/orRHZzZV9dyuy2WiUpmnn/lArbyV9a6otuTMYdR6sSGRiQ7Ck3FYEmxIDbGgwGMBHh2b/TvRa
-        rotYh1NHw2TWT5L+cMqRXUM+3Ad03NPjEzPlpDzYsynuUBlYDmCN+a01qKXgjKNTgdr4F1sahtLa
-        x4A9kDsoOjLEj5LgE2qNu5JToVBGQiip8qQP5OGoQgmVNfQMwcK2cQbQwwqdBh+rxVzlQBm+rQKa
-        nKBwtoK1NSpH7ksxG/BHYtpgiwK4T8nx0tp9U/tYtLB5wzEDXAIMHQFrdKEiExhPaanMbgBfVQ2S
-        UHeMGBU85k4VihFDnGOcaBf1dusUhedurEAVuR0HbROYAyBUFMo+d9rkJKHEPxR5VLgn4BUZyWOw
-        juFylPFWwcfa4UFxRRE1ZHYN7igq63qzZMTVbNk+RXlZBgo8iBWnspuTfGmPD063RhTlQ83CiztP
-        pulwmszmyYw3fJC3yudRiTGPzTcSZOtfpbFzVWIdotmKG7fe6ia8Jt1Mo8Y0mY5yW8K/T9JkmiTv
-        O8UPftW7SJOXSv4u0jqHr7gun8+QrHm/KBjxwq3DZfeSeI70P3/H/hJQldxGJBFCOp7MJsmQCeTW
-        BBbCdwysgqjWn/31gv2h5HYWTSht23drS3l5NfP4apIxJKNsOs9Gw8uVjZKh5JR08ur6TGpX8l8g
-        xmn0eX4yF7jZW3NlGxP/jjEPUPm15R2LbHh6Ov0FAAD//wMAZJZ7TGkEAAA=
+      string: '{"links":{"first":1,"last":1,"next":null,"prev":null},"data":[{"id":6227949,"airedSeason":8,"airedSeasonID":722666,"airedEpisodeNumber":1,"episodeName":"We
+        Become What We... Frank!","firstAired":"2017-11-05","guestStars":[],"directors":["Iain
+        B. MacDonald"],"writers":["John Wells"],"overview":"The Gallaghers find themselves
+        with money to burn as Carl sells their inheritance from Monica. Fiona swears
+        off random hookups to focus on her new apartment building. Lip deals with
+        the sacrifice that comes with sobriety. Frank emerges out of a meth-induced
+        haze to make amends for decades of depravity.","language":{"episodeName":"en","overview":"en"},"productionCode":"","showUrl":"","lastUpdated":1668554355,"dvdDiscid":"","dvdSeason":8,"dvdEpisodeNumber":1,"dvdChapter":null,"absoluteNumber":85,"filename":"episodes/161511/6227949.jpg","seriesId":161511,"lastUpdatedBy":2302046,"airsAfterSeason":null,"airsBeforeSeason":null,"airsBeforeEpisode":null,"imdbId":"tt6347410","contentRating":"TV-MA","thumbAuthor":1,"thumbAdded":"2019-11-13
+        12:59:20","thumbWidth":"640","thumbHeight":"360","siteRating":7,"siteRatingCount":135,"isMovie":0}]}'
     headers:
-      age:
-      - '50943'
-      cache-control:
+      Age:
+      - '35524'
+      Cache-Control:
       - private, max-age=86400
-      connection:
+      Connection:
       - keep-alive
-      content-encoding:
+      Content-Encoding:
       - gzip
-      content-type:
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Sat, 09 May 2020 00:31:06 GMT
-      transfer-encoding:
+      Date:
+      - Wed, 22 May 2024 04:41:38 GMT
+      Transfer-Encoding:
       - chunked
-      vary:
+      Vary:
       - Accept-Encoding,Accept-Language
-      via:
-      - 1.1 449f2b51e83bf8ba5fa5e65ce60bc277.cloudfront.net (CloudFront)
-      x-amz-cf-id:
-      - 6fzW3dPzkozSpgEstE52zPHXq2_HysJlE1cicOBFLGt1jjgUkQnr4A==
-      x-amz-cf-pop:
-      - ZRH50-C1
-      x-cache:
+      Via:
+      - 1.1 56d84f665e9029878cb3adcd83a21026.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - _Cg9DA7mj8P0S8rFgqthYkuHWeeyoNlPrz6k9u0doSJzs1MqtXC_zA==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
       - Hit from cloudfront
-      x-powered-by:
+      X-Powered-By:
       - Thundar!
-      x-thetvdb-api-version:
+      X-Thetvdb-Api-Version:
       - 3.0.0
     status:
       code: 200
@@ -313,11 +265,11 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Accept-Language:
       - en
       Authorization:
-      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
       Connection:
       - keep-alive
       Content-Type:
@@ -328,49 +280,44 @@ interactions:
     uri: https://api.thetvdb.com/episodes/6227949
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAA3RTy3LbMAz8FZRn2zH9kGPdbKePdOoemqY+dHqARUhiQ5EakrInzeTfC8ZyJp5O
-        bwKwxC6A1ZNQGFHkT0IrkWeTyWI5Ww4Eak/qjjA4K/Lri/j2RuSLySTLsj79vtXBKfraNXvyIpcD
-        QX0GGxK52BGsqXANwa7GCDsajUbwwaN9eCcGotQ+xFXqw9DJWC6GUg7Hc65UHYV4F9EHkf/8NRCK
-        QUV0L6G4RW1hPYItFjfOolGCEUevI53qn11tmcqYkAruQP6g6cgU32uCj2gMVjVDodRWQaypCWQO
-        FOCoYw2Ns/QI0cG+8xYwwAa9gZC6Jaz2oC2/1hFtQVB618DWWV0gz6VZDYQjsWxwZQk8p+J67dxD
-        14bUtHRFxzUL3AIsHQFb9LEhG5lPG6VtNYIvugVFaHpFzAoBC69LzYwx7TFttK8Gt/ea4mO/VqCG
-        fMVF10XWAAgNxXrIk3YFKajxDyUdDT4Q8Ims4jU4z3QFqvSq5M/W40FzR76DQVt1WFEyyeVlyYqL
-        3XL8PBCtd0wUeREbhnKaQaF2x3tvToHBEO9b9l26uZxn47lcLOWCL3xQNzoUyYkJx+EbC3L0r9M4
-        uamxjSm0nTFsyX1wpouvoOt58pgh20s+tQhXMpNzKa96x49+t1WSyUelcJtkvZQvtK4fXyjZ82FV
-        MuNZW8/L6TXxHul/+V79uaAbtU9MIsZsOlvM5JgFFM5GNsI3jOyC5NYfw+2K87HmcVZdrN1p7lOs
-        1PmvWaa/Rk5BTvL5Mp+Mz092WsWaIdnsNfWJdFVHzk2zlAv8y5zpFm/Djessw+SUF6jD1vGNRT5+
-        fv4LAAD//wMA134xOzIEAAA=
+      string: '{"data":{"id":6227949,"airedSeason":8,"airedSeasonID":722666,"airedEpisodeNumber":1,"episodeName":"We
+        Become What We... Frank!","firstAired":"2017-11-05","guestStars":[],"directors":["Iain
+        B. MacDonald"],"writers":["John Wells"],"overview":"The Gallaghers find themselves
+        with money to burn as Carl sells their inheritance from Monica. Fiona swears
+        off random hookups to focus on her new apartment building. Lip deals with
+        the sacrifice that comes with sobriety. Frank emerges out of a meth-induced
+        haze to make amends for decades of depravity.","language":{"episodeName":"en","overview":"en"},"productionCode":"","showUrl":"","lastUpdated":1668554355,"dvdDiscid":"","dvdSeason":8,"dvdEpisodeNumber":1,"dvdChapter":null,"absoluteNumber":85,"filename":"episodes/161511/6227949.jpg","seriesId":161511,"lastUpdatedBy":2302046,"airsAfterSeason":null,"airsBeforeSeason":null,"airsBeforeEpisode":null,"imdbId":"tt6347410","contentRating":"TV-MA","thumbAuthor":1,"thumbAdded":"2019-11-13
+        12:59:20","thumbWidth":"640","thumbHeight":"360","siteRating":7,"siteRatingCount":135,"isMovie":0}}'
     headers:
-      age:
-      - '77510'
-      cache-control:
+      Age:
+      - '35524'
+      Cache-Control:
       - private, max-age=86400
-      connection:
+      Connection:
       - keep-alive
-      content-encoding:
+      Content-Encoding:
       - gzip
-      content-type:
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Fri, 08 May 2020 17:08:19 GMT
-      last-modified:
+      Date:
+      - Wed, 22 May 2024 04:41:38 GMT
+      Last-Modified:
       - Thu, 01 Jan 1970 00:00:00 GMT
-      transfer-encoding:
+      Transfer-Encoding:
       - chunked
-      vary:
+      Vary:
       - Accept-Encoding,Accept-Language
-      via:
-      - 1.1 449f2b51e83bf8ba5fa5e65ce60bc277.cloudfront.net (CloudFront)
-      x-amz-cf-id:
-      - z5HowkL_jDb9XFQE-yXYoVHidd0hu8m6XfOZc4myl65k2wlFgpyn5w==
-      x-amz-cf-pop:
-      - ZRH50-C1
-      x-cache:
+      Via:
+      - 1.1 e33c092c8429c324c2810046683bf2f2.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - DQzjiezwzy9pHTjWPPjaIHPRwXwp8hgTIuwl_thQRykWDQDf4nAR0A==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
       - Hit from cloudfront
-      x-powered-by:
+      X-Powered-By:
       - Thundar!
-      x-thetvdb-api-version:
+      X-Thetvdb-Api-Version:
       - 3.0.0
     status:
       code: 200

@@ -5,11 +5,11 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Accept-Language:
       - en
       Authorization:
-      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
       Connection:
       - keep-alive
       Content-Type:
@@ -20,48 +20,54 @@ interactions:
     uri: https://api.thetvdb.com/search/series?name=alex+inc
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAA4xUTZPUNhD9K12+BKrsYWeXj929DRuK5BBCsUk4pDi0pbatHY3kSPIYQ/Hf8yTP
-        BkKqICdbH939+r2n/lhpTlxd//mxYms4SsT/u7pq2TkJ1bWbrK2rzoSYdiaIrq6r87PtZXPRnF9W
-        dWWwcXF++fTiCf4P3AvOH62x8dHoY8rf9UJzvrkbe8Q4SbMPe9zcPb+hB7/fPsSmP0o4GpnzLvXT
-        QsbRYCIdjG4uziLNJg3E+HRC7DQhBe2NxgXeS6Q0CKnAHxbSokw03lHy9NdkUsnSe6/pzrclVJuj
-        ID3Oc1QbGEsnMwGU1eQ7iolDMq5HvXaKxkmMG0Bc27mnJEowEl/xIbe8s/K+pp+dyveinXrsMfYa
-        41TeSZwmEFu9cBoUfqr/P9nbq6vHzfasuSf72ZPHV8++wXU5b7b/ofqVUXuxXot3X7ENmPQLqz2B
-        J3bkgzaOw0JJxKEI9SbYmqw5ZkaKDIMEGjmIS7Gml+JDv2rynEPLgeuy8FbjWjQZVk0754zUWdSi
-        lA+jD5wEIs0uU/4acdpEoT/YWlk29HYwVmhmu89lB39AiQ6pSvHCEGlecujd5IzHvukHimrwHmgj
-        iqAdJxzsgqNE7QI1U5jQZxf8AQs1yMEotjRadmkFraeQy2WMUM5oyQenZBoNI0bfWzH5sYmigqTP
-        qVRGr+nlTbN9ut3QLSKjhxfRmsqcZ6NyIuDps+tyLzEFdiBw9DPON/TbILFUt5MGP2Jlnx1oQHWG
-        xa2xJi3Z3R94pNbbFDMLuKdSMCqflQZXnpA5xLW3QjyPrE7hB4gwrO+AsWgz3+OkNT7Id5CEXoyC
-        8HhFekM/Ad8xS1nUL2BpDGgq52qFJjfCsUYlbpHhQZwUSMK7HcStfaKN9WXhOVo/Z57bANESFJqL
-        2iD6hyxaOPopPlzpU9510AE9OluGQnFSaShnbQVG6PASna7pDS81ZQfEIiIGhMj4JV6mk2CFodzO
-        4p2Au1i8mSkvbvvS3x281cFHmZQ5i1d4/Jd36ObFrzX9yAAG+WmXgnc1bGItaZ9x5ISmK0aCJBha
-        fkrfmSiwAd2uYN/ez6V/nurnIQMwJxM2ZXw1vmvK4Dmcrn01ed59+hsAAP//AwDHjGHG8QUAAA==
+      string: '{"data":[{"aliases":[],"banner":"/banners/graphical/328635-g2.jpg","firstAired":"2018-03-28","id":328635,"image":"/banners/posters/328635-2.jpg","network":"ABC
+        (US)","overview":"Based on the podcast \"StartUp\" from Gimlet Media, Alex
+        Schuman embarks on the adventure of starting his own company. Having already
+        found success professionally, as a radio journalist, and personally, as a
+        husband and father of two, Alex isn''t satisfied just coasting along and decides
+        to quit his job and start over on his own terms. He quickly learns that building
+        his own business isn''t going to be as easy as he thought, but the payoff
+        will be rewarding.","poster":"/banners/posters/328635-2.jpg","seriesName":"Alex,
+        Inc.","slug":"alex-inc","status":"Ended"},{"aliases":[],"banner":"/banners/v4/series/75497/banners/663fb15bf1aae.jpg","firstAired":"1994-10-08","id":75497,"image":"/banners/posters/75497-2.jpg","network":"Nickelodeon","overview":"Alex
+        Mack is an ordinary teenage girl, living with her parents, George and Barbara,
+        and older sister, Annie, in the corporate town of Paradise Valley. While walking
+        home after her first day of junior high school, she is nearly hit by a truck
+        from a chemical plant, and during the incident, she is drenched with a top-secret
+        chemical called GC-161. She soon discovers that it gave her strange powers.
+        These include telekinesis, the ability to zap bolts of electricity from her
+        fingers, and the capacity to morph into a mobile puddle of metallic liquid.
+        However, her powers prove to be unpredictable (such as when her skin starts
+        glowing brightly while she''s nervous). She confides only in Annie and her
+        best friend, Ray, choosing to keep her powers a secret from everyone else,
+        including her parents, for fear of what the chemical plant CEO, Danielle Atron,
+        will do to her if she finds out.","poster":"/banners/posters/75497-2.jpg","seriesName":"The
+        Secret World of Alex Mack","slug":"the-secret-world-of-alex-mack","status":"Ended"}]}'
     headers:
-      cache-control:
+      Cache-Control:
       - private, max-age=86400
-      connection:
+      Connection:
       - keep-alive
-      content-encoding:
+      Content-Encoding:
       - gzip
-      content-type:
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Sat, 09 May 2020 14:40:07 GMT
-      transfer-encoding:
+      Date:
+      - Wed, 22 May 2024 14:33:41 GMT
+      Transfer-Encoding:
       - chunked
-      vary:
+      Vary:
       - Accept-Encoding,Accept-Language
-      via:
-      - 1.1 7e81b1a3e22ce96cdfb0b6c2db121d58.cloudfront.net (CloudFront)
-      x-amz-cf-id:
-      - Q5zratCHIJXIJv2lqNTIN-H4effggLW5tzyJ4sFeCJyEGXrv33yZjw==
-      x-amz-cf-pop:
-      - ZRH50-C1
-      x-cache:
+      Via:
+      - 1.1 27a35654821ee52d8aa69c940ad5de7e.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - N0QOI77qsxZ-m341BagusTovxWi4t2NZy9bosunD6kU4fp8_ZD-bPQ==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
       - Miss from cloudfront
-      x-powered-by:
+      X-Powered-By:
       - Thundar!
-      x-thetvdb-api-version:
+      X-Thetvdb-Api-Version:
       - 3.0.0
     status:
       code: 200
@@ -72,11 +78,11 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Accept-Language:
       - en
       Authorization:
-      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
       Connection:
       - keep-alive
       Content-Type:
@@ -87,41 +93,46 @@ interactions:
     uri: https://api.thetvdb.com/series/328635
   response:
     body:
-      string: !!python/unicode '{"data":{"id":328635,"seriesId":"204745","seriesName":"Alex,
-        Inc.","aliases":[],"season":"1","poster":"posters/328635-2.jpg","banner":"graphical/328635-g2.jpg","fanart":"fanart/original/328635-1.jpg","status":"Ended","firstAired":"2018-03-28","network":"ABC
-        (US)","networkId":"5","runtime":"25","language":"en","genre":["Comedy"],"overview":"A
-        guy in his mid-30s with a wife and two kids makes the crazy decision to quit
-        his good job and dive into the brave new world of starting a business.","lastUpdated":1573797600,"airsDayOfWeek":"Wednesday","airsTime":"8:30
-        PM","rating":"TV-PG","imdbId":"tt6466948","zap2itId":"SH02696747","added":"2017-05-16
+      string: '{"data":{"id":328635,"seriesId":"","seriesName":"Alex, Inc.","aliases":[],"season":"1","poster":"posters/328635-2.jpg","banner":"graphical/328635-g2.jpg","fanart":"fanart/original/328635-1.jpg","status":"Ended","firstAired":"2018-03-28","network":"ABC
+        (US)","networkId":"5","runtime":"25","language":"en","genre":["Comedy"],"overview":"Based
+        on the podcast \"StartUp\" from Gimlet Media, Alex Schuman embarks on the
+        adventure of starting his own company. Having already found success professionally,
+        as a radio journalist, and personally, as a husband and father of two, Alex
+        isn''t satisfied just coasting along and decides to quit his job and start
+        over on his own terms. He quickly learns that building his own business isn''t
+        going to be as easy as he thought, but the payoff will be rewarding.","lastUpdated":1629325689,"airsDayOfWeek":"Wednesday","airsTime":"8:30
+        PM","rating":"TV-PG","imdbId":"tt6466948","zap2itId":"","added":"2017-05-16
         10:29:38","addedBy":95425,"siteRating":5.5,"siteRatingCount":58,"slug":"alex-inc"}}'
     headers:
-      age:
-      - '18679'
-      cache-control:
+      Age:
+      - '46573'
+      Cache-Control:
       - private, max-age=86400
-      connection:
+      Connection:
       - keep-alive
-      content-length:
-      - '732'
-      content-type:
+      Content-Encoding:
+      - gzip
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Sat, 09 May 2020 09:28:49 GMT
-      last-modified:
-      - Fri, 15 Nov 2019 06:00:00 GMT
-      vary:
-      - Accept-Language
-      via:
-      - 1.1 7e81b1a3e22ce96cdfb0b6c2db121d58.cloudfront.net (CloudFront)
-      x-amz-cf-id:
-      - MXRhEhi8r3gjgWdnBJLS2nEHdPSe33P_RSpNkiDGU09n-IIYtH9Fkg==
-      x-amz-cf-pop:
-      - ZRH50-C1
-      x-cache:
+      Date:
+      - Wed, 22 May 2024 01:37:28 GMT
+      Last-Modified:
+      - Wed, 18 Aug 2021 22:28:09 GMT
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding,Accept-Language
+      Via:
+      - 1.1 d780d90e1f6b43875e14c416b368d3b6.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - fvcmfi28ww1e3Kp1Up4LanKhZkmzs7As2Q5A-iuO7ZBIj23EdxOc3w==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
       - Hit from cloudfront
-      x-powered-by:
+      X-Powered-By:
       - Thundar!
-      x-thetvdb-api-version:
+      X-Thetvdb-Api-Version:
       - 3.0.0
     status:
       code: 200
@@ -132,11 +143,11 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Accept-Language:
       - en
       Authorization:
-      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
       Connection:
       - keep-alive
       Content-Type:
@@ -144,38 +155,40 @@ interactions:
       User-Agent:
       - Subliminal/2.1
     method: GET
-    uri: https://api.thetvdb.com/series/328635/episodes/query?airedEpisode=4&airedSeason=1&page=1
+    uri: https://api.thetvdb.com/series/328635/episodes/query?airedSeason=1&airedEpisode=4&page=1
   response:
     body:
-      string: !!python/unicode '{"links":{"first":1,"last":1,"next":null,"prev":null},"data":[{"id":6627151,"airedSeason":1,"airedSeasonID":745822,"airedEpisodeNumber":4,"episodeName":"The
+      string: '{"links":{"first":1,"last":1,"next":null,"prev":null},"data":[{"id":6627151,"airedSeason":1,"airedSeasonID":745822,"airedEpisodeNumber":4,"episodeName":"The
         Nanny","firstAired":"2018-04-17","guestStars":[],"directors":[],"writers":[],"overview":"Alex
         thinks he fired the baby sitter, but the situation gets complicated when she
-        shows up for work.","language":{"episodeName":"en","overview":"en"},"productionCode":"","showUrl":"","lastUpdated":1524161520,"dvdDiscid":"","dvdSeason":null,"dvdEpisodeNumber":null,"dvdChapter":null,"absoluteNumber":null,"filename":"episodes/328635/6627151.jpg","seriesId":328635,"lastUpdatedBy":1,"airsAfterSeason":null,"airsBeforeSeason":null,"airsBeforeEpisode":null,"imdbId":"","contentRating":"TV-PG","thumbAuthor":1,"thumbAdded":"2019-11-13
+        shows up for work.","language":{"episodeName":"en","overview":"en"},"productionCode":"","showUrl":"","lastUpdated":1597244363,"dvdDiscid":"","dvdSeason":null,"dvdEpisodeNumber":null,"dvdChapter":null,"absoluteNumber":null,"filename":"episodes/328635/6627151.jpg","seriesId":328635,"lastUpdatedBy":201648,"airsAfterSeason":null,"airsBeforeSeason":null,"airsBeforeEpisode":null,"imdbId":"","contentRating":"TV-PG","thumbAuthor":1,"thumbAdded":"2019-11-13
         12:53:34","thumbWidth":"640","thumbHeight":"360","siteRating":0,"siteRatingCount":0,"isMovie":0}]}'
     headers:
-      cache-control:
+      Age:
+      - '27100'
+      Cache-Control:
       - private, max-age=86400
-      connection:
+      Connection:
       - keep-alive
-      content-length:
-      - '874'
-      content-type:
+      Content-Length:
+      - '879'
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Sat, 09 May 2020 14:40:08 GMT
-      vary:
+      Date:
+      - Wed, 22 May 2024 07:02:02 GMT
+      Vary:
       - Accept-Language
-      via:
-      - 1.1 7e81b1a3e22ce96cdfb0b6c2db121d58.cloudfront.net (CloudFront)
-      x-amz-cf-id:
-      - tvoHlqZaagcvRVlVLpP-H232CT8tBJJ4p0oQIYJF_PmxID7E12FtFA==
-      x-amz-cf-pop:
-      - ZRH50-C1
-      x-cache:
-      - Miss from cloudfront
-      x-powered-by:
+      Via:
+      - 1.1 f13924e40949c7e0a5bd0c7e333695f2.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - lCFYGCItadWEGzP2B6klil8iOMTguLC1g0OmF_uWGqLAXX11Vf4O9w==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
+      - Hit from cloudfront
+      X-Powered-By:
       - Thundar!
-      x-thetvdb-api-version:
+      X-Thetvdb-Api-Version:
       - 3.0.0
     status:
       code: 200
@@ -186,11 +199,11 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Accept-Language:
       - en
       Authorization:
-      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
       Connection:
       - keep-alive
       Content-Type:
@@ -201,37 +214,39 @@ interactions:
     uri: https://api.thetvdb.com/episodes/6627151
   response:
     body:
-      string: !!python/unicode '{"data":{"id":6627151,"airedSeason":1,"airedSeasonID":745822,"airedEpisodeNumber":4,"episodeName":"The
+      string: '{"data":{"id":6627151,"airedSeason":1,"airedSeasonID":745822,"airedEpisodeNumber":4,"episodeName":"The
         Nanny","firstAired":"2018-04-17","guestStars":[],"directors":[],"writers":[],"overview":"Alex
         thinks he fired the baby sitter, but the situation gets complicated when she
-        shows up for work.","language":{"episodeName":"en","overview":"en"},"productionCode":"","showUrl":"","lastUpdated":1524161520,"dvdDiscid":"","dvdSeason":null,"dvdEpisodeNumber":null,"dvdChapter":null,"absoluteNumber":null,"filename":"episodes/328635/6627151.jpg","seriesId":328635,"lastUpdatedBy":1,"airsAfterSeason":null,"airsBeforeSeason":null,"airsBeforeEpisode":null,"imdbId":"","contentRating":"TV-PG","thumbAuthor":1,"thumbAdded":"2019-11-13
+        shows up for work.","language":{"episodeName":"en","overview":"en"},"productionCode":"","showUrl":"","lastUpdated":1597244363,"dvdDiscid":"","dvdSeason":null,"dvdEpisodeNumber":null,"dvdChapter":null,"absoluteNumber":null,"filename":"episodes/328635/6627151.jpg","seriesId":328635,"lastUpdatedBy":201648,"airsAfterSeason":null,"airsBeforeSeason":null,"airsBeforeEpisode":null,"imdbId":"","contentRating":"TV-PG","thumbAuthor":1,"thumbAdded":"2019-11-13
         12:53:34","thumbWidth":"640","thumbHeight":"360","siteRating":0,"siteRatingCount":0,"isMovie":0}}'
     headers:
-      cache-control:
+      Age:
+      - '27100'
+      Cache-Control:
       - private, max-age=86400
-      connection:
+      Connection:
       - keep-alive
-      content-length:
-      - '819'
-      content-type:
+      Content-Length:
+      - '824'
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Sat, 09 May 2020 14:40:08 GMT
-      last-modified:
+      Date:
+      - Wed, 22 May 2024 07:02:02 GMT
+      Last-Modified:
       - Thu, 01 Jan 1970 00:00:00 GMT
-      vary:
+      Vary:
       - Accept-Language
-      via:
-      - 1.1 7e81b1a3e22ce96cdfb0b6c2db121d58.cloudfront.net (CloudFront)
-      x-amz-cf-id:
-      - kWallNGt6eBWWznQDrdOhqZl4WSw6JNvJ4ckByjGzcDF-W3KgBf4hA==
-      x-amz-cf-pop:
-      - ZRH50-C1
-      x-cache:
-      - Miss from cloudfront
-      x-powered-by:
+      Via:
+      - 1.1 f2dd3b65381fad5aad94ac94ad7043f8.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - RKEz0sDnXXfmoAih5ZiTTNZN9oIH788qSFuSLCb7Bh_5LXRVwkfmxA==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
+      - Hit from cloudfront
+      X-Powered-By:
       - Thundar!
-      x-thetvdb-api-version:
+      X-Thetvdb-Api-Version:
       - 3.0.0
     status:
       code: 200

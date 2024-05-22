@@ -1,0 +1,210 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br, zstd
+      Accept-Language:
+      - en
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Subliminal/2.1
+    method: GET
+    uri: https://api.themoviedb.org/3/search/tv?api_key=3dac925d5d494853ea6ef9161011fbb3&query=dallas&language=en-US&page=1&year=2012
+  response:
+    body:
+      string: '{"page":1,"results":[{"adult":false,"backdrop_path":"/xCyr9ay1lMgkA6HV2ugiWIFQtiR.jpg","genre_ids":[18],"id":37759,"origin_country":["US"],"original_language":"en","original_name":"Dallas","overview":"J.R.,
+        Bobby and Sue Ellen Ewing are all back at Southfork, with plenty of secrets,
+        schemes and betrayals in mind. This time, they''re joined by the next generation
+        of Ewings, who take ambition and deception to a new level.","popularity":143.924,"poster_path":"/c76QP3y5PnZ5L1wUvRDqUuP2bd.jpg","first_air_date":"2012-06-13","name":"Dallas","vote_average":6.9,"vote_count":63},{"adult":false,"backdrop_path":"/bRrm6IOUFc79aIO7lvwtZ2z48sS.jpg","genre_ids":[10764,99],"id":10179,"origin_country":["US"],"original_language":"en","original_name":"Dallas
+        Cowboys Cheerleaders: Making the Team","overview":"Reality show following
+        the auditioning process and making of the annual Dallas Cowboys Cheerleading
+        Squad.","popularity":29.668,"poster_path":"/gZSwy6ByE5uY9pHsXVFqAzdobTn.jpg","first_air_date":"2006-09-29","name":"Dallas
+        Cowboys Cheerleaders: Making the Team","vote_average":7.7,"vote_count":13},{"adult":false,"backdrop_path":null,"genre_ids":[10764],"id":62220,"origin_country":[],"original_language":"en","original_name":"Donna
+        Decorates Dallas","overview":"Interior designer Donna Moss and her team give
+        credence to the notion that everything''s bigger in Texas as they undertake
+        dramatic room makeovers in some of the most fabulous homes in the Dallas area.","popularity":0.749,"poster_path":null,"first_air_date":"2011-11-12","name":"Donna
+        Decorates Dallas","vote_average":0.0,"vote_count":0},{"adult":false,"backdrop_path":"/bFa172o4JUJZExyWPD9dKwilgDA.jpg","genre_ids":[35,18],"id":39302,"origin_country":["US"],"original_language":"en","original_name":"GCB","overview":"Amanda
+        Vaughn, once the ultimate high school \"mean girl,\" is forced to return home
+        in disgrace after her marriage ends in scandal. As Amanda and her teenage
+        kids try to adjust to their new lives, the ladies from her past alternate
+        between sympathy and scheming.","popularity":47.302,"poster_path":"/cBRvJhjEoVYWqYwTR3P7T6zsVCi.jpg","first_air_date":"2012-03-04","name":"GCB","vote_average":6.0,"vote_count":31}],"total_pages":1,"total_results":4}'
+    headers:
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      Cache-Control:
+      - public, max-age=22265
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - br
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Wed, 22 May 2024 22:47:55 GMT
+      ETag:
+      - W/"5f7fa9394e54d2124364586b15d5c5e4"
+      Server:
+      - openresty
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - accept-encoding
+      - Origin
+      Via:
+      - 1.1 68c9162ccc29f8f3ca30be36950cea58.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - hmMcfl4ZKzaMVIJhRnmjG39wFJuJvHUK9WTGZA5HS5LTpRBR19xr1A==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
+      - RefreshHit from cloudfront
+      x-memc:
+      - MISS, STORE
+      x-memc-age:
+      - '0'
+      x-memc-expires:
+      - '22751'
+      x-memc-key:
+      - 24f7e98e5d6f8eb17a6a6ff5b4ba4af0
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br, zstd
+      Accept-Language:
+      - en
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Subliminal/2.1
+    method: GET
+    uri: https://api.themoviedb.org/3/tv/37759?api_key=3dac925d5d494853ea6ef9161011fbb3&append_to_response=external_ids
+  response:
+    body:
+      string: '{"adult":false,"backdrop_path":"/xCyr9ay1lMgkA6HV2ugiWIFQtiR.jpg","created_by":[{"id":1212323,"credit_id":"5258eae7760ee3466188f5b4","name":"David
+        Jacobs","original_name":"David Jacobs","gender":2,"profile_path":"/dZ6kv0kWS1JQ8WtHhuRXPpC7CpC.jpg"},{"id":1238640,"credit_id":"5258eae7760ee3466188f5ba","name":"Cynthia
+        Cidre","original_name":"Cynthia Cidre","gender":1,"profile_path":"/uY7HQpN0wDOEw6dy9U2YtvPEsJm.jpg"}],"episode_run_time":[45],"first_air_date":"2012-06-13","genres":[{"id":18,"name":"Drama"}],"homepage":"http://www.tnt.tv/series/dallas/","id":37759,"in_production":false,"languages":["en"],"last_air_date":"2014-09-22","last_episode_to_air":{"id":1002549,"overview":"In
+        the electrifying third season finale, the Ewings and the Rylands finally force
+        the cartel to pay the piper as some lives are saved and others are lost. Bobby
+        and Sue Ellen form a new alliance to protect the family, which pits them against
+        John Ross, who is still trying to regain control of Ewing Global and fix his
+        marriage to Pamela. And Elena is pushed to the brink when she finds out the
+        real depths of Nicolas'' betrayal. As the season comes to an end, enemies
+        are unmasked, new alliances are formed, and John Ross learns a shocking secret
+        about J.R. that sends him halfway around the globe in search of a surprising
+        new cohort.","name":"Brave New World","vote_average":0.0,"vote_count":0,"air_date":"2014-09-22","episode_number":15,"episode_type":"finale","production_code":"","runtime":45,"season_number":3,"show_id":37759,"still_path":"/nIVOxfKkPxMkkATSLAjmOqokDBV.jpg"},"name":"Dallas","next_episode_to_air":null,"networks":[{"id":41,"logo_path":"/6ISsKwa2XUhSC6oBtHZjYf6xFqv.png","name":"TNT","origin_country":"US"}],"number_of_episodes":40,"number_of_seasons":3,"origin_country":["US"],"original_language":"en","original_name":"Dallas","overview":"J.R.,
+        Bobby and Sue Ellen Ewing are all back at Southfork, with plenty of secrets,
+        schemes and betrayals in mind. This time, they''re joined by the next generation
+        of Ewings, who take ambition and deception to a new level.","popularity":143.924,"poster_path":"/c76QP3y5PnZ5L1wUvRDqUuP2bd.jpg","production_companies":[{"id":29347,"logo_path":"/y72MLXgCFQGKfJigwUzXUeUO4kX.png","name":"Warner
+        Horizon Television","origin_country":"US"}],"production_countries":[{"iso_3166_1":"US","name":"United
+        States of America"}],"seasons":[{"air_date":null,"episode_count":5,"id":49091,"name":"Specials","overview":"","poster_path":null,"season_number":0,"vote_average":0.0},{"air_date":"2012-06-13","episode_count":10,"id":49089,"name":"Season
+        1","overview":"","poster_path":"/AqRzqZlwexW23ch2XpHNsGxNQDk.jpg","season_number":1,"vote_average":7.0},{"air_date":"2013-01-28","episode_count":15,"id":49090,"name":"Season
+        2","overview":"","poster_path":"/eMjtlE8E2tuYLFC7soPaXO6ys0X.jpg","season_number":2,"vote_average":0.0},{"air_date":"2014-02-24","episode_count":15,"id":49092,"name":"Season
+        3","overview":"","poster_path":"/gxwfYs9KG1UyLWd6vYaIxAr7qby.jpg","season_number":3,"vote_average":1.0}],"spoken_languages":[{"english_name":"English","iso_639_1":"en","name":"English"}],"status":"Canceled","tagline":"","type":"Scripted","vote_average":6.9,"vote_count":63,"external_ids":{"imdb_id":"tt1723760","freebase_mid":"/m/0gffhld","freebase_id":null,"tvdb_id":242521,"tvrage_id":28960,"wikidata_id":"Q726735","facebook_id":"DallasTNT","instagram_id":null,"twitter_id":null}}'
+    headers:
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      Cache-Control:
+      - public, max-age=21745
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - br
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Wed, 22 May 2024 22:47:55 GMT
+      ETag:
+      - W/"5fa0366cc8e59df1c6d609c05b87d529"
+      Server:
+      - openresty
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding,accept-encoding
+      - Origin
+      Via:
+      - 1.1 42c937f806e6e43029a719b83b9a8612.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - zv1r3sVvjP68irUDSXdSmYAMf_yqjCiwHAjnxlPHcsHpAkUl9GTTuA==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
+      - Miss from cloudfront
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br, zstd
+      Accept-Language:
+      - en
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Subliminal/2.1
+    method: GET
+    uri: https://api.themoviedb.org/3/tv/37759/season/1/episode/3?api_key=3dac925d5d494853ea6ef9161011fbb3&append_to_response=external_ids
+  response:
+    body:
+      string: "{\"air_date\":\"2012-06-20\",\"crew\":[{\"department\":\"Writing\",\"job\":\"Writer\",\"credit_id\":\"5258eae4760ee3466188f042\",\"adult\":false,\"gender\":2,\"id\":1213093,\"known_for_department\":\"Writing\",\"name\":\"Bruce
+        Rasmussen\",\"original_name\":\"Bruce Rasmussen\",\"popularity\":4.998,\"profile_path\":\"/a5avkeMI18MZG32u7sDT5jF1cEe.jpg\"},{\"department\":\"Directing\",\"job\":\"Director\",\"credit_id\":\"5258eae4760ee3466188effc\",\"adult\":false,\"gender\":2,\"id\":112548,\"known_for_department\":\"Production\",\"name\":\"Michael
+        M. Robin\",\"original_name\":\"Michael M. Robin\",\"popularity\":6.273,\"profile_path\":null}],\"episode_number\":3,\"guest_stars\":[],\"name\":\"The
+        Price You Pay\",\"overview\":\"Just as John Ross sets out to claim his birthright
+        and make his father proud, J.R. decides to move back to Southfork, much to
+        Ann\u2019s dismay. Bitter Ewing family enemy Cliff Barnes returns and tries
+        to reconnect with his nephew, Christopher. A startling family announcement
+        offers an opportunity to heal old wounds.\",\"id\":851353,\"production_code\":\"\",\"runtime\":45,\"season_number\":1,\"still_path\":\"/9CppiKh8K1nZGJaw7wJfpXFvMBQ.jpg\",\"vote_average\":0.0,\"vote_count\":0,\"external_ids\":{\"imdb_id\":null,\"freebase_mid\":\"/m/0j_f3y6\",\"freebase_id\":null,\"tvdb_id\":4199511,\"tvrage_id\":null,\"wikidata_id\":null}}"
+    headers:
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      Cache-Control:
+      - public, max-age=3205
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - br
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Wed, 22 May 2024 22:47:55 GMT
+      ETag:
+      - W/"f89e6c7f46d63909593bc6d691fd69b5"
+      Server:
+      - openresty
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding,accept-encoding
+      - Origin
+      Via:
+      - 1.1 daf51694fe4a175a7249d39be5e22e4c.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - QQQgznbcXy-X2pi62BKr0azrF4uvujocsPnd909Nh4_D5UHcQHuD2Q==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
+      - Miss from cloudfront
+    status:
+      code: 200
+      message: OK
+version: 1

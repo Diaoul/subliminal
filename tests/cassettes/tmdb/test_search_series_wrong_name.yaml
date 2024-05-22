@@ -1,0 +1,65 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br, zstd
+      Accept-Language:
+      - en
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Subliminal/2.1
+    method: GET
+    uri: https://api.themoviedb.org/3/search/tv?api_key=3dac925d5d494853ea6ef9161011fbb3&query=The+Bing+Bag+Theory&language=en-US&page=1
+  response:
+    body:
+      string: '{"page":1,"results":[],"total_pages":1,"total_results":0}'
+    headers:
+      Age:
+      - '553'
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      Cache-Control:
+      - public, max-age=27356
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - br
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Wed, 22 May 2024 14:53:59 GMT
+      ETag:
+      - W/"0e23279b004381f72a34159d5c7dfd1f"
+      Server:
+      - openresty
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding,accept-encoding
+      - Origin
+      Via:
+      - 1.1 347b4531a9eb19c96c462a85600ac33a.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - 9dP4Rzc3GZjMIxUJG5q69FF60_wb4kWjiC8lif90lhnhNVG7joCy6A==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
+      - Hit from cloudfront
+      x-memc:
+      - MISS, STORE
+      x-memc-age:
+      - '0'
+      x-memc-expires:
+      - '27356'
+      x-memc-key:
+      - 29c3efb0f62926bde22e547ff2b93c92
+    status:
+      code: 200
+      message: OK
+version: 1

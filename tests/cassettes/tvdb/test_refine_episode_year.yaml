@@ -5,11 +5,11 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Accept-Language:
       - en
       Authorization:
-      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
       Connection:
       - keep-alive
       Content-Type:
@@ -20,337 +20,333 @@ interactions:
     uri: https://api.thetvdb.com/search/series?name=dallas
   response:
     body:
-      string: "{\"data\":[{\"aliases\":[],\"banner\":\"/banners/graphical/77092-g.jpg\"\
-        ,\"firstAired\":\"1978-4-2\",\"id\":77092,\"image\":\"/banners/posters/77092-1.jpg\"\
-        ,\"network\":\"CBS\",\"overview\":\"The world's first mega-soap, and one of\
-        \ the most popular ever produced, Dallas had it all. Beautiful women, expensive\
-        \ cars, and men playing Monopoly with real buildings. Famous for one of the\
-        \ best cliffhangers in TV history, as the world asked \\\"Who shot J.R.?\\\
-        \" \\r\\nA slow-burner to begin with, Dallas hit its stride in the 2nd season,\
-        \ with long storylines and expert character development. Dallas ruled the\
-        \ airwaves in the 1980's.\",\"poster\":\"/banners/posters/77092-1.jpg\",\"\
-        seriesName\":\"Dallas\",\"slug\":\"dallas\",\"status\":\"Ended\"},{\"aliases\"\
-        :[],\"banner\":\"/banners/graphical/242521-g5.jpg\",\"firstAired\":\"2012-6-13\"\
-        ,\"id\":242521,\"image\":\"/banners/posters/242521-6.jpg\",\"network\":\"\
-        TNT (US)\",\"overview\":\"The next generation of the Ewing family - cousins\
-        \ John Ross Ewing and Christopher Ewing - clash over the family's oil business\
-        \ and vast fortune. Roll on drama, sabotage, secrets and betrayal. Everyone\
-        \ is back and then some!\",\"poster\":\"/banners/posters/242521-6.jpg\",\"\
-        seriesName\":\"Dallas (2012)\",\"slug\":\"dallas-2012\",\"status\":\"Ended\"\
-        },{\"aliases\":[],\"banner\":null,\"firstAired\":\"2006-1-5\",\"id\":80341,\"\
-        image\":\"/banners/posters/80341-1.jpg\",\"network\":\"A\\u0026E\",\"overview\"\
-        :\"Dallas SWAT follows the action-packed, high-stress line of work and the\
-        \ elite team of law enforcement officers that make up the Dallas SWAT team.\
-        \ Every day the officers on this team must be at the top of their game, waiting\
-        \ for the next mission. Follow the officers to their homes and see what they\
-        \ do on their down time and how the rigors of their job affect their life\
-        \ out side of the team.\",\"poster\":null,\"seriesName\":\"Dallas SWAT\",\"\
-        slug\":\"dallas-swat\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"\
-        firstAired\":\"2006-9-29\",\"id\":79395,\"image\":\"/banners/posters/79395-2.jpg\"\
-        ,\"network\":\"CMT\",\"overview\":\"It takes a lot more than pompoms and a\
-        \ winning smile to become a member of one of the nation's most iconic cheerleading\
-        \ teams in the world as CMT discovers in the two-hour special, Dallas Cowboys\
-        \ Cheerleaders: Making the Team. \\r\\n\\r\\nCMT cameras document the audition\
-        \ process as 1,000 women descend upon Texas Stadium for Dallas Cowboys Cheerleaders\
-        \ open auditions. CMT cameras will capture the entire journey of the 2005-2006\
-        \ squad from auditions, through training camp, all the way to the first home\
-        \ game, with unprecedented access. \\r\\n\\r\\n\\\"Through the years, I have\
-        \ found that most people don't truly understand what it takes to be a cheerleader,\\\
-        \" says Dallas Cowboys Cheerleaders director Kelli McGonagill Finglass. \\\
-        \"This CMT special breaks through the mystique of the organization to reveal\
-        \ a group of women with extraordinary talent, sacrifice and diversity. I am\
-        \ proud for the nation to see how truly impressive the ladies are while always\
-        \ embracing a humble, hometown girl spirit.\\\" \\r\\n\\r\\nWith unlimited\
-        \ access, CMT's original special will take viewers every step of the way,\
-        \ as the field of candidates is whittled down from more than 1,000 to just\
-        \ 38. CMT will go behind the scenes throughout the three audition phases --\
-        \ preliminaries, semifinals and finals. Then it's off with the 45 remaining\
-        \ candidates for a grueling three-month training camp to learn more than 50\
-        \ song-and-dance routines for the upcoming football season. Ultimately 38\
-        \ women will be selected for the 2005-2006 Dallas Cowboys Cheerleaders squad,\
-        \ and CMT will be there as they perform at the first home game against their\
-        \ rivals, the Washington Redskins.\",\"poster\":null,\"seriesName\":\"Dallas\
-        \ Cowboys Cheerleaders: Making the Team\",\"slug\":\"dallas-cowboys-cheerleaders-making-the-team\"\
-        ,\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":null,\"firstAired\"\
-        :null,\"id\":357811,\"image\":\"/banners/posters/5c331ccbd15fd.jpg\",\"network\"\
-        :null,\"poster\":null,\"seriesName\":\"Dallas DNA\",\"slug\":\"dallas-dna\"\
-        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/5bef731022dd6.jpg\"\
-        ,\"firstAired\":\"2018-5-30\",\"id\":347972,\"image\":\"/banners/posters/5b18113f7a921.jpg\"\
-        ,\"network\":\"YouTube Premium\",\"overview\":\"DALLAS \\u0026 ROBO is an\
-        \ animated comedy from YouTube Originals about best friends and dysfunctional\
-        \ space truckers Dallas Moonshiner, a boozy ex-stock car racer (Kat Dennings)\
-        \ and Robo, a hulking A.I. with a sensitive side (John Cena.) As they haul\
-        \ their cargo all over the galaxy, they also run out on bar tabs, bicker with\
-        \ rival truckers,and tussle with outlaw cannibal bikers who terrorize the\
-        \ space lanes.\\r\\n\",\"poster\":\"/banners/posters/5b18113f7a921.jpg\",\"\
-        seriesName\":\"Dallas \\u0026 Robo\",\"slug\":\"dallas-and-robo\",\"status\"\
-        :\"Continuing\"},{\"aliases\":[],\"banner\":\"/banners/graphical/5af2a3181aa19.jpg\"\
-        ,\"firstAired\":\"2017-11-28\",\"id\":345215,\"image\":\"/banners/posters/5b2348800f9f3.jpg\"\
-        ,\"network\":\"Food Network\",\"overview\":\"Dallas Cakes, follows talented,\
-        \ Dallas-based bakers as they conceive, create and deliver incredible, customized\
-        \ confections to their customers.\",\"poster\":\"/banners/posters/5b2348800f9f3.jpg\"\
-        ,\"seriesName\":\"Dallas Cakes\",\"slug\":\"345215\",\"status\":\"Ended\"\
-        },{\"aliases\":[],\"banner\":null,\"firstAired\":null,\"id\":330483,\"image\"\
-        :\"/banners/images/missing/series.jpg\",\"network\":null,\"poster\":null,\"\
-        seriesName\":\"Dallas 2\",\"slug\":\"330483\",\"status\":\"Ended\"},{\"aliases\"\
-        :[],\"banner\":null,\"firstAired\":\"2009-10-4\",\"id\":293986,\"image\":\"\
-        /banners/images/missing/series.jpg\",\"network\":\"Style\",\"overview\":\"\
-        This show follows the wealthiest mothers and daughters from Dallas' most well-off\
-        \ neighborhoods. See how their relationships fair in the lives of the super-rich.\
-        \ Starring Pamela Martin Duarte and her daughter Hannah Martin Duarte.\",\"\
-        poster\":null,\"seriesName\":\"Dallas Divas \\u0026 Daughters\",\"slug\":\"\
-        dallas-divas-and-daughters\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\"\
-        :null,\"firstAired\":\"2013-7-23\",\"id\":271452,\"image\":\"/banners/posters/271452-3.jpg\"\
-        ,\"network\":\"Velocity\",\"overview\":\"Car enthusiasts battle one another\
-        \ at automobile auctions, then try to flip their purchases.\",\"poster\":null,\"\
-        seriesName\":\"Dallas Car Sharks\",\"slug\":\"dallas-car-sharks\",\"status\"\
-        :\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"2007-3-9\",\"\
-        id\":79949,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"\
-        Showtime\",\"overview\":\"This seven-part documentary series from the producers\
-        \ of \\\"Inside Deep Throat\\\" tracks the production of \\\"Debbie Does Dallas\
-        \ Again,\\\" a sequel to the legendary porn feature, as director Paul Thomas\
-        \ and star Stefani Morgan bring their erotic film to life. \",\"poster\":null,\"\
-        seriesName\":\"Debbie Does Dallas Again\",\"slug\":\"debbie-does-dallas-again\"\
-        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"2016-11-2\"\
-        ,\"id\":319215,\"image\":\"/banners/posters/319215-1.jpg\",\"network\":null,\"\
-        overview\":\"Follow the lives of Bri Barlup, Emily Fernandez, Asta Young,\
-        \ Amanda Loy, Tiffany Chance and Caylea Woodbury as they take on new adventures,\
-        \ friendships, fights and (of course!) all the drama. Everything is not always\
-        \ bigger in Texas!\",\"poster\":null,\"seriesName\":\"Little Women: Dallas\"\
-        ,\"slug\":\"little-women-dallas\",\"status\":\"Ended\"},{\"aliases\":[],\"\
-        banner\":null,\"firstAired\":null,\"id\":292986,\"image\":\"/banners/images/missing/series.jpg\"\
-        ,\"network\":\"HGTV\",\"poster\":null,\"seriesName\":\"Donna Decorates Dallas\"\
-        ,\"slug\":\"donna-decorates-dallas\",\"status\":\"Ended\"},{\"aliases\":[],\"\
-        banner\":null,\"firstAired\":\"2013-12-5\",\"id\":274997,\"image\":\"/banners/posters/274997-2.jpg\"\
-        ,\"network\":\"Bravo\",\"overview\":\"Courtney Kerr, breakout star of Most\
-        \ Eligible Dallas, navigates the lively Dallas social scene, while building\
-        \ a brand new career in this docu-series. This season follows Courtney through\
-        \ an emotional rollercoaster ride as she juggles her search for the perfect\
-        \ southern gentleman and a fast moving fashion career filled with amazing\
-        \ opportunities. \",\"poster\":null,\"seriesName\":\"Courtney Loves Dallas\"\
-        ,\"slug\":\"courtney-loves-dallas\",\"status\":\"Ended\"},{\"aliases\":[],\"\
-        banner\":null,\"firstAired\":null,\"id\":269228,\"image\":\"/banners/images/missing/series.jpg\"\
-        ,\"network\":null,\"overview\":\"A glossy, cheeky and occasionally outrageous\
-        \ behind-the-scenes look at the new Dallas\",\"poster\":null,\"seriesName\"\
-        :\"John Borrowman's Dallas\",\"slug\":\"john-borrowmans-dallas\",\"status\"\
-        :\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"2011-8-15\",\"\
-        id\":250374,\"image\":\"/banners/posters/250374-1.jpg\",\"network\":\"Bravo\"\
-        ,\"overview\":\"They\u2019re young, they\u2019re hot, they\u2019re single\
-        \ \u2013- they\u2019re Dallas\u2019 Most Eligible. From beauty queens to pro-football\
-        \ players, this group of Texas socialites proves that everything\u2019s bigger\
-        \ in Texas \u2013- including the drama. Some are looking for true love while\
-        \ others have perfected the art of the one-night stand, and somehow their\
-        \ love lives have all crossed paths at one time or another. Dallas serves\
-        \ as the sexy backdrop for this jaw-dropping series that follows a group of\
-        \ successful friends living it up in the lone star state. \",\"poster\":null,\"\
-        seriesName\":\"Most Eligible Dallas\",\"slug\":\"most-eligible-dallas\",\"\
-        status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":null,\"\
-        id\":347832,\"image\":\"/banners/images/missing/series.jpg\",\"network\":null,\"\
-        poster\":null,\"seriesName\":\"Children's Medical Centre Dallas\",\"slug\"\
-        :\"childrens-medical-centre-dallas\",\"status\":\"Ended\"},{\"aliases\":[],\"\
-        banner\":null,\"firstAired\":\"2011-10-10\",\"id\":252679,\"image\":\"/banners/posters/252679-1.jpg\"\
-        ,\"network\":\"LOGO\",\"overview\":\"Logo goes where everything is bigger,\
-        \ including the drama. The A-List: Dallas is dishing up a Texas-sized serving\
-        \ of larger-than-life personalities and their high-living lifestyles.\",\"\
-        poster\":null,\"seriesName\":\"The A-List: Dallas\",\"slug\":\"the-a-list-dallas\"\
-        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"2010-10-28\"\
-        ,\"id\":203581,\"image\":\"/banners/posters/203581-1.jpg\",\"network\":\"\
-        TLC\",\"overview\":\"Police Women of Dallas is the fourth installment of TLC's\
-        \ Police Women reality documentary series, which follows three police officers\
-        \ and a detective of the Dallas Police Department in Dallas, Texas.\",\"poster\"\
-        :null,\"seriesName\":\"Police Women of Dallas\",\"slug\":\"police-women-of-dallas\"\
-        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/307475-g2.jpg\"\
-        ,\"firstAired\":\"2016-4-11\",\"id\":307475,\"image\":\"/banners/posters/307475-1.jpg\"\
-        ,\"network\":\"Bravo\",\"overview\":\"An exclusive look into the glamorous\
-        \ galas, scintillating scandals and enormous egos of a group of women as they\
-        \ navigate the social scene of Dallas\u2019 elite, all while juggling their\
-        \ husbands, boyfriends and families.\",\"poster\":\"/banners/posters/307475-1.jpg\"\
-        ,\"seriesName\":\"The Real Housewives of Dallas\",\"slug\":\"the-real-housewives-of-dallas\"\
-        ,\"status\":\"Continuing\"},{\"aliases\":[\"Storage Wars: Dallas\"],\"banner\"\
-        :null,\"firstAired\":\"2011-12-6\",\"id\":251596,\"image\":\"/banners/posters/251596-1.jpg\"\
-        ,\"network\":\"A\\u0026E\",\"overview\":\"Storage Wars: Texas (Originally\
-        \ Storage Wars Dallas) is a reality television series on the A\\u0026E Network\
-        \ that premiered in 2011. It is a regionalized spin-off of the highly-popular\
-        \ series Storage Wars.\",\"poster\":null,\"seriesName\":\"Storage Wars: Texas\"\
-        ,\"slug\":\"storage-wars-texas\",\"status\":\"Ended\"},{\"aliases\":[\"All\
-        \ or Nothing: A Season with the Arizona Cardinals\",\"All or Nothing: A Season\
-        \ with the Los Angeles Rams\",\"All or Nothing: The Dallas Cowboys\"],\"banner\"\
-        :\"/banners/graphical/313828-g.jpg\",\"firstAired\":\"2016-6-30\",\"id\":313828,\"\
-        image\":\"/banners/posters/313828-1.jpg\",\"network\":\"Amazon\",\"overview\"\
-        :\"For the first time in history, Amazon and NFL Films present an unprecedented\
-        \ inside look at the lives of players, coaches and owners of a franchise over\
-        \ the course of an entire NFL season. Witness the real life, behind the scenes\
-        \ journey on the field, off the field, and everything in between.\",\"poster\"\
-        :\"/banners/posters/313828-1.jpg\",\"seriesName\":\"All or Nothing\",\"slug\"\
-        :\"all-or-nothing\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\"\
-        :\"/banners/graphical/262312-g.jpg\",\"firstAired\":\"1983-12-21\",\"id\"\
-        :262312,\"image\":\"/banners/posters/262312-1.jpg\",\"network\":\"Anime OAV\"\
-        ,\"overview\":\"In a near future, mankind has moved from a drained Earth to\
-        \ the Moon. Rebel acts of terrorism lead to conflicts with the Earth Federal\
-        \ Government. A mysterious entity called Dallos appears to restore hope.\"\
-        ,\"poster\":\"/banners/posters/262312-1.jpg\",\"seriesName\":\"Dallos\",\"\
-        slug\":\"dallos\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"\
-        firstAired\":null,\"id\":251784,\"image\":\"/banners/images/missing/series.jpg\"\
-        ,\"network\":\"ITV4\",\"overview\":\"Dallaglio's World Cup is presented by\
-        \ Lawrence Dallaglio and Craig Doyle. He takes a look at the fates of the\
-        \ world\u2019s leading rugby nations from the inaugural Rugby World Cup in\
-        \ 1987 through to France in 2007. He talks to Craig Doyle as he examines what\
-        \ it takes for a country to be able to succeed at the highest level\",\"poster\"\
-        :null,\"seriesName\":\"Dallaglio's World Cup\",\"slug\":\"dallaglios-world-cup\"\
-        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2015-3-16\"\
-        ,\"id\":369339,\"image\":\"/banners/posters/5d74c867a0e26.jpg\",\"network\"\
-        :\"Rai 3\",\"overview\":\"Cronache dall'antichit\xE0 \xE8 un programma di\
-        \ approfondimento storico, in onda su Rai Storia. Come un inviato nel mondo\
-        \ antico, Cristoforo Gorno guida il telespettatore ora dopo ora nei luoghi\
-        \ dell'azione, non tralasciando il contesto in cui quell'avvenimento si \xE8\
-        \ determinato.\",\"poster\":\"/banners/posters/5d74c867a0e26.jpg\",\"seriesName\"\
-        :\"Cronache dall'antichit\xE0\",\"slug\":\"cronache-dallantichita\",\"status\"\
-        :\"Continuing\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"2013-10-4\"\
-        ,\"id\":281815,\"image\":\"/banners/posters/281815-2.jpg\",\"network\":\"\
-        YouTube\",\"poster\":null,\"seriesName\":\"Fuga dalla morte\",\"slug\":\"\
-        281815\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/text/260116.jpg\"\
-        ,\"firstAired\":null,\"id\":260116,\"image\":\"/banners/posters/260116-1.jpg\"\
-        ,\"network\":null,\"poster\":\"/banners/posters/260116-1.jpg\",\"seriesName\"\
-        :\"In the Beginning: The Bible Stories\",\"slug\":\"260116\",\"status\":\"\
-        Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"2011-11-15\",\"\
-        id\":256421,\"image\":\"/banners/posters/256421-2.jpg\",\"network\":\"Canale\
-        \ 5\",\"poster\":null,\"seriesName\":\"Baciati dall'amore\",\"slug\":\"256421\"\
-        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":null,\"\
-        id\":320148,\"image\":\"/banners/images/missing/series.jpg\",\"network\":null,\"\
-        overview\":\"Lawrence Dallaglio and Freddie Flintoff cycle from Olympia to\
-        \ London\",\"poster\":null,\"seriesName\":\"Flintoff and Dallaglio's Big Ride\"\
-        ,\"slug\":\"flintoff-and-dallaglios-big-ride\",\"status\":\"Ended\"},{\"aliases\"\
-        :[],\"banner\":null,\"firstAired\":null,\"id\":258261,\"image\":\"/banners/posters/258261-1.jpg\"\
-        ,\"network\":null,\"poster\":null,\"seriesName\":\"Le frontiere dell'Astronomia\"\
-        ,\"slug\":\"258261\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"\
-        firstAired\":null,\"id\":368159,\"image\":\"/banners/posters/5d721a0e2deec.jpg\"\
-        ,\"network\":null,\"poster\":null,\"seriesName\":\"Khalilullah, Ibrahim l\u2019\
-        ami intime d\u2019Allah (\u0627\u0628\u0631\u0627\u0647\u064A\u0645 \u062E\
-        \u0644\u064A\u0644 \u0627\u0644\u0644\u0647)\",\"slug\":\"khalilullah\",\"\
-        status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/5c7072b6f29eb.jpg\"\
-        ,\"firstAired\":\"2019-2-15\",\"id\":360017,\"image\":\"/banners/posters/5c706f9410fe3.jpg\"\
-        ,\"network\":\"V LIVE\",\"poster\":\"/banners/posters/5c706f9410fe3.jpg\"\
-        ,\"seriesName\":\"ITZY \\\"DALLA DALLA\\\" M/V BEHIND\",\"slug\":\"itzy-dalla-dalla-mv-behind\"\
-        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"2019-6-14\"\
-        ,\"id\":364471,\"image\":\"/banners/posters/5d06ab22a6f8d.jpg\",\"network\"\
-        :\"Netflix\",\"overview\":\"New interviews and an up-to-date analysis of evidence\
-        \ shed light on the 1992 murders of three girls in Spain and their profound\
-        \ impact on the nation.\",\"poster\":null,\"seriesName\":\"The Alc\xE0sser\
-        \ Murders\",\"slug\":\"the-alcasser-murders\",\"status\":\"Ended\"},{\"aliases\"\
-        :[\"Bugs Bunny\",\"Daffy Duck\",\"Foghorn Leghorn\",\"Road Runner\",\"Speedy\
-        \ Gonzales\",\"Sylvester\",\"Tweety\"],\"banner\":\"/banners/graphical/72514-g2.jpg\"\
-        ,\"firstAired\":\"1929-5-1\",\"id\":72514,\"image\":\"/banners/posters/72514-2.jpg\"\
-        ,\"network\":\"Cartoon Network\",\"overview\":\"Looney Tunes is an American\
-        \ animated series of comedy short films produced by Warner Bros. from 1929\
-        \ to 1969 during the golden age of American animation, alongside its sister\
-        \ series Merrie Melodies\",\"poster\":\"/banners/posters/72514-2.jpg\",\"\
-        seriesName\":\"Looney Tunes\",\"slug\":\"looney-tunes\",\"status\":\"Ended\"\
-        },{\"aliases\":[],\"banner\":\"/banners/graphical/71301-g.jpg\",\"firstAired\"\
-        :\"2002-9-7\",\"id\":71301,\"image\":\"/banners/posters/71301-3.jpg\",\"network\"\
-        :\"Cartoon Network\",\"overview\":\"The characters of Looney Tunes are all\
-        \ babies and live with Granny.\",\"poster\":\"/banners/posters/71301-3.jpg\"\
-        ,\"seriesName\":\"Baby Looney Tunes\",\"slug\":\"baby-looney-tunes\",\"status\"\
-        :\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/84303-g2.jpg\"\
-        ,\"firstAired\":\"2006-5-3\",\"id\":84303,\"image\":\"/banners/posters/84303-1.jpg\"\
-        ,\"network\":\"Cuatro\",\"poster\":\"/banners/posters/84303-1.jpg\",\"seriesName\"\
-        :\"Genesis: Inside The Killer's Mind\",\"slug\":\"genesis-inside-the-killers-mind\"\
-        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"2007-1-18\"\
-        ,\"id\":81379,\"image\":\"/banners/posters/81379-1.jpg\",\"network\":\"RTL\"\
-        ,\"overview\":\"Doctor Daniel Koch works at the forensic in Cologne and tries\
-        \ to solve the many crimes taking place there.\",\"poster\":null,\"seriesName\"\
-        :\"Post Mortem\",\"slug\":\"post-mortem\",\"status\":\"Ended\"},{\"aliases\"\
-        :[],\"banner\":\"/banners/graphical/80115-g.jpg\",\"firstAired\":\"1966-9-17\"\
-        ,\"id\":80115,\"image\":\"/banners/posters/80115-3.jpg\",\"network\":\"NDR\"\
-        ,\"overview\":\"What seems like a fairy tale today may be reality tomorrow.\
-        \ Here we have a fairy tale of the day after tomorrow. There are no more national\
-        \ states, only mankind and her colonies in outer space. We settle on stars\
-        \ far-off, the bottom of the sea is developed as living place. With what are\
-        \ today unimaginable speeds, the starships of tomorrow transverse the Milky\
-        \ Way. One of this starships is the Orion, a little piece in the giant security\
-        \ system which protects the Earth from outer space threats. Let's accompany\
-        \ the Orion and her crew at their patrols-service on the edge of infinity...\
-        \ \",\"poster\":\"/banners/posters/80115-3.jpg\",\"seriesName\":\"Raumpatrouille\
-        \ Orion\",\"slug\":\"raumpatrouille-orion\",\"status\":\"Ended\"},{\"aliases\"\
-        :[\"Az Apoll\xF3-program\"],\"banner\":\"/banners/graphical/77831-g3.jpg\"\
-        ,\"firstAired\":\"1998-4-1\",\"id\":77831,\"image\":\"/banners/posters/77831-3.jpg\"\
-        ,\"network\":\"HBO\",\"overview\":\"The story of the United States' space\
-        \ program, from its beginnings in 1961 to the final moon mission in 1972.\"\
-        ,\"poster\":\"/banners/posters/77831-3.jpg\",\"seriesName\":\"From the Earth\
-        \ to the Moon\",\"slug\":\"from-the-earth-to-the-moon\",\"status\":\"Ended\"\
-        },{\"aliases\":[],\"banner\":\"/banners/graphical/5ba5e211cd57f.jpg\",\"firstAired\"\
-        :\"2018-9-14\",\"id\":352862,\"image\":\"/banners/series/352862/posters/62114833.jpg\"\
-        ,\"network\":\"Netflix\",\"overview\":\"The colorful crew at Gotham Garage\
-        \ overhauls an eclectic collection of cars and trucks, trading up to a showstopper\
-        \ they can sell for big bucks.\",\"poster\":\"/banners/series/352862/posters/62114833.jpg\"\
-        ,\"seriesName\":\"Car Masters: Rust to Riches\",\"slug\":\"car-masters-rust-to-riches\"\
-        ,\"status\":\"Continuing\"},{\"aliases\":[\"earthflight\",\"\xC0 vol d'oiseau\"\
-        ],\"banner\":\"/banners/text/254572.jpg\",\"firstAired\":\"2011-12-29\",\"\
-        id\":254572,\"image\":\"/banners/posters/254572-3.jpg\",\"network\":\"BBC\
-        \ One\",\"overview\":\"Bird's-eye view of the natural world, joining the journeys\
-        \ of snow geese, cranes, albatrosses, eagles and other birds across six continents.\
-        \ Beginning in North America, snow geese face their biggest predator, pelicans\
-        \ glide under San Francisco's Golden Gate Bridge, bald eagles in Alaska swoop\
-        \ among brown bears, and on the Great Plains, cowbirds dive under the feet\
-        \ of fighting bison. Narrated by David Tennant.\",\"poster\":\"/banners/posters/254572-3.jpg\"\
-        ,\"seriesName\":\"Earthflight\",\"slug\":\"earthflight\",\"status\":\"Ended\"\
-        },{\"aliases\":[],\"banner\":null,\"firstAired\":null,\"id\":359698,\"image\"\
-        :\"/banners/images/missing/series.jpg\",\"network\":null,\"poster\":null,\"\
-        seriesName\":\"Pallas\",\"slug\":\"pallas\",\"status\":\"Ended\"},{\"aliases\"\
-        :[],\"banner\":null,\"firstAired\":\"2005-11-6\",\"id\":327530,\"image\":\"\
-        /banners/posters/327530-1.jpg\",\"network\":\"Canale 5\",\"poster\":null,\"\
-        seriesName\":\"Callas e Onassis\",\"slug\":\"327530\",\"status\":\"Ended\"\
-        },{\"aliases\":[],\"banner\":null,\"firstAired\":\"2016-4-7\",\"id\":313788,\"\
-        image\":\"/banners/images/missing/series.jpg\",\"network\":null,\"poster\"\
-        :null,\"seriesName\":\"Vi Kallas Tiggare\",\"slug\":\"313788\",\"status\"\
-        :\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":null,\"id\":296294,\"\
-        image\":\"/banners/posters/296294-1.jpg\",\"network\":null,\"poster\":null,\"\
-        seriesName\":\"Gafas e Pallaso\",\"slug\":\"296294\",\"status\":\"Ended\"\
-        },{\"aliases\":[],\"banner\":null,\"firstAired\":\"2014-02-05\",\"id\":278401,\"\
-        image\":\"/banners/images/missing/movie.jpg\",\"network\":null,\"overview\"\
-        :\"Here's your choice: would you rather get electrocuted by an electric eel\
-        \ or a Taser? Or your house is on fire, what's the best way to escape: through\
-        \ the window or down the stairs? Or the engine of your aircraft fails, what\
-        \ would you rather be in: a helicopter or a plane? \\r\\n\\r\\nDeadly Dilemmas\
-        \ gives you a load of hypothetical situations in every episode, and all you\
-        \ have to is decide which is the more survivable. Then we'll tell you the\
-        \ science behind why! \\r\\n\\r\\nThink of it as a kind of dangerous version\
-        \ of Play Your Cards Right, where the decision between higher or lower will\
-        \ make the difference between life or death!\",\"poster\":null,\"seriesName\"\
-        :\"Deadly Dilemmas\",\"slug\":\"deadly-dilemmas\",\"status\":\"Ended\"},{\"\
-        aliases\":[],\"banner\":null,\"firstAired\":null,\"id\":159161,\"image\":\"\
-        /banners/posters/159161-1.jpg\",\"network\":null,\"overview\":\"Narrated by\
-        \ Academy Award-winner Ben Kingsley, this series objectively documents Judaism,\
-        \ Islam, Hinduism, Buddhism, Catholicism, and Protestantism worldwide with\
-        \ interviews from experts. Explore issues that probe the very core of our\
-        \ existence and gain new understanding about humanity. Travel to exotic locations\
-        \ and observe how religions have shaped cultures, changed history, brought\
-        \ us closer together and thrust us into war.\",\"poster\":null,\"seriesName\"\
-        :\"Religions of the World\",\"slug\":\"religions-of-the-world\",\"status\"\
-        :\"Ended\"}]}"
+      string: "{\"data\":[{\"aliases\":[],\"banner\":\"/banners/graphical/242521-g5.jpg\",\"firstAired\":\"2012-06-13\",\"id\":242521,\"image\":\"/banners/posters/242521-6.jpg\",\"network\":\"TNT
+        (US)\",\"overview\":\"The next generation of the Ewing family - cousins John
+        Ross Ewing and Christopher Ewing - clash over the family's oil business and
+        vast fortune. Roll on drama, sabotage, secrets and betrayal. Everyone is back
+        and then some!\",\"poster\":\"/banners/posters/242521-6.jpg\",\"seriesName\":\"Dallas
+        (2012)\",\"slug\":\"dallas-2012\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/blank/77092.jpg\",\"firstAired\":\"1978-04-02\",\"id\":77092,\"image\":\"/banners/posters/77092-1.jpg\",\"network\":\"CBS\",\"overview\":\"The
+        world's first mega-soap, and one of the most popular ever produced, Dallas
+        had it all. Beautiful women, expensive cars, and men playing Monopoly with
+        real buildings. Famous for one of the best cliffhangers in TV history, as
+        the world asked \\\"Who shot J.R.?\\\" \\r\\nA slow-burner to begin with,
+        Dallas hit its stride in the 2nd season, with long storylines and expert character
+        development. Dallas ruled the airwaves in the 1980's.\",\"poster\":\"/banners/posters/77092-1.jpg\",\"seriesName\":\"Dallas\",\"slug\":\"dallas\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/307475-g2.jpg\",\"firstAired\":\"2016-04-11\",\"id\":307475,\"image\":\"/banners/posters/307475-1.jpg\",\"network\":\"Bravo\",\"overview\":\"An
+        exclusive look into the glamorous galas, scintillating scandals and enormous
+        egos of a group of women as they navigate the social scene of Dallas\u2019
+        elite, all while juggling their husbands, boyfriends and families.\",\"poster\":\"/banners/posters/307475-1.jpg\",\"seriesName\":\"The
+        Real Housewives of Dallas\",\"slug\":\"the-real-housewives-of-dallas\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/79395-g2.jpg\",\"firstAired\":\"2006-09-29\",\"id\":79395,\"image\":\"/banners/posters/79395-2.jpg\",\"network\":\"CMT\",\"overview\":\"It
+        takes a lot more than pompoms and a winning smile to become a member of one
+        of the nation's most iconic cheerleading teams in the world as CMT discovers
+        in the two-hour special, Dallas Cowboys Cheerleaders: Making the Team. \\r\\n\\r\\nCMT
+        cameras document the audition process as 1,000 women descend upon Texas Stadium
+        for Dallas Cowboys Cheerleaders open auditions. CMT cameras will capture the
+        entire journey of the 2005-2006 squad from auditions, through training camp,
+        all the way to the first home game, with unprecedented access. \\r\\n\\r\\n\\\"Through
+        the years, I have found that most people don't truly understand what it takes
+        to be a cheerleader,\\\" says Dallas Cowboys Cheerleaders director Kelli McGonagill
+        Finglass. \\\"This CMT special breaks through the mystique of the organization
+        to reveal a group of women with extraordinary talent, sacrifice and diversity.
+        I am proud for the nation to see how truly impressive the ladies are while
+        always embracing a humble, hometown girl spirit.\\\" \\r\\n\\r\\nWith unlimited
+        access, CMT's original special will take viewers every step of the way, as
+        the field of candidates is whittled down from more than 1,000 to just 38.
+        CMT will go behind the scenes throughout the three audition phases -- preliminaries,
+        semifinals and finals. Then it's off with the 45 remaining candidates for
+        a grueling three-month training camp to learn more than 50 song-and-dance
+        routines for the upcoming football season. Ultimately 38 women will be selected
+        for the 2005-2006 Dallas Cowboys Cheerleaders squad, and CMT will be there
+        as they perform at the first home game against their rivals, the Washington
+        Redskins.\",\"poster\":\"/banners/posters/79395-2.jpg\",\"seriesName\":\"Dallas
+        Cowboys Cheerleaders: Making the Team\",\"slug\":\"dallas-cowboys-cheerleaders-making-the-team\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/319215/banners/65c3d61eb8977.jpg\",\"firstAired\":\"2016-11-02\",\"id\":319215,\"image\":\"/banners/posters/319215-1.jpg\",\"network\":\"Lifetime\",\"overview\":\"Follow
+        the lives of Bri Barlup, Emily Fernandez, Asta Young, Amanda Loy, Tiffany
+        Chance and Caylea Woodbury as they take on new adventures, friendships, fights
+        and (of course!) all the drama. Everything is not always bigger in Texas!\",\"poster\":\"/banners/posters/319215-1.jpg\",\"seriesName\":\"Little
+        Women: Dallas\",\"slug\":\"little-women-dallas\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/80341-g.jpg\",\"firstAired\":\"2006-01-05\",\"id\":80341,\"image\":\"/banners/posters/80341-1.jpg\",\"network\":\"A\\u0026E\",\"overview\":\"Dallas
+        SWAT follows the action-packed, high-stress line of work and the elite team
+        of law enforcement officers that make up the Dallas SWAT team. Every day the
+        officers on this team must be at the top of their game, waiting for the next
+        mission. Follow the officers to their homes and see what they do on their
+        down time and how the rigors of their job affect their life out side of the
+        team.\",\"poster\":\"/banners/posters/80341-1.jpg\",\"seriesName\":\"Dallas
+        SWAT\",\"slug\":\"dallas-swat\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/347972/banners/664beea13b4a8.jpg\",\"firstAired\":\"2018-05-30\",\"id\":347972,\"image\":\"/banners/series/347972/posters/5f5a3424d3822.jpg\",\"network\":\"YouTube
+        Premium\",\"overview\":\"DALLAS \\u0026 ROBO is an animated comedy from YouTube
+        Originals about best friends and dysfunctional space truckers Dallas Moonshiner,
+        a boozy ex-stock car racer (Kat Dennings) and Robo, a hulking A.I. with a
+        sensitive side (John Cena.) As they haul their cargo all over the galaxy,
+        they also run out on bar tabs, bicker with rival truckers,and tussle with
+        outlaw cannibal bikers who terrorize the space lanes.\\r\\n\",\"poster\":\"/banners/series/347972/posters/5f5a3424d3822.jpg\",\"seriesName\":\"Dallas
+        \\u0026 Robo\",\"slug\":\"dallas-and-robo\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/252679-g2.jpg\",\"firstAired\":\"2011-10-10\",\"id\":252679,\"image\":\"/banners/posters/252679-1.jpg\",\"network\":\"Logo\",\"overview\":\"Logo
+        goes where everything is bigger, including the drama. The A-List: Dallas is
+        dishing up a Texas-sized serving of larger-than-life personalities and their
+        high-living lifestyles.\",\"poster\":\"/banners/posters/252679-1.jpg\",\"seriesName\":\"The
+        A-List: Dallas\",\"slug\":\"the-a-list-dallas\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/274997/banners/662ae9ed9b5ad.jpg\",\"firstAired\":\"2013-12-05\",\"id\":274997,\"image\":\"/banners/posters/274997-2.jpg\",\"network\":\"Bravo\",\"overview\":\"Courtney
+        Kerr, breakout star of Most Eligible Dallas, navigates the lively Dallas social
+        scene, while building a brand new career in this docu-series. This season
+        follows Courtney through an emotional rollercoaster ride as she juggles her
+        search for the perfect southern gentleman and a fast moving fashion career
+        filled with amazing opportunities.\",\"poster\":\"/banners/posters/274997-2.jpg\",\"seriesName\":\"Courtney
+        Loves Dallas\",\"slug\":\"courtney-loves-dallas\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/203581-g.jpg\",\"firstAired\":\"2010-10-28\",\"id\":203581,\"image\":\"/banners/posters/203581-1.jpg\",\"network\":\"TLC\",\"overview\":\"Police
+        Women of Dallas is the fourth installment of TLC's Police Women reality documentary
+        series, which follows three police officers and a detective of the Dallas
+        Police Department in Dallas, Texas.\",\"poster\":\"/banners/posters/203581-1.jpg\",\"seriesName\":\"Police
+        Women of Dallas\",\"slug\":\"police-women-of-dallas\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/271452/banners/660a9545c89f8.jpg\",\"firstAired\":\"2013-07-23\",\"id\":271452,\"image\":\"/banners/posters/271452-3.jpg\",\"network\":\"Velocity\",\"overview\":\"Car
+        enthusiasts battle one another at automobile auctions, then try to flip their
+        purchases.\",\"poster\":\"/banners/posters/271452-3.jpg\",\"seriesName\":\"Dallas
+        Car Sharks\",\"slug\":\"dallas-car-sharks\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/5af2a3181aa19.jpg\",\"firstAired\":\"2018-04-30\",\"id\":345215,\"image\":\"/banners/posters/5b2348800f9f3.jpg\",\"network\":\"Food
+        Network\",\"overview\":\"Dallas Cakes, follows talented, Dallas-based bakers
+        as they conceive, create and deliver incredible, customized confections to
+        their customers.\",\"poster\":\"/banners/posters/5b2348800f9f3.jpg\",\"seriesName\":\"Dallas
+        Cakes\",\"slug\":\"345215-show\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/79949-g.jpg\",\"firstAired\":\"2007-03-09\",\"id\":79949,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"Showtime\",\"overview\":\"This
+        seven-part documentary series from the producers of \\\"Inside Deep Throat\\\"
+        tracks the production of \\\"Debbie Does Dallas Again,\\\" a sequel to the
+        legendary porn feature, as director Paul Thomas and star Stefani Morgan bring
+        their erotic film to life.\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Debbie
+        Does Dallas Again\",\"slug\":\"debbie-does-dallas-again\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/250374-g2.jpg\",\"firstAired\":\"2011-08-15\",\"id\":250374,\"image\":\"/banners/posters/250374-1.jpg\",\"network\":\"Bravo\",\"overview\":\"They\u2019re
+        young, they\u2019re hot, they\u2019re single \u2013- they\u2019re Dallas\u2019
+        Most Eligible. From beauty queens to pro-football players, this group of Texas
+        socialites proves that everything\u2019s bigger in Texas \u2013- including
+        the drama. Some are looking for true love while others have perfected the
+        art of the one-night stand, and somehow their love lives have all crossed
+        paths at one time or another. Dallas serves as the sexy backdrop for this
+        jaw-dropping series that follows a group of successful friends living it up
+        in the lone star state.\",\"poster\":\"/banners/posters/250374-1.jpg\",\"seriesName\":\"Most
+        Eligible Dallas\",\"slug\":\"most-eligible-dallas\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2009-10-04\",\"id\":293986,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"Style\",\"overview\":\"This
+        show follows the wealthiest mothers and daughters from Dallas' most well-off
+        neighborhoods. See how their relationships fair in the lives of the super-rich.
+        Starring Pamela Martin Duarte and her daughter Hannah Martin Duarte.\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Dallas
+        Divas \\u0026 Daughters\",\"slug\":\"dallas-divas-and-daughters\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/series/357811/banners/5fc43ef5ac3a4.jpg\",\"firstAired\":\"2009-04-28\",\"id\":357811,\"image\":\"/banners/posters/5c331ccbd15fd.jpg\",\"network\":\"Investigation
+        Discovery\",\"overview\":\"The Texas justice system has always been notorious
+        for having tough judges, tough sentences and putting people away with shaky
+        evidence. In 2007, the district attorney mandated that every Dallas County
+        prisoner who has requested DNA testing can have their case reviewed with the
+        chance to be heard again. This series follows their plight.\",\"poster\":\"/banners/posters/5c331ccbd15fd.jpg\",\"seriesName\":\"Dallas
+        DNA\",\"slug\":\"dallas-dna\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2014-07-10\",\"id\":389255,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"YouTube\",\"overview\":\"Dallasmed65's
+        YouTube Let's Play Minecraft Survival Long Running Series\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Minecraft
+        Lets Play Survival [Dallasmed65]\",\"slug\":\"minecraft-lets-play-survival-dallasmed65\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"\",\"id\":347832,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Children's
+        Medical Centre Dallas\",\"slug\":\"childrens-medical-centre-dallas\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2024-06-20\",\"id\":449142,\"image\":\"/banners/v4/series/449142/posters/664dfefce8775.jpg\",\"network\":\"Netflix\",\"overview\":\"The
+        series follows the 2023-24 Dallas Cowboys Cheerleaders squad from start to
+        finish \u2014 kicking off at auditions and training camp and continuing all
+        the way through the NFL season.\",\"poster\":\"/banners/v4/series/449142/posters/664dfefce8775.jpg\",\"seriesName\":\"America\u2019s
+        Sweethearts: Dallas Cowboys Cheerleaders\",\"slug\":\"americas-sweethearts-dallas-cowboys-cheerleaders\",\"status\":\"Upcoming\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2018-09-01\",\"id\":411514,\"image\":\"/banners/images/missing/series.jpg\",\"network\":null,\"overview\":\"In
+        this Minecraft Let's Play Dallasmed65 challenges himself to be moving around
+        all the time, like a real nomad.\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Minecraft
+        Nomadic Survival [Dallasmed65]\",\"slug\":\"minecraft-nomadic-survival-dallasmed65\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"\",\"id\":269228,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"\",\"overview\":\"A
+        glossy, cheeky and occasionally outrageous behind-the-scenes look at the new
+        Dallas\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"John
+        Borrowman's Dallas\",\"slug\":\"john-borrowmans-dallas\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2011-08-12\",\"id\":292986,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"HGTV\",\"overview\":\"Interior
+        designer Donna Moss and her team give credence to the notion that everything's
+        bigger in Texas as they undertake dramatic room makeovers in some of the most
+        fabulous homes in the Dallas area.\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Donna
+        Decorates Dallas\",\"slug\":\"donna-decorates-dallas\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"\",\"id\":450111,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"Netflix\",\"overview\":\"Tells
+        the story of team owner Jerry Jones and his unique journey in transforming
+        the Cowboys franchise, leading a historic set of players and coaches to three
+        NFL titles in the 1990s and searing his imprint into the global sports business
+        landscape. Along the way, Jones has become one of the most innovative and
+        influential leaders in sports, with his team being the most valuable sports
+        franchise in the world.\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Dallas
+        Cowboys\",\"slug\":\"dallas-cowboys-jerry-jones\",\"status\":\"Upcoming\"},{\"aliases\":[],\"banner\":\"/banners/graphical/320983-g.jpg\",\"firstAired\":\"2016-12-27\",\"id\":320983,\"image\":\"/banners/posters/320983-3.jpg\",\"network\":\"Netflix\",\"overview\":\"Lights.
+        Cameron. Action. Cameron Dallas is more than just a social media star, he\u2019s
+        an entrepreneur and one of the most influential personalities of his generation.
+        In the Netflix original doc-series, Chasing Cameron, peel back the curtain
+        of what happens within the social media and into the lives of Cameron and
+        more of todays' MAGCON Boys as they meet and greet the world.\",\"poster\":\"/banners/posters/320983-3.jpg\",\"seriesName\":\"Chasing
+        Cameron\",\"slug\":\"chasing-cameron\",\"status\":\"Ended\"},{\"aliases\":[\"All
+        or Nothing: A Season with the Arizona Cardinals\",\"All or Nothing: A Season
+        with the Los Angeles Rams\",\"All or Nothing: The Dallas Cowboys\",\"All or
+        Nothing: The Philadelphia Eagles\",\"All or Nothing: The Carolina Panthers\"],\"banner\":\"/banners/graphical/313828-g.jpg\",\"firstAired\":\"2016-06-30\",\"id\":313828,\"image\":\"/banners/posters/313828-1.jpg\",\"network\":\"Prime
+        Video\",\"overview\":\"For the first time in history, Amazon and NFL Films
+        present an unprecedented inside look at the lives of players, coaches and
+        owners of a franchise over the course of an entire NFL season. Witness the
+        real life, behind the scenes journey on the field, off the field, and everything
+        in between.\",\"poster\":\"/banners/posters/313828-1.jpg\",\"seriesName\":\"All
+        or Nothing: American Football\",\"slug\":\"all-or-nothing\",\"status\":\"Ended\"},{\"aliases\":[\"Storage
+        Wars: Dallas\",\"Quem D\xE1 Mais: Texas\"],\"banner\":\"/banners/v4/series/251596/banners/6606d65580916.jpg\",\"firstAired\":\"2011-12-06\",\"id\":251596,\"image\":\"/banners/posters/251596-1.jpg\",\"network\":\"A\\u0026E\",\"overview\":\"Storage
+        Wars: Texas (Originally Storage Wars Dallas) is a reality television series
+        on the A\\u0026E Network that premiered in 2011. It is a regionalized spin-off
+        of the highly-popular series Storage Wars.\",\"poster\":\"/banners/posters/251596-1.jpg\",\"seriesName\":\"Storage
+        Wars: Texas\",\"slug\":\"storage-wars-texas\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/281815-g.jpg\",\"firstAired\":\"2013-10-04\",\"id\":281815,\"image\":\"/banners/posters/281815-2.jpg\",\"network\":\"YouTube\",\"poster\":\"/banners/posters/281815-2.jpg\",\"seriesName\":\"Fuga
+        dalla morte\",\"slug\":\"281815-show\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/256421-g.jpg\",\"firstAired\":\"2011-11-15\",\"id\":256421,\"image\":\"/banners/posters/256421-2.jpg\",\"network\":\"Canale
+        5\",\"poster\":\"/banners/posters/256421-2.jpg\",\"seriesName\":\"Baciati
+        dall'amore\",\"slug\":\"256421-show\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2015-03-16\",\"id\":369339,\"image\":\"/banners/posters/5d74c867a0e26.jpg\",\"network\":\"Rai
+        3\",\"overview\":\"Cronache dall'antichit\xE0 \xE8 un programma di approfondimento
+        storico, in onda su Rai Storia. Come un inviato nel mondo antico, Cristoforo
+        Gorno guida il telespettatore ora dopo ora nei luoghi dell'azione, non tralasciando
+        il contesto in cui quell'avvenimento si \xE8 determinato.\",\"poster\":\"/banners/posters/5d74c867a0e26.jpg\",\"seriesName\":\"Cronache
+        dall'antichit\xE0\",\"slug\":\"cronache-dallantichita\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2022-06-28\",\"id\":423796,\"image\":\"/banners/v4/series/423796/posters/642d2965abf41.jpg\",\"network\":\"Rai
+        2\",\"poster\":\"/banners/v4/series/423796/posters/642d2965abf41.jpg\",\"seriesName\":\"Dalla
+        strada al palco\",\"slug\":\"dalla-strada-al-palco\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"\",\"id\":320148,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"\",\"overview\":\"Lawrence
+        Dallaglio and Freddie Flintoff cycle from Olympia to London\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Flintoff
+        and Dallaglio's Big Ride\",\"slug\":\"flintoff-and-dallaglios-big-ride\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2022-12-01\",\"id\":442597,\"image\":\"/banners/images/missing/series.jpg\",\"network\":null,\"overview\":\"Yara's
+        murder has been in the public spotlight for 12 years.\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Sulle
+        tracce dell'assassino - il caso Yara\",\"slug\":\"sulle-tracce-dellassassino-il-caso-yara\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/258261-g.jpg\",\"firstAired\":\"\",\"id\":258261,\"image\":\"/banners/posters/258261-1.jpg\",\"network\":\"\",\"poster\":\"/banners/posters/258261-1.jpg\",\"seriesName\":\"Le
+        frontiere dell'Astronomia\",\"slug\":\"258261-show\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"\",\"id\":251784,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"ITV4\",\"overview\":\"Dallaglio's
+        World Cup is presented by Lawrence Dallaglio and Craig Doyle. He takes a look
+        at the fates of the world\u2019s leading rugby nations from the inaugural
+        Rugby World Cup in 1987 through to France in 2007. He talks to Craig Doyle
+        as he examines what it takes for a country to be able to succeed at the highest
+        level\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Dallaglio's
+        World Cup\",\"slug\":\"dallaglios-world-cup\",\"status\":\"Ended\"},{\"aliases\":[\"The
+        Woman in the House\",\"TWITHATSFTGITW\",\"La mujer de la casa de enfrente\",\"The
+        Woman in the House\",\"TWITHATSFTGITW\"],\"banner\":\"/banners/v4/series/390537/banners/64cfb58a5d142.jpg\",\"firstAired\":\"2022-01-28\",\"id\":390537,\"image\":\"/banners/v4/series/390537/posters/61d4781055645.jpg\",\"network\":\"Netflix\",\"overview\":\"Mixing
+        wine, pills, casseroles and an overactive imagination, Anna obsesses over
+        a hunky neighbor across the street and witnesses a murder. Or did she?\",\"poster\":\"/banners/v4/series/390537/posters/61d4781055645.jpg\",\"seriesName\":\"The
+        Woman in the House Across the Street from the Girl in the Window\",\"slug\":\"the-woman-in-the-house\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/71301-g.jpg\",\"firstAired\":\"2002-09-07\",\"id\":71301,\"image\":\"/banners/posters/71301-3.jpg\",\"network\":\"Cartoon
+        Network\",\"overview\":\"The characters of Looney Tunes are all babies and
+        live with Granny.\",\"poster\":\"/banners/posters/71301-3.jpg\",\"seriesName\":\"Baby
+        Looney Tunes\",\"slug\":\"baby-looney-tunes\",\"status\":\"Ended\"},{\"aliases\":[\"Bugs
+        Bunny\",\"Daffy Duck\",\"Foghorn Leghorn\",\"Road Runner\",\"Speedy Gonzales\",\"Sylvester\",\"Tweety\",\"Yosemite
+        Sam\",\"The Road Runner Show\"],\"banner\":\"/banners/graphical/72514-g.jpg\",\"firstAired\":\"1929-05-01\",\"id\":72514,\"image\":\"/banners/posters/72514-7.jpg\",\"network\":\"Cartoon
+        Network\",\"overview\":\"Series of comedy short films from 1929 to 1969 during
+        the golden age of American animation, alongside its sister series Merrie Melodies.\",\"poster\":\"/banners/posters/72514-7.jpg\",\"seriesName\":\"Looney
+        Tunes\",\"slug\":\"looney-tunes\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/5d0be9d8c6998.jpg\",\"firstAired\":\"2019-06-14\",\"id\":364471,\"image\":\"/banners/v4/series/364471/posters/64dd54c59b220.jpg\",\"network\":\"Netflix\",\"overview\":\"New
+        interviews and an up-to-date analysis of evidence shed light on the 1992 murders
+        of three girls in Spain and their profound impact on the nation.\",\"poster\":\"/banners/v4/series/364471/posters/64dd54c59b220.jpg\",\"seriesName\":\"The
+        Alc\xE0sser Murders\",\"slug\":\"the-alcasser-murders\",\"status\":\"Ended\"},{\"aliases\":[\"Car
+        Masters Von Schrott zu Reichtum\",\"De cacharros a cochazos\",\"De chatarras
+        a carrazos\"],\"banner\":\"/banners/v4/series/352862/banners/62835a11a52af.jpg\",\"firstAired\":\"2018-09-14\",\"id\":352862,\"image\":\"/banners/series/352862/posters/62114833.jpg\",\"network\":\"Netflix\",\"overview\":\"The
+        colorful crew at Gotham Garage overhauls an eclectic collection of cars and
+        trucks, trading up to a showstopper they can sell for big bucks.\",\"poster\":\"/banners/series/352862/posters/62114833.jpg\",\"seriesName\":\"Car
+        Masters: Rust to Riches\",\"slug\":\"car-masters-rust-to-riches\",\"status\":\"Continuing\"},{\"aliases\":[\"Inu
+        ni Nattara Suki na Hito ni Hirowareta\",\"If I Became a Dog I Would be Picked
+        Up by the Person I Like\",\"My Life as Inukai-san's Dog\",\"Inu ni Nattara
+        Suki na Hito ni Hirowareta\"],\"banner\":\"/banners/v4/series/418185/banners/623cc8a19c690.jpg\",\"firstAired\":\"2023-01-07\",\"id\":418185,\"image\":\"/banners/v4/series/418185/posters/6361307ac82cc.jpg\",\"network\":\"Tokyo
+        MX\",\"overview\":\"The \\\"dog's viewpoint romantic comedy\\\" manga centers
+        on a protagonist who suddenly wakes up one day to find out he has been turned
+        into the pet dog of his cool and beautiful classmate Karen Inukai. While Karen
+        is cool and expressionless at school, at home she dotes on her pet dog.\",\"poster\":\"/banners/v4/series/418185/posters/6361307ac82cc.jpg\",\"seriesName\":\"My
+        Life as Inukai-san's Dog\",\"slug\":\"inu-ni-nattara-suki-na-hito-ni-hirowareta\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/422799/banners/632882da4c259.jpg\",\"firstAired\":\"2022-09-22\",\"id\":422799,\"image\":\"/banners/v4/series/422799/posters/62e443d2d0e18.jpg\",\"network\":\"Netflix\",\"overview\":\"A
+        Thai youth soccer team and their assistant coach are trapped within Tham Luang
+        Cave, prompting a global rescue effort. Inspired by true events.\",\"poster\":\"/banners/v4/series/422799/posters/62e443d2d0e18.jpg\",\"seriesName\":\"Thai
+        Cave Rescue\",\"slug\":\"thai-cave-rescue\",\"status\":\"Ended\"},{\"aliases\":[\"Wabbit\",\"Bugs\"],\"banner\":\"/banners/v4/series/300683/banners/662af84c0bbff.jpg\",\"firstAired\":\"2015-09-21\",\"id\":300683,\"image\":\"/banners/posters/300683-1.jpg\",\"network\":\"Boomerang\",\"overview\":\"\\\"New
+        Looney Tunes\\\" (formerly known as \\\"Wabbit. A Looney Tunes Production\\\"),
+        is an animated series from Warner Bros. Animation. The series is a return
+        to Looney Tunes' slapstick-comedy roots. Each episode contains four shorts
+        starring Bugs Bunny as the main character.\",\"poster\":\"/banners/posters/300683-1.jpg\",\"seriesName\":\"New
+        Looney Tunes\",\"slug\":\"wabbit\",\"status\":\"Ended\"},{\"aliases\":[\"Az
+        Apoll\xF3-program\",\"\u767B\u6708\u4E4B\u65C5\"],\"banner\":\"/banners/graphical/7028-g.jpg\",\"firstAired\":\"1998-04-05\",\"id\":77831,\"image\":\"/banners/posters/77831-3.jpg\",\"network\":\"HBO\",\"overview\":\"The
+        story of the United States' space program, from its beginnings in 1961 to
+        the final moon mission in 1972.\",\"poster\":\"/banners/posters/77831-3.jpg\",\"seriesName\":\"From
+        the Earth to the Moon\",\"slug\":\"from-the-earth-to-the-moon\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/433831/banners/6462258bafeeb.jpg\",\"firstAired\":\"2023-05-14\",\"id\":433831,\"image\":\"/banners/v4/series/433831/posters/646137b86a596.jpg\",\"network\":\"TLC\",\"overview\":\"\\\"Match
+        Me Abroad\\\" follows three matchmakers helping seven Americans who are looking
+        to find love.\",\"poster\":\"/banners/v4/series/433831/posters/646137b86a596.jpg\",\"seriesName\":\"Match
+        Me Abroad\",\"slug\":\"match-me-abroad\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"/banners/graphical/84303-g2.jpg\",\"firstAired\":\"2006-05-03\",\"id\":84303,\"image\":\"/banners/posters/84303-1.jpg\",\"network\":\"Cuatro\",\"poster\":\"/banners/posters/84303-1.jpg\",\"seriesName\":\"Genesis:
+        Inside The Killer's Mind\",\"slug\":\"genesis-inside-the-killers-mind\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/361081/banners/6298de91e85fd.jpg\",\"firstAired\":\"2019-03-14\",\"id\":361081,\"image\":\"/banners/posters/5c947b4b93a5e.jpg\",\"network\":\"National
+        Geographic\",\"overview\":\"An aerial tour of Egypt.\",\"poster\":\"/banners/posters/5c947b4b93a5e.jpg\",\"seriesName\":\"Egypt
+        from Above\",\"slug\":\"egypt-from-above\",\"status\":\"Ended\"},{\"aliases\":[\"Raumpatrouille\",\"Space
+        Patrol\",\"Raumpatrouille Orion\",\"Commando Spatial\",\"Rymdpatrullen\"],\"banner\":\"/banners/graphical/80115-g4.jpg\",\"firstAired\":\"1966-09-17\",\"id\":80115,\"image\":\"/banners/posters/80115-3.jpg\",\"network\":\"Norddeutscher
+        Rundfunk (NDR)\",\"overview\":\"What seems like a fairy tale today may be
+        reality tomorrow. Here we have a fairy tale of the day after tomorrow. There
+        are no more national states, only mankind and her colonies in outer space.
+        We settle on stars far-off, the bottom of the sea is developed as living place.
+        With what are today unimaginable speeds, the starships of tomorrow transverse
+        the Milky Way. One of this starships is the Orion, a little piece in the giant
+        security system which protects the Earth from outer space threats. Let's accompany
+        the Orion and her crew at their patrols-service on the edge of infinity...\",\"poster\":\"/banners/posters/80115-3.jpg\",\"seriesName\":\"Space
+        Patrol Orion\",\"slug\":\"raumpatrouille-orion\",\"status\":\"Ended\"},{\"aliases\":[\"\xC0
+        vol d'oiseau\"],\"banner\":\"/banners/text/254572.jpg\",\"firstAired\":\"2011-12-29\",\"id\":254572,\"image\":\"/banners/posters/254572-4.jpg\",\"network\":\"BBC
+        One\",\"overview\":\"Bird's-eye view of the natural world, joining the journeys
+        of snow geese, cranes, albatrosses, eagles and other birds across six continents.
+        Beginning in North America, snow geese face their biggest predator, pelicans
+        glide under San Francisco's Golden Gate Bridge, bald eagles in Alaska swoop
+        among brown bears, and on the Great Plains, cowbirds dive under the feet of
+        fighting bison. Narrated by David Tennant.\",\"poster\":\"/banners/posters/254572-4.jpg\",\"seriesName\":\"Earthflight\",\"slug\":\"earthflight\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/262312-g.jpg\",\"firstAired\":\"1983-12-21\",\"id\":262312,\"image\":\"/banners/posters/262312-1.jpg\",\"network\":\"Anime
+        OAV\",\"overview\":\"In a near future, mankind has moved from a drained Earth
+        to the Moon. Rebel acts of terrorism lead to conflicts with the Earth Federal
+        Government. A mysterious entity called Dallos appears to restore hope.\",\"poster\":\"/banners/posters/262312-1.jpg\",\"seriesName\":\"Dallos\",\"slug\":\"dallos\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/81379-g.jpg\",\"firstAired\":\"2007-01-18\",\"id\":81379,\"image\":\"/banners/posters/81379-1.jpg\",\"network\":\"RTL
+        Television\",\"overview\":\"Doctor Daniel Koch works at the forensic in Cologne
+        and tries to solve the many crimes taking place there.\",\"poster\":\"/banners/posters/81379-1.jpg\",\"seriesName\":\"Post
+        Mortem\",\"slug\":\"post-mortem\",\"status\":\"Ended\"},{\"aliases\":[\"In
+        principio: Storie dalla Bibbia\",\"Tezuka Osamu no ky\u016Byaku seisho monogatari\",\"The
+        Little Bible Fox\",\"Tezuka Osamu no Kyuuyaku Seisho Monogatari: In the Beginning\",\"Tezuka
+        Osamu no Ky\u016Byaku Seisho Monogatari\",\"Osamu Tezuka's Old Testament Stories\",\"Tezuka
+        Osamu's Tales from the Old Testament\",\"Osamu Tezukas Erz\xE4hlung vom Alten
+        Testament\",\"Tezuka Osamu no Ky\u016Byaku Seisho Monogatari\",\"Historias
+        de la Biblia\",\"Seisho Monogatari\",\"Las Historias de la Biblia de Osamu
+        Tezuka\",\"Tezuka Osamu no Kyuuyaku Seisho Monogatari\",\"Seisho Monogatari\",\"\u624B\u585A\u6CBB\u866B\u306E\u65E7\u7D04\u8056\u66F8\u7269\u8A9E\",\"\u3066\u3065\u304B\u304A\u3055\u3080\u306E\u304D\u3085\u3046\u3084\u304F\u305B\u3044\u3057\u3087\u3082\u306E\u304C\u305F\u308A\",\"\u0422\u044D\u0434\u0437\u0443\u043A\u0430
+        \u041E\u0441\u0430\u043C\u0443 \u043D\u043E \u043A\u044E:\u044F\u043A\u0443
+        \u0441\u044D\u0439\u0441\u0451 \u043C\u043E\u043D\u043E\u0433\u0430\u0442\u0430\u0440\u0438\",\"\u0412\u0435\u0442\u0445\u043E\u0437\u0430\u0432\u0435\u0442\u043D\u044B\u0435
+        \u0438\u0441\u0442\u043E\u0440\u0438\u0438 \u041E\u0441\u0430\u043C\u0443
+        \u0422\u044D\u0434\u0437\u0443\u043A\u0430\",\"Cerita Perjanjian Lama Osamu
+        Tezuka\"],\"banner\":\"/banners/text/260116.jpg\",\"firstAired\":\"1997-04-01\",\"id\":260116,\"image\":\"/banners/v4/series/260116/posters/63f937ca91bae.jpg\",\"network\":\"WOWOW\",\"overview\":\"Based
+        on the Old Testament in the Bible, up until the birth of Jesus Christ.\",\"poster\":\"/banners/v4/series/260116/posters/63f937ca91bae.jpg\",\"seriesName\":\"In
+        the Beginning: The Bible Stories\",\"slug\":\"260116-show\",\"status\":\"Ended\"},{\"aliases\":[\"Studios
+        DaviProdu\xE7\xF5es\",\"Diandra Santos Produ\xE7\xF5es\",\"Diandra Santos\"],\"banner\":\"/banners/v4/series/389473/banners/609dc349287e5.jpg\",\"firstAired\":\"2020-04-27\",\"id\":389473,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"YouTube\",\"overview\":\"Di's
+        house tips and a program Presented by Diandra Santos. from Studios DaviProdu\xE7\xF5es
+        and Diandra Santos Produ\xE7\xF5es\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Di's
+        house tips\",\"slug\":\"dicas-de-casa-da-di\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2005-11-06\",\"id\":327530,\"image\":\"/banners/posters/327530-1.jpg\",\"network\":\"Canale
+        5\",\"poster\":\"/banners/posters/327530-1.jpg\",\"seriesName\":\"Callas and
+        Onassis\",\"slug\":\"327530-show\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2016-04-07\",\"id\":313788,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"SVT1\",\"overview\":\"About
+        some of those who beg on our streets. Many have opinions and perhaps also
+        prejudices about beggars. But how many of us have really talked to any of
+        them?\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"We
+        Are Called Beggars\",\"slug\":\"313788-show\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"1968-04-01\",\"id\":407625,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"\",\"overview\":\"Conversations
+        with Lord Harewood and Maria Callas.\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"The
+        Callas Conversations\",\"slug\":\"the-callas-conversations\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"\",\"id\":359698,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Pallas\",\"slug\":\"pallas\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2015-03-16\",\"id\":296294,\"image\":\"/banners/posters/296294-1.jpg\",\"network\":\"\",\"overview\":\"Gafas
+        e Pallaso are two characters of a reality that is not governed by the same
+        parameters as ours. The contact with other forms of life resulting from the
+        free intergalactic transit and the miscegenation that this entails, as well
+        as the peculiar religious idols or hegemonic alcoholic beverages whose image
+        is a football myth, not to mention rare parallel worlds or space-time flirtations
+        , Demonstrate what we say. The protagonists are the best proof of this: a
+        clown of race who comes from another planet with a magic band, and an individual
+        whose sunglasses are part of him as his chest hairs. Within this cosmology
+        we can consider various particular and picturesque species and individuals,
+        but also a series of everyday elements that make up a whole with a characteristic
+        and identifiable personality: a monopolistic beer whose corporate image is
+        the legendary porter Oliver Kahn, Excellence, a somewhat special religion.\",\"poster\":\"/banners/posters/296294-1.jpg\",\"seriesName\":\"Gafas
+        e Pallaso\",\"slug\":\"296294-show\",\"status\":\"Ended\"},{\"aliases\":[\"Liar
+        (2020)\",\"Mentiras - Bugie\"],\"banner\":\"/banners/series/378377/banners/5eb0542761590.jpg\",\"firstAired\":\"2020-04-19\",\"id\":378377,\"image\":\"/banners/series/378377/posters/600d66a662b83.jpg\",\"network\":\"atresplayer\",\"overview\":\"A
+        literature teacher suspects that a well-respected surgeon has drugged her
+        and begins a legal case against him.\",\"poster\":\"/banners/series/378377/posters/600d66a662b83.jpg\",\"seriesName\":\"Lies
+        and Deceit\",\"slug\":\"mentiras-2020\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/282590-g.jpg\",\"firstAired\":\"2014-06-20\",\"id\":282590,\"image\":\"/banners/posters/282590-1.jpg\",\"network\":\"Animal
+        Planet\",\"overview\":\"A team of specialists who spend each episode, designing
+        and executing unique and stunning pools that seem to be formed by nature.\",\"poster\":\"/banners/posters/282590-1.jpg\",\"seriesName\":\"The
+        Pool Master\",\"slug\":\"the-pool-master\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/278401/banners/6631643fd2822.jpg\",\"firstAired\":\"2014-02-05\",\"id\":278401,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"\",\"overview\":\"Here's
+        your choice: would you rather get electrocuted by an electric eel or a Taser?
+        Or your house is on fire, what's the best way to escape: through the window
+        or down the stairs? Or the engine of your aircraft fails, what would you rather
+        be in: a helicopter or a plane? \\r\\n\\r\\nDeadly Dilemmas gives you a load
+        of hypothetical situations in every episode, and all you have to is decide
+        which is the more survivable. Then we'll tell you the science behind why!
+        \\r\\n\\r\\nThink of it as a kind of dangerous version of Play Your Cards
+        Right, where the decision between higher or lower will make the difference
+        between life or death!\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Deadly
+        Dilemmas\",\"slug\":\"deadly-dilemmas\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/159161-g.jpg\",\"firstAired\":\"2004-09-06\",\"id\":159161,\"image\":\"/banners/posters/159161-1.jpg\",\"network\":\"\",\"overview\":\"Narrated
+        by Academy Award-winner Ben Kingsley, this series objectively documents Judaism,
+        Islam, Hinduism, Buddhism, Catholicism, and Protestantism worldwide with interviews
+        from experts. Explore issues that probe the very core of our existence and
+        gain new understanding about humanity. Travel to exotic locations and observe
+        how religions have shaped cultures, changed history, brought us closer together
+        and thrust us into war.\",\"poster\":\"/banners/posters/159161-1.jpg\",\"seriesName\":\"Religions
+        of the World\",\"slug\":\"religions-of-the-world\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2013-01-18\",\"id\":398405,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"\",\"overview\":\"Tales
+        of people so desperate that they commit unspeakable acts of murder and violence\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Desperate
+        Measures\",\"slug\":\"desperate-measures\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"1998-01-13\",\"id\":400138,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Animated
+        World Faiths\",\"slug\":\"animated-world-faiths\",\"status\":\"Ended\"}]}"
     headers:
-      cache-control:
+      Cache-Control:
       - private, max-age=86400
-      connection:
+      Connection:
       - keep-alive
-      content-type:
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Sat, 09 May 2020 14:40:05 GMT
-      transfer-encoding:
+      Date:
+      - Wed, 22 May 2024 14:33:38 GMT
+      Transfer-Encoding:
       - chunked
-      vary:
+      Vary:
       - Accept-Language
-      via:
-      - 1.1 1437ff2cfbc1ea8c7a36e6b0ce6e935a.cloudfront.net (CloudFront)
-      x-amz-cf-id:
-      - yHDq-fQnoUOXD1lziJ7wmmipS1co41hKaGYcXGyXHuJb5M_9kDgq-g==
-      x-amz-cf-pop:
-      - ZRH50-C1
-      x-cache:
+      Via:
+      - 1.1 5a9df1bcd5f48109e94a8e34d807b686.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - vyz0evP2CHl7-7Ldv3q3LIBjQiWrC7TQNzgqpIjOVqBaEyp-lJq1mw==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
       - Miss from cloudfront
-      x-powered-by:
+      X-Powered-By:
       - Thundar!
-      x-thetvdb-api-version:
+      X-Thetvdb-Api-Version:
       - 3.0.0
     status:
       code: 200
@@ -361,11 +357,11 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Accept-Language:
       - en
       Authorization:
-      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
       Connection:
       - keep-alive
       Content-Type:
@@ -376,41 +372,40 @@ interactions:
     uri: https://api.thetvdb.com/series/242521
   response:
     body:
-      string: !!python/unicode '{"data":{"id":242521,"seriesId":"","seriesName":"Dallas
-        (2012)","aliases":[],"season":"3","poster":"posters/242521-6.jpg","banner":"graphical/242521-g5.jpg","fanart":"fanart/original/242521-6.jpg","status":"Ended","firstAired":"2012-06-13","network":"TNT
-        (US)","networkId":"273","runtime":"45","language":"en","genre":["Drama"],"overview":"The
+      string: '{"data":{"id":242521,"seriesId":"","seriesName":"Dallas (2012)","aliases":[],"season":"3","poster":"posters/242521-6.jpg","banner":"graphical/242521-g5.jpg","fanart":"fanart/original/242521-1.jpg","status":"Ended","firstAired":"2012-06-13","network":"TNT
+        (US)","networkId":"273","runtime":"45","language":"en","genre":["Drama","Romance"],"overview":"The
         next generation of the Ewing family - cousins John Ross Ewing and Christopher
         Ewing - clash over the family''s oil business and vast fortune. Roll on drama,
-        sabotage, secrets and betrayal. Everyone is back and then some!","lastUpdated":1581556354,"airsDayOfWeek":"","airsTime":"","rating":"TV-14","imdbId":"tt1723760","zap2itId":"EP01481224","added":"2011-03-22
+        sabotage, secrets and betrayal. Everyone is back and then some!","lastUpdated":1708963506,"airsDayOfWeek":"","airsTime":"","rating":"TV-14","imdbId":"tt1723760","zap2itId":"","added":"2011-03-22
         04:34:14","addedBy":38654,"siteRating":8,"siteRatingCount":562,"slug":"dallas-2012"}}'
     headers:
-      age:
-      - '75621'
-      cache-control:
+      Age:
+      - '44903'
+      Cache-Control:
       - private, max-age=86400
-      connection:
+      Connection:
       - keep-alive
-      content-length:
+      Content-Length:
       - '790'
-      content-type:
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Fri, 08 May 2020 17:39:44 GMT
-      last-modified:
-      - Thu, 13 Feb 2020 01:12:34 GMT
-      vary:
+      Date:
+      - Wed, 22 May 2024 02:05:16 GMT
+      Last-Modified:
+      - Mon, 26 Feb 2024 16:05:06 GMT
+      Vary:
       - Accept-Language
-      via:
-      - 1.1 1437ff2cfbc1ea8c7a36e6b0ce6e935a.cloudfront.net (CloudFront)
-      x-amz-cf-id:
-      - vwDVx6MBsyKm8ucHdg94PQWS4yMJnKVtEpayrtSx5GMTVyk_YJLOJA==
-      x-amz-cf-pop:
-      - ZRH50-C1
-      x-cache:
+      Via:
+      - 1.1 191181f299c93f856cc1cdad79c1bb76.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - WQ9QGDQ_xa4nJMVJ7KLOe5qKDBcdEYeJN-imWDASS-PgZdBiHSxOCA==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
       - Hit from cloudfront
-      x-powered-by:
+      X-Powered-By:
       - Thundar!
-      x-thetvdb-api-version:
+      X-Thetvdb-Api-Version:
       - 3.0.0
     status:
       code: 200
@@ -421,11 +416,11 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Accept-Language:
       - en
       Authorization:
-      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
       Connection:
       - keep-alive
       Content-Type:
@@ -433,50 +428,43 @@ interactions:
       User-Agent:
       - Subliminal/2.1
     method: GET
-    uri: https://api.thetvdb.com/series/242521/episodes/query?airedEpisode=3&airedSeason=1&page=1
+    uri: https://api.thetvdb.com/series/242521/episodes/query?airedSeason=1&airedEpisode=3&page=1
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAA3RT247aMBD9lZGfQzYJAUregF2pu9JWFdttVa32wcQT4pLYkS9QtELqb/T3+iUd
-        E2ihUt88Z854jmeO31gj1cay4o1V0ljHijRiDT8dFH6ng/JNE7HO4LY/HyImuOOseHljUrAiT6fT
-        UUp0Lg2KJ+RWq2P5RXx/S7zJZDLNTvBdJ60W+MG3KzSsGEYMTwhvkRXsU43w0cgS4av28JHvWdQr
-        nIVqImRJmg2S8SBLKLP2aN2T44Ze8vJK+ohUOn0M2aMsa44NPMaw1CupGBF2Rjrs03PjqcuS29Zb
-        i8es3qLZStxRmwdvHXALD7pWVG4tWHQWtHfgNJQNly3U0sJKGlcbua6JrQS0fINHvOKuRgOd0V5E
-        8BAvYxBYSoE21LfUCVa83ITgiS6tK202EbS+rAM0U+rXj58WhLQt38cwl45kw91OqjVd3cpmD6iw
-        3cOikVUFc24U3WzQeaPsUYkzsu9FE9FK0VhgJ119FKewq3EXwYKUW6cpMDHMwNIgXXPRgiulvSqx
-        ReVAVxVNjjDQXaeN80q6fWhQI29ANwJ2RBY2ZsFJau35GoO/rvdLg76aM8WHYDItfOmkVguiEkwk
-        W+vds2n6IFjzuSP7BQ+kw+k0y/LhcEwb34pbacvgx8Cj8GzE3r4E/GO5P/ii5p37i/CV1Y13l9as
-        ZIPqpLu/xN5keTbK0puT+eNv3TpoxTDtexLRp68Ez/fnX2FnFTW8FhjgOdL68X/4Sf85IVuxCp2Y
-        c1mWjEbZmATQih0tackdrS98o8+DNCfc1fSaGflLm6OIPhbi/JWmgzQdpENIkyJPitHoXPJFClcT
-        ZZwnZ+g9BpcTNhwHzNJHOrebxNklsCAfEDF/l5Na+6hp1axIDq+H3wAAAP//AwBKADAddgQAAA==
+      string: "{\"links\":{\"first\":1,\"last\":1,\"next\":null,\"prev\":null},\"data\":[{\"id\":4199511,\"airedSeason\":1,\"airedSeasonID\":477792,\"airedEpisodeNumber\":3,\"episodeName\":\"The
+        Price You Pay\",\"firstAired\":\"2012-06-20\",\"guestStars\":[],\"directors\":[\"Michael
+        M. Robin\"],\"writers\":[\"Bruce Rasmussen\"],\"overview\":\"Just as John
+        Ross sets out to claim his birthright and make his father proud, J.R. decides
+        to move back to Southfork, much to Ann\u2019s dismay. Bitter Ewing family
+        enemy Cliff Barnes returns and tries to reconnect with his nephew, Christopher.
+        A startling family announcement offers an opportunity to heal old wounds.\",\"language\":{\"episodeName\":\"en\",\"overview\":\"en\"},\"productionCode\":\"\",\"showUrl\":\"\",\"lastUpdated\":1573641655,\"dvdDiscid\":\"\",\"dvdSeason\":1,\"dvdEpisodeNumber\":3,\"dvdChapter\":null,\"absoluteNumber\":3,\"filename\":\"episodes/242521/4199511.jpg\",\"seriesId\":242521,\"lastUpdatedBy\":1,\"airsAfterSeason\":null,\"airsBeforeSeason\":null,\"airsBeforeEpisode\":null,\"imdbId\":\"tt2205526\",\"contentRating\":\"TV-14\",\"thumbAuthor\":1,\"thumbAdded\":\"2019-11-13
+        10:40:55\",\"thumbWidth\":\"640\",\"thumbHeight\":\"360\",\"siteRating\":7.2,\"siteRatingCount\":484,\"isMovie\":0}]}"
     headers:
-      age:
-      - '58152'
-      cache-control:
+      Cache-Control:
       - private, max-age=86400
-      connection:
+      Connection:
       - keep-alive
-      content-encoding:
+      Content-Encoding:
       - gzip
-      content-type:
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Fri, 08 May 2020 22:30:53 GMT
-      transfer-encoding:
+      Date:
+      - Wed, 22 May 2024 14:33:39 GMT
+      Transfer-Encoding:
       - chunked
-      vary:
+      Vary:
       - Accept-Encoding,Accept-Language
-      via:
-      - 1.1 1437ff2cfbc1ea8c7a36e6b0ce6e935a.cloudfront.net (CloudFront)
-      x-amz-cf-id:
-      - DnHal0YyLUh3rdx8SVVjbVKPIVlPCE2QQT7mM_n0q1Tn2OScQGJayQ==
-      x-amz-cf-pop:
-      - ZRH50-C1
-      x-cache:
-      - Hit from cloudfront
-      x-powered-by:
+      Via:
+      - 1.1 68c9162ccc29f8f3ca30be36950cea58.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - dytdl6Z2deWwTr6p38NxxTepSWufudfE9djf0NX1j0BtOV_Qg9iFeA==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
+      - Miss from cloudfront
+      X-Powered-By:
       - Thundar!
-      x-thetvdb-api-version:
+      X-Thetvdb-Api-Version:
       - 3.0.0
     status:
       code: 200
@@ -487,11 +475,11 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Accept-Language:
       - en
       Authorization:
-      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
       Connection:
       - keep-alive
       Content-Type:
@@ -502,47 +490,44 @@ interactions:
     uri: https://api.thetvdb.com/episodes/4199511
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAA3RTy27bMBD8lQXPsiLJsl3rZjsBmgApgqRpURQ90OLKZCORArmKYQQB+hv9vX5J
-        l360cYEed3bIGe4OX4SSJEX1IowSVZnP55M8T4Q0HtUDyuCsqM7r60vmzWazeXGEr3oTnMIPQ7dG
-        L6pxIvCIyA5FJT5qhDtvaoQvboA7uROJaIwPtIinmVBkeTHKpqMi485mwEAPJH0Q1ddviVBMqsnt
-        S3Frai2xhdsU7t3aWMGErTeEh/bSD6xyL0M3hID7rntG/2xwyzI3QyCQAW6ctnw8BAhIAdxAQA7q
-        VpoOtAmwNp60NxvNbKugk0+4xxtJGj303g0qgZv0PgWFtVEY4vmOlWAt66dYPPClunH+KYFuqHWE
-        Ftb++vEzgDKhk7sUlobYNlxtjd3w1Z1pd4AWux2sWtM0sJTe8s0eafA27J2QNwctnoizlscCW0N6
-        b85ir3GbwIqdB3Jc+BQWEHiQ1L6RkNa6wdbYoSVwTcOTYwxc3ztPgzW0iwIaZQuuVbBlsgop76WV
-        djPIDcaonO+XB302Z65fE8FjUkNNxtkVUxlmUtBu++jbQ9HKQI89py9mIB/P50VRjsdT3vizujSh
-        jnmMPC5PQbRD2+6BfyL3B19p2dNfRK6Dawd6G83GtGiPvg+XhIuiLCZFfnEMf/q930SvGKd9zSYO
-        7TPDy93pV4RFw4LnBiO8RF4//g8/+j81TKfWUUkQFUU2mRRTNsArJl7SvSReX/xGn0Z5yThpfs2C
-        8+X83sShVur0leajPB/lY8izqsyqyeR05LNRpJkyLbMT9B5jyhkbTyMW+COd5GZp8RZYcQ6YWL4r
-        2W24dbxqUWWvr78BAAD//wMAl9Pvuz8EAAA=
+      string: "{\"data\":{\"id\":4199511,\"airedSeason\":1,\"airedSeasonID\":477792,\"airedEpisodeNumber\":3,\"episodeName\":\"The
+        Price You Pay\",\"firstAired\":\"2012-06-20\",\"guestStars\":[],\"directors\":[\"Michael
+        M. Robin\"],\"writers\":[\"Bruce Rasmussen\"],\"overview\":\"Just as John
+        Ross sets out to claim his birthright and make his father proud, J.R. decides
+        to move back to Southfork, much to Ann\u2019s dismay. Bitter Ewing family
+        enemy Cliff Barnes returns and tries to reconnect with his nephew, Christopher.
+        A startling family announcement offers an opportunity to heal old wounds.\",\"language\":{\"episodeName\":\"en\",\"overview\":\"en\"},\"productionCode\":\"\",\"showUrl\":\"\",\"lastUpdated\":1573641655,\"dvdDiscid\":\"\",\"dvdSeason\":1,\"dvdEpisodeNumber\":3,\"dvdChapter\":null,\"absoluteNumber\":3,\"filename\":\"episodes/242521/4199511.jpg\",\"seriesId\":242521,\"lastUpdatedBy\":1,\"airsAfterSeason\":null,\"airsBeforeSeason\":null,\"airsBeforeEpisode\":null,\"imdbId\":\"tt2205526\",\"contentRating\":\"TV-14\",\"thumbAuthor\":1,\"thumbAdded\":\"2019-11-13
+        10:40:55\",\"thumbWidth\":\"640\",\"thumbHeight\":\"360\",\"siteRating\":7.2,\"siteRatingCount\":484,\"isMovie\":0}}"
     headers:
-      cache-control:
+      Age:
+      - '15630'
+      Cache-Control:
       - private, max-age=86400
-      connection:
+      Connection:
       - keep-alive
-      content-encoding:
+      Content-Encoding:
       - gzip
-      content-type:
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Sat, 09 May 2020 14:40:05 GMT
-      last-modified:
+      Date:
+      - Wed, 22 May 2024 10:13:09 GMT
+      Last-Modified:
       - Thu, 01 Jan 1970 00:00:00 GMT
-      transfer-encoding:
+      Transfer-Encoding:
       - chunked
-      vary:
+      Vary:
       - Accept-Encoding,Accept-Language
-      via:
-      - 1.1 1437ff2cfbc1ea8c7a36e6b0ce6e935a.cloudfront.net (CloudFront)
-      x-amz-cf-id:
-      - ZQoVxZt7nH_YX6KRcuVK3OKSeyzYjFMc023H_t2Nj0d60bpC1zGNKw==
-      x-amz-cf-pop:
-      - ZRH50-C1
-      x-cache:
-      - Miss from cloudfront
-      x-powered-by:
+      Via:
+      - 1.1 735dd7fa3c296627cd805d04e3e3a3e8.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - ODJ0UA0pzXZipSgRUqjql1J4DInSSRDiluGvKBVwtPoT1GnM77nXtw==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
+      - Hit from cloudfront
+      X-Powered-By:
       - Thundar!
-      x-thetvdb-api-version:
+      X-Thetvdb-Api-Version:
       - 3.0.0
     status:
       code: 200

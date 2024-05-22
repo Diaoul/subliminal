@@ -1,11 +1,11 @@
 interactions:
 - request:
-    body: !!python/unicode '{"username": null, "password": null, "apikey": "5EC930FB90DA1ADA"}'
+    body: '{"apikey": "5EC930FB90DA1ADA", "username": null, "password": null}'
     headers:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Accept-Language:
       - en
       Connection:
@@ -20,29 +20,29 @@ interactions:
     uri: https://api.thetvdb.com/login
   response:
     body:
-      string: !!python/unicode '{"token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw"}'
+      string: '{"token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg"}'
     headers:
-      connection:
+      Connection:
       - keep-alive
-      content-length:
+      Content-Length:
       - '470'
-      content-type:
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Sat, 09 May 2020 14:40:00 GMT
-      vary:
+      Date:
+      - Wed, 22 May 2024 14:33:34 GMT
+      Vary:
       - Accept-Language
-      via:
-      - 1.1 d92debab8d9ca0518390aebaec8733a7.cloudfront.net (CloudFront)
-      x-amz-cf-id:
-      - USoTPJdv7MZYuMGzh93-1dKQjpXqsjNIb5ffDS9L8s4Jbq5hzOJeoA==
-      x-amz-cf-pop:
-      - ZRH50-C1
-      x-cache:
+      Via:
+      - 1.1 2b1fd1e1421ca124eaa002817c6c475a.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - ZRlGvJMw9l8m8F_5_ZcUkEpo4bbvjXOwoVTOWqy_WubSgl5jBugmFQ==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
       - Miss from cloudfront
-      x-powered-by:
+      X-Powered-By:
       - Thundar!
-      x-thetvdb-api-version:
+      X-Thetvdb-Api-Version:
       - 3.0.0
     status:
       code: 200
@@ -53,11 +53,11 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Accept-Language:
       - en
       Authorization:
-      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
       Connection:
       - keep-alive
       Content-Type:
@@ -68,38 +68,35 @@ interactions:
     uri: https://api.thetvdb.com/search/series?name=the+big+bang+theory
   response:
     body:
-      string: "{\"data\":[{\"aliases\":[\"\u56E7\u7537\u5927\u7206\u70B8\"],\"banner\"\
-        :\"/banners/graphical/80379-g13.jpg\",\"firstAired\":\"2007-9-24\",\"id\"\
-        :80379,\"image\":\"/banners/posters/80379-18.jpg\",\"network\":\"CBS\",\"\
-        overview\":\"A woman who moves into an apartment across the hall from two\
-        \ brilliant but socially awkward physicists shows them how little they know\
-        \ about life outside of the laboratory.\",\"poster\":\"/banners/posters/80379-18.jpg\"\
-        ,\"seriesName\":\"The Big Bang Theory\",\"slug\":\"the-big-bang-theory\",\"\
-        status\":\"Ended\"}]}"
+      string: "{\"data\":[{\"aliases\":[\"La teoria del Big Bang\",\"\u56E7\u7537\u5927\u7206\u70B8\"],\"banner\":\"/banners/graphical/80379-g23.jpg\",\"firstAired\":\"2007-09-24\",\"id\":80379,\"image\":\"/banners/posters/80379-18.jpg\",\"network\":\"CBS\",\"overview\":\"A
+        woman who moves into an apartment across the hall from two brilliant but socially
+        awkward physicists shows them how little they know about life outside of the
+        laboratory.\",\"poster\":\"/banners/posters/80379-18.jpg\",\"seriesName\":\"The
+        Big Bang Theory\",\"slug\":\"the-big-bang-theory\",\"status\":\"Ended\"}]}"
     headers:
-      cache-control:
+      Cache-Control:
       - private, max-age=86400
-      connection:
+      Connection:
       - keep-alive
-      content-length:
-      - '486'
-      content-type:
+      Content-Length:
+      - '512'
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Sat, 09 May 2020 14:40:00 GMT
-      vary:
+      Date:
+      - Wed, 22 May 2024 14:33:35 GMT
+      Vary:
       - Accept-Language
-      via:
-      - 1.1 d92debab8d9ca0518390aebaec8733a7.cloudfront.net (CloudFront)
-      x-amz-cf-id:
-      - 2GHXjtli_1iLsjx7EpMwqIAVogm0T1JqR8WBV_6l0f05tHjZ1PLvBg==
-      x-amz-cf-pop:
-      - ZRH50-C1
-      x-cache:
+      Via:
+      - 1.1 2b1fd1e1421ca124eaa002817c6c475a.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - u0RLAFO0287UKlgu3HPz7b9SFP9WI400Kos-UFIOEUiFMAuCLVPSZw==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
       - Miss from cloudfront
-      x-powered-by:
+      X-Powered-By:
       - Thundar!
-      x-thetvdb-api-version:
+      X-Thetvdb-Api-Version:
       - 3.0.0
     status:
       code: 200
@@ -110,11 +107,11 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Accept-Language:
       - en
       Authorization:
-      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
       Connection:
       - keep-alive
       Content-Type:
@@ -125,41 +122,40 @@ interactions:
     uri: https://api.thetvdb.com/series/80379
   response:
     body:
-      string: !!python/unicode '{"data":{"id":80379,"seriesId":"58053","seriesName":"The
-        Big Bang Theory","aliases":[],"season":"12","poster":"posters/80379-18.jpg","banner":"graphical/80379-g13.jpg","fanart":"fanart/original/80379-2.jpg","status":"Ended","firstAired":"2007-09-24","network":"CBS","networkId":"57","runtime":"25","language":"en","genre":["Comedy"],"overview":"A
+      string: '{"data":{"id":80379,"seriesId":"","seriesName":"The Big Bang Theory","aliases":[],"season":"12","poster":"posters/80379-18.jpg","banner":"graphical/80379-g23.jpg","fanart":"fanart/original/80379-38.jpg","status":"Ended","firstAired":"2007-09-24","network":"CBS","networkId":"57","runtime":"25","language":"en","genre":["Comedy","Romance"],"overview":"A
         woman who moves into an apartment across the hall from two brilliant but socially
         awkward physicists shows them how little they know about life outside of the
-        laboratory.","lastUpdated":1588972609,"airsDayOfWeek":"Thursday","airsTime":"8:00
-        PM","rating":"TV-14","imdbId":"tt0898266","zap2itId":"EP00931182","added":"2008-02-04
+        laboratory.","lastUpdated":1716229863,"airsDayOfWeek":"Thursday","airsTime":"8:00
+        PM","rating":"TV-14","imdbId":"tt0898266","zap2itId":"","added":"2008-02-04
         00:00:00","addedBy":1,"siteRating":8.8,"siteRatingCount":41886,"slug":"the-big-bang-theory"}}'
     headers:
-      age:
-      - '62288'
-      cache-control:
+      Age:
+      - '38733'
+      Cache-Control:
       - private, max-age=86400
-      connection:
+      Connection:
       - keep-alive
-      content-length:
-      - '767'
-      content-type:
+      Content-Length:
+      - '763'
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Fri, 08 May 2020 21:21:53 GMT
-      last-modified:
-      - Fri, 08 May 2020 21:16:49 GMT
-      vary:
+      Date:
+      - Wed, 22 May 2024 03:48:02 GMT
+      Last-Modified:
+      - Mon, 20 May 2024 18:31:03 GMT
+      Vary:
       - Accept-Language
-      via:
-      - 1.1 d92debab8d9ca0518390aebaec8733a7.cloudfront.net (CloudFront)
-      x-amz-cf-id:
-      - PqrDHeTWLr6lA8w-Yv8twTkRf5HZi5SHNb1BL2V9FP6bD_RXlLELEQ==
-      x-amz-cf-pop:
-      - ZRH50-C1
-      x-cache:
+      Via:
+      - 1.1 e78b88048cb2f0beb893089a9fa30352.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - 44KPcjJgKsfQ8Y50sGsrJsq1vjXBuYAMA_4Q475P0LXJvUiBX5bRlg==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
       - Hit from cloudfront
-      x-powered-by:
+      X-Powered-By:
       - Thundar!
-      x-thetvdb-api-version:
+      X-Thetvdb-Api-Version:
       - 3.0.0
     status:
       code: 200
@@ -170,11 +166,11 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Accept-Language:
       - en
       Authorization:
-      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
       Connection:
       - keep-alive
       Content-Type:
@@ -182,50 +178,45 @@ interactions:
       User-Agent:
       - Subliminal/2.1
     method: GET
-    uri: https://api.thetvdb.com/series/80379/episodes/query?airedEpisode=5&airedSeason=7&page=1
+    uri: https://api.thetvdb.com/series/80379/episodes/query?airedSeason=7&airedEpisode=5&page=1
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAA3RTXVPbMBD8Kzd66YsJjp3Eid9CYApt6TB8lM4AD4p1iURsySPJMYHJf+8pTihM
-        p2+6vc16727zxkqlV47lb2yhrPMs70es5PuHxhd66KYsI1ZbXHfvbcQE95zlD29MCZYPRqNxmk0i
-        xpVFcYPcGc3y7FN9ccryYZKM4wPtrFbOCPzZVHO01IsY7hFeIcvZrUS4N3ZVl7xAuLLmRVXKb1jU
-        +ZwGDaIlcT896sdH/Yw6ywadv/Hc0jwPbLppKgUX6rVZcWreGiHgzKoCplpYbB17ojlIpvCm+8El
-        tyuYIXVN61Yq9FurPHbdmWyKFfww1iKp7YS+c3KnqfqmKrjGjTal2MmaNdq1wpYM3kgshdFQNc6D
-        wEIJBGlaqgsJj2xabcCrCh8ZKAfemK7BF/RZcLQDz1fogMOzmQP3IInVaEX6jrYRAdcCvERlwWLJ
-        vTLaSVUHrbrxpBea4GktPbhErlupSozg3LTcClgoLRxJVg7LBbgS6QR6CeT2mj9/cVCYv144sZfS
-        Q6u8hBO0mgv0HnssxEUvG77EEKLPR8SwnA/LoHobkmREUwSvM6ISPPg9TOMhUR1t5s6WBLEuhXc1
-        JS0cuj8cj5M4TkLMxFqcKleE6AUelR8yR9W/0SJwJnntQ9mlmc+dKRv/TuoP4pCsEnXn3KFV6I7H
-        MQX7eD+UOx4i53E6nIjhOBv0nutl8LxjXpCZHfmT75MNKU/Gg/5ol3o3Das8mN0bIfgEF8bi//D9
-        OIeGqsQ8fI15nybJJJ0kZKIw2qP215QAvQz/nl9HV18J95LmmzZemvfJO0gI3K9vV98r4SXVo0F8
-        gM4x3JuwdBQwihse5LNe9hGYmUYTcTDJUrLnLg1dm+Xx9mn7BwAA//8DAPP2eC5eBAAA
+      string: '{"links":{"first":1,"last":1,"next":null,"prev":null},"data":[{"id":4668379,"airedSeason":7,"airedSeasonID":522809,"airedEpisodeNumber":5,"episodeName":"The
+        Workplace Proximity","firstAired":"2013-10-17","guestStars":["Ayumi Iizuka","Todd
+        Eric Andrews"],"directors":["Mark Cendrowski"],"writers":["Chuck Lorre","Eric
+        Kaplan","Jim Reynolds"],"overview":"Sheldon must decide how much \"Amy time\"
+        is too much after she takes a job at his university, and their relationship
+        is put to the test. Meanwhile, Howard finds himself sleeping on Raj''s couch
+        after a fight with Bernadette.","language":{"episodeName":"en","overview":"en"},"productionCode":"4X5305","showUrl":"","lastUpdated":1592063484,"dvdDiscid":"","dvdSeason":7,"dvdEpisodeNumber":5,"dvdChapter":null,"absoluteNumber":140,"filename":"series/80379/episodes/5eaa0359d5874.jpg","seriesId":80379,"lastUpdatedBy":198416,"airsAfterSeason":null,"airsBeforeSeason":null,"airsBeforeEpisode":null,"imdbId":"tt3229392","contentRating":"TV-PG","thumbAuthor":198416,"thumbAdded":"2020-04-29
+        22:44:41","thumbWidth":"640","thumbHeight":"360","siteRating":7.7,"siteRatingCount":4973,"isMovie":0}]}'
     headers:
-      age:
-      - '18967'
-      cache-control:
+      Age:
+      - '34329'
+      Cache-Control:
       - private, max-age=86400
-      connection:
+      Connection:
       - keep-alive
-      content-encoding:
+      Content-Encoding:
       - gzip
-      content-type:
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Sat, 09 May 2020 09:23:54 GMT
-      transfer-encoding:
+      Date:
+      - Wed, 22 May 2024 05:01:25 GMT
+      Transfer-Encoding:
       - chunked
-      vary:
+      Vary:
       - Accept-Encoding,Accept-Language
-      via:
-      - 1.1 d92debab8d9ca0518390aebaec8733a7.cloudfront.net (CloudFront)
-      x-amz-cf-id:
-      - mkwfzDFQajnZPU6W2256A09HSj3kMLuFEyY_zUTVjGSPv4diJVXgkw==
-      x-amz-cf-pop:
-      - ZRH50-C1
-      x-cache:
+      Via:
+      - 1.1 07b26b5e851ab857ec87e6df0aa7882e.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - _OXAzIBCk1Yb3peeXQZjyvlK93ifm7mcEt6Q5hq3Jbn8ylbDhy5i2A==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
       - Hit from cloudfront
-      x-powered-by:
+      X-Powered-By:
       - Thundar!
-      x-thetvdb-api-version:
+      X-Thetvdb-Api-Version:
       - 3.0.0
     status:
       code: 200
@@ -236,11 +227,11 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Accept-Language:
       - en
       Authorization:
-      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
       Connection:
       - keep-alive
       Content-Type:
@@ -251,49 +242,44 @@ interactions:
     uri: https://api.thetvdb.com/episodes/4668379
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAA3RTy27bMBD8lQUvvTiOLPkh++Y4QZO2KYI8mgJND7S4NhlLpECuorpB/r1L2U4T
-        FD3u7Gg4uzt6FkqSFLNnYZSYDcfjPJtMe0Iaj+oGZXBWzCbv6otTMRulaZ4caGe1CU7h16Zaoude
-        T+AekRWKmbjVCPfOb+pSFghX3v0ylaGt6ImV8YHmUYNpaTLIjgbJ0WDCnXWDgW5I+iBmP8R821QG
-        LszvZiO5eeuUgjNvCphb5bEN4mdPKJYpyO0+uJR+AwvkrmvDxsR+6w3hrrvQTbGBL857ZLVO6LNk
-        d5arT6aCa9xaV6pO1j2hfzLYssEbjaVyFqomECgsjELQruW60PAg5tUWyFT4IMAEIOd2DbniZyHw
-        DkhuMICER7cESaCZ1VjD+oG30QNpFZBG48FjKck4G7Spo1bdEOvFJhCvpQ+XKG2rTYk9OHet9ApW
-        xqrAklXAcgWhRD6BXQO7vZaPHwIU7q8Xyey1JmgNaThBb6VCIuzz9LyDdSPXGPPw/ogYl/NmGVy/
-        9ETtnWqK6HXBVIaH30dZMmJq4M3c+ZKhTjbQXc1Bi4cejPI8TZI0xkw9qVMTihi9yOPyTea4+jda
-        DC60rCmWtilLzuAyuLKhV9JgmMRklWh3zgN6g+E4TzjYx/uhwvEIpUyy0VSN8smw/1ivo+eOecFm
-        OvI73ydbVp7mw8G4S32Yx1UezO6NMHyCK+fxf/h+nEPDVGoZXxNEWZpOs2nKJgpnCS1dcwLsOv49
-        346uPjJOmuebN6Td6+Q7SCncr6+r740izfV4mBygc4z3ZiwbR4zjhgf5SX/yFli4xjJxOJ1kbC9c
-        Or62mCUvL38AAAD//wMAAFgg+icEAAA=
+      string: '{"data":{"id":4668379,"airedSeason":7,"airedSeasonID":522809,"airedEpisodeNumber":5,"episodeName":"The
+        Workplace Proximity","firstAired":"2013-10-17","guestStars":["Ayumi Iizuka","Todd
+        Eric Andrews"],"directors":["Mark Cendrowski"],"writers":["Chuck Lorre","Eric
+        Kaplan","Jim Reynolds"],"overview":"Sheldon must decide how much \"Amy time\"
+        is too much after she takes a job at his university, and their relationship
+        is put to the test. Meanwhile, Howard finds himself sleeping on Raj''s couch
+        after a fight with Bernadette.","language":{"episodeName":"en","overview":"en"},"productionCode":"4X5305","showUrl":"","lastUpdated":1592063484,"dvdDiscid":"","dvdSeason":7,"dvdEpisodeNumber":5,"dvdChapter":null,"absoluteNumber":140,"filename":"series/80379/episodes/5eaa0359d5874.jpg","seriesId":80379,"lastUpdatedBy":198416,"airsAfterSeason":null,"airsBeforeSeason":null,"airsBeforeEpisode":null,"imdbId":"tt3229392","contentRating":"TV-PG","thumbAuthor":198416,"thumbAdded":"2020-04-29
+        22:44:41","thumbWidth":"640","thumbHeight":"360","siteRating":7.7,"siteRatingCount":4973,"isMovie":0}}'
     headers:
-      age:
-      - '43305'
-      cache-control:
+      Age:
+      - '50870'
+      Cache-Control:
       - private, max-age=86400
-      connection:
+      Connection:
       - keep-alive
-      content-encoding:
+      Content-Encoding:
       - gzip
-      content-type:
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Sat, 09 May 2020 02:38:16 GMT
-      last-modified:
+      Date:
+      - Wed, 22 May 2024 00:25:45 GMT
+      Last-Modified:
       - Thu, 01 Jan 1970 00:00:00 GMT
-      transfer-encoding:
+      Transfer-Encoding:
       - chunked
-      vary:
+      Vary:
       - Accept-Encoding,Accept-Language
-      via:
-      - 1.1 d92debab8d9ca0518390aebaec8733a7.cloudfront.net (CloudFront)
-      x-amz-cf-id:
-      - TepgJRcQCUagjfGyuK8hfXRgRQYFQT1jXd7oZlLObpcTK6RTJpmXxg==
-      x-amz-cf-pop:
-      - ZRH50-C1
-      x-cache:
+      Via:
+      - 1.1 f13924e40949c7e0a5bd0c7e333695f2.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - emkRCUEvDcnTRKTGJy7VM7yMc31w_XHaC4RDijDFcwF_cVnsHw677A==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
       - Hit from cloudfront
-      x-powered-by:
+      X-Powered-By:
       - Thundar!
-      x-thetvdb-api-version:
+      X-Thetvdb-Api-Version:
       - 3.0.0
     status:
       code: 200

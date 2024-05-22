@@ -5,11 +5,11 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Accept-Language:
       - en
       Authorization:
-      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
       Connection:
       - keep-alive
       Content-Type:
@@ -20,35 +20,35 @@ interactions:
     uri: https://api.thetvdb.com/search/series?name=turn%3A+washington%27s+spies
   response:
     body:
-      string: !!python/unicode '{"data":[{"aliases":["Turn"],"banner":"/banners/graphical/272135-g2.jpg","firstAired":"2014-4-6","id":272135,"image":"/banners/posters/272135-3.jpg","network":"AMC","overview":"Follows
+      string: "{\"data\":[{\"aliases\":[\"Turn\",\"\u041F\u043E\u0432\u043E\u0440\u043E\u0442\"],\"banner\":\"/banners/graphical/272135-g5.jpg\",\"firstAired\":\"2014-04-06\",\"id\":272135,\"image\":\"/banners/posters/272135-3.jpg\",\"network\":\"AMC\",\"overview\":\"Follows
         New York farmer, Abe Woodhull, who bands together with a group of childhood
         friends to form The Culper Ring, an unlikely group of spies who turn the tide
-        in America''s fight for independence.","poster":"/banners/posters/272135-3.jpg","seriesName":"TURN:
-        Washington''s Spies","slug":"turn-washingtons-spies","status":"Ended"}]}'
+        in America's fight for independence.\",\"poster\":\"/banners/posters/272135-3.jpg\",\"seriesName\":\"TURN:
+        Washington's Spies\",\"slug\":\"turn-washingtons-spies\",\"status\":\"Ended\"}]}"
     headers:
-      cache-control:
+      Cache-Control:
       - private, max-age=86400
-      connection:
+      Connection:
       - keep-alive
-      content-length:
-      - '509'
-      content-type:
+      Content-Length:
+      - '528'
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Sat, 09 May 2020 14:40:06 GMT
-      vary:
+      Date:
+      - Wed, 22 May 2024 14:33:40 GMT
+      Vary:
       - Accept-Language
-      via:
-      - 1.1 d7147e532e5cf73689fcb39fa760bcf3.cloudfront.net (CloudFront)
-      x-amz-cf-id:
-      - i60UQO6rlz8w4VLN1_Ho8VBe8d59Z7kA2m-b4K8uTOtsJETLgIM-XA==
-      x-amz-cf-pop:
-      - ZRH50-C1
-      x-cache:
+      Via:
+      - 1.1 2c1fa76ea6af6e9212cf3e52e166c4ce.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - qo4tBctkAu3220YAs0fmSF_xbd2pLkwloXEP4Zu_QG8eK5LkPyhkag==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
       - Miss from cloudfront
-      x-powered-by:
+      X-Powered-By:
       - Thundar!
-      x-thetvdb-api-version:
+      X-Thetvdb-Api-Version:
       - 3.0.0
     status:
       code: 200
@@ -59,11 +59,11 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Accept-Language:
       - en
       Authorization:
-      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
       Connection:
       - keep-alive
       Content-Type:
@@ -74,41 +74,41 @@ interactions:
     uri: https://api.thetvdb.com/series/272135
   response:
     body:
-      string: !!python/unicode '{"data":{"id":272135,"seriesId":"http://www.tv.com/shows/turn/","seriesName":"TURN:
-        Washington''s Spies","aliases":["Turn"],"season":"4","poster":"posters/272135-3.jpg","banner":"graphical/272135-g2.jpg","fanart":"fanart/original/272135-1.jpg","status":"Ended","firstAired":"2014-04-06","network":"AMC","networkId":"400","runtime":"45","language":"en","genre":["Adventure","Drama"],"overview":"Follows
+      string: '{"data":{"id":272135,"seriesId":"","seriesName":"TURN: Washington''s
+        Spies","aliases":["Turn"],"season":"4","poster":"posters/272135-3.jpg","banner":"graphical/272135-g5.jpg","fanart":"fanart/original/272135-6.jpg","status":"Ended","firstAired":"2014-04-06","network":"AMC","networkId":"400","runtime":"45","language":"en","genre":["Adventure","Drama","History","War"],"overview":"Follows
         New York farmer, Abe Woodhull, who bands together with a group of childhood
         friends to form The Culper Ring, an unlikely group of spies who turn the tide
-        in America''s fight for independence.","lastUpdated":1579652114,"airsDayOfWeek":"Saturday","airsTime":"9:00
-        PM","rating":"TV-14","imdbId":"tt2543328","zap2itId":"SH01823452","added":"2013-08-08
+        in America''s fight for independence.","lastUpdated":1699886194,"airsDayOfWeek":"Saturday","airsTime":"9:00
+        PM","rating":"TV-14","imdbId":"tt2543328","zap2itId":"","added":"2013-08-08
         04:59:14","addedBy":1,"siteRating":8.1,"siteRatingCount":696,"slug":"turn-washingtons-spies"}}'
     headers:
-      age:
-      - '3751'
-      cache-control:
+      Age:
+      - '38579'
+      Cache-Control:
       - private, max-age=86400
-      connection:
+      Connection:
       - keep-alive
-      content-length:
-      - '842'
-      content-type:
+      Content-Length:
+      - '819'
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Sat, 09 May 2020 13:37:36 GMT
-      last-modified:
-      - Wed, 22 Jan 2020 00:15:14 GMT
-      vary:
+      Date:
+      - Wed, 22 May 2024 03:50:41 GMT
+      Last-Modified:
+      - Mon, 13 Nov 2023 14:36:34 GMT
+      Vary:
       - Accept-Language
-      via:
-      - 1.1 d7147e532e5cf73689fcb39fa760bcf3.cloudfront.net (CloudFront)
-      x-amz-cf-id:
-      - ald_g3j1GpjcPuvITAcZ6P7dswRs-y3qqCV5_BqdpOl_hgFKgtd_Ww==
-      x-amz-cf-pop:
-      - ZRH50-C1
-      x-cache:
+      Via:
+      - 1.1 d8d835cce198f21656f532aa7cb25fbe.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - RJC_UiLOLXaPof8RnMCFdQApyKX4h87oePugGiyp6tKE39btzoym_g==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
       - Hit from cloudfront
-      x-powered-by:
+      X-Powered-By:
       - Thundar!
-      x-thetvdb-api-version:
+      X-Thetvdb-Api-Version:
       - 3.0.0
     status:
       code: 200
@@ -119,11 +119,11 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Accept-Language:
       - en
       Authorization:
-      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
       Connection:
       - keep-alive
       Content-Type:
@@ -131,41 +131,41 @@ interactions:
       User-Agent:
       - Subliminal/2.1
     method: GET
-    uri: https://api.thetvdb.com/series/272135/episodes/query?airedEpisode=3&airedSeason=4&page=1
+    uri: https://api.thetvdb.com/series/272135/episodes/query?airedSeason=4&airedEpisode=3&page=1
   response:
     body:
-      string: !!python/unicode '{"links":{"first":1,"last":1,"next":null,"prev":null},"data":[{"id":6124360,"airedSeason":4,"airedSeasonID":709698,"airedEpisodeNumber":3,"episodeName":"Blood
+      string: '{"links":{"first":1,"last":1,"next":null,"prev":null},"data":[{"id":6124360,"airedSeason":4,"airedSeasonID":709698,"airedEpisodeNumber":3,"episodeName":"Blood
         for Blood","firstAired":"2017-06-24","guestStars":[],"directors":[],"writers":[],"overview":"Abe''s
         strategy to rescue Caleb takes a deadly turn; Anna must make a burdensome
         decision; Benedict Arnold has suspicions that Peggy is harboring a secret,
-        which she is keeping from him.","language":{"episodeName":"en","overview":"en"},"productionCode":"","showUrl":"","lastUpdated":1547236548,"dvdDiscid":"","dvdSeason":null,"dvdEpisodeNumber":null,"dvdChapter":null,"absoluteNumber":null,"filename":"episodes/272135/6124360.jpg","seriesId":272135,"lastUpdatedBy":1,"airsAfterSeason":null,"airsBeforeSeason":null,"airsBeforeEpisode":null,"imdbId":"tt6137686","contentRating":"TV-14","thumbAuthor":1,"thumbAdded":"2019-11-13
-        11:01:29","thumbWidth":"640","thumbHeight":"360","siteRating":7.8,"siteRatingCount":108,"isMovie":0}]}'
+        which she is keeping from him.","language":{"episodeName":"en","overview":"en"},"productionCode":"","showUrl":"","lastUpdated":1689698090,"dvdDiscid":"","dvdSeason":null,"dvdEpisodeNumber":null,"dvdChapter":null,"absoluteNumber":null,"filename":"episodes/272135/64b6bf293dd96.jpg","seriesId":272135,"lastUpdatedBy":1,"airsAfterSeason":null,"airsBeforeSeason":null,"airsBeforeEpisode":null,"imdbId":"tt6137686","contentRating":"TV-14","thumbAuthor":198416,"thumbAdded":"2023-07-18
+        16:34:49","thumbWidth":"640","thumbHeight":"360","siteRating":7.8,"siteRatingCount":108,"isMovie":0}]}'
     headers:
-      age:
-      - '21476'
-      cache-control:
+      Age:
+      - '11003'
+      Cache-Control:
       - private, max-age=86400
-      connection:
+      Connection:
       - keep-alive
-      content-length:
-      - '978'
-      content-type:
+      Content-Length:
+      - '989'
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Sat, 09 May 2020 08:42:11 GMT
-      vary:
+      Date:
+      - Wed, 22 May 2024 11:30:18 GMT
+      Vary:
       - Accept-Language
-      via:
-      - 1.1 d7147e532e5cf73689fcb39fa760bcf3.cloudfront.net (CloudFront)
-      x-amz-cf-id:
-      - 11hiUhwqwybgeZqqhwlJ8F6-wU0uSf5GKND5aEEedsLQk0al7gHJ8Q==
-      x-amz-cf-pop:
-      - ZRH50-C1
-      x-cache:
+      Via:
+      - 1.1 ca3702c84b0e2f2daaf573cabe88ad8c.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - j1sDR0revjm-8-muhdIAx-lqS-eJBvRQm_TU5kn2AiR0JFQRiYj-BA==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
       - Hit from cloudfront
-      x-powered-by:
+      X-Powered-By:
       - Thundar!
-      x-thetvdb-api-version:
+      X-Thetvdb-Api-Version:
       - 3.0.0
     status:
       code: 200
@@ -176,11 +176,11 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Accept-Language:
       - en
       Authorization:
-      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
       Connection:
       - keep-alive
       Content-Type:
@@ -191,40 +191,40 @@ interactions:
     uri: https://api.thetvdb.com/episodes/6124360
   response:
     body:
-      string: !!python/unicode '{"data":{"id":6124360,"airedSeason":4,"airedSeasonID":709698,"airedEpisodeNumber":3,"episodeName":"Blood
+      string: '{"data":{"id":6124360,"airedSeason":4,"airedSeasonID":709698,"airedEpisodeNumber":3,"episodeName":"Blood
         for Blood","firstAired":"2017-06-24","guestStars":[],"directors":[],"writers":[],"overview":"Abe''s
         strategy to rescue Caleb takes a deadly turn; Anna must make a burdensome
         decision; Benedict Arnold has suspicions that Peggy is harboring a secret,
-        which she is keeping from him.","language":{"episodeName":"en","overview":"en"},"productionCode":"","showUrl":"","lastUpdated":1547236548,"dvdDiscid":"","dvdSeason":null,"dvdEpisodeNumber":null,"dvdChapter":null,"absoluteNumber":null,"filename":"episodes/272135/6124360.jpg","seriesId":272135,"lastUpdatedBy":1,"airsAfterSeason":null,"airsBeforeSeason":null,"airsBeforeEpisode":null,"imdbId":"tt6137686","contentRating":"TV-14","thumbAuthor":1,"thumbAdded":"2019-11-13
-        11:01:29","thumbWidth":"640","thumbHeight":"360","siteRating":7.8,"siteRatingCount":108,"isMovie":0}}'
+        which she is keeping from him.","language":{"episodeName":"en","overview":"en"},"productionCode":"","showUrl":"","lastUpdated":1689698090,"dvdDiscid":"","dvdSeason":null,"dvdEpisodeNumber":null,"dvdChapter":null,"absoluteNumber":null,"filename":"episodes/272135/64b6bf293dd96.jpg","seriesId":272135,"lastUpdatedBy":1,"airsAfterSeason":null,"airsBeforeSeason":null,"airsBeforeEpisode":null,"imdbId":"tt6137686","contentRating":"TV-14","thumbAuthor":198416,"thumbAdded":"2023-07-18
+        16:34:49","thumbWidth":"640","thumbHeight":"360","siteRating":7.8,"siteRatingCount":108,"isMovie":0}}'
     headers:
-      age:
-      - '38562'
-      cache-control:
+      Age:
+      - '11003'
+      Cache-Control:
       - private, max-age=86400
-      connection:
+      Connection:
       - keep-alive
-      content-length:
-      - '923'
-      content-type:
+      Content-Length:
+      - '934'
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Sat, 09 May 2020 03:57:25 GMT
-      last-modified:
+      Date:
+      - Wed, 22 May 2024 11:30:18 GMT
+      Last-Modified:
       - Thu, 01 Jan 1970 00:00:00 GMT
-      vary:
+      Vary:
       - Accept-Language
-      via:
-      - 1.1 d7147e532e5cf73689fcb39fa760bcf3.cloudfront.net (CloudFront)
-      x-amz-cf-id:
-      - aB4e58g_FMi4-AVcC6Rm2FSl_apTEPZW8pY_LXmR_p3OSX9d9AHaMg==
-      x-amz-cf-pop:
-      - ZRH50-C1
-      x-cache:
+      Via:
+      - 1.1 daf51694fe4a175a7249d39be5e22e4c.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - 2i4CPreOVgPMT38BnIT4OJuuCBomJkTslFRXga1GHpqodccc3NgADw==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
       - Hit from cloudfront
-      x-powered-by:
+      X-Powered-By:
       - Thundar!
-      x-thetvdb-api-version:
+      X-Thetvdb-Api-Version:
       - 3.0.0
     status:
       code: 200

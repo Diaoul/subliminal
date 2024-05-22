@@ -1,11 +1,11 @@
 interactions:
 - request:
-    body: !!python/unicode '{"username": null, "password": null, "apikey": "2AE5D1E42E7194B9"}'
+    body: '{"apikey": "5EC930FB90DA1ADA", "username": null, "password": null}'
     headers:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Accept-Language:
       - en
       Connection:
@@ -20,29 +20,29 @@ interactions:
     uri: https://api.thetvdb.com/login
   response:
     body:
-      string: !!python/unicode '{"token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2Mzk5ODksImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MTg5fQ.BWejZLUWYgzMOc3N-s50yC_sppTCd9KVmk8EMgO_jMGvnp50-LFOI0RHLS2F7dlqzEtJ3Y_qZNqWis-YOrGrKI3e6OG5kIQR30WLHti5pF71IRvwCfDlGtReI0RT8TI1vgQ3JXb9dlDYnj9SquGdN-jNByY1QuNRFO1xiDszlNKRn4zaNGYsj1NQ_1oFnANeFqzGDdpFbeJE1vum21aRgo9dUPgIAtVinS0UOc6NPDUDg023EFIKfA74vqh8y4uSMJozV0eVmfvC5jjiS4vl09YTDxZ7pmjrXjlOC5-BPTOHrUFw-sHqIyoXJ_VuI4tyvudKX74IPJ4Smcy_MJqGGA"}'
+      string: '{"token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMDksImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDA5fQ.rmGlRQEnzMycKnlMsr3EP-qtH4p94SphmDzvUCncPjzq8-f0ZhbcIs6TPMHS9mlFgxr0soBZaH7DAjkuP9B4eeTW3Jm4vRpJ8PPEyFxS-ZeO_delVccATUVD1gOf72MCYucZljOnx8GuGqyoYpVeNC_vVymjVmtr1urcHbw95NV8l1r_4eqeEEl1bnkkceELPUGEdm6N4OcPz8qF4mSnRwLEmcq59UXuvZjtOw-H7MklXObhwAGrLMybSu-E-J7EmH1tBAWT64GfvqY0d81rzgQPSSjqa88-eJ2NQSIsMrENSrQQRqgOgEMwxr7bNJTRqlQgbOiZCNZF7CN22q52sQ"}'
     headers:
-      connection:
+      Connection:
       - keep-alive
-      content-length:
+      Content-Length:
       - '470'
-      content-type:
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Sat, 09 May 2020 14:39:49 GMT
-      vary:
+      Date:
+      - Wed, 22 May 2024 14:33:29 GMT
+      Vary:
       - Accept-Language
-      via:
-      - 1.1 c76347c8ef1f3a2b6fb69cd7d1c6f749.cloudfront.net (CloudFront)
-      x-amz-cf-id:
-      - KAi-w-9kxxhbWaxucZrkcoUPQJ9RfReMmVWesuSbF_XcJMqnNZaOng==
-      x-amz-cf-pop:
-      - ZRH50-C1
-      x-cache:
+      Via:
+      - 1.1 07b26b5e851ab857ec87e6df0aa7882e.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - cdS0cHSfD6Ok4SseoOo0rZxzwblE9uXrVaCL6YdXWBOTVvF5xZgHsA==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
       - Miss from cloudfront
-      x-powered-by:
+      X-Powered-By:
       - Thundar!
-      x-thetvdb-api-version:
+      X-Thetvdb-Api-Version:
       - 3.0.0
     status:
       code: 200
@@ -53,11 +53,11 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Accept-Language:
       - en
       Authorization:
-      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2Mzk5ODksImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MTg5fQ.BWejZLUWYgzMOc3N-s50yC_sppTCd9KVmk8EMgO_jMGvnp50-LFOI0RHLS2F7dlqzEtJ3Y_qZNqWis-YOrGrKI3e6OG5kIQR30WLHti5pF71IRvwCfDlGtReI0RT8TI1vgQ3JXb9dlDYnj9SquGdN-jNByY1QuNRFO1xiDszlNKRn4zaNGYsj1NQ_1oFnANeFqzGDdpFbeJE1vum21aRgo9dUPgIAtVinS0UOc6NPDUDg023EFIKfA74vqh8y4uSMJozV0eVmfvC5jjiS4vl09YTDxZ7pmjrXjlOC5-BPTOHrUFw-sHqIyoXJ_VuI4tyvudKX74IPJ4Smcy_MJqGGA'
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMDksImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDA5fQ.rmGlRQEnzMycKnlMsr3EP-qtH4p94SphmDzvUCncPjzq8-f0ZhbcIs6TPMHS9mlFgxr0soBZaH7DAjkuP9B4eeTW3Jm4vRpJ8PPEyFxS-ZeO_delVccATUVD1gOf72MCYucZljOnx8GuGqyoYpVeNC_vVymjVmtr1urcHbw95NV8l1r_4eqeEEl1bnkkceELPUGEdm6N4OcPz8qF4mSnRwLEmcq59UXuvZjtOw-H7MklXObhwAGrLMybSu-E-J7EmH1tBAWT64GfvqY0d81rzgQPSSjqa88-eJ2NQSIsMrENSrQQRqgOgEMwxr7bNJTRqlQgbOiZCNZF7CN22q52sQ
       Connection:
       - keep-alive
       Content-Type:
@@ -68,38 +68,35 @@ interactions:
     uri: https://api.thetvdb.com/search/series?name=The+Big+Bang+Theory
   response:
     body:
-      string: "{\"data\":[{\"aliases\":[\"\u56E7\u7537\u5927\u7206\u70B8\"],\"banner\"\
-        :\"/banners/graphical/80379-g13.jpg\",\"firstAired\":\"2007-9-24\",\"id\"\
-        :80379,\"image\":\"/banners/posters/80379-18.jpg\",\"network\":\"CBS\",\"\
-        overview\":\"A woman who moves into an apartment across the hall from two\
-        \ brilliant but socially awkward physicists shows them how little they know\
-        \ about life outside of the laboratory.\",\"poster\":\"/banners/posters/80379-18.jpg\"\
-        ,\"seriesName\":\"The Big Bang Theory\",\"slug\":\"the-big-bang-theory\",\"\
-        status\":\"Ended\"}]}"
+      string: "{\"data\":[{\"aliases\":[\"La teoria del Big Bang\",\"\u56E7\u7537\u5927\u7206\u70B8\"],\"banner\":\"/banners/graphical/80379-g23.jpg\",\"firstAired\":\"2007-09-24\",\"id\":80379,\"image\":\"/banners/posters/80379-18.jpg\",\"network\":\"CBS\",\"overview\":\"A
+        woman who moves into an apartment across the hall from two brilliant but socially
+        awkward physicists shows them how little they know about life outside of the
+        laboratory.\",\"poster\":\"/banners/posters/80379-18.jpg\",\"seriesName\":\"The
+        Big Bang Theory\",\"slug\":\"the-big-bang-theory\",\"status\":\"Ended\"}]}"
     headers:
-      cache-control:
+      Cache-Control:
       - private, max-age=86400
-      connection:
+      Connection:
       - keep-alive
-      content-length:
-      - '486'
-      content-type:
+      Content-Length:
+      - '512'
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Sat, 09 May 2020 14:39:49 GMT
-      vary:
+      Date:
+      - Wed, 22 May 2024 14:33:30 GMT
+      Vary:
       - Accept-Language
-      via:
-      - 1.1 c76347c8ef1f3a2b6fb69cd7d1c6f749.cloudfront.net (CloudFront)
-      x-amz-cf-id:
-      - kCvM12iLzT5yATySQcIWJrFXrFotIuc-uLHkJDzWE6kYryz5x-tZkw==
-      x-amz-cf-pop:
-      - ZRH50-C1
-      x-cache:
+      Via:
+      - 1.1 1a8de953aa4aaf678d8f6dfdeeea9a46.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - d9ZyS8HAy5Sgfq5NqxABmjF8mpYFFQe6KsxNI-zJ5DelFRJ1Ya8MRA==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
       - Miss from cloudfront
-      x-powered-by:
+      X-Powered-By:
       - Thundar!
-      x-thetvdb-api-version:
+      X-Thetvdb-Api-Version:
       - 3.0.0
     status:
       code: 200

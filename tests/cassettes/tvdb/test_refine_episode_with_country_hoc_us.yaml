@@ -5,11 +5,11 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Accept-Language:
       - en
       Authorization:
-      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
       Connection:
       - keep-alive
       Content-Type:
@@ -20,69 +20,52 @@ interactions:
     uri: https://api.thetvdb.com/search/series?name=house+of+cards
   response:
     body:
-      string: "{\"data\":[{\"aliases\":[\"To Play the King\",\"The Final Cut\"],\"\
-        banner\":\"/banners/graphical/79861-g.jpg\",\"firstAired\":\"1990-11-18\"\
-        ,\"id\":79861,\"image\":\"/banners/posters/79861-3.jpg\",\"network\":\"BBC\
-        \ One\",\"overview\":\"The PM made a deadly mistake when he passed over Francis\
-        \ Urquhart. With his recent dire performance in the general election, he's\
-        \ going to need all the friends he can get. But Urquhart won't be ignored\
-        \ by anyone and now he's out for revenge. As the trusted Chief Whip, he has\
-        \ his hands on every grubby little secret in politics, and with innocent journalist\
-        \ Mattie Storin unwittingly drawn into his web, he'll stop at nothing to get\
-        \ what he wants.\\r\\nA black tale of greed, corruption and burning ambition.\
-        \ Based on the best selling novel by Michael Dobbs, a former aide to Margaret\
-        \ Thatcher.\",\"poster\":\"/banners/posters/79861-3.jpg\",\"seriesName\":\"\
-        House of Cards\",\"slug\":\"house-of-cards\",\"status\":\"Ended\"},{\"aliases\"\
-        :[\"House of Cards (2013)\",\"\u7D19\u724C\u5C4B\"],\"banner\":\"/banners/graphical/262980-g5.jpg\"\
-        ,\"firstAired\":\"2013-2-1\",\"id\":262980,\"image\":\"/banners/posters/262980-3.jpg\"\
-        ,\"network\":\"Netflix\",\"overview\":\"Ruthless and cunning, Congressman\
-        \ Francis Underwood and his wife Claire stop at nothing to conquer everything.\
-        \ This wicked political drama penetrates the shadowy world of greed, sex and\
-        \ corruption in modern D.C.\",\"poster\":\"/banners/posters/262980-3.jpg\"\
-        ,\"seriesName\":\"House of Cards (US)\",\"slug\":\"house-of-cards-us\",\"\
-        status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"2015-9-7\"\
-        ,\"id\":301510,\"image\":\"/banners/images/missing/series.jpg\",\"network\"\
-        :\"BBC One\",\"overview\":\"Following the staff at Belfast's Charles Hurst\
-        \ dealership, the largest car lot in Europe, as they attempt to hit their\
-        \ sales targets\",\"poster\":null,\"seriesName\":\"House of Cars (2015)\"\
-        ,\"slug\":\"house-of-cars-2015\",\"status\":\"Ended\"},{\"aliases\":[],\"\
-        banner\":null,\"firstAired\":\"2014-11-23\",\"id\":288520,\"image\":\"/banners/posters/288520-1.jpg\"\
-        ,\"network\":\"Discovery MAX\",\"poster\":null,\"seriesName\":\"House of Cars\"\
-        ,\"slug\":\"house-of-cars\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\"\
-        :null,\"firstAired\":\"2017-9-10\",\"id\":334720,\"image\":\"/banners/images/missing/series.jpg\"\
-        ,\"network\":\"History\",\"overview\":\"Brian and Jay seek to add rare and\
-        \ collectible vehicles to their father's museum, the Volo Auto Museum.\",\"\
-        poster\":null,\"seriesName\":\"Volo, House of Cars\",\"slug\":\"volo-house-of-cars\"\
-        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"2017-9-4\"\
-        ,\"id\":334021,\"image\":\"/banners/posters/334021-1.jpg\",\"network\":null,\"\
-        overview\":\"Nate Boyer runs a new type of garage, ``The Doghouse,'' a co-op\
-        \ business where mechanics and hobbyists use Nate's tools and space to modify\
-        \ and restore cars.\",\"poster\":null,\"seriesName\":\"Gear Dogs\",\"slug\"\
-        :\"gear-dogs\",\"status\":\"Ended\"}]}"
+      string: "{\"data\":[{\"aliases\":[\"House of Cards (2013)\",\"\u7D19\u724C\u5C4B\"],\"banner\":\"/banners/graphical/262980-g2.jpg\",\"firstAired\":\"2013-02-01\",\"id\":262980,\"image\":\"/banners/posters/262980-3.jpg\",\"network\":\"Netflix\",\"overview\":\"Ruthless
+        and cunning, Congressman Francis Underwood and his wife Claire stop at nothing
+        to conquer everything. It penetrates the shadowy world of greed, sex and corruption
+        in modern D.C.\",\"poster\":\"/banners/posters/262980-3.jpg\",\"seriesName\":\"House
+        of Cards (US)\",\"slug\":\"house-of-cards-us\",\"status\":\"Ended\"},{\"aliases\":[\"The
+        House of Cards Trilogy: House of Cards\",\"\u041A\u0430\u0440\u0442\u043E\u0447\u043D\u044B\u0439
+        \u0434\u043E\u043C\u0438\",\"Dom z kart\",\"Maktens korthus\",\"K\xE1rtyav\xE1r\",\"\u7EB8\u724C\u5C4B
+        \u82F1\u7248\"],\"banner\":\"/banners/text/79861.jpg\",\"firstAired\":\"1990-11-18\",\"id\":79861,\"image\":\"/banners/posters/79861-3.jpg\",\"network\":\"BBC
+        One\",\"overview\":\"The schemes of a ruthlessly ambitious British politician
+        who will stop at nothing to get to the top.\",\"poster\":\"/banners/posters/79861-3.jpg\",\"seriesName\":\"House
+        of Cards\",\"slug\":\"house-of-cards\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/text/288520.jpg\",\"firstAired\":\"2014-11-23\",\"id\":288520,\"image\":\"/banners/posters/288520-1.jpg\",\"network\":\"Discovery
+        MAX\",\"poster\":\"/banners/posters/288520-1.jpg\",\"seriesName\":\"House
+        of Cars\",\"slug\":\"house-of-cars\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2015-09-07\",\"id\":301510,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"BBC
+        One\",\"overview\":\"Following the staff at Belfast's Charles Hurst dealership,
+        the largest car lot in Europe, as they attempt to hit their sales targets\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"House
+        of Cars (2015)\",\"slug\":\"house-of-cars-2015\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/334720/banners/62dfbfc02b5b6.jpg\",\"firstAired\":\"2017-09-10\",\"id\":334720,\"image\":\"/banners/series/334720/posters/5f447b3f88cb4.jpg\",\"network\":\"History\",\"overview\":\"Brian
+        and Jay seek to add rare and collectible vehicles to their father's museum,
+        the Volo Auto Museum.\",\"poster\":\"/banners/series/334720/posters/5f447b3f88cb4.jpg\",\"seriesName\":\"Volo,
+        House of Cars\",\"slug\":\"volo-house-of-cars\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/334021-g.jpg\",\"firstAired\":\"2017-09-04\",\"id\":334021,\"image\":\"/banners/posters/334021-1.jpg\",\"network\":\"\",\"overview\":\"Nate
+        Boyer runs a new type of garage, ``The Doghouse,'' a co-op business where
+        mechanics and hobbyists use Nate's tools and space to modify and restore cars.\",\"poster\":\"/banners/posters/334021-1.jpg\",\"seriesName\":\"Gear
+        Dogs\",\"slug\":\"gear-dogs\",\"status\":\"Ended\"}]}"
     headers:
-      cache-control:
+      Cache-Control:
       - private, max-age=86400
-      connection:
+      Connection:
       - keep-alive
-      content-type:
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Sat, 09 May 2020 14:40:10 GMT
-      transfer-encoding:
+      Date:
+      - Wed, 22 May 2024 14:33:43 GMT
+      Transfer-Encoding:
       - chunked
-      vary:
+      Vary:
       - Accept-Language
-      via:
-      - 1.1 a06cb72e779e366fcd004926eacd5b85.cloudfront.net (CloudFront)
-      x-amz-cf-id:
-      - cYZztC-Q-xeEA2LG26zsExRLNwDG4ycSKVjYbtfglcK4zEQ6hQntxQ==
-      x-amz-cf-pop:
-      - ZRH50-C1
-      x-cache:
+      Via:
+      - 1.1 f13924e40949c7e0a5bd0c7e333695f2.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - gZVe-e7vclM6Om8PpXPRIGR2xI4rFArGxCJznYoKbqwgHd06wXq2Hg==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
       - Miss from cloudfront
-      x-powered-by:
+      X-Powered-By:
       - Thundar!
-      x-thetvdb-api-version:
+      X-Thetvdb-Api-Version:
       - 3.0.0
     status:
       code: 200
@@ -93,11 +76,11 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Accept-Language:
       - en
       Authorization:
-      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
       Connection:
       - keep-alive
       Content-Type:
@@ -108,39 +91,41 @@ interactions:
     uri: https://api.thetvdb.com/series/262980
   response:
     body:
-      string: !!python/unicode '{"data":{"id":262980,"seriesId":"81065","seriesName":"House
-        of Cards (US)","aliases":["House of Cards (2013)"],"season":"6","poster":"posters/262980-3.jpg","banner":"graphical/262980-g5.jpg","fanart":"fanart/original/262980-2.jpg","status":"Ended","firstAired":"2013-02-01","network":"Netflix","networkId":"546","runtime":"55","language":"en","genre":["Crime","Drama"],"overview":"Ruthless
+      string: '{"data":{"id":262980,"seriesId":"","seriesName":"House of Cards (US)","aliases":["House
+        of Cards (2013)"],"season":"6","poster":"posters/262980-3.jpg","banner":"graphical/262980-g9.jpg","fanart":"fanart/original/262980-11.jpg","status":"Ended","firstAired":"2013-02-01","network":"Netflix","networkId":"546","runtime":"52","language":"en","genre":["Crime","Drama"],"overview":"Ruthless
         and cunning, Congressman Francis Underwood and his wife Claire stop at nothing
-        to conquer everything. This wicked political drama penetrates the shadowy
-        world of greed, sex and corruption in modern D.C.","lastUpdated":1588307295,"airsDayOfWeek":"Friday","airsTime":"3:00
-        AM","rating":"TV-MA","imdbId":"tt1856010","zap2itId":"SH01676454","added":"2012-10-04
+        to conquer everything. It penetrates the shadowy world of greed, sex and corruption
+        in modern D.C.","lastUpdated":1709572378,"airsDayOfWeek":"Friday","airsTime":"3:00
+        AM","rating":"TV-MA","imdbId":"tt1856010","zap2itId":"","added":"2012-10-04
         16:08:09","addedBy":16553,"siteRating":8.9,"siteRatingCount":4719,"slug":"house-of-cards-us"}}'
     headers:
-      cache-control:
+      Age:
+      - '38140'
+      Cache-Control:
       - private, max-age=86400
-      connection:
+      Connection:
       - keep-alive
-      content-length:
-      - '841'
-      content-type:
+      Content-Length:
+      - '802'
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Sat, 09 May 2020 14:40:10 GMT
-      last-modified:
-      - Fri, 01 May 2020 04:28:15 GMT
-      vary:
+      Date:
+      - Wed, 22 May 2024 03:58:03 GMT
+      Last-Modified:
+      - Mon, 04 Mar 2024 17:12:58 GMT
+      Vary:
       - Accept-Language
-      via:
-      - 1.1 a06cb72e779e366fcd004926eacd5b85.cloudfront.net (CloudFront)
-      x-amz-cf-id:
-      - DrC6YGb9IhMs-fr6l9mVf_kAH0T6fdCeRPnQaJ6S0c-QYMQL6T586A==
-      x-amz-cf-pop:
-      - ZRH50-C1
-      x-cache:
-      - Miss from cloudfront
-      x-powered-by:
+      Via:
+      - 1.1 daf51694fe4a175a7249d39be5e22e4c.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - ELLEIuXbcV2gGL0wirDiB7xE9fF3P2R07U6_03Y0gXKxYdHUORB8KQ==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
+      - Hit from cloudfront
+      X-Powered-By:
       - Thundar!
-      x-thetvdb-api-version:
+      X-Thetvdb-Api-Version:
       - 3.0.0
     status:
       code: 200
@@ -151,11 +136,11 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Accept-Language:
       - en
       Authorization:
-      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
       Connection:
       - keep-alive
       Content-Type:
@@ -163,41 +148,45 @@ interactions:
       User-Agent:
       - Subliminal/2.1
     method: GET
-    uri: https://api.thetvdb.com/series/262980/episodes/query?airedEpisode=1&airedSeason=6&page=1
+    uri: https://api.thetvdb.com/series/262980/episodes/query?airedSeason=6&airedEpisode=1&page=1
   response:
     body:
-      string: !!python/unicode '{"links":{"first":1,"last":1,"next":null,"prev":null},"data":[{"id":6553109,"airedSeason":6,"airedSeasonID":751740,"airedEpisodeNumber":1,"episodeName":"Chapter
-        66","firstAired":"2018-11-02","guestStars":[],"directors":["Alik Sakharov"],"writers":["Frank
-        Pugliese","Melissa James Gibson"],"overview":"As the first woman president,
-        Claire faces increased scrutiny and threats. Sibling power couple Annette
-        and Bill Shepherd attempt to influence policy.","language":{"episodeName":"en","overview":"en"},"productionCode":"","showUrl":"","lastUpdated":1541598880,"dvdDiscid":"","dvdSeason":6,"dvdEpisodeNumber":1,"dvdChapter":null,"absoluteNumber":66,"filename":"episodes/262980/6553109.jpg","seriesId":262980,"lastUpdatedBy":1,"airsAfterSeason":null,"airsBeforeSeason":null,"airsBeforeEpisode":null,"imdbId":"tt7538918","contentRating":"TV-MA","thumbAuthor":1,"thumbAdded":"2019-11-13
+      string: '{"links":{"first":1,"last":1,"next":null,"prev":null},"data":[{"id":6553109,"airedSeason":6,"airedSeasonID":751740,"airedEpisodeNumber":1,"episodeName":"Chapter
+        66","firstAired":"2018-11-02","guestStars":["Ann Charles Sutton","Athena Karkanis","Beth
+        Chamberlin","Chip Zien","Chris Agos","Cody Fern","Jeremy Holm","Linda Powell","Robert
+        Newman"],"directors":["Alik Sakharov"],"writers":["Frank Pugliese","Melissa
+        James Gibson"],"overview":"As the first woman president, Claire faces increased
+        scrutiny and threats. Sibling power couple Annette and Bill Shepherd attempt
+        to influence policy.","language":{"episodeName":"en","overview":"en"},"productionCode":"","showUrl":"","lastUpdated":1707077988,"dvdDiscid":"","dvdSeason":6,"dvdEpisodeNumber":1,"dvdChapter":null,"absoluteNumber":66,"filename":"episodes/262980/6553109.jpg","seriesId":262980,"lastUpdatedBy":2302044,"airsAfterSeason":null,"airsBeforeSeason":null,"airsBeforeEpisode":null,"imdbId":"tt7538918","contentRating":"TV-MA","thumbAuthor":1,"thumbAdded":"2019-11-13
         12:47:54","thumbWidth":"640","thumbHeight":"360","siteRating":0,"siteRatingCount":0,"isMovie":0}]}'
     headers:
-      age:
-      - '68992'
-      cache-control:
+      Age:
+      - '19317'
+      Cache-Control:
       - private, max-age=86400
-      connection:
+      Connection:
       - keep-alive
-      content-length:
-      - '980'
-      content-type:
+      Content-Encoding:
+      - gzip
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Fri, 08 May 2020 19:30:18 GMT
-      vary:
-      - Accept-Language
-      via:
-      - 1.1 a06cb72e779e366fcd004926eacd5b85.cloudfront.net (CloudFront)
-      x-amz-cf-id:
-      - g_eJA_eSldOFSbXsWSizINt8818eGIu1PwzyyBrZM6ZqlbHWX2LIYA==
-      x-amz-cf-pop:
-      - ZRH50-C1
-      x-cache:
+      Date:
+      - Wed, 22 May 2024 09:11:46 GMT
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding,Accept-Language
+      Via:
+      - 1.1 735dd7fa3c296627cd805d04e3e3a3e8.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - D6R9D3SCHewa1w7q342HGqAt-2p5SJ3CQ9Hp6K-CEoJ_UW2VVyhNbQ==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
       - Hit from cloudfront
-      x-powered-by:
+      X-Powered-By:
       - Thundar!
-      x-thetvdb-api-version:
+      X-Thetvdb-Api-Version:
       - 3.0.0
     status:
       code: 200
@@ -208,11 +197,11 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Accept-Language:
       - en
       Authorization:
-      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
       Connection:
       - keep-alive
       Content-Type:
@@ -223,40 +212,44 @@ interactions:
     uri: https://api.thetvdb.com/episodes/6553109
   response:
     body:
-      string: !!python/unicode '{"data":{"id":6553109,"airedSeason":6,"airedSeasonID":751740,"airedEpisodeNumber":1,"episodeName":"Chapter
-        66","firstAired":"2018-11-02","guestStars":[],"directors":["Alik Sakharov"],"writers":["Frank
-        Pugliese","Melissa James Gibson"],"overview":"As the first woman president,
-        Claire faces increased scrutiny and threats. Sibling power couple Annette
-        and Bill Shepherd attempt to influence policy.","language":{"episodeName":"en","overview":"en"},"productionCode":"","showUrl":"","lastUpdated":1541598880,"dvdDiscid":"","dvdSeason":6,"dvdEpisodeNumber":1,"dvdChapter":null,"absoluteNumber":66,"filename":"episodes/262980/6553109.jpg","seriesId":262980,"lastUpdatedBy":1,"airsAfterSeason":null,"airsBeforeSeason":null,"airsBeforeEpisode":null,"imdbId":"tt7538918","contentRating":"TV-MA","thumbAuthor":1,"thumbAdded":"2019-11-13
+      string: '{"data":{"id":6553109,"airedSeason":6,"airedSeasonID":751740,"airedEpisodeNumber":1,"episodeName":"Chapter
+        66","firstAired":"2018-11-02","guestStars":["Ann Charles Sutton","Athena Karkanis","Beth
+        Chamberlin","Chip Zien","Chris Agos","Cody Fern","Jeremy Holm","Linda Powell","Robert
+        Newman"],"directors":["Alik Sakharov"],"writers":["Frank Pugliese","Melissa
+        James Gibson"],"overview":"As the first woman president, Claire faces increased
+        scrutiny and threats. Sibling power couple Annette and Bill Shepherd attempt
+        to influence policy.","language":{"episodeName":"en","overview":"en"},"productionCode":"","showUrl":"","lastUpdated":1707077988,"dvdDiscid":"","dvdSeason":6,"dvdEpisodeNumber":1,"dvdChapter":null,"absoluteNumber":66,"filename":"episodes/262980/6553109.jpg","seriesId":262980,"lastUpdatedBy":2302044,"airsAfterSeason":null,"airsBeforeSeason":null,"airsBeforeEpisode":null,"imdbId":"tt7538918","contentRating":"TV-MA","thumbAuthor":1,"thumbAdded":"2019-11-13
         12:47:54","thumbWidth":"640","thumbHeight":"360","siteRating":0,"siteRatingCount":0,"isMovie":0}}'
     headers:
-      age:
-      - '49505'
-      cache-control:
+      Age:
+      - '19316'
+      Cache-Control:
       - private, max-age=86400
-      connection:
+      Connection:
       - keep-alive
-      content-length:
-      - '925'
-      content-type:
+      Content-Encoding:
+      - gzip
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Sat, 09 May 2020 00:55:05 GMT
-      last-modified:
+      Date:
+      - Wed, 22 May 2024 09:11:47 GMT
+      Last-Modified:
       - Thu, 01 Jan 1970 00:00:00 GMT
-      vary:
-      - Accept-Language
-      via:
-      - 1.1 a06cb72e779e366fcd004926eacd5b85.cloudfront.net (CloudFront)
-      x-amz-cf-id:
-      - dWPGFde1ZAgC6XMcOqHmTI-ER62N44lKukADGMDTLTDXNChXSpV1xg==
-      x-amz-cf-pop:
-      - ZRH50-C1
-      x-cache:
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding,Accept-Language
+      Via:
+      - 1.1 f355844b811a4a5ec94df0918f0fb80c.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - -SAc5wmQ0nmoHfkuwtiQ1Tn50iJsnT8QFvhF89am0Hpt5PMDioWycQ==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
       - Hit from cloudfront
-      x-powered-by:
+      X-Powered-By:
       - Thundar!
-      x-thetvdb-api-version:
+      X-Thetvdb-Api-Version:
       - 3.0.0
     status:
       code: 200

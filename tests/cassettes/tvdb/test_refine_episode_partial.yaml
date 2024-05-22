@@ -5,11 +5,11 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Accept-Language:
       - en
       Authorization:
-      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
       Connection:
       - keep-alive
       Content-Type:
@@ -20,296 +20,293 @@ interactions:
     uri: https://api.thetvdb.com/search/series?name=csi
   response:
     body:
-      string: "{\"data\":[{\"aliases\":[\"CSI: Vegas\",\"CSI\",\"CSI: Las Vegas\"\
-        ,\"CSI: Crime Scene Investigation\",\"CSI\u6EC5\u7F6A\u9451\u8B49\u79D1\"\
-        ],\"banner\":\"/banners/graphical/19-g2.jpg\",\"firstAired\":\"2000-10-6\"\
-        ,\"id\":72546,\"image\":\"/banners/posters/72546-5.jpg\",\"network\":\"CBS\"\
-        ,\"overview\":\"CSI is a crime drama in which the characters use cutting-edge\
-        \ forensic tools to examine the evidence to solve the case.  Rather than asking\
-        \ 'whodunnit' (investigating witnesses/suspects), CSI explores the 'howdunnit'.\"\
-        ,\"poster\":\"/banners/posters/72546-5.jpg\",\"seriesName\":\"CSI: Crime Scene\
-        \ Investigation\",\"slug\":\"csi-crime-scene-investigation\",\"status\":\"\
-        Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":null,\"id\":83898,\"\
-        image\":\"/banners/posters/5b5e08fdcd284.jpg\",\"network\":null,\"overview\"\
-        :\"A 6 part series for Channel Five about the course for crime scene investigators\
-        \ at the National Forensic Academy in Knoxville, Tennessee.\",\"poster\":null,\"\
-        seriesName\":\"CSI Academy\",\"slug\":\"csi-academy\",\"status\":\"Ended\"\
-        },{\"aliases\":[\"CSI: Miami\",\"\u9451\u8B49\u884C\u52D5\u7D44\"],\"banner\"\
-        :\"/banners/graphical/78310-g4.jpg\",\"firstAired\":\"2002-5-9\",\"id\":78310,\"\
-        image\":\"/banners/posters/78310-3.jpg\",\"network\":\"CBS\",\"overview\"\
-        :\"CSI's gritty approach to crime known as forensic science makes its way\
-        \ from Las Vegas to the streets of Florida in CSI: Miami. A whole new team\
-        \ of crime scene investigators is on hand to probe the seamy underside of\
-        \ Miami.\",\"poster\":\"/banners/posters/78310-3.jpg\",\"seriesName\":\"CSI:\
-        \ Miami\",\"slug\":\"csi-miami\",\"status\":\"Ended\"},{\"aliases\":[\"CSI:\
-        \ New York\"],\"banner\":\"/banners/graphical/24125-g.jpg\",\"firstAired\"\
-        :\"2004-5-17\",\"id\":73696,\"image\":\"/banners/posters/73696-3.jpg\",\"\
-        network\":\"CBS\",\"overview\":\"The third edition of the \\\"CSI\\\" franchise\
-        \ sets up shop in the Big Apple, where taciturn Detective Mac Taylor (Gary\
-        \ Sinise) and his partner, Detective Stella Bonasera (Melina Kanakaredes),\
-        \ lead a crime-solving team. Like his counterparts in Las Vegas and Miami,\
-        \ Taylor knows that people may lie, but the evidence rarely does.\",\"poster\"\
-        :\"/banners/posters/73696-3.jpg\",\"seriesName\":\"CSI: NY\",\"slug\":\"csi-ny\"\
-        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":null,\"\
-        id\":363278,\"image\":\"/banners/images/missing/series.jpg\",\"network\":null,\"\
-        poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"CSI: Las\
-        \ Vegas\",\"slug\":\"csi-las-vegas\",\"status\":\"Ended\"},{\"aliases\":[],\"\
-        banner\":null,\"firstAired\":\"2017-12-2\",\"id\":342048,\"image\":\"/banners/posters/342048-1.jpg\"\
-        ,\"network\":\"TVQ (Australia)\",\"poster\":null,\"seriesName\":\"CSI:\uC18C\
-        \uBE44\uC790 \uD0D0\uC0AC\uB300\",\"slug\":\"342048\",\"status\":\"Continuing\"\
-        },{\"aliases\":[],\"banner\":null,\"firstAired\":null,\"id\":338516,\"image\"\
-        :\"/banners/posters/338516-1.jpg\",\"network\":null,\"poster\":null,\"seriesName\"\
-        :\"Csillag\xF6sv\xE9nyen\",\"slug\":\"338516\",\"status\":\"Ended\"},{\"aliases\"\
-        :[],\"banner\":\"/banners/blank/281551.jpg\",\"firstAired\":\"2015-3-4\",\"\
-        id\":281551,\"image\":\"/banners/posters/281551-1.jpg\",\"network\":\"CBS\"\
-        ,\"overview\":\"The series follows an elite team of FBI Special Agents tasked\
-        \ with investigating cyber crimes in North America. Based out of Quantico,\
-        \ the team is supervised by Avery Ryan a behavioral psychologist turned cyber\
-        \ shrink who established the FBI Cyber Crime division and heads a \\\"hack-for-good\\\
-        \" program, a scheme in which the criminals she catches can work for her in\
-        \ lieu of receiving a prison sentence.\",\"poster\":\"/banners/posters/281551-1.jpg\"\
-        ,\"seriesName\":\"CSI: Cyber\",\"slug\":\"csi-cyber\",\"status\":\"Ended\"\
-        },{\"aliases\":[],\"banner\":null,\"firstAired\":\"2008-9-1\",\"id\":253208,\"\
-        image\":\"/banners/posters/253208-1.jpg\",\"network\":\"TV Nova\",\"overview\"\
-        :\"Crimi series inspired by real cases.\",\"poster\":null,\"seriesName\":\"\
-        CSI Andel\",\"slug\":\"csi-andel\",\"status\":\"Ended\"},{\"aliases\":[],\"\
-        banner\":\"/banners/graphical/249250-g.jpg\",\"firstAired\":\"2011-4-13\"\
-        ,\"id\":249250,\"image\":\"/banners/posters/5b65766f488dd.jpg\",\"network\"\
-        :\"TV Asahi\",\"overview\":\"\\\"CSI: Crime Scene Talks\\\" depicts the work\
-        \ of a group of detectives who solve murder cases by looking for clues in\
-        \ the articles left by victims.\",\"poster\":\"/banners/posters/5b65766f488dd.jpg\"\
-        ,\"seriesName\":\"CSI: Crime Scene Talks\",\"slug\":\"iryu-sosa\",\"status\"\
-        :\"Continuing\"},{\"aliases\":[\"Jurassic C.S.I.\"],\"banner\":\"/banners/graphical/253030-g.jpg\"\
-        ,\"firstAired\":\"2011-7-7\",\"id\":253030,\"image\":\"/banners/posters/253030-1.jpg\"\
-        ,\"network\":\"National Geographic\",\"overview\":\"In Jurassic CSI, dino\
-        \ detective Dr. Phil Manning launches a full-scale investigation to unearth\
-        \ how dinosaurs really looked and lived. \\r\\n\\r\\nJurassic CSI goes into\
-        \ the minds, under the skin and inside the bones of the biggest, most impressive\
-        \ beasts ever to walk the planet. Dr. Manning doesn\u2019t stick to convention\
-        \ \u2013 or even his own discipline \u2013 on his perpetual quest to expand\
-        \ what we know about dinosaurs. With privileged access to some of the world\u2019\
-        s most sophisticated technologies \u2013 from crime scene 3D mapping technology\
-        \ to an image machine one million times stronger than a chest X-ray \u2013\
-        \ Jurassic CSI challenges long \u2013 held assumptions and poses radical questions\
-        \ about our understanding of dinosaurs.\",\"poster\":\"/banners/posters/253030-1.jpg\"\
-        ,\"seriesName\":\"Jurassic CSI\",\"slug\":\"jurassic-csi\",\"status\":\"Ended\"\
-        },{\"aliases\":[],\"banner\":null,\"firstAired\":\"2011-6-29\",\"id\":248519,\"\
-        image\":\"/banners/posters/248519-1.jpg\",\"network\":null,\"poster\":null,\"\
-        seriesName\":\"True CSI\",\"slug\":\"true-csi\",\"status\":\"Ended\"},{\"\
-        aliases\":[],\"banner\":null,\"firstAired\":\"2006-1-12\",\"id\":152441,\"\
-        image\":\"/banners/posters/152441-1.jpg\",\"network\":\"National Geographic\"\
-        ,\"overview\":\"Shocking wilderness unfolds as state of art forensics and\
-        \ photography reveal the unknown acts of our animal kingdom. Get up close\
-        \ with predators and see how their instincts make them the fittest when it\
-        \ comes to their survival.\",\"poster\":null,\"seriesName\":\"Predator CSI\"\
-        ,\"slug\":\"predator-csi\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\"\
-        :null,\"firstAired\":\"2019-5-1\",\"id\":362856,\"image\":\"/banners/posters/5ccac40deb2eb.jpg\"\
-        ,\"network\":\"BBC Two\",\"overview\":\"Multiple cameras follow serious crime\
-        \ investigations in real time, revealing the crucial role cutting-edge forensic\
-        \ science now plays in bringing criminals to justice.\",\"poster\":null,\"\
-        seriesName\":\"Forensics: The Real CSI\",\"slug\":\"forensics-the-real-csi\"\
-        ,\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":null,\"firstAired\"\
-        :\"2004-1-5\",\"id\":143501,\"image\":\"/banners/posters/143501-1.jpg\",\"\
-        network\":\"TVBS Entertainment Channel\",\"poster\":null,\"seriesName\":\"\
-        Variety Show of Mr. Con \\u0026 Ms. Csi\",\"slug\":\"variety-show-of-mr-con-and-ms-csi\"\
-        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"2005-8-17\"\
-        ,\"id\":262278,\"image\":\"/banners/posters/262278-2.jpg\",\"network\":\"\
-        BBC One\",\"overview\":\"David Attenborough narrates a murder mystery series\
-        \ with a twist - forensic science techniques are used to find out who or what\
-        \ killed an animal.\",\"poster\":null,\"seriesName\":\"Animal Crime Scene\"\
-        ,\"slug\":\"animal-crime-scene\",\"status\":\"Ended\"},{\"aliases\":[],\"\
-        banner\":null,\"firstAired\":\"2015-10-1\",\"id\":307245,\"image\":\"/banners/posters/307245-1.jpg\"\
-        ,\"network\":\"Disney Channel\",\"overview\":\"As far back as anyone can remember,\
-        \ Starlings have granted wishes for Earthlings. But when an evil force suddenly\
-        \ threatens Starland, twelve Star-Charmed girls are sent on the most magical\
-        \ adventures of their lives\u2026as THE STAR DARLINGS!\\r\\n\\r\\nOur Starlings\
-        \ believe in making wishes from the heart, dreaming big and embracing your\
-        \ inner star, because anything is possible! Wish upon your Star! \",\"poster\"\
-        :null,\"seriesName\":\"Star Darlings\",\"slug\":\"star-darlings\",\"status\"\
-        :\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"2008-01-07\"\
-        ,\"id\":81938,\"image\":\"/banners/posters/81938-1.jpg\",\"network\":null,\"\
-        overview\":\"In three hard-hitting programmes, Hugh Fearnley-Whittingstall\
-        \ explores the horrors of intensive chicken farming. The journey takes him\
-        \ far from the cosy lifestyle of River Cottage and into the harrowing conditions\
-        \ of running his own modern poultry production line.\",\"poster\":null,\"\
-        seriesName\":\"Hugh's Chicken Run\",\"slug\":\"hughs-chicken-run\",\"status\"\
-        :\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"2008-1-10\",\"\
-        id\":85236,\"image\":\"/banners/posters/85236-1.jpg\",\"network\":\"Five\"\
-        ,\"overview\":\"Robert Llewellyn presents a series examining the feats of\
-        \ science and engineering behind everyday life.\",\"poster\":null,\"seriesName\"\
-        :\"How Do They Do It? (UK)\",\"slug\":\"how-do-they-do-it-uk\",\"status\"\
-        :\"Ended\"},{\"aliases\":[],\"banner\":null,\"firstAired\":\"2004-6-28\",\"\
-        id\":174241,\"image\":\"/banners/posters/174241-1.jpg\",\"network\":\"TF1\"\
-        ,\"poster\":null,\"seriesName\":\"Zodiac (2004)\",\"slug\":\"zodiac-2004\"\
-        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/17291-g.jpg\"\
-        ,\"firstAired\":\"2003-11-7\",\"id\":72244,\"image\":\"/banners/posters/72244-1.jpg\"\
-        ,\"network\":\"Cartoon Network\",\"overview\":\"Star Wars: Clone Wars picks\
-        \ up where the theatrical feature Star Wars: Episode II: Attack of the Clones\
-        \ left off as an epic civil war pits the Republic against the separatist movement\
-        \ led by the Dark Side of the Force's mastermind Darth Sidious.\",\"poster\"\
-        :\"/banners/posters/72244-1.jpg\",\"seriesName\":\"Star Wars: Clone Wars\"\
-        ,\"slug\":\"star-wars-clone-wars\",\"status\":\"Ended\"},{\"aliases\":[],\"\
-        banner\":\"/banners/graphical/311810-g2.jpg\",\"firstAired\":\"2016-5-16\"\
-        ,\"id\":311810,\"image\":\"/banners/posters/311810-5.jpg\",\"network\":\"\
-        FOX\",\"overview\":\"This musical drama revolves around Star, her sister Simone\
-        \ and their friend Alex, three talented young singers who navigate the music\
-        \ business on their road to success in Atlanta, where Star and Simone's long\
-        \ lost godmother Carlotta lives. They'll soon learn that success is not only\
-        \ about the music, but also drama, sacrifice and pain.\",\"poster\":\"/banners/posters/311810-5.jpg\"\
-        ,\"seriesName\":\"Star\",\"slug\":\"star\",\"status\":\"Ended\"},{\"aliases\"\
-        :[],\"banner\":null,\"firstAired\":\"2012-3-31\",\"id\":257504,\"image\":\"\
-        /banners/images/missing/series.jpg\",\"network\":\"National Geographic\",\"\
-        overview\":\"Ghostly sounds in a haunted wood in Wales, silver stolen in a\
-        \ canyon in California and pets disappearing in Vermont \u2013 are the suspects\
-        \ human or could animals be involved? Just as smart-phone cameras have revolutionised\
-        \ the way news footage is captured around the globe, so the increasing sophistication\
-        \ of camera trapping technology has led to a surge in the recording of unusual\
-        \ animal behaviours. Big cats, small rats, freaky dogs and scary hogs are\
-        \ all under investigation, but who has committed the crimes and why?\",\"\
-        poster\":null,\"seriesName\":\"Wild Scene Investigation\",\"slug\":\"wild-scene-investigation\"\
-        ,\"status\":\"Ended\"},{\"aliases\":[\"Ester vs. M\xF6rkrets Makter\"],\"\
-        banner\":\"/banners/graphical/282994-g.jpg\",\"firstAired\":\"2015-1-18\"\
-        ,\"id\":282994,\"image\":\"/banners/posters/282994-2.jpg\",\"network\":\"\
-        Disney Channel\",\"overview\":\"After having skirmished with a number of dangerous\
-        \ monsters, Star Butterfly arrives on Earth to live with the Diaz family.\
-        \ However, rather than living a normal life, Star continues on having to battle\
-        \ villains both throughout the universe and in their high school, although\
-        \ if only to protect her extremely powerful wand, an object which she is still\
-        \ confused with.\",\"poster\":\"/banners/posters/282994-2.jpg\",\"seriesName\"\
-        :\"Star vs. the Forces of Evil\",\"slug\":\"star-vs-the-forces-of-evil\",\"\
-        status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/5b9bf0636b205.jpg\"\
-        ,\"firstAired\":\"1983-4-4\",\"id\":131361,\"image\":\"/banners/posters/5cdc205cd5a30.jpg\"\
-        ,\"network\":\"NCRV\",\"overview\":\"Mrs. Pepper Pot always wears a golden\
-        \ spoon around her neck. She lives with her husband, a painter, in a small\
-        \ village. Mrs. Pepper can quickly shrink her body as small as the spoon around\
-        \ her neck! When she becomes small, she can communicate with animals and enjoy\
-        \ wonderful adventures in the woods.\",\"poster\":\"/banners/posters/5cdc205cd5a30.jpg\"\
-        ,\"seriesName\":\"Mrs. Pepperpot\",\"slug\":\"mrs-pepperpot\",\"status\":\"\
-        Ended\"},{\"aliases\":[\"Farscape - Verschollen im All\",\"Farscape: The Peacekeeper\
-        \ Wars\"],\"banner\":\"/banners/graphical/70522-g.jpg\",\"firstAired\":\"\
-        1999-3-19\",\"id\":70522,\"image\":\"/banners/posters/70522-5.jpg\",\"network\"\
-        :\"Syfy\",\"overview\":\"Astronaut John Crichton attempts to use the Earth's\
-        \ atmosphere to propel his ship, Farscape 1, at great speeds across the solar\
-        \ system. He went much further though and was sucked down a wormhole to a\
-        \ distant part of the galaxy and into the middle of a battle. He is rescued\
-        \ by a group of escaping prisoners and taken aboard their living ship. As\
-        \ the years went by, Crichton has made enemies, powerful and dangerous enemies.\
-        \ On his journey to find a way back home, he freed other captives who became\
-        \ part of the crew on Moya.\",\"poster\":\"/banners/posters/70522-5.jpg\"\
-        ,\"seriesName\":\"Farscape\",\"slug\":\"farscape\",\"status\":\"Ended\"},{\"\
-        aliases\":[\"Star Crossed\",\"\u041A\u0438\u0441\u043B\u043E\u0440\u043E\u0434\
-        \"],\"banner\":\"/banners/graphical/269604-g.jpg\",\"firstAired\":\"2014-2-17\"\
-        ,\"id\":269604,\"image\":\"/banners/posters/269604-3.jpg\",\"network\":\"\
-        The CW\",\"overview\":\"Passion and politics threaten the peace and an epic\
-        \ romance ignites between a human girl and an alien boy when he and eight\
-        \ others of his kind (The Orion 9) are integrated into a suburban high school\
-        \ 10 years after they and hundreds of others landed on Earth and were immediately\
-        \ consigned to an internment camp where they\u2019ve been imprisoned ever\
-        \ since.\",\"poster\":\"/banners/posters/269604-3.jpg\",\"seriesName\":\"\
-        Star-Crossed\",\"slug\":\"star-crossed\",\"status\":\"Ended\"},{\"aliases\"\
-        :[\"\u0417\u0432\u0435\u0437\u0434\u043D\u044B\u0439 \u043A\u0440\u0435\u0439\
-        \u0441\u0435\u0440 \",\"\u592A\u7A7A\u5821\u58D8\u5361\u62C9\u72C4\u52A0\"\
-        ,\"Battlestar Galactica: The Resistance\",\"Battlestar Galactica: The Miniseries\"\
-        ,\"Battlestar Galactica: Razor\",\"Battlestar Galactica: Face of the Enemy\"\
-        ,\"Battlestar Galactica: The Miniseries (1)\",\"Battlestar Galactica: Razor\
-        \ Minisode\"],\"banner\":\"/banners/graphical/73545-g11.jpg\",\"firstAired\"\
-        :\"2003-11-26\",\"id\":73545,\"image\":\"/banners/posters/73545-2.jpg\",\"\
-        network\":\"Syfy\",\"overview\":\"In a distant part of the universe, a civilization\
-        \ of humans live on planets known as the Twelve Colonies. In the past, the\
-        \ Colonies have been at war with a cybernetic race known as the Cylons. 40\
-        \ years after the first war the Cylons launch a devastating attack on the\
-        \ Colonies. The only military ship that survived the attack takes up the task\
-        \ of leading a small fugitive fleet of survivors into space in search of a\
-        \ fabled refuge known as Earth.\",\"poster\":\"/banners/posters/73545-2.jpg\"\
-        ,\"seriesName\":\"Battlestar Galactica (2003)\",\"slug\":\"battlestar-galactica-2003\"\
-        ,\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/325720-g.jpg\"\
-        ,\"firstAired\":\"2017-9-7\",\"id\":325720,\"image\":\"/banners/posters/325720-1.jpg\"\
-        ,\"network\":\"Sky Atlantic (UK)\",\"overview\":\"A brand-new oil refinery\
-        \ is bringing more to the remote Canadian mountain town Little Big Bear than\
-        \ just new workers and new money. Along with them, this once-idyllic community\
-        \ begins to see an incursion of drugs, prostitution, and organized crime.\
-        \ \\r\\nIn the midst of this, the new police chief, Jim Worth, has just arrived\
-        \ from London with his family looking for a more peaceful setting to help\
-        \ him stay on the wagon. Instead, a deliberate, violent act tears the family\
-        \ apart, setting Jim's sights on whiskey and revenge. \",\"poster\":\"/banners/posters/325720-1.jpg\"\
-        ,\"seriesName\":\"Tin Star\",\"slug\":\"tin-star\",\"status\":\"Continuing\"\
-        },{\"aliases\":[\"Der gestiefelte Kater - Abenteuer in San Lorenzo\"],\"banner\"\
-        :\"/banners/graphical/290174-g.jpg\",\"firstAired\":\"2015-1-16\",\"id\":290174,\"\
-        image\":\"/banners/posters/290174-2.jpg\",\"network\":\"Netflix\",\"overview\"\
-        :\"The world's greatest fighter, lover (and milk connoisseur) springs to action\
-        \ with mystical, comical tales that take him to exotic locations filled with\
-        \ unforgettable characters.\",\"poster\":\"/banners/posters/290174-2.jpg\"\
-        ,\"seriesName\":\"The Adventures of Puss in Boots\",\"slug\":\"the-adventures-of-puss-in-boots\"\
-        ,\"status\":\"Ended\"},{\"aliases\":[\"Stargate SG1\",\"Stargate SG1\"],\"\
-        banner\":\"/banners/graphical/72449-g6.jpg\",\"firstAired\":\"1994-10-28\"\
-        ,\"id\":72449,\"image\":\"/banners/posters/72449-4.jpg\",\"network\":\"Syfy\"\
-        ,\"overview\":\"This sequel to the 1994 movie Stargate chronicles the further\
-        \ adventures of SGC (Stargate Command). It turned out that the Goa'uld Ra\
-        \ was only one of many alien System Lords who used the Stargates to conquer\
-        \ much of the universe. When Earth uncovers a working cartouche to decipher\
-        \ the coding system of their own Stargate, they find they can now travel anywhere.\
-        \ Earth's military sends out SG teams to explore new planets, find technology,\
-        \ and oppose the Goa'uld. Jack O'Neill and Daniel Jackson from the original\
-        \ movie are part of SG-1. They are joined by Sam Carter, a scientist, and\
-        \ Teal'c, a Jaffa who is convinced the Goa'uld are not gods.\",\"poster\"\
-        :\"/banners/posters/72449-4.jpg\",\"seriesName\":\"Stargate SG-1\",\"slug\"\
-        :\"stargate-sg-1\",\"status\":\"Ended\"},{\"aliases\":[\"\u661F\u9645\u4E4B\
-        \u95E8\uFF1A\u4E9A\u7279\u5170\u8482\u65AF\"],\"banner\":\"/banners/graphical/70851-g9.jpg\"\
-        ,\"firstAired\":\"2004-7-5\",\"id\":70851,\"image\":\"/banners/posters/70851-1.jpg\"\
-        ,\"network\":\"Syfy\",\"overview\":\"The story of Stargate Atlantis follows\
-        \ the cliffhanger episode on Stargate SG-1's seventh season finale \\\"Lost\
-        \ City\\\", where SG-1 found an outpost made by the race known as the Ancients\
-        \ in Antarctica. After the events of Stargate SG-1 season eight premiere \\\
-        \"New Order\\\", the Stargate Command sends an international team to investigate\
-        \ the outpost. Soon, Dr. Daniel Jackson discovers the location of the greatest\
-        \ city created by the Ancients, Atlantis. The story unfolds when the members\
-        \ of the expedition encounter the Wraith, the race that defeated the Ancients\
-        \ ten thousand years ago.\",\"poster\":\"/banners/posters/70851-1.jpg\",\"\
-        seriesName\":\"Stargate Atlantis\",\"slug\":\"stargate-atlantis\",\"status\"\
-        :\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/83237-g4.jpg\"\
-        ,\"firstAired\":\"2009-10-2\",\"id\":83237,\"image\":\"/banners/posters/83237-5.jpg\"\
-        ,\"network\":\"Syfy\",\"overview\":\"The previously unknown purpose of the\
-        \ ninth chevron is revealed and takes a group of refugees on a one-way trip\
-        \ to a millions of years old Ancient-built ship. Led by Dr. Nicolas Rush and\
-        \ Colonel Everett Young, the refugees are trapped on the ship, unable to change\
-        \ its programmed mission.\",\"poster\":\"/banners/posters/83237-5.jpg\",\"\
-        seriesName\":\"Stargate Universe\",\"slug\":\"stargate-universe\",\"status\"\
-        :\"Ended\"},{\"aliases\":[\"Tiku ja Taku pelastajat\",\"Chip \xE9s Dale -\
-        \ A Csipet Csapat\"],\"banner\":\"/banners/graphical/75477-g.jpg\",\"firstAired\"\
-        :\"1989-3-5\",\"id\":75477,\"image\":\"/banners/posters/75477-6.jpg\",\"network\"\
-        :\"Disney Channel\",\"overview\":\"Chip and Dale, two chipmunks with a nose\
-        \ for trouble, start a detective agency, Rescue Rangers, along with their\
-        \ new friends Gadget, Monterey Jack, and Zipper. The pint-sized detectives\
-        \ deal with crimes that are often \\\"too small\\\" for the police to handle,\
-        \ usually with other animals as their clients. The gang frequently finds itself\
-        \ going up against two particular arch villains: Mafia-style tabby cat Fat\
-        \ Cat and mad scientist Norton Nimnul (both voiced by Jim Cummings).\",\"\
-        poster\":\"/banners/posters/75477-6.jpg\",\"seriesName\":\"Chip 'n Dale Rescue\
-        \ Rangers\",\"slug\":\"chip-n-dale-rescue-rangers\",\"status\":\"Ended\"}]}"
+      string: "{\"data\":[{\"aliases\":[\"CSI: Vegas\",\"CSI\",\"CSI: Las Vegas\",\"CSI\u6EC5\u7F6A\u9451\u8B49\u79D1\"],\"banner\":\"/banners/graphical/19-g.jpg\",\"firstAired\":\"2000-10-06\",\"id\":72546,\"image\":\"/banners/posters/72546-5.jpg\",\"network\":\"CBS\",\"overview\":\"CSI
+        is a crime drama in which the characters use cutting-edge forensic tools to
+        examine the evidence to solve the case.  Rather than asking 'whodunnit' (investigating
+        witnesses/suspects), CSI explores the 'howdunnit'.\",\"poster\":\"/banners/posters/72546-5.jpg\",\"seriesName\":\"CSI:
+        Crime Scene Investigation\",\"slug\":\"csi-crime-scene-investigation\",\"status\":\"Ended\"},{\"aliases\":[\"\u9451\u8B49\u884C\u52D5\u7D44\"],\"banner\":\"/banners/graphical/8460-g.jpg\",\"firstAired\":\"2002-09-23\",\"id\":78310,\"image\":\"/banners/posters/78310-3.jpg\",\"network\":\"CBS\",\"overview\":\"CSI's
+        gritty approach to crime known as forensic science makes its way from Las
+        Vegas to the streets of Florida in CSI: Miami. A whole new team of crime scene
+        investigators is on hand to probe the seamy underside of Miami.\",\"poster\":\"/banners/posters/78310-3.jpg\",\"seriesName\":\"CSI:
+        Miami\",\"slug\":\"csi-miami\",\"status\":\"Ended\"},{\"aliases\":[\"CSI:
+        New York\",\"CSI: New York\"],\"banner\":\"/banners/graphical/24125-g.jpg\",\"firstAired\":\"2004-09-22\",\"id\":73696,\"image\":\"/banners/posters/73696-3.jpg\",\"network\":\"CBS\",\"overview\":\"The
+        third edition of the \\\"CSI\\\" franchise sets up shop in the Big Apple,
+        where taciturn Detective Mac Taylor (Gary Sinise) and his partner, Detective
+        Stella Bonasera (Melina Kanakaredes), lead a crime-solving team. Like his
+        counterparts in Las Vegas and Miami, Taylor knows that people may lie, but
+        the evidence rarely does.\",\"poster\":\"/banners/posters/73696-3.jpg\",\"seriesName\":\"CSI:
+        NY\",\"slug\":\"csi-ny\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/blank/281551.jpg\",\"firstAired\":\"2015-03-04\",\"id\":281551,\"image\":\"/banners/posters/281551-1.jpg\",\"network\":\"CBS\",\"overview\":\"The
+        series follows an elite team of FBI Special Agents tasked with investigating
+        cyber crimes in North America. Based out of Quantico, the team is supervised
+        by Avery Ryan a behavioral psychologist turned cyber shrink who established
+        the FBI Cyber Crime division and heads a \\\"hack-for-good\\\" program, a
+        scheme in which the criminals she catches can work for her in lieu of receiving
+        a prison sentence.\",\"poster\":\"/banners/posters/281551-1.jpg\",\"seriesName\":\"CSI:
+        Cyber\",\"slug\":\"csi-cyber\",\"status\":\"Ended\"},{\"aliases\":[\"Les Experts
+        Las Vegas\"],\"banner\":\"/banners/v4/series/400248/banners/6395fc799540f.jpg\",\"firstAired\":\"2021-10-06\",\"id\":400248,\"image\":\"/banners/v4/series/400248/posters/6131260d0c13f.jpg\",\"network\":\"CBS\",\"overview\":\"Facing
+        an existential threat that could bring down the Crime Lab, a brilliant team
+        of forensic investigators must welcome back old friends and deploy new techniques
+        to preserve and serve justice in Sin City.\",\"poster\":\"/banners/v4/series/400248/posters/6131260d0c13f.jpg\",\"seriesName\":\"CSI:
+        Vegas\",\"slug\":\"csi-vegas\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"\",\"id\":83898,\"image\":\"/banners/posters/5b5e08fdcd284.jpg\",\"network\":\"\",\"overview\":\"A
+        6 part series for Channel Five about the course for crime scene investigators
+        at the National Forensic Academy in Knoxville, Tennessee.\",\"poster\":\"/banners/posters/5b5e08fdcd284.jpg\",\"seriesName\":\"CSI
+        Academy\",\"slug\":\"csi-academy\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2011-06-29\",\"id\":248519,\"image\":\"/banners/posters/248519-1.jpg\",\"network\":\"\",\"poster\":\"/banners/posters/248519-1.jpg\",\"seriesName\":\"True
+        CSI\",\"slug\":\"true-csi\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2021-03-02\",\"id\":397461,\"image\":\"/banners/v4/series/397461/posters/6107dbacd1c15.jpg\",\"network\":\"YouTube\",\"overview\":\"ITZY
+        investigates!\",\"poster\":\"/banners/v4/series/397461/posters/6107dbacd1c15.jpg\",\"seriesName\":\"[CSI]
+        Codename: Secret ITZY\",\"slug\":\"csi-codename-secret-itzy\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/5ccac3bfe5aeb.jpg\",\"firstAired\":\"2019-05-01\",\"id\":362856,\"image\":\"/banners/v4/series/362856/posters/60a543e25f51e.jpg\",\"network\":\"BBC
+        Two\",\"overview\":\"Multiple cameras follow serious crime investigations
+        in real time, revealing the crucial role cutting-edge forensic science now
+        plays in bringing criminals to justice.\",\"poster\":\"/banners/v4/series/362856/posters/60a543e25f51e.jpg\",\"seriesName\":\"Forensics:
+        The Real CSI\",\"slug\":\"forensics-the-real-csi\",\"status\":\"Continuing\"},{\"aliases\":[\"Jurassic
+        C.S.I.\"],\"banner\":\"/banners/graphical/253030-g.jpg\",\"firstAired\":\"2011-07-07\",\"id\":253030,\"image\":\"/banners/posters/253030-1.jpg\",\"network\":\"National
+        Geographic\",\"overview\":\"In Jurassic CSI, dino detective Dr. Phil Manning
+        launches a full-scale investigation to unearth how dinosaurs really looked
+        and lived. \\r\\n\\r\\nJurassic CSI goes into the minds, under the skin and
+        inside the bones of the biggest, most impressive beasts ever to walk the planet.
+        Dr. Manning doesn\u2019t stick to convention \u2013 or even his own discipline
+        \u2013 on his perpetual quest to expand what we know about dinosaurs. With
+        privileged access to some of the world\u2019s most sophisticated technologies
+        \u2013 from crime scene 3D mapping technology to an image machine one million
+        times stronger than a chest X-ray \u2013 Jurassic CSI challenges long \u2013
+        held assumptions and poses radical questions about our understanding of dinosaurs.\",\"poster\":\"/banners/posters/253030-1.jpg\",\"seriesName\":\"Jurassic
+        CSI\",\"slug\":\"jurassic-csi\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/152441-g.jpg\",\"firstAired\":\"2006-01-12\",\"id\":152441,\"image\":\"/banners/posters/152441-1.jpg\",\"network\":\"National
+        Geographic\",\"overview\":\"Shocking wilderness unfolds as state of art forensics
+        and photography reveal the unknown acts of our animal kingdom. Get up close
+        with predators and see how their instincts make them the fittest when it comes
+        to their survival.\",\"poster\":\"/banners/posters/152441-1.jpg\",\"seriesName\":\"Predator
+        CSI\",\"slug\":\"predator-csi\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2004-01-05\",\"id\":143501,\"image\":\"/banners/posters/143501-1.jpg\",\"network\":\"TVBS
+        Entertainment Channel\",\"poster\":\"/banners/posters/143501-1.jpg\",\"seriesName\":\"Variety
+        Show of Mr. Con \\u0026 Ms. Csi\",\"slug\":\"variety-show-of-mr-con-and-ms-csi\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/434381/banners/6612f969cc8da.jpg\",\"firstAired\":\"2023-03-23\",\"id\":434381,\"image\":\"/banners/v4/series/434381/posters/644df8cf2a006.jpg\",\"network\":null,\"overview\":\"CSI
+        On Trial reveals the shocking lack of scientific validity behind these investigative
+        practices through real-life criminal cases, the stories of the wrongly convicted
+        who are now free, and the believed innocent who remain behind bars.\",\"poster\":\"/banners/v4/series/434381/posters/644df8cf2a006.jpg\",\"seriesName\":\"CSI
+        on Trial\",\"slug\":\"csi-on-trial\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/342048-g.jpg\",\"firstAired\":\"2017-12-02\",\"id\":342048,\"image\":\"/banners/posters/342048-1.jpg\",\"network\":\"TVQ
+        (Australia)\",\"poster\":\"/banners/posters/342048-1.jpg\",\"seriesName\":\"CSI:\uC18C\uBE44\uC790
+        \uD0D0\uC0AC\uB300\",\"slug\":\"342048-show\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2019-09-08\",\"id\":415906,\"image\":\"/banners/images/missing/series.jpg\",\"network\":null,\"overview\":\"Talks
+        and portraits of extraordinary people every week.\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Tell
+        Csilla Tatar!\",\"slug\":\"mondd-el-tatar-csillanak\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"\",\"id\":449895,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"CBS\",\"overview\":\"The
+        series will feature real-life crime cases and the cutting-edge forensic science
+        used to solve them.\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"The
+        Real CSI: Miami\",\"slug\":\"the-real-csi-miami\",\"status\":\"Upcoming\"},{\"aliases\":[\"Stargate
+        SG1\",\"Stargate Kommando SG-1\",\"Stargate SG1\"],\"banner\":\"/banners/graphical/185-g.jpg\",\"firstAired\":\"1997-07-27\",\"id\":72449,\"image\":\"/banners/posters/72449-4.jpg\",\"network\":\"Showtime\",\"overview\":\"This
+        sequel to the 1994 movie Stargate chronicles the further adventures of SGC
+        (Stargate Command). It turned out that the Goa'uld Ra was only one of many
+        alien System Lords who used the Stargates to conquer much of the universe.
+        When Earth uncovers a working cartouche to decipher the coding system of their
+        own Stargate, they find they can now travel anywhere. Earth's military sends
+        out SG teams to explore new planets, find technology, and oppose the Goa'uld.
+        Jack O'Neill and Daniel Jackson from the original movie are part of SG-1.
+        They are joined by Sam Carter, a scientist, and Teal'c, a Jaffa who is convinced
+        the Goa'uld are not gods.\",\"poster\":\"/banners/posters/72449-4.jpg\",\"seriesName\":\"Stargate
+        SG-1\",\"slug\":\"stargate-sg-1\",\"status\":\"Ended\"},{\"aliases\":[\"Star
+        Crossed\",\"\u041A\u0438\u0441\u043B\u043E\u0440\u043E\u0434\",\"\u041D\u0435\u0441\u0447\u0430\u0441\u0442\u043D\u044B\u0435\"],\"banner\":\"/banners/graphical/269604-g4.jpg\",\"firstAired\":\"2014-02-17\",\"id\":269604,\"image\":\"/banners/posters/269604-3.jpg\",\"network\":\"The
+        CW\",\"overview\":\"Passion and politics threaten the peace and an epic romance
+        ignites between a human girl and an alien boy when he and eight others of
+        his kind (The Orion 9) are integrated into a suburban high school 10 years
+        after they and hundreds of others landed on Earth and were immediately consigned
+        to an internment camp where they\u2019ve been imprisoned ever since.\",\"poster\":\"/banners/posters/269604-3.jpg\",\"seriesName\":\"Star-Crossed\",\"slug\":\"star-crossed\",\"status\":\"Ended\"},{\"aliases\":[\"Battlestar
+        Galactica: The Resistance\",\"Battlestar Galactica: The Miniseries\",\"Battlestar
+        Galactica: Razor\",\"Battlestar Galactica: Face of the Enemy\",\"Battlestar
+        Galactica (2004)\",\"\u0417\u0432\u0435\u0437\u0434\u043D\u044B\u0439 \u043A\u0440\u0435\u0439\u0441\u0435\u0440
+        \u0413\u0430\u043B\u0430\u043A\u0442\u0438\u043A\u0430\",\"\u592A\u7A7A\u5821\u58D8\u5361\u62C9\u72C4\u52A0\"],\"banner\":\"/banners/blank/73545.jpg\",\"firstAired\":\"2005-01-14\",\"id\":73545,\"image\":\"/banners/posters/73545-2.jpg\",\"network\":\"SYFY\",\"overview\":\"In
+        a distant part of the universe, a civilization of humans live on planets known
+        as the Twelve Colonies. In the past, the Colonies have been at war with a
+        cybernetic race known as the Cylons. 40 years after the first war the Cylons
+        launch a devastating attack on the Colonies. The only military ship that survived
+        the attack takes up the task of leading a small fugitive fleet of survivors
+        into space in search of a fabled refuge known as Earth.\",\"poster\":\"/banners/posters/73545-2.jpg\",\"seriesName\":\"Battlestar
+        Galactica (2003)\",\"slug\":\"battlestar-galactica-2003\",\"status\":\"Ended\"},{\"aliases\":[\"\u661F\u9645\u4E4B\u95E8\uFF1A\u4E9A\u7279\u5170\u8482\u65AF\"],\"banner\":\"/banners/blank/70851-6.jpg\",\"firstAired\":\"2004-07-16\",\"id\":70851,\"image\":\"/banners/posters/70851-1.jpg\",\"network\":\"SYFY\",\"overview\":\"The
+        story of Stargate Atlantis follows the cliffhanger episode on Stargate SG-1's
+        seventh season finale \\\"Lost City\\\", where SG-1 found an outpost made
+        by the race known as the Ancients in Antarctica. After the events of Stargate
+        SG-1 season eight premiere \\\"New Order\\\", the Stargate Command sends an
+        international team to investigate the outpost. Soon, Dr. Daniel Jackson discovers
+        the location of the greatest city created by the Ancients, Atlantis. The story
+        unfolds when the members of the expedition encounter the Wraith, the race
+        that defeated the Ancients ten thousand years ago.\",\"poster\":\"/banners/posters/70851-1.jpg\",\"seriesName\":\"Stargate
+        Atlantis\",\"slug\":\"stargate-atlantis\",\"status\":\"Ended\"},{\"aliases\":[\"Ester
+        vs. M\xF6rkrets Makter\",\"Star vs. As For\xE7as do Mal\",\"\uBCC4\uB098\uBE44\",\"\u0646\u062C\u0645\u0629
+        \u0636\u062F \u0642\u0648\u0649 \u0627\u0644\u0634\u0631\"],\"banner\":\"/banners/text/282994.jpg\",\"firstAired\":\"2015-01-18\",\"id\":282994,\"image\":\"/banners/posters/282994-2.jpg\",\"network\":\"Disney
+        Channel\",\"overview\":\"After having skirmished with a number of dangerous
+        monsters, Star Butterfly arrives on Earth to live with the Diaz family. However,
+        rather than living a normal life, Star continues on having to battle villains
+        both throughout the universe and in their high school, although if only to
+        protect her extremely powerful wand, an object which she is still confused
+        with.\",\"poster\":\"/banners/posters/282994-2.jpg\",\"seriesName\":\"Star
+        vs. the Forces of Evil\",\"slug\":\"star-vs-the-forces-of-evil\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/83237-g.jpg\",\"firstAired\":\"2009-10-02\",\"id\":83237,\"image\":\"/banners/posters/83237-5.jpg\",\"network\":\"SYFY\",\"overview\":\"The
+        previously unknown purpose of the ninth chevron is revealed and takes a group
+        of refugees on a one-way trip to a millions of years old Ancient-built ship.
+        Led by Dr. Nicolas Rush and Colonel Everett Young, the refugees are trapped
+        on the ship, unable to change its programmed mission.\",\"poster\":\"/banners/posters/83237-5.jpg\",\"seriesName\":\"Stargate
+        Universe\",\"slug\":\"stargate-universe\",\"status\":\"Ended\"},{\"aliases\":[\"Cowboy
+        Bebop\",\"Kowboj Bebop\"],\"banner\":\"/banners/v4/series/367234/banners/6609f02387b03.jpg\",\"firstAired\":\"2021-11-19\",\"id\":367234,\"image\":\"/banners/v4/series/367234/posters/61794825640b3.jpg\",\"network\":\"Netflix\",\"overview\":\"A
+        ragtag crew of bounty hunters chases down the galaxy's most dangerous criminals.
+        They'll save the world ... for the right price.\",\"poster\":\"/banners/v4/series/367234/posters/61794825640b3.jpg\",\"seriesName\":\"Cowboy
+        Bebop (2021)\",\"slug\":\"cowboy-bebop-2021\",\"status\":\"Ended\"},{\"aliases\":[\"Lee
+        Daniels' Star\",\"\u0421\u0442\u0430\u0440\"],\"banner\":\"/banners/graphical/311810-g2.jpg\",\"firstAired\":\"2016-12-14\",\"id\":311810,\"image\":\"/banners/posters/311810-6.jpg\",\"network\":\"FOX\",\"overview\":\"Star,
+        her sister Simone, and their friend Alex are three talented young singers
+        who navigate the music business on their road to success in Atlanta, where
+        Star and Simone's long lost godmother Carlotta lives. They'll soon learn that
+        success is not only about the music, but also drama, sacrifice and pain.\",\"poster\":\"/banners/posters/311810-6.jpg\",\"seriesName\":\"Star\",\"slug\":\"star\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/17291-g.jpg\",\"firstAired\":\"2003-11-07\",\"id\":72244,\"image\":\"/banners/posters/72244-2.jpg\",\"network\":\"Cartoon
+        Network\",\"overview\":\"Star Wars: Clone Wars picks up where the theatrical
+        feature Star Wars: Episode II: Attack of the Clones left off as an epic civil
+        war pits the Republic against the separatist movement led by the Dark Side
+        of the Force's mastermind Darth Sidious.\",\"poster\":\"/banners/posters/72244-2.jpg\",\"seriesName\":\"Star
+        Wars: Clone Wars\",\"slug\":\"star-wars-clone-wars\",\"status\":\"Ended\"},{\"aliases\":[\"Tin
+        Star: Liverpool\",\"Tin Star (2017)\",\"\u0417\u0432\u0435\u0437\u0434\u0430
+        \u0448\u0435\u0440\u0438\u0444\u0430\",\"\u0416\u0435\u0441\u0442\u044F\u043D\u0430\u044F
+        \u0437\u0432\u0435\u0437\u0434\u0430\"],\"banner\":\"/banners/graphical/325720-g.jpg\",\"firstAired\":\"2017-09-07\",\"id\":325720,\"image\":\"/banners/posters/325720-1.jpg\",\"network\":\"Sky
+        Atlantic (UK)\",\"overview\":\"Ex undercover UK cop turned police chief of
+        a small town in the Canadian Rockies does what he must to defend his family
+        from those in power whether it's the oilmen, the preachers or the gangsters.\",\"poster\":\"/banners/posters/325720-1.jpg\",\"seriesName\":\"Tin
+        Star\",\"slug\":\"tin-star\",\"status\":\"Ended\"},{\"aliases\":[\"Farscape
+        - Verschollen im All\",\"Farscape: The Peacekeeper Wars\",\"\u0414\u0430\u043B\u0435\u043A\u043E
+        \u0432\u043E \u0412\u0441\u0435\u043B\u0435\u043D\u043D\u043E\u0439\"],\"banner\":\"/banners/graphical/70522-g22.jpg\",\"firstAired\":\"1999-03-19\",\"id\":70522,\"image\":\"/banners/posters/644426314b419.jpg\",\"network\":\"SYFY\",\"overview\":\"Astronaut
+        John Crichton attempts to use the Earth's atmosphere to propel his ship, Farscape
+        1, at great speeds across the solar system. He went much further though and
+        was sucked down a wormhole to a distant part of the galaxy and into the middle
+        of a battle. He is rescued by a group of escaping prisoners and taken aboard
+        their living ship. As the years went by, Crichton has made enemies, powerful
+        and dangerous enemies. On his journey to find a way back home, he freed other
+        captives who became part of the crew on Moya.\",\"poster\":\"/banners/posters/644426314b419.jpg\",\"seriesName\":\"Farscape\",\"slug\":\"farscape\",\"status\":\"Ended\"},{\"aliases\":[\"Der
+        gestiefelte Kater - Abenteuer in San Lorenzo\"],\"banner\":\"/banners/graphical/290174-g.jpg\",\"firstAired\":\"2015-01-16\",\"id\":290174,\"image\":\"/banners/posters/290174-2.jpg\",\"network\":\"Netflix\",\"overview\":\"The
+        world's greatest fighter, lover (and milk connoisseur) springs to action with
+        mystical, comical tales that take him to exotic locations filled with unforgettable
+        characters.\",\"poster\":\"/banners/posters/290174-2.jpg\",\"seriesName\":\"The
+        Adventures of Puss in Boots\",\"slug\":\"the-adventures-of-puss-in-boots\",\"status\":\"Ended\"},{\"aliases\":[\"Chip
+        und Chap \u2013 Die Ritter des Rechts\",\"Chip 'n Dale: Rescue Rangers\",\"Chip
+        'n' Dale: Rescue Rangers\",\"Chip \xE9s Dale - A Csipet Csapat\",\"Chip y
+        Dale al rescate\",\"Chip y Dale Rescatadores\",\"Tiku ja Taku pelastajat\",\"Disney
+        Tico e Teco e os Defensores da Lei\"],\"banner\":\"/banners/graphical/75477-g4.jpg\",\"firstAired\":\"1989-03-05\",\"id\":75477,\"image\":\"/banners/posters/75477-6.jpg\",\"network\":\"Disney
+        Channel\",\"overview\":\"Chip and Dale, two chipmunks with a nose for trouble,
+        start a detective agency, Rescue Rangers, along with their new friends Gadget,
+        Monterey Jack, and Zipper. The pint-sized detectives deal with crimes that
+        are often \\\"too small\\\" for the police to handle, usually with other animals
+        as their clients. The gang frequently finds itself going up against two particular
+        arch villains: Mafia-style tabby cat Fat Cat and mad scientist Norton Nimnul
+        (both voiced by Jim Cummings).\",\"poster\":\"/banners/posters/75477-6.jpg\",\"seriesName\":\"Chip
+        'n Dale Rescue Rangers\",\"slug\":\"chip-n-dale-rescue-rangers\",\"status\":\"Ended\"},{\"aliases\":[\"SpongeBob
+        SquarePants: The Patrick Star Show\",\"Bob Esponja: O Show do Patrick Estrela\"],\"banner\":\"/banners/v4/series/386806/banners/6615f6a298818.jpg\",\"firstAired\":\"2021-07-09\",\"id\":386806,\"image\":\"/banners/v4/series/386806/posters/60e6bc8677d0f.jpg\",\"network\":\"Nickelodeon\",\"overview\":\"Patrick
+        Star hosts his very own talk show, with the support of his family.\",\"poster\":\"/banners/v4/series/386806/posters/60e6bc8677d0f.jpg\",\"seriesName\":\"The
+        Patrick Star Show\",\"slug\":\"the-patrick-star-show\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/400730/banners/644856d8a3922.jpg\",\"firstAired\":\"2021-05-26\",\"id\":400730,\"image\":\"/banners/v4/series/400730/posters/643a7163a6c2f.jpg\",\"network\":\"FOX\",\"overview\":\"Culinary
+        guessing game in which bakers are tasked with decoding what type of dessert
+        was made when all that\u2019s left are the crumbs, flour trails, and a few
+        elusive clues. They must then recreate the recipe for celebrity judges, chef
+        Curtis Stone and cake artist Yolanda Gampp, who will determine how closely
+        their sweet treat matches the missing dessert \u2013 and how good it tastes!\",\"poster\":\"/banners/v4/series/400730/posters/643a7163a6c2f.jpg\",\"seriesName\":\"Crime
+        Scene Kitchen\",\"slug\":\"crime-scene-kitchen\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"/banners/graphical/174241-g.jpg\",\"firstAired\":\"2004-06-28\",\"id\":174241,\"image\":\"/banners/posters/174241-2.jpg\",\"network\":\"TF1\",\"overview\":\"A
+        young woman returns from the United States to attend the birthday of her father's
+        birthday in the Marseille region. However, a series of murders that at first
+        seem random commence and Esther is brought in to assist and discover who is
+        the \\\"Zodiac.\\\"\",\"poster\":\"/banners/posters/174241-2.jpg\",\"seriesName\":\"Zodiac
+        (2004)\",\"slug\":\"zodiac-2004\",\"status\":\"Ended\"},{\"aliases\":[\"\u0939\u0940\u0930\u093E\u092E\u0902\u0921\u0940:
+        \u0926 \u0921\u093E\u092F\u092E\u0902\u0921 \u092C\u093E\u095B\u093E\u0930\",\"Heeramandi:
+        O Bazar dos Diamantes\"],\"banner\":\"/banners/v4/series/420398/banners/662fda5f367b9.jpg\",\"firstAired\":\"2024-05-01\",\"id\":420398,\"image\":\"/banners/v4/series/420398/posters/6637257502b93.jpg\",\"network\":\"Netflix\",\"overview\":\"Sanjay
+        Leela Bhansali brings his majestic signature flair to stories of love and
+        betrayal in the lives of courtesans in pre-independence India.\",\"poster\":\"/banners/v4/series/420398/posters/6637257502b93.jpg\",\"seriesName\":\"Heeramandi:
+        The Diamond Bazaar\",\"slug\":\"heeramandi\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"/banners/graphical/307245-g.jpg\",\"firstAired\":\"2015-10-01\",\"id\":307245,\"image\":\"/banners/posters/307245-1.jpg\",\"network\":\"Disney
+        Channel\",\"overview\":\"As far back as anyone can remember, Starlings have
+        granted wishes for Earthlings. But when an evil force suddenly threatens Starland,
+        twelve Star-Charmed girls are sent on the most magical adventures of their
+        lives\u2026as THE STAR DARLINGS!\\r\\n\\r\\nOur Starlings believe in making
+        wishes from the heart, dreaming big and embracing your inner star, because
+        anything is possible! Wish upon your Star!\",\"poster\":\"/banners/posters/307245-1.jpg\",\"seriesName\":\"Star
+        Darlings\",\"slug\":\"star-darlings\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/253208-g.jpg\",\"firstAired\":\"2008-09-01\",\"id\":253208,\"image\":\"/banners/posters/253208-1.jpg\",\"network\":\"TV
+        Nova\",\"overview\":\"Crimi series inspired by real cases.\",\"poster\":\"/banners/posters/253208-1.jpg\",\"seriesName\":\"CSI
+        Andel\",\"slug\":\"csi-andel\",\"status\":\"Continuing\"},{\"aliases\":[\"Spoon
+        Oba-san\",\"Sup\xFBn ob\xE2san\"],\"banner\":\"/banners/v4/series/131361/banners/645c12a67da70.jpg\",\"firstAired\":\"1983-04-04\",\"id\":131361,\"image\":\"/banners/v4/series/131361/posters/618983a882595.jpg\",\"network\":\"NCRV\",\"overview\":\"Mrs.
+        Pepper Pot always wears a golden spoon around her neck. She lives with her
+        husband, a painter, in a small village. Mrs. Pepper can quickly shrink her
+        body as small as the spoon around her neck! When she becomes small, she can
+        communicate with animals and enjoy wonderful adventures in the woods.\",\"poster\":\"/banners/v4/series/131361/posters/618983a882595.jpg\",\"seriesName\":\"Mrs.
+        Pepperpot\",\"slug\":\"mrs-pepperpot\",\"status\":\"Ended\"},{\"aliases\":[\"Iryuu
+        Sousa\"],\"banner\":\"/banners/graphical/249250-g.jpg\",\"firstAired\":\"2011-04-13\",\"id\":249250,\"image\":\"/banners/v4/series/249250/posters/62e410ff78ca4.jpg\",\"network\":\"TV
+        Asahi\",\"overview\":\"Depicts the work of a group of detectives who solve
+        murder cases by looking for clues in the articles left by victims.\",\"poster\":\"/banners/v4/series/249250/posters/62e410ff78ca4.jpg\",\"seriesName\":\"CSI:
+        Crime Scene Talks\",\"slug\":\"iryu-sosa\",\"status\":\"Continuing\"},{\"aliases\":[\"Dakgangjeong\",\"Dalggangjeong\",\"Dak
+        Gang Jeong\",\"Fried Chicken\",\"Chicken Gangjeong\",\"Sweet and Sour Chicken\"],\"banner\":\"/banners/v4/series/424613/banners/65e1053fc5002.jpg\",\"firstAired\":\"2024-03-15\",\"id\":424613,\"image\":\"/banners/v4/series/424613/posters/65cd71cb48620.jpg\",\"network\":\"Netflix\",\"overview\":\"A
+        woman steps into an odd machine and becomes\u2026 a chicken nugget?! Now,
+        it\u2019s up to her father and admirer to embark on a zany quest to bring
+        her back.\",\"poster\":\"/banners/v4/series/424613/posters/65cd71cb48620.jpg\",\"seriesName\":\"Chicken
+        Nugget\",\"slug\":\"424613-\",\"status\":\"Ended\"},{\"aliases\":[\"The Bad
+        Girl\",\"The Mischief of the Bad Girl\"],\"banner\":\"/banners/v4/series/427340/banners/6612fef86cbc7.jpg\",\"firstAired\":\"2022-12-08\",\"id\":427340,\"image\":\"/banners/v4/series/427340/posters/63e708bc8baef.jpg\",\"network\":\"ViX+\",\"overview\":\"The
+        epic love story between Arlette, a nonconformist and adventurous woman, and
+        her once teenage love, Ricardo, a man trapped in a predictable routine. Thanks
+        to Arlette, he slowly learns to get out of his comfort zone. These two characters\u2019
+        lives will intertwine over 40 years, through reunions across Lima, Paris,
+        Madrid, Tokyo, London, and more. Based on the 2006 novel by Nobel prize winner
+        Mario Vargas Llosa\",\"poster\":\"/banners/v4/series/427340/posters/63e708bc8baef.jpg\",\"seriesName\":\"Travesuras
+        de la ni\xF1a mala\",\"slug\":\"travesuras-de-la-nina-mala\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/262278/banners/6629463e1acdd.jpg\",\"firstAired\":\"2005-08-17\",\"id\":262278,\"image\":\"/banners/posters/262278-2.jpg\",\"network\":\"BBC
+        One\",\"overview\":\"David Attenborough narrates a murder mystery series with
+        a twist - forensic science techniques are used to find out who or what killed
+        an animal.\",\"poster\":\"/banners/posters/262278-2.jpg\",\"seriesName\":\"Animal
+        Crime Scene\",\"slug\":\"animal-crime-scene\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/435541/banners/66204ef14635c.jpg\",\"firstAired\":\"2022-10-17\",\"id\":435541,\"image\":\"/banners/v4/series/435541/posters/650a61ab5432b.jpg\",\"network\":\"ABC
+        (AU)\",\"overview\":\"In the distant future, a seven-year-old girl named Ella
+        is gleefully testing her limits in a star-filled playground called 'The Milky
+        Way.' Ella is a bright-eyed girl propelled by curiosity and ambition. A natural
+        born leader, Ella and her best friends - Slippy (a space native) and Madhu
+        (a space alien) - are discovering exciting new worlds and doing amazing things
+        that nobody else has ever done before like surfing supernovas, riding comets,
+        and racing Moon Scooters around Saturn's rings.\",\"poster\":\"/banners/v4/series/435541/posters/650a61ab5432b.jpg\",\"seriesName\":\"Interstellar
+        Ella\",\"slug\":\"interstellar-ella\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"/banners/graphical/85236-g.jpg\",\"firstAired\":\"2008-01-10\",\"id\":85236,\"image\":\"/banners/posters/85236-1.jpg\",\"network\":\"Channel
+        5\",\"overview\":\"Robert Llewellyn presents a series examining the feats
+        of science and engineering behind everyday life.\",\"poster\":\"/banners/posters/85236-1.jpg\",\"seriesName\":\"How
+        Do They Do It? (UK)\",\"slug\":\"how-do-they-do-it-uk\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2012-03-31\",\"id\":257504,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"National
+        Geographic\",\"overview\":\"Ghostly sounds in a haunted wood in Wales, silver
+        stolen in a canyon in California and pets disappearing in Vermont \u2013 are
+        the suspects human or could animals be involved? Just as smart-phone cameras
+        have revolutionised the way news footage is captured around the globe, so
+        the increasing sophistication of camera trapping technology has led to a surge
+        in the recording of unusual animal behaviours. Big cats, small rats, freaky
+        dogs and scary hogs are all under investigation, but who has committed the
+        crimes and why?\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Wild
+        Scene Investigation\",\"slug\":\"wild-scene-investigation\",\"status\":\"Ended\"},{\"aliases\":[\"Majka\",\"Majka,
+        a csillagok k\xFCld\xF6tte\"],\"banner\":\"/banners/graphical/83545-g2.jpg\",\"firstAired\":\"1979-01-20\",\"id\":83545,\"image\":\"/banners/posters/83545-1.jpg\",\"network\":\"\u010Ceskoslovensk\xE1
+        televize\",\"overview\":\"An extraterrestrial alien lands on Earth near the
+        (fictional) Slovak town \u010Cabovce. The alien, which looks like a little
+        girl, meets with a group of children from the town who name her Maika (Majka).
+        While she has extensive knowledge of encyclopedical facts about the human
+        world, she doesn't really understand people's emotions and behaviour and gets
+        only slowly acquainted with them through the help of her new friends. Maika
+        in turn uses her abilities to fly or to effortlessly replicate things as a
+        source of entertainment and adventures for her friends.\",\"poster\":\"/banners/posters/83545-1.jpg\",\"seriesName\":\"She
+        Came Out of the Blue Sky\",\"slug\":\"she-came-out-of-the-blue-sky\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/81938-g.jpg\",\"firstAired\":\"2008-01-07\",\"id\":81938,\"image\":\"/banners/posters/81938-1.jpg\",\"network\":\"Channel
+        4\",\"overview\":\"In three hard-hitting programmes, Hugh Fearnley-Whittingstall
+        explores the horrors of intensive chicken farming. The journey takes him far
+        from the cosy lifestyle of River Cottage and into the harrowing conditions
+        of running his own modern poultry production line.\",\"poster\":\"/banners/posters/81938-1.jpg\",\"seriesName\":\"Hugh's
+        Chicken Run\",\"slug\":\"hughs-chicken-run\",\"status\":\"Ended\"},{\"aliases\":[\"Dua
+        Aur Azan\"],\"banner\":\"\",\"firstAired\":\"2024-04-26\",\"id\":449502,\"image\":\"/banners/v4/series/449502/posters/662d3a7b650bd.jpg\",\"network\":\"YouTube\",\"overview\":\"A
+        love story that tells the story of two souls who never wanted to become soulmates,
+        but are destined to become soulmates eventually through a marriage contract.
+        Dua and Azaan over time develop love for each other and begin to build a nest
+        from their love branch, experiencing an increasingly stronger bond through
+        the tests of circumstances and separation.\",\"poster\":\"/banners/v4/series/449502/posters/662d3a7b650bd.jpg\",\"seriesName\":\"Dua
+        Aur Azan\",\"slug\":\"dua-aur-azan\",\"status\":\"Continuing\"}]}"
     headers:
-      cache-control:
+      Cache-Control:
       - private, max-age=86400
-      connection:
+      Connection:
       - keep-alive
-      content-type:
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Sat, 09 May 2020 14:40:02 GMT
-      transfer-encoding:
+      Date:
+      - Wed, 22 May 2024 14:33:35 GMT
+      Transfer-Encoding:
       - chunked
-      vary:
+      Vary:
       - Accept-Language
-      via:
-      - 1.1 d4ab4520827d99650a0d233539c37425.cloudfront.net (CloudFront)
-      x-amz-cf-id:
-      - ANORi0OjMKLtni6Qyfv9cVEkINkSMBG-TnSmqYeedbm0Eqa9z0qCwA==
-      x-amz-cf-pop:
-      - ZRH50-C1
-      x-cache:
+      Via:
+      - 1.1 e78b88048cb2f0beb893089a9fa30352.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - TOdgjBq1z0fyyEwlf1FdJuI7Fe6M-GDCkLe8NRXkqIKQ4nJ7f4JYKw==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
       - Miss from cloudfront
-      x-powered-by:
+      X-Powered-By:
       - Thundar!
-      x-thetvdb-api-version:
+      X-Thetvdb-Api-Version:
       - 3.0.0
     status:
       code: 200
@@ -320,11 +317,11 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Accept-Language:
       - en
       Authorization:
-      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
       Connection:
       - keep-alive
       Content-Type:
@@ -335,41 +332,41 @@ interactions:
     uri: https://api.thetvdb.com/series/72546
   response:
     body:
-      string: !!python/unicode '{"data":{"id":72546,"seriesId":"19","seriesName":"CSI:
-        Crime Scene Investigation","aliases":["CSI","CSI: Las Vegas"],"season":"15","poster":"posters/72546-5.jpg","banner":"graphical/19-g2.jpg","fanart":"fanart/original/72546-2.jpg","status":"Ended","firstAired":"2000-10-06","network":"CBS","networkId":"57","runtime":"45","language":"en","genre":["Crime","Drama"],"overview":"CSI
+      string: '{"data":{"id":72546,"seriesId":"","seriesName":"CSI: Crime Scene Investigation","aliases":["CSI","CSI:
+        Las Vegas"],"season":"15","poster":"posters/72546-5.jpg","banner":"graphical/19-g.jpg","fanart":"fanart/original/72546-29.jpg","status":"Ended","firstAired":"2000-10-06","network":"CBS","networkId":"57","runtime":"45","language":"en","genre":["Crime","Drama","Mystery","Thriller"],"overview":"CSI
         is a crime drama in which the characters use cutting-edge forensic tools to
         examine the evidence to solve the case.  Rather than asking ''whodunnit''
-        (investigating witnesses/suspects), CSI explores the ''howdunnit''.","lastUpdated":1588878522,"airsDayOfWeek":"Sunday","airsTime":"10:00
-        PM","rating":"TV-14","imdbId":"tt0247082","zap2itId":"EP00380341","added":"2008-02-04
+        (investigating witnesses/suspects), CSI explores the ''howdunnit''.","lastUpdated":1708445803,"airsDayOfWeek":"Sunday","airsTime":"10:00
+        PM","rating":"TV-14","imdbId":"tt0247082","zap2itId":"","added":"2008-02-04
         00:00:00","addedBy":1,"siteRating":8.4,"siteRatingCount":6457,"slug":"csi-crime-scene-investigation"}}'
     headers:
-      age:
-      - '67756'
-      cache-control:
+      Age:
+      - '82670'
+      Cache-Control:
       - private, max-age=86400
-      connection:
+      Connection:
       - keep-alive
-      content-length:
-      - '852'
-      content-type:
+      Content-Length:
+      - '861'
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Fri, 08 May 2020 19:50:46 GMT
-      last-modified:
-      - Thu, 07 May 2020 19:08:42 GMT
-      vary:
+      Date:
+      - Tue, 21 May 2024 15:35:45 GMT
+      Last-Modified:
+      - Tue, 20 Feb 2024 16:16:43 GMT
+      Vary:
       - Accept-Language
-      via:
-      - 1.1 d4ab4520827d99650a0d233539c37425.cloudfront.net (CloudFront)
-      x-amz-cf-id:
-      - K7ceHTAl8i1inraoAuKQFbl8zfPfQ3xKpveqszPp7LVNZboMiKGRFg==
-      x-amz-cf-pop:
-      - ZRH50-C1
-      x-cache:
+      Via:
+      - 1.1 42c937f806e6e43029a719b83b9a8612.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - WPb1K2YCdSIcxbR5ngPkWnvUQEYpYM9cdDciqp1MvqRXqaxblaEp-A==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
       - Hit from cloudfront
-      x-powered-by:
+      X-Powered-By:
       - Thundar!
-      x-thetvdb-api-version:
+      X-Thetvdb-Api-Version:
       - 3.0.0
     status:
       code: 200
@@ -380,11 +377,11 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Accept-Language:
       - en
       Authorization:
-      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
       Connection:
       - keep-alive
       Content-Type:
@@ -392,50 +389,43 @@ interactions:
       User-Agent:
       - Subliminal/2.1
     method: GET
-    uri: https://api.thetvdb.com/series/72546/episodes/query?airedEpisode=18&airedSeason=15&page=1
+    uri: https://api.thetvdb.com/series/72546/episodes/query?airedSeason=15&airedEpisode=18&page=1
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAA3RTUW/iMAz+K1GegbW0ZaNvwKZtOjFNx233MO3BNKbNkSYoSemhif9+Di27cdK9
-        VPZnO/5sf/3gSuqt4/kH30jrPM/jAVfQGxp/k6EbpQZ8Z3Hf2ccBF+CB528fXAqeZ3GUJtl0wEFa
-        FCsEZzSVZxfA4y0lTqNJlPbw3U46I/CpqddoKf1mwLGHoEae8x8Vsjst2H1wBx29Waik2DiKs2E0
-        HsYZRcoGnV95sDTGG5+DtQc2N863sthSeG5BC6PZ84jNUSlC7qws2HdDfb0j9xv4yh40WxYLY+uu
-        aAm2YK+gdWdvyVYKD703fIZGsXvjHCoAy99pI8Ss8KbjMFNYsFUty8qHWGulxy6yqKx03uwqtIyY
-        rk1zqjZ7tHuJbT/2YvXIGi0920CBjnmCNlKDYq4yrTCtZq301Qm/lyV7CA9ZtpVE0bK2Mg5Zbbzc
-        Uy3YvlYdGF0QQaEYsSWCbiupcMCeaGC28mZLyTWELzCBhXSSduYr8NRLKQabDc13aona07DMI9TU
-        Zi91yTbGtmDFiAfx6LKBEoOkLg+KYZlfJiX/GHRlRFN46ragVIIpKYz5YlXnBDW+7Ehx4fIxKW08
-        TbIbkovYi1vpiiDBkEfuWXudYgn4R2Sf+KKCnf+LwNoZ1fjPvCTJguAU6p5594y7uh5n6eSqF/zo
-        164MZNFKdI/E4hS9IDw/nP4jErybbajhJcEAz5F2h//De/7ngKzFOjTi3qdxmk2zMfUvjPZ0ku/g
-        6RJBQK/DOCXcVzTNrPGVsScSnS/E+QeaDuN4GCcsTvJxnCc355KfUviKUiZpdIYe8CTlnCeTgDmS
-        87nd9WjyFViYRlNiEhEq3ZLUQeSj4/vxDwAAAP//AwDjA3UJaQQAAA==
+      string: '{"links":{"first":1,"last":1,"next":null,"prev":null},"data":[{"id":5104359,"airedSeason":15,"airedSeasonID":590604,"airedEpisodeNumber":18,"episodeName":"The
+        End Game","firstAired":"2015-02-15","guestStars":["Barry Bostwick","Brandon
+        P. Bell","Eric Roberts","Kathryn McCormick","Marc Vann","Mark Valley","Mark-Paul
+        Gosselaar"],"directors":["Alec Smight"],"writers":["Christopher Barbour"],"overview":"The
+        CSI unit faces the final showdown with the Gig Harbor killer whose motives
+        are finally revealed. Meanwhile, Nick Stokes makes a decision that will affect
+        the entire team moving forward.","language":{"episodeName":"en","overview":"en"},"productionCode":"","showUrl":"","lastUpdated":1701296585,"dvdDiscid":"","dvdSeason":15,"dvdEpisodeNumber":18,"dvdChapter":null,"absoluteNumber":335,"filename":"episodes/72546/5104359.jpg","seriesId":72546,"lastUpdatedBy":1,"airsAfterSeason":null,"airsBeforeSeason":null,"airsBeforeEpisode":null,"imdbId":"tt4145952","contentRating":"TV-14","thumbAuthor":1,"thumbAdded":"2019-11-13
+        13:21:38","thumbWidth":"640","thumbHeight":"360","siteRating":7.6,"siteRatingCount":306,"isMovie":0}]}'
     headers:
-      age:
-      - '26836'
-      cache-control:
+      Cache-Control:
       - private, max-age=86400
-      connection:
+      Connection:
       - keep-alive
-      content-encoding:
+      Content-Encoding:
       - gzip
-      content-type:
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Sat, 09 May 2020 07:12:46 GMT
-      transfer-encoding:
+      Date:
+      - Wed, 22 May 2024 14:33:36 GMT
+      Transfer-Encoding:
       - chunked
-      vary:
+      Vary:
       - Accept-Encoding,Accept-Language
-      via:
-      - 1.1 d4ab4520827d99650a0d233539c37425.cloudfront.net (CloudFront)
-      x-amz-cf-id:
-      - iPYmcKpZAzb2zNHRsqQzNTSPiEeJFJ6lhltcJq8NGALVTHDbLxmFuw==
-      x-amz-cf-pop:
-      - ZRH50-C1
-      x-cache:
-      - Hit from cloudfront
-      x-powered-by:
+      Via:
+      - 1.1 e33c092c8429c324c2810046683bf2f2.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - mlgNLLG0c7kVN-XksEf-N3G74RNYJ45SQ1Z10kYm9SnNmNNn-srwPQ==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
+      - Miss from cloudfront
+      X-Powered-By:
       - Thundar!
-      x-thetvdb-api-version:
+      X-Thetvdb-Api-Version:
       - 3.0.0
     status:
       code: 200
@@ -446,11 +436,11 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Accept-Language:
       - en
       Authorization:
-      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2NDAwMDAsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MjAwfQ.rSAWNnnOj50Uc26LTvEWyS3iyUESdlXCdoONdRFN44crUQCL_ZYM5xxOin0-krMuoBrJZ3Wbcihijg1hLgnw-esq1YWWTV1-9zgPLCRl3GK2IsPHF0UZbFJxVju295HPCnWYchvI7upOXfgPeTjffjJN__oXaEjxT-xU1Ze1NSDlqde69LcASFcuZWXhFuz0Y1wKdaoQsvUqlWPiYvIdhYsEw_y8WSZYyWs18oDA82CX4QZoJiuARmTDUMATIyg5n8YGLgnrG4z84Gm05quvHuoDAuOYrIf6sXswzg2EaTwGqab4BRQQ6BV0LSkpYo9KzfMJYSUhuleAxWBITBzcAw'
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
       Connection:
       - keep-alive
       Content-Type:
@@ -461,49 +451,44 @@ interactions:
     uri: https://api.thetvdb.com/episodes/5104359
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAA3RTwW7iMBD9FctnoAkhtOQGtGqrFVVVtt3Dag9DPBAvxkb2hAhV/fcdh9AtK+0l
-        yrx5k/fGfnmXCghk8S61kkWeJqMsn/QkaI9qiRCclUWaXwCPt0ycJONk1MF3ex2cwqd6t0LP9Jue
-        xA6CHcpCfq9Q3Fkl7mPZk2vtA03jJPeGSZr3k2E/zbmzqTHQksAHWfyUM/D+KGYuUKPLLbdnHqxy
-        VjwPxAyNYeTO61K8ONalwOU3oMofrViUc+d3p6EF+FK8gbWn9y2/G4PHruo/Q23EvQsBDYCXv3pS
-        sbOS3MnD1GAplju9qSj2Gq8JT5155XUgt6/QC3a6cnU77Q7oDxqbbu358lHUVpNYQ4lBEENrbcGI
-        ULlGucaKRlPV4vd6Ix7ih7zYarboRVO5gGLnSB94Fnw3a47C4wHBoBqIBYJtKm2wJ554YbEkt2Xy
-        DuIThMJSB81nRhUQaxkjYL3m/VpJtMTLCkLYscxB241YO9+AVwM+HwN2U8MGYzouLxTjYX7ZlOuP
-        ntx7p+qSWG3OVIaZFNd89eZUGAj0uufAxZtPOWnDSZbfcFzUQd3qUMYIRh6X5+zZ2pgW+Cdkn/i8
-        gj39RWAVnKnpk5dleQycQds5P30mXF0P89H4qgv84Pd+E82i1xge2UXbvTA8O7LlNvBhumbBS4MR
-        niGfHf4P7/yfG3qnVlFIEo3SUT7Jh6xfOkt8JS9AfBMxQG/9dMQ4VbzNtKbK+dbEqVbq/ANN+mna
-        TzORZsUwLbKb88gPrahiyniUnKEHbKNcyGwcscBxPstdD8ZfgbmrLROzhFEdFpwONp98fPwBAAD/
-        /wMA+oz46jIEAAA=
+      string: '{"data":{"id":5104359,"airedSeason":15,"airedSeasonID":590604,"airedEpisodeNumber":18,"episodeName":"The
+        End Game","firstAired":"2015-02-15","guestStars":["Barry Bostwick","Brandon
+        P. Bell","Eric Roberts","Kathryn McCormick","Marc Vann","Mark Valley","Mark-Paul
+        Gosselaar"],"directors":["Alec Smight"],"writers":["Christopher Barbour"],"overview":"The
+        CSI unit faces the final showdown with the Gig Harbor killer whose motives
+        are finally revealed. Meanwhile, Nick Stokes makes a decision that will affect
+        the entire team moving forward.","language":{"episodeName":"en","overview":"en"},"productionCode":"","showUrl":"","lastUpdated":1701296585,"dvdDiscid":"","dvdSeason":15,"dvdEpisodeNumber":18,"dvdChapter":null,"absoluteNumber":335,"filename":"episodes/72546/5104359.jpg","seriesId":72546,"lastUpdatedBy":1,"airsAfterSeason":null,"airsBeforeSeason":null,"airsBeforeEpisode":null,"imdbId":"tt4145952","contentRating":"TV-14","thumbAuthor":1,"thumbAdded":"2019-11-13
+        13:21:38","thumbWidth":"640","thumbHeight":"360","siteRating":7.6,"siteRatingCount":306,"isMovie":0}}'
     headers:
-      age:
-      - '9163'
-      cache-control:
+      Age:
+      - '63624'
+      Cache-Control:
       - private, max-age=86400
-      connection:
+      Connection:
       - keep-alive
-      content-encoding:
+      Content-Encoding:
       - gzip
-      content-type:
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Sat, 09 May 2020 12:07:19 GMT
-      last-modified:
+      Date:
+      - Tue, 21 May 2024 20:53:12 GMT
+      Last-Modified:
       - Thu, 01 Jan 1970 00:00:00 GMT
-      transfer-encoding:
+      Transfer-Encoding:
       - chunked
-      vary:
+      Vary:
       - Accept-Encoding,Accept-Language
-      via:
-      - 1.1 d4ab4520827d99650a0d233539c37425.cloudfront.net (CloudFront)
-      x-amz-cf-id:
-      - Np1ZX8nRwAhX9zFgwQSfCDuef8w8HoL0FxH-WUdtWtcx7O_6ZlmIEA==
-      x-amz-cf-pop:
-      - ZRH50-C1
-      x-cache:
+      Via:
+      - 1.1 a48f09960f130cb6049f12b379cf591e.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - NI6EvvB5HhGkVDoH0KI61ijFH8nhTf_EUHk8E-2x68HuTcFDf8sj8Q==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
       - Hit from cloudfront
-      x-powered-by:
+      X-Powered-By:
       - Thundar!
-      x-thetvdb-api-version:
+      X-Thetvdb-Api-Version:
       - 3.0.0
     status:
       code: 200

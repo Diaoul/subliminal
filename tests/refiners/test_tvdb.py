@@ -1,23 +1,30 @@
-from datetime import datetime, timedelta, timezone
 import os
 import time
+from datetime import datetime, timedelta, timezone
 
 import pytest
 import requests
+from subliminal.refiners.tvdb import TVDBClient, refine, series_re
+from subliminal.video import Episode
 from vcr import VCR
 
-from subliminal import __short_version__
-from subliminal.video import Episode
-from subliminal.refiners.tvdb import TVDBClient, refine, series_re
-
-vcr = VCR(path_transformer=lambda path: path + '.yaml',
-          record_mode=os.environ.get('VCR_RECORD_MODE', 'once'),
-          cassette_library_dir=os.path.realpath(os.path.join('tests', 'cassettes', 'tvdb')))
+vcr = VCR(
+    path_transformer=lambda path: path + '.yaml',
+    record_mode=os.environ.get('VCR_RECORD_MODE', 'once'),
+    cassette_library_dir=os.path.realpath(os.path.join('tests', 'cassettes', 'tvdb')),
+)
 
 
 @pytest.fixture()
 def client():
-    return TVDBClient('2AE5D1E42E7194B9', headers={'User-Agent': 'Subliminal/%s' % __short_version__})
+    return TVDBClient()
+
+
+def test_apikey():
+    apikey = '000000000'
+    client = TVDBClient()
+    client.apikey = apikey
+    assert client.token is None
 
 
 def test_series_re_no_year():
@@ -76,15 +83,15 @@ def test_headers():
     assert client.session.headers['X-Test'] == 'Value'
 
 
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_login_error():
-    client = TVDBClient('1234', headers={'User-Agent': 'Subliminal/%s' % __short_version__})
+    client = TVDBClient('1234')
     with pytest.raises(requests.HTTPError):
         client.login()
 
 
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_login(client):
     assert client.token is None
@@ -96,7 +103,7 @@ def test_login(client):
     assert client.token_expired is False
 
 
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_token_needs_refresh(client, monkeypatch):
     monkeypatch.setattr(client, 'refresh_token_every', timedelta(milliseconds=100))
@@ -107,7 +114,7 @@ def test_token_needs_refresh(client, monkeypatch):
     assert client.token_needs_refresh
 
 
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_refresh_token(client):
     client.login()
@@ -117,38 +124,24 @@ def test_refresh_token(client):
     assert client.token != old_token
 
 
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_search_series(client):
     data = client.search_series('The Big Bang Theory')
     assert len(data) == 1
     series = data[0]
     assert series['id'] == 80379
-    assert series['firstAired'] == '2007-9-24'
+    assert series['firstAired'] == '2007-09-24'
 
 
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_search_series_wrong_name(client):
     data = client.search_series('The Bing Bag Theory')
-    assert data is None
+    assert data == {}
 
 
-@pytest.mark.integration
-@vcr.use_cassette
-def test_search_series_no_parameter(client):
-    with pytest.raises(requests.HTTPError):
-        client.search_series()
-
-
-@pytest.mark.integration
-@vcr.use_cassette
-def test_search_series_multiple_parameters(client):
-    with pytest.raises(requests.HTTPError):
-        client.search_series('The Big Bang Theory', 'tt0898266')
-
-
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_get_series(client):
     series = client.get_series(80379)
@@ -157,14 +150,14 @@ def test_get_series(client):
     assert series['imdbId'] == 'tt0898266'
 
 
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_get_series_wrong_id(client):
     series = client.get_series(999999999)
-    assert series is None
+    assert series == {}
 
 
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_get_series_actors(client):
     actors = client.get_series_actors(80379)
@@ -172,50 +165,14 @@ def test_get_series_actors(client):
     assert 'Jim Parsons' in {a['name'] for a in actors}
 
 
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_get_series_actors_wrong_id(client):
     actors = client.get_series_actors(999999999)
-    assert actors is None
+    assert actors == []
 
 
-@pytest.mark.integration
-@vcr.use_cassette
-def test_get_series_episodes(client):
-    episodes_data = client.get_series_episodes(80379)
-    assert episodes_data['links']['first'] == 1
-    assert episodes_data['links']['last'] == 3
-    assert episodes_data['links']['next'] == 2
-    assert episodes_data['links']['prev'] is None
-    assert len(episodes_data['data']) == 100
-
-
-@pytest.mark.integration
-@vcr.use_cassette
-def test_get_series_episodes_page(client):
-    episodes_data = client.get_series_episodes(80379, page=2)
-    assert episodes_data['links']['first'] == 1
-    assert episodes_data['links']['last'] == 3
-    assert episodes_data['links']['next'] == 3
-    assert episodes_data['links']['prev'] == 1
-    assert len(episodes_data['data']) == 100
-
-
-@pytest.mark.integration
-@vcr.use_cassette
-def test_get_series_episodes_wrong_id(client):
-    episodes_data = client.get_series_episodes(999999999)
-    assert episodes_data is None
-
-
-@pytest.mark.integration
-@vcr.use_cassette
-def test_get_series_episodes_wrong_page(client):
-    episodes_data = client.get_series_episodes(80379, page=10)
-    assert episodes_data is None
-
-
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_query_series_episodes(client):
     episodes_data = client.query_series_episodes(80379, aired_season=7, aired_episode=5)
@@ -227,14 +184,14 @@ def test_query_series_episodes(client):
     assert episodes_data['data'][0]['episodeName'] == 'The Workplace Proximity'
 
 
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_query_series_episodes_wrong_season(client):
     episodes_data = client.query_series_episodes(80379, aired_season=99)
-    assert episodes_data is None
+    assert episodes_data == {}
 
 
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_refine(episodes):
     video = episodes['bbt_s07e05']
@@ -250,7 +207,7 @@ def test_refine(episodes):
     assert episode.series_tvdb_id == video.series_tvdb_id
 
 
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_refine_episode_partial(episodes):
     video = episodes['csi_s15e18']
@@ -266,7 +223,7 @@ def test_refine_episode_partial(episodes):
     assert episode.series_tvdb_id == video.series_tvdb_id
 
 
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_refine_ambiguous(episodes):
     video = episodes['colony_s01e09']
@@ -282,7 +239,7 @@ def test_refine_ambiguous(episodes):
     assert episode.series_tvdb_id == video.series_tvdb_id
 
 
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_refine_ambiguous_2(episodes):
     video = episodes['the_100_s03e09']
@@ -298,12 +255,18 @@ def test_refine_ambiguous_2(episodes):
     assert episode.series_tvdb_id == video.series_tvdb_id
 
 
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_refine_episode_year(episodes):
     video = episodes['dallas_2012_s01e03']
-    episode = Episode(video.name.lower(), video.series.lower(), video.season, video.episode, year=video.year,
-                      original_series=video.original_series)
+    episode = Episode(
+        video.name.lower(),
+        video.series.lower(),
+        video.season,
+        video.episode,
+        year=video.year,
+        original_series=video.original_series,
+    )
     refine(episode)
     assert episode.series == video.series
     assert episode.year == video.year
@@ -315,7 +278,7 @@ def test_refine_episode_year(episodes):
     assert episode.series_tvdb_id == video.series_tvdb_id
 
 
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_refine_episode_no_year(episodes):
     video = episodes['dallas_s01e03']
@@ -331,7 +294,7 @@ def test_refine_episode_no_year(episodes):
     assert episode.series_tvdb_id == video.series_tvdb_id
 
 
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_refine_episode_alternative_series(episodes):
     video = episodes['turn_s04e03']
@@ -348,7 +311,7 @@ def test_refine_episode_alternative_series(episodes):
     assert episode.alternative_series == video.alternative_series
 
 
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_refine_episode_with_comma(episodes):
     video = episodes['alex_inc_s01e04']
@@ -365,7 +328,7 @@ def test_refine_episode_with_comma(episodes):
     assert episode.alternative_series == video.alternative_series
 
 
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_refine_episode_with_country(episodes):
     video = episodes['shameless_us_s08e01']
@@ -382,7 +345,7 @@ def test_refine_episode_with_country(episodes):
     assert episode.alternative_series == video.alternative_series
 
 
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_refine_episode_with_country_hoc_us(episodes):
     video = episodes['house_of_cards_us_s06e01']

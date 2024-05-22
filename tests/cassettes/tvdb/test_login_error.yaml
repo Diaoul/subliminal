@@ -1,11 +1,11 @@
 interactions:
 - request:
-    body: !!python/unicode '{"username": null, "password": null, "apikey": "1234"}'
+    body: '{"apikey": "1234", "username": null, "password": null}'
     headers:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Accept-Language:
       - en
       Connection:
@@ -20,31 +20,31 @@ interactions:
     uri: https://api.thetvdb.com/login
   response:
     body:
-      string: !!python/unicode '{"Error":"API Key Required"}'
+      string: '{"Error":"API Key Required"}'
     headers:
-      connection:
+      Connection:
       - keep-alive
-      content-length:
+      Content-Length:
       - '28'
-      content-type:
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Sat, 09 May 2020 14:39:45 GMT
-      vary:
+      Date:
+      - Wed, 22 May 2024 14:33:26 GMT
+      Vary:
       - Accept-Language
-      via:
-      - 1.1 376bac901e689131d2a41914df1245d9.cloudfront.net (CloudFront)
-      www-authenticate:
+      Via:
+      - 1.1 735dd7fa3c296627cd805d04e3e3a3e8.cloudfront.net (CloudFront)
+      Www-Authenticate:
       - JWT realm=jwt auth
-      x-amz-cf-id:
-      - ZNdnnrIf0BlvddiX-VHuQIukfqD3sQMl6O6-KAfNbkceow5BW2D4OQ==
-      x-amz-cf-pop:
-      - ZRH50-C1
-      x-cache:
+      X-Amz-Cf-Id:
+      - CIgzZQPrUhfZr2R4FJsNaz1lUvLoOMvyGWjQWH_4ztWAWArbK3laIw==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
       - Error from cloudfront
-      x-powered-by:
+      X-Powered-By:
       - Thundar!
-      x-thetvdb-api-version:
+      X-Thetvdb-Api-Version:
       - 3.0.0
     status:
       code: 401

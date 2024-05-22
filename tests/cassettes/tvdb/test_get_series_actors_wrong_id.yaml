@@ -1,11 +1,11 @@
 interactions:
 - request:
-    body: !!python/unicode '{"username": null, "password": null, "apikey": "2AE5D1E42E7194B9"}'
+    body: '{"apikey": "5EC930FB90DA1ADA", "username": null, "password": null}'
     headers:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Accept-Language:
       - en
       Connection:
@@ -20,29 +20,29 @@ interactions:
     uri: https://api.thetvdb.com/login
   response:
     body:
-      string: !!python/unicode '{"token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2Mzk5OTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MTk0fQ.QVI2zHJ7ZQe7mcEAO6Mdq32tslw-muwlY36Jk7SZ6t_54CixEM0-FFGVVNlQH1jPDtnOdfgDKQN8KxAQvNPcS64vxK4VeZT4F2HQVbXIo1p3ccsZ5ZVWbT3FhGazOl7Rh1ZYLBai2rePh2BFj8BQD1CSXhYP4Cygp0MJTLZLR7KTpDqFOJ0tNJ1DEXdS0uT31swoJ7UZjbrtbRWLR_hzOzWMDrOpwrdF6zMolUwFkG8W2BZraRIoHxnx2BDiy117M_N9TO0oGs8BStbgJgBBuqvMLXB-5FmEajzgIol3GUoFKLNbpg_rONtBQIHJaOa5Ve2lOqZWAOqcyavTlaefgw"}'
+      string: '{"token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTMsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDEzfQ.pop3CJJhjHMHmJ3EHLf0ZYE2ORD-MFqBEi8w9yO9RlIbqkzTkyfLAiUOpflZ7AiASGnkdCLyFZagZKaHcK86YjHRBrrQOQ5jSCN13oVT2d7yOwFP6U4WSLiA8HdHIxLh0Jkh_mnyBUoFJSkJr12WiuouW8mi2HsSfPv1S5kS0m149atLnJFQxXh5BD1AzQaeED1RKNzVvktwGLXDe01yKxsk0xkOYFNDWt3kUh3thH8GwQrsEKn1-L7wxm5s-q7r3xSH7Hqt9RL--M2NVfgAAwmZy0l1-hMr6zJyNgaxx9ClTWbHWh83zIb3M_Op0Oa4iL7rsQ60xkvp96OjNBUbAw"}'
     headers:
-      connection:
+      Connection:
       - keep-alive
-      content-length:
+      Content-Length:
       - '470'
-      content-type:
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Sat, 09 May 2020 14:39:54 GMT
-      vary:
+      Date:
+      - Wed, 22 May 2024 14:33:33 GMT
+      Vary:
       - Accept-Language
-      via:
-      - 1.1 c76347c8ef1f3a2b6fb69cd7d1c6f749.cloudfront.net (CloudFront)
-      x-amz-cf-id:
-      - Pucq1Ao7gEzH87uyu9d0IF0I1e8ZGhu4h4cANlX5C2E52kS1lRAsnA==
-      x-amz-cf-pop:
-      - ZRH50-C1
-      x-cache:
+      Via:
+      - 1.1 5a9df1bcd5f48109e94a8e34d807b686.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - U2nsPyjuHOKknP9J4T1FAONBcCjKXsx5Mc_oDclhWlaZi8YeeCOnPg==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
       - Miss from cloudfront
-      x-powered-by:
+      X-Powered-By:
       - Thundar!
-      x-thetvdb-api-version:
+      X-Thetvdb-Api-Version:
       - 3.0.0
     status:
       code: 200
@@ -53,11 +53,11 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Accept-Language:
       - en
       Authorization:
-      - !!python/unicode 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODk2Mzk5OTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNTg5MDM1MTk0fQ.QVI2zHJ7ZQe7mcEAO6Mdq32tslw-muwlY36Jk7SZ6t_54CixEM0-FFGVVNlQH1jPDtnOdfgDKQN8KxAQvNPcS64vxK4VeZT4F2HQVbXIo1p3ccsZ5ZVWbT3FhGazOl7Rh1ZYLBai2rePh2BFj8BQD1CSXhYP4Cygp0MJTLZLR7KTpDqFOJ0tNJ1DEXdS0uT31swoJ7UZjbrtbRWLR_hzOzWMDrOpwrdF6zMolUwFkG8W2BZraRIoHxnx2BDiy117M_N9TO0oGs8BStbgJgBBuqvMLXB-5FmEajzgIol3GUoFKLNbpg_rONtBQIHJaOa5Ve2lOqZWAOqcyavTlaefgw'
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTMsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDEzfQ.pop3CJJhjHMHmJ3EHLf0ZYE2ORD-MFqBEi8w9yO9RlIbqkzTkyfLAiUOpflZ7AiASGnkdCLyFZagZKaHcK86YjHRBrrQOQ5jSCN13oVT2d7yOwFP6U4WSLiA8HdHIxLh0Jkh_mnyBUoFJSkJr12WiuouW8mi2HsSfPv1S5kS0m149atLnJFQxXh5BD1AzQaeED1RKNzVvktwGLXDe01yKxsk0xkOYFNDWt3kUh3thH8GwQrsEKn1-L7wxm5s-q7r3xSH7Hqt9RL--M2NVfgAAwmZy0l1-hMr6zJyNgaxx9ClTWbHWh83zIb3M_Op0Oa4iL7rsQ60xkvp96OjNBUbAw
       Connection:
       - keep-alive
       Content-Type:
@@ -68,33 +68,33 @@ interactions:
     uri: https://api.thetvdb.com/series/999999999/actors
   response:
     body:
-      string: !!python/unicode '{"Error":"not found"}'
+      string: '{"data":[]}'
     headers:
-      cache-control:
+      Cache-Control:
       - private, max-age=86400
-      connection:
+      Connection:
       - keep-alive
-      content-length:
-      - '21'
-      content-type:
+      Content-Length:
+      - '11'
+      Content-Type:
       - application/json; charset=utf-8
-      date:
-      - Sat, 09 May 2020 14:39:55 GMT
-      vary:
+      Date:
+      - Wed, 22 May 2024 14:33:33 GMT
+      Vary:
       - Accept-Language
-      via:
-      - 1.1 c76347c8ef1f3a2b6fb69cd7d1c6f749.cloudfront.net (CloudFront)
-      x-amz-cf-id:
-      - afMW2hNWS7mRa_uKVTIQb6OReBhja8ZqWGg-GspErA-1L25Z3sj3Lg==
-      x-amz-cf-pop:
-      - ZRH50-C1
-      x-cache:
-      - Error from cloudfront
-      x-powered-by:
+      Via:
+      - 1.1 735dd7fa3c296627cd805d04e3e3a3e8.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - qEsZe0BZb51fX6Ypz4CjxxqzcnmVXvC0y0Urlj0uEGWMAqnuHrFrLQ==
+      X-Amz-Cf-Pop:
+      - LIS50-P1
+      X-Cache:
+      - Miss from cloudfront
+      X-Powered-By:
       - Thundar!
-      x-thetvdb-api-version:
+      X-Thetvdb-Api-Version:
       - 3.0.0
     status:
-      code: 404
-      message: Not Found
+      code: 200
+      message: OK
 version: 1

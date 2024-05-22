@@ -1,38 +1,49 @@
+"""Refine the :class:`~subliminal.video.Video` object by searching on TheTVDB."""
+
 from __future__ import annotations
 
-from datetime import datetime, timedelta, timezone
-from functools import wraps
 import logging
 import re
+from datetime import datetime, timedelta, timezone
+from functools import wraps
+from typing import Any, Callable, ClassVar, TypeVar, cast
 
-from babelfish import Country
-import guessit
+import guessit  # type: ignore[import-untyped]
 import requests
+from babelfish import Country  # type: ignore[import-untyped]
 
-from .. import __short_version__
-from ..cache import REFINER_EXPIRATION_TIME, region
-from ..utils import sanitize
-from ..video import Episode
+from subliminal import __short_version__
+from subliminal.cache import REFINER_EXPIRATION_TIME, region
+from subliminal.utils import sanitize
+from subliminal.video import Episode, Video
+
+C = TypeVar('C', bound=Callable)
+
 
 logger = logging.getLogger(__name__)
+
+#: TheTVDB subliminal API key
+TVDB_API_KEY = '5EC930FB90DA1ADA'
 
 series_re = re.compile(r'^(?P<series>.*?)(?: \((?:(?P<year>\d{4})|(?P<country>[A-Z]{2}))\))?$')
 
 
-def requires_auth(func):
-    """Decorator for :class:`TVDBClient` methods that require authentication"""
+def requires_auth(func: C) -> C:
+    """Decorator for :class:`TVDBClient` methods that require authentication."""
+
     @wraps(func)
-    def wrapper(self, *args, **kwargs):
+    def wrapper(self: TVDBClient, *args: Any, **kwargs: Any) -> Any:
         if self.token is None or self.token_expired:
             self.login()
         elif self.token_needs_refresh:
             self.refresh_token()
         return func(self, *args, **kwargs)
-    return wrapper
+
+    return cast(C, wrapper)
 
 
 class TVDBClient:
-    """TVDB REST API Client
+    """TVDB REST API Client.
 
     :param str apikey: API key to use.
     :param str username: username to use.
@@ -44,63 +55,95 @@ class TVDBClient:
     :param int timeout: timeout for the requests.
 
     """
+
     #: Base URL of the API
-    base_url = 'https://api.thetvdb.com'
+    base_url: ClassVar[str] = 'https://api.thetvdb.com'
+
+    #: User agent
+    user_agent: ClassVar[str] = f'Subliminal/{__short_version__}'
 
     #: Token lifespan
-    token_lifespan = timedelta(hours=1)
+    token_lifespan: ClassVar[timedelta] = timedelta(hours=1)
+
+    #: API version
+    apiversion: ClassVar[int] = 1
 
     #: Minimum token age before a :meth:`refresh_token` is triggered
-    refresh_token_every = timedelta(minutes=30)
+    refresh_token_every: ClassVar[timedelta] = timedelta(minutes=30)
 
-    def __init__(self, apikey=None, username=None, password=None, language='en', session=None, headers=None,
-                 timeout=10):
-        #: API key
-        self.apikey = apikey
+    #: API key
+    _apikey: str
 
-        #: Username
+    #: Username
+    username: str | None
+
+    #: Password
+    password: str | None
+
+    #: Last token acquisition date
+    token_date: datetime
+
+    #: Session for the requests
+    session: requests.Session
+
+    #: Session timeout
+    timeout: int
+
+    def __init__(
+        self,
+        apikey: str | None = None,
+        username: str | None = None,
+        password: str | None = None,
+        language: str = 'en',
+        session: requests.Session | None = None,
+        headers: dict | None = None,
+        timeout: int = 10,
+    ) -> None:
+        self._apikey = apikey or TVDB_API_KEY
         self.username = username
-
-        #: Password
         self.password = password
 
-        #: Last token acquisition date
         self.token_date = datetime.now(timezone.utc) - self.token_lifespan
+        self.timeout = timeout
 
         #: Session for the requests
-        self.session = session or requests.Session()
-        self.session.timeout = timeout
+        self.session = session if session is not None else requests.Session()
+        self.session.headers['User-Agent'] = self.user_agent
         self.session.headers.update(headers or {})
         self.session.headers['Content-Type'] = 'application/json'
         self.session.headers['Accept-Language'] = language
 
     @property
-    def language(self):
-        return self.session.headers['Accept-Language']
+    def language(self) -> str:
+        """Header language of the response."""
+        return str(self.session.headers['Accept-Language'])
 
     @language.setter
-    def language(self, value):
+    def language(self, value: str) -> None:
         self.session.headers['Accept-Language'] = value
 
     @property
-    def token(self):
+    def token(self) -> str | None:
+        """Authentication token."""
         if 'Authorization' not in self.session.headers:
             return None
-        return self.session.headers['Authorization'][7:]
+        return str(self.session.headers['Authorization'][7:])
 
     @property
-    def token_expired(self):
+    def token_expired(self) -> bool:
+        """Check if the token expired."""
         return datetime.now(timezone.utc) - self.token_date > self.token_lifespan
 
     @property
-    def token_needs_refresh(self):
+    def token_needs_refresh(self) -> bool:
+        """Check if the token needs to be refreshed."""
         return datetime.now(timezone.utc) - self.token_date > self.refresh_token_every
 
-    def login(self):
-        """Login"""
+    def login(self) -> None:
+        """Login."""
         # perform the request
         data = {'apikey': self.apikey, 'username': self.username, 'password': self.password}
-        r = self.session.post(self.base_url + '/login', json=data)
+        r = self.session.post(self.base_url + '/login', json=data, timeout=self.timeout)
         r.raise_for_status()
 
         # set the Authorization header
@@ -109,10 +152,10 @@ class TVDBClient:
         # update token_date
         self.token_date = datetime.now(timezone.utc)
 
-    def refresh_token(self):
-        """Refresh token"""
+    def refresh_token(self) -> None:
+        """Refresh token."""
         # perform the request
-        r = self.session.get(self.base_url + '/refresh_token')
+        r = self.session.get(self.base_url + '/refresh_token', timeout=self.timeout)
         r.raise_for_status()
 
         # set the Authorization header
@@ -121,130 +164,180 @@ class TVDBClient:
         # update token_date
         self.token_date = datetime.now(timezone.utc)
 
+    @region.cache_on_arguments(expiration_time=REFINER_EXPIRATION_TIME)
     @requires_auth
-    def search_series(self, name=None, imdb_id=None, zap2it_id=None):
-        """Search series"""
+    def search_series(self, name: str, imdb_id: str | None = None, zap2it_id: str | None = None) -> dict[str, Any]:
+        """Search series.
+
+        :param str name: name of the series.
+        :param str imdb_id: the IMDB id of the series.
+        :param str zap2it_id: the Zap2it id of the series.
+        :return: the search results.
+        :rtype: list
+
+        """
         # perform the request
-        params = {'name': name, 'imdbId': imdb_id, 'zap2itId': zap2it_id}
-        r = self.session.get(self.base_url + '/search/series', params=params)
+        params = {'name': name}
+        if imdb_id is not None:
+            params['imdbId'] = imdb_id
+        if zap2it_id is not None:
+            params['zap2itId'] = zap2it_id
+        r = self.session.get(self.base_url + '/search/series', params=params, timeout=self.timeout)
         if r.status_code == 404:
-            return None
+            return {}
         r.raise_for_status()
 
-        return r.json()['data']
+        return cast(dict, r.json()['data'])
 
     @requires_auth
-    def get_series(self, id):
-        """Get series"""
+    def query_series_episodes(
+        self,
+        series_id: int,
+        absolute_number: int | None = None,
+        aired_season: int | None = None,
+        aired_episode: int | None = None,
+        dvd_season: int | None = None,
+        dvd_episode: int | None = None,
+        imdb_id: str | None = None,
+        page: int = 1,
+    ) -> dict[str, Any]:
+        """Query series episodes."""
         # perform the request
-        r = self.session.get(self.base_url + '/series/{}'.format(id))
+        params = {
+            'absoluteNumber': absolute_number,
+            'airedSeason': aired_season,
+            'airedEpisode': aired_episode,
+            'dvdSeason': dvd_season,
+            'dvdEpisode': dvd_episode,
+            'imdbId': imdb_id,
+            'page': page,
+        }
+        r = self.session.get(
+            self.base_url + f'/series/{series_id:d}/episodes/query',
+            params=params,
+            timeout=self.timeout,
+        )
         if r.status_code == 404:
-            return None
+            return {}
         r.raise_for_status()
 
-        return r.json()['data']
+        return cast(dict, r.json())
 
+    @region.cache_on_arguments(expiration_time=REFINER_EXPIRATION_TIME)
     @requires_auth
-    def get_series_actors(self, id):
-        """Get series actors"""
+    def get_series(self, series_id: int) -> dict[str, Any]:
+        """Get series.
+
+        :param int series_id: id of the series.
+        :return: the series data.
+        :rtype: dict
+
+        """
         # perform the request
-        r = self.session.get(self.base_url + '/series/{}/actors'.format(id))
+        r = self.session.get(self.base_url + f'/series/{series_id:d}', timeout=self.timeout)
         if r.status_code == 404:
-            return None
+            return {}
         r.raise_for_status()
 
-        return r.json()['data']
+        return cast(dict, r.json()['data'])
 
+    @region.cache_on_arguments(expiration_time=REFINER_EXPIRATION_TIME)
     @requires_auth
-    def get_series_episodes(self, id, page=1):
-        """Get series episodes"""
+    def get_episode(self, episode_id: int) -> dict[str, Any]:
+        """Get episode.
+
+        :param int episode_id: id of the episode.
+        :return: the episode data.
+        :rtype: dict
+        """
+        # perform the request
+        r = self.session.get(self.base_url + f'/episodes/{episode_id:d}', timeout=self.timeout)
+        if r.status_code == 404:
+            return {}
+        r.raise_for_status()
+
+        return cast(dict, r.json()['data'])
+
+    @region.cache_on_arguments(expiration_time=REFINER_EXPIRATION_TIME)
+    @requires_auth
+    def get_series_episodes(self, series_id: int, page: int = 1) -> dict[str, Any]:
+        """Get all the episodes of a series.
+
+        :param int series_id: id of the series.
+        :param int page: the page number.
+        :return: the data for all the episodes.
+        :rtype: dict
+
+        """
         # perform the request
         params = {'page': page}
-        r = self.session.get(self.base_url + '/series/{}/episodes'.format(id), params=params)
+        r = self.session.get(self.base_url + f'/series/{series_id:d}/episodes', params=params, timeout=self.timeout)
         if r.status_code == 404:
-            return None
+            return {}
         r.raise_for_status()
 
-        return r.json()
+        return cast(dict, r.json())
 
+    @region.cache_on_arguments(expiration_time=REFINER_EXPIRATION_TIME)
     @requires_auth
-    def query_series_episodes(self, id, absolute_number=None, aired_season=None, aired_episode=None, dvd_season=None,
-                              dvd_episode=None, imdb_id=None, page=1):
-        """Query series episodes"""
-        # perform the request
-        params = {'absoluteNumber': absolute_number, 'airedSeason': aired_season, 'airedEpisode': aired_episode,
-                  'dvdSeason': dvd_season, 'dvdEpisode': dvd_episode, 'imdbId': imdb_id, 'page': page}
-        r = self.session.get(self.base_url + '/series/{}/episodes/query'.format(id), params=params)
-        if r.status_code == 404:
-            return None
-        r.raise_for_status()
+    def get_series_episode(self, series_id: int, season: int, episode: int) -> dict[str, Any]:
+        """Get an episode of a series.
 
-        return r.json()
+        :param int series_id: id of the series.
+        :param int season: season number of the episode.
+        :param int episode: episode number of the episode.
+        :return: the episode data.
+        :rtype: dict
 
+        """
+        result = self.query_series_episodes(series_id, aired_season=season, aired_episode=episode)
+        if not result:
+            return {}
+        return self.get_episode(result['data'][0]['id'])
+
+    @region.cache_on_arguments(expiration_time=REFINER_EXPIRATION_TIME)
     @requires_auth
-    def get_episode(self, id):
-        """Get episode"""
+    def get_series_actors(self, series_id: int) -> list[dict]:
+        """Get series actors.
+
+        :param int series_id: id of the series.
+        :return: the actors data.
+        :rtype: dict
+
+        """
         # perform the request
-        r = self.session.get(self.base_url + '/episodes/{}'.format(id))
+        r = self.session.get(self.base_url + f'/series/{series_id:d}/actors', timeout=self.timeout)
         if r.status_code == 404:
-            return None
+            return []
         r.raise_for_status()
 
-        return r.json()['data']
+        return cast(list, r.json()['data'])
+
+    @property
+    def apikey(self) -> str:
+        """API key for search."""
+        return self._apikey
+
+    @apikey.setter
+    def apikey(self, value: str) -> None:
+        # early return if the API key is unchanged
+        if value == self._apikey:
+            return
+        self._apikey = value
+        # invalidate the token
+        if 'Authorization' in self.session.headers:
+            del self.session.headers['Authorization']
 
 
-#: User-Agent to use
-user_agent = 'Subliminal/%s' % __short_version__
-
-#: Configured instance of :class:`TVDBClient`
-tvdb_client = TVDBClient('5EC930FB90DA1ADA', headers={'User-Agent': user_agent})
+#: Default client
+tvdb_client = TVDBClient()
 
 #: Configure guessit in order to use GuessitCountryConverter
 guessit.api.configure()
 
 
-@region.cache_on_arguments(expiration_time=REFINER_EXPIRATION_TIME)
-def search_series(name):
-    """Search series.
-
-    :param str name: name of the series.
-    :return: the search results.
-    :rtype: list
-
-    """
-    return tvdb_client.search_series(name)
-
-
-@region.cache_on_arguments(expiration_time=REFINER_EXPIRATION_TIME)
-def get_series(id):
-    """Get series.
-
-    :param int id: id of the series.
-    :return: the series data.
-    :rtype: dict
-
-    """
-    return tvdb_client.get_series(id)
-
-
-@region.cache_on_arguments(expiration_time=REFINER_EXPIRATION_TIME)
-def get_series_episode(series_id, season, episode):
-    """Get an episode of a series.
-
-    :param int series_id: id of the series.
-    :param int season: season number of the episode.
-    :param int episode: episode number of the episode.
-    :return: the episode data.
-    :rtype: dict
-
-    """
-    result = tvdb_client.query_series_episodes(series_id, aired_season=season, aired_episode=episode)
-    if result:
-        return tvdb_client.get_episode(result['data'][0]['id'])
-
-
-def refine(video, **kwargs):
-    """Refine a video by searching `TheTVDB <http://thetvdb.com/>`_.
+def refine(video: Video, *, apikey: str | None = None, force: bool = False, **kwargs: Any) -> Video:
+    """Refine a video by searching `TheTVDB <https://thetvdb.com/>`_.
 
     .. note::
 
@@ -263,20 +356,24 @@ def refine(video, **kwargs):
     """
     # only deal with Episode videos
     if not isinstance(video, Episode):
-        logger.error('Cannot refine episodes')
-        return
+        logger.error('Cannot refine movies')
+        return video
 
     # exit if the information is complete
-    if video.series_tvdb_id and video.tvdb_id:
-        logger.debug('No need to search')
-        return
+    if not force and video.series_tvdb_id and video.tvdb_id:
+        logger.debug('No need to search, TheTVDB ids already exist for the video.')
+        return video
+
+    # update the API key
+    if apikey is not None:
+        tvdb_client.apikey = apikey
 
     # search the series
     logger.info('Searching series %r', video.series)
-    results = search_series(video.series.lower())
+    results = tvdb_client.search_series(video.series.lower())
     if not results:
         logger.warning('No results for series')
-        return
+        return video
     logger.debug('Found %d results', len(results))
 
     # search for exact matches
@@ -285,16 +382,20 @@ def refine(video, **kwargs):
         matching_result = {}
 
         # use seriesName and aliases
-        series_names = [result['seriesName']]
-        series_names.extend(result['aliases'])
+        original_series_name = result['seriesName']
+        series_names = [original_series_name, *result['aliases']]
 
         # parse the original series as series + year or country
-        original_match = series_re.match(result['seriesName']).groupdict()
+        series_match = series_re.match(original_series_name)
+        if not series_match:  # pragma: no-cover
+            logger.debug('Discarding series %r, cannot match to regex %r', original_series_name, series_re)
+            continue
+        original_match = series_match.groupdict()
 
         # parse series year
         series_year = None
         if result['firstAired']:
-            series_year = datetime.strptime(result['firstAired'], '%Y-%m-%d').year
+            series_year = datetime.strptime(result['firstAired'], '%Y-%m-%d').astimezone(timezone.utc).year
 
         # discard mismatches on year
         if video.year and series_year and video.year != series_year:
@@ -304,7 +405,12 @@ def refine(video, **kwargs):
         # iterate over series names
         for series_name in series_names:
             # parse as series, year and country
-            series, year, country = series_re.match(series_name).groups()
+            series_match = series_re.match(series_name)
+            if not series_match:  # pragma: no-cover
+                logger.debug('Discarding series name %r, cannot match to regex %r', series_name, series_re)
+                continue
+
+            series, year, country = series_match.groups()
             if year:
                 year = int(year)
 
@@ -325,10 +431,10 @@ def refine(video, **kwargs):
             if sanitize(series) == sanitize(video.series):
                 logger.debug('Found exact match on series %r', series_name)
                 matching_result['match'] = {
-                    'series': original_match['series'],
+                    'series': original_match.get('series', series),
                     'year': series_year or year,
                     'country': country,
-                    'original_series': original_match['year'] is None and country is None
+                    'original_series': original_match.get('year') is None and country is None,
                 }
                 break
 
@@ -340,14 +446,14 @@ def refine(video, **kwargs):
     # exit if we don't have exactly 1 matching result
     if not matching_results:
         logger.error('No matching series found')
-        return
+        return video
     if len(matching_results) > 1:
         logger.error('Multiple matches found')
-        return
+        return video
 
     # get the series
     matching_result = matching_results[0]
-    series = get_series(matching_result['data']['id'])
+    series = tvdb_client.get_series(matching_result['data']['id'])
 
     # add series information
     logger.debug('Found series %r', series)
@@ -361,13 +467,15 @@ def refine(video, **kwargs):
 
     # get the episode
     logger.info('Getting series episode %dx%d', video.season, video.episode)
-    episode = get_series_episode(video.series_tvdb_id, video.season, video.episode)
+    episode = tvdb_client.get_series_episode(video.series_tvdb_id, video.season, video.episode)
     if not episode:
         logger.warning('No results for episode')
-        return
+        return video
 
     # add episode information
     logger.debug('Found episode %r', episode)
     video.tvdb_id = episode['id']
     video.title = episode['episodeName'] or None
     video.imdb_id = episode['imdbId'] or None
+
+    return video

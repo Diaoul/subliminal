@@ -5,46 +5,41 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
       User-Agent:
-      - python-requests/2.23.0
+      - Subliminal/2.1
     method: GET
-    uri: http://www.omdbapi.com/?apikey=00000000&r=json&v=1&plot=short&t=Meen+of+Stal&tomatoes=False
+    uri: https://www.omdbapi.com/?r=json&v=1&apikey=44d5b275&t=Meen+of+Stal&plot=short
   response:
     body:
-      string: !!python/unicode '{"Response":"False","Error":"Movie not found!"}'
+      string: '{"Response":"False","Error":"Movie not found!"}'
     headers:
-      accept-ranges:
+      Accept-Ranges:
       - bytes
+      CF-Cache-Status:
+      - MISS
+      CF-RAY:
+      - 887d96771a603cf9-CDG
+      Cache-Control:
+      - public, max-age=86400
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '47'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 22 May 2024 14:45:03 GMT
+      Server:
+      - cloudflare
       access-control-allow-origin:
       - '*'
-      cache-control:
-      - public, max-age=86400
-      cf-cache-status:
-      - MISS
-      cf-ray:
-      - 590c4ea699e1cc42-ZRH
-      cf-request-id:
-      - 029b8f7c230000cc42db2e5200000001
-      connection:
-      - keep-alive
-      content-length:
-      - '47'
-      content-type:
-      - application/json; charset=utf-8
-      date:
-      - Sat, 09 May 2020 15:03:26 GMT
       expires:
-      - Sat, 09 May 2020 16:03:26 GMT
+      - Wed, 22 May 2024 15:45:03 GMT
       last-modified:
-      - Sat, 09 May 2020 15:03:26 GMT
-      server:
-      - cloudflare
-      set-cookie:
-      - __cfduid=d0c5f4e4ebfaa56902b0c302496ecac0a1589036606; expires=Mon, 08-Jun-20
-        15:03:26 GMT; path=/; domain=.omdbapi.com; HttpOnly; SameSite=Lax
+      - Wed, 22 May 2024 14:45:03 GMT
       vary:
       - '*, Accept-Encoding'
       x-aspnet-version:

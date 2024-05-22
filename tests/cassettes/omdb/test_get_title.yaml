@@ -5,59 +5,50 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
       User-Agent:
-      - python-requests/2.23.0
+      - Subliminal/2.1
     method: GET
-    uri: http://www.omdbapi.com/?apikey=00000000&r=json&v=1&plot=short&t=Man+of+Steel&tomatoes=False
+    uri: https://www.omdbapi.com/?r=json&v=1&apikey=44d5b275&t=Man+of+Steel&plot=short
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAA21UYW/bRgz9KwSxDh1wkSUntjN/qh03abvK8SrXaTsMBSMx0s0Sz7g7ydWK/Pfi
-        5BbLsH3TPb7j4yOP+opb7WvGOaYkYB4g88w1KvzIZHGO4zg5R4XvyHOBc9zcnJ3OXDO5AUou4E0r
-        8IPYitcND/g5NFpQ4Q2LDcgi99qIgkXRsfjWsoIs12fXGhWutOXcmyD5ifI9ZNIXbFHhndWeA7yi
-        TheQRXBjerbw3OWWWQ419b8o+E/QGxvwq8pq582hYgtrU5P8E3rD1vaQaS65hudZe2DbkEBuOXiF
-        +4FjGLKqdT7k/D8KquDKWIdzfMVie7iiTte1gkXTw6KgxilIdV4R15BVJBIasNIkDG9JGBVuauND
-        cwSo1iyQV7ouQDvgjvJ2EHqwpoFKOyh6LSUcja0LICnAsXjwBl6S9VX4qHXHQI2REqq2IXERvNIO
-        Dkw5h5y+GmoXLhQcKxZwre10Z6wLsw8SlWkYDjUJe9DSUcGn7BEqfEtStlSGWb6UstauQoVXphVv
-        e5zj+2yh4P1voSdHskXoyQyOWhz8DBdTENNoofAEXEi2Me402Mr7g5uPRk3UcKHpjBr620iUm2ak
-        GyrZjdJRupss0+1+crvaJ+vV/kt6PVmm9WRJspQP+2v/aZsf19vF5Hb7Mb79/cWL6PMu+Zx9OI/j
-        6K9DeXrAWkqH8z++YmZamwcTr8WzDUZT02mGFXm6JxeGsqO6DYxZFI+SGB/Vk1vvjPcssDUNecPu
-        CXsyffZvasqecqu9zp+yJqMkjvHxTzXEXW7sCUaFuinuT6WexL9DO+M5tHM6vVTTi9l39PUK5+h9
-        PJvFl+NLVLjtDyFTE9yEndoFQjKGtel+7OfSfLl9eNBDdT+Nf01UPE7UZBq0N9YU7bCiOMc7ssIW
-        lta4CDY6D+sarN7xvdM+3F6PFsOPwB2MuABsbcv4+A3PclMSUQQAAA==
+      string: '{"Title":"Man of Steel","Year":"2013","Rated":"PG-13","Released":"14
+        Jun 2013","Runtime":"143 min","Genre":"Action, Adventure, Sci-Fi","Director":"Zack
+        Snyder","Writer":"David S. Goyer, Christopher Nolan, Jerry Siegel","Actors":"Henry
+        Cavill, Amy Adams, Michael Shannon","Plot":"An alien child is evacuated from
+        his dying world and sent to Earth to live among humans. His peace is threatened
+        when other survivors of his home planet invade Earth.","Language":"English","Country":"United
+        States, United Kingdom","Awards":"Nominated for 1 BAFTA Award7 wins & 46 nominations
+        total","Poster":"https://m.media-amazon.com/images/M/MV5BMTk5ODk1NDkxMF5BMl5BanBnXkFtZTcwNTA5OTY0OQ@@._V1_SX300.jpg","Ratings":[{"Source":"Internet
+        Movie Database","Value":"7.1/10"},{"Source":"Rotten Tomatoes","Value":"56%"},{"Source":"Metacritic","Value":"55/100"}],"Metascore":"55","imdbRating":"7.1","imdbVotes":"809,805","imdbID":"tt0770828","Type":"movie","DVD":"08
+        Dec 2015","BoxOffice":"$291,045,518","Production":"N/A","Website":"N/A","Response":"True"}'
     headers:
+      CF-Cache-Status:
+      - MISS
+      CF-RAY:
+      - 887d96734af0216d-CDG
+      Cache-Control:
+      - public, max-age=86400
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 22 May 2024 14:45:03 GMT
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
       access-control-allow-origin:
       - '*'
-      cache-control:
-      - public, max-age=86400
-      cf-cache-status:
-      - MISS
-      cf-ray:
-      - 590c4ea2b91dcc3e-ZRH
-      cf-request-id:
-      - 029b8f79b00000cc3ed5ba1200000001
-      connection:
-      - keep-alive
-      content-encoding:
-      - gzip
-      content-type:
-      - application/json; charset=utf-8
-      date:
-      - Sat, 09 May 2020 15:03:26 GMT
       expires:
-      - Sat, 09 May 2020 16:03:26 GMT
+      - Wed, 22 May 2024 15:45:03 GMT
       last-modified:
-      - Sat, 09 May 2020 15:03:26 GMT
-      server:
-      - cloudflare
-      set-cookie:
-      - __cfduid=d1476b1be93db703ac71c87e5df6ea16d1589036605; expires=Mon, 08-Jun-20
-        15:03:25 GMT; path=/; domain=.omdbapi.com; HttpOnly; SameSite=Lax
-      transfer-encoding:
-      - chunked
+      - Wed, 22 May 2024 14:45:03 GMT
       vary:
       - '*, Accept-Encoding'
       x-aspnet-version:

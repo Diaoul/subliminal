@@ -5,56 +5,50 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
       User-Agent:
-      - python-requests/2.23.0
+      - Subliminal/2.1
     method: GET
-    uri: http://www.omdbapi.com/?apikey=00000000&r=json&v=1&y=2013&s=Man+of+Steel&page=1
+    uri: https://www.omdbapi.com/?r=json&v=1&apikey=44d5b275&s=Man+of+Steel&page=1&y=2013
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAA62UXW+bMBSG/4rlm96wxBAIKVfNB9laxWQpNA2ZpsojZ2C+nIKTFqr+94ledI20
-        kUTq7bGs53382n7BLrAiiLD14wV7XKaALUxZjsRv5EqAFCvYB1ZgC2tE7WEF82zz63qCLSwlMU0y
-        0AZYwV61bTZmYs8BK/i7KCU0eyIpt6XV7WadDDacfWEZq0XeCUTW5RkLoezSLl0aI+olxnySqM4k
-        eaZTY0RTY8TyUb5KpnLtBU+ONzTmnk/mi6urzsNSfXBXPUI68TbEr8rf4DMuZQro1PyaYZjmgHxC
-        /nVsqzS2depdy3V8E9MxIc5kGs/u7WcnHkoaLzmtF7XvDfX1/V29SuxqlUwfg68bWKyWFa392qkD
-        1Yn9Nr+PYsgVedhqZxp6X+t/Rjvx8MmpbZ3Wd/r8X+3Uiep4iXqknYP0F65INxyK98lFq8ulqmra
-        h6ZClh2oON3hf1kW8iJAPouEQDO+BzRlObL3kMs2ZK+nmbrednxHmM0UufC4gzyAVpKpDy57+hmk
-        xucbFAJKNIKI5xt0yG7WeIBcKYpKQpry9puiq8ZAJeTMAJSnXLKiQpSHkWzop767N17rv3Gu8Fhk
-        W1HyPETsXT4QBbSn6BODaGekuBG7Ioeq4U54GYg9FJWFxgUw2aBP1+8TQz/a908FSyFZegvlLpUl
-        trDahL2Fcivy8u1Uih3g1z8Pd67fwwUAAA==
+      string: '{"Search":[{"Title":"Man of Steel","Year":"2013","imdbID":"tt0770828","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BMTk5ODk1NDkxMF5BMl5BanBnXkFtZTcwNTA5OTY0OQ@@._V1_SX300.jpg"},{"Title":"Man
+        of Steel: The Yahoo Live Fan Event","Year":"2013","imdbID":"tt3327446","Type":"movie","Poster":"N/A"},{"Title":"Little
+        Man of Steel","Year":"2013","imdbID":"tt2557780","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BZjE1MjE4MTItZjJjMC00NDFjLWExNjAtMjViMzQzYTA4ZWUzXkEyXkFqcGdeQXVyMzYzNzc1NjY@._V1_SX300.jpg"},{"Title":"Man
+        of Steel Song","Year":"2013","imdbID":"tt2754626","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BMjAwNzE4MzU4OF5BMl5BanBnXkFtZTcwNzk1NTk1OQ@@._V1_SX300.jpg"},{"Title":"Man
+        of Steel ''Soldier of Steel''","Year":"2013","imdbID":"tt2911220","Type":"game","Poster":"N/A"},{"Title":"Man
+        of Steel: Title Sequence","Year":"2013","imdbID":"tt3748934","Type":"movie","Poster":"N/A"},{"Title":"The
+        Heroes Behind Man of Steel: Heroic Storytelling","Year":"2013","imdbID":"tt4158100","Type":"movie","Poster":"N/A"},{"Title":"The
+        Military Might of Man of Steel","Year":"2013","imdbID":"tt4158128","Type":"movie","Poster":"N/A"},{"Title":"The
+        Heroes Behind Man of Steel: Composing a Heroic Score","Year":"2013","imdbID":"tt4160502","Type":"movie","Poster":"N/A"},{"Title":"Journey
+        of Discovery: Creating Man of Steel","Year":"2013","imdbID":"tt4160544","Type":"movie","Poster":"N/A"}],"totalResults":"15","Response":"True"}'
     headers:
+      CF-Cache-Status:
+      - MISS
+      CF-RAY:
+      - 887d96854a903ce7-CDG
+      Cache-Control:
+      - public, max-age=86400
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 22 May 2024 14:45:06 GMT
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
       access-control-allow-origin:
       - '*'
-      cache-control:
-      - public, max-age=86400
-      cf-cache-status:
-      - MISS
-      cf-ray:
-      - 590c4eb8697acc42-ZRH
-      cf-request-id:
-      - 029b8f87440000cc42d291b200000001
-      connection:
-      - keep-alive
-      content-encoding:
-      - gzip
-      content-type:
-      - application/json; charset=utf-8
-      date:
-      - Sat, 09 May 2020 15:03:29 GMT
       expires:
-      - Sat, 09 May 2020 16:03:29 GMT
+      - Wed, 22 May 2024 15:45:06 GMT
       last-modified:
-      - Sat, 09 May 2020 15:03:29 GMT
-      server:
-      - cloudflare
-      set-cookie:
-      - __cfduid=d619e387ea5bfe4a8a27e046dec53225e1589036609; expires=Mon, 08-Jun-20
-        15:03:29 GMT; path=/; domain=.omdbapi.com; HttpOnly; SameSite=Lax
-      transfer-encoding:
-      - chunked
+      - Wed, 22 May 2024 14:45:06 GMT
       vary:
       - '*, Accept-Encoding'
       x-aspnet-version:

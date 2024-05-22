@@ -5,48 +5,41 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
       User-Agent:
-      - python-requests/2.23.0
+      - Subliminal/2.1
     method: GET
-    uri: http://www.omdbapi.com/?apikey=00000000&r=json&v=1&i=tt9999999&tomatoes=False&plot=short
+    uri: https://www.omdbapi.com/?r=json&v=1&apikey=44d5b275&i=tt9999999&plot=short
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAA6tWCkotLsjPK05VslJyS8wpTlXSUXItKsovUrKC0ArpqSUlmXnpCimJJYl6SrUA
-        JMuAmDIAAAA=
+      string: '{"Response":"False","Error":"Error getting data."}'
     headers:
+      CF-Cache-Status:
+      - MISS
+      CF-RAY:
+      - 887d966ebf73f864-CDG
+      Cache-Control:
+      - public, max-age=86400
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 22 May 2024 14:45:02 GMT
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
       access-control-allow-origin:
       - '*'
-      cache-control:
-      - public, max-age=86400
-      cf-cache-status:
-      - MISS
-      cf-ray:
-      - 590c4ea02b85cc42-ZRH
-      cf-request-id:
-      - 029b8f781b0000cc42dd9c3200000001
-      connection:
-      - keep-alive
-      content-encoding:
-      - gzip
-      content-type:
-      - application/json; charset=utf-8
-      date:
-      - Sat, 09 May 2020 15:03:25 GMT
       expires:
-      - Sat, 09 May 2020 16:03:25 GMT
+      - Wed, 22 May 2024 15:45:02 GMT
       last-modified:
-      - Sat, 09 May 2020 15:03:25 GMT
-      server:
-      - cloudflare
-      set-cookie:
-      - __cfduid=dce43170fd40f1b67ff0501cee72b0b661589036605; expires=Mon, 08-Jun-20
-        15:03:25 GMT; path=/; domain=.omdbapi.com; HttpOnly; SameSite=Lax
-      transfer-encoding:
-      - chunked
+      - Wed, 22 May 2024 14:45:02 GMT
       vary:
       - '*, Accept-Encoding'
       x-aspnet-version:

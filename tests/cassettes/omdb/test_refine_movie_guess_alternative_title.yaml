@@ -5,52 +5,41 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
-      Cookie:
-      - __cfduid=d7e2ffb3c8ccaf23fa22fe8a9901de6ec1589036610
       User-Agent:
       - Subliminal/2.1
     method: GET
-    uri: http://www.omdbapi.com/?apikey=00000000&r=json&v=1&y=2016&s=Jack+Reacher&type=movie&page=1
+    uri: https://www.omdbapi.com/?r=json&v=1&apikey=44d5b275&s=Jack+Reacher&page=1&type=movie&y=2016
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAAxWO22qDQBRFf0X2s/VSay/zVMS2pDCmNSJJQwin5qBWxxFnktKE/HvxYb8sWIt9
-        wYppqhqI7QVFa3uGwDtVnZMzVQ1Pwsn4xJPzpp2Eqg4uNkwTBG6D8B4uWnX4XqQQsDaKnqKHxxkW
-        f+PcUfrUMlx8aGN5dhprRyN8X3mKDy3dkKKzHrxKK79VVLPxpS/LOFmmn9G8LF3cZWWcyD5OaEiG
-        dfdqv4r6V6abUJ67eFm8PHv7Mtyv1lEQeD9jjevOhdWW+pzNsbcGAiFc5GxGPZj5VTEdGdd/Q4ob
-        jPkAAAA=
+      string: '{"Search":[{"Title":"Jack Reacher: Never Go Back","Year":"2016","imdbID":"tt3393786","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BMTA2MDIwNzAyNzReQTJeQWpwZ15BbWU4MDAxNjI5Njkx._V1_SX300.jpg"}],"totalResults":"1","Response":"True"}'
     headers:
+      CF-Cache-Status:
+      - MISS
+      CF-RAY:
+      - 887d96bf7a9f3cf3-CDG
+      Cache-Control:
+      - public, max-age=86400
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 22 May 2024 14:45:15 GMT
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
       access-control-allow-origin:
       - '*'
-      age:
-      - '386'
-      cache-control:
-      - public, max-age=86400
-      cf-cache-status:
-      - HIT
-      cf-ray:
-      - 590c4ec43ab1cc42-ZRH
-      cf-request-id:
-      - 029b8f8ea00000cc42dd031200000001
-      connection:
-      - keep-alive
-      content-encoding:
-      - gzip
-      content-type:
-      - application/json; charset=utf-8
-      date:
-      - Sat, 09 May 2020 15:03:31 GMT
       expires:
-      - Sat, 09 May 2020 15:57:04 GMT
+      - Wed, 22 May 2024 15:45:15 GMT
       last-modified:
-      - Sat, 09 May 2020 14:57:04 GMT
-      server:
-      - cloudflare
-      transfer-encoding:
-      - chunked
+      - Wed, 22 May 2024 14:45:15 GMT
       vary:
       - '*, Accept-Encoding'
       x-aspnet-version:

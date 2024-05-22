@@ -5,53 +5,47 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
-      Cookie:
-      - __cfduid=d7e2ffb3c8ccaf23fa22fe8a9901de6ec1589036610
       User-Agent:
       - Subliminal/2.1
     method: GET
-    uri: http://www.omdbapi.com/?apikey=00000000&r=json&v=1&y=2012&s=dallas&type=series&page=1
+    uri: https://www.omdbapi.com/?r=json&v=1&apikey=44d5b275&s=dallas&page=1&type=series&y=2012
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAA63QXU7CQBQF4K0097n2Z9pC7BNtgEjiFIVCQGPI2F6h0HaazlShhMQ9uENXYuoL
-        waC8uIBz7/nOHsbIymgF7uMewkSmCC50WZoyASrMkZXgAjFM8vn+QQzTBhWSLH4edMEFKc02sdot
-        A1QId0WTFFgm2CTvuJDYZFdSFsLV9UzLME7YFctYzXMt4pmeZGyJQqc6nTo+XfecIOxtg27k0L7j
-        09TxWe7ns01fPoTRG11HZlB7b8P7TkdbTM3FeGYZhrYulnBQj9XDFSo+5xuFvyi/ME4JxGpbxLb/
-        hRBOSFDPDVoPyDlCUNMtrefG0LtImOQxlpgVKd9hrHjxK+ayKlEcWcoNRptLtlbbMsiftkD3Tp7f
-        Vtuq3J2d7uduFrGvycXbTypILlk6QlGlUoALTZ8RioLn4ptbVgiHLzNoljSIAgAA
+      string: "{\"Search\":[{\"Title\":\"Dallas\",\"Year\":\"2012\u20132014\",\"imdbID\":\"tt1723760\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BMjE5NTExNDc5MF5BMl5BanBnXkFtZTcwMjc1NzAwOQ@@._V1_SX300.jpg\"},{\"Title\":\"The
+        Book of Dallas\",\"Year\":\"2012\u2013\",\"imdbID\":\"tt2373244\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BMTU2NzY0MzI2MF5BMl5BanBnXkFtZTcwNzMxMzY0OA@@._V1_SX300.jpg\"},{\"Title\":\"The
+        Underemployed Adventures of Dallas Heck\",\"Year\":\"2012\u2013\",\"imdbID\":\"tt2673024\",\"Type\":\"series\",\"Poster\":\"N/A\"},{\"Title\":\"Dallas
+        Roundup Aftershow\",\"Year\":\"2012\u2013\",\"imdbID\":\"tt2715600\",\"Type\":\"series\",\"Poster\":\"N/A\"},{\"Title\":\"Dallas
+        Live\",\"Year\":\"2012\u20132013\",\"imdbID\":\"tt6872494\",\"Type\":\"series\",\"Poster\":\"N/A\"},{\"Title\":\"John
+        Barrowman's Dallas\",\"Year\":\"2012\",\"imdbID\":\"tt27329542\",\"Type\":\"series\",\"Poster\":\"N/A\"},{\"Title\":\"Luxury
+        Dallas\",\"Year\":\"2012\",\"imdbID\":\"tt2332492\",\"Type\":\"series\",\"Poster\":\"N/A\"}],\"totalResults\":\"7\",\"Response\":\"True\"}"
     headers:
+      CF-Cache-Status:
+      - MISS
+      CF-RAY:
+      - 887d96af0dc4f83c-CDG
+      Cache-Control:
+      - public, max-age=86400
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 22 May 2024 14:45:12 GMT
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
       access-control-allow-origin:
       - '*'
-      age:
-      - '387'
-      cache-control:
-      - public, max-age=86400
-      cf-cache-status:
-      - HIT
-      cf-ray:
-      - 590c4ec1393fcc56-ZRH
-      cf-request-id:
-      - 029b8f8cc70000cc567c2e9200000001
-      connection:
-      - keep-alive
-      content-encoding:
-      - gzip
-      content-type:
-      - application/json; charset=utf-8
-      date:
-      - Sat, 09 May 2020 15:03:30 GMT
       expires:
-      - Sat, 09 May 2020 15:57:03 GMT
+      - Wed, 22 May 2024 15:45:12 GMT
       last-modified:
-      - Sat, 09 May 2020 14:57:03 GMT
-      server:
-      - cloudflare
-      transfer-encoding:
-      - chunked
+      - Wed, 22 May 2024 14:45:12 GMT
       vary:
       - '*, Accept-Encoding'
       x-aspnet-version:

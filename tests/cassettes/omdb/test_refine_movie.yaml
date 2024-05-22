@@ -5,59 +5,50 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
-      Cookie:
-      - __cfduid=d7e2ffb3c8ccaf23fa22fe8a9901de6ec1589036610
       User-Agent:
       - Subliminal/2.1
     method: GET
-    uri: http://www.omdbapi.com/?apikey=00000000&r=json&v=1&s=man+of+steel&type=movie&page=1
+    uri: https://www.omdbapi.com/?r=json&v=1&apikey=44d5b275&s=man+of+steel&page=1&type=movie
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAA62UXW/aMBiF/4rlawZ2PkjIVaEJHRU2o5iPZJqqLLghTpzQxC2Qqv99gquNDmgl
-        bi29r89zzrHf4ISHZbSCzs83yBKVcehAEuageAITxXkGG9DnYQkdqCGswwZM5PL3wIUOVApZFrI1
-        GzYg2633g7J4TThswB9Fpfh+ZqXUunJaLdmUfJmE30IZ1kXejArZSmQY86pFWmRm9ghLzZGbYuqm
-        W9I3eyQze2HeyxdpXwUs2lDWNUfMR6PxzU3zcYYfJwsdoaZYx/C9cUk47nQ6R8KxjWxsXUF44MYm
-        YbNk5MZqxGKN7BAKpLcdzgdbXxJFxX0asHsZsJWgzK8XqbdbpP3n6G7Jx4vZjrrTLRWRSYV/Dmxe
-        lNkSzMMSsE3hANwxMAjzJVArDk6mhf+FNk3dwlr7CtC+HCBf9NOA+YpIT6e3e+hADlm6De58RebT
-        bSB6KdVmGXGJ9gGaEZ24ZEfc8TnoYaJUdobvqI2aaVqWja4RqvAwEZ5B2EAF4l6QW4So2xfDubel
-        oquImCWkHtc+6xrBfPohVFL7Na0jfCHUU21tW0dt1dq6hYwzYLTVPbkZTIo8PuubZRrtq/SCiO6G
-        1p5B6qkx+t8rrlNMWYovvOLbVZlUqliveAkeOH/lDmBnen5w5m8ejGzDtr5g1+FC0AujIndO1+3o
-        Gt1sI9zWrmAbrWON1GONsIFOP9gWb6gY4BFLd4R5n62TAw6nYMKfX3ge8XP565Zhd/Sv1IuFGa/A
-        U1lI4PJXnhVryXMFvvMsc8A8TFSSx+CpKD/vpdXp2KZ9ScKvBlSFCrMHXr1kqtqv2v9xD7xaF3l1
-        UFa+cPj+B837MUPVBgAA
+      string: '{"Search":[{"Title":"Man of Steel","Year":"2013","imdbID":"tt0770828","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BMTk5ODk1NDkxMF5BMl5BanBnXkFtZTcwNTA5OTY0OQ@@._V1_SX300.jpg"},{"Title":"World
+        War Two: 1941 and the Man of Steel","Year":"2011","imdbID":"tt5537126","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BYmI0YjFkZTYtMmE3NC00ZmZmLTkxZGYtMWUxZjBkN2VlMDM2XkEyXkFqcGdeQXVyNTM3MDMyMDQ@._V1_SX300.jpg"},{"Title":"Man
+        of Steel: The Yahoo Live Fan Event","Year":"2013","imdbID":"tt3327446","Type":"movie","Poster":"N/A"},{"Title":"Little
+        Man of Steel","Year":"2013","imdbID":"tt2557780","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BZjE1MjE4MTItZjJjMC00NDFjLWExNjAtMjViMzQzYTA4ZWUzXkEyXkFqcGdeQXVyMzYzNzc1NjY@._V1_SX300.jpg"},{"Title":"Man
+        of Steel","Year":"1967","imdbID":"tt0263704","Type":"movie","Poster":"N/A"},{"Title":"Christopher
+        Reeve: The Man of Steel","Year":"2004","imdbID":"tt2108487","Type":"movie","Poster":"N/A"},{"Title":"Man
+        of Steel Song","Year":"2013","imdbID":"tt2754626","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BMjAwNzE4MzU4OF5BMl5BanBnXkFtZTcwNzk1NTk1OQ@@._V1_SX300.jpg"},{"Title":"Chris
+        Bacon: Man of Steel","Year":"2014","imdbID":"tt3560162","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BNzg2MzQ2MTI3NF5BMl5BanBnXkFtZTgwNjI1OTkyMTE@._V1_SX300.jpg"},{"Title":"Superman:
+        Man of Steel","Year":"2019","imdbID":"tt10069974","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BODcxNDg4YjYtZjZmYS00NDAwLTg2NjctYTNiMjFiMDRlNmU5XkEyXkFqcGdeQXVyODc5OTgyODQ@._V1_SX300.jpg"},{"Title":"Stalin:
+        Man of Steel","Year":"2003","imdbID":"tt6643772","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BNGI0NjJiM2QtNDlkNS00NWYxLWI0MjctNjQwZDA4YmY0ZmNkXkEyXkFqcGdeQXVyNzI4MDMyMTU@._V1_SX300.jpg"}],"totalResults":"28","Response":"True"}'
     headers:
+      CF-Cache-Status:
+      - MISS
+      CF-RAY:
+      - 887d96b338040403-CDG
+      Cache-Control:
+      - public, max-age=86400
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 22 May 2024 14:45:13 GMT
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
       access-control-allow-origin:
       - '*'
-      age:
-      - '387'
-      cache-control:
-      - public, max-age=86400
-      cf-cache-status:
-      - HIT
-      cf-ray:
-      - 590c4ec1dae2cc3a-ZRH
-      cf-request-id:
-      - 029b8f8d270000cc3a62989200000001
-      connection:
-      - keep-alive
-      content-encoding:
-      - gzip
-      content-type:
-      - application/json; charset=utf-8
-      date:
-      - Sat, 09 May 2020 15:03:30 GMT
       expires:
-      - Sat, 09 May 2020 15:57:03 GMT
+      - Wed, 22 May 2024 15:45:13 GMT
       last-modified:
-      - Sat, 09 May 2020 14:57:03 GMT
-      server:
-      - cloudflare
-      transfer-encoding:
-      - chunked
+      - Wed, 22 May 2024 14:45:13 GMT
       vary:
       - '*, Accept-Encoding'
       x-aspnet-version:
@@ -73,54 +64,50 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
-      Cookie:
-      - __cfduid=d7e2ffb3c8ccaf23fa22fe8a9901de6ec1589036610
       User-Agent:
       - Subliminal/2.1
     method: GET
-    uri: http://www.omdbapi.com/?apikey=00000000&r=json&v=1&s=man+of+steel&type=movie&page=2
+    uri: https://www.omdbapi.com/?r=json&v=1&apikey=44d5b275&s=man+of+steel&page=2&type=movie
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAA53Sy27CMBAF0F+xZsMmUhPnAWRXoBW0UFWEDaq6cJMpsRQ8ke2kihD/XoVFBZV4
-        hLXle+Z6vIMEhU5ziD92sJK2QIhhlSOboiY0bIS5VBlbCMXomyUWsYgPZzJliSXdWCwKqTbgwBqF
-        hhi46/nggNxmX7MJxGBt4IUDz3XBgVVTtvlbqiWCA+9kLLZ33h4eYe+cDrCQhbRCN2whN7lt9eMh
-        rnp80NG7VHhM25KMVBsm/sqnpPHyFJEburzDFC9UaYVN606kSalG3cRsrFHYlr69fuSGQdCxfkJK
-        pmwuVGZSUWIr9Y7F3iUy9D3uD7qSs/RgjnOhRWpRm3vQLmseyc0URXb+JcP/QjQMh12Es8nuaTLn
-        XsiHYYfk10pbtiCt6Se+uQD3+wPfH95ZIGbtltYiJ2JzWSN7Foo91ajspbX4Pu8HQXTN/HTAkhXF
-        Ek1VWNNGeeDAEk1Jyhy+iK4Q9r91821xoQQAAA==
+      string: '{"Search":[{"Title":"Superman IV: The Man of Steel and Glass","Year":"2017","imdbID":"tt11783846","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BZTIzMjNmMDUtYzI0ZS00ZDY0LWI4NDUtZmY5ODY4N2I0ZWY2XkEyXkFqcGdeQXVyNDA1NzI5NDk@._V1_SX300.jpg"},{"Title":"John
+        henry man of steel the movie","Year":"2023","imdbID":"tt18926960","Type":"movie","Poster":"N/A"},{"Title":"The
+        Man of Steel","Year":"2022","imdbID":"tt22021586","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BMzU1ZDY1N2MtYjlkMy00ZTg3LWJiOGQtMjllZGU2MmZhYTBhXkEyXkFqcGdeQXVyMjQ2Mzg4Ng@@._V1_SX300.jpg"},{"Title":"Hyperbaric
+        Reviews - Man of Steel (2013)","Year":"2013","imdbID":"tt22355224","Type":"movie","Poster":"N/A"},{"Title":"Episode
+        41 - Man of Steel (2013)","Year":"2013","imdbID":"tt24266808","Type":"movie","Poster":"N/A"},{"Title":"Movieclips:
+        Man of Steel Alien Invasion","Year":"2013","imdbID":"tt10244568","Type":"movie","Poster":"N/A"},{"Title":"The
+        Legacy of Gilbert Klingel: Man of Steel","Year":"2018","imdbID":"tt8359232","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BYWQ5ODFjNTEtZmMzNS00M2U4LTgxMDUtOWY2MTAxNzVhNWZkXkEyXkFqcGdeQXVyODc4Nzg1MzM@._V1_SX300.jpg"},{"Title":"Man
+        of Steel","Year":"2010","imdbID":"tt2215295","Type":"movie","Poster":"N/A"},{"Title":"Kurt
+        Morrow: Man of Steel","Year":"2015","imdbID":"tt2378339","Type":"movie","Poster":"N/A"},{"Title":"Man
+        of Steel: Title Sequence","Year":"2013","imdbID":"tt3748934","Type":"movie","Poster":"N/A"}],"totalResults":"28","Response":"True"}'
     headers:
+      CF-Cache-Status:
+      - MISS
+      CF-RAY:
+      - 887d96b7be4599f1-CDG
+      Cache-Control:
+      - public, max-age=86400
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 22 May 2024 14:45:13 GMT
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
       access-control-allow-origin:
       - '*'
-      age:
-      - '387'
-      cache-control:
-      - public, max-age=86400
-      cf-cache-status:
-      - HIT
-      cf-ray:
-      - 590c4ec2bcafcc3a-ZRH
-      cf-request-id:
-      - 029b8f8db70000cc3a6298f200000001
-      connection:
-      - keep-alive
-      content-encoding:
-      - gzip
-      content-type:
-      - application/json; charset=utf-8
-      date:
-      - Sat, 09 May 2020 15:03:31 GMT
       expires:
-      - Sat, 09 May 2020 15:57:04 GMT
+      - Wed, 22 May 2024 15:45:13 GMT
       last-modified:
-      - Sat, 09 May 2020 14:57:04 GMT
-      server:
-      - cloudflare
-      transfer-encoding:
-      - chunked
+      - Wed, 22 May 2024 14:45:13 GMT
       vary:
       - '*, Accept-Encoding'
       x-aspnet-version:
@@ -136,52 +123,49 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
-      Cookie:
-      - __cfduid=d7e2ffb3c8ccaf23fa22fe8a9901de6ec1589036610
       User-Agent:
       - Subliminal/2.1
     method: GET
-    uri: http://www.omdbapi.com/?apikey=00000000&r=json&v=1&s=man+of+steel&type=movie&page=3
+    uri: https://www.omdbapi.com/?r=json&v=1&apikey=44d5b275&s=man+of+steel&page=3&type=movie
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAAx2QXW+CMBhG/wp5rxmfmjiutgU1yyxOQUSXxVR4B9WWMlqNYPzvC7t9knOS89wh
-        RtrmFQRfd0iY5ggBJBUaCyxp3hnyx5gzfsRWGx+c1SXywCC0HvZYI3IwYYe0hQA8x52ACUwUx/cQ
-        AtB64o+fPd8DE5KuGbxCXhmCCZ9SaRyYSutGBbYtLIEFo09U0F7WVi6FzQQtUdnEJun4bbddjZfh
-        7BQlU70XpI9ixyHeZrRIyhsJN3q53Xkkeb1FfVpF2/05O0+77Dz7zecFrrK0W4b5KOpLl/TkxTqk
-        7iHOfMexTk0Jj28TtNSUr1FduFZDiQsmrFE1slb/d7QXhMcfg+O0uioBAAA=
+      string: '{"Search":[{"Title":"Tales from Development Hell: Waiting for Man of
+        Steel","Year":"2014","imdbID":"tt3799858","Type":"movie","Poster":"N/A"},{"Title":"The
+        Heroes Behind Man of Steel: Heroic Storytelling","Year":"2013","imdbID":"tt4158100","Type":"movie","Poster":"N/A"},{"Title":"The
+        Military Might of Man of Steel","Year":"2013","imdbID":"tt4158128","Type":"movie","Poster":"N/A"},{"Title":"The
+        Heroes Behind Man of Steel: Composing a Heroic Score","Year":"2013","imdbID":"tt4160502","Type":"movie","Poster":"N/A"},{"Title":"Journey
+        of Discovery: Creating Man of Steel","Year":"2013","imdbID":"tt4160544","Type":"movie","Poster":"N/A"},{"Title":"The
+        Sonic Landscape of ''Man of Steel''","Year":"2013","imdbID":"tt5312384","Type":"movie","Poster":"N/A"},{"Title":"The
+        Iconic Characters of ''Man of Steel''","Year":"2013","imdbID":"tt5312388","Type":"movie","Poster":"N/A"},{"Title":"BigHead
+        Man of Steel","Year":"2015","imdbID":"tt5369598","Type":"movie","Poster":"N/A"}],"totalResults":"28","Response":"True"}'
     headers:
+      CF-Cache-Status:
+      - MISS
+      CF-RAY:
+      - 887d96ba28a199ed-CDG
+      Cache-Control:
+      - public, max-age=86400
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 22 May 2024 14:45:14 GMT
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
       access-control-allow-origin:
       - '*'
-      age:
-      - '387'
-      cache-control:
-      - public, max-age=86400
-      cf-cache-status:
-      - HIT
-      cf-ray:
-      - 590c4ec30d5ccc3a-ZRH
-      cf-request-id:
-      - 029b8f8de90000cc3a62990200000001
-      connection:
-      - keep-alive
-      content-encoding:
-      - gzip
-      content-type:
-      - application/json; charset=utf-8
-      date:
-      - Sat, 09 May 2020 15:03:31 GMT
       expires:
-      - Sat, 09 May 2020 15:57:04 GMT
+      - Wed, 22 May 2024 15:45:14 GMT
       last-modified:
-      - Sat, 09 May 2020 14:57:04 GMT
-      server:
-      - cloudflare
-      transfer-encoding:
-      - chunked
+      - Wed, 22 May 2024 14:45:14 GMT
       vary:
       - '*, Accept-Encoding'
       x-aspnet-version:

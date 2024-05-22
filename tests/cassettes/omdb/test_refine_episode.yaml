@@ -5,54 +5,42 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
       User-Agent:
       - Subliminal/2.1
     method: GET
-    uri: http://www.omdbapi.com/?apikey=00000000&r=json&v=1&s=the+big+bang+theory&type=series&page=1
+    uri: https://www.omdbapi.com/?r=json&v=1&apikey=44d5b275&s=the+big+bang+theory&page=1&type=series
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAA33PUW6CQBSF4a2Q+0xhoGKVp2LUxqRi1YkCTWOmeAujjFBmjBmMiXtwh66ksU/t
-        iws4f853hDmyOs3Bfz8C5apA8IHmaPR4ZvTYLjNojmWtwYQYWQ0+uIQ8Xc8XlzhdMIGL9eeoDz4o
-        RTrdjttugwlUV7eMxJqjBBPeSqnwts2VqqRv28ISuObsgQnWlDsrLYXNBctQ2mN7vPB6sTsUCY29
-        mG7VZDkrYk1IKEb6dTkgiZiqpJ+58aYQ4yZtkn7Co+1AR9vhd/qyxmm00OEma4VNoCc0eLZWC2c1
-        jx4JsTZVBifzrtMIvhTWxjwvD3/Jjnc9X/5zvbbjdrqte9zQDuD0YYIqFStmKPeFkrccmDBDWZU7
-        +fui3iOcfgA9TlK1iQEAAA==
+      string: "{\"Search\":[{\"Title\":\"The Big Bang Theory\",\"Year\":\"2007\u20132019\",\"imdbID\":\"tt0898266\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BY2FmZTY5YTktOWRlYy00NmIyLWE0ZmQtZDg2YjlmMzczZDZiXkEyXkFqcGdeQXVyNjg4NzAyOTA@._V1_SX300.jpg\"},{\"Title\":\"The
+        Big Bang Theory After Show\",\"Year\":\"2015\u2013\",\"imdbID\":\"tt5612894\",\"Type\":\"series\",\"Poster\":\"N/A\"}],\"totalResults\":\"2\",\"Response\":\"True\"}"
     headers:
+      CF-Cache-Status:
+      - MISS
+      CF-RAY:
+      - 887d96929de0998c-CDG
+      Cache-Control:
+      - public, max-age=86400
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 22 May 2024 14:45:08 GMT
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
       access-control-allow-origin:
       - '*'
-      age:
-      - '389'
-      cache-control:
-      - public, max-age=86400
-      cf-cache-status:
-      - HIT
-      cf-ray:
-      - 590c4ebedf22cc3e-ZRH
-      cf-request-id:
-      - 029b8f8b450000cc3ecf33c200000001
-      connection:
-      - keep-alive
-      content-encoding:
-      - gzip
-      content-type:
-      - application/json; charset=utf-8
-      date:
-      - Sat, 09 May 2020 15:03:30 GMT
       expires:
-      - Sat, 09 May 2020 15:57:01 GMT
+      - Wed, 22 May 2024 15:45:08 GMT
       last-modified:
-      - Sat, 09 May 2020 14:57:01 GMT
-      server:
-      - cloudflare
-      set-cookie:
-      - __cfduid=d7e2ffb3c8ccaf23fa22fe8a9901de6ec1589036610; expires=Mon, 08-Jun-20
-        15:03:30 GMT; path=/; domain=.omdbapi.com; HttpOnly; SameSite=Lax
-      transfer-encoding:
-      - chunked
+      - Wed, 22 May 2024 14:45:08 GMT
       vary:
       - '*, Accept-Encoding'
       x-aspnet-version:

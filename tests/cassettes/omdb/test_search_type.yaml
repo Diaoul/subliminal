@@ -5,58 +5,50 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
       User-Agent:
-      - python-requests/2.23.0
+      - Subliminal/2.1
     method: GET
-    uri: http://www.omdbapi.com/?apikey=00000000&r=json&v=1&s=Man+of+Steel&type=movie&page=1
+    uri: https://www.omdbapi.com/?r=json&v=1&apikey=44d5b275&s=Man+of+Steel&page=1&type=movie
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAA62UXW/aMBiF/4rlawZ2PkjIVaEJHRU2o5iPZJqqLLghTpzQxC2Qqv99gquNDmgl
-        bi29r89zzrHf4ISHZbSCzs83yBKVcehAEuageAITxXkGG9DnYQkdqCGswwZM5PL3wIUOVApZFrI1
-        GzYg2633g7J4TThswB9Fpfh+ZqXUunJaLdmUfJmE30IZ1kXejArZSmQY86pFWmRm9ghLzZGbYuqm
-        W9I3eyQze2HeyxdpXwUs2lDWNUfMR6PxzU3zcYYfJwsdoaZYx/C9cUk47nQ6R8KxjWxsXUF44MYm
-        YbNk5MZqxGKN7BAKpLcdzgdbXxJFxX0asHsZsJWgzK8XqbdbpP3n6G7Jx4vZjrrTLRWRSYV/Dmxe
-        lNkSzMMSsE3hANwxMAjzJVArDk6mhf+FNk3dwlr7CtC+HCBf9NOA+YpIT6e3e+hADlm6De58RebT
-        bSB6KdVmGXGJ9gGaEZ24ZEfc8TnoYaJUdobvqI2aaVqWja4RqvAwEZ5B2EAF4l6QW4So2xfDubel
-        oquImCWkHtc+6xrBfPohVFL7Na0jfCHUU21tW0dt1dq6hYwzYLTVPbkZTIo8PuubZRrtq/SCiO6G
-        1p5B6qkx+t8rrlNMWYovvOLbVZlUqliveAkeOH/lDmBnen5w5m8ejGzDtr5g1+FC0AujIndO1+3o
-        Gt1sI9zWrmAbrWON1GONsIFOP9gWb6gY4BFLd4R5n62TAw6nYMKfX3ge8XP565Zhd/Sv1IuFGa/A
-        U1lI4PJXnhVryXMFvvMsc8A8TFSSx+CpKD/vpdXp2KZ9ScKvBlSFCrMHXr1kqtqv2v9xD7xaF3l1
-        UFa+cPj+B837MUPVBgAA
+      string: '{"Search":[{"Title":"Man of Steel","Year":"2013","imdbID":"tt0770828","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BMTk5ODk1NDkxMF5BMl5BanBnXkFtZTcwNTA5OTY0OQ@@._V1_SX300.jpg"},{"Title":"World
+        War Two: 1941 and the Man of Steel","Year":"2011","imdbID":"tt5537126","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BYmI0YjFkZTYtMmE3NC00ZmZmLTkxZGYtMWUxZjBkN2VlMDM2XkEyXkFqcGdeQXVyNTM3MDMyMDQ@._V1_SX300.jpg"},{"Title":"Man
+        of Steel: The Yahoo Live Fan Event","Year":"2013","imdbID":"tt3327446","Type":"movie","Poster":"N/A"},{"Title":"Little
+        Man of Steel","Year":"2013","imdbID":"tt2557780","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BZjE1MjE4MTItZjJjMC00NDFjLWExNjAtMjViMzQzYTA4ZWUzXkEyXkFqcGdeQXVyMzYzNzc1NjY@._V1_SX300.jpg"},{"Title":"Man
+        of Steel","Year":"1967","imdbID":"tt0263704","Type":"movie","Poster":"N/A"},{"Title":"Christopher
+        Reeve: The Man of Steel","Year":"2004","imdbID":"tt2108487","Type":"movie","Poster":"N/A"},{"Title":"Man
+        of Steel Song","Year":"2013","imdbID":"tt2754626","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BMjAwNzE4MzU4OF5BMl5BanBnXkFtZTcwNzk1NTk1OQ@@._V1_SX300.jpg"},{"Title":"Chris
+        Bacon: Man of Steel","Year":"2014","imdbID":"tt3560162","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BNzg2MzQ2MTI3NF5BMl5BanBnXkFtZTgwNjI1OTkyMTE@._V1_SX300.jpg"},{"Title":"Superman:
+        Man of Steel","Year":"2019","imdbID":"tt10069974","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BODcxNDg4YjYtZjZmYS00NDAwLTg2NjctYTNiMjFiMDRlNmU5XkEyXkFqcGdeQXVyODc5OTgyODQ@._V1_SX300.jpg"},{"Title":"Stalin:
+        Man of Steel","Year":"2003","imdbID":"tt6643772","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BNGI0NjJiM2QtNDlkNS00NWYxLWI0MjctNjQwZDA4YmY0ZmNkXkEyXkFqcGdeQXVyNzI4MDMyMTU@._V1_SX300.jpg"}],"totalResults":"28","Response":"True"}'
     headers:
+      CF-Cache-Status:
+      - MISS
+      CF-RAY:
+      - 887d9bf088aa153b-CDG
+      Cache-Control:
+      - public, max-age=86400
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 22 May 2024 14:48:47 GMT
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
       access-control-allow-origin:
       - '*'
-      cache-control:
-      - public, max-age=86400
-      cf-cache-status:
-      - MISS
-      cf-ray:
-      - 590c4eb49a96cc4a-ZRH
-      cf-request-id:
-      - 029b8f84e10000cc4a47be5200000001
-      connection:
-      - keep-alive
-      content-encoding:
-      - gzip
-      content-type:
-      - application/json; charset=utf-8
-      date:
-      - Sat, 09 May 2020 15:03:29 GMT
       expires:
-      - Sat, 09 May 2020 16:03:28 GMT
+      - Wed, 22 May 2024 15:48:47 GMT
       last-modified:
-      - Sat, 09 May 2020 15:03:28 GMT
-      server:
-      - cloudflare
-      set-cookie:
-      - __cfduid=deb2a52d50116d33872348c19bb4381a41589036608; expires=Mon, 08-Jun-20
-        15:03:28 GMT; path=/; domain=.omdbapi.com; HttpOnly; SameSite=Lax
-      transfer-encoding:
-      - chunked
+      - Wed, 22 May 2024 14:48:47 GMT
       vary:
       - '*, Accept-Encoding'
       x-aspnet-version:

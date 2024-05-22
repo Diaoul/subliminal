@@ -5,53 +5,43 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
-      Cookie:
-      - __cfduid=d7e2ffb3c8ccaf23fa22fe8a9901de6ec1589036610
       User-Agent:
       - Subliminal/2.1
     method: GET
-    uri: http://www.omdbapi.com/?apikey=00000000&r=json&v=1&s=house+of+cards&type=series&page=1
+    uri: https://www.omdbapi.com/?r=json&v=1&apikey=44d5b275&s=house+of+cards&page=1&type=series
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAA62RT06DQBxGr2J+a4QZKoayMohUEmdqW0ppjWlGGCl/BpCZptKmiXfwhp7EsDQu
-        3HiA9+W9fCdYcNYlO3CeThDmquLgwH2zl/yieb24ZV0qQYM1Zx04YCI8+vr4NBG2QYNcpC+BBw4o
-        hW3rGmEEGoR9OyxI3uV8IB8bqfjA7pRqpWMYQhc8zdklE+zY1HrSCCMXLOPSIAaJLHfqEUy8pUmL
-        tUV9yyWV5bLarePSV5swOxCvfKdhcqAFudG3Ed4u4hFCetFmcNb+TsDjMfrpjtDYtk3rP9ypiHZk
-        4lekWCpqBoguECIhuXpY+dUmzBRZBXhtznoiAjz10iIu7/q49N+SScpncdTTY3kgxcyix99tzxqo
-        RrFqzuW+UnJ4AzSYc9k2tRy0w27P4fwNMfSwq9ABAAA=
+      string: "{\"Search\":[{\"Title\":\"House of Cards\",\"Year\":\"2013\u20132018\",\"imdbID\":\"tt1856010\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BNmM4ODU1MzItODYyYi00Y2U0LWFjZjItYTRhZWIwOGMyZTRhXkEyXkFqcGdeQXVyNjc2NTQ4Nzk@._V1_SX300.jpg\"},{\"Title\":\"House
+        of Cards\",\"Year\":\"1990\",\"imdbID\":\"tt0098825\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BNmVhMGFlMjUtN2I0NS00MTM4LWFlZTgtMWI1Y2QyMmI1ODdjXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg\"},{\"Title\":\"DateSmash:
+        Bernie Sanders & House of Cards' Frank Underwood\",\"Year\":\"2016\",\"imdbID\":\"tt14397660\",\"Type\":\"series\",\"Poster\":\"N/A\"}],\"totalResults\":\"3\",\"Response\":\"True\"}"
     headers:
+      CF-Cache-Status:
+      - MISS
+      CF-RAY:
+      - 887d96c7fc9003fb-CDG
+      Cache-Control:
+      - public, max-age=86400
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 22 May 2024 14:45:16 GMT
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
       access-control-allow-origin:
       - '*'
-      age:
-      - '385'
-      cache-control:
-      - public, max-age=86400
-      cf-cache-status:
-      - HIT
-      cf-ray:
-      - 590c4ec5e9e1cc4a-ZRH
-      cf-request-id:
-      - 029b8f8faf0000cc4a478c3200000001
-      connection:
-      - keep-alive
-      content-encoding:
-      - gzip
-      content-type:
-      - application/json; charset=utf-8
-      date:
-      - Sat, 09 May 2020 15:03:31 GMT
       expires:
-      - Sat, 09 May 2020 15:57:06 GMT
+      - Wed, 22 May 2024 15:45:16 GMT
       last-modified:
-      - Sat, 09 May 2020 14:57:06 GMT
-      server:
-      - cloudflare
-      transfer-encoding:
-      - chunked
+      - Wed, 22 May 2024 14:45:16 GMT
       vary:
       - '*, Accept-Encoding'
       x-aspnet-version:

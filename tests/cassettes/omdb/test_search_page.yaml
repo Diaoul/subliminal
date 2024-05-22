@@ -5,52 +5,50 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
       User-Agent:
-      - python-requests/2.23.0
+      - Subliminal/2.1
     method: GET
-    uri: http://www.omdbapi.com/?apikey=00000000&r=json&v=1&s=Man+of+Steel&page=3
+    uri: https://www.omdbapi.com/?r=json&v=1&apikey=44d5b275&s=Man+of+Steel&page=3
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAA5XQ3W6CQBQE4Fch55rys0iqXNUGNY0utoKINo1Z8RRQlrWwtoLx3Rt607RJTfoA
-        M19mzuAjK+MUnOczBJnMERygrFDEq+JLxBxUWCIrwQFimAaokPHt5sEFB6QkxLRJzwYVgvrQBrl4
-        zxBUeBSVxDbj6X24qN/N42MpFSrKUnw4yp+M/YuxbruW1fsHE6SoTDBhcd0CoyzfYCmVcZ4VCeZX
-        4O5PuGvZPWKRK3Aq5aFydJ1rHLcZu2GcNaLQYsH1jLMEK53qNLTvl4sne+oOd14wkCtOG883DErm
-        nUmQnKg7l9PFktCgf/KaMPUWq320H9TRfvgWj7b4FIX11I07XpOYtKF32jo0135kGYa2OyRweVFB
-        CsnyGVbHXFbtEgtUmGF1EEX1dUd5RLh8AidFRZTrAQAA
+      string: '{"Search":[{"Title":"Kurt Morrow: Man of Steel","Year":"2015","imdbID":"tt2378339","Type":"movie","Poster":"N/A"},{"Title":"Man
+        of Steel: Title Sequence","Year":"2013","imdbID":"tt3748934","Type":"movie","Poster":"N/A"},{"Title":"Tales
+        from Development Hell: Waiting for Man of Steel","Year":"2014","imdbID":"tt3799858","Type":"movie","Poster":"N/A"},{"Title":"The
+        Heroes Behind Man of Steel: Heroic Storytelling","Year":"2013","imdbID":"tt4158100","Type":"movie","Poster":"N/A"},{"Title":"The
+        Military Might of Man of Steel","Year":"2013","imdbID":"tt4158128","Type":"movie","Poster":"N/A"},{"Title":"The
+        Heroes Behind Man of Steel: Composing a Heroic Score","Year":"2013","imdbID":"tt4160502","Type":"movie","Poster":"N/A"},{"Title":"Journey
+        of Discovery: Creating Man of Steel","Year":"2013","imdbID":"tt4160544","Type":"movie","Poster":"N/A"},{"Title":"The
+        Sonic Landscape of ''Man of Steel''","Year":"2013","imdbID":"tt5312384","Type":"movie","Poster":"N/A"},{"Title":"The
+        Iconic Characters of ''Man of Steel''","Year":"2013","imdbID":"tt5312388","Type":"movie","Poster":"N/A"},{"Title":"BigHead
+        Man of Steel","Year":"2015","imdbID":"tt5369598","Type":"movie","Poster":"N/A"}],"totalResults":"30","Response":"True"}'
     headers:
+      CF-Cache-Status:
+      - MISS
+      CF-RAY:
+      - 887d968e4e509992-CDG
+      Cache-Control:
+      - public, max-age=86400
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 22 May 2024 14:45:07 GMT
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
       access-control-allow-origin:
       - '*'
-      cache-control:
-      - public, max-age=86400
-      cf-cache-status:
-      - MISS
-      cf-ray:
-      - 590c4ebb688ecc5a-ZRH
-      cf-request-id:
-      - 029b8f89240000cc5a3630f200000001
-      connection:
-      - keep-alive
-      content-encoding:
-      - gzip
-      content-type:
-      - application/json; charset=utf-8
-      date:
-      - Sat, 09 May 2020 15:03:30 GMT
       expires:
-      - Sat, 09 May 2020 16:03:30 GMT
+      - Wed, 22 May 2024 15:45:07 GMT
       last-modified:
-      - Sat, 09 May 2020 15:03:30 GMT
-      server:
-      - cloudflare
-      set-cookie:
-      - __cfduid=d71802a8035a73edff801ffd1d0095c2d1589036609; expires=Mon, 08-Jun-20
-        15:03:29 GMT; path=/; domain=.omdbapi.com; HttpOnly; SameSite=Lax
-      transfer-encoding:
-      - chunked
+      - Wed, 22 May 2024 14:45:07 GMT
       vary:
       - '*, Accept-Encoding'
       x-aspnet-version:

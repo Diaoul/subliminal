@@ -143,8 +143,8 @@ def episodes():
                     series_tvdb_id=328635),
             'shameless_us_s08e01':
             Episode('Shameless.US.s08e01.web.h264-convoy', 'Shameless', 8, 1, source='Web', video_codec='H.264',
-                    country=Country('US'), original_series=False, release_group='convoy', year=2010,
-                    alternative_series=[], title='We Become What We... Frank!',
+                    country=Country('US'), original_series=False, release_group='convoy', year=2011,
+                    alternative_series=['Shameless: Hall of Shame'], title='We Become What We... Frank!',
                     series_imdb_id='tt1586680', series_tvdb_id=161511, imdb_id='tt6347410', tvdb_id=6227949),
             'house_of_cards_us_s06e01':
             Episode('house.of.cards.us.s06e01.720p.web-dl.x264', 'House of Cards', 6, 1, source='Web',

@@ -5,7 +5,7 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Api-Key:
       - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
       Connection:
@@ -15,25 +15,76 @@ interactions:
       User-Agent:
       - Subliminal v2.1
     method: GET
+    uri: https://api.opensubtitles.com/api/v1/subtitles?episode_number=5&languages=de&page=1&query=the+big+bang+theory&season_number=7
+  response:
+    body:
+      string: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-Cache-Status:
+      - MISS
+      CF-RAY:
+      - 88a9966c1c0d2155-CDG
+      Cache-Control:
+      - public, max-age=86400
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '0'
+      Date:
+      - Mon, 27 May 2024 22:54:34 GMT
+      Location:
+      - /api/v1/subtitles?episode_number=5&languages=de&query=the+big+bang+theory&season_number=7
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=K4TUT9usKxZzOoQRyiX%2BqOQaC1CzA93gZRFtJb7jDaNUo0tgQ%2BQ6UQfMtcNEWki1mbS4gn2UhY5zalEx2xAYpdGsALPrfch2q7XfYeAt1B6mWfRN59O8DpU67pQ2Q%2FOgtOkPpC91zPg%3D"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Varnish:
+      - '108039496'
+      alt-svc:
+      - h3=":443"; ma=86400
+    status:
+      code: 301
+      message: Moved Permanently
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br, zstd
+      Api-Key:
+      - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal v2.1
+    method: GET
     uri: https://api.opensubtitles.com/api/v1/subtitles?episode_number=5&languages=de&query=the+big+bang+theory&season_number=7
   response:
     body:
-      string: !!binary |
-        wUBdACD22dQ/XZm9fgGSMAJ0SyntN0Yxz1gT2khynMbENV3fn/z/vIOffmuLCEpM0PGsz5M2kPk4
-        EvDxSRc2w4HIbOrIauKgoy0lBz1x0i9f9Y2M+ifUk2nJQwu2EbMDjYKWDBM5CR9oxRmurCUYGhMM
-        9J9v2AYasliUlVqAIXxOBA2/eQ02dASGQdChvxsr1X1xRAnQaAgMpuFoTi2KvMoZBtrWzTsSnGFN
-        xtmhrW0/GeuogV6ZzhPDuoEObkMMq8lDyyypCsXwPoIykzM4E+zQemiecIaVG/s6uI0PetZYjY5s
-        O9STccHX49B9rspmgmN+YwJBQ3KRxYLHorrnlc5LLeVvMBhbZ1xY0xnN7uG1XjZ+x98/ySq4T446
-        Mp6gcb+mZNe2ya4Z2uR+TaP7TO54ccDzpJB8So737x+TZ6kW8f7JxcHl3cnVZdJQfLf36/5x8QAG
-        GhwPDTB01JrlZz0mwbnMeM65AGqgQq7w3OC+5KC/cVg4k6VkGExP0Bh9bDZhBIMzwxs0dqaps0sT
-        7DhEs1YNJOcxM7yKwtc/l4eQBK8+wDbQQnElC1GMYAseTNaPDYHhk4yDllxkDJxDfLVZ9DS6t6kz
-        S4qu3fhhexs+wdCP75ZqpOPv1xTt2jbaNUMbuXTQKI7uioM8+ivQ4l9E2g3bN6/OSJBVVkmGUPuA
-        WhSlZPBk/DjUk4z1gS4YyBLinJEzTMbREGqNQWVVSqXa0qzMhLAEgjgcu1iIsnuaZ7crleQzw8Z1
-        0FiHMHmdptvtNhknGjhR4v8SA72htJJNicGlRGHAzxEmUFN3dnjzASE1D8lgaOx0XdT5MqLV6KL7
-        9+huPW4j/IXAg3Ghx6eO5szrTksl+RjUaWs9jXxlEqHDp0hlqlKKpSZC2fTMDMBIl5oSqLAlAXAq
-        jhEojljM/xhWtiNXait7U86SpZQ8LxmWDVdYIZ3K5aKFBu/8b55ZJIfuQikplEjpm1dpKhM7aC7R
-        4P1Ux19fxkLGmbjnSnOuZbFk+qLPPMn+eSJ4yadkt9vcms/kQz4h8wzfv7YirzKuqgVx5jcYRWqM
-        E5+PAo9FUeZCiVzv/mGxvdzH/G+e/80=
+      string: '{"total_pages":1,"total_count":2,"per_page":60,"page":1,"data":[{"id":"2748964","type":"subtitle","attributes":{"subtitle_id":"2748964","language":"de","download_count":17595,"new_download_count":111,"hearing_impaired":false,"hd":true,"fps":23.976,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-10-19T09:58:22Z","ai_translated":false,"nb_cd":1,"machine_translated":false,"release":"The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION.de-SC+TV4U","comments":"","legacy_subtitle_id":5230500,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":160627,"feature_type":"Episode","year":2013,"title":"The
+        Workplace Proximity","movie_name":"The Big Bang Theory - S7E5 \"The Big Bang
+        Theory\" The Workplace Proximity","imdb_id":3229392,"tmdb_id":64782,"season_number":7,"episode_number":5,"parent_imdb_id":898266,"parent_title":"The
+        Big Bang Theory","parent_tmdb_id":1418,"parent_feature_id":8620},"url":"https://www.opensubtitles.com/de/subtitles/legacy/5230500","related_links":[{"label":"All
+        subtitles for Tv Show The Big Bang Theory","url":"https://www.opensubtitles.com/de/features/redirect/8620","img_url":"https://s9.opensubtitles.com/features/7/2/6/160627.jpg"},{"label":"All
+        subtitles for Episode the workplace proximity","url":"https://www.opensubtitles.com/de/features/redirect/160627"}],"files":[{"file_id":2822058,"cd_number":1,"file_name":"The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION.de-SC+TV4U"}]}},{"id":"4662161","type":"subtitle","attributes":{"subtitle_id":"4662161","language":"de","download_count":315,"new_download_count":163,"hearing_impaired":true,"hd":true,"fps":23.976,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2018-12-31T06:00:27Z","ai_translated":false,"nb_cd":1,"machine_translated":false,"release":"The.Big.Bang.Theory.S07E05.German.DL.1080p.BluRay.x264","comments":"","legacy_subtitle_id":7593069,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":160627,"feature_type":"Episode","year":2013,"title":"The
+        Workplace Proximity","movie_name":"The Big Bang Theory - S07E05  The Workplace
+        Proximity","imdb_id":3229392,"tmdb_id":64782,"season_number":7,"episode_number":5,"parent_imdb_id":898266,"parent_title":"The
+        Big Bang Theory","parent_tmdb_id":1418,"parent_feature_id":8620},"url":"https://www.opensubtitles.com/de/subtitles/legacy/7593069","related_links":[{"label":"All
+        subtitles for Tv Show The Big Bang Theory","url":"https://www.opensubtitles.com/de/features/redirect/8620","img_url":"https://s9.opensubtitles.com/features/7/2/6/160627.jpg"},{"label":"All
+        subtitles for Episode the workplace proximity","url":"https://www.opensubtitles.com/de/features/redirect/160627"}],"files":[{"file_id":4785161,"cd_number":1,"file_name":"The.Big.Bang.Theory.S07E05.German.DL.1080p.BluRay.x264-iND"}]}}]}'
     headers:
       Access-Control-Allow-Headers:
       - Origin, Authorization, Accept, Api-Key, Content-Type, X-User-Agent
@@ -41,12 +92,10 @@ interactions:
       - GET, HEAD, POST, OPTIONS
       Access-Control-Allow-Origin:
       - '*'
-      Age:
-      - '48859'
       CF-Cache-Status:
-      - HIT
+      - MISS
       CF-RAY:
-      - 883aac50e8f9f0f0-CDG
+      - 88a9966d3a123ce7-CDG
       Cache-Control:
       - public, max-age=86400
       Connection:
@@ -56,9 +105,9 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Tue, 14 May 2024 11:50:52 GMT
+      - Mon, 27 May 2024 22:54:35 GMT
       Last-Modified:
-      - Mon, 13 May 2024 22:16:33 GMT
+      - Mon, 27 May 2024 22:54:35 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       RateLimit-Limit:
@@ -68,7 +117,7 @@ interactions:
       RateLimit-Reset:
       - '1'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=dcjvVmJIz3PtcYZnWgjTVDDLPQklRVjzoPKavDtK4Aaku59fsY91AY2AadQb5BsSVUKu%2BC6RwgGiqkUxHWe9oTwqDK0LbKBri1NvTnmdPiZVbFdTmQpA7LqsqAyP%2BXg3nZJvbLlpJBU%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=QobQNNwc6yPqDg1vf5%2BUgTe5kMXbrGp1smw5bUh0zCNpe405OqDNWjGP2xOpZ3MKoKBgBu0wXytPrIfkeJZcv540zrt99YVTKXCZfCbTBswFu8RK%2BStKL0Bjo%2FQCsjYl1PY1grcFlW0%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -78,7 +127,7 @@ interactions:
       Vary:
       - Accept-Encoding
       X-Cache-Backend:
-      - apigw1_8000 rb7
+      - apigw1_8000 rb11
       X-Content-Type-Options:
       - nosniff
       X-Download-Options:
@@ -88,17 +137,15 @@ interactions:
       X-Kong-Proxy-Latency:
       - '1'
       X-Kong-Upstream-Latency:
-      - '322'
+      - '45'
       X-RateLimit-Limit-Second:
       - '5'
       X-RateLimit-Remaining-Second:
       - '4'
       X-Request-Id:
-      - dae03172-ed45-4024-ae27-50ac1d5d5cf5
+      - b81ffb98-dc2c-4bb3-85db-5236bc58be8b
       X-Runtime:
-      - '0.075396'
-      X-StackifyID:
-      - V1|34fc9055-8702-45ae-a3eb-e890971cdc37|C98087|CD1
+      - '0.043002'
       X-Var-Cache:
       - MISS
       X-Via:
@@ -122,7 +169,7 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Api-Key:
       - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
       Connection:
@@ -132,25 +179,78 @@ interactions:
       User-Agent:
       - Subliminal v2.1
     method: GET
+    uri: https://api.opensubtitles.com/api/v1/subtitles?episode_number=5&languages=de&page=1&query=the+big+bang+theory&season_number=7
+  response:
+    body:
+      string: ''
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Age:
+      - '1'
+      CF-Cache-Status:
+      - HIT
+      CF-RAY:
+      - 88a9966e9b7e99e8-CDG
+      Cache-Control:
+      - public, max-age=86400
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '0'
+      Date:
+      - Mon, 27 May 2024 22:54:35 GMT
+      Location:
+      - /api/v1/subtitles?episode_number=5&languages=de&query=the+big+bang+theory&season_number=7
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=VFwGdBaZr1BIYav54WgJ5ADJTjOdc31C%2BXR3UaxMCFE%2FLCkLoNIK1pmXWp4eqghzLpeHzZYYjPB2EfwNs9jPQUtvwicxC9cst0llyTsXz%2BeYxMPNZ6b%2B%2B7%2BntI5ATgbgGfWbj%2Bc%2BOo0%3D"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Varnish:
+      - '108039496'
+      alt-svc:
+      - h3=":443"; ma=86400
+    status:
+      code: 301
+      message: Moved Permanently
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, br, zstd
+      Api-Key:
+      - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal v2.1
+    method: GET
     uri: https://api.opensubtitles.com/api/v1/subtitles?episode_number=5&languages=de&query=the+big+bang+theory&season_number=7
   response:
     body:
-      string: !!binary |
-        wUBdACD22dQ/XZm9fgGSMAJ0SyntN0Yxz1gT2khynMbENV3fn/z/vIOffmuLCEpM0PGsz5M2kPk4
-        EvDxSRc2w4HIbOrIauKgoy0lBz1x0i9f9Y2M+ifUk2nJQwu2EbMDjYKWDBM5CR9oxRmurCUYGhMM
-        9J9v2AYasliUlVqAIXxOBA2/eQ02dASGQdChvxsr1X1xRAnQaAgMpuFoTi2KvMoZBtrWzTsSnGFN
-        xtmhrW0/GeuogV6ZzhPDuoEObkMMq8lDyyypCsXwPoIykzM4E+zQemiecIaVG/s6uI0PetZYjY5s
-        O9STccHX49B9rspmgmN+YwJBQ3KRxYLHorrnlc5LLeVvMBhbZ1xY0xnN7uG1XjZ+x98/ySq4T446
-        Mp6gcb+mZNe2ya4Z2uR+TaP7TO54ccDzpJB8So737x+TZ6kW8f7JxcHl3cnVZdJQfLf36/5x8QAG
-        GhwPDTB01JrlZz0mwbnMeM65AGqgQq7w3OC+5KC/cVg4k6VkGExP0Bh9bDZhBIMzwxs0dqaps0sT
-        7DhEs1YNJOcxM7yKwtc/l4eQBK8+wDbQQnElC1GMYAseTNaPDYHhk4yDllxkDJxDfLVZ9DS6t6kz
-        S4qu3fhhexs+wdCP75ZqpOPv1xTt2jbaNUMbuXTQKI7uioM8+ivQ4l9E2g3bN6/OSJBVVkmGUPuA
-        WhSlZPBk/DjUk4z1gS4YyBLinJEzTMbREGqNQWVVSqXa0qzMhLAEgjgcu1iIsnuaZ7crleQzw8Z1
-        0FiHMHmdptvtNhknGjhR4v8SA72htJJNicGlRGHAzxEmUFN3dnjzASE1D8lgaOx0XdT5MqLV6KL7
-        9+huPW4j/IXAg3Ghx6eO5szrTksl+RjUaWs9jXxlEqHDp0hlqlKKpSZC2fTMDMBIl5oSqLAlAXAq
-        jhEojljM/xhWtiNXait7U86SpZQ8LxmWDVdYIZ3K5aKFBu/8b55ZJIfuQikplEjpm1dpKhM7aC7R
-        4P1Ux19fxkLGmbjnSnOuZbFk+qLPPMn+eSJ4yadkt9vcms/kQz4h8wzfv7YirzKuqgVx5jcYRWqM
-        E5+PAo9FUeZCiVzv/mGxvdzH/G+e/80=
+      string: '{"total_pages":1,"total_count":2,"per_page":60,"page":1,"data":[{"id":"2748964","type":"subtitle","attributes":{"subtitle_id":"2748964","language":"de","download_count":17595,"new_download_count":111,"hearing_impaired":false,"hd":true,"fps":23.976,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-10-19T09:58:22Z","ai_translated":false,"nb_cd":1,"machine_translated":false,"release":"The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION.de-SC+TV4U","comments":"","legacy_subtitle_id":5230500,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":160627,"feature_type":"Episode","year":2013,"title":"The
+        Workplace Proximity","movie_name":"The Big Bang Theory - S7E5 \"The Big Bang
+        Theory\" The Workplace Proximity","imdb_id":3229392,"tmdb_id":64782,"season_number":7,"episode_number":5,"parent_imdb_id":898266,"parent_title":"The
+        Big Bang Theory","parent_tmdb_id":1418,"parent_feature_id":8620},"url":"https://www.opensubtitles.com/de/subtitles/legacy/5230500","related_links":[{"label":"All
+        subtitles for Tv Show The Big Bang Theory","url":"https://www.opensubtitles.com/de/features/redirect/8620","img_url":"https://s9.opensubtitles.com/features/7/2/6/160627.jpg"},{"label":"All
+        subtitles for Episode the workplace proximity","url":"https://www.opensubtitles.com/de/features/redirect/160627"}],"files":[{"file_id":2822058,"cd_number":1,"file_name":"The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION.de-SC+TV4U"}]}},{"id":"4662161","type":"subtitle","attributes":{"subtitle_id":"4662161","language":"de","download_count":315,"new_download_count":163,"hearing_impaired":true,"hd":true,"fps":23.976,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2018-12-31T06:00:27Z","ai_translated":false,"nb_cd":1,"machine_translated":false,"release":"The.Big.Bang.Theory.S07E05.German.DL.1080p.BluRay.x264","comments":"","legacy_subtitle_id":7593069,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":160627,"feature_type":"Episode","year":2013,"title":"The
+        Workplace Proximity","movie_name":"The Big Bang Theory - S07E05  The Workplace
+        Proximity","imdb_id":3229392,"tmdb_id":64782,"season_number":7,"episode_number":5,"parent_imdb_id":898266,"parent_title":"The
+        Big Bang Theory","parent_tmdb_id":1418,"parent_feature_id":8620},"url":"https://www.opensubtitles.com/de/subtitles/legacy/7593069","related_links":[{"label":"All
+        subtitles for Tv Show The Big Bang Theory","url":"https://www.opensubtitles.com/de/features/redirect/8620","img_url":"https://s9.opensubtitles.com/features/7/2/6/160627.jpg"},{"label":"All
+        subtitles for Episode the workplace proximity","url":"https://www.opensubtitles.com/de/features/redirect/160627"}],"files":[{"file_id":4785161,"cd_number":1,"file_name":"The.Big.Bang.Theory.S07E05.German.DL.1080p.BluRay.x264-iND"}]}}]}'
     headers:
       Access-Control-Allow-Headers:
       - Origin, Authorization, Accept, Api-Key, Content-Type, X-User-Agent
@@ -159,11 +259,11 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Age:
-      - '48859'
+      - '0'
       CF-Cache-Status:
       - HIT
       CF-RAY:
-      - 883aac51292cf0f0-CDG
+      - 88a9966f5c7499c8-CDG
       Cache-Control:
       - public, max-age=86400
       Connection:
@@ -173,9 +273,9 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Tue, 14 May 2024 11:50:52 GMT
+      - Mon, 27 May 2024 22:54:35 GMT
       Last-Modified:
-      - Mon, 13 May 2024 22:16:33 GMT
+      - Mon, 27 May 2024 22:54:35 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       RateLimit-Limit:
@@ -185,7 +285,7 @@ interactions:
       RateLimit-Reset:
       - '1'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=EF3IhaEQw0F6dNxTRcaSkMa6GYt%2F7nOTVouV241NJrdbZFzggHSMkrUksAgBulVaOeJRb0F7urdaBKRj3e48T6BjsHYZF6HSZd3RXweL2jPzwQSR6Dc4Mr9g%2BD5XvT6HBLGBNYAItwU%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=s48Dm4lRhMKSebQU9tJCQM%2FMgxFLlJlfjsRyNRFozdtPLP7ae7FKOuN3fbfq%2B2oKi8G0fw%2F1NX1j1yn2uB3OWswSsGAcTDGoedbohd0kVa1HZid29DX3mAwHIPnmRxfz%2FI4XDcwLkPs%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -195,7 +295,7 @@ interactions:
       Vary:
       - Accept-Encoding
       X-Cache-Backend:
-      - apigw1_8000 rb7
+      - apigw1_8000 rb11
       X-Content-Type-Options:
       - nosniff
       X-Download-Options:
@@ -205,17 +305,15 @@ interactions:
       X-Kong-Proxy-Latency:
       - '1'
       X-Kong-Upstream-Latency:
-      - '322'
+      - '45'
       X-RateLimit-Limit-Second:
       - '5'
       X-RateLimit-Remaining-Second:
       - '4'
       X-Request-Id:
-      - dae03172-ed45-4024-ae27-50ac1d5d5cf5
+      - b81ffb98-dc2c-4bb3-85db-5236bc58be8b
       X-Runtime:
-      - '0.075396'
-      X-StackifyID:
-      - V1|34fc9055-8702-45ae-a3eb-e890971cdc37|C98087|CD1
+      - '0.043002'
       X-Var-Cache:
       - MISS
       X-Via:

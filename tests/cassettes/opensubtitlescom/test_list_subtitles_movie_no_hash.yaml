@@ -5,7 +5,7 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Api-Key:
       - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
       Connection:
@@ -15,140 +15,72 @@ interactions:
       User-Agent:
       - Subliminal v2.1
     method: GET
-    uri: https://api.opensubtitles.com/api/v1/subtitles?languages=de&query=enders+game
+    uri: https://api.opensubtitles.com/api/v1/subtitles?languages=de&page=1&query=enders+game
   response:
     body:
-      string: !!binary |
-        wRBoACD+t1Q7XT0vux1JfNQsbltaZYj1rTCqAzhO0/wfNpADPfMjOD46sD9ubV3b5hh0tUGWrWFh
-        FvgVUBj2IlqCJRKApUOcuxst+syk6Bpz1H+EWWzHAZrEhjZ1oB7QucDCnsIKupICn94UCbQ2Wug/
-        13AtNJq8KcscAvFyYWiEw2l0cWAI+EAGff1jGpMUy+MHjZYhoBiW5RmLoiaBiY/m10ejuhE4Y+vd
-        1Bk3LtZ5bqH3dggscNZCR39ggf0SoFWeNnUlcD5HjV/e2+imLkCTTKXA3s+jif4QYkZ32M+eXTeZ
-        xfoYzDwNlzxEh0We129tZGgoSUUi80RWX6nSeaVV/RsC1pn5LSwZbM6m6dTsWqvjvk8iEr5Xnge2
-        gaHxbGrZh/SFHTl9akPa+TkETr8sjod0cBAPkD59m5LcyiV9PBw+28v0QlVF8uznp2/ui/v6DAKB
-        8HRoQGDgzu4ujVscy7KmrVIEUEkR+5U9lVVeUqn6luyhr0F1dpUrVQhMdmRoTHycnNdjIODt1EPD
-        vNJVoC8UrhlTHggQ/DUQZmlb1Q2RouC61rv53DEELtl6aCUpF4g2ZKYT74bNCzsyBMb53LERZ3tK
-        Ur5JNmQqN7ansh9DdU5UkED89p5bqepiFTj4ARpnMS5BZ9nxeEznhSe7JYUFRyBrOTuzM+NxMmOy
-        4McDbOTWDG7qw98meG4dHaHxaBg2iZM3MyCJ1CB08RAAaGsZMiUpT3IhJiEZ48bObCqF5oEs7RUy
-        ypqszhwQPIeQXus/gb0bWHrJ3sXKWiRVXhMJ7Foz4bQAQAANMjvQxyJ0duQkMu2w/ltXARoULmSh
-        Kpw0phUZpEpVp6rcAlxAd1L5Ibb/Q5KJkl+V0nKrqZikJOXIsA++fHz0+c2XIxW2VVFXTbYSEHS5
-        2qrtZnNI7CHO27UfLcvgdja6edpMyu6Ph31AB2jT78qK7KIqmjjFaChsrD5vylxVZ4CkMa26KGu5
-        rajUFlZaxHD+cLgBz3+RJK1qXRaNrVX1xS8BNQWYQJt+Wyoz+lI1ch3vwDVb/63rvxU=
+      string: ''
     headers:
-      Access-Control-Allow-Headers:
-      - Origin, Authorization, Accept, Api-Key, Content-Type, X-User-Agent
-      Access-Control-Allow-Methods:
-      - GET, HEAD, POST, OPTIONS
       Access-Control-Allow-Origin:
       - '*'
-      Age:
-      - '48856'
       CF-Cache-Status:
-      - HIT
+      - MISS
       CF-RAY:
-      - 883aac53fd33f170-CDG
+      - 88a996799be699ee-CDG
       Cache-Control:
       - public, max-age=86400
       Connection:
       - keep-alive
-      Content-Encoding:
-      - br
-      Content-Type:
-      - application/json; charset=utf-8
+      Content-Length:
+      - '0'
       Date:
-      - Tue, 14 May 2024 11:50:52 GMT
-      Last-Modified:
-      - Mon, 13 May 2024 22:16:36 GMT
+      - Mon, 27 May 2024 22:54:37 GMT
+      Location:
+      - /api/v1/subtitles?languages=de&query=enders+game
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
-      RateLimit-Limit:
-      - '5'
-      RateLimit-Remaining:
-      - '3'
-      RateLimit-Reset:
-      - '1'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=qaFOpy3yTZ03qJmUdhhxHedUBp08B3flfLuwnaO0NTqrOm9OwAMxT5Az4LHbkFTnKEJgI3JaoWGbELdHNjZdgW2DNUI4TxprDDKs2%2F9X1NUeHYQU%2Bc0uMdp6ATU9L7b%2FzK5JuRL%2B2%2Fw%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=JBzxxbeDNt2UBCwhk4KKkFW3yWFmNkzvhy5SbFiIZTzjIdRgSRPjqFgVaMCR%2BDue0chNyuvPmaKiGkpll6hfqGv%2Boi0Myk0%2Bx2Kf6nt2qe52t0tMqnmDrsTUBUWtEaA%2Br8n4f4wWrEE%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
       - max-age=15552000; includeSubDomains; preload
-      Transfer-Encoding:
-      - chunked
       Vary:
       - Accept-Encoding
-      X-Cache-Backend:
-      - apigw1_8000 rb7
       X-Content-Type-Options:
       - nosniff
-      X-Download-Options:
-      - noopen
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Kong-Proxy-Latency:
-      - '1'
-      X-Kong-Upstream-Latency:
-      - '309'
-      X-RateLimit-Limit-Second:
-      - '5'
-      X-RateLimit-Remaining-Second:
-      - '3'
-      X-Request-Id:
-      - 2943783a-11a7-4d95-bedd-57f774054173
-      X-Runtime:
-      - '0.051178'
-      X-StackifyID:
-      - V1|50946b4d-13e7-49be-9dec-acbede6557ed|C98087|CD1
-      X-Var-Cache:
-      - MISS
-      X-Via:
-      - fw1
-      X-Vip:
-      - 'false'
-      X-Vip-Consumer:
-      - 'false'
-      X-Vip-User:
-      - 'false'
-      X-XSS-Protection:
-      - 1; mode=block
+      X-Varnish:
+      - '77868616'
       alt-svc:
       - h3=":443"; ma=86400
     status:
-      code: 200
-      message: OK
+      code: 301
+      message: Moved Permanently
 - request:
     body: null
     headers:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Api-Key:
       - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
       Connection:
       - keep-alive
-      Content-Type:
-      - application/json
       User-Agent:
       - Subliminal v2.1
     method: GET
     uri: https://api.opensubtitles.com/api/v1/subtitles?languages=de&query=enders+game
   response:
     body:
-      string: !!binary |
-        wRBoACD+t1Q7XT0vux1JfNQsbltaZYj1rTCqAzhO0/wfNpADPfMjOD46sD9ubV3b5hh0tUGWrWFh
-        FvgVUBj2IlqCJRKApUOcuxst+syk6Bpz1H+EWWzHAZrEhjZ1oB7QucDCnsIKupICn94UCbQ2Wug/
-        13AtNJq8KcscAvFyYWiEw2l0cWAI+EAGff1jGpMUy+MHjZYhoBiW5RmLoiaBiY/m10ejuhE4Y+vd
-        1Bk3LtZ5bqH3dggscNZCR39ggf0SoFWeNnUlcD5HjV/e2+imLkCTTKXA3s+jif4QYkZ32M+eXTeZ
-        xfoYzDwNlzxEh0We129tZGgoSUUi80RWX6nSeaVV/RsC1pn5LSwZbM6m6dTsWqvjvk8iEr5Xnge2
-        gaHxbGrZh/SFHTl9akPa+TkETr8sjod0cBAPkD59m5LcyiV9PBw+28v0QlVF8uznp2/ui/v6DAKB
-        8HRoQGDgzu4ujVscy7KmrVIEUEkR+5U9lVVeUqn6luyhr0F1dpUrVQhMdmRoTHycnNdjIODt1EPD
-        vNJVoC8UrhlTHggQ/DUQZmlb1Q2RouC61rv53DEELtl6aCUpF4g2ZKYT74bNCzsyBMb53LERZ3tK
-        Ur5JNmQqN7ansh9DdU5UkED89p5bqepiFTj4ARpnMS5BZ9nxeEznhSe7JYUFRyBrOTuzM+NxMmOy
-        4McDbOTWDG7qw98meG4dHaHxaBg2iZM3MyCJ1CB08RAAaGsZMiUpT3IhJiEZ48bObCqF5oEs7RUy
-        ypqszhwQPIeQXus/gb0bWHrJ3sXKWiRVXhMJ7Foz4bQAQAANMjvQxyJ0duQkMu2w/ltXARoULmSh
-        Kpw0phUZpEpVp6rcAlxAd1L5Ibb/Q5KJkl+V0nKrqZikJOXIsA++fHz0+c2XIxW2VVFXTbYSEHS5
-        2qrtZnNI7CHO27UfLcvgdja6edpMyu6Ph31AB2jT78qK7KIqmjjFaChsrD5vylxVZ4CkMa26KGu5
-        rajUFlZaxHD+cLgBz3+RJK1qXRaNrVX1xS8BNQWYQJt+Wyoz+lI1ch3vwDVb/63rvxU=
+      string: '{"total_pages":1,"total_count":3,"per_page":60,"page":1,"data":[{"id":"939553","type":"subtitle","attributes":{"subtitle_id":"939553","language":"de","download_count":4471,"new_download_count":184,"hearing_impaired":false,"hd":true,"fps":23.976,"votes":1,"ratings":10.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2014-03-06T16:36:27Z","ai_translated":false,"nb_cd":1,"machine_translated":false,"release":"Enders.Game.Das.grosse.Spiel.German.DL.1080p.BluRay.x264-EXQUiSiTE","comments":"","legacy_subtitle_id":5571822,"legacy_uploader_id":1563515,"uploader":{"uploader_id":63224,"name":"newkinds","rank":"trusted"},"feature_details":{"feature_id":586791,"feature_type":"Movie","year":2013,"title":"Ender''s
+        Game","movie_name":"2013 - Ender''s Game","imdb_id":1731141,"tmdb_id":80274},"url":"https://www.opensubtitles.com/de/subtitles/legacy/5571822","related_links":[{"label":"All
+        subtitles for ender''s game","url":"https://www.opensubtitles.com/de/movies/2013-ender-s-game","img_url":"https://s9.opensubtitles.com/features/1/9/7/586791.jpg"}],"files":[{"file_id":1023711,"cd_number":1,"file_name":"endersgame-1080p"}]}},{"id":"940426","type":"subtitle","attributes":{"subtitle_id":"940426","language":"de","download_count":1252,"new_download_count":68,"hearing_impaired":false,"hd":true,"fps":0.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2014-10-20T22:08:17Z","ai_translated":false,"nb_cd":1,"machine_translated":false,"release":"Enders.Game.2013.1080p.BluRay.x264-SPARKS","comments":"","legacy_subtitle_id":5864769,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":586791,"feature_type":"Movie","year":2013,"title":"Ender''s
+        Game","movie_name":"2013 - Ender''s Game","imdb_id":1731141,"tmdb_id":80274},"url":"https://www.opensubtitles.com/de/subtitles/legacy/5864769","related_links":[{"label":"All
+        subtitles for ender''s game","url":"https://www.opensubtitles.com/de/movies/2013-ender-s-game","img_url":"https://s9.opensubtitles.com/features/1/9/7/586791.jpg"}],"files":[{"file_id":1024649,"cd_number":1,"file_name":"Enders.Game.2013.1080p.BluRay.x264-SPARKS"}]}},{"id":"939532","type":"subtitle","attributes":{"subtitle_id":"939532","language":"de","download_count":570,"new_download_count":25,"hearing_impaired":true,"hd":true,"fps":23.976,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2014-03-06T01:27:57Z","ai_translated":false,"nb_cd":1,"machine_translated":false,"release":"Enders.Game.Das.grosse.Spiel.German.720p.BluRay.x264-EXQUiSiTE","comments":"","legacy_subtitle_id":5571194,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":586791,"feature_type":"Movie","year":2013,"title":"Ender''s
+        Game","movie_name":"2013 - Ender''s Game","imdb_id":1731141,"tmdb_id":80274},"url":"https://www.opensubtitles.com/de/subtitles/legacy/5571194","related_links":[{"label":"All
+        subtitles for ender''s game","url":"https://www.opensubtitles.com/de/movies/2013-ender-s-game","img_url":"https://s9.opensubtitles.com/features/1/9/7/586791.jpg"}],"files":[{"file_id":1023690,"cd_number":1,"file_name":"Enders.Game.Das.grosse.Spiel.German.720p.BluRay.x264-EXQUiSiTE"}]}}]}'
     headers:
       Access-Control-Allow-Headers:
       - Origin, Authorization, Accept, Api-Key, Content-Type, X-User-Agent
@@ -156,12 +88,10 @@ interactions:
       - GET, HEAD, POST, OPTIONS
       Access-Control-Allow-Origin:
       - '*'
-      Age:
-      - '48856'
       CF-Cache-Status:
-      - HIT
+      - MISS
       CF-RAY:
-      - 883aac544d8ef170-CDG
+      - 88a9967aa8622173-CDG
       Cache-Control:
       - public, max-age=86400
       Connection:
@@ -171,19 +101,19 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Tue, 14 May 2024 11:50:52 GMT
+      - Mon, 27 May 2024 22:54:37 GMT
       Last-Modified:
-      - Mon, 13 May 2024 22:16:36 GMT
+      - Mon, 27 May 2024 22:54:37 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       RateLimit-Limit:
       - '5'
       RateLimit-Remaining:
-      - '3'
+      - '4'
       RateLimit-Reset:
       - '1'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=uc9GaD6yFSGAJhp1pVj8vff5jYYWrx4A7iSBNfJygNqkg5xiPAhgkImclVuTk01TmwjsJTrZQAlJhl48De5gxyAns2ZGNfm4MtCnzyznp%2F%2BgCrd7PBSx9bXwDroPSkrlvvf9ZQ4SbR8%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=YI9iCxul%2BiTdhl%2Fd3JpXZzC5AYqtTJrcWYYxd5JpqrmfsTySlpbYhF6ftj4YQOHthjI4%2FEWt1SSExIElV5HijQ4T07ryCwM1eWnGtTh8Kp%2BWOxQbGEgMZKHqOxrp1Ngqz31uDlX5L3E%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -193,7 +123,7 @@ interactions:
       Vary:
       - Accept-Encoding
       X-Cache-Backend:
-      - apigw1_8000 rb7
+      - apigw1_8000 rb11
       X-Content-Type-Options:
       - nosniff
       X-Download-Options:
@@ -203,17 +133,15 @@ interactions:
       X-Kong-Proxy-Latency:
       - '1'
       X-Kong-Upstream-Latency:
-      - '309'
+      - '28'
       X-RateLimit-Limit-Second:
       - '5'
       X-RateLimit-Remaining-Second:
-      - '3'
+      - '4'
       X-Request-Id:
-      - 2943783a-11a7-4d95-bedd-57f774054173
+      - 654b3b57-1125-4de3-bd0d-95f4de8468a2
       X-Runtime:
-      - '0.051178'
-      X-StackifyID:
-      - V1|50946b4d-13e7-49be-9dec-acbede6557ed|C98087|CD1
+      - '0.026893'
       X-Var-Cache:
       - MISS
       X-Via:

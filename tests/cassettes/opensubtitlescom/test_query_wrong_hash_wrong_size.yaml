@@ -5,7 +5,7 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Api-Key:
       - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
       Connection:
@@ -15,7 +15,7 @@ interactions:
       User-Agent:
       - Subliminal v2.1
     method: GET
-    uri: https://api.opensubtitles.com/api/v1/subtitles?languages=en&moviehash=123456787654321
+    uri: https://api.opensubtitles.com/api/v1/subtitles?languages=en&moviehash=123456787654321&page=1
   response:
     body:
       string: ''
@@ -23,11 +23,11 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Age:
-      - '48860'
+      - '54'
       CF-Cache-Status:
       - HIT
       CF-RAY:
-      - 883aac4fafbb3cad-CDG
+      - 88a997be3bed99b0-CDG
       Cache-Control:
       - public, max-age=86400
       Connection:
@@ -35,11 +35,13 @@ interactions:
       Content-Length:
       - '0'
       Date:
-      - Tue, 14 May 2024 11:50:52 GMT
+      - Mon, 27 May 2024 22:55:28 GMT
+      Location:
+      - /api/v1/subtitles?languages=en&moviehash=123456787654321
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=CqiykDB2mvzFut%2FOrrpDc5QZHdEqD296XJXBAZju1NFCr7elUt1OUCBf%2BJPG9IIPn6nXGMRPPdOH2jZUgsmrgmxW9wULI6jOutI7cXkBfYjtuAaL7Ek45JSXo8ygPmjZAv0A%2FkEmHvo%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=ecIeYUvbUKBLskCFaNftQYFtrnEq5R14h83Zqyks86%2Fpf1Y%2BRLEokQo54evQfdSQH2mzPWIu2YtfBOAHAW90Lpt1NggpeJ4KmQw43epMNiiCw%2BdZn06LhbNXsFBm2O4TqR9pzjGLCYc%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -48,28 +50,24 @@ interactions:
       - Accept-Encoding
       X-Content-Type-Options:
       - nosniff
-      X-Reason:
-      - Request parameters does not make sense, moviehash is wrong
       X-Varnish:
-      - '5104067'
+      - '91158584'
       alt-svc:
       - h3=":443"; ma=86400
     status:
-      code: 400
-      message: Bad Request
+      code: 301
+      message: Moved Permanently
 - request:
     body: null
     headers:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Api-Key:
       - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
       Connection:
       - keep-alive
-      Content-Type:
-      - application/json
       User-Agent:
       - Subliminal v2.1
     method: GET
@@ -81,11 +79,11 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Age:
-      - '48860'
+      - '55'
       CF-Cache-Status:
       - HIT
       CF-RAY:
-      - 883aac4fffff3cad-CDG
+      - 88a997bfee2f99eb-CDG
       Cache-Control:
       - public, max-age=86400
       Connection:
@@ -93,11 +91,11 @@ interactions:
       Content-Length:
       - '0'
       Date:
-      - Tue, 14 May 2024 11:50:52 GMT
+      - Mon, 27 May 2024 22:55:29 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=7ORzJp2vZ%2FlBWaM8d9hQhB2a2%2FIAcnRxNQVvKBj1ihyL2yn3M%2Fk2CS5ToUNcL%2FV3bmLedgosFRLz8d4dVlJ3s8gBhah9F7D%2FISNGL2rnkZpj0tLTQf8zKtR%2BZkdE9jJqCA8%2Bq3DMwJ8%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=xk%2Bgtl%2BV5wqogbCM5nnrWbulDk5GeJQSESAm1AoIteCWxZWpib0qVeULYsLd2iffeUhV3xzs0927RORVRs%2B5dwiBShQhWFSrkh9wsQ%2BS7IBROJx3EQOIxkJvRBJoTU4Jk%2Fa4PWIYKoE%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -109,7 +107,7 @@ interactions:
       X-Reason:
       - Request parameters does not make sense, moviehash is wrong
       X-Varnish:
-      - '5104067'
+      - '89607968'
       alt-svc:
       - h3=":443"; ma=86400
     status:

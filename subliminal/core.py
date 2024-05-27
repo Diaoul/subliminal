@@ -228,7 +228,7 @@ class ProviderPool:
                 break
 
             # stop if only one subtitle is requested
-            if only_one:
+            if only_one and len(downloaded_subtitles) > 0:
                 logger.debug('Only one subtitle downloaded')
                 break
 

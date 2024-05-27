@@ -28,7 +28,7 @@ logger = logging.getLogger(__name__)
 language_converters.register('opensubtitlescom = subliminal.converters.opensubtitlescom:OpenSubtitlesComConverter')
 
 #: Opensubtitles.com API key for subliminal
-OPENSUBTITLESCOM_API_KEY = "mij33pjc3kOlup1qOKxnWWxvle2kFbMH"
+OPENSUBTITLESCOM_API_KEY = 'mij33pjc3kOlup1qOKxnWWxvle2kFbMH'
 
 #: Expiration time for token
 DEFAULT_EXPIRATION_TIME = timedelta(days=1).total_seconds()
@@ -48,18 +48,20 @@ urls_expire_after = {
 
 def sanitize_id(imdb_id):
     if imdb_id is None:
-        return ""
+        return ''
     imdb_id = str(imdb_id).lower().lstrip('tt')
     return str(int(imdb_id))
 
+
 def decorate_imdb_id(imdb_id):
     if imdb_id is None:
-        return ""
-    return 'tt' + str(int(imdb_id)).rjust(7, "0")
+        return ''
+    return 'tt' + str(int(imdb_id)).rjust(7, '0')
 
 
 class OpenSubtitlesComSubtitle(Subtitle):
     """OpenSubtitles.com Subtitle."""
+
     provider_name = 'opensubtitlescom'
 
     def __init__(
@@ -67,33 +69,33 @@ class OpenSubtitlesComSubtitle(Subtitle):
         language,
         hearing_impaired,
         *,
-        subtitle_id = None,
-        movie_kind = None,
-        movie_hash = None,
-        download_count = None,
-        fps = None,
-        from_trusted = None,
-        uploader_rank = None,
-        foreign_parts_only = None,
-        machine_translated = None,
-        release = None,
-        movie_title = None,
-        movie_full_name = None,
-        movie_year = None,
-        movie_imdb_id = None,
-        movie_tmdb_id = None,
-        series_season = None,
-        series_episode = None,
-        series_title = None,
-        series_imdb_id = None,
-        series_tmdb_id = None,
-        imdb_match = False,
-        tmdb_match = False,
-        moviehash_match = False,
-        file_id = None,
-        file_name = None,
+        subtitle_id=None,
+        movie_kind=None,
+        movie_hash=None,
+        download_count=None,
+        fps=None,
+        from_trusted=None,
+        uploader_rank=None,
+        foreign_parts_only=None,
+        machine_translated=None,
+        release=None,
+        movie_title=None,
+        movie_full_name=None,
+        movie_year=None,
+        movie_imdb_id=None,
+        movie_tmdb_id=None,
+        series_season=None,
+        series_episode=None,
+        series_title=None,
+        series_imdb_id=None,
+        series_tmdb_id=None,
+        imdb_match=False,
+        tmdb_match=False,
+        moviehash_match=False,
+        file_id=None,
+        file_name=None,
     ):
-        super().__init__(language, hearing_impaired=hearing_impaired, page_link="", encoding="utf-8")
+        super().__init__(language, hearing_impaired=hearing_impaired, page_link='', encoding='utf-8')
         self.subtitle_id = subtitle_id
         self.movie_kind = movie_kind
         self.movie_hash = movie_hash
@@ -134,17 +136,21 @@ class OpenSubtitlesComSubtitle(Subtitle):
 
     def get_matches(self, video):
         if (isinstance(video, Episode) and self.movie_kind != 'episode') or (
-                isinstance(video, Movie) and self.movie_kind != 'movie'):
+            isinstance(video, Movie) and self.movie_kind != 'movie'
+        ):
             logger.info('%r is not a valid movie_kind', self.movie_kind)
             return set()
 
-        matches = guess_matches(video, {
-            'title': self.series_title if self.movie_kind == 'episode' else self.movie_title,
-            'episode_title': self.movie_title if self.movie_kind == 'episode' else None,
-            'year': self.movie_year,
-            'season': self.series_season,
-            'episode': self.series_episode
-        })
+        matches = guess_matches(
+            video,
+            {
+                'title': self.series_title if self.movie_kind == 'episode' else self.movie_title,
+                'episode_title': self.movie_title if self.movie_kind == 'episode' else None,
+                'year': self.movie_year,
+                'season': self.series_season,
+                'episode': self.series_episode,
+            },
+        )
 
         # tag
         if not video.imdb_id or self.movie_imdb_id == video.imdb_id:
@@ -179,10 +185,11 @@ class OpenSubtitlesComProvider(Provider):
     :param str password: password.
 
     """
+
     server_url = 'https://api.opensubtitles.com/api/v1/'
     subtitle_class = OpenSubtitlesComSubtitle
     user_agent = 'Subliminal v%s' % __short_version__
-    sub_format = "srt"
+    sub_format = 'srt'
 
     def __init__(self, username=None, password=None, *, apikey=None):
         if any((username, password)) and not all((username, password)):
@@ -200,8 +207,8 @@ class OpenSubtitlesComProvider(Provider):
         self.session = Session()
         self.session.headers['User-Agent'] = self.user_agent
         self.session.headers['Api-Key'] = self.apikey
-        self.session.headers['Accept'] = "*/*"
-        self.session.headers['Content-Type'] = "application/json"
+        self.session.headers['Accept'] = '*/*'
+        self.session.headers['Content-Type'] = 'application/json'
 
         if self.check_token():
             self.session.headers['Authorization'] = 'Bearer ' + str(self.token)
@@ -227,7 +234,7 @@ class OpenSubtitlesComProvider(Provider):
             self.session.headers['Authorization'] = 'Bearer ' + str(self.token)
             return True
 
-        token = region.get("oscom_token", expiration_time=TOKEN_EXPIRATION_TIME)
+        token = region.get('oscom_token', expiration_time=TOKEN_EXPIRATION_TIME)
         if token is NO_VALUE:
             return False
 
@@ -254,13 +261,13 @@ class OpenSubtitlesComProvider(Provider):
             r = checked(r)
         except ProviderError:
             # raise error
-            logger.exception("An error occurred")
+            logger.exception('An error occurred')
             raise
 
         ret = r.json()
-        self.token = ret["token"]
+        self.token = ret['token']
         if self.token:
-            region.set("oscom_token", self.token)
+            region.set('oscom_token', self.token)
             self.session.headers['Authorization'] = 'Bearer ' + str(self.token)
             self.token_expires_at = datetime.now(timezone.utc) + timedelta(hours=24)
 
@@ -275,7 +282,7 @@ class OpenSubtitlesComProvider(Provider):
     @staticmethod
     def reset_token():
         logger.debug('Authentication failed: clearing cache and attempting to login.')
-        region.delete("oscom_token")
+        region.delete('oscom_token')
         return
 
     def try_login(self):
@@ -284,7 +291,7 @@ class OpenSubtitlesComProvider(Provider):
             self.login()
 
             if not self.check_token():
-                logger.info("Cannot authenticate with username and password")
+                logger.info('Cannot authenticate with username and password')
                 return False
         return True
 
@@ -311,7 +318,7 @@ class OpenSubtitlesComProvider(Provider):
             r = self.session.post(self.server_url + path, json=body)
             r = checked(r)
         except ProviderError:
-            logger.exception("An error occurred")
+            logger.exception('An error occurred')
             return {}
 
         return r.json()
@@ -330,7 +337,7 @@ class OpenSubtitlesComProvider(Provider):
             r = self.session.get(self.server_url + path, params=params)
             r = checked(r)
         except ProviderError:
-            logger.exception("An error occurred")
+            logger.exception('An error occurred')
             return {}
 
         return r.json()
@@ -372,45 +379,45 @@ class OpenSubtitlesComProvider(Provider):
         if season and episode:
             criterion.update({'season_number': season, 'episode_number': episode})
         if year:
-            criterion.update({"year": year})
+            criterion.update({'year': year})
 
         # return a list of criteria
         if not criterion:
             return []
 
         criteria = [criterion]
-        if "id" in criterion:
-            criteria.append({"id": criterion["id"]})
-        if "imdb_id" in criterion:
-            criteria.append({"imdb_id": criterion["imdb_id"]})
-        if "tmdb_id" in criterion:
-            criteria.append({"tmdb_id": criterion["tmdb_id"]})
-        if "moviehash" in criterion:
-            criteria.append({"moviehash": criterion["moviehash"]})
-        if "query" in criterion:
-            if "season_number" in criterion and "episode_number" in criterion:
+        if 'id' in criterion:
+            criteria.append({'id': criterion['id']})
+        if 'imdb_id' in criterion:
+            criteria.append({'imdb_id': criterion['imdb_id']})
+        if 'tmdb_id' in criterion:
+            criteria.append({'tmdb_id': criterion['tmdb_id']})
+        if 'moviehash' in criterion:
+            criteria.append({'moviehash': criterion['moviehash']})
+        if 'query' in criterion:
+            if 'season_number' in criterion and 'episode_number' in criterion:
                 criteria.append({
-                    "query": criterion["query"],
-                    "season_number": criterion["season_number"],
-                    "episode_number": criterion["episode_number"],
+                    'query': criterion['query'],
+                    'season_number': criterion['season_number'],
+                    'episode_number': criterion['episode_number'],
                 })
             else:
-                criteria.append({"query": criterion["query"]})
+                criteria.append({'query': criterion['query']})
 
         return criteria
 
     def _parse_single_response(self, subtitle_item, imdb_match=False, tmdb_match=False):
         # read the item
-        attributes = subtitle_item.get("attributes", {})
-        feature_details = attributes.get("feature_details", {})
+        attributes = subtitle_item.get('attributes', {})
+        feature_details = attributes.get('feature_details', {})
 
-        opensubtitles_id = int(subtitle_item.get("id"))
+        opensubtitles_id = int(subtitle_item.get('id'))
         language = Language.fromopensubtitlescom(str(attributes.get('language')))
         download_count = int(attributes.get('download_count'))
         fps = float(attributes.get('fps'))
         hearing_impaired = bool(int(attributes.get('hearing_impaired')))
         from_trusted = bool(int(attributes.get('from_trusted')))
-        uploader_rank = str(attributes.get('uploader', {}).get("rank"))
+        uploader_rank = str(attributes.get('uploader', {}).get('rank'))
         foreign_parts_only = bool(int(attributes.get('foreign_parts_only')))
         machine_translated = bool(int(attributes.get('machine_translated')))
         release = str(attributes.get('release'))
@@ -429,14 +436,13 @@ class OpenSubtitlesComProvider(Provider):
         parent_imdb_id = decorate_imdb_id(feature_details.get('parent_imdb_id'))
         parent_tmdb_id = feature_details.get('parent_tmdb_id')
 
-        files = attributes.get("files", [])
+        files = attributes.get('files', [])
         if len(files) == 0:
-            srt_file = {"file_id": 0, "file_name": ""}
+            srt_file = {'file_id': 0, 'file_name': ''}
         else:
             srt_file = files[0]
-        file_id = int(srt_file.get("file_id"))
-        file_name = str(srt_file.get("file_name"))
-
+        file_id = int(srt_file.get('file_id'))
+        file_name = str(srt_file.get('file_name'))
 
         return self.subtitle_class(
             language,
@@ -505,17 +511,17 @@ class OpenSubtitlesComProvider(Provider):
             # add the language and query the server
             criterion.update({'languages': ','.join(sorted(l.opensubtitlescom for l in languages))})
             if page is not None:
-                criterion.update({"page": page})
+                criterion.update({'page': page})
 
             # query the server
             logger.info('Searching subtitles %r', criterion)
-            response = self.api_get("subtitles", criterion)
+            response = self.api_get('subtitles', criterion)
 
             if not response or not response['data']:
                 continue
 
-            imdb_match = "imdb_id" in criterion or "show_imdb_id" in criterion
-            tmdb_match = "tmdb_id" in criterion or "show_tmdb_id" in criterion
+            imdb_match = 'imdb_id' in criterion or 'show_imdb_id' in criterion
+            tmdb_match = 'tmdb_id' in criterion or 'show_tmdb_id' in criterion
 
             # loop over subtitle items
             for subtitle_item in response['data']:
@@ -557,16 +563,16 @@ class OpenSubtitlesComProvider(Provider):
 
         # get the subtitle download link
         logger.info('Downloading subtitle %r', subtitle)
-        body = {"file_id": subtitle.file_id, "file_name": subtitle.file_name, "sub_format": self.sub_format}
-        r = self.api_post("download", body)
+        body = {'file_id': subtitle.file_id, 'file_name': subtitle.file_name, 'sub_format': self.sub_format}
+        r = self.api_post('download', body)
 
-        link = r["link"]
-        remaining = int(r["remaining"])
-        reset_time_utc = r["reset_time_utc"]
+        link = r['link']
+        remaining = int(r['remaining'])
+        reset_time_utc = r['reset_time_utc']
 
         # detect download limit exceeded
         if remaining <= 0:
-            logger.error("download quota exceeded, quota reset on %s UTC", reset_time_utc)
+            logger.error('download quota exceeded, quota reset on %s UTC', reset_time_utc)
             raise DownloadLimitReached
 
         # download the subtitle
@@ -583,47 +589,56 @@ class OpenSubtitlesComProvider(Provider):
 
 class OpenSubtitlesComVipSubtitle(OpenSubtitlesComSubtitle):
     """OpenSubtitles.com VIP Subtitle."""
+
     provider_name = 'opensubtitlescomvip'
 
 
 class OpenSubtitlesComVipProvider(OpenSubtitlesComProvider):
     """OpenSubtitles.com VIP Provider."""
+
     server_url = 'https://vip-api.opensubtitles.com/api/v1/'
     subtitle_class = OpenSubtitlesComVipSubtitle
 
 
 class OpenSubtitlesComError(ProviderError):
     """Base class for non-generic :class:`OpenSubtitlesComProvider` exceptions."""
+
     pass
 
 
 class Unauthorized(OpenSubtitlesComError, AuthenticationError):
     """Exception raised when status is '401 Unauthorized'."""
+
     pass
 
 
 class NoSession(OpenSubtitlesComError, AuthenticationError):
     """Exception raised when status is '406 No session'."""
+
     pass
 
 
 class DownloadLimitReached(OpenSubtitlesComError, DownloadLimitExceeded):
     """Exception raised when status is '407 Download limit reached'."""
+
     pass
 
 
 class InvalidImdbid(OpenSubtitlesComError):
     """Exception raised when status is '413 Invalid ImdbID'."""
+
     pass
 
 
 class UnknownUserAgent(OpenSubtitlesComError, AuthenticationError):
     """Exception raised when status is '414 Unknown User Agent'."""
+
     pass
 
 
 class DisabledUserAgent(OpenSubtitlesComError, AuthenticationError):
     """Exception raised when status is '415 Disabled user agent'."""
+
     pass
 
 

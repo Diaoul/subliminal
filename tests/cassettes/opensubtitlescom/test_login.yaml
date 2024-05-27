@@ -5,7 +5,7 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Api-Key:
       - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
       Connection:
@@ -20,13 +20,8 @@ interactions:
     uri: https://api.opensubtitles.com/api/v1/login
   response:
     body:
-      string: !!binary |
-        IXQFACCXufX63uw700E0P/AG18oebOskAXeMA7dRJx1tWOxaiAaP4XNIUY5rzAe0xBvwD7CoKrqn
-        a4AusBTFkQSeZSbKWALPZRjgpEbgMNP2X4DoXPEGLHF0Ihd4qVrN5HIM8KlOFEllBQG6wP+tQCKD
-        OyX68Y+Bin2MgAO+RAbXNRqR6C2zE+o3xNXuODQiYS7eZnZIomrgSyROfkAjEnq+3r4WfjWcZtvv
-        weqqrJV7Q//5svNBOOtkMsP80No2N8UtmdIMlwWnYZYGc+c5nDuv4byVH3YzxjZe9d+nVzopDjOP
-        zVyM8FUwL+EzqelAN5evh9vOlMyx2l4mwEAqS+kROhkGtiXxpG8BcLASMuIEI6ltRSpAaThxCD8D
-        Aw==
+      string: '{"user":{"allowed_translations":1,"allowed_downloads":20,"level":"Sub
+        leecher","user_id":699022,"ext_installed":false,"vip":false},"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI2Sm9hMjNaVWxwU0pMemhkbmxvY1FNWUowU0xGa0RhNyIsImV4cCI6MTcxNjg5NDM4MX0.vI0XJO_54twowBlxabxK28aH_-nkUbsjmnYUXqHpp3Y","status":200,"base_url":"api.opensubtitles.com"}'
     headers:
       Access-Control-Allow-Headers:
       - Origin, Authorization, Accept, Api-Key, Content-Type, X-User-Agent
@@ -39,7 +34,7 @@ interactions:
       CF-Cache-Status:
       - DYNAMIC
       CF-RAY:
-      - 883aac28cdc1f8cd-CDG
+      - 88a9979e8ac899e1-CDG
       Cache-Control:
       - max-age=0, private, must-revalidate, s-maxage=600
       Connection:
@@ -49,7 +44,7 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Tue, 14 May 2024 11:50:46 GMT
+      - Mon, 27 May 2024 22:55:24 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       RateLimit-Limit:
@@ -59,7 +54,7 @@ interactions:
       RateLimit-Reset:
       - '1'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=WXqVo2ioDT4J%2FHup9e%2FylIC7UgkYd84A6CAFt613F7NuK%2BgIOdqmduIM1kpuqCcN4ECnecWGglUt3EUqf1fuhWVf0o7vFroZeWjgkPqLQUxeNfdmwz7BUQNKeVPxYCcrLt5B0H0T2e4%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=UnVtilNHQQjnJMks9d0wWR1oNJO6IgqqcAcf3til4Rtnwud2JCRMo6QNqaspLXeFRzMujsfDBB%2BE2pWJBmZBFdTli7O%2FeNIS9hLwsLQxDFjQhwctbBYzFWC%2BKMtM%2FjYENxnvi1oUGjM%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -67,7 +62,7 @@ interactions:
       Transfer-Encoding:
       - chunked
       X-Cache-Backend:
-      - apigw1_8000 rb1
+      - apigw1_8000 rb11
       X-Content-Type-Options:
       - nosniff
       X-Download-Options:
@@ -75,23 +70,21 @@ interactions:
       X-Frame-Options:
       - SAMEORIGIN
       X-Kong-Proxy-Latency:
-      - '1'
+      - '0'
       X-Kong-Upstream-Latency:
-      - '281'
+      - '269'
       X-RateLimit-Limit-Hour:
       - '60'
       X-RateLimit-Limit-Second:
       - '1'
       X-RateLimit-Remaining-Hour:
-      - '59'
+      - '54'
       X-RateLimit-Remaining-Second:
       - '0'
       X-Request-Id:
-      - 8d05021b-8ebd-4186-845a-1db3123fcdfe
+      - f8087884-eb1b-494b-aac6-6e45342da958
       X-Runtime:
-      - '0.278494'
-      X-StackifyID:
-      - V1|a4ba9ad7-b4de-4427-b25e-2ec29a96af31|C98184|CD5
+      - '0.266013'
       X-Var-Cache:
       - MISS
       X-Via:

@@ -4,7 +4,12 @@ from babelfish import LanguageReverseConverter, language_converters
 
 
 class OpenSubtitlesComConverter(LanguageReverseConverter):
-    def __init__(self):
+    """Language converter for OpenSubtitlesCom.
+
+    From GET API at: https://api.opensubtitles.com/api/v1/infos/languages
+    """
+
+    def __init__(self) -> None:
         self.alpha2_converter = language_converters['alpha2']
         self.from_opensubtitlescom = {
             'pt-br': ('por', 'BR'),
@@ -13,6 +18,9 @@ class OpenSubtitlesComConverter(LanguageReverseConverter):
             'zh-tw': ('zho', 'TW'),
             'ze': ('zho', 'US'),
             'me': ('srp', 'ME'),
+            'sy': ('syr',),
+            'ma': ('mni',),
+            'at': ('ast',),
         }
         self.to_opensubtitlescom = {v: k for k, v in self.from_opensubtitlescom.items()}
         self.codes = self.alpha2_converter.codes | set(self.from_opensubtitlescom.keys())

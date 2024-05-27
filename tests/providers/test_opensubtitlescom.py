@@ -6,6 +6,7 @@ from vcr import VCR
 
 from subliminal.exceptions import ConfigurationError
 from subliminal.providers.opensubtitlescom import (
+    OpenSubtitlesComError,
     OpenSubtitlesComProvider,
     OpenSubtitlesComSubtitle,
     Unauthorized,
@@ -26,9 +27,9 @@ vcr = VCR(
 
 def test_get_matches_movie_hash(movies):
     subtitle = OpenSubtitlesComSubtitle(
-        Language("deu"),
-        False,
-        subtitle_id="1953771409",
+        language=Language("deu"),
+        subtitle_id=1953771409,
+        hearing_impaired=False,
         movie_kind="movie",
         movie_title="Man of Steel",
         release="Man.of.Steel.German.720p.BluRay.x264-EXQUiSiTE",
@@ -54,8 +55,8 @@ def test_get_matches_movie_hash(movies):
 def test_get_matches_episode(episodes):
     subtitle = OpenSubtitlesComSubtitle(
         language=Language("ell"),
+        subtitle_id=1953579014,
         hearing_impaired=False,
-        subtitle_id="1953579014",
         movie_kind="episode",
         movie_title='Mhysa',
         release=" Game.of.Thrones.S03E10.HDTV.XviD-AFG",
@@ -80,8 +81,8 @@ def test_get_matches_episode(episodes):
 def test_get_matches_episode_year(episodes):
     subtitle = OpenSubtitlesComSubtitle(
         language=Language("spa"),
+        subtitle_id=1953369959,
         hearing_impaired=False,
-        subtitle_id="1953369959",
         movie_kind="episode",
         movie_title='The Price You Pay',
         release=" Dallas.2012.S01E03.HDTV.x264-LOL",
@@ -99,8 +100,8 @@ def test_get_matches_episode_year(episodes):
 def test_get_matches_episode_filename(episodes):
     subtitle = OpenSubtitlesComSubtitle(
         language=Language("por", country="BR"),
+        subtitle_id=1954453973,
         hearing_impaired=False,
-        subtitle_id="1954453973",
         movie_kind="episode",
         movie_title='A Fractured House',
         release="HDTV.x264-KILLERS-mSD-AFG-EVO-KILLERS",
@@ -128,8 +129,8 @@ def test_get_matches_episode_filename(episodes):
 def test_get_matches_episode_tag(episodes):
     subtitle = OpenSubtitlesComSubtitle(
         language=Language("por", country="BR"),
+        subtitle_id=1954453973,
         hearing_impaired=False,
-        subtitle_id="1954453973",
         movie_kind="episode",
         movie_title='A Fractured House',
         release="HDTV.x264-KILLERS-mSD-AFG-EVO-KILLERS",
@@ -142,7 +143,6 @@ def test_get_matches_episode_tag(episodes):
     )
     matches = subtitle.get_matches(episodes["marvels_agents_of_shield_s02e06"])
     assert matches == {
-        "series",
         "year",
         "country",
         "season",
@@ -155,8 +155,8 @@ def test_get_matches_episode_tag(episodes):
 def test_get_matches_imdb_id(movies):
     subtitle = OpenSubtitlesComSubtitle(
         language=Language("fra"),
+        subtitle_id=1953767650,
         hearing_impaired=True,
-        subtitle_id="1953767650",
         movie_kind="movie",
         movie_title="Man of Steel",
         release="man.of.steel.2013.720p.bluray.x264-felony",
@@ -183,8 +183,8 @@ def test_get_matches_imdb_id(movies):
 def test_get_matches_no_match(episodes):
     subtitle = OpenSubtitlesComSubtitle(
         language=Language("fra"),
+        subtitle_id=1953767650,
         hearing_impaired=False,
-        subtitle_id="1953767650",
         movie_kind="movie",
         movie_title="Man of Steel",
         release="man.of.steel.2013.720p.bluray.x264-felony",
@@ -346,7 +346,7 @@ def test_query_hash_size(movies):
     }
     with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
         subtitles = provider.query(
-            languages, hash=video.hashes["opensubtitles"]
+            languages, moviehash=video.hashes["opensubtitles"]
         )
     assert {subtitle.id for subtitle in subtitles} == expected_subtitles
     assert {subtitle.language for subtitle in subtitles} == languages
@@ -357,8 +357,8 @@ def test_query_hash_size(movies):
 def test_query_wrong_hash_wrong_size():
     languages = {Language("eng")}
     with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
-        subtitles = provider.query(languages, hash="123456787654321")
-    assert len(subtitles) == 0
+        with pytest.raises(OpenSubtitlesComError):
+            provider.query(languages, moviehash="123456787654321")
 
 
 @pytest.mark.integration

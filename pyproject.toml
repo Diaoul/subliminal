@@ -84,7 +84,6 @@ subliminal = "subliminal.cli:subliminal"
 
 [project.entry-points."subliminal.providers"]
 addic7ed = "subliminal.providers.addic7ed:Addic7edProvider"
-argenteam = "subliminal.providers.argenteam:ArgenteamProvider"
 gestdown = "subliminal.providers.gestdown:GestdownProvider"
 napiprojekt = "subliminal.providers.napiprojekt:NapiProjektProvider"
 opensubtitles = "subliminal.providers.opensubtitles:OpenSubtitlesProvider"
@@ -92,8 +91,6 @@ opensubtitlesvip = "subliminal.providers.opensubtitles:OpenSubtitlesVipProvider"
 opensubtitlescom = "subliminal.providers.opensubtitlescom:OpenSubtitlesComProvider"
 opensubtitlescomvip = "subliminal.providers.opensubtitlescom:OpenSubtitlesComVipProvider"
 podnapisi = "subliminal.providers.podnapisi:PodnapisiProvider"
-shooter = "subliminal.providers.shooter:ShooterProvider"
-thesubdb = "subliminal.providers.thesubdb:TheSubDBProvider"
 tvsubtitles = "subliminal.providers.tvsubtitles:TVsubtitlesProvider"
 
 [project.entry-points."subliminal.refiners"]

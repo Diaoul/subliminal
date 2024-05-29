@@ -32,16 +32,6 @@ Podnapisi
 .. automodule:: subliminal.providers.podnapisi
    :private-members:
 
-Shooter
--------
-.. automodule:: subliminal.providers.shooter
-   :private-members:
-
-TheSubDB
---------
-.. automodule:: subliminal.providers.thesubdb
-   :private-members:
-
 TVsubtitles
 -----------
 .. automodule:: subliminal.providers.tvsubtitles

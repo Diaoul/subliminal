@@ -8,13 +8,10 @@ subtitles. Current supported providers are:
 
 * Addic7ed
 * Gestdown
-* LegendasTV
 * NapiProjekt
 * OpenSubtitles
 * OpenSubtitles.com
 * Podnapisi
-* Shooter
-* TheSubDB
 * TvSubtitles
 
 Providers all inherit the same :class:`~subliminal.providers.Provider` base class and thus share the same API.

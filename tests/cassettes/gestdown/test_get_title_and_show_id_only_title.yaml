@@ -3,7 +3,7 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
       User-Agent:
@@ -14,17 +14,14 @@ interactions:
     uri: https://api.gestdown.info/shows/search/Marvel's%20Agents%20of%20S.H.I.E.L.D.
   response:
     body:
-      string: !!binary |
-        g8cAAORUl9MaXYHOMVCSrURTxqJd+58d6S8FcoxzHoCuRQZdZQDZAIaJHBUd5Ouy+QWaDZ8E3cMv
-        zBN00LTeJR0jC0pqZpQUrA1Cs4mJLkn/lq0RgFDCOkMH92HzkVd7VB1PcxmpGiZVX1/V1/V5fVef
-        1YBQYp8DDYWg8wiUAw2FoHuQqFCjQYsO/RPC+HEWrxN0ymntLMK4TvE6QSeN0Ai0ep9CB+uw+cgr
-        YmGay0hsmDCazfMqwT/+wjxBB63QbfQqs6bNkRkhM2uT0EwY2caJT1J5nbDoqn41L1OaDWMNiJzL
-        +2qFllwrmgYhox/9P/0bAw==
+      string: '{"shows":[{"id":"8976d3bb-a213-4210-9a03-f4b6d17ce540","name":"Marvel''s
+        Agents of S.H.I.E.L.D.","nbSeasons":7,"seasons":[1,2,3,4,5,6,7],"tvDbId":263365,"tmdbId":1403,"slug":"marvels-agents-of-shield"},{"id":"9039b72e-89eb-401e-9d03-0419bf7d1273","name":"Marvel''s
+        Agents of S.H.I.E.L.D.: Slingshot","nbSeasons":0,"seasons":[],"tvDbId":null,"tmdbId":69088,"slug":"marvels-agents-of-shield-slingshot"}]}'
     headers:
       CF-Cache-Status:
-      - MISS
+      - HIT
       CF-RAY:
-      - 87f858f56f992292-CDG
+      - 88ba5f323efb6924-LIS
       Cache-Control:
       - public, max-age=14400
       Connection:
@@ -34,13 +31,13 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Mon, 06 May 2024 10:39:37 GMT
+      - Wed, 29 May 2024 23:47:50 GMT
       Last-Modified:
-      - Mon, 06 May 2024 10:39:37 GMT
+      - Wed, 29 May 2024 19:47:24 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=MgzcC6lAUR2PCalEJBjJigJC1rUQCoDWdzbs5xoCPuKA5qBQOfjkhivXJfklKRHv2jSSvCKcdcERQhpMtOq3HoXIEXnm5Wfc3BK3KVAytguonjCMInizbahtTPbiE%2BV23sBoOQ%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=Bq9WlqbYndalfXDQXZGqdWPlpwHKUzniipjxPTs1LZHpeHt89CPPIc%2BtHpLaiSjq6Iv0czqkA3MUlu%2B9eEak4JF8uzobG3jNFVXUYrFrJnqfHbaHS707qrEFrzbYIeZqRioG5A%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:

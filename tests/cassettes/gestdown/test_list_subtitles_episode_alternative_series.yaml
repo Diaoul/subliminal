@@ -3,7 +3,7 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
       User-Agent:
@@ -14,17 +14,12 @@ interactions:
     uri: https://api.gestdown.info/shows/external/tvdb/272135
   response:
     body:
-      string: !!binary |
-        g0oAAMRiOqf95icmzFWdIgY1IxUL4QKgvlCb81OBR19sBThK2/MMxxfMkcGKOY5tsDIUBZNmEZSh
-        qBxhGCCciqMEx2I5G4FwKueyUOeTAncIShbqfFLgkUkW2eQkhPrRKLsC3PIt03YJ9VGUXQHu+pbv
-        EdThvgZHfb+d8E/+Aw==
+      string: '{"shows":[{"id":"b366047d-4e8f-4430-b9da-e1a8b9dc4d00","name":"TURN","nbSeasons":4,"seasons":[1,2,3,4],"tvDbId":272135,"tmdbId":57276,"slug":"turn"}]}'
     headers:
-      Age:
-      - '506374'
       CF-Cache-Status:
       - HIT
       CF-RAY:
-      - 87f87da2d8cb3c80-CDG
+      - 88ba5f41ec4f5bee-LIS
       Cache-Control:
       - public, max-age=14400
       Connection:
@@ -34,13 +29,13 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Mon, 06 May 2024 11:04:40 GMT
+      - Wed, 29 May 2024 23:47:53 GMT
       Last-Modified:
-      - Tue, 30 Apr 2024 14:25:06 GMT
+      - Thu, 23 May 2024 01:03:24 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=UsdgJ6Zo6Ne%2Bb0cTeJMVpyFS%2FyFvOXnvzmpUOk2uLOPYvcjoLwY%2FEvmh6w1E1u5PzllpJ3%2F25RfJCnzL816r5HLk2aoHQbaA6EPXR9rMHfYqoY%2BbPjK0k8fV5O%2FZIZ8kAnvGrw%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=WA7jhC5Tf4ck%2FMkXaOIC4O239poHZelEubGKCut%2FU7v4jQTIhbEfB%2FIZ0FLHOrfV4Y%2F1gcyDrqqhezPFz6oWMRM2L06PaQbN1FXTQtRJ2SNpPybTZQNOipntTRfUlXYM8bPaMg%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -60,7 +55,7 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
       User-Agent:
@@ -71,35 +66,29 @@ interactions:
     uri: https://api.gestdown.info/shows/search/Turn
   response:
     body:
-      string: !!binary |
-        gywGAORe1ddpxUNK072gHJo2t5Yqp/QDcBAZU8B/JGX3dcow5v+/d572PQwT/mLhP1ECY/LGCVI0
-        X7+NRWPbnLQ2hr4mr1uRSaprNJVogvHng5WuA17mcv/vd3KbxqtNHn9/J+cqj1KFpm1NETzFAphC
-        g0xE4Au2YAs336o8yE4Xlkd5m8er69KO4gfer2sXpyFOE4sfp5mXulCvmzzInn9k2kbf5FEf5Ma0
-        jb7J4+/6z4PcX97Nj6o8WqUthoPcLzU/qvLo0SV7kNtyPcujzDxeXZcGK+/XtcM+YJ8YtmnmpS7U
-        6yY/HN7JucqjLLY6HUKFHKICjOSBaqkQVC2kszeUtTzITheWR3lvEXdXOv//Xz+KH3i/rl2MJkj8
-        TOs6j1UeZAfwxu9gLkJQ2mpGQu3QmheoK51Hv4xGA4JXfvjwQeTkkXRiaKgKYLUZUrMGmg7VaqVs
-        w2QvxcOxiwfzumziZ+o716M4XdfOVXzbJe8E45VVTEHbMGUaO5znddng4/te8ENpg2B01CCMMclX
-        46GEYAFjyJAZM5BVLrdEzJrtCk/mfhajidvjzXYUp4lF7Yh9YvFk7ucjHVVMWjJp2moXSd/6xdzP
-        MBrk8WaDfWLu2+wTw4u5nwuIVox1AQsUNBoQo4XMhoCbIhsUZePJpj69dhLf8X7tM+mmM/Yhbl3o
-        7UxdSO7XZTnoPqpksFw7wY0THnbNPoAqXzAgtCqmsQ2QmS1gLQZSQgO1BM+No3Vsrc2zN9vO6xvx
-        Dw3sUlicJqadV2GVUuFwfx84b7hVcvGGwYbBTgE0HIjyIVZNaF0lQN8cYEgIVBwDGdTNRo6hJa3v
-        D6qJxzMqqCtY46xCvdO0NiQSCbpQSUyIQWEoSltQ2BpgqA4otgCcFYakTfR2TEQ0EZd7lRlNCWgC
-        vIAmnGX3AVyZOBDKN8ZABnKkBIglALVswVXFMRtXjXVGkm5r5TG/5cyLeEwXHqLTonbGjRZ6bXWM
-        OkmOSf71QIV/Ecn+QuOscSlDibEB+pogpmYgmKRz9N55VKCbg6v4/PmPX0BNMdHaoSGXNxrNk8wV
-        rgAHZeu9wlAB2W6CVkFOlYA1xZxqwaoszPMfvsGExwoHc7AHRJYcjLYMprlggt/sMwJi9qZmXSw0
-        mxwg1wDUsIBBX6sxgbyW3F2drmsXt6m8EKf5wuJzo7Tiy9mJi2iUiTrTonMR2zaQqbyAfb4wGKUV
-        1A9MtSVS6EAFZwEJE2RqFipXVKlolTR4Jq5rF89vxJ2J1mXmgKZbp12EyCI6jF57vYHSLgLvCxXt
-        XDMINmABrLlCrCVCRZN0Tq6YbGuEV/GpeDhGmUpIsiaoFbVGp+yt5hWmVvnR/UaKWLlqNCTvPaDz
-        GlJsGprxrZhMuWhsq8z9LL4bc9+PIn2ttaBe58r18TOtYnRx4nUda3awQRVjMhW11d5p2Mvnfoab
-        MfcdktZAvc6eZq9ohdFhd4gwDTGjjhERlLcNsJUEsfoMudRklNIBq7FJE4sfr5cLr+LRUqWK71be
-        9zddcHqVlZK8U7xnJgze57d48yKFebUiudmQKADUkSoTgXYOAdE4IPIJcjU1uZBNJdwmd2jbF35J
-        c73qm1GWQO4QCVs0WmubZKzD9PIqzUuhFzuoj4+tiwmKbxowtAhZ5wY2qGptq8YXEovNaWJxe1yy
-        YJrnzliq+JlqMnrnqM5i0CWTechus08MeVyyYAaWsVR4Rav88OcHAwM=
+      string: "{\"shows\":[{\"id\":\"07f13d98-6a8c-497f-baaa-6c4f73cef6fd\",\"name\":\"Beowulf:
+        Return To The Shieldlands\",\"nbSeasons\":1,\"seasons\":[1],\"tvDbId\":301347,\"tmdbId\":64593,\"slug\":\"beowulf-return-to-the-shieldlands\"},{\"id\":\"c3d5177d-b780-48a6-adcd-70dca1b62ab1\",\"name\":\"El
+        Drag\xF3n: Return of a Warrior\",\"nbSeasons\":2,\"seasons\":[1,2],\"tvDbId\":370131,\"tmdbId\":94154,\"slug\":\"el-dragon-return-of-a-warrior\"},{\"id\":\"b964a19e-f40c-4d3b-9f32-f17d31003f49\",\"name\":\"Hot
+        Girls Wanted: Turned On\",\"nbSeasons\":1,\"seasons\":[1],\"tvDbId\":326030,\"tmdbId\":71373,\"slug\":\"hot-girls-wanted-turned-on\"},{\"id\":\"22296d26-c773-487b-be4b-a305bf9aee1e\",\"name\":\"King
+        of Boys: The Return of the King\",\"nbSeasons\":1,\"seasons\":[1],\"tvDbId\":408917,\"tmdbId\":131584,\"slug\":\"king-of-boys-the-return-of-the-king\"},{\"id\":\"fc23574c-c421-4483-be2a-ef0a370ab26a\",\"name\":\"Luna
+        Petunia: Return to Amazia\",\"nbSeasons\":1,\"seasons\":[1],\"tvDbId\":null,\"tmdbId\":76809,\"slug\":\"luna-petunia-return-to-amazia\"},{\"id\":\"10c2fe37-bee3-4dc2-9942-dc76efe835e3\",\"name\":\"Mystery
+        Science Theater 3000: The Return\",\"nbSeasons\":1,\"seasons\":[1],\"tvDbId\":null,\"tmdbId\":null,\"slug\":\"mystery-science-theater-3000-the-return\"},{\"id\":\"d1a435da-46f5-4794-ac5e-a241f38e87f1\",\"name\":\"Return
+        of the Mac\",\"nbSeasons\":1,\"seasons\":[1],\"tvDbId\":325304,\"tmdbId\":71112,\"slug\":\"return-of-the-mac\"},{\"id\":\"7047c013-04ff-47d5-a8f7-eb047912863d\",\"name\":\"Return
+        to Eden\",\"nbSeasons\":1,\"seasons\":[1],\"tvDbId\":74274,\"tmdbId\":727,\"slug\":\"return-to-eden\"},{\"id\":\"06fe47a2-b8a9-44c7-afb3-5d0e8b25d235\",\"name\":\"The
+        Return of Jezebel James\",\"nbSeasons\":1,\"seasons\":[1],\"tvDbId\":81525,\"tmdbId\":1318,\"slug\":\"the-return-of-jezebel-james\"},{\"id\":\"1253259b-c88f-46d9-89f2-7291b8665640\",\"name\":\"The
+        Returned (US)\",\"nbSeasons\":1,\"seasons\":[1],\"tvDbId\":283317,\"tmdbId\":62142,\"slug\":\"the-returned-us\"},{\"id\":\"b366047d-4e8f-4430-b9da-e1a8b9dc4d00\",\"name\":\"TURN\",\"nbSeasons\":4,\"seasons\":[1,2,3,4],\"tvDbId\":272135,\"tmdbId\":57276,\"slug\":\"turn\"},{\"id\":\"b62db1c3-f395-4ed7-af4c-246dd227a61d\",\"name\":\"Turn
+        Back Time (2010)\",\"nbSeasons\":2,\"seasons\":[1,2],\"tvDbId\":202811,\"tmdbId\":34558,\"slug\":\"turn-back-time-2010\"},{\"id\":\"9df9a045-0753-4a49-baf3-ded409c10935\",\"name\":\"Turn
+        Up Charlie\",\"nbSeasons\":1,\"seasons\":[1],\"tvDbId\":351581,\"tmdbId\":85486,\"slug\":\"turn-up-charlie\"},{\"id\":\"9c155f24-374c-4dbd-8dc8-d4291b95c2b5\",\"name\":\"Turner
+        & Hooch\",\"nbSeasons\":1,\"seasons\":[1],\"tvDbId\":393235,\"tmdbId\":114503,\"slug\":\"turner-hooch\"},{\"id\":\"0ae05d21-9666-4561-98f1-f26fc2babc15\",\"name\":\"Turning
+        Point: 9/11 and the War on Terror\",\"nbSeasons\":1,\"seasons\":[1],\"tvDbId\":408892,\"tmdbId\":131651,\"slug\":\"turning-point-911-and-the-war-on-terror\"},{\"id\":\"9b418844-063f-4fc9-8d6b-bcd9200174d2\",\"name\":\"The
+        Summer I Turned Pretty\",\"nbSeasons\":2,\"seasons\":[1,2],\"tvDbId\":396505,\"tmdbId\":194766,\"slug\":\"the-summer-i-turned-pretty\"},{\"id\":\"018adeaa-1554-4425-aa69-bd2d957b2da2\",\"name\":\"Castlevania:
+        Nocturne\",\"nbSeasons\":1,\"seasons\":[1],\"tvDbId\":421113,\"tmdbId\":123548,\"slug\":\"castlevania-nocturne\"},{\"id\":\"018e3589-c6f1-47f8-b1bf-370d33fd26ca\",\"name\":\"Turning
+        Point: The Bomb and the Cold War\",\"nbSeasons\":1,\"seasons\":[1],\"tvDbId\":446555,\"tmdbId\":245926,\"slug\":\"turning-point-the-bomb-and-the-cold-war\"}]}"
     headers:
       CF-Cache-Status:
-      - MISS
+      - HIT
       CF-RAY:
-      - 87f87da339373c80-CDG
+      - 88ba5f42ac415bde-LIS
       Cache-Control:
       - public, max-age=14400
       Connection:
@@ -109,13 +98,13 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Mon, 06 May 2024 11:04:40 GMT
+      - Wed, 29 May 2024 23:47:53 GMT
       Last-Modified:
-      - Mon, 06 May 2024 11:04:40 GMT
+      - Wed, 29 May 2024 19:47:29 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=CKCKcddeFTyYs9PbMtnC1GENafE%2BgcXVGMC5xjiwwd20DAGVdavpjgPhVR%2FanmNQPUznrHsGcUQtDwvptDDvQSj3PwkcHL1jsh1drvrEOrh0vARfl3Va3cjAGhCyMtUULBAIng%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=sy%2FmVebfs%2FnvyE8Nj%2FvO2K3tIeFHNA46pv8gcukiDjkUzDDoW96U7saU%2FeqiVoeE20JIFLt1Yg10z8wKi5MrJVUhHblnNFOhW3T08EvX7Y2264gDR%2BsQFA6INos9RJMHf66XLg%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -135,7 +124,7 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
       User-Agent:
@@ -146,18 +135,13 @@ interactions:
     uri: https://api.gestdown.info/subtitles/get/b366047d-4e8f-4430-b9da-e1a8b9dc4d00/4/3/eng
   response:
     body:
-      string: !!binary |
-        g2oBAMRKm1atZ2vpgSRf56QCIKEt04PeCa87ILjp94Nd5HY4hn1JnnHAASfePH4g2TVZLQZH1/v2
-        1PovNmo0i7CdX+30GMa1i6CnX0TfemBBaDKZ66nLuaqF4VUmCy5dU3OlMmHruhK6qcAwQa4E4ep2
-        BoaN31vQOOwcw8KpIWznB5tOhcFZkFfr6Bgm3jammJdRh/5mCCCk0CSmyR4pQOp4AOFb9Q4MNsSr
-        4/OcBaHIioLnOS+z60xQKahuEpHVZdk8AszJ/Xa3HUFV9c+Y+vFayKl3hmeFm/JKSct1pnLurchy
-        JXNhRS1IYKBVwBejkBAyI/t/YXBdiK11oF9Ep2K7BVUMj21VUMnA4hyEvXXb2olvh0l0ETDERfsJ
-        wvXN5emBmUI+4v/fAAM=
+      string: '{"matchingSubtitles":[{"subtitleId":"6081b9e1-a57c-4082-8e65-aa07d5547b64","version":"SVA","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/6081b9e1-a57c-4082-8e65-aa07d5547b64","language":"English","discovered":"2022-11-30T07:37:56.705336Z","downloadCount":46},{"subtitleId":"6b789fec-02e9-4a8d-b0a1-fd701a817d75","version":"SVA","completed":true,"hearingImpaired":true,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/6b789fec-02e9-4a8d-b0a1-fd701a817d75","language":"English","discovered":"2022-11-30T07:37:56.705778Z","downloadCount":0}],"episode":{"season":4,"number":3,"title":"Blood
+        for Blood","show":"TURN","discovered":"2022-11-30T07:37:56.705328Z"}}'
     headers:
       CF-Cache-Status:
-      - MISS
+      - EXPIRED
       CF-RAY:
-      - 87f87da3e9c73c80-CDG
+      - 88ba5f433ebd5bda-LIS
       Cache-Control:
       - public, max-age=7200
       Connection:
@@ -167,13 +151,13 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Mon, 06 May 2024 11:04:40 GMT
+      - Wed, 29 May 2024 23:47:53 GMT
       Last-Modified:
-      - Mon, 06 May 2024 11:04:40 GMT
+      - Wed, 29 May 2024 19:47:29 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=a76c0mlg0%2Fz8ypPePXmcv2LDRH6IFHLs0vn5ddOGNoAV76WDliQIh%2F3bLVcem%2Fet2hNvCkGOqgLXWzFyfhgjXuMITgOGYEbQnR5fIPTsonknnUKuPtX4uFyLq26hYQiXbou%2BzQ%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=U4HCuFovL5%2BJ%2BdIiiiJldmF6M6tZv%2FCgiNosRgFe9XivQbttruBAb5Ve8Izz%2BOYkZsQeDm958A4JJM%2F%2FM0z65NWunKjFuzUp2c7crskDnjp1jkccBDC80jCZT5I0B%2BuG4ynbfw%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:

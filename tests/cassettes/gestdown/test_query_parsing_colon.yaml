@@ -3,7 +3,7 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
       User-Agent:
@@ -14,15 +14,13 @@ interactions:
     uri: https://api.gestdown.info/shows/search/CSI:%20Cyber
   response:
     body:
-      string: !!binary |
-        A04AAMT/nFPZ3dOJSMrfjnXlsEAUwgWwbejiaupArw2JD4IrFUc3dZX7luVx1QwFt7TQ4K5uaNK0
-        PMd0TDCUThGAcLafdDovbtCCoXTtwOmqsgNJhi5wuqrsQC/B5IehHy/u0wdJU2iaYOgL3336IF2Y
-        QjB0+RCB4HUJ9xY3aHF8DgMD
+      string: '{"shows":[{"id":"b23a6864-d99c-48f1-95f7-b675289ca8a8","name":"CSI:
+        Cyber","nbSeasons":2,"seasons":[1,2],"tvDbId":281551,"tmdbId":61811,"slug":"csi-cyber"}]}'
     headers:
       CF-Cache-Status:
-      - MISS
+      - HIT
       CF-RAY:
-      - 87f859038cf104a2-CDG
+      - 88ba5f3aea365be4-LIS
       Cache-Control:
       - public, max-age=14400
       Connection:
@@ -32,13 +30,13 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Mon, 06 May 2024 10:39:40 GMT
+      - Wed, 29 May 2024 23:47:52 GMT
       Last-Modified:
-      - Mon, 06 May 2024 10:39:40 GMT
+      - Wed, 29 May 2024 19:47:27 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=FsdR6BVy13GT2X7jKNQVzK75Ja3lLTuuCRryPx3AthQ14Yph59zMQ%2BiuOaWr5HLdixScxX8wCZeoeIBSl081%2BCK1Yx%2Bvm7jGyT%2BUrtK%2B%2FsMk6n64sBwArRHbgcJxs9YpCKVsrw%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=Nh%2FF782ffJVixq8VsYOQu6nLwD0CUsfXGVwxNii6Kppa2m54j%2F8SbM7Og4kyj1prhbXZlIKQ5BUle4WSZqLUQ98BKJhrBJDKEqfky9q4vyv4umCJ1AjualCYEnJ2hp8cgmOyDQ%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -58,7 +56,7 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
       User-Agent:
@@ -69,19 +67,13 @@ interactions:
     uri: https://api.gestdown.info/subtitles/get/b23a6864-d99c-48f1-95f7-b675289ca8a8/2/3/eng
   response:
     body:
-      string: !!binary |
-        gw8CAMT/1Om05t4sNikaC8Sy9dU4QLJbnnZ2l2Opl4UJlOfPu88HNLPnA574gEa7zvcYT7epR1/Q
-        EQbNsVtr+y9mvmtG7fz9sq+7tptSgnv8RVq77gc4qKKyRagKXsTQ8DwWnluvSj7Mgy9qa6KPJRg6
-        yPXBYWv/ePvkcv/0BAzXnxTgunVPDCPy63b+vj9b+nYdUtveJs1ZEsZpytfrFg4SH0tyNiFR4rRb
-        cPhbvQSG0Kb68SAPjDKGq4qb6spkLrNOZ6Kypa7MA8ActLno5x2c+Wds3YLCa6KYWa5UYXke9ZBb
-        ZTNOOVUZ1blWpTUqytT/ggJrPtCGclQOV59UTSpSiJpntsx4buqGe2VKbq2PVSz9MC+1vjqNfpqG
-        D5ih6EIVWfLy/5mBlm1aBIL7RSKfFnM4w/BUWQGXMehvCRw21ovP+WD7mxIbbEx72l4aMKTR4hMO
-        m5f7brD5XdNa9Vw/4P/fAAM=
+      string: '{"matchingSubtitles":[{"subtitleId":"05785d75-5fdc-4f5a-8a06-94da5b82faf6","version":"DIMENSION","completed":true,"hearingImpaired":true,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/05785d75-5fdc-4f5a-8a06-94da5b82faf6","language":"English","discovered":"2022-07-27T23:38:13.786172Z","downloadCount":4},{"subtitleId":"5a1eef38-0058-4f19-8083-e4e73eb41068","version":"DIMENSION.colored","completed":true,"hearingImpaired":true,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/5a1eef38-0058-4f19-8083-e4e73eb41068","language":"English","discovered":"2022-07-27T23:38:13.786174Z","downloadCount":0},{"subtitleId":"be0fedf1-3863-42bc-a026-88af7f6a9461","version":"DIMENSION","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/be0fedf1-3863-42bc-a026-88af7f6a9461","language":"English","discovered":"2022-07-27T23:38:13.786175Z","downloadCount":49}],"episode":{"season":2,"number":3,"title":"Brown
+        Eyes, Blue Eyes","show":"CSI: Cyber","discovered":"2022-07-27T23:38:13.786171Z"}}'
     headers:
       CF-Cache-Status:
-      - MISS
+      - EXPIRED
       CF-RAY:
-      - 87f859041d6a04a2-CDG
+      - 88ba5f3b6ef65bf0-LIS
       Cache-Control:
       - public, max-age=7200
       Connection:
@@ -91,13 +83,13 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Mon, 06 May 2024 10:39:40 GMT
+      - Wed, 29 May 2024 23:47:52 GMT
       Last-Modified:
-      - Mon, 06 May 2024 10:39:40 GMT
+      - Wed, 29 May 2024 19:47:27 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=vMBdaiz8T5GzdqD%2FEX48RwG3NmMfWt4AaiKom0dn1cSoXSfONaui%2F1QmNsqZepqidqP4ZG72lSteoIE8Dstc5fikbt5JJ601A4aHg48eTJhUW%2BrRq9%2B6QNodYgjK5XcbBZS70g%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=4QnzNJPGR4GTzoKLmh%2FKs3aA7MLGkX8ITc4C%2BgG9WMuF2keHG3xBIyPEV2%2BvRf4XkrRjtzMRuP%2FEPaLuldcSexYOiBeSapNjy1NBQHIPwnxTmpvfo9Vk1RurHRhjlvEAKTX35g%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:

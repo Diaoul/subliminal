@@ -3,7 +3,7 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
       User-Agent:
@@ -14,15 +14,13 @@ interactions:
     uri: https://api.gestdown.info/shows/external/tvdb/328635
   response:
     body:
-      string: !!binary |
-        g0wAAMSotaXKbL57s4ZYJr6oACFcANgXY9auIwzzizyCASWWOVUSdMrpukQlSUyoJoox5QNOCYOQ
-        11ROBkHj1zEMnKt4I6d3EzIgaIJP7I9tM8LgCcbYH9tmhGHyNsG03IJ3BEMUNEWUCaY6Ct4RDJVX
-        FZFgrOYUBvwq3mjehPjbfwMD
+      string: '{"shows":[{"id":"6e507429-0994-443f-833e-1b06cbc18705","name":"Alex,
+        Inc.","nbSeasons":1,"seasons":[1],"tvDbId":328635,"tmdbId":71763,"slug":"alex-inc"}]}'
     headers:
       CF-Cache-Status:
-      - EXPIRED
+      - HIT
       CF-RAY:
-      - 87f858f6bf82f16c-CDG
+      - 88ba5f32dabe5bdb-LIS
       Cache-Control:
       - public, max-age=14400
       Connection:
@@ -32,13 +30,13 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Mon, 06 May 2024 10:39:38 GMT
+      - Wed, 29 May 2024 23:47:50 GMT
       Last-Modified:
-      - Sun, 05 May 2024 16:16:42 GMT
+      - Sun, 26 May 2024 01:02:32 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=P1p57zi%2FQIKIiEA4DvgX4J29pPnBShSLvZiQVdjSAwVeaiuDRgZ6Tq4LUZmOmO6UWScPq2kQtm2iqezBDWv%2BQDTYLRavuYNzrhSuLDl3d2k37kb%2FPlZf7jrP%2F%2FNMx3d3XmdQLw%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=5k%2Fl95f8%2FG%2BuaAMr016MNR3Se7P2a%2F%2BLBlR8MSUMsLHA1NKlYzWno%2Ffxygx2jeVvY6UaUPQjsV9%2F4%2BJzyQ4JtGaYak6VYcgFDVDQlHqx%2BBhFB69EDiTwa7Z7Ure4P2xHDEtfBw%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:

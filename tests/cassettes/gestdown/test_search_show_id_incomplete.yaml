@@ -3,7 +3,7 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
       User-Agent:
@@ -14,15 +14,13 @@ interactions:
     uri: https://api.gestdown.info/shows/search/The%20Big%20Bang
   response:
     body:
-      string: !!binary |
-        g2IAAMT/dHNauTe/3PERG1ufy1YPCVQ8VCyUC4Dwhducnw7F9IutQYFcrM6DNFNZVccqMsaoXERU
-        Wie+ljiPs0qDOK2PFgXKjfU628brrE+NV27s+fYGcdITu3bnk0MhAeHs2p1PDsVUGDBkxJgJU2bM
-        KT5FKMGcaB89PTYoMj9Mc6I9Gj02KCSSjHCHe4MC7cYqvW2UXp8a1W7s+fbGf/43AAM=
+      string: '{"shows":[{"id":"91eb9278-8cf5-4ddd-9111-7f60b15958cb","name":"The
+        Big Bang Theory","nbSeasons":12,"seasons":[1,2,3,4,5,6,7,8,9,10,11,12],"tvDbId":80379,"tmdbId":1418,"slug":"the-big-bang-theory"}]}'
     headers:
       CF-Cache-Status:
-      - MISS
+      - HIT
       CF-RAY:
-      - 87f858eedbb9f138-CDG
+      - 88ba5f2f68f25bee-LIS
       Cache-Control:
       - public, max-age=14400
       Connection:
@@ -32,13 +30,13 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Mon, 06 May 2024 10:39:36 GMT
+      - Wed, 29 May 2024 23:47:50 GMT
       Last-Modified:
-      - Mon, 06 May 2024 10:39:36 GMT
+      - Wed, 29 May 2024 19:47:24 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=kRR5jGV26EsqDHIyjeowmuY9k%2FquD%2BE9I6i%2BqGp1S9ULadvQPtp3OSbNH76HfFL4bKilvmr3wO9d2SCXhzR5S7vBTF%2BHWeQ9DhaXGuv8tm0Fj6CmkEn5TZa93sdTl%2BCTHLIQmA%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=J%2FR%2FefMXFGc9w3vDaZ4VUXA6OmMgu7QvS%2FylIf7K3ALlHl5KfdHtC3xWaColU%2B6l5ak%2FuFkt6ghm7LQY1md18fPRfLq6qealTb5wY05GHKBnCKs9mTVn4uYzdJ8ds8ripg1QbA%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:

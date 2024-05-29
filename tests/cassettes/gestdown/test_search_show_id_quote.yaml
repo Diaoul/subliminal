@@ -3,7 +3,7 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
       User-Agent:
@@ -14,15 +14,13 @@ interactions:
     uri: https://api.gestdown.info/shows/search/Grey's%20Anatomy
   response:
     body:
-      string: !!binary |
-        A2kAAMRKXVbtzwZoDSe2uwDVKVl6BDlAoVwAkV/kyfozo338xXSAFv0kOiUXir7TvjDDelQk3wyK
-        gRlJMo1XOtQgVnE5RIvb3fD7KPfOV7FbL79BrNLDMOb1KqNVNZGHMa9XGe2jUFHT0NLRM7Ch1BSh
-        KIqmGIqlOIqnBEpDVT8T3cdVuh+g9do7RXTLQbofoBUjjsiL9zFajHfD71zEVezWy2/8P/8bAw==
+      string: '{"shows":[{"id":"cb13bb68-c637-4e0f-b79d-d4f1b4972380","name":"Grey''s
+        Anatomy","nbSeasons":20,"seasons":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"tvDbId":73762,"tmdbId":1416,"slug":"greys-anatomy"}]}'
     headers:
       CF-Cache-Status:
-      - MISS
+      - HIT
       CF-RAY:
-      - 87f858f2deedf118-CDG
+      - 88ba5f315e0e5bde-LIS
       Cache-Control:
       - public, max-age=14400
       Connection:
@@ -32,13 +30,13 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Mon, 06 May 2024 10:39:37 GMT
+      - Wed, 29 May 2024 23:47:50 GMT
       Last-Modified:
-      - Mon, 06 May 2024 10:39:37 GMT
+      - Wed, 29 May 2024 22:57:07 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=41DsDixqa8uzNCG61hoeXv%2BV9uoLWqQGK3DK6rZLCSdHqCwlJ4lLbBpqYY9fuqw4X1d6W3Wv2MmXRmrkHStuUmbV%2FKrUzazmVPr2UNkCKKsuQoj5b6n4oIJyNe4gN%2BexlklcBQ%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=qKUUT9RxcspBOBuTLiAzMDXwnCPTxBpUr0OLxNf82spAsvW5adzGGcGHK7xGHXp4wa5fm9eJ%2FAcbL2u5PVK1l2v9JCuAHSAL7wK27%2BI1IMflcJVFHrIqCOpYzwDx0YE9a8bEbQ%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:

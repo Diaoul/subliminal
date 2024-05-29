@@ -3,7 +3,7 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
       User-Agent:
@@ -14,19 +14,14 @@ interactions:
     uri: https://api.gestdown.info/shows/search/Marvel's%20Agents%20of%20S.H.I.E.L.D.
   response:
     body:
-      string: !!binary |
-        g8cAAORUl9MaXYHOMVCSrURTxqJd+58d6S8FcoxzHoCuRQZdZQDZAIaJHBUd5Ouy+QWaDZ8E3cMv
-        zBN00LTeJR0jC0pqZpQUrA1Cs4mJLkn/lq0RgFDCOkMH92HzkVd7VB1PcxmpGiZVX1/V1/V5fVef
-        1YBQYp8DDYWg8wiUAw2FoHuQqFCjQYsO/RPC+HEWrxN0ymntLMK4TvE6QSeN0Ai0ep9CB+uw+cgr
-        YmGay0hsmDCazfMqwT/+wjxBB63QbfQqs6bNkRkhM2uT0EwY2caJT1J5nbDoqn41L1OaDWMNiJzL
-        +2qFllwrmgYhox/9P/0bAw==
+      string: '{"shows":[{"id":"8976d3bb-a213-4210-9a03-f4b6d17ce540","name":"Marvel''s
+        Agents of S.H.I.E.L.D.","nbSeasons":7,"seasons":[1,2,3,4,5,6,7],"tvDbId":263365,"tmdbId":1403,"slug":"marvels-agents-of-shield"},{"id":"9039b72e-89eb-401e-9d03-0419bf7d1273","name":"Marvel''s
+        Agents of S.H.I.E.L.D.: Slingshot","nbSeasons":0,"seasons":[],"tvDbId":null,"tmdbId":69088,"slug":"marvels-agents-of-shield-slingshot"}]}'
     headers:
-      Age:
-      - '3658'
       CF-Cache-Status:
       - HIT
       CF-RAY:
-      - 87f8b2443bb3f104-CDG
+      - 88ba5f396bb35be2-LIS
       Cache-Control:
       - public, max-age=14400
       Connection:
@@ -36,13 +31,13 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Mon, 06 May 2024 11:40:35 GMT
+      - Wed, 29 May 2024 23:47:51 GMT
       Last-Modified:
-      - Mon, 06 May 2024 10:39:37 GMT
+      - Wed, 29 May 2024 19:47:24 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=gOCvdMCGMUY4I5RrG8RsGJLqPM8QoIIZk%2BWfHslcaSne3OS8dveu7nnJiqsF2VKF24zQXbn%2BAgViyZes9iyC69siz%2Bj9wLdJ2tdWcdJRvdrB0Ke1CxbyDI3icXM7OM%2BHKTp04Q%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=XTeDH74XDTX7n0N%2FjifuDjSDdJbzLi0aOTWJOJRisvJLwFed6jYTt5DuLbZEX9M1UDC28wNrkew7zevwjxJNjt%2BTsfZ5qPIU2P%2BsmtpVFaHWfFCef76OueOC%2FC5LzZ9XPtJd1A%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -62,7 +57,7 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
       User-Agent:
@@ -73,23 +68,13 @@ interactions:
     uri: https://api.gestdown.info/subtitles/get/8976d3bb-a213-4210-9a03-f4b6d17ce540/2/6/eng
   response:
     body:
-      string: !!binary |
-        gxUFAGTfnO/p2qe/cZQaZLwNEGxLbvOBkm7s//9N9z6GOpYnUjRBOr3b2NbJIKECTTyhwrbFnqVO
-        18Gu7vBSIY1pTqfD/8JRWdp2Ot682tVlWg5lhvzpL8zHpA8YMhiWop3WqGowSIorxlQdSvVd9Wp0
-        LA4G2EFuBGQIRp3iowePH995+QoGQLA+Q17OdzLAVsr5dLx5cHRapnNhyL0czjLA1rexdrF8m1Sq
-        /835BBnWGI15fbKINVKp9BZk+L96HwzA0/wOeV1KXkIZgyqhNq+VypayC6PSPqjwEcDMdetkd7xA
-        1vr/QNkjqJqnVHpHI94ikfFYYujoo3AX6kGRDYEWXFIARQ1WSjZzk+RYeWoBTROLlLTGGpJCMa5z
-        s1xjUvEX92+/fjv+Mp5YE/UXUmQUcEG08WnDTY905ETJW0ZjakEKLmJs3LASd4o+WUk1sva+pFkU
-        eFGDZTu0DWLbYlDappBQlLFIunssyRaMvUbWpTmvdfT43Z2bePsx3mRMIDmsyAhgoggLdDGGe6Rc
-        kZ40BbRORaRkPaZEBTkQh95cr1GlwAkuKVCitJU/9uMeNFNiFSGsXVsk4oTFeI/BBa0KMZP4vXXz
-        9svpdH3Eyzvvbry8zRoFWlA3ploHazZRYI+0941JR4+RlULS1WLSzOhrsDVE4eKFNnhTUsBF8Rbs
-        YIs4+//LAHI6zScskP/CLGU+OYZsBvhKZROyH8Df3hXIcGN197y0ZXcuvLp/spsFBpi3Jz8hw5Ny
-        /kMOL8+rGxs5XubVSV+9Gu+PD8Y74+Px9vh4bcp9hP//DQM=
+      string: '{"matchingSubtitles":[{"subtitleId":"2dea1511-0b72-40db-89b5-eb6f0fb218a5","version":"720p-KILLERS","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/2dea1511-0b72-40db-89b5-eb6f0fb218a5","language":"English","discovered":"2022-09-12T00:34:57.016707Z","downloadCount":11},{"subtitleId":"0c649aff-2e63-4426-a87f-68edfe4f7043","version":"720p-KILLERS","completed":true,"hearingImpaired":true,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/0c649aff-2e63-4426-a87f-68edfe4f7043","language":"English","discovered":"2022-09-12T00:34:57.016709Z","downloadCount":2},{"subtitleId":"45d064c7-2ce3-4911-b790-e25fdc3db890","version":"HDTV.x264-KILLERS","completed":true,"hearingImpaired":true,"corrected":true,"hd":false,"downloadUri":"/subtitles/download/45d064c7-2ce3-4911-b790-e25fdc3db890","language":"English","discovered":"2022-09-12T00:34:57.016712Z","downloadCount":6},{"subtitleId":"8d94963d-22ba-4758-8cdc-b4df48693e9b","version":"HDTV.x264-KILLERS","completed":true,"hearingImpaired":false,"corrected":true,"hd":false,"downloadUri":"/subtitles/download/8d94963d-22ba-4758-8cdc-b4df48693e9b","language":"English","discovered":"2022-09-12T00:34:57.016713Z","downloadCount":138},{"subtitleId":"47013979-e023-41f6-a93a-8fb8d1ac5611","version":"WEB-DL-BS","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/47013979-e023-41f6-a93a-8fb8d1ac5611","language":"English","discovered":"2022-09-12T00:34:57.016717Z","downloadCount":55},{"subtitleId":"5aef9147-3508-4936-994a-d74d7fc5fb80","version":"WEB-DL-BS","completed":true,"hearingImpaired":true,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/5aef9147-3508-4936-994a-d74d7fc5fb80","language":"English","discovered":"2022-09-12T00:34:57.016718Z","downloadCount":4},{"subtitleId":"c2a8bee4-bf13-44d9-a266-75710a4dd4e3","version":"BDRip.x264-REWARD","completed":true,"hearingImpaired":true,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/c2a8bee4-bf13-44d9-a266-75710a4dd4e3","language":"English","discovered":"2022-09-12T00:34:57.016732Z","downloadCount":31},{"subtitleId":"66cd4186-8d00-41b3-91dd-6b73b78eda6e","version":"BDRip.x264-REWARD","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/66cd4186-8d00-41b3-91dd-6b73b78eda6e","language":"English","discovered":"2022-09-12T00:34:57.016733Z","downloadCount":159}],"episode":{"season":2,"number":6,"title":"A
+        Fractured House","show":"Marvel''s Agents of S.H.I.E.L.D.","discovered":"2022-09-12T00:34:57.016705Z"}}'
     headers:
       CF-Cache-Status:
-      - MISS
+      - EXPIRED
       CF-RAY:
-      - 87f8b2448c11f104-CDG
+      - 88ba5f39ecab5bd6-LIS
       Cache-Control:
       - public, max-age=7200
       Connection:
@@ -99,13 +84,13 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Mon, 06 May 2024 11:40:35 GMT
+      - Wed, 29 May 2024 23:47:52 GMT
       Last-Modified:
-      - Mon, 06 May 2024 11:40:35 GMT
+      - Wed, 29 May 2024 19:47:26 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=nzfbadmzqJnDSrqaeRorolPa1bXvBW6p9nYSKn8JZdD53EjfSdffCVN%2Fg1PS9OaGquHS5yglm33aiCiMBfojpYcljDyj5ZQ8DXV1CAlkXe410srqBUHNvGxaNecjlj9SJ%2BaW%2Bg%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=HW4lmfkkk8NfFgSLac9xPHMU3pR7VKzn6RMZQn4%2F2jAyiP7ov7gtqrQi13jjK3End6f8%2B3ELuVZsdG9JvuONN2ri6nmp3Xg4ubhpQMWeq25eC2WPgoPFXJfU2nzs9s5b2RGaCA%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:

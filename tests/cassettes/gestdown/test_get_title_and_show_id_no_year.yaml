@@ -3,7 +3,7 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
       User-Agent:
@@ -14,17 +14,12 @@ interactions:
     uri: https://api.gestdown.info/shows/external/tvdb/77092
   response:
     body:
-      string: !!binary |
-        A1IAAMTCOZU//UkKrId6kgsEa00IGmkmeTTYeUef1HMP57kjDeBAUYzAjFSNuXakMy0KFWZbgclC
-        P7I1TdFUU9ZAqNwyhIOTWxRuD0LlPUK3r6sejiwR+tDtK58yKaSSRjoZZJFNskKy+iYM08m7B3BM
-        U7IVwlAGVJMIfTHGcBD8+b//Aw==
+      string: '{"shows":[{"id":"226d7f34-a9f5-4fe2-98d7-ecf944243714","name":"Dallas","nbSeasons":10,"seasons":[1,2,3,4,5,6,8,9,12,13],"tvDbId":77092,"tmdbId":40,"slug":"dallas"}]}'
     headers:
-      Age:
-      - '386600'
       CF-Cache-Status:
       - HIT
       CF-RAY:
-      - 87f858fa7b3d22af-CDG
+      - 88ba5f34dba05bf0-LIS
       Cache-Control:
       - public, max-age=14400
       Connection:
@@ -34,13 +29,13 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Mon, 06 May 2024 10:39:38 GMT
+      - Wed, 29 May 2024 23:47:51 GMT
       Last-Modified:
-      - Wed, 01 May 2024 23:16:18 GMT
+      - Thu, 23 May 2024 02:32:32 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=0JsgXYKsPYxdvPD9PaFgZspT7x0Fxqbptn1GnU3SuCYHDOjy5JpZ99BsqxldSVP1N5baQ5EB%2BdDpiTh3gwZZRt3H5WwrscflMlJ3aNKQe6EDHiYQsueLHyxg7YTzsTf2SStBLw%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=JVTi6FVTz2NbOI8A6HriRgYI8rBy4lXG8Djbh%2BMwJRAYPAKLF4Wob%2FUhmgk9d%2Fw1YeBTARlY0vxmtCo5J0eIU0ivgcUPMUp6pD4qOffNNUc%2F9jddWPewXr57GK1qBlbIEOja2Q%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:

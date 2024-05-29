@@ -3,7 +3,7 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
       User-Agent:
@@ -14,15 +14,13 @@ interactions:
     uri: https://api.gestdown.info/shows/search/The%20X-Files
   response:
     body:
-      string: !!binary |
-        A1kAAMT3tW1aeX9Oz2xGZ/OWBrMcYiFcAPEXsjk/BcX4i61FARuxDvJlqIKcPRWl2lOZ9kOV5CbQ
-        YZCbUKcgnPSRUaCz4cpA1bcHFhBOps1azidB4fsEYS3nk6AY+xRQSBHFlFBKGeXke+T7U0L5qJqW
-        RZGmYZ4RyqM1LYsi8rKUIIf7GgXKDauXWm0PLPhP/wM=
+      string: '{"shows":[{"id":"d4ea29c3-29e0-47a0-8a13-69b2a329b3a7","name":"The
+        X-Files","nbSeasons":11,"seasons":[1,2,3,4,5,6,7,8,9,10,11],"tvDbId":77398,"tmdbId":4087,"slug":"the-x-files"}]}'
     headers:
       CF-Cache-Status:
-      - MISS
+      - HIT
       CF-RAY:
-      - 87f8b1297fd03c92-CDG
+      - 88ba5f3c5adf5bd8-LIS
       Cache-Control:
       - public, max-age=14400
       Connection:
@@ -32,13 +30,13 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Mon, 06 May 2024 11:39:50 GMT
+      - Wed, 29 May 2024 23:47:52 GMT
       Last-Modified:
-      - Mon, 06 May 2024 11:39:50 GMT
+      - Wed, 29 May 2024 11:08:17 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=P1Gsmthe5uCbfg5CdUqiRBqE66ojj54tJXFX6FB5y6guLvG8VpiodXcoon4zhszlq11E%2BOvnG5WegDvp4afTiicZ7wxU2%2FG%2Be3wI26zJm7bUu1PA96OpraPZgN9WVkSEizzKwQ%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=NUx7qJavs4n6bofq7L%2FkKeJqnWhQmdxpshQ1hgyPJSPx%2Bxu%2FGYp8yvQoYIlp2gdoIVk2HoXVCbAMp%2FqOtLy8F3kIK90eoHD11CRiEY3Rbz%2BJ7enpyxQBNPVrPbOv1e2PYhn%2B8g%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -58,7 +56,7 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
       User-Agent:
@@ -69,21 +67,13 @@ interactions:
     uri: https://api.gestdown.info/subtitles/get/d4ea29c3-29e0-47a0-8a13-69b2a329b3a7/10/2/fra
   response:
     body:
-      string: !!binary |
-        gzcDAGR/6evpmqe0GwVss28dcwgQsf9Y+Ld78CYAjIe6gU1kdkH2O49Sygo08YQWfvQAw0HMK9bD
-        zwvblfpi5v+FNc15nDbnr45pnuYVN4if/kLrqz4oEEF3nIk9o+o6hTolhb63Fq3WeUiKgksEAm6Q
-        WwYR3nHC24/PHjx5fuflgzdPQADE/gXifDiygJHpMG3OH6x3NB24QKy0aizg9tsoT8bLkLXqm8ME
-        ESQmaXKwCQmLrJ+CCHcPvMkjCChTO0U+HReI0Ku+R2Ww9687H42OgzkzQTltPgLLVre2x80MUYf/
-        wmmX2NdMyXKP3nUDalU6pMqMNQSluSu+FpZ/vLzx8ua95oLUUwHZYqWHHLQZvKGAoZaA2ijCVPKA
-        VbNlx2R0svKNG29fRZULQD9+gjfhElPfhcHVimnghNoUg6F4g76o4nM2obqchfm4faB8XJG6YPXj
-        Mm1UDXc2Bw/pe66UK2OgwaAOxBiYPJIeqA7Ks+NeMvLowePHd16GlgtIT74q72uCLwJ4N7VtYYh/
-        oTG17QZipwQ8fpdC7AXwjiDCfxS8IHy43E6eHGeap+0GBLRx+xMivB755D3enVbcto/ph4/w/78B
-        Aw==
+      string: '{"matchingSubtitles":[{"subtitleId":"41ecae8e-0110-4bb0-8266-644c3b0a97ba","version":"Web-DL.IMPERIUM","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/41ecae8e-0110-4bb0-8266-644c3b0a97ba","language":"French","discovered":"2022-05-28T18:54:35.590745Z","downloadCount":51},{"subtitleId":"2fcab6e2-8713-40d1-afee-f9904e1d8fde","version":"Web-DL.RARBG","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/2fcab6e2-8713-40d1-afee-f9904e1d8fde","language":"French","discovered":"2022-05-28T18:54:35.590746Z","downloadCount":0},{"subtitleId":"345385a9-9fd9-450a-bdc3-f4e6e7ea54b6","version":"AVS","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/345385a9-9fd9-450a-bdc3-f4e6e7ea54b6","language":"French","discovered":"2022-05-28T18:54:35.590759Z","downloadCount":0},{"subtitleId":"b21937ff-b3eb-45d5-9d85-8d0d8cc59f7c","version":"Web-DL.Dracula","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/b21937ff-b3eb-45d5-9d85-8d0d8cc59f7c","language":"French","discovered":"2022-05-28T18:54:35.59076Z","downloadCount":16},{"subtitleId":"82efacfe-9a35-49ae-9ea8-a43af308e7e2","version":"KILLERS","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/82efacfe-9a35-49ae-9ea8-a43af308e7e2","language":"French","discovered":"2022-05-28T18:54:35.590762Z","downloadCount":0}],"episode":{"season":10,"number":2,"title":"Founder''s
+        Mutation","show":"The X-Files","discovered":"2022-05-28T18:54:35.590723Z"}}'
     headers:
       CF-Cache-Status:
-      - MISS
+      - EXPIRED
       CF-RAY:
-      - 87f8b129d84d3c92-CDG
+      - 88ba5f3ceb445bda-LIS
       Cache-Control:
       - public, max-age=7200
       Connection:
@@ -93,13 +83,13 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Mon, 06 May 2024 11:39:50 GMT
+      - Wed, 29 May 2024 23:47:52 GMT
       Last-Modified:
-      - Mon, 06 May 2024 11:39:50 GMT
+      - Wed, 29 May 2024 19:47:27 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=op7Ua2RlQON%2FdtX1%2F9CBFV0Ftk4%2Bqiiu9ZcsVX8AO2WBqgyOfBfQrmhgPy9VoC%2FhxAO%2BIbfrrfJJyL3mP%2Fy09sKt%2FsqyLe8F102nNHeb1a%2Fr80b%2B9%2BseqTO0c%2FBmE7m3lrfMfQ%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=FWcj19DQcSXv4s80Lgvp63EW69TuTWn9h1LkIZrfojiW7Bzm97PenKaoscexfm%2BDygupE0ibYuc06X8KPXu3X7NvInhU7troBCNww8hyLOwDEwCizzkLW6KTvMen%2B8BKQWQtCQ%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:

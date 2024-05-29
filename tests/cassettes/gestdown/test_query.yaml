@@ -3,7 +3,7 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
       User-Agent:
@@ -14,17 +14,15 @@ interactions:
     uri: https://api.gestdown.info/shows/external/tvdb/80379
   response:
     body:
-      string: !!binary |
-        g2IAAMT/dHNauTe/3PERG1ufy1YPCVQ8VCyUC4Dwhducnw7F9IutQYFcrM6DNFNZVccqMsaoXERU
-        Wie+ljiPs0qDOK2PFgXKjfU628brrE+NV27s+fYGcdITu3bnk0MhAeHs2p1PDsVUGDBkxJgJU2bM
-        KT5FKMGcaB89PTYoMj9Mc6I9Gj02KCSSjHCHe4MC7cYqvW2UXp8a1W7s+fbGf/43AAM=
+      string: '{"shows":[{"id":"91eb9278-8cf5-4ddd-9111-7f60b15958cb","name":"The
+        Big Bang Theory","nbSeasons":12,"seasons":[1,2,3,4,5,6,7,8,9,10,11,12],"tvDbId":80379,"tmdbId":1418,"slug":"the-big-bang-theory"}]}'
     headers:
       Age:
-      - '537049'
+      - '109'
       CF-Cache-Status:
       - HIT
       CF-RAY:
-      - 87f858fb982d229c-CDG
+      - 88ba5f3599805bd3-LIS
       Cache-Control:
       - public, max-age=14400
       Connection:
@@ -34,13 +32,13 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Mon, 06 May 2024 10:39:38 GMT
+      - Wed, 29 May 2024 23:47:51 GMT
       Last-Modified:
-      - Tue, 30 Apr 2024 05:28:49 GMT
+      - Thu, 23 May 2024 00:34:46 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=Pb4jP%2Fnj4DMM3tJNkaR3ji%2BzxDMiBziovsPWsrhL77b1bw5ep3BdFCq9quz2CHxfcmxN6odGdczedQLjVMz26hQlFtf9HCiqUp%2B2yDeyTau07J%2BzbLGkGr1ILdWRlbjI%2BRz2oQ%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=lQ58yX1nf3%2FwYuuDwEyyosX1tuGyPDrQWf0dUsnvZPvnTElr6abc6IFH0eEHCLFM9R2yaVXLAkEeOqbtnVlNyrdBaFOtCSLO56kJXcg7DY%2FjTd9MF8%2BIZbtRGqxweXw1qDZgwA%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -60,7 +58,7 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
       User-Agent:
@@ -71,21 +69,13 @@ interactions:
     uri: https://api.gestdown.info/subtitles/get/91eb9278-8cf5-4ddd-9111-7f60b15958cb/7/5/eng
   response:
     body:
-      string: !!binary |
-        A0ADAGRfnf209mmOWpNM2wcEmZoUKOkd/7+z93LsW5rpBZZAeX7uuHxAM5sNxxPf8wPTKOeZu0Yp
-        D+W1ldu1ecLxW9jylPtht/x0TtMwbeoI8dctjPPSFwUisDLUdJMYlGhoZCNMgRt6Z9lqnbMvBTq4
-        QW4PIjx+8ebJ208v3r2FDpb/qECcTufaQV/5NOyWL7YHHk4q99rbXraVauGm/eU0QIQFPjUuxhIL
-        lMLtFUT4W70FHZRhPD8e5QEllEJBqMVnaSLJKMTcKmmD/Qlg7n60P+8miEbdd3RVqEAkKSMbK9CY
-        yhgSe/RFu5RTSMRWNm68GVs6zLYK6IFQohBEgQU2kgJNcw1TDoTCyVKLK54Uy498e/IQH7/uDWBs
-        J7CoTmi8rSLZUxPKC2w6KzREHhMXi84LrQ1nV5WsjMP2ErAJiG1xBRFZyiIDZU0yadTeBzRBMHIu
-        GoNiL6zzwTSS9334+ONwmF8pa+aPn7x58PZxIvIkTSSuCbwtBdioysQ8pMP9nw7qYRj3pUK8hbHy
-        uN9BdB08gNdApA54PQ8RPvd19m1/Wh82nOvs/Wl/NWyH6Ro6GPv9pdHTPByWs4e8W84+93V/ut5W
-        tfkJ9/cD
+      string: '{"matchingSubtitles":[{"subtitleId":"a245f3f1-920f-41f5-b9af-876a633cc8dd","version":"DIMENSION","completed":true,"hearingImpaired":true,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/a245f3f1-920f-41f5-b9af-876a633cc8dd","language":"English","discovered":"2022-05-30T14:51:00.621696Z","downloadCount":45},{"subtitleId":"a295515c-a460-44ea-9ba8-8d37bcb9b5a6","version":"DIMENSION","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/a295515c-a460-44ea-9ba8-8d37bcb9b5a6","language":"English","discovered":"2022-05-30T14:51:00.621698Z","downloadCount":50},{"subtitleId":"a00559a0-f510-4f7f-bc95-071ded7d852a","version":"WEB-DL","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/a00559a0-f510-4f7f-bc95-071ded7d852a","language":"English","discovered":"2022-05-30T14:51:00.621703Z","downloadCount":48},{"subtitleId":"c85f0280-f3c2-4558-bad6-780334ac7e21","version":"WEB-DL","completed":true,"hearingImpaired":true,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/c85f0280-f3c2-4558-bad6-780334ac7e21","language":"English","discovered":"2022-05-30T14:51:00.621705Z","downloadCount":11},{"subtitleId":"95c351b3-3889-490a-acd3-92a8067894f5","version":"BDRip.x264.DEMAND","completed":true,"hearingImpaired":false,"corrected":true,"hd":false,"downloadUri":"/subtitles/download/95c351b3-3889-490a-acd3-92a8067894f5","language":"English","discovered":"2022-05-30T14:51:00.621728Z","downloadCount":548}],"episode":{"season":7,"number":5,"title":"The
+        Workplace Proximity","show":"The Big Bang Theory","discovered":"2022-05-30T14:51:00.621694Z"}}'
     headers:
       CF-Cache-Status:
-      - MISS
+      - HIT
       CF-RAY:
-      - 87f858fbe865229c-CDG
+      - 88ba5f35ed925bd8-LIS
       Cache-Control:
       - public, max-age=7200
       Connection:
@@ -95,13 +85,13 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Mon, 06 May 2024 10:39:38 GMT
+      - Wed, 29 May 2024 23:47:51 GMT
       Last-Modified:
-      - Mon, 06 May 2024 10:39:38 GMT
+      - Wed, 29 May 2024 23:44:22 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=df8alJZ5jwLts9RGVdmrIZoigqqkfAmiOFwj03D75pSJoZ5D5VnStUcv6c%2BrYiV8I0%2BggLfqyCumigK9GqCvIOpSuORyZjgHb2UN85y46y%2Fblsk72IxXY7sRti%2BX0HN0O0ZXzA%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=BsCQ27bN%2FmmjMAeJwsgWLuzu2ZrcbqtI6sosCy8ZZIOXUMhHwI%2FbHm0UefsaDq%2FNLk5ZBQodjnssSqTtVQ6SXaq7ZXzKnXNXYrx08tbULh6BFs%2BQ6a3O8lGi1jHkjIlTZud8pw%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:

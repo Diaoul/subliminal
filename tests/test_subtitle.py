@@ -1,8 +1,7 @@
 import os
 
-from babelfish import Language
 import pytest
-
+from babelfish import Language
 from subliminal.subtitle import Subtitle, fix_line_ending, get_subtitle_path
 
 
@@ -14,7 +13,7 @@ def test_subtitle_text():
 
 def test_subtitle_text_no_content():
     subtitle = Subtitle(Language('eng'))
-    assert subtitle.text is None
+    assert subtitle.text == ''
 
 
 def test_subtitle_is_valid_no_content():
@@ -24,32 +23,39 @@ def test_subtitle_is_valid_no_content():
 
 def test_subtitle_is_valid_valid(monkeypatch):
     subtitle = Subtitle(Language('fra'))
-    text = (u'1\n'
-            u'00:00:20,000 --> 00:00:24,400\n'
-            u'En réponse à l\'augmentation de la criminalité\n'
-            u'dans certains quartiers,\n')
+    text = (
+        '1\n'
+        '00:00:20,000 --> 00:00:24,400\n'
+        "En réponse à l'augmentation de la criminalité\n"
+        'dans certains quartiers,\n'
+    )
     monkeypatch.setattr(Subtitle, 'text', text)
     assert subtitle.is_valid() is True
 
-@pytest.mark.xfail
+
+@pytest.mark.xfail()
 def test_subtitle_is_valid_invalid(monkeypatch):
     subtitle = Subtitle(Language('fra'))
-    text = (u'1\n'
-            u'00:00:20,000 --> 00:00:24,400\n'
-            u'En réponse à l\'augmentation de la criminalité\n'
-            u'dans certains quartiers,\n\n')
-    text += u'This line shouldn\'t be here'
+    text = (
+        '1\n'
+        '00:00:20,000 --> 00:00:24,400\n'
+        "En réponse à l'augmentation de la criminalité\n"
+        'dans certains quartiers,\n\n'
+    )
+    text += "This line shouldn't be here"
     monkeypatch.setattr(Subtitle, 'text', text)
     assert subtitle.is_valid() is False
 
 
 def test_subtitle_is_valid_valid_begin(monkeypatch):
     subtitle = Subtitle(Language('fra'))
-    text = (u'1\n'
-            u'00:00:20,000 --> 00:00:24,400\n'
-            u'En réponse à l\'augmentation de la criminalité\n'
-            u'dans certains quartiers,\n\n')*20
-    text += u'This line shouldn\'t be here'
+    text = (
+        '1\n'
+        '00:00:20,000 --> 00:00:24,400\n'
+        "En réponse à l'augmentation de la criminalité\n"
+        'dans certains quartiers,\n\n'
+    ) * 20
+    text += "This line shouldn't be here"
     monkeypatch.setattr(Subtitle, 'text', text)
     assert subtitle.is_valid() is True
 
@@ -83,33 +89,58 @@ def test_fix_line_ending_chinese_characters():
 
 
 def test_subtitle_valid_encoding():
-    subtitle = Subtitle(Language('deu'), False, None, 'windows-1252')
+    subtitle = Subtitle(
+        language=Language('deu'),
+        hearing_impaired=False,
+        page_link=None,
+        encoding='windows-1252',
+    )
     assert subtitle.encoding == 'cp1252'
 
 
 def test_subtitle_empty_encoding():
-    subtitle = Subtitle(Language('deu'), False, None, None)
+    subtitle = Subtitle(
+        language=Language('deu'),
+        hearing_impaired=False,
+        page_link=None,
+        encoding=None,
+    )
     assert subtitle.encoding is None
 
 
 def test_subtitle_invalid_encoding():
-    subtitle = Subtitle(Language('deu'), False, None, 'rubbish')
+    subtitle = Subtitle(
+        language=Language('deu'),
+        hearing_impaired=False,
+        page_link=None,
+        encoding='rubbish',
+    )
     assert subtitle.encoding is None
 
 
 def test_subtitle_guess_encoding_utf8():
-    subtitle = Subtitle(Language('zho'), False, None, None)
+    subtitle = Subtitle(
+        language=Language('zho'),
+        hearing_impaired=False,
+        page_link=None,
+        encoding=None,
+    )
     subtitle.content = b'Something here'
     assert subtitle.guess_encoding() == 'utf-8'
-    assert isinstance(subtitle.text, str)
+    assert subtitle.text == 'Something here'
 
 
 # regression for #921
 def test_subtitle_text_guess_encoding_none():
     content = b'\x00d\x00\x80\x00\x00\xff\xff\xff\xff\xff\xff,\x00\x00\x00\x00d\x00d\x00\x00\x02s\x84\x8f\xa9'
-    subtitle = Subtitle(Language('zho'), False, None, None)
+    subtitle = Subtitle(
+        language=Language('zho'),
+        hearing_impaired=False,
+        page_link=None,
+        encoding=None,
+    )
     subtitle.content = content
 
     assert subtitle.guess_encoding() is None
     assert not subtitle.is_valid()
-    assert not isinstance(subtitle.text, str)
+    assert subtitle.text == ''

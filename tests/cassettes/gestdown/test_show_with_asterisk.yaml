@@ -3,7 +3,7 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
       User-Agent:
@@ -14,15 +14,14 @@ interactions:
     uri: https://api.gestdown.info/shows/search/The%20End%20of%20the%20Fucking%20World
   response:
     body:
-      string: !!binary |
-        gxgAAETdlup4MXSraEiCdK9cOD+oYsqCDValri8lf8oWLuYyxhH/EVUGsjEcry2vxxdpvpXJAAM=
+      string: '"Couldn''t find show: The End of the Fucking World"'
     headers:
       Age:
-      - '4377'
+      - '2'
       CF-Cache-Status:
       - HIT
       CF-RAY:
-      - 87f8c3d4dcea3c86-CDG
+      - 88ba5f442d655be0-LIS
       Cache-Control:
       - public, max-age=43200
       Connection:
@@ -32,11 +31,11 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Mon, 06 May 2024 11:52:35 GMT
+      - Wed, 29 May 2024 23:47:53 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=k4hh8DgqHp2y5RTpTEmATlfBB2mvwDBPjPY4RvS2l%2Bv0qJW1AyRQ65Vz6qHKo9ZiFyLEQRb4PFPa7WRlDjZdnsnURViRhPEHCaHW6KFDmcFq0eD7uG6zM1OhICpbOpOL0Iv6qQ%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=V6Nnpz0JVhjVksNKEqz9jG3zaFpo8uZnvWI2sRX%2FuMEpSMwhiFECOuUa%2F2cRRDpZcAUp0VQtv0b8NiTqouJkTQfIX%2BFY%2BJdZ0hTF6sbA13iuTYCQ7CehHE1d%2Fz5nye4OaGvkpA%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -56,7 +55,7 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
       User-Agent:
@@ -67,17 +66,15 @@ interactions:
     uri: https://api.gestdown.info/shows/search/The%20end%20of%20the%20f***ing%20world
   response:
     body:
-      string: !!binary |
-        A18AAMSqOZXNrMz8BehBF3XrAvRXAIANOFKOJMkGoHOllp9fXFfH5xUm/2JtYcBS6UUsQ2o5kJTY
-        LqFOty1lXZywZM2yCyBwaPcMg/mKneHBOscFlxFGruuuD0tHdiAgcOhm3F6PhytMJHAt5KGISoHb
-        Y9BNLUwcZ2kUCdz29i1lkkopcN3dlzC4rZj4YOm4oNuKabE+LOl5vOws/uXfAAM=
+      string: '{"shows":[{"id":"e789f371-ae07-4db4-b9aa-6b34e7e9e7b0","name":"The
+        End of the F***ing World","nbSeasons":2,"seasons":[1,2],"tvDbId":336522,"tmdbId":74577,"slug":"the-end-of-the-fing-world"}]}'
     headers:
       Age:
-      - '2876'
+      - '2'
       CF-Cache-Status:
       - HIT
       CF-RAY:
-      - 87f8c3d53d3e3c86-CDG
+      - 88ba5f445fa55bde-LIS
       Cache-Control:
       - public, max-age=14400
       Connection:
@@ -87,13 +84,13 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Mon, 06 May 2024 11:52:35 GMT
+      - Wed, 29 May 2024 23:47:53 GMT
       Last-Modified:
-      - Mon, 06 May 2024 11:04:39 GMT
+      - Wed, 29 May 2024 19:47:25 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=yrZu13mZnKPzwoC56bV%2F2RG%2Fs%2FgZlRYKR3D8ECr12%2FcVs%2BrOXksCW%2FzWZoN%2BUYKAtLOl9Muk50L7%2F0OB%2BOsHmqDYq5GquXRO2pBtFJPwDmny7oKi%2BDftrrbGhe6FZ%2BN7A%2FdYaQ%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=Qzux1Fm2zfu%2FcsRk1rIyRHYFJ8GPdX6EcyUltAk2jyU36hyY%2FNZPEoBtk%2BKUpWjAe3oj48ot3%2Blx2uosa3hpBFt9nt8D9sMLbVsFxqnSciBexzeDlXtmAV4CJlNlD12Ap2eL6w%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -113,7 +110,7 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
       User-Agent:
@@ -124,21 +121,13 @@ interactions:
     uri: https://api.gestdown.info/subtitles/get/e789f371-ae07-4db4-b9aa-6b34e7e9e7b0/1/4/eng
   response:
     body:
-      string: !!binary |
-        gxACAMT/lrPTNfOOHWiB/Bi3FRUsTSpGuuvDTt1TPoABReX5+z7CgQxnA5741zAdTbep4FVHRyg0
-        yzt1+y+mpnNNOxterW3XdpMQoZ9+EdeuBx4aNqPaKkHclaLiRCLjJZHltax9XgepKpWBIYPcKjSu
-        ti53dk63LjfOwXB+Jw/drdaBoQlm1c6GB9OFaVcqOe9t5GwXPHRtJjEwOCrerFpoDBCSOFC2GODE
-        jk+g0V29AAbfxh/kxwUPDSWU4iLnIr2WuZa5prxfSVGJ8hFgDtqar2cdNP2z+/qkyCqyNqTchJo4
-        SVPwMi9S7gpfOGlJpCnRi97tbPLt4/7F2QXBXZ0fLmB64pwUsPrFSGWZyIPiqiolp1IabgWVPLcU
-        ZKiNpKwmFD7+pgucvjinImuMLKv/F4awaOPcB+hfxGDifAYtGcqU5dDE8LgUGjvGXRMCQ2zmn9C4
-        bkKyM/NJKb4zu71er50Nk5Yr3EQ9yx/x/28AAw==
+      string: '{"matchingSubtitles":[{"subtitleId":"b54fb204-c809-4405-844b-f1fd6fe12925","version":"SCREENCRAP","completed":true,"hearingImpaired":true,"corrected":true,"hd":false,"downloadUri":"/subtitles/download/b54fb204-c809-4405-844b-f1fd6fe12925","language":"English","discovered":"2022-06-03T16:16:46.910908Z","downloadCount":4},{"subtitleId":"0594bbe3-aef4-41a7-8673-c7d7c1b40334","version":"WEB-DL.QOQ","completed":true,"hearingImpaired":true,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/0594bbe3-aef4-41a7-8673-c7d7c1b40334","language":"English","discovered":"2022-06-03T16:16:46.91091Z","downloadCount":2},{"subtitleId":"425506e2-2981-481a-b048-6b4e1efa145f","version":"WEB-DL.QOQ","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/425506e2-2981-481a-b048-6b4e1efa145f","language":"English","discovered":"2022-06-03T16:16:46.910912Z","downloadCount":192}],"episode":{"season":1,"number":4,"title":"Episode
+        4","show":"The End of the F***ing World","discovered":"2022-06-03T16:16:46.910906Z"}}'
     headers:
-      Age:
-      - '2875'
       CF-Cache-Status:
-      - HIT
+      - EXPIRED
       CF-RAY:
-      - 87f8c3d58d843c86-CDG
+      - 88ba5f449ebb5bd5-LIS
       Cache-Control:
       - public, max-age=7200
       Connection:
@@ -148,13 +137,13 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Mon, 06 May 2024 11:52:35 GMT
+      - Wed, 29 May 2024 23:47:53 GMT
       Last-Modified:
-      - Mon, 06 May 2024 11:04:40 GMT
+      - Wed, 29 May 2024 19:47:30 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=G1XYlxn0sSDzfzBv0Xjqu2ft%2Fb0qxsBSPPIY5wJGfDhs0%2FlcM22y5LNKz%2Bx%2FZtsihuIqgNE1fayv06kVWhZYPAAeH2qBitn%2BcmWukLrekmIMa9BczrJMkuTy6tIFBLRcU0zGow%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=aGLT0QfG1rucX99vMKkPN3Rgj%2FZIushH24xNU%2FitYCK0%2Flr3j6uP74kR61UXppEGOC6XcJ4gilZX%2F3ZUYTEaRD%2B4wfWjkzoHqJLFFF8IELm8vLlS2p1NbBM7ngCElQGiQYyaBg%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:

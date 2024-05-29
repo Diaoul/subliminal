@@ -1,26 +1,31 @@
-from datetime import datetime, timedelta, timezone
-import io
+# ruff: noqa: PT011, SIM115
 import os
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from unittest.mock import Mock
 
 import pytest
 from babelfish import Language
-from vcr import VCR
-
 from subliminal.core import (
-    AsyncProviderPool, ProviderPool, check_video, download_best_subtitles,
-    download_subtitles, list_subtitles, refine, save_subtitles, scan_archive, scan_video,
-    scan_videos, search_external_subtitles,
+    AsyncProviderPool,
+    ProviderPool,
+    check_video,
+    download_best_subtitles,
+    download_subtitles,
+    list_subtitles,
+    refine,
+    save_subtitles,
+    scan_archive,
+    scan_video,
+    scan_videos,
+    search_external_subtitles,
 )
 from subliminal.extensions import provider_manager
-from subliminal.providers.thesubdb import TheSubDBSubtitle
 from subliminal.providers.tvsubtitles import TVsubtitlesSubtitle
 from subliminal.score import episode_scores
 from subliminal.subtitle import Subtitle
 from subliminal.utils import timestamp
 from subliminal.video import Movie
-
+from vcr import VCR
 
 vcr = VCR(
     path_transformer=lambda path: path + '.yaml',
@@ -30,8 +35,8 @@ vcr = VCR(
 )
 
 
-@pytest.fixture
-def mock_providers(monkeypatch):
+@pytest.fixture()
+def _mock_providers(monkeypatch):
     for provider in provider_manager:
         monkeypatch.setattr(provider.plugin, 'initialize', Mock())
         monkeypatch.setattr(provider.plugin, 'list_subtitles', Mock(return_value=[provider.name]))
@@ -51,14 +56,16 @@ def test_provider_pool_del_keyerror():
         del pool['addic7ed']
 
 
-def test_provider_pool_iter(mock_providers):
+@pytest.mark.usefixtures('_mock_providers')
+def test_provider_pool_iter():
     pool = ProviderPool()
     assert len(list(pool)) == 0
     pool['tvsubtitles']
     assert len(list(pool)) == 1
 
 
-def test_provider_pool_list_subtitles_provider(episodes, mock_providers):
+@pytest.mark.usefixtures('_mock_providers')
+def test_provider_pool_list_subtitles_provider(episodes):
     pool = ProviderPool()
     subtitles = pool.list_subtitles_provider('tvsubtitles', episodes['bbt_s07e05'], {Language('eng')})
     assert subtitles == ['tvsubtitles']
@@ -66,16 +73,18 @@ def test_provider_pool_list_subtitles_provider(episodes, mock_providers):
     assert provider_manager['tvsubtitles'].plugin.list_subtitles.called
 
 
-def test_provider_pool_list_subtitles(episodes, mock_providers):
+@pytest.mark.usefixtures('_mock_providers')
+def test_provider_pool_list_subtitles(episodes):
     pool = ProviderPool()
     subtitles = pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
-    assert sorted(subtitles) == ['gestdown', 'opensubtitles', 'podnapisi', 'thesubdb', 'tvsubtitles']
+    assert sorted(subtitles) == ['gestdown', 'opensubtitles', 'opensubtitlescom', 'podnapisi', 'tvsubtitles']
     for provider in subtitles:
         assert provider_manager[provider].plugin.initialize.called
         assert provider_manager[provider].plugin.list_subtitles.called
 
 
-def test_async_provider_pool_list_subtitles_provider(episodes, mock_providers):
+@pytest.mark.usefixtures('_mock_providers')
+def test_async_provider_pool_list_subtitles_provider(episodes):
     pool = AsyncProviderPool()
     subtitles = pool.list_subtitles_provider('tvsubtitles', episodes['bbt_s07e05'], {Language('eng')})
     assert subtitles == ('tvsubtitles', ['tvsubtitles'])
@@ -83,10 +92,11 @@ def test_async_provider_pool_list_subtitles_provider(episodes, mock_providers):
     assert provider_manager['tvsubtitles'].plugin.list_subtitles.called
 
 
-def test_async_provider_pool_list_subtitles(episodes, mock_providers):
+@pytest.mark.usefixtures('_mock_providers')
+def test_async_provider_pool_list_subtitles(episodes):
     pool = AsyncProviderPool()
     subtitles = pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
-    assert sorted(subtitles) == ['gestdown', 'opensubtitles', 'podnapisi', 'thesubdb', 'tvsubtitles']
+    assert sorted(subtitles) == ['gestdown', 'opensubtitles', 'opensubtitlescom', 'podnapisi', 'tvsubtitles']
     for provider in subtitles:
         assert provider_manager[provider].plugin.initialize.called
         assert provider_manager[provider].plugin.list_subtitles.called
@@ -128,7 +138,7 @@ def test_search_external_subtitles(episodes, tmpdir):
         video_root + '.pt-BR.srt': Language('por', 'BR'),
         video_name + '.sr_cyrl.sub': Language('srp', script='Cyrl'),
         video_name + '.re.srt': Language('und'),
-        video_name + '.something.srt': Language('und')
+        video_name + '.something.srt': Language('und'),
     }
     tmpdir.ensure(os.path.split(episodes['got_s03e10'].name)[1] + '.srt')
     for path in expected_subtitles:
@@ -148,7 +158,7 @@ def test_search_external_subtitles_archive(movies, tmpdir):
         video_name + '.fra.srt': Language('fra'),
         video_root + '.pt-BR.srt': Language('por', 'BR'),
         video_name + '.sr_cyrl.sub': Language('srp', script='Cyrl'),
-        video_name + '.something.srt': Language('und')
+        video_name + '.something.srt': Language('und'),
     }
     tmpdir.ensure(os.path.split(movies['interstellar'].name)[1] + '.srt')
     for path in expected_subtitles:
@@ -162,10 +172,7 @@ def test_search_external_subtitles_no_directory(movies, tmpdir, monkeypatch):
     video_root = os.path.splitext(video_name)[0]
     tmpdir.ensure(video_name)
     monkeypatch.chdir(str(tmpdir))
-    expected_subtitles = {
-        video_name + '.srt': Language('und'),
-        video_root + '.en.srt': Language('eng')
-    }
+    expected_subtitles = {video_name + '.srt': Language('und'), video_root + '.en.srt': Language('eng')}
     for path in expected_subtitles:
         tmpdir.ensure(path)
     subtitles = search_external_subtitles(video_name)
@@ -177,10 +184,7 @@ def test_search_external_subtitles_in_directory(episodes, tmpdir):
     video_root = os.path.splitext(video_name)[0]
     tmpdir.ensure('tvshows', video_name)
     subtitles_directory = str(tmpdir.ensure('subtitles', dir=True))
-    expected_subtitles = {
-        video_name + '.srt': Language('und'),
-        video_root + '.en.srt': Language('eng')
-    }
+    expected_subtitles = {video_name + '.srt': Language('und'), video_root + '.en.srt': Language('eng')}
     tmpdir.ensure('tvshows', video_name + '.fr.srt')
     for path in expected_subtitles:
         tmpdir.ensure('subtitles', path)
@@ -244,11 +248,17 @@ def test_refine_video_metadata(mkv):
     assert scanned_video.hashes == {
         'opensubtitlescom': '49e2530ea3bd0d18',
         'opensubtitles': '49e2530ea3bd0d18',
-        'thesubdb': '64a8b87f12daa4f31895616e6c3fd39e',
     }
     assert scanned_video.size == 31762747
-    assert scanned_video.subtitle_languages == {Language('spa'), Language('deu'), Language('jpn'), Language('und'),
-                                                Language('ita'), Language('fra'), Language('hun')}
+    assert scanned_video.subtitle_languages == {
+        Language('spa'),
+        Language('deu'),
+        Language('jpn'),
+        Language('und'),
+        Language('ita'),
+        Language('fra'),
+        Language('hun'),
+    }
     assert scanned_video.title == 'test5'
     assert scanned_video.year is None
 
@@ -265,14 +275,13 @@ def test_scan_video_invalid_extension(movies, tmpdir, monkeypatch):
     tmpdir.ensure(movie_name)
     with pytest.raises(ValueError) as excinfo:
         scan_video(movie_name)
-    assert str(excinfo.value) == '\'.mp3\' is not a valid video extension'
+    assert str(excinfo.value) == "'.mp3' is not a valid video extension"
 
 
 def test_scan_video_broken(mkv, tmpdir, monkeypatch):
     broken_path = 'test1.mkv'
-    with io.open(mkv['test1'], 'rb') as original:
-        with tmpdir.join(broken_path).open('wb') as broken:
-            broken.write(original.read(512))
+    with open(mkv['test1'], 'rb') as original, tmpdir.join(broken_path).open('wb') as broken:
+        broken.write(original.read(512))
     monkeypatch.chdir(str(tmpdir))
     scanned_video = scan_video(broken_path)
     assert type(scanned_video) is Movie
@@ -296,7 +305,7 @@ def test_scan_archive_invalid_extension(movies, tmpdir, monkeypatch):
     tmpdir.ensure(movie_name)
     with pytest.raises(ValueError) as excinfo:
         scan_archive(movie_name)
-    assert str(excinfo.value) == '\'.mp3\' is not a valid archive'
+    assert str(excinfo.value) == "'.mp3' is not a valid archive"
 
 
 def test_scan_videos_path_does_not_exist(movies):
@@ -342,20 +351,24 @@ def test_scan_videos(movies, tmpdir, monkeypatch):
     assert mock_scan_archive.call_count == 1
 
     # scan_video calls
-    kwargs = dict()
-    scan_video_calls = [((os.path.join('movies', movies['man_of_steel'].name),), kwargs),
-                        ((os.path.join('movies', movies['enders_game'].name),), kwargs)]
+    kwargs = {}
+    scan_video_calls = [
+        ((os.path.join('movies', movies['man_of_steel'].name),), kwargs),
+        ((os.path.join('movies', movies['enders_game'].name),), kwargs),
+    ]
     mock_scan_video.assert_has_calls(scan_video_calls, any_order=True)
 
     # scan_archive calls
-    kwargs = dict()
+    kwargs = {}
     scan_archive_calls = [((os.path.join('movies', movies['interstellar'].name),), kwargs)]
     mock_scan_archive.assert_has_calls(scan_archive_calls, any_order=True)
 
 
 def test_scan_videos_age(movies, tmpdir, monkeypatch):
     tmpdir.ensure('movies', movies['man_of_steel'].name)
-    tmpdir.ensure('movies', movies['enders_game'].name).setmtime(timestamp(datetime.now(timezone.utc) - timedelta(days=10)))
+    tmpdir.ensure('movies', movies['enders_game'].name).setmtime(
+        timestamp(datetime.now(timezone.utc) - timedelta(days=10))
+    )
 
     # mock scan_video and scan_archive with the correct types
     mock_video = Mock(subtitle_languages=set())
@@ -372,61 +385,67 @@ def test_scan_videos_age(movies, tmpdir, monkeypatch):
     assert mock_scan_archive.call_count == 0
 
     # scan_video calls
-    kwargs = dict()
+    kwargs = {}
     scan_video_calls = [((os.path.join('movies', movies['man_of_steel'].name),), kwargs)]
     mock_scan_video.assert_has_calls(scan_video_calls, any_order=True)
 
 
-def test_list_subtitles_movie(movies, mock_providers):
+@pytest.mark.usefixtures('_mock_providers')
+def test_list_subtitles_movie(movies):
     video = movies['man_of_steel']
     languages = {Language('eng')}
 
     subtitles = list_subtitles({video}, languages)
 
     # test providers
-    for name in ('addic7ed', 'napiprojekt', 'opensubtitlesvip', 'shooter', 'tvsubtitles'):
+    for name in ('addic7ed', 'napiprojekt', 'opensubtitlesvip', 'tvsubtitles'):
         assert not provider_manager[name].plugin.list_subtitles.called
 
-    for name in ('opensubtitles', 'podnapisi', 'thesubdb'):
+    for name in ('opensubtitles', 'opensubtitlescom', 'podnapisi'):
         assert provider_manager[name].plugin.list_subtitles.called
 
     # test result
     assert len(subtitles) == 1
-    assert sorted(subtitles[movies['man_of_steel']]) == ['opensubtitles', 'podnapisi', 'thesubdb']
+    assert sorted(subtitles[movies['man_of_steel']]) == ['opensubtitles', 'opensubtitlescom', 'podnapisi']
 
 
-def test_list_subtitles_episode(episodes, mock_providers):
+@pytest.mark.usefixtures('_mock_providers')
+def test_list_subtitles_episode(episodes):
     video = episodes['bbt_s07e05']
     languages = {Language('eng'), Language('heb')}
 
     subtitles = list_subtitles({video}, languages)
 
     # test providers
-    for name in ('addic7ed', 'napiprojekt', 'opensubtitlesvip', 'shooter'):
+    for name in ('addic7ed', 'napiprojekt', 'opensubtitlesvip'):
         assert not provider_manager[name].plugin.list_subtitles.called
 
-    for name in ('gestdown', 'opensubtitles', 'podnapisi', 'thesubdb', 'tvsubtitles'):
+    for name in ('gestdown', 'opensubtitles', 'opensubtitlescom', 'podnapisi', 'tvsubtitles'):
         assert provider_manager[name].plugin.list_subtitles.called
 
     # test result
     assert len(subtitles) == 1
     assert sorted(subtitles[episodes['bbt_s07e05']]) == [
-        'gestdown', 'opensubtitles', 'podnapisi', 'thesubdb', 'tvsubtitles'
+        'gestdown',
+        'opensubtitles',
+        'opensubtitlescom',
+        'podnapisi',
+        'tvsubtitles',
     ]
 
 
-def test_list_subtitles_providers(episodes, mock_providers):
+@pytest.mark.usefixtures('_mock_providers')
+def test_list_subtitles_providers(episodes):
     video = episodes['bbt_s07e05']
     languages = {Language('eng')}
 
     subtitles = list_subtitles({video}, languages, providers=['opensubtitles'])
 
     # test providers
-    for name in ('addic7ed', 'napiprojekt', 'opensubtitlesvip', 'podnapisi', 'shooter', 'tvsubtitles',
-                 'thesubdb'):
+    for name in ('addic7ed', 'napiprojekt', 'opensubtitlesvip', 'podnapisi', 'tvsubtitles'):
         assert not provider_manager[name].plugin.list_subtitles.called
 
-    for name in ('opensubtitles', ):
+    for name in ('opensubtitles',):
         assert provider_manager[name].plugin.list_subtitles.called
 
     # test result
@@ -434,14 +453,15 @@ def test_list_subtitles_providers(episodes, mock_providers):
     assert sorted(subtitles[episodes['bbt_s07e05']]) == ['opensubtitles']
 
 
-def test_list_subtitles_episode_no_hash(episodes, mock_providers):
+@pytest.mark.usefixtures('_mock_providers')
+def test_list_subtitles_episode_no_hash(episodes):
     video = episodes['dallas_s01e03']
     languages = {Language('eng'), Language('heb')}
 
     subtitles = list_subtitles({video}, languages)
 
     # test providers
-    for name in ('addic7ed', 'napiprojekt', 'opensubtitlesvip', 'shooter', 'thesubdb'):
+    for name in ('addic7ed', 'napiprojekt', 'opensubtitlesvip'):
         assert not provider_manager[name].plugin.list_subtitles.called
 
     for name in ('gestdown', 'opensubtitles', 'podnapisi', 'tvsubtitles'):
@@ -450,11 +470,16 @@ def test_list_subtitles_episode_no_hash(episodes, mock_providers):
     # test result
     assert len(subtitles) == 1
     assert sorted(subtitles[episodes['dallas_s01e03']]) == [
-        'gestdown', 'opensubtitles', 'podnapisi', 'tvsubtitles'
+        'gestdown',
+        'opensubtitles',
+        'opensubtitlescom',
+        'podnapisi',
+        'tvsubtitles',
     ]
 
 
-def test_list_subtitles_no_language(episodes, mock_providers):
+@pytest.mark.usefixtures('_mock_providers')
+def test_list_subtitles_no_language(episodes):
     video = episodes['dallas_s01e03']
     languages = {Language('eng')}
     video.subtitle_languages = languages
@@ -462,41 +487,50 @@ def test_list_subtitles_no_language(episodes, mock_providers):
     subtitles = list_subtitles({video}, languages)
 
     # test providers
-    for name in ('addic7ed', 'napiprojekt', 'opensubtitles', 'opensubtitlesvip', 'podnapisi', 'shooter',
-                 'thesubdb', 'tvsubtitles'):
+    for name in ('addic7ed', 'napiprojekt', 'opensubtitles', 'opensubtitlesvip', 'podnapisi', 'tvsubtitles'):
         assert not provider_manager[name].plugin.list_subtitles.called
 
     # test result
     assert len(subtitles) == 0
 
 
-def test_download_subtitles(mock_providers):
+@pytest.mark.usefixtures('_mock_providers')
+def test_download_subtitles():
     subtitles = [
-        # Addic7edSubtitle(Language('eng'), True, None, 'The Big Bang Theory', 7, 5, 'The Workplace Proximity', 2007,
-        #                 'DIMENSION', None),
-        TheSubDBSubtitle(Language('eng'), 'ad32876133355929d814457537e12dc2'),
-        TVsubtitlesSubtitle(Language('por'), None, 261077, 'Game of Thrones', 3, 10, None, '1080p.BluRay', 'DEMAND')
+        TVsubtitlesSubtitle(
+            language=Language('por'),
+            subtitle_id=261077,
+            page_link=None,
+            series='Game of Thrones',
+            season=3,
+            episode=10,
+            year=None,
+            rip='1080p.BluRay',
+            release='DEMAND',
+        )
     ]
 
     download_subtitles(subtitles)
 
     # test providers
-    for name in ('addic7ed', 'napiprojekt', 'opensubtitles', 'opensubtitlesvip', 'podnapisi', 'shooter'):
+    for name in ('addic7ed', 'napiprojekt', 'opensubtitles', 'opensubtitlesvip', 'podnapisi'):
         assert not provider_manager[name].plugin.download_subtitle.called
 
-    for name in ('thesubdb', 'tvsubtitles'):
+    for name in ('tvsubtitles',):
         assert provider_manager[name].plugin.download_subtitle.called
 
 
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_download_best_subtitles(episodes):
     video = episodes['bbt_s07e05']
     languages = {Language('eng'), Language('fra')}
-    providers = ['gestdown', 'thesubdb']
+    providers = ['gestdown', 'podnapisi']
     expected_subtitles = {
-        ('gestdown', 'a295515c-a460-44ea-9ba8-8d37bcb9b5a6'),
-        ('gestdown', '90fe1369-fa0c-4154-bd04-d3d332dec587'),
+        ('podnapisi', 'EdQo'),
+        ('podnapisi', 'Dego'),
+        # ('gestdown', 'a295515c-a460-44ea-9ba8-8d37bcb9b5a6'),
+        # ('gestdown', '90fe1369-fa0c-4154-bd04-d3d332dec587'),
     }
 
     subtitles = download_best_subtitles({video}, languages, providers=providers)
@@ -506,7 +540,7 @@ def test_download_best_subtitles(episodes):
     assert {(s.provider_name, s.id) for s in subtitles[video]} == expected_subtitles
 
 
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_download_best_subtitles_min_score(episodes):
     video = episodes['bbt_s07e05']
@@ -536,19 +570,21 @@ def test_download_best_subtitles_undefined(episodes):
     video.subtitle_languages = languages
     providers = ['gestdown']
 
-    subtitles = download_best_subtitles({video}, languages, min_score=episode_scores['hash'], only_one=True,
-                                        providers=providers)
+    subtitles = download_best_subtitles(
+        {video}, languages, min_score=episode_scores['hash'], only_one=True, providers=providers
+    )
 
     assert len(subtitles) == 0
 
 
-@pytest.mark.integration
-@vcr.use_cassette('test_download_best_subtitles')
+@pytest.mark.integration()
+@vcr.use_cassette
 def test_download_best_subtitles_only_one(episodes):
     video = episodes['bbt_s07e05']
     languages = {Language('eng'), Language('por', 'BR')}
-    providers = ['gestdown', 'thesubdb']
-    expected_subtitles = {('gestdown', 'a295515c-a460-44ea-9ba8-8d37bcb9b5a6')}
+    providers = ['gestdown', 'podnapisi']
+    # expected_subtitles = {('gestdown', 'a295515c-a460-44ea-9ba8-8d37bcb9b5a6')}
+    expected_subtitles = {('podnapisi', 'EdQo')}
 
     subtitles = download_best_subtitles({video}, languages, only_one=True, providers=providers)
 
@@ -578,17 +614,17 @@ def test_save_subtitles(movies, tmpdir, monkeypatch):
     # first subtitle with language is saved
     path = os.path.join(str(tmpdir), os.path.splitext(movies['man_of_steel'].name)[0] + '.fr.srt')
     assert os.path.exists(path)
-    assert io.open(path, 'rb').read() == b'Some content'
+    assert open(path, 'rb').read() == b'Some content'
 
     # ietf language in path
     path = os.path.join(str(tmpdir), os.path.splitext(movies['man_of_steel'].name)[0] + '.pt-BR.srt')
     assert os.path.exists(path)
-    assert io.open(path, 'rb').read() == b'Some brazilian content'
+    assert open(path, 'rb').read() == b'Some brazilian content'
 
 
 def test_save_subtitles_single_directory_encoding(movies, tmpdir):
     subtitle = Subtitle(Language('jpn'))
-    subtitle.content = u'ハローワールド'.encode('shift-jis')
+    subtitle.content = 'ハローワールド'.encode('shift-jis')
     subtitle_pt_br = Subtitle(Language('por', 'BR'))
     subtitle_pt_br.content = b'Some brazilian content'
     subtitles = [subtitle, subtitle_pt_br]
@@ -598,10 +634,10 @@ def test_save_subtitles_single_directory_encoding(movies, tmpdir):
     # first subtitle only and correctly encoded
     path = os.path.join(str(tmpdir), os.path.splitext(os.path.split(movies['man_of_steel'].name)[1])[0] + '.srt')
     assert os.path.exists(path)
-    assert io.open(path, encoding='utf-8').read() == u'ハローワールド'
+    assert open(path, encoding='utf-8').read() == 'ハローワールド'
 
 
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_download_bad_subtitle(movies):
     pool = ProviderPool()
@@ -617,7 +653,7 @@ def test_download_bad_subtitle(movies):
 
 
 def test_scan_archive_with_one_video(rar, mkv):
-    if "video" not in rar:
+    if 'video' not in rar:
         return
     rar_file = rar['video']
     actual = scan_archive(rar_file)
@@ -626,7 +662,7 @@ def test_scan_archive_with_one_video(rar, mkv):
 
 
 def test_scan_archive_with_multiple_videos(rar, mkv):
-    if "video" not in rar:
+    if 'video' not in rar:
         return
     rar_file = rar['videos']
     actual = scan_archive(rar_file)
@@ -637,16 +673,16 @@ def test_scan_archive_with_multiple_videos(rar, mkv):
 def test_scan_archive_with_no_video(rar):
     with pytest.raises(ValueError) as excinfo:
         scan_archive(rar['simple'])
-    assert excinfo.value.args == ('No video in archive', )
+    assert excinfo.value.args == ('No video in archive',)
 
 
 def test_scan_bad_archive(mkv):
     with pytest.raises(ValueError) as excinfo:
         scan_archive(mkv['test1'])
-    assert excinfo.value.args == ("'.mkv' is not a valid archive", )
+    assert excinfo.value.args == ("'.mkv' is not a valid archive",)
 
 
 def test_scan_password_protected_archive(rar):
     with pytest.raises(ValueError) as excinfo:
         scan_archive(rar['pwd-protected'])
-    assert excinfo.value.args == ('Rar requires a password', )
+    assert excinfo.value.args == ('Rar requires a password',)

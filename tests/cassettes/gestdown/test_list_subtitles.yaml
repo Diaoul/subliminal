@@ -3,7 +3,7 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
       User-Agent:
@@ -14,17 +14,15 @@ interactions:
     uri: https://api.gestdown.info/shows/external/tvdb/80379
   response:
     body:
-      string: !!binary |
-        g2IAAMT/dHNauTe/3PERG1ufy1YPCVQ8VCyUC4Dwhducnw7F9IutQYFcrM6DNFNZVccqMsaoXERU
-        Wie+ljiPs0qDOK2PFgXKjfU628brrE+NV27s+fYGcdITu3bnk0MhAeHs2p1PDsVUGDBkxJgJU2bM
-        KT5FKMGcaB89PTYoMj9Mc6I9Gj02KCSSjHCHe4MC7cYqvW2UXp8a1W7s+fbGf/43AAM=
+      string: '{"shows":[{"id":"91eb9278-8cf5-4ddd-9111-7f60b15958cb","name":"The
+        Big Bang Theory","nbSeasons":12,"seasons":[1,2,3,4,5,6,7,8,9,10,11,12],"tvDbId":80379,"tmdbId":1418,"slug":"the-big-bang-theory"}]}'
     headers:
       Age:
-      - '537051'
+      - '110'
       CF-Cache-Status:
       - HIT
       CF-RAY:
-      - 87f859079d6ff135-CDG
+      - 88ba5f3f1c4a5bd5-LIS
       Cache-Control:
       - public, max-age=14400
       Connection:
@@ -34,13 +32,13 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Mon, 06 May 2024 10:39:40 GMT
+      - Wed, 29 May 2024 23:47:52 GMT
       Last-Modified:
-      - Tue, 30 Apr 2024 05:28:49 GMT
+      - Thu, 23 May 2024 00:34:46 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=Sm3Ejp2hjyDRL1pohUQaFBzONRe10wfhiE7U7rqio9ZfOkkpuvxrrU5h02YPr%2FFNZcsTNSO5WlfJw6yrPYpJzFeHXBF2S5U50Ls0SuaQ0fqqUnNI3JaIu5o5EvLY8bJA3bhJ2w%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=%2BTY8PyPAgmLEtazIW3oLO2OL527cdIxNX1UYO03u9LCymbFREpzBeIpC0KSTg1plVFjdKohpusgTR59TTzZn6t0njsjyW01whWVCisoQvtKrsw7HETP%2FqIVRYdCEVDAmiDvt3Q%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -60,64 +58,7 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br
-      Connection:
-      - keep-alive
-      User-Agent:
-      - Subliminal/2.1
-      accept:
-      - application/json
-    method: GET
-    uri: https://api.gestdown.info/subtitles/get/91eb9278-8cf5-4ddd-9111-7f60b15958cb/7/5/fra
-  response:
-    body:
-      string: !!binary |
-        A+cAAMTvp6uqzfs1MZvyxJwNE/GFnNgHF3/EmeDFG51OaneaA3WyECVv7q0j/4tBLkXdjNXl+2pp
-        lp4N6PEXJlr3FQi5V7IfJrldSq+wIz+O7JXyIluFKgwDxUWcpRC4IBeBsLV/vH1yuX96AoH29wq0
-        6HcWqFnqZqz2h1k2mhWolL1hgbu3phBjGfjU17oBwQUk4yY9XEzwHYGwo3ksagioxuyP32MFQuAF
-        ge3Fduhd+RHFPnmekwR+kucPYHmxOb2PC8gPsv9nAZ4bMykG/cKwNNMISgXeSRVQLDDbOghXNVu3
-        k+7mXhZsnenpqxma5RsCpp4+RdNsNJW1IcfKuqp50t+QHD3g/98AAw==
-    headers:
-      CF-Cache-Status:
-      - MISS
-      CF-RAY:
-      - 87f85907fdb1f135-CDG
-      Cache-Control:
-      - public, max-age=7200
-      Connection:
-      - keep-alive
-      Content-Encoding:
-      - br
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Mon, 06 May 2024 10:39:40 GMT
-      Last-Modified:
-      - Mon, 06 May 2024 10:39:40 GMT
-      NEL:
-      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
-      Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=00JzKnZXh4%2B4rQiV4k0yjJ2UeFZo1YhBdHIFkMsuqeqgOLcXOQm0PgZcFAipBzyfFuGHZnj8dMJcHET%2BruK43o16uBX45Jf9%2F3mcvXZ5f4t0xCiEfgH3nvI9FEz3ll08CZKkBg%3D%3D"}],"group":"cf-nel","max_age":604800}'
-      Server:
-      - cloudflare
-      Strict-Transport-Security:
-      - max-age=15552000; includeSubDomains; preload
-      Transfer-Encoding:
-      - chunked
-      X-Content-Type-Options:
-      - nosniff
-      alt-svc:
-      - h3=":443"; ma=86400
-      vary:
-      - Accept-Encoding
-    status:
-      code: 200
-      message: OK
-- request:
-    body: null
-    headers:
-      Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
       User-Agent:
@@ -128,17 +69,13 @@ interactions:
     uri: https://api.gestdown.info/subtitles/get/91eb9278-8cf5-4ddd-9111-7f60b15958cb/7/5/deu
   response:
     body:
-      string: !!binary |
-        g+MAAMTv1em0+v1ZJroxmQoAqnS1ZSA5LT89cCuwRLIgzJPmqYdxZnG3u42N2cpI42v1X/RyVbUZ
-        qovd22rWji3o4Re2Rvc0CHkYaS6L0JW5Um6iOHCLJFJuoGUpg0yHSR5BIEHOgnB4cgiBxe81aF12
-        LFCzXMxQ7fWTNAtr0LvsLAsk3joFxjFQqK8WA4JPjazfjPAJguIMBPMEBQFtrHP8HWsQoiCK3CB1
-        4+AyTCgNKQi8LArzMLwHlx+2425YQXnw/yTAk7GjZtAvLEs7DqBc4I9UBqUCR+2DcFmzczMu7dRJ
-        xc7pMn6Z3qzfELD1+AnaYmMqZyOHyrmseVy+OcqsTO7x/28AAw==
+      string: '{"matchingSubtitles":[{"subtitleId":"712de981-a7cc-4ce0-842c-0da9a06d1472","version":"LOL","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/712de981-a7cc-4ce0-842c-0da9a06d1472","language":"German","discovered":"2022-05-30T14:51:00.621711Z","downloadCount":72}],"episode":{"season":7,"number":5,"title":"The
+        Workplace Proximity","show":"The Big Bang Theory","discovered":"2022-05-30T14:51:00.621694Z"}}'
     headers:
       CF-Cache-Status:
-      - MISS
+      - EXPIRED
       CF-RAY:
-      - 87f859089e6af135-CDG
+      - 88ba5f3f4af35bea-LIS
       Cache-Control:
       - public, max-age=7200
       Connection:
@@ -148,13 +85,68 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Mon, 06 May 2024 10:39:40 GMT
+      - Wed, 29 May 2024 23:47:52 GMT
       Last-Modified:
-      - Mon, 06 May 2024 10:39:40 GMT
+      - Wed, 29 May 2024 19:47:28 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=ZMF57xaWhntzoSM50HDyTj7k%2FNgWOFa4v5VG9NSfBLEG2%2Fo8y0L6cuE3fgL2Z0bixHbhzIZAwQN9vtvKJ8zqXU9QOxNnGT96JDj%2Fb6RdG22jAWE9lz1qN9oRMx7lRmaT1TXzcA%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=MpR7RvMb9k5jOK6rB%2BrzRqsNGgtlbSt%2Bhc3ujrvfbipd4f4dVkCuUctR4EEoYE936mwaDlXbu54rH7yIcxnF9XTZCbUgGRmT1WjWbkMxgIuS2oFumyXe1N%2Bb%2BxmL7dy9GG3lLQ%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      alt-svc:
+      - h3=":443"; ma=86400
+      vary:
+      - Accept-Encoding
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept-Encoding:
+      - gzip, deflate, br, zstd
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.1
+      accept:
+      - application/json
+    method: GET
+    uri: https://api.gestdown.info/subtitles/get/91eb9278-8cf5-4ddd-9111-7f60b15958cb/7/5/fra
+  response:
+    body:
+      string: '{"matchingSubtitles":[{"subtitleId":"90fe1369-fa0c-4154-bd04-d3d332dec587","version":"DIMENSION","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/90fe1369-fa0c-4154-bd04-d3d332dec587","language":"French","discovered":"2022-05-30T14:51:00.621699Z","downloadCount":134}],"episode":{"season":7,"number":5,"title":"The
+        Workplace Proximity","show":"The Big Bang Theory","discovered":"2022-05-30T14:51:00.621694Z"}}'
+    headers:
+      Age:
+      - '210'
+      CF-Cache-Status:
+      - HIT
+      CF-RAY:
+      - 88ba5f3fff635bec-LIS
+      Cache-Control:
+      - public, max-age=7200
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - br
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 29 May 2024 23:47:52 GMT
+      Last-Modified:
+      - Wed, 29 May 2024 19:47:28 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=IAx4aW0HGK2J37sxjPaZXJa6GeP6dpLY1netWTbvM5V%2FIt%2Fw6uRFk7SBrfQD8MVMDttJnaGy4Z1UWRnQ0t20kuRS7%2FquqGtTOf5pX3hR9tBOG1cXMd9OMCPI%2BnSUkbuHChIbpw%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:

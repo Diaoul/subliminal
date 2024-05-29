@@ -3,7 +3,7 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
       User-Agent:
@@ -14,13 +14,12 @@ interactions:
     uri: https://api.gestdown.info/shows/search/The%20Big%20How%20I%20Met%20Your%20Mother
   response:
     body:
-      string: !!binary |
-        AxmAIkNvdWxkbid0IGZpbmQgc2hvdzogVGhlIEJpZyBIb3cgSSBNZXQgWW91ciBNb3RoZXIiAw==
+      string: '"Couldn''t find show: The Big How I Met Your Mother"'
     headers:
       CF-Cache-Status:
-      - MISS
+      - EXPIRED
       CF-RAY:
-      - 87f858f1ce96048a-CDG
+      - 88ba5f309e555be6-LIS
       Cache-Control:
       - public, max-age=43200
       Connection:
@@ -30,11 +29,11 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Mon, 06 May 2024 10:39:37 GMT
+      - Wed, 29 May 2024 23:47:50 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=w%2F3UPWs5DBKmm8bn8QBmDqPj4NFyWo64lvZNLcWvpaw4yJH79Ilq9VpLfpketv7VJGvlp9VrJHFki1qliuwBr8PvVa%2B1SAkbhVJ7lJdXU2pAHPTzbmKHtQgmWWXL9b1HX%2BtcEw%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=yl7C6z7kRGBZ9Vcg3H45Jh9qA4rFixeGMAr2j3%2BEE1dY8jqQqSRJlvAosviKyUSZ4UlmUJQg8Au3AE%2By3NgfcgBV1H4ZpZZxa7CqF75Keo9UhEV0cpGaTuYyC0XxooCj3Qze8A%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:

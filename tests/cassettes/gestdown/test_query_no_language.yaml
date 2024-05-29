@@ -3,7 +3,7 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
       User-Agent:
@@ -14,17 +14,15 @@ interactions:
     uri: https://api.gestdown.info/shows/external/tvdb/80379
   response:
     body:
-      string: !!binary |
-        g2IAAMT/dHNauTe/3PERG1ufy1YPCVQ8VCyUC4Dwhducnw7F9IutQYFcrM6DNFNZVccqMsaoXERU
-        Wie+ljiPs0qDOK2PFgXKjfU628brrE+NV27s+fYGcdITu3bnk0MhAeHs2p1PDsVUGDBkxJgJU2bM
-        KT5FKMGcaB89PTYoMj9Mc6I9Gj02KCSSjHCHe4MC7cYqvW2UXp8a1W7s+fbGf/43AAM=
+      string: '{"shows":[{"id":"91eb9278-8cf5-4ddd-9111-7f60b15958cb","name":"The
+        Big Bang Theory","nbSeasons":12,"seasons":[1,2,3,4,5,6,7,8,9,10,11,12],"tvDbId":80379,"tmdbId":1418,"slug":"the-big-bang-theory"}]}'
     headers:
       Age:
-      - '537050'
+      - '109'
       CF-Cache-Status:
       - HIT
       CF-RAY:
-      - 87f858fd3d43049c-CDG
+      - 88ba5f368d825be8-LIS
       Cache-Control:
       - public, max-age=14400
       Connection:
@@ -34,13 +32,13 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Mon, 06 May 2024 10:39:39 GMT
+      - Wed, 29 May 2024 23:47:51 GMT
       Last-Modified:
-      - Tue, 30 Apr 2024 05:28:49 GMT
+      - Thu, 23 May 2024 00:34:46 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=9lu1ek8J18fPFHY3K3acm0yQasM5jhZPPVBAxBv6%2B5Rvpj3BnP05nEeW2CSdUD9Iq7N092H3Z4VTV4rSVWjmJzWl38pz%2FYk0srLYU6hnDCM5%2BLj6WXLq7NGfeg5m0fgaErBmIA%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=WVu9TzxcTtrmfPaaE%2BEjpoD3SJXM1h2RySs8mtfQzlA8ZXhVyb6QEbq3OMuKf1GsmGvWAm3XWRVvf6jyND2FusyTX3gB3ewQ4xe74RhO0ihLvh6xxct6U3DO%2BscLx%2B%2BI8pCWaQ%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:

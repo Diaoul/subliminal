@@ -3,7 +3,7 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
       User-Agent:
@@ -14,17 +14,13 @@ interactions:
     uri: https://api.gestdown.info/shows/external/tvdb/121361
   response:
     body:
-      string: !!binary |
-        A1oAAMTvnVPZva8vJdJDvTlOinAdUGlCXGTVL7jon4zo+EWZIIIKAhm4oSMS0w2EkyWpUKGdCjvI
-        bD9WvnINBUIn2xQRNrJNF322OBRT36UMQqf2qeS+Y0QhgVPJfceIjgaZZJFNDrnkkU/BmTA/lmqX
-        IDIt0/ZMwtwmapcgMu0wJHBzzxEhl20q+kzMhfE//w0D
+      string: '{"shows":[{"id":"b88a8594-d158-4fde-b93e-38f37cb7b50b","name":"Game
+        of Thrones","nbSeasons":9,"seasons":[0,1,2,3,4,5,6,7,8],"tvDbId":121361,"tmdbId":1399,"slug":"game-of-thrones"}]}'
     headers:
-      Age:
-      - '581252'
       CF-Cache-Status:
-      - HIT
+      - EXPIRED
       CF-RAY:
-      - 87f8b24249673cad-CDG
+      - 88ba5f37c86f5be2-LIS
       Cache-Control:
       - public, max-age=14400
       Connection:
@@ -34,13 +30,13 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Mon, 06 May 2024 11:40:35 GMT
+      - Wed, 29 May 2024 23:47:51 GMT
       Last-Modified:
-      - Mon, 29 Apr 2024 18:13:03 GMT
+      - Wed, 22 May 2024 23:41:22 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=Lfx3F2bBOll8fSOyU6fHe%2Bec454OZQq0274m54oicgOu37Og88izf8J%2FHQt1qWb04WSKmknkDEGIdPCrAvCJbZSZboo2IEVDx%2BV6k41wdj5wUrw0eYJkAElZydHsDFk7HCdPAQ%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=1kDAI%2FCxOvFB8QcJgsYKx0RbA8BpK1tvMr8q2QHfZihrCJ3D0HEc7r9MDUxaVUkj03stHS80kpd3gVM5yQRudEjA5Mqz%2BvVCE2KAaChYtPmqb89uSuX0VE7pe3ia4JdM5lXKYQ%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -60,7 +56,7 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
       User-Agent:
@@ -71,18 +67,13 @@ interactions:
     uri: https://api.gestdown.info/subtitles/get/b88a8594-d158-4fde-b93e-38f37cb7b50b/3/10/por
   response:
     body:
-      string: !!binary |
-        g34BAMQ3df609t5sh0BbP8FE7ERK4wI5BVp3AHD1H+yCh3874FsShxRYwIkn9CRJKYhrMppMuHvV
-        TPMHTExXt3Y6eFpVne3G4kBfBzhfessglE1SZI00upYi00kZFtpEZaTZ1JwymyCvCyhskBuC0B+P
-        /za2a/8moItsoEBxnkHdciUKrZilnQ5uJ3Njl8KgxoydKKy/repkKsN2/cvSguBzsvODLXxabL8D
-        4fIcFNi6UfJ5wiBEQRTpINVx+BzmFIUU515cZFGcfoJn2/lsNe1AYZac1NE9OeEqCAOJNEd5qJOK
-        U12xKXSZp1ldNIlJ4lz+mq06iwAuqFCWkhSnHwWZWzdjAR3gxLjZFBQrfMnVgMJA4YHeCwiP7c4Z
-        KLh2tgHh2kykN2t6z+1yNhWHo4LyE6eTAQM=
+      string: '{"matchingSubtitles":[{"subtitleId":"9f486fef-ce86-4918-a292-dacd5dda07c8","version":"All_with_preview","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/9f486fef-ce86-4918-a292-dacd5dda07c8","language":"Portuguese","discovered":"2022-05-31T17:21:37.386235Z","downloadCount":168},{"subtitleId":"4db010e2-d271-4bd5-bda8-9756c8f4a437","version":"All_without_preview","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/4db010e2-d271-4bd5-bda8-9756c8f4a437","language":"Portuguese","discovered":"2022-05-31T17:21:37.386236Z","downloadCount":48}],"episode":{"season":3,"number":10,"title":"Mhysa","show":"Game
+        of Thrones","discovered":"2022-05-31T17:21:37.386209Z"}}'
     headers:
       CF-Cache-Status:
-      - MISS
+      - EXPIRED
       CF-RAY:
-      - 87f8b24299ae3cad-CDG
+      - 88ba5f3878e55be0-LIS
       Cache-Control:
       - public, max-age=7200
       Connection:
@@ -92,13 +83,13 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Mon, 06 May 2024 11:40:35 GMT
+      - Wed, 29 May 2024 23:47:51 GMT
       Last-Modified:
-      - Mon, 06 May 2024 11:40:35 GMT
+      - Wed, 29 May 2024 19:47:26 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=HzgthVFql3FON9on2JnfR0VXEnwU5Ei9Qcegrl0TupdRKi55t8Z9ApU7wBD94qjHhqPZ6TjvickH5IBbvCpxs%2BxaKMJPs4J2JzdeYp8tcHstTIidgFcLDrFyCnO9pOG%2BaQ8kRw%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=760eA%2B2dRiib0wM5ZZlS3fQzEt14%2Fxk59eDUhvenjmcRBBvbQOgqZPgKSgRuFtvELALfY0HFVLUrfrx2t7nm3pDu6OJzvPQUU075wld56zZ4BPh2geb%2BiDGEjGOofhPZOBX75Q%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:

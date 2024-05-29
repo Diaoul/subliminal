@@ -3,7 +3,7 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
       User-Agent:
@@ -14,17 +14,15 @@ interactions:
     uri: https://api.gestdown.info/shows/external/tvdb/80379
   response:
     body:
-      string: !!binary |
-        g2IAAMT/dHNauTe/3PERG1ufy1YPCVQ8VCyUC4Dwhducnw7F9IutQYFcrM6DNFNZVccqMsaoXERU
-        Wie+ljiPs0qDOK2PFgXKjfU628brrE+NV27s+fYGcdITu3bnk0MhAeHs2p1PDsVUGDBkxJgJU2bM
-        KT5FKMGcaB89PTYoMj9Mc6I9Gj02KCSSjHCHe4MC7cYqvW2UXp8a1W7s+fbGf/43AAM=
+      string: '{"shows":[{"id":"91eb9278-8cf5-4ddd-9111-7f60b15958cb","name":"The
+        Big Bang Theory","nbSeasons":12,"seasons":[1,2,3,4,5,6,7,8,9,10,11,12],"tvDbId":80379,"tmdbId":1418,"slug":"the-big-bang-theory"}]}'
     headers:
       Age:
-      - '537052'
+      - '111'
       CF-Cache-Status:
       - HIT
       CF-RAY:
-      - 87f8590a5f323cbc-CDG
+      - 88ba5f407efc5bd5-LIS
       Cache-Control:
       - public, max-age=14400
       Connection:
@@ -34,13 +32,13 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Mon, 06 May 2024 10:39:41 GMT
+      - Wed, 29 May 2024 23:47:53 GMT
       Last-Modified:
-      - Tue, 30 Apr 2024 05:28:49 GMT
+      - Thu, 23 May 2024 00:34:46 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=49esMdNQWdKJpIdymXU4RMyJ0FLe39njlzxy7gOAUR8cmrn13DsLHSTJWXBfGiOseKkKJNUvs8bz2NVe6uJ2Em45YC6dv7f52RdxdgrIZ9TjtgxJoBScuZPgoFzPMF9sgxIlpA%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=5zto4dfZwTY0Bgagw4LZEPNqMb9HU%2FM1W74RuFCeMNeGXRVpAmXEs1YDiG2g8TViFu9tkmCIcC4GRuWH3QVhHgb7oSQaNi%2FWKPOra8sc38QictxLna5dQhMh7iA3x65Ct6I0Dg%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -60,7 +58,7 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
       User-Agent:
@@ -71,19 +69,15 @@ interactions:
     uri: https://api.gestdown.info/subtitles/get/91eb9278-8cf5-4ddd-9111-7f60b15958cb/7/5/fra
   response:
     body:
-      string: !!binary |
-        A+cAAMTvp6uqzfs1MZvyxJwNE/GFnNgHF3/EmeDFG51OaneaA3WyECVv7q0j/4tBLkXdjNXl+2pp
-        lp4N6PEXJlr3FQi5V7IfJrldSq+wIz+O7JXyIluFKgwDxUWcpRC4IBeBsLV/vH1yuX96AoH29wq0
-        6HcWqFnqZqz2h1k2mhWolL1hgbu3phBjGfjU17oBwQUk4yY9XEzwHYGwo3ksagioxuyP32MFQuAF
-        ge3Fduhd+RHFPnmekwR+kucPYHmxOb2PC8gPsv9nAZ4bMykG/cKwNNMISgXeSRVQLDDbOghXNVu3
-        k+7mXhZsnenpqxma5RsCpp4+RdNsNJW1IcfKuqp50t+QHD3g/98AAw==
+      string: '{"matchingSubtitles":[{"subtitleId":"90fe1369-fa0c-4154-bd04-d3d332dec587","version":"DIMENSION","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/90fe1369-fa0c-4154-bd04-d3d332dec587","language":"French","discovered":"2022-05-30T14:51:00.621699Z","downloadCount":134}],"episode":{"season":7,"number":5,"title":"The
+        Workplace Proximity","show":"The Big Bang Theory","discovered":"2022-05-30T14:51:00.621694Z"}}'
     headers:
       Age:
-      - '1'
+      - '211'
       CF-Cache-Status:
       - HIT
       CF-RAY:
-      - 87f8590aaf5c3cbc-CDG
+      - 88ba5f40ec4b5bd4-LIS
       Cache-Control:
       - public, max-age=7200
       Connection:
@@ -93,13 +87,13 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Mon, 06 May 2024 10:39:41 GMT
+      - Wed, 29 May 2024 23:47:53 GMT
       Last-Modified:
-      - Mon, 06 May 2024 10:39:40 GMT
+      - Wed, 29 May 2024 19:47:28 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=EkPrT9zQ0PXramB1hd7Sgq6H4N8vH9ihCpnv2S46NYpBhmqA17uHcxjuTZXzDShsCu1%2FOKw%2BcftanXsUELooqR%2Bfwih0ARLXCzaeF2W0Sk9DFlnHib5tZ5T4AjEZGtAmogQ%2FuQ%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=WZOVZRnVjV6IkClegt9gExHW%2Bcru1uxzGk04BFpfsKWdZjcdqUgVpqeBwtR2SYVe7na8YHm0t7y8YUc3M%2FBuXfuJtxEIpgKlQ06g52HKlt2lXixrVj47faci5IR8SaIaf3V2zw%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -119,7 +113,7 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
       User-Agent:
@@ -531,9 +525,9 @@ interactions:
         Synchro par elderman =-\r\n-= www.addic7ed.com =-\r\n\r\n"
     headers:
       CF-Cache-Status:
-      - MISS
+      - HIT
       CF-RAY:
-      - 87f8590aff963cbc-CDG
+      - 88ba5f412dca5be4-LIS
       Cache-Control:
       - public, max-age=691200
       Connection:
@@ -541,11 +535,11 @@ interactions:
       Content-Type:
       - text/srt
       Date:
-      - Mon, 06 May 2024 10:39:41 GMT
+      - Wed, 29 May 2024 23:47:53 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=4NMq9TqpHiKvev8DqeUtl%2FkFsQhRbE56hSdCOdnQ5%2FzzsA%2FOcjjVqvAqkfuE2CRGjlz3Ei2oyxZUS6vfucZ4zoj9iqq01cEluOvYOHha5oRRUp9Tih%2FvgMhV2Dhh2H46VxZUlw%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=lhEhh1PqIW%2BuLN5ibqbp%2B%2FNkCG1MDs2FCV1l54xOklMy8C59fXWm5ux%2FOCJlbP6dRL78CLqT6wmCD3nHMgUet85zqXsYlZrI9zk7UZ9VfrbEuxqwofkCV91koT3ed8%2FD%2F5B4ew%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -557,7 +551,7 @@ interactions:
       alt-svc:
       - h3=":443"; ma=86400
       content-disposition:
-      - attachment; filename=The.Big.Bang.Theory.S07E05.fr.srt; filename*=UTF-8''The.Big.Bang.Theory.S07E05.fr.srt
+      - attachment; filename=The.Big.Bang.Theory.S07E05.DIMENSION.fr.srt; filename*=UTF-8''The.Big.Bang.Theory.S07E05.DIMENSION.fr.srt
       etag:
       - W/"90fe1369-fa0c-4154-bd04-d3d332dec587-637949927070602570"
       last-modified:

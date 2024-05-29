@@ -3,7 +3,7 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
       User-Agent:
@@ -14,16 +14,13 @@ interactions:
     uri: https://api.gestdown.info/shows/search/Dallas
   response:
     body:
-      string: !!binary |
-        g54AAGTVltNaeSo4UmwHPpmLc0c+pCfQyYnQTU7nE55awJEFGFrgHDMoYng/u3yBTT0dNhC/LtDk
-        EIHZ5b4Uo5JQWmXKglVY5V4VWRmMYSOeDCCMyVBAhOek75MNIIzpZ5FspnEDkTTCpkg2t/lFyCho
-        0KLDFQYkRpIfhO3+Of3IIXqvAyNsh7yj0QibfldBhPw/bkj3oimsS4xzSigRZVJtVXDBKecpoSx3
-        wZpCnbt71sQPkF6sTAUbtkxJ4r0NY8WaGG4/NwMD
+      string: '{"shows":[{"id":"226d7f34-a9f5-4fe2-98d7-ecf944243714","name":"Dallas","nbSeasons":10,"seasons":[1,2,3,4,5,6,8,9,12,13],"tvDbId":77092,"tmdbId":40,"slug":"dallas"},{"id":"4e56a466-31a3-4b05-9696-671a1cd6954e","name":"Dallas
+        (2012)","nbSeasons":3,"seasons":[1,2,3],"tvDbId":242521,"tmdbId":37759,"slug":"dallas-2012"}]}'
     headers:
       CF-Cache-Status:
-      - MISS
+      - HIT
       CF-RAY:
-      - 87f858f05e5af14c-CDG
+      - 88ba5f2ffed15be4-LIS
       Cache-Control:
       - public, max-age=14400
       Connection:
@@ -33,13 +30,13 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Mon, 06 May 2024 10:39:37 GMT
+      - Wed, 29 May 2024 23:47:50 GMT
       Last-Modified:
-      - Mon, 06 May 2024 10:39:37 GMT
+      - Wed, 29 May 2024 19:47:24 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=%2BSyu6csVDWDJ%2FwYDCqKjx1Yb2QsMoTqzMCbHfABhd1tqURyeKbvXtNtOsQB4o602aX9yo%2FlfW6MWx2maYQdI9KoOJ5p5gxDd3%2FMHoBwx%2B%2Br%2FehVr19PL4n0z6PO8Qs6SWMBvGQ%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=2H%2FEJwSshEZ8CeD6VTFGq2kMF0JR2VtpMd9kmX7RB4pU4PTU0yF4WuKHZ5%2FyKEACYjWclj9H7Q8SfTB7br%2BhL1t4r%2B7umA34wz3xrDkTQR8F5%2FRWGR4xfUuRim0zqPAi4svXkg%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:

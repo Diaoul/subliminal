@@ -1,0 +1,31 @@
+name: dev
+
+on:
+  push:
+    branches-ignore:
+      - master
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      -
+        name: Checkout 
+        uses: actions/checkout@v2
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      -
+        name: Build and export to Docker
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          load: true
+          tags: subliminal/subliminal:latest
+      -
+        name: Tests
+        run: |
+          docker run -v .:/tests -i --entrypoint /tests/launch_docker_tests.sh subliminal/subliminal:latest

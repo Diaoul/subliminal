@@ -9,6 +9,7 @@ from typing import TYPE_CHECKING, ClassVar
 
 import chardet
 import srt  # type: ignore[import-untyped]
+from pysubs2 import SSAFile  # type: ignore[import-untyped]
 
 if TYPE_CHECKING:
     from babelfish import Language  # type: ignore[import-untyped]
@@ -18,7 +19,7 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 #: Subtitle extensions
-SUBTITLE_EXTENSIONS = ('.srt', '.sub', '.smi', '.txt', '.ssa', '.ass', '.mpl')
+SUBTITLE_EXTENSIONS = ('.srt', '.sub', '.smi', '.txt', '.ssa', '.ass', '.mpl', '.vtt')
 
 
 class Subtitle:
@@ -26,7 +27,7 @@ class Subtitle:
 
     :param language: language of the subtitle.
     :type language: :class:`~babelfish.language.Language`
-    :param bool hearing_impaired: whether or not the subtitle is hearing impaired.
+    :param (bool | None) hearing_impaired: whether or not the subtitle is hearing impaired (None if unknown).
     :param page_link: URL of the web page from which the subtitle can be downloaded.
     :type page_link: str
     :param encoding: Text encoding of the subtitle.
@@ -37,44 +38,61 @@ class Subtitle:
     #: Name of the provider that returns that class of subtitle
     provider_name: ClassVar[str] = ''
 
+    #: Subtitle format used to test if the subtitle is valid
+    expected_format: ClassVar[str] = 'srt'
+
+    #: Content as bytes
+    _content: bytes | None
+
+    #: Content as string
+    _text: str
+
+    #: Flag to assert if the subtitle raw content was decoded
+    _is_decoded: bool
+
+    #: Flag to assert if the subtitle is valid (None if it was not checked yet)
+    _is_valid: bool | None
+
+    #: Guess encoding if None is defined
+    _guess_encoding: bool
+
     #: Language of the subtitle
     language: Language
 
-    #: Whether or not the subtitle is hearing impaired
-    hearing_impaired: bool
+    #: Whether or not the subtitle is hearing impaired (None if unknown)
+    hearing_impaired: bool | None
 
     #: URL of the web page from which the subtitle can be downloaded
     page_link: str | None
 
-    #: Content as bytes
-    content: bytes | None
-
     #: Encoding to decode with when accessing :attr:`text`
     encoding: str | None
+
+    #: Framerate for frame-based formats (MicroDVD)
+    fps: float | None
 
     def __init__(
         self,
         language: Language,
         *,
-        hearing_impaired: bool = False,
+        hearing_impaired: bool | None = None,
         page_link: str | None = None,
         encoding: str | None = None,
+        fps: float | None = None,
+        guess_encoding: bool = True,
     ) -> None:
-        #: Language of the subtitle
+        self._content = None
+        self._text = ''
+        self._is_decoded = False
+        self._is_valid = None
+        self._guess_encoding = guess_encoding
+
         self.language = language
-
-        #: Whether or not the subtitle is hearing impaired
         self.hearing_impaired = hearing_impaired
-
-        #: URL of the web page from which the subtitle can be downloaded
         self.page_link = page_link
+        self.fps = fps
 
-        #: Content as bytes
-        self.content = None
-
-        #: Encoding to decode with when accessing :attr:`text`
         self.encoding = None
-
         # validate the encoding
         if encoding:
             try:
@@ -93,29 +111,80 @@ class Subtitle:
         return ''
 
     @property
-    def text(self) -> str:
-        """Content as string.
+    def content(self) -> bytes | None:
+        """Content as bytes.
 
         If :attr:`encoding` is None, the encoding is guessed with :meth:`guess_encoding`
 
         """
+        return self._content
+
+    @content.setter
+    def content(self, value: bytes | None) -> None:
+        self.clear_content()
+        self._content = value
+
+        if self._guess_encoding and self.encoding is None:
+            self.encoding = self.guess_encoding()
+
+    @property
+    def text(self) -> str:
+        """Content as string."""
+        if not self._is_decoded:
+            self._text = self._decode_content()
+        return self._text
+
+    def clear_content(self) -> None:
+        """Clear the content of the subtitle."""
+        self._text = ''
+        self._is_decoded = False
+        self._is_valid = None
+
+    def _decode_content(self) -> str:
+        self._is_decoded = True
+
         if not isinstance(self.content, bytes) or not self.content:
             return ''
 
+        # No encoding found
+        if not self.encoding:
+            logger.warning('Cannot guess encoding to decode subtitle content.')
+            return ''
+
         # Decode
-        if self.encoding:
-            return self.content.decode(self.encoding, errors='replace')
+        return self.content.decode(self.encoding, errors='replace')
 
-        # Get encoding
-        guessed_encoding = self.guess_encoding()
-        if guessed_encoding:
-            return self.content.decode(guessed_encoding, errors='replace')
+    def reencode(self, encoding: str = "utf-8") -> bool:
+        """Re-encode the subtitle raw content using the specified encoding.
 
-        # Cannot decode
-        logger.warning('Cannot guess encoding to decode subtitle content.')
-        return ''
+        :param str encoding: the new encoding of the raw content (default to 'utf-8').
+        :return: False if the encoding raised a UnicodeEncodeError error.
+        :rtype: bool
 
-    def is_valid(self) -> bool:
+        """
+        text = self._text
+
+        self.encoding = encoding
+        try:
+            self._content = text.encode(encoding=encoding)
+        except UnicodeEncodeError:
+            logger.exception('Cannot encode text to bytes with encoding: %s', encoding)
+            return False
+        return True
+
+    def is_valid(self, *, auto_fix_srt: bool = False) -> bool:
+        """Check if a :attr:`text` is a valid SubRip format.
+
+        :return: whether or not the subtitle is valid.
+        :rtype: bool
+
+        """
+        if self._is_valid is None:
+            self._is_valid = self._check_is_valid(auto_fix_srt=auto_fix_srt)
+
+        return bool(self._is_valid)
+
+    def _check_is_valid(self, *, auto_fix_srt: bool = False) -> bool:
         """Check if a :attr:`text` is a valid SubRip format.
 
         :return: whether or not the subtitle is valid.
@@ -125,15 +194,30 @@ class Subtitle:
         if not self.text:
             return False
 
+        # Valid srt
+        if self.expected_format == "srt":
+            try:
+                parsed = self.parse_srt()
+            except Exception:
+                msg = "srt parsing failed, try pysubs2"
+                logger.exception(msg)
+            else:
+                if auto_fix_srt:
+                    self._text = parsed
+                return True
+
+        # Try other subtitle format
         try:
-            self.parsed()
-        except srt.SRTParseError:
-            return False
+            SSAFile.from_string(self.text, format_=self.expected_format, fps=self.fps)
+        except Exception:
+            logger.exception("not a valid subtitle.")
+        else:
+            return True
 
-        return True
+        return False
 
-    def parsed(self) -> str:
-        """Text content parsed to a valid subtitle."""
+    def parse_srt(self) -> str:
+        """Text content parsed to a valid srt subtitle."""
         return str(srt.compose(srt.parse(self.text)))
 
     def guess_encoding(self) -> str | None:
@@ -151,25 +235,57 @@ class Subtitle:
         encodings = ['utf-8']
 
         # add language-specific encodings
+        # http://scratchpad.wikia.com/wiki/Character_Encoding_Recommendation_for_Languages
+
+        # add language-specific encodings
         if self.language.alpha3 == 'zho':
-            encodings.extend(['gb18030', 'big5'])
+            encodings.extend(['cp936', 'gb2312', 'gbk', 'hz', 'iso2022_jp_2', 'cp950', 'big5hkscs', 'big5',
+                              'gb18030', 'utf-16'])
+
         elif self.language.alpha3 == 'jpn':
-            encodings.append('shift-jis')
-        elif self.language.alpha3 == 'ara':
-            encodings.append('windows-1256')
+            encodings.extend(['shift-jis', 'cp932', 'euc_jp', 'iso2022_jp', 'iso2022_jp_1', 'iso2022_jp_2',
+                              'iso2022_jp_2004', 'iso2022_jp_3', 'iso2022_jp_ext'])
+
+        elif self.language.alpha3 == 'tha':
+            encodings.extend(['tis-620', 'cp874'])
+
+        elif self.language.alpha3 in ('ara', 'fas', 'per'):
+            encodings.extend(['windows-1256', 'utf-16', 'utf-16le', 'ascii', 'iso-8859-6'])
+
         elif self.language.alpha3 == 'heb':
-            encodings.append('windows-1255')
+            encodings.extend(['windows-1255', 'iso-8859-8'])
+
         elif self.language.alpha3 == 'tur':
-            encodings.extend(['iso-8859-9', 'windows-1254'])
-        elif self.language.alpha3 == 'pol':
-            # Eastern European Group 1
-            encodings.extend(['windows-1250'])
-        elif self.language.alpha3 == 'bul':
-            # Eastern European Group 2
-            encodings.extend(['windows-1251'])
+            encodings.extend(['iso-8859-3', 'iso-8859-9', 'windows-1254'])
+
+        elif self.language.alpha3 in ('grc', 'gre', 'ell'):
+            encodings.extend(['windows-1253', 'cp1253', 'cp737', 'iso8859-7', 'cp875', 'cp869', 'iso2022_jp_2',
+                              'mac_greek'])
+
+        elif self.language.alpha3 in ('pol', 'cze', 'ces', 'slk', 'slo', 'slv', 'hun', 'bos', 'hbs', 'hrv', 'rsb',
+                                      'ron', 'rum', 'sqi', 'alb'):
+            encodings.extend(['iso-8859-2', 'windows-1250'])
+
+            if self.language.alpha3 == 'slv':
+                encodings.extend(['iso-8859-4'])
+            elif self.language.alpha3 in ("sqi", "alb"):
+                encodings.extend(['windows-1252', 'iso-8859-15', 'iso-8859-1', 'iso-8859-9'])
+
+        elif self.language.alpha3 in ('bul', 'srp', 'mkd', 'mac', 'rus', 'ukr'):
+            if self.language.alpha3 in ('bul', 'mkd', 'mac', 'rus', 'ukr'):
+                encodings.extend(['windows-1251', 'iso-8859-5'])
+
+            elif self.language.alpha3 == 'srp':
+                if self.language.script == "Latn":
+                    encodings.extend(['windows-1250', 'iso-8859-2'])
+                elif self.language.script == "Cyrl":
+                    encodings.extend(['windows-1251', 'iso-8859-5'])
+                else:
+                    encodings.extend(['windows-1250', 'windows-1251', 'iso-8859-2', 'iso-8859-5'])
+
         else:
-            # Western European (windows-1252)
-            encodings.append('latin-1')
+            # Western European (windows-1252) / Northern European
+            encodings.extend(['iso-8859-1', 'iso-8859-4', 'iso-8859-9', 'iso-8859-15', 'windows-1252'])
 
         # try to decode
         logger.debug('Trying encodings %r', encodings)

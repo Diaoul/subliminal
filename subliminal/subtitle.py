@@ -143,6 +143,8 @@ class Subtitle:
         :rtype: str
 
         """
+        if not isinstance(self.content, bytes):
+            return None
         logger.info('Guessing encoding for language %s', self.language)
 
         # always try utf-8 first

@@ -2,13 +2,14 @@
 
 from __future__ import annotations
 
+import contextlib
 import logging
 import time
 from datetime import datetime, timedelta, timezone
 from functools import wraps
 from typing import TYPE_CHECKING, Any, Callable, ClassVar, TypeVar, cast
 
-from babelfish import Language  # type: ignore[import-untyped]
+from babelfish import Language, language_converters  # type: ignore[import-untyped]
 from dogpile.cache.api import NO_VALUE
 from guessit import guessit  # type: ignore[import-untyped]
 from requests import Response, Session
@@ -36,6 +37,9 @@ C = TypeVar('C', bound=Callable)
 
 logger = logging.getLogger(__name__)
 
+with contextlib.suppress(ValueError):
+    language_converters.register('opensubtitlescom = subliminal.converters.opensubtitlescom:OpenSubtitlesComConverter')
+
 #: Opensubtitles.com API key for subliminal
 OPENSUBTITLESCOM_API_KEY = 'mij33pjc3kOlup1qOKxnWWxvle2kFbMH'
 
@@ -47,6 +51,86 @@ TOKEN_EXPIRATION_TIME = timedelta(hours=24).total_seconds()
 
 #: Expiration time for download link
 DOWNLOAD_EXPIRATION_TIME = timedelta(hours=3).total_seconds()
+
+
+opensubtitlescom_languages = {
+    Language('por', 'BR'),
+    Language('srp', 'ME'),
+    Language('zho', 'TW'),
+    Language('zho', 'US'),
+} | {
+    Language(lang)
+    for lang in [
+        'afr',
+        'ara',
+        'arg',
+        'ast',
+        'bel',
+        'ben',
+        'bos',
+        'bre',
+        'bul',
+        'cat',
+        'ces',
+        'dan',
+        'deu',
+        'ell',
+        'eng',
+        'epo',
+        'est',
+        'eus',
+        'fas',
+        'fin',
+        'fra',
+        'glg',
+        'heb',
+        'hin',
+        'hrv',
+        'hun',
+        'hye',
+        'ind',
+        'isl',
+        'ita',
+        'jpn',
+        'kat',
+        'kaz',
+        'khm',
+        'kor',
+        'lav',
+        'lit',
+        'ltz',
+        'mal',
+        'mkd',
+        'mni',
+        'mon',
+        'msa',
+        'mya',
+        'nld',
+        'nor',
+        'oci',
+        'pol',
+        'ron',
+        'rus',
+        'sin',
+        'slk',
+        'slv',
+        'spa',
+        'sqi',
+        'srp',
+        'swa',
+        'swe',
+        'syr',
+        'tam',
+        'tel',
+        'tgl',
+        'tha',
+        'tur',
+        'ukr',
+        'urd',
+        'uzb',
+        'vie',
+    ]
+}
 
 
 def sanitize_id(id_: int | str | None) -> int | None:
@@ -285,87 +369,10 @@ class OpenSubtitlesComProvider(Provider):
 
     server_url: ClassVar[str] = 'https://api.opensubtitles.com/api/v1/'
     subtitle_class: ClassVar = OpenSubtitlesComSubtitle
-    languages: ClassVar[Set[Language]] = {
-        Language('por', 'BR'),
-        Language('srp', 'ME'),
-        Language('zho', 'TW'),
-        Language('zho', 'US'),
-    } | {
-        Language(lang)
-        for lang in [
-            'afr',
-            'ara',
-            'arg',
-            'ast',
-            'bel',
-            'ben',
-            'bos',
-            'bre',
-            'bul',
-            'cat',
-            'ces',
-            'dan',
-            'deu',
-            'ell',
-            'eng',
-            'epo',
-            'est',
-            'eus',
-            'fas',
-            'fin',
-            'fra',
-            'glg',
-            'heb',
-            'hin',
-            'hrv',
-            'hun',
-            'hye',
-            'ind',
-            'isl',
-            'ita',
-            'jpn',
-            'kat',
-            'kaz',
-            'khm',
-            'kor',
-            'lav',
-            'lit',
-            'ltz',
-            'mal',
-            'mkd',
-            'mni',
-            'mon',
-            'msa',
-            'mya',
-            'nld',
-            'nor',
-            'oci',
-            'pol',
-            'ron',
-            'rus',
-            'sin',
-            'slk',
-            'slv',
-            'spa',
-            'sqi',
-            'srp',
-            'swa',
-            'swe',
-            'syr',
-            'tam',
-            'tel',
-            'tgl',
-            'tha',
-            'tur',
-            'ukr',
-            'urd',
-            'uzb',
-            'vie',
-        ]
-    }
+    languages: ClassVar[Set[Language]] = opensubtitlescom_languages
 
     user_agent: str = f'Subliminal v{__short_version__}'
-    sub_format: str = 'srt'
+    expected_format: str = 'srt'
 
     username: str | None
     password: str | None
@@ -589,7 +596,7 @@ class OpenSubtitlesComProvider(Provider):
             # missing pages
             ret.extend(self._search(page=page + 1, **params))
 
-        return ret
+        return ret  # type: ignore[no-any-return]
 
     def _make_query(
         self,
@@ -737,7 +744,7 @@ class OpenSubtitlesComProvider(Provider):
 
         # get the subtitle download link
         logger.info('Downloading subtitle %r', subtitle)
-        body = {'file_id': subtitle.file_id, 'file_name': subtitle.file_name, 'sub_format': self.sub_format}
+        body = {'file_id': subtitle.file_id, 'file_name': subtitle.file_name, 'sub_format': self.expected_format}
         r = self.api_post('download', body)
         if any(k not in r for k in ('link', 'remaining')):
             return

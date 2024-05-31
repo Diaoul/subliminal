@@ -1,15 +1,15 @@
 import os
 
-from babelfish import Language
 import pytest
-from vcr import VCR
-
+from babelfish import Language  # type: ignore[import-untyped]
 from subliminal.providers.napiprojekt import NapiProjektProvider, NapiProjektSubtitle
+from vcr import VCR  # type: ignore[import-untyped]
 
-
-vcr = VCR(path_transformer=lambda path: path + '.yaml',
-          record_mode=os.environ.get('VCR_RECORD_MODE', 'once'),
-          cassette_library_dir=os.path.realpath(os.path.join('tests', 'cassettes', 'napiprojekt')))
+vcr = VCR(
+    path_transformer=lambda path: path + '.yaml',
+    record_mode=os.environ.get('VCR_RECORD_MODE', 'once'),
+    cassette_library_dir=os.path.realpath(os.path.join('tests', 'cassettes', 'napiprojekt')),
+)
 
 
 def test_get_matches(movies):
@@ -24,26 +24,29 @@ def test_get_matches_no_match(episodes):
     assert matches == set()
 
 
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_query(movies):
     language = Language('pol')
     video = movies['man_of_steel']
     with NapiProjektProvider() as provider:
-        subtitle = provider.query(language, video.hashes['napiprojekt'])
+        subtitles = provider.query(language, video.hashes['napiprojekt'])
+    assert len(subtitles) == 1
+    subtitle = subtitles[0]
     assert subtitle.language == language
-    assert subtitle.content is not None
+    assert subtitle.content
+    assert subtitle.is_valid()
 
 
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_query_wrong_hash():
     with NapiProjektProvider() as provider:
-        subtitle = provider.query(Language('pol'), 'abcdabdcabcd1234abcd1234abcd123')
-    assert subtitle is None
+        subtitles = provider.query(Language('pol'), 'abcdabdcabcd1234abcd1234abcd123')
+    assert len(subtitles) == 0
 
 
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_list_subtitles(episodes):
     video = episodes['bbt_s07e05']
@@ -51,5 +54,27 @@ def test_list_subtitles(episodes):
     with NapiProjektProvider() as provider:
         subtitles = provider.list_subtitles(video, languages)
     assert len(subtitles) == 1
-    assert {subtitle.language for subtitle in subtitles} == languages
-    assert subtitles[0].content is not None
+    subtitle = subtitles[0]
+    assert {subtitle.language} == languages
+    assert subtitle.content
+    assert subtitle.is_valid()
+
+
+@pytest.mark.integration()
+@vcr.use_cassette
+def test_download_subtitles(episodes):
+    video = episodes['got_s03e10']
+    languages = {Language('pol')}
+    with NapiProjektProvider() as provider:
+        subtitles = provider.list_subtitles(video, languages)
+    assert len(subtitles) == 1
+    subtitle = subtitles[0]
+    assert {subtitle.language} == languages
+
+    content = subtitle.content
+    assert content
+
+    with NapiProjektProvider() as provider:
+        provider.download_subtitle(subtitle)
+    assert subtitle.content == content
+    assert subtitle.is_valid()

@@ -1,3 +1,5 @@
+"""Provider for Opensubtitles.org."""
+
 from __future__ import annotations
 
 import base64
@@ -5,44 +7,89 @@ import logging
 import os
 import re
 import zlib
+from typing import TYPE_CHECKING, Any, ClassVar
 from xmlrpc.client import ServerProxy
 
-from babelfish import Language, language_converters
-from guessit import guessit
+from babelfish import Language, language_converters  # type: ignore[import-untyped]
+from guessit import guessit  # type: ignore[import-untyped]
+
+from subliminal.exceptions import (
+    AuthenticationError,
+    ConfigurationError,
+    DownloadLimitExceeded,
+    ProviderError,
+    ServiceUnavailable,
+)
+from subliminal.matches import guess_matches
+from subliminal.subtitle import Subtitle, fix_line_ending
+from subliminal.utils import decorate_imdb_id, sanitize_id
+from subliminal.video import Episode, Movie, Video
 
 from . import Provider, TimeoutSafeTransport
-from ..exceptions import (AuthenticationError, ConfigurationError, DownloadLimitExceeded, ProviderError,
-                          ServiceUnavailable)
-from ..matches import guess_matches
-from ..subtitle import Subtitle, fix_line_ending
-from ..video import Episode, Movie
+
+if TYPE_CHECKING:
+    from collections.abc import Set
+    from http.client import HTTPConnection
 
 logger = logging.getLogger(__name__)
 
 
 class UATimeoutSafeTransport(TimeoutSafeTransport):
-    def set_user_agent(self, user_agent):
+    """TimeoutSafeTransport with a user agent."""
+
+    def set_user_agent(self, user_agent: str) -> None:
+        """Set user agent."""
         self._user_agent = user_agent
 
-    def send_headers(self, connection, headers):
+    def send_headers(self, connection: HTTPConnection, headers: list) -> None:
+        """Send headers."""
         if self._user_agent:
-            connection.putheader("User-Agent", self.user_agent)
+            connection.putheader('User-Agent', self.user_agent)
         super().send_headers(connection, headers)
 
 
 class OpenSubtitlesSubtitle(Subtitle):
     """OpenSubtitles Subtitle."""
-    provider_name = 'opensubtitles'
-    series_re = re.compile(r'^"(?P<series_name>.*)" (?P<series_title>.*)$')
 
-    def __init__(self, language, hearing_impaired, page_link, subtitle_id, matched_by, movie_kind, hash, movie_name,
-                 movie_release_name, movie_year, movie_imdb_id, series_season, series_episode, filename, encoding):
-        super().__init__(language, hearing_impaired=hearing_impaired,
-                                                    page_link=page_link, encoding=encoding)
+    provider_name: ClassVar[str] = 'opensubtitles'
+    series_re: re.Pattern = re.compile(r'^"(?P<series_name>.*)" (?P<series_title>.*)$')
+
+    subtitle_id: str
+    matched_by: str | None
+    movie_kind: str | None
+    moviehash: str | None
+    movie_name: str | None
+    movie_release_name: str | None
+    movie_year: int | None
+    movie_imdb_id: str | None
+    series_season: int | None
+    series_episode: int | None
+    filename: str
+
+    def __init__(
+        self,
+        language: Language,
+        subtitle_id: str,
+        *,
+        hearing_impaired: bool = False,
+        page_link: str | None = None,
+        matched_by: str | None = None,
+        movie_kind: str | None = None,
+        moviehash: str | None = None,
+        movie_name: str | None = None,
+        movie_release_name: str | None = None,
+        movie_year: int | None = None,
+        movie_imdb_id: str | None = None,
+        series_season: int | None = None,
+        series_episode: int | None = None,
+        filename: str = '',
+        encoding: str | None = None,
+    ) -> None:
+        super().__init__(language, hearing_impaired=hearing_impaired, page_link=page_link, encoding=encoding)
         self.subtitle_id = subtitle_id
         self.matched_by = matched_by
         self.movie_kind = movie_kind
-        self.hash = hash
+        self.moviehash = moviehash
         self.movie_name = movie_name
         self.movie_release_name = movie_release_name
         self.movie_year = movie_year
@@ -52,54 +99,68 @@ class OpenSubtitlesSubtitle(Subtitle):
         self.filename = filename
 
     @property
-    def id(self):
+    def id(self) -> str:
+        """The subtitle unique id."""
         return str(self.subtitle_id)
 
     @property
-    def info(self):
+    def info(self) -> str:
+        """Information about the subtitle."""
         if not self.filename and not self.movie_release_name:
-            return self.subtitle_id
+            return self.id
         if self.movie_release_name and len(self.movie_release_name) > len(self.filename):
             return self.movie_release_name
         return self.filename
 
     @property
-    def series_name(self):
-        return self.series_re.match(self.movie_name).group('series_name')
+    def series_name(self) -> str:
+        """The series name matched from `movie_name`."""
+        m = self.series_re.match(self.movie_name)
+        if m:
+            return str(m.group('series_name'))
+        return ''
 
     @property
-    def series_title(self):
-        return self.series_re.match(self.movie_name).group('series_title')
+    def series_title(self) -> str:
+        """The series title matched from `movie_name`."""
+        m = self.series_re.match(self.movie_name)
+        if m:
+            return str(m.group('series_title'))
+        return ''
 
-    def get_matches(self, video):
+    def get_matches(self, video: Video) -> set[str]:
+        """Get the matches against the `video`."""
         if (isinstance(video, Episode) and self.movie_kind != 'episode') or (
-                isinstance(video, Movie) and self.movie_kind != 'movie'):
+            isinstance(video, Movie) and self.movie_kind != 'movie'
+        ):
             logger.info('%r is not a valid movie_kind', self.movie_kind)
             return set()
 
-        matches = guess_matches(video, {
-            'title': self.series_name if self.movie_kind == 'episode' else self.movie_name,
-            'episode_title': self.series_title if self.movie_kind == 'episode' else None,
-            'year': self.movie_year,
-            'season': self.series_season,
-            'episode': self.series_episode
-        })
+        matches = guess_matches(
+            video,
+            {
+                'title': self.series_name if self.movie_kind == 'episode' else self.movie_name,
+                'episode_title': self.series_title if self.movie_kind == 'episode' else None,
+                'year': self.movie_year,
+                'season': self.series_season,
+                'episode': self.series_episode,
+            },
+        )
 
         # tag
-        if self.matched_by == 'tag':
-            if not video.imdb_id or self.movie_imdb_id == video.imdb_id:
-                if self.movie_kind == 'episode':
-                    matches |= {'series', 'year', 'season', 'episode'}
-                elif self.movie_kind == 'movie':
-                    matches |= {'title', 'year'}
+        if self.matched_by == 'tag' and (not video.imdb_id or self.movie_imdb_id == video.imdb_id):
+            if self.movie_kind == 'episode':
+                matches |= {'series', 'year', 'season', 'episode'}
+            elif self.movie_kind == 'movie':
+                matches |= {'title', 'year'}
 
         # guess
         matches |= guess_matches(video, guessit(self.movie_release_name, {'type': self.movie_kind}))
         matches |= guess_matches(video, guessit(self.filename, {'type': self.movie_kind}))
 
-        # hash
-        if 'opensubtitles' in video.hashes and self.hash == video.hashes['opensubtitles']:
-            if self.movie_kind == 'movie' and 'title' in matches:
+        # moviehash
+        if 'opensubtitles' in video.hashes and self.moviehash == video.hashes['opensubtitles']:
+            if self.movie_kind == 'movie' and 'title' in matches:  # noqa: SIM114
                 matches.add('hash')
             elif self.movie_kind == 'episode' and 'series' in matches and 'season' in matches and 'episode' in matches:
                 matches.add('hash')
@@ -120,67 +181,99 @@ class OpenSubtitlesProvider(Provider):
     :param str password: password.
 
     """
-    languages = {Language.fromopensubtitles(l) for l in language_converters['opensubtitles'].codes}
-    server_url = 'https://api.opensubtitles.org/xml-rpc'
-    subtitle_class = OpenSubtitlesSubtitle
-    user_agent = 'VLSub 0.11.1'
-    # user_agent = 'subliminal v%s' % __short_version__
 
-    def __init__(self, username=None, password=None):
-        transport = UATimeoutSafeTransport(10)
+    languages: ClassVar[Set[Language]] = {
+        Language.fromopensubtitles(lang) for lang in language_converters['opensubtitles'].codes
+    }
+    subtitle_class: ClassVar = OpenSubtitlesSubtitle
+
+    server_url: ClassVar[str] = 'https://api.opensubtitles.org/xml-rpc'
+    # user_agent = 'subliminal v%s' % __short_version__
+    user_agent: str = 'VLSub 0.11.1'
+
+    username: str | None
+    password: str | None
+    token: str | None
+    server: ServerProxy
+
+    def __init__(
+        self,
+        username: str | None = None,
+        password: str | None = None,
+        *,
+        timeout: int = 10,
+    ) -> None:
+        transport = UATimeoutSafeTransport(timeout)
         transport.set_user_agent('VLSub')
         self.server = ServerProxy(self.server_url, transport)
         if any((username, password)) and not all((username, password)):
-            raise ConfigurationError('Username and password must be specified')
+            msg = 'Username and password must be specified'
+            raise ConfigurationError(msg)
         # None values not allowed for logging in, so replace it by ''
         self.username = username or ''
         self.password = password or ''
         self.token = None
 
-    def initialize(self):
+    def initialize(self) -> None:
+        """Initialize the provider."""
         logger.info('Logging in')
-        response = checked(self.server.LogIn(self.username, self.password, 'eng', self.user_agent))
-        self.token = response['token']
+        response = checked(self.server.LogIn(self.username, self.password, 'eng', self.user_agent))  # type: ignore[arg-type]
+        self.token = str(response['token'])
         logger.debug('Logged in with token %r', self.token)
 
-    def terminate(self):
+    def terminate(self) -> None:
+        """Terminate the provider."""
         logger.info('Logging out')
-        checked(self.server.LogOut(self.token))
+        checked(self.server.LogOut(self.token))  # type: ignore[arg-type]
         self.server.close()
         self.token = None
         logger.debug('Logged out')
 
-    def no_operation(self):
+    def no_operation(self) -> None:
+        """No-operation on the server."""
         logger.debug('No operation')
-        checked(self.server.NoOperation(self.token))
+        checked(self.server.NoOperation(self.token))  # type: ignore[arg-type]
 
-    def query(self, languages, hash=None, size=None, imdb_id=None, query=None, season=None, episode=None, tag=None):
+    def query(
+        self,
+        languages: Set[Language],
+        *,
+        moviehash: str | None = None,
+        size: int | None = None,
+        imdb_id: str | None = None,
+        query: str | None = None,
+        season: int | None = None,
+        episode: int | None = None,
+        tag: str | None = None,
+    ) -> list[OpenSubtitlesSubtitle]:
+        """Query the server and return all the data."""
         # fill the search criteria
-        criteria = []
-        if hash and size:
-            criteria.append({'moviehash': hash, 'moviebytesize': str(size)})
+        criteria: list[dict[str, Any]] = []
+        if moviehash and size:
+            criteria.append({'moviehash': moviehash, 'moviebytesize': str(size)})
         if imdb_id:
             if season and episode:
-                criteria.append({'imdbid': imdb_id[2:], 'season': season, 'episode': episode})
+                criteria.append({'imdbid': sanitize_id(imdb_id), 'season': season, 'episode': episode})
             else:
-                criteria.append({'imdbid': imdb_id[2:]})
+                criteria.append({'imdbid': sanitize_id(imdb_id)})
         if tag:
             criteria.append({'tag': tag})
         if query and season and episode:
-            criteria.append({'query': query.replace('\'', ''), 'season': season, 'episode': episode})
+            criteria.append({'query': query.replace("'", ''), 'season': season, 'episode': episode})
         elif query:
-            criteria.append({'query': query.replace('\'', '')})
+            criteria.append({'query': query.replace("'", '')})
         if not criteria:
-            raise ValueError('Not enough information')
+            msg = 'Not enough information'
+            raise ValueError(msg)
 
         # add the language
         for criterion in criteria:
-            criterion['sublanguageid'] = ','.join(sorted(l.opensubtitles for l in languages))
+            criterion['sublanguageid'] = ','.join(sorted(lang.opensubtitles for lang in languages))
 
         # query the server
         logger.info('Searching subtitles %r', criteria)
-        response = checked(self.server.SearchSubtitles(self.token, criteria))
-        subtitles = []
+        response = checked(self.server.SearchSubtitles(self.token, criteria))  # type: ignore[arg-type]
+        subtitles: list[OpenSubtitlesSubtitle] = []
 
         # exit if no data
         if not response['data']:
@@ -196,89 +289,124 @@ class OpenSubtitlesProvider(Provider):
             subtitle_id = int(subtitle_item['IDSubtitleFile'])
             matched_by = subtitle_item['MatchedBy']
             movie_kind = subtitle_item['MovieKind']
-            hash = subtitle_item['MovieHash']
+            moviehash = subtitle_item['MovieHash']
             movie_name = subtitle_item['MovieName']
             movie_release_name = subtitle_item['MovieReleaseName']
             movie_year = int(subtitle_item['MovieYear']) if subtitle_item['MovieYear'] else None
-            movie_imdb_id = 'tt' + subtitle_item['IDMovieImdb']
+            movie_imdb_id = decorate_imdb_id(subtitle_item['IDMovieImdb'])
             series_season = int(subtitle_item['SeriesSeason']) if subtitle_item['SeriesSeason'] else None
             series_episode = int(subtitle_item['SeriesEpisode']) if subtitle_item['SeriesEpisode'] else None
             filename = subtitle_item['SubFileName']
             encoding = subtitle_item.get('SubEncoding') or None
 
-            subtitle = self.subtitle_class(language, hearing_impaired, page_link, subtitle_id, matched_by, movie_kind,
-                                           hash, movie_name, movie_release_name, movie_year, movie_imdb_id,
-                                           series_season, series_episode, filename, encoding)
+            subtitle = self.subtitle_class(
+                language=language,
+                subtitle_id=subtitle_id,
+                hearing_impaired=hearing_impaired,
+                page_link=page_link,
+                matched_by=matched_by,
+                movie_kind=movie_kind,
+                moviehash=moviehash,
+                movie_name=movie_name,
+                movie_release_name=movie_release_name,
+                movie_year=movie_year,
+                movie_imdb_id=movie_imdb_id,
+                series_season=series_season,
+                series_episode=series_episode,
+                filename=filename,
+                encoding=encoding,
+            )
             logger.debug('Found subtitle %r by %s', subtitle, matched_by)
             subtitles.append(subtitle)
 
         return subtitles
 
-    def list_subtitles(self, video, languages):
+    def list_subtitles(self, video: Video, languages: Set[Language]) -> list[OpenSubtitlesSubtitle]:
+        """List all the subtitles for the video."""
         season = episode = None
         if isinstance(video, Episode):
             query = video.series
             season = video.season
             episode = video.episode
-        else:
+        elif isinstance(video, Movie):
             query = video.title
+        else:
+            return []
 
-        return self.query(languages, hash=video.hashes.get('opensubtitles'), size=video.size, imdb_id=video.imdb_id,
-                          query=query, season=season, episode=episode, tag=os.path.basename(video.name))
+        return self.query(
+            languages,
+            moviehash=video.hashes.get('opensubtitles'),
+            size=video.size,
+            imdb_id=video.imdb_id,
+            query=query,
+            season=season,
+            episode=episode,
+            tag=os.path.basename(video.name),
+        )
 
-    def download_subtitle(self, subtitle):
+    def download_subtitle(self, subtitle: OpenSubtitlesSubtitle) -> None:
+        """Download the content of the subtitle."""
         logger.info('Downloading subtitle %r', subtitle)
-        response = checked(self.server.DownloadSubtitles(self.token, [str(subtitle.subtitle_id)]))
+        response = checked(self.server.DownloadSubtitles(self.token, [str(subtitle.subtitle_id)]))  # type: ignore[arg-type]
         subtitle.content = fix_line_ending(zlib.decompress(base64.b64decode(response['data'][0]['data']), 47))
 
 
 class OpenSubtitlesVipSubtitle(OpenSubtitlesSubtitle):
     """OpenSubtitles Subtitle."""
+
     provider_name = 'opensubtitlesvip'
 
 
 class OpenSubtitlesVipProvider(OpenSubtitlesProvider):
     """OpenSubtitles Provider using VIP url."""
+
     server_url = 'https://vip-api.opensubtitles.org/xml-rpc'
     subtitle_class = OpenSubtitlesVipSubtitle
 
 
 class OpenSubtitlesError(ProviderError):
     """Base class for non-generic :class:`OpenSubtitlesProvider` exceptions."""
+
     pass
 
 
 class Unauthorized(OpenSubtitlesError, AuthenticationError):
     """Exception raised when status is '401 Unauthorized'."""
+
     pass
 
 
 class NoSession(OpenSubtitlesError, AuthenticationError):
     """Exception raised when status is '406 No session'."""
+
     pass
 
 
 class DownloadLimitReached(OpenSubtitlesError, DownloadLimitExceeded):
     """Exception raised when status is '407 Download limit reached'."""
+
     pass
 
 
 class InvalidImdbid(OpenSubtitlesError):
     """Exception raised when status is '413 Invalid ImdbID'."""
+
     pass
 
 
 class UnknownUserAgent(OpenSubtitlesError, AuthenticationError):
     """Exception raised when status is '414 Unknown User Agent'."""
+
     pass
 
 
 class DisabledUserAgent(OpenSubtitlesError, AuthenticationError):
     """Exception raised when status is '415 Disabled user agent'."""
+
     pass
 
 
-def checked(response):
+def checked(response: dict[str, Any]) -> dict[str, Any]:
     """Check a response status before returning it.
 
     :param response: a response from a XMLRPC call to OpenSubtitles.

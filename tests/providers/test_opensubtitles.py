@@ -1,81 +1,187 @@
 import os
 
-from babelfish import Language
 import pytest
-from vcr import VCR
-
+from babelfish import Language  # type: ignore[import-untyped]
 from subliminal.exceptions import ConfigurationError
 from subliminal.providers.opensubtitles import (
-    OpenSubtitlesProvider, OpenSubtitlesVipProvider, OpenSubtitlesSubtitle, Unauthorized
+    OpenSubtitlesProvider,
+    OpenSubtitlesSubtitle,
+    OpenSubtitlesVipProvider,
+    Unauthorized,
 )
+from vcr import VCR  # type: ignore[import-untyped]
 
 USERNAME = 'python-subliminal'
 PASSWORD = 'subliminal'
 
-vcr = VCR(path_transformer=lambda path: path + '.yaml',
-          record_mode=os.environ.get('VCR_RECORD_MODE', 'once'),
-          match_on=['method', 'scheme', 'host', 'port', 'path', 'query', 'body'],
-          cassette_library_dir=os.path.realpath(os.path.join('tests', 'cassettes', 'opensubtitles')))
+vcr = VCR(
+    path_transformer=lambda path: path + '.yaml',
+    record_mode=os.environ.get('VCR_RECORD_MODE', 'once'),
+    match_on=['method', 'scheme', 'host', 'port', 'path', 'query', 'body'],
+    cassette_library_dir=os.path.realpath(os.path.join('tests', 'cassettes', 'opensubtitles')),
+)
 
 
 def test_get_matches_movie_hash(movies):
-    subtitle = OpenSubtitlesSubtitle(Language('deu'), False, None, '1953771409', 'moviehash', 'movie',
-                                     '5b8f8f4e41ccb21e', 'Man of Steel',
-                                     'Man.of.Steel.German.720p.BluRay.x264-EXQUiSiTE', 2013, 'tt0770828', 0, 0,
-                                     'Man.of.Steel.German.720p.BluRay.x264-EXQUiSiTE.srt', None)
+    subtitle = OpenSubtitlesSubtitle(
+        language=Language('deu'),
+        subtitle_id='1953771409',
+        hearing_impaired=False,
+        page_link=None,
+        matched_by='moviehash',
+        movie_kind='movie',
+        moviehash='5b8f8f4e41ccb21e',
+        movie_name='Man of Steel',
+        movie_release_name='Man.of.Steel.German.720p.BluRay.x264-EXQUiSiTE',
+        movie_year=2013,
+        movie_imdb_id='tt0770828',
+        series_season=0,
+        series_episode=0,
+        filename='Man.of.Steel.German.720p.BluRay.x264-EXQUiSiTE.srt',
+        encoding=None,
+    )
     matches = subtitle.get_matches(movies['man_of_steel'])
     assert matches == {'title', 'year', 'country', 'video_codec', 'imdb_id', 'hash', 'resolution', 'source'}
 
 
 def test_get_matches_episode(episodes):
-    subtitle = OpenSubtitlesSubtitle(Language('ell'), False, None, '1953579014', 'fulltext', 'episode',
-                                     '0', '"Game of Thrones" Mhysa',
-                                     ' Game.of.Thrones.S03E10.HDTV.XviD-AFG', 2013, 'tt2178796', 3, 10,
-                                     'Game.of.Thrones.S03E10.HDTV.XviD-AFG.srt', None)
+    subtitle = OpenSubtitlesSubtitle(
+        language=Language('ell'),
+        subtitle_id='1953579014',
+        hearing_impaired=False,
+        page_link=None,
+        matched_by='fulltext',
+        movie_kind='episode',
+        moviehash='0',
+        movie_name='"Game of Thrones" Mhysa',
+        movie_release_name=' Game.of.Thrones.S03E10.HDTV.XviD-AFG',
+        movie_year=2013,
+        movie_imdb_id='tt2178796',
+        series_season=3,
+        series_episode=10,
+        filename='Game.of.Thrones.S03E10.HDTV.XviD-AFG.srt',
+        encoding=None,
+    )
     matches = subtitle.get_matches(episodes['got_s03e10'])
     assert matches == {'imdb_id', 'series', 'year', 'country', 'episode', 'season', 'title'}
 
 
 def test_get_matches_episode_year(episodes):
-    subtitle = OpenSubtitlesSubtitle(Language('spa'), False, None, '1953369959', 'tag', 'episode',
-                                     '0', '"Dallas" The Price You Pay',
-                                     ' Dallas.2012.S01E03.HDTV.x264-LOL', 2012, 'tt2205526', 1, 3,
-                                     'Dallas.2012.S01E03.HDTV.x264-LOL.srt', 'cp1252')
+    subtitle = OpenSubtitlesSubtitle(
+        language=Language('spa'),
+        subtitle_id='1953369959',
+        hearing_impaired=False,
+        page_link=None,
+        matched_by='tag',
+        movie_kind='episode',
+        moviehash='0',
+        movie_name='"Dallas" The Price You Pay',
+        movie_release_name=' Dallas.2012.S01E03.HDTV.x264-LOL',
+        movie_year=2012,
+        movie_imdb_id='tt2205526',
+        series_season=1,
+        series_episode=3,
+        filename='Dallas.2012.S01E03.HDTV.x264-LOL.srt',
+        encoding='cp1252',
+    )
     matches = subtitle.get_matches(episodes['dallas_2012_s01e03'])
     assert matches == {'imdb_id', 'series', 'year', 'episode', 'season', 'title'}
 
 
 def test_get_matches_episode_filename(episodes):
-    subtitle = OpenSubtitlesSubtitle(Language('por', country='BR'), False, None, '1954453973', 'fulltext', 'episode',
-                                     '0', '"Agents of S.H.I.E.L.D." A Fractured House',
-                                     'HDTV.x264-KILLERS-mSD-AFG-EVO-KILLERS', 2014, 'tt4078580', 2, 6,
-                                     'Marvels.Agents.of.S.H.I.E.L.D.S02E06.720p.HDTV.x264-KILLERS.srt', 'cp1252')
+    subtitle = OpenSubtitlesSubtitle(
+        language=Language('por', country='BR'),
+        subtitle_id='1954453973',
+        hearing_impaired=False,
+        page_link=None,
+        matched_by='fulltext',
+        movie_kind='episode',
+        moviehash='0',
+        movie_name='"Agents of S.H.I.E.L.D." A Fractured House',
+        movie_release_name='HDTV.x264-KILLERS-mSD-AFG-EVO-KILLERS',
+        movie_year=2014,
+        movie_imdb_id='tt4078580',
+        series_season=2,
+        series_episode=6,
+        filename='Marvels.Agents.of.S.H.I.E.L.D.S02E06.720p.HDTV.x264-KILLERS.srt',
+        encoding='cp1252',
+    )
     matches = subtitle.get_matches(episodes['marvels_agents_of_shield_s02e06'])
-    assert matches == {'series', 'year', 'country', 'season', 'episode', 'release_group', 'source', 'resolution',
-                       'video_codec'}
+    assert matches == {
+        'series',
+        'year',
+        'country',
+        'season',
+        'episode',
+        'release_group',
+        'source',
+        'resolution',
+        'video_codec',
+    }
 
 
 def test_get_matches_episode_tag(episodes):
-    subtitle = OpenSubtitlesSubtitle(Language('por', country='BR'), False, None, '1954453973', 'tag', 'episode',
-                                     '0', '"Agents of S.H.I.E.L.D." A Fractured House',
-                                     'HDTV.x264-KILLERS-mSD-AFG-EVO-KILLERS', 2014, 'tt4078580', 2, 6,
-                                     '', 'cp1252')
+    subtitle = OpenSubtitlesSubtitle(
+        language=Language('por', country='BR'),
+        subtitle_id='1954453973',
+        hearing_impaired=False,
+        page_link=None,
+        matched_by='tag',
+        movie_kind='episode',
+        moviehash='0',
+        movie_name='"Agents of S.H.I.E.L.D." A Fractured House',
+        movie_release_name='HDTV.x264-KILLERS-mSD-AFG-EVO-KILLERS',
+        movie_year=2014,
+        movie_imdb_id='tt4078580',
+        series_season=2,
+        series_episode=6,
+        filename='',
+        encoding='cp1252',
+    )
     matches = subtitle.get_matches(episodes['marvels_agents_of_shield_s02e06'])
     assert matches == {'series', 'year', 'country', 'season', 'episode', 'source', 'video_codec'}
 
 
 def test_get_matches_imdb_id(movies):
-    subtitle = OpenSubtitlesSubtitle(Language('fra'), True, None, '1953767650', 'imdbid', 'movie', 0, 'Man of Steel',
-                                     'man.of.steel.2013.720p.bluray.x264-felony', 2013, 'tt0770828', 0, 0,
-                                     'man.of.steel.2013.720p.bluray.x264-felony.srt', None)
+    subtitle = OpenSubtitlesSubtitle(
+        language=Language('fra'),
+        subtitle_id='1953767650',
+        hearing_impaired=True,
+        page_link=None,
+        matched_by='imdbid',
+        movie_kind='movie',
+        moviehash=None,
+        movie_name='Man of Steel',
+        movie_release_name='man.of.steel.2013.720p.bluray.x264-felony',
+        movie_year=2013,
+        movie_imdb_id='tt0770828',
+        series_season=0,
+        series_episode=0,
+        filename='man.of.steel.2013.720p.bluray.x264-felony.srt',
+        encoding=None,
+    )
     matches = subtitle.get_matches(movies['man_of_steel'])
     assert matches == {'title', 'year', 'country', 'video_codec', 'imdb_id', 'resolution', 'source', 'release_group'}
 
 
 def test_get_matches_no_match(episodes):
-    subtitle = OpenSubtitlesSubtitle(Language('fra'), False, None, '1953767650', 'imdbid', 'movie', 0, 'Man of Steel',
-                                     'man.of.steel.2013.720p.bluray.x264-felony', 2013, 770828, 0, 0,
-                                     'man.of.steel.2013.720p.bluray.x264-felony.srt', None)
+    subtitle = OpenSubtitlesSubtitle(
+        language=Language('fra'),
+        subtitle_id='1953767650',
+        hearing_impaired=False,
+        page_link=None,
+        matched_by='imdbid',
+        movie_kind='movie',
+        moviehash=0,  # type: ignore[arg-type]
+        movie_name='Man of Steel',
+        movie_release_name='man.of.steel.2013.720p.bluray.x264-felony',
+        movie_year=2013,
+        movie_imdb_id=770828,  # type: ignore[arg-type]
+        series_season=0,
+        series_episode=0,
+        filename='man.of.steel.2013.720p.bluray.x264-felony.srt',
+        encoding=None,
+    )
     matches = subtitle.get_matches(episodes['got_s03e10'])
     assert matches == set()
 
@@ -91,7 +197,7 @@ def test_configuration_error_no_password():
 
 
 @pytest.mark.skip('authorization no longer works on the old API')
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_login():
     provider = OpenSubtitlesProvider(USERNAME, PASSWORD)
@@ -100,7 +206,7 @@ def test_login():
     assert provider.token is not None
 
 
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_login_bad_password():
     provider = OpenSubtitlesProvider(USERNAME, 'lanimilbus')
@@ -108,7 +214,7 @@ def test_login_bad_password():
         provider.initialize()
 
 
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_login_vip_login():
     provider = OpenSubtitlesVipProvider(USERNAME, PASSWORD)
@@ -116,7 +222,7 @@ def test_login_vip_login():
         provider.initialize()
 
 
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_login_vip_bad_password():
     provider = OpenSubtitlesVipProvider(USERNAME, 'lanimilbus')
@@ -125,7 +231,7 @@ def test_login_vip_bad_password():
 
 
 @pytest.mark.skip('authorization no longer works on the old API')
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_logout():
     provider = OpenSubtitlesProvider(USERNAME, PASSWORD)
@@ -134,24 +240,24 @@ def test_logout():
     assert provider.token is None
 
 
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_no_operation():
     with OpenSubtitlesProvider() as provider:
         provider.no_operation()
 
 
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_query_not_enough_information():
     languages = {Language('eng')}
-    with OpenSubtitlesProvider() as provider:
-        with pytest.raises(ValueError) as excinfo:
+    with OpenSubtitlesProvider() as provider:  # noqa: SIM117
+        with pytest.raises(ValueError) as excinfo:  # noqa: PT011
             provider.query(languages)
     assert str(excinfo.value) == 'Not enough information'
 
 
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_query_query_movie(movies):
     video = movies['man_of_steel']
@@ -166,7 +272,7 @@ def test_query_query_movie(movies):
         '1955252613',
         '1955260179',
         '1955260793',
-        '1956104848'
+        '1956104848',
     }
     with OpenSubtitlesProvider() as provider:
         subtitles = provider.query(languages, query=video.title)
@@ -174,7 +280,7 @@ def test_query_query_movie(movies):
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_query_query_episode(episodes):
     video = episodes['dallas_2012_s01e03']
@@ -187,7 +293,7 @@ def test_query_query_episode(episodes):
 
 
 @pytest.mark.skip('query by tag currently broken on opensubtitles')
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_query_tag_movie(movies):
     video = movies['interstellar']
@@ -199,7 +305,7 @@ def test_query_tag_movie(movies):
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_query_imdb_id(movies):
     video = movies['man_of_steel']
@@ -211,7 +317,7 @@ def test_query_imdb_id(movies):
         '1955279635',
         '1955742626',
         '1956717408',
-        '1957720375'
+        '1957720375',
     }
     with OpenSubtitlesProvider() as provider:
         subtitles = provider.query(languages, imdb_id=video.imdb_id)
@@ -219,7 +325,7 @@ def test_query_imdb_id(movies):
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_query_hash_size(movies):
     video = movies['man_of_steel']
@@ -235,24 +341,24 @@ def test_query_hash_size(movies):
         '1953767218',
         '1953767330',
         '1953767678',
-        '1953785668'
+        '1953785668',
     }
     with OpenSubtitlesProvider() as provider:
-        subtitles = provider.query(languages, hash=video.hashes['opensubtitles'], size=video.size)
+        subtitles = provider.query(languages, moviehash=video.hashes['opensubtitles'], size=video.size)
     assert {subtitle.id for subtitle in subtitles} == expected_subtitles
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_query_wrong_hash_wrong_size():
     languages = {Language('eng')}
     with OpenSubtitlesProvider() as provider:
-        subtitles = provider.query(languages, hash='123456787654321', size=99999)
+        subtitles = provider.query(languages, moviehash='123456787654321', size=99999)
     assert len(subtitles) == 0
 
 
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_query_query_season_episode(episodes):
     video = episodes['bbt_s07e05']
@@ -264,7 +370,7 @@ def test_query_query_season_episode(episodes):
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_list_subtitles_movie(movies):
     video = movies['man_of_steel']
@@ -303,7 +409,7 @@ def test_list_subtitles_movie(movies):
         '1958112113',
         '1957400516',
         '1957720375',
-        '1957200647'
+        '1957200647',
     }
     with OpenSubtitlesProvider() as provider:
         subtitles = provider.list_subtitles(video, languages)
@@ -311,7 +417,7 @@ def test_list_subtitles_movie(movies):
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_list_subtitles_movie_no_hash(movies):
     video = movies['enders_game']
@@ -323,7 +429,7 @@ def test_list_subtitles_movie_no_hash(movies):
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_list_subtitles_episode(episodes):
     video = episodes['marvels_agents_of_shield_s02e06']
@@ -335,7 +441,7 @@ def test_list_subtitles_episode(episodes):
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_download_subtitle(movies):
     video = movies['man_of_steel']
@@ -349,7 +455,7 @@ def test_download_subtitle(movies):
 
 
 @pytest.mark.skip('query by tag currently broken on opensubtitles')
-@pytest.mark.integration
+@pytest.mark.integration()
 @vcr.use_cassette
 def test_tag_match(episodes):
     video = episodes['the fall']
@@ -357,8 +463,11 @@ def test_tag_match(episodes):
     unwanted_subtitle_id = '1954369181'  # 'Doc.Martin.S03E01.(24 September 2007).[TVRip (Xvid)]-spa.srt'
     with OpenSubtitlesProvider() as provider:
         subtitles = provider.list_subtitles(video, languages)
-        found_subtitle = [s for s in subtitles if s.id == unwanted_subtitle_id and s.matched_by == 'tag'][0]
-        matches = found_subtitle.get_matches(video)
+
+    matched_subtitles = [s for s in subtitles if s.id == unwanted_subtitle_id and s.matched_by == 'tag']
+    assert len(matched_subtitles) == 1
+    found_subtitle = matched_subtitles[0]
+    matches = found_subtitle.get_matches(video)
     assert len(subtitles) > 0
     assert unwanted_subtitle_id in {subtitle.id for subtitle in subtitles}
     # Assert is not a tag match: {'series', 'year', 'season', 'episode'}

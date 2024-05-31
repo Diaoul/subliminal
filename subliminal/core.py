@@ -684,7 +684,7 @@ def save_subtitles(video, subtitles, single=False, directory=None, encoding=None
     saved_subtitles = []
     for subtitle in subtitles:
         # check content
-        if subtitle.content is None:
+        if not subtitle.content:
             logger.error('Skipping subtitle %r: no content', subtitle)
             continue
 

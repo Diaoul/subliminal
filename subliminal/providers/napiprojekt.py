@@ -1,35 +1,47 @@
+"""Provider for NapiProjekt."""
+
 from __future__ import annotations
 
+import io
 import logging
+from gzip import BadGzipFile, GzipFile
+from typing import TYPE_CHECKING, ClassVar
 
-from babelfish import Language
+from babelfish import Language  # type: ignore[import-untyped]
 from requests import Session
 
+from subliminal.exceptions import NotInitializedProviderError
+from subliminal.subtitle import Subtitle, fix_line_ending
+
 from . import Provider
-from ..subtitle import Subtitle
+
+if TYPE_CHECKING:
+    from collections.abc import Set
+
+    from subliminal.video import Video
 
 logger = logging.getLogger(__name__)
 
 
-def get_subhash(hash):
+def get_subhash(video_hash: str) -> str:
     """Get a second hash based on napiprojekt's hash.
 
-    :param str hash: napiprojekt's hash.
+    :param str video_hash: napiprojekt's hash.
     :return: the subhash.
     :rtype: str
 
     """
-    idx = [0xe, 0x3, 0x6, 0x8, 0x2]
+    idx = [0xE, 0x3, 0x6, 0x8, 0x2]
     mul = [2, 2, 5, 4, 3]
-    add = [0, 0xd, 0x10, 0xb, 0x5]
+    add = [0, 0xD, 0x10, 0xB, 0x5]
 
     b = []
     for i in range(len(idx)):
         a = add[i]
         m = mul[i]
         i = idx[i]
-        t = a + int(hash[i], 16)
-        v = int(hash[t:t + 2], 16)
+        t = a + int(video_hash[i], 16)
+        v = int(video_hash[t : t + 2], 16)
         b.append(('%x' % (v * m))[-1])
 
     return ''.join(b)
@@ -37,26 +49,32 @@ def get_subhash(hash):
 
 class NapiProjektSubtitle(Subtitle):
     """NapiProjekt Subtitle."""
-    provider_name = 'napiprojekt'
 
-    def __init__(self, language, hash):
-        super().__init__(language)
-        self.hash = hash
+    provider_name: ClassVar[str] = 'napiprojekt'
+
+    video_hash: str
+
+    def __init__(self, language: Language, video_hash: str, fps: float = 24) -> None:
+        super().__init__(language, fps=fps)
+        self.video_hash = video_hash
         self.content = None
 
     @property
-    def id(self):
-        return self.hash
+    def id(self) -> str:
+        """The subtitle unique id."""
+        return str(self.video_hash)
 
     @property
-    def info(self):
-        return self.hash
+    def info(self) -> str:
+        """Information about the subtitle."""
+        return str(self.video_hash)
 
-    def get_matches(self, video):
+    def get_matches(self, video: Video) -> set[str]:
+        """Get the matches against the `video`."""
         matches = set()
 
-        # hash
-        if 'napiprojekt' in video.hashes and video.hashes['napiprojekt'] == self.hash:
+        # video_hash
+        if 'napiprojekt' in video.hashes and video.hashes['napiprojekt'] == self.video_hash:
             matches.add('hash')
 
         return matches
@@ -64,22 +82,63 @@ class NapiProjektSubtitle(Subtitle):
 
 class NapiProjektProvider(Provider):
     """NapiProjekt Provider."""
-    languages = {Language.fromalpha2(l) for l in ['pl']}
-    required_hash = 'napiprojekt'
-    server_url = 'http://napiprojekt.pl/unit_napisy/dl.php'
-    subtitle_class = NapiProjektSubtitle
 
-    def __init__(self):
+    languages: ClassVar[Set[Language]] = {Language.fromalpha2(lang) for lang in ['pl']}
+    subtitle_class: ClassVar = NapiProjektSubtitle
+
+    required_hash: ClassVar = 'napiprojekt'
+    server_url: ClassVar[str] = 'http://napiprojekt.pl/unit_napisy/dl.php'
+
+    timeout: int
+    session: Session | None
+
+    def __init__(self, *, timeout: int = 10) -> None:
+        self.timeout = timeout
         self.session = None
 
-    def initialize(self):
+    def initialize(self) -> None:
+        """Initialize the provider."""
         self.session = Session()
         self.session.headers['User-Agent'] = self.user_agent
 
-    def terminate(self):
+    def terminate(self) -> None:
+        """Terminate the provider."""
+        if self.session is None:
+            raise NotInitializedProviderError
         self.session.close()
 
-    def query(self, language, hash):
+    def _parse_content(self, content: bytes) -> bytes:
+        """Parse the subtitle content from the response."""
+        gzip_prefix = b'\x1f\x8b\x08'
+
+        # GZipped file
+        if content.startswith(gzip_prefix):
+            # open the zip
+            try:
+                with GzipFile(fileobj=io.BytesIO(content)) as gz:
+                    content = gz.read()
+
+            except BadGzipFile:
+                return b''
+
+        # Handle subtitles not found and errors
+        if content[:4] == b'NPc0':
+            return b''
+        return fix_line_ending(content)
+
+    def query(self, language: Language, video_hash: str) -> list[NapiProjektSubtitle]:
+        """Query the provider for subtitles.
+
+        :param :class:`~babelfish.language.Language` language: the language of the subtitles.
+        :param int video_hash: the hash of the video.
+
+        :return: the list of found subtitles.
+        :rtype: list[NapiProjektSubtitle]
+
+        """
+        if self.session is None:
+            raise NotInitializedProviderError
+
         params = {
             'v': 'dreambox',
             'kolejka': 'false',
@@ -87,26 +146,31 @@ class NapiProjektProvider(Provider):
             'pass': '',
             'napios': 'Linux',
             'l': language.alpha2.upper(),
-            'f': hash,
-            't': get_subhash(hash)}
+            'f': video_hash,
+            't': get_subhash(video_hash),
+        }
         logger.info('Searching subtitle %r', params)
-        r = self.session.get(self.server_url, params=params, timeout=10)
+        r = self.session.get(self.server_url, params=params, timeout=self.timeout)
         r.raise_for_status()
 
-        # handle subtitles not found and errors
-        if r.content[:4] == b'NPc0':
+        # Parse content
+        content = self._parse_content(r.content)
+        if not content:
             logger.debug('No subtitles found')
-            return None
+            return []
 
-        subtitle = self.subtitle_class(language, hash)
+        # Create subtitle object
+        subtitle = self.subtitle_class(language=language, video_hash=video_hash)
         subtitle.content = r.content
         logger.debug('Found subtitle %r', subtitle)
 
-        return subtitle
+        return [subtitle]
 
-    def list_subtitles(self, video, languages):
-        return [s for s in [self.query(l, video.hashes['napiprojekt']) for l in languages] if s is not None]
+    def list_subtitles(self, video: Video, languages: Set[Language]) -> list[NapiProjektSubtitle]:
+        """List all the subtitles for the video."""
+        return [s[0] for s in [self.query(lang, video.hashes['napiprojekt']) for lang in languages] if len(s) > 0]
 
-    def download_subtitle(self, subtitle):
+    def download_subtitle(self, subtitle: NapiProjektSubtitle) -> None:
+        """Download the content of the subtitle."""
         # there is no download step, content is already filled from listing subtitles
-        pass
+        return

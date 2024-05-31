@@ -1,79 +1,156 @@
+"""Provider for Gestdown."""
+
 from __future__ import annotations
 
 import logging
 import re
+from typing import TYPE_CHECKING, Any, ClassVar
 
-from babelfish import Language
-from guessit import guessit
+from babelfish import Language  # type: ignore[import-untyped]
+from guessit import guessit  # type: ignore[import-untyped]
 from requests import HTTPError, Session
 
+from subliminal.exceptions import DownloadLimitExceeded, NotInitializedProviderError
+from subliminal.matches import guess_matches
+from subliminal.subtitle import Subtitle, fix_line_ending
+from subliminal.utils import sanitize
+from subliminal.video import Episode, Video
+
 from . import Provider
-from ..exceptions import DownloadLimitExceeded
-from ..matches import guess_matches
-from ..subtitle import Subtitle, fix_line_ending
-from ..utils import sanitize
-from ..video import Episode
+
+if TYPE_CHECKING:
+    from collections.abc import Set
 
 logger = logging.getLogger(__name__)
+
+gestdown_languages: Set[Language] = {
+    Language(lang)
+    for lang in [
+        'ara',
+        'aze',
+        'ben',
+        'bos',
+        'bul',
+        'cat',
+        'ces',
+        'dan',
+        'deu',
+        'ell',
+        'eng',
+        'eus',
+        'fas',
+        'fin',
+        'fra',
+        'glg',
+        'heb',
+        'hrv',
+        'hun',
+        'hye',
+        'ind',
+        'ita',
+        'jpn',
+        'kor',
+        'mkd',
+        'msa',
+        'nld',
+        'nor',
+        'pol',
+        'por',
+        'ron',
+        'rus',
+        'slk',
+        'slv',
+        'spa',
+        'sqi',
+        'srp',
+        'swe',
+        'tha',
+        'tur',
+        'ukr',
+        'vie',
+        'zho',
+    ]
+}
 
 
 class GestdownSubtitle(Subtitle):
     """Gestdown Subtitle."""
-    provider_name = 'gestdown'
-    id_pattern = r'.*\/subtitles\/download\/([a-z0-9-]+)'
+
+    provider_name: ClassVar[str] = 'gestdown'
+    id_pattern: ClassVar[str] = r'.*\/subtitles\/download\/([a-z0-9-]+)'
+
+    subtitle_id: str
+    series: str
+    season: int | None
+    episode: int | None
+    title: str | None
+    release_group: str | None
 
     def __init__(
-        self, language, hearing_impaired, series, season, episode, title, version,
-        download_link,
-    ):
-        super().__init__(language, hearing_impaired=hearing_impaired)
+        self,
+        language: Language,
+        *,
+        hearing_impaired: bool = False,
+        page_link: str | None = None,
+        series: str = '',
+        season: int | None = None,
+        episode: int | None = None,
+        title: str | None = None,
+        release_group: str = '',
+    ) -> None:
+        super().__init__(language, hearing_impaired=hearing_impaired, page_link=page_link)
         self.series = series
         self.season = season
         self.episode = episode
         self.title = title
-        self.version = version
-        self.download_link = download_link
+        self.release_group = release_group
 
         subtitle_id = None
-        if download_link:
-            m = re.match(self.id_pattern, download_link)
+        if page_link:
+            m = re.match(self.id_pattern, page_link)
             if m:
                 subtitle_id = m.groups()[0]
-        self.subtitle_id = subtitle_id or download_link
+        self.subtitle_id = subtitle_id or page_link or ''
 
     @property
-    def id(self):
-        return self.subtitle_id
+    def id(self) -> str:
+        """The subtitle unique id."""
+        return str(self.subtitle_id)
 
     @property
-    def info(self):
-        title = ' - {} - '.format(self.title) if self.title else ' - '
-        return '{series} s{season:02d}e{episode:02d}{title}{version}'.format(
-            series=self.series,
-            season=self.season,
-            episode=self.episode,
-            title=title,
-            version=self.version,
+    def info(self) -> str:
+        """Information about the subtitle."""
+        parts = []
+        if self.title:
+            parts.append(self.title)
+        if self.release_group:
+            parts.append(self.release_group)
+        title_part = ' - '.join(parts)
+        return f'{self.series} s{self.season:02d}e{self.episode:02d}{title_part}'
+
+    def get_matches(self, video: Video) -> set[str]:
+        """Get the matches against the `video`."""
+        # series name
+        matches = guess_matches(
+            video,
+            {
+                'title': self.series,
+                'season': self.season,
+                'episode': self.episode,
+                'episode_title': self.title,
+                'release_group': self.release_group,
+            },
         )
 
-    def get_matches(self, video):
-        # series name
-        matches = guess_matches(video, {
-            'title': self.series,
-            'season': self.season,
-            'episode': self.episode,
-            'episode_title': self.title,
-            'release_group': self.version,
-        })
-
         # resolution
-        if self.version and video.resolution and video.resolution in self.version.lower():
+        if self.release_group and video.resolution and video.resolution in self.release_group.lower():
             matches.add('resolution')
+
         # other properties
-        if self.version:
+        if self.release_group:
             matches |= guess_matches(
                 video,
-                guessit(self.version, {'type': 'episode'}),
+                guessit(self.release_group, {'type': 'episode'}),
                 partial=True,
             )
 
@@ -82,50 +159,54 @@ class GestdownSubtitle(Subtitle):
 
 class GestdownProvider(Provider):
     """Gestdown Provider."""
-    languages = {Language(lang) for lang in [
-        'ara', 'aze', 'ben', 'bos', 'bul', 'cat', 'ces', 'dan', 'deu', 'ell', 'eng',
-        'eus', 'fas', 'fin', 'fra', 'glg', 'heb', 'hrv', 'hun', 'hye', 'ind', 'ita',
-        'jpn', 'kor', 'mkd', 'msa', 'nld', 'nor', 'pol', 'por', 'ron', 'rus', 'slk',
-        'slv', 'spa', 'sqi', 'srp', 'swe', 'tha', 'tur', 'ukr', 'vie', 'zho',
-    ]}
-    video_types = (Episode,)
-    server_url = 'https://api.gestdown.info'
-    subtitle_class = GestdownSubtitle
 
-    def __init__(self):
+    languages: ClassVar[Set[Language]] = gestdown_languages
+    video_types: ClassVar = (Episode,)
+    server_url: ClassVar[str] = 'https://api.gestdown.info'
+    subtitle_class: ClassVar = GestdownSubtitle
+
+    timeout: int
+    session: Session | None
+
+    def __init__(self, *, timeout: int = 10) -> None:
+        self.timeout = timeout
         self.session = None
 
-    def initialize(self):
+    def initialize(self) -> None:
+        """Initialize the provider."""
         self.session = Session()
         self.session.headers['User-Agent'] = self.user_agent
         self.session.headers['accept'] = 'application/json'
 
-    def terminate(self):
+    def terminate(self) -> None:
+        """Terminate the provider."""
         if self.session is None:
-            return
+            raise NotInitializedProviderError
+
         self.session.close()
 
-    def _search_show_id(self, series, series_tvdb_id=None):
+    def _search_show_id(self, series: str, series_tvdb_id: str | None = None) -> str | None:
         """Search the show id from the `series`.
 
         :param str series: series of the episode.
-        :param int series_tvdb_id: tvdb id of the series.
+        :param str series_tvdb_id: tvdb id of the series.
         :return: the show id, if found.
-        :rtype: int
+        :rtype: str
 
         """
         if self.session is None:
-            return
+            raise NotInitializedProviderError
+
         # build the params
         if series_tvdb_id is not None:
-            query = f"{self.server_url}/shows/external/tvdb/{series_tvdb_id}"
+            query = f'{self.server_url}/shows/external/tvdb/{series_tvdb_id}'
             logger.info(f'Searching show ids for TVBD id {series_tvdb_id}')
         else:
-            query = f"{self.server_url}/shows/search/{series}"
+            query = f'{self.server_url}/shows/search/{series}'
             logger.info(f'Searching show ids for {series}')
 
         # make the search
-        r = self.session.get(query, timeout=10)
+        r = self.session.get(query, timeout=self.timeout)
         try:
             r.raise_for_status()
         except HTTPError:
@@ -137,14 +218,15 @@ class GestdownProvider(Provider):
         # get the suggestion
         for show in result['shows']:
             if not series or sanitize(show['name']) == sanitize(series):
-                show_id = show['id']
+                show_id = str(show['id'])
                 logger.debug(f'Found show id {show_id}')
                 return show_id
 
         logger.warning('Show id not found: suggestion does not match: %r', result)
         return None
 
-    def get_title_and_show_id(self, video):
+    def get_title_and_show_id(self, video: Episode) -> tuple[str, str | None]:
+        """Get the title and show_id."""
         # lookup show_id
         series_tvdb_id = getattr(video, 'series_tvdb_id', None)
         title = video.series
@@ -160,11 +242,21 @@ class GestdownProvider(Provider):
 
         return (title, show_id)
 
-    def _query_all_episodes(self, show_id, season, language):
+    def _query_all_episodes(self, show_id: str, season: int, language: Language) -> list[dict[str, Any]]:
+        """Get the subtitles in the specified language for all the episodes of a season of the show.
+
+        :param str show_id: the show id.
+        :param int season: the season to query.
+        :param :class:`~babelfish.language.Language` language: the language of the subtitles.
+        :return: the list of found subtitles (as dicts).
+        :rtype: list[dict[str, Any]]
+
+        """
         if self.session is None:
-            return
-        query = f"{self.server_url}/shows/{show_id}/{season}/{language.alpha3}"
-        r = self.session.get(query, timeout=10)
+            raise NotInitializedProviderError
+
+        query = f'{self.server_url}/shows/{show_id}/{season}/{language.alpha3}'
+        r = self.session.get(query, timeout=self.timeout)
         try:
             r.raise_for_status()
         except HTTPError:
@@ -178,15 +270,32 @@ class GestdownProvider(Provider):
             logger.debug('No data returned from provider')
             return []
 
-        return result["episodes"]
+        return result['episodes']  # type: ignore[no-any-return]
 
-    def _query_single_episode(self, show_id, season, episode, language):
+    def _query_single_episode(
+        self,
+        show_id: str,
+        season: int,
+        episode: int,
+        language: Language,
+    ) -> list[dict[str, Any]]:
+        """Get the subtitles in the specified language of a single episode (and season) of the show.
+
+        :param str show_id: the show id.
+        :param int season: the season to query.
+        :param int episode: the episode to query.
+        :param :class:`~babelfish.language.Language` language: the language of the subtitles.
+        :return: the list of found subtitles (as dicts).
+        :rtype: list[dict[str, Any]]
+
+        """
         if self.session is None:
-            return
-        base_query = f"{self.server_url}/subtitles/get"
-        query = f"{base_query}/{show_id}/{season}/{episode}/{language.alpha3}"
+            raise NotInitializedProviderError
 
-        r = self.session.get(query, timeout=10)
+        base_query = f'{self.server_url}/subtitles/get'
+        query = f'{base_query}/{show_id}/{season}/{episode}/{language.alpha3}'
+
+        r = self.session.get(query, timeout=self.timeout)
         try:
             r.raise_for_status()
         except HTTPError:
@@ -201,21 +310,38 @@ class GestdownProvider(Provider):
             return []
 
         # Transform to list of episodes, identical to `query_all_episodes`
-        episode = result["episode"]
-        episode['subtitles'] = result['matchingSubtitles']
-        return [episode]
+        data: dict[str, Any] = result['episode']
+        data['subtitles'] = result['matchingSubtitles']
+        return [data]
 
-    def query(self, show_id, series, season, episode, language):
+    def query(
+        self,
+        show_id: str | None,
+        series: str,
+        season: int,
+        episode: int | None,
+        language: Language,
+    ) -> list[GestdownSubtitle]:
+        """Query the provider for subtitles.
+
+        :param (str | None) show_id: the show id.
+        :param str series: the series title.
+        :param int season: the season number.
+        :param int episode: the episode number.
+        :param :class:`~babelfish.language.Language` language: the language of the subtitles.
+        :return: the list of found subtitles.
+        :rtype: list[GestdownSubtitle]
+
+        """
         # get the page of the season of the show
-        logger.info(
-            'Getting the subtitles list of show id %d, season %d', show_id, season
-        )
-        if language is None:
-            logger.debug(
-                'A language for the subtitle must be provided, language=None is not allowed'
-            )
+        if show_id is None:
+            logger.debug('A show id must be provided, show_id=None is not allowed')
             return []
 
+        logger.info('Getting the subtitles list of show id %d, season %d', show_id, season)
+        if language is None:
+            logger.debug('A language for the subtitle must be provided, language=None is not allowed')
+            return []
 
         if episode is None:
             # download for the given season of the show
@@ -234,25 +360,29 @@ class GestdownProvider(Provider):
             for subtitle in found['subtitles']:
                 # read the item
                 hearing_impaired = subtitle['hearingImpaired']
-                download_link = f"{self.server_url}{subtitle['downloadUri']}"
-                version = subtitle['version']
+                page_link = f"{self.server_url}{subtitle['downloadUri']}"
+                release_group = subtitle['version']
 
                 subtitle = self.subtitle_class(
-                    language,
-                    hearing_impaired,
-                    series,
-                    season,
-                    episode,
-                    title,
-                    version,
-                    download_link,
+                    language=language,
+                    hearing_impaired=hearing_impaired,
+                    series=series,
+                    season=season,
+                    episode=episode,
+                    title=title,
+                    release_group=release_group,
+                    page_link=page_link,
                 )
                 logger.debug('Found subtitle %r', subtitle)
                 subtitles.append(subtitle)
 
         return subtitles
 
-    def list_subtitles(self, video, languages):
+    def list_subtitles(self, video: Video, languages: Set[Language]) -> list[GestdownSubtitle]:
+        """List all the subtitles for the video."""
+        if not isinstance(video, Episode):
+            return []
+
         # lookup title and show_id
         title, show_id = self.get_title_and_show_id(video)
 
@@ -264,26 +394,25 @@ class GestdownProvider(Provider):
         # query for subtitles with the show_id
         subtitles = []
         for lang in languages:
-            subtitles.extend(
-                self.query(show_id, title, video.season, video.episode, lang)
-            )
+            subtitles.extend(self.query(show_id, title, video.season, video.episode, lang))
 
         return subtitles
 
-    def download_subtitle(self, subtitle):
+    def download_subtitle(self, subtitle: GestdownSubtitle) -> None:
+        """Download the content of the subtitle."""
         if self.session is None:
+            raise NotInitializedProviderError
+
+        if not subtitle.page_link:
             return
+
         # download the subtitle
         logger.info('Downloading subtitle %r', subtitle)
-        r = self.session.get(
-            subtitle.download_link,
-            headers={'Referer': subtitle.page_link},
-            timeout=10,
-        )
+        r = self.session.get(subtitle.page_link, timeout=self.timeout)
         try:
             r.raise_for_status()
         except HTTPError:
-            logger.exception("Could not download subtitle %s", subtitle)
+            logger.exception('Could not download subtitle %s', subtitle)
             return
 
         if not r.content:

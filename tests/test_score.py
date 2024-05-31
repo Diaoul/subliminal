@@ -49,9 +49,17 @@ def test_compute_score_episode_imdb_id(movies):
 
 def test_compute_score_episode_title(episodes):
     video = episodes['bbt_s07e05']
-    subtitle = PodnapisiSubtitle(Language('eng'), True, None, 1,
-                                 ['The.Big.Bang.Theory.S07E05.The.Workplace.Proximity.720p.HDTV.x264-DIMENSION.mkv'],
-                                 None, 7, 5, None)
+    subtitle = PodnapisiSubtitle(
+        language=Language('eng'),
+        subtitle_id="1",
+        hearing_impaired=True,
+        page_link=None,
+        releases=['The.Big.Bang.Theory.S07E05.The.Workplace.Proximity.720p.HDTV.x264-DIMENSION.mkv'],
+        title=None,
+        season=7,
+        episode=5,
+        year=None,
+    )
     assert compute_score(subtitle, video) == sum(episode_scores.get(m, 0) for m in
                                                  ('series', 'year', 'country', 'season', 'episode', 'release_group',
                                                   'source', 'resolution', 'video_codec', 'title'))

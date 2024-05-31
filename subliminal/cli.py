@@ -39,6 +39,7 @@ from subliminal import (
     scan_videos,
 )
 from subliminal.core import ARCHIVE_EXTENSIONS, search_external_subtitles
+from subliminal.score import match_hearing_impaired
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -560,7 +561,7 @@ def download(
 
                 # scale score from 0 to 100 taking out preferences
                 scaled_score = score
-                if s.hearing_impaired == hearing_impaired:
+                if match_hearing_impaired(s, hearing_impaired=hearing_impaired):
                     scaled_score -= scores['hearing_impaired']
                 scaled_score *= 100 / scores['hash']
 

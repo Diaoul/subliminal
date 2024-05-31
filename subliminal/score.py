@@ -153,6 +153,15 @@ def get_scores(video: Video) -> dict[str, Any]:
     raise ValueError(msg)
 
 
+def match_hearing_impaired(subtitle: Subtitle, *, hearing_impaired: bool | None = None) -> bool:
+    """Match hearing impaired, if it is defined for the subtitle."""
+    return (
+        hearing_impaired is not None
+        and subtitle.hearing_impaired is not None
+        and subtitle.hearing_impaired == hearing_impaired
+    )
+
+
 def compute_score(subtitle: Subtitle, video: Video, *, hearing_impaired: bool | None = None) -> int:
     """Compute the score of the `subtitle` against the `video` with `hearing_impaired` preference.
 
@@ -163,7 +172,7 @@ def compute_score(subtitle: Subtitle, video: Video, *, hearing_impaired: bool | 
     :type subtitle: :class:`~subliminal.subtitle.Subtitle`
     :param video: the video to compute the score against.
     :type video: :class:`~subliminal.video.Video`
-    :param bool hearing_impaired: hearing impaired preference.
+    :param (bool | None) hearing_impaired: hearing impaired preference (None if no preference).
     :return: score of the subtitle.
     :rtype: int
 
@@ -206,7 +215,7 @@ def compute_score(subtitle: Subtitle, video: Video, *, hearing_impaired: bool | 
             matches |= {'title', 'year', 'country'}
 
     # handle hearing impaired
-    if hearing_impaired is not None and subtitle.hearing_impaired == hearing_impaired:
+    if match_hearing_impaired(subtitle, hearing_impaired=hearing_impaired):
         logger.debug('Matched hearing_impaired')
         matches.add('hearing_impaired')
 

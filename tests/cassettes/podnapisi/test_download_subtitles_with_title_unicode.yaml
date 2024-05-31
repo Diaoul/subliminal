@@ -5,118 +5,113 @@ interactions:
       Accept:
       - application/json
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
       User-Agent:
       - Subliminal/2.1
     method: GET
-    uri: https://www.podnapisi.net/subtitles/search/advanced?keywords=Caf%C3%A9+Society&movie_type=movie&language=fr&year=2016
+    uri: https://www.podnapisi.net/subtitles/search/advanced?keywords=Caf%C3%A9+Society&language=fr&movie_type=movie&year=2016
   response:
     body:
-      string: !!python/unicode "{\n  \"all_pages\": 1, \n  \"data\": [\n    {\n  \
-        \    \"audited\": false, \n      \"contributions\": [], \n      \"contributor\"\
-        : null, \n      \"created\": \"2017-04-28T21:18:09.833000+00:00\", \n    \
-        \  \"custom_releases\": [\n        \"Cafe.Society.2016.720p.BluRay.ShAaNiG\"\
-        , \n        \"Cafe.Society.2016.BRRip.XviD.AC3-EVO\", \n        \"Cafe.Society.2016.BDRip.X264-AMIABLE\"\
-        , \n        \"Cafe.Society.2016.720p.BluRay.YIFY\", \n        \"Cafe.Society.2016.1080p.BluRay.x264-Ganool\"\
-        , \n        \"Cafe.Society.2016.720p.BluRay.x264-Ganool\", \n        \"Cafe.Society.2016.ML.1080p.x264\"\
-        , \n        \"Cafe.Society.2016.1080p.BluRay.YIFY\", \n        \"Cafe.Society.2016.720p.BluRay.X264-AMIABLE\"\
-        , \n        \"Cafe.Society.2016.1080p.BluRay.X264-AMIABLE\", \n        \"\
-        Cafe.Society.2016.1080p.BluRay.ShAaNiG\"\n      ], \n      \"download\": \"\
-        /en/subtitles/fr-cafe-society-2016/iulD/download\", \n      \"flags\": [],\
-        \ \n      \"fps\": \"\", \n      \"id\": \"iulD\", \n      \"language\": \"\
-        fr\", \n      \"movie\": {\n        \"aliases\": [], \n        \"episode_info\"\
-        : null, \n        \"id\": \"iuo\", \n        \"posters\": {\n          \"\
-        inline\": \"/thumbnails/moviedb/inline/8a/b5/50/d4/55/c0/213b02c89c673fa208d5/iuo.jpg\"\
-        , \n          \"normal\": \"/thumbnails/moviedb/normal/8a/b5/50/d4/55/c0/213b02c89c673fa208d5/iuo.jpg\"\
-        , \n          \"small\": \"/thumbnails/moviedb/small/8a/b5/50/d4/55/c0/213b02c89c673fa208d5/iuo.jpg\"\
-        , \n          \"title\": \"/thumbnails/moviedb/title/8a/b5/50/d4/55/c0/213b02c89c673fa208d5/iuo.jpg\"\
-        \n        }, \n        \"providers\": [\n          \"omdb:X_sG\", \n     \
-        \     \"imdb:4513674\"\n        ], \n        \"slug\": \"cafe-society-2016\"\
-        , \n        \"title\": \"Caf\\u00e9 Society\", \n        \"type\": \"movie\"\
-        , \n        \"year\": 2016\n      }, \n      \"notes\": null, \n      \"num_cds\"\
-        : 1, \n      \"rejected\": null, \n      \"releases\": [], \n      \"state\"\
-        : \"\", \n      \"stats\": {\n        \"characters\": 96, \n        \"characters_per_line\"\
-        : 19.2, \n        \"downloads\": 2823, \n        \"lines\": 5, \n        \"\
-        lines_per_unit\": 1.6666666667, \n        \"parts\": 1, \n        \"units\"\
-        : 3\n      }, \n      \"url\": \"/en/subtitles/fr-cafe-society-2016/iulD\"\
-        \n    }, \n    {\n      \"audited\": false, \n      \"contributions\": [],\
-        \ \n      \"contributor\": null, \n      \"created\": \"2017-04-28T21:12:38.179000+00:00\"\
-        , \n      \"custom_releases\": [\n        \"Cafe.Society.2016.ML.1080p.x264\"\
-        \n      ], \n      \"download\": \"/en/subtitles/fr-cafe-society-2016/ielD/download\"\
-        , \n      \"flags\": [], \n      \"fps\": \"\", \n      \"id\": \"ielD\",\
-        \ \n      \"language\": \"fr\", \n      \"movie\": {\n        \"aliases\"\
-        : [], \n        \"episode_info\": null, \n        \"id\": \"iuo\", \n    \
-        \    \"posters\": {\n          \"inline\": \"/thumbnails/moviedb/inline/8a/b5/50/d4/55/c0/213b02c89c673fa208d5/iuo.jpg\"\
-        , \n          \"normal\": \"/thumbnails/moviedb/normal/8a/b5/50/d4/55/c0/213b02c89c673fa208d5/iuo.jpg\"\
-        , \n          \"small\": \"/thumbnails/moviedb/small/8a/b5/50/d4/55/c0/213b02c89c673fa208d5/iuo.jpg\"\
-        , \n          \"title\": \"/thumbnails/moviedb/title/8a/b5/50/d4/55/c0/213b02c89c673fa208d5/iuo.jpg\"\
-        \n        }, \n        \"providers\": [\n          \"omdb:X_sG\", \n     \
-        \     \"imdb:4513674\"\n        ], \n        \"slug\": \"cafe-society-2016\"\
-        , \n        \"title\": \"Caf\\u00e9 Society\", \n        \"type\": \"movie\"\
-        , \n        \"year\": 2016\n      }, \n      \"notes\": null, \n      \"num_cds\"\
-        : 1, \n      \"rejected\": null, \n      \"releases\": [], \n      \"state\"\
-        : \"\", \n      \"stats\": {\n        \"characters\": 60606, \n        \"\
-        characters_per_line\": 27.5356656065, \n        \"downloads\": 54, \n    \
-        \    \"lines\": 2201, \n        \"lines_per_unit\": 1.5210780926, \n     \
-        \   \"parts\": 1, \n        \"units\": 1447\n      }, \n      \"url\": \"\
-        /en/subtitles/fr-cafe-society-2016/ielD\"\n    }, \n    {\n      \"audited\"\
-        : false, \n      \"contributions\": [], \n      \"contributor\": null, \n\
-        \      \"created\": \"2017-04-28T21:07:02.332000+00:00\", \n      \"custom_releases\"\
-        : [\n        \"Cafe.Society.2016.ML.1080p.x264\"\n      ], \n      \"download\"\
-        : \"/en/subtitles/fr-cafe-society-2016/iOlD/download\", \n      \"flags\"\
-        : [], \n      \"fps\": \"\", \n      \"id\": \"iOlD\", \n      \"language\"\
-        : \"fr\", \n      \"movie\": {\n        \"aliases\": [], \n        \"episode_info\"\
-        : null, \n        \"id\": \"iuo\", \n        \"posters\": {\n          \"\
-        inline\": \"/thumbnails/moviedb/inline/8a/b5/50/d4/55/c0/213b02c89c673fa208d5/iuo.jpg\"\
-        , \n          \"normal\": \"/thumbnails/moviedb/normal/8a/b5/50/d4/55/c0/213b02c89c673fa208d5/iuo.jpg\"\
-        , \n          \"small\": \"/thumbnails/moviedb/small/8a/b5/50/d4/55/c0/213b02c89c673fa208d5/iuo.jpg\"\
-        , \n          \"title\": \"/thumbnails/moviedb/title/8a/b5/50/d4/55/c0/213b02c89c673fa208d5/iuo.jpg\"\
-        \n        }, \n        \"providers\": [\n          \"omdb:X_sG\", \n     \
-        \     \"imdb:4513674\"\n        ], \n        \"slug\": \"cafe-society-2016\"\
-        , \n        \"title\": \"Caf\\u00e9 Society\", \n        \"type\": \"movie\"\
-        , \n        \"year\": 2016\n      }, \n      \"notes\": null, \n      \"num_cds\"\
-        : 1, \n      \"rejected\": null, \n      \"releases\": [], \n      \"state\"\
-        : \"\", \n      \"stats\": {\n        \"characters\": 57423, \n        \"\
-        characters_per_line\": 24.6450643777, \n        \"downloads\": 373, \n   \
-        \     \"lines\": 2330, \n        \"lines_per_unit\": 1.3689776733, \n    \
-        \    \"parts\": 1, \n        \"units\": 1702\n      }, \n      \"url\": \"\
-        /en/subtitles/fr-cafe-society-2016/iOlD\"\n    }, \n    {\n      \"audited\"\
-        : false, \n      \"contributions\": [], \n      \"contributor\": null, \n\
-        \      \"created\": \"2016-09-17T06:20:29.048000+00:00\", \n      \"custom_releases\"\
-        : [\n        \"Cafe.Society.2016.720p.BluRay.X264-AMIABLE\", \n        \"\
-        Cafe.Society.2016.MULTi.1080p.BluRay.x264-LOST\", \n        \"Cafe.Society.2016.MULTi.1080p.BluRay.x264-LOST.Fr\"\
-        , \n        \"Cafe.Society.2016.BDRip.X264-AMIABLE\", \n        \"Cafe.Society.2016.1080p.BluRay.X264-AMIABLE\"\
-        \n      ], \n      \"download\": \"/en/subtitles/fr-cafe-society-2016/2o5B/download\"\
-        , \n      \"flags\": [], \n      \"fps\": \"23.976\", \n      \"id\": \"2o5B\"\
-        , \n      \"language\": \"fr\", \n      \"movie\": {\n        \"aliases\"\
-        : [], \n        \"episode_info\": null, \n        \"id\": \"iuo\", \n    \
-        \    \"posters\": {\n          \"inline\": \"/thumbnails/moviedb/inline/8a/b5/50/d4/55/c0/213b02c89c673fa208d5/iuo.jpg\"\
-        , \n          \"normal\": \"/thumbnails/moviedb/normal/8a/b5/50/d4/55/c0/213b02c89c673fa208d5/iuo.jpg\"\
-        , \n          \"small\": \"/thumbnails/moviedb/small/8a/b5/50/d4/55/c0/213b02c89c673fa208d5/iuo.jpg\"\
-        , \n          \"title\": \"/thumbnails/moviedb/title/8a/b5/50/d4/55/c0/213b02c89c673fa208d5/iuo.jpg\"\
-        \n        }, \n        \"providers\": [\n          \"omdb:X_sG\", \n     \
-        \     \"imdb:4513674\"\n        ], \n        \"slug\": \"cafe-society-2016\"\
-        , \n        \"title\": \"Caf\\u00e9 Society\", \n        \"type\": \"movie\"\
-        , \n        \"year\": 2016\n      }, \n      \"notes\": null, \n      \"num_cds\"\
-        : 1, \n      \"rejected\": null, \n      \"releases\": [], \n      \"state\"\
-        : \"\", \n      \"stats\": {\n        \"characters\": 57444, \n        \"\
-        characters_per_line\": 24.6646629455, \n        \"downloads\": 693, \n   \
-        \     \"lines\": 2329, \n        \"lines_per_unit\": 1.3683901293, \n    \
-        \    \"parts\": 1, \n        \"units\": 1702\n      }, \n      \"url\": \"\
-        /en/subtitles/fr-cafe-society-2016/2o5B\"\n    }\n  ], \n  \"page\": 1, \n\
-        \  \"per_page\": 50, \n  \"status\": \"ok\"\n}"
+      string: "{\n  \"all_pages\": 1, \n  \"data\": [\n    {\n      \"audited\": false,
+        \n      \"contributions\": [], \n      \"contributor\": null, \n      \"created\":
+        \"2017-04-28T21:18:09.833000+00:00\", \n      \"custom_releases\": [\n        \"Cafe.Society.2016.720p.BluRay.ShAaNiG\",
+        \n        \"Cafe.Society.2016.BRRip.XviD.AC3-EVO\", \n        \"Cafe.Society.2016.BDRip.X264-AMIABLE\",
+        \n        \"Cafe.Society.2016.720p.BluRay.YIFY\", \n        \"Cafe.Society.2016.1080p.BluRay.x264-Ganool\",
+        \n        \"Cafe.Society.2016.720p.BluRay.x264-Ganool\", \n        \"Cafe.Society.2016.ML.1080p.x264\",
+        \n        \"Cafe.Society.2016.1080p.BluRay.YIFY\", \n        \"Cafe.Society.2016.720p.BluRay.X264-AMIABLE\",
+        \n        \"Cafe.Society.2016.1080p.BluRay.X264-AMIABLE\", \n        \"Cafe.Society.2016.1080p.BluRay.ShAaNiG\"\n
+        \     ], \n      \"download\": \"/en/subtitles/fr-cafe-society-2016/iulD/download\",
+        \n      \"flags\": [], \n      \"fps\": \"\", \n      \"id\": \"iulD\", \n
+        \     \"language\": \"fr\", \n      \"movie\": {\n        \"aliases\": [],
+        \n        \"episode_info\": null, \n        \"id\": \"iuo\", \n        \"posters\":
+        {\n          \"inline\": \"/thumbnails/moviedb/inline/8a/b5/50/d4/55/c0/213b02c89c673fa208d5/iuo.jpg\",
+        \n          \"normal\": \"/thumbnails/moviedb/normal/8a/b5/50/d4/55/c0/213b02c89c673fa208d5/iuo.jpg\",
+        \n          \"small\": \"/thumbnails/moviedb/small/8a/b5/50/d4/55/c0/213b02c89c673fa208d5/iuo.jpg\",
+        \n          \"title\": \"/thumbnails/moviedb/title/8a/b5/50/d4/55/c0/213b02c89c673fa208d5/iuo.jpg\"\n
+        \       }, \n        \"providers\": [\n          \"omdb:X_sG\", \n          \"imdb:4513674\"\n
+        \       ], \n        \"slug\": \"cafe-society-2016\", \n        \"title\":
+        \"Caf\\u00e9 Society\", \n        \"type\": \"movie\", \n        \"year\":
+        2016\n      }, \n      \"notes\": null, \n      \"num_cds\": 1, \n      \"rejected\":
+        null, \n      \"releases\": [], \n      \"state\": \"\", \n      \"stats\":
+        {\n        \"characters\": 96, \n        \"characters_per_line\": 19.2, \n
+        \       \"downloads\": 4264, \n        \"lines\": 5, \n        \"lines_per_unit\":
+        1.6666666666666667, \n        \"parts\": 1, \n        \"units\": 3\n      },
+        \n      \"url\": \"/en/subtitles/fr-cafe-society-2016/iulD\"\n    }, \n    {\n
+        \     \"audited\": false, \n      \"contributions\": [], \n      \"contributor\":
+        null, \n      \"created\": \"2017-04-28T21:12:38.179000+00:00\", \n      \"custom_releases\":
+        [\n        \"Cafe.Society.2016.ML.1080p.x264\"\n      ], \n      \"download\":
+        \"/en/subtitles/fr-cafe-society-2016/ielD/download\", \n      \"flags\": [],
+        \n      \"fps\": \"\", \n      \"id\": \"ielD\", \n      \"language\": \"fr\",
+        \n      \"movie\": {\n        \"aliases\": [], \n        \"episode_info\":
+        null, \n        \"id\": \"iuo\", \n        \"posters\": {\n          \"inline\":
+        \"/thumbnails/moviedb/inline/8a/b5/50/d4/55/c0/213b02c89c673fa208d5/iuo.jpg\",
+        \n          \"normal\": \"/thumbnails/moviedb/normal/8a/b5/50/d4/55/c0/213b02c89c673fa208d5/iuo.jpg\",
+        \n          \"small\": \"/thumbnails/moviedb/small/8a/b5/50/d4/55/c0/213b02c89c673fa208d5/iuo.jpg\",
+        \n          \"title\": \"/thumbnails/moviedb/title/8a/b5/50/d4/55/c0/213b02c89c673fa208d5/iuo.jpg\"\n
+        \       }, \n        \"providers\": [\n          \"omdb:X_sG\", \n          \"imdb:4513674\"\n
+        \       ], \n        \"slug\": \"cafe-society-2016\", \n        \"title\":
+        \"Caf\\u00e9 Society\", \n        \"type\": \"movie\", \n        \"year\":
+        2016\n      }, \n      \"notes\": null, \n      \"num_cds\": 1, \n      \"rejected\":
+        null, \n      \"releases\": [], \n      \"state\": \"\", \n      \"stats\":
+        {\n        \"characters\": 60606, \n        \"characters_per_line\": 27.53566560654248,
+        \n        \"downloads\": 84, \n        \"lines\": 2201, \n        \"lines_per_unit\":
+        1.5210780926053904, \n        \"parts\": 1, \n        \"units\": 1447\n      },
+        \n      \"url\": \"/en/subtitles/fr-cafe-society-2016/ielD\"\n    }, \n    {\n
+        \     \"audited\": false, \n      \"contributions\": [], \n      \"contributor\":
+        null, \n      \"created\": \"2017-04-28T21:07:02.332000+00:00\", \n      \"custom_releases\":
+        [\n        \"Cafe.Society.2016.ML.1080p.x264\"\n      ], \n      \"download\":
+        \"/en/subtitles/fr-cafe-society-2016/iOlD/download\", \n      \"flags\": [],
+        \n      \"fps\": \"\", \n      \"id\": \"iOlD\", \n      \"language\": \"fr\",
+        \n      \"movie\": {\n        \"aliases\": [], \n        \"episode_info\":
+        null, \n        \"id\": \"iuo\", \n        \"posters\": {\n          \"inline\":
+        \"/thumbnails/moviedb/inline/8a/b5/50/d4/55/c0/213b02c89c673fa208d5/iuo.jpg\",
+        \n          \"normal\": \"/thumbnails/moviedb/normal/8a/b5/50/d4/55/c0/213b02c89c673fa208d5/iuo.jpg\",
+        \n          \"small\": \"/thumbnails/moviedb/small/8a/b5/50/d4/55/c0/213b02c89c673fa208d5/iuo.jpg\",
+        \n          \"title\": \"/thumbnails/moviedb/title/8a/b5/50/d4/55/c0/213b02c89c673fa208d5/iuo.jpg\"\n
+        \       }, \n        \"providers\": [\n          \"omdb:X_sG\", \n          \"imdb:4513674\"\n
+        \       ], \n        \"slug\": \"cafe-society-2016\", \n        \"title\":
+        \"Caf\\u00e9 Society\", \n        \"type\": \"movie\", \n        \"year\":
+        2016\n      }, \n      \"notes\": null, \n      \"num_cds\": 1, \n      \"rejected\":
+        null, \n      \"releases\": [], \n      \"state\": \"\", \n      \"stats\":
+        {\n        \"characters\": 57423, \n        \"characters_per_line\": 24.645064377682402,
+        \n        \"downloads\": 427, \n        \"lines\": 2330, \n        \"lines_per_unit\":
+        1.3689776733254995, \n        \"parts\": 1, \n        \"units\": 1702\n      },
+        \n      \"url\": \"/en/subtitles/fr-cafe-society-2016/iOlD\"\n    }, \n    {\n
+        \     \"audited\": false, \n      \"contributions\": [], \n      \"contributor\":
+        null, \n      \"created\": \"2016-09-17T06:20:29.048000+00:00\", \n      \"custom_releases\":
+        [\n        \"Cafe.Society.2016.720p.BluRay.X264-AMIABLE\", \n        \"Cafe.Society.2016.MULTi.1080p.BluRay.x264-LOST\",
+        \n        \"Cafe.Society.2016.MULTi.1080p.BluRay.x264-LOST.Fr\", \n        \"Cafe.Society.2016.BDRip.X264-AMIABLE\",
+        \n        \"Cafe.Society.2016.1080p.BluRay.X264-AMIABLE\"\n      ], \n      \"download\":
+        \"/en/subtitles/fr-cafe-society-2016/2o5B/download\", \n      \"flags\": [],
+        \n      \"fps\": \"23.976\", \n      \"id\": \"2o5B\", \n      \"language\":
+        \"fr\", \n      \"movie\": {\n        \"aliases\": [], \n        \"episode_info\":
+        null, \n        \"id\": \"iuo\", \n        \"posters\": {\n          \"inline\":
+        \"/thumbnails/moviedb/inline/8a/b5/50/d4/55/c0/213b02c89c673fa208d5/iuo.jpg\",
+        \n          \"normal\": \"/thumbnails/moviedb/normal/8a/b5/50/d4/55/c0/213b02c89c673fa208d5/iuo.jpg\",
+        \n          \"small\": \"/thumbnails/moviedb/small/8a/b5/50/d4/55/c0/213b02c89c673fa208d5/iuo.jpg\",
+        \n          \"title\": \"/thumbnails/moviedb/title/8a/b5/50/d4/55/c0/213b02c89c673fa208d5/iuo.jpg\"\n
+        \       }, \n        \"providers\": [\n          \"omdb:X_sG\", \n          \"imdb:4513674\"\n
+        \       ], \n        \"slug\": \"cafe-society-2016\", \n        \"title\":
+        \"Caf\\u00e9 Society\", \n        \"type\": \"movie\", \n        \"year\":
+        2016\n      }, \n      \"notes\": null, \n      \"num_cds\": 1, \n      \"rejected\":
+        null, \n      \"releases\": [], \n      \"state\": \"\", \n      \"stats\":
+        {\n        \"characters\": 57444, \n        \"characters_per_line\": 24.66466294547016,
+        \n        \"downloads\": 758, \n        \"lines\": 2329, \n        \"lines_per_unit\":
+        1.3683901292596945, \n        \"parts\": 1, \n        \"units\": 1702\n      },
+        \n      \"url\": \"/en/subtitles/fr-cafe-society-2016/2o5B\"\n    }\n  ],
+        \n  \"page\": 1, \n  \"per_page\": 50, \n  \"status\": \"ok\"\n}"
     headers:
-      connection:
+      Connection:
       - keep-alive
-      content-length:
-      - '6903'
-      content-type:
+      Content-Length:
+      - '6940'
+      Content-Type:
       - application/json
-      date:
-      - Sat, 09 May 2020 10:24:47 GMT
-      server:
+      Date:
+      - Fri, 31 May 2024 12:22:25 GMT
+      Server:
       - nginx
     status:
       code: 200
@@ -127,7 +122,7 @@ interactions:
       Accept:
       - application/json
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, br, zstd
       Connection:
       - keep-alive
       User-Agent:
@@ -1001,23 +996,23 @@ interactions:
         AFBLAQIUAxQAAAAIAIu6nErFuSCbcb8AALr2AQAnAAAAAAAAAAAAAACAAQAAAABDYWZlLlNvY2ll
         dHkuMjAxNi5UTC4xMDgwcC54MjY0X2ZyZS5zcnRQSwUGAAAAAAEAAQBVAAAAtr8AAAAA
     headers:
-      accept-ranges:
+      Accept-Ranges:
       - bytes
-      connection:
+      Connection:
       - keep-alive
-      content-disposition:
+      Content-Disposition:
       - attachment; filename="fr-cafe-society-2016-SubRip-utf-8.zip"
-      content-length:
+      Content-Length:
       - '49185'
-      content-type:
+      Content-Type:
       - application/octet-stream
-      date:
-      - Sat, 09 May 2020 10:24:47 GMT
-      etag:
+      Date:
+      - Fri, 31 May 2024 12:22:26 GMT
+      ETag:
       - '"5903b216-c021"'
-      last-modified:
+      Last-Modified:
       - Fri, 28 Apr 2017 21:20:22 GMT
-      server:
+      Server:
       - nginx
     status:
       code: 200

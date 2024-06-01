@@ -1,11 +1,19 @@
+"""Subtitle class."""
+
 from __future__ import annotations
 
 import codecs
 import logging
 import os
+from typing import TYPE_CHECKING, ClassVar
 
 import chardet
-import srt
+import srt  # type: ignore[import-untyped]
+
+if TYPE_CHECKING:
+    from babelfish import Language  # type: ignore[import-untyped]
+
+    from subliminal.video import Video
 
 logger = logging.getLogger(__name__)
 
@@ -25,10 +33,33 @@ class Subtitle:
     :type encoding: str
 
     """
-    #: Name of the provider that returns that class of subtitle
-    provider_name = ''
 
-    def __init__(self, language, hearing_impaired=False, page_link=None, encoding=None):
+    #: Name of the provider that returns that class of subtitle
+    provider_name: ClassVar[str] = ''
+
+    #: Language of the subtitle
+    language: Language
+
+    #: Whether or not the subtitle is hearing impaired
+    hearing_impaired: bool
+
+    #: URL of the web page from which the subtitle can be downloaded
+    page_link: str | None
+
+    #: Content as bytes
+    content: bytes | None
+
+    #: Encoding to decode with when accessing :attr:`text`
+    encoding: str | None
+
+    def __init__(
+        self,
+        language: Language,
+        *,
+        hearing_impaired: bool = False,
+        page_link: str | None = None,
+        encoding: str | None = None,
+    ) -> None:
         #: Language of the subtitle
         self.language = language
 
@@ -52,18 +83,18 @@ class Subtitle:
                 logger.debug('Unsupported encoding %s', encoding)
 
     @property
-    def id(self):
-        """Unique identifier of the subtitle"""
-        return ""
+    def id(self) -> str:
+        """Unique identifier of the subtitle."""
+        return ''
 
     @property
-    def info(self):
-        """Info of the subtitle, human readable. Usually the subtitle name for GUI rendering"""
-        return ""
+    def info(self) -> str:
+        """Info of the subtitle, human readable. Usually the subtitle name for GUI rendering."""
+        return ''
 
     @property
-    def text(self):
-        """Content as string
+    def text(self) -> str:
+        """Content as string.
 
         If :attr:`encoding` is None, the encoding is guessed with :meth:`guess_encoding`
 
@@ -83,7 +114,7 @@ class Subtitle:
 
         return self.content
 
-    def is_valid(self):
+    def is_valid(self) -> bool:
         """Check if a :attr:`text` is a valid SubRip format.
 
         :return: whether or not the subtitle is valid.
@@ -100,19 +131,19 @@ class Subtitle:
 
         return True
 
-    def parsed(self):
-        """Text content parsed to a valid subtitle.
+    def parsed(self) -> str:
+        """Text content parsed to a valid subtitle."""
+        return str(srt.compose(srt.parse(self.text)))
 
-        """
-        return srt.compose(srt.parse(self.text))
-
-    def guess_encoding(self):
+    def guess_encoding(self) -> str | None:
         """Guess encoding using the language, falling back on chardet.
 
         :return: the guessed encoding.
         :rtype: str
 
         """
+        if not isinstance(self.content, bytes):
+            return None
         logger.info('Guessing encoding for language %s', self.language)
 
         # always try utf-8 first
@@ -153,12 +184,12 @@ class Subtitle:
         logger.warning('Could not guess encoding from language')
 
         # fallback on chardet
-        encoding = chardet.detect(self.content)['encoding']
-        logger.info('Chardet found encoding %s', encoding)
+        encoding_or_none = chardet.detect(self.content)['encoding']
+        logger.info('Chardet found encoding %s', encoding_or_none)
 
-        return encoding
+        return encoding_or_none
 
-    def get_path(self, video, single=False):
+    def get_path(self, video: Video, *, single: bool = False) -> str:
         """Get the subtitle path using the `video`, `language` and `extension`.
 
         :param video: path to the video.
@@ -170,7 +201,7 @@ class Subtitle:
         """
         return get_subtitle_path(video.name, None if single else self.language)
 
-    def get_matches(self, video):
+    def get_matches(self, video: Video) -> set[str]:
         """Get the matches against the `video`.
 
         :param video: the video to get the matches with.
@@ -181,14 +212,14 @@ class Subtitle:
         """
         raise NotImplementedError
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         return hash(self.provider_name + '-' + self.id)
 
-    def __repr__(self):
-        return '<%s %r [%s]>' % (self.__class__.__name__, self.id, self.language)
+    def __repr__(self) -> str:
+        return f'<{self.__class__.__name__} {self.id!r} [{self.language}]>'
 
 
-def get_subtitle_path(video_path, language=None, extension='.srt'):
+def get_subtitle_path(video_path: str | os.PathLike, language: Language | None = None, extension: str = '.srt') -> str:
     """Get the subtitle path using the `video_path` and `language`.
 
     :param str video_path: path to the video.
@@ -207,8 +238,8 @@ def get_subtitle_path(video_path, language=None, extension='.srt'):
     return subtitle_root + extension
 
 
-def fix_line_ending(content):
-    """Fix line ending of `content` by changing it to \n.
+def fix_line_ending(content: bytes) -> bytes:
+    r"""Fix line ending of `content` by changing it to \n.
 
     :param bytes content: content of the subtitle.
     :return: the content with fixed line endings.

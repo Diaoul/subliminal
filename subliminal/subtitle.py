@@ -99,20 +99,21 @@ class Subtitle:
         If :attr:`encoding` is None, the encoding is guessed with :meth:`guess_encoding`
 
         """
-        if not self.content:
-            return
+        if not isinstance(self.content, bytes) or not self.content:
+            return ''
 
-        if isinstance(self.content, bytes):
-            if self.encoding:
-                return self.content.decode(self.encoding, errors='replace')
+        # Decode
+        if self.encoding:
+            return self.content.decode(self.encoding, errors='replace')
 
-            guessed_encoding = self.guess_encoding()
-            if guessed_encoding:
-                return self.content.decode(guessed_encoding, errors='replace')
+        # Get encoding
+        guessed_encoding = self.guess_encoding()
+        if guessed_encoding:
+            return self.content.decode(guessed_encoding, errors='replace')
 
-            return None
-
-        return self.content
+        # Cannot decode
+        logger.warning('Cannot guess encoding to decode subtitle content.')
+        return ''
 
     def is_valid(self) -> bool:
         """Check if a :attr:`text` is a valid SubRip format.

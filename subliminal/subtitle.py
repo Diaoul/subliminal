@@ -154,7 +154,7 @@ class Subtitle:
         # Decode
         return self.content.decode(self.encoding, errors='replace')
 
-    def reencode(self, encoding: str = "utf-8") -> bool:
+    def reencode(self, encoding: str = 'utf-8') -> bool:
         """Re-encode the subtitle raw content using the specified encoding.
 
         :param str encoding: the new encoding of the raw content (default to 'utf-8').
@@ -195,11 +195,11 @@ class Subtitle:
             return False
 
         # Valid srt
-        if self.expected_format == "srt":
+        if self.expected_format == 'srt':
             try:
                 parsed = self.parse_srt()
             except Exception:
-                msg = "srt parsing failed, try pysubs2"
+                msg = 'srt parsing failed, try pysubs2'
                 logger.exception(msg)
             else:
                 if auto_fix_srt:
@@ -210,7 +210,7 @@ class Subtitle:
         try:
             SSAFile.from_string(self.text, format_=self.expected_format, fps=self.fps)
         except Exception:
-            logger.exception("not a valid subtitle.")
+            logger.exception('not a valid subtitle.')
         else:
             return True
 
@@ -239,12 +239,24 @@ class Subtitle:
 
         # add language-specific encodings
         if self.language.alpha3 == 'zho':
-            encodings.extend(['cp936', 'gb2312', 'gbk', 'hz', 'iso2022_jp_2', 'cp950', 'big5hkscs', 'big5',
-                              'gb18030', 'utf-16'])
+            encodings.extend(
+                ['cp936', 'gb2312', 'gbk', 'hz', 'iso2022_jp_2', 'cp950', 'big5hkscs', 'big5', 'gb18030', 'utf-16']
+            )
 
         elif self.language.alpha3 == 'jpn':
-            encodings.extend(['shift-jis', 'cp932', 'euc_jp', 'iso2022_jp', 'iso2022_jp_1', 'iso2022_jp_2',
-                              'iso2022_jp_2004', 'iso2022_jp_3', 'iso2022_jp_ext'])
+            encodings.extend(
+                [
+                    'shift-jis',
+                    'cp932',
+                    'euc_jp',
+                    'iso2022_jp',
+                    'iso2022_jp_1',
+                    'iso2022_jp_2',
+                    'iso2022_jp_2004',
+                    'iso2022_jp_3',
+                    'iso2022_jp_ext',
+                ]
+            )
 
         elif self.language.alpha3 == 'tha':
             encodings.extend(['tis-620', 'cp874'])
@@ -259,16 +271,32 @@ class Subtitle:
             encodings.extend(['iso-8859-3', 'iso-8859-9', 'windows-1254'])
 
         elif self.language.alpha3 in ('grc', 'gre', 'ell'):
-            encodings.extend(['windows-1253', 'cp1253', 'cp737', 'iso8859-7', 'cp875', 'cp869', 'iso2022_jp_2',
-                              'mac_greek'])
+            encodings.extend(
+                ['windows-1253', 'cp1253', 'cp737', 'iso8859-7', 'cp875', 'cp869', 'iso2022_jp_2', 'mac_greek']
+            )
 
-        elif self.language.alpha3 in ('pol', 'cze', 'ces', 'slk', 'slo', 'slv', 'hun', 'bos', 'hbs', 'hrv', 'rsb',
-                                      'ron', 'rum', 'sqi', 'alb'):
+        elif self.language.alpha3 in (
+            'pol',
+            'cze',
+            'ces',
+            'slk',
+            'slo',
+            'slv',
+            'hun',
+            'bos',
+            'hbs',
+            'hrv',
+            'rsb',
+            'ron',
+            'rum',
+            'sqi',
+            'alb',
+        ):
             encodings.extend(['iso-8859-2', 'windows-1250'])
 
             if self.language.alpha3 == 'slv':
                 encodings.extend(['iso-8859-4'])
-            elif self.language.alpha3 in ("sqi", "alb"):
+            elif self.language.alpha3 in ('sqi', 'alb'):
                 encodings.extend(['windows-1252', 'iso-8859-15', 'iso-8859-1', 'iso-8859-9'])
 
         elif self.language.alpha3 in ('bul', 'srp', 'mkd', 'mac', 'rus', 'ukr'):
@@ -276,9 +304,9 @@ class Subtitle:
                 encodings.extend(['windows-1251', 'iso-8859-5'])
 
             elif self.language.alpha3 == 'srp':
-                if self.language.script == "Latn":
+                if self.language.script == 'Latn':
                     encodings.extend(['windows-1250', 'iso-8859-2'])
-                elif self.language.script == "Cyrl":
+                elif self.language.script == 'Cyrl':
                     encodings.extend(['windows-1251', 'iso-8859-5'])
                 else:
                     encodings.extend(['windows-1250', 'windows-1251', 'iso-8859-2', 'iso-8859-5'])

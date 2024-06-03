@@ -31,6 +31,7 @@ def test_subtitle_is_valid_valid(monkeypatch):
     )
     monkeypatch.setattr(Subtitle, 'text', text)
     assert subtitle.is_valid() is True
+    assert subtitle.subtitle_format == 'srt'
 
 
 @pytest.mark.xfail()
@@ -58,6 +59,22 @@ def test_subtitle_is_valid_valid_begin(monkeypatch):
     text += "This line shouldn't be here"
     monkeypatch.setattr(Subtitle, 'text', text)
     assert subtitle.is_valid() is True
+
+
+def test_subtitle_is_valid_sub_format(monkeypatch, movies):
+    video = movies['man_of_steel']
+    subtitle = Subtitle(Language('pol'))
+    text = (
+        '{3146}{3189}/Nie rozumiecie?\n'
+        '{3189}{3244}/Jšdro Kryptona się rozpada.\n'
+        '{3244}{3299}To kwestia tygodni.\n'
+    )
+    monkeypatch.setattr(Subtitle, 'text', text)
+    assert subtitle.is_valid() is True
+    assert subtitle.subtitle_format == 'microdvd'
+    path = subtitle.get_path(video, single=True)
+    extension = os.path.splitext(path)[1]
+    assert extension == '.sub'
 
 
 def test_get_subtitle_path(movies):

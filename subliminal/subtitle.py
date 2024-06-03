@@ -361,7 +361,7 @@ class Subtitle:
 
         """
         if extension is None:
-            extension = FORMAT_TO_EXTENSION.get(self.subtitle_format, '.srt')
+            extension = FORMAT_TO_EXTENSION.get(self.subtitle_format, '.srt')  # type: ignore[arg-type]
         return get_subtitle_path(video.name, None if single else self.language, extension=extension)
 
     def get_matches(self, video: Video) -> set[str]:
@@ -404,7 +404,7 @@ def get_subtitle_format(
     except Exception:
         logger.exception('not a valid subtitle.')
     else:
-        return obj.format
+        return str(obj.format)
     return None
 
 

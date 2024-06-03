@@ -16,8 +16,6 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any
 
-from babelfish import Country
-
 from .score import get_equivalent_release_groups, score_keys
 from .utils import ensure_list, sanitize, sanitize_release_group
 from .video import Episode, Movie, Video
@@ -25,6 +23,8 @@ from .video import Episode, Movie, Video
 if TYPE_CHECKING:
     from collections.abc import Mapping
     from typing import Protocol
+
+    from babelfish import Country  # type: ignore[import-untyped]
 
     class MatchingFunc(Protocol):
         """Match a :class:`~subliminal.video.Video` to criteria."""

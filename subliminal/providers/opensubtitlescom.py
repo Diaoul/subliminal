@@ -372,7 +372,7 @@ class OpenSubtitlesComProvider(Provider):
     languages: ClassVar[Set[Language]] = opensubtitlescom_languages
 
     user_agent: str = f'Subliminal v{__short_version__}'
-    expected_format: str = 'srt'
+    subtitle_format: str = 'srt'
 
     username: str | None
     password: str | None
@@ -744,7 +744,7 @@ class OpenSubtitlesComProvider(Provider):
 
         # get the subtitle download link
         logger.info('Downloading subtitle %r', subtitle)
-        body = {'file_id': subtitle.file_id, 'file_name': subtitle.file_name, 'sub_format': self.expected_format}
+        body = {'file_id': subtitle.file_id, 'file_name': subtitle.file_name, 'sub_format': self.subtitle_format}
         r = self.api_post('download', body)
         if any(k not in r for k in ('link', 'remaining')):
             return

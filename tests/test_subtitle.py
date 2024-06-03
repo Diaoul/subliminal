@@ -1,7 +1,7 @@
 import os
 
 import pytest
-from babelfish import Language
+from babelfish import Language  # type: ignore[import-untyped]
 from subliminal.subtitle import Subtitle, fix_line_ending, get_subtitle_path
 
 

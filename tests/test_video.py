@@ -1,8 +1,10 @@
+# ruff: noqa: PT011
+from __future__ import annotations
+
 from datetime import datetime, timedelta, timezone
 from unittest.mock import Mock
 
 import pytest
-
 from subliminal.utils import sanitize, timestamp
 from subliminal.video import Episode, Movie, Video
 
@@ -23,14 +25,14 @@ def test_video_fromguess_episode(episodes, monkeypatch):
     guess = {'type': 'episode'}
     monkeypatch.setattr(Episode, 'fromguess', Mock())
     Video.fromguess(episodes['bbt_s07e05'].name, guess)
-    assert Episode.fromguess.called
+    assert Episode.fromguess.called  # type: ignore[attr-defined]
 
 
 def test_video_fromguess_movie(movies, monkeypatch):
     guess = {'type': 'movie'}
     monkeypatch.setattr(Movie, 'fromguess', Mock())
     Video.fromguess(movies['man_of_steel'].name, guess)
-    assert Movie.fromguess.called
+    assert Movie.fromguess.called  # type: ignore[attr-defined]
 
 
 def test_video_fromguess_wrong_type(episodes):
@@ -42,7 +44,7 @@ def test_video_fromguess_wrong_type(episodes):
 
 def test_video_fromname_movie(movies):
     video = Video.fromname(movies['man_of_steel'].name)
-    assert type(video) is Movie
+    assert isinstance(video, Movie)
     assert video.name == movies['man_of_steel'].name
     assert video.source == movies['man_of_steel'].source
     assert video.release_group == movies['man_of_steel'].release_group
@@ -59,7 +61,7 @@ def test_video_fromname_movie(movies):
 
 def test_video_fromname_episode(episodes):
     video = Video.fromname(episodes['bbt_s07e05'].name)
-    assert type(video) is Episode
+    assert isinstance(video, Episode)
     assert video.name == episodes['bbt_s07e05'].name
     assert video.source == episodes['bbt_s07e05'].source
     assert video.release_group == episodes['bbt_s07e05'].release_group
@@ -80,7 +82,7 @@ def test_video_fromname_episode(episodes):
 
 def test_video_fromname_episode_no_season(episodes):
     video = Video.fromname(episodes['the_jinx_e05'].name)
-    assert type(video) is Episode
+    assert isinstance(video, Episode)
     assert video.name == episodes['the_jinx_e05'].name
     assert video.source == episodes['the_jinx_e05'].source
     assert video.release_group == episodes['the_jinx_e05'].release_group
@@ -107,6 +109,7 @@ def test_video_hash(episodes):
 def test_episode_from_guess_multi_episode(episodes):
     video = Video.fromname(episodes['Marvels.Agents.of.S.H.I.E.L.D.S05E01-E02'].name)
     # Multi-ep is converted to single-ep by taking the lowest episode number
+    assert isinstance(video, Episode)
     assert video.episode == episodes['Marvels.Agents.of.S.H.I.E.L.D.S05E01-E02'].episode
 
 
@@ -140,6 +143,7 @@ def test_movie_fromguess_insufficient_data(movies):
 
 def test_movie_fromname(movies):
     video = Movie.fromname(movies['man_of_steel'].name)
+    assert isinstance(video, Movie)
     assert video.name == movies['man_of_steel'].name
     assert video.source == movies['man_of_steel'].source
     assert video.release_group == movies['man_of_steel'].release_group
@@ -156,6 +160,7 @@ def test_movie_fromname(movies):
 
 def test_episode_fromname(episodes):
     video = Episode.fromname(episodes['bbt_s07e05'].name)
+    assert isinstance(video, Episode)
     assert video.name == episodes['bbt_s07e05'].name
     assert video.source == episodes['bbt_s07e05'].source
     assert video.release_group == episodes['bbt_s07e05'].release_group

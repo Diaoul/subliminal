@@ -1,6 +1,8 @@
-import pytest
+# ruff: noqa: PT011
+from __future__ import annotations
 
-from subliminal.providers import ParserBeautifulSoup, Provider, FeatureNotFound
+import pytest
+from subliminal.providers import FeatureNotFound, ParserBeautifulSoup, Provider
 from subliminal.video import Episode, Movie
 
 

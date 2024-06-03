@@ -1,10 +1,11 @@
 # ruff: noqa: PT011, SIM115
 import os
 from datetime import datetime, timedelta, timezone
+from typing import Any
 from unittest.mock import Mock
 
 import pytest
-from babelfish import Language
+from babelfish import Language  # type: ignore[import-untyped]
 from subliminal.core import (
     AsyncProviderPool,
     ProviderPool,
@@ -24,8 +25,8 @@ from subliminal.providers.tvsubtitles import TVsubtitlesSubtitle
 from subliminal.score import episode_scores
 from subliminal.subtitle import Subtitle
 from subliminal.utils import timestamp
-from subliminal.video import Movie
-from vcr import VCR
+from subliminal.video import Episode, Movie
+from vcr import VCR  # type: ignore[import-untyped]
 
 vcr = VCR(
     path_transformer=lambda path: path + '.yaml',
@@ -68,7 +69,7 @@ def test_provider_pool_iter():
 def test_provider_pool_list_subtitles_provider(episodes):
     pool = ProviderPool()
     subtitles = pool.list_subtitles_provider('tvsubtitles', episodes['bbt_s07e05'], {Language('eng')})
-    assert subtitles == ['tvsubtitles']
+    assert subtitles == ['tvsubtitles']  # type: ignore[comparison-overlap]
     assert provider_manager['tvsubtitles'].plugin.initialize.called
     assert provider_manager['tvsubtitles'].plugin.list_subtitles.called
 
@@ -77,7 +78,7 @@ def test_provider_pool_list_subtitles_provider(episodes):
 def test_provider_pool_list_subtitles(episodes):
     pool = ProviderPool()
     subtitles = pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
-    assert sorted(subtitles) == ['gestdown', 'opensubtitles', 'opensubtitlescom', 'podnapisi', 'tvsubtitles']
+    assert sorted(subtitles) == ['gestdown', 'opensubtitles', 'opensubtitlescom', 'podnapisi', 'tvsubtitles']  # type: ignore[type-var,comparison-overlap]
     for provider in subtitles:
         assert provider_manager[provider].plugin.initialize.called
         assert provider_manager[provider].plugin.list_subtitles.called
@@ -86,8 +87,8 @@ def test_provider_pool_list_subtitles(episodes):
 @pytest.mark.usefixtures('_mock_providers')
 def test_async_provider_pool_list_subtitles_provider(episodes):
     pool = AsyncProviderPool()
-    subtitles = pool.list_subtitles_provider('tvsubtitles', episodes['bbt_s07e05'], {Language('eng')})
-    assert subtitles == ('tvsubtitles', ['tvsubtitles'])
+    subtitles = pool.list_subtitles_provider_tuple('tvsubtitles', episodes['bbt_s07e05'], {Language('eng')})
+    assert subtitles == ('tvsubtitles', ['tvsubtitles'])  # type: ignore[comparison-overlap]
     assert provider_manager['tvsubtitles'].plugin.initialize.called
     assert provider_manager['tvsubtitles'].plugin.list_subtitles.called
 
@@ -96,7 +97,7 @@ def test_async_provider_pool_list_subtitles_provider(episodes):
 def test_async_provider_pool_list_subtitles(episodes):
     pool = AsyncProviderPool()
     subtitles = pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
-    assert sorted(subtitles) == ['gestdown', 'opensubtitles', 'opensubtitlescom', 'podnapisi', 'tvsubtitles']
+    assert sorted(subtitles) == ['gestdown', 'opensubtitles', 'opensubtitlescom', 'podnapisi', 'tvsubtitles']  # type: ignore[type-var,comparison-overlap]
     for provider in subtitles:
         assert provider_manager[provider].plugin.initialize.called
         assert provider_manager[provider].plugin.list_subtitles.called
@@ -197,6 +198,7 @@ def test_scan_video_movie(movies, tmpdir, monkeypatch):
     monkeypatch.chdir(str(tmpdir))
     tmpdir.ensure(video.name)
     scanned_video = scan_video(video.name)
+    assert isinstance(scanned_video, Movie)
     assert scanned_video.name == video.name
     assert scanned_video.source == video.source
     assert scanned_video.release_group == video.release_group
@@ -216,6 +218,7 @@ def test_scan_video_episode(episodes, tmpdir, monkeypatch):
     monkeypatch.chdir(str(tmpdir))
     tmpdir.ensure(video.name)
     scanned_video = scan_video(video.name)
+    assert isinstance(scanned_video, Episode)
     assert scanned_video.name, video.name
     assert scanned_video.source == video.source
     assert scanned_video.release_group == video.release_group
@@ -351,17 +354,17 @@ def test_scan_videos(movies, tmpdir, monkeypatch):
     assert mock_scan_archive.call_count == 1
 
     # scan_video calls
-    kwargs = {}
+    kwargs: dict[str, Any] = {}
     scan_video_calls = [
         ((os.path.join('movies', movies['man_of_steel'].name),), kwargs),
         ((os.path.join('movies', movies['enders_game'].name),), kwargs),
     ]
-    mock_scan_video.assert_has_calls(scan_video_calls, any_order=True)
+    mock_scan_video.assert_has_calls(scan_video_calls, any_order=True)  # type: ignore[arg-type]
 
     # scan_archive calls
     kwargs = {}
     scan_archive_calls = [((os.path.join('movies', movies['interstellar'].name),), kwargs)]
-    mock_scan_archive.assert_has_calls(scan_archive_calls, any_order=True)
+    mock_scan_archive.assert_has_calls(scan_archive_calls, any_order=True)  # type: ignore[arg-type]
 
 
 def test_scan_videos_age(movies, tmpdir, monkeypatch):
@@ -385,9 +388,9 @@ def test_scan_videos_age(movies, tmpdir, monkeypatch):
     assert mock_scan_archive.call_count == 0
 
     # scan_video calls
-    kwargs = {}
+    kwargs: dict[str, Any] = {}
     scan_video_calls = [((os.path.join('movies', movies['man_of_steel'].name),), kwargs)]
-    mock_scan_video.assert_has_calls(scan_video_calls, any_order=True)
+    mock_scan_video.assert_has_calls(scan_video_calls, any_order=True)  # type: ignore[arg-type]
 
 
 @pytest.mark.usefixtures('_mock_providers')
@@ -406,7 +409,7 @@ def test_list_subtitles_movie(movies):
 
     # test result
     assert len(subtitles) == 1
-    assert sorted(subtitles[movies['man_of_steel']]) == ['opensubtitles', 'opensubtitlescom', 'podnapisi']
+    assert sorted(subtitles[movies['man_of_steel']]) == ['opensubtitles', 'opensubtitlescom', 'podnapisi']  # type: ignore[type-var,comparison-overlap]
 
 
 @pytest.mark.usefixtures('_mock_providers')
@@ -425,7 +428,7 @@ def test_list_subtitles_episode(episodes):
 
     # test result
     assert len(subtitles) == 1
-    assert sorted(subtitles[episodes['bbt_s07e05']]) == [
+    assert sorted(subtitles[episodes['bbt_s07e05']]) == [  # type: ignore[type-var,comparison-overlap]
         'gestdown',
         'opensubtitles',
         'opensubtitlescom',
@@ -450,7 +453,7 @@ def test_list_subtitles_providers(episodes):
 
     # test result
     assert len(subtitles) == 1
-    assert sorted(subtitles[episodes['bbt_s07e05']]) == ['opensubtitles']
+    assert sorted(subtitles[episodes['bbt_s07e05']]) == ['opensubtitles']  # type: ignore[type-var,comparison-overlap]
 
 
 @pytest.mark.usefixtures('_mock_providers')
@@ -469,7 +472,7 @@ def test_list_subtitles_episode_no_hash(episodes):
 
     # test result
     assert len(subtitles) == 1
-    assert sorted(subtitles[episodes['dallas_s01e03']]) == [
+    assert sorted(subtitles[episodes['dallas_s01e03']]) == [  # type: ignore[type-var,comparison-overlap]
         'gestdown',
         'opensubtitles',
         'opensubtitlescom',

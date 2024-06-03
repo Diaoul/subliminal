@@ -2,14 +2,14 @@ from unittest.mock import Mock
 
 from dogpile.cache import make_region
 
-
 # A Mock version is already provided in conftest.py so no need to configure it again
 from subliminal.cache import region as region_custom
 
 # Configure default dogpile cache
 region_dogpile = make_region()
 region_dogpile.configure('dogpile.cache.null')
-region_dogpile.configure = Mock()
+region_dogpile.configure = Mock()  # type: ignore[method-assign]
+
 
 str_object = 'The Simpsons-S12E09-HOMЯ'
 bytes_object = b'The Simpsons-S12E09-HOM\xd0\xaf'

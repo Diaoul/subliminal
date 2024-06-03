@@ -10,6 +10,7 @@ import requests
 
 from subliminal import __short_version__
 from subliminal.cache import REFINER_EXPIRATION_TIME, region
+from subliminal.utils import decorate_imdb_id, sanitize_id
 from subliminal.video import Episode, Movie, Video
 
 if TYPE_CHECKING:
@@ -241,7 +242,7 @@ def refine_episode(client: OMDBClient, video: Episode, *, force: bool = False, *
     logger.debug('Found series %r', result)
     video.series = result['Title']
     video.year = split_year_omdb(result['Year'])
-    video.series_imdb_id = result['imdbID']
+    video.series_imdb_id = decorate_imdb_id(sanitize_id(result['imdbID']))
 
 
 def refine_movie(client: OMDBClient, video: Movie, *, force: bool = False, **kwargs: Any) -> None:
@@ -282,7 +283,7 @@ def refine_movie(client: OMDBClient, video: Movie, *, force: bool = False, **kwa
     logger.debug('Found movie %r', result)
     video.title = result['Title']
     video.year = split_year_omdb(result['Year'])
-    video.imdb_id = result['imdbID']
+    video.imdb_id = decorate_imdb_id(sanitize_id(result['imdbID']))
 
 
 #: Default client

@@ -14,7 +14,7 @@ from babelfish import Country  # type: ignore[import-untyped]
 
 from subliminal import __short_version__
 from subliminal.cache import REFINER_EXPIRATION_TIME, region
-from subliminal.utils import sanitize
+from subliminal.utils import decorate_imdb_id, sanitize, sanitize_id
 from subliminal.video import Episode, Video
 
 C = TypeVar('C', bound=Callable)
@@ -293,7 +293,7 @@ class TVDBClient:
         result = self.query_series_episodes(series_id, aired_season=season, aired_episode=episode)
         if not result:
             return {}
-        return self.get_episode(result['data'][0]['id'])
+        return self.get_episode(result['data'][0]['id'])  # type: ignore[no-any-return]
 
     @region.cache_on_arguments(expiration_time=REFINER_EXPIRATION_TIME)
     @requires_auth
@@ -462,8 +462,8 @@ def refine(video: Video, *, apikey: str | None = None, force: bool = False, **kw
     video.year = matching_result['match']['year']
     video.country = matching_result['match']['country']
     video.original_series = matching_result['match']['original_series']
-    video.series_tvdb_id = series['id']
-    video.series_imdb_id = series['imdbId'] or None
+    video.series_tvdb_id = sanitize_id(series['id'])
+    video.series_imdb_id = decorate_imdb_id(sanitize_id(series['imdbId']))
 
     # get the episode
     logger.info('Getting series episode %dx%d', video.season, video.episode)
@@ -474,8 +474,8 @@ def refine(video: Video, *, apikey: str | None = None, force: bool = False, **kw
 
     # add episode information
     logger.debug('Found episode %r', episode)
-    video.tvdb_id = episode['id']
+    video.tvdb_id = sanitize_id(episode['id'])
     video.title = episode['episodeName'] or None
-    video.imdb_id = episode['imdbId'] or None
+    video.imdb_id = decorate_imdb_id(sanitize_id(episode['imdbId']))
 
     return video

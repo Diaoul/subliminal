@@ -40,7 +40,6 @@ class TVsubtitlesSubtitle(Subtitle):
 
     provider_name: ClassVar[str] = 'tvsubtitles'
 
-    subtitle_id: int
     series: str | None
     season: int | None
     episode: int | None
@@ -50,10 +49,8 @@ class TVsubtitlesSubtitle(Subtitle):
 
     def __init__(
         self,
-        # language, page_link, subtitle_id, series, season, episode,
-        # year, rip, release
         language: Language,
-        subtitle_id: int,
+        subtitle_id: str,
         *,
         page_link: str | None = None,
         series: str | None = None,
@@ -63,19 +60,13 @@ class TVsubtitlesSubtitle(Subtitle):
         rip: str | None = None,
         release: str | None = None,
     ) -> None:
-        super().__init__(language, page_link=page_link)
-        self.subtitle_id = subtitle_id
+        super().__init__(language, subtitle_id, page_link=page_link)
         self.series = series
         self.season = season
         self.episode = episode
         self.year = year
         self.rip = rip
         self.release = release
-
-    @property
-    def id(self) -> str:
-        """The subtitle unique id."""
-        return str(self.subtitle_id)
 
     @property
     def info(self) -> str:
@@ -261,8 +252,8 @@ class TVsubtitlesProvider(Provider):
         for row in soup.select('.subtitlen'):
             # read the item
             language = Language.fromtvsubtitles(row.h5.img['src'][13:-4])  # type: ignore[union-attr,index]
-            subtitle_id = int(row.parent['href'][10:-5])  # type: ignore[arg-type,index]
-            page_link = self.server_url + '/subtitle-%d.html' % subtitle_id
+            subtitle_id = str(int(row.parent['href'][10:-5]))  # type: ignore[arg-type,index]
+            page_link = self.server_url + f'/subtitle-{subtitle_id}.html'
             rip = row.find('p', title='rip').text.strip() or None  # type: ignore[union-attr]
             release = row.find('h5').text.strip() or None  # type: ignore[union-attr]
 

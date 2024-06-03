@@ -25,7 +25,7 @@ vcr = VCR(
 def test_get_matches_movie_hash(movies):
     subtitle = OpenSubtitlesComSubtitle(
         language=Language('deu'),
-        subtitle_id=1953771409,
+        subtitle_id='1953771409',
         hearing_impaired=False,
         movie_kind='movie',
         movie_title='Man of Steel',
@@ -52,7 +52,7 @@ def test_get_matches_movie_hash(movies):
 def test_get_matches_episode(episodes):
     subtitle = OpenSubtitlesComSubtitle(
         language=Language('ell'),
-        subtitle_id=1953579014,
+        subtitle_id='1953579014',
         hearing_impaired=False,
         movie_kind='episode',
         movie_title='Mhysa',
@@ -78,7 +78,7 @@ def test_get_matches_episode(episodes):
 def test_get_matches_episode_year(episodes):
     subtitle = OpenSubtitlesComSubtitle(
         language=Language('spa'),
-        subtitle_id=1953369959,
+        subtitle_id='1953369959',
         hearing_impaired=False,
         movie_kind='episode',
         movie_title='The Price You Pay',
@@ -97,7 +97,7 @@ def test_get_matches_episode_year(episodes):
 def test_get_matches_episode_filename(episodes):
     subtitle = OpenSubtitlesComSubtitle(
         language=Language('por', country='BR'),
-        subtitle_id=1954453973,
+        subtitle_id='1954453973',
         hearing_impaired=False,
         movie_kind='episode',
         movie_title='A Fractured House',
@@ -126,7 +126,7 @@ def test_get_matches_episode_filename(episodes):
 def test_get_matches_episode_tag(episodes):
     subtitle = OpenSubtitlesComSubtitle(
         language=Language('por', country='BR'),
-        subtitle_id=1954453973,
+        subtitle_id='1954453973',
         hearing_impaired=False,
         movie_kind='episode',
         movie_title='A Fractured House',
@@ -152,7 +152,7 @@ def test_get_matches_episode_tag(episodes):
 def test_get_matches_imdb_id(movies):
     subtitle = OpenSubtitlesComSubtitle(
         language=Language('fra'),
-        subtitle_id=1953767650,
+        subtitle_id='1953767650',
         hearing_impaired=True,
         movie_kind='movie',
         movie_title='Man of Steel',
@@ -180,7 +180,7 @@ def test_get_matches_imdb_id(movies):
 def test_get_matches_no_match(episodes):
     subtitle = OpenSubtitlesComSubtitle(
         language=Language('fra'),
-        subtitle_id=1953767650,
+        subtitle_id='1953767650',
         hearing_impaired=False,
         movie_kind='movie',
         movie_title='Man of Steel',
@@ -446,7 +446,7 @@ def test_tag_match(episodes):
 
     # 'Doc.Martin.S03E01.(24 September 2007).[TVRip (Xvid)]-spa.srt'
     unwanted_subtitle_id = '2852678'
-    found_subtitles = [s for s in subtitles if s.id == unwanted_subtitle_id]
+    found_subtitles = [s for s in subtitles if s.subtitle_id == unwanted_subtitle_id]
     assert len(found_subtitles) > 0
 
     found_subtitle = found_subtitles[0]

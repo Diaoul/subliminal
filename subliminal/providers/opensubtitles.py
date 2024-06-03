@@ -54,7 +54,6 @@ class OpenSubtitlesSubtitle(Subtitle):
     provider_name: ClassVar[str] = 'opensubtitles'
     series_re: re.Pattern = re.compile(r'^"(?P<series_name>.*)" (?P<series_title>.*)$')
 
-    subtitle_id: str
     matched_by: str | None
     movie_kind: str | None
     moviehash: str | None
@@ -85,8 +84,13 @@ class OpenSubtitlesSubtitle(Subtitle):
         filename: str = '',
         encoding: str | None = None,
     ) -> None:
-        super().__init__(language, hearing_impaired=hearing_impaired, page_link=page_link, encoding=encoding)
-        self.subtitle_id = subtitle_id
+        super().__init__(
+            language,
+            subtitle_id,
+            hearing_impaired=hearing_impaired,
+            page_link=page_link,
+            encoding=encoding,
+        )
         self.matched_by = matched_by
         self.movie_kind = movie_kind
         self.moviehash = moviehash
@@ -97,11 +101,6 @@ class OpenSubtitlesSubtitle(Subtitle):
         self.series_season = series_season
         self.series_episode = series_episode
         self.filename = filename
-
-    @property
-    def id(self) -> str:
-        """The subtitle unique id."""
-        return str(self.subtitle_id)
 
     @property
     def info(self) -> str:

@@ -6,7 +6,7 @@ import pytest
 import requests
 from subliminal.refiners.tvdb import TVDBClient, refine, series_re
 from subliminal.video import Episode
-from vcr import VCR
+from vcr import VCR  # type: ignore[import-untyped]
 
 vcr = VCR(
     path_transformer=lambda path: path + '.yaml',
@@ -28,34 +28,44 @@ def test_apikey():
 
 
 def test_series_re_no_year():
-    groups = series_re.match('Series Name').groupdict()
+    m = series_re.match('Series Name')
+    assert m
+    groups = m.groupdict()
     assert groups['series'] == 'Series Name'
     assert groups['year'] is None
 
 
 def test_series_re_year_parenthesis():
-    groups = series_re.match('Series Name (2013)').groupdict()
+    m = series_re.match('Series Name (2013)')
+    assert m
+    groups = m.groupdict()
     assert groups['series'] == 'Series Name'
     assert groups['year'] == '2013'
     assert groups['country'] is None
 
 
 def test_series_re_text_parenthesis():
-    groups = series_re.match('Series Name (Rock)').groupdict()
+    m = series_re.match('Series Name (Rock)')
+    assert m
+    groups = m.groupdict()
     assert groups['series'] == 'Series Name (Rock)'
     assert groups['year'] is None
     assert groups['country'] is None
 
 
 def test_series_re_text_unclosed_parenthesis():
-    groups = series_re.match('Series Name (2013').groupdict()
+    m = series_re.match('Series Name (2013')
+    assert m
+    groups = m.groupdict()
     assert groups['series'] == 'Series Name (2013'
     assert groups['year'] is None
     assert groups['country'] is None
 
 
 def test_series_re_country():
-    groups = series_re.match('Series Name (UK)').groupdict()
+    m = series_re.match('Series Name (UK)')
+    assert m
+    groups = m.groupdict()
     assert groups['series'] == 'Series Name'
     assert groups['year'] is None
     assert groups['country'] == 'UK'

@@ -1,9 +1,9 @@
 import os
 
 import pytest
-from babelfish import Language, language_converters
+from babelfish import Language, language_converters  # type: ignore[import-untyped]
 from subliminal.providers.tvsubtitles import TVsubtitlesProvider, TVsubtitlesSubtitle
-from vcr import VCR
+from vcr import VCR  # type: ignore[import-untyped]
 
 vcr = VCR(
     path_transformer=lambda path: path + '.yaml',
@@ -41,7 +41,7 @@ def test_converter_reverse_name_converter():
 def test_get_matches_format_release_group(episodes):
     subtitle = TVsubtitlesSubtitle(
         language=Language('fra'),
-        subtitle_id=249518,
+        subtitle_id='249518',
         page_link=None,
         series='The Big Bang Theory',
         season=7,
@@ -57,7 +57,7 @@ def test_get_matches_format_release_group(episodes):
 def test_get_matches_format_equivalent_release_group(episodes):
     subtitle = TVsubtitlesSubtitle(
         language=Language('fra'),
-        subtitle_id=249518,
+        subtitle_id='249518',
         page_link=None,
         series='The Big Bang Theory',
         season=7,
@@ -73,7 +73,7 @@ def test_get_matches_format_equivalent_release_group(episodes):
 def test_get_matches_video_codec_resolution(episodes):
     subtitle = TVsubtitlesSubtitle(
         language=Language('por'),
-        subtitle_id=261077,
+        subtitle_id='261077',
         page_link=None,
         series='Game of Thrones',
         season=3,
@@ -89,7 +89,7 @@ def test_get_matches_video_codec_resolution(episodes):
 def test_get_matches_only_year_country(episodes):
     subtitle = TVsubtitlesSubtitle(
         language=Language('por'),
-        subtitle_id=261077,
+        subtitle_id='261077',
         page_link=None,
         series='Game of Thrones',
         season=3,
@@ -105,7 +105,7 @@ def test_get_matches_only_year_country(episodes):
 def test_get_matches_no_match(episodes):
     subtitle = TVsubtitlesSubtitle(
         language=Language('por'),
-        subtitle_id=261077,
+        subtitle_id='261077',
         page_link=None,
         series='Game of Thrones',
         season=3,
@@ -228,7 +228,18 @@ def test_get_episode_ids_wrong_season():
 @vcr.use_cassette
 def test_query(episodes):
     video = episodes['bbt_s07e05']
-    expected_subtitles = {268673, 249733, 249518, 249519, 249714, 32596, 249590, 249592, 249499, 261214}
+    expected_subtitles = {
+        '268673',
+        '249733',
+        '249518',
+        '249519',
+        '249714',
+        '32596',
+        '249590',
+        '249592',
+        '249499',
+        '261214',
+    }
     with TVsubtitlesProvider() as provider:
         show_id = provider.search_show_id(video.series, video.year)
         subtitles = provider.query(show_id, video.series, video.season, video.episode, video.year)
@@ -239,7 +250,7 @@ def test_query(episodes):
 @vcr.use_cassette
 def test_query_no_year(episodes):
     video = episodes['dallas_s01e03']
-    expected_subtitles = {124753, 167064}
+    expected_subtitles = {'124753', '167064'}
     with TVsubtitlesProvider() as provider:
         show_id = provider.search_show_id(video.series, video.year)
         subtitles = provider.query(show_id, video.series, video.season, video.episode, video.year)
@@ -251,7 +262,7 @@ def test_query_no_year(episodes):
 @vcr.use_cassette
 def test_query_with_quote(episodes):
     video = episodes['marvels_agents_of_shield_s02e06']
-    expected_subtitles = {91420, 278637, 278909, 278910, 278972, 279205, 279216, 279217, 285917}
+    expected_subtitles = {'91420', '278637', '278909', '278910', '278972', '279205', '279216', '279217', '285917'}
     with TVsubtitlesProvider() as provider:
         show_id = provider.search_show_id(video.series, video.year)
         subtitles = provider.query(show_id, video.series, video.season, video.episode, video.year)
@@ -283,7 +294,7 @@ def test_query_wrong_episode(episodes):
 def test_list_subtitles(episodes):
     video = episodes['bbt_s07e05']
     languages = {Language('eng'), Language('fra')}
-    expected_subtitles = {249592, 249499, 32596, 249518}
+    expected_subtitles = {'249592', '249499', '32596', '249518'}
     with TVsubtitlesProvider() as provider:
         subtitles = provider.list_subtitles(video, languages)
     assert {subtitle.subtitle_id for subtitle in subtitles} == expected_subtitles
@@ -296,7 +307,7 @@ def test_list_subtitles(episodes):
 def test_list_subtitles_episode_alternative_series(episodes):
     video = episodes['turn_s03e01']
     languages = {Language('fra')}
-    expected_subtitles = {307588}
+    expected_subtitles = {'307588'}
     with TVsubtitlesProvider() as provider:
         subtitles = provider.list_subtitles(video, languages)
     assert {subtitle.subtitle_id for subtitle in subtitles} == expected_subtitles

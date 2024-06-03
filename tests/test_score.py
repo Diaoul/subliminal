@@ -27,6 +27,7 @@ def test_compute_score(episodes):
     video = episodes['bbt_s07e05']
     subtitle = Addic7edSubtitle(
         language=Language('eng'),
+        subtitle_id='',
         hearing_impaired=True,
         page_link=None,
         series='the big BANG theory',
@@ -35,7 +36,6 @@ def test_compute_score(episodes):
         title=None,
         year=None,
         release_group='1080p',
-        download_link='',
     )
     expected_score = episode_scores['series'] + episode_scores['year'] + episode_scores['country']
     assert compute_score(subtitle, video) == expected_score

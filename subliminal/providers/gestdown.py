@@ -23,6 +23,9 @@ if TYPE_CHECKING:
 
 logger = logging.getLogger(__name__)
 
+#: Subtitle id pattern
+id_pattern = re.compile(r'.*\/subtitles\/download\/([a-z0-9-]+)')
+
 gestdown_languages: Set[Language] = {
     Language(lang)
     for lang in [
@@ -77,9 +80,7 @@ class GestdownSubtitle(Subtitle):
     """Gestdown Subtitle."""
 
     provider_name: ClassVar[str] = 'gestdown'
-    id_pattern: ClassVar[str] = r'.*\/subtitles\/download\/([a-z0-9-]+)'
 
-    subtitle_id: str
     series: str
     season: int | None
     episode: int | None
@@ -89,6 +90,7 @@ class GestdownSubtitle(Subtitle):
     def __init__(
         self,
         language: Language,
+        subtitle_id: str,
         *,
         hearing_impaired: bool = False,
         page_link: str | None = None,
@@ -98,24 +100,12 @@ class GestdownSubtitle(Subtitle):
         title: str | None = None,
         release_group: str = '',
     ) -> None:
-        super().__init__(language, hearing_impaired=hearing_impaired, page_link=page_link)
+        super().__init__(language, subtitle_id, hearing_impaired=hearing_impaired, page_link=page_link)
         self.series = series
         self.season = season
         self.episode = episode
         self.title = title
         self.release_group = release_group
-
-        subtitle_id = None
-        if page_link:
-            m = re.match(self.id_pattern, page_link)
-            if m:
-                subtitle_id = m.groups()[0]
-        self.subtitle_id = subtitle_id or page_link or ''
-
-    @property
-    def id(self) -> str:
-        """The subtitle unique id."""
-        return str(self.subtitle_id)
 
     @property
     def info(self) -> str:
@@ -363,8 +353,12 @@ class GestdownProvider(Provider):
                 page_link = f"{self.server_url}{subtitle['downloadUri']}"
                 release_group = subtitle['version']
 
+                m = id_pattern.match(page_link)
+                subtitle_id = m.groups()[0] if m else page_link
+
                 subtitle = self.subtitle_class(
                     language=language,
+                    subtitle_id=subtitle_id,
                     hearing_impaired=hearing_impaired,
                     series=series,
                     season=season,

@@ -67,6 +67,9 @@ class Subtitle:
     #: Language of the subtitle
     language: Language
 
+    #: Subtitle id
+    subtitle_id: str
+
     #: Whether or not the subtitle is hearing impaired (None if unknown)
     hearing_impaired: bool | None
 
@@ -85,6 +88,7 @@ class Subtitle:
     def __init__(
         self,
         language: Language,
+        subtitle_id: str = '',
         *,
         hearing_impaired: bool | None = None,
         page_link: str | None = None,
@@ -100,6 +104,7 @@ class Subtitle:
         self._guess_encoding = guess_encoding
 
         self.language = language
+        self.subtitle_id = subtitle_id
         self.hearing_impaired = hearing_impaired
         self.page_link = page_link
         self.subtitle_format = subtitle_format
@@ -116,7 +121,7 @@ class Subtitle:
     @property
     def id(self) -> str:
         """Unique identifier of the subtitle."""
-        return ''
+        return str(self.subtitle_id)
 
     @property
     def info(self) -> str:

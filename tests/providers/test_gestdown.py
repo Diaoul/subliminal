@@ -20,6 +20,7 @@ def test_converter_convert_alpha3_country():
 def test_get_matches_release_group(episodes):
     subtitle = GestdownSubtitle(
         language=Language('eng'),
+        subtitle_id='',
         hearing_impaired=True,
         series='The Big Bang Theory',
         season=7,
@@ -35,6 +36,7 @@ def test_get_matches_release_group(episodes):
 def test_get_matches_equivalent_release_group(episodes):
     subtitle = GestdownSubtitle(
         language=Language('eng'),
+        subtitle_id='',
         hearing_impaired=True,
         series='The Big Bang Theory',
         season=7,
@@ -50,6 +52,7 @@ def test_get_matches_equivalent_release_group(episodes):
 def test_get_matches_resolution_release_group(episodes):
     subtitle = GestdownSubtitle(
         language=Language('heb'),
+        subtitle_id='',
         hearing_impaired=True,
         series='The Big Bang Theory',
         season=7,
@@ -65,6 +68,7 @@ def test_get_matches_resolution_release_group(episodes):
 def test_get_matches_source_release_group(episodes):
     subtitle = GestdownSubtitle(
         language=Language('eng'),
+        subtitle_id='',
         hearing_impaired=True,
         series='Game of Thrones',
         season=3,
@@ -80,6 +84,7 @@ def test_get_matches_source_release_group(episodes):
 def test_get_matches_streaming_service(episodes):
     subtitle = GestdownSubtitle(
         language=Language('nld'),
+        subtitle_id='',
         hearing_impaired=True,
         series='The Walking Dead',
         season=8,
@@ -95,6 +100,7 @@ def test_get_matches_streaming_service(episodes):
 def test_get_matches_only_year_country(episodes):
     subtitle = GestdownSubtitle(
         language=Language('eng'),
+        subtitle_id='',
         hearing_impaired=True,
         series='The Big Bang Theory',
         season=7,
@@ -110,6 +116,7 @@ def test_get_matches_only_year_country(episodes):
 def test_get_matches_no_match(episodes):
     subtitle = GestdownSubtitle(
         language=Language('eng'),
+        subtitle_id='',
         hearing_impaired=True,
         series='The Big Bang Theory',
         season=7,

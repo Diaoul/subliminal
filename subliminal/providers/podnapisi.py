@@ -51,18 +51,12 @@ class PodnapisiSubtitle(Subtitle):
         episode: int | None = None,
         year: int | None = None,
     ) -> None:
-        super().__init__(language, hearing_impaired=hearing_impaired, page_link=page_link)
-        self.subtitle_id = subtitle_id
+        super().__init__(language, subtitle_id, hearing_impaired=hearing_impaired, page_link=page_link)
         self.releases = list(releases) if releases is not None else []
         self.title = title
         self.season = season
         self.episode = episode
         self.year = year
-
-    @property
-    def id(self) -> str:
-        """The subtitle unique id."""
-        return str(self.subtitle_id)
 
     @property
     def info(self) -> str:

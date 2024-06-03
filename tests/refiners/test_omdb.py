@@ -4,7 +4,7 @@ import pytest
 import requests
 from subliminal.refiners.omdb import OMDBClient, refine
 from subliminal.video import Episode, Movie
-from vcr import VCR
+from vcr import VCR  # type: ignore[import-untyped]
 
 vcr = VCR(
     path_transformer=lambda path: path + '.yaml',
@@ -34,8 +34,8 @@ def test_apikey():
     apikey = '000000000'
     client = OMDBClient(headers={'X-Test': 'Value'})
     client.apikey = apikey
-    assert 'apikey' in client.session.params
-    assert client.session.params['apikey'] == apikey
+    assert 'apikey' in client.session.params  # type: ignore[operator]
+    assert client.session.params['apikey'] == apikey  # type: ignore[index,call-overload]
 
 
 @pytest.mark.integration()

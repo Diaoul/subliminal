@@ -169,7 +169,7 @@ class Video:
     imdb_id: str | None
 
     #: TMDB id of the video
-    tmdb_id: str | None
+    tmdb_id: int | None
 
     def __init__(
         self,
@@ -188,7 +188,7 @@ class Video:
         year: int | None = None,
         country: Country | None = None,
         imdb_id: str | None = None,
-        tmdb_id: str | None = None,
+        tmdb_id: int | None = None,
     ) -> None:
         self.name = name
         self.source = source
@@ -284,12 +284,6 @@ class Episode(Video):
     #: The series is the first with this name
     original_series: bool
 
-    #: TVDB id of the episode
-    tvdb_id: str | None
-
-    #: TVDB id of the series
-    series_tvdb_id: str | None
-
     #: IMDb id of the episode
     imdb_id: str | None
 
@@ -297,10 +291,16 @@ class Episode(Video):
     series_imdb_id: str | None
 
     #: TMDB id of the episode
-    tmdb_id: str | None
+    tmdb_id: int | None
 
     #: TMDB id of the series
-    series_tmdb_id: str | None
+    series_tmdb_id: int | None
+
+    #: TVDB id of the episode
+    tvdb_id: int | None
+
+    #: TVDB id of the series
+    series_tvdb_id: int | None
 
     #: Alternative names of the series
     alternative_series: list[str]
@@ -313,10 +313,10 @@ class Episode(Video):
         episodes: int | Sequence[int],
         *,
         original_series: bool = True,
-        tvdb_id: str | None = None,
-        series_tvdb_id: str | None = None,
+        tvdb_id: int | None = None,
+        series_tvdb_id: int | None = None,
         series_imdb_id: str | None = None,
-        series_tmdb_id: str | None = None,
+        series_tmdb_id: int | None = None,
         alternative_series: Sequence[str] | None = None,
         **kwargs: Any,
     ) -> None:
@@ -417,7 +417,7 @@ class Movie(Video):
     imdb_id: str | None
 
     #: TMDB id of the episode
-    tmdb_id: str | None
+    tmdb_id: int | None
 
     #: Alternative titles of the movie
     alternative_titles: list[str]

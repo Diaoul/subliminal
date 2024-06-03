@@ -9,7 +9,7 @@ from typing import TYPE_CHECKING, ClassVar
 
 import chardet
 import srt  # type: ignore[import-untyped]
-from pysubs2 import SSAFile  # type: ignore[import-untyped]
+from pysubs2 import SSAFile, UnknownFPSError  # type: ignore[import-untyped]
 
 if TYPE_CHECKING:
     from babelfish import Language  # type: ignore[import-untyped]
@@ -18,8 +18,19 @@ if TYPE_CHECKING:
 
 logger = logging.getLogger(__name__)
 
+#: Subtitle formats to extension
+FORMAT_TO_EXTENSION = {
+    'srt': '.srt',
+    'ass': '.ass',
+    'ssa': '.ssa',
+    'microdvd': '.sub',
+    'mpl2': '.mpl',
+    'tmp': '.txt',
+    'vtt': '.vtt',
+}
+
 #: Subtitle extensions
-SUBTITLE_EXTENSIONS = ('.srt', '.sub', '.smi', '.txt', '.ssa', '.ass', '.mpl', '.vtt')
+SUBTITLE_EXTENSIONS = (*FORMAT_TO_EXTENSION.values(), '.smi')
 
 
 class Subtitle:
@@ -37,9 +48,6 @@ class Subtitle:
 
     #: Name of the provider that returns that class of subtitle
     provider_name: ClassVar[str] = ''
-
-    #: Subtitle format used to test if the subtitle is valid
-    expected_format: ClassVar[str] = 'srt'
 
     #: Content as bytes
     _content: bytes | None
@@ -68,6 +76,9 @@ class Subtitle:
     #: Encoding to decode with when accessing :attr:`text`
     encoding: str | None
 
+    #: Subtitle format, None for automatic detection
+    subtitle_format: str | None = None
+
     #: Framerate for frame-based formats (MicroDVD)
     fps: float | None
 
@@ -78,6 +89,7 @@ class Subtitle:
         hearing_impaired: bool | None = None,
         page_link: str | None = None,
         encoding: str | None = None,
+        subtitle_format: str | None = None,
         fps: float | None = None,
         guess_encoding: bool = True,
     ) -> None:
@@ -90,6 +102,7 @@ class Subtitle:
         self.language = language
         self.hearing_impaired = hearing_impaired
         self.page_link = page_link
+        self.subtitle_format = subtitle_format
         self.fps = fps
 
         self.encoding = None
@@ -194,8 +207,18 @@ class Subtitle:
         if not self.text:
             return False
 
+        # Try guessing the subtitle format
+        if self.subtitle_format is None:
+            guessed_format = get_subtitle_format(self.text, subtitle_format=self.subtitle_format, fps=self.fps)
+            if guessed_format:
+                # Keep the guessed format
+                self.subtitle_format = guessed_format
+                if self.subtitle_format != 'srt':
+                    # Do not check more if the format is not 'srt'
+                    return True
+
         # Valid srt
-        if self.expected_format == 'srt':
+        if self.subtitle_format == 'srt':
             try:
                 parsed = self.parse_srt()
             except Exception:
@@ -205,14 +228,6 @@ class Subtitle:
                 if auto_fix_srt:
                     self._text = parsed
                 return True
-
-        # Try other subtitle format
-        try:
-            SSAFile.from_string(self.text, format_=self.expected_format, fps=self.fps)
-        except Exception:
-            logger.exception('not a valid subtitle.')
-        else:
-            return True
 
         return False
 
@@ -334,17 +349,20 @@ class Subtitle:
 
         return encoding_or_none
 
-    def get_path(self, video: Video, *, single: bool = False) -> str:
+    def get_path(self, video: Video, *, single: bool = False, extension: str | None = None) -> str:
         """Get the subtitle path using the `video`, `language` and `extension`.
 
         :param video: path to the video.
         :type video: :class:`~subliminal.video.Video`
         :param bool single: save a single subtitle, default is to save one subtitle per language.
+        :param (str | None) extension: the subtitle extension, default is to match to the subtitle format.
         :return: path of the subtitle.
         :rtype: str
 
         """
-        return get_subtitle_path(video.name, None if single else self.language)
+        if extension is None:
+            extension = FORMAT_TO_EXTENSION.get(self.subtitle_format, '.txt')
+        return get_subtitle_path(video.name, None if single else self.language, extension=extension)
 
     def get_matches(self, video: Video) -> set[str]:
         """Get the matches against the `video`.
@@ -362,6 +380,32 @@ class Subtitle:
 
     def __repr__(self) -> str:
         return f'<{self.__class__.__name__} {self.id!r} [{self.language}]>'
+
+
+def get_subtitle_format(
+    text: str,
+    subtitle_format: str | None = None,
+    fps: float | None = None,
+) -> str | None:
+    """Detect the subtitle format with `pysubs2`.
+
+    :param str text: the subtitle text.
+    :param (str | None) subtitle_format: the expected subtitle_format, None for auto-detect.
+    :param (str | None) fps: the framerate for framerate based subtitles.
+    :return: the guessed format or None if not found.
+    :rtype: str | None
+
+    """
+    try:
+        obj = SSAFile.from_string(text, format_=subtitle_format, fps=fps)
+    except UnknownFPSError:
+        default_fps = 24
+        return get_subtitle_format(text, subtitle_format=subtitle_format, fps=default_fps)
+    except Exception:
+        logger.exception('not a valid subtitle.')
+    else:
+        return obj.format
+    return None
 
 
 def get_subtitle_path(video_path: str | os.PathLike, language: Language | None = None, extension: str = '.srt') -> str:

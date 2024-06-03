@@ -661,7 +661,7 @@ def download_best_subtitles(videos, languages, min_score=0, hearing_impaired=Fal
     return downloaded_subtitles
 
 
-def save_subtitles(video, subtitles, single=False, directory=None, encoding=None):
+def save_subtitles(video, subtitles, single=False, directory=None, encoding=None, extension=None):
     """Save subtitles on filesystem.
 
     Subtitles are saved in the order of the list. If a subtitle with a language has already been saved, other subtitles
@@ -677,6 +677,7 @@ def save_subtitles(video, subtitles, single=False, directory=None, encoding=None
     :param bool single: save a single subtitle, default is to save one subtitle per language.
     :param str directory: path to directory where to save the subtitles, default is next to the video.
     :param str encoding: encoding in which to save the subtitles, default is to keep original encoding.
+    :param (str | None) extension: the subtitle extension, default is to match to the subtitle format.
     :return: the saved subtitles
     :rtype: list of :class:`~subliminal.subtitle.Subtitle`
 
@@ -694,7 +695,7 @@ def save_subtitles(video, subtitles, single=False, directory=None, encoding=None
             continue
 
         # create subtitle path
-        subtitle_path = subtitle.get_path(video, single=single)
+        subtitle_path = subtitle.get_path(video, single=single, extension=extension)
         if directory is not None:
             subtitle_path = os.path.join(directory, os.path.split(subtitle_path)[1])
 

@@ -100,7 +100,7 @@ def sanitize_id(id_: str | int) -> int:
 @none_passthrough
 def decorate_imdb_id(imdb_id: str | int, *, ndigits: int = 7) -> str:
     """Convert the IMDB id to add the leading 'tt' and the leading zeroes."""
-    return 'tt' + str(int(imdb_id)).rjust(ndigits, "0")
+    return 'tt' + str(int(imdb_id)).rjust(ndigits, '0')
 
 
 def timestamp(date: datetime) -> float:
@@ -141,6 +141,7 @@ def matches_title(
             return True
 
     return False
+
 
 def handle_exception(e: Exception, msg: str) -> None:
     """Handle exception, logging the proper error message followed by `msg`.

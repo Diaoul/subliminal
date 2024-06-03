@@ -137,11 +137,11 @@ class Addic7edSubtitle(Subtitle):
     title: str | None
     year: int | None
     release_group: str | None
-    download_link: str
 
     def __init__(
         self,
         language: Language,
+        subtitle_id: str,
         *,
         hearing_impaired: bool = False,
         page_link: str | None = None,
@@ -151,21 +151,14 @@ class Addic7edSubtitle(Subtitle):
         title: str | None = None,
         year: int | None = None,
         release_group: str | None = None,
-        download_link: str = '',
     ) -> None:
-        super().__init__(language, hearing_impaired=hearing_impaired, page_link=page_link)
+        super().__init__(language, subtitle_id, hearing_impaired=hearing_impaired, page_link=page_link)
         self.series = series
         self.season = season
         self.episode = episode
         self.title = title
         self.year = year
         self.release_group = release_group
-        self.download_link = download_link
-
-    @property
-    def id(self) -> str:
-        """The subtitle unique id."""
-        return str(self.download_link)
 
     @property
     def info(self) -> str:
@@ -577,10 +570,11 @@ class Addic7edProvider(Provider):
             page_link = f'{self.server_url}/{path}'
             title = cells[2].text
             release_group = cells[4].text
-            download_link = cells[9].a['href'][1:]
+            subtitle_id = cells[9].a['href'][1:]
 
             subtitle = self.subtitle_class(
                 language=language,
+                subtitle_id=subtitle_id,
                 hearing_impaired=hearing_impaired,
                 page_link=page_link,
                 series=series,
@@ -589,7 +583,6 @@ class Addic7edProvider(Provider):
                 title=title,
                 year=year,
                 release_group=release_group,
-                download_link=download_link,
             )
             logger.debug('Found subtitle %r', subtitle)
             subtitles.append(subtitle)
@@ -621,7 +614,7 @@ class Addic7edProvider(Provider):
         # download the subtitle
         logger.info('Downloading subtitle %r', subtitle)
         r = self.session.get(
-            f'{self.server_url}/{subtitle.download_link}',
+            f'{self.server_url}/{subtitle.subtitle_id}',
             headers={'Referer': subtitle.page_link},
             timeout=self.timeout,
         )

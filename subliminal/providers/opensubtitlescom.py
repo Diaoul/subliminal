@@ -153,7 +153,6 @@ class OpenSubtitlesComSubtitle(Subtitle):
 
     provider_name: ClassVar[str] = 'opensubtitlescom'
 
-    subtitle_id: int
     movie_kind: str | None
     release: str | None
     movie_title: str | None
@@ -177,7 +176,7 @@ class OpenSubtitlesComSubtitle(Subtitle):
     def __init__(
         self,
         language: Language,
-        subtitle_id: int,
+        subtitle_id: str,
         *,
         hearing_impaired: bool = False,
         movie_kind: str | None = None,
@@ -200,8 +199,7 @@ class OpenSubtitlesComSubtitle(Subtitle):
         file_id: int = 0,
         file_name: str = '',
     ) -> None:
-        super().__init__(language, hearing_impaired=hearing_impaired, page_link=None, encoding='utf-8')
-        self.subtitle_id = subtitle_id
+        super().__init__(language, subtitle_id, hearing_impaired=hearing_impaired, page_link=None, encoding='utf-8')
         self.movie_kind = movie_kind
         self.release = release
         self.movie_title = movie_title
@@ -232,7 +230,7 @@ class OpenSubtitlesComSubtitle(Subtitle):
     ) -> OpenSubtitlesComSubtitle:
         """Parse a single subtitle query response to a :class:`OpenSubtitlesComSubtitle`."""
         # read the response
-        subtitle_id = int(response.get('id'))  # type: ignore[arg-type]
+        subtitle_id = str(int(response.get('id')))  # type: ignore[arg-type]
 
         attributes = response.get('attributes', {})
         language = Language.fromopensubtitlescom(str(attributes.get('language')))
@@ -288,11 +286,6 @@ class OpenSubtitlesComSubtitle(Subtitle):
             file_id=file_id,
             file_name=file_name,
         )
-
-    @property
-    def id(self) -> str:
-        """The subtitle unique id."""
-        return str(self.subtitle_id)
 
     @property
     def info(self) -> str:

@@ -57,6 +57,7 @@ def test_series_year_re():
 def test_get_matches_release_group(episodes):
     subtitle = Addic7edSubtitle(
         language=Language('eng'),
+        subtitle_id='',
         hearing_impaired=True,
         page_link=None,
         series='The Big Bang Theory',
@@ -65,7 +66,6 @@ def test_get_matches_release_group(episodes):
         title='The Workplace Proximity',
         year=2007,
         release_group='DIMENSION',
-        download_link='',
     )
     matches = subtitle.get_matches(episodes['bbt_s07e05'])
     assert matches == {'series', 'season', 'episode', 'title', 'year', 'country', 'release_group'}
@@ -74,6 +74,7 @@ def test_get_matches_release_group(episodes):
 def test_get_matches_equivalent_release_group(episodes):
     subtitle = Addic7edSubtitle(
         language=Language('eng'),
+        subtitle_id='',
         hearing_impaired=True,
         page_link=None,
         series='The Big Bang Theory',
@@ -82,7 +83,6 @@ def test_get_matches_equivalent_release_group(episodes):
         title='The Workplace Proximity',
         year=2007,
         release_group='LOL',
-        download_link='',
     )
     matches = subtitle.get_matches(episodes['bbt_s07e05'])
     assert matches == {'series', 'season', 'episode', 'title', 'year', 'country', 'release_group'}
@@ -91,6 +91,7 @@ def test_get_matches_equivalent_release_group(episodes):
 def test_get_matches_resolution_release_group(episodes):
     subtitle = Addic7edSubtitle(
         language=Language('heb'),
+        subtitle_id='',
         hearing_impaired=True,
         page_link=None,
         series='The Big Bang Theory',
@@ -99,7 +100,6 @@ def test_get_matches_resolution_release_group(episodes):
         title='The Workplace Proximity',
         year=2007,
         release_group='720PDIMENSION',
-        download_link='',
     )
     matches = subtitle.get_matches(episodes['bbt_s07e05'])
     assert matches == {'series', 'season', 'episode', 'title', 'year', 'country', 'release_group', 'resolution'}
@@ -108,6 +108,7 @@ def test_get_matches_resolution_release_group(episodes):
 def test_get_matches_source_release_group(episodes):
     subtitle = Addic7edSubtitle(
         language=Language('eng'),
+        subtitle_id='',
         hearing_impaired=True,
         page_link=None,
         series='Game of Thrones',
@@ -116,7 +117,6 @@ def test_get_matches_source_release_group(episodes):
         title='Mhysa',
         year=None,
         release_group='WEB-DL-NTb',
-        download_link='',
     )
     matches = subtitle.get_matches(episodes['got_s03e10'])
     assert matches == {'series', 'season', 'episode', 'title', 'year', 'country', 'release_group', 'source'}
@@ -125,6 +125,7 @@ def test_get_matches_source_release_group(episodes):
 def test_get_matches_streaming_service(episodes):
     subtitle = Addic7edSubtitle(
         language=Language('nld'),
+        subtitle_id='',
         hearing_impaired=True,
         page_link=None,
         series='The Walking Dead',
@@ -133,7 +134,6 @@ def test_get_matches_streaming_service(episodes):
         title=None,
         year=None,
         release_group='AMZN.WEB-DL-CasStudio',
-        download_link='',
     )
     matches = subtitle.get_matches(episodes['walking_dead_s08e07'])
     assert matches == {'series', 'season', 'episode', 'year', 'country', 'release_group', 'streaming_service', 'source'}
@@ -142,6 +142,7 @@ def test_get_matches_streaming_service(episodes):
 def test_get_matches_only_year_country(episodes):
     subtitle = Addic7edSubtitle(
         language=Language('eng'),
+        subtitle_id='',
         hearing_impaired=True,
         page_link=None,
         series='The Big Bang Theory',
@@ -150,7 +151,6 @@ def test_get_matches_only_year_country(episodes):
         title='The Workplace Proximity',
         year=None,
         release_group='DIMENSION',
-        download_link='',
     )
     matches = subtitle.get_matches(episodes['got_s03e10'])
     assert matches == {'year', 'country'}
@@ -159,6 +159,7 @@ def test_get_matches_only_year_country(episodes):
 def test_get_matches_no_match(episodes):
     subtitle = Addic7edSubtitle(
         language=Language('eng'),
+        subtitle_id='',
         hearing_impaired=True,
         page_link=None,
         series='The Big Bang Theory',
@@ -167,7 +168,6 @@ def test_get_matches_no_match(episodes):
         title='The Workplace Proximity',
         year=2007,
         release_group='DIMENSION',
-        download_link='',
     )
     matches = subtitle.get_matches(episodes['house_of_cards_us_s06e01'])
     assert matches == set()
@@ -462,7 +462,7 @@ def test_query_parsing(episodes):
     assert len(subtitles) > 0
 
     matched_id = 'updated/1/76311/1'
-    matched_subtitles = [s for s in subtitles if s.download_link == matched_id]
+    matched_subtitles = [s for s in subtitles if s.subtitle_id == matched_id]
     assert len(matched_subtitles) == 1
 
     subtitle = matched_subtitles[0]
@@ -486,7 +486,7 @@ def test_query_parsing_quote_dots_mixed_case(episodes):
         subtitles = provider.query(show_id, video.series, video.season)
 
     matched_id = 'updated/10/93279/9'
-    matched_subtitles = [s for s in subtitles if s.download_link == matched_id]
+    matched_subtitles = [s for s in subtitles if s.subtitle_id == matched_id]
     assert len(matched_subtitles) == 1
 
     subtitle = matched_subtitles[0]
@@ -511,7 +511,7 @@ def test_query_parsing_colon(episodes):
     assert show_id == 4633
 
     matched_id = 'updated/1/105111/2'
-    matched_subtitles = [s for s in subtitles if s.download_link == matched_id]
+    matched_subtitles = [s for s in subtitles if s.subtitle_id == matched_id]
     assert len(matched_subtitles) == 1
 
     subtitle = matched_subtitles[0]
@@ -533,7 +533,7 @@ def test_query_parsing_dash(episodes):
         subtitles = provider.query(show_id, video.series, video.season)
 
     matched_id = 'updated/8/108202/21'
-    matched_subtitles = [s for s in subtitles if s.download_link == matched_id]
+    matched_subtitles = [s for s in subtitles if s.subtitle_id == matched_id]
     assert len(matched_subtitles) == 1
 
     subtitle = matched_subtitles[0]
@@ -583,7 +583,7 @@ def test_list_subtitles(episodes):
     expected_subtitles = {'updated/8/80254/1', 'updated/11/80254/5'}
     with Addic7edProvider() as provider:
         subtitles = provider.list_subtitles(video, languages)
-    assert {subtitle.download_link for subtitle in subtitles} == expected_subtitles
+    assert {subtitle.subtitle_id for subtitle in subtitles} == expected_subtitles
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
@@ -608,7 +608,7 @@ def test_list_subtitles_episode_alternative_series(episodes):
     with Addic7edProvider() as provider:
         subtitles = provider.list_subtitles(video, languages)
         matches = subtitles[0].get_matches(episodes['turn_s04e03'])
-    assert {subtitle.download_link for subtitle in subtitles} == expected_subtitles
+    assert {subtitle.subtitle_id for subtitle in subtitles} == expected_subtitles
     assert {subtitle.language for subtitle in subtitles} == languages
     assert matches == {'episode', 'title', 'series', 'season', 'year', 'country', 'release_group'}
 
@@ -624,6 +624,6 @@ def test_list_subtitles_show_with_asterisk(episodes):
         subtitles = provider.list_subtitles(video, languages)
         matches = subtitles[0].get_matches(episodes['the_end_of_the_fucking_world'])
     assert {subtitle.series for subtitle in subtitles} == names
-    assert {subtitle.download_link for subtitle in subtitles} == expected_subtitles
+    assert {subtitle.subtitle_id for subtitle in subtitles} == expected_subtitles
     assert {subtitle.language for subtitle in subtitles} == languages
     assert matches == {'year', 'country', 'series', 'episode', 'season'}

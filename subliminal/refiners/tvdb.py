@@ -463,7 +463,7 @@ def refine(video: Video, *, apikey: str | None = None, force: bool = False, **kw
     video.country = matching_result['match']['country']
     video.original_series = matching_result['match']['original_series']
     video.series_tvdb_id = sanitize_id(series['id'])
-    video.series_imdb_id = decorate_imdb_id(sanitize_id(series['imdbId']))
+    video.series_imdb_id = decorate_imdb_id(sanitize_id(series['imdbId'] or None))
 
     # get the episode
     logger.info('Getting series episode %dx%d', video.season, video.episode)
@@ -476,6 +476,6 @@ def refine(video: Video, *, apikey: str | None = None, force: bool = False, **kw
     logger.debug('Found episode %r', episode)
     video.tvdb_id = sanitize_id(episode['id'])
     video.title = episode['episodeName'] or None
-    video.imdb_id = decorate_imdb_id(sanitize_id(episode['imdbId']))
+    video.imdb_id = decorate_imdb_id(sanitize_id(episode['imdbId'] or None))
 
     return video

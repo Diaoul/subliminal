@@ -54,27 +54,27 @@ class NapiProjektSubtitle(Subtitle):
 
     video_hash: str
 
-    def __init__(self, language: Language, video_hash: str, fps: float = 24) -> None:
-        super().__init__(language, fps=fps)
-        self.video_hash = video_hash
+    def __init__(
+        self,
+        language: Language,
+        subtitle_id: str,
+        *,
+        fps: float = 24,
+    ) -> None:
+        super().__init__(language, subtitle_id, fps=fps)
         self.content = None
-
-    @property
-    def id(self) -> str:
-        """The subtitle unique id."""
-        return str(self.video_hash)
 
     @property
     def info(self) -> str:
         """Information about the subtitle."""
-        return str(self.video_hash)
+        return str(self.subtitle_id)
 
     def get_matches(self, video: Video) -> set[str]:
         """Get the matches against the `video`."""
         matches = set()
 
         # video_hash
-        if 'napiprojekt' in video.hashes and video.hashes['napiprojekt'] == self.video_hash:
+        if 'napiprojekt' in video.hashes and video.hashes['napiprojekt'] == self.subtitle_id:
             matches.add('hash')
 
         return matches
@@ -160,7 +160,7 @@ class NapiProjektProvider(Provider):
             return []
 
         # Create subtitle object
-        subtitle = self.subtitle_class(language=language, video_hash=video_hash)
+        subtitle = self.subtitle_class(language=language, subtitle_id=video_hash)
         subtitle.content = content
         logger.debug('Found subtitle %r', subtitle)
 

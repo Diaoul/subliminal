@@ -161,7 +161,7 @@ class NapiProjektProvider(Provider):
 
         # Create subtitle object
         subtitle = self.subtitle_class(language=language, video_hash=video_hash)
-        subtitle.content = r.content
+        subtitle.content = content
         logger.debug('Found subtitle %r', subtitle)
 
         return [subtitle]

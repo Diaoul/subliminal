@@ -39,7 +39,9 @@ with contextlib.suppress(ValueError):
 show_cells_re = re.compile(b'<td class="version">.*?</td>', re.DOTALL)
 
 #: Series url parsing regex
-series_url_re = re.compile(r'\/serie\/(?P<series>[^\/]+)\/(?P<season>\d+)\/(?P<episode>\d+)\/(?P<title>[^\/]*)')
+series_url_re = re.compile(
+    r'\/serie\/(?P<series>[^\/]+)\/(?P<season>\d+)\/(?P<episode>\d+)\/(?P<title>[^\/]*)'  # spellchecker: disable-line
+)
 
 #: Show_id href parsing regex
 show_id_re = re.compile(r'\/season\/(?P<show_id>\d+)\/(?P<season>\d+)')
@@ -324,7 +326,7 @@ class Addic7edProvider(Provider):
         soup = ParserBeautifulSoup(response.content, ['lxml', 'html.parser'])
 
         # check if list of episodes
-        table = soup.find('table', class_='tabel')
+        table = soup.find('table', class_='tabel')  # spellchecker: disable-line
 
         if table is None:
             logger.info('Cannot find the table with matching episodes in %s', response.url)

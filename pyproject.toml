@@ -68,6 +68,7 @@ test = [
     "vcrpy>=1.6.1",
 ]
 dev = [
+    "doc8",
     "mypy",
     "ruff",
     "typos",
@@ -190,16 +191,18 @@ doctest_optionflags = ["NORMALIZE_WHITESPACE", "IGNORE_EXCEPTION_DETAIL"]
 # https://coverage.readthedocs.io/en/latest/config.html
 [tool.coverage.report]
 exclude_also = [
-    "pragma: no cover",
+    "pragma: no.cover",
     "if TYPE_CHECKING:",
     "@overload",
     "except ImportError",
     "\\.\\.\\.",
     "raise NotImplementedError()",
+    "if __name__ == .__main__.:",
 ]
 show_missing = true
 skip_covered = true
 fail_under = 100
+omit = ["subliminal/cli.py"]
 
 [tool.coverage.run]
 source = ["subliminal"]
@@ -236,6 +239,11 @@ warn_return_any = false
 disable_error_code = ["var-annotated"]
 
 
+# https://github.com/PyCQA/doc8
+[tool.doc8]
+allow-long-titles = true
+max-line-length = 120
+
 # https://github.com/crate-ci/typos/blob/master/docs/reference.md
 [tool.typos.files]
 extend-exclude = ["cassettes/", "tests/"]
@@ -247,3 +255,4 @@ extend-ignore-re = [
 ]
 [tool.typos.default.extend-identifiers]
 tha = "tha"
+bre = "bre"

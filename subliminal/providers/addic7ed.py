@@ -374,7 +374,7 @@ class Addic7edProvider(Provider):
 
         Very slow, better to avoid.
 
-        :param str series_year: series of the episode, optionnally with the year.
+        :param str series_year: series of the episode, optionally with the year.
         :param int season: season of the series. If None, defaults to 1
         :param int episode: episode in the season. If None, defaults to 1
         :return: a list of potential show ids.
@@ -401,7 +401,7 @@ class Addic7edProvider(Provider):
         for response in responses:
             match = series_url_re.search(response.url)
             if not match:
-                logger.info('Could not parse series name frome %r', response.url)
+                logger.info('Could not parse series name from %r', response.url)
                 continue
 
             found_series = unquote(match.groupdict()['series'])

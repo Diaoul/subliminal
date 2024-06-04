@@ -37,7 +37,7 @@ only configuration. Any error in the configuration must raise a
 :class:`~subliminal.exceptions.ConfigurationError`.
 
 
-Beyond this point, if an error occurs, a generic :class:`~subliminal.exceptions.ProviderError` exception 
+Beyond this point, if an error occurs, a generic :class:`~subliminal.exceptions.ProviderError` exception
 must be raised. You can also use more explicit exception classes :class:`~subliminal.exceptions.AuthenticationError`
 and :class:`~subliminal.exceptions.DownloadLimitExceeded`.
 

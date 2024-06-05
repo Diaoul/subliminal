@@ -283,7 +283,7 @@ class Subtitle:
             encodings.extend(['windows-1255', 'iso-8859-8'])
 
         elif self.language.alpha3 == 'tur':
-            encodings.extend(['iso-8859-3', 'iso-8859-9', 'windows-1254'])
+            encodings.extend(['windows-1254', 'iso-8859-9', 'iso-8859-3'])
 
         elif self.language.alpha3 in ('grc', 'gre', 'ell'):
             encodings.extend(
@@ -307,7 +307,7 @@ class Subtitle:
             'sqi',
             'alb',
         ):
-            encodings.extend(['iso-8859-2', 'windows-1250'])
+            encodings.extend(['windows-1250', 'iso-8859-2'])
 
             if self.language.alpha3 == 'slv':
                 encodings.extend(['iso-8859-4'])
@@ -328,7 +328,7 @@ class Subtitle:
 
         else:
             # Western European (windows-1252) / Northern European
-            encodings.extend(['iso-8859-1', 'iso-8859-4', 'iso-8859-9', 'iso-8859-15', 'windows-1252'])
+            encodings.extend(['windows-1252', 'iso-8859-15', 'iso-8859-9', 'iso-8859-4', 'iso-8859-1'])
 
         # try to decode
         logger.debug('Trying encodings %r', encodings)

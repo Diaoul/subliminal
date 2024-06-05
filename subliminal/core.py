@@ -807,6 +807,10 @@ def save_subtitles(
         if subtitle.language in {s.language for s in saved_subtitles}:
             logger.debug('Skipping subtitle %r: language already saved', subtitle)
             continue
+        
+        # re-encode if not utf-8
+        if subtitle.encoding != 'utf-8':
+            subtitle.reencode()
 
         # create subtitle path
         subtitle_path = subtitle.get_path(video, single=single, extension=extension)

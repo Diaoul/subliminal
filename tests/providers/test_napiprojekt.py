@@ -56,6 +56,25 @@ def test_query_srt(episodes):
 
 @pytest.mark.integration()
 @vcr.use_cassette
+def test_query_srt_reencode(episodes):
+    language = Language('pol')
+    video = episodes['suits_s06_e13']
+    with NapiProjektProvider() as provider:
+        subtitles = provider.query(language, video.hashes['napiprojekt'])
+    assert len(subtitles) == 1
+    subtitle = subtitles[0]
+    assert subtitle.language == language
+    assert subtitle.content
+    assert subtitle.is_valid()
+    assert subtitle.subtitle_format == 'srt'
+    assert subtitle.encoding == 'windows-1250'
+    subtitle.reencode()
+    assert subtitle.encoding == 'utf-8'
+    assert 'O czym myślisz?' in subtitle.text
+
+
+@pytest.mark.integration()
+@vcr.use_cassette
 def test_query_wrong_hash():
     with NapiProjektProvider() as provider:
         subtitles = provider.query(Language('pol'), 'abcdabdcabcd1234abcd1234abcd123')

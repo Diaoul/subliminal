@@ -415,6 +415,17 @@ def episodes() -> dict[str, Episode]:
                 'napiprojekt': '32f216ee3fda2cf765e10847e7a8e90f',
             },
         ),
+        'suits_s06_e13': Episode(
+            'Suits.S06E13.1080p.BluRay.x265-RARBG.pl.srt',
+            'Suits',
+            6,
+            13,
+            source='Blu-ray',
+            release_group='RARBG',
+            hashes={
+                'napiprojekt': '95bdf8ca5716166e6ad1e030a4a6b5cd',
+            },
+        )
     }
 
 

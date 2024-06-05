@@ -334,7 +334,12 @@ class Subtitle:
         logger.debug('Trying encodings %r', encodings)
         for encoding in encodings:
             try:
-                self.content.decode(encoding)
+                decoded = self.content.decode(encoding)
+                # remove whitespace other than spaces from the string
+                # see https://docs.python.org/3/library/stdtypes.html#str.isprintable
+                decoded = decoded.replace('\r', '').replace('\n', '').replace('\t', '')
+                if not decoded.isprintable():
+                    continue
             except UnicodeDecodeError:
                 pass
             else:

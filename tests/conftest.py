@@ -404,6 +404,17 @@ def episodes() -> dict[str, Episode]:
             streaming_service='Amazon Prime',
             release_group='CasStudio',
         ),
+        'suits_s06_e12': Episode(
+            'Suits.S06E12.1080p.BluRay.x265-RARBG.mp4',
+            'Suits',
+            6,
+            12,
+            source='Blu-ray',
+            release_group='RARBG',
+            hashes={
+                'napiprojekt': '32f216ee3fda2cf765e10847e7a8e90f',
+            },
+        ),
     }
 
 

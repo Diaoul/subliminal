@@ -26,7 +26,7 @@ def test_get_matches_no_match(episodes):
 
 @pytest.mark.integration()
 @vcr.use_cassette
-def test_query(movies):
+def test_query_microdvd(movies):
     language = Language('pol')
     video = movies['man_of_steel']
     with NapiProjektProvider() as provider:
@@ -36,6 +36,22 @@ def test_query(movies):
     assert subtitle.language == language
     assert subtitle.content
     assert subtitle.is_valid()
+    assert subtitle.subtitle_format == 'microdvd'
+
+
+@pytest.mark.integration()
+@vcr.use_cassette
+def test_query_srt(episodes):
+    language = Language('pol')
+    video = episodes['suits_s06_e12']
+    with NapiProjektProvider() as provider:
+        subtitles = provider.query(language, video.hashes['napiprojekt'])
+    assert len(subtitles) == 1
+    subtitle = subtitles[0]
+    assert subtitle.language == language
+    assert subtitle.content
+    assert subtitle.is_valid()
+    assert subtitle.subtitle_format == 'srt'
 
 
 @pytest.mark.integration()

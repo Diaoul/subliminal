@@ -60,6 +60,7 @@ docs = [
     "sphinxcontrib-programoutput",
 ]
 test = [
+    "mypy",
     "lxml",
     "pytest>=6.0",
     "pytest-cov",
@@ -130,6 +131,9 @@ readme = {file = ["README.rst", "HISTORY.rst"]}
 [tool.ruff]
 line-length = 120
 src = ["subliminal", "tests"]
+exclude = [
+    "_version.py",
+]
 
 [tool.ruff.lint]
 pydocstyle = { convention = "pep257" }

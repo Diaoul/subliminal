@@ -425,7 +425,7 @@ def episodes() -> dict[str, Episode]:
             hashes={
                 'napiprojekt': '95bdf8ca5716166e6ad1e030a4a6b5cd',
             },
-        )
+        ),
     }
 
 

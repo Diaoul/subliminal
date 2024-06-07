@@ -18,3 +18,8 @@ TVDB
 OMDb
 ----
 .. autofunction:: subliminal.refiners.omdb.refine
+
+
+TMDB
+----
+.. autofunction:: subliminal.refiners.tmdb.refine

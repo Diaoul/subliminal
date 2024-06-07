@@ -4,7 +4,7 @@ import pytest
 import requests
 from subliminal.refiners.tmdb import TMDBClient, refine
 from subliminal.video import Episode, Movie
-from vcr import VCR
+from vcr import VCR  # type: ignore[import-untyped]
 
 vcr = VCR(
     path_transformer=lambda path: path + '.yaml',
@@ -37,8 +37,8 @@ def test_apikey():
     apikey = '000000000'
     client = TMDBClient(headers={'X-Test': 'Value'})
     client.apikey = apikey
-    assert 'api_key' in client.session.params
-    assert client.session.params['api_key'] == apikey
+    assert 'api_key' in client.session.params  # type: ignore[operator]
+    assert client.session.params['api_key'] == apikey  # type: ignore[index,call-overload]
 
 
 @pytest.mark.integration()

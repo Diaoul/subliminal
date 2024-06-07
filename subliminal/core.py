@@ -622,9 +622,9 @@ def refine(
     """
     refiners: tuple[str, ...] = ()
     if isinstance(video, Episode):
-        refiners = tuple(episode_refiners) if episode_refiners is not None else ('metadata', 'tvdb', 'omdb')
+        refiners = tuple(episode_refiners) if episode_refiners is not None else ('metadata', 'tvdb', 'omdb', 'tmdb')
     elif isinstance(video, Movie):
-        refiners = tuple(movie_refiners) if movie_refiners is not None else ('metadata', 'omdb')
+        refiners = tuple(movie_refiners) if movie_refiners is not None else ('metadata', 'omdb', 'tmdb')
 
     for refiner in ('hash', *refiners):
         logger.info('Refining video with %s', refiner)

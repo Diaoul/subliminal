@@ -150,5 +150,6 @@ refiner_manager = RegistrableExtensionManager(
         'metadata = subliminal.refiners.metadata:refine',
         'omdb = subliminal.refiners.omdb:refine',
         'tvdb = subliminal.refiners.tvdb:refine',
+        'tmdb = subliminal.refiners.tmdb:refine',
     ],
 )

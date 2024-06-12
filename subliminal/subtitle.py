@@ -5,6 +5,7 @@ from __future__ import annotations
 import codecs
 import logging
 import os
+from codecs import BOM_UTF8, BOM_UTF16_BE, BOM_UTF16_LE, BOM_UTF32_BE, BOM_UTF32_LE
 from typing import TYPE_CHECKING, ClassVar
 
 import chardet
@@ -31,6 +32,15 @@ FORMAT_TO_EXTENSION = {
 
 #: Subtitle extensions
 SUBTITLE_EXTENSIONS = (*FORMAT_TO_EXTENSION.values(), '.smi')
+
+#: BOMs for UTF contents, first UTF32 BOMS as BOM_UTF32_LE startswith BOM_UTF16_LE
+BOMS = (
+    (BOM_UTF8, 'utf-8-sig'),
+    (BOM_UTF32_BE, 'utf-32-be'),
+    (BOM_UTF32_LE, 'utf-32-le'),
+    (BOM_UTF16_BE, 'utf-16-be'),
+    (BOM_UTF16_LE, 'utf-16-le'),
+)
 
 
 class Subtitle:
@@ -254,10 +264,12 @@ class Subtitle:
         # always try utf-8 first
         encodings = ['utf-8']
 
+        # add UTF encodings matched by the BOM
+        encodings.extend(find_encoding_with_bom(self.content))
+
         # add language-specific encodings
         # http://scratchpad.wikia.com/wiki/Character_Encoding_Recommendation_for_Languages
 
-        # add language-specific encodings
         if self.language.alpha3 == 'zho':
             encodings.extend(
                 ['cp936', 'gb2312', 'gbk', 'hz', 'iso2022_jp_2', 'cp950', 'big5hkscs', 'big5', 'gb18030', 'utf-16']
@@ -435,6 +447,14 @@ def get_subtitle_path(video_path: str | os.PathLike, language: Language | None =
         subtitle_root += '.' + str(language)
 
     return subtitle_root + extension
+
+
+def find_encoding_with_bom(data: bytes) -> list[str]:
+    """Find the UTF encoding if the raw content is starting with a byte order mask (BOM).
+
+    Only return the first encoding that match the BOM or an empty list if no match.
+    """
+    return [encoding for bom, encoding in BOMS if data.startswith(bom)][:1]
 
 
 def fix_line_ending(content: bytes) -> bytes:

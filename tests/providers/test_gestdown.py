@@ -415,3 +415,17 @@ def test_show_with_asterisk(episodes):
     assert {subtitle.subtitle_id for subtitle in subtitles} == expected_subtitles
     assert {subtitle.language for subtitle in subtitles} == languages
     assert matches == {'country', 'series', 'episode', 'season', 'year'}
+
+
+@pytest.mark.integration()
+@vcr.use_cassette
+def test_download_with_bom(episodes):
+    video = episodes['grimsburg_s01e01']
+    languages = {Language('eng')}
+    with GestdownProvider() as provider:
+        subtitles = provider.list_subtitles(video, languages)
+    assert len(subtitles) > 0
+    subtitle = subtitles[0]
+    provider.download_subtitle(subtitle)
+    assert subtitle.content is not None
+    assert subtitle.is_valid() is True

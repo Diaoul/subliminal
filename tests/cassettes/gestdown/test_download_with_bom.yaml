@@ -1,0 +1,578 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept-Encoding:
+      - gzip, deflate, br, zstd
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.1
+      accept:
+      - application/json
+    method: GET
+    uri: https://api.gestdown.info/shows/search/Grimsburg
+  response:
+    body:
+      string: '{"shows":[{"id":"018b4083-1600-48b5-a5f1-28f7d152d265","name":"Grimsburg","nbSeasons":1,"seasons":[1],"tvDbId":420069,"tmdbId":202224,"slug":"grimsburg"}]}'
+    headers:
+      Age:
+      - '2335'
+      CF-Cache-Status:
+      - HIT
+      CF-RAY:
+      - 892d08b5ff00499a-LHR
+      Cache-Control:
+      - public, max-age=14400
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - br
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 12 Jun 2024 21:46:30 GMT
+      Last-Modified:
+      - Wed, 12 Jun 2024 21:07:35 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=LV%2BtCZEyGpPnJr654rVQiQ1zIsoUxoOoCyEJxv5g8IZjs1D9o%2BLjatJfRjyevQZnvhAHjdyiuJ9WDDzxAMc%2BrnNgZOoMEoeeFEkE2Ib%2BlKbwSRGMmHgAbd7vwGMSz7k3rSDp8w%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      alt-svc:
+      - h3=":443"; ma=86400
+      vary:
+      - Accept-Encoding
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept-Encoding:
+      - gzip, deflate, br, zstd
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.1
+      accept:
+      - application/json
+    method: GET
+    uri: https://api.gestdown.info/subtitles/get/018b4083-1600-48b5-a5f1-28f7d152d265/1/1/eng
+  response:
+    body:
+      string: '{"matchingSubtitles":[{"subtitleId":"018ceac7-5d4f-4f26-8d36-3efc4b948281","version":"WEB-EDITH","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/018ceac7-5d4f-4f26-8d36-3efc4b948281","language":"English","discovered":"2024-01-08T20:33:03.311777Z","downloadCount":47},{"subtitleId":"018ceac7-5d4f-452b-b36f-fded539e7c6d","version":"WEB-EDITH","completed":true,"hearingImpaired":true,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/018ceac7-5d4f-452b-b36f-fded539e7c6d","language":"English","discovered":"2024-01-08T20:33:03.311796Z","downloadCount":20}],"episode":{"season":1,"number":1,"title":"Pilot","show":"Grimsburg","discovered":"2024-01-08T20:33:03.311746Z"}}'
+    headers:
+      Age:
+      - '2335'
+      CF-Cache-Status:
+      - HIT
+      CF-RAY:
+      - 892d08b6cc0c3d88-LHR
+      Cache-Control:
+      - public, max-age=7200
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - br
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 12 Jun 2024 21:46:30 GMT
+      Last-Modified:
+      - Wed, 12 Jun 2024 21:07:35 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=YA9uuRESMjLVbim2rX%2FjEmxH2j36za7xR72mHv0one0%2BKRYG4qGHX24ltlyC3y7DKPTCcYpx5q%2BBgd%2BZ2EOl9bdgpM3ssm0mJc1eDc1B%2F0MMSN7R7zn82%2FJea8wLAWG%2BlJoq8w%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      alt-svc:
+      - h3=":443"; ma=86400
+      vary:
+      - Accept-Encoding
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept-Encoding:
+      - gzip, deflate, br, zstd
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.1
+      accept:
+      - application/json
+    method: GET
+    uri: https://api.gestdown.info/subtitles/download/018ceac7-5d4f-4f26-8d36-3efc4b948281
+  response:
+    body:
+      string: "\uFEFF1\r\n00:00:02,790 --> 00:00:06,189\r\n<i>\u266A Don't go \u266A</i>\r\n\r\n2\r\n00:00:06,190
+        --> 00:00:08,070\r\nYou're a really good kisser.\r\n\r\n3\r\n00:00:08,100
+        --> 00:00:10,240\r\nMy dad was so wrong about you.\r\n\r\n4\r\n00:00:10,340
+        --> 00:00:12,809\r\nWait, your dad thought\r\nI'd be a bad kisser?\r\n\r\n5\r\n00:00:12,810
+        --> 00:00:15,249\r\n- Marcus.\r\n- Don't Marcus me, Abigail.\r\n\r\n6\r\n00:00:15,250
+        --> 00:00:16,513\r\nKissing's supes important\r\nto me.\r\n\r\n7\r\n00:00:16,514
+        --> 00:00:18,184\r\nI've been practicing\r\nall day on my mom's\r\n\r\n8\r\n00:00:18,250
+        --> 00:00:19,519\r\n- favorite throw pillow!\r\n- What is that?\r\n\r\n9\r\n00:00:19,520
+        --> 00:00:21,220\r\nYou know, the smaller\r\npillows on a couch.\r\n\r\n10\r\n00:00:21,260
+        --> 00:00:23,830\r\n- More decorative than practical.\r\n- Oh, my God, no!\r\n\r\n11\r\n00:00:23,960
+        --> 00:00:26,870\r\nYes, and now the pillow's\r\nall wet and my mom is pissed.\r\n\r\n12\r\n00:00:26,900
+        --> 00:00:28,009\r\nDo you even like me?\r\n\r\n13\r\n00:00:28,010 --> 00:00:29,510\r\n-
+        No!\r\n- I knew it.\r\n\r\n14\r\n00:00:29,540 --> 00:00:32,164\r\nWhich is
+        why I've also been\r\npracticing on your best friend.\r\n\r\n15\r\n00:00:32,165
+        --> 00:00:34,750\r\nSorry, Abigail, but I think\r\nit's time for me to move
+        on...\r\n\r\n16\r\n00:00:37,520 --> 00:00:38,189\r\nDot org.\r\n\r\n17\r\n00:00:38,190
+        --> 00:00:40,969\r\nI knew you'd regret it.\r\n\r\n18\r\n00:00:40,970 -->
+        00:00:42,399\r\nNo, I was screaming because\r\n\r\n19\r\n00:00:42,400 -->
+        00:00:43,783\r\nsomeone just chopped\r\nyour head off.\r\n\r\n20\r\n00:00:43,784
+        --> 00:00:46,839\r\nOh, so the whole time\r\nyou were warning me.\r\n\r\n21\r\n00:00:46,840
+        --> 00:00:49,150\r\nThat is so us.\r\n\r\n22\r\n00:00:49,280 --> 00:00:53,000\r\n-
+        Kiss me.\r\n- No!\r\n\r\n23\r\n00:01:13,420 --> 00:01:15,120\r\nHuh?\r\nYou
+        want some more?\r\n\r\n24\r\n00:01:16,390 --> 00:01:18,860\r\nNo, you are!\r\nGet
+        out of here!\r\n\r\n25\r\n00:01:18,960 --> 00:01:20,960\r\nIf this is about
+        the screaming,\r\nsome whack job\r\n\r\n26\r\n00:01:21,070 --> 00:01:24,399\r\nstuck
+        his head in my window\r\nand kept calling me a failure.\r\n\r\n27\r\n00:01:24,400
+        --> 00:01:29,410\r\n- But I took care of him.\r\n- Marvin Flute.\r\n\r\n28\r\n00:01:29,450
+        --> 00:01:32,149\r\nI should've known you'd be\r\nFriday drunk on a Tuesday.\r\n\r\n29\r\n00:01:32,150
+        --> 00:01:34,360\r\nLieutenant Kang.\r\nYou're like my college\r\n\r\n30\r\n00:01:34,361
+        --> 00:01:35,159\r\nalumni donation department.\r\n\r\n31\r\n00:01:35,160
+        --> 00:01:36,700\r\nYou can somehow\r\nfind me anywhere.\r\n\r\n32\r\n00:01:36,800
+        --> 00:01:39,080\r\nWe got a case only you\r\ncan solve, and an opening\r\n\r\n33\r\n00:01:39,081
+        --> 00:01:41,360\r\non the cornhole team for\r\nthis weekend's Cornament.\r\n\r\n34\r\n00:01:41,384
+        --> 00:01:43,679\r\nDid you forget you took\r\nmy badge, Lieutenant?\r\n\r\n35\r\n00:01:43,680
+        --> 00:01:46,080\r\nNow if you'll excuse me, I got\r\nto get back to the only
+        things\r\n\r\n36\r\n00:01:46,104 --> 00:01:48,050\r\nI'm good at anymore...\r\ndrinking
+        myself to death,\r\n\r\n37\r\n00:01:48,150 --> 00:01:49,449\r\nand painstakingly
+        crafting\r\n\r\n38\r\n00:01:49,450 --> 00:01:51,560\r\nMid-Century modern\r\ndollhouse
+        furniture.\r\n\r\n39\r\n00:01:51,590 --> 00:01:54,430\r\nOh, little tiny chair\r\nin
+        your little perfect world.\r\n\r\n40\r\n00:01:54,460 --> 00:01:57,770\r\nOh,
+        what I'd give to spin\r\naround on you and go whee!\r\n\r\n41\r\n00:01:57,910
+        --> 00:02:00,179\r\nBut I'm too big.\r\nI would crush you.\r\n\r\n42\r\n00:02:00,180
+        --> 00:02:01,650\r\nAnd that would crush me.\r\n\r\n43\r\n00:02:01,750 -->
+        00:02:04,080\r\nWell, then, I guess you\r\ndon't want this back.\r\n\r\n44\r\n00:02:04,120
+        --> 00:02:06,190\r\nBadgey!\r\nI missed ya, girl.\r\n\r\n45\r\n00:02:06,225
+        --> 00:02:08,360\r\nHave you seen Cuffy?\r\nWhat about Crime Tapey?\r\n\r\n46\r\n00:02:08,490
+        --> 00:02:09,793\r\nNot until you crack this week's\r\n\r\n47\r\n00:02:09,794
+        --> 00:02:13,000\r\n- bizarre, unsolvable case.\r\n- Dare I go back to Grimsburg,\r\n\r\n48\r\n00:02:13,100
+        --> 00:02:16,480\r\nthe town I left behind like\r\na perfectly-timed elevator
+        fart?\r\n\r\n49\r\n00:02:16,510 --> 00:02:18,479\r\nA place permanently cursed\r\na
+        century ago\r\n\r\n50\r\n00:02:18,480 --> 00:02:20,620\r\nby a virgin sacrifice
+        gone sideways.\r\n\r\n51\r\n00:02:20,720 --> 00:02:23,390\r\nA city so full
+        of vice,\r\nthey named it twice,\r\n\r\n52\r\n00:02:23,490 --> 00:02:24,753\r\nthen
+        realized\r\nthat sounded dumb,\r\n\r\n53\r\n00:02:24,754 --> 00:02:26,414\r\nso
+        they went back to\r\njust the one word.\r\n\r\n54\r\n00:02:28,500 --> 00:02:31,270\r\nGrim...
+        wait, hold on.\r\n\r\n55\r\n00:02:31,370 --> 00:02:35,310\r\nMm.\r\nWow, big
+        bite.\r\n\r\n56\r\n00:02:35,350 --> 00:02:37,380\r\nAh.\r\n\r\n57\r\n00:02:37,480
+        --> 00:02:39,990\r\nGrimsburg.\r\n\r\n58\r\n00:02:51,380 --> 00:02:55,649\r\n-
+        You got a cough, Petunia?\r\n- Worse, I'm alive,\r\n\r\n59\r\n00:02:55,650
+        --> 00:02:57,720\r\nand I have a single hair\r\nin the back of my throat.\r\n\r\n60\r\n00:02:57,760
+        --> 00:02:59,390\r\nIt's been bugging me\r\nfor like three days.\r\n\r\n61\r\n00:02:59,430
+        --> 00:03:01,460\r\nIt's literally the worst.\r\n\r\n62\r\n00:03:04,300 -->
+        00:03:06,779\r\nThere he is!\r\nExcited to meet ya, partner.\r\n\r\n63\r\n00:03:06,780
+        --> 00:03:10,450\r\n- I'm not partnering up with a robot.\r\n- I'm technically
+        a cyborg.\r\n\r\n64\r\n00:03:10,480 --> 00:03:13,260\r\nI lost exactly 74.2%
+        of my body\r\n\r\n65\r\n00:03:13,360 --> 00:03:14,810\r\nin a freak\r\nmerry-go-round
+        smash-up,\r\n\r\n66\r\n00:03:14,890 --> 00:03:16,630\r\nbut the good folks\r\nat
+        Grimsburg Cybernetics\r\n\r\n67\r\n00:03:16,760 --> 00:03:22,209\r\n- rebuilt
+        me to be faster and stronger!\r\n- What's that?\r\n\r\n68\r\n00:03:23,740
+        --> 00:03:26,110\r\nThey had to move some stuff\r\naround after the accident.\r\n\r\n69\r\n00:03:26,210
+        --> 00:03:28,869\r\nIf we're going to be partners,\r\nI only got one rule...\r\n\r\n70\r\n00:03:28,870
+        --> 00:03:31,489\r\nI don't play by the rules.\r\nEven that one.\r\n\r\n71\r\n00:03:31,490
+        --> 00:03:34,230\r\nSo I play by the rules, my rules.\r\n\r\n72\r\n00:03:34,330
+        --> 00:03:35,769\r\nAnd I've only got one rule...\r\n\r\n73\r\n00:03:35,770
+        --> 00:03:38,870\r\nI don't play by...\r\nby the rules.\r\n\r\n74\r\n00:03:41,580
+        --> 00:03:45,450\r\nThere's just never a right time\r\nfor a double teen homicide.\r\n\r\n75\r\n00:03:46,690
+        --> 00:03:50,529\r\nLooks like the boy didn't\r\nmake it, but the girl...\r\n\r\n76\r\n00:03:50,530
+        --> 00:03:53,140\r\nOh...\r\nI'm not sure you're supposed\r\n\r\n77\r\n00:03:53,141
+        --> 00:03:54,670\r\n- to be touching the evidence...\r\n- Quiet!\r\n\r\n78\r\n00:03:54,671
+        --> 00:03:57,380\r\nI'm going into my crime mind.\r\n\r\n79\r\n00:03:57,410
+        --> 00:03:58,709\r\n<i>Crime mind.</i>\r\n\r\n80\r\n00:03:58,710 --> 00:04:03,390\r\nThe
+        girl, she ran for her life.\r\n\r\n81\r\n00:04:03,490 --> 00:04:06,599\r\nYou
+        go on.\r\n\r\n82\r\n00:04:06,600 --> 00:04:08,400\r\nJust a stitch.\r\n\r\n83\r\n00:04:08,500
+        --> 00:04:09,839\r\nI'll catch up, I'll catch up.\r\n\r\n84\r\n00:04:09,840
+        --> 00:04:11,839\r\n<i>\u266A Hey, mama,\r\nwill you be my lover \u266A</i>\r\n\r\n85\r\n00:04:11,840
+        --> 00:04:13,310\r\n<i>\u266A 'Cause I need you in my life \u266A</i>\r\n\r\n86\r\n00:04:13,410
+        --> 00:04:16,480\r\nWhoa!\r\nJumping jacks are back!\r\n\r\n87\r\n00:04:23,960
+        --> 00:04:26,800\r\nYou, with the great hair,\r\nwhere did he take the girl?\r\n\r\n88\r\n00:04:26,840
+        --> 00:04:29,170\r\nBro, you're barking up the wrong...\r\n\r\n89\r\n00:04:29,210
+        --> 00:04:31,140\r\nMy treenis!\r\n\r\n90\r\n00:04:39,460 --> 00:04:43,570\r\nThank
+        God, the girl's still alive.\r\nBut the killer is taunting us.\r\n\r\n91\r\n00:04:43,700
+        --> 00:04:46,340\r\nAnd he's got absolutely\r\ngorgeous penmanship.\r\n\r\n92\r\n00:04:46,440
+        --> 00:04:48,410\r\nLook at the loops on those L's!\r\n\r\n93\r\n00:04:48,450
+        --> 00:04:50,450\r\n- Look!\r\n- Backhoe tracks.\r\n\r\n94\r\n00:04:50,480
+        --> 00:04:54,759\r\nFrom the Kubota L-39 diesel used\r\nto deliver this block
+        of ice.\r\n\r\n95\r\n00:04:54,760 --> 00:04:57,600\r\n- We find that Kubota...\r\n-
+        We find the killer.\r\n\r\n96\r\n00:04:57,630 --> 00:05:01,210\r\n- We find
+        the killer...\r\n- We find the girl.\r\n\r\n97\r\n00:05:01,310 --> 00:05:04,439\r\n-
+        We find the girl...\r\n- No, that's it.\r\n\r\n98\r\n00:05:04,440 --> 00:05:06,720\r\nWe,
+        that... we... that's it.\r\n\r\n99\r\n00:05:07,520 --> 00:05:10,820\r\nMind
+        if I ask you a couple of\r\nquestions for the local news?\r\n\r\n100\r\n00:05:10,860
+        --> 00:05:14,459\r\n- Sorry, ma'am, but this is a crime scene.\r\n- Oh, I
+        can see that.\r\n\r\n101\r\n00:05:14,460 --> 00:05:16,900\r\nIt seems someone
+        stole\r\nthis man's looks.\r\n\r\n102\r\n00:05:17,000 --> 00:05:18,739\r\nNice
+        try, but the only crime here\r\n\r\n103\r\n00:05:18,740 --> 00:05:24,580\r\n-
+        is that belt with those boots.\r\n- And the decapitation.\r\n\r\n104\r\n00:05:29,900
+        --> 00:05:32,939\r\nAh, I forgot what it's like\r\nwatching you tear into
+        a carcass.\r\n\r\n105\r\n00:05:32,940 --> 00:05:34,809\r\nJust one of the
+        many perks\r\nof having a wife\r\n\r\n106\r\n00:05:34,810 --> 00:05:36,779\r\n-
+        who was raised by bears.\r\n- Ex-wife.\r\n\r\n107\r\n00:05:36,780 --> 00:05:38,940\r\nAnd
+        I'm more than just a woman\r\nwho was raised by bears.\r\n\r\n108\r\n00:05:38,980
+        --> 00:05:41,519\r\nYou're right.\r\nThat was insensitive.\r\n\r\n109\r\n00:05:41,520
+        --> 00:05:45,630\r\nUm, I was raised by bears, so I\r\nthink I'm tough enough
+        to take it.\r\n\r\n110\r\n00:05:45,660 --> 00:05:48,100\r\nSo, anything you
+        can\r\ntell me about the case?\r\n\r\n111\r\n00:05:48,200 --> 00:05:50,900\r\nIt's
+        an active investigation.\r\nYou know I can't.\r\n\r\n112\r\n00:05:51,040 -->
+        00:05:53,540\r\nJust like you can't ask\r\none question about\r\n\r\n113\r\n00:05:53,610
+        --> 00:05:55,409\r\nthe son you haven't seen\r\nin years.\r\n\r\n114\r\n00:05:55,410
+        --> 00:05:58,749\r\nI'm fairly sure he's fine.\r\nRight, pal?\r\n\r\n115\r\n00:05:58,750
+        --> 00:06:01,890\r\nOh, I'm great,\r\nnow that you called me pal.\r\n\r\n116\r\n00:06:02,030
+        --> 00:06:04,830\r\n- Pal.\r\n- Hey, hey. Don't fall for it, Stan.\r\n\r\n117\r\n00:06:04,930
+        --> 00:06:07,839\r\nHe's just coming back to\r\nface-fudge this family again.\r\n\r\n118\r\n00:06:07,840
+        --> 00:06:10,380\r\nI wouldn't say no\r\nto a little face-fudging.\r\n\r\n119\r\n00:06:10,410
+        --> 00:06:13,919\r\n- What do you want?\r\n- This. You and I, mixing it up,\r\n\r\n120\r\n00:06:13,920
+        --> 00:06:16,249\r\nthe lightly simmering tension\r\nof will we or won't we,\r\n\r\n121\r\n00:06:16,250
+        --> 00:06:17,820\r\nand if we do, which positions.\r\n\r\n122\r\n00:06:17,890
+        --> 00:06:20,360\r\nCome on, admit it.\r\nYou need me too.\r\n\r\n123\r\n00:06:20,430
+        --> 00:06:23,799\r\nUgh, please.\r\nI have got everything covered.\r\n\r\n124\r\n00:06:23,800
+        --> 00:06:25,610\r\nEven taught Stan how to catch.\r\n\r\n125\r\n00:06:25,710
+        --> 00:06:28,579\r\n- Ugh!\r\n- With his face. Good one, baby!\r\n\r\n126\r\n00:06:28,580
+        --> 00:06:30,580\r\nSee?\r\nWe don't need you at all.\r\n\r\n127\r\n00:06:30,650
+        --> 00:06:34,460\r\nWell, actually, this weekend is the\r\nannual Father-Son
+        Dance.\r\n\r\n128\r\n00:06:34,490 --> 00:06:35,859\r\nAnd I'll just put on
+        a mustache\r\n\r\n129\r\n00:06:35,860 --> 00:06:37,800\r\nand take you like
+        I do\r\nevery year, hon.\r\n\r\n130\r\n00:06:37,830 --> 00:06:41,020\r\nNo
+        need, because the stache\r\nis back and ready to prove he's\r\n\r\n131\r\n00:06:41,021
+        --> 00:06:43,809\r\n- here to stay, probably.\r\n- Fine.\r\n\r\n132\r\n00:06:43,810
+        --> 00:06:45,330\r\nBut you better\r\nnot make me regret this,\r\n\r\n133\r\n00:06:45,430
+        --> 00:06:47,590\r\neven though I know you're\r\ngoing to make me regret this.\r\n\r\n134\r\n00:06:47,614
+        --> 00:06:50,134\r\nLet's go get you\r\nan ill-fitting suit, Stan.\r\n\r\n135\r\n00:06:51,590
+        --> 00:06:53,040\r\nDon't worry boy son,\r\nwe're going to\r\n\r\n136\r\n00:06:53,054
+        --> 00:06:54,730\r\nduct tape this\r\nbroken family back together\r\n\r\n137\r\n00:06:54,770
+        --> 00:06:56,740\r\nfaster than you can say\r\nhereditary schizophrenia.\r\n\r\n138\r\n00:06:56,770
+        --> 00:06:58,370\r\nWhich you also\r\ndon't need to worry about,\r\n\r\n139\r\n00:06:58,394
+        --> 00:07:01,109\r\nunless you're still seeing\r\nyour imaginary skeleton
+        friend.\r\n\r\n140\r\n00:07:01,110 --> 00:07:02,749\r\nThe one who made you\r\npull
+        the fire alarm.\r\n\r\n141\r\n00:07:02,750 --> 00:07:06,519\r\nNope. Therapy's
+        working great.\r\nBye.\r\n\r\n142\r\n00:07:09,330 --> 00:07:10,830\r\nHe bought
+        it, Stanny!\r\n\r\n143\r\n00:07:10,860 --> 00:07:14,540\r\nNow all we got
+        to do is make sure\r\nhe never talks to your therapist.\r\n\r\n144\r\n00:07:14,600
+        --> 00:07:17,145\r\n- Just like us.\r\n- Mr. Flesh, now we can\r\n\r\n145\r\n00:07:17,146
+        --> 00:07:20,120\r\nfinally start our plan to\r\nget my parents back together!\r\n\r\n146\r\n00:07:20,150
+        --> 00:07:22,250\r\nAnd it's going to work, too,\r\n\r\n147\r\n00:07:22,350
+        --> 00:07:25,890\r\nbecause all of my plans work,\r\naside from the dead bird
+        one.\r\n\r\n148\r\n00:07:25,930 --> 00:07:28,800\r\nNow, let's get you\r\nready
+        for that dance!\r\n\r\n149\r\n00:07:28,900 --> 00:07:32,210\r\nAre you familiar
+        with\r\nthe end of \"Dirty Dancing\"?\r\n\r\n150\r\n00:07:40,560 --> 00:07:42,029\r\nGlad
+        you're back, Flute.\r\n\r\n151\r\n00:07:42,030 --> 00:07:44,630\r\nThis place
+        has been\r\ndead without you.\r\n\r\n152\r\n00:07:44,660 --> 00:07:47,040\r\nI'm
+        fun.\r\n\r\n153\r\n00:07:47,070 --> 00:07:49,470\r\nHey, Wynona, are you\r\nwearing
+        a new scent?\r\n\r\n154\r\n00:07:49,510 --> 00:07:52,410\r\n- I love it!\r\n-
+        It's formaldehyde.\r\n\r\n155\r\n00:07:52,510 --> 00:07:54,790\r\nOoh, look
+        who it is.\r\n\r\n156\r\n00:07:54,890 --> 00:07:57,930\r\nThe man who puts\r\nthe
+        \"ten\" in Lieutenant.\r\n\r\n157\r\n00:07:58,060 --> 00:08:00,260\r\nYou
+        ever put that ten\r\nanywhere else?\r\n\r\n158\r\n00:08:00,360 --> 00:08:03,769\r\nBody's
+        still off-gassing.\r\n\r\n159\r\n00:08:03,770 --> 00:08:08,510\r\nThat note
+        was a perfect B-flat.\r\n\r\n160\r\n00:08:08,610 --> 00:08:10,750\r\nThere
+        must be\r\nsomething inside him.\r\n\r\n161\r\n00:08:12,490 --> 00:08:15,430\r\nI
+        keep\r\nforgetting to check both sides.\r\n\r\n162\r\n00:08:15,530 --> 00:08:18,000\r\nWowie.\r\nA
+        flute!\r\n\r\n163\r\n00:08:18,060 --> 00:08:20,060\r\nThe killer must be trying\r\nto
+        make contact with you.\r\n\r\n164\r\n00:08:20,084 --> 00:08:22,270\r\nGood
+        thing your name's not piano.\r\n\r\n165\r\n00:08:24,180 --> 00:08:27,520\r\nYeah,
+        'cause then he'd have\r\na piano in his butt.\r\n\r\n166\r\n00:08:27,550 -->
+        00:08:29,760\r\nThat'd be messed up.\r\n\r\n167\r\n00:08:29,790 --> 00:08:32,407\r\nSummers,
+        a boy is dead.\r\n\r\n168\r\n00:08:35,780 --> 00:08:38,780\r\nKang was the
+        one who suggested\r\nwe bring you back for this case.\r\n\r\n169\r\n00:08:38,820
+        --> 00:08:40,820\r\nI said we'd be\r\nbetter off deputizing\r\n\r\n170\r\n00:08:40,920
+        --> 00:08:44,659\r\nan alcoholic alley cat.\r\nI was wrong.\r\n\r\n171\r\n00:08:46,460
+        --> 00:08:50,096\r\nThe mayor needs his daughter\r\nfound before the opening\r\n\r\n172\r\n00:08:50,131
+        --> 00:08:53,680\r\n- of the new casino!\r\n- Which he also happens to own.\r\n\r\n173\r\n00:08:53,710
+        --> 00:08:55,650\r\nShut your spit maker, Stewart.\r\n\r\n174\r\n00:08:55,780
+        --> 00:08:57,350\r\n- Sorry, Mom.\r\n- Mom?\r\n\r\n175\r\n00:08:57,390 -->
+        00:09:00,123\r\nHi, I'm Stewart.\r\nI just passed the detective exam,\r\n\r\n176\r\n00:09:00,124
+        --> 00:09:02,529\r\nbut apparently\r\nI'm much more valuable\r\n\r\n177\r\n00:09:02,530
+        --> 00:09:05,280\r\n- taking notes as her secretary.\r\n- Never knew you had
+        a kid, Chief.\r\n\r\n178\r\n00:09:05,340 --> 00:09:07,209\r\n- Anything else
+        I don't know?\r\n- Let's see.\r\n\r\n179\r\n00:09:07,210 --> 00:09:09,840\r\nI'm
+        a climate change-denying\r\nFlat-Earther\r\n\r\n180\r\n00:09:09,880 --> 00:09:13,850\r\nwhose
+        23andMe confirmed\r\nI'm 12% Sasquatch.\r\n\r\n181\r\n00:09:13,920 --> 00:09:15,259\r\nNow
+        that we're caught up on me,\r\n\r\n182\r\n00:09:15,260 --> 00:09:18,021\r\nif
+        you don't find Abigail\r\nby Friday, I'm taking\r\n\r\n183\r\n00:09:18,022
+        --> 00:09:20,783\r\nthat loaner badge back and\r\nthrowing you off the edge\r\n\r\n184\r\n00:09:20,784
+        --> 00:09:25,264\r\nof this appropriately-warm\r\nfrisbee we call a planet!\r\n\r\n185\r\n00:09:28,280
+        --> 00:09:29,850\r\n30 years ago at this school,\r\n\r\n186\r\n00:09:29,990
+        --> 00:09:31,710\r\nI had the most brilliant\r\nteacher of my life.\r\n\r\n187\r\n00:09:31,734
+        --> 00:09:34,330\r\nThen 10 years ago, I sent him\r\nto prison for the rest
+        of his.\r\n\r\n188\r\n00:09:34,360 --> 00:09:36,870\r\nFaced with a teacher
+        shortage,\r\nthe city ordered him\r\n\r\n189\r\n00:09:36,970 --> 00:09:39,139\r\nto
+        finish serving out\r\nhis sentence working here,\r\n\r\n190\r\n00:09:39,140
+        --> 00:09:41,240\r\nwhich is how the man who was\r\nonce my greatest mentor\r\n\r\n191\r\n00:09:41,340
+        --> 00:09:44,750\r\nhas now become one of\r\nmy biggest nemesises,\r\n\r\n192\r\n00:09:44,850
+        --> 00:09:47,989\r\nnemeses, nemesisis, nemesi.\r\n\r\n193\r\n00:09:47,990
+        --> 00:09:50,330\r\nUgh.\r\nJust remind me to ask him.\r\n\r\n194\r\n00:09:50,360
+        --> 00:09:52,899\r\nHe'll know.\r\n\r\n195\r\n00:09:52,900 --> 00:09:54,869\r\nDr.
+        Rufis Pentos.\r\n\r\n196\r\n00:09:54,870 --> 00:09:57,269\r\nHow's the ankle
+        bracelet?\r\nItchy, I hope.\r\n\r\n197\r\n00:09:57,270 --> 00:09:59,580\r\nOh,
+        Marvin,\r\nhow you've changed.\r\n\r\n198\r\n00:09:59,680 --> 00:10:02,849\r\nWhat
+        misfortune has twisted you\r\ninto this pot-bellied shadow\r\n\r\n199\r\n00:10:02,850
+        --> 00:10:05,160\r\nthat cowers before me now?\r\n\r\n200\r\n00:10:05,260
+        --> 00:10:07,760\r\nThe unrelenting cruelty\r\nof human existence.\r\n\r\n201\r\n00:10:07,860
+        --> 00:10:10,130\r\nAnd a brief addiction to Roblox.\r\n\r\n202\r\n00:10:10,170
+        --> 00:10:13,040\r\nSo have you returned to\r\nplay our little game\r\n\r\n203\r\n00:10:13,140
+        --> 00:10:16,880\r\nof cat and lesser animal\r\nthan a cat?\r\n\r\n204\r\n00:10:16,910
+        --> 00:10:18,750\r\nI'm not here to play, Pentos,\r\n\r\n205\r\n00:10:18,780
+        --> 00:10:22,159\r\n- so don't try to get in my head.\r\n- I wouldn't dream
+        of it.\r\n\r\n206\r\n00:10:22,160 --> 00:10:25,530\r\nInteresting jacket\r\nyou're
+        wearing.\r\n\r\n207\r\n00:10:25,630 --> 00:10:26,899\r\nWhat?\r\nWhat do you
+        mean?\r\n\r\n208\r\n00:10:26,900 --> 00:10:28,470\r\nThe cut's not flattering\r\nor
+        the color?\r\n\r\n209\r\n00:10:28,500 --> 00:10:31,510\r\n- Get out of my
+        head!\r\n- But there's so much room.\r\n\r\n210\r\n00:10:32,680 --> 00:10:34,049\r\nUm,
+        Dr. Pentos.\r\n\r\n211\r\n00:10:34,050 --> 00:10:35,279\r\n- Hi!\r\n- My wife
+        and I...\r\n\r\n212\r\n00:10:35,280 --> 00:10:36,719\r\nOh, of course, my
+        office hours...\r\n\r\n213\r\n00:10:36,720 --> 00:10:38,520\r\nfeel you're
+        forcing\r\nour introverted Franny...\r\n\r\n214\r\n00:10:38,544 --> 00:10:39,489\r\n-
+        OK.\r\n- To read aloud...\r\n\r\n215\r\n00:10:39,490 --> 00:10:43,300\r\n-
+        Perhaps we can find... is vocal discrimination.\r\n- OK, thank you.\r\n\r\n216\r\n00:10:43,330
+        --> 00:10:46,000\r\nNow,\r\nwhat deliciously dark crime\r\n\r\n217\r\n00:10:46,040
+        --> 00:10:48,410\r\ndo you seek help with\r\nthis time?\r\n\r\n218\r\n00:10:48,440
+        --> 00:10:51,230\r\nMurder?\r\nKidnapping?\r\n\r\n219\r\n00:10:51,250 -->
+        00:10:54,450\r\nThe missing bagels from\r\nthe faculty break room?\r\n\r\n220\r\n00:10:54,520
+        --> 00:10:58,100\r\n- Twasn't I.\r\n- Recognize this?\r\n\r\n221\r\n00:10:58,200
+        --> 00:11:01,100\r\nWhere ever did you find her?\r\n\r\n222\r\n00:11:01,200
+        --> 00:11:03,410\r\nNo, no, no,\r\ndon't put that in your... oh.\r\n\r\n223\r\n00:11:03,510
+        --> 00:11:04,980\r\nInteresting.\r\n\r\n224\r\n00:11:05,080 --> 00:11:08,120\r\nIts
+        keys have been altered\r\nto only play B-flat.\r\n\r\n225\r\n00:11:08,220
+        --> 00:11:10,950\r\nSome ruffians stole it from\r\nmy classroom two days ago,\r\n\r\n226\r\n00:11:11,020
+        --> 00:11:16,360\r\nbut I simply have\r\nno idea how he got in.\r\n\r\n227\r\n00:11:19,370
+        --> 00:11:22,280\r\nBest of luck finding\r\npoor Miss Abigail,\r\n\r\n228\r\n00:11:22,380
+        --> 00:11:25,879\r\nwhose only crime was growing up\r\nin her father's shadow.\r\n\r\n229\r\n00:11:25,880
+        --> 00:11:30,830\r\nParents truly block out\r\nthe sun, don't they, Marvin?\r\n\r\n230\r\n00:11:30,860
+        --> 00:11:33,260\r\nDon't they?\r\nDon't they?\r\n\r\n231\r\n00:11:33,360
+        --> 00:11:37,240\r\nDo not they!\r\n\r\n232\r\n00:11:40,010 --> 00:11:44,119\r\nSo
+        sorry, what can we do to make\r\nFranny feel less triggered, hm?\r\n\r\n233\r\n00:11:44,120
+        --> 00:11:46,090\r\nAnd Mayor Dilquez,\r\nhow are you coping\r\n\r\n234\r\n00:11:46,120
+        --> 00:11:47,559\r\nwith your daughter's\r\ndisappearance?\r\n\r\n235\r\n00:11:47,560
+        --> 00:11:51,030\r\nIt is still hard for me to\r\neven believe she is missing.\r\n\r\n236\r\n00:11:51,100
+        --> 00:11:55,080\r\nThe opening of\r\nGrimsburg's first casino!\r\n\r\n237\r\n00:11:55,110
+        --> 00:11:57,380\r\nThis town will finally\r\nbe known for something\r\n\r\n238\r\n00:11:57,410
+        --> 00:12:00,750\r\nother than our unusually\r\nhigh number of killer clowns.\r\n\r\n239\r\n00:12:00,790
+        --> 00:12:02,890\r\nBut, it is sad.\r\n\r\n240\r\n00:12:02,990 --> 00:12:06,030\r\n-
+        Marvy Marvs!\r\n- I need to ask you some questions.\r\n\r\n241\r\n00:12:06,130
+        --> 00:12:08,169\r\nUm, I am in the middle\r\nof an interview.\r\n\r\n242\r\n00:12:08,170
+        --> 00:12:10,170\r\nAnd I'm in the middle\r\nof an investigation,\r\n\r\n243\r\n00:12:10,270
+        --> 00:12:11,910\r\n- which trumps your interview.\r\n- Nu-uh.\r\n\r\n244\r\n00:12:12,010
+        --> 00:12:15,149\r\n- Freedom of the press.\r\n- Yuh-huh. Obstruction of justice.\r\n\r\n245\r\n00:12:15,150
+        --> 00:12:17,020\r\nShouldn't you be getting\r\nready for the dance?\r\n\r\n246\r\n00:12:17,050
+        --> 00:12:20,190\r\nShouldn't you be not asking me\r\nif I shouldn't be doing
+        stuff?\r\n\r\n247\r\n00:12:20,290 --> 00:12:22,900\r\nI'm not sure\r\nwhat's
+        going on here, but...\r\n\r\n248\r\n00:12:23,000 --> 00:12:24,229\r\n- Summers!\r\n-
+        Back off, R2!\r\n\r\n249\r\n00:12:24,230 --> 00:12:26,910\r\nDo you two mind
+        not flirt\r\nfighting in front of my wife?\r\n\r\n250\r\n00:12:29,140 -->
+        00:12:31,580\r\nThis has been really tough on her.\r\n\r\n251\r\n00:12:31,680
+        --> 00:12:36,590\r\nHon, I'm going to talk\r\nto these detectives, OK?\r\n\r\n252\r\n00:12:36,690
+        --> 00:12:38,930\r\nWell,\r\nsomeone here may be involved\r\n\r\n253\r\n00:12:39,000
+        --> 00:12:40,470\r\nin Abigail's disappearance.\r\n\r\n254\r\n00:12:40,500
+        --> 00:12:43,870\r\nI assure you, all my guys\r\nhave been karmically vetted.\r\n\r\n255\r\n00:12:47,810
+        --> 00:12:50,020\r\nOh, bollocks.\r\n\r\n256\r\n00:12:50,050 --> 00:12:52,220\r\nKubota
+        backhoe.\r\nHe's the Ice Block Killer.\r\n\r\n257\r\n00:12:52,320 --> 00:12:54,760\r\n-
+        Get him!\r\n- Chase Mode activated.\r\n\r\n258\r\n00:13:02,580 --> 00:13:05,120\r\nIf
+        you want to run along,\r\nI'll catch up.\r\n\r\n259\r\n00:13:14,370 --> 00:13:17,740\r\nStill
+        wearing that jacket?\r\nOh.\r\n\r\n260\r\n00:13:17,840 --> 00:13:19,810\r\nGet
+        out of my he... oh!\r\n\r\n261\r\n00:13:22,550 --> 00:13:25,060\r\nBrake Mode,
+        Brake Mode!\r\n\r\n262\r\n00:13:25,160 --> 00:13:28,589\r\nWe scoured the
+        suspect's place.\r\nBupkis.\r\n\r\n263\r\n00:13:28,590 --> 00:13:31,970\r\nKid,
+        speaking as your mentor\r\nslash work daddy,\r\n\r\n264\r\n00:13:32,070 -->
+        00:13:36,440\r\ndetectives and criminals are\r\nlocked in a long, mysterious
+        dance.\r\n\r\n265\r\n00:13:36,480 --> 00:13:41,290\r\nOne big, cosmic dance.\r\n\r\n266\r\n00:13:43,260
+        --> 00:13:46,130\r\nJonathan Taylor Thomas!\r\nI got to go.\r\n\r\n267\r\n00:13:58,820
+        --> 00:14:02,859\r\nDon't be a baby, Stan.\r\n\r\n268\r\n00:14:02,860 -->
+        00:14:04,630\r\nHe'll be here.\r\n\r\n269\r\n00:14:10,380 --> 00:14:13,420\r\nUh,
+        didn't we already\r\nclear the suspect's place?\r\n\r\n270\r\n00:14:13,520
+        --> 00:14:15,419\r\nThe word dance reminded me\r\nof music,\r\n\r\n271\r\n00:14:15,420
+        --> 00:14:17,860\r\nand I remembered that\r\nthe flute was tuned to B-flat.\r\n\r\n272\r\n00:14:17,960
+        --> 00:14:21,130\r\nThe suspect is British, and British\r\npeople call apartments
+        flats.\r\n\r\n273\r\n00:14:21,170 --> 00:14:23,039\r\nB-flat. Flat B.\r\n\r\n274\r\n00:14:23,040
+        --> 00:14:24,770\r\nIn other words, apartment B.\r\n\r\n275\r\n00:14:24,880
+        --> 00:14:28,649\r\n- He's been leading us to...\r\n- Be best friends!\r\n\r\n276\r\n00:14:28,650
+        --> 00:14:30,920\r\nDetective Jesus, take the wheel.\r\n\r\n277\r\n00:14:31,020
+        --> 00:14:33,020\r\nOoh, I'd watch that show.\r\n\r\n278\r\n00:14:38,570 -->
+        00:14:43,409\r\n<i>OK, it's time to slow\r\nit down, boys and boys.</i>\r\n\r\n279\r\n00:14:52,160
+        --> 00:14:55,769\r\n- How awful.\r\n- Yeah, a terrible way to go.\r\n\r\n280\r\n00:14:55,770
+        --> 00:14:58,945\r\nNo, his furniture.\r\nWho mixes Scandinavian\r\n\r\n281\r\n00:14:58,946
+        --> 00:15:02,250\r\nminimalism with shabby chic?\r\nUgh.\r\n\r\n282\r\n00:15:02,350
+        --> 00:15:04,189\r\n\"While you were chasing\r\nthis idiot around,\r\n\r\n283\r\n00:15:04,190
+        --> 00:15:07,090\r\nI was completing my brilliant crime.\"\r\n\r\n284\r\n00:15:07,190
+        --> 00:15:10,770\r\nHmm.\r\nThe top of the page is missing.\r\n\r\n285\r\n00:15:12,140
+        --> 00:15:15,739\r\nGee, sure was nice of the\r\nkiller to use recycled paper.\r\n\r\n286\r\n00:15:15,740
+        --> 00:15:18,949\r\nWe should all be looking out\r\nfor future generations
+        like that.\r\n\r\n287\r\n00:15:18,950 --> 00:15:21,960\r\nFuture generations.\r\n\r\n288\r\n00:15:21,990
+        --> 00:15:23,440\r\nMy child-spawn!\r\n\r\n289\r\n00:15:28,200 --> 00:15:30,843\r\nOh,
+        my baby! What happened,\r\neven though I know,\r\n\r\n290\r\n00:15:30,844
+        --> 00:15:32,980\r\nsince I've been warning you\r\nabout it the whole time.\r\n\r\n291\r\n00:15:33,080
+        --> 00:15:37,219\r\nOh, you're frozen!\r\nTake these to warm you up.\r\n\r\n292\r\n00:15:37,220
+        --> 00:15:39,489\r\nWhere'd you go?\r\n\r\n293\r\n00:15:39,490 --> 00:15:41,630\r\nA
+        lovely boy.\r\n\r\n294\r\n00:15:41,730 --> 00:15:45,870\r\nA shame his father's
+        duties\r\nleave no time for love.\r\n\r\n295\r\n00:15:45,900 --> 00:15:50,349\r\nParents
+        truly block out\r\nthe sun, don't they, Marvin?\r\n\r\n296\r\n00:15:50,350
+        --> 00:15:52,820\r\nUh, you already said that earlier.\r\n\r\n297\r\n00:15:52,950
+        --> 00:15:58,360\r\nI did?\r\nThen perhaps it's important.\r\n\r\n298\r\n00:15:58,400
+        --> 00:15:59,799\r\nOh, I knew this would happen.\r\n\r\n299\r\n00:15:59,800
+        --> 00:16:03,669\r\n- So, what's next in the Bad Dad Olympics?\r\n- It was
+        a mistake.\r\n\r\n300\r\n00:16:03,670 --> 00:16:06,110\r\nLet me prove I'm
+        not the man\r\nwho checked into a motel\r\n\r\n301\r\n00:16:06,210 --> 00:16:08,210\r\nunder
+        your credit card\r\nfor five years.\r\n\r\n302\r\n00:16:08,250 --> 00:16:13,759\r\n-
+        You don't need to prove that to me.\r\n- Right.\r\n\r\n303\r\n00:16:13,760
+        --> 00:16:16,100\r\n- I need to prove it to myself.\r\n- No.\r\n\r\n304\r\n00:16:16,130
+        --> 00:16:18,100\r\nProve it to Lieutenant Kang?\r\n\r\n305\r\n00:16:18,230
+        --> 00:16:19,539\r\nThe Chief?\r\nMy dad?\r\n\r\n306\r\n00:16:19,540 --> 00:16:21,270\r\nNo,
+        your dad. The town?\r\n\r\n307\r\n00:16:21,370 --> 00:16:22,850\r\nSeems a
+        bit much,\r\nbut I'll do whatever\r\n\r\n308\r\n00:16:22,950 --> 00:16:24,490\r\nit
+        takes to get\r\nmy old life back.\r\n\r\n309\r\n00:16:27,420 --> 00:16:31,290\r\n-
+        You can't quit, Marvin.\r\n- Our one lead has freezer burn.\r\n\r\n310\r\n00:16:31,330
+        --> 00:16:32,729\r\nMy ex won't have me.\r\n\r\n311\r\n00:16:32,730 --> 00:16:35,399\r\nAnd
+        I just found out\r\nPete Davidson broke up with...\r\n\r\n312\r\n00:16:35,400
+        --> 00:16:39,410\r\n- Name TBD. Fill in in post.\r\n- I'd do anything to be
+        a detective,\r\n\r\n313\r\n00:16:39,510 --> 00:16:41,580\r\nand you're just
+        throwing it\r\nin the trash?\r\n\r\n314\r\n00:16:41,680 --> 00:16:44,419\r\nAt
+        least write down your\r\nfeelings on the Chief's notepad.\r\n\r\n315\r\n00:16:44,420
+        --> 00:16:48,360\r\nMake a pros and cons list,\r\nand then decide.\r\n\r\n316\r\n00:16:48,430
+        --> 00:16:50,270\r\nChief's notepad?\r\n\r\n317\r\n00:16:50,300 --> 00:16:52,870\r\nLook!\r\nThe
+        paper matches perfectly.\r\n\r\n318\r\n00:16:52,900 --> 00:16:54,540\r\nThe
+        Chief is the killer!\r\n\r\n319\r\n00:16:54,570 --> 00:16:58,580\r\nLook at
+        me, I solved the case,\r\nFlute, I solved the case!\r\n\r\n320\r\n00:16:58,610
+        --> 00:16:59,965\r\nSee, Kang, you don't need me.\r\n\r\n321\r\n00:16:59,966
+        --> 00:17:03,290\r\nMy family doesn't need me.\r\nEven crime doesn't need
+        me.\r\n\r\n322\r\n00:17:03,320 --> 00:17:05,560\r\nI'll be at the bar\r\nif
+        anyone needs me,\r\n\r\n323\r\n00:17:05,660 --> 00:17:09,100\r\nwhich nobody
+        will,\r\nas I've just clearly stated.\r\n\r\n324\r\n00:17:27,640 --> 00:17:32,320\r\nParents
+        truly block out\r\nthe sun, don't they, Marvin?\r\n\r\n325\r\n00:17:32,350
+        --> 00:17:35,920\r\nWhat are you saying?\r\nWhat does that mean?\r\n\r\n326\r\n00:17:38,490
+        --> 00:17:41,270\r\nYou should know what it means.\r\n\r\n327\r\n00:17:41,370
+        --> 00:17:46,240\r\nYou've been guilty of it all along.\r\n\r\n328\r\n00:17:46,280
+        --> 00:17:48,350\r\nI'm trying to be poetic here.\r\n\r\n329\r\n00:17:48,380
+        --> 00:17:50,490\r\nDon't make me spell it out.\r\n\r\n330\r\n00:17:50,590
+        --> 00:17:53,929\r\nBut I don't get what\r\nthis has to do with my son.\r\n\r\n331\r\n00:17:53,930
+        --> 00:17:56,970\r\nSun, son...\r\n\r\n332\r\n00:18:02,110 --> 00:18:07,220\r\n-
+        Wait, it's not the Chief.\r\n- It's the Chief!\r\n\r\n333\r\n00:18:09,320
+        --> 00:18:11,210\r\nYou're under arrest\r\nfor the murders of two people\r\n\r\n334\r\n00:18:11,211
+        --> 00:18:13,100\r\nwhose names I really\r\nshould have remembered.\r\n\r\n335\r\n00:18:13,200
+        --> 00:18:14,499\r\nWhy would I do this?\r\n\r\n336\r\n00:18:14,500 --> 00:18:18,979\r\n-
+        I have no motive.\r\n- I got your motive right here.\r\n\r\n337\r\n00:18:18,980
+        --> 00:18:23,420\r\n- Case closed.\r\n- That's not what motive means.\r\n\r\n338\r\n00:18:23,520
+        --> 00:18:25,660\r\nBut it...\r\nit does the matchy thing.\r\n\r\n339\r\n00:18:25,760
+        --> 00:18:27,790\r\nChief's innocent.\r\nThe notepad isn't hers.\r\n\r\n340\r\n00:18:27,930
+        --> 00:18:30,269\r\nShe doesn't believe\r\nin climate change,\r\n\r\n341\r\n00:18:30,270
+        --> 00:18:32,400\r\ntherefore she'd never buy recycled.\r\n\r\n342\r\n00:18:32,440
+        --> 00:18:35,305\r\nDuh! It's a scam.\r\nThey want us to pay\r\n\r\n343\r\n00:18:35,306
+        --> 00:18:37,880\r\nmore for something\r\nthat's already been used?\r\n\r\n344\r\n00:18:38,010
+        --> 00:18:41,250\r\n- Pff, right.\r\n- So if it's not the Chief, then who?\r\n\r\n345\r\n00:18:41,350
+        --> 00:18:43,420\r\nThe poor little boy in her shadow.\r\n\r\n346\r\n00:18:45,960
+        --> 00:18:48,200\r\nYou wanted to be a detective,\r\nbut your mom never let
+        you.\r\n\r\n347\r\n00:18:48,230 --> 00:18:50,610\r\nSo you planted a flute\r\nin
+        that poor kid's butt,\r\n\r\n348\r\n00:18:50,710 --> 00:18:52,870\r\nknowing
+        I'd put the pieces\r\ntogether and nail the Chief.\r\n\r\n349\r\n00:18:52,894
+        --> 00:18:55,480\r\nAnd then, when she's no longer\r\nblocking out the sun,\r\n\r\n350\r\n00:18:55,580
+        --> 00:18:57,549\r\nthen you, her son,\r\ndifferent spelling,\r\n\r\n351\r\n00:18:57,550
+        --> 00:19:00,260\r\nget to be a detective at last.\r\n\r\n352\r\n00:19:00,330
+        --> 00:19:06,840\r\n- Uh, yeah, pretty much exactly.\r\n- So where is Abigail?\r\n\r\n353\r\n00:19:15,190
+        --> 00:19:16,640\r\nHi!\r\n\r\n354\r\n00:19:29,250 --> 00:19:30,750\r\nMy
+        tanks...\r\n\r\n355\r\n00:19:30,850 --> 00:19:34,730\r\nto Flute, for saving
+        my daughter.\r\n\r\n356\r\n00:19:34,760 --> 00:19:37,030\r\nI got something\r\nthat
+        belongs to you.\r\n\r\n357\r\n00:19:37,130 --> 00:19:41,340\r\nBadgey! Wait,
+        first,\r\nthere's somebody I need to see.\r\n\r\n358\r\n00:19:46,420 --> 00:19:49,719\r\nHarm,
+        you were right, we can't\r\npick up where we left off.\r\n\r\n359\r\n00:19:49,720
+        --> 00:19:53,500\r\nBut maybe we can start\r\nwhere we are right now.\r\n\r\n360\r\n00:19:53,600
+        --> 00:19:55,740\r\nI just want to give my son\r\neverything he needs.\r\n\r\n361\r\n00:19:55,770
+        --> 00:19:59,010\r\nAnd I guess that includes you.\r\n\r\n362\r\n00:19:59,040
+        --> 00:20:01,080\r\nI learned a vital lesson\r\ntoday, child person.\r\n\r\n363\r\n00:20:01,150
+        --> 00:20:05,790\r\nThe only one I need to prove\r\nI've changed to is you.\r\n\r\n364\r\n00:20:05,890
+        --> 00:20:08,090\r\nOtherwise, you'll turn into\r\na twisted sicko like Stewart\r\n\r\n365\r\n00:20:08,114
+        --> 00:20:10,200\r\nand frame me for a murder\r\nI didn't commit.\r\n\r\n366\r\n00:20:10,230
+        --> 00:20:13,469\r\n- May I?\r\n- You may.\r\n\r\n367\r\n00:20:21,750 -->
+        00:20:24,190\r\nGrimsburg, I promised\r\nmyself I'd never come back,\r\n\r\n368\r\n00:20:24,230
+        --> 00:20:26,900\r\nand yet somehow, it's this\r\nplace where I feel like
+        maybe,\r\n\r\n369\r\n00:20:26,930 --> 00:20:29,000\r\njust maybe,\r\nI'll
+        solve the one mystery\r\n\r\n370\r\n00:20:29,070 --> 00:20:32,040\r\nI've
+        never been able to crack... myself.\r\n\r\n371\r\n00:20:32,080 --> 00:20:34,980\r\nOh,
+        and the mystery of where\r\nI put my suede desert boots.\r\n\r\n372\r\n00:20:35,080
+        --> 00:20:37,920\r\nAnd if there's time, maybe how\r\nto use the self-checkout
+        lane.\r\n\r\n373\r\n00:20:37,950 --> 00:20:40,282\r\nI've literally never
+        done it\r\nwithout the person having to\r\n\r\n374\r\n00:20:40,283 --> 00:20:42,614\r\ncome
+        over, and at that point,\r\nwhy can't they just check me out?\r\n\r\n375\r\n00:20:42,630
+        --> 00:20:44,080\r\nWow, this is a pretty cool shot.\r\n\r\n376\r\n00:20:44,100
+        --> 00:20:46,381\r\nIt seems like they're putting\r\nsome real money behind
+        this.\r\n\r\n377\r\n00:20:46,405 --> 00:20:49,422\r\nThat's got to be a good
+        sign.\r\n\r\n378\r\n00:20:52,820 --> 00:20:55,560\r\nSo your pop's moving\r\ninto
+        the basement, hmm?\r\n\r\n379\r\n00:20:55,660 --> 00:20:57,560\r\nTogether
+        under one roof again.\r\n\r\n380\r\n00:20:57,590 --> 00:21:00,699\r\n- This
+        is what we've been dreaming of!\r\n- Speak for yourself.\r\n\r\n381\r\n00:21:00,700
+        --> 00:21:02,699\r\nI've been dreaming about\r\nmeeting Phoebe Bridgers.\r\n\r\n382\r\n00:21:02,700
+        --> 00:21:04,809\r\nAll we need now is a little nudge\r\n\r\n383\r\n00:21:04,810
+        --> 00:21:07,450\r\nto get them\r\nall the way back together.\r\n\r\n384\r\n00:21:07,480
+        --> 00:21:11,050\r\nEasy. You flood the basement.\r\nWhen your dad starts
+        to drown,\r\n\r\n385\r\n00:21:11,090 --> 00:21:14,290\r\nyour mom is forced
+        to save him\r\nand they're back in love.\r\n\r\n386\r\n00:21:14,330 --> 00:21:18,430\r\nOr
+        you all drown there, and become\r\na big happy family in heaven.\r\n\r\n387\r\n00:21:18,470
+        --> 00:21:21,669\r\nOr, I give them love letters I wrote\r\n\r\n388\r\n00:21:21,670
+        --> 00:21:24,850\r\n- and say they're from the other person.\r\n- Eh, that
+        works too.\r\n\r\n389\r\n00:21:24,950 --> 00:21:28,205\r\nBut if you do go
+        with that one,\r\nyou probably want to shut off\r\n\r\n390\r\n00:21:28,206
+        --> 00:21:31,858\r\nthe main water valve, like right now.\r\n\r\n391\r\n00:21:33,115
+        --> 00:21:35,989\r\n<i> <font color=\"cyan\">  sync & correction by f1nc0\r\n--
+        Addic7ed.com --  </font></i>\r\n\r\n"
+    headers:
+      Age:
+      - '2334'
+      CF-Cache-Status:
+      - HIT
+      CF-RAY:
+      - 892d08b798a248bb-LHR
+      Cache-Control:
+      - public, max-age=691200
+      Connection:
+      - keep-alive
+      Content-Type:
+      - text/srt
+      Date:
+      - Wed, 12 Jun 2024 21:46:30 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=HCnK9h8c5cD0FGc%2By0rZVOO5PQMjHnPoUTWhHUKu64oCagHAXnZ53wZvd2DWpbV9DhVak4lWK9A4Id0wcj%2F%2BTidoswfN42OWpy3iluFPUI5trc79ZBlt6FFl90SuIfKiRbcDFQ%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      alt-svc:
+      - h3=":443"; ma=86400
+      content-disposition:
+      - attachment; filename=Grimsburg.S01E01.WEB-EDITH.en.srt; filename*=UTF-8''Grimsburg.S01E01.WEB-EDITH.en.srt
+      etag:
+      - W/"018ceac7-5d4f-4f26-8d36-3efc4b948281-638403478840298590"
+      last-modified:
+      - Mon, 08 Jan 2024 21:58:04 GMT
+      vary:
+      - Accept-Encoding
+    status:
+      code: 200
+      message: OK
+version: 1

@@ -5,6 +5,7 @@ Changelog
 ^^^^^
 **release date:** *not released*
 
+* Change default encoding of downloaded subtitle to 'utf-8' (not the original encoding)
 * Switch podnapisi provider to use JSON API
 * Add support for episodes with season 0 in podnapisi provider
 * Disabled addic7ed provider due to required captcha for authentication

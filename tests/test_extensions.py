@@ -1,4 +1,10 @@
-from importlib.metadata import entry_points
+from sys import version_info
+
+if version_info >= (3, 10):
+    # 'group' keyword argument was introduced in 3.10
+    from importlib.metadata import entry_points
+else:
+    from importlib_metadata import entry_points  # type: ignore[assignment,no-redef,import-not-found]
 
 from subliminal.extensions import (
     RegistrableExtensionManager,
@@ -64,7 +70,7 @@ def test_registrable_extension_manager_unregister():
 
 
 def test_provider_manager():
-    setup_names = {ep.name for ep in entry_points() if ep.group == provider_manager.namespace}
+    setup_names = {ep.name for ep in entry_points(group=provider_manager.namespace)}
     internal_names = {
         parse_entry_point(iep, provider_manager.namespace).name for iep in provider_manager.internal_extensions
     }

@@ -67,6 +67,7 @@ test = [
     "pytest-flakes",
     "sympy",
     "vcrpy>=1.6.1",
+    "importlib_metadata>=4.6; python_version<'3.10'",
 ]
 dev = [
     "doc8",

@@ -190,14 +190,24 @@ class Subtitle:
         :rtype: bool
 
         """
-        text = self._text
+        # Compute self._text by calling the property
+        text = self.text
 
-        self.encoding = encoding
+        # Text is empty, maybe because the content was not decoded.
+        # Reencoding would erase the content, so return.
+        if not text:
+            return False
+
+        # Try re-encoding
         try:
-            self._content = text.encode(encoding=encoding)
+            new_content = text.encode(encoding=encoding)
         except UnicodeEncodeError:
             logger.exception('Cannot encode text to bytes with encoding: %s', encoding)
             return False
+
+        # Save the new encoding and new raw content
+        self.encoding = encoding
+        self._content = new_content
         return True
 
     def is_valid(self, *, auto_fix_srt: bool = False) -> bool:

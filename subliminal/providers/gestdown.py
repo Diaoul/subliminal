@@ -190,10 +190,10 @@ class GestdownProvider(Provider):
         # build the params
         if series_tvdb_id is not None:
             query = f'{self.server_url}/shows/external/tvdb/{series_tvdb_id}'
-            logger.info(f'Searching show ids for TVBD id {series_tvdb_id}')
+            logger.info('Searching show ids for TVBD id %s', series_tvdb_id)
         else:
             query = f'{self.server_url}/shows/search/{series}'
-            logger.info(f'Searching show ids for {series}')
+            logger.info('Searching show ids for %s', series)
 
         # make the search
         r = self.session.get(query, timeout=self.timeout)
@@ -209,7 +209,7 @@ class GestdownProvider(Provider):
         for show in result['shows']:
             if not series or sanitize(show['name']) == sanitize(series):
                 show_id = str(show['id'])
-                logger.debug(f'Found show id {show_id}')
+                logger.debug('Found show id %s', show_id)
                 return show_id
 
         logger.warning('Show id not found: suggestion does not match: %r', result)
@@ -328,7 +328,7 @@ class GestdownProvider(Provider):
             logger.debug('A show id must be provided, show_id=None is not allowed')
             return []
 
-        logger.info('Getting the subtitles list of show id %d, season %d', show_id, season)
+        logger.info('Getting the subtitles list of show id %s, season %d', show_id, season)
         if language is None:
             logger.debug('A language for the subtitle must be provided, language=None is not allowed')
             return []

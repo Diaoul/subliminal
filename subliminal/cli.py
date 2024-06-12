@@ -314,7 +314,14 @@ def cache(ctx: click.Context, clear_subliminal: bool) -> None:
     '--encoding',
     type=click.STRING,
     metavar='ENC',
-    help='Subtitle file encoding, default is to preserve original encoding.',
+    default='utf-8',
+    help='Force subtitle file encoding, default is utf-8.',
+)
+@click.option(
+    '--original-encoding',
+    is_flag=True,
+    default=False,
+    help='Preserve original subtitle file encoding.',
 )
 @click.option(
     '-s',
@@ -354,6 +361,7 @@ def download(
     age: timedelta | None,
     directory: str | None,
     encoding: str | None,
+    original_encoding: bool,
     single: bool,
     force: bool,
     hearing_impaired: bool,
@@ -373,6 +381,13 @@ def download(
     """
     # process parameters
     language_set = set(language)
+
+    # preserve original encoding
+    if original_encoding:
+        encoding = None
+    # no encoding specified, default to utf-8
+    elif encoding is None:
+        encoding = 'utf-8'
 
     debug = obj.get('debug', False)
     if debug:

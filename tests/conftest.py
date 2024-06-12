@@ -426,6 +426,12 @@ def episodes() -> dict[str, Episode]:
                 'napiprojekt': '95bdf8ca5716166e6ad1e030a4a6b5cd',
             },
         ),
+        'grimsburg_s01e01': Episode(
+            'Grimsburg - S01E01 - Pilot [720p.h265.AAC.Webrip].mkv',
+            'Grimsburg',
+            1,
+            1,
+        ),
     }
 
 

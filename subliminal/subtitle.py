@@ -227,7 +227,7 @@ class Subtitle:
             try:
                 parsed = self.parse_srt()
             except Exception:
-                msg = 'srt parsing failed, try pysubs2'
+                msg = 'srt parsing failed, subtitle is invalid'
                 logger.exception(msg)
             else:
                 if auto_fix_srt:

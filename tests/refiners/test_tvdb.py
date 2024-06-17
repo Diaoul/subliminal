@@ -11,6 +11,7 @@ from vcr import VCR  # type: ignore[import-untyped]
 vcr = VCR(
     path_transformer=lambda path: path + '.yaml',
     record_mode=os.environ.get('VCR_RECORD_MODE', 'once'),
+    decode_compressed_response=True,
     cassette_library_dir=os.path.realpath(os.path.join('tests', 'cassettes', 'tvdb')),
 )
 

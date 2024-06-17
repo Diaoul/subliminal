@@ -85,27 +85,46 @@ jobs:
           python -m pip install --upgrade pip
           pip install -e .[test]
       - name: run pytest --cov
+        env:
+          COVERAGE_FILE: ".coverage.${{ matrix.os }}.${{ matrix.python-version }}"
+          # Alternatively you can run coverage with the --parallel flag or add
+          # `parallel = True` in the coverage config file.
+          # If using pytest-cov, you can also add the `--cov-append` flag
+          # directly or through PYTEST_ADD_OPTS.
         run: |
-          set -e
-          pytest --cov=./ --cov-report=xml
-          : .coverage confuses coveralls, remove it
-          rm -f .coverage
-      - name: upload coverage data to coveralls
-        uses: coverallsapp/github-action@v2.2.3
+          pytest --cov --cov-report=xml
+      - name: Store coverage file
+        uses: actions/upload-artifact@v4
         with:
-          parallel: true
-          flag-name: python-${{ matrix.python-version }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-      - name: upload coverage data to codecov
-        uses: codecov/codecov-action@v4.1.0
-        with:
-          fail_ci_if_error: true
+          name: coverage-${{ matrix.os }}-${{ matrix.python-version }}
+          path: .coverage.${{ matrix.os }}.${{ matrix.python-version }}
 
-  coveralls-finish:
-    needs: test
-    if: github.event_name != 'schedule'
+  coverage:
+    name: Coverage
     runs-on: ubuntu-latest
+    needs: test
+    permissions:
+      pull-requests: write
+      contents: write
     steps:
-      - uses: coverallsapp/github-action@v2.2.3
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        id: download
         with:
-          parallel-finished: true
+          pattern: coverage-*
+          merge-multiple: true
+
+      - name: Coverage comment
+        id: coverage_comment
+        uses: py-cov-action/python-coverage-comment-action@v3
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MERGE_COVERAGE_FILES: true
+
+      - name: Store Pull Request comment to be posted
+        uses: actions/upload-artifact@v4
+        if: steps.coverage_comment.outputs.COMMENT_FILE_WRITTEN == 'true'
+        with:
+          name: python-coverage-comment-action
+          path: python-coverage-comment-action.txt

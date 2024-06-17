@@ -1,5 +1,6 @@
 # ruff: noqa: PT011, SIM115
 import os
+import sys
 from datetime import datetime, timedelta, timezone
 from typing import Any
 from unittest.mock import Mock
@@ -33,6 +34,12 @@ vcr = VCR(
     record_mode=os.environ.get('VCR_RECORD_MODE', 'once'),
     match_on=['method', 'scheme', 'host', 'port', 'path', 'query', 'body'],
     cassette_library_dir=os.path.realpath(os.path.join('tests', 'cassettes', 'core')),
+)
+
+
+unix_platform = pytest.mark.skipif(
+    not sys.platform.startswith('linux'),
+    reason='only on linux platform',
 )
 
 
@@ -655,6 +662,7 @@ def test_download_bad_subtitle(movies):
     assert subtitle.is_valid() is False
 
 
+@unix_platform
 def test_scan_archive_with_one_video(rar, mkv):
     if 'video' not in rar:
         return
@@ -664,6 +672,7 @@ def test_scan_archive_with_one_video(rar, mkv):
     assert actual.name == os.path.join(os.path.split(rar_file)[0], mkv['test1'])
 
 
+@unix_platform
 def test_scan_archive_with_multiple_videos(rar, mkv):
     if 'video' not in rar:
         return
@@ -673,18 +682,21 @@ def test_scan_archive_with_multiple_videos(rar, mkv):
     assert actual.name == os.path.join(os.path.split(rar_file)[0], mkv['test5'])
 
 
+@unix_platform
 def test_scan_archive_with_no_video(rar):
     with pytest.raises(ValueError) as excinfo:
         scan_archive(rar['simple'])
     assert excinfo.value.args == ('No video in archive',)
 
 
+@unix_platform
 def test_scan_bad_archive(mkv):
     with pytest.raises(ValueError) as excinfo:
         scan_archive(mkv['test1'])
     assert excinfo.value.args == ("'.mkv' is not a valid archive",)
 
 
+@unix_platform
 def test_scan_password_protected_archive(rar):
     with pytest.raises(ValueError) as excinfo:
         scan_archive(rar['pwd-protected'])

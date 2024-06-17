@@ -8,8 +8,9 @@ from vcr import VCR  # type: ignore[import-untyped]
 vcr = VCR(
     path_transformer=lambda path: path + '.yaml',
     record_mode=os.environ.get('VCR_RECORD_MODE', 'once'),
+    decode_compressed_response=True,
     match_on=['method', 'scheme', 'host', 'port', 'path', 'query', 'body'],
-    cassette_library_dir=os.path.realpath(os.path.realpath(os.path.join('tests', 'cassettes', 'tvsubtitles'))),
+    cassette_library_dir=os.path.realpath(os.path.join('tests', 'cassettes', 'tvsubtitles')),
 )
 
 

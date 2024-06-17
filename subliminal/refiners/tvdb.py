@@ -132,7 +132,7 @@ class TVDBClient:
     @property
     def token_expired(self) -> bool:
         """Check if the token expired."""
-        return datetime.now(timezone.utc) - self.token_date > self.token_lifespan
+        return datetime.now(timezone.utc) - self.token_date >= self.token_lifespan
 
     @property
     def token_needs_refresh(self) -> bool:
@@ -395,7 +395,8 @@ def refine(video: Video, *, apikey: str | None = None, force: bool = False, **kw
         # parse series year
         series_year = None
         if result['firstAired']:
-            series_year = datetime.strptime(result['firstAired'], '%Y-%m-%d').astimezone(timezone.utc).year
+            first_aired = datetime.strptime(result['firstAired'], '%Y-%m-%d').replace(tzinfo=timezone.utc)
+            series_year = first_aired.year
 
         # discard mismatches on year
         if video.year and series_year and video.year != series_year:

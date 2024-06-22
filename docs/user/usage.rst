@@ -16,6 +16,14 @@ Download English subtitles::
     only. Otherwise you will get banned from the providers for abuse due to too many requests. If subliminal didn't
     find subtitles for an old video, it's unlikely it will find subtitles for that video ever anyway.
 
+You can use a configuration file in the `TOML <https://toml.io/>`_ format with the ``-config-file/-c`` option. If no configuration file is
+provided, it looks for a ``subliminal.toml`` file in the default configuration folder for the application. This folder is
+`OS dependent <https://github.com/platformdirs/platformdirs>`_:
+
+- Linux: ``/home/<user>/.config/subliminal/subliminal.toml``
+- MacOS: ``/Users/<user>/Library/Application Support/subliminal/subliminal.toml``
+- Windows: ``C:\\Users\\<user>\\AppData\\Local\\Acme\\subliminal\\subliminal.toml``
+
 See :ref:`cli` for more details on the available commands and options.
 
 
@@ -23,6 +31,9 @@ Nautilus/Nemo integration
 -------------------------
 See the dedicated `project page <https://github.com/Diaoul/nautilus-subliminal>`_ for more information.
 
+Dolphin integration
+-------------------
+See `this Gist <https://gist.github.com/maurocolella/03a9f02c56b1a90c64f05683e2840d57>`_.
 
 High level API
 --------------

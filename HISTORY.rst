@@ -1,16 +1,29 @@
 Changelog
 ---------
 
-2.1.1
+2.2.0
 ^^^^^
 **release date:** *not released*
 
-* Change default encoding of downloaded subtitle to 'utf-8' (not the original encoding)
-* Switch podnapisi provider to use JSON API
-* Add support for episodes with season 0 in podnapisi provider
-* Disabled addic7ed provider due to required captcha for authentication
-* Disabled shooter provider since it doesn't filter by language
+* Drop python2 support, the supported versions are `>=3.8,<=3.12`.
+* Load CLI options from a configuration file with the ``--config-file/-c`` option (`#1084 <https://github.com/Diaoul/subliminal/pull/1084>`_).
+* Change default encoding of downloaded subtitles to 'utf-8' (not the original encoding). Use the ``--original-encoding`` cli option to recover the previous default behavior (`#1125 <https://github.com/Diaoul/subliminal/pull/1125>`_).
+* Add opensubtitlescom provider
+* Add gestdown provider
+* Add tmdb refiner (requires a personal API key)
+* Fix tvsubtitles provider
+* Fix opensubtitles provider
+* Fix napiprojekt provider
+* Fix podnapisi provider to use JSON API
+* Fix addic7ed provider
+* Remove thesubdb provider
+* Remove argenteam provider
+* Remove shooter provider
 * Remove legendastv provider
+* Use `pyproject.toml` to specify the package configurations.* Add pre-commit hook (`#1115 <https://github.com/Diaoul/subliminal/pull/1115>`_).
+* Use ruff to lint and format
+* Use mypy to check types
+* Add type annotations
 
 
 2.1.0

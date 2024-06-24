@@ -16,7 +16,7 @@ Download English subtitles::
     only. Otherwise you will get banned from the providers for abuse due to too many requests. If subliminal didn't
     find subtitles for an old video, it's unlikely it will find subtitles for that video ever anyway.
 
-You can use a configuration file in the `TOML <https://toml.io/>`_ format with the ``-config-file/-c`` option. If no configuration file is
+You can use a configuration file in the `TOML <https://toml.io/>`_ format with the ``--config/-c`` option. If no configuration file is
 provided, it looks for a ``subliminal.toml`` file in the default configuration folder for the application. This folder is
 `OS dependent <https://github.com/platformdirs/platformdirs>`_:
 

@@ -24,7 +24,20 @@ Changelog
 * Use ruff to lint and format
 * Use mypy to check types
 * Add type annotations
-
+* Drop dependencies: pysrt, appdirs, six, pytz
+* Add dependencies:
+    - click-option-group>=0.5.6
+    - platformdirs>=4.2
+    - pysubs2>=1.7
+    - srt>=3.5
+    - tomli>=2
+* Bump dependency versions:
+    - babelfish>=0.6.1
+    - chardet>=5.0
+    - click>=8.0
+    - dogpile.cache>=1.0
+    - enzyme>=0.5.0
+    - stevedore>=3.0
 
 2.1.0
 ^^^^^

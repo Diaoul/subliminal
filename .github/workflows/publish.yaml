@@ -11,6 +11,7 @@ on:
 permissions:
   contents: read
 
+# https://packaging.python.org/en/latest/guides/publishing-package-distribution-releases-using-github-actions-ci-cd-workflows/
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -30,11 +31,31 @@ jobs:
           name: Packages
           path: dist/*
 
+  publish-to-pypi:
+    needs: [deploy]
+    environment:
+      name: pypi
+      url: https://pypi.org/p/subliminal
+    permissions:
+      id-token: write
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')  # only publish to PyPI on tag pushes
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: Packages
+          path: dist
+      - name: Publish package
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          user: __token__
+          password: ${{ secrets.PYPI_API_TOKEN }}
+
   github-release:
     name: >-
       Sign the Python 🐍 distribution 📦 with Sigstore
       and upload them to GitHub Release
-    needs: [deploy]
+    needs: [publish-to-pypi]
     runs-on: ubuntu-latest
 
     permissions:
@@ -60,7 +81,6 @@ jobs:
         gh release create
         '${{ github.ref_name }}'
         --repo '${{ github.repository }}'
-        --draft
         --generate-notes
         --notes ""
     - name: Upload artifact signatures to GitHub Release
@@ -73,23 +93,3 @@ jobs:
         gh release upload
         '${{ github.ref_name }}' dist/**
         --repo '${{ github.repository }}'
-
-  publish-to-pypi:
-    needs: [github-release]
-    environment:
-      name: pypi
-      url: https://pypi.org/p/subliminal
-    permissions:
-      id-token: write
-    runs-on: ubuntu-latest
-    if: github.event_name == 'release' && github.event.action == 'published'
-    steps:
-      - uses: actions/download-artifact@v4
-        with:
-          name: Packages
-          path: dist
-      - name: Publish package
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          user: __token__
-          password: ${{ secrets.PYPI_API_TOKEN }}

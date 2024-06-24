@@ -181,7 +181,7 @@ refiners_config = OptionGroup('Refiners configuration')
 )
 @click.option(
     '-c',
-    '--config-file',
+    '--config',
     type=click.Path(dir_okay=False, path_type=pathlib.Path),
     default=default_config_path,
     callback=configure,

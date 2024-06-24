@@ -6,7 +6,7 @@ Changelog
 **release date:** *not released*
 
 * Drop python2 support, the supported versions are `>=3.8,<=3.12`.
-* Load CLI options from a configuration file with the ``--config-file/-c`` option (`#1084 <https://github.com/Diaoul/subliminal/pull/1084>`_).
+* Load CLI options from a configuration file with the ``--config/-c`` option (`#1084 <https://github.com/Diaoul/subliminal/pull/1084>`_).
 * Change default encoding of downloaded subtitles to 'utf-8' (not the original encoding). Use the ``--original-encoding`` cli option to recover the previous default behavior (`#1125 <https://github.com/Diaoul/subliminal/pull/1125>`_).
 * Add opensubtitlescom provider
 * Add gestdown provider

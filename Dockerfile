@@ -1,4 +1,4 @@
-FROM python:3.9.19-alpine3.20
+FROM python:3.12-alpine
 
 MAINTAINER Antoine Bertin <diaoulael@gmail.com>
 
@@ -8,8 +8,7 @@ ARG UNRAR_VERSION=6.2.6
 
 RUN \
 if [ "$BUILD_WITH_UNRAR" = true ]; then \
-    apk add -U --update --no-cache --virtual=build-dependencies \
-    build-base curl && \
+    apk add -U --update --no-cache --virtual=build-dependencies build-base curl && \
     echo "**** install unrar from source ****" && \
     mkdir /tmp/unrar && \
     curl -o /tmp/unrar.tar.gz -L "https://www.rarlab.com/rar/unrarsrc-${UNRAR_VERSION}.tar.gz" && \
@@ -19,7 +18,7 @@ if [ "$BUILD_WITH_UNRAR" = true ]; then \
     install -v -m755 unrar /usr/local/bin && \
     apk del build-dependencies curl && \
     rm -rf /tmp/unrar /tmp/unrar.tar.gz; \
-    fi
+fi
 
 RUN mkdir -p /usr/src/app /usr/src/cache
 

@@ -3,7 +3,7 @@ Changelog
 
 2.2.0
 ^^^^^
-**release date:** *not released*
+**release date:** 2024-06-24
 
 * Drop python2 support, the supported versions are `>=3.8,<=3.12`.
 * Load CLI options from a configuration file with the ``--config/-c`` option (`#1084 <https://github.com/Diaoul/subliminal/pull/1084>`_).

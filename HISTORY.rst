@@ -1,6 +1,12 @@
 Changelog
 ---------
 
+Not yet released
+^^^^^^^^^^^^^^^^
+**release date:** TBA
+
+* Relax the ``platformdirs`` dependency requirement to ``>= 3``
+
 2.2.0
 ^^^^^
 **release date:** 2024-06-24

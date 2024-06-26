@@ -1,24 +1,11 @@
 """
 Providers list and download subtitles for a :class:`~subliminal.video.Video` object.
 
-A Provider is a ContextManager with `__enter__` and `__exit__` methods and two public methods:
-
-.. py:method:: list_subtitles(self, video, languages)
-
-    :param video: video to list subtitles for.
-    :type video: :class:`~subliminal.video.Video`
-    :param languages: languages to search for.
-    :type languages: set of :class:`~babelfish.language.Language`
-    :return: found subtitles.
-    :rtype: list of :class:`~subliminal.subtitle.Subtitle`
-    :raise: :class:`~subliminal.exceptions.ProviderError`
-
-
-.. py:method:: download_subtitle(self, subtitle)
-
-    :param subtitle: subtitle to download.
-    :type subtitle: :class:`~subliminal.subtitle.Subtitle`
-    :raise: :class:`~subliminal.exceptions.ProviderError`
+A Provider is a ContextManager with :meth:`~subliminal.Provider.__enter__` and
+:meth:`~subliminal.Provider.__exit__`
+methods and two public methods,
+:py:meth:`~subliminal.Provider.list_subtitles(video, languages)` and
+:py:meth:`~subliminal.Provider.download_subtitle(subtitle)`.
 
 """
 
@@ -51,7 +38,7 @@ logger = logging.getLogger(__name__)
 
 
 class SecLevelOneTLSAdapter(adapters.HTTPAdapter):
-    """``HTTPAdapter`` with security level set to 1."""
+    """:class:`~requests.adapters.HTTPAdapter` with security level set to 1."""
 
     def init_poolmanager(self, connections: int, maxsize: int, block: bool = False, **pool_kwargs: Any) -> None:  # noqa: FBT001, FBT002
         """Create and initialize the urllib3 PoolManager."""
@@ -67,7 +54,7 @@ class SecLevelOneTLSAdapter(adapters.HTTPAdapter):
 
 
 class TimeoutSafeTransport(SafeTransport):
-    """Timeout support for ``xmlrpc.client.SafeTransport``."""
+    """Timeout support for :class:`~xmlrpc.client.SafeTransport`."""
 
     timeout: float | None
 
@@ -76,7 +63,14 @@ class TimeoutSafeTransport(SafeTransport):
         self.timeout = timeout
 
     def make_connection(self, host: _HostType) -> HTTPSConnection:
-        """Make connection to host."""
+        """Make connection to host.
+
+        :param host: the connection host.
+        :type host: :class:`~xmlrpc.client._HostType`
+        :return: the HTTPS connection.
+        :rtype: :class:`~http.client import HTTPSConnection`
+
+        """
         c = SafeTransport.make_connection(self, host)
         c.timeout = self.timeout
 
@@ -84,10 +78,10 @@ class TimeoutSafeTransport(SafeTransport):
 
 
 class ParserBeautifulSoup(BeautifulSoup):
-    """A ``bs4.BeautifulSoup`` that picks the first parser available in `parsers`.
+    """A :class:`~bs4.BeautifulSoup` that picks the first parser available in `parsers`.
 
-    :param markup: markup for the ``bs4.BeautifulSoup``.
-    :param list parsers: parser names, in order of preference.
+    :param (str | bytes) markup: markup for the :class:`~bs4.BeautifulSoup`.
+    :param list[str] parsers: parser names, in order of preference.
 
     """
 
@@ -127,7 +121,7 @@ class Provider(Generic[S]):
 
     If any configuration is possible for the provider, like credentials, it must take place during instantiation.
 
-    :raise: :class:`~subliminal.exceptions.ConfigurationError` if there is a configuration error
+    :raises: :class:`~subliminal.exceptions.ConfigurationError` if there is a configuration error
 
     """
 

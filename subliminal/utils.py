@@ -174,7 +174,7 @@ def is_iterable(obj: Any) -> TypeGuard[Iterable]:
 def ensure_list(value: T | Sequence[T] | None) -> list[T]:
     """Ensure to return a list of values.
 
-    From rebulk.loose.ensure_list
+    From :func:`rebulk.loose.ensure_list`.
     """
     if value is None:
         return []

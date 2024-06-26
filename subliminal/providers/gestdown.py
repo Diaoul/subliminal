@@ -237,10 +237,10 @@ class GestdownProvider(Provider):
 
         :param str show_id: the show id.
         :param int season: the season to query.
-        :param :class:`~babelfish.language.Language` language: the language of the subtitles.
+        :param language: the language of the subtitles.
+        :type language: :class:`~babelfish.language.Language`
         :return: the list of found subtitles (as dicts).
         :rtype: list[dict[str, Any]]
-
         """
         if self.session is None:
             raise NotInitializedProviderError
@@ -274,10 +274,10 @@ class GestdownProvider(Provider):
         :param str show_id: the show id.
         :param int season: the season to query.
         :param int episode: the episode to query.
-        :param :class:`~babelfish.language.Language` language: the language of the subtitles.
+        :param language: the language of the subtitles.
+        :type language: :class:`~babelfish.language.Language`
         :return: the list of found subtitles (as dicts).
         :rtype: list[dict[str, Any]]
-
         """
         if self.session is None:
             raise NotInitializedProviderError
@@ -318,7 +318,8 @@ class GestdownProvider(Provider):
         :param str series: the series title.
         :param int season: the season number.
         :param int episode: the episode number.
-        :param :class:`~babelfish.language.Language` language: the language of the subtitles.
+        :param language: the language of the subtitles.
+        :type language: :class:`~babelfish.language.Language`
         :return: the list of found subtitles.
         :rtype: list[GestdownSubtitle]
 

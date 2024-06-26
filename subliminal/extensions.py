@@ -13,7 +13,7 @@ if TYPE_CHECKING:
 
 
 class RegistrableExtensionManager(ExtensionManager):
-    """:class:~stevedore.extensions.ExtensionManager` with support for registration.
+    """:class:`stevedore.extensions.ExtensionManager` with support for registration.
 
     It allows loading of internal extensions without setup and registering/unregistering additional extensions.
 
@@ -23,9 +23,9 @@ class RegistrableExtensionManager(ExtensionManager):
     * Internal extensions
     * Registered extensions
 
-    :param str namespace: namespace argument for :class:~stevedore.extensions.ExtensionManager`.
+    :param str namespace: namespace argument for :class:`stevedore.extensions.ExtensionManager`.
     :param list internal_extensions: internal extensions to use with entry point syntax.
-    :param kwargs: additional parameters for the :class:~stevedore.extensions.ExtensionManager` constructor.
+    :param kwargs: additional parameters for the :class:`stevedore.extensions.ExtensionManager` constructor.
 
     """
 

@@ -117,7 +117,8 @@ class Video:
     :param str audio_codec: codec of the main audio stream.
     :param dict hashes: hashes of the video file by provider names.
     :param int size: size of the video file in bytes.
-    :param set subtitle_languages: existing subtitle languages.
+    :param subtitle_languages: existing subtitle languages.
+    :type subtitle_languages: set[:class:`~babelfish.language.Language`]
     :param int year: year of the video.
     :param country: Country of the video.
     :type country: :class:`~babelfish.country.Country`
@@ -399,7 +400,7 @@ class Movie(Video):
     :param int year: year of the movie.
     :param country: Country of the movie.
     :type country: :class:`~babelfish.country.Country`
-    :param list alternative_titles: alternative titles of the movie
+    :param list[str] alternative_titles: alternative titles of the movie
     :param kwargs: additional parameters for the :class:`Video` constructor.
 
     """

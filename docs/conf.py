@@ -73,7 +73,7 @@ release = subliminal.__version__
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+# language = None
 
 # There are two options for replacing |today|: either, you set today to some
 # non-false value, then it is used:
@@ -304,7 +304,6 @@ intersphinx_mapping = {
     'guessit': ('https://guessit.readthedocs.org/en/latest', None),
     'babelfish': ('https://babelfish.readthedocs.org/en/latest', None),
     'dogpilecache': ('https://dogpilecache.sqlalchemy.org/en/latest', None),
-    'dogpilecore': ('https://dogpilecore.readthedocs.org/en/latest', None),
     'stevedore': ('https://docs.openstack.org/stevedore/latest', None),
     'click': ('https://click.palletsprojects.com/en/latest/', None),
 }

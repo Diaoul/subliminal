@@ -5,6 +5,7 @@ Not yet released
 ^^^^^^^^^^^^^^^^
 **release date:** TBA
 
+* Add example subliminal.toml to documentation and fix documentation.
 * [CLI] show the message about the config file only with the ``--debug`` option.
 * Relax the ``platformdirs`` dependency requirement to ``>= 3``
 

@@ -5,6 +5,11 @@ Refiners
 .. automodule:: subliminal.refiners
 
 
+Hash
+--------
+.. autofunction:: subliminal.refiners.hash.refine
+
+
 Metadata
 --------
 .. autofunction:: subliminal.refiners.metadata.refine

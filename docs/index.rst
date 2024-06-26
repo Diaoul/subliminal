@@ -5,7 +5,7 @@
 
 Welcome to subliminal!
 ======================
-Subliminal is a python 2.7+ library to search and download subtitles.
+Subliminal is a python3 library to search and download subtitles.
 It comes with an easy to use yet powerful :abbr:`CLI (command-line interface)` suitable for direct use or cron jobs.
 
 

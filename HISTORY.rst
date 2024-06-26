@@ -5,6 +5,7 @@ Not yet released
 ^^^^^^^^^^^^^^^^
 **release date:** TBA
 
+* [CLI] show the message about the config file only with the ``--debug`` option.
 * Relax the ``platformdirs`` dependency requirement to ``>= 3``
 
 2.2.0

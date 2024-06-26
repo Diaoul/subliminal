@@ -2,13 +2,14 @@
 cache_dir = "~/.cache/subliminal"
 
 [provider.opensubtitlescom]
-username = "python-subliminal-test"
+username = "subliminal"
 password = "subliminal"
 apikey = "mij33pjc3kOlup1qOKxnWWxvle2kFbMH"
 
 [provider.addic7ed]
 username = "subliminal"
 password = "subliminal"
+timeout = 20
 
 [refiner.omdb]
 apikey = "44d5b275"
@@ -18,7 +19,7 @@ apikey = "xxxxxxxxx"
 
 [download]
 provider = ["addic7ed", "opensubtitlescom", "opensubtitles"]
-refiner = ["metadata", "hash", "omdb", "tvdb"]
+refiner = ["metadata", "hash", "omdb", "tmdb"]
 language = ["fr", "en", "pt-br"]
 encoding = "utf-8"
 min_score = 50

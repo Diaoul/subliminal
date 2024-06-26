@@ -118,6 +118,7 @@ class AgeParamType(click.ParamType):
 def configure(ctx: click.Context, param: click.Parameter | None, filename: str | os.PathLike) -> None:
     """Read a configuration file."""
     filename = pathlib.Path(filename).expanduser()
+    msg = ''
     toml_dict = {}
     if filename.is_file():
         try:
@@ -125,13 +126,10 @@ def configure(ctx: click.Context, param: click.Parameter | None, filename: str |
                 toml_dict = tomli.load(f)
         except tomli.TOMLDecodeError:
             msg = f'Cannot read the configuration file at {filename}'
-            click.echo(msg)
         else:
             msg = f'Using configuration file at {filename}'
-            click.echo(msg)
     else:
         msg = 'Not using any configuration file.'
-        click.echo(msg)
 
     options = {}
 
@@ -148,7 +146,11 @@ def configure(ctx: click.Context, param: click.Parameter | None, filename: str |
     providers_dict = toml_dict.setdefault('provider', {})
     refiners_dict = toml_dict.setdefault('refiner', {})
 
-    ctx.obj = {'provider_configs': providers_dict, 'refiner_configs': refiners_dict}
+    ctx.obj = {
+        '__config__': {'dict': toml_dict, 'debug_message': msg},
+        'provider_configs': providers_dict,
+        'refiner_configs': refiners_dict,
+    }
     ctx.default_map = options
 
 
@@ -254,6 +256,9 @@ def subliminal(
         handler.setFormatter(logging.Formatter(logging.BASIC_FORMAT))
         logging.getLogger('subliminal').addHandler(handler)
         logging.getLogger('subliminal').setLevel(logging.DEBUG)
+        # log about the config file
+        msg = ctx.obj['__config__']['debug_message']
+        logger.info(msg)
 
     ctx.obj['debug'] = debug
     # provider configs

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 __title__: str = 'subliminal'
-__version__: str = '2.2.0'
+__version__: str = '2.2.1'
 __short_version__: str = '.'.join(__version__.split('.')[:2])
 __author__: str = 'Antoine Bertin'
 __license__: str = 'MIT'

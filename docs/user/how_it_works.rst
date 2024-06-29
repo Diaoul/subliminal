@@ -30,7 +30,7 @@ Scoring
 Rating subtitles and comparing them is probably the most difficult part and this is where subliminal excels with its
 powerful scoring algorithm.
 
-Using `guessit <https://guessit.readthedocs.org>`_ and `enzyme <https://enzyme.readthedocs.org>`_, subliminal extracts
+Using `guessit <https://guessit.readthedocs.org>`_ and `knowit <https://github.com/ratoaq2/knowit>`_, subliminal extracts
 properties of the video and match them with the properties of the subtitles found with the providers.
 
 Equations in :mod:`subliminal.score` give a score to each property (called a match). The more matches the video and
@@ -42,7 +42,7 @@ Libraries
 Various libraries are used by subliminal and are key to its success:
 
 * `guessit <https://guessit.readthedocs.org>`_ to guess information from filenames
-* `enzyme <https://enzyme.readthedocs.org>`_ to detect embedded subtitles in videos and read other video metadata
+* `knowit <https://github.com/ratoaq2/knowit>`_ to detect embedded subtitles in videos and read other video metadata
 * `babelfish <https://babelfish.readthedocs.org>`_ to work with languages
 * `requests <https://requests.readthedocs.org/>`_ to make human readable HTTP requests
 * `BeautifulSoup <https://www.crummy.com/software/BeautifulSoup/>`_ to parse HTML and XML

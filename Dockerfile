@@ -20,12 +20,16 @@ if [ "$BUILD_WITH_UNRAR" = true ]; then \
     rm -rf /tmp/unrar /tmp/unrar.tar.gz; \
 fi
 
+# install libmediainfo for metadata refiner
+RUN apk add --no-cache libmediainfo
+
 RUN mkdir -p /usr/src/app /usr/src/cache
 
 WORKDIR /usr/src/app
 VOLUME /usr/src/cache
 
 COPY . /usr/src/app
+RUN python -m pip install -U pip
 RUN python -m pip install .
 
 

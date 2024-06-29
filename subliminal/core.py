@@ -368,11 +368,34 @@ def check_video(
     return True
 
 
+def parse_subtitle_filename(subtitle_filename: str, video_filename: str) -> Subtitle | None:
+    """Parse the subtitle filename to extract the language."""
+    fileroot, fileext = os.path.splitext(video_filename)
+
+    # keep only valid subtitle filenames
+    if not subtitle_filename.startswith(fileroot) or not subtitle_filename.lower().endswith(SUBTITLE_EXTENSIONS):
+        return None
+
+    # extract the potential language code
+    language = Language('und')
+    language_code = subtitle_filename[len(fileroot) : -len(os.path.splitext(subtitle_filename)[1])]
+    language_code = language_code.replace(fileext, '').replace('_', '-')[1:]
+    if language_code:
+        try:
+            language = Language.fromietf(language_code)
+        except (ValueError, LanguageReverseError):
+            logger.exception('Cannot parse language code %r', language_code)
+
+    # TODO: extract the hearing_impaired or forced attribute
+
+    return Subtitle(language, subtitle_id=subtitle_filename)
+
+
 def search_external_subtitles(
     path: str | os.PathLike,
     *,
     directory: str | os.PathLike | None = None,
-) -> dict[str, Language]:
+) -> dict[str, Subtitle]:
     """Search for external subtitles from a video `path` and their associated language.
 
     Unless `directory` is provided, search will be made in the same directory as the video file.
@@ -386,25 +409,15 @@ def search_external_subtitles(
     # split path
     dirpath, filename = os.path.split(path)
     dirpath = dirpath or '.'
-    fileroot, fileext = os.path.splitext(filename)
 
     # search for subtitles
     subtitles = {}
     for p in os.listdir(directory or dirpath):
-        # keep only valid subtitle filenames
-        if not p.startswith(fileroot) or not p.lower().endswith(SUBTITLE_EXTENSIONS):
+        subtitle = parse_subtitle_filename(p, filename)
+        if subtitle is None:
             continue
 
-        # extract the potential language code
-        language = Language('und')
-        language_code = p[len(fileroot) : -len(os.path.splitext(p)[1])].replace(fileext, '').replace('_', '-')[1:]
-        if language_code:
-            try:
-                language = Language.fromietf(language_code)
-            except (ValueError, LanguageReverseError):
-                logger.exception('Cannot parse language code %r', language_code)
-
-        subtitles[p] = language
+        subtitles[p] = subtitle
 
     logger.debug('Found subtitles %r', subtitles)
 

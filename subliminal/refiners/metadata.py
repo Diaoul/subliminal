@@ -10,6 +10,8 @@ from babelfish import Error as BabelfishError  # type: ignore[import-untyped]
 from babelfish import Language  # type: ignore[import-untyped]
 from enzyme import MKV  # type: ignore[import-untyped]
 
+from subliminal.subtitle import EmbeddedSubtitle
+
 if TYPE_CHECKING:
     from subliminal.video import Video
 
@@ -24,7 +26,7 @@ def refine(video: Video, *, embedded_subtitles: bool = True, **kwargs: Any) -> V
       * :attr:`~subliminal.video.Video.resolution`
       * :attr:`~subliminal.video.Video.video_codec`
       * :attr:`~subliminal.video.Video.audio_codec`
-      * :attr:`~subliminal.video.Video.subtitle_languages`
+      * :attr:`~subliminal.video.Video.subtitles`
 
     :param bool embedded_subtitles: search for embedded subtitles.
 
@@ -106,7 +108,7 @@ def refine(video: Video, *, embedded_subtitles: bool = True, **kwargs: Any) -> V
                 else:
                     embedded_subtitle_languages.add(Language('und'))
             logger.debug('Found embedded subtitle %r', embedded_subtitle_languages)
-            video.subtitle_languages |= embedded_subtitle_languages
+            video.subtitles |= {EmbeddedSubtitle(lang) for lang in embedded_subtitle_languages}
     else:
         logger.debug('MKV has no subtitle track')
 

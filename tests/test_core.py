@@ -14,7 +14,6 @@ from subliminal.core import (
     download_best_subtitles,
     download_subtitles,
     list_subtitles,
-    refine,
     save_subtitles,
     scan_archive,
     scan_video,
@@ -115,7 +114,7 @@ def test_check_video_languages(movies):
     video = movies['man_of_steel']
     languages = {Language('fra'), Language('eng')}
     assert check_video(video, languages=languages)
-    video.subtitle_languages = languages
+    video.subtitles = {Subtitle(lang) for lang in languages}
     assert not check_video(video, languages=languages)
 
 
@@ -130,7 +129,7 @@ def test_check_video_undefined(movies):
     video = movies['man_of_steel']
     assert check_video(video, undefined=False)
     assert check_video(video, undefined=True)
-    video.subtitle_languages = {Language('und')}
+    video.subtitles = {Subtitle(Language('und'))}
     assert check_video(video, undefined=False)
     assert not check_video(video, undefined=True)
 
@@ -153,7 +152,8 @@ def test_search_external_subtitles(episodes, tmpdir):
     for path in expected_subtitles:
         tmpdir.ensure(path)
     subtitles = search_external_subtitles(video_path)
-    assert subtitles == expected_subtitles
+    subtitle_languages = {path: subtitle.language for path, subtitle in subtitles.items()}
+    assert subtitle_languages == expected_subtitles
 
 
 def test_search_external_subtitles_archive(movies, tmpdir):
@@ -173,7 +173,8 @@ def test_search_external_subtitles_archive(movies, tmpdir):
     for path in expected_subtitles:
         tmpdir.ensure(path)
     subtitles = search_external_subtitles(video_path)
-    assert subtitles == expected_subtitles
+    subtitle_languages = {path: subtitle.language for path, subtitle in subtitles.items()}
+    assert subtitle_languages == expected_subtitles
 
 
 def test_search_external_subtitles_no_directory(movies, tmpdir, monkeypatch):
@@ -185,7 +186,8 @@ def test_search_external_subtitles_no_directory(movies, tmpdir, monkeypatch):
     for path in expected_subtitles:
         tmpdir.ensure(path)
     subtitles = search_external_subtitles(video_name)
-    assert subtitles == expected_subtitles
+    subtitle_languages = {path: subtitle.language for path, subtitle in subtitles.items()}
+    assert subtitle_languages == expected_subtitles
 
 
 def test_search_external_subtitles_in_directory(episodes, tmpdir):
@@ -198,7 +200,8 @@ def test_search_external_subtitles_in_directory(episodes, tmpdir):
     for path in expected_subtitles:
         tmpdir.ensure('subtitles', path)
     subtitles = search_external_subtitles(video_name, directory=subtitles_directory)
-    assert subtitles == expected_subtitles
+    subtitle_languages = {path: subtitle.language for path, subtitle in subtitles.items()}
+    assert subtitle_languages == expected_subtitles
 
 
 def test_scan_video_movie(movies, tmpdir, monkeypatch):
@@ -243,35 +246,6 @@ def test_scan_video_episode(episodes, tmpdir, monkeypatch):
     assert scanned_video.title is None
     assert scanned_video.year is None
     assert scanned_video.tvdb_id is None
-
-
-def test_refine_video_metadata(mkv):
-    scanned_video = scan_video(mkv['test5'])
-    refine(scanned_video, episode_refiners=('metadata',), movie_refiners=('metadata',))
-    assert type(scanned_video) is Movie
-    assert scanned_video.name == mkv['test5']
-    assert scanned_video.source is None
-    assert scanned_video.release_group is None
-    assert scanned_video.resolution is None
-    assert scanned_video.video_codec == 'H.264'
-    assert scanned_video.audio_codec == 'AAC'
-    assert scanned_video.imdb_id is None
-    assert scanned_video.hashes == {
-        'opensubtitlescom': '49e2530ea3bd0d18',
-        'opensubtitles': '49e2530ea3bd0d18',
-    }
-    assert scanned_video.size == 31762747
-    assert scanned_video.subtitle_languages == {
-        Language('spa'),
-        Language('deu'),
-        Language('jpn'),
-        Language('und'),
-        Language('ita'),
-        Language('fra'),
-        Language('hun'),
-    }
-    assert scanned_video.title == 'test5'
-    assert scanned_video.year is None
 
 
 def test_scan_video_path_does_not_exist(movies):
@@ -493,7 +467,7 @@ def test_list_subtitles_episode_no_hash(episodes):
 def test_list_subtitles_no_language(episodes):
     video = episodes['dallas_s01e03']
     languages = {Language('eng')}
-    video.subtitle_languages = languages
+    video.subtitles = {Subtitle(lang) for lang in languages}
 
     subtitles = list_subtitles({video}, languages)
 
@@ -567,7 +541,7 @@ def test_download_best_subtitles_min_score(episodes):
 def test_download_best_subtitles_no_language(episodes):
     video = episodes['bbt_s07e05']
     languages = {Language('fra')}
-    video.subtitle_languages = languages
+    video.subtitles = {Subtitle(lang) for lang in languages}
     providers = ['gestdown']
 
     subtitles = download_best_subtitles({video}, languages, min_score=episode_scores['hash'], providers=providers)
@@ -578,7 +552,7 @@ def test_download_best_subtitles_no_language(episodes):
 def test_download_best_subtitles_undefined(episodes):
     video = episodes['bbt_s07e05']
     languages = {Language('und')}
-    video.subtitle_languages = languages
+    video.subtitles = {Subtitle(lang) for lang in languages}
     providers = ['gestdown']
 
     subtitles = download_best_subtitles(

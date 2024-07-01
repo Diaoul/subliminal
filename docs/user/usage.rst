@@ -160,5 +160,5 @@ We got ourselves a nice subtitle, now we can save it on the file system using :f
 
     >>> save_subtitles(video, [best_subtitle])
     [<PodnapisiSubtitle 'ZtAW' [hu]>]
-    >>> os.listdir()
-    ['The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.hu.srt']
+    >>> 'The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.hu.srt' in os.listdir()
+    True

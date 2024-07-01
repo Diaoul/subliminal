@@ -1,6 +1,8 @@
 Changelog
 ---------
 
+.. towncrier release notes start
+
 2.2.1
 ^^^^^
 **release date:** 2024-06-27

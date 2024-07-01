@@ -57,6 +57,7 @@ docs = [
     "sphinx",
     "sphinx_rtd_theme",
     "sphinxcontrib-programoutput",
+    "towncrier",
 ]
 test = [
     "mypy",
@@ -211,6 +212,52 @@ omit = ["subliminal/cli.py"]
 [tool.coverage.run]
 source = ["subliminal"]
 relative_files = true
+
+
+# https://towncrier.readthedocs.io/en/stable/tutorial.html
+[tool.towncrier]
+name = "subliminal"
+package = "subliminal"
+directory = "changelog.d"
+filename = "HISTORY.rst"
+title_format = "`version <https://github.com/Diaoul/subliminal/tree/{version}>`_ - {project_date}"
+issue_format = "`#{issue} <https://github.com/Diaoul/subliminal/issues/{issue}>`_"
+underlines = ["^", "-", "~"]
+
+[[tool.towncrier.type]]
+directory = "breaking"
+name = "Backwards-incompatible Changes"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "change"
+name = "Changes"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "provider"
+name = "Provider Changes"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "refiner"
+name = "Refiner Changes"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "deprecation"
+name = "Deprecations"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "doc"
+name = "Documentation"
+showcontent = false
+
+[[tool.towncrier.type]]
+directory = "misc"
+name = "Misc"
+showcontent = false
 
 
 # https://mypy.readthedocs.io/en/stable/config_file.html

@@ -78,7 +78,7 @@ class LanguageParamType(click.ParamType):
     name = 'language'
 
     def convert(self, value: str, param: click.Parameter | None, ctx: click.Context | None) -> Language:
-        """Convert ietf language to :class:`~babelfish.Language`."""
+        """Convert ietf language to :class:`~babelfish.language.Language`."""
         try:
             return Language.fromietf(value)
         except BabelfishError:

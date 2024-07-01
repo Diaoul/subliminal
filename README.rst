@@ -6,16 +6,12 @@ Subtitles, faster than your thoughts.
     :target: https://pypi.python.org/pypi/subliminal
     :alt: Latest Version
 
-.. image:: https://travis-ci.org/Diaoul/subliminal.svg?branch=develop
-    :target: https://travis-ci.org/Diaoul/subliminal
-    :alt: Travis CI build status
-
 .. image:: https://readthedocs.org/projects/subliminal/badge/?version=latest
     :target: https://subliminal.readthedocs.org/
     :alt: Documentation Status
 
-.. image:: https://coveralls.io/repos/Diaoul/subliminal/badge.svg?branch=develop&service=github
-    :target: https://coveralls.io/github/Diaoul/subliminal?branch=develop
+.. image:: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/Diaoul/subliminal/python-coverage-comment-action-data/endpoint.json
+    :target: https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/Diaoul/subliminal/python-coverage-comment-action-data/endpoint.json
     :alt: Code coverage
 
 .. image:: https://img.shields.io/github/license/Diaoul/subliminal.svg
@@ -77,13 +73,27 @@ Run subliminal in a docker container::
 
 Installation
 ------------
-Subliminal can be installed as a regular python module by running::
+For a better isolation with your system you should use a dedicated virtualenv.
+The preferred installation method is to use `pipx <https://github.com/pypa/pipx>`_ that does that for you::
 
-    $ [sudo] pip install subliminal
+    $ pipx install subliminal
 
-For a better isolation with your system you should use a dedicated virtualenv or install for your user only using
-the ``--user`` flag.
+Subliminal can be also be installed as a regular python module by running::
+
+    $ pip install --user subliminal
+
+If you want to modify the code, `fork <https://github.com/Diaoul/subliminal/fork>`_ this repo,
+clone your fork locally and install a development version::
+
+    $ git clone https://github.com/<my-username>/subliminal
+    $ cd subliminal
+    $ pip install --user -e '.[dev,test,docs]'
+
 
 Nautilus/Nemo integration
 -------------------------
 See the dedicated `project page <https://github.com/Diaoul/nautilus-subliminal>`_ for more information.
+
+Dolphin integration
+-------------------
+See this `Gist <https://gist.github.com/maurocolella/03a9f02c56b1a90c64f05683e2840d57>`_.

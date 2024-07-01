@@ -31,3 +31,12 @@ repos:
       - id: doc8
         description: This hook runs doc8 for linting docs
         require_serial: true
+
+  - repo: local
+    hooks:
+    - id: changelog-fragment-filenames
+      name: changelog fragment
+      language: fail
+      entry: changelog fragment files must be named *.(breaking|change|provider|refiner|deprecation|doc|misc).rst
+      exclude: ^changelog.d/(\..*|towncrier_template.rst|.*\.(breaking|change|provider|refiner|deprecation|doc|misc).rst)
+      files: ^changelog.d/

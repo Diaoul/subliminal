@@ -22,6 +22,10 @@ Subtitles, faster than your thoughts.
     :alt: Join the chat at https://gitter.im/Diaoul/subliminal
     :target: https://gitter.im/Diaoul/subliminal
 
+.. image:: https://img.shields.io/discord/1256603445411184740?style=for-the-badge&label&logo=discord&logoColor=white&color=blue
+    :alt: Discord
+    :target: https://discord.gg/kXW6sWte9N
+
 
 :Project page: https://github.com/Diaoul/subliminal
 :Documentation: https://subliminal.readthedocs.org/

@@ -148,7 +148,7 @@ def handle_exception(e: Exception, msg: str) -> None:
 
     Exception traceback is only logged for specific cases.
 
-    :param exception e: The exception to handle.
+    :param Exception e: The exception to handle.
     :param str msg: The message to log.
     """
     if isinstance(e, (requests.Timeout, socket.timeout)):
@@ -174,7 +174,7 @@ def is_iterable(obj: Any) -> TypeGuard[Iterable]:
 def ensure_list(value: T | Sequence[T] | None) -> list[T]:
     """Ensure to return a list of values.
 
-    From :func:`rebulk.loose.ensure_list`.
+    From ``rebulk.loose.ensure_list``.
     """
     if value is None:
         return []

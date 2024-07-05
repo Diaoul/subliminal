@@ -18,4 +18,5 @@ Cache
 
 
 Refer to dogpile.cache's `region configuration documentation
-<http://dogpilecache.readthedocs.org/en/latest/usage.html#region-configuration>`_ to see how to configure the region
+<https://dogpilecache.sqlalchemy.org/en/latest/usage.html#region-configuration>`_
+to see how to configure the region.

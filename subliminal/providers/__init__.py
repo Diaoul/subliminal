@@ -1,12 +1,9 @@
 """
 Providers list and download subtitles for a :class:`~subliminal.video.Video` object.
 
-A Provider is a ContextManager with :meth:`~subliminal.Provider.__enter__` and
-:meth:`~subliminal.Provider.__exit__`
-methods and two public methods,
-:py:meth:`~subliminal.Provider.list_subtitles(video, languages)` and
-:py:meth:`~subliminal.Provider.download_subtitle(subtitle)`.
-
+A Provider is a ContextManager with ``__enter__`` and ``__exit__`` methods and
+two public methods: :meth:`~subliminal.providers.Provider.list_subtitles` and
+:meth:`~subliminal.providers.Provider.download_subtitle`.
 """
 
 from __future__ import annotations
@@ -16,6 +13,8 @@ import ssl
 from typing import TYPE_CHECKING, Any, ClassVar, Generic, TypeVar
 from xmlrpc.client import SafeTransport
 
+# Do not put babelfish in a TYPE_CHECKING block for intersphinx to work properly
+from babelfish import Language  # type: ignore[import-untyped]  # noqa: TCH002
 from bs4 import BeautifulSoup, FeatureNotFound
 from requests import adapters
 from urllib3 import poolmanager  # type: ignore[import-untyped]
@@ -29,9 +28,6 @@ if TYPE_CHECKING:
     from http.client import HTTPSConnection
     from types import TracebackType
     from typing import Self
-    from xmlrpc.client import _HostType
-
-    from babelfish import Language  # type: ignore[import-untyped]
 
 
 logger = logging.getLogger(__name__)
@@ -54,7 +50,7 @@ class SecLevelOneTLSAdapter(adapters.HTTPAdapter):
 
 
 class TimeoutSafeTransport(SafeTransport):
-    """Timeout support for :class:`~xmlrpc.client.SafeTransport`."""
+    """Timeout support for :library/xmlrpc.client:class:`~xmlrpc.client.SafeTransport`."""
 
     timeout: float | None
 
@@ -62,13 +58,13 @@ class TimeoutSafeTransport(SafeTransport):
         super().__init__(*args, **kwargs)
         self.timeout = timeout
 
-    def make_connection(self, host: _HostType) -> HTTPSConnection:
+    def make_connection(self, host: Any) -> HTTPSConnection:
         """Make connection to host.
 
         :param host: the connection host.
-        :type host: :class:`~xmlrpc.client._HostType`
+        :type host: ``xmlrpc.client._HostType``
         :return: the HTTPS connection.
-        :rtype: :class:`~http.client import HTTPSConnection`
+        :rtype: :library/http.client:class:`~http.client.HTTPSConnection`
 
         """
         c = SafeTransport.make_connection(self, host)

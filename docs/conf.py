@@ -39,6 +39,7 @@ extensions = [
     'sphinx.ext.intersphinx',
     'sphinx.ext.viewcode',
     'sphinxcontrib.programoutput',
+    'sphinx_autodoc_typehints',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -307,10 +308,22 @@ intersphinx_mapping = {
     'dogpilecache': ('https://dogpilecache.sqlalchemy.org/en/latest', None),
     'stevedore': ('https://docs.openstack.org/stevedore/latest', None),
     'click': ('https://click.palletsprojects.com/en/latest/', None),
+    'requests': ('https://docs.python-requests.org/en/latest/', None),
+    'sympy': ('https://docs.sympy.org/latest/', None),
+    'bs4': ('https://www.crummy.com/software/BeautifulSoup/bs4/doc/', None),
+    'importlib.metadata': ('https://docs.python.org/3/', '_intersphinx/importlib_metadata_objects.inv'),
 }
 
 
-# -- Options for autodoc -------------------------------------------------------
+# -- Options for autodoc -----------------------------------------------------
 autodoc_member_order = 'bysource'
 
 autodoc_default_flags = ['members']
+
+
+# -- Options for sphinx-autodoc-typehints ------------------------------------
+# https://github.com/tox-dev/sphinx-autodoc-typehints
+
+always_use_bars_union = True
+
+set_type_checking_flag = False

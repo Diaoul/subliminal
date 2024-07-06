@@ -186,10 +186,7 @@ class Provider(Generic[S]):
         """
         if not cls.check_types(video):
             return False
-        if cls.required_hash is not None and cls.required_hash not in video.hashes:
-            return False
-
-        return True
+        return cls.required_hash is None or cls.required_hash in video.hashes
 
     @classmethod
     def check_types(cls, video: Video) -> bool:

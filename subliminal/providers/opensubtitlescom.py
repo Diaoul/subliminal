@@ -675,7 +675,7 @@ class OpenSubtitlesComProvider(Provider):
         # fill the search criteria
         criteria = self._make_query(**kwargs)
 
-        subtitles = []
+        subtitles: list[OpenSubtitlesComSubtitle] = []
 
         for criterion in criteria:
             # add the language and query the server
@@ -695,8 +695,12 @@ class OpenSubtitlesComProvider(Provider):
                     imdb_match=imdb_match,
                     tmdb_match=tmdb_match,
                 )
-                logger.debug('Found subtitle %r', subtitle)
-                subtitles.append(subtitle)
+
+                # Some criteria are redundant, so skip duplicates
+                unique_ids = [s.id for s in subtitles]
+                if subtitle.id not in unique_ids:
+                    logger.debug('Found subtitle %r', subtitle)
+                    subtitles.append(subtitle)
 
         # filter out the machine translated subtitles
         if not allow_machine_translated:

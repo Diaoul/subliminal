@@ -230,7 +230,7 @@ def compute_score(subtitle: Subtitle, video: Video, *, hearing_impaired: bool | 
 
 
 if WITH_SYMPY:
-    from sympy import Eq, Symbol, solve, symbols
+    from sympy import Eq, Symbol, solve, symbols  # type: ignore[import-untyped]
 
     def solve_episode_equations() -> dict[Symbol, int]:
         """Solve the score equation for Episodes.

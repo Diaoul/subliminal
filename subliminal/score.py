@@ -33,17 +33,11 @@ Available matches:
 
 from __future__ import annotations
 
-import contextlib
 import logging
+from importlib.util import find_spec
 from typing import TYPE_CHECKING, Any
 
 from .video import Episode, Movie
-
-WITH_SYMPY = False
-with contextlib.suppress(ImportError):
-    import sympy  # noqa: F401
-
-    WITH_SYMPY = True
 
 if TYPE_CHECKING:
     from typing import Protocol
@@ -56,6 +50,9 @@ if TYPE_CHECKING:
 
         def __call__(self, subtitle: Subtitle, video: Video, *, hearing_impaired: bool | None) -> int: ...  # noqa: D102
 
+
+# Check if sympy is installed (for tests)
+WITH_SYMPY = find_spec('sympy') is not None
 
 logger = logging.getLogger(__name__)
 

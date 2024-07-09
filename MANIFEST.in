@@ -5,6 +5,7 @@ include Dockerfile
 include .dockerignore
 include .pre-commit-config.yaml
 include .readthedocs.yaml
+include .python-version-default
 include tox.ini
 
 graft docs

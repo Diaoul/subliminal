@@ -6,6 +6,7 @@ import codecs
 import logging
 import os
 from codecs import BOM_UTF8, BOM_UTF16_BE, BOM_UTF16_LE, BOM_UTF32_BE, BOM_UTF32_LE
+from enum import Enum
 from typing import TYPE_CHECKING, ClassVar
 
 import chardet
@@ -41,6 +42,16 @@ BOMS = (
     (BOM_UTF16_BE, 'utf-16-be'),
     (BOM_UTF16_LE, 'utf-16-le'),
 )
+
+
+#: Subtitle language types
+class LanguageType(Enum):
+    """Subtitle language types."""
+
+    UNKNOWN = 'unknown'
+    FORCED = 'forced'
+    NORMAL = 'normal'
+    HEARING_IMPAIRED = 'hearing_impaired'
 
 
 class Subtitle:
@@ -81,7 +92,7 @@ class Subtitle:
     subtitle_id: str
 
     #: Whether or not the subtitle is hearing impaired (None if unknown)
-    hearing_impaired: bool | None
+    language_type: LanguageType
 
     #: URL of the web page from which the subtitle can be downloaded
     page_link: str | None
@@ -95,16 +106,21 @@ class Subtitle:
     #: Framerate for frame-based formats (MicroDVD)
     fps: float | None
 
+    #: Whether the subtitle is embedded in the video or an external file
+    embedded: bool
+
     def __init__(
         self,
         language: Language,
         subtitle_id: str = '',
         *,
         hearing_impaired: bool | None = None,
+        forced: bool | None = None,
         page_link: str | None = None,
         encoding: str | None = None,
         subtitle_format: str | None = None,
         fps: float | None = None,
+        embedded: bool = False,
         guess_encoding: bool = True,
     ) -> None:
         self._content = None
@@ -115,10 +131,20 @@ class Subtitle:
 
         self.language = language
         self.subtitle_id = subtitle_id
-        self.hearing_impaired = hearing_impaired
         self.page_link = page_link
         self.subtitle_format = subtitle_format
         self.fps = fps
+        self.embedded = embedded
+
+        self.language_type = LanguageType.UNKNOWN
+        if hearing_impaired:
+            self.language_type = LanguageType.HEARING_IMPAIRED
+        elif forced:
+            self.language_type = LanguageType.FORCED
+        # if hearing_impaired or forced is specified to be False
+        # then for sure the subtitle is normal.
+        elif hearing_impaired is False or forced is False:
+            self.language_type = LanguageType.NORMAL
 
         self.encoding = None
         # validate the encoding
@@ -136,7 +162,25 @@ class Subtitle:
     @property
     def info(self) -> str:
         """Info of the subtitle, human readable. Usually the subtitle name for GUI rendering."""
-        return ''
+        return self.id
+
+    @property
+    def hearing_impaired(self) -> bool | None:
+        """Whether the subtitle is for hearing impaired."""
+        if self.language_type == LanguageType.HEARING_IMPAIRED:
+            return True
+        if self.language_type == LanguageType.UNKNOWN:
+            return None
+        return False
+
+    @property
+    def forced(self) -> bool | None:
+        """Whether the subtitle is a forced subtitle."""
+        if self.language_type == LanguageType.FORCED:
+            return True
+        if self.language_type == LanguageType.UNKNOWN:
+            return None
+        return False
 
     @property
     def content(self) -> bytes | None:
@@ -412,6 +456,42 @@ class Subtitle:
 
     def __repr__(self) -> str:
         return f'<{self.__class__.__name__} {self.id!r} [{self.language}]>'
+
+
+class EmbeddedSubtitle(Subtitle):
+    """Embedded subtitle."""
+
+    def __init__(
+        self,
+        language: Language,
+        *,
+        hearing_impaired: bool | None = None,
+        forced: bool | None = None,
+        encoding: str | None = None,
+        subtitle_format: str | None = None,
+    ) -> None:
+        subtitle_id = f'Embedded {language}'
+
+        super().__init__(
+            language,
+            subtitle_id,
+            hearing_impaired=hearing_impaired,
+            forced=forced,
+            encoding=encoding,
+            subtitle_format=subtitle_format,
+            embedded=True,
+        )
+
+    @property
+    def info(self) -> str:
+        """Info of the subtitle, human readable. Usually the subtitle name for GUI rendering."""
+        extra = ''
+        if self.language_type == LanguageType.HEARING_IMPAIRED:
+            extra = ' [hi]'
+        elif self.language_type == LanguageType.FORCED:
+            extra = ' [forced]'
+
+        return f'{self.id}{extra}'
 
 
 def get_subtitle_format(

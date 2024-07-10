@@ -347,6 +347,17 @@ def cache(ctx: click.Context, clear_subliminal: bool) -> None:
     default=0,
     help='Minimum score for a subtitle to be downloaded (0 to 100).',
 )
+@click.option(
+    '--language-type-suffix',
+    is_flag=True,
+    default=False,
+    help='Add a suffix to the saved subtitle name to indicate a hearing impaired or foreign part subtitle.',
+)
+@click.option(
+    '--language-format',
+    default='alpha2',
+    help='Format of the language code in the saved subtitle name. Default is a 2-letter language code.',
+)
 @click.option('-w', '--max-workers', type=click.IntRange(1, 50), default=None, help='Maximum number of threads to use.')
 @click.option(
     '-z/-Z',
@@ -371,6 +382,8 @@ def download(
     force: bool,
     hearing_impaired: bool,
     min_score: int,
+    language_type_suffix: bool,
+    language_format: str,
     max_workers: int,
     archives: bool,
     verbose: int,
@@ -548,7 +561,15 @@ def download(
     # save subtitles
     total_subtitles = 0
     for v, subtitles in downloaded_subtitles.items():
-        saved_subtitles = save_subtitles(v, subtitles, single=single, directory=directory, encoding=encoding)
+        saved_subtitles = save_subtitles(
+            v,
+            subtitles,
+            single=single,
+            directory=directory,
+            encoding=encoding,
+            language_type_suffix=language_type_suffix,
+            language_format=language_format,
+        )
         total_subtitles += len(saved_subtitles)
 
         if verbose > 0:

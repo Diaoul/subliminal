@@ -14,7 +14,7 @@ import srt  # type: ignore[import-untyped]
 from pysubs2 import SSAFile, UnknownFPSError  # type: ignore[import-untyped]
 
 if TYPE_CHECKING:
-    from babelfish import Language  # type: ignore[import-untyped]
+    from babelfish import Language
 
     from subliminal.video import Video
 
@@ -425,20 +425,41 @@ class Subtitle:
 
         return encoding_or_none
 
-    def get_path(self, video: Video, *, single: bool = False, extension: str | None = None) -> str:
+    def get_path(
+        self,
+        video: Video,
+        *,
+        single: bool = False,
+        extension: str | None = None,
+        language_type_suffix: bool = False,
+        language_format: str = 'alpha2',
+    ) -> str:
         """Get the subtitle path using the `video`, `language` and `extension`.
 
         :param video: path to the video.
         :type video: :class:`~subliminal.video.Video`
         :param bool single: save a single subtitle, default is to save one subtitle per language.
         :param (str | None) extension: the subtitle extension, default is to match to the subtitle format.
+        :param bool language_type_suffix: add a suffix 'hi' or 'forced' if needed. Default to False.
+        :param str language_format: format of the language suffix. Default to 'alpha2'.
         :return: path of the subtitle.
         :rtype: str
 
         """
         if extension is None:
             extension = FORMAT_TO_EXTENSION.get(self.subtitle_format, '.srt')  # type: ignore[arg-type]
-        return get_subtitle_path(video.name, None if single else self.language, extension=extension)
+
+        suffix = (
+            ''
+            if single
+            else get_subtitle_suffix(
+                self.language,
+                language_format=language_format,
+                language_type=self.language_type,
+                language_type_suffix=language_type_suffix,
+            )
+        )
+        return get_subtitle_path(video.name, suffix=suffix, extension=extension)
 
     def get_matches(self, video: Video) -> set[str]:
         """Get the matches against the `video`.
@@ -513,30 +534,82 @@ def get_subtitle_format(
     except UnknownFPSError:
         default_fps = 24
         return get_subtitle_format(text, subtitle_format=subtitle_format, fps=default_fps)
-    except Exception:
+    except Exception:  # pragma: no cover
         logger.exception('not a valid subtitle.')
     else:
         return str(obj.format)
-    return None
+    return None  # pragma: no cover
 
 
-def get_subtitle_path(video_path: str | os.PathLike, language: Language | None = None, extension: str = '.srt') -> str:
+def get_subtitle_suffix(
+    language: Language,
+    *,
+    language_format: str = 'alpha2',
+    language_type: LanguageType = LanguageType.UNKNOWN,
+    language_type_suffix: bool = False,
+) -> str:
+    """Get the subtitle suffix using the `language` and `language_type`.
+
+    :param language: language of the subtitle to put in the path.
+    :type language: :class:`~babelfish.language.Language`
+    :param str language_format: format of the language suffix. Default to 'alpha2'.
+    :param LanguageType language_type: the language type of the subtitle (hearing impaired or forced).
+    :param bool language_type_suffix: add a suffix 'hi' or 'forced' if needed. Default to False.
+    :return: suffix to the subtitle name.
+    :rtype: str
+
+    """
+    only_language_formats = ('alpha2', 'alpha3', 'alpha3b', 'alpha3t', 'name')
+
+    # Language part
+    language_part = ''
+    if language:
+        # Defined language, not Language('und')
+        try:
+            language_str = getattr(language, language_format)
+        except AttributeError:  # pragma: no cover
+            logger.warning('cannot convert language %s using scheme: %s', language, language_format)
+            language_str = str(language)
+
+        language_part = f'.{language_str}'
+        if language_format in only_language_formats:  # pragma: no branch
+            # Add country and script if present
+            if language.country is not None:
+                # add country
+                language_part += f'-{language.country!s}'
+            if language.script is not None:
+                # add script
+                language_part += f'-{language.script!s}'
+
+    # Language type part
+    language_type_part = ''
+    if language_type_suffix:
+        if language_type == LanguageType.HEARING_IMPAIRED:
+            language_type_part = '.hi'
+        elif language_type == LanguageType.FORCED:
+            language_type_part = '.forced'
+
+    return language_type_part + language_part
+
+
+def get_subtitle_path(
+    video_path: str | os.PathLike,
+    suffix: str = '',
+    extension: str = '.srt',
+) -> str:
     """Get the subtitle path using the `video_path` and `language`.
 
     :param str video_path: path to the video.
-    :param language: language of the subtitle to put in the path.
-    :type language: :class:`~babelfish.language.Language`
+    :param str suffix: suffix with the language of the subtitle to put in the path.
     :param str extension: extension of the subtitle.
     :return: path of the subtitle.
     :rtype: str
 
     """
+    # Full name and path
     subtitle_root = os.path.splitext(video_path)[0]
 
-    if language:
-        subtitle_root += '.' + str(language)
-
-    return subtitle_root + extension
+    return subtitle_root + suffix + extension
 
 
 def find_encoding_with_bom(data: bytes) -> list[str]:

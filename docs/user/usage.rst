@@ -162,3 +162,18 @@ We got ourselves a nice subtitle, now we can save it on the file system using :f
     [<PodnapisiSubtitle 'ZtAW' [hu]>]
     >>> 'The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.hu.srt' in os.listdir()
     True
+
+
+    .. testcleanup::
+
+        import os
+
+        downloaded = [
+            'The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.hu.srt',
+            'The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.en.srt',
+            'The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.srt',
+        ]
+        # Remove downloaded files
+        for f in downloaded:
+            if os.path.isfile(f):
+                os.remove(f)

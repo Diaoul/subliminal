@@ -14,7 +14,7 @@ region_dogpile.configure = Mock()  # type: ignore[method-assign]
 str_object = 'The Simpsons-S12E09-HOMЯ'
 bytes_object = b'The Simpsons-S12E09-HOM\xd0\xaf'
 namespace = 'namespace'
-expected_key = 'test_cache:fn|namespace|The Simpsons-S12E09-HOMЯ'  # Key is expected as native string
+expected_key = 'tests.test_cache:fn|namespace|The Simpsons-S12E09-HOMЯ'  # Key is expected as native string
 
 
 def fn():
@@ -29,7 +29,7 @@ def test_dogpile_cache_key_generator_unicode_string():
 
 def test_dogpile_cache_key_generator_byte_string():
     key = region_dogpile.function_key_generator(namespace, fn)(bytes_object)
-    assert key == 'test_cache:fn|namespace|' + str(b'The Simpsons-S12E09-HOM\xd0\xaf')
+    assert key == 'tests.test_cache:fn|namespace|' + str(b'The Simpsons-S12E09-HOM\xd0\xaf')
     assert key != expected_key  # Key is not as expected
     assert isinstance(key, str)
 

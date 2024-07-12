@@ -439,15 +439,22 @@ def episodes() -> dict[str, Episode]:
 def mkv():
     data_path = os.path.join(TESTS, 'data', 'mkv')
 
-    # download matroska test suite
-    if not os.path.exists(data_path) or len(os.listdir(data_path)) != 8:
+    wanted_files = [f'test{i}.mkv' for i in range(1, 9)]
+
+    # check for missing files
+    missing_files = [f for f in wanted_files if not os.path.exists(os.path.join(data_path, f))]
+    if missing_files:
+        # download matroska test suite
         r = requests.get('http://downloads.sourceforge.net/project/matroska/test_files/matroska_test_w1_1.zip')
         with ZipFile(BytesIO(r.content), 'r') as f:
-            f.extractall(data_path, [m for m in f.namelist() if os.path.splitext(m)[1] == '.mkv'])
+            for missing_file in missing_files:
+                f.extract(missing_file, data_path)
 
     # populate a dict with mkv files
     files = {}
     for path in os.listdir(data_path):
+        if path not in wanted_files:
+            continue
         name, _ = os.path.splitext(path)
         files[name] = os.path.join(data_path, path)
 

@@ -16,6 +16,8 @@ if TYPE_CHECKING:
 
     from babelfish import Country, Language  # type: ignore[import-untyped]
 
+    from subliminal.subtitle import Subtitle
+
 logger = logging.getLogger(__name__)
 
 #: Video extensions
@@ -115,10 +117,12 @@ class Video:
     :param str resolution: resolution of the video stream (480p, 720p, 1080p or 1080i).
     :param str video_codec: codec of the video stream.
     :param str audio_codec: codec of the main audio stream.
+    :param float frame_rate: frame rate in frames per seconds.
+    :param float duration: duration of the video in seconds.
     :param dict hashes: hashes of the video file by provider names.
     :param int size: size of the video file in bytes.
-    :param subtitle_languages: existing subtitle languages.
-    :type subtitle_languages: set[:class:`~babelfish.language.Language`]
+    :param subtitles: existing subtitles.
+    :type subtitles: set[:class:`~subliminal.subtitle.Subtitle`]
     :param int year: year of the video.
     :param country: Country of the video.
     :type country: :class:`~babelfish.country.Country`
@@ -148,14 +152,17 @@ class Video:
     #: Codec of the main audio stream
     audio_codec: str | None
 
+    #: Frame rate in frame per seconds
+    frame_rate: float | None
+
+    #: Duration of the video in seconds
+    duration: float | None
+
     #: Hashes of the video file by provider names
     hashes: dict[str, str]
 
     #: Size of the video file in bytes
     size: int | None
-
-    #: Existing subtitle languages
-    subtitle_languages: set[Language]
 
     #: Title of the video
     title: str | None
@@ -172,6 +179,9 @@ class Video:
     #: TMDB id of the video
     tmdb_id: int | None
 
+    #: Existing subtitle languages
+    subtitles: set[Subtitle]
+
     def __init__(
         self,
         name: str,
@@ -182,9 +192,11 @@ class Video:
         streaming_service: str | None = None,
         video_codec: str | None = None,
         audio_codec: str | None = None,
+        frame_rate: float | None = None,
+        duration: float | None = None,
         hashes: Mapping[str, str] | None = None,
         size: int | None = None,
-        subtitle_languages: Set[Language] | None = None,
+        subtitles: Set[Subtitle] | None = None,
         title: str | None = None,
         year: int | None = None,
         country: Country | None = None,
@@ -198,9 +210,11 @@ class Video:
         self.resolution = resolution
         self.video_codec = video_codec
         self.audio_codec = audio_codec
+        self.frame_rate = frame_rate
+        self.duration = duration
         self.hashes = dict(hashes) if hashes is not None else {}
         self.size = size
-        self.subtitle_languages = set(subtitle_languages) if subtitle_languages is not None else set()
+        self.subtitles = set(subtitles) if subtitles is not None else set()
         self.title = title
         self.year = year
         self.country = country
@@ -218,6 +232,11 @@ class Video:
         if not self.exists:
             return timedelta()
         return datetime.now(timezone.utc) - datetime.fromtimestamp(os.path.getmtime(self.name), timezone.utc)
+
+    @property
+    def subtitle_languages(self) -> set[Language]:
+        """Set of languages from the subtitles already found for the video."""
+        return {s.language for s in self.subtitles}
 
     @classmethod
     def fromguess(cls, name: str, guess: dict[str, Any]) -> Video:

@@ -419,7 +419,7 @@ def download(
                     errored_paths.append(p)
                     continue
                 if not force:
-                    video.subtitle_languages |= set(search_external_subtitles(video.name, directory=directory).values())
+                    video.subtitles |= set(search_external_subtitles(video.name, directory=directory).values())
 
                 if check_video(video, languages=language_set, age=age, undefined=single):
                     refine(
@@ -444,9 +444,7 @@ def download(
                     continue
                 for video in scanned_videos:
                     if not force:
-                        video.subtitle_languages |= set(
-                            search_external_subtitles(video.name, directory=directory).values()
-                        )
+                        video.subtitles |= set(search_external_subtitles(video.name, directory=directory).values())
                     if check_video(video, languages=language_set, age=age, undefined=single):
                         refine(
                             video,
@@ -470,7 +468,7 @@ def download(
                 errored_paths.append(p)
                 continue
             if not force:
-                video.subtitle_languages |= set(search_external_subtitles(video.name, directory=directory).values())
+                video.subtitles |= set(search_external_subtitles(video.name, directory=directory).values())
             if check_video(video, languages=language_set, age=age, undefined=single):
                 refine(
                     video,

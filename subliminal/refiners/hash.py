@@ -53,7 +53,7 @@ def hash_opensubtitles(video_path: str | os.PathLike) -> str | None:
     return f'{filehash:016x}'
 
 
-def hash_thesubdb(video_path: str | os.PathLike) -> str | None:
+def hash_thesubdb(video_path: str | os.PathLike) -> str | None:  # pragma: no cover
     """Compute a hash using TheSubDB's algorithm.
 
     :param str video_path: path of the video.
@@ -86,7 +86,7 @@ def hash_napiprojekt(video_path: str | os.PathLike) -> str | None:
     return hashlib.md5(data).hexdigest()  # noqa: S324
 
 
-def hash_shooter(video_path: str | os.PathLike) -> str | None:
+def hash_shooter(video_path: str | os.PathLike) -> str | None:  # pragma: no cover
     """Compute a hash using Shooter's algorithm.
 
     :param string video_path: path of the video

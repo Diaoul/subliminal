@@ -14,7 +14,7 @@ import srt  # type: ignore[import-untyped]
 from pysubs2 import SSAFile, UnknownFPSError  # type: ignore[import-untyped]
 
 if TYPE_CHECKING:
-    from babelfish import Language
+    from babelfish import Language  # type: ignore[import-untyped]
 
     from subliminal.video import Video
 

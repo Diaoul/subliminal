@@ -154,7 +154,9 @@ exclude_also = [
 show_missing = true
 skip_covered = true
 fail_under = 80
-omit = ["subliminal/cli.py"]
+omit = [
+    "subliminal/cli.py",
+]
 
 [tool.coverage.run]
 source = ["subliminal"]

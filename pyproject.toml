@@ -62,10 +62,8 @@ docs = [
 ]
 test = [
     "mypy",
-    "lxml",
     "pytest>=6.0",
     "pytest-cov",
-    "pytest-flakes",
     "pytest-xdist",
     "sympy",
     "vcrpy>=1.6.1",
@@ -131,6 +129,41 @@ version = {attr = "subliminal.__version__"}
 readme = {file = ["README.rst", "HISTORY.rst"]}
 
 
+# https://docs.pytest.org/en/6.2.x/customize.html
+[tool.pytest.ini_options]
+minversion = "6.0"
+testpaths = ["tests"]
+addopts = "--import-mode=importlib --doctest-glob='*.rst'"
+markers = [
+    "integration",
+    "converter",
+]
+doctest_optionflags = ["NORMALIZE_WHITESPACE", "IGNORE_EXCEPTION_DETAIL"]
+
+# https://coverage.readthedocs.io/en/latest/config.html
+[tool.coverage.report]
+exclude_also = [
+    "pragma: no.cover",
+    "if TYPE_CHECKING:",
+    "@overload",
+    "except ImportError",
+    "\\.\\.\\.",
+    "raise NotImplementedError()",
+    "if __name__ == .__main__.:",
+]
+show_missing = true
+skip_covered = true
+fail_under = 80
+omit = [
+    "subliminal/cli.py",
+]
+
+[tool.coverage.run]
+source = ["subliminal"]
+branch = true
+relative_files = true
+
+
 # https://docs.astral.sh/ruff/
 [tool.ruff]
 line-length = 120
@@ -184,37 +217,6 @@ ignore = [
 [tool.ruff.format]
 docstring-code-format = true
 quote-style = "single"
-
-# https://docs.pytest.org/en/6.2.x/customize.html
-[tool.pytest.ini_options]
-minversion = "6.0"
-testpaths = ["tests"]
-addopts = "--doctest-glob='*.rst'"
-markers = [
-    "integration",
-    "converter",
-]
-doctest_optionflags = ["NORMALIZE_WHITESPACE", "IGNORE_EXCEPTION_DETAIL"]
-
-# https://coverage.readthedocs.io/en/latest/config.html
-[tool.coverage.report]
-exclude_also = [
-    "pragma: no.cover",
-    "if TYPE_CHECKING:",
-    "@overload",
-    "except ImportError",
-    "\\.\\.\\.",
-    "raise NotImplementedError()",
-    "if __name__ == .__main__.:",
-]
-show_missing = true
-skip_covered = true
-fail_under = 80
-omit = ["subliminal/cli.py"]
-
-[tool.coverage.run]
-source = ["subliminal"]
-relative_files = true
 
 
 # https://towncrier.readthedocs.io/en/stable/tutorial.html

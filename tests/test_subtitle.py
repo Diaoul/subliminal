@@ -2,7 +2,7 @@ import os
 
 import pytest
 from babelfish import Language  # type: ignore[import-untyped]
-from subliminal.subtitle import Subtitle, fix_line_ending, get_subtitle_path
+from subliminal.subtitle import LanguageType, Subtitle, fix_line_ending, get_subtitle_path, get_subtitle_suffix
 
 
 def test_subtitle_text():
@@ -84,12 +84,46 @@ def test_get_subtitle_path(movies):
 
 def test_get_subtitle_path_language(movies):
     video = movies['man_of_steel']
-    assert get_subtitle_path(video.name, Language('por', 'BR')) == os.path.splitext(video.name)[0] + '.pt-BR.srt'
+    suffix = get_subtitle_suffix(Language('por', 'BR'))
+    assert get_subtitle_path(video.name, suffix) == os.path.splitext(video.name)[0] + '.pt-BR.srt'
 
 
 def test_get_subtitle_path_language_undefined(movies):
     video = movies['man_of_steel']
-    assert get_subtitle_path(video.name, Language('und')) == os.path.splitext(video.name)[0] + '.srt'
+    suffix = get_subtitle_suffix(Language('und'))
+    assert get_subtitle_path(video.name, suffix) == os.path.splitext(video.name)[0] + '.srt'
+
+
+def test_get_subtitle_path_hearing_impaired(movies):
+    video = movies['man_of_steel']
+    suffix = get_subtitle_suffix(
+        Language('deu', 'CH', 'Latn'),
+        language_type=LanguageType.HEARING_IMPAIRED,
+        language_type_suffix=True,
+    )
+    assert get_subtitle_path(video.name, suffix) == os.path.splitext(video.name)[0] + '.hi.de-CH-Latn.srt'
+
+
+def test_get_subtitle_path_forced(movies):
+    video = movies['man_of_steel']
+    suffix = get_subtitle_suffix(
+        Language('srp', None, 'Cyrl'),
+        language_type=LanguageType.FORCED,
+        language_type_suffix=True,
+    )
+    assert get_subtitle_path(video.name, suffix) == os.path.splitext(video.name)[0] + '.forced.sr-Cyrl.srt'
+
+
+def test_get_subtitle_path_alpha3(movies):
+    video = movies['man_of_steel']
+    suffix = get_subtitle_suffix(Language('fra', 'CA'), language_format='alpha3')
+    assert get_subtitle_path(video.name, suffix) == os.path.splitext(video.name)[0] + '.fra-CA.srt'
+
+
+def test_get_subtitle_path_extension(movies):
+    video = movies['man_of_steel']
+    suffix = get_subtitle_suffix(Language('zho', 'CN'), language_type_suffix=True)
+    assert get_subtitle_path(video.name, suffix, extension='.sub') == os.path.splitext(video.name)[0] + '.zh-CN.sub'
 
 
 def test_fix_line_ending():

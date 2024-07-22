@@ -82,7 +82,7 @@ Change into the newly created directory and after activating a virtual environme
 ```console
 $ cd subliminal
 $ python -m pip install --upgrade pip wheel  # PLEASE don't skip this step
-$ python -m pip install -e '.[dev]'
+$ python -m pip install -e '.[docs,test,dev]'  # you can omit `docs` if you are not planning to build docs
 ```
 
 At this point,

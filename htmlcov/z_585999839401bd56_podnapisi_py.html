@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Coverage for subliminal/providers/podnapisi.py: 89%</title>
+    <title>Coverage for subliminal/providers/podnapisi.py: 86%</title>
     <link rel="icon" sizes="32x32" href="favicon_32_cb_58284776.png">
     <link rel="stylesheet" href="style_cb_8e611ae1.css" type="text/css">
     <script src="coverage_html_cb_6fb7b396.js" defer></script>
@@ -12,7 +12,7 @@
     <div class="content">
         <h1>
             <span class="text">Coverage for </span><b>subliminal/providers/podnapisi.py</b>:
-            <span class="pc_cov">89%</span>
+            <span class="pc_cov">86%</span>
         </h1>
         <aside id="help_panel_wrapper">
             <input id="help_panel_state" type="checkbox">
@@ -26,6 +26,7 @@
                         <kbd>r</kbd>
                         <kbd>m</kbd>
                         <kbd>x</kbd>
+                        <kbd>p</kbd>
                         &nbsp; toggle line displays
                     </p>
                     <p>
@@ -58,6 +59,7 @@
             <button type="button" class="run button_toggle_run" value="run" data-shortcut="r" title="Toggle lines run">113<span class="text"> run</span></button>
             <button type="button" class="mis show_mis button_toggle_mis" value="mis" data-shortcut="m" title="Toggle lines missing">14<span class="text"> missing</span></button>
             <button type="button" class="exc show_exc button_toggle_exc" value="exc" data-shortcut="x" title="Toggle lines excluded">2<span class="text"> excluded</span></button>
+            <button type="button" class="par run show_par button_toggle_par" value="par" data-shortcut="p" title="Toggle lines partially run">9<span class="text"> partial</span></button>
         </h2>
         <p class="text">
             <a id="prevFileLink" class="nav" href="z_585999839401bd56_opensubtitlescom_py.html">&#xab; prev</a> &nbsp; &nbsp;
@@ -65,7 +67,7 @@
             <a id="nextFileLink" class="nav" href="z_585999839401bd56_tvsubtitles_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.6.0">coverage.py v7.6.0</a>,
-            created at 2024-07-22 21:36 +0000
+            created at 2024-07-22 23:09 +0000
         </p>
         <aside class="hidden">
             <button type="button" class="button_next_chunk" data-shortcut="j"></button>
@@ -189,7 +191,7 @@
     <p class="pln"><span class="n"><a id="t107" href="#t107">107</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t108" href="#t108">108</a></span><span class="t">    <span class="key">def</span> <span class="nam">terminate</span><span class="op">(</span><span class="nam">self</span><span class="op">)</span> <span class="op">-></span> <span class="key">None</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t109" href="#t109">109</a></span><span class="t">        <span class="str">"""Terminate the provider."""</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t110" href="#t110">110</a></span><span class="t">        <span class="key">if</span> <span class="nam">self</span><span class="op">.</span><span class="nam">session</span> <span class="key">is</span> <span class="key">None</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="par run show_par"><span class="n"><a id="t110" href="#t110">110</a></span><span class="t">        <span class="key">if</span> <span class="nam">self</span><span class="op">.</span><span class="nam">session</span> <span class="key">is</span> <span class="key">None</span><span class="op">:</span>&nbsp;</span><span class="r"><span class="annotate short">110&#x202F;&#x219B;&#x202F;111</span><span class="annotate long">line 110 didn't jump to line 111 because the condition on line 110 was never true</span></span></p>
     <p class="mis show_mis"><span class="n"><a id="t111" href="#t111">111</a></span><span class="t">            <span class="key">raise</span> <span class="nam">NotInitializedProviderError</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t112" href="#t112">112</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t113" href="#t113">113</a></span><span class="t">        <span class="nam">self</span><span class="op">.</span><span class="nam">session</span><span class="op">.</span><span class="nam">close</span><span class="op">(</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
@@ -214,7 +216,7 @@
     <p class="pln"><span class="n"><a id="t132" href="#t132">132</a></span><span class="t"><span class="str">        :rtype: list[PodnapisiSubtitle]</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t133" href="#t133">133</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t134" href="#t134">134</a></span><span class="t"><span class="str">        """</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t135" href="#t135">135</a></span><span class="t">        <span class="key">if</span> <span class="nam">self</span><span class="op">.</span><span class="nam">session</span> <span class="key">is</span> <span class="key">None</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="par run show_par"><span class="n"><a id="t135" href="#t135">135</a></span><span class="t">        <span class="key">if</span> <span class="nam">self</span><span class="op">.</span><span class="nam">session</span> <span class="key">is</span> <span class="key">None</span><span class="op">:</span>&nbsp;</span><span class="r"><span class="annotate short">135&#x202F;&#x219B;&#x202F;136</span><span class="annotate long">line 135 didn't jump to line 136 because the condition on line 135 was never true</span></span></p>
     <p class="mis show_mis"><span class="n"><a id="t136" href="#t136">136</a></span><span class="t">            <span class="key">raise</span> <span class="nam">NotInitializedProviderError</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t137" href="#t137">137</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t138" href="#t138">138</a></span><span class="t">        <span class="com"># set parameters, see http://www.podnapisi.net/forum/viewtopic.php?f=62&amp;t=26164#p212652</span>&nbsp;</span><span class="r"></span></p>
@@ -245,11 +247,11 @@
     <p class="pln"><span class="n"><a id="t163" href="#t163">163</a></span><span class="t">                <span class="com"># read xml elements</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t164" href="#t164">164</a></span><span class="t">                <span class="nam">pid</span> <span class="op">=</span> <span class="nam">data</span><span class="op">[</span><span class="str">'id'</span><span class="op">]</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t165" href="#t165">165</a></span><span class="t">                <span class="com"># ignore duplicates, see http://www.podnapisi.net/forum/viewtopic.php?f=62&amp;t=26164&amp;start=10#p213321</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t166" href="#t166">166</a></span><span class="t">                <span class="key">if</span> <span class="nam">pid</span> <span class="key">in</span> <span class="nam">pids</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="par run show_par"><span class="n"><a id="t166" href="#t166">166</a></span><span class="t">                <span class="key">if</span> <span class="nam">pid</span> <span class="key">in</span> <span class="nam">pids</span><span class="op">:</span>&nbsp;</span><span class="r"><span class="annotate short">166&#x202F;&#x219B;&#x202F;167</span><span class="annotate long">line 166 didn't jump to line 167 because the condition on line 166 was never true</span></span></p>
     <p class="mis show_mis"><span class="n"><a id="t167" href="#t167">167</a></span><span class="t">                    <span class="nam">logger</span><span class="op">.</span><span class="nam">debug</span><span class="op">(</span><span class="str">'Ignoring duplicate %r'</span><span class="op">,</span> <span class="nam">pid</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="mis show_mis"><span class="n"><a id="t168" href="#t168">168</a></span><span class="t">                    <span class="key">continue</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t169" href="#t169">169</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t170" href="#t170">170</a></span><span class="t">                <span class="key">if</span> <span class="nam">is_episode</span> <span class="key">and</span> <span class="nam">data</span><span class="op">[</span><span class="str">'movie'</span><span class="op">]</span><span class="op">[</span><span class="str">'type'</span><span class="op">]</span> <span class="op">==</span> <span class="str">'movie'</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="par run show_par"><span class="n"><a id="t170" href="#t170">170</a></span><span class="t">                <span class="key">if</span> <span class="nam">is_episode</span> <span class="key">and</span> <span class="nam">data</span><span class="op">[</span><span class="str">'movie'</span><span class="op">]</span><span class="op">[</span><span class="str">'type'</span><span class="op">]</span> <span class="op">==</span> <span class="str">'movie'</span><span class="op">:</span>&nbsp;</span><span class="r"><span class="annotate short">170&#x202F;&#x219B;&#x202F;171</span><span class="annotate long">line 170 didn't jump to line 171 because the condition on line 170 was never true</span></span></p>
     <p class="mis show_mis"><span class="n"><a id="t171" href="#t171">171</a></span><span class="t">                    <span class="nam">logger</span><span class="op">.</span><span class="nam">error</span><span class="op">(</span><span class="str">'Wrong type detected: movie for episode'</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="mis show_mis"><span class="n"><a id="t172" href="#t172">172</a></span><span class="t">                    <span class="key">continue</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t173" href="#t173">173</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
@@ -279,7 +281,7 @@
     <p class="run"><span class="n"><a id="t197" href="#t197">197</a></span><span class="t">                <span class="nam">pids</span><span class="op">.</span><span class="nam">add</span><span class="op">(</span><span class="nam">pid</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t198" href="#t198">198</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t199" href="#t199">199</a></span><span class="t">            <span class="com"># stop on last page</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t200" href="#t200">200</a></span><span class="t">            <span class="key">if</span> <span class="nam">int</span><span class="op">(</span><span class="nam">result</span><span class="op">[</span><span class="str">'page'</span><span class="op">]</span><span class="op">)</span> <span class="op">>=</span> <span class="nam">int</span><span class="op">(</span><span class="nam">result</span><span class="op">[</span><span class="str">'all_pages'</span><span class="op">]</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="par run show_par"><span class="n"><a id="t200" href="#t200">200</a></span><span class="t">            <span class="key">if</span> <span class="nam">int</span><span class="op">(</span><span class="nam">result</span><span class="op">[</span><span class="str">'page'</span><span class="op">]</span><span class="op">)</span> <span class="op">>=</span> <span class="nam">int</span><span class="op">(</span><span class="nam">result</span><span class="op">[</span><span class="str">'all_pages'</span><span class="op">]</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"><span class="annotate short">200&#x202F;&#x219B;&#x202F;204</span><span class="annotate long">line 200 didn't jump to line 204 because the condition on line 200 was always true</span></span></p>
     <p class="run"><span class="n"><a id="t201" href="#t201">201</a></span><span class="t">                <span class="key">break</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t202" href="#t202">202</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t203" href="#t203">203</a></span><span class="t">            <span class="com"># increment current page</span>&nbsp;</span><span class="r"></span></p>
@@ -295,12 +297,12 @@
     <p class="run"><span class="n"><a id="t213" href="#t213">213</a></span><span class="t">            <span class="nam">titles</span> <span class="op">=</span> <span class="op">[</span><span class="nam">video</span><span class="op">.</span><span class="nam">series</span><span class="op">,</span> <span class="op">*</span><span class="nam">video</span><span class="op">.</span><span class="nam">alternative_series</span><span class="op">]</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t214" href="#t214">214</a></span><span class="t">            <span class="nam">season</span> <span class="op">=</span> <span class="nam">video</span><span class="op">.</span><span class="nam">season</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t215" href="#t215">215</a></span><span class="t">            <span class="nam">episode</span> <span class="op">=</span> <span class="nam">video</span><span class="op">.</span><span class="nam">episode</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t216" href="#t216">216</a></span><span class="t">        <span class="key">elif</span> <span class="nam">isinstance</span><span class="op">(</span><span class="nam">video</span><span class="op">,</span> <span class="nam">Movie</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="par run show_par"><span class="n"><a id="t216" href="#t216">216</a></span><span class="t">        <span class="key">elif</span> <span class="nam">isinstance</span><span class="op">(</span><span class="nam">video</span><span class="op">,</span> <span class="nam">Movie</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"><span class="annotate short">216&#x202F;&#x219B;&#x202F;219</span><span class="annotate long">line 216 didn't jump to line 219 because the condition on line 216 was always true</span></span></p>
     <p class="run"><span class="n"><a id="t217" href="#t217">217</a></span><span class="t">            <span class="nam">titles</span> <span class="op">=</span> <span class="op">[</span><span class="nam">video</span><span class="op">.</span><span class="nam">title</span><span class="op">,</span> <span class="op">*</span><span class="nam">video</span><span class="op">.</span><span class="nam">alternative_titles</span><span class="op">]</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t218" href="#t218">218</a></span><span class="t">        <span class="key">else</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p class="mis show_mis"><span class="n"><a id="t219" href="#t219">219</a></span><span class="t">            <span class="key">return</span> <span class="op">[</span><span class="op">]</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t220" href="#t220">220</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t221" href="#t221">221</a></span><span class="t">        <span class="key">for</span> <span class="nam">title</span> <span class="key">in</span> <span class="nam">titles</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="par run show_par"><span class="n"><a id="t221" href="#t221">221</a></span><span class="t">        <span class="key">for</span> <span class="nam">title</span> <span class="key">in</span> <span class="nam">titles</span><span class="op">:</span>&nbsp;</span><span class="r"><span class="annotate short">221&#x202F;&#x219B;&#x202F;230</span><span class="annotate long">line 221 didn't jump to line 230 because the loop on line 221 didn't complete</span></span></p>
     <p class="run"><span class="n"><a id="t222" href="#t222">222</a></span><span class="t">            <span class="nam">subtitles</span> <span class="op">=</span> <span class="op">[</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t223" href="#t223">223</a></span><span class="t">                <span class="nam">s</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t224" href="#t224">224</a></span><span class="t">                <span class="key">for</span> <span class="nam">lang</span> <span class="key">in</span> <span class="nam">languages</span>&nbsp;</span><span class="r"></span></p>
@@ -313,7 +315,7 @@
     <p class="pln"><span class="n"><a id="t231" href="#t231">231</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t232" href="#t232">232</a></span><span class="t">    <span class="key">def</span> <span class="nam">download_subtitle</span><span class="op">(</span><span class="nam">self</span><span class="op">,</span> <span class="nam">subtitle</span><span class="op">:</span> <span class="nam">PodnapisiSubtitle</span><span class="op">)</span> <span class="op">-></span> <span class="key">None</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t233" href="#t233">233</a></span><span class="t">        <span class="str">"""Download the content of the subtitle."""</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t234" href="#t234">234</a></span><span class="t">        <span class="key">if</span> <span class="nam">self</span><span class="op">.</span><span class="nam">session</span> <span class="key">is</span> <span class="key">None</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="par run show_par"><span class="n"><a id="t234" href="#t234">234</a></span><span class="t">        <span class="key">if</span> <span class="nam">self</span><span class="op">.</span><span class="nam">session</span> <span class="key">is</span> <span class="key">None</span><span class="op">:</span>&nbsp;</span><span class="r"><span class="annotate short">234&#x202F;&#x219B;&#x202F;235</span><span class="annotate long">line 234 didn't jump to line 235 because the condition on line 234 was never true</span></span></p>
     <p class="mis show_mis"><span class="n"><a id="t235" href="#t235">235</a></span><span class="t">            <span class="key">raise</span> <span class="nam">NotInitializedProviderError</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t236" href="#t236">236</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t237" href="#t237">237</a></span><span class="t">        <span class="com"># download as a zip</span>&nbsp;</span><span class="r"></span></p>
@@ -327,7 +329,7 @@
     <p class="pln"><span class="n"><a id="t245" href="#t245">245</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t246" href="#t246">246</a></span><span class="t">        <span class="com"># open the zip</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t247" href="#t247">247</a></span><span class="t">        <span class="key">with</span> <span class="nam">ZipFile</span><span class="op">(</span><span class="nam">io</span><span class="op">.</span><span class="nam">BytesIO</span><span class="op">(</span><span class="nam">r</span><span class="op">.</span><span class="nam">content</span><span class="op">)</span><span class="op">)</span> <span class="key">as</span> <span class="nam">zf</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t248" href="#t248">248</a></span><span class="t">            <span class="key">if</span> <span class="nam">len</span><span class="op">(</span><span class="nam">zf</span><span class="op">.</span><span class="nam">namelist</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">></span> <span class="num">1</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="par run show_par"><span class="n"><a id="t248" href="#t248">248</a></span><span class="t">            <span class="key">if</span> <span class="nam">len</span><span class="op">(</span><span class="nam">zf</span><span class="op">.</span><span class="nam">namelist</span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">></span> <span class="num">1</span><span class="op">:</span>&nbsp;</span><span class="r"><span class="annotate short">248&#x202F;&#x219B;&#x202F;249</span><span class="annotate long">line 248 didn't jump to line 249 because the condition on line 248 was never true</span></span></p>
     <p class="mis show_mis"><span class="n"><a id="t249" href="#t249">249</a></span><span class="t">                <span class="nam">msg</span> <span class="op">=</span> <span class="str">'More than one file to unzip'</span>&nbsp;</span><span class="r"></span></p>
     <p class="mis show_mis"><span class="n"><a id="t250" href="#t250">250</a></span><span class="t">                <span class="key">raise</span> <span class="nam">ProviderError</span><span class="op">(</span><span class="nam">msg</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t251" href="#t251">251</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
@@ -341,7 +343,7 @@
             <a class="nav" href="z_585999839401bd56_tvsubtitles_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.6.0">coverage.py v7.6.0</a>,
-            created at 2024-07-22 21:36 +0000
+            created at 2024-07-22 23:09 +0000
         </p>
     </div>
 </footer>

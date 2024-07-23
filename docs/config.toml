@@ -19,7 +19,8 @@ apikey = "xxxxxxxxx"
 
 [download]
 provider = ["addic7ed", "opensubtitlescom", "opensubtitles"]
-refiner = ["metadata", "hash", "omdb", "tmdb"]
+refiner = ["metadata", "hash", "omdb"]
+ignore_refiner = ["tmdb"]
 language = ["fr", "en", "pt-br"]
 encoding = "utf-8"
 min_score = 50

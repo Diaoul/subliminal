@@ -1,10 +1,25 @@
+from __future__ import annotations
+
 import datetime
 from typing import Any
+from xmlrpc.client import ProtocolError
 
-from subliminal.utils import get_age, sanitize
+import pytest
+import requests
+from subliminal.exceptions import ServiceUnavailable
+from subliminal.utils import (
+    ensure_list,
+    get_age,
+    get_extend_and_ignore_union,
+    handle_exception,
+    matches_title,
+    merge_extend_and_ignore_unions,
+    sanitize,
+)
 
 
 def test_sanitize():
+    assert sanitize(None) is None
     assert sanitize("Marvel's Agents of S.H.I.E.L.D.") == 'marvels agents of s h i e l d'
 
 
@@ -38,3 +53,132 @@ def test_get_age(monkeypatch) -> None:
 
     c_age_2 = get_age(__file__, use_ctime=True, reference_date=NOW)
     assert c_age_2 == datetime.timedelta(weeks=2)
+
+
+@pytest.mark.parametrize(
+    ('actual', 'title', 'alt', 'expected'),
+    [
+        (None, 'The Big Bang Theory', [], False),
+        ('The Big Bang Theory', None, [], False),
+        ('the.big.bang.theory', 'The Big Bang Theory', [], True),
+        ('the.big.bang.theory', 'Big Bang Theory', None, False),
+        ('the.big.bang.theory', 'Big Bang Theory', ['The Big Bang Theory'], True),
+        ('the.big.bang.theory', 'Big Bang Theory', ['Not The Big Bang Theory'], False),
+    ],
+)
+def test_matches_title(actual: str | None, title: str | None, alt: list[str], expected: bool) -> None:
+    ret = matches_title(actual, title, alt)
+    assert ret == expected
+
+
+@pytest.mark.parametrize(
+    ('err', 'msg'),
+    [
+        (requests.Timeout(), 'Request timed out'),
+        (ServiceUnavailable(), 'Service unavailable'),
+        (ProtocolError('', 0, '', {}), 'Service unavailable'),
+        (requests.exceptions.HTTPError(response=requests.Response()), 'HTTP error'),
+        (requests.exceptions.SSLError(''), 'SSL error'),
+        (ValueError(), 'Unexpected error'),
+    ],
+)
+def test_handle_exception(caplog: pytest.LogCaptureFixture, err: Exception, msg: str) -> None:
+    handle_exception(err, '')
+    for record in caplog.records:
+        assert record.levelname == 'ERROR'
+        assert record.message.startswith(msg)
+
+
+def test_ensure_list() -> None:
+    ret = ensure_list(None)
+    assert isinstance(ret, list)
+    assert ret == []
+
+    ret = ensure_list('a')
+    assert isinstance(ret, list)
+    assert set(ret) == {'a'}
+
+    ret = ensure_list(('a', 'b'))
+    assert isinstance(ret, list)
+    assert set(ret) == {'a', 'b'}
+
+    ret = ensure_list({'a', 'b'})
+    assert isinstance(ret, list)
+    assert set(ret) == {'a', 'b'}
+
+
+@pytest.mark.parametrize(
+    ('select', 'extend', 'ignore', 'defaults', 'expected'),
+    [
+        (None, None, None, None, set()),
+        (None, None, None, ['a', 'b'], {'a', 'b'}),
+        ([], None, None, ['a', 'b'], {'a', 'b'}),
+        ([], [], ['a'], ['a', 'b'], {'b'}),
+        ([], ['c'], ['a'], ['a', 'b'], {'b', 'c'}),
+        (['a'], ['b'], ['c'], ['a', 'b'], {'a', 'b'}),
+        (['a', 'b', 'c'], ['c'], ['a'], ['a', 'b'], {'b', 'c'}),
+        (['a', 'b'], ['c'], ['c'], ['a', 'b'], {'a', 'b'}),
+        ([], ['c'], ['c'], ['a', 'b'], {'a', 'b'}),
+        (['ALL'], ['b'], [], ['a', 'b'], {'a', 'b'}),
+        (['ALL'], ['c'], [], ['a', 'b'], {'a', 'b', 'c'}),
+        (['ALL'], [], ['b'], ['a', 'b'], {'a'}),
+        (['c'], ['ALL'], [], ['a', 'b'], {'a', 'b', 'c'}),
+        ([], [], ['ALL'], ['a', 'b'], set()),
+        (['ALL'], [], ['ALL'], ['a', 'b'], set()),
+        (['ALL'], ['ALL'], ['ALL'], ['a', 'b'], set()),
+    ],
+)
+def test_get_extend_and_ignore_union(
+    select: list[str] | None,
+    extend: list[str] | None,
+    ignore: list[str] | None,
+    defaults: list[str] | None,
+    expected: set[str],
+) -> None:
+    final = set(get_extend_and_ignore_union(select, extend, ignore, defaults))
+    assert final == expected
+
+
+@pytest.mark.parametrize(
+    ('lists', 'default_lists', 'defaults', 'expected'),
+    [
+        (
+            {'select': None, 'extend': None, 'ignore': None},
+            {'select': None, 'extend': None, 'ignore': None},
+            ['a', 'b'],
+            {'a', 'b'},
+        ),
+        (
+            {'select': None, 'extend': None, 'ignore': 'ALL'},
+            {'select': None, 'extend': None, 'ignore': None},
+            ['a', 'b'],
+            set(),
+        ),
+        (
+            {'select': None, 'extend': None, 'ignore': None},
+            {'select': None, 'extend': None, 'ignore': 'ALL'},
+            ['a', 'b'],
+            set(),
+        ),
+        (
+            {'select': ['c'], 'extend': None, 'ignore': None},
+            {'select': None, 'extend': None, 'ignore': 'ALL'},
+            ['a', 'b'],
+            {'c'},
+        ),
+        (
+            {'select': ['c'], 'extend': ['ALL'], 'ignore': None},
+            {'select': None, 'extend': None, 'ignore': 'ALL'},
+            ['a', 'b'],
+            {'a', 'b', 'c'},
+        ),
+    ],
+)
+def test_merge_extend_and_ignore_unions(
+    lists: dict,
+    default_lists: dict,
+    defaults: list[str],
+    expected: set[str],
+) -> None:
+    final = set(merge_extend_and_ignore_unions(lists, default_lists, defaults))
+    assert final == expected

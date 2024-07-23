@@ -102,13 +102,12 @@ tvsubtitles = "subliminal.providers.tvsubtitles:TVsubtitlesProvider"
 hash = "subliminal.refiners.hash:refine"
 metadata = "subliminal.refiners.metadata:refine"
 omdb = "subliminal.refiners.omdb:refine"
+tmdb = "subliminal.refiners.tmdb:refine"
 tvdb = "subliminal.refiners.tvdb:refine"
 
 [project.entry-points."babelfish.language_converters"]
 addic7ed = "subliminal.converters.addic7ed:Addic7edConverter"
 opensubtitlescom = "subliminal.converters.opensubtitlescom:OpenSubtitlesComConverter"
-shooter = "subliminal.converters.shooter:ShooterConverter"
-thesubdb = "subliminal.converters.thesubdb:TheSubDBConverter"
 tvsubtitles = "subliminal.converters.tvsubtitles:TVsubtitlesConverter"
 
 [tool.setuptools]

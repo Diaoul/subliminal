@@ -5,14 +5,14 @@ from __future__ import annotations
 import logging
 import os
 from datetime import datetime, timedelta, timezone
-from typing import TYPE_CHECKING, Any, Sequence
+from typing import TYPE_CHECKING, Any
 
 from guessit import guessit  # type: ignore[import-untyped]
 
 from subliminal.utils import ensure_list, matches_title
 
 if TYPE_CHECKING:
-    from collections.abc import Mapping, Set
+    from collections.abc import Mapping, Sequence, Set
 
     from babelfish import Country, Language  # type: ignore[import-untyped]
 

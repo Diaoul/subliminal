@@ -90,7 +90,7 @@ def test_handle_exception(caplog: pytest.LogCaptureFixture, err: Exception, msg:
 
 
 def test_ensure_list() -> None:
-    ret = ensure_list(None)
+    ret: list = ensure_list(None)
     assert isinstance(ret, list)
     assert ret == []
 
@@ -102,7 +102,7 @@ def test_ensure_list() -> None:
     assert isinstance(ret, list)
     assert set(ret) == {'a', 'b'}
 
-    ret = ensure_list({'a', 'b'})
+    ret = ensure_list({'a', 'b'})  # type: ignore[arg-type]
     assert isinstance(ret, list)
     assert set(ret) == {'a', 'b'}
 
@@ -180,5 +180,5 @@ def test_merge_extend_and_ignore_unions(
     defaults: list[str],
     expected: set[str],
 ) -> None:
-    final = set(merge_extend_and_ignore_unions(lists, default_lists, defaults))
+    final = set(merge_extend_and_ignore_unions(lists, default_lists, defaults))  # type: ignore[arg-type]
     assert final == expected

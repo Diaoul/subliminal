@@ -316,7 +316,7 @@ class AsyncProviderPool(ProviderPool):
 
     def list_subtitles(self, video: Video, languages: Set[Language]) -> list[Subtitle]:
         """List subtitles, multi-threaded."""
-        subtitles = []
+        subtitles: list[Subtitle] = []
 
         # Avoid raising a ValueError with `ThreadPoolExecutor(self.max_workers)`
         if self.max_workers == 0:

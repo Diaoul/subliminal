@@ -100,7 +100,7 @@ class ProviderPool:
         try:
             logger.info('Terminating provider %s', name)
             self.initialized_providers[name].terminate()
-        except Exception as e:  # noqa: BLE001
+        except Exception as e:  # noqa: BLE001  # pragma: no cover
             handle_exception(e, f'Provider {name} improperly terminated')
 
         del self.initialized_providers[name]
@@ -190,7 +190,7 @@ class ProviderPool:
         logger.info('Downloading subtitle %r', subtitle)
         try:
             self[subtitle.provider_name].download_subtitle(subtitle)
-        except (BadZipfile, BadRarFile):
+        except (BadZipfile, BadRarFile):  # pragma: no cover
             logger.exception('Bad archive for subtitle %r', subtitle)
         except Exception as e:  # noqa: BLE001
             handle_exception(e, f'Discarding provider {subtitle.provider_name}')
@@ -424,10 +424,24 @@ def search_external_subtitles(
     return subtitles
 
 
-def scan_video(path: str | os.PathLike) -> Video:
+def scan_name(path: str | os.PathLike, name: str | None = None) -> Video:
+    """Scan a video from a `path` that does not exist.
+
+    :param str path: non-existing path to the video.
+    :param str name: if defined, name to use with guessit instead of the path.
+    :return: the scanned video.
+    :rtype: :class:`~subliminal.video.Video`
+    """
+    path = os.fspath(path)
+    repl = name if name else path
+    return Video.fromguess(path, guessit(repl))
+
+
+def scan_video(path: str | os.PathLike, name: str | None = None) -> Video:
     """Scan a video from a `path`.
 
     :param str path: existing path to the video.
+    :param str name: if defined, name to use with guessit instead of the path.
     :return: the scanned video.
     :rtype: :class:`~subliminal.video.Video`
     :raises: :class:`ValueError`: video path is not well defined.
@@ -444,10 +458,14 @@ def scan_video(path: str | os.PathLike) -> Video:
         raise ValueError(msg)
 
     dirpath, filename = os.path.split(path)
-    logger.info('Scanning video %r in %r', filename, dirpath)
+    repl = name if name else path
+    if name:
+        logger.info('Scanning video %r in %r, with replacement name %r', filename, dirpath, repl)
+    else:
+        logger.info('Scanning video %r in %r', filename, dirpath)
 
     # guess
-    video = Video.fromguess(path, guessit(path))
+    video = Video.fromguess(path, guessit(repl))
 
     # size
     video.size = os.path.getsize(path)
@@ -456,17 +474,18 @@ def scan_video(path: str | os.PathLike) -> Video:
     return video
 
 
-def scan_archive(path: str | os.PathLike) -> Video:
+def scan_archive(path: str | os.PathLike, name: str | None = None) -> Video:
     """Scan an archive from a `path`.
 
     :param str path: existing path to the archive.
+    :param str name: if defined, name to use with guessit instead of the path.
     :return: the scanned video.
     :rtype: :class:`~subliminal.video.Video`
     :raises: :class:`ValueError`: video path is not well defined.
     """
     path = os.fspath(path)
     # check for non-existing path
-    if not os.path.exists(path):
+    if not os.path.exists(path):  # pragma: no cover
         msg = 'Path does not exist'
         raise ValueError(msg)
 
@@ -506,7 +525,9 @@ def scan_archive(path: str | os.PathLike) -> Video:
     # guess
     video_filename = file_info.filename
     video_path = os.path.join(dir_path, video_filename)
-    video = Video.fromguess(video_path, guessit(video_path))
+
+    repl = name if name else video_path
+    video = Video.fromguess(video_path, guessit(repl))
 
     # size
     video.size = file_info.file_size
@@ -514,7 +535,13 @@ def scan_archive(path: str | os.PathLike) -> Video:
     return video
 
 
-def scan_videos(path: str | os.PathLike, *, age: timedelta | None = None, archives: bool = True) -> list[Video]:
+def scan_videos(
+    path: str | os.PathLike,
+    *,
+    age: timedelta | None = None,
+    archives: bool = True,
+    name: str | None = None,
+) -> list[Video]:
     """Scan `path` for videos and their subtitles.
 
     See :func:`refine` to find additional information for the video.
@@ -522,6 +549,7 @@ def scan_videos(path: str | os.PathLike, *, age: timedelta | None = None, archiv
     :param str path: existing directory path to scan.
     :param datetime.timedelta age: maximum age of the video or archive.
     :param bool archives: scan videos in archives.
+    :param str name: name to use with guessit instead of the path.
     :return: the scanned videos.
     :rtype: list of :class:`~subliminal.video.Video`
     :raises: :class:`ValueError`: video path is not well defined.
@@ -580,7 +608,7 @@ def scan_videos(path: str | os.PathLike, *, age: timedelta | None = None, archiv
             # skip old files
             try:
                 file_age = datetime.fromtimestamp(os.path.getmtime(filepath), timezone.utc)
-            except ValueError:
+            except ValueError:  # pragma: no cover
                 logger.warning('Could not get age of file %r in %r', filename, dirpath)
                 continue
             else:
@@ -591,13 +619,13 @@ def scan_videos(path: str | os.PathLike, *, age: timedelta | None = None, archiv
             # scan
             if filename.lower().endswith(VIDEO_EXTENSIONS):  # video
                 try:
-                    video = scan_video(filepath)
+                    video = scan_video(filepath, name=name)
                 except ValueError:  # pragma: no cover
                     logger.exception('Error scanning video')
                     continue
             elif archives and filename.lower().endswith(ARCHIVE_EXTENSIONS):  # archive
                 try:
-                    video = scan_archive(filepath)
+                    video = scan_archive(filepath, name=name)
                 except (Error, NotRarFile, RarCannotExec, ValueError):  # pragma: no cover
                     logger.exception('Error scanning archive')
                     continue
@@ -636,7 +664,7 @@ def refine(
     refiners: tuple[str, ...] = ()
     if isinstance(video, Episode):
         refiners = tuple(episode_refiners) if episode_refiners is not None else ('metadata', 'tvdb', 'omdb', 'tmdb')
-    elif isinstance(video, Movie):
+    elif isinstance(video, Movie):  # pragma: no branch
         refiners = tuple(movie_refiners) if movie_refiners is not None else ('metadata', 'omdb', 'tmdb')
 
     for refiner in ('hash', *refiners):

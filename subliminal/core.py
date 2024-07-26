@@ -553,7 +553,7 @@ def scan_videos(path: str | os.PathLike, *, age: timedelta | None = None, archiv
                 dirnames.remove(dirname)
 
         # scan for videos
-        for filename in filenames:
+        for filename in sorted(filenames):
             # filter on videos and archives
             if not filename.lower().endswith(VIDEO_EXTENSIONS) and not (
                 archives and filename.lower().endswith(ARCHIVE_EXTENSIONS)

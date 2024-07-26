@@ -1,4 +1,5 @@
 # ruff: noqa: PT011, SIM115
+import logging
 import os
 import sys
 from datetime import datetime, timedelta, timezone
@@ -14,13 +15,15 @@ from subliminal.core import (
     download_best_subtitles,
     download_subtitles,
     list_subtitles,
+    refine,
     save_subtitles,
     scan_archive,
+    scan_name,
     scan_video,
     scan_videos,
     search_external_subtitles,
 )
-from subliminal.extensions import provider_manager
+from subliminal.extensions import provider_manager, refiner_manager
 from subliminal.providers.tvsubtitles import TVsubtitlesSubtitle
 from subliminal.score import episode_scores
 from subliminal.subtitle import Subtitle
@@ -50,6 +53,24 @@ def _mock_providers(monkeypatch):
         monkeypatch.setattr(provider.plugin, 'list_subtitles', Mock(return_value=[provider.name]))
         monkeypatch.setattr(provider.plugin, 'download_subtitle', Mock())
         monkeypatch.setattr(provider.plugin, 'terminate', Mock())
+
+
+@pytest.fixture()
+def refiner_mocks(monkeypatch):
+    mocks = {}
+    # monkeypatch refiners
+    for refiner in refiner_manager:
+        mocks[refiner.name] = Mock()
+
+        def mocked_refine(refiner):
+            def func(video, *args, **kwargs):
+                mocks[refiner.name](video)
+                return refiner.plugin(*args, **kwargs)
+
+            return func
+
+        monkeypatch.setattr(refiner, 'plugin', mocked_refine(refiner))
+    return mocks
 
 
 def test_provider_pool_get_keyerror():
@@ -230,7 +251,7 @@ def test_scan_video_episode(episodes, tmpdir, monkeypatch):
     tmpdir.ensure(video.name)
     scanned_video = scan_video(video.name)
     assert isinstance(scanned_video, Episode)
-    assert scanned_video.name, video.name
+    assert scanned_video.name == video.name
     assert scanned_video.source == video.source
     assert scanned_video.release_group == video.release_group
     assert scanned_video.resolution == video.resolution
@@ -282,6 +303,73 @@ def test_scan_video_broken(mkv, tmpdir, monkeypatch):
     assert scanned_video.subtitle_languages == set()
     assert scanned_video.title == 'test1'
     assert scanned_video.year is None
+
+
+def test_scan_video_movie_name(movies, mkv):
+    video = movies['man_of_steel']
+    path = mkv['test1']
+    scanned_video = scan_video(path, name=video.name)
+    assert isinstance(scanned_video, Movie)
+    # from real file
+    assert scanned_video.name == path
+    assert scanned_video.size != 0
+    # from replacement name
+    assert scanned_video.source == video.source
+    assert scanned_video.release_group == video.release_group
+    assert scanned_video.resolution == video.resolution
+    assert scanned_video.video_codec == video.video_codec
+    assert scanned_video.audio_codec is None
+    assert scanned_video.imdb_id is None
+    assert scanned_video.hashes == {}
+    assert scanned_video.subtitle_languages == set()
+    assert scanned_video.title == video.title
+    assert scanned_video.year == video.year
+
+
+def test_scan_video_episode_name(episodes, mkv):
+    video = episodes['bbt_s07e05']
+    path = mkv['test1']
+    scanned_video = scan_video(path, name=video.name)
+    assert isinstance(scanned_video, Episode)
+    # from real file
+    assert scanned_video.name == path
+    assert scanned_video.size != 0
+    # from replacement name
+    assert scanned_video.source == video.source
+    assert scanned_video.release_group == video.release_group
+    assert scanned_video.resolution == video.resolution
+    assert scanned_video.video_codec == video.video_codec
+    assert scanned_video.audio_codec is None
+    assert scanned_video.imdb_id is None
+    assert scanned_video.hashes == {}
+    assert scanned_video.subtitle_languages == set()
+    assert scanned_video.series == video.series
+    assert scanned_video.season == video.season
+    assert scanned_video.episode == video.episode
+    assert scanned_video.title is None
+    assert scanned_video.year is None
+    assert scanned_video.tvdb_id is None
+
+
+def test_scan_video_movie_name_path_does_not_exist(movies):
+    video = movies['man_of_steel']
+    path = 'video_but_not_a_path.avi'
+    scanned_video = scan_name(path, name=video.name)
+    assert isinstance(scanned_video, Movie)
+    # from real file
+    assert scanned_video.name == path
+    # from replacement name
+    assert scanned_video.source == video.source
+    assert scanned_video.release_group == video.release_group
+    assert scanned_video.resolution == video.resolution
+    assert scanned_video.video_codec == video.video_codec
+    assert scanned_video.audio_codec is None
+    assert scanned_video.imdb_id is None
+    assert scanned_video.hashes == {}
+    assert scanned_video.size is None
+    assert scanned_video.subtitle_languages == set()
+    assert scanned_video.title == video.title
+    assert scanned_video.year == video.year
 
 
 def test_scan_archive_invalid_extension(movies, tmpdir, monkeypatch):
@@ -336,7 +424,7 @@ def test_scan_videos(movies, tmpdir, monkeypatch):
     assert mock_scan_archive.call_count == 1
 
     # scan_video calls
-    kwargs: dict[str, Any] = {}
+    kwargs: dict[str, Any] = {'name': None}
     scan_video_calls = [
         ((os.path.join('movies', movies['man_of_steel'].name),), kwargs),
         ((os.path.join('movies', movies['enders_game'].name),), kwargs),
@@ -344,7 +432,7 @@ def test_scan_videos(movies, tmpdir, monkeypatch):
     mock_scan_video.assert_has_calls(scan_video_calls, any_order=True)  # type: ignore[arg-type]
 
     # scan_archive calls
-    kwargs = {}
+    kwargs = {'name': None}
     scan_archive_calls = [((os.path.join('movies', movies['interstellar'].name),), kwargs)]
     mock_scan_archive.assert_has_calls(scan_archive_calls, any_order=True)  # type: ignore[arg-type]
 
@@ -370,9 +458,41 @@ def test_scan_videos_age(movies, tmpdir, monkeypatch):
     assert mock_scan_archive.call_count == 0
 
     # scan_video calls
-    kwargs: dict[str, Any] = {}
+    kwargs: dict[str, Any] = {'name': None}
     scan_video_calls = [((os.path.join('movies', movies['man_of_steel'].name),), kwargs)]
     mock_scan_video.assert_has_calls(scan_video_calls, any_order=True)  # type: ignore[arg-type]
+
+
+def test_refine_movie(movies, caplog, refiner_mocks):
+    video = movies['man_of_steel']
+
+    with caplog.at_level(logging.INFO):
+        refine(video, movie_refiners=['metadata'], providers=['opensubtitles'])
+
+    # test refiners
+    for name in ('omdb', 'tmdb'):
+        assert f'Refining video with {name}' not in caplog.text
+        refiner_mocks[name].assert_not_called()
+
+    for name in ('hash', 'metadata'):
+        assert f'Refining video with {name}' in caplog.text
+        refiner_mocks[name].assert_called_once_with(video)
+
+
+def test_refine_episode(episodes, caplog, refiner_mocks):
+    video = episodes['bbt_s07e05']
+
+    with caplog.at_level(logging.INFO):
+        refine(video, episode_refiners=['omdb', 'tvdb'], providers=['opensubtitles'])
+
+    # test refiners
+    for name in ('metadata', 'tmdb'):
+        assert f'Refining video with {name}' not in caplog.text
+        refiner_mocks[name].assert_not_called()
+
+    for name in ('hash', 'omdb', 'tvdb'):
+        assert f'Refining video with {name}' in caplog.text
+        refiner_mocks[name].assert_called_once_with(video)
 
 
 @pytest.mark.usefixtures('_mock_providers')

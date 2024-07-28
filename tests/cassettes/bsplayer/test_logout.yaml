@@ -1,0 +1,111 @@
+interactions:
+- request:
+    body: '<?xml version="1.0" encoding="UTF-8"?>
+
+      <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+      xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://s1.api.bsplayer-subtitles.com/v1.php"><SOAP-ENV:Body
+      SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><ns1:logIn><username></username><password></password><AppID>BSPlayer
+      v2.67</AppID></ns1:logIn></SOAP-ENV:Body></SOAP-ENV:Envelope>'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - close
+      Content-Length:
+      - '543'
+      Content-Type:
+      - text/xml; charset=utf-8
+      SOAPAction:
+      - '"http://api.bsplayer-subtitles.com/v1.php#logIn"'
+      User-Agent:
+      - BSPlayer/2.x (1022.12360)
+    method: POST
+    uri: http://s1.api.bsplayer-subtitles.com/v1.php
+  response:
+    body:
+      string: '<?xml version="1.0" encoding="UTF-8"?>
+
+        <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+        xmlns:ns1="http://api.bsplayer-subtitles.com/v1.php" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+        SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><SOAP-ENV:Body><ns1:logInResponse><return
+        xsi:type="ns1:SubtitlesResult"><result xsi:type="xsd:string">200</result><status
+        xsi:type="xsd:string">OK</status><data xsi:type="xsd:string">b0d3945ae6aa3ffa99190927271cb621</data></return></ns1:logInResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>
+
+        '
+    headers:
+      Connection:
+      - close
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '342'
+      Content-Type:
+      - text/xml; charset=utf-8
+      Date:
+      - Sun, 28 Jul 2024 19:24:28 GMT
+      Server:
+      - Apache/2.4.59 (Debian)
+      Vary:
+      - Accept-Encoding
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '<?xml version="1.0" encoding="UTF-8"?>
+
+      <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+      xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://s1.api.bsplayer-subtitles.com/v1.php"><SOAP-ENV:Body
+      SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><ns1:logOut><handle>b0d3945ae6aa3ffa99190927271cb621</handle></ns1:logOut></SOAP-ENV:Body></SOAP-ENV:Envelope>'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - close
+      Content-Length:
+      - '523'
+      Content-Type:
+      - text/xml; charset=utf-8
+      SOAPAction:
+      - '"http://api.bsplayer-subtitles.com/v1.php#logOut"'
+      User-Agent:
+      - BSPlayer/2.x (1022.12360)
+    method: POST
+    uri: http://s1.api.bsplayer-subtitles.com/v1.php
+  response:
+    body:
+      string: '<?xml version="1.0" encoding="UTF-8"?>
+
+        <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+        xmlns:ns1="http://api.bsplayer-subtitles.com/v1.php" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+        SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><SOAP-ENV:Body><ns1:logOutResponse><return
+        xsi:type="ns1:SubtitlesResult"><result xsi:type="xsd:string">200</result><status
+        xsi:type="xsd:string">OK</status><data xsi:type="xsd:string">0</data></return></ns1:logOutResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>
+
+        '
+    headers:
+      Connection:
+      - close
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '315'
+      Content-Type:
+      - text/xml; charset=utf-8
+      Date:
+      - Sun, 28 Jul 2024 19:24:28 GMT
+      Server:
+      - Apache/2.4.59 (Debian)
+      Vary:
+      - Accept-Encoding
+    status:
+      code: 200
+      message: OK
+version: 1

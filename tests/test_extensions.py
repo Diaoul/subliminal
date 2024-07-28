@@ -31,13 +31,14 @@ def test_registrable_extension_manager_internal_extension():
         'subliminal.test_providers',
         [
             'addic7ed = subliminal.providers.addic7ed:Addic7edProvider',
+            'bsplayer = subliminal.providers.bsplayer:BSPlayerProvider',
             'opensubtitles = subliminal.providers.opensubtitles:OpenSubtitlesProvider',
             'podnapisi = subliminal.providers.podnapisi:PodnapisiProvider',
             'tvsubtitles = subliminal.providers.tvsubtitles:TVsubtitlesProvider',
         ],
     )
-    assert len(list(manager)) == 4
-    assert len(manager.internal_extensions) == 4
+    assert len(list(manager)) == 5
+    assert len(manager.internal_extensions) == 5
 
 
 def test_registrable_extension_manager_register():
@@ -45,12 +46,13 @@ def test_registrable_extension_manager_register():
         'subliminal.test_providers',
         [
             'addic7ed = subliminal.providers.addic7ed:Addic7edProvider',
+            'bsplayer = subliminal.providers.bsplayer:BSPlayerProvider',
             'opensubtitles = subliminal.providers.opensubtitles:OpenSubtitlesProvider',
         ],
     )
-    assert len(list(manager)) == 2
-    manager.register('de7cidda = subliminal.providers.addic7ed:Addic7edProvider')
     assert len(list(manager)) == 3
+    manager.register('de7cidda = subliminal.providers.addic7ed:Addic7edProvider')
+    assert len(list(manager)) == 4
     assert 'de7cidda' in manager.names()
 
 

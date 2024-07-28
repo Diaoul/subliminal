@@ -7,6 +7,8 @@ Subliminal uses multiple providers to give users a vast choice and have a better
 subtitles. Current supported providers are:
 
 * Addic7ed
+* BSPlayer
+* Gestdown
 * Gestdown
 * NapiProjekt
 * OpenSubtitles

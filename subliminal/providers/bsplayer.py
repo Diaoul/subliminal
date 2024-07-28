@@ -8,15 +8,17 @@ import random
 import re
 import zlib
 from time import sleep
+from typing import Any, ClassVar
 from xml.etree import ElementTree
 
 from babelfish import Language, language_converters
 from requests import Session
-from six.moves.xmlrpc_client import ServerProxy
+from xmlrpc.client import ServerProxy
+
+from subliminal.subtitle import Subtitle, fix_line_ending
+from subliminal.video import Video
 
 from . import Provider, TimeoutSafeTransport
-from .. import __short_version__
-from ..subtitle import Subtitle, fix_line_ending
 
 logger = logging.getLogger(__name__)
 
@@ -26,19 +28,38 @@ SUB_DOMAINS = ['s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9',
 API_URL_TEMPLATE = "http://{sub_domain}.api.bsplayer-subtitles.com/v1.php"
 
 
-def get_sub_domain():
+def get_sub_domain() -> str:
     sub_domains_end = len(SUB_DOMAINS) - 1
     return API_URL_TEMPLATE.format(sub_domain=SUB_DOMAINS[random.randint(0, sub_domains_end)])
 
 
 class BSPlayerSubtitle(Subtitle):
     """BSPlayer Subtitle."""
-    provider_name = 'bsplayer'
+
+    provider_name: ClassVar[str] = 'bsplayer'
     series_re = re.compile(r'^"(?P<series_name>.*)" (?P<series_title>.*)$')
 
-    def __init__(self, subtitle_id, size, page_link, language, filename, subtitle_format, subtitle_hash, rating,
-                 season, episode, encoding, imdb_id, imdb_rating, movie_year, movie_name, movie_hash, movie_size,
-                 movie_fps):
+    def __init__(
+            self,
+            subtitle_id: str,
+            size: int | None = None,
+            page_link: str | None = None,
+            language: Language | None = None,
+            filename: str = '',
+            subtitle_format: str | None = None,
+            subtitle_hash: str | None = None,
+            rating: str | None = None,
+            season: int | None = None,
+            episode: int | None = None,
+            encoding: str | None = None,
+            imdb_id: str | None = None,
+            imdb_rating: str | None = None,
+            movie_year: int | None = None,
+            movie_name: str | None = None,
+            movie_hash: str | None = None,
+            movie_size: int | None = None,
+            movie_fps: float | None = None,
+    ):
         super(BSPlayerSubtitle, self).__init__(language, page_link=page_link, encoding=encoding)
         self.subtitle_id = subtitle_id
         self.size = size
@@ -60,11 +81,11 @@ class BSPlayerSubtitle(Subtitle):
         self.movie_fps = movie_fps
 
     @property
-    def id(self):
+    def id(self) -> str:
         return str(self.subtitle_id)
 
     @property
-    def info(self):
+    def info(self) -> str:
         if not self.filename and not self.movie_name:
             return self.subtitle_id
         if self.movie_name and len(self.movie_name) > len(self.filename):
@@ -72,23 +93,22 @@ class BSPlayerSubtitle(Subtitle):
         return self.filename
 
     @property
-    def series_name(self):
+    def series_name(self) -> str:
         return self.series_re.match(self.movie_name).group('series_name')
 
     @property
-    def series_title(self):
+    def series_title(self) -> str:
         return self.series_re.match(self.movie_name).group('series_title')
 
-    def get_matches(self, video):
+    def get_matches(self, video) -> set[str]:
         return {'hash'}
 
 
 class BSPlayerProvider(Provider):
     """BSPlayer Provider.
     """
-    languages = {Language.fromalpha3b(l) for l in language_converters['alpha3b'].codes}
-    server_url = 'https://api.bsplayer.org/xml-rpc'
-    user_agent = 'subliminal v%s' % __short_version__
+    languages: ClassVar[Language] = {Language.fromalpha3b(l) for l in language_converters['alpha3b'].codes}
+    server_url: ClassVar[str] = 'https://api.bsplayer.org/xml-rpc'
 
     def __init__(self, search_url=None):
         self.server = ServerProxy(self.server_url, TimeoutSafeTransport(10))
@@ -97,7 +117,7 @@ class BSPlayerProvider(Provider):
         self.session = Session()
         self.search_url = search_url or get_sub_domain()
 
-    def _api_request(self, func_name='logIn', params='', tries=5):
+    def _api_request(self, func_name: str = 'logIn', params: str = '', tries: int = 5) -> Any:
         headers = {
             'User-Agent': 'BSPlayer/2.x (1022.12360)',
             'Content-Type': 'text/xml; charset=utf-8',
@@ -125,7 +145,7 @@ class BSPlayerProvider(Provider):
                 sleep(1)
         logger.error('[BSPlayer] ERROR: Too many tries (%d)...' % tries)
 
-    def initialize(self):
+    def initialize(self) -> None:
         root = self._api_request(
             func_name='logIn',
             params=('<username></username>'
@@ -136,7 +156,7 @@ class BSPlayerProvider(Provider):
         if res.find('status').text == 'OK':
             self.token = res.find('data').text
 
-    def terminate(self):
+    def terminate(self) -> None:
         root = self._api_request(
             func_name='logOut',
             params='<handle>{token}</handle>'.format(token=self.token)
@@ -146,7 +166,7 @@ class BSPlayerProvider(Provider):
             logger.error('[BSPlayer] ERROR: Unable to close session.')
         self.token = None
 
-    def query(self, languages, hash=None, size=None):
+    def query(self, languages: set[languages], hash: str | None = None, size: int | None = None) -> list[BSPlayerSubtitle]:
         # fill the search criteria
         root = self._api_request(
             func_name='searchSubtitles',
@@ -195,10 +215,10 @@ class BSPlayerProvider(Provider):
 
         return subtitles
 
-    def list_subtitles(self, video, languages):
+    def list_subtitles(self, video: Video, languages: set[Language]) -> list[BSPlayerSubtitle]:
         return self.query(languages, hash=video.hashes.get('bsplayer'), size=video.size)
 
-    def download_subtitle(self, subtitle):
+    def download_subtitle(self, subtitle: Language) -> None:
         logger.info('Downloading subtitle %r', subtitle)
         headers = {
             'User-Agent': 'BSPlayer/2.x (1022.12360)',

@@ -4,9 +4,11 @@ from __future__ import annotations
 
 import functools
 import logging
+import os
+import platform
 import re
 import socket
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from types import GeneratorType
 from typing import TYPE_CHECKING, Any, Callable, Generic, Iterable, TypeVar, cast, overload
 from xmlrpc.client import ProtocolError
@@ -181,3 +183,39 @@ def ensure_list(value: T | Sequence[T] | None) -> list[T]:
     if not is_iterable(value):
         return [cast(T, value)]
     return list(value)
+
+
+def modification_date(filepath: os.PathLike | str) -> float:
+    """Get the modification date of the file."""
+    # Use the more cross-platform modification time.
+    return os.path.getmtime(filepath)
+
+
+def creation_date(filepath: os.PathLike | str) -> float:
+    """Get the creation date of the file.
+
+    Try to get the date that a file was created, falling back to when it was
+    last modified if that isn't possible.
+    See http://stackoverflow.com/a/39501288/1709587 for explanation.
+    """
+    # Use creation time (although it may not be correct)
+    if platform.system() == 'Windows':
+        return os.path.getctime(filepath)
+    stat = os.stat(filepath)
+    try:
+        return stat.st_birthtime  # type: ignore[no-any-return,attr-defined]
+    except AttributeError:
+        # We're probably on Linux. No easy way to get creation dates here,
+        # so we'll settle for when its content was last modified.
+        return stat.st_mtime
+
+
+def get_age(filepath: os.PathLike | str, *, use_ctime: bool = False) -> timedelta:
+    """Get the age of the video from modification time (and creation time, optionally)."""
+    if not os.path.exists(filepath):
+        return timedelta()
+
+    file_date = modification_date(filepath)
+    if use_ctime:
+        file_date = max(file_date, creation_date(filepath))
+    return datetime.now(timezone.utc) - datetime.fromtimestamp(file_date, timezone.utc)

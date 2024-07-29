@@ -4,15 +4,15 @@ from __future__ import annotations
 
 import logging
 import os
-from datetime import datetime, timedelta, timezone
 from typing import TYPE_CHECKING, Any, Sequence
 
 from guessit import guessit  # type: ignore[import-untyped]
 
-from subliminal.utils import ensure_list, matches_title
+from subliminal.utils import ensure_list, get_age, matches_title
 
 if TYPE_CHECKING:
     from collections.abc import Mapping, Set
+    from datetime import timedelta
 
     from babelfish import Country, Language  # type: ignore[import-untyped]
 
@@ -229,9 +229,7 @@ class Video:
     @property
     def age(self) -> timedelta:
         """Age of the video."""
-        if not self.exists:
-            return timedelta()
-        return datetime.now(timezone.utc) - datetime.fromtimestamp(os.path.getmtime(self.name), timezone.utc)
+        return get_age(self.name, use_ctime=False)
 
     @property
     def subtitle_languages(self) -> set[Language]:

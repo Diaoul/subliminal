@@ -101,7 +101,7 @@ def test_list_subtitles_hash(movies):
     languages = {Language('deu'), Language('fra')}
     expected_subtitles = {'21230278', '16456646', '16448284', '16456702'}
 
-    with BSPlayerProvider(search_url='http://s2.api.bsplayer-subtitles.com/v1.php') as provider:
+    with BSPlayerProvider(search_url='http://s1.api.bsplayer-subtitles.com/v1.php') as provider:
         subtitles = provider.list_subtitles(video, languages)
     assert {subtitle.id for subtitle in subtitles} == expected_subtitles
     assert {subtitle.language for subtitle in subtitles} == languages
@@ -112,7 +112,7 @@ def test_list_subtitles_hash(movies):
 def test_download_subtitle(episodes):
     video = episodes['bbt_s07e05']
     languages = {Language('eng'), Language('spa')}
-    with BSPlayerProvider(search_url='http://s3.api.bsplayer-subtitles.com/v1.php') as provider:
+    with BSPlayerProvider(search_url='http://s1.api.bsplayer-subtitles.com/v1.php') as provider:
         subtitles = provider.list_subtitles(video, languages)
         provider.download_subtitle(subtitles[0])
     assert subtitles[0].content is not None

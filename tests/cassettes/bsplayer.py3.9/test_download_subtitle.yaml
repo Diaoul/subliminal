@@ -4,7 +4,7 @@ interactions:
 
       <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
       xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://s3.api.bsplayer-subtitles.com/v1.php"><SOAP-ENV:Body
+      xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://s1.api.bsplayer-subtitles.com/v1.php"><SOAP-ENV:Body
       SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><ns1:logIn><username></username><password></password><AppID>BSPlayer
       v2.67</AppID></ns1:logIn></SOAP-ENV:Body></SOAP-ENV:Envelope>'
     headers:
@@ -23,7 +23,7 @@ interactions:
       User-Agent:
       - BSPlayer/2.x (1022.12360)
     method: POST
-    uri: http://s3.api.bsplayer-subtitles.com/v1.php
+    uri: http://s1.api.bsplayer-subtitles.com/v1.php
   response:
     body:
       string: !!binary |
@@ -56,7 +56,7 @@ interactions:
 
       <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
       xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://s3.api.bsplayer-subtitles.com/v1.php"><SOAP-ENV:Body
+      xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://s1.api.bsplayer-subtitles.com/v1.php"><SOAP-ENV:Body
       SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><ns1:searchSubtitles><handle>a2c74775c66a41b5fef7824ebbb41040</handle><movieHash>6878b3ef7c1bd19e</movieHash><movieSize>501910737</movieSize><languageId>eng,spa</languageId><imdbId>*</imdbId></ns1:searchSubtitles></SOAP-ENV:Body></SOAP-ENV:Envelope>'
     headers:
       Accept:
@@ -74,7 +74,7 @@ interactions:
       User-Agent:
       - BSPlayer/2.x (1022.12360)
     method: POST
-    uri: http://s3.api.bsplayer-subtitles.com/v1.php
+    uri: http://s1.api.bsplayer-subtitles.com/v1.php
   response:
     body:
       string: !!binary |
@@ -450,7 +450,7 @@ interactions:
 
       <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
       xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://s3.api.bsplayer-subtitles.com/v1.php"><SOAP-ENV:Body
+      xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://s1.api.bsplayer-subtitles.com/v1.php"><SOAP-ENV:Body
       SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><ns1:logOut><handle>a2c74775c66a41b5fef7824ebbb41040</handle></ns1:logOut></SOAP-ENV:Body></SOAP-ENV:Envelope>'
     headers:
       Accept:
@@ -468,7 +468,7 @@ interactions:
       User-Agent:
       - BSPlayer/2.x (1022.12360)
     method: POST
-    uri: http://s3.api.bsplayer-subtitles.com/v1.php
+    uri: http://s1.api.bsplayer-subtitles.com/v1.php
   response:
     body:
       string: !!binary |

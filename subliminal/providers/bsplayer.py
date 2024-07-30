@@ -142,6 +142,7 @@ class BSPlayerProvider(Provider):
             'Content-Type': 'text/xml; charset=utf-8',
             'Connection': 'close',
             'SOAPAction': f'"http://api.bsplayer-subtitles.com/v1.php#{func_name}"',
+            'Accept-Encoding': 'gzip, deflate',
         }
         data = (
             '<?xml version="1.0" encoding="UTF-8"?>\n'

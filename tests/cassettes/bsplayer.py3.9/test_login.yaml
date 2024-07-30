@@ -1,0 +1,54 @@
+interactions:
+- request:
+    body: '<?xml version="1.0" encoding="UTF-8"?>
+
+      <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+      xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://s1.api.bsplayer-subtitles.com/v1.php"><SOAP-ENV:Body
+      SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><ns1:logIn><username></username><password></password><AppID>BSPlayer
+      v2.67</AppID></ns1:logIn></SOAP-ENV:Body></SOAP-ENV:Envelope>'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - close
+      Content-Length:
+      - '543'
+      Content-Type:
+      - text/xml; charset=utf-8
+      SOAPAction:
+      - '"http://api.bsplayer-subtitles.com/v1.php#logIn"'
+      User-Agent:
+      - BSPlayer/2.x (1022.12360)
+    method: POST
+    uri: http://s1.api.bsplayer-subtitles.com/v1.php
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA5WS3W+CMBTF3/0rSN+hILgoqTXb4pJlHy5jW/Za4EZJsG24ReS/X1HRfWbb283t
+        7/T0nJTNtuvS2UCFhZJTEng+cUBmKi/kckqen67cMZnxAUsW5w/u/P4lnssNlEqDY3US434/JStj
+        dEwpZitYC/TsMSqhPVUtaTdQOAgpOUglBkeV0IWXoi5FC5WLdWoKUwJ6mVrTTeDple5FW8yPoqZp
+        vCbcOQx9P6Cvd7fJzv0EF7/DbiHRCJkB+Rjp8i+R9kXZSMd++l1i2hL+cwU/dXyh8pYz209cquW1
+        fATUSiJwVoGpK+nYXLFptb2+Y5K+LsvVpSEd1g3vMNtajKayPoTb9IzuCc5sclPjD+TihtE9wFku
+        jPgBgyBI82EI/sQXkZ+G4mwYhUEEuT+OJqN0xGgn5p1p93o7fJOMfgpPv3w4PngD+ReRuqwCAAA=
+    headers:
+      Connection:
+      - close
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '341'
+      Content-Type:
+      - text/xml; charset=utf-8
+      Date:
+      - Tue, 30 Jul 2024 23:02:39 GMT
+      Server:
+      - Apache/2.4.59 (Debian)
+      Vary:
+      - Accept-Encoding
+    status:
+      code: 200
+      message: OK
+version: 1

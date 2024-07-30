@@ -168,7 +168,7 @@ class BSPlayerProvider(Provider):
     def initialize(self) -> None:
         """Initialize the provider."""
         root = self._api_request(
-            func_name='logIn', params=('<username></username><password></password><AppID>BSPlayer v2.67</AppID>')
+            func_name='logIn', params='<username></username><password></password><AppID>BSPlayer v2.67</AppID>'
         )
         res = root.find('.//return')
         if res.find('status').text == 'OK':

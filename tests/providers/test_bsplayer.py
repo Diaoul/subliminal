@@ -1,5 +1,4 @@
 import os
-import sys
 
 import pytest
 from babelfish import Language
@@ -10,9 +9,7 @@ vcr = VCR(
     path_transformer=lambda path: path + '.yaml',
     record_mode=os.environ.get('VCR_RECORD_MODE', 'once'),
     match_on=['method', 'scheme', 'host', 'port', 'path', 'query', 'body'],
-    cassette_library_dir=os.path.realpath(
-        os.path.join('tests', 'cassettes', 'bsplayer' if sys.version_info >= (3, 10) else 'bsplayer.py3.9')
-    ),
+    cassette_library_dir=os.path.realpath(os.path.join('tests', 'cassettes', 'bsplayer')),
 )
 
 
@@ -34,8 +31,8 @@ def test_get_matches_movie_hash(episodes):
         movie_year=None,
         movie_name=None,
         movie_hash='6878b3ef7c1bd19e',
-        movie_size='0',
-        movie_fps='0',
+        movie_size=0,
+        movie_fps=0,
     )
 
     matches = subtitle.get_matches(episodes['bbt_s07e05'])

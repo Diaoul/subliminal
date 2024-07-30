@@ -8,7 +8,6 @@ import operator
 import os
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
-from datetime import datetime, timedelta, timezone
 from typing import TYPE_CHECKING, Any
 from zipfile import BadZipfile
 
@@ -19,11 +18,12 @@ from rarfile import BadRarFile, Error, NotRarFile, RarCannotExec, RarFile, is_ra
 from .extensions import default_providers, provider_manager, refiner_manager
 from .score import compute_score as default_compute_score
 from .subtitle import SUBTITLE_EXTENSIONS, Subtitle
-from .utils import handle_exception
+from .utils import get_age, handle_exception
 from .video import VIDEO_EXTENSIONS, Episode, Movie, Video
 
 if TYPE_CHECKING:
     from collections.abc import Iterator, Mapping, Sequence, Set
+    from datetime import timedelta
     from types import TracebackType
 
     from subliminal.providers import Provider
@@ -330,6 +330,7 @@ def check_video(
     *,
     languages: Set[Language] | None = None,
     age: timedelta | None = None,
+    use_ctime: bool = False,
     undefined: bool = False,
 ) -> bool:
     """Perform some checks on the `video`.
@@ -345,6 +346,8 @@ def check_video(
     :param languages: desired languages.
     :type languages: set of :class:`~babelfish.language.Language`
     :param datetime.timedelta age: maximum age of the video.
+    :param bool use_ctime: use the latest of creation time and modification time to compute the age of the video,
+        instead of just modification time.
     :param bool undefined: fail on existing undefined language.
     :return: `True` if the video passes the checks, `False` otherwise.
     :rtype: bool
@@ -356,7 +359,8 @@ def check_video(
         return False
 
     # age test
-    if age and video.age > age:
+    file_age = video.get_age(use_ctime=use_ctime)
+    if age and file_age > age:
         logger.debug('Video is older than %r', age)
         return False
 
@@ -514,13 +518,21 @@ def scan_archive(path: str | os.PathLike) -> Video:
     return video
 
 
-def scan_videos(path: str | os.PathLike, *, age: timedelta | None = None, archives: bool = True) -> list[Video]:
+def scan_videos(
+    path: str | os.PathLike,
+    *,
+    age: timedelta | None = None,
+    use_ctime: bool = False,
+    archives: bool = True,
+) -> list[Video]:
     """Scan `path` for videos and their subtitles.
 
     See :func:`refine` to find additional information for the video.
 
     :param str path: existing directory path to scan.
     :param datetime.timedelta age: maximum age of the video or archive.
+    :param bool use_ctime: use the latest of creation time and modification time to compute the age of the video,
+        instead of just modification time.
     :param bool archives: scan videos in archives.
     :return: the scanned videos.
     :rtype: list of :class:`~subliminal.video.Video`
@@ -579,12 +591,12 @@ def scan_videos(path: str | os.PathLike, *, age: timedelta | None = None, archiv
 
             # skip old files
             try:
-                file_age = datetime.fromtimestamp(os.path.getmtime(filepath), timezone.utc)
+                file_age = get_age(filepath, use_ctime=use_ctime)
             except ValueError:
                 logger.warning('Could not get age of file %r in %r', filename, dirpath)
                 continue
             else:
-                if age and datetime.now(timezone.utc) - file_age > age:
+                if age and file_age > age:
                     logger.debug('Skipping old file %r in %r', filename, dirpath)
                     continue
 

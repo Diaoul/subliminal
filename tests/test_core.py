@@ -85,7 +85,14 @@ def test_provider_pool_list_subtitles_provider(episodes):
 def test_provider_pool_list_subtitles(episodes):
     pool = ProviderPool()
     subtitles = pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
-    assert sorted(subtitles) == ['bsplayer', 'gestdown', 'opensubtitles', 'opensubtitlescom', 'podnapisi', 'tvsubtitles']  # type: ignore[type-var,comparison-overlap]
+    assert sorted(subtitles) == [
+        'bsplayer',
+        'gestdown',
+        'opensubtitles',
+        'opensubtitlescom',
+        'podnapisi',
+        'tvsubtitles',
+    ]  # type: ignore[type-var,comparison-overlap]
     for provider in subtitles:
         assert provider_manager[provider].plugin.initialize.called
         assert provider_manager[provider].plugin.list_subtitles.called
@@ -104,7 +111,14 @@ def test_async_provider_pool_list_subtitles_provider(episodes):
 def test_async_provider_pool_list_subtitles(episodes):
     pool = AsyncProviderPool()
     subtitles = pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
-    assert sorted(subtitles) == ['bsplayer', 'gestdown', 'opensubtitles', 'opensubtitlescom', 'podnapisi', 'tvsubtitles']  # type: ignore[type-var,comparison-overlap]
+    assert sorted(subtitles) == [
+        'bsplayer',
+        'gestdown',
+        'opensubtitles',
+        'opensubtitlescom',
+        'podnapisi',
+        'tvsubtitles',
+    ]  # type: ignore[type-var,comparison-overlap]
     for provider in subtitles:
         assert provider_manager[provider].plugin.initialize.called
         assert provider_manager[provider].plugin.list_subtitles.called
@@ -474,7 +488,15 @@ def test_list_subtitles_no_language(episodes):
     subtitles = list_subtitles({video}, languages)
 
     # test providers
-    for name in ('addic7ed', 'bsplayer', 'napiprojekt', 'opensubtitles', 'opensubtitlesvip', 'podnapisi', 'tvsubtitles'):
+    for name in (
+        'addic7ed',
+        'bsplayer',
+        'napiprojekt',
+        'opensubtitles',
+        'opensubtitlesvip',
+        'podnapisi',
+        'tvsubtitles',
+    ):
         assert not provider_manager[name].plugin.list_subtitles.called
 
     # test result

@@ -11,7 +11,7 @@ Addic7ed
 
 BSPlayer
 --------
-.. automodule:: subliminal.providers.bsplayer:BSPlayerProvider
+.. automodule:: subliminal.providers.bsplayer
    :members:
    :private-members:
 

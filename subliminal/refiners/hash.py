@@ -24,11 +24,12 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 
-def hash_bsplayer(video_path):
+def hash_bsplayer(video_path: str) -> str | None:
     """Compute a hash using BSPlayer's algorithm.
+
     :param str video_path: path of the video.
     :return: the hash.
-    :rtype: str
+    :rtype: str.
     """
     little_endian_long_long = '<q'  # little-endian long long
     byte_size = struct.calcsize(little_endian_long_long)
@@ -38,7 +39,7 @@ def hash_bsplayer(video_path):
         file_hash = file_size
 
         if file_size < 65536 * 2:
-            return
+            return None
 
         for _ in range(65536 // byte_size):
             buff = f.read(byte_size)
@@ -48,13 +49,13 @@ def hash_bsplayer(video_path):
 
         f.seek(max(0, file_size - 65536), 0)
 
-        for x in range(65536 // byte_size):
+        for _x in range(65536 // byte_size):
             buff = f.read(byte_size)
             (l_value,) = struct.unpack(little_endian_long_long, buff)
             file_hash += l_value
             file_hash &= 0xFFFFFFFFFFFFFFFF
 
-    return "%016x" % file_hash
+    return f'{file_hash:016x}'
 
 
 def hash_opensubtitles(video_path: str | os.PathLike) -> str | None:

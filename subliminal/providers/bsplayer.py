@@ -3,15 +3,15 @@
 from __future__ import annotations
 
 import logging
-import random
 import re
+import secrets
 import zlib
 from time import sleep
 from typing import TYPE_CHECKING, Any, ClassVar
-from xml.etree import ElementTree
 from xmlrpc.client import ServerProxy
 
 from babelfish import Language, language_converters
+from defusedxml import ElementTree
 from requests import Session
 
 from subliminal.subtitle import Subtitle, fix_line_ending
@@ -48,8 +48,8 @@ API_URL_TEMPLATE = 'http://{sub_domain}.api.bsplayer-subtitles.com/v1.php'
 
 
 def get_sub_domain() -> str:
-    sub_domains_end = len(SUB_DOMAINS) - 1
-    return API_URL_TEMPLATE.format(sub_domain=SUB_DOMAINS[random.randint(0, sub_domains_end)])
+    """Get a random subdomain."""
+    return API_URL_TEMPLATE.format(sub_domain=SUB_DOMAINS[secrets.randbelow(len(SUB_DOMAINS))])
 
 
 class BSPlayerSubtitle(Subtitle):
@@ -100,11 +100,8 @@ class BSPlayerSubtitle(Subtitle):
         self.movie_fps = movie_fps
 
     @property
-    def id(self) -> str:
-        return str(self.subtitle_id)
-
-    @property
     def info(self) -> str:
+        """Information about the subtitle."""
         if not self.filename and not self.movie_name:
             return self.subtitle_id
         if self.movie_name and len(self.movie_name) > len(self.filename):
@@ -113,23 +110,26 @@ class BSPlayerSubtitle(Subtitle):
 
     @property
     def series_name(self) -> str:
+        """The series name matched from `movie_name`."""
         return self.series_re.match(self.movie_name).group('series_name')
 
     @property
     def series_title(self) -> str:
+        """The series title matched from `movie_name`."""
         return self.series_re.match(self.movie_name).group('series_title')
 
-    def get_matches(self, video) -> set[str]:
+    def get_matches(self, video: Video) -> set[str]:
+        """Get the matches against the `video`."""
         return {'hash'}
 
 
 class BSPlayerProvider(Provider):
     """BSPlayer Provider."""
 
-    languages: ClassVar[Language] = {Language.fromalpha3b(l) for l in language_converters['alpha3b'].codes}
+    languages: ClassVar[Language] = {Language.fromalpha3b(lang) for lang in language_converters['alpha3b'].codes}
     server_url: ClassVar[str] = 'https://api.bsplayer.org/xml-rpc'
 
-    def __init__(self, search_url=None) -> None:
+    def __init__(self, search_url: str | None = None) -> None:
         self.server = ServerProxy(self.server_url, TimeoutSafeTransport(10))
         # None values not allowed for logging in, so replace it by ''
         self.token = None
@@ -157,8 +157,8 @@ class BSPlayerProvider(Provider):
             try:
                 res = self.session.post(self.search_url, data=data, headers=headers)
                 return ElementTree.fromstring(res.content)
-            except Exception as ex:
-                logger.exception(f'[BSPlayer] ERROR: {ex}.')
+            except Exception:
+                logger.exception('[BSPlayer] ERROR:.')
                 if func_name == 'logIn':
                     self.search_url = get_sub_domain()
                 sleep(1)
@@ -166,14 +166,16 @@ class BSPlayerProvider(Provider):
         return None
 
     def initialize(self) -> None:
+        """Initialize the provider."""
         root = self._api_request(
-            func_name='logIn', params=('<username></username>' '<password></password>' '<AppID>BSPlayer v2.67</AppID>')
+            func_name='logIn', params=('<username></username><password></password><AppID>BSPlayer v2.67</AppID>')
         )
         res = root.find('.//return')
         if res.find('status').text == 'OK':
             self.token = res.find('data').text
 
     def terminate(self) -> None:
+        """Terminate the provider."""
         root = self._api_request(func_name='logOut', params=f'<handle>{self.token}</handle>')
         res = root.find('.//return')
         if res.find('status').text != 'OK':
@@ -181,8 +183,9 @@ class BSPlayerProvider(Provider):
         self.token = None
 
     def query(
-        self, languages: set[languages], hash: str | None = None, size: int | None = None
+        self, languages: set[Language], file_hash: str | None = None, size: int | None = None
     ) -> list[BSPlayerSubtitle]:
+        """Query the provider for subtitles."""
         # fill the search criteria
         root = self._api_request(
             func_name='searchSubtitles',
@@ -193,7 +196,10 @@ class BSPlayerProvider(Provider):
                 '<languageId>{language_ids}</languageId>'
                 '<imdbId>*</imdbId>'
             ).format(
-                token=self.token, movie_hash=hash, movie_size=size, language_ids=','.join(l.alpha3 for l in languages)
+                token=self.token,
+                movie_hash=file_hash,
+                movie_size=size,
+                language_ids=','.join(lang.alpha3 for lang in languages),
             ),
         )
         res = root.find('.//return/result')
@@ -250,9 +256,11 @@ class BSPlayerProvider(Provider):
         return subtitles
 
     def list_subtitles(self, video: Video, languages: set[Language]) -> list[BSPlayerSubtitle]:
-        return self.query(languages, hash=video.hashes.get('bsplayer'), size=video.size)
+        """List all the subtitles for the video."""
+        return self.query(languages, file_hash=video.hashes.get('bsplayer'), size=video.size)
 
     def download_subtitle(self, subtitle: Language) -> None:
+        """Download the content of the subtitle."""
         logger.info('Downloading subtitle %r', subtitle)
         headers = {
             'User-Agent': 'BSPlayer/2.x (1022.12360)',

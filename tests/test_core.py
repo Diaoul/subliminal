@@ -141,7 +141,11 @@ def test_check_video_languages(movies):
 
 def test_check_video_age(movies, monkeypatch):
     video = movies['man_of_steel']
-    monkeypatch.setattr('subliminal.video.Video.age', timedelta(weeks=2))
+
+    def fake_age(*args: Any, **kwargs: Any) -> timedelta:
+        return timedelta(weeks=2)
+
+    monkeypatch.setattr('subliminal.video.Video.get_age', fake_age)
     assert check_video(video, age=timedelta(weeks=3))
     assert not check_video(video, age=timedelta(weeks=1))
 

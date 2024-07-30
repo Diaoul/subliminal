@@ -210,12 +210,26 @@ def creation_date(filepath: os.PathLike | str) -> float:
         return stat.st_mtime
 
 
-def get_age(filepath: os.PathLike | str, *, use_ctime: bool = False) -> timedelta:
-    """Get the age of the video from modification time (and creation time, optionally)."""
+def get_age(
+    filepath: os.PathLike | str,
+    *,
+    reference_date: datetime | None = None,
+    use_ctime: bool = False,
+) -> timedelta:
+    """Get the age of the file from modification time (and creation time, optionally).
+
+    :param str filepath: the path of the file.
+    :param (datetime | None) reference_date: the datetime object to use as reference to calculate age.
+        Defaults to `datetime.now(timeinfo.utc)`.
+    :param bool use_ctime: if True, use the latest of modification and creation time to calculate age,
+        instead of using only the modification time.
+
+    """
     if not os.path.exists(filepath):
         return timedelta()
 
     file_date = modification_date(filepath)
     if use_ctime:
         file_date = max(file_date, creation_date(filepath))
-    return datetime.now(timezone.utc) - datetime.fromtimestamp(file_date, timezone.utc)
+    reference_date = reference_date if reference_date is not None else datetime.now(timezone.utc)
+    return reference_date - datetime.fromtimestamp(file_date, timezone.utc)

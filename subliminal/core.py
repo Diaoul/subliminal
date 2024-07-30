@@ -359,7 +359,7 @@ def check_video(
         return False
 
     # age test
-    file_age = get_age(video.name, use_ctime=use_ctime)
+    file_age = video.get_age(use_ctime=use_ctime)
     if age and file_age > age:
         logger.debug('Video is older than %r', age)
         return False

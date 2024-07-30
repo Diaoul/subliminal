@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import logging
 import os
+import warnings
 from typing import TYPE_CHECKING, Any, Sequence
 
 from guessit import guessit  # type: ignore[import-untyped]
@@ -229,7 +230,12 @@ class Video:
     @property
     def age(self) -> timedelta:
         """Age of the video."""
-        return get_age(self.name, use_ctime=False)
+        warnings.warn(
+            'Use `get_age(use_ctime)` instead, to specify if modification time is used or also creation time.',
+            DeprecationWarning,
+            stacklevel=1,
+        )
+        return self.get_age(use_ctime=False)
 
     @property
     def subtitle_languages(self) -> set[Language]:
@@ -262,6 +268,10 @@ class Video:
 
         """
         return cls.fromguess(name, guessit(name))
+
+    def get_age(self, *, use_ctime: bool = False) -> timedelta:
+        """Age of the video, with an option to take into account creation time."""
+        return get_age(self.name, use_ctime=use_ctime)
 
     def __repr__(self) -> str:
         return f'<{self.__class__.__name__} [{self.name!r}]>'

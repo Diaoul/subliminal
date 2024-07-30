@@ -26,27 +26,24 @@ interactions:
     uri: http://s1.api.bsplayer-subtitles.com/v1.php
   response:
     body:
-      string: '<?xml version="1.0" encoding="UTF-8"?>
-
-        <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
-        xmlns:ns1="http://api.bsplayer-subtitles.com/v1.php" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
-        SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><SOAP-ENV:Body><ns1:logInResponse><return
-        xsi:type="ns1:SubtitlesResult"><result xsi:type="xsd:string">200</result><status
-        xsi:type="xsd:string">OK</status><data xsi:type="xsd:string">a263f5978ba9e3566578bbb35501198d</data></return></ns1:logInResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>
-
-        '
+      string: !!binary |
+        H4sIAAAAAAAAA5WSS2/CMBCE7/yKyPfEeUCDImPUVlSq+qBq2qpXkywQKdhW1iHw7+sAgT7V9rZa
+        f+PxjMzGm1XprKHCQskRCTyfOCAzlRdyMSLPT1fukIx5j6XT8wd3cv+STOQaSqXBsTqJSbcfkaUx
+        OqEUsyWsBHr2GJXQnqoWtB0oHISUHKQSg6NK6MKboS7FFioX65kpTAnoZWpF14Gnl7oTbTA/ipqm
+        8Zpo5xD6fkBf727TnfsJLn6H3UKiETID8jHS5V8i7YuykY79dLvUbEv4zxX81PGFyrec2X6SUi2u
+        5SOgVhKBswpMXUnH5krMVtvrWybt6rJcXRrSYu3wDrOtJWgq60O4Tc/onuDMJjc1/kBObxjdA5zl
+        wogfsP48yvKzgehHOfginOXx3O/7EA/DQRiHccRoK+ataft6O3yTjH4KT798ON57A6siyCusAgAA
     headers:
       Connection:
       - close
       Content-Encoding:
       - gzip
       Content-Length:
-      - '341'
+      - '342'
       Content-Type:
       - text/xml; charset=utf-8
       Date:
-      - Mon, 29 Jul 2024 22:51:48 GMT
+      - Mon, 29 Jul 2024 22:57:26 GMT
       Server:
       - Apache/2.4.59 (Debian)
       Vary:
@@ -60,7 +57,7 @@ interactions:
       <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
       xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://s1.api.bsplayer-subtitles.com/v1.php"><SOAP-ENV:Body
-      SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><ns1:logOut><handle>a263f5978ba9e3566578bbb35501198d</handle></ns1:logOut></SOAP-ENV:Body></SOAP-ENV:Envelope>'
+      SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><ns1:logOut><handle>4f3cd65a43de0a2bd7f040e782527273</handle></ns1:logOut></SOAP-ENV:Body></SOAP-ENV:Envelope>'
     headers:
       Accept:
       - '*/*'
@@ -80,16 +77,13 @@ interactions:
     uri: http://s1.api.bsplayer-subtitles.com/v1.php
   response:
     body:
-      string: '<?xml version="1.0" encoding="UTF-8"?>
-
-        <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
-        xmlns:ns1="http://api.bsplayer-subtitles.com/v1.php" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
-        SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><SOAP-ENV:Body><ns1:logOutResponse><return
-        xsi:type="ns1:SubtitlesResult"><result xsi:type="xsd:string">200</result><status
-        xsi:type="xsd:string">OK</status><data xsi:type="xsd:string">0</data></return></ns1:logOutResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>
-
-        '
+      string: !!binary |
+        H4sIAAAAAAAAA5WSy07DMBBF9/2KyPvYDWxQ5LoCVDY8igggtm4ySiI5tpVxmubvsdum5VUBu9H4
+        3Jm5V+bzTaOiNbRYGz0jCZ2SCHRuilqXM/LyfBNfkLmY8Gx5+RgvHl7ThV6DMhYir9OYjv0ZqZyz
+        KWOYV9BIpP4ZjbTUtCULBYO9kJG9VGNyUElb0xVaJQdoY+xWrnYKkOamYeuE2sqOog0WB1Hf97Q/
+        3244m04T9nZ/l223H+H6dziuNTqpcyCfLV3/xdIuKG/pkM/Yy9yg4D8jxDHjK1MMgvt8UmXKZeee
+        AK3RCIK34LpWR95Y6gbr5wcoG/PyXKccCVgoPmA+thRd6xcR4e1ztiME99ZdhyfI5S1nO0DwQjp5
+        AvPjwqsIU8N5vvjpdvbFH/v2p8TkHaRZmOOPAgAA
     headers:
       Connection:
       - close
@@ -100,7 +94,7 @@ interactions:
       Content-Type:
       - text/xml; charset=utf-8
       Date:
-      - Mon, 29 Jul 2024 22:51:48 GMT
+      - Mon, 29 Jul 2024 22:57:27 GMT
       Server:
       - Apache/2.4.59 (Debian)
       Vary:

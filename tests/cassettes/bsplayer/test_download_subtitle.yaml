@@ -4,7 +4,7 @@ interactions:
 
       <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
       xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://s3.api.bsplayer-subtitles.com/v1.php"><SOAP-ENV:Body
+      xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://s1.api.bsplayer-subtitles.com/v1.php"><SOAP-ENV:Body
       SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><ns1:logIn><username></username><password></password><AppID>BSPlayer
       v2.67</AppID></ns1:logIn></SOAP-ENV:Body></SOAP-ENV:Envelope>'
     headers:
@@ -23,7 +23,7 @@ interactions:
       User-Agent:
       - BSPlayer/2.x (1022.12360)
     method: POST
-    uri: http://s3.api.bsplayer-subtitles.com/v1.php
+    uri: http://s1.api.bsplayer-subtitles.com/v1.php
   response:
     body:
       string: '<?xml version="1.0" encoding="UTF-8"?>
@@ -33,7 +33,7 @@ interactions:
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
         SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><SOAP-ENV:Body><ns1:logInResponse><return
         xsi:type="ns1:SubtitlesResult"><result xsi:type="xsd:string">200</result><status
-        xsi:type="xsd:string">OK</status><data xsi:type="xsd:string">e57573929e18b6e049977ed3fe9d6d53</data></return></ns1:logInResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>
+        xsi:type="xsd:string">OK</status><data xsi:type="xsd:string">439a38101e37cb7801b94196d13a6ed5</data></return></ns1:logInResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>
 
         '
     headers:
@@ -46,7 +46,7 @@ interactions:
       Content-Type:
       - text/xml; charset=utf-8
       Date:
-      - Sun, 28 Jul 2024 19:24:28 GMT
+      - Mon, 29 Jul 2024 23:06:18 GMT
       Server:
       - Apache/2.4.59 (Debian)
       Vary:
@@ -59,8 +59,8 @@ interactions:
 
       <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
       xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://s3.api.bsplayer-subtitles.com/v1.php"><SOAP-ENV:Body
-      SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><ns1:searchSubtitles><handle>e57573929e18b6e049977ed3fe9d6d53</handle><movieHash>6878b3ef7c1bd19e</movieHash><movieSize>501910737</movieSize><languageId>eng,spa</languageId><imdbId>*</imdbId></ns1:searchSubtitles></SOAP-ENV:Body></SOAP-ENV:Envelope>'
+      xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://s1.api.bsplayer-subtitles.com/v1.php"><SOAP-ENV:Body
+      SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><ns1:searchSubtitles><handle>439a38101e37cb7801b94196d13a6ed5</handle><movieHash>6878b3ef7c1bd19e</movieHash><movieSize>501910737</movieSize><languageId>eng,spa</languageId><imdbId>*</imdbId></ns1:searchSubtitles></SOAP-ENV:Body></SOAP-ENV:Envelope>'
     headers:
       Accept:
       - '*/*'
@@ -77,7 +77,7 @@ interactions:
       User-Agent:
       - BSPlayer/2.x (1022.12360)
     method: POST
-    uri: http://s3.api.bsplayer-subtitles.com/v1.php
+    uri: http://s1.api.bsplayer-subtitles.com/v1.php
   response:
     body:
       string: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap.org/soap/envelope/\"
@@ -89,7 +89,7 @@ interactions:
         xsi:type=\"xsd:string\">0</data></result><data SOAP-ENC:arrayType=\"ns1:SubtitleData[100]\"
         xsi:type=\"ns1:ArrayOfSubtitleData\"><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16442520</subID><subSize xsi:type=\"xsd:int\">12185</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16442520/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16442520/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">dbaf71fc665f83a716ae3f5daa62b7a0</subHash><subRating
         xsi:type=\"xsd:int\">5</subRating><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -98,7 +98,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16443755</subID><subSize xsi:type=\"xsd:int\">12244</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16443755/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16443755/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">eng</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.720p.HDTV.x264-DIMENSION.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">7c75c37e81420b602e73cd06fde917aa</subHash><subRating
         xsi:type=\"xsd:int\">5</subRating><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -107,7 +107,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16443145</subID><subSize xsi:type=\"xsd:int\">12475</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16443145/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16443145/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">eng</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">ba3a83e914fdda6516a214bcf35f7a4f</subHash><subRating
         xsi:type=\"xsd:int\">4</subRating><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -116,7 +116,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16479752</subID><subSize xsi:type=\"xsd:int\">12239</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16479752/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16479752/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.The.Workplace.Proximity.720p.HDTV.x264-DIMENSION-spa.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">ac7c01853374ca44ea558e8435f3e138</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -125,7 +125,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16482214</subID><subSize xsi:type=\"xsd:int\">11598</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16482214/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16482214/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION-spa.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">7d8edad101ca5a41820fc82608abbd2a</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -134,7 +134,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16491862</subID><subSize xsi:type=\"xsd:int\">12550</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16491862/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16491862/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">eng</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">62d28bd06d22e37845c691d150cc37e2</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -143,7 +143,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16501461</subID><subSize xsi:type=\"xsd:int\">12165</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16501461/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16501461/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The
         Big Bang Theory 7x05 - The Workplace Proximity.srt</subName><subFormat xsi:type=\"xsd:string\">srt</subFormat><subHash
         xsi:type=\"xsd:string\">5527025d719909ca98d71edac6c83383</subHash><subRating
@@ -153,7 +153,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16502364</subID><subSize xsi:type=\"xsd:int\">12290</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16502364/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16502364/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION-spa.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">14ec9d6fa31f2002422b80343bf56cbf</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -162,7 +162,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16514645</subID><subSize xsi:type=\"xsd:int\">12172</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16514645/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16514645/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The
         Big Bang Theory 7x05 - The Workplace Proximity (Espa\xF1ol (Espa\xF1a)).srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">cfe9d844cbaa6aa82df0dc74f13ef79b</subHash><subRating
@@ -172,7 +172,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16518585</subID><subSize xsi:type=\"xsd:int\">12233</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16518585/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16518585/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The
         Big Bang Theory 7x05 - The Workplace Proximity (Espa\xF1ol (Latinoam\xE9rica)).srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">7218c8c7c1789d4f799e188cd3939494</subHash><subRating
@@ -182,7 +182,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16534568</subID><subSize xsi:type=\"xsd:int\">12173</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16534568/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16534568/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The
         Big Bang Theory 7x05 - The Workplace Proximity.srt</subName><subFormat xsi:type=\"xsd:string\">srt</subFormat><subHash
         xsi:type=\"xsd:string\">0a5364c1b978dece17d483f24ffa1884</subHash><subRating
@@ -192,7 +192,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16537463</subID><subSize xsi:type=\"xsd:int\">12450</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16537463/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16537463/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">eng</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.The.Workplace.Proximity.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">6f2235e71ee46798ce71727121e68613</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -201,7 +201,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16570762</subID><subSize xsi:type=\"xsd:int\">11597</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16570762/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16570762/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION-spa.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">ca7aec9a6cf6d79098e8694c6e1f0770</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -210,7 +210,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16479554</subID><subSize xsi:type=\"xsd:int\">12192</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16479554/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16479554/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The
         Big Bang Theory 7x05 - The Workplace Proximity.srt</subName><subFormat xsi:type=\"xsd:string\">srt</subFormat><subHash
         xsi:type=\"xsd:string\">a6104e970eb83294ffc8689693aabdbd</subHash><subRating
@@ -220,7 +220,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16477677</subID><subSize xsi:type=\"xsd:int\">12320</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16477677/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16477677/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The
         Big Bang Theory.S07E05 - The Workplace Proximity.720p.DIMENSION.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">1813ce3cd5024e19b6588388655b565a</subHash><subRating
@@ -230,7 +230,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16449018</subID><subSize xsi:type=\"xsd:int\">12230</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16449018/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16449018/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">eng</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION-eng.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">6728f18661ee98512965262b2f904cdd</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -239,7 +239,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16451982</subID><subSize xsi:type=\"xsd:int\">12247</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16451982/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16451982/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The
         Big Bang Theory 7x05 - The Workplace Proximity (Espa\xF1ol (Latinoam\xE9rica)).srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">ceca0ed2bf0127374c75cf1efc8173c2</subHash><subRating
@@ -249,7 +249,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16452212</subID><subSize xsi:type=\"xsd:int\">12171</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16452212/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16452212/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The
         Big Bang Theory 7x05 - The Workplace Proximity (Espa\xF1ol (Espa\xF1a)).srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">7fd3450834f544fae8f723a56b52dfc7</subHash><subRating
@@ -259,7 +259,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16452531</subID><subSize xsi:type=\"xsd:int\">12165</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16452531/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16452531/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The
         Big Bang Theory 7x05 - The Workplace Proximity (Espa\xF1ol (Espa\xF1a)).srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">e7e0a81247826b1a87ab0422946227c9</subHash><subRating
@@ -269,7 +269,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16453272</subID><subSize xsi:type=\"xsd:int\">12241</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16453272/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16453272/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The
         Big Bang Theory - S07E05 - The Workplace Proximity.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">396de815d223e047cc7c208593d7b9fc</subHash><subRating
@@ -279,7 +279,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16454939</subID><subSize xsi:type=\"xsd:int\">10938</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16454939/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16454939/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.HDTV-LOL.ESP.wWw.SubsTeam.Net.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">bf399980c3d4a072240b0b055338edae</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -288,7 +288,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16457770</subID><subSize xsi:type=\"xsd:int\">12220</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16457770/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16457770/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The
         Big Bang Theory 7x05 - The Workplace Proximity (Espa\xF1ol (Latinoam\xE9rica)).srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">6e7d372e70b0713e43d074621529fdfc</subHash><subRating
@@ -298,7 +298,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16459772</subID><subSize xsi:type=\"xsd:int\">12237</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16459772/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16459772/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The
         Big Bang Theory 7x05 - The Workplace Proximity (Espa\xF1ol (Latinoam\xE9rica)).srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">f911800ff0da35e4ec92b5b85da5bbba</subHash><subRating
@@ -308,7 +308,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16460233</subID><subSize xsi:type=\"xsd:int\">12237</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16460233/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16460233/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.720p.wWw.Darkville.Com.Mx.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">c2d3eb7f5a56ab6f43119d3bbc7b785a</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -317,7 +317,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16463065</subID><subSize xsi:type=\"xsd:int\">10873</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16463065/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16463065/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">eng</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION-eng(1)(2).srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">77b6dcc1febde6e09a380cd056c0493b</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -326,7 +326,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16477102</subID><subSize xsi:type=\"xsd:int\">11546</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16477102/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16477102/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.The.Workplace.Proximity.HDTV.x264-LOL.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">35249930e80b30ec0b968b7a90b2b80f</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -335,7 +335,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16588894</subID><subSize xsi:type=\"xsd:int\">11414</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16588894/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16588894/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION-spa.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">e6c73dc4d8a4cf7ad989467657e12db6</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -344,7 +344,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16611335</subID><subSize xsi:type=\"xsd:int\">12451</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16611335/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16611335/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">eng</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.HDTV.x264-LOL.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">5be4209ed8a43db8824ff36b141c932c</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -353,7 +353,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16618141</subID><subSize xsi:type=\"xsd:int\">35144</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16618141/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16618141/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION-heb.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">b72b97ca6bec967c75c4aafcf424255b</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -362,7 +362,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">23688777</subID><subSize xsi:type=\"xsd:int\">12375</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/23688777/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/23688777/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">eng</subLang><subName xsi:type=\"xsd:string\">The
         Big Bang Theory - 7x05 - The Workplace Proximity-eng.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">450e6827a279a43227ebe9b391605211</subHash><subRating
@@ -372,7 +372,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">25202322</subID><subSize xsi:type=\"xsd:int\">12365</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/25202322/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/25202322/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">eng</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION-eng.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">e1817f67ec65ab57f7d79eb42ced38ad</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -381,7 +381,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">25872851</subID><subSize xsi:type=\"xsd:int\">12274</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/25872851/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/25872851/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION-spa.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">ac1f7ebe854c9ad254d024918b609def</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -390,7 +390,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">26757901</subID><subSize xsi:type=\"xsd:int\">12385</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/26757901/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/26757901/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">eng</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION-eng.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">06d18ee0e3b63d01245c631a7d7edbd6</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -399,7 +399,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">27287242</subID><subSize xsi:type=\"xsd:int\">12455</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/27287242/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/27287242/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">eng</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION.ass</subName><subFormat
         xsi:type=\"xsd:string\">ass</subFormat><subHash xsi:type=\"xsd:string\">e14e1039f598469569e1840e51eb20e0</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -408,7 +408,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">27642690</subID><subSize xsi:type=\"xsd:int\">12381</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/27642690/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/27642690/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">eng</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION-eng.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">3a07a4eece3e22c286a8764c15984b55</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -417,7 +417,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">27652482</subID><subSize xsi:type=\"xsd:int\">12395</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/27652482/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/27652482/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">eng</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION-eng.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">8b21205a48067b0e6d86c727826ff45e</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -426,7 +426,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">28076723</subID><subSize xsi:type=\"xsd:int\">12273</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/28076723/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/28076723/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION-spa.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">ec1c2fe9da4c6cd684e937b38690fafe</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -435,7 +435,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">29833895</subID><subSize xsi:type=\"xsd:int\">12367</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/29833895/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/29833895/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">eng</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION-eng.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">272731ae19b4adda04d7d3decdcad828</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -444,7 +444,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">30172766</subID><subSize xsi:type=\"xsd:int\">12307</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/30172766/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/30172766/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">eng</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION-eng.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">daa43cd209b2861fd07fb3f91d189713</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -453,7 +453,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">23426937</subID><subSize xsi:type=\"xsd:int\">12341</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/23426937/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/23426937/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">eng</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION-eng.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">9db63d1206e31bddbd06858f32ac6128</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -462,7 +462,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">22890714</subID><subSize xsi:type=\"xsd:int\">12354</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/22890714/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/22890714/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">eng</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION-eng.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">49cc1331f90dde6e48f6246b526e2038</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -471,7 +471,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16732830</subID><subSize xsi:type=\"xsd:int\">11479</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16732830/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16732830/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION@TheSubFactory.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">bfd1670b014df5235c93bb9d09a22c64</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -480,7 +480,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">17867643</subID><subSize xsi:type=\"xsd:int\">12569</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/17867643/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/17867643/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">eng</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">37844d7fef947e133edd3be91418457a</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -489,7 +489,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">17874625</subID><subSize xsi:type=\"xsd:int\">12231</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/17874625/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/17874625/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">eng</subLang><subName xsi:type=\"xsd:string\">The
         Big Bang Theory - S07E05 - The Workplace Proximity.en.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">ebae3848ef42c0ccfac52557a4f047b1</subHash><subRating
@@ -499,7 +499,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">18099997</subID><subSize xsi:type=\"xsd:int\">10664</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/18099997/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/18099997/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">TBBT_07x05_(Sub_Spanish).srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">174f34a0911af4ef7e2e258787bf6554</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -508,7 +508,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">18525806</subID><subSize xsi:type=\"xsd:int\">12174</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/18525806/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/18525806/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">705.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">b7bdd466b3e8056574e2546526c8d4be</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -517,7 +517,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">19720007</subID><subSize xsi:type=\"xsd:int\">12166</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/19720007/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/19720007/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION-spa.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">38fd2d9fd3fba19b62486675b417124e</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -526,7 +526,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">20135448</subID><subSize xsi:type=\"xsd:int\">12337</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/20135448/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/20135448/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">eng</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION-eng.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">01bcbdd8ea9a72e6fef250718cfe61ac</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -535,7 +535,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">21111081</subID><subSize xsi:type=\"xsd:int\">12244</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/21111081/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/21111081/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION-spa.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">1ecdad6c681f35528246aac50c9b5aa4</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -544,7 +544,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">22163890</subID><subSize xsi:type=\"xsd:int\">12367</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/22163890/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/22163890/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">eng</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION-eng.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">b18c9bcbb866027be5d77a9f11b9e55e</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -553,7 +553,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">22296741</subID><subSize xsi:type=\"xsd:int\">11517</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/22296741/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/22296741/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">05.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">5ad305833b7e50cfd8d894699bf70a2a</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -562,7 +562,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">30363023</subID><subSize xsi:type=\"xsd:int\">12588</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/30363023/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/30363023/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">eng</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION-eng.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">159260fb0d57e369e5f066df82247492</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -571,7 +571,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16442040</subID><subSize xsi:type=\"xsd:int\">12329</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16442040/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16442040/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">eng</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.HDTV.x264-LOL.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">616e8aef0190581171f67679ac5244d4</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -580,7 +580,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16443285</subID><subSize xsi:type=\"xsd:int\">11517</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16443285/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16443285/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION@TheSubFactory.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">5ad305833b7e50cfd8d894699bf70a2a</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -589,7 +589,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16443289</subID><subSize xsi:type=\"xsd:int\">12463</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16443289/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16443289/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">eng</subLang><subName xsi:type=\"xsd:string\">The
         Big Bang Theory - 07x05 - The Workplace Proximity.DIMENSION.English.HI.C.orig.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">47c16fb6a06de849075ad433dad0c2b4</subHash><subRating
@@ -599,7 +599,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16443301</subID><subSize xsi:type=\"xsd:int\">12218</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16443301/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16443301/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The
         Big Bang Theory 7x05 - The Workplace Proximity (Espa\xF1ol (Latinoam\xE9rica)).srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">b0ef6be4c4d6c555f7e8e2eebbf29ccf</subHash><subRating
@@ -609,7 +609,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16443307</subID><subSize xsi:type=\"xsd:int\">12217</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16443307/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16443307/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The
         Big Bang Theory 7x05 - The Workplace Proximity (Espa\xF1ol (Latinoam\xE9rica)).srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">57e1d2dc4796ecef5d248841e74fd66c</subHash><subRating
@@ -619,7 +619,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16443309</subID><subSize xsi:type=\"xsd:int\">12220</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16443309/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16443309/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The
         Big Bang Theory 7x05 - The Workplace Proximity (Espa\xF1ol (Latinoam\xE9rica)).srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">8a9b488101048ab9aa236951506c38ed</subHash><subRating
@@ -629,7 +629,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16443312</subID><subSize xsi:type=\"xsd:int\">12224</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16443312/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16443312/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The
         Big Bang Theory 7x05 - The Workplace Proximity (Espa\xF1ol (Latinoam\xE9rica))
         (1).srt</subName><subFormat xsi:type=\"xsd:string\">srt</subFormat><subHash
@@ -640,7 +640,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16443520</subID><subSize xsi:type=\"xsd:int\">12230</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16443520/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16443520/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">7aa480288438a857fe518c12e4167497</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -649,7 +649,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16443602</subID><subSize xsi:type=\"xsd:int\">12219</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16443602/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16443602/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The
         Big Bang Theory 7x05 - The Workplace Proximity (Espa\xF1ol (Latinoam\xE9rica)).srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">785f84688d572f0d78ad0a80733bfdef</subHash><subRating
@@ -659,7 +659,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16443784</subID><subSize xsi:type=\"xsd:int\">12473</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16443784/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16443784/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">eng</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">054fb7b0d83971c12baedb651693da0f</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -668,7 +668,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16443826</subID><subSize xsi:type=\"xsd:int\">12218</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16443826/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16443826/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The
         Big Bang Theory 7x05 - The Workplace Proximity (Espa\xF1ol (Latinoam\xE9rica)).srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">bc4b3412b10da87017a95910a22d1f01</subHash><subRating
@@ -678,7 +678,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16443198</subID><subSize xsi:type=\"xsd:int\">12219</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16443198/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16443198/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">14337ef0288db1dd2ec94ca4400be5ae</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -687,7 +687,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16443152</subID><subSize xsi:type=\"xsd:int\">12162</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16443152/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16443152/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The
         Big Bang Theory 7x05 - The Workplace Proximity (Espa\xF1ol (Espa\xF1a)).srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">50f0a4393e9bd9a84504e17d1137a5c7</subHash><subRating
@@ -697,7 +697,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16442512</subID><subSize xsi:type=\"xsd:int\">12192</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16442512/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16442512/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">69af19354403687bd0e7c6ac32f198a9</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -706,7 +706,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16442540</subID><subSize xsi:type=\"xsd:int\">12254</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16442540/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16442540/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">eng</subLang><subName xsi:type=\"xsd:string\">The
         Big Bang Theory - 07x05 - The Workplace Proximity.DIMENSION.English.C.orig.Addic7ed.com.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">f18de9888230bcd71be8bc7be3add167</subHash><subRating
@@ -716,7 +716,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16442556</subID><subSize xsi:type=\"xsd:int\">12193</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16442556/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16442556/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">c774d31d9f3831f8be40275782a658e4</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -725,7 +725,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16442717</subID><subSize xsi:type=\"xsd:int\">12184</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16442717/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16442717/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The
         Big Bang Theory 7x05 - The Workplace Proximity (Espa\xF1ol (Espa\xF1a)).srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">e163b88c265f001e31235af07e8285f5</subHash><subRating
@@ -735,7 +735,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16442839</subID><subSize xsi:type=\"xsd:int\">12216</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16442839/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16442839/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The
         Big Bang Theory 7x05 - The Workplace Proximity.srt</subName><subFormat xsi:type=\"xsd:string\">srt</subFormat><subHash
         xsi:type=\"xsd:string\">ceebbe4653f63cd4ee90e68a194b3f7c</subHash><subRating
@@ -745,7 +745,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16442952</subID><subSize xsi:type=\"xsd:int\">12227</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16442952/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16442952/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The
         Big Bang Theory 7x05 - The Workplace Proximity (Espa\xF1ol (Latinoam\xE9rica)).srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">a42de13ae275401d61a0fe5381b8bbfd</subHash><subRating
@@ -755,7 +755,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16442994</subID><subSize xsi:type=\"xsd:int\">12220</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16442994/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16442994/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The
         Big Bang Theory 7x05 - The Workplace Proximity (Espa\xF1ol (Latinoam\xE9rica)).srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">085bf756b85477ab39de29bc96d54126</subHash><subRating
@@ -765,7 +765,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16443031</subID><subSize xsi:type=\"xsd:int\">12222</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16443031/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16443031/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The
         Big Bang Theory 7x05 - The Workplace Proximity (Espa\xF1ol (Latinoam\xE9rica)).srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">9eac6b79d6a088d31a8c1f721e63d54a</subHash><subRating
@@ -775,7 +775,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16443105</subID><subSize xsi:type=\"xsd:int\">12223</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16443105/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16443105/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The
         Big Bang Theory 7x05 - The Workplace Proximity.srt</subName><subFormat xsi:type=\"xsd:string\">srt</subFormat><subHash
         xsi:type=\"xsd:string\">9147c8353976d9ccb1a3a575b2311892</subHash><subRating
@@ -785,7 +785,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">48283576</subID><subSize xsi:type=\"xsd:int\">11635</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/48283576/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/48283576/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">26e5dd43c12e53ba6bbd9562c47e42c2</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -794,7 +794,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16443882</subID><subSize xsi:type=\"xsd:int\">12180</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16443882/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16443882/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">eng</subLang><subName xsi:type=\"xsd:string\">The
         Big Bang Theory 7x05 - The Workplace Proximity.srt</subName><subFormat xsi:type=\"xsd:string\">srt</subFormat><subHash
         xsi:type=\"xsd:string\">dfeb5fc37248be3c90cac3dbbe99d4cc</subHash><subRating
@@ -804,7 +804,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16443886</subID><subSize xsi:type=\"xsd:int\">12254</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16443886/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16443886/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">eng</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">5d7c46b9ef264b47b556125cd3736c12</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -813,7 +813,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16443893</subID><subSize xsi:type=\"xsd:int\">12217</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16443893/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16443893/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The
         Big Bang Theory 7x05 - The Workplace Proximity (Espa\xF1ol (Latinoam\xE9rica)).srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">391df8bdd13a3f8a44036576b886f18e</subHash><subRating
@@ -823,7 +823,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16446517</subID><subSize xsi:type=\"xsd:int\">12256</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16446517/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16446517/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">eng</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.The.Workplace.Proximity.HD.TV-DIMENSION.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">5b66fa465a48bb15bc10c8c2bb8df5ee</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -832,7 +832,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16446825</subID><subSize xsi:type=\"xsd:int\">11943</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16446825/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16446825/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">f58c13b59c1a7b4ce1b9ee40fe7bfb36</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -841,7 +841,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16447289</subID><subSize xsi:type=\"xsd:int\">12563</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16447289/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16447289/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">eng</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.HDTV.x264-LOL.HI.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">dfb48033b21d4876dc9a40d62702e615</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -850,7 +850,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16447421</subID><subSize xsi:type=\"xsd:int\">12246</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16447421/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16447421/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">eng</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">804b027637467cb5d809ef72ea76ff85</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -859,7 +859,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16447806</subID><subSize xsi:type=\"xsd:int\">12221</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16447806/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16447806/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The
         Big Bang Theory 7x05 - The Workplace Proximity (Espa\xF1ol (Latinoam\xE9rica)).srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">44304e11132cb6e14dc13057ccc90e37</subHash><subRating
@@ -869,7 +869,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16447942</subID><subSize xsi:type=\"xsd:int\">12242</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16447942/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16447942/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The
         Big Bang Theory 7x05 - The Workplace Proximity (Espa\xF1ol (Latinoam\xE9rica)).srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">862202bb9172b0b79452b228e21b7197</subHash><subRating
@@ -879,7 +879,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16447995</subID><subSize xsi:type=\"xsd:int\">12245</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16447995/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16447995/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The
         Big Bang Theory 7x05 - The Workplace Proximity (Espa\xF1ol (Latinoam\xE9rica)).srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">9115139c9ddd8ab7c97957c501a48617</subHash><subRating
@@ -889,7 +889,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16448294</subID><subSize xsi:type=\"xsd:int\">10770</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16448294/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16448294/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">eng</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S05E07.720p.HDTV.x264-IMMERSE.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">65408e35de4b50a87c1fb3d6306104d2</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -898,7 +898,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16448660</subID><subSize xsi:type=\"xsd:int\">12326</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16448660/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16448660/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">eng</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.480p.HDTV.x264-mSD.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">2f99daeb24d4ae4f69b310d003952e58</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -907,7 +907,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16448816</subID><subSize xsi:type=\"xsd:int\">11574</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16448816/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16448816/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">TBBT0705.264LOL.wWw.Darkville.Com.Mx.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">d7465e8768e8796ed86d4ffd82bc63b4</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -916,7 +916,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16446252</subID><subSize xsi:type=\"xsd:int\">12317</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16446252/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16446252/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">eng</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.HDTV.XviD-AFG-eng(1).srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">46c99c3a3fbdd93a043f0934ec898a33</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -925,7 +925,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16446022</subID><subSize xsi:type=\"xsd:int\">12255</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16446022/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16446022/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">eng</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.HDTV.x264-LOL.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">33950b79178e868c826f53bcd3bb3dfb</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -934,7 +934,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16444112</subID><subSize xsi:type=\"xsd:int\">12280</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16444112/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16444112/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">eng</subLang><subName xsi:type=\"xsd:string\">The
         Big Bang Theory - 7x05 - Episode 5.HDTV.LOL.en.srt</subName><subFormat xsi:type=\"xsd:string\">srt</subFormat><subHash
         xsi:type=\"xsd:string\">e0b2c19d20e21a048c4f873b311822b3</subHash><subRating
@@ -944,7 +944,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16444315</subID><subSize xsi:type=\"xsd:int\">11816</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16444315/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16444315/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">eng</subLang><subName xsi:type=\"xsd:string\">The
         Big Bang Theory - 07x05 - The Workplace Proximity.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">a4356dbf8286bd6c1aa428fd26c1e3fa</subHash><subRating
@@ -954,7 +954,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16444720</subID><subSize xsi:type=\"xsd:int\">12163</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16444720/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16444720/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The
         Big Bang Theory 7x05 - The Workplace Proximity (Espa\xF1ol (Espa\xF1a)) (1).srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">8d5f773a6ae6d9b450ab3a6bcb59c4ab</subHash><subRating
@@ -964,7 +964,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16444938</subID><subSize xsi:type=\"xsd:int\">12167</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16444938/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16444938/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The
         Big Bang Theory 7x05 - The Workplace Proximity (Espa\xF1ol (Espa\xF1a)).srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">8396ed52e585038ba08de939b163c426</subHash><subRating
@@ -974,7 +974,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16444974</subID><subSize xsi:type=\"xsd:int\">12562</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16444974/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16444974/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">eng</subLang><subName xsi:type=\"xsd:string\">The
         Big Bang Theory Season 7 Episode 5 -The Workplace Proximity-eng.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">834610079869b1cdce55f91877af9c5c</subHash><subRating
@@ -984,7 +984,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16445297</subID><subSize xsi:type=\"xsd:int\">12174</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16445297/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16445297/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The
         Big Bang Theory 7x05 - The Workplace Proximity (Espa\xF1ol (Espa\xF1a)).srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">b7bdd466b3e8056574e2546526c8d4be</subHash><subRating
@@ -994,7 +994,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16445309</subID><subSize xsi:type=\"xsd:int\">12165</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16445309/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16445309/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">b34290118f4f0b37640bb092db989d63</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -1003,7 +1003,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16445521</subID><subSize xsi:type=\"xsd:int\">12213</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16445521/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16445521/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The
         Big Bang Theory - S07 - 05 - The Workplace Proximity.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">7504c17187c04639933648f3565e6519</subHash><subRating
@@ -1013,7 +1013,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16445695</subID><subSize xsi:type=\"xsd:int\">12347</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16445695/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16445695/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">eng</subLang><subName xsi:type=\"xsd:string\">The.Big.Bang.Theory.S07E05.Episode.5.HDTV.LOL.en.srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">bd64c6d80cd498a73a5df1359c40c65a</subHash><subRating
         xsi:nil=\"true\"/><season xsi:nil=\"true\"/><episode xsi:nil=\"true\"/><encsubtitle
@@ -1022,7 +1022,7 @@ interactions:
         xsi:type=\"xsd:string\">6878b3ef7c1bd19e</movieHash><movieSize xsi:type=\"xsd:long\">0</movieSize><movieFPS
         xsi:type=\"xsd:float\">0</movieFPS></item><item xsi:type=\"ns1:SubtitleData\"><subID
         xsi:type=\"xsd:int\">16445962</subID><subSize xsi:type=\"xsd:int\">12210</subSize><subDownloadLink
-        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16445962/de57573929e18b6e049977ed3fe9d6d53</subDownloadLink><subLang
+        xsi:type=\"xsd:string\">http://download.bsplayer-subtitles.com/download/file/16445962/d439a38101e37cb7801b94196d13a6ed5</subDownloadLink><subLang
         xsi:type=\"xsd:string\">spa</subLang><subName xsi:type=\"xsd:string\">The
         Big Bang Theory 7x05 - The Workplace Proximity (Espa\xF1ol (Latinoam\xE9rica)).srt</subName><subFormat
         xsi:type=\"xsd:string\">srt</subFormat><subHash xsi:type=\"xsd:string\">5b96b85aed251dbfd81e55fafef41e7a</subHash><subRating
@@ -1037,11 +1037,11 @@ interactions:
       Content-Encoding:
       - gzip
       Content-Length:
-      - '5284'
+      - '5285'
       Content-Type:
       - text/xml; charset=utf-8
       Date:
-      - Sun, 28 Jul 2024 19:24:29 GMT
+      - Mon, 29 Jul 2024 23:06:18 GMT
       Server:
       - Apache/2.4.59 (Debian)
       Vary:
@@ -1063,7 +1063,7 @@ interactions:
       User-Agent:
       - BSPlayer/2.x (1022.12360)
     method: GET
-    uri: http://download.bsplayer-subtitles.com/download/file/16442520/de57573929e18b6e049977ed3fe9d6d53
+    uri: http://download.bsplayer-subtitles.com/download/file/16442520/d439a38101e37cb7801b94196d13a6ed5
   response:
     body:
       string: !!binary |
@@ -1297,7 +1297,7 @@ interactions:
       Content-Type:
       - application/octet-stream
       Date:
-      - Sun, 28 Jul 2024 19:24:29 GMT
+      - Mon, 29 Jul 2024 23:06:18 GMT
       Keep-Alive:
       - timeout=5, max=100
       Server:
@@ -1310,8 +1310,8 @@ interactions:
 
       <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
       xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://s3.api.bsplayer-subtitles.com/v1.php"><SOAP-ENV:Body
-      SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><ns1:logOut><handle>e57573929e18b6e049977ed3fe9d6d53</handle></ns1:logOut></SOAP-ENV:Body></SOAP-ENV:Envelope>'
+      xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://s1.api.bsplayer-subtitles.com/v1.php"><SOAP-ENV:Body
+      SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><ns1:logOut><handle>439a38101e37cb7801b94196d13a6ed5</handle></ns1:logOut></SOAP-ENV:Body></SOAP-ENV:Envelope>'
     headers:
       Accept:
       - '*/*'
@@ -1328,7 +1328,7 @@ interactions:
       User-Agent:
       - BSPlayer/2.x (1022.12360)
     method: POST
-    uri: http://s3.api.bsplayer-subtitles.com/v1.php
+    uri: http://s1.api.bsplayer-subtitles.com/v1.php
   response:
     body:
       string: '<?xml version="1.0" encoding="UTF-8"?>
@@ -1351,7 +1351,7 @@ interactions:
       Content-Type:
       - text/xml; charset=utf-8
       Date:
-      - Sun, 28 Jul 2024 19:24:29 GMT
+      - Mon, 29 Jul 2024 23:06:19 GMT
       Server:
       - Apache/2.4.59 (Debian)
       Vary:

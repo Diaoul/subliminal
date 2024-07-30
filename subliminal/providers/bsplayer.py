@@ -1,31 +1,50 @@
-# -*- coding: utf-8 -*-
-"""
-Based on https://github.com/realgam3/service.subtitles.bsplayer
-"""
+"""Based on https://github.com/realgam3/service.subtitles.bsplayer."""
+
+from __future__ import annotations
 
 import logging
 import random
 import re
 import zlib
 from time import sleep
-from typing import Any, ClassVar
+from typing import TYPE_CHECKING, Any, ClassVar
 from xml.etree import ElementTree
+from xmlrpc.client import ServerProxy
 
 from babelfish import Language, language_converters
 from requests import Session
-from xmlrpc.client import ServerProxy
 
 from subliminal.subtitle import Subtitle, fix_line_ending
-from subliminal.video import Video
 
 from . import Provider, TimeoutSafeTransport
+
+if TYPE_CHECKING:
+    from subliminal.video import Video
 
 logger = logging.getLogger(__name__)
 
 # s1-9, s101-109
-SUB_DOMAINS = ['s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9',
-               's101', 's102', 's103', 's104', 's105', 's106', 's107', 's108', 's109']
-API_URL_TEMPLATE = "http://{sub_domain}.api.bsplayer-subtitles.com/v1.php"
+SUB_DOMAINS = [
+    's1',
+    's2',
+    's3',
+    's4',
+    's5',
+    's6',
+    's7',
+    's8',
+    's9',
+    's101',
+    's102',
+    's103',
+    's104',
+    's105',
+    's106',
+    's107',
+    's108',
+    's109',
+]
+API_URL_TEMPLATE = 'http://{sub_domain}.api.bsplayer-subtitles.com/v1.php'
 
 
 def get_sub_domain() -> str:
@@ -40,27 +59,27 @@ class BSPlayerSubtitle(Subtitle):
     series_re = re.compile(r'^"(?P<series_name>.*)" (?P<series_title>.*)$')
 
     def __init__(
-            self,
-            subtitle_id: str,
-            size: int | None = None,
-            page_link: str | None = None,
-            language: Language | None = None,
-            filename: str = '',
-            subtitle_format: str | None = None,
-            subtitle_hash: str | None = None,
-            rating: str | None = None,
-            season: int | None = None,
-            episode: int | None = None,
-            encoding: str | None = None,
-            imdb_id: str | None = None,
-            imdb_rating: str | None = None,
-            movie_year: int | None = None,
-            movie_name: str | None = None,
-            movie_hash: str | None = None,
-            movie_size: int | None = None,
-            movie_fps: float | None = None,
-    ):
-        super(BSPlayerSubtitle, self).__init__(language, page_link=page_link, encoding=encoding)
+        self,
+        subtitle_id: str,
+        size: int | None = None,
+        page_link: str | None = None,
+        language: Language | None = None,
+        filename: str = '',
+        subtitle_format: str | None = None,
+        subtitle_hash: str | None = None,
+        rating: str | None = None,
+        season: int | None = None,
+        episode: int | None = None,
+        encoding: str | None = None,
+        imdb_id: str | None = None,
+        imdb_rating: str | None = None,
+        movie_year: int | None = None,
+        movie_name: str | None = None,
+        movie_hash: str | None = None,
+        movie_size: int | None = None,
+        movie_fps: float | None = None,
+    ) -> None:
+        super().__init__(language, page_link=page_link, encoding=encoding)
         self.subtitle_id = subtitle_id
         self.size = size
         self.page_link = page_link
@@ -105,12 +124,12 @@ class BSPlayerSubtitle(Subtitle):
 
 
 class BSPlayerProvider(Provider):
-    """BSPlayer Provider.
-    """
+    """BSPlayer Provider."""
+
     languages: ClassVar[Language] = {Language.fromalpha3b(l) for l in language_converters['alpha3b'].codes}
     server_url: ClassVar[str] = 'https://api.bsplayer.org/xml-rpc'
 
-    def __init__(self, search_url=None):
+    def __init__(self, search_url=None) -> None:
         self.server = ServerProxy(self.server_url, TimeoutSafeTransport(10))
         # None values not allowed for logging in, so replace it by ''
         self.token = None
@@ -122,51 +141,48 @@ class BSPlayerProvider(Provider):
             'User-Agent': 'BSPlayer/2.x (1022.12360)',
             'Content-Type': 'text/xml; charset=utf-8',
             'Connection': 'close',
-            'SOAPAction': '"http://api.bsplayer-subtitles.com/v1.php#{func_name}"'.format(func_name=func_name)
+            'SOAPAction': f'"http://api.bsplayer-subtitles.com/v1.php#{func_name}"',
         }
         data = (
             '<?xml version="1.0" encoding="UTF-8"?>\n'
             '<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" '
             'xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" '
             'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" '
-            'xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="{search_url}">'
+            f'xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="{self.search_url}">'
             '<SOAP-ENV:Body SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">'
-            '<ns1:{func_name}>{params}</ns1:{func_name}></SOAP-ENV:Body></SOAP-ENV:Envelope>'
-        ).format(search_url=self.search_url, func_name=func_name, params=params)
+            f'<ns1:{func_name}>{params}</ns1:{func_name}></SOAP-ENV:Body></SOAP-ENV:Envelope>'
+        )
 
         for _ in range(tries):
             try:
                 res = self.session.post(self.search_url, data=data, headers=headers)
                 return ElementTree.fromstring(res.content)
             except Exception as ex:
-                logger.error("[BSPlayer] ERROR: %s." % ex)
+                logger.exception(f'[BSPlayer] ERROR: {ex}.')
                 if func_name == 'logIn':
                     self.search_url = get_sub_domain()
                 sleep(1)
         logger.error('[BSPlayer] ERROR: Too many tries (%d)...' % tries)
+        return None
 
     def initialize(self) -> None:
         root = self._api_request(
-            func_name='logIn',
-            params=('<username></username>'
-                    '<password></password>'
-                    '<AppID>BSPlayer v2.67</AppID>')
+            func_name='logIn', params=('<username></username>' '<password></password>' '<AppID>BSPlayer v2.67</AppID>')
         )
         res = root.find('.//return')
         if res.find('status').text == 'OK':
             self.token = res.find('data').text
 
     def terminate(self) -> None:
-        root = self._api_request(
-            func_name='logOut',
-            params='<handle>{token}</handle>'.format(token=self.token)
-        )
+        root = self._api_request(func_name='logOut', params=f'<handle>{self.token}</handle>')
         res = root.find('.//return')
         if res.find('status').text != 'OK':
             logger.error('[BSPlayer] ERROR: Unable to close session.')
         self.token = None
 
-    def query(self, languages: set[languages], hash: str | None = None, size: int | None = None) -> list[BSPlayerSubtitle]:
+    def query(
+        self, languages: set[languages], hash: str | None = None, size: int | None = None
+    ) -> list[BSPlayerSubtitle]:
         # fill the search criteria
         root = self._api_request(
             func_name='searchSubtitles',
@@ -176,8 +192,9 @@ class BSPlayerProvider(Provider):
                 '<movieSize>{movie_size}</movieSize>'
                 '<languageId>{language_ids}</languageId>'
                 '<imdbId>*</imdbId>'
-            ).format(token=self.token, movie_hash=hash,
-                     movie_size=size, language_ids=','.join(map(lambda l: l.alpha3, languages)))
+            ).format(
+                token=self.token, movie_hash=hash, movie_size=size, language_ids=','.join(l.alpha3 for l in languages)
+            ),
         )
         res = root.find('.//return/result')
         if res.find('status').text != 'OK':
@@ -206,9 +223,26 @@ class BSPlayerProvider(Provider):
                 movie_size = item.find('movieSize').text
                 movie_fps = item.find('movieFPS').text
 
-                subtitle = BSPlayerSubtitle(subtitle_id, size, download_link, language, filename, subtitle_format,
-                                            subtitle_hash, rating, season, episode, encoding, imdb_id, imdb_rating,
-                                            movie_year, movie_name, movie_hash, movie_size, movie_fps)
+                subtitle = BSPlayerSubtitle(
+                    subtitle_id,
+                    size,
+                    download_link,
+                    language,
+                    filename,
+                    subtitle_format,
+                    subtitle_hash,
+                    rating,
+                    season,
+                    episode,
+                    encoding,
+                    imdb_id,
+                    imdb_rating,
+                    movie_year,
+                    movie_name,
+                    movie_hash,
+                    movie_size,
+                    movie_fps,
+                )
                 logger.debug('Found subtitle %s', subtitle)
 
                 subtitles.append(subtitle)

@@ -4,7 +4,7 @@ interactions:
 
       <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
       xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://s2.api.bsplayer-subtitles.com/v1.php"><SOAP-ENV:Body
+      xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://s1.api.bsplayer-subtitles.com/v1.php"><SOAP-ENV:Body
       SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><ns1:logIn><username></username><password></password><AppID>BSPlayer
       v2.67</AppID></ns1:logIn></SOAP-ENV:Body></SOAP-ENV:Envelope>'
     headers:
@@ -23,17 +23,17 @@ interactions:
       User-Agent:
       - BSPlayer/2.x (1022.12360)
     method: POST
-    uri: http://s2.api.bsplayer-subtitles.com/v1.php
+    uri: http://s1.api.bsplayer-subtitles.com/v1.php
   response:
     body:
       string: '<?xml version="1.0" encoding="UTF-8"?>
 
         <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
-        xmlns:ns1="http://s3.api.bsplayer-subtitles.com/v1.php" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:ns1="http://s1.api.bsplayer-subtitles.com/v1.php" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
         SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><SOAP-ENV:Body><ns1:logInResponse><return
         xsi:type="ns1:SubtitlesResult"><result xsi:type="xsd:string">200</result><status
-        xsi:type="xsd:string">OK</status><data xsi:type="xsd:string">e0d303818073897ce300f922fb16c681</data></return></ns1:logInResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>
+        xsi:type="xsd:string">OK</status><data xsi:type="xsd:string">70012cff27e904c12144aadc5c089b2e</data></return></ns1:logInResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>
 
         '
     headers:
@@ -42,11 +42,11 @@ interactions:
       Content-Encoding:
       - gzip
       Content-Length:
-      - '344'
+      - '343'
       Content-Type:
       - text/xml; charset=utf-8
       Date:
-      - Sun, 28 Jul 2024 19:24:28 GMT
+      - Mon, 29 Jul 2024 23:06:18 GMT
       Server:
       - Apache/2.4.59 (Debian)
       Vary:
@@ -59,8 +59,8 @@ interactions:
 
       <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
       xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://s2.api.bsplayer-subtitles.com/v1.php"><SOAP-ENV:Body
-      SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><ns1:searchSubtitles><handle>e0d303818073897ce300f922fb16c681</handle><movieHash>5b8f8f4e41ccb21e</movieHash><movieSize>7033732714</movieSize><languageId>fra,deu</languageId><imdbId>*</imdbId></ns1:searchSubtitles></SOAP-ENV:Body></SOAP-ENV:Envelope>'
+      xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://s1.api.bsplayer-subtitles.com/v1.php"><SOAP-ENV:Body
+      SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><ns1:searchSubtitles><handle>70012cff27e904c12144aadc5c089b2e</handle><movieHash>5b8f8f4e41ccb21e</movieHash><movieSize>7033732714</movieSize><languageId>fra,deu</languageId><imdbId>*</imdbId></ns1:searchSubtitles></SOAP-ENV:Body></SOAP-ENV:Envelope>'
     headers:
       Accept:
       - '*/*'
@@ -77,13 +77,13 @@ interactions:
       User-Agent:
       - BSPlayer/2.x (1022.12360)
     method: POST
-    uri: http://s2.api.bsplayer-subtitles.com/v1.php
+    uri: http://s1.api.bsplayer-subtitles.com/v1.php
   response:
     body:
       string: '<?xml version="1.0" encoding="UTF-8"?>
 
         <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
-        xmlns:ns1="http://s3.api.bsplayer-subtitles.com/v1.php" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:ns1="http://s1.api.bsplayer-subtitles.com/v1.php" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
         SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><SOAP-ENV:Body><ns1:searchSubtitlesResponse><return
         xsi:type="ns1:SearchResult"><result xsi:type="ns1:SubtitlesResult"><result
@@ -91,7 +91,7 @@ interactions:
         xsi:type="xsd:string">0</data></result><data SOAP-ENC:arrayType="ns1:SubtitleData[4]"
         xsi:type="ns1:ArrayOfSubtitleData"><item xsi:type="ns1:SubtitleData"><subID
         xsi:type="xsd:int">16448284</subID><subSize xsi:type="xsd:int">32914</subSize><subDownloadLink
-        xsi:type="xsd:string">http://download2.bsplayer-subtitles.com/download/file/16448284/de0d303818073897ce300f922fb16c681</subDownloadLink><subLang
+        xsi:type="xsd:string">http://download2.bsplayer-subtitles.com/download/file/16448284/d70012cff27e904c12144aadc5c089b2e</subDownloadLink><subLang
         xsi:type="xsd:string">fre</subLang><subName xsi:type="xsd:string">Man.Of.Steel.2013.1080p.BluRay.AVC.DTS-HD.MA.7.1-TRUEDEF.Fr.srt</subName><subFormat
         xsi:type="xsd:string">srt</subFormat><subHash xsi:type="xsd:string">7054beaba53a11728a66cf4ddf17e999</subHash><subRating
         xsi:nil="true"/><season xsi:nil="true"/><episode xsi:nil="true"/><encsubtitle
@@ -100,7 +100,7 @@ interactions:
         xsi:type="xsd:string">5b8f8f4e41ccb21e</movieHash><movieSize xsi:type="xsd:long">0</movieSize><movieFPS
         xsi:type="xsd:float">0</movieFPS></item><item xsi:type="ns1:SubtitleData"><subID
         xsi:type="xsd:int">16456646</subID><subSize xsi:type="xsd:int">37758</subSize><subDownloadLink
-        xsi:type="xsd:string">http://download2.bsplayer-subtitles.com/download/file/16456646/de0d303818073897ce300f922fb16c681</subDownloadLink><subLang
+        xsi:type="xsd:string">http://download2.bsplayer-subtitles.com/download/file/16456646/d70012cff27e904c12144aadc5c089b2e</subDownloadLink><subLang
         xsi:type="xsd:string">ger</subLang><subName xsi:type="xsd:string">Man.of.Steel.German.720p.BluRay.x264-EXQUiSiTE.srt</subName><subFormat
         xsi:type="xsd:string">srt</subFormat><subHash xsi:type="xsd:string">987cc67a38e2c0838fa47344325026c3</subHash><subRating
         xsi:nil="true"/><season xsi:nil="true"/><episode xsi:nil="true"/><encsubtitle
@@ -109,7 +109,7 @@ interactions:
         xsi:type="xsd:string">5b8f8f4e41ccb21e</movieHash><movieSize xsi:type="xsd:long">0</movieSize><movieFPS
         xsi:type="xsd:float">0</movieFPS></item><item xsi:type="ns1:SubtitleData"><subID
         xsi:type="xsd:int">16456702</subID><subSize xsi:type="xsd:int">32585</subSize><subDownloadLink
-        xsi:type="xsd:string">http://download2.bsplayer-subtitles.com/download/file/16456702/de0d303818073897ce300f922fb16c681</subDownloadLink><subLang
+        xsi:type="xsd:string">http://download2.bsplayer-subtitles.com/download/file/16456702/d70012cff27e904c12144aadc5c089b2e</subDownloadLink><subLang
         xsi:type="xsd:string">fre</subLang><subName xsi:type="xsd:string">man.of.steel.2013.720p.bluray.x264-felony.srt</subName><subFormat
         xsi:type="xsd:string">srt</subFormat><subHash xsi:type="xsd:string">2400948861b6f74da73fb2b720f776f8</subHash><subRating
         xsi:nil="true"/><season xsi:nil="true"/><episode xsi:nil="true"/><encsubtitle
@@ -118,7 +118,7 @@ interactions:
         xsi:type="xsd:string">5b8f8f4e41ccb21e</movieHash><movieSize xsi:type="xsd:long">0</movieSize><movieFPS
         xsi:type="xsd:float">0</movieFPS></item><item xsi:type="ns1:SubtitleData"><subID
         xsi:type="xsd:int">21230278</subID><subSize xsi:type="xsd:int">32582</subSize><subDownloadLink
-        xsi:type="xsd:string">http://download2.bsplayer-subtitles.com/download/file/21230278/de0d303818073897ce300f922fb16c681</subDownloadLink><subLang
+        xsi:type="xsd:string">http://download2.bsplayer-subtitles.com/download/file/21230278/d70012cff27e904c12144aadc5c089b2e</subDownloadLink><subLang
         xsi:type="xsd:string">fre</subLang><subName xsi:type="xsd:string">Ginie-ManOfSteal-fre.srt</subName><subFormat
         xsi:type="xsd:string">srt</subFormat><subHash xsi:type="xsd:string">19a5e0f72e40eb953c2ea3d1195ce10f</subHash><subRating
         xsi:nil="true"/><season xsi:nil="true"/><episode xsi:nil="true"/><encsubtitle
@@ -134,11 +134,11 @@ interactions:
       Content-Encoding:
       - gzip
       Content-Length:
-      - '919'
+      - '918'
       Content-Type:
       - text/xml; charset=utf-8
       Date:
-      - Sun, 28 Jul 2024 19:24:28 GMT
+      - Mon, 29 Jul 2024 23:06:18 GMT
       Server:
       - Apache/2.4.59 (Debian)
       Vary:
@@ -151,8 +151,8 @@ interactions:
 
       <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
       xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://s2.api.bsplayer-subtitles.com/v1.php"><SOAP-ENV:Body
-      SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><ns1:logOut><handle>e0d303818073897ce300f922fb16c681</handle></ns1:logOut></SOAP-ENV:Body></SOAP-ENV:Envelope>'
+      xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://s1.api.bsplayer-subtitles.com/v1.php"><SOAP-ENV:Body
+      SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><ns1:logOut><handle>70012cff27e904c12144aadc5c089b2e</handle></ns1:logOut></SOAP-ENV:Body></SOAP-ENV:Envelope>'
     headers:
       Accept:
       - '*/*'
@@ -169,13 +169,13 @@ interactions:
       User-Agent:
       - BSPlayer/2.x (1022.12360)
     method: POST
-    uri: http://s2.api.bsplayer-subtitles.com/v1.php
+    uri: http://s1.api.bsplayer-subtitles.com/v1.php
   response:
     body:
       string: '<?xml version="1.0" encoding="UTF-8"?>
 
         <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
-        xmlns:ns1="http://s3.api.bsplayer-subtitles.com/v1.php" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:ns1="http://s1.api.bsplayer-subtitles.com/v1.php" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
         SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><SOAP-ENV:Body><ns1:logOutResponse><return
         xsi:type="ns1:SubtitlesResult"><result xsi:type="xsd:string">200</result><status
@@ -192,7 +192,7 @@ interactions:
       Content-Type:
       - text/xml; charset=utf-8
       Date:
-      - Sun, 28 Jul 2024 19:24:28 GMT
+      - Mon, 29 Jul 2024 23:06:18 GMT
       Server:
       - Apache/2.4.59 (Debian)
       Vary:

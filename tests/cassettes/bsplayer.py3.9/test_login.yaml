@@ -26,16 +26,13 @@ interactions:
     uri: http://s1.api.bsplayer-subtitles.com/v1.php
   response:
     body:
-      string: '<?xml version="1.0" encoding="UTF-8"?>
-
-        <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
-        xmlns:ns1="http://api.bsplayer-subtitles.com/v1.php" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
-        SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><SOAP-ENV:Body><ns1:logInResponse><return
-        xsi:type="ns1:SubtitlesResult"><result xsi:type="xsd:string">200</result><status
-        xsi:type="xsd:string">OK</status><data xsi:type="xsd:string">27d2b8c24899a1382a342bb0ecf11720</data></return></ns1:logInResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>
-
-        '
+      string: !!binary |
+        H4sIAAAAAAAAA5WS3W+CMBTF3/0rSN+hoBMNqTXb4pJlnxnbstcKFyXBtuEWkf9+RUX3Zba93dz+
+        Tk/PSdl0syqcNZSYKzkhgecTB2Si0lwuJuTl+codkynvsfjh/NGd3b9GM7mGQmlwrE5i1O0nZGmM
+        jijFZAkrgZ49RiW0p8oFbQcKeyEle6nE4KASOvfmqAvRQOliNTe5KQC9RK3oOvD0UneiDaYHUV3X
+        Xj3YOvR9P6Bvd7fx1v0I57/Dbi7RCJkA+Rzp8i+RdkXZSId+ul1smgL+cwU/dnyh0oYz209UqMW1
+        fALUSiJwVoKpSunYXJFptL2+ZeKuLstVhSEt1g4fMNtahKa0PoTb9IzuCM5sclPhCfLhhtEdwFkq
+        jDiBzcNA9MPxCLI0DEM/FaPhKBtAFp7546GfDRltxbw1bV9vhx+S0S/h6bcPx3vvV5j9vKwCAAA=
     headers:
       Connection:
       - close
@@ -46,7 +43,7 @@ interactions:
       Content-Type:
       - text/xml; charset=utf-8
       Date:
-      - Mon, 29 Jul 2024 22:51:48 GMT
+      - Mon, 29 Jul 2024 22:57:26 GMT
       Server:
       - Apache/2.4.59 (Debian)
       Vary:

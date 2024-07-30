@@ -89,7 +89,7 @@ def test_query_hash_size(movies):
         '17580179',
     }
     with BSPlayerProvider(search_url='http://s1.api.bsplayer-subtitles.com/v1.php') as provider:
-        subtitles = provider.query(languages, hash=video.hashes['bsplayer'], size=video.size)
+        subtitles = provider.query(languages, file_hash=video.hashes['bsplayer'], size=video.size)
     assert {subtitle.id for subtitle in subtitles} == expected_subtitles
     assert {subtitle.language for subtitle in subtitles} == languages
 

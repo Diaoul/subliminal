@@ -199,7 +199,7 @@ class BSPlayerProvider(Provider):
                 token=self.token,
                 movie_hash=file_hash,
                 movie_size=size,
-                language_ids=','.join(lang.alpha3 for lang in languages),
+                language_ids=','.join(sorted(lang.alpha3 for lang in languages)),
             ),
         )
         res = root.find('.//return/result')

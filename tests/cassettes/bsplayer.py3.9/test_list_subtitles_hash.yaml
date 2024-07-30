@@ -27,24 +27,24 @@ interactions:
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAA5WSXU/CMBSG7/kVS+/XrjIBl1KiBhPjB8ap8bZsR1gy2mbtGPv3dsCYX0S9aU5O
-        n7fnvG/KJptV7q2hMJmSY0RxgDyQiUozuRij56crf4QmvMfi2fmDP71/iaZyDbnS4DmdNFHbH6Ol
-        tToixCRLWAmD3bVRQmNVLEhTENgLCdpLpaGdqo+FzvDc6FzUUPimnNvM5mBwolZkTbFe6la3MelB
-        V1UVrvrbISdBQMnr3W28XaCDs99hP5PGCpkA+uzq8i+udlk5V4eI2l5s6xz+8wTvYr5Qac2ZiyjK
-        1eJaPoLRShrgrABbFtJzviJba/d8w8RtXI4rc4sarCk+YC61yNjCzUHcuWdkR3DmnNvSHCFnN4zs
-        AM5SYcURbDSgdPAWDkUIwzM6gjAMIA1TGp7OwR0JI42YN0Ob7V3xgzPyxTz59ud47x1FMYQcrwIA
-        AA==
+        H4sIAAAAAAAAA5WSy27CMBBF93xF5H3smIdoImPUVlSq+qBq2qpbJzEQKdhWxiHk7+sAgT7Vdjca
+        nzsz98psul0X3kaWkGs1QRQHyJMq1VmulhP0/HTln6Ep77F4fv7gz+5fopnayEIb6TmdgqjrT9DK
+        WhMRAulKrgVg9wxaGKzLJWkLIg9Cgg5SBfSkGmBhcpyAKUQjSx+qxOa2kIBTvSYbis3KdLotZEdd
+        Xde4HuyW9IOAkte723h3wAnOf4f9XIEVKpXoo6vLv7jaZ+VcHSPqerFtCvmfEfwU84XOGs5cRFGh
+        l9fqUYLRCiRnpbRVqTznK7KNceNbJu7iclxVWNRibfEOc6lFYEu3B3HnnpE9wZlzbiv4gZzfMLIH
+        OMuEFT9gYdgfjrLFaEHDQUATKlI6Dsfj4TDpi5GQISOtmLdL2+td8Y0z8sk8+fLneO8NNatdfq8C
+        AAA=
     headers:
       Connection:
       - close
       Content-Encoding:
       - gzip
       Content-Length:
-      - '343'
+      - '344'
       Content-Type:
       - text/xml; charset=utf-8
       Date:
-      - Mon, 29 Jul 2024 22:57:27 GMT
+      - Tue, 30 Jul 2024 22:22:41 GMT
       Server:
       - Apache/2.4.59 (Debian)
       Vary:
@@ -58,7 +58,7 @@ interactions:
       <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
       xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://s2.api.bsplayer-subtitles.com/v1.php"><SOAP-ENV:Body
-      SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><ns1:searchSubtitles><handle>86116f47a4e7918e440ed4d145be145c</handle><movieHash>5b8f8f4e41ccb21e</movieHash><movieSize>7033732714</movieSize><languageId>fra,deu</languageId><imdbId>*</imdbId></ns1:searchSubtitles></SOAP-ENV:Body></SOAP-ENV:Envelope>'
+      SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><ns1:searchSubtitles><handle>99245df5f19301b1ac1797744b2a5ae9</handle><movieHash>5b8f8f4e41ccb21e</movieHash><movieSize>7033732714</movieSize><languageId>deu,fra</languageId><imdbId>*</imdbId></ns1:searchSubtitles></SOAP-ENV:Body></SOAP-ENV:Envelope>'
     headers:
       Accept:
       - '*/*'
@@ -79,34 +79,34 @@ interactions:
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAA+2YUW/aOhTH3/cpqrzjxI4TJ4gytQO2ae2629BpV9N9cJKTYi04UWxKuZ/+OoEA
-        F5rdTlO7q6kvyMr5Hfucf/zHmMHr+3l+cgeVEoU8tTByrBOQSZEKeXtq3UwnvcB6PXw1iK7OPvXG
-        Hz/3x/IO8qKEE5MnVb99fmrNtC77tq2SGcy5QiasCl6iorq164ENm0Tb2qRKhXdZLuKlQLEqc76C
-        qqcWsRY6B4WSYm7fYVTOyjbvXqXbvOVyiZZuswhxHGx/ubyImgJ2sPhvuCek0lwmYP27qzeP6Wqt
-        lelqK1H7LNKrHH5kiuFO5vMiXQ0HRqK+Al4ls6gV5BpUWUgFw0EFelHJE9NhX69Ks1BNRw1toEWu
-        rZqpB4fM3lwdmNG4r3RlqrKGRquBvSaGA6OTXqgO8urDwF4Dw0HKNe/AzHR1dLibtYFb0fu8qvhq
-        elTuyEBf6V/WQTdnNX2V7VOmI6Fh3tH2hjBb7P3ooEIhjRrYpzQgATW91EhDRuJveIh1SYjXYE00
-        6KhYyrzg6YWQ3zoE2OyIdEOSrn3fAnYmcrDbuuw08DH2M8o4BRbiACh1IKUppl4M5iNpCtqvoyns
-        gsvbjoKyCpqcGmnYj3x+2G/LXnKJrjIUaYAcEQe7CDuBU6LzfHHNV+js8xs0mka9dyN0eYYYwr3p
-        9c14NJ6gSYVUpZt16umbdSZFNeddG6+l11DDv+Nq1kEzx6Mx8Jh7LseYkYD7fpLRNM0wgzAMm6nq
-        /Gaia67FRg4p8lNLVwuwbBMCrgp5/BxKoYoUHgjIpH1px8F5cSfg/eX56Ginbb3AmGNe6sDeQ/fy
-        uspsgD+N1ztC2/d3HPqOhF4cZEFGgeIkiQmGTVVr0ZrhAz7Ii42nt8CGnXyKDtDM7Ee9Yw1gvgNq
-        p/6sXz3fp/6j/MqYFzyfX5u6nsCvt1D9kF+L1q9vwVhJIkZ2hr0nPu2Nv/xxIyIxHT+pRcOAJYnP
-        uBsASZzADTJOmUupSzyH+In7YtHf2aLMIY87Ur3Ae06Lmrp+8ZE6X1tU7Y7UxqBxvqhag2bmt7Nc
-        Pak7CXWckAZGidjPGE05c7OYxKaUjDE/C17c+Zu6k2DiOoQFj3UneSZ3tnX9Yne+FVJAzxyj5pKh
-        gec9k/ykRsQh98CYjoBpMw49NyHA3RTj0EsAO9mLEf/PRtzdbevruRl89xJvH9z47aM/Woav/gFD
-        yy+spBEAAA==
+        H4sIAAAAAAAAA+2Y4W+bOBjGv++vqPgeg43BEKWZ2iXZprXrrqTTTtN9MPDSWCMGYadp7q8/Q0KS
+        S8qu09TuNPUbwr/Xft4HP3Xcwev7eX5yB5UShTy1MHKsE5BJkQp5e2rdTCe9wHo9fDWIrs4+9cYf
+        P/fH8g7yooQTUydVv31/as20Lvu2rZIZzLlCZlgVvERFdWvXDzZsCm1rUyoV3lW5iJcCxarM+Qqq
+        nlrEWugcFEqKuX2HUTkr27p7lW7rlsslWrrNIsRxsP3l8iJqBOxg8d9wT0iluUzA+ndXbx7T1dor
+        09XWovZdpFc5/MgUw53N50W6Gg6MRX0FvEpmUWvINaiykAqGgwr0opInpsO+XpVmoZqOGtpAi1xb
+        NVM/HDJ7c3VgxuO+0pVRZQ2NVwN7TQwHxie9UB3k1YeBvQaGg5Rr3oGZ6erR4W7WBm5N7/Oq4qvp
+        kdyRgb7Sv6yDbs5q+irbp0xHQsO8o+0NYbbY+9GBQiGNG9inNCABNb3USENG4m94iHVJiNdgTTTo
+        qFjKvODphZDfOgzY7Ih0Q5Kufd8CdiZysFtddhqGhHpp5mU4dB0cY55gFjJGaUy4xyFsBO3raIRd
+        cHnbISiroKmpkYb9yOeH/bbsJZfoKkORBsgRcbCLsBM4JTrPF9d8hc4+v0GjadR7N0KXZ4gh3Jte
+        34xH4wmaVEhVulmnnr5ZZ1JUc9618Vp6DTX8O65mHTRzPBoDj7nncowZCbjvJxlN0wwzCMO1KXV9
+        M9E112JjhxT5qaWrBVi2GQKuCnn8HkqhihQeGJBJ+9GOB+fFnYD3l+ejo522zQJjjvmoA3sP3avr
+        ktkAf5qsdwxtv9/x0Hcs9OIgCzIKFCdJTDBsVK1Nax4fyEFebDK9BTbs5FN0gGZmP+odawDzN6BO
+        6s/m1fN96j8qr4x5wfPltdH1BHm9heqH8lq0eX0LJkoSMbIL7D3xaW/85Y8bEYnp+EkjGgYsSXzG
+        3QBI4gRukHHKXEpd4jnET9yXiP7OEWUOedyR6gXec0bU6PrFR+p8HVG1O1KbgMb5omoDmpnfznL1
+        pOkk1HFCGgQ+jv2M0ZQzN4tJbKRkjPlZ8JLO3zSdBBPXISx4bDrJM6Wz1fWL0/lWSAE9c4yaS4YG
+        nvdM8ZMGEYfcAxM6AtSBOPTchAB3U4xDLwHsZC9B/D8HcXe3ra/n5uG7l3j74MZvH/2jZfjqHxqs
+        Pz2kEQAA
     headers:
       Connection:
       - close
       Content-Encoding:
       - gzip
       Content-Length:
-      - '919'
+      - '918'
       Content-Type:
       - text/xml; charset=utf-8
       Date:
-      - Mon, 29 Jul 2024 22:57:27 GMT
+      - Tue, 30 Jul 2024 22:22:41 GMT
       Server:
       - Apache/2.4.59 (Debian)
       Vary:
@@ -120,7 +120,7 @@ interactions:
       <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
       xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://s2.api.bsplayer-subtitles.com/v1.php"><SOAP-ENV:Body
-      SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><ns1:logOut><handle>86116f47a4e7918e440ed4d145be145c</handle></ns1:logOut></SOAP-ENV:Body></SOAP-ENV:Envelope>'
+      SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><ns1:logOut><handle>99245df5f19301b1ac1797744b2a5ae9</handle></ns1:logOut></SOAP-ENV:Body></SOAP-ENV:Envelope>'
     headers:
       Accept:
       - '*/*'
@@ -157,7 +157,7 @@ interactions:
       Content-Type:
       - text/xml; charset=utf-8
       Date:
-      - Mon, 29 Jul 2024 22:57:27 GMT
+      - Tue, 30 Jul 2024 22:22:42 GMT
       Server:
       - Apache/2.4.59 (Debian)
       Vary:

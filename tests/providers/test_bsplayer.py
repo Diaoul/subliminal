@@ -1,5 +1,4 @@
 import os
-import sys
 
 import pytest
 from babelfish import Language
@@ -9,10 +8,9 @@ from vcr import VCR
 vcr = VCR(
     path_transformer=lambda path: path + '.yaml',
     record_mode=os.environ.get('VCR_RECORD_MODE', 'once'),
+    decode_compressed_response=True,
     match_on=['method', 'scheme', 'host', 'port', 'path', 'query', 'body'],
-    cassette_library_dir=os.path.realpath(
-        os.path.join('tests', 'cassettes', 'bsplayer' if sys.version_info >= (3, 10) else 'bsplayer.py3.9')
-    ),
+    cassette_library_dir=os.path.realpath(os.path.join('tests', 'cassettes', 'bsplayer')),
 )
 
 

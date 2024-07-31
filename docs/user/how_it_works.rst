@@ -9,7 +9,6 @@ subtitles. Current supported providers are:
 * Addic7ed
 * BSPlayer
 * Gestdown
-* Gestdown
 * NapiProjekt
 * OpenSubtitles
 * OpenSubtitles.com

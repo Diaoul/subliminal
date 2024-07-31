@@ -10,8 +10,8 @@ from time import sleep
 from typing import TYPE_CHECKING, Any, ClassVar
 from xmlrpc.client import ServerProxy
 
-from babelfish import Language, language_converters
-from defusedxml import ElementTree
+from babelfish import Language, language_converters  # type: ignore[import-untyped]
+from defusedxml import ElementTree  # type: ignore[import-untyped]
 from requests import Session
 
 from subliminal.subtitle import Subtitle, fix_line_ending
@@ -19,6 +19,8 @@ from subliminal.subtitle import Subtitle, fix_line_ending
 from . import Provider, TimeoutSafeTransport
 
 if TYPE_CHECKING:
+    from collections.abc import Set
+
     from subliminal.video import Video
 
 logger = logging.getLogger(__name__)
@@ -109,14 +111,22 @@ class BSPlayerSubtitle(Subtitle):
         return self.filename
 
     @property
-    def series_name(self) -> str:
+    def series_name(self) -> str | None:
         """The series name matched from `movie_name`."""
-        return self.series_re.match(self.movie_name).group('series_name')
+        if self.movie_name:
+            matches = self.series_re.match(self.movie_name)
+            if matches:
+                return matches.group('series_name')
+        return None
 
     @property
-    def series_title(self) -> str:
+    def series_title(self) -> str | None:
         """The series title matched from `movie_name`."""
-        return self.series_re.match(self.movie_name).group('series_title')
+        if self.movie_name:
+            matches = self.series_re.match(self.movie_name)
+            if matches:
+                return matches.group('series_title')
+        return None
 
     def get_matches(self, video: Video) -> set[str]:
         """Get the matches against the `video`."""
@@ -184,7 +194,7 @@ class BSPlayerProvider(Provider):
         self.token = None
 
     def query(
-        self, languages: set[Language], file_hash: str | None = None, size: int | None = None
+        self, languages: Set[Language], file_hash: str | None = None, size: int | None = None
     ) -> list[BSPlayerSubtitle]:
         """Query the provider for subtitles."""
         # fill the search criteria
@@ -256,7 +266,7 @@ class BSPlayerProvider(Provider):
 
         return subtitles
 
-    def list_subtitles(self, video: Video, languages: set[Language]) -> list[BSPlayerSubtitle]:
+    def list_subtitles(self, video: Video, languages: Set[Language]) -> list[BSPlayerSubtitle]:
         """List all the subtitles for the video."""
         return self.query(languages, file_hash=video.hashes.get('bsplayer'), size=video.size)
 

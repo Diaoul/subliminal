@@ -24,7 +24,7 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 
-def hash_bsplayer(video_path: str) -> str | None:
+def hash_bsplayer(video_path: str | os.PathLike) -> str | None:
     """Compute a hash using BSPlayer's algorithm.
 
     :param str video_path: path of the video.

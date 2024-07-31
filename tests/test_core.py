@@ -85,14 +85,14 @@ def test_provider_pool_list_subtitles_provider(episodes):
 def test_provider_pool_list_subtitles(episodes):
     pool = ProviderPool()
     subtitles = pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
-    assert sorted(subtitles) == [
+    assert sorted(subtitles) == [  # type: ignore[type-var,comparison-overlap]
         'bsplayer',
         'gestdown',
         'opensubtitles',
         'opensubtitlescom',
         'podnapisi',
         'tvsubtitles',
-    ]  # type: ignore[type-var,comparison-overlap]
+    ]
     for provider in subtitles:
         assert provider_manager[provider].plugin.initialize.called
         assert provider_manager[provider].plugin.list_subtitles.called
@@ -111,14 +111,14 @@ def test_async_provider_pool_list_subtitles_provider(episodes):
 def test_async_provider_pool_list_subtitles(episodes):
     pool = AsyncProviderPool()
     subtitles = pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
-    assert sorted(subtitles) == [
+    assert sorted(subtitles) == [  # type: ignore[type-var,comparison-overlap]
         'bsplayer',
         'gestdown',
         'opensubtitles',
         'opensubtitlescom',
         'podnapisi',
         'tvsubtitles',
-    ]  # type: ignore[type-var,comparison-overlap]
+    ]
     for provider in subtitles:
         assert provider_manager[provider].plugin.initialize.called
         assert provider_manager[provider].plugin.list_subtitles.called

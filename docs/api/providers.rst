@@ -9,6 +9,12 @@ Addic7ed
    :members:
    :private-members:
 
+BSPlayer
+--------
+.. automodule:: subliminal.providers.bsplayer
+   :members:
+   :private-members:
+
 Gestdown
 --------
 .. automodule:: subliminal.providers.gestdown

@@ -1,4 +1,13 @@
-from subliminal.refiners.hash import hash_opensubtitles, hash_thesubdb
+from subliminal.refiners.hash import hash_bsplayer, hash_opensubtitles, hash_thesubdb
+
+
+def test_hash_bsplayer(mkv):
+    assert hash_bsplayer(mkv['test1']) == '40b44a7096b71ec3'
+
+
+def test_hash_bsplayer_too_small(tmpdir):
+    path = tmpdir.ensure('test_too_small.mkv')
+    assert hash_bsplayer(str(path)) is None
 
 
 def test_hash_opensubtitles(mkv):

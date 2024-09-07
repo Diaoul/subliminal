@@ -49,7 +49,7 @@ def hash_bsplayer(video_path: str | os.PathLike) -> str | None:
 
         f.seek(max(0, file_size - 65536), 0)
 
-        for _x in range(65536 // byte_size):
+        for _ in range(65536 // byte_size):
             buff = f.read(byte_size)
             (l_value,) = struct.unpack(little_endian_long_long, buff)
             file_hash += l_value

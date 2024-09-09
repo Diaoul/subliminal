@@ -25,7 +25,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.x"
-      - uses: pre-commit/action@v3.8.0
+      - uses: pre-commit/action@v3.0.1
 
   typing:
     if: github.event_name != 'schedule'

@@ -308,6 +308,16 @@ def cache(ctx: click.Context, clear_subliminal: bool) -> None:
 @click.option('-r', '--refiner', type=REFINER, multiple=True, help='Refiner to use (can be used multiple times).')
 @click.option('-a', '--age', type=AGE, help='Filter videos newer than AGE, e.g. 12h, 1w2d.')
 @click.option(
+    '--use_creation_time',
+    'use_ctime',
+    is_flag=True,
+    default=False,
+    help=(
+        'Use the latest of modification date and creation date to calculate the age. '
+        'Otherwise, just use the modification date.'
+    ),
+)
+@click.option(
     '-d',
     '--directory',
     type=click.STRING,
@@ -374,6 +384,7 @@ def download(
     refiner: Sequence[str],
     language: Sequence[Language],
     age: timedelta | None,
+    use_ctime: bool,
     directory: str | None,
     encoding: str | None,
     original_encoding: bool,
@@ -460,7 +471,7 @@ def download(
             for video in video_candidates:
                 if not force:
                     video.subtitles |= set(search_external_subtitles(video.name, directory=directory).values())
-                if check_video(video, languages=language_set, age=age, undefined=single):
+                if check_video(video, languages=language_set, age=age, use_ctime=use_ctime, undefined=single):
                     refine(
                         video,
                         episode_refiners=refiner,

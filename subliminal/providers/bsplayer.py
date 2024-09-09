@@ -7,7 +7,7 @@ import re
 import secrets
 import zlib
 from time import sleep
-from typing import TYPE_CHECKING, ClassVar, cast
+from typing import TYPE_CHECKING, ClassVar, cast, overload
 
 from babelfish import Language, language_converters  # type: ignore[import-untyped]
 from defusedxml import ElementTree  # type: ignore[import-untyped]
@@ -55,35 +55,48 @@ def get_sub_domain() -> str:
     return API_URL_TEMPLATE.format(sub_domain=SUB_DOMAINS[secrets.randbelow(len(SUB_DOMAINS))])
 
 
-def try_int(value: str | None) -> int | None:
-    """Try converting value to int or None."""
-    if value is None or value == '':
-        return None
+@overload
+def find_text(xml: Element | None, tag: str, default: str) -> str: ...
+
+
+@overload
+def find_text(xml: Element | None, tag: str, default: None = None) -> str | None: ...
+
+
+def find_text(xml: Element | None, tag: str, default: str | None = None) -> str | None:
+    """Find tag in XML and return text or None."""
+    if xml is None:
+        return default
+    res = xml.find(tag)
+    if res is None:
+        return default
+    return res.text if res.text is not None else default
+
+
+def find_int(xml: Element, tag: str, default: int | None = None) -> int | None:
+    """Find tag in XML and return text converted to int or None."""
+    value = find_text(xml, tag, default=None)
+    if value is None:
+        return default
 
     try:
         return int(value)
     except ValueError:
         logger.exception('Error parsing value.')
-        return None
+        return default
 
 
-def try_float(value: str | None) -> float | None:
-    """Try converting value to float or None."""
-    if value is None or value == '':
-        return None
+def find_float(xml: Element, tag: str, default: float | None = None) -> float | None:
+    """Find tag in XML and return text converted to float or None."""
+    value = find_text(xml, tag)
+    if value is None:
+        return default
 
     try:
         return float(value)
     except ValueError:
         logger.exception('Error parsing value.')
-        return None
-
-
-def try_str(value: str | None) -> str | None:
-    """Try converting value to str or None."""
-    if value is None or value == '':
-        return None
-    return value
+        return default
 
 
 class BSPlayerSubtitle(Subtitle):
@@ -225,10 +238,10 @@ class BSPlayerProvider(Provider):
             params='<username></username><password></password><AppID>BSPlayer v2.67</AppID>',
         )
         res = root.find('.//return')
-        if res is None or res.findtext('status') != 'OK':
+        if res is None or find_text(res, 'status') != 'OK':
             msg = '[BSPlayer] ERROR: Unable to login.'
             raise AuthenticationError(msg)
-        self.token = try_str(res.findtext('data'))
+        self.token = find_text(res, 'data')
 
     def terminate(self) -> None:
         """Terminate the provider."""
@@ -236,7 +249,7 @@ class BSPlayerProvider(Provider):
             raise NotInitializedProviderError
         root = self._api_request(func_name='logOut', params=f'<handle>{self.token}</handle>')
         res = root.find('.//return')
-        if res is None or res.findtext('status') != 'OK':
+        if res is None or find_text(res, 'status') != 'OK':
             msg = '[BSPlayer] ERROR: Unable to close session.'
             logger.error(msg)
         self.token = None
@@ -263,33 +276,33 @@ class BSPlayerProvider(Provider):
             ),
         )
         res = root.find('.//return/result')
-        if res is None or res.findtext('status') != 'OK':
+        if res is None or find_text(res, 'status') != 'OK':
             return []
 
         items = root.findall('.//return/data/item')
         subtitles = []
         if items:
             for item in items:
-                language = Language.fromalpha3b(item.findtext('subLang'))
+                language = Language.fromalpha3b(find_text(item, 'subLang'))
                 subtitle = BSPlayerSubtitle(
                     language=language,
-                    subtitle_id=item.findtext('subID', default=''),
-                    page_link=item.findtext('subDownloadLink', default=''),
-                    filename=item.findtext('subName', default=''),
-                    size=try_int(item.findtext('subSize')),
-                    subtitle_format=try_str(item.findtext('subFormat')),
-                    subtitle_hash=try_str(item.findtext('subHash')),
-                    rating=try_str(item.findtext('subRating')),
-                    season=try_int(item.findtext('season')),
-                    episode=try_int(item.findtext('episode')),
-                    encoding=try_str(item.findtext('encsubtitle')),
-                    imdb_id=try_str(item.findtext('movieIMBDID')),
-                    imdb_rating=try_str(item.findtext('movieIMBDRating')),
-                    movie_year=try_int(item.findtext('movieYear')),
-                    movie_name=try_str(item.findtext('movieName')),
-                    movie_hash=try_str(item.findtext('movieHash')),
-                    movie_size=try_int(item.findtext('movieSize')),
-                    movie_fps=try_float(item.findtext('movieFPS')),
+                    subtitle_id=find_text(item, 'subID', default=''),
+                    page_link=find_text(item, 'subDownloadLink', default=''),
+                    filename=find_text(item, 'subName', default=''),
+                    size=find_int(item, 'subSize'),
+                    subtitle_format=find_text(item, 'subFormat'),
+                    subtitle_hash=find_text(item, 'subHash'),
+                    rating=find_text(item, 'subRating'),
+                    season=find_int(item, 'season'),
+                    episode=find_int(item, 'episode'),
+                    encoding=find_text(item, 'encsubtitle'),
+                    imdb_id=find_text(item, 'movieIMBDID'),
+                    imdb_rating=find_text(item, 'movieIMBDRating'),
+                    movie_year=find_int(item, 'movieYear'),
+                    movie_name=find_text(item, 'movieName'),
+                    movie_hash=find_text(item, 'movieHash'),
+                    movie_size=find_int(item, 'movieSize'),
+                    movie_fps=find_float(item, 'movieFPS'),
                 )
                 logger.debug('Found subtitle %s', subtitle)
                 subtitles.append(subtitle)

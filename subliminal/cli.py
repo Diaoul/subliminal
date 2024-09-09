@@ -39,7 +39,9 @@ from subliminal import (
     scan_videos,
 )
 from subliminal.core import ARCHIVE_EXTENSIONS, scan_name, search_external_subtitles
+from subliminal.extensions import default_providers, default_refiners
 from subliminal.score import match_hearing_impaired
+from subliminal.utils import merge_extend_and_ignore_unions
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -125,11 +127,11 @@ def configure(ctx: click.Context, param: click.Parameter | None, filename: str |
             with open(filename, 'rb') as f:
                 toml_dict = tomli.load(f)
         except tomli.TOMLDecodeError:
-            msg = f'Cannot read the configuration file at {filename}'
+            msg = f'Cannot read the configuration file at "{filename}"'
         else:
-            msg = f'Using configuration file at {filename}'
+            msg = f'Using configuration file at "{filename}"'
     else:
-        msg = 'Not using any configuration file.'
+        msg = f'Not using any configuration file, not a file "{filename}"'
 
     options = {}
 
@@ -140,6 +142,17 @@ def configure(ctx: click.Context, param: click.Parameter | None, filename: str |
 
     # make download options
     download_dict = toml_dict.setdefault('download', {})
+    # remove the provider and refiner lists to select, extend and ignore
+    provider_lists = {
+        'select': download_dict.pop('provider', []),
+        'extend': download_dict.pop('extend_provider', []),
+        'ignore': download_dict.pop('ignore_provider', []),
+    }
+    refiner_lists = {
+        'select': download_dict.pop('refiner', []),
+        'extend': download_dict.pop('extend_refiner', []),
+        'ignore': download_dict.pop('ignore_refiner', []),
+    }
     options['download'] = download_dict
 
     # make provider and refiner options
@@ -147,7 +160,9 @@ def configure(ctx: click.Context, param: click.Parameter | None, filename: str |
     refiners_dict = toml_dict.setdefault('refiner', {})
 
     ctx.obj = {
-        '__config__': {'dict': toml_dict, 'debug_message': msg},
+        'debug_message': msg,
+        'provider_lists': provider_lists,
+        'refiner_lists': refiner_lists,
         'provider_configs': providers_dict,
         'refiner_configs': refiners_dict,
     }
@@ -165,9 +180,9 @@ def plural(quantity: int, name: str, *, bold: bool = True, **kwargs: Any) -> str
 
 AGE = AgeParamType()
 
-PROVIDER = click.Choice(sorted(provider_manager.names()))
+PROVIDER = click.Choice(['ALL', *sorted(provider_manager.names())])
 
-REFINER = click.Choice(sorted(refiner_manager.names()))
+REFINER = click.Choice(['ALL', *sorted(refiner_manager.names())])
 
 dirs = PlatformDirs('subliminal')
 cache_file = 'subliminal.dbm'
@@ -257,7 +272,7 @@ def subliminal(
         logging.getLogger('subliminal').addHandler(handler)
         logging.getLogger('subliminal').setLevel(logging.DEBUG)
         # log about the config file
-        msg = ctx.obj['__config__']['debug_message']
+        msg = ctx.obj['debug_message']
         logger.info(msg)
 
     ctx.obj['debug'] = debug
@@ -305,7 +320,54 @@ def cache(ctx: click.Context, clear_subliminal: bool) -> None:
     help='Language as IETF code, e.g. en, pt-BR (can be used multiple times).',
 )
 @click.option('-p', '--provider', type=PROVIDER, multiple=True, help='Provider to use (can be used multiple times).')
+@click.option(
+    '-pp',
+    '--extend-provider',
+    type=PROVIDER,
+    multiple=True,
+    help=(
+        'Provider to use, on top of the default list (can be used multiple times). '
+        'Supersedes the providers used or ignored in the configuration file.'
+    ),
+)
+@click.option(
+    '-P',
+    '--ignore-provider',
+    type=PROVIDER,
+    multiple=True,
+    help=(
+        'Provider to ignore (can be used multiple times). '
+        'Supersedes the providers used or ignored in the configuration file.'
+    ),
+)
 @click.option('-r', '--refiner', type=REFINER, multiple=True, help='Refiner to use (can be used multiple times).')
+@click.option(
+    '-rr',
+    '--extend-refiner',
+    type=REFINER,
+    multiple=True,
+    help=(
+        'Refiner to use, on top of the default list (can be used multiple times). '
+        'Supersedes the refiners used or ignored in the configuration file.'
+    ),
+)
+@click.option(
+    '-R',
+    '--ignore-refiner',
+    type=REFINER,
+    multiple=True,
+    help=(
+        'Refiner to ignore (can be used multiple times). '
+        'Supersedes the refiners used or ignored in the configuration file.'
+    ),
+)
+@click.option(
+    '-I',
+    '--ignore-subtitles',
+    type=click.STRING,
+    multiple=True,
+    help='Subtitle ids to ignore (can be used multiple times).',
+)
 @click.option('-a', '--age', type=AGE, help='Filter videos newer than AGE, e.g. 12h, 1w2d.')
 @click.option(
     '--use_creation_time',
@@ -381,7 +443,12 @@ def cache(ctx: click.Context, clear_subliminal: bool) -> None:
 def download(
     obj: dict[str, Any],
     provider: Sequence[str],
+    extend_provider: Sequence[str],
+    ignore_provider: Sequence[str],
     refiner: Sequence[str],
+    extend_refiner: Sequence[str],
+    ignore_refiner: Sequence[str],
+    ignore_subtitles: Sequence[str],
     language: Sequence[Language],
     age: timedelta | None,
     use_ctime: bool,
@@ -419,6 +486,28 @@ def download(
     debug = obj.get('debug', False)
     if debug:
         verbose = 3
+
+    # parse list of refiners
+    use_providers = merge_extend_and_ignore_unions(
+        {
+            'select': provider,
+            'extend': extend_provider,
+            'ignore': ignore_provider,
+        },
+        obj['provider_lists'],
+        default_providers,
+    )
+    logger.info('Use providers: %s', use_providers)
+    use_refiners = merge_extend_and_ignore_unions(
+        {
+            'select': refiner,
+            'extend': extend_refiner,
+            'ignore': ignore_refiner,
+        },
+        obj['refiner_lists'],
+        default_refiners,
+    )
+    logger.info('Use refiners: %s', use_refiners)
 
     # scan videos
     videos = []
@@ -474,11 +563,10 @@ def download(
                 if check_video(video, languages=language_set, age=age, use_ctime=use_ctime, undefined=single):
                     refine(
                         video,
-                        episode_refiners=refiner,
-                        movie_refiners=refiner,
+                        refiners=use_refiners,
                         refiner_configs=obj['refiner_configs'],
                         embedded_subtitles=not force,
-                        providers=provider,
+                        providers=use_providers,
                         languages=language_set,
                     )
                     videos.append(video)
@@ -516,11 +604,21 @@ def download(
     if not videos:
         return
 
+    # exit if no providers are used
+    if len(use_providers) == 0:
+        click.echo('No provider was selected to download subtitles.')
+        if 'ALL' in ignore_provider:
+            click.echo('All ignored from CLI argument: `--ignore-provider=ALL`')
+        elif 'ALL' in obj['provider_lists']['ignore']:
+            config_ignore = list(obj['provider_lists']['ignore'])
+            click.echo(f'All ignored from configuration: `ignore_provider={config_ignore}`')
+        return
+
     # download best subtitles
     downloaded_subtitles = defaultdict(list)
     with AsyncProviderPool(
         max_workers=max_workers,
-        providers=provider,
+        providers=use_providers,
         provider_configs=obj['provider_configs'],
     ) as pp:
         with click.progressbar(
@@ -540,6 +638,7 @@ def download(
                     min_score=scores['hash'] * min_score // 100,
                     hearing_impaired=hearing_impaired,
                     only_one=single,
+                    ignore_subtitles=ignore_subtitles,
                 )
                 downloaded_subtitles[v] = subtitles
 

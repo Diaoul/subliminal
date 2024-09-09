@@ -20,7 +20,17 @@ from .exceptions import ServiceUnavailable
 
 if TYPE_CHECKING:
     from collections.abc import Sequence, Set
-    from typing import TypeGuard
+    from typing import TypedDict, TypeGuard
+
+    S = TypeVar('S')
+
+    class ExtendedLists(Generic[S], TypedDict):
+        """Dict with item to select, extend-select and ignore."""
+
+        select: Sequence[S]
+        extend: Sequence[S]
+        ignore: Sequence[S]
+
 
 T = TypeVar('T')
 R = TypeVar('R')
@@ -61,12 +71,12 @@ def sanitize(string: str, ignore_characters: Set[str] | None = None) -> str:
 
     # replace some characters with one space
     characters = {'-', ':', '(', ')', '.', ','} - ignore_characters
-    if characters:
+    if characters:  # pragma: no branch
         string = re.sub(r'[{}]'.format(re.escape(''.join(characters))), ' ', string)
 
     # remove some characters
     characters = {"'"} - ignore_characters
-    if characters:
+    if characters:  # pragma: no branch
         string = re.sub(r'[{}]'.format(re.escape(''.join(characters))), '', string)
 
     # replace multiple spaces with one
@@ -95,6 +105,7 @@ def sanitize_release_group(string: str) -> str:
 @none_passthrough
 def sanitize_id(id_: str | int) -> int:
     """Sanitize the IMDB (or other) id and transform it to a string (without leading 'tt' or zeroes)."""
+    # TODO: use str.removeprefix('tt')
     id_ = str(id_).lower().lstrip('t')
     return int(id_)
 
@@ -233,3 +244,85 @@ def get_age(
         file_date = max(file_date, creation_date(filepath))
     reference_date = reference_date if reference_date is not None else datetime.now(timezone.utc)
     return reference_date - datetime.fromtimestamp(file_date, timezone.utc)
+
+
+def merge_extend_and_ignore_unions(
+    lists: ExtendedLists[str],
+    default_lists: ExtendedLists[str],
+    defaults: Sequence[str] | None = None,
+    all_token: str | None = 'ALL',  # noqa: S107
+) -> list[str]:
+    """Merge lists of item to select and ignore.
+
+    Ignore lists supersede the select lists.
+    `select` and `ignore` supersede `default_select` and `default_ignore`.
+
+    :param Sequence[T] select: sequence of items to select (supersede the defaults).
+    :param Sequence[T] ignore: sequence of items to select (supersede the defaults and `select`).
+    :param Sequence[T] default_select: default sequence of items to select.
+    :param Sequence[T] default_ignore: default sequence of items to ignore.
+    :return: the list of selected and not-ignored items.
+    :rtype: list[T]
+    """
+    extend = lists['extend'] or []
+    ignore = lists['ignore'] or []
+    defaults = defaults or []
+
+    # Ignore all
+    if all_token is not None and all_token in ignore:
+        return []
+
+    # Nothing selected, start by the selected list using the default_lists
+    if not lists['select']:
+        item_set = set(get_extend_and_ignore_union(**default_lists, defaults=defaults, all_token=all_token))
+    else:
+        item_set = set(lists['select'])
+
+    # Add the extend list
+    item_set.update(set(extend))
+    # Replace all_token
+    if all_token in item_set:
+        item_set -= {all_token}
+        item_set.update(defaults)
+    # Remove the ignore list
+    item_set -= set(ignore)
+
+    return list(item_set)
+
+
+def get_extend_and_ignore_union(
+    select: Sequence[str] | None = None,
+    extend: Sequence[str] | None = None,
+    ignore: Sequence[str] | None = None,
+    defaults: Sequence[str] | None = None,
+    all_token: str | None = 'ALL',  # noqa: S107
+) -> list[str]:
+    """Get the list of items to use.
+
+    :param Sequence select: items to select. Empty sequence or None is equivalent to `defaults`.
+    :param Sequence extend: like 'select', but add additional items (empty sequence does nothing).
+    :param Sequence ignore: items to ignore.
+    :param Sequence defaults: default items
+    :param str all_token: token used to represent all the items.
+
+    """
+    extend = extend or []
+    ignore = ignore or []
+    defaults = defaults or []
+
+    # Ignore all
+    if all_token is not None and all_token in ignore:
+        return []
+
+    # Start with the defaults
+    item_set = set(select or defaults)
+    # Add the extend list
+    item_set.update(set(extend))
+    # Replace all_token
+    if all_token is not None and all_token in item_set:
+        item_set -= {all_token}
+        item_set.update(defaults)
+    # Remove the ignore list
+    item_set -= set(ignore)
+
+    return list(item_set)

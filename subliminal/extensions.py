@@ -55,7 +55,7 @@ class RegistrableExtensionManager(ExtensionManager):
         # registered extensions
         for rep in self.registered_extensions:
             ep = parse_entry_point(rep, self.namespace)
-            if ep.name not in [e.name for e in eps]:
+            if ep.name not in [e.name for e in eps]:  # pragma: no branch
                 eps.append(ep)
 
         return eps
@@ -84,7 +84,7 @@ class RegistrableExtensionManager(ExtensionManager):
             verify_requirements=False,
         )
         self.extensions.append(ext)
-        if self._extensions_by_name is not None:
+        if self._extensions_by_name is not None:  # pragma: no branch
             self._extensions_by_name[ext.name] = ext
         self.registered_extensions.insert(0, entry_point)
 
@@ -101,9 +101,9 @@ class RegistrableExtensionManager(ExtensionManager):
 
         ep = parse_entry_point(entry_point, self.namespace)
         self.registered_extensions.remove(entry_point)
-        if self._extensions_by_name is not None:
+        if self._extensions_by_name is not None:  # pragma: no branch
             del self._extensions_by_name[ep.name]
-        for i, ext in enumerate(self.extensions):
+        for i, ext in enumerate(self.extensions):  # pragma: no branch
             if ext.name == ep.name:
                 del self.extensions[i]
                 break
@@ -153,3 +153,15 @@ refiner_manager = RegistrableExtensionManager(
         'tmdb = subliminal.refiners.tmdb:refine',
     ],
 )
+
+#: Disabled refiners
+disabled_refiners: list[str] = []
+
+#: Default enabled refiners
+default_refiners = [r for r in refiner_manager.names() if r not in disabled_refiners]
+
+#: Discarded Movie refiners
+discarded_movie_refiners: list[str] = ['tvdb']
+
+#: Discarded Episode refiners
+discarded_episode_refiners: list[str] = []

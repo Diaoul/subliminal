@@ -15,7 +15,14 @@ from babelfish import Language, LanguageReverseError  # type: ignore[import-unty
 from guessit import guessit  # type: ignore[import-untyped]
 from rarfile import BadRarFile, Error, NotRarFile, RarCannotExec, RarFile, is_rarfile  # type: ignore[import-untyped]
 
-from .extensions import default_providers, provider_manager, refiner_manager
+from .extensions import (
+    default_providers,
+    default_refiners,
+    discarded_episode_refiners,
+    discarded_movie_refiners,
+    provider_manager,
+    refiner_manager,
+)
 from .score import compute_score as default_compute_score
 from .subtitle import SUBTITLE_EXTENSIONS, Subtitle
 from .utils import get_age, handle_exception
@@ -65,7 +72,7 @@ class ProviderPool:
         providers: Sequence[str] | None = None,
         provider_configs: Mapping[str, Any] | None = None,
     ) -> None:
-        self.providers = providers or default_providers
+        self.providers = providers if providers is not None else default_providers
         self.provider_configs = provider_configs or {}
         self.initialized_providers = {}
         self.discarded_providers = set()
@@ -213,6 +220,7 @@ class ProviderPool:
         hearing_impaired: bool = False,
         only_one: bool = False,
         compute_score: ComputeScore | None = None,
+        ignore_subtitles: Sequence[str] | None = None,
     ) -> list[Subtitle]:
         """Download the best matching subtitles.
 
@@ -227,11 +235,16 @@ class ProviderPool:
         :param bool only_one: download only one subtitle, not one per language.
         :param compute_score: function that takes `subtitle` and `video` as positional arguments,
             `hearing_impaired` as keyword argument and returns the score.
+        :param ignore_subtitles: list of subtitle ids to ignore (None defaults to an empty list).
         :return: downloaded subtitles.
         :rtype: list of :class:`~subliminal.subtitle.Subtitle`
 
         """
         compute_score = compute_score or default_compute_score
+        ignore_subtitles = ignore_subtitles or []
+
+        # ignore subtitles
+        subtitles = [s for s in subtitles if s.id not in ignore_subtitles]
 
         # sort subtitles by score
         scored_subtitles = sorted(
@@ -303,7 +316,11 @@ class AsyncProviderPool(ProviderPool):
 
     def list_subtitles(self, video: Video, languages: Set[Language]) -> list[Subtitle]:
         """List subtitles, multi-threaded."""
-        subtitles = []
+        subtitles: list[Subtitle] = []
+
+        # Avoid raising a ValueError with `ThreadPoolExecutor(self.max_workers)`
+        if self.max_workers == 0:
+            return subtitles
 
         with ThreadPoolExecutor(self.max_workers) as executor:
             executor_map = executor.map(
@@ -648,8 +665,7 @@ def scan_videos(
 def refine(
     video: Video,
     *,
-    episode_refiners: Sequence[str] | None = None,
-    movie_refiners: Sequence[str] | None = None,
+    refiners: Sequence[str] | None = None,
     refiner_configs: Mapping[str, Any] | None = None,
     **kwargs: Any,
 ) -> Video:
@@ -661,20 +677,19 @@ def refine(
 
     :param video: the video to refine.
     :type video: :class:`~subliminal.video.Video`
-    :param tuple episode_refiners: refiners to use for episodes.
-    :param tuple movie_refiners: refiners to use for movies.
+    :param Sequence refiners: refiners to select. None defaults to all refiners.
     :param dict refiner_configs: refiner configuration as keyword arguments per refiner name to pass when
         calling the refine method
     :param kwargs: additional parameters for the :func:`~subliminal.refiners.refine` functions.
 
     """
-    refiners: tuple[str, ...] = ()
+    refiners = refiners if refiners is not None else default_refiners
+    if isinstance(video, Movie):
+        refiners = [r for r in refiners if r not in discarded_movie_refiners]
     if isinstance(video, Episode):
-        refiners = tuple(episode_refiners) if episode_refiners is not None else ('metadata', 'tvdb', 'omdb', 'tmdb')
-    elif isinstance(video, Movie):  # pragma: no branch
-        refiners = tuple(movie_refiners) if movie_refiners is not None else ('metadata', 'omdb', 'tmdb')
+        refiners = [r for r in refiners if r not in discarded_episode_refiners]
 
-    for refiner in ('hash', *refiners):
+    for refiner in refiners:
         logger.info('Refining video with %s', refiner)
         try:
             refiner_manager[refiner].plugin(video, **dict((refiner_configs or {}).get(refiner, {}), **kwargs))

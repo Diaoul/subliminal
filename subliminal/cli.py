@@ -38,7 +38,7 @@ from subliminal import (
     scan_video,
     scan_videos,
 )
-from subliminal.core import ARCHIVE_EXTENSIONS, search_external_subtitles
+from subliminal.core import ARCHIVE_EXTENSIONS, scan_name, search_external_subtitles
 from subliminal.score import match_hearing_impaired
 
 if TYPE_CHECKING:
@@ -355,6 +355,16 @@ def cache(ctx: click.Context, clear_subliminal: bool) -> None:
     show_default=True,
     help=f'Scan archives for videos (supported extensions: {", ".join(ARCHIVE_EXTENSIONS)}).',
 )
+@providers_config.option(
+    '-n',
+    '--name',
+    type=click.STRING,
+    metavar='NAME',
+    help=(
+        'Name used instead of the path name for guessing information about the file. '
+        'If used with multiple paths or a directory, `name` is passed to ALL the files.'
+    ),
+)
 @click.option('-v', '--verbose', count=True, help='Increase verbosity.')
 @click.argument('path', type=click.Path(), required=True, nargs=-1)
 @click.pass_obj
@@ -373,6 +383,7 @@ def download(
     min_score: int,
     max_workers: int,
     archives: bool,
+    name: str | None,
     verbose: int,
     path: list[str],
 ) -> None:
@@ -410,17 +421,45 @@ def download(
             p = os.path.abspath(os.path.expanduser(p))
             logger.debug('Collecting path %s', p)
 
+            video_candidates: list[Video] = []
+
             # non-existing
             if not os.path.exists(p):
                 try:
-                    video = Video.fromname(p)
+                    video = scan_name(p, name=name)
                 except ValueError:
-                    logger.exception('Unexpected error while collecting non-existing path %s', p)
+                    repl_p = f'{p} ({name})' if name else p
+                    logger.exception('Unexpected error while collecting non-existing path %s', repl_p)
                     errored_paths.append(p)
                     continue
+                video_candidates.append(video)
+
+            # directories
+            elif os.path.isdir(p):
+                try:
+                    scanned_videos = scan_videos(p, age=age, archives=archives, name=name)
+                except ValueError:
+                    repl_p = f'{p} ({name})' if name else p
+                    logger.exception('Unexpected error while collecting directory path %s', repl_p)
+                    errored_paths.append(p)
+                    continue
+                video_candidates.extend(scanned_videos)
+
+            # other inputs
+            else:
+                try:
+                    video = scan_video(p, name=name)
+                except ValueError:
+                    repl_p = f'{p} ({name})' if name else p
+                    logger.exception('Unexpected error while collecting path %s', repl_p)
+                    errored_paths.append(p)
+                    continue
+                video_candidates.append(video)
+
+            # check and refine videos
+            for video in video_candidates:
                 if not force:
                     video.subtitles |= set(search_external_subtitles(video.name, directory=directory).values())
-
                 if check_video(video, languages=language_set, age=age, undefined=single):
                     refine(
                         video,
@@ -432,56 +471,8 @@ def download(
                         languages=language_set,
                     )
                     videos.append(video)
-                continue
-
-            # directories
-            if os.path.isdir(p):
-                try:
-                    scanned_videos = scan_videos(p, age=age, archives=archives)
-                except ValueError:
-                    logger.exception('Unexpected error while collecting directory path %s', p)
-                    errored_paths.append(p)
-                    continue
-                for video in scanned_videos:
-                    if not force:
-                        video.subtitles |= set(search_external_subtitles(video.name, directory=directory).values())
-                    if check_video(video, languages=language_set, age=age, undefined=single):
-                        refine(
-                            video,
-                            episode_refiners=refiner,
-                            movie_refiners=refiner,
-                            refiner_configs=obj['refiner_configs'],
-                            embedded_subtitles=not force,
-                            providers=provider,
-                            languages=language_set,
-                        )
-                        videos.append(video)
-                    else:
-                        ignored_videos.append(video)
-                continue
-
-            # other inputs
-            try:
-                video = scan_video(p)
-            except ValueError:
-                logger.exception('Unexpected error while collecting path %s', p)
-                errored_paths.append(p)
-                continue
-            if not force:
-                video.subtitles |= set(search_external_subtitles(video.name, directory=directory).values())
-            if check_video(video, languages=language_set, age=age, undefined=single):
-                refine(
-                    video,
-                    episode_refiners=refiner,
-                    movie_refiners=refiner,
-                    refiner_configs=obj['refiner_configs'],
-                    embedded_subtitles=not force,
-                    providers=provider,
-                    languages=language_set,
-                )
-                videos.append(video)
-            else:
-                ignored_videos.append(video)
+                else:
+                    ignored_videos.append(video)
 
     # output errored paths
     if verbose > 0:
@@ -492,12 +483,14 @@ def download(
     if verbose > 1:
         for video in ignored_videos:
             video_name = os.path.split(video.name)[1]
-            langs = ', '.join(str(s) for s in video.subtitle_languages) or 'none'
-            days = f"{video.age.days:d} day{'s' if video.age.days > 1 else ''}"
-            click.secho(
-                f'{video_name!r} ignored - subtitles: {langs} / age: {days}',
-                fg='yellow',
-            )
+            msg = f'{video_name!r} ignored'
+            if video.exists:
+                langs = ', '.join(str(s) for s in video.subtitle_languages) or 'none'
+                days = f"{video.age.days:d} day{'s' if video.age.days > 1 else ''}"
+                msg += f' - subtitles: {langs} / age: {days}'
+            else:
+                msg += ' - not a video file'
+            click.secho(msg, fg='yellow')
 
     # report collected videos
     click.echo(

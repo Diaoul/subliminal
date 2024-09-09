@@ -838,6 +838,8 @@ def save_subtitles(
     directory: str | os.PathLike | None = None,
     encoding: str | None = None,
     extension: str | None = None,
+    language_type_suffix: bool = False,
+    language_format: str = 'alpha2',
 ) -> list[Subtitle]:
     """Save subtitles on filesystem.
 
@@ -855,6 +857,8 @@ def save_subtitles(
     :param str directory: path to directory where to save the subtitles, default is next to the video.
     :param str encoding: encoding in which to save the subtitles, default is to keep original encoding.
     :param (str | None) extension: the subtitle extension, default is to match to the subtitle format.
+    :param bool language_type_suffix: add a suffix 'hi' or 'forced' if needed. Default to False.
+    :param str language_format: format of the language suffix. Default to 'alpha2'.
     :return: the saved subtitles
     :rtype: list of :class:`~subliminal.subtitle.Subtitle`
 
@@ -872,7 +876,13 @@ def save_subtitles(
             continue
 
         # create subtitle path
-        subtitle_path = subtitle.get_path(video, single=single, extension=extension)
+        subtitle_path = subtitle.get_path(
+            video,
+            single=single,
+            extension=extension,
+            language_type_suffix=language_type_suffix,
+            language_format=language_format,
+        )
         if directory is not None:
             subtitle_path = os.path.join(directory, os.path.split(subtitle_path)[1])
 

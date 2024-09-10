@@ -119,7 +119,7 @@ def decorate_imdb_id(imdb_id: str | int, *, ndigits: int = 7) -> str:
 def timestamp(date: datetime) -> float:
     """Get the timestamp of the `date` (with timezone).
 
-    :param datetime.datetime date: the utc date.
+    :param :class:`datetime.datetime` date: the utc date.
     :return: the timestamp of the date.
     :rtype: float
 
@@ -230,11 +230,14 @@ def get_age(
     """Get the age of the file from modification time (and creation time, optionally).
 
     :param str filepath: the path of the file.
-    :param (datetime | None) reference_date: the datetime object to use as reference to calculate age.
+    :param (`datetime.datetime` | None) reference_date: the datetime object
+        to use as reference to calculate age.
         Defaults to `datetime.now(timeinfo.utc)`.
-    :param bool use_ctime: if True, use the latest of modification and creation time to calculate age,
-        instead of using only the modification time.
-
+    :param bool use_ctime: if True, use the latest of modification
+        and creation time to calculate age, instead of using
+        only the modification time.
+    :return: the age of the file.
+    :rtype: `datetime.timedelta`
     """
     if not os.path.exists(filepath):
         return timedelta()
@@ -255,14 +258,17 @@ def merge_extend_and_ignore_unions(
     """Merge lists of item to select and ignore.
 
     Ignore lists supersede the select lists.
-    `select` and `ignore` supersede `default_select` and `default_ignore`.
+    `lists['select']` and `lists['ignore']` supersede the corresponding lists
+    in `default_lists`.
 
-    :param Sequence[T] select: sequence of items to select (supersede the defaults).
-    :param Sequence[T] ignore: sequence of items to select (supersede the defaults and `select`).
-    :param Sequence[T] default_select: default sequence of items to select.
-    :param Sequence[T] default_ignore: default sequence of items to ignore.
-    :return: the list of selected and not-ignored items.
-    :rtype: list[T]
+    :param dict[str, str] lists: dict with 'select', 'extend' and 'ignore'
+        lists of string names.
+    :param dict[str, str] default_lists: dict with 'select', 'extend' and
+        'ignore' default lists of string names.
+    :param (Sequence[str] | None) defaults: list of default items.
+    :param str all_token: token used to represent all the items.
+    :return: the list of selected and not ignored items.
+    :rtype: list[str]
     """
     extend = lists['extend'] or []
     ignore = lists['ignore'] or []
@@ -299,11 +305,13 @@ def get_extend_and_ignore_union(
 ) -> list[str]:
     """Get the list of items to use.
 
-    :param Sequence select: items to select. Empty sequence or None is equivalent to `defaults`.
-    :param Sequence extend: like 'select', but add additional items (empty sequence does nothing).
-    :param Sequence ignore: items to ignore.
-    :param Sequence defaults: default items
+    :param (Sequence[str] | None) select: items to select. Empty sequence or None is equivalent to `defaults`.
+    :param (Sequence[str] | None) extend: like 'select', but add additional items (empty sequence does nothing).
+    :param (Sequence[str] | None) ignore: items to ignore.
+    :param (Sequence[str] | None) defaults: default items
     :param str all_token: token used to represent all the items.
+    :return: the list of selected and not ignored items.
+    :rtype: list[str]
 
     """
     extend = extend or []

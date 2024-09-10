@@ -18,7 +18,8 @@ def test_video_exists_age(movies, tmpdir, monkeypatch):
 
 
 def test_video_age(movies):
-    assert movies['man_of_steel'].age == timedelta()
+    with pytest.deprecated_call():
+        assert movies['man_of_steel'].age == timedelta()
 
 
 def test_video_fromguess_episode(episodes, monkeypatch):

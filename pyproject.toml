@@ -55,7 +55,7 @@ dependencies = [
 [project.optional-dependencies]
 docs = [
     "sphinx",
-    "sphinx_rtd_theme",
+    "sphinx_rtd_theme>=2",
     "sphinxcontrib-programoutput",
     "sphinx_autodoc_typehints",
     "towncrier",

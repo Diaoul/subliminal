@@ -379,7 +379,7 @@ class Episode(Video):
             msg = 'The guess must be an episode guess'
             raise ValueError(msg)
 
-        if 'title' not in guess or 'episode' not in guess:
+        if 'title' not in guess:
             msg = 'Insufficient data to process the guess'
             raise ValueError(msg)
 

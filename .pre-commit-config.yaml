@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
+    rev: v4.6.0
     hooks:
       - id: check-toml
       - id: check-yaml
@@ -8,25 +8,25 @@ repos:
       - id: end-of-file-fixer
 
   - repo: https://github.com/crate-ci/typos
-    rev: v1.22.0
+    rev: v1.24.5
     hooks:
       - id: typos
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.4.7
+    rev: v0.6.4
     hooks:
       - id: ruff
-        args: [ --fix, --unsafe-fixes ]
+        args: [--fix, --unsafe-fixes]
       - id: ruff-format
 
   - repo: https://github.com/abravalheri/validate-pyproject
-    rev: v0.18
+    rev: v0.19
     hooks:
       - id: validate-pyproject
         name: validate-pyproject
 
   - repo: https://github.com/PyCQA/doc8
-    rev: v1.1.1
+    rev: v1.1.2
     hooks:
       - id: doc8
         description: This hook runs doc8 for linting docs
@@ -34,9 +34,10 @@ repos:
 
   - repo: local
     hooks:
-    - id: changelog-fragment-filenames
-      name: changelog fragment
-      language: fail
-      entry: changelog fragment files must be named *.(breaking|change|provider|refiner|deprecation|doc|misc).rst
-      exclude: ^changelog.d/(\..*|towncrier_template.rst|.*\.(breaking|change|provider|refiner|deprecation|doc|misc).rst)
-      files: ^changelog.d/
+      - id: changelog-fragment-filenames
+        name: changelog fragment
+        language: fail
+        entry: changelog fragment files must be named *.(breaking|change|provider|refiner|deprecation|doc|misc).rst
+        exclude:
+          ^changelog.d/(\..*|towncrier_template.rst|.*\.(breaking|change|provider|refiner|deprecation|doc|misc).rst)
+        files: ^changelog.d/

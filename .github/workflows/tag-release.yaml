@@ -1,0 +1,58 @@
+name: Tag release
+
+on:
+  pull_request:
+    types:
+      - closed
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release tag version.'
+        type: string
+        default: NONE
+        required: true
+
+env:
+  FORCE_COLOR: "1"
+
+# https://packaging.python.org/en/latest/guides/publishing-package-distribution-releases-using-github-actions-ci-cd-workflows/
+jobs:
+  # Always build & lint package.
+  build-package:
+    name: Build & verify package
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: hynek/build-and-inspect-python-package@v2
+
+  tag:
+    name: Tag a new release
+    # tag a release after a release PR was accepted
+    if: |
+      github.event_name == 'pull_request'
+      && github.event.action == 'closed'
+      && github.event.pull_request.merged == true
+      && startsWith(github.head_ref, 'release-')
+    needs: [build-package]
+    env:
+      GITHUB_HEAD_REF: ${{ github.head_ref }}
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Tag the commit
+        run: |
+          RELEASE_VERSION=${GITHUB_HEAD_REF#release-}
+          echo Release version: $RELEASE_VERSION
+          git config user.name 'subliminal bot'
+          git config user.email diaoulael@gmail.com
+          git tag --annotate --message="Release version $RELEASE_VERSION" $RELEASE_VERSION ${{ github.sha }}
+          git push origin $RELEASE_VERSION

@@ -1,0 +1,53 @@
+name: Prepare release PR
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to base the release from'
+        required: false
+        default: 'main'
+      bump:
+        description: |
+          'Release type: major, minor or patch. '
+          'Leave empty for autommatic detection based on changelog segments.'
+        required: false
+        default: ''
+      prerelease:
+        description: 'Prerelease (ex: rc1). Leave empty if not a pre-release.'
+        required: false
+        default: ''
+
+env:
+  FORCE_COLOR: "1"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version-file: .python-version-default
+        cache: pip
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install --upgrade setuptools tox
+
+    - name: Prepare release PR
+      env:
+        BRANCH: ${{ github.event.inputs.branch }}
+        BUMP: ${{ github.event.inputs.bump }}
+        PRERELEASE: ${{ github.event.inputs.prerelease }}
+      run: |
+        tox -e prepare-release-pr -- ${BRANCH} ${{ github.token }} --bump='${BUMP}' --prerelease='${PRERELEASE}'

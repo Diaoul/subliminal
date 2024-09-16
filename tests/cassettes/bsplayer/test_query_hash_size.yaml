@@ -1,0 +1,359 @@
+interactions:
+- request:
+    body: '<?xml version="1.0" encoding="UTF-8"?>
+
+      <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+      xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://s1.api.bsplayer-subtitles.com/v1.php"><SOAP-ENV:Body
+      SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><ns1:logIn><username></username><password></password><AppID>BSPlayer
+      v2.67</AppID></ns1:logIn></SOAP-ENV:Body></SOAP-ENV:Envelope>'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - close
+      Content-Length:
+      - '543'
+      Content-Type:
+      - text/xml; charset=utf-8
+      SOAPAction:
+      - '"http://api.bsplayer-subtitles.com/v1.php#logIn"'
+      User-Agent:
+      - BSPlayer/2.x (1022.12360)
+    method: POST
+    uri: http://s1.api.bsplayer-subtitles.com/v1.php
+  response:
+    body:
+      string: '<?xml version="1.0" encoding="UTF-8"?>
+
+        <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+        xmlns:ns1="http://api.bsplayer-subtitles.com/v1.php" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+        SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><SOAP-ENV:Body><ns1:logInResponse><return
+        xsi:type="ns1:SubtitlesResult"><result xsi:type="xsd:string">200</result><status
+        xsi:type="xsd:string">OK</status><data xsi:type="xsd:string">78d6171c89ac7d2ce35d8b75a69f2bc4</data></return></ns1:logInResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>
+
+        '
+    headers:
+      Connection:
+      - close
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '342'
+      Content-Type:
+      - text/xml; charset=utf-8
+      Date:
+      - Tue, 30 Jul 2024 22:26:24 GMT
+      Server:
+      - Apache/2.4.59 (Debian)
+      Vary:
+      - Accept-Encoding
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '<?xml version="1.0" encoding="UTF-8"?>
+
+      <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+      xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://s1.api.bsplayer-subtitles.com/v1.php"><SOAP-ENV:Body
+      SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><ns1:searchSubtitles><handle>78d6171c89ac7d2ce35d8b75a69f2bc4</handle><movieHash>5b8f8f4e41ccb21e</movieHash><movieSize>7033732714</movieSize><languageId>spa</languageId><imdbId>*</imdbId></ns1:searchSubtitles></SOAP-ENV:Body></SOAP-ENV:Envelope>'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - close
+      Content-Length:
+      - '659'
+      Content-Type:
+      - text/xml; charset=utf-8
+      SOAPAction:
+      - '"http://api.bsplayer-subtitles.com/v1.php#searchSubtitles"'
+      User-Agent:
+      - BSPlayer/2.x (1022.12360)
+    method: POST
+    uri: http://s1.api.bsplayer-subtitles.com/v1.php
+  response:
+    body:
+      string: '<?xml version="1.0" encoding="UTF-8"?>
+
+        <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+        xmlns:ns1="http://api.bsplayer-subtitles.com/v1.php" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+        SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><SOAP-ENV:Body><ns1:searchSubtitlesResponse><return
+        xsi:type="ns1:SearchResult"><result xsi:type="ns1:SubtitlesResult"><result
+        xsi:type="xsd:string">200</result><status xsi:type="xsd:string">OK</status><data
+        xsi:type="xsd:string">0</data></result><data SOAP-ENC:arrayType="ns1:SubtitleData[21]"
+        xsi:type="ns1:ArrayOfSubtitleData"><item xsi:type="ns1:SubtitleData"><subID
+        xsi:type="xsd:int">16459402</subID><subSize xsi:type="xsd:int">31273</subSize><subDownloadLink
+        xsi:type="xsd:string">http://download.bsplayer-subtitles.com/download/file/16459402/d78d6171c89ac7d2ce35d8b75a69f2bc4</subDownloadLink><subLang
+        xsi:type="xsd:string">spa</subLang><subName xsi:type="xsd:string">Man of Steel
+        2013 720p BluRay x264 YIFY.ESP@TheSubFactory.Net.srt</subName><subFormat xsi:type="xsd:string">srt</subFormat><subHash
+        xsi:type="xsd:string">1d379cd01d85cb723209626e5262b674</subHash><subRating
+        xsi:type="xsd:int">5</subRating><season xsi:nil="true"/><episode xsi:nil="true"/><encsubtitle
+        xsi:nil="true"/><movieIMBDID xsi:type="xsd:string">0770828</movieIMBDID><movieIMBDRating
+        xsi:nil="true"/><movieYear xsi:nil="true"/><movieName xsi:nil="true"/><movieHash
+        xsi:type="xsd:string">5b8f8f4e41ccb21e</movieHash><movieSize xsi:type="xsd:long">0</movieSize><movieFPS
+        xsi:type="xsd:float">0</movieFPS></item><item xsi:type="ns1:SubtitleData"><subID
+        xsi:type="xsd:int">16406078</subID><subSize xsi:type="xsd:int">30316</subSize><subDownloadLink
+        xsi:type="xsd:string">http://download.bsplayer-subtitles.com/download/file/16406078/d78d6171c89ac7d2ce35d8b75a69f2bc4</subDownloadLink><subLang
+        xsi:type="xsd:string">spa</subLang><subName xsi:type="xsd:string">man.of.steel.2013.720p.bluray.x264-felony.srt</subName><subFormat
+        xsi:type="xsd:string">srt</subFormat><subHash xsi:type="xsd:string">2d72ac0adff113b80fb9f6934459bfe0</subHash><subRating
+        xsi:nil="true"/><season xsi:nil="true"/><episode xsi:nil="true"/><encsubtitle
+        xsi:nil="true"/><movieIMBDID xsi:type="xsd:string">0770828</movieIMBDID><movieIMBDRating
+        xsi:nil="true"/><movieYear xsi:nil="true"/><movieName xsi:nil="true"/><movieHash
+        xsi:type="xsd:string">5b8f8f4e41ccb21e</movieHash><movieSize xsi:type="xsd:long">0</movieSize><movieFPS
+        xsi:type="xsd:float">0</movieFPS></item><item xsi:type="ns1:SubtitleData"><subID
+        xsi:type="xsd:int">16480125</subID><subSize xsi:type="xsd:int">36130</subSize><subDownloadLink
+        xsi:type="xsd:string">http://download.bsplayer-subtitles.com/download/file/16480125/d78d6171c89ac7d2ce35d8b75a69f2bc4</subDownloadLink><subLang
+        xsi:type="xsd:string">spa</subLang><subName xsi:type="xsd:string">man.of.steel.2013.720p.bluray.x264-felony.srt</subName><subFormat
+        xsi:type="xsd:string">srt</subFormat><subHash xsi:type="xsd:string">d915faa6364c6782c48732803cf82d59</subHash><subRating
+        xsi:nil="true"/><season xsi:nil="true"/><episode xsi:nil="true"/><encsubtitle
+        xsi:nil="true"/><movieIMBDID xsi:type="xsd:string">0770828</movieIMBDID><movieIMBDRating
+        xsi:nil="true"/><movieYear xsi:nil="true"/><movieName xsi:nil="true"/><movieHash
+        xsi:type="xsd:string">5b8f8f4e41ccb21e</movieHash><movieSize xsi:type="xsd:long">0</movieSize><movieFPS
+        xsi:type="xsd:float">0</movieFPS></item><item xsi:type="ns1:SubtitleData"><subID
+        xsi:type="xsd:int">16511626</subID><subSize xsi:type="xsd:int">34755</subSize><subDownloadLink
+        xsi:type="xsd:string">http://download.bsplayer-subtitles.com/download/file/16511626/d78d6171c89ac7d2ce35d8b75a69f2bc4</subDownloadLink><subLang
+        xsi:type="xsd:string">spa</subLang><subName xsi:type="xsd:string">man.of.steel.2013.720p.bluray.x264-felony.srt</subName><subFormat
+        xsi:type="xsd:string">srt</subFormat><subHash xsi:type="xsd:string">49a15ef8f4972a6ec8b08a5921a3786f</subHash><subRating
+        xsi:nil="true"/><season xsi:nil="true"/><episode xsi:nil="true"/><encsubtitle
+        xsi:nil="true"/><movieIMBDID xsi:type="xsd:string">0770828</movieIMBDID><movieIMBDRating
+        xsi:nil="true"/><movieYear xsi:nil="true"/><movieName xsi:nil="true"/><movieHash
+        xsi:type="xsd:string">5b8f8f4e41ccb21e</movieHash><movieSize xsi:type="xsd:long">0</movieSize><movieFPS
+        xsi:type="xsd:float">0</movieFPS></item><item xsi:type="ns1:SubtitleData"><subID
+        xsi:type="xsd:int">16615164</subID><subSize xsi:type="xsd:int">38829</subSize><subDownloadLink
+        xsi:type="xsd:string">http://download.bsplayer-subtitles.com/download/file/16615164/d78d6171c89ac7d2ce35d8b75a69f2bc4</subDownloadLink><subLang
+        xsi:type="xsd:string">spa</subLang><subName xsi:type="xsd:string">Man.Of.Steel.2013.720p.BluRay.x264-Felony.srt</subName><subFormat
+        xsi:type="xsd:string">srt</subFormat><subHash xsi:type="xsd:string">9bf0edf8fec7fa04d54e12cf046a80f9</subHash><subRating
+        xsi:nil="true"/><season xsi:nil="true"/><episode xsi:nil="true"/><encsubtitle
+        xsi:nil="true"/><movieIMBDID xsi:type="xsd:string">0770828</movieIMBDID><movieIMBDRating
+        xsi:nil="true"/><movieYear xsi:nil="true"/><movieName xsi:nil="true"/><movieHash
+        xsi:type="xsd:string">5b8f8f4e41ccb21e</movieHash><movieSize xsi:type="xsd:long">0</movieSize><movieFPS
+        xsi:type="xsd:float">0</movieFPS></item><item xsi:type="ns1:SubtitleData"><subID
+        xsi:type="xsd:int">16690745</subID><subSize xsi:type="xsd:int">34772</subSize><subDownloadLink
+        xsi:type="xsd:string">http://download.bsplayer-subtitles.com/download/file/16690745/d78d6171c89ac7d2ce35d8b75a69f2bc4</subDownloadLink><subLang
+        xsi:type="xsd:string">spa</subLang><subName xsi:type="xsd:string">5187_ES.srt</subName><subFormat
+        xsi:type="xsd:string">srt</subFormat><subHash xsi:type="xsd:string">5e8685ae4dfb3a531658ba839f529461</subHash><subRating
+        xsi:nil="true"/><season xsi:nil="true"/><episode xsi:nil="true"/><encsubtitle
+        xsi:nil="true"/><movieIMBDID xsi:type="xsd:string">0770828</movieIMBDID><movieIMBDRating
+        xsi:nil="true"/><movieYear xsi:nil="true"/><movieName xsi:nil="true"/><movieHash
+        xsi:type="xsd:string">5b8f8f4e41ccb21e</movieHash><movieSize xsi:type="xsd:long">0</movieSize><movieFPS
+        xsi:type="xsd:float">0</movieFPS></item><item xsi:type="ns1:SubtitleData"><subID
+        xsi:type="xsd:int">16833591</subID><subSize xsi:type="xsd:int">34905</subSize><subDownloadLink
+        xsi:type="xsd:string">http://download.bsplayer-subtitles.com/download/file/16833591/d78d6171c89ac7d2ce35d8b75a69f2bc4</subDownloadLink><subLang
+        xsi:type="xsd:string">spa</subLang><subName xsi:type="xsd:string">man.of.steel.2013.720p.bluray.x264-felony-spa.srt</subName><subFormat
+        xsi:type="xsd:string">srt</subFormat><subHash xsi:type="xsd:string">fbb722cac90d84d4ccf0f502eb173323</subHash><subRating
+        xsi:nil="true"/><season xsi:nil="true"/><episode xsi:nil="true"/><encsubtitle
+        xsi:nil="true"/><movieIMBDID xsi:type="xsd:string">0770828</movieIMBDID><movieIMBDRating
+        xsi:nil="true"/><movieYear xsi:nil="true"/><movieName xsi:nil="true"/><movieHash
+        xsi:type="xsd:string">5b8f8f4e41ccb21e</movieHash><movieSize xsi:type="xsd:long">0</movieSize><movieFPS
+        xsi:type="xsd:float">0</movieFPS></item><item xsi:type="ns1:SubtitleData"><subID
+        xsi:type="xsd:int">16920391</subID><subSize xsi:type="xsd:int">31351</subSize><subDownloadLink
+        xsi:type="xsd:string">http://download.bsplayer-subtitles.com/download/file/16920391/d78d6171c89ac7d2ce35d8b75a69f2bc4</subDownloadLink><subLang
+        xsi:type="xsd:string">spa</subLang><subName xsi:type="xsd:string">man.of.steel.2013.720p.bluray.x264-felony-spa.srt</subName><subFormat
+        xsi:type="xsd:string">srt</subFormat><subHash xsi:type="xsd:string">6219a77ca90360d7c686f7091cf50d17</subHash><subRating
+        xsi:nil="true"/><season xsi:nil="true"/><episode xsi:nil="true"/><encsubtitle
+        xsi:nil="true"/><movieIMBDID xsi:type="xsd:string">0770828</movieIMBDID><movieIMBDRating
+        xsi:nil="true"/><movieYear xsi:nil="true"/><movieName xsi:nil="true"/><movieHash
+        xsi:type="xsd:string">5b8f8f4e41ccb21e</movieHash><movieSize xsi:type="xsd:long">0</movieSize><movieFPS
+        xsi:type="xsd:float">0</movieFPS></item><item xsi:type="ns1:SubtitleData"><subID
+        xsi:type="xsd:int">16935990</subID><subSize xsi:type="xsd:int">40397</subSize><subDownloadLink
+        xsi:type="xsd:string">http://download.bsplayer-subtitles.com/download/file/16935990/d78d6171c89ac7d2ce35d8b75a69f2bc4</subDownloadLink><subLang
+        xsi:type="xsd:string">spa</subLang><subName xsi:type="xsd:string">man.of.steel.2013.720p.bluray.x264-felony.srt</subName><subFormat
+        xsi:type="xsd:string">srt</subFormat><subHash xsi:type="xsd:string">a05dff11b79951fae2eee140b2d20ce7</subHash><subRating
+        xsi:nil="true"/><season xsi:nil="true"/><episode xsi:nil="true"/><encsubtitle
+        xsi:nil="true"/><movieIMBDID xsi:type="xsd:string">0770828</movieIMBDID><movieIMBDRating
+        xsi:nil="true"/><movieYear xsi:nil="true"/><movieName xsi:nil="true"/><movieHash
+        xsi:type="xsd:string">5b8f8f4e41ccb21e</movieHash><movieSize xsi:type="xsd:long">0</movieSize><movieFPS
+        xsi:type="xsd:float">0</movieFPS></item><item xsi:type="ns1:SubtitleData"><subID
+        xsi:type="xsd:int">17406400</subID><subSize xsi:type="xsd:int">34320</subSize><subDownloadLink
+        xsi:type="xsd:string">http://download.bsplayer-subtitles.com/download/file/17406400/d78d6171c89ac7d2ce35d8b75a69f2bc4</subDownloadLink><subLang
+        xsi:type="xsd:string">spa</subLang><subName xsi:type="xsd:string">Man of Steel
+        [Felony].srt</subName><subFormat xsi:type="xsd:string">srt</subFormat><subHash
+        xsi:type="xsd:string">fc83fb3ff2241be1f6b1eb5cef2651cd</subHash><subRating
+        xsi:nil="true"/><season xsi:nil="true"/><episode xsi:nil="true"/><encsubtitle
+        xsi:nil="true"/><movieIMBDID xsi:type="xsd:string">0770828</movieIMBDID><movieIMBDRating
+        xsi:nil="true"/><movieYear xsi:nil="true"/><movieName xsi:nil="true"/><movieHash
+        xsi:type="xsd:string">5b8f8f4e41ccb21e</movieHash><movieSize xsi:type="xsd:long">0</movieSize><movieFPS
+        xsi:type="xsd:float">0</movieFPS></item><item xsi:type="ns1:SubtitleData"><subID
+        xsi:type="xsd:int">16479531</subID><subSize xsi:type="xsd:int">34561</subSize><subDownloadLink
+        xsi:type="xsd:string">http://download.bsplayer-subtitles.com/download/file/16479531/d78d6171c89ac7d2ce35d8b75a69f2bc4</subDownloadLink><subLang
+        xsi:type="xsd:string">spa</subLang><subName xsi:type="xsd:string">man.of.steel.2013.720p.bluray.x264-felony-spa.srt</subName><subFormat
+        xsi:type="xsd:string">srt</subFormat><subHash xsi:type="xsd:string">ce6f0fd8d5198e96c3b1e0bf2136b8c5</subHash><subRating
+        xsi:nil="true"/><season xsi:nil="true"/><episode xsi:nil="true"/><encsubtitle
+        xsi:nil="true"/><movieIMBDID xsi:type="xsd:string">0770828</movieIMBDID><movieIMBDRating
+        xsi:nil="true"/><movieYear xsi:nil="true"/><movieName xsi:nil="true"/><movieHash
+        xsi:type="xsd:string">5b8f8f4e41ccb21e</movieHash><movieSize xsi:type="xsd:long">0</movieSize><movieFPS
+        xsi:type="xsd:float">0</movieFPS></item><item xsi:type="ns1:SubtitleData"><subID
+        xsi:type="xsd:int">16478430</subID><subSize xsi:type="xsd:int">30228</subSize><subDownloadLink
+        xsi:type="xsd:string">http://download.bsplayer-subtitles.com/download/file/16478430/d78d6171c89ac7d2ce35d8b75a69f2bc4</subDownloadLink><subLang
+        xsi:type="xsd:string">spa</subLang><subName xsi:type="xsd:string">cd1.srt</subName><subFormat
+        xsi:type="xsd:string">srt</subFormat><subHash xsi:type="xsd:string">444d407f7633bc9d6ffb45c74d7ec88b</subHash><subRating
+        xsi:nil="true"/><season xsi:nil="true"/><episode xsi:nil="true"/><encsubtitle
+        xsi:nil="true"/><movieIMBDID xsi:type="xsd:string">0770828</movieIMBDID><movieIMBDRating
+        xsi:nil="true"/><movieYear xsi:nil="true"/><movieName xsi:nil="true"/><movieHash
+        xsi:type="xsd:string">5b8f8f4e41ccb21e</movieHash><movieSize xsi:type="xsd:long">0</movieSize><movieFPS
+        xsi:type="xsd:float">0</movieFPS></item><item xsi:type="ns1:SubtitleData"><subID
+        xsi:type="xsd:int">16416262</subID><subSize xsi:type="xsd:int">32183</subSize><subDownloadLink
+        xsi:type="xsd:string">http://download.bsplayer-subtitles.com/download/file/16416262/d78d6171c89ac7d2ce35d8b75a69f2bc4</subDownloadLink><subLang
+        xsi:type="xsd:string">spa</subLang><subName xsi:type="xsd:string">Man Of Steel
+        [2013][720p][x264][BDRip].srt</subName><subFormat xsi:type="xsd:string">srt</subFormat><subHash
+        xsi:type="xsd:string">7b6a1cd93660cc3c63397b2ffb95bfb2</subHash><subRating
+        xsi:nil="true"/><season xsi:nil="true"/><episode xsi:nil="true"/><encsubtitle
+        xsi:nil="true"/><movieIMBDID xsi:type="xsd:string">0770828</movieIMBDID><movieIMBDRating
+        xsi:nil="true"/><movieYear xsi:nil="true"/><movieName xsi:nil="true"/><movieHash
+        xsi:type="xsd:string">5b8f8f4e41ccb21e</movieHash><movieSize xsi:type="xsd:long">0</movieSize><movieFPS
+        xsi:type="xsd:float">0</movieFPS></item><item xsi:type="ns1:SubtitleData"><subID
+        xsi:type="xsd:int">16418130</subID><subSize xsi:type="xsd:int">30411</subSize><subDownloadLink
+        xsi:type="xsd:string">http://download.bsplayer-subtitles.com/download/file/16418130/d78d6171c89ac7d2ce35d8b75a69f2bc4</subDownloadLink><subLang
+        xsi:type="xsd:string">spa</subLang><subName xsi:type="xsd:string">man.of.steel.2013.720p.bluray.x264-felony-spa.srt</subName><subFormat
+        xsi:type="xsd:string">srt</subFormat><subHash xsi:type="xsd:string">0f67aa55fbb8465068c7c0f97863738e</subHash><subRating
+        xsi:nil="true"/><season xsi:nil="true"/><episode xsi:nil="true"/><encsubtitle
+        xsi:nil="true"/><movieIMBDID xsi:type="xsd:string">0770828</movieIMBDID><movieIMBDRating
+        xsi:nil="true"/><movieYear xsi:nil="true"/><movieName xsi:nil="true"/><movieHash
+        xsi:type="xsd:string">5b8f8f4e41ccb21e</movieHash><movieSize xsi:type="xsd:long">0</movieSize><movieFPS
+        xsi:type="xsd:float">0</movieFPS></item><item xsi:type="ns1:SubtitleData"><subID
+        xsi:type="xsd:int">16443177</subID><subSize xsi:type="xsd:int">38591</subSize><subDownloadLink
+        xsi:type="xsd:string">http://download.bsplayer-subtitles.com/download/file/16443177/d78d6171c89ac7d2ce35d8b75a69f2bc4</subDownloadLink><subLang
+        xsi:type="xsd:string">spa</subLang><subName xsi:type="xsd:string">man.of.steel.2013.720p.bluray.x264-felony.srt</subName><subFormat
+        xsi:type="xsd:string">srt</subFormat><subHash xsi:type="xsd:string">2c7738333222451c5d3808d60937dd7e</subHash><subRating
+        xsi:nil="true"/><season xsi:nil="true"/><episode xsi:nil="true"/><encsubtitle
+        xsi:nil="true"/><movieIMBDID xsi:type="xsd:string">0770828</movieIMBDID><movieIMBDRating
+        xsi:nil="true"/><movieYear xsi:nil="true"/><movieName xsi:nil="true"/><movieHash
+        xsi:type="xsd:string">5b8f8f4e41ccb21e</movieHash><movieSize xsi:type="xsd:long">0</movieSize><movieFPS
+        xsi:type="xsd:float">0</movieFPS></item><item xsi:type="ns1:SubtitleData"><subID
+        xsi:type="xsd:int">16460111</subID><subSize xsi:type="xsd:int">38690</subSize><subDownloadLink
+        xsi:type="xsd:string">http://download.bsplayer-subtitles.com/download/file/16460111/d78d6171c89ac7d2ce35d8b75a69f2bc4</subDownloadLink><subLang
+        xsi:type="xsd:string">spa</subLang><subName xsi:type="xsd:string">man.of.steel.2013.720p.bluray.x264-felony-spa.srt</subName><subFormat
+        xsi:type="xsd:string">srt</subFormat><subHash xsi:type="xsd:string">8babd351c92c93757ff8dc25dada2547</subHash><subRating
+        xsi:nil="true"/><season xsi:nil="true"/><episode xsi:nil="true"/><encsubtitle
+        xsi:nil="true"/><movieIMBDID xsi:type="xsd:string">0770828</movieIMBDID><movieIMBDRating
+        xsi:nil="true"/><movieYear xsi:nil="true"/><movieName xsi:nil="true"/><movieHash
+        xsi:type="xsd:string">5b8f8f4e41ccb21e</movieHash><movieSize xsi:type="xsd:long">0</movieSize><movieFPS
+        xsi:type="xsd:float">0</movieFPS></item><item xsi:type="ns1:SubtitleData"><subID
+        xsi:type="xsd:int">16461946</subID><subSize xsi:type="xsd:int">32319</subSize><subDownloadLink
+        xsi:type="xsd:string">http://download.bsplayer-subtitles.com/download/file/16461946/d78d6171c89ac7d2ce35d8b75a69f2bc4</subDownloadLink><subLang
+        xsi:type="xsd:string">spa</subLang><subName xsi:type="xsd:string">man.of.steel.2013.720p.bluray.x264-felony-spa.srt</subName><subFormat
+        xsi:type="xsd:string">srt</subFormat><subHash xsi:type="xsd:string">cacb0b869d7cbaac32b541d860896b82</subHash><subRating
+        xsi:nil="true"/><season xsi:nil="true"/><episode xsi:nil="true"/><encsubtitle
+        xsi:nil="true"/><movieIMBDID xsi:type="xsd:string">0770828</movieIMBDID><movieIMBDRating
+        xsi:nil="true"/><movieYear xsi:nil="true"/><movieName xsi:nil="true"/><movieHash
+        xsi:type="xsd:string">5b8f8f4e41ccb21e</movieHash><movieSize xsi:type="xsd:long">0</movieSize><movieFPS
+        xsi:type="xsd:float">0</movieFPS></item><item xsi:type="ns1:SubtitleData"><subID
+        xsi:type="xsd:int">16471760</subID><subSize xsi:type="xsd:int">38593</subSize><subDownloadLink
+        xsi:type="xsd:string">http://download.bsplayer-subtitles.com/download/file/16471760/d78d6171c89ac7d2ce35d8b75a69f2bc4</subDownloadLink><subLang
+        xsi:type="xsd:string">spa</subLang><subName xsi:type="xsd:string">man.of.steel.2013.720p.bluray.x264-felony.srt</subName><subFormat
+        xsi:type="xsd:string">srt</subFormat><subHash xsi:type="xsd:string">326059613db7e1ab2294bca76eda31b6</subHash><subRating
+        xsi:nil="true"/><season xsi:nil="true"/><episode xsi:nil="true"/><encsubtitle
+        xsi:nil="true"/><movieIMBDID xsi:type="xsd:string">0770828</movieIMBDID><movieIMBDRating
+        xsi:nil="true"/><movieYear xsi:nil="true"/><movieName xsi:nil="true"/><movieHash
+        xsi:type="xsd:string">5b8f8f4e41ccb21e</movieHash><movieSize xsi:type="xsd:long">0</movieSize><movieFPS
+        xsi:type="xsd:float">0</movieFPS></item><item xsi:type="ns1:SubtitleData"><subID
+        xsi:type="xsd:int">16476519</subID><subSize xsi:type="xsd:int">34946</subSize><subDownloadLink
+        xsi:type="xsd:string">http://download.bsplayer-subtitles.com/download/file/16476519/d78d6171c89ac7d2ce35d8b75a69f2bc4</subDownloadLink><subLang
+        xsi:type="xsd:string">spa</subLang><subName xsi:type="xsd:string">man.of.steel.2013.720p.bluray.x264-felony-spa.srt</subName><subFormat
+        xsi:type="xsd:string">srt</subFormat><subHash xsi:type="xsd:string">146ff1447c050e6910799aaa29702701</subHash><subRating
+        xsi:nil="true"/><season xsi:nil="true"/><episode xsi:nil="true"/><encsubtitle
+        xsi:nil="true"/><movieIMBDID xsi:type="xsd:string">0770828</movieIMBDID><movieIMBDRating
+        xsi:nil="true"/><movieYear xsi:nil="true"/><movieName xsi:nil="true"/><movieHash
+        xsi:type="xsd:string">5b8f8f4e41ccb21e</movieHash><movieSize xsi:type="xsd:long">0</movieSize><movieFPS
+        xsi:type="xsd:float">0</movieFPS></item><item xsi:type="ns1:SubtitleData"><subID
+        xsi:type="xsd:int">16478096</subID><subSize xsi:type="xsd:int">34805</subSize><subDownloadLink
+        xsi:type="xsd:string">http://download.bsplayer-subtitles.com/download/file/16478096/d78d6171c89ac7d2ce35d8b75a69f2bc4</subDownloadLink><subLang
+        xsi:type="xsd:string">spa</subLang><subName xsi:type="xsd:string">man.of.steel.2013.720p.bluray.x264-felony.srt</subName><subFormat
+        xsi:type="xsd:string">srt</subFormat><subHash xsi:type="xsd:string">a6b1db66c44cdc7460fb05d422f3b16d</subHash><subRating
+        xsi:nil="true"/><season xsi:nil="true"/><episode xsi:nil="true"/><encsubtitle
+        xsi:nil="true"/><movieIMBDID xsi:type="xsd:string">0770828</movieIMBDID><movieIMBDRating
+        xsi:nil="true"/><movieYear xsi:nil="true"/><movieName xsi:nil="true"/><movieHash
+        xsi:type="xsd:string">5b8f8f4e41ccb21e</movieHash><movieSize xsi:type="xsd:long">0</movieSize><movieFPS
+        xsi:type="xsd:float">0</movieFPS></item><item xsi:type="ns1:SubtitleData"><subID
+        xsi:type="xsd:int">17580179</subID><subSize xsi:type="xsd:int">40387</subSize><subDownloadLink
+        xsi:type="xsd:string">http://download.bsplayer-subtitles.com/download/file/17580179/d78d6171c89ac7d2ce35d8b75a69f2bc4</subDownloadLink><subLang
+        xsi:type="xsd:string">spa</subLang><subName xsi:type="xsd:string">man.of.steel.2013.720p.bluray.x264-felony-spa(1)(2).srt</subName><subFormat
+        xsi:type="xsd:string">srt</subFormat><subHash xsi:type="xsd:string">89351c9af2f5f33a97685ac88d80ffde</subHash><subRating
+        xsi:nil="true"/><season xsi:nil="true"/><episode xsi:nil="true"/><encsubtitle
+        xsi:nil="true"/><movieIMBDID xsi:type="xsd:string">0770828</movieIMBDID><movieIMBDRating
+        xsi:nil="true"/><movieYear xsi:nil="true"/><movieName xsi:nil="true"/><movieHash
+        xsi:type="xsd:string">5b8f8f4e41ccb21e</movieHash><movieSize xsi:type="xsd:long">0</movieSize><movieFPS
+        xsi:type="xsd:float">0</movieFPS></item></data></return></ns1:searchSubtitlesResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>
+
+        '
+    headers:
+      Connection:
+      - close
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '1717'
+      Content-Type:
+      - text/xml; charset=utf-8
+      Date:
+      - Tue, 30 Jul 2024 22:26:24 GMT
+      Server:
+      - Apache/2.4.59 (Debian)
+      Vary:
+      - Accept-Encoding
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '<?xml version="1.0" encoding="UTF-8"?>
+
+      <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+      xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://s1.api.bsplayer-subtitles.com/v1.php"><SOAP-ENV:Body
+      SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><ns1:logOut><handle>78d6171c89ac7d2ce35d8b75a69f2bc4</handle></ns1:logOut></SOAP-ENV:Body></SOAP-ENV:Envelope>'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - close
+      Content-Length:
+      - '523'
+      Content-Type:
+      - text/xml; charset=utf-8
+      SOAPAction:
+      - '"http://api.bsplayer-subtitles.com/v1.php#logOut"'
+      User-Agent:
+      - BSPlayer/2.x (1022.12360)
+    method: POST
+    uri: http://s1.api.bsplayer-subtitles.com/v1.php
+  response:
+    body:
+      string: '<?xml version="1.0" encoding="UTF-8"?>
+
+        <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+        xmlns:ns1="http://api.bsplayer-subtitles.com/v1.php" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+        SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><SOAP-ENV:Body><ns1:logOutResponse><return
+        xsi:type="ns1:SubtitlesResult"><result xsi:type="xsd:string">200</result><status
+        xsi:type="xsd:string">OK</status><data xsi:type="xsd:string">0</data></return></ns1:logOutResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>
+
+        '
+    headers:
+      Connection:
+      - close
+      Content-Encoding:
+      - gzip
+      Content-Length:
+      - '315'
+      Content-Type:
+      - text/xml; charset=utf-8
+      Date:
+      - Tue, 30 Jul 2024 22:26:24 GMT
+      Server:
+      - Apache/2.4.59 (Debian)
+      Vary:
+      - Accept-Encoding
+    status:
+      code: 200
+      message: OK
+version: 1

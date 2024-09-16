@@ -125,6 +125,7 @@ provider_manager = RegistrableExtensionManager(
     'subliminal.providers',
     [
         'addic7ed = subliminal.providers.addic7ed:Addic7edProvider',
+        'bsplayer = subliminal.providers.bsplayer:BSPlayerProvider',
         'gestdown = subliminal.providers.gestdown:GestdownProvider',
         'napiprojekt = subliminal.providers.napiprojekt:NapiProjektProvider',
         'opensubtitles = subliminal.providers.opensubtitles:OpenSubtitlesProvider',

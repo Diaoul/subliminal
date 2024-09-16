@@ -35,6 +35,7 @@ dynamic = ["version", "readme"]
 dependencies = [
     "babelfish>=0.6.1",
     "beautifulsoup4>=4.4.0",
+    "defusedxml>=0.7.1",
     "chardet>=5.0",
     "click>=8.0",
     "click-option-group>=0.5.6",
@@ -89,6 +90,7 @@ subliminal = "subliminal.cli:subliminal"
 
 [project.entry-points."subliminal.providers"]
 addic7ed = "subliminal.providers.addic7ed:Addic7edProvider"
+bsplayer = "subliminal.providers.bsplayer:BSPlayerProvider"
 gestdown = "subliminal.providers.gestdown:GestdownProvider"
 napiprojekt = "subliminal.providers.napiprojekt:NapiProjektProvider"
 opensubtitles = "subliminal.providers.opensubtitles:OpenSubtitlesProvider"

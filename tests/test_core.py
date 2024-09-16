@@ -86,7 +86,14 @@ def test_provider_pool_list_subtitles_provider(episodes):
 def test_provider_pool_list_subtitles(episodes):
     pool = ProviderPool()
     subtitles = pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
-    assert sorted(subtitles) == ['gestdown', 'opensubtitles', 'opensubtitlescom', 'podnapisi', 'tvsubtitles']  # type: ignore[type-var,comparison-overlap]
+    assert sorted(subtitles) == [  # type: ignore[type-var,comparison-overlap]
+        'bsplayer',
+        'gestdown',
+        'opensubtitles',
+        'opensubtitlescom',
+        'podnapisi',
+        'tvsubtitles',
+    ]
     for provider in subtitles:
         assert provider_manager[provider].plugin.initialize.called
         assert provider_manager[provider].plugin.list_subtitles.called
@@ -105,7 +112,14 @@ def test_async_provider_pool_list_subtitles_provider(episodes):
 def test_async_provider_pool_list_subtitles(episodes):
     pool = AsyncProviderPool()
     subtitles = pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
-    assert sorted(subtitles) == ['gestdown', 'opensubtitles', 'opensubtitlescom', 'podnapisi', 'tvsubtitles']  # type: ignore[type-var,comparison-overlap]
+    assert sorted(subtitles) == [  # type: ignore[type-var,comparison-overlap]
+        'bsplayer',
+        'gestdown',
+        'opensubtitles',
+        'opensubtitlescom',
+        'podnapisi',
+        'tvsubtitles',
+    ]
     for provider in subtitles:
         assert provider_manager[provider].plugin.initialize.called
         assert provider_manager[provider].plugin.list_subtitles.called
@@ -458,12 +472,12 @@ def test_list_subtitles_movie(movies):
     for name in ('addic7ed', 'napiprojekt', 'opensubtitlesvip', 'tvsubtitles'):
         assert not provider_manager[name].plugin.list_subtitles.called
 
-    for name in ('opensubtitles', 'opensubtitlescom', 'podnapisi'):
+    for name in ('bsplayer', 'opensubtitles', 'opensubtitlescom', 'podnapisi'):
         assert provider_manager[name].plugin.list_subtitles.called
 
     # test result
     assert len(subtitles) == 1
-    assert sorted(subtitles[movies['man_of_steel']]) == ['opensubtitles', 'opensubtitlescom', 'podnapisi']  # type: ignore[type-var,comparison-overlap]
+    assert sorted(subtitles[movies['man_of_steel']]) == ['bsplayer', 'opensubtitles', 'opensubtitlescom', 'podnapisi']  # type: ignore[type-var,comparison-overlap]
 
 
 @pytest.mark.usefixtures('_mock_providers')
@@ -477,12 +491,13 @@ def test_list_subtitles_episode(episodes):
     for name in ('addic7ed', 'napiprojekt', 'opensubtitlesvip'):
         assert not provider_manager[name].plugin.list_subtitles.called
 
-    for name in ('gestdown', 'opensubtitles', 'opensubtitlescom', 'podnapisi', 'tvsubtitles'):
+    for name in ('bsplayer', 'gestdown', 'opensubtitles', 'opensubtitlescom', 'podnapisi', 'tvsubtitles'):
         assert provider_manager[name].plugin.list_subtitles.called
 
     # test result
     assert len(subtitles) == 1
     assert sorted(subtitles[episodes['bbt_s07e05']]) == [  # type: ignore[type-var,comparison-overlap]
+        'bsplayer',
         'gestdown',
         'opensubtitles',
         'opensubtitlescom',
@@ -499,7 +514,7 @@ def test_list_subtitles_providers(episodes):
     subtitles = list_subtitles({video}, languages, providers=['opensubtitles'])
 
     # test providers
-    for name in ('addic7ed', 'napiprojekt', 'opensubtitlesvip', 'podnapisi', 'tvsubtitles'):
+    for name in ('addic7ed', 'bsplayer', 'napiprojekt', 'opensubtitlesvip', 'podnapisi', 'tvsubtitles'):
         assert not provider_manager[name].plugin.list_subtitles.called
 
     for name in ('opensubtitles',):
@@ -521,12 +536,13 @@ def test_list_subtitles_episode_no_hash(episodes):
     for name in ('addic7ed', 'napiprojekt', 'opensubtitlesvip'):
         assert not provider_manager[name].plugin.list_subtitles.called
 
-    for name in ('gestdown', 'opensubtitles', 'podnapisi', 'tvsubtitles'):
+    for name in ('bsplayer', 'gestdown', 'opensubtitles', 'podnapisi', 'tvsubtitles'):
         assert provider_manager[name].plugin.list_subtitles.called
 
     # test result
     assert len(subtitles) == 1
     assert sorted(subtitles[episodes['dallas_s01e03']]) == [  # type: ignore[type-var,comparison-overlap]
+        'bsplayer',
         'gestdown',
         'opensubtitles',
         'opensubtitlescom',
@@ -544,7 +560,15 @@ def test_list_subtitles_no_language(episodes):
     subtitles = list_subtitles({video}, languages)
 
     # test providers
-    for name in ('addic7ed', 'napiprojekt', 'opensubtitles', 'opensubtitlesvip', 'podnapisi', 'tvsubtitles'):
+    for name in (
+        'addic7ed',
+        'bsplayer',
+        'napiprojekt',
+        'opensubtitles',
+        'opensubtitlesvip',
+        'podnapisi',
+        'tvsubtitles',
+    ):
         assert not provider_manager[name].plugin.list_subtitles.called
 
     # test result
@@ -570,7 +594,7 @@ def test_download_subtitles():
     download_subtitles(subtitles)
 
     # test providers
-    for name in ('addic7ed', 'napiprojekt', 'opensubtitles', 'opensubtitlesvip', 'podnapisi'):
+    for name in ('addic7ed', 'bsplayer', 'napiprojekt', 'opensubtitles', 'opensubtitlesvip', 'podnapisi'):
         assert not provider_manager[name].plugin.download_subtitle.called
 
     for name in ('tvsubtitles',):

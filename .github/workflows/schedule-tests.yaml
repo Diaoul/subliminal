@@ -11,7 +11,7 @@ concurrency:
 jobs:
   test-api:
     name: Test APIs
-    if: github.event_name == 'schedule'
+    if: github.repository == 'Diaoul/subliminal' && github.event_name == 'schedule'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

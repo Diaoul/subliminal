@@ -62,12 +62,15 @@ docs = [
     "towncrier",
 ]
 test = [
+    "coverage[toml]>=7",
     "mypy",
+    "types-requests",
+    "types-beautifulsoup4",
     "pytest>=6.0",
     "pytest-cov",
     "pytest-xdist",
     "sympy",
-    "vcrpy>=1.6.1",
+    "vcrpy>=5",
     "importlib_metadata>=4.6; python_version<'3.10'",
 ]
 dev = [
@@ -158,6 +161,9 @@ fail_under = 80
 omit = [
     "subliminal/cli.py",
 ]
+
+[tool.coverage.paths]
+source = [".tox/py*/**/site-packages"]
 
 [tool.coverage.run]
 source = ["subliminal"]

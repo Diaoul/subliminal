@@ -14,7 +14,8 @@ def test_video_exists_age(movies, tmpdir, monkeypatch):
     video = movies['man_of_steel']
     tmpdir.ensure(video.name).setmtime(timestamp(datetime.now(timezone.utc) - timedelta(days=3)))
     assert video.exists
-    assert timedelta(days=3) <= video.age < timedelta(days=3, seconds=1)
+    with pytest.deprecated_call():
+        assert timedelta(days=3) <= video.age < timedelta(days=3, seconds=1)
 
 
 def test_video_age(movies):

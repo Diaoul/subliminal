@@ -77,7 +77,7 @@ def test_registrable_extension_manager_register():
 
     eps = manager.list_entry_points()
     ep_names = [ep.name for ep in eps]
-    assert ep_names == ['addic7ed', 'opensubtitles', 'de7cidda']
+    assert ep_names == ['addic7ed', 'bsplayer', 'opensubtitles', 'de7cidda']
 
     # Raise ValueError on same entry point
     with pytest.raises(ValueError, match='Extension already registered'):

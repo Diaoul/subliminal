@@ -15,6 +15,7 @@ Documentation
     :maxdepth: 2
 
     user/usage
+    user/installation
     user/how_it_works
     user/cli
     user/provider_guide

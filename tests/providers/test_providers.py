@@ -73,6 +73,7 @@ def test_provider_pool_list_subtitles(episodes):
         'opensubtitles',
         'opensubtitlescom',
         'podnapisi',
+        'subtitulamos',
         'tvsubtitles',
     ]
     for provider in subtitles:
@@ -99,6 +100,7 @@ def test_async_provider_pool_list_subtitles(episodes):
         'opensubtitles',
         'opensubtitlescom',
         'podnapisi',
+        'subtitulamos',
         'tvsubtitles',
     ]
     for provider in subtitles:
@@ -136,7 +138,15 @@ def test_list_subtitles_episode(episodes):
     for name in ('addic7ed', 'napiprojekt', 'opensubtitlesvip'):
         assert not provider_manager[name].plugin.list_subtitles.called
 
-    for name in ('bsplayer', 'gestdown', 'opensubtitles', 'opensubtitlescom', 'podnapisi', 'tvsubtitles'):
+    for name in (
+        'bsplayer',
+        'gestdown',
+        'opensubtitles',
+        'opensubtitlescom',
+        'podnapisi',
+        'subtitulamos',
+        'tvsubtitles',
+    ):
         assert provider_manager[name].plugin.list_subtitles.called
 
     # test result
@@ -147,6 +157,7 @@ def test_list_subtitles_episode(episodes):
         'opensubtitles',
         'opensubtitlescom',
         'podnapisi',
+        'subtitulamos',
         'tvsubtitles',
     ]
 
@@ -181,7 +192,7 @@ def test_list_subtitles_episode_no_hash(episodes):
     for name in ('addic7ed', 'napiprojekt', 'opensubtitlesvip'):
         assert not provider_manager[name].plugin.list_subtitles.called
 
-    for name in ('bsplayer', 'gestdown', 'opensubtitles', 'podnapisi', 'tvsubtitles'):
+    for name in ('bsplayer', 'gestdown', 'opensubtitles', 'podnapisi', 'subtitulamos', 'tvsubtitles'):
         assert provider_manager[name].plugin.list_subtitles.called
 
     # test result
@@ -192,6 +203,7 @@ def test_list_subtitles_episode_no_hash(episodes):
         'opensubtitles',
         'opensubtitlescom',
         'podnapisi',
+        'subtitulamos',
         'tvsubtitles',
     ]
 

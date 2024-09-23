@@ -16,6 +16,15 @@ vcr = VCR(
 SEARCH_URL = 'http://s1.api.bsplayer-subtitles.com/v1.php'
 
 
+def test_hash_bsplayer(mkv):
+    assert BSPlayerProvider.hash_video(mkv['test1']) == '40b44a7096b71ec3'
+
+
+def test_hash_bsplayer_too_small(tmpdir):
+    path = tmpdir.ensure('test_too_small.mkv')
+    assert BSPlayerProvider.hash_video(str(path)) is None
+
+
 def test_get_matches_movie_hash(episodes):
     subtitle = BSPlayerSubtitle(
         subtitle_id='16442520',

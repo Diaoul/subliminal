@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import io
 import logging
 from gzip import BadGzipFile, GzipFile
@@ -16,6 +17,7 @@ from subliminal.subtitle import Subtitle, fix_line_ending
 from . import Provider
 
 if TYPE_CHECKING:
+    import os
     from collections.abc import Set
 
     from subliminal.video import Video
@@ -95,6 +97,20 @@ class NapiProjektProvider(Provider):
     def __init__(self, *, timeout: int = 10) -> None:
         self.timeout = timeout
         self.session = None
+
+    @staticmethod
+    def hash_video(video_path: str | os.PathLike) -> str | None:
+        """Compute a hash using NapiProjekt's algorithm.
+
+        :param str video_path: path of the video.
+        :return: the hash.
+        :rtype: str
+
+        """
+        readsize = 1024 * 1024 * 10
+        with open(video_path, 'rb') as f:
+            data = f.read(readsize)
+        return hashlib.md5(data).hexdigest()  # noqa: S324
 
     def initialize(self) -> None:
         """Initialize the provider."""

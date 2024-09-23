@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import hashlib
 import logging
 import os
 import struct
@@ -22,40 +21,6 @@ if TYPE_CHECKING:
     HashFunc: TypeAlias = Callable[[str | os.PathLike], str | None]
 
 logger = logging.getLogger(__name__)
-
-
-def hash_bsplayer(video_path: str | os.PathLike) -> str | None:
-    """Compute a hash using BSPlayer's algorithm.
-
-    :param str video_path: path of the video.
-    :return: the hash.
-    :rtype: str.
-    """
-    little_endian_long_long = '<q'  # little-endian long long
-    byte_size = struct.calcsize(little_endian_long_long)
-
-    with open(video_path, 'rb') as f:
-        file_size = os.path.getsize(video_path)
-        file_hash = file_size
-
-        if file_size < 65536 * 2:
-            return None
-
-        for _ in range(65536 // byte_size):
-            buff = f.read(byte_size)
-            (l_value,) = struct.unpack(little_endian_long_long, buff)
-            file_hash += l_value
-            file_hash &= 0xFFFFFFFFFFFFFFFF  # to remain as 64bit number
-
-        f.seek(max(0, file_size - 65536), 0)
-
-        for _ in range(65536 // byte_size):
-            buff = f.read(byte_size)
-            (l_value,) = struct.unpack(little_endian_long_long, buff)
-            file_hash += l_value
-            file_hash &= 0xFFFFFFFFFFFFFFFF
-
-    return f'{file_hash:016x}'
 
 
 def hash_opensubtitles(video_path: str | os.PathLike) -> str | None:
@@ -87,69 +52,11 @@ def hash_opensubtitles(video_path: str | os.PathLike) -> str | None:
     return f'{filehash:016x}'
 
 
-def hash_thesubdb(video_path: str | os.PathLike) -> str | None:  # pragma: no cover
-    """Compute a hash using TheSubDB's algorithm.
-
-    :param str video_path: path of the video.
-    :return: the hash.
-    :rtype: str
-
-    """
-    readsize = 64 * 1024
-    if os.path.getsize(video_path) < readsize:
-        return None
-    with open(video_path, 'rb') as f:
-        data = f.read(readsize)
-        f.seek(-readsize, os.SEEK_END)
-        data += f.read(readsize)
-
-    return hashlib.md5(data).hexdigest()  # noqa: S324
-
-
-def hash_napiprojekt(video_path: str | os.PathLike) -> str | None:
-    """Compute a hash using NapiProjekt's algorithm.
-
-    :param str video_path: path of the video.
-    :return: the hash.
-    :rtype: str
-
-    """
-    readsize = 1024 * 1024 * 10
-    with open(video_path, 'rb') as f:
-        data = f.read(readsize)
-    return hashlib.md5(data).hexdigest()  # noqa: S324
-
-
-def hash_shooter(video_path: str | os.PathLike) -> str | None:  # pragma: no cover
-    """Compute a hash using Shooter's algorithm.
-
-    :param string video_path: path of the video
-    :return: the hash
-    :rtype: string
-
-    """
-    filesize = os.path.getsize(video_path)
-    readsize = 4096
-    if os.path.getsize(video_path) < readsize * 2:
-        return None
-    offsets = (readsize, filesize // 3 * 2, filesize // 3, filesize - readsize * 2)
-    filehash = []
-    with open(video_path, 'rb') as f:
-        for offset in offsets:
-            f.seek(offset)
-            filehash.append(hashlib.md5(f.read(readsize)).hexdigest())  # noqa: S324
-    return ';'.join(filehash)
-
-
 hash_functions: dict[str, HashFunc] = {
-    'bsplayer': hash_bsplayer,
-    'napiprojekt': hash_napiprojekt,
     'opensubtitles': hash_opensubtitles,
     'opensubtitlesvip': hash_opensubtitles,
     'opensubtitlescom': hash_opensubtitles,
     'opensubtitlescomvip': hash_opensubtitles,
-    'shooter': hash_shooter,
-    'thesubdb': hash_thesubdb,
 }
 
 
@@ -174,16 +81,20 @@ def refine(
     logger.debug('Computing hashes for %r', video.name)
     for name in providers or default_providers:
         provider = cast(Provider, provider_manager[name].plugin)
-        if name not in hash_functions:
-            continue
-
         if not provider.check_types(video):
             continue
 
         if languages is not None and not provider.check_languages(languages):
             continue
 
-        h = hash_functions[name](video.name)
+        # Try provider static method
+        h = provider.hash_video(video.name)
+
+        # Try generic hashes
+        if h is None and name in hash_functions:
+            h = hash_functions[name](video.name)
+
+        # Add hash
         if h is not None:
             video.hashes[name] = h
 

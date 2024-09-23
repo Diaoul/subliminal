@@ -3,8 +3,10 @@
 from __future__ import annotations
 
 import logging
+import os
 import re
 import secrets
+import struct
 import zlib
 from time import sleep
 from typing import TYPE_CHECKING, ClassVar, cast, overload
@@ -193,6 +195,40 @@ class BSPlayerProvider(Provider):
         self.token = None
         self.session = Session()
         self.search_url = search_url or get_sub_domain()
+
+    @staticmethod
+    def hash_video(video_path: str | os.PathLike) -> str | None:
+        """Compute a hash using BSPlayer's algorithm.
+
+        :param str video_path: path of the video.
+        :return: the hash.
+        :rtype: str.
+        """
+        little_endian_long_long = '<q'  # little-endian long long
+        byte_size = struct.calcsize(little_endian_long_long)
+
+        with open(video_path, 'rb') as f:
+            file_size = os.path.getsize(video_path)
+            file_hash = file_size
+
+            if file_size < 65536 * 2:
+                return None
+
+            for _ in range(65536 // byte_size):
+                buff = f.read(byte_size)
+                (l_value,) = struct.unpack(little_endian_long_long, buff)
+                file_hash += l_value
+                file_hash &= 0xFFFFFFFFFFFFFFFF  # to remain as 64bit number
+
+            f.seek(max(0, file_size - 65536), 0)
+
+            for _ in range(65536 // byte_size):
+                buff = f.read(byte_size)
+                (l_value,) = struct.unpack(little_endian_long_long, buff)
+                file_hash += l_value
+                file_hash &= 0xFFFFFFFFFFFFFFFF
+
+        return f'{file_hash:016x}'
 
     def _api_request(self, func_name: str = 'logIn', params: str = '', tries: int = 5) -> Element:
         """Request data from search url.

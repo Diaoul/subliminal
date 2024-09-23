@@ -19,6 +19,9 @@ from subliminal.extensions import (
     refiner_manager,
 )
 
+# Core test
+pytestmark = pytest.mark.core
+
 
 def test_parse_entry_point() -> None:
     src = 'addic7ed = subliminal.providers.addic7ed:Addic7edProvider'

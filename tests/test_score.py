@@ -1,10 +1,14 @@
 from __future__ import annotations
 
+import pytest
 from babelfish import Language  # type: ignore[import-untyped]
 from subliminal.providers.addic7ed import Addic7edSubtitle
 from subliminal.providers.opensubtitles import OpenSubtitlesSubtitle
 from subliminal.providers.podnapisi import PodnapisiSubtitle
 from subliminal.score import compute_score, episode_scores, movie_scores, solve_episode_equations, solve_movie_equations
+
+# Core test
+pytestmark = pytest.mark.core
 
 
 def test_episode_equations():
@@ -63,7 +67,7 @@ def test_get_score_cap(movies):
     assert compute_score(subtitle, video) == movie_scores['hash']
 
 
-def test_compute_score_episode_imdb_id(movies):
+def test_compute_score_movie_imdb_id(movies):
     video = movies['man_of_steel']
     subtitle = OpenSubtitlesSubtitle(
         language=Language('eng'),

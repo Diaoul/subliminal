@@ -198,11 +198,11 @@ class BSPlayerProvider(Provider):
 
     @staticmethod
     def hash_video(video_path: str | os.PathLike) -> str | None:
-        """Compute a hash using BSPlayer's algorithm.
+        """Compute a hash using BSPlayer algorithm.
 
         :param str video_path: path of the video.
         :return: the hash.
-        :rtype: str.
+        :rtype: str
         """
         little_endian_long_long = '<q'  # little-endian long long
         byte_size = struct.calcsize(little_endian_long_long)
@@ -235,8 +235,9 @@ class BSPlayerProvider(Provider):
 
         :param str func_name: the type of request.
         :param str params: xml string of parameters to send with the request.
+        :param int tries: the number of times to try making the request.
         :return: the root XML element from the response.
-        :rtype: `xml.etree.ElementTree.Element`.
+        :rtype: `xml.etree.ElementTree.Element`
         """
         headers = {
             'User-Agent': 'BSPlayer/2.x (1022.12360)',

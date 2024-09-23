@@ -1,4 +1,8 @@
+import pytest
 from subliminal.matches import guess_matches
+
+# Core test
+pytestmark = pytest.mark.core
 
 
 def test_guess_matches_movie(movies):
@@ -43,6 +47,13 @@ def test_guess_matches_episode(episodes):
         'video_codec',
         'audio_codec',
     }
+    assert guess_matches(video, guess) == expected
+
+
+def test_guess_matches_country(episodes):
+    video = episodes['shameless_us_s08e01']
+    guess = {'title': video.series, 'season': video.season, 'episode': video.episode, 'country': video.country}
+    expected = {'series', 'season', 'episode', 'country'}
     assert guess_matches(video, guess) == expected
 
 

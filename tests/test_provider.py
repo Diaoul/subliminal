@@ -5,6 +5,9 @@ import pytest
 from subliminal.providers import FeatureNotFound, ParserBeautifulSoup, Provider
 from subliminal.video import Episode, Movie
 
+# Core test
+pytestmark = pytest.mark.core
+
 
 def test_parserbeautifulsoup_reject_features():
     with pytest.raises(ValueError):

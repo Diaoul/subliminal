@@ -1,26 +1,66 @@
 from __future__ import annotations
 
 import datetime
-from typing import Any
+from typing import TYPE_CHECKING, Any
 from xmlrpc.client import ProtocolError
 
 import pytest
 import requests
 from subliminal.exceptions import ServiceUnavailable
 from subliminal.utils import (
+    clip,
+    creation_date,
+    decorate_imdb_id,
     ensure_list,
     get_age,
     get_extend_and_ignore_union,
     handle_exception,
-    matches_title,
+    matches_extended_title,
     merge_extend_and_ignore_unions,
+    modification_date,
     sanitize,
+    sanitize_id,
+    sanitize_release_group,
 )
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
+# Core test
+pytestmark = pytest.mark.core
 
 
 def test_sanitize():
     assert sanitize(None) is None
     assert sanitize("Marvel's Agents of S.H.I.E.L.D.") == 'marvels agents of s h i e l d'
+
+
+def test_sanitize_release_group():
+    assert sanitize_release_group(None) is None
+    assert sanitize_release_group(' Lol[x264]') == 'LOL'
+
+
+def test_sanitize_id():
+    assert sanitize_id(None) is None
+    assert sanitize_id('tt0770828') == 770828
+
+    assert decorate_imdb_id(sanitize_id(None)) is None
+    assert decorate_imdb_id(sanitize_id('tt0770828')) == 'tt0770828'
+
+    assert decorate_imdb_id(203) == 'tt0000203'
+
+
+def test_get_creation_date(tmp_path: Path) -> None:
+    NOW = datetime.datetime.now(datetime.timezone.utc)
+
+    content = 'content'
+    p = tmp_path / 'test.txt'
+    p.write_text(content, encoding='utf-8')
+
+    mdate = datetime.datetime.fromtimestamp(modification_date(p), tz=datetime.timezone.utc)
+    cdate = datetime.datetime.fromtimestamp(creation_date(p), tz=datetime.timezone.utc)
+    assert abs((cdate - mdate).total_seconds()) < 2
+    assert abs((cdate - NOW).total_seconds()) < 2
 
 
 def test_get_age(monkeypatch) -> None:
@@ -66,8 +106,8 @@ def test_get_age(monkeypatch) -> None:
         ('the.big.bang.theory', 'Big Bang Theory', ['Not The Big Bang Theory'], False),
     ],
 )
-def test_matches_title(actual: str | None, title: str | None, alt: list[str], expected: bool) -> None:
-    ret = matches_title(actual, title, alt)
+def test_matches_extended_title(actual: str | None, title: str | None, alt: list[str], expected: bool) -> None:
+    ret = matches_extended_title(actual, title, alt)
     assert ret == expected
 
 
@@ -182,3 +222,18 @@ def test_merge_extend_and_ignore_unions(
 ) -> None:
     final = set(merge_extend_and_ignore_unions(lists, default_lists, defaults))  # type: ignore[arg-type]
     assert final == expected
+
+
+@pytest.mark.parametrize(
+    ('value', 'minimum', 'maximum', 'expected'),
+    [
+        (1, None, None, 1),
+        (1, 0, 2, 1),
+        (1, 2, 0, 2),
+        (1, -1, 0, 0),
+        (1, 2, 4, 2),
+    ],
+)
+def test_clip(value: float, minimum: float | None, maximum: float | None, expected: float) -> None:
+    out = clip(value, minimum, maximum)
+    assert out == expected

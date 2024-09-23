@@ -141,6 +141,7 @@ addopts = "--import-mode=importlib --doctest-glob='*.rst'"
 markers = [
     "integration",
     "converter",
+    "core",
 ]
 doctest_optionflags = ["NORMALIZE_WHITESPACE", "IGNORE_EXCEPTION_DETAIL"]
 

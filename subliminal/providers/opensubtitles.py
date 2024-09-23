@@ -29,23 +29,8 @@ from . import Provider, TimeoutSafeTransport
 
 if TYPE_CHECKING:
     from collections.abc import Set
-    from http.client import HTTPConnection
 
 logger = logging.getLogger(__name__)
-
-
-class UATimeoutSafeTransport(TimeoutSafeTransport):
-    """TimeoutSafeTransport with a user agent."""
-
-    def set_user_agent(self, user_agent: str) -> None:
-        """Set user agent."""
-        self._user_agent = user_agent
-
-    def send_headers(self, connection: HTTPConnection, headers: list) -> None:
-        """Send headers."""
-        if self._user_agent:
-            connection.putheader('User-Agent', self.user_agent)
-        super().send_headers(connection, headers)
 
 
 class OpenSubtitlesSubtitle(Subtitle):
@@ -202,8 +187,7 @@ class OpenSubtitlesProvider(Provider):
         *,
         timeout: int = 10,
     ) -> None:
-        transport = UATimeoutSafeTransport(timeout)
-        transport.set_user_agent('VLSub')
+        transport = TimeoutSafeTransport(timeout=timeout, user_agent='VLSub')
         self.server = ServerProxy(self.server_url, transport)
         if any((username, password)) and not all((username, password)):
             msg = 'Username and password must be specified'

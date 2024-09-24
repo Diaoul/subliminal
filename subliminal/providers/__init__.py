@@ -54,9 +54,17 @@ class TimeoutSafeTransport(SafeTransport):
 
     timeout: float | None
 
-    def __init__(self, timeout: float | None, *args: Any, **kwargs: Any) -> None:
+    def __init__(
+        self,
+        *args: Any,
+        timeout: float | None = None,
+        user_agent: str | None = None,
+        **kwargs: Any,
+    ) -> None:
         super().__init__(*args, **kwargs)
         self.timeout = timeout
+        if user_agent is not None:
+            self.user_agent = user_agent
 
     def make_connection(self, host: Any) -> HTTPSConnection:
         """Make connection to host.

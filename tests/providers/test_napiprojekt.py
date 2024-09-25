@@ -13,6 +13,10 @@ vcr = VCR(
 )
 
 
+def test_hash_napiprojekt(mkv):
+    assert NapiProjektProvider.hash_video(mkv['test1']) == '9884a2b66dcb2965d0f45ce84e37b60c'
+
+
 def test_get_matches(movies):
     subtitle = NapiProjektSubtitle(Language('pol'), '6303e7ee6a835e9fcede9fb2fb00cb36')
     matches = subtitle.get_matches(movies['man_of_steel'])

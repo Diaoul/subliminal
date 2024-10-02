@@ -318,7 +318,8 @@ def test_download_best_subtitles_only_one(episodes):
 
     assert len(subtitles) == 1
     assert len(subtitles[video]) == 1
-    assert {(s.provider_name, s.id) for s in subtitles[video]} in expected_subtitles
+    subtitle = subtitles[video][0]
+    assert (subtitle.provider_name, subtitle.id) in expected_subtitles
 
 
 @pytest.mark.integration()

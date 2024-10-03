@@ -127,7 +127,7 @@ def timestamp(date: datetime) -> float:
     return (date - datetime(1970, 1, 1, tzinfo=timezone.utc)).total_seconds()
 
 
-def matches_title(
+def matches_extended_title(
     actual: str | None,
     title: str | None,
     alternative_titles: Sequence[str],
@@ -334,3 +334,22 @@ def get_extend_and_ignore_union(
     item_set -= set(ignore)
 
     return list(item_set)
+
+
+def clip(value: float, minimum: float | None, maximum: float | None) -> float:
+    """Clip the value between a minimum and maximum.
+
+    Cheap replacement for the numpy.clip function.
+
+    :param float value: the value to clip (float or int).
+    :param (float | None) minimum: the minimum value (no minimum if None).
+    :param (float | None) maximum: the maximum value (no maximum if None).
+    :return: the clipped value.
+    :rtype: float
+
+    """
+    if maximum is not None:
+        value = min(value, maximum)
+    if minimum is not None:
+        value = max(value, minimum)
+    return value

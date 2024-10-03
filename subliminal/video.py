@@ -9,7 +9,7 @@ from typing import TYPE_CHECKING, Any, Sequence
 
 from guessit import guessit  # type: ignore[import-untyped]
 
-from subliminal.utils import ensure_list, get_age, matches_title
+from subliminal.utils import ensure_list, get_age, matches_extended_title
 
 if TYPE_CHECKING:
     from collections.abc import Mapping, Set
@@ -273,7 +273,7 @@ class Video:
         """Age of the video, with an option to take into account creation time."""
         return get_age(self.name, use_ctime=use_ctime)
 
-    def __repr__(self) -> str:
+    def __repr__(self) -> str:  # pragma: no cover
         return f'<{self.__class__.__name__} [{self.name!r}]>'
 
     def __hash__(self) -> int:
@@ -370,7 +370,7 @@ class Episode(Video):
 
     def matches(self, series: str | None) -> bool:
         """Match the name to the series name, using alternative series names also.."""
-        return matches_title(series, self.series, self.alternative_series)
+        return matches_extended_title(series, self.series, self.alternative_series)
 
     @classmethod
     def fromguess(cls, name: str, guess: Mapping[str, Any]) -> Episode:
@@ -407,16 +407,13 @@ class Episode(Video):
         return cls.fromguess(name, guessit(name, {'type': 'episode'}))
 
     def __repr__(self) -> str:
-        return '<{cn} [{series}{open}{country}{sep}{year}{close} s{season:02d}e{episodes}]>'.format(
+        return '<{cn} [{series}{country}{year} s{season:02d}e{episodes}]>'.format(
             cn=self.__class__.__name__,
             series=self.series,
-            year=self.year or '',
-            country=self.country or '',
+            country=f' ({self.country})' if not self.original_series and self.country else '',
+            year=f' ({self.year})' if not self.original_series and self.year else '',
             season=self.season,
             episodes='-'.join(f'{num:02d}' for num in self.episodes),
-            open=' (' if not self.original_series else '',
-            sep=') (' if self.year and self.country else '',
-            close=')' if not self.original_series else '',
         )
 
 
@@ -463,7 +460,7 @@ class Movie(Video):
 
     def matches(self, title: str) -> bool:
         """Match the name to the movie title, using alternative titles also.."""
-        return matches_title(title, self.title, self.alternative_titles)
+        return matches_extended_title(title, self.title, self.alternative_titles)
 
     @classmethod
     def fromguess(cls, name: str, guess: Mapping[str, Any]) -> Movie:

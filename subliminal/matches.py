@@ -67,7 +67,7 @@ def title_matches(video: Video, *, title: str | None = None, episode_title: str 
         return video.title is not None and sanitize(episode_title) == sanitize(video.title)
     if isinstance(video, Movie):
         return video.title is not None and sanitize(title) == sanitize(video.title)
-    return False
+    return False  # pragma: no cover
 
 
 def season_matches(video: Video, *, season: int | None = None, **kwargs: Any) -> bool:
@@ -142,7 +142,7 @@ def country_matches(video: Video, *, country: Country | None = None, partial: bo
     if isinstance(video, Movie):
         # count "no country" as an information
         return video.country is None and country is None
-    return False
+    return False  # pragma: no cover
 
 
 def release_group_matches(video: Video, *, release_group: str | None = None, **kwargs: Any) -> bool:

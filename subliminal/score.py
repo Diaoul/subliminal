@@ -37,6 +37,7 @@ import logging
 from importlib.util import find_spec
 from typing import TYPE_CHECKING, Any
 
+from .utils import clip
 from .video import Episode, Movie
 
 if TYPE_CHECKING:
@@ -96,25 +97,6 @@ score_keys = set(list(episode_scores) + list(movie_scores))
 equivalent_release_groups = ({'LOL', 'DIMENSION'}, {'ASAP', 'IMMERSE', 'FLEET'}, {'AVS', 'SVA'})
 
 
-def clip(value: float, minimum: float | None, maximum: float | None) -> float:
-    """Clip the value between a minimum and maximum.
-
-    Cheap replacement for the numpy.clip function.
-
-    :param float value: the value to clip (float or int).
-    :param (float | None) minimum: the minimum value (no minimum if None).
-    :param (float | None) maximum: the maximum value (no maximum if None).
-    :return: the clipped value.
-    :rtype: float
-
-    """
-    if maximum is not None:
-        value = min(value, maximum)
-    if minimum is not None:
-        value = max(value, minimum)
-    return value
-
-
 def get_equivalent_release_groups(release_group: str) -> set[str]:
     """Get all the equivalents of the given release group.
 
@@ -147,7 +129,7 @@ def get_scores(video: Video) -> dict[str, Any]:
         return movie_scores
 
     msg = 'video must be an instance of Episode or Movie'  # pragma: no-cover
-    raise ValueError(msg)
+    raise ValueError(msg)  # pragma: no-cover
 
 
 def match_hearing_impaired(subtitle: Subtitle, *, hearing_impaired: bool | None = None) -> bool:
@@ -206,7 +188,7 @@ def compute_score(subtitle: Subtitle, video: Video, *, hearing_impaired: bool | 
         if 'series_tvdb_id' in matches:
             logger.debug('Adding series_tvdb_id match equivalents')
             matches |= {'series', 'year', 'country'}
-    elif isinstance(video, Movie):
+    elif isinstance(video, Movie):  # pragma: no branch
         if 'imdb_id' in matches:
             logger.debug('Adding imdb_id match equivalents')
             matches |= {'title', 'year', 'country'}
@@ -222,14 +204,14 @@ def compute_score(subtitle: Subtitle, video: Video, *, hearing_impaired: bool | 
 
     # ensure score is within valid bounds
     max_score = scores['hash'] + scores['hearing_impaired']
-    if not (0 <= score <= max_score):
+    if not (0 <= score <= max_score):  # pragma: no cover
         logger.info('Clip score between 0 and %d: %d', max_score, score)
         score = int(clip(score, 0, max_score))
 
     return score
 
 
-if WITH_SYMPY:
+if WITH_SYMPY:  # pragma: no cover
     from sympy import Eq, Symbol, solve, symbols  # type: ignore[import-untyped]
 
     def solve_episode_equations() -> dict[Symbol, int]:

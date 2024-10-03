@@ -1,9 +1,13 @@
 from unittest.mock import Mock
 
+import pytest
 from dogpile.cache import make_region
 
 # A Mock version is already provided in conftest.py so no need to configure it again
 from subliminal.cache import region as region_custom
+
+# Core test
+pytestmark = pytest.mark.core
 
 # Configure default dogpile cache
 region_dogpile = make_region()

@@ -8,6 +8,9 @@ import pytest
 from subliminal.utils import sanitize, timestamp
 from subliminal.video import Episode, Movie, Video
 
+# Core test
+pytestmark = pytest.mark.core
+
 
 def test_video_exists_age(movies, tmpdir, monkeypatch):
     monkeypatch.chdir(str(tmpdir))
@@ -106,6 +109,27 @@ def test_video_fromname_episode_no_season(episodes):
 def test_video_hash(episodes):
     video = episodes['bbt_s07e05']
     assert hash(video) == hash(video.name)
+
+
+def test_movie_matches(movies):
+    video = movies['man_of_steel']
+    assert video.matches('Man of Steel')
+
+
+def test_episode_matches(episodes):
+    video = episodes['marvels_jessica_jones_s01e13']
+    assert video.matches('Jessica Jones')
+    assert video.matches("Marvel's Jessica Jones")
+
+
+def test_movie_repr(movies):
+    video = movies['man_of_steel']
+    assert isinstance(f'{video!r}', str)
+
+
+def test_episode_repr(episodes):
+    video = episodes['bbt_s07e05']
+    assert isinstance(f'{video!r}', str)
 
 
 def test_episode_from_guess_multi_episode(episodes):

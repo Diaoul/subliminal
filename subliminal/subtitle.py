@@ -53,6 +53,37 @@ class LanguageType(Enum):
     NORMAL = 'normal'
     HEARING_IMPAIRED = 'hearing_impaired'
 
+    @classmethod
+    def from_flags(cls, *, hearing_impaired: bool | None = None, forced: bool | None = None) -> LanguageType:
+        """Convert to LanguageType from flags."""
+        language_type = cls.UNKNOWN
+        if hearing_impaired:
+            language_type = cls.HEARING_IMPAIRED
+        elif forced:
+            language_type = cls.FORCED
+        # if hearing_impaired or forced is specified to be False
+        # then for sure the subtitle is normal.
+        elif hearing_impaired is False or forced is False:
+            language_type = cls.NORMAL
+
+        return language_type
+
+    def is_hearing_impaired(self) -> bool | None:
+        """Flag for hearing impaired."""
+        if self == LanguageType.HEARING_IMPAIRED:
+            return True
+        if self == LanguageType.UNKNOWN:
+            return None
+        return False
+
+    def is_forced(self) -> bool | None:
+        """Flag for forced."""
+        if self == LanguageType.FORCED:
+            return True
+        if self == LanguageType.UNKNOWN:
+            return None
+        return False
+
 
 class Subtitle:
     """Base class for subtitle.
@@ -136,16 +167,7 @@ class Subtitle:
         self.fps = fps
         self.embedded = embedded
 
-        self.language_type = LanguageType.UNKNOWN
-        if hearing_impaired:
-            self.language_type = LanguageType.HEARING_IMPAIRED
-        elif forced:
-            self.language_type = LanguageType.FORCED
-        # if hearing_impaired or forced is specified to be False
-        # then for sure the subtitle is normal.
-        elif hearing_impaired is False or forced is False:
-            self.language_type = LanguageType.NORMAL
-
+        self.language_type = LanguageType.from_flags(hearing_impaired=hearing_impaired, forced=forced)
         self.encoding = None
         # validate the encoding
         if encoding:
@@ -167,20 +189,12 @@ class Subtitle:
     @property
     def hearing_impaired(self) -> bool | None:
         """Whether the subtitle is for hearing impaired."""
-        if self.language_type == LanguageType.HEARING_IMPAIRED:
-            return True
-        if self.language_type == LanguageType.UNKNOWN:
-            return None
-        return False
+        return self.language_type.is_hearing_impaired()
 
     @property
     def forced(self) -> bool | None:
         """Whether the subtitle is a forced subtitle."""
-        if self.language_type == LanguageType.FORCED:
-            return True
-        if self.language_type == LanguageType.UNKNOWN:
-            return None
-        return False
+        return self.language_type.is_forced()
 
     @property
     def content(self) -> bytes | None:
@@ -239,13 +253,13 @@ class Subtitle:
 
         # Text is empty, maybe because the content was not decoded.
         # Reencoding would erase the content, so return.
-        if not text:
+        if not text:  # pragma: no cover
             return False
 
         # Try re-encoding
         try:
             new_content = text.encode(encoding=encoding)
-        except UnicodeEncodeError:
+        except UnicodeEncodeError:  # pragma: no cover
             logger.exception('Cannot encode text to bytes with encoding: %s', encoding)
             return False
 
@@ -261,7 +275,7 @@ class Subtitle:
         :rtype: bool
 
         """
-        if self._is_valid is None:
+        if self._is_valid is None:  # pragma: no branch
             self._is_valid = self._check_is_valid(auto_fix_srt=auto_fix_srt)
 
         return bool(self._is_valid)
@@ -279,26 +293,28 @@ class Subtitle:
         # Try guessing the subtitle format
         if self.subtitle_format is None:
             guessed_format = get_subtitle_format(self.text, subtitle_format=self.subtitle_format, fps=self.fps)
-            if guessed_format:
-                # Keep the guessed format
-                self.subtitle_format = guessed_format
-                if self.subtitle_format != 'srt':
-                    # Do not check more if the format is not 'srt'
-                    return True
+            # Cannot guess format
+            if not guessed_format:
+                return False
+
+            # Keep the guessed format
+            self.subtitle_format = guessed_format
 
         # Valid srt
         if self.subtitle_format == 'srt':
             try:
                 parsed = self.parse_srt()
-            except Exception:
+            except Exception:  # pragma: no cover
                 msg = 'srt parsing failed, subtitle is invalid'
                 logger.exception(msg)
+                return False
             else:
                 if auto_fix_srt:
                     self._text = parsed
                 return True
 
-        return False
+        # TODO: check other formats
+        return True
 
     def parse_srt(self) -> str:
         """Text content parsed to a valid srt subtitle."""
@@ -311,7 +327,7 @@ class Subtitle:
         :rtype: str
 
         """
-        if not isinstance(self.content, bytes):
+        if not isinstance(self.content, bytes):  # pragma: no cover
             return None
         logger.info('Guessing encoding for language %s', self.language)
 
@@ -322,84 +338,7 @@ class Subtitle:
         encodings.extend(find_encoding_with_bom(self.content))
 
         # add language-specific encodings
-        # http://scratchpad.wikia.com/wiki/Character_Encoding_Recommendation_for_Languages
-
-        if self.language.alpha3 == 'zho':
-            encodings.extend(
-                ['cp936', 'gb2312', 'gbk', 'hz', 'iso2022_jp_2', 'cp950', 'big5hkscs', 'big5', 'gb18030', 'utf-16']
-            )
-
-        elif self.language.alpha3 == 'jpn':
-            encodings.extend(
-                [
-                    'shift-jis',
-                    'cp932',
-                    'euc_jp',
-                    'iso2022_jp',
-                    'iso2022_jp_1',
-                    'iso2022_jp_2',
-                    'iso2022_jp_2004',
-                    'iso2022_jp_3',
-                    'iso2022_jp_ext',
-                ]
-            )
-
-        elif self.language.alpha3 == 'tha':
-            encodings.extend(['tis-620', 'cp874'])
-
-        elif self.language.alpha3 in ('ara', 'fas', 'per'):
-            encodings.extend(['windows-1256', 'utf-16', 'utf-16le', 'ascii', 'iso-8859-6'])
-
-        elif self.language.alpha3 == 'heb':
-            encodings.extend(['windows-1255', 'iso-8859-8'])
-
-        elif self.language.alpha3 == 'tur':
-            encodings.extend(['windows-1254', 'iso-8859-9', 'iso-8859-3'])
-
-        elif self.language.alpha3 in ('grc', 'gre', 'ell'):
-            encodings.extend(
-                ['windows-1253', 'cp1253', 'cp737', 'iso8859-7', 'cp875', 'cp869', 'iso2022_jp_2', 'mac_greek']
-            )
-
-        elif self.language.alpha3 in (
-            'pol',
-            'cze',
-            'ces',
-            'slk',
-            'slo',
-            'slv',
-            'hun',
-            'bos',
-            'hbs',
-            'hrv',
-            'rsb',
-            'ron',
-            'rum',
-            'sqi',
-            'alb',
-        ):
-            encodings.extend(['windows-1250', 'iso-8859-2'])
-
-            if self.language.alpha3 == 'slv':
-                encodings.extend(['iso-8859-4'])
-            elif self.language.alpha3 in ('sqi', 'alb'):
-                encodings.extend(['windows-1252', 'iso-8859-15', 'iso-8859-1', 'iso-8859-9'])
-
-        elif self.language.alpha3 in ('bul', 'srp', 'mkd', 'mac', 'rus', 'ukr'):
-            if self.language.alpha3 in ('bul', 'mkd', 'mac', 'rus', 'ukr'):
-                encodings.extend(['windows-1251', 'iso-8859-5'])
-
-            elif self.language.alpha3 == 'srp':
-                if self.language.script == 'Latn':
-                    encodings.extend(['windows-1250', 'iso-8859-2'])
-                elif self.language.script == 'Cyrl':
-                    encodings.extend(['windows-1251', 'iso-8859-5'])
-                else:
-                    encodings.extend(['windows-1250', 'windows-1251', 'iso-8859-2', 'iso-8859-5'])
-
-        else:
-            # Western European (windows-1252) / Northern European
-            encodings.extend(['windows-1252', 'iso-8859-15', 'iso-8859-9', 'iso-8859-4', 'iso-8859-1'])
+        encodings.extend(find_potential_encodings(self.language))
 
         # try to decode
         logger.debug('Trying encodings %r', encodings)
@@ -409,7 +348,7 @@ class Subtitle:
                 # remove whitespace other than spaces from the string
                 # see https://docs.python.org/3/library/stdtypes.html#str.isprintable
                 decoded = decoded.replace('\r', '').replace('\n', '').replace('\t', '')
-                if not decoded.isprintable():
+                if not decoded.isprintable():  # pragma: no cover
                     continue
             except UnicodeDecodeError:
                 pass
@@ -491,7 +430,7 @@ class EmbeddedSubtitle(Subtitle):
         encoding: str | None = None,
         subtitle_format: str | None = None,
     ) -> None:
-        subtitle_id = f'Embedded {language}'
+        subtitle_id = f'Embedded <{language}>'
 
         super().__init__(
             language,
@@ -590,6 +529,80 @@ def get_subtitle_suffix(
             language_type_part = '.forced'
 
     return language_type_part + language_part
+
+
+def find_potential_encodings(language: Language) -> list[str]:  # pragma: no cover
+    """Find potential encodings given the language."""
+    # http://scratchpad.wikia.com/wiki/Character_Encoding_Recommendation_for_Languages
+
+    if language.alpha3 == 'zho':
+        return ['cp936', 'gb2312', 'gbk', 'hz', 'iso2022_jp_2', 'cp950', 'big5hkscs', 'big5', 'gb18030', 'utf-16']
+
+    if language.alpha3 == 'jpn':
+        return [
+            'shift-jis',
+            'cp932',
+            'euc_jp',
+            'iso2022_jp',
+            'iso2022_jp_1',
+            'iso2022_jp_2',
+            'iso2022_jp_2004',
+            'iso2022_jp_3',
+            'iso2022_jp_ext',
+        ]
+
+    if language.alpha3 == 'tha':
+        return ['tis-620', 'cp874']
+
+    if language.alpha3 in ('ara', 'fas', 'per'):
+        return ['windows-1256', 'utf-16', 'utf-16le', 'ascii', 'iso-8859-6']
+
+    if language.alpha3 == 'heb':
+        return ['windows-1255', 'iso-8859-8']
+
+    if language.alpha3 == 'tur':
+        return ['windows-1254', 'iso-8859-9', 'iso-8859-3']
+
+    if language.alpha3 in ('grc', 'gre', 'ell'):
+        return ['windows-1253', 'cp1253', 'cp737', 'iso8859-7', 'cp875', 'cp869', 'iso2022_jp_2', 'mac_greek']
+
+    if language.alpha3 in (
+        'pol',
+        'cze',
+        'ces',
+        'slk',
+        'slo',
+        'slv',
+        'hun',
+        'bos',
+        'hbs',
+        'hrv',
+        'rsb',
+        'ron',
+        'rum',
+        'sqi',
+        'alb',
+    ):
+        encodings = ['windows-1250', 'iso-8859-2']
+
+        if language.alpha3 == 'slv':
+            encodings.extend(['iso-8859-4'])
+        elif language.alpha3 in ('sqi', 'alb'):
+            encodings.extend(['windows-1252', 'iso-8859-15', 'iso-8859-1', 'iso-8859-9'])
+        return encodings
+
+    if language.alpha3 in ('bul', 'mkd', 'mac', 'rus', 'ukr'):
+        return ['windows-1251', 'iso-8859-5']
+
+    if language.alpha3 == 'srp':
+        if language.script == 'Latn':
+            return ['windows-1250', 'iso-8859-2']
+        if language.script == 'Cyrl':
+            return ['windows-1251', 'iso-8859-5']
+        return ['windows-1250', 'windows-1251', 'iso-8859-2', 'iso-8859-5']
+
+    # Western European (windows-1252) / Northern European
+    return ['windows-1252', 'iso-8859-15', 'iso-8859-9', 'iso-8859-4', 'iso-8859-1']
 
 
 def get_subtitle_path(

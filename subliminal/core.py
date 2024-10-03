@@ -60,10 +60,13 @@ class ProviderPool:
 
     #: Name of providers to use
     providers: Sequence[str]
+
     #: Provider configuration
     provider_configs: Mapping[str, Any]
+
     #: Initialized providers
     initialized_providers: dict[str, Provider]
+
     #: Discarded providers
     discarded_providers: set[str]
 
@@ -297,6 +300,7 @@ class AsyncProviderPool(ProviderPool):
 
     """
 
+    #: Maximum number of threads to use.
     max_workers: int
 
     def __init__(self, max_workers: int | None = None, *args: Any, **kwargs: Any) -> None:
@@ -495,7 +499,7 @@ def scan_video(path: str | os.PathLike, name: str | None = None) -> Video:
     return video
 
 
-def scan_archive(path: str | os.PathLike, name: str | None = None) -> Video:
+def scan_archive(path: str | os.PathLike, name: str | None = None) -> Video:  # pragma: no cover
     """Scan an archive from a `path`.
 
     :param str path: existing path to the archive.
@@ -632,7 +636,7 @@ def scan_videos(
             # skip old files
             try:
                 file_age = get_age(filepath, use_ctime=use_ctime)
-            except ValueError:
+            except ValueError:  # pragma: no cover
                 logger.warning('Could not get age of file %r in %r', filename, dirpath)
                 continue
             else:

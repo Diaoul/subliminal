@@ -1,0 +1,108 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept-Encoding:
+      - gzip, deflate, br, zstd
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.2
+      accept:
+      - application/json
+    method: GET
+    uri: https://api.gestdown.info/shows/external/tvdb/80379
+  response:
+    body:
+      string: '{"shows":[{"id":"91eb9278-8cf5-4ddd-9111-7f60b15958cb","name":"The
+        Big Bang Theory","nbSeasons":12,"seasons":[1,2,3,4,5,6,7,8,9,10,11,12],"tvDbId":80379,"tmdbId":1418,"slug":"the-big-bang-theory"}]}'
+    headers:
+      Age:
+      - '476330'
+      CF-Cache-Status:
+      - HIT
+      CF-RAY:
+      - 8cbfa72abce899ba-CDG
+      Cache-Control:
+      - public, max-age=14400
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - br
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 01 Oct 2024 21:47:45 GMT
+      Last-Modified:
+      - Wed, 25 Sep 2024 23:17:44 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=PqFoTLOc1upxGpGQTM7qN3QIw4GbqcDo3%2FQmR5KO2OpMXVDDHGcvie0q1cQ5nnjTMShT7eFlPypNa4yPTtCsPsshzgp9cn5krbkkSgOtQ3tp3L9azeQpKpamW%2BgnhITabv42xw%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      vary:
+      - Accept-Encoding
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept-Encoding:
+      - gzip, deflate, br, zstd
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.2
+      accept:
+      - application/json
+    method: GET
+    uri: https://api.gestdown.info/subtitles/get/91eb9278-8cf5-4ddd-9111-7f60b15958cb/7/5/fra
+  response:
+    body:
+      string: '{"matchingSubtitles":[{"subtitleId":"90fe1369-fa0c-4154-bd04-d3d332dec587","version":"DIMENSION","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/90fe1369-fa0c-4154-bd04-d3d332dec587","language":"French","discovered":"2022-05-30T14:51:00.621699Z","downloadCount":148}],"episode":{"season":7,"number":5,"title":"The
+        Workplace Proximity","show":"The Big Bang Theory","discovered":"2022-05-30T14:51:00.621694Z"}}'
+    headers:
+      Age:
+      - '2604'
+      CF-Cache-Status:
+      - HIT
+      CF-RAY:
+      - 8cbfa72b7a09f850-CDG
+      Cache-Control:
+      - public, max-age=7200
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - br
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 01 Oct 2024 21:47:45 GMT
+      Last-Modified:
+      - Tue, 01 Oct 2024 21:04:21 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=MMavRQ8JlpHCzB0qaRgszOosQPZWd%2Bqw7sUsQQc7Q1%2F03Cd6yUuMLez4Ozqy1w%2FYL2%2Bh7CV%2FpgQW3F4CFQ6ip5BTCjgNuPAqmCFtV8OHZXj7Im6p9qTVerJPT3DviW9%2F9mjkcA%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      X-Content-Type-Options:
+      - nosniff
+      vary:
+      - Accept-Encoding
+    status:
+      code: 200
+      message: OK
+version: 1

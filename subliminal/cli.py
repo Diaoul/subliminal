@@ -16,7 +16,7 @@ import click
 import tomli
 from babelfish import Error as BabelfishError  # type: ignore[import-untyped]
 from babelfish import Language
-from click_option_group import OptionGroup
+from click_option_group import MutuallyExclusiveOptionGroup, OptionGroup
 from dogpile.cache.backends.file import AbstractFileLock
 from dogpile.util.readwrite_lock import ReadWriteMutex
 from platformdirs import PlatformDirs
@@ -40,7 +40,6 @@ from subliminal import (
 )
 from subliminal.core import ARCHIVE_EXTENSIONS, scan_name, search_external_subtitles
 from subliminal.extensions import get_default_providers, get_default_refiners
-from subliminal.score import match_hearing_impaired
 from subliminal.utils import merge_extend_and_ignore_unions
 
 if TYPE_CHECKING:
@@ -190,6 +189,14 @@ default_config_path = dirs.user_config_path / 'subliminal.toml'
 
 providers_config = OptionGroup('Providers configuration')
 refiners_config = OptionGroup('Refiners configuration')
+hearing_impaired_group = MutuallyExclusiveOptionGroup(
+    'Hearing impaired subtitles',
+    help='Require or avoid hearing impaired subtitles. Set to empty if no preference (default).',
+)
+foreign_only_group = MutuallyExclusiveOptionGroup(
+    'Foreign only subtitles',
+    help='Require or avoid foreign-only/forced subtitles. Set to empty if no preference (default).',
+)
 
 
 @click.group(
@@ -411,7 +418,16 @@ def cache(ctx: click.Context, clear_subliminal: bool) -> None:
     ),
 )
 @click.option('-f', '--force', is_flag=True, default=False, help='Force download even if a subtitle already exist.')
-@click.option('-hi', '--hearing-impaired', is_flag=True, default=False, help='Prefer hearing impaired subtitles.')
+@hearing_impaired_group.option('-hi', '--hearing-impaired', is_flag=True, default=False)
+@hearing_impaired_group.option('-HI', '--no-hearing-impaired', is_flag=True, default=False)
+@foreign_only_group.option('-fo', '--foreign-only', is_flag=True, default=False)
+@foreign_only_group.option('-FO', '--no-foreign-only', is_flag=True, default=False)
+@click.option(
+    '--forced',
+    is_flag=True,
+    default=False,
+    help='Require or avoid forced/foreign-only subtitles. Set to empty if no preference (default).',
+)
 @click.option(
     '-m',
     '--min-score',
@@ -469,6 +485,9 @@ def download(
     single: bool,
     force: bool,
     hearing_impaired: bool,
+    no_hearing_impaired: bool,
+    foreign_only: bool,
+    no_foreign_only: bool,
     min_score: int,
     language_type_suffix: bool,
     language_format: str,
@@ -495,6 +514,18 @@ def download(
     # no encoding specified, default to utf-8
     elif encoding is None:
         encoding = 'utf-8'
+
+    # language_type
+    hearing_impaired_flag: bool | None = None
+    if hearing_impaired:
+        hearing_impaired_flag = True
+    elif no_hearing_impaired:
+        hearing_impaired_flag = False
+    foreign_only_flag: bool | None = None
+    if foreign_only:
+        foreign_only_flag = True
+    elif no_foreign_only:
+        foreign_only_flag = False
 
     debug = obj.get('debug', False)
     if debug:
@@ -649,7 +680,8 @@ def download(
                     v,
                     language_set,
                     min_score=scores['hash'] * min_score // 100,
-                    hearing_impaired=hearing_impaired,
+                    hearing_impaired=hearing_impaired_flag,
+                    foreign_only=foreign_only_flag,
                     only_one=single,
                     ignore_subtitles=ignore_subtitles,
                 )
@@ -701,11 +733,8 @@ def download(
                     else:
                         score_color = 'green'
 
-                # scale score from 0 to 100 taking out preferences
-                scaled_score = score
-                if match_hearing_impaired(s, hearing_impaired=hearing_impaired):
-                    scaled_score -= scores['hearing_impaired']
-                scaled_score *= 100 / scores['hash']
+                # scale score from 0 to 100
+                scaled_score = score * 100 / scores['hash']
 
                 # echo some nice colored output
                 language_str = (

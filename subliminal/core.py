@@ -24,7 +24,7 @@ from .extensions import (
     refiner_manager,
 )
 from .score import compute_score as default_compute_score
-from .subtitle import SUBTITLE_EXTENSIONS, Subtitle
+from .subtitle import SUBTITLE_EXTENSIONS, LanguageType, Subtitle
 from .utils import get_age, handle_exception
 from .video import VIDEO_EXTENSIONS, Episode, Movie, Video
 
@@ -220,7 +220,8 @@ class ProviderPool:
         languages: Set[Language],
         *,
         min_score: int = 0,
-        hearing_impaired: bool = False,
+        hearing_impaired: bool | None = None,
+        foreign_only: bool | None = None,
         only_one: bool = False,
         compute_score: ComputeScore | None = None,
         ignore_subtitles: Sequence[str] | None = None,
@@ -234,10 +235,11 @@ class ProviderPool:
         :param languages: languages to download.
         :type languages: set of :class:`~babelfish.language.Language`
         :param int min_score: minimum score for a subtitle to be downloaded.
-        :param bool hearing_impaired: hearing impaired preference.
+        :param (bool | None) hearing_impaired: hearing impaired preference (yes/no/indifferent).
+        :param (bool | None) foreign_only: foreign only preference (yes/no/indifferent).
         :param bool only_one: download only one subtitle, not one per language.
         :param compute_score: function that takes `subtitle` and `video` as positional arguments,
-            `hearing_impaired` as keyword argument and returns the score.
+            and returns the score.
         :param ignore_subtitles: list of subtitle ids to ignore (None defaults to an empty list).
         :return: downloaded subtitles.
         :rtype: list of :class:`~subliminal.subtitle.Subtitle`
@@ -249,9 +251,14 @@ class ProviderPool:
         # ignore subtitles
         subtitles = [s for s in subtitles if s.id not in ignore_subtitles]
 
+        # filter by hearing impaired and foreign only
+        lt = LanguageType.from_flags(hearing_impaired=hearing_impaired, forced=foreign_only)
+        if lt != LanguageType.UNKNOWN:
+            subtitles = [s for s in subtitles if s.language_type == lt]
+
         # sort subtitles by score
         scored_subtitles = sorted(
-            [(s, compute_score(s, video, hearing_impaired=hearing_impaired)) for s in subtitles],
+            [(s, compute_score(s, video)) for s in subtitles],
             key=operator.itemgetter(1),
             reverse=True,
         )
@@ -775,7 +782,8 @@ def download_best_subtitles(
     languages: Set[Language],
     *,
     min_score: int = 0,
-    hearing_impaired: bool = False,
+    hearing_impaired: bool | None = None,
+    foreign_only: bool | None = None,
     only_one: bool = False,
     compute_score: ComputeScore | None = None,
     pool_class: type[ProviderPool] = ProviderPool,
@@ -790,7 +798,8 @@ def download_best_subtitles(
     :param languages: languages to download.
     :type languages: set of :class:`~babelfish.language.Language`
     :param int min_score: minimum score for a subtitle to be downloaded.
-    :param bool hearing_impaired: hearing impaired preference.
+    :param (bool | None) hearing_impaired: hearing impaired preference (yes/no/indifferent).
+    :param (bool | None) foreign_only: foreign only preference (yes/no/indifferent).
     :param bool only_one: download only one subtitle, not one per language.
     :param compute_score: function that takes `subtitle` and `video` as positional arguments,
         `hearing_impaired` as keyword argument and returns the score.
@@ -825,6 +834,7 @@ def download_best_subtitles(
                 languages,
                 min_score=min_score,
                 hearing_impaired=hearing_impaired,
+                foreign_only=foreign_only,
                 only_one=only_one,
                 compute_score=compute_score,
             )

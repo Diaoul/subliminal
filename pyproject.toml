@@ -321,6 +321,8 @@ extend-ignore-re = [
     "(?Rm)^.*#\\s*spellchecker:\\s*disable-line$",
     "#\\s*spellchecker:off\\s*\\n.*\\n\\s*#\\s*spellchecker:on"
 ]
+[tool.typos.default.extend-words]
+fo = "fo"
 [tool.typos.default.extend-identifiers]
 tha = "tha"
 bre = "bre"

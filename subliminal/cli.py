@@ -722,7 +722,3 @@ def download(
 
     if verbose == 0:
         click.echo(f"Downloaded {plural(total_subtitles, 'subtitle')}")
-
-
-if __name__ == '__main__':
-    subliminal()

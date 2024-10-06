@@ -112,6 +112,25 @@ def episodes() -> dict[str, Episode]:
                 'thesubdb': '9dbbfb7ba81c9a6237237dae8589fccc',
             },
         ),
+        'bbt_s11e16': Episode(
+            os.path.join('The Big Bang Theory', 'Season 11', 'The.Big.Bang.Theory.S11E16.720p.HDTV.x264-AVS.mkv'),
+            'The Big Bang Theory',
+            11,
+            16,
+            title='The Neonatal Nomenclature',
+            year=2007,
+            tvdb_id=6498115,
+            series_tvdb_id=80379,
+            series_imdb_id='tt0898266',
+            source='HDTV',
+            release_group='AVS',
+            resolution='720p',
+            video_codec='H.264',
+            audio_codec='Dolby Digital',
+            imdb_id='tt6674448',
+            size=505152010,
+            hashes={},
+        ),
         'got_s03e10': Episode(
             os.path.join(
                 'Game of Thrones', 'Season 03', 'Game.of.Thrones.S03E10.Mhysa.720p.WEB-DL.DD5.1.H.264-NTb.mkv'

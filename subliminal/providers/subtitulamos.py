@@ -129,6 +129,7 @@ class SubtitulamosProvider(Provider):
     def terminate(self) -> None:
         """Terminate the provider."""
         self.session.close()
+        self.session = None
 
     def _session_request(self, *args: Any, **kwargs: Any) -> Response:
         """Perform a GET request to the provider."""
@@ -191,8 +192,9 @@ class SubtitulamosProvider(Provider):
             series_response = self._query_search(series)
 
         episode_url = self._get_episode_url(series_response[0]['show_id'], season, episode)
-
-        return self.server_url + episode_url
+        if episode_url:
+            return self.server_url + episode_url
+        return None
 
     def query(
         self, series: str | None = None, season: int | None = None, episode: int | None = None, year: int | None = None

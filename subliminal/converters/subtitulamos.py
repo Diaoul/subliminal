@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from babelfish import LanguageReverseConverter, language_converters
+from babelfish import LanguageReverseConverter, language_converters  # type: ignore[import-untyped]
 
 if TYPE_CHECKING:
     from . import LanguageTuple
@@ -37,11 +37,11 @@ class SubtitulamosConverter(LanguageReverseConverter):
         if (alpha3,) in self.to_subtitulamos:
             return self.to_subtitulamos[(alpha3,)]
 
-        return self.name_converter.convert(alpha3, country, script)
+        return self.name_converter.convert(alpha3, country, script)  # type: ignore[no-any-return]
 
     def reverse(self, code: str) -> LanguageTuple:
         """Reverse a custom code into alpha3, country and script code."""
         if code in self.from_subtitulamos:
             return self.from_subtitulamos[code]
 
-        return self.name_converter.reverse(code)
+        return self.name_converter.reverse(code)  # type: ignore[no-any-return]

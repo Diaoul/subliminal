@@ -27,11 +27,7 @@ class SubtitulamosConverter(LanguageReverseConverter):
             'English (UK)': ('eng', 'GB'),
             'Brazilian': ('por', 'BR'),
         }
-        self.to_subtitulamos: dict[LanguageTuple, str] = {
-            ('cat',): 'Català',
-            ('glg',): 'Galego',
-            ('por', 'BR'): 'Brazilian',
-        }
+        self.to_subtitulamos: dict[LanguageTuple, str] = {item[1]: item[0] for item in self.from_subtitulamos.items()}
         self.codes = set(self.from_subtitulamos.keys())
 
     def convert(self, alpha3: str, country: str | None = None, script: str | None = None) -> str:

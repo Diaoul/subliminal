@@ -8,6 +8,7 @@ import logging
 from typing import TYPE_CHECKING, Any, ClassVar, cast
 
 from babelfish import Language, language_converters  # type: ignore[import-untyped]
+from bs4 import Tag
 from guessit import guessit  # type: ignore[import-untyped]
 from requests import Session
 
@@ -200,9 +201,16 @@ class SubtitulamosProvider(Provider):
         subtitles = []
         for sub in soup.select('.download-button:not(unavailable)'):
             # read the language
-            language = Language.fromsubtitulamos(sub.find_previous('div', class_='language-name').get_text().strip())
+            if (
+                sub.parent is None
+                or (lang_name_element := sub.find_previous('div', class_='language-name')) is None
+                or (version_container := sub.find_previous('div', class_='version-container')) is None
+                or not isinstance(version_container, Tag)
+                or (release_group_element := version_container.select('.version-container .text.spaced')) is None
+            ):
+                continue
 
-            version_container = sub.find_previous('div', class_='version-container')
+            language = Language.fromsubtitulamos(lang_name_element.get_text().strip())
 
             hearing_impaired = False
 
@@ -214,7 +222,7 @@ class SubtitulamosProvider(Provider):
                 hearing_impaired = True
 
             # read the release subtitle
-            release_group = version_container.select('.version-container .text.spaced')[0].getText()
+            release_group = release_group_element[0].getText()
 
             # read the subtitle url
             subtitle_url = self.server_url + cast(str, sub.parent.get('href', ''))

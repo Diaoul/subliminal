@@ -45,6 +45,12 @@ Podnapisi
    :members:
    :private-members:
 
+Subtitulamos
+------------
+.. automodule:: subliminal.providers.subtitulamos
+   :members:
+   :private-members:
+
 TVsubtitles
 -----------
 .. automodule:: subliminal.providers.tvsubtitles

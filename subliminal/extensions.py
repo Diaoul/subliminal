@@ -133,6 +133,7 @@ provider_manager = RegistrableExtensionManager(
         'opensubtitlescomvip = subliminal.providers.opensubtitlescom:OpenSubtitlesComVipProvider',
         'opensubtitlesvip = subliminal.providers.opensubtitles:OpenSubtitlesVipProvider',
         'podnapisi = subliminal.providers.podnapisi:PodnapisiProvider',
+        'subtitulamos = subliminal.providers.subtitulamos:SubtitulamosProvider',
         'tvsubtitles = subliminal.providers.tvsubtitles:TVsubtitlesProvider',
     ],
 )

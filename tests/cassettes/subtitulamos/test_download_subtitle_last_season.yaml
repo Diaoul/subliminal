@@ -1,0 +1,2354 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Referer:
+      - https://www.subtitulamos.tv
+      User-Agent:
+      - Subliminal/2.2
+    method: GET
+    uri: https://www.subtitulamos.tv/search/query?q=Doctor+Who+%282005%29
+  response:
+    body:
+      string: '[]'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 8ce99475da439d18-SIN
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - text/html; charset=UTF-8
+      Date:
+      - Sun, 06 Oct 2024 23:55:01 GMT
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=Z511MEyZaEbsrcAh8sRJf9l5iheuYB20xNteW4bjO9REfuozLLAIhyc4Q%2BQtUABhpJQISNUQkWm8gUHTW27ACBQruH%2BkpgUqv0T0Adjvw0aEtatFjZypY0l28ukLLjkjJRdS%2B8zp"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - PHPSESSID=1a7813bnqe272lndfpes8ohdf5; path=/; HttpOnly
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
+      Transfer-Encoding:
+      - chunked
+      X-Powered-By:
+      - PHP/7.4.14
+      content-length:
+      - '2'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - PHPSESSID=1a7813bnqe272lndfpes8ohdf5
+      Referer:
+      - https://www.subtitulamos.tv
+      User-Agent:
+      - Subliminal/2.2
+    method: GET
+    uri: https://www.subtitulamos.tv/search/query?q=Doctor+Who
+  response:
+    body:
+      string: '[{"show_id":233,"show_name":"Doctor Who"}]'
+    headers:
+      CF-RAY:
+      - 8ce9947aadb2cfe2-MAD
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - text/html; charset=UTF-8
+      Date:
+      - Sun, 06 Oct 2024 23:55:02 GMT
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=Vv%2Ff40VnAzCJScNpiEE6Yy%2FVkJxHKiCsDI9rE1trteI1a8WqQ9xbGKeAaarBPf42sm1bNkMVV%2BkjqY68Sq5UEfYhPKzOXw%2B645CjQAu%2F6LOqoKnJlsqEyhfRTfDoxSv4K3Luke2V"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
+      Transfer-Encoding:
+      - chunked
+      X-Powered-By:
+      - PHP/7.4.14
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '42'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - PHPSESSID=1a7813bnqe272lndfpes8ohdf5
+      Referer:
+      - https://www.subtitulamos.tv
+      User-Agent:
+      - Subliminal/2.2
+    method: GET
+    uri: https://www.subtitulamos.tv/shows/233
+  response:
+    body:
+      string: ''
+    headers:
+      CF-RAY:
+      - 8ce9947e7bd86689-MAD
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - text/html; charset=UTF-8
+      Date:
+      - Sun, 06 Oct 2024 23:55:02 GMT
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Location:
+      - /episodes/9689
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=N1LewNCzuJxhRZm2DM7JtlouMd2oA3kcLR7baByBbrgQsJ4LT7wHXTOapNZka7LISKehjE2suwXmJFTsvOkh7xW0wpsG8Hga3MDIRSqacyRaLVTJJPBhaf2ynMS8Hpv4nS7YGh1n"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
+      Transfer-Encoding:
+      - chunked
+      X-Powered-By:
+      - PHP/7.4.14
+      cf-cache-status:
+      - DYNAMIC
+    status:
+      code: 302
+      message: Found
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - PHPSESSID=1a7813bnqe272lndfpes8ohdf5
+      Referer:
+      - https://www.subtitulamos.tv
+      User-Agent:
+      - Subliminal/2.2
+    method: GET
+    uri: https://www.subtitulamos.tv/episodes/9689
+  response:
+    body:
+      string: ''
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 8ce9947fea176683-MAD
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - text/html; charset=UTF-8
+      Date:
+      - Sun, 06 Oct 2024 23:55:03 GMT
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Location:
+      - /episodes/9689/doctor-who-13x99-the-power-of-the-doctor
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=iz3HBmPVhoxEPN3rc3BDeYIVENTCiz9vFX1gtK8%2BVYzIovob1F5t2Ti3LYgGDY%2F4JKxauQz%2BZ9WuqZ2488%2FUljPC4HU%2FM10uZ%2F5MiFh7YVxvYOano%2FYft5bAxh9MASbeQBf8AIoS"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
+      Transfer-Encoding:
+      - chunked
+      X-Powered-By:
+      - PHP/7.4.14
+    status:
+      code: 301
+      message: Moved Permanently
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - PHPSESSID=1a7813bnqe272lndfpes8ohdf5
+      Referer:
+      - https://www.subtitulamos.tv
+      User-Agent:
+      - Subliminal/2.2
+    method: GET
+    uri: https://www.subtitulamos.tv/episodes/9689/doctor-who-13x99-the-power-of-the-doctor
+  response:
+    body:
+      string: "<!DOCTYPE html>\n<html>\n<head>\n  <base href=\"https://www.subtitulamos.tv/\">\n\n
+        \ <meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"/>\n
+        \ <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1\">\n
+        \       <link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/apple-touch-icon.png?v=lkvlWOG2Qx\">\n<link
+        rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/favicon-32x32.png?v=lkvlWOG2Qx\">\n<link
+        rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/favicon-16x16.png?v=lkvlWOG2Qx\">\n<link
+        rel=\"manifest\" href=\"/site.webmanifest?v=lkvlWOG2Qx\">\n<link rel=\"mask-icon\"
+        href=\"/safari-pinned-tab.svg?v=lkvlWOG2Qx\" color=\"#607dcd\">\n<link rel=\"shortcut
+        icon\" href=\"/favicon.ico?v=lkvlWOG2Qx\">\n<meta name=\"msapplication-TileColor\"
+        content=\"#607dcd\">\n<meta name=\"theme-color\" content=\"#607dcd\">\n  \n
+        \ <script type=\"text/javascript\" src=\"js/hotload.js?202410062355\"></script>\n\n
+        \ <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css\">\n
+        \ <link href=\"https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap\"
+        rel=\"stylesheet\">\n  <link href=\"https://fonts.googleapis.com/css2?family=Open+Sans:wght@700\"
+        rel=\"stylesheet\">\n      <link href=\"css/episode.33948c0e9a7ae54a4c20.css\"
+        rel=\"stylesheet\" type=\"text/css\"/>\n\n\n  <title>\n        Doctor Who
+        13x99 - The Power of the Doctor - Subtitulamos.tv - Subt\xEDtulos de series\n
+        \ </title>\n</head>\n<body>\n  <div id=\"base\" class=\"w-header color-swatch-normal
+        font-thickness-normal\">\n        <div id=\"overlay\" class=\"overlay-wrap
+        hidden\">\n      <div class=\"overlay-container w-box-shadow bounce-in\">\n
+        \       <i id=\"overlay-close\"class=\"fas fa-times close-button\" aria-hidden=\"true\"></i>\n
+        \       <div id=\"overlay-content\">\n\n        </div>\n      </div>\n      <div
+        id=\"overlay-fade\" class=\"fade-pan\"></div>\n    </div>\n      <nav id=\"control-panel\"
+        class=\"no-scroll-bar \">\n        <div id=\"control-panel-top-section\" class=\"control-panel-section\">\n
+        \         <a href=\"/\">\n            <div id=\"control-panel-logo-wrap\">\n
+        \             <svg id=\"logo-miniature\" height=\"30\" viewBox=\"0 0 720 720\">\n
+        \               <path d=\"M500,480C373.919,603.693,144.292,621.974,115.091,623.822A359,359,0,0,1,0,360C0,161.178,161.178,0,360,0A358.39,358.39,0,0,1,576.516,72.38C594.276,124.682,651.193,331.67,500,480ZM456,236H172a32,32,0,0,0,0,64H456A32,32,0,0,0,456,236Zm0,104H172a32,32,0,0,0,0,64H456A32,32,0,0,0,456,340ZM564,504c101.048-137.763,87.982-313.7,81.9-362.757a359.955,359.955,0,0,1-24.222,465.966L664,688l-94.3-35.364A358.341,358.341,0,0,1,360,720a362.772,362.772,0,0,1-54.959-4.17C340.3,698.95,471.256,630.442,564,504Z\"/>\n
+        \             </svg>\n              <span class=\"logo-text\">subtitulamos.tv</span>\n
+        \           </div>\n          </a>\n          <div id=\"control-panel-search\"
+        class=\"search-bar-container\">\n            <button id=\"search-subtitles\"
+        title=\"Buscar\"  class=\"text small\"><i id=\"search_subtitles\" class=\"fa
+        fa-search\" aria-hidden=\"true\" aria-hidden=\"true\"></i></button>\n            <input
+        id=\"search-input\" data-search-bar-target='panel-search-results' type=\"text\"
+        class=\"text tiny\" placeholder=\"Busca una serie... Ej.: Westworld\" autocomplete=\"off\"
+        />\n            <ul class=\"search-results w-box-shadow hidden\" id='panel-search-results'></ul>\n
+        \         </div>\n          <button class=\"control-panel-button search\"
+        id='search-icon'>\n            <i class=\"fa fa-search\" aria-hidden=\"true\"></i>\n
+        \         </button>\n\n                    <button id=\"login-cp\" class=\"control-panel-button\">\n
+        \           <i class=\"fas fa-sign-in-alt\" aria-hidden=\"true\"></i>\n            <span>Iniciar
+        sesi\xF3n</span>\n          </button>\n          <button id=\"register-cp\"
+        class=\"control-panel-button\">\n            <i class=\"fas fa-user-plus\"
+        aria-hidden=\"true\"></i>\n            <span>Registro</span>\n          </button>\n
+        \                   <a class=\"control-panel-button\" page=\"/shows\" href='/shows'>\n
+        \           <i class=\"fas fa-list-ul\" aria-hidden=\"true\"></i>\n            <span>\xCDndice
+        de series</span>\n          </a>\n        </div>\n        <div id=\"control-panel-bottom-section\"
+        class=\"control-panel-section\">\n          <button class=\"control-panel-button
+        control-panel-minimize-toggle\">\n            <i class=\"fas fa-chevron-circle-left\"
+        aria-hidden=\"true\"></i>\n            <i class=\"fas fa-chevron-circle-right\"
+        aria-hidden=\"true\"></i>\n            <span>Minimizar</span>\n          </button>\n
+        \                 </div>\n\n        <div id=\"control-panel-fade-pan\"></div>\n
+        \     </nav>\n        <header>\n      <a href='/'>\n        <div id=\"header-logo-wrap\">\n
+        \         <svg id=\"logo-miniature\" height=\"40\" viewBox=\"0 0 720 720\">\n
+        \           <path d=\"M500,480C373.919,603.693,144.292,621.974,115.091,623.822A359,359,0,0,1,0,360C0,161.178,161.178,0,360,0A358.39,358.39,0,0,1,576.516,72.38C594.276,124.682,651.193,331.67,500,480ZM456,236H172a32,32,0,0,0,0,64H456A32,32,0,0,0,456,236Zm0,104H172a32,32,0,0,0,0,64H456A32,32,0,0,0,456,340ZM564,504c101.048-137.763,87.982-313.7,81.9-362.757a359.955,359.955,0,0,1-24.222,465.966L664,688l-94.3-35.364A358.341,358.341,0,0,1,360,720a362.772,362.772,0,0,1-54.959-4.17C340.3,698.95,471.256,630.442,564,504Z\"/>\n
+        \         </svg>\n          <span class=\"logo-text\">subtitulamos.tv</span>\n
+        \       </div>\n      </a>\n      <nav id=\"top-links\">\n        <button
+        class=\"text tiny spaced\" id=\"shows-index\"><a href=\"/shows\">\xCDNDICE
+        DE SERIES</a></button>\n        <button class=\"text tiny spaced\" id=\"register\">REGISTRO</button>\n
+        \       <button class=\"text tiny spaced\" id=\"login\">INICIAR SESI\xD3N</button>\n
+        \     </nav>\n    </header>\n        <div id=\"page-container\" class=\"\">\n
+        \     <button class=\"overlaying-button control-panel-minimize-toggle\">\n
+        \       <i class=\"fas fa-bars\" aria-hidden=\"true\"></i>\n      </button>\n
+        \     <div class=\"content limited-width\">\n    \n  <div id=\"show-info-header\">\n
+        \   <div id=\"show-name\" class=\"\">\n            <h1 class=\"blue-a\">Doctor
+        Who</h1>\n    </div>\n    <div id=\"episode-header\">\n      <div id=\"episode-name\"
+        class=\"\">\n                <h3 class=\"blue-a\">The Power of the Doctor</h3>\n
+        \       <div class=\"blue-b text small\" id=\"episode-numbers\">(13x99)</div>\n
+        \     </div>\n      <div id=\"episode-buttons\" class=\"text tiny\">\n        <a
+        class=\"thin-button episode-button\" href='/episodes/9689/resync' class=\"text
+        tiny blue-a\">\n          Subir resincronizaci\xF3n\n        </a>\n        <button
+        class=\"thin-button episode-button translate-subtitle\">\n          + Nueva
+        traducci\xF3n\n        </button>\n      </div>\n    </div>\n    <div id=\"season-line\">\n
+        \     <span class=\"text bold spaced-wide choices-title\">TEMPORADA</span>\n
+        \     <div id=\"season-choices\" class=\"choices no-scroll-bar\">\n                  <a
+        href=\"/episodes/1293/doctor-who-11x00-twice-upon-a-time-christmas-special\"
+        class=\"choice \">11</a>\n                  <a href=\"/episodes/3785/doctor-who-12x00-resolution\"
+        class=\"choice \">12</a>\n                  <a href=\"/episodes/7196/doctor-who-13x00-revolution-of-the-daleks\"
+        class=\"choice selected\">13</a>\n              </div>\n    </div>\n    <div
+        id=\"episode-line\">\n      <span class=\"text bold spaced-wide choices-title\">EPISODIO</span>\n
+        \     <div id=\"episode-choices\" class=\"choices no-scroll-bar\">\n                  <a
+        href=\"/episodes/7196/doctor-who-13x00-revolution-of-the-daleks\" class=\"choice
+        \">0</a>\n                  <a href=\"/episodes/8623/doctor-who-13x01-chapter-one-the-halloween-apocalypse\"
+        class=\"choice \">1</a>\n                  <a href=\"/episodes/8651/doctor-who-13x02-chapter-two-war-of-sontarans\"
+        class=\"choice \">2</a>\n                  <a href=\"/episodes/8685/doctor-who-13x03-chapter-three-once-upon-time\"
+        class=\"choice \">3</a>\n                  <a href=\"/episodes/8723/doctor-who-13x04-chapter-four-village-of-the-angels\"
+        class=\"choice \">4</a>\n                  <a href=\"/episodes/8743/doctor-who-13x05-chapter-five-survivors-of-the-flux\"
+        class=\"choice \">5</a>\n                  <a href=\"/episodes/8773/doctor-who-13x06-chapter-six-the-vanquishers\"
+        class=\"choice \">6</a>\n                  <a href=\"/episodes/8854/doctor-who-13x97-eve-of-the-daleks\"
+        class=\"choice \">97</a>\n                  <a href=\"/episodes/9243/doctor-who-13x98-legend-of-the-sea-devils\"
+        class=\"choice \">98</a>\n                  <a href=\"/episodes/9689/doctor-who-13x99-the-power-of-the-doctor\"
+        class=\"choice selected\">99</a>\n              </div>\n    </div>\n  </div>\n\n
+        \ <div id=\"languages\">\n    <div id=\"languages-header\">\n    <h4>Versiones</h4>\n
+        \                                                                                                                                                                                                 <div
+        id=\"download-count\" class=\"text tiny hint--left\" data-hint='English -
+        227&#10;&#10;Espa\xF1ol (Espa\xF1a) - 2.271&#10;&#10;Espa\xF1ol (Latinoam\xE9rica)
+        - 0' >\n      <i class=\"fas fa-arrow-alt-circle-down\"></i>\n      <span
+        id=\"count\" class=\"text bold\">2 498</span>\n      <span >descargas</span>\n
+        \   </div>\n    </div>\n          <div class=\"language-container w-box-shadow\">\n
+        \       <button class=\"collapser-button blue-a\">\n          <i class=\"fas
+        fa-chevron-up\"></i>\n        </button>\n\n        <div class=\"text small
+        bold blue-a language-name\"  data-lang-id=\"1\">English</div>\n\n        <div
+        class=\"language-content\">\n                      <template id=\"subtitle-properties-24548\">\n
+        \ <div class=\"form-wrap\">\n    <form action=\"subtitles/24548/properties\"
+        method=\"POST\">\n      <h3>Propiedades del subt\xEDtulo</h2>\n      <div
+        class='form-field validated' fieldname=\"Nombre de versi\xF3n\">\n        <input
+        id=\"vname\" type=\"text\" class=\"form_input\"\n          name=\"vname\"
+        value=\"KETTLE/MiNX/MeGusta\" required>\n        <i class=\"fas fa-code-branch\"></i>\n
+        \     </div>\n\n      <div class='form-field validated' fieldname=\"Comentario
+        de versi\xF3n\">\n        <input id=\"vcomment\" type=\"text\" class=\"form_input\"\n
+        \         name=\"vcomment\" value=\"De Addic7ed, sin acotaciones. Sincro de
+        firefly.\" required>\n        <i class=\"fas fa-comment\"></i>\n      </div>\n\n
+        \     <div class='form-field validated' fieldname=\"Idioma\">\n        <select
+        name=\"lang\" id=\"lang\" class=\"form_input\" required>\n          <option
+        value=\"\" disabled>Selecciona un idioma</option>\n                      <option
+        value=\"en-en\" selected>English</option>\n                      <option value=\"es-es\"
+        >Espa\xF1ol (Espa\xF1a)</option>\n                      <option value=\"es-lat\"
+        >Espa\xF1ol (Latinoam\xE9rica)</option>\n                      <option value=\"fr-fr\"
+        >Fran\xE7ais</option>\n                      <option value=\"ca-es\" >Catal\xE0</option>\n
+        \                     <option value=\"gl-es\" >Galego</option>\n                  </select>\n
+        \       <i class=\"fas fa-globe\"></i>\n      </div>\n\n      <button id=\"save-edit\"
+        type=\"submit\" class='button button-fat'>Guardar</button>\n    </form>\n
+        \ </div>\n</template>\n                                      \n                        \n
+        \           <div class=\"version-container \">\n              <p class=\"text
+        mini\">versi\xF3n</p>\n              <p class=\"text tiny spaced bold\">KETTLE/MiNX/MeGusta</p>\n
+        \             <div class=\"version-info\">\n                <div class=\"version-buttons\">\n
+        \                                   <a rel=\"nofollow\" href=\"/subtitles/24548/download\">\n
+        \                                     <div class=\"download-button \">\n                      <i
+        class=\"far fa-arrow-alt-circle-down\"></i>\n                    </div>\n
+        \                                   </a>\n                                    <a
+        rel=\"nofollow\" href=\"/subtitles/24548/translate\">\n                    <div
+        class=\"edit-button-wrap\">\n                      <div class=\"edit-button\">\n
+        \                       <i class=\"fas fa-pencil-alt\"></i>\n                      </div>\n
+        \                   </div>\n                  </a>\n                </div>\n
+        \               <div class=\"progress-bar-container\">\n                                      <div
+        class=\"subtitle-uploader\">\n                      <span class=\"text mini\">\n
+        \                                               ORIGINAL\n                        \n
+        \                                             </span>\n                      <a
+        rel=\"nofollow\" href=\"/users/24\" class=\"uploader_name text tiny bold blue-a\">\n
+        \                       <i class=\"fas fa-file-import\"></i>\n                        grimya\n
+        \                     </a>\n                    </div>\n                                    <div
+        class=\"more-info\">\n                                        <span class=\"text
+        small\">\n                      <i class=\"fa fa-comment\" aria-hidden=\"true\"></i>
+        De Addic7ed, sin acotaciones. Sincro de firefly.\n                    </span>\n
+        \                                     </div>\n                </div>\n                              </div>\n
+        \           </div>\n                  </div>\n      </div>\n          <div
+        class=\"language-container w-box-shadow\">\n        <button class=\"collapser-button
+        blue-a\">\n          <i class=\"fas fa-chevron-up\"></i>\n        </button>\n\n
+        \       <div class=\"text small bold blue-a language-name\"  data-lang-id=\"5\">Espa\xF1ol
+        (Espa\xF1a)</div>\n\n        <div class=\"language-content\">\n                      <template
+        id=\"subtitle-properties-24549\">\n  <div class=\"form-wrap\">\n    <form
+        action=\"subtitles/24549/properties\" method=\"POST\">\n      <h3>Propiedades
+        del subt\xEDtulo</h2>\n      <div class='form-field validated' fieldname=\"Nombre
+        de versi\xF3n\">\n        <input id=\"vname\" type=\"text\" class=\"form_input\"\n
+        \         name=\"vname\" value=\"KETTLE/MiNX/MeGusta\" required>\n        <i
+        class=\"fas fa-code-branch\"></i>\n      </div>\n\n      <div class='form-field
+        validated' fieldname=\"Comentario de versi\xF3n\">\n        <input id=\"vcomment\"
+        type=\"text\" class=\"form_input\"\n          name=\"vcomment\" value=\"De
+        Addic7ed, sin acotaciones. Sincro de firefly.\" required>\n        <i class=\"fas
+        fa-comment\"></i>\n      </div>\n\n      <div class='form-field validated'
+        fieldname=\"Idioma\">\n        <select name=\"lang\" id=\"lang\" class=\"form_input\"
+        required>\n          <option value=\"\" disabled>Selecciona un idioma</option>\n
+        \                     <option value=\"en-en\" >English</option>\n                      <option
+        value=\"es-es\" selected>Espa\xF1ol (Espa\xF1a)</option>\n                      <option
+        value=\"es-lat\" >Espa\xF1ol (Latinoam\xE9rica)</option>\n                      <option
+        value=\"fr-fr\" >Fran\xE7ais</option>\n                      <option value=\"ca-es\"
+        >Catal\xE0</option>\n                      <option value=\"gl-es\" >Galego</option>\n
+        \                 </select>\n        <i class=\"fas fa-globe\"></i>\n      </div>\n\n
+        \     <button id=\"save-edit\" type=\"submit\" class='button button-fat'>Guardar</button>\n
+        \   </form>\n  </div>\n</template>\n                                      \n
+        \                       \n            <div class=\"version-container \">\n
+        \             <p class=\"text mini\">versi\xF3n</p>\n              <p class=\"text
+        tiny spaced bold\">KETTLE/MiNX/MeGusta</p>\n              <div class=\"version-info\">\n
+        \               <div class=\"version-buttons\">\n                                    <a
+        rel=\"nofollow\" href=\"/subtitles/24549/download\">\n                                      <div
+        class=\"download-button \">\n                      <i class=\"far fa-arrow-alt-circle-down\"></i>\n
+        \                   </div>\n                                    </a>\n                                    <a
+        rel=\"nofollow\" href=\"/subtitles/24549/translate\">\n                    <div
+        class=\"edit-button-wrap\">\n                      <div class=\"edit-button\">\n
+        \                       <i class=\"fas fa-pencil-alt\"></i>\n                      </div>\n
+        \                   </div>\n                  </a>\n                </div>\n
+        \               <div class=\"progress-bar-container\">\n                                      <div
+        class=\"progress-bar \">\n                                            <div
+        class=\"progress progress_100\"\n                        style=\"width: 100%\">\n
+        \                     </div>\n                    </div>\n                                    <div
+        class=\"more-info\">\n                                          <span class=\"text
+        small bold percentage-value\">\n                        100%\n                      </span>\n
+        \                                                           </div>\n                </div>\n
+        \                             </div>\n            </div>\n                      <template
+        id=\"subtitle-properties-24565\">\n  <div class=\"form-wrap\">\n    <form
+        action=\"subtitles/24565/properties\" method=\"POST\">\n      <h3>Propiedades
+        del subt\xEDtulo</h2>\n      <div class='form-field validated' fieldname=\"Nombre
+        de versi\xF3n\">\n        <input id=\"vname\" type=\"text\" class=\"form_input\"\n
+        \         name=\"vname\" value=\"GGEZ/ION10\" required>\n        <i class=\"fas
+        fa-code-branch\"></i>\n      </div>\n\n      <div class='form-field validated'
+        fieldname=\"Comentario de versi\xF3n\">\n        <input id=\"vcomment\" type=\"text\"
+        class=\"form_input\"\n          name=\"vcomment\" value=\"Los traducidos aqu\xED,
+        tiempos de Addic7ed. Gracias a Se7enOfNin9.\" required>\n        <i class=\"fas
+        fa-comment\"></i>\n      </div>\n\n      <div class='form-field validated'
+        fieldname=\"Idioma\">\n        <select name=\"lang\" id=\"lang\" class=\"form_input\"
+        required>\n          <option value=\"\" disabled>Selecciona un idioma</option>\n
+        \                     <option value=\"en-en\" >English</option>\n                      <option
+        value=\"es-es\" selected>Espa\xF1ol (Espa\xF1a)</option>\n                      <option
+        value=\"es-lat\" >Espa\xF1ol (Latinoam\xE9rica)</option>\n                      <option
+        value=\"fr-fr\" >Fran\xE7ais</option>\n                      <option value=\"ca-es\"
+        >Catal\xE0</option>\n                      <option value=\"gl-es\" >Galego</option>\n
+        \                 </select>\n        <i class=\"fas fa-globe\"></i>\n      </div>\n\n
+        \     <button id=\"save-edit\" type=\"submit\" class='button button-fat'>Guardar</button>\n
+        \   </form>\n  </div>\n</template>\n                                      \n
+        \                       \n            <div class=\"version-container \">\n
+        \             <p class=\"text mini\">versi\xF3n</p>\n              <p class=\"text
+        tiny spaced bold\">GGEZ/ION10</p>\n              <div class=\"version-info\">\n
+        \               <div class=\"version-buttons\">\n                                    <a
+        rel=\"nofollow\" href=\"/subtitles/24565/download\">\n                                      <div
+        class=\"download-button \">\n                      <i class=\"far fa-arrow-alt-circle-down\"></i>\n
+        \                   </div>\n                                    </a>\n                                    <a
+        rel=\"nofollow\" href=\"/subtitles/24565/translate\">\n                    <div
+        class=\"edit-button-wrap\">\n                      <div class=\"edit-button\">\n
+        \                       <i class=\"fas fa-pencil-alt\"></i>\n                      </div>\n
+        \                   </div>\n                  </a>\n                </div>\n
+        \               <div class=\"progress-bar-container\">\n                                      <div
+        class=\"subtitle-uploader\">\n                      <span class=\"text mini\">\n
+        \                                               RESINCRONIZADO\n                        \n
+        \                                             </span>\n                      <a
+        rel=\"nofollow\" href=\"/users/9\" class=\"uploader_name text tiny bold blue-a\">\n
+        \                       <i class=\"fas fa-file-import\"></i>\n                        carochristie\n
+        \                     </a>\n                    </div>\n                                    <div
+        class=\"more-info\">\n                                        <span class=\"text
+        small\">\n                      <i class=\"fa fa-comment\" aria-hidden=\"true\"></i>
+        Los traducidos aqu\xED, tiempos de Addic7ed. Gracias a Se7enOfNin9.\n                    </span>\n
+        \                                     </div>\n                </div>\n                              </div>\n
+        \           </div>\n                      <template id=\"subtitle-properties-24569\">\n
+        \ <div class=\"form-wrap\">\n    <form action=\"subtitles/24569/properties\"
+        method=\"POST\">\n      <h3>Propiedades del subt\xEDtulo</h2>\n      <div
+        class='form-field validated' fieldname=\"Nombre de versi\xF3n\">\n        <input
+        id=\"vname\" type=\"text\" class=\"form_input\"\n          name=\"vname\"
+        value=\"NTb\" required>\n        <i class=\"fas fa-code-branch\"></i>\n      </div>\n\n
+        \     <div class='form-field validated' fieldname=\"Comentario de versi\xF3n\">\n
+        \       <input id=\"vcomment\" type=\"text\" class=\"form_input\"\n          name=\"vcomment\"
+        value=\"Subt\xEDtulos traducidos aqu\xED, sincronizados para AMZN WEBRip NTb
+        (720p y 1080p).\" required>\n        <i class=\"fas fa-comment\"></i>\n      </div>\n\n
+        \     <div class='form-field validated' fieldname=\"Idioma\">\n        <select
+        name=\"lang\" id=\"lang\" class=\"form_input\" required>\n          <option
+        value=\"\" disabled>Selecciona un idioma</option>\n                      <option
+        value=\"en-en\" >English</option>\n                      <option value=\"es-es\"
+        selected>Espa\xF1ol (Espa\xF1a)</option>\n                      <option value=\"es-lat\"
+        >Espa\xF1ol (Latinoam\xE9rica)</option>\n                      <option value=\"fr-fr\"
+        >Fran\xE7ais</option>\n                      <option value=\"ca-es\" >Catal\xE0</option>\n
+        \                     <option value=\"gl-es\" >Galego</option>\n                  </select>\n
+        \       <i class=\"fas fa-globe\"></i>\n      </div>\n\n      <button id=\"save-edit\"
+        type=\"submit\" class='button button-fat'>Guardar</button>\n    </form>\n
+        \ </div>\n</template>\n                                      \n                        \n
+        \           <div class=\"version-container \">\n              <p class=\"text
+        mini\">versi\xF3n</p>\n              <p class=\"text tiny spaced bold\">NTb</p>\n
+        \             <div class=\"version-info\">\n                <div class=\"version-buttons\">\n
+        \                                   <a rel=\"nofollow\" href=\"/subtitles/24569/download\">\n
+        \                                     <div class=\"download-button \">\n                      <i
+        class=\"far fa-arrow-alt-circle-down\"></i>\n                    </div>\n
+        \                                   </a>\n                                    <a
+        rel=\"nofollow\" href=\"/subtitles/24569/translate\">\n                    <div
+        class=\"edit-button-wrap\">\n                      <div class=\"edit-button\">\n
+        \                       <i class=\"fas fa-pencil-alt\"></i>\n                      </div>\n
+        \                   </div>\n                  </a>\n                </div>\n
+        \               <div class=\"progress-bar-container\">\n                                      <div
+        class=\"subtitle-uploader\">\n                      <span class=\"text mini\">\n
+        \                                               RESINCRONIZADO\n                        \n
+        \                                             </span>\n                      <a
+        rel=\"nofollow\" href=\"/users/2\" class=\"uploader_name text tiny bold blue-a\">\n
+        \                       <i class=\"fas fa-file-import\"></i>\n                        marilynbrown2\n
+        \                     </a>\n                    </div>\n                                    <div
+        class=\"more-info\">\n                                        <span class=\"text
+        small\">\n                      <i class=\"fa fa-comment\" aria-hidden=\"true\"></i>
+        Subt\xEDtulos traducidos aqu\xED, sincronizados para AMZN WEBRip NTb (720p
+        y 1080p).\n                    </span>\n                                      </div>\n
+        \               </div>\n                              </div>\n            </div>\n
+        \                 </div>\n      </div>\n          <div class=\"language-container
+        w-box-shadow\">\n        <button class=\"collapser-button blue-a\">\n          <i
+        class=\"fas fa-chevron-up\"></i>\n        </button>\n\n        <div class=\"text
+        small bold blue-a language-name\"  data-lang-id=\"6\">Espa\xF1ol (Latinoam\xE9rica)</div>\n\n
+        \       <div class=\"language-content\">\n                      <template
+        id=\"subtitle-properties-24706\">\n  <div class=\"form-wrap\">\n    <form
+        action=\"subtitles/24706/properties\" method=\"POST\">\n      <h3>Propiedades
+        del subt\xEDtulo</h2>\n      <div class='form-field validated' fieldname=\"Nombre
+        de versi\xF3n\">\n        <input id=\"vname\" type=\"text\" class=\"form_input\"\n
+        \         name=\"vname\" value=\"KETTLE/MiNX/MeGusta\" required>\n        <i
+        class=\"fas fa-code-branch\"></i>\n      </div>\n\n      <div class='form-field
+        validated' fieldname=\"Comentario de versi\xF3n\">\n        <input id=\"vcomment\"
+        type=\"text\" class=\"form_input\"\n          name=\"vcomment\" value=\"De
+        Addic7ed, sin acotaciones. Sincro de firefly.\" required>\n        <i class=\"fas
+        fa-comment\"></i>\n      </div>\n\n      <div class='form-field validated'
+        fieldname=\"Idioma\">\n        <select name=\"lang\" id=\"lang\" class=\"form_input\"
+        required>\n          <option value=\"\" disabled>Selecciona un idioma</option>\n
+        \                     <option value=\"en-en\" >English</option>\n                      <option
+        value=\"es-es\" >Espa\xF1ol (Espa\xF1a)</option>\n                      <option
+        value=\"es-lat\" selected>Espa\xF1ol (Latinoam\xE9rica)</option>\n                      <option
+        value=\"fr-fr\" >Fran\xE7ais</option>\n                      <option value=\"ca-es\"
+        >Catal\xE0</option>\n                      <option value=\"gl-es\" >Galego</option>\n
+        \                 </select>\n        <i class=\"fas fa-globe\"></i>\n      </div>\n\n
+        \     <button id=\"save-edit\" type=\"submit\" class='button button-fat'>Guardar</button>\n
+        \   </form>\n  </div>\n</template>\n                                      \n
+        \                       \n            <div class=\"version-container \">\n
+        \             <p class=\"text mini\">versi\xF3n</p>\n              <p class=\"text
+        tiny spaced bold\">KETTLE/MiNX/MeGusta</p>\n              <div class=\"version-info\">\n
+        \               <div class=\"version-buttons\">\n                                      <div
+        class=\"download-button unavailable\">\n                      <i class=\"far
+        fa-arrow-alt-circle-down\"></i>\n                    </div>\n                                    <a
+        rel=\"nofollow\" href=\"/subtitles/24706/translate\">\n                    <div
+        class=\"edit-button-wrap\">\n                      <div class=\"edit-button\">\n
+        \                       <i class=\"fas fa-pencil-alt\"></i>\n                      </div>\n
+        \                   </div>\n                  </a>\n                </div>\n
+        \               <div class=\"progress-bar-container\">\n                                      <div
+        class=\"progress-bar \">\n                                            <div
+        class=\"progress progress_019\"\n                        style=\"width: 3%\">\n
+        \                     </div>\n                    </div>\n                                    <div
+        class=\"more-info\">\n                                          <span class=\"text
+        small bold percentage-value\">\n                        3%\n                      </span>\n
+        \                                                           </div>\n                </div>\n
+        \                             </div>\n            </div>\n                  </div>\n
+        \     </div>\n      </div>\n\n  <div id=\"comments-container\" class=\"comments-container\">\n
+        \   \n    <h4 class=\"comment-header\">Comentarios ({{comments.length}})</h4>\n
+        \   \n\n    <comment v-for=\"comment in comments\"\n        :key=\"comment.id\"\n
+        \       :id=\"comment.id\"\n        :user=\"comment.user\"\n        :base-text=\"comment.text\"\n
+        \       :published-at=\"comment.published_at\"\n        :edited-at=\"comment.edited_at\"\n
+        \       :pinned=\"comment.pinned\"\n        @remove=\"remove\"\n        @pin=\"pin\"\n
+        \       @save=\"save\"\n      >\n    </comment>\n    <div class=\"no-comments\"
+        v-if=\"comments.length == 0\">Nadie ha dejado su comentario a\xFAn.</div>\n\n
+        \         <div class='newcomment-box'>\n                  <div class=\"open-comment
+        disabled\">\n            <textarea id=\"new-comment\" rows=\"2\" class=\"textarea\"
+        disabled>Debes estar identificado para poder dejar comentarios</textarea>\n
+        \         </div>\n              </div>\n      </div>\n</div>\n\n<template
+        id=\"new-translation\">\n  <div class=\"form-wrap\">\n    <h3>Nueva traducci\xF3n</h3>\n
+        \   <form action=\"/subtitles/translate\" method=\"POST\">\n      <input type=\"hidden\"
+        name=\"episode\" value=\"9689\" />\n      <div class=\"form-field validated
+        dropdown-field\" fieldname=\"Idioma\">\n        <i class=\"fas fa-chevron-down
+        dropdown\"></i>\n        <select name=\"lang\" id=\"translate-to-lang\" required>\n
+        \         <option value=\"\" disabled selected>Selecciona un idioma</option>\n
+        \                                   <option value=\"en-en\">English</option>\n
+        \                                               <option value=\"es-es\">Espa\xF1ol
+        (Espa\xF1a)</option>\n                                                <option
+        value=\"es-lat\">Espa\xF1ol (Latinoam\xE9rica)</option>\n                                                <option
+        value=\"fr-fr\">Fran\xE7ais</option>\n                                                <option
+        value=\"ca-es\">Catal\xE0</option>\n                                                <option
+        value=\"gl-es\">Galego</option>\n                              </select>\n
+        \       <i class=\"fas fa-globe\"></i>\n      </div>\n      <button type=\"submit\"
+        id=\"open-translation\">Abrir traducci\xF3n</button>\n    </form>\n  </div>\n</template>\n\n\n\n
+        \     <footer id=\"footer\">\n        <div id=\"footer-content\">\n          <div
+        id=\"in-memory-of\">\n            <div id=\"in-memory-of-content\">\n              <p>en
+        memoria de</p>\n              <p>SUBTITULOS.ES</p>\n              <p>(2008-2015)</p>\n
+        \             <p class='disclaimer-row'><a href='/disclaimer'>Disclaimer</a></p>\n
+        \           </div>\n          </div>\n          <div id=\"page-navigation\">\n
+        \           <p class=\"text light small logo-text\">&#169; subtitulamos.tv</p>\n
+        \           <nav id=\"page-links\" class=\"text thin tiny\">\n              <a
+        class=\"text light\" href=\"https://github.com/subtitulamos/subtitulamos\"
+        target=\"_blank\">GitHub</a>\n              <a class=\"text light\" href=\"/rules\">Normas
+        de traducci\xF3n</a>\n              <a class=\"text light\" href=\"https://foro.subtitulamos.tv/\"
+        target=\"_blank\">Foro</a>\n              <a class=\"text light\" href=\"/shows\">\xCDndice
+        de series</a>\n            </nav>\n            <nav class=\"social-networks\">\n
+        \             <a class=\"text light\" href=\"https://foro.subtitulamos.tv/\"
+        title=\"Foro\" target=\"_blank\"><i class=\"fab fa-forumbee\" aria-hidden=\"true\"></i></a>\n
+        \             <a class=\"text light\" href=\"https://www.facebook.com/subtitulamos.tv\"
+        title=\"Facebook\" target=\"_blank\"><i class=\"fab fa-facebook-f\" aria-hidden=\"true\"></i></a>\n
+        \             <a class=\"text light\" href=\"https://twitter.com/subtitulamostv\"
+        title=\"Twitter\" target=\"_blank\"><i class=\"fab fa-twitter\" aria-hidden=\"true\"></i></a>\n
+        \             <a class=\"text light\" href=\"https://t.me/subtitulamostv\"
+        title=\"Telegram\" target=\"_blank\"><i class=\"fab fa-telegram-plane\" aria-hidden=\"true\"></i></a>\n
+        \             <a class=\"text light\" href=\"https://github.com/subtitulamos/subtitulamos\"
+        title=\"GitHub\" target=\"_blank\"><i class=\"fab fa-github\" aria-hidden=\"true\"></i></a>\n
+        \             <a class=\"text light\" href=\"/rss\" title=\"RSS\" target=\"_blank\"><i
+        class=\"fas fa-rss\" aria-hidden=\"true\"></i></a>\n            </nav>\n          </div>\n
+        \       </div>\n      </footer>\n    </div>\n  </div>\n\n      <script type=\"text/javascript\"
+        src=\"js/vendor.b749971c14518ffbfafc.bundle.js\" ></script>\n\n    <script
+        type=\"text/javascript\" src=\"js/app.06fc2580f3864eeace40.bundle.js\" ></script>\n\n
+        \  \n  <script src=\"https://cdn.jsdelivr.net/npm/sweetalert2@9\"></script>\n
+        \ <script>\n    const Toast = Swal.mixin({\n      toast: true,\n      position:
+        'bottom-end',\n      showConfirmButton: false,\n      timer: 4000\n    });\n
+        \   const Toasts = {\n      error: Toast.mixin({icon: 'error', timer: 8000}),\n
+        \     success: Toast.mixin({icon: 'success', timer: 5000}),\n      info: Toast.mixin({icon:
+        'info', timer: 5000})\n    };\n  </script>\n  <template id='tpl-login'>\n
+        \   <h3>Inicio de sesi\xF3n</h3>\n    <div class=\"form-wrap\">\n      <form
+        id=\"login-form\">\n        <div class=\"form-field text small\" fieldname=\"Nombre
+        de usuario\">\n          <input type=\"text\" id=\"username\" required autocomplete=\"username\">\n
+        \         <i class=\"fas fa-user\" aria-hidden=\"true\"></i>\n        </div>\n
+        \       <div class=\"form-field text small\" fieldname=\"Contrase\xF1a\">\n
+        \         <input type=\"password\" id=\"password\" required autocomplete=\"current-password\">\n
+        \         <i class=\"fas fa-key\" aria-hidden=\"true\"></i>\n        </div>\n
+        \       <div class=\"form-error\" id='login-error'></div>\n        <button
+        id='login-button' type=\"submit\" class=\"text light\">Iniciar sesi\xF3n</button>\n
+        \     </form>\n    </div>\n  </template>\n  <template id='tpl-register'>\n
+        \   <h3>Registro</h3>\n    <div class=\"form-wrap\">\n      <form id=\"register-form\"
+        action=\"/register\" method=\"POST\">\n        <div class=\"form-field text
+        small validated\" fieldname=\"Nombre de usuario\">\n          <input type=\"text\"
+        name=\"username\" required autocomplete=\"off\">\n          <i class=\"fas
+        fa-user\" aria-hidden=\"true\"></i>\n        </div>\n        <div class=\"form-field
+        text small validated\" fieldname=\"Contrase\xF1a\">\n          <input type=\"password\"
+        name=\"password\" required autocomplete=\"off\">\n          <i class=\"fas
+        fa-key\" aria-hidden=\"true\"></i>\n        </div>\n        <div class=\"form-field
+        text small validated\" fieldname=\"Confirmar contrase\xF1a\">\n          <input
+        type=\"password\" name=\"password-confirmation\" required autocomplete=\"off\">\n
+        \         <i class=\"fas fa-key\" aria-hidden=\"true\"></i>\n        </div>\n
+        \       <div class=\"form-field text small validated\" fieldname=\"Correo
+        electr\xF3nico\">\n          <input type=\"email\" name=\"email\" required>\n
+        \         <i class=\"fas fa-envelope\" aria-hidden=\"true\"></i>\n        </div>\n
+        \       <div id=\"register-checkbox\">\n          <input type='checkbox' name=\"terms\"
+        required>\n          Acepto las reglas y las condiciones generales de uso
+        del sitio web\n        </div>\n        <div class=\"form-error\" id='register-error'></div>\n
+        \       <button id='register-button' type=\"submit\" class=\"text light\">Registrarme</button>\n
+        \     </form>\n    </div>\n  </template>\n    <script type=\"text/javascript\">\n
+        \   var userId = 0;\n    var epId = 9689;\n    var MAX_USER_EDIT_SECONDS =
+        60;\n    var canDeleteComments = false;\n    var canEditComments = false;\n
+        \   var canPinComments = false;\n    var canEditProperties = false;\n    var
+        isBanned = false;\n  </script>\n    <script type=\"text/javascript\" src=\"js/episode.6090abffe69f45e739c2.bundle.js\"
+        ></script>\n\n</body>\n"
+    headers:
+      CF-RAY:
+      - 8ce994852bf48219-SIN
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - text/html; charset=UTF-8
+      Date:
+      - Sun, 06 Oct 2024 23:55:04 GMT
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=1VagzZZkl7TA8j8h4nVNoPtTZ3Ka%2Bb68LtkFlRedAcnnZgloiI%2BT0%2BdiHDw%2Byl6%2Be%2BWyrPcMp587Fy24mmW89Kr7hGy3rOj2FiShx6onA4Q19G7FACzi0WjLPcMe2I4zYNB0JerD"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
+      Transfer-Encoding:
+      - chunked
+      X-Powered-By:
+      - PHP/7.4.14
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '33745'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - PHPSESSID=1a7813bnqe272lndfpes8ohdf5
+      Referer:
+      - https://www.subtitulamos.tv
+      User-Agent:
+      - Subliminal/2.2
+    method: GET
+    uri: https://www.subtitulamos.tv/episodes/7196/doctor-who-13x00-revolution-of-the-daleks
+  response:
+    body:
+      string: "<!DOCTYPE html>\n<html>\n<head>\n  <base href=\"https://www.subtitulamos.tv/\">\n\n
+        \ <meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"/>\n
+        \ <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1\">\n
+        \       <link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/apple-touch-icon.png?v=lkvlWOG2Qx\">\n<link
+        rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/favicon-32x32.png?v=lkvlWOG2Qx\">\n<link
+        rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/favicon-16x16.png?v=lkvlWOG2Qx\">\n<link
+        rel=\"manifest\" href=\"/site.webmanifest?v=lkvlWOG2Qx\">\n<link rel=\"mask-icon\"
+        href=\"/safari-pinned-tab.svg?v=lkvlWOG2Qx\" color=\"#607dcd\">\n<link rel=\"shortcut
+        icon\" href=\"/favicon.ico?v=lkvlWOG2Qx\">\n<meta name=\"msapplication-TileColor\"
+        content=\"#607dcd\">\n<meta name=\"theme-color\" content=\"#607dcd\">\n  \n
+        \ <script type=\"text/javascript\" src=\"js/hotload.js?202410062355\"></script>\n\n
+        \ <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css\">\n
+        \ <link href=\"https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap\"
+        rel=\"stylesheet\">\n  <link href=\"https://fonts.googleapis.com/css2?family=Open+Sans:wght@700\"
+        rel=\"stylesheet\">\n      <link href=\"css/episode.33948c0e9a7ae54a4c20.css\"
+        rel=\"stylesheet\" type=\"text/css\"/>\n\n\n  <title>\n        Doctor Who
+        13x00 - Revolution of the Daleks - Subtitulamos.tv - Subt\xEDtulos de series\n
+        \ </title>\n</head>\n<body>\n  <div id=\"base\" class=\"w-header color-swatch-normal
+        font-thickness-normal\">\n        <div id=\"overlay\" class=\"overlay-wrap
+        hidden\">\n      <div class=\"overlay-container w-box-shadow bounce-in\">\n
+        \       <i id=\"overlay-close\"class=\"fas fa-times close-button\" aria-hidden=\"true\"></i>\n
+        \       <div id=\"overlay-content\">\n\n        </div>\n      </div>\n      <div
+        id=\"overlay-fade\" class=\"fade-pan\"></div>\n    </div>\n      <nav id=\"control-panel\"
+        class=\"no-scroll-bar \">\n        <div id=\"control-panel-top-section\" class=\"control-panel-section\">\n
+        \         <a href=\"/\">\n            <div id=\"control-panel-logo-wrap\">\n
+        \             <svg id=\"logo-miniature\" height=\"30\" viewBox=\"0 0 720 720\">\n
+        \               <path d=\"M500,480C373.919,603.693,144.292,621.974,115.091,623.822A359,359,0,0,1,0,360C0,161.178,161.178,0,360,0A358.39,358.39,0,0,1,576.516,72.38C594.276,124.682,651.193,331.67,500,480ZM456,236H172a32,32,0,0,0,0,64H456A32,32,0,0,0,456,236Zm0,104H172a32,32,0,0,0,0,64H456A32,32,0,0,0,456,340ZM564,504c101.048-137.763,87.982-313.7,81.9-362.757a359.955,359.955,0,0,1-24.222,465.966L664,688l-94.3-35.364A358.341,358.341,0,0,1,360,720a362.772,362.772,0,0,1-54.959-4.17C340.3,698.95,471.256,630.442,564,504Z\"/>\n
+        \             </svg>\n              <span class=\"logo-text\">subtitulamos.tv</span>\n
+        \           </div>\n          </a>\n          <div id=\"control-panel-search\"
+        class=\"search-bar-container\">\n            <button id=\"search-subtitles\"
+        title=\"Buscar\"  class=\"text small\"><i id=\"search_subtitles\" class=\"fa
+        fa-search\" aria-hidden=\"true\" aria-hidden=\"true\"></i></button>\n            <input
+        id=\"search-input\" data-search-bar-target='panel-search-results' type=\"text\"
+        class=\"text tiny\" placeholder=\"Busca una serie... Ej.: Westworld\" autocomplete=\"off\"
+        />\n            <ul class=\"search-results w-box-shadow hidden\" id='panel-search-results'></ul>\n
+        \         </div>\n          <button class=\"control-panel-button search\"
+        id='search-icon'>\n            <i class=\"fa fa-search\" aria-hidden=\"true\"></i>\n
+        \         </button>\n\n                    <button id=\"login-cp\" class=\"control-panel-button\">\n
+        \           <i class=\"fas fa-sign-in-alt\" aria-hidden=\"true\"></i>\n            <span>Iniciar
+        sesi\xF3n</span>\n          </button>\n          <button id=\"register-cp\"
+        class=\"control-panel-button\">\n            <i class=\"fas fa-user-plus\"
+        aria-hidden=\"true\"></i>\n            <span>Registro</span>\n          </button>\n
+        \                   <a class=\"control-panel-button\" page=\"/shows\" href='/shows'>\n
+        \           <i class=\"fas fa-list-ul\" aria-hidden=\"true\"></i>\n            <span>\xCDndice
+        de series</span>\n          </a>\n        </div>\n        <div id=\"control-panel-bottom-section\"
+        class=\"control-panel-section\">\n          <button class=\"control-panel-button
+        control-panel-minimize-toggle\">\n            <i class=\"fas fa-chevron-circle-left\"
+        aria-hidden=\"true\"></i>\n            <i class=\"fas fa-chevron-circle-right\"
+        aria-hidden=\"true\"></i>\n            <span>Minimizar</span>\n          </button>\n
+        \                 </div>\n\n        <div id=\"control-panel-fade-pan\"></div>\n
+        \     </nav>\n        <header>\n      <a href='/'>\n        <div id=\"header-logo-wrap\">\n
+        \         <svg id=\"logo-miniature\" height=\"40\" viewBox=\"0 0 720 720\">\n
+        \           <path d=\"M500,480C373.919,603.693,144.292,621.974,115.091,623.822A359,359,0,0,1,0,360C0,161.178,161.178,0,360,0A358.39,358.39,0,0,1,576.516,72.38C594.276,124.682,651.193,331.67,500,480ZM456,236H172a32,32,0,0,0,0,64H456A32,32,0,0,0,456,236Zm0,104H172a32,32,0,0,0,0,64H456A32,32,0,0,0,456,340ZM564,504c101.048-137.763,87.982-313.7,81.9-362.757a359.955,359.955,0,0,1-24.222,465.966L664,688l-94.3-35.364A358.341,358.341,0,0,1,360,720a362.772,362.772,0,0,1-54.959-4.17C340.3,698.95,471.256,630.442,564,504Z\"/>\n
+        \         </svg>\n          <span class=\"logo-text\">subtitulamos.tv</span>\n
+        \       </div>\n      </a>\n      <nav id=\"top-links\">\n        <button
+        class=\"text tiny spaced\" id=\"shows-index\"><a href=\"/shows\">\xCDNDICE
+        DE SERIES</a></button>\n        <button class=\"text tiny spaced\" id=\"register\">REGISTRO</button>\n
+        \       <button class=\"text tiny spaced\" id=\"login\">INICIAR SESI\xD3N</button>\n
+        \     </nav>\n    </header>\n        <div id=\"page-container\" class=\"\">\n
+        \     <button class=\"overlaying-button control-panel-minimize-toggle\">\n
+        \       <i class=\"fas fa-bars\" aria-hidden=\"true\"></i>\n      </button>\n
+        \     <div class=\"content limited-width\">\n    \n  <div id=\"show-info-header\">\n
+        \   <div id=\"show-name\" class=\"\">\n            <h1 class=\"blue-a\">Doctor
+        Who</h1>\n    </div>\n    <div id=\"episode-header\">\n      <div id=\"episode-name\"
+        class=\"\">\n                <h3 class=\"blue-a\">Revolution of the Daleks</h3>\n
+        \       <div class=\"blue-b text small\" id=\"episode-numbers\">(13x00)</div>\n
+        \     </div>\n      <div id=\"episode-buttons\" class=\"text tiny\">\n        <a
+        class=\"thin-button episode-button\" href='/episodes/7196/resync' class=\"text
+        tiny blue-a\">\n          Subir resincronizaci\xF3n\n        </a>\n        <button
+        class=\"thin-button episode-button translate-subtitle\">\n          + Nueva
+        traducci\xF3n\n        </button>\n      </div>\n    </div>\n    <div id=\"season-line\">\n
+        \     <span class=\"text bold spaced-wide choices-title\">TEMPORADA</span>\n
+        \     <div id=\"season-choices\" class=\"choices no-scroll-bar\">\n                  <a
+        href=\"/episodes/1293/doctor-who-11x00-twice-upon-a-time-christmas-special\"
+        class=\"choice \">11</a>\n                  <a href=\"/episodes/3785/doctor-who-12x00-resolution\"
+        class=\"choice \">12</a>\n                  <a href=\"/episodes/7196/doctor-who-13x00-revolution-of-the-daleks\"
+        class=\"choice selected\">13</a>\n              </div>\n    </div>\n    <div
+        id=\"episode-line\">\n      <span class=\"text bold spaced-wide choices-title\">EPISODIO</span>\n
+        \     <div id=\"episode-choices\" class=\"choices no-scroll-bar\">\n                  <a
+        href=\"/episodes/7196/doctor-who-13x00-revolution-of-the-daleks\" class=\"choice
+        selected\">0</a>\n                  <a href=\"/episodes/8623/doctor-who-13x01-chapter-one-the-halloween-apocalypse\"
+        class=\"choice \">1</a>\n                  <a href=\"/episodes/8651/doctor-who-13x02-chapter-two-war-of-sontarans\"
+        class=\"choice \">2</a>\n                  <a href=\"/episodes/8685/doctor-who-13x03-chapter-three-once-upon-time\"
+        class=\"choice \">3</a>\n                  <a href=\"/episodes/8723/doctor-who-13x04-chapter-four-village-of-the-angels\"
+        class=\"choice \">4</a>\n                  <a href=\"/episodes/8743/doctor-who-13x05-chapter-five-survivors-of-the-flux\"
+        class=\"choice \">5</a>\n                  <a href=\"/episodes/8773/doctor-who-13x06-chapter-six-the-vanquishers\"
+        class=\"choice \">6</a>\n                  <a href=\"/episodes/8854/doctor-who-13x97-eve-of-the-daleks\"
+        class=\"choice \">97</a>\n                  <a href=\"/episodes/9243/doctor-who-13x98-legend-of-the-sea-devils\"
+        class=\"choice \">98</a>\n                  <a href=\"/episodes/9689/doctor-who-13x99-the-power-of-the-doctor\"
+        class=\"choice \">99</a>\n              </div>\n    </div>\n  </div>\n\n  <div
+        id=\"languages\">\n    <div id=\"languages-header\">\n    <h4>Versiones</h4>\n
+        \                                                                                                                                         <div
+        id=\"download-count\" class=\"text tiny hint--left\" data-hint='English -
+        372&#10;&#10;Espa\xF1ol (Espa\xF1a) - 3.081' >\n      <i class=\"fas fa-arrow-alt-circle-down\"></i>\n
+        \     <span id=\"count\" class=\"text bold\">3 453</span>\n      <span >descargas</span>\n
+        \   </div>\n    </div>\n          <div class=\"language-container w-box-shadow\">\n
+        \       <button class=\"collapser-button blue-a\">\n          <i class=\"fas
+        fa-chevron-up\"></i>\n        </button>\n\n        <div class=\"text small
+        bold blue-a language-name\"  data-lang-id=\"1\">English</div>\n\n        <div
+        class=\"language-content\">\n                      <template id=\"subtitle-properties-18265\">\n
+        \ <div class=\"form-wrap\">\n    <form action=\"subtitles/18265/properties\"
+        method=\"POST\">\n      <h3>Propiedades del subt\xEDtulo</h2>\n      <div
+        class='form-field validated' fieldname=\"Nombre de versi\xF3n\">\n        <input
+        id=\"vname\" type=\"text\" class=\"form_input\"\n          name=\"vname\"
+        value=\"FoV/TENNANT\" required>\n        <i class=\"fas fa-code-branch\"></i>\n
+        \     </div>\n\n      <div class='form-field validated' fieldname=\"Comentario
+        de versi\xF3n\">\n        <input id=\"vcomment\" type=\"text\" class=\"form_input\"\n
+        \         name=\"vcomment\" value=\"De addic7ed, sin acotaciones.\" required>\n
+        \       <i class=\"fas fa-comment\"></i>\n      </div>\n\n      <div class='form-field
+        validated' fieldname=\"Idioma\">\n        <select name=\"lang\" id=\"lang\"
+        class=\"form_input\" required>\n          <option value=\"\" disabled>Selecciona
+        un idioma</option>\n                      <option value=\"en-en\" selected>English</option>\n
+        \                     <option value=\"es-es\" >Espa\xF1ol (Espa\xF1a)</option>\n
+        \                     <option value=\"es-lat\" >Espa\xF1ol (Latinoam\xE9rica)</option>\n
+        \                     <option value=\"fr-fr\" >Fran\xE7ais</option>\n                      <option
+        value=\"ca-es\" >Catal\xE0</option>\n                      <option value=\"gl-es\"
+        >Galego</option>\n                  </select>\n        <i class=\"fas fa-globe\"></i>\n
+        \     </div>\n\n      <button id=\"save-edit\" type=\"submit\" class='button
+        button-fat'>Guardar</button>\n    </form>\n  </div>\n</template>\n                                      \n
+        \                       \n            <div class=\"version-container \">\n
+        \             <p class=\"text mini\">versi\xF3n</p>\n              <p class=\"text
+        tiny spaced bold\">FoV/TENNANT</p>\n              <div class=\"version-info\">\n
+        \               <div class=\"version-buttons\">\n                                    <a
+        rel=\"nofollow\" href=\"/subtitles/18265/download\">\n                                      <div
+        class=\"download-button \">\n                      <i class=\"far fa-arrow-alt-circle-down\"></i>\n
+        \                   </div>\n                                    </a>\n                                    <a
+        rel=\"nofollow\" href=\"/subtitles/18265/translate\">\n                    <div
+        class=\"edit-button-wrap\">\n                      <div class=\"edit-button\">\n
+        \                       <i class=\"fas fa-pencil-alt\"></i>\n                      </div>\n
+        \                   </div>\n                  </a>\n                </div>\n
+        \               <div class=\"progress-bar-container\">\n                                      <div
+        class=\"subtitle-uploader\">\n                      <span class=\"text mini\">\n
+        \                                               ORIGINAL\n                        \n
+        \                                             </span>\n                      <a
+        rel=\"nofollow\" href=\"/users/54\" class=\"uploader_name text tiny bold blue-a\">\n
+        \                       <i class=\"fas fa-file-import\"></i>\n                        ClaraTL\n
+        \                     </a>\n                    </div>\n                                    <div
+        class=\"more-info\">\n                                        <span class=\"text
+        small\">\n                      <i class=\"fa fa-comment\" aria-hidden=\"true\"></i>
+        De addic7ed, sin acotaciones.\n                    </span>\n                                      </div>\n
+        \               </div>\n                              </div>\n            </div>\n
+        \                 </div>\n      </div>\n          <div class=\"language-container
+        w-box-shadow\">\n        <button class=\"collapser-button blue-a\">\n          <i
+        class=\"fas fa-chevron-up\"></i>\n        </button>\n\n        <div class=\"text
+        small bold blue-a language-name\"  data-lang-id=\"5\">Espa\xF1ol (Espa\xF1a)</div>\n\n
+        \       <div class=\"language-content\">\n                      <template
+        id=\"subtitle-properties-18266\">\n  <div class=\"form-wrap\">\n    <form
+        action=\"subtitles/18266/properties\" method=\"POST\">\n      <h3>Propiedades
+        del subt\xEDtulo</h2>\n      <div class='form-field validated' fieldname=\"Nombre
+        de versi\xF3n\">\n        <input id=\"vname\" type=\"text\" class=\"form_input\"\n
+        \         name=\"vname\" value=\"FoV/TENNANT\" required>\n        <i class=\"fas
+        fa-code-branch\"></i>\n      </div>\n\n      <div class='form-field validated'
+        fieldname=\"Comentario de versi\xF3n\">\n        <input id=\"vcomment\" type=\"text\"
+        class=\"form_input\"\n          name=\"vcomment\" value=\"De addic7ed, sin
+        acotaciones.\" required>\n        <i class=\"fas fa-comment\"></i>\n      </div>\n\n
+        \     <div class='form-field validated' fieldname=\"Idioma\">\n        <select
+        name=\"lang\" id=\"lang\" class=\"form_input\" required>\n          <option
+        value=\"\" disabled>Selecciona un idioma</option>\n                      <option
+        value=\"en-en\" >English</option>\n                      <option value=\"es-es\"
+        selected>Espa\xF1ol (Espa\xF1a)</option>\n                      <option value=\"es-lat\"
+        >Espa\xF1ol (Latinoam\xE9rica)</option>\n                      <option value=\"fr-fr\"
+        >Fran\xE7ais</option>\n                      <option value=\"ca-es\" >Catal\xE0</option>\n
+        \                     <option value=\"gl-es\" >Galego</option>\n                  </select>\n
+        \       <i class=\"fas fa-globe\"></i>\n      </div>\n\n      <button id=\"save-edit\"
+        type=\"submit\" class='button button-fat'>Guardar</button>\n    </form>\n
+        \ </div>\n</template>\n                                      \n                        \n
+        \           <div class=\"version-container \">\n              <p class=\"text
+        mini\">versi\xF3n</p>\n              <p class=\"text tiny spaced bold\">FoV/TENNANT</p>\n
+        \             <div class=\"version-info\">\n                <div class=\"version-buttons\">\n
+        \                                   <a rel=\"nofollow\" href=\"/subtitles/18266/download\">\n
+        \                                     <div class=\"download-button \">\n                      <i
+        class=\"far fa-arrow-alt-circle-down\"></i>\n                    </div>\n
+        \                                   </a>\n                                    <a
+        rel=\"nofollow\" href=\"/subtitles/18266/translate\">\n                    <div
+        class=\"edit-button-wrap\">\n                      <div class=\"edit-button\">\n
+        \                       <i class=\"fas fa-pencil-alt\"></i>\n                      </div>\n
+        \                   </div>\n                  </a>\n                </div>\n
+        \               <div class=\"progress-bar-container\">\n                                      <div
+        class=\"progress-bar \">\n                                            <div
+        class=\"progress progress_100\"\n                        style=\"width: 100%\">\n
+        \                     </div>\n                    </div>\n                                    <div
+        class=\"more-info\">\n                                          <span class=\"text
+        small bold percentage-value\">\n                        100%\n                      </span>\n
+        \                                                           </div>\n                </div>\n
+        \                             </div>\n            </div>\n                      <template
+        id=\"subtitle-properties-18278\">\n  <div class=\"form-wrap\">\n    <form
+        action=\"subtitles/18278/properties\" method=\"POST\">\n      <h3>Propiedades
+        del subt\xEDtulo</h2>\n      <div class='form-field validated' fieldname=\"Nombre
+        de versi\xF3n\">\n        <input id=\"vname\" type=\"text\" class=\"form_input\"\n
+        \         name=\"vname\" value=\"AMZN NTb/ION10\" required>\n        <i class=\"fas
+        fa-code-branch\"></i>\n      </div>\n\n      <div class='form-field validated'
+        fieldname=\"Comentario de versi\xF3n\">\n        <input id=\"vcomment\" type=\"text\"
+        class=\"form_input\"\n          name=\"vcomment\" value=\"Los traducidos aqu\xED
+        sincronizados para las versiones AMZN NTb y WEBRip ION10.\" required>\n        <i
+        class=\"fas fa-comment\"></i>\n      </div>\n\n      <div class='form-field
+        validated' fieldname=\"Idioma\">\n        <select name=\"lang\" id=\"lang\"
+        class=\"form_input\" required>\n          <option value=\"\" disabled>Selecciona
+        un idioma</option>\n                      <option value=\"en-en\" >English</option>\n
+        \                     <option value=\"es-es\" selected>Espa\xF1ol (Espa\xF1a)</option>\n
+        \                     <option value=\"es-lat\" >Espa\xF1ol (Latinoam\xE9rica)</option>\n
+        \                     <option value=\"fr-fr\" >Fran\xE7ais</option>\n                      <option
+        value=\"ca-es\" >Catal\xE0</option>\n                      <option value=\"gl-es\"
+        >Galego</option>\n                  </select>\n        <i class=\"fas fa-globe\"></i>\n
+        \     </div>\n\n      <button id=\"save-edit\" type=\"submit\" class='button
+        button-fat'>Guardar</button>\n    </form>\n  </div>\n</template>\n                                      \n
+        \                       \n            <div class=\"version-container \">\n
+        \             <p class=\"text mini\">versi\xF3n</p>\n              <p class=\"text
+        tiny spaced bold\">AMZN NTb/ION10</p>\n              <div class=\"version-info\">\n
+        \               <div class=\"version-buttons\">\n                                    <a
+        rel=\"nofollow\" href=\"/subtitles/18278/download\">\n                                      <div
+        class=\"download-button \">\n                      <i class=\"far fa-arrow-alt-circle-down\"></i>\n
+        \                   </div>\n                                    </a>\n                                    <a
+        rel=\"nofollow\" href=\"/subtitles/18278/translate\">\n                    <div
+        class=\"edit-button-wrap\">\n                      <div class=\"edit-button\">\n
+        \                       <i class=\"fas fa-pencil-alt\"></i>\n                      </div>\n
+        \                   </div>\n                  </a>\n                </div>\n
+        \               <div class=\"progress-bar-container\">\n                                      <div
+        class=\"subtitle-uploader\">\n                      <span class=\"text mini\">\n
+        \                                               RESINCRONIZADO\n                        \n
+        \                                             </span>\n                      <a
+        rel=\"nofollow\" href=\"/users/54\" class=\"uploader_name text tiny bold blue-a\">\n
+        \                       <i class=\"fas fa-file-import\"></i>\n                        ClaraTL\n
+        \                     </a>\n                    </div>\n                                    <div
+        class=\"more-info\">\n                                        <span class=\"text
+        small\">\n                      <i class=\"fa fa-comment\" aria-hidden=\"true\"></i>
+        Los traducidos aqu\xED sincronizados para las versiones AMZN NTb y WEBRip
+        ION10.\n                    </span>\n                                      </div>\n
+        \               </div>\n                              </div>\n            </div>\n
+        \                     <template id=\"subtitle-properties-18279\">\n  <div
+        class=\"form-wrap\">\n    <form action=\"subtitles/18279/properties\" method=\"POST\">\n
+        \     <h3>Propiedades del subt\xEDtulo</h2>\n      <div class='form-field
+        validated' fieldname=\"Nombre de versi\xF3n\">\n        <input id=\"vname\"
+        type=\"text\" class=\"form_input\"\n          name=\"vname\" value=\"BLUTONiUM\"
+        required>\n        <i class=\"fas fa-code-branch\"></i>\n      </div>\n\n
+        \     <div class='form-field validated' fieldname=\"Comentario de versi\xF3n\">\n
+        \       <input id=\"vcomment\" type=\"text\" class=\"form_input\"\n          name=\"vcomment\"
+        value=\"Los traducidos aqu\xED sincronizados para la versi\xF3n 4k BLUTONiUM.\"
+        required>\n        <i class=\"fas fa-comment\"></i>\n      </div>\n\n      <div
+        class='form-field validated' fieldname=\"Idioma\">\n        <select name=\"lang\"
+        id=\"lang\" class=\"form_input\" required>\n          <option value=\"\" disabled>Selecciona
+        un idioma</option>\n                      <option value=\"en-en\" >English</option>\n
+        \                     <option value=\"es-es\" selected>Espa\xF1ol (Espa\xF1a)</option>\n
+        \                     <option value=\"es-lat\" >Espa\xF1ol (Latinoam\xE9rica)</option>\n
+        \                     <option value=\"fr-fr\" >Fran\xE7ais</option>\n                      <option
+        value=\"ca-es\" >Catal\xE0</option>\n                      <option value=\"gl-es\"
+        >Galego</option>\n                  </select>\n        <i class=\"fas fa-globe\"></i>\n
+        \     </div>\n\n      <button id=\"save-edit\" type=\"submit\" class='button
+        button-fat'>Guardar</button>\n    </form>\n  </div>\n</template>\n                                      \n
+        \                       \n            <div class=\"version-container \">\n
+        \             <p class=\"text mini\">versi\xF3n</p>\n              <p class=\"text
+        tiny spaced bold\">BLUTONiUM</p>\n              <div class=\"version-info\">\n
+        \               <div class=\"version-buttons\">\n                                    <a
+        rel=\"nofollow\" href=\"/subtitles/18279/download\">\n                                      <div
+        class=\"download-button \">\n                      <i class=\"far fa-arrow-alt-circle-down\"></i>\n
+        \                   </div>\n                                    </a>\n                                    <a
+        rel=\"nofollow\" href=\"/subtitles/18279/translate\">\n                    <div
+        class=\"edit-button-wrap\">\n                      <div class=\"edit-button\">\n
+        \                       <i class=\"fas fa-pencil-alt\"></i>\n                      </div>\n
+        \                   </div>\n                  </a>\n                </div>\n
+        \               <div class=\"progress-bar-container\">\n                                      <div
+        class=\"subtitle-uploader\">\n                      <span class=\"text mini\">\n
+        \                                               RESINCRONIZADO\n                        \n
+        \                                             </span>\n                      <a
+        rel=\"nofollow\" href=\"/users/54\" class=\"uploader_name text tiny bold blue-a\">\n
+        \                       <i class=\"fas fa-file-import\"></i>\n                        ClaraTL\n
+        \                     </a>\n                    </div>\n                                    <div
+        class=\"more-info\">\n                                        <span class=\"text
+        small\">\n                      <i class=\"fa fa-comment\" aria-hidden=\"true\"></i>
+        Los traducidos aqu\xED sincronizados para la versi\xF3n 4k BLUTONiUM.\n                    </span>\n
+        \                                     </div>\n                </div>\n                              </div>\n
+        \           </div>\n                  </div>\n      </div>\n      </div>\n\n
+        \ <div id=\"comments-container\" class=\"comments-container\">\n    \n    <h4
+        class=\"comment-header\">Comentarios ({{comments.length}})</h4>\n    \n\n
+        \   <comment v-for=\"comment in comments\"\n        :key=\"comment.id\"\n
+        \       :id=\"comment.id\"\n        :user=\"comment.user\"\n        :base-text=\"comment.text\"\n
+        \       :published-at=\"comment.published_at\"\n        :edited-at=\"comment.edited_at\"\n
+        \       :pinned=\"comment.pinned\"\n        @remove=\"remove\"\n        @pin=\"pin\"\n
+        \       @save=\"save\"\n      >\n    </comment>\n    <div class=\"no-comments\"
+        v-if=\"comments.length == 0\">Nadie ha dejado su comentario a\xFAn.</div>\n\n
+        \         <div class='newcomment-box'>\n                  <div class=\"open-comment
+        disabled\">\n            <textarea id=\"new-comment\" rows=\"2\" class=\"textarea\"
+        disabled>Debes estar identificado para poder dejar comentarios</textarea>\n
+        \         </div>\n              </div>\n      </div>\n</div>\n\n<template
+        id=\"new-translation\">\n  <div class=\"form-wrap\">\n    <h3>Nueva traducci\xF3n</h3>\n
+        \   <form action=\"/subtitles/translate\" method=\"POST\">\n      <input type=\"hidden\"
+        name=\"episode\" value=\"7196\" />\n      <div class=\"form-field validated
+        dropdown-field\" fieldname=\"Idioma\">\n        <i class=\"fas fa-chevron-down
+        dropdown\"></i>\n        <select name=\"lang\" id=\"translate-to-lang\" required>\n
+        \         <option value=\"\" disabled selected>Selecciona un idioma</option>\n
+        \                                   <option value=\"en-en\">English</option>\n
+        \                                               <option value=\"es-es\">Espa\xF1ol
+        (Espa\xF1a)</option>\n                                                <option
+        value=\"es-lat\">Espa\xF1ol (Latinoam\xE9rica)</option>\n                                                <option
+        value=\"fr-fr\">Fran\xE7ais</option>\n                                                <option
+        value=\"ca-es\">Catal\xE0</option>\n                                                <option
+        value=\"gl-es\">Galego</option>\n                              </select>\n
+        \       <i class=\"fas fa-globe\"></i>\n      </div>\n      <button type=\"submit\"
+        id=\"open-translation\">Abrir traducci\xF3n</button>\n    </form>\n  </div>\n</template>\n\n\n\n
+        \     <footer id=\"footer\">\n        <div id=\"footer-content\">\n          <div
+        id=\"in-memory-of\">\n            <div id=\"in-memory-of-content\">\n              <p>en
+        memoria de</p>\n              <p>SUBTITULOS.ES</p>\n              <p>(2008-2015)</p>\n
+        \             <p class='disclaimer-row'><a href='/disclaimer'>Disclaimer</a></p>\n
+        \           </div>\n          </div>\n          <div id=\"page-navigation\">\n
+        \           <p class=\"text light small logo-text\">&#169; subtitulamos.tv</p>\n
+        \           <nav id=\"page-links\" class=\"text thin tiny\">\n              <a
+        class=\"text light\" href=\"https://github.com/subtitulamos/subtitulamos\"
+        target=\"_blank\">GitHub</a>\n              <a class=\"text light\" href=\"/rules\">Normas
+        de traducci\xF3n</a>\n              <a class=\"text light\" href=\"https://foro.subtitulamos.tv/\"
+        target=\"_blank\">Foro</a>\n              <a class=\"text light\" href=\"/shows\">\xCDndice
+        de series</a>\n            </nav>\n            <nav class=\"social-networks\">\n
+        \             <a class=\"text light\" href=\"https://foro.subtitulamos.tv/\"
+        title=\"Foro\" target=\"_blank\"><i class=\"fab fa-forumbee\" aria-hidden=\"true\"></i></a>\n
+        \             <a class=\"text light\" href=\"https://www.facebook.com/subtitulamos.tv\"
+        title=\"Facebook\" target=\"_blank\"><i class=\"fab fa-facebook-f\" aria-hidden=\"true\"></i></a>\n
+        \             <a class=\"text light\" href=\"https://twitter.com/subtitulamostv\"
+        title=\"Twitter\" target=\"_blank\"><i class=\"fab fa-twitter\" aria-hidden=\"true\"></i></a>\n
+        \             <a class=\"text light\" href=\"https://t.me/subtitulamostv\"
+        title=\"Telegram\" target=\"_blank\"><i class=\"fab fa-telegram-plane\" aria-hidden=\"true\"></i></a>\n
+        \             <a class=\"text light\" href=\"https://github.com/subtitulamos/subtitulamos\"
+        title=\"GitHub\" target=\"_blank\"><i class=\"fab fa-github\" aria-hidden=\"true\"></i></a>\n
+        \             <a class=\"text light\" href=\"/rss\" title=\"RSS\" target=\"_blank\"><i
+        class=\"fas fa-rss\" aria-hidden=\"true\"></i></a>\n            </nav>\n          </div>\n
+        \       </div>\n      </footer>\n    </div>\n  </div>\n\n      <script type=\"text/javascript\"
+        src=\"js/vendor.b749971c14518ffbfafc.bundle.js\" ></script>\n\n    <script
+        type=\"text/javascript\" src=\"js/app.06fc2580f3864eeace40.bundle.js\" ></script>\n\n
+        \  \n  <script src=\"https://cdn.jsdelivr.net/npm/sweetalert2@9\"></script>\n
+        \ <script>\n    const Toast = Swal.mixin({\n      toast: true,\n      position:
+        'bottom-end',\n      showConfirmButton: false,\n      timer: 4000\n    });\n
+        \   const Toasts = {\n      error: Toast.mixin({icon: 'error', timer: 8000}),\n
+        \     success: Toast.mixin({icon: 'success', timer: 5000}),\n      info: Toast.mixin({icon:
+        'info', timer: 5000})\n    };\n  </script>\n  <template id='tpl-login'>\n
+        \   <h3>Inicio de sesi\xF3n</h3>\n    <div class=\"form-wrap\">\n      <form
+        id=\"login-form\">\n        <div class=\"form-field text small\" fieldname=\"Nombre
+        de usuario\">\n          <input type=\"text\" id=\"username\" required autocomplete=\"username\">\n
+        \         <i class=\"fas fa-user\" aria-hidden=\"true\"></i>\n        </div>\n
+        \       <div class=\"form-field text small\" fieldname=\"Contrase\xF1a\">\n
+        \         <input type=\"password\" id=\"password\" required autocomplete=\"current-password\">\n
+        \         <i class=\"fas fa-key\" aria-hidden=\"true\"></i>\n        </div>\n
+        \       <div class=\"form-error\" id='login-error'></div>\n        <button
+        id='login-button' type=\"submit\" class=\"text light\">Iniciar sesi\xF3n</button>\n
+        \     </form>\n    </div>\n  </template>\n  <template id='tpl-register'>\n
+        \   <h3>Registro</h3>\n    <div class=\"form-wrap\">\n      <form id=\"register-form\"
+        action=\"/register\" method=\"POST\">\n        <div class=\"form-field text
+        small validated\" fieldname=\"Nombre de usuario\">\n          <input type=\"text\"
+        name=\"username\" required autocomplete=\"off\">\n          <i class=\"fas
+        fa-user\" aria-hidden=\"true\"></i>\n        </div>\n        <div class=\"form-field
+        text small validated\" fieldname=\"Contrase\xF1a\">\n          <input type=\"password\"
+        name=\"password\" required autocomplete=\"off\">\n          <i class=\"fas
+        fa-key\" aria-hidden=\"true\"></i>\n        </div>\n        <div class=\"form-field
+        text small validated\" fieldname=\"Confirmar contrase\xF1a\">\n          <input
+        type=\"password\" name=\"password-confirmation\" required autocomplete=\"off\">\n
+        \         <i class=\"fas fa-key\" aria-hidden=\"true\"></i>\n        </div>\n
+        \       <div class=\"form-field text small validated\" fieldname=\"Correo
+        electr\xF3nico\">\n          <input type=\"email\" name=\"email\" required>\n
+        \         <i class=\"fas fa-envelope\" aria-hidden=\"true\"></i>\n        </div>\n
+        \       <div id=\"register-checkbox\">\n          <input type='checkbox' name=\"terms\"
+        required>\n          Acepto las reglas y las condiciones generales de uso
+        del sitio web\n        </div>\n        <div class=\"form-error\" id='register-error'></div>\n
+        \       <button id='register-button' type=\"submit\" class=\"text light\">Registrarme</button>\n
+        \     </form>\n    </div>\n  </template>\n    <script type=\"text/javascript\">\n
+        \   var userId = 0;\n    var epId = 7196;\n    var MAX_USER_EDIT_SECONDS =
+        60;\n    var canDeleteComments = false;\n    var canEditComments = false;\n
+        \   var canPinComments = false;\n    var canEditProperties = false;\n    var
+        isBanned = false;\n  </script>\n    <script type=\"text/javascript\" src=\"js/episode.6090abffe69f45e739c2.bundle.js\"
+        ></script>\n\n</body>\n"
+    headers:
+      CF-RAY:
+      - 8ce99489fcdc3153-MAD
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - text/html; charset=UTF-8
+      Date:
+      - Sun, 06 Oct 2024 23:55:04 GMT
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=%2BO5x2GPuL%2F3ZHswuZ2WaPf3rUGFW8v3HkAUyx3qeqjzBmsH94H%2F5Xvi2tQ2ibgd1O%2F41oiHx%2FqUL1YbVMTPrmUc3FcFwYLUZUWQD9Z5Qc%2BbDJff6Xse5Aj00sGfBBn03u33EGYDP"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
+      Transfer-Encoding:
+      - chunked
+      X-Powered-By:
+      - PHP/7.4.14
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '30206'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - PHPSESSID=1a7813bnqe272lndfpes8ohdf5
+      Referer:
+      - https://www.subtitulamos.tv
+      User-Agent:
+      - Subliminal/2.2
+    method: GET
+    uri: https://www.subtitulamos.tv/episodes/8685/doctor-who-13x03-chapter-three-once-upon-time
+  response:
+    body:
+      string: "<!DOCTYPE html>\n<html>\n<head>\n  <base href=\"https://www.subtitulamos.tv/\">\n\n
+        \ <meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"/>\n
+        \ <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1\">\n
+        \       <link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/apple-touch-icon.png?v=lkvlWOG2Qx\">\n<link
+        rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/favicon-32x32.png?v=lkvlWOG2Qx\">\n<link
+        rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/favicon-16x16.png?v=lkvlWOG2Qx\">\n<link
+        rel=\"manifest\" href=\"/site.webmanifest?v=lkvlWOG2Qx\">\n<link rel=\"mask-icon\"
+        href=\"/safari-pinned-tab.svg?v=lkvlWOG2Qx\" color=\"#607dcd\">\n<link rel=\"shortcut
+        icon\" href=\"/favicon.ico?v=lkvlWOG2Qx\">\n<meta name=\"msapplication-TileColor\"
+        content=\"#607dcd\">\n<meta name=\"theme-color\" content=\"#607dcd\">\n  \n
+        \ <script type=\"text/javascript\" src=\"js/hotload.js?202410062355\"></script>\n\n
+        \ <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css\">\n
+        \ <link href=\"https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap\"
+        rel=\"stylesheet\">\n  <link href=\"https://fonts.googleapis.com/css2?family=Open+Sans:wght@700\"
+        rel=\"stylesheet\">\n      <link href=\"css/episode.33948c0e9a7ae54a4c20.css\"
+        rel=\"stylesheet\" type=\"text/css\"/>\n\n\n  <title>\n        Doctor Who
+        13x03 - Chapter Three: Once, Upon Time - Subtitulamos.tv - Subt\xEDtulos de
+        series\n  </title>\n</head>\n<body>\n  <div id=\"base\" class=\"w-header color-swatch-normal
+        font-thickness-normal\">\n        <div id=\"overlay\" class=\"overlay-wrap
+        hidden\">\n      <div class=\"overlay-container w-box-shadow bounce-in\">\n
+        \       <i id=\"overlay-close\"class=\"fas fa-times close-button\" aria-hidden=\"true\"></i>\n
+        \       <div id=\"overlay-content\">\n\n        </div>\n      </div>\n      <div
+        id=\"overlay-fade\" class=\"fade-pan\"></div>\n    </div>\n      <nav id=\"control-panel\"
+        class=\"no-scroll-bar \">\n        <div id=\"control-panel-top-section\" class=\"control-panel-section\">\n
+        \         <a href=\"/\">\n            <div id=\"control-panel-logo-wrap\">\n
+        \             <svg id=\"logo-miniature\" height=\"30\" viewBox=\"0 0 720 720\">\n
+        \               <path d=\"M500,480C373.919,603.693,144.292,621.974,115.091,623.822A359,359,0,0,1,0,360C0,161.178,161.178,0,360,0A358.39,358.39,0,0,1,576.516,72.38C594.276,124.682,651.193,331.67,500,480ZM456,236H172a32,32,0,0,0,0,64H456A32,32,0,0,0,456,236Zm0,104H172a32,32,0,0,0,0,64H456A32,32,0,0,0,456,340ZM564,504c101.048-137.763,87.982-313.7,81.9-362.757a359.955,359.955,0,0,1-24.222,465.966L664,688l-94.3-35.364A358.341,358.341,0,0,1,360,720a362.772,362.772,0,0,1-54.959-4.17C340.3,698.95,471.256,630.442,564,504Z\"/>\n
+        \             </svg>\n              <span class=\"logo-text\">subtitulamos.tv</span>\n
+        \           </div>\n          </a>\n          <div id=\"control-panel-search\"
+        class=\"search-bar-container\">\n            <button id=\"search-subtitles\"
+        title=\"Buscar\"  class=\"text small\"><i id=\"search_subtitles\" class=\"fa
+        fa-search\" aria-hidden=\"true\" aria-hidden=\"true\"></i></button>\n            <input
+        id=\"search-input\" data-search-bar-target='panel-search-results' type=\"text\"
+        class=\"text tiny\" placeholder=\"Busca una serie... Ej.: Westworld\" autocomplete=\"off\"
+        />\n            <ul class=\"search-results w-box-shadow hidden\" id='panel-search-results'></ul>\n
+        \         </div>\n          <button class=\"control-panel-button search\"
+        id='search-icon'>\n            <i class=\"fa fa-search\" aria-hidden=\"true\"></i>\n
+        \         </button>\n\n                    <button id=\"login-cp\" class=\"control-panel-button\">\n
+        \           <i class=\"fas fa-sign-in-alt\" aria-hidden=\"true\"></i>\n            <span>Iniciar
+        sesi\xF3n</span>\n          </button>\n          <button id=\"register-cp\"
+        class=\"control-panel-button\">\n            <i class=\"fas fa-user-plus\"
+        aria-hidden=\"true\"></i>\n            <span>Registro</span>\n          </button>\n
+        \                   <a class=\"control-panel-button\" page=\"/shows\" href='/shows'>\n
+        \           <i class=\"fas fa-list-ul\" aria-hidden=\"true\"></i>\n            <span>\xCDndice
+        de series</span>\n          </a>\n        </div>\n        <div id=\"control-panel-bottom-section\"
+        class=\"control-panel-section\">\n          <button class=\"control-panel-button
+        control-panel-minimize-toggle\">\n            <i class=\"fas fa-chevron-circle-left\"
+        aria-hidden=\"true\"></i>\n            <i class=\"fas fa-chevron-circle-right\"
+        aria-hidden=\"true\"></i>\n            <span>Minimizar</span>\n          </button>\n
+        \                 </div>\n\n        <div id=\"control-panel-fade-pan\"></div>\n
+        \     </nav>\n        <header>\n      <a href='/'>\n        <div id=\"header-logo-wrap\">\n
+        \         <svg id=\"logo-miniature\" height=\"40\" viewBox=\"0 0 720 720\">\n
+        \           <path d=\"M500,480C373.919,603.693,144.292,621.974,115.091,623.822A359,359,0,0,1,0,360C0,161.178,161.178,0,360,0A358.39,358.39,0,0,1,576.516,72.38C594.276,124.682,651.193,331.67,500,480ZM456,236H172a32,32,0,0,0,0,64H456A32,32,0,0,0,456,236Zm0,104H172a32,32,0,0,0,0,64H456A32,32,0,0,0,456,340ZM564,504c101.048-137.763,87.982-313.7,81.9-362.757a359.955,359.955,0,0,1-24.222,465.966L664,688l-94.3-35.364A358.341,358.341,0,0,1,360,720a362.772,362.772,0,0,1-54.959-4.17C340.3,698.95,471.256,630.442,564,504Z\"/>\n
+        \         </svg>\n          <span class=\"logo-text\">subtitulamos.tv</span>\n
+        \       </div>\n      </a>\n      <nav id=\"top-links\">\n        <button
+        class=\"text tiny spaced\" id=\"shows-index\"><a href=\"/shows\">\xCDNDICE
+        DE SERIES</a></button>\n        <button class=\"text tiny spaced\" id=\"register\">REGISTRO</button>\n
+        \       <button class=\"text tiny spaced\" id=\"login\">INICIAR SESI\xD3N</button>\n
+        \     </nav>\n    </header>\n        <div id=\"page-container\" class=\"\">\n
+        \     <button class=\"overlaying-button control-panel-minimize-toggle\">\n
+        \       <i class=\"fas fa-bars\" aria-hidden=\"true\"></i>\n      </button>\n
+        \     <div class=\"content limited-width\">\n    \n  <div id=\"show-info-header\">\n
+        \   <div id=\"show-name\" class=\"\">\n            <h1 class=\"blue-a\">Doctor
+        Who</h1>\n    </div>\n    <div id=\"episode-header\">\n      <div id=\"episode-name\"
+        class=\"\">\n                <h3 class=\"blue-a\">Chapter Three: Once, Upon
+        Time</h3>\n        <div class=\"blue-b text small\" id=\"episode-numbers\">(13x03)</div>\n
+        \     </div>\n      <div id=\"episode-buttons\" class=\"text tiny\">\n        <a
+        class=\"thin-button episode-button\" href='/episodes/8685/resync' class=\"text
+        tiny blue-a\">\n          Subir resincronizaci\xF3n\n        </a>\n        <button
+        class=\"thin-button episode-button translate-subtitle\">\n          + Nueva
+        traducci\xF3n\n        </button>\n      </div>\n    </div>\n    <div id=\"season-line\">\n
+        \     <span class=\"text bold spaced-wide choices-title\">TEMPORADA</span>\n
+        \     <div id=\"season-choices\" class=\"choices no-scroll-bar\">\n                  <a
+        href=\"/episodes/1293/doctor-who-11x00-twice-upon-a-time-christmas-special\"
+        class=\"choice \">11</a>\n                  <a href=\"/episodes/3785/doctor-who-12x00-resolution\"
+        class=\"choice \">12</a>\n                  <a href=\"/episodes/7196/doctor-who-13x00-revolution-of-the-daleks\"
+        class=\"choice selected\">13</a>\n              </div>\n    </div>\n    <div
+        id=\"episode-line\">\n      <span class=\"text bold spaced-wide choices-title\">EPISODIO</span>\n
+        \     <div id=\"episode-choices\" class=\"choices no-scroll-bar\">\n                  <a
+        href=\"/episodes/7196/doctor-who-13x00-revolution-of-the-daleks\" class=\"choice
+        \">0</a>\n                  <a href=\"/episodes/8623/doctor-who-13x01-chapter-one-the-halloween-apocalypse\"
+        class=\"choice \">1</a>\n                  <a href=\"/episodes/8651/doctor-who-13x02-chapter-two-war-of-sontarans\"
+        class=\"choice \">2</a>\n                  <a href=\"/episodes/8685/doctor-who-13x03-chapter-three-once-upon-time\"
+        class=\"choice selected\">3</a>\n                  <a href=\"/episodes/8723/doctor-who-13x04-chapter-four-village-of-the-angels\"
+        class=\"choice \">4</a>\n                  <a href=\"/episodes/8743/doctor-who-13x05-chapter-five-survivors-of-the-flux\"
+        class=\"choice \">5</a>\n                  <a href=\"/episodes/8773/doctor-who-13x06-chapter-six-the-vanquishers\"
+        class=\"choice \">6</a>\n                  <a href=\"/episodes/8854/doctor-who-13x97-eve-of-the-daleks\"
+        class=\"choice \">97</a>\n                  <a href=\"/episodes/9243/doctor-who-13x98-legend-of-the-sea-devils\"
+        class=\"choice \">98</a>\n                  <a href=\"/episodes/9689/doctor-who-13x99-the-power-of-the-doctor\"
+        class=\"choice \">99</a>\n              </div>\n    </div>\n  </div>\n\n  <div
+        id=\"languages\">\n    <div id=\"languages-header\">\n    <h4>Versiones</h4>\n
+        \                                                                                                                           <div
+        id=\"download-count\" class=\"text tiny hint--left\" data-hint='English -
+        626&#10;&#10;Espa\xF1ol (Espa\xF1a) - 2.464' >\n      <i class=\"fas fa-arrow-alt-circle-down\"></i>\n
+        \     <span id=\"count\" class=\"text bold\">3 090</span>\n      <span >descargas</span>\n
+        \   </div>\n    </div>\n          <div class=\"language-container w-box-shadow\">\n
+        \       <button class=\"collapser-button blue-a\">\n          <i class=\"fas
+        fa-chevron-up\"></i>\n        </button>\n\n        <div class=\"text small
+        bold blue-a language-name\"  data-lang-id=\"1\">English</div>\n\n        <div
+        class=\"language-content\">\n                      <template id=\"subtitle-properties-21994\">\n
+        \ <div class=\"form-wrap\">\n    <form action=\"subtitles/21994/properties\"
+        method=\"POST\">\n      <h3>Propiedades del subt\xEDtulo</h2>\n      <div
+        class='form-field validated' fieldname=\"Nombre de versi\xF3n\">\n        <input
+        id=\"vname\" type=\"text\" class=\"form_input\"\n          name=\"vname\"
+        value=\"UKTV/TORRENTGALAXY\" required>\n        <i class=\"fas fa-code-branch\"></i>\n
+        \     </div>\n\n      <div class='form-field validated' fieldname=\"Comentario
+        de versi\xF3n\">\n        <input id=\"vcomment\" type=\"text\" class=\"form_input\"\n
+        \         name=\"vcomment\" value=\"De iPlayer, sin colores, sin acotaciones,
+        l\xEDneas de dialogo y para cr\xE9ditos a\xF1adidas.\" required>\n        <i
+        class=\"fas fa-comment\"></i>\n      </div>\n\n      <div class='form-field
+        validated' fieldname=\"Idioma\">\n        <select name=\"lang\" id=\"lang\"
+        class=\"form_input\" required>\n          <option value=\"\" disabled>Selecciona
+        un idioma</option>\n                      <option value=\"en-en\" selected>English</option>\n
+        \                     <option value=\"es-es\" >Espa\xF1ol (Espa\xF1a)</option>\n
+        \                     <option value=\"es-lat\" >Espa\xF1ol (Latinoam\xE9rica)</option>\n
+        \                     <option value=\"fr-fr\" >Fran\xE7ais</option>\n                      <option
+        value=\"ca-es\" >Catal\xE0</option>\n                      <option value=\"gl-es\"
+        >Galego</option>\n                  </select>\n        <i class=\"fas fa-globe\"></i>\n
+        \     </div>\n\n      <button id=\"save-edit\" type=\"submit\" class='button
+        button-fat'>Guardar</button>\n    </form>\n  </div>\n</template>\n                                      \n
+        \                       \n            <div class=\"version-container \">\n
+        \             <p class=\"text mini\">versi\xF3n</p>\n              <p class=\"text
+        tiny spaced bold\">UKTV/TORRENTGALAXY</p>\n              <div class=\"version-info\">\n
+        \               <div class=\"version-buttons\">\n                                    <a
+        rel=\"nofollow\" href=\"/subtitles/21994/download\">\n                                      <div
+        class=\"download-button \">\n                      <i class=\"far fa-arrow-alt-circle-down\"></i>\n
+        \                   </div>\n                                    </a>\n                                    <a
+        rel=\"nofollow\" href=\"/subtitles/21994/translate\">\n                    <div
+        class=\"edit-button-wrap\">\n                      <div class=\"edit-button\">\n
+        \                       <i class=\"fas fa-pencil-alt\"></i>\n                      </div>\n
+        \                   </div>\n                  </a>\n                </div>\n
+        \               <div class=\"progress-bar-container\">\n                                      <div
+        class=\"subtitle-uploader\">\n                      <span class=\"text mini\">\n
+        \                                               ORIGINAL\n                        \n
+        \                                             </span>\n                      <a
+        rel=\"nofollow\" href=\"/users/54\" class=\"uploader_name text tiny bold blue-a\">\n
+        \                       <i class=\"fas fa-file-import\"></i>\n                        ClaraTL\n
+        \                     </a>\n                    </div>\n                                    <div
+        class=\"more-info\">\n                                        <span class=\"text
+        small\">\n                      <i class=\"fa fa-comment\" aria-hidden=\"true\"></i>
+        De iPlayer, sin colores, sin acotaciones, l\xEDneas de dialogo y para cr\xE9ditos
+        a\xF1adidas.\n                    </span>\n                                      </div>\n
+        \               </div>\n                              </div>\n            </div>\n
+        \                 </div>\n      </div>\n          <div class=\"language-container
+        w-box-shadow\">\n        <button class=\"collapser-button blue-a\">\n          <i
+        class=\"fas fa-chevron-up\"></i>\n        </button>\n\n        <div class=\"text
+        small bold blue-a language-name\"  data-lang-id=\"5\">Espa\xF1ol (Espa\xF1a)</div>\n\n
+        \       <div class=\"language-content\">\n                      <template
+        id=\"subtitle-properties-21995\">\n  <div class=\"form-wrap\">\n    <form
+        action=\"subtitles/21995/properties\" method=\"POST\">\n      <h3>Propiedades
+        del subt\xEDtulo</h2>\n      <div class='form-field validated' fieldname=\"Nombre
+        de versi\xF3n\">\n        <input id=\"vname\" type=\"text\" class=\"form_input\"\n
+        \         name=\"vname\" value=\"UKTV/TORRENTGALAXY\" required>\n        <i
+        class=\"fas fa-code-branch\"></i>\n      </div>\n\n      <div class='form-field
+        validated' fieldname=\"Comentario de versi\xF3n\">\n        <input id=\"vcomment\"
+        type=\"text\" class=\"form_input\"\n          name=\"vcomment\" value=\"De
+        iPlayer, sin colores, sin acotaciones, l\xEDneas de dialogo y para cr\xE9ditos
+        a\xF1adidas.\" required>\n        <i class=\"fas fa-comment\"></i>\n      </div>\n\n
+        \     <div class='form-field validated' fieldname=\"Idioma\">\n        <select
+        name=\"lang\" id=\"lang\" class=\"form_input\" required>\n          <option
+        value=\"\" disabled>Selecciona un idioma</option>\n                      <option
+        value=\"en-en\" >English</option>\n                      <option value=\"es-es\"
+        selected>Espa\xF1ol (Espa\xF1a)</option>\n                      <option value=\"es-lat\"
+        >Espa\xF1ol (Latinoam\xE9rica)</option>\n                      <option value=\"fr-fr\"
+        >Fran\xE7ais</option>\n                      <option value=\"ca-es\" >Catal\xE0</option>\n
+        \                     <option value=\"gl-es\" >Galego</option>\n                  </select>\n
+        \       <i class=\"fas fa-globe\"></i>\n      </div>\n\n      <button id=\"save-edit\"
+        type=\"submit\" class='button button-fat'>Guardar</button>\n    </form>\n
+        \ </div>\n</template>\n                                      \n                        \n
+        \           <div class=\"version-container \">\n              <p class=\"text
+        mini\">versi\xF3n</p>\n              <p class=\"text tiny spaced bold\">UKTV/TORRENTGALAXY</p>\n
+        \             <div class=\"version-info\">\n                <div class=\"version-buttons\">\n
+        \                                   <a rel=\"nofollow\" href=\"/subtitles/21995/download\">\n
+        \                                     <div class=\"download-button \">\n                      <i
+        class=\"far fa-arrow-alt-circle-down\"></i>\n                    </div>\n
+        \                                   </a>\n                                    <a
+        rel=\"nofollow\" href=\"/subtitles/21995/translate\">\n                    <div
+        class=\"edit-button-wrap\">\n                      <div class=\"edit-button\">\n
+        \                       <i class=\"fas fa-pencil-alt\"></i>\n                      </div>\n
+        \                   </div>\n                  </a>\n                </div>\n
+        \               <div class=\"progress-bar-container\">\n                                      <div
+        class=\"progress-bar \">\n                                            <div
+        class=\"progress progress_100\"\n                        style=\"width: 100%\">\n
+        \                     </div>\n                    </div>\n                                    <div
+        class=\"more-info\">\n                                          <span class=\"text
+        small bold percentage-value\">\n                        100%\n                      </span>\n
+        \                                                           </div>\n                </div>\n
+        \                             </div>\n            </div>\n                      <template
+        id=\"subtitle-properties-22008\">\n  <div class=\"form-wrap\">\n    <form
+        action=\"subtitles/22008/properties\" method=\"POST\">\n      <h3>Propiedades
+        del subt\xEDtulo</h2>\n      <div class='form-field validated' fieldname=\"Nombre
+        de versi\xF3n\">\n        <input id=\"vname\" type=\"text\" class=\"form_input\"\n
+        \         name=\"vname\" value=\"ION10/GOSSIP\" required>\n        <i class=\"fas
+        fa-code-branch\"></i>\n      </div>\n\n      <div class='form-field validated'
+        fieldname=\"Comentario de versi\xF3n\">\n        <input id=\"vcomment\" type=\"text\"
+        class=\"form_input\"\n          name=\"vcomment\" value=\"Subt\xEDtulos traducidos
+        aqu\xED, sincronizados para WEBRip ION10 y GOSSIP (720p y 1080p).\" required>\n
+        \       <i class=\"fas fa-comment\"></i>\n      </div>\n\n      <div class='form-field
+        validated' fieldname=\"Idioma\">\n        <select name=\"lang\" id=\"lang\"
+        class=\"form_input\" required>\n          <option value=\"\" disabled>Selecciona
+        un idioma</option>\n                      <option value=\"en-en\" >English</option>\n
+        \                     <option value=\"es-es\" selected>Espa\xF1ol (Espa\xF1a)</option>\n
+        \                     <option value=\"es-lat\" >Espa\xF1ol (Latinoam\xE9rica)</option>\n
+        \                     <option value=\"fr-fr\" >Fran\xE7ais</option>\n                      <option
+        value=\"ca-es\" >Catal\xE0</option>\n                      <option value=\"gl-es\"
+        >Galego</option>\n                  </select>\n        <i class=\"fas fa-globe\"></i>\n
+        \     </div>\n\n      <button id=\"save-edit\" type=\"submit\" class='button
+        button-fat'>Guardar</button>\n    </form>\n  </div>\n</template>\n                                      \n
+        \                       \n            <div class=\"version-container \">\n
+        \             <p class=\"text mini\">versi\xF3n</p>\n              <p class=\"text
+        tiny spaced bold\">ION10/GOSSIP</p>\n              <div class=\"version-info\">\n
+        \               <div class=\"version-buttons\">\n                                    <a
+        rel=\"nofollow\" href=\"/subtitles/22008/download\">\n                                      <div
+        class=\"download-button \">\n                      <i class=\"far fa-arrow-alt-circle-down\"></i>\n
+        \                   </div>\n                                    </a>\n                                    <a
+        rel=\"nofollow\" href=\"/subtitles/22008/translate\">\n                    <div
+        class=\"edit-button-wrap\">\n                      <div class=\"edit-button\">\n
+        \                       <i class=\"fas fa-pencil-alt\"></i>\n                      </div>\n
+        \                   </div>\n                  </a>\n                </div>\n
+        \               <div class=\"progress-bar-container\">\n                                      <div
+        class=\"subtitle-uploader\">\n                      <span class=\"text mini\">\n
+        \                                               RESINCRONIZADO\n                        \n
+        \                                             </span>\n                      <a
+        rel=\"nofollow\" href=\"/users/2\" class=\"uploader_name text tiny bold blue-a\">\n
+        \                       <i class=\"fas fa-file-import\"></i>\n                        marilynbrown2\n
+        \                     </a>\n                    </div>\n                                    <div
+        class=\"more-info\">\n                                        <span class=\"text
+        small\">\n                      <i class=\"fa fa-comment\" aria-hidden=\"true\"></i>
+        Subt\xEDtulos traducidos aqu\xED, sincronizados para WEBRip ION10 y GOSSIP
+        (720p y 1080p).\n                    </span>\n                                      </div>\n
+        \               </div>\n                              </div>\n            </div>\n
+        \                 </div>\n      </div>\n      </div>\n\n  <div id=\"comments-container\"
+        class=\"comments-container\">\n    \n    <h4 class=\"comment-header\">Comentarios
+        ({{comments.length}})</h4>\n    \n\n    <comment v-for=\"comment in comments\"\n
+        \       :key=\"comment.id\"\n        :id=\"comment.id\"\n        :user=\"comment.user\"\n
+        \       :base-text=\"comment.text\"\n        :published-at=\"comment.published_at\"\n
+        \       :edited-at=\"comment.edited_at\"\n        :pinned=\"comment.pinned\"\n
+        \       @remove=\"remove\"\n        @pin=\"pin\"\n        @save=\"save\"\n
+        \     >\n    </comment>\n    <div class=\"no-comments\" v-if=\"comments.length
+        == 0\">Nadie ha dejado su comentario a\xFAn.</div>\n\n          <div class='newcomment-box'>\n
+        \                 <div class=\"open-comment disabled\">\n            <textarea
+        id=\"new-comment\" rows=\"2\" class=\"textarea\" disabled>Debes estar identificado
+        para poder dejar comentarios</textarea>\n          </div>\n              </div>\n
+        \     </div>\n</div>\n\n<template id=\"new-translation\">\n  <div class=\"form-wrap\">\n
+        \   <h3>Nueva traducci\xF3n</h3>\n    <form action=\"/subtitles/translate\"
+        method=\"POST\">\n      <input type=\"hidden\" name=\"episode\" value=\"8685\"
+        />\n      <div class=\"form-field validated dropdown-field\" fieldname=\"Idioma\">\n
+        \       <i class=\"fas fa-chevron-down dropdown\"></i>\n        <select name=\"lang\"
+        id=\"translate-to-lang\" required>\n          <option value=\"\" disabled
+        selected>Selecciona un idioma</option>\n                                    <option
+        value=\"en-en\">English</option>\n                                                <option
+        value=\"es-es\">Espa\xF1ol (Espa\xF1a)</option>\n                                                <option
+        value=\"es-lat\">Espa\xF1ol (Latinoam\xE9rica)</option>\n                                                <option
+        value=\"fr-fr\">Fran\xE7ais</option>\n                                                <option
+        value=\"ca-es\">Catal\xE0</option>\n                                                <option
+        value=\"gl-es\">Galego</option>\n                              </select>\n
+        \       <i class=\"fas fa-globe\"></i>\n      </div>\n      <button type=\"submit\"
+        id=\"open-translation\">Abrir traducci\xF3n</button>\n    </form>\n  </div>\n</template>\n\n\n\n
+        \     <footer id=\"footer\">\n        <div id=\"footer-content\">\n          <div
+        id=\"in-memory-of\">\n            <div id=\"in-memory-of-content\">\n              <p>en
+        memoria de</p>\n              <p>SUBTITULOS.ES</p>\n              <p>(2008-2015)</p>\n
+        \             <p class='disclaimer-row'><a href='/disclaimer'>Disclaimer</a></p>\n
+        \           </div>\n          </div>\n          <div id=\"page-navigation\">\n
+        \           <p class=\"text light small logo-text\">&#169; subtitulamos.tv</p>\n
+        \           <nav id=\"page-links\" class=\"text thin tiny\">\n              <a
+        class=\"text light\" href=\"https://github.com/subtitulamos/subtitulamos\"
+        target=\"_blank\">GitHub</a>\n              <a class=\"text light\" href=\"/rules\">Normas
+        de traducci\xF3n</a>\n              <a class=\"text light\" href=\"https://foro.subtitulamos.tv/\"
+        target=\"_blank\">Foro</a>\n              <a class=\"text light\" href=\"/shows\">\xCDndice
+        de series</a>\n            </nav>\n            <nav class=\"social-networks\">\n
+        \             <a class=\"text light\" href=\"https://foro.subtitulamos.tv/\"
+        title=\"Foro\" target=\"_blank\"><i class=\"fab fa-forumbee\" aria-hidden=\"true\"></i></a>\n
+        \             <a class=\"text light\" href=\"https://www.facebook.com/subtitulamos.tv\"
+        title=\"Facebook\" target=\"_blank\"><i class=\"fab fa-facebook-f\" aria-hidden=\"true\"></i></a>\n
+        \             <a class=\"text light\" href=\"https://twitter.com/subtitulamostv\"
+        title=\"Twitter\" target=\"_blank\"><i class=\"fab fa-twitter\" aria-hidden=\"true\"></i></a>\n
+        \             <a class=\"text light\" href=\"https://t.me/subtitulamostv\"
+        title=\"Telegram\" target=\"_blank\"><i class=\"fab fa-telegram-plane\" aria-hidden=\"true\"></i></a>\n
+        \             <a class=\"text light\" href=\"https://github.com/subtitulamos/subtitulamos\"
+        title=\"GitHub\" target=\"_blank\"><i class=\"fab fa-github\" aria-hidden=\"true\"></i></a>\n
+        \             <a class=\"text light\" href=\"/rss\" title=\"RSS\" target=\"_blank\"><i
+        class=\"fas fa-rss\" aria-hidden=\"true\"></i></a>\n            </nav>\n          </div>\n
+        \       </div>\n      </footer>\n    </div>\n  </div>\n\n      <script type=\"text/javascript\"
+        src=\"js/vendor.b749971c14518ffbfafc.bundle.js\" ></script>\n\n    <script
+        type=\"text/javascript\" src=\"js/app.06fc2580f3864eeace40.bundle.js\" ></script>\n\n
+        \  \n  <script src=\"https://cdn.jsdelivr.net/npm/sweetalert2@9\"></script>\n
+        \ <script>\n    const Toast = Swal.mixin({\n      toast: true,\n      position:
+        'bottom-end',\n      showConfirmButton: false,\n      timer: 4000\n    });\n
+        \   const Toasts = {\n      error: Toast.mixin({icon: 'error', timer: 8000}),\n
+        \     success: Toast.mixin({icon: 'success', timer: 5000}),\n      info: Toast.mixin({icon:
+        'info', timer: 5000})\n    };\n  </script>\n  <template id='tpl-login'>\n
+        \   <h3>Inicio de sesi\xF3n</h3>\n    <div class=\"form-wrap\">\n      <form
+        id=\"login-form\">\n        <div class=\"form-field text small\" fieldname=\"Nombre
+        de usuario\">\n          <input type=\"text\" id=\"username\" required autocomplete=\"username\">\n
+        \         <i class=\"fas fa-user\" aria-hidden=\"true\"></i>\n        </div>\n
+        \       <div class=\"form-field text small\" fieldname=\"Contrase\xF1a\">\n
+        \         <input type=\"password\" id=\"password\" required autocomplete=\"current-password\">\n
+        \         <i class=\"fas fa-key\" aria-hidden=\"true\"></i>\n        </div>\n
+        \       <div class=\"form-error\" id='login-error'></div>\n        <button
+        id='login-button' type=\"submit\" class=\"text light\">Iniciar sesi\xF3n</button>\n
+        \     </form>\n    </div>\n  </template>\n  <template id='tpl-register'>\n
+        \   <h3>Registro</h3>\n    <div class=\"form-wrap\">\n      <form id=\"register-form\"
+        action=\"/register\" method=\"POST\">\n        <div class=\"form-field text
+        small validated\" fieldname=\"Nombre de usuario\">\n          <input type=\"text\"
+        name=\"username\" required autocomplete=\"off\">\n          <i class=\"fas
+        fa-user\" aria-hidden=\"true\"></i>\n        </div>\n        <div class=\"form-field
+        text small validated\" fieldname=\"Contrase\xF1a\">\n          <input type=\"password\"
+        name=\"password\" required autocomplete=\"off\">\n          <i class=\"fas
+        fa-key\" aria-hidden=\"true\"></i>\n        </div>\n        <div class=\"form-field
+        text small validated\" fieldname=\"Confirmar contrase\xF1a\">\n          <input
+        type=\"password\" name=\"password-confirmation\" required autocomplete=\"off\">\n
+        \         <i class=\"fas fa-key\" aria-hidden=\"true\"></i>\n        </div>\n
+        \       <div class=\"form-field text small validated\" fieldname=\"Correo
+        electr\xF3nico\">\n          <input type=\"email\" name=\"email\" required>\n
+        \         <i class=\"fas fa-envelope\" aria-hidden=\"true\"></i>\n        </div>\n
+        \       <div id=\"register-checkbox\">\n          <input type='checkbox' name=\"terms\"
+        required>\n          Acepto las reglas y las condiciones generales de uso
+        del sitio web\n        </div>\n        <div class=\"form-error\" id='register-error'></div>\n
+        \       <button id='register-button' type=\"submit\" class=\"text light\">Registrarme</button>\n
+        \     </form>\n    </div>\n  </template>\n    <script type=\"text/javascript\">\n
+        \   var userId = 0;\n    var epId = 8685;\n    var MAX_USER_EDIT_SECONDS =
+        60;\n    var canDeleteComments = false;\n    var canEditComments = false;\n
+        \   var canPinComments = false;\n    var canEditProperties = false;\n    var
+        isBanned = false;\n  </script>\n    <script type=\"text/javascript\" src=\"js/episode.6090abffe69f45e739c2.bundle.js\"
+        ></script>\n\n</body>\n"
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 8ce9948e4f3e86bc-MAD
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - text/html; charset=UTF-8
+      Date:
+      - Sun, 06 Oct 2024 23:55:05 GMT
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=qwxujZebo6lUfNCLeJ0i6eVbTfvlQNV1hHtYNHrSz6ylV6ks8JZJ%2FCiogK0mkkdxEEFOTG6Qx85mRPAlCSPyf59pbeXA9mdKhMQfSgzjyDHiSGry0aahJHL%2BSprCNdDl4crnJFXU"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
+      Transfer-Encoding:
+      - chunked
+      X-Powered-By:
+      - PHP/7.4.14
+      content-length:
+      - '26976'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - PHPSESSID=1a7813bnqe272lndfpes8ohdf5
+      Referer:
+      - /episodes/8685/doctor-who-13x03-chapter-three-once-upon-time
+      User-Agent:
+      - Subliminal/2.2
+    method: GET
+    uri: https://www.subtitulamos.tv/subtitles/21994/download
+  response:
+    body:
+      string: "1\r\n00:00:02,000 --> 00:00:04,838\r\n- What in the name of the saints?\r\n-
+        But what is it you are saving them from?\r\n\r\n2\r\n00:00:04,840 --> 00:00:06,878\r\n-
+        The Flux.\r\n- What's the Flux?\r\n\r\n3\r\n00:00:06,880 --> 00:00:10,598\r\nThis
+        is Serving Commander\r\nInston-Vee Vinder leaving his post.\r\n\r\n4\r\n00:00:10,600
+        --> 00:00:12,478\r\nSo, we still on\r\nfor Halloween drinks?\r\n\r\n5\r\n00:00:12,480
+        --> 00:00:14,478\r\n- Eight o'clock.\r\n- Don't keep me waiting, you.\r\n\r\n6\r\n00:00:14,480
+        --> 00:00:16,198\r\nDiane. Come on in.\r\n\r\n7\r\n00:00:16,200 --> 00:00:17,278\r\nFour...\r\n\r\n8\r\n00:00:17,280
+        --> 00:00:19,478\r\n- Hello again, Doctor.\r\n- Who are you?\r\n\r\n9\r\n00:00:19,480
+        --> 00:00:20,678\r\n..three...\r\n\r\n10\r\n00:00:20,680 --> 00:00:23,798\r\nExplain
+        Mouri. Explain Atropos.\r\n\r\n11\r\n00:00:23,800 --> 00:00:25,678\r\nBefore
+        Atropos, time ran wild.\r\n\r\n12\r\n00:00:25,680 --> 00:00:27,798\r\nAll
+        time passes through the Mouri.\r\n\r\n13\r\n00:00:27,800 --> 00:00:31,198\r\nIf
+        the Mouri are broken,\r\ntime shall run unstoppable.\r\n\r\n14\r\n00:00:31,200
+        --> 00:00:32,558\r\n..two...\r\n\r\n15\r\n00:00:32,560 --> 00:00:34,158\r\nThe
+        Temple of Atropos is broken...\r\n\r\n16\r\n00:00:34,160 --> 00:00:35,918\r\nYou
+        know how to fix this?\r\n\r\n17\r\n00:00:35,920 --> 00:00:38,198\r\n- ..so
+        I made a short term repair.\r\n- Yaz!\r\n\r\n18\r\n00:00:38,200 --> 00:00:40,038\r\n-
+        Tell me what you want.\r\n- ..one.\r\n\r\n19\r\n00:00:40,040 --> 00:00:42,120\r\nAll
+        in good time.\r\n\r\n20\r\n00:00:45,057 --> 00:00:49,768\r\n_\r\n\r\n21\r\n00:00:51,840
+        --> 00:00:55,918\r\nWhat I learned in the immediate\r\naftermath of the Flux\r\n\r\n22\r\n00:00:55,920
+        --> 00:00:57,678\r\nseems obvious now.\r\n\r\n23\r\n00:00:57,680 --> 00:01:00,040\r\nBut
+        it's only obvious\r\nonce you've lived it.\r\n\r\n24\r\n00:01:02,400 --> 00:01:05,318\r\nThe
+        biggest changes\r\nto our lives start small.\r\n\r\n25\r\n00:01:05,320 -->
+        00:01:08,998\r\nCatastrophes creep in quietly.\r\n\r\n26\r\n00:01:09,000 -->
+        00:01:10,998\r\nAnd by the time you realise,\r\n\r\n27\r\n00:01:11,000 -->
+        00:01:14,800\r\nthe life you once had\r\nis already behind you.\r\n\r\n28\r\n00:01:20,440
+        --> 00:01:22,198\r\nThe Dalek Sector is growing.\r\n\r\n29\r\n00:01:22,200
+        --> 00:01:24,038\r\nI thought I'd made it out,\r\n\r\n30\r\n00:01:24,040 -->
+        00:01:25,958\r\nbut they just keep spreading.\r\n\r\n31\r\n00:01:25,960 -->
+        00:01:28,198\r\nBecause since what\r\nsome people keep calling\r\n\r\n32\r\n00:01:28,200
+        --> 00:01:30,518\r\nthe Beginning of the End,\r\n\r\n33\r\n00:01:30,520 -->
+        00:01:33,360\r\nwho is there left to stop them?\r\n\r\n34\r\n00:01:35,760
+        --> 00:01:37,838\r\nOf course,\r\nI call it the Dalek Sector,\r\n\r\n35\r\n00:01:37,840
+        --> 00:01:39,958\r\nI don't know for certain.\r\n\r\n36\r\n00:01:39,960 -->
+        00:01:42,598\r\nBut it helps me understand,\r\n\r\n37\r\n00:01:42,600 -->
+        00:01:45,558\r\nbecause the maps definitely don't\r\nmake any sense any more.\r\n\r\n38\r\n00:01:45,560
+        --> 00:01:48,998\r\nOr the days.\r\n\r\n39\r\n00:01:49,000 --> 00:01:51,758\r\nEverything
+        is disrupted.\r\n\r\n40\r\n00:01:51,760 --> 00:01:53,638\r\nBut this isn't
+        about Daleks.\r\n\r\n41\r\n00:01:53,640 --> 00:01:55,918\r\nFor once, they're
+        not\r\nwhat worries me.\r\n\r\n42\r\n00:01:55,920 --> 00:01:57,558\r\nAt least
+        we understand them,\r\n\r\n43\r\n00:01:57,560 --> 00:01:59,640\r\nyou and
+        me, my love.\r\nWe've fought them.\r\n\r\n44\r\n00:02:03,120 --> 00:02:05,758\r\nIt's
+        the other things...\r\n\r\n45\r\n00:02:05,760 --> 00:02:08,080\r\n..whatever
+        they are.\r\n\r\n46\r\n00:02:18,040 --> 00:02:19,838\r\nAppearing from nowhere.\r\n\r\n47\r\n00:02:19,840
+        --> 00:02:21,878\r\nFeasting on the wreckage.\r\n\r\n48\r\n00:02:21,880 -->
+        00:02:25,718\r\nComing for survivors of the Flux.\r\n\r\n49\r\n00:02:25,720
+        --> 00:02:28,358\r\nI must admit, some days\r\nI feel like...\r\n\r\n50\r\n00:02:28,360
+        --> 00:02:30,480\r\n..they want to stop me\r\nfrom getting to you.\r\n\r\n51\r\n00:02:33,520
+        --> 00:02:36,600\r\nBut nothing is going to stop me\r\ngetting to you.\r\n\r\n52\r\n00:02:54,653
+        --> 00:02:58,653\r\nCREDITS\r\n\r\n53\r\n00:03:13,240 --> 00:03:15,278\r\nI
+        spend my life walking into\r\nnew places\r\n\r\n54\r\n00:03:15,280 --> 00:03:16,798\r\nand
+        weighing things up fast.\r\n\r\n55\r\n00:03:16,820 --> 00:03:18,718\r\nWho's
+        who? Who has the power?\r\nWho's in danger?\r\n\r\n56\r\n00:03:18,720 -->
+        00:03:20,478\r\nHow fast danger is coming?\r\n\r\n57\r\n00:03:20,480 --> 00:03:23,358\r\nAlso,
+        how likely my friends are\r\nto die.\r\n\r\n58\r\n00:03:23,360 --> 00:03:25,638\r\nI've
+        got good at figuring\r\nall of that out at speed.\r\n\r\n59\r\n00:03:25,640
+        --> 00:03:26,998\r\nThree...\r\n\r\n60\r\n00:03:27,000 --> 00:03:29,198\r\nRight
+        now, big danger.\r\nNo obvious solutions.\r\n\r\n61\r\n00:03:29,200 --> 00:03:31,958\r\nWell,
+        one solution,\r\none massive risk.\r\n\r\n62\r\n00:03:31,960 --> 00:03:33,958\r\n-
+        All in good time.\r\n- You don't mess with time.\r\n\r\n63\r\n00:03:33,960
+        --> 00:03:36,038\r\nYou don't put yourself\r\nand your friends\r\n\r\n64\r\n00:03:36,040
+        --> 00:03:38,678\r\nin the midst of a time storm\r\nunless there's no alternative.\r\n\r\n65\r\n00:03:38,680
+        --> 00:03:42,118\r\nJohn Burroughs once said to me,\r\n\"Leap and the net
+        will appear.\"\r\n\r\n66\r\n00:03:42,120 --> 00:03:44,438\r\nHe was talking
+        metaphorically,\r\n\r\n67\r\n00:03:44,440 --> 00:03:46,358\r\nwhereas right
+        now...\r\n\r\n68\r\n00:04:06,480 --> 00:04:07,918\r\nI'm sorry.\r\n\r\n69\r\n00:04:07,920
+        --> 00:04:10,078\r\nI had to buy us time. Literally.\r\n\r\n70\r\n00:04:10,080
+        --> 00:04:12,998\r\nWe're in the heart\r\nof the time storm,\r\n\r\n71\r\n00:04:13,000
+        --> 00:04:15,438\r\nsheltering in broken time.\r\n\r\n72\r\n00:04:15,440 -->
+        00:04:17,120\r\nNo! Yaz...\r\n\r\n73\r\n00:04:18,440 --> 00:04:20,158\r\nDan!\r\n\r\n74\r\n00:04:20,160
+        --> 00:04:22,478\r\nTime is pulling you back.\r\nI'm coming to get you.\r\n\r\n75\r\n00:04:22,480
+        --> 00:04:24,400\r\nNo!\r\n\r\n76\r\n00:04:27,760 --> 00:04:30,238\r\nHow
+        did you get in here?\r\n\r\n77\r\n00:04:30,240 --> 00:04:32,518\r\nBroken
+        and disrupted time.\r\n\r\n78\r\n00:04:32,520 --> 00:04:35,318\r\nEverything
+        is corrupted.\r\n\r\n79\r\n00:04:35,320 --> 00:04:36,880\r\nI have to rescue
+        them.\r\n\r\n80\r\n00:04:39,640 --> 00:04:42,598\r\nNo. Not me as well,\r\nI
+        have too much to do...\r\n\r\n81\r\n00:04:50,640 --> 00:04:52,278\r\nWhat's
+        the update, boss?\r\n\r\n82\r\n00:04:52,280 --> 00:04:56,238\r\nTrubial Monument
+        is down.\r\nOnly the central temple left.\r\n\r\n83\r\n00:04:56,240 --> 00:04:59,638\r\n-
+        Where are the hostages?\r\n- We don't know. No traces.\r\n\r\n84\r\n00:04:59,640
+        --> 00:05:02,958\r\nThe only information we have is five\r\nPassenger forms
+        in main temple.\r\n\r\n85\r\n00:05:02,960 --> 00:05:05,758\r\n- Where are
+        we on aerial?\r\n- Aerial shelling now complete.\r\n\r\n86\r\n00:05:05,760
+        --> 00:05:08,438\r\nShould've weakened primary defences\r\nto give us a way
+        in.\r\n\r\n87\r\n00:05:08,440 --> 00:05:10,238\r\nJust give the word.\r\n\r\n88\r\n00:05:10,240
+        --> 00:05:12,558\r\nEnough equipment remaining\r\nto breach the entrance?\r\n\r\n89\r\n00:05:12,560
+        --> 00:05:13,758\r\nYou said come prepared.\r\n\r\n90\r\n00:05:13,760 -->
+        00:05:15,958\r\nWe also have temporal erasure\r\noptions,\r\n\r\n91\r\n00:05:15,960
+        --> 00:05:17,680\r\nshould we require them.\r\n\r\n92\r\n00:05:21,320 -->
+        00:05:23,520\r\nWhere is this?\r\n\r\n93\r\n00:05:26,240 --> 00:05:27,718\r\nWhy...?\r\n\r\n94\r\n00:05:27,720
+        --> 00:05:29,758\r\nWhat are you wearing?\r\n\r\n95\r\n00:05:29,760 --> 00:05:30,998\r\nTemporal
+        hazing?\r\n\r\n96\r\n00:05:31,000 --> 00:05:32,678\r\nHappens to the best
+        of us.\r\n\r\n97\r\n00:05:32,680 --> 00:05:34,118\r\nWhen is this?\r\n\r\n98\r\n00:05:34,120
+        --> 00:05:36,598\r\nOw! What did you do that for?\r\n\r\n99\r\n00:05:36,600
+        --> 00:05:39,358\r\n- She loves doing that.\r\n- She so loves doing that.\r\n\r\n100\r\n00:05:39,360
+        --> 00:05:42,598\r\nI do love doing that.\r\nShould block the temporal hazing.\r\n\r\n101\r\n00:05:42,600
+        --> 00:05:44,318\r\nYou back with us?\r\n\r\n102\r\n00:05:44,320 --> 00:05:47,558\r\nWe
+        need to get this job done\r\nand end the siege of Atropos.\r\n\r\n103\r\n00:05:47,560
+        --> 00:05:49,958\r\nAtropos.\r\n\r\n104\r\n00:05:49,960 --> 00:05:51,560\r\nThat's
+        where I found you.\r\n\r\n105\r\n00:05:56,560 --> 00:05:59,478\r\nTell psy-ops
+        to alert the Mouri\r\nskeins, they should be on standby,\r\n\r\n106\r\n00:05:59,480
+        --> 00:06:03,558\r\nand tell the fleet to ramp up\r\nsecond wave of aerial
+        shelling.\r\n\r\n107\r\n00:06:03,560 --> 00:06:06,038\r\nWe all know why we're
+        here.\r\n\r\n108\r\n00:06:06,040 --> 00:06:09,398\r\nWe rescue those hostages,\r\nend
+        the siege, reset time\r\n\r\n109\r\n00:06:09,400 --> 00:06:12,158\r\nso the
+        universe can function again.\r\n\r\n110\r\n00:06:12,160 --> 00:06:14,758\r\nThe
+        only way in's through the front,\r\n\r\n111\r\n00:06:14,760 --> 00:06:16,798\r\nrisking
+        our lives to save others'.\r\n\r\n112\r\n00:06:16,800 --> 00:06:18,398\r\nThe
+        usual.\r\n\r\n113\r\n00:06:18,400 --> 00:06:19,920\r\nOn my command.\r\n\r\n114\r\n00:06:21,640
+        --> 00:06:23,280\r\nThe universe is relying on us.\r\n\r\n115\r\n00:06:36,000
+        --> 00:06:38,078\r\nWhat are you doing here?\r\n\r\n116\r\n00:06:38,080 -->
+        00:06:39,638\r\nI seem to have two coffees\r\n\r\n117\r\n00:06:39,640 -->
+        00:06:42,758\r\nand one of them's a skinny latte\r\nwith an extra shot.\r\n\r\n118\r\n00:06:42,760
+        --> 00:06:44,958\r\nWeird. That's the way I have it.\r\n\r\n119\r\n00:06:44,960
+        --> 00:06:46,758\r\nIs it?\r\n\r\n120\r\n00:06:46,760 --> 00:06:48,840\r\nThat's
+        lucky...\r\n\r\n121\r\n00:06:52,360 --> 00:06:54,638\r\nYou all right?\r\n\r\n122\r\n00:06:54,640
+        --> 00:06:56,438\r\nYeah, sorry.\r\n\r\n123\r\n00:06:56,440 --> 00:06:58,438\r\nJust
+        lost me bearings.\r\n\r\n124\r\n00:06:58,440 --> 00:07:01,278\r\n- So how
+        was your date?\r\n- It wasn't a date.\r\n\r\n125\r\n00:07:01,280 --> 00:07:04,438\r\nAll
+        right, so, how was your thing\r\nthat wasn't a date?\r\n\r\n126\r\n00:07:04,440
+        --> 00:07:06,518\r\nI fell asleep in front of him.\r\n\r\n127\r\n00:07:06,520
+        --> 00:07:08,038\r\nI thought you were going for pizza.\r\n\r\n128\r\n00:07:08,040
+        --> 00:07:10,318\r\nI fell asleep, in me pizza,\r\nin front of him.\r\n\r\n129\r\n00:07:10,320
+        --> 00:07:11,718\r\nNo!\r\n\r\n130\r\n00:07:11,720 --> 00:07:15,078\r\nHe
+        was so boring. I woke up with him\r\npicking bits of mozzarella\r\n\r\n131\r\n00:07:15,080
+        --> 00:07:17,398\r\noff me cheek and asking the waiter\r\nto call an ambulance.\r\n\r\n132\r\n00:07:17,400
+        --> 00:07:19,558\r\nI had to lie and tell him\r\nI was narcoleptic.\r\n\r\n133\r\n00:07:19,560
+        --> 00:07:21,680\r\nI mean, I obviously am,\r\nin reaction to him.\r\n\r\n134\r\n00:07:23,240
+        --> 00:07:24,598\r\nAm I boring you?\r\n\r\n135\r\n00:07:24,600 --> 00:07:26,840\r\nNo.
+        Just thought I saw...\r\n\r\n136\r\n00:07:28,800 --> 00:07:30,558\r\nDoesn't
+        matter.\r\n\r\n137\r\n00:07:30,560 --> 00:07:32,718\r\nWhy aren't you married?\r\n\r\n138\r\n00:07:32,720
+        --> 00:07:35,758\r\nYou're taking no prisoners tonight,\r\nare you?\r\n\r\n139\r\n00:07:35,760
+        --> 00:07:38,798\r\nYou're not a kid and you're not\r\nthe ugliest fella in
+        this city,\r\n\r\n140\r\n00:07:38,800 --> 00:07:40,958\r\nso what's wrong
+        with you?\r\n\r\n141\r\n00:07:40,960 --> 00:07:43,120\r\nWhy aren't you married\r\nwith
+        triplets?\r\n\r\n142\r\n00:07:47,800 --> 00:07:49,718\r\nIt nearly happened,
+        once.\r\n\r\n143\r\n00:07:49,720 --> 00:07:51,198\r\n15 years ago?\r\n\r\n144\r\n00:07:51,200
+        --> 00:07:53,038\r\nLost count now.\r\n\r\n145\r\n00:07:53,040 --> 00:07:54,958\r\nI
+        was engaged to get married.\r\n\r\n146\r\n00:07:54,960 --> 00:07:57,038\r\nTwo
+        days before,\r\nshe changed her mind.\r\n\r\n147\r\n00:07:57,040 --> 00:07:58,478\r\nOuch.\r\n\r\n148\r\n00:07:58,480
+        --> 00:07:59,998\r\nSaid she'd been thinking about it,\r\n\r\n149\r\n00:08:00,000
+        --> 00:08:02,758\r\nproperly couldn't bear spending\r\nthe rest of her life
+        with me.\r\n\r\n150\r\n00:08:02,760 --> 00:08:04,838\r\nSo, thought she could
+        do better.\r\n\r\n151\r\n00:08:04,840 --> 00:08:06,118\r\nOh, my God. Brutal.\r\n\r\n152\r\n00:08:06,120
+        --> 00:08:08,558\r\nThat's life, innit?\r\n\r\n153\r\n00:08:08,560 --> 00:08:10,760\r\nNobody
+        gets by without some bruises.\r\n\r\n154\r\n00:08:14,320 --> 00:08:15,880\r\nGod,
+        I loved her.\r\n\r\n155\r\n00:08:19,560 --> 00:08:21,998\r\nWhen is this?\r\n\r\n156\r\n00:08:22,000
+        --> 00:08:23,600\r\nWhat?\r\n\r\n157\r\n00:08:28,200 --> 00:08:29,558\r\nDid
+        we move?\r\n\r\n158\r\n00:08:29,560 --> 00:08:31,878\r\nHave we done this
+        before?\r\n\r\n159\r\n00:08:31,880 --> 00:08:33,518\r\nWhy am I here?\r\n\r\n160\r\n00:08:33,520
+        --> 00:08:35,398\r\nI was waiting.\r\n\r\n161\r\n00:08:35,400 --> 00:08:36,598\r\nYou
+        didn't come.\r\n\r\n162\r\n00:08:36,600 --> 00:08:38,080\r\nWhere were you,
+        Dan?\r\n\r\n163\r\n00:08:39,840 --> 00:08:41,320\r\nWhere were you, Dan?\r\n\r\n164\r\n00:08:54,440
+        --> 00:08:55,718\r\nFound you...\r\n\r\n165\r\n00:08:55,720 --> 00:08:56,918\r\nDoctor,
+        what are you doing?\r\n\r\n166\r\n00:08:56,920 --> 00:08:59,958\r\nI can't
+        hold on to everything...\r\n\r\n167\r\n00:08:59,960 --> 00:09:01,280\r\nEr...\r\n\r\n168\r\n00:09:06,720
+        --> 00:09:09,278\r\nBut if you go three doors down,\r\nthey've got them half
+        the price.\r\n\r\n169\r\n00:09:09,280 --> 00:09:11,838\r\nSo I was like, \"Have
+        you not seen\r\nwhat they're charging there?\"\r\n\r\n170\r\n00:09:11,840
+        --> 00:09:15,638\r\nAnd they were like \"No, we don't care\". So I said,\r\n\"Well,
+        why would I buy them here for this price\r\n\r\n171\r\n00:09:15,640 --> 00:09:18,998\r\n\"when
+        they're half the price three doors down?\"\r\nAnd she said, and she was so
+        snotty,\r\n\r\n172\r\n00:09:19,000 --> 00:09:22,878\r\n\"It's up to you, isn't
+        it?\" And I said, \"Yes, it is\"\r\nand I've never stepped inside that shop
+        since,\r\n\r\n173\r\n00:09:22,880 --> 00:09:26,398\r\nand who's the loser
+        now? It's not even\r\nlike I'm that bothered about satsumas.\r\n\r\n174\r\n00:09:26,400
+        --> 00:09:27,800\r\nDoctor?\r\n\r\n175\r\n00:09:30,720 --> 00:09:32,720\r\nYou
+        all right?\r\n\r\n176\r\n00:09:34,400 --> 00:09:36,080\r\nYeah.\r\n\r\n177\r\n00:09:44,840
+        --> 00:09:46,480\r\nWhat is that?\r\n\r\n178\r\n00:09:52,840 --> 00:09:54,920\r\nOh,
+        you've got a bit of\r\nsalad dressing.\r\n\r\n179\r\n00:10:01,160 --> 00:10:03,918\r\nYaz,
+        I'm trying to break through\r\nto your time stream,\r\n\r\n180\r\n00:10:03,920
+        --> 00:10:08,758\r\nbut there's a barrier, like\r\nsomething's trying to keep
+        me out...\r\n\r\n181\r\n00:10:08,760 --> 00:10:11,800\r\nThere we are. All
+        gone now.\r\n\r\n182\r\n00:10:13,840 --> 00:10:16,078\r\nQualified highest
+        in all streams.\r\n\r\n183\r\n00:10:16,080 --> 00:10:17,598\r\nExceptional
+        honours award\r\n\r\n184\r\n00:10:17,600 --> 00:10:20,318\r\nand a commendation
+        for saving\r\nthe life of three colleagues\r\n\r\n185\r\n00:10:20,320 -->
+        00:10:21,838\r\non your most recent mission.\r\n\r\n186\r\n00:10:21,840 -->
+        00:10:23,598\r\nAny pilot would have done the same.\r\n\r\n187\r\n00:10:23,600
+        --> 00:10:26,278\r\nNo. Because they didn't.\r\n\r\n188\r\n00:10:26,280 -->
+        00:10:28,838\r\nYou were the only one\r\nto fly into the blaze.\r\n\r\n189\r\n00:10:28,840
+        --> 00:10:30,918\r\nYour training craft received\r\nfatal damage.\r\n\r\n190\r\n00:10:30,920
+        --> 00:10:32,758\r\nYou were lucky to escape\r\nwith your life.\r\n\r\n191\r\n00:10:32,760
+        --> 00:10:38,038\r\nYes and no. Yes, the damage\r\nto the craft was bad.\r\n\r\n192\r\n00:10:38,040
+        --> 00:10:41,518\r\nNo, I don't believe I was lucky.\r\nI made a judgment
+        call\r\n\r\n193\r\n00:10:41,520 --> 00:10:42,878\r\nand it came off.\r\n\r\n194\r\n00:10:42,880
+        --> 00:10:44,400\r\nThat's what we train for.\r\n\r\n195\r\n00:10:49,120 -->
+        00:10:50,840\r\nI remember this.\r\n\r\n196\r\n00:10:52,080 --> 00:10:53,718\r\nBut
+        it wasn't you.\r\n\r\n197\r\n00:10:53,720 --> 00:10:55,878\r\nYou weren't
+        here.\r\n\r\n198\r\n00:10:55,880 --> 00:10:57,958\r\nCommander.\r\n\r\n199\r\n00:10:57,960
+        --> 00:11:00,038\r\nYes. Sorry.\r\n\r\n200\r\n00:11:00,040 --> 00:11:03,238\r\nNo
+        record of post-traumatic\r\npsycho disturbance.\r\n\r\n201\r\n00:11:03,240
+        --> 00:11:07,318\r\nI've taken all offers of counselling\r\nand term-coming.\r\n\r\n202\r\n00:11:07,320
+        --> 00:11:08,638\r\nNo problems.\r\n\r\n203\r\n00:11:08,640 --> 00:11:11,958\r\nDon't
+        mind me.\r\nI'm trying not to be distracting.\r\n\r\n204\r\n00:11:11,960 -->
+        00:11:13,358\r\nLet me just...\r\n\r\n205\r\n00:11:13,360 --> 00:11:15,318\r\nDid
+        you...?\r\n\r\n206\r\n00:11:15,320 --> 00:11:17,880\r\nDid I what?\r\n\r\n207\r\n00:11:20,880
+        --> 00:11:22,440\r\nNothing.\r\n\r\n208\r\n00:11:24,880 --> 00:11:27,958\r\nYou
+        do realise this is\r\na prestigious posting\r\n\r\n209\r\n00:11:27,960 -->
+        00:11:30,958\r\nwith the highest level\r\nof security clearance?\r\n\r\n210\r\n00:11:30,960
+        --> 00:11:32,358\r\nI understand.\r\n\r\n211\r\n00:11:32,360 --> 00:11:35,118\r\nYou'll
+        be permanently at the side of\r\nthe Grand Serpent.\r\n\r\n212\r\n00:11:35,120
+        --> 00:11:36,758\r\nIt will be arduous.\r\n\r\n213\r\n00:11:36,760 --> 00:11:40,278\r\nThe
+        Grand Serpent is demanding.\r\n\r\n214\r\n00:11:40,280 --> 00:11:43,118\r\n-
+        Yes. - Absolute discretion\r\nand absolute fidelity\r\n\r\n215\r\n00:11:43,120
+        --> 00:11:45,118\r\n- are the minimum expected.\r\n- I understand.\r\n\r\n216\r\n00:11:45,120
+        --> 00:11:47,798\r\nDon't make me regret this.\r\n\r\n217\r\n00:11:47,800
+        --> 00:11:49,600\r\nMeaning?\r\n\r\n218\r\n00:11:51,000 --> 00:11:52,680\r\nThe
+        posting is yours.\r\n\r\n219\r\n00:11:56,960 --> 00:11:59,878\r\nThank you,
+        sir. It's an honour.\r\n\r\n220\r\n00:11:59,880 --> 00:12:01,638\r\nIt is.\r\n\r\n221\r\n00:12:01,640
+        --> 00:12:03,638\r\nMake sure you remember that.\r\n\r\n222\r\n00:12:03,640
+        --> 00:12:05,920\r\nDo not let the Grand Serpent down.\r\n\r\n223\r\n00:12:22,200
+        --> 00:12:23,720\r\nBlow the doors in.\r\n\r\n224\r\n00:12:33,880 --> 00:12:36,438\r\nI've
+        got about 11 nitros\r\nof reducer left.\r\n\r\n225\r\n00:12:36,440 --> 00:12:38,158\r\nWe
+        use it soon as the doors go.\r\n\r\n226\r\n00:12:38,160 --> 00:12:41,238\r\nKeeps
+        us at normal speed but slows\r\ndown the rest of the environment.\r\n\r\n227\r\n00:12:41,240
+        --> 00:12:43,120\r\nWe've gotta make\r\nthe most of it...\r\n\r\n228\r\n00:12:44,960
+        --> 00:12:48,680\r\nOur entire focus is\r\nlocate the Ravagers.\r\n\r\n229\r\n00:13:02,160
+        --> 00:13:04,598\r\nOh, wow, supersized Mouri.\r\n\r\n230\r\n00:13:04,600
+        --> 00:13:06,838\r\nHey, where was I?\r\nThat wasn't my time stream.\r\n\r\n231\r\n00:13:06,840
+        --> 00:13:09,318\r\nAnd why were Dan, Yaz\r\nand that lad there?\r\n\r\n232\r\n00:13:09,320
+        --> 00:13:12,038\r\nYou have put yourself at risk\r\nin here, Doctor.\r\n\r\n233\r\n00:13:12,040
+        --> 00:13:14,558\r\nTime is playing games with you all.\r\n\r\n234\r\n00:13:14,560
+        --> 00:13:18,558\r\nYou understand what I'm trying\r\nto do by throwing myself
+        in here.\r\n\r\n235\r\n00:13:18,560 --> 00:13:22,678\r\nThe pressure of the
+        time storm\r\nwill be too much, even for you...\r\n\r\n236\r\n00:13:22,680
+        --> 00:13:24,480\r\nI will not let them die.\r\n\r\n237\r\n00:13:25,680 -->
+        00:13:28,318\r\nI can do this.\r\n\r\n238\r\n00:13:28,320 --> 00:13:29,878\r\nI
+        can absorb it...\r\n\r\n239\r\n00:13:29,880 --> 00:13:32,758\r\nHelp me with
+        it and I can help you.\r\n\r\n240\r\n00:13:32,760 --> 00:13:34,798\r\nTime
+        resists,\r\nit is pulling you back.\r\n\r\n241\r\n00:13:34,800 --> 00:13:36,600\r\nAgh!\r\n\r\n242\r\n00:13:38,240
+        --> 00:13:40,358\r\nListen up, Ravagers.\r\n\r\n243\r\n00:13:40,360 --> 00:13:43,798\r\nYou
+        are intruders in\r\nthe Temple of Atropos.\r\n\r\n244\r\n00:13:43,800 -->
+        00:13:45,558\r\nThe Temple is surrounded.\r\n\r\n245\r\n00:13:45,560 --> 00:13:47,318\r\nThere's
+        no way out of here,\r\n\r\n246\r\n00:13:47,320 --> 00:13:48,798\r\nand no
+        way off this planet.\r\n\r\n247\r\n00:13:48,800 --> 00:13:51,598\r\nWe've
+        come to reclaim what you took.\r\n\r\n248\r\n00:13:51,600 --> 00:13:54,158\r\nYou
+        do not belong here,\r\n\r\n249\r\n00:13:54,160 --> 00:13:56,158\r\nso you
+        might as well surrender\r\n\r\n250\r\n00:13:56,160 --> 00:13:58,280\r\nto
+        save matters getting\r\ntoo unpleasant.\r\n\r\n251\r\n00:14:00,920 --> 00:14:02,878\r\nI
+        know you can hear me.\r\n\r\n252\r\n00:14:02,880 --> 00:14:05,878\r\nTell
+        your remaining troops\r\nto surrender now,\r\n\r\n253\r\n00:14:05,880 -->
+        00:14:08,040\r\nor they'll have me\r\nto answer to.\r\n\r\n254\r\n00:14:15,120
+        --> 00:14:17,358\r\nWho the hell are you?\r\n\r\n255\r\n00:14:17,360 --> 00:14:19,638\r\nAnd
+        what are you doing\r\nin my reflection?\r\n\r\n256\r\n00:14:19,640 --> 00:14:21,718\r\nWhat
+        are you doing here?\r\n\r\n257\r\n00:14:21,720 --> 00:14:24,398\r\nIs this
+        the Atropos\r\ndefence systems?\r\n\r\n258\r\n00:14:24,400 --> 00:14:25,798\r\nI'm
+        you.\r\n\r\n259\r\n00:14:25,800 --> 00:14:27,278\r\nWhich means...\r\n\r\n260\r\n00:14:27,280
+        --> 00:14:29,478\r\n..this is my past.\r\n\r\n261\r\n00:14:29,480 --> 00:14:30,718\r\nI'm
+        in a memory.\r\n\r\n262\r\n00:14:30,720 --> 00:14:32,238\r\nWhat do you mean,
+        you're me?\r\n\r\n263\r\n00:14:32,240 --> 00:14:33,878\r\nNah, I don't think
+        so.\r\n\r\n264\r\n00:14:33,880 --> 00:14:35,038\r\nI'm your future.\r\n\r\n265\r\n00:14:35,040
+        --> 00:14:37,518\r\nI threw myself into a time storm\r\nhere in the future\r\n\r\n266\r\n00:14:37,520
+        --> 00:14:39,278\r\nto protect myself and my friends.\r\n\r\n267\r\n00:14:39,280
+        --> 00:14:41,198\r\nBut it's thrown me down\r\ninto my own time stream,\r\n\r\n268\r\n00:14:41,200
+        --> 00:14:42,878\r\nin the middle of a memory\r\nthat I've lost.\r\n\r\n269\r\n00:14:42,880
+        --> 00:14:44,478\r\nI'm losing control of it all...\r\n\r\n270\r\n00:14:44,480
+        --> 00:14:46,838\r\nNo time to admire yourself, boss!\r\n\r\n271\r\n00:14:46,840
+        --> 00:14:49,998\r\nBit of praise for the effective\r\nreducer wouldn't go
+        amiss.\r\n\r\n272\r\n00:14:50,000 --> 00:14:52,398\r\nYeah. You're pretty
+        smart\r\nfor a dog.\r\n\r\n273\r\n00:14:52,400 --> 00:14:55,718\r\n- Oi! Language.\r\n-
+        What did you call him?\r\n\r\n274\r\n00:14:55,720 --> 00:14:57,958\r\nTell
+        me who you are.\r\nAll of you.\r\n\r\n275\r\n00:14:57,960 --> 00:14:59,718\r\nIf
+        this temporal hazing gets\r\nany worse,\r\n\r\n276\r\n00:14:59,720 --> 00:15:02,798\r\nwe'll
+        have to relieve her of\r\ncommand. We can't risk the mission.\r\n\r\n277\r\n00:15:02,800
+        --> 00:15:05,038\r\nWe're your team.\r\n\r\n278\r\n00:15:05,040 --> 00:15:06,640\r\nMy
+        team...\r\n\r\n279\r\n00:15:08,800 --> 00:15:11,440\r\nYou talk to her. We'll
+        cover.\r\n\r\n280\r\n00:15:12,520 --> 00:15:15,638\r\nIt's all right, boss,\r\nwe
+        understand the pressure.\r\n\r\n281\r\n00:15:15,640 --> 00:15:19,318\r\nFinal
+        push, we do this,\r\nyou're clear.\r\n\r\n282\r\n00:15:19,320 --> 00:15:20,678\r\nClear?\r\n\r\n283\r\n00:15:20,680
+        --> 00:15:23,438\r\nThey promised,\r\nthey'll stick to it. Final attack.\r\n\r\n284\r\n00:15:23,440
+        --> 00:15:25,638\r\nRetake the chamber,\r\nretake the planet.\r\n\r\n285\r\n00:15:25,640
+        --> 00:15:28,518\r\nAnd you'll be free of all this.\r\nThat's the point, isn't
+        it?\r\n\r\n286\r\n00:15:28,520 --> 00:15:30,280\r\nIf you say so...\r\n\r\n287\r\n00:15:32,400
+        --> 00:15:34,958\r\nWhy don't I know?\r\n\r\n288\r\n00:15:34,960 --> 00:15:37,118\r\nWhy
+        don't I remember how this ends?\r\n\r\n289\r\n00:15:37,120 --> 00:15:39,798\r\nIf
+        you've thrown yourself into\r\na time storm\r\n\r\n290\r\n00:15:39,800 -->
+        00:15:42,358\r\nand that storm's thrown you\r\nin here,\r\n\r\n291\r\n00:15:42,360
+        --> 00:15:43,998\r\nyou might never get back.\r\n\r\n292\r\n00:15:44,000 -->
+        00:15:46,278\r\nAnd my friends will die\r\n\r\n293\r\n00:15:46,280 --> 00:15:48,120\r\nsubmerged
+        in their own time stream.\r\n\r\n294\r\n00:15:49,400 --> 00:15:51,240\r\nThen
+        you've got a lot\r\nto figure out.\r\n\r\n295\r\n00:16:02,920 --> 00:16:06,118\r\n-
+        What am I running from?\r\n- We've got him!\r\n\r\n296\r\n00:16:06,120 -->
+        00:16:07,438\r\nDon't shoot.\r\n\r\n297\r\n00:16:07,440 --> 00:16:09,798\r\nWhy
+        are you dallying here?\r\n\r\n298\r\n00:16:09,800 --> 00:16:12,078\r\nI'm
+        not dallying,\r\nI'm trying to get out.\r\n\r\n299\r\n00:16:12,080 --> 00:16:15,918\r\nLast
+        I knew, I was somewhere else.\r\nAnd now I'm not. Again.\r\n\r\n300\r\n00:16:15,920
+        --> 00:16:17,518\r\nWhy do you disobey the task?\r\n\r\n301\r\n00:16:17,520
+        --> 00:16:19,038\r\nWhat task?\r\n\r\n302\r\n00:16:19,040 --> 00:16:20,758\r\nBack,
+        vile demons!\r\n\r\n303\r\n00:16:20,760 --> 00:16:22,400\r\nI spite you all.\r\n\r\n304\r\n00:16:24,360
+        --> 00:16:26,078\r\nNow, what is this?\r\n\r\n305\r\n00:16:26,080 --> 00:16:27,958\r\nHas
+        your mind deserted you?\r\n\r\n306\r\n00:16:27,960 --> 00:16:29,998\r\nAre
+        you now a fool?\r\n\r\n307\r\n00:16:30,000 --> 00:16:32,158\r\nIt's really
+        beginning\r\nto feel that way.\r\n\r\n308\r\n00:16:32,160 --> 00:16:34,238\r\nSo
+        where've you come from?\r\n\r\n309\r\n00:16:34,240 --> 00:16:35,918\r\nMason
+        Street, clearly.\r\n\r\n310\r\n00:16:35,920 --> 00:16:37,798\r\nMason Street,
+        Edge Hill?\r\n\r\n311\r\n00:16:37,800 --> 00:16:40,958\r\nWell, of course,
+        Edge Hill.\r\nWhere else?\r\n\r\n312\r\n00:16:40,960 --> 00:16:44,160\r\nThat's
+        right by where I live,\r\nare we near there now?\r\n\r\n313\r\n00:16:45,440
+        --> 00:16:47,518\r\nNo, sir.\r\n\r\n314\r\n00:16:47,520 --> 00:16:49,518\r\nVery
+        far.\r\n\r\n315\r\n00:16:49,520 --> 00:16:52,080\r\nVery, very far!\r\n\r\n316\r\n00:17:09,960
+        --> 00:17:11,558\r\nIs that what you were firing at?\r\n\r\n317\r\n00:17:11,560
+        --> 00:17:13,358\r\nNo.\r\n\r\n318\r\n00:17:13,360 --> 00:17:14,998\r\nThose
+        mites,\r\n\r\n319\r\n00:17:15,000 --> 00:17:17,278\r\nI have seen them remove
+        people\r\n\r\n320\r\n00:17:17,280 --> 00:17:20,118\r\nand objects from this
+        mortal plane.\r\n\r\n321\r\n00:17:20,120 --> 00:17:21,680\r\nWait, wait, they
+        return!\r\n\r\n322\r\n00:17:23,000 --> 00:17:25,038\r\nRight, stay put, don't
+        move.\r\n\r\n323\r\n00:17:25,040 --> 00:17:26,438\r\nI'm coming in.\r\n\r\n324\r\n00:17:26,440
+        --> 00:17:28,598\r\nQuantum disruption,\r\nnot exactly helping,\r\n\r\n325\r\n00:17:28,600
+        --> 00:17:30,838\r\nbut you should be safe\r\nfrom those particles here.\r\n\r\n326\r\n00:17:30,840
+        --> 00:17:33,958\r\nI'm trying to hide you, but you keep\r\nfidgeting out
+        of your time stream.\r\n\r\n327\r\n00:17:33,960 --> 00:17:35,278\r\nI'm over
+        here.\r\n\r\n328\r\n00:17:35,280 --> 00:17:36,718\r\nHang on, pushing through.\r\n\r\n329\r\n00:17:36,720
+        --> 00:17:38,120\r\nWait.\r\n\r\n330\r\n00:17:39,440 --> 00:17:40,718\r\nIt's
+        not me.\r\n\r\n331\r\n00:17:40,720 --> 00:17:42,278\r\nThe world keeps moving.\r\n\r\n332\r\n00:17:42,280
+        --> 00:17:44,318\r\nI'm hiding you here,\r\nin your own time stream,\r\n\r\n333\r\n00:17:44,320
+        --> 00:17:45,998\r\nwhile I try and get the Mouri\r\ninto place.\r\n\r\n334\r\n00:17:46,000
+        --> 00:17:48,238\r\nBut it's hard. I mean,\r\nborderline impossible.\r\n\r\n335\r\n00:17:48,240
+        --> 00:17:49,878\r\nTime is breaking,\r\n\r\n336\r\n00:17:49,880 --> 00:17:51,598\r\nhunting
+        down anomalies.\r\n\r\n337\r\n00:17:51,600 --> 00:17:53,118\r\nWhich means
+        there's a problem.\r\n\r\n338\r\n00:17:53,120 --> 00:17:55,358\r\nAnother
+        problem. A lot of problems.\r\n\r\n339\r\n00:17:55,360 --> 00:17:58,438\r\nNot
+        that I want to worry you,\r\ncos I don't, but I have. So, sorry.\r\n\r\n340\r\n00:17:58,440
+        --> 00:18:01,320\r\nI'll fix this.\r\nJust don't disappear...\r\n\r\n341\r\n00:18:03,623
+        --> 00:18:07,084\r\n_\r\n\r\n342\r\n00:18:07,680 --> 00:18:10,038\r\nGood
+        news. I found a ship.\r\n\r\n343\r\n00:18:10,040 --> 00:18:11,518\r\nOne lone
+        ship.\r\n\r\n344\r\n00:18:11,520 --> 00:18:13,198\r\nThe last relic of the
+        Lupari,\r\n\r\n345\r\n00:18:13,200 --> 00:18:15,838\r\nwho seem to have just
+        vanished\r\nfrom their home galaxy.\r\n\r\n346\r\n00:18:15,840 --> 00:18:17,838\r\nDo
+        you think the Flux got them, too?\r\n\r\n347\r\n00:18:17,840 --> 00:18:21,118\r\nAnyway,
+        we got out the space port\r\nbefore it blew up,\r\n\r\n348\r\n00:18:21,120
+        --> 00:18:23,758\r\nmade it through the outer\r\nbarriers of the Dalek Sector\r\n\r\n349\r\n00:18:23,760
+        --> 00:18:26,758\r\nwithout being exterminated, just.\r\n\r\n350\r\n00:18:26,760
+        --> 00:18:29,398\r\nThere are bodies and wreckage\r\neverywhere.\r\n\r\n351\r\n00:18:29,400
+        --> 00:18:32,158\r\nIt feels like the last days of\r\nthe universe.\r\n\r\n352\r\n00:18:32,160
+        --> 00:18:34,558\r\nAnd here I am, still doing\r\nwhat I do best,\r\n\r\n353\r\n00:18:34,560
+        --> 00:18:36,158\r\npiloting a ship.\r\n\r\n354\r\n00:18:36,160 --> 00:18:38,958\r\nOnly
+        now I'm watching\r\nplanets crumble,\r\n\r\n355\r\n00:18:38,960 --> 00:18:40,878\r\nand
+        space lanes fill with debris.\r\n\r\n356\r\n00:18:40,880 --> 00:18:43,800\r\nWho'd
+        have thought that one thing\r\ncould do so much damage?\r\n\r\n357\r\n00:18:45,200
+        --> 00:18:47,318\r\nAnd any time I think we've found\r\na brief sanctuary,\r\n\r\n358\r\n00:18:47,320
+        --> 00:18:49,000\r\nlife proves me wrong.\r\n\r\n359\r\n00:18:51,640 --> 00:18:55,478\r\nBecause
+        apparently, this is\r\nthe Cyber Sector now.\r\n\r\n360\r\n00:18:55,480 -->
+        00:18:57,478\r\nCyber Armies ransacking what's left,\r\n\r\n361\r\n00:18:57,480
+        --> 00:18:58,878\r\nconverting the few who remain,\r\n\r\n362\r\n00:18:58,880
+        --> 00:19:01,798\r\nand in the dark moments,\r\nI think...\r\n\r\n363\r\n00:19:01,800
+        --> 00:19:04,918\r\n..the bad guys have won.\r\n\r\n364\r\n00:19:04,920 -->
+        00:19:06,718\r\nBut I know what you'd say -\r\n\r\n365\r\n00:19:06,720 -->
+        00:19:10,478\r\n\"Challenges are temporary,\r\nlife is constant.\r\n\r\n366\r\n00:19:10,480
+        --> 00:19:14,318\r\n\"Don't overthink it,\r\njust move forward.\"\r\n\r\n367\r\n00:19:14,320
+        --> 00:19:16,838\r\nAnd I can still hear you\r\ntelling me that.\r\n\r\n368\r\n00:19:16,840
+        --> 00:19:20,398\r\nSo I am. We are.\r\n\r\n369\r\n00:19:20,400 --> 00:19:23,438\r\nMe
+        and Tigmi, moving forward.\r\n\r\n370\r\n00:19:23,440 --> 00:19:25,598\r\nHoping
+        that you're right.\r\n\r\n371\r\n00:19:25,600 --> 00:19:27,518\r\nHoping we'll
+        see you soon.\r\n\r\n372\r\n00:19:27,520 --> 00:19:30,438\r\nAnd I'm ignoring
+        the creature\r\nin a bar who told me,\r\n\r\n373\r\n00:19:30,440 --> 00:19:33,078\r\n\"Atropos
+        is falling,\r\nthe Mouri are compromised,\r\n\r\n374\r\n00:19:33,080 --> 00:19:35,078\r\n\"and
+        time is beginning to run wild.\"\r\n\r\n375\r\n00:19:35,080 --> 00:19:37,278\r\nBecause
+        if the Flux\r\nis eroding space,\r\n\r\n376\r\n00:19:37,280 --> 00:19:39,078\r\nand
+        time is breaking down,\r\n\r\n377\r\n00:19:39,080 --> 00:19:42,080\r\nthen
+        what hope do we ever have\r\nof finding each other again?\r\n\r\n378\r\n00:19:47,440
+        --> 00:19:49,318\r\nTake in that view.\r\n\r\n379\r\n00:19:49,320 --> 00:19:51,558\r\nYou
+        know who would never\r\nget in here?\r\n\r\n380\r\n00:19:51,560 --> 00:19:52,838\r\nFrey
+        Sampor.\r\n\r\n381\r\n00:19:52,840 --> 00:19:56,198\r\nCos they don't let
+        losers in.\r\n\r\n382\r\n00:19:56,200 --> 00:19:59,638\r\nYou have two tasks
+        as guardian\r\nof the Grand Serpent,\r\n\r\n383\r\n00:19:59,640 --> 00:20:01,318\r\nprotect
+        me\r\n\r\n384\r\n00:20:01,320 --> 00:20:06,478\r\nand record the meeting\r\nso
+        there's no...\r\n\r\n385\r\n00:20:06,480 --> 00:20:09,718\r\n..misunderstandings
+        later.\r\n\r\n386\r\n00:20:09,720 --> 00:20:12,158\r\nOur guest today comes\r\nseeking
+        a deal.\r\n\r\n387\r\n00:20:12,160 --> 00:20:13,678\r\nThe Alforia want an
+        alliance\r\n\r\n388\r\n00:20:13,680 --> 00:20:17,078\r\nwhere we shelter them\r\nunder
+        our security protocols.\r\n\r\n389\r\n00:20:17,080 --> 00:20:19,798\r\nIn
+        return,\r\n\r\n390\r\n00:20:19,800 --> 00:20:22,958\r\nthey provide our population\r\nwith
+        food and safety\r\n\r\n391\r\n00:20:22,960 --> 00:20:24,598\r\nfor generations
+        to come.\r\n\r\n392\r\n00:20:24,600 --> 00:20:26,400\r\nEverybody wins.\r\n\r\n393\r\n00:20:37,120
+        --> 00:20:39,278\r\nWhat did you say?\r\n\r\n394\r\n00:20:39,280 --> 00:20:41,198\r\nI
+        mean, I can see...\r\n\r\n395\r\n00:20:41,200 --> 00:20:44,638\r\n..that there
+        are benefits\r\nfor both sides.\r\n\r\n396\r\n00:20:44,640 --> 00:20:47,480\r\nOh.
+        You can see that?\r\n\r\n397\r\n00:20:51,960 --> 00:20:54,480\r\nYou understand
+        this.\r\n\r\n398\r\n00:20:56,640 --> 00:20:58,598\r\nSupremacy, I didn't mean...\r\n\r\n399\r\n00:20:58,600
+        --> 00:21:00,998\r\nYou want my seat?\r\n\r\n400\r\n00:21:01,000 --> 00:21:03,280\r\nDo
+        you want to be me?\r\n\r\n401\r\n00:21:08,960 --> 00:21:13,918\r\nI was only
+        expressing solidarity,\r\nSupremacy, my apologies.\r\n\r\n402\r\n00:21:13,920
+        --> 00:21:17,118\r\nI don't need solidarity\r\nfrom a grunt.\r\n\r\n403\r\n00:21:17,120
+        --> 00:21:21,880\r\nWhat I need is for you to be silent\r\nand do as you're
+        ordered.\r\n\r\n404\r\n00:21:23,560 --> 00:21:25,760\r\nUnderstood.\r\n\r\n405\r\n00:21:32,040
+        --> 00:21:33,920\r\nThey've docked.\r\n\r\n406\r\n00:21:35,600 --> 00:21:37,480\r\nBe
+        ready.\r\n\r\n407\r\n00:21:39,840 --> 00:21:41,280\r\nI don't want to relive
+        this.\r\n\r\n408\r\n00:21:42,720 --> 00:21:44,240\r\nI don't want to relive
+        this.\r\n\r\n409\r\n00:21:46,120 --> 00:21:50,838\r\nYaz, again, what are
+        you doing here?\r\n\r\n410\r\n00:21:50,840 --> 00:21:52,758\r\nCome on, you
+        are so bad at this.\r\n\r\n411\r\n00:21:52,760 --> 00:21:54,838\r\nI don't
+        even like playing\r\nvideo games.\r\n\r\n412\r\n00:21:54,840 --> 00:21:56,518\r\nNobody
+        calls them video games.\r\n\r\n413\r\n00:21:56,520 --> 00:21:58,678\r\nWhatever
+        you wanna call them,\r\nI'm not good at them.\r\n\r\n414\r\n00:21:58,680 -->
+        00:22:01,198\r\nBut you're helping me, cos this lad\r\nain't gonna look at
+        me\r\n\r\n415\r\n00:22:01,200 --> 00:22:03,318\r\nif I don't know my way\r\naround
+        a controller.\r\n\r\n416\r\n00:22:03,320 --> 00:22:04,958\r\nI'm going to
+        learn to be\r\nace at this,\r\n\r\n417\r\n00:22:04,960 --> 00:22:06,558\r\nso
+        the next time I'm in a room\r\nwith him,\r\n\r\n418\r\n00:22:06,560 --> 00:22:08,198\r\nhe's
+        going to look at me and think,\r\n\r\n419\r\n00:22:08,200 --> 00:22:10,398\r\n\"Who's
+        the sexy girl\r\nwith the nimble fingers?\"\r\n\r\n420\r\n00:22:10,400 -->
+        00:22:14,000\r\nNo human being is ever gonna look\r\nat you and think those
+        words.\r\n\r\n421\r\n00:22:16,240 --> 00:22:18,478\r\nAll right, I'm super\r\nfreaking
+        out now...\r\n\r\n422\r\n00:22:18,480 --> 00:22:21,798\r\nTo save you and
+        that lad on Atropos,\r\nwho I've not even met yet,\r\n\r\n423\r\n00:22:21,800
+        --> 00:22:23,638\r\nfrom being overwhelmed by time,\r\n\r\n424\r\n00:22:23,640
+        --> 00:22:27,278\r\nI took it upon myself to jump into\r\none of the burned
+        out Mouris' place,\r\n\r\n425\r\n00:22:27,280 --> 00:22:30,638\r\nto divert
+        you from having\r\nto absorb the Time Force...\r\n\r\n426\r\n00:22:30,640
+        --> 00:22:35,398\r\nBut if time would've overwhelmed me,\r\nwhat's it gonna
+        do to you?\r\n\r\n427\r\n00:22:35,400 --> 00:22:37,118\r\nYeah, well, I've
+        got\r\na bit more practice,\r\n\r\n428\r\n00:22:37,120 --> 00:22:39,518\r\nnot
+        to mention an entirely\r\ndifferent biology.\r\n\r\n429\r\n00:22:39,520 -->
+        00:22:41,118\r\nMe and the Mouri are connected.\r\n\r\n430\r\n00:22:41,120
+        --> 00:22:44,198\r\nWe're hiding all of you\r\nin your own time streams.\r\n\r\n431\r\n00:22:44,200
+        --> 00:22:49,318\r\nIn your own memories, past,\r\npresent or even future.\r\n\r\n432\r\n00:22:49,320
+        --> 00:22:51,958\r\nWhat you looking at me\r\nlike that for?\r\n\r\n433\r\n00:22:51,960
+        --> 00:22:54,878\r\nSorry. I'm split across\r\nmultiple events,\r\n\r\n434\r\n00:22:54,880
+        --> 00:22:56,118\r\nmultiple time streams.\r\n\r\n435\r\n00:22:56,120 -->
+        00:22:58,478\r\nI can't be constant. Multiple crisis\r\n\r\n436\r\n00:22:58,480
+        --> 00:23:01,878\r\nand I'm still trying to work out\r\nthe plan. You're camouflaged
+        here,\r\n\r\n437\r\n00:23:01,880 --> 00:23:03,638\r\nbecause this is where
+        you belong.\r\n\r\n438\r\n00:23:03,640 --> 00:23:06,678\r\nThe best place
+        to hide you all\r\nis in your own lives.\r\n\r\n439\r\n00:23:06,680 --> 00:23:10,238\r\nExcept
+        it's not.\r\nThese things haven't happened to me.\r\n\r\n440\r\n00:23:10,240
+        --> 00:23:13,998\r\nThis isn't my house,\r\nthe details are wrong.\r\n\r\n441\r\n00:23:14,000
+        --> 00:23:17,158\r\nYes, I think there's something's\r\nwrong with your time
+        stream.\r\n\r\n442\r\n00:23:17,160 --> 00:23:18,920\r\nYaz?\r\n\r\n443\r\n00:23:22,640
+        --> 00:23:23,998\r\nDon't blink.\r\n\r\n444\r\n00:23:24,000 --> 00:23:26,840\r\nThere
+        are Angels disrupting\r\nyour time stream.\r\n\r\n445\r\n00:23:29,160 -->
+        00:23:31,638\r\nIt's stalking me.\r\n\r\n446\r\n00:23:31,640 --> 00:23:33,158\r\nWhat
+        is it?!\r\n\r\n447\r\n00:23:33,160 --> 00:23:35,440\r\nQuit the game.\r\n\r\n448\r\n00:23:38,240
+        --> 00:23:39,718\r\nYou have to keep your eyes on it.\r\n\r\n449\r\n00:23:39,720
+        --> 00:23:42,678\r\nIf the Angel gets you,\r\nit will propel you back in time.\r\n\r\n450\r\n00:23:42,680
+        --> 00:23:45,478\r\nI won't know where you are,\r\nyou could be lost forever\r\n\r\n451\r\n00:23:45,480
+        --> 00:23:46,958\r\nand I won't be able to find you.\r\n\r\n452\r\n00:23:46,960
+        --> 00:23:49,480\r\nYaz, I'm being pulled away...\r\n\r\n453\r\n00:23:55,560
+        --> 00:23:57,400\r\nDo you want me to be\r\nsingle forever?\r\n\r\n454\r\n00:24:00,400
+        --> 00:24:02,158\r\nNo.\r\n\r\n455\r\n00:24:02,160 --> 00:24:03,878\r\nCome
+        on, Doctor.\r\n\r\n456\r\n00:24:03,880 --> 00:24:05,678\r\nYou're in here
+        for a reason,\r\n\r\n457\r\n00:24:05,680 --> 00:24:08,078\r\nfix the future,
+        fix Atropos,\r\n\r\n458\r\n00:24:08,080 --> 00:24:10,078\r\nprotect Yaz and
+        that lad.\r\n\r\n459\r\n00:24:10,080 --> 00:24:12,158\r\nI'm being pulled
+        away again,\r\n\r\n460\r\n00:24:12,160 --> 00:24:14,000\r\ndragged back to
+        Atropos in the past.\r\n\r\n461\r\n00:24:18,160 --> 00:24:21,198\r\nOf course
+        you've made yourselves\r\nthrones.\r\n\r\n462\r\n00:24:21,200 --> 00:24:23,238\r\nYou've
+        no shame.\r\n\r\n463\r\n00:24:23,240 --> 00:24:25,078\r\nOnly pride.\r\n\r\n464\r\n00:24:25,080
+        --> 00:24:27,438\r\nYou should know that by now.\r\n\r\n465\r\n00:24:27,440
+        --> 00:24:31,440\r\nSurrender now and your sentences\r\nwill be merciful.\r\n\r\n466\r\n00:24:32,480
+        --> 00:24:34,558\r\nBanishment...\r\n\r\n467\r\n00:24:34,560 --> 00:24:36,478\r\n..or
+        execution?\r\n\r\n468\r\n00:24:36,480 --> 00:24:38,638\r\nSurrender?\r\n\r\n469\r\n00:24:38,640
+        --> 00:24:40,518\r\nTo the four of you?\r\n\r\n470\r\n00:24:40,520 --> 00:24:42,038\r\nDon't
+        underestimate me.\r\n\r\n471\r\n00:24:42,040 --> 00:24:46,158\r\nIt's a difficult
+        moral high ground\r\nyou occupy.\r\n\r\n472\r\n00:24:46,160 --> 00:24:48,758\r\nIf
+        you don't stop killing things,\r\n\r\n473\r\n00:24:48,760 --> 00:24:50,318\r\nwe'll
+        kill you.\r\n\r\n474\r\n00:24:50,320 --> 00:24:52,918\r\nIf there's further
+        death\r\nor bloodshed,\r\n\r\n475\r\n00:24:52,920 --> 00:24:54,638\r\nyour
+        punishments will be worse.\r\n\r\n476\r\n00:24:54,640 --> 00:24:57,078\r\nErasure
+        of identity.\r\n\r\n477\r\n00:24:57,080 --> 00:25:01,918\r\nIsolation prison
+        terms for the\r\ninfinite duration of the universe.\r\n\r\n478\r\n00:25:01,920
+        --> 00:25:05,598\r\nWorking for the Division must be\r\nso compromising.\r\n\r\n479\r\n00:25:05,600
+        --> 00:25:07,998\r\nYou've already lost.\r\nI'm just trying to reason with
+        you.\r\n\r\n480\r\n00:25:08,000 --> 00:25:12,120\r\nHow can we have lost\r\nwith
+        so many hostages?\r\n\r\n481\r\n00:25:14,920 --> 00:25:19,198\r\nYou understand
+        what Passenger is?\r\n\r\n482\r\n00:25:19,200 --> 00:25:23,318\r\nThe Passenger
+        is\r\na long forbidden form.\r\n\r\n483\r\n00:25:23,320 --> 00:25:27,318\r\nBarred
+        from this dimension,\r\nfor good reason.\r\n\r\n484\r\n00:25:27,320 --> 00:25:30,438\r\nA
+        thing of beauty.\r\n\r\n485\r\n00:25:30,440 --> 00:25:32,398\r\nA holding
+        entity,\r\n\r\n486\r\n00:25:32,400 --> 00:25:35,320\r\nable to store what
+        it has\r\ncaptured within.\r\n\r\n487\r\n00:25:36,920 --> 00:25:39,878\r\nA
+        living prison,\r\n\r\n488\r\n00:25:39,880 --> 00:25:42,798\r\nwith endless
+        capacity.\r\n\r\n489\r\n00:25:42,800 --> 00:25:48,558\r\nHundreds of thousands
+        of life forms\r\nlocked away within each Passenger.\r\n\r\n490\r\n00:25:48,560
+        --> 00:25:51,158\r\nFive Passengers,\r\n\r\n491\r\n00:25:51,160 --> 00:25:53,598\r\nmillions
+        of lives.\r\n\r\n492\r\n00:25:53,600 --> 00:25:55,958\r\nKept a list, have
+        we?\r\n\r\n493\r\n00:25:55,960 --> 00:25:57,560\r\nKept the numbers?\r\n\r\n494\r\n00:26:07,440
+        --> 00:26:10,318\r\nOne Passenger destroyed.\r\nWe need the Mouri now...\r\n\r\n495\r\n00:26:10,320
+        --> 00:26:11,678\r\nI'm trying...\r\n\r\n496\r\n00:26:11,680 --> 00:26:14,678\r\nYou
+        think we would cower\r\nbefore the Division\r\n\r\n497\r\n00:26:14,680 -->
+        00:26:18,480\r\nwhen we have taken control\r\nof its dirty secret?\r\n\r\n498\r\n00:26:20,320
+        --> 00:26:24,918\r\nA planet called Time.\r\n\r\n499\r\n00:26:24,920 --> 00:26:29,518\r\nThinking
+        this could bring\r\nthe Dark Times to an end.\r\n\r\n500\r\n00:26:29,520 -->
+        00:26:33,238\r\nTime is not controllable, Doctor.\r\n\r\n501\r\n00:26:33,240
+        --> 00:26:37,118\r\nIt will not do as other beings bid.\r\n\r\n502\r\n00:26:37,120
+        --> 00:26:38,678\r\nIt will.\r\n\r\n503\r\n00:26:38,680 --> 00:26:40,238\r\nIt
+        must.\r\n\r\n504\r\n00:26:40,240 --> 00:26:46,040\r\nHere we are, still engaged\r\nin
+        the Founding Conflict.\r\n\r\n505\r\n00:26:47,600 --> 00:26:49,718\r\nThere
+        is no greater battle\r\n\r\n506\r\n00:26:49,720 --> 00:26:55,158\r\nthan this
+        the battle between\r\nTime and Space.\r\n\r\n507\r\n00:26:55,160 --> 00:26:59,038\r\nAnd
+        Time shall not lose.\r\n\r\n508\r\n00:26:59,040 --> 00:27:03,798\r\nTime shall
+        never surrender to Space.\r\n\r\n509\r\n00:27:03,800 --> 00:27:07,118\r\nNo
+        planetary mass,\r\nhowever sophisticated,\r\n\r\n510\r\n00:27:07,120 --> 00:27:10,878\r\ncan
+        imprison the force of Time.\r\n\r\n511\r\n00:27:10,880 --> 00:27:12,478\r\nThis
+        planet,\r\n\r\n512\r\n00:27:12,480 --> 00:27:16,958\r\nthis construction\r\nis
+        not just a fallacy,\r\n\r\n513\r\n00:27:16,960 --> 00:27:20,358\r\nnot just
+        futile hubris,\r\n\r\n514\r\n00:27:20,360 --> 00:27:22,278\r\nit is heresy.\r\n\r\n515\r\n00:27:22,280
+        --> 00:27:24,918\r\nAnd see how many lives it has cost.\r\n\r\n516\r\n00:27:24,920
+        --> 00:27:26,200\r\nKeep away from it...\r\n\r\n517\r\n00:27:28,520 --> 00:27:31,598\r\nThat's
+        the second.\r\nIt's a massacre in there...\r\n\r\n518\r\n00:27:31,600 -->
+        00:27:34,118\r\nWe can't let her lose any more.\r\n\r\n519\r\n00:27:34,120
+        --> 00:27:37,758\r\nThe Mouri are ready,\r\nthe Mouri are connected.\r\n\r\n520\r\n00:27:37,760
+        --> 00:27:41,118\r\nOh...\r\n\r\n521\r\n00:27:41,120 --> 00:27:43,518\r\n..is
+        that Passenger meant\r\nto glow like that?\r\n\r\n522\r\n00:27:43,520 -->
+        00:27:44,760\r\nMouri...\r\n\r\n523\r\n00:27:47,320 --> 00:27:50,838\r\nTell
+        me you did not\r\nbring them here.\r\n\r\n524\r\n00:27:50,840 --> 00:27:51,998\r\nYou
+        were warned...\r\n\r\n525\r\n00:27:52,000 --> 00:27:53,678\r\nThey shall not
+        have this!\r\n\r\n526\r\n00:27:53,680 --> 00:27:55,798\r\nYou know the thing
+        about\r\na Passenger form?\r\n\r\n527\r\n00:27:55,800 --> 00:27:57,958\r\nYou'd
+        better be sure\r\nyou know where they've been,\r\n\r\n528\r\n00:27:57,960
+        --> 00:28:00,358\r\nor everything that's held\r\ninside them,\r\n\r\n529\r\n00:28:00,360
+        --> 00:28:03,158\r\nmaybe even hidden,\r\n\r\n530\r\n00:28:03,160 --> 00:28:05,798\r\nready
+        to be summoned.\r\n\r\n531\r\n00:28:05,800 --> 00:28:09,358\r\nCos that one\r\ninfiltrated
+        your temple,\r\n\r\n532\r\n00:28:09,360 --> 00:28:12,038\r\nsubstituted for
+        one of yours,\r\n\r\n533\r\n00:28:12,040 --> 00:28:16,798\r\nand inside waiting
+        for my command...\r\n\r\n534\r\n00:28:16,800 --> 00:28:18,918\r\nOut you come,
+        Mouri.\r\n\r\n535\r\n00:28:18,920 --> 00:28:21,078\r\nThis is your time.\r\n\r\n536\r\n00:28:21,080
+        --> 00:28:23,638\r\nNo! The Mouri must not be allowed\r\nback in.\r\n\r\n537\r\n00:28:23,640
+        --> 00:28:24,998\r\nThey are banished.\r\n\r\n538\r\n00:28:25,000 --> 00:28:26,760\r\nTime
+        is not their prisoner!\r\n\r\n539\r\n00:28:28,000 --> 00:28:30,040\r\nStasis
+        fields, now.\r\n\r\n540\r\n00:28:35,920 --> 00:28:38,598\r\nWe shall not be
+        contained!\r\n\r\n541\r\n00:28:38,600 --> 00:28:41,360\r\nGet them transported\r\nout
+        of here, now.\r\n\r\n542\r\n00:28:42,960 --> 00:28:45,678\r\nMission accomplished,
+        boss.\r\n\r\n543\r\n00:28:45,680 --> 00:28:47,558\r\nYes.\r\n\r\n544\r\n00:28:47,560
+        --> 00:28:49,278\r\nI need your help.\r\n\r\n545\r\n00:28:49,280 --> 00:28:50,718\r\nYou
+        and me together.\r\n\r\n546\r\n00:28:50,720 --> 00:28:52,158\r\nWe save my
+        friends in the future\r\n\r\n547\r\n00:28:52,160 --> 00:28:54,398\r\nby replicating
+        what happened\r\nin the past.\r\n\r\n548\r\n00:28:54,400 --> 00:28:56,278\r\nSame
+        problem, same solution.\r\n\r\n549\r\n00:28:56,280 --> 00:28:59,798\r\nEmbed
+        yourselves in the Temple\r\nas you did before.\r\n\r\n550\r\n00:28:59,800
+        --> 00:29:01,558\r\nThe Passenger is there.\r\n\r\n551\r\n00:29:01,560 -->
+        00:29:04,598\r\nWe need four of you to replace\r\nthe burned-out Mouri,\r\n\r\n552\r\n00:29:04,600
+        --> 00:29:06,558\r\nlet four be waiting.\r\n\r\n553\r\n00:29:06,560 --> 00:29:08,678\r\nYou
+        have to do this\r\nor time will fracture\r\n\r\n554\r\n00:29:08,680 --> 00:29:10,680\r\nacross
+        all of the space. Please.\r\n\r\n555\r\n00:29:13,664 --> 00:29:15,164\r\n_\r\n\r\n556\r\n00:29:20,480
+        --> 00:29:22,198\r\nCome on.\r\n\r\n557\r\n00:29:22,200 --> 00:29:24,398\r\nCome
+        on, make hyper for me.\r\n\r\n558\r\n00:29:24,400 --> 00:29:26,760\r\nWhoooo!\r\n\r\n559\r\n00:29:29,000
+        --> 00:29:30,040\r\nOh, I miss that rush.\r\n\r\n560\r\n00:29:32,200 --> 00:29:33,520\r\nYeah...\r\n\r\n561\r\n00:29:34,960
+        --> 00:29:37,278\r\nHow you doing, Tigmi? Huh?\r\n\r\n562\r\n00:29:37,280
+        --> 00:29:40,360\r\nSlightly elevated, but that's\r\nto be expected, right?\r\n\r\n563\r\n00:29:42,680
+        --> 00:29:46,240\r\nRight, I'm hoping\r\nthe nav charts are up-to-date.\r\n\r\n564\r\n00:29:49,000
+        --> 00:29:50,998\r\nThey are, but they're not good.\r\n\r\n565\r\n00:29:51,000
+        --> 00:29:53,118\r\nThe Dalek Empire expanding\r\nover here.\r\n\r\n566\r\n00:29:53,120
+        --> 00:29:55,238\r\nSontarans starting\r\nto spread over here.\r\n\r\n567\r\n00:29:55,240
+        --> 00:30:00,478\r\nAnd us, exiting the Cyber Zone\r\nas fast as we can.\r\n\r\n568\r\n00:30:00,480
+        --> 00:30:03,598\r\nWait, what's that?\r\n\r\n569\r\n00:30:03,600 --> 00:30:04,880\r\nDid
+        we make it out or...?\r\n\r\n570\r\n00:30:06,000 --> 00:30:07,278\r\nGuess
+        not.\r\n\r\n571\r\n00:30:07,280 --> 00:30:09,558\r\nPrepare to convert\r\norganic
+        life forms.\r\n\r\n572\r\n00:30:09,560 --> 00:30:11,038\r\nYeah?\r\n\r\n573\r\n00:30:11,040
+        --> 00:30:12,600\r\nConvert this.\r\n\r\n574\r\n00:30:55,840 --> 00:30:58,158\r\nHow
+        many Cybermen\r\nin this part of the galaxy?\r\n\r\n575\r\n00:30:58,160 -->
+        00:31:02,438\r\n7,000,313,409.\r\n\r\n576\r\n00:31:02,440 --> 00:31:04,478\r\nI
+        like our odds, Tigmi.\r\n\r\n577\r\n00:31:04,480 --> 00:31:06,558\r\nSo what
+        is happening to Time?\r\n\r\n578\r\n00:31:06,560 --> 00:31:08,998\r\nI mean,\r\nI
+        get what happened with the Flux,\r\n\r\n579\r\n00:31:09,000 --> 00:31:10,878\r\nbut
+        something has started\r\naffecting Time.\r\n\r\n580\r\n00:31:10,880 --> 00:31:14,158\r\nCorrect.\r\nFlux
+        event affected the planet Time.\r\n\r\n581\r\n00:31:14,160 --> 00:31:15,918\r\nTemporal
+        centre cannot hold.\r\n\r\n582\r\n00:31:15,920 --> 00:31:17,438\r\nI have
+        no idea what that means.\r\n\r\n583\r\n00:31:17,440 --> 00:31:19,000\r\nBut
+        it doesn't sound good.\r\n\r\n584\r\n00:31:22,520 --> 00:31:25,438\r\nOK,
+        so, what is the strategic aim\r\n\r\n585\r\n00:31:25,440 --> 00:31:27,318\r\nof
+        the Cyber race post-Flux?\r\n\r\n586\r\n00:31:27,320 --> 00:31:29,478\r\nSecure
+        territorial advance.\r\n\r\n587\r\n00:31:29,480 --> 00:31:32,558\r\nConvert
+        all organic life forms\r\nremaining.\r\n\r\n588\r\n00:31:32,560 --> 00:31:36,038\r\nAnd
+        then what?\r\nWe shall command. We shall rule.\r\n\r\n589\r\n00:31:36,040
+        --> 00:31:38,078\r\nOver what?\r\n\r\n590\r\n00:31:38,080 --> 00:31:40,038\r\nThere's
+        barely anything left.\r\n\r\n591\r\n00:31:40,040 --> 00:31:41,438\r\nThe universe
+        is disappearing.\r\n\r\n592\r\n00:31:41,440 --> 00:31:43,278\r\nAll that is
+        left shall be ours.\r\n\r\n593\r\n00:31:43,280 --> 00:31:45,598\r\nThe Cyber
+        victory shall be ultimate.\r\n\r\n594\r\n00:31:45,600 --> 00:31:47,598\r\nIt
+        shall be hollow.\r\n\r\n595\r\n00:31:47,600 --> 00:31:49,398\r\nPointless.\r\n\r\n596\r\n00:31:49,400
+        --> 00:31:54,078\r\nSo you guys, Daleks and Sontarans,\r\nall fighting for
+        the spoils,\r\n\r\n597\r\n00:31:54,080 --> 00:31:56,958\r\nas if nothing has
+        changed.\r\n\r\n598\r\n00:31:56,960 --> 00:31:59,318\r\nIn the end, it'll
+        come down\r\nto you fighting each other\r\n\r\n599\r\n00:31:59,320 --> 00:32:02,078\r\nand
+        wiping each other out.\r\n\r\n600\r\n00:32:02,080 --> 00:32:05,000\r\nActually,\r\nthat's
+        quite a good thing.\r\n\r\n601\r\n00:32:08,160 --> 00:32:10,080\r\nWhat is
+        your mission?\r\n\r\n602\r\n00:32:13,720 --> 00:32:14,958\r\nWhat?\r\n\r\n603\r\n00:32:14,960
+        --> 00:32:16,478\r\nWhat is your mission?\r\n\r\n604\r\n00:32:16,480 --> 00:32:19,598\r\nI'm
+        one person,\r\nout here in the broken universe.\r\n\r\n605\r\n00:32:19,600
+        --> 00:32:21,718\r\nMy mission doesn't impinge on you.\r\n\r\n606\r\n00:32:21,720
+        --> 00:32:24,118\r\nI must record.\r\n\r\n607\r\n00:32:24,120 --> 00:32:25,240\r\nFine.\r\n\r\n608\r\n00:32:27,160
+        --> 00:32:29,158\r\nJust put...\r\n\r\n609\r\n00:32:29,160 --> 00:32:31,158\r\n..love.\r\n\r\n610\r\n00:32:31,160
+        --> 00:32:32,800\r\nIncorrect.\r\n\r\n611\r\n00:32:34,880 --> 00:32:36,478\r\nWhat?\r\n\r\n612\r\n00:32:36,480
+        --> 00:32:38,278\r\nLove is not a mission.\r\n\r\n613\r\n00:32:38,280 -->
+        00:32:42,798\r\nLove is an emotion.\r\nEmotions are not missions.\r\n\r\n614\r\n00:32:42,800
+        --> 00:32:44,598\r\nAnd that's why you're dead on floor,\r\n\r\n615\r\n00:32:44,600
+        --> 00:32:46,160\r\nand I put you there.\r\n\r\n616\r\n00:32:47,760 --> 00:32:49,638\r\nLove
+        is the only mission.\r\n\r\n617\r\n00:32:49,640 --> 00:32:51,040\r\nIdiot.\r\n\r\n618\r\n00:32:53,360
+        --> 00:32:55,000\r\nRight?\r\n\r\n619\r\n00:32:57,560 --> 00:33:00,198\r\nI'm
+        gonna get us\r\nto where we need to be\r\n\r\n620\r\n00:33:00,200 --> 00:33:01,560\r\nand
+        who we need to be with.\r\n\r\n621\r\n00:33:02,800 --> 00:33:04,600\r\nThat's
+        my promise to you.\r\n\r\n622\r\n00:33:16,560 --> 00:33:19,438\r\nThank you,\r\nmy
+        valued Alforian friends.\r\n\r\n623\r\n00:33:19,440 --> 00:33:22,638\r\nWell,
+        it looks like we've come\r\nto an agreement,\r\n\r\n624\r\n00:33:22,640 -->
+        00:33:24,800\r\non one condition.\r\n\r\n625\r\n00:33:26,640 --> 00:33:28,760\r\nYou
+        can stop the recording now,\r\nVinder.\r\n\r\n626\r\n00:33:31,000 --> 00:33:32,838\r\nSupremacy,
+        I'm duty-bound...\r\n\r\n627\r\n00:33:32,840 --> 00:33:35,680\r\nShut it off.\r\n\r\n628\r\n00:33:38,640
+        --> 00:33:41,160\r\nWas my order unclear?\r\n\r\n629\r\n00:33:45,800 --> 00:33:47,640\r\nStopping
+        recording, sir.\r\n\r\n630\r\n00:33:58,120 --> 00:34:01,640\r\nYou're sheltering
+        a number of\r\ndissidents on Alforus Extant.\r\n\r\n631\r\n00:34:02,760 -->
+        00:34:05,160\r\nI'm going to give you\r\na list of nine people.\r\n\r\n632\r\n00:34:06,320
+        --> 00:34:10,918\r\nFive of them are to be returned\r\nto us, to face justice.\r\n\r\n633\r\n00:34:10,920
+        --> 00:34:14,120\r\nThey must face the consequences\r\nfor their treasonous
+        actions.\r\n\r\n634\r\n00:34:16,440 --> 00:34:19,318\r\nThe other four,\r\n\r\n635\r\n00:34:19,320
+        --> 00:34:25,118\r\nthe other four are family members\r\nof my dear opponent\r\n\r\n636\r\n00:34:25,120
+        --> 00:34:27,080\r\nand vocal critic, Frey Sampor.\r\n\r\n637\r\n00:34:30,400
+        --> 00:34:33,278\r\nThey need to have an accident.\r\n\r\n638\r\n00:34:33,280
+        --> 00:34:37,518\r\nIt's important they're involved\r\nin an unexpected tragedy.\r\n\r\n639\r\n00:34:37,520
+        --> 00:34:40,038\r\nNatural disaster.\r\n\r\n640\r\n00:34:40,040 --> 00:34:42,078\r\nLandslide.\r\n\r\n641\r\n00:34:42,080
+        --> 00:34:43,838\r\nHunting accident.\r\n\r\n642\r\n00:34:43,840 --> 00:34:45,638\r\nYou
+        decide.\r\n\r\n643\r\n00:34:45,640 --> 00:34:47,598\r\nYou don't need to tell
+        me.\r\n\r\n644\r\n00:34:47,600 --> 00:34:49,520\r\nBut they have to die.\r\n\r\n645\r\n00:34:52,560
+        --> 00:34:54,320\r\nAnd those are my final conditions.\r\n\r\n646\r\n00:34:57,600
+        --> 00:34:59,318\r\nAnd you want to make this official?\r\n\r\n647\r\n00:34:59,320
+        --> 00:35:02,238\r\nThey're dead. You saw the reports.\r\n\r\n648\r\n00:35:02,240
+        --> 00:35:04,038\r\nAn accident on the lunar range.\r\n\r\n649\r\n00:35:04,040
+        --> 00:35:06,998\r\nYou want to report that\r\nthe Grand Serpent is responsible?\r\n\r\n650\r\n00:35:07,000
+        --> 00:35:09,198\r\nIt was his condition\r\nfor the alliance.\r\n\r\n651\r\n00:35:09,200
+        --> 00:35:11,238\r\nThere's no evidence\r\non the recording.\r\n\r\n652\r\n00:35:11,240
+        --> 00:35:13,120\r\nNo, he asked me to stop\r\nthe recording.\r\n\r\n653\r\n00:35:18,040
+        --> 00:35:20,998\r\nWhat do you want to achieve here,\r\nCommander Vinder?\r\n\r\n654\r\n00:35:21,000
+        --> 00:35:22,678\r\nHe needs to be held to account.\r\n\r\n655\r\n00:35:22,680
+        --> 00:35:25,238\r\nYou understand this report\r\nwill reach him, if filed?\r\n\r\n656\r\n00:35:25,240
+        --> 00:35:27,598\r\nThere are processes,\r\nthough, right?\r\n\r\n657\r\n00:35:27,600
+        --> 00:35:30,438\r\nOther people see it.\r\nThere are whistle-blower protocols.\r\n\r\n658\r\n00:35:30,440
+        --> 00:35:32,960\r\nEstablished by the Grand Serpent.\r\n\r\n659\r\n00:35:34,000
+        --> 00:35:37,518\r\nHave you spoken\r\nto your family about any of this?\r\n\r\n660\r\n00:35:37,520
+        --> 00:35:41,160\r\nNo. You're the first,\r\nas my commanding officer.\r\n\r\n661\r\n00:35:42,920
+        --> 00:35:45,278\r\nI took an oath.\r\n\r\n662\r\n00:35:45,280 --> 00:35:49,198\r\nI
+        swore my loyalty\r\nto our constitution.\r\n\r\n663\r\n00:35:49,200 --> 00:35:51,198\r\nNot
+        to any one person.\r\n\r\n664\r\n00:35:51,200 --> 00:35:53,960\r\nTo something
+        bigger.\r\nMore important.\r\n\r\n665\r\n00:35:56,080 --> 00:35:57,798\r\nSo...\r\n\r\n666\r\n00:35:57,800
+        --> 00:36:00,598\r\n..here's a choice.\r\n\r\n667\r\n00:36:00,600 --> 00:36:02,120\r\nI
+        can submit this...\r\n\r\n668\r\n00:36:04,640 --> 00:36:06,240\r\n..or I can
+        not submit this.\r\n\r\n669\r\n00:36:13,360 --> 00:36:15,560\r\nDon't make
+        me relive this bit.\r\n\r\n670\r\n00:36:22,400 --> 00:36:24,080\r\nPeople
+        need to know the truth.\r\n\r\n671\r\n00:36:29,680 --> 00:36:31,240\r\nSubmit
+        it.\r\n\r\n672\r\n00:36:32,640 --> 00:36:34,720\r\nSit down, Commander.\r\n\r\n673\r\n00:36:56,720
+        --> 00:36:58,520\r\nHi, it's me.\r\n\r\n674\r\n00:37:01,200 --> 00:37:03,600\r\nI
+        won't be coming back off tour\r\nwhen I expected.\r\n\r\n675\r\n00:37:05,640
+        --> 00:37:08,998\r\nIt may be a lot longer\r\nbefore I see you again.\r\n\r\n676\r\n00:37:09,000
+        --> 00:37:11,638\r\nNow, I don't want you to worry,\r\n\r\n677\r\n00:37:11,640
+        --> 00:37:13,998\r\nbut there was an incident.\r\n\r\n678\r\n00:37:14,000
+        --> 00:37:16,720\r\nI was immediately reposted.\r\n\r\n679\r\n00:37:20,440
+        --> 00:37:23,120\r\nLook, I can't say any more,\r\nbecause...\r\n\r\n680\r\n00:37:26,760
+        --> 00:37:29,318\r\nI'm sorry.\r\n\r\n681\r\n00:37:29,320 --> 00:37:31,960\r\nI
+        was doing the right thing.\r\n\r\n682\r\n00:37:35,440 --> 00:37:39,718\r\nI'm
+        permitted one message,\r\nI hope it gets to you.\r\n\r\n683\r\n00:37:39,720
+        --> 00:37:41,600\r\nI love you.\r\n\r\n684\r\n00:37:55,760 --> 00:37:59,118\r\nTime's
+        correcting.\r\nI'll file the report for Division.\r\n\r\n685\r\n00:37:59,120
+        --> 00:38:01,198\r\nI've seen that before.\r\n\r\n686\r\n00:38:01,200 -->
+        00:38:03,198\r\nOi.\r\n\r\n687\r\n00:38:03,200 --> 00:38:07,358\r\nYou know
+        the rules,\r\ndon't touch what you can't afford.\r\n\r\n688\r\n00:38:07,360
+        --> 00:38:09,998\r\nWe know each other.\r\n\r\n689\r\n00:38:10,000 --> 00:38:12,518\r\nTemporal
+        hazing's getting\r\nto the boss again...\r\n\r\n690\r\n00:38:12,520 --> 00:38:14,158\r\nTime
+        to move.\r\n\r\n691\r\n00:38:14,160 --> 00:38:15,678\r\nBring the Passengers,\r\n\r\n692\r\n00:38:15,680
+        --> 00:38:18,798\r\nwe'll extract the hostages back\r\nonboard the ship.\r\n\r\n693\r\n00:38:18,800
+        --> 00:38:20,678\r\nWe have done as you asked, Doctor.\r\n\r\n694\r\n00:38:20,680
+        --> 00:38:23,438\r\nWe have returned four Mouri\r\nto your time.\r\n\r\n695\r\n00:38:23,440
+        --> 00:38:25,238\r\nNow you must return.\r\n\r\n696\r\n00:38:25,240 --> 00:38:28,438\r\nYou
+        must not linger\r\nin your own time stream.\r\n\r\n697\r\n00:38:28,440 -->
+        00:38:30,838\r\nNot yet. Not just yet...\r\n\r\n698\r\n00:38:30,840 --> 00:38:33,758\r\nThe
+        force of Time will break you.\r\n\r\n699\r\n00:38:33,760 --> 00:38:36,318\r\nBut
+        this is my only chance\r\nto find out more...\r\n\r\n700\r\n00:38:36,320 -->
+        00:38:39,358\r\n- More?\r\n- Who I was. Who I am.\r\n\r\n701\r\n00:38:39,360
+        --> 00:38:41,358\r\nIt's all in here,\r\nif I can just find it...\r\n\r\n702\r\n00:38:41,360
+        --> 00:38:44,998\r\nYour body is breaking, Doctor.\r\nWe can sense it. You
+        must leave.\r\n\r\n703\r\n00:38:45,000 --> 00:38:46,838\r\nOne more memory.\r\n\r\n704\r\n00:38:46,840
+        --> 00:38:49,160\r\nOne more piece of my past.\r\n\r\n705\r\n00:38:50,240
+        --> 00:38:51,798\r\nLet me have some...\r\n\r\n706\r\n00:38:51,800 --> 00:38:53,358\r\n..some
+        explanation.\r\n\r\n707\r\n00:38:53,360 --> 00:38:55,198\r\nYou will die in
+        here.\r\n\r\n708\r\n00:38:55,200 --> 00:38:56,878\r\nJust give me something!\r\n\r\n709\r\n00:38:56,880
+        --> 00:38:59,478\r\nGive me the end,\r\ngive me the end of what I was in...\r\n\r\n710\r\n00:38:59,480
+        --> 00:39:00,798\r\nNo.\r\n\r\n711\r\n00:39:00,800 --> 00:39:02,920\r\nYou
+        can't force me out!\r\n\r\n712\r\n00:39:09,400 --> 00:39:11,160\r\nStop fighting
+        now, Doctor.\r\n\r\n713\r\n00:39:12,360 --> 00:39:13,600\r\nWho are you?\r\n\r\n714\r\n00:39:16,040
+        --> 00:39:17,798\r\nWhere am I?\r\n\r\n715\r\n00:39:17,800 --> 00:39:20,678\r\nYou
+        think you can navigate\r\nall those time streams\r\n\r\n716\r\n00:39:20,680
+        --> 00:39:22,478\r\nwithout anyone noticing?\r\n\r\n717\r\n00:39:22,480 -->
+        00:39:24,758\r\nYou're fighting a lost cause.\r\n\r\n718\r\n00:39:24,760 -->
+        00:39:26,198\r\nYou need to stop.\r\n\r\n719\r\n00:39:26,200 --> 00:39:27,998\r\nLost
+        causes are my speciality.\r\n\r\n720\r\n00:39:28,000 --> 00:39:29,518\r\nNot
+        this time.\r\n\r\n721\r\n00:39:29,520 --> 00:39:31,918\r\nThere'll be no glory
+        awaiting you\r\non this one.\r\n\r\n722\r\n00:39:31,920 --> 00:39:33,918\r\nYou
+        seem to think\r\nyou're very well informed.\r\n\r\n723\r\n00:39:33,920 -->
+        00:39:37,998\r\nI'm telling you, the damage\r\nto Time is already done.\r\n\r\n724\r\n00:39:38,000
+        --> 00:39:39,198\r\nAs intended.\r\n\r\n725\r\n00:39:39,200 --> 00:39:40,398\r\nIntended?\r\n\r\n726\r\n00:39:40,400
+        --> 00:39:43,198\r\nHm. The Flux event was spatial.\r\n\r\n727\r\n00:39:43,200
+        --> 00:39:45,558\r\nBut it was possible\r\nit wouldn't be enough.\r\n\r\n728\r\n00:39:45,560
+        --> 00:39:46,838\r\nThe Ravagers,\r\n\r\n729\r\n00:39:46,840 --> 00:39:49,998\r\nSwarm
+        and Azure,\r\nare rare and useful creatures.\r\n\r\n730\r\n00:39:50,000 -->
+        00:39:52,398\r\nNow they have been reintroduced.\r\n\r\n731\r\n00:39:52,400
+        --> 00:39:55,238\r\nThink of them as\r\na temporal poison,\r\n\r\n732\r\n00:39:55,240
+        --> 00:39:56,518\r\nor contagion.\r\n\r\n733\r\n00:39:56,520 --> 00:39:59,038\r\nI'm
+        sorry, I'm normally very good\r\nat keeping up with things,\r\n\r\n734\r\n00:39:59,040
+        --> 00:40:01,198\r\nbut you lost me quite early on.\r\nWhere are we?\r\n\r\n735\r\n00:40:01,200
+        --> 00:40:03,198\r\nAnd how do you know me\r\nand I don't know you?\r\n\r\n736\r\n00:40:03,200
+        --> 00:40:05,078\r\nAlways the wrong questions.\r\n\r\n737\r\n00:40:05,080
+        --> 00:40:08,800\r\nThis universe is over, Doctor.\r\nHm?\r\n\r\n738\r\n00:40:09,960
+        --> 00:40:11,318\r\nAnd you get to call it, do you?\r\n\r\n739\r\n00:40:11,320
+        --> 00:40:12,598\r\nEverything has its time.\r\n\r\n740\r\n00:40:12,600 -->
+        00:40:14,438\r\nNothing is forever.\r\nNothing is certain.\r\n\r\n741\r\n00:40:14,440
+        --> 00:40:17,758\r\nNot you and not this universe\r\nyou seem to love so much.\r\n\r\n742\r\n00:40:17,760
+        --> 00:40:20,598\r\nThis universe is home to innumerable\r\nspecies and life
+        forms.\r\n\r\n743\r\n00:40:20,600 --> 00:40:22,318\r\nDon't lecture me, Doctor.\r\n\r\n744\r\n00:40:22,320
+        --> 00:40:24,440\r\nNot when you should look\r\nto yourself.\r\n\r\n745\r\n00:40:26,280
+        --> 00:40:27,918\r\nThe Flux wasn't an accident.\r\n\r\n746\r\n00:40:27,920
+        --> 00:40:29,838\r\nIt wasn't a naturally occurring\r\nevent.\r\n\r\n747\r\n00:40:29,840
+        --> 00:40:31,680\r\nIt was made. It was placed.\r\n\r\n748\r\n00:40:33,600
+        --> 00:40:34,638\r\nWhat?\r\n\r\n749\r\n00:40:34,640 --> 00:40:36,398\r\nBecause
+        of you.\r\n\r\n750\r\n00:40:36,400 --> 00:40:38,158\r\nWhat are you talking
+        about?\r\n\r\n751\r\n00:40:38,160 --> 00:40:40,240\r\nAll is ending.\r\n\r\n752\r\n00:40:42,040
+        --> 00:40:43,960\r\nAnd don't come looking for this.\r\n\r\n753\r\n00:40:45,960
+        --> 00:40:47,878\r\nYou can go.\r\n\r\n754\r\n00:40:47,880 --> 00:40:49,680\r\nI
+        will not go.\r\n\r\n755\r\n00:40:52,360 --> 00:40:53,798\r\nNo, no, no.\r\n\r\n756\r\n00:40:53,800
+        --> 00:40:55,158\r\nPut me back, put me back.\r\n\r\n757\r\n00:40:55,160 -->
+        00:40:57,158\r\nI want to go back in there.\r\nI have to get back in.\r\n\r\n758\r\n00:40:57,160
+        --> 00:40:58,958\r\n- Doctor, it's OK...\r\n- It's not OK!\r\n\r\n759\r\n00:40:58,960
+        --> 00:41:00,598\r\nNot for me!\r\n\r\n760\r\n00:41:00,600 --> 00:41:02,118\r\nYou
+        don't understand anything.\r\n\r\n761\r\n00:41:02,120 --> 00:41:06,238\r\n-
+        All right.\r\n- I had a chance while it was broken.\r\n\r\n762\r\n00:41:06,240
+        --> 00:41:07,518\r\nWell, it's not now.\r\n\r\n763\r\n00:41:07,520 --> 00:41:08,798\r\nThe
+        Mouri, they're all back.\r\n\r\n764\r\n00:41:08,800 --> 00:41:11,278\r\nYou
+        saved our lives.\r\n\r\n765\r\n00:41:11,280 --> 00:41:13,558\r\nWell done,
+        Doctor.\r\n\r\n766\r\n00:41:13,560 --> 00:41:18,080\r\nDid you have fun in
+        there,\r\ndiscovering the past you've lost?\r\n\r\n767\r\n00:41:20,360 -->
+        00:41:23,998\r\nYou may have forgotten,\r\nbut we did not.\r\n\r\n768\r\n00:41:24,000
+        --> 00:41:26,600\r\nWe brought you here\r\nknowing what you would do.\r\n\r\n769\r\n00:41:28,040
+        --> 00:41:30,438\r\nThis is only the beginning.\r\n\r\n770\r\n00:41:30,440
+        --> 00:41:32,678\r\nUgh...\r\n\r\n771\r\n00:41:32,680 --> 00:41:34,198\r\nI've
+        seen this stuff before.\r\n\r\n772\r\n00:41:34,200 --> 00:41:36,518\r\nParticles
+        of the Time Force.\r\n\r\n773\r\n00:41:36,520 --> 00:41:39,198\r\nTiny fragments
+        of\r\ntemporal destruction,\r\n\r\n774\r\n00:41:39,200 --> 00:41:41,958\r\nwhich
+        will erode whatever\r\nthey touch.\r\n\r\n775\r\n00:41:41,960 --> 00:41:43,558\r\nYou
+        may have repaired,\r\n\r\n776\r\n00:41:43,560 --> 00:41:45,478\r\nbut Time
+        was unleashed\r\nfor long enough.\r\n\r\n777\r\n00:41:45,480 --> 00:41:47,598\r\nThe
+        damage is done.\r\n\r\n778\r\n00:41:47,600 --> 00:41:51,078\r\nAnd if the
+        Flux wrecked Space,\r\n\r\n779\r\n00:41:51,080 --> 00:41:54,038\r\nthen we
+        have disrupted\r\nthe flow of Time,\r\n\r\n780\r\n00:41:54,040 --> 00:41:55,518\r\nhowever
+        briefly.\r\n\r\n781\r\n00:41:55,520 --> 00:41:58,960\r\nNo, you haven't.\r\nAnd
+        we're gonna stop you. Right?\r\n\r\n782\r\n00:42:00,520 --> 00:42:01,878\r\nRight,
+        Doctor?\r\n\r\n783\r\n00:42:01,880 --> 00:42:03,638\r\nDan Lewis.\r\n\r\n784\r\n00:42:03,640
+        --> 00:42:05,958\r\nWe have something of yours.\r\n\r\n785\r\n00:42:05,960
+        --> 00:42:09,440\r\nYou're not the only one who can hide\r\nthings in Passenger,
+        Doctor.\r\n\r\n786\r\n00:42:11,640 --> 00:42:13,118\r\nWhere am I now?\r\n\r\n787\r\n00:42:13,120
+        --> 00:42:15,118\r\n- Di.\r\n- Dan...\r\n\r\n788\r\n00:42:15,120 --> 00:42:16,198\r\nI
+        can't get to you.\r\n\r\n789\r\n00:42:16,200 --> 00:42:18,518\r\nWhat happened
+        to you?\r\nWhat're you doing here?\r\n\r\n790\r\n00:42:18,520 --> 00:42:20,358\r\n-
+        Stay there, Dan...\r\n- I've gotta get her...\r\n\r\n791\r\n00:42:20,360 -->
+        00:42:22,838\r\n- You can't, you mustn't.\r\n- Course I can. Get off me.\r\n\r\n792\r\n00:42:22,840
+        --> 00:42:26,278\r\nDo as you're told. You have no idea\r\nwhat you're dealing
+        with, I do.\r\n\r\n793\r\n00:42:26,280 --> 00:42:28,198\r\nStay there.\r\n\r\n794\r\n00:42:28,200
+        --> 00:42:30,718\r\nI'll help you get her back.\r\nPromise.\r\n\r\n795\r\n00:42:30,720
+        --> 00:42:33,638\r\nNo, she's our toy now.\r\n\r\n796\r\n00:42:35,080 -->
+        00:42:36,318\r\nWhat do you want?\r\n\r\n797\r\n00:42:36,320 --> 00:42:39,040\r\nTo
+        reign in hell.\r\n\r\n798\r\n00:43:21,160 --> 00:43:23,278\r\nSorry, what
+        is this?\r\n\r\n799\r\n00:43:23,280 --> 00:43:24,840\r\nStick your head in.\r\n\r\n800\r\n00:43:26,920
+        --> 00:43:28,160\r\nGo on.\r\n\r\n801\r\n00:43:34,640 --> 00:43:36,400\r\nWhat?!\r\n\r\n802\r\n00:43:39,520
+        --> 00:43:41,680\r\nIs this a TARDIS?\r\n\r\n803\r\n00:43:43,440 --> 00:43:45,398\r\nIt
+        is, isn't it?\r\n\r\n804\r\n00:43:45,400 --> 00:43:47,998\r\nI didn't even
+        think these were real.\r\n\r\n805\r\n00:43:48,000 --> 00:43:52,318\r\nWait,
+        this can get me home.\r\n\r\n806\r\n00:43:52,320 --> 00:43:56,838\r\nAfter
+        all this time.\r\n\r\n807\r\n00:43:56,840 --> 00:43:59,078\r\nCan I pilot
+        it?\r\nWill you show me?\r\n\r\n808\r\n00:43:59,080 --> 00:44:00,760\r\nNo.
+        Get in.\r\n\r\n809\r\n00:44:03,520 --> 00:44:05,798\r\nDoctor, seriously.\r\nWe
+        can't leave here without her.\r\n\r\n810\r\n00:44:05,800 --> 00:44:07,318\r\nShe's
+        not here, Dan.\r\n\r\n811\r\n00:44:07,320 --> 00:44:09,038\r\nBut we'll get
+        her back, I promise.\r\n\r\n812\r\n00:44:09,040 --> 00:44:11,558\r\nWe'll
+        get Vinder home,\r\nwe'll rescue Diane,\r\n\r\n813\r\n00:44:11,560 --> 00:44:13,918\r\nwe'll
+        find out\r\nwho's behind the Flux,\r\n\r\n814\r\n00:44:13,920 --> 00:44:15,998\r\nand
+        what it's got to do with me.\r\n\r\n815\r\n00:44:16,000 --> 00:44:18,638\r\nWhy
+        would it have anything\r\nto do with you?\r\n\r\n816\r\n00:44:18,640 --> 00:44:20,958\r\nDoes
+        everything have to be\r\na discussion?\r\n\r\n817\r\n00:44:20,960 --> 00:44:24,120\r\nGo
+        on... in.\r\n\r\n818\r\n00:44:30,960 --> 00:44:33,038\r\nDid you repair?\r\n\r\n819\r\n00:44:33,040
+        --> 00:44:35,438\r\nCan you repair?\r\n\r\n820\r\n00:44:35,440 --> 00:44:37,040\r\nI
+        really hope so.\r\n\r\n821\r\n00:44:42,800 --> 00:44:44,998\r\nI'm sorry.\r\n\r\n822\r\n00:44:45,000
+        --> 00:44:47,518\r\nI was doing the right thing.\r\n\r\n823\r\n00:44:47,520
+        --> 00:44:49,638\r\nI'm only permitted one message.\r\n\r\n824\r\n00:44:49,640
+        --> 00:44:53,318\r\nI hope it gets to you.\r\n\r\n825\r\n00:44:53,320 -->
+        00:44:54,560\r\nI love you.\r\n\r\n826\r\n00:44:55,560 --> 00:44:57,520\r\nI
+        love you, too.\r\n\r\n827\r\n00:44:59,920 --> 00:45:01,440\r\nDon't we, Tigmi?\r\n\r\n828\r\n00:45:03,600
+        --> 00:45:05,238\r\nYou know,\r\n\r\n829\r\n00:45:05,240 --> 00:45:07,880\r\nwe'll
+        break it if it we watch it\r\ntoo many more times.\r\n\r\n830\r\n00:45:14,400
+        --> 00:45:15,800\r\nI wonder if he looks different.\r\n\r\n831\r\n00:45:18,560
+        --> 00:45:22,318\r\nWe're coming, Vinder.\r\n\r\n832\r\n00:45:22,320 --> 00:45:26,118\r\nWe
+        waited and now we're looking\r\nand we're close.\r\n\r\n833\r\n00:45:26,120
+        --> 00:45:28,318\r\nWe'll be there soon.\r\n\r\n834\r\n00:45:34,000 --> 00:45:37,600\r\nMe
+        and your beautiful\r\nas yet unborn child.\r\n\r\n835\r\n00:45:52,000 -->
+        00:45:53,440\r\nThis is your home?\r\n\r\n836\r\n00:45:55,040 --> 00:45:56,240\r\nIt
+        was.\r\n\r\n837\r\n00:45:57,880 --> 00:46:01,438\r\nLooks like the Flux ripped\r\nthrough
+        here, too.\r\n\r\n838\r\n00:46:01,440 --> 00:46:03,358\r\nI can take you anywhere.\r\n\r\n839\r\n00:46:03,360
+        --> 00:46:06,198\r\nNo. I have to find someone...\r\n\r\n840\r\n00:46:06,200
+        --> 00:46:09,318\r\nMate, it's a lost cause...\r\n\r\n841\r\n00:46:09,320
+        --> 00:46:10,718\r\nNo.\r\n\r\n842\r\n00:46:10,720 --> 00:46:12,518\r\nI know
+        she would've been here.\r\n\r\n843\r\n00:46:12,520 --> 00:46:14,600\r\nI need
+        to find her.\r\n\r\n844\r\n00:46:16,280 --> 00:46:17,478\r\nStay in touch.\r\n\r\n845\r\n00:46:17,480
+        --> 00:46:19,598\r\nWhenever you need us, press 0.\r\n\r\n846\r\n00:46:19,600
+        --> 00:46:21,398\r\nIt's a direct line to us.\r\n\r\n847\r\n00:46:21,400 -->
+        00:46:23,200\r\nBe safe.\r\n\r\n848\r\n00:46:55,480 --> 00:46:57,638\r\nI'm
+        back home.\r\n\r\n849\r\n00:46:57,640 --> 00:47:00,478\r\nI came looking for
+        you.\r\n\r\n850\r\n00:47:00,480 --> 00:47:02,680\r\nBut there's no home left.\r\n\r\n851\r\n00:47:04,120
+        --> 00:47:06,080\r\nThe Flux took that, too.\r\n\r\n852\r\n00:47:14,640 -->
+        00:47:15,880\r\nBut I'm not giving up.\r\n\r\n853\r\n00:47:17,960 --> 00:47:19,878\r\nI'll
+        find you...\r\n\r\n854\r\n00:47:19,880 --> 00:47:21,560\r\n..whatever it takes.\r\n\r\n855\r\n00:47:34,400
+        --> 00:47:36,080\r\nDoctor!\r\n\r\n856\r\n00:47:37,160 --> 00:47:38,358\r\nOh,
+        no...\r\n\r\n857\r\n00:47:38,360 --> 00:47:39,398\r\nThat you yelling?\r\n\r\n858\r\n00:47:39,400
+        --> 00:47:41,358\r\nWhat's the matter?\r\n\r\n859\r\n00:47:41,360 --> 00:47:42,638\r\nWhat's
+        that?\r\n\r\n860\r\n00:47:42,640 --> 00:47:44,558\r\nA Weeping Angel. Don't
+        blink.\r\n\r\n861\r\n00:47:44,560 --> 00:47:45,758\r\nWhy not?\r\n\r\n862\r\n00:47:45,760
+        --> 00:47:48,718\r\nKeep your eyes on the Angel,\r\nstay behind by me...\r\n\r\n863\r\n00:47:48,720
+        --> 00:47:50,878\r\nI think I just blinked.\r\n\r\n864\r\n00:47:50,880 -->
+        00:47:54,280\r\nIt's at the controls. Doctor.\r\n\r\n865\r\n00:47:57,960 -->
+        00:47:59,720\r\nThe Angel has the TARDIS.\r\n\r\n866\r\n00:48:32,440 --> 00:48:34,398\r\nCan
+        you state your name, please?\r\n\r\n867\r\n00:48:34,400 --> 00:48:36,358\r\nClaire
+        Brown.\r\n\r\n868\r\n00:48:36,360 --> 00:48:39,078\r\nWe're missing a little
+        girl.\r\nTen years old.\r\n\r\n869\r\n00:48:39,080 --> 00:48:40,758\r\nMaggie!
+        Maggie! Maggie!\r\n\r\n870\r\n00:48:40,760 --> 00:48:42,638\r\nIt's happening
+        again.\r\n\r\n871\r\n00:48:42,640 --> 00:48:46,158\r\nWas that scarecrow there\r\na
+        minute ago?\r\n\r\n872\r\n00:48:46,160 --> 00:48:49,398\r\nEveryone in the
+        village disappears\r\non the 21st of November 1967.\r\n\r\n873\r\n00:48:49,400
+        --> 00:48:51,118\r\nTonight.\r\n\r\n874\r\n00:48:51,120 --> 00:48:53,518\r\nWhat's
+        going on?!\r\n\r\n875\r\n00:48:53,520 --> 00:48:55,200\r\nJericho, wait!\r\n\r\n876\r\n00:48:57,040
+        --> 00:48:58,800\r\nI'm not blinking!\r\n\r\n877\r\n00:48:59,040 --> 00:50:00,800\r\nCREDITS\r\n\r\n"
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-RAY:
+      - 8ce9949099443145-MAD
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Disposition:
+      - 'attachment; filename="Doctor Who 13x03 - Chapter Three: Once, Upon Time.UKTV/TORRENTGALAXY.en-en.srt"'
+      Content-Type:
+      - text/srt;charset=UTF-8
+      Date:
+      - Sun, 06 Oct 2024 23:55:05 GMT
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=5JtvIuTrgq0NuvTn2x4NQBrOU7mBruJF5qRYxuWe%2Fd5MCIIGvbBz%2B9CjZMxzfxPG0fNHyH8NhtH1Wfp03j%2F7pWjuv%2Baab6XvYC9eqFUIKDdt0%2BloZ38NnAhBFAPrs4ULO%2FKYgIOr"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      X-Powered-By:
+      - PHP/7.4.14
+      X-Robots-Tag:
+      - noindex
+    status:
+      code: 200
+      message: OK
+version: 1

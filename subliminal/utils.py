@@ -8,9 +8,10 @@ import os
 import platform
 import re
 import socket
+from collections.abc import Iterable
 from datetime import datetime, timedelta, timezone
 from types import GeneratorType
-from typing import TYPE_CHECKING, Any, Callable, Generic, Iterable, TypeVar, cast, overload
+from typing import TYPE_CHECKING, Any, Callable, Generic, TypeVar, cast, overload
 from xmlrpc.client import ProtocolError
 
 import requests

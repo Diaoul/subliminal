@@ -148,7 +148,7 @@ class ProviderPool:
         try:
             return self[provider].list_subtitles(video, provider_languages)
         except Exception as e:  # noqa: BLE001
-            handle_exception(e, 'Provider {provider}')
+            handle_exception(e, f'Provider {provider}')
 
         return []
 
@@ -251,10 +251,14 @@ class ProviderPool:
         # ignore subtitles
         subtitles = [s for s in subtitles if s.id not in ignore_subtitles]
 
-        # filter by hearing impaired and foreign only
+        # sort by hearing impaired and foreign only
         language_type = LanguageType.from_flags(hearing_impaired=hearing_impaired, foreign_only=foreign_only)
         if language_type != LanguageType.UNKNOWN:
-            subtitles = [s for s in subtitles if s.language_type == language_type]
+            subtitles = sorted(
+                subtitles,
+                key=lambda s: s.language_type == language_type,
+                reverse=True,
+            )
 
         # sort subtitles by score
         scored_subtitles = sorted(

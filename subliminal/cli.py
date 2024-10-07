@@ -191,11 +191,11 @@ providers_config = OptionGroup('Providers configuration')
 refiners_config = OptionGroup('Refiners configuration')
 hearing_impaired_group = MutuallyExclusiveOptionGroup(
     'Hearing impaired subtitles',
-    help='Require or avoid hearing impaired subtitles. Set to empty if no preference (default).',
+    help='Require or avoid hearing impaired subtitles. If no preference (default), do not use any flag.',
 )
 foreign_only_group = MutuallyExclusiveOptionGroup(
     'Foreign only subtitles',
-    help='Require or avoid foreign-only/forced subtitles. Set to empty if no preference (default).',
+    help='Require or avoid foreign-only/forced subtitles.  If no preference (default), do not use any flag.',
 )
 
 

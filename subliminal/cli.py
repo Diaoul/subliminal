@@ -423,12 +423,6 @@ def cache(ctx: click.Context, clear_subliminal: bool) -> None:
 @foreign_only_group.option('-fo', '--foreign-only', is_flag=True, default=False)
 @foreign_only_group.option('-FO', '--no-foreign-only', is_flag=True, default=False)
 @click.option(
-    '--forced',
-    is_flag=True,
-    default=False,
-    help='Require or avoid forced/foreign-only subtitles. Set to empty if no preference (default).',
-)
-@click.option(
     '-m',
     '--min-score',
     type=click.IntRange(0, 100),

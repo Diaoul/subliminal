@@ -141,7 +141,7 @@ def match_hearing_impaired(subtitle: Subtitle, *, hearing_impaired: bool | None 
     )
 
 
-def compute_score(subtitle: Subtitle, video: Video) -> int:
+def compute_score(subtitle: Subtitle, video: Video, **kwargs: Any) -> int:
     """Compute the score of the `subtitle` against the `video`.
 
     :func:`compute_score` uses the :meth:`Subtitle.get_matches <subliminal.subtitle.Subtitle.get_matches>` method and

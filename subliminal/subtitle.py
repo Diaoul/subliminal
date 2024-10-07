@@ -49,21 +49,22 @@ class LanguageType(Enum):
     """Subtitle language types."""
 
     UNKNOWN = 'unknown'
-    FORCED = 'forced'
+    FOREIGN_ONLY = 'foreign_only'
     NORMAL = 'normal'
     HEARING_IMPAIRED = 'hearing_impaired'
 
     @classmethod
-    def from_flags(cls, *, hearing_impaired: bool | None = None, forced: bool | None = None) -> LanguageType:
+    def from_flags(cls, *, hearing_impaired: bool | None = None, foreign_only: bool | None = None) -> LanguageType:
         """Convert to LanguageType from flags."""
         language_type = cls.UNKNOWN
+        # hearing_impaired takes precedence over foreign_only if both are True
         if hearing_impaired:
             language_type = cls.HEARING_IMPAIRED
-        elif forced:
-            language_type = cls.FORCED
-        # if hearing_impaired or forced is specified to be False
+        elif foreign_only:
+            language_type = cls.FOREIGN_ONLY
+        # if hearing_impaired or foreign_only is specified to be False
         # then for sure the subtitle is normal.
-        elif hearing_impaired is False or forced is False:
+        elif hearing_impaired is False or foreign_only is False:
             language_type = cls.NORMAL
 
         return language_type
@@ -76,9 +77,9 @@ class LanguageType(Enum):
             return None
         return False
 
-    def is_forced(self) -> bool | None:
-        """Flag for forced."""
-        if self == LanguageType.FORCED:
+    def is_foreign_only(self) -> bool | None:
+        """Flag for foreign only."""
+        if self == LanguageType.FOREIGN_ONLY:
             return True
         if self == LanguageType.UNKNOWN:
             return None
@@ -91,6 +92,7 @@ class Subtitle:
     :param language: language of the subtitle.
     :type language: :class:`~babelfish.language.Language`
     :param (bool | None) hearing_impaired: whether or not the subtitle is hearing impaired (None if unknown).
+    :param (bool | None) foreign_only: whether or not the subtitle is foreign only / forced (None if unknown).
     :param page_link: URL of the web page from which the subtitle can be downloaded.
     :type page_link: str
     :param encoding: Text encoding of the subtitle.
@@ -146,7 +148,7 @@ class Subtitle:
         subtitle_id: str = '',
         *,
         hearing_impaired: bool | None = None,
-        forced: bool | None = None,
+        foreign_only: bool | None = None,
         page_link: str | None = None,
         encoding: str | None = None,
         subtitle_format: str | None = None,
@@ -167,7 +169,7 @@ class Subtitle:
         self.fps = fps
         self.embedded = embedded
 
-        self.language_type = LanguageType.from_flags(hearing_impaired=hearing_impaired, forced=forced)
+        self.language_type = LanguageType.from_flags(hearing_impaired=hearing_impaired, foreign_only=foreign_only)
         self.encoding = None
         # validate the encoding
         if encoding:
@@ -192,9 +194,9 @@ class Subtitle:
         return self.language_type.is_hearing_impaired()
 
     @property
-    def forced(self) -> bool | None:
-        """Whether the subtitle is a forced subtitle."""
-        return self.language_type.is_forced()
+    def foreign_only(self) -> bool | None:
+        """Whether the subtitle is a foreign only / forced subtitle."""
+        return self.language_type.is_foreign_only()
 
     @property
     def content(self) -> bytes | None:
@@ -379,7 +381,7 @@ class Subtitle:
         :type video: :class:`~subliminal.video.Video`
         :param bool single: save a single subtitle, default is to save one subtitle per language.
         :param (str | None) extension: the subtitle extension, default is to match to the subtitle format.
-        :param bool language_type_suffix: add a suffix 'hi' or 'forced' if needed. Default to False.
+        :param bool language_type_suffix: add a suffix 'hi' or 'fo' if needed. Default to False.
         :param str language_format: format of the language suffix. Default to 'alpha2'.
         :return: path of the subtitle.
         :rtype: str
@@ -426,7 +428,7 @@ class EmbeddedSubtitle(Subtitle):
         language: Language,
         *,
         hearing_impaired: bool | None = None,
-        forced: bool | None = None,
+        foreign_only: bool | None = None,
         encoding: str | None = None,
         subtitle_format: str | None = None,
     ) -> None:
@@ -436,7 +438,7 @@ class EmbeddedSubtitle(Subtitle):
             language,
             subtitle_id,
             hearing_impaired=hearing_impaired,
-            forced=forced,
+            foreign_only=foreign_only,
             encoding=encoding,
             subtitle_format=subtitle_format,
             embedded=True,
@@ -448,8 +450,8 @@ class EmbeddedSubtitle(Subtitle):
         extra = ''
         if self.language_type == LanguageType.HEARING_IMPAIRED:
             extra = ' [hi]'
-        elif self.language_type == LanguageType.FORCED:
-            extra = ' [forced]'
+        elif self.language_type == LanguageType.FOREIGN_ONLY:
+            extra = ' [fo]'
 
         return f'{self.id}{extra}'
 
@@ -491,9 +493,12 @@ def get_subtitle_suffix(
 
     :param language: language of the subtitle to put in the path.
     :type language: :class:`~babelfish.language.Language`
-    :param str language_format: format of the language suffix. Default to 'alpha2'.
-    :param LanguageType language_type: the language type of the subtitle (hearing impaired or forced).
-    :param bool language_type_suffix: add a suffix 'hi' or 'forced' if needed. Default to False.
+    :param str language_format: format of the language suffix.
+        Default to 'alpha2'.
+    :param LanguageType language_type: the language type of the subtitle
+        (hearing impaired or foreign only).
+    :param bool language_type_suffix: add a suffix 'hi' or 'fo' if needed.
+        Default to False.
     :return: suffix to the subtitle name.
     :rtype: str
 
@@ -525,8 +530,8 @@ def get_subtitle_suffix(
     if language_type_suffix:
         if language_type == LanguageType.HEARING_IMPAIRED:
             language_type_part = '.hi'
-        elif language_type == LanguageType.FORCED:
-            language_type_part = '.forced'
+        elif language_type == LanguageType.FOREIGN_ONLY:
+            language_type_part = '.fo'
 
     return language_type_part + language_part
 

@@ -252,9 +252,9 @@ class ProviderPool:
         subtitles = [s for s in subtitles if s.id not in ignore_subtitles]
 
         # filter by hearing impaired and foreign only
-        lt = LanguageType.from_flags(hearing_impaired=hearing_impaired, forced=foreign_only)
-        if lt != LanguageType.UNKNOWN:
-            subtitles = [s for s in subtitles if s.language_type == lt]
+        language_type = LanguageType.from_flags(hearing_impaired=hearing_impaired, foreign_only=foreign_only)
+        if language_type != LanguageType.UNKNOWN:
+            subtitles = [s for s in subtitles if s.language_type == language_type]
 
         # sort subtitles by score
         scored_subtitles = sorted(
@@ -418,7 +418,7 @@ def parse_subtitle_filename(subtitle_filename: str, video_filename: str) -> Subt
         except (ValueError, LanguageReverseError):
             logger.exception('Cannot parse language code %r', language_code)
 
-    # TODO: extract the hearing_impaired or forced attribute
+    # TODO: extract the hearing_impaired or foreign_only attribute
 
     return Subtitle(language, subtitle_id=subtitle_filename)
 
@@ -871,7 +871,7 @@ def save_subtitles(
     :param str directory: path to directory where to save the subtitles, default is next to the video.
     :param str encoding: encoding in which to save the subtitles, default is to keep original encoding.
     :param (str | None) extension: the subtitle extension, default is to match to the subtitle format.
-    :param bool language_type_suffix: add a suffix 'hi' or 'forced' if needed. Default to False.
+    :param bool language_type_suffix: add a suffix 'hi' or 'fo' if needed. Default to False.
     :param str language_format: format of the language suffix. Default to 'alpha2'.
     :return: the saved subtitles
     :rtype: list of :class:`~subliminal.subtitle.Subtitle`

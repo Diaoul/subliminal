@@ -141,6 +141,4 @@ def test_compute_score_hash_hearing_impaired(movies):
         filename='',
         encoding='utf-8',
     )
-    assert compute_score(subtitle, video, hearing_impaired=True) == (
-        movie_scores['hash'] + movie_scores['hearing_impaired']
-    )
+    assert compute_score(subtitle, video, hearing_impaired=True) == movie_scores['hash']

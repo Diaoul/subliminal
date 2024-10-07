@@ -76,10 +76,6 @@ class SubtitulamosSubtitle(Subtitle):
             },
         )
 
-        # resolution
-        if video.resolution and self.release_group and video.resolution in self.release_group.lower():
-            matches.add('resolution')
-
         # other properties
         matches |= guess_matches(video, guessit(self.release_group), partial=True)
 
@@ -140,24 +136,10 @@ class SubtitulamosProvider(Provider):
         r = self._session_request(self.server_url + series_url, headers={'Referer': self.server_url}, timeout=10)
         return ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
 
-    def _get_episode_url(self, series_id: str, season: int, episode: int) -> str | None:
-        """Provides the URL for a specific episode of the series."""
-        series_content = self._read_series(f'/shows/{series_id}')
-
-        for season_element in series_content.select('#season-choices a.choice'):
-            if season == int(season_element.get_text()):
-                if 'selected' not in (list[str], season_element.get('class', [])):
-                    series_content = self._read_series(cast(str, season_element.get('href', '')))
-                break
-            return None
-
-        for episode_element in series_content.select('#episode-choices a.choice'):
-            if episode == int(episode_element.get_text()):
-                return cast(str, episode_element.get('href', ''))
-        return None
-
     @region.cache_on_arguments(expiration_time=SHOW_EXPIRATION_TIME)
-    def _search_url_titles(self, series: str, season: int, episode: int, year: int | None = None) -> str | None:
+    def _read_episode_page(
+        self, series: str, season: int, episode: int, year: int | None = None
+    ) -> tuple[ParserBeautifulSoup, str]:
         """Search the URL titles by kind for the given `title`, `season` and `episode`.
 
         :param str series: Series to search for.
@@ -174,26 +156,40 @@ class SubtitulamosProvider(Provider):
         if len(series_response) == 0:
             series_response = self._query_search(series)
 
-        episode_url = self._get_episode_url(series_response[0]['show_id'], season, episode)
+        """Provides the URL for a specific episode of the series."""
+        page_content = self._read_series(f'/shows/{series_response[0]['show_id']}')
 
-        return self.server_url + episode_url if episode_url else None
+        # Select season
+        season_element = next(
+            (el for el in page_content.select('#season-choices a.choice') if str(season) in el.text), None
+        )
+        if season_element is None:
+            raise SeasonEpisodeNotExists
 
-    def query(
+        if 'selected' not in (list[str], season_element.get('class', [])):
+            page_content = self._read_series(cast(str, season_element.get('href', '')))
+
+        # Select episode
+        episode_element = next(
+            (el for el in page_content.select('#episode-choices a.choice') if str(episode) in el.text), None
+        )
+        if episode_element is None:
+            raise SeasonEpisodeNotExists
+
+        episode_url = cast(str, episode_element.get('href', ''))
+        if 'selected' not in (list[str], episode_element.get('class', [])):
+            page_content = self._read_series(episode_url)
+
+        # logger.error('No episode url found for %s, season %d, episode %d', series, season, episode)
+
+        return page_content, episode_url
+
+    def _query_provider(
         self, series: str | None = None, season: int | None = None, episode: int | None = None, year: int | None = None
     ) -> list[SubtitulamosSubtitle]:
         """Query the provider for subtitles."""
-        if not self.session:
-            raise NotInitializedProviderError
-
-        # get the episode url
-        episode_url = self._search_url_titles(series, season, episode, year)
-        if episode_url is None:
-            logger.error('No episode url found for %s, season %d, episode %d', series, season, episode)
-            return []
-
-        r = self.session.get(episode_url, headers={'Referer': self.server_url}, timeout=10)
-        r.raise_for_status()
-        soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
+        # get the episode page content
+        soup, episode_url = self._read_episode_page(series, season, episode, year)
 
         # get episode title
         title = soup.select('#episode-name h3')[0].get_text().strip().lower()
@@ -227,21 +223,30 @@ class SubtitulamosProvider(Provider):
             # read the subtitle url
             subtitle_url = self.server_url + cast(str, sub.parent.get('href', ''))
             subtitle = SubtitulamosSubtitle(
-                language,
-                hearing_impaired,
-                episode_url,
-                series,
-                season,
-                episode,
-                title,
-                year,
-                release_group,
-                subtitle_url,
+                language=language,
+                hearing_impaired=hearing_impaired,
+                page_link=self.server_url + episode_url,
+                series=series,
+                season=season,
+                episode=episode,
+                title=title,
+                year=year,
+                release_group=release_group,
+                download_link=subtitle_url,
             )
             logger.debug('Found subtitle %r', subtitle)
             subtitles.append(subtitle)
 
         return subtitles
+
+    def query(
+        self, series: str | None = None, season: int | None = None, episode: int | None = None, year: int | None = None
+    ) -> list[SubtitulamosSubtitle]:
+        """Query the provider for subtitles."""
+        try:
+            return self._query_provider(series, season, episode, year)
+        except SeasonEpisodeNotExists:
+            return []
 
     def list_subtitles(self, video: Video, languages: Set[Language]) -> list[SubtitulamosSubtitle]:
         """List all the subtitles for the video."""
@@ -263,3 +268,15 @@ class SubtitulamosProvider(Provider):
         r.raise_for_status()
 
         subtitle.content = fix_line_ending(r.content)
+
+
+class SubtitulamosError(ProviderError):
+    """Base class for non-generic :class:`SubtitulamosProvider` exceptions."""
+
+    pass
+
+
+class SeasonEpisodeNotExists(SubtitulamosError):
+    """Exception raised when the season and/or the episode does not exist on provider."""
+
+    pass

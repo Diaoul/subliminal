@@ -129,7 +129,6 @@ def episodes() -> dict[str, Episode]:
             audio_codec='Dolby Digital',
             imdb_id='tt6674448',
             size=505152010,
-            hashes={},
         ),
         'got_s03e10': Episode(
             os.path.join(
@@ -453,6 +452,13 @@ def episodes() -> dict[str, Episode]:
             'Grimsburg',
             1,
             1,
+        ),
+        'dw_s13e03': Episode(
+            'Doctor.Who.2005.S13E03.Chapter.Three.Once.Upon.Time.1080p.AMZN.WEB-DL.DDP5.1.H.264-NOSIVID.mkv',
+            'Doctor Who',
+            13,
+            3,
+            year=2005,
         ),
     }
 

@@ -697,7 +697,8 @@ class OpenSubtitlesComProvider(Provider):
                 )
 
                 # Some criteria are redundant, so skip duplicates
-                unique_ids = [s.id for s in subtitles]
+                # Use set for faster search
+                unique_ids = {s.id for s in subtitles}
                 if subtitle.id not in unique_ids:
                     logger.debug('Found subtitle %r', subtitle)
                     subtitles.append(subtitle)

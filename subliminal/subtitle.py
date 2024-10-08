@@ -595,9 +595,9 @@ def find_potential_encodings(language: Language) -> list[str]:  # pragma: no cov
         return ['windows-1251', 'iso-8859-5']
 
     if language.alpha3 == 'srp':
-        if language.script == 'Latn':
+        if language.script is not None and language.script.code == 'Latn':
             return ['windows-1250', 'iso-8859-2']
-        if language.script == 'Cyrl':
+        if language.script is not None and language.script.code == 'Cyrl':
             return ['windows-1251', 'iso-8859-5']
         return ['windows-1250', 'windows-1251', 'iso-8859-2', 'iso-8859-5']
 

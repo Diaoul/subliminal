@@ -156,6 +156,10 @@ class SubtitulamosProvider(Provider):
         if len(series_response) == 0:
             series_response = self._query_search(series)
 
+        if len(series_response) == 0:
+            msg = 'Series not found'
+            raise NotExists(msg)
+
         """Provides the URL for a specific episode of the series."""
         page_content = self._read_series(f'/shows/{series_response[0]['show_id']}')
 
@@ -164,9 +168,10 @@ class SubtitulamosProvider(Provider):
             (el for el in page_content.select('#season-choices a.choice') if str(season) in el.text), None
         )
         if season_element is None:
-            raise SeasonEpisodeNotExists
+            msg = 'Season not found'
+            raise NotExists(msg)
 
-        if 'selected' not in (list[str], season_element.get('class', [])):
+        if 'selected' not in cast(list[str], season_element.get('class', [])):
             page_content = self._read_series(cast(str, season_element.get('href', '')))
 
         # Select episode
@@ -174,13 +179,12 @@ class SubtitulamosProvider(Provider):
             (el for el in page_content.select('#episode-choices a.choice') if str(episode) in el.text), None
         )
         if episode_element is None:
-            raise SeasonEpisodeNotExists
+            msg = 'Episode not found'
+            raise NotExists(msg)
 
         episode_url = cast(str, episode_element.get('href', ''))
-        if 'selected' not in (list[str], episode_element.get('class', [])):
+        if 'selected' not in cast(list[str], episode_element.get('class', [])):
             page_content = self._read_series(episode_url)
-
-        # logger.error('No episode url found for %s, season %d, episode %d', series, season, episode)
 
         return page_content, episode_url
 
@@ -245,7 +249,7 @@ class SubtitulamosProvider(Provider):
         """Query the provider for subtitles."""
         try:
             return self._query_provider(series, season, episode, year)
-        except SeasonEpisodeNotExists:
+        except NotExists:
             return []
 
     def list_subtitles(self, video: Video, languages: Set[Language]) -> list[SubtitulamosSubtitle]:
@@ -276,7 +280,9 @@ class SubtitulamosError(ProviderError):
     pass
 
 
-class SeasonEpisodeNotExists(SubtitulamosError):
+class NotExists(SubtitulamosError):
     """Exception raised when the season and/or the episode does not exist on provider."""
 
-    pass
+    def __init__(self, msg: str) -> None:
+        super().__init__(msg)
+        logger.debug(f'Unable to download subtitle. Reason: {msg}')

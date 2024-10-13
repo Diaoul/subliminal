@@ -460,6 +460,20 @@ def episodes() -> dict[str, Episode]:
             3,
             year=2005,
         ),
+        'charmed_s01e01': Episode(
+            'Charmed.(2018).S01E01.Pilot.1080p.10bit.AMZN.WEB-DL.AAC5.1.HEVC-Vyndros.mkv',
+            'Charmed',
+            1,
+            1,
+            year=2018,
+        ),
+        'fake_show_s13e03': Episode(
+            'Fake.Show.S13E03.Chapter.This.Show.Does.Not.Exist.1080p.AMZN.WEB-DL.DDP5.1.H.264-NOSIVID.mkv',
+            'Fake Show',
+            4,
+            2,
+            year=1914,
+        ),
     }
 
 

@@ -1,0 +1,114 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Referer:
+      - https://www.subtitulamos.tv
+      User-Agent:
+      - Subliminal/2.2
+    method: GET
+    uri: https://www.subtitulamos.tv/search/query?q=Fake+Show+%281914%29
+  response:
+    body:
+      string: '[]'
+    headers:
+      CF-RAY:
+      - 8d1e52be8f496677-MAD
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - text/html; charset=UTF-8
+      Date:
+      - Sun, 13 Oct 2024 09:32:35 GMT
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=JwRm0wdlHmaWm7%2B1aNlX1fq5XCatGdQ9kg7In%2FSbiMVwFe%2BATlc%2BNJesu%2FaGziZjkX0rUw%2Fnw0e%2BEBB8LgzMCapZ%2Bejar1hhbqijaPi1WUvpeXTnB04iVldt90n%2Bcw4RYb0Ff%2BYp"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - PHPSESSID=rftvvbbu47mnclpf3e6lpj9n81; path=/; HttpOnly
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
+      Transfer-Encoding:
+      - chunked
+      X-Powered-By:
+      - PHP/7.4.14
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '2'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - PHPSESSID=rftvvbbu47mnclpf3e6lpj9n81
+      Referer:
+      - https://www.subtitulamos.tv
+      User-Agent:
+      - Subliminal/2.2
+    method: GET
+    uri: https://www.subtitulamos.tv/search/query?q=Fake+Show
+  response:
+    body:
+      string: '[]'
+    headers:
+      CF-RAY:
+      - 8d1e52bfac0c2f8c-MAD
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - text/html; charset=UTF-8
+      Date:
+      - Sun, 13 Oct 2024 09:32:35 GMT
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=1kjcSkDiCjskgIFPLajXqe3Dy44XXiPqvSTbqIi%2Bk1X4TKcyR0KI41HXOgG8h2%2BKUCOF%2By2y9aJExIIc%2BTcteGpSSB1SbBoWb6hh1Zjk38t6d4n2su4vV9ckeCEz92LFHv2E%2FAp5"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
+      Transfer-Encoding:
+      - chunked
+      X-Powered-By:
+      - PHP/7.4.14
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '2'
+    status:
+      code: 200
+      message: OK
+version: 1

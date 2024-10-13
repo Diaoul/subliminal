@@ -79,10 +79,9 @@ def test_download_subtitle_year(episodes):
 def test_download_subtitle_last_season(episodes):
     video = episodes['dw_s13e03']
     languages = {Language('eng'), Language('spa')}
-    with (
-        SubtitulamosProvider() as provider,
-        patch.object(SubtitulamosProvider, '_read_series', wraps=provider._read_series) as mock,
-    ):
+    with SubtitulamosProvider() as provider, patch.object(
+        SubtitulamosProvider, '_read_series', wraps=provider._read_series
+    ) as mock:
         subtitles = provider.list_subtitles(video, languages)
         assert len(subtitles) >= 1
         subtitle = subtitles[0]
@@ -100,10 +99,9 @@ def test_download_subtitle_last_season(episodes):
 def test_download_subtitle_first_episode(episodes):
     video = episodes['charmed_s01e01']
     languages = {Language('eng')}
-    with (
-        SubtitulamosProvider() as provider,
-        patch.object(SubtitulamosProvider, '_read_series', wraps=provider._read_series) as mock,
-    ):
+    with SubtitulamosProvider() as provider, patch.object(
+        SubtitulamosProvider, '_read_series', wraps=provider._read_series
+    ) as mock:
         subtitles = provider.list_subtitles(video, languages)
         assert len(subtitles) >= 1
         subtitle = subtitles[0]

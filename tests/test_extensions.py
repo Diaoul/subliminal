@@ -10,10 +10,10 @@ import pytest
 from subliminal.extensions import (
     EntryPoint,
     RegistrableExtensionManager,
-    default_providers,
-    default_refiners,
     disabled_providers,
     disabled_refiners,
+    get_default_providers,
+    get_default_refiners,
     parse_entry_point,
     provider_manager,
     refiner_manager,
@@ -115,7 +115,7 @@ def test_provider_manager():
     internal_names = {
         parse_entry_point(iep, provider_manager.namespace).name for iep in provider_manager.internal_extensions
     }
-    enabled_names = set(default_providers)
+    enabled_names = set(get_default_providers())
     disabled_names = set(disabled_providers)
     assert enabled_names == setup_names - disabled_names
     assert internal_names == enabled_names | disabled_names
@@ -126,7 +126,7 @@ def test_refiner_manager():
     internal_names = {
         parse_entry_point(iep, refiner_manager.namespace).name for iep in refiner_manager.internal_extensions
     }
-    enabled_names = set(default_refiners)
+    enabled_names = set(get_default_refiners())
     disabled_names = set(disabled_refiners)
     assert enabled_names == setup_names - disabled_names
     assert internal_names == enabled_names | disabled_names

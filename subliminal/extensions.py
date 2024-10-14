@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 import re
 from importlib.metadata import EntryPoint
 from typing import TYPE_CHECKING, Any
@@ -138,10 +139,15 @@ provider_manager = RegistrableExtensionManager(
 )
 
 #: Disabled providers
-disabled_providers = ['addic7ed', 'napiprojekt', 'opensubtitlesvip', 'opensubtitlescomvip']
+disabled_providers = ['opensubtitlesvip', 'opensubtitlescomvip']
+if 'SUBLIMINAL_DISABLED_PROVIDERS' in os.environ:
+    disabled_providers = os.environ['SUBLIMINAL_DISABLED_PROVIDERS'].split(' ')
 
-#: Default enabled providers
-default_providers = [p for p in provider_manager.names() if p not in disabled_providers]
+
+def get_default_providers() -> list[str]:
+    """Return the default enabled providers."""
+    return [p for p in provider_manager.names() if p not in disabled_providers]
+
 
 #: Refiner manager
 refiner_manager = RegistrableExtensionManager(
@@ -157,9 +163,14 @@ refiner_manager = RegistrableExtensionManager(
 
 #: Disabled refiners
 disabled_refiners: list[str] = []
+if 'SUBLIMINAL_DISABLED_REFINERS' in os.environ:
+    disabled_refiners = os.environ['SUBLIMINAL_DISABLED_REFINERS'].split(' ')
 
-#: Default enabled refiners
-default_refiners = [r for r in refiner_manager.names() if r not in disabled_refiners]
+
+def get_default_refiners() -> list[str]:
+    """Return the default enabled refiners."""
+    return [r for r in refiner_manager.names() if r not in disabled_refiners]
+
 
 #: Discarded Movie refiners
 discarded_movie_refiners: list[str] = ['tvdb']

@@ -16,10 +16,10 @@ from guessit import guessit  # type: ignore[import-untyped]
 from rarfile import BadRarFile, Error, NotRarFile, RarCannotExec, RarFile, is_rarfile  # type: ignore[import-untyped]
 
 from .extensions import (
-    default_providers,
-    default_refiners,
     discarded_episode_refiners,
     discarded_movie_refiners,
+    get_default_providers,
+    get_default_refiners,
     provider_manager,
     refiner_manager,
 )
@@ -75,7 +75,7 @@ class ProviderPool:
         providers: Sequence[str] | None = None,
         provider_configs: Mapping[str, Any] | None = None,
     ) -> None:
-        self.providers = providers if providers is not None else default_providers
+        self.providers = providers if providers is not None else get_default_providers()
         self.provider_configs = provider_configs or {}
         self.initialized_providers = {}
         self.discarded_providers = set()
@@ -687,7 +687,7 @@ def refine(
     :param kwargs: additional parameters for the :func:`~subliminal.refiners.refine` functions.
 
     """
-    refiners = refiners if refiners is not None else default_refiners
+    refiners = refiners if refiners is not None else get_default_refiners()
     if isinstance(video, Movie):
         refiners = [r for r in refiners if r not in discarded_movie_refiners]
     if isinstance(video, Episode):

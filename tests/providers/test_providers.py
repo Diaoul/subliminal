@@ -10,7 +10,7 @@ from subliminal.core import (
     download_subtitles,
     list_subtitles,
 )
-from subliminal.extensions import provider_manager
+from subliminal.extensions import disabled_providers, provider_manager
 from subliminal.providers.tvsubtitles import TVsubtitlesSubtitle
 from subliminal.score import episode_scores
 from subliminal.subtitle import Subtitle
@@ -68,6 +68,7 @@ def test_provider_pool_list_subtitles(episodes):
     pool = ProviderPool()
     subtitles = pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
     assert sorted(subtitles) == [  # type: ignore[type-var,comparison-overlap]
+        'addic7ed',
         'bsplayer',
         'gestdown',
         'opensubtitles',
@@ -94,6 +95,7 @@ def test_async_provider_pool_list_subtitles(episodes):
     pool = AsyncProviderPool()
     subtitles = pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
     assert sorted(subtitles) == [  # type: ignore[type-var,comparison-overlap]
+        'addic7ed',
         'bsplayer',
         'gestdown',
         'opensubtitles',
@@ -133,15 +135,16 @@ def test_list_subtitles_episode(episodes):
     subtitles = list_subtitles({video}, languages)
 
     # test providers
-    for name in ('addic7ed', 'napiprojekt', 'opensubtitlesvip'):
+    for name in ('napiprojekt', 'opensubtitlesvip', 'opensubtitlescomvip'):
         assert not provider_manager[name].plugin.list_subtitles.called
 
-    for name in ('bsplayer', 'gestdown', 'opensubtitles', 'opensubtitlescom', 'podnapisi', 'tvsubtitles'):
+    for name in ('addic7ed', 'bsplayer', 'gestdown', 'opensubtitles', 'opensubtitlescom', 'podnapisi', 'tvsubtitles'):
         assert provider_manager[name].plugin.list_subtitles.called
 
     # test result
     assert len(subtitles) == 1
     assert sorted(subtitles[episodes['bbt_s07e05']]) == [  # type: ignore[type-var,comparison-overlap]
+        'addic7ed',
         'bsplayer',
         'gestdown',
         'opensubtitles',
@@ -178,15 +181,16 @@ def test_list_subtitles_episode_no_hash(episodes):
     subtitles = list_subtitles({video}, languages)
 
     # test providers
-    for name in ('addic7ed', 'napiprojekt', 'opensubtitlesvip'):
+    for name in ('napiprojekt', 'opensubtitlesvip', 'opensubtitlescomvip'):
         assert not provider_manager[name].plugin.list_subtitles.called
 
-    for name in ('bsplayer', 'gestdown', 'opensubtitles', 'podnapisi', 'tvsubtitles'):
+    for name in ('addic7ed', 'bsplayer', 'gestdown', 'opensubtitles', 'podnapisi', 'tvsubtitles'):
         assert provider_manager[name].plugin.list_subtitles.called
 
     # test result
     assert len(subtitles) == 1
     assert sorted(subtitles[episodes['dallas_s01e03']]) == [  # type: ignore[type-var,comparison-overlap]
+        'addic7ed',
         'bsplayer',
         'gestdown',
         'opensubtitles',
@@ -335,3 +339,31 @@ def test_download_bad_subtitle(movies):
 
     assert subtitle.content is None
     assert subtitle.is_valid() is False
+
+
+@pytest.mark.integration()
+@vcr.use_cassette
+def test_list_subtitles_providers_download(episodes):
+    video = episodes['bbt_s07e05']
+    languages = {Language('eng')}
+
+    # modify global variable
+    if 'gestdown' not in disabled_providers:
+        disabled_providers.append('gestdown')
+
+    # force using 'gestdown', bypass default when init ProviderPool
+    subtitles = list_subtitles({video}, languages, providers=['gestdown'])
+
+    # test result
+    assert len(subtitles) == 1
+    assert len(subtitles[video]) > 0
+    subtitle = subtitles[video][0]
+    assert subtitle.content is None
+
+    # download subtitles
+    download_subtitles(subtitles[video][:1])
+    assert subtitle.content is not None
+
+    # reset global variable
+    if 'gestdown' in disabled_providers:
+        disabled_providers.remove('gestdown')

@@ -8,9 +8,10 @@ import os
 import platform
 import re
 import socket
+from collections.abc import Iterable
 from datetime import datetime, timedelta, timezone
 from types import GeneratorType
-from typing import TYPE_CHECKING, Any, Callable, Generic, Iterable, TypeVar, cast, overload
+from typing import TYPE_CHECKING, Any, Callable, Generic, TypeVar, cast, overload
 from xmlrpc.client import ProtocolError
 
 import requests
@@ -105,8 +106,7 @@ def sanitize_release_group(string: str) -> str:
 @none_passthrough
 def sanitize_id(id_: str | int) -> int:
     """Sanitize the IMDB (or other) id and transform it to a string (without leading 'tt' or zeroes)."""
-    # TODO: use str.removeprefix('tt')
-    id_ = str(id_).lower().lstrip('t')
+    id_ = str(id_).lower().removeprefix('tt')
     return int(id_)
 
 

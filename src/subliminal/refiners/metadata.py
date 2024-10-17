@@ -61,6 +61,7 @@ def refine(
       * :attr:`~subliminal.video.Video.audio_codec`
       * :attr:`~subliminal.video.Video.subtitles`
 
+    :param Video video: the Video to refine.
     :param bool embedded_subtitles: search for embedded subtitles.
     :param (str | None) metadata_provider: provider used to retrieve information from video metadata.
         Should be one of ['mediainfo', 'ffmpeg', 'mkvmerge', 'enzyme']. None defaults to `mediainfo`.

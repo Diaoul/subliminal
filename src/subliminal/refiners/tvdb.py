@@ -353,6 +353,11 @@ def refine(video: Video, *, apikey: str | None = None, force: bool = False, **kw
       * :attr:`~subliminal.video.Video.imdb_id`
       * :attr:`~subliminal.video.Episode.tvdb_id`
 
+    :param Video video: the Video to refine.
+    :param (str | None) apikey: a personal API key to use TheTVDB.
+    :param bool force: if True, refine even if both the IMDB ids of the series and
+        of the episodes are known for an Episode.
+
     """
     # only deal with Episode videos
     if not isinstance(video, Episode):

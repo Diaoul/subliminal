@@ -88,7 +88,7 @@ repository = "https://github.com/Diaoul/subliminal"
 documentation = "https://subliminal.readthedocs.org"
 
 [project.scripts]
-subliminal = "subliminal.cli:subliminal"
+subliminal = "subliminal.cli:cli"
 
 [project.entry-points."subliminal.providers"]
 addic7ed = "subliminal.providers.addic7ed:Addic7edProvider"

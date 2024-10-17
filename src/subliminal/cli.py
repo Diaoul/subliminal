@@ -9,6 +9,7 @@ import os
 import pathlib
 import re
 from collections import defaultdict
+from collections.abc import Mapping
 from datetime import timedelta
 from typing import TYPE_CHECKING, Any
 
@@ -43,7 +44,7 @@ from subliminal.extensions import get_default_providers, get_default_refiners
 from subliminal.utils import get_parameters_from_signature, merge_extend_and_ignore_unions
 
 if TYPE_CHECKING:
-    from collections.abc import Callable, Mapping, Sequence
+    from collections.abc import Callable, Sequence
 
     from subliminal.utils import Parameter
 
@@ -118,6 +119,11 @@ class AgeParamType(click.ParamType):
         return timedelta(**{k: int(v) for k, v in match.groupdict(0).items()})
 
 
+PROVIDERS_OPTIONS_TEMPLATE = '_{ext}__{plugin}__{key}'
+PROVIDERS_OPTIONS_CLI_TEMPLATE = '--{ext}.{plugin}.{key}'
+PROVIDERS_OPTIONS_ENVVAR_TEMPLATE = 'SUBLIMINAL_{ext}_{plugin}_{key}'
+
+
 def configure(ctx: click.Context, param: click.Parameter | None, filename: str | os.PathLike) -> None:
     """Read a configuration file."""
     filename = pathlib.Path(filename).expanduser()
@@ -163,15 +169,18 @@ def configure(ctx: click.Context, param: click.Parameter | None, filename: str |
     options['download'] = download_dict
 
     # make provider and refiner options
-    providers_dict = toml_dict.setdefault('provider', {})
-    refiners_dict = toml_dict.setdefault('refiner', {})
+    for ext in ('provider', 'refiner'):
+        for plugin, d in toml_dict.setdefault(ext, {}).items():
+            if not isinstance(d, Mapping):
+                continue
+            for k, v in d.items():
+                name = PROVIDERS_OPTIONS_TEMPLATE.format(ext=ext, plugin=plugin, key=k)
+                options[name] = v
 
     ctx.obj = {
         'debug_message': msg,
         'provider_lists': provider_lists,
         'refiner_lists': refiner_lists,
-        'provider_configs': providers_dict,
-        'refiner_configs': refiners_dict,
     }
     ctx.default_map = options
 
@@ -214,8 +223,8 @@ def options_from_managers(
                 # CLI option has dots, variable has double-underscores to differentiate
                 # with simple underscore in provider name or keyword argument.
                 param_decls = (
-                    f'--{group_name}.{plugin_name}.{name}',
-                    f'_{group_name}__{plugin_name}__{name}',
+                    PROVIDERS_OPTIONS_CLI_TEMPLATE.format(ext=group_name, plugin=plugin_name, key=name),
+                    PROVIDERS_OPTIONS_TEMPLATE.format(ext=group_name, plugin=plugin_name, key=name),
                 )
                 attrs = {
                     'default': opt['default'],
@@ -243,10 +252,10 @@ refiner_options = {
 }
 
 # Decorator to add click options from providers
-options_from_providers = options_from_managers('providers', provider_options, group=providers_config)
+options_from_providers = options_from_managers('provider', provider_options, group=providers_config)
 
 # Decorator to add click options from refiners
-options_from_refiners = options_from_managers('refiners', refiner_options, group=refiners_config)
+options_from_refiners = options_from_managers('refiner', refiner_options, group=refiners_config)
 
 
 @click.group(
@@ -311,22 +320,24 @@ def subliminal(
 
     ctx.obj['debug'] = debug
 
-    # provider configs
-    provider_configs = ctx.obj['provider_configs']
-    # refiner configs
-    refiner_configs = ctx.obj['refiner_configs']
+    # create provider and refiner configs
+    provider_configs = {}
+    refiner_configs = {}
 
     for k, v in kwargs.items():
         try_split = k.split('__')
-        if len(try_split) != 3:
+        if len(try_split) != 3:  # pragma: no cover
             click.echo(f'Unknown option: {k}={v}')
             continue
         group, plugin, key = try_split
-        if group == '_providers':
+        if group == '_provider':
             provider_configs.setdefault(plugin, {})[key] = v
 
-        elif group == '_refiners':
+        elif group == '_refiner':  # pragma: no branch
             refiner_configs.setdefault(plugin, {})[key] = v
+
+    ctx.obj['provider_configs'] = provider_configs
+    ctx.obj['refiner_configs'] = refiner_configs
 
 
 @subliminal.command()

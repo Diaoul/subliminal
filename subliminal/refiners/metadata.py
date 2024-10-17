@@ -28,6 +28,7 @@ def refine(video: Video, *, embedded_subtitles: bool = True, **kwargs: Any) -> V
       * :attr:`~subliminal.video.Video.audio_codec`
       * :attr:`~subliminal.video.Video.subtitles`
 
+    :param Video video: the Video to refine.
     :param bool embedded_subtitles: search for embedded subtitles.
 
     """

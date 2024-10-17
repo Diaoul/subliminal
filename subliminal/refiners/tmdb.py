@@ -320,6 +320,11 @@ def refine(video: Video, *, apikey: str | None = None, force: bool = False, **kw
       * :attr:`~subliminal.video.Video.tmdb_id`
       * :attr:`~subliminal.video.Video.imdb_id`
 
+    :param Video video: the Video to refine.
+    :param (str | None) apikey: a personal API key to use TMDB.
+    :param bool force: if True, refine even if TMDB id is already known for a Movie or
+        if both the TMDB ids of the series and of the episodes are known for an Episode.
+
     """
     # update the API key
     if apikey is not None:

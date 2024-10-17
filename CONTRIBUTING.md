@@ -7,7 +7,7 @@ This document presents general guidelines to make contributions easier.
 ## Translations
 
 Contribution to translations can be made on [subliminal's transifex page](https://www.transifex.com/subliminal/subliminal/)
-Subliminal is configured to work with [transifex-client](http://docs.transifex.com/client/)
+Subliminal is configured to work with [transifex-client](https://docs.transifex.com/client/)
 
 ## Issues
 

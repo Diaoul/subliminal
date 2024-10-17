@@ -18,26 +18,26 @@ pytestmark = pytest.mark.core
 
 
 @pytest.mark.parametrize('hearing_impaired', [None, True, False])
-@pytest.mark.parametrize('forced', [None, True, False])
-def test_languague_type(hearing_impaired: bool | None, forced: bool | None) -> None:
-    language_type = LanguageType.from_flags(hearing_impaired=hearing_impaired, forced=forced)
+@pytest.mark.parametrize('foreign_only', [None, True, False])
+def test_languague_type(hearing_impaired: bool | None, foreign_only: bool | None) -> None:
+    language_type = LanguageType.from_flags(hearing_impaired=hearing_impaired, foreign_only=foreign_only)
 
     if hearing_impaired is True:
         assert language_type == LanguageType.HEARING_IMPAIRED
         assert language_type.is_hearing_impaired() is True
-        assert language_type.is_forced() is False
-    elif forced is True:
-        assert language_type == LanguageType.FORCED
+        assert language_type.is_foreign_only() is False
+    elif foreign_only is True:
+        assert language_type == LanguageType.FOREIGN_ONLY
         assert language_type.is_hearing_impaired() is False
-        assert language_type.is_forced() is True
-    elif hearing_impaired is False or forced is False:
+        assert language_type.is_foreign_only() is True
+    elif hearing_impaired is False or foreign_only is False:
         assert language_type == LanguageType.NORMAL
         assert language_type.is_hearing_impaired() is False
-        assert language_type.is_forced() is False
+        assert language_type.is_foreign_only() is False
     else:
         assert language_type == LanguageType.UNKNOWN
         assert language_type.is_hearing_impaired() is None
-        assert language_type.is_forced() is None
+        assert language_type.is_foreign_only() is None
 
 
 def test_subtitle_text() -> None:
@@ -175,14 +175,14 @@ def test_get_subtitle_path_hearing_impaired(movies):
     assert get_subtitle_path(video.name, suffix) == os.path.splitext(video.name)[0] + '.hi.de-CH-Latn.srt'
 
 
-def test_get_subtitle_path_forced(movies):
+def test_get_subtitle_path_foreign_only(movies):
     video = movies['man_of_steel']
     suffix = get_subtitle_suffix(
         Language('srp', None, 'Cyrl'),
-        language_type=LanguageType.FORCED,
+        language_type=LanguageType.FOREIGN_ONLY,
         language_type_suffix=True,
     )
-    assert get_subtitle_path(video.name, suffix) == os.path.splitext(video.name)[0] + '.forced.sr-Cyrl.srt'
+    assert get_subtitle_path(video.name, suffix) == os.path.splitext(video.name)[0] + '.fo.sr-Cyrl.srt'
 
 
 def test_get_subtitle_path_alpha3(movies):
@@ -243,12 +243,12 @@ def test_subtitle_invalid_encoding():
 def test_subtitle_guess_encoding_utf8():
     subtitle = Subtitle(
         language=Language('zho'),
-        forced=False,
+        foreign_only=False,
         page_link=None,
         encoding=None,
     )
     subtitle.content = b'Something here'
-    assert subtitle.forced is False
+    assert subtitle.foreign_only is False
     assert subtitle.guess_encoding() == 'utf-8'
     assert subtitle.text == 'Something here'
 
@@ -285,7 +285,7 @@ def test_subtitle_info(monkeypatch) -> None:
     subtitle = Subtitle(
         Language('eng'),
         'xv34e',
-        forced=True,
+        foreign_only=True,
     )
     text = '1\n00:00:20,000 --> 00:00:24,400\nIn response to your honored\n\n'
     monkeypatch.setattr(Subtitle, 'text', text)
@@ -306,10 +306,10 @@ def test_embedded_subtitle_info_hearing_impaired(monkeypatch) -> None:
     assert isinstance(subtitle.info, str)
 
 
-def test_embedded_subtitle_info_forced(monkeypatch) -> None:
+def test_embedded_subtitle_info_foreign_only(monkeypatch) -> None:
     subtitle = EmbeddedSubtitle(
         Language('fra'),
-        forced=True,
+        foreign_only=True,
     )
     text = '1\n00:00:20,000 --> 00:00:24,400\nEn réponse à votre honorée du tant\n\n'
     monkeypatch.setattr(Subtitle, 'text', text)

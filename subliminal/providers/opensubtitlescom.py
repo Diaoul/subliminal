@@ -179,6 +179,7 @@ class OpenSubtitlesComSubtitle(Subtitle):
         subtitle_id: str,
         *,
         hearing_impaired: bool = False,
+        foreign_only: bool = False,
         movie_kind: str | None = None,
         release: str | None = None,
         movie_title: str | None = None,
@@ -199,7 +200,14 @@ class OpenSubtitlesComSubtitle(Subtitle):
         file_id: int = 0,
         file_name: str = '',
     ) -> None:
-        super().__init__(language, subtitle_id, hearing_impaired=hearing_impaired, page_link=None, encoding='utf-8')
+        super().__init__(
+            language,
+            subtitle_id,
+            hearing_impaired=hearing_impaired,
+            foreign_only=foreign_only,
+            page_link=None,
+            encoding='utf-8',
+        )
         self.movie_kind = movie_kind
         self.release = release
         self.movie_title = movie_title
@@ -235,6 +243,7 @@ class OpenSubtitlesComSubtitle(Subtitle):
         attributes = response.get('attributes', {})
         language = Language.fromopensubtitlescom(str(attributes.get('language')))
         hearing_impaired = bool(int(attributes.get('hearing_impaired')))
+        foreign_only = bool(int(attributes.get('foreign_parts_only')))
         release = str(attributes.get('release'))
         moviehash_match = bool(attributes.get('moviehash_match', False))
         download_count = int(attributes.get('download_count'))
@@ -266,6 +275,7 @@ class OpenSubtitlesComSubtitle(Subtitle):
             language,
             subtitle_id,
             hearing_impaired=hearing_impaired,
+            foreign_only=foreign_only,
             movie_kind=movie_kind,
             release=release,
             movie_title=movie_title,

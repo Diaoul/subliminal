@@ -533,7 +533,7 @@ def get_subtitle_suffix(
 
 def find_potential_encodings(language: Language) -> list[str]:  # pragma: no cover
     """Find potential encodings given the language."""
-    # http://scratchpad.wikia.com/wiki/Character_Encoding_Recommendation_for_Languages
+    # https://scratchpad.wikia.com/wiki/Character_Encoding_Recommendation_for_Languages
 
     if language.alpha3 == 'zho':
         return ['cp936', 'gb2312', 'gbk', 'hz', 'iso2022_jp_2', 'cp950', 'big5hkscs', 'big5', 'gb18030', 'utf-16']

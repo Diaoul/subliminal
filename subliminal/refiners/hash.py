@@ -73,6 +73,10 @@ def refine(
 
       * :attr:`~subliminal.video.Video.hashes`
 
+    :param Video video: the Video to refine.
+    :param providers: list of providers for which the video hash should be computed.
+    :param languages: set of languages that need to be compatible with the providers.
+
     """
     if video.size is None or video.size <= 10485760:
         logger.warning('Size is lower than 10MB: hashes not computed')

@@ -225,6 +225,12 @@ def options_from_managers(
                     'default': opt['default'],
                     'help': opt['desc'],
                     'show_default': True,
+                    'show_envvar': True,
+                    'envvar': PROVIDERS_OPTIONS_ENVVAR_TEMPLATE.format(
+                        ext=group_name.upper(),
+                        plugin=plugin_name.upper(),
+                        key=name.upper(),
+                    ),
                 }
                 click_option(*param_decls, **attrs)(f)
         return f
@@ -266,6 +272,7 @@ options_from_refiners = options_from_managers('refiner', refiner_options, group=
     show_default=True,
     is_eager=True,
     expose_value=False,
+    show_envvar=True,
     help='Path to the TOML configuration file.',
 )
 @click.option(
@@ -416,6 +423,7 @@ def cache(ctx: click.Context, clear_subliminal: bool) -> None:
     'use_ctime',
     is_flag=True,
     default=False,
+    show_envvar=True,
     help=(
         'Use the latest of modification date and creation date to calculate the age. '
         'Otherwise, just use the modification date.'
@@ -764,3 +772,8 @@ def download(
 
     if verbose == 0:
         click.echo(f"Downloaded {plural(total_subtitles, 'subtitle')}")
+
+
+def cli() -> None:
+    """CLI that recognizes environment variables."""
+    subliminal(auto_envvar_prefix='SUBLIMINAL')

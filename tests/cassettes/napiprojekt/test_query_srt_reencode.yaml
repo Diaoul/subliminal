@@ -9,9 +9,9 @@ interactions:
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
-    uri: http://napiprojekt.pl/unit_napisy/dl.php?v=dreambox&kolejka=false&nick=&pass=&napios=Linux&l=PL&f=95bdf8ca5716166e6ad1e030a4a6b5cd&t=4c98e
+    uri: https://napiprojekt.pl/unit_napisy/dl.php?v=dreambox&kolejka=false&nick=&pass=&napios=Linux&l=PL&f=95bdf8ca5716166e6ad1e030a4a6b5cd&t=4c98e
   response:
     body:
       string: !!binary |
@@ -1012,22 +1012,20 @@ interactions:
       - max-age=1296000
       Connection:
       - Keep-Alive
-      Content-Encoding:
-      - gzip
-      Content-Length:
-      - '23251'
       Content-Type:
       - text/html; charset=UTF-8
       Date:
-      - Wed, 05 Jun 2024 10:35:33 GMT
+      - Thu, 17 Oct 2024 20:53:36 GMT
       Expires:
-      - Thu, 20 Jun 2024 10:35:33 GMT
+      - Fri, 01 Nov 2024 20:53:36 GMT
       Keep-Alive:
       - timeout=5, max=1000
       Server:
       - Apache
       Vary:
       - Accept-Encoding
+      content-length:
+      - '56529'
     status:
       code: 200
       message: OK

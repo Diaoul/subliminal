@@ -60,12 +60,12 @@ Expiration time should be :data:`~subliminal.cache.SHOW_EXPIRATION_TIME` for sho
 
 Language
 --------
-To be able to handle various language codes, subliminal makes use of `babelfish <http://babelfish.readthedocs.org>`_
+To be able to handle various language codes, subliminal makes use of `babelfish <https://babelfish.readthedocs.org>`_
 Language and converters. You must set the attribute :attr:`~subliminal.providers.Provider.languages` with a set of
 supported :class:`~babelfish.language.Language`.
 
 If you cannot find a suitable converter for your provider, you can `make one of your own
-<http://babelfish.readthedocs.org/en/latest/#custom-converters>`_.
+<https://babelfish.readthedocs.org/en/latest/#custom-converters>`_.
 
 
 Querying

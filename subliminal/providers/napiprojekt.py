@@ -89,7 +89,7 @@ class NapiProjektProvider(Provider):
     subtitle_class: ClassVar = NapiProjektSubtitle
 
     required_hash: ClassVar = 'napiprojekt'
-    server_url: ClassVar[str] = 'http://napiprojekt.pl/unit_napisy/dl.php'
+    server_url: ClassVar[str] = 'https://napiprojekt.pl/unit_napisy/dl.php'
 
     timeout: int
     session: Session | None

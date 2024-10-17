@@ -448,7 +448,7 @@ def mkv():
     missing_files = [f for f in wanted_files if not os.path.exists(os.path.join(data_path, f))]
     if missing_files:
         # download matroska test suite
-        r = requests.get('http://downloads.sourceforge.net/project/matroska/test_files/matroska_test_w1_1.zip')
+        r = requests.get('https://downloads.sourceforge.net/project/matroska/test_files/matroska_test_w1_1.zip')
         with ZipFile(BytesIO(r.content), 'r') as f:
             for missing_file in missing_files:
                 f.extract(missing_file, data_path)

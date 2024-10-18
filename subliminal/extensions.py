@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import os
 import re
 from importlib.metadata import EntryPoint
 from typing import TYPE_CHECKING, Any
@@ -140,8 +139,6 @@ provider_manager = RegistrableExtensionManager(
 
 #: Disabled providers
 disabled_providers = ['opensubtitlesvip', 'opensubtitlescomvip']
-if 'SUBLIMINAL_DISABLED_PROVIDERS' in os.environ:
-    disabled_providers = os.environ['SUBLIMINAL_DISABLED_PROVIDERS'].split(' ')
 
 
 def get_default_providers() -> list[str]:
@@ -163,8 +160,6 @@ refiner_manager = RegistrableExtensionManager(
 
 #: Disabled refiners
 disabled_refiners: list[str] = []
-if 'SUBLIMINAL_DISABLED_REFINERS' in os.environ:
-    disabled_refiners = os.environ['SUBLIMINAL_DISABLED_REFINERS'].split(' ')
 
 
 def get_default_refiners() -> list[str]:

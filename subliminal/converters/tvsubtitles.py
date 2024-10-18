@@ -33,11 +33,11 @@ class TVsubtitlesConverter(LanguageReverseConverter):
         if (alpha3, None) in self.to_tvsubtitles:
             return self.to_tvsubtitles[(alpha3, None)]
 
-        return self.alpha2_converter.convert(alpha3, country, script)
+        return self.alpha2_converter.convert(alpha3, country, script)  # type: ignore[no-any-return]
 
     def reverse(self, code: str) -> LanguageTuple:
         """Reverse a custom code into alpha3, country and script code."""
         if code in self.from_tvsubtitles:
             return (*self.from_tvsubtitles[code], None)
 
-        return self.alpha2_converter.reverse(code)
+        return self.alpha2_converter.reverse(code)  # type: ignore[no-any-return]

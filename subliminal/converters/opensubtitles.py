@@ -59,7 +59,7 @@ class OpenSubtitlesConverter(LanguageReverseConverter):
 
     def convert(self, alpha3: str, country: str | None = None, script: str | None = None) -> str:
         """Convert an alpha3 language code with an alpha2 country code and a script code into a custom code."""
-        alpha3b = self.alpha3b_converter.convert(alpha3, country, script)
+        alpha3b = self.alpha3b_converter.convert(alpha3, country, script)  # type: ignore[no-any-return]
         if (alpha3b, country, script) in self.to_opensubtitles:
             return self.to_opensubtitles[(alpha3b, country, script)]
         return alpha3b
@@ -71,7 +71,7 @@ class OpenSubtitlesConverter(LanguageReverseConverter):
         for conv in [self.alpha3b_converter, self.alpha2_converter]:
             conv = cast(LanguageReverseConverter, conv)
             try:
-                return conv.reverse(code)
+                return conv.reverse(code)  # type: ignore[no-any-return]
             except LanguageReverseError:
                 pass
         raise LanguageReverseError(code)

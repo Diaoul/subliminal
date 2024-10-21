@@ -29,7 +29,7 @@ Scoring
 Rating subtitles and comparing them is probably the most difficult part and this is where subliminal excels with its
 powerful scoring algorithm.
 
-Using `guessit <http://guessit.readthedocs.org>`_ and `enzyme <http://enzyme.readthedocs.org>`_, subliminal extracts
+Using `guessit <https://guessit.readthedocs.org>`_ and `enzyme <https://enzyme.readthedocs.org>`_, subliminal extracts
 properties of the video and match them with the properties of the subtitles found with the providers.
 
 Equations in :mod:`subliminal.score` give a score to each property (called a match). The more matches the video and
@@ -40,13 +40,13 @@ Libraries
 ---------
 Various libraries are used by subliminal and are key to its success:
 
-* `guessit <http://guessit.readthedocs.org>`_ to guess information from filenames
-* `enzyme <http://enzyme.readthedocs.org>`_ to detect embedded subtitles in videos and read other video metadata
-* `babelfish <http://babelfish.readthedocs.org>`_ to work with languages
-* `requests <http://docs.python-requests.org>`_ to make human readable HTTP requests
-* `BeautifulSoup <http://www.crummy.com/software/BeautifulSoup>`_ to parse HTML and XML
-* `dogpile.cache <http://dogpilecache.readthedocs.org>`_ to cache intermediate search results
-* `stevedore <http://docs.openstack.org/developer/stevedore/>`_ to manage the provider entry point
-* `chardet <http://chardet.readthedocs.org>`_ to detect subtitles' encoding
+* `guessit <https://guessit.readthedocs.org>`_ to guess information from filenames
+* `enzyme <https://enzyme.readthedocs.org>`_ to detect embedded subtitles in videos and read other video metadata
+* `babelfish <https://babelfish.readthedocs.org>`_ to work with languages
+* `requests <https://requests.readthedocs.org/>`_ to make human readable HTTP requests
+* `BeautifulSoup <https://www.crummy.com/software/BeautifulSoup/>`_ to parse HTML and XML
+* `dogpile.cache <https://dogpilecache.readthedocs.org>`_ to cache intermediate search results
+* `stevedore <https://docs.openstack.org/stevedore/latest/>`_ to manage the provider entry point
+* `chardet <https://chardet.readthedocs.org>`_ to detect subtitles' encoding
 * `srt <https://github.com/cdown/srt>`_ to validate downloaded SubRip subtitles
 * `pysub2 <https://github.com/tkarabela/pysubs2>`_ to validate and convert downloaded subtitles to other formats.

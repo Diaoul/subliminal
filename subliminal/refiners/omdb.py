@@ -205,7 +205,7 @@ class OMDBClient:
 
 
 def refine_episode(client: OMDBClient, video: Episode, *, force: bool = False, **kwargs: Any) -> None:
-    """Refine an Episode by searching `OMDb API <http://omdbapi.com/>`_."""
+    """Refine an Episode by searching `OMDb API <https://omdbapi.com/>`_."""
     # exit if the information is complete
     if not force and video.series_imdb_id and video.imdb_id:
         logger.debug('No need to search, IMDB ids already exist for the video.')
@@ -246,7 +246,7 @@ def refine_episode(client: OMDBClient, video: Episode, *, force: bool = False, *
 
 
 def refine_movie(client: OMDBClient, video: Movie, *, force: bool = False, **kwargs: Any) -> None:
-    """Refine a Movie by searching `OMDb API <http://omdbapi.com/>`_."""
+    """Refine a Movie by searching `OMDb API <https://omdbapi.com/>`_."""
     # exit if the information is complete
     if not force and video.imdb_id:
         logger.debug('No need to search, IMDB ids already exist for the video.')

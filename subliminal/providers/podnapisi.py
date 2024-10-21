@@ -135,7 +135,7 @@ class PodnapisiProvider(Provider):
         if self.session is None:
             raise NotInitializedProviderError
 
-        # set parameters, see http://www.podnapisi.net/forum/viewtopic.php?f=62&t=26164#p212652
+        # set parameters, see https://www.podnapisi.net/forum/viewtopic.php?f=62&t=26164#p212652
         params: dict[str, Any] = {'keywords': keyword, 'language': str(language)}
         is_episode = False
         if season is not None and episode is not None:
@@ -162,7 +162,7 @@ class PodnapisiProvider(Provider):
             for data in result['data']:
                 # read xml elements
                 pid = data['id']
-                # ignore duplicates, see http://www.podnapisi.net/forum/viewtopic.php?f=62&t=26164&start=10#p213321
+                # ignore duplicates, see https://www.podnapisi.net/forum/viewtopic.php?f=62&t=26164&start=10#p213321
                 if pid in pids:
                     logger.debug('Ignoring duplicate %r', pid)
                     continue

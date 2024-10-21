@@ -207,7 +207,7 @@ def creation_date(filepath: os.PathLike | str) -> float:
 
     Try to get the date that a file was created, falling back to when it was
     last modified if that isn't possible.
-    See http://stackoverflow.com/a/39501288/1709587 for explanation.
+    See https://stackoverflow.com/a/39501288/1709587 for explanation.
     """
     # Use creation time (although it may not be correct)
     if platform.system() == 'Windows':

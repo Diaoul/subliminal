@@ -6,7 +6,7 @@ and :func:`~subliminal.core.download_best_subtitles`.
 
 .. note::
 
-    To avoid unnecessary dependency on `sympy <http://www.sympy.org/>`_ and boost subliminal's import time, the
+    To avoid unnecessary dependency on `sympy <https://www.sympy.org/>`_ and boost subliminal's import time, the
     resulting scores are hardcoded here and manually updated when the set of equations change.
 
 Available matches:

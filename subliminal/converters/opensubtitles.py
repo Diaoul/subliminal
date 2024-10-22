@@ -62,12 +62,12 @@ class OpenSubtitlesConverter(LanguageReverseConverter):
         alpha3b = self.alpha3b_converter.convert(alpha3, country, script)  # type: ignore[no-any-return]
         if (alpha3b, country, script) in self.to_opensubtitles:
             return self.to_opensubtitles[(alpha3b, country, script)]
-        return alpha3b
+        return alpha3b  # type: ignore[no-any-return]
 
     def reverse(self, code: str) -> LanguageTuple:
         """Reverse a custom code into alpha3, country and script code."""
         if code in self.from_opensubtitles:
-            return self.from_opensubtitles[code]
+            return self.from_opensubtitles[code]  # type: ignore[no-any-return]
         for conv in [self.alpha3b_converter, self.alpha2_converter]:
             conv = cast(LanguageReverseConverter, conv)
             try:

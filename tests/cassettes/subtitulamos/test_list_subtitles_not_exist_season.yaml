@@ -1,0 +1,618 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Referer:
+      - https://www.subtitulamos.tv
+      User-Agent:
+      - Subliminal/2.2
+    method: GET
+    uri: https://www.subtitulamos.tv/search/query?q=The+Big+Bang+Theory+%282007%29
+  response:
+    body:
+      string: '[]'
+    headers:
+      CF-RAY:
+      - 8d1e52c0aa0a3846-MAD
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - text/html; charset=UTF-8
+      Date:
+      - Sun, 13 Oct 2024 09:32:35 GMT
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=KD9uxxjnyFEVsC0BWwfauW50ayV8b57ouKpGJZJZ0LweuaIGEp6loxfGgU8AsXk9LrCtLBL7GoXAbjcGu0xqalWpdpQKJ3XDqVM25Fvaqxs0TUqwJkwo%2FCKpCcPYGFeaq%2BH7FN8V"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - PHPSESSID=sto55oeln8j362p3hnka97s5v7; path=/; HttpOnly
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
+      Transfer-Encoding:
+      - chunked
+      X-Powered-By:
+      - PHP/7.4.14
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '2'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - PHPSESSID=sto55oeln8j362p3hnka97s5v7
+      Referer:
+      - https://www.subtitulamos.tv
+      User-Agent:
+      - Subliminal/2.2
+    method: GET
+    uri: https://www.subtitulamos.tv/search/query?q=The+Big+Bang+Theory
+  response:
+    body:
+      string: '[{"show_id":97,"show_name":"The Big Bang Theory"}]'
+    headers:
+      CF-RAY:
+      - 8d1e52c1ad4d666f-MAD
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - text/html; charset=UTF-8
+      Date:
+      - Sun, 13 Oct 2024 09:32:35 GMT
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=K3fTmyrcL0J2V6%2BFLCxCegkcz4buGBbI1fpMwuPpMWkGWKkgOrTHeKr%2FcyH%2BornjTz0phX2hXe8Sx%2FHuX3eZ%2BNZ%2FCPtTCIifPsAKdqPJ%2F3%2FKBBkKgGClXhuyLf8304vAjY9TddFa"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
+      Transfer-Encoding:
+      - chunked
+      X-Powered-By:
+      - PHP/7.4.14
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '50'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - PHPSESSID=sto55oeln8j362p3hnka97s5v7
+      Referer:
+      - https://www.subtitulamos.tv
+      User-Agent:
+      - Subliminal/2.2
+    method: GET
+    uri: https://www.subtitulamos.tv/shows/97
+  response:
+    body:
+      string: ''
+    headers:
+      CF-RAY:
+      - 8d1e52c2bf76cc40-MAD
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - text/html; charset=UTF-8
+      Date:
+      - Sun, 13 Oct 2024 09:32:35 GMT
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Location:
+      - /episodes/4768
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=tHRRvSXNKMVVwTECs5EqGfoAVxSwiJ2cRoQLlUwjoBYo3xAvzksRiY7cHBAOT7ytKvV7FVH6J3e7x4DbvR%2FzGE0%2BGyRat6tE61LSwtQ01kXnXGt3UbKHc2HQO9IoGYvvwywzFP4m"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
+      Transfer-Encoding:
+      - chunked
+      X-Powered-By:
+      - PHP/7.4.14
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+    status:
+      code: 302
+      message: Found
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - PHPSESSID=sto55oeln8j362p3hnka97s5v7
+      Referer:
+      - https://www.subtitulamos.tv
+      User-Agent:
+      - Subliminal/2.2
+    method: GET
+    uri: https://www.subtitulamos.tv/episodes/4768
+  response:
+    body:
+      string: ''
+    headers:
+      CF-RAY:
+      - 8d1e52c3be66667b-MAD
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - text/html; charset=UTF-8
+      Date:
+      - Sun, 13 Oct 2024 09:32:35 GMT
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Location:
+      - /episodes/4768/the-big-bang-theory-12x90-unraveling-the-mystery-a-big-bang-farewell
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=vI9jIVEGhv0zpjaNyivL5qddYRBXSB5irDvvBJDpczcUj211AJe5%2B74dw2sxnrkfEFC7pRTHfxzqnwHa47Kjzn8zaB1FWxgyV1BV765yWw13fn1Lljq11liaNgCiSd%2B89euh9MZl"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
+      Transfer-Encoding:
+      - chunked
+      X-Powered-By:
+      - PHP/7.4.14
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+    status:
+      code: 301
+      message: Moved Permanently
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Cookie:
+      - PHPSESSID=sto55oeln8j362p3hnka97s5v7
+      Referer:
+      - https://www.subtitulamos.tv
+      User-Agent:
+      - Subliminal/2.2
+    method: GET
+    uri: https://www.subtitulamos.tv/episodes/4768/the-big-bang-theory-12x90-unraveling-the-mystery-a-big-bang-farewell
+  response:
+    body:
+      string: "<!DOCTYPE html>\n<html>\n<head>\n  <base href=\"https://www.subtitulamos.tv/\">\n\n
+        \ <meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"/>\n
+        \ <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1\">\n
+        \       <link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/apple-touch-icon.png?v=lkvlWOG2Qx\">\n<link
+        rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/favicon-32x32.png?v=lkvlWOG2Qx\">\n<link
+        rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/favicon-16x16.png?v=lkvlWOG2Qx\">\n<link
+        rel=\"manifest\" href=\"/site.webmanifest?v=lkvlWOG2Qx\">\n<link rel=\"mask-icon\"
+        href=\"/safari-pinned-tab.svg?v=lkvlWOG2Qx\" color=\"#607dcd\">\n<link rel=\"shortcut
+        icon\" href=\"/favicon.ico?v=lkvlWOG2Qx\">\n<meta name=\"msapplication-TileColor\"
+        content=\"#607dcd\">\n<meta name=\"theme-color\" content=\"#607dcd\">\n  \n
+        \ <script type=\"text/javascript\" src=\"js/hotload.js?202410130932\"></script>\n\n
+        \ <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css\">\n
+        \ <link href=\"https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap\"
+        rel=\"stylesheet\">\n  <link href=\"https://fonts.googleapis.com/css2?family=Open+Sans:wght@700\"
+        rel=\"stylesheet\">\n      <link href=\"css/episode.33948c0e9a7ae54a4c20.css\"
+        rel=\"stylesheet\" type=\"text/css\"/>\n\n\n  <title>\n        The Big Bang
+        Theory 12x90 - Unraveling the Mystery. A Big Bang Farewell. - Subtitulamos.tv
+        - Subt\xEDtulos de series\n  </title>\n</head>\n<body>\n  <div id=\"base\"
+        class=\"w-header color-swatch-normal font-thickness-normal\">\n        <div
+        id=\"overlay\" class=\"overlay-wrap hidden\">\n      <div class=\"overlay-container
+        w-box-shadow bounce-in\">\n        <i id=\"overlay-close\"class=\"fas fa-times
+        close-button\" aria-hidden=\"true\"></i>\n        <div id=\"overlay-content\">\n\n
+        \       </div>\n      </div>\n      <div id=\"overlay-fade\" class=\"fade-pan\"></div>\n
+        \   </div>\n      <nav id=\"control-panel\" class=\"no-scroll-bar \">\n        <div
+        id=\"control-panel-top-section\" class=\"control-panel-section\">\n          <a
+        href=\"/\">\n            <div id=\"control-panel-logo-wrap\">\n              <svg
+        id=\"logo-miniature\" height=\"30\" viewBox=\"0 0 720 720\">\n                <path
+        d=\"M500,480C373.919,603.693,144.292,621.974,115.091,623.822A359,359,0,0,1,0,360C0,161.178,161.178,0,360,0A358.39,358.39,0,0,1,576.516,72.38C594.276,124.682,651.193,331.67,500,480ZM456,236H172a32,32,0,0,0,0,64H456A32,32,0,0,0,456,236Zm0,104H172a32,32,0,0,0,0,64H456A32,32,0,0,0,456,340ZM564,504c101.048-137.763,87.982-313.7,81.9-362.757a359.955,359.955,0,0,1-24.222,465.966L664,688l-94.3-35.364A358.341,358.341,0,0,1,360,720a362.772,362.772,0,0,1-54.959-4.17C340.3,698.95,471.256,630.442,564,504Z\"/>\n
+        \             </svg>\n              <span class=\"logo-text\">subtitulamos.tv</span>\n
+        \           </div>\n          </a>\n          <div id=\"control-panel-search\"
+        class=\"search-bar-container\">\n            <button id=\"search-subtitles\"
+        title=\"Buscar\"  class=\"text small\"><i id=\"search_subtitles\" class=\"fa
+        fa-search\" aria-hidden=\"true\" aria-hidden=\"true\"></i></button>\n            <input
+        id=\"search-input\" data-search-bar-target='panel-search-results' type=\"text\"
+        class=\"text tiny\" placeholder=\"Busca una serie... Ej.: Westworld\" autocomplete=\"off\"
+        />\n            <ul class=\"search-results w-box-shadow hidden\" id='panel-search-results'></ul>\n
+        \         </div>\n          <button class=\"control-panel-button search\"
+        id='search-icon'>\n            <i class=\"fa fa-search\" aria-hidden=\"true\"></i>\n
+        \         </button>\n\n                    <button id=\"login-cp\" class=\"control-panel-button\">\n
+        \           <i class=\"fas fa-sign-in-alt\" aria-hidden=\"true\"></i>\n            <span>Iniciar
+        sesi\xF3n</span>\n          </button>\n          <button id=\"register-cp\"
+        class=\"control-panel-button\">\n            <i class=\"fas fa-user-plus\"
+        aria-hidden=\"true\"></i>\n            <span>Registro</span>\n          </button>\n
+        \                   <a class=\"control-panel-button\" page=\"/shows\" href='/shows'>\n
+        \           <i class=\"fas fa-list-ul\" aria-hidden=\"true\"></i>\n            <span>\xCDndice
+        de series</span>\n          </a>\n        </div>\n        <div id=\"control-panel-bottom-section\"
+        class=\"control-panel-section\">\n          <button class=\"control-panel-button
+        control-panel-minimize-toggle\">\n            <i class=\"fas fa-chevron-circle-left\"
+        aria-hidden=\"true\"></i>\n            <i class=\"fas fa-chevron-circle-right\"
+        aria-hidden=\"true\"></i>\n            <span>Minimizar</span>\n          </button>\n
+        \                 </div>\n\n        <div id=\"control-panel-fade-pan\"></div>\n
+        \     </nav>\n        <header>\n      <a href='/'>\n        <div id=\"header-logo-wrap\">\n
+        \         <svg id=\"logo-miniature\" height=\"40\" viewBox=\"0 0 720 720\">\n
+        \           <path d=\"M500,480C373.919,603.693,144.292,621.974,115.091,623.822A359,359,0,0,1,0,360C0,161.178,161.178,0,360,0A358.39,358.39,0,0,1,576.516,72.38C594.276,124.682,651.193,331.67,500,480ZM456,236H172a32,32,0,0,0,0,64H456A32,32,0,0,0,456,236Zm0,104H172a32,32,0,0,0,0,64H456A32,32,0,0,0,456,340ZM564,504c101.048-137.763,87.982-313.7,81.9-362.757a359.955,359.955,0,0,1-24.222,465.966L664,688l-94.3-35.364A358.341,358.341,0,0,1,360,720a362.772,362.772,0,0,1-54.959-4.17C340.3,698.95,471.256,630.442,564,504Z\"/>\n
+        \         </svg>\n          <span class=\"logo-text\">subtitulamos.tv</span>\n
+        \       </div>\n      </a>\n      <nav id=\"top-links\">\n        <button
+        class=\"text tiny spaced\" id=\"shows-index\"><a href=\"/shows\">\xCDNDICE
+        DE SERIES</a></button>\n        <button class=\"text tiny spaced\" id=\"register\">REGISTRO</button>\n
+        \       <button class=\"text tiny spaced\" id=\"login\">INICIAR SESI\xD3N</button>\n
+        \     </nav>\n    </header>\n        <div id=\"page-container\" class=\"\">\n
+        \     <button class=\"overlaying-button control-panel-minimize-toggle\">\n
+        \       <i class=\"fas fa-bars\" aria-hidden=\"true\"></i>\n      </button>\n
+        \     <div class=\"content limited-width\">\n    \n  <div id=\"show-info-header\">\n
+        \   <div id=\"show-name\" class=\"\">\n            <h1 class=\"blue-a\">The
+        Big Bang Theory</h1>\n    </div>\n    <div id=\"episode-header\">\n      <div
+        id=\"episode-name\" class=\"\">\n                <h3 class=\"blue-a\">Unraveling
+        the Mystery. A Big Bang Farewell.</h3>\n        <div class=\"blue-b text small\"
+        id=\"episode-numbers\">(12x90)</div>\n      </div>\n      <div id=\"episode-buttons\"
+        class=\"text tiny\">\n        <a class=\"thin-button episode-button\" href='/episodes/4768/resync'
+        class=\"text tiny blue-a\">\n          Subir resincronizaci\xF3n\n        </a>\n
+        \       <button class=\"thin-button episode-button translate-subtitle\">\n
+        \         + Nueva traducci\xF3n\n        </button>\n      </div>\n    </div>\n
+        \   <div id=\"season-line\">\n      <span class=\"text bold spaced-wide choices-title\">TEMPORADA</span>\n
+        \     <div id=\"season-choices\" class=\"choices no-scroll-bar\">\n                  <a
+        href=\"/episodes/440/the-big-bang-theory-11x01-the-proposal-proposal\" class=\"choice
+        \">11</a>\n                  <a href=\"/episodes/3065/the-big-bang-theory-12x01-the-conjugal-configuration\"
+        class=\"choice selected\">12</a>\n              </div>\n    </div>\n    <div
+        id=\"episode-line\">\n      <span class=\"text bold spaced-wide choices-title\">EPISODIO</span>\n
+        \     <div id=\"episode-choices\" class=\"choices no-scroll-bar\">\n                  <a
+        href=\"/episodes/3065/the-big-bang-theory-12x01-the-conjugal-configuration\"
+        class=\"choice \">1</a>\n                  <a href=\"/episodes/3100/the-big-bang-theory-12x02-the-wedding-gift-wormhole\"
+        class=\"choice \">2</a>\n                  <a href=\"/episodes/3157/the-big-bang-theory-12x03-the-procreation-calculation\"
+        class=\"choice \">3</a>\n                  <a href=\"/episodes/3220/the-big-bang-theory-12x04-the-tam-turbulence\"
+        class=\"choice \">4</a>\n                  <a href=\"/episodes/3286/the-big-bang-theory-12x05-the-planetarium-collision\"
+        class=\"choice \">5</a>\n                  <a href=\"/episodes/3359/the-big-bang-theory-12x06-the-imitation-perturbation\"
+        class=\"choice \">6</a>\n                  <a href=\"/episodes/3423/the-big-bang-theory-12x07-the-grant-allocation-derivation\"
+        class=\"choice \">7</a>\n                  <a href=\"/episodes/3478/the-big-bang-theory-12x08-the-consummation-deviation\"
+        class=\"choice \">8</a>\n                  <a href=\"/episodes/3534/the-big-bang-theory-12x09-the-citation-negation\"
+        class=\"choice \">9</a>\n                  <a href=\"/episodes/3662/the-big-bang-theory-12x10-the-vcr-illumination\"
+        class=\"choice \">10</a>\n                  <a href=\"/episodes/3794/the-big-bang-theory-12x11-the-paintball-scattering\"
+        class=\"choice \">11</a>\n                  <a href=\"/episodes/3845/the-big-bang-theory-12x12-the-propagation-proposition\"
+        class=\"choice \">12</a>\n                  <a href=\"/episodes/3902/the-big-bang-theory-12x13-the-confirmation-polarization\"
+        class=\"choice \">13</a>\n                  <a href=\"/episodes/4020/the-big-bang-theory-12x14-the-meteorite-manifestation\"
+        class=\"choice \">14</a>\n                  <a href=\"/episodes/4065/the-big-bang-theory-12x15-the-donation-oscillation\"
+        class=\"choice \">15</a>\n                  <a href=\"/episodes/4152/the-big-bang-theory-12x16-the-d-d-vortex\"
+        class=\"choice \">16</a>\n                  <a href=\"/episodes/4244/the-big-bang-theory-12x17-the-conference-valuation\"
+        class=\"choice \">17</a>\n                  <a href=\"/episodes/4468/the-big-bang-theory-12x18-the-laureate-accumulation\"
+        class=\"choice \">18</a>\n                  <a href=\"/episodes/4547/the-big-bang-theory-12x19-the-inspiration-deprivation\"
+        class=\"choice \">19</a>\n                  <a href=\"/episodes/4593/the-big-bang-theory-12x20-the-decision-reverberation\"
+        class=\"choice \">20</a>\n                  <a href=\"/episodes/4640/the-big-bang-theory-12x21-the-plagiarism-schism\"
+        class=\"choice \">21</a>\n                  <a href=\"/episodes/4694/the-big-bang-theory-12x22-the-maternal-conclusion\"
+        class=\"choice \">22</a>\n                  <a href=\"/episodes/4749/the-big-bang-theory-12x23-the-change-constant-12x24-the-stockholm-syndrome\"
+        class=\"choice \">23</a>\n                  <a href=\"/episodes/4768/the-big-bang-theory-12x90-unraveling-the-mystery-a-big-bang-farewell\"
+        class=\"choice selected\">90</a>\n              </div>\n    </div>\n  </div>\n\n
+        \ <div id=\"languages\">\n    <div id=\"languages-header\">\n    <h4>Versiones</h4>\n
+        \                                                                                                                                                                     <div
+        id=\"download-count\" class=\"text tiny hint--left\" data-hint='English -
+        467&#10;&#10;Espa\xF1ol (Espa\xF1a) - 2.010&#10;&#10;Espa\xF1ol (Latinoam\xE9rica)
+        - 0' >\n      <i class=\"fas fa-arrow-alt-circle-down\"></i>\n      <span
+        id=\"count\" class=\"text bold\">2 477</span>\n      <span >descargas</span>\n
+        \   </div>\n    </div>\n          <div class=\"language-container w-box-shadow\">\n
+        \       <button class=\"collapser-button blue-a\">\n          <i class=\"fas
+        fa-chevron-up\"></i>\n        </button>\n\n        <div class=\"text small
+        bold blue-a language-name\"  data-lang-id=\"1\">English</div>\n\n        <div
+        class=\"language-content\">\n                      <template id=\"subtitle-properties-12004\">\n
+        \ <div class=\"form-wrap\">\n    <form action=\"subtitles/12004/properties\"
+        method=\"POST\">\n      <h3>Propiedades del subt\xEDtulo</h2>\n      <div
+        class='form-field validated' fieldname=\"Nombre de versi\xF3n\">\n        <input
+        id=\"vname\" type=\"text\" class=\"form_input\"\n          name=\"vname\"
+        value=\"REAL WEB TBS\" required>\n        <i class=\"fas fa-code-branch\"></i>\n
+        \     </div>\n\n      <div class='form-field validated' fieldname=\"Comentario
+        de versi\xF3n\">\n        <input id=\"vcomment\" type=\"text\" class=\"form_input\"\n
+        \         name=\"vcomment\" value=\"De Addic7ed. Sin acotaciones.\" required>\n
+        \       <i class=\"fas fa-comment\"></i>\n      </div>\n\n      <div class='form-field
+        validated' fieldname=\"Idioma\">\n        <select name=\"lang\" id=\"lang\"
+        class=\"form_input\" required>\n          <option value=\"\" disabled>Selecciona
+        un idioma</option>\n                      <option value=\"en-en\" selected>English</option>\n
+        \                     <option value=\"es-es\" >Espa\xF1ol (Espa\xF1a)</option>\n
+        \                     <option value=\"es-lat\" >Espa\xF1ol (Latinoam\xE9rica)</option>\n
+        \                     <option value=\"fr-fr\" >Fran\xE7ais</option>\n                      <option
+        value=\"ca-es\" >Catal\xE0</option>\n                      <option value=\"gl-es\"
+        >Galego</option>\n                  </select>\n        <i class=\"fas fa-globe\"></i>\n
+        \     </div>\n\n      <button id=\"save-edit\" type=\"submit\" class='button
+        button-fat'>Guardar</button>\n    </form>\n  </div>\n</template>\n                                      \n
+        \                       \n            <div class=\"version-container \">\n
+        \             <p class=\"text mini\">versi\xF3n</p>\n              <p class=\"text
+        tiny spaced bold\">REAL WEB TBS</p>\n              <div class=\"version-info\">\n
+        \               <div class=\"version-buttons\">\n                                    <a
+        rel=\"nofollow\" href=\"/subtitles/12004/download\">\n                                      <div
+        class=\"download-button \">\n                      <i class=\"far fa-arrow-alt-circle-down\"></i>\n
+        \                   </div>\n                                    </a>\n                                    <a
+        rel=\"nofollow\" href=\"/subtitles/12004/translate\">\n                    <div
+        class=\"edit-button-wrap\">\n                      <div class=\"edit-button\">\n
+        \                       <i class=\"fas fa-pencil-alt\"></i>\n                      </div>\n
+        \                   </div>\n                  </a>\n                </div>\n
+        \               <div class=\"progress-bar-container\">\n                                      <div
+        class=\"subtitle-uploader\">\n                      <span class=\"text mini\">\n
+        \                                               ORIGINAL\n                        \n
+        \                                             </span>\n                      <a
+        rel=\"nofollow\" href=\"/users/1970\" class=\"uploader_name text tiny bold
+        blue-a\">\n                        <i class=\"fas fa-file-import\"></i>\n
+        \                       nemesiscb\n                      </a>\n                    </div>\n
+        \                                   <div class=\"more-info\">\n                                        <span
+        class=\"text small\">\n                      <i class=\"fa fa-comment\" aria-hidden=\"true\"></i>
+        De Addic7ed. Sin acotaciones.\n                    </span>\n                                      </div>\n
+        \               </div>\n                              </div>\n            </div>\n
+        \                 </div>\n      </div>\n          <div class=\"language-container
+        w-box-shadow\">\n        <button class=\"collapser-button blue-a\">\n          <i
+        class=\"fas fa-chevron-up\"></i>\n        </button>\n\n        <div class=\"text
+        small bold blue-a language-name\"  data-lang-id=\"5\">Espa\xF1ol (Espa\xF1a)</div>\n\n
+        \       <div class=\"language-content\">\n                      <template
+        id=\"subtitle-properties-12020\">\n  <div class=\"form-wrap\">\n    <form
+        action=\"subtitles/12020/properties\" method=\"POST\">\n      <h3>Propiedades
+        del subt\xEDtulo</h2>\n      <div class='form-field validated' fieldname=\"Nombre
+        de versi\xF3n\">\n        <input id=\"vname\" type=\"text\" class=\"form_input\"\n
+        \         name=\"vname\" value=\"REAL WEB TBS\" required>\n        <i class=\"fas
+        fa-code-branch\"></i>\n      </div>\n\n      <div class='form-field validated'
+        fieldname=\"Comentario de versi\xF3n\">\n        <input id=\"vcomment\" type=\"text\"
+        class=\"form_input\"\n          name=\"vcomment\" value=\"De Addic7ed. Sin
+        acotaciones.\" required>\n        <i class=\"fas fa-comment\"></i>\n      </div>\n\n
+        \     <div class='form-field validated' fieldname=\"Idioma\">\n        <select
+        name=\"lang\" id=\"lang\" class=\"form_input\" required>\n          <option
+        value=\"\" disabled>Selecciona un idioma</option>\n                      <option
+        value=\"en-en\" >English</option>\n                      <option value=\"es-es\"
+        selected>Espa\xF1ol (Espa\xF1a)</option>\n                      <option value=\"es-lat\"
+        >Espa\xF1ol (Latinoam\xE9rica)</option>\n                      <option value=\"fr-fr\"
+        >Fran\xE7ais</option>\n                      <option value=\"ca-es\" >Catal\xE0</option>\n
+        \                     <option value=\"gl-es\" >Galego</option>\n                  </select>\n
+        \       <i class=\"fas fa-globe\"></i>\n      </div>\n\n      <button id=\"save-edit\"
+        type=\"submit\" class='button button-fat'>Guardar</button>\n    </form>\n
+        \ </div>\n</template>\n                                      \n                        \n
+        \           <div class=\"version-container \">\n              <p class=\"text
+        mini\">versi\xF3n</p>\n              <p class=\"text tiny spaced bold\">REAL
+        WEB TBS</p>\n              <div class=\"version-info\">\n                <div
+        class=\"version-buttons\">\n                                    <a rel=\"nofollow\"
+        href=\"/subtitles/12020/download\">\n                                      <div
+        class=\"download-button \">\n                      <i class=\"far fa-arrow-alt-circle-down\"></i>\n
+        \                   </div>\n                                    </a>\n                                    <a
+        rel=\"nofollow\" href=\"/subtitles/12020/translate\">\n                    <div
+        class=\"edit-button-wrap\">\n                      <div class=\"edit-button\">\n
+        \                       <i class=\"fas fa-pencil-alt\"></i>\n                      </div>\n
+        \                   </div>\n                  </a>\n                </div>\n
+        \               <div class=\"progress-bar-container\">\n                                      <div
+        class=\"progress-bar \">\n                                            <div
+        class=\"progress progress_100\"\n                        style=\"width: 100%\">\n
+        \                     </div>\n                    </div>\n                                    <div
+        class=\"more-info\">\n                                          <span class=\"text
+        small bold percentage-value\">\n                        100%\n                      </span>\n
+        \                                                           </div>\n                </div>\n
+        \                             </div>\n            </div>\n                  </div>\n
+        \     </div>\n          <div class=\"language-container w-box-shadow\">\n
+        \       <button class=\"collapser-button blue-a\">\n          <i class=\"fas
+        fa-chevron-up\"></i>\n        </button>\n\n        <div class=\"text small
+        bold blue-a language-name\"  data-lang-id=\"6\">Espa\xF1ol (Latinoam\xE9rica)</div>\n\n
+        \       <div class=\"language-content\">\n                      <template
+        id=\"subtitle-properties-23705\">\n  <div class=\"form-wrap\">\n    <form
+        action=\"subtitles/23705/properties\" method=\"POST\">\n      <h3>Propiedades
+        del subt\xEDtulo</h2>\n      <div class='form-field validated' fieldname=\"Nombre
+        de versi\xF3n\">\n        <input id=\"vname\" type=\"text\" class=\"form_input\"\n
+        \         name=\"vname\" value=\"REAL WEB TBS\" required>\n        <i class=\"fas
+        fa-code-branch\"></i>\n      </div>\n\n      <div class='form-field validated'
+        fieldname=\"Comentario de versi\xF3n\">\n        <input id=\"vcomment\" type=\"text\"
+        class=\"form_input\"\n          name=\"vcomment\" value=\"De Addic7ed. Sin
+        acotaciones.\" required>\n        <i class=\"fas fa-comment\"></i>\n      </div>\n\n
+        \     <div class='form-field validated' fieldname=\"Idioma\">\n        <select
+        name=\"lang\" id=\"lang\" class=\"form_input\" required>\n          <option
+        value=\"\" disabled>Selecciona un idioma</option>\n                      <option
+        value=\"en-en\" >English</option>\n                      <option value=\"es-es\"
+        >Espa\xF1ol (Espa\xF1a)</option>\n                      <option value=\"es-lat\"
+        selected>Espa\xF1ol (Latinoam\xE9rica)</option>\n                      <option
+        value=\"fr-fr\" >Fran\xE7ais</option>\n                      <option value=\"ca-es\"
+        >Catal\xE0</option>\n                      <option value=\"gl-es\" >Galego</option>\n
+        \                 </select>\n        <i class=\"fas fa-globe\"></i>\n      </div>\n\n
+        \     <button id=\"save-edit\" type=\"submit\" class='button button-fat'>Guardar</button>\n
+        \   </form>\n  </div>\n</template>\n                                      \n
+        \                       \n            <div class=\"version-container \">\n
+        \             <p class=\"text mini\">versi\xF3n</p>\n              <p class=\"text
+        tiny spaced bold\">REAL WEB TBS</p>\n              <div class=\"version-info\">\n
+        \               <div class=\"version-buttons\">\n                                      <div
+        class=\"download-button unavailable\">\n                      <i class=\"far
+        fa-arrow-alt-circle-down\"></i>\n                    </div>\n                                    <a
+        rel=\"nofollow\" href=\"/subtitles/23705/translate\">\n                    <div
+        class=\"edit-button-wrap\">\n                      <div class=\"edit-button\">\n
+        \                       <i class=\"fas fa-pencil-alt\"></i>\n                      </div>\n
+        \                   </div>\n                  </a>\n                </div>\n
+        \               <div class=\"progress-bar-container\">\n                                      <div
+        class=\"progress-bar \">\n                                            <div
+        class=\"progress progress_019\"\n                        style=\"width: 2%\">\n
+        \                     </div>\n                    </div>\n                                    <div
+        class=\"more-info\">\n                                          <span class=\"text
+        small bold percentage-value\">\n                        2%\n                      </span>\n
+        \                                                           </div>\n                </div>\n
+        \                             </div>\n            </div>\n                  </div>\n
+        \     </div>\n      </div>\n\n  <div id=\"comments-container\" class=\"comments-container\">\n
+        \   \n    <h4 class=\"comment-header\">Comentarios ({{comments.length}})</h4>\n
+        \   \n\n    <comment v-for=\"comment in comments\"\n        :key=\"comment.id\"\n
+        \       :id=\"comment.id\"\n        :user=\"comment.user\"\n        :base-text=\"comment.text\"\n
+        \       :published-at=\"comment.published_at\"\n        :edited-at=\"comment.edited_at\"\n
+        \       :pinned=\"comment.pinned\"\n        @remove=\"remove\"\n        @pin=\"pin\"\n
+        \       @save=\"save\"\n      >\n    </comment>\n    <div class=\"no-comments\"
+        v-if=\"comments.length == 0\">Nadie ha dejado su comentario a\xFAn.</div>\n\n
+        \         <div class='newcomment-box'>\n                  <div class=\"open-comment
+        disabled\">\n            <textarea id=\"new-comment\" rows=\"2\" class=\"textarea\"
+        disabled>Debes estar identificado para poder dejar comentarios</textarea>\n
+        \         </div>\n              </div>\n      </div>\n</div>\n\n<template
+        id=\"new-translation\">\n  <div class=\"form-wrap\">\n    <h3>Nueva traducci\xF3n</h3>\n
+        \   <form action=\"/subtitles/translate\" method=\"POST\">\n      <input type=\"hidden\"
+        name=\"episode\" value=\"4768\" />\n      <div class=\"form-field validated
+        dropdown-field\" fieldname=\"Idioma\">\n        <i class=\"fas fa-chevron-down
+        dropdown\"></i>\n        <select name=\"lang\" id=\"translate-to-lang\" required>\n
+        \         <option value=\"\" disabled selected>Selecciona un idioma</option>\n
+        \                                   <option value=\"en-en\">English</option>\n
+        \                                               <option value=\"es-es\">Espa\xF1ol
+        (Espa\xF1a)</option>\n                                                <option
+        value=\"es-lat\">Espa\xF1ol (Latinoam\xE9rica)</option>\n                                                <option
+        value=\"fr-fr\">Fran\xE7ais</option>\n                                                <option
+        value=\"ca-es\">Catal\xE0</option>\n                                                <option
+        value=\"gl-es\">Galego</option>\n                              </select>\n
+        \       <i class=\"fas fa-globe\"></i>\n      </div>\n      <button type=\"submit\"
+        id=\"open-translation\">Abrir traducci\xF3n</button>\n    </form>\n  </div>\n</template>\n\n\n\n
+        \     <footer id=\"footer\">\n        <div id=\"footer-content\">\n          <div
+        id=\"in-memory-of\">\n            <div id=\"in-memory-of-content\">\n              <p>en
+        memoria de</p>\n              <p>SUBTITULOS.ES</p>\n              <p>(2008-2015)</p>\n
+        \             <p class='disclaimer-row'><a href='/disclaimer'>Disclaimer</a></p>\n
+        \           </div>\n          </div>\n          <div id=\"page-navigation\">\n
+        \           <p class=\"text light small logo-text\">&#169; subtitulamos.tv</p>\n
+        \           <nav id=\"page-links\" class=\"text thin tiny\">\n              <a
+        class=\"text light\" href=\"https://github.com/subtitulamos/subtitulamos\"
+        target=\"_blank\">GitHub</a>\n              <a class=\"text light\" href=\"/rules\">Normas
+        de traducci\xF3n</a>\n              <a class=\"text light\" href=\"https://foro.subtitulamos.tv/\"
+        target=\"_blank\">Foro</a>\n              <a class=\"text light\" href=\"/shows\">\xCDndice
+        de series</a>\n            </nav>\n            <nav class=\"social-networks\">\n
+        \             <a class=\"text light\" href=\"https://foro.subtitulamos.tv/\"
+        title=\"Foro\" target=\"_blank\"><i class=\"fab fa-forumbee\" aria-hidden=\"true\"></i></a>\n
+        \             <a class=\"text light\" href=\"https://www.facebook.com/subtitulamos.tv\"
+        title=\"Facebook\" target=\"_blank\"><i class=\"fab fa-facebook-f\" aria-hidden=\"true\"></i></a>\n
+        \             <a class=\"text light\" href=\"https://twitter.com/subtitulamostv\"
+        title=\"Twitter\" target=\"_blank\"><i class=\"fab fa-twitter\" aria-hidden=\"true\"></i></a>\n
+        \             <a class=\"text light\" href=\"https://t.me/subtitulamostv\"
+        title=\"Telegram\" target=\"_blank\"><i class=\"fab fa-telegram-plane\" aria-hidden=\"true\"></i></a>\n
+        \             <a class=\"text light\" href=\"https://github.com/subtitulamos/subtitulamos\"
+        title=\"GitHub\" target=\"_blank\"><i class=\"fab fa-github\" aria-hidden=\"true\"></i></a>\n
+        \             <a class=\"text light\" href=\"/rss\" title=\"RSS\" target=\"_blank\"><i
+        class=\"fas fa-rss\" aria-hidden=\"true\"></i></a>\n            </nav>\n          </div>\n
+        \       </div>\n      </footer>\n    </div>\n  </div>\n\n      <script type=\"text/javascript\"
+        src=\"js/vendor.b749971c14518ffbfafc.bundle.js\" ></script>\n\n    <script
+        type=\"text/javascript\" src=\"js/app.06fc2580f3864eeace40.bundle.js\" ></script>\n\n
+        \  \n  <script src=\"https://cdn.jsdelivr.net/npm/sweetalert2@9\"></script>\n
+        \ <script>\n    const Toast = Swal.mixin({\n      toast: true,\n      position:
+        'bottom-end',\n      showConfirmButton: false,\n      timer: 4000\n    });\n
+        \   const Toasts = {\n      error: Toast.mixin({icon: 'error', timer: 8000}),\n
+        \     success: Toast.mixin({icon: 'success', timer: 5000}),\n      info: Toast.mixin({icon:
+        'info', timer: 5000})\n    };\n  </script>\n  <template id='tpl-login'>\n
+        \   <h3>Inicio de sesi\xF3n</h3>\n    <div class=\"form-wrap\">\n      <form
+        id=\"login-form\">\n        <div class=\"form-field text small\" fieldname=\"Nombre
+        de usuario\">\n          <input type=\"text\" id=\"username\" required autocomplete=\"username\">\n
+        \         <i class=\"fas fa-user\" aria-hidden=\"true\"></i>\n        </div>\n
+        \       <div class=\"form-field text small\" fieldname=\"Contrase\xF1a\">\n
+        \         <input type=\"password\" id=\"password\" required autocomplete=\"current-password\">\n
+        \         <i class=\"fas fa-key\" aria-hidden=\"true\"></i>\n        </div>\n
+        \       <div class=\"form-error\" id='login-error'></div>\n        <button
+        id='login-button' type=\"submit\" class=\"text light\">Iniciar sesi\xF3n</button>\n
+        \     </form>\n    </div>\n  </template>\n  <template id='tpl-register'>\n
+        \   <h3>Registro</h3>\n    <div class=\"form-wrap\">\n      <form id=\"register-form\"
+        action=\"/register\" method=\"POST\">\n        <div class=\"form-field text
+        small validated\" fieldname=\"Nombre de usuario\">\n          <input type=\"text\"
+        name=\"username\" required autocomplete=\"off\">\n          <i class=\"fas
+        fa-user\" aria-hidden=\"true\"></i>\n        </div>\n        <div class=\"form-field
+        text small validated\" fieldname=\"Contrase\xF1a\">\n          <input type=\"password\"
+        name=\"password\" required autocomplete=\"off\">\n          <i class=\"fas
+        fa-key\" aria-hidden=\"true\"></i>\n        </div>\n        <div class=\"form-field
+        text small validated\" fieldname=\"Confirmar contrase\xF1a\">\n          <input
+        type=\"password\" name=\"password-confirmation\" required autocomplete=\"off\">\n
+        \         <i class=\"fas fa-key\" aria-hidden=\"true\"></i>\n        </div>\n
+        \       <div class=\"form-field text small validated\" fieldname=\"Correo
+        electr\xF3nico\">\n          <input type=\"email\" name=\"email\" required>\n
+        \         <i class=\"fas fa-envelope\" aria-hidden=\"true\"></i>\n        </div>\n
+        \       <div id=\"register-checkbox\">\n          <input type='checkbox' name=\"terms\"
+        required>\n          Acepto las reglas y las condiciones generales de uso
+        del sitio web\n        </div>\n        <div class=\"form-error\" id='register-error'></div>\n
+        \       <button id='register-button' type=\"submit\" class=\"text light\">Registrarme</button>\n
+        \     </form>\n    </div>\n  </template>\n    <script type=\"text/javascript\">\n
+        \   var userId = 0;\n    var epId = 4768;\n    var MAX_USER_EDIT_SECONDS =
+        60;\n    var canDeleteComments = false;\n    var canEditComments = false;\n
+        \   var canPinComments = false;\n    var canEditProperties = false;\n    var
+        isBanned = false;\n  </script>\n    <script type=\"text/javascript\" src=\"js/episode.6090abffe69f45e739c2.bundle.js\"
+        ></script>\n\n</body>\n"
+    headers:
+      CF-RAY:
+      - 8d1e52c4dfd3cc58-MAD
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Connection:
+      - keep-alive
+      Content-Type:
+      - text/html; charset=UTF-8
+      Date:
+      - Sun, 13 Oct 2024 09:32:36 GMT
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      NEL:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Pragma:
+      - no-cache
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=JcQH7iPIUmigpvfwukYRBsPE5h7TD%2FOZqunzj6s8c5kPFY7s8dxB4YxRJBD4MFnHc5TCHiHSwGPYzL%2BGguCtUq9IbWRwd8LXLOYh%2FifzFlqNOPT03721obA8A%2B%2FMCD4mQs2%2FbkUO"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
+      Transfer-Encoding:
+      - chunked
+      X-Powered-By:
+      - PHP/7.4.14
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '28387'
+    status:
+      code: 200
+      message: OK
+version: 1

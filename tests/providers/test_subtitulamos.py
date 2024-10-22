@@ -19,6 +19,78 @@ vcr = VCR(
 logger_name = 'subliminal.providers.subtitulamos'
 
 
+@pytest.mark.converter()
+def test_converter_convert_alpha3():
+    assert language_converters['subtitulamos'].convert('cat') == 'Català'
+
+
+@pytest.mark.converter()
+def test_converter_convert_alpha3_country():
+    assert language_converters['subtitulamos'].convert('spa', 'MX') == 'Español (Latinoamérica)'
+    assert language_converters['subtitulamos'].convert('por', 'BR') == 'Brazilian'
+
+
+@pytest.mark.converter()
+def test_converter_convert_alpha3_name_converter():
+    assert (
+        language_converters['subtitulamos'].convert(
+            'fra',
+        )
+        == 'French'
+    )
+
+
+@pytest.mark.converter()
+def test_converter_reverse():
+    assert language_converters['subtitulamos'].reverse('Español') == ('spa', None, None)
+
+
+@pytest.mark.converter()
+def test_converter_reverse_country():
+    assert language_converters['subtitulamos'].reverse('Español (España)') == ('spa', None, None)
+    assert language_converters['subtitulamos'].reverse('Español (Latinoamérica)') == ('spa', 'MX', None)
+
+
+@pytest.mark.converter()
+def test_converter_reverse_name_converter():
+    assert language_converters['subtitulamos'].reverse('French') == ('fra', None, None)
+
+
+def test_get_matches_episode(episodes):
+    subtitle = SubtitulamosSubtitle(
+        language=Language('spa'),
+        hearing_impaired=True,
+        page_link=None,
+        series='The Big Bang Theory',
+        season=11,
+        episode=16,
+        title='the neonatal nomenclature',
+        year=2007,
+        release_group='AVS/SVA',
+    )
+
+    matches = subtitle.get_matches(episodes['bbt_s11e16'])
+    assert matches == {'release_group', 'series', 'year', 'country', 'episode', 'season', 'title'}
+
+
+def test_list_subtitles_without_initialization(episodes):
+    video = episodes['bbt_s11e16']
+    languages = {Language('eng'), Language('spa')}
+
+    provider = SubtitulamosProvider()
+    with pytest.raises(NotInitializedProviderError):
+        provider.list_subtitles(video, languages)
+
+
+def test_list_subtitles_no_video_type():
+    video = {}  # type: ignore[var-annotated]
+    languages = {Language('spa')}
+
+    with SubtitulamosProvider() as provider:
+        subtitles = provider.list_subtitles(video, languages)  # type: ignore[arg-type]
+        assert len(subtitles) == 0
+
+
 @pytest.mark.integration()
 @vcr.use_cassette
 def test_login():
@@ -211,77 +283,3 @@ def test_list_subtitles_not_exist_language(caplog, episodes):
 
         subtitles = provider.list_subtitles(video, languages)
         assert len(subtitles) == 0
-
-
-@pytest.mark.integration()
-def test_list_subtitles_without_initialization(episodes):
-    video = episodes['bbt_s11e16']
-    languages = {Language('eng'), Language('spa')}
-
-    provider = SubtitulamosProvider()
-    with pytest.raises(NotInitializedProviderError):
-        provider.list_subtitles(video, languages)
-
-
-@pytest.mark.integration()
-def test_list_subtitles_no_video_type(episodes):
-    video = {}  # type: ignore[var-annotated]
-    languages = {Language('spa')}
-
-    with SubtitulamosProvider() as provider:
-        subtitles = provider.list_subtitles(video, languages)  # type: ignore[arg-type]
-        assert len(subtitles) == 0
-
-
-@pytest.mark.converter()
-def test_converter_convert_alpha3():
-    assert language_converters['subtitulamos'].convert('cat') == 'Català'
-
-
-@pytest.mark.converter()
-def test_converter_convert_alpha3_country():
-    assert language_converters['subtitulamos'].convert('spa', 'MX') == 'Español (Latinoamérica)'
-    assert language_converters['subtitulamos'].convert('por', 'BR') == 'Brazilian'
-
-
-@pytest.mark.converter()
-def test_converter_convert_alpha3_name_converter():
-    assert (
-        language_converters['subtitulamos'].convert(
-            'fra',
-        )
-        == 'French'
-    )
-
-
-@pytest.mark.converter()
-def test_converter_reverse():
-    assert language_converters['subtitulamos'].reverse('Español') == ('spa',)
-
-
-@pytest.mark.converter()
-def test_converter_reverse_country():
-    assert language_converters['subtitulamos'].reverse('Español (España)') == ('spa',)
-    assert language_converters['subtitulamos'].reverse('Español (Latinoamérica)') == ('spa', 'MX')
-
-
-@pytest.mark.converter()
-def test_converter_reverse_name_converter():
-    assert language_converters['subtitulamos'].reverse('French') == ('fra', None, None)
-
-
-def test_get_matches_episode(episodes):
-    subtitle = SubtitulamosSubtitle(
-        language=Language('spa'),
-        hearing_impaired=True,
-        page_link=None,
-        series='The Big Bang Theory',
-        season=11,
-        episode=16,
-        title='the neonatal nomenclature',
-        year=2007,
-        release_group='AVS/SVA',
-    )
-
-    matches = subtitle.get_matches(episodes['bbt_s11e16'])
-    assert matches == {'release_group', 'series', 'year', 'country', 'episode', 'season', 'title'}

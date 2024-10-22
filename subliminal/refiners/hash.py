@@ -7,7 +7,7 @@ import os
 import struct
 from typing import TYPE_CHECKING, Any, cast
 
-from subliminal.extensions import default_providers, provider_manager
+from subliminal.extensions import get_default_providers, provider_manager
 from subliminal.providers import Provider
 
 if TYPE_CHECKING:
@@ -78,8 +78,10 @@ def refine(
         logger.warning('Size is lower than 10MB: hashes not computed')
         return video
 
+    providers = providers if providers is not None else get_default_providers()
+
     logger.debug('Computing hashes for %r', video.name)
-    for name in providers or default_providers:
+    for name in providers:
         provider = cast(Provider, provider_manager[name].plugin)
         if not provider.check_types(video):
             continue

@@ -59,6 +59,7 @@ def test_converter_reverse_name_converter():
 def test_get_matches_episode(episodes):
     subtitle = SubtitulamosSubtitle(
         language=Language('spa'),
+        subtitle_id='',
         hearing_impaired=True,
         page_link=None,
         series='The Big Bang Theory',
@@ -71,24 +72,6 @@ def test_get_matches_episode(episodes):
 
     matches = subtitle.get_matches(episodes['bbt_s11e16'])
     assert matches == {'release_group', 'series', 'year', 'country', 'episode', 'season', 'title'}
-
-
-def test_list_subtitles_without_initialization(episodes):
-    video = episodes['bbt_s11e16']
-    languages = {Language('eng'), Language('spa')}
-
-    provider = SubtitulamosProvider()
-    with pytest.raises(NotInitializedProviderError):
-        provider.list_subtitles(video, languages)
-
-
-def test_list_subtitles_no_video_type():
-    video = {}  # type: ignore[var-annotated]
-    languages = {Language('spa')}
-
-    with SubtitulamosProvider() as provider:
-        subtitles = provider.list_subtitles(video, languages)  # type: ignore[arg-type]
-        assert len(subtitles) == 0
 
 
 @pytest.mark.integration()
@@ -117,125 +100,23 @@ def test_logout_without_initialization():
 
 
 @pytest.mark.integration()
-@vcr.use_cassette
-def test_download_subtitle(episodes):
+def test_list_subtitles_without_initialization(episodes):
     video = episodes['bbt_s11e16']
     languages = {Language('eng'), Language('spa')}
-    with SubtitulamosProvider() as provider:
-        subtitles = provider.list_subtitles(video, languages)
-        assert len(subtitles) >= 1
-        subtitle = subtitles[0]
-
-        provider.download_subtitle(subtitle)
-        assert subtitle.content is not None
-        assert subtitle.is_valid() is True
-
-
-@pytest.mark.integration()
-@vcr.use_cassette
-def test_download_subtitle_year(episodes):
-    video = episodes['charmed_s01e01']
-    languages = {Language('eng')}
-    with SubtitulamosProvider() as provider:
-        subtitles = provider.list_subtitles(video, languages)
-        assert len(subtitles) >= 1
-        subtitle = subtitles[0]
-
-        provider.download_subtitle(subtitle)
-        assert subtitle.content is not None
-        assert subtitle.is_valid() is True
-
-
-@pytest.mark.integration()
-@vcr.use_cassette
-def test_download_subtitle_last_season(episodes):
-    video = episodes['dw_s13e03']
-    languages = {Language('eng'), Language('spa')}
-    with SubtitulamosProvider() as provider, patch.object(
-        SubtitulamosProvider, '_read_series', wraps=provider._read_series
-    ) as mock:
-        subtitles = provider.list_subtitles(video, languages)
-        assert len(subtitles) >= 1
-        subtitle = subtitles[0]
-
-        assert mock.call_count == 2
-        assert mock.call_args_list[1].args[0] == '/episodes/8685/doctor-who-13x03-chapter-three-once-upon-time'
-
-        provider.download_subtitle(subtitle)
-        assert subtitle.content is not None
-        assert subtitle.is_valid() is True
-
-
-@pytest.mark.integration()
-@vcr.use_cassette
-def test_download_subtitle_first_episode(episodes):
-    video = episodes['charmed_s01e01']
-    languages = {Language('eng')}
-    with SubtitulamosProvider() as provider, patch.object(
-        SubtitulamosProvider, '_read_series', wraps=provider._read_series
-    ) as mock:
-        subtitles = provider.list_subtitles(video, languages)
-        assert len(subtitles) >= 1
-        subtitle = subtitles[0]
-
-        assert mock.call_count == 2
-        assert mock.call_args_list[1].args[0] == '/episodes/3250/charmed-2018-1x01-pilot'
-
-        provider.download_subtitle(subtitle)
-        assert subtitle.content is not None
-        assert subtitle.is_valid() is True
-
-
-@pytest.mark.integration()
-@vcr.use_cassette
-def test_download_subtitle_foo(episodes):
-    video = episodes['dw_s13e03']
-    languages = {Language('eng'), Language('spa')}
-    with SubtitulamosProvider() as provider:
-        subtitles = provider.list_subtitles(video, languages)
-        assert len(subtitles) >= 1
-        subtitle = subtitles[0]
-
-        provider.download_subtitle(subtitle)
-        assert subtitle.content is not None
-        assert subtitle.is_valid() is True
-
-
-def test_download_subtitle_missing_download_link():
-    subtitle = SubtitulamosSubtitle(
-        language=Language('spa'),
-        hearing_impaired=True,
-        page_link=None,
-        series='The Big Bang Theory',
-        season=11,
-        episode=16,
-        title='the neonatal nomenclature',
-        year=2007,
-        release_group='AVS/SVA',
-    )
-
-    with SubtitulamosProvider() as provider:
-        provider.download_subtitle(subtitle)
-        assert subtitle.content is None
-        assert subtitle.is_valid() is False
-
-
-def test_download_subtitle_without_initialization():
-    subtitle = SubtitulamosSubtitle(
-        language=Language('spa'),
-        hearing_impaired=True,
-        page_link=None,
-        series='The Big Bang Theory',
-        season=11,
-        episode=16,
-        title='the neonatal nomenclature',
-        year=2007,
-        release_group='AVS/SVA',
-    )
 
     provider = SubtitulamosProvider()
     with pytest.raises(NotInitializedProviderError):
-        provider.download_subtitle(subtitle)
+        provider.list_subtitles(video, languages)
+
+
+@pytest.mark.integration()
+def test_list_subtitles_no_video_type():
+    video = {}  # type: ignore[var-annotated]
+    languages = {Language('spa')}
+
+    with SubtitulamosProvider() as provider:
+        subtitles = provider.list_subtitles(video, languages)  # type: ignore[arg-type]
+        assert len(subtitles) == 0
 
 
 @pytest.mark.integration()
@@ -283,3 +164,131 @@ def test_list_subtitles_not_exist_language(caplog, episodes):
 
         subtitles = provider.list_subtitles(video, languages)
         assert len(subtitles) == 0
+
+
+@pytest.mark.integration()
+@vcr.use_cassette
+def test_download_subtitle(episodes):
+    video = episodes['bbt_s11e16']
+    languages = {Language('eng'), Language('spa')}
+    with SubtitulamosProvider() as provider:
+        subtitles = provider.list_subtitles(video, languages)
+        assert len(subtitles) >= 1
+        subtitle = subtitles[0]
+
+        provider.download_subtitle(subtitle)
+        assert subtitle.content is not None
+        assert subtitle.is_valid() is True
+
+
+@pytest.mark.integration()
+@vcr.use_cassette
+def test_download_subtitle_year(episodes):
+    video = episodes['charmed_s01e01']
+    languages = {Language('eng')}
+    with SubtitulamosProvider() as provider:
+        subtitles = provider.list_subtitles(video, languages)
+        assert len(subtitles) >= 1
+        subtitle = subtitles[0]
+
+        provider.download_subtitle(subtitle)
+        assert subtitle.content is not None
+        assert subtitle.is_valid() is True
+
+
+@pytest.mark.integration()
+@vcr.use_cassette
+def test_download_subtitle_last_season(episodes):
+    video = episodes['dw_s13e03']
+    languages = {Language('eng'), Language('spa')}
+    with (
+        SubtitulamosProvider() as provider,
+        patch.object(SubtitulamosProvider, '_read_series', wraps=provider._read_series) as mock,
+    ):
+        subtitles = provider.list_subtitles(video, languages)
+        assert len(subtitles) >= 1
+        subtitle = subtitles[0]
+
+        assert mock.call_count == 2
+        assert mock.call_args_list[1].args[0] == '/episodes/8685/doctor-who-13x03-chapter-three-once-upon-time'
+
+        provider.download_subtitle(subtitle)
+        assert subtitle.content is not None
+        assert subtitle.is_valid() is True
+
+
+@pytest.mark.integration()
+@vcr.use_cassette
+def test_download_subtitle_first_episode(episodes):
+    video = episodes['charmed_s01e01']
+    languages = {Language('eng')}
+    with (
+        SubtitulamosProvider() as provider,
+        patch.object(SubtitulamosProvider, '_read_series', wraps=provider._read_series) as mock,
+    ):
+        subtitles = provider.list_subtitles(video, languages)
+        assert len(subtitles) >= 1
+        subtitle = subtitles[0]
+
+        assert mock.call_count == 2
+        assert mock.call_args_list[1].args[0] == '/episodes/3250/charmed-2018-1x01-pilot'
+
+        provider.download_subtitle(subtitle)
+        assert subtitle.content is not None
+        assert subtitle.is_valid() is True
+
+
+@pytest.mark.integration()
+@vcr.use_cassette
+def test_download_subtitle_foo(episodes):
+    video = episodes['dw_s13e03']
+    languages = {Language('eng'), Language('spa')}
+    with SubtitulamosProvider() as provider:
+        subtitles = provider.list_subtitles(video, languages)
+        assert len(subtitles) >= 1
+        subtitle = subtitles[0]
+
+        provider.download_subtitle(subtitle)
+        assert subtitle.content is not None
+        assert subtitle.is_valid() is True
+
+
+@pytest.mark.integration()
+def test_download_subtitle_missing_download_link():
+    subtitle = SubtitulamosSubtitle(
+        language=Language('spa'),
+        subtitle_id='',
+        hearing_impaired=True,
+        page_link=None,
+        series='The Big Bang Theory',
+        season=11,
+        episode=16,
+        title='the neonatal nomenclature',
+        year=2007,
+        release_group='AVS/SVA',
+    )
+
+    with SubtitulamosProvider() as provider:
+        provider.download_subtitle(subtitle)
+        assert subtitle.content is None
+        assert subtitle.is_valid() is False
+
+
+@pytest.mark.integration()
+def test_download_subtitle_without_initialization():
+    subtitle = SubtitulamosSubtitle(
+        language=Language('spa'),
+        subtitle_id='',
+        hearing_impaired=True,
+        page_link=None,
+        series='The Big Bang Theory',
+        season=11,
+        episode=16,
+        title='the neonatal nomenclature',
+        year=2007,
+        release_group='AVS/SVA',
+    )
+
+    provider = SubtitulamosProvider()
+    with pytest.raises(NotInitializedProviderError):
+        provider.download_subtitle(subtitle)

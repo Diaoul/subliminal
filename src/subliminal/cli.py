@@ -226,6 +226,7 @@ def options_from_managers(
                     PROVIDERS_OPTIONS_CLI_TEMPLATE.format(ext=group_name, plugin=plugin_name, key=name),
                     PROVIDERS_OPTIONS_TEMPLATE.format(ext=group_name, plugin=plugin_name, key=name),
                 )
+                # Setting the default value also decides on the type
                 attrs = {
                     'default': opt['default'],
                     'help': opt['desc'],
@@ -237,7 +238,7 @@ def options_from_managers(
                         key=name.upper(),
                     ),
                 }
-                click_option(*param_decls, **attrs)(f)
+                f = click_option(*param_decls, **attrs)(f)  # type: ignore[operator]
         return f
 
     return decorator
@@ -295,6 +296,7 @@ options_from_refiners = options_from_managers('refiner', refiner_options, group=
 @click.pass_context
 def subliminal(
     ctx: click.Context,
+    /,
     cache_dir: str,
     debug: bool,
     **kwargs: Any,
@@ -328,8 +330,8 @@ def subliminal(
     ctx.obj['debug'] = debug
 
     # create provider and refiner configs
-    provider_configs = {}
-    refiner_configs = {}
+    provider_configs: dict[str, dict[str, Any]] = {}
+    refiner_configs: dict[str, dict[str, Any]] = {}
 
     for k, v in kwargs.items():
         try_split = k.split('__')

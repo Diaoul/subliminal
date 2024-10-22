@@ -30,7 +30,7 @@ from subliminal.utils import (
 if TYPE_CHECKING:
     from pathlib import Path
 
-    from babelfish import Language
+    from babelfish import Language  # type: ignore[import-untyped]
 
 # Core test
 pytestmark = pytest.mark.core
@@ -280,7 +280,7 @@ def test_get_argument_doc(docstring: str, is_class: bool) -> None:
 
     else:
 
-        class obj:
+        class obj:  # type: ignore[no-redef]
             pass
 
     obj.__doc__ = docstring

@@ -112,6 +112,7 @@ tvdb = "subliminal.refiners.tvdb:refine"
 
 [project.entry-points."babelfish.language_converters"]
 addic7ed = "subliminal.converters.addic7ed:Addic7edConverter"
+opensubtitles = "subliminal.converters.opensubtitles:OpenSubtitlesConverter"
 opensubtitlescom = "subliminal.converters.opensubtitlescom:OpenSubtitlesComConverter"
 tvsubtitles = "subliminal.converters.tvsubtitles:TVsubtitlesConverter"
 

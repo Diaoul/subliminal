@@ -4,4 +4,4 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     # Tuple of language (alpha3, country, script), with country and script optional
-    LanguageTuple = tuple[str] | tuple[str, str | None] | tuple[str, str | None, str | None]
+    LanguageTuple = tuple[str, str | None, str | None]

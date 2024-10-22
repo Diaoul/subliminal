@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import base64
+import contextlib
 import logging
 import os
 import re
@@ -31,6 +32,15 @@ if TYPE_CHECKING:
     from collections.abc import Set
 
 logger = logging.getLogger(__name__)
+
+with contextlib.suppress(ValueError, KeyError):
+    # Delete entry from babelfish, if it was defined
+    language_converters.internal_converters.remove(
+        'opensubtitles = babelfish.converters.opensubtitles:OpenSubtitlesConverter'
+    )
+    del language_converters.converters['opensubtitles']
+    # Register subliminal version
+    language_converters.register('opensubtitles = subliminal.converters.opensubtitles:OpenSubtitlesConverter')
 
 
 class OpenSubtitlesSubtitle(Subtitle):

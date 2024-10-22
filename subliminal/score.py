@@ -49,7 +49,7 @@ if TYPE_CHECKING:
     class ComputeScore(Protocol):
         """Compute the score of a subtitle matching a video."""
 
-        def __call__(self, subtitle: Subtitle, video: Video, *, hearing_impaired: bool | None) -> int: ...  # noqa: D102
+        def __call__(self, subtitle: Subtitle, video: Video) -> int: ...  # noqa: D102
 
 
 # Check if sympy is installed (for tests)
@@ -141,8 +141,8 @@ def match_hearing_impaired(subtitle: Subtitle, *, hearing_impaired: bool | None 
     )
 
 
-def compute_score(subtitle: Subtitle, video: Video, *, hearing_impaired: bool | None = None) -> int:
-    """Compute the score of the `subtitle` against the `video` with `hearing_impaired` preference.
+def compute_score(subtitle: Subtitle, video: Video, **kwargs: Any) -> int:
+    """Compute the score of the `subtitle` against the `video`.
 
     :func:`compute_score` uses the :meth:`Subtitle.get_matches <subliminal.subtitle.Subtitle.get_matches>` method and
     applies the scores (either from :data:`episode_scores` or :data:`movie_scores`) after some processing.
@@ -151,12 +151,11 @@ def compute_score(subtitle: Subtitle, video: Video, *, hearing_impaired: bool | 
     :type subtitle: :class:`~subliminal.subtitle.Subtitle`
     :param video: the video to compute the score against.
     :type video: :class:`~subliminal.video.Video`
-    :param (bool | None) hearing_impaired: hearing impaired preference (None if no preference).
     :return: score of the subtitle.
     :rtype: int
 
     """
-    logger.info('Computing score of %r for video %r with %r', subtitle, video, {'hearing_impaired': hearing_impaired})
+    logger.info('Computing score of %r for video %r', subtitle, video)
 
     # get the scores dict
     scores = get_scores(video)
@@ -193,17 +192,12 @@ def compute_score(subtitle: Subtitle, video: Video, *, hearing_impaired: bool | 
             logger.debug('Adding imdb_id match equivalents')
             matches |= {'title', 'year', 'country'}
 
-    # handle hearing impaired
-    if match_hearing_impaired(subtitle, hearing_impaired=hearing_impaired):
-        logger.debug('Matched hearing_impaired')
-        matches.add('hearing_impaired')
-
     # compute the score
     score = int(sum(scores.get(match, 0) for match in matches))
     logger.info('Computed score %r with final matches %r', score, matches)
 
     # ensure score is within valid bounds
-    max_score = scores['hash'] + scores['hearing_impaired']
+    max_score = scores['hash']
     if not (0 <= score <= max_score):  # pragma: no cover
         logger.info('Clip score between 0 and %d: %d', max_score, score)
         score = int(clip(score, 0, max_score))

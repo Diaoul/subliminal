@@ -5,7 +5,7 @@ from __future__ import annotations
 import contextlib
 import json
 import logging
-from typing import TYPE_CHECKING, Any, ClassVar, Dict, List, cast  # Needed for Python3.8 support
+from typing import TYPE_CHECKING, Any, ClassVar, cast
 
 from babelfish import Language, language_converters  # type: ignore[import-untyped]
 from bs4 import Tag
@@ -42,6 +42,7 @@ class SubtitulamosSubtitle(Subtitle):
     def __init__(
         self,
         language: Language,
+        subtitle_id: str,
         hearing_impaired: bool | None = None,
         page_link: str | None = None,
         series: str | None = None,
@@ -52,8 +53,12 @@ class SubtitulamosSubtitle(Subtitle):
         release_group: str | None = None,
         download_link: str | None = None,
     ) -> None:
-        super().__init__(language=language, hearing_impaired=hearing_impaired, page_link=page_link)
-        self.page_link = page_link
+        super().__init__(
+            language=language,
+            subtitle_id=subtitle_id,
+            hearing_impaired=hearing_impaired,
+            page_link=page_link,
+        )
         self.series = series
         self.season = season
         self.episode = episode
@@ -88,14 +93,17 @@ class SubtitulamosProvider(Provider):
     languages: ClassVar[Set[Language]] = {Language('por', 'BR')} | {
         Language(lang) for lang in ['cat', 'eng', 'glg', 'por', 'spa']
     }
+    video_types: ClassVar = (Episode,)
 
-    video_types = (Episode,)
     server_url = 'https://www.subtitulamos.tv'
     search_url = server_url + '/search/query'
+
+    timeout: int
     session: Session | None
 
-    def __init__(self) -> None:
+    def __init__(self, *, timeout: int = 10) -> None:
         self.session = None
+        self.timeout = timeout
 
     def initialize(self) -> None:
         """Initialize the provider."""
@@ -126,14 +134,21 @@ class SubtitulamosProvider(Provider):
     def _query_search(self, search_param: str) -> list[dict[str, str]]:
         """Search Series/Series + Season using query search method."""
         r = self._session_request(
-            self.search_url, headers={'Referer': self.server_url}, params={'q': search_param}, timeout=10
+            self.search_url,
+            headers={'Referer': self.server_url},
+            params={'q': search_param},
+            timeout=self.timeout,
         )
         data = json.loads(r.text)
-        return cast(List[Dict[str, str]], data)
+        return cast(list[dict[str, str]], data)
 
     def _read_series(self, series_url: str) -> ParserBeautifulSoup:
         """Read series information from provider."""
-        r = self._session_request(self.server_url + series_url, headers={'Referer': self.server_url}, timeout=10)
+        r = self._session_request(
+            self.server_url + series_url,
+            headers={'Referer': self.server_url},
+            timeout=self.timeout,
+        )
         return ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
 
     @region.cache_on_arguments(expiration_time=SHOW_EXPIRATION_TIME)
@@ -160,8 +175,9 @@ class SubtitulamosProvider(Provider):
             msg = 'Series not found'
             raise NotExists(msg)
 
-        """Provides the URL for a specific episode of the series."""
-        page_content = self._read_series(f'/shows/{series_response[0]["show_id"]}')
+        # Provides the URL for a specific episode of the series
+        show_id = series_response[0]['show_id']
+        page_content = self._read_series(f'/shows/{show_id}')
 
         # Select season
         season_element = next(
@@ -171,8 +187,8 @@ class SubtitulamosProvider(Provider):
             msg = 'Season not found'
             raise NotExists(msg)
 
-        if 'selected' not in cast(List[str], season_element.get('class', [])):
-            page_content = self._read_series(cast(str, season_element.get('href', '')))
+        if 'selected' not in cast(list[str], season_element.get('class', [])):
+            page_content = self._read_series(str(season_element.get('href', '')))
 
         # Select episode
         episode_element = next(
@@ -182,8 +198,8 @@ class SubtitulamosProvider(Provider):
             msg = 'Episode not found'
             raise NotExists(msg)
 
-        episode_url = cast(str, episode_element.get('href', ''))
-        if 'selected' not in cast(List[str], episode_element.get('class', [])):
+        episode_url = str(episode_element.get('href', ''))
+        if 'selected' not in cast(list[str], episode_element.get('class', [])):
             page_content = self._read_series(episode_url)
 
         return page_content, episode_url
@@ -225,9 +241,11 @@ class SubtitulamosProvider(Provider):
             release_group = release_group_element[0].getText()
 
             # read the subtitle url
-            subtitle_url = self.server_url + cast(str, sub.parent.get('href', ''))
+            subtitle_id = str(sub.parent.get('href', ''))
+            subtitle_url = self.server_url + subtitle_id
             subtitle = SubtitulamosSubtitle(
                 language=language,
+                subtitle_id=subtitle_id,
                 hearing_impaired=hearing_impaired,
                 page_link=self.server_url + episode_url,
                 series=series,
@@ -244,7 +262,11 @@ class SubtitulamosProvider(Provider):
         return subtitles
 
     def query(
-        self, series: str | None = None, season: int | None = None, episode: int | None = None, year: int | None = None
+        self,
+        series: str | None = None,
+        season: int | None = None,
+        episode: int | None = None,
+        year: int | None = None,
     ) -> list[SubtitulamosSubtitle]:
         """Query the provider for subtitles."""
         try:

@@ -348,22 +348,32 @@ def test_list_subtitles_providers_download(episodes):
     languages = {Language('eng')}
 
     # modify global variable
-    if 'gestdown' not in disabled_providers:
-        disabled_providers.append('gestdown')
+    try:
+        if 'gestdown' not in disabled_providers:
+            disabled_providers.append('gestdown')
 
-    # force using 'gestdown', bypass default when init ProviderPool
-    subtitles = list_subtitles({video}, languages, providers=['gestdown'])
+        # no subtitles from 'gestdown'
+        subtitles = list_subtitles({video}, languages)
+        assert not any(sub.provider_name == 'gestdown' for sub in subtitles[video])
 
-    # test result
-    assert len(subtitles) == 1
-    assert len(subtitles[video]) > 0
-    subtitle = subtitles[video][0]
-    assert subtitle.content is None
+        # force using 'gestdown', bypass default when init ProviderPool
+        subtitles = list_subtitles({video}, languages, providers=['gestdown'])
 
-    # download subtitles
-    download_subtitles(subtitles[video][:1])
-    assert subtitle.content is not None
+        # test result
+        assert len(subtitles) == 1
+        assert len(subtitles[video]) > 0
+        subtitle = subtitles[video][0]
+        assert subtitle.provider_name == 'gestdown'
+        assert subtitle.content is None
 
-    # reset global variable
-    if 'gestdown' in disabled_providers:
-        disabled_providers.remove('gestdown')
+        # download subtitles
+        download_subtitles([subtitle], providers=['gestdown'])
+        assert subtitle.content is not None
+
+        # force using 'gestdown', bypass default when init ProviderPool
+        subtitles = list_subtitles({video}, languages, providers=['gestdown'])
+
+    finally:
+        # reset global variable
+        if 'gestdown' in disabled_providers:
+            disabled_providers.remove('gestdown')

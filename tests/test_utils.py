@@ -29,7 +29,7 @@ from subliminal.utils import (
 if TYPE_CHECKING:
     from pathlib import Path
 
-    from babelfish import Language
+    from babelfish import Language  # type: ignore[import-untyped]
 
 # Core test
 pytestmark = pytest.mark.core

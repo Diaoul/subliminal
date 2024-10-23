@@ -7,18 +7,19 @@ import os
 import warnings
 from typing import TYPE_CHECKING, Any
 
+from attrs import define, field
+from babelfish import Country, Language  # noqa: TC002  # type: ignore[import-untyped]
 from guessit import guessit  # type: ignore[import-untyped]
 
 from subliminal.exceptions import GuessingError
+from subliminal.subtitle import Subtitle  # noqa: TC001
 from subliminal.utils import ensure_list, get_age, matches_extended_title
 
 if TYPE_CHECKING:
-    from collections.abc import Mapping, Sequence, Set
+    # Do not put babelfish.Language and Subtitle in TYPE_CHECKING so cattrs.unstructure works
+    from collections.abc import Mapping
     from datetime import timedelta
 
-    from babelfish import Country, Language  # type: ignore[import-untyped]
-
-    from subliminal.subtitle import Subtitle
 
 logger = logging.getLogger(__name__)
 
@@ -107,6 +108,7 @@ VIDEO_EXTENSIONS = (
 )
 
 
+@define
 class Video:
     """Base class for videos.
 
@@ -121,7 +123,8 @@ class Video:
     :param str audio_codec: codec of the main audio stream.
     :param float frame_rate: frame rate in frames per seconds.
     :param float duration: duration of the video in seconds.
-    :param dict hashes: hashes of the video file by provider names.
+    :param hashes: hashes of the video file by provider names.
+    :type hashes: dict[str, str]
     :param int size: size of the video file in bytes.
     :param subtitles: existing subtitles.
     :type subtitles: set[:class:`~subliminal.subtitle.Subtitle`]
@@ -134,94 +137,60 @@ class Video:
     """
 
     #: Name or path of the video
-    name: str
+    _name: str
 
     #: Source of the video (HDTV, Web, Blu-ray, ...)
-    source: str | None
+    source: str | None = field(kw_only=True, default=None)
 
     #: Release group of the video
-    release_group: str | None
+    release_group: str | None = field(kw_only=True, default=None)
 
     #: Streaming service of the video
-    streaming_service: str | None
+    streaming_service: str | None = field(kw_only=True, default=None)
 
     #: Resolution of the video stream (480p, 720p, 1080p or 1080i)
-    resolution: str | None
+    resolution: str | None = field(kw_only=True, default=None)
 
     #: Codec of the video stream
-    video_codec: str | None
+    video_codec: str | None = field(kw_only=True, default=None)
 
     #: Codec of the main audio stream
-    audio_codec: str | None
+    audio_codec: str | None = field(kw_only=True, default=None)
 
     #: Frame rate in frame per seconds
-    frame_rate: float | None
+    frame_rate: float | None = field(kw_only=True, default=None)
 
     #: Duration of the video in seconds
-    duration: float | None
+    duration: float | None = field(kw_only=True, default=None)
 
     #: Hashes of the video file by provider names
-    hashes: dict[str, str]
+    hashes: dict[str, str] = field(kw_only=True, factory=dict)
 
     #: Size of the video file in bytes
-    size: int | None
+    size: int | None = field(kw_only=True, default=None)
 
     #: Title of the video
-    title: str | None
+    title: str | None = field(kw_only=True, default=None)
 
     #: Year of the video
-    year: int | None
+    year: int | None = field(kw_only=True, default=None)
 
     #: Country of the video
-    country: Country | None
+    country: Country | None = field(kw_only=True, default=None)
 
     #: IMDb id of the video
-    imdb_id: str | None
+    imdb_id: str | None = field(kw_only=True, default=None)
 
     #: TMDB id of the video
-    tmdb_id: int | None
+    tmdb_id: int | None = field(kw_only=True, default=None)
 
     #: Existing subtitle languages
-    subtitles: set[Subtitle]
+    subtitles: set[Subtitle] = field(kw_only=True, factory=set)
 
-    def __init__(
-        self,
-        name: str,
-        *,
-        source: str | None = None,
-        release_group: str | None = None,
-        resolution: str | None = None,
-        streaming_service: str | None = None,
-        video_codec: str | None = None,
-        audio_codec: str | None = None,
-        frame_rate: float | None = None,
-        duration: float | None = None,
-        hashes: Mapping[str, str] | None = None,
-        size: int | None = None,
-        subtitles: Set[Subtitle] | None = None,
-        title: str | None = None,
-        year: int | None = None,
-        country: Country | None = None,
-        imdb_id: str | None = None,
-        tmdb_id: int | None = None,
-    ) -> None:
-        self.name = name
-        self.source = source
-        self.release_group = release_group
-        self.streaming_service = streaming_service
-        self.resolution = resolution
-        self.video_codec = video_codec
-        self.audio_codec = audio_codec
-        self.frame_rate = frame_rate
-        self.duration = duration
-        self.hashes = dict(hashes) if hashes is not None else {}
-        self.size = size
-        self.subtitles = set(subtitles) if subtitles is not None else set()
-        self.title = title
-        self.year = year
-        self.country = country
-        self.imdb_id = imdb_id
-        self.tmdb_id = tmdb_id
+    @property
+    def name(self) -> str:
+        """Video name, read-only."""
+        return self._name
 
     @property
     def exists(self) -> bool:
@@ -281,6 +250,7 @@ class Video:
         return hash(self.name)
 
 
+@define
 class Episode(Video):
     """Episode :class:`Video`.
 
@@ -302,64 +272,37 @@ class Episode(Video):
     season: int
 
     #: Episode numbers of the episode
-    episodes: list[int]
+    episodes: list[int] = field(converter=ensure_list)
 
     #: Title of the episode
-    title: str | None
+    title: str | None = field(kw_only=True, default=None)
 
     #: Year of series
-    year: int | None
+    year: int | None = field(kw_only=True, default=None)
 
     #: The series is the first with this name
-    original_series: bool
+    original_series: bool = field(kw_only=True, default=True)
 
     #: IMDb id of the episode
-    imdb_id: str | None
+    imdb_id: str | None = field(kw_only=True, default=None)
 
     #: IMDb id of the series
-    series_imdb_id: str | None
+    series_imdb_id: str | None = field(kw_only=True, default=None)
 
     #: TMDB id of the episode
-    tmdb_id: int | None
+    tmdb_id: int | None = field(kw_only=True, default=None)
 
     #: TMDB id of the series
-    series_tmdb_id: int | None
+    series_tmdb_id: int | None = field(kw_only=True, default=None)
 
     #: TVDB id of the episode
-    tvdb_id: int | None
+    tvdb_id: int | None = field(kw_only=True, default=None)
 
     #: TVDB id of the series
-    series_tvdb_id: int | None
+    series_tvdb_id: int | None = field(kw_only=True, default=None)
 
     #: Alternative names of the series
-    alternative_series: list[str]
-
-    def __init__(
-        self,
-        name: str,
-        series: str,
-        season: int,
-        episodes: int | Sequence[int] | None,
-        *,
-        original_series: bool = True,
-        tvdb_id: int | None = None,
-        series_tvdb_id: int | None = None,
-        series_imdb_id: str | None = None,
-        series_tmdb_id: int | None = None,
-        alternative_series: Sequence[str] | None = None,
-        **kwargs: Any,
-    ) -> None:
-        super().__init__(name, **kwargs)
-
-        self.series = series
-        self.season = season
-        self.episodes = ensure_list(episodes)
-        self.original_series = original_series
-        self.tvdb_id = tvdb_id
-        self.series_tvdb_id = series_tvdb_id
-        self.series_imdb_id = series_imdb_id
-        self.series_tmdb_id = series_tmdb_id
-        self.alternative_series = list(alternative_series) if alternative_series is not None else []
+    alternative_series: list[str] = field(kw_only=True, factory=list)
 
     @property
     def episode(self) -> int | None:
@@ -417,7 +360,11 @@ class Episode(Video):
             episodes='-'.join(f'{num:02d}' for num in self.episodes),
         )
 
+    def __hash__(self) -> int:
+        return hash(self.name)
 
+
+@define
 class Movie(Video):
     """Movie :class:`Video`.
 
@@ -434,30 +381,19 @@ class Movie(Video):
     title: str
 
     #: Year of the movie
-    year: int | None
+    year: int | None = field(kw_only=True, default=None)
 
     #: Country of the movie
-    country: Country | None
+    country: Country | None = field(kw_only=True, default=None)
 
     #: IMDb id of the episode
-    imdb_id: str | None
+    imdb_id: str | None = field(kw_only=True, default=None)
 
     #: TMDB id of the episode
-    tmdb_id: int | None
+    tmdb_id: int | None = field(kw_only=True, default=None)
 
     #: Alternative titles of the movie
-    alternative_titles: list[str]
-
-    def __init__(
-        self,
-        name: str,
-        title: str,
-        *,
-        alternative_titles: Sequence[str] | None = None,
-        **kwargs: Any,
-    ) -> None:
-        super().__init__(name, title=title, **kwargs)
-        self.alternative_titles = list(alternative_titles) if alternative_titles is not None else []
+    alternative_titles: list[str] = field(kw_only=True, factory=list)
 
     def matches(self, title: str) -> bool:
         """Match the name to the movie title, using alternative titles also.."""
@@ -494,12 +430,12 @@ class Movie(Video):
         return cls.fromguess(name, guessit(name, {'type': 'movie'}))
 
     def __repr__(self) -> str:
-        return '<{cn} [{title}{open}{country}{sep}{year}{close}]>'.format(
+        return '<{cn} [{title}{country}{year}]>'.format(
             cn=self.__class__.__name__,
             title=self.title,
-            year=self.year or '',
-            country=self.country or '',
-            open=' (' if self.year or self.country else '',
-            sep=') (' if self.year and self.country else '',
-            close=')' if self.year or self.country else '',
+            country=f' ({self.country})' if self.country else '',
+            year=f' ({self.year})' if self.year else '',
         )
+
+    def __hash__(self) -> int:
+        return hash(self.name)

@@ -2,21 +2,20 @@
 
 from __future__ import annotations
 
+# Do not put timedelta and Sequence in TYPE_CHECKING for avoid error with docs
 import logging
 import os
 from collections.abc import Mapping, MutableMapping, MutableSequence, Sequence, Set
-from typing import TYPE_CHECKING, Any, TypedDict, cast
+from datetime import timedelta  # noqa: TC003
+from typing import Any, TypedDict, cast
+
+# Do not put babelfish.Language and Subtitle in TYPE_CHECKING so cattrs.unstructure works
+from attrs import define, field
+from babelfish import Country, Language  # noqa: TC002  # type: ignore[import-untyped]
 
 from subliminal.exceptions import GuessingError
+from subliminal.subtitle import Subtitle  # noqa: TC001
 from subliminal.utils import ensure_list, ensure_str, get_age, matches_extended_title, safely_guessit
-
-if TYPE_CHECKING:
-    from datetime import timedelta
-
-    from babelfish import Country, Language  # type: ignore[import-untyped]
-
-    from subliminal.subtitle import Subtitle
-
 
 logger = logging.getLogger(__name__)
 
@@ -45,6 +44,7 @@ VIDEO_EXTENSIONS = (
 # fmt: on
 
 
+@define
 class Video:
     """Base class for videos.
 
@@ -77,49 +77,49 @@ class Video:
     _name: str
 
     #: Source of the video (HDTV, Web, Blu-ray, ...)
-    source: str | None
+    source: str | None = field(kw_only=True, default=None)
 
     #: Release group of the video
-    release_group: str | None
+    release_group: str | None = field(kw_only=True, default=None)
 
     #: Streaming service of the video
-    streaming_service: str | None
+    streaming_service: str | None = field(kw_only=True, default=None)
 
     #: Resolution of the video stream (480p, 720p, 1080p or 1080i)
-    resolution: str | None
+    resolution: str | None = field(kw_only=True, default=None)
 
     #: Codec of the video stream
-    video_codec: str | None
+    video_codec: str | None = field(kw_only=True, default=None)
 
     #: Codec of the main audio stream
-    audio_codec: str | None
+    audio_codec: str | None = field(kw_only=True, default=None)
 
     #: Frame rate in frame per seconds
-    frame_rate: float | None
+    frame_rate: float | None = field(kw_only=True, default=None)
 
     #: Duration of the video in seconds
-    duration: float | None
+    duration: float | None = field(kw_only=True, default=None)
 
     #: Hashes of the video file by provider names
-    hashes: dict[str, str]
+    hashes: dict[str, str] = field(kw_only=True, factory=dict)
 
     #: Size of the video file in bytes
-    size: int | None
+    size: int | None = field(kw_only=True, default=None)
 
     #: Title of the video
-    title: str | None
+    title: str | None = field(kw_only=True, default=None)
 
     #: Year of the video
-    year: int | None
+    year: int | None = field(kw_only=True, default=None)
 
     #: Country of the video
-    country: Country | None
+    country: Country | None = field(kw_only=True, default=None)
 
     #: External ids of the video from different databases (IMDb, TMDB, ...)
-    external_ids: VideoExternalIds
+    external_ids: VideoExternalIds = field(kw_only=True, factory=dict)
 
     #: Use the latest of creation time and modification time for the video age
-    use_ctime: bool
+    use_ctime: bool = field(kw_only=True, default=True)
 
     #: Existing subtitles
     subtitles: list[Subtitle]
@@ -258,10 +258,16 @@ class Video:
     def __repr__(self) -> str:  # pragma: no cover
         return f'<{self.__class__.__name__} [{self.name!r}]>'
 
-    def __hash__(self) -> int:
+    def __hash__(self) -> int:  # pragma: no cover
         return hash(self.name)
 
 
+def ensure_list_int(value: int | Sequence[int] | None) -> list[int]:
+    """Return None if the value is non-positive."""
+    return ensure_list(value)
+
+
+@define
 class Episode(Video):
     """Episode :class:`Video`.
 
@@ -282,16 +288,16 @@ class Episode(Video):
     season: int
 
     #: Episode numbers of the episode
-    episodes: list[int]
+    episodes: list[int] = field(converter=ensure_list_int)
 
     #: Title of the episode
-    title: str | None
+    title: str | None = field(kw_only=True, default=None)
 
     #: Year of series
-    year: int | None
+    year: int | None = field(kw_only=True, default=None)
 
     #: The series is the first with this name
-    original_series: bool
+    original_series: bool = field(kw_only=True, default=True)
 
     #: Alternative names of the series
     alternative_series: list[str]
@@ -374,7 +380,11 @@ class Episode(Video):
             episodes='-'.join(f'{num:02d}' for num in self.episodes),
         )
 
+    def __hash__(self) -> int:
+        return hash(self.name)
 
+
+@define
 class Movie(Video):
     """Movie :class:`Video`.
 
@@ -391,10 +401,10 @@ class Movie(Video):
     title: str
 
     #: Year of the movie
-    year: int | None
+    year: int | None = field(kw_only=True, default=None)
 
     #: Country of the movie
-    country: Country | None
+    country: Country | None = field(kw_only=True, default=None)
 
     #: Alternative titles of the movie
     alternative_titles: list[str]
@@ -454,3 +464,6 @@ class Movie(Video):
             country=f' ({self.country})' if self.country else '',
             year=f' ({self.year})' if self.year else '',
         )
+
+    def __hash__(self) -> int:
+        return hash(self.name)

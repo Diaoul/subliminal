@@ -9,6 +9,7 @@ from unittest.mock import Mock
 
 import pytest
 from babelfish import Language
+from cattrs import structure, unstructure
 from packaging.version import Version
 
 from subliminal.subtitle import Subtitle
@@ -403,3 +404,29 @@ def test_episode_update_fake_set(episodes: dict[str, Episode]) -> None:
 
     assert video.fake_set == {1, 2, 3, 4}  # type: ignore[attr-defined]
     assert video.year == 2057
+
+
+@pytest.mark.skipif(
+    Version(get_version('babelfish')) <= Version('0.6.1'),
+    reason='babelfish.Language needs to be a hashable dataclass',
+)
+def test_serialize_movie(movies: dict[str, Movie]) -> None:
+    video = movies['man_of_steel']
+
+    ser = unstructure(video)
+    new_video = structure(ser, Movie)
+
+    assert video == new_video
+
+
+@pytest.mark.skipif(
+    Version(get_version('babelfish')) <= Version('0.6.1'),
+    reason='babelfish.Language needs to be a hashable dataclass',
+)
+def test_serialize_episode(episodes: dict[str, Episode]) -> None:
+    video = episodes['bbt_s07e05']
+
+    ser = unstructure(video)
+    new_video = structure(ser, Episode)
+
+    assert video == new_video

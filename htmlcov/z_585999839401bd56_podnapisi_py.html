@@ -66,8 +66,8 @@
             <a id="indexLink" class="nav" href="index.html">&Hat; index</a> &nbsp; &nbsp;
             <a id="nextFileLink" class="nav" href="z_585999839401bd56_tvsubtitles_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
-            <a class="nav" href="https://coverage.readthedocs.io/en/7.6.3">coverage.py v7.6.3</a>,
-            created at 2024-10-17 20:40 +0000
+            <a class="nav" href="https://coverage.readthedocs.io/en/7.6.4">coverage.py v7.6.4</a>,
+            created at 2024-10-27 20:13 +0000
         </p>
         <aside class="hidden">
             <button type="button" class="button_next_chunk" data-shortcut="j"></button>
@@ -219,7 +219,7 @@
     <p class="par run show_par"><span class="n"><a id="t135" href="#t135">135</a></span><span class="t">        <span class="key">if</span> <span class="nam">self</span><span class="op">.</span><span class="nam">session</span> <span class="key">is</span> <span class="key">None</span><span class="op">:</span>&nbsp;</span><span class="r"><span class="annotate short">135&#x202F;&#x219B;&#x202F;136</span><span class="annotate long">line 135 didn't jump to line 136 because the condition on line 135 was never true</span></span></p>
     <p class="mis show_mis"><span class="n"><a id="t136" href="#t136">136</a></span><span class="t">            <span class="key">raise</span> <span class="nam">NotInitializedProviderError</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t137" href="#t137">137</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t138" href="#t138">138</a></span><span class="t">        <span class="com"># set parameters, see http://www.podnapisi.net/forum/viewtopic.php?f=62&amp;t=26164#p212652</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t138" href="#t138">138</a></span><span class="t">        <span class="com"># set parameters, see https://www.podnapisi.net/forum/viewtopic.php?f=62&amp;t=26164#p212652</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t139" href="#t139">139</a></span><span class="t">        <span class="nam">params</span><span class="op">:</span> <span class="nam">dict</span><span class="op">[</span><span class="nam">str</span><span class="op">,</span> <span class="nam">Any</span><span class="op">]</span> <span class="op">=</span> <span class="op">{</span><span class="str">'keywords'</span><span class="op">:</span> <span class="nam">keyword</span><span class="op">,</span> <span class="str">'language'</span><span class="op">:</span> <span class="nam">str</span><span class="op">(</span><span class="nam">language</span><span class="op">)</span><span class="op">}</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t140" href="#t140">140</a></span><span class="t">        <span class="nam">is_episode</span> <span class="op">=</span> <span class="key">False</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t141" href="#t141">141</a></span><span class="t">        <span class="key">if</span> <span class="nam">season</span> <span class="key">is</span> <span class="key">not</span> <span class="key">None</span> <span class="key">and</span> <span class="nam">episode</span> <span class="key">is</span> <span class="key">not</span> <span class="key">None</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
@@ -246,7 +246,7 @@
     <p class="run"><span class="n"><a id="t162" href="#t162">162</a></span><span class="t">            <span class="key">for</span> <span class="nam">data</span> <span class="key">in</span> <span class="nam">result</span><span class="op">[</span><span class="str">'data'</span><span class="op">]</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t163" href="#t163">163</a></span><span class="t">                <span class="com"># read xml elements</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t164" href="#t164">164</a></span><span class="t">                <span class="nam">pid</span> <span class="op">=</span> <span class="nam">data</span><span class="op">[</span><span class="str">'id'</span><span class="op">]</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t165" href="#t165">165</a></span><span class="t">                <span class="com"># ignore duplicates, see http://www.podnapisi.net/forum/viewtopic.php?f=62&amp;t=26164&amp;start=10#p213321</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t165" href="#t165">165</a></span><span class="t">                <span class="com"># ignore duplicates, see https://www.podnapisi.net/forum/viewtopic.php?f=62&amp;t=26164&amp;start=10#p213321</span>&nbsp;</span><span class="r"></span></p>
     <p class="par run show_par"><span class="n"><a id="t166" href="#t166">166</a></span><span class="t">                <span class="key">if</span> <span class="nam">pid</span> <span class="key">in</span> <span class="nam">pids</span><span class="op">:</span>&nbsp;</span><span class="r"><span class="annotate short">166&#x202F;&#x219B;&#x202F;167</span><span class="annotate long">line 166 didn't jump to line 167 because the condition on line 166 was never true</span></span></p>
     <p class="mis show_mis"><span class="n"><a id="t167" href="#t167">167</a></span><span class="t">                    <span class="nam">logger</span><span class="op">.</span><span class="nam">debug</span><span class="op">(</span><span class="str">'Ignoring duplicate %r'</span><span class="op">,</span> <span class="nam">pid</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="mis show_mis"><span class="n"><a id="t168" href="#t168">168</a></span><span class="t">                    <span class="key">continue</span>&nbsp;</span><span class="r"></span></p>
@@ -342,8 +342,8 @@
             <a class="nav" href="index.html">&Hat; index</a> &nbsp; &nbsp;
             <a class="nav" href="z_585999839401bd56_tvsubtitles_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
-            <a class="nav" href="https://coverage.readthedocs.io/en/7.6.3">coverage.py v7.6.3</a>,
-            created at 2024-10-17 20:40 +0000
+            <a class="nav" href="https://coverage.readthedocs.io/en/7.6.4">coverage.py v7.6.4</a>,
+            created at 2024-10-27 20:13 +0000
         </p>
     </div>
 </footer>

@@ -39,7 +39,7 @@ from subliminal import (
     scan_videos,
 )
 from subliminal.core import ARCHIVE_EXTENSIONS, scan_name, search_external_subtitles
-from subliminal.extensions import default_providers, default_refiners
+from subliminal.extensions import get_default_providers, get_default_refiners
 from subliminal.score import match_hearing_impaired
 from subliminal.utils import merge_extend_and_ignore_unions
 
@@ -508,7 +508,7 @@ def download(
             'ignore': ignore_provider,
         },
         obj['provider_lists'],
-        default_providers,
+        get_default_providers(),
     )
     logger.info('Use providers: %s', use_providers)
     use_refiners = merge_extend_and_ignore_unions(
@@ -518,7 +518,7 @@ def download(
             'ignore': ignore_refiner,
         },
         obj['refiner_lists'],
-        default_refiners,
+        get_default_refiners(),
     )
     logger.info('Use refiners: %s', use_refiners)
 

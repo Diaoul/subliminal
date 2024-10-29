@@ -16,7 +16,7 @@ import click
 import tomli
 from babelfish import Error as BabelfishError  # type: ignore[import-untyped]
 from babelfish import Language
-from click_option_group import MutuallyExclusiveOptionGroup, OptionGroup
+from click_option_group import OptionGroup
 from dogpile.cache.backends.file import AbstractFileLock
 from dogpile.util.readwrite_lock import ReadWriteMutex
 from platformdirs import PlatformDirs
@@ -141,6 +141,12 @@ def configure(ctx: click.Context, param: click.Parameter | None, filename: str |
 
     # make download options
     download_dict = toml_dict.setdefault('download', {})
+    # handle language types
+    for lt in ('hearing_impaired', 'foreign_only'):
+        # if an option was defined in the config file, make it a tuple, the expected type
+        if lt in download_dict and (isinstance(download_dict[lt], bool) or download_dict[lt] is None):
+            download_dict[lt] = (download_dict[lt],)
+
     # remove the provider and refiner lists to select, extend and ignore
     provider_lists = {
         'select': download_dict.pop('provider', []),
@@ -189,14 +195,6 @@ default_config_path = dirs.user_config_path / 'subliminal.toml'
 
 providers_config = OptionGroup('Providers configuration')
 refiners_config = OptionGroup('Refiners configuration')
-hearing_impaired_group = MutuallyExclusiveOptionGroup(
-    'Hearing impaired subtitles',
-    help='Require or avoid hearing impaired subtitles. If no preference (default), do not use any flag.',
-)
-foreign_only_group = MutuallyExclusiveOptionGroup(
-    'Foreign only subtitles',
-    help='Require or avoid foreign-only/forced subtitles.  If no preference (default), do not use any flag.',
-)
 
 
 @click.group(
@@ -418,10 +416,42 @@ def cache(ctx: click.Context, clear_subliminal: bool) -> None:
     ),
 )
 @click.option('-f', '--force', is_flag=True, default=False, help='Force download even if a subtitle already exist.')
-@hearing_impaired_group.option('-hi', '--hearing-impaired', is_flag=True, default=False)
-@hearing_impaired_group.option('-HI', '--no-hearing-impaired', is_flag=True, default=False)
-@foreign_only_group.option('-fo', '--foreign-only', is_flag=True, default=False)
-@foreign_only_group.option('-FO', '--no-foreign-only', is_flag=True, default=False)
+@click.option(
+    '-fo',
+    '--foreign-only',
+    'foreign_only',
+    is_flag=True,
+    flag_value=True,
+    multiple=True,
+    help='Prefer foreign-only subtitles.',
+)
+@click.option(
+    '-FO',
+    '--no-foreign-only',
+    'foreign_only',
+    is_flag=True,
+    flag_value=False,
+    multiple=True,
+    help='Disfavor foreign-only subtitles.',
+)
+@click.option(
+    '-hi',
+    '--hearing-impaired',
+    'hearing_impaired',
+    is_flag=True,
+    flag_value=True,
+    multiple=True,
+    help='Prefer hearing-impaired subtitles.',
+)
+@click.option(
+    '-HI',
+    '--no-hearing-impaired',
+    'hearing_impaired',
+    is_flag=True,
+    flag_value=False,
+    multiple=True,
+    help='Disfavor hearing-impaired subtitles.',
+)
 @click.option(
     '-m',
     '--min-score',
@@ -433,7 +463,7 @@ def cache(ctx: click.Context, clear_subliminal: bool) -> None:
     '--language-type-suffix',
     is_flag=True,
     default=False,
-    help='Add a suffix to the saved subtitle name to indicate a hearing impaired or foreign part subtitle.',
+    help='Add a suffix to the saved subtitle name to indicate a hearing impaired or foreign only subtitle.',
 )
 @click.option(
     '--language-format',
@@ -478,10 +508,8 @@ def download(
     original_encoding: bool,
     single: bool,
     force: bool,
-    hearing_impaired: bool,
-    no_hearing_impaired: bool,
-    foreign_only: bool,
-    no_foreign_only: bool,
+    hearing_impaired: tuple[bool | None, ...],
+    foreign_only: tuple[bool | None, ...],
     min_score: int,
     language_type_suffix: bool,
     language_format: str,
@@ -511,15 +539,11 @@ def download(
 
     # language_type
     hearing_impaired_flag: bool | None = None
-    if hearing_impaired:
-        hearing_impaired_flag = True
-    elif no_hearing_impaired:
-        hearing_impaired_flag = False
+    if len(hearing_impaired) > 0:
+        hearing_impaired_flag = hearing_impaired[-1]
     foreign_only_flag: bool | None = None
-    if foreign_only:
-        foreign_only_flag = True
-    elif no_foreign_only:
-        foreign_only_flag = False
+    if len(foreign_only) > 0:
+        foreign_only_flag = foreign_only[-1]
 
     debug = obj.get('debug', False)
     if debug:

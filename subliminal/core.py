@@ -254,6 +254,7 @@ class ProviderPool:
         # sort by hearing impaired and foreign only
         language_type = LanguageType.from_flags(hearing_impaired=hearing_impaired, foreign_only=foreign_only)
         if language_type != LanguageType.UNKNOWN:
+            logger.info('Sort subtitles by %s types first', language_type.value)
             subtitles = sorted(
                 subtitles,
                 key=lambda s: s.language_type == language_type,

@@ -40,7 +40,6 @@ from subliminal import (
 )
 from subliminal.core import ARCHIVE_EXTENSIONS, scan_name, search_external_subtitles
 from subliminal.extensions import get_default_providers, get_default_refiners
-from subliminal.score import match_hearing_impaired
 from subliminal.utils import merge_extend_and_ignore_unions
 
 if TYPE_CHECKING:
@@ -142,6 +141,12 @@ def configure(ctx: click.Context, param: click.Parameter | None, filename: str |
 
     # make download options
     download_dict = toml_dict.setdefault('download', {})
+    # handle language types
+    for lt in ('hearing_impaired', 'foreign_only'):
+        # if an option was defined in the config file, make it a tuple, the expected type
+        if lt in download_dict and (isinstance(download_dict[lt], bool) or download_dict[lt] is None):
+            download_dict[lt] = (download_dict[lt],)
+
     # remove the provider and refiner lists to select, extend and ignore
     provider_lists = {
         'select': download_dict.pop('provider', []),
@@ -411,7 +416,42 @@ def cache(ctx: click.Context, clear_subliminal: bool) -> None:
     ),
 )
 @click.option('-f', '--force', is_flag=True, default=False, help='Force download even if a subtitle already exist.')
-@click.option('-hi', '--hearing-impaired', is_flag=True, default=False, help='Prefer hearing impaired subtitles.')
+@click.option(
+    '-fo',
+    '--foreign-only',
+    'foreign_only',
+    is_flag=True,
+    flag_value=True,
+    multiple=True,
+    help='Prefer foreign-only subtitles.',
+)
+@click.option(
+    '-FO',
+    '--no-foreign-only',
+    'foreign_only',
+    is_flag=True,
+    flag_value=False,
+    multiple=True,
+    help='Disfavor foreign-only subtitles.',
+)
+@click.option(
+    '-hi',
+    '--hearing-impaired',
+    'hearing_impaired',
+    is_flag=True,
+    flag_value=True,
+    multiple=True,
+    help='Prefer hearing-impaired subtitles.',
+)
+@click.option(
+    '-HI',
+    '--no-hearing-impaired',
+    'hearing_impaired',
+    is_flag=True,
+    flag_value=False,
+    multiple=True,
+    help='Disfavor hearing-impaired subtitles.',
+)
 @click.option(
     '-m',
     '--min-score',
@@ -423,7 +463,7 @@ def cache(ctx: click.Context, clear_subliminal: bool) -> None:
     '--language-type-suffix',
     is_flag=True,
     default=False,
-    help='Add a suffix to the saved subtitle name to indicate a hearing impaired or foreign part subtitle.',
+    help='Add a suffix to the saved subtitle name to indicate a hearing impaired or foreign only subtitle.',
 )
 @click.option(
     '--language-format',
@@ -468,7 +508,8 @@ def download(
     original_encoding: bool,
     single: bool,
     force: bool,
-    hearing_impaired: bool,
+    hearing_impaired: tuple[bool | None, ...],
+    foreign_only: tuple[bool | None, ...],
     min_score: int,
     language_type_suffix: bool,
     language_format: str,
@@ -495,6 +536,14 @@ def download(
     # no encoding specified, default to utf-8
     elif encoding is None:
         encoding = 'utf-8'
+
+    # language_type
+    hearing_impaired_flag: bool | None = None
+    if len(hearing_impaired) > 0:
+        hearing_impaired_flag = hearing_impaired[-1]
+    foreign_only_flag: bool | None = None
+    if len(foreign_only) > 0:
+        foreign_only_flag = foreign_only[-1]
 
     debug = obj.get('debug', False)
     if debug:
@@ -649,7 +698,8 @@ def download(
                     v,
                     language_set,
                     min_score=scores['hash'] * min_score // 100,
-                    hearing_impaired=hearing_impaired,
+                    hearing_impaired=hearing_impaired_flag,
+                    foreign_only=foreign_only_flag,
                     only_one=single,
                     ignore_subtitles=ignore_subtitles,
                 )
@@ -701,11 +751,8 @@ def download(
                     else:
                         score_color = 'green'
 
-                # scale score from 0 to 100 taking out preferences
-                scaled_score = score
-                if match_hearing_impaired(s, hearing_impaired=hearing_impaired):
-                    scaled_score -= scores['hearing_impaired']
-                scaled_score *= 100 / scores['hash']
+                # scale score from 0 to 100
+                scaled_score = score * 100 / scores['hash']
 
                 # echo some nice colored output
                 language_str = (

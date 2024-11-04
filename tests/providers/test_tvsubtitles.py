@@ -31,7 +31,7 @@ def test_converter_convert_alpha3_alpha2_converter():
 
 @pytest.mark.converter()
 def test_converter_reverse():
-    assert language_converters['tvsubtitles'].reverse('gr') == ('ell',)
+    assert language_converters['tvsubtitles'].reverse('gr') == ('ell', None, None)
 
 
 @pytest.mark.converter()

@@ -18,17 +18,14 @@ Subtitles, faster than your thoughts.
     :target: https://github.com/Diaoul/subliminal/blob/master/LICENSE
     :alt: License
 
-.. image:: https://img.shields.io/badge/gitter-join%20chat-1dce73.svg
-    :alt: Join the chat at https://gitter.im/Diaoul/subliminal
-    :target: https://gitter.im/Diaoul/subliminal
-
-.. image:: https://img.shields.io/discord/1256603445411184740?style=for-the-badge&label&logo=discord&logoColor=white&color=blue
+.. image:: https://img.shields.io/badge/discord-7289da.svg?style=flat-square&logo=discord
     :alt: Discord
     :target: https://discord.gg/kXW6sWte9N
 
 
 :Project page: https://github.com/Diaoul/subliminal
 :Documentation: https://subliminal.readthedocs.org/
+:Community: https://discord.gg/kXW6sWte9N
 
 
 Usage
@@ -71,6 +68,7 @@ Download best subtitles in French and English for videos less than two weeks old
 
 Docker
 ^^^^^^
+
 Run subliminal in a docker container::
 
     $ docker run --rm --name subliminal -v subliminal_cache:/usr/src/cache -v /tvshows:/tvshows -it diaoulael/subliminal download -l en /tvshows/The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.mp4
@@ -94,10 +92,22 @@ clone your fork locally and install a development version::
     $ pip install --user -e '.[dev,test,docs]'
 
 
-Nautilus/Nemo integration
--------------------------
-See the dedicated `project page <https://github.com/Diaoul/nautilus-subliminal>`_ for more information.
+Integrations
+------------
+Subliminal integrates with various desktop file managers to enhance your workflow:
 
-Dolphin integration
--------------------
-See this `Gist <https://gist.github.com/maurocolella/03a9f02c56b1a90c64f05683e2840d57>`_.
+- **Nautilus/Nemo**: See the dedicated `project page <https://github.com/Diaoul/nautilus-subliminal>`_ for more information.
+- **Dolphin**: See this `Gist <https://gist.github.com/maurocolella/03a9f02c56b1a90c64f05683e2840d57>`_. for more details.
+
+Contributing
+------------
+We welcome contributions from the community! If you're interested in contributing, here are a few
+ways you can get involved:
+
+- **Browse Issues and Pull Requests**: Check out the existing `Issues <https://github.com/Diaoul/subliminal/issues>`_
+  and `Pull Requests <https://github.com/Diaoul/subliminal/pulls>`_ to see where you can help.
+- **Report Bugs or Request Features**: If you encounter a bug or have a feature request, please create a GitHub Issue.
+- **Follow the Contribution Guide**: For detailed instructions on how to contribute, please refer to our
+  `Contribution Guide <https://github.com/Diaoul/subliminal/blob/main/CONTRIBUTING.md>`_.
+
+Your contributions are greatly appreciated and help make this project better for everyone!

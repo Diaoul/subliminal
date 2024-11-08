@@ -16,15 +16,15 @@ from guessit import guessit  # type: ignore[import-untyped]
 from rarfile import BadRarFile, Error, NotRarFile, RarCannotExec, RarFile, is_rarfile  # type: ignore[import-untyped]
 
 from .extensions import (
-    default_providers,
-    default_refiners,
     discarded_episode_refiners,
     discarded_movie_refiners,
+    get_default_providers,
+    get_default_refiners,
     provider_manager,
     refiner_manager,
 )
 from .score import compute_score as default_compute_score
-from .subtitle import SUBTITLE_EXTENSIONS, Subtitle
+from .subtitle import SUBTITLE_EXTENSIONS, LanguageType, Subtitle
 from .utils import get_age, handle_exception
 from .video import VIDEO_EXTENSIONS, Episode, Movie, Video
 
@@ -75,7 +75,7 @@ class ProviderPool:
         providers: Sequence[str] | None = None,
         provider_configs: Mapping[str, Any] | None = None,
     ) -> None:
-        self.providers = providers if providers is not None else default_providers
+        self.providers = providers if providers is not None else get_default_providers()
         self.provider_configs = provider_configs or {}
         self.initialized_providers = {}
         self.discarded_providers = set()
@@ -148,7 +148,7 @@ class ProviderPool:
         try:
             return self[provider].list_subtitles(video, provider_languages)
         except Exception as e:  # noqa: BLE001
-            handle_exception(e, 'Provider {provider}')
+            handle_exception(e, f'Provider {provider}')
 
         return []
 
@@ -220,7 +220,8 @@ class ProviderPool:
         languages: Set[Language],
         *,
         min_score: int = 0,
-        hearing_impaired: bool = False,
+        hearing_impaired: bool | None = None,
+        foreign_only: bool | None = None,
         only_one: bool = False,
         compute_score: ComputeScore | None = None,
         ignore_subtitles: Sequence[str] | None = None,
@@ -234,10 +235,11 @@ class ProviderPool:
         :param languages: languages to download.
         :type languages: set of :class:`~babelfish.language.Language`
         :param int min_score: minimum score for a subtitle to be downloaded.
-        :param bool hearing_impaired: hearing impaired preference.
+        :param (bool | None) hearing_impaired: hearing impaired preference (yes/no/indifferent).
+        :param (bool | None) foreign_only: foreign only preference (yes/no/indifferent).
         :param bool only_one: download only one subtitle, not one per language.
         :param compute_score: function that takes `subtitle` and `video` as positional arguments,
-            `hearing_impaired` as keyword argument and returns the score.
+            and returns the score.
         :param ignore_subtitles: list of subtitle ids to ignore (None defaults to an empty list).
         :return: downloaded subtitles.
         :rtype: list of :class:`~subliminal.subtitle.Subtitle`
@@ -249,9 +251,19 @@ class ProviderPool:
         # ignore subtitles
         subtitles = [s for s in subtitles if s.id not in ignore_subtitles]
 
+        # sort by hearing impaired and foreign only
+        language_type = LanguageType.from_flags(hearing_impaired=hearing_impaired, foreign_only=foreign_only)
+        if language_type != LanguageType.UNKNOWN:
+            logger.info('Sort subtitles by %s types first', language_type.value)
+            subtitles = sorted(
+                subtitles,
+                key=lambda s: s.language_type == language_type,
+                reverse=True,
+            )
+
         # sort subtitles by score
         scored_subtitles = sorted(
-            [(s, compute_score(s, video, hearing_impaired=hearing_impaired)) for s in subtitles],
+            [(s, compute_score(s, video)) for s in subtitles],
             key=operator.itemgetter(1),
             reverse=True,
         )
@@ -411,7 +423,7 @@ def parse_subtitle_filename(subtitle_filename: str, video_filename: str) -> Subt
         except (ValueError, LanguageReverseError):
             logger.exception('Cannot parse language code %r', language_code)
 
-    # TODO: extract the hearing_impaired or forced attribute
+    # TODO: extract the hearing_impaired or foreign_only attribute
 
     return Subtitle(language, subtitle_id=subtitle_filename)
 
@@ -687,7 +699,7 @@ def refine(
     :param kwargs: additional parameters for the :func:`~subliminal.refiners.refine` functions.
 
     """
-    refiners = refiners if refiners is not None else default_refiners
+    refiners = refiners if refiners is not None else get_default_refiners()
     if isinstance(video, Movie):
         refiners = [r for r in refiners if r not in discarded_movie_refiners]
     if isinstance(video, Episode):
@@ -775,7 +787,8 @@ def download_best_subtitles(
     languages: Set[Language],
     *,
     min_score: int = 0,
-    hearing_impaired: bool = False,
+    hearing_impaired: bool | None = None,
+    foreign_only: bool | None = None,
     only_one: bool = False,
     compute_score: ComputeScore | None = None,
     pool_class: type[ProviderPool] = ProviderPool,
@@ -790,7 +803,8 @@ def download_best_subtitles(
     :param languages: languages to download.
     :type languages: set of :class:`~babelfish.language.Language`
     :param int min_score: minimum score for a subtitle to be downloaded.
-    :param bool hearing_impaired: hearing impaired preference.
+    :param (bool | None) hearing_impaired: hearing impaired preference (yes/no/indifferent).
+    :param (bool | None) foreign_only: foreign only preference (yes/no/indifferent).
     :param bool only_one: download only one subtitle, not one per language.
     :param compute_score: function that takes `subtitle` and `video` as positional arguments,
         `hearing_impaired` as keyword argument and returns the score.
@@ -825,6 +839,7 @@ def download_best_subtitles(
                 languages,
                 min_score=min_score,
                 hearing_impaired=hearing_impaired,
+                foreign_only=foreign_only,
                 only_one=only_one,
                 compute_score=compute_score,
             )
@@ -861,7 +876,7 @@ def save_subtitles(
     :param str directory: path to directory where to save the subtitles, default is next to the video.
     :param str encoding: encoding in which to save the subtitles, default is to keep original encoding.
     :param (str | None) extension: the subtitle extension, default is to match to the subtitle format.
-    :param bool language_type_suffix: add a suffix 'hi' or 'forced' if needed. Default to False.
+    :param bool language_type_suffix: add a suffix 'hi' or 'fo' if needed. Default to False.
     :param str language_format: format of the language suffix. Default to 'alpha2'.
     :return: the saved subtitles
     :rtype: list of :class:`~subliminal.subtitle.Subtitle`

@@ -139,10 +139,13 @@ provider_manager = RegistrableExtensionManager(
 )
 
 #: Disabled providers
-disabled_providers = ['addic7ed', 'napiprojekt', 'opensubtitlesvip', 'opensubtitlescomvip']
+disabled_providers = ['opensubtitlesvip', 'opensubtitlescomvip']
 
-#: Default enabled providers
-default_providers = [p for p in provider_manager.names() if p not in disabled_providers]
+
+def get_default_providers() -> list[str]:
+    """Return the default enabled providers."""
+    return [p for p in provider_manager.names() if p not in disabled_providers]
+
 
 #: Refiner manager
 refiner_manager = RegistrableExtensionManager(
@@ -159,8 +162,11 @@ refiner_manager = RegistrableExtensionManager(
 #: Disabled refiners
 disabled_refiners: list[str] = []
 
-#: Default enabled refiners
-default_refiners = [r for r in refiner_manager.names() if r not in disabled_refiners]
+
+def get_default_refiners() -> list[str]:
+    """Return the default enabled refiners."""
+    return [r for r in refiner_manager.names() if r not in disabled_refiners]
+
 
 #: Discarded Movie refiners
 discarded_movie_refiners: list[str] = ['tvdb']

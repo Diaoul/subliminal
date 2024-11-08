@@ -40,7 +40,7 @@ def test_converter_convert_alpha3_name_converter():
 
 @pytest.mark.converter()
 def test_converter_reverse():
-    assert language_converters['addic7ed'].reverse('Chinese (Traditional)') == ('zho',)
+    assert language_converters['addic7ed'].reverse('Chinese (Traditional)') == ('zho', None, None)
 
 
 @pytest.mark.converter()

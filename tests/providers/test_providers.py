@@ -141,7 +141,8 @@ def test_list_subtitles_episode(episodes):
         assert not provider_manager[name].plugin.list_subtitles.called
 
     for name in (
-        'addic7ed', 'bsplayer',
+        'addic7ed',
+        'bsplayer',
         'gestdown',
         'opensubtitles',
         'opensubtitlescom',

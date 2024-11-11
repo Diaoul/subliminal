@@ -256,8 +256,6 @@ class SubtitulamosProvider(Provider):
 
             language = Language.fromsubtitulamos(lang_name_element.get_text().strip())
 
-            hearing_impaired = False
-
             # read the release subtitle
             release_group = release_group_element[0].getText()
 
@@ -267,7 +265,6 @@ class SubtitulamosProvider(Provider):
             subtitle = SubtitulamosSubtitle(
                 language=language,
                 subtitle_id=subtitle_id,
-                hearing_impaired=hearing_impaired,
                 page_link=self.server_url + episode_url,
                 series=series,
                 season=season,

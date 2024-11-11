@@ -29,6 +29,28 @@ class SubtitulamosConverter(LanguageReverseConverter):
         }
         self.to_subtitulamos: dict[tuple[str, str | None], str] = {
             item[1]: item[0] for item in self.from_subtitulamos.items()
+        } | {
+            ('spa', country): 'Español (Latinoamérica)'
+            for country in [
+                'AR',  # Argentina
+                'BO',  # Bolivia
+                'CL',  # Chile
+                'CO',  # Colombia
+                'CR',  # Costa Rica
+                'DO',  # República Dominicana
+                'EC',  # Ecuador
+                'GT',  # Guatemala
+                'HN',  # Honduras
+                'NI',  # Nicaragua
+                'PA',  # Panamá
+                'PE',  # Perú
+                'PR',  # Puerto Rico
+                'PY',  # Paraguay
+                'SV',  # El Salvador
+                'US',  # United States
+                'UY',  # Uruguay
+                'VE',  # Venezuela
+            ]
         }
         self.codes = set(self.from_subtitulamos.keys())
 

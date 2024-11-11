@@ -34,6 +34,36 @@ with contextlib.suppress(ValueError):
     language_converters.register('subtitulamos = subliminal.converters.subtitulamos:SubtitulamosConverter')
 
 
+subtitulamos_languages = (
+    {Language('por', 'BR')}
+    | {
+        Language('spa', country)
+        for country in [
+            'AR',  # Argentina
+            'BO',  # Bolivia
+            'CL',  # Chile
+            'CO',  # Colombia
+            'CR',  # Costa Rica
+            'DO',  # República Dominicana
+            'EC',  # Ecuador
+            'GT',  # Guatemala
+            'HN',  # Honduras
+            'MX',  # México
+            'NI',  # Nicaragua
+            'PA',  # Panamá
+            'PE',  # Perú
+            'PR',  # Puerto Rico
+            'PY',  # Paraguay
+            'SV',  # El Salvador
+            'US',  # United States
+            'UY',  # Uruguay
+            'VE',  # Venezuela
+        ]
+    }
+    | {Language(lang) for lang in ['cat', 'eng', 'glg', 'por', 'spa']}
+)
+
+
 class SubtitulamosSubtitle(Subtitle):
     """Subtitulamos Subtitle."""
 
@@ -90,9 +120,7 @@ class SubtitulamosSubtitle(Subtitle):
 class SubtitulamosProvider(Provider):
     """Subtitulamos Provider."""
 
-    languages: ClassVar[Set[Language]] = {Language('por', 'BR')} | {
-        Language(lang) for lang in ['cat', 'eng', 'glg', 'por', 'spa']
-    }
+    languages: ClassVar[Set[Language]] = subtitulamos_languages
     video_types: ClassVar = (Episode,)
 
     server_url = 'https://www.subtitulamos.tv'
@@ -230,13 +258,6 @@ class SubtitulamosProvider(Provider):
 
             hearing_impaired = False
 
-            # modify spanish latino subtitle language to only spanish and set hearing_impaired = True
-            # because if exists spanish and spanish latino subtitle for the same episode, the score will be
-            # higher with spanish subtitle. Spanish subtitle takes priority.
-            if language == Language('spa', 'MX'):
-                language = Language('spa')
-                hearing_impaired = True
-
             # read the release subtitle
             release_group = release_group_element[0].getText()
 
@@ -279,7 +300,18 @@ class SubtitulamosProvider(Provider):
         if not isinstance(video, Episode):
             return []
 
-        return [s for s in self.query(video.series, video.season, video.episode, video.year) if s.language in languages]
+        result = []
+        for subtitle in self.query(video.series, video.season, video.episode, video.year):
+            subtitle_lang = next(
+                (lang for lang in languages if lang.subtitulamos == subtitle.language.subtitulamos), None
+            )
+            if subtitle_lang:
+                result.append(subtitle)
+                # All spanish variations are labeled as "Español (Latinoamérica)",
+                # which is guessed as es-MX; this replaces it with the specified one.
+                subtitle.language = subtitle_lang
+
+        return result
 
     def download_subtitle(self, subtitle: SubtitulamosSubtitle) -> None:
         """Download the content of the subtitle."""

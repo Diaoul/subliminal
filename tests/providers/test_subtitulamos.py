@@ -27,6 +27,7 @@ def test_converter_convert_alpha3():
 @pytest.mark.converter()
 def test_converter_convert_alpha3_country():
     assert language_converters['subtitulamos'].convert('spa', 'MX') == 'Español (Latinoamérica)'
+    assert language_converters['subtitulamos'].convert('spa', 'AR') == 'Español (Latinoamérica)'
     assert language_converters['subtitulamos'].convert('por', 'BR') == 'Brazilian'
 
 
@@ -164,6 +165,18 @@ def test_list_subtitles_not_exist_language(caplog, episodes):
 
         subtitles = provider.list_subtitles(video, languages)
         assert len(subtitles) == 0
+
+
+@pytest.mark.integration()
+@vcr.use_cassette
+def test_list_subtitles_with_spanish_non_mx_search(caplog, episodes):
+    with caplog.at_level(logging.DEBUG, logger=logger_name), SubtitulamosProvider() as provider:
+        video = episodes['bbt_s11e16']
+        languages = {Language('spa', 'AR')}
+
+        subtitles = provider.list_subtitles(video, languages)
+        assert len(subtitles) > 0
+        assert all(s.language == Language('spa', 'AR') for s in subtitles)
 
 
 @pytest.mark.integration()

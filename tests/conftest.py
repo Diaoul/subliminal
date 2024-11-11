@@ -112,6 +112,24 @@ def episodes() -> dict[str, Episode]:
                 'thesubdb': '9dbbfb7ba81c9a6237237dae8589fccc',
             },
         ),
+        'bbt_s11e16': Episode(
+            os.path.join('The Big Bang Theory', 'Season 11', 'The.Big.Bang.Theory.S11E16.720p.HDTV.x264-AVS.mkv'),
+            'The Big Bang Theory',
+            11,
+            16,
+            title='The Neonatal Nomenclature',
+            year=2007,
+            tvdb_id=6498115,
+            series_tvdb_id=80379,
+            series_imdb_id='tt0898266',
+            source='HDTV',
+            release_group='AVS',
+            resolution='720p',
+            video_codec='H.264',
+            audio_codec='Dolby Digital',
+            imdb_id='tt6674448',
+            size=505152010,
+        ),
         'got_s03e10': Episode(
             os.path.join(
                 'Game of Thrones', 'Season 03', 'Game.of.Thrones.S03E10.Mhysa.720p.WEB-DL.DD5.1.H.264-NTb.mkv'
@@ -434,6 +452,27 @@ def episodes() -> dict[str, Episode]:
             'Grimsburg',
             1,
             1,
+        ),
+        'dw_s13e03': Episode(
+            'Doctor.Who.2005.S13E03.Chapter.Three.Once.Upon.Time.1080p.AMZN.WEB-DL.DDP5.1.H.264-NOSIVID.mkv',
+            'Doctor Who',
+            13,
+            3,
+            year=2005,
+        ),
+        'charmed_s01e01': Episode(
+            'Charmed.(2018).S01E01.Pilot.1080p.10bit.AMZN.WEB-DL.AAC5.1.HEVC-Vyndros.mkv',
+            'Charmed',
+            1,
+            1,
+            year=2018,
+        ),
+        'fake_show_s13e03': Episode(
+            'Fake.Show.S13E03.Chapter.This.Show.Does.Not.Exist.1080p.AMZN.WEB-DL.DDP5.1.H.264-NOSIVID.mkv',
+            'Fake Show',
+            4,
+            2,
+            year=1914,
         ),
     }
 

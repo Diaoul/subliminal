@@ -98,7 +98,7 @@ class AgeParamType(click.ParamType):
         * ``d`` for days
         * ``h`` for hours
 
-    The form can be specified multiple times but only with that idenfier ordering. For example:
+    The form can be specified multiple times but only with that identifier ordering. For example:
 
         * ``1w2d4h`` for 1 week, 2 days and 4 hours
         * ``2w`` for 2 weeks

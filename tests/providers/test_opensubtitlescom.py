@@ -2,6 +2,8 @@ import os
 
 import pytest
 from babelfish import Language  # type: ignore[import-untyped]
+from vcr import VCR  # type: ignore[import-untyped]
+
 from subliminal.exceptions import ConfigurationError
 from subliminal.providers.opensubtitlescom import (
     OpenSubtitlesComError,
@@ -9,7 +11,6 @@ from subliminal.providers.opensubtitlescom import (
     OpenSubtitlesComSubtitle,
     Unauthorized,
 )
-from vcr import VCR  # type: ignore[import-untyped]
 
 USERNAME = 'python-subliminal-test'
 PASSWORD = 'subliminal'
@@ -206,7 +207,7 @@ def test_configuration_error_no_password():
         OpenSubtitlesComProvider(username=USERNAME)
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_login():
     provider = OpenSubtitlesComProvider(USERNAME, PASSWORD)
@@ -216,7 +217,7 @@ def test_login():
     assert provider.token is not None
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_login_bad_password():
     provider = OpenSubtitlesComProvider(USERNAME, 'lanimilbus')
@@ -225,7 +226,7 @@ def test_login_bad_password():
         provider.login(wait=True)
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_logout():
     provider = OpenSubtitlesComProvider(USERNAME, PASSWORD)
@@ -235,7 +236,7 @@ def test_logout():
     assert provider.token is None
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_user_infos():
     with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
@@ -244,7 +245,7 @@ def test_user_infos():
         assert ret
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_query_not_enough_information():
     languages = {Language('eng')}
@@ -254,7 +255,7 @@ def test_query_not_enough_information():
     assert str(excinfo.value) == 'Not enough information'
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_query_query_movie(movies):
     video = movies['man_of_steel']
@@ -273,7 +274,7 @@ def test_query_query_movie(movies):
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_query_query_episode(episodes):
     video = episodes['dallas_2012_s01e03']
@@ -290,7 +291,7 @@ def test_query_query_episode(episodes):
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_query_tag_movie(movies):
     video = movies['enders_game']
@@ -302,7 +303,7 @@ def test_query_tag_movie(movies):
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_query_imdb_id(movies):
     video = movies['man_of_steel']
@@ -321,7 +322,7 @@ def test_query_imdb_id(movies):
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_query_hash_size(movies):
     video = movies['man_of_steel']
@@ -346,7 +347,7 @@ def test_query_hash_size(movies):
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_query_wrong_hash_wrong_size():
     languages = {Language('eng')}
@@ -355,7 +356,7 @@ def test_query_wrong_hash_wrong_size():
             provider.query(languages, moviehash='123456787654321')
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_query_query_season_episode(episodes):
     video = episodes['bbt_s07e05']
@@ -367,7 +368,7 @@ def test_query_query_season_episode(episodes):
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_list_subtitles_movie(movies):
     video = movies['man_of_steel']
@@ -398,7 +399,7 @@ def test_list_subtitles_movie(movies):
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_list_subtitles_movie_no_hash(movies):
     video = movies['enders_game']
@@ -410,7 +411,7 @@ def test_list_subtitles_movie_no_hash(movies):
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_list_subtitles_episode(episodes):
     video = episodes['marvels_agents_of_shield_s02e06']
@@ -422,7 +423,7 @@ def test_list_subtitles_episode(episodes):
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_download_subtitle(movies):
     video = movies['man_of_steel']
@@ -435,7 +436,7 @@ def test_download_subtitle(movies):
     assert subtitles[0].encoding == 'utf-8'
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_tag_match(episodes):
     video = episodes['the fall']

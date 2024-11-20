@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import pytest
 from babelfish import Language  # type: ignore[import-untyped]
+
 from subliminal.providers.addic7ed import Addic7edSubtitle
 from subliminal.providers.opensubtitles import OpenSubtitlesSubtitle
 from subliminal.providers.podnapisi import PodnapisiSubtitle

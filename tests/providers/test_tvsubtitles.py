@@ -2,8 +2,9 @@ import os
 
 import pytest
 from babelfish import Language, language_converters  # type: ignore[import-untyped]
-from subliminal.providers.tvsubtitles import TVsubtitlesProvider, TVsubtitlesSubtitle
 from vcr import VCR  # type: ignore[import-untyped]
+
+from subliminal.providers.tvsubtitles import TVsubtitlesProvider, TVsubtitlesSubtitle
 
 vcr = VCR(
     path_transformer=lambda path: path + '.yaml',
@@ -14,27 +15,27 @@ vcr = VCR(
 )
 
 
-@pytest.mark.converter()
+@pytest.mark.converter
 def test_converter_convert_alpha3_country():
     assert language_converters['tvsubtitles'].convert('por', 'BR') == 'br'
 
 
-@pytest.mark.converter()
+@pytest.mark.converter
 def test_converter_convert_alpha3():
     assert language_converters['tvsubtitles'].convert('ukr') == 'ua'
 
 
-@pytest.mark.converter()
+@pytest.mark.converter
 def test_converter_convert_alpha3_alpha2_converter():
     assert language_converters['tvsubtitles'].convert('fra') == 'fr'
 
 
-@pytest.mark.converter()
+@pytest.mark.converter
 def test_converter_reverse():
     assert language_converters['tvsubtitles'].reverse('gr') == ('ell', None, None)
 
 
-@pytest.mark.converter()
+@pytest.mark.converter
 def test_converter_reverse_name_converter():
     assert language_converters['tvsubtitles'].reverse('en') == ('eng', None, None)
 
@@ -119,7 +120,7 @@ def test_get_matches_no_match(episodes):
     assert matches == set()
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_search_show_id():
     with TVsubtitlesProvider() as provider:
@@ -127,7 +128,7 @@ def test_search_show_id():
     assert show_id == 154
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_search_show_id_incomplete():
     with TVsubtitlesProvider() as provider:
@@ -135,7 +136,7 @@ def test_search_show_id_incomplete():
     assert show_id is None
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_search_show_id_ambiguous():
     with TVsubtitlesProvider() as provider:
@@ -143,7 +144,7 @@ def test_search_show_id_ambiguous():
     assert show_id == 977
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_search_show_id_us():
     with TVsubtitlesProvider() as provider:
@@ -151,7 +152,7 @@ def test_search_show_id_us():
     assert show_id == 1246
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_search_show_id_uk():
     with TVsubtitlesProvider() as provider:
@@ -159,7 +160,7 @@ def test_search_show_id_uk():
     assert show_id == 657
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_search_show_id_no_year():
     with TVsubtitlesProvider() as provider:
@@ -167,7 +168,7 @@ def test_search_show_id_no_year():
     assert show_id == 646
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_search_show_id_year_in_title():
     with TVsubtitlesProvider() as provider:
@@ -175,7 +176,7 @@ def test_search_show_id_year_in_title():
     assert show_id == 1127
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_search_show_id_error():
     with TVsubtitlesProvider() as provider:
@@ -183,7 +184,7 @@ def test_search_show_id_error():
     assert show_id is None
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_get_episode_ids():
     expected_episode_ids = {
@@ -217,7 +218,7 @@ def test_get_episode_ids():
     assert episode_ids == expected_episode_ids
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_get_episode_ids_wrong_season():
     with TVsubtitlesProvider() as provider:
@@ -225,7 +226,7 @@ def test_get_episode_ids_wrong_season():
     assert len(episode_ids) == 0
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_query(episodes):
     video = episodes['bbt_s07e05']
@@ -247,7 +248,7 @@ def test_query(episodes):
     assert {subtitle.subtitle_id for subtitle in subtitles} == expected_subtitles
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_query_no_year(episodes):
     video = episodes['dallas_s01e03']
@@ -259,7 +260,7 @@ def test_query_no_year(episodes):
     assert {subtitle.subtitle_id for subtitle in subtitles} == expected_subtitles
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_query_with_quote(episodes):
     video = episodes['marvels_agents_of_shield_s02e06']
@@ -271,7 +272,7 @@ def test_query_with_quote(episodes):
     assert {subtitle.subtitle_id for subtitle in subtitles} == expected_subtitles
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_query_wrong_series(episodes):
     video = episodes['bbt_s07e05']
@@ -280,7 +281,7 @@ def test_query_wrong_series(episodes):
     assert len(subtitles) == 0
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_query_wrong_episode(episodes):
     video = episodes['bbt_s07e05']
@@ -290,7 +291,7 @@ def test_query_wrong_episode(episodes):
     assert len(subtitles) == 0
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_list_subtitles(episodes):
     video = episodes['bbt_s07e05']
@@ -303,7 +304,7 @@ def test_list_subtitles(episodes):
     assert subtitles[0].release == 'The Big Bang Theory 7x05 (HDTV.LOL)'
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_list_subtitles_episode_alternative_series(episodes):
     video = episodes['turn_s03e01']
@@ -315,7 +316,7 @@ def test_list_subtitles_episode_alternative_series(episodes):
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_download_subtitle(episodes):
     video = episodes['bbt_s07e05']
@@ -327,7 +328,7 @@ def test_download_subtitle(episodes):
     assert subtitles[0].is_valid() is True
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_download_subtitle_with_quote(episodes):
     video = episodes['marvels_agents_of_shield_s02e06']

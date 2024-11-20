@@ -2,8 +2,9 @@ import os
 
 import pytest
 from babelfish import Language  # type: ignore[import-untyped]
-from subliminal.providers.bsplayer import BSPlayerProvider, BSPlayerSubtitle
 from vcr import VCR  # type: ignore[import-untyped]
+
+from subliminal.providers.bsplayer import BSPlayerProvider, BSPlayerSubtitle
 
 vcr = VCR(
     path_transformer=lambda path: path + '.yaml',
@@ -51,7 +52,7 @@ def test_get_matches_movie_hash(episodes):
     assert matches == {'hash'}
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_login():
     provider = BSPlayerProvider(search_url=SEARCH_URL)
@@ -60,7 +61,7 @@ def test_login():
     assert provider.token is not None
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_logout():
     provider = BSPlayerProvider(search_url=SEARCH_URL)
@@ -69,7 +70,7 @@ def test_logout():
     assert provider.token is None
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_query_hash_size(movies):
     video = movies['man_of_steel']
@@ -103,7 +104,7 @@ def test_query_hash_size(movies):
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_list_subtitles_hash(movies):
     video = movies['man_of_steel']
@@ -116,7 +117,7 @@ def test_list_subtitles_hash(movies):
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_download_subtitle(episodes):
     video = episodes['bbt_s07e05']

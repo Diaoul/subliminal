@@ -1,4 +1,5 @@
 import pytest
+
 from subliminal.matches import guess_matches
 
 # Core test

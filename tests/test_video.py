@@ -5,6 +5,7 @@ from datetime import datetime, timedelta, timezone
 from unittest.mock import Mock
 
 import pytest
+
 from subliminal.utils import sanitize, timestamp
 from subliminal.video import Episode, Movie, Video
 

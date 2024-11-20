@@ -2,9 +2,10 @@ import os
 
 import pytest
 from babelfish import Language, language_converters  # type: ignore[import-untyped]
+from vcr import VCR  # type: ignore[import-untyped]
+
 from subliminal.exceptions import AuthenticationError, ConfigurationError
 from subliminal.providers.addic7ed import Addic7edProvider, Addic7edSubtitle, addic7ed_sanitize, series_year_re
-from vcr import VCR  # type: ignore[import-untyped]
 
 vcr = VCR(
     path_transformer=lambda path: path + '.yaml',
@@ -18,32 +19,32 @@ USERNAME = 'subliminal'
 PASSWORD = 'subliminal'
 
 
-@pytest.mark.converter()
+@pytest.mark.converter
 def test_converter_convert_alpha3_country_script():
     assert language_converters['addic7ed'].convert('srp', None, 'Cyrl') == 'Serbian (Cyrillic)'
 
 
-@pytest.mark.converter()
+@pytest.mark.converter
 def test_converter_convert_alpha3_country():
     assert language_converters['addic7ed'].convert('por', 'BR') == 'Portuguese (Brazilian)'
 
 
-@pytest.mark.converter()
+@pytest.mark.converter
 def test_converter_convert_alpha3():
     assert language_converters['addic7ed'].convert('eus') == 'Euskera'
 
 
-@pytest.mark.converter()
+@pytest.mark.converter
 def test_converter_convert_alpha3_name_converter():
     assert language_converters['addic7ed'].convert('fra') == 'French'
 
 
-@pytest.mark.converter()
+@pytest.mark.converter
 def test_converter_reverse():
     assert language_converters['addic7ed'].reverse('Chinese (Traditional)') == ('zho', None, None)
 
 
-@pytest.mark.converter()
+@pytest.mark.converter
 def test_converter_reverse_name_converter():
     assert language_converters['addic7ed'].reverse('English') == ('eng', None, None)
 
@@ -200,8 +201,8 @@ def test_configuration_error_no_password():
         Addic7edProvider(username=USERNAME)
 
 
-@pytest.mark.skip()
-@pytest.mark.integration()
+@pytest.mark.skip
+@pytest.mark.integration
 @vcr.use_cassette
 def test_login():
     provider = Addic7edProvider(USERNAME, PASSWORD)
@@ -213,8 +214,8 @@ def test_login():
     assert r.status_code == 302
 
 
-@pytest.mark.skip()
-@pytest.mark.integration()
+@pytest.mark.skip
+@pytest.mark.integration
 @vcr.use_cassette
 def test_login_bad_password():
     provider = Addic7edProvider(USERNAME, 'lanimilbus')
@@ -222,8 +223,8 @@ def test_login_bad_password():
         provider.initialize()
 
 
-@pytest.mark.skip()
-@pytest.mark.integration()
+@pytest.mark.skip
+@pytest.mark.integration
 @vcr.use_cassette
 def test_logout():
     provider = Addic7edProvider(USERNAME, PASSWORD)
@@ -235,7 +236,7 @@ def test_logout():
     assert r.status_code == 302
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette('test_get_show_ids')
 def test_get_show_ids():
     with Addic7edProvider() as provider:
@@ -244,7 +245,7 @@ def test_get_show_ids():
     assert show_ids['the big bang theory'] == 126
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette('test_get_show_ids')
 def test_get_show_ids_no_year():
     with Addic7edProvider() as provider:
@@ -253,7 +254,7 @@ def test_get_show_ids_no_year():
     assert show_ids['dallas'] == 802
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette('test_get_show_ids')
 def test_get_show_ids_year():
     with Addic7edProvider() as provider:
@@ -262,7 +263,7 @@ def test_get_show_ids_year():
     assert show_ids['dallas 2012'] == 2559
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette('test_get_show_ids')
 def test_get_show_ids_dot():
     with Addic7edProvider() as provider:
@@ -271,7 +272,7 @@ def test_get_show_ids_dot():
     assert show_ids['mr robot'] == 5151
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette('test_get_show_ids')
 def test_get_show_ids_country():
     with Addic7edProvider() as provider:
@@ -280,7 +281,7 @@ def test_get_show_ids_country():
     assert show_ids['being human us'] == 1317
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette('test_get_show_ids')
 def test_get_show_ids_quote():
     with Addic7edProvider() as provider:
@@ -289,7 +290,7 @@ def test_get_show_ids_quote():
     assert show_ids['marvel s agents of s h i e l d'] == 4010
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette('test_get_show_ids')
 def test_get_show_ids_unicode():
     with Addic7edProvider() as provider:
@@ -299,8 +300,8 @@ def test_get_show_ids_unicode():
     assert show_ids['alska mig'] == 7816
 
 
-@pytest.mark.skip()
-@pytest.mark.integration()
+@pytest.mark.skip
+@pytest.mark.integration
 @vcr.use_cassette
 def test_search_show_id():
     with Addic7edProvider() as provider:
@@ -308,8 +309,8 @@ def test_search_show_id():
     assert show_id == 126
 
 
-@pytest.mark.skip()
-@pytest.mark.integration()
+@pytest.mark.skip
+@pytest.mark.integration
 @vcr.use_cassette
 def test_search_show_id_incomplete():
     with Addic7edProvider() as provider:
@@ -317,8 +318,8 @@ def test_search_show_id_incomplete():
     assert show_id == 126
 
 
-@pytest.mark.skip()
-@pytest.mark.integration()
+@pytest.mark.skip
+@pytest.mark.integration
 @vcr.use_cassette
 def test_search_show_id_no_year():
     with Addic7edProvider() as provider:
@@ -326,8 +327,8 @@ def test_search_show_id_no_year():
     assert show_id == 802
 
 
-@pytest.mark.skip()
-@pytest.mark.integration()
+@pytest.mark.skip
+@pytest.mark.integration
 @vcr.use_cassette
 def test_search_show_id_year():
     with Addic7edProvider() as provider:
@@ -335,8 +336,8 @@ def test_search_show_id_year():
     assert show_id == 2559
 
 
-@pytest.mark.skip()
-@pytest.mark.integration()
+@pytest.mark.skip
+@pytest.mark.integration
 @vcr.use_cassette
 def test_search_show_id_error():
     with Addic7edProvider() as provider:
@@ -344,8 +345,8 @@ def test_search_show_id_error():
     assert show_id is None
 
 
-@pytest.mark.skip()
-@pytest.mark.integration()
+@pytest.mark.skip
+@pytest.mark.integration
 @vcr.use_cassette
 def test_search_show_id_quote():
     with Addic7edProvider() as provider:
@@ -353,8 +354,8 @@ def test_search_show_id_quote():
     assert show_id == 30
 
 
-@pytest.mark.skip()
-@pytest.mark.integration()
+@pytest.mark.skip
+@pytest.mark.integration
 @vcr.use_cassette
 def test_search_show_ids_quote_dots_mixed_case(episodes):
     video = episodes['marvels_agents_of_shield_s02e06']
@@ -365,8 +366,8 @@ def test_search_show_ids_quote_dots_mixed_case(episodes):
     assert show_ids == expected
 
 
-@pytest.mark.skip()
-@pytest.mark.integration()
+@pytest.mark.skip
+@pytest.mark.integration
 @vcr.use_cassette
 def test_search_show_ids_with_comma(episodes):
     video = episodes['alex_inc_s01e04']
@@ -377,8 +378,8 @@ def test_search_show_ids_with_comma(episodes):
     assert show_ids == expected
 
 
-@pytest.mark.skip()
-@pytest.mark.integration()
+@pytest.mark.skip
+@pytest.mark.integration
 @vcr.use_cassette
 def test_search_show_ids_with_country(episodes):
     with Addic7edProvider() as provider:
@@ -388,7 +389,7 @@ def test_search_show_ids_with_country(episodes):
     assert show_ids == expected
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_get_show_id_quote_dots_mixed_case(episodes):
     video = episodes['marvels_agents_of_shield_s02e06']
@@ -397,7 +398,7 @@ def test_get_show_id_quote_dots_mixed_case(episodes):
     assert show_id == 4010
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_get_show_id_with_comma(episodes):
     video = episodes['alex_inc_s01e04']
@@ -406,7 +407,7 @@ def test_get_show_id_with_comma(episodes):
     assert show_id == 6388
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_get_show_id_country():
     with Addic7edProvider() as provider:
@@ -414,7 +415,7 @@ def test_get_show_id_country():
     assert show_id == 1317
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_get_show_id_year():
     with Addic7edProvider() as provider:
@@ -422,7 +423,7 @@ def test_get_show_id_year():
     assert show_id == 2559
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_get_show_id():
     with Addic7edProvider() as provider:
@@ -430,7 +431,7 @@ def test_get_show_id():
     assert show_id == 802
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_query(episodes):
     video = episodes['bbt_s07e05']
@@ -444,7 +445,7 @@ def test_query(episodes):
         assert subtitle.year is None
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_query_wrong_series(episodes):
     video = episodes['bbt_s07e05']
@@ -453,7 +454,7 @@ def test_query_wrong_series(episodes):
     assert len(subtitles) == 0
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_query_parsing(episodes):
     video = episodes['got_s03e10']
@@ -478,7 +479,7 @@ def test_query_parsing(episodes):
     assert subtitle.release_group == 'EVOLVE'
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_query_parsing_quote_dots_mixed_case(episodes):
     video = episodes['marvels_agents_of_shield_s02e06']
@@ -502,7 +503,7 @@ def test_query_parsing_quote_dots_mixed_case(episodes):
     assert subtitle.release_group == 'KILLERS'
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_query_parsing_colon(episodes):
     video = episodes['csi_cyber_s02e03']
@@ -525,7 +526,7 @@ def test_query_parsing_colon(episodes):
     assert subtitle.release_group == 'DIMENSION'
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_query_parsing_dash(episodes):
     video = episodes['the_x_files_s10e02']
@@ -547,7 +548,7 @@ def test_query_parsing_dash(episodes):
     assert subtitle.release_group == 'KILLERS'
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_query_year(episodes):
     video = episodes['dallas_2012_s01e03']
@@ -561,7 +562,7 @@ def test_query_year(episodes):
         assert subtitle.year == video.year
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_query_no_year(episodes):
     video = episodes['dallas_s01e03']
@@ -576,7 +577,7 @@ def test_query_no_year(episodes):
         assert subtitle.year is None
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_list_subtitles(episodes):
     video = episodes['bbt_s07e05']
@@ -588,7 +589,7 @@ def test_list_subtitles(episodes):
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_download_subtitle(episodes):
     video = episodes['bbt_s07e05']
@@ -600,7 +601,7 @@ def test_download_subtitle(episodes):
     assert subtitles[0].is_valid() is True
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_list_subtitles_episode_alternative_series(episodes):
     video = episodes['turn_s04e03']
@@ -614,7 +615,7 @@ def test_list_subtitles_episode_alternative_series(episodes):
     assert matches == {'episode', 'title', 'series', 'season', 'year', 'country', 'release_group'}
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_list_subtitles_show_with_asterisk(episodes):
     video = episodes['the_end_of_the_fucking_world']

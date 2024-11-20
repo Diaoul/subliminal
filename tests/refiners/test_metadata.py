@@ -1,4 +1,5 @@
 from babelfish import Language  # type: ignore[import-untyped]
+
 from subliminal.core import scan_video
 from subliminal.refiners.metadata import refine
 from subliminal.video import Movie

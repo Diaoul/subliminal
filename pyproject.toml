@@ -1,13 +1,14 @@
-# https://peps.python.org/pep-0517/
+# https://packaging.python.org/en/latest/specifications/pyproject-toml/
 [build-system]
-requires = ["setuptools>=64"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
 
 # https://peps.python.org/pep-0621/
 [project]
 name = "subliminal"
 description = "Subtitles, faster than your thoughts"
 requires-python = ">=3.9"
+readme = "README.rst"
 license = { text = "MIT" }
 authors = [{ name = "Antoine Bertin", email = "diaoulael@gmail.com" }]
 maintainers = [
@@ -31,7 +32,7 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Topic :: Multimedia :: Video",
 ]
-dynamic = ["version", "readme"]
+dynamic = ["version"]
 dependencies = [
     "babelfish>=0.6.1",
     "beautifulsoup4>=4.4.0",
@@ -63,9 +64,6 @@ docs = [
 ]
 test = [
     "coverage[toml]>=7",
-    "mypy",
-    "types-requests",
-    "types-beautifulsoup4",
     "pytest>=6.0",
     "pytest-cov",
     "pytest-xdist",
@@ -73,14 +71,13 @@ test = [
     "vcrpy>=5",
     "importlib_metadata>=4.6; python_version<'3.10'",
 ]
-dev = [
-    "pre-commit",
-    "doc8",
+types = [
     "mypy",
-    "ruff",
-    "typos",
-    "validate-pyproject",
-    "tox",
+    "types-requests",
+    "types-beautifulsoup4",
+]
+dev = [
+    "pre-commit>=2.9.3",
 ]
 
 [project.urls]
@@ -117,22 +114,11 @@ opensubtitles = "subliminal.converters.opensubtitles:OpenSubtitlesConverter"
 opensubtitlescom = "subliminal.converters.opensubtitlescom:OpenSubtitlesComConverter"
 tvsubtitles = "subliminal.converters.tvsubtitles:TVsubtitlesConverter"
 
-[tool.setuptools]
-py-modules = ["subliminal"]
-include-package-data = true
+[tool.hatch.version]
+source = "vcs"
 
-[tool.setuptools.package-data]
-subliminal = [
-    "py.typed",
-]
-
-[tool.setuptools.packages.find]
-namespaces = false
-where = ["."]
-
-[tool.setuptools.dynamic]
-version = {attr = "subliminal.__version__"}
-readme = {file = ["README.rst", "HISTORY.rst"]}
+[tool.hatch.build.hooks.vcs]
+version-file = "_version.py"
 
 
 # https://docs.pytest.org/en/6.2.x/customize.html
@@ -166,10 +152,13 @@ omit = [
 ]
 
 [tool.coverage.paths]
-source = [".tox/py*/**/site-packages"]
+source = [
+    "subliminal",
+    "**/site-packages/subliminal",
+]
 
 [tool.coverage.run]
-source = ["subliminal"]
+source = ["src"]
 branch = true
 relative_files = true
 
@@ -177,7 +166,7 @@ relative_files = true
 # https://docs.astral.sh/ruff/
 [tool.ruff]
 line-length = 120
-src = ["subliminal", "tests"]
+src = ["src", "tests"]
 exclude = [
     "_version.py",
 ]
@@ -223,7 +212,7 @@ mark-parentheses = true
 
 [tool.ruff.lint.per-file-ignores]
 "docs/conf*.py" = ["ALL"]
-"subliminal/__init__.py" = ["E402"]
+"src/subliminal/__init__.py" = ["E402"]
 "tests/*.py" = ["D", "S", "RUF012", "ANN", "FBT"]
 
 # https://docs.astral.sh/ruff/formatter/
@@ -280,7 +269,7 @@ showcontent = false
 
 # https://mypy.readthedocs.io/en/stable/config_file.html
 [tool.mypy]
-files = "subliminal/**/*.py"
+files = "src/**/*.py"
 exclude = ['build', 'dist', 'docs']
 # global-only flags
 pretty = true

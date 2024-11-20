@@ -62,7 +62,7 @@ docs = [
     "sphinx_autodoc_typehints",
     "towncrier",
 ]
-test = [
+tests = [
     "coverage[toml]>=7",
     "pytest>=6.0",
     "pytest-cov",
@@ -77,6 +77,8 @@ types = [
     "types-beautifulsoup4",
 ]
 dev = [
+    "subliminal[types]",
+    "subliminal[tests]",
     "pre-commit>=2.9.3",
 ]
 

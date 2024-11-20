@@ -89,7 +89,7 @@ clone your fork locally and install a development version::
 
     $ git clone https://github.com/<my-username>/subliminal
     $ cd subliminal
-    $ pip install --user -e '.[dev,test,docs]'
+    $ pip install --user -e '.[dev,tests,docs]'
 
 
 Integrations

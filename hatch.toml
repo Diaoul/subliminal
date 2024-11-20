@@ -1,0 +1,111 @@
+# https://hatch.pypa.io/latest/config/environment/overview/
+# ---------------------------------------------------------
+[envs.default]
+description = "Development environment"
+installer = "uv pip install"
+features = [
+  "tests",
+  "types",
+  "docs",
+  "dev",
+]
+
+# ---------------------------------------------------------
+[envs.pkg]
+description = "package information"
+features = [
+  "tests",
+  "dev",
+]
+[envs.pkg.scripts]
+show = [
+  "uv pip list --format=columns",
+  'python -c "import sys; print(sys.version); print(sys.executable)"',
+]
+
+# ---------------------------------------------------------
+[envs.lint]
+template = "lint"
+installer = "uv pip install"
+description = "lint and format"
+detached = true
+dependencies = ["pre-commit"]
+
+[envs.lint.scripts]
+run = "pre-commit run --all-files --show-diff-on-failure"
+
+# ---------------------------------------------------------
+[envs.types]
+template = "types"
+installer = "uv pip install"
+description = "Run the type checker"
+dev-mode = false
+features = ["types"]
+
+[envs.types.scripts]
+run = "mypy --install-types --non-interactive --ignore-missing-imports --config-file={root}/pyproject.toml {args:src tests}"
+
+# ---------------------------------------------------------
+[envs.docs]
+template = "docs"
+installer = "uv pip install"
+description = "build and check documentation"
+features = ["docs"]
+
+[envs.docs.scripts]
+build = "sphinx-build -W --keep-going --color -b html docs docs/_build"
+linkcheck = "sphinx-build -W --keep-going --color -b linkcheck docs docs/_build"
+doctest = "sphinx-build -W --keep-going --color -b doctest docs docs/_build"
+all = ["build", "linkcheck"]
+
+# ---------------------------------------------------------
+[envs.changelog]
+template = "changelog"
+installer = "uv pip install"
+description = "build changelog with towncrier"
+dev-mode = false
+dependencies = ["towncrier"]
+
+[envs.changelog.scripts]
+run = "towncrier build --version main --draft"
+
+# ---------------------------------------------------------
+[envs.tests]
+template = "tests"
+installer = "uv pip install"
+description = "Run the tests suite"
+features = ["tests"]
+
+[[envs.tests.matrix]]
+python = ["3.9", "3.10", "3.11", "3.12", "3.13"]
+
+[envs.tests.env-vars]
+COVERAGE_PROCESS_START = "pyproject.toml"
+COVERAGE_FILE = "report/.coverage.{matrix:python}"
+
+[envs.tests.scripts]
+run = "pytest {args:-n auto}"
+test-cov = "python -m pytest --cov=subliminal --cov-report= --cov-fail-under=0 {args:-n auto --slow}"
+test-core = "test-cov -m core"
+report-base = "coverage report --skip-covered --show-missing"
+report-cov = "cov-base --fail-under=80"
+report-core = "cov-base --fail-under=100 --omit='subliminal/cli.py,subliminal/converters/*,subliminal/providers/*,subliminal/refiners/*'"
+run-cov = ["test-cov", "report-cov"]
+run-core = ["test-core", "report-core"]
+
+# ---------------------------------------------------------
+[envs.coverage]
+template = "coverage"
+installer = "uv pip install"
+description = "combine coverage files"
+detached = true
+dependencies = [
+  "coverage[toml]>=7.3.2",
+]
+env-vars = { COVERAGE_FILE = "report/.coverage" }
+
+[envs.coverage.scripts]
+run = [
+  "- coverage combine report",
+  "coverage report --sort=Cover --show-missing --skip-covered",
+]

@@ -148,12 +148,12 @@ show_missing = true
 skip_covered = true
 fail_under = 80
 omit = [
-    "subliminal/cli.py",
+    "src/subliminal/cli.py",
 ]
 
 [tool.coverage.paths]
 source = [
-    "subliminal",
+    "src/subliminal",
     "**/site-packages/subliminal",
 ]
 

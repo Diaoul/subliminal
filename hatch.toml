@@ -73,8 +73,9 @@ run = "towncrier build --version main --draft"
 # ---------------------------------------------------------
 [envs.tests]
 template = "tests"
-installer = "uv pip install"
+#installer = "uv pip install"
 description = "Run the tests suite"
+dev-mode = false
 features = ["tests"]
 
 [[envs.tests.matrix]]
@@ -96,7 +97,7 @@ run-cov-core = [
   "test-cov-core",
   """\
     coverage report --skip-covered --show-missing --fail-under=100 \
-    --omit='subliminal/cli.py,subliminal/converters/*,subliminal/providers/*,subliminal/refiners/*' \
+    --omit='src/subliminal/cli.py,src/subliminal/converters/*,src/subliminal/providers/*,src/subliminal/refiners/*' \
   """,
 ]
 

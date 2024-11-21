@@ -56,7 +56,8 @@ features = ["docs"]
 build = "sphinx-build -W --keep-going --color -b html docs docs/_build"
 linkcheck = "sphinx-build -W --keep-going --color -b linkcheck docs docs/_build"
 doctest = "sphinx-build -W --keep-going --color -b doctest docs docs/_build"
-all = ["build", "linkcheck"]
+run = ["build", "linkcheck"]
+all = ["build", "linkcheck", "doctest"]
 
 # ---------------------------------------------------------
 [envs.changelog]
@@ -85,13 +86,19 @@ COVERAGE_FILE = "report/.coverage.{matrix:python}"
 
 [envs.tests.scripts]
 run = "pytest {args:-n auto}"
-test-cov = "python -m pytest --cov=subliminal --cov-report= --cov-fail-under=0 {args:-n auto --slow}"
-test-core = "test-cov -m core"
-report-base = "coverage report --skip-covered --show-missing"
-report-cov = "cov-base --fail-under=80"
-report-core = "cov-base --fail-under=100 --omit='subliminal/cli.py,subliminal/converters/*,subliminal/providers/*,subliminal/refiners/*'"
-run-cov = ["test-cov", "report-cov"]
-run-core = ["test-core", "report-core"]
+test-cov = "python -m pytest --cov=subliminal --cov-report= --cov-fail-under=0 {args:-n auto}"
+test-cov-core = "python -m pytest -m core --cov=subliminal --cov-report= --cov-fail-under=0 {args:-n auto}"
+run-cov = [
+  "test-cov",
+  "coverage report --skip-covered --show-missing --fail-under=80",
+]
+run-cov-core = [
+  "test-cov-core",
+  """\
+    coverage report --skip-covered --show-missing --fail-under=100 \
+    --omit='subliminal/cli.py,subliminal/converters/*,subliminal/providers/*,subliminal/refiners/*' \
+  """,
+]
 
 # ---------------------------------------------------------
 [envs.coverage]

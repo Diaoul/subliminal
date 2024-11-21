@@ -13,6 +13,7 @@ subtitles. Current supported providers are:
 * OpenSubtitles
 * OpenSubtitles.com
 * Podnapisi
+* Subtitulamos
 * TvSubtitles
 
 Providers all inherit the same :class:`~subliminal.providers.Provider` base class and thus share the same API.

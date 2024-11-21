@@ -51,7 +51,7 @@ class SecLevelOneTLSAdapter(adapters.HTTPAdapter):
 
 
 class TimeoutSafeTransport(SafeTransport):
-    """Timeout support for :library/xmlrpc.client:class:`~xmlrpc.client.SafeTransport`."""
+    """Timeout support for :class:`!xmlrpc.client.SafeTransport`."""
 
     timeout: float | None
 

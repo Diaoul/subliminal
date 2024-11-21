@@ -6,6 +6,7 @@ version: 2
 build:
   os: ubuntu-22.04
   tools:
+    # Keep in sync with CI.yaml/docs, hatch.toml and tox/docs.
     python: "3.12"
 
 python:

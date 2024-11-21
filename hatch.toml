@@ -51,6 +51,8 @@ template = "docs"
 installer = "uv pip install"
 description = "build and check documentation"
 features = ["docs"]
+# Keep in sync with CI.yaml/docs, tox/docs and .readthedocs.yaml.
+python = "3.12"
 
 [envs.docs.scripts]
 build = "sphinx-build -W --keep-going --color -b html docs docs/_build"

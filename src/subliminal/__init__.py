@@ -2,9 +2,20 @@
 
 from __future__ import annotations
 
+import contextlib
 import logging
 
-from ._version import __version__
+# Must be first, otherwise we run into ImportError: partially initialized module
+__version__: str = 'undefined'
+with contextlib.suppress(ImportError):
+    from ._version import __version__  # type: ignore[no-redef]
+__short_version__: str = '.'.join(__version__.split('.')[:2])
+__title__: str = 'subliminal'
+__author__: str = 'Antoine Bertin'
+__license__: str = 'MIT'
+__copyright__: str = 'Copyright 2016, Antoine Bertin'
+
+
 from .cache import region
 from .core import (
     AsyncProviderPool,
@@ -26,12 +37,6 @@ from .subtitle import SUBTITLE_EXTENSIONS, Subtitle
 from .video import VIDEO_EXTENSIONS, Episode, Movie, Video
 
 logging.getLogger(__name__).addHandler(logging.NullHandler())
-
-__title__: str = 'subliminal'
-__short_version__: str = '.'.join(__version__.split('.')[:2])
-__author__: str = 'Antoine Bertin'
-__license__: str = 'MIT'
-__copyright__: str = 'Copyright 2016, Antoine Bertin'
 
 
 __all__ = [

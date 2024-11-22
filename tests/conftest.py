@@ -21,7 +21,7 @@ def _configure_region():
     region.configure = Mock()  # type: ignore[method-assign]
 
 
-@pytest.fixture()
+@pytest.fixture
 def movies() -> dict[str, Movie]:
     return {
         'man_of_steel': Movie(
@@ -83,7 +83,7 @@ def movies() -> dict[str, Movie]:
     }
 
 
-@pytest.fixture()
+@pytest.fixture
 def episodes() -> dict[str, Episode]:
     return {
         'bbt_s07e05': Episode(

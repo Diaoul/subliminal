@@ -14,7 +14,7 @@ from typing import TYPE_CHECKING, Any, ClassVar, Generic, TypeVar
 from xmlrpc.client import SafeTransport
 
 # Do not put babelfish in a TYPE_CHECKING block for intersphinx to work properly
-from babelfish import Language  # type: ignore[import-untyped]  # noqa: TCH002
+from babelfish import Language  # type: ignore[import-untyped]  # noqa: TC002
 from bs4 import BeautifulSoup, FeatureNotFound
 from requests import adapters
 from urllib3 import poolmanager  # type: ignore[import-untyped]
@@ -51,7 +51,7 @@ class SecLevelOneTLSAdapter(adapters.HTTPAdapter):
 
 
 class TimeoutSafeTransport(SafeTransport):
-    """Timeout support for :library/xmlrpc.client:class:`~xmlrpc.client.SafeTransport`."""
+    """Timeout support for :class:`!xmlrpc.client.SafeTransport`."""
 
     timeout: float | None
 

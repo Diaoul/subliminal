@@ -118,7 +118,7 @@ def test_get_matches_no_match(episodes):
     assert matches == {'year', 'country'}
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_query_movie(movies):
     video = movies['man_of_steel']
@@ -143,7 +143,7 @@ def test_query_movie(movies):
     assert {subtitle.language for subtitle in subtitles} == {language}
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_query_episode(episodes):
     video = episodes['bbt_s07e05']
@@ -155,7 +155,7 @@ def test_query_episode(episodes):
     assert {subtitle.language for subtitle in subtitles} == {language}
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_list_subtitles_movie(movies):
     video = movies['man_of_steel']
@@ -182,7 +182,7 @@ def test_list_subtitles_movie(movies):
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_list_subtitles_episode(episodes):
     video = episodes['got_s03e10']
@@ -209,7 +209,7 @@ def test_list_subtitles_episode(episodes):
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_download_subtitle(movies):
     video = movies['man_of_steel']
@@ -232,7 +232,7 @@ def test_download_subtitle(movies):
     assert subtitle.is_valid()
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_list_subtitles_episode_alternative_series(episodes):
     video = episodes['marvels_jessica_jones_s01e13']
@@ -257,7 +257,7 @@ def test_list_subtitles_episode_alternative_series(episodes):
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_download_subtitles_with_title_unicode(movies):
     video = movies['café_society']

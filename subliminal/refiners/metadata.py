@@ -51,9 +51,9 @@ def refine(video: Video, *, embedded_subtitles: bool = True, **kwargs: Any) -> V
         # resolution
         if video_track.height in (480, 720, 1080):
             if video_track.interlaced:
-                video.resolution = '%di' % video_track.height
+                video.resolution = f'{video_track.height:d}i'
             else:
-                video.resolution = '%dp' % video_track.height
+                video.resolution = f'{video_track.height:d}p'
             logger.debug('Found resolution %s', video.resolution)
 
         # video codec

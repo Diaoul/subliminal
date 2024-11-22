@@ -14,7 +14,7 @@ vcr = VCR(
 )
 
 
-@pytest.fixture()
+@pytest.fixture
 def client():
     return OMDBClient()
 
@@ -39,35 +39,35 @@ def test_apikey():
     assert client.session.params['apikey'] == apikey  # type: ignore[index,call-overload]
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_get_id(client):
     data = client.search_by_id('tt0770828')
     assert data['Title'] == 'Man of Steel'
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_get_wrong_id(client):
     data = client.search_by_id('tt9999999')
     assert not data
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_get_title(client):
     data = client.search_by_title('Man of Steel')
     assert data['imdbID'] == 'tt0770828'
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_get_wrong_title(client):
     data = client.search_by_title('Meen of Stal')
     assert not data
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_search(client):
     data = client.search('Man of Steel')
@@ -77,28 +77,28 @@ def test_search(client):
     assert data['Search'][0]['Year'] == '2013'
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_search_wrong_title(client):
     data = client.search('Meen of Stal')
     assert not data
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_search_type(client):
     data = client.search('Man of Steel', is_movie=True)
     assert data['totalResults'] == '28'
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_search_year(client):
     data = client.search('Man of Steel', year=2013)
     assert data['totalResults'] == '15'
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_search_page(client):
     data = client.search('Man of Steel', page=3)
@@ -108,7 +108,7 @@ def test_search_page(client):
     assert data['Search'][0]['Title'] == 'Kurt Morrow: Man of Steel'
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_refine_episode(episodes):
     episode = Episode(
@@ -123,7 +123,7 @@ def test_refine_episode(episodes):
     assert episode.series_imdb_id == episodes['bbt_s07e05'].series_imdb_id
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_refine_episode_original_series(episodes):
     episode = Episode(
@@ -138,7 +138,7 @@ def test_refine_episode_original_series(episodes):
     assert episode.series_imdb_id == 'tt0077000'
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_refine_episode_year(episodes):
     episode = Episode(
@@ -155,7 +155,7 @@ def test_refine_episode_year(episodes):
     assert episode.series_imdb_id == 'tt1723760'
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_refine_movie(movies):
     movie = Movie(movies['man_of_steel'].name, movies['man_of_steel'].title.lower())
@@ -165,7 +165,7 @@ def test_refine_movie(movies):
     assert movie.imdb_id == movies['man_of_steel'].imdb_id
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_refine_movie_guess_alternative_title(movies):
     movie = Movie.fromname(movies['jack_reacher_never_go_back'].name)
@@ -175,7 +175,7 @@ def test_refine_movie_guess_alternative_title(movies):
     assert movie.imdb_id == movies['jack_reacher_never_go_back'].imdb_id
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_refine_episode_with_country(episodes):
     episode = Episode.fromname(episodes['shameless_us_s08e01'].name)
@@ -186,7 +186,7 @@ def test_refine_episode_with_country(episodes):
     assert episode.series_imdb_id is None
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_refine_episode_with_country_hoc_us(episodes):
     episode = Episode.fromname(episodes['house_of_cards_us_s06e01'].name)

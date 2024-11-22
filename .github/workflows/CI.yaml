@@ -139,7 +139,7 @@ jobs:
           PYTHON_VERSION: ${{ matrix.py }}
         run: |
           import codecs; import os
-          py = f"tests.py{os.environ('PYTHON_VERSION')}"
+          py = f"tests.py{os.environ.get('PYTHON_VERSION')}"
           print(f"Picked {py}")
           with codecs.open(os.environ["GITHUB_ENV"], mode="a", encoding="utf-8") as file_handler:
               file_handler.write(f"FORCE_COLOR=1\nENV={py}\n")

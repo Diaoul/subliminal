@@ -17,7 +17,7 @@ vcr = VCR(
 TMDB_API_KEY = '3dac925d5d494853ea6ef9161011fbb3'
 
 
-@pytest.fixture()
+@pytest.fixture
 def client():
     return TMDBClient(apikey=TMDB_API_KEY)
 

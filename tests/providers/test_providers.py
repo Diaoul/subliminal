@@ -25,7 +25,7 @@ vcr = VCR(
 )
 
 
-@pytest.fixture()
+@pytest.fixture
 def _mock_providers(monkeypatch):
     for provider in provider_manager:
         monkeypatch.setattr(provider.plugin, 'initialize', Mock())

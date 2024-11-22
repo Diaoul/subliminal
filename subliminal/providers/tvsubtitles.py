@@ -244,7 +244,7 @@ class TVsubtitlesProvider(Provider):
 
         # get the episode page
         logger.info('Getting the page for episode %d', episode_ids[episode])
-        r = self.session.get(self.server_url + '/episode-%d.html' % episode_ids[episode], timeout=10)
+        r = self.session.get(self.server_url + f'/episode-{episode_ids[episode]:d}.html', timeout=10)
         soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
 
         # loop over subtitles rows

@@ -16,7 +16,7 @@ vcr = VCR(
 )
 
 
-@pytest.fixture()
+@pytest.fixture
 def client():
     return TVDBClient()
 

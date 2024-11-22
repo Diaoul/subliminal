@@ -9,6 +9,11 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  FORCE_COLOR: "1"
+  PIP_DISABLE_PIP_VERSION_CHECK: "1"
+  PIP_NO_PYTHON_VERSION_WARNING: "1"
+
 jobs:
   test-api:
     name: Run tests with deleted requests cassettes
@@ -25,8 +30,8 @@ jobs:
           python-version: "3.x"
       - name: install
         run: |
-          python -m pip install -U pip
-          python -m pip install -e ".[test]"
+          python -Im pip install -U pip
+          python -Im pip install -e ".[tests]"
       - name: remove cassettes
         run: |
           rm -rf tests/cassettes

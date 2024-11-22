@@ -32,11 +32,6 @@ repos:
         description: This hook runs doc8 for linting docs
         require_serial: true
 
-  - repo: https://github.com/woodruffw/zizmor
-    rev: v0.5.0
-    hooks:
-      - id: zizmor
-
   - repo: local
     hooks:
       - id: changelog-fragment-filenames

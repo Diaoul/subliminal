@@ -66,9 +66,8 @@ jobs:
         run: python -Im pip install hatch
       - name: Build and check docs
         run: hatch run docs:run
-      - name: Run doctests
-        if: false  # disabled
-        run: hatch run docs:doctest
+      # - name: Run doctests
+      #    run: hatch run docs:doctest
       - name: Check changelog
         run: hatch run changelog:run
 
@@ -136,10 +135,11 @@ jobs:
         run: python -Im pip install hatch
 
       - name: Pick environment to run
+        env:
+          PYTHON_VERSION: "${{ matrix.py }}"
         run: |
           import codecs; import os
-          py = "${{ matrix.py }}"
-          py = f"tests.py{py}"
+          py = f"tests.py{os.environ('PYTHON_VERSION')}"
           print(f"Picked {py}")
           with codecs.open(os.environ["GITHUB_ENV"], mode="a", encoding="utf-8") as file_handler:
               file_handler.write(f"FORCE_COLOR=1\nENV={py}\n")

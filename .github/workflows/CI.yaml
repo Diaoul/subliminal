@@ -136,7 +136,7 @@ jobs:
 
       - name: Pick environment to run
         env:
-          PYTHON_VERSION: "${{ matrix.py }}"
+          PYTHON_VERSION: ${{ matrix.py }}
         run: |
           import codecs; import os
           py = f"tests.py{os.environ('PYTHON_VERSION')}"

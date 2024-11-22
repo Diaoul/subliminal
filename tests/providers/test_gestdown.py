@@ -13,7 +13,7 @@ vcr = VCR(
 )
 
 
-@pytest.mark.converter()
+@pytest.mark.converter
 def test_converter_convert_alpha3_country():
     assert language_converters['addic7ed'].convert('por', 'BR') == 'Portuguese (Brazilian)'
 
@@ -130,7 +130,7 @@ def test_get_matches_no_match(episodes):
     assert matches == set()
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_search_show_id():
     with GestdownProvider() as provider:
@@ -138,7 +138,7 @@ def test_search_show_id():
     assert show_id == '91eb9278-8cf5-4ddd-9111-7f60b15958cb'
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_search_show_id_incomplete():
     with GestdownProvider() as provider:
@@ -146,7 +146,7 @@ def test_search_show_id_incomplete():
     assert show_id is None
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_search_show_id_no_year():
     with GestdownProvider() as provider:
@@ -154,7 +154,7 @@ def test_search_show_id_no_year():
     assert show_id == '226d7f34-a9f5-4fe2-98d7-ecf944243714'
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_search_show_id_error():
     with GestdownProvider() as provider:
@@ -162,7 +162,7 @@ def test_search_show_id_error():
     assert show_id is None
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_search_show_id_quote():
     with GestdownProvider() as provider:
@@ -170,7 +170,7 @@ def test_search_show_id_quote():
     assert show_id == 'cb13bb68-c637-4e0f-b79d-d4f1b4972380'
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_search_show_series_tvdb_id():
     with GestdownProvider() as provider:
@@ -179,7 +179,7 @@ def test_search_show_series_tvdb_id():
     assert show_id == '91eb9278-8cf5-4ddd-9111-7f60b15958cb'
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_get_title_and_show_id_only_title(episodes):
     video = episodes['marvels_agents_of_shield_s02e06']
@@ -189,7 +189,7 @@ def test_get_title_and_show_id_only_title(episodes):
     assert show_id == '8976d3bb-a213-4210-9a03-f4b6d17ce540'
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_get_title_and_show_id_with_tvdb_id(episodes):
     video = episodes['alex_inc_s01e04']
@@ -199,7 +199,7 @@ def test_get_title_and_show_id_with_tvdb_id(episodes):
     assert show_id == '6e507429-0994-443f-833e-1b06cbc18705'
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_get_title_and_show_id_alternative_name(episodes):
     video = episodes['the_end_of_the_fucking_world']
@@ -209,7 +209,7 @@ def test_get_title_and_show_id_alternative_name(episodes):
     assert show_id == 'e789f371-ae07-4db4-b9aa-6b34e7e9e7b0'
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_get_title_and_show_id_no_year(episodes):
     video = episodes['dallas_s01e03']
@@ -219,7 +219,7 @@ def test_get_title_and_show_id_no_year(episodes):
     assert show_id == '226d7f34-a9f5-4fe2-98d7-ecf944243714'
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_query(episodes):
     video = episodes['bbt_s07e05']
@@ -233,7 +233,7 @@ def test_query(episodes):
         assert subtitle.episode == video.episode
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_query_no_language(episodes):
     video = episodes['bbt_s07e05']
@@ -243,7 +243,7 @@ def test_query_no_language(episodes):
     assert len(subtitles) == 0
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_query_wrong_series(episodes):
     video = episodes['bbt_s07e05']
@@ -252,7 +252,7 @@ def test_query_wrong_series(episodes):
     assert len(subtitles) == 0
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_query_parsing(episodes):
     lang = Language('por', country='BR')
@@ -275,7 +275,7 @@ def test_query_parsing(episodes):
     assert subtitle.release_group == 'All_with_preview'
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_query_parsing_quote_dots_mixed_case(episodes):
     lang = Language('eng')
@@ -297,7 +297,7 @@ def test_query_parsing_quote_dots_mixed_case(episodes):
     assert subtitle.release_group == '720p-KILLERS'
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_query_parsing_colon(episodes):
     lang = Language('eng')
@@ -319,7 +319,7 @@ def test_query_parsing_colon(episodes):
     assert subtitle.release_group == 'DIMENSION'
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_query_parsing_dash(episodes):
     lang = Language('fra')
@@ -341,7 +341,7 @@ def test_query_parsing_dash(episodes):
     assert subtitle.release_group == 'KILLERS'
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_query_all_series(episodes):
     lang = Language('eng')
@@ -356,7 +356,7 @@ def test_query_all_series(episodes):
     assert not all(sub.episode == video.episode for sub in subtitles)
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_list_subtitles(episodes):
     video = episodes['bbt_s07e05']
@@ -371,7 +371,7 @@ def test_list_subtitles(episodes):
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_download_subtitle(episodes):
     video = episodes['bbt_s07e05']
@@ -383,7 +383,7 @@ def test_download_subtitle(episodes):
     assert subtitles[0].is_valid() is True
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_list_subtitles_episode_alternative_series(episodes):
     video = episodes['turn_s04e03']
@@ -400,7 +400,7 @@ def test_list_subtitles_episode_alternative_series(episodes):
     assert matches == {'episode', 'title', 'series', 'season', 'country', 'year', 'release_group'}
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_show_with_asterisk(episodes):
     video = episodes['the_end_of_the_fucking_world']
@@ -418,7 +418,7 @@ def test_show_with_asterisk(episodes):
     assert matches == {'country', 'series', 'episode', 'season', 'year'}
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_download_with_bom(episodes):
     video = episodes['grimsburg_s01e01']

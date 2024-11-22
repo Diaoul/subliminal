@@ -19,19 +19,19 @@ vcr = VCR(
 logger_name = 'subliminal.providers.subtitulamos'
 
 
-@pytest.mark.converter()
+@pytest.mark.converter
 def test_converter_convert_alpha3():
     assert language_converters['subtitulamos'].convert('cat') == 'Català'
 
 
-@pytest.mark.converter()
+@pytest.mark.converter
 def test_converter_convert_alpha3_country():
     assert language_converters['subtitulamos'].convert('spa', 'MX') == 'Español (Latinoamérica)'
     assert language_converters['subtitulamos'].convert('spa', 'AR') == 'Español (Latinoamérica)'
     assert language_converters['subtitulamos'].convert('por', 'BR') == 'Brazilian'
 
 
-@pytest.mark.converter()
+@pytest.mark.converter
 def test_converter_convert_alpha3_name_converter():
     assert (
         language_converters['subtitulamos'].convert(
@@ -41,18 +41,18 @@ def test_converter_convert_alpha3_name_converter():
     )
 
 
-@pytest.mark.converter()
+@pytest.mark.converter
 def test_converter_reverse():
     assert language_converters['subtitulamos'].reverse('Español') == ('spa', None, None)
 
 
-@pytest.mark.converter()
+@pytest.mark.converter
 def test_converter_reverse_country():
     assert language_converters['subtitulamos'].reverse('Español (España)') == ('spa', None, None)
     assert language_converters['subtitulamos'].reverse('Español (Latinoamérica)') == ('spa', 'MX', None)
 
 
-@pytest.mark.converter()
+@pytest.mark.converter
 def test_converter_reverse_name_converter():
     assert language_converters['subtitulamos'].reverse('French') == ('fra', None, None)
 
@@ -75,7 +75,7 @@ def test_get_matches_episode(episodes):
     assert matches == {'release_group', 'series', 'year', 'country', 'episode', 'season', 'title'}
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_login():
     provider = SubtitulamosProvider()
@@ -84,7 +84,7 @@ def test_login():
     assert provider.session is not None
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_logout():
     provider = SubtitulamosProvider()
@@ -93,14 +93,14 @@ def test_logout():
     assert provider.session is None
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 def test_logout_without_initialization():
     provider = SubtitulamosProvider()
     with pytest.raises(NotInitializedProviderError):
         provider.terminate()
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 def test_list_subtitles_without_initialization(episodes):
     video = episodes['bbt_s11e16']
     languages = {Language('eng'), Language('spa')}
@@ -110,7 +110,7 @@ def test_list_subtitles_without_initialization(episodes):
         provider.list_subtitles(video, languages)
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 def test_list_subtitles_no_video_type():
     video = {}  # type: ignore[var-annotated]
     languages = {Language('spa')}
@@ -120,7 +120,7 @@ def test_list_subtitles_no_video_type():
         assert len(subtitles) == 0
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_list_subtitles_not_exist_series(caplog, episodes):
     with caplog.at_level(logging.DEBUG, logger=logger_name), SubtitulamosProvider() as provider:
@@ -132,7 +132,7 @@ def test_list_subtitles_not_exist_series(caplog, episodes):
         assert caplog.records[-1].message.endswith('Series not found')
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_list_subtitles_not_exist_season(caplog, episodes):
     with caplog.at_level(logging.DEBUG, logger=logger_name), SubtitulamosProvider() as provider:
@@ -144,7 +144,7 @@ def test_list_subtitles_not_exist_season(caplog, episodes):
         assert caplog.records[-1].message.endswith('Season not found')
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_list_subtitles_not_exist_episode(caplog, episodes):
     with caplog.at_level(logging.DEBUG, logger=logger_name), SubtitulamosProvider() as provider:
@@ -156,7 +156,7 @@ def test_list_subtitles_not_exist_episode(caplog, episodes):
         assert caplog.records[-1].message.endswith('Episode not found')
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_list_subtitles_not_exist_language(caplog, episodes):
     with caplog.at_level(logging.DEBUG, logger=logger_name), SubtitulamosProvider() as provider:
@@ -167,7 +167,7 @@ def test_list_subtitles_not_exist_language(caplog, episodes):
         assert len(subtitles) == 0
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_list_subtitles_with_spanish_non_mx_search(caplog, episodes):
     with caplog.at_level(logging.DEBUG, logger=logger_name), SubtitulamosProvider() as provider:
@@ -179,7 +179,7 @@ def test_list_subtitles_with_spanish_non_mx_search(caplog, episodes):
         assert all(s.language == Language('spa', 'AR') for s in subtitles)
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_download_subtitle(episodes):
     video = episodes['bbt_s11e16']
@@ -194,7 +194,7 @@ def test_download_subtitle(episodes):
         assert subtitle.is_valid() is True
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_download_subtitle_year(episodes):
     video = episodes['charmed_s01e01']
@@ -209,7 +209,7 @@ def test_download_subtitle_year(episodes):
         assert subtitle.is_valid() is True
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_download_subtitle_last_season(episodes):
     video = episodes['dw_s13e03']
@@ -230,7 +230,7 @@ def test_download_subtitle_last_season(episodes):
         assert subtitle.is_valid() is True
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_download_subtitle_first_episode(episodes):
     video = episodes['charmed_s01e01']
@@ -251,7 +251,7 @@ def test_download_subtitle_first_episode(episodes):
         assert subtitle.is_valid() is True
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_download_subtitle_foo(episodes):
     video = episodes['dw_s13e03']
@@ -266,7 +266,7 @@ def test_download_subtitle_foo(episodes):
         assert subtitle.is_valid() is True
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 def test_download_subtitle_missing_download_link():
     subtitle = SubtitulamosSubtitle(
         language=Language('spa'),
@@ -287,7 +287,7 @@ def test_download_subtitle_missing_download_link():
         assert subtitle.is_valid() is False
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 def test_download_subtitle_without_initialization():
     subtitle = SubtitulamosSubtitle(
         language=Language('spa'),

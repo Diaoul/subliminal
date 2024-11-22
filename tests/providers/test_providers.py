@@ -263,7 +263,7 @@ def test_download_subtitles():
         assert provider_manager[name].plugin.download_subtitle.called
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_download_best_subtitles(episodes):
     video = episodes['bbt_s07e05']
@@ -283,7 +283,7 @@ def test_download_best_subtitles(episodes):
     assert {(s.provider_name, s.id) for s in subtitles[video]} == expected_subtitles
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_download_best_subtitles_min_score(episodes):
     video = episodes['bbt_s07e05']
@@ -320,7 +320,7 @@ def test_download_best_subtitles_undefined(episodes):
     assert len(subtitles) == 0
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_download_best_subtitles_only_one(episodes):
     video = episodes['bbt_s07e05']
@@ -339,7 +339,7 @@ def test_download_best_subtitles_only_one(episodes):
     assert (subtitle.provider_name, subtitle.id) in expected_subtitles
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_download_bad_subtitle(movies):
     pool = ProviderPool()
@@ -354,7 +354,7 @@ def test_download_bad_subtitle(movies):
     assert subtitle.is_valid() is False
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_list_subtitles_providers_download(episodes):
     video = episodes['bbt_s07e05']

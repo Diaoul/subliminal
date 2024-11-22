@@ -42,7 +42,7 @@ def test_apikey():
     assert client.session.params['api_key'] == apikey  # type: ignore[index,call-overload]
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_search_movie(client):
     data = client.search('Man of Steel', is_movie=True)
@@ -52,21 +52,21 @@ def test_search_movie(client):
     assert movie['release_date'] == '2013-06-12'
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_search_movie_wrong_title(client):
     data = client.search('Meen of Stal', is_movie=True)
     assert data == []
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_search_movie_year(client):
     data = client.search('Man of Steel', is_movie=True, year=2013)
     assert len(data) == 1
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_search_movie_page(client):
     data = client.search('James Bond', is_movie=True, page=2)
@@ -76,7 +76,7 @@ def test_search_movie_page(client):
     assert movie['title'] == 'In Search of James Bond with Jonathan Ross'
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_search_series(client):
     data = client.search('The Big Bang Theory', is_movie=False)
@@ -86,35 +86,35 @@ def test_search_series(client):
     assert series['first_air_date'] == '2007-09-24'
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_search_series_wrong_name(client):
     data = client.search('The Bing Bag Theory', is_movie=False)
     assert not data
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_get_movie_id(client):
     id_ = client.get_id('Man of Steel', is_movie=True)
     assert id_ == 49521
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_get_movie_id_failed(client):
     id_ = client.get_id('Meen of Stal', is_movie=True)
     assert id_ is None
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_get_series_id(client):
     id_ = client.get_id('The Big Bang Theory', is_movie=False)
     assert id_ == 1418
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_get_series_wrong_id(client):
     id_ = client.get_id('The Bing Bag Theory', is_movie=False)
@@ -127,7 +127,7 @@ def test_refine_no_apikey(movies):
     assert movie.tmdb_id is None
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_refine_episode(episodes):
     episode = Episode(
@@ -142,7 +142,7 @@ def test_refine_episode(episodes):
     assert episode.series_imdb_id == episodes['bbt_s07e05'].series_imdb_id
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_refine_episode_original_series(episodes):
     episode = Episode(
@@ -157,7 +157,7 @@ def test_refine_episode_original_series(episodes):
     assert episode.series_imdb_id == 'tt0077000'
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_refine_episode_year(episodes):
     episode = Episode(
@@ -174,7 +174,7 @@ def test_refine_episode_year(episodes):
     assert episode.series_imdb_id == 'tt1723760'
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_refine_movie(movies):
     movie = Movie(movies['man_of_steel'].name, movies['man_of_steel'].title.lower())
@@ -184,7 +184,7 @@ def test_refine_movie(movies):
     assert movie.imdb_id == movies['man_of_steel'].imdb_id
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_refine_movie_guess_alternative_title(movies):
     movie = Movie.fromname(movies['jack_reacher_never_go_back'].name)
@@ -194,7 +194,7 @@ def test_refine_movie_guess_alternative_title(movies):
     assert movie.imdb_id == movies['jack_reacher_never_go_back'].imdb_id
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_refine_episode_with_country(episodes):
     episode = Episode.fromname(episodes['shameless_us_s08e01'].name)
@@ -205,7 +205,7 @@ def test_refine_episode_with_country(episodes):
     assert episode.series_imdb_id == 'tt1586680'
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_refine_episode_with_country_hoc_us(episodes):
     episode = Episode.fromname(episodes['house_of_cards_us_s06e01'].name)

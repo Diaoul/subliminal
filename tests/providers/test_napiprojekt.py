@@ -29,7 +29,7 @@ def test_get_matches_no_match(episodes):
     assert matches == set()
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_query_microdvd(movies):
     language = Language('pol')
@@ -44,7 +44,7 @@ def test_query_microdvd(movies):
     assert subtitle.subtitle_format == 'microdvd'
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_query_srt(episodes):
     language = Language('pol')
@@ -59,7 +59,7 @@ def test_query_srt(episodes):
     assert subtitle.subtitle_format == 'srt'
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_query_srt_reencode(episodes):
     language = Language('pol')
@@ -78,7 +78,7 @@ def test_query_srt_reencode(episodes):
     assert 'O czym myślisz?' in subtitle.text
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_query_wrong_hash():
     with NapiProjektProvider() as provider:
@@ -86,7 +86,7 @@ def test_query_wrong_hash():
     assert len(subtitles) == 0
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_list_subtitles(episodes):
     video = episodes['bbt_s07e05']
@@ -100,7 +100,7 @@ def test_list_subtitles(episodes):
     assert subtitle.is_valid()
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_download_subtitles(episodes):
     video = episodes['got_s03e10']

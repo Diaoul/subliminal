@@ -198,7 +198,7 @@ def test_configuration_error_no_password():
 
 
 @pytest.mark.skip('authorization no longer works on the old API')
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_login():
     provider = OpenSubtitlesProvider(USERNAME, PASSWORD)
@@ -207,7 +207,7 @@ def test_login():
     assert provider.token is not None
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_login_bad_password():
     provider = OpenSubtitlesProvider(USERNAME, 'lanimilbus')
@@ -215,7 +215,7 @@ def test_login_bad_password():
         provider.initialize()
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_login_vip_login():
     provider = OpenSubtitlesVipProvider(USERNAME, PASSWORD)
@@ -223,7 +223,7 @@ def test_login_vip_login():
         provider.initialize()
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_login_vip_bad_password():
     provider = OpenSubtitlesVipProvider(USERNAME, 'lanimilbus')
@@ -232,7 +232,7 @@ def test_login_vip_bad_password():
 
 
 @pytest.mark.skip('authorization no longer works on the old API')
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_logout():
     provider = OpenSubtitlesProvider(USERNAME, PASSWORD)
@@ -241,14 +241,14 @@ def test_logout():
     assert provider.token is None
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_no_operation():
     with OpenSubtitlesProvider() as provider:
         provider.no_operation()
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_query_not_enough_information():
     languages = {Language('eng')}
@@ -258,7 +258,7 @@ def test_query_not_enough_information():
     assert str(excinfo.value) == 'Not enough information'
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_query_query_movie(movies):
     video = movies['man_of_steel']
@@ -281,7 +281,7 @@ def test_query_query_movie(movies):
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_query_query_episode(episodes):
     video = episodes['dallas_2012_s01e03']
@@ -294,7 +294,7 @@ def test_query_query_episode(episodes):
 
 
 @pytest.mark.skip('query by tag currently broken on opensubtitles')
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_query_tag_movie(movies):
     video = movies['interstellar']
@@ -306,7 +306,7 @@ def test_query_tag_movie(movies):
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_query_imdb_id(movies):
     video = movies['man_of_steel']
@@ -326,7 +326,7 @@ def test_query_imdb_id(movies):
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_query_hash_size(movies):
     video = movies['man_of_steel']
@@ -350,7 +350,7 @@ def test_query_hash_size(movies):
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_query_wrong_hash_wrong_size():
     languages = {Language('eng')}
@@ -359,7 +359,7 @@ def test_query_wrong_hash_wrong_size():
     assert len(subtitles) == 0
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_query_query_season_episode(episodes):
     video = episodes['bbt_s07e05']
@@ -371,7 +371,7 @@ def test_query_query_season_episode(episodes):
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_list_subtitles_movie(movies):
     video = movies['man_of_steel']
@@ -418,7 +418,7 @@ def test_list_subtitles_movie(movies):
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_list_subtitles_movie_no_hash(movies):
     video = movies['enders_game']
@@ -430,7 +430,7 @@ def test_list_subtitles_movie_no_hash(movies):
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_list_subtitles_episode(episodes):
     video = episodes['marvels_agents_of_shield_s02e06']
@@ -442,7 +442,7 @@ def test_list_subtitles_episode(episodes):
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_download_subtitle(movies):
     video = movies['man_of_steel']
@@ -456,7 +456,7 @@ def test_download_subtitle(movies):
 
 
 @pytest.mark.skip('query by tag currently broken on opensubtitles')
-@pytest.mark.integration()
+@pytest.mark.integration
 @vcr.use_cassette
 def test_tag_match(episodes):
     video = episodes['the fall']

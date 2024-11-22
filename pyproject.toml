@@ -1,4 +1,4 @@
-# https://peps.python.org/pep-0517/
+# https://packaging.python.org/en/latest/specifications/pyproject-toml/
 [build-system]
 requires = ["setuptools>=64"]
 build-backend = "setuptools.build_meta"
@@ -8,6 +8,7 @@ build-backend = "setuptools.build_meta"
 name = "subliminal"
 description = "Subtitles, faster than your thoughts"
 requires-python = ">=3.9"
+readme = "README.rst"
 license = { text = "MIT" }
 authors = [{ name = "Antoine Bertin", email = "diaoulael@gmail.com" }]
 maintainers = [
@@ -31,7 +32,7 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Topic :: Multimedia :: Video",
 ]
-dynamic = ["version", "readme"]
+dynamic = ["version"]
 dependencies = [
     "babelfish>=0.6.1",
     "beautifulsoup4>=4.4.0",
@@ -133,7 +134,6 @@ where = ["."]
 
 [tool.setuptools.dynamic]
 version = {attr = "subliminal.__version__"}
-readme = {file = ["README.rst", "HISTORY.rst"]}
 
 
 # https://docs.pytest.org/en/6.2.x/customize.html
@@ -167,7 +167,10 @@ omit = [
 ]
 
 [tool.coverage.paths]
-source = [".tox/py*/**/site-packages"]
+source = [
+    "subliminal",
+    "**/site-packages/subliminal",
+]
 
 [tool.coverage.run]
 source = ["subliminal"]

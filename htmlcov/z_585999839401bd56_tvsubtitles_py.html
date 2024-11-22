@@ -67,7 +67,7 @@
             <a id="nextFileLink" class="nav" href="z_85f374613d351c95_hash_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.6.4">coverage.py v7.6.4</a>,
-            created at 2024-11-12 02:05 +0000
+            created at 2024-11-22 23:42 +0000
         </p>
         <aside class="hidden">
             <button type="button" class="button_next_chunk" data-shortcut="j"></button>
@@ -328,7 +328,7 @@
     <p class="pln"><span class="n"><a id="t244" href="#t244">244</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t245" href="#t245">245</a></span><span class="t">        <span class="com"># get the episode page</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t246" href="#t246">246</a></span><span class="t">        <span class="nam">logger</span><span class="op">.</span><span class="nam">info</span><span class="op">(</span><span class="str">'Getting the page for episode %d'</span><span class="op">,</span> <span class="nam">episode_ids</span><span class="op">[</span><span class="nam">episode</span><span class="op">]</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t247" href="#t247">247</a></span><span class="t">        <span class="nam">r</span> <span class="op">=</span> <span class="nam">self</span><span class="op">.</span><span class="nam">session</span><span class="op">.</span><span class="nam">get</span><span class="op">(</span><span class="nam">self</span><span class="op">.</span><span class="nam">server_url</span> <span class="op">+</span> <span class="str">'/episode-%d.html'</span> <span class="op">%</span> <span class="nam">episode_ids</span><span class="op">[</span><span class="nam">episode</span><span class="op">]</span><span class="op">,</span> <span class="nam">timeout</span><span class="op">=</span><span class="num">10</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t247" href="#t247">247</a></span><span class="t">        <span class="nam">r</span> <span class="op">=</span> <span class="nam">self</span><span class="op">.</span><span class="nam">session</span><span class="op">.</span><span class="nam">get</span><span class="op">(</span><span class="nam">self</span><span class="op">.</span><span class="nam">server_url</span> <span class="op">+</span> <span class="fst">f'</span><span class="fst">/episode-</span><span class="op">{</span><span class="nam">episode_ids</span><span class="op">[</span><span class="nam">episode</span><span class="op">]</span><span class="op">:</span><span class="fst">d</span><span class="op">}</span><span class="fst">.html</span><span class="fst">'</span><span class="op">,</span> <span class="nam">timeout</span><span class="op">=</span><span class="num">10</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t248" href="#t248">248</a></span><span class="t">        <span class="nam">soup</span> <span class="op">=</span> <span class="nam">ParserBeautifulSoup</span><span class="op">(</span><span class="nam">r</span><span class="op">.</span><span class="nam">content</span><span class="op">,</span> <span class="op">[</span><span class="str">'lxml'</span><span class="op">,</span> <span class="str">'html.parser'</span><span class="op">]</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t249" href="#t249">249</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t250" href="#t250">250</a></span><span class="t">        <span class="com"># loop over subtitles rows</span>&nbsp;</span><span class="r"></span></p>
@@ -423,7 +423,7 @@
             <a class="nav" href="z_85f374613d351c95_hash_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.6.4">coverage.py v7.6.4</a>,
-            created at 2024-11-12 02:05 +0000
+            created at 2024-11-22 23:42 +0000
         </p>
     </div>
 </footer>

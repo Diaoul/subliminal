@@ -2,13 +2,14 @@
 
 from __future__ import annotations
 
-import contextlib
 import logging
+from importlib.metadata import PackageNotFoundError, version
 
 # Must be first, otherwise we run into ImportError: partially initialized module
-__version__: str = 'undefined'
-with contextlib.suppress(ImportError):
-    from ._version import __version__  # type: ignore[no-redef]
+try:
+    __version__ = version('subliminal')
+except PackageNotFoundError:
+    __version__ = 'undefined'
 __short_version__: str = '.'.join(__version__.split('.')[:2])
 __title__: str = 'subliminal'
 __author__: str = 'Antoine Bertin'

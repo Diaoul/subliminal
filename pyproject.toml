@@ -118,9 +118,6 @@ tvsubtitles = "subliminal.converters.tvsubtitles:TVsubtitlesConverter"
 [tool.hatch.version]
 source = "vcs"
 
-[tool.hatch.build.hooks.vcs]
-version-file = "src/subliminal/_version.py"
-
 
 # https://docs.pytest.org/en/6.2.x/customize.html
 [tool.pytest.ini_options]

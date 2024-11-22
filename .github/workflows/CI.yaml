@@ -158,7 +158,6 @@ jobs:
         shell: bash
       - name: List coverage files
         run: |
-          ls -al report
           ls -al .
         shell: bash
 
@@ -166,7 +165,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: coverage-${{ matrix.os }}-${{ matrix.py }}
-          path: report/.coverage*
+          path: .coverage*
           include-hidden-files: true
           if-no-files-found: error
 

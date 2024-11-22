@@ -151,23 +151,16 @@ jobs:
       - name: Run test suite
         run: hatch -v run ${ENV}:test-cov
         env:
+          # Make sure to add `passenv=COVERAGE_FILE` to `[testenv]` in tox.ini
+          # Make sure to add `overrides = { env.COVERAGE_FILE.env-vars = "COVERAGE_FILE" }` to `[tests]` in hatch.toml
+          COVERAGE_FILE: ".coverage.${{ matrix.os }}.${{ matrix.py }}"
           CI_RUN: "yes"
         shell: bash
-      - name: Rename coverage report file
-        # Follow https://github.com/tox-dev/platformdirs
-        run: |
-          import os;
-          os.rename(
-            f"report{os.sep}.coverage.${{ matrix.py }}",
-            f"report{os.sep}.coverage.${{ matrix.os }}-${{ matrix.py }}",
-          )
-        shell: python
-
       - name: Store coverage file
         uses: actions/upload-artifact@v4
         with:
-          name: coverage-${{ matrix.os }}-${{ matrix.python-version }}
-          path: .coverage*
+          name: coverage-${{ matrix.os }}-${{ matrix.py }}
+          path: report/.coverage*
           include-hidden-files: true
           if-no-files-found: error
 

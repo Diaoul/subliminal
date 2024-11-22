@@ -87,6 +87,11 @@ python = ["3.9", "3.10", "3.11", "3.12", "3.13"]
 COVERAGE_PROCESS_START = "pyproject.toml"
 COVERAGE_FILE = "report/.coverage.{matrix:python}"
 
+[envs.tests.overrides]
+# To allow environment variable overwrite
+env.COVERAGE_FILE.env-vars = "COVERAGE_FILE"
+env.COVERAGE_PROCESS_START.env-vars = "COVERAGE_PROCESS_START"
+
 [envs.tests.scripts]
 run = "pytest {args:-n auto}"
 test-cov = "python -m pytest --cov=subliminal --cov-report= --cov-fail-under=0 {args:-n auto}"
@@ -113,9 +118,11 @@ dependencies = [
   "coverage[toml]>=7.3.2",
 ]
 env-vars = { COVERAGE_FILE = "report/.coverage" }
+# To allow environment variable overwrite
+overrides = { env.COVERAGE_FILE.env-vars = "COVERAGE_FILE" }
 
 [envs.coverage.scripts]
 run = [
   "- coverage combine report",
-  "coverage report --sort=Cover --show-missing --skip-covered",
+  "coverage report --sort=-Cover --show-missing --skip-covered --skip-empty",
 ]

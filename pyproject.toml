@@ -218,9 +218,6 @@ ignore = [
     "D401",   # First line should be in imperative mood
 ]
 
-[tool.ruff.lint.flake8-pytest-style]
-mark-parentheses = true
-
 [tool.ruff.lint.per-file-ignores]
 "docs/conf*.py" = ["ALL"]
 "subliminal/__init__.py" = ["E402"]

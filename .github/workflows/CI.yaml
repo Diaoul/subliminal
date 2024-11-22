@@ -156,6 +156,12 @@ jobs:
           COVERAGE_FILE: ".coverage.${{ matrix.os }}.${{ matrix.py }}"
           CI_RUN: "yes"
         shell: bash
+      - name: List coverage files
+        run: |
+          ls -al report
+          ls -al .
+        shell: bash
+
       - name: Store coverage file
         uses: actions/upload-artifact@v4
         with:

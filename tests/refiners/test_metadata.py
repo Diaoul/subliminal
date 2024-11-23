@@ -7,6 +7,7 @@ from typing import Any
 import pytest
 from babelfish import Language  # type: ignore[import-untyped]
 from knowit.units import units  # type: ignore[import-untyped]
+
 from subliminal.core import scan_video
 from subliminal.refiners.metadata import (
     get_float,

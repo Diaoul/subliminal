@@ -2,8 +2,9 @@ import os
 
 import pytest
 from babelfish import Language  # type: ignore[import-untyped]
-from subliminal.providers.podnapisi import PodnapisiProvider, PodnapisiSubtitle
 from vcr import VCR  # type: ignore[import-untyped]
+
+from subliminal.providers.podnapisi import PodnapisiProvider, PodnapisiSubtitle
 
 vcr = VCR(
     path_transformer=lambda path: path + '.yaml',

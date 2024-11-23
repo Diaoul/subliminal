@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import pytest
+
 from subliminal.providers import FeatureNotFound, ParserBeautifulSoup, Provider
 from subliminal.video import Episode, Movie
 

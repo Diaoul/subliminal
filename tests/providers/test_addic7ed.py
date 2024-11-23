@@ -2,9 +2,10 @@ import os
 
 import pytest
 from babelfish import Language, language_converters  # type: ignore[import-untyped]
+from vcr import VCR  # type: ignore[import-untyped]
+
 from subliminal.exceptions import AuthenticationError, ConfigurationError
 from subliminal.providers.addic7ed import Addic7edProvider, Addic7edSubtitle, addic7ed_sanitize, series_year_re
-from vcr import VCR  # type: ignore[import-untyped]
 
 vcr = VCR(
     path_transformer=lambda path: path + '.yaml',

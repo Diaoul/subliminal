@@ -3,6 +3,8 @@ from unittest.mock import Mock
 
 import pytest
 from babelfish import Language  # type: ignore[import-untyped]
+from vcr import VCR  # type: ignore[import-untyped]
+
 from subliminal.core import (
     AsyncProviderPool,
     ProviderPool,
@@ -14,7 +16,6 @@ from subliminal.extensions import disabled_providers, provider_manager
 from subliminal.providers.tvsubtitles import TVsubtitlesSubtitle
 from subliminal.score import episode_scores
 from subliminal.subtitle import Subtitle
-from vcr import VCR  # type: ignore[import-untyped]
 
 vcr = VCR(
     path_transformer=lambda path: path + '.yaml',

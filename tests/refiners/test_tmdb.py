@@ -2,9 +2,10 @@ import os
 
 import pytest
 import requests
+from vcr import VCR  # type: ignore[import-untyped]
+
 from subliminal.refiners.tmdb import TMDBClient, refine
 from subliminal.video import Episode, Movie
-from vcr import VCR  # type: ignore[import-untyped]
 
 vcr = VCR(
     path_transformer=lambda path: path + '.yaml',

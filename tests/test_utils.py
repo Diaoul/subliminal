@@ -6,6 +6,7 @@ from xmlrpc.client import ProtocolError
 
 import pytest
 import requests
+
 from subliminal.exceptions import ServiceUnavailable
 from subliminal.utils import (
     clip,

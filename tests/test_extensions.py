@@ -7,6 +7,7 @@ else:
     from importlib_metadata import entry_points  # type: ignore[assignment,no-redef,import-not-found]
 
 import pytest
+
 from subliminal.extensions import (
     EntryPoint,
     RegistrableExtensionManager,

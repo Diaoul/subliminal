@@ -2,14 +2,20 @@
 
 from __future__ import annotations
 
-__title__: str = 'subliminal'
-__version__: str = '2.2.1'
+import logging
+from importlib.metadata import PackageNotFoundError, version
+
+# Must be first, otherwise we run into ImportError: partially initialized module
+try:
+    __version__ = version('subliminal')
+except PackageNotFoundError:
+    __version__ = 'undefined'
 __short_version__: str = '.'.join(__version__.split('.')[:2])
+__title__: str = 'subliminal'
 __author__: str = 'Antoine Bertin'
 __license__: str = 'MIT'
 __copyright__: str = 'Copyright 2016, Antoine Bertin'
 
-import logging
 
 from .cache import region
 from .core import (

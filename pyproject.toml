@@ -1,7 +1,7 @@
 # https://packaging.python.org/en/latest/specifications/pyproject-toml/
 [build-system]
-requires = ["setuptools>=64"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
 
 # https://peps.python.org/pep-0621/
 [project]
@@ -117,21 +117,9 @@ opensubtitlescom = "subliminal.converters.opensubtitlescom:OpenSubtitlesComConve
 subtitulamos = "subliminal.converters.subtitulamos:SubtitulamosConverter"
 tvsubtitles = "subliminal.converters.tvsubtitles:TVsubtitlesConverter"
 
-[tool.setuptools]
-py-modules = ["subliminal"]
-include-package-data = true
 
-[tool.setuptools.package-data]
-subliminal = [
-    "py.typed",
-]
-
-[tool.setuptools.packages.find]
-namespaces = false
-where = ["src"]
-
-[tool.setuptools.dynamic]
-version = {attr = "subliminal.__version__"}
+[tool.hatch.version]
+source = "vcs"
 
 
 # https://docs.pytest.org/en/6.2.x/customize.html

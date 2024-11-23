@@ -8,8 +8,10 @@ on:
     types:
       - published
 
-permissions:
-  contents: read
+env:
+  FORCE_COLOR: "1"
+  PIP_DISABLE_PIP_VERSION_CHECK: "1"
+  PIP_NO_PYTHON_VERSION_WARNING: "1"
 
 # https://packaging.python.org/en/latest/guides/publishing-package-distribution-releases-using-github-actions-ci-cd-workflows/
 jobs:
@@ -17,6 +19,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: actions/setup-python@v5
         with:
           python-version: "3.x"
@@ -39,7 +43,8 @@ jobs:
     permissions:
       id-token: write
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags/')  # only publish to PyPI on tag pushes
+    # only publish to PyPI on tag pushes
+    if: startsWith(github.ref, 'refs/tags/')
     steps:
       - uses: actions/download-artifact@v4
         with:
@@ -47,9 +52,6 @@ jobs:
           path: dist
       - name: Publish package
         uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          user: __token__
-          password: ${{ secrets.PYPI_API_TOKEN }}
 
   github-release:
     name: >-
@@ -77,19 +79,21 @@ jobs:
     - name: Create GitHub Release Draft
       env:
         GITHUB_TOKEN: ${{ github.token }}
+        VERSION: ${{ github.ref_name }}
       run: >-
         gh release create
-        '${{ github.ref_name }}'
+        '${VERSION}'
         --repo '${{ github.repository }}'
         --generate-notes
         --notes ""
     - name: Upload artifact signatures to GitHub Release
       env:
         GITHUB_TOKEN: ${{ github.token }}
+        VERSION: ${{ github.ref_name }}
       # Upload to GitHub Release using the `gh` CLI.
       # `dist/` contains the built packages, and the
       # sigstore-produced signatures and certificates.
       run: >-
         gh release upload
-        '${{ github.ref_name }}' dist/**
+        '${VERSION}' dist/**
         --repo '${{ github.repository }}'

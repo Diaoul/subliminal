@@ -2,8 +2,9 @@ import os
 
 import pytest
 from babelfish import Language  # type: ignore[import-untyped]
-from subliminal.providers.napiprojekt import NapiProjektProvider, NapiProjektSubtitle
 from vcr import VCR  # type: ignore[import-untyped]
+
+from subliminal.providers.napiprojekt import NapiProjektProvider, NapiProjektSubtitle
 
 vcr = VCR(
     path_transformer=lambda path: path + '.yaml',

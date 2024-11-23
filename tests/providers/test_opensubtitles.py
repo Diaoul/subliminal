@@ -2,6 +2,8 @@ import os
 
 import pytest
 from babelfish import Language  # type: ignore[import-untyped]
+from vcr import VCR  # type: ignore[import-untyped]
+
 from subliminal.exceptions import ConfigurationError
 from subliminal.providers.opensubtitles import (
     OpenSubtitlesProvider,
@@ -9,7 +11,6 @@ from subliminal.providers.opensubtitles import (
     OpenSubtitlesVipProvider,
     Unauthorized,
 )
-from vcr import VCR  # type: ignore[import-untyped]
 
 USERNAME = 'python-subliminal'
 PASSWORD = 'subliminal'

@@ -4,6 +4,7 @@ import os
 
 import pytest
 from babelfish import Language  # type: ignore[import-untyped]
+
 from subliminal.subtitle import (
     EmbeddedSubtitle,
     LanguageType,

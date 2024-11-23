@@ -2,8 +2,9 @@ import os
 
 import pytest
 from babelfish import Language, language_converters  # type: ignore[import-untyped]
-from subliminal.providers.tvsubtitles import TVsubtitlesProvider, TVsubtitlesSubtitle
 from vcr import VCR  # type: ignore[import-untyped]
+
+from subliminal.providers.tvsubtitles import TVsubtitlesProvider, TVsubtitlesSubtitle
 
 vcr = VCR(
     path_transformer=lambda path: path + '.yaml',

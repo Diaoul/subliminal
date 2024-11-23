@@ -9,6 +9,7 @@ from unittest.mock import Mock
 
 import pytest
 from babelfish import Language  # type: ignore[import-untyped]
+
 from subliminal.core import (
     check_video,
     save_subtitles,

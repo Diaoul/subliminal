@@ -4,9 +4,10 @@ from unittest.mock import patch
 
 import pytest
 from babelfish import Language, language_converters  # type: ignore[import-untyped]
+from vcr import VCR  # type: ignore[import-untyped]
+
 from subliminal.exceptions import NotInitializedProviderError
 from subliminal.providers.subtitulamos import SubtitulamosProvider, SubtitulamosSubtitle
-from vcr import VCR  # type: ignore[import-untyped]
 
 vcr = VCR(
     path_transformer=lambda path: path + '.yaml',

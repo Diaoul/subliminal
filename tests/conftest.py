@@ -9,6 +9,7 @@ from zipfile import ZipFile
 import pytest
 import requests
 from babelfish import Country  # type: ignore[import-untyped]
+
 from subliminal import Episode, Movie
 from subliminal.cache import region
 

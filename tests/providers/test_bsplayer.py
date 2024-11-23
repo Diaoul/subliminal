@@ -2,8 +2,9 @@ import os
 
 import pytest
 from babelfish import Language  # type: ignore[import-untyped]
-from subliminal.providers.bsplayer import BSPlayerProvider, BSPlayerSubtitle
 from vcr import VCR  # type: ignore[import-untyped]
+
+from subliminal.providers.bsplayer import BSPlayerProvider, BSPlayerSubtitle
 
 vcr = VCR(
     path_transformer=lambda path: path + '.yaml',

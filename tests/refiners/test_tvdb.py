@@ -4,9 +4,10 @@ from datetime import datetime, timedelta, timezone
 
 import pytest
 import requests
+from vcr import VCR  # type: ignore[import-untyped]
+
 from subliminal.refiners.tvdb import TVDBClient, refine, series_re
 from subliminal.video import Episode
-from vcr import VCR  # type: ignore[import-untyped]
 
 vcr = VCR(
     path_transformer=lambda path: path + '.yaml',

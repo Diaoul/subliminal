@@ -41,8 +41,9 @@ dependencies = [
     "click>=8.0",
     "click-option-group>=0.5.6",
     "dogpile.cache>=1.0",
-    "enzyme>=0.5.0",
     "guessit>=3.0.0",
+    "knowit>=0.5.2; python_version <= '3.8'",
+    "knowit>=0.5.5; python_version > '3.8'",
     "platformdirs>=3",
     "pysubs2>=1.7",
     "rarfile>=2.7",
@@ -204,6 +205,7 @@ select = [
     "TCH",    # flake8-typecheck
     "TID",    # flake8-tidy-imports
     "RUF",    # ruff-specific rules
+    "T",      # flake8-print
     "ISC",    # flake8-implicit-str-concat
     "PT",     # flake8-pytest-style
     "FA",     # flake8-future-annotations

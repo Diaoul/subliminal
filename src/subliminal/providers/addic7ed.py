@@ -202,7 +202,15 @@ class Addic7edSubtitle(Subtitle):
 
 
 class Addic7edProvider(Provider):
-    """Addic7ed Provider."""
+    """Addic7ed Provider.
+
+    :param (str | None) username: addic7ed username (not mandatory)
+    :param (str | None) password: addic7ed password (not mandatory)
+    :param int timeout: request timeout
+    :param bool allow_searches: allow using Addic7ed search API, it's very slow and
+        using it can result in blocking access to the website (default to False).
+
+    """
 
     languages: ClassVar[Set[Language]] = addic7ed_languages
     video_types: ClassVar = (Episode,)

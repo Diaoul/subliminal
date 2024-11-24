@@ -305,6 +305,11 @@ def refine(video: Video, *, apikey: str | None = None, force: bool = False, **kw
       * :attr:`~subliminal.video.Movie.year`
       * :attr:`~subliminal.video.Video.imdb_id`
 
+    :param Video video: the Video to refine.
+    :param (str | None) apikey: a personal API key to use OMDb.
+    :param bool force: if True, refine even if IMDB id is already known for a Movie or
+        if both the IMDB ids of the series and of the episodes are known for an Episode.
+
     """
     # update the API key
     if apikey is not None:

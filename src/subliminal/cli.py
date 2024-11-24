@@ -9,6 +9,7 @@ import os
 import pathlib
 import re
 from collections import defaultdict
+from collections.abc import Mapping
 from datetime import timedelta
 from typing import TYPE_CHECKING, Any
 
@@ -40,10 +41,12 @@ from subliminal import (
 )
 from subliminal.core import ARCHIVE_EXTENSIONS, scan_name, search_external_subtitles
 from subliminal.extensions import get_default_providers, get_default_refiners
-from subliminal.utils import merge_extend_and_ignore_unions
+from subliminal.utils import get_parameters_from_signature, merge_extend_and_ignore_unions
 
 if TYPE_CHECKING:
-    from collections.abc import Sequence
+    from collections.abc import Callable, Sequence
+
+    from subliminal.utils import Parameter
 
 logger = logging.getLogger(__name__)
 
@@ -116,6 +119,11 @@ class AgeParamType(click.ParamType):
         return timedelta(**{k: int(v) for k, v in match.groupdict(0).items()})
 
 
+PROVIDERS_OPTIONS_TEMPLATE = '_{ext}__{plugin}__{key}'
+PROVIDERS_OPTIONS_CLI_TEMPLATE = '--{ext}.{plugin}.{key}'
+PROVIDERS_OPTIONS_ENVVAR_TEMPLATE = 'SUBLIMINAL_{ext}_{plugin}_{key}'
+
+
 def configure(ctx: click.Context, param: click.Parameter | None, filename: str | os.PathLike) -> None:
     """Read a configuration file."""
     filename = pathlib.Path(filename).expanduser()
@@ -161,15 +169,18 @@ def configure(ctx: click.Context, param: click.Parameter | None, filename: str |
     options['download'] = download_dict
 
     # make provider and refiner options
-    providers_dict = toml_dict.setdefault('provider', {})
-    refiners_dict = toml_dict.setdefault('refiner', {})
+    for ext in ('provider', 'refiner'):
+        for plugin, d in toml_dict.setdefault(ext, {}).items():
+            if not isinstance(d, Mapping):
+                continue
+            for k, v in d.items():
+                name = PROVIDERS_OPTIONS_TEMPLATE.format(ext=ext, plugin=plugin, key=k)
+                options[name] = v
 
     ctx.obj = {
         'debug_message': msg,
         'provider_lists': provider_lists,
         'refiner_lists': refiner_lists,
-        'provider_configs': providers_dict,
-        'refiner_configs': refiners_dict,
     }
     ctx.default_map = options
 
@@ -197,6 +208,63 @@ providers_config = OptionGroup('Providers configuration')
 refiners_config = OptionGroup('Refiners configuration')
 
 
+def options_from_managers(
+    group_name: str,
+    options: Mapping[str, Sequence[Parameter]],
+    group: OptionGroup | None = None,
+) -> Callable[[Callable], Callable]:
+    """Add click options dynamically from providers and refiners keyword arguments."""
+    click_option = click.option if group is None else group.option
+
+    def decorator(f: Callable) -> Callable:
+        for plugin_name, opt_params in options.items():
+            for opt in reversed(opt_params):
+                name = opt['name']
+                # CLI option has dots, variable has double-underscores to differentiate
+                # with simple underscore in provider name or keyword argument.
+                param_decls = (
+                    PROVIDERS_OPTIONS_CLI_TEMPLATE.format(ext=group_name, plugin=plugin_name, key=name),
+                    PROVIDERS_OPTIONS_TEMPLATE.format(ext=group_name, plugin=plugin_name, key=name),
+                )
+                # Setting the default value also decides on the type
+                attrs = {
+                    'default': opt['default'],
+                    'help': opt['desc'],
+                    'show_default': True,
+                    'show_envvar': True,
+                    'envvar': PROVIDERS_OPTIONS_ENVVAR_TEMPLATE.format(
+                        ext=group_name.upper(),
+                        plugin=plugin_name.upper(),
+                        key=name.upper(),
+                    ),
+                }
+                f = click_option(*param_decls, **attrs)(f)  # type: ignore[operator]
+        return f
+
+    return decorator
+
+
+# Options from providers
+provider_options = {
+    name: get_parameters_from_signature(provider_manager[name].plugin) for name in provider_manager.names()
+}
+
+refiner_options = {
+    name: [
+        opt
+        for opt in get_parameters_from_signature(refiner_manager[name].plugin)
+        if opt['name'] not in ('video', 'kwargs', 'embedded_subtitles', 'providers', 'languages')
+    ]
+    for name in refiner_manager.names()
+}
+
+# Decorator to add click options from providers
+options_from_providers = options_from_managers('provider', provider_options, group=providers_config)
+
+# Decorator to add click options from refiners
+options_from_refiners = options_from_managers('refiner', refiner_options, group=refiners_config)
+
+
 @click.group(
     context_settings={'max_content_width': 100},
     epilog='Suggestions and bug reports are greatly appreciated: https://github.com/Diaoul/subliminal/',
@@ -210,6 +278,7 @@ refiners_config = OptionGroup('Refiners configuration')
     show_default=True,
     is_eager=True,
     expose_value=False,
+    show_envvar=True,
     help='Path to the TOML configuration file.',
 )
 @click.option(
@@ -220,39 +289,17 @@ refiners_config = OptionGroup('Refiners configuration')
     expose_value=True,
     help='Path to the cache directory.',
 )
-@providers_config.option(
-    '--addic7ed',
-    type=click.STRING,
-    nargs=2,
-    metavar='USERNAME PASSWORD',
-    help='Addic7ed configuration.',
-)
-@providers_config.option(
-    '--opensubtitles',
-    type=click.STRING,
-    nargs=2,
-    metavar='USERNAME PASSWORD',
-    help='OpenSubtitles configuration.',
-)
-@providers_config.option(
-    '--opensubtitlescom',
-    type=click.STRING,
-    nargs=2,
-    metavar='USERNAME PASSWORD',
-    help='OpenSubtitles.com configuration.',
-)
-@refiners_config.option('--omdb', type=click.STRING, nargs=1, metavar='APIKEY', help='OMDB API key.')
+@options_from_providers
+@options_from_refiners
 @click.option('--debug', is_flag=True, help='Print useful information for debugging subliminal and for reporting bugs.')
 @click.version_option(__version__)
 @click.pass_context
 def subliminal(
     ctx: click.Context,
+    /,
     cache_dir: str,
     debug: bool,
-    addic7ed: tuple[str, str],
-    opensubtitles: tuple[str, str],
-    opensubtitlescom: tuple[str, str],
-    omdb: str,
+    **kwargs: Any,
 ) -> None:
     """Subtitles, faster than your thoughts."""
     cache_dir = os.path.expanduser(cache_dir)
@@ -281,21 +328,25 @@ def subliminal(
         logger.info(msg)
 
     ctx.obj['debug'] = debug
-    # provider configs
-    provider_configs = ctx.obj['provider_configs']
-    if addic7ed:
-        provider_configs['addic7ed'] = {'username': addic7ed[0], 'password': addic7ed[1]}
-    if opensubtitles:
-        provider_configs['opensubtitles'] = {'username': opensubtitles[0], 'password': opensubtitles[1]}
-        provider_configs['opensubtitlesvip'] = {'username': opensubtitles[0], 'password': opensubtitles[1]}
-    if opensubtitlescom:
-        provider_configs['opensubtitlescom'] = {'username': opensubtitlescom[0], 'password': opensubtitlescom[1]}
-        provider_configs['opensubtitlescomvip'] = {'username': opensubtitlescom[0], 'password': opensubtitlescom[1]}
 
-    # refiner configs
-    refiner_configs = ctx.obj['refiner_configs']
-    if omdb:
-        refiner_configs['omdb'] = {'apikey': omdb}
+    # create provider and refiner configs
+    provider_configs: dict[str, dict[str, Any]] = {}
+    refiner_configs: dict[str, dict[str, Any]] = {}
+
+    for k, v in kwargs.items():
+        try_split = k.split('__')
+        if len(try_split) != 3:  # pragma: no cover
+            click.echo(f'Unknown option: {k}={v}')
+            continue
+        group, plugin, key = try_split
+        if group == '_provider':
+            provider_configs.setdefault(plugin, {})[key] = v
+
+        elif group == '_refiner':  # pragma: no branch
+            refiner_configs.setdefault(plugin, {})[key] = v
+
+    ctx.obj['provider_configs'] = provider_configs
+    ctx.obj['refiner_configs'] = refiner_configs
 
 
 @subliminal.command()
@@ -379,6 +430,7 @@ def cache(ctx: click.Context, clear_subliminal: bool) -> None:
     'use_ctime',
     is_flag=True,
     default=False,
+    show_envvar=True,
     help=(
         'Use the latest of modification date and creation date to calculate the age. '
         'Otherwise, just use the modification date.'
@@ -478,7 +530,7 @@ def cache(ctx: click.Context, clear_subliminal: bool) -> None:
     show_default=True,
     help=f'Scan archives for videos (supported extensions: {", ".join(ARCHIVE_EXTENSIONS)}).',
 )
-@providers_config.option(
+@click.option(
     '-n',
     '--name',
     type=click.STRING,
@@ -769,3 +821,8 @@ def download(
 
     if verbose == 0:
         click.echo(f"Downloaded {plural(total_subtitles, 'subtitle')}")
+
+
+def cli() -> None:
+    """CLI that recognizes environment variables."""
+    subliminal(auto_envvar_prefix='SUBLIMINAL')

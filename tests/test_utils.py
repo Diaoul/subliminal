@@ -36,7 +36,7 @@ if TYPE_CHECKING:
 pytestmark = pytest.mark.core
 
 
-@pytest.fixture()
+@pytest.fixture
 def docstring() -> str:
     """Generate a docstring with arguments."""
     return """Some class or function.

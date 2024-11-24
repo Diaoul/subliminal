@@ -67,8 +67,8 @@ jobs:
         run: python -Im pip install hatch
       - name: Build and check docs
         run: hatch run docs:run
-      # - name: Run doctests
-      #    run: hatch run docs:doctest
+      - name: Run doctests
+        run: hatch run docs:doctest
       - name: Check changelog
         run: hatch run changelog:run
 

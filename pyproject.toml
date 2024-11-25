@@ -213,6 +213,7 @@ ignore = [
 "docs/conf*.py" = ["ALL"]
 "src/subliminal/__init__.py" = ["E402"]
 "tests/*.py" = ["D", "S", "RUF012", "ANN", "FBT"]
+"scripts/*.py" = ["T201"]
 
 # https://docs.astral.sh/ruff/formatter/
 [tool.ruff.format]

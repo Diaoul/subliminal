@@ -45,10 +45,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version-file: .python-version-default
-      - name: Install tox-uv
-        run: python -Im pip install tox-uv
+      - name: Install hatch
+        run: python -Im pip install hatch
       - name: type-check
-        run: python -Im tox run -e mypy
+        run: hatch run types:run
 
   docs:
     name: Build docs and run doctests
@@ -59,14 +59,18 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-python@v5
         with:
-          # Keep in sync with tox/docs and .readthedocs.yaml.
+          # Keep in sync with tox/docs, hatch.toml and .readthedocs.yaml.
           python-version: "3.12"
           cache: pip
 
-      - name: Install tox-uv
-        run: python -Im pip install tox-uv
-      - name: Build docs
-        run: python -Im tox run -e docs,changelog
+      - name: Install hatch
+        run: python -Im pip install hatch
+      - name: Build and check docs
+        run: hatch run docs:run
+      - name: Run doctests
+        run: hatch run docs:doctest
+      - name: Check changelog
+        run: hatch run changelog:run
 
       - uses: actions/upload-artifact@v4
         with:
@@ -118,32 +122,46 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
         # Created by the build-and-inspect-python-package action above.
-        python-version: ${{ fromJson(needs.build-package.outputs.supported-python-versions) }}
+        py: ${{ fromJson(needs.build-package.outputs.supported-python-versions) }}
     steps:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
       - uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: ${{ matrix.py }}
           cache: 'pip'
           allow-prereleases: true
-      - name: Install tox-uv
-        run: python -Im pip install tox-uv
+      - name: Install hatch
+        run: python -Im pip install hatch
 
-      - name: Run tests
+      - name: Pick environment to run
+        env:
+          PYTHON_VERSION: ${{ matrix.py }}
+        run: |
+          import codecs; import os
+          py = f"tests.py{os.environ.get('PYTHON_VERSION')}"
+          print(f"Picked {py}")
+          with codecs.open(os.environ["GITHUB_ENV"], mode="a", encoding="utf-8") as file_handler:
+              file_handler.write(f"FORCE_COLOR=1\nENV={py}\n")
+        shell: python
+      - name: Setup test environment
+        run: |
+          hatch -v env create ${ENV}
+        shell: bash
+      - name: Run test suite
         env:
           # Make sure to add `passenv=COVERAGE_FILE` to `[testenv]` in tox.ini
-          COVERAGE_FILE: ".coverage.${{ matrix.os }}.${{ matrix.python-version }}"
-        run: >-
-          uvx --with=tox-uv
-          tox run
-          -e py${{ matrix.python-version }}-coverage
+          # Make sure to add `overrides = { env.COVERAGE_FILE.env-vars = "COVERAGE_FILE" }` to `[tests]` in hatch.toml
+          COVERAGE_FILE: ".coverage.${{ matrix.os }}.${{ matrix.py }}"
+          CI_RUN: "yes"
+        run: hatch -v run ${ENV}:test-cov
+        shell: bash
 
       - name: Store coverage file
         uses: actions/upload-artifact@v4
         with:
-          name: coverage-${{ matrix.os }}-${{ matrix.python-version }}
+          name: coverage-${{ matrix.os }}-${{ matrix.py }}
           path: .coverage*
           include-hidden-files: true
           if-no-files-found: error

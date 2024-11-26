@@ -11,11 +11,12 @@ from typing import TYPE_CHECKING, ClassVar
 
 import chardet
 import srt  # type: ignore[import-untyped]
+from attrs import define, field
+from babelfish import Language  # noqa: TC002  # type: ignore[import-untyped]
 from pysubs2 import SSAFile, UnknownFPSError  # type: ignore[import-untyped]
 
 if TYPE_CHECKING:
-    from babelfish import Language  # type: ignore[import-untyped]
-
+    # Do not put babelfish.Language in TYPE_CHECKING so cattrs.unstructure works
     from subliminal.video import Video
 
 logger = logging.getLogger(__name__)
@@ -42,6 +43,22 @@ BOMS = (
     (BOM_UTF16_BE, 'utf-16-be'),
     (BOM_UTF16_LE, 'utf-16-le'),
 )
+
+
+def check_encoding(encoding: str | None) -> str | None:
+    """Check that the encoding name exists."""
+    if not encoding:
+        return None
+
+    # validate the encoding
+    try:
+        encoding = codecs.lookup(encoding).name
+    except (TypeError, LookupError):
+        logger.debug('Unsupported encoding %s', encoding)
+    else:
+        return encoding
+
+    return None
 
 
 #: Subtitle language types
@@ -86,97 +103,76 @@ class LanguageType(Enum):
         return False
 
 
+def ensure_positive(value: float | None) -> float | None:
+    """Return None if the value is non-positive."""
+    return value if value is not None and value > 0 else None
+
+
+@define
 class Subtitle:
     """Base class for subtitle.
 
     :param language: language of the subtitle.
     :type language: :class:`~babelfish.language.Language`
+    :param str subtitle_id: subtitle id.
     :param (bool | None) hearing_impaired: whether or not the subtitle is hearing impaired (None if unknown).
     :param (bool | None) foreign_only: whether or not the subtitle is foreign only / forced (None if unknown).
-    :param page_link: URL of the web page from which the subtitle can be downloaded.
-    :type page_link: str
-    :param encoding: Text encoding of the subtitle.
-    :type encoding: str
+    :param str page_link: URL of the web page from which the subtitle can be downloaded.
+    :param str encoding: Text encoding of the subtitle.
+    :param (str | None) subtitle_format: Subtitle format, None for automatic detection.
+    :param (float | None) fps: Framerate for frame-based formats (MicroDVD)
+    :param bool embedded: Whether the subtitle is embedded in the video or an external file
+    :param bool force_guessing_encoding: Guess encoding if None is defined
 
     """
 
     #: Name of the provider that returns that class of subtitle
     provider_name: ClassVar[str] = ''
 
-    #: Content as bytes
-    _content: bytes | None
-
-    #: Content as string
-    _text: str
-
-    #: Flag to assert if the subtitle raw content was decoded
-    _is_decoded: bool
-
-    #: Flag to assert if the subtitle is valid (None if it was not checked yet)
-    _is_valid: bool | None
-
-    #: Guess encoding if None is defined
-    _guess_encoding: bool
-
     #: Language of the subtitle
     language: Language
 
     #: Subtitle id
-    subtitle_id: str
+    subtitle_id: str = ''
 
-    #: Whether or not the subtitle is hearing impaired (None if unknown)
-    language_type: LanguageType
+    #: Whether the subtitle is for hearing impaired
+    _hearing_impaired: bool | None = field(eq=False, default=None)
+
+    #: Whether the subtitle is a foreign only / forced subtitle
+    _foreign_only: bool | None = field(eq=False, default=None)
 
     #: URL of the web page from which the subtitle can be downloaded
-    page_link: str | None
+    page_link: str | None = field(kw_only=True, default=None)
 
     #: Encoding to decode with when accessing :attr:`text`
-    encoding: str | None
+    encoding: str | None = field(kw_only=True, default=None, converter=check_encoding)
 
     #: Subtitle format, None for automatic detection
-    subtitle_format: str | None = None
+    subtitle_format: str | None = field(kw_only=True, default=None)
 
     #: Framerate for frame-based formats (MicroDVD)
-    fps: float | None
+    fps: float | None = field(kw_only=True, default=None, converter=ensure_positive)
 
     #: Whether the subtitle is embedded in the video or an external file
-    embedded: bool
+    embedded: bool = field(kw_only=True, default=False)
 
-    def __init__(
-        self,
-        language: Language,
-        subtitle_id: str = '',
-        *,
-        hearing_impaired: bool | None = None,
-        foreign_only: bool | None = None,
-        page_link: str | None = None,
-        encoding: str | None = None,
-        subtitle_format: str | None = None,
-        fps: float | None = None,
-        embedded: bool = False,
-        guess_encoding: bool = True,
-    ) -> None:
-        self._content = None
-        self._text = ''
-        self._is_decoded = False
-        self._is_valid = None
-        self._guess_encoding = guess_encoding
+    #: Guess encoding if None is defined
+    force_guessing_encoding: bool = field(kw_only=True, default=True, eq=False)
 
-        self.language = language
-        self.subtitle_id = subtitle_id
-        self.page_link = page_link
-        self.subtitle_format = subtitle_format
-        self.fps = fps if fps is not None and fps > 0 else None
-        self.embedded = embedded
+    #: Content as bytes
+    _content: bytes | None = field(init=False, default=None, eq=True)
 
-        self.language_type = LanguageType.from_flags(hearing_impaired=hearing_impaired, foreign_only=foreign_only)
-        self.encoding = None
-        # validate the encoding
-        if encoding:
-            try:
-                self.encoding = codecs.lookup(encoding).name
-            except (TypeError, LookupError):
-                logger.debug('Unsupported encoding %s', encoding)
+    #: Content as string
+    _text: str = field(init=False, default='', eq=False)
+
+    #: Flag to assert if the subtitle raw content was decoded
+    _is_decoded: bool = field(init=False, default=False, eq=False)
+
+    #: Flag to assert if the subtitle is valid (None if it was not checked yet)
+    _is_valid: bool | None = field(init=False, default=None, eq=False)
+
+    #: Language type: normal, hearing impaired, foreign only or unknown
+    _language_type: LanguageType = field(init=False, default=LanguageType.UNKNOWN, eq=True)
 
     @property
     def id(self) -> str:
@@ -189,14 +185,29 @@ class Subtitle:
         return self.id
 
     @property
+    def language_type(self) -> LanguageType:
+        """Language type: normal, hearing impaired, foreign only or unknown."""
+        return LanguageType.from_flags(hearing_impaired=self._hearing_impaired, foreign_only=self._foreign_only)
+
+    @property
     def hearing_impaired(self) -> bool | None:
         """Whether the subtitle is for hearing impaired."""
         return self.language_type.is_hearing_impaired()
+
+    @hearing_impaired.setter
+    def hearing_impaired(self, value: bool | None) -> None:
+        """Whether the subtitle is for hearing impaired."""
+        self._hearing_impaired = value
 
     @property
     def foreign_only(self) -> bool | None:
         """Whether the subtitle is a foreign only / forced subtitle."""
         return self.language_type.is_foreign_only()
+
+    @foreign_only.setter
+    def foreign_only(self, value: bool | None) -> None:
+        """Whether the subtitle is a foreign only / forced subtitle."""
+        self._foreign_only = value
 
     @property
     def content(self) -> bytes | None:
@@ -212,7 +223,7 @@ class Subtitle:
         self.clear_content()
         self._content = value
 
-        if self._guess_encoding and self.encoding is None:
+        if self.force_guessing_encoding and self.encoding is None:
             self.encoding = self.guess_encoding()
 
     @property
@@ -517,14 +528,13 @@ class EmbeddedSubtitle(Subtitle):
     def __init__(
         self,
         language: Language,
+        subtitle_id: str = 'embedded',
         *,
         hearing_impaired: bool | None = None,
         foreign_only: bool | None = None,
         encoding: str | None = None,
         subtitle_format: str | None = None,
     ) -> None:
-        subtitle_id = f'Embedded <{language}>'
-
         super().__init__(
             language,
             subtitle_id,
@@ -544,7 +554,7 @@ class EmbeddedSubtitle(Subtitle):
         elif self.language_type == LanguageType.FOREIGN_ONLY:
             extra = ' [fo]'
 
-        return f'{self.id}{extra}'
+        return f'{self.id} <{self.language}>{extra}'
 
 
 def get_subtitle_format(

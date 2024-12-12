@@ -208,6 +208,9 @@ ignore = [
     "D107",   # Missing docstring in `__init__`
     "D401",   # First line should be in imperative mood
 ]
+unfixable = [
+    "T201",
+]
 
 [tool.ruff.lint.per-file-ignores]
 "docs/conf*.py" = ["ALL"]

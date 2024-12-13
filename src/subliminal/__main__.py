@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from textwrap import dedent
 
-if len(__package__) == 0:
+if not (__name__ == '__main__' and __package__ == 'subliminal'):
     import sys
 
     print(  # noqa: T201

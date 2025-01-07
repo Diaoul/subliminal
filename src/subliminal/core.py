@@ -37,7 +37,7 @@ if TYPE_CHECKING:
     from subliminal.score import ComputeScore
 
 
-#: Supported archive extensions
+#: Supported archive extensions (.rar)
 ARCHIVE_EXTENSIONS = ('.rar',)
 
 logger = logging.getLogger(__name__)

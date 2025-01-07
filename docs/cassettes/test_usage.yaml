@@ -2,84 +2,95 @@ interactions:
 - request:
     body: null
     headers:
-      Accept: [application/json]
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      User-Agent: [Subliminal/2.1]
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.2
     method: GET
     uri: https://www.podnapisi.net/subtitles/search/advanced?keywords=The+Big+Bang+Theory&language=hu&seasons=5&episodes=18&movie_type=tv-series&movie_type=mini-series
   response:
-    body: {string: "{\n  \"all_pages\": 1, \n  \"data\": [\n    {\n      \"audited\"\
-        : true, \n      \"contributions\": [\n        {\n          \"contributor\"\
-        : {\n            \"id\": 40156, \n            \"name\": \"kvrle\", \n    \
-        \        \"type\": \"user\"\n          }, \n          \"role\": \"uploader\"\
-        , \n          \"share\": 0.0\n        }\n      ], \n      \"contributor\"\
-        : {\n        \"id\": 40156, \n        \"name\": \"kvrle\", \n        \"type\"\
-        : \"user\"\n      }, \n      \"created\": \"2012-02-26T00:42:49+00:00\", \n\
-        \      \"custom_releases\": [\n        \"The.Big.Bang.Theory.S05E18.HDTV-LOL\"\
-        , \n        \"The.Big.Bang.Theory.S05E18.720p.HDTV.x264-DIMENSION\"\n    \
-        \  ], \n      \"download\": \"/en/subtitles/hu-the-big-bang-theory-2007-S05E18-O/ZtAW/download\"\
-        , \n      \"flags\": [\n        \"high_definition\"\n      ], \n      \"fps\"\
-        : \"23.976\", \n      \"id\": \"ZtAW\", \n      \"language\": \"hu\", \n \
-        \     \"movie\": {\n        \"aliases\": [\n          \"Veliki pokovci\"\n\
-        \        ], \n        \"episode_info\": {\n          \"episode\": 18, \n \
-        \         \"id\": null, \n          \"season\": 5, \n          \"slug\": \"\
-        S05E18-O\", \n          \"title\": \"\", \n          \"type\": \"ordinary\"\
-        , \n          \"year\": null\n        }, \n        \"id\": \"uJE\", \n   \
-        \     \"posters\": {\n          \"inline\": \"/thumbnails/moviedb/inline/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        , \n          \"normal\": \"/thumbnails/moviedb/normal/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        , \n          \"small\": \"/thumbnails/moviedb/small/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        , \n          \"title\": \"/thumbnails/moviedb/title/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        \n        }, \n        \"providers\": [\n          \"omdb:sY0G\"\n       \
-        \ ], \n        \"slug\": \"the-big-bang-theory-2007-S05E18-O\", \n       \
-        \ \"title\": \"The Big Bang Theory\", \n        \"type\": \"tv-series\", \n\
-        \        \"year\": 2007\n      }, \n      \"notes\": \"\", \n      \"num_cds\"\
-        : 1, \n      \"rejected\": null, \n      \"releases\": [], \n      \"state\"\
-        : \"migration\", \n      \"stats\": {\n        \"downloads\": 4118, \n   \
-        \     \"lines\": 323\n      }, \n      \"url\": \"/en/subtitles/hu-the-big-bang-theory-2007-S05E18-O/ZtAW\"\
-        \n    }, \n    {\n      \"audited\": false, \n      \"contributions\": [\n\
-        \        {\n          \"contributor\": {\n            \"id\": 1, \n      \
-        \      \"name\": \"Anonymous\", \n            \"type\": \"user\"\n       \
-        \   }, \n          \"role\": \"uploader\", \n          \"share\": 0.0\n  \
-        \      }\n      ], \n      \"contributor\": {\n        \"id\": 1, \n     \
-        \   \"name\": \"Anonymous\", \n        \"type\": \"user\"\n      }, \n   \
-        \   \"created\": \"2012-02-25T02:49:35+00:00\", \n      \"custom_releases\"\
-        : [\n        \"The.Big.Bang.Theory.S05E18.HDTV.XviD-FQM\"\n      ], \n   \
-        \   \"download\": \"/en/subtitles/hu-the-big-bang-theory-2007-S05E18-O/ONAW/download\"\
-        , \n      \"flags\": [], \n      \"fps\": \"\", \n      \"id\": \"ONAW\",\
-        \ \n      \"language\": \"hu\", \n      \"movie\": {\n        \"aliases\"\
-        : [\n          \"Veliki pokovci\"\n        ], \n        \"episode_info\":\
-        \ {\n          \"episode\": 18, \n          \"id\": null, \n          \"season\"\
-        : 5, \n          \"slug\": \"S05E18-O\", \n          \"title\": \"\", \n \
-        \         \"type\": \"ordinary\", \n          \"year\": null\n        }, \n\
-        \        \"id\": \"uJE\", \n        \"posters\": {\n          \"inline\":\
-        \ \"/thumbnails/moviedb/inline/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        , \n          \"normal\": \"/thumbnails/moviedb/normal/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        , \n          \"small\": \"/thumbnails/moviedb/small/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        , \n          \"title\": \"/thumbnails/moviedb/title/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        \n        }, \n        \"providers\": [\n          \"omdb:sY0G\"\n       \
-        \ ], \n        \"slug\": \"the-big-bang-theory-2007-S05E18-O\", \n       \
-        \ \"title\": \"The Big Bang Theory\", \n        \"type\": \"tv-series\", \n\
-        \        \"year\": 2007\n      }, \n      \"notes\": null, \n      \"num_cds\"\
-        : 1, \n      \"rejected\": null, \n      \"releases\": [], \n      \"state\"\
-        : \"migration\", \n      \"stats\": {\n        \"downloads\": 421, \n    \
-        \    \"lines\": 323\n      }, \n      \"url\": \"/en/subtitles/hu-the-big-bang-theory-2007-S05E18-O/ONAW\"\
-        \n    }\n  ], \n  \"page\": 1, \n  \"per_page\": 50, \n  \"status\": \"ok\"\
-        \n}"}
+    body:
+      string: "{\n  \"all_pages\": 1, \n  \"data\": [\n    {\n      \"audited\": true,
+        \n      \"contributions\": [\n        {\n          \"contributor\": {\n            \"id\":
+        40156, \n            \"name\": \"kvrle\", \n            \"type\": \"user\"\n
+        \         }, \n          \"role\": \"uploader\", \n          \"share\": 0.0\n
+        \       }\n      ], \n      \"contributor\": {\n        \"id\": 40156, \n
+        \       \"name\": \"kvrle\", \n        \"type\": \"user\"\n      }, \n      \"created\":
+        \"2012-02-26T00:42:49+00:00\", \n      \"custom_releases\": [\n        \"The.Big.Bang.Theory.S05E18.HDTV-LOL\",
+        \n        \"The.Big.Bang.Theory.S05E18.720p.HDTV.x264-DIMENSION\"\n      ],
+        \n      \"download\": \"/en/subtitles/hu-the-big-bang-theory-2007-S05E18-O/ZtAW/download\",
+        \n      \"flags\": [\n        \"high_definition\"\n      ], \n      \"fps\":
+        \"23.976\", \n      \"id\": \"ZtAW\", \n      \"language\": \"hu\", \n      \"movie\":
+        {\n        \"aliases\": [\n          \"Veliki pokovci\"\n        ], \n        \"episode_info\":
+        {\n          \"episode\": 18, \n          \"id\": null, \n          \"season\":
+        5, \n          \"slug\": \"S05E18-O\", \n          \"title\": \"\", \n          \"type\":
+        \"ordinary\", \n          \"year\": null\n        }, \n        \"id\": \"uJE\",
+        \n        \"posters\": {\n          \"inline\": \"/thumbnails/moviedb/inline/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\",
+        \n          \"normal\": \"/thumbnails/moviedb/normal/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\",
+        \n          \"small\": \"/thumbnails/moviedb/small/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\",
+        \n          \"title\": \"/thumbnails/moviedb/title/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\n
+        \       }, \n        \"providers\": [\n          \"omdb:sY0G\"\n        ],
+        \n        \"slug\": \"the-big-bang-theory-2007-S05E18-O\", \n        \"title\":
+        \"The Big Bang Theory\", \n        \"type\": \"tv-series\", \n        \"year\":
+        2007\n      }, \n      \"notes\": \"\", \n      \"num_cds\": 1, \n      \"rejected\":
+        null, \n      \"releases\": [], \n      \"state\": \"migration\", \n      \"stats\":
+        {\n        \"downloads\": 4431, \n        \"lines\": 323\n      }, \n      \"url\":
+        \"/en/subtitles/hu-the-big-bang-theory-2007-S05E18-O/ZtAW\"\n    }, \n    {\n
+        \     \"audited\": false, \n      \"contributions\": [\n        {\n          \"contributor\":
+        {\n            \"id\": 1, \n            \"name\": \"Anonymous\", \n            \"type\":
+        \"user\"\n          }, \n          \"role\": \"uploader\", \n          \"share\":
+        0.0\n        }\n      ], \n      \"contributor\": {\n        \"id\": 1, \n
+        \       \"name\": \"Anonymous\", \n        \"type\": \"user\"\n      }, \n
+        \     \"created\": \"2012-02-25T02:49:35+00:00\", \n      \"custom_releases\":
+        [\n        \"The.Big.Bang.Theory.S05E18.HDTV.XviD-FQM\"\n      ], \n      \"download\":
+        \"/en/subtitles/hu-the-big-bang-theory-2007-S05E18-O/ONAW/download\", \n      \"flags\":
+        [], \n      \"fps\": \"\", \n      \"id\": \"ONAW\", \n      \"language\":
+        \"hu\", \n      \"movie\": {\n        \"aliases\": [\n          \"Veliki pokovci\"\n
+        \       ], \n        \"episode_info\": {\n          \"episode\": 18, \n          \"id\":
+        null, \n          \"season\": 5, \n          \"slug\": \"S05E18-O\", \n          \"title\":
+        \"\", \n          \"type\": \"ordinary\", \n          \"year\": null\n        },
+        \n        \"id\": \"uJE\", \n        \"posters\": {\n          \"inline\":
+        \"/thumbnails/moviedb/inline/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\",
+        \n          \"normal\": \"/thumbnails/moviedb/normal/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\",
+        \n          \"small\": \"/thumbnails/moviedb/small/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\",
+        \n          \"title\": \"/thumbnails/moviedb/title/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\n
+        \       }, \n        \"providers\": [\n          \"omdb:sY0G\"\n        ],
+        \n        \"slug\": \"the-big-bang-theory-2007-S05E18-O\", \n        \"title\":
+        \"The Big Bang Theory\", \n        \"type\": \"tv-series\", \n        \"year\":
+        2007\n      }, \n      \"notes\": null, \n      \"num_cds\": 1, \n      \"rejected\":
+        null, \n      \"releases\": [], \n      \"state\": \"migration\", \n      \"stats\":
+        {\n        \"downloads\": 426, \n        \"lines\": 323\n      }, \n      \"url\":
+        \"/en/subtitles/hu-the-big-bang-theory-2007-S05E18-O/ONAW\"\n    }\n  ], \n
+        \ \"page\": 1, \n  \"per_page\": 50, \n  \"status\": \"ok\"\n}"
     headers:
-      Connection: [keep-alive]
-      Content-Length: ['3982']
-      Content-Type: [application/json]
-      Date: ['Sun, 24 Feb 2019 11:52:04 GMT']
-      Server: [nginx/1.8.0]
-    status: {code: 200, message: OK}
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '3982'
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 06 Jan 2025 20:53:38 GMT
+      Server:
+      - nginx
+    status:
+      code: 200
+      message: OK
 - request:
     body: null
     headers:
-      Accept: [application/json]
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      User-Agent: [Subliminal/2.1]
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.2
     method: GET
     uri: https://www.podnapisi.net/subtitles/ZtAW/download?container=zip
   response:
@@ -271,97 +282,119 @@ interactions:
         CllAZeWzQ10oAAAjXwAANwAAAAAAAAAAACAAAAAAAAAAVGhlLkJpZy5CYW5nLlRoZW9yeS5TMDVF
         MTguNzIwcC5IRFRWLlgyNjQtRElNRU5TSU9OLnNydFBLBQYAAAAAAQABAGUAAACyKAAAAAA=
     headers:
-      Accept-Ranges: [bytes]
-      Connection: [keep-alive]
-      Content-Disposition: [attachment; filename="e638ea178f406cb584f48051501e2cb4db4fce1d.zip"]
-      Content-Length: ['10541']
-      Content-Type: [application/octet-stream]
-      Date: ['Sun, 24 Feb 2019 11:52:04 GMT']
-      ETag: ['"4f497ffb-292d"']
-      Last-Modified: ['Sun, 26 Feb 2012 00:42:35 GMT']
-      Server: [nginx/1.8.0]
-    status: {code: 200, message: OK}
+      Accept-Ranges:
+      - bytes
+      Connection:
+      - keep-alive
+      Content-Disposition:
+      - attachment; filename="e638ea178f406cb584f48051501e2cb4db4fce1d.zip"
+      Content-Length:
+      - '10541'
+      Content-Type:
+      - application/octet-stream
+      Date:
+      - Mon, 06 Jan 2025 20:53:38 GMT
+      ETag:
+      - '"4f497ffb-292d"'
+      Last-Modified:
+      - Sun, 26 Feb 2012 00:42:35 GMT
+      Server:
+      - nginx
+    status:
+      code: 200
+      message: OK
 - request:
     body: null
     headers:
-      Accept: [application/json]
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      User-Agent: [Subliminal/2.1]
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.2
     method: GET
     uri: https://www.podnapisi.net/subtitles/search/advanced?keywords=The+Big+Bang+Theory&language=hu&seasons=5&episodes=18&movie_type=tv-series&movie_type=mini-series
   response:
-    body: {string: "{\n  \"all_pages\": 1, \n  \"data\": [\n    {\n      \"audited\"\
-        : true, \n      \"contributions\": [\n        {\n          \"contributor\"\
-        : {\n            \"id\": 40156, \n            \"name\": \"kvrle\", \n    \
-        \        \"type\": \"user\"\n          }, \n          \"role\": \"uploader\"\
-        , \n          \"share\": 0.0\n        }\n      ], \n      \"contributor\"\
-        : {\n        \"id\": 40156, \n        \"name\": \"kvrle\", \n        \"type\"\
-        : \"user\"\n      }, \n      \"created\": \"2012-02-26T00:42:49+00:00\", \n\
-        \      \"custom_releases\": [\n        \"The.Big.Bang.Theory.S05E18.HDTV-LOL\"\
-        , \n        \"The.Big.Bang.Theory.S05E18.720p.HDTV.x264-DIMENSION\"\n    \
-        \  ], \n      \"download\": \"/en/subtitles/hu-the-big-bang-theory-2007-S05E18-O/ZtAW/download\"\
-        , \n      \"flags\": [\n        \"high_definition\"\n      ], \n      \"fps\"\
-        : \"23.976\", \n      \"id\": \"ZtAW\", \n      \"language\": \"hu\", \n \
-        \     \"movie\": {\n        \"aliases\": [\n          \"Veliki pokovci\"\n\
-        \        ], \n        \"episode_info\": {\n          \"episode\": 18, \n \
-        \         \"id\": null, \n          \"season\": 5, \n          \"slug\": \"\
-        S05E18-O\", \n          \"title\": \"\", \n          \"type\": \"ordinary\"\
-        , \n          \"year\": null\n        }, \n        \"id\": \"uJE\", \n   \
-        \     \"posters\": {\n          \"inline\": \"/thumbnails/moviedb/inline/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        , \n          \"normal\": \"/thumbnails/moviedb/normal/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        , \n          \"small\": \"/thumbnails/moviedb/small/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        , \n          \"title\": \"/thumbnails/moviedb/title/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        \n        }, \n        \"providers\": [\n          \"omdb:sY0G\"\n       \
-        \ ], \n        \"slug\": \"the-big-bang-theory-2007-S05E18-O\", \n       \
-        \ \"title\": \"The Big Bang Theory\", \n        \"type\": \"tv-series\", \n\
-        \        \"year\": 2007\n      }, \n      \"notes\": \"\", \n      \"num_cds\"\
-        : 1, \n      \"rejected\": null, \n      \"releases\": [], \n      \"state\"\
-        : \"migration\", \n      \"stats\": {\n        \"downloads\": 4118, \n   \
-        \     \"lines\": 323\n      }, \n      \"url\": \"/en/subtitles/hu-the-big-bang-theory-2007-S05E18-O/ZtAW\"\
-        \n    }, \n    {\n      \"audited\": false, \n      \"contributions\": [\n\
-        \        {\n          \"contributor\": {\n            \"id\": 1, \n      \
-        \      \"name\": \"Anonymous\", \n            \"type\": \"user\"\n       \
-        \   }, \n          \"role\": \"uploader\", \n          \"share\": 0.0\n  \
-        \      }\n      ], \n      \"contributor\": {\n        \"id\": 1, \n     \
-        \   \"name\": \"Anonymous\", \n        \"type\": \"user\"\n      }, \n   \
-        \   \"created\": \"2012-02-25T02:49:35+00:00\", \n      \"custom_releases\"\
-        : [\n        \"The.Big.Bang.Theory.S05E18.HDTV.XviD-FQM\"\n      ], \n   \
-        \   \"download\": \"/en/subtitles/hu-the-big-bang-theory-2007-S05E18-O/ONAW/download\"\
-        , \n      \"flags\": [], \n      \"fps\": \"\", \n      \"id\": \"ONAW\",\
-        \ \n      \"language\": \"hu\", \n      \"movie\": {\n        \"aliases\"\
-        : [\n          \"Veliki pokovci\"\n        ], \n        \"episode_info\":\
-        \ {\n          \"episode\": 18, \n          \"id\": null, \n          \"season\"\
-        : 5, \n          \"slug\": \"S05E18-O\", \n          \"title\": \"\", \n \
-        \         \"type\": \"ordinary\", \n          \"year\": null\n        }, \n\
-        \        \"id\": \"uJE\", \n        \"posters\": {\n          \"inline\":\
-        \ \"/thumbnails/moviedb/inline/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        , \n          \"normal\": \"/thumbnails/moviedb/normal/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        , \n          \"small\": \"/thumbnails/moviedb/small/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        , \n          \"title\": \"/thumbnails/moviedb/title/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        \n        }, \n        \"providers\": [\n          \"omdb:sY0G\"\n       \
-        \ ], \n        \"slug\": \"the-big-bang-theory-2007-S05E18-O\", \n       \
-        \ \"title\": \"The Big Bang Theory\", \n        \"type\": \"tv-series\", \n\
-        \        \"year\": 2007\n      }, \n      \"notes\": null, \n      \"num_cds\"\
-        : 1, \n      \"rejected\": null, \n      \"releases\": [], \n      \"state\"\
-        : \"migration\", \n      \"stats\": {\n        \"downloads\": 421, \n    \
-        \    \"lines\": 323\n      }, \n      \"url\": \"/en/subtitles/hu-the-big-bang-theory-2007-S05E18-O/ONAW\"\
-        \n    }\n  ], \n  \"page\": 1, \n  \"per_page\": 50, \n  \"status\": \"ok\"\
-        \n}"}
+    body:
+      string: "{\n  \"all_pages\": 1, \n  \"data\": [\n    {\n      \"audited\": true,
+        \n      \"contributions\": [\n        {\n          \"contributor\": {\n            \"id\":
+        40156, \n            \"name\": \"kvrle\", \n            \"type\": \"user\"\n
+        \         }, \n          \"role\": \"uploader\", \n          \"share\": 0.0\n
+        \       }\n      ], \n      \"contributor\": {\n        \"id\": 40156, \n
+        \       \"name\": \"kvrle\", \n        \"type\": \"user\"\n      }, \n      \"created\":
+        \"2012-02-26T00:42:49+00:00\", \n      \"custom_releases\": [\n        \"The.Big.Bang.Theory.S05E18.HDTV-LOL\",
+        \n        \"The.Big.Bang.Theory.S05E18.720p.HDTV.x264-DIMENSION\"\n      ],
+        \n      \"download\": \"/en/subtitles/hu-the-big-bang-theory-2007-S05E18-O/ZtAW/download\",
+        \n      \"flags\": [\n        \"high_definition\"\n      ], \n      \"fps\":
+        \"23.976\", \n      \"id\": \"ZtAW\", \n      \"language\": \"hu\", \n      \"movie\":
+        {\n        \"aliases\": [\n          \"Veliki pokovci\"\n        ], \n        \"episode_info\":
+        {\n          \"episode\": 18, \n          \"id\": null, \n          \"season\":
+        5, \n          \"slug\": \"S05E18-O\", \n          \"title\": \"\", \n          \"type\":
+        \"ordinary\", \n          \"year\": null\n        }, \n        \"id\": \"uJE\",
+        \n        \"posters\": {\n          \"inline\": \"/thumbnails/moviedb/inline/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\",
+        \n          \"normal\": \"/thumbnails/moviedb/normal/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\",
+        \n          \"small\": \"/thumbnails/moviedb/small/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\",
+        \n          \"title\": \"/thumbnails/moviedb/title/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\n
+        \       }, \n        \"providers\": [\n          \"omdb:sY0G\"\n        ],
+        \n        \"slug\": \"the-big-bang-theory-2007-S05E18-O\", \n        \"title\":
+        \"The Big Bang Theory\", \n        \"type\": \"tv-series\", \n        \"year\":
+        2007\n      }, \n      \"notes\": \"\", \n      \"num_cds\": 1, \n      \"rejected\":
+        null, \n      \"releases\": [], \n      \"state\": \"migration\", \n      \"stats\":
+        {\n        \"downloads\": 4431, \n        \"lines\": 323\n      }, \n      \"url\":
+        \"/en/subtitles/hu-the-big-bang-theory-2007-S05E18-O/ZtAW\"\n    }, \n    {\n
+        \     \"audited\": false, \n      \"contributions\": [\n        {\n          \"contributor\":
+        {\n            \"id\": 1, \n            \"name\": \"Anonymous\", \n            \"type\":
+        \"user\"\n          }, \n          \"role\": \"uploader\", \n          \"share\":
+        0.0\n        }\n      ], \n      \"contributor\": {\n        \"id\": 1, \n
+        \       \"name\": \"Anonymous\", \n        \"type\": \"user\"\n      }, \n
+        \     \"created\": \"2012-02-25T02:49:35+00:00\", \n      \"custom_releases\":
+        [\n        \"The.Big.Bang.Theory.S05E18.HDTV.XviD-FQM\"\n      ], \n      \"download\":
+        \"/en/subtitles/hu-the-big-bang-theory-2007-S05E18-O/ONAW/download\", \n      \"flags\":
+        [], \n      \"fps\": \"\", \n      \"id\": \"ONAW\", \n      \"language\":
+        \"hu\", \n      \"movie\": {\n        \"aliases\": [\n          \"Veliki pokovci\"\n
+        \       ], \n        \"episode_info\": {\n          \"episode\": 18, \n          \"id\":
+        null, \n          \"season\": 5, \n          \"slug\": \"S05E18-O\", \n          \"title\":
+        \"\", \n          \"type\": \"ordinary\", \n          \"year\": null\n        },
+        \n        \"id\": \"uJE\", \n        \"posters\": {\n          \"inline\":
+        \"/thumbnails/moviedb/inline/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\",
+        \n          \"normal\": \"/thumbnails/moviedb/normal/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\",
+        \n          \"small\": \"/thumbnails/moviedb/small/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\",
+        \n          \"title\": \"/thumbnails/moviedb/title/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\n
+        \       }, \n        \"providers\": [\n          \"omdb:sY0G\"\n        ],
+        \n        \"slug\": \"the-big-bang-theory-2007-S05E18-O\", \n        \"title\":
+        \"The Big Bang Theory\", \n        \"type\": \"tv-series\", \n        \"year\":
+        2007\n      }, \n      \"notes\": null, \n      \"num_cds\": 1, \n      \"rejected\":
+        null, \n      \"releases\": [], \n      \"state\": \"migration\", \n      \"stats\":
+        {\n        \"downloads\": 426, \n        \"lines\": 323\n      }, \n      \"url\":
+        \"/en/subtitles/hu-the-big-bang-theory-2007-S05E18-O/ONAW\"\n    }\n  ], \n
+        \ \"page\": 1, \n  \"per_page\": 50, \n  \"status\": \"ok\"\n}"
     headers:
-      Connection: [keep-alive]
-      Content-Length: ['3982']
-      Content-Type: [application/json]
-      Date: ['Sun, 24 Feb 2019 11:52:05 GMT']
-      Server: [nginx/1.8.0]
-    status: {code: 200, message: OK}
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '3982'
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 06 Jan 2025 20:53:39 GMT
+      Server:
+      - nginx
+    status:
+      code: 200
+      message: OK
 - request:
     body: null
     headers:
-      Accept: [application/json]
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      User-Agent: [Subliminal/2.1]
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.2
     method: GET
     uri: https://www.podnapisi.net/subtitles/ZtAW/download?container=zip
   response:
@@ -553,14 +586,25 @@ interactions:
         CllAZeWzQ10oAAAjXwAANwAAAAAAAAAAACAAAAAAAAAAVGhlLkJpZy5CYW5nLlRoZW9yeS5TMDVF
         MTguNzIwcC5IRFRWLlgyNjQtRElNRU5TSU9OLnNydFBLBQYAAAAAAQABAGUAAACyKAAAAAA=
     headers:
-      Accept-Ranges: [bytes]
-      Connection: [keep-alive]
-      Content-Disposition: [attachment; filename="e638ea178f406cb584f48051501e2cb4db4fce1d.zip"]
-      Content-Length: ['10541']
-      Content-Type: [application/octet-stream]
-      Date: ['Sun, 24 Feb 2019 11:52:05 GMT']
-      ETag: ['"4f497ffb-292d"']
-      Last-Modified: ['Sun, 26 Feb 2012 00:42:35 GMT']
-      Server: [nginx/1.8.0]
-    status: {code: 200, message: OK}
+      Accept-Ranges:
+      - bytes
+      Connection:
+      - keep-alive
+      Content-Disposition:
+      - attachment; filename="e638ea178f406cb584f48051501e2cb4db4fce1d.zip"
+      Content-Length:
+      - '10541'
+      Content-Type:
+      - application/octet-stream
+      Date:
+      - Mon, 06 Jan 2025 20:53:39 GMT
+      ETag:
+      - '"4f497ffb-292d"'
+      Last-Modified:
+      - Sun, 26 Feb 2012 00:42:35 GMT
+      Server:
+      - nginx
+    status:
+      code: 200
+      message: OK
 version: 1

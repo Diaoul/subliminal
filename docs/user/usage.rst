@@ -5,57 +5,17 @@ CLI
 
     .. testsetup::
 
-        from importlib import import_module
+        import os
 
-        from babelfish import Language
-        from subliminal import provider_manager
-        from subliminal.providers.mock import mock_subtitle_provider
+        from vcr import VCR
 
-        subtitle_pool = [
-            {
-                "language": Language.fromietf('en'),
-                "subtitle_id": 'ZQo4',
-                "fake_content": (
-                    b'1\n00:00:04,254 --> 00:00:07,214\n'
-                    b'I\'m gonna run to the store.\nI\'ll pick you up when you\'re done.\n\n'
-                    b'2\n00:00:07,424 --> 00:00:10,968\n'
-                    b'Okay. L like it a little better\nwhen you stay, but all right.\n\n'
-                    b'3\n00:00:11,511 --> 00:00:12,803\n'
-                    b'- Hey, Sheldon.\n- Hello.\n\n'
-                ),
-                "video_name": 'The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.mp4',
-                "matches": {'country', 'episode', 'season', 'series', 'video_codec', 'year'},
-            },
-            {
-                "language": Language.fromietf('hu'),
-                "subtitle_id": 'ZtAW',
-                "fake_content": (
-                    b'1\n00:00:02,090 --> 00:00:03,970\n'
-                    b'Elszaladok a boltba\nn\xe9h\xe1ny apr\xf3s\xe1g\xe9rt.\n\n'
-                    b'2\n00:00:04,080 --> 00:00:05,550\n'
-                    b'\xc9rted j\xf6v\xf6k, mikor v\xe9gezt\xe9l.\n\n'
-                    b'3\n00:00:05,650 --> 00:00:08,390\n'
-                    b'J\xf3l van. \xc9n jobb szeretem,\nmikor itt maradsz, de j\xf3l van...\n\n'
-                ),
-                "video_name": 'The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.mp4',
-                "matches": {'country', 'episode', 'release_group', 'season', 'series', 'source', 'video_codec', 'year'},
-            },
-            {
-                "language": Language.fromietf('hu'),
-                "subtitle_id": 'ONAW',
-                "fake_content": (
-                    b'1\n00:00:02,090 --> 00:00:03,970\n'
-                    b'Elszaladok a boltba\nn\xe9h\xe1ny apr\xf3s\xe1g\xe9rt.\n\n'
-                    b'2\n00:00:04,080 --> 00:00:05,550\n'
-                    b'\xc9rted j\xf6v\xf6k, mikor v\xe9gezt\xe9l.\n\n'
-                ),
-                "video_name": 'The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.mp4',
-                "matches": {'country', 'episode', 'season', 'series', 'source', 'year'},
-            },
-        ]
-
-        ep = mock_subtitle_provider("Custom", subtitle_pool)
-        provider_manager.register(ep)
+        vcr = VCR(
+            path_transformer=lambda path: path + '.yaml',
+            record_mode=os.environ.get('VCR_RECORD_MODE', 'once'),
+            match_on=['method', 'scheme', 'host', 'port', 'path', 'query', 'body'],
+            cassette_library_dir=os.path.realpath(os.path.join('docs', 'cassettes')),
+        )
+        vcr.use_cassette('test_usage')
 
 
 Download English subtitles::
@@ -150,9 +110,9 @@ Listing
 To list subtitles, subliminal provides a :func:`~subliminal.core.list_subtitles` function that will return all found
 subtitles:
 
-    >>> subtitles = list_subtitles([video], {Language('hun')}, providers=['custom'])
+    >>> subtitles = list_subtitles([video], {Language('hun')}, providers=['podnapisi'])
     >>> subtitles[video]
-    [<CustomSubtitle 'ZtAW' [hu]>, <CustomSubtitle 'ONAW' [hu]>]
+    [<PodnapisiSubtitle 'ZtAW' [hu]>, <PodnapisiSubtitle 'ONAW' [hu]>]
 
 .. note::
 
@@ -174,8 +134,8 @@ And then compute a score with those matches with :func:`~subliminal.score.comput
 
     >>> for s in subtitles[video]:
     ...     {s: compute_score(s, video)}
-    {<CustomSubtitle 'ZtAW' [hu]>: 789}
-    {<CustomSubtitle 'ONAW' [hu]>: 772}
+    {<PodnapisiSubtitle 'ZtAW' [hu]>: 789}
+    {<PodnapisiSubtitle 'ONAW' [hu]>: 772}
 
 Now you should have a better idea about which one you should choose.
 
@@ -201,9 +161,9 @@ Downloading best subtitles
 Downloading best subtitles is what you want to do in almost all cases, as a shortcut for listing, scoring and
 downloading you can use :func:`~subliminal.core.download_best_subtitles`:
 
-    >>> best_subtitles = download_best_subtitles([video], {Language('hun')}, providers=['custom'])
+    >>> best_subtitles = download_best_subtitles([video], {Language('hun')}, providers=['podnapisi'])
     >>> best_subtitles[video]
-    [<CustomSubtitle 'ZtAW' [hu]>]
+    [<PodnapisiSubtitle 'ZtAW' [hu]>]
     >>> best_subtitle = best_subtitles[video][0]
     >>> best_subtitle.content.split(b'\n')[2]
     b'Elszaladok a boltba'
@@ -215,7 +175,7 @@ Save
 We got ourselves a nice subtitle, now we can save it on the file system using :func:`~subliminal.core.save_subtitles`:
 
     >>> save_subtitles(video, [best_subtitle])
-    [<CustomSubtitle 'ZtAW' [hu]>]
+    [<PodnapisiSubtitle 'ZtAW' [hu]>]
     >>> 'The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.hu.srt' in os.listdir()
     True
 

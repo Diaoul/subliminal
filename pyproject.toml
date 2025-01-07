@@ -42,8 +42,7 @@ dependencies = [
     "click-option-group>=0.5.6",
     "dogpile.cache>=1.0",
     "guessit>=3.0.0",
-    "knowit>=0.5.2; python_version <= '3.8'",
-    "knowit>=0.5.5; python_version > '3.8'",
+    "knowit>=0.5.5",
     "platformdirs>=3",
     "pysubs2>=1.7",
     "rarfile>=2.7",
@@ -61,6 +60,7 @@ docs = [
     "sphinx_rtd_theme>=2",
     "sphinxcontrib-programoutput",
     "sphinx_autodoc_typehints",
+    "vcrpy>=5",  # keep synchronized with tests dependencies
     "towncrier",
 ]
 tests = [
@@ -69,7 +69,7 @@ tests = [
     "pytest-cov",
     "pytest-xdist",
     "sympy",
-    "vcrpy>=5",
+    "vcrpy>=5",  # keep synchronized with docs dependencies
     "importlib_metadata>=4.6; python_version<'3.10'",
 ]
 types = [
@@ -125,7 +125,6 @@ source = "vcs"
 # https://docs.pytest.org/en/6.2.x/customize.html
 [tool.pytest.ini_options]
 minversion = "6.0"
-testpaths = ["tests"]
 addopts = "--import-mode=importlib --doctest-glob='*.rst'"
 markers = [
     "integration",
@@ -314,8 +313,10 @@ extend-ignore-re = [
     "(?Rm)^.*#\\s*spellchecker:\\s*disable-line$",
     "#\\s*spellchecker:off\\s*\\n.*\\n\\s*#\\s*spellchecker:on"
 ]
+
 [tool.typos.default.extend-words]
 fo = "fo"
+
 [tool.typos.default.extend-identifiers]
 tha = "tha"
 bre = "bre"

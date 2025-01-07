@@ -21,10 +21,10 @@ clone your fork locally and install a development version::
 
     $ git clone https://github.com/<my-username>/subliminal
     $ cd subliminal
-    $ pip install --user -e '.[dev,test,docs]'
+    $ pip install --user -e '.[dev,tests,docs]'
 
 External dependencies
 ---------------------
 
-To extract information about the video files, `subliminal` uses `knowit <https://github.com/ratoaq2/knowit`.
-For better results, make sure one of its provider is installed, for instance `MediaInfo <https://mediaarea.net/en/MediaInfo>`.
+To extract information about the video files, ``subliminal`` uses `knowit <https://github.com/ratoaq2/knowit>`_.
+For better results, make sure one of its provider is installed, for instance `MediaInfo <https://mediaarea.net/en/MediaInfo>`_.

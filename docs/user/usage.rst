@@ -47,6 +47,12 @@ Example of a ``subliminal.toml`` file:
 
 See :ref:`cli` for more details on the available commands and options.
 
+.. note::
+
+    The subliminal module can also be called from the command line::
+
+        $ python -m subliminal download -h
+
 
 Nautilus/Nemo integration
 -------------------------

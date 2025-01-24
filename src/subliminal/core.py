@@ -9,12 +9,12 @@ import os
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
 from typing import TYPE_CHECKING, Any
-from zipfile import BadZipfile
 
 from babelfish import Language, LanguageReverseError  # type: ignore[import-untyped]
 from guessit import guessit  # type: ignore[import-untyped]
-from rarfile import BadRarFile, Error, NotRarFile, RarCannotExec, RarFile, is_rarfile  # type: ignore[import-untyped]
 
+from .archives import ARCHIVE_ERRORS, ARCHIVE_EXTENSIONS, is_supported_archive, scan_archive
+from .exceptions import ArchiveError
 from .extensions import (
     discarded_episode_refiners,
     discarded_movie_refiners,
@@ -35,10 +35,6 @@ if TYPE_CHECKING:
 
     from subliminal.providers import Provider
     from subliminal.score import ComputeScore
-
-
-#: Supported archive extensions (.rar)
-ARCHIVE_EXTENSIONS = ('.rar',)
 
 logger = logging.getLogger(__name__)
 
@@ -200,7 +196,7 @@ class ProviderPool:
         logger.info('Downloading subtitle %r', subtitle)
         try:
             self[subtitle.provider_name].download_subtitle(subtitle)
-        except (BadZipfile, BadRarFile):  # pragma: no cover
+        except ARCHIVE_ERRORS:  # type: ignore[misc]  # pragma: no cover
             logger.exception('Bad archive for subtitle %r', subtitle)
         except Exception as e:  # noqa: BLE001
             handle_exception(e, f'Discarding provider {subtitle.provider_name}')
@@ -511,67 +507,6 @@ def scan_video(path: str | os.PathLike, name: str | None = None) -> Video:
     return video
 
 
-def scan_archive(path: str | os.PathLike, name: str | None = None) -> Video:  # pragma: no cover
-    """Scan an archive from a `path`.
-
-    :param str path: existing path to the archive.
-    :param str name: if defined, name to use with guessit instead of the path.
-    :return: the scanned video.
-    :rtype: :class:`~subliminal.video.Video`
-    :raises: :class:`ValueError`: video path is not well defined.
-    """
-    path = os.fspath(path)
-    # check for non-existing path
-    if not os.path.exists(path):  # pragma: no cover
-        msg = 'Path does not exist'
-        raise ValueError(msg)
-
-    if not is_rarfile(path):
-        msg = f'{os.path.splitext(path)[1]!r} is not a valid archive'
-        raise ValueError(msg)
-
-    dir_path, filename = os.path.split(path)
-
-    logger.info('Scanning archive %r in %r', filename, dir_path)
-
-    # Get filename and file size from RAR
-    rar = RarFile(path)
-
-    # check that the rar doesnt need a password
-    if rar.needs_password():
-        msg = 'Rar requires a password'
-        raise ValueError(msg)
-
-    # raise an exception if the rar file is broken
-    # must be called to avoid a potential deadlock with some broken rars
-    rar.testrar()
-
-    file_infos = [f for f in rar.infolist() if not f.isdir() and f.filename.endswith(VIDEO_EXTENSIONS)]
-
-    # sort by file size descending, the largest video in the archive is the one we want, there may be samples or intros
-    file_infos.sort(key=operator.attrgetter('file_size'), reverse=True)
-
-    # no video found
-    if not file_infos:
-        msg = 'No video in archive'
-        raise ValueError(msg)
-
-    # Free the information about irrelevant files before guessing
-    file_info = file_infos[0]
-
-    # guess
-    video_filename = file_info.filename
-    video_path = os.path.join(dir_path, video_filename)
-
-    repl = name if name else video_path
-    video = Video.fromguess(video_path, guessit(repl))
-
-    # size
-    video.size = file_info.file_size
-
-    return video
-
-
 def scan_videos(
     path: str | os.PathLike,
     *,
@@ -663,10 +598,10 @@ def scan_videos(
                 except ValueError:  # pragma: no cover
                     logger.exception('Error scanning video')
                     continue
-            elif archives and filename.lower().endswith(ARCHIVE_EXTENSIONS):  # archive
+            elif archives and is_supported_archive(filename):  # archive
                 try:
                     video = scan_archive(filepath, name=name)
-                except (Error, NotRarFile, RarCannotExec, ValueError):  # pragma: no cover
+                except (ArchiveError, ValueError):  # pragma: no cover
                     logger.exception('Error scanning archive')
                     continue
             else:  # pragma: no cover

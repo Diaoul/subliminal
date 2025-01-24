@@ -8,6 +8,7 @@ import os
 import pathlib
 import re
 import traceback
+import warnings
 from collections import defaultdict
 from collections.abc import Mapping
 from datetime import timedelta
@@ -305,6 +306,27 @@ options_from_refiners = options_from_managers('refiner', refiner_options, group=
     expose_value=True,
     help='Path to the cache directory.',
 )
+@providers_config.option(
+    '--addic7ed',
+    type=click.STRING,
+    nargs=2,
+    metavar='USERNAME PASSWORD',
+    help='DEPRECATED: Addic7ed configuration.',
+)
+@providers_config.option(
+    '--opensubtitles',
+    type=click.STRING,
+    nargs=2,
+    metavar='USERNAME PASSWORD',
+    help='DEPRECATED: OpenSubtitles configuration.',
+)
+@providers_config.option(
+    '--opensubtitlescom',
+    type=click.STRING,
+    nargs=2,
+    metavar='USERNAME PASSWORD',
+    help='DEPRECATED: OpenSubtitlesCom configuration.',
+)
 @options_from_providers
 @options_from_refiners
 @click.option('--debug', is_flag=True, help='Print useful information for debugging subliminal and for reporting bugs.')
@@ -406,6 +428,20 @@ def subliminal(
 
     ctx.obj['provider_configs'] = provider_configs
     ctx.obj['refiner_configs'] = refiner_configs
+
+    # Deprecated options
+    deprecated_options = ['addic7ed', 'opensubtitles', 'opensubtitlescom']
+    for provider in deprecated_options:
+        option_value = kwargs.get(provider)
+        if option_value is not None:
+            msg = (
+                f'option --{provider} is deprecated, use --provider.{provider}.username and '
+                f'--provider.{provider}.password'
+            )
+            warnings.warn(msg, DeprecationWarning, stacklevel=2)
+
+            provider_configs[provider]['username'] = option_value[0]
+            provider_configs[provider]['password'] = option_value[1]
 
 
 @subliminal.command()

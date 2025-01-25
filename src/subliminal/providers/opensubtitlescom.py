@@ -172,6 +172,7 @@ class OpenSubtitlesComSubtitle(Subtitle):
     moviehash_match: bool
     file_id: int
     file_name: str
+    fps: float | None
 
     def __init__(
         self,
@@ -194,6 +195,7 @@ class OpenSubtitlesComSubtitle(Subtitle):
         series_tmdb_id: str | None = None,
         download_count: int | None = None,
         machine_translated: bool | None = None,
+        fps: float | None = None,
         imdb_match: bool = False,
         tmdb_match: bool = False,
         moviehash_match: bool = False,
@@ -205,6 +207,7 @@ class OpenSubtitlesComSubtitle(Subtitle):
             subtitle_id,
             hearing_impaired=hearing_impaired,
             foreign_only=foreign_only,
+            fps=fps,
             page_link=None,
             encoding='utf-8',
         )
@@ -248,7 +251,7 @@ class OpenSubtitlesComSubtitle(Subtitle):
         moviehash_match = bool(attributes.get('moviehash_match', False))
         download_count = int(attributes.get('download_count'))
         machine_translated = bool(int(attributes.get('machine_translated')))
-        # fps = float(attributes.get('fps'))
+        fps: float | None = float(attributes.get('fps')) or None
         # from_trusted = bool(int(attributes.get('from_trusted')))
         # uploader_rank = str(attributes.get('uploader', {}).get("rank"))
         # foreign_parts_only = bool(int(attributes.get('foreign_parts_only')))
@@ -290,6 +293,7 @@ class OpenSubtitlesComSubtitle(Subtitle):
             series_tmdb_id=series_tmdb_id,
             download_count=download_count,
             machine_translated=machine_translated,
+            fps=fps,
             imdb_match=imdb_match,
             tmdb_match=tmdb_match,
             moviehash_match=moviehash_match,
@@ -322,6 +326,7 @@ class OpenSubtitlesComSubtitle(Subtitle):
                 'year': self.movie_year,
                 'season': self.series_season,
                 'episode': self.series_episode,
+                'fps': self.fps,
             },
         )
 

@@ -145,6 +145,29 @@ def country_matches(video: Video, *, country: Country | None = None, partial: bo
     return False  # pragma: no cover
 
 
+def fps_matches(video: Video, *, fps: float | None = None, **kwargs: Any) -> bool:
+    """Whether the video matches the `fps`.
+
+    Frame rates are considered equal if the relative difference is less than 0.1 percent.
+
+    :param video: the video.
+    :type video: :class:`~subliminal.video.Video`
+    :param str fps: the video frame rate.
+    :return: whether there's a match
+    :rtype: bool
+
+    """
+    # make the difference a bit more than 0.1% to be sure
+    relative_diff = 0.0011
+    return (
+        video.frame_rate is not None
+        and video.frame_rate > 0
+        and fps is not None
+        and fps > 0
+        and abs(video.frame_rate - fps) / video.frame_rate < relative_diff
+    )
+
+
 def release_group_matches(video: Video, *, release_group: str | None = None, **kwargs: Any) -> bool:
     """Whether the video matches the `release_group`.
 
@@ -238,6 +261,7 @@ matches_manager: dict[str, MatchingFunc] = {
     'episode': episode_matches,
     'year': year_matches,
     'country': country_matches,
+    'fps': fps_matches,
     'release_group': release_group_matches,
     'streaming_service': streaming_service_matches,
     'resolution': resolution_matches,

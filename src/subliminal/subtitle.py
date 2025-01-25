@@ -242,7 +242,7 @@ class Subtitle:
         # Decode
         return self.content.decode(self.encoding, errors='replace')
 
-    def reencode(self, encoding: str = 'utf-8') -> bool:
+    def reencode(self, text: str | None = None, encoding: str = 'utf-8') -> bool:
         """Re-encode the subtitle raw content using the specified encoding.
 
         :param str encoding: the new encoding of the raw content (default to 'utf-8').
@@ -251,7 +251,8 @@ class Subtitle:
 
         """
         # Compute self._text by calling the property
-        text = self.text
+        if text is None:
+            text = self.text
 
         # Text is empty, maybe because the content was not decoded.
         # Reencoding would erase the content, so return.
@@ -269,6 +270,61 @@ class Subtitle:
         self.encoding = encoding
         self._content = new_content
         return True
+
+    def convert(self, output_format: str = 'srt', output_encoding: str = 'utf-8', fps: float | None = None) -> bool:
+        """Convert the subtitle to a given format.
+
+        :param str output_format: the new subtitle format (default to 'srt').
+        :return: False if the conversion raised an error.
+        :rtype: bool
+
+        """
+        # Compute self._text by calling the property
+        text = self.text
+
+        # Text is empty, maybe because the content was not decoded.
+        # Reencoding would erase the content, so return.
+        if not text:  # pragma: no cover
+            return False
+
+        fps = self.fps if fps is None or fps <= 0 else fps
+
+        # try parsing the subtitle
+        try:
+            obj = SSAFile.from_string(text, format_=self.subtitle_format, fps=fps)
+        except UnknownFPSError:
+            logger.exception('need to specify the FPS to convert this subtitle')
+            return False
+        except Exception:  # pragma: no cover
+            logger.exception('not a valid subtitle')
+            return False
+
+        # Try converting
+        try:
+            new_text = obj.to_string(format_=output_format, fps=fps)
+        except Exception:  # pragma: no cover
+            logger.exception('cannot convert subtitle to %s format', output_format)
+            return False
+
+        # Validate srt
+        if output_format == 'srt':
+            try:
+                parsed = self.parse_srt(new_text)
+            except Exception:  # pragma: no cover
+                msg = 'srt parsing failed, converted subtitle is invalid'
+                logger.exception(msg)
+                return False
+            new_text = parsed
+
+        # Save the new content
+        ret = self.reencode(new_text, encoding=output_encoding)
+
+        # Conversion success
+        if ret:
+            self.encoding = output_encoding
+            self.subtitle_format = output_format
+
+        return ret
 
     def is_valid(self, *, auto_fix_srt: bool = False) -> bool:
         """Check if a :attr:`text` is a valid SubRip format.
@@ -305,7 +361,7 @@ class Subtitle:
         # Valid srt
         if self.subtitle_format == 'srt':
             try:
-                parsed = self.parse_srt()
+                parsed = self.parse_srt(self.text)
             except Exception:  # pragma: no cover
                 msg = 'srt parsing failed, subtitle is invalid'
                 logger.exception(msg)
@@ -318,9 +374,10 @@ class Subtitle:
         # TODO: check other formats
         return True
 
-    def parse_srt(self) -> str:
+    @staticmethod
+    def parse_srt(text: str) -> str:
         """Text content parsed to a valid srt subtitle."""
-        return str(srt.compose(srt.parse(self.text)))
+        return str(srt.compose(srt.parse(text)))
 
     def guess_encoding(self) -> str | None:
         """Guess encoding using the language, falling back on chardet.

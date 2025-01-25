@@ -23,7 +23,7 @@ Available matches:
   * source
   * audio_codec
   * resolution
-  * hearing_impaired
+  * fps
   * video_codec
   * series_imdb_id
   * imdb_id
@@ -66,13 +66,13 @@ episode_scores: dict[str, int] = {
     'country': 135,
     'season': 45,
     'episode': 45,
-    'release_group': 15,
-    'streaming_service': 15,
-    'source': 7,
-    'audio_codec': 3,
-    'resolution': 2,
-    'video_codec': 2,
-    'hearing_impaired': 1,
+    'fps': 18,
+    'release_group': 9,
+    'streaming_service': 9,
+    'source': 4,
+    'audio_codec': 2,
+    'resolution': 1,
+    'video_codec': 1,
 }
 
 #: Scores for movies
@@ -81,13 +81,13 @@ movie_scores: dict[str, int] = {
     'title': 135,
     'year': 45,
     'country': 45,
-    'release_group': 15,
-    'streaming_service': 15,
-    'source': 7,
-    'audio_codec': 3,
-    'resolution': 2,
-    'video_codec': 2,
-    'hearing_impaired': 1,
+    'fps': 18,
+    'release_group': 9,
+    'streaming_service': 9,
+    'source': 4,
+    'audio_codec': 2,
+    'resolution': 1,
+    'video_codec': 1,
 }
 
 #: All scores names
@@ -130,15 +130,6 @@ def get_scores(video: Video) -> dict[str, Any]:
 
     msg = 'video must be an instance of Episode or Movie'  # pragma: no-cover
     raise ValueError(msg)  # pragma: no-cover
-
-
-def match_hearing_impaired(subtitle: Subtitle, *, hearing_impaired: bool | None = None) -> bool:
-    """Match hearing impaired, if it is defined for the subtitle."""
-    return (  # pragma: no cover
-        hearing_impaired is not None
-        and subtitle.hearing_impaired is not None
-        and subtitle.hearing_impaired == hearing_impaired
-    )
 
 
 def compute_score(subtitle: Subtitle, video: Video, **kwargs: Any) -> int:
@@ -223,9 +214,8 @@ if WITH_SYMPY:  # pragma: no cover
         For testing purposes.
         """
         hash, series, year, country, season, episode = symbols('hash series year country season episode')  # noqa: A001
-        release_group, streaming_service, source = symbols('release_group streaming_service source')
+        fps, release_group, streaming_service, source = symbols('fps release_group streaming_service source')
         audio_codec, resolution, video_codec = symbols('audio_codec resolution video_codec')
-        hearing_impaired = symbols('hearing_impaired')
 
         equations = [
             # hash is best
@@ -236,6 +226,7 @@ if WITH_SYMPY:  # pragma: no cover
                 + country
                 + season
                 + episode
+                + fps
                 + release_group
                 + streaming_service
                 + source
@@ -250,6 +241,7 @@ if WITH_SYMPY:  # pragma: no cover
                 + country
                 + season
                 + episode
+                + fps
                 + release_group
                 + streaming_service
                 + source
@@ -263,6 +255,7 @@ if WITH_SYMPY:  # pragma: no cover
                 year,
                 season
                 + episode
+                + fps
                 + release_group
                 + streaming_service
                 + source
@@ -274,9 +267,11 @@ if WITH_SYMPY:  # pragma: no cover
             # year counts as much as country
             Eq(year, country),
             # season is important too
-            Eq(season, release_group + streaming_service + source + audio_codec + resolution + video_codec + 1),
+            Eq(season, fps + release_group + streaming_service + source + audio_codec + resolution + video_codec + 1),
             # episode is equally important to season
             Eq(episode, season),
+            # fps is the next most wanted match
+            Eq(fps, release_group + source + audio_codec + resolution + video_codec + 1),
             # release group is the next most wanted match
             Eq(release_group, source + audio_codec + resolution + video_codec + 1),
             # streaming service counts as much as release group
@@ -287,10 +282,8 @@ if WITH_SYMPY:  # pragma: no cover
             Eq(audio_codec, video_codec + 1),
             # resolution counts as much as video_codec
             Eq(resolution, video_codec),
-            # video_codec is the least valuable match but counts more than the sum of all scoring increasing matches
-            Eq(video_codec, hearing_impaired + 1),
-            # hearing impaired is only used for score increasing, so put it to 1
-            Eq(hearing_impaired, 1),
+            # video_codec is the least valuable match, so put it to 1
+            Eq(video_codec, 1),
         ]
 
         return solve(  # type: ignore[no-any-return]
@@ -302,13 +295,13 @@ if WITH_SYMPY:  # pragma: no cover
                 country,
                 season,
                 episode,
+                fps,
                 release_group,
                 streaming_service,
                 source,
                 audio_codec,
                 resolution,
                 video_codec,
-                hearing_impaired,
             ],
         )
 
@@ -317,7 +310,7 @@ if WITH_SYMPY:  # pragma: no cover
 
         For testing purposes.
         """
-        hash, title, year, country, release_group = symbols('hash title year country release_group')  # noqa: A001
+        hash, title, year, country, fps, release_group = symbols('hash title year country fps release_group')  # noqa: A001
         streaming_service, source, audio_codec, resolution = symbols('streaming_service source audio_codec resolution')
         video_codec, hearing_impaired = symbols('video_codec hearing_impaired')
 
@@ -328,6 +321,7 @@ if WITH_SYMPY:  # pragma: no cover
                 title
                 + year
                 + country
+                + fps
                 + release_group
                 + streaming_service
                 + source
@@ -340,6 +334,7 @@ if WITH_SYMPY:  # pragma: no cover
                 title,
                 year
                 + country
+                + fps
                 + release_group
                 + streaming_service
                 + source
@@ -349,9 +344,11 @@ if WITH_SYMPY:  # pragma: no cover
                 + 1,
             ),
             # year is the second most important part
-            Eq(year, release_group + streaming_service + source + audio_codec + resolution + video_codec + 1),
+            Eq(year, fps + release_group + streaming_service + source + audio_codec + resolution + video_codec + 1),
             # year counts as much as country
             Eq(year, country),
+            # fps is the next most wanted match
+            Eq(fps, release_group + source + audio_codec + resolution + video_codec + 1),
             # release group is the next most wanted match
             Eq(release_group, source + audio_codec + resolution + video_codec + 1),
             # streaming service counts as much as release group
@@ -362,10 +359,8 @@ if WITH_SYMPY:  # pragma: no cover
             Eq(audio_codec, video_codec + 1),
             # resolution counts as much as video_codec
             Eq(resolution, video_codec),
-            # video_codec is the least valuable match but counts more than the sum of all scoring increasing matches
-            Eq(video_codec, hearing_impaired + 1),
-            # hearing impaired is only used for score increasing, so put it to 1
-            Eq(hearing_impaired, 1),
+            # video_codec is the least valuable match, so put it to 1
+            Eq(video_codec, 1),
         ]
 
         return solve(  # type: ignore[no-any-return]
@@ -375,12 +370,12 @@ if WITH_SYMPY:  # pragma: no cover
                 title,
                 year,
                 country,
+                fps,
                 release_group,
                 streaming_service,
                 source,
                 audio_codec,
                 resolution,
                 video_codec,
-                hearing_impaired,
             ],
         )

@@ -64,6 +64,7 @@ docs = [
     "towncrier",
 ]
 tests = [
+    "subliminal[rar]",
     "coverage[toml]>=7",
     "pytest>=6.0",
     "pytest-cov",

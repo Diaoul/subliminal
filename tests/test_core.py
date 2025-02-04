@@ -19,6 +19,7 @@ from subliminal.core import (
     scan_videos,
     search_external_subtitles,
 )
+from subliminal.exceptions import ArchiveError
 from subliminal.subtitle import Subtitle
 from subliminal.utils import timestamp
 from subliminal.video import Episode, Movie
@@ -285,7 +286,7 @@ def test_scan_archive_invalid_extension(movies: dict[str, Movie], tmpdir, monkey
     monkeypatch.chdir(str(tmpdir))
     movie_name = os.path.splitext(movies['interstellar'].name)[0] + '.mp3'
     tmpdir.ensure(movie_name)
-    with pytest.raises(ValueError) as excinfo:
+    with pytest.raises(ArchiveError) as excinfo:
         scan_archive(movie_name)
     assert str(excinfo.value) == "'.mp3' is not a valid archive"
 
@@ -442,20 +443,20 @@ def test_scan_archive_with_multiple_videos(rar: dict[str, str], mkv: dict[str, s
 
 @unix_platform
 def test_scan_archive_with_no_video(rar: dict[str, str]) -> None:
-    with pytest.raises(ValueError) as excinfo:
+    with pytest.raises(ArchiveError) as excinfo:
         scan_archive(rar['simple'])
     assert excinfo.value.args == ('No video in archive',)
 
 
 @unix_platform
 def test_scan_bad_archive(mkv: dict[str, str]) -> None:
-    with pytest.raises(ValueError) as excinfo:
+    with pytest.raises(ArchiveError) as excinfo:
         scan_archive(mkv['test1'])
     assert excinfo.value.args == ("'.mkv' is not a valid archive",)
 
 
 @unix_platform
 def test_scan_password_protected_archive(rar: dict[str, str]) -> None:
-    with pytest.raises(ValueError) as excinfo:
+    with pytest.raises(ArchiveError) as excinfo:
         scan_archive(rar['pwd-protected'])
     assert excinfo.value.args == ('Rar requires a password',)

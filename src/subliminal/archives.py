@@ -65,15 +65,17 @@ def scan_archive(path: str | os.PathLike, name: str | None = None) -> Video:  # 
     path = Path(path)
 
     # rar
-    if '.rar' in ARCHIVE_EXTENSIONS and path.name.lower().endswith('.rar'):
+    if '.rar' in ARCHIVE_EXTENSIONS and path.suffix.lower() == '.rar':
         try:
             video = scan_archive_rar(path, name=name)
         except (Error, NotRarFile, RarCannotExec, ValueError) as e:
-            raise ArchiveError from e
+            args = (e.message,) if hasattr(e, 'message') else e.args
+            raise ArchiveError(*args) from e
 
         return video
 
-    raise ArchiveError
+    msg = f'{path.suffix!r} is not a valid archive'
+    raise ArchiveError(msg)
 
 
 def scan_archive_rar(path: str | os.PathLike, name: str | None = None) -> Video:  # pragma: no cover

@@ -267,14 +267,22 @@ class Subtitle:
             return False
 
         # Save the new encoding and new raw content
+        self.clear_content()
         self.encoding = encoding
         self._content = new_content
         return True
 
-    def convert(self, output_format: str = 'srt', output_encoding: str = 'utf-8', fps: float | None = None) -> bool:
+    def convert(
+        self,
+        output_format: str = 'srt',
+        output_encoding: str | None = 'utf-8',
+        fps: float | None = None,
+    ) -> bool:
         """Convert the subtitle to a given format.
 
         :param str output_format: the new subtitle format (default to 'srt').
+        :param (str | None) output_encoding: specify the encoding, do not change if None (default to None).
+        :param (float | None) fps: the frame rate used to convert from/to a frame rate based subtitle (default to None).
         :return: False if the conversion raised an error.
         :rtype: bool
 
@@ -287,9 +295,18 @@ class Subtitle:
         if not text:  # pragma: no cover
             return False
 
+        # Current encoding is not defined, cannot convert
+        if self.encoding is None:  # pragma: no cover
+            logger.error('the current encoding is not defined')
+            return False
+
+        # Use the current encoding by default, otherwise normalize the encoding name
+        output_encoding = self.encoding if output_encoding is None else codecs.lookup(output_encoding).name
+
+        # Pick the subtitle fps if it's not specified as an argument
         fps = self.fps if fps is None or fps <= 0 else fps
 
-        # try parsing the subtitle
+        # Try parsing the subtitle
         try:
             obj = SSAFile.from_string(text, format_=self.subtitle_format, fps=fps)
         except UnknownFPSError:
@@ -299,12 +316,28 @@ class Subtitle:
             logger.exception('not a valid subtitle')
             return False
 
-        # Try converting
-        try:
-            new_text = obj.to_string(format_=output_format, fps=fps)
-        except Exception:  # pragma: no cover
-            logger.exception('cannot convert subtitle to %s format', output_format)
-            return False
+        # Check subtitle format
+        self.subtitle_format = str(obj.format)
+        convert_format = True
+        if self.subtitle_format == output_format:
+            logger.debug('the subtitle is already in the correct format: %s', output_format)
+            convert_format = False
+            if self.encoding == output_encoding:
+                if output_encoding is not None:  # pragma: no branch
+                    logger.debug('the subtitle is already in the correct encoding: %s', output_encoding)
+                return True
+
+        if convert_format:
+            # Try converting
+            try:
+                new_text = obj.to_string(format_=output_format, fps=fps)
+            except Exception:  # pragma: no cover
+                logger.exception('cannot convert subtitle to %s format', output_format)
+                return False
+
+        else:
+            # Do not convert to a new format
+            new_text = text
 
         # Validate srt
         if output_format == 'srt':
@@ -320,7 +353,8 @@ class Subtitle:
         ret = self.reencode(new_text, encoding=output_encoding)
 
         # Conversion success
-        if ret:
+        if ret:  # pragma: no branch
+            self._is_valid = True
             self.encoding = output_encoding
             self.subtitle_format = output_format
 

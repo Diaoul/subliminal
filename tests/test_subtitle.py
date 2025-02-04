@@ -239,6 +239,7 @@ def test_subtitle_invalid_encoding():
         encoding='rubbish',
     )
     assert subtitle.encoding is None
+    assert subtitle.hearing_impaired is False
 
 
 def test_subtitle_guess_encoding_utf8():
@@ -295,6 +296,17 @@ def test_subtitle_info(monkeypatch) -> None:
     assert isinstance(subtitle.info, str)
 
 
+def test_embedded_subtitle_info(monkeypatch) -> None:
+    subtitle = EmbeddedSubtitle(
+        Language('ita'),
+    )
+    text = '1\n00:00:20,000 --> 00:00:24,400\nIn risposta alla sua lettera del\n\n'
+    monkeypatch.setattr(Subtitle, 'text', text)
+    assert subtitle.is_valid() is True
+    assert isinstance(subtitle.id, str)
+    assert isinstance(subtitle.info, str)
+
+
 def test_embedded_subtitle_info_hearing_impaired(monkeypatch) -> None:
     subtitle = EmbeddedSubtitle(
         Language('spa'),
@@ -303,6 +315,7 @@ def test_embedded_subtitle_info_hearing_impaired(monkeypatch) -> None:
     text = '1\n00:00:20,000 --> 00:00:24,400\nEn respuesta a su carta de\n\n'
     monkeypatch.setattr(Subtitle, 'text', text)
     assert subtitle.is_valid() is True
+    assert subtitle.hearing_impaired is True
     assert isinstance(subtitle.id, str)
     assert isinstance(subtitle.info, str)
 
@@ -315,5 +328,6 @@ def test_embedded_subtitle_info_foreign_only(monkeypatch) -> None:
     text = '1\n00:00:20,000 --> 00:00:24,400\nEn réponse à votre honorée du tant\n\n'
     monkeypatch.setattr(Subtitle, 'text', text)
     assert subtitle.is_valid() is True
+    assert subtitle.foreign_only is True
     assert isinstance(subtitle.id, str)
     assert isinstance(subtitle.info, str)

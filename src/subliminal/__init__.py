@@ -8,7 +8,7 @@ from importlib.metadata import PackageNotFoundError, version
 # Must be first, otherwise we run into ImportError: partially initialized module
 try:
     __version__ = version('subliminal')
-except PackageNotFoundError:
+except PackageNotFoundError:  # pragma: no cover
     __version__ = 'undefined'
 __short_version__: str = '.'.join(__version__.split('.')[:2])
 __title__: str = 'subliminal'

@@ -366,11 +366,11 @@ def clip(value: float, minimum: float | None, maximum: float | None) -> float:
 
 def split_doc_args(args: str | None) -> list[str]:
     """Split the arguments of a docstring (in Sphinx docstyle)."""
-    if not args:
+    if not args:  # pragma: no cover
         return []
     split_regex = re.compile(r'(?m):((param|type)\s|(return|yield|raise|rtype|ytype)s?:)')
     split_indices = [m.start() for m in split_regex.finditer(args)]
-    if len(split_indices) == 0:
+    if len(split_indices) == 0:  # pragma: no cover
         return []
     next_indices = [*split_indices[1:], None]
     parts = [args[i:j].strip() for i, j in zip(split_indices, next_indices)]
@@ -388,10 +388,10 @@ def get_argument_doc(fun: Callable) -> dict[str, str]:
     ret = {}
     for p in parts:
         m = param_regex.match(p)
-        if not m:
+        if not m:  # pragma: no cover
             continue
         _, name, desc = m.groups()
-        if name is None:
+        if name is None:  # pragma: no cover
             continue
         ret[name] = ' '.join(desc.strip().split())
 

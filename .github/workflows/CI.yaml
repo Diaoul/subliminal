@@ -130,7 +130,6 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.py }}
-          cache: 'pip'
           allow-prereleases: true
       - name: Install hatch
         run: python -Im pip install hatch

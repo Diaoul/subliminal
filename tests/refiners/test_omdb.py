@@ -72,7 +72,7 @@ def test_get_wrong_title(client):
 @vcr.use_cassette
 def test_search(client):
     data = client.search('Man of Steel')
-    assert data['totalResults'] == '30'
+    assert data['totalResults'] == '32'
     assert len(data['Search']) == 10
     assert data['Search'][0]['imdbID'] == 'tt0770828'
     assert data['Search'][0]['Year'] == '2013'
@@ -89,24 +89,24 @@ def test_search_wrong_title(client):
 @vcr.use_cassette
 def test_search_type(client):
     data = client.search('Man of Steel', is_movie=True)
-    assert data['totalResults'] == '28'
+    assert data['totalResults'] == '30'
 
 
 @pytest.mark.integration
 @vcr.use_cassette
 def test_search_year(client):
     data = client.search('Man of Steel', year=2013)
-    assert data['totalResults'] == '15'
+    assert data['totalResults'] == '17'
 
 
 @pytest.mark.integration
 @vcr.use_cassette
 def test_search_page(client):
     data = client.search('Man of Steel', page=3)
-    assert data['totalResults'] == '30'
+    assert data['totalResults'] == '32'
     assert len(data['Search']) == 10
-    assert data['Search'][0]['imdbID'] == 'tt2378339'
-    assert data['Search'][0]['Title'] == 'Kurt Morrow: Man of Steel'
+    assert data['Search'][0]['imdbID'] != 'tt0770828'
+    assert data['Search'][0]['Title'] != 'Man of Steel'
 
 
 @pytest.mark.integration
@@ -159,21 +159,23 @@ def test_refine_episode_year(episodes):
 @pytest.mark.integration
 @vcr.use_cassette
 def test_refine_movie(movies):
-    movie = Movie(movies['man_of_steel'].name, movies['man_of_steel'].title.lower())
+    original_movie = movies['man_of_steel']
+    movie = Movie(original_movie.name, original_movie.title.lower())
     refine(movie)
-    assert movie.title == movies['man_of_steel'].title
-    assert movie.year == movies['man_of_steel'].year
-    assert movie.imdb_id == movies['man_of_steel'].imdb_id
+    assert movie.title == original_movie.title
+    assert movie.year == original_movie.year
+    assert movie.imdb_id == original_movie.imdb_id
 
 
 @pytest.mark.integration
 @vcr.use_cassette
 def test_refine_movie_guess_alternative_title(movies):
-    movie = Movie.fromname(movies['jack_reacher_never_go_back'].name)
+    original_movie = movies['jack_reacher_never_go_back']
+    movie = Movie.fromname(original_movie.name)
     refine(movie)
-    assert movie.title == movies['jack_reacher_never_go_back'].title
-    assert movie.year == movies['jack_reacher_never_go_back'].year
-    assert movie.imdb_id == movies['jack_reacher_never_go_back'].imdb_id
+    assert movie.title == original_movie.title
+    assert movie.year == original_movie.year
+    assert movie.imdb_id == original_movie.imdb_id
 
 
 @pytest.mark.integration

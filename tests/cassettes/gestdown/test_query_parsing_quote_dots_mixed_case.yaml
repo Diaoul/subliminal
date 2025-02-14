@@ -3,11 +3,11 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
       accept:
       - application/json
     method: GET
@@ -18,26 +18,20 @@ interactions:
         Agents of S.H.I.E.L.D.","nbSeasons":7,"seasons":[1,2,3,4,5,6,7],"tvDbId":263365,"tmdbId":1403,"slug":"marvels-agents-of-shield"},{"id":"9039b72e-89eb-401e-9d03-0419bf7d1273","name":"Marvel''s
         Agents of S.H.I.E.L.D.: Slingshot","nbSeasons":0,"seasons":[],"tvDbId":null,"tmdbId":69088,"slug":"marvels-agents-of-shield-slingshot"}]}'
     headers:
-      CF-Cache-Status:
-      - HIT
       CF-RAY:
-      - 88ba5f396bb35be2-LIS
+      - 91189a471d59ef11-LHR
       Cache-Control:
       - public, max-age=14400
       Connection:
       - keep-alive
-      Content-Encoding:
-      - br
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 29 May 2024 23:47:51 GMT
-      Last-Modified:
-      - Wed, 29 May 2024 19:47:24 GMT
+      - Thu, 13 Feb 2025 23:29:48 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=XTeDH74XDTX7n0N%2FjifuDjSDdJbzLi0aOTWJOJRisvJLwFed6jYTt5DuLbZEX9M1UDC28wNrkew7zevwjxJNjt%2BTsfZ5qPIU2P%2BsmtpVFaHWfFCef76OueOC%2FC5LzZ9XPtJd1A%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=0mcYLQS8ZNwR9xdvTMIW6yc4xDTJCFfPWsEuFRifl%2F6yDzf6Q6KVaLoELwbt%2FVAvaSkYy4NtkTgdOi9fCkALnqugPpTfTkslU%2FTgnf3c47NM%2BKB7Lyr%2B7ols64i3XLMPVqOxFA%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -48,7 +42,16 @@ interactions:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
+      cf-cache-status:
+      - HIT
+      content-length:
+      - '400'
+      last-modified:
+      - Thu, 13 Feb 2025 23:29:47 GMT
+      server-timing:
+      - cfL4;desc="?proto=TCP&rtt=32112&min_rtt=32044&rtt_var=12153&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2847&recv_bytes=822&delivery_rate=88861&cwnd=249&unsent_bytes=0&cid=8f22eb98dde40809&ts=59&x=0"
       vary:
+      - Accept-Encoding
       - Accept-Encoding
     status:
       code: 200
@@ -57,40 +60,38 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
       accept:
       - application/json
     method: GET
     uri: https://api.gestdown.info/subtitles/get/8976d3bb-a213-4210-9a03-f4b6d17ce540/2/6/eng
   response:
     body:
-      string: '{"matchingSubtitles":[{"subtitleId":"2dea1511-0b72-40db-89b5-eb6f0fb218a5","version":"720p-KILLERS","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/2dea1511-0b72-40db-89b5-eb6f0fb218a5","language":"English","discovered":"2022-09-12T00:34:57.016707Z","downloadCount":11},{"subtitleId":"0c649aff-2e63-4426-a87f-68edfe4f7043","version":"720p-KILLERS","completed":true,"hearingImpaired":true,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/0c649aff-2e63-4426-a87f-68edfe4f7043","language":"English","discovered":"2022-09-12T00:34:57.016709Z","downloadCount":2},{"subtitleId":"45d064c7-2ce3-4911-b790-e25fdc3db890","version":"HDTV.x264-KILLERS","completed":true,"hearingImpaired":true,"corrected":true,"hd":false,"downloadUri":"/subtitles/download/45d064c7-2ce3-4911-b790-e25fdc3db890","language":"English","discovered":"2022-09-12T00:34:57.016712Z","downloadCount":6},{"subtitleId":"8d94963d-22ba-4758-8cdc-b4df48693e9b","version":"HDTV.x264-KILLERS","completed":true,"hearingImpaired":false,"corrected":true,"hd":false,"downloadUri":"/subtitles/download/8d94963d-22ba-4758-8cdc-b4df48693e9b","language":"English","discovered":"2022-09-12T00:34:57.016713Z","downloadCount":138},{"subtitleId":"47013979-e023-41f6-a93a-8fb8d1ac5611","version":"WEB-DL-BS","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/47013979-e023-41f6-a93a-8fb8d1ac5611","language":"English","discovered":"2022-09-12T00:34:57.016717Z","downloadCount":55},{"subtitleId":"5aef9147-3508-4936-994a-d74d7fc5fb80","version":"WEB-DL-BS","completed":true,"hearingImpaired":true,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/5aef9147-3508-4936-994a-d74d7fc5fb80","language":"English","discovered":"2022-09-12T00:34:57.016718Z","downloadCount":4},{"subtitleId":"c2a8bee4-bf13-44d9-a266-75710a4dd4e3","version":"BDRip.x264-REWARD","completed":true,"hearingImpaired":true,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/c2a8bee4-bf13-44d9-a266-75710a4dd4e3","language":"English","discovered":"2022-09-12T00:34:57.016732Z","downloadCount":31},{"subtitleId":"66cd4186-8d00-41b3-91dd-6b73b78eda6e","version":"BDRip.x264-REWARD","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/66cd4186-8d00-41b3-91dd-6b73b78eda6e","language":"English","discovered":"2022-09-12T00:34:57.016733Z","downloadCount":159}],"episode":{"season":2,"number":6,"title":"A
+      string: '{"matchingSubtitles":[{"subtitleId":"2dea1511-0b72-40db-89b5-eb6f0fb218a5","version":"720p-KILLERS","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/2dea1511-0b72-40db-89b5-eb6f0fb218a5","language":"English","discovered":"2022-09-12T00:34:57.016707Z","downloadCount":14},{"subtitleId":"0c649aff-2e63-4426-a87f-68edfe4f7043","version":"720p-KILLERS","completed":true,"hearingImpaired":true,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/0c649aff-2e63-4426-a87f-68edfe4f7043","language":"English","discovered":"2022-09-12T00:34:57.016709Z","downloadCount":2},{"subtitleId":"45d064c7-2ce3-4911-b790-e25fdc3db890","version":"HDTV.x264-KILLERS","completed":true,"hearingImpaired":true,"corrected":true,"hd":false,"downloadUri":"/subtitles/download/45d064c7-2ce3-4911-b790-e25fdc3db890","language":"English","discovered":"2022-09-12T00:34:57.016712Z","downloadCount":13},{"subtitleId":"8d94963d-22ba-4758-8cdc-b4df48693e9b","version":"HDTV.x264-KILLERS","completed":true,"hearingImpaired":false,"corrected":true,"hd":false,"downloadUri":"/subtitles/download/8d94963d-22ba-4758-8cdc-b4df48693e9b","language":"English","discovered":"2022-09-12T00:34:57.016713Z","downloadCount":180},{"subtitleId":"47013979-e023-41f6-a93a-8fb8d1ac5611","version":"WEB-DL-BS","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/47013979-e023-41f6-a93a-8fb8d1ac5611","language":"English","discovered":"2022-09-12T00:34:57.016717Z","downloadCount":78},{"subtitleId":"5aef9147-3508-4936-994a-d74d7fc5fb80","version":"WEB-DL-BS","completed":true,"hearingImpaired":true,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/5aef9147-3508-4936-994a-d74d7fc5fb80","language":"English","discovered":"2022-09-12T00:34:57.016718Z","downloadCount":8},{"subtitleId":"c2a8bee4-bf13-44d9-a266-75710a4dd4e3","version":"BDRip.x264-REWARD","completed":true,"hearingImpaired":true,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/c2a8bee4-bf13-44d9-a266-75710a4dd4e3","language":"English","discovered":"2022-09-12T00:34:57.016732Z","downloadCount":46},{"subtitleId":"66cd4186-8d00-41b3-91dd-6b73b78eda6e","version":"BDRip.x264-REWARD","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/66cd4186-8d00-41b3-91dd-6b73b78eda6e","language":"English","discovered":"2022-09-12T00:34:57.016733Z","downloadCount":206}],"episode":{"season":2,"number":6,"title":"A
         Fractured House","show":"Marvel''s Agents of S.H.I.E.L.D.","discovered":"2022-09-12T00:34:57.016705Z"}}'
     headers:
       CF-Cache-Status:
       - EXPIRED
       CF-RAY:
-      - 88ba5f39ecab5bd6-LIS
+      - 91189a47ef65f653-LHR
       Cache-Control:
       - public, max-age=7200
       Connection:
       - keep-alive
-      Content-Encoding:
-      - br
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 29 May 2024 23:47:52 GMT
+      - Thu, 13 Feb 2025 23:29:48 GMT
       Last-Modified:
-      - Wed, 29 May 2024 19:47:26 GMT
+      - Thu, 13 Feb 2025 23:29:48 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=HW4lmfkkk8NfFgSLac9xPHMU3pR7VKzn6RMZQn4%2F2jAyiP7ov7gtqrQi13jjK3End6f8%2B3ELuVZsdG9JvuONN2ri6nmp3Xg4ubhpQMWeq25eC2WPgoPFXJfU2nzs9s5b2RGaCA%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=jkvSJguawvP0WDX6UqesJgfPDUI%2B3jOsH%2FM3DvZ3scJUyvbbOWcXOQpaMjYzZHVxYNct%2FC0TO8qY%2BFBded3wL4azEh4Bp43CkTtTOAZAEUExg8FKgTOQJep%2BkGtV9GYnV9yVbw%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -101,7 +102,12 @@ interactions:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
+      content-length:
+      - '2605'
+      server-timing:
+      - cfL4;desc="?proto=TCP&rtt=32102&min_rtt=32007&rtt_var=12193&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2848&recv_bytes=830&delivery_rate=88373&cwnd=251&unsent_bytes=0&cid=e4b8a1eec4984e9a&ts=82&x=0"
       vary:
+      - Accept-Encoding
       - Accept-Encoding
     status:
       code: 200

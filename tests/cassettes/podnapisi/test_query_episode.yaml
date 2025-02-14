@@ -9,164 +9,151 @@ interactions:
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
-    uri: https://www.podnapisi.net/subtitles/search/advanced?movie_type=tv-series&movie_type=mini-series&language=en&episodes=5&year=2007&keywords=The+Big+Bang+Theory&seasons=7
+    uri: https://www.podnapisi.net/subtitles/search/advanced?keywords=The+Big+Bang+Theory&language=en&seasons=7&episodes=5&movie_type=tv-series&movie_type=mini-series&year=2007
   response:
     body:
-      string: !!python/unicode "{\n  \"all_pages\": 1, \n  \"data\": [\n    {\n  \
-        \    \"audited\": true, \n      \"contributions\": [\n        {\n        \
-        \  \"contributor\": {\n            \"id\": 23329, \n            \"name\":\
-        \ \"jane\", \n            \"type\": \"user\"\n          }, \n          \"\
-        role\": \"uploader\", \n          \"share\": 0.0\n        }\n      ], \n \
-        \     \"contributor\": {\n        \"id\": 23329, \n        \"name\": \"jane\"\
-        , \n        \"type\": \"user\"\n      }, \n      \"created\": \"2014-09-07T07:06:05+00:00\"\
-        , \n      \"custom_releases\": [\n        \"the.big.bang.theory.s07e05.1080p.bluray.x264-rovers\"\
-        \n      ], \n      \"download\": \"/en/subtitles/en-the-big-bang-theory-2007-S07E05-O/2581/download\"\
-        , \n      \"flags\": [\n        \"hearing_impaired\", \n        \"high_definition\"\
-        \n      ], \n      \"fps\": \"\", \n      \"id\": \"2581\", \n      \"language\"\
-        : \"en\", \n      \"movie\": {\n        \"aliases\": [\n          \"Veliki\
-        \ pokovci\"\n        ], \n        \"episode_info\": {\n          \"episode\"\
-        : 5, \n          \"id\": null, \n          \"season\": 7, \n          \"slug\"\
-        : \"S07E05-O\", \n          \"title\": \"\", \n          \"type\": \"ordinary\"\
-        , \n          \"year\": null\n        }, \n        \"id\": \"uJE\", \n   \
-        \     \"posters\": {\n          \"inline\": \"/thumbnails/moviedb/inline/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        , \n          \"normal\": \"/thumbnails/moviedb/normal/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        , \n          \"small\": \"/thumbnails/moviedb/small/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        , \n          \"title\": \"/thumbnails/moviedb/title/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        \n        }, \n        \"providers\": [\n          \"omdb:sY0G\"\n       \
-        \ ], \n        \"slug\": \"the-big-bang-theory-2007-S07E05-O\", \n       \
-        \ \"title\": \"The Big Bang Theory\", \n        \"type\": \"tv-series\", \n\
-        \        \"year\": 2007\n      }, \n      \"notes\": \"\", \n      \"num_cds\"\
-        : 1, \n      \"rejected\": null, \n      \"releases\": [], \n      \"state\"\
-        : \"migration\", \n      \"stats\": {\n        \"downloads\": 31744, \n  \
-        \      \"lines\": 348\n      }, \n      \"url\": \"/en/subtitles/en-the-big-bang-theory-2007-S07E05-O/2581\"\
-        \n    }, \n    {\n      \"audited\": true, \n      \"contributions\": [\n\
-        \        {\n          \"contributor\": {\n            \"id\": 23329, \n  \
-        \          \"name\": \"jane\", \n            \"type\": \"user\"\n        \
-        \  }, \n          \"role\": \"uploader\", \n          \"share\": 0.0\n   \
-        \     }\n      ], \n      \"contributor\": {\n        \"id\": 23329, \n  \
-        \      \"name\": \"jane\", \n        \"type\": \"user\"\n      }, \n     \
-        \ \"created\": \"2014-09-07T07:04:24+00:00\", \n      \"custom_releases\"\
-        : [\n        \"the.big.bang.theory.s07e05.1080p.bluray.x264-rovers\"\n   \
-        \   ], \n      \"download\": \"/en/subtitles/en-the-big-bang-theory-2007-S07E05-O/w581/download\"\
-        , \n      \"flags\": [\n        \"high_definition\"\n      ], \n      \"fps\"\
-        : \"\", \n      \"id\": \"w581\", \n      \"language\": \"en\", \n      \"\
-        movie\": {\n        \"aliases\": [\n          \"Veliki pokovci\"\n       \
-        \ ], \n        \"episode_info\": {\n          \"episode\": 5, \n         \
-        \ \"id\": null, \n          \"season\": 7, \n          \"slug\": \"S07E05-O\"\
-        , \n          \"title\": \"\", \n          \"type\": \"ordinary\", \n    \
-        \      \"year\": null\n        }, \n        \"id\": \"uJE\", \n        \"\
-        posters\": {\n          \"inline\": \"/thumbnails/moviedb/inline/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        , \n          \"normal\": \"/thumbnails/moviedb/normal/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        , \n          \"small\": \"/thumbnails/moviedb/small/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        , \n          \"title\": \"/thumbnails/moviedb/title/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        \n        }, \n        \"providers\": [\n          \"omdb:sY0G\"\n       \
-        \ ], \n        \"slug\": \"the-big-bang-theory-2007-S07E05-O\", \n       \
-        \ \"title\": \"The Big Bang Theory\", \n        \"type\": \"tv-series\", \n\
-        \        \"year\": 2007\n      }, \n      \"notes\": \"\", \n      \"num_cds\"\
-        : 1, \n      \"rejected\": null, \n      \"releases\": [], \n      \"state\"\
-        : \"migration\", \n      \"stats\": {\n        \"downloads\": 42579, \n  \
-        \      \"lines\": 335\n      }, \n      \"url\": \"/en/subtitles/en-the-big-bang-theory-2007-S07E05-O/w581\"\
-        \n    }, \n    {\n      \"audited\": true, \n      \"contributions\": [\n\
-        \        {\n          \"contributor\": {\n            \"id\": 1, \n      \
-        \      \"name\": \"Anonymous\", \n            \"type\": \"user\"\n       \
-        \   }, \n          \"role\": \"uploader\", \n          \"share\": 0.0\n  \
-        \      }\n      ], \n      \"contributor\": {\n        \"id\": 1, \n     \
-        \   \"name\": \"Anonymous\", \n        \"type\": \"user\"\n      }, \n   \
-        \   \"created\": \"2013-10-18T14:12:21+00:00\", \n      \"custom_releases\"\
-        : [\n        \"The.Big.Bang.Theory.S07E05.720p.WEB-DL.DD5.1.H.264\"\n    \
-        \  ], \n      \"download\": \"/en/subtitles/en-the-big-bang-theory-2007-S07E05-O/ftUo/download\"\
-        , \n      \"flags\": [\n        \"hearing_impaired\", \n        \"high_definition\"\
-        \n      ], \n      \"fps\": \"23.976\", \n      \"id\": \"ftUo\", \n     \
-        \ \"language\": \"en\", \n      \"movie\": {\n        \"aliases\": [\n   \
-        \       \"Veliki pokovci\"\n        ], \n        \"episode_info\": {\n   \
-        \       \"episode\": 5, \n          \"id\": null, \n          \"season\":\
-        \ 7, \n          \"slug\": \"S07E05-O\", \n          \"title\": \"\", \n \
-        \         \"type\": \"ordinary\", \n          \"year\": null\n        }, \n\
-        \        \"id\": \"uJE\", \n        \"posters\": {\n          \"inline\":\
-        \ \"/thumbnails/moviedb/inline/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        , \n          \"normal\": \"/thumbnails/moviedb/normal/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        , \n          \"small\": \"/thumbnails/moviedb/small/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        , \n          \"title\": \"/thumbnails/moviedb/title/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        \n        }, \n        \"providers\": [\n          \"omdb:sY0G\"\n       \
-        \ ], \n        \"slug\": \"the-big-bang-theory-2007-S07E05-O\", \n       \
-        \ \"title\": \"The Big Bang Theory\", \n        \"type\": \"tv-series\", \n\
-        \        \"year\": 2007\n      }, \n      \"notes\": \"\", \n      \"num_cds\"\
-        : 1, \n      \"rejected\": null, \n      \"releases\": [], \n      \"state\"\
-        : \"migration\", \n      \"stats\": {\n        \"downloads\": 39427, \n  \
-        \      \"lines\": 347\n      }, \n      \"url\": \"/en/subtitles/en-the-big-bang-theory-2007-S07E05-O/ftUo\"\
-        \n    }, \n    {\n      \"audited\": true, \n      \"contributions\": [\n\
-        \        {\n          \"contributor\": {\n            \"id\": 44181, \n  \
-        \          \"name\": \"grzesiek11\", \n            \"type\": \"user\"\n  \
-        \        }, \n          \"role\": \"uploader\", \n          \"share\": 0.0\n\
-        \        }\n      ], \n      \"contributor\": {\n        \"id\": 44181, \n\
-        \        \"name\": \"grzesiek11\", \n        \"type\": \"user\"\n      },\
-        \ \n      \"created\": \"2013-10-18T05:49:11+00:00\", \n      \"custom_releases\"\
-        : [\n        \"The.Big.Bang.Theory.S07E05.HDTV.x264-LOL\", \n        \"The.Big.Bang.Theory.S07E05.720p.HDTV.x264-DIMENSION\"\
-        , \n        \"The.Big.Bang.Theory.S07E05.480p.HDTV.x264-mSD\", \n        \"\
-        The.Big.Bang.Theory.S07E05.HDTV.XviD-AFG\"\n      ], \n      \"download\"\
-        : \"/en/subtitles/en-the-big-bang-theory-2007-S07E05-O/EdQo/download\", \n\
-        \      \"flags\": [\n        \"high_definition\"\n      ], \n      \"fps\"\
-        : \"23.976\", \n      \"id\": \"EdQo\", \n      \"language\": \"en\", \n \
-        \     \"movie\": {\n        \"aliases\": [\n          \"Veliki pokovci\"\n\
-        \        ], \n        \"episode_info\": {\n          \"episode\": 5, \n  \
-        \        \"id\": null, \n          \"season\": 7, \n          \"slug\": \"\
-        S07E05-O\", \n          \"title\": \"\", \n          \"type\": \"ordinary\"\
-        , \n          \"year\": null\n        }, \n        \"id\": \"uJE\", \n   \
-        \     \"posters\": {\n          \"inline\": \"/thumbnails/moviedb/inline/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        , \n          \"normal\": \"/thumbnails/moviedb/normal/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        , \n          \"small\": \"/thumbnails/moviedb/small/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        , \n          \"title\": \"/thumbnails/moviedb/title/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        \n        }, \n        \"providers\": [\n          \"omdb:sY0G\"\n       \
-        \ ], \n        \"slug\": \"the-big-bang-theory-2007-S07E05-O\", \n       \
-        \ \"title\": \"The Big Bang Theory\", \n        \"type\": \"tv-series\", \n\
-        \        \"year\": 2007\n      }, \n      \"notes\": \"\", \n      \"num_cds\"\
-        : 1, \n      \"rejected\": null, \n      \"releases\": [], \n      \"state\"\
-        : \"migration\", \n      \"stats\": {\n        \"downloads\": 64985, \n  \
-        \      \"lines\": 430\n      }, \n      \"url\": \"/en/subtitles/en-the-big-bang-theory-2007-S07E05-O/EdQo\"\
-        \n    }, \n    {\n      \"audited\": true, \n      \"contributions\": [\n\
-        \        {\n          \"contributor\": {\n            \"id\": 1, \n      \
-        \      \"name\": \"Anonymous\", \n            \"type\": \"user\"\n       \
-        \   }, \n          \"role\": \"uploader\", \n          \"share\": 0.0\n  \
-        \      }\n      ], \n      \"contributor\": {\n        \"id\": 1, \n     \
-        \   \"name\": \"Anonymous\", \n        \"type\": \"user\"\n      }, \n   \
-        \   \"created\": \"2013-10-18T02:09:50+00:00\", \n      \"custom_releases\"\
-        : [\n        \"The.Big.Bang.Theory.S07E05.HDTV.x264-LOL\", \n        \"The.Big.Bang.Theory.S07E05.720p.HDTV.x264-DIMENSION\"\
-        , \n        \"The.Big.Bang.Theory.S07E05.480p.HDTV.x264-mSD\", \n        \"\
-        The.Big.Bang.Theory.S07E05.HDTV.XviD-AFG\"\n      ], \n      \"download\"\
-        : \"/en/subtitles/en-the-big-bang-theory-2007-S07E05-O/WNMo/download\", \n\
-        \      \"flags\": [\n        \"hearing_impaired\", \n        \"high_definition\"\
-        \n      ], \n      \"fps\": \"23.976\", \n      \"id\": \"WNMo\", \n     \
-        \ \"language\": \"en\", \n      \"movie\": {\n        \"aliases\": [\n   \
-        \       \"Veliki pokovci\"\n        ], \n        \"episode_info\": {\n   \
-        \       \"episode\": 5, \n          \"id\": null, \n          \"season\":\
-        \ 7, \n          \"slug\": \"S07E05-O\", \n          \"title\": \"\", \n \
-        \         \"type\": \"ordinary\", \n          \"year\": null\n        }, \n\
-        \        \"id\": \"uJE\", \n        \"posters\": {\n          \"inline\":\
-        \ \"/thumbnails/moviedb/inline/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        , \n          \"normal\": \"/thumbnails/moviedb/normal/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        , \n          \"small\": \"/thumbnails/moviedb/small/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        , \n          \"title\": \"/thumbnails/moviedb/title/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\
-        \n        }, \n        \"providers\": [\n          \"omdb:sY0G\"\n       \
-        \ ], \n        \"slug\": \"the-big-bang-theory-2007-S07E05-O\", \n       \
-        \ \"title\": \"The Big Bang Theory\", \n        \"type\": \"tv-series\", \n\
-        \        \"year\": 2007\n      }, \n      \"notes\": \"\", \n      \"num_cds\"\
-        : 1, \n      \"rejected\": null, \n      \"releases\": [], \n      \"state\"\
-        : \"migration\", \n      \"stats\": {\n        \"downloads\": 39202, \n  \
-        \      \"lines\": 439\n      }, \n      \"url\": \"/en/subtitles/en-the-big-bang-theory-2007-S07E05-O/WNMo\"\
-        \n    }\n  ], \n  \"page\": 1, \n  \"per_page\": 50, \n  \"status\": \"ok\"\
-        \n}"
+      string: "{\n  \"all_pages\": 1, \n  \"data\": [\n    {\n      \"audited\": true,
+        \n      \"contributions\": [\n        {\n          \"contributor\": {\n            \"id\":
+        23329, \n            \"name\": \"jane\", \n            \"type\": \"user\"\n
+        \         }, \n          \"role\": \"uploader\", \n          \"share\": 0.0\n
+        \       }\n      ], \n      \"contributor\": {\n        \"id\": 23329, \n
+        \       \"name\": \"jane\", \n        \"type\": \"user\"\n      }, \n      \"created\":
+        \"2014-09-07T07:06:05+00:00\", \n      \"custom_releases\": [\n        \"the.big.bang.theory.s07e05.1080p.bluray.x264-rovers\"\n
+        \     ], \n      \"download\": \"/en/subtitles/en-the-big-bang-theory-2007-S07E05-O/2581/download\",
+        \n      \"flags\": [\n        \"hearing_impaired\", \n        \"high_definition\"\n
+        \     ], \n      \"fps\": \"\", \n      \"id\": \"2581\", \n      \"language\":
+        \"en\", \n      \"movie\": {\n        \"aliases\": [\n          \"Veliki pokovci\"\n
+        \       ], \n        \"episode_info\": {\n          \"episode\": 5, \n          \"id\":
+        null, \n          \"season\": 7, \n          \"slug\": \"S07E05-O\", \n          \"title\":
+        \"\", \n          \"type\": \"ordinary\", \n          \"year\": null\n        },
+        \n        \"id\": \"uJE\", \n        \"posters\": {\n          \"inline\":
+        \"/thumbnails/moviedb/inline/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\",
+        \n          \"normal\": \"/thumbnails/moviedb/normal/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\",
+        \n          \"small\": \"/thumbnails/moviedb/small/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\",
+        \n          \"title\": \"/thumbnails/moviedb/title/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\n
+        \       }, \n        \"providers\": [\n          \"omdb:sY0G\"\n        ],
+        \n        \"slug\": \"the-big-bang-theory-2007-S07E05-O\", \n        \"title\":
+        \"The Big Bang Theory\", \n        \"type\": \"tv-series\", \n        \"year\":
+        2007\n      }, \n      \"notes\": \"\", \n      \"num_cds\": 1, \n      \"rejected\":
+        null, \n      \"releases\": [], \n      \"state\": \"migration\", \n      \"stats\":
+        {\n        \"downloads\": 33406, \n        \"lines\": 348\n      }, \n      \"url\":
+        \"/en/subtitles/en-the-big-bang-theory-2007-S07E05-O/2581\"\n    }, \n    {\n
+        \     \"audited\": true, \n      \"contributions\": [\n        {\n          \"contributor\":
+        {\n            \"id\": 23329, \n            \"name\": \"jane\", \n            \"type\":
+        \"user\"\n          }, \n          \"role\": \"uploader\", \n          \"share\":
+        0.0\n        }\n      ], \n      \"contributor\": {\n        \"id\": 23329,
+        \n        \"name\": \"jane\", \n        \"type\": \"user\"\n      }, \n      \"created\":
+        \"2014-09-07T07:04:24+00:00\", \n      \"custom_releases\": [\n        \"the.big.bang.theory.s07e05.1080p.bluray.x264-rovers\"\n
+        \     ], \n      \"download\": \"/en/subtitles/en-the-big-bang-theory-2007-S07E05-O/w581/download\",
+        \n      \"flags\": [\n        \"high_definition\"\n      ], \n      \"fps\":
+        \"\", \n      \"id\": \"w581\", \n      \"language\": \"en\", \n      \"movie\":
+        {\n        \"aliases\": [\n          \"Veliki pokovci\"\n        ], \n        \"episode_info\":
+        {\n          \"episode\": 5, \n          \"id\": null, \n          \"season\":
+        7, \n          \"slug\": \"S07E05-O\", \n          \"title\": \"\", \n          \"type\":
+        \"ordinary\", \n          \"year\": null\n        }, \n        \"id\": \"uJE\",
+        \n        \"posters\": {\n          \"inline\": \"/thumbnails/moviedb/inline/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\",
+        \n          \"normal\": \"/thumbnails/moviedb/normal/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\",
+        \n          \"small\": \"/thumbnails/moviedb/small/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\",
+        \n          \"title\": \"/thumbnails/moviedb/title/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\n
+        \       }, \n        \"providers\": [\n          \"omdb:sY0G\"\n        ],
+        \n        \"slug\": \"the-big-bang-theory-2007-S07E05-O\", \n        \"title\":
+        \"The Big Bang Theory\", \n        \"type\": \"tv-series\", \n        \"year\":
+        2007\n      }, \n      \"notes\": \"\", \n      \"num_cds\": 1, \n      \"rejected\":
+        null, \n      \"releases\": [], \n      \"state\": \"migration\", \n      \"stats\":
+        {\n        \"downloads\": 47210, \n        \"lines\": 335\n      }, \n      \"url\":
+        \"/en/subtitles/en-the-big-bang-theory-2007-S07E05-O/w581\"\n    }, \n    {\n
+        \     \"audited\": true, \n      \"contributions\": [\n        {\n          \"contributor\":
+        {\n            \"id\": 1, \n            \"name\": \"Anonymous\", \n            \"type\":
+        \"user\"\n          }, \n          \"role\": \"uploader\", \n          \"share\":
+        0.0\n        }\n      ], \n      \"contributor\": {\n        \"id\": 1, \n
+        \       \"name\": \"Anonymous\", \n        \"type\": \"user\"\n      }, \n
+        \     \"created\": \"2013-10-18T14:12:21+00:00\", \n      \"custom_releases\":
+        [\n        \"The.Big.Bang.Theory.S07E05.720p.WEB-DL.DD5.1.H.264\"\n      ],
+        \n      \"download\": \"/en/subtitles/en-the-big-bang-theory-2007-S07E05-O/ftUo/download\",
+        \n      \"flags\": [\n        \"hearing_impaired\", \n        \"high_definition\"\n
+        \     ], \n      \"fps\": \"23.976\", \n      \"id\": \"ftUo\", \n      \"language\":
+        \"en\", \n      \"movie\": {\n        \"aliases\": [\n          \"Veliki pokovci\"\n
+        \       ], \n        \"episode_info\": {\n          \"episode\": 5, \n          \"id\":
+        null, \n          \"season\": 7, \n          \"slug\": \"S07E05-O\", \n          \"title\":
+        \"\", \n          \"type\": \"ordinary\", \n          \"year\": null\n        },
+        \n        \"id\": \"uJE\", \n        \"posters\": {\n          \"inline\":
+        \"/thumbnails/moviedb/inline/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\",
+        \n          \"normal\": \"/thumbnails/moviedb/normal/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\",
+        \n          \"small\": \"/thumbnails/moviedb/small/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\",
+        \n          \"title\": \"/thumbnails/moviedb/title/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\n
+        \       }, \n        \"providers\": [\n          \"omdb:sY0G\"\n        ],
+        \n        \"slug\": \"the-big-bang-theory-2007-S07E05-O\", \n        \"title\":
+        \"The Big Bang Theory\", \n        \"type\": \"tv-series\", \n        \"year\":
+        2007\n      }, \n      \"notes\": \"\", \n      \"num_cds\": 1, \n      \"rejected\":
+        null, \n      \"releases\": [], \n      \"state\": \"migration\", \n      \"stats\":
+        {\n        \"downloads\": 40702, \n        \"lines\": 347\n      }, \n      \"url\":
+        \"/en/subtitles/en-the-big-bang-theory-2007-S07E05-O/ftUo\"\n    }, \n    {\n
+        \     \"audited\": true, \n      \"contributions\": [\n        {\n          \"contributor\":
+        {\n            \"id\": 44181, \n            \"name\": \"grzesiek11\", \n            \"type\":
+        \"user\"\n          }, \n          \"role\": \"uploader\", \n          \"share\":
+        0.0\n        }\n      ], \n      \"contributor\": {\n        \"id\": 44181,
+        \n        \"name\": \"grzesiek11\", \n        \"type\": \"user\"\n      },
+        \n      \"created\": \"2013-10-18T05:49:11+00:00\", \n      \"custom_releases\":
+        [\n        \"The.Big.Bang.Theory.S07E05.HDTV.x264-LOL\", \n        \"The.Big.Bang.Theory.S07E05.720p.HDTV.x264-DIMENSION\",
+        \n        \"The.Big.Bang.Theory.S07E05.480p.HDTV.x264-mSD\", \n        \"The.Big.Bang.Theory.S07E05.HDTV.XviD-AFG\"\n
+        \     ], \n      \"download\": \"/en/subtitles/en-the-big-bang-theory-2007-S07E05-O/EdQo/download\",
+        \n      \"flags\": [\n        \"high_definition\"\n      ], \n      \"fps\":
+        \"23.976\", \n      \"id\": \"EdQo\", \n      \"language\": \"en\", \n      \"movie\":
+        {\n        \"aliases\": [\n          \"Veliki pokovci\"\n        ], \n        \"episode_info\":
+        {\n          \"episode\": 5, \n          \"id\": null, \n          \"season\":
+        7, \n          \"slug\": \"S07E05-O\", \n          \"title\": \"\", \n          \"type\":
+        \"ordinary\", \n          \"year\": null\n        }, \n        \"id\": \"uJE\",
+        \n        \"posters\": {\n          \"inline\": \"/thumbnails/moviedb/inline/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\",
+        \n          \"normal\": \"/thumbnails/moviedb/normal/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\",
+        \n          \"small\": \"/thumbnails/moviedb/small/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\",
+        \n          \"title\": \"/thumbnails/moviedb/title/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\n
+        \       }, \n        \"providers\": [\n          \"omdb:sY0G\"\n        ],
+        \n        \"slug\": \"the-big-bang-theory-2007-S07E05-O\", \n        \"title\":
+        \"The Big Bang Theory\", \n        \"type\": \"tv-series\", \n        \"year\":
+        2007\n      }, \n      \"notes\": \"\", \n      \"num_cds\": 1, \n      \"rejected\":
+        null, \n      \"releases\": [], \n      \"state\": \"migration\", \n      \"stats\":
+        {\n        \"downloads\": 67630, \n        \"lines\": 430\n      }, \n      \"url\":
+        \"/en/subtitles/en-the-big-bang-theory-2007-S07E05-O/EdQo\"\n    }, \n    {\n
+        \     \"audited\": true, \n      \"contributions\": [\n        {\n          \"contributor\":
+        {\n            \"id\": 1, \n            \"name\": \"Anonymous\", \n            \"type\":
+        \"user\"\n          }, \n          \"role\": \"uploader\", \n          \"share\":
+        0.0\n        }\n      ], \n      \"contributor\": {\n        \"id\": 1, \n
+        \       \"name\": \"Anonymous\", \n        \"type\": \"user\"\n      }, \n
+        \     \"created\": \"2013-10-18T02:09:50+00:00\", \n      \"custom_releases\":
+        [\n        \"The.Big.Bang.Theory.S07E05.HDTV.x264-LOL\", \n        \"The.Big.Bang.Theory.S07E05.720p.HDTV.x264-DIMENSION\",
+        \n        \"The.Big.Bang.Theory.S07E05.480p.HDTV.x264-mSD\", \n        \"The.Big.Bang.Theory.S07E05.HDTV.XviD-AFG\"\n
+        \     ], \n      \"download\": \"/en/subtitles/en-the-big-bang-theory-2007-S07E05-O/WNMo/download\",
+        \n      \"flags\": [\n        \"hearing_impaired\", \n        \"high_definition\"\n
+        \     ], \n      \"fps\": \"23.976\", \n      \"id\": \"WNMo\", \n      \"language\":
+        \"en\", \n      \"movie\": {\n        \"aliases\": [\n          \"Veliki pokovci\"\n
+        \       ], \n        \"episode_info\": {\n          \"episode\": 5, \n          \"id\":
+        null, \n          \"season\": 7, \n          \"slug\": \"S07E05-O\", \n          \"title\":
+        \"\", \n          \"type\": \"ordinary\", \n          \"year\": null\n        },
+        \n        \"id\": \"uJE\", \n        \"posters\": {\n          \"inline\":
+        \"/thumbnails/moviedb/inline/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\",
+        \n          \"normal\": \"/thumbnails/moviedb/normal/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\",
+        \n          \"small\": \"/thumbnails/moviedb/small/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\",
+        \n          \"title\": \"/thumbnails/moviedb/title/2c/9c/f5/c9/ae/30/0df660438f29fcf6bef8/uJE.jpg\"\n
+        \       }, \n        \"providers\": [\n          \"omdb:sY0G\"\n        ],
+        \n        \"slug\": \"the-big-bang-theory-2007-S07E05-O\", \n        \"title\":
+        \"The Big Bang Theory\", \n        \"type\": \"tv-series\", \n        \"year\":
+        2007\n      }, \n      \"notes\": \"\", \n      \"num_cds\": 1, \n      \"rejected\":
+        null, \n      \"releases\": [], \n      \"state\": \"migration\", \n      \"stats\":
+        {\n        \"downloads\": 39722, \n        \"lines\": 439\n      }, \n      \"url\":
+        \"/en/subtitles/en-the-big-bang-theory-2007-S07E05-O/WNMo\"\n    }\n  ], \n
+        \ \"page\": 1, \n  \"per_page\": 50, \n  \"status\": \"ok\"\n}"
     headers:
-      connection:
+      Connection:
       - keep-alive
-      content-length:
+      Content-Length:
       - '10231'
-      content-type:
+      Content-Type:
       - application/json
-      date:
-      - Sat, 09 May 2020 10:24:41 GMT
-      server:
+      Date:
+      - Thu, 13 Feb 2025 23:31:35 GMT
+      Server:
       - nginx
     status:
       code: 200

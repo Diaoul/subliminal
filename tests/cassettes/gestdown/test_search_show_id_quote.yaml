@@ -3,11 +3,11 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
       accept:
       - application/json
     method: GET
@@ -15,28 +15,26 @@ interactions:
   response:
     body:
       string: '{"shows":[{"id":"cb13bb68-c637-4e0f-b79d-d4f1b4972380","name":"Grey''s
-        Anatomy","nbSeasons":20,"seasons":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"tvDbId":73762,"tmdbId":1416,"slug":"greys-anatomy"}]}'
+        Anatomy","nbSeasons":21,"seasons":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21],"tvDbId":73762,"tmdbId":1416,"slug":"greys-anatomy"}]}'
     headers:
       CF-Cache-Status:
-      - HIT
+      - MISS
       CF-RAY:
-      - 88ba5f315e0e5bde-LIS
+      - 91189a3e5cc35bd4-LIS
       Cache-Control:
       - public, max-age=14400
       Connection:
       - keep-alive
-      Content-Encoding:
-      - br
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 29 May 2024 23:47:50 GMT
+      - Thu, 13 Feb 2025 23:29:47 GMT
       Last-Modified:
-      - Wed, 29 May 2024 22:57:07 GMT
+      - Thu, 13 Feb 2025 23:29:47 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=qKUUT9RxcspBOBuTLiAzMDXwnCPTxBpUr0OLxNf82spAsvW5adzGGcGHK7xGHXp4wa5fm9eJ%2FAcbL2u5PVK1l2v9JCuAHSAL7wK27%2BI1IMflcJVFHrIqCOpYzwDx0YE9a8bEbQ%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=r19gGjhTR2MiVlu3yoxOR9UkGKVsssnEbgAKrHWxpRWonfSsiPOSc72QAcw8JqpT4zUMtKjpSndGPXAFKDzVDv%2BQ8%2Fb9KO1lD%2BXBK998wJfXnecuU0HpFQnRLX3mMflrvh8liw%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -47,7 +45,12 @@ interactions:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
+      content-length:
+      - '214'
+      server-timing:
+      - cfL4;desc="?proto=TCP&rtt=2948&min_rtt=2738&rtt_var=1177&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2847&recv_bytes=801&delivery_rate=1057706&cwnd=241&unsent_bytes=0&cid=2e1bda9ce9ae6fa5&ts=89&x=0"
       vary:
+      - Accept-Encoding
       - Accept-Encoding
     status:
       code: 200

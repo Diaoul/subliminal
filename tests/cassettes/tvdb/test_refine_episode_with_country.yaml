@@ -20,7 +20,7 @@ interactions:
     uri: https://api.thetvdb.com/login
   response:
     body:
-      string: '{"token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg"}'
+      string: '{"token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDAwOTQyMTgsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzM5NDg5NDE4fQ.I-flvnRYHdakvoJPuyRAVB6U6ePDHLaV8YdC98u5dVsuvO3P3obJ7E7yAN_x3Mc5f5xyQyHcD11I0JsOcud3NLHt-zM3wknZbMcSqhsy7oNl9OYlELhePRcOMl_EVs_IyyCV9tEjkjTPRoHGrHI2R2DLbOzSWojSqWUkwZemRHvHSsxIaaCIKouP9Slp4B1xAdGlkBklpr0QNhjOU6NkSjioing-gUMc053fDuEJTbaOoH9wMFgYyC6S4cZEEyD2zMmGW_Cqvfgbhy2YGZdAXmWoEQzHepnDct11knRzYFR6t2RwGoziOF1l41kOwfXeUtQQdIvvFuyXdJQSJuU6UA"}'
     headers:
       Connection:
       - keep-alive
@@ -53,53 +53,47 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Accept-Language:
       - en
       Authorization:
-      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDAwOTQyMTgsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzM5NDg5NDE4fQ.I-flvnRYHdakvoJPuyRAVB6U6ePDHLaV8YdC98u5dVsuvO3P3obJ7E7yAN_x3Mc5f5xyQyHcD11I0JsOcud3NLHt-zM3wknZbMcSqhsy7oNl9OYlELhePRcOMl_EVs_IyyCV9tEjkjTPRoHGrHI2R2DLbOzSWojSqWUkwZemRHvHSsxIaaCIKouP9Slp4B1xAdGlkBklpr0QNhjOU6NkSjioing-gUMc053fDuEJTbaOoH9wMFgYyC6S4cZEEyD2zMmGW_Cqvfgbhy2YGZdAXmWoEQzHepnDct11knRzYFR6t2RwGoziOF1l41kOwfXeUtQQdIvvFuyXdJQSJuU6UA
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
     uri: https://api.thetvdb.com/search/series?name=shameless
   response:
     body:
       string: "{\"data\":[{\"aliases\":[\"Shameless - Nicht ganz n\xFCchtern\",\"Shameless:
-        Hall of Shame\",\"\u05DC\u05DC\u05D0 \u05D1\u05D5\u05E9\u05D4\",\"Shameless
-        \u2013 Niepokorni\",\"\u65E0\u803B\u4E4B\u5F92\"],\"banner\":\"/banners/graphical/161511-g5.jpg\",\"firstAired\":\"2011-01-09\",\"id\":161511,\"image\":\"/banners/posters/161511-1.jpg\",\"network\":\"Showtime\",\"overview\":\"Chicagoan
-        Frank Gallagher is the proud single dad of six smart, industrious, independent
-        kids, who without him would be... frankly, perhaps better off. When Frank's
-        not at the bar spending what little money they have, he's passed out on the
-        floor. But the kids have found ways to grow up in spite of him. They may not
-        be like any family you know, but they make no apologies for being exactly
-        who they are.\",\"poster\":\"/banners/posters/161511-1.jpg\",\"seriesName\":\"Shameless
+        Hall of Shame\",\"\u05DC\u05DC\u05D0 \u05D1\u05D5\u05E9\u05D4\",\"Bezwstydny
+        (US)\",\"\u65E0\u803B\u4E4B\u5F92\"],\"banner\":\"/banners/graphical/161511-g5.jpg\",\"firstAired\":\"2011-01-09\",\"id\":161511,\"image\":\"/banners/posters/161511-1.jpg\",\"network\":\"Paramount+
+        with Showtime\",\"overview\":\"Chicagoan Frank Gallagher is the proud single
+        dad of six smart, industrious, independent kids, who without him would be...
+        frankly, perhaps better off. When Frank's not at the bar spending what little
+        money they have, he's passed out on the floor. But the kids have found ways
+        to grow up in spite of him. They may not be like any family you know, but
+        they make no apologies for being exactly who they are.\",\"poster\":\"/banners/posters/161511-1.jpg\",\"seriesName\":\"Shameless
         (US)\",\"slug\":\"shameless-us\",\"status\":\"Ended\"},{\"aliases\":[\"Shameless
         (UK)\",\"Shameless (UK)\"],\"banner\":\"/banners/graphical/78846-g4.jpg\",\"firstAired\":\"2004-01-13\",\"id\":78846,\"image\":\"/banners/posters/78846-2.jpg\",\"network\":\"Channel
         4\",\"overview\":\"The lives and relationships of a group of siblings and
         their estranged father Frank Gallagher on a rough Manchester estate.\",\"poster\":\"/banners/posters/78846-2.jpg\",\"seriesName\":\"Shameless\",\"slug\":\"shameless\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/336588-g.jpg\",\"firstAired\":\"2017-09-01\",\"id\":336588,\"image\":\"/banners/posters/336588-1.jpg\",\"network\":\"\u041D\u0422\u0412\",\"poster\":\"/banners/posters/336588-1.jpg\",\"seriesName\":\"Shameless
         (2017)\",\"slug\":\"336588-show\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/416717/banners/6270d43ca9f39.jpg\",\"firstAired\":\"2022-02-19\",\"id\":416717,\"image\":\"/banners/v4/series/416717/posters/64bdb4bc4a793.jpg\",\"network\":\"TNT
-        (US)\",\"overview\":\"Fame. Power. Respect. Money can bring it all. And drain
-        it all away. Rich \\u0026 Shameless tells the true stories of the successes,
-        failures, thrills and miseries that accompany the kind of wealth that ordinary
-        people can never understand. Using a combination of powerful interviews, unique
-        archive and atmospheric visuals, Rich \\u0026 Shameless goes behind the public
-        facade to reveal the dangers of great prosperity. Subjects include the mysterious
-        death of crypto millionaire and suspected con artist Gerald Cotton, Seagrams
-        heiress Clare Bronfman and her involvement in a nefarious sex cult, the unlikely
-        battle between Martin Shkreli and The Wu-Tang Clan, the disappearance of NBA
-        great Bison Dele (formerly Brian Williams) at sea, fashion mogul Peter Nygard\u2019s
-        quest for eternal youth, and more.\",\"poster\":\"/banners/v4/series/416717/posters/64bdb4bc4a793.jpg\",\"seriesName\":\"Rich
+        (US)\",\"overview\":\"The true stories of the successes, failures, thrills
+        and miseries that accompany the kind of wealth that ordinary people can never
+        understand. Using a combination of powerful interviews, unique archive and
+        atmospheric visuals, Rich \\u0026 Shameless goes behind the public facade
+        to reveal the dangers of great prosperity.\",\"poster\":\"/banners/v4/series/416717/posters/64bdb4bc4a793.jpg\",\"seriesName\":\"Rich
         \\u0026 Shameless\",\"slug\":\"rich-shameless\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2007-09-09\",\"id\":339031,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"TVN\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"The
-        Shameless Three (PL)\",\"slug\":\"339031-show\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"\",\"id\":439469,\"image\":\"/banners/images/missing/series.jpg\",\"network\":null,\"overview\":\"Shameless
-        Hall of Shame is a mini series that airs during the eleventh season of Shameless
-        (US). The series contains new and original scenes that are juxtaposed with
-        flashbacks of the series' lead characters throughout the past ten seasons.
-        Six episodes are set to air, with the final episode airing on February 28,
-        2021.\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Shameless
+        Shameless Three (PL)\",\"slug\":\"339031-show\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2021-01-03\",\"id\":439469,\"image\":\"/banners/v4/series/439469/posters/66ac85d091efe.jpg\",\"network\":\"Paramount+
+        with Showtime\",\"overview\":\"Shameless Hall of Shame is a mini series that
+        airs during the eleventh season of Shameless (US). The series contains new
+        and original scenes that are juxtaposed with flashbacks of the series' lead
+        characters throughout the past ten seasons. Six episodes are set to air, with
+        the final episode airing on February 28, 2021.\",\"poster\":\"/banners/v4/series/439469/posters/66ac85d091efe.jpg\",\"seriesName\":\"Shameless
         Hall of Shame\",\"slug\":\"hall-of-shame\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/411567/banners/63c58effc8c52.jpg\",\"firstAired\":\"2021-03-07\",\"id\":411567,\"image\":\"/banners/v4/series/411567/posters/63c58ed2ead05.jpg\",\"network\":\"DR
         P3\",\"overview\":\"Is it SHAMELESS to feel like having a lot of sex when
         you are a young woman? In DR3\u2019s new reportage series, we follow three
@@ -123,8 +117,17 @@ interactions:
         Egyptian spy files of one of the Egyptian intelligence operations against
         the Israeli Mossad, whose hero was in fact (Ahmed Muhammad Abdel Rahman El-Hwan),
         who became in the series (Gomaa Al-Shawan).\",\"poster\":\"/banners/v4/series/318975/posters/640cbb149235a.jpg\",\"seriesName\":\"Tears
-        in Shameless Eyes\",\"slug\":\"dumou-fi-oyoun-waqiha\",\"status\":\"Ended\"},{\"aliases\":[\"Shameless
-        (TR)\"],\"banner\":\"\",\"firstAired\":\"2017-09-14\",\"id\":334846,\"image\":\"/banners/series/334846/posters/62040119.jpg\",\"network\":\"FOX
+        in Shameless Eyes\",\"slug\":\"dumou-fi-oyoun-waqiha\",\"status\":\"Ended\"},{\"aliases\":[\"Gong
+        Zi Wu Shang\",\"Gong Zi Wu Chi\",\"\u516C\u5B50\u7121\u6065\",\"\u516C\u5B50\u7121\u96D9\",\"\u516C\u5B50\u65E0\u803B\"],\"banner\":\"\",\"firstAired\":\"2024-11-12\",\"id\":456717,\"image\":\"/banners/v4/series/456717/posters/6764c55aa22e6.jpg\",\"network\":\"Tencent
+        Video\",\"overview\":\"Shen Zhi Li embarks on a quest to revive her master
+        using an ancient formula that requires a rare medicinal ingredient. When Su
+        Chen Che arrives, Shen Zhi Li is unexpectedly trapped in a time loop, discovering
+        that each time Su Chen Che dies, time resets. To complete the mission, the
+        two set out together, navigating misunderstandings, a growing bond, and cryptic
+        guidance from a mysterious figure in the shadows. Can they solve the riddle
+        of the time loop and find the elusive ingredient?\",\"poster\":\"/banners/v4/series/456717/posters/6764c55aa22e6.jpg\",\"seriesName\":\"Shameless
+        Lover\",\"slug\":\"gong-zi-wu-shuang\",\"status\":\"Ended\"},{\"aliases\":[\"Shameless
+        (TR)\"],\"banner\":\"/banners/v4/series/334846/banners/6756cf9b6c0f8.jpg\",\"firstAired\":\"2017-09-14\",\"id\":334846,\"image\":\"/banners/series/334846/posters/62040119.jpg\",\"network\":\"FOX
         T\xFCrkiye\",\"overview\":\"Filiz is the eldest of the 6 siblings whose father,
         Fikri, is an alcoholic. All the responsibility of managing the house and raising
         her siblings falls on her shoulders. Baris falls in love with Filiz for who
@@ -152,7 +155,11 @@ interactions:
         does not have her daughter to support, during the creation of her show \\\"Epilogue\\\",
         in 2017. Like her dual life, where the routine rubs shoulders with glamour,
         laughter flirts with the serious, and parody invites itself into reality.
-        A beautiful mess.\",\"poster\":\"/banners/v4/series/420062/posters/633d229cf1c8a.jpg\",\"seriesName\":\"D\xE9sordres\",\"slug\":\"desordres\",\"status\":\"Continuing\"}]}"
+        A beautiful mess.\",\"poster\":\"/banners/v4/series/420062/posters/633d229cf1c8a.jpg\",\"seriesName\":\"D\xE9sordres\",\"slug\":\"desordres\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/455790/banners/672367ed73f4e.jpg\",\"firstAired\":\"2024-10-30\",\"id\":455790,\"image\":\"/banners/v4/series/455790/posters/6722c9e46b32c.jpg\",\"network\":\"ITV1\",\"overview\":\"With
+        unique access to Prince William, this series captures rare behind-the-scenes
+        footage of him at work as he confronts the scale of the homelessness crisis
+        with an ambitious plan.\",\"poster\":\"/banners/v4/series/455790/posters/6722c9e46b32c.jpg\",\"seriesName\":\"Prince
+        William: We Can End Homelessness\",\"slug\":\"prince-william-we-can-end-homelessness\",\"status\":\"Ended\"}]}"
     headers:
       Cache-Control:
       - private, max-age=86400
@@ -161,17 +168,17 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 22 May 2024 14:33:42 GMT
+      - Thu, 13 Feb 2025 23:30:28 GMT
       Transfer-Encoding:
       - chunked
       Vary:
       - Accept-Language
       Via:
-      - 1.1 68c9162ccc29f8f3ca30be36950cea58.cloudfront.net (CloudFront)
+      - 1.1 72dd98bd7ac49e4cde7380f0bf4fad6c.cloudfront.net (CloudFront)
       X-Amz-Cf-Id:
-      - _EMd4fBsoi5MiBhCQJGlOtNRekyq6k_W3RlWu8btzh3jr-WOwYNlMQ==
+      - qehts8eDr5s6ZeSc13V1GSrpSJG0P4W-Yrr5q1lNEe8HfpGA99B8gw==
       X-Amz-Cf-Pop:
-      - LIS50-P1
+      - MAD51-C3
       X-Cache:
       - Miss from cloudfront
       X-Powered-By:
@@ -187,62 +194,63 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Accept-Language:
       - en
       Authorization:
-      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDAwOTQyMTgsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzM5NDg5NDE4fQ.I-flvnRYHdakvoJPuyRAVB6U6ePDHLaV8YdC98u5dVsuvO3P3obJ7E7yAN_x3Mc5f5xyQyHcD11I0JsOcud3NLHt-zM3wknZbMcSqhsy7oNl9OYlELhePRcOMl_EVs_IyyCV9tEjkjTPRoHGrHI2R2DLbOzSWojSqWUkwZemRHvHSsxIaaCIKouP9Slp4B1xAdGlkBklpr0QNhjOU6NkSjioing-gUMc053fDuEJTbaOoH9wMFgYyC6S4cZEEyD2zMmGW_Cqvfgbhy2YGZdAXmWoEQzHepnDct11knRzYFR6t2RwGoziOF1l41kOwfXeUtQQdIvvFuyXdJQSJuU6UA
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
     uri: https://api.thetvdb.com/series/161511
   response:
     body:
       string: '{"data":{"id":161511,"seriesId":"","seriesName":"Shameless (US)","aliases":["Shameless:
-        Hall of Shame"],"season":"11","poster":"posters/161511-1.jpg","banner":"graphical/161511-g3.jpg","fanart":"fanart/original/161511-28.jpg","status":"Ended","firstAired":"2011-01-09","network":"Showtime","networkId":"212","runtime":"55","language":"en","genre":["Comedy","Drama"],"overview":"Chicagoan
+        Hall of Shame"],"season":"11","poster":"posters/161511-1.jpg","banner":"graphical/161511-g3.jpg","fanart":"fanart/original/161511-28.jpg","status":"Ended","firstAired":"2011-01-09","network":"Paramount+
+        with Showtime","networkId":"212","runtime":"55","language":"en","genre":["Comedy","Drama"],"overview":"Chicagoan
         Frank Gallagher is the proud single dad of six smart, industrious, independent
         kids, who without him would be... frankly, perhaps better off. When Frank''s
         not at the bar spending what little money they have, he''s passed out on the
         floor. But the kids have found ways to grow up in spite of him. They may not
         be like any family you know, but they make no apologies for being exactly
-        who they are.","lastUpdated":1709675824,"airsDayOfWeek":"Sunday","airsTime":"9:00
+        who they are.","lastUpdated":1736020309,"airsDayOfWeek":"Sunday","airsTime":"9:00
         PM","rating":"TV-MA","imdbId":"tt1586680","zap2itId":"","added":"2010-05-06
         13:26:59","addedBy":171,"siteRating":9,"siteRatingCount":4279,"slug":"shameless-us"}}'
     headers:
       Age:
-      - '6719'
+      - '40467'
       Cache-Control:
       - private, max-age=86400
       Connection:
       - keep-alive
-      Content-Encoding:
-      - gzip
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 22 May 2024 12:41:43 GMT
+      - Thu, 13 Feb 2025 12:16:02 GMT
       Last-Modified:
-      - Tue, 05 Mar 2024 21:57:04 GMT
+      - Sat, 04 Jan 2025 19:51:49 GMT
       Transfer-Encoding:
       - chunked
       Vary:
       - Accept-Encoding,Accept-Language
       Via:
-      - 1.1 c6ccd07e1e50408d404ed1f9dd2506ce.cloudfront.net (CloudFront)
+      - 1.1 f5cc76e0ef8305f960f258eb80ac4006.cloudfront.net (CloudFront)
       X-Amz-Cf-Id:
-      - CDs-JnWF3elE_ZI5hwwinz7L4BLBdmlBfPBq_ZClENPr3r0B8_CukA==
+      - DjmCVqC1leT8Ksh2C2S7FMOc7qIzUHepsEjUGUasJ_07MiQ2orwU_w==
       X-Amz-Cf-Pop:
-      - LIS50-P1
+      - MAD51-C3
       X-Cache:
       - Hit from cloudfront
       X-Powered-By:
       - Thundar!
       X-Thetvdb-Api-Version:
       - 3.0.0
+      content-length:
+      - '1029'
     status:
       code: 200
       message: OK
@@ -252,17 +260,17 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Accept-Language:
       - en
       Authorization:
-      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDAwOTQyMTgsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzM5NDg5NDE4fQ.I-flvnRYHdakvoJPuyRAVB6U6ePDHLaV8YdC98u5dVsuvO3P3obJ7E7yAN_x3Mc5f5xyQyHcD11I0JsOcud3NLHt-zM3wknZbMcSqhsy7oNl9OYlELhePRcOMl_EVs_IyyCV9tEjkjTPRoHGrHI2R2DLbOzSWojSqWUkwZemRHvHSsxIaaCIKouP9Slp4B1xAdGlkBklpr0QNhjOU6NkSjioing-gUMc053fDuEJTbaOoH9wMFgYyC6S4cZEEyD2zMmGW_Cqvfgbhy2YGZdAXmWoEQzHepnDct11knRzYFR6t2RwGoziOF1l41kOwfXeUtQQdIvvFuyXdJQSJuU6UA
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
     uri: https://api.thetvdb.com/series/161511/episodes/query?airedSeason=8&airedEpisode=1&page=1
   response:
@@ -277,33 +285,33 @@ interactions:
         12:59:20","thumbWidth":"640","thumbHeight":"360","siteRating":7,"siteRatingCount":135,"isMovie":0}]}'
     headers:
       Age:
-      - '35524'
+      - '72164'
       Cache-Control:
       - private, max-age=86400
       Connection:
       - keep-alive
-      Content-Encoding:
-      - gzip
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 22 May 2024 04:41:38 GMT
+      - Thu, 13 Feb 2025 03:27:45 GMT
       Transfer-Encoding:
       - chunked
       Vary:
       - Accept-Encoding,Accept-Language
       Via:
-      - 1.1 56d84f665e9029878cb3adcd83a21026.cloudfront.net (CloudFront)
+      - 1.1 c854fb0d5b88436abc85e38f9c08a56c.cloudfront.net (CloudFront)
       X-Amz-Cf-Id:
-      - _Cg9DA7mj8P0S8rFgqthYkuHWeeyoNlPrz6k9u0doSJzs1MqtXC_zA==
+      - MYXha2NhFHBBtYn8ydMqgHiBd7zuO1oJ6VNXSy_sQ1nFMwg6lc3znA==
       X-Amz-Cf-Pop:
-      - LIS50-P1
+      - MAD51-C3
       X-Cache:
       - Hit from cloudfront
       X-Powered-By:
       - Thundar!
       X-Thetvdb-Api-Version:
       - 3.0.0
+      content-length:
+      - '1135'
     status:
       code: 200
       message: OK
@@ -313,17 +321,17 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Accept-Language:
       - en
       Authorization:
-      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDAwOTQyMTgsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzM5NDg5NDE4fQ.I-flvnRYHdakvoJPuyRAVB6U6ePDHLaV8YdC98u5dVsuvO3P3obJ7E7yAN_x3Mc5f5xyQyHcD11I0JsOcud3NLHt-zM3wknZbMcSqhsy7oNl9OYlELhePRcOMl_EVs_IyyCV9tEjkjTPRoHGrHI2R2DLbOzSWojSqWUkwZemRHvHSsxIaaCIKouP9Slp4B1xAdGlkBklpr0QNhjOU6NkSjioing-gUMc053fDuEJTbaOoH9wMFgYyC6S4cZEEyD2zMmGW_Cqvfgbhy2YGZdAXmWoEQzHepnDct11knRzYFR6t2RwGoziOF1l41kOwfXeUtQQdIvvFuyXdJQSJuU6UA
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
     uri: https://api.thetvdb.com/episodes/6227949
   response:
@@ -338,17 +346,15 @@ interactions:
         12:59:20","thumbWidth":"640","thumbHeight":"360","siteRating":7,"siteRatingCount":135,"isMovie":0}}'
     headers:
       Age:
-      - '35524'
+      - '72164'
       Cache-Control:
       - private, max-age=86400
       Connection:
       - keep-alive
-      Content-Encoding:
-      - gzip
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 22 May 2024 04:41:38 GMT
+      - Thu, 13 Feb 2025 03:27:45 GMT
       Last-Modified:
       - Thu, 01 Jan 1970 00:00:00 GMT
       Transfer-Encoding:
@@ -356,17 +362,19 @@ interactions:
       Vary:
       - Accept-Encoding,Accept-Language
       Via:
-      - 1.1 e33c092c8429c324c2810046683bf2f2.cloudfront.net (CloudFront)
+      - 1.1 ccf23514a8a200c107293458311fe030.cloudfront.net (CloudFront)
       X-Amz-Cf-Id:
-      - DQzjiezwzy9pHTjWPPjaIHPRwXwp8hgTIuwl_thQRykWDQDf4nAR0A==
+      - aBp8QXBsoAOmCQ_TC_DeteJAKf51j-6V7oBSXRHI8jKJpcb5R-UtUA==
       X-Amz-Cf-Pop:
-      - LIS50-P1
+      - MAD51-C3
       X-Cache:
       - Hit from cloudfront
       X-Powered-By:
       - Thundar!
       X-Thetvdb-Api-Version:
       - 3.0.0
+      content-length:
+      - '1080'
     status:
       code: 200
       message: OK

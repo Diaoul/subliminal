@@ -3,11 +3,11 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
       accept:
       - application/json
     method: GET
@@ -16,28 +16,24 @@ interactions:
     body:
       string: '{"shows":[{"id":"018b4083-1600-48b5-a5f1-28f7d152d265","name":"Grimsburg","nbSeasons":1,"seasons":[1],"tvDbId":420069,"tmdbId":202224,"slug":"grimsburg"}]}'
     headers:
-      Age:
-      - '2335'
       CF-Cache-Status:
-      - HIT
+      - EXPIRED
       CF-RAY:
-      - 892d08b5ff00499a-LHR
+      - 91189a34ed2b5bf0-LIS
       Cache-Control:
       - public, max-age=14400
       Connection:
       - keep-alive
-      Content-Encoding:
-      - br
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 12 Jun 2024 21:46:30 GMT
+      - Thu, 13 Feb 2025 23:29:45 GMT
       Last-Modified:
-      - Wed, 12 Jun 2024 21:07:35 GMT
+      - Thu, 13 Feb 2025 23:29:45 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=LV%2BtCZEyGpPnJr654rVQiQ1zIsoUxoOoCyEJxv5g8IZjs1D9o%2BLjatJfRjyevQZnvhAHjdyiuJ9WDDzxAMc%2BrnNgZOoMEoeeFEkE2Ib%2BlKbwSRGMmHgAbd7vwGMSz7k3rSDp8w%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=tclIyT0UVzw4jkCPrTQO8t07fWfmaNU6BY33SeqZd3LqI8fXx6twajei8VQTa%2B%2FJJJsl0EGmED%2BJ2j5Qu5jpJAdPf2s81EKsdCE7IIYDFGerezw6cPS63QqeIOK8owxDZNxghw%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -48,7 +44,12 @@ interactions:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
+      content-length:
+      - '155'
+      server-timing:
+      - cfL4;desc="?proto=TCP&rtt=3050&min_rtt=2990&rtt_var=1242&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2847&recv_bytes=794&delivery_rate=833861&cwnd=235&unsent_bytes=0&cid=9345d48b2bd3d39f&ts=77&x=0"
       vary:
+      - Accept-Encoding
       - Accept-Encoding
     status:
       code: 200
@@ -57,41 +58,37 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
       accept:
       - application/json
     method: GET
     uri: https://api.gestdown.info/subtitles/get/018b4083-1600-48b5-a5f1-28f7d152d265/1/1/eng
   response:
     body:
-      string: '{"matchingSubtitles":[{"subtitleId":"018ceac7-5d4f-4f26-8d36-3efc4b948281","version":"WEB-EDITH","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/018ceac7-5d4f-4f26-8d36-3efc4b948281","language":"English","discovered":"2024-01-08T20:33:03.311777Z","downloadCount":47},{"subtitleId":"018ceac7-5d4f-452b-b36f-fded539e7c6d","version":"WEB-EDITH","completed":true,"hearingImpaired":true,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/018ceac7-5d4f-452b-b36f-fded539e7c6d","language":"English","discovered":"2024-01-08T20:33:03.311796Z","downloadCount":20}],"episode":{"season":1,"number":1,"title":"Pilot","show":"Grimsburg","discovered":"2024-01-08T20:33:03.311746Z"}}'
+      string: '{"matchingSubtitles":[{"subtitleId":"018ceac7-5d4f-4f26-8d36-3efc4b948281","version":"WEB-EDITH","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/018ceac7-5d4f-4f26-8d36-3efc4b948281","language":"English","discovered":"2024-01-08T20:33:03.311777Z","downloadCount":84},{"subtitleId":"018ceac7-5d4f-452b-b36f-fded539e7c6d","version":"WEB-EDITH","completed":true,"hearingImpaired":true,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/018ceac7-5d4f-452b-b36f-fded539e7c6d","language":"English","discovered":"2024-01-08T20:33:03.311796Z","downloadCount":57}],"episode":{"season":1,"number":1,"title":"Pilot","show":"Grimsburg","discovered":"2024-01-08T20:33:03.311746Z"}}'
     headers:
-      Age:
-      - '2335'
       CF-Cache-Status:
-      - HIT
+      - MISS
       CF-RAY:
-      - 892d08b6cc0c3d88-LHR
+      - 91189a35efe048b5-LHR
       Cache-Control:
       - public, max-age=7200
       Connection:
       - keep-alive
-      Content-Encoding:
-      - br
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 12 Jun 2024 21:46:30 GMT
+      - Thu, 13 Feb 2025 23:29:45 GMT
       Last-Modified:
-      - Wed, 12 Jun 2024 21:07:35 GMT
+      - Thu, 13 Feb 2025 23:29:45 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=YA9uuRESMjLVbim2rX%2FjEmxH2j36za7xR72mHv0one0%2BKRYG4qGHX24ltlyC3y7DKPTCcYpx5q%2BBgd%2BZ2EOl9bdgpM3ssm0mJc1eDc1B%2F0MMSN7R7zn82%2FJea8wLAWG%2BlJoq8w%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=aoI5ZSqU6wvzkimsZP9GIZoQU55XhBO3JFkmnEf0FsY0QF9fBvSbeuI9hmzLblvjd7JaexUNiQlsy8zKnBzxikKxD4DLqUB0xhN2DNVWtLWLbr7nT%2BPm82%2FrbIyKpqLp3K21oQ%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -102,7 +99,12 @@ interactions:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
+      content-length:
+      - '734'
+      server-timing:
+      - cfL4;desc="?proto=TCP&rtt=32136&min_rtt=32042&rtt_var=12205&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2846&recv_bytes=830&delivery_rate=88292&cwnd=239&unsent_bytes=0&cid=fb0d7b3c051ff22a&ts=98&x=0"
       vary:
+      - Accept-Encoding
       - Accept-Encoding
     status:
       code: 200
@@ -111,11 +113,11 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
       accept:
       - application/json
     method: GET
@@ -536,12 +538,10 @@ interactions:
         --> 00:21:35,989\r\n<i> <font color=\"cyan\">  sync & correction by f1nc0\r\n--
         Addic7ed.com --  </font></i>\r\n\r\n"
     headers:
-      Age:
-      - '2334'
       CF-Cache-Status:
       - HIT
       CF-RAY:
-      - 892d08b798a248bb-LHR
+      - 91189a36fa493da0-LHR
       Cache-Control:
       - public, max-age=691200
       Connection:
@@ -549,11 +549,11 @@ interactions:
       Content-Type:
       - text/srt
       Date:
-      - Wed, 12 Jun 2024 21:46:30 GMT
+      - Thu, 13 Feb 2025 23:29:46 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=HCnK9h8c5cD0FGc%2By0rZVOO5PQMjHnPoUTWhHUKu64oCagHAXnZ53wZvd2DWpbV9DhVak4lWK9A4Id0wcj%2F%2BTidoswfN42OWpy3iluFPUI5trc79ZBlt6FFl90SuIfKiRbcDFQ%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=F5YmPYC8aed2pfZZ%2BuDJOGMWWg5Fa1%2FzQ5RymgVYxQm%2FKe58SPJLEmVm03w93BBR8hwrJvVxY0niHjzc9AjfCmlQejHKxP9v4uI%2FTfAGIReNORxmB7ww%2FBF576PI8ZVvD1oxoQ%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -570,7 +570,10 @@ interactions:
       - W/"018ceac7-5d4f-4f26-8d36-3efc4b948281-638403478840298590"
       last-modified:
       - Mon, 08 Jan 2024 21:58:04 GMT
+      server-timing:
+      - cfL4;desc="?proto=TCP&rtt=32017&min_rtt=31952&rtt_var=12112&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2847&recv_bytes=827&delivery_rate=89176&cwnd=252&unsent_bytes=0&cid=bb82d3d8ff5ffaa4&ts=86&x=0"
       vary:
+      - Accept-Encoding
       - Accept-Encoding
     status:
       code: 200

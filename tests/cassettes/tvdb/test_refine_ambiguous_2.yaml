@@ -20,7 +20,7 @@ interactions:
     uri: https://api.thetvdb.com/login
   response:
     body:
-      string: '{"token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg"}'
+      string: '{"token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDAwOTQyMTgsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzM5NDg5NDE4fQ.I-flvnRYHdakvoJPuyRAVB6U6ePDHLaV8YdC98u5dVsuvO3P3obJ7E7yAN_x3Mc5f5xyQyHcD11I0JsOcud3NLHt-zM3wknZbMcSqhsy7oNl9OYlELhePRcOMl_EVs_IyyCV9tEjkjTPRoHGrHI2R2DLbOzSWojSqWUkwZemRHvHSsxIaaCIKouP9Slp4B1xAdGlkBklpr0QNhjOU6NkSjioing-gUMc053fDuEJTbaOoH9wMFgYyC6S4cZEEyD2zMmGW_Cqvfgbhy2YGZdAXmWoEQzHepnDct11knRzYFR6t2RwGoziOF1l41kOwfXeUtQQdIvvFuyXdJQSJuU6UA"}'
     headers:
       Connection:
       - keep-alive
@@ -53,17 +53,17 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Accept-Language:
       - en
       Authorization:
-      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDAwOTQyMTgsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzM5NDg5NDE4fQ.I-flvnRYHdakvoJPuyRAVB6U6ePDHLaV8YdC98u5dVsuvO3P3obJ7E7yAN_x3Mc5f5xyQyHcD11I0JsOcud3NLHt-zM3wknZbMcSqhsy7oNl9OYlELhePRcOMl_EVs_IyyCV9tEjkjTPRoHGrHI2R2DLbOzSWojSqWUkwZemRHvHSsxIaaCIKouP9Slp4B1xAdGlkBklpr0QNhjOU6NkSjioing-gUMc053fDuEJTbaOoH9wMFgYyC6S4cZEEyD2zMmGW_Cqvfgbhy2YGZdAXmWoEQzHepnDct11knRzYFR6t2RwGoziOF1l41kOwfXeUtQQdIvvFuyXdJQSJuU6UA
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
     uri: https://api.thetvdb.com/search/series?name=the+100
   response:
@@ -78,9 +78,7 @@ interactions:
         BOYZ : THE 100\",\"slug\":\"the-boyz-the-100\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/5cb232ca82c4d.jpg\",\"firstAired\":\"2018-12-20\",\"id\":360144,\"image\":\"/banners/series/360144/posters/5ec984a8a863f.jpg\",\"network\":\"YouTube\",\"overview\":\"Kelsey
         Impicciche plays the Sims 4 and begins the very long, and very popular, 100-baby
         challenge!\",\"poster\":\"/banners/series/360144/posters/5ec984a8a863f.jpg\",\"seriesName\":\"The
-        100 Baby Challenge\",\"slug\":\"100-baby-challenge\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/5b225464d7d95.jpg\",\"firstAired\":\"2018-04-30\",\"id\":347057,\"image\":\"/banners/posters/5aec35fac15a7.jpg\",\"network\":\"VLIVE\",\"overview\":\"The
-        100 is the new reality featuring the idol group Fromis_9\",\"poster\":\"/banners/posters/5aec35fac15a7.jpg\",\"seriesName\":\"Fromis
-        9 - The 100\",\"slug\":\"347057-show\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/201711-g.jpg\",\"firstAired\":\"2004-10-27\",\"id\":201711,\"image\":\"/banners/posters/201711-1.jpg\",\"network\":\"Bravo\",\"overview\":\"Film-makers,
+        100 Baby Challenge\",\"slug\":\"100-baby-challenge\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/201711-g.jpg\",\"firstAired\":\"2004-10-27\",\"id\":201711,\"image\":\"/banners/posters/201711-1.jpg\",\"network\":\"Bravo\",\"overview\":\"Film-makers,
         performers, genre authorities and selected high-profile fans count down the
         most chilling moments in cinematic history. Not just from horror films, but
         from such thrillers as Wait Until Dark (1967) and Jaws (1975) and such science-fiction
@@ -124,9 +122,9 @@ interactions:
         100 Baby Challenge Speedrun\",\"slug\":\"the-100-baby-challenge-speedrun\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2000-09-09\",\"id\":383098,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"Channel
         4\",\"overview\":\"A celebration of the hundred most memorable bad moments
         from the UK's television archives.\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"The
-        100 Greatest TV Moments from Hell\",\"slug\":\"the-100-greatest-tv-moments-from-hell\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2009-04-05\",\"id\":403663,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"Food
-        Network Canada\",\"overview\":\"James MacKinnon and Alisa Smith revolutionized
-        the concept of the 100-mile diet. This method of eating relies solely on consuming
+        100 Greatest TV Moments from Hell\",\"slug\":\"the-100-greatest-tv-moments-from-hell\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2009-04-05\",\"id\":403663,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"Flavour
+        Network\",\"overview\":\"James MacKinnon and Alisa Smith revolutionized the
+        concept of the 100-mile diet. This method of eating relies solely on consuming
         those foods that are grown or produced within a 100-mile radius of one's own
         home. They place a challenge on the residents of Mission, British Columbia,
         Canada, a small town located in the Fraser Valley just east of Vancouver:
@@ -142,8 +140,9 @@ interactions:
         no Koto ga Dai Dai Dai Dai Daisuki na 100-nin no Kanojo\",\"Kimi no Koto ga
         Daidaidaidaidaisuki na 100-nin no Kanojo\",\"100-nin no Kanojo\",\"Hyakkano\",\"100
         Kanojo\",\"100\u30AB\u30CE\",\"100 Kano\",\"100\u4EBA\u306E\u5F7C\u5973\",\"100
-        Girlfriends\",\"\u8D85\u8D85\u8D85\u8D85\u8D85\u559C\u6B61\u4F60\u7684100\u500B\u5973\u670B\u53CB\",\"\u8D85\u8D85\u8D85\u8D85\u559C\u6B22\u4F60\u7684100\u4E2A\u5973\u670B\u53CB\",\"The
-        100 Girlfriends Who Really, Really, Really, Really, Really Love You\",\"Hyakkano\"],\"banner\":\"/banners/v4/series/432050/banners/663e62e157582.jpg\",\"firstAired\":\"2023-10-08\",\"id\":432050,\"image\":\"/banners/v4/series/432050/posters/640f54e3cfd63.jpg\",\"network\":\"Tokyo
+        Girlfriends\",\"\u8D85\u8D85\u8D85\u8D85\u8D85\u559C\u6B61\u4F60\u7684100\u500B\u5973\u670B\u53CB\",\"\u8D85\u8D85\u8D85\u8D85\u8D85\u559C\u6B22\u4F60\u7684100\u4E2A\u5973\u5B69\u5B50\",\"Las
+        100 novias que de verdad, de verdad, de verdad, de verdad, de verdad te quieren\",\"Hyakkano\",\"Kimi
+        no Koto ga Daidaidaidaidaisuki na 100-nin no Kanojo\"],\"banner\":\"/banners/v4/series/432050/banners/663e62e157582.jpg\",\"firstAired\":\"2023-10-08\",\"id\":432050,\"image\":\"/banners/v4/series/432050/posters/640f54e3cfd63.jpg\",\"network\":\"Tokyo
         MX\",\"overview\":\"Rentar\u014D Aijo was rejected 100 times in middle school.
         He visits a shrine and prays for better luck in high school. The God of Love
         appears and promises that he\u2019ll soon meet 100 people he\u2019s destined
@@ -154,14 +153,14 @@ interactions:
         100th Bride\",\"slug\":\"the-100th-bride\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2006-01-09\",\"id\":347151,\"image\":\"/banners/posters/5aea72b96f44a.jpg\",\"network\":\"MusiquePlus\",\"overview\":\"Retrace
         the 100 events that shook the cultural field in Quebec.\",\"poster\":\"/banners/posters/5aea72b96f44a.jpg\",\"seriesName\":\"The
         100 Scandals and Tragedies of Quebec showbiz\",\"slug\":\"les-100-scandales-et-tragedies-du-showbiz-quebecois\",\"status\":\"Ended\"},{\"aliases\":[\"All
-        Together Now: The 100\"],\"banner\":\"\",\"firstAired\":\"2018-10-07\",\"id\":351438,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"Seven
-        Network\",\"overview\":\"The series sees a range of talented singers (solos
-        and groups) perform in front of the biggest judging panel Australia has ever
-        seen. The 100 will be made up of great singers and industry professionals
-        with big voices and even bigger opinions. If any of The 100 like what they
-        hear, they can stand up, join in and sing along. The greater the number that
-        join in, the higher the act's score. Who can get them ALL on their feet singing
-        along? The urge to join in at home will be irresistible.\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"All
+        Together Now: The 100\"],\"banner\":\"\",\"firstAired\":\"2018-10-07\",\"id\":351438,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"Seven\",\"overview\":\"The
+        series sees a range of talented singers (solos and groups) perform in front
+        of the biggest judging panel Australia has ever seen. The 100 will be made
+        up of great singers and industry professionals with big voices and even bigger
+        opinions. If any of The 100 like what they hear, they can stand up, join in
+        and sing along. The greater the number that join in, the higher the act's
+        score. Who can get them ALL on their feet singing along? The urge to join
+        in at home will be irresistible.\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"All
         Together Now (AU)\",\"slug\":\"all-together-now-au\",\"status\":\"Ended\"},{\"aliases\":[\"Kelsey
         Tries the 100 Bae Challenge\"],\"banner\":\"\",\"firstAired\":\"2021-09-15\",\"id\":424496,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"YouTube\",\"overview\":\"Kelsey
         attempts the 100 Bae Challenge in The Sims 4\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"100
@@ -181,15 +180,21 @@ interactions:
         goes to the winners circle for a chance to win the grand prize.\",\"poster\":\"/banners/v4/series/404327/posters/60cd2a86d4ebc.jpg\",\"seriesName\":\"The
         $100,000 Pyramid\",\"slug\":\"the-100000-pyramid\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/5b49ad85a9c49.jpg\",\"firstAired\":\"2018-02-12\",\"id\":346249,\"image\":\"/banners/posters/5b49ad3a37a6c.jpg\",\"network\":\"VLIVE\",\"overview\":\"A
         new reality show that shows rookie group THE BOYZ as they prepare for a showcase
-        in 100 hours.\",\"poster\":\"/banners/posters/5b49ad3a37a6c.jpg\",\"seriesName\":\"THE100\",\"slug\":\"346249-show\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2016-10-19\",\"id\":329178,\"image\":\"/banners/posters/329178-1.jpg\",\"network\":\"Blackpills\",\"overview\":\"First
+        in 100 hours.\",\"poster\":\"/banners/posters/5b49ad3a37a6c.jpg\",\"seriesName\":\"THE100\",\"slug\":\"346249-show\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/5b225464d7d95.jpg\",\"firstAired\":\"2018-04-30\",\"id\":347057,\"image\":\"/banners/posters/5aec35fac15a7.jpg\",\"network\":\"VLIVE\",\"overview\":\"The
+        group will travel somewhere nice and be given 100 hours to prepare for a concert
+        to be held at the end of the show. However, how those hours will be divided
+        is up to the members. Mixing leisure and hard work, fromis_9's first travel
+        show is home to countless legendary moments.\",\"poster\":\"/banners/posters/5aec35fac15a7.jpg\",\"seriesName\":\"fromis_9:
+        THE100\",\"slug\":\"347057-show\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2016-10-19\",\"id\":329178,\"image\":\"/banners/posters/329178-1.jpg\",\"network\":\"Blackpills\",\"overview\":\"First
         100 days of Donald Trump at the white house\",\"poster\":\"/banners/posters/329178-1.jpg\",\"seriesName\":\"You
-        Got Trumped: The First 100 Days\",\"slug\":\"you-got-trumped-the-first-100-days\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2009-07-05\",\"id\":320290,\"image\":\"/banners/posters/320290-2.jpg\",\"network\":\"Spike
-        TV\",\"overview\":\"For 16 years, the Ultimate Fighting Championship has been
-        the gold standard in combat sports. Now you can re-live the 100 greatest fights
-        in UFC history with this exciting countdown show. Featuring all the greats
-        of the Octagon, from Royce Gracie and Chuck Liddell to Matt Hughes and Randy
-        Couture, this five episode special has the most dramatic, explosive, and memorable
-        battles of the UFC from 100 down to the greatest UFC fight of all time.\",\"poster\":\"/banners/posters/320290-2.jpg\",\"seriesName\":\"UFC:
+        Got Trumped: The First 100 Days\",\"slug\":\"you-got-trumped-the-first-100-days\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2009-07-05\",\"id\":320290,\"image\":\"/banners/posters/320290-2.jpg\",\"network\":\"Paramount
+        Network\",\"overview\":\"For 16 years, the Ultimate Fighting Championship
+        has been the gold standard in combat sports. Now you can re-live the 100 greatest
+        fights in UFC history with this exciting countdown show. Featuring all the
+        greats of the Octagon, from Royce Gracie and Chuck Liddell to Matt Hughes
+        and Randy Couture, this five episode special has the most dramatic, explosive,
+        and memorable battles of the UFC from 100 down to the greatest UFC fight of
+        all time.\",\"poster\":\"/banners/posters/320290-2.jpg\",\"seriesName\":\"UFC:
         The Ultimate 100 Greatest Fights\",\"slug\":\"ufc-the-ultimate-100-greatest-fights\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/188471-g2.jpg\",\"firstAired\":\"2010-09-03\",\"id\":188471,\"image\":\"/banners/posters/188471-1.jpg\",\"network\":\"\",\"overview\":\"On
         Friday, Sept. 3, NFL Network debuts a new 10-episode series produced by NFL
         Films entitled, The Top 100: NFL\u2019s Greatest Players. The one-hour shows
@@ -227,7 +232,11 @@ interactions:
         Network\",\"overview\":\"Tara and Percy are interior designers with a passion
         for old homes. After years of designing for others, now they're taking on
         a live-in renovation for their own farmhouse in upstate New York.\",\"poster\":\"/banners/v4/series/427183/posters/637190bb2802e.jpg\",\"seriesName\":\"The
-        Story of Home\",\"slug\":\"the-story-of-home\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2018-01-16\",\"id\":359345,\"image\":\"/banners/posters/5c5facf0e53c5.jpg\",\"network\":\"YouTube\",\"poster\":\"/banners/posters/5c5facf0e53c5.jpg\",\"seriesName\":\"100
+        Story of Home\",\"slug\":\"the-story-of-home\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/460150/banners/67abf7778e4e0.jpg\",\"firstAired\":\"2025-02-10\",\"id\":460150,\"image\":\"/banners/v4/series/460150/posters/67abe755d38a6.jpg\",\"network\":null,\"overview\":\"With
+        unprecedented access to archive footage and extensive new background research
+        this is the up-to-date story of Gerry Hutch by some of those who know his
+        life best.\",\"poster\":\"/banners/v4/series/460150/posters/67abe755d38a6.jpg\",\"seriesName\":\"Gerry
+        Hutch: AKA The Monk\",\"slug\":\"gerry-hutch-aka-the-monk\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2018-01-16\",\"id\":359345,\"image\":\"/banners/posters/5c5facf0e53c5.jpg\",\"network\":\"YouTube\",\"poster\":\"/banners/posters/5c5facf0e53c5.jpg\",\"seriesName\":\"100
         Thieves: The Heist\",\"slug\":\"100-thieves-the-heist\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/111841-g.jpg\",\"firstAired\":\"2009-07-06\",\"id\":111841,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Rocked
         the Nation 2: 100 NZ Pop Culture Stories\",\"slug\":\"rocked-the-nation-2-100-nz-pop-culture-stories\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2017-07-24\",\"id\":390886,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"\",\"overview\":\"In
         a series of films Dan Snow visits the battlefields of Passchendaele and examines
@@ -288,7 +297,11 @@ interactions:
         who brought vast change, modernisation, and d\xE9tente, yet saw the Soviet
         Union collapse under his rule \u2013 the untenable nation. The 20th century
         was shaped by its convulsions, its purges, its wars, and its leaders.\",\"poster\":\"/banners/v4/series/428494/posters/639d1ca014768.jpg\",\"seriesName\":\"The
-        Soviet Union: 100th Anniversary 1922\",\"slug\":\"the-soviet-union-100th-anniversary-1922\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/379401/banners/6632f502a59c8.jpg\",\"firstAired\":\"2014-03-31\",\"id\":379401,\"image\":\"/banners/v4/series/379401/posters/62418eb64e3d1.jpg\",\"network\":\"Smithsonian
+        Soviet Union: 100th Anniversary 1922\",\"slug\":\"the-soviet-union-100th-anniversary-1922\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/451422/banners/668190d904f7a.jpg\",\"firstAired\":\"2024-07-03\",\"id\":451422,\"image\":\"/banners/v4/series/451422/posters/6685ec84506b6.jpg\",\"network\":\"Netflix\",\"overview\":\"A
+        group of families learn the charismatic man they had trusted is sperm donor
+        to hundreds \u2014 or perhaps thousands \u2014 of other children across the
+        world.\",\"poster\":\"/banners/v4/series/451422/posters/6685ec84506b6.jpg\",\"seriesName\":\"The
+        Man with 1000 Kids\",\"slug\":\"the-man-with-1000-kids\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/379401/banners/6632f502a59c8.jpg\",\"firstAired\":\"2014-03-31\",\"id\":379401,\"image\":\"/banners/v4/series/379401/posters/62418eb64e3d1.jpg\",\"network\":\"Smithsonian
         Channel\",\"overview\":\"A celebrated Nazi general who plots Hitler's assassination.
         A sunken U-boat that mysteriously vanishes. An Alpine Fortress that may house
         millions in lost Nazi gold. Decades after World War II, there are still many
@@ -303,7 +316,16 @@ interactions:
         have been missed?\\r\\nA two-part true-crime series looking at some of the
         most notorious cases of women who disappeared within a so-called Vanishing
         Triangle throughout the 1990\u2019s.\",\"poster\":\"/banners/v4/series/438001/posters/6601626202f8f.jpg\",\"seriesName\":\"Missing:
-        Beyond The Vanishing Triangle\",\"slug\":\"missing-beyond-the-vanishing-triangle\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/437829/banners/64dddbf571f10.jpg\",\"firstAired\":\"2023-08-30\",\"id\":437829,\"image\":\"/banners/v4/series/437829/posters/64ef3aec04c35.jpg\",\"network\":\"Netflix\",\"overview\":\"Travel
+        Beyond The Vanishing Triangle\",\"slug\":\"missing-beyond-the-vanishing-triangle\",\"status\":\"Ended\"},{\"aliases\":[\"The
+        Money List (Ireland)\"],\"banner\":\"/banners/v4/series/441001/banners/664281a16db19.jpg\",\"firstAired\":\"2023-10-01\",\"id\":441001,\"image\":\"/banners/v4/series/441001/posters/652f05c2339d2.jpg\",\"network\":\"RT\xC9
+        One\",\"overview\":\"The Money List, presented by Baz Ashmawy, sees two teams
+        of complete strangers challenged to fill in missing answers on a list. The
+        more lists they complete, the more money they win. The lists can be about
+        anything, from \u2018Presidents of the USA\u2019 to \u2018Madonna Hit Singles\u2019.\\r\\n\\r\\nThe
+        format originated in the United States more than a decade ago with the short-lived
+        The Rich List, which the BBC then adapted as Who Dares Wins. Following another
+        name-change, it now comes to RT\xC9.\",\"poster\":\"/banners/v4/series/441001/posters/652f05c2339d2.jpg\",\"seriesName\":\"The
+        Money List\",\"slug\":\"the-money-list-ireland\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/437829/banners/64dddbf571f10.jpg\",\"firstAired\":\"2023-08-30\",\"id\":437829,\"image\":\"/banners/v4/series/437829/posters/64ef3aec04c35.jpg\",\"network\":\"Netflix\",\"overview\":\"Travel
         around the world with author Dan Buettner to discover five unique communities
         where people live extraordinarily long and vibrant lives.\",\"poster\":\"/banners/v4/series/437829/posters/64ef3aec04c35.jpg\",\"seriesName\":\"Live
         to 100: Secrets of the Blue Zones\",\"slug\":\"live-to-100-secrets-of-the-blue-zones\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2015-07-20\",\"id\":403081,\"image\":\"/banners/v4/series/403081/posters/60a3021af1873.jpg\",\"network\":\"\",\"overview\":\"Historian
@@ -327,7 +349,10 @@ interactions:
         is the story of the first coast to coast automobile road in the United States
         and its impact on Wyoming.\",\"poster\":\"/banners/posters/337417-1.jpg\",\"seriesName\":\"100
         Years on the Lincoln Highway\",\"slug\":\"100-years-on-the-lincoln-highway\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2014-03-04\",\"id\":367836,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"100
-        wonders of the world\",\"slug\":\"100-wonders-of-the-world\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/291981-g.jpg\",\"firstAired\":\"2013-04-25\",\"id\":291981,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"CBC\",\"overview\":\"A
+        wonders of the world\",\"slug\":\"100-wonders-of-the-world\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/454315/banners/67741a917f085.jpg\",\"firstAired\":\"\",\"id\":454315,\"image\":\"/banners/v4/series/454315/posters/6773e05926ba9.jpg\",\"network\":null,\"overview\":\"Today\xB4s
+        surgeons stand on the shoulders of people who risked their lives to solve
+        the puzzle of the human body.\\r\\n\\r\\n\\r\\n\",\"poster\":\"/banners/v4/series/454315/posters/6773e05926ba9.jpg\",\"seriesName\":\"The
+        Invention of Surgery\",\"slug\":\"the-invention-of-surgery\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"/banners/graphical/291981-g.jpg\",\"firstAired\":\"2013-04-25\",\"id\":291981,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"CBC\",\"overview\":\"A
         crew of mariners, scientists and filmmakers are followed as they cast off
         on the Sedna IV, an oceanographic schooner, to sail around the world exploring
         the beauty of nature, how ecosystems work and conservation challenges facing
@@ -354,11 +379,14 @@ interactions:
         up due to having their dreams stolen.\",\"poster\":\"/banners/posters/5b301f20f32f9.jpg\",\"seriesName\":\"100
         Sleeping Princes \\u0026 The Kingdom of Dreams\",\"slug\":\"100-sleeping-princes-\\u0026-the-kingdom-of-dreams\",\"status\":\"Ended\"},{\"aliases\":[\"100
         Percent Wolf: Legend Of The Moonstone\",\"100 Prozent Wolf - Die Legende des
-        Mondsteins\"],\"banner\":\"/banners/series/394076/banners/5fe9c975e06ba.jpg\",\"firstAired\":\"2020-12-27\",\"id\":394076,\"image\":\"/banners/v4/series/394076/posters/60a70bc27e658.jpg\",\"network\":\"ABC
+        Mondsteins\"],\"banner\":\"/banners/v4/series/394076/banners/6776de0528c02.jpg\",\"firstAired\":\"2020-12-27\",\"id\":394076,\"image\":\"/banners/v4/series/394076/posters/60a70bc27e658.jpg\",\"network\":\"ABC
         Me\",\"overview\":\"Freddy may be a poodle, but he has the heart of a wolf,
         and he's going to prove it by graduating from the werewolf-only Howlington
         Academy!\",\"poster\":\"/banners/v4/series/394076/posters/60a70bc27e658.jpg\",\"seriesName\":\"100%
-        Wolf: Legend Of The Moonstone\",\"slug\":\"100-wolf-legend-of-the-moonstone\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/347085/banners/6647da2f9d618.jpg\",\"firstAired\":\"\",\"id\":347085,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"100
+        Wolf: Legend Of The Moonstone\",\"slug\":\"100-wolf-legend-of-the-moonstone\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2024-06-03\",\"id\":450639,\"image\":\"/banners/v4/series/450639/posters/66578867d3e4f.jpg\",\"network\":\"Sky
+        History\",\"overview\":\"Retrace the 100 days of battle as the Allies liberated
+        Normandy, broke through the German line and paved the way towards victory.\",\"poster\":\"/banners/v4/series/450639/posters/66578867d3e4f.jpg\",\"seriesName\":\"D
+        Day: 100 Days to Beat the Third Reich\",\"slug\":\"d-day-100-days-to-beat-the-third-reich\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/347085/banners/6647da2f9d618.jpg\",\"firstAired\":\"\",\"id\":347085,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"100
         Greatest Songs of the 80's\",\"slug\":\"347085-show\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2021-04-29\",\"id\":428658,\"image\":\"/banners/images/missing/series.jpg\",\"network\":null,\"overview\":\"Be
         inspired! Introducing 100 passionate stories of efforts and innovations that
         pave the way towards the UN's 17 SDGs. From the treasure trove of NHK WORLD-JAPAN's
@@ -411,7 +439,15 @@ interactions:
         looks inside these atomic insiders\u2019 hearts and minds, their triumphs
         and failures, their bravery in the face of paralyzing fear and, ultimately,
         their war-winning and world-changing accomplishments.\",\"poster\":\"/banners/posters/323053-1.jpg\",\"seriesName\":\"1000
-        Days of Fear: The Deadly Race at Los Alamos\",\"slug\":\"1000-days-of-fear-the-deadly-race-at-los-alamos\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2013-09-05\",\"id\":403576,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"Eros
+        Days of Fear: The Deadly Race at Los Alamos\",\"slug\":\"1000-days-of-fear-the-deadly-race-at-los-alamos\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/442667/banners/66d5c1572c272.jpg\",\"firstAired\":\"2024-09-01\",\"id\":442667,\"image\":\"/banners/v4/series/442667/posters/66da21ea3a26b.jpg\",\"network\":\"RT\xC9
+        One\",\"overview\":\"When Dillon\u2019s father Harry races back to their tiny
+        apartment to rescue his child, the apartment is in rubble and there is no
+        sign of his son. Three years later, thousands of miles away in Dublin, Harry
+        spots a six-year-old boy in a crowd and is convinced he is Dillon. Desperate
+        to find his son, Harry\u2019s obsession tears apart his marriage to Robin,
+        exposing shameful secrets that lead to the truth of what happened to their
+        son on the night he went missing.\",\"poster\":\"/banners/v4/series/442667/posters/66da21ea3a26b.jpg\",\"seriesName\":\"The
+        Boy That Never Was\",\"slug\":\"the-boy-that-never-was\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2013-09-05\",\"id\":403576,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"Eros
         Now\",\"overview\":\"Get ready for the scariest ride of your life! Watch the
         most spine-chilling tales and short films.\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Twisted
         Tales\",\"slug\":\"twisted-tales\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/series/385519/banners/5f87832caa8f1.jpg\",\"firstAired\":\"2020-09-06\",\"id\":385519,\"image\":\"/banners/series/385519/posters/5f578af2d2de0.jpg\",\"network\":\"Smithsonian
@@ -442,7 +478,8 @@ interactions:
         in making herself look good. One day, she realizes that people don't view
         her as other women. She begins to read up on things like make-up and fashion
         trends with her two female colleagues.\",\"poster\":\"/banners/posters/326526-4.jpg\",\"seriesName\":\"It's
-        All About The Looks\",\"slug\":\"its-all-about-the-looks\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/254597-g.jpg\",\"firstAired\":\"1984-02-19\",\"id\":254597,\"image\":\"/banners/v4/series/254597/posters/6425cce345b57.jpg\",\"network\":\"CBS\",\"overview\":\"Based
+        All About The Looks\",\"slug\":\"its-all-about-the-looks\",\"status\":\"Ended\"},{\"aliases\":[\"100
+        Karat - Die Diamanten Dynastie\"],\"banner\":\"/banners/graphical/254597-g.jpg\",\"firstAired\":\"1984-02-19\",\"id\":254597,\"image\":\"/banners/v4/series/254597/posters/6425cce345b57.jpg\",\"network\":\"CBS\",\"overview\":\"Based
         on the novel by Sidney Sheldon, the story spans six generations in the lives
         of the fictional MacGregor/Blackwell family.\\r\\n\\r\\nElderly Kate Blackwell
         looks back at her family's life beginning with her Scottish father Jamie McGregor's
@@ -462,7 +499,7 @@ interactions:
         actors to live together for 3 months at a share house. The actors begin their
         temporary living arrangement. An incident from 10 years ago though causes
         the actors to hold resentment.\",\"poster\":\"/banners/series/322344/posters/5ff59b9cd3871.jpg\",\"seriesName\":\"The
-        Supporting Actors\",\"slug\":\"byplayers\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2016-03-12\",\"id\":308971,\"image\":\"/banners/posters/5be35ce93fc06.jpg\",\"network\":\"ZDF\",\"overview\":\"The
+        Supporting Actors\",\"slug\":\"byplayers\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2016-03-12\",\"id\":308971,\"image\":\"/banners/posters/5be35ce93fc06.jpg\",\"network\":\"ZDF\",\"overview\":\"The
         Weimar Republic was undoubtedly a dawn of the modern age, but had too many
         opponents who wanted to set the clock back to the past. The majority of Germans
         were not yet ready for democracy. Many were stubborn in their world views.
@@ -480,7 +517,7 @@ interactions:
         30 tollsten\",\"Der tolle Schlagerabend\",\"Pop nonstop\",\"Die 30 sch\xF6nsten\",\"Die
         30 gr\xF6\xDFten\",\"Schlager nonstop\",\"Die 30 legend\xE4rsten\",\"Die Schlager-Traumpaare\",\"Schlager,
         die Sie kennen sollten\",\"Schlagerhits \\u0026 Spa\xDF\",\"Die gr\xF6\xDFten
-        Pop-Kulthits\",\"Die sch\xF6nsten Kulthits\"],\"banner\":\"\",\"firstAired\":\"2011-12-30\",\"id\":407329,\"image\":\"/banners/v4/series/407329/posters/60f992262bd2b.jpg\",\"network\":\"SWR\",\"overview\":\"Music
+        Pop-Kulthits\",\"Die sch\xF6nsten Kulthits\",\"Die TOP HITS\"],\"banner\":\"\",\"firstAired\":\"2011-12-30\",\"id\":407329,\"image\":\"/banners/v4/series/407329/posters/60f992262bd2b.jpg\",\"network\":\"SWR\",\"overview\":\"Music
         videos cut together from a decade each.\",\"poster\":\"/banners/v4/series/407329/posters/60f992262bd2b.jpg\",\"seriesName\":\"The
         Greatest Cult Hits\",\"slug\":\"die-groessten-schlager-kulthits\",\"status\":\"Continuing\"},{\"aliases\":[\"Fixer
         Upper: Behind the Design\"],\"banner\":\"/banners/graphical/281053-g2.jpg\",\"firstAired\":\"2013-05-23\",\"id\":281053,\"image\":\"/banners/posters/281053-2.jpg\",\"network\":\"HGTV\",\"overview\":\"The
@@ -490,15 +527,12 @@ interactions:
         pairs renovation, design and real estate pros Chip and Joanna Gaines with
         Waco/Dallas, Texas-area buyers to renovate the wrong house that's in the right
         location.\",\"poster\":\"/banners/posters/281053-2.jpg\",\"seriesName\":\"Fixer
-        Upper\",\"slug\":\"fixer-upper\",\"status\":\"Ended\"},{\"aliases\":[\"The
-        Popularity Of Music\",\"Billboard Hot 100\",\"Welcome To Spectrum Pulse\"],\"banner\":\"/banners/series/386616/banners/5f357cb9b9417.jpg\",\"firstAired\":\"2014-11-28\",\"id\":386616,\"image\":\"/banners/v4/series/386616/posters/618875627114b.jpg\",\"network\":\"YouTube\",\"overview\":\"This
-        show is hosted by Mark Grondin aka Spectrum Pulse. He reviews new songs from
-        the Billboard Hot 100 (United States) chart. He also has his Voltorb as his
-        partner. He's the subtitle person. This is the music version of \\\"First
-        Take\\\". With comfortably over a thousand albums reviewed spanning every
-        genre of music, his long-running weekly series Billboard BREAKDOWN examining
-        the charts (now on its own channel).\",\"poster\":\"/banners/v4/series/386616/posters/618875627114b.jpg\",\"seriesName\":\"Billboard
-        BREAKDOWN\",\"slug\":\"billboard-breakdown\",\"status\":\"Continuing\"},{\"aliases\":[\"\u0E1B\u0E31\u0E08\u0E09\u0E34\u0E21\u0E2D\u0E40\u0E21\u0E23\u0E34\u0E01\u0E32\"],\"banner\":\"/banners/v4/series/392256/banners/63cded40a22f4.jpg\",\"firstAired\":\"2023-01-15\",\"id\":392256,\"image\":\"/banners/v4/series/392256/posters/6362e8b41ca10.jpg\",\"network\":\"HBO\",\"overview\":\"After
+        Upper\",\"slug\":\"fixer-upper\",\"status\":\"Ended\"},{\"aliases\":[\"USA
+        extrem - Leben im Land der Gegens\xE4tze\",\"USA extreme - life in the land
+        of contrasts\"],\"banner\":\"\",\"firstAired\":\"\",\"id\":451752,\"image\":\"/banners/images/missing/series.jpg\",\"network\":null,\"overview\":\"The
+        United States of America - the land of opportunity, the dream of many migrants.
+        But is it really a dreamland?\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"USA
+        extrem\",\"slug\":\"usa-extrem\",\"status\":\"Continuing\"},{\"aliases\":[\"\u0E1B\u0E31\u0E08\u0E09\u0E34\u0E21\u0E2D\u0E40\u0E21\u0E23\u0E34\u0E01\u0E32\"],\"banner\":\"/banners/v4/series/392256/banners/66fa18f99712f.jpg\",\"firstAired\":\"2023-01-15\",\"id\":392256,\"image\":\"/banners/v4/series/392256/posters/6362e8b41ca10.jpg\",\"network\":\"HBO\",\"overview\":\"After
         a global pandemic destroys civilization, a hardened survivor takes charge
         of a 14-year-old girl who may be humanity\u2019s last hope.\",\"poster\":\"/banners/v4/series/392256/posters/6362e8b41ca10.jpg\",\"seriesName\":\"The
         Last of Us\",\"slug\":\"the-last-of-us\",\"status\":\"Continuing\"},{\"aliases\":[\"\u041A\u043B\u0443\u0431
@@ -588,13 +622,13 @@ interactions:
         a mystery that lies within the village. During their time there, they play
         different games and compete with one another.\",\"poster\":\"/banners/posters/5bf929005db56.jpg\",\"seriesName\":\"Village
         Survival, The Eight\",\"slug\":\"village-survival-the-eight\",\"status\":\"Ended\"},{\"aliases\":[\"Inside
-        the NFL (2009)\"],\"banner\":\"/banners/v4/series/72075/banners/65566a06183a3.jpg\",\"firstAired\":\"2009-09-09\",\"id\":72075,\"image\":\"/banners/posters/72075-1.jpg\",\"network\":\"Showtime\",\"overview\":\"Inside
-        the NFL is one of the longest running, Emmy award winning sports shows on
-        cable television today. Each episode has some of the most exciting player
-        profiles, interviews and footage as well as expert comentary from past players
-        from around the NFL. Current hosts include James Brown, Cris Collinsworth,
-        Phil Simms and Warren Sapp who provide the in depth coverage that fans have
-        come to expect since the shows long history.\",\"poster\":\"/banners/posters/72075-1.jpg\",\"seriesName\":\"Inside
+        the NFL (2009)\"],\"banner\":\"/banners/v4/series/72075/banners/65566a06183a3.jpg\",\"firstAired\":\"2009-09-09\",\"id\":72075,\"image\":\"/banners/posters/72075-1.jpg\",\"network\":\"Paramount+
+        with Showtime\",\"overview\":\"Inside the NFL is one of the longest running,
+        Emmy award winning sports shows on cable television today. Each episode has
+        some of the most exciting player profiles, interviews and footage as well
+        as expert comentary from past players from around the NFL. Current hosts include
+        James Brown, Cris Collinsworth, Phil Simms and Warren Sapp who provide the
+        in depth coverage that fans have come to expect since the shows long history.\",\"poster\":\"/banners/posters/72075-1.jpg\",\"seriesName\":\"Inside
         The NFL\",\"slug\":\"inside-the-nfl\",\"status\":\"Continuing\"},{\"aliases\":[\"Dr.
         Kimble auf der Flucht\"],\"banner\":\"/banners/v4/series/75258/banners/653185b27aa8d.jpg\",\"firstAired\":\"1963-09-17\",\"id\":75258,\"image\":\"/banners/posters/75258-4.jpg\",\"network\":\"ABC
         (US)\",\"overview\":\"Dr. Richard Kimble (David Janssen), wrongly accused
@@ -632,7 +666,7 @@ interactions:
         will sit down with members of the Star Trek casts and crews to discuss all
         things Trek.\",\"poster\":\"/banners/series/358781/posters/62061470.jpg\",\"seriesName\":\"The
         Ready Room\",\"slug\":\"the-ready-room\",\"status\":\"Continuing\"},{\"aliases\":[\"Secrets
-        of the Zoo Down Under\"],\"banner\":\"/banners/series/377378/banners/62098142.jpg\",\"firstAired\":\"2020-03-01\",\"id\":377378,\"image\":\"/banners/v4/series/377378/posters/6318955eb1b81.jpg\",\"network\":\"National
+        of the Zoo Down Under\"],\"banner\":\"/banners/v4/series/377378/banners/664e2a3aa0adb.jpg\",\"firstAired\":\"2020-03-01\",\"id\":377378,\"image\":\"/banners/v4/series/377378/posters/6318955eb1b81.jpg\",\"network\":\"National
         Geographic Wild\",\"overview\":\"A behind-the-scenes look at what it takes
         to run the Taronga Zoo Sydney, Australia's largest zoo, located on the shores
         of Sydney Harbour.\",\"poster\":\"/banners/v4/series/377378/posters/6318955eb1b81.jpg\",\"seriesName\":\"Secrets
@@ -659,46 +693,7 @@ interactions:
         to help her friend Karim get back to his rightful place on the Sultan\u2019s
         throne, encountering such legendary characters as Aladdin, Sinbad and Ali
         Baba.\\r\\n\",\"poster\":\"/banners/v4/series/335509/posters/607eb0e112bc5.jpg\",\"seriesName\":\"Sherazade:
-        The Untold Stories\",\"slug\":\"sherazade-the-untold-stories\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/blank/318556.jpg\",\"firstAired\":\"2016-06-07\",\"id\":318556,\"image\":\"/banners/posters/5d0b8cb1352ac.jpg\",\"network\":\"Yesterday\",\"overview\":\"Lives,
-        loves and scandals - this new and exclusive three-part series takes an intimate
-        look behind the closed doors of one of the most celebrated royal dynasties
-        in British constitutional history.\\r\\n\\r\\nBased on a book by Tracy Borman
-        and presented by Tracy, the series is packed with atmospheric reconstructions
-        bringing to life history's enduring personalities, including Henry VIII and
-        Queen Elizabeth I, and the age in which they lived. From known historical
-        scandal, to the minute details of Tudor habits and rituals, this series is
-        entirely dedicated to revealing the 'private' aspects of life at court.\",\"poster\":\"/banners/posters/5d0b8cb1352ac.jpg\",\"seriesName\":\"The
-        Private Lives of the Tudors\",\"slug\":\"the-private-lives-of-the-tudors\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/320659-g.jpg\",\"firstAired\":\"2016-10-27\",\"id\":320659,\"image\":\"/banners/posters/320659-1.jpg\",\"network\":\"YouTube\",\"overview\":\"Watch
-        as hosts Josh \\u0026 Samantha attempt to entertainment audiences very, very
-        early in the morning.\",\"poster\":\"/banners/posters/320659-1.jpg\",\"seriesName\":\"The
-        Earliest Show\",\"slug\":\"the-earliest-show\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/76676-g.jpg\",\"firstAired\":\"1996-03-12\",\"id\":76676,\"image\":\"/banners/posters/76676-1.jpg\",\"network\":\"ABC
-        (US)\",\"overview\":\"The former SNL cast member (along with Robert Smigel)
-        is the host and star of this sketch comedy series.  Each week, the show would
-        be sponsered by a different soda, usually Pepsi or Mug Root Beer.  The show,
-        however, was doomed by a sketch in the first episode depicting President Clinton
-        breast-feeding puppies. Broadcast History:\\r\\nMarch-April 1996 Tuesday 9:30-10:00
-        (8:30 Central)\",\"poster\":\"/banners/posters/76676-1.jpg\",\"seriesName\":\"The
-        Dana Carvey Show\",\"slug\":\"the-dana-carvey-show\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/351463/banners/664be1c41cbfc.jpg\",\"firstAired\":\"2018-08-13\",\"id\":351463,\"image\":\"/banners/posters/5b8509553c8fb.jpg\",\"network\":\"National
-        Geographic\",\"overview\":\"A special period of recent history is examined
-        closely and discussed by experts in order to develop a broader awareness of
-        meaningful events and individuals that had a direct impact on the way in which
-        society developed afterwards.\",\"poster\":\"/banners/posters/5b8509553c8fb.jpg\",\"seriesName\":\"The
-        '80s Greatest\",\"slug\":\"the-80s-greatest-us\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/series/376771/banners/62077350.jpg\",\"firstAired\":\"2020-02-09\",\"id\":376771,\"image\":\"/banners/v4/series/376771/posters/645b3e690b3c3.jpg\",\"network\":\"Science
-        Channel\",\"overview\":\"Throughout \u2018Curse of the Bermuda Triangle,\u2019
-        the team investigates a variety of mysteries and attempts to determine whether
-        these stories of strange mishaps are purely coincidence, or if there\u2019s
-        an explanation \u2013 scientific or supernatural \u2013 hidden beneath the
-        surface.\\r\\nBermuda Triangle is home to some of the most fascinating unsolved
-        mysteries on Earth. This remote territory in the Atlantic Ocean has been the
-        subject of notoriety and legend as countless ships, planes and human lives
-        have been lost in its waters.\",\"poster\":\"/banners/v4/series/376771/posters/645b3e690b3c3.jpg\",\"seriesName\":\"Curse
-        of the Bermuda Triangle\",\"slug\":\"curse-of-the-bermuda-triangle\",\"status\":\"Ended\"},{\"aliases\":[\"Quacula\"],\"banner\":\"/banners/graphical/274741-g.jpg\",\"firstAired\":\"1979-09-08\",\"id\":274741,\"image\":\"/banners/posters/274741-1.jpg\",\"network\":\"CBS\",\"overview\":\"The
-        New Adventures of Mighty Mouse and Heckle \\u0026 Jeckle is an updated version
-        of Mighty Mouse and Heckle \\u0026 Jeckle cartoons from the 1940s. The television
-        series was produced by Filmation, and aired from 1979 to 1981 on CBS with
-        over 48 episodes produced. It is not to be confused with Mighty Mouse: The
-        New Adventures.\",\"poster\":\"/banners/posters/274741-1.jpg\",\"seriesName\":\"The
-        New Adventures of Mighty Mouse and Heckle and Jeckle\",\"slug\":\"the-new-adventures-of-mighty-mouse-and-heckle-and-jeckle\",\"status\":\"Ended\"}]}"
+        The Untold Stories\",\"slug\":\"sherazade-the-untold-stories\",\"status\":\"Ended\"}]}"
     headers:
       Cache-Control:
       - private, max-age=86400
@@ -707,17 +702,17 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 22 May 2024 14:33:37 GMT
+      - Thu, 13 Feb 2025 23:30:22 GMT
       Transfer-Encoding:
       - chunked
       Vary:
       - Accept-Language
       Via:
-      - 1.1 27a35654821ee52d8aa69c940ad5de7e.cloudfront.net (CloudFront)
+      - 1.1 c5e8330f799b230f9d152ff32e5aac4a.cloudfront.net (CloudFront)
       X-Amz-Cf-Id:
-      - aes4LuK1JaWRe0I_ePVyLKEUZlXduM2qX_evKaKNAa_kcoELfQWfJA==
+      - GDDm_PJlEeji3lH9L1uv54mBjr0zZAcL9cFZQuZOzrFti1Qf1j_Qpw==
       X-Amz-Cf-Pop:
-      - LIS50-P1
+      - MAD51-C3
       X-Cache:
       - Miss from cloudfront
       X-Powered-By:
@@ -733,17 +728,17 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Accept-Language:
       - en
       Authorization:
-      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDAwOTQyMTgsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzM5NDg5NDE4fQ.I-flvnRYHdakvoJPuyRAVB6U6ePDHLaV8YdC98u5dVsuvO3P3obJ7E7yAN_x3Mc5f5xyQyHcD11I0JsOcud3NLHt-zM3wknZbMcSqhsy7oNl9OYlELhePRcOMl_EVs_IyyCV9tEjkjTPRoHGrHI2R2DLbOzSWojSqWUkwZemRHvHSsxIaaCIKouP9Slp4B1xAdGlkBklpr0QNhjOU6NkSjioing-gUMc053fDuEJTbaOoH9wMFgYyC6S4cZEEyD2zMmGW_Cqvfgbhy2YGZdAXmWoEQzHepnDct11knRzYFR6t2RwGoziOF1l41kOwfXeUtQQdIvvFuyXdJQSJuU6UA
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
     uri: https://api.thetvdb.com/series/268592
   response:
@@ -753,12 +748,12 @@ interactions:
         Fiction","Suspense","Thriller"],"overview":"Set ninety-seven years after a
         nuclear war has destroyed civilization, when a spaceship housing humanity''s
         lone survivors sends one hundred juvenile delinquents back to Earth, in hopes
-        of possibly re-populating the planet.\r\n","lastUpdated":1715890063,"airsDayOfWeek":"Wednesday","airsTime":"8:00
+        of possibly re-populating the planet.\r\n","lastUpdated":1724743738,"airsDayOfWeek":"Wednesday","airsTime":"8:00
         PM","rating":"TV-14","imdbId":"tt2661044","zap2itId":"","added":"2013-04-09
         18:54:34","addedBy":22600,"siteRating":8.3,"siteRatingCount":4203,"slug":"the-100"}}'
     headers:
       Age:
-      - '40635'
+      - '77036'
       Cache-Control:
       - private, max-age=86400
       Connection:
@@ -768,17 +763,17 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 22 May 2024 03:16:23 GMT
+      - Thu, 13 Feb 2025 02:06:26 GMT
       Last-Modified:
-      - Thu, 16 May 2024 20:07:43 GMT
+      - Tue, 27 Aug 2024 07:28:58 GMT
       Vary:
       - Accept-Language
       Via:
-      - 1.1 d780d90e1f6b43875e14c416b368d3b6.cloudfront.net (CloudFront)
+      - 1.1 352ab4fc53db02754a30e59a7814a0d2.cloudfront.net (CloudFront)
       X-Amz-Cf-Id:
-      - 2-0r8sNj_gbWCNYxIyUNCjUsN0LbI4e8un2qjxMB8fUjQ7bdhtPJUQ==
+      - GUK7iPmRL0enPVJurKaVHT_yPQdOLWcX-2RDeuqVqddDZJsvspR2Gg==
       X-Amz-Cf-Pop:
-      - LIS50-P1
+      - MAD51-C3
       X-Cache:
       - Hit from cloudfront
       X-Powered-By:
@@ -794,17 +789,17 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Accept-Language:
       - en
       Authorization:
-      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDAwOTQyMTgsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzM5NDg5NDE4fQ.I-flvnRYHdakvoJPuyRAVB6U6ePDHLaV8YdC98u5dVsuvO3P3obJ7E7yAN_x3Mc5f5xyQyHcD11I0JsOcud3NLHt-zM3wknZbMcSqhsy7oNl9OYlELhePRcOMl_EVs_IyyCV9tEjkjTPRoHGrHI2R2DLbOzSWojSqWUkwZemRHvHSsxIaaCIKouP9Slp4B1xAdGlkBklpr0QNhjOU6NkSjioing-gUMc053fDuEJTbaOoH9wMFgYyC6S4cZEEyD2zMmGW_Cqvfgbhy2YGZdAXmWoEQzHepnDct11knRzYFR6t2RwGoziOF1l41kOwfXeUtQQdIvvFuyXdJQSJuU6UA
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
     uri: https://api.thetvdb.com/series/268592/episodes/query?airedSeason=3&airedEpisode=9&page=1
   response:
@@ -813,11 +808,11 @@ interactions:
         Fire","firstAired":"2016-03-31","guestStars":[],"directors":["Uta Briesewitz"],"writers":["Heidi
         Cole McAdams"],"overview":"Clarke discovers a shocking truth. Octavia is forced
         to make a decision that could have devastating consequences. Kane and Abby
-        share a moment.","language":{"episodeName":"en","overview":"en"},"productionCode":"","showUrl":"","lastUpdated":1713103093,"dvdDiscid":"","dvdSeason":3,"dvdEpisodeNumber":9,"dvdChapter":null,"absoluteNumber":38,"filename":"episodes/268592/5544536.jpg","seriesId":268592,"lastUpdatedBy":153464,"airsAfterSeason":null,"airsBeforeSeason":null,"airsBeforeEpisode":null,"imdbId":"tt4799896","contentRating":"TV-14","thumbAuthor":1,"thumbAdded":"2019-11-13
+        share a moment.","language":{"episodeName":"en","overview":"en"},"productionCode":"","showUrl":"","lastUpdated":1724740283,"dvdDiscid":"","dvdSeason":3,"dvdEpisodeNumber":9,"dvdChapter":null,"absoluteNumber":38,"filename":"episodes/268592/5544536.jpg","seriesId":268592,"lastUpdatedBy":153464,"airsAfterSeason":null,"airsBeforeSeason":null,"airsBeforeEpisode":null,"imdbId":"tt4799896","contentRating":"TV-14","thumbAuthor":1,"thumbAdded":"2019-11-13
         11:16:24","thumbWidth":"640","thumbHeight":"360","siteRating":7.9,"siteRatingCount":416,"isMovie":0}]}'
     headers:
       Age:
-      - '40606'
+      - '62048'
       Cache-Control:
       - private, max-age=86400
       Connection:
@@ -827,15 +822,15 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 22 May 2024 03:16:52 GMT
+      - Thu, 13 Feb 2025 06:16:14 GMT
       Vary:
       - Accept-Language
       Via:
-      - 1.1 daf51694fe4a175a7249d39be5e22e4c.cloudfront.net (CloudFront)
+      - 1.1 f966f79361bddf464daf437364dccfbc.cloudfront.net (CloudFront)
       X-Amz-Cf-Id:
-      - Fbfdje1pQpRzj8RofdS5oyHbO14cz2F-CSran1SggwIHGGjrB4WLLw==
+      - tQFWxUaa_Ufsk3xnjk2ONasoPqy-8JeKizz3lMVOYzA85Ui2fqli5w==
       X-Amz-Cf-Pop:
-      - LIS50-P1
+      - MAD51-C3
       X-Cache:
       - Hit from cloudfront
       X-Powered-By:
@@ -851,17 +846,17 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Accept-Language:
       - en
       Authorization:
-      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDAwOTQyMTgsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzM5NDg5NDE4fQ.I-flvnRYHdakvoJPuyRAVB6U6ePDHLaV8YdC98u5dVsuvO3P3obJ7E7yAN_x3Mc5f5xyQyHcD11I0JsOcud3NLHt-zM3wknZbMcSqhsy7oNl9OYlELhePRcOMl_EVs_IyyCV9tEjkjTPRoHGrHI2R2DLbOzSWojSqWUkwZemRHvHSsxIaaCIKouP9Slp4B1xAdGlkBklpr0QNhjOU6NkSjioing-gUMc053fDuEJTbaOoH9wMFgYyC6S4cZEEyD2zMmGW_Cqvfgbhy2YGZdAXmWoEQzHepnDct11knRzYFR6t2RwGoziOF1l41kOwfXeUtQQdIvvFuyXdJQSJuU6UA
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
     uri: https://api.thetvdb.com/episodes/5544536
   response:
@@ -870,9 +865,11 @@ interactions:
         Fire","firstAired":"2016-03-31","guestStars":[],"directors":["Uta Briesewitz"],"writers":["Heidi
         Cole McAdams"],"overview":"Clarke discovers a shocking truth. Octavia is forced
         to make a decision that could have devastating consequences. Kane and Abby
-        share a moment.","language":{"episodeName":"en","overview":"en"},"productionCode":"","showUrl":"","lastUpdated":1713103093,"dvdDiscid":"","dvdSeason":3,"dvdEpisodeNumber":9,"dvdChapter":null,"absoluteNumber":38,"filename":"episodes/268592/5544536.jpg","seriesId":268592,"lastUpdatedBy":153464,"airsAfterSeason":null,"airsBeforeSeason":null,"airsBeforeEpisode":null,"imdbId":"tt4799896","contentRating":"TV-14","thumbAuthor":1,"thumbAdded":"2019-11-13
+        share a moment.","language":{"episodeName":"en","overview":"en"},"productionCode":"","showUrl":"","lastUpdated":1724740283,"dvdDiscid":"","dvdSeason":3,"dvdEpisodeNumber":9,"dvdChapter":null,"absoluteNumber":38,"filename":"episodes/268592/5544536.jpg","seriesId":268592,"lastUpdatedBy":153464,"airsAfterSeason":null,"airsBeforeSeason":null,"airsBeforeEpisode":null,"imdbId":"tt4799896","contentRating":"TV-14","thumbAuthor":1,"thumbAdded":"2019-11-13
         11:16:24","thumbWidth":"640","thumbHeight":"360","siteRating":7.9,"siteRatingCount":416,"isMovie":0}}'
     headers:
+      Age:
+      - '62048'
       Cache-Control:
       - private, max-age=86400
       Connection:
@@ -882,19 +879,19 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 22 May 2024 14:33:38 GMT
+      - Thu, 13 Feb 2025 06:16:14 GMT
       Last-Modified:
       - Thu, 01 Jan 1970 00:00:00 GMT
       Vary:
       - Accept-Language
       Via:
-      - 1.1 5d25c31f47a198dbf50acf297a389a00.cloudfront.net (CloudFront)
+      - 1.1 f5cc76e0ef8305f960f258eb80ac4006.cloudfront.net (CloudFront)
       X-Amz-Cf-Id:
-      - t--q5eu6PS-iIr3GOHCD47vLEHyfDZgpbLhofq15IwYUBD6ofZlVUw==
+      - nd2kvDgNkfO1CHTNk3ZgkPzXlc6gmCSwaaEwtYC6asOyHpf_KgSj1A==
       X-Amz-Cf-Pop:
-      - LIS50-P1
+      - MAD51-C3
       X-Cache:
-      - Miss from cloudfront
+      - Hit from cloudfront
       X-Powered-By:
       - Thundar!
       X-Thetvdb-Api-Version:

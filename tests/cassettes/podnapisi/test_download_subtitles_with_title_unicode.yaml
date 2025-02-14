@@ -5,11 +5,11 @@ interactions:
       Accept:
       - application/json
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
     uri: https://www.podnapisi.net/subtitles/search/advanced?keywords=Caf%C3%A9+Society&language=fr&movie_type=movie&year=2016
   response:
@@ -36,7 +36,7 @@ interactions:
         2016\n      }, \n      \"notes\": null, \n      \"num_cds\": 1, \n      \"rejected\":
         null, \n      \"releases\": [], \n      \"state\": \"\", \n      \"stats\":
         {\n        \"characters\": 96, \n        \"characters_per_line\": 19.2, \n
-        \       \"downloads\": 4264, \n        \"lines\": 5, \n        \"lines_per_unit\":
+        \       \"downloads\": 4269, \n        \"lines\": 5, \n        \"lines_per_unit\":
         1.6666666666666667, \n        \"parts\": 1, \n        \"units\": 3\n      },
         \n      \"url\": \"/en/subtitles/fr-cafe-society-2016/iulD\"\n    }, \n    {\n
         \     \"audited\": false, \n      \"contributions\": [], \n      \"contributor\":
@@ -76,7 +76,7 @@ interactions:
         2016\n      }, \n      \"notes\": null, \n      \"num_cds\": 1, \n      \"rejected\":
         null, \n      \"releases\": [], \n      \"state\": \"\", \n      \"stats\":
         {\n        \"characters\": 57423, \n        \"characters_per_line\": 24.645064377682402,
-        \n        \"downloads\": 427, \n        \"lines\": 2330, \n        \"lines_per_unit\":
+        \n        \"downloads\": 433, \n        \"lines\": 2330, \n        \"lines_per_unit\":
         1.3689776733254995, \n        \"parts\": 1, \n        \"units\": 1702\n      },
         \n      \"url\": \"/en/subtitles/fr-cafe-society-2016/iOlD\"\n    }, \n    {\n
         \     \"audited\": false, \n      \"contributions\": [], \n      \"contributor\":
@@ -110,7 +110,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 31 May 2024 12:22:25 GMT
+      - Thu, 13 Feb 2025 23:31:44 GMT
       Server:
       - nginx
     status:
@@ -122,11 +122,11 @@ interactions:
       Accept:
       - application/json
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
     uri: https://www.podnapisi.net/subtitles/iOlD/download?container=zip
   response:
@@ -1007,7 +1007,7 @@ interactions:
       Content-Type:
       - application/octet-stream
       Date:
-      - Fri, 31 May 2024 12:22:26 GMT
+      - Thu, 13 Feb 2025 23:31:45 GMT
       ETag:
       - '"5903b216-c021"'
       Last-Modified:

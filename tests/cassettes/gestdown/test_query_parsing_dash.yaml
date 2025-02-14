@@ -3,11 +3,11 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
       accept:
       - application/json
     method: GET
@@ -20,23 +20,21 @@ interactions:
       CF-Cache-Status:
       - HIT
       CF-RAY:
-      - 88ba5f3c5adf5bd8-LIS
+      - 91189a4a8816eefd-LHR
       Cache-Control:
       - public, max-age=14400
       Connection:
       - keep-alive
-      Content-Encoding:
-      - br
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 29 May 2024 23:47:52 GMT
+      - Thu, 13 Feb 2025 23:29:49 GMT
       Last-Modified:
-      - Wed, 29 May 2024 11:08:17 GMT
+      - Thu, 13 Feb 2025 13:23:45 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=NUx7qJavs4n6bofq7L%2FkKeJqnWhQmdxpshQ1hgyPJSPx%2Bxu%2FGYp8yvQoYIlp2gdoIVk2HoXVCbAMp%2FqOtLy8F3kIK90eoHD11CRiEY3Rbz%2BJ7enpyxQBNPVrPbOv1e2PYhn%2B8g%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=4FTT1cFsEsoykrbNUWJdt5KDwQZVtAkOHEOis%2B2JjSh52Rl5Y8sNIgN%2FTKzhNlRqlw3w9%2FnHstmvYhss%2FQNuvt6tbo0ymayGeUtVsaNzIHa326l1lcYCsARi8RPs35eE0x%2Farw%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -47,7 +45,12 @@ interactions:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
+      content-length:
+      - '179'
+      server-timing:
+      - cfL4;desc="?proto=TCP&rtt=31970&min_rtt=31840&rtt_var=12033&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2847&recv_bytes=798&delivery_rate=90954&cwnd=239&unsent_bytes=0&cid=23acd4721323dfbc&ts=65&x=0"
       vary:
+      - Accept-Encoding
       - Accept-Encoding
     status:
       code: 200
@@ -56,40 +59,38 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
       accept:
       - application/json
     method: GET
     uri: https://api.gestdown.info/subtitles/get/d4ea29c3-29e0-47a0-8a13-69b2a329b3a7/10/2/fra
   response:
     body:
-      string: '{"matchingSubtitles":[{"subtitleId":"41ecae8e-0110-4bb0-8266-644c3b0a97ba","version":"Web-DL.IMPERIUM","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/41ecae8e-0110-4bb0-8266-644c3b0a97ba","language":"French","discovered":"2022-05-28T18:54:35.590745Z","downloadCount":51},{"subtitleId":"2fcab6e2-8713-40d1-afee-f9904e1d8fde","version":"Web-DL.RARBG","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/2fcab6e2-8713-40d1-afee-f9904e1d8fde","language":"French","discovered":"2022-05-28T18:54:35.590746Z","downloadCount":0},{"subtitleId":"345385a9-9fd9-450a-bdc3-f4e6e7ea54b6","version":"AVS","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/345385a9-9fd9-450a-bdc3-f4e6e7ea54b6","language":"French","discovered":"2022-05-28T18:54:35.590759Z","downloadCount":0},{"subtitleId":"b21937ff-b3eb-45d5-9d85-8d0d8cc59f7c","version":"Web-DL.Dracula","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/b21937ff-b3eb-45d5-9d85-8d0d8cc59f7c","language":"French","discovered":"2022-05-28T18:54:35.59076Z","downloadCount":16},{"subtitleId":"82efacfe-9a35-49ae-9ea8-a43af308e7e2","version":"KILLERS","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/82efacfe-9a35-49ae-9ea8-a43af308e7e2","language":"French","discovered":"2022-05-28T18:54:35.590762Z","downloadCount":0}],"episode":{"season":10,"number":2,"title":"Founder''s
+      string: '{"matchingSubtitles":[{"subtitleId":"41ecae8e-0110-4bb0-8266-644c3b0a97ba","version":"Web-DL.IMPERIUM","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/41ecae8e-0110-4bb0-8266-644c3b0a97ba","language":"French","discovered":"2022-05-28T18:54:35.590745Z","downloadCount":79},{"subtitleId":"2fcab6e2-8713-40d1-afee-f9904e1d8fde","version":"Web-DL.RARBG","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/2fcab6e2-8713-40d1-afee-f9904e1d8fde","language":"French","discovered":"2022-05-28T18:54:35.590746Z","downloadCount":0},{"subtitleId":"345385a9-9fd9-450a-bdc3-f4e6e7ea54b6","version":"AVS","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/345385a9-9fd9-450a-bdc3-f4e6e7ea54b6","language":"French","discovered":"2022-05-28T18:54:35.590759Z","downloadCount":0},{"subtitleId":"b21937ff-b3eb-45d5-9d85-8d0d8cc59f7c","version":"Web-DL.Dracula","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/b21937ff-b3eb-45d5-9d85-8d0d8cc59f7c","language":"French","discovered":"2022-05-28T18:54:35.59076Z","downloadCount":16},{"subtitleId":"82efacfe-9a35-49ae-9ea8-a43af308e7e2","version":"KILLERS","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/82efacfe-9a35-49ae-9ea8-a43af308e7e2","language":"French","discovered":"2022-05-28T18:54:35.590762Z","downloadCount":0}],"episode":{"season":10,"number":2,"title":"Founder''s
         Mutation","show":"The X-Files","discovered":"2022-05-28T18:54:35.590723Z"}}'
     headers:
       CF-Cache-Status:
-      - EXPIRED
+      - MISS
       CF-RAY:
-      - 88ba5f3ceb445bda-LIS
+      - 91189a4b8f81ef42-LHR
       Cache-Control:
       - public, max-age=7200
       Connection:
       - keep-alive
-      Content-Encoding:
-      - br
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 29 May 2024 23:47:52 GMT
+      - Thu, 13 Feb 2025 23:29:49 GMT
       Last-Modified:
-      - Wed, 29 May 2024 19:47:27 GMT
+      - Thu, 13 Feb 2025 23:29:49 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=FWcj19DQcSXv4s80Lgvp63EW69TuTWn9h1LkIZrfojiW7Bzm97PenKaoscexfm%2BDygupE0ibYuc06X8KPXu3X7NvInhU7troBCNww8hyLOwDEwCizzkLW6KTvMen%2B8BKQWQtCQ%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=PINqSQHpCjjELEo276lPMzlM74t62q5leZJR1vIvq5CECtGgkoiddhgiphaGRJAdbbD8Q076mP%2BVYG6lR8r7Ny4hSEV8DylrzUbPpbvuGIppv9mYSsKO2yQc5TwxumikjJznuA%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -100,7 +101,12 @@ interactions:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
+      content-length:
+      - '1648'
+      server-timing:
+      - cfL4;desc="?proto=TCP&rtt=32979&min_rtt=32968&rtt_var=12385&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2848&recv_bytes=831&delivery_rate=87608&cwnd=251&unsent_bytes=0&cid=030756f76a25b286&ts=101&x=0"
       vary:
+      - Accept-Encoding
       - Accept-Encoding
     status:
       code: 200

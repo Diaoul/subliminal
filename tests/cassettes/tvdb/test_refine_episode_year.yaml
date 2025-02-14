@@ -20,7 +20,7 @@ interactions:
     uri: https://api.thetvdb.com/login
   response:
     body:
-      string: '{"token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg"}'
+      string: '{"token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDAwOTQyMTgsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzM5NDg5NDE4fQ.I-flvnRYHdakvoJPuyRAVB6U6ePDHLaV8YdC98u5dVsuvO3P3obJ7E7yAN_x3Mc5f5xyQyHcD11I0JsOcud3NLHt-zM3wknZbMcSqhsy7oNl9OYlELhePRcOMl_EVs_IyyCV9tEjkjTPRoHGrHI2R2DLbOzSWojSqWUkwZemRHvHSsxIaaCIKouP9Slp4B1xAdGlkBklpr0QNhjOU6NkSjioing-gUMc053fDuEJTbaOoH9wMFgYyC6S4cZEEyD2zMmGW_Cqvfgbhy2YGZdAXmWoEQzHepnDct11knRzYFR6t2RwGoziOF1l41kOwfXeUtQQdIvvFuyXdJQSJuU6UA"}'
     headers:
       Connection:
       - keep-alive
@@ -53,17 +53,17 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Accept-Language:
       - en
       Authorization:
-      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDAwOTQyMTgsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzM5NDg5NDE4fQ.I-flvnRYHdakvoJPuyRAVB6U6ePDHLaV8YdC98u5dVsuvO3P3obJ7E7yAN_x3Mc5f5xyQyHcD11I0JsOcud3NLHt-zM3wknZbMcSqhsy7oNl9OYlELhePRcOMl_EVs_IyyCV9tEjkjTPRoHGrHI2R2DLbOzSWojSqWUkwZemRHvHSsxIaaCIKouP9Slp4B1xAdGlkBklpr0QNhjOU6NkSjioing-gUMc053fDuEJTbaOoH9wMFgYyC6S4cZEEyD2zMmGW_Cqvfgbhy2YGZdAXmWoEQzHepnDct11knRzYFR6t2RwGoziOF1l41kOwfXeUtQQdIvvFuyXdJQSJuU6UA
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
     uri: https://api.thetvdb.com/search/series?name=dallas
   response:
@@ -73,7 +73,8 @@ interactions:
         Ross Ewing and Christopher Ewing - clash over the family's oil business and
         vast fortune. Roll on drama, sabotage, secrets and betrayal. Everyone is back
         and then some!\",\"poster\":\"/banners/posters/242521-6.jpg\",\"seriesName\":\"Dallas
-        (2012)\",\"slug\":\"dallas-2012\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/blank/77092.jpg\",\"firstAired\":\"1978-04-02\",\"id\":77092,\"image\":\"/banners/posters/77092-1.jpg\",\"network\":\"CBS\",\"overview\":\"The
+        (2012)\",\"slug\":\"dallas-2012\",\"status\":\"Ended\"},{\"aliases\":[\"Dallas
+        (1978)\"],\"banner\":\"/banners/blank/77092.jpg\",\"firstAired\":\"1978-04-02\",\"id\":77092,\"image\":\"/banners/posters/77092-1.jpg\",\"network\":\"CBS\",\"overview\":\"The
         world's first mega-soap, and one of the most popular ever produced, Dallas
         had it all. Beautiful women, expensive cars, and men playing Monopoly with
         real buildings. Famous for one of the best cliffhangers in TV history, as
@@ -145,11 +146,11 @@ interactions:
         Network\",\"overview\":\"Dallas Cakes, follows talented, Dallas-based bakers
         as they conceive, create and deliver incredible, customized confections to
         their customers.\",\"poster\":\"/banners/posters/5b2348800f9f3.jpg\",\"seriesName\":\"Dallas
-        Cakes\",\"slug\":\"345215-show\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/79949-g.jpg\",\"firstAired\":\"2007-03-09\",\"id\":79949,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"Showtime\",\"overview\":\"This
-        seven-part documentary series from the producers of \\\"Inside Deep Throat\\\"
-        tracks the production of \\\"Debbie Does Dallas Again,\\\" a sequel to the
-        legendary porn feature, as director Paul Thomas and star Stefani Morgan bring
-        their erotic film to life.\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Debbie
+        Cakes\",\"slug\":\"345215-show\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/79949-g.jpg\",\"firstAired\":\"2007-03-09\",\"id\":79949,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"Paramount+
+        with Showtime\",\"overview\":\"This seven-part documentary series from the
+        producers of \\\"Inside Deep Throat\\\" tracks the production of \\\"Debbie
+        Does Dallas Again,\\\" a sequel to the legendary porn feature, as director
+        Paul Thomas and star Stefani Morgan bring their erotic film to life.\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Debbie
         Does Dallas Again\",\"slug\":\"debbie-does-dallas-again\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/250374-g2.jpg\",\"firstAired\":\"2011-08-15\",\"id\":250374,\"image\":\"/banners/posters/250374-1.jpg\",\"network\":\"Bravo\",\"overview\":\"They\u2019re
         young, they\u2019re hot, they\u2019re single \u2013- they\u2019re Dallas\u2019
         Most Eligible. From beauty queens to pro-football players, this group of Texas
@@ -172,28 +173,20 @@ interactions:
         DNA\",\"slug\":\"dallas-dna\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2014-07-10\",\"id\":389255,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"YouTube\",\"overview\":\"Dallasmed65's
         YouTube Let's Play Minecraft Survival Long Running Series\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Minecraft
         Lets Play Survival [Dallasmed65]\",\"slug\":\"minecraft-lets-play-survival-dallasmed65\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"\",\"id\":347832,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Children's
-        Medical Centre Dallas\",\"slug\":\"childrens-medical-centre-dallas\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2024-06-20\",\"id\":449142,\"image\":\"/banners/v4/series/449142/posters/664dfefce8775.jpg\",\"network\":\"Netflix\",\"overview\":\"The
-        series follows the 2023-24 Dallas Cowboys Cheerleaders squad from start to
-        finish \u2014 kicking off at auditions and training camp and continuing all
-        the way through the NFL season.\",\"poster\":\"/banners/v4/series/449142/posters/664dfefce8775.jpg\",\"seriesName\":\"America\u2019s
-        Sweethearts: Dallas Cowboys Cheerleaders\",\"slug\":\"americas-sweethearts-dallas-cowboys-cheerleaders\",\"status\":\"Upcoming\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2018-09-01\",\"id\":411514,\"image\":\"/banners/images/missing/series.jpg\",\"network\":null,\"overview\":\"In
+        Medical Centre Dallas\",\"slug\":\"childrens-medical-centre-dallas\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2018-09-01\",\"id\":411514,\"image\":\"/banners/images/missing/series.jpg\",\"network\":null,\"overview\":\"In
         this Minecraft Let's Play Dallasmed65 challenges himself to be moving around
         all the time, like a real nomad.\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Minecraft
         Nomadic Survival [Dallasmed65]\",\"slug\":\"minecraft-nomadic-survival-dallasmed65\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"\",\"id\":269228,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"\",\"overview\":\"A
         glossy, cheeky and occasionally outrageous behind-the-scenes look at the new
         Dallas\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"John
-        Borrowman's Dallas\",\"slug\":\"john-borrowmans-dallas\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2011-08-12\",\"id\":292986,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"HGTV\",\"overview\":\"Interior
+        Borrowman's Dallas\",\"slug\":\"john-borrowmans-dallas\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/449142/banners/665a02195f43e.jpg\",\"firstAired\":\"2024-06-20\",\"id\":449142,\"image\":\"/banners/v4/series/449142/posters/669db56f7aef6.jpg\",\"network\":\"Netflix\",\"overview\":\"Follow
+        the Dallas Cowboys Cheerleaders from auditions to training camp and the NFL
+        season as they chase their dreams and a coveted spot on the squad.\",\"poster\":\"/banners/v4/series/449142/posters/669db56f7aef6.jpg\",\"seriesName\":\"America's
+        Sweethearts: Dallas Cowboys Cheerleaders\",\"slug\":\"americas-sweethearts-dallas-cowboys-cheerleaders\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2011-08-12\",\"id\":292986,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"HGTV\",\"overview\":\"Interior
         designer Donna Moss and her team give credence to the notion that everything's
         bigger in Texas as they undertake dramatic room makeovers in some of the most
         fabulous homes in the Dallas area.\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Donna
-        Decorates Dallas\",\"slug\":\"donna-decorates-dallas\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"\",\"id\":450111,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"Netflix\",\"overview\":\"Tells
-        the story of team owner Jerry Jones and his unique journey in transforming
-        the Cowboys franchise, leading a historic set of players and coaches to three
-        NFL titles in the 1990s and searing his imprint into the global sports business
-        landscape. Along the way, Jones has become one of the most innovative and
-        influential leaders in sports, with his team being the most valuable sports
-        franchise in the world.\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Dallas
-        Cowboys\",\"slug\":\"dallas-cowboys-jerry-jones\",\"status\":\"Upcoming\"},{\"aliases\":[],\"banner\":\"/banners/graphical/320983-g.jpg\",\"firstAired\":\"2016-12-27\",\"id\":320983,\"image\":\"/banners/posters/320983-3.jpg\",\"network\":\"Netflix\",\"overview\":\"Lights.
+        Decorates Dallas\",\"slug\":\"donna-decorates-dallas\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/320983-g.jpg\",\"firstAired\":\"2016-12-27\",\"id\":320983,\"image\":\"/banners/posters/320983-3.jpg\",\"network\":\"Netflix\",\"overview\":\"Lights.
         Cameron. Action. Cameron Dallas is more than just a social media star, he\u2019s
         an entrepreneur and one of the most influential personalities of his generation.
         In the Netflix original doc-series, Chasing Cameron, peel back the curtain
@@ -213,19 +206,32 @@ interactions:
         Wars: Texas (Originally Storage Wars Dallas) is a reality television series
         on the A\\u0026E Network that premiered in 2011. It is a regionalized spin-off
         of the highly-popular series Storage Wars.\",\"poster\":\"/banners/posters/251596-1.jpg\",\"seriesName\":\"Storage
-        Wars: Texas\",\"slug\":\"storage-wars-texas\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/281815-g.jpg\",\"firstAired\":\"2013-10-04\",\"id\":281815,\"image\":\"/banners/posters/281815-2.jpg\",\"network\":\"YouTube\",\"poster\":\"/banners/posters/281815-2.jpg\",\"seriesName\":\"Fuga
+        Wars: Texas\",\"slug\":\"storage-wars-texas\",\"status\":\"Ended\"},{\"aliases\":[\"Dallas
+        Cowboys docuseries\"],\"banner\":\"\",\"firstAired\":\"\",\"id\":450111,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"Netflix\",\"overview\":\"Tells
+        the story of team owner Jerry Jones and his unique journey in transforming
+        the Cowboys franchise, leading a historic set of players and coaches to three
+        NFL titles in the 1990s and searing his imprint into the global sports business
+        landscape. Along the way, Jones has become one of the most innovative and
+        influential leaders in sports, with his team being the most valuable sports
+        franchise in the world.\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"America's
+        Team: The Gambler and His Cowboys\",\"slug\":\"dallas-cowboys-jerry-jones\",\"status\":\"Upcoming\"},{\"aliases\":[],\"banner\":\"/banners/graphical/281815-g.jpg\",\"firstAired\":\"2013-10-04\",\"id\":281815,\"image\":\"/banners/posters/281815-2.jpg\",\"network\":\"YouTube\",\"poster\":\"/banners/posters/281815-2.jpg\",\"seriesName\":\"Fuga
         dalla morte\",\"slug\":\"281815-show\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/256421-g.jpg\",\"firstAired\":\"2011-11-15\",\"id\":256421,\"image\":\"/banners/posters/256421-2.jpg\",\"network\":\"Canale
         5\",\"poster\":\"/banners/posters/256421-2.jpg\",\"seriesName\":\"Baciati
-        dall'amore\",\"slug\":\"256421-show\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2015-03-16\",\"id\":369339,\"image\":\"/banners/posters/5d74c867a0e26.jpg\",\"network\":\"Rai
+        dall'amore\",\"slug\":\"256421-show\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2022-06-28\",\"id\":423796,\"image\":\"/banners/v4/series/423796/posters/642d2965abf41.jpg\",\"network\":\"Rai
+        2\",\"poster\":\"/banners/v4/series/423796/posters/642d2965abf41.jpg\",\"seriesName\":\"Dalla
+        strada al palco\",\"slug\":\"dalla-strada-al-palco\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2015-03-16\",\"id\":369339,\"image\":\"/banners/posters/5d74c867a0e26.jpg\",\"network\":\"Rai
         3\",\"overview\":\"Cronache dall'antichit\xE0 \xE8 un programma di approfondimento
         storico, in onda su Rai Storia. Come un inviato nel mondo antico, Cristoforo
         Gorno guida il telespettatore ora dopo ora nei luoghi dell'azione, non tralasciando
         il contesto in cui quell'avvenimento si \xE8 determinato.\",\"poster\":\"/banners/posters/5d74c867a0e26.jpg\",\"seriesName\":\"Cronache
-        dall'antichit\xE0\",\"slug\":\"cronache-dallantichita\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2022-06-28\",\"id\":423796,\"image\":\"/banners/v4/series/423796/posters/642d2965abf41.jpg\",\"network\":\"Rai
-        2\",\"poster\":\"/banners/v4/series/423796/posters/642d2965abf41.jpg\",\"seriesName\":\"Dalla
-        strada al palco\",\"slug\":\"dalla-strada-al-palco\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"\",\"id\":320148,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"\",\"overview\":\"Lawrence
+        dall'antichit\xE0\",\"slug\":\"cronache-dallantichita\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"\",\"id\":320148,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"\",\"overview\":\"Lawrence
         Dallaglio and Freddie Flintoff cycle from Olympia to London\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Flintoff
-        and Dallaglio's Big Ride\",\"slug\":\"flintoff-and-dallaglios-big-ride\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2022-12-01\",\"id\":442597,\"image\":\"/banners/images/missing/series.jpg\",\"network\":null,\"overview\":\"Yara's
+        and Dallaglio's Big Ride\",\"slug\":\"flintoff-and-dallaglios-big-ride\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2021-12-01\",\"id\":450675,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"Spotify\",\"overview\":\"On
+        the night of January 13, 2012, the Costa Concordia cruise ship, with more
+        than 4,000 people on board, sank off the Giglio Island. Ten years later, Pablo
+        Trincia takes us back to that ship through the testimonies of those who were
+        there that night.\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Il
+        Dito di Dio - Voci dalla Concordia\",\"slug\":\"il-dito-di-dio-voci-dalla-concordia\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2022-12-01\",\"id\":442597,\"image\":\"/banners/images/missing/series.jpg\",\"network\":null,\"overview\":\"Yara's
         murder has been in the public spotlight for 12 years.\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Sulle
         tracce dell'assassino - il caso Yara\",\"slug\":\"sulle-tracce-dellassassino-il-caso-yara\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/258261-g.jpg\",\"firstAired\":\"\",\"id\":258261,\"image\":\"/banners/posters/258261-1.jpg\",\"network\":\"\",\"poster\":\"/banners/posters/258261-1.jpg\",\"seriesName\":\"Le
         frontiere dell'Astronomia\",\"slug\":\"258261-show\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"\",\"id\":251784,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"ITV4\",\"overview\":\"Dallaglio's
@@ -258,7 +264,8 @@ interactions:
         Masters: Rust to Riches\",\"slug\":\"car-masters-rust-to-riches\",\"status\":\"Continuing\"},{\"aliases\":[\"Inu
         ni Nattara Suki na Hito ni Hirowareta\",\"If I Became a Dog I Would be Picked
         Up by the Person I Like\",\"My Life as Inukai-san's Dog\",\"Inu ni Nattara
-        Suki na Hito ni Hirowareta\"],\"banner\":\"/banners/v4/series/418185/banners/623cc8a19c690.jpg\",\"firstAired\":\"2023-01-07\",\"id\":418185,\"image\":\"/banners/v4/series/418185/posters/6361307ac82cc.jpg\",\"network\":\"Tokyo
+        Suki na Hito ni Hirowareta\",\"A Minha Vida Como o C\xE3o da Inukai\",\"A
+        Minha Vida Como o Cachorro da Inukai\"],\"banner\":\"/banners/v4/series/418185/banners/623cc8a19c690.jpg\",\"firstAired\":\"2023-01-07\",\"id\":418185,\"image\":\"/banners/v4/series/418185/posters/6361307ac82cc.jpg\",\"network\":\"Tokyo
         MX\",\"overview\":\"The \\\"dog's viewpoint romantic comedy\\\" manga centers
         on a protagonist who suddenly wakes up one day to find out he has been turned
         into the pet dog of his cool and beautiful classmate Karen Inukai. While Karen
@@ -281,7 +288,13 @@ interactions:
         Me Abroad\",\"slug\":\"match-me-abroad\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"/banners/graphical/84303-g2.jpg\",\"firstAired\":\"2006-05-03\",\"id\":84303,\"image\":\"/banners/posters/84303-1.jpg\",\"network\":\"Cuatro\",\"poster\":\"/banners/posters/84303-1.jpg\",\"seriesName\":\"Genesis:
         Inside The Killer's Mind\",\"slug\":\"genesis-inside-the-killers-mind\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/361081/banners/6298de91e85fd.jpg\",\"firstAired\":\"2019-03-14\",\"id\":361081,\"image\":\"/banners/posters/5c947b4b93a5e.jpg\",\"network\":\"National
         Geographic\",\"overview\":\"An aerial tour of Egypt.\",\"poster\":\"/banners/posters/5c947b4b93a5e.jpg\",\"seriesName\":\"Egypt
-        from Above\",\"slug\":\"egypt-from-above\",\"status\":\"Ended\"},{\"aliases\":[\"Raumpatrouille\",\"Space
+        from Above\",\"slug\":\"egypt-from-above\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/404140/banners/6282d46529110.jpg\",\"firstAired\":\"2021-06-09\",\"id\":404140,\"image\":\"/banners/v4/series/404140/posters/60c22b50f1418.jpg\",\"network\":\"Channel
+        4\",\"overview\":\"Emilia Fox and Professor David Wilson, Britain's leading
+        criminologist, investigate famous unsolved murder cases. By visiting the scenes
+        of the crimes and reinvestigating the evidence, they attempt to get to the
+        bottom of what really happened.\",\"poster\":\"/banners/v4/series/404140/posters/60c22b50f1418.jpg\",\"seriesName\":\"In
+        the Footsteps of Killers\",\"slug\":\"in-the-footsteps-of-killers\",\"status\":\"Continuing\"},{\"aliases\":[\"Raumpatrouille
+        - Die phantastischen Abenteuer des Raumschiffes Orion\",\"Raumpatrouille Orion\",\"Space
         Patrol\",\"Raumpatrouille Orion\",\"Commando Spatial\",\"Rymdpatrullen\"],\"banner\":\"/banners/graphical/80115-g4.jpg\",\"firstAired\":\"1966-09-17\",\"id\":80115,\"image\":\"/banners/posters/80115-3.jpg\",\"network\":\"Norddeutscher
         Rundfunk (NDR)\",\"overview\":\"What seems like a fairy tale today may be
         reality tomorrow. Here we have a fairy tale of the day after tomorrow. There
@@ -298,7 +311,7 @@ interactions:
         Beginning in North America, snow geese face their biggest predator, pelicans
         glide under San Francisco's Golden Gate Bridge, bald eagles in Alaska swoop
         among brown bears, and on the Great Plains, cowbirds dive under the feet of
-        fighting bison. Narrated by David Tennant.\",\"poster\":\"/banners/posters/254572-4.jpg\",\"seriesName\":\"Earthflight\",\"slug\":\"earthflight\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/262312-g.jpg\",\"firstAired\":\"1983-12-21\",\"id\":262312,\"image\":\"/banners/posters/262312-1.jpg\",\"network\":\"Anime
+        fighting bison. Narrated by David Tennant.\",\"poster\":\"/banners/posters/254572-4.jpg\",\"seriesName\":\"Earthflight\",\"slug\":\"earthflight\",\"status\":\"Ended\"},{\"aliases\":[\"Dallos\",\"\u30C0\u30ED\u30B9\"],\"banner\":\"/banners/graphical/262312-g.jpg\",\"firstAired\":\"1983-12-21\",\"id\":262312,\"image\":\"/banners/posters/262312-1.jpg\",\"network\":\"Anime
         OAV\",\"overview\":\"In a near future, mankind has moved from a drained Earth
         to the Moon. Rebel acts of terrorism lead to conflicts with the Earth Federal
         Government. A mysterious entity called Dallos appears to restore hope.\",\"poster\":\"/banners/posters/262312-1.jpg\",\"seriesName\":\"Dallos\",\"slug\":\"dallos\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/81379-g.jpg\",\"firstAired\":\"2007-01-18\",\"id\":81379,\"image\":\"/banners/posters/81379-1.jpg\",\"network\":\"RTL
@@ -311,13 +324,14 @@ interactions:
         Osamu's Tales from the Old Testament\",\"Osamu Tezukas Erz\xE4hlung vom Alten
         Testament\",\"Tezuka Osamu no Ky\u016Byaku Seisho Monogatari\",\"Historias
         de la Biblia\",\"Seisho Monogatari\",\"Las Historias de la Biblia de Osamu
-        Tezuka\",\"Tezuka Osamu no Kyuuyaku Seisho Monogatari\",\"Seisho Monogatari\",\"\u624B\u585A\u6CBB\u866B\u306E\u65E7\u7D04\u8056\u66F8\u7269\u8A9E\",\"\u3066\u3065\u304B\u304A\u3055\u3080\u306E\u304D\u3085\u3046\u3084\u304F\u305B\u3044\u3057\u3087\u3082\u306E\u304C\u305F\u308A\",\"\u0422\u044D\u0434\u0437\u0443\u043A\u0430
+        Tezuka\",\"Tezuka Osamu no Kyuuyaku Seisho Monogatari\",\"Historia de la Biblia\",\"La
+        historia de la Biblia\",\"Seisho Monogatari\",\"\u624B\u585A\u6CBB\u866B\u306E\u65E7\u7D04\u8056\u66F8\u7269\u8A9E\",\"\u3066\u3065\u304B\u304A\u3055\u3080\u306E\u304D\u3085\u3046\u3084\u304F\u305B\u3044\u3057\u3087\u3082\u306E\u304C\u305F\u308A\",\"\u0422\u044D\u0434\u0437\u0443\u043A\u0430
         \u041E\u0441\u0430\u043C\u0443 \u043D\u043E \u043A\u044E:\u044F\u043A\u0443
         \u0441\u044D\u0439\u0441\u0451 \u043C\u043E\u043D\u043E\u0433\u0430\u0442\u0430\u0440\u0438\",\"\u0412\u0435\u0442\u0445\u043E\u0437\u0430\u0432\u0435\u0442\u043D\u044B\u0435
         \u0438\u0441\u0442\u043E\u0440\u0438\u0438 \u041E\u0441\u0430\u043C\u0443
         \u0422\u044D\u0434\u0437\u0443\u043A\u0430\",\"Cerita Perjanjian Lama Osamu
-        Tezuka\"],\"banner\":\"/banners/text/260116.jpg\",\"firstAired\":\"1997-04-01\",\"id\":260116,\"image\":\"/banners/v4/series/260116/posters/63f937ca91bae.jpg\",\"network\":\"WOWOW\",\"overview\":\"Based
-        on the Old Testament in the Bible, up until the birth of Jesus Christ.\",\"poster\":\"/banners/v4/series/260116/posters/63f937ca91bae.jpg\",\"seriesName\":\"In
+        Tezuka\"],\"banner\":\"/banners/text/260116.jpg\",\"firstAired\":\"1997-04-01\",\"id\":260116,\"image\":\"/banners/v4/series/260116/posters/6755c4360a594.jpg\",\"network\":\"WOWOW\",\"overview\":\"Based
+        on the Old Testament in the Bible, up until the birth of Jesus Christ.\",\"poster\":\"/banners/v4/series/260116/posters/6755c4360a594.jpg\",\"seriesName\":\"In
         the Beginning: The Bible Stories\",\"slug\":\"260116-show\",\"status\":\"Ended\"},{\"aliases\":[\"Studios
         DaviProdu\xE7\xF5es\",\"Diandra Santos Produ\xE7\xF5es\",\"Diandra Santos\"],\"banner\":\"/banners/v4/series/389473/banners/609dc349287e5.jpg\",\"firstAired\":\"2020-04-27\",\"id\":389473,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"YouTube\",\"overview\":\"Di's
         house tips and a program Presented by Diandra Santos. from Studios DaviProdu\xE7\xF5es
@@ -360,7 +374,15 @@ interactions:
         \\r\\n\\r\\nThink of it as a kind of dangerous version of Play Your Cards
         Right, where the decision between higher or lower will make the difference
         between life or death!\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Deadly
-        Dilemmas\",\"slug\":\"deadly-dilemmas\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/159161-g.jpg\",\"firstAired\":\"2004-09-06\",\"id\":159161,\"image\":\"/banners/posters/159161-1.jpg\",\"network\":\"\",\"overview\":\"Narrated
+        Dilemmas\",\"slug\":\"deadly-dilemmas\",\"status\":\"Ended\"},{\"aliases\":[\"Adoration\"],\"banner\":\"/banners/v4/series/439774/banners/6730b3efb49c3.jpg\",\"firstAired\":\"2024-11-20\",\"id\":439774,\"image\":\"/banners/v4/series/439774/posters/6730b3ced4c8f.jpg\",\"network\":\"Netflix\",\"overview\":\"In
+        a small town near Rome, Elena, a teenage girl disappears. Who is she? What
+        happened to her? This is the story of the two faces of adoration - one striving
+        for dedication; and the other for possession. And how it is sometimes hard
+        to recognise the right one.\",\"poster\":\"/banners/v4/series/439774/posters/6730b3ced4c8f.jpg\",\"seriesName\":\"Adoration\",\"slug\":\"adorazione\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2023-09-03\",\"id\":439072,\"image\":\"/banners/v4/series/439072/posters/64f4755362148.jpg\",\"network\":\"SVT\",\"overview\":\"A
+        personal portrait of Carl XVI Gustaf. For two years, filmmaker Karin af Klintberg
+        has had the unique opportunity to closely follow the king in his life and
+        work. It will be an unexpected meeting between two worlds and two generations.\",\"poster\":\"/banners/v4/series/439072/posters/64f4755362148.jpg\",\"seriesName\":\"Kungen
+        och jag\",\"slug\":\"kungen-och-jag\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"/banners/graphical/159161-g.jpg\",\"firstAired\":\"2004-09-06\",\"id\":159161,\"image\":\"/banners/posters/159161-1.jpg\",\"network\":\"\",\"overview\":\"Narrated
         by Academy Award-winner Ben Kingsley, this series objectively documents Judaism,
         Islam, Hinduism, Buddhism, Catholicism, and Protestantism worldwide with interviews
         from experts. Explore issues that probe the very core of our existence and
@@ -369,8 +391,18 @@ interactions:
         and thrust us into war.\",\"poster\":\"/banners/posters/159161-1.jpg\",\"seriesName\":\"Religions
         of the World\",\"slug\":\"religions-of-the-world\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2013-01-18\",\"id\":398405,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"\",\"overview\":\"Tales
         of people so desperate that they commit unspeakable acts of murder and violence\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Desperate
-        Measures\",\"slug\":\"desperate-measures\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"1998-01-13\",\"id\":400138,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Animated
-        World Faiths\",\"slug\":\"animated-world-faiths\",\"status\":\"Ended\"}]}"
+        Measures\",\"slug\":\"desperate-measures\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/453770/banners/675e91b89043a.jpg\",\"firstAired\":\"2024-12-13\",\"id\":453770,\"image\":\"/banners/v4/series/453770/posters/676bbbd907b89.jpg\",\"network\":null,\"overview\":\"Maria
+        Callas' metamorphosis from ordinary singer to renowned opera diva during WWII,
+        based on Nicholas Diomedes-Petsalis' book \\\"The Unknown Callas,\\\" depicting
+        her rise to stardom's challenges and triumphs\",\"poster\":\"/banners/v4/series/453770/posters/676bbbd907b89.jpg\",\"seriesName\":\"I
+        Maria pou egine Kallas\",\"slug\":\"e-maria-pou-egine-kallas\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"1998-01-13\",\"id\":400138,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Animated
+        World Faiths\",\"slug\":\"animated-world-faiths\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/453191/banners/66d718b4c0ae7.jpg\",\"firstAired\":\"2024-09-02\",\"id\":453191,\"image\":\"/banners/v4/series/453191/posters/66d1cf345aeeb.jpg\",\"network\":\"Investigation
+        Discovery\",\"overview\":\"Explore the life and crimes of Hadden Clark, a
+        lesser-known serial killer. Dive into the inner workings of the volatile and
+        dysfunctional Clark family, Hadden's path of depravity, and the shocking confessions
+        he made to his cellmate that sent investigators on a search to solve the cold
+        cases allegedly linked to him.\",\"poster\":\"/banners/v4/series/453191/posters/66d1cf345aeeb.jpg\",\"seriesName\":\"Born
+        Evil: The Serial Killer and the Savior\",\"slug\":\"born-evil-the-serial-killer-and-the-savior\",\"status\":\"Continuing\"}]}"
     headers:
       Cache-Control:
       - private, max-age=86400
@@ -379,17 +411,17 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 22 May 2024 14:33:38 GMT
+      - Thu, 13 Feb 2025 23:30:23 GMT
       Transfer-Encoding:
       - chunked
       Vary:
       - Accept-Language
       Via:
-      - 1.1 5a9df1bcd5f48109e94a8e34d807b686.cloudfront.net (CloudFront)
+      - 1.1 a592869f6e840918be1b6be3060d1632.cloudfront.net (CloudFront)
       X-Amz-Cf-Id:
-      - vyz0evP2CHl7-7Ldv3q3LIBjQiWrC7TQNzgqpIjOVqBaEyp-lJq1mw==
+      - 7XXKWmnN6swihyQYUDaIufRSP0t50TNOuHHcM_zbbsWShsVvfj3BsQ==
       X-Amz-Cf-Pop:
-      - LIS50-P1
+      - MAD51-C3
       X-Cache:
       - Miss from cloudfront
       X-Powered-By:
@@ -405,17 +437,17 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Accept-Language:
       - en
       Authorization:
-      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDAwOTQyMTgsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzM5NDg5NDE4fQ.I-flvnRYHdakvoJPuyRAVB6U6ePDHLaV8YdC98u5dVsuvO3P3obJ7E7yAN_x3Mc5f5xyQyHcD11I0JsOcud3NLHt-zM3wknZbMcSqhsy7oNl9OYlELhePRcOMl_EVs_IyyCV9tEjkjTPRoHGrHI2R2DLbOzSWojSqWUkwZemRHvHSsxIaaCIKouP9Slp4B1xAdGlkBklpr0QNhjOU6NkSjioing-gUMc053fDuEJTbaOoH9wMFgYyC6S4cZEEyD2zMmGW_Cqvfgbhy2YGZdAXmWoEQzHepnDct11knRzYFR6t2RwGoziOF1l41kOwfXeUtQQdIvvFuyXdJQSJuU6UA
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
     uri: https://api.thetvdb.com/series/242521
   response:
@@ -427,8 +459,6 @@ interactions:
         sabotage, secrets and betrayal. Everyone is back and then some!","lastUpdated":1708963506,"airsDayOfWeek":"","airsTime":"","rating":"TV-14","imdbId":"tt1723760","zap2itId":"","added":"2011-03-22
         04:34:14","addedBy":38654,"siteRating":8,"siteRatingCount":562,"slug":"dallas-2012"}}'
     headers:
-      Age:
-      - '44903'
       Cache-Control:
       - private, max-age=86400
       Connection:
@@ -438,19 +468,19 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 22 May 2024 02:05:16 GMT
+      - Thu, 13 Feb 2025 23:30:23 GMT
       Last-Modified:
       - Mon, 26 Feb 2024 16:05:06 GMT
       Vary:
       - Accept-Language
       Via:
-      - 1.1 191181f299c93f856cc1cdad79c1bb76.cloudfront.net (CloudFront)
+      - 1.1 72dd98bd7ac49e4cde7380f0bf4fad6c.cloudfront.net (CloudFront)
       X-Amz-Cf-Id:
-      - WQ9QGDQ_xa4nJMVJ7KLOe5qKDBcdEYeJN-imWDASS-PgZdBiHSxOCA==
+      - 4BMHJlKuztnKea4uqUwxNRBziOWqXmSGO94s7teBUNQ4WBxYeCNpLQ==
       X-Amz-Cf-Pop:
-      - LIS50-P1
+      - MAD51-C3
       X-Cache:
-      - Hit from cloudfront
+      - Miss from cloudfront
       X-Powered-By:
       - Thundar!
       X-Thetvdb-Api-Version:
@@ -464,17 +494,17 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Accept-Language:
       - en
       Authorization:
-      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDAwOTQyMTgsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzM5NDg5NDE4fQ.I-flvnRYHdakvoJPuyRAVB6U6ePDHLaV8YdC98u5dVsuvO3P3obJ7E7yAN_x3Mc5f5xyQyHcD11I0JsOcud3NLHt-zM3wknZbMcSqhsy7oNl9OYlELhePRcOMl_EVs_IyyCV9tEjkjTPRoHGrHI2R2DLbOzSWojSqWUkwZemRHvHSsxIaaCIKouP9Slp4B1xAdGlkBklpr0QNhjOU6NkSjioing-gUMc053fDuEJTbaOoH9wMFgYyC6S4cZEEyD2zMmGW_Cqvfgbhy2YGZdAXmWoEQzHepnDct11knRzYFR6t2RwGoziOF1l41kOwfXeUtQQdIvvFuyXdJQSJuU6UA
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
     uri: https://api.thetvdb.com/series/242521/episodes/query?airedSeason=1&airedEpisode=3&page=1
   response:
@@ -492,28 +522,28 @@ interactions:
       - private, max-age=86400
       Connection:
       - keep-alive
-      Content-Encoding:
-      - gzip
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 22 May 2024 14:33:39 GMT
+      - Thu, 13 Feb 2025 23:30:24 GMT
       Transfer-Encoding:
       - chunked
       Vary:
       - Accept-Encoding,Accept-Language
       Via:
-      - 1.1 68c9162ccc29f8f3ca30be36950cea58.cloudfront.net (CloudFront)
+      - 1.1 ccf23514a8a200c107293458311fe030.cloudfront.net (CloudFront)
       X-Amz-Cf-Id:
-      - dytdl6Z2deWwTr6p38NxxTepSWufudfE9djf0NX1j0BtOV_Qg9iFeA==
+      - PbywAjxT4DER62rsV6YMM-MnhwQqHtVk_qzcRcOityaiReMxxeK8tQ==
       X-Amz-Cf-Pop:
-      - LIS50-P1
+      - MAD51-C3
       X-Cache:
       - Miss from cloudfront
       X-Powered-By:
       - Thundar!
       X-Thetvdb-Api-Version:
       - 3.0.0
+      content-length:
+      - '1136'
     status:
       code: 200
       message: OK
@@ -523,17 +553,17 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Accept-Language:
       - en
       Authorization:
-      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDAwOTQyMTgsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzM5NDg5NDE4fQ.I-flvnRYHdakvoJPuyRAVB6U6ePDHLaV8YdC98u5dVsuvO3P3obJ7E7yAN_x3Mc5f5xyQyHcD11I0JsOcud3NLHt-zM3wknZbMcSqhsy7oNl9OYlELhePRcOMl_EVs_IyyCV9tEjkjTPRoHGrHI2R2DLbOzSWojSqWUkwZemRHvHSsxIaaCIKouP9Slp4B1xAdGlkBklpr0QNhjOU6NkSjioing-gUMc053fDuEJTbaOoH9wMFgYyC6S4cZEEyD2zMmGW_Cqvfgbhy2YGZdAXmWoEQzHepnDct11knRzYFR6t2RwGoziOF1l41kOwfXeUtQQdIvvFuyXdJQSJuU6UA
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
     uri: https://api.thetvdb.com/episodes/4199511
   response:
@@ -547,18 +577,14 @@ interactions:
         A startling family announcement offers an opportunity to heal old wounds.\",\"language\":{\"episodeName\":\"en\",\"overview\":\"en\"},\"productionCode\":\"\",\"showUrl\":\"\",\"lastUpdated\":1573641655,\"dvdDiscid\":\"\",\"dvdSeason\":1,\"dvdEpisodeNumber\":3,\"dvdChapter\":null,\"absoluteNumber\":3,\"filename\":\"episodes/242521/4199511.jpg\",\"seriesId\":242521,\"lastUpdatedBy\":1,\"airsAfterSeason\":null,\"airsBeforeSeason\":null,\"airsBeforeEpisode\":null,\"imdbId\":\"tt2205526\",\"contentRating\":\"TV-14\",\"thumbAuthor\":1,\"thumbAdded\":\"2019-11-13
         10:40:55\",\"thumbWidth\":\"640\",\"thumbHeight\":\"360\",\"siteRating\":7.2,\"siteRatingCount\":484,\"isMovie\":0}}"
     headers:
-      Age:
-      - '15630'
       Cache-Control:
       - private, max-age=86400
       Connection:
       - keep-alive
-      Content-Encoding:
-      - gzip
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 22 May 2024 10:13:09 GMT
+      - Thu, 13 Feb 2025 23:30:24 GMT
       Last-Modified:
       - Thu, 01 Jan 1970 00:00:00 GMT
       Transfer-Encoding:
@@ -566,17 +592,19 @@ interactions:
       Vary:
       - Accept-Encoding,Accept-Language
       Via:
-      - 1.1 735dd7fa3c296627cd805d04e3e3a3e8.cloudfront.net (CloudFront)
+      - 1.1 f5cc76e0ef8305f960f258eb80ac4006.cloudfront.net (CloudFront)
       X-Amz-Cf-Id:
-      - ODJ0UA0pzXZipSgRUqjql1J4DInSSRDiluGvKBVwtPoT1GnM77nXtw==
+      - jFzaxk23RG2jPlKX7_uPsbnLAkUu0Iqnk3hvamlgsUCHhi5ZKadK6w==
       X-Amz-Cf-Pop:
-      - LIS50-P1
+      - MAD51-C3
       X-Cache:
-      - Hit from cloudfront
+      - Miss from cloudfront
       X-Powered-By:
       - Thundar!
       X-Thetvdb-Api-Version:
       - 3.0.0
+      content-length:
+      - '1081'
     status:
       code: 200
       message: OK

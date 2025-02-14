@@ -20,7 +20,7 @@ interactions:
     uri: https://api.thetvdb.com/login
   response:
     body:
-      string: '{"token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg"}'
+      string: '{"token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDAwOTQyMTgsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzM5NDg5NDE4fQ.I-flvnRYHdakvoJPuyRAVB6U6ePDHLaV8YdC98u5dVsuvO3P3obJ7E7yAN_x3Mc5f5xyQyHcD11I0JsOcud3NLHt-zM3wknZbMcSqhsy7oNl9OYlELhePRcOMl_EVs_IyyCV9tEjkjTPRoHGrHI2R2DLbOzSWojSqWUkwZemRHvHSsxIaaCIKouP9Slp4B1xAdGlkBklpr0QNhjOU6NkSjioing-gUMc053fDuEJTbaOoH9wMFgYyC6S4cZEEyD2zMmGW_Cqvfgbhy2YGZdAXmWoEQzHepnDct11knRzYFR6t2RwGoziOF1l41kOwfXeUtQQdIvvFuyXdJQSJuU6UA"}'
     headers:
       Connection:
       - keep-alive
@@ -53,17 +53,17 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Accept-Language:
       - en
       Authorization:
-      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDAwOTQyMTgsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzM5NDg5NDE4fQ.I-flvnRYHdakvoJPuyRAVB6U6ePDHLaV8YdC98u5dVsuvO3P3obJ7E7yAN_x3Mc5f5xyQyHcD11I0JsOcud3NLHt-zM3wknZbMcSqhsy7oNl9OYlELhePRcOMl_EVs_IyyCV9tEjkjTPRoHGrHI2R2DLbOzSWojSqWUkwZemRHvHSsxIaaCIKouP9Slp4B1xAdGlkBklpr0QNhjOU6NkSjioing-gUMc053fDuEJTbaOoH9wMFgYyC6S4cZEEyD2zMmGW_Cqvfgbhy2YGZdAXmWoEQzHepnDct11knRzYFR6t2RwGoziOF1l41kOwfXeUtQQdIvvFuyXdJQSJuU6UA
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
     uri: https://api.thetvdb.com/search/series?name=turn%3A+washington%27s+spies
   response:
@@ -83,15 +83,15 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 22 May 2024 14:33:40 GMT
+      - Thu, 13 Feb 2025 23:30:25 GMT
       Vary:
       - Accept-Language
       Via:
-      - 1.1 2c1fa76ea6af6e9212cf3e52e166c4ce.cloudfront.net (CloudFront)
+      - 1.1 f5cc76e0ef8305f960f258eb80ac4006.cloudfront.net (CloudFront)
       X-Amz-Cf-Id:
-      - qo4tBctkAu3220YAs0fmSF_xbd2pLkwloXEP4Zu_QG8eK5LkPyhkag==
+      - Iy5jExg7UanPfNdb32KVEtLmg2BI3SM9u7t47u9UL8VIxjzF8ujG3w==
       X-Amz-Cf-Pop:
-      - LIS50-P1
+      - MAD51-C3
       X-Cache:
       - Miss from cloudfront
       X-Powered-By:
@@ -107,17 +107,17 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Accept-Language:
       - en
       Authorization:
-      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDAwOTQyMTgsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzM5NDg5NDE4fQ.I-flvnRYHdakvoJPuyRAVB6U6ePDHLaV8YdC98u5dVsuvO3P3obJ7E7yAN_x3Mc5f5xyQyHcD11I0JsOcud3NLHt-zM3wknZbMcSqhsy7oNl9OYlELhePRcOMl_EVs_IyyCV9tEjkjTPRoHGrHI2R2DLbOzSWojSqWUkwZemRHvHSsxIaaCIKouP9Slp4B1xAdGlkBklpr0QNhjOU6NkSjioing-gUMc053fDuEJTbaOoH9wMFgYyC6S4cZEEyD2zMmGW_Cqvfgbhy2YGZdAXmWoEQzHepnDct11knRzYFR6t2RwGoziOF1l41kOwfXeUtQQdIvvFuyXdJQSJuU6UA
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
     uri: https://api.thetvdb.com/series/272135
   response:
@@ -126,12 +126,10 @@ interactions:
         Spies","aliases":["Turn"],"season":"4","poster":"posters/272135-3.jpg","banner":"graphical/272135-g5.jpg","fanart":"fanart/original/272135-6.jpg","status":"Ended","firstAired":"2014-04-06","network":"AMC","networkId":"400","runtime":"45","language":"en","genre":["Adventure","Drama","History","War"],"overview":"Follows
         New York farmer, Abe Woodhull, who bands together with a group of childhood
         friends to form The Culper Ring, an unlikely group of spies who turn the tide
-        in America''s fight for independence.","lastUpdated":1699886194,"airsDayOfWeek":"Saturday","airsTime":"9:00
+        in America''s fight for independence.","lastUpdated":1735764217,"airsDayOfWeek":"Saturday","airsTime":"9:00
         PM","rating":"TV-14","imdbId":"tt2543328","zap2itId":"","added":"2013-08-08
         04:59:14","addedBy":1,"siteRating":8.1,"siteRatingCount":696,"slug":"turn-washingtons-spies"}}'
     headers:
-      Age:
-      - '38579'
       Cache-Control:
       - private, max-age=86400
       Connection:
@@ -141,19 +139,19 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 22 May 2024 03:50:41 GMT
+      - Thu, 13 Feb 2025 23:30:26 GMT
       Last-Modified:
-      - Mon, 13 Nov 2023 14:36:34 GMT
+      - Wed, 01 Jan 2025 20:43:37 GMT
       Vary:
       - Accept-Language
       Via:
-      - 1.1 d8d835cce198f21656f532aa7cb25fbe.cloudfront.net (CloudFront)
+      - 1.1 088ca04bdb72aecc3b592341a13090a4.cloudfront.net (CloudFront)
       X-Amz-Cf-Id:
-      - RJC_UiLOLXaPof8RnMCFdQApyKX4h87oePugGiyp6tKE39btzoym_g==
+      - q_72jwEIxURO-JCDDW3gfwQ-z02YxFZMEyR0OKx_OkdktDdkmgIQbA==
       X-Amz-Cf-Pop:
-      - LIS50-P1
+      - MAD51-C3
       X-Cache:
-      - Hit from cloudfront
+      - Miss from cloudfront
       X-Powered-By:
       - Thundar!
       X-Thetvdb-Api-Version:
@@ -167,17 +165,17 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Accept-Language:
       - en
       Authorization:
-      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDAwOTQyMTgsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzM5NDg5NDE4fQ.I-flvnRYHdakvoJPuyRAVB6U6ePDHLaV8YdC98u5dVsuvO3P3obJ7E7yAN_x3Mc5f5xyQyHcD11I0JsOcud3NLHt-zM3wknZbMcSqhsy7oNl9OYlELhePRcOMl_EVs_IyyCV9tEjkjTPRoHGrHI2R2DLbOzSWojSqWUkwZemRHvHSsxIaaCIKouP9Slp4B1xAdGlkBklpr0QNhjOU6NkSjioing-gUMc053fDuEJTbaOoH9wMFgYyC6S4cZEEyD2zMmGW_Cqvfgbhy2YGZdAXmWoEQzHepnDct11knRzYFR6t2RwGoziOF1l41kOwfXeUtQQdIvvFuyXdJQSJuU6UA
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
     uri: https://api.thetvdb.com/series/272135/episodes/query?airedSeason=4&airedEpisode=3&page=1
   response:
@@ -189,8 +187,6 @@ interactions:
         which she is keeping from him.","language":{"episodeName":"en","overview":"en"},"productionCode":"","showUrl":"","lastUpdated":1689698090,"dvdDiscid":"","dvdSeason":null,"dvdEpisodeNumber":null,"dvdChapter":null,"absoluteNumber":null,"filename":"episodes/272135/64b6bf293dd96.jpg","seriesId":272135,"lastUpdatedBy":1,"airsAfterSeason":null,"airsBeforeSeason":null,"airsBeforeEpisode":null,"imdbId":"tt6137686","contentRating":"TV-14","thumbAuthor":198416,"thumbAdded":"2023-07-18
         16:34:49","thumbWidth":"640","thumbHeight":"360","siteRating":7.8,"siteRatingCount":108,"isMovie":0}]}'
     headers:
-      Age:
-      - '11003'
       Cache-Control:
       - private, max-age=86400
       Connection:
@@ -200,17 +196,17 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 22 May 2024 11:30:18 GMT
+      - Thu, 13 Feb 2025 23:30:26 GMT
       Vary:
       - Accept-Language
       Via:
-      - 1.1 ca3702c84b0e2f2daaf573cabe88ad8c.cloudfront.net (CloudFront)
+      - 1.1 c040df466db8351d337f6dca52ab08e8.cloudfront.net (CloudFront)
       X-Amz-Cf-Id:
-      - j1sDR0revjm-8-muhdIAx-lqS-eJBvRQm_TU5kn2AiR0JFQRiYj-BA==
+      - goSt5hJqkCsl-5uaLiVdiBBmeZGlN6JwaIYTV2KRbTdD13jr36-F7w==
       X-Amz-Cf-Pop:
-      - LIS50-P1
+      - MAD51-C3
       X-Cache:
-      - Hit from cloudfront
+      - Miss from cloudfront
       X-Powered-By:
       - Thundar!
       X-Thetvdb-Api-Version:
@@ -224,17 +220,17 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Accept-Language:
       - en
       Authorization:
-      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDAwOTQyMTgsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzM5NDg5NDE4fQ.I-flvnRYHdakvoJPuyRAVB6U6ePDHLaV8YdC98u5dVsuvO3P3obJ7E7yAN_x3Mc5f5xyQyHcD11I0JsOcud3NLHt-zM3wknZbMcSqhsy7oNl9OYlELhePRcOMl_EVs_IyyCV9tEjkjTPRoHGrHI2R2DLbOzSWojSqWUkwZemRHvHSsxIaaCIKouP9Slp4B1xAdGlkBklpr0QNhjOU6NkSjioing-gUMc053fDuEJTbaOoH9wMFgYyC6S4cZEEyD2zMmGW_Cqvfgbhy2YGZdAXmWoEQzHepnDct11knRzYFR6t2RwGoziOF1l41kOwfXeUtQQdIvvFuyXdJQSJuU6UA
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
     uri: https://api.thetvdb.com/episodes/6124360
   response:
@@ -246,8 +242,6 @@ interactions:
         which she is keeping from him.","language":{"episodeName":"en","overview":"en"},"productionCode":"","showUrl":"","lastUpdated":1689698090,"dvdDiscid":"","dvdSeason":null,"dvdEpisodeNumber":null,"dvdChapter":null,"absoluteNumber":null,"filename":"episodes/272135/64b6bf293dd96.jpg","seriesId":272135,"lastUpdatedBy":1,"airsAfterSeason":null,"airsBeforeSeason":null,"airsBeforeEpisode":null,"imdbId":"tt6137686","contentRating":"TV-14","thumbAuthor":198416,"thumbAdded":"2023-07-18
         16:34:49","thumbWidth":"640","thumbHeight":"360","siteRating":7.8,"siteRatingCount":108,"isMovie":0}}'
     headers:
-      Age:
-      - '11003'
       Cache-Control:
       - private, max-age=86400
       Connection:
@@ -257,19 +251,19 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 22 May 2024 11:30:18 GMT
+      - Thu, 13 Feb 2025 23:30:27 GMT
       Last-Modified:
       - Thu, 01 Jan 1970 00:00:00 GMT
       Vary:
       - Accept-Language
       Via:
-      - 1.1 daf51694fe4a175a7249d39be5e22e4c.cloudfront.net (CloudFront)
+      - 1.1 352ab4fc53db02754a30e59a7814a0d2.cloudfront.net (CloudFront)
       X-Amz-Cf-Id:
-      - 2i4CPreOVgPMT38BnIT4OJuuCBomJkTslFRXga1GHpqodccc3NgADw==
+      - 8ZkizfRj5cAe1HPuOvgFP1HPDtVF84PEyq3RLgS0IJf4fNmIOgME_w==
       X-Amz-Cf-Pop:
-      - LIS50-P1
+      - MAD51-C3
       X-Cache:
-      - Hit from cloudfront
+      - Miss from cloudfront
       X-Powered-By:
       - Thundar!
       X-Thetvdb-Api-Version:

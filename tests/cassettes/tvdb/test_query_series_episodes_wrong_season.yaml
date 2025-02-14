@@ -5,7 +5,7 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Accept-Language:
       - en
       Connection:
@@ -15,12 +15,12 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: POST
     uri: https://api.thetvdb.com/login
   response:
     body:
-      string: '{"token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg"}'
+      string: '{"token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDAwOTQyMTcsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzM5NDg5NDE3fQ.Es455TPGAju2IUoTiXJPoMMAC3nxEZO02xXHTc1QtvIjcaZ_juLlB_Dr6TyoQ-dsICova3PnduVSTGYsLhsISPZhTqu0gBbiZosMcsDODRLl-B8VVrifpu2W0Cmt1FZzcTIGFB1hIxGAO7bJvVwMTyntyNxhK_3GBRVB2fD94zATWaHWN6veiRUXuNfupJQ2omYf9WqCh4R_ZyrqZvs2QM8zmhmUUoV6_bQjtET-16dO8ErMODUl6V_cY1bKYAXI-XSRpVEWwgXXKtDHVfrG5TDMT_wGhw6R4N5aW0aqmnLqlkxGjD4GwsEQpENtU77XmPAuoyNxTkyJ_mgFi7c0sg"}'
     headers:
       Connection:
       - keep-alive
@@ -29,15 +29,15 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 22 May 2024 14:33:34 GMT
+      - Thu, 13 Feb 2025 23:30:17 GMT
       Vary:
       - Accept-Language
       Via:
-      - 1.1 42c937f806e6e43029a719b83b9a8612.cloudfront.net (CloudFront)
+      - 1.1 508a0f3451a34ff5e6a3963c94ef304c.cloudfront.net (CloudFront)
       X-Amz-Cf-Id:
-      - HyrLaPS01OJVbUP_9DxUGBAiCuR7PkF7meh2Xx5zrkkKThu0xMVB8w==
+      - zDGFoR5M8IMS58DRrLYJiFKBUf18M3cLxqOgsJTOpnwYNNqEbnR0Jg==
       X-Amz-Cf-Pop:
-      - LIS50-P1
+      - MAD51-C3
       X-Cache:
       - Miss from cloudfront
       X-Powered-By:
@@ -53,17 +53,17 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Accept-Language:
       - en
       Authorization:
-      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDAwOTQyMTcsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzM5NDg5NDE3fQ.Es455TPGAju2IUoTiXJPoMMAC3nxEZO02xXHTc1QtvIjcaZ_juLlB_Dr6TyoQ-dsICova3PnduVSTGYsLhsISPZhTqu0gBbiZosMcsDODRLl-B8VVrifpu2W0Cmt1FZzcTIGFB1hIxGAO7bJvVwMTyntyNxhK_3GBRVB2fD94zATWaHWN6veiRUXuNfupJQ2omYf9WqCh4R_ZyrqZvs2QM8zmhmUUoV6_bQjtET-16dO8ErMODUl6V_cY1bKYAXI-XSRpVEWwgXXKtDHVfrG5TDMT_wGhw6R4N5aW0aqmnLqlkxGjD4GwsEQpENtU77XmPAuoyNxTkyJ_mgFi7c0sg
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
     uri: https://api.thetvdb.com/series/80379/episodes/query?airedSeason=99&page=1
   response:
@@ -79,15 +79,15 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 22 May 2024 14:33:34 GMT
+      - Thu, 13 Feb 2025 23:30:18 GMT
       Vary:
       - Accept-Language
       Via:
-      - 1.1 daf51694fe4a175a7249d39be5e22e4c.cloudfront.net (CloudFront)
+      - 1.1 ac6c61c5795b4bc9c16e9a11b9a19660.cloudfront.net (CloudFront)
       X-Amz-Cf-Id:
-      - utSAEJYb6fq0K36xbaIb9EUYjlkc4l9vypWBqq8C8NKoWCeKuprANA==
+      - t951WnGKEXp_lAxp0K4NLKiDPoIHo1zKE8rDtzifP-9lxp1GcxAeVA==
       X-Amz-Cf-Pop:
-      - LIS50-P1
+      - MAD51-C3
       X-Cache:
       - Error from cloudfront
       X-Powered-By:

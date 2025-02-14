@@ -3,11 +3,11 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
       accept:
       - application/json
     method: GET
@@ -18,25 +18,23 @@ interactions:
         Cyber","nbSeasons":2,"seasons":[1,2],"tvDbId":281551,"tmdbId":61811,"slug":"csi-cyber"}]}'
     headers:
       CF-Cache-Status:
-      - HIT
+      - MISS
       CF-RAY:
-      - 88ba5f3aea365be4-LIS
+      - 91189a486ab55be2-LIS
       Cache-Control:
       - public, max-age=14400
       Connection:
       - keep-alive
-      Content-Encoding:
-      - br
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 29 May 2024 23:47:52 GMT
+      - Thu, 13 Feb 2025 23:29:48 GMT
       Last-Modified:
-      - Wed, 29 May 2024 19:47:27 GMT
+      - Thu, 13 Feb 2025 23:29:48 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=Nh%2FF782ffJVixq8VsYOQu6nLwD0CUsfXGVwxNii6Kppa2m54j%2F8SbM7Og4kyj1prhbXZlIKQ5BUle4WSZqLUQ98BKJhrBJDKEqfky9q4vyv4umCJ1AjualCYEnJ2hp8cgmOyDQ%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=RKYiJqrE2KKunpU1ZD80TbI3QGmyJF4S4q5Ebjk77i%2BF%2B0GK8XCYNKYFHGver9vYEZ0fEky6hU6vzhRAVcZNjpJWLQL2LEYUI2l7b1bP%2FHg8EGA3%2Bv15VugLP2kRxZdLWVsz0g%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -47,7 +45,12 @@ interactions:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
+      content-length:
+      - '157'
+      server-timing:
+      - cfL4;desc="?proto=TCP&rtt=3057&min_rtt=2994&rtt_var=1248&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2846&recv_bytes=797&delivery_rate=827901&cwnd=183&unsent_bytes=0&cid=2e43278c80d97922&ts=81&x=0"
       vary:
+      - Accept-Encoding
       - Accept-Encoding
     status:
       code: 200
@@ -56,40 +59,38 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
       accept:
       - application/json
     method: GET
     uri: https://api.gestdown.info/subtitles/get/b23a6864-d99c-48f1-95f7-b675289ca8a8/2/3/eng
   response:
     body:
-      string: '{"matchingSubtitles":[{"subtitleId":"05785d75-5fdc-4f5a-8a06-94da5b82faf6","version":"DIMENSION","completed":true,"hearingImpaired":true,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/05785d75-5fdc-4f5a-8a06-94da5b82faf6","language":"English","discovered":"2022-07-27T23:38:13.786172Z","downloadCount":4},{"subtitleId":"5a1eef38-0058-4f19-8083-e4e73eb41068","version":"DIMENSION.colored","completed":true,"hearingImpaired":true,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/5a1eef38-0058-4f19-8083-e4e73eb41068","language":"English","discovered":"2022-07-27T23:38:13.786174Z","downloadCount":0},{"subtitleId":"be0fedf1-3863-42bc-a026-88af7f6a9461","version":"DIMENSION","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/be0fedf1-3863-42bc-a026-88af7f6a9461","language":"English","discovered":"2022-07-27T23:38:13.786175Z","downloadCount":49}],"episode":{"season":2,"number":3,"title":"Brown
+      string: '{"matchingSubtitles":[{"subtitleId":"05785d75-5fdc-4f5a-8a06-94da5b82faf6","version":"DIMENSION","completed":true,"hearingImpaired":true,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/05785d75-5fdc-4f5a-8a06-94da5b82faf6","language":"English","discovered":"2022-07-27T23:38:13.786172Z","downloadCount":43},{"subtitleId":"5a1eef38-0058-4f19-8083-e4e73eb41068","version":"DIMENSION.colored","completed":true,"hearingImpaired":true,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/5a1eef38-0058-4f19-8083-e4e73eb41068","language":"English","discovered":"2022-07-27T23:38:13.786174Z","downloadCount":0},{"subtitleId":"be0fedf1-3863-42bc-a026-88af7f6a9461","version":"DIMENSION","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/be0fedf1-3863-42bc-a026-88af7f6a9461","language":"English","discovered":"2022-07-27T23:38:13.786175Z","downloadCount":66}],"episode":{"season":2,"number":3,"title":"Brown
         Eyes, Blue Eyes","show":"CSI: Cyber","discovered":"2022-07-27T23:38:13.786171Z"}}'
     headers:
       CF-Cache-Status:
-      - EXPIRED
+      - MISS
       CF-RAY:
-      - 88ba5f3b6ef65bf0-LIS
+      - 91189a4979c6ef54-LHR
       Cache-Control:
       - public, max-age=7200
       Connection:
       - keep-alive
-      Content-Encoding:
-      - br
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 29 May 2024 23:47:52 GMT
+      - Thu, 13 Feb 2025 23:29:49 GMT
       Last-Modified:
-      - Wed, 29 May 2024 19:47:27 GMT
+      - Thu, 13 Feb 2025 23:29:49 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=4QnzNJPGR4GTzoKLmh%2FKs3aA7MLGkX8ITc4C%2BgG9WMuF2keHG3xBIyPEV2%2BvRf4XkrRjtzMRuP%2FEPaLuldcSexYOiBeSapNjy1NBQHIPwnxTmpvfo9Vk1RurHRhjlvEAKTX35g%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=52ZtqyC2qXen5Z4VxXooDsFDIu0Dqd5FtOWspZm7NMxqTeueql%2FO58OBNvn9YhrsluU3ODlILVcx8S2ivcwNXW%2FWE6rQ%2BeEkZKUeCyMyBtgn4jtj1hrYMxhmTfX855wyD7uZig%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -100,7 +101,12 @@ interactions:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
+      content-length:
+      - '1057'
+      server-timing:
+      - cfL4;desc="?proto=TCP&rtt=32881&min_rtt=32174&rtt_var=12570&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2846&recv_bytes=830&delivery_rate=90010&cwnd=252&unsent_bytes=0&cid=311fe27e858cdec4&ts=96&x=0"
       vary:
+      - Accept-Encoding
       - Accept-Encoding
     status:
       code: 200

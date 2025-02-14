@@ -5,7 +5,7 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Accept-Language:
       - en
       Connection:
@@ -15,12 +15,12 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: POST
     uri: https://api.thetvdb.com/login
   response:
     body:
-      string: '{"token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTMsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDEzfQ.pop3CJJhjHMHmJ3EHLf0ZYE2ORD-MFqBEi8w9yO9RlIbqkzTkyfLAiUOpflZ7AiASGnkdCLyFZagZKaHcK86YjHRBrrQOQ5jSCN13oVT2d7yOwFP6U4WSLiA8HdHIxLh0Jkh_mnyBUoFJSkJr12WiuouW8mi2HsSfPv1S5kS0m149atLnJFQxXh5BD1AzQaeED1RKNzVvktwGLXDe01yKxsk0xkOYFNDWt3kUh3thH8GwQrsEKn1-L7wxm5s-q7r3xSH7Hqt9RL--M2NVfgAAwmZy0l1-hMr6zJyNgaxx9ClTWbHWh83zIb3M_Op0Oa4iL7rsQ60xkvp96OjNBUbAw"}'
+      string: '{"token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDAwOTQyMTcsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzM5NDg5NDE3fQ.Es455TPGAju2IUoTiXJPoMMAC3nxEZO02xXHTc1QtvIjcaZ_juLlB_Dr6TyoQ-dsICova3PnduVSTGYsLhsISPZhTqu0gBbiZosMcsDODRLl-B8VVrifpu2W0Cmt1FZzcTIGFB1hIxGAO7bJvVwMTyntyNxhK_3GBRVB2fD94zATWaHWN6veiRUXuNfupJQ2omYf9WqCh4R_ZyrqZvs2QM8zmhmUUoV6_bQjtET-16dO8ErMODUl6V_cY1bKYAXI-XSRpVEWwgXXKtDHVfrG5TDMT_wGhw6R4N5aW0aqmnLqlkxGjD4GwsEQpENtU77XmPAuoyNxTkyJ_mgFi7c0sg"}'
     headers:
       Connection:
       - keep-alive
@@ -29,15 +29,15 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 22 May 2024 14:33:33 GMT
+      - Thu, 13 Feb 2025 23:30:17 GMT
       Vary:
       - Accept-Language
       Via:
-      - 1.1 5a9df1bcd5f48109e94a8e34d807b686.cloudfront.net (CloudFront)
+      - 1.1 ac6c61c5795b4bc9c16e9a11b9a19660.cloudfront.net (CloudFront)
       X-Amz-Cf-Id:
-      - Vlir5yLHiTAFYEh8TXGw3A3F-TZiTkvD78wjuOsWXc-X5p-4AACTWA==
+      - 3sMXRKjHzE-b5O82C0_0Fn6Iu8J_X4xcOV1uwTlaNZ03gU3GKwwBUw==
       X-Amz-Cf-Pop:
-      - LIS50-P1
+      - MAD51-C3
       X-Cache:
       - Miss from cloudfront
       X-Powered-By:
@@ -53,17 +53,17 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Accept-Language:
       - en
       Authorization:
-      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTMsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDEzfQ.pop3CJJhjHMHmJ3EHLf0ZYE2ORD-MFqBEi8w9yO9RlIbqkzTkyfLAiUOpflZ7AiASGnkdCLyFZagZKaHcK86YjHRBrrQOQ5jSCN13oVT2d7yOwFP6U4WSLiA8HdHIxLh0Jkh_mnyBUoFJSkJr12WiuouW8mi2HsSfPv1S5kS0m149atLnJFQxXh5BD1AzQaeED1RKNzVvktwGLXDe01yKxsk0xkOYFNDWt3kUh3thH8GwQrsEKn1-L7wxm5s-q7r3xSH7Hqt9RL--M2NVfgAAwmZy0l1-hMr6zJyNgaxx9ClTWbHWh83zIb3M_Op0Oa4iL7rsQ60xkvp96OjNBUbAw
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDAwOTQyMTcsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzM5NDg5NDE3fQ.Es455TPGAju2IUoTiXJPoMMAC3nxEZO02xXHTc1QtvIjcaZ_juLlB_Dr6TyoQ-dsICova3PnduVSTGYsLhsISPZhTqu0gBbiZosMcsDODRLl-B8VVrifpu2W0Cmt1FZzcTIGFB1hIxGAO7bJvVwMTyntyNxhK_3GBRVB2fD94zATWaHWN6veiRUXuNfupJQ2omYf9WqCh4R_ZyrqZvs2QM8zmhmUUoV6_bQjtET-16dO8ErMODUl6V_cY1bKYAXI-XSRpVEWwgXXKtDHVfrG5TDMT_wGhw6R4N5aW0aqmnLqlkxGjD4GwsEQpENtU77XmPAuoyNxTkyJ_mgFi7c0sg
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
     uri: https://api.thetvdb.com/series/80379/episodes/query?airedSeason=7&airedEpisode=5&page=1
   response:
@@ -78,33 +78,33 @@ interactions:
         22:44:41","thumbWidth":"640","thumbHeight":"360","siteRating":7.7,"siteRatingCount":4973,"isMovie":0}]}'
     headers:
       Age:
-      - '34327'
+      - '76467'
       Cache-Control:
       - private, max-age=86400
       Connection:
       - keep-alive
-      Content-Encoding:
-      - gzip
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 22 May 2024 05:01:25 GMT
+      - Thu, 13 Feb 2025 02:15:50 GMT
       Transfer-Encoding:
       - chunked
       Vary:
       - Accept-Encoding,Accept-Language
       Via:
-      - 1.1 4c13f73e83aaf9d7bee2c3b379c641d6.cloudfront.net (CloudFront)
+      - 1.1 352ab4fc53db02754a30e59a7814a0d2.cloudfront.net (CloudFront)
       X-Amz-Cf-Id:
-      - 3EaR8biYWu91oaKVbwV3v43aWpGhfe3M7JQMPdQ6jMpsM0v0PGl3Nw==
+      - _aBz_UAnOVdDptNMAomOxRZUjipJJU46DyNao3erkciDzAfnYE41Tg==
       X-Amz-Cf-Pop:
-      - LIS50-P1
+      - MAD51-C3
       X-Cache:
       - Hit from cloudfront
       X-Powered-By:
       - Thundar!
       X-Thetvdb-Api-Version:
       - 3.0.0
+      content-length:
+      - '1139'
     status:
       code: 200
       message: OK

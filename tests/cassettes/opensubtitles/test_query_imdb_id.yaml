@@ -45,19 +45,16 @@ interactions:
       Content-Type:
       - text/xml
       User-Agent:
-      - Python-xmlrpc/3.12
+      - VLSub
     method: POST
     uri: https://api.opensubtitles.org/xml-rpc
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAA42QTQ6CMBCFr0LYYwu6cDGUxGCMaDTBExQYfyJtDW3R44umGEUXrmbmzZsvmQfJ
-        TdRei40+KRn74Yj6HspSVSd5iH1r9sHUTxgINEdV5agvSmpkcOENF9pVBi2vbadq09jSPNyiwIaB
-        5AKZUWeUQJ79m7Hjs00+w+i6SNtdUQdivsQ81eNsnS3UBIjzAHE3pKd+0LXhxurf+IhSb7v6m4Sl
-        ktUQVSlb1MjoiIYhEDd9k0j/+mvjkiF9UmQQ4R1D+d+yeQEAAA==
+      string: <?xml version="1.0" encoding="utf-8"?><methodResponse><params><param><value><struct><member><name>token</name><value><string>U,FkOyD6AYRj1xujlNoF1clEQy0</string></value></member><member><name>status</name><value><string>200
+        OK</string></value></member><member><name>seconds</name><value><double>0.007000</double></value></member></struct></value></param></params></methodResponse>
     headers:
-      Accept-Ranges:
-      - bytes
+      Access-Control-Allow-Credentials:
+      - ''
       Access-Control-Allow-Headers:
       - Origin,X-Requested-With,Content-Type,Accept,DNT,Keep-Alive,User-Agent,If-Modified-Since,Cache-Control
       Access-Control-Allow-Methods:
@@ -66,51 +63,51 @@ interactions:
       - '*'
       Age:
       - '0'
-      CF-Cache-Status:
-      - DYNAMIC
       CF-RAY:
-      - 88e70c8319486683-MAD
+      - 91189a443f505be0-LIS
       Connection:
       - keep-alive
-      Content-Encoding:
-      - gzip
-      Content-Length:
-      - '208'
       Content-Type:
       - text/xml;charset=UTF-8
       Date:
-      - Tue, 04 Jun 2024 09:55:43 GMT
+      - Thu, 13 Feb 2025 23:29:48 GMT
       Download-Quota:
       - '999999999'
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=dNs9Hy2blbYetl3u33tA3rACyItWeBY8nsweQgW3vk2nmPUiUXK%2F2y1eB%2FqVRpCYEdAHXVQ%2BOUCRFr8BZQaRx%2FgUoavcYhxl%2BxvHSgrtd8l0TtopeZPX0ZlnWq2e0d9%2BHZqHJChBIaw%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=H%2FJJACccYypphSH5it0Q4xwbBzxyk9RTSRaGSxRC98p0YAs%2BYh7spRRorDfsM3xh%2Fx74Z8Xczn363HSnHeSpZnKZM6pRJ4B8CqYCZWtAPbVYRtgPDD%2B7adTb4IM6clt5y1Xiji6Dkhw%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Set-Cookie:
-      - PHPSESSID=NRBe2wGDvSbl-mEIeRDs3JLJGo4; expires=Tue, 04-Jun-2024 15:55:43 GMT;
-        Max-Age=21600; path=/; domain=.opensubtitles.org; HttpOnly
+      - PHPSESSID=U%2CFkOyD6AYRj1xujlNoF1clEQy0; expires=Fri, 14-Feb-2025 05:29:48
+        GMT; Max-Age=21600; path=/; domain=.opensubtitles.org; HttpOnly
       Vary:
       - Accept-Encoding
       X-Cache-Backend:
-      - web3
+      - lw2
       X-Compressed-Content-Length:
-      - '208'
+      - '212'
       X-Content-Encoding:
       - gzip
       X-HTTP-Version:
-      - '1.0'
+      - 1.0
       X-RateLimit-Remaining:
-      - '39'
+      - '35'
       X-Uncompressed-Content-Length:
-      - '377'
+      - '380'
       X-Var-Cache:
       - MISS
       X-Via:
-      - fw2
+      - lb2
       alt-svc:
       - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '380'
+      server-timing:
+      - cfL4;desc="?proto=TCP&rtt=2994&min_rtt=2975&rtt_var=1155&sent=4&recv=7&lost=0&retrans=0&sent_bytes=2368&recv_bytes=1097&delivery_rate=924648&cwnd=247&unsent_bytes=0&cid=f43556d4038ab9b8&ts=137&x=0"
     status:
       code: 200
       message: OK
@@ -125,7 +122,7 @@ interactions:
 
       <param>
 
-      <value><string>NRBe2wGDvSbl-mEIeRDs3JLJGo4</string></value>
+      <value><string>U,FkOyD6AYRj1xujlNoF1clEQy0</string></value>
 
       </param>
 
@@ -170,57 +167,38 @@ interactions:
       Content-Type:
       - text/xml
       User-Agent:
-      - Python-xmlrpc/3.12
+      - VLSub
     method: POST
     uri: https://api.opensubtitles.org/xml-rpc
   response:
     body:
-      string: !!binary |
-        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
+      string: <?xml version="1.0" encoding="utf-8"?><methodResponse><params><param><value><struct><member><name>status</name><value><string>200
+        OK</string></value></member><member><name>data</name><value><array><data><value><struct><member><name>MatchedBy</name><value><string>imdbid</string></value></member><member><name>IDSubMovieFile</name><value><string>0</string></value></member><member><name>MovieHash</name><value><string>0</string></value></member><member><name>MovieByteSize</name><value><string>0</string></value></member><member><name>MovieTimeMS</name><value><string>0</string></value></member><member><name>IDSubtitleFile</name><value><string>1956717408</string></value></member><member><name>SubFileName</name><value><string>Man.of.Steel.2013.720p.german.srt</string></value></member><member><name>SubActualCD</name><value><string>1</string></value></member><member><name>SubSize</name><value><string>97351</string></value></member><member><name>SubHash</name><value><string>3e60ce66aecfd8e140f5953ff6ea7d5b</string></value></member><member><name>SubLastTS</name><value><string>02:12:44</string></value></member><member><name>SubTSGroup</name><value><string>1</string></value></member><member><name>InfoReleaseGroup</name><value><string/></value></member><member><name>InfoFormat</name><value><string/></value></member><member><name>InfoOther</name><value><string/></value></member><member><name>IDSubtitle</name><value><string>8148911</string></value></member><member><name>UserID</name><value><string>1189705</string></value></member><member><name>SubLanguageID</name><value><string>ger</string></value></member><member><name>SubFormat</name><value><string>srt</string></value></member><member><name>SubSumCD</name><value><string>1</string></value></member><member><name>SubAuthorComment</name><value><string/></value></member><member><name>SubAddDate</name><value><string>2020-03-29
+        11:40:37</string></value></member><member><name>SubBad</name><value><string>0</string></value></member><member><name>SubRating</name><value><string>10.0</string></value></member><member><name>SubSumVotes</name><value><string>1</string></value></member><member><name>SubDownloadsCnt</name><value><string>1969</string></value></member><member><name>MovieReleaseName</name><value><string>Man.of.Steel.2013.720p.german.srt</string></value></member><member><name>MovieFPS</name><value><string>23.976</string></value></member><member><name>IDMovie</name><value><string>143341</string></value></member><member><name>IDMovieImdb</name><value><string>770828</string></value></member><member><name>MovieName</name><value><string>Man
+        of Steel</string></value></member><member><name>MovieNameEng</name><value><string/></value></member><member><name>MovieYear</name><value><string>2013</string></value></member><member><name>MovieImdbRating</name><value><string>7.1</string></value></member><member><name>SubFeatured</name><value><string>0</string></value></member><member><name>UserNickName</name><value><string>arcchancellor</string></value></member><member><name>SubTranslator</name><value><string/></value></member><member><name>ISO639</name><value><string>de</string></value></member><member><name>LanguageName</name><value><string>German</string></value></member><member><name>SubComments</name><value><string>0</string></value></member><member><name>SubHearingImpaired</name><value><string>0</string></value></member><member><name>UserRank</name><value><string>administrator</string></value></member><member><name>SeriesSeason</name><value><string>0</string></value></member><member><name>SeriesEpisode</name><value><string>0</string></value></member><member><name>MovieKind</name><value><string>movie</string></value></member><member><name>SubHD</name><value><string>1</string></value></member><member><name>SeriesIMDBParent</name><value><string>0</string></value></member><member><name>SubEncoding</name><value><string>UTF-8</string></value></member><member><name>SubAutoTranslation</name><value><string>0</string></value></member><member><name>SubForeignPartsOnly</name><value><string>0</string></value></member><member><name>SubFromTrusted</name><value><string>1</string></value></member><member><name>QueryCached</name><value><int>1</int></value></member><member><name>SubTSGroupHash</name><value><string>02f67211b8d854114356f322431f733c</string></value></member><member><name>SubDownloadLink</name><value><string>https://dl.opensubtitles.org/en/download/src-api/vrf-19cf0c59/sid-U,FkOyD6AYRj1xujlNoF1clEQy0/file/1956717408.gz</string></value></member><member><name>ZipDownloadLink</name><value><string>https://dl.opensubtitles.org/en/download/src-api/vrf-f5590bb9/sid-U,FkOyD6AYRj1xujlNoF1clEQy0/sub/8148911</string></value></member><member><name>SubtitlesLink</name><value><string>http://www.opensubtitles.org/en/subtitles/8148911/sid-U,FkOyD6AYRj1xujlNoF1clEQy0/man-of-steel-de</string></value></member><member><name>QueryNumber</name><value><string>0</string></value></member><member><name>QueryParameters</name><value><struct><member><name>imdbid</name><value><string>0770828</string></value></member><member><name>sublanguageid</name><value><string>ger</string></value></member></struct></value></member><member><name>Score</name><value><double>35.019690</double></value></member></struct></value><value><struct><member><name>MatchedBy</name><value><string>imdbid</string></value></member><member><name>IDSubMovieFile</name><value><string>0</string></value></member><member><name>MovieHash</name><value><string>0</string></value></member><member><name>MovieByteSize</name><value><string>0</string></value></member><member><name>MovieTimeMS</name><value><string>0</string></value></member><member><name>IDSubtitleFile</name><value><string>1955278518</string></value></member><member><name>SubFileName</name><value><string>Man
+        of Steel (DT-2013).srt</string></value></member><member><name>SubActualCD</name><value><string>1</string></value></member><member><name>SubSize</name><value><string>85935</string></value></member><member><name>SubHash</name><value><string>bc4e604d8a5b6d51a65914d7eff195b5</string></value></member><member><name>SubLastTS</name><value><string>02:07:15</string></value></member><member><name>SubTSGroup</name><value><string>18</string></value></member><member><name>InfoReleaseGroup</name><value><string/></value></member><member><name>InfoFormat</name><value><string/></value></member><member><name>InfoOther</name><value><string/></value></member><member><name>IDSubtitle</name><value><string>6698593</string></value></member><member><name>UserID</name><value><string>2563175</string></value></member><member><name>SubLanguageID</name><value><string>ger</string></value></member><member><name>SubFormat</name><value><string>srt</string></value></member><member><name>SubSumCD</name><value><string>1</string></value></member><member><name>SubAuthorComment</name><value><string/></value></member><member><name>SubAddDate</name><value><string>2016-07-31
+        14:29:17</string></value></member><member><name>SubBad</name><value><string>0</string></value></member><member><name>SubRating</name><value><string>0.0</string></value></member><member><name>SubSumVotes</name><value><string>0</string></value></member><member><name>SubDownloadsCnt</name><value><string>4296</string></value></member><member><name>MovieReleaseName</name><value><string>Man
+        of Steel (2013) Dtv 2h07min</string></value></member><member><name>MovieFPS</name><value><string>25.000</string></value></member><member><name>IDMovie</name><value><string>143341</string></value></member><member><name>IDMovieImdb</name><value><string>770828</string></value></member><member><name>MovieName</name><value><string>Man
+        of Steel</string></value></member><member><name>MovieNameEng</name><value><string/></value></member><member><name>MovieYear</name><value><string>2013</string></value></member><member><name>MovieImdbRating</name><value><string>7.1</string></value></member><member><name>SubFeatured</name><value><string>0</string></value></member><member><name>UserNickName</name><value><string>tim132</string></value></member><member><name>SubTranslator</name><value><string/></value></member><member><name>ISO639</name><value><string>de</string></value></member><member><name>LanguageName</name><value><string>German</string></value></member><member><name>SubComments</name><value><string>0</string></value></member><member><name>SubHearingImpaired</name><value><string>0</string></value></member><member><name>UserRank</name><value><string>trusted</string></value></member><member><name>SeriesSeason</name><value><string>0</string></value></member><member><name>SeriesEpisode</name><value><string>0</string></value></member><member><name>MovieKind</name><value><string>movie</string></value></member><member><name>SubHD</name><value><string>1</string></value></member><member><name>SeriesIMDBParent</name><value><string>0</string></value></member><member><name>SubEncoding</name><value><string>UTF-8</string></value></member><member><name>SubAutoTranslation</name><value><string>0</string></value></member><member><name>SubForeignPartsOnly</name><value><string>0</string></value></member><member><name>SubFromTrusted</name><value><string>0</string></value></member><member><name>QueryCached</name><value><int>1</int></value></member><member><name>SubTSGroupHash</name><value><string>24b2c6835da02051d302579647e41552</string></value></member><member><name>SubDownloadLink</name><value><string>https://dl.opensubtitles.org/en/download/src-api/vrf-19d10c5c/sid-U,FkOyD6AYRj1xujlNoF1clEQy0/file/1955278518.gz</string></value></member><member><name>ZipDownloadLink</name><value><string>https://dl.opensubtitles.org/en/download/src-api/vrf-f5880bc7/sid-U,FkOyD6AYRj1xujlNoF1clEQy0/sub/6698593</string></value></member><member><name>SubtitlesLink</name><value><string>http://www.opensubtitles.org/en/subtitles/6698593/sid-U,FkOyD6AYRj1xujlNoF1clEQy0/man-of-steel-de</string></value></member><member><name>QueryNumber</name><value><string>0</string></value></member><member><name>QueryParameters</name><value><struct><member><name>imdbid</name><value><string>0770828</string></value></member><member><name>sublanguageid</name><value><string>ger</string></value></member></struct></value></member><member><name>Score</name><value><double>31.042960</double></value></member></struct></value><value><struct><member><name>MatchedBy</name><value><string>imdbid</string></value></member><member><name>IDSubMovieFile</name><value><string>0</string></value></member><member><name>MovieHash</name><value><string>0</string></value></member><member><name>MovieByteSize</name><value><string>0</string></value></member><member><name>MovieTimeMS</name><value><string>0</string></value></member><member><name>IDSubtitleFile</name><value><string>1955279635</string></value></member><member><name>SubFileName</name><value><string>exq-manofsteel-1080p.idx.mkv.srt</string></value></member><member><name>SubActualCD</name><value><string>1</string></value></member><member><name>SubSize</name><value><string>101616</string></value></member><member><name>SubHash</name><value><string>8429820833fbdacfd994af77edb86c67</string></value></member><member><name>SubLastTS</name><value><string>02:22:57</string></value></member><member><name>SubTSGroup</name><value><string>1</string></value></member><member><name>InfoReleaseGroup</name><value><string/></value></member><member><name>InfoFormat</name><value><string/></value></member><member><name>InfoOther</name><value><string/></value></member><member><name>IDSubtitle</name><value><string>6699712</string></value></member><member><name>UserID</name><value><string>1471910</string></value></member><member><name>SubLanguageID</name><value><string>ger</string></value></member><member><name>SubFormat</name><value><string>srt</string></value></member><member><name>SubSumCD</name><value><string>1</string></value></member><member><name>SubAuthorComment</name><value><string/></value></member><member><name>SubAddDate</name><value><string>2016-08-01
+        19:13:17</string></value></member><member><name>SubBad</name><value><string>0</string></value></member><member><name>SubRating</name><value><string>10.0</string></value></member><member><name>SubSumVotes</name><value><string>2</string></value></member><member><name>SubDownloadsCnt</name><value><string>1015</string></value></member><member><name>MovieReleaseName</name><value><string>Man
+        of Steel German DL 1080p BluRay x264-EXQUiSiTE</string></value></member><member><name>MovieFPS</name><value><string>23.976</string></value></member><member><name>IDMovie</name><value><string>143341</string></value></member><member><name>IDMovieImdb</name><value><string>770828</string></value></member><member><name>MovieName</name><value><string>Man
+        of Steel</string></value></member><member><name>MovieNameEng</name><value><string/></value></member><member><name>MovieYear</name><value><string>2013</string></value></member><member><name>MovieImdbRating</name><value><string>7.1</string></value></member><member><name>SubFeatured</name><value><string>0</string></value></member><member><name>UserNickName</name><value><string>PissPott</string></value></member><member><name>SubTranslator</name><value><string/></value></member><member><name>ISO639</name><value><string>de</string></value></member><member><name>LanguageName</name><value><string>German</string></value></member><member><name>SubComments</name><value><string>0</string></value></member><member><name>SubHearingImpaired</name><value><string>1</string></value></member><member><name>UserRank</name><value><string>silver
+        member</string></value></member><member><name>SeriesSeason</name><value><string>0</string></value></member><member><name>SeriesEpisode</name><value><string>0</string></value></member><member><name>MovieKind</name><value><string>movie</string></value></member><member><name>SubHD</name><value><string>1</string></value></member><member><name>SeriesIMDBParent</name><value><string>0</string></value></member><member><name>SubEncoding</name><value><string>UTF-8</string></value></member><member><name>SubAutoTranslation</name><value><string>0</string></value></member><member><name>SubForeignPartsOnly</name><value><string>0</string></value></member><member><name>SubFromTrusted</name><value><string>0</string></value></member><member><name>QueryCached</name><value><int>1</int></value></member><member><name>SubTSGroupHash</name><value><string>02f67211b8d854114356f322431f733c</string></value></member><member><name>SubDownloadLink</name><value><string>https://dl.opensubtitles.org/en/download/src-api/vrf-19d90c5d/sid-U,FkOyD6AYRj1xujlNoF1clEQy0/file/1955279635.gz</string></value></member><member><name>ZipDownloadLink</name><value><string>https://dl.opensubtitles.org/en/download/src-api/vrf-f5810bc1/sid-U,FkOyD6AYRj1xujlNoF1clEQy0/sub/6699712</string></value></member><member><name>SubtitlesLink</name><value><string>http://www.opensubtitles.org/en/subtitles/6699712/sid-U,FkOyD6AYRj1xujlNoF1clEQy0/man-of-steel-de</string></value></member><member><name>QueryNumber</name><value><string>0</string></value></member><member><name>QueryParameters</name><value><struct><member><name>imdbid</name><value><string>0770828</string></value></member><member><name>sublanguageid</name><value><string>ger</string></value></member></struct></value></member><member><name>Score</name><value><double>18.010150</double></value></member></struct></value><value><struct><member><name>MatchedBy</name><value><string>imdbid</string></value></member><member><name>IDSubMovieFile</name><value><string>0</string></value></member><member><name>MovieHash</name><value><string>0</string></value></member><member><name>MovieByteSize</name><value><string>0</string></value></member><member><name>MovieTimeMS</name><value><string>0</string></value></member><member><name>IDSubtitleFile</name><value><string>1955742626</string></value></member><member><name>SubFileName</name><value><string>Man.of.Steel.2013.German.AC3.DL.2160p.UHD.BluRay.HDR.HEVC.Remux-NIMA4K.ger.srt</string></value></member><member><name>SubActualCD</name><value><string>1</string></value></member><member><name>SubSize</name><value><string>108108</string></value></member><member><name>SubHash</name><value><string>b20df24b3044d691439116237723b571</string></value></member><member><name>SubLastTS</name><value><string>02:22:56</string></value></member><member><name>SubTSGroup</name><value><string>1</string></value></member><member><name>InfoReleaseGroup</name><value><string>NIMA4K</string></value></member><member><name>InfoFormat</name><value><string>BluRay</string></value></member><member><name>InfoOther</name><value><string>Remux</string></value></member><member><name>IDSubtitle</name><value><string>7161145</string></value></member><member><name>UserID</name><value><string>5726190</string></value></member><member><name>SubLanguageID</name><value><string>ger</string></value></member><member><name>SubFormat</name><value><string>srt</string></value></member><member><name>SubSumCD</name><value><string>1</string></value></member><member><name>SubAuthorComment</name><value><string/></value></member><member><name>SubAddDate</name><value><string>2017-11-16
+        02:59:32</string></value></member><member><name>SubBad</name><value><string>0</string></value></member><member><name>SubRating</name><value><string>0.0</string></value></member><member><name>SubSumVotes</name><value><string>0</string></value></member><member><name>SubDownloadsCnt</name><value><string>368</string></value></member><member><name>MovieReleaseName</name><value><string>Man.of.Steel.2013.German.AC3.DL.2160p.UHD.BluRay.HDR.HEVC.Remux-NIMA4K</string></value></member><member><name>MovieFPS</name><value><string>23.976</string></value></member><member><name>IDMovie</name><value><string>143341</string></value></member><member><name>IDMovieImdb</name><value><string>770828</string></value></member><member><name>MovieName</name><value><string>Man
+        of Steel</string></value></member><member><name>MovieNameEng</name><value><string/></value></member><member><name>MovieYear</name><value><string>2013</string></value></member><member><name>MovieImdbRating</name><value><string>7.1</string></value></member><member><name>SubFeatured</name><value><string>0</string></value></member><member><name>UserNickName</name><value><string>TomRoyls</string></value></member><member><name>SubTranslator</name><value><string/></value></member><member><name>ISO639</name><value><string>de</string></value></member><member><name>LanguageName</name><value><string>German</string></value></member><member><name>SubComments</name><value><string>0</string></value></member><member><name>SubHearingImpaired</name><value><string>1</string></value></member><member><name>UserRank</name><value><string>silver
+        member</string></value></member><member><name>SeriesSeason</name><value><string>0</string></value></member><member><name>SeriesEpisode</name><value><string>0</string></value></member><member><name>MovieKind</name><value><string>movie</string></value></member><member><name>SubHD</name><value><string>1</string></value></member><member><name>SeriesIMDBParent</name><value><string>0</string></value></member><member><name>SubEncoding</name><value><string>UTF-8</string></value></member><member><name>SubAutoTranslation</name><value><string>0</string></value></member><member><name>SubForeignPartsOnly</name><value><string>0</string></value></member><member><name>SubFromTrusted</name><value><string>0</string></value></member><member><name>QueryCached</name><value><int>1</int></value></member><member><name>SubTSGroupHash</name><value><string>02f67211b8d854114356f322431f733c</string></value></member><member><name>SubDownloadLink</name><value><string>https://dl.opensubtitles.org/en/download/src-api/vrf-19cb0c58/sid-U,FkOyD6AYRj1xujlNoF1clEQy0/file/1955742626.gz</string></value></member><member><name>ZipDownloadLink</name><value><string>https://dl.opensubtitles.org/en/download/src-api/vrf-f5320bb2/sid-U,FkOyD6AYRj1xujlNoF1clEQy0/sub/7161145</string></value></member><member><name>SubtitlesLink</name><value><string>http://www.opensubtitles.org/en/subtitles/7161145/sid-U,FkOyD6AYRj1xujlNoF1clEQy0/man-of-steel-de</string></value></member><member><name>QueryNumber</name><value><string>0</string></value></member><member><name>QueryParameters</name><value><struct><member><name>imdbid</name><value><string>0770828</string></value></member><member><name>sublanguageid</name><value><string>ger</string></value></member></struct></value></member><member><name>Score</name><value><double>16.003680</double></value></member></struct></value><value><struct><member><name>MatchedBy</name><value><string>imdbid</string></value></member><member><name>IDSubMovieFile</name><value><string>0</string></value></member><member><name>MovieHash</name><value><string>0</string></value></member><member><name>MovieByteSize</name><value><string>0</string></value></member><member><name>MovieTimeMS</name><value><string>0</string></value></member><member><name>IDSubtitleFile</name><value><string>1957720375</string></value></member><member><name>SubFileName</name><value><string>Man
+        of Steel.Full - German.ass</string></value></member><member><name>SubActualCD</name><value><string>1</string></value></member><member><name>SubSize</name><value><string>108420</string></value></member><member><name>SubHash</name><value><string>f6ead6cc15f4cc41b1f56bcb52480c51</string></value></member><member><name>SubLastTS</name><value><string>02:12:42</string></value></member><member><name>SubTSGroup</name><value><string>1</string></value></member><member><name>InfoReleaseGroup</name><value><string/></value></member><member><name>InfoFormat</name><value><string/></value></member><member><name>InfoOther</name><value><string/></value></member><member><name>IDSubtitle</name><value><string>9150443</string></value></member><member><name>UserID</name><value><string>9372469</string></value></member><member><name>SubLanguageID</name><value><string>ger</string></value></member><member><name>SubFormat</name><value><string>ssa</string></value></member><member><name>SubSumCD</name><value><string>1</string></value></member><member><name>SubAuthorComment</name><value><string/></value></member><member><name>SubAddDate</name><value><string>2022-06-26
+        19:32:54</string></value></member><member><name>SubBad</name><value><string>0</string></value></member><member><name>SubRating</name><value><string>0.0</string></value></member><member><name>SubSumVotes</name><value><string>0</string></value></member><member><name>SubDownloadsCnt</name><value><string>89</string></value></member><member><name>MovieReleaseName</name><value><string>Should
+        work with 4k BD rips</string></value></member><member><name>MovieFPS</name><value><string>23.976</string></value></member><member><name>IDMovie</name><value><string>143341</string></value></member><member><name>IDMovieImdb</name><value><string>770828</string></value></member><member><name>MovieName</name><value><string>Man
+        of Steel</string></value></member><member><name>MovieNameEng</name><value><string/></value></member><member><name>MovieYear</name><value><string>2013</string></value></member><member><name>MovieImdbRating</name><value><string>7.1</string></value></member><member><name>SubFeatured</name><value><string>0</string></value></member><member><name>UserNickName</name><value><string>Och_Nee</string></value></member><member><name>SubTranslator</name><value><string/></value></member><member><name>ISO639</name><value><string>de</string></value></member><member><name>LanguageName</name><value><string>German</string></value></member><member><name>SubComments</name><value><string>0</string></value></member><member><name>SubHearingImpaired</name><value><string>0</string></value></member><member><name>UserRank</name><value><string>bronze
+        member</string></value></member><member><name>SeriesSeason</name><value><string>0</string></value></member><member><name>SeriesEpisode</name><value><string>0</string></value></member><member><name>MovieKind</name><value><string>movie</string></value></member><member><name>SubHD</name><value><string>1</string></value></member><member><name>SeriesIMDBParent</name><value><string>0</string></value></member><member><name>SubEncoding</name><value><string>UTF-8</string></value></member><member><name>SubAutoTranslation</name><value><string>0</string></value></member><member><name>SubForeignPartsOnly</name><value><string>0</string></value></member><member><name>SubFromTrusted</name><value><string>0</string></value></member><member><name>QueryCached</name><value><int>1</int></value></member><member><name>SubTSGroupHash</name><value><string>02f67211b8d854114356f322431f733c</string></value></member><member><name>SubDownloadLink</name><value><string>https://dl.opensubtitles.org/en/download/src-api/vrf-19c70c57/sid-U,FkOyD6AYRj1xujlNoF1clEQy0/file/1957720375.gz</string></value></member><member><name>ZipDownloadLink</name><value><string>https://dl.opensubtitles.org/en/download/src-api/vrf-f53e0bb3/sid-U,FkOyD6AYRj1xujlNoF1clEQy0/sub/9150443</string></value></member><member><name>SubtitlesLink</name><value><string>http://www.opensubtitles.org/en/subtitles/9150443/sid-U,FkOyD6AYRj1xujlNoF1clEQy0/man-of-steel-de</string></value></member><member><name>QueryNumber</name><value><string>0</string></value></member><member><name>QueryParameters</name><value><struct><member><name>imdbid</name><value><string>0770828</string></value></member><member><name>sublanguageid</name><value><string>ger</string></value></member></struct></value></member><member><name>Score</name><value><double>16.000890</double></value></member></struct></value><value><struct><member><name>MatchedBy</name><value><string>imdbid</string></value></member><member><name>IDSubMovieFile</name><value><string>0</string></value></member><member><name>MovieHash</name><value><string>0</string></value></member><member><name>MovieByteSize</name><value><string>0</string></value></member><member><name>MovieTimeMS</name><value><string>0</string></value></member><member><name>IDSubtitleFile</name><value><string>1953768982</string></value></member><member><name>SubFileName</name><value><string>Man.of.Steel.German.DL.1080p.BluRay.x264-EXQUiSiTE.srt</string></value></member><member><name>SubActualCD</name><value><string>1</string></value></member><member><name>SubSize</name><value><string>109454</string></value></member><member><name>SubHash</name><value><string>2e6569c9f0b36632d13679943c4c34f7</string></value></member><member><name>SubLastTS</name><value><string>02:22:57</string></value></member><member><name>SubTSGroup</name><value><string>1</string></value></member><member><name>InfoReleaseGroup</name><value><string>EXQUiSiTE</string></value></member><member><name>InfoFormat</name><value><string>BluRay</string></value></member><member><name>InfoOther</name><value><string/></value></member><member><name>IDSubtitle</name><value><string>5227599</string></value></member><member><name>UserID</name><value><string>0</string></value></member><member><name>SubLanguageID</name><value><string>ger</string></value></member><member><name>SubFormat</name><value><string>srt</string></value></member><member><name>SubSumCD</name><value><string>1</string></value></member><member><name>SubAuthorComment</name><value><string/></value></member><member><name>SubAddDate</name><value><string>2013-10-17
+        13:26:46</string></value></member><member><name>SubBad</name><value><string>0</string></value></member><member><name>SubRating</name><value><string>0.0</string></value></member><member><name>SubSumVotes</name><value><string>0</string></value></member><member><name>SubDownloadsCnt</name><value><string>7254</string></value></member><member><name>MovieReleaseName</name><value><string>Man.of.Steel.German.DL.1080p.BluRay.x264-EXQUiSiTE</string></value></member><member><name>MovieFPS</name><value><string>23.976</string></value></member><member><name>IDMovie</name><value><string>143341</string></value></member><member><name>IDMovieImdb</name><value><string>770828</string></value></member><member><name>MovieName</name><value><string>Man
+        of Steel</string></value></member><member><name>MovieNameEng</name><value><string/></value></member><member><name>MovieYear</name><value><string>2013</string></value></member><member><name>MovieImdbRating</name><value><string>7.1</string></value></member><member><name>SubFeatured</name><value><string>0</string></value></member><member><name>UserNickName</name><value><string/></value></member><member><name>SubTranslator</name><value><string/></value></member><member><name>ISO639</name><value><string>de</string></value></member><member><name>LanguageName</name><value><string>German</string></value></member><member><name>SubComments</name><value><string>0</string></value></member><member><name>SubHearingImpaired</name><value><string>1</string></value></member><member><name>UserRank</name><value><string/></value></member><member><name>SeriesSeason</name><value><string>0</string></value></member><member><name>SeriesEpisode</name><value><string>0</string></value></member><member><name>MovieKind</name><value><string>movie</string></value></member><member><name>SubHD</name><value><string>1</string></value></member><member><name>SeriesIMDBParent</name><value><string>0</string></value></member><member><name>SubEncoding</name><value><string>UTF-8</string></value></member><member><name>SubAutoTranslation</name><value><string>0</string></value></member><member><name>SubForeignPartsOnly</name><value><string>0</string></value></member><member><name>SubFromTrusted</name><value><string>0</string></value></member><member><name>QueryCached</name><value><int>1</int></value></member><member><name>SubTSGroupHash</name><value><string>02f67211b8d854114356f322431f733c</string></value></member><member><name>SubDownloadLink</name><value><string>https://dl.opensubtitles.org/en/download/src-api/vrf-19f00c63/sid-U,FkOyD6AYRj1xujlNoF1clEQy0/file/1953768982.gz</string></value></member><member><name>ZipDownloadLink</name><value><string>https://dl.opensubtitles.org/en/download/src-api/vrf-f5480bc0/sid-U,FkOyD6AYRj1xujlNoF1clEQy0/sub/5227599</string></value></member><member><name>SubtitlesLink</name><value><string>http://www.opensubtitles.org/en/subtitles/5227599/sid-U,FkOyD6AYRj1xujlNoF1clEQy0/man-of-steel-de</string></value></member><member><name>QueryNumber</name><value><string>0</string></value></member><member><name>QueryParameters</name><value><struct><member><name>imdbid</name><value><string>0770828</string></value></member><member><name>sublanguageid</name><value><string>ger</string></value></member></struct></value></member><member><name>Score</name><value><double>10.072540</double></value></member></struct></value><value><struct><member><name>MatchedBy</name><value><string>imdbid</string></value></member><member><name>IDSubMovieFile</name><value><string>0</string></value></member><member><name>MovieHash</name><value><string>0</string></value></member><member><name>MovieByteSize</name><value><string>0</string></value></member><member><name>MovieTimeMS</name><value><string>0</string></value></member><member><name>IDSubtitleFile</name><value><string>1953771409</string></value></member><member><name>SubFileName</name><value><string>Man.of.Steel.German.720p.BluRay.x264-EXQUiSiTE.srt</string></value></member><member><name>SubActualCD</name><value><string>1</string></value></member><member><name>SubSize</name><value><string>95974</string></value></member><member><name>SubHash</name><value><string>987cc67a38e2c0838fa47344325026c3</string></value></member><member><name>SubLastTS</name><value><string>02:12:43</string></value></member><member><name>SubTSGroup</name><value><string>1</string></value></member><member><name>InfoReleaseGroup</name><value><string>EXQUiSiTE</string></value></member><member><name>InfoFormat</name><value><string>BluRay</string></value></member><member><name>InfoOther</name><value><string/></value></member><member><name>IDSubtitle</name><value><string>5229998</string></value></member><member><name>UserID</name><value><string>0</string></value></member><member><name>SubLanguageID</name><value><string>ger</string></value></member><member><name>SubFormat</name><value><string>srt</string></value></member><member><name>SubSumCD</name><value><string>1</string></value></member><member><name>SubAuthorComment</name><value><string/></value></member><member><name>SubAddDate</name><value><string>2013-10-19
+        00:53:25</string></value></member><member><name>SubBad</name><value><string>0</string></value></member><member><name>SubRating</name><value><string>0.0</string></value></member><member><name>SubSumVotes</name><value><string>0</string></value></member><member><name>SubDownloadsCnt</name><value><string>2711</string></value></member><member><name>MovieReleaseName</name><value><string>Man.of.Steel.German.720p.BluRay.x264-EXQUiSiTE</string></value></member><member><name>MovieFPS</name><value><string>23.976</string></value></member><member><name>IDMovie</name><value><string>143341</string></value></member><member><name>IDMovieImdb</name><value><string>770828</string></value></member><member><name>MovieName</name><value><string>Man
+        of Steel</string></value></member><member><name>MovieNameEng</name><value><string/></value></member><member><name>MovieYear</name><value><string>2013</string></value></member><member><name>MovieImdbRating</name><value><string>7.1</string></value></member><member><name>SubFeatured</name><value><string>0</string></value></member><member><name>UserNickName</name><value><string/></value></member><member><name>SubTranslator</name><value><string/></value></member><member><name>ISO639</name><value><string>de</string></value></member><member><name>LanguageName</name><value><string>German</string></value></member><member><name>SubComments</name><value><string>0</string></value></member><member><name>SubHearingImpaired</name><value><string>0</string></value></member><member><name>UserRank</name><value><string/></value></member><member><name>SeriesSeason</name><value><string>0</string></value></member><member><name>SeriesEpisode</name><value><string>0</string></value></member><member><name>MovieKind</name><value><string>movie</string></value></member><member><name>SubHD</name><value><string>1</string></value></member><member><name>SeriesIMDBParent</name><value><string>0</string></value></member><member><name>SubEncoding</name><value><string>UTF-8</string></value></member><member><name>SubAutoTranslation</name><value><string>0</string></value></member><member><name>SubForeignPartsOnly</name><value><string>0</string></value></member><member><name>SubFromTrusted</name><value><string>0</string></value></member><member><name>QueryCached</name><value><int>1</int></value></member><member><name>SubTSGroupHash</name><value><string>02f67211b8d854114356f322431f733c</string></value></member><member><name>SubDownloadLink</name><value><string>https://dl.opensubtitles.org/en/download/src-api/vrf-19c10c57/sid-U,FkOyD6AYRj1xujlNoF1clEQy0/file/1953771409.gz</string></value></member><member><name>ZipDownloadLink</name><value><string>https://dl.opensubtitles.org/en/download/src-api/vrf-f55b0bc5/sid-U,FkOyD6AYRj1xujlNoF1clEQy0/sub/5229998</string></value></member><member><name>SubtitlesLink</name><value><string>http://www.opensubtitles.org/en/subtitles/5229998/sid-U,FkOyD6AYRj1xujlNoF1clEQy0/man-of-steel-de</string></value></member><member><name>QueryNumber</name><value><string>0</string></value></member><member><name>QueryParameters</name><value><struct><member><name>imdbid</name><value><string>0770828</string></value></member><member><name>sublanguageid</name><value><string>ger</string></value></member></struct></value></member><member><name>Score</name><value><double>10.027110</double></value></member></struct></value></data></array></value></member><member><name>seconds</name><value><double>0.013000</double></value></member></struct></value></param></params></methodResponse>
     headers:
-      Accept-Ranges:
-      - bytes
+      Access-Control-Allow-Credentials:
+      - ''
       Access-Control-Allow-Headers:
       - Origin,X-Requested-With,Content-Type,Accept,DNT,Keep-Alive,User-Agent,If-Modified-Since,Cache-Control
       Access-Control-Allow-Methods:
@@ -229,47 +207,49 @@ interactions:
       - '*'
       Age:
       - '0'
-      CF-Cache-Status:
-      - DYNAMIC
       CF-RAY:
-      - 88e70c83aa666683-MAD
+      - 91189a4518af5be0-LIS
       Connection:
       - keep-alive
-      Content-Encoding:
-      - gzip
-      Content-Length:
-      - '2385'
       Content-Type:
       - text/xml;charset=UTF-8
       Date:
-      - Tue, 04 Jun 2024 09:55:43 GMT
+      - Thu, 13 Feb 2025 23:29:48 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=ApypU8y8UpWtyNfqNhIsxTkgeJHnhqJy0T3fn3vH%2FajBjnwqs4Dd4es%2BXGAr86ZSGHnUJVJxDbZp5tXneK3jCERYcr7njH9%2FvIqaxFn92IHKW095pXBIIugS1mXf3rOFRtc8aaP05pQ%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=v3p%2BhcCt1xisTYzoORof6W2SDkRg%2BLGzpadWRCG0ESFIxIxCt%2BACWggVvdtMzJx%2FEcHH2HBwQYbhfY5loUNlTvqoIA5UDyexTazJJWNPetGBZvZ5oafOXezrm5jgVR7WenZsLcoEZ78%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Set-Cookie:
-      - PHPSESSID=NRBe2wGDvSbl-mEIeRDs3JLJGo4; expires=Tue, 04-Jun-2024 15:55:43 GMT;
-        Max-Age=21600; path=/; domain=.opensubtitles.org; HttpOnly
+      - PHPSESSID=U%2CFkOyD6AYRj1xujlNoF1clEQy0; expires=Fri, 14-Feb-2025 05:29:48
+        GMT; Max-Age=21600; path=/; domain=.opensubtitles.org; HttpOnly
       Vary:
       - Accept-Encoding
       X-Cache-Backend:
-      - web3
+      - lw2
       X-Compressed-Content-Length:
-      - '2385'
+      - '2390'
       X-Content-Encoding:
       - gzip
+      X-HTTP-Version:
+      - 1.0
       X-RateLimit-Remaining:
-      - '38'
+      - '34'
       X-Uncompressed-Content-Length:
-      - '36084'
+      - '36095'
       X-Var-Cache:
       - MISS
       X-Via:
-      - fw2
+      - lb2
       alt-svc:
       - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '36095'
+      server-timing:
+      - cfL4;desc="?proto=TCP&rtt=3647&min_rtt=2975&rtt_var=1947&sent=8&recv=10&lost=0&retrans=0&sent_bytes=4598&recv_bytes=1719&delivery_rate=927610&cwnd=250&unsent_bytes=0&cid=f43556d4038ab9b8&ts=220&x=0"
     status:
       code: 200
       message: OK
@@ -284,7 +264,7 @@ interactions:
 
       <param>
 
-      <value><string>NRBe2wGDvSbl-mEIeRDs3JLJGo4</string></value>
+      <value><string>U,FkOyD6AYRj1xujlNoF1clEQy0</string></value>
 
       </param>
 
@@ -301,18 +281,16 @@ interactions:
       Content-Type:
       - text/xml
       User-Agent:
-      - Python-xmlrpc/3.12
+      - VLSub
     method: POST
     uri: https://api.opensubtitles.org/xml-rpc
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAA2WPQQ7CMAwEv1LlTh164uC6D+CAxA/SxkClJkFxUvF8CkoRlJO13tXYi93DTdXM
-        UcbgW7WvtarYD8GO/tqqnC67g+oIHadbsGeWe/DChHcTjZMyCWcz5WUrKeYhvdKu50jojWOSZFIW
-        hLf4Si4HqNG6Oh0RikQoNqyEXxIPwdstyobcT0y61rpBKOqfBOtzH6f8DmsX2JR8AvnwajMbAQAA
+      string: <?xml version="1.0" encoding="utf-8"?><methodResponse><params><param><value><struct><member><name>status</name><value><string>200
+        OK</string></value></member><member><name>seconds</name><value><double>0.002000</double></value></member></struct></value></param></params></methodResponse>
     headers:
-      Accept-Ranges:
-      - bytes
+      Access-Control-Allow-Credentials:
+      - ''
       Access-Control-Allow-Headers:
       - Origin,X-Requested-With,Content-Type,Accept,DNT,Keep-Alive,User-Agent,If-Modified-Since,Cache-Control
       Access-Control-Allow-Methods:
@@ -321,47 +299,49 @@ interactions:
       - '*'
       Age:
       - '0'
-      CF-Cache-Status:
-      - DYNAMIC
       CF-RAY:
-      - 88e70c846ba66683-MAD
+      - 91189a45a9715be0-LIS
       Connection:
       - keep-alive
-      Content-Encoding:
-      - gzip
-      Content-Length:
-      - '171'
       Content-Type:
       - text/xml;charset=UTF-8
       Date:
-      - Tue, 04 Jun 2024 09:55:43 GMT
+      - Thu, 13 Feb 2025 23:29:48 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=5unQGhNVNpG%2Btd6mPq%2BWlv6dQ8dhaAVWSex68iqjUJ3kzuzS6Pif%2Bo41JZvZBls9tIVou7cO7OH4b5TQ1U4ljiqEf9NNHK5oWgpxjSXeV99VAFPirVnRsGGihXUgigSRIyfPd0pcsKc%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=O6226XF3JsgIKOu%2FPlD1LI6MAR%2BFFCSUlVRIQ%2FTHxIE8BLTSxKPK0HXAyBee4Zo4rr2kjHVLwAFyTj%2Fb2O1PiLvEyYwei2wjPFTKmRWA34jxoQYqfH1%2FU7Hshc%2FXpeGUh1fCU6gOlgQ%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Set-Cookie:
-      - PHPSESSID=NRBe2wGDvSbl-mEIeRDs3JLJGo4; expires=Tue, 04-Jun-2024 15:55:43 GMT;
-        Max-Age=21600; path=/; domain=.opensubtitles.org; HttpOnly
+      - PHPSESSID=U%2CFkOyD6AYRj1xujlNoF1clEQy0; expires=Fri, 14-Feb-2025 05:29:48
+        GMT; Max-Age=21600; path=/; domain=.opensubtitles.org; HttpOnly
       Vary:
       - Accept-Encoding
       X-Cache-Backend:
-      - web3
+      - lw2
       X-Compressed-Content-Length:
-      - '171'
+      - '172'
       X-Content-Encoding:
       - gzip
+      X-HTTP-Version:
+      - 1.0
       X-RateLimit-Remaining:
-      - '37'
+      - '33'
       X-Uncompressed-Content-Length:
-      - '283'
+      - '286'
       X-Var-Cache:
       - MISS
       X-Via:
-      - fw2
+      - lb2
       alt-svc:
       - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '286'
+      server-timing:
+      - cfL4;desc="?proto=TCP&rtt=3658&min_rtt=2975&rtt_var=1482&sent=12&recv=13&lost=0&retrans=0&sent_bytes=8508&recv_bytes=2082&delivery_rate=1163675&cwnd=253&unsent_bytes=0&cid=f43556d4038ab9b8&ts=296&x=0"
     status:
       code: 200
       message: OK
@@ -387,19 +367,16 @@ interactions:
       Content-Type:
       - text/xml
       User-Agent:
-      - Python-xmlrpc/3.12
+      - VLSub
     method: POST
     uri: https://api.opensubtitles.org/xml-rpc
   response:
     body:
-      string: !!binary |
-        H4sIAAAAAAAAA2WPSw7CMAxErxJlTx0kFiC56QnYcIO0caFS41T5VByfUqUIysoaz+jZg83TjWKm
-        EAfPtTxWSgriztuB77XMqT+cZaPRUXp4e6M4eY6kcTLBuFimxtmMednGFHKX3mnXUtDIxpGOyaQc
-        EVbxlVwO6JO6iOuKFuyT6H1mi1BMhBKGjffLpc6z3YOtz+1IWlVKHRGK+ifB9urHKU1gawa7yi/3
-        ES06KQEAAA==
+      string: <?xml version="1.0" encoding="utf-8"?><methodResponse><params><param><value><struct><member><name>status</name><value><string>409
+        Method not found</string></value></member><member><name>seconds</name><value><double>0.001000</double></value></member></struct></value></param></params></methodResponse>
     headers:
-      Accept-Ranges:
-      - bytes
+      Access-Control-Allow-Credentials:
+      - ''
       Access-Control-Allow-Headers:
       - Origin,X-Requested-With,Content-Type,Accept,DNT,Keep-Alive,User-Agent,If-Modified-Since,Cache-Control
       Access-Control-Allow-Methods:
@@ -408,44 +385,46 @@ interactions:
       - '*'
       Age:
       - '0'
-      CF-Cache-Status:
-      - DYNAMIC
       CF-RAY:
-      - 88e70c84ecca6683-MAD
+      - 91189a460a565be0-LIS
       Connection:
       - keep-alive
-      Content-Encoding:
-      - gzip
-      Content-Length:
-      - '178'
       Content-Type:
       - text/xml;charset=UTF-8
       Date:
-      - Tue, 04 Jun 2024 09:55:43 GMT
+      - Thu, 13 Feb 2025 23:29:48 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=kkZtr9j%2Bli8tmHoa%2F58kYmkf4qLgW4zn4cl05HV%2FKj7Il9Hc9R2xFRfIK8w0FipdH%2FvbKgF8Q6h0p7ynBHjhAcZ%2B5w2B8iU89OgfMfSXnoxwR6aA5rGHmIOf3I46wTIxKNjtUK6z7vw%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=muzICBRrIHjcngdZfsKuCYj%2BgegisbBiJlh7YdAmGXi7jvBcDFO0OYqif0qpC1OtrO09HNMBK%2FQeT9R3TVX7CqjprKxNJZDRfJC6aE0jU0p9jWia4ZADD6TilPuYueYCbA1STki9teM%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Vary:
       - Accept-Encoding
       X-Cache-Backend:
-      - web2
+      - lw4
       X-Compressed-Content-Length:
-      - '178'
+      - '180'
       X-Content-Encoding:
       - gzip
+      X-HTTP-Version:
+      - 1.0
       X-RateLimit-Remaining:
-      - '36'
+      - '32'
       X-Uncompressed-Content-Length:
-      - '297'
+      - '300'
       X-Var-Cache:
       - MISS
       X-Via:
-      - fw2
+      - lb2
       alt-svc:
       - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '300'
+      server-timing:
+      - cfL4;desc="?proto=TCP&rtt=3612&min_rtt=2975&rtt_var=1202&sent=15&recv=16&lost=0&retrans=0&sent_bytes=10180&recv_bytes=2366&delivery_rate=1163675&cwnd=253&unsent_bytes=0&cid=f43556d4038ab9b8&ts=368&x=0"
     status:
       code: 200
       message: OK

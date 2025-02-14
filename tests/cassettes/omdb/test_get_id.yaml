@@ -5,11 +5,11 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
     uri: https://www.omdbapi.com/?r=json&v=1&apikey=44d5b275&i=tt0770828&plot=short
   response:
@@ -22,33 +22,32 @@ interactions:
         when other survivors of his home planet invade Earth.","Language":"English","Country":"United
         States, United Kingdom","Awards":"Nominated for 1 BAFTA Award7 wins & 46 nominations
         total","Poster":"https://m.media-amazon.com/images/M/MV5BMTk5ODk1NDkxMF5BMl5BanBnXkFtZTcwNTA5OTY0OQ@@._V1_SX300.jpg","Ratings":[{"Source":"Internet
-        Movie Database","Value":"7.1/10"},{"Source":"Rotten Tomatoes","Value":"56%"},{"Source":"Metacritic","Value":"55/100"}],"Metascore":"55","imdbRating":"7.1","imdbVotes":"809,805","imdbID":"tt0770828","Type":"movie","DVD":"08
-        Dec 2015","BoxOffice":"$291,045,518","Production":"N/A","Website":"N/A","Response":"True"}'
+        Movie Database","Value":"7.1/10"},{"Source":"Rotten Tomatoes","Value":"57%"},{"Source":"Metacritic","Value":"55/100"}],"Metascore":"55","imdbRating":"7.1","imdbVotes":"828,023","imdbID":"tt0770828","Type":"movie","DVD":"N/A","BoxOffice":"$291,045,518","Production":"N/A","Website":"N/A","Response":"True"}'
     headers:
       CF-Cache-Status:
       - MISS
       CF-RAY:
-      - 887d966aa8400477-CDG
+      - 91189a935c2def44-LHR
       Cache-Control:
       - public, max-age=86400
       Connection:
       - keep-alive
-      Content-Encoding:
-      - gzip
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 22 May 2024 14:45:01 GMT
+      - Thu, 13 Feb 2025 23:30:01 GMT
       Server:
       - cloudflare
       Transfer-Encoding:
       - chunked
       access-control-allow-origin:
       - '*'
+      content-length:
+      - '1024'
       expires:
-      - Wed, 22 May 2024 15:45:01 GMT
+      - Fri, 14 Feb 2025 00:30:01 GMT
       last-modified:
-      - Wed, 22 May 2024 14:45:01 GMT
+      - Thu, 13 Feb 2025 23:30:01 GMT
       vary:
       - '*, Accept-Encoding'
       x-aspnet-version:

@@ -3,11 +3,11 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
       accept:
       - application/json
     method: GET
@@ -18,25 +18,23 @@ interactions:
         Big Bang Theory","nbSeasons":12,"seasons":[1,2,3,4,5,6,7,8,9,10,11,12],"tvDbId":80379,"tmdbId":1418,"slug":"the-big-bang-theory"}]}'
     headers:
       CF-Cache-Status:
-      - HIT
+      - MISS
       CF-RAY:
-      - 88ba5f2f68f25bee-LIS
+      - 91189a3c1e26ef03-LHR
       Cache-Control:
       - public, max-age=14400
       Connection:
       - keep-alive
-      Content-Encoding:
-      - br
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 29 May 2024 23:47:50 GMT
+      - Thu, 13 Feb 2025 23:29:46 GMT
       Last-Modified:
-      - Wed, 29 May 2024 19:47:24 GMT
+      - Thu, 13 Feb 2025 23:29:46 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=J%2FR%2FefMXFGc9w3vDaZ4VUXA6OmMgu7QvS%2FylIf7K3ALlHl5KfdHtC3xWaColU%2B6l5ak%2FuFkt6ghm7LQY1md18fPRfLq6qealTb5wY05GHKBnCKs9mTVn4uYzdJ8ds8ripg1QbA%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=PYTdGgvDIjA%2FvdPIdaeMASuLMWKOHIwv0Zvm8JRESGwwHGwoNSpaivB4EIU6ljtIdJp1%2BpA%2FqSHczpg3DWDUREZaKRxkTY8UtHnnJ3j85Iz3PBDEu%2BnoPnjz0NEiJHbwmXOxhg%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -47,7 +45,12 @@ interactions:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
+      content-length:
+      - '198'
+      server-timing:
+      - cfL4;desc="?proto=TCP&rtt=32029&min_rtt=31981&rtt_var=12089&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2848&recv_bytes=801&delivery_rate=89479&cwnd=242&unsent_bytes=0&cid=385f7f1de8548d1b&ts=85&x=0"
       vary:
+      - Accept-Encoding
       - Accept-Encoding
     status:
       code: 200

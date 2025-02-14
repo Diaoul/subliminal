@@ -5,11 +5,11 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
     uri: https://www.omdbapi.com/?r=json&v=1&apikey=44d5b275&s=Man+of+Steel&page=1&y=2013
   response:
@@ -23,32 +23,32 @@ interactions:
         Heroes Behind Man of Steel: Heroic Storytelling","Year":"2013","imdbID":"tt4158100","Type":"movie","Poster":"N/A"},{"Title":"The
         Military Might of Man of Steel","Year":"2013","imdbID":"tt4158128","Type":"movie","Poster":"N/A"},{"Title":"The
         Heroes Behind Man of Steel: Composing a Heroic Score","Year":"2013","imdbID":"tt4160502","Type":"movie","Poster":"N/A"},{"Title":"Journey
-        of Discovery: Creating Man of Steel","Year":"2013","imdbID":"tt4160544","Type":"movie","Poster":"N/A"}],"totalResults":"15","Response":"True"}'
+        of Discovery: Creating Man of Steel","Year":"2013","imdbID":"tt4160544","Type":"movie","Poster":"N/A"}],"totalResults":"17","Response":"True"}'
     headers:
       CF-Cache-Status:
       - MISS
       CF-RAY:
-      - 887d96854a903ce7-CDG
+      - 91189aaf29d93dae-LHR
       Cache-Control:
       - public, max-age=86400
       Connection:
       - keep-alive
-      Content-Encoding:
-      - gzip
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 22 May 2024 14:45:06 GMT
+      - Thu, 13 Feb 2025 23:30:05 GMT
       Server:
       - cloudflare
       Transfer-Encoding:
       - chunked
       access-control-allow-origin:
       - '*'
+      content-length:
+      - '1475'
       expires:
-      - Wed, 22 May 2024 15:45:06 GMT
+      - Fri, 14 Feb 2025 00:30:05 GMT
       last-modified:
-      - Wed, 22 May 2024 14:45:06 GMT
+      - Thu, 13 Feb 2025 23:30:05 GMT
       vary:
       - '*, Accept-Encoding'
       x-aspnet-version:

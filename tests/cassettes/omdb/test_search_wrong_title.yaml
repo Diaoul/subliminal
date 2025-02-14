@@ -5,11 +5,11 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
     uri: https://www.omdbapi.com/?r=json&v=1&apikey=44d5b275&s=Meen+of+Stal&page=1
   response:
@@ -21,7 +21,7 @@ interactions:
       CF-Cache-Status:
       - MISS
       CF-RAY:
-      - 887d9680bc4c999f-CDG
+      - 91189aa77f3decfe-LHR
       Cache-Control:
       - public, max-age=86400
       Connection:
@@ -31,15 +31,15 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 22 May 2024 14:45:05 GMT
+      - Thu, 13 Feb 2025 23:30:04 GMT
       Server:
       - cloudflare
       access-control-allow-origin:
       - '*'
       expires:
-      - Wed, 22 May 2024 15:45:05 GMT
+      - Fri, 14 Feb 2025 00:30:04 GMT
       last-modified:
-      - Wed, 22 May 2024 14:45:05 GMT
+      - Thu, 13 Feb 2025 23:30:04 GMT
       vary:
       - '*, Accept-Encoding'
       x-aspnet-version:

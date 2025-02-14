@@ -216,6 +216,7 @@ unfixable = [
 "docs/conf*.py" = ["ALL"]
 "src/subliminal/__init__.py" = ["E402"]
 "tests/*.py" = ["D", "S", "RUF012", "ANN", "FBT"]
+"scripts/*.py" = ["T201"]
 
 # https://docs.astral.sh/ruff/formatter/
 [tool.ruff.format]
@@ -229,7 +230,7 @@ name = "subliminal"
 package = "subliminal"
 directory = "changelog.d"
 filename = "HISTORY.rst"
-title_format = "`version <https://github.com/Diaoul/subliminal/tree/{version}>`_ - {project_date}"
+title_format = "`v{version} <https://github.com/Diaoul/subliminal/tree/{version}>`_ ({project_date})"
 issue_format = "`#{issue} <https://github.com/Diaoul/subliminal/issues/{issue}>`_"
 underlines = ["^", "-", "~"]
 

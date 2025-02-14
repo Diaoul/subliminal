@@ -60,15 +60,15 @@ logger = logging.getLogger(__name__)
 
 #: Scores for episodes
 episode_scores: dict[str, int] = {
-    'hash': 809,
-    'series': 405,
-    'year': 135,
-    'country': 135,
-    'season': 45,
-    'episode': 45,
-    'fps': 18,
-    'release_group': 9,
-    'streaming_service': 9,
+    'hash': 971,
+    'series': 486,
+    'country': 162,
+    'year': 162,
+    'episode': 54,
+    'season': 54,
+    'release_group': 18,
+    'streaming_service': 18,
+    'fps': 9,
     'source': 4,
     'audio_codec': 2,
     'resolution': 1,
@@ -77,13 +77,13 @@ episode_scores: dict[str, int] = {
 
 #: Scores for movies
 movie_scores: dict[str, int] = {
-    'hash': 269,
-    'title': 135,
-    'year': 45,
-    'country': 45,
-    'fps': 18,
-    'release_group': 9,
-    'streaming_service': 9,
+    'hash': 323,
+    'title': 162,
+    'country': 54,
+    'year': 54,
+    'release_group': 18,
+    'streaming_service': 18,
+    'fps': 9,
     'source': 4,
     'audio_codec': 2,
     'resolution': 1,
@@ -205,7 +205,7 @@ if WITH_SYMPY:  # pragma: no cover
         For testing purposes.
         """
         hash, series, year, country, season, episode = symbols('hash series year country season episode')  # noqa: A001
-        fps, release_group, streaming_service, source = symbols('fps release_group streaming_service source')
+        release_group, streaming_service, fps, source = symbols('release_group streaming_service fps source')
         audio_codec, resolution, video_codec = symbols('audio_codec resolution video_codec')
 
         equations = [
@@ -217,9 +217,9 @@ if WITH_SYMPY:  # pragma: no cover
                 + country
                 + season
                 + episode
-                + fps
                 + release_group
                 + streaming_service
+                + fps
                 + source
                 + audio_codec
                 + resolution
@@ -232,9 +232,9 @@ if WITH_SYMPY:  # pragma: no cover
                 + country
                 + season
                 + episode
-                + fps
                 + release_group
                 + streaming_service
+                + fps
                 + source
                 + audio_codec
                 + resolution
@@ -246,9 +246,9 @@ if WITH_SYMPY:  # pragma: no cover
                 year,
                 season
                 + episode
-                + fps
                 + release_group
                 + streaming_service
+                + fps
                 + source
                 + audio_codec
                 + resolution
@@ -258,15 +258,15 @@ if WITH_SYMPY:  # pragma: no cover
             # year counts as much as country
             Eq(year, country),
             # season is important too
-            Eq(season, fps + release_group + streaming_service + source + audio_codec + resolution + video_codec + 1),
+            Eq(season, release_group + streaming_service + fps + source + audio_codec + resolution + video_codec + 1),
             # episode is equally important to season
             Eq(episode, season),
-            # fps is the next most wanted match
-            Eq(fps, release_group + source + audio_codec + resolution + video_codec + 1),
             # release group is the next most wanted match
-            Eq(release_group, source + audio_codec + resolution + video_codec + 1),
+            Eq(release_group, fps + source + audio_codec + resolution + video_codec + 1),
             # streaming service counts as much as release group
             Eq(release_group, streaming_service),
+            # fps is the next most wanted match
+            Eq(fps, source + audio_codec + resolution + video_codec + 1),
             # source counts as much as audio_codec, resolution and video_codec
             Eq(source, audio_codec + resolution + video_codec),
             # audio_codec is more valuable than video_codec
@@ -286,9 +286,9 @@ if WITH_SYMPY:  # pragma: no cover
                 country,
                 season,
                 episode,
-                fps,
                 release_group,
                 streaming_service,
+                fps,
                 source,
                 audio_codec,
                 resolution,
@@ -301,9 +301,9 @@ if WITH_SYMPY:  # pragma: no cover
 
         For testing purposes.
         """
-        hash, title, year, country, fps, release_group = symbols('hash title year country fps release_group')  # noqa: A001
-        streaming_service, source, audio_codec, resolution = symbols('streaming_service source audio_codec resolution')
-        video_codec, hearing_impaired = symbols('video_codec hearing_impaired')
+        hash, title, year, country, release_group = symbols('hash title year country release_group')  # noqa: A001
+        streaming_service, fps, source, audio_codec = symbols('streaming_service fps source audio_codec')
+        resolution, video_codec, hearing_impaired = symbols('resolution video_codec hearing_impaired')
 
         equations = [
             # hash is best
@@ -312,9 +312,9 @@ if WITH_SYMPY:  # pragma: no cover
                 title
                 + year
                 + country
-                + fps
                 + release_group
                 + streaming_service
+                + fps
                 + source
                 + audio_codec
                 + resolution
@@ -325,9 +325,9 @@ if WITH_SYMPY:  # pragma: no cover
                 title,
                 year
                 + country
-                + fps
                 + release_group
                 + streaming_service
+                + fps
                 + source
                 + audio_codec
                 + resolution
@@ -335,15 +335,15 @@ if WITH_SYMPY:  # pragma: no cover
                 + 1,
             ),
             # year is the second most important part
-            Eq(year, fps + release_group + streaming_service + source + audio_codec + resolution + video_codec + 1),
+            Eq(year, release_group + streaming_service + fps + source + audio_codec + resolution + video_codec + 1),
             # year counts as much as country
             Eq(year, country),
-            # fps is the next most wanted match
-            Eq(fps, release_group + source + audio_codec + resolution + video_codec + 1),
             # release group is the next most wanted match
-            Eq(release_group, source + audio_codec + resolution + video_codec + 1),
+            Eq(release_group, fps + source + audio_codec + resolution + video_codec + 1),
             # streaming service counts as much as release group
             Eq(release_group, streaming_service),
+            # fps is the next most wanted match
+            Eq(fps, source + audio_codec + resolution + video_codec + 1),
             # source counts as much as audio_codec, resolution and video_codec
             Eq(source, audio_codec + resolution + video_codec),
             # audio_codec is more valuable than video_codec
@@ -361,9 +361,9 @@ if WITH_SYMPY:  # pragma: no cover
                 title,
                 year,
                 country,
-                fps,
                 release_group,
                 streaming_service,
+                fps,
                 source,
                 audio_codec,
                 resolution,

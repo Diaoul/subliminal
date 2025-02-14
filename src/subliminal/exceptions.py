@@ -7,6 +7,12 @@ class Error(Exception):
     pass
 
 
+class ArchiveError(Error):
+    """Exception raised by reading an archive."""
+
+    pass
+
+
 class ProviderError(Error):
     """Exception raised by providers."""
 

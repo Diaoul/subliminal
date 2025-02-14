@@ -45,7 +45,6 @@ dependencies = [
     "knowit>=0.5.5",
     "platformdirs>=3",
     "pysubs2>=1.7",
-    "rarfile>=2.7",
     "requests>=2.0",
     "srt>=3.5",
     "stevedore>=3.0",
@@ -55,6 +54,7 @@ dependencies = [
 # extras
 # https://peps.python.org/pep-0621/#dependencies-optional-dependencies
 [project.optional-dependencies]
+rar = ["rarfile>=2.7"]
 docs = [
     "sphinx",
     "sphinx_rtd_theme>=2",
@@ -64,6 +64,7 @@ docs = [
     "towncrier",
 ]
 tests = [
+    "subliminal[rar]",
     "coverage[toml]>=7",
     "pytest>=6.0",
     "pytest-cov",

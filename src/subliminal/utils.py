@@ -219,7 +219,7 @@ def creation_date(filepath: os.PathLike | str) -> float:
     See https://stackoverflow.com/a/39501288/1709587 for explanation.
     """
     # Use creation time (although it may not be correct)
-    if platform.system() == 'Windows':
+    if platform.system() == 'Windows':  # pragma: no cover
         return os.path.getctime(filepath)
     stat = os.stat(filepath)
     try:

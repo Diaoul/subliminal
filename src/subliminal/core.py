@@ -23,6 +23,7 @@ from .extensions import (
     provider_manager,
     refiner_manager,
 )
+from .matches import fps_matches
 from .score import compute_score as default_compute_score
 from .subtitle import SUBTITLE_EXTENSIONS, LanguageType, Subtitle
 from .utils import get_age, handle_exception
@@ -218,6 +219,7 @@ class ProviderPool:
         min_score: int = 0,
         hearing_impaired: bool | None = None,
         foreign_only: bool | None = None,
+        skip_wrong_fps: bool = False,
         only_one: bool = False,
         compute_score: ComputeScore | None = None,
         ignore_subtitles: Sequence[str] | None = None,
@@ -233,6 +235,7 @@ class ProviderPool:
         :param int min_score: minimum score for a subtitle to be downloaded.
         :param (bool | None) hearing_impaired: hearing impaired preference (yes/no/indifferent).
         :param (bool | None) foreign_only: foreign only preference (yes/no/indifferent).
+        :param bool skip_wrong_fps: skip subtitles with an FPS that do not match the video (False).
         :param bool only_one: download only one subtitle, not one per language.
         :param compute_score: function that takes `subtitle` and `video` as positional arguments,
             and returns the score.
@@ -246,6 +249,10 @@ class ProviderPool:
 
         # ignore subtitles
         subtitles = [s for s in subtitles if s.id not in ignore_subtitles]
+
+        # skip subtitles that do not match the FPS of the video (if defined)
+        if skip_wrong_fps and video.frame_rate is not None and video.frame_rate > 0:
+            subtitles = [s for s in subtitles if s.fps is None or fps_matches(video, fps=s.fps)]
 
         # sort by hearing impaired and foreign only
         language_type = LanguageType.from_flags(hearing_impaired=hearing_impaired, foreign_only=foreign_only)
@@ -724,6 +731,7 @@ def download_best_subtitles(
     min_score: int = 0,
     hearing_impaired: bool | None = None,
     foreign_only: bool | None = None,
+    skip_wrong_fps: bool = False,
     only_one: bool = False,
     compute_score: ComputeScore | None = None,
     pool_class: type[ProviderPool] = ProviderPool,
@@ -740,6 +748,7 @@ def download_best_subtitles(
     :param int min_score: minimum score for a subtitle to be downloaded.
     :param (bool | None) hearing_impaired: hearing impaired preference (yes/no/indifferent).
     :param (bool | None) foreign_only: foreign only preference (yes/no/indifferent).
+    :param bool skip_wrong_fps: skip subtitles with an FPS that do not match the video (False).
     :param bool only_one: download only one subtitle, not one per language.
     :param compute_score: function that takes `subtitle` and `video` as positional arguments,
         `hearing_impaired` as keyword argument and returns the score.
@@ -775,6 +784,7 @@ def download_best_subtitles(
                 min_score=min_score,
                 hearing_impaired=hearing_impaired,
                 foreign_only=foreign_only,
+                skip_wrong_fps=skip_wrong_fps,
                 only_one=only_one,
                 compute_score=compute_score,
             )

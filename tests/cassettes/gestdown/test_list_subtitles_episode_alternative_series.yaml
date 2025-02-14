@@ -3,11 +3,11 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
       accept:
       - application/json
     method: GET
@@ -19,23 +19,21 @@ interactions:
       CF-Cache-Status:
       - HIT
       CF-RAY:
-      - 88ba5f41ec4f5bee-LIS
+      - 91189a301ab9edef-LHR
       Cache-Control:
       - public, max-age=14400
       Connection:
       - keep-alive
-      Content-Encoding:
-      - br
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 29 May 2024 23:47:53 GMT
+      - Thu, 13 Feb 2025 23:29:44 GMT
       Last-Modified:
-      - Thu, 23 May 2024 01:03:24 GMT
+      - Thu, 13 Feb 2025 16:22:06 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=WA7jhC5Tf4ck%2FMkXaOIC4O239poHZelEubGKCut%2FU7v4jQTIhbEfB%2FIZ0FLHOrfV4Y%2F1gcyDrqqhezPFz6oWMRM2L06PaQbN1FXTQtRJ2SNpPybTZQNOipntTRfUlXYM8bPaMg%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=Z0jkRq60GOlSEBO09Er3F7dlKVdd8y%2Bk3NT7LkjmkKHLcaxn6KRjQTwEFtnQy7yLP0Ds9VhcQA8LQZDcuWFiCFDx1gCSpAPJeKDNtxm73Tn4705dM3sD%2BiGX6GfZRBiDsmDxNQ%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -46,7 +44,12 @@ interactions:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
+      content-length:
+      - '150'
+      server-timing:
+      - cfL4;desc="?proto=TCP&rtt=32044&min_rtt=32023&rtt_var=12051&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2847&recv_bytes=798&delivery_rate=89951&cwnd=251&unsent_bytes=0&cid=aea4d4ca97ce8444&ts=61&x=0"
       vary:
+      - Accept-Encoding
       - Accept-Encoding
     status:
       code: 200
@@ -55,11 +58,11 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
       accept:
       - application/json
     method: GET
@@ -86,25 +89,23 @@ interactions:
         Point: The Bomb and the Cold War\",\"nbSeasons\":1,\"seasons\":[1],\"tvDbId\":446555,\"tmdbId\":245926,\"slug\":\"turning-point-the-bomb-and-the-cold-war\"}]}"
     headers:
       CF-Cache-Status:
-      - HIT
+      - EXPIRED
       CF-RAY:
-      - 88ba5f42ac415bde-LIS
+      - 91189a30def5eefd-LHR
       Cache-Control:
       - public, max-age=14400
       Connection:
       - keep-alive
-      Content-Encoding:
-      - br
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 29 May 2024 23:47:53 GMT
+      - Thu, 13 Feb 2025 23:29:45 GMT
       Last-Modified:
-      - Wed, 29 May 2024 19:47:29 GMT
+      - Thu, 13 Feb 2025 23:29:45 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=sy%2FmVebfs%2FnvyE8Nj%2FvO2K3tIeFHNA46pv8gcukiDjkUzDDoW96U7saU%2FeqiVoeE20JIFLt1Yg10z8wKi5MrJVUhHblnNFOhW3T08EvX7Y2264gDR%2BsQFA6INos9RJMHf66XLg%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=b6IG8QnJvlHrQj80%2B8TF6SdoAyJxeILU8YQCc6AgYYZdC8PB8E4Whiggo001OtDEkVaftLFyvCHTeYotaqu0DK6H6JM%2BPTd3fw9a27fy7ooSIz%2F7kha5VrbfkF4XvBVeOYW6iw%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -115,7 +116,12 @@ interactions:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
+      content-length:
+      - '3162'
+      server-timing:
+      - cfL4;desc="?proto=TCP&rtt=32019&min_rtt=31996&rtt_var=12015&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2846&recv_bytes=789&delivery_rate=90511&cwnd=239&unsent_bytes=0&cid=00ad54a0eb956028&ts=88&x=0"
       vary:
+      - Accept-Encoding
       - Accept-Encoding
     status:
       code: 200
@@ -124,40 +130,38 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
       accept:
       - application/json
     method: GET
     uri: https://api.gestdown.info/subtitles/get/b366047d-4e8f-4430-b9da-e1a8b9dc4d00/4/3/eng
   response:
     body:
-      string: '{"matchingSubtitles":[{"subtitleId":"6081b9e1-a57c-4082-8e65-aa07d5547b64","version":"SVA","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/6081b9e1-a57c-4082-8e65-aa07d5547b64","language":"English","discovered":"2022-11-30T07:37:56.705336Z","downloadCount":46},{"subtitleId":"6b789fec-02e9-4a8d-b0a1-fd701a817d75","version":"SVA","completed":true,"hearingImpaired":true,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/6b789fec-02e9-4a8d-b0a1-fd701a817d75","language":"English","discovered":"2022-11-30T07:37:56.705778Z","downloadCount":0}],"episode":{"season":4,"number":3,"title":"Blood
+      string: '{"matchingSubtitles":[{"subtitleId":"6081b9e1-a57c-4082-8e65-aa07d5547b64","version":"SVA","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/6081b9e1-a57c-4082-8e65-aa07d5547b64","language":"English","discovered":"2022-11-30T07:37:56.705336Z","downloadCount":61},{"subtitleId":"6b789fec-02e9-4a8d-b0a1-fd701a817d75","version":"SVA","completed":true,"hearingImpaired":true,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/6b789fec-02e9-4a8d-b0a1-fd701a817d75","language":"English","discovered":"2022-11-30T07:37:56.705778Z","downloadCount":4}],"episode":{"season":4,"number":3,"title":"Blood
         for Blood","show":"TURN","discovered":"2022-11-30T07:37:56.705328Z"}}'
     headers:
       CF-Cache-Status:
-      - EXPIRED
+      - MISS
       CF-RAY:
-      - 88ba5f433ebd5bda-LIS
+      - 91189a31688a5be8-LIS
       Cache-Control:
       - public, max-age=7200
       Connection:
       - keep-alive
-      Content-Encoding:
-      - br
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 29 May 2024 23:47:53 GMT
+      - Thu, 13 Feb 2025 23:29:45 GMT
       Last-Modified:
-      - Wed, 29 May 2024 19:47:29 GMT
+      - Thu, 13 Feb 2025 23:29:45 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=U4HCuFovL5%2BJ%2BdIiiiJldmF6M6tZv%2FCgiNosRgFe9XivQbttruBAb5Ve8Izz%2BOYkZsQeDm958A4JJM%2F%2FM0z65NWunKjFuzUp2c7crskDnjp1jkccBDC80jCZT5I0B%2BuG4ynbfw%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=THGwPsQ3%2BzWb0x7bxgXh3gJTRGGtLEkrcFvJL7Np6SNV79yovm%2BENOtLakYI6QsrBwtW0dzP2KDQo1Um5ccTRGbSxbh3BUDDX5riSPsBEggB85KsqXvnakkWmMbL4lgIkMhDdQ%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -168,7 +172,12 @@ interactions:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
+      content-length:
+      - '726'
+      server-timing:
+      - cfL4;desc="?proto=TCP&rtt=3007&min_rtt=2978&rtt_var=1176&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2848&recv_bytes=830&delivery_rate=900497&cwnd=251&unsent_bytes=0&cid=2544edce29eddc12&ts=108&x=0"
       vary:
+      - Accept-Encoding
       - Accept-Encoding
     status:
       code: 200

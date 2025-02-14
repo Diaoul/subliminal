@@ -5,7 +5,7 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Accept-Language:
       - en
       Connection:
@@ -13,18 +13,18 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
     uri: https://api.themoviedb.org/3/search/tv?api_key=3dac925d5d494853ea6ef9161011fbb3&query=Shameless&language=en-US&page=1
   response:
     body:
-      string: "{\"page\":1,\"results\":[{\"adult\":false,\"backdrop_path\":\"/bFVx0ydejF6NE8SEAVz95ns0o6A.jpg\",\"genre_ids\":[18,35],\"id\":34307,\"origin_country\":[\"US\"],\"original_language\":\"en\",\"original_name\":\"Shameless\",\"overview\":\"Chicagoan
+      string: "{\"page\":1,\"results\":[{\"adult\":false,\"backdrop_path\":\"/zjOj2gnDJYFdYt6R7FtuHn7yrPr.jpg\",\"genre_ids\":[18,35],\"id\":34307,\"origin_country\":[\"US\"],\"original_language\":\"en\",\"original_name\":\"Shameless\",\"overview\":\"Chicagoan
         Frank Gallagher is the proud single dad of six smart, industrious, independent
         kids, who without him would be... perhaps better off. When Frank's not at
         the bar spending what little money they have, he's passed out on the floor.
         But the kids have found ways to grow up in spite of him. They may not be like
         any family you know, but they make no apologies for being exactly who they
-        are.\",\"popularity\":1387.543,\"poster_path\":\"/9akij7PqZ1g6zl42DQQTtL9CTSb.jpg\",\"first_air_date\":\"2011-01-09\",\"name\":\"Shameless\",\"vote_average\":8.153,\"vote_count\":2561},{\"adult\":false,\"backdrop_path\":\"/1FWw7Q5gn74tYVsyLdo3AcO3LNR.jpg\",\"genre_ids\":[35,18],\"id\":1906,\"origin_country\":[\"GB\"],\"original_language\":\"en\",\"original_name\":\"Shameless\",\"overview\":\"The
+        are.\",\"popularity\":508.541,\"poster_path\":\"/9akij7PqZ1g6zl42DQQTtL9CTSb.jpg\",\"first_air_date\":\"2011-01-09\",\"name\":\"Shameless\",\"vote_average\":8.2,\"vote_count\":2813},{\"adult\":false,\"backdrop_path\":\"/1FWw7Q5gn74tYVsyLdo3AcO3LNR.jpg\",\"genre_ids\":[35,18],\"id\":1906,\"origin_country\":[\"GB\"],\"original_language\":\"en\",\"original_name\":\"Shameless\",\"overview\":\"The
         story of a young group of siblings pretty much abandoned by their parents,
         surviving by their wits - and humor - on a rough Manchester council estate.
         Whilst they won't admit it, they need help and find it in Steve, a young middle
@@ -32,10 +32,13 @@ interactions:
         himself drawn to this unconventional and unique family. Anarchic family life
         seen through the eyes of an exceptionally bright fifteen year old, who struggles
         to come of age in the context of his belligerent father, closeted brother,
-        psychotic sister and internet porn star neighbors.\",\"popularity\":323.974,\"poster_path\":\"/kE30UWJvJZ03KIIJMmL6m6YoG0l.jpg\",\"first_air_date\":\"2004-01-13\",\"name\":\"Shameless\",\"vote_average\":7.649,\"vote_count\":114},{\"adult\":false,\"backdrop_path\":\"/1pX22o8ivcMI09sZIORdaUX6f3h.jpg\",\"genre_ids\":[18,35],\"id\":86005,\"origin_country\":[\"RU\"],\"original_language\":\"ru\",\"original_name\":\"\u0411\u0435\u0441\u0441\u0442\u044B\u0434\u043D\u0438\u043A\u0438\",\"overview\":\"\",\"popularity\":39.087,\"poster_path\":\"/jkBLMwU7RKZBovtVMyhNOaIwtDW.jpg\",\"first_air_date\":\"2017-09-24\",\"name\":\"Shameless\",\"vote_average\":6.0,\"vote_count\":3},{\"adult\":false,\"backdrop_path\":\"/xY56FG5LaFQZVkCOdJkDxIXaMlO.jpg\",\"genre_ids\":[18],\"id\":208736,\"origin_country\":[\"US\"],\"original_language\":\"en\",\"original_name\":\"Shameless
-        Hall of Shame\",\"overview\":\"Retrospective look at ten seasons of Gallagher
-        trials and tribulations.\",\"popularity\":59.783,\"poster_path\":\"/ezSi7VR7247XbkwapsjCkF70ooB.jpg\",\"first_air_date\":\"2020-12-22\",\"name\":\"Shameless
-        Hall of Shame\",\"vote_average\":8.7,\"vote_count\":7},{\"adult\":false,\"backdrop_path\":\"/6cgWun89mHPxIjXkIlrbJDhMU5z.jpg\",\"genre_ids\":[99],\"id\":120399,\"origin_country\":[\"DK\"],\"original_language\":\"da\",\"original_name\":\"Skaml\xF8s\",\"overview\":\"Is
+        psychotic sister and internet porn star neighbors.\",\"popularity\":59.354,\"poster_path\":\"/kE30UWJvJZ03KIIJMmL6m6YoG0l.jpg\",\"first_air_date\":\"2004-01-13\",\"name\":\"Shameless\",\"vote_average\":7.6,\"vote_count\":136},{\"adult\":false,\"backdrop_path\":\"/1pX22o8ivcMI09sZIORdaUX6f3h.jpg\",\"genre_ids\":[18,35],\"id\":86005,\"origin_country\":[\"RU\"],\"original_language\":\"ru\",\"original_name\":\"\u0411\u0435\u0441\u0441\u0442\u044B\u0434\u043D\u0438\u043A\u0438\",\"overview\":\"\",\"popularity\":45.007,\"poster_path\":\"/on5wnMCUT6R7umxHef2st1wQpQP.jpg\",\"first_air_date\":\"2017-09-24\",\"name\":\"Shameless\",\"vote_average\":7.0,\"vote_count\":4},{\"adult\":false,\"backdrop_path\":\"/6QUYgDaET9VT73t7LDEjkyzXg9y.jpg\",\"genre_ids\":[99,10764],\"id\":157512,\"origin_country\":[\"US\"],\"original_language\":\"en\",\"original_name\":\"Rich
+        & Shameless\",\"overview\":\"The true stories of the successes, failures,
+        thrills and miseries that accompany the kind of wealth that ordinary people
+        can never understand. Using a combination of powerful interviews, unique archive
+        and atmospheric visuals, Rich & Shameless goes behind the public facade to
+        reveal the dangers of great prosperity.\",\"popularity\":4.763,\"poster_path\":\"/6CnIuXJLCHX3NCa3BqtbjLjUcQt.jpg\",\"first_air_date\":\"2022-02-19\",\"name\":\"Rich
+        & Shameless\",\"vote_average\":6.5,\"vote_count\":2},{\"adult\":false,\"backdrop_path\":\"/6cgWun89mHPxIjXkIlrbJDhMU5z.jpg\",\"genre_ids\":[99],\"id\":120399,\"origin_country\":[\"DK\"],\"original_language\":\"da\",\"original_name\":\"Skaml\xF8s\",\"overview\":\"Is
         it SHAMELESS to feel like having a lot of sex when you are a young woman?
         In DR3\u2019s new reportage series, we follow three strong young women who
         defy prejudice and shame and set their sexual desires free. Here it is Inger,
@@ -44,29 +47,32 @@ interactions:
         or felt wrong. We open the door to the most intimate of their lives and experience
         all that is not normally said out loud. For Inger, Asmita and Sofie insist
         that it should be possible to have an open sex life as a woman in 2021 without
-        being labeled \\\"cheap\\\".\",\"popularity\":3.156,\"poster_path\":\"/cFjwl6Uc7PSv7lHsP44PbeOEbx9.jpg\",\"first_air_date\":\"2021-03-07\",\"name\":\"Shameless\",\"vote_average\":2.0,\"vote_count\":1},{\"adult\":false,\"backdrop_path\":null,\"genre_ids\":[],\"id\":109353,\"origin_country\":[],\"original_language\":\"nb\",\"original_name\":\"Skaml\xF8s\",\"overview\":\"Sofia
-        Srour and Nancy Herz about sex, virginity, faith, honour, and social control.\",\"popularity\":1.213,\"poster_path\":null,\"first_air_date\":\"2020-09-09\",\"name\":\"Shameless\",\"vote_average\":0.0,\"vote_count\":0},{\"adult\":false,\"backdrop_path\":\"/6QUYgDaET9VT73t7LDEjkyzXg9y.jpg\",\"genre_ids\":[99,10764],\"id\":157512,\"origin_country\":[\"US\"],\"original_language\":\"en\",\"original_name\":\"Rich
-        \\u0026 Shameless\",\"overview\":\"The true stories of the successes, failures,
-        thrills and miseries that accompany the kind of wealth that ordinary people
-        can never understand. Using a combination of powerful interviews, unique archive
-        and atmospheric visuals, Rich \\u0026 Shameless goes behind the public facade
-        to reveal the dangers of great prosperity.\",\"popularity\":33.139,\"poster_path\":\"/6CnIuXJLCHX3NCa3BqtbjLjUcQt.jpg\",\"first_air_date\":\"2022-02-19\",\"name\":\"Rich
-        \\u0026 Shameless\",\"vote_average\":7.0,\"vote_count\":1}],\"total_pages\":1,\"total_results\":7}"
+        being labeled \\\"cheap\\\".\",\"popularity\":3.549,\"poster_path\":\"/cFjwl6Uc7PSv7lHsP44PbeOEbx9.jpg\",\"first_air_date\":\"2021-03-07\",\"name\":\"Shameless\",\"vote_average\":2.0,\"vote_count\":1},{\"adult\":false,\"backdrop_path\":\"/a1Uk4tP2hGHzLdjQdh5I8H6BiA8.jpg\",\"genre_ids\":[18,10765],\"id\":276355,\"origin_country\":[\"CN\"],\"original_language\":\"zh\",\"original_name\":\"\u516C\u5B50\u65E0\u53CC\",\"overview\":\"Shen
+        Zhili embarks on a quest to revive her master using an ancient formula that
+        requires a rare medicinal ingredient. When Su Chenche arrives, Shen Zhili
+        is unexpectedly trapped in a time loop, discovering that each time Su Chenche
+        dies, time resets. To complete the mission, the two set out together, navigating
+        misunderstandings, a growing bond, and cryptic guidance from a mysterious
+        figure in the shadows. Can they solve the riddle of the time loop and find
+        the elusive ingredient?\",\"popularity\":2.682,\"poster_path\":\"/kfYMuyXKkga8iAYRLufE2THwyET.jpg\",\"first_air_date\":\"2024-11-12\",\"name\":\"Shameless
+        Lover\",\"vote_average\":7.0,\"vote_count\":1},{\"adult\":false,\"backdrop_path\":\"/xY56FG5LaFQZVkCOdJkDxIXaMlO.jpg\",\"genre_ids\":[18],\"id\":208736,\"origin_country\":[\"US\"],\"original_language\":\"en\",\"original_name\":\"Shameless
+        Hall of Shame\",\"overview\":\"Retrospective look at ten seasons of Gallagher
+        trials and tribulations.\",\"popularity\":14.397,\"poster_path\":\"/ezSi7VR7247XbkwapsjCkF70ooB.jpg\",\"first_air_date\":\"2020-12-22\",\"name\":\"Shameless
+        Hall of Shame\",\"vote_average\":8.3,\"vote_count\":9},{\"adult\":false,\"backdrop_path\":\"/xBPY3Tj0Z1PCOWcQJ2IIQJR15WF.jpg\",\"genre_ids\":[18],\"id\":109353,\"origin_country\":[\"NO\"],\"original_language\":\"nb\",\"original_name\":\"Skaml\xF8s\",\"overview\":\"Sofia
+        Srour and Nancy Herz about sex, virginity, faith, honour, and social control.\",\"popularity\":1.49,\"poster_path\":\"/95Ed5xYwmSV26LEEgb6faFnsSn3.jpg\",\"first_air_date\":\"2020-09-09\",\"name\":\"Shameless\",\"vote_average\":0.0,\"vote_count\":0}],\"total_pages\":1,\"total_results\":8}"
     headers:
       Alt-Svc:
       - h3=":443"; ma=86400
       Cache-Control:
-      - public, max-age=20500
+      - public, max-age=18414
       Connection:
       - keep-alive
-      Content-Encoding:
-      - br
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Wed, 22 May 2024 22:26:08 GMT
+      - Thu, 13 Feb 2025 23:30:15 GMT
       ETag:
-      - W/"cff20c4c76187dbb0d95899b4e567fd6"
+      - W/"650c28d072667053fd9b4a0dbaf8b86b"
       Server:
       - openresty
       Transfer-Encoding:
@@ -75,19 +81,21 @@ interactions:
       - Accept-Encoding,accept-encoding
       - Origin
       Via:
-      - 1.1 42c937f806e6e43029a719b83b9a8612.cloudfront.net (CloudFront)
+      - 1.1 f2dd3b65381fad5aad94ac94ad7043f8.cloudfront.net (CloudFront)
       X-Amz-Cf-Id:
-      - G6sQlW8MkSlXW8L2bm5I5BieA5c6dEjLzPKrm40XBpCmIZ_zy_CL7w==
+      - 32ocP72nk2BDspa0MTYRP1xVO--pncJ7A1ZawLNo8AEmMhWKGXsgAA==
       X-Amz-Cf-Pop:
       - LIS50-P1
       X-Cache:
       - Miss from cloudfront
+      content-length:
+      - '5434'
       x-memc:
       - HIT
       x-memc-age:
-      - '5080'
+      - '9606'
       x-memc-expires:
-      - '20500'
+      - '18414'
       x-memc-key:
       - 09f24a346559febfe43ecd25ae0a1f9f
     status:
@@ -99,7 +107,7 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Accept-Language:
       - en
       Connection:
@@ -107,31 +115,28 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
     uri: https://api.themoviedb.org/3/tv/34307?api_key=3dac925d5d494853ea6ef9161011fbb3&append_to_response=external_ids
   response:
     body:
-      string: "{\"adult\":false,\"backdrop_path\":\"/bFVx0ydejF6NE8SEAVz95ns0o6A.jpg\",\"created_by\":[{\"id\":47333,\"credit_id\":\"60762d12c392660058efb809\",\"name\":\"John
+      string: "{\"adult\":false,\"backdrop_path\":\"/zjOj2gnDJYFdYt6R7FtuHn7yrPr.jpg\",\"created_by\":[{\"id\":47333,\"credit_id\":\"60762d12c392660058efb809\",\"name\":\"John
         Wells\",\"original_name\":\"John Wells\",\"gender\":2,\"profile_path\":\"/j1cEQmFdSkew87UjO354qeppo1G.jpg\"},{\"id\":1212184,\"credit_id\":\"5b9b133dc3a3686c0200c416\",\"name\":\"Paul
-        Abbott\",\"original_name\":\"Paul Abbott\",\"gender\":2,\"profile_path\":\"/nOSdxmbKRuoVnh29cG1x5fZlBLj.jpg\"}],\"episode_run_time\":[],\"first_air_date\":\"2011-01-09\",\"genres\":[{\"id\":18,\"name\":\"Drama\"},{\"id\":35,\"name\":\"Comedy\"}],\"homepage\":\"http://www.sho.com/shameless\",\"id\":34307,\"in_production\":false,\"languages\":[\"en\"],\"last_air_date\":\"2021-04-11\",\"last_episode_to_air\":{\"id\":2771080,\"overview\":\"Ian
-        and Mickey shop for furniture for their new place and Kev and V look for a
-        buyer for the Alibi. While Lip settles for a new job, Carl finally finds his
-        calling in a new role on the police force. Debbie plunges into a treacherous
-        world when she meets someone new. Frank comes to terms with his own mortality.\",\"name\":\"Father
-        Frank, Full of Grace\",\"vote_average\":6.1,\"vote_count\":7,\"air_date\":\"2021-04-11\",\"episode_number\":12,\"episode_type\":\"finale\",\"production_code\":\"\",\"runtime\":57,\"season_number\":11,\"show_id\":34307,\"still_path\":\"/tGp0pGTCLcQI6IJPVWSf4AFvpId.jpg\"},\"name\":\"Shameless\",\"next_episode_to_air\":null,\"networks\":[{\"id\":67,\"logo_path\":\"/Allse9kbjiP6ExaQrnSpIhkurEi.png\",\"name\":\"Showtime\",\"origin_country\":\"US\"}],\"number_of_episodes\":134,\"number_of_seasons\":11,\"origin_country\":[\"US\"],\"original_language\":\"en\",\"original_name\":\"Shameless\",\"overview\":\"Chicagoan
+        Abbott\",\"original_name\":\"Paul Abbott\",\"gender\":2,\"profile_path\":\"/nOSdxmbKRuoVnh29cG1x5fZlBLj.jpg\"}],\"episode_run_time\":[],\"first_air_date\":\"2011-01-09\",\"genres\":[{\"id\":18,\"name\":\"Drama\"},{\"id\":35,\"name\":\"Comedy\"}],\"homepage\":\"http://www.sho.com/shameless\",\"id\":34307,\"in_production\":false,\"languages\":[\"en\"],\"last_air_date\":\"2021-04-11\",\"last_episode_to_air\":{\"id\":2771080,\"name\":\"Father
+        Frank, Full of Grace\",\"overview\":\"Ian and Mickey shop for furniture for
+        their new place and Kev and V look for a buyer for the Alibi. While Lip settles
+        for a new job, Carl finally finds his calling in a new role on the police
+        force. Debbie plunges into a treacherous world when she meets someone new.
+        Frank comes to terms with his own mortality.\",\"vote_average\":6.5,\"vote_count\":10,\"air_date\":\"2021-04-11\",\"episode_number\":12,\"episode_type\":\"finale\",\"production_code\":\"\",\"runtime\":57,\"season_number\":11,\"show_id\":34307,\"still_path\":\"/tGp0pGTCLcQI6IJPVWSf4AFvpId.jpg\"},\"name\":\"Shameless\",\"next_episode_to_air\":null,\"networks\":[{\"id\":67,\"logo_path\":\"/Allse9kbjiP6ExaQrnSpIhkurEi.png\",\"name\":\"Showtime\",\"origin_country\":\"US\"}],\"number_of_episodes\":134,\"number_of_seasons\":11,\"origin_country\":[\"US\"],\"original_language\":\"en\",\"original_name\":\"Shameless\",\"overview\":\"Chicagoan
         Frank Gallagher is the proud single dad of six smart, industrious, independent
         kids, who without him would be... perhaps better off. When Frank's not at
         the bar spending what little money they have, he's passed out on the floor.
         But the kids have found ways to grow up in spite of him. They may not be like
         any family you know, but they make no apologies for being exactly who they
-        are.\",\"popularity\":1387.543,\"poster_path\":\"/9akij7PqZ1g6zl42DQQTtL9CTSb.jpg\",\"production_companies\":[{\"id\":37423,\"logo_path\":null,\"name\":\"Bonanza
-        Productions\",\"origin_country\":\"US\"},{\"id\":1512,\"logo_path\":null,\"name\":\"John
+        are.\",\"popularity\":508.541,\"poster_path\":\"/9akij7PqZ1g6zl42DQQTtL9CTSb.jpg\",\"production_companies\":[{\"id\":1512,\"logo_path\":null,\"name\":\"John
         Wells Productions\",\"origin_country\":\"US\"},{\"id\":1957,\"logo_path\":\"/pJJw98MtNFC9cHn3o15G7vaUnnX.png\",\"name\":\"Warner
         Bros. Television\",\"origin_country\":\"US\"},{\"id\":4343,\"logo_path\":\"/rXq1B1Hnkdnw6soz1zoGcslK3wb.png\",\"name\":\"Showtime
-        Networks\",\"origin_country\":\"US\"},{\"id\":168706,\"logo_path\":\"/gwVk8GKPghzEg2hg1GLzZpVQ9Ry.png\",\"name\":\"Anthony
-        Hemingway Productions\",\"origin_country\":\"US\"},{\"id\":11842,\"logo_path\":\"/eNw316EUzXBLVOzlZPVwOcPKoDw.png\",\"name\":\"Company
-        Pictures\",\"origin_country\":\"GB\"}],\"production_countries\":[{\"iso_3166_1\":\"US\",\"name\":\"United
+        Networks\",\"origin_country\":\"US\"}],\"production_countries\":[{\"iso_3166_1\":\"US\",\"name\":\"United
         States of America\"}],\"seasons\":[{\"air_date\":\"2010-12-12\",\"episode_count\":39,\"id\":45139,\"name\":\"Specials\",\"overview\":\"\",\"poster_path\":\"/mEsacM6KmTf6z9kDVMisXw0EGmR.jpg\",\"season_number\":0,\"vote_average\":0.0},{\"air_date\":\"2011-01-09\",\"episode_count\":12,\"id\":45137,\"name\":\"Season
         1\",\"overview\":\"Frank goes missing and turns up in Toronto, tries without
         success to embrace sobriety, and bends the law to protect his disability checks.
@@ -145,22 +150,22 @@ interactions:
         in preparation for the arrival of his and Karen's baby. Karen and Sheila clash
         over Karen's new husband Jody, a good-hearted but weird guy she met in Sexaholics
         Anonymous. Ian tries to get into West Point. Debbie prepares for the onset
-        of puberty. Kev and Veronica contemplate starting a family.\",\"poster_path\":\"/v7yEZZCMXgSMoGBr4DRcj4wwBGt.jpg\",\"season_number\":2,\"vote_average\":7.3},{\"air_date\":\"2013-01-13\",\"episode_count\":12,\"id\":45140,\"name\":\"Season
+        of puberty. Kev and Veronica contemplate starting a family.\",\"poster_path\":\"/v7yEZZCMXgSMoGBr4DRcj4wwBGt.jpg\",\"season_number\":2,\"vote_average\":7.5},{\"air_date\":\"2013-01-13\",\"episode_count\":12,\"id\":45140,\"name\":\"Season
         3\",\"overview\":\"Season three finds each member of the Gallagher family
         seeking their individual version of the \u201CAmerican Dream.\u201D Jimmy
         has moved into the Gallagher home, and Fiona is beginning to realize that
         a long-term relationship isn\u2019t nearly as fulfilling as she expected\u2026
         and her GED will only get her so far. Meanwhile, Frank reappears south of
-        the border, with no idea how he got there.\",\"poster_path\":\"/j4tFVJ926chUO9rWfHxCVw6WP18.jpg\",\"season_number\":3,\"vote_average\":7.5},{\"air_date\":\"2014-01-12\",\"episode_count\":12,\"id\":45141,\"name\":\"Season
+        the border, with no idea how he got there.\",\"poster_path\":\"/j4tFVJ926chUO9rWfHxCVw6WP18.jpg\",\"season_number\":3,\"vote_average\":7.7},{\"air_date\":\"2014-01-12\",\"episode_count\":12,\"id\":45141,\"name\":\"Season
         4\",\"overview\":\"The crazy Gallaghers returned. They have new issues. Lip
         went to college. Fiona\u2019s life is gradually improving. She has a stable
         job. The whole family is waiting for news about the health of Frank. Can the
         Gallaghers finally realize the middle class American dream? This ain\u2019t
-        no tea party.\",\"poster_path\":\"/xunL4azPNRRVYqPqLhxgezwAUBr.jpg\",\"season_number\":4,\"vote_average\":7.8},{\"air_date\":\"2015-01-11\",\"episode_count\":12,\"id\":63466,\"name\":\"Season
+        no tea party.\",\"poster_path\":\"/xunL4azPNRRVYqPqLhxgezwAUBr.jpg\",\"season_number\":4,\"vote_average\":8.0},{\"air_date\":\"2015-01-11\",\"episode_count\":12,\"id\":63466,\"name\":\"Season
         5\",\"overview\":\"Season five finds the Gallaghers dealing with both the
         upside and downside of personal and urban renewal. As their neighborhood begins
         a move towards gentrifying, the Gallagher clan begins to reconcile their chaotic
-        past in the hopes of building a better future.\",\"poster_path\":\"/hq3BoH2LJfwInCTn3Vc3k8NGfBC.jpg\",\"season_number\":5,\"vote_average\":8.2},{\"air_date\":\"2016-01-10\",\"episode_count\":12,\"id\":70404,\"name\":\"Season
+        past in the hopes of building a better future.\",\"poster_path\":\"/mSSj9zjUOP9RWwXaIvQvyvJHMXg.jpg\",\"season_number\":5,\"vote_average\":8.4},{\"air_date\":\"2016-01-10\",\"episode_count\":12,\"id\":70404,\"name\":\"Season
         6\",\"overview\":\"Season six picks up a few months after last season\u2019s
         finale, as the Gallaghers prepare for yet another long Chicago winter. Frank
         is still mourning his big loss, while his newfound appreciation for life is
@@ -177,43 +182,41 @@ interactions:
         on alcoholism and his future, whereas the once-unstable Ian is now thriving
         as an EMT and in a comfortable relationship. Debbie is still figuring out
         how to be a good mom to young Franny, while Carl has some big decisions to
-        face as he enters manhood.\",\"poster_path\":\"/eOqXdkg0flz99a0OXpNKoQTSp7Z.jpg\",\"season_number\":7,\"vote_average\":7.1},{\"air_date\":\"2017-11-05\",\"episode_count\":12,\"id\":91214,\"name\":\"Season
+        face as he enters manhood.\",\"poster_path\":\"/8x0JX3E5LjA8Atzz359UObWaB9Z.jpg\",\"season_number\":7,\"vote_average\":7.4},{\"air_date\":\"2017-11-05\",\"episode_count\":12,\"id\":91214,\"name\":\"Season
         8\",\"overview\":\"In season 8 the Gallaghers are finally on an upswing! Frank
         tries to become a contributing member of society, Fiona finds success as a
         landlord, Lip struggles to stay sober, Ian takes up a cause, and Debbie tries
         life as a working single mom.\",\"poster_path\":\"/1E6asdJoCpoalo8mrFerAHFKANj.jpg\",\"season_number\":8,\"vote_average\":7.8},{\"air_date\":\"2018-09-09\",\"episode_count\":14,\"id\":104861,\"name\":\"Season
         9\",\"overview\":\"In season 9, political fervor hits the South Side, and
         the Gallaghers take justice into their own hands. Frank sees financial opportunity
-        in campaigning and Fiona tries to build on the success of her apartment building.\",\"poster_path\":\"/von3HnQF4SokUopZV6FXt12NfXM.jpg\",\"season_number\":9,\"vote_average\":8.0},{\"air_date\":\"2019-11-10\",\"episode_count\":12,\"id\":128829,\"name\":\"Season
+        in campaigning and Fiona tries to build on the success of her apartment building.\",\"poster_path\":\"/von3HnQF4SokUopZV6FXt12NfXM.jpg\",\"season_number\":9,\"vote_average\":8.1},{\"air_date\":\"2019-11-10\",\"episode_count\":12,\"id\":128829,\"name\":\"Season
         10\",\"overview\":\"Season ten picks up six months after last season\u2019s
         finale: Frank uses his leg injury to collect as many prescription drugs as
         possible and his exploits lead him to an old friend. Debbie rules over the
         Gallagher household with an iron fist. Lip navigates his relationship with
         Tami. And Gallavich returns as Ian and Mickey rekindle their relationship
-        in prison as both cellmates and lovers.\",\"poster_path\":\"/m2gf7SYOq9z30Q1dJFMF51DfrmF.jpg\",\"season_number\":10,\"vote_average\":7.3},{\"air_date\":\"2020-12-06\",\"episode_count\":12,\"id\":142132,\"name\":\"Season
+        in prison as both cellmates and lovers.\",\"poster_path\":\"/jNMceYdwAasW8jybOtsRNzJcR2r.jpg\",\"season_number\":10,\"vote_average\":7.3},{\"air_date\":\"2020-12-06\",\"episode_count\":12,\"id\":142132,\"name\":\"Season
         11\",\"overview\":\"As Frank confronts his own mortality and family ties in
         his alcoholic and drug induced twilight years, Lip struggles with the prospect
         of becoming the family\u2019s new patriarch. Newlyweds Ian and Mickey are
         figuring out the rules and responsibilities of being in a committed relationship
         while Deb embraces her individuality and single motherhood. Carl finds an
         unlikely new career in law enforcement and Kevin and V struggle to decide
-        whether a hard life on the South Side is worth fighting for.\",\"poster_path\":\"/9akij7PqZ1g6zl42DQQTtL9CTSb.jpg\",\"season_number\":11,\"vote_average\":7.1}],\"spoken_languages\":[{\"english_name\":\"English\",\"iso_639_1\":\"en\",\"name\":\"English\"}],\"status\":\"Ended\",\"tagline\":\"The
-        Gallaghers. Absolutely, Wildly, Unapologetically... Shameless\",\"type\":\"Scripted\",\"vote_average\":8.153,\"vote_count\":2560,\"external_ids\":{\"imdb_id\":\"tt1586680\",\"freebase_mid\":\"/m/0dll6_j\",\"freebase_id\":null,\"tvdb_id\":161511,\"tvrage_id\":25117,\"wikidata_id\":\"Q23599\",\"facebook_id\":\"ShamelessOnShowtime\",\"instagram_id\":\"shameless\",\"twitter_id\":\"SHO_Shameless\"}}"
+        whether a hard life on the South Side is worth fighting for.\",\"poster_path\":\"/9akij7PqZ1g6zl42DQQTtL9CTSb.jpg\",\"season_number\":11,\"vote_average\":7.3}],\"spoken_languages\":[{\"english_name\":\"English\",\"iso_639_1\":\"en\",\"name\":\"English\"}],\"status\":\"Ended\",\"tagline\":\"The
+        Gallaghers. Absolutely, Wildly, Unapologetically... Shameless\",\"type\":\"Scripted\",\"vote_average\":8.2,\"vote_count\":2813,\"external_ids\":{\"imdb_id\":\"tt1586680\",\"freebase_mid\":\"/m/0dll6_j\",\"freebase_id\":null,\"tvdb_id\":161511,\"tvrage_id\":25117,\"wikidata_id\":\"Q23599\",\"facebook_id\":\"ShamelessOnShowtime\",\"instagram_id\":\"shameless\",\"twitter_id\":\"SHO_Shameless\"}}"
     headers:
       Alt-Svc:
       - h3=":443"; ma=86400
       Cache-Control:
-      - public, max-age=490
+      - public, max-age=6258
       Connection:
       - keep-alive
-      Content-Encoding:
-      - br
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Wed, 22 May 2024 22:26:08 GMT
+      - Thu, 13 Feb 2025 23:30:15 GMT
       ETag:
-      - W/"b38347a2c77c1bccb2e7a771568070de"
+      - W/"2066054aff87b232a0380768dfa38d25"
       Server:
       - openresty
       Transfer-Encoding:
@@ -222,13 +225,15 @@ interactions:
       - Accept-Encoding,accept-encoding
       - Origin
       Via:
-      - 1.1 735dd7fa3c296627cd805d04e3e3a3e8.cloudfront.net (CloudFront)
+      - 1.1 4ccea9891122bbc59cea4168a401fd44.cloudfront.net (CloudFront)
       X-Amz-Cf-Id:
-      - rEXgXxGYj0wMFCjQKM-rb-O0dDy0uqURGhCceofPN_BcVtGlynCDuw==
+      - oc-xvkvIpzvbEiQY2qM13zrgT9QQE56q94uflJyILaf3YKo4sN8XIQ==
       X-Amz-Cf-Pop:
       - LIS50-P1
       X-Cache:
       - Miss from cloudfront
+      content-length:
+      - '9402'
     status:
       code: 200
       message: OK
@@ -238,7 +243,7 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Accept-Language:
       - en
       Connection:
@@ -246,41 +251,77 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
     uri: https://api.themoviedb.org/3/tv/34307/season/8/episode/1?api_key=3dac925d5d494853ea6ef9161011fbb3&append_to_response=external_ids
   response:
     body:
       string: '{"air_date":"2017-11-05","crew":[{"job":"Director","department":"Directing","credit_id":"5fdbb24f7776f0003f3145e2","adult":false,"gender":2,"id":80161,"known_for_department":"Directing","name":"Iain
-        B. MacDonald","original_name":"Iain B. MacDonald","popularity":5.57,"profile_path":"/cxCwbSjnomHNGgvW2EP6YSr4hXv.jpg"}],"episode_number":1,"guest_stars":[{"character":"Brad","credit_id":"5e69c30e357c0000163dd9e9","order":16,"adult":false,"gender":2,"id":65728,"known_for_department":"Acting","name":"Scott
-        Michael Campbell","original_name":"Scott Michael Campbell","popularity":22.513,"profile_path":"/p1fKMI59U489Rys9xvqzdTLxPrL.jpg"},{"character":"Trevor","credit_id":"580dc46fc3a3682413018437","order":19,"adult":false,"gender":2,"id":1601960,"known_for_department":"Acting","name":"Elliot
-        Fletcher","original_name":"Elliot Fletcher","popularity":17.845,"profile_path":"/5vv8EFHAhkaeaV82VXcfAIROro7.jpg"},{"character":"Eddie","credit_id":"5b30b9a19251413c580004ee","order":547,"adult":false,"gender":1,"id":1578220,"known_for_department":"Acting","name":"Levy
-        Tran","original_name":"Levy Tran","popularity":28.276,"profile_path":"/ungYHOdC0DETelUD8I6FR1bFdn.jpg"},{"character":"Farhad","credit_id":"5b9b8470c3a3686c08012f1e","order":551,"adult":false,"gender":2,"id":1561485,"known_for_department":"Acting","name":"Peter
-        Banifaz","original_name":"Peter Banifaz","popularity":8.366,"profile_path":"/fQXcGOpKU8mzkYNyzXrmtXP5In4.jpg"},{"character":"Charlie","credit_id":"5bf29986c3a368189f083e89","order":557,"adult":false,"gender":2,"id":1421688,"known_for_department":"Acting","name":"Chet
-        Hanks","original_name":"Chet Hanks","popularity":11.676,"profile_path":"/rk4WtugPbBHtx9FtsC4spM89kMY.jpg"},{"character":"Clyde
+        B. MacDonald","original_name":"Iain B. MacDonald","popularity":3.027,"profile_path":"/cxCwbSjnomHNGgvW2EP6YSr4hXv.jpg"}],"episode_number":1,"guest_stars":[{"character":"Liam
+        Gallagher","credit_id":"5e69bfa4151c5c0019058347","order":8,"adult":false,"gender":2,"id":2563541,"known_for_department":"Acting","name":"Christian
+        Isaiah","original_name":"Christian Isaiah","popularity":2.993,"profile_path":"/2gD6D7Lp9CYqTLG2iNg6RR6QPkt.jpg"},{"character":"Brad","credit_id":"5e69c30e357c0000163dd9e9","order":15,"adult":false,"gender":2,"id":65728,"known_for_department":"Acting","name":"Scott
+        Michael Campbell","original_name":"Scott Michael Campbell","popularity":7.654,"profile_path":"/p1fKMI59U489Rys9xvqzdTLxPrL.jpg"},{"character":"Trevor","credit_id":"580dc46fc3a3682413018437","order":18,"adult":false,"gender":2,"id":1601960,"known_for_department":"Acting","name":"Elliot
+        Fletcher","original_name":"Elliot Fletcher","popularity":2.596,"profile_path":"/5vv8EFHAhkaeaV82VXcfAIROro7.jpg"},{"character":"Neil
+        Morton","credit_id":"58ef2937c3a3682626007b52","order":20,"adult":false,"gender":2,"id":130535,"known_for_department":"Acting","name":"Zack
+        Pearlman","original_name":"Zack Pearlman","popularity":4.623,"profile_path":"/ez93T66xMaCycaw5aoh61o6FO2H.jpg"},{"character":"Sierra
+        Morton","credit_id":"5aa0509c9251415815018eeb","order":21,"adult":false,"gender":1,"id":1602964,"known_for_department":"Acting","name":"Ruby
+        Modine","original_name":"Ruby Modine","popularity":5.446,"profile_path":"/3SEz3Edts4A7dIYYnV08VKGM7u9.jpg"},{"character":"Tommy","credit_id":"5e29dc491685da0013e399f1","order":25,"adult":false,"gender":2,"id":154816,"known_for_department":"Acting","name":"Michael
+        Patrick McGill","original_name":"Michael Patrick McGill","popularity":4.035,"profile_path":"/kKKnwvtxhXaJtYpdZUtjXHO4f26.jpg"},{"character":"Kermit","credit_id":"5e73f43ccabfe400181cc300","order":26,"adult":false,"gender":2,"id":1224161,"known_for_department":"Acting","name":"Jim
+        Hoffmaster","original_name":"Jim Hoffmaster","popularity":5.126,"profile_path":"/dhBCEaB1qDndEXKS6GVGO3l4CYF.jpg"},{"character":"Eddie","credit_id":"5b30b9a19251413c580004ee","order":548,"adult":false,"gender":1,"id":1578220,"known_for_department":"Acting","name":"Levy
+        Tran","original_name":"Levy Tran","popularity":14.833,"profile_path":"/ungYHOdC0DETelUD8I6FR1bFdn.jpg"},{"character":"Farhad","credit_id":"5b9b8470c3a3686c08012f1e","order":552,"adult":false,"gender":2,"id":1561485,"known_for_department":"Acting","name":"Peter
+        Banifaz","original_name":"Peter Banifaz","popularity":1.963,"profile_path":"/fQXcGOpKU8mzkYNyzXrmtXP5In4.jpg"},{"character":"Charlie","credit_id":"5bf29986c3a368189f083e89","order":558,"adult":false,"gender":2,"id":1421688,"known_for_department":"Acting","name":"Chet
+        Hanks","original_name":"Chet Hanks","popularity":5.558,"profile_path":"/rk4WtugPbBHtx9FtsC4spM89kMY.jpg"},{"character":"Clyde
         Youens","credit_id":"5e7bf40e109dec1ebb00eafa","order":661,"adult":false,"gender":2,"id":3008,"known_for_department":"Acting","name":"Alan
-        Rosenberg","original_name":"Alan Rosenberg","popularity":24.291,"profile_path":"/fk5nR9aLZBjGA67J5SOK3FWjjWF.jpg"},{"character":"Carson","credit_id":"65d0ffcfc144dd017cbdef16","order":779,"adult":false,"gender":2,"id":2533916,"known_for_department":"Acting","name":"Ricardo
-        Walker","original_name":"Ricardo Walker","popularity":7.878,"profile_path":"/r5jDeWnRJMiR8sCHPVbpe0z7cLd.jpg"}],"name":"We
+        Rosenberg","original_name":"Alan Rosenberg","popularity":13.289,"profile_path":"/fk5nR9aLZBjGA67J5SOK3FWjjWF.jpg"},{"character":"Carson","credit_id":"65d0ffcfc144dd017cbdef16","order":778,"adult":false,"gender":2,"id":2533916,"known_for_department":"Acting","name":"Ricardo
+        Walker","original_name":"Ricardo Walker","popularity":1.304,"profile_path":"/r5jDeWnRJMiR8sCHPVbpe0z7cLd.jpg"},{"character":"Anne
+        Seery","credit_id":"6736ebe0ff85881393a0ca40","order":1641,"adult":false,"gender":1,"id":9212,"known_for_department":"Acting","name":"Jennifer
+        Taylor","original_name":"Jennifer Taylor","popularity":9.834,"profile_path":"/5rNxbcLeRA6s6K9DOqVP3msXuwN.jpg"},{"character":"Mel","credit_id":"6736ece6143e439db4c68865","order":1705,"adult":false,"gender":1,"id":1869253,"known_for_department":"Acting","name":"Perry
+        Mattfeld","original_name":"Perry Mattfeld","popularity":4.154,"profile_path":"/7oM81wmfkM185bivpMx95HMWeQ7.jpg"},{"character":"Nessa
+        Chabon","credit_id":"6736ece871ef66978cfb034d","order":1706,"adult":false,"gender":1,"id":130782,"known_for_department":"Acting","name":"Jessica
+        Szohr","original_name":"Jessica Szohr","popularity":10.291,"profile_path":"/lyOju1tWTlluW2P3pXT9jJ78KB8.jpg"},{"character":"Sue","credit_id":"6736f18fac9f3ba081558569","order":1815,"adult":false,"gender":1,"id":126875,"known_for_department":"Acting","name":"Alicia
+        Coppola","original_name":"Alicia Coppola","popularity":14.491,"profile_path":"/mxbBP7Qig0iVOau1MU0LqXUzJZ9.jpg"},{"character":"ICE
+        Squad Captain","credit_id":"6736f195c62c3a26ad055611","order":1816,"adult":false,"gender":2,"id":19227,"known_for_department":"Acting","name":"Brad
+        Beyer","original_name":"Brad Beyer","popularity":3.614,"profile_path":"/7h0k75Qcd7n0O4fT1KbOdvMAvNu.jpg"},{"character":"Jason","credit_id":"6736f196c62c3a26ad055615","order":1817,"adult":false,"gender":2,"id":1795898,"known_for_department":"Acting","name":"Shea
+        Buckner","original_name":"Shea Buckner","popularity":1.877,"profile_path":"/zPceeH9jsxUgvQhgyppLdcbtEbf.jpg"},{"character":"Russian
+        Man","credit_id":"6736f198c62c3a26ad055619","order":1818,"adult":false,"gender":0,"id":1245802,"known_for_department":"Acting","name":"Eugene
+        Alper","original_name":"Eugene Alper","popularity":1.134,"profile_path":"/r9bPS23UWHZLwCkHu8a2JHZJ0W9.jpg"},{"character":"Parminder","credit_id":"6736f199c62c3a26ad05561d","order":1819,"adult":false,"gender":1,"id":991779,"known_for_department":"Acting","name":"Amrapali
+        Ambegaokar","original_name":"Amrapali Ambegaokar","popularity":1.305,"profile_path":"/8G915Ka1549bS7I8DaEdFCulYl8.jpg"},{"character":"Kelso","credit_id":"6736f19aac9f3ba081558575","order":1820,"adult":false,"gender":2,"id":1050090,"known_for_department":"Acting","name":"Cris
+        D''Annunzio","original_name":"Cris D''Annunzio","popularity":1.396,"profile_path":"/h1kAozQyf3c7lRul1vJKFpJZqn2.jpg"},{"character":"Davey","credit_id":"6736f19cce49410032c1eaa8","order":1821,"adult":false,"gender":2,"id":1864190,"known_for_department":"Acting","name":"Ricarlo
+        Flanagan","original_name":"Ricarlo Flanagan","popularity":0.402,"profile_path":"/AdNyDGJwarPCk1mCMREbcRfXizf.jpg"},{"character":"Lucas","credit_id":"6736f19dac9f3ba081558579","order":1822,"adult":false,"gender":2,"id":1496516,"known_for_department":"Acting","name":"Cooper
+        J. Friedman","original_name":"Cooper J. Friedman","popularity":2.569,"profile_path":"/bEi86MoNo3nxlXnfB08vxyD6kZF.jpg"},{"character":"Clara","credit_id":"6736f19eac9f3ba08155857d","order":1823,"adult":false,"gender":1,"id":1493119,"known_for_department":"Acting","name":"Talisa
+        Friedman","original_name":"Talisa Friedman","popularity":0.001,"profile_path":null},{"character":"Jill","credit_id":"6736f19fce49410032c1eaac","order":1824,"adult":false,"gender":0,"id":2198076,"known_for_department":"Acting","name":"Beth
+        Geiger","original_name":"Beth Geiger","popularity":0.001,"profile_path":null},{"character":"Lakisha","credit_id":"6736f1a0ac9f3ba081558581","order":1825,"adult":false,"gender":1,"id":996826,"known_for_department":"Acting","name":"Kelli
+        Dawn Hancock","original_name":"Kelli Dawn Hancock","popularity":3.07,"profile_path":"/lYSa3PF8LqgykHgJwbIR89KW5h4.jpg"},{"character":"Bob","credit_id":"6736f1a2143e439db4c68a33","order":1826,"adult":false,"gender":2,"id":78890,"known_for_department":"Acting","name":"Keith
+        Jardine","original_name":"Keith Jardine","popularity":2.472,"profile_path":"/emN5dXAoqW9Naab4g3yOwxSfkvh.jpg"},{"character":"Heather","credit_id":"6736f1a3a102d269c03f13ee","order":1827,"adult":false,"gender":0,"id":2554395,"known_for_department":"Acting","name":"Jasmine
+        B. Johnson","original_name":"Jasmine B. Johnson","popularity":0.428,"profile_path":null},{"character":"Robin","credit_id":"6736f1a4a102d269c03f13f2","order":1828,"adult":false,"gender":1,"id":1586913,"known_for_department":"Acting","name":"Christine
+        Kilmer","original_name":"Christine Kilmer","popularity":1.029,"profile_path":"/jH8grwUmsSk9qM8jYiVotYJwzgp.jpg"},{"character":"Jamie","credit_id":"6736f1a6c62c3a26ad055621","order":1829,"adult":false,"gender":2,"id":2338493,"known_for_department":"Acting","name":"Martin
+        Martinez","original_name":"Martin Martinez","popularity":4.231,"profile_path":"/qR0TDXH5PPUudrRf6mgx1arlgna.jpg"},{"character":"Chinese
+        Owner","credit_id":"6736f1a6a102d269c03f13f6","order":1830,"adult":false,"gender":2,"id":165214,"known_for_department":"Acting","name":"Raymond
+        Ma","original_name":"Raymond Ma","popularity":3.496,"profile_path":"/9IvSLpcBKb6AHYnba0HIn7Dx2Ok.jpg"},{"character":"Scott","credit_id":"6736f1a8ac9f3ba081558585","order":1831,"adult":false,"gender":2,"id":2088733,"known_for_department":"Acting","name":"Tommy
+        Martinez","original_name":"Tommy Martinez","popularity":3.791,"profile_path":"/hPPWLxCSoehYnDaOrC6O0HxXPjT.jpg"},{"character":"Aldo","credit_id":"6736f1aaac9f3ba08155858a","order":1832,"adult":false,"gender":2,"id":1192831,"known_for_department":"Acting","name":"Bart
+        McCarthy","original_name":"Bart McCarthy","popularity":2.554,"profile_path":"/ddMRjOGx2RZAGmbZkfCfFDU4mV3.jpg"},{"character":"Berta","credit_id":"6736f1abc62c3a26ad055626","order":1833,"adult":false,"gender":1,"id":13451,"known_for_department":"Acting","name":"Jane
+        Morris","original_name":"Jane Morris","popularity":2.705,"profile_path":"/8rNS5qEl8ALKa5spSExpuIUA4vR.jpg"},{"character":"Fox","credit_id":"6736f1acc62c3a26ad05562a","order":1834,"adult":false,"gender":2,"id":1190639,"known_for_department":"Acting","name":"Scott
+        Alan Smith","original_name":"Scott Alan Smith","popularity":4.336,"profile_path":"/e424UmsKRjDGKfCFfW144KUHRel.jpg"},{"character":"Mike","credit_id":"6736f1adac9f3ba08155858e","order":1835,"adult":false,"gender":2,"id":18305,"known_for_department":"Acting","name":"Glenn
+        Taranto","original_name":"Glenn Taranto","popularity":2.044,"profile_path":"/cZlVXtS98hA8X6EOFfwl6bn7WKy.jpg"},{"character":"Ryne","credit_id":"6736f1afa102d269c03f13fe","order":1836,"adult":false,"gender":2,"id":1238632,"known_for_department":"Acting","name":"Anthony
+        Traina","original_name":"Anthony Traina","popularity":1.012,"profile_path":"/u3q1RaRtuO6DZzU79LfeuSbNK4G.jpg"}],"name":"We
         Become What We... Frank!","overview":"The Gallaghers find themselves with
         money to burn as Carl sells their inheritance from Monica. Fiona swears off
         random hookups to focus on her new apartment building. Lip deals with the
         sacrifice that comes with sobriety. Frank emerges out of a meth-induced haze
-        to make amends for decades of depravity.","id":1347196,"production_code":"","runtime":57,"season_number":8,"still_path":"/7HGoqjNuUbjpLyhM2xJSt4JPTa3.jpg","vote_average":6.9,"vote_count":22,"external_ids":{"imdb_id":"tt6347410","freebase_mid":null,"freebase_id":null,"tvdb_id":6227949,"tvrage_id":null,"wikidata_id":"Q105671664"}}'
+        to make amends for decades of depravity.","id":1347196,"production_code":"","runtime":57,"season_number":8,"still_path":"/7HGoqjNuUbjpLyhM2xJSt4JPTa3.jpg","vote_average":7.04,"vote_count":25,"external_ids":{"imdb_id":"tt6347410","freebase_mid":null,"freebase_id":null,"tvdb_id":6227949,"tvrage_id":null,"wikidata_id":"Q105671664"}}'
     headers:
       Alt-Svc:
       - h3=":443"; ma=86400
       Cache-Control:
-      - public, max-age=4253
+      - public, max-age=22626
       Connection:
       - keep-alive
-      Content-Encoding:
-      - br
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Wed, 22 May 2024 22:26:09 GMT
+      - Thu, 13 Feb 2025 23:30:15 GMT
       ETag:
-      - W/"e7e0db58151a1c138400c63c91699a55"
+      - W/"a58e92c2fbfe143776f6e8ced741676c"
       Server:
       - openresty
       Transfer-Encoding:
@@ -289,13 +330,15 @@ interactions:
       - Accept-Encoding,accept-encoding
       - Origin
       Via:
-      - 1.1 c6ccd07e1e50408d404ed1f9dd2506ce.cloudfront.net (CloudFront)
+      - 1.1 56d84f665e9029878cb3adcd83a21026.cloudfront.net (CloudFront)
       X-Amz-Cf-Id:
-      - QpisG34YUYTLecKmNWzlAsZbNMN7_767asMZbioSdqBkd2FfYFCOIQ==
+      - 2s8xyrfqoNfrSMKGlJZH6bG8uta-IMaGOEqrzPo7f31YBsqcl-QsYA==
       X-Amz-Cf-Pop:
       - LIS50-P1
       X-Cache:
       - Miss from cloudfront
+      content-length:
+      - '10946'
     status:
       code: 200
       message: OK

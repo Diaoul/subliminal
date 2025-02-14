@@ -3,39 +3,33 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
       accept:
       - application/json
     method: GET
     uri: https://api.gestdown.info/shows/external/tvdb/77092
   response:
     body:
-      string: '{"shows":[{"id":"226d7f34-a9f5-4fe2-98d7-ecf944243714","name":"Dallas","nbSeasons":10,"seasons":[1,2,3,4,5,6,8,9,12,13],"tvDbId":77092,"tmdbId":40,"slug":"dallas"}]}'
+      string: '{"shows":[{"id":"226d7f34-a9f5-4fe2-98d7-ecf944243714","name":"Dallas","nbSeasons":11,"seasons":[1,2,3,4,5,6,8,9,11,12,13],"tvDbId":77092,"tmdbId":40,"slug":"dallas"}]}'
     headers:
-      CF-Cache-Status:
-      - HIT
       CF-RAY:
-      - 88ba5f34dba05bf0-LIS
+      - 91189a41ab1b5be0-LIS
       Cache-Control:
       - public, max-age=14400
       Connection:
       - keep-alive
-      Content-Encoding:
-      - br
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 29 May 2024 23:47:51 GMT
-      Last-Modified:
-      - Thu, 23 May 2024 02:32:32 GMT
+      - Thu, 13 Feb 2025 23:29:47 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=JVTi6FVTz2NbOI8A6HriRgYI8rBy4lXG8Djbh%2BMwJRAYPAKLF4Wob%2FUhmgk9d%2Fw1YeBTARlY0vxmtCo5J0eIU0ivgcUPMUp6pD4qOffNNUc%2F9jddWPewXr57GK1qBlbIEOja2Q%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=w6h5csftLSFHDOix%2BbhFlqmS748gwMF3K%2FMlN24WApq9ciE0dXyNz0VoWNDGab5hLyRbv9Eufn0DDXYb1F6qUAMBslL%2FEGgd2ZSQX0BWqQvU6q2nAv%2BrnTJLqXmaNgyTfsuoQw%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -46,7 +40,16 @@ interactions:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
+      cf-cache-status:
+      - HIT
+      content-length:
+      - '168'
+      last-modified:
+      - Thu, 13 Feb 2025 22:54:10 GMT
+      server-timing:
+      - cfL4;desc="?proto=TCP&rtt=2875&min_rtt=1409&rtt_var=1282&sent=4&recv=7&lost=0&retrans=0&sent_bytes=2846&recv_bytes=797&delivery_rate=1027679&cwnd=247&unsent_bytes=0&cid=70e06eb04f5b10c9&ts=130&x=0"
       vary:
+      - Accept-Encoding
       - Accept-Encoding
     status:
       code: 200

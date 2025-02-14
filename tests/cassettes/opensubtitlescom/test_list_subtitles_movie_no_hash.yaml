@@ -5,7 +5,7 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Api-Key:
       - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
       Connection:
@@ -13,7 +13,7 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Subliminal v2.1
+      - Subliminal v2.2
     method: GET
     uri: https://api.opensubtitles.com/api/v1/subtitles?languages=de&page=1&query=enders+game
   response:
@@ -25,7 +25,7 @@ interactions:
       CF-Cache-Status:
       - MISS
       CF-RAY:
-      - 88a996799be699ee-CDG
+      - 91189cbc198df662-LHR
       Cache-Control:
       - public, max-age=86400
       Connection:
@@ -33,25 +33,43 @@ interactions:
       Content-Length:
       - '0'
       Date:
-      - Mon, 27 May 2024 22:54:37 GMT
+      - Thu, 13 Feb 2025 23:31:29 GMT
       Location:
       - /api/v1/subtitles?languages=de&query=enders+game
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      RateLimit-Limit:
+      - '5'
+      RateLimit-Remaining:
+      - '4'
+      RateLimit-Reset:
+      - '1'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=JBzxxbeDNt2UBCwhk4KKkFW3yWFmNkzvhy5SbFiIZTzjIdRgSRPjqFgVaMCR%2BDue0chNyuvPmaKiGkpll6hfqGv%2Boi0Myk0%2Bx2Kf6nt2qe52t0tMqnmDrsTUBUWtEaA%2Br8n4f4wWrEE%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=%2BDPPEABQ6hPbyGziUkMQzwJNyQ5HmrIWgi6i7gCDbkPVxz7BR1YBSVzo1Py%2Fwr5tcuYdWdTBdMXLCgE5g0LFWj%2FUU63Bd0DvTTjkQDnuXxq%2FwmSeLB3TDmbrMBz1%2BfXdT%2F4l9mQbalQ%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
       - max-age=15552000; includeSubDomains; preload
       Vary:
       - Accept-Encoding
+      Via:
+      - kong/3.3.0
       X-Content-Type-Options:
       - nosniff
+      X-Kong-Proxy-Latency:
+      - '0'
+      X-Kong-Upstream-Latency:
+      - '1'
+      X-RateLimit-Limit-Second:
+      - '5'
+      X-RateLimit-Remaining-Second:
+      - '4'
       X-Varnish:
-      - '77868616'
+      - '19198378697'
       alt-svc:
       - h3=":443"; ma=86400
+      server-timing:
+      - cfL4;desc="?proto=TCP&rtt=32087&min_rtt=31975&rtt_var=12216&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2854&recv_bytes=893&delivery_rate=88088&cwnd=251&unsent_bytes=0&cid=d42e17b3c9aea642&ts=79&x=0"
     status:
       code: 301
       message: Moved Permanently
@@ -61,23 +79,23 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Api-Key:
       - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal v2.1
+      - Subliminal v2.2
     method: GET
     uri: https://api.opensubtitles.com/api/v1/subtitles?languages=de&query=enders+game
   response:
     body:
-      string: '{"total_pages":1,"total_count":3,"per_page":60,"page":1,"data":[{"id":"939553","type":"subtitle","attributes":{"subtitle_id":"939553","language":"de","download_count":4471,"new_download_count":184,"hearing_impaired":false,"hd":true,"fps":23.976,"votes":1,"ratings":10.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2014-03-06T16:36:27Z","ai_translated":false,"nb_cd":1,"machine_translated":false,"release":"Enders.Game.Das.grosse.Spiel.German.DL.1080p.BluRay.x264-EXQUiSiTE","comments":"","legacy_subtitle_id":5571822,"legacy_uploader_id":1563515,"uploader":{"uploader_id":63224,"name":"newkinds","rank":"trusted"},"feature_details":{"feature_id":586791,"feature_type":"Movie","year":2013,"title":"Ender''s
-        Game","movie_name":"2013 - Ender''s Game","imdb_id":1731141,"tmdb_id":80274},"url":"https://www.opensubtitles.com/de/subtitles/legacy/5571822","related_links":[{"label":"All
-        subtitles for ender''s game","url":"https://www.opensubtitles.com/de/movies/2013-ender-s-game","img_url":"https://s9.opensubtitles.com/features/1/9/7/586791.jpg"}],"files":[{"file_id":1023711,"cd_number":1,"file_name":"endersgame-1080p"}]}},{"id":"940426","type":"subtitle","attributes":{"subtitle_id":"940426","language":"de","download_count":1252,"new_download_count":68,"hearing_impaired":false,"hd":true,"fps":0.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2014-10-20T22:08:17Z","ai_translated":false,"nb_cd":1,"machine_translated":false,"release":"Enders.Game.2013.1080p.BluRay.x264-SPARKS","comments":"","legacy_subtitle_id":5864769,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+      string: '{"total_pages":1,"total_count":3,"per_page":50,"page":1,"data":[{"id":"940426","type":"subtitle","attributes":{"subtitle_id":"940426","language":"de","download_count":1311,"new_download_count":140,"hearing_impaired":false,"hd":true,"fps":0.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2014-10-20T22:08:17Z","file_hashes":["4ff7b661bab99895","271a2764e30f72a8","1e8af369c4b2536d","efb1fd759bd84056"],"ai_translated":false,"nb_cd":1,"slug":"5864769-enders-game-2013-1080p-bluray-x264-sparks","machine_translated":false,"release":"Enders.Game.2013.1080p.BluRay.x264-SPARKS","comments":"","legacy_subtitle_id":5864769,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
         Developers"},"feature_details":{"feature_id":586791,"feature_type":"Movie","year":2013,"title":"Ender''s
         Game","movie_name":"2013 - Ender''s Game","imdb_id":1731141,"tmdb_id":80274},"url":"https://www.opensubtitles.com/de/subtitles/legacy/5864769","related_links":[{"label":"All
-        subtitles for ender''s game","url":"https://www.opensubtitles.com/de/movies/2013-ender-s-game","img_url":"https://s9.opensubtitles.com/features/1/9/7/586791.jpg"}],"files":[{"file_id":1024649,"cd_number":1,"file_name":"Enders.Game.2013.1080p.BluRay.x264-SPARKS"}]}},{"id":"939532","type":"subtitle","attributes":{"subtitle_id":"939532","language":"de","download_count":570,"new_download_count":25,"hearing_impaired":true,"hd":true,"fps":23.976,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2014-03-06T01:27:57Z","ai_translated":false,"nb_cd":1,"machine_translated":false,"release":"Enders.Game.Das.grosse.Spiel.German.720p.BluRay.x264-EXQUiSiTE","comments":"","legacy_subtitle_id":5571194,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        subtitles for ender''s game","url":"https://www.opensubtitles.com/de/movies/2013-ender-s-game","img_url":"https://s9.opensubtitles.com/features/1/9/7/586791.jpg"}],"files":[{"file_id":1024649,"cd_number":1,"file_name":"Enders.Game.2013.1080p.BluRay.x264-SPARKS"}]}},{"id":"939553","type":"subtitle","attributes":{"subtitle_id":"939553","language":"de","download_count":4471,"new_download_count":216,"hearing_impaired":false,"hd":true,"fps":23.976,"votes":1,"ratings":10.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2014-03-06T16:36:27Z","file_hashes":[],"ai_translated":false,"nb_cd":1,"slug":"enders-game-das-grosse-spiel-german-dl-1080p-bluray-x264-exquisite","machine_translated":false,"release":"Enders.Game.Das.grosse.Spiel.German.DL.1080p.BluRay.x264-EXQUiSiTE","comments":"","legacy_subtitle_id":5571822,"legacy_uploader_id":1563515,"uploader":{"uploader_id":63224,"name":"newkinds","rank":"trusted"},"feature_details":{"feature_id":586791,"feature_type":"Movie","year":2013,"title":"Ender''s
+        Game","movie_name":"2013 - Ender''s Game","imdb_id":1731141,"tmdb_id":80274},"url":"https://www.opensubtitles.com/de/subtitles/legacy/5571822","related_links":[{"label":"All
+        subtitles for ender''s game","url":"https://www.opensubtitles.com/de/movies/2013-ender-s-game","img_url":"https://s9.opensubtitles.com/features/1/9/7/586791.jpg"}],"files":[{"file_id":1023711,"cd_number":1,"file_name":"endersgame-1080p"}]}},{"id":"939532","type":"subtitle","attributes":{"subtitle_id":"939532","language":"de","download_count":570,"new_download_count":34,"hearing_impaired":true,"hd":true,"fps":23.976,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2014-03-06T01:27:57Z","file_hashes":[],"ai_translated":false,"nb_cd":1,"slug":"enders-game-das-grosse-spiel-german-720p-bluray-x264-exquisite","machine_translated":false,"release":"Enders.Game.Das.grosse.Spiel.German.720p.BluRay.x264-EXQUiSiTE","comments":"","legacy_subtitle_id":5571194,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
         Developers"},"feature_details":{"feature_id":586791,"feature_type":"Movie","year":2013,"title":"Ender''s
         Game","movie_name":"2013 - Ender''s Game","imdb_id":1731141,"tmdb_id":80274},"url":"https://www.opensubtitles.com/de/subtitles/legacy/5571194","related_links":[{"label":"All
         subtitles for ender''s game","url":"https://www.opensubtitles.com/de/movies/2013-ender-s-game","img_url":"https://s9.opensubtitles.com/features/1/9/7/586791.jpg"}],"files":[{"file_id":1023690,"cd_number":1,"file_name":"Enders.Game.Das.grosse.Spiel.German.720p.BluRay.x264-EXQUiSiTE"}]}}]}'
@@ -91,19 +109,17 @@ interactions:
       CF-Cache-Status:
       - MISS
       CF-RAY:
-      - 88a9967aa8622173-CDG
+      - 91189cbc8f145bec-LIS
       Cache-Control:
       - public, max-age=86400
       Connection:
       - keep-alive
-      Content-Encoding:
-      - br
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Mon, 27 May 2024 22:54:37 GMT
+      - Thu, 13 Feb 2025 23:31:29 GMT
       Last-Modified:
-      - Mon, 27 May 2024 22:54:37 GMT
+      - Thu, 13 Feb 2025 23:31:29 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       RateLimit-Limit:
@@ -113,7 +129,7 @@ interactions:
       RateLimit-Reset:
       - '1'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=YI9iCxul%2BiTdhl%2Fd3JpXZzC5AYqtTJrcWYYxd5JpqrmfsTySlpbYhF6ftj4YQOHthjI4%2FEWt1SSExIElV5HijQ4T07ryCwM1eWnGtTh8Kp%2BWOxQbGEgMZKHqOxrp1Ngqz31uDlX5L3E%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=Q1YvKGoYa3bHRiFwxuvgH2jVZTkIZ2YIIlENneH4NKXaMpdNjrpZ9Pz3E1fXn%2B6SVyqTe6JrpJhLljRvaYLZz8EAfwmsVRvuWWDMBsTKGhE8uUldLdxDjUeWYhDHgPh5oIdb%2FLJeqtE%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -122,8 +138,10 @@ interactions:
       - chunked
       Vary:
       - Accept-Encoding
+      Via:
+      - kong/3.3.0
       X-Cache-Backend:
-      - apigw1_8000 rb11
+      - rb12
       X-Content-Type-Options:
       - nosniff
       X-Download-Options:
@@ -131,21 +149,21 @@ interactions:
       X-Frame-Options:
       - SAMEORIGIN
       X-Kong-Proxy-Latency:
-      - '1'
+      - '0'
       X-Kong-Upstream-Latency:
-      - '28'
+      - '22'
       X-RateLimit-Limit-Second:
       - '5'
       X-RateLimit-Remaining-Second:
       - '4'
       X-Request-Id:
-      - 654b3b57-1125-4de3-bd0d-95f4de8468a2
+      - b2a95301-cf27-4d97-8179-c3f6f2111643
       X-Runtime:
-      - '0.026893'
+      - 0.019818
       X-Var-Cache:
       - MISS
       X-Via:
-      - fw1
+      - lb1
       X-Vip:
       - 'false'
       X-Vip-Consumer:
@@ -156,6 +174,10 @@ interactions:
       - 1; mode=block
       alt-svc:
       - h3=":443"; ma=86400
+      content-length:
+      - '3665'
+      server-timing:
+      - cfL4;desc="?proto=TCP&rtt=2996&min_rtt=2942&rtt_var=1211&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2856&recv_bytes=854&delivery_rate=858074&cwnd=241&unsent_bytes=0&cid=7895810d854da9af&ts=97&x=0"
     status:
       code: 200
       message: OK

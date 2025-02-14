@@ -3,40 +3,38 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
       accept:
       - application/json
     method: GET
     uri: https://api.gestdown.info/shows/search/Dallas
   response:
     body:
-      string: '{"shows":[{"id":"226d7f34-a9f5-4fe2-98d7-ecf944243714","name":"Dallas","nbSeasons":10,"seasons":[1,2,3,4,5,6,8,9,12,13],"tvDbId":77092,"tmdbId":40,"slug":"dallas"},{"id":"4e56a466-31a3-4b05-9696-671a1cd6954e","name":"Dallas
+      string: '{"shows":[{"id":"226d7f34-a9f5-4fe2-98d7-ecf944243714","name":"Dallas","nbSeasons":11,"seasons":[1,2,3,4,5,6,8,9,11,12,13],"tvDbId":77092,"tmdbId":40,"slug":"dallas"},{"id":"4e56a466-31a3-4b05-9696-671a1cd6954e","name":"Dallas
         (2012)","nbSeasons":3,"seasons":[1,2,3],"tvDbId":242521,"tmdbId":37759,"slug":"dallas-2012"}]}'
     headers:
       CF-Cache-Status:
-      - HIT
+      - MISS
       CF-RAY:
-      - 88ba5f2ffed15be4-LIS
+      - 91189a3d1a0eedf8-LHR
       Cache-Control:
       - public, max-age=14400
       Connection:
       - keep-alive
-      Content-Encoding:
-      - br
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 29 May 2024 23:47:50 GMT
+      - Thu, 13 Feb 2025 23:29:47 GMT
       Last-Modified:
-      - Wed, 29 May 2024 19:47:24 GMT
+      - Thu, 13 Feb 2025 23:29:47 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=2H%2FEJwSshEZ8CeD6VTFGq2kMF0JR2VtpMd9kmX7RB4pU4PTU0yF4WuKHZ5%2FyKEACYjWclj9H7Q8SfTB7br%2BhL1t4r%2B7umA34wz3xrDkTQR8F5%2FRWGR4xfUuRim0zqPAi4svXkg%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=yb2etjFaHp212nP5vSwRqiB4hPwTtAnwcOCHjVga0TknLga%2FCvtt9utAGQTTAzHGFSX90wv4x%2F6f4mw9SHDaEw5fhPRnZ4myZ6eIOBc8hkR3HvVEWvQ0ANn76AGBtDYcQiN1Fw%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -47,7 +45,12 @@ interactions:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
+      content-length:
+      - '321'
+      server-timing:
+      - cfL4;desc="?proto=TCP&rtt=32042&min_rtt=31978&rtt_var=12121&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2847&recv_bytes=791&delivery_rate=89121&cwnd=251&unsent_bytes=0&cid=ab76998768b8fe85&ts=94&x=0"
       vary:
+      - Accept-Encoding
       - Accept-Encoding
     status:
       code: 200

@@ -5,7 +5,7 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Accept-Language:
       - en
       Connection:
@@ -15,7 +15,7 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: POST
     uri: https://api.thetvdb.com/login
   response:
@@ -29,17 +29,17 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 22 May 2024 14:33:26 GMT
+      - Thu, 13 Feb 2025 23:30:16 GMT
       Vary:
       - Accept-Language
       Via:
-      - 1.1 735dd7fa3c296627cd805d04e3e3a3e8.cloudfront.net (CloudFront)
+      - 1.1 037815db6a622da57fe5824befbc0e0c.cloudfront.net (CloudFront)
       Www-Authenticate:
       - JWT realm=jwt auth
       X-Amz-Cf-Id:
-      - CIgzZQPrUhfZr2R4FJsNaz1lUvLoOMvyGWjQWH_4ztWAWArbK3laIw==
+      - GY4qSAB9svp70t3jxGA-EshjobsMMoTQXyWF6ozL5sAzCk1j1nl8cQ==
       X-Amz-Cf-Pop:
-      - LIS50-P1
+      - MAD51-C3
       X-Cache:
       - Error from cloudfront
       X-Powered-By:

@@ -5,17 +5,18 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Accept-Language:
       - en-US,en;q=1.0
       Connection:
       - keep-alive
       User-Agent:
-      - Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:56.0) Gecko/20100101 Firefox/56.0
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/61.0.3163.100 Safari/537.36
       X-Requested-With:
       - XMLHttpRequest
       referer:
-      - https://www.addic7ed.com//show/4010
+      - https://www.addic7ed.com/show/4010
     method: GET
     uri: https://www.addic7ed.com/ajax_loadShow.php?show=4010&season=2&langs=%7C
   response:
@@ -2123,12 +2124,10 @@ interactions:
       - no-store, no-cache, must-revalidate, post-check=0, pre-check=0
       Connection:
       - keep-alive
-      Content-Encoding:
-      - gzip
       Content-Type:
       - text/html
       Date:
-      - Sat, 01 Jun 2024 07:19:48 GMT
+      - Thu, 13 Feb 2025 23:30:17 GMT
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
       Permissions-Policy:
@@ -2140,7 +2139,7 @@ interactions:
       Server:
       - nginx
       Set-Cookie:
-      - PHPSESSID=ik61divrjst7pimfrrlgqp1bl3; path=/
+      - PHPSESSID=2se60f0ijrkkqbpo8f50rlcmj1; path=/
       Strict-Transport-Security:
       - max-age=63072000; includeSubdomains; preload
       Transfer-Encoding:
@@ -2151,6 +2150,8 @@ interactions:
       - SAMEORIGIN
       X-Powered-By:
       - PHP/5.4.16
+      content-length:
+      - '181800'
     status:
       code: 200
       message: OK

@@ -5,7 +5,7 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Accept-Language:
       - en
       Connection:
@@ -15,12 +15,12 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: POST
     uri: https://api.thetvdb.com/login
   response:
     body:
-      string: '{"token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMDksImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDA5fQ.rmGlRQEnzMycKnlMsr3EP-qtH4p94SphmDzvUCncPjzq8-f0ZhbcIs6TPMHS9mlFgxr0soBZaH7DAjkuP9B4eeTW3Jm4vRpJ8PPEyFxS-ZeO_delVccATUVD1gOf72MCYucZljOnx8GuGqyoYpVeNC_vVymjVmtr1urcHbw95NV8l1r_4eqeEEl1bnkkceELPUGEdm6N4OcPz8qF4mSnRwLEmcq59UXuvZjtOw-H7MklXObhwAGrLMybSu-E-J7EmH1tBAWT64GfvqY0d81rzgQPSSjqa88-eJ2NQSIsMrENSrQQRqgOgEMwxr7bNJTRqlQgbOiZCNZF7CN22q52sQ"}'
+      string: '{"token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDAwOTQyMTksImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzM5NDg5NDE5fQ.X8qNUk8a3GuyzlYxWzm0CoQfavWf3Bkw3VSevhhxebuiJOVuUwNHMsUUJkLeQ15731mRtsSmGOljpRiGDEVv3jg6lQKoiUzLkRVmrbK1ifRxIhjEoPYXSxjTNJs96WGBRqoOlNL1XKzJF0Ey6EAqciw5w-z1EkaLbwYz4HuHn-h3MFN85cCoY8FY3EbA2j2J8vFPhkP69tXorV0j_brX6xQTfZC-rXAAEIASX5BsReM5-mTw80K5igMiJlN3bTMolMt-4zTx_L9NYgGJfwD6muZ6j-8CRDw-I7kltX9e75f9K4aghjhTMsvNUfWCQdAJzvKcKK9qaaRIF6yXKDsepA"}'
     headers:
       Connection:
       - keep-alive
@@ -29,15 +29,15 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 22 May 2024 14:33:29 GMT
+      - Thu, 13 Feb 2025 23:30:19 GMT
       Vary:
       - Accept-Language
       Via:
-      - 1.1 07b26b5e851ab857ec87e6df0aa7882e.cloudfront.net (CloudFront)
+      - 1.1 cd792529b65c0806dd516f60fbcf5d94.cloudfront.net (CloudFront)
       X-Amz-Cf-Id:
-      - cdS0cHSfD6Ok4SseoOo0rZxzwblE9uXrVaCL6YdXWBOTVvF5xZgHsA==
+      - 4-_dPrYrDvfZ9d6Ey6dq6bUSH4fzBkSTE007pSqmQ97BK5GyZPSBDA==
       X-Amz-Cf-Pop:
-      - LIS50-P1
+      - MAD51-C3
       X-Cache:
       - Miss from cloudfront
       X-Powered-By:
@@ -53,22 +53,23 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Accept-Language:
       - en
       Authorization:
-      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMDksImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDA5fQ.rmGlRQEnzMycKnlMsr3EP-qtH4p94SphmDzvUCncPjzq8-f0ZhbcIs6TPMHS9mlFgxr0soBZaH7DAjkuP9B4eeTW3Jm4vRpJ8PPEyFxS-ZeO_delVccATUVD1gOf72MCYucZljOnx8GuGqyoYpVeNC_vVymjVmtr1urcHbw95NV8l1r_4eqeEEl1bnkkceELPUGEdm6N4OcPz8qF4mSnRwLEmcq59UXuvZjtOw-H7MklXObhwAGrLMybSu-E-J7EmH1tBAWT64GfvqY0d81rzgQPSSjqa88-eJ2NQSIsMrENSrQQRqgOgEMwxr7bNJTRqlQgbOiZCNZF7CN22q52sQ
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDAwOTQyMTksImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzM5NDg5NDE5fQ.X8qNUk8a3GuyzlYxWzm0CoQfavWf3Bkw3VSevhhxebuiJOVuUwNHMsUUJkLeQ15731mRtsSmGOljpRiGDEVv3jg6lQKoiUzLkRVmrbK1ifRxIhjEoPYXSxjTNJs96WGBRqoOlNL1XKzJF0Ey6EAqciw5w-z1EkaLbwYz4HuHn-h3MFN85cCoY8FY3EbA2j2J8vFPhkP69tXorV0j_brX6xQTfZC-rXAAEIASX5BsReM5-mTw80K5igMiJlN3bTMolMt-4zTx_L9NYgGJfwD6muZ6j-8CRDw-I7kltX9e75f9K4aghjhTMsvNUfWCQdAJzvKcKK9qaaRIF6yXKDsepA
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
     uri: https://api.thetvdb.com/search/series?name=The+Big+Bang+Theory
   response:
     body:
-      string: "{\"data\":[{\"aliases\":[\"La teoria del Big Bang\",\"\u56E7\u7537\u5927\u7206\u70B8\"],\"banner\":\"/banners/graphical/80379-g23.jpg\",\"firstAired\":\"2007-09-24\",\"id\":80379,\"image\":\"/banners/posters/80379-18.jpg\",\"network\":\"CBS\",\"overview\":\"A
+      string: "{\"data\":[{\"aliases\":[\"La teoria del Big Bang\",\"The Big Bang
+        Theory\",\"\u56E7\u7537\u5927\u7206\u70B8\"],\"banner\":\"/banners/graphical/80379-g23.jpg\",\"firstAired\":\"2007-09-24\",\"id\":80379,\"image\":\"/banners/posters/80379-18.jpg\",\"network\":\"CBS\",\"overview\":\"A
         woman who moves into an apartment across the hall from two brilliant but socially
         awkward physicists shows them how little they know about life outside of the
         laboratory.\",\"poster\":\"/banners/posters/80379-18.jpg\",\"seriesName\":\"The
@@ -79,19 +80,19 @@ interactions:
       Connection:
       - keep-alive
       Content-Length:
-      - '512'
+      - '534'
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 22 May 2024 14:33:30 GMT
+      - Thu, 13 Feb 2025 23:30:19 GMT
       Vary:
       - Accept-Language
       Via:
-      - 1.1 1a8de953aa4aaf678d8f6dfdeeea9a46.cloudfront.net (CloudFront)
+      - 1.1 508a0f3451a34ff5e6a3963c94ef304c.cloudfront.net (CloudFront)
       X-Amz-Cf-Id:
-      - d9ZyS8HAy5Sgfq5NqxABmjF8mpYFFQe6KsxNI-zJ5DelFRJ1Ya8MRA==
+      - yBQXfqxg9xSP1iYoCL4P7EykIlsS2jGIUwgOZUjwC4FZtVjCIavveA==
       X-Amz-Cf-Pop:
-      - LIS50-P1
+      - MAD51-C3
       X-Cache:
       - Miss from cloudfront
       X-Powered-By:

@@ -3,11 +3,11 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
       accept:
       - application/json
     method: GET
@@ -16,24 +16,20 @@ interactions:
     body:
       string: '"Couldn''t find show: The End of the Fucking World"'
     headers:
-      CF-Cache-Status:
-      - MISS
       CF-RAY:
-      - 88ba5f3368505be2-LIS
+      - 91189a410ca048c8-LHR
       Cache-Control:
       - public, max-age=43200
       Connection:
       - keep-alive
-      Content-Encoding:
-      - br
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 29 May 2024 23:47:51 GMT
+      - Thu, 13 Feb 2025 23:29:47 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=BEJtczcIsxzrwq3USK7pi4KJ1pr4XlCkEFLNrvpn7uaH137%2FZTopkNC7QERUAG09wnzXCEkGvTpL67p2v%2FZj5Jrix7Wv%2Fmbi30mRRpfK7pvRtDb%2FGqYazKb4kLvOJ%2FgQRhL1bQ%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=r%2FvJxkAg6QKaKKhGYUYGMqBThNJHyAW9cflS3mOEBx9lernr6giwYJn6ZMTgxHzMndX9brrH%2BN1UryXHnchqvS4hdqHusdmP7zN%2F4VCHCwMNEPNoZqWbecaUMNqGrSvdjuyOgg%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -44,7 +40,14 @@ interactions:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
+      cf-cache-status:
+      - HIT
+      content-length:
+      - '50'
+      server-timing:
+      - cfL4;desc="?proto=TCP&rtt=33519&min_rtt=32070&rtt_var=13061&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2846&recv_bytes=823&delivery_rate=90302&cwnd=250&unsent_bytes=0&cid=e8d9ba65139567e1&ts=64&x=0"
       vary:
+      - Accept-Encoding
       - Accept-Encoding
     status:
       code: 404
@@ -53,11 +56,11 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
       accept:
       - application/json
     method: GET
@@ -67,26 +70,22 @@ interactions:
       string: '{"shows":[{"id":"e789f371-ae07-4db4-b9aa-6b34e7e9e7b0","name":"The
         End of the F***ing World","nbSeasons":2,"seasons":[1,2],"tvDbId":336522,"tmdbId":74577,"slug":"the-end-of-the-fing-world"}]}'
     headers:
-      CF-Cache-Status:
-      - HIT
+      Age:
+      - '2'
       CF-RAY:
-      - 88ba5f343a5d5bee-LIS
+      - 91189a4169395be2-LIS
       Cache-Control:
       - public, max-age=14400
       Connection:
       - keep-alive
-      Content-Encoding:
-      - br
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 29 May 2024 23:47:51 GMT
-      Last-Modified:
-      - Wed, 29 May 2024 19:47:25 GMT
+      - Thu, 13 Feb 2025 23:29:47 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=MCfogFMhfP86%2FstE66lXdblQA370W301l6Vx2kbEqOCFOiTaxC2RER5TQlqg0UZJJNZWSouQuSxzmw97C3UJVVdg3odWB%2B8ZbM779T5kPkqAMolRncN7%2Frusy1hiUOY6wtOieA%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=eZ%2FV4xtdoV%2FcHQ1rAEPeHNKF8ZTC4uWyGIwkDAPq4ODZuWBZXyKAFbxiBQKuKPjLcb%2B3xwCSyotkKRC5yMro2tvaE7bq3E4XiELezIk6CMuRMd4lVvFiCo04bw%2B%2BwhYqb9sV9A%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -97,7 +96,16 @@ interactions:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
+      cf-cache-status:
+      - HIT
+      content-length:
+      - '191'
+      last-modified:
+      - Thu, 13 Feb 2025 23:29:45 GMT
+      server-timing:
+      - cfL4;desc="?proto=TCP&rtt=3136&min_rtt=2975&rtt_var=1439&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2848&recv_bytes=823&delivery_rate=678537&cwnd=183&unsent_bytes=0&cid=c2ed27014550b1ab&ts=21&x=0"
       vary:
+      - Accept-Encoding
       - Accept-Encoding
     status:
       code: 200

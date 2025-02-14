@@ -5,7 +5,7 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Accept-Language:
       - en
       Connection:
@@ -13,35 +13,31 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
     uri: https://api.themoviedb.org/3/search/movie?api_key=3dac925d5d494853ea6ef9161011fbb3&query=Man+of+Steel&language=en-US&page=1&year=2013
   response:
     body:
-      string: '{"page":1,"results":[{"adult":false,"backdrop_path":"/4oYBCR2CWtKpfkOKCzpmlE5EdxY.jpg","genre_ids":[28,12,878],"id":49521,"original_language":"en","original_title":"Man
+      string: '{"page":1,"results":[{"adult":false,"backdrop_path":"/69EFgWWPFWbRNHmQgYdSnyJ94Ge.jpg","genre_ids":[28,12,878],"id":49521,"original_language":"en","original_title":"Man
         of Steel","overview":"A young boy learns that he has extraordinary powers
         and is not of this earth. As a young man, he journeys to discover where he
         came from and what he was sent here to do. But the hero in him must emerge
         if he is to save the world from annihilation and become the symbol of hope
-        for all mankind.","popularity":95.663,"poster_path":"/dksTL9NXc3GqPBRHYHcy1aIwjS.jpg","release_date":"2013-06-12","title":"Man
-        of Steel","video":false,"vote_average":6.623,"vote_count":14763}],"total_pages":1,"total_results":1}'
+        for all mankind.","popularity":50.299,"poster_path":"/dksTL9NXc3GqPBRHYHcy1aIwjS.jpg","release_date":"2013-06-12","title":"Man
+        of Steel","video":false,"vote_average":6.629,"vote_count":15242}],"total_pages":1,"total_results":1}'
     headers:
-      Age:
-      - '554'
       Alt-Svc:
       - h3=":443"; ma=86400
       Cache-Control:
-      - public, max-age=10667
+      - public, max-age=4350
       Connection:
       - keep-alive
-      Content-Encoding:
-      - br
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Wed, 22 May 2024 14:53:58 GMT
+      - Thu, 13 Feb 2025 23:30:15 GMT
       ETag:
-      - W/"b352efba0ff7725aa8560ba00660b3ff"
+      - W/"7286b69d9653a43b9ab2fc3bc87817e4"
       Server:
       - openresty
       Transfer-Encoding:
@@ -50,19 +46,21 @@ interactions:
       - Accept-Encoding,accept-encoding
       - Origin
       Via:
-      - 1.1 d780d90e1f6b43875e14c416b368d3b6.cloudfront.net (CloudFront)
+      - 1.1 27a35654821ee52d8aa69c940ad5de7e.cloudfront.net (CloudFront)
       X-Amz-Cf-Id:
-      - OyvfvwQtXcjgc2WUAZrxbA6PCwUNhFodH-9tEMJn4CEw0uGWTumimw==
+      - JOgHgmvsL5qz6MP828RqriIrZjduLvtAAbn-m3ri-sTdMWgA9WwhIg==
       X-Amz-Cf-Pop:
       - LIS50-P1
       X-Cache:
-      - Hit from cloudfront
+      - Miss from cloudfront
+      content-length:
+      - '695'
       x-memc:
       - HIT
       x-memc-age:
-      - '16346'
+      - '20687'
       x-memc-expires:
-      - '10667'
+      - '4350'
       x-memc-key:
       - 3fed4b99e74a2821dfdba4d5bacbc98a
     status:

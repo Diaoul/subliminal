@@ -3,7 +3,7 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Connection:
       - keep-alive
       User-Agent:
@@ -18,27 +18,21 @@ interactions:
         Big Bang Theory","nbSeasons":12,"seasons":[1,2,3,4,5,6,7,8,9,10,11,12],"tvDbId":80379,"tmdbId":1418,"slug":"the-big-bang-theory"}]}'
     headers:
       Age:
-      - '476330'
-      CF-Cache-Status:
-      - HIT
+      - '85376'
       CF-RAY:
-      - 8cbfa72abce899ba-CDG
+      - 91189a693c47eeff-LHR
       Cache-Control:
       - public, max-age=14400
       Connection:
       - keep-alive
-      Content-Encoding:
-      - br
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Tue, 01 Oct 2024 21:47:45 GMT
-      Last-Modified:
-      - Wed, 25 Sep 2024 23:17:44 GMT
+      - Thu, 13 Feb 2025 23:29:54 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=PqFoTLOc1upxGpGQTM7qN3QIw4GbqcDo3%2FQmR5KO2OpMXVDDHGcvie0q1cQ5nnjTMShT7eFlPypNa4yPTtCsPsshzgp9cn5krbkkSgOtQ3tp3L9azeQpKpamW%2BgnhITabv42xw%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=te8Ssfk3ea%2BT2OB%2Bf%2BIQ%2FWKHDo4pJLv3mkL90oJUSA4s3%2BLH5DwRFLdszPwKBmKQXR5DzqTn4g5TQz34nmxqMndtZkQ6%2B9YzwpuvU7DHgqsJbwyZJ1KmYg98Pfnzh8UIh5Vs3Q%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -47,7 +41,18 @@ interactions:
       - chunked
       X-Content-Type-Options:
       - nosniff
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - HIT
+      content-length:
+      - '198'
+      last-modified:
+      - Wed, 12 Feb 2025 22:02:09 GMT
+      server-timing:
+      - cfL4;desc="?proto=TCP&rtt=32148&min_rtt=32057&rtt_var=12205&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2846&recv_bytes=797&delivery_rate=88314&cwnd=245&unsent_bytes=0&cid=f1df424a48feab88&ts=48&x=0"
       vary:
+      - Accept-Encoding
       - Accept-Encoding
     status:
       code: 200
@@ -56,7 +61,7 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Connection:
       - keep-alive
       User-Agent:
@@ -67,31 +72,29 @@ interactions:
     uri: https://api.gestdown.info/subtitles/get/91eb9278-8cf5-4ddd-9111-7f60b15958cb/7/5/fra
   response:
     body:
-      string: '{"matchingSubtitles":[{"subtitleId":"90fe1369-fa0c-4154-bd04-d3d332dec587","version":"DIMENSION","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/90fe1369-fa0c-4154-bd04-d3d332dec587","language":"French","discovered":"2022-05-30T14:51:00.621699Z","downloadCount":148}],"episode":{"season":7,"number":5,"title":"The
+      string: '{"matchingSubtitles":[{"subtitleId":"90fe1369-fa0c-4154-bd04-d3d332dec587","version":"DIMENSION","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/90fe1369-fa0c-4154-bd04-d3d332dec587","language":"French","discovered":"2022-05-30T14:51:00.621699Z","downloadCount":168}],"episode":{"season":7,"number":5,"title":"The
         Workplace Proximity","show":"The Big Bang Theory","discovered":"2022-05-30T14:51:00.621694Z"}}'
     headers:
       Age:
-      - '2604'
+      - '4'
       CF-Cache-Status:
       - HIT
       CF-RAY:
-      - 8cbfa72b7a09f850-CDG
+      - 91189a6a0d7eecfd-LHR
       Cache-Control:
       - public, max-age=7200
       Connection:
       - keep-alive
-      Content-Encoding:
-      - br
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Tue, 01 Oct 2024 21:47:45 GMT
+      - Thu, 13 Feb 2025 23:29:54 GMT
       Last-Modified:
-      - Tue, 01 Oct 2024 21:04:21 GMT
+      - Thu, 13 Feb 2025 23:29:44 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=MMavRQ8JlpHCzB0qaRgszOosQPZWd%2Bqw7sUsQQc7Q1%2F03Cd6yUuMLez4Ozqy1w%2FYL2%2Bh7CV%2FpgQW3F4CFQ6ip5BTCjgNuPAqmCFtV8OHZXj7Im6p9qTVerJPT3DviW9%2F9mjkcA%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=uzfiCdnwGbtSBm9q4KGeeeJYFiCe1slkvXWMJZxbGWy7ZaxKqz2h9YVMhgSuJUjZbBlN7YnZRP7TgU0RwqtHX9fHAGwiM6zZXJ1uJr76NclFTMhgAuONl58FmbzYEXqfSOrjuw%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -100,7 +103,14 @@ interactions:
       - chunked
       X-Content-Type-Options:
       - nosniff
+      alt-svc:
+      - h3=":443"; ma=86400
+      content-length:
+      - '463'
+      server-timing:
+      - cfL4;desc="?proto=TCP&rtt=32929&min_rtt=32899&rtt_var=12398&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2847&recv_bytes=830&delivery_rate=87381&cwnd=245&unsent_bytes=0&cid=8aaa4cf3a62f2429&ts=60&x=0"
       vary:
+      - Accept-Encoding
       - Accept-Encoding
     status:
       code: 200

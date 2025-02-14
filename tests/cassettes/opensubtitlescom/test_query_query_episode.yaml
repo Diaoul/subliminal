@@ -5,7 +5,7 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Api-Key:
       - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
       Connection:
@@ -13,7 +13,7 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Subliminal v2.1
+      - Subliminal v2.2
     method: GET
     uri: https://api.opensubtitles.com/api/v1/subtitles?episode_number=3&languages=fr&page=1&query=dallas&season_number=1
   response:
@@ -25,7 +25,7 @@ interactions:
       CF-Cache-Status:
       - MISS
       CF-RAY:
-      - 88a9965e184e216d-CDG
+      - 91189ca33e535bec-LIS
       Cache-Control:
       - public, max-age=86400
       Connection:
@@ -33,25 +33,43 @@ interactions:
       Content-Length:
       - '0'
       Date:
-      - Mon, 27 May 2024 22:54:32 GMT
+      - Thu, 13 Feb 2025 23:31:25 GMT
       Location:
       - /api/v1/subtitles?episode_number=3&languages=fr&query=dallas&season_number=1
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      RateLimit-Limit:
+      - '5'
+      RateLimit-Remaining:
+      - '4'
+      RateLimit-Reset:
+      - '1'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=TL8BZR%2BL9AG5jowD%2B5ieNEl2KKUl1%2FXiSYipzQdedyFTltitj0lobH7rcLB6vq9e5EPMv0rqc3g1sbFTsEN7ClVSFF7LJfdpqDJ4q%2FZLFDU92tDGPT1HQZ0WRqlHAP4XKdOWPDvqaPc%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=Uk4WHQNCdW9uZzTFWFxX7QztuIxDVozYSZbgJFW8k%2Bt1kWBVayMvpEw1RQr1oToy7XRuLqal1zr6IrGNKAsiZ%2BpENo8CWNAKD6LKctVxLvuitK7F7vA08Hl%2FDLzKZQI%2FA%2F5zRn0Fq4c%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
       - max-age=15552000; includeSubDomains; preload
       Vary:
       - Accept-Encoding
+      Via:
+      - kong/3.3.0
       X-Content-Type-Options:
       - nosniff
+      X-Kong-Proxy-Latency:
+      - '0'
+      X-Kong-Upstream-Latency:
+      - '1'
+      X-RateLimit-Limit-Second:
+      - '5'
+      X-RateLimit-Remaining-Second:
+      - '4'
       X-Varnish:
-      - '85258170'
+      - '19169182837'
       alt-svc:
       - h3=":443"; ma=86400
+      server-timing:
+      - cfL4;desc="?proto=TCP&rtt=3192&min_rtt=3002&rtt_var=1506&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2855&recv_bytes=921&delivery_rate=640282&cwnd=241&unsent_bytes=0&cid=c9b9bcba69e79646&ts=91&x=0"
     status:
       code: 301
       message: Moved Permanently
@@ -61,43 +79,18 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Api-Key:
       - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal v2.1
+      - Subliminal v2.2
     method: GET
     uri: https://api.opensubtitles.com/api/v1/subtitles?episode_number=3&languages=fr&query=dallas&season_number=1
   response:
     body:
-      string: "{\"total_pages\":1,\"total_count\":4,\"per_page\":60,\"page\":1,\"data\":[{\"id\":\"3359298\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"3359298\",\"language\":\"fr\",\"download_count\":938,\"new_download_count\":9,\"hearing_impaired\":false,\"hd\":true,\"fps\":23.976,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2010-10-07T03:56:07Z\",\"ai_translated\":false,\"nb_cd\":1,\"machine_translated\":false,\"release\":\"The
-        Event - 1x03 - Protect Them from the Truth.HDTV.The Event - 01x03 - Protect
-        Them From the Truth\",\"comments\":\"\",\"legacy_subtitle_id\":3870905,\"legacy_uploader_id\":1168246,\"uploader\":{\"uploader_id\":53768,\"name\":\"nicocha\",\"rank\":\"bronze
-        member\"},\"feature_details\":{\"feature_id\":271191,\"feature_type\":\"Episode\",\"year\":2010,\"title\":\"Protect
-        Them from the Truth\",\"movie_name\":\"The Event - S1E3 \\\"The Event\\\"
-        Protect Them from the Truth\",\"imdb_id\":1653551,\"tmdb_id\":769867,\"season_number\":1,\"episode_number\":3,\"parent_imdb_id\":1582459,\"parent_title\":\"The
-        Event\",\"parent_tmdb_id\":32730,\"parent_feature_id\":10757},\"url\":\"https://www.opensubtitles.com/fr/subtitles/legacy/3870905\",\"related_links\":[{\"label\":\"All
-        subtitles for Tv Show The Event\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/10757\",\"img_url\":\"https://s9.opensubtitles.com/features/1/9/1/271191.jpg\"},{\"label\":\"All
-        subtitles for Episode protect them from the truth\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/271191\"}],\"files\":[{\"file_id\":3426643,\"cd_number\":1,\"file_name\":\"The
-        Event - 1x03 - Protect Them from the Truth.HDTV.The Event - 01x03 - Protect
-        Them From the Truth\"}]}},{\"id\":\"3829531\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"3829531\",\"language\":\"fr\",\"download_count\":545,\"new_download_count\":12,\"hearing_impaired\":false,\"hd\":false,\"fps\":23.976,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2012-06-21T14:43:26Z\",\"ai_translated\":false,\"nb_cd\":1,\"machine_translated\":false,\"release\":\"Dallas
-        (2012) - 01x03 - The Price You Pay.x264-LOL.French.C.updated.Addic7ed.com\",\"comments\":\"\",\"legacy_subtitle_id\":4581134,\"legacy_uploader_id\":0,\"uploader\":{\"uploader_id\":3282,\"name\":\"os-auto\",\"rank\":\"Application
-        Developers\"},\"feature_details\":{\"feature_id\":333010,\"feature_type\":\"Episode\",\"year\":2012,\"title\":\"The
-        Price You Pay\",\"movie_name\":\"Dallas - S1E3 \\\"Dallas\\\" The Price You
-        Pay\",\"imdb_id\":2205526,\"tmdb_id\":851353,\"season_number\":1,\"episode_number\":3,\"parent_imdb_id\":1723760,\"parent_title\":\"Dallas\",\"parent_tmdb_id\":37759,\"parent_feature_id\":12129},\"url\":\"https://www.opensubtitles.com/fr/subtitles/legacy/4581134\",\"related_links\":[{\"label\":\"All
-        subtitles for Tv Show Dallas\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/12129\",\"img_url\":\"https://s9.opensubtitles.com/features/0/1/0/333010.jpg\"},{\"label\":\"All
-        subtitles for Episode the price you pay\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/333010\"}],\"files\":[{\"file_id\":3904804,\"cd_number\":1,\"file_name\":\"Dallas
-        (2012) - 01x03 - The Price You Pay.x264-LOL.French.C.updated.Addic7ed.com\"}]}},{\"id\":\"3359569\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"3359569\",\"language\":\"fr\",\"download_count\":146,\"new_download_count\":4,\"hearing_impaired\":false,\"hd\":true,\"fps\":23.976,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2012-02-27T07:35:01Z\",\"ai_translated\":false,\"nb_cd\":1,\"machine_translated\":false,\"release\":\"The
-        Event S01E03 Protect Them from the Truth 720p BluRay\",\"comments\":\"\",\"legacy_subtitle_id\":4478723,\"legacy_uploader_id\":1253306,\"uploader\":{\"uploader_id\":55203,\"name\":\"Pb8SOWOA\",\"rank\":\"bronze
-        member\"},\"feature_details\":{\"feature_id\":271191,\"feature_type\":\"Episode\",\"year\":2010,\"title\":\"Protect
-        Them from the Truth\",\"movie_name\":\"The Event - S1E3 \\\"The Event\\\"
-        Protect Them from the Truth\",\"imdb_id\":1653551,\"tmdb_id\":769867,\"season_number\":1,\"episode_number\":3,\"parent_imdb_id\":1582459,\"parent_title\":\"The
-        Event\",\"parent_tmdb_id\":32730,\"parent_feature_id\":10757},\"url\":\"https://www.opensubtitles.com/fr/subtitles/legacy/4478723\",\"related_links\":[{\"label\":\"All
-        subtitles for Tv Show The Event\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/10757\",\"img_url\":\"https://s9.opensubtitles.com/features/1/9/1/271191.jpg\"},{\"label\":\"All
-        subtitles for Episode protect them from the truth\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/271191\"}],\"files\":[{\"file_id\":3426918,\"cd_number\":1,\"file_name\":\"The
-        Event S01E03 Protect Them from the Truth 720p BluRay\"}]}},{\"id\":\"6915085\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"6915085\",\"language\":\"fr\",\"download_count\":34,\"new_download_count\":8,\"hearing_impaired\":false,\"hd\":true,\"fps\":0.0,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2022-07-05T13:19:24Z\",\"ai_translated\":false,\"nb_cd\":1,\"machine_translated\":false,\"release\":\"Space
+      string: "{\"total_pages\":1,\"total_count\":4,\"per_page\":50,\"page\":1,\"data\":[{\"id\":\"6915085\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"6915085\",\"language\":\"fr\",\"download_count\":44,\"new_download_count\":15,\"hearing_impaired\":false,\"hd\":true,\"fps\":0.0,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2022-07-05T13:19:24Z\",\"file_hashes\":[\"fe95ce64ea0cd00c\"],\"ai_translated\":false,\"nb_cd\":1,\"slug\":\"space-battleship-yamato-2199-2012-03-vostfr-bdrip-1080p-flac-x265-gundamguy\",\"machine_translated\":false,\"release\":\"Space
         Battleship Yamato 2199 (2012) - 03 VOSTFR BDrip 1080p FLAC x265-GundamGuy\",\"comments\":\"Sous-titres
         officiels \xE9diteur.\",\"legacy_subtitle_id\":9159327,\"legacy_uploader_id\":8338908,\"uploader\":{\"uploader_id\":285788,\"name\":\"sonkun02\",\"rank\":\"Platinum
         Member\"},\"feature_details\":{\"feature_id\":1388271,\"feature_type\":\"Episode\",\"year\":2012,\"title\":\"Escape
@@ -106,7 +99,31 @@ interactions:
         Blazers [Space Battleship Yamato] 2199\",\"parent_tmdb_id\":45844,\"parent_feature_id\":13449},\"url\":\"https://www.opensubtitles.com/fr/subtitles/legacy/9159327\",\"related_links\":[{\"label\":\"All
         subtitles for Tv Show Star Blazers [Space Battleship Yamato] 2199\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/13449\",\"img_url\":\"https://s9.opensubtitles.com/features/1/7/2/1388271.jpg\"},{\"label\":\"All
         subtitles for Episode escape from the jupiter sphere\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/1388271\"}],\"files\":[{\"file_id\":7869617,\"cd_number\":1,\"file_name\":\"Space
-        Battleship Yamato 2199 (2012) - 03 VOSTFR BDrip 1080p FLAC x265-GundamGuy\"}]}}]}"
+        Battleship Yamato 2199 (2012) - 03 VOSTFR BDrip 1080p FLAC x265-GundamGuy\"}]}},{\"id\":\"3829531\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"3829531\",\"language\":\"fr\",\"download_count\":683,\"new_download_count\":15,\"hearing_impaired\":false,\"hd\":false,\"fps\":23.976,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2012-06-21T16:43:26Z\",\"file_hashes\":[\"847b4f45c4eda9ee\",\"3473c8003b55fd6d\",\"ec30db211134118a\"],\"ai_translated\":false,\"nb_cd\":1,\"slug\":\"dallas-2012-01x03-the-price-you-pay-x264-lol-french-c-updated-addic7ed-com\",\"machine_translated\":false,\"release\":\"Dallas
+        (2012) - 01x03 - The Price You Pay.x264-LOL.French.C.updated.Addic7ed.com\",\"comments\":\"\",\"legacy_subtitle_id\":4581134,\"legacy_uploader_id\":0,\"uploader\":{\"uploader_id\":3282,\"name\":\"os-auto\",\"rank\":\"Application
+        Developers\"},\"feature_details\":{\"feature_id\":333010,\"feature_type\":\"Episode\",\"year\":2012,\"title\":\"The
+        Price You Pay\",\"movie_name\":\"Dallas - S01E03  The Price You Pay\",\"imdb_id\":2205526,\"tmdb_id\":851353,\"season_number\":1,\"episode_number\":3,\"parent_imdb_id\":1723760,\"parent_title\":\"Dallas\",\"parent_tmdb_id\":37759,\"parent_feature_id\":12129},\"url\":\"https://www.opensubtitles.com/fr/subtitles/legacy/4581134\",\"related_links\":[{\"label\":\"All
+        subtitles for Tv Show Dallas\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/12129\",\"img_url\":\"https://s9.opensubtitles.com/features/0/1/0/333010.jpg\"},{\"label\":\"All
+        subtitles for Episode the price you pay\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/333010\"}],\"files\":[{\"file_id\":3904804,\"cd_number\":1,\"file_name\":\"Dallas
+        (2012) - 01x03 - The Price You Pay.x264-LOL.French.C.updated.Addic7ed.com\"}]}},{\"id\":\"3359569\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"3359569\",\"language\":\"fr\",\"download_count\":216,\"new_download_count\":6,\"hearing_impaired\":false,\"hd\":true,\"fps\":23.976,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2012-02-27T08:35:01Z\",\"file_hashes\":[\"9231d615ef489f8c\"],\"ai_translated\":false,\"nb_cd\":1,\"slug\":\"the-event-s01e03-protect-them-from-the-truth-720p-bluray\",\"machine_translated\":false,\"release\":\"The
+        Event S01E03 Protect Them from the Truth 720p BluRay\",\"comments\":\"\",\"legacy_subtitle_id\":4478723,\"legacy_uploader_id\":1253306,\"uploader\":{\"uploader_id\":55203,\"name\":\"Pb8SOWOA\",\"rank\":\"bronze
+        member\"},\"feature_details\":{\"feature_id\":271191,\"feature_type\":\"Episode\",\"year\":2010,\"title\":\"Protect
+        Them from the Truth\",\"movie_name\":\"The Event - S01E03  Protect Them from
+        the Truth\",\"imdb_id\":1653551,\"tmdb_id\":769867,\"season_number\":1,\"episode_number\":3,\"parent_imdb_id\":1582459,\"parent_title\":\"The
+        Event\",\"parent_tmdb_id\":32730,\"parent_feature_id\":10757},\"url\":\"https://www.opensubtitles.com/fr/subtitles/legacy/4478723\",\"related_links\":[{\"label\":\"All
+        subtitles for Tv Show The Event\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/10757\",\"img_url\":\"https://s9.opensubtitles.com/features/1/9/1/271191.jpg\"},{\"label\":\"All
+        subtitles for Episode protect them from the truth\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/271191\"}],\"files\":[{\"file_id\":3426918,\"cd_number\":1,\"file_name\":\"The
+        Event S01E03 Protect Them from the Truth 720p BluRay\"}]}},{\"id\":\"3359298\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"3359298\",\"language\":\"fr\",\"download_count\":1238,\"new_download_count\":17,\"hearing_impaired\":false,\"hd\":true,\"fps\":23.976,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2010-10-07T05:56:07Z\",\"file_hashes\":[\"2580967d9c7d41ce\",\"4b6b5d669ca7f926\",\"f09dcaefd70d39ea\",\"86030772415f020b\"],\"ai_translated\":false,\"nb_cd\":1,\"slug\":\"the-event-1x03-protect-them-from-the-truth-hdtv-the-event-01x03-protect-them-from-the-truth\",\"machine_translated\":false,\"release\":\"The
+        Event - 1x03 - Protect Them from the Truth.HDTV.The Event - 01x03 - Protect
+        Them From the Truth\",\"comments\":\"\",\"legacy_subtitle_id\":3870905,\"legacy_uploader_id\":1168246,\"uploader\":{\"uploader_id\":53768,\"name\":\"nicocha\",\"rank\":\"bronze
+        member\"},\"feature_details\":{\"feature_id\":271191,\"feature_type\":\"Episode\",\"year\":2010,\"title\":\"Protect
+        Them from the Truth\",\"movie_name\":\"The Event - S01E03  Protect Them from
+        the Truth\",\"imdb_id\":1653551,\"tmdb_id\":769867,\"season_number\":1,\"episode_number\":3,\"parent_imdb_id\":1582459,\"parent_title\":\"The
+        Event\",\"parent_tmdb_id\":32730,\"parent_feature_id\":10757},\"url\":\"https://www.opensubtitles.com/fr/subtitles/legacy/3870905\",\"related_links\":[{\"label\":\"All
+        subtitles for Tv Show The Event\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/10757\",\"img_url\":\"https://s9.opensubtitles.com/features/1/9/1/271191.jpg\"},{\"label\":\"All
+        subtitles for Episode protect them from the truth\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/271191\"}],\"files\":[{\"file_id\":3426643,\"cd_number\":1,\"file_name\":\"The
+        Event - 1x03 - Protect Them from the Truth.HDTV.The Event - 01x03 - Protect
+        Them From the Truth\"}]}}]}"
     headers:
       Access-Control-Allow-Headers:
       - Origin, Authorization, Accept, Api-Key, Content-Type, X-User-Agent
@@ -117,29 +134,27 @@ interactions:
       CF-Cache-Status:
       - MISS
       CF-RAY:
-      - 88a9965f28fd3cfe-CDG
+      - 91189ca44aceedf8-LHR
       Cache-Control:
       - public, max-age=86400
       Connection:
       - keep-alive
-      Content-Encoding:
-      - br
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Mon, 27 May 2024 22:54:32 GMT
+      - Thu, 13 Feb 2025 23:31:25 GMT
       Last-Modified:
-      - Mon, 27 May 2024 22:54:32 GMT
+      - Thu, 13 Feb 2025 23:31:25 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       RateLimit-Limit:
       - '5'
       RateLimit-Remaining:
-      - '3'
+      - '4'
       RateLimit-Reset:
       - '1'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=ZGv5GTgmPXco%2B0gFCAvnobPV5E8fa8qMxhQYJOAQHM4pOGmpDz71BI%2B%2BLYIpogPF%2BubGwb7FqGQTeLKuQQO58Zn2jz2m7dItKTGC%2FW1jpxFA46BBlgFqj7vZrxsPE2NVOSOYr8XsZts%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=8%2FjUaDfoTyyksLEd9v9D5OZcyUY6vf%2B4YWiBwfrdavaBidC%2FvDG8HTdlM3rPzNfAaQ5cf0k7rj4gin5%2Fm3L2weI84qVec8ehxO5hgEP5xQSUQMOc8%2Bw14sX%2FHGwuYKPlWlkVJCTwoMo%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -148,8 +163,10 @@ interactions:
       - chunked
       Vary:
       - Accept-Encoding
+      Via:
+      - kong/3.3.0
       X-Cache-Backend:
-      - apigw1_8000 rb7
+      - rb13
       X-Content-Type-Options:
       - nosniff
       X-Download-Options:
@@ -159,21 +176,19 @@ interactions:
       X-Kong-Proxy-Latency:
       - '1'
       X-Kong-Upstream-Latency:
-      - '23'
+      - '24'
       X-RateLimit-Limit-Second:
       - '5'
       X-RateLimit-Remaining-Second:
-      - '3'
+      - '4'
       X-Request-Id:
-      - 862ddfc2-7a93-4d12-8ec6-7d2618a91f8c
+      - 47b3e525-b4e4-4ebf-85be-1df34cfab442
       X-Runtime:
-      - '0.021170'
-      X-StackifyID:
-      - V1|82f8b6c0-e018-4656-9416-79ef2d54d343|C98087|CD1
+      - 0.022594
       X-Var-Cache:
       - MISS
       X-Via:
-      - fw1
+      - lb1
       X-Vip:
       - 'false'
       X-Vip-Consumer:
@@ -184,6 +199,10 @@ interactions:
       - 1; mode=block
       alt-svc:
       - h3=":443"; ma=86400
+      content-length:
+      - '6635'
+      server-timing:
+      - cfL4;desc="?proto=TCP&rtt=31996&min_rtt=31982&rtt_var=12003&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2856&recv_bytes=882&delivery_rate=90550&cwnd=251&unsent_bytes=0&cid=3b00da3e0f584108&ts=101&x=0"
     status:
       code: 200
       message: OK
@@ -193,7 +212,7 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Api-Key:
       - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
       Connection:
@@ -201,7 +220,7 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Subliminal v2.1
+      - Subliminal v2.2
     method: GET
     uri: https://api.opensubtitles.com/api/v1/subtitles?episode_number=3&languages=fr&page=1&query=dallas&season_number=1
   response:
@@ -210,12 +229,10 @@ interactions:
     headers:
       Access-Control-Allow-Origin:
       - '*'
-      Age:
-      - '1'
       CF-Cache-Status:
-      - HIT
+      - MISS
       CF-RAY:
-      - 88a996605d2d2161-CDG
+      - 91189ca56ab0ef1b-LHR
       Cache-Control:
       - public, max-age=86400
       Connection:
@@ -223,25 +240,43 @@ interactions:
       Content-Length:
       - '0'
       Date:
-      - Mon, 27 May 2024 22:54:33 GMT
+      - Thu, 13 Feb 2025 23:31:25 GMT
       Location:
       - /api/v1/subtitles?episode_number=3&languages=fr&query=dallas&season_number=1
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      RateLimit-Limit:
+      - '5'
+      RateLimit-Remaining:
+      - '4'
+      RateLimit-Reset:
+      - '1'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=8tExaDdv8xUHSyGgyXE2ShEq2EP%2BCPzVuyDGLo%2BOoldkODPXJiqANcKNXhAVvhoT8RlKrLqfDs7SGppliXg8CLzovshncVtvtwdJVAnIO%2FK5fwr0ofBCy%2F%2BdsMxnGW3kc5iYj4PlJW8%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=D2wkT35LJmFTKU%2Fl1N4Z083MScdVRlIXmhRDWc5dqLaIKPfuV9FLRd50mVlWlJfQzPb2ll8GBo%2F%2BKFIoSDDvH1E%2FqJOkUomxRQCJRYGC33YZaO3kf8D6eQzOxJ4XvcyjwNUK32wnlrs%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
       - max-age=15552000; includeSubDomains; preload
       Vary:
       - Accept-Encoding
+      Via:
+      - kong/3.3.0
       X-Content-Type-Options:
       - nosniff
+      X-Kong-Proxy-Latency:
+      - '0'
+      X-Kong-Upstream-Latency:
+      - '0'
+      X-RateLimit-Limit-Second:
+      - '5'
+      X-RateLimit-Remaining-Second:
+      - '4'
       X-Varnish:
-      - '85258170'
+      - '19144512034'
       alt-svc:
       - h3=":443"; ma=86400
+      server-timing:
+      - cfL4;desc="?proto=TCP&rtt=32846&min_rtt=31884&rtt_var=12644&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2855&recv_bytes=921&delivery_rate=90829&cwnd=250&unsent_bytes=0&cid=9c2c6542f63ad85c&ts=90&x=0"
     status:
       code: 301
       message: Moved Permanently
@@ -251,43 +286,18 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Api-Key:
       - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal v2.1
+      - Subliminal v2.2
     method: GET
     uri: https://api.opensubtitles.com/api/v1/subtitles?episode_number=3&languages=fr&query=dallas&season_number=1
   response:
     body:
-      string: "{\"total_pages\":1,\"total_count\":4,\"per_page\":60,\"page\":1,\"data\":[{\"id\":\"3359298\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"3359298\",\"language\":\"fr\",\"download_count\":938,\"new_download_count\":9,\"hearing_impaired\":false,\"hd\":true,\"fps\":23.976,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2010-10-07T03:56:07Z\",\"ai_translated\":false,\"nb_cd\":1,\"machine_translated\":false,\"release\":\"The
-        Event - 1x03 - Protect Them from the Truth.HDTV.The Event - 01x03 - Protect
-        Them From the Truth\",\"comments\":\"\",\"legacy_subtitle_id\":3870905,\"legacy_uploader_id\":1168246,\"uploader\":{\"uploader_id\":53768,\"name\":\"nicocha\",\"rank\":\"bronze
-        member\"},\"feature_details\":{\"feature_id\":271191,\"feature_type\":\"Episode\",\"year\":2010,\"title\":\"Protect
-        Them from the Truth\",\"movie_name\":\"The Event - S1E3 \\\"The Event\\\"
-        Protect Them from the Truth\",\"imdb_id\":1653551,\"tmdb_id\":769867,\"season_number\":1,\"episode_number\":3,\"parent_imdb_id\":1582459,\"parent_title\":\"The
-        Event\",\"parent_tmdb_id\":32730,\"parent_feature_id\":10757},\"url\":\"https://www.opensubtitles.com/fr/subtitles/legacy/3870905\",\"related_links\":[{\"label\":\"All
-        subtitles for Tv Show The Event\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/10757\",\"img_url\":\"https://s9.opensubtitles.com/features/1/9/1/271191.jpg\"},{\"label\":\"All
-        subtitles for Episode protect them from the truth\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/271191\"}],\"files\":[{\"file_id\":3426643,\"cd_number\":1,\"file_name\":\"The
-        Event - 1x03 - Protect Them from the Truth.HDTV.The Event - 01x03 - Protect
-        Them From the Truth\"}]}},{\"id\":\"3829531\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"3829531\",\"language\":\"fr\",\"download_count\":545,\"new_download_count\":12,\"hearing_impaired\":false,\"hd\":false,\"fps\":23.976,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2012-06-21T14:43:26Z\",\"ai_translated\":false,\"nb_cd\":1,\"machine_translated\":false,\"release\":\"Dallas
-        (2012) - 01x03 - The Price You Pay.x264-LOL.French.C.updated.Addic7ed.com\",\"comments\":\"\",\"legacy_subtitle_id\":4581134,\"legacy_uploader_id\":0,\"uploader\":{\"uploader_id\":3282,\"name\":\"os-auto\",\"rank\":\"Application
-        Developers\"},\"feature_details\":{\"feature_id\":333010,\"feature_type\":\"Episode\",\"year\":2012,\"title\":\"The
-        Price You Pay\",\"movie_name\":\"Dallas - S1E3 \\\"Dallas\\\" The Price You
-        Pay\",\"imdb_id\":2205526,\"tmdb_id\":851353,\"season_number\":1,\"episode_number\":3,\"parent_imdb_id\":1723760,\"parent_title\":\"Dallas\",\"parent_tmdb_id\":37759,\"parent_feature_id\":12129},\"url\":\"https://www.opensubtitles.com/fr/subtitles/legacy/4581134\",\"related_links\":[{\"label\":\"All
-        subtitles for Tv Show Dallas\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/12129\",\"img_url\":\"https://s9.opensubtitles.com/features/0/1/0/333010.jpg\"},{\"label\":\"All
-        subtitles for Episode the price you pay\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/333010\"}],\"files\":[{\"file_id\":3904804,\"cd_number\":1,\"file_name\":\"Dallas
-        (2012) - 01x03 - The Price You Pay.x264-LOL.French.C.updated.Addic7ed.com\"}]}},{\"id\":\"3359569\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"3359569\",\"language\":\"fr\",\"download_count\":146,\"new_download_count\":4,\"hearing_impaired\":false,\"hd\":true,\"fps\":23.976,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2012-02-27T07:35:01Z\",\"ai_translated\":false,\"nb_cd\":1,\"machine_translated\":false,\"release\":\"The
-        Event S01E03 Protect Them from the Truth 720p BluRay\",\"comments\":\"\",\"legacy_subtitle_id\":4478723,\"legacy_uploader_id\":1253306,\"uploader\":{\"uploader_id\":55203,\"name\":\"Pb8SOWOA\",\"rank\":\"bronze
-        member\"},\"feature_details\":{\"feature_id\":271191,\"feature_type\":\"Episode\",\"year\":2010,\"title\":\"Protect
-        Them from the Truth\",\"movie_name\":\"The Event - S1E3 \\\"The Event\\\"
-        Protect Them from the Truth\",\"imdb_id\":1653551,\"tmdb_id\":769867,\"season_number\":1,\"episode_number\":3,\"parent_imdb_id\":1582459,\"parent_title\":\"The
-        Event\",\"parent_tmdb_id\":32730,\"parent_feature_id\":10757},\"url\":\"https://www.opensubtitles.com/fr/subtitles/legacy/4478723\",\"related_links\":[{\"label\":\"All
-        subtitles for Tv Show The Event\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/10757\",\"img_url\":\"https://s9.opensubtitles.com/features/1/9/1/271191.jpg\"},{\"label\":\"All
-        subtitles for Episode protect them from the truth\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/271191\"}],\"files\":[{\"file_id\":3426918,\"cd_number\":1,\"file_name\":\"The
-        Event S01E03 Protect Them from the Truth 720p BluRay\"}]}},{\"id\":\"6915085\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"6915085\",\"language\":\"fr\",\"download_count\":34,\"new_download_count\":8,\"hearing_impaired\":false,\"hd\":true,\"fps\":0.0,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2022-07-05T13:19:24Z\",\"ai_translated\":false,\"nb_cd\":1,\"machine_translated\":false,\"release\":\"Space
+      string: "{\"total_pages\":1,\"total_count\":4,\"per_page\":50,\"page\":1,\"data\":[{\"id\":\"6915085\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"6915085\",\"language\":\"fr\",\"download_count\":44,\"new_download_count\":15,\"hearing_impaired\":false,\"hd\":true,\"fps\":0.0,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2022-07-05T13:19:24Z\",\"file_hashes\":[\"fe95ce64ea0cd00c\"],\"ai_translated\":false,\"nb_cd\":1,\"slug\":\"space-battleship-yamato-2199-2012-03-vostfr-bdrip-1080p-flac-x265-gundamguy\",\"machine_translated\":false,\"release\":\"Space
         Battleship Yamato 2199 (2012) - 03 VOSTFR BDrip 1080p FLAC x265-GundamGuy\",\"comments\":\"Sous-titres
         officiels \xE9diteur.\",\"legacy_subtitle_id\":9159327,\"legacy_uploader_id\":8338908,\"uploader\":{\"uploader_id\":285788,\"name\":\"sonkun02\",\"rank\":\"Platinum
         Member\"},\"feature_details\":{\"feature_id\":1388271,\"feature_type\":\"Episode\",\"year\":2012,\"title\":\"Escape
@@ -296,7 +306,31 @@ interactions:
         Blazers [Space Battleship Yamato] 2199\",\"parent_tmdb_id\":45844,\"parent_feature_id\":13449},\"url\":\"https://www.opensubtitles.com/fr/subtitles/legacy/9159327\",\"related_links\":[{\"label\":\"All
         subtitles for Tv Show Star Blazers [Space Battleship Yamato] 2199\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/13449\",\"img_url\":\"https://s9.opensubtitles.com/features/1/7/2/1388271.jpg\"},{\"label\":\"All
         subtitles for Episode escape from the jupiter sphere\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/1388271\"}],\"files\":[{\"file_id\":7869617,\"cd_number\":1,\"file_name\":\"Space
-        Battleship Yamato 2199 (2012) - 03 VOSTFR BDrip 1080p FLAC x265-GundamGuy\"}]}}]}"
+        Battleship Yamato 2199 (2012) - 03 VOSTFR BDrip 1080p FLAC x265-GundamGuy\"}]}},{\"id\":\"3829531\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"3829531\",\"language\":\"fr\",\"download_count\":683,\"new_download_count\":15,\"hearing_impaired\":false,\"hd\":false,\"fps\":23.976,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2012-06-21T16:43:26Z\",\"file_hashes\":[\"847b4f45c4eda9ee\",\"3473c8003b55fd6d\",\"ec30db211134118a\"],\"ai_translated\":false,\"nb_cd\":1,\"slug\":\"dallas-2012-01x03-the-price-you-pay-x264-lol-french-c-updated-addic7ed-com\",\"machine_translated\":false,\"release\":\"Dallas
+        (2012) - 01x03 - The Price You Pay.x264-LOL.French.C.updated.Addic7ed.com\",\"comments\":\"\",\"legacy_subtitle_id\":4581134,\"legacy_uploader_id\":0,\"uploader\":{\"uploader_id\":3282,\"name\":\"os-auto\",\"rank\":\"Application
+        Developers\"},\"feature_details\":{\"feature_id\":333010,\"feature_type\":\"Episode\",\"year\":2012,\"title\":\"The
+        Price You Pay\",\"movie_name\":\"Dallas - S01E03  The Price You Pay\",\"imdb_id\":2205526,\"tmdb_id\":851353,\"season_number\":1,\"episode_number\":3,\"parent_imdb_id\":1723760,\"parent_title\":\"Dallas\",\"parent_tmdb_id\":37759,\"parent_feature_id\":12129},\"url\":\"https://www.opensubtitles.com/fr/subtitles/legacy/4581134\",\"related_links\":[{\"label\":\"All
+        subtitles for Tv Show Dallas\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/12129\",\"img_url\":\"https://s9.opensubtitles.com/features/0/1/0/333010.jpg\"},{\"label\":\"All
+        subtitles for Episode the price you pay\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/333010\"}],\"files\":[{\"file_id\":3904804,\"cd_number\":1,\"file_name\":\"Dallas
+        (2012) - 01x03 - The Price You Pay.x264-LOL.French.C.updated.Addic7ed.com\"}]}},{\"id\":\"3359569\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"3359569\",\"language\":\"fr\",\"download_count\":216,\"new_download_count\":6,\"hearing_impaired\":false,\"hd\":true,\"fps\":23.976,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2012-02-27T08:35:01Z\",\"file_hashes\":[\"9231d615ef489f8c\"],\"ai_translated\":false,\"nb_cd\":1,\"slug\":\"the-event-s01e03-protect-them-from-the-truth-720p-bluray\",\"machine_translated\":false,\"release\":\"The
+        Event S01E03 Protect Them from the Truth 720p BluRay\",\"comments\":\"\",\"legacy_subtitle_id\":4478723,\"legacy_uploader_id\":1253306,\"uploader\":{\"uploader_id\":55203,\"name\":\"Pb8SOWOA\",\"rank\":\"bronze
+        member\"},\"feature_details\":{\"feature_id\":271191,\"feature_type\":\"Episode\",\"year\":2010,\"title\":\"Protect
+        Them from the Truth\",\"movie_name\":\"The Event - S01E03  Protect Them from
+        the Truth\",\"imdb_id\":1653551,\"tmdb_id\":769867,\"season_number\":1,\"episode_number\":3,\"parent_imdb_id\":1582459,\"parent_title\":\"The
+        Event\",\"parent_tmdb_id\":32730,\"parent_feature_id\":10757},\"url\":\"https://www.opensubtitles.com/fr/subtitles/legacy/4478723\",\"related_links\":[{\"label\":\"All
+        subtitles for Tv Show The Event\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/10757\",\"img_url\":\"https://s9.opensubtitles.com/features/1/9/1/271191.jpg\"},{\"label\":\"All
+        subtitles for Episode protect them from the truth\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/271191\"}],\"files\":[{\"file_id\":3426918,\"cd_number\":1,\"file_name\":\"The
+        Event S01E03 Protect Them from the Truth 720p BluRay\"}]}},{\"id\":\"3359298\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"3359298\",\"language\":\"fr\",\"download_count\":1238,\"new_download_count\":17,\"hearing_impaired\":false,\"hd\":true,\"fps\":23.976,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2010-10-07T05:56:07Z\",\"file_hashes\":[\"2580967d9c7d41ce\",\"4b6b5d669ca7f926\",\"f09dcaefd70d39ea\",\"86030772415f020b\"],\"ai_translated\":false,\"nb_cd\":1,\"slug\":\"the-event-1x03-protect-them-from-the-truth-hdtv-the-event-01x03-protect-them-from-the-truth\",\"machine_translated\":false,\"release\":\"The
+        Event - 1x03 - Protect Them from the Truth.HDTV.The Event - 01x03 - Protect
+        Them From the Truth\",\"comments\":\"\",\"legacy_subtitle_id\":3870905,\"legacy_uploader_id\":1168246,\"uploader\":{\"uploader_id\":53768,\"name\":\"nicocha\",\"rank\":\"bronze
+        member\"},\"feature_details\":{\"feature_id\":271191,\"feature_type\":\"Episode\",\"year\":2010,\"title\":\"Protect
+        Them from the Truth\",\"movie_name\":\"The Event - S01E03  Protect Them from
+        the Truth\",\"imdb_id\":1653551,\"tmdb_id\":769867,\"season_number\":1,\"episode_number\":3,\"parent_imdb_id\":1582459,\"parent_title\":\"The
+        Event\",\"parent_tmdb_id\":32730,\"parent_feature_id\":10757},\"url\":\"https://www.opensubtitles.com/fr/subtitles/legacy/3870905\",\"related_links\":[{\"label\":\"All
+        subtitles for Tv Show The Event\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/10757\",\"img_url\":\"https://s9.opensubtitles.com/features/1/9/1/271191.jpg\"},{\"label\":\"All
+        subtitles for Episode protect them from the truth\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/271191\"}],\"files\":[{\"file_id\":3426643,\"cd_number\":1,\"file_name\":\"The
+        Event - 1x03 - Protect Them from the Truth.HDTV.The Event - 01x03 - Protect
+        Them From the Truth\"}]}}]}"
     headers:
       Access-Control-Allow-Headers:
       - Origin, Authorization, Accept, Api-Key, Content-Type, X-User-Agent
@@ -305,33 +339,31 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Age:
-      - '1'
+      - '0'
       CF-Cache-Status:
       - HIT
       CF-RAY:
-      - 88a996612c5999d9-CDG
+      - 91189ca67b77ef21-LHR
       Cache-Control:
       - public, max-age=86400
       Connection:
       - keep-alive
-      Content-Encoding:
-      - br
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Mon, 27 May 2024 22:54:33 GMT
+      - Thu, 13 Feb 2025 23:31:25 GMT
       Last-Modified:
-      - Mon, 27 May 2024 22:54:32 GMT
+      - Thu, 13 Feb 2025 23:31:25 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       RateLimit-Limit:
       - '5'
       RateLimit-Remaining:
-      - '3'
+      - '4'
       RateLimit-Reset:
       - '1'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=l7ioeSTEot9Xap%2B9MJc%2FnFpxVB1IchNrheLrRLH15%2FzOTGctui3PfGgHc7PeoEKL16OY24QpR0eNBlX%2FIz6UzbxM5%2Fq0GTJQ4xNDHZAF7x4F0TTP9DeY9bpWpeO3hpG2wv9eXwKzk8o%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=PAHfXfKSXNtNj9EfVCrI1EXqRyUzfBsa0hgHvLXyhxIVhqce036Rapym587c1x9dPvzu3FS10L9l4VBeNJFD%2FGOMCOTF5doQ48NXiygQ2Jp8AOlaTadF%2FdfY6Krt4YHyr4RqovqVUX0%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -340,8 +372,10 @@ interactions:
       - chunked
       Vary:
       - Accept-Encoding
+      Via:
+      - kong/3.3.0
       X-Cache-Backend:
-      - apigw1_8000 rb7
+      - rb13
       X-Content-Type-Options:
       - nosniff
       X-Download-Options:
@@ -351,21 +385,19 @@ interactions:
       X-Kong-Proxy-Latency:
       - '1'
       X-Kong-Upstream-Latency:
-      - '23'
+      - '24'
       X-RateLimit-Limit-Second:
       - '5'
       X-RateLimit-Remaining-Second:
-      - '3'
+      - '4'
       X-Request-Id:
-      - 862ddfc2-7a93-4d12-8ec6-7d2618a91f8c
+      - 47b3e525-b4e4-4ebf-85be-1df34cfab442
       X-Runtime:
-      - '0.021170'
-      X-StackifyID:
-      - V1|82f8b6c0-e018-4656-9416-79ef2d54d343|C98087|CD1
+      - 0.022594
       X-Var-Cache:
       - MISS
       X-Via:
-      - fw1
+      - lb1
       X-Vip:
       - 'false'
       X-Vip-Consumer:
@@ -376,6 +408,10 @@ interactions:
       - 1; mode=block
       alt-svc:
       - h3=":443"; ma=86400
+      content-length:
+      - '6635'
+      server-timing:
+      - cfL4;desc="?proto=TCP&rtt=32081&min_rtt=31986&rtt_var=12186&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2855&recv_bytes=882&delivery_rate=88424&cwnd=246&unsent_bytes=0&cid=8f87a482cffb4ec7&ts=48&x=0"
     status:
       code: 200
       message: OK

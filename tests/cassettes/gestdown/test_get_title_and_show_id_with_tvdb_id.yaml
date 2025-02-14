@@ -3,11 +3,11 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
       accept:
       - application/json
     method: GET
@@ -20,23 +20,21 @@ interactions:
       CF-Cache-Status:
       - HIT
       CF-RAY:
-      - 88ba5f32dabe5bdb-LIS
+      - 91189a3ffd2f5bd6-LIS
       Cache-Control:
       - public, max-age=14400
       Connection:
       - keep-alive
-      Content-Encoding:
-      - br
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 29 May 2024 23:47:50 GMT
+      - Thu, 13 Feb 2025 23:29:47 GMT
       Last-Modified:
-      - Sun, 26 May 2024 01:02:32 GMT
+      - Sat, 08 Feb 2025 13:32:07 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=5k%2Fl95f8%2FG%2BuaAMr016MNR3Se7P2a%2F%2BLBlR8MSUMsLHA1NKlYzWno%2Ffxygx2jeVvY6UaUPQjsV9%2F4%2BJzyQ4JtGaYak6VYcgFDVDQlHqx%2BBhFB69EDiTwa7Z7Ure4P2xHDEtfBw%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=rIFs4g4lEzDxjm5QQuqq%2FvT4TJ0Dp1pVaRElNzqQQAnj4WKKCSnn%2BaD1sF63CDHrVAUTaV3TBraeeTcjwQzszpVX8vLP9A7%2FECqZYn1%2FemPVpZw9wfQ4p7SMi6I3BdX8Fhty6w%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -47,7 +45,12 @@ interactions:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
+      content-length:
+      - '154'
+      server-timing:
+      - cfL4;desc="?proto=TCP&rtt=3858&min_rtt=3212&rtt_var=1666&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2846&recv_bytes=798&delivery_rate=901618&cwnd=226&unsent_bytes=0&cid=cdd85987a4c9d613&ts=74&x=0"
       vary:
+      - Accept-Encoding
       - Accept-Encoding
     status:
       code: 200

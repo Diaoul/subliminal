@@ -5,42 +5,42 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
     uri: https://www.omdbapi.com/?r=json&v=1&apikey=44d5b275&s=the+big+bang+theory&page=1&type=series
   response:
     body:
-      string: "{\"Search\":[{\"Title\":\"The Big Bang Theory\",\"Year\":\"2007\u20132019\",\"imdbID\":\"tt0898266\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BY2FmZTY5YTktOWRlYy00NmIyLWE0ZmQtZDg2YjlmMzczZDZiXkEyXkFqcGdeQXVyNjg4NzAyOTA@._V1_SX300.jpg\"},{\"Title\":\"The
+      string: "{\"Search\":[{\"Title\":\"The Big Bang Theory\",\"Year\":\"2007\u20132019\",\"imdbID\":\"tt0898266\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BZjgzY2QyNzItNDhhYi00ZWIwLWFjN2UtZDJkN2MxYWNjMmJjXkEyXkFqcGc@._V1_SX300.jpg\"},{\"Title\":\"The
         Big Bang Theory After Show\",\"Year\":\"2015\u2013\",\"imdbID\":\"tt5612894\",\"Type\":\"series\",\"Poster\":\"N/A\"}],\"totalResults\":\"2\",\"Response\":\"True\"}"
     headers:
       CF-Cache-Status:
       - MISS
       CF-RAY:
-      - 887d96929de0998c-CDG
+      - 91189ab4a8beef40-LHR
       Cache-Control:
       - public, max-age=86400
       Connection:
       - keep-alive
-      Content-Encoding:
-      - gzip
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 22 May 2024 14:45:08 GMT
+      - Thu, 13 Feb 2025 23:30:06 GMT
       Server:
       - cloudflare
       Transfer-Encoding:
       - chunked
       access-control-allow-origin:
       - '*'
+      content-length:
+      - '377'
       expires:
-      - Wed, 22 May 2024 15:45:08 GMT
+      - Fri, 14 Feb 2025 00:30:06 GMT
       last-modified:
-      - Wed, 22 May 2024 14:45:08 GMT
+      - Thu, 13 Feb 2025 23:30:06 GMT
       vary:
       - '*, Accept-Encoding'
       x-aspnet-version:

@@ -17,8 +17,10 @@ interactions:
       string: '{"shows":[{"id":"91eb9278-8cf5-4ddd-9111-7f60b15958cb","name":"The
         Big Bang Theory","nbSeasons":12,"seasons":[1,2,3,4,5,6,7,8,9,10,11,12],"tvDbId":80379,"tmdbId":1418,"slug":"the-big-bang-theory"}]}'
     headers:
+      Age:
+      - '85376'
       CF-RAY:
-      - 8cc04056dc0503e2-LIS
+      - 91189a6b1bfcef03-LHR
       Cache-Control:
       - public, max-age=14400
       Connection:
@@ -26,13 +28,11 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Tue, 01 Oct 2024 23:32:19 GMT
-      Last-Modified:
-      - Wed, 25 Sep 2024 23:17:44 GMT
+      - Thu, 13 Feb 2025 23:29:54 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=thf1O8MPiCVRFKowkfS8sRFiheopOAoJXqcbRde77f4QOCFa3ZUWPtqVl%2B8x666%2FFoObGaodz2WU7PW8J%2BrVk3NGryG4W9%2FB3tPO6z59PeCaKUlw0cJ7bcWbSqhHXbZ9igg0Ug%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=SeJJMrzso0OApSzXoiwnDGwGGnI0w1QwUPOl0hN2Ouq%2BhWaLjookKB3RygVfqZSd3%2B9JS5NuvGb%2FVflWl4pGTxhwVrCUaG57uoD811BNg5HPVsPN%2Fjm9R0ybOoWuOiZpTyUL1Q%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -41,11 +41,18 @@ interactions:
       - chunked
       X-Content-Type-Options:
       - nosniff
+      alt-svc:
+      - h3=":443"; ma=86400
       cf-cache-status:
       - HIT
       content-length:
       - '198'
+      last-modified:
+      - Wed, 12 Feb 2025 22:02:09 GMT
+      server-timing:
+      - cfL4;desc="?proto=TCP&rtt=32066&min_rtt=32019&rtt_var=12101&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2846&recv_bytes=797&delivery_rate=89396&cwnd=242&unsent_bytes=0&cid=524c7dabdddfbc7c&ts=49&x=0"
       vary:
+      - Accept-Encoding
       - Accept-Encoding
     status:
       code: 200
@@ -65,13 +72,13 @@ interactions:
     uri: https://api.gestdown.info/subtitles/get/91eb9278-8cf5-4ddd-9111-7f60b15958cb/7/5/eng
   response:
     body:
-      string: '{"matchingSubtitles":[{"subtitleId":"a245f3f1-920f-41f5-b9af-876a633cc8dd","version":"DIMENSION","completed":true,"hearingImpaired":true,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/a245f3f1-920f-41f5-b9af-876a633cc8dd","language":"English","discovered":"2022-05-30T14:51:00.621696Z","downloadCount":58},{"subtitleId":"a295515c-a460-44ea-9ba8-8d37bcb9b5a6","version":"DIMENSION","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/a295515c-a460-44ea-9ba8-8d37bcb9b5a6","language":"English","discovered":"2022-05-30T14:51:00.621698Z","downloadCount":65},{"subtitleId":"a00559a0-f510-4f7f-bc95-071ded7d852a","version":"WEB-DL","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/a00559a0-f510-4f7f-bc95-071ded7d852a","language":"English","discovered":"2022-05-30T14:51:00.621703Z","downloadCount":59},{"subtitleId":"c85f0280-f3c2-4558-bad6-780334ac7e21","version":"WEB-DL","completed":true,"hearingImpaired":true,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/c85f0280-f3c2-4558-bad6-780334ac7e21","language":"English","discovered":"2022-05-30T14:51:00.621705Z","downloadCount":22},{"subtitleId":"95c351b3-3889-490a-acd3-92a8067894f5","version":"BDRip.x264.DEMAND","completed":true,"hearingImpaired":false,"corrected":true,"hd":false,"downloadUri":"/subtitles/download/95c351b3-3889-490a-acd3-92a8067894f5","language":"English","discovered":"2022-05-30T14:51:00.621728Z","downloadCount":581}],"episode":{"season":7,"number":5,"title":"The
+      string: '{"matchingSubtitles":[{"subtitleId":"a245f3f1-920f-41f5-b9af-876a633cc8dd","version":"DIMENSION","completed":true,"hearingImpaired":true,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/a245f3f1-920f-41f5-b9af-876a633cc8dd","language":"English","discovered":"2022-05-30T14:51:00.621696Z","downloadCount":76},{"subtitleId":"a295515c-a460-44ea-9ba8-8d37bcb9b5a6","version":"DIMENSION","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/a295515c-a460-44ea-9ba8-8d37bcb9b5a6","language":"English","discovered":"2022-05-30T14:51:00.621698Z","downloadCount":80},{"subtitleId":"a00559a0-f510-4f7f-bc95-071ded7d852a","version":"WEB-DL","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/a00559a0-f510-4f7f-bc95-071ded7d852a","language":"English","discovered":"2022-05-30T14:51:00.621703Z","downloadCount":75},{"subtitleId":"c85f0280-f3c2-4558-bad6-780334ac7e21","version":"WEB-DL","completed":true,"hearingImpaired":true,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/c85f0280-f3c2-4558-bad6-780334ac7e21","language":"English","discovered":"2022-05-30T14:51:00.621705Z","downloadCount":23},{"subtitleId":"95c351b3-3889-490a-acd3-92a8067894f5","version":"BDRip.x264.DEMAND","completed":true,"hearingImpaired":false,"corrected":true,"hd":false,"downloadUri":"/subtitles/download/95c351b3-3889-490a-acd3-92a8067894f5","language":"English","discovered":"2022-05-30T14:51:00.621728Z","downloadCount":595}],"episode":{"season":7,"number":5,"title":"The
         Workplace Proximity","show":"The Big Bang Theory","discovered":"2022-05-30T14:51:00.621694Z"}}'
     headers:
       CF-Cache-Status:
-      - EXPIRED
+      - HIT
       CF-RAY:
-      - 8cc040577be77110-LIS
+      - 91189a6b69675bd3-LIS
       Cache-Control:
       - public, max-age=7200
       Connection:
@@ -79,13 +86,13 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Tue, 01 Oct 2024 23:32:19 GMT
+      - Thu, 13 Feb 2025 23:29:54 GMT
       Last-Modified:
-      - Tue, 01 Oct 2024 23:32:19 GMT
+      - Thu, 13 Feb 2025 23:29:48 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=ikOC12RXuapdBUGkjtuL0UrO75QK1EZ5Wm2V0TiR%2BTlSOKG5WTG9xu9TyzVY0d8VsP4dbU9%2ByV4cLgQHpqlFn9VDoYMmEsSf%2Bl9Vh53dYbW58ao05tXUIRyDinqn1yVu%2FrLSKA%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=vBEZgWfGbi4cZURHRHbnb4S3v1heeuHP%2BSSNmYxJ2CkWaUwjiPqppg0wb5HLmvrJAcSOiAgB6y61iOG%2B6qTGUYseuuWZWFTl%2BkDB1MC2lT6vBt%2FvlgBJk13%2BH%2FcOXdZRk4ZPoQ%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -94,9 +101,14 @@ interactions:
       - chunked
       X-Content-Type-Options:
       - nosniff
+      alt-svc:
+      - h3=":443"; ma=86400
       content-length:
       - '1665'
+      server-timing:
+      - cfL4;desc="?proto=TCP&rtt=3033&min_rtt=2978&rtt_var=1227&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2846&recv_bytes=830&delivery_rate=847031&cwnd=230&unsent_bytes=0&cid=bac66980049d8862&ts=62&x=0"
       vary:
+      - Accept-Encoding
       - Accept-Encoding
     status:
       code: 200
@@ -140,7 +152,7 @@ interactions:
         \"The Big Bang Theory\", \n        \"type\": \"tv-series\", \n        \"year\":
         2007\n      }, \n      \"notes\": \"\", \n      \"num_cds\": 1, \n      \"rejected\":
         null, \n      \"releases\": [], \n      \"state\": \"migration\", \n      \"stats\":
-        {\n        \"downloads\": 33320, \n        \"lines\": 348\n      }, \n      \"url\":
+        {\n        \"downloads\": 33406, \n        \"lines\": 348\n      }, \n      \"url\":
         \"/en/subtitles/en-the-big-bang-theory-2007-S07E05-O/2581\"\n    }, \n    {\n
         \     \"audited\": true, \n      \"contributions\": [\n        {\n          \"contributor\":
         {\n            \"id\": 23329, \n            \"name\": \"jane\", \n            \"type\":
@@ -164,7 +176,7 @@ interactions:
         \"The Big Bang Theory\", \n        \"type\": \"tv-series\", \n        \"year\":
         2007\n      }, \n      \"notes\": \"\", \n      \"num_cds\": 1, \n      \"rejected\":
         null, \n      \"releases\": [], \n      \"state\": \"migration\", \n      \"stats\":
-        {\n        \"downloads\": 47114, \n        \"lines\": 335\n      }, \n      \"url\":
+        {\n        \"downloads\": 47210, \n        \"lines\": 335\n      }, \n      \"url\":
         \"/en/subtitles/en-the-big-bang-theory-2007-S07E05-O/w581\"\n    }, \n    {\n
         \     \"audited\": true, \n      \"contributions\": [\n        {\n          \"contributor\":
         {\n            \"id\": 1, \n            \"name\": \"Anonymous\", \n            \"type\":
@@ -190,7 +202,7 @@ interactions:
         \"The Big Bang Theory\", \n        \"type\": \"tv-series\", \n        \"year\":
         2007\n      }, \n      \"notes\": \"\", \n      \"num_cds\": 1, \n      \"rejected\":
         null, \n      \"releases\": [], \n      \"state\": \"migration\", \n      \"stats\":
-        {\n        \"downloads\": 40660, \n        \"lines\": 347\n      }, \n      \"url\":
+        {\n        \"downloads\": 40702, \n        \"lines\": 347\n      }, \n      \"url\":
         \"/en/subtitles/en-the-big-bang-theory-2007-S07E05-O/ftUo\"\n    }, \n    {\n
         \     \"audited\": true, \n      \"contributions\": [\n        {\n          \"contributor\":
         {\n            \"id\": 44181, \n            \"name\": \"grzesiek11\", \n            \"type\":
@@ -216,7 +228,7 @@ interactions:
         \"The Big Bang Theory\", \n        \"type\": \"tv-series\", \n        \"year\":
         2007\n      }, \n      \"notes\": \"\", \n      \"num_cds\": 1, \n      \"rejected\":
         null, \n      \"releases\": [], \n      \"state\": \"migration\", \n      \"stats\":
-        {\n        \"downloads\": 67502, \n        \"lines\": 430\n      }, \n      \"url\":
+        {\n        \"downloads\": 67629, \n        \"lines\": 430\n      }, \n      \"url\":
         \"/en/subtitles/en-the-big-bang-theory-2007-S07E05-O/EdQo\"\n    }, \n    {\n
         \     \"audited\": true, \n      \"contributions\": [\n        {\n          \"contributor\":
         {\n            \"id\": 1, \n            \"name\": \"Anonymous\", \n            \"type\":
@@ -243,7 +255,7 @@ interactions:
         \"The Big Bang Theory\", \n        \"type\": \"tv-series\", \n        \"year\":
         2007\n      }, \n      \"notes\": \"\", \n      \"num_cds\": 1, \n      \"rejected\":
         null, \n      \"releases\": [], \n      \"state\": \"migration\", \n      \"stats\":
-        {\n        \"downloads\": 39684, \n        \"lines\": 439\n      }, \n      \"url\":
+        {\n        \"downloads\": 39722, \n        \"lines\": 439\n      }, \n      \"url\":
         \"/en/subtitles/en-the-big-bang-theory-2007-S07E05-O/WNMo\"\n    }\n  ], \n
         \ \"page\": 1, \n  \"per_page\": 50, \n  \"status\": \"ok\"\n}"
     headers:
@@ -254,7 +266,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 01 Oct 2024 23:32:20 GMT
+      - Thu, 13 Feb 2025 23:29:55 GMT
       Server:
       - nginx
     status:
@@ -285,7 +297,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 01 Oct 2024 23:32:21 GMT
+      - Thu, 13 Feb 2025 23:29:55 GMT
       Server:
       - nginx
     status:
@@ -538,7 +550,7 @@ interactions:
       Content-Type:
       - application/octet-stream
       Date:
-      - Tue, 01 Oct 2024 23:32:22 GMT
+      - Thu, 13 Feb 2025 23:29:56 GMT
       ETag:
       - '"5260cbd7-308b"'
       Last-Modified:

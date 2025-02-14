@@ -3,11 +3,11 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
       accept:
       - application/json
     method: GET
@@ -18,27 +18,21 @@ interactions:
         Big Bang Theory","nbSeasons":12,"seasons":[1,2,3,4,5,6,7,8,9,10,11,12],"tvDbId":80379,"tmdbId":1418,"slug":"the-big-bang-theory"}]}'
     headers:
       Age:
-      - '109'
-      CF-Cache-Status:
-      - HIT
+      - '3'
       CF-RAY:
-      - 88ba5f3599805bd3-LIS
+      - 91189a4298445bd6-LIS
       Cache-Control:
       - public, max-age=14400
       Connection:
       - keep-alive
-      Content-Encoding:
-      - br
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 29 May 2024 23:47:51 GMT
-      Last-Modified:
-      - Thu, 23 May 2024 00:34:46 GMT
+      - Thu, 13 Feb 2025 23:29:47 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=lQ58yX1nf3%2FwYuuDwEyyosX1tuGyPDrQWf0dUsnvZPvnTElr6abc6IFH0eEHCLFM9R2yaVXLAkEeOqbtnVlNyrdBaFOtCSLO56kJXcg7DY%2FjTd9MF8%2BIZbtRGqxweXw1qDZgwA%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=Q4T%2BmDBH4rL4q7Hq8ZUTNusDEB9dAFy0V5euKiXTkm4b%2FKsoSYYdsS0q0fkbss9K7LOYZ8Crhiwsi3boxlMOfSQ6AFqNYDK%2BrQ6%2BCtnOPC5cVFMfRKhyCU44yw7D9Nmh8qiquw%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -49,7 +43,16 @@ interactions:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
+      cf-cache-status:
+      - HIT
+      content-length:
+      - '198'
+      last-modified:
+      - Wed, 12 Feb 2025 22:02:09 GMT
+      server-timing:
+      - cfL4;desc="?proto=TCP&rtt=2813&min_rtt=1527&rtt_var=1491&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2846&recv_bytes=797&delivery_rate=1896529&cwnd=226&unsent_bytes=0&cid=23f21f319ade5eb1&ts=21&x=0"
       vary:
+      - Accept-Encoding
       - Accept-Encoding
     status:
       code: 200
@@ -58,40 +61,38 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
       accept:
       - application/json
     method: GET
     uri: https://api.gestdown.info/subtitles/get/91eb9278-8cf5-4ddd-9111-7f60b15958cb/7/5/eng
   response:
     body:
-      string: '{"matchingSubtitles":[{"subtitleId":"a245f3f1-920f-41f5-b9af-876a633cc8dd","version":"DIMENSION","completed":true,"hearingImpaired":true,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/a245f3f1-920f-41f5-b9af-876a633cc8dd","language":"English","discovered":"2022-05-30T14:51:00.621696Z","downloadCount":45},{"subtitleId":"a295515c-a460-44ea-9ba8-8d37bcb9b5a6","version":"DIMENSION","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/a295515c-a460-44ea-9ba8-8d37bcb9b5a6","language":"English","discovered":"2022-05-30T14:51:00.621698Z","downloadCount":50},{"subtitleId":"a00559a0-f510-4f7f-bc95-071ded7d852a","version":"WEB-DL","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/a00559a0-f510-4f7f-bc95-071ded7d852a","language":"English","discovered":"2022-05-30T14:51:00.621703Z","downloadCount":48},{"subtitleId":"c85f0280-f3c2-4558-bad6-780334ac7e21","version":"WEB-DL","completed":true,"hearingImpaired":true,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/c85f0280-f3c2-4558-bad6-780334ac7e21","language":"English","discovered":"2022-05-30T14:51:00.621705Z","downloadCount":11},{"subtitleId":"95c351b3-3889-490a-acd3-92a8067894f5","version":"BDRip.x264.DEMAND","completed":true,"hearingImpaired":false,"corrected":true,"hd":false,"downloadUri":"/subtitles/download/95c351b3-3889-490a-acd3-92a8067894f5","language":"English","discovered":"2022-05-30T14:51:00.621728Z","downloadCount":548}],"episode":{"season":7,"number":5,"title":"The
+      string: '{"matchingSubtitles":[{"subtitleId":"a245f3f1-920f-41f5-b9af-876a633cc8dd","version":"DIMENSION","completed":true,"hearingImpaired":true,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/a245f3f1-920f-41f5-b9af-876a633cc8dd","language":"English","discovered":"2022-05-30T14:51:00.621696Z","downloadCount":76},{"subtitleId":"a295515c-a460-44ea-9ba8-8d37bcb9b5a6","version":"DIMENSION","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/a295515c-a460-44ea-9ba8-8d37bcb9b5a6","language":"English","discovered":"2022-05-30T14:51:00.621698Z","downloadCount":80},{"subtitleId":"a00559a0-f510-4f7f-bc95-071ded7d852a","version":"WEB-DL","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/a00559a0-f510-4f7f-bc95-071ded7d852a","language":"English","discovered":"2022-05-30T14:51:00.621703Z","downloadCount":75},{"subtitleId":"c85f0280-f3c2-4558-bad6-780334ac7e21","version":"WEB-DL","completed":true,"hearingImpaired":true,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/c85f0280-f3c2-4558-bad6-780334ac7e21","language":"English","discovered":"2022-05-30T14:51:00.621705Z","downloadCount":23},{"subtitleId":"95c351b3-3889-490a-acd3-92a8067894f5","version":"BDRip.x264.DEMAND","completed":true,"hearingImpaired":false,"corrected":true,"hd":false,"downloadUri":"/subtitles/download/95c351b3-3889-490a-acd3-92a8067894f5","language":"English","discovered":"2022-05-30T14:51:00.621728Z","downloadCount":595}],"episode":{"season":7,"number":5,"title":"The
         Workplace Proximity","show":"The Big Bang Theory","discovered":"2022-05-30T14:51:00.621694Z"}}'
     headers:
       CF-Cache-Status:
-      - HIT
+      - EXPIRED
       CF-RAY:
-      - 88ba5f35ed925bd8-LIS
+      - 91189a433917ef0d-LHR
       Cache-Control:
       - public, max-age=7200
       Connection:
       - keep-alive
-      Content-Encoding:
-      - br
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 29 May 2024 23:47:51 GMT
+      - Thu, 13 Feb 2025 23:29:48 GMT
       Last-Modified:
-      - Wed, 29 May 2024 23:44:22 GMT
+      - Thu, 13 Feb 2025 23:29:48 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=BsCQ27bN%2FmmjMAeJwsgWLuzu2ZrcbqtI6sosCy8ZZIOXUMhHwI%2FbHm0UefsaDq%2FNLk5ZBQodjnssSqTtVQ6SXaq7ZXzKnXNXYrx08tbULh6BFs%2BQ6a3O8lGi1jHkjIlTZud8pw%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=mFaaQn3HI99KjcPrGFyduGhAUb%2FXZGEFGoTMsuRIYgGvqVtjcJPvQHRXlypAvRUb3H8qi%2Btdne8%2Bvjptw1NDV7Ab5M0hj4iEgtJHKuciAExFU5w4roqILu87K4bI8tDvmEsmwg%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -102,7 +103,12 @@ interactions:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
+      content-length:
+      - '1665'
+      server-timing:
+      - cfL4;desc="?proto=TCP&rtt=32988&min_rtt=32817&rtt_var=12429&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2847&recv_bytes=830&delivery_rate=88246&cwnd=244&unsent_bytes=0&cid=a218b50832fceeea&ts=91&x=0"
       vary:
+      - Accept-Encoding
       - Accept-Encoding
     status:
       code: 200

@@ -9,68 +9,72 @@ interactions:
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
-    uri: https://www.podnapisi.net/subtitles/search/advanced?keywords=Man+of+Steel&movie_type=movie&language=fr&year=2013
+    uri: https://www.podnapisi.net/subtitles/search/advanced?keywords=Man+of+Steel&language=fr&movie_type=movie&year=2013
   response:
     body:
-      string: !!python/unicode "{\n  \"all_pages\": 1, \n  \"data\": [\n    {\n  \
-        \    \"audited\": false, \n      \"contributions\": [], \n      \"contributor\"\
-        : {\n        \"id\": 1, \n        \"name\": \"Anonymous\", \n        \"type\"\
-        : \"user\"\n      }, \n      \"created\": \"2013-10-17T07:38:07+00:00\", \n\
-        \      \"custom_releases\": [\n        \"Man.Of.Steel.2013.BDRip.x264-Larceny\"\
-        \n      ], \n      \"download\": \"/en/subtitles/fr-man-of-steel-2013/GMso/download\"\
-        , \n      \"flags\": [\n        \"high_definition\"\n      ], \n      \"fps\"\
-        : \"\", \n      \"id\": \"GMso\", \n      \"language\": \"fr\", \n      \"\
-        movie\": {\n        \"aliases\": [], \n        \"episode_info\": null, \n\
-        \        \"id\": \"WIk\", \n        \"posters\": {\n          \"inline\":\
-        \ \"/thumbnails/moviedb/inline/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        , \n          \"normal\": \"/thumbnails/moviedb/normal/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        , \n          \"small\": \"/thumbnails/moviedb/small/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        , \n          \"title\": \"/thumbnails/moviedb/title/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        \n        }, \n        \"providers\": [\n          \"omdb:_ngG\"\n       \
-        \ ], \n        \"slug\": \"man-of-steel-2013\", \n        \"title\": \"Man\
-        \ of Steel\", \n        \"type\": \"movie\", \n        \"year\": 2013\n  \
-        \    }, \n      \"notes\": null, \n      \"num_cds\": 1, \n      \"rejected\"\
-        : null, \n      \"releases\": [], \n      \"state\": \"\", \n      \"stats\"\
-        : {\n        \"characters\": 40130, \n        \"characters_per_line\": 27.561813186813186,\
-        \ \n        \"downloads\": 8242, \n        \"lines\": 1456, \n        \"lines_per_unit\"\
-        : 1.4887525562372188, \n        \"parts\": 1, \n        \"units\": 978\n \
-        \     }, \n      \"url\": \"/en/subtitles/fr-man-of-steel-2013/GMso\"\n  \
-        \  }, \n    {\n      \"audited\": false, \n      \"contributions\": [], \n\
-        \      \"contributor\": {\n        \"id\": 1, \n        \"name\": \"Anonymous\"\
-        , \n        \"type\": \"user\"\n      }, \n      \"created\": \"2013-07-26T07:10:34+00:00\"\
-        , \n      \"custom_releases\": [\n        \"Man.Of.Steel.2013.TS.XviD-JUSTiCE\"\
-        , \n        \"Man.of.Steel.2013.720p.R6.LiNE.x264.AAC-DiGiTAL\"\n      ],\
-        \ \n      \"download\": \"/en/subtitles/fr-man-of-steel-2013/d_Im/download\"\
-        , \n      \"flags\": [], \n      \"fps\": \"\", \n      \"id\": \"d_Im\",\
-        \ \n      \"language\": \"fr\", \n      \"movie\": {\n        \"aliases\"\
-        : [], \n        \"episode_info\": null, \n        \"id\": \"WIk\", \n    \
-        \    \"posters\": {\n          \"inline\": \"/thumbnails/moviedb/inline/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        , \n          \"normal\": \"/thumbnails/moviedb/normal/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        , \n          \"small\": \"/thumbnails/moviedb/small/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        , \n          \"title\": \"/thumbnails/moviedb/title/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        \n        }, \n        \"providers\": [\n          \"omdb:_ngG\"\n       \
-        \ ], \n        \"slug\": \"man-of-steel-2013\", \n        \"title\": \"Man\
-        \ of Steel\", \n        \"type\": \"movie\", \n        \"year\": 2013\n  \
-        \    }, \n      \"notes\": null, \n      \"num_cds\": 1, \n      \"rejected\"\
-        : null, \n      \"releases\": [], \n      \"state\": \"\", \n      \"stats\"\
-        : {\n        \"characters\": 40131, \n        \"characters_per_line\": 27.5625,\
-        \ \n        \"downloads\": 4968, \n        \"lines\": 1456, \n        \"lines_per_unit\"\
-        : 1.4872318692543411, \n        \"parts\": 1, \n        \"units\": 979\n \
-        \     }, \n      \"url\": \"/en/subtitles/fr-man-of-steel-2013/d_Im\"\n  \
-        \  }\n  ], \n  \"page\": 1, \n  \"per_page\": 50, \n  \"status\": \"ok\"\n\
-        }"
+      string: "{\n  \"all_pages\": 1, \n  \"data\": [\n    {\n      \"audited\": false,
+        \n      \"contributions\": [], \n      \"contributor\": {\n        \"id\":
+        1, \n        \"name\": \"Anonymous\", \n        \"type\": \"user\"\n      },
+        \n      \"created\": \"2013-10-17T07:38:07+00:00\", \n      \"custom_releases\":
+        [\n        \"Man.Of.Steel.2013.BDRip.x264-Larceny\"\n      ], \n      \"download\":
+        \"/en/subtitles/fr-man-of-steel-2013/GMso/download\", \n      \"flags\": [\n
+        \       \"high_definition\"\n      ], \n      \"fps\": \"\", \n      \"id\":
+        \"GMso\", \n      \"language\": \"fr\", \n      \"movie\": {\n        \"aliases\":
+        [\n          \"\\u010covjek od \\u010delika\", \n          \"L'uomo d'acciaio\",
+        \n          \"Jekleni mo\\u017e\", \n          \"El hombre de acero\", \n
+        \         \"\\u010covek od \\u010delika\"\n        ], \n        \"episode_info\":
+        null, \n        \"id\": \"WIk\", \n        \"posters\": {\n          \"inline\":
+        \"/thumbnails/moviedb/inline/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\",
+        \n          \"normal\": \"/thumbnails/moviedb/normal/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\",
+        \n          \"small\": \"/thumbnails/moviedb/small/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\",
+        \n          \"title\": \"/thumbnails/moviedb/title/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\n
+        \       }, \n        \"providers\": [\n          \"imdb:0770828\", \n          \"omdb:_ngG\"\n
+        \       ], \n        \"slug\": \"man-of-steel-2013\", \n        \"title\":
+        \"Man of Steel\", \n        \"type\": \"movie\", \n        \"year\": 2013\n
+        \     }, \n      \"notes\": null, \n      \"num_cds\": 1, \n      \"rejected\":
+        null, \n      \"releases\": [], \n      \"state\": \"\", \n      \"stats\":
+        {\n        \"characters\": 40130, \n        \"characters_per_line\": 27.561813186813186,
+        \n        \"downloads\": 9138, \n        \"lines\": 1456, \n        \"lines_per_unit\":
+        1.4887525562372188, \n        \"parts\": 1, \n        \"units\": 978\n      },
+        \n      \"url\": \"/en/subtitles/fr-man-of-steel-2013/GMso\"\n    }, \n    {\n
+        \     \"audited\": false, \n      \"contributions\": [], \n      \"contributor\":
+        {\n        \"id\": 1, \n        \"name\": \"Anonymous\", \n        \"type\":
+        \"user\"\n      }, \n      \"created\": \"2013-07-26T07:10:34+00:00\", \n
+        \     \"custom_releases\": [\n        \"Man.Of.Steel.2013.TS.XviD-JUSTiCE\",
+        \n        \"Man.of.Steel.2013.720p.R6.LiNE.x264.AAC-DiGiTAL\"\n      ], \n
+        \     \"download\": \"/en/subtitles/fr-man-of-steel-2013/d_Im/download\",
+        \n      \"flags\": [], \n      \"fps\": \"\", \n      \"id\": \"d_Im\", \n
+        \     \"language\": \"fr\", \n      \"movie\": {\n        \"aliases\": [\n
+        \         \"\\u010covjek od \\u010delika\", \n          \"L'uomo d'acciaio\",
+        \n          \"Jekleni mo\\u017e\", \n          \"El hombre de acero\", \n
+        \         \"\\u010covek od \\u010delika\"\n        ], \n        \"episode_info\":
+        null, \n        \"id\": \"WIk\", \n        \"posters\": {\n          \"inline\":
+        \"/thumbnails/moviedb/inline/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\",
+        \n          \"normal\": \"/thumbnails/moviedb/normal/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\",
+        \n          \"small\": \"/thumbnails/moviedb/small/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\",
+        \n          \"title\": \"/thumbnails/moviedb/title/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\n
+        \       }, \n        \"providers\": [\n          \"imdb:0770828\", \n          \"omdb:_ngG\"\n
+        \       ], \n        \"slug\": \"man-of-steel-2013\", \n        \"title\":
+        \"Man of Steel\", \n        \"type\": \"movie\", \n        \"year\": 2013\n
+        \     }, \n      \"notes\": null, \n      \"num_cds\": 1, \n      \"rejected\":
+        null, \n      \"releases\": [], \n      \"state\": \"\", \n      \"stats\":
+        {\n        \"characters\": 40131, \n        \"characters_per_line\": 27.5625,
+        \n        \"downloads\": 5171, \n        \"lines\": 1456, \n        \"lines_per_unit\":
+        1.4872318692543411, \n        \"parts\": 1, \n        \"units\": 979\n      },
+        \n      \"url\": \"/en/subtitles/fr-man-of-steel-2013/d_Im\"\n    }\n  ],
+        \n  \"page\": 1, \n  \"per_page\": 50, \n  \"status\": \"ok\"\n}"
     headers:
-      connection:
+      Connection:
       - keep-alive
-      content-length:
-      - '3311'
-      content-type:
+      Content-Length:
+      - '3731'
+      Content-Type:
       - application/json
-      date:
-      - Sat, 09 May 2020 10:24:41 GMT
-      server:
+      Date:
+      - Thu, 13 Feb 2025 23:31:35 GMT
+      Server:
       - nginx
     status:
       code: 200
@@ -85,352 +89,334 @@ interactions:
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
-    uri: https://www.podnapisi.net/subtitles/search/advanced?keywords=Man+of+Steel&movie_type=movie&language=en&year=2013
+    uri: https://www.podnapisi.net/subtitles/search/advanced?keywords=Man+of+Steel&language=en&movie_type=movie&year=2013
   response:
     body:
-      string: !!python/unicode "{\n  \"all_pages\": 1, \n  \"data\": [\n    {\n  \
-        \    \"audited\": true, \n      \"contributions\": [], \n      \"contributor\"\
-        : {\n        \"id\": 41840, \n        \"name\": \"gilraen\", \n        \"\
-        type\": \"user\"\n      }, \n      \"created\": \"2013-11-21T06:29:19+00:00\"\
-        , \n      \"custom_releases\": [\n        \"Man.Of.Steel.2013.EXTRAS.BONUS.DISC.720p.BluRay.DTS.x264-PublicHD:\"\
-        , \n        \"publichd.EXTRAS.Journey.Of.Discovery.Creating.Man.Of.Steel.720p\"\
-        , \n        \"publichd.EXTRAS.Planet.Krypton.720p\"\n      ], \n      \"download\"\
-        : \"/en/subtitles/en-man-of-steel-2013/WMgp/download\", \n      \"flags\"\
-        : [\n        \"hearing_impaired\", \n        \"high_definition\"\n      ],\
-        \ \n      \"fps\": \"23.976\", \n      \"id\": \"WMgp\", \n      \"language\"\
-        : \"en\", \n      \"movie\": {\n        \"aliases\": [\n          \"\\u010covjek\
-        \ od \\u010delika\", \n          \"L'uomo d'acciaio\", \n          \"Jekleni\
-        \ mo\\u017e\", \n          \"El hombre de acero\", \n          \"\\u010covek\
-        \ od \\u010delika\"\n        ], \n        \"episode_info\": null, \n     \
-        \   \"id\": \"WIk\", \n        \"posters\": {\n          \"inline\": \"/thumbnails/moviedb/inline/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        , \n          \"normal\": \"/thumbnails/moviedb/normal/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        , \n          \"small\": \"/thumbnails/moviedb/small/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        , \n          \"title\": \"/thumbnails/moviedb/title/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        \n        }, \n        \"providers\": [\n          \"imdb:0770828\", \n  \
-        \        \"omdb:_ngG\"\n        ], \n        \"slug\": \"man-of-steel-2013\"\
-        , \n        \"title\": \"Man of Steel\", \n        \"type\": \"movie\", \n\
-        \        \"year\": 2013\n      }, \n      \"notes\": \"Journey of Discovery\
-        \ Creating Man of Steel<br />\\r\\nPlanet Krypton<br />\\r\\n\", \n      \"\
-        num_cds\": 2, \n      \"rejected\": null, \n      \"releases\": [], \n   \
-        \   \"state\": \"\", \n      \"stats\": {\n        \"characters\": 133030,\
-        \ \n        \"characters_per_line\": 29.76062639821029, \n        \"downloads\"\
-        : 20276, \n        \"lines\": 4470, \n        \"lines_per_unit\": 1.6494464944649447,\
-        \ \n        \"parts\": 2, \n        \"units\": 2710\n      }, \n      \"url\"\
-        : \"/en/subtitles/en-man-of-steel-2013/WMgp\"\n    }, \n    {\n      \"audited\"\
-        : true, \n      \"contributions\": [], \n      \"contributor\": {\n      \
-        \  \"id\": 41840, \n        \"name\": \"gilraen\", \n        \"type\": \"\
-        user\"\n      }, \n      \"created\": \"2013-10-22T06:35:44+00:00\", \n  \
-        \    \"custom_releases\": [\n        \"publichd.EXTRAS\"\n      ], \n    \
-        \  \"download\": \"/en/subtitles/en-man-of-steel-2013/MOko/download\", \n\
-        \      \"flags\": [\n        \"high_definition\"\n      ], \n      \"fps\"\
-        : \"\", \n      \"id\": \"MOko\", \n      \"language\": \"en\", \n      \"\
-        movie\": {\n        \"aliases\": [\n          \"\\u010covjek od \\u010delika\"\
-        , \n          \"L'uomo d'acciaio\", \n          \"Jekleni mo\\u017e\", \n\
-        \          \"El hombre de acero\", \n          \"\\u010covek od \\u010delika\"\
-        \n        ], \n        \"episode_info\": null, \n        \"id\": \"WIk\",\
-        \ \n        \"posters\": {\n          \"inline\": \"/thumbnails/moviedb/inline/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        , \n          \"normal\": \"/thumbnails/moviedb/normal/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        , \n          \"small\": \"/thumbnails/moviedb/small/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        , \n          \"title\": \"/thumbnails/moviedb/title/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        \n        }, \n        \"providers\": [\n          \"imdb:0770828\", \n  \
-        \        \"omdb:_ngG\"\n        ], \n        \"slug\": \"man-of-steel-2013\"\
-        , \n        \"title\": \"Man of Steel\", \n        \"type\": \"movie\", \n\
-        \        \"year\": 2013\n      }, \n      \"notes\": \"Retail...<br />\\r\\\
-        npublichd.EXTRAS.All.Out.Actions.720p,<br />\\r\\npublichd.EXTRAS.Krypton.Decoded.720p<br\
-        \ />\\r\\npublichd.EXTRAS.Small.Characters.Legendary.Role\", \n      \"num_cds\"\
-        : 3, \n      \"rejected\": null, \n      \"releases\": [], \n      \"state\"\
-        : \"\", \n      \"stats\": {\n        \"characters\": 55050, \n        \"\
-        characters_per_line\": 31.839213418160785, \n        \"downloads\": 17114,\
-        \ \n        \"lines\": 1729, \n        \"lines_per_unit\": 1.7221115537848606,\
-        \ \n        \"parts\": 3, \n        \"units\": 1004\n      }, \n      \"url\"\
-        : \"/en/subtitles/en-man-of-steel-2013/MOko\"\n    }, \n    {\n      \"audited\"\
-        : true, \n      \"contributions\": [], \n      \"contributor\": {\n      \
-        \  \"id\": 144401, \n        \"name\": \"flax\", \n        \"type\": \"user\"\
-        \n      }, \n      \"created\": \"2013-10-15T23:01:51+00:00\", \n      \"\
-        custom_releases\": [\n        \"Man.Of.Steel.2013.720p.BRRip.x264.AAC-ViSiON\"\
-        , \n        \"Man.Of.Steel.2013.720p.BluRay.x264-Felony.[PublicHD].\", \n\
-        \        \"Man.Of.Steel.2013.1080p.BluRay.x264-SECTOR7.\", \n        \"Man.Of.Steel.2013.720p.BRRip.x264.AC3-UNDERCOVER.\"\
-        , \n        \"Man.Of.Steel.2013.BDRip.XviD.MP3-RARBG.\", \n        \"Man.Of.Steel.(2013).BDRip.600MB.Ganool.\"\
-        , \n        \"Man.of.Steel.2013.BDRip.x264.700MB-Micromkv.\", \n        \"\
-        Man.Of.Steel.2013.BRRip.AAC.x264-SSDD.\", \n        \"Man.Of.Steel.2013.BDRip.x264-Larceny.\"\
-        , \n        \"Man.Of.Steel.2013.BDRiP.XViD-NoGRP.\", \n        \"Man.Of.Steel.2013.720p.BRRip.x264.AC3-EVO.\"\
-        , \n        \"Man.of.Steel.2013.720p.BRRip.h264.AAC-RARBG.\", \n        \"\
-        Man.Of.Steel.[2013].BRRip.XviD-ETRG.\", \n        \"Man.of.Steel.[2013].BRRip.XViD.[AC3]-ETRG.\"\
-        , \n        \"Man.Of.Steel.2013.BRRiP.XVID.AC3-MAJESTIC.\", \n        \"Man.of.steel.2013.BRRip.XviD.AC3-RARBG.\"\
-        , \n        \"Man.Of.Steel.2013.720p.BRRip.x264.AC3-SUPERM4N.\", \n      \
-        \  \"Man.Of.Steel.2013.720p.BRRip.XviD.AC3-ViSiON\"\n      ], \n      \"download\"\
-        : \"/en/subtitles/en-man-of-steel-2013/Tsko/download\", \n      \"flags\"\
-        : [\n        \"high_definition\"\n      ], \n      \"fps\": \"23.976\", \n\
-        \      \"id\": \"Tsko\", \n      \"language\": \"en\", \n      \"movie\":\
-        \ {\n        \"aliases\": [\n          \"\\u010covjek od \\u010delika\", \n\
-        \          \"L'uomo d'acciaio\", \n          \"Jekleni mo\\u017e\", \n   \
-        \       \"El hombre de acero\", \n          \"\\u010covek od \\u010delika\"\
-        \n        ], \n        \"episode_info\": null, \n        \"id\": \"WIk\",\
-        \ \n        \"posters\": {\n          \"inline\": \"/thumbnails/moviedb/inline/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        , \n          \"normal\": \"/thumbnails/moviedb/normal/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        , \n          \"small\": \"/thumbnails/moviedb/small/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        , \n          \"title\": \"/thumbnails/moviedb/title/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        \n        }, \n        \"providers\": [\n          \"imdb:0770828\", \n  \
-        \        \"omdb:_ngG\"\n        ], \n        \"slug\": \"man-of-steel-2013\"\
-        , \n        \"title\": \"Man of Steel\", \n        \"type\": \"movie\", \n\
-        \        \"year\": 2013\n      }, \n      \"notes\": \"Fixed some errors.\"\
-        , \n      \"num_cds\": 1, \n      \"rejected\": null, \n      \"releases\"\
-        : [], \n      \"state\": \"\", \n      \"stats\": {\n        \"characters\"\
-        : 38858, \n        \"characters_per_line\": 23.650639074863054, \n       \
-        \ \"downloads\": 46418, \n        \"lines\": 1643, \n        \"lines_per_unit\"\
-        : 1.2706883217324052, \n        \"parts\": 1, \n        \"units\": 1293\n\
-        \      }, \n      \"url\": \"/en/subtitles/en-man-of-steel-2013/Tsko\"\n \
-        \   }, \n    {\n      \"audited\": true, \n      \"contributions\": [], \n\
-        \      \"contributor\": {\n        \"id\": 7718, \n        \"name\": \"jdinic3\"\
-        , \n        \"type\": \"user\"\n      }, \n      \"created\": \"2013-10-15T16:53:11+00:00\"\
-        , \n      \"custom_releases\": [\n        \"Man.Of.Steel.2013.720p.BRRip.x264.AAC-ViSiON\"\
-        , \n        \"Man.Of.Steel.2013.720p.BluRay.x264-Felony\", \n        \"Man.Of.Steel.2013.1080p.BluRay.x264-SECTOR7\"\
-        , \n        \"Man.Of.Steel.2013.720p.BRRip.x264.AC3-UNDERCOVER\", \n     \
-        \   \"Man.Of.Steel.2013.BDRip.XviD.MP3-RARBG\", \n        \"Man.Of.Steel.(2013).BDRip.600MB.Ganool\"\
-        , \n        \"Man.of.Steel.2013.BDRip.x264.700MB-Micromkv\", \n        \"\
-        Man.Of.Steel.2013.BRRip.AAC.x264-SSDD\", \n        \"Man.Of.Steel.2013.BDRip.x264-Larceny\"\
-        , \n        \"Man.Of.Steel.2013.BDRiP.XViD-NoGRP\", \n        \"Man.Of.Steel.2013.720p.BRRip.x264.AC3-EVO\"\
-        , \n        \"Man.of.Steel.2013.720p.BRRip.h264.AAC-RARBG\", \n        \"\
-        Man.Of.Steel.[2013].BRRip.XviD-ETRG\", \n        \"Man.of.Steel.[2013].BRRip.XViD.[AC3]-ETRG\"\
-        , \n        \"Man.Of.Steel.2013.BRRiP.XVID.AC3-MAJESTIC\", \n        \"Man.of.steel.2013.BRRip.XviD.AC3-RARBG\"\
-        , \n        \"Man.Of.Steel.2013.720p.BRRip.x264.AC3-SUPERM4N\", \n       \
-        \ \"Man.Of.Steel.2013.720p.BRRip.XviD.AC3-ViSiON\", \n        \"Man.Of.Steel.2013.720p.BRRip.x264.AC3-JYK\"\
-        , \n        \"Man.of.Steel.[2013].DVDRIP.DIVX.[Eng]-DUQA\\u252c\\u00ab\",\
-        \ \n        \"Man.of.Steel.2013.1080p.BluRay.x264.YIFY\"\n      ], \n    \
-        \  \"download\": \"/en/subtitles/en-man-of-steel-2013/EMgo/download\", \n\
-        \      \"flags\": [\n        \"hearing_impaired\", \n        \"high_definition\"\
-        \n      ], \n      \"fps\": \"23.976\", \n      \"id\": \"EMgo\", \n     \
-        \ \"language\": \"en\", \n      \"movie\": {\n        \"aliases\": [\n   \
-        \       \"\\u010covjek od \\u010delika\", \n          \"L'uomo d'acciaio\"\
-        , \n          \"Jekleni mo\\u017e\", \n          \"El hombre de acero\", \n\
-        \          \"\\u010covek od \\u010delika\"\n        ], \n        \"episode_info\"\
-        : null, \n        \"id\": \"WIk\", \n        \"posters\": {\n          \"\
-        inline\": \"/thumbnails/moviedb/inline/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        , \n          \"normal\": \"/thumbnails/moviedb/normal/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        , \n          \"small\": \"/thumbnails/moviedb/small/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        , \n          \"title\": \"/thumbnails/moviedb/title/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        \n        }, \n        \"providers\": [\n          \"imdb:0770828\", \n  \
-        \        \"omdb:_ngG\"\n        ], \n        \"slug\": \"man-of-steel-2013\"\
-        , \n        \"title\": \"Man of Steel\", \n        \"type\": \"movie\", \n\
-        \        \"year\": 2013\n      }, \n      \"notes\": \"\", \n      \"num_cds\"\
-        : 1, \n      \"rejected\": null, \n      \"releases\": [], \n      \"state\"\
-        : \"\", \n      \"stats\": {\n        \"characters\": 44788, \n        \"\
-        characters_per_line\": 24.17053426875337, \n        \"downloads\": 25348,\
-        \ \n        \"lines\": 1853, \n        \"lines_per_unit\": 1.2579769178547182,\
-        \ \n        \"parts\": 1, \n        \"units\": 1473\n      }, \n      \"url\"\
-        : \"/en/subtitles/en-man-of-steel-2013/EMgo\"\n    }, \n    {\n      \"audited\"\
-        : true, \n      \"contributions\": [], \n      \"contributor\": {\n      \
-        \  \"id\": 86327, \n        \"name\": \"mixi69\", \n        \"type\": \"user\"\
-        \n      }, \n      \"created\": \"2013-10-11T15:41:19+00:00\", \n      \"\
-        custom_releases\": [\n        \"Man.of.Steel.[2013].INTERNAL.TS.720p.DIVX.[Eng]-DUQA\"\
-        \n      ], \n      \"download\": \"/en/subtitles/en-man-of-steel-2013/NLUo/download\"\
-        , \n      \"flags\": [], \n      \"fps\": \"\", \n      \"id\": \"NLUo\",\
-        \ \n      \"language\": \"en\", \n      \"movie\": {\n        \"aliases\"\
-        : [\n          \"\\u010covjek od \\u010delika\", \n          \"L'uomo d'acciaio\"\
-        , \n          \"Jekleni mo\\u017e\", \n          \"El hombre de acero\", \n\
-        \          \"\\u010covek od \\u010delika\"\n        ], \n        \"episode_info\"\
-        : null, \n        \"id\": \"WIk\", \n        \"posters\": {\n          \"\
-        inline\": \"/thumbnails/moviedb/inline/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        , \n          \"normal\": \"/thumbnails/moviedb/normal/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        , \n          \"small\": \"/thumbnails/moviedb/small/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        , \n          \"title\": \"/thumbnails/moviedb/title/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        \n        }, \n        \"providers\": [\n          \"imdb:0770828\", \n  \
-        \        \"omdb:_ngG\"\n        ], \n        \"slug\": \"man-of-steel-2013\"\
-        , \n        \"title\": \"Man of Steel\", \n        \"type\": \"movie\", \n\
-        \        \"year\": 2013\n      }, \n      \"notes\": \"\", \n      \"num_cds\"\
-        : 1, \n      \"rejected\": null, \n      \"releases\": [], \n      \"state\"\
-        : \"\", \n      \"stats\": {\n        \"characters\": 33155, \n        \"\
-        characters_per_line\": 25.155538694992412, \n        \"downloads\": 1871,\
-        \ \n        \"lines\": 1318, \n        \"lines_per_unit\": 1.4233261339092873,\
-        \ \n        \"parts\": 1, \n        \"units\": 926\n      }, \n      \"url\"\
-        : \"/en/subtitles/en-man-of-steel-2013/NLUo\"\n    }, \n    {\n      \"audited\"\
-        : true, \n      \"contributions\": [], \n      \"contributor\": {\n      \
-        \  \"id\": 1, \n        \"name\": \"Anonymous\", \n        \"type\": \"user\"\
-        \n      }, \n      \"created\": \"2013-07-12T07:37:20+00:00\", \n      \"\
-        custom_releases\": [\n        \"Man.of.Steel.[2013].INTERNAL.TS.720p.DIVX.[Eng]-DUQA\\\
-        u252c\\u00ab\"\n      ], \n      \"download\": \"/en/subtitles/en-man-of-steel-2013/uYcm/download\"\
-        , \n      \"flags\": [], \n      \"fps\": \"\", \n      \"id\": \"uYcm\",\
-        \ \n      \"language\": \"en\", \n      \"movie\": {\n        \"aliases\"\
-        : [\n          \"\\u010covjek od \\u010delika\", \n          \"L'uomo d'acciaio\"\
-        , \n          \"Jekleni mo\\u017e\", \n          \"El hombre de acero\", \n\
-        \          \"\\u010covek od \\u010delika\"\n        ], \n        \"episode_info\"\
-        : null, \n        \"id\": \"WIk\", \n        \"posters\": {\n          \"\
-        inline\": \"/thumbnails/moviedb/inline/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        , \n          \"normal\": \"/thumbnails/moviedb/normal/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        , \n          \"small\": \"/thumbnails/moviedb/small/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        , \n          \"title\": \"/thumbnails/moviedb/title/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        \n        }, \n        \"providers\": [\n          \"imdb:0770828\", \n  \
-        \        \"omdb:_ngG\"\n        ], \n        \"slug\": \"man-of-steel-2013\"\
-        , \n        \"title\": \"Man of Steel\", \n        \"type\": \"movie\", \n\
-        \        \"year\": 2013\n      }, \n      \"notes\": \"\", \n      \"num_cds\"\
-        : 1, \n      \"rejected\": null, \n      \"releases\": [], \n      \"state\"\
-        : \"\", \n      \"stats\": {\n        \"characters\": 33194, \n        \"\
-        characters_per_line\": 25.166034874905232, \n        \"downloads\": 2924,\
-        \ \n        \"lines\": 1319, \n        \"lines_per_unit\": 1.4213362068965518,\
-        \ \n        \"parts\": 1, \n        \"units\": 928\n      }, \n      \"url\"\
-        : \"/en/subtitles/en-man-of-steel-2013/uYcm\"\n    }, \n    {\n      \"audited\"\
-        : true, \n      \"contributions\": [], \n      \"contributor\": {\n      \
-        \  \"id\": 1, \n        \"name\": \"Anonymous\", \n        \"type\": \"user\"\
-        \n      }, \n      \"created\": \"2013-07-12T01:31:40+00:00\", \n      \"\
-        custom_releases\": [\n        \"Superman.Man.of.Steel.2013.480p.R6.LiNE.x264.AAC-DAMN\"\
-        \n      ], \n      \"download\": \"/en/subtitles/en-man-of-steel-2013/aoYm/download\"\
-        , \n      \"flags\": [], \n      \"fps\": \"\", \n      \"id\": \"aoYm\",\
-        \ \n      \"language\": \"en\", \n      \"movie\": {\n        \"aliases\"\
-        : [\n          \"\\u010covjek od \\u010delika\", \n          \"L'uomo d'acciaio\"\
-        , \n          \"Jekleni mo\\u017e\", \n          \"El hombre de acero\", \n\
-        \          \"\\u010covek od \\u010delika\"\n        ], \n        \"episode_info\"\
-        : null, \n        \"id\": \"WIk\", \n        \"posters\": {\n          \"\
-        inline\": \"/thumbnails/moviedb/inline/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        , \n          \"normal\": \"/thumbnails/moviedb/normal/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        , \n          \"small\": \"/thumbnails/moviedb/small/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        , \n          \"title\": \"/thumbnails/moviedb/title/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        \n        }, \n        \"providers\": [\n          \"imdb:0770828\", \n  \
-        \        \"omdb:_ngG\"\n        ], \n        \"slug\": \"man-of-steel-2013\"\
-        , \n        \"title\": \"Man of Steel\", \n        \"type\": \"movie\", \n\
-        \        \"year\": 2013\n      }, \n      \"notes\": \"\", \n      \"num_cds\"\
-        : 1, \n      \"rejected\": null, \n      \"releases\": [], \n      \"state\"\
-        : \"\", \n      \"stats\": {\n        \"characters\": 33296, \n        \"\
-        characters_per_line\": 25.18608169440242, \n        \"downloads\": 11755,\
-        \ \n        \"lines\": 1322, \n        \"lines_per_unit\": 1.4199785177228785,\
-        \ \n        \"parts\": 1, \n        \"units\": 931\n      }, \n      \"url\"\
-        : \"/en/subtitles/en-man-of-steel-2013/aoYm\"\n    }, \n    {\n      \"audited\"\
-        : true, \n      \"contributions\": [], \n      \"contributor\": {\n      \
-        \  \"id\": 1, \n        \"name\": \"Anonymous\", \n        \"type\": \"user\"\
-        \n      }, \n      \"created\": \"2013-07-09T18:36:51+00:00\", \n      \"\
-        custom_releases\": [\n        \"Man.of.Steel.(2013).720p.R6.LiNE.900MB.Ganool\"\
-        \n      ], \n      \"download\": \"/en/subtitles/en-man-of-steel-2013/XnUm/download\"\
-        , \n      \"flags\": [], \n      \"fps\": \"\", \n      \"id\": \"XnUm\",\
-        \ \n      \"language\": \"en\", \n      \"movie\": {\n        \"aliases\"\
-        : [\n          \"\\u010covjek od \\u010delika\", \n          \"L'uomo d'acciaio\"\
-        , \n          \"Jekleni mo\\u017e\", \n          \"El hombre de acero\", \n\
-        \          \"\\u010covek od \\u010delika\"\n        ], \n        \"episode_info\"\
-        : null, \n        \"id\": \"WIk\", \n        \"posters\": {\n          \"\
-        inline\": \"/thumbnails/moviedb/inline/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        , \n          \"normal\": \"/thumbnails/moviedb/normal/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        , \n          \"small\": \"/thumbnails/moviedb/small/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        , \n          \"title\": \"/thumbnails/moviedb/title/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        \n        }, \n        \"providers\": [\n          \"imdb:0770828\", \n  \
-        \        \"omdb:_ngG\"\n        ], \n        \"slug\": \"man-of-steel-2013\"\
-        , \n        \"title\": \"Man of Steel\", \n        \"type\": \"movie\", \n\
-        \        \"year\": 2013\n      }, \n      \"notes\": \"\", \n      \"num_cds\"\
-        : 1, \n      \"rejected\": null, \n      \"releases\": [], \n      \"state\"\
-        : \"\", \n      \"stats\": {\n        \"characters\": 33220, \n        \"\
-        characters_per_line\": 25.18574677786202, \n        \"downloads\": 4400, \n\
-        \        \"lines\": 1319, \n        \"lines_per_unit\": 1.4213362068965518,\
-        \ \n        \"parts\": 1, \n        \"units\": 928\n      }, \n      \"url\"\
-        : \"/en/subtitles/en-man-of-steel-2013/XnUm\"\n    }, \n    {\n      \"audited\"\
-        : true, \n      \"contributions\": [], \n      \"contributor\": {\n      \
-        \  \"id\": 1, \n        \"name\": \"Anonymous\", \n        \"type\": \"user\"\
-        \n      }, \n      \"created\": \"2013-07-06T21:10:22+00:00\", \n      \"\
-        custom_releases\": [\n        \"Man.of.Steel.2013.720p.R6.LiNE.x264.AAC-DiGiTAL\"\
-        \n      ], \n      \"download\": \"/en/subtitles/en-man-of-steel-2013/ZmIm/download\"\
-        , \n      \"flags\": [], \n      \"fps\": \"23.976\", \n      \"id\": \"ZmIm\"\
-        , \n      \"language\": \"en\", \n      \"movie\": {\n        \"aliases\"\
-        : [\n          \"\\u010covjek od \\u010delika\", \n          \"L'uomo d'acciaio\"\
-        , \n          \"Jekleni mo\\u017e\", \n          \"El hombre de acero\", \n\
-        \          \"\\u010covek od \\u010delika\"\n        ], \n        \"episode_info\"\
-        : null, \n        \"id\": \"WIk\", \n        \"posters\": {\n          \"\
-        inline\": \"/thumbnails/moviedb/inline/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        , \n          \"normal\": \"/thumbnails/moviedb/normal/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        , \n          \"small\": \"/thumbnails/moviedb/small/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        , \n          \"title\": \"/thumbnails/moviedb/title/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        \n        }, \n        \"providers\": [\n          \"imdb:0770828\", \n  \
-        \        \"omdb:_ngG\"\n        ], \n        \"slug\": \"man-of-steel-2013\"\
-        , \n        \"title\": \"Man of Steel\", \n        \"type\": \"movie\", \n\
-        \        \"year\": 2013\n      }, \n      \"notes\": \"\", \n      \"num_cds\"\
-        : 1, \n      \"rejected\": null, \n      \"releases\": [], \n      \"state\"\
-        : \"\", \n      \"stats\": {\n        \"characters\": 36508, \n        \"\
-        characters_per_line\": 24.338666666666665, \n        \"downloads\": 6093,\
-        \ \n        \"lines\": 1500, \n        \"lines_per_unit\": 1.5321756894790604,\
-        \ \n        \"parts\": 1, \n        \"units\": 979\n      }, \n      \"url\"\
-        : \"/en/subtitles/en-man-of-steel-2013/ZmIm\"\n    }, \n    {\n      \"audited\"\
-        : true, \n      \"contributions\": [], \n      \"contributor\": {\n      \
-        \  \"id\": 1, \n        \"name\": \"Anonymous\", \n        \"type\": \"user\"\
-        \n      }, \n      \"created\": \"2013-06-24T13:12:30+00:00\", \n      \"\
-        custom_releases\": [\n        \"Man.of.Steel.2013.CAM.XviD.MP3.MiLLENiUM\"\
-        \n      ], \n      \"download\": \"/en/subtitles/en-man-of-steel-2013/whQm/download\"\
-        , \n      \"flags\": [], \n      \"fps\": \"25\", \n      \"id\": \"whQm\"\
-        , \n      \"language\": \"en\", \n      \"movie\": {\n        \"aliases\"\
-        : [\n          \"\\u010covjek od \\u010delika\", \n          \"L'uomo d'acciaio\"\
-        , \n          \"Jekleni mo\\u017e\", \n          \"El hombre de acero\", \n\
-        \          \"\\u010covek od \\u010delika\"\n        ], \n        \"episode_info\"\
-        : null, \n        \"id\": \"WIk\", \n        \"posters\": {\n          \"\
-        inline\": \"/thumbnails/moviedb/inline/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        , \n          \"normal\": \"/thumbnails/moviedb/normal/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        , \n          \"small\": \"/thumbnails/moviedb/small/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        , \n          \"title\": \"/thumbnails/moviedb/title/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        \n        }, \n        \"providers\": [\n          \"imdb:0770828\", \n  \
-        \        \"omdb:_ngG\"\n        ], \n        \"slug\": \"man-of-steel-2013\"\
-        , \n        \"title\": \"Man of Steel\", \n        \"type\": \"movie\", \n\
-        \        \"year\": 2013\n      }, \n      \"notes\": \"\", \n      \"num_cds\"\
-        : 1, \n      \"rejected\": null, \n      \"releases\": [], \n      \"state\"\
-        : \"\", \n      \"stats\": {\n        \"characters\": 34169, \n        \"\
-        characters_per_line\": 35.225773195876286, \n        \"downloads\": 8072,\
-        \ \n        \"lines\": 970, \n        \"lines_per_unit\": 1.0, \n        \"\
-        parts\": 1, \n        \"units\": 970\n      }, \n      \"url\": \"/en/subtitles/en-man-of-steel-2013/whQm\"\
-        \n    }, \n    {\n      \"audited\": true, \n      \"contributions\": [],\
-        \ \n      \"contributor\": {\n        \"id\": 26933, \n        \"name\": \"\
-        asdasd\", \n        \"type\": \"user\"\n      }, \n      \"created\": \"2013-06-24T05:15:56+00:00\"\
-        , \n      \"custom_releases\": [\n        \"Man.Of.Steel.2013.CAM.XViD-CALiBRATE\"\
-        \n      ], \n      \"download\": \"/en/subtitles/en-man-of-steel-2013/8RIm/download\"\
-        , \n      \"flags\": [], \n      \"fps\": \"29.97\", \n      \"id\": \"8RIm\"\
-        , \n      \"language\": \"en\", \n      \"movie\": {\n        \"aliases\"\
-        : [\n          \"\\u010covjek od \\u010delika\", \n          \"L'uomo d'acciaio\"\
-        , \n          \"Jekleni mo\\u017e\", \n          \"El hombre de acero\", \n\
-        \          \"\\u010covek od \\u010delika\"\n        ], \n        \"episode_info\"\
-        : null, \n        \"id\": \"WIk\", \n        \"posters\": {\n          \"\
-        inline\": \"/thumbnails/moviedb/inline/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        , \n          \"normal\": \"/thumbnails/moviedb/normal/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        , \n          \"small\": \"/thumbnails/moviedb/small/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        , \n          \"title\": \"/thumbnails/moviedb/title/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        \n        }, \n        \"providers\": [\n          \"imdb:0770828\", \n  \
-        \        \"omdb:_ngG\"\n        ], \n        \"slug\": \"man-of-steel-2013\"\
-        , \n        \"title\": \"Man of Steel\", \n        \"type\": \"movie\", \n\
-        \        \"year\": 2013\n      }, \n      \"notes\": \"Cleaned and carefully\
-        \ edited. Better than the rest.\", \n      \"num_cds\": 1, \n      \"rejected\"\
-        : null, \n      \"releases\": [], \n      \"state\": \"\", \n      \"stats\"\
-        : {\n        \"characters\": 34166, \n        \"characters_per_line\": 35.25902992776058,\
-        \ \n        \"downloads\": 5247, \n        \"lines\": 969, \n        \"lines_per_unit\"\
-        : 0.9989690721649485, \n        \"parts\": 1, \n        \"units\": 970\n \
-        \     }, \n      \"url\": \"/en/subtitles/en-man-of-steel-2013/8RIm\"\n  \
-        \  }, \n    {\n      \"audited\": true, \n      \"contributions\": [], \n\
-        \      \"contributor\": {\n        \"id\": 7718, \n        \"name\": \"jdinic3\"\
-        , \n        \"type\": \"user\"\n      }, \n      \"created\": \"2013-06-21T10:08:43+00:00\"\
-        , \n      \"custom_releases\": [\n        \"Man.Of.Steel.2013.CAM.NEW.AUDiO.XViD-JUSTiCE\"\
-        \n      ], \n      \"download\": \"/en/subtitles/en-man-of-steel-2013/Nv0l/download\"\
-        , \n      \"flags\": [], \n      \"fps\": \"23.976\", \n      \"id\": \"Nv0l\"\
-        , \n      \"language\": \"en\", \n      \"movie\": {\n        \"aliases\"\
-        : [\n          \"\\u010covjek od \\u010delika\", \n          \"L'uomo d'acciaio\"\
-        , \n          \"Jekleni mo\\u017e\", \n          \"El hombre de acero\", \n\
-        \          \"\\u010covek od \\u010delika\"\n        ], \n        \"episode_info\"\
-        : null, \n        \"id\": \"WIk\", \n        \"posters\": {\n          \"\
-        inline\": \"/thumbnails/moviedb/inline/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        , \n          \"normal\": \"/thumbnails/moviedb/normal/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        , \n          \"small\": \"/thumbnails/moviedb/small/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        , \n          \"title\": \"/thumbnails/moviedb/title/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\
-        \n        }, \n        \"providers\": [\n          \"imdb:0770828\", \n  \
-        \        \"omdb:_ngG\"\n        ], \n        \"slug\": \"man-of-steel-2013\"\
-        , \n        \"title\": \"Man of Steel\", \n        \"type\": \"movie\", \n\
-        \        \"year\": 2013\n      }, \n      \"notes\": \"\", \n      \"num_cds\"\
-        : 1, \n      \"rejected\": null, \n      \"releases\": [], \n      \"state\"\
-        : \"\", \n      \"stats\": {\n        \"characters\": 31878, \n        \"\
-        characters_per_line\": 29.219065077910173, \n        \"downloads\": 10623,\
-        \ \n        \"lines\": 1091, \n        \"lines_per_unit\": 1.0036798528058877,\
-        \ \n        \"parts\": 1, \n        \"units\": 1087\n      }, \n      \"url\"\
-        : \"/en/subtitles/en-man-of-steel-2013/Nv0l\"\n    }\n  ], \n  \"page\": 1,\
-        \ \n  \"per_page\": 50, \n  \"status\": \"ok\"\n}"
+      string: "{\n  \"all_pages\": 1, \n  \"data\": [\n    {\n      \"audited\": true,
+        \n      \"contributions\": [], \n      \"contributor\": {\n        \"id\":
+        41840, \n        \"name\": \"gilraen\", \n        \"type\": \"user\"\n      },
+        \n      \"created\": \"2013-11-21T06:29:19+00:00\", \n      \"custom_releases\":
+        [\n        \"Man.Of.Steel.2013.EXTRAS.BONUS.DISC.720p.BluRay.DTS.x264-PublicHD:\",
+        \n        \"publichd.EXTRAS.Journey.Of.Discovery.Creating.Man.Of.Steel.720p\",
+        \n        \"publichd.EXTRAS.Planet.Krypton.720p\"\n      ], \n      \"download\":
+        \"/en/subtitles/en-man-of-steel-2013/WMgp/download\", \n      \"flags\": [\n
+        \       \"hearing_impaired\", \n        \"high_definition\"\n      ], \n      \"fps\":
+        \"23.976\", \n      \"id\": \"WMgp\", \n      \"language\": \"en\", \n      \"movie\":
+        {\n        \"aliases\": [\n          \"\\u010covjek od \\u010delika\", \n
+        \         \"L'uomo d'acciaio\", \n          \"Jekleni mo\\u017e\", \n          \"El
+        hombre de acero\", \n          \"\\u010covek od \\u010delika\"\n        ],
+        \n        \"episode_info\": null, \n        \"id\": \"WIk\", \n        \"posters\":
+        {\n          \"inline\": \"/thumbnails/moviedb/inline/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\",
+        \n          \"normal\": \"/thumbnails/moviedb/normal/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\",
+        \n          \"small\": \"/thumbnails/moviedb/small/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\",
+        \n          \"title\": \"/thumbnails/moviedb/title/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\n
+        \       }, \n        \"providers\": [\n          \"imdb:0770828\", \n          \"omdb:_ngG\"\n
+        \       ], \n        \"slug\": \"man-of-steel-2013\", \n        \"title\":
+        \"Man of Steel\", \n        \"type\": \"movie\", \n        \"year\": 2013\n
+        \     }, \n      \"notes\": \"Journey of Discovery Creating Man of Steel<br
+        />\\r\\nPlanet Krypton<br />\\r\\n\", \n      \"num_cds\": 2, \n      \"rejected\":
+        null, \n      \"releases\": [], \n      \"state\": \"\", \n      \"stats\":
+        {\n        \"characters\": 133030, \n        \"characters_per_line\": 29.76062639821029,
+        \n        \"downloads\": 30073, \n        \"lines\": 4470, \n        \"lines_per_unit\":
+        1.6494464944649447, \n        \"parts\": 2, \n        \"units\": 2710\n      },
+        \n      \"url\": \"/en/subtitles/en-man-of-steel-2013/WMgp\"\n    }, \n    {\n
+        \     \"audited\": true, \n      \"contributions\": [], \n      \"contributor\":
+        {\n        \"id\": 41840, \n        \"name\": \"gilraen\", \n        \"type\":
+        \"user\"\n      }, \n      \"created\": \"2013-10-22T06:35:44+00:00\", \n
+        \     \"custom_releases\": [\n        \"publichd.EXTRAS\"\n      ], \n      \"download\":
+        \"/en/subtitles/en-man-of-steel-2013/MOko/download\", \n      \"flags\": [\n
+        \       \"high_definition\"\n      ], \n      \"fps\": \"\", \n      \"id\":
+        \"MOko\", \n      \"language\": \"en\", \n      \"movie\": {\n        \"aliases\":
+        [\n          \"\\u010covjek od \\u010delika\", \n          \"L'uomo d'acciaio\",
+        \n          \"Jekleni mo\\u017e\", \n          \"El hombre de acero\", \n
+        \         \"\\u010covek od \\u010delika\"\n        ], \n        \"episode_info\":
+        null, \n        \"id\": \"WIk\", \n        \"posters\": {\n          \"inline\":
+        \"/thumbnails/moviedb/inline/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\",
+        \n          \"normal\": \"/thumbnails/moviedb/normal/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\",
+        \n          \"small\": \"/thumbnails/moviedb/small/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\",
+        \n          \"title\": \"/thumbnails/moviedb/title/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\n
+        \       }, \n        \"providers\": [\n          \"imdb:0770828\", \n          \"omdb:_ngG\"\n
+        \       ], \n        \"slug\": \"man-of-steel-2013\", \n        \"title\":
+        \"Man of Steel\", \n        \"type\": \"movie\", \n        \"year\": 2013\n
+        \     }, \n      \"notes\": \"Retail...<br />\\r\\npublichd.EXTRAS.All.Out.Actions.720p,<br
+        />\\r\\npublichd.EXTRAS.Krypton.Decoded.720p<br />\\r\\npublichd.EXTRAS.Small.Characters.Legendary.Role\",
+        \n      \"num_cds\": 3, \n      \"rejected\": null, \n      \"releases\":
+        [], \n      \"state\": \"\", \n      \"stats\": {\n        \"characters\":
+        55050, \n        \"characters_per_line\": 31.839213418160785, \n        \"downloads\":
+        20208, \n        \"lines\": 1729, \n        \"lines_per_unit\": 1.7221115537848606,
+        \n        \"parts\": 3, \n        \"units\": 1004\n      }, \n      \"url\":
+        \"/en/subtitles/en-man-of-steel-2013/MOko\"\n    }, \n    {\n      \"audited\":
+        true, \n      \"contributions\": [], \n      \"contributor\": {\n        \"id\":
+        144401, \n        \"name\": \"flax\", \n        \"type\": \"user\"\n      },
+        \n      \"created\": \"2013-10-15T23:01:51+00:00\", \n      \"custom_releases\":
+        [\n        \"Man.Of.Steel.2013.720p.BRRip.x264.AAC-ViSiON\", \n        \"Man.Of.Steel.2013.720p.BluRay.x264-Felony.[PublicHD].\",
+        \n        \"Man.Of.Steel.2013.1080p.BluRay.x264-SECTOR7.\", \n        \"Man.Of.Steel.2013.720p.BRRip.x264.AC3-UNDERCOVER.\",
+        \n        \"Man.Of.Steel.2013.BDRip.XviD.MP3-RARBG.\", \n        \"Man.Of.Steel.(2013).BDRip.600MB.Ganool.\",
+        \n        \"Man.of.Steel.2013.BDRip.x264.700MB-Micromkv.\", \n        \"Man.Of.Steel.2013.BRRip.AAC.x264-SSDD.\",
+        \n        \"Man.Of.Steel.2013.BDRip.x264-Larceny.\", \n        \"Man.Of.Steel.2013.BDRiP.XViD-NoGRP.\",
+        \n        \"Man.Of.Steel.2013.720p.BRRip.x264.AC3-EVO.\", \n        \"Man.of.Steel.2013.720p.BRRip.h264.AAC-RARBG.\",
+        \n        \"Man.Of.Steel.[2013].BRRip.XviD-ETRG.\", \n        \"Man.of.Steel.[2013].BRRip.XViD.[AC3]-ETRG.\",
+        \n        \"Man.Of.Steel.2013.BRRiP.XVID.AC3-MAJESTIC.\", \n        \"Man.of.steel.2013.BRRip.XviD.AC3-RARBG.\",
+        \n        \"Man.Of.Steel.2013.720p.BRRip.x264.AC3-SUPERM4N.\", \n        \"Man.Of.Steel.2013.720p.BRRip.XviD.AC3-ViSiON\"\n
+        \     ], \n      \"download\": \"/en/subtitles/en-man-of-steel-2013/Tsko/download\",
+        \n      \"flags\": [\n        \"high_definition\"\n      ], \n      \"fps\":
+        \"23.976\", \n      \"id\": \"Tsko\", \n      \"language\": \"en\", \n      \"movie\":
+        {\n        \"aliases\": [\n          \"\\u010covjek od \\u010delika\", \n
+        \         \"L'uomo d'acciaio\", \n          \"Jekleni mo\\u017e\", \n          \"El
+        hombre de acero\", \n          \"\\u010covek od \\u010delika\"\n        ],
+        \n        \"episode_info\": null, \n        \"id\": \"WIk\", \n        \"posters\":
+        {\n          \"inline\": \"/thumbnails/moviedb/inline/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\",
+        \n          \"normal\": \"/thumbnails/moviedb/normal/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\",
+        \n          \"small\": \"/thumbnails/moviedb/small/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\",
+        \n          \"title\": \"/thumbnails/moviedb/title/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\n
+        \       }, \n        \"providers\": [\n          \"imdb:0770828\", \n          \"omdb:_ngG\"\n
+        \       ], \n        \"slug\": \"man-of-steel-2013\", \n        \"title\":
+        \"Man of Steel\", \n        \"type\": \"movie\", \n        \"year\": 2013\n
+        \     }, \n      \"notes\": \"Fixed some errors.\", \n      \"num_cds\": 1,
+        \n      \"rejected\": null, \n      \"releases\": [], \n      \"state\": \"\",
+        \n      \"stats\": {\n        \"characters\": 38858, \n        \"characters_per_line\":
+        23.650639074863054, \n        \"downloads\": 61761, \n        \"lines\": 1643,
+        \n        \"lines_per_unit\": 1.2706883217324052, \n        \"parts\": 1,
+        \n        \"units\": 1293\n      }, \n      \"url\": \"/en/subtitles/en-man-of-steel-2013/Tsko\"\n
+        \   }, \n    {\n      \"audited\": true, \n      \"contributions\": [], \n
+        \     \"contributor\": {\n        \"id\": 7718, \n        \"name\": \"jdinic3\",
+        \n        \"type\": \"user\"\n      }, \n      \"created\": \"2013-10-15T16:53:11+00:00\",
+        \n      \"custom_releases\": [\n        \"Man.Of.Steel.2013.720p.BRRip.x264.AAC-ViSiON\",
+        \n        \"Man.Of.Steel.2013.720p.BluRay.x264-Felony\", \n        \"Man.Of.Steel.2013.1080p.BluRay.x264-SECTOR7\",
+        \n        \"Man.Of.Steel.2013.720p.BRRip.x264.AC3-UNDERCOVER\", \n        \"Man.Of.Steel.2013.BDRip.XviD.MP3-RARBG\",
+        \n        \"Man.Of.Steel.(2013).BDRip.600MB.Ganool\", \n        \"Man.of.Steel.2013.BDRip.x264.700MB-Micromkv\",
+        \n        \"Man.Of.Steel.2013.BRRip.AAC.x264-SSDD\", \n        \"Man.Of.Steel.2013.BDRip.x264-Larceny\",
+        \n        \"Man.Of.Steel.2013.BDRiP.XViD-NoGRP\", \n        \"Man.Of.Steel.2013.720p.BRRip.x264.AC3-EVO\",
+        \n        \"Man.of.Steel.2013.720p.BRRip.h264.AAC-RARBG\", \n        \"Man.Of.Steel.[2013].BRRip.XviD-ETRG\",
+        \n        \"Man.of.Steel.[2013].BRRip.XViD.[AC3]-ETRG\", \n        \"Man.Of.Steel.2013.BRRiP.XVID.AC3-MAJESTIC\",
+        \n        \"Man.of.steel.2013.BRRip.XviD.AC3-RARBG\", \n        \"Man.Of.Steel.2013.720p.BRRip.x264.AC3-SUPERM4N\",
+        \n        \"Man.Of.Steel.2013.720p.BRRip.XviD.AC3-ViSiON\", \n        \"Man.Of.Steel.2013.720p.BRRip.x264.AC3-JYK\",
+        \n        \"Man.of.Steel.[2013].DVDRIP.DIVX.[Eng]-DUQA\\u252c\\u00ab\", \n
+        \       \"Man.of.Steel.2013.1080p.BluRay.x264.YIFY\"\n      ], \n      \"download\":
+        \"/en/subtitles/en-man-of-steel-2013/EMgo/download\", \n      \"flags\": [\n
+        \       \"hearing_impaired\", \n        \"high_definition\"\n      ], \n      \"fps\":
+        \"23.976\", \n      \"id\": \"EMgo\", \n      \"language\": \"en\", \n      \"movie\":
+        {\n        \"aliases\": [\n          \"\\u010covjek od \\u010delika\", \n
+        \         \"L'uomo d'acciaio\", \n          \"Jekleni mo\\u017e\", \n          \"El
+        hombre de acero\", \n          \"\\u010covek od \\u010delika\"\n        ],
+        \n        \"episode_info\": null, \n        \"id\": \"WIk\", \n        \"posters\":
+        {\n          \"inline\": \"/thumbnails/moviedb/inline/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\",
+        \n          \"normal\": \"/thumbnails/moviedb/normal/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\",
+        \n          \"small\": \"/thumbnails/moviedb/small/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\",
+        \n          \"title\": \"/thumbnails/moviedb/title/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\n
+        \       }, \n        \"providers\": [\n          \"imdb:0770828\", \n          \"omdb:_ngG\"\n
+        \       ], \n        \"slug\": \"man-of-steel-2013\", \n        \"title\":
+        \"Man of Steel\", \n        \"type\": \"movie\", \n        \"year\": 2013\n
+        \     }, \n      \"notes\": \"\", \n      \"num_cds\": 1, \n      \"rejected\":
+        null, \n      \"releases\": [], \n      \"state\": \"\", \n      \"stats\":
+        {\n        \"characters\": 44788, \n        \"characters_per_line\": 24.17053426875337,
+        \n        \"downloads\": 29933, \n        \"lines\": 1853, \n        \"lines_per_unit\":
+        1.2579769178547182, \n        \"parts\": 1, \n        \"units\": 1473\n      },
+        \n      \"url\": \"/en/subtitles/en-man-of-steel-2013/EMgo\"\n    }, \n    {\n
+        \     \"audited\": true, \n      \"contributions\": [], \n      \"contributor\":
+        {\n        \"id\": 86327, \n        \"name\": \"mixi69\", \n        \"type\":
+        \"user\"\n      }, \n      \"created\": \"2013-10-11T15:41:19+00:00\", \n
+        \     \"custom_releases\": [\n        \"Man.of.Steel.[2013].INTERNAL.TS.720p.DIVX.[Eng]-DUQA\"\n
+        \     ], \n      \"download\": \"/en/subtitles/en-man-of-steel-2013/NLUo/download\",
+        \n      \"flags\": [], \n      \"fps\": \"\", \n      \"id\": \"NLUo\", \n
+        \     \"language\": \"en\", \n      \"movie\": {\n        \"aliases\": [\n
+        \         \"\\u010covjek od \\u010delika\", \n          \"L'uomo d'acciaio\",
+        \n          \"Jekleni mo\\u017e\", \n          \"El hombre de acero\", \n
+        \         \"\\u010covek od \\u010delika\"\n        ], \n        \"episode_info\":
+        null, \n        \"id\": \"WIk\", \n        \"posters\": {\n          \"inline\":
+        \"/thumbnails/moviedb/inline/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\",
+        \n          \"normal\": \"/thumbnails/moviedb/normal/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\",
+        \n          \"small\": \"/thumbnails/moviedb/small/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\",
+        \n          \"title\": \"/thumbnails/moviedb/title/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\n
+        \       }, \n        \"providers\": [\n          \"imdb:0770828\", \n          \"omdb:_ngG\"\n
+        \       ], \n        \"slug\": \"man-of-steel-2013\", \n        \"title\":
+        \"Man of Steel\", \n        \"type\": \"movie\", \n        \"year\": 2013\n
+        \     }, \n      \"notes\": \"\", \n      \"num_cds\": 1, \n      \"rejected\":
+        null, \n      \"releases\": [], \n      \"state\": \"\", \n      \"stats\":
+        {\n        \"characters\": 33155, \n        \"characters_per_line\": 25.155538694992412,
+        \n        \"downloads\": 3243, \n        \"lines\": 1318, \n        \"lines_per_unit\":
+        1.4233261339092873, \n        \"parts\": 1, \n        \"units\": 926\n      },
+        \n      \"url\": \"/en/subtitles/en-man-of-steel-2013/NLUo\"\n    }, \n    {\n
+        \     \"audited\": true, \n      \"contributions\": [], \n      \"contributor\":
+        {\n        \"id\": 1, \n        \"name\": \"Anonymous\", \n        \"type\":
+        \"user\"\n      }, \n      \"created\": \"2013-07-12T07:37:20+00:00\", \n
+        \     \"custom_releases\": [\n        \"Man.of.Steel.[2013].INTERNAL.TS.720p.DIVX.[Eng]-DUQA\\u252c\\u00ab\"\n
+        \     ], \n      \"download\": \"/en/subtitles/en-man-of-steel-2013/uYcm/download\",
+        \n      \"flags\": [], \n      \"fps\": \"\", \n      \"id\": \"uYcm\", \n
+        \     \"language\": \"en\", \n      \"movie\": {\n        \"aliases\": [\n
+        \         \"\\u010covjek od \\u010delika\", \n          \"L'uomo d'acciaio\",
+        \n          \"Jekleni mo\\u017e\", \n          \"El hombre de acero\", \n
+        \         \"\\u010covek od \\u010delika\"\n        ], \n        \"episode_info\":
+        null, \n        \"id\": \"WIk\", \n        \"posters\": {\n          \"inline\":
+        \"/thumbnails/moviedb/inline/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\",
+        \n          \"normal\": \"/thumbnails/moviedb/normal/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\",
+        \n          \"small\": \"/thumbnails/moviedb/small/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\",
+        \n          \"title\": \"/thumbnails/moviedb/title/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\n
+        \       }, \n        \"providers\": [\n          \"imdb:0770828\", \n          \"omdb:_ngG\"\n
+        \       ], \n        \"slug\": \"man-of-steel-2013\", \n        \"title\":
+        \"Man of Steel\", \n        \"type\": \"movie\", \n        \"year\": 2013\n
+        \     }, \n      \"notes\": \"\", \n      \"num_cds\": 1, \n      \"rejected\":
+        null, \n      \"releases\": [], \n      \"state\": \"\", \n      \"stats\":
+        {\n        \"characters\": 33194, \n        \"characters_per_line\": 25.166034874905232,
+        \n        \"downloads\": 4039, \n        \"lines\": 1319, \n        \"lines_per_unit\":
+        1.4213362068965518, \n        \"parts\": 1, \n        \"units\": 928\n      },
+        \n      \"url\": \"/en/subtitles/en-man-of-steel-2013/uYcm\"\n    }, \n    {\n
+        \     \"audited\": true, \n      \"contributions\": [], \n      \"contributor\":
+        {\n        \"id\": 1, \n        \"name\": \"Anonymous\", \n        \"type\":
+        \"user\"\n      }, \n      \"created\": \"2013-07-12T01:31:40+00:00\", \n
+        \     \"custom_releases\": [\n        \"Superman.Man.of.Steel.2013.480p.R6.LiNE.x264.AAC-DAMN\"\n
+        \     ], \n      \"download\": \"/en/subtitles/en-man-of-steel-2013/aoYm/download\",
+        \n      \"flags\": [], \n      \"fps\": \"\", \n      \"id\": \"aoYm\", \n
+        \     \"language\": \"en\", \n      \"movie\": {\n        \"aliases\": [\n
+        \         \"\\u010covjek od \\u010delika\", \n          \"L'uomo d'acciaio\",
+        \n          \"Jekleni mo\\u017e\", \n          \"El hombre de acero\", \n
+        \         \"\\u010covek od \\u010delika\"\n        ], \n        \"episode_info\":
+        null, \n        \"id\": \"WIk\", \n        \"posters\": {\n          \"inline\":
+        \"/thumbnails/moviedb/inline/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\",
+        \n          \"normal\": \"/thumbnails/moviedb/normal/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\",
+        \n          \"small\": \"/thumbnails/moviedb/small/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\",
+        \n          \"title\": \"/thumbnails/moviedb/title/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\n
+        \       }, \n        \"providers\": [\n          \"imdb:0770828\", \n          \"omdb:_ngG\"\n
+        \       ], \n        \"slug\": \"man-of-steel-2013\", \n        \"title\":
+        \"Man of Steel\", \n        \"type\": \"movie\", \n        \"year\": 2013\n
+        \     }, \n      \"notes\": \"\", \n      \"num_cds\": 1, \n      \"rejected\":
+        null, \n      \"releases\": [], \n      \"state\": \"\", \n      \"stats\":
+        {\n        \"characters\": 33296, \n        \"characters_per_line\": 25.18608169440242,
+        \n        \"downloads\": 12925, \n        \"lines\": 1322, \n        \"lines_per_unit\":
+        1.4199785177228785, \n        \"parts\": 1, \n        \"units\": 931\n      },
+        \n      \"url\": \"/en/subtitles/en-man-of-steel-2013/aoYm\"\n    }, \n    {\n
+        \     \"audited\": true, \n      \"contributions\": [], \n      \"contributor\":
+        {\n        \"id\": 1, \n        \"name\": \"Anonymous\", \n        \"type\":
+        \"user\"\n      }, \n      \"created\": \"2013-07-09T18:36:51+00:00\", \n
+        \     \"custom_releases\": [\n        \"Man.of.Steel.(2013).720p.R6.LiNE.900MB.Ganool\"\n
+        \     ], \n      \"download\": \"/en/subtitles/en-man-of-steel-2013/XnUm/download\",
+        \n      \"flags\": [], \n      \"fps\": \"\", \n      \"id\": \"XnUm\", \n
+        \     \"language\": \"en\", \n      \"movie\": {\n        \"aliases\": [\n
+        \         \"\\u010covjek od \\u010delika\", \n          \"L'uomo d'acciaio\",
+        \n          \"Jekleni mo\\u017e\", \n          \"El hombre de acero\", \n
+        \         \"\\u010covek od \\u010delika\"\n        ], \n        \"episode_info\":
+        null, \n        \"id\": \"WIk\", \n        \"posters\": {\n          \"inline\":
+        \"/thumbnails/moviedb/inline/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\",
+        \n          \"normal\": \"/thumbnails/moviedb/normal/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\",
+        \n          \"small\": \"/thumbnails/moviedb/small/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\",
+        \n          \"title\": \"/thumbnails/moviedb/title/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\n
+        \       }, \n        \"providers\": [\n          \"imdb:0770828\", \n          \"omdb:_ngG\"\n
+        \       ], \n        \"slug\": \"man-of-steel-2013\", \n        \"title\":
+        \"Man of Steel\", \n        \"type\": \"movie\", \n        \"year\": 2013\n
+        \     }, \n      \"notes\": \"\", \n      \"num_cds\": 1, \n      \"rejected\":
+        null, \n      \"releases\": [], \n      \"state\": \"\", \n      \"stats\":
+        {\n        \"characters\": 33220, \n        \"characters_per_line\": 25.18574677786202,
+        \n        \"downloads\": 5560, \n        \"lines\": 1319, \n        \"lines_per_unit\":
+        1.4213362068965518, \n        \"parts\": 1, \n        \"units\": 928\n      },
+        \n      \"url\": \"/en/subtitles/en-man-of-steel-2013/XnUm\"\n    }, \n    {\n
+        \     \"audited\": true, \n      \"contributions\": [], \n      \"contributor\":
+        {\n        \"id\": 1, \n        \"name\": \"Anonymous\", \n        \"type\":
+        \"user\"\n      }, \n      \"created\": \"2013-07-06T21:10:22+00:00\", \n
+        \     \"custom_releases\": [\n        \"Man.of.Steel.2013.720p.R6.LiNE.x264.AAC-DiGiTAL\"\n
+        \     ], \n      \"download\": \"/en/subtitles/en-man-of-steel-2013/ZmIm/download\",
+        \n      \"flags\": [], \n      \"fps\": \"23.976\", \n      \"id\": \"ZmIm\",
+        \n      \"language\": \"en\", \n      \"movie\": {\n        \"aliases\": [\n
+        \         \"\\u010covjek od \\u010delika\", \n          \"L'uomo d'acciaio\",
+        \n          \"Jekleni mo\\u017e\", \n          \"El hombre de acero\", \n
+        \         \"\\u010covek od \\u010delika\"\n        ], \n        \"episode_info\":
+        null, \n        \"id\": \"WIk\", \n        \"posters\": {\n          \"inline\":
+        \"/thumbnails/moviedb/inline/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\",
+        \n          \"normal\": \"/thumbnails/moviedb/normal/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\",
+        \n          \"small\": \"/thumbnails/moviedb/small/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\",
+        \n          \"title\": \"/thumbnails/moviedb/title/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\n
+        \       }, \n        \"providers\": [\n          \"imdb:0770828\", \n          \"omdb:_ngG\"\n
+        \       ], \n        \"slug\": \"man-of-steel-2013\", \n        \"title\":
+        \"Man of Steel\", \n        \"type\": \"movie\", \n        \"year\": 2013\n
+        \     }, \n      \"notes\": \"\", \n      \"num_cds\": 1, \n      \"rejected\":
+        null, \n      \"releases\": [], \n      \"state\": \"\", \n      \"stats\":
+        {\n        \"characters\": 36508, \n        \"characters_per_line\": 24.338666666666665,
+        \n        \"downloads\": 7542, \n        \"lines\": 1500, \n        \"lines_per_unit\":
+        1.5321756894790604, \n        \"parts\": 1, \n        \"units\": 979\n      },
+        \n      \"url\": \"/en/subtitles/en-man-of-steel-2013/ZmIm\"\n    }, \n    {\n
+        \     \"audited\": true, \n      \"contributions\": [], \n      \"contributor\":
+        {\n        \"id\": 1, \n        \"name\": \"Anonymous\", \n        \"type\":
+        \"user\"\n      }, \n      \"created\": \"2013-06-24T13:12:30+00:00\", \n
+        \     \"custom_releases\": [\n        \"Man.of.Steel.2013.CAM.XviD.MP3.MiLLENiUM\"\n
+        \     ], \n      \"download\": \"/en/subtitles/en-man-of-steel-2013/whQm/download\",
+        \n      \"flags\": [], \n      \"fps\": \"25\", \n      \"id\": \"whQm\",
+        \n      \"language\": \"en\", \n      \"movie\": {\n        \"aliases\": [\n
+        \         \"\\u010covjek od \\u010delika\", \n          \"L'uomo d'acciaio\",
+        \n          \"Jekleni mo\\u017e\", \n          \"El hombre de acero\", \n
+        \         \"\\u010covek od \\u010delika\"\n        ], \n        \"episode_info\":
+        null, \n        \"id\": \"WIk\", \n        \"posters\": {\n          \"inline\":
+        \"/thumbnails/moviedb/inline/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\",
+        \n          \"normal\": \"/thumbnails/moviedb/normal/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\",
+        \n          \"small\": \"/thumbnails/moviedb/small/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\",
+        \n          \"title\": \"/thumbnails/moviedb/title/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\n
+        \       }, \n        \"providers\": [\n          \"imdb:0770828\", \n          \"omdb:_ngG\"\n
+        \       ], \n        \"slug\": \"man-of-steel-2013\", \n        \"title\":
+        \"Man of Steel\", \n        \"type\": \"movie\", \n        \"year\": 2013\n
+        \     }, \n      \"notes\": \"\", \n      \"num_cds\": 1, \n      \"rejected\":
+        null, \n      \"releases\": [], \n      \"state\": \"\", \n      \"stats\":
+        {\n        \"characters\": 34169, \n        \"characters_per_line\": 35.225773195876286,
+        \n        \"downloads\": 9187, \n        \"lines\": 970, \n        \"lines_per_unit\":
+        1.0, \n        \"parts\": 1, \n        \"units\": 970\n      }, \n      \"url\":
+        \"/en/subtitles/en-man-of-steel-2013/whQm\"\n    }, \n    {\n      \"audited\":
+        true, \n      \"contributions\": [], \n      \"contributor\": {\n        \"id\":
+        26933, \n        \"name\": \"asdasd\", \n        \"type\": \"user\"\n      },
+        \n      \"created\": \"2013-06-24T05:15:56+00:00\", \n      \"custom_releases\":
+        [\n        \"Man.Of.Steel.2013.CAM.XViD-CALiBRATE\"\n      ], \n      \"download\":
+        \"/en/subtitles/en-man-of-steel-2013/8RIm/download\", \n      \"flags\": [],
+        \n      \"fps\": \"29.97\", \n      \"id\": \"8RIm\", \n      \"language\":
+        \"en\", \n      \"movie\": {\n        \"aliases\": [\n          \"\\u010covjek
+        od \\u010delika\", \n          \"L'uomo d'acciaio\", \n          \"Jekleni
+        mo\\u017e\", \n          \"El hombre de acero\", \n          \"\\u010covek
+        od \\u010delika\"\n        ], \n        \"episode_info\": null, \n        \"id\":
+        \"WIk\", \n        \"posters\": {\n          \"inline\": \"/thumbnails/moviedb/inline/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\",
+        \n          \"normal\": \"/thumbnails/moviedb/normal/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\",
+        \n          \"small\": \"/thumbnails/moviedb/small/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\",
+        \n          \"title\": \"/thumbnails/moviedb/title/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\n
+        \       }, \n        \"providers\": [\n          \"imdb:0770828\", \n          \"omdb:_ngG\"\n
+        \       ], \n        \"slug\": \"man-of-steel-2013\", \n        \"title\":
+        \"Man of Steel\", \n        \"type\": \"movie\", \n        \"year\": 2013\n
+        \     }, \n      \"notes\": \"Cleaned and carefully edited. Better than the
+        rest.\", \n      \"num_cds\": 1, \n      \"rejected\": null, \n      \"releases\":
+        [], \n      \"state\": \"\", \n      \"stats\": {\n        \"characters\":
+        34166, \n        \"characters_per_line\": 35.25902992776058, \n        \"downloads\":
+        6377, \n        \"lines\": 969, \n        \"lines_per_unit\": 0.9989690721649485,
+        \n        \"parts\": 1, \n        \"units\": 970\n      }, \n      \"url\":
+        \"/en/subtitles/en-man-of-steel-2013/8RIm\"\n    }, \n    {\n      \"audited\":
+        true, \n      \"contributions\": [], \n      \"contributor\": {\n        \"id\":
+        7718, \n        \"name\": \"jdinic3\", \n        \"type\": \"user\"\n      },
+        \n      \"created\": \"2013-06-21T10:08:43+00:00\", \n      \"custom_releases\":
+        [\n        \"Man.Of.Steel.2013.CAM.NEW.AUDiO.XViD-JUSTiCE\"\n      ], \n      \"download\":
+        \"/en/subtitles/en-man-of-steel-2013/Nv0l/download\", \n      \"flags\": [],
+        \n      \"fps\": \"23.976\", \n      \"id\": \"Nv0l\", \n      \"language\":
+        \"en\", \n      \"movie\": {\n        \"aliases\": [\n          \"\\u010covjek
+        od \\u010delika\", \n          \"L'uomo d'acciaio\", \n          \"Jekleni
+        mo\\u017e\", \n          \"El hombre de acero\", \n          \"\\u010covek
+        od \\u010delika\"\n        ], \n        \"episode_info\": null, \n        \"id\":
+        \"WIk\", \n        \"posters\": {\n          \"inline\": \"/thumbnails/moviedb/inline/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\",
+        \n          \"normal\": \"/thumbnails/moviedb/normal/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\",
+        \n          \"small\": \"/thumbnails/moviedb/small/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\",
+        \n          \"title\": \"/thumbnails/moviedb/title/0e/30/30/30/da/f3/1a01e5cf452882d958f9/WIk.jpg\"\n
+        \       }, \n        \"providers\": [\n          \"imdb:0770828\", \n          \"omdb:_ngG\"\n
+        \       ], \n        \"slug\": \"man-of-steel-2013\", \n        \"title\":
+        \"Man of Steel\", \n        \"type\": \"movie\", \n        \"year\": 2013\n
+        \     }, \n      \"notes\": \"\", \n      \"num_cds\": 1, \n      \"rejected\":
+        null, \n      \"releases\": [], \n      \"state\": \"\", \n      \"stats\":
+        {\n        \"characters\": 31878, \n        \"characters_per_line\": 29.219065077910173,
+        \n        \"downloads\": 11890, \n        \"lines\": 1091, \n        \"lines_per_unit\":
+        1.0036798528058877, \n        \"parts\": 1, \n        \"units\": 1087\n      },
+        \n      \"url\": \"/en/subtitles/en-man-of-steel-2013/Nv0l\"\n    }\n  ],
+        \n  \"page\": 1, \n  \"per_page\": 50, \n  \"status\": \"ok\"\n}"
     headers:
-      connection:
+      Connection:
       - keep-alive
-      content-length:
+      Content-Length:
       - '24224'
-      content-type:
+      Content-Type:
       - application/json
-      date:
-      - Sat, 09 May 2020 10:24:42 GMT
-      server:
+      Date:
+      - Thu, 13 Feb 2025 23:31:36 GMT
+      Server:
       - nginx
     status:
       code: 200

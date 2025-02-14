@@ -5,7 +5,7 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Api-Key:
       - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
       Connection:
@@ -13,7 +13,7 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Subliminal v2.1
+      - Subliminal v2.2
     method: GET
     uri: https://api.opensubtitles.com/api/v1/subtitles?episode_number=6&languages=hu&page=1&query=marvels+agents+of+s.h.i.e.l.d.&season_number=2
   response:
@@ -25,7 +25,7 @@ interactions:
       CF-Cache-Status:
       - MISS
       CF-RAY:
-      - 88a9967c19f5119e-CDG
+      - 91189cbd6b6e5bd3-LIS
       Cache-Control:
       - public, max-age=86400
       Connection:
@@ -33,25 +33,43 @@ interactions:
       Content-Length:
       - '0'
       Date:
-      - Mon, 27 May 2024 22:54:37 GMT
+      - Thu, 13 Feb 2025 23:31:29 GMT
       Location:
       - /api/v1/subtitles?episode_number=6&languages=hu&query=marvels+agents+of+s.h.i.e.l.d.&season_number=2
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      RateLimit-Limit:
+      - '5'
+      RateLimit-Remaining:
+      - '4'
+      RateLimit-Reset:
+      - '1'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=Q8JXQ5c8GWB%2Bx%2B1U4B3ct8d8r4gZ9okRFNj0BvmIzBLJJ06PD%2Bc%2FwX7O20YHZCxTtTJCx89ZRPLWPO0tfDAddvcCO6xueE0saEiiu%2Fnl0J%2Bey64VaGnRJ6vR3QepQ%2B1sBw7kvibpumY%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=J6rQzlYQWdRiSJCL4J%2FnP%2BnV1kgjHplNIDNsHcKB6JAVNdVIzlWAsybFwI5NkMAXHd1ThLT%2FvJhfsNxdlxtMQeDzmeUmfmQCDi4QWkxzrLbaNG8V6aH7joOJds87NY5YVninYltOsBM%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
       - max-age=15552000; includeSubDomains; preload
       Vary:
       - Accept-Encoding
+      Via:
+      - kong/3.3.0
       X-Content-Type-Options:
       - nosniff
+      X-Kong-Proxy-Latency:
+      - '0'
+      X-Kong-Upstream-Latency:
+      - '1'
+      X-RateLimit-Limit-Second:
+      - '5'
+      X-RateLimit-Remaining-Second:
+      - '4'
       X-Varnish:
-      - '91970277'
+      - '19199984610'
       alt-svc:
       - h3=":443"; ma=86400
+      server-timing:
+      - cfL4;desc="?proto=TCP&rtt=3016&min_rtt=2989&rtt_var=1175&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2855&recv_bytes=945&delivery_rate=902743&cwnd=230&unsent_bytes=0&cid=6ed7b45a5c290059&ts=87&x=0"
     status:
       code: 301
       message: Moved Permanently
@@ -61,38 +79,38 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Api-Key:
       - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal v2.1
+      - Subliminal v2.2
     method: GET
     uri: https://api.opensubtitles.com/api/v1/subtitles?episode_number=6&languages=hu&query=marvels+agents+of+s.h.i.e.l.d.&season_number=2
   response:
     body:
-      string: '{"total_pages":1,"total_count":3,"per_page":60,"page":1,"data":[{"id":"2492310","type":"subtitle","attributes":{"subtitle_id":"2492310","language":"hu","download_count":6910,"new_download_count":9,"hearing_impaired":false,"hd":true,"fps":25.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2014-11-08T00:39:41Z","ai_translated":false,"nb_cd":1,"machine_translated":false,"release":"Marvels.Agents.of.S.H.I.E.L.D.S02E06.A.Fractured.House.720p.WEB-DL.DD5.1.H.264-BS","comments":"","legacy_subtitle_id":5885999,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+      string: '{"total_pages":1,"total_count":3,"per_page":50,"page":1,"data":[{"id":"2493688","type":"subtitle","attributes":{"subtitle_id":"2493688","language":"hu","download_count":429,"new_download_count":6,"hearing_impaired":false,"hd":true,"fps":23.976,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2016-10-15T18:19:23Z","file_hashes":["ff23bd9095eceaec","0889f3fd18a88198"],"ai_translated":false,"nb_cd":1,"slug":"6764373-marvels-agents-of-s-h-i-e-l-d-s02e06-bdrip-x264-hun-eng-krissz","machine_translated":false,"release":"Marvels.Agents.of.S.H.I.E.L.D.S02E06.BDRIP.x264.Hun.Eng-Krissz","comments":"","legacy_subtitle_id":6764373,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":149353,"feature_type":"Episode","year":2014,"title":"A
+        Fractured House","movie_name":"Marvel''s Agents of S.H.I.E.L.D. - S02E06  A
+        Fractured House","imdb_id":4078580,"tmdb_id":1010684,"season_number":2,"episode_number":6,"parent_imdb_id":2364582,"parent_title":"Marvel''s
+        Agents of S.H.I.E.L.D.","parent_tmdb_id":1403,"parent_feature_id":13370},"url":"https://www.opensubtitles.com/hu/subtitles/legacy/6764373","related_links":[{"label":"All
+        subtitles for Tv Show Marvel''s Agents of S.H.I.E.L.D.","url":"https://www.opensubtitles.com/hu/features/redirect/13370","img_url":"https://s9.opensubtitles.com/features/3/5/3/149353.jpg"},{"label":"All
+        subtitles for Episode a fractured house","url":"https://www.opensubtitles.com/hu/features/redirect/149353"}],"files":[{"file_id":2570094,"cd_number":1,"file_name":"Marvels.Agents.of.S.H.I.E.L.D.S02E06.BDRIP.x264.Hun.Eng-Krissz.hu"}]}},{"id":"2492310","type":"subtitle","attributes":{"subtitle_id":"2492310","language":"hu","download_count":6948,"new_download_count":11,"hearing_impaired":false,"hd":true,"fps":25.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2014-11-08T00:39:41Z","file_hashes":["3a105af286585e79","1771c5209812bed4","106167e08a959a98","bff0db8137e29c84","38370c72f3ed9342","b6fadda686d629a3","c0c3a3c8c68e22e5","63289d933d1a29e7","671f14f7f11ca11d","7037a89f01949e0e","b058f0769d7c52a2","88a397cf5c8d99be","f014c71e2a7117e5","4834e9d1e12c4496","e056bad9f865559d","5f6bf1a50b9fd1e9","c03fb9ddbd20221","d2d84d331cdd02cf"],"ai_translated":false,"nb_cd":1,"slug":"marvels-agents-of-s-h-i-e-l-d-s02e06-a-fractured-house-720p-web-dl-dd5-1-h-264-bs","machine_translated":false,"release":"Marvels.Agents.of.S.H.I.E.L.D.S02E06.A.Fractured.House.720p.WEB-DL.DD5.1.H.264-BS","comments":"","legacy_subtitle_id":5885999,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
         Developers"},"feature_details":{"feature_id":149353,"feature_type":"Episode","year":2014,"title":"A
         Fractured House","movie_name":"Marvel''s Agents of S.H.I.E.L.D. - S02E06  A
         Fractured House","imdb_id":4078580,"tmdb_id":1010684,"season_number":2,"episode_number":6,"parent_imdb_id":2364582,"parent_title":"Marvel''s
         Agents of S.H.I.E.L.D.","parent_tmdb_id":1403,"parent_feature_id":13370},"url":"https://www.opensubtitles.com/hu/subtitles/legacy/5885999","related_links":[{"label":"All
         subtitles for Tv Show Marvel''s Agents of S.H.I.E.L.D.","url":"https://www.opensubtitles.com/hu/features/redirect/13370","img_url":"https://s9.opensubtitles.com/features/3/5/3/149353.jpg"},{"label":"All
-        subtitles for Episode a fractured house","url":"https://www.opensubtitles.com/hu/features/redirect/149353"}],"files":[{"file_id":2568816,"cd_number":1,"file_name":"Marvels.Agents.of.S.H.I.E.L.D.S02E06.A.Fractured.House.720p.WEB-DL.DD5.1.H.264-BS"}]}},{"id":"2491535","type":"subtitle","attributes":{"subtitle_id":"2491535","language":"hu","download_count":3158,"new_download_count":2,"hearing_impaired":false,"hd":true,"fps":0.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2014-10-30T17:21:18Z","ai_translated":false,"nb_cd":1,"machine_translated":false,"release":"Marvels
+        subtitles for Episode a fractured house","url":"https://www.opensubtitles.com/hu/features/redirect/149353"}],"files":[{"file_id":2568816,"cd_number":1,"file_name":"Marvels.Agents.of.S.H.I.E.L.D.S02E06.A.Fractured.House.720p.WEB-DL.DD5.1.H.264-BS"}]}},{"id":"2491535","type":"subtitle","attributes":{"subtitle_id":"2491535","language":"hu","download_count":3244,"new_download_count":3,"hearing_impaired":false,"hd":true,"fps":0.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2014-10-30T18:21:18Z","file_hashes":["88a397cf5c8d99be","106167e08a959a98","ac9a41f09ecabb33","022185ea18248e99","d2aaf4ab759cb667","056f3863aa973ef5","9e51819e9ff824ee","1ee50387bf85ac2e","bff0db8137e29c84","67a397cf5c8d9a9d","58594a613126de79","3a105af286585e79"],"ai_translated":false,"nb_cd":1,"slug":"marvels-agents-of-s-h-i-e-l-d-2x06-a-fractured-house-hdtv-hdtv-evo","machine_translated":false,"release":"Marvels
         Agents of S.H.I.E.L.D. - 2x06 - A Fractured House.HDTV.HDTV.EVO","comments":"","legacy_subtitle_id":5876161,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
         Developers"},"feature_details":{"feature_id":149353,"feature_type":"Episode","year":2014,"title":"A
-        Fractured House","movie_name":"Marvel''s Agents of S.H.I.E.L.D. - S2E6 A Fractured
-        House","imdb_id":4078580,"tmdb_id":1010684,"season_number":2,"episode_number":6,"parent_imdb_id":2364582,"parent_title":"Marvel''s
+        Fractured House","movie_name":"Marvel''s Agents of S.H.I.E.L.D. - S02E06  A
+        Fractured House","imdb_id":4078580,"tmdb_id":1010684,"season_number":2,"episode_number":6,"parent_imdb_id":2364582,"parent_title":"Marvel''s
         Agents of S.H.I.E.L.D.","parent_tmdb_id":1403,"parent_feature_id":13370},"url":"https://www.opensubtitles.com/hu/subtitles/legacy/5876161","related_links":[{"label":"All
         subtitles for Tv Show Marvel''s Agents of S.H.I.E.L.D.","url":"https://www.opensubtitles.com/hu/features/redirect/13370","img_url":"https://s9.opensubtitles.com/features/3/5/3/149353.jpg"},{"label":"All
         subtitles for Episode a fractured house","url":"https://www.opensubtitles.com/hu/features/redirect/149353"}],"files":[{"file_id":2568016,"cd_number":1,"file_name":"Marvels
-        Agents of S.H.I.E.L.D. - 2x06 - A Fractured House.HDTV.HDTV.EVO.hu"}]}},{"id":"2493688","type":"subtitle","attributes":{"subtitle_id":"2493688","language":"hu","download_count":179,"new_download_count":5,"hearing_impaired":false,"hd":true,"fps":23.976,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2016-10-15T16:19:23Z","ai_translated":false,"nb_cd":1,"machine_translated":false,"release":"Marvels.Agents.of.S.H.I.E.L.D.S02E06.BDRIP.x264.Hun.Eng-Krissz","comments":"","legacy_subtitle_id":6764373,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
-        Developers"},"feature_details":{"feature_id":149353,"feature_type":"Episode","year":2014,"title":"A
-        Fractured House","movie_name":"Marvel''s Agents of S.H.I.E.L.D. - S2E6 A Fractured
-        House","imdb_id":4078580,"tmdb_id":1010684,"season_number":2,"episode_number":6,"parent_imdb_id":2364582,"parent_title":"Marvel''s
-        Agents of S.H.I.E.L.D.","parent_tmdb_id":1403,"parent_feature_id":13370},"url":"https://www.opensubtitles.com/hu/subtitles/legacy/6764373","related_links":[{"label":"All
-        subtitles for Tv Show Marvel''s Agents of S.H.I.E.L.D.","url":"https://www.opensubtitles.com/hu/features/redirect/13370","img_url":"https://s9.opensubtitles.com/features/3/5/3/149353.jpg"},{"label":"All
-        subtitles for Episode a fractured house","url":"https://www.opensubtitles.com/hu/features/redirect/149353"}],"files":[{"file_id":2570094,"cd_number":1,"file_name":"Marvels.Agents.of.S.H.I.E.L.D.S02E06.BDRIP.x264.Hun.Eng-Krissz.hu"}]}}]}'
+        Agents of S.H.I.E.L.D. - 2x06 - A Fractured House.HDTV.HDTV.EVO.hu"}]}}]}'
     headers:
       Access-Control-Allow-Headers:
       - Origin, Authorization, Accept, Api-Key, Content-Type, X-User-Agent
@@ -103,29 +121,27 @@ interactions:
       CF-Cache-Status:
       - MISS
       CF-RAY:
-      - 88a9967d1a81153f-CDG
+      - 91189cbdfe8b5bd4-LIS
       Cache-Control:
       - public, max-age=86400
       Connection:
       - keep-alive
-      Content-Encoding:
-      - br
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Mon, 27 May 2024 22:54:37 GMT
+      - Thu, 13 Feb 2025 23:31:29 GMT
       Last-Modified:
-      - Mon, 27 May 2024 22:54:37 GMT
+      - Thu, 13 Feb 2025 23:31:29 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       RateLimit-Limit:
       - '5'
       RateLimit-Remaining:
-      - '3'
+      - '4'
       RateLimit-Reset:
       - '1'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=H2gP5YKIATOhWFvtEyAbjzPEjya%2FmNJmcu3HmI6VNwJA5vVU%2BWAdxtDbp0dS74JY0C16ef%2BI2JheA8AG90zowxtehmVbLcHkPbRx4pMxjwkTxMXpFK1acB9z0rpBI9AKEInhBssdScU%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=JWcXROIiDEBayCZdCm0RMNqIeTvcPH%2Ftg5WkUzWpxPbBIqH3%2BplDD59kqo3vCrv%2FpTkgHay3Su9OUaAvznMax0uj526Ol5IzHs7FGSzSztAxK6%2BXJcDhtunjaJQftqSkQwMPWooQcpQ%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -134,8 +150,10 @@ interactions:
       - chunked
       Vary:
       - Accept-Encoding
+      Via:
+      - kong/3.3.0
       X-Cache-Backend:
-      - apigw1_8000 rb1-temp
+      - rb13
       X-Content-Type-Options:
       - nosniff
       X-Download-Options:
@@ -145,19 +163,19 @@ interactions:
       X-Kong-Proxy-Latency:
       - '0'
       X-Kong-Upstream-Latency:
-      - '34'
+      - '50'
       X-RateLimit-Limit-Second:
       - '5'
       X-RateLimit-Remaining-Second:
-      - '3'
+      - '4'
       X-Request-Id:
-      - 1466e5ae-b7e3-454c-8908-09ff907b0963
+      - be5d5f78-5dbe-4522-ab99-10bd630f2fb6
       X-Runtime:
-      - '0.030606'
+      - 0.047967
       X-Var-Cache:
       - MISS
       X-Via:
-      - fw1
+      - lb1
       X-Vip:
       - 'false'
       X-Vip-Consumer:
@@ -168,6 +186,10 @@ interactions:
       - 1; mode=block
       alt-svc:
       - h3=":443"; ma=86400
+      content-length:
+      - '5455'
+      server-timing:
+      - cfL4;desc="?proto=TCP&rtt=2182&min_rtt=1957&rtt_var=1185&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2855&recv_bytes=906&delivery_rate=770007&cwnd=241&unsent_bytes=0&cid=bb51d2bb2fb7c62a&ts=119&x=0"
     status:
       code: 200
       message: OK
@@ -177,7 +199,7 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Api-Key:
       - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
       Connection:
@@ -185,7 +207,7 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Subliminal v2.1
+      - Subliminal v2.2
     method: GET
     uri: https://api.opensubtitles.com/api/v1/subtitles?episode_number=6&languages=hu&page=1&query=marvels+agents+of+s.h.i.e.l.d.&season_number=2
   response:
@@ -199,7 +221,7 @@ interactions:
       CF-Cache-Status:
       - HIT
       CF-RAY:
-      - 88a9967e39bf2173-CDG
+      - 91189cbf0a665bd8-LIS
       Cache-Control:
       - public, max-age=86400
       Connection:
@@ -207,25 +229,43 @@ interactions:
       Content-Length:
       - '0'
       Date:
-      - Mon, 27 May 2024 22:54:37 GMT
+      - Thu, 13 Feb 2025 23:31:29 GMT
       Location:
       - /api/v1/subtitles?episode_number=6&languages=hu&query=marvels+agents+of+s.h.i.e.l.d.&season_number=2
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      RateLimit-Limit:
+      - '5'
+      RateLimit-Remaining:
+      - '4'
+      RateLimit-Reset:
+      - '1'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=en7xTH%2FrbaxUeNiSc6Xa69df4GKfPrauEhTnOG9mSRAft2lqkdrqpTxvn4KtSk0l6ngu%2BOdazutdKLr%2F9WLm8OTc7PxM2tnX70QDuTxbZh17vnJ%2BudNXYcHXFTbF46eqmA9SAf4al1I%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=wSckhmHBLQ7BfioFebEz2E77fpq0nR9dgO%2BagxuDEutjM6O9stNn3uxUUoj0QNilHD8kAMvHtnMyU0YE8wNWDvHpucm2KF%2Bpl9XiA2kDwOnF9tqBX0cCUmUHis3sUPhrj2R%2BwQfhChg%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
       - max-age=15552000; includeSubDomains; preload
       Vary:
       - Accept-Encoding
+      Via:
+      - kong/3.3.0
       X-Content-Type-Options:
       - nosniff
+      X-Kong-Proxy-Latency:
+      - '0'
+      X-Kong-Upstream-Latency:
+      - '1'
+      X-RateLimit-Limit-Second:
+      - '5'
+      X-RateLimit-Remaining-Second:
+      - '4'
       X-Varnish:
-      - '91970277'
+      - '19199984610'
       alt-svc:
       - h3=":443"; ma=86400
+      server-timing:
+      - cfL4;desc="?proto=TCP&rtt=3031&min_rtt=2975&rtt_var=1228&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2854&recv_bytes=945&delivery_rate=845053&cwnd=238&unsent_bytes=0&cid=bcba5d56bdf9c712&ts=29&x=0"
     status:
       code: 301
       message: Moved Permanently
@@ -235,38 +275,38 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Api-Key:
       - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal v2.1
+      - Subliminal v2.2
     method: GET
     uri: https://api.opensubtitles.com/api/v1/subtitles?episode_number=6&languages=hu&query=marvels+agents+of+s.h.i.e.l.d.&season_number=2
   response:
     body:
-      string: '{"total_pages":1,"total_count":3,"per_page":60,"page":1,"data":[{"id":"2492310","type":"subtitle","attributes":{"subtitle_id":"2492310","language":"hu","download_count":6910,"new_download_count":9,"hearing_impaired":false,"hd":true,"fps":25.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2014-11-08T00:39:41Z","ai_translated":false,"nb_cd":1,"machine_translated":false,"release":"Marvels.Agents.of.S.H.I.E.L.D.S02E06.A.Fractured.House.720p.WEB-DL.DD5.1.H.264-BS","comments":"","legacy_subtitle_id":5885999,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+      string: '{"total_pages":1,"total_count":3,"per_page":50,"page":1,"data":[{"id":"2493688","type":"subtitle","attributes":{"subtitle_id":"2493688","language":"hu","download_count":429,"new_download_count":6,"hearing_impaired":false,"hd":true,"fps":23.976,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2016-10-15T18:19:23Z","file_hashes":["ff23bd9095eceaec","0889f3fd18a88198"],"ai_translated":false,"nb_cd":1,"slug":"6764373-marvels-agents-of-s-h-i-e-l-d-s02e06-bdrip-x264-hun-eng-krissz","machine_translated":false,"release":"Marvels.Agents.of.S.H.I.E.L.D.S02E06.BDRIP.x264.Hun.Eng-Krissz","comments":"","legacy_subtitle_id":6764373,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":149353,"feature_type":"Episode","year":2014,"title":"A
+        Fractured House","movie_name":"Marvel''s Agents of S.H.I.E.L.D. - S02E06  A
+        Fractured House","imdb_id":4078580,"tmdb_id":1010684,"season_number":2,"episode_number":6,"parent_imdb_id":2364582,"parent_title":"Marvel''s
+        Agents of S.H.I.E.L.D.","parent_tmdb_id":1403,"parent_feature_id":13370},"url":"https://www.opensubtitles.com/hu/subtitles/legacy/6764373","related_links":[{"label":"All
+        subtitles for Tv Show Marvel''s Agents of S.H.I.E.L.D.","url":"https://www.opensubtitles.com/hu/features/redirect/13370","img_url":"https://s9.opensubtitles.com/features/3/5/3/149353.jpg"},{"label":"All
+        subtitles for Episode a fractured house","url":"https://www.opensubtitles.com/hu/features/redirect/149353"}],"files":[{"file_id":2570094,"cd_number":1,"file_name":"Marvels.Agents.of.S.H.I.E.L.D.S02E06.BDRIP.x264.Hun.Eng-Krissz.hu"}]}},{"id":"2492310","type":"subtitle","attributes":{"subtitle_id":"2492310","language":"hu","download_count":6948,"new_download_count":11,"hearing_impaired":false,"hd":true,"fps":25.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2014-11-08T00:39:41Z","file_hashes":["3a105af286585e79","1771c5209812bed4","106167e08a959a98","bff0db8137e29c84","38370c72f3ed9342","b6fadda686d629a3","c0c3a3c8c68e22e5","63289d933d1a29e7","671f14f7f11ca11d","7037a89f01949e0e","b058f0769d7c52a2","88a397cf5c8d99be","f014c71e2a7117e5","4834e9d1e12c4496","e056bad9f865559d","5f6bf1a50b9fd1e9","c03fb9ddbd20221","d2d84d331cdd02cf"],"ai_translated":false,"nb_cd":1,"slug":"marvels-agents-of-s-h-i-e-l-d-s02e06-a-fractured-house-720p-web-dl-dd5-1-h-264-bs","machine_translated":false,"release":"Marvels.Agents.of.S.H.I.E.L.D.S02E06.A.Fractured.House.720p.WEB-DL.DD5.1.H.264-BS","comments":"","legacy_subtitle_id":5885999,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
         Developers"},"feature_details":{"feature_id":149353,"feature_type":"Episode","year":2014,"title":"A
         Fractured House","movie_name":"Marvel''s Agents of S.H.I.E.L.D. - S02E06  A
         Fractured House","imdb_id":4078580,"tmdb_id":1010684,"season_number":2,"episode_number":6,"parent_imdb_id":2364582,"parent_title":"Marvel''s
         Agents of S.H.I.E.L.D.","parent_tmdb_id":1403,"parent_feature_id":13370},"url":"https://www.opensubtitles.com/hu/subtitles/legacy/5885999","related_links":[{"label":"All
         subtitles for Tv Show Marvel''s Agents of S.H.I.E.L.D.","url":"https://www.opensubtitles.com/hu/features/redirect/13370","img_url":"https://s9.opensubtitles.com/features/3/5/3/149353.jpg"},{"label":"All
-        subtitles for Episode a fractured house","url":"https://www.opensubtitles.com/hu/features/redirect/149353"}],"files":[{"file_id":2568816,"cd_number":1,"file_name":"Marvels.Agents.of.S.H.I.E.L.D.S02E06.A.Fractured.House.720p.WEB-DL.DD5.1.H.264-BS"}]}},{"id":"2491535","type":"subtitle","attributes":{"subtitle_id":"2491535","language":"hu","download_count":3158,"new_download_count":2,"hearing_impaired":false,"hd":true,"fps":0.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2014-10-30T17:21:18Z","ai_translated":false,"nb_cd":1,"machine_translated":false,"release":"Marvels
+        subtitles for Episode a fractured house","url":"https://www.opensubtitles.com/hu/features/redirect/149353"}],"files":[{"file_id":2568816,"cd_number":1,"file_name":"Marvels.Agents.of.S.H.I.E.L.D.S02E06.A.Fractured.House.720p.WEB-DL.DD5.1.H.264-BS"}]}},{"id":"2491535","type":"subtitle","attributes":{"subtitle_id":"2491535","language":"hu","download_count":3244,"new_download_count":3,"hearing_impaired":false,"hd":true,"fps":0.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2014-10-30T18:21:18Z","file_hashes":["88a397cf5c8d99be","106167e08a959a98","ac9a41f09ecabb33","022185ea18248e99","d2aaf4ab759cb667","056f3863aa973ef5","9e51819e9ff824ee","1ee50387bf85ac2e","bff0db8137e29c84","67a397cf5c8d9a9d","58594a613126de79","3a105af286585e79"],"ai_translated":false,"nb_cd":1,"slug":"marvels-agents-of-s-h-i-e-l-d-2x06-a-fractured-house-hdtv-hdtv-evo","machine_translated":false,"release":"Marvels
         Agents of S.H.I.E.L.D. - 2x06 - A Fractured House.HDTV.HDTV.EVO","comments":"","legacy_subtitle_id":5876161,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
         Developers"},"feature_details":{"feature_id":149353,"feature_type":"Episode","year":2014,"title":"A
-        Fractured House","movie_name":"Marvel''s Agents of S.H.I.E.L.D. - S2E6 A Fractured
-        House","imdb_id":4078580,"tmdb_id":1010684,"season_number":2,"episode_number":6,"parent_imdb_id":2364582,"parent_title":"Marvel''s
+        Fractured House","movie_name":"Marvel''s Agents of S.H.I.E.L.D. - S02E06  A
+        Fractured House","imdb_id":4078580,"tmdb_id":1010684,"season_number":2,"episode_number":6,"parent_imdb_id":2364582,"parent_title":"Marvel''s
         Agents of S.H.I.E.L.D.","parent_tmdb_id":1403,"parent_feature_id":13370},"url":"https://www.opensubtitles.com/hu/subtitles/legacy/5876161","related_links":[{"label":"All
         subtitles for Tv Show Marvel''s Agents of S.H.I.E.L.D.","url":"https://www.opensubtitles.com/hu/features/redirect/13370","img_url":"https://s9.opensubtitles.com/features/3/5/3/149353.jpg"},{"label":"All
         subtitles for Episode a fractured house","url":"https://www.opensubtitles.com/hu/features/redirect/149353"}],"files":[{"file_id":2568016,"cd_number":1,"file_name":"Marvels
-        Agents of S.H.I.E.L.D. - 2x06 - A Fractured House.HDTV.HDTV.EVO.hu"}]}},{"id":"2493688","type":"subtitle","attributes":{"subtitle_id":"2493688","language":"hu","download_count":179,"new_download_count":5,"hearing_impaired":false,"hd":true,"fps":23.976,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2016-10-15T16:19:23Z","ai_translated":false,"nb_cd":1,"machine_translated":false,"release":"Marvels.Agents.of.S.H.I.E.L.D.S02E06.BDRIP.x264.Hun.Eng-Krissz","comments":"","legacy_subtitle_id":6764373,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
-        Developers"},"feature_details":{"feature_id":149353,"feature_type":"Episode","year":2014,"title":"A
-        Fractured House","movie_name":"Marvel''s Agents of S.H.I.E.L.D. - S2E6 A Fractured
-        House","imdb_id":4078580,"tmdb_id":1010684,"season_number":2,"episode_number":6,"parent_imdb_id":2364582,"parent_title":"Marvel''s
-        Agents of S.H.I.E.L.D.","parent_tmdb_id":1403,"parent_feature_id":13370},"url":"https://www.opensubtitles.com/hu/subtitles/legacy/6764373","related_links":[{"label":"All
-        subtitles for Tv Show Marvel''s Agents of S.H.I.E.L.D.","url":"https://www.opensubtitles.com/hu/features/redirect/13370","img_url":"https://s9.opensubtitles.com/features/3/5/3/149353.jpg"},{"label":"All
-        subtitles for Episode a fractured house","url":"https://www.opensubtitles.com/hu/features/redirect/149353"}],"files":[{"file_id":2570094,"cd_number":1,"file_name":"Marvels.Agents.of.S.H.I.E.L.D.S02E06.BDRIP.x264.Hun.Eng-Krissz.hu"}]}}]}'
+        Agents of S.H.I.E.L.D. - 2x06 - A Fractured House.HDTV.HDTV.EVO.hu"}]}}]}'
     headers:
       Access-Control-Allow-Headers:
       - Origin, Authorization, Accept, Api-Key, Content-Type, X-User-Agent
@@ -274,34 +314,30 @@ interactions:
       - GET, HEAD, POST, OPTIONS
       Access-Control-Allow-Origin:
       - '*'
-      Age:
-      - '0'
       CF-Cache-Status:
-      - HIT
+      - MISS
       CF-RAY:
-      - 88a9967eeace99c8-CDG
+      - 91189cbfce95ef09-LHR
       Cache-Control:
       - public, max-age=86400
       Connection:
       - keep-alive
-      Content-Encoding:
-      - br
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Mon, 27 May 2024 22:54:37 GMT
+      - Thu, 13 Feb 2025 23:31:29 GMT
       Last-Modified:
-      - Mon, 27 May 2024 22:54:37 GMT
+      - Thu, 13 Feb 2025 23:31:29 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       RateLimit-Limit:
       - '5'
       RateLimit-Remaining:
-      - '3'
+      - '4'
       RateLimit-Reset:
       - '1'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=b%2FLGBLdza4vG0mk0GZq5wkAlaMsTS6FF4DHSlf4QfkkHyXcIXww36x5ECQKJ7G8PO5zom%2BcWriBf441DhAFRrcWLTU%2BtX%2BakcftloCtArw3D9STRXDbIaISM2eiHjSXmLnnmUKg5g8E%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=nYjoRZ0gSpmjISh%2BlTkm%2FafcO0YqrS%2ByeMFGhv7yFUee60jIQG75XtVANJ4a8%2Bwi5tC4JextK7g2eqyIu1Kjej%2Fw4oAwW%2F2g57xL%2B2ly4FIOJYXscK%2B5ljq2wwajMYPwk7Mp4VdFgdA%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -310,8 +346,10 @@ interactions:
       - chunked
       Vary:
       - Accept-Encoding
+      Via:
+      - kong/3.3.0
       X-Cache-Backend:
-      - apigw1_8000 rb1-temp
+      - rb13
       X-Content-Type-Options:
       - nosniff
       X-Download-Options:
@@ -321,19 +359,19 @@ interactions:
       X-Kong-Proxy-Latency:
       - '0'
       X-Kong-Upstream-Latency:
-      - '34'
+      - '28'
       X-RateLimit-Limit-Second:
       - '5'
       X-RateLimit-Remaining-Second:
-      - '3'
+      - '4'
       X-Request-Id:
-      - 1466e5ae-b7e3-454c-8908-09ff907b0963
+      - 324227fa-c83c-47f4-994a-6dc5c367d8cd
       X-Runtime:
-      - '0.030606'
+      - 0.025368
       X-Var-Cache:
       - MISS
       X-Via:
-      - fw1
+      - lb1
       X-Vip:
       - 'false'
       X-Vip-Consumer:
@@ -344,6 +382,10 @@ interactions:
       - 1; mode=block
       alt-svc:
       - h3=":443"; ma=86400
+      content-length:
+      - '5455'
+      server-timing:
+      - cfL4;desc="?proto=TCP&rtt=32870&min_rtt=32110&rtt_var=12584&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2855&recv_bytes=906&delivery_rate=90189&cwnd=235&unsent_bytes=0&cid=aeac8e085073061d&ts=110&x=0"
     status:
       code: 200
       message: OK

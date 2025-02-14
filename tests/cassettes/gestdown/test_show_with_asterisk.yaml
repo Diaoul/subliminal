@@ -3,11 +3,11 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
       accept:
       - application/json
     method: GET
@@ -16,26 +16,20 @@ interactions:
     body:
       string: '"Couldn''t find show: The End of the Fucking World"'
     headers:
-      Age:
-      - '2'
-      CF-Cache-Status:
-      - HIT
       CF-RAY:
-      - 88ba5f442d655be0-LIS
+      - 91189a328a435bf0-LIS
       Cache-Control:
       - public, max-age=43200
       Connection:
       - keep-alive
-      Content-Encoding:
-      - br
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 29 May 2024 23:47:53 GMT
+      - Thu, 13 Feb 2025 23:29:45 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=V6Nnpz0JVhjVksNKEqz9jG3zaFpo8uZnvWI2sRX%2FuMEpSMwhiFECOuUa%2F2cRRDpZcAUp0VQtv0b8NiTqouJkTQfIX%2BFY%2BJdZ0hTF6sbA13iuTYCQ7CehHE1d%2Fz5nye4OaGvkpA%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=fy%2Fqd5SzRTGfnrmNbX73HVMTkfTHg59cH4VwMk57yrcFcfdzF8hROefltYl1lSiJqF1GAmfsqO3j4GeD7aubCMWK%2B%2F0uWAc9iUqOb67DVDteGZH6JGLc9XNQOt%2FEU7WzJ3VlHw%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -46,7 +40,14 @@ interactions:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
+      cf-cache-status:
+      - EXPIRED
+      content-length:
+      - '50'
+      server-timing:
+      - cfL4;desc="?proto=TCP&rtt=3055&min_rtt=2971&rtt_var=1282&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2848&recv_bytes=823&delivery_rate=794731&cwnd=235&unsent_bytes=0&cid=3fb13d955dd20cf4&ts=86&x=0"
       vary:
+      - Accept-Encoding
       - Accept-Encoding
     status:
       code: 404
@@ -55,11 +56,11 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
       accept:
       - application/json
     method: GET
@@ -69,28 +70,20 @@ interactions:
       string: '{"shows":[{"id":"e789f371-ae07-4db4-b9aa-6b34e7e9e7b0","name":"The
         End of the F***ing World","nbSeasons":2,"seasons":[1,2],"tvDbId":336522,"tmdbId":74577,"slug":"the-end-of-the-fing-world"}]}'
     headers:
-      Age:
-      - '2'
-      CF-Cache-Status:
-      - HIT
       CF-RAY:
-      - 88ba5f445fa55bde-LIS
+      - 91189a333cbe5bea-LIS
       Cache-Control:
       - public, max-age=14400
       Connection:
       - keep-alive
-      Content-Encoding:
-      - br
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 29 May 2024 23:47:53 GMT
-      Last-Modified:
-      - Wed, 29 May 2024 19:47:25 GMT
+      - Thu, 13 Feb 2025 23:29:45 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=Qzux1Fm2zfu%2FcsRk1rIyRHYFJ8GPdX6EcyUltAk2jyU36hyY%2FNZPEoBtk%2BKUpWjAe3oj48ot3%2Blx2uosa3hpBFt9nt8D9sMLbVsFxqnSciBexzeDlXtmAV4CJlNlD12Ap2eL6w%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=aAuKojDYjJaaCjYymfvJxCR1f6w7CVRHfa%2BB6y3O2dvba%2FYHYIjCukyLx6%2FT2Q3Qt3h6VSVHo5t7ykJGC%2FY5ShSSNp1i5DC7KamOL938OmrziEFR42DQvR5cMhZ3B62fMb8byg%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -101,7 +94,16 @@ interactions:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
+      cf-cache-status:
+      - EXPIRED
+      content-length:
+      - '191'
+      last-modified:
+      - Thu, 13 Feb 2025 23:29:45 GMT
+      server-timing:
+      - cfL4;desc="?proto=TCP&rtt=3063&min_rtt=3003&rtt_var=1246&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2847&recv_bytes=823&delivery_rate=831467&cwnd=243&unsent_bytes=0&cid=9f75562879495196&ts=109&x=0"
       vary:
+      - Accept-Encoding
       - Accept-Encoding
     status:
       code: 200
@@ -110,40 +112,38 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
       accept:
       - application/json
     method: GET
     uri: https://api.gestdown.info/subtitles/get/e789f371-ae07-4db4-b9aa-6b34e7e9e7b0/1/4/eng
   response:
     body:
-      string: '{"matchingSubtitles":[{"subtitleId":"b54fb204-c809-4405-844b-f1fd6fe12925","version":"SCREENCRAP","completed":true,"hearingImpaired":true,"corrected":true,"hd":false,"downloadUri":"/subtitles/download/b54fb204-c809-4405-844b-f1fd6fe12925","language":"English","discovered":"2022-06-03T16:16:46.910908Z","downloadCount":4},{"subtitleId":"0594bbe3-aef4-41a7-8673-c7d7c1b40334","version":"WEB-DL.QOQ","completed":true,"hearingImpaired":true,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/0594bbe3-aef4-41a7-8673-c7d7c1b40334","language":"English","discovered":"2022-06-03T16:16:46.91091Z","downloadCount":2},{"subtitleId":"425506e2-2981-481a-b048-6b4e1efa145f","version":"WEB-DL.QOQ","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/425506e2-2981-481a-b048-6b4e1efa145f","language":"English","discovered":"2022-06-03T16:16:46.910912Z","downloadCount":192}],"episode":{"season":1,"number":4,"title":"Episode
+      string: '{"matchingSubtitles":[{"subtitleId":"b54fb204-c809-4405-844b-f1fd6fe12925","version":"SCREENCRAP","completed":true,"hearingImpaired":true,"corrected":true,"hd":false,"downloadUri":"/subtitles/download/b54fb204-c809-4405-844b-f1fd6fe12925","language":"English","discovered":"2022-06-03T16:16:46.910908Z","downloadCount":4},{"subtitleId":"0594bbe3-aef4-41a7-8673-c7d7c1b40334","version":"WEB-DL.QOQ","completed":true,"hearingImpaired":true,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/0594bbe3-aef4-41a7-8673-c7d7c1b40334","language":"English","discovered":"2022-06-03T16:16:46.91091Z","downloadCount":24},{"subtitleId":"425506e2-2981-481a-b048-6b4e1efa145f","version":"WEB-DL.QOQ","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/425506e2-2981-481a-b048-6b4e1efa145f","language":"English","discovered":"2022-06-03T16:16:46.910912Z","downloadCount":227}],"episode":{"season":1,"number":4,"title":"Episode
         4","show":"The End of the F***ing World","discovered":"2022-06-03T16:16:46.910906Z"}}'
     headers:
       CF-Cache-Status:
       - EXPIRED
       CF-RAY:
-      - 88ba5f449ebb5bd5-LIS
+      - 91189a33f8a15bd8-LIS
       Cache-Control:
       - public, max-age=7200
       Connection:
       - keep-alive
-      Content-Encoding:
-      - br
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 29 May 2024 23:47:53 GMT
+      - Thu, 13 Feb 2025 23:29:45 GMT
       Last-Modified:
-      - Wed, 29 May 2024 19:47:30 GMT
+      - Thu, 13 Feb 2025 23:29:45 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=aGLT0QfG1rucX99vMKkPN3Rgj%2FZIushH24xNU%2FitYCK0%2Flr3j6uP74kR61UXppEGOC6XcJ4gilZX%2F3ZUYTEaRD%2B4wfWjkzoHqJLFFF8IELm8vLlS2p1NbBM7ngCElQGiQYyaBg%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=UdwzxvzcMbIQrlnxbdwfpWoPt7dx2LbhCgCj3WkLXcblCMx%2FSi4Hb7nfb2ZW%2BldpTOmzCZn6ko26BfxzT0XS%2FNQcKGl8jHp21nlQtzBeJEAs0TnRJPsrM%2Fmvtjv5jZpKBD3Dyg%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -154,7 +154,12 @@ interactions:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
+      content-length:
+      - '1059'
+      server-timing:
+      - cfL4;desc="?proto=TCP&rtt=3042&min_rtt=2996&rtt_var=1216&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2848&recv_bytes=830&delivery_rate=860112&cwnd=238&unsent_bytes=0&cid=70fbf30300d78f04&ts=134&x=0"
       vary:
+      - Accept-Encoding
       - Accept-Encoding
     status:
       code: 200

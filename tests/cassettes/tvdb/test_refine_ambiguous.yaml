@@ -1,69 +1,21 @@
 interactions:
 - request:
-    body: '{"apikey": "5EC930FB90DA1ADA", "username": null, "password": null}'
-    headers:
-      Accept:
-      - '*/*'
-      Accept-Encoding:
-      - gzip, deflate, br, zstd
-      Accept-Language:
-      - en
-      Connection:
-      - keep-alive
-      Content-Length:
-      - '66'
-      Content-Type:
-      - application/json
-      User-Agent:
-      - Subliminal/2.1
-    method: POST
-    uri: https://api.thetvdb.com/login
-  response:
-    body:
-      string: '{"token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg"}'
-    headers:
-      Connection:
-      - keep-alive
-      Content-Length:
-      - '470'
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Wed, 22 May 2024 14:33:34 GMT
-      Vary:
-      - Accept-Language
-      Via:
-      - 1.1 2b1fd1e1421ca124eaa002817c6c475a.cloudfront.net (CloudFront)
-      X-Amz-Cf-Id:
-      - ZRlGvJMw9l8m8F_5_ZcUkEpo4bbvjXOwoVTOWqy_WubSgl5jBugmFQ==
-      X-Amz-Cf-Pop:
-      - LIS50-P1
-      X-Cache:
-      - Miss from cloudfront
-      X-Powered-By:
-      - Thundar!
-      X-Thetvdb-Api-Version:
-      - 3.0.0
-    status:
-      code: 200
-      message: OK
-- request:
     body: null
     headers:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Accept-Language:
       - en
       Authorization:
-      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDAwOTQyMTgsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzM5NDg5NDE4fQ.I-flvnRYHdakvoJPuyRAVB6U6ePDHLaV8YdC98u5dVsuvO3P3obJ7E7yAN_x3Mc5f5xyQyHcD11I0JsOcud3NLHt-zM3wknZbMcSqhsy7oNl9OYlELhePRcOMl_EVs_IyyCV9tEjkjTPRoHGrHI2R2DLbOzSWojSqWUkwZemRHvHSsxIaaCIKouP9Slp4B1xAdGlkBklpr0QNhjOU6NkSjioing-gUMc053fDuEJTbaOoH9wMFgYyC6S4cZEEyD2zMmGW_Cqvfgbhy2YGZdAXmWoEQzHepnDct11knRzYFR6t2RwGoziOF1l41kOwfXeUtQQdIvvFuyXdJQSJuU6UA
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
     uri: https://api.thetvdb.com/search/series?name=colony
   response:
@@ -85,7 +37,7 @@ interactions:
         engineering and psychology have helped design the world of The Colony to reflect
         elements from both real-life disasters and models of what the future could
         look like after a global viral outbreak.\",\"poster\":\"/banners/v4/series/105521/posters/609db96ca73a9.jpg\",\"seriesName\":\"The
-        Colony\",\"slug\":\"the-colony\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2019-08-25\",\"id\":415272,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"Netflix\",\"overview\":\"Delves
+        Colony (2009)\",\"slug\":\"the-colony\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2019-08-25\",\"id\":415272,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"Netflix\",\"overview\":\"Delves
         into the untold stories and unsung heroes that paved Nigeria's road to independence.
         Based on the books by host Olasupo Shasore.\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Journey
         of an African Colony\",\"slug\":\"journey-of-an-african-colony\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/259064-g.jpg\",\"firstAired\":\"2012-05-29\",\"id\":259064,\"image\":\"/banners/posters/259064-1.jpg\",\"network\":\"National
@@ -113,10 +65,9 @@ interactions:
         of their ancestors. Living the life of free settlers, convicts and local Aboriginal
         people, they experience the unforgiving toughness of the colony of New South
         Wales as it was 200 years ago.\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"The
-        Colony\",\"slug\":\"the-colony-australia\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2022-04-15\",\"id\":422893,\"image\":\"/banners/v4/series/422893/posters/62e7f39a0c54d.jpg\",\"network\":\"YouTube\",\"overview\":\"Today
+        Colony (2005)\",\"slug\":\"the-colony-australia\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2022-04-15\",\"id\":422893,\"image\":\"/banners/v4/series/422893/posters/62e7f39a0c54d.jpg\",\"network\":\"YouTube\",\"overview\":\"Today
         the boys use the nuclear option.\",\"poster\":\"/banners/v4/series/422893/posters/62e7f39a0c54d.jpg\",\"seriesName\":\"Neebs
-        Gaming: Pulsar - Lost Colony\",\"slug\":\"neebs-gaming-pulsar-lost-colony\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"/banners/graphical/95181-g.jpg\",\"firstAired\":\"2007-01-11\",\"id\":95181,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"TVNorge\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Vacation
-        Colony\",\"slug\":\"95181-show\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/5c93a00937dfd.jpg\",\"firstAired\":\"2019-03-11\",\"id\":360904,\"image\":\"/banners/posters/5c9396c380ce9.jpg\",\"network\":\"BBC
+        Gaming: Pulsar - Lost Colony\",\"slug\":\"neebs-gaming-pulsar-lost-colony\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"/banners/graphical/5c93a00937dfd.jpg\",\"firstAired\":\"2019-03-11\",\"id\":360904,\"image\":\"/banners/posters/5c9396c380ce9.jpg\",\"network\":\"BBC
         One\",\"overview\":\"Wales: England's Colony? is designed to stimulate debate
         about the past story of Wales, and will also challenge the audience to think
         afresh about some of the future constitutional choices facing Wales as it
@@ -128,7 +79,11 @@ interactions:
         exploitation, the Blue Books, the 1919 race riots and the flooding of Cwm
         Tryweryn.\\r\\n\",\"poster\":\"/banners/posters/5c9396c380ce9.jpg\",\"seriesName\":\"Wales:
         England's Colony?\",\"slug\":\"wales-englands-colony\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"\",\"id\":392408,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Col\xF3n
-        y la era del descubrimiento\",\"slug\":\"colon-y-la-era-del-descubrimiento\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/5bf50db16915b.jpg\",\"firstAired\":\"2018-11-20\",\"id\":355758,\"image\":\"/banners/posters/5bf6fdc99e1a3.jpg\",\"network\":\"VRT
+        y la era del descubrimiento\",\"slug\":\"colon-y-la-era-del-descubrimiento\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2017-03-12\",\"id\":451612,\"image\":\"/banners/images/missing/series.jpg\",\"network\":null,\"overview\":\"Welcome
+        to Colony Survival, the game where you play as a king attempting to build
+        his kingdom with the aid of his boy slaves. Join Lewis, Duncan and Tom as
+        they sit back, relax and watch their minions build their ambitious kingdoms.\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Yogscast:
+        Colony Survival\",\"slug\":\"yogscast-colony-survival\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/5bf50db16915b.jpg\",\"firstAired\":\"2018-11-20\",\"id\":355758,\"image\":\"/banners/posters/5bf6fdc99e1a3.jpg\",\"network\":\"VRT
         CANVAS\",\"overview\":\"In 1960 Congo became independent after a short political
         struggle. For Belgium it was the end of more than 75 years of presence in
         the Central African country. In the six-part series Children of the Colony,
@@ -139,8 +94,9 @@ interactions:
         close will talk about colonial and postcolonial Congo. In the sixth episode,
         six Congo experts delve deeper into the postcolonial image and unravel truth
         and myths about Belgian Congo.\",\"poster\":\"/banners/posters/5bf6fdc99e1a3.jpg\",\"seriesName\":\"Children
-        of the Colony\",\"slug\":\"kinderen-van-de-kolonie\",\"status\":\"Ended\"},{\"aliases\":[\"A
-        Sinister Sect: Colonia Dignidad (2021)\"],\"banner\":\"/banners/v4/series/410898/banners/616d8e38dc511.jpg\",\"firstAired\":\"2021-10-01\",\"id\":410898,\"image\":\"/banners/v4/series/410898/posters/6163e9f8e6894.jpg\",\"network\":\"Netflix\",\"overview\":\"A
+        of the Colony\",\"slug\":\"kinderen-van-de-kolonie\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/95181-g.jpg\",\"firstAired\":\"2007-01-11\",\"id\":95181,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"TVNorge\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Vacation
+        Colony\",\"slug\":\"95181-show\",\"status\":\"Ended\"},{\"aliases\":[\"A Sinister
+        Sect: Colonia Dignidad (2021)\"],\"banner\":\"/banners/v4/series/410898/banners/616d8e38dc511.jpg\",\"firstAired\":\"2021-10-01\",\"id\":410898,\"image\":\"/banners/v4/series/410898/posters/6163e9f8e6894.jpg\",\"network\":\"Netflix\",\"overview\":\"A
         colony of German Christians with a charismatic and manipulative leader establishes
         itself in Chile and becomes instrumental to the dictatorship.\",\"poster\":\"/banners/v4/series/410898/posters/6163e9f8e6894.jpg\",\"seriesName\":\"A
         Sinister Sect: Colonia Dignidad\",\"slug\":\"voyage-au-bout-de-lemprise-colonia-dignidad\",\"status\":\"Ended\"},{\"aliases\":[\"Colonia
@@ -163,7 +119,7 @@ interactions:
         Off\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Col\xF4nia
         de f\xE9rias\",\"slug\":\"colonia-de-ferias\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2017-07-18\",\"id\":330557,\"image\":\"/banners/posters/330557-1.jpg\",\"network\":\"Comedy
         Central\",\"poster\":\"/banners/posters/330557-1.jpg\",\"seriesName\":\"La
-        Culpa es de Col\xF3n\",\"slug\":\"330557-show\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/71913-g.jpg\",\"firstAired\":\"2004-05-17\",\"id\":71913,\"image\":\"/banners/posters/71913-2.jpg\",\"network\":\"PBS\",\"overview\":\"A
+        Culpa es de Col\xF3n\",\"slug\":\"330557-show\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/71913/banners/67646fbdf3433.jpg\",\"firstAired\":\"2004-05-17\",\"id\":71913,\"image\":\"/banners/posters/71913-2.jpg\",\"network\":\"PBS\",\"overview\":\"A
         group of ordinary people arrive on a boat to 1628 and have to build a functioning
         colony, using only time appropriate resources. Their goal: survive for 4 months
         and pass the final evaluation.\\r\\n\",\"poster\":\"/banners/posters/71913-2.jpg\",\"seriesName\":\"Colonial
@@ -183,7 +139,7 @@ interactions:
         Death in the Dressing Room, and The New Invisible Man) Karloff narrates the
         three segments and stars as the lead.\",\"poster\":\"/banners/posters/78711-2.jpg\",\"seriesName\":\"Colonel
         March of Scotland Yard\",\"slug\":\"colonel-march-of-scotland-yard\",\"status\":\"Ended\"},{\"aliases\":[\"The
-        Survivors,  Colonia Dignidad\"],\"banner\":\"\",\"firstAired\":\"2022-09-30\",\"id\":426523,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"Prime
+        Survivors,  Colonia Dignidad\",\"The Survivors: Colonia Dignidad\"],\"banner\":\"/banners/v4/series/426523/banners/6667921702f64.jpg\",\"firstAired\":\"2022-09-30\",\"id\":426523,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"Prime
         Video\",\"overview\":\"Explores the hidden truths behind the idyllic German-themed
         amusement park that was once home to Nazis, torture chambers, extreme medical
         experiments, and Chile's most dangerous sect.\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Los
@@ -227,13 +183,7 @@ interactions:
         Central\",\"overview\":\"An animated series featuring two ignorant, foul-mouthed
         fish, Vinny Gill and Colonel Peppersnacks; overly confident best friends who
         have left the ocean behind to conquer the rap game.\",\"poster\":\"/banners/posters/336619-1.jpg\",\"seriesName\":\"Vinny
-        And The Colonel\",\"slug\":\"vinny-and-the-colonel\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"\",\"id\":419518,\"image\":\"/banners/images/missing/series.jpg\",\"network\":null,\"overview\":\"Set
-        in colonial Chile in the 19th century. It had three seasons broadcast from
-        Monday to Friday during 2010 and 2011, with a total of approximately 100 chapters.
-        The plot of the episode usually contains two stories, a main story and a secondary
-        story, which begins and ends with the denouement of the main story. The chapters
-        always end with the credits and joke scenes.\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"La
-        colonia\",\"slug\":\"la-colonia\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"1953-10-07\",\"id\":78709,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"\",\"overview\":\"Welcome
+        And The Colonel\",\"slug\":\"vinny-and-the-colonel\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"1953-10-07\",\"id\":78709,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"\",\"overview\":\"Welcome
         to the Colonel Flack guide at TV Tome.\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Colonel
         Flack\",\"slug\":\"colonel-flack\",\"status\":\"Ended\"},{\"aliases\":[\"The
         Great Courses - American Military History\"],\"banner\":\"\",\"firstAired\":\"\",\"id\":433105,\"image\":\"/banners/v4/series/433105/posters/6463f64ed135e.jpg\",\"network\":null,\"overview\":\"Wars
@@ -253,7 +203,9 @@ interactions:
         and the Colonel\",\"slug\":\"mckeever-and-the-colonel\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2010-01-01\",\"id\":348868,\"image\":\"/banners/series/348868/posters/62038976.jpg\",\"network\":\"Toute
         l'histoire\",\"poster\":\"/banners/series/348868/posters/62038976.jpg\",\"seriesName\":\"Au
         temps des colonies\",\"slug\":\"au-temps-des-colonies\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"\",\"id\":335494,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Colonial
-        Life For Children\",\"slug\":\"colonial-life-for-children\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"\",\"id\":419631,\"image\":\"/banners/v4/series/419631/posters/626f1f5fc2a37.jpg\",\"network\":null,\"overview\":\"The
+        Life For Children\",\"slug\":\"colonial-life-for-children\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2024-01-30\",\"id\":446101,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"Multishow\",\"overview\":\"Nicole
+        Bahls always welcomes guests to her place.\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Col\xF4nia
+        Bahls\",\"slug\":\"colonia-bahls\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"\",\"id\":419631,\"image\":\"/banners/v4/series/419631/posters/626f1f5fc2a37.jpg\",\"network\":null,\"overview\":\"The
         history of colonial America is a story of extraordinary scope, with Europeans,
         Africans, and the native peoples of North America interacting in a drama of
         settlement and conflict that lasted nearly three centuries. In the midst of
@@ -273,9 +225,7 @@ interactions:
         Heeza Liar is the star of the first animated series featuring a recurring
         character. In this story he comes to the rescue of a baseball team and becomes
         the star pitcher and hitter.\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Colonel
-        Heeza Liar\",\"slug\":\"colonel-heeza-liar\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2024-01-30\",\"id\":446101,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"Multishow\",\"overview\":\"Nicole
-        Bahls always welcomes guests to her place.\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Col\xF4nia
-        Bahls\",\"slug\":\"colonia-bahls\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/403227/banners/62ad9f2816a1c.jpg\",\"firstAired\":\"2021-06-16\",\"id\":403227,\"image\":\"/banners/v4/series/403227/posters/60c9ed9da4757.jpg\",\"network\":\"Netflix\",\"overview\":\"In
+        Heeza Liar\",\"slug\":\"colonel-heeza-liar\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/403227/banners/62ad9f2816a1c.jpg\",\"firstAired\":\"2021-06-16\",\"id\":403227,\"image\":\"/banners/v4/series/403227/posters/60c9ed9da4757.jpg\",\"network\":\"Netflix\",\"overview\":\"In
         a picturesque South African town, an eclectic group of endangered penguins
         flock together to find mates, raise families and mix with the locals.\",\"poster\":\"/banners/v4/series/403227/posters/60c9ed9da4757.jpg\",\"seriesName\":\"Penguin
         Town\",\"slug\":\"penguin-town\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/133271/banners/63fa97b8e7bb9.jpg\",\"firstAired\":\"2003-10-15\",\"id\":133271,\"image\":\"/banners/series/133271/posters/5f6b1bd0759bd.jpg\",\"network\":\"ZDF\",\"overview\":\"SOKO
@@ -313,17 +263,17 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 22 May 2024 14:33:36 GMT
+      - Thu, 13 Feb 2025 23:30:20 GMT
       Transfer-Encoding:
       - chunked
       Vary:
       - Accept-Language
       Via:
-      - 1.1 ca3702c84b0e2f2daaf573cabe88ad8c.cloudfront.net (CloudFront)
+      - 1.1 ccf23514a8a200c107293458311fe030.cloudfront.net (CloudFront)
       X-Amz-Cf-Id:
-      - 3fn9d610EjI3aLbTA5JI02TPVMRwDnAYVQrH1ri7z4fBj_wzQqmodQ==
+      - zDu1mfl7O00xKnXfne0KvYaSID7oVFE8uSjEpCAu5mZ_IduEuW66Pw==
       X-Amz-Cf-Pop:
-      - LIS50-P1
+      - MAD51-C3
       X-Cache:
       - Miss from cloudfront
       X-Powered-By:
@@ -339,17 +289,17 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Accept-Language:
       - en
       Authorization:
-      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDAwOTQyMTgsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzM5NDg5NDE4fQ.I-flvnRYHdakvoJPuyRAVB6U6ePDHLaV8YdC98u5dVsuvO3P3obJ7E7yAN_x3Mc5f5xyQyHcD11I0JsOcud3NLHt-zM3wknZbMcSqhsy7oNl9OYlELhePRcOMl_EVs_IyyCV9tEjkjTPRoHGrHI2R2DLbOzSWojSqWUkwZemRHvHSsxIaaCIKouP9Slp4B1xAdGlkBklpr0QNhjOU6NkSjioing-gUMc053fDuEJTbaOoH9wMFgYyC6S4cZEEyD2zMmGW_Cqvfgbhy2YGZdAXmWoEQzHepnDct11knRzYFR6t2RwGoziOF1l41kOwfXeUtQQdIvvFuyXdJQSJuU6UA
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
     uri: https://api.thetvdb.com/series/284210
   response:
@@ -365,7 +315,7 @@ interactions:
         07:35:43","addedBy":1,"siteRating":8.3,"siteRatingCount":1010,"slug":"colony"}}'
     headers:
       Age:
-      - '51173'
+      - '40623'
       Cache-Control:
       - private, max-age=86400
       Connection:
@@ -375,17 +325,17 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 22 May 2024 00:20:42 GMT
+      - Thu, 13 Feb 2025 12:13:18 GMT
       Last-Modified:
       - Sun, 31 Dec 2023 04:42:17 GMT
       Vary:
       - Accept-Language
       Via:
-      - 1.1 a48f09960f130cb6049f12b379cf591e.cloudfront.net (CloudFront)
+      - 1.1 63232f3b2d3a2bd32f6b987afbf6b4ec.cloudfront.net (CloudFront)
       X-Amz-Cf-Id:
-      - Ipskt6lkgBE65Lhc8l690C0r7QADB09l6jowEQcf9DtmAx4pnoiPCg==
+      - e6bS-PFU6S4bjm8bGSkgLvtlkvR7qwPpFJFcv6v8d8DGz103Hv5u-A==
       X-Amz-Cf-Pop:
-      - LIS50-P1
+      - MAD51-C3
       X-Cache:
       - Hit from cloudfront
       X-Powered-By:
@@ -401,17 +351,17 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Accept-Language:
       - en
       Authorization:
-      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDAwOTQyMTgsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzM5NDg5NDE4fQ.I-flvnRYHdakvoJPuyRAVB6U6ePDHLaV8YdC98u5dVsuvO3P3obJ7E7yAN_x3Mc5f5xyQyHcD11I0JsOcud3NLHt-zM3wknZbMcSqhsy7oNl9OYlELhePRcOMl_EVs_IyyCV9tEjkjTPRoHGrHI2R2DLbOzSWojSqWUkwZemRHvHSsxIaaCIKouP9Slp4B1xAdGlkBklpr0QNhjOU6NkSjioing-gUMc053fDuEJTbaOoH9wMFgYyC6S4cZEEyD2zMmGW_Cqvfgbhy2YGZdAXmWoEQzHepnDct11knRzYFR6t2RwGoziOF1l41kOwfXeUtQQdIvvFuyXdJQSJuU6UA
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
     uri: https://api.thetvdb.com/series/284210/episodes/query?airedSeason=1&airedEpisode=9&page=1
   response:
@@ -426,34 +376,32 @@ interactions:
         move.\r\n","language":{"episodeName":"en","overview":"en"},"productionCode":"","showUrl":"","lastUpdated":1599565295,"dvdDiscid":"","dvdSeason":1,"dvdEpisodeNumber":9,"dvdChapter":null,"absoluteNumber":9,"filename":"series/284210/episodes/5f4ff0afceff3.jpg","seriesId":284210,"lastUpdatedBy":2302046,"airsAfterSeason":null,"airsBeforeSeason":null,"airsBeforeEpisode":null,"imdbId":"tt4926022","contentRating":"TV-14","thumbAuthor":2302046,"thumbAdded":"2019-11-13
         13:13:27","thumbWidth":"640","thumbHeight":"360","siteRating":8.3,"siteRatingCount":348,"isMovie":0}]}'
     headers:
-      Age:
-      - '42186'
       Cache-Control:
       - private, max-age=86400
       Connection:
       - keep-alive
-      Content-Encoding:
-      - gzip
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 22 May 2024 02:50:30 GMT
+      - Thu, 13 Feb 2025 23:30:21 GMT
       Transfer-Encoding:
       - chunked
       Vary:
       - Accept-Encoding,Accept-Language
       Via:
-      - 1.1 68c9162ccc29f8f3ca30be36950cea58.cloudfront.net (CloudFront)
+      - 1.1 04f3fd55f9b917223bc0c2e0c0d302d6.cloudfront.net (CloudFront)
       X-Amz-Cf-Id:
-      - yyo-gRSoee5mVRENgSz8pV-n2QP1dNFdHtR3glI6KvcKgeRcGmp-Vg==
+      - 8sJAQN3JxHXwFUJGXwpb-UzPgRdtFBk9RtkAAdlf1o38X5I4sx-eCQ==
       X-Amz-Cf-Pop:
-      - LIS50-P1
+      - MAD51-C3
       X-Cache:
-      - Hit from cloudfront
+      - Miss from cloudfront
       X-Powered-By:
       - Thundar!
       X-Thetvdb-Api-Version:
       - 3.0.0
+      content-length:
+      - '1225'
     status:
       code: 200
       message: OK
@@ -463,17 +411,17 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Accept-Language:
       - en
       Authorization:
-      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDAwOTQyMTgsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzM5NDg5NDE4fQ.I-flvnRYHdakvoJPuyRAVB6U6ePDHLaV8YdC98u5dVsuvO3P3obJ7E7yAN_x3Mc5f5xyQyHcD11I0JsOcud3NLHt-zM3wknZbMcSqhsy7oNl9OYlELhePRcOMl_EVs_IyyCV9tEjkjTPRoHGrHI2R2DLbOzSWojSqWUkwZemRHvHSsxIaaCIKouP9Slp4B1xAdGlkBklpr0QNhjOU6NkSjioing-gUMc053fDuEJTbaOoH9wMFgYyC6S4cZEEyD2zMmGW_Cqvfgbhy2YGZdAXmWoEQzHepnDct11knRzYFR6t2RwGoziOF1l41kOwfXeUtQQdIvvFuyXdJQSJuU6UA
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
     uri: https://api.thetvdb.com/episodes/5463229
   response:
@@ -488,18 +436,14 @@ interactions:
         move.\r\n","language":{"episodeName":"en","overview":"en"},"productionCode":"","showUrl":"","lastUpdated":1599565295,"dvdDiscid":"","dvdSeason":1,"dvdEpisodeNumber":9,"dvdChapter":null,"absoluteNumber":9,"filename":"series/284210/episodes/5f4ff0afceff3.jpg","seriesId":284210,"lastUpdatedBy":2302046,"airsAfterSeason":null,"airsBeforeSeason":null,"airsBeforeEpisode":null,"imdbId":"tt4926022","contentRating":"TV-14","thumbAuthor":2302046,"thumbAdded":"2019-11-13
         13:13:27","thumbWidth":"640","thumbHeight":"360","siteRating":8.3,"siteRatingCount":348,"isMovie":0}}'
     headers:
-      Age:
-      - '42187'
       Cache-Control:
       - private, max-age=86400
       Connection:
       - keep-alive
-      Content-Encoding:
-      - gzip
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 22 May 2024 02:50:30 GMT
+      - Thu, 13 Feb 2025 23:30:21 GMT
       Last-Modified:
       - Thu, 01 Jan 1970 00:00:00 GMT
       Transfer-Encoding:
@@ -507,17 +451,19 @@ interactions:
       Vary:
       - Accept-Encoding,Accept-Language
       Via:
-      - 1.1 f13924e40949c7e0a5bd0c7e333695f2.cloudfront.net (CloudFront)
+      - 1.1 f5cc76e0ef8305f960f258eb80ac4006.cloudfront.net (CloudFront)
       X-Amz-Cf-Id:
-      - m9GtA9Ealf1UCH9punlkvpWgIV5qbyGUUPePClE5CmxMe9DYVHbGXg==
+      - pIxbWPkgQrHn2qts-LzsARf_dU9osuJmrdPYiVrxEIZoCdcO31IEcg==
       X-Amz-Cf-Pop:
-      - LIS50-P1
+      - MAD51-C3
       X-Cache:
-      - Hit from cloudfront
+      - Miss from cloudfront
       X-Powered-By:
       - Thundar!
       X-Thetvdb-Api-Version:
       - 3.0.0
+      content-length:
+      - '1170'
     status:
       code: 200
       message: OK

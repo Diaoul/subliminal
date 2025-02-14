@@ -1,69 +1,21 @@
 interactions:
 - request:
-    body: '{"apikey": "5EC930FB90DA1ADA", "username": null, "password": null}'
-    headers:
-      Accept:
-      - '*/*'
-      Accept-Encoding:
-      - gzip, deflate, br, zstd
-      Accept-Language:
-      - en
-      Connection:
-      - keep-alive
-      Content-Length:
-      - '66'
-      Content-Type:
-      - application/json
-      User-Agent:
-      - Subliminal/2.1
-    method: POST
-    uri: https://api.thetvdb.com/login
-  response:
-    body:
-      string: '{"token":"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg"}'
-    headers:
-      Connection:
-      - keep-alive
-      Content-Length:
-      - '470'
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Wed, 22 May 2024 14:33:34 GMT
-      Vary:
-      - Accept-Language
-      Via:
-      - 1.1 2b1fd1e1421ca124eaa002817c6c475a.cloudfront.net (CloudFront)
-      X-Amz-Cf-Id:
-      - ZRlGvJMw9l8m8F_5_ZcUkEpo4bbvjXOwoVTOWqy_WubSgl5jBugmFQ==
-      X-Amz-Cf-Pop:
-      - LIS50-P1
-      X-Cache:
-      - Miss from cloudfront
-      X-Powered-By:
-      - Thundar!
-      X-Thetvdb-Api-Version:
-      - 3.0.0
-    status:
-      code: 200
-      message: OK
-- request:
     body: null
     headers:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Accept-Language:
       - en
       Authorization:
-      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDAwOTQyMTgsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzM5NDg5NDE4fQ.I-flvnRYHdakvoJPuyRAVB6U6ePDHLaV8YdC98u5dVsuvO3P3obJ7E7yAN_x3Mc5f5xyQyHcD11I0JsOcud3NLHt-zM3wknZbMcSqhsy7oNl9OYlELhePRcOMl_EVs_IyyCV9tEjkjTPRoHGrHI2R2DLbOzSWojSqWUkwZemRHvHSsxIaaCIKouP9Slp4B1xAdGlkBklpr0QNhjOU6NkSjioing-gUMc053fDuEJTbaOoH9wMFgYyC6S4cZEEyD2zMmGW_Cqvfgbhy2YGZdAXmWoEQzHepnDct11knRzYFR6t2RwGoziOF1l41kOwfXeUtQQdIvvFuyXdJQSJuU6UA
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
     uri: https://api.thetvdb.com/search/series?name=csi
   response:
@@ -77,7 +29,7 @@ interactions:
         Vegas to the streets of Florida in CSI: Miami. A whole new team of crime scene
         investigators is on hand to probe the seamy underside of Miami.\",\"poster\":\"/banners/posters/78310-3.jpg\",\"seriesName\":\"CSI:
         Miami\",\"slug\":\"csi-miami\",\"status\":\"Ended\"},{\"aliases\":[\"CSI:
-        New York\",\"CSI: New York\"],\"banner\":\"/banners/graphical/24125-g.jpg\",\"firstAired\":\"2004-09-22\",\"id\":73696,\"image\":\"/banners/posters/73696-3.jpg\",\"network\":\"CBS\",\"overview\":\"The
+        New York\",\"\u72AF\u7F6A\u73B0\u573A\",\"CSI: New York\"],\"banner\":\"/banners/graphical/24125-g.jpg\",\"firstAired\":\"2004-09-22\",\"id\":73696,\"image\":\"/banners/posters/73696-3.jpg\",\"network\":\"CBS\",\"overview\":\"The
         third edition of the \\\"CSI\\\" franchise sets up shop in the Big Apple,
         where taciturn Detective Mac Taylor (Gary Sinise) and his partner, Detective
         Stella Bonasera (Melina Kanakaredes), lead a crime-solving team. Like his
@@ -105,7 +57,10 @@ interactions:
         Two\",\"overview\":\"Multiple cameras follow serious crime investigations
         in real time, revealing the crucial role cutting-edge forensic science now
         plays in bringing criminals to justice.\",\"poster\":\"/banners/v4/series/362856/posters/60a543e25f51e.jpg\",\"seriesName\":\"Forensics:
-        The Real CSI\",\"slug\":\"forensics-the-real-csi\",\"status\":\"Continuing\"},{\"aliases\":[\"Jurassic
+        The Real CSI\",\"slug\":\"forensics-the-real-csi\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/449895/banners/666bc18d365b2.jpg\",\"firstAired\":\"2024-06-26\",\"id\":449895,\"image\":\"/banners/v4/series/449895/posters/666b6d28d17d5.jpg\",\"network\":\"CBS\",\"overview\":\"The
+        series will feature real-life crime cases and the cutting-edge forensic science
+        used to solve them.\",\"poster\":\"/banners/v4/series/449895/posters/666b6d28d17d5.jpg\",\"seriesName\":\"The
+        Real CSI: Miami\",\"slug\":\"the-real-csi-miami\",\"status\":\"Continuing\"},{\"aliases\":[\"Jurassic
         C.S.I.\"],\"banner\":\"/banners/graphical/253030-g.jpg\",\"firstAired\":\"2011-07-07\",\"id\":253030,\"image\":\"/banners/posters/253030-1.jpg\",\"network\":\"National
         Geographic\",\"overview\":\"In Jurassic CSI, dino detective Dr. Phil Manning
         launches a full-scale investigation to unearth how dinosaurs really looked
@@ -122,7 +77,7 @@ interactions:
         and photography reveal the unknown acts of our animal kingdom. Get up close
         with predators and see how their instincts make them the fittest when it comes
         to their survival.\",\"poster\":\"/banners/posters/152441-1.jpg\",\"seriesName\":\"Predator
-        CSI\",\"slug\":\"predator-csi\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2004-01-05\",\"id\":143501,\"image\":\"/banners/posters/143501-1.jpg\",\"network\":\"TVBS
+        CSI\",\"slug\":\"predator-csi\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/143501/banners/677802d79190b.jpg\",\"firstAired\":\"2004-01-05\",\"id\":143501,\"image\":\"/banners/posters/143501-1.jpg\",\"network\":\"TVBS
         Entertainment Channel\",\"poster\":\"/banners/posters/143501-1.jpg\",\"seriesName\":\"Variety
         Show of Mr. Con \\u0026 Ms. Csi\",\"slug\":\"variety-show-of-mr-con-and-ms-csi\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/434381/banners/6612f969cc8da.jpg\",\"firstAired\":\"2023-03-23\",\"id\":434381,\"image\":\"/banners/v4/series/434381/posters/644df8cf2a006.jpg\",\"network\":null,\"overview\":\"CSI
         On Trial reveals the shocking lack of scientific validity behind these investigative
@@ -132,20 +87,17 @@ interactions:
         (Australia)\",\"poster\":\"/banners/posters/342048-1.jpg\",\"seriesName\":\"CSI:\uC18C\uBE44\uC790
         \uD0D0\uC0AC\uB300\",\"slug\":\"342048-show\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"2019-09-08\",\"id\":415906,\"image\":\"/banners/images/missing/series.jpg\",\"network\":null,\"overview\":\"Talks
         and portraits of extraordinary people every week.\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"Tell
-        Csilla Tatar!\",\"slug\":\"mondd-el-tatar-csillanak\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"\",\"firstAired\":\"\",\"id\":449895,\"image\":\"/banners/images/missing/series.jpg\",\"network\":\"CBS\",\"overview\":\"The
-        series will feature real-life crime cases and the cutting-edge forensic science
-        used to solve them.\",\"poster\":\"/banners/images/missing/series.jpg\",\"seriesName\":\"The
-        Real CSI: Miami\",\"slug\":\"the-real-csi-miami\",\"status\":\"Upcoming\"},{\"aliases\":[\"Stargate
-        SG1\",\"Stargate Kommando SG-1\",\"Stargate SG1\"],\"banner\":\"/banners/graphical/185-g.jpg\",\"firstAired\":\"1997-07-27\",\"id\":72449,\"image\":\"/banners/posters/72449-4.jpg\",\"network\":\"Showtime\",\"overview\":\"This
-        sequel to the 1994 movie Stargate chronicles the further adventures of SGC
-        (Stargate Command). It turned out that the Goa'uld Ra was only one of many
-        alien System Lords who used the Stargates to conquer much of the universe.
-        When Earth uncovers a working cartouche to decipher the coding system of their
-        own Stargate, they find they can now travel anywhere. Earth's military sends
-        out SG teams to explore new planets, find technology, and oppose the Goa'uld.
-        Jack O'Neill and Daniel Jackson from the original movie are part of SG-1.
-        They are joined by Sam Carter, a scientist, and Teal'c, a Jaffa who is convinced
-        the Goa'uld are not gods.\",\"poster\":\"/banners/posters/72449-4.jpg\",\"seriesName\":\"Stargate
+        Csilla Tatar!\",\"slug\":\"mondd-el-tatar-csillanak\",\"status\":\"Ended\"},{\"aliases\":[\"Stargate
+        SG1\",\"Stargate Kommando SG-1\",\"Stargate SG1\"],\"banner\":\"/banners/graphical/185-g.jpg\",\"firstAired\":\"1997-07-27\",\"id\":72449,\"image\":\"/banners/posters/72449-4.jpg\",\"network\":\"Paramount+
+        with Showtime\",\"overview\":\"This sequel to the 1994 movie Stargate chronicles
+        the further adventures of SGC (Stargate Command). It turned out that the Goa'uld
+        Ra was only one of many alien System Lords who used the Stargates to conquer
+        much of the universe. When Earth uncovers a working cartouche to decipher
+        the coding system of their own Stargate, they find they can now travel anywhere.
+        Earth's military sends out SG teams to explore new planets, find technology,
+        and oppose the Goa'uld. Jack O'Neill and Daniel Jackson from the original
+        movie are part of SG-1. They are joined by Sam Carter, a scientist, and Teal'c,
+        a Jaffa who is convinced the Goa'uld are not gods.\",\"poster\":\"/banners/posters/72449-4.jpg\",\"seriesName\":\"Stargate
         SG-1\",\"slug\":\"stargate-sg-1\",\"status\":\"Ended\"},{\"aliases\":[\"Star
         Crossed\",\"\u041A\u0438\u0441\u043B\u043E\u0440\u043E\u0434\",\"\u041D\u0435\u0441\u0447\u0430\u0441\u0442\u043D\u044B\u0435\"],\"banner\":\"/banners/graphical/269604-g4.jpg\",\"firstAired\":\"2014-02-17\",\"id\":269604,\"image\":\"/banners/posters/269604-3.jpg\",\"network\":\"The
         CW\",\"overview\":\"Passion and politics threaten the peace and an epic romance
@@ -195,7 +147,9 @@ interactions:
         her sister Simone, and their friend Alex are three talented young singers
         who navigate the music business on their road to success in Atlanta, where
         Star and Simone's long lost godmother Carlotta lives. They'll soon learn that
-        success is not only about the music, but also drama, sacrifice and pain.\",\"poster\":\"/banners/posters/311810-6.jpg\",\"seriesName\":\"Star\",\"slug\":\"star\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/graphical/17291-g.jpg\",\"firstAired\":\"2003-11-07\",\"id\":72244,\"image\":\"/banners/posters/72244-2.jpg\",\"network\":\"Cartoon
+        success is not only about the music, but also drama, sacrifice and pain.\",\"poster\":\"/banners/posters/311810-6.jpg\",\"seriesName\":\"Star\",\"slug\":\"star\",\"status\":\"Ended\"},{\"aliases\":[\"Star
+        Wars Vintage: Clone Wars 2D Micro-Series\",\"Star Wars Vintage: Clone Wars
+        2D Mini-Serie\"],\"banner\":\"/banners/graphical/17291-g.jpg\",\"firstAired\":\"2003-11-07\",\"id\":72244,\"image\":\"/banners/posters/72244-2.jpg\",\"network\":\"Cartoon
         Network\",\"overview\":\"Star Wars: Clone Wars picks up where the theatrical
         feature Star Wars: Episode II: Attack of the Clones left off as an epic civil
         war pits the Republic against the separatist movement led by the Dark Side
@@ -236,7 +190,7 @@ interactions:
         'n Dale Rescue Rangers\",\"slug\":\"chip-n-dale-rescue-rangers\",\"status\":\"Ended\"},{\"aliases\":[\"SpongeBob
         SquarePants: The Patrick Star Show\",\"Bob Esponja: O Show do Patrick Estrela\"],\"banner\":\"/banners/v4/series/386806/banners/6615f6a298818.jpg\",\"firstAired\":\"2021-07-09\",\"id\":386806,\"image\":\"/banners/v4/series/386806/posters/60e6bc8677d0f.jpg\",\"network\":\"Nickelodeon\",\"overview\":\"Patrick
         Star hosts his very own talk show, with the support of his family.\",\"poster\":\"/banners/v4/series/386806/posters/60e6bc8677d0f.jpg\",\"seriesName\":\"The
-        Patrick Star Show\",\"slug\":\"the-patrick-star-show\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/400730/banners/644856d8a3922.jpg\",\"firstAired\":\"2021-05-26\",\"id\":400730,\"image\":\"/banners/v4/series/400730/posters/643a7163a6c2f.jpg\",\"network\":\"FOX\",\"overview\":\"Culinary
+        Patrick Star Show\",\"slug\":\"the-patrick-star-show\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/400730/banners/66d4c38682c57.jpg\",\"firstAired\":\"2021-05-26\",\"id\":400730,\"image\":\"/banners/v4/series/400730/posters/643a7163a6c2f.jpg\",\"network\":\"FOX\",\"overview\":\"Culinary
         guessing game in which bakers are tasked with decoding what type of dessert
         was made when all that\u2019s left are the crumbs, flour trails, and a few
         elusive clues. They must then recreate the recipe for celebrity judges, chef
@@ -247,12 +201,14 @@ interactions:
         birthday in the Marseille region. However, a series of murders that at first
         seem random commence and Esther is brought in to assist and discover who is
         the \\\"Zodiac.\\\"\",\"poster\":\"/banners/posters/174241-2.jpg\",\"seriesName\":\"Zodiac
-        (2004)\",\"slug\":\"zodiac-2004\",\"status\":\"Ended\"},{\"aliases\":[\"\u0939\u0940\u0930\u093E\u092E\u0902\u0921\u0940:
-        \u0926 \u0921\u093E\u092F\u092E\u0902\u0921 \u092C\u093E\u095B\u093E\u0930\",\"Heeramandi:
-        O Bazar dos Diamantes\"],\"banner\":\"/banners/v4/series/420398/banners/662fda5f367b9.jpg\",\"firstAired\":\"2024-05-01\",\"id\":420398,\"image\":\"/banners/v4/series/420398/posters/6637257502b93.jpg\",\"network\":\"Netflix\",\"overview\":\"Sanjay
-        Leela Bhansali brings his majestic signature flair to stories of love and
-        betrayal in the lives of courtesans in pre-independence India.\",\"poster\":\"/banners/v4/series/420398/posters/6637257502b93.jpg\",\"seriesName\":\"Heeramandi:
-        The Diamond Bazaar\",\"slug\":\"heeramandi\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"/banners/graphical/307245-g.jpg\",\"firstAired\":\"2015-10-01\",\"id\":307245,\"image\":\"/banners/posters/307245-1.jpg\",\"network\":\"Disney
+        (2004)\",\"slug\":\"zodiac-2004\",\"status\":\"Ended\"},{\"aliases\":[\"Byeoldeulege
+        Muleobwa\",\"Ask the Stars\",\"\u041A\u043E\u0433\u0434\u0430 \u0437\u0432\u0451\u0437\u0434\u044B
+        \u0448\u0435\u043F\u0447\u0443\u0442\"],\"banner\":\"/banners/v4/series/412705/banners/677949be35801.jpg\",\"firstAired\":\"2025-01-04\",\"id\":412705,\"image\":\"/banners/v4/series/412705/posters/6758e4ba093b5.jpg\",\"network\":\"tvN\",\"overview\":\"The
+        intergalactic life beyond Earth and romance between Eve, a boss working at
+        the zero-gravity space station, and Gong Ryong, an uninvited guest with a
+        secret mission. Set against the beautiful, boundless backdrop of space, their
+        story is a captivating blend of life, love, and adventure.\",\"poster\":\"/banners/v4/series/412705/posters/6758e4ba093b5.jpg\",\"seriesName\":\"When
+        the Stars Gossip\",\"slug\":\"when-the-stars-gossip\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"/banners/graphical/307245-g.jpg\",\"firstAired\":\"2015-10-01\",\"id\":307245,\"image\":\"/banners/posters/307245-1.jpg\",\"network\":\"Disney
         Channel\",\"overview\":\"As far back as anyone can remember, Starlings have
         granted wishes for Earthlings. But when an evil force suddenly threatens Starland,
         twelve Star-Charmed girls are sent on the most magical adventures of their
@@ -268,34 +224,39 @@ interactions:
         body as small as the spoon around her neck! When she becomes small, she can
         communicate with animals and enjoy wonderful adventures in the woods.\",\"poster\":\"/banners/v4/series/131361/posters/618983a882595.jpg\",\"seriesName\":\"Mrs.
         Pepperpot\",\"slug\":\"mrs-pepperpot\",\"status\":\"Ended\"},{\"aliases\":[\"Iryuu
-        Sousa\"],\"banner\":\"/banners/graphical/249250-g.jpg\",\"firstAired\":\"2011-04-13\",\"id\":249250,\"image\":\"/banners/v4/series/249250/posters/62e410ff78ca4.jpg\",\"network\":\"TV
+        Sousa\"],\"banner\":\"/banners/v4/series/249250/banners/666882a8720a6.jpg\",\"firstAired\":\"2011-04-13\",\"id\":249250,\"image\":\"/banners/v4/series/249250/posters/62e410ff78ca4.jpg\",\"network\":\"TV
         Asahi\",\"overview\":\"Depicts the work of a group of detectives who solve
         murder cases by looking for clues in the articles left by victims.\",\"poster\":\"/banners/v4/series/249250/posters/62e410ff78ca4.jpg\",\"seriesName\":\"CSI:
-        Crime Scene Talks\",\"slug\":\"iryu-sosa\",\"status\":\"Continuing\"},{\"aliases\":[\"Dakgangjeong\",\"Dalggangjeong\",\"Dak
-        Gang Jeong\",\"Fried Chicken\",\"Chicken Gangjeong\",\"Sweet and Sour Chicken\"],\"banner\":\"/banners/v4/series/424613/banners/65e1053fc5002.jpg\",\"firstAired\":\"2024-03-15\",\"id\":424613,\"image\":\"/banners/v4/series/424613/posters/65cd71cb48620.jpg\",\"network\":\"Netflix\",\"overview\":\"A
-        woman steps into an odd machine and becomes\u2026 a chicken nugget?! Now,
-        it\u2019s up to her father and admirer to embark on a zany quest to bring
-        her back.\",\"poster\":\"/banners/v4/series/424613/posters/65cd71cb48620.jpg\",\"seriesName\":\"Chicken
-        Nugget\",\"slug\":\"424613-\",\"status\":\"Ended\"},{\"aliases\":[\"The Bad
-        Girl\",\"The Mischief of the Bad Girl\"],\"banner\":\"/banners/v4/series/427340/banners/6612fef86cbc7.jpg\",\"firstAired\":\"2022-12-08\",\"id\":427340,\"image\":\"/banners/v4/series/427340/posters/63e708bc8baef.jpg\",\"network\":\"ViX+\",\"overview\":\"The
+        Crime Scene Talks\",\"slug\":\"iryu-sosa\",\"status\":\"Continuing\"},{\"aliases\":[\"The
+        Bad Girl\",\"The Mischief of the Bad Girl\"],\"banner\":\"/banners/v4/series/427340/banners/6612fef86cbc7.jpg\",\"firstAired\":\"2022-12-08\",\"id\":427340,\"image\":\"/banners/v4/series/427340/posters/63e708bc8baef.jpg\",\"network\":\"ViX+\",\"overview\":\"The
         epic love story between Arlette, a nonconformist and adventurous woman, and
         her once teenage love, Ricardo, a man trapped in a predictable routine. Thanks
         to Arlette, he slowly learns to get out of his comfort zone. These two characters\u2019
         lives will intertwine over 40 years, through reunions across Lima, Paris,
         Madrid, Tokyo, London, and more. Based on the 2006 novel by Nobel prize winner
         Mario Vargas Llosa\",\"poster\":\"/banners/v4/series/427340/posters/63e708bc8baef.jpg\",\"seriesName\":\"Travesuras
-        de la ni\xF1a mala\",\"slug\":\"travesuras-de-la-nina-mala\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/262278/banners/6629463e1acdd.jpg\",\"firstAired\":\"2005-08-17\",\"id\":262278,\"image\":\"/banners/posters/262278-2.jpg\",\"network\":\"BBC
+        de la ni\xF1a mala\",\"slug\":\"travesuras-de-la-nina-mala\",\"status\":\"Continuing\"},{\"aliases\":[\"Dakgangjeong\",\"Dalggangjeong\",\"Dak
+        Gang Jeong\",\"Fried Chicken\",\"Chicken Gangjeong\",\"Sweet and Sour Chicken\"],\"banner\":\"/banners/v4/series/424613/banners/65e1053fc5002.jpg\",\"firstAired\":\"2024-03-15\",\"id\":424613,\"image\":\"/banners/v4/series/424613/posters/65cd71cb48620.jpg\",\"network\":\"Netflix\",\"overview\":\"A
+        woman steps into an odd machine and becomes\u2026 a chicken nugget?! Now,
+        it\u2019s up to her father and admirer to embark on a zany quest to bring
+        her back.\",\"poster\":\"/banners/v4/series/424613/posters/65cd71cb48620.jpg\",\"seriesName\":\"Chicken
+        Nugget\",\"slug\":\"424613-\",\"status\":\"Ended\"},{\"aliases\":[\"\u0939\u0940\u0930\u093E\u092E\u0902\u0921\u0940:
+        \u0926 \u0921\u093E\u092F\u092E\u0902\u0921 \u092C\u093E\u095B\u093E\u0930\",\"Heeramandi:
+        O Bazar dos Diamantes\"],\"banner\":\"/banners/v4/series/420398/banners/662fda5f367b9.jpg\",\"firstAired\":\"2024-05-01\",\"id\":420398,\"image\":\"/banners/v4/series/420398/posters/6637257502b93.jpg\",\"network\":\"Netflix\",\"overview\":\"Sanjay
+        Leela Bhansali brings his majestic signature flair to stories of love and
+        betrayal in the lives of courtesans in pre-independence India.\",\"poster\":\"/banners/v4/series/420398/posters/6637257502b93.jpg\",\"seriesName\":\"Heeramandi:
+        The Diamond Bazaar\",\"slug\":\"heeramandi\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/262278/banners/6629463e1acdd.jpg\",\"firstAired\":\"2005-08-17\",\"id\":262278,\"image\":\"/banners/posters/262278-2.jpg\",\"network\":\"BBC
         One\",\"overview\":\"David Attenborough narrates a murder mystery series with
         a twist - forensic science techniques are used to find out who or what killed
         an animal.\",\"poster\":\"/banners/posters/262278-2.jpg\",\"seriesName\":\"Animal
-        Crime Scene\",\"slug\":\"animal-crime-scene\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/435541/banners/66204ef14635c.jpg\",\"firstAired\":\"2022-10-17\",\"id\":435541,\"image\":\"/banners/v4/series/435541/posters/650a61ab5432b.jpg\",\"network\":\"ABC
+        Crime Scene\",\"slug\":\"animal-crime-scene\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/435541/banners/66204ef14635c.jpg\",\"firstAired\":\"2022-10-17\",\"id\":435541,\"image\":\"/banners/v4/series/435541/posters/66472b0164232.jpg\",\"network\":\"ABC
         (AU)\",\"overview\":\"In the distant future, a seven-year-old girl named Ella
         is gleefully testing her limits in a star-filled playground called 'The Milky
         Way.' Ella is a bright-eyed girl propelled by curiosity and ambition. A natural
         born leader, Ella and her best friends - Slippy (a space native) and Madhu
         (a space alien) - are discovering exciting new worlds and doing amazing things
         that nobody else has ever done before like surfing supernovas, riding comets,
-        and racing Moon Scooters around Saturn's rings.\",\"poster\":\"/banners/v4/series/435541/posters/650a61ab5432b.jpg\",\"seriesName\":\"Interstellar
+        and racing Moon Scooters around Saturn's rings.\",\"poster\":\"/banners/v4/series/435541/posters/66472b0164232.jpg\",\"seriesName\":\"Interstellar
         Ella\",\"slug\":\"interstellar-ella\",\"status\":\"Continuing\"},{\"aliases\":[],\"banner\":\"/banners/graphical/85236-g.jpg\",\"firstAired\":\"2008-01-10\",\"id\":85236,\"image\":\"/banners/posters/85236-1.jpg\",\"network\":\"Channel
         5\",\"overview\":\"Robert Llewellyn presents a series examining the feats
         of science and engineering behind everyday life.\",\"poster\":\"/banners/posters/85236-1.jpg\",\"seriesName\":\"How
@@ -323,14 +284,18 @@ interactions:
         explores the horrors of intensive chicken farming. The journey takes him far
         from the cosy lifestyle of River Cottage and into the harrowing conditions
         of running his own modern poultry production line.\",\"poster\":\"/banners/posters/81938-1.jpg\",\"seriesName\":\"Hugh's
-        Chicken Run\",\"slug\":\"hughs-chicken-run\",\"status\":\"Ended\"},{\"aliases\":[\"Dua
-        Aur Azan\"],\"banner\":\"\",\"firstAired\":\"2024-04-26\",\"id\":449502,\"image\":\"/banners/v4/series/449502/posters/662d3a7b650bd.jpg\",\"network\":\"YouTube\",\"overview\":\"A
-        love story that tells the story of two souls who never wanted to become soulmates,
-        but are destined to become soulmates eventually through a marriage contract.
-        Dua and Azaan over time develop love for each other and begin to build a nest
-        from their love branch, experiencing an increasingly stronger bond through
-        the tests of circumstances and separation.\",\"poster\":\"/banners/v4/series/449502/posters/662d3a7b650bd.jpg\",\"seriesName\":\"Dua
-        Aur Azan\",\"slug\":\"dua-aur-azan\",\"status\":\"Continuing\"}]}"
+        Chicken Run\",\"slug\":\"hughs-chicken-run\",\"status\":\"Ended\"},{\"aliases\":[],\"banner\":\"/banners/v4/series/452443/banners/66ad158730072.jpg\",\"firstAired\":\"2024-08-18\",\"id\":452443,\"image\":\"/banners/v4/series/452443/posters/66df8d440737b.jpg\",\"network\":\"HBO\",\"overview\":\"Former
+        nurse-turned-exotic animal broker Tonia Haddix spends her days caring for
+        animals in captivity. However, her love for one chimpanzee in particular spins
+        into a wild cat-and-mouse game with authorities and an animal rights group.\",\"poster\":\"/banners/v4/series/452443/posters/66df8d440737b.jpg\",\"seriesName\":\"Chimp
+        Crazy\",\"slug\":\"chimp-crazy\",\"status\":\"Continuing\"},{\"aliases\":[\"Dua
+        Aur Azan\"],\"banner\":\"\",\"firstAired\":\"2024-04-26\",\"id\":449502,\"image\":\"/banners/v4/series/449502/posters/665a1298431fc.jpg\",\"network\":\"Green
+        TV Entertainment\",\"overview\":\"A love story that tells the story of two
+        souls who never wanted to become soulmates, but are destined to become soulmates
+        eventually through a marriage contract. Dua and Azaan over time develop love
+        for each other and begin to build a nest from their love branch, experiencing
+        an increasingly stronger bond through the tests of circumstances and separation.\",\"poster\":\"/banners/v4/series/449502/posters/665a1298431fc.jpg\",\"seriesName\":\"Dua
+        Aur Azan\",\"slug\":\"dua-aur-azan\",\"status\":\"Ended\"}]}"
     headers:
       Cache-Control:
       - private, max-age=86400
@@ -339,17 +304,17 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 22 May 2024 14:33:35 GMT
+      - Thu, 13 Feb 2025 23:30:19 GMT
       Transfer-Encoding:
       - chunked
       Vary:
       - Accept-Language
       Via:
-      - 1.1 e78b88048cb2f0beb893089a9fa30352.cloudfront.net (CloudFront)
+      - 1.1 f61fcb7f3f348ee095c7f6aba066fbdc.cloudfront.net (CloudFront)
       X-Amz-Cf-Id:
-      - TOdgjBq1z0fyyEwlf1FdJuI7Fe6M-GDCkLe8NRXkqIKQ4nJ7f4JYKw==
+      - Ak-doCRADaeqZj96RyqgNVMoCdBzm-i73qz9FcGdPgE9n3kQhk-yTQ==
       X-Amz-Cf-Pop:
-      - LIS50-P1
+      - MAD51-C3
       X-Cache:
       - Miss from cloudfront
       X-Powered-By:
@@ -365,17 +330,17 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Accept-Language:
       - en
       Authorization:
-      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDAwOTQyMTgsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzM5NDg5NDE4fQ.I-flvnRYHdakvoJPuyRAVB6U6ePDHLaV8YdC98u5dVsuvO3P3obJ7E7yAN_x3Mc5f5xyQyHcD11I0JsOcud3NLHt-zM3wknZbMcSqhsy7oNl9OYlELhePRcOMl_EVs_IyyCV9tEjkjTPRoHGrHI2R2DLbOzSWojSqWUkwZemRHvHSsxIaaCIKouP9Slp4B1xAdGlkBklpr0QNhjOU6NkSjioing-gUMc053fDuEJTbaOoH9wMFgYyC6S4cZEEyD2zMmGW_Cqvfgbhy2YGZdAXmWoEQzHepnDct11knRzYFR6t2RwGoziOF1l41kOwfXeUtQQdIvvFuyXdJQSJuU6UA
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
     uri: https://api.thetvdb.com/series/72546
   response:
@@ -389,7 +354,7 @@ interactions:
         00:00:00","addedBy":1,"siteRating":8.4,"siteRatingCount":6457,"slug":"csi-crime-scene-investigation"}}'
     headers:
       Age:
-      - '82670'
+      - '24750'
       Cache-Control:
       - private, max-age=86400
       Connection:
@@ -399,17 +364,17 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Tue, 21 May 2024 15:35:45 GMT
+      - Thu, 13 Feb 2025 16:37:50 GMT
       Last-Modified:
       - Tue, 20 Feb 2024 16:16:43 GMT
       Vary:
       - Accept-Language
       Via:
-      - 1.1 42c937f806e6e43029a719b83b9a8612.cloudfront.net (CloudFront)
+      - 1.1 72dd98bd7ac49e4cde7380f0bf4fad6c.cloudfront.net (CloudFront)
       X-Amz-Cf-Id:
-      - WPb1K2YCdSIcxbR5ngPkWnvUQEYpYM9cdDciqp1MvqRXqaxblaEp-A==
+      - WfmfyUUdTUDWkCdh2UOxqIdxHGbLAr1ZJXv142SPV-VlTjeCDLNPeg==
       X-Amz-Cf-Pop:
-      - LIS50-P1
+      - MAD51-C3
       X-Cache:
       - Hit from cloudfront
       X-Powered-By:
@@ -425,17 +390,17 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Accept-Language:
       - en
       Authorization:
-      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDAwOTQyMTgsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzM5NDg5NDE4fQ.I-flvnRYHdakvoJPuyRAVB6U6ePDHLaV8YdC98u5dVsuvO3P3obJ7E7yAN_x3Mc5f5xyQyHcD11I0JsOcud3NLHt-zM3wknZbMcSqhsy7oNl9OYlELhePRcOMl_EVs_IyyCV9tEjkjTPRoHGrHI2R2DLbOzSWojSqWUkwZemRHvHSsxIaaCIKouP9Slp4B1xAdGlkBklpr0QNhjOU6NkSjioing-gUMc053fDuEJTbaOoH9wMFgYyC6S4cZEEyD2zMmGW_Cqvfgbhy2YGZdAXmWoEQzHepnDct11knRzYFR6t2RwGoziOF1l41kOwfXeUtQQdIvvFuyXdJQSJuU6UA
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
     uri: https://api.thetvdb.com/series/72546/episodes/query?airedSeason=15&airedEpisode=18&page=1
   response:
@@ -453,28 +418,28 @@ interactions:
       - private, max-age=86400
       Connection:
       - keep-alive
-      Content-Encoding:
-      - gzip
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 22 May 2024 14:33:36 GMT
+      - Thu, 13 Feb 2025 23:30:20 GMT
       Transfer-Encoding:
       - chunked
       Vary:
       - Accept-Encoding,Accept-Language
       Via:
-      - 1.1 e33c092c8429c324c2810046683bf2f2.cloudfront.net (CloudFront)
+      - 1.1 088ca04bdb72aecc3b592341a13090a4.cloudfront.net (CloudFront)
       X-Amz-Cf-Id:
-      - mlgNLLG0c7kVN-XksEf-N3G74RNYJ45SQ1Z10kYm9SnNmNNn-srwPQ==
+      - Scj_l-lEz_X_A6NNmL3cy5UOnF_xWCVxrn4FQZL63Cq0C9joGPosOw==
       X-Amz-Cf-Pop:
-      - LIS50-P1
+      - MAD51-C3
       X-Cache:
       - Miss from cloudfront
       X-Powered-By:
       - Thundar!
       X-Thetvdb-Api-Version:
       - 3.0.0
+      content-length:
+      - '1125'
     status:
       code: 200
       message: OK
@@ -484,17 +449,17 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Accept-Language:
       - en
       Authorization:
-      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTY5OTMyMTQsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzE2Mzg4NDE0fQ.dJAo_FBEcSnkDtgNp-g_mZjEyYoW1MHhgAb-IWuwL3OIhiI3Ga0QAn0MbhX6o88BtmVsoHsWoRD1dFYGeNyO4AK8JUOYV4zwUBpZzxr2dBCd02cEDvbOnA9yLaYmhpUAyN86p3hWKLKlLTBrctBQD9obkMY8pIFoeHNS0SfkQD6PMnjsHdqtpjab0IoH2cFpgm45HhAq78XhEOPBAX45WjlsP-wXrF4H49nzAL_bFButDyS_cCYdYcqaTv4J65OyDJ0VQpA4aUp4T-_6WjwnZ2d0WtcPSaXGX0cDiGFSQMptR7atojVlRJD30ZaZU_wrAfpWGcaoip22xeEx_D0DJg
+      - Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDAwOTQyMTgsImlkIjoic3VibGltaW5hbCIsIm9yaWdfaWF0IjoxNzM5NDg5NDE4fQ.I-flvnRYHdakvoJPuyRAVB6U6ePDHLaV8YdC98u5dVsuvO3P3obJ7E7yAN_x3Mc5f5xyQyHcD11I0JsOcud3NLHt-zM3wknZbMcSqhsy7oNl9OYlELhePRcOMl_EVs_IyyCV9tEjkjTPRoHGrHI2R2DLbOzSWojSqWUkwZemRHvHSsxIaaCIKouP9Slp4B1xAdGlkBklpr0QNhjOU6NkSjioing-gUMc053fDuEJTbaOoH9wMFgYyC6S4cZEEyD2zMmGW_Cqvfgbhy2YGZdAXmWoEQzHepnDct11knRzYFR6t2RwGoziOF1l41kOwfXeUtQQdIvvFuyXdJQSJuU6UA
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
     uri: https://api.thetvdb.com/episodes/5104359
   response:
@@ -509,17 +474,15 @@ interactions:
         13:21:38","thumbWidth":"640","thumbHeight":"360","siteRating":7.6,"siteRatingCount":306,"isMovie":0}}'
     headers:
       Age:
-      - '63624'
+      - '7934'
       Cache-Control:
       - private, max-age=86400
       Connection:
       - keep-alive
-      Content-Encoding:
-      - gzip
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Tue, 21 May 2024 20:53:12 GMT
+      - Thu, 13 Feb 2025 21:18:06 GMT
       Last-Modified:
       - Thu, 01 Jan 1970 00:00:00 GMT
       Transfer-Encoding:
@@ -527,17 +490,19 @@ interactions:
       Vary:
       - Accept-Encoding,Accept-Language
       Via:
-      - 1.1 a48f09960f130cb6049f12b379cf591e.cloudfront.net (CloudFront)
+      - 1.1 154ecb715e497053770673a9ecb0c104.cloudfront.net (CloudFront)
       X-Amz-Cf-Id:
-      - NI6EvvB5HhGkVDoH0KI61ijFH8nhTf_EUHk8E-2x68HuTcFDf8sj8Q==
+      - _ygVXaLBQNfabSFyg78kFRdmHwHZf7_c3PI9-CmYZXzReDHBlEaCkQ==
       X-Amz-Cf-Pop:
-      - LIS50-P1
+      - MAD51-C3
       X-Cache:
       - Hit from cloudfront
       X-Powered-By:
       - Thundar!
       X-Thetvdb-Api-Version:
       - 3.0.0
+      content-length:
+      - '1070'
     status:
       code: 200
       message: OK

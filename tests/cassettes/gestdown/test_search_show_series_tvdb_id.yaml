@@ -3,11 +3,11 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
       accept:
       - application/json
     method: GET
@@ -18,27 +18,21 @@ interactions:
         Big Bang Theory","nbSeasons":12,"seasons":[1,2,3,4,5,6,7,8,9,10,11,12],"tvDbId":80379,"tmdbId":1418,"slug":"the-big-bang-theory"}]}'
     headers:
       Age:
-      - '108'
-      CF-Cache-Status:
-      - HIT
+      - '2'
       CF-RAY:
-      - 88ba5f31eda05bee-LIS
+      - 91189a3f0d785bda-LIS
       Cache-Control:
       - public, max-age=14400
       Connection:
       - keep-alive
-      Content-Encoding:
-      - br
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 29 May 2024 23:47:50 GMT
-      Last-Modified:
-      - Thu, 23 May 2024 00:34:46 GMT
+      - Thu, 13 Feb 2025 23:29:47 GMT
       NEL:
       - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=erDpFuXqWDUVFYTOruDZhwHV4vA1qlGQ7SEY81es8kVwCuIJPVcvlANrwy4cgD6siKfIdrm3pIKoVPJuTolPN3OeUGuyRssXiecjwIoQhCdFxJLrySNt46Smanhn0jyf3ilkXg%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=eFm2qvfCKQeVDSPt%2BqNM9LW4Ak9wJbLJDMooBI7sWBBnynC9FJeJMK8d1EahkeebGIVQdckpimodnLpTHKJWiWvqXTPqWCImyxMIBOeEWlzZIeFRfbqh5fXQ5YJuNKiTJ7Bf2g%3D%3D"}],"group":"cf-nel","max_age":604800}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -49,7 +43,16 @@ interactions:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
+      cf-cache-status:
+      - HIT
+      content-length:
+      - '198'
+      last-modified:
+      - Wed, 12 Feb 2025 22:02:09 GMT
+      server-timing:
+      - cfL4;desc="?proto=TCP&rtt=2949&min_rtt=2754&rtt_var=1172&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2847&recv_bytes=797&delivery_rate=1051561&cwnd=250&unsent_bytes=0&cid=c604498dad723c34&ts=26&x=0"
       vary:
+      - Accept-Encoding
       - Accept-Encoding
     status:
       code: 200

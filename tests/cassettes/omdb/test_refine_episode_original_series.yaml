@@ -5,49 +5,49 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
     uri: https://www.omdbapi.com/?r=json&v=1&apikey=44d5b275&s=dallas&page=1&type=series
   response:
     body:
-      string: "{\"Search\":[{\"Title\":\"Dallas\",\"Year\":\"1978\u20131991\",\"imdbID\":\"tt0077000\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BNTg3ZDY1OWEtYjRkYy00NzQ4LWFjMjMtMDc0YzcxNzU5NmFhXkEyXkFqcGdeQXVyMTkxODQ4MDg@._V1_SX300.jpg\"},{\"Title\":\"Dallas\",\"Year\":\"2012\u20132014\",\"imdbID\":\"tt1723760\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BMjE5NTExNDc5MF5BMl5BanBnXkFtZTcwMjc1NzAwOQ@@._V1_SX300.jpg\"},{\"Title\":\"All
+      string: "{\"Search\":[{\"Title\":\"Dallas\",\"Year\":\"1978\u20131991\",\"imdbID\":\"tt0077000\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BMTIwOTYxZTItYWU4Ny00YTI5LTk0NzgtNDdjODE4YjUwMTdiXkEyXkFqcGc@._V1_SX300.jpg\"},{\"Title\":\"Dallas\",\"Year\":\"2012\u20132014\",\"imdbID\":\"tt1723760\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BMjE5NTExNDc5MF5BMl5BanBnXkFtZTcwMjc1NzAwOQ@@._V1_SX300.jpg\"},{\"Title\":\"America's
+        Sweethearts: Dallas Cowboys Cheerleaders\",\"Year\":\"2024\u2013\",\"imdbID\":\"tt32146518\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BYjhkZWJjY2ItN2MwOS00ODk2LTg1ZDUtOGIzZDBjYjQwZDIwXkEyXkFqcGc@._V1_SX300.jpg\"},{\"Title\":\"All
         or Nothing: The Dallas Cowboys\",\"Year\":\"2018\",\"imdbID\":\"tt8077544\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BNTU4NmFlNTctN2RjMy00ODI1LThkMTYtZmJiZjgxMzIxZDA1XkEyXkFqcGdeQXVyNjI4OTg2Njg@._V1_SX300.jpg\"},{\"Title\":\"The
-        Real Housewives of Dallas\",\"Year\":\"2016\u20132021\",\"imdbID\":\"tt5512352\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BNWI2ODU3MjItZmVkYy00MGYxLWE4YjMtM2RiMmIzZjJiOTg2XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg\"},{\"Title\":\"Dallas
-        Cowboys Cheerleaders: Making the Team\",\"Year\":\"2006\u2013\",\"imdbID\":\"tt0491758\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BMmYzYmZhMGItMDNkYS00MmQ1LTliNjMtYmEyNWRjMTQxNjBiXkEyXkFqcGdeQXVyMTUyNjc3NDQ4._V1_SX300.jpg\"},{\"Title\":\"Dallas
-        & Robo\",\"Year\":\"2018\",\"imdbID\":\"tt7896392\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BMjJhNDkzZTMtODc1Yi00Mjc2LWIyZDctMzNkNGY0MGRkYzlhXkEyXkFqcGdeQXVyMDcwODc3OA@@._V1_SX300.jpg\"},{\"Title\":\"Little
-        Women: Dallas\",\"Year\":\"2016\u2013\",\"imdbID\":\"tt6306584\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BZDMzMWZhMTUtMTZhYi00YjIzLTlkYWMtZThiNzZlZGRhYjExL2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMzAwNzQ5NTQ@._V1_SX300.jpg\"},{\"Title\":\"Debbie
+        Real Housewives of Dallas\",\"Year\":\"2016\u20132021\",\"imdbID\":\"tt5512352\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BZDQ2ZGUzZTYtMTc0Yy00MzhmLWI3ODAtMTdmYjBmZjEwNTFhXkEyXkFqcGc@._V1_SX300.jpg\"},{\"Title\":\"Dallas
+        Cowboys Cheerleaders: Making the Team\",\"Year\":\"2006\u2013\",\"imdbID\":\"tt0491758\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BYTlmODMyOGItMjM1Yi00ODBjLTk3NWQtYzE0OWExNGMwZjZkXkEyXkFqcGc@._V1_SX300.jpg\"},{\"Title\":\"Dallas
+        & Robo\",\"Year\":\"2018\",\"imdbID\":\"tt7896392\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BZmI2NTUyZTMtZjc1Yy00ZDY4LTk5YWItMzdjYzZiYjMxOTg0XkEyXkFqcGc@._V1_SX300.jpg\"},{\"Title\":\"Little
+        Women: Dallas\",\"Year\":\"2016\u2013\",\"imdbID\":\"tt6306584\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BMjk5NGNkNWEtNjMwMS00ZmI5LWIwYzgtZDJjNGJmNmY3MzlhXkEyXkFqcGc@._V1_SX300.jpg\"},{\"Title\":\"Debbie
         Does Dallas... Again\",\"Year\":\"2007\",\"imdbID\":\"tt1675910\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BYWE0ZDVkMDQtOGY3YS00YjNhLWI0ZDYtZDYyZjEwNjdlZDE0XkEyXkFqcGdeQXVyMTIxMDUyOTI@._V1_SX300.jpg\"},{\"Title\":\"Dallas
-        SWAT\",\"Year\":\"2006\u2013\",\"imdbID\":\"tt0497290\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BMjBiMWEyYTctNTI1ZS00MWYxLTgxZGEtNjJhYmY5NTFmODAwXkEyXkFqcGdeQXVyNzM3MjY2MjU@._V1_SX300.jpg\"},{\"Title\":\"The
-        A-List: Dallas\",\"Year\":\"2011\u2013\",\"imdbID\":\"tt2084665\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BMjU4MzAzOTkzM15BMl5BanBnXkFtZTgwNzg0NjAxMzE@._V1_SX300.jpg\"}],\"totalResults\":\"49\",\"Response\":\"True\"}"
+        SWAT\",\"Year\":\"2006\u2013\",\"imdbID\":\"tt0497290\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BMjBiMWEyYTctNTI1ZS00MWYxLTgxZGEtNjJhYmY5NTFmODAwXkEyXkFqcGdeQXVyNzM3MjY2MjU@._V1_SX300.jpg\"}],\"totalResults\":\"51\",\"Response\":\"True\"}"
     headers:
       CF-Cache-Status:
       - MISS
       CF-RAY:
-      - 887d96967ea0040f-CDG
+      - 91189ab86e6fef29-LHR
       Cache-Control:
       - public, max-age=86400
       Connection:
       - keep-alive
-      Content-Encoding:
-      - gzip
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 22 May 2024 14:45:08 GMT
+      - Thu, 13 Feb 2025 23:30:07 GMT
       Server:
       - cloudflare
       Transfer-Encoding:
       - chunked
       access-control-allow-origin:
       - '*'
+      content-length:
+      - '2256'
       expires:
-      - Wed, 22 May 2024 15:45:08 GMT
+      - Fri, 14 Feb 2025 00:30:07 GMT
       last-modified:
-      - Wed, 22 May 2024 14:45:08 GMT
+      - Thu, 13 Feb 2025 23:30:07 GMT
       vary:
       - '*, Accept-Encoding'
       x-aspnet-version:
@@ -63,50 +63,50 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
     uri: https://www.omdbapi.com/?r=json&v=1&apikey=44d5b275&s=dallas&page=2&type=series
   response:
     body:
-      string: "{\"Search\":[{\"Title\":\"Dallas Car Sharks\",\"Year\":\"2013\u2013\",\"imdbID\":\"tt3239336\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BMTU3MDc5NDM0Ml5BMl5BanBnXkFtZTgwNDA4NDkyMDI@._V1_SX300.jpg\"},{\"Title\":\"Police
+      string: "{\"Search\":[{\"Title\":\"The A-List: Dallas\",\"Year\":\"2011\u2013\",\"imdbID\":\"tt2084665\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BMjU4MzAzOTkzM15BMl5BanBnXkFtZTgwNzg0NjAxMzE@._V1_SX300.jpg\"},{\"Title\":\"Dallas
+        Car Sharks\",\"Year\":\"2013\u2013\",\"imdbID\":\"tt3239336\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BMTU3MDc5NDM0Ml5BMl5BanBnXkFtZTgwNDA4NDkyMDI@._V1_SX300.jpg\"},{\"Title\":\"Police
         Women of Dallas\",\"Year\":\"2010\u2013\",\"imdbID\":\"tt1763858\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BZTJhMmQ5ZmUtZWNmNy00ZTEzLTg5YzUtZWFhYjIyZTk2YjE3XkEyXkFqcGdeQXVyNTM3MDMyMDQ@._V1_SX300.jpg\"},{\"Title\":\"Most
         Eligible: Dallas\",\"Year\":\"2011\u2013\",\"imdbID\":\"tt1879627\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BNDUyNDY2Mjc1OF5BMl5BanBnXkFtZTgwMjAwOTcwMzE@._V1_SX300.jpg\"},{\"Title\":\"The
         Book of Dallas\",\"Year\":\"2012\u2013\",\"imdbID\":\"tt2373244\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BMTU2NzY0MzI2MF5BMl5BanBnXkFtZTcwNzMxMzY0OA@@._V1_SX300.jpg\"},{\"Title\":\"Courtney
         Loves Dallas\",\"Year\":\"2013\u2013\",\"imdbID\":\"tt2366296\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BMTQ0NDQ2NTk2NV5BMl5BanBnXkFtZTgwMDk2NDAxMzE@._V1_SX300.jpg\"},{\"Title\":\"The
         Chloe, Dallas & Ryan Show\",\"Year\":\"2018\u2013\",\"imdbID\":\"tt9587254\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BN2Q0NzFmMzEtOTAzZS00NjdiLWFjZDMtZjEyZmZmYzgzNjQyXkEyXkFqcGdeQXVyMTk2MzA5NTk@._V1_SX300.jpg\"},{\"Title\":\"Dallas
-        Divas & Daughters\",\"Year\":\"2009\u2013\",\"imdbID\":\"tt1534866\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BZDQ4NDE2NzAtMDMzOS00NTk0LTlhNDAtOTVhNzA0OGIzNDFiXkEyXkFqcGdeQXVyNTc3Mzg4NjA@._V1_SX300.jpg\"},{\"Title\":\"Dallas
+        Divas & Daughters\",\"Year\":\"2009\u2013\",\"imdbID\":\"tt1534866\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BY2FlZmM2NjYtN2MxMy00NjlkLTllNGQtMDhjOGRhMjQ3YjY5XkEyXkFqcGc@._V1_SX300.jpg\"},{\"Title\":\"Dallas
         DNA\",\"Year\":\"2009\u2013\",\"imdbID\":\"tt1489323\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BOGVhN2ZhMDAtNzY3ZC00ZDZmLTlhZmEtMjYyOWRhOGE1ZGFiXkEyXkFqcGdeQXVyMTUyNjc3NDQ4._V1_SX300.jpg\"},{\"Title\":\"Sheer
-        Dallas\",\"Year\":\"2005\u2013\",\"imdbID\":\"tt1030468\",\"Type\":\"series\",\"Poster\":\"N/A\"},{\"Title\":\"The
-        Daily Buzz: Dallas\",\"Year\":\"2004\u2013\",\"imdbID\":\"tt0498424\",\"Type\":\"series\",\"Poster\":\"N/A\"}],\"totalResults\":\"49\",\"Response\":\"True\"}"
+        Dallas\",\"Year\":\"2005\u2013\",\"imdbID\":\"tt1030468\",\"Type\":\"series\",\"Poster\":\"N/A\"}],\"totalResults\":\"51\",\"Response\":\"True\"}"
     headers:
       CF-Cache-Status:
       - MISS
       CF-RAY:
-      - 887d969b880d99dc-CDG
+      - 91189abc39eaedf6-LHR
       Cache-Control:
       - public, max-age=86400
       Connection:
       - keep-alive
-      Content-Encoding:
-      - gzip
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 22 May 2024 14:45:09 GMT
+      - Thu, 13 Feb 2025 23:30:07 GMT
       Server:
       - cloudflare
       Transfer-Encoding:
       - chunked
       access-control-allow-origin:
       - '*'
+      content-length:
+      - '2029'
       expires:
-      - Wed, 22 May 2024 15:45:09 GMT
+      - Fri, 14 Feb 2025 00:30:07 GMT
       last-modified:
-      - Wed, 22 May 2024 14:45:09 GMT
+      - Thu, 13 Feb 2025 23:30:07 GMT
       vary:
       - '*, Accept-Encoding'
       x-aspnet-version:
@@ -122,16 +122,17 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
     uri: https://www.omdbapi.com/?r=json&v=1&apikey=44d5b275&s=dallas&page=3&type=series
   response:
     body:
-      string: "{\"Search\":[{\"Title\":\"Dallas and Wayne: The Bigfoot Hunters\",\"Year\":\"2010\u2013\",\"imdbID\":\"tt2004521\",\"Type\":\"series\",\"Poster\":\"N/A\"},{\"Title\":\"Donna
+      string: "{\"Search\":[{\"Title\":\"The Daily Buzz: Dallas\",\"Year\":\"2004\u2013\",\"imdbID\":\"tt0498424\",\"Type\":\"series\",\"Poster\":\"N/A\"},{\"Title\":\"Dallas
+        and Wayne: The Bigfoot Hunters\",\"Year\":\"2010\u2013\",\"imdbID\":\"tt2004521\",\"Type\":\"series\",\"Poster\":\"N/A\"},{\"Title\":\"Donna
         Decorates Dallas\",\"Year\":\"2011\u2013\",\"imdbID\":\"tt2055946\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BYWEwODJmNzgtMzU0NS00NjU5LThmNGItZWFhYTE0NzRiZDZmXkEyXkFqcGdeQXVyMjI4Mzc4Njg@._V1_SX300.jpg\"},{\"Title\":\"Children's
         Med Dallas\",\"Year\":\"2011\u20132012\",\"imdbID\":\"tt2060877\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BMTA0N2VjMjItYmMxMy00MDQ1LWI0ZTUtOWNlZTNiODJkZGZiXkEyXkFqcGdeQXVyMjMxMjA2NDQ@._V1_SX300.jpg\"},{\"Title\":\"Spotlight
         on Dallas\",\"Year\":\"2011\u2013\",\"imdbID\":\"tt1871032\",\"Type\":\"series\",\"Poster\":\"N/A\"},{\"Title\":\"Luxury
@@ -139,33 +140,32 @@ interactions:
         Underemployed Adventures of Dallas Heck\",\"Year\":\"2012\u2013\",\"imdbID\":\"tt2673024\",\"Type\":\"series\",\"Poster\":\"N/A\"},{\"Title\":\"Dallas
         Roundup Aftershow\",\"Year\":\"2012\u2013\",\"imdbID\":\"tt2715600\",\"Type\":\"series\",\"Poster\":\"N/A\"},{\"Title\":\"Behind
         the Gates: Dazzling Dallas\",\"Year\":\"2013\u2013\",\"imdbID\":\"tt3058296\",\"Type\":\"series\",\"Poster\":\"N/A\"},{\"Title\":\"Dancing
-        Dallas\",\"Year\":\"2015\u2013\",\"imdbID\":\"tt5052446\",\"Type\":\"series\",\"Poster\":\"N/A\"},{\"Title\":\"The
-        Dallas Market Report\",\"Year\":\"2016\u2013\",\"imdbID\":\"tt5360352\",\"Type\":\"series\",\"Poster\":\"N/A\"}],\"totalResults\":\"49\",\"Response\":\"True\"}"
+        Dallas\",\"Year\":\"2015\u2013\",\"imdbID\":\"tt5052446\",\"Type\":\"series\",\"Poster\":\"N/A\"}],\"totalResults\":\"51\",\"Response\":\"True\"}"
     headers:
       CF-Cache-Status:
       - MISS
       CF-RAY:
-      - 887d969ffa5e041a-CDG
+      - 91189abdd9b9ef41-LHR
       Cache-Control:
       - public, max-age=86400
       Connection:
       - keep-alive
-      Content-Encoding:
-      - gzip
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 22 May 2024 14:45:10 GMT
+      - Thu, 13 Feb 2025 23:30:08 GMT
       Server:
       - cloudflare
       Transfer-Encoding:
       - chunked
       access-control-allow-origin:
       - '*'
+      content-length:
+      - '1373'
       expires:
-      - Wed, 22 May 2024 15:45:10 GMT
+      - Fri, 14 Feb 2025 00:30:08 GMT
       last-modified:
-      - Wed, 22 May 2024 14:45:10 GMT
+      - Thu, 13 Feb 2025 23:30:08 GMT
       vary:
       - '*, Accept-Encoding'
       x-aspnet-version:
@@ -181,16 +181,17 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
     uri: https://www.omdbapi.com/?r=json&v=1&apikey=44d5b275&s=dallas&page=4&type=series
   response:
     body:
-      string: "{\"Search\":[{\"Title\":\"The Millennials: Dallas\",\"Year\":\"2017\u2013\",\"imdbID\":\"tt7970714\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BNjQ0NDY0YzUtZWZmNy00YTQzLTg3ZDgtYjg0ZGMwMTA4ODFhXkEyXkFqcGdeQXVyODUxNzY3Njg@._V1_SX300.jpg\"},{\"Title\":\"The
+      string: "{\"Search\":[{\"Title\":\"The Dallas Market Report\",\"Year\":\"2016\u2013\",\"imdbID\":\"tt5360352\",\"Type\":\"series\",\"Poster\":\"N/A\"},{\"Title\":\"The
+        Millennials: Dallas\",\"Year\":\"2017\u2013\",\"imdbID\":\"tt7970714\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BNjQ0NDY0YzUtZWZmNy00YTQzLTg3ZDgtYjg0ZGMwMTA4ODFhXkEyXkFqcGdeQXVyODUxNzY3Njg@._V1_SX300.jpg\"},{\"Title\":\"The
         Late Show with Jeremy Dallas\",\"Year\":\"2017\",\"imdbID\":\"tt6870534\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BMThmZWYxODMtMTNlZS00YWI2LWFmNDEtN2Q4NzNhOWMxYTMzXkEyXkFqcGdeQXVyNjQ3NTk4Mjg@._V1_SX300.jpg\"},{\"Title\":\"Dallas
         Live\",\"Year\":\"2012\u20132013\",\"imdbID\":\"tt6872494\",\"Type\":\"series\",\"Poster\":\"N/A\"},{\"Title\":\"Dallas
         Cowboys Training Camp Oxnard California NFL Network\",\"Year\":\"2013\u2013\",\"imdbID\":\"tt7562184\",\"Type\":\"series\",\"Poster\":\"N/A\"},{\"Title\":\"Vice
@@ -198,33 +199,32 @@ interactions:
         Dallas\",\"Year\":\"2017\u2013\",\"imdbID\":\"tt7829762\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BMDUwM2YwOGItYWQ5My00MzBmLTg0M2ItYTBlZGYxODJjZThlXkEyXkFqcGdeQXVyMzYzNTg3OTM@._V1_SX300.jpg\"},{\"Title\":\"Chasing:
         Dallas\",\"Year\":\"2018\u2013\",\"imdbID\":\"tt7885832\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BMDMyN2E0OWItMTA4OC00Yzg3LWIwNzItMjc1YjM0Zjk5MzNhXkEyXkFqcGdeQXVyMjYzOTY5NDg@._V1_SX300.jpg\"},{\"Title\":\"Rescue,
         Dallas Pets Alive\",\"Year\":\"2018\",\"imdbID\":\"tt10575872\",\"Type\":\"series\",\"Poster\":\"N/A\"},{\"Title\":\"School
-        Zone Dallas\",\"Year\":\"2002\u20132014\",\"imdbID\":\"tt10978836\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BZTEwOGQ4N2YtYzE4ZS00NDZmLWEyMDMtODI1MGRiNWJjYzc5XkEyXkFqcGdeQXVyNjg1MjEzMDU@._V1_SX300.jpg\"},{\"Title\":\"Chasing:
-        Dallas Presents 'The Retreat'\",\"Year\":\"2021\",\"imdbID\":\"tt13935796\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BZGQwZWE0NWItZWE1Zi00ODNjLTk0ZDAtOGQxYjBhYWFlNjU0XkEyXkFqcGdeQXVyMjYzOTY5NDg@._V1_SX300.jpg\"}],\"totalResults\":\"49\",\"Response\":\"True\"}"
+        Zone Dallas\",\"Year\":\"2002\u20132014\",\"imdbID\":\"tt10978836\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BZTEwOGQ4N2YtYzE4ZS00NDZmLWEyMDMtODI1MGRiNWJjYzc5XkEyXkFqcGdeQXVyNjg1MjEzMDU@._V1_SX300.jpg\"}],\"totalResults\":\"51\",\"Response\":\"True\"}"
     headers:
       CF-Cache-Status:
       - MISS
       CF-RAY:
-      - 887d96a51cc703f9-CDG
+      - 91189ac19c4048b5-LHR
       Cache-Control:
       - public, max-age=86400
       Connection:
       - keep-alive
-      Content-Encoding:
-      - gzip
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 22 May 2024 14:45:11 GMT
+      - Thu, 13 Feb 2025 23:30:08 GMT
       Server:
       - cloudflare
       Transfer-Encoding:
       - chunked
       access-control-allow-origin:
       - '*'
+      content-length:
+      - '1877'
       expires:
-      - Wed, 22 May 2024 15:45:10 GMT
+      - Fri, 14 Feb 2025 00:30:08 GMT
       last-modified:
-      - Wed, 22 May 2024 14:45:10 GMT
+      - Thu, 13 Feb 2025 23:30:08 GMT
       vary:
       - '*, Accept-Encoding'
       x-aspnet-version:
@@ -240,49 +240,100 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.2
     method: GET
     uri: https://www.omdbapi.com/?r=json&v=1&apikey=44d5b275&s=dallas&page=5&type=series
   response:
     body:
-      string: "{\"Search\":[{\"Title\":\"Fraud Hunters: Malice in Dallas\",\"Year\":\"2022\u2013\",\"imdbID\":\"tt14610178\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BZjY3Zjk3MmUtNDk2MS00OGU1LWE0MWEtMmUwNzQ4NzI5MjYyXkEyXkFqcGdeQXVyMjIzOTkzMzQ@._V1_SX300.jpg\"},{\"Title\":\"Destination
+      string: "{\"Search\":[{\"Title\":\"Chasing: Dallas Presents 'The Retreat'\",\"Year\":\"2021\",\"imdbID\":\"tt13935796\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BZGQwZWE0NWItZWE1Zi00ODNjLTk0ZDAtOGQxYjBhYWFlNjU0XkEyXkFqcGdeQXVyMjYzOTY5NDg@._V1_SX300.jpg\"},{\"Title\":\"Fraud
+        Hunters: Malice in Dallas\",\"Year\":\"2022\u2013\",\"imdbID\":\"tt14610178\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BZjY3Zjk3MmUtNDk2MS00OGU1LWE0MWEtMmUwNzQ4NzI5MjYyXkEyXkFqcGdeQXVyMjIzOTkzMzQ@._V1_SX300.jpg\"},{\"Title\":\"Destination
         Dallas\",\"Year\":\"2021\u2013\",\"imdbID\":\"tt15772478\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BNjc0YjA4MGYtYjM3My00ZWJjLWE1ZGItNDQ3ZDEwMjdkNDljXkEyXkFqcGdeQXVyMTI0NTE1MzQ4._V1_SX300.jpg\"},{\"Title\":\"Rookies
         Dallas\",\"Year\":\"2022\u2013\",\"imdbID\":\"tt16985216\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BMmZkODI3NmQtYmUwMC00NDcwLWFiYWUtZTRiZTE2OTk0N2M3XkEyXkFqcGdeQXVyODUxNzY3Njg@._V1_SX300.jpg\"},{\"Title\":\"Open
         Door: Inside Bryce Dallas Howard's Glamorous L.A. Home\",\"Year\":\"2022\u2013\",\"imdbID\":\"tt21292558\",\"Type\":\"series\",\"Poster\":\"N/A\"},{\"Title\":\"Dallas
         Social Cafe\",\"Year\":\"2016\u2013\",\"imdbID\":\"tt26653463\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BYTBlZWQ1ZGItOTA2Ni00ZTUwLWFhZmEtYjVhMGQ1MDQyYzI3XkEyXkFqcGdeQXVyODQzMzAyNjY@._V1_SX300.jpg\"},{\"Title\":\"John
-        Barrowman's Dallas\",\"Year\":\"2012\",\"imdbID\":\"tt27329542\",\"Type\":\"series\",\"Poster\":\"N/A\"},{\"Title\":\"Destination
+        Barrowman's Dallas\",\"Year\":\"2012\",\"imdbID\":\"tt27329542\",\"Type\":\"series\",\"Poster\":\"N/A\"},{\"Title\":\"Dallas,
+        2019\",\"Year\":\"2025\u2013\",\"imdbID\":\"tt33365230\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BZmMzODM2NjYtNTVkNi00YmI0LWE1YzktODNhMDUwODBmOGE2XkEyXkFqcGc@._V1_SX300.jpg\"},{\"Title\":\"Destination
         Dallas\",\"Year\":\"2018\",\"imdbID\":\"tt8386602\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BNWVmNjIxNmQtZWZkOS00ZTQxLWFhY2QtYjk0ZWFkM2I5NDcwXkEyXkFqcGdeQXVyNTA2MjA5NTg@._V1_SX300.jpg\"},{\"Title\":\"Cameron
-        Dallas\",\"Year\":\"2013\u2013\",\"imdbID\":\"tt8742736\",\"Type\":\"series\",\"Poster\":\"N/A\"},{\"Title\":\"This
-        Is Dallas\",\"Year\":\"2019\u2013\",\"imdbID\":\"tt9397890\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BMGZkYTY0YjQtMWJiYi00ZTkzLTljNDUtY2IwNTgxYjlmMjExXkEyXkFqcGdeQXVyODYyNDkxMTM@._V1_SX300.jpg\"}],\"totalResults\":\"49\",\"Response\":\"True\"}"
+        Dallas\",\"Year\":\"2013\u2013\",\"imdbID\":\"tt8742736\",\"Type\":\"series\",\"Poster\":\"N/A\"}],\"totalResults\":\"51\",\"Response\":\"True\"}"
     headers:
       CF-Cache-Status:
       - MISS
       CF-RAY:
-      - 887d96aa39e303f7-CDG
+      - 91189ac55d2291f1-LHR
       Cache-Control:
       - public, max-age=86400
       Connection:
       - keep-alive
-      Content-Encoding:
-      - gzip
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 22 May 2024 14:45:11 GMT
+      - Thu, 13 Feb 2025 23:30:09 GMT
       Server:
       - cloudflare
       Transfer-Encoding:
       - chunked
       access-control-allow-origin:
       - '*'
+      content-length:
+      - '1987'
       expires:
-      - Wed, 22 May 2024 15:45:11 GMT
+      - Fri, 14 Feb 2025 00:30:09 GMT
       last-modified:
-      - Wed, 22 May 2024 14:45:11 GMT
+      - Thu, 13 Feb 2025 23:30:09 GMT
+      vary:
+      - '*, Accept-Encoding'
+      x-aspnet-version:
+      - 4.0.30319
+      x-powered-by:
+      - ASP.NET
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.2
+    method: GET
+    uri: https://www.omdbapi.com/?r=json&v=1&apikey=44d5b275&s=dallas&page=6&type=series
+  response:
+    body:
+      string: "{\"Search\":[{\"Title\":\"This Is Dallas\",\"Year\":\"2019\u2013\",\"imdbID\":\"tt9397890\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BMGZkYTY0YjQtMWJiYi00ZTkzLTljNDUtY2IwNTgxYjlmMjExXkEyXkFqcGdeQXVyODYyNDkxMTM@._V1_SX300.jpg\"}],\"totalResults\":\"51\",\"Response\":\"True\"}"
+    headers:
+      CF-Cache-Status:
+      - MISS
+      CF-RAY:
+      - 91189ac90857f662-LHR
+      Cache-Control:
+      - public, max-age=86400
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 13 Feb 2025 23:30:09 GMT
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      access-control-allow-origin:
+      - '*'
+      content-length:
+      - '273'
+      expires:
+      - Fri, 14 Feb 2025 00:30:09 GMT
+      last-modified:
+      - Thu, 13 Feb 2025 23:30:09 GMT
       vary:
       - '*, Accept-Encoding'
       x-aspnet-version:

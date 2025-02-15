@@ -55,7 +55,7 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 
-class MutexLock(AbstractFileLock):
+class MutexLock(AbstractFileLock):  # pragma: no cover
     """:class:`MutexLock` is a thread-based rw lock based on :class:`dogpile.core.ReadWriteMutex`."""
 
     def __init__(self, filename: str) -> None:
@@ -407,7 +407,7 @@ def cache(ctx: click.Context, clear_subliminal: bool) -> None:
     """Cache management."""
     if clear_subliminal and ctx.parent and 'cache_dir' in ctx.parent.params:
         cache_dir_path = Path(ctx.parent.params['cache_dir'])
-        for file in (cache_dir_path / cache_file).glob('*'):
+        for file in (cache_dir_path / cache_file).glob('*'):  # pragma: no cover
             file.unlink()
         click.echo("Subliminal's cache cleared.")
     else:
@@ -940,6 +940,6 @@ def download(
         click.echo(f"Downloaded {plural(total_subtitles, 'subtitle')}")
 
 
-def cli() -> None:
+def cli() -> None:  # pragma: no cover
     """CLI that recognizes environment variables."""
     subliminal(auto_envvar_prefix='SUBLIMINAL')

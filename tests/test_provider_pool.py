@@ -1,0 +1,401 @@
+from __future__ import annotations
+
+import logging
+import sys
+from typing import TYPE_CHECKING
+from unittest.mock import Mock
+
+import pytest
+from babelfish import Language  # type: ignore[import-untyped]
+
+from subliminal.core import (
+    AsyncProviderPool,
+    ProviderPool,
+    download_best_subtitles,
+    download_subtitles,
+    list_subtitles,
+)
+from subliminal.score import episode_scores
+from subliminal.subtitle import Subtitle
+
+if TYPE_CHECKING:
+    from subliminal.extensions import RegistrableExtensionManager
+
+# Core test
+pytestmark = [
+    pytest.mark.core,
+    pytest.mark.usefixtures('provider_manager'),
+    pytest.mark.usefixtures('disabled_providers'),
+]
+
+root = logging.getLogger('subliminal')
+root.setLevel(logging.DEBUG)
+
+handler = logging.StreamHandler(sys.stdout)
+handler.setLevel(logging.DEBUG)
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+handler.setFormatter(formatter)
+root.addHandler(handler)
+
+
+@pytest.fixture
+def _mock_providers(monkeypatch: pytest.MonkeyPatch, provider_manager: RegistrableExtensionManager) -> None:
+    for provider in provider_manager:
+        monkeypatch.setattr(provider.plugin, 'initialize', Mock())
+        monkeypatch.setattr(provider.plugin, 'list_subtitles', Mock(return_value=[provider.name]))
+        monkeypatch.setattr(provider.plugin, 'download_subtitle', Mock())
+        monkeypatch.setattr(provider.plugin, 'terminate', Mock())
+
+
+def test_provider_pool_get_keyerror():
+    pool = ProviderPool()
+    with pytest.raises(KeyError):
+        pool['nwodtseg']
+
+
+def test_provider_pool_del_keyerror():
+    pool = ProviderPool()
+    with pytest.raises(KeyError):
+        del pool['gestdown']
+
+
+@pytest.mark.usefixtures('_mock_providers')
+def test_provider_pool_iter():
+    pool = ProviderPool()
+    assert len(list(pool)) == 0
+    pool['tvsubtitles']
+    assert len(list(pool)) == 1
+
+
+@pytest.mark.usefixtures('_mock_providers')
+def test_provider_pool_list_subtitles_provider(episodes, provider_manager):
+    pool = ProviderPool()
+    subtitles = pool.list_subtitles_provider('tvsubtitles', episodes['bbt_s07e05'], {Language('eng')})
+    assert subtitles == ['tvsubtitles']  # type: ignore[comparison-overlap]
+    assert provider_manager['tvsubtitles'].plugin.initialize.called
+    assert provider_manager['tvsubtitles'].plugin.list_subtitles.called
+
+
+@pytest.mark.usefixtures('_mock_providers')
+def test_provider_pool_list_subtitles(episodes, provider_manager):
+    pool = ProviderPool()
+    subtitles = pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
+    assert sorted(subtitles) == [  # type: ignore[type-var,comparison-overlap]
+        'gestdown',
+        'opensubtitlescom',
+        'podnapisi',
+        'tvsubtitles',
+    ]
+    for provider in subtitles:
+        assert provider_manager[provider].plugin.initialize.called
+        assert provider_manager[provider].plugin.list_subtitles.called
+
+
+@pytest.mark.usefixtures('_mock_providers')
+def test_async_provider_pool_list_subtitles_provider(episodes, provider_manager):
+    pool = AsyncProviderPool()
+    subtitles = pool.list_subtitles_provider_tuple('tvsubtitles', episodes['bbt_s07e05'], {Language('eng')})
+    assert subtitles == ('tvsubtitles', ['tvsubtitles'])  # type: ignore[comparison-overlap]
+    assert provider_manager['tvsubtitles'].plugin.initialize.called
+    assert provider_manager['tvsubtitles'].plugin.list_subtitles.called
+
+
+@pytest.mark.usefixtures('_mock_providers')
+def test_async_provider_pool_list_subtitles(episodes, provider_manager):
+    pool = AsyncProviderPool()
+    subtitles = pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
+    assert sorted(subtitles) == [  # type: ignore[type-var,comparison-overlap]
+        'gestdown',
+        'opensubtitlescom',
+        'podnapisi',
+        'tvsubtitles',
+    ]
+    for provider in subtitles:
+        assert provider_manager[provider].plugin.initialize.called
+        assert provider_manager[provider].plugin.list_subtitles.called
+
+
+@pytest.mark.usefixtures('_mock_providers')
+def test_list_subtitles_movie(movies, provider_manager):
+    video = movies['man_of_steel']
+    languages = {Language('eng')}
+
+    subtitles = list_subtitles({video}, languages)
+
+    # test providers
+    for name in ('gestdown', 'tvsubtitles', 'opensubtitlescomvip'):
+        assert not provider_manager[name].plugin.list_subtitles.called
+
+    for name in ('opensubtitlescom', 'podnapisi'):
+        assert provider_manager[name].plugin.list_subtitles.called
+
+    # test result
+    assert len(subtitles) == 1
+    assert sorted(subtitles[movies['man_of_steel']]) == ['opensubtitlescom', 'podnapisi']  # type: ignore[type-var,comparison-overlap]
+
+
+@pytest.mark.usefixtures('_mock_providers')
+def test_list_subtitles_episode(episodes, provider_manager):
+    video = episodes['bbt_s07e05']
+    languages = {Language('eng'), Language('heb')}
+
+    subtitles = list_subtitles({video}, languages)
+
+    # test providers
+    for name in ('opensubtitlescomvip',):
+        assert not provider_manager[name].plugin.list_subtitles.called
+
+    for name in (
+        'gestdown',
+        'opensubtitlescom',
+        'podnapisi',
+        'tvsubtitles',
+    ):
+        assert provider_manager[name].plugin.list_subtitles.called
+
+    # test result
+    assert len(subtitles) == 1
+    assert sorted(subtitles[episodes['bbt_s07e05']]) == [  # type: ignore[type-var,comparison-overlap]
+        'gestdown',
+        'opensubtitlescom',
+        'podnapisi',
+        'tvsubtitles',
+    ]
+
+
+@pytest.mark.usefixtures('_mock_providers')
+def test_list_subtitles_providers(episodes, provider_manager):
+    video = episodes['bbt_s07e05']
+    languages = {Language('eng')}
+
+    subtitles = list_subtitles({video}, languages, providers=['opensubtitlescom'])
+
+    # test providers
+    for name in ('podnapisi', 'gestdown', 'tvsubtitles', 'opensubtitlescomvip'):
+        assert not provider_manager[name].plugin.list_subtitles.called
+
+    for name in ('opensubtitlescom',):
+        assert provider_manager[name].plugin.list_subtitles.called
+
+    # test result
+    assert len(subtitles) == 1
+    assert sorted(subtitles[episodes['bbt_s07e05']]) == ['opensubtitlescom']  # type: ignore[type-var,comparison-overlap]
+
+
+@pytest.mark.usefixtures('_mock_providers')
+def test_list_subtitles_no_language(episodes, provider_manager):
+    video = episodes['dallas_s01e03']
+    languages = {Language('eng')}
+    video.subtitles = {Subtitle(lang) for lang in languages}
+
+    subtitles = list_subtitles({video}, languages)
+
+    # test providers
+    for name in (
+        'opensubtitlescom',
+        'opensubtitlescomvip',
+        'gestdown',
+        'podnapisi',
+        'tvsubtitles',
+    ):
+        assert not provider_manager[name].plugin.list_subtitles.called
+
+    # test result
+    assert len(subtitles) == 0
+
+
+@pytest.mark.usefixtures('_mock_providers')
+def test_download_subtitles(provider_manager):
+    from subliminal.providers.mock import MockSubtitle
+
+    MockTVsubtitlesSubtitle = type('MockTVsubtitlesSubtitle', (MockSubtitle,), {'provider_name': 'tvsubtitles'})
+
+    subtitles = [
+        MockTVsubtitlesSubtitle(
+            language=Language('por'),
+            subtitle_id='261077',
+            page_link=None,
+            parameters={
+                'series': 'Game of Thrones',
+                'season': 3,
+                'episode': 10,
+                'year': None,
+                'rip': '1080p.BluRay',
+                'release': 'DEMAND',
+            },
+        ),
+    ]
+    download_subtitles(subtitles)
+
+    # test providers
+    for name in ('gestdown', 'opensubtitlescom', 'opensubtitlescomvip', 'podnapisi'):
+        assert not provider_manager[name].plugin.download_subtitle.called
+
+    for name in ('tvsubtitles',):
+        assert provider_manager[name].plugin.download_subtitle.called
+
+
+def test_discarded_provider(movies, provider_manager):
+    video = movies['man_of_steel']
+    languages = {Language('eng')}
+
+    pool = ProviderPool(['opensubtitlescom'])
+
+    # Working provider
+    subtitles = pool.list_subtitles(video, languages)
+    assert len(subtitles) == 1
+
+    # Mock a broken provider
+    pool['opensubtitlescom'].is_broken = True
+    subtitles = pool.list_subtitles(video, languages)
+    assert len(subtitles) == 0
+
+    # Mock the provider now works, but it was discarded
+    pool['opensubtitlescom'].is_broken = False
+
+    subtitles = pool.list_subtitles(video, languages)
+    assert len(subtitles) == 0
+
+
+def test_download_best_subtitles(episodes):
+    video = episodes['bbt_s07e05']
+    languages = {Language('eng'), Language('fra')}
+    providers = ['gestdown', 'podnapisi']
+    expected_subtitles = {
+        ('podnapisi', 'EdQo'),
+        ('podnapisi', 'Dego'),
+        # ('gestdown', 'a295515c-a460-44ea-9ba8-8d37bcb9b5a6'),
+        # ('gestdown', '90fe1369-fa0c-4154-bd04-d3d332dec587'),
+    }
+
+    subtitles = download_best_subtitles({video}, languages, providers=providers)
+
+    assert len(subtitles) == 1
+    assert len(subtitles[video]) == 2
+    assert {(s.provider_name, s.id) for s in subtitles[video]} == expected_subtitles
+
+
+def test_download_best_subtitles_min_score(episodes):
+    video = episodes['bbt_s07e05']
+    languages = {Language('fra')}
+    providers = ['gestdown']
+
+    # No minimum score
+    subtitles = download_best_subtitles({video}, languages, min_score=0, providers=providers)
+
+    assert len(subtitles) == 1
+    assert len(subtitles[video]) == 1
+
+    # With minimum score
+    subtitles = download_best_subtitles({video}, languages, min_score=episode_scores['hash'], providers=providers)
+
+    assert len(subtitles) == 1
+    assert len(subtitles[video]) == 0
+
+
+def test_download_best_subtitles_embedded_language(episodes):
+    video = episodes['bbt_s07e05']
+    languages = {Language('fra')}
+    providers = ['gestdown']
+
+    # Download best subtitle for given language
+    subtitles = download_best_subtitles({video}, languages, only_one=True, providers=providers)
+
+    assert len(subtitles) == 1
+    assert len(subtitles[video]) == 1
+
+    # With an embedded subtitle with given language
+    video.subtitles = {Subtitle(lang) for lang in languages}
+    subtitles = download_best_subtitles({video}, languages, providers=providers)
+
+    assert len(subtitles) == 0
+
+
+def test_download_best_subtitles_undefined(episodes):
+    video = episodes['bbt_s07e05']
+    languages = {Language('und')}
+    providers = ['gestdown']
+
+    # Download best subtitle for undefined language
+    subtitles = download_best_subtitles({video}, languages, only_one=True, providers=providers)
+
+    assert len(subtitles) == 1
+    assert len(subtitles[video]) == 0
+
+    # With an embedded subtitle with undefined language
+    video.subtitles = {Subtitle(lang) for lang in languages}
+    subtitles = download_best_subtitles({video}, languages, only_one=True, providers=providers)
+
+    assert len(subtitles) == 0
+
+
+def test_download_best_subtitles_no_language_provider(episodes):
+    video = episodes['bbt_s07e05']
+    languages = {Language('heb')}
+    providers = ['gestdown']
+
+    # Download best subtitle for provider that does not support the language
+    subtitles = download_best_subtitles({video}, languages, providers=providers)
+
+    assert len(subtitles) == 1
+    assert len(subtitles[video]) == 0
+
+
+def test_download_best_subtitles_only_one(episodes):
+    video = episodes['bbt_s07e05']
+    languages = {Language('eng'), Language('por', 'BR')}
+    providers = ['gestdown', 'podnapisi']
+    expected_subtitles = {
+        ('gestdown', 'a295515c-a460-44ea-9ba8-8d37bcb9b5a6'),
+        ('podnapisi', 'EdQo'),
+    }
+
+    subtitles = download_best_subtitles({video}, languages, only_one=True, providers=providers)
+
+    assert len(subtitles) == 1
+    assert len(subtitles[video]) == 1
+    subtitle = subtitles[video][0]
+    assert (subtitle.provider_name, subtitle.id) in expected_subtitles
+
+
+def test_download_bad_subtitle(movies):
+    pool = ProviderPool()
+    subtitles = pool.list_subtitles_provider('opensubtitlescom', movies['man_of_steel'], {Language('tur')})
+    assert len(subtitles) >= 1
+    subtitle = subtitles[0]
+
+    # The subtitle has no content
+    pool.download_subtitle(subtitle)
+
+    assert subtitle.content is None
+    assert subtitle.is_valid() is False
+
+
+def test_list_subtitles_providers_download(episodes, disabled_providers: list[str]) -> None:
+    video = episodes['bbt_s07e05']
+    languages = {Language('eng')}
+
+    # Disable a provider
+    if 'gestdown' not in disabled_providers:
+        disabled_providers.append('gestdown')
+
+    # no subtitles from 'gestdown'
+    subtitles = list_subtitles({video}, languages)
+    assert not any(sub.provider_name == 'gestdown' for sub in subtitles[video])
+
+    # force using 'gestdown', bypass default when init ProviderPool
+    subtitles = list_subtitles({video}, languages, providers=['gestdown'])
+
+    # test result
+    assert len(subtitles) == 1
+    assert len(subtitles[video]) > 0
+    subtitle = subtitles[video][0]
+    assert subtitle.provider_name == 'gestdown'
+    assert subtitle.content is None
+
+    # download subtitles
+    download_subtitles([subtitle], providers=['gestdown'])
+    assert subtitle.content is not None
+
+    # force using 'gestdown', bypass default when init ProviderPool
+    subtitles = list_subtitles({video}, languages, providers=['gestdown'])

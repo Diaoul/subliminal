@@ -3,6 +3,7 @@ from __future__ import annotations
 import os
 import subprocess
 from io import BytesIO
+from typing import TYPE_CHECKING
 from unittest.mock import Mock
 from zipfile import ZipFile
 
@@ -10,9 +11,14 @@ import pytest
 import requests
 from babelfish import Country, Language  # type: ignore[import-untyped]
 
+import subliminal
 from subliminal import Episode, Movie
 from subliminal.cache import region
-from subliminal.providers.mock import MockSubtitle
+from subliminal.extensions import RegistrableExtensionManager
+from subliminal.providers.mock import MockSubtitle, mock_subtitle_provider
+
+if TYPE_CHECKING:
+    from collections.abc import Generator
 
 TESTS = os.path.dirname(__file__)
 
@@ -546,6 +552,258 @@ def subtitles() -> dict[str, MockSubtitle]:
             release_name='The.Big.Bang.Theory.S07E05.The.Workplace.Proximity.720p.HDTV.x264-DIMENSION.mkv',
         ),
     }
+
+
+@pytest.fixture
+def provider_manager(monkeypatch: pytest.MonkeyPatch) -> Generator[RegistrableExtensionManager, None, None]:
+    """Patch the subliminal.extensions.provider_manager to use mock providers."""
+    original_provider_manager = subliminal.extensions.provider_manager
+
+    # Create a mock provider manager (namespace cannot be 'subliminal.providers')
+    patched_provider_manager = RegistrableExtensionManager('subliminal.mock-providers', [])
+
+    # Replace the provider_manager in all the module were it is imported
+    subliminal.extensions.provider_manager = patched_provider_manager
+    subliminal.core.provider_manager = patched_provider_manager
+    subliminal.cli.provider_manager = patched_provider_manager
+    subliminal.refiners.hash.provider_manager = patched_provider_manager
+
+    movie_name = os.path.join('Man of Steel (2013)', 'man.of.steel.2013.720p.bluray.x264-felony.mkv')
+    episode_name = os.path.join(
+        'The Big Bang Theory', 'Season 07', 'The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION.mkv'
+    )
+
+    # Podnapisi, subtitle pool
+    subtitle_pool_podnapisi = [
+        {
+            'language': Language.fromietf('en'),
+            'subtitle_id': 'EdQo',
+            'fake_content': (
+                b'1\n00:00:04,254 --> 00:00:07,214\n'
+                b"I'm gonna run to the store.\nI'll pick you up when you're done.\n\n"
+                b'2\n00:00:07,424 --> 00:00:10,968\n'
+                b'Okay. L like it a little better\nwhen you stay, but all right.\n\n'
+                b'3\n00:00:11,511 --> 00:00:12,803\n'
+                b'- Hey, Sheldon.\n- Hello.\n\n'
+            ),
+            'video_name': episode_name,
+            'matches': {'country', 'episode', 'season', 'series', 'video_codec', 'year'},
+        },
+        {
+            'language': Language.fromietf('hu'),
+            'subtitle_id': 'ZtAW',
+            'fake_content': (
+                b'1\n00:00:02,090 --> 00:00:03,970\n'
+                b'Elszaladok a boltba\nn\xe9h\xe1ny apr\xf3s\xe1g\xe9rt.\n\n'
+                b'2\n00:00:04,080 --> 00:00:05,550\n'
+                b'\xc9rted j\xf6v\xf6k, mikor v\xe9gezt\xe9l.\n\n'
+                b'3\n00:00:05,650 --> 00:00:08,390\n'
+                b'J\xf3l van. \xc9n jobb szeretem,\nmikor itt maradsz, de j\xf3l van...\n\n'
+            ),
+            'video_name': episode_name,
+            'matches': {'country', 'episode', 'release_group', 'season', 'series', 'source', 'video_codec', 'year'},
+        },
+        {
+            'language': Language.fromietf('fr'),
+            'subtitle_id': 'Dego',
+            'fake_content': (
+                b'1\n00:00:02,090 --> 00:00:03,970\n'
+                b'Je vais au magasin\n\npour quelques petites choses.\n\n'
+                b'2\n00:00:04,080 --> 00:00:05,550\n'
+                b'Je passerai te prendre quand tu auras fini.\n\n'
+                b'3\n00:00:05,650 --> 00:00:08,390\n'
+                b"D'accord. Je pr\xc3\xa9f\xc3\xa8re\nque tu restes ici, mais d'accord...\n\n"
+            ),
+            'video_name': episode_name,
+            'matches': {'country', 'episode', 'season', 'series', 'source', 'year'},
+        },
+        {
+            'language': Language.fromietf('en'),
+            'subtitle_id': 'EMgo',
+            'fake_content': (
+                b'1\n00:00:02,090 --> 00:00:03,970\n'
+                b'Say something.\n\n'
+                b'2\n00:00:04,080 --> 00:00:05,550\n'
+                b'Say something else.\n\n'
+            ),
+            'video_name': movie_name,
+            'matches': {'title', 'country', 'year'},
+        },
+    ]
+
+    ep_podnapisi = mock_subtitle_provider('Podnapisi', subtitle_pool_podnapisi)
+    patched_provider_manager.register(ep_podnapisi)
+
+    # OpenSubtitlesCom, subtitle pool
+    subtitle_pool_opensubtitlescom = [
+        {
+            'language': Language.fromietf('en'),
+            'fake_content': (
+                b'1\n00:00:04,254 --> 00:00:07,214\n'
+                b"I'm gonna run to the store.\nI'll pick you up when you're done.\n\n"
+                b'2\n00:00:07,424 --> 00:00:10,968\n'
+                b'Okay. L like it a little better\nwhen you stay, but all right.\n\n'
+                b'3\n00:00:11,511 --> 00:00:12,803\n'
+                b'- Hey, Sheldon.\n- Hello.\n\n'
+            ),
+            'video_name': episode_name,
+            'matches': {'country', 'episode', 'season', 'series', 'video_codec', 'year'},
+        },
+        {
+            'language': Language.fromietf('hu'),
+            'fake_content': (
+                b'1\n00:00:02,090 --> 00:00:03,970\n'
+                b'Elszaladok a boltba\nn\xe9h\xe1ny apr\xf3s\xe1g\xe9rt.\n\n'
+                b'2\n00:00:04,080 --> 00:00:05,550\n'
+                b'\xc9rted j\xf6v\xf6k, mikor v\xe9gezt\xe9l.\n\n'
+                b'3\n00:00:05,650 --> 00:00:08,390\n'
+                b'J\xf3l van. \xc9n jobb szeretem,\nmikor itt maradsz, de j\xf3l van...\n\n'
+            ),
+            'video_name': episode_name,
+            'matches': {'country', 'episode', 'release_group', 'season', 'series', 'source', 'video_codec', 'year'},
+        },
+        {
+            'language': Language.fromietf('fr'),
+            'fake_content': (
+                b'1\n00:00:02,090 --> 00:00:03,970\n'
+                b'Je vais au magasin\n\npour quelques petites choses.\n\n'
+                b'2\n00:00:04,080 --> 00:00:05,550\n'
+                b'Je passerai te prendre quand tu auras fini.\n\n'
+                b'3\n00:00:05,650 --> 00:00:08,390\n'
+                b"D'accord. Je pr\xc3\xa9f\xc3\xa8re\nque tu restes ici, mais d'accord...\n\n"
+            ),
+            'video_name': episode_name,
+            'matches': {'country', 'episode', 'season', 'series', 'source', 'year'},
+        },
+        {
+            'language': Language.fromietf('en'),
+            'fake_content': (
+                b'1\n00:00:02,090 --> 00:00:03,970\n'
+                b'Say something.\n\n'
+                b'2\n00:00:04,080 --> 00:00:05,550\n'
+                b'Say something else.\n\n'
+            ),
+            'video_name': movie_name,
+            'matches': {'title', 'country', 'year'},
+        },
+        {
+            'language': Language.fromietf('tr'),
+            # No content for testing a bad subtitle
+            'fake_content': None,
+            'video_name': movie_name,
+            'matches': {'title', 'country', 'year'},
+        },
+    ]
+
+    ep_opensubtitlescom = mock_subtitle_provider('OpenSubtitlesCom', subtitle_pool_opensubtitlescom)
+    patched_provider_manager.register(ep_opensubtitlescom)
+
+    # OpenSubtitlesComVIP, no subtitles
+    ep_opensubtitlescomvip = mock_subtitle_provider('OpenSubtitlesComVip', [])
+    patched_provider_manager.register(ep_opensubtitlescomvip)
+
+    # Gestdown, subtitle pool
+    subtitle_pool_gestdown = [
+        {
+            'language': Language.fromietf('en'),
+            'subtitle_id': 'a295515c-a460-44ea-9ba8-8d37bcb9b5a6',
+            'fake_content': (
+                b'1\n00:00:04,254 --> 00:00:07,214\n'
+                b"I'm gonna run to the store.\nI'll pick you up when you're done.\n\n"
+                b'2\n00:00:07,424 --> 00:00:10,968\n'
+                b'Okay. L like it a little better\nwhen you stay, but all right.\n\n'
+                b'3\n00:00:11,511 --> 00:00:12,803\n'
+                b'- Hey, Sheldon.\n- Hello.\n\n'
+            ),
+            'video_name': episode_name,
+            'matches': {'episode', 'season', 'series'},
+        },
+        {
+            'language': Language.fromietf('hu'),
+            'subtitle_id': '12c63596-b6dd-4f1b-a55f-4eac8a94c3c3',
+            'fake_content': (
+                b'1\n00:00:02,090 --> 00:00:03,970\n'
+                b'Elszaladok a boltba\nn\xe9h\xe1ny apr\xf3s\xe1g\xe9rt.\n\n'
+                b'2\n00:00:04,080 --> 00:00:05,550\n'
+                b'\xc9rted j\xf6v\xf6k, mikor v\xe9gezt\xe9l.\n\n'
+                b'3\n00:00:05,650 --> 00:00:08,390\n'
+                b'J\xf3l van. \xc9n jobb szeretem,\nmikor itt maradsz, de j\xf3l van...\n\n'
+            ),
+            'video_name': episode_name,
+            'matches': {'country', 'episode', 'release_group', 'season', 'series', 'source', 'video_codec', 'year'},
+        },
+        {
+            'language': Language.fromietf('fr'),
+            'subtitle_id': '90fe1369-fa0c-4154-bd04-d3d332dec587',
+            'fake_content': (
+                b'1\n00:00:02,090 --> 00:00:03,970\n'
+                b'Je vais au magasin\n\npour quelques petites choses.\n\n'
+                b'2\n00:00:04,080 --> 00:00:05,550\n'
+                b'Je passerai te prendre quand tu auras fini.\n\n'
+                b'3\n00:00:05,650 --> 00:00:08,390\n'
+                b"D'accord. Je pr\xc3\xa9f\xc3\xa8re\nque tu restes ici, mais d'accord...\n\n"
+            ),
+            'video_name': episode_name,
+            'matches': {'episode', 'season', 'series'},
+        },
+    ]
+
+    ep_gestdown = mock_subtitle_provider(
+        'Gestdown',
+        subtitle_pool_gestdown,
+        video_types=(Episode,),
+        # Mock a provider with limited language support
+        languages={Language('eng'), Language('fra'), Language('hun')},
+    )
+    patched_provider_manager.register(ep_gestdown)
+
+    # TVSubtitles, subtitle pool
+    subtitle_pool_tvsubtitles = [
+        {
+            'language': Language.fromietf('en'),
+            'subtitle_id': '23329',
+            'fake_content': (
+                b'1\n00:00:04,254 --> 00:00:07,214\n'
+                b"I'm gonna run to the store.\nI'll pick you up when you're done.\n\n"
+                b'2\n00:00:07,424 --> 00:00:10,968\n'
+                b'Okay. L like it a little better\nwhen you stay, but all right.\n\n'
+                b'3\n00:00:11,511 --> 00:00:12,803\n'
+                b'- Hey, Sheldon.\n- Hello.\n\n'
+            ),
+            'video_name': episode_name,
+            'matches': {'country', 'episode', 'season', 'series', 'video_codec', 'year'},
+        },
+    ]
+
+    ep_tvsubtitles = mock_subtitle_provider('TVSubtitles', subtitle_pool_tvsubtitles, video_types=(Episode,))
+    patched_provider_manager.register(ep_tvsubtitles)
+
+    # Yield the mocked provider_manager
+    yield patched_provider_manager
+
+    # Recover the original provider_manager in all the modules
+    subliminal.extensions.provider_manager = original_provider_manager
+    subliminal.core.provider_manager = original_provider_manager
+    subliminal.cli.provider_manager = original_provider_manager
+    subliminal.refiners.hash.provider_manager = original_provider_manager
+
+
+@pytest.fixture
+def disabled_providers(monkeypatch: pytest.MonkeyPatch) -> Generator[list[str], None, None]:
+    import subliminal.extensions
+
+    original_disabled_providers = subliminal.extensions.disabled_providers
+
+    patched_disabled_providers: list[str] = ['opensubtitlescomvip']
+
+    # Replace disabled_providers
+    subliminal.extensions.disabled_providers = patched_disabled_providers
+
+    # Yield the mocked disabled_providers
+    yield patched_disabled_providers
+
+    # Recover the original disabled_providers
+    subliminal.extensions.disabled_providers = original_disabled_providers
 
 
 @pytest.fixture(scope='session')

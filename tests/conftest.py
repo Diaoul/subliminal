@@ -8,10 +8,11 @@ from zipfile import ZipFile
 
 import pytest
 import requests
-from babelfish import Country  # type: ignore[import-untyped]
+from babelfish import Country, Language  # type: ignore[import-untyped]
 
 from subliminal import Episode, Movie
 from subliminal.cache import region
+from subliminal.providers.mock import MockSubtitle
 
 TESTS = os.path.dirname(__file__)
 
@@ -474,6 +475,75 @@ def episodes() -> dict[str, Episode]:
             4,
             2,
             year=1914,
+        ),
+    }
+
+
+@pytest.fixture
+def subtitles() -> dict[str, MockSubtitle]:
+    return {
+        'man_of_steel==empty': MockSubtitle(
+            language=Language('eng'),
+            subtitle_id='man_of_steel==empty',
+            hearing_impaired=True,
+            page_link=None,
+            encoding='utf-8',
+        ),
+        'bbt_s07e05==empty': MockSubtitle(
+            language=Language('eng'),
+            subtitle_id='bbt_s07e05==empty',
+            foreign_only=False,
+            page_link=None,
+        ),
+        'bbt_s07e05==series_year_country': MockSubtitle(
+            language=Language('eng'),
+            subtitle_id='bbt_s07e05==series_year_country',
+            hearing_impaired=False,
+            page_link=None,
+            parameters={
+                'title': 'the big BANG theory',
+                'season': 6,
+                'episode': 4,
+                'episode_title': None,
+                'year': None,
+                'release_group': '1080p',
+            },
+        ),
+        'man_of_steel==hash': MockSubtitle(
+            language=Language('eng'),
+            subtitle_id='man_of_steel==hash',
+            foreign_only=True,
+            page_link=None,
+            encoding='utf-8',
+            matches={'hash'},
+        ),
+        'man_of_steel==imdb_id': MockSubtitle(
+            language=Language('eng'),
+            subtitle_id='man_of_steel==imdb_id',
+            page_link=None,
+            encoding='utf-8',
+            matches={'imdb_id', 'country'},
+            parameters={
+                'title': 'Man of Steel',
+                'year': 2013,
+                'imdb_id': 'tt770828',
+                'season': None,
+                'episode': None,
+            },
+            release_name='man.of.steel.2013.720p.bluray.x264-felony.mkv',
+        ),
+        'bbt_s07e05==episode_title': MockSubtitle(
+            language=Language('pol'),
+            subtitle_id='bbt_s07e05==episode_title',
+            page_link=None,
+            encoding='utf-8',
+            parameters={
+                'title': None,
+                'season': 7,
+                'episode': 5,
+                'year': None,
+            },
+            release_name='The.Big.Bang.Theory.S07E05.The.Workplace.Proximity.720p.HDTV.x264-DIMENSION.mkv',
         ),
     }
 

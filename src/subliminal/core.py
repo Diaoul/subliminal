@@ -114,7 +114,7 @@ class ProviderPool:
     def __iter__(self) -> Iterator[str]:
         return iter(self.initialized_providers)
 
-    def list_subtitles_provider(self, provider: str, video: Video, languages: Set[Language]) -> list[Subtitle]:
+    def list_subtitles_provider(self, provider: str, video: Video, languages: Set[Language]) -> list[Subtitle] | None:
         """List subtitles with a single provider.
 
         The video and languages are checked against the provider.
@@ -124,7 +124,7 @@ class ProviderPool:
         :type video: :class:`~subliminal.video.Video`
         :param languages: languages to search for.
         :type languages: set of :class:`~babelfish.language.Language`
-        :return: found subtitles.
+        :return: found subtitles or None if there was an error and the provider should be discarded.
         :rtype: list of :class:`~subliminal.subtitle.Subtitle` or None
 
         """
@@ -146,7 +146,8 @@ class ProviderPool:
         except Exception as e:  # noqa: BLE001
             handle_exception(e, f'Provider {provider}')
 
-        return []
+        # return None to discard this provider
+        return None
 
     def list_subtitles(self, video: Video, languages: Set[Language]) -> list[Subtitle]:
         """List subtitles.
@@ -322,7 +323,7 @@ class AsyncProviderPool(ProviderPool):
         provider: str,
         video: Video,
         languages: Set[Language],
-    ) -> tuple[str, list[Subtitle]]:
+    ) -> tuple[str, list[Subtitle] | None]:
         """List subtitles with a single provider, multi-threaded."""
         return provider, super().list_subtitles_provider(provider, video, languages)
 

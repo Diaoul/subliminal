@@ -141,7 +141,8 @@ exclude_also = [
     "if TYPE_CHECKING:",
     "@overload",
     "except ImportError",
-    "\\.\\.\\.",
+    "except PackageNotFoundError",
+    "\\.\\.\\.^",
     "raise NotImplementedError()",
     "if __name__ == .__main__.:",
 ]

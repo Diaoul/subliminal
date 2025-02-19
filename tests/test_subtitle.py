@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+from textwrap import dedent
 
 import pytest
 from babelfish import Language  # type: ignore[import-untyped]
@@ -281,6 +282,236 @@ def test_subtitle_reencode() -> None:
     success = subtitle.reencode()
     assert success
     assert subtitle.content == b'Uma palavra longa \xc3\xa9 melhor do que um p\xc3\xa3o curto'
+
+
+def test_subtitle_reencode_text() -> None:
+    text = 'Uma palavra longa é melhor do que um pão curto'
+    subtitle = Subtitle(
+        language=Language('por'),
+        encoding='latin1',
+    )
+
+    assert not subtitle.text
+
+    success = subtitle.reencode(text)
+    assert success
+    assert subtitle.content == b'Uma palavra longa \xc3\xa9 melhor do que um p\xc3\xa3o curto'
+    assert subtitle.text == text
+
+
+def test_subtitle_convert_empty() -> None:
+    subtitle = Subtitle(
+        language=Language('fra'),
+        encoding='latin1',
+    )
+    assert not subtitle.convert()
+
+
+def test_subtitle_convert_same_format_same_encoding() -> None:
+    subtitle = Subtitle(
+        language=Language('eng'),
+        encoding='utf-8',
+    )
+    text = "1\n00:00:05,000 --> 00:00:10,000\n«Attention, ce flim n'est pas un flim sur le cyclimse»\n\n"
+    subtitle.content = text.encode('utf-8')
+    assert subtitle.encoding == 'utf-8'
+    assert subtitle.text == text
+
+    assert subtitle.convert(output_format='srt', output_encoding=None)
+
+
+def test_subtitle_convert_same_format_different_encoding() -> None:
+    subtitle = Subtitle(
+        language=Language('fra'),
+        encoding='latin1',
+    )
+    text = "1\n00:00:05,000 --> 00:00:10,000\n«Attention, ce flim n'est pas un flim sur le cyclimse»\n\n"
+    subtitle.content = text.encode('latin1')
+    assert subtitle.encoding == 'iso8859-1'
+    assert subtitle.text == text
+
+    assert subtitle.convert(output_format='srt', output_encoding='utf-8')
+    assert subtitle.encoding == 'utf-8'
+    assert subtitle.text == text
+
+
+def test_subtitle_convert_from_microdvd_no_fps() -> None:
+    subtitle = Subtitle(
+        language=Language('pol'),
+    )
+    text = """\
+    {1189}{1271}Tłumaczenie:|sinu6
+    {3146}{3189}/Nie rozumiecie?
+    {3189}{3244}/Jądro Kryptona się rozpada.
+    {3244}{3299}To kwestia tygodni.
+    {3299}{3390}Ostrzegałem, że eksploatacja jądra|to samobójstwo.
+    """
+    subtitle.content = text.encode('utf-8')
+
+    assert not subtitle.convert(output_format='srt', output_encoding='utf-8')
+
+
+def test_subtitle_convert_from_microdvd_subtitle_fps() -> None:
+    subtitle = Subtitle(
+        language=Language('pol'),
+        fps=24,
+    )
+    text = """\
+    {1189}{1271}Tłumaczenie:|sinu6
+    {3146}{3189}/Nie rozumiecie?
+    {3189}{3244}/Jądro Kryptona się rozpada.
+    {3244}{3299}To kwestia tygodni.
+    {3299}{3390}Ostrzegałem, że eksploatacja jądra|to samobójstwo.
+    """
+    subtitle.content = text.encode('utf-8')
+
+    assert subtitle.convert(output_format='srt', output_encoding='utf-8')
+    assert subtitle.subtitle_format == 'srt'
+    assert subtitle.encoding == 'utf-8'
+
+    new_text = dedent(
+        """\
+        1
+        00:00:49,542 --> 00:00:52,958
+        Tłumaczenie:
+        sinu6
+
+        2
+        00:02:11,083 --> 00:02:12,875
+        /Nie rozumiecie?
+
+        3
+        00:02:12,875 --> 00:02:15,167
+        /Jądro Kryptona się rozpada.
+
+        4
+        00:02:15,167 --> 00:02:17,458
+        To kwestia tygodni.
+
+        5
+        00:02:17,458 --> 00:02:21,250
+        Ostrzegałem, że eksploatacja jądra
+        to samobójstwo.
+
+        """
+    )
+    assert subtitle.text == new_text
+
+
+def test_subtitle_convert_from_microdvd_argument_fps() -> None:
+    subtitle = Subtitle(
+        language=Language('pol'),
+        fps=32,
+    )
+    text = """\
+    {1189}{1271}Tłumaczenie:|sinu6
+    {3146}{3189}/Nie rozumiecie?
+    {3189}{3244}/Jądro Kryptona się rozpada.
+    {3244}{3299}To kwestia tygodni.
+    {3299}{3390}Ostrzegałem, że eksploatacja jądra|to samobójstwo.
+    """
+    subtitle.content = text.encode('utf-8')
+
+    assert subtitle.convert(output_format='srt', output_encoding='utf-8', fps=24)
+    assert subtitle.subtitle_format == 'srt'
+    assert subtitle.encoding == 'utf-8'
+
+    new_text = dedent(
+        """\
+        1
+        00:00:49,542 --> 00:00:52,958
+        Tłumaczenie:
+        sinu6
+
+        2
+        00:02:11,083 --> 00:02:12,875
+        /Nie rozumiecie?
+
+        3
+        00:02:12,875 --> 00:02:15,167
+        /Jądro Kryptona się rozpada.
+
+        4
+        00:02:15,167 --> 00:02:17,458
+        To kwestia tygodni.
+
+        5
+        00:02:17,458 --> 00:02:21,250
+        Ostrzegałem, że eksploatacja jądra
+        to samobójstwo.
+
+        """
+    )
+    assert subtitle.text == new_text
+
+
+def test_subtitle_convert_to_ssa() -> None:
+    subtitle = Subtitle(
+        language=Language('pol'),
+        fps=24,
+    )
+    text = dedent(
+        """\
+        1
+        00:00:49,542 --> 00:00:52,958
+        Tłumaczenie:
+        sinu6
+
+        2
+        00:02:11,083 --> 00:02:12,875
+        /Nie rozumiecie?
+
+        3
+        00:02:12,875 --> 00:02:15,167
+        /Jądro Kryptona się rozpada.
+
+        4
+        00:02:15,167 --> 00:02:17,458
+        To kwestia tygodni.
+
+        5
+        00:02:17,458 --> 00:02:21,250
+        Ostrzegałem, że eksploatacja jądra
+        to samobójstwo.
+
+        """
+    )
+    subtitle.content = text.encode('utf-8')
+
+    assert subtitle.convert(output_format='ass')
+    assert subtitle.subtitle_format == 'ass'
+    assert subtitle.encoding == 'utf-8'
+
+    # Define a variable to be able to wrap the long line
+    styles = (
+        'Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, '
+        'Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, '
+        'Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding'
+    )
+    new_text = dedent(
+        f"""\
+        [Script Info]
+        ; Script generated by pysubs2
+        ; https://pypi.python.org/pypi/pysubs2
+        WrapStyle: 0
+        ScaledBorderAndShadow: yes
+        Collisions: Normal
+        ScriptType: v4.00+
+
+        [V4+ Styles]
+        Format: {styles}
+        Style: Default,Arial,20,&H00FFFFFF,&H000000FF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,2,2,2,10,10,10,1
+
+        [Events]
+        Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+        Dialogue: 0,0:00:49.54,0:00:52.96,Default,,0,0,0,,Tłumaczenie:\\Nsinu6
+        Dialogue: 0,0:02:11.08,0:02:12.88,Default,,0,0,0,,/Nie rozumiecie?
+        Dialogue: 0,0:02:12.88,0:02:15.17,Default,,0,0,0,,/Jądro Kryptona się rozpada.
+        Dialogue: 0,0:02:15.17,0:02:17.46,Default,,0,0,0,,To kwestia tygodni.
+        Dialogue: 0,0:02:17.46,0:02:21.25,Default,,0,0,0,,Ostrzegałem, że eksploatacja jądra\\Nto samobójstwo.
+        """
+    )
+    assert subtitle.text == new_text
 
 
 def test_subtitle_info(monkeypatch) -> None:

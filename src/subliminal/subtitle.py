@@ -166,7 +166,7 @@ class Subtitle:
         self.subtitle_id = subtitle_id
         self.page_link = page_link
         self.subtitle_format = subtitle_format
-        self.fps = fps
+        self.fps = fps if fps is not None and fps > 0 else None
         self.embedded = embedded
 
         self.language_type = LanguageType.from_flags(hearing_impaired=hearing_impaired, foreign_only=foreign_only)

@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 import os
-import sys
 from datetime import datetime, timedelta, timezone
 from typing import Any
 from unittest.mock import Mock
@@ -26,11 +25,6 @@ from subliminal.video import Episode, Movie
 
 # Core test
 pytestmark = pytest.mark.core
-
-unix_platform = pytest.mark.skipif(
-    not sys.platform.startswith('linux'),
-    reason='only on linux platform',
-)
 
 
 def test_check_video_languages(movies: dict[str, Movie]) -> None:
@@ -419,44 +413,3 @@ def test_save_subtitles_single_directory_encoding(movies: dict[str, Movie], tmpd
     path = os.path.join(str(tmpdir), os.path.splitext(os.path.split(movies['man_of_steel'].name)[1])[0] + '.srt')
     assert os.path.exists(path)
     assert open(path, encoding='utf-8').read() == 'ハローワールド'
-
-
-@unix_platform
-def test_scan_archive_with_one_video(rar: dict[str, str], mkv: dict[str, str]) -> None:
-    if 'video' not in rar:
-        return
-    rar_file = rar['video']
-    actual = scan_archive(rar_file)
-
-    assert actual.name == os.path.join(os.path.split(rar_file)[0], mkv['test1'])
-
-
-@unix_platform
-def test_scan_archive_with_multiple_videos(rar: dict[str, str], mkv: dict[str, str]) -> None:
-    if 'video' not in rar:
-        return
-    rar_file = rar['videos']
-    actual = scan_archive(rar_file)
-
-    assert actual.name == os.path.join(os.path.split(rar_file)[0], mkv['test5'])
-
-
-@unix_platform
-def test_scan_archive_with_no_video(rar: dict[str, str]) -> None:
-    with pytest.raises(ArchiveError) as excinfo:
-        scan_archive(rar['simple'])
-    assert excinfo.value.args == ('No video in archive',)
-
-
-@unix_platform
-def test_scan_bad_archive(mkv: dict[str, str]) -> None:
-    with pytest.raises(ArchiveError) as excinfo:
-        scan_archive(mkv['test1'])
-    assert excinfo.value.args == ("'.mkv' is not a valid archive",)
-
-
-@unix_platform
-def test_scan_password_protected_archive(rar: dict[str, str]) -> None:
-    with pytest.raises(ArchiveError) as excinfo:
-        scan_archive(rar['pwd-protected'])
-    assert excinfo.value.args == ('Rar requires a password',)

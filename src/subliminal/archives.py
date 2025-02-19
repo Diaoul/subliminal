@@ -46,14 +46,14 @@ def is_supported_archive(filename: str) -> bool:
     if filename.lower().endswith(ARCHIVE_EXTENSIONS):
         return True
 
-    if filename.lower().endswith('.rar'):
+    if filename.lower().endswith('.rar'):  # pragma: no cover
         msg = 'Install the rarfile module to be able to read rar archives.'
         warnings.warn(msg, UserWarning, stacklevel=2)
 
-    return False
+    return False  # pragma: no cover
 
 
-def scan_archive(path: str | os.PathLike, name: str | None = None) -> Video:  # pragma: no cover
+def scan_archive(path: str | os.PathLike, name: str | None = None) -> Video:
     """Scan an archive from a `path`.
 
     :param str path: existing path to the archive.
@@ -78,7 +78,7 @@ def scan_archive(path: str | os.PathLike, name: str | None = None) -> Video:  # 
     raise ArchiveError(msg)
 
 
-def scan_archive_rar(path: str | os.PathLike, name: str | None = None) -> Video:  # pragma: no cover
+def scan_archive_rar(path: str | os.PathLike, name: str | None = None) -> Video:
     """Scan a rar archive from a `path`.
 
     :param str path: existing path to the archive.
@@ -90,7 +90,7 @@ def scan_archive_rar(path: str | os.PathLike, name: str | None = None) -> Video:
     path = os.fspath(path)
     # check for non-existing path
     if not os.path.exists(path):  # pragma: no cover
-        msg = 'Path does not exist'
+        msg = f'Path does not exist: {path!r}'
         raise ValueError(msg)
 
     if not is_rarfile(path):

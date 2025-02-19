@@ -1,18 +1,14 @@
 from __future__ import annotations
 
 import pytest
-from babelfish import Language  # type: ignore[import-untyped]
 
-from subliminal.providers.addic7ed import Addic7edSubtitle
-from subliminal.providers.opensubtitles import OpenSubtitlesSubtitle
-from subliminal.providers.podnapisi import PodnapisiSubtitle
 from subliminal.score import compute_score, episode_scores, movie_scores, solve_episode_equations, solve_movie_equations
 
 # Core test
 pytestmark = pytest.mark.core
 
 
-def test_episode_equations():
+def test_episode_equations() -> None:
     expected_scores = {}
     for symbol, score in solve_episode_equations().items():
         expected_scores[str(symbol)] = score
@@ -20,7 +16,7 @@ def test_episode_equations():
     assert episode_scores == expected_scores
 
 
-def test_movie_equations():
+def test_movie_equations() -> None:
     expected_scores = {}
     for symbol, score in solve_movie_equations().items():
         expected_scores[str(symbol)] = score
@@ -28,85 +24,38 @@ def test_movie_equations():
     assert movie_scores == expected_scores
 
 
-def test_compute_score(episodes):
+def test_compute_score(episodes, subtitles) -> None:
     video = episodes['bbt_s07e05']
-    subtitle = Addic7edSubtitle(
-        language=Language('eng'),
-        subtitle_id='',
-        hearing_impaired=True,
-        page_link=None,
-        series='the big BANG theory',
-        season=6,
-        episode=4,
-        title=None,
-        year=None,
-        release_group='1080p',
-    )
+    subtitle = subtitles['bbt_s07e05==series_year_country']
     expected_score = episode_scores['series'] + episode_scores['year'] + episode_scores['country']
     assert compute_score(subtitle, video) == expected_score
 
 
-def test_get_score_cap(movies):
+def test_get_score_cap(movies, subtitles) -> None:
     video = movies['man_of_steel']
-    subtitle = OpenSubtitlesSubtitle(
-        language=Language('eng'),
-        subtitle_id='1',
-        hearing_impaired=True,
-        page_link=None,
-        matched_by='hash',
-        movie_kind='movie',
-        moviehash='5b8f8f4e41ccb21e',
-        movie_name='Man of Steel',
-        movie_release_name='man.of.steel.2013.720p.bluray.x264-felony.mkv',
-        movie_year=2013,
-        movie_imdb_id='tt770828',
-        series_season=None,
-        series_episode=None,
-        filename='',
-        encoding='utf-8',
-    )
-    assert compute_score(subtitle, video) == movie_scores['hash']
+    subtitle = subtitles['man_of_steel==hash']
+
+    expected_matches = {'hash', 'country'}
+    assert subtitle.get_matches(video) == expected_matches
+
+    expected = movie_scores['hash']
+    assert compute_score(subtitle, video) == expected
 
 
-def test_compute_score_movie_imdb_id(movies):
+def test_compute_score_movie_imdb_id(movies, subtitles) -> None:
     video = movies['man_of_steel']
-    subtitle = OpenSubtitlesSubtitle(
-        language=Language('eng'),
-        subtitle_id='1',
-        hearing_impaired=True,
-        page_link=None,
-        matched_by='hash',
-        movie_kind='movie',
-        moviehash=None,
-        movie_name='Man of Steel',
-        movie_release_name='man.of.steel.2013.720p.bluray.x264-felony.mkv',
-        movie_year=2013,
-        movie_imdb_id='tt770828',
-        series_season=None,
-        series_episode=None,
-        filename='',
-        encoding='utf-8',
-    )
-    assert compute_score(subtitle, video) == sum(
+    subtitle = subtitles['man_of_steel==imdb_id']
+    expected = sum(
         movie_scores.get(m, 0)
         for m in ('imdb_id', 'title', 'year', 'country', 'release_group', 'source', 'resolution', 'video_codec')
     )
+    assert compute_score(subtitle, video) == expected
 
 
-def test_compute_score_episode_title(episodes):
+def test_compute_score_episode_title(episodes, subtitles) -> None:
     video = episodes['bbt_s07e05']
-    subtitle = PodnapisiSubtitle(
-        language=Language('eng'),
-        subtitle_id='1',
-        hearing_impaired=True,
-        page_link=None,
-        releases=['The.Big.Bang.Theory.S07E05.The.Workplace.Proximity.720p.HDTV.x264-DIMENSION.mkv'],
-        title=None,
-        season=7,
-        episode=5,
-        year=None,
-    )
-    assert compute_score(subtitle, video) == sum(
+    subtitle = subtitles['bbt_s07e05==episode_title']
+    expected = sum(
         episode_scores.get(m, 0)
         for m in (
             'series',
@@ -121,25 +70,34 @@ def test_compute_score_episode_title(episodes):
             'title',
         )
     )
+    assert compute_score(subtitle, video) == expected
 
 
-def test_compute_score_hash_hearing_impaired(movies):
+@pytest.mark.parametrize('id_type', ['imdb_id', 'tmdb_id', 'tvdb_id'])
+def test_compute_score_episode_imdb_id_only(episodes, subtitles, id_type: str) -> None:
+    video = episodes['bbt_s07e05']
+    subtitle = subtitles['bbt_s07e05==empty']
+    subtitle.matches = {id_type}
+
+    expected = sum(episode_scores.get(m, 0) for m in ('series', 'year', 'country', 'season', 'episode'))
+    assert compute_score(subtitle, video) == expected
+
+
+@pytest.mark.parametrize('id_type', ['series_imdb_id', 'series_tmdb_id', 'series_tvdb_id'])
+def test_compute_score_episode_series_imdb_id_only(episodes, subtitles, id_type: str) -> None:
+    video = episodes['bbt_s07e05']
+    subtitle = subtitles['bbt_s07e05==empty']
+    subtitle.matches = {id_type}
+
+    expected = sum(episode_scores.get(m, 0) for m in ('series', 'year', 'country'))
+    assert compute_score(subtitle, video) == expected
+
+
+@pytest.mark.parametrize('id_type', ['imdb_id', 'tmdb_id'])
+def test_compute_score_movie_imdb_id_only(movies, subtitles, id_type: str) -> None:
     video = movies['man_of_steel']
-    subtitle = OpenSubtitlesSubtitle(
-        language=Language('eng'),
-        subtitle_id='1',
-        hearing_impaired=True,
-        page_link=None,
-        matched_by='hash',
-        movie_kind='movie',
-        moviehash='5b8f8f4e41ccb21e',
-        movie_name='Man of Steel',
-        movie_release_name='man.of.steel.2013.720p.bluray.x264-felony.mkv',
-        movie_year=2013,
-        movie_imdb_id='tt770828',
-        series_season=None,
-        series_episode=None,
-        filename='',
-        encoding='utf-8',
-    )
-    assert compute_score(subtitle, video, hearing_impaired=True) == movie_scores['hash']
+    subtitle = subtitles['man_of_steel==empty']
+    subtitle.matches = {id_type}
+
+    expected = sum(movie_scores.get(m, 0) for m in ('title', 'year', 'country'))
+    assert compute_score(subtitle, video) == expected

@@ -8,8 +8,9 @@ from itertools import count
 from typing import TYPE_CHECKING, Any, ClassVar
 
 from babelfish import LANGUAGES, Language  # type: ignore[import-untyped]
+from guessit import guessit  # type: ignore[import-untyped]
 
-from subliminal.exceptions import NotInitializedProviderError
+from subliminal.exceptions import NotInitializedProviderError, ProviderError
 from subliminal.matches import guess_matches
 from subliminal.subtitle import Subtitle
 from subliminal.video import Episode, Movie, Video
@@ -25,13 +26,25 @@ logger = logging.getLogger(__name__)
 class MockSubtitle(Subtitle):
     """Mock Subtitle."""
 
-    provider_name: ClassVar[str] = 'mock'
     _ids: ClassVar = count(0)
 
+    #: Provider name, modify in subclasses
+    provider_name: ClassVar[str] = 'mock'
+
+    #: Fake content, will be copied to 'content' with :meth:`MockProvider.download_subtitle`
     fake_content: bytes
+
+    #: Video name to match to be listed by :meth:`MockProvider.list_subtitles`
     video_name: str
+
+    #: A set of matches to add to the set when :meth:`get_matches` is called
     matches: set[str]
-    force_matches: bool
+
+    #: Guesses used as argument to compute the matches with :func:`guess_matches`
+    parameters: dict[str, Any]
+
+    #: Release name to be parsed with guessit and added to the :attr:`parameters`
+    release_name: str
 
     def __init__(
         self,
@@ -41,7 +54,8 @@ class MockSubtitle(Subtitle):
         fake_content: bytes = b'',
         video_name: str = '',
         matches: Set[str] | None = None,
-        parameters: dict[str, Any] | None = None,
+        parameters: Mapping[str, Any] | None = None,
+        release_name: str = '',
         **kwargs: Any,
     ) -> None:
         # generate unique id for mock subtitle
@@ -55,15 +69,22 @@ class MockSubtitle(Subtitle):
         )
         self.fake_content = fake_content
         self.video_name = video_name
-        self.force_matches = matches is not None
         self.matches = set(matches) if matches is not None else set()
         self.parameters = dict(parameters) if parameters is not None else {}
+        self.release_name = release_name
 
     def get_matches(self, video: Video) -> set[str]:
         """Get the matches against the `video`."""
-        if self.force_matches:
-            return self.matches
-        return guess_matches(video, self.parameters)
+        # Use the parameters as guesses
+        matches = guess_matches(video, self.parameters)
+
+        # Parse the release_name and guess more matches
+        if self.release_name:
+            video_type = 'episode' if isinstance(video, Episode) else 'movie'
+            matches |= guess_matches(video, guessit(self.release_name, {'type': video_type}))
+
+        # Force add more matches
+        return matches | self.matches
 
 
 class MockProvider(Provider):
@@ -77,22 +98,27 @@ class MockProvider(Provider):
 
     logged_in: bool
     subtitle_pool: list[MockSubtitle]
+    is_broken: bool
 
     def __init__(self, subtitle_pool: Sequence[MockSubtitle] | None = None) -> None:
         self.logged_in = False
         self.subtitle_pool = list(self.internal_subtitle_pool)
         if subtitle_pool is not None:
             self.subtitle_pool.extend(list(subtitle_pool))
+        self.is_broken = False
 
     def initialize(self) -> None:
         """Initialize the provider."""
+        logger.info('Mock provider %s was initialized', self.__class__.__name__)
         self.logged_in = True
 
     def terminate(self) -> None:
         """Terminate the provider."""
         if not self.logged_in:
+            logger.info('Mock provider %s was not terminated', self.__class__.__name__)
             raise NotInitializedProviderError
 
+        logger.info('Mock provider %s was terminated', self.__class__.__name__)
         self.logged_in = False
 
     def query(
@@ -102,27 +128,66 @@ class MockProvider(Provider):
         matches: Set[str] | None = None,
     ) -> list[MockSubtitle]:
         """Query the provider for subtitles."""
+        if self.is_broken:
+            msg = f'Mock provider {self.__class__.__name__} query raised an error'
+            raise ProviderError(msg)
+
         subtitles = []
         for lang in languages:
-            subtitle = MockSubtitle(language=lang, video=video, matches=matches)
+            subtitle = self.subtitle_class(language=lang, video=video, matches=matches)
             subtitles.append(subtitle)
+        logger.info(
+            'Mock provider %s query for video %r and languages %s: %d',
+            self.__class__.__name__,
+            video.name if video else None,
+            languages,
+            len(subtitles),
+        )
         return subtitles
 
     def list_subtitles(self, video: Video, languages: Set[Language]) -> list[MockSubtitle]:
         """List all the subtitles for the video."""
-        return [
+        if self.is_broken:
+            msg = f'Mock provider {self.__class__.__name__} list_subtitles raised an error'
+            raise ProviderError(msg)
+
+        subtitles = [
             subtitle
             for subtitle in self.subtitle_pool
             if subtitle.language in languages and subtitle.video_name == video.name
         ]
+        logger.info(
+            'Mock provider %s list subtitles for video %r and languages %s: %d',
+            self.__class__.__name__,
+            video.name,
+            languages,
+            len(subtitles),
+        )
+        return subtitles
 
     def download_subtitle(self, subtitle: MockSubtitle) -> None:
         """Download the content of the subtitle."""
+        if self.is_broken:
+            msg = f'Mock provider {self.__class__.__name__} download_subtitle raised an error'
+            raise ProviderError(msg)
+
+        logger.info(
+            'Mock provider %s download subtitle %s',
+            self.__class__.__name__,
+            subtitle,
+        )
         subtitle.content = subtitle.fake_content
 
 
-def mock_subtitle_provider(name: str, subtitles_info: Sequence[Mapping[str, Any]]) -> str:
+def mock_subtitle_provider(
+    name: str,
+    subtitles_info: Sequence[Mapping[str, Any]],
+    languages: Set[Language] | None = None,
+    video_types: tuple[type[Episode] | type[Movie], ...] = (Episode, Movie),
+) -> str:
     """Mock a subtitle provider, providing subtitles."""
+    languages = set(languages) if languages else {Language(lang) for lang in LANGUAGES}
+
     name_lower = name.lower()
     subtitle_class_name = f'{name}Subtitle'
     provider_class_name = f'{name}Provider'
@@ -138,6 +203,8 @@ def mock_subtitle_provider(name: str, subtitles_info: Sequence[Mapping[str, Any]
         {
             'subtitle_class': MyMockSubtitle,
             'internal_subtitle_pool': subtitle_pool,
+            'languages': languages,
+            'video_types': video_types,
         },
     )
 

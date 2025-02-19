@@ -134,7 +134,7 @@ def get_scores(video: Video) -> dict[str, Any]:
 
 def match_hearing_impaired(subtitle: Subtitle, *, hearing_impaired: bool | None = None) -> bool:
     """Match hearing impaired, if it is defined for the subtitle."""
-    return (
+    return (  # pragma: no cover
         hearing_impaired is not None
         and subtitle.hearing_impaired is not None
         and subtitle.hearing_impaired == hearing_impaired
@@ -181,15 +181,24 @@ def compute_score(subtitle: Subtitle, video: Video, **kwargs: Any) -> int:
         if 'imdb_id' in matches:
             logger.debug('Adding imdb_id match equivalents')
             matches |= {'series', 'year', 'country', 'season', 'episode'}
-        if 'tvdb_id' in matches:
-            logger.debug('Adding tvdb_id match equivalents')
+        if 'series_tmdb_id' in matches:
+            logger.debug('Adding series_tmdb_id match equivalents')
+            matches |= {'series', 'year', 'country'}
+        if 'tmdb_id' in matches:
+            logger.debug('Adding tmdb_id match equivalents')
             matches |= {'series', 'year', 'country', 'season', 'episode'}
         if 'series_tvdb_id' in matches:
             logger.debug('Adding series_tvdb_id match equivalents')
             matches |= {'series', 'year', 'country'}
+        if 'tvdb_id' in matches:
+            logger.debug('Adding tvdb_id match equivalents')
+            matches |= {'series', 'year', 'country', 'season', 'episode'}
     elif isinstance(video, Movie):  # pragma: no branch
         if 'imdb_id' in matches:
             logger.debug('Adding imdb_id match equivalents')
+            matches |= {'title', 'year', 'country'}
+        if 'tmdb_id' in matches:
+            logger.debug('Adding tmdb_id match equivalents')
             matches |= {'title', 'year', 'country'}
 
     # compute the score

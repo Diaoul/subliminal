@@ -104,7 +104,7 @@ run-cov-core = [
   "test-cov-core",
   """\
     coverage report --skip-covered --show-missing --fail-under=100 \
-    --omit='src/subliminal/cli.py,src/subliminal/archives.py,src/subliminal/__main__.py,'\
+    --omit='src/subliminal/cli.py,src/subliminal/__main__.py,'\
     'src/subliminal/converters/*,src/subliminal/providers/*,src/subliminal/refiners/*' \
   """,
 ]

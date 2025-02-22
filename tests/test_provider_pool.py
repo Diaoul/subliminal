@@ -3,7 +3,7 @@ from __future__ import annotations
 import logging
 import sys
 from typing import TYPE_CHECKING
-from unittest.mock import Mock
+from unittest.mock import Mock, call
 
 import pytest
 from babelfish import Language  # type: ignore[import-untyped]
@@ -15,12 +15,16 @@ from subliminal.core import (
     download_subtitles,
     list_subtitles,
     refine,
+    refiner_manager,
 )
 from subliminal.score import episode_scores
 from subliminal.subtitle import Subtitle
 
 if TYPE_CHECKING:
+    from typing import Callable
+
     from subliminal.extensions import RegistrableExtensionManager
+    from subliminal.video import Video
 
 # Core test
 pytestmark = [
@@ -46,6 +50,40 @@ def _mock_providers(monkeypatch: pytest.MonkeyPatch, provider_manager: Registrab
         monkeypatch.setattr(provider.plugin, 'list_subtitles', Mock(return_value=[provider.name]))
         monkeypatch.setattr(provider.plugin, 'download_subtitle', Mock())
         monkeypatch.setattr(provider.plugin, 'terminate', Mock())
+
+
+@pytest.fixture
+def mock_refiners(monkeypatch: pytest.MonkeyPatch) -> Mock:
+    mock = Mock()
+
+    def mock_and_refine(refiner_name: str) -> Callable:
+        def mock_refine(video: Video, **kwargs) -> None:
+            mock(refiner_name)
+
+        return mock_refine
+
+    for refiner in refiner_manager:
+        monkeypatch.setattr(refiner, 'plugin', mock_and_refine(refiner.name))
+
+    return mock
+
+
+@pytest.fixture
+def mock_refiners_hash_broken(monkeypatch: pytest.MonkeyPatch) -> Mock:
+    mock = Mock()
+
+    def mock_and_refine(refiner_name: str) -> Callable:
+        def mock_refine(video: Video, **kwargs) -> None:
+            if refiner_name == 'hash':
+                raise ValueError
+            mock(refiner_name)
+
+        return mock_refine
+
+    for refiner in refiner_manager:
+        monkeypatch.setattr(refiner, 'plugin', mock_and_refine(refiner.name))
+
+    return mock
 
 
 def test_provider_pool_get_keyerror():
@@ -463,24 +501,28 @@ def test_list_subtitles_providers_download(episodes, disabled_providers: list[st
     subtitles = list_subtitles({video}, languages, providers=['gestdown'])
 
 
-@pytest.mark.skip
-def test_refine_movie(movies):
+def test_refine_movie(movies, mock_refiners):
     video = movies['man_of_steel']
 
     refine(video)
 
-    # test result
-    assert len(video.hashes) > 0
-    assert video.imbd_id == 'tt2414'
+    calls = [call('hash'), call('metadata'), call('omdb'), call('tmdb')]
+    mock_refiners.assert_has_calls(calls, any_order=True)
 
 
-@pytest.mark.skip
-def test_refine_episode(episodes):
+def test_refine_episode(episodes, mock_refiners):
     video = episodes['bbt_s07e05']
 
     refine(video)
 
-    # test result
-    assert len(video.hashes) > 0
-    assert video.series_imbd_id == 'tt2414'
-    assert video.imbd_id == 'tt2414'
+    calls = [call('hash'), call('metadata'), call('omdb'), call('tmdb'), call('tvdb')]
+    mock_refiners.assert_has_calls(calls, any_order=True)
+
+
+def test_refine_movie_broken(movies, mock_refiners_hash_broken):
+    video = movies['man_of_steel']
+
+    refine(video)
+
+    calls = [call('metadata'), call('omdb'), call('tmdb')]
+    mock_refiners_hash_broken.assert_has_calls(calls, any_order=True)

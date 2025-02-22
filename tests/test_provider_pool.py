@@ -103,6 +103,8 @@ def test_provider_pool_iter():
     pool = ProviderPool()
     assert len(list(pool)) == 0
     pool['tvsubtitles']
+    # test printing
+    print(pool['tvsubtitles'])  # noqa: T201
     assert len(list(pool)) == 1
 
 

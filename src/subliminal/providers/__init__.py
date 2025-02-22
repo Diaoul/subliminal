@@ -64,7 +64,7 @@ class TimeoutSafeTransport(SafeTransport):
     ) -> None:
         super().__init__(*args, **kwargs)
         self.timeout = timeout
-        if user_agent is not None:
+        if user_agent is not None:  # pragma: no branch
             self.user_agent = user_agent
 
     def make_connection(self, host: Any) -> HTTPSConnection:

@@ -12,6 +12,8 @@ import requests
 from babelfish import Country, Language  # type: ignore[import-untyped]
 
 import subliminal
+import subliminal.cli
+import subliminal.refiners.hash
 from subliminal import Episode, Movie
 from subliminal.cache import region
 from subliminal.extensions import RegistrableExtensionManager
@@ -47,8 +49,10 @@ def movies() -> dict[str, Movie]:
                 'napiprojekt': '6303e7ee6a835e9fcede9fb2fb00cb36',
                 'bsplayer': '5b8f8f4e41ccb21e',
                 'opensubtitles': '5b8f8f4e41ccb21e',
-                'shooter': '314f454ab464775498ae6f1f5ad813a9;fdaa8b702d8936feba2122e93ba5c44f;'
-                '0a6935e3436aa7db5597ef67a2c494e3;4d269733f36ddd49f71e92732a462fe5',
+                'shooter': (
+                    '314f454ab464775498ae6f1f5ad813a9;fdaa8b702d8936feba2122e93ba5c44f;'
+                    '0a6935e3436aa7db5597ef67a2c494e3;4d269733f36ddd49f71e92732a462fe5'
+                ),
                 'thesubdb': 'ad32876133355929d814457537e12dc2',
             },
         ),
@@ -115,8 +119,10 @@ def episodes() -> dict[str, Episode]:
                 'napiprojekt': '6303e7ee6a835e9fcede9fb2fb00cb36',
                 'bsplayer': '6878b3ef7c1bd19e',
                 'opensubtitles': '6878b3ef7c1bd19e',
-                'shooter': 'c13e0e5243c56d280064d344676fff94;cd4184d1c0c623735f6db90841ce15fc;'
-                '3faefd72f92b63f2504269b4f484a377;8c68d1ef873afb8ba0cc9f97cbac41c1',
+                'shooter': (
+                    'c13e0e5243c56d280064d344676fff94;cd4184d1c0c623735f6db90841ce15fc;'
+                    '3faefd72f92b63f2504269b4f484a377;8c68d1ef873afb8ba0cc9f97cbac41c1'
+                ),
                 'thesubdb': '9dbbfb7ba81c9a6237237dae8589fccc',
             },
         ),
@@ -160,8 +166,10 @@ def episodes() -> dict[str, Episode]:
                 'napiprojekt': '6303e7ee6a835e9fcede9fb2fb00cb36',
                 'bsplayer': 'b850baa096976c22',
                 'opensubtitles': 'b850baa096976c22',
-                'shooter': 'b02d992c04ad74b31c252bd5a097a036;ef1b32f873b2acf8f166fc266bdf011a;'
-                '82ce34a3bcee0c66ed3b26d900d31cca;78113770551f3efd1e2d4ec45898c59c',
+                'shooter': (
+                    'b02d992c04ad74b31c252bd5a097a036;ef1b32f873b2acf8f166fc266bdf011a;'
+                    '82ce34a3bcee0c66ed3b26d900d31cca;78113770551f3efd1e2d4ec45898c59c'
+                ),
                 'thesubdb': 'b1f899c77f4c960b84b8dbf840d4e42d',
             },
         ),
@@ -761,6 +769,7 @@ def provider_manager(monkeypatch: pytest.MonkeyPatch) -> Generator[RegistrableEx
     subtitle_pool_tvsubtitles = [
         {
             'language': Language.fromietf('en'),
+            'hearing_impaired': True,
             'subtitle_id': '23329',
             'fake_content': (
                 b'1\n00:00:04,254 --> 00:00:07,214\n'

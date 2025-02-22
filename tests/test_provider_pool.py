@@ -14,6 +14,7 @@ from subliminal.core import (
     download_best_subtitles,
     download_subtitles,
     list_subtitles,
+    refine,
 )
 from subliminal.score import episode_scores
 from subliminal.subtitle import Subtitle
@@ -235,7 +236,7 @@ def test_download_subtitles(provider_manager):
         assert provider_manager[name].plugin.download_subtitle.called
 
 
-def test_discarded_provider(movies, provider_manager):
+def test_list_subtitles_discarded_provider(movies, provider_manager):
     video = movies['man_of_steel']
     languages = {Language('eng')}
 
@@ -244,6 +245,8 @@ def test_discarded_provider(movies, provider_manager):
     # Working provider
     subtitles = pool.list_subtitles(video, languages)
     assert len(subtitles) == 1
+    # keep listed subtitle
+    subtitle = subtitles[0]
 
     # Mock a broken provider
     pool['opensubtitlescom'].is_broken = True
@@ -252,9 +255,51 @@ def test_discarded_provider(movies, provider_manager):
 
     # Mock the provider now works, but it was discarded
     pool['opensubtitlescom'].is_broken = False
+    assert 'opensubtitlescom' in pool.discarded_providers
 
     subtitles = pool.list_subtitles(video, languages)
     assert len(subtitles) == 0
+
+    # Try failing downloading from discarded provider
+    assert not pool.download_subtitle(subtitle)
+
+
+def test_async_provider_pool_list_subtitles_discarded_providers(episodes, provider_manager):
+    video = episodes['bbt_s07e05']
+    languages = {Language('eng')}
+
+    pool = AsyncProviderPool(max_workers=1)
+    # One provider is broken
+    pool['opensubtitlescom'].is_broken = True
+
+    subtitles = pool.list_subtitles(video, languages)
+    assert {s.provider_name for s in subtitles} == {
+        'gestdown',
+        'podnapisi',
+        'tvsubtitles',
+    }
+    assert 'opensubtitlescom' in pool.discarded_providers
+
+
+def test_download_subtitles_discarded_provider(movies, provider_manager):
+    video = movies['man_of_steel']
+    languages = {Language('eng')}
+
+    pool = ProviderPool(['opensubtitlescom'])
+
+    # Working provider
+    subtitles = pool.list_subtitles(video, languages)
+    assert len(subtitles) == 1
+    # keep listed subtitle
+    subtitle = subtitles[0]
+    assert 'opensubtitlescom' not in pool.discarded_providers
+
+    # Mock a broken provider
+    pool['opensubtitlescom'].is_broken = True
+    # Try failing downloading subtitle
+    assert not pool.download_subtitle(subtitle)
+
+    assert 'opensubtitlescom' in pool.discarded_providers
 
 
 def test_download_best_subtitles(episodes):
@@ -358,6 +403,23 @@ def test_download_best_subtitles_only_one(episodes):
     assert (subtitle.provider_name, subtitle.id) in expected_subtitles
 
 
+def test_download_best_subtitles_language_type(episodes):
+    video = episodes['bbt_s07e05']
+    languages = {Language('eng')}
+    providers = ['gestdown', 'podnapisi', 'tvsubtitles']
+    expected_subtitles = {
+        ('tvsubtitles', '23329'),
+        # ('podnapisi', 'EdQo'),
+        # ('gestdown', 'a295515c-a460-44ea-9ba8-8d37bcb9b5a6'),
+    }
+
+    subtitles = download_best_subtitles({video}, languages, hearing_impaired=True, providers=providers)
+
+    assert len(subtitles) == 1
+    assert len(subtitles[video]) == 1
+    assert {(s.provider_name, s.id) for s in subtitles[video]} == expected_subtitles
+
+
 def test_download_bad_subtitle(movies):
     pool = ProviderPool()
     subtitles = pool.list_subtitles_provider('opensubtitlescom', movies['man_of_steel'], {Language('tur')})
@@ -399,3 +461,26 @@ def test_list_subtitles_providers_download(episodes, disabled_providers: list[st
 
     # force using 'gestdown', bypass default when init ProviderPool
     subtitles = list_subtitles({video}, languages, providers=['gestdown'])
+
+
+@pytest.mark.skip
+def test_refine_movie(movies):
+    video = movies['man_of_steel']
+
+    refine(video)
+
+    # test result
+    assert len(video.hashes) > 0
+    assert video.imbd_id == 'tt2414'
+
+
+@pytest.mark.skip
+def test_refine_episode(episodes):
+    video = episodes['bbt_s07e05']
+
+    refine(video)
+
+    # test result
+    assert len(video.hashes) > 0
+    assert video.series_imbd_id == 'tt2414'
+    assert video.imbd_id == 'tt2414'

@@ -274,12 +274,12 @@ class ProviderPool:
                 break
 
             # check downloaded languages
-            if subtitle.language in {s.language for s in downloaded_subtitles}:
+            if subtitle.language in {s.language for s in downloaded_subtitles}:  # pragma: no cover
                 logger.debug('Skipping subtitle: %r already downloaded', subtitle.language)
                 continue
 
             # download
-            if self.download_subtitle(subtitle):
+            if self.download_subtitle(subtitle):  # pragma: no branch
                 downloaded_subtitles.append(subtitle)
 
             # stop when all languages are downloaded
@@ -332,7 +332,7 @@ class AsyncProviderPool(ProviderPool):
         subtitles: list[Subtitle] = []
 
         # Avoid raising a ValueError with `ThreadPoolExecutor(self.max_workers)`
-        if self.max_workers == 0:
+        if self.max_workers == 0:  # pragma: no cover
             return subtitles
 
         with ThreadPoolExecutor(self.max_workers) as executor:

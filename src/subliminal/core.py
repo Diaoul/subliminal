@@ -791,6 +791,7 @@ def save_subtitles(
     single: bool = False,
     directory: str | os.PathLike | None = None,
     encoding: str | None = None,
+    subtitle_format: str | None = None,
     extension: str | None = None,
     language_type_suffix: bool = False,
     language_format: str = 'alpha2',
@@ -810,6 +811,7 @@ def save_subtitles(
     :param bool single: save a single subtitle, default is to save one subtitle per language.
     :param str directory: path to directory where to save the subtitles, default is next to the video.
     :param str encoding: encoding in which to save the subtitles, default is to keep original encoding.
+    :param str subtitle_format: format in which to save the subtitles, default is to keep original format.
     :param (str | None) extension: the subtitle extension, default is to match to the subtitle format.
     :param bool language_type_suffix: add a suffix 'hi' or 'fo' if needed. Default to False.
     :param str language_format: format of the language suffix. Default to 'alpha2'.
@@ -828,6 +830,12 @@ def save_subtitles(
         if subtitle.language in {s.language for s in saved_subtitles}:
             logger.debug('Skipping subtitle %r: language already saved', subtitle)
             continue
+
+        # convert subtitle to a new format
+        if subtitle_format:
+            # Use the video FPS if the FPS of the subtitle is not defined
+            fps = video.frame_rate if subtitle.fps is None else None
+            subtitle.convert(subtitle_format, output_encoding=encoding, fps=fps)
 
         # create subtitle path
         subtitle_path = subtitle.get_path(

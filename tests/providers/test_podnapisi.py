@@ -5,6 +5,7 @@ from babelfish import Language  # type: ignore[import-untyped]
 from vcr import VCR  # type: ignore[import-untyped]
 
 from subliminal.providers.podnapisi import PodnapisiProvider, PodnapisiSubtitle
+from subliminal.video import Episode, Movie
 
 vcr = VCR(
     path_transformer=lambda path: path + '.yaml',
@@ -14,7 +15,7 @@ vcr = VCR(
 )
 
 
-def test_get_matches_movie(movies):
+def test_get_matches_movie(movies: dict[str, Movie]) -> None:
     subtitle_releases = [
         'Man.Of.Steel.2013.720p.BRRip.x264.AAC-ViSiON',
         'Man.Of.Steel.2013.720p.BluRay.x264-Felony',
@@ -53,7 +54,7 @@ def test_get_matches_movie(movies):
     assert matches == {'title', 'year', 'country', 'video_codec', 'resolution', 'source', 'release_group'}
 
 
-def test_get_matches_episode(episodes):
+def test_get_matches_episode(episodes: dict[str, Episode]) -> None:
     subtitle_releases = [
         'The.Big.Bang.Theory.S07E05.HDTV.x264-LOL',
         'The.Big.Bang.Theory.S07E05.720p.HDTV.x264-DIMENSION',
@@ -85,7 +86,7 @@ def test_get_matches_episode(episodes):
     }
 
 
-def test_get_matches_episode_year(episodes):
+def test_get_matches_episode_year(episodes: dict[str, Episode]) -> None:
     subtitle_releases = ['Dallas.2012.S01E03.HDTV.x264-LOL']
     subtitle = PodnapisiSubtitle(
         language=Language('eng'),
@@ -102,7 +103,7 @@ def test_get_matches_episode_year(episodes):
     assert matches == {'series', 'year', 'season', 'episode'}
 
 
-def test_get_matches_no_match(episodes):
+def test_get_matches_no_match(episodes: dict[str, Episode]) -> None:
     subtitle_releases = ['The.Big.Bang.Theory.S07E05.1080p.HDTV.DIMENSION']
     subtitle = PodnapisiSubtitle(
         language=Language('eng'),
@@ -121,7 +122,7 @@ def test_get_matches_no_match(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_query_movie(movies):
+def test_query_movie(movies: dict[str, Movie]) -> None:
     video = movies['man_of_steel']
     language = Language('eng')
     expected_subtitles = {
@@ -146,7 +147,7 @@ def test_query_movie(movies):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_query_episode(episodes):
+def test_query_episode(episodes: dict[str, Episode]) -> None:
     video = episodes['bbt_s07e05']
     language = Language('eng')
     expected_subtitles = {'EdQo', '2581', 'w581', 'ftUo', 'WNMo'}
@@ -158,7 +159,7 @@ def test_query_episode(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_list_subtitles_movie(movies):
+def test_list_subtitles_movie(movies: dict[str, Movie]) -> None:
     video = movies['man_of_steel']
     languages = {Language('eng'), Language('fra')}
     expected_subtitles = {
@@ -185,7 +186,7 @@ def test_list_subtitles_movie(movies):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_list_subtitles_episode(episodes):
+def test_list_subtitles_episode(episodes: dict[str, Episode]) -> None:
     video = episodes['got_s03e10']
     languages = {Language('eng'), Language('fra')}
     expected_subtitles = {
@@ -212,7 +213,7 @@ def test_list_subtitles_episode(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_download_subtitle(movies):
+def test_download_subtitle(movies: dict[str, Movie]) -> None:
     video = movies['man_of_steel']
     languages = {Language('eng'), Language('fra')}
     with PodnapisiProvider() as provider:
@@ -235,7 +236,7 @@ def test_download_subtitle(movies):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_list_subtitles_episode_alternative_series(episodes):
+def test_list_subtitles_episode_alternative_series(episodes: dict[str, Episode]) -> None:
     video = episodes['marvels_jessica_jones_s01e13']
     languages = {Language('eng')}
     expected_subtitles = {
@@ -260,7 +261,7 @@ def test_list_subtitles_episode_alternative_series(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_download_subtitles_with_title_unicode(movies):
+def test_download_subtitles_with_title_unicode(movies: dict[str, Movie]) -> None:
     video = movies['café_society']
     languages = {Language('fra')}
     expected_subtitles = {'iOlD', 'iulD', '2o5B', 'ielD'}

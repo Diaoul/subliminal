@@ -5,6 +5,7 @@ from babelfish import Language  # type: ignore[import-untyped]
 from vcr import VCR  # type: ignore[import-untyped]
 
 from subliminal.providers.napiprojekt import NapiProjektProvider, NapiProjektSubtitle
+from subliminal.video import Episode, Movie
 
 vcr = VCR(
     path_transformer=lambda path: path + '.yaml',
@@ -14,17 +15,17 @@ vcr = VCR(
 )
 
 
-def test_hash_napiprojekt(mkv):
+def test_hash_napiprojekt(mkv: dict[str, str]) -> None:
     assert NapiProjektProvider.hash_video(mkv['test1']) == '9884a2b66dcb2965d0f45ce84e37b60c'
 
 
-def test_get_matches(movies):
+def test_get_matches(movies: dict[str, Movie]) -> None:
     subtitle = NapiProjektSubtitle(Language('pol'), '6303e7ee6a835e9fcede9fb2fb00cb36')
     matches = subtitle.get_matches(movies['man_of_steel'])
     assert matches == {'hash'}
 
 
-def test_get_matches_no_match(episodes):
+def test_get_matches_no_match(episodes: dict[str, Episode]) -> None:
     subtitle = NapiProjektSubtitle(Language('pol'), 'de2e9caa58dd53a6ab9d241e6b251234')
     matches = subtitle.get_matches(episodes['got_s03e10'])
     assert matches == set()
@@ -32,7 +33,7 @@ def test_get_matches_no_match(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_query_microdvd(movies):
+def test_query_microdvd(movies: dict[str, Movie]) -> None:
     language = Language('pol')
     video = movies['man_of_steel']
     with NapiProjektProvider() as provider:
@@ -47,7 +48,7 @@ def test_query_microdvd(movies):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_query_srt(episodes):
+def test_query_srt(episodes: dict[str, Episode]) -> None:
     language = Language('pol')
     video = episodes['suits_s06_e12']
     with NapiProjektProvider() as provider:
@@ -62,7 +63,7 @@ def test_query_srt(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_query_srt_reencode(episodes):
+def test_query_srt_reencode(episodes: dict[str, Episode]) -> None:
     language = Language('pol')
     video = episodes['suits_s06_e13']
     with NapiProjektProvider() as provider:
@@ -81,7 +82,7 @@ def test_query_srt_reencode(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_query_wrong_hash():
+def test_query_wrong_hash() -> None:
     with NapiProjektProvider() as provider:
         subtitles = provider.query(Language('pol'), 'abcdabdcabcd1234abcd1234abcd123')
     assert len(subtitles) == 0
@@ -89,7 +90,7 @@ def test_query_wrong_hash():
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_list_subtitles(episodes):
+def test_list_subtitles(episodes: dict[str, Episode]) -> None:
     video = episodes['bbt_s07e05']
     languages = {Language('pol')}
     with NapiProjektProvider() as provider:
@@ -103,7 +104,7 @@ def test_list_subtitles(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_download_subtitles(episodes):
+def test_download_subtitles(episodes: dict[str, Episode]) -> None:
     video = episodes['got_s03e10']
     languages = {Language('pol')}
     with NapiProjektProvider() as provider:

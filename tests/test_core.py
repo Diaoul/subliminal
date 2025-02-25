@@ -29,7 +29,7 @@ pytestmark = pytest.mark.core
 
 
 def ensure(path: str | os.PathLike[str], *, directory: bool = False) -> Path:
-    """Create a file (or directory) at path"""
+    """Create a file (or directory) at path."""
     path = Path(path)
     if directory:
         # Create a directory at path

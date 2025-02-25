@@ -16,23 +16,23 @@ vcr = VCR(
 
 
 @pytest.fixture
-def client():
+def client() -> OMDBClient:
     return OMDBClient()
 
 
-def test_session():
+def test_session() -> None:
     session = requests.Session()
     client = OMDBClient(session=session)
     assert client.session is session
 
 
-def test_headers():
+def test_headers() -> None:
     client = OMDBClient(headers={'X-Test': 'Value'})
     assert 'X-Test' in client.session.headers
     assert client.session.headers['X-Test'] == 'Value'
 
 
-def test_apikey():
+def test_apikey() -> None:
     apikey = '000000000'
     client = OMDBClient(headers={'X-Test': 'Value'})
     client.apikey = apikey
@@ -42,35 +42,35 @@ def test_apikey():
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_get_id(client):
+def test_get_id(client: OMDBClient) -> None:
     data = client.search_by_id('tt0770828')
     assert data['Title'] == 'Man of Steel'
 
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_get_wrong_id(client):
+def test_get_wrong_id(client: OMDBClient) -> None:
     data = client.search_by_id('tt9999999')
     assert not data
 
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_get_title(client):
+def test_get_title(client: OMDBClient) -> None:
     data = client.search_by_title('Man of Steel')
     assert data['imdbID'] == 'tt0770828'
 
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_get_wrong_title(client):
+def test_get_wrong_title(client: OMDBClient) -> None:
     data = client.search_by_title('Meen of Stal')
     assert not data
 
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_search(client):
+def test_search(client: OMDBClient) -> None:
     data = client.search('Man of Steel')
     assert data['totalResults'] == '32'
     assert len(data['Search']) == 10
@@ -80,28 +80,28 @@ def test_search(client):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_search_wrong_title(client):
+def test_search_wrong_title(client: OMDBClient) -> None:
     data = client.search('Meen of Stal')
     assert not data
 
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_search_type(client):
+def test_search_type(client: OMDBClient) -> None:
     data = client.search('Man of Steel', is_movie=True)
     assert data['totalResults'] == '30'
 
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_search_year(client):
+def test_search_year(client: OMDBClient) -> None:
     data = client.search('Man of Steel', year=2013)
     assert data['totalResults'] == '17'
 
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_search_page(client):
+def test_search_page(client: OMDBClient) -> None:
     data = client.search('Man of Steel', page=3)
     assert data['totalResults'] == '32'
     assert len(data['Search']) == 10
@@ -111,7 +111,7 @@ def test_search_page(client):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_refine_episode(episodes):
+def test_refine_episode(episodes: dict[str, Episode]) -> None:
     episode = Episode(
         episodes['bbt_s07e05'].name,
         episodes['bbt_s07e05'].series.lower(),
@@ -126,7 +126,7 @@ def test_refine_episode(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_refine_episode_original_series(episodes):
+def test_refine_episode_original_series(episodes: dict[str, Episode]) -> None:
     episode = Episode(
         episodes['dallas_s01e03'].name,
         episodes['dallas_s01e03'].series.lower(),
@@ -141,7 +141,7 @@ def test_refine_episode_original_series(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_refine_episode_year(episodes):
+def test_refine_episode_year(episodes: dict[str, Episode]) -> None:
     episode = Episode(
         episodes['dallas_2012_s01e03'].name,
         episodes['dallas_2012_s01e03'].series.lower(),
@@ -158,7 +158,7 @@ def test_refine_episode_year(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_refine_movie(movies):
+def test_refine_movie(movies: dict[str, Movie]) -> None:
     original_movie = movies['man_of_steel']
     movie = Movie(original_movie.name, original_movie.title.lower())
     refine(movie)
@@ -169,7 +169,7 @@ def test_refine_movie(movies):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_refine_movie_guess_alternative_title(movies):
+def test_refine_movie_guess_alternative_title(movies: dict[str, Movie]) -> None:
     original_movie = movies['jack_reacher_never_go_back']
     movie = Movie.fromname(original_movie.name)
     refine(movie)
@@ -180,7 +180,7 @@ def test_refine_movie_guess_alternative_title(movies):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_refine_episode_with_country(episodes):
+def test_refine_episode_with_country(episodes: dict[str, Episode]) -> None:
     episode = Episode.fromname(episodes['shameless_us_s08e01'].name)
     video_series = episode.series
     refine(episode)
@@ -191,7 +191,7 @@ def test_refine_episode_with_country(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_refine_episode_with_country_hoc_us(episodes):
+def test_refine_episode_with_country_hoc_us(episodes: dict[str, Episode]) -> None:
     episode = Episode.fromname(episodes['house_of_cards_us_s06e01'].name)
     video_series = episode.series
     refine(episode)

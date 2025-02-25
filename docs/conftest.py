@@ -1,5 +1,6 @@
+"""Docs conftest.py."""
+
 import os
-import sys
 from pathlib import Path
 from unittest.mock import Mock
 
@@ -29,5 +30,6 @@ def _chdir(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
 
 @pytest.fixture(autouse=True)
 def use_cassette(request: pytest.FixtureRequest) -> None:
+    """Use VCR cassette automatically."""
     with vcr.use_cassette('test_' + request.fspath.purebasename):
         yield

@@ -11,6 +11,7 @@ from subliminal.providers.opensubtitlescom import (
     OpenSubtitlesComSubtitle,
     Unauthorized,
 )
+from subliminal.video import Episode, Movie
 
 USERNAME = 'python-subliminal-test'
 PASSWORD = 'subliminal'
@@ -24,7 +25,7 @@ vcr = VCR(
 )
 
 
-def test_get_matches_movie_hash(movies):
+def test_get_matches_movie_hash(movies: dict[str, Movie]) -> None:
     subtitle = OpenSubtitlesComSubtitle(
         language=Language('deu'),
         subtitle_id='1953771409',
@@ -51,7 +52,7 @@ def test_get_matches_movie_hash(movies):
     }
 
 
-def test_get_matches_episode(episodes):
+def test_get_matches_episode(episodes: dict[str, Episode]) -> None:
     subtitle = OpenSubtitlesComSubtitle(
         language=Language('ell'),
         subtitle_id='1953579014',
@@ -77,7 +78,7 @@ def test_get_matches_episode(episodes):
     }
 
 
-def test_get_matches_episode_year(episodes):
+def test_get_matches_episode_year(episodes: dict[str, Episode]) -> None:
     subtitle = OpenSubtitlesComSubtitle(
         language=Language('spa'),
         subtitle_id='1953369959',
@@ -96,7 +97,7 @@ def test_get_matches_episode_year(episodes):
     assert matches == {'series', 'year', 'episode', 'season', 'title'}
 
 
-def test_get_matches_episode_filename(episodes):
+def test_get_matches_episode_filename(episodes: dict[str, Episode]) -> None:
     subtitle = OpenSubtitlesComSubtitle(
         language=Language('por', country='BR'),
         subtitle_id='1954453973',
@@ -125,7 +126,7 @@ def test_get_matches_episode_filename(episodes):
     }
 
 
-def test_get_matches_episode_tag(episodes):
+def test_get_matches_episode_tag(episodes: dict[str, Episode]) -> None:
     subtitle = OpenSubtitlesComSubtitle(
         language=Language('por', country='BR'),
         subtitle_id='1954453973',
@@ -151,7 +152,7 @@ def test_get_matches_episode_tag(episodes):
     }
 
 
-def test_get_matches_imdb_id(movies):
+def test_get_matches_imdb_id(movies: dict[str, Movie]) -> None:
     subtitle = OpenSubtitlesComSubtitle(
         language=Language('fra'),
         subtitle_id='1953767650',
@@ -179,7 +180,7 @@ def test_get_matches_imdb_id(movies):
     }
 
 
-def test_get_matches_no_match(episodes):
+def test_get_matches_no_match(episodes: dict[str, Episode]) -> None:
     subtitle = OpenSubtitlesComSubtitle(
         language=Language('fra'),
         subtitle_id='1953767650',
@@ -197,19 +198,19 @@ def test_get_matches_no_match(episodes):
     assert matches == set()
 
 
-def test_configuration_error_no_username():
+def test_configuration_error_no_username() -> None:
     with pytest.raises(ConfigurationError):
         OpenSubtitlesComProvider(password=PASSWORD)
 
 
-def test_configuration_error_no_password():
+def test_configuration_error_no_password() -> None:
     with pytest.raises(ConfigurationError):
         OpenSubtitlesComProvider(username=USERNAME)
 
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_login():
+def test_login() -> None:
     provider = OpenSubtitlesComProvider(USERNAME, PASSWORD)
     assert provider.token is None
     provider.initialize()
@@ -219,7 +220,7 @@ def test_login():
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_login_bad_password():
+def test_login_bad_password() -> None:
     provider = OpenSubtitlesComProvider(USERNAME, 'lanimilbus')
     with pytest.raises(Unauthorized):  # noqa: PT012
         provider.initialize()
@@ -228,7 +229,7 @@ def test_login_bad_password():
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_logout():
+def test_logout() -> None:
     provider = OpenSubtitlesComProvider(USERNAME, PASSWORD)
     provider.initialize()
     provider.login(wait=True)
@@ -238,7 +239,7 @@ def test_logout():
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_user_infos():
+def test_user_infos() -> None:
     with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
         provider.login(wait=True)
         ret = provider.user_infos()
@@ -247,7 +248,7 @@ def test_user_infos():
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_query_not_enough_information():
+def test_query_not_enough_information() -> None:
     languages = {Language('eng')}
     with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:  # noqa: SIM117
         with pytest.raises(ValueError) as excinfo:  # noqa: PT011
@@ -257,7 +258,7 @@ def test_query_not_enough_information():
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_query_query_movie(movies):
+def test_query_query_movie(movies: dict[str, Movie]) -> None:
     video = movies['man_of_steel']
     languages = {Language('fra')}
     expected_subtitles = {
@@ -276,7 +277,7 @@ def test_query_query_movie(movies):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_query_query_episode(episodes):
+def test_query_query_episode(episodes: dict[str, Episode]) -> None:
     video = episodes['dallas_2012_s01e03']
     languages = {Language('fra')}
     expected_subtitles = {
@@ -293,7 +294,7 @@ def test_query_query_episode(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_query_tag_movie(movies):
+def test_query_tag_movie(movies: dict[str, Movie]) -> None:
     video = movies['enders_game']
     languages = {Language('fra')}
     expected_subtitles = {'938965', '940630'}
@@ -305,7 +306,7 @@ def test_query_tag_movie(movies):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_query_imdb_id(movies):
+def test_query_imdb_id(movies: dict[str, Movie]) -> None:
     video = movies['man_of_steel']
     languages = {Language('deu')}
     expected_subtitles = {
@@ -324,7 +325,7 @@ def test_query_imdb_id(movies):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_query_hash_size(movies):
+def test_query_hash_size(movies: dict[str, Movie]) -> None:
     video = movies['man_of_steel']
     languages = {Language('eng')}
     expected_subtitles = {
@@ -349,7 +350,7 @@ def test_query_hash_size(movies):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_query_wrong_hash_wrong_size():
+def test_query_wrong_hash_wrong_size() -> None:
     languages = {Language('eng')}
     with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:  # noqa: SIM117
         with pytest.raises(OpenSubtitlesComError):
@@ -358,7 +359,7 @@ def test_query_wrong_hash_wrong_size():
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_query_query_season_episode(episodes):
+def test_query_query_season_episode(episodes: dict[str, Episode]) -> None:
     video = episodes['bbt_s07e05']
     languages = {Language('deu')}
     expected_subtitles = {'2748964', '4662161'}
@@ -370,7 +371,7 @@ def test_query_query_season_episode(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_list_subtitles_movie(movies):
+def test_list_subtitles_movie(movies: dict[str, Movie]) -> None:
     video = movies['man_of_steel']
     languages = {Language('deu'), Language('fra')}
     expected_subtitles = {
@@ -401,7 +402,7 @@ def test_list_subtitles_movie(movies):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_list_subtitles_movie_no_hash(movies):
+def test_list_subtitles_movie_no_hash(movies: dict[str, Movie]) -> None:
     video = movies['enders_game']
     languages = {Language('deu')}
     expected_subtitles = {'939532', '939553', '940426'}
@@ -413,7 +414,7 @@ def test_list_subtitles_movie_no_hash(movies):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_list_subtitles_episode(episodes):
+def test_list_subtitles_episode(episodes: dict[str, Episode]) -> None:
     video = episodes['marvels_agents_of_shield_s02e06']
     languages = {Language('hun')}
     expected_subtitles = {'2491535', '2492310', '2493688'}
@@ -425,7 +426,7 @@ def test_list_subtitles_episode(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_download_subtitle(movies):
+def test_download_subtitle(movies: dict[str, Movie]) -> None:
     video = movies['man_of_steel']
     languages = {Language('deu'), Language('fra')}
     with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
@@ -438,7 +439,7 @@ def test_download_subtitle(movies):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_tag_match(episodes):
+def test_tag_match(episodes: dict[str, Episode]) -> None:
     video = episodes['the fall']
     languages = {Language('por', 'BR')}
     with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import logging
 import sys
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, cast
 from unittest.mock import Mock, call
 
 import pytest
@@ -17,6 +17,7 @@ from subliminal.core import (
     refine,
     refiner_manager,
 )
+from subliminal.providers.mock import MockProvider
 from subliminal.score import episode_scores
 from subliminal.subtitle import Subtitle
 
@@ -288,13 +289,15 @@ def test_list_subtitles_discarded_provider(movies, provider_manager):
     # keep listed subtitle
     subtitle = subtitles[0]
 
+    provider = cast(MockProvider, pool['opensubtitlescom'])
+
     # Mock a broken provider
-    pool['opensubtitlescom'].is_broken = True
+    provider.is_broken = True
     subtitles = pool.list_subtitles(video, languages)
     assert len(subtitles) == 0
 
     # Mock the provider now works, but it was discarded
-    pool['opensubtitlescom'].is_broken = False
+    provider.is_broken = False
     assert 'opensubtitlescom' in pool.discarded_providers
 
     subtitles = pool.list_subtitles(video, languages)
@@ -310,7 +313,7 @@ def test_async_provider_pool_list_subtitles_discarded_providers(episodes, provid
 
     pool = AsyncProviderPool(max_workers=1)
     # One provider is broken
-    pool['opensubtitlescom'].is_broken = True
+    cast(MockProvider, pool['opensubtitlescom']).is_broken = True
 
     subtitles = pool.list_subtitles(video, languages)
     assert {s.provider_name for s in subtitles} == {
@@ -335,7 +338,7 @@ def test_download_subtitles_discarded_provider(movies, provider_manager):
     assert 'opensubtitlescom' not in pool.discarded_providers
 
     # Mock a broken provider
-    pool['opensubtitlescom'].is_broken = True
+    cast(MockProvider, pool['opensubtitlescom']).is_broken = True
     # Try failing downloading subtitle
     assert not pool.download_subtitle(subtitle)
 
@@ -463,6 +466,7 @@ def test_download_best_subtitles_language_type(episodes):
 def test_download_bad_subtitle(movies):
     pool = ProviderPool()
     subtitles = pool.list_subtitles_provider('opensubtitlescom', movies['man_of_steel'], {Language('tur')})
+    assert subtitles is not None
     assert len(subtitles) >= 1
     subtitle = subtitles[0]
 

@@ -26,7 +26,7 @@ TESTS = os.path.dirname(__file__)
 
 
 @pytest.fixture(autouse=True, scope='session')
-def _configure_region():
+def _configure_region() -> None:
     region.configure('dogpile.cache.null')
     region.configure = Mock()  # type: ignore[method-assign]
 
@@ -816,7 +816,7 @@ def disabled_providers(monkeypatch: pytest.MonkeyPatch) -> Generator[list[str], 
 
 
 @pytest.fixture(scope='session')
-def mkv():
+def mkv() -> dict[str, str]:
     data_path = os.path.join(TESTS, 'data', 'mkv')
 
     wanted_files = [f'test{i}.mkv' for i in range(1, 9)]
@@ -842,7 +842,7 @@ def mkv():
 
 
 @pytest.fixture(scope='session')
-def rar(mkv):
+def rar(mkv: dict[str, str]) -> dict[str, str]:
     data_path = os.path.join(TESTS, 'data', 'rar')
     if not os.path.exists(data_path):
         os.makedirs(data_path)

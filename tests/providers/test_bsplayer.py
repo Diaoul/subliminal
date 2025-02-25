@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 
 import pytest
 from babelfish import Language  # type: ignore[import-untyped]
@@ -21,8 +22,9 @@ def test_hash_bsplayer(mkv):
     assert BSPlayerProvider.hash_video(mkv['test1']) == '40b44a7096b71ec3'
 
 
-def test_hash_bsplayer_too_small(tmpdir):
-    path = tmpdir.ensure('test_too_small.mkv')
+def test_hash_bsplayer_too_small(tmp_path: Path) -> None:
+    path = tmp_path / 'test_too_small.mkv'
+    path.touch()
     assert BSPlayerProvider.hash_video(str(path)) is None
 
 

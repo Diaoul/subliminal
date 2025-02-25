@@ -1,5 +1,6 @@
 import os
 import sys
+from pathlib import Path
 from unittest.mock import Mock
 
 import pytest
@@ -16,17 +17,17 @@ vcr = VCR(
 
 
 @pytest.fixture(autouse=True, scope='session')
-def configure_region():
+def _configure_region() -> None:
     region.configure('dogpile.cache.null')
     region.configure = Mock()
 
 
 @pytest.fixture(autouse=True)
-def chdir(tmpdir, monkeypatch):
-    monkeypatch.chdir(str(tmpdir))
+def _chdir(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.chdir(tmp_path)
 
 
 @pytest.fixture(autouse=True)
-def use_cassette(request):
+def use_cassette(request: pytest.FixtureRequest) -> None:
     with vcr.use_cassette('test_' + request.fspath.purebasename):
         yield

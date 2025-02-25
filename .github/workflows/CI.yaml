@@ -278,6 +278,7 @@ jobs:
 
       - name: Store coverage file
         uses: actions/upload-artifact@v4
+        if: ${{ failure() }}
         with:
           name: core-coverage
           path: .core-coverage

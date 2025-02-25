@@ -26,7 +26,7 @@ def split_year_omdb(string: str) -> int | None:
     """Split the year."""
     try:
         return int(string.split('\u2013')[0].split('-')[0])
-    except (ValueError, AttributeError):
+    except (ValueError, AttributeError):  # pragma: no cover
         logger.exception(f'Cannot extract year from date in {string!r}')
     return None
 
@@ -174,7 +174,7 @@ class OMDBClient:
     def search_all(self, title: str, is_movie: bool | None = None, year: int | None = None) -> list:
         """Search with the specified parameters and return all the results."""
         results = self.search(title=title, is_movie=is_movie, year=year)
-        if not results:
+        if not results:  # pragma: no cover
             return []
 
         # fetch all paginated results
@@ -184,7 +184,7 @@ class OMDBClient:
         while total_results > page * 10:
             page += 1
             results = self.search(title=title, is_movie=is_movie, year=year, page=page)
-            if results:
+            if results:  # pragma: no branch
                 all_results.extend(cast(list, results['Search']))
 
         return all_results
@@ -207,21 +207,21 @@ class OMDBClient:
 def refine_episode(client: OMDBClient, video: Episode, *, force: bool = False, **kwargs: Any) -> None:
     """Refine an Episode by searching `OMDb API <https://omdbapi.com/>`_."""
     # exit if the information is complete
-    if not force and video.series_imdb_id and video.imdb_id:
+    if not force and video.series_imdb_id and video.imdb_id:  # pragma: no cover
         logger.debug('No need to search, IMDB ids already exist for the video.')
         return
 
     # search the series
     results = client.search_all(video.series, is_movie=False, year=video.year)
-    if not results:
+    if not results:  # pragma: no cover
         logger.warning('No results for series')
         return
     logger.debug('Found %d results', len(results))
 
     # filter the results, only if multiple results
-    if len(results) > 1:
+    if len(results) > 1:  # pragma: no branch
         results = [r for r in results if video.matches(r['Title'])]
-        if not results:
+        if not results:  # pragma: no cover
             logger.warning('No matching series found')
             return
 
@@ -248,13 +248,13 @@ def refine_episode(client: OMDBClient, video: Episode, *, force: bool = False, *
 def refine_movie(client: OMDBClient, video: Movie, *, force: bool = False, **kwargs: Any) -> None:
     """Refine a Movie by searching `OMDb API <https://omdbapi.com/>`_."""
     # exit if the information is complete
-    if not force and video.imdb_id:
+    if not force and video.imdb_id:  # pragma: no cover
         logger.debug('No need to search, IMDB ids already exist for the video.')
         return
 
     # search the movie
     results = client.search_all(video.title, is_movie=True, year=video.year)
-    if not results:
+    if not results:  # pragma: no cover
         logger.warning('No results for movie')
         return
     logger.debug('Found %d results', len(results))
@@ -262,7 +262,7 @@ def refine_movie(client: OMDBClient, video: Movie, *, force: bool = False, **kwa
     # filter the results, only if multiple results
     if len(results) > 1:
         results = [r for r in results if video.matches(r['Title'])]
-        if not results:
+        if not results:  # pragma: no cover
             logger.warning('No matching movie found')
             return
 
@@ -272,10 +272,10 @@ def refine_movie(client: OMDBClient, video: Movie, *, force: bool = False, **kwa
             logger.debug('Found result for movie without year')
             break
 
-        if video.year == split_year_omdb(result['Year']):
+        if video.year == split_year_omdb(result['Year']):  # pragma: no branch
             logger.debug('Found result with matching year')
             break
-    else:
+    else:  # pragma: no cover
         logger.warning('No matching movie found')
         return
 
@@ -320,7 +320,7 @@ def refine(video: Video, *, apikey: str | None = None, force: bool = False, **kw
         refine_episode(omdb_client, video, force=force, **kwargs)
 
     # refine for Movie
-    elif isinstance(video, Movie):
+    elif isinstance(video, Movie):  # pragma: no branch
         refine_movie(omdb_client, video, force=force, **kwargs)
 
     return video

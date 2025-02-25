@@ -8,6 +8,7 @@ from vcr import VCR  # type: ignore[import-untyped]
 
 from subliminal.exceptions import NotInitializedProviderError
 from subliminal.providers.subtitulamos import SubtitulamosProvider, SubtitulamosSubtitle
+from subliminal.video import Episode
 
 vcr = VCR(
     path_transformer=lambda path: path + '.yaml',
@@ -21,19 +22,19 @@ logger_name = 'subliminal.providers.subtitulamos'
 
 
 @pytest.mark.converter
-def test_converter_convert_alpha3():
+def test_converter_convert_alpha3() -> None:
     assert language_converters['subtitulamos'].convert('cat') == 'Català'
 
 
 @pytest.mark.converter
-def test_converter_convert_alpha3_country():
+def test_converter_convert_alpha3_country() -> None:
     assert language_converters['subtitulamos'].convert('spa', 'MX') == 'Español (Latinoamérica)'
     assert language_converters['subtitulamos'].convert('spa', 'AR') == 'Español (Latinoamérica)'
     assert language_converters['subtitulamos'].convert('por', 'BR') == 'Brazilian'
 
 
 @pytest.mark.converter
-def test_converter_convert_alpha3_name_converter():
+def test_converter_convert_alpha3_name_converter() -> None:
     assert (
         language_converters['subtitulamos'].convert(
             'fra',
@@ -43,22 +44,22 @@ def test_converter_convert_alpha3_name_converter():
 
 
 @pytest.mark.converter
-def test_converter_reverse():
+def test_converter_reverse() -> None:
     assert language_converters['subtitulamos'].reverse('Español') == ('spa', None, None)
 
 
 @pytest.mark.converter
-def test_converter_reverse_country():
+def test_converter_reverse_country() -> None:
     assert language_converters['subtitulamos'].reverse('Español (España)') == ('spa', None, None)
     assert language_converters['subtitulamos'].reverse('Español (Latinoamérica)') == ('spa', 'MX', None)
 
 
 @pytest.mark.converter
-def test_converter_reverse_name_converter():
+def test_converter_reverse_name_converter() -> None:
     assert language_converters['subtitulamos'].reverse('French') == ('fra', None, None)
 
 
-def test_get_matches_episode(episodes):
+def test_get_matches_episode(episodes: dict[str, Episode]) -> None:
     subtitle = SubtitulamosSubtitle(
         language=Language('spa'),
         subtitle_id='',
@@ -78,7 +79,7 @@ def test_get_matches_episode(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_login():
+def test_login() -> None:
     provider = SubtitulamosProvider()
     assert provider.session is None
     provider.initialize()
@@ -87,7 +88,7 @@ def test_login():
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_logout():
+def test_logout() -> None:
     provider = SubtitulamosProvider()
     provider.initialize()
     provider.terminate()
@@ -95,14 +96,14 @@ def test_logout():
 
 
 @pytest.mark.integration
-def test_logout_without_initialization():
+def test_logout_without_initialization() -> None:
     provider = SubtitulamosProvider()
     with pytest.raises(NotInitializedProviderError):
         provider.terminate()
 
 
 @pytest.mark.integration
-def test_list_subtitles_without_initialization(episodes):
+def test_list_subtitles_without_initialization(episodes: dict[str, Episode]) -> None:
     video = episodes['bbt_s11e16']
     languages = {Language('eng'), Language('spa')}
 
@@ -112,7 +113,7 @@ def test_list_subtitles_without_initialization(episodes):
 
 
 @pytest.mark.integration
-def test_list_subtitles_no_video_type():
+def test_list_subtitles_no_video_type() -> None:
     video = {}  # type: ignore[var-annotated]
     languages = {Language('spa')}
 
@@ -123,7 +124,7 @@ def test_list_subtitles_no_video_type():
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_list_subtitles_not_exist_series(caplog, episodes):
+def test_list_subtitles_not_exist_series(caplog: pytest.LogCaptureFixture, episodes: dict[str, Episode]) -> None:
     with caplog.at_level(logging.DEBUG, logger=logger_name), SubtitulamosProvider() as provider:
         video = episodes['fake_show_s13e03']
         languages = {Language('spa')}
@@ -135,7 +136,7 @@ def test_list_subtitles_not_exist_series(caplog, episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_list_subtitles_not_exist_season(caplog, episodes):
+def test_list_subtitles_not_exist_season(caplog: pytest.LogCaptureFixture, episodes: dict[str, Episode]) -> None:
     with caplog.at_level(logging.DEBUG, logger=logger_name), SubtitulamosProvider() as provider:
         video = episodes['bbt_s07e05']
         languages = {Language('eng'), Language('spa')}
@@ -147,7 +148,7 @@ def test_list_subtitles_not_exist_season(caplog, episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_list_subtitles_not_exist_episode(caplog, episodes):
+def test_list_subtitles_not_exist_episode(caplog: pytest.LogCaptureFixture, episodes: dict[str, Episode]) -> None:
     with caplog.at_level(logging.DEBUG, logger=logger_name), SubtitulamosProvider() as provider:
         video = episodes['fear_walking_dead_s03e10']
         languages = {Language('eng'), Language('spa')}
@@ -159,7 +160,7 @@ def test_list_subtitles_not_exist_episode(caplog, episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_list_subtitles_not_exist_language(caplog, episodes):
+def test_list_subtitles_not_exist_language(caplog: pytest.LogCaptureFixture, episodes: dict[str, Episode]) -> None:
     with caplog.at_level(logging.DEBUG, logger=logger_name), SubtitulamosProvider() as provider:
         video = episodes['dw_s13e03']
         languages = {Language('spa', 'MX')}
@@ -170,7 +171,10 @@ def test_list_subtitles_not_exist_language(caplog, episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_list_subtitles_with_spanish_non_mx_search(caplog, episodes):
+def test_list_subtitles_with_spanish_non_mx_search(
+    caplog: pytest.LogCaptureFixture,
+    episodes: dict[str, Episode],
+) -> None:
     with caplog.at_level(logging.DEBUG, logger=logger_name), SubtitulamosProvider() as provider:
         video = episodes['bbt_s11e16']
         languages = {Language('spa', 'AR')}
@@ -182,7 +186,7 @@ def test_list_subtitles_with_spanish_non_mx_search(caplog, episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_download_subtitle(episodes):
+def test_download_subtitle(episodes: dict[str, Episode]) -> None:
     video = episodes['bbt_s11e16']
     languages = {Language('eng'), Language('spa')}
     with SubtitulamosProvider() as provider:
@@ -197,7 +201,7 @@ def test_download_subtitle(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_download_subtitle_year(episodes):
+def test_download_subtitle_year(episodes: dict[str, Episode]) -> None:
     video = episodes['charmed_s01e01']
     languages = {Language('eng')}
     with SubtitulamosProvider() as provider:
@@ -212,7 +216,7 @@ def test_download_subtitle_year(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_download_subtitle_last_season(episodes):
+def test_download_subtitle_last_season(episodes: dict[str, Episode]) -> None:
     video = episodes['dw_s13e03']
     languages = {Language('eng'), Language('spa')}
     with (
@@ -233,7 +237,7 @@ def test_download_subtitle_last_season(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_download_subtitle_first_episode(episodes):
+def test_download_subtitle_first_episode(episodes: dict[str, Episode]) -> None:
     video = episodes['charmed_s01e01']
     languages = {Language('eng')}
     with (
@@ -254,7 +258,7 @@ def test_download_subtitle_first_episode(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_download_subtitle_foo(episodes):
+def test_download_subtitle_foo(episodes: dict[str, Episode]) -> None:
     video = episodes['dw_s13e03']
     languages = {Language('eng'), Language('spa')}
     with SubtitulamosProvider() as provider:
@@ -268,7 +272,7 @@ def test_download_subtitle_foo(episodes):
 
 
 @pytest.mark.integration
-def test_download_subtitle_missing_download_link():
+def test_download_subtitle_missing_download_link() -> None:
     subtitle = SubtitulamosSubtitle(
         language=Language('spa'),
         subtitle_id='',
@@ -289,7 +293,7 @@ def test_download_subtitle_missing_download_link():
 
 
 @pytest.mark.integration
-def test_download_subtitle_without_initialization():
+def test_download_subtitle_without_initialization() -> None:
     subtitle = SubtitulamosSubtitle(
         language=Language('spa'),
         subtitle_id='',

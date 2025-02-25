@@ -217,9 +217,9 @@ unfixable = [
 ]
 
 [tool.ruff.lint.per-file-ignores]
-"docs/conf*.py" = ["ALL"]
+"docs/conf*.py" = ["A001", "D"]
 "src/subliminal/__init__.py" = ["E402"]
-"tests/*.py" = ["D", "S", "RUF012", "ANN", "FBT"]
+"tests/*.py" = ["D", "S", "RUF012", "FBT"]
 
 # https://docs.astral.sh/ruff/formatter/
 [tool.ruff.format]

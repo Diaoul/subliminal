@@ -54,17 +54,17 @@ def docstring() -> str:
         """
 
 
-def test_sanitize():
+def test_sanitize() -> None:
     assert sanitize(None) is None
     assert sanitize("Marvel's Agents of S.H.I.E.L.D.") == 'marvels agents of s h i e l d'
 
 
-def test_sanitize_release_group():
+def test_sanitize_release_group() -> None:
     assert sanitize_release_group(None) is None
     assert sanitize_release_group(' Lol[x264]') == 'LOL'
 
 
-def test_sanitize_id():
+def test_sanitize_id() -> None:
     assert sanitize_id(None) is None
     assert sanitize_id('tt0770828') == 770828
 
@@ -87,7 +87,7 @@ def test_get_creation_date(tmp_path: Path) -> None:
     assert abs((cdate - NOW).total_seconds()) < 2
 
 
-def test_get_age(monkeypatch) -> None:
+def test_get_age(monkeypatch: pytest.MonkeyPatch) -> None:
     NOW = datetime.datetime.now(datetime.timezone.utc)
 
     # mock file age
@@ -275,7 +275,7 @@ def test_get_argument_doc(docstring: str, is_class: bool) -> None:
     obj: Callable
     if is_class:
 
-        def obj():
+        def obj() -> None:
             pass
 
     else:

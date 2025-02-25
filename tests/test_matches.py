@@ -1,12 +1,13 @@
 import pytest
 
 from subliminal.matches import guess_matches
+from subliminal.video import Episode, Movie
 
 # Core test
 pytestmark = pytest.mark.core
 
 
-def test_guess_matches_movie(movies):
+def test_guess_matches_movie(movies: dict[str, Movie]) -> None:
     video = movies['man_of_steel']
     guess = {
         'title': video.title.upper(),
@@ -21,7 +22,7 @@ def test_guess_matches_movie(movies):
     assert guess_matches(video, guess) == expected
 
 
-def test_guess_matches_episode(episodes):
+def test_guess_matches_episode(episodes: dict[str, Episode]) -> None:
     video = episodes['bbt_s07e05']
     guess = {
         'title': video.series,
@@ -51,14 +52,14 @@ def test_guess_matches_episode(episodes):
     assert guess_matches(video, guess) == expected
 
 
-def test_guess_matches_country(episodes):
+def test_guess_matches_country(episodes: dict[str, Episode]) -> None:
     video = episodes['shameless_us_s08e01']
     guess = {'title': video.series, 'season': video.season, 'episode': video.episode, 'country': video.country}
     expected = {'series', 'season', 'episode', 'country'}
     assert guess_matches(video, guess) == expected
 
 
-def test_guess_matches_episode_equivalent_release_group(episodes):
+def test_guess_matches_episode_equivalent_release_group(episodes: dict[str, Episode]) -> None:
     video = episodes['bbt_s07e05']
     guess = {
         'title': video.series,
@@ -88,7 +89,7 @@ def test_guess_matches_episode_equivalent_release_group(episodes):
     assert guess_matches(video, guess) == expected
 
 
-def test_guess_matches_multiple_sources(episodes):
+def test_guess_matches_multiple_sources(episodes: dict[str, Episode]) -> None:
     video = episodes['bbt_s07e05']
     video.source = [video.source, 'Blu-ray']
     guess = {
@@ -119,7 +120,7 @@ def test_guess_matches_multiple_sources(episodes):
     assert guess_matches(video, guess) == expected
 
 
-def test_guess_matches_multiple_sources_no_match(episodes):
+def test_guess_matches_multiple_sources_no_match(episodes: dict[str, Episode]) -> None:
     video = episodes['bbt_s07e05']
     guess = {
         'title': video.series,
@@ -148,7 +149,7 @@ def test_guess_matches_multiple_sources_no_match(episodes):
     assert guess_matches(video, guess) == expected
 
 
-def test_guess_matches_episode_no_year(episodes):
+def test_guess_matches_episode_no_year(episodes: dict[str, Episode]) -> None:
     video = episodes['dallas_s01e03']
     guess = {'title': video.series, 'season': video.season, 'episode': video.episode}
     expected = {'series', 'season', 'episode', 'year', 'country'}

@@ -5,6 +5,7 @@ from babelfish import Language, language_converters  # type: ignore[import-untyp
 from vcr import VCR  # type: ignore[import-untyped]
 
 from subliminal.providers.gestdown import GestdownProvider, GestdownSubtitle
+from subliminal.video import Episode
 
 vcr = VCR(
     path_transformer=lambda path: path + '.yaml',
@@ -15,11 +16,11 @@ vcr = VCR(
 
 
 @pytest.mark.converter
-def test_converter_convert_alpha3_country():
+def test_converter_convert_alpha3_country() -> None:
     assert language_converters['addic7ed'].convert('por', 'BR') == 'Portuguese (Brazilian)'
 
 
-def test_get_matches_release_group(episodes):
+def test_get_matches_release_group(episodes: dict[str, Episode]) -> None:
     subtitle = GestdownSubtitle(
         language=Language('eng'),
         subtitle_id='',
@@ -35,7 +36,7 @@ def test_get_matches_release_group(episodes):
     assert matches == {'series', 'season', 'episode', 'title', 'year', 'country', 'release_group'}
 
 
-def test_get_matches_equivalent_release_group(episodes):
+def test_get_matches_equivalent_release_group(episodes: dict[str, Episode]) -> None:
     subtitle = GestdownSubtitle(
         language=Language('eng'),
         subtitle_id='',
@@ -51,7 +52,7 @@ def test_get_matches_equivalent_release_group(episodes):
     assert matches == {'series', 'season', 'episode', 'title', 'year', 'country', 'release_group'}
 
 
-def test_get_matches_resolution_release_group(episodes):
+def test_get_matches_resolution_release_group(episodes: dict[str, Episode]) -> None:
     subtitle = GestdownSubtitle(
         language=Language('heb'),
         subtitle_id='',
@@ -67,7 +68,7 @@ def test_get_matches_resolution_release_group(episodes):
     assert matches == {'series', 'season', 'episode', 'title', 'year', 'country', 'release_group', 'resolution'}
 
 
-def test_get_matches_source_release_group(episodes):
+def test_get_matches_source_release_group(episodes: dict[str, Episode]) -> None:
     subtitle = GestdownSubtitle(
         language=Language('eng'),
         subtitle_id='',
@@ -83,7 +84,7 @@ def test_get_matches_source_release_group(episodes):
     assert matches == {'series', 'season', 'episode', 'title', 'year', 'country', 'release_group', 'source'}
 
 
-def test_get_matches_streaming_service(episodes):
+def test_get_matches_streaming_service(episodes: dict[str, Episode]) -> None:
     subtitle = GestdownSubtitle(
         language=Language('nld'),
         subtitle_id='',
@@ -99,7 +100,7 @@ def test_get_matches_streaming_service(episodes):
     assert matches == {'series', 'season', 'episode', 'year', 'country', 'release_group', 'streaming_service', 'source'}
 
 
-def test_get_matches_only_year_country(episodes):
+def test_get_matches_only_year_country(episodes: dict[str, Episode]) -> None:
     subtitle = GestdownSubtitle(
         language=Language('eng'),
         subtitle_id='',
@@ -115,7 +116,7 @@ def test_get_matches_only_year_country(episodes):
     assert matches == {'year', 'country'}
 
 
-def test_get_matches_no_match(episodes):
+def test_get_matches_no_match(episodes: dict[str, Episode]) -> None:
     subtitle = GestdownSubtitle(
         language=Language('eng'),
         subtitle_id='',
@@ -133,7 +134,7 @@ def test_get_matches_no_match(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_search_show_id():
+def test_search_show_id() -> None:
     with GestdownProvider() as provider:
         show_id = provider._search_show_id('The Big Bang Theory')
     assert show_id == '91eb9278-8cf5-4ddd-9111-7f60b15958cb'
@@ -141,7 +142,7 @@ def test_search_show_id():
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_search_show_id_incomplete():
+def test_search_show_id_incomplete() -> None:
     with GestdownProvider() as provider:
         show_id = provider._search_show_id('The Big Bang')
     assert show_id is None
@@ -149,7 +150,7 @@ def test_search_show_id_incomplete():
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_search_show_id_no_year():
+def test_search_show_id_no_year() -> None:
     with GestdownProvider() as provider:
         show_id = provider._search_show_id('Dallas')
     assert show_id == '226d7f34-a9f5-4fe2-98d7-ecf944243714'
@@ -157,7 +158,7 @@ def test_search_show_id_no_year():
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_search_show_id_error():
+def test_search_show_id_error() -> None:
     with GestdownProvider() as provider:
         show_id = provider._search_show_id('The Big How I Met Your Mother')
     assert show_id is None
@@ -165,7 +166,7 @@ def test_search_show_id_error():
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_search_show_id_quote():
+def test_search_show_id_quote() -> None:
     with GestdownProvider() as provider:
         show_id = provider._search_show_id("Grey's Anatomy")
     assert show_id == 'cb13bb68-c637-4e0f-b79d-d4f1b4972380'
@@ -173,7 +174,7 @@ def test_search_show_id_quote():
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_search_show_series_tvdb_id():
+def test_search_show_series_tvdb_id() -> None:
     with GestdownProvider() as provider:
         # The Big Bang Theory
         show_id = provider._search_show_id('', series_tvdb_id='80379')
@@ -182,7 +183,7 @@ def test_search_show_series_tvdb_id():
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_get_title_and_show_id_only_title(episodes):
+def test_get_title_and_show_id_only_title(episodes: dict[str, Episode]) -> None:
     video = episodes['marvels_agents_of_shield_s02e06']
     with GestdownProvider() as provider:
         title, show_id = provider.get_title_and_show_id(video)
@@ -192,7 +193,7 @@ def test_get_title_and_show_id_only_title(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_get_title_and_show_id_with_tvdb_id(episodes):
+def test_get_title_and_show_id_with_tvdb_id(episodes: dict[str, Episode]) -> None:
     video = episodes['alex_inc_s01e04']
     with GestdownProvider() as provider:
         title, show_id = provider.get_title_and_show_id(video)
@@ -202,7 +203,7 @@ def test_get_title_and_show_id_with_tvdb_id(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_get_title_and_show_id_alternative_name(episodes):
+def test_get_title_and_show_id_alternative_name(episodes: dict[str, Episode]) -> None:
     video = episodes['the_end_of_the_fucking_world']
     with GestdownProvider() as provider:
         title, show_id = provider.get_title_and_show_id(video)
@@ -212,7 +213,7 @@ def test_get_title_and_show_id_alternative_name(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_get_title_and_show_id_no_year(episodes):
+def test_get_title_and_show_id_no_year(episodes: dict[str, Episode]) -> None:
     video = episodes['dallas_s01e03']
     with GestdownProvider() as provider:
         title, show_id = provider.get_title_and_show_id(video)
@@ -222,7 +223,7 @@ def test_get_title_and_show_id_no_year(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_query(episodes):
+def test_query(episodes: dict[str, Episode]) -> None:
     video = episodes['bbt_s07e05']
     with GestdownProvider() as provider:
         title, show_id = provider.get_title_and_show_id(video)
@@ -236,7 +237,7 @@ def test_query(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_query_no_language(episodes):
+def test_query_no_language(episodes: dict[str, Episode]) -> None:
     video = episodes['bbt_s07e05']
     with GestdownProvider() as provider:
         title, show_id = provider.get_title_and_show_id(video)
@@ -246,7 +247,7 @@ def test_query_no_language(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_query_wrong_series(episodes):
+def test_query_wrong_series(episodes: dict[str, Episode]) -> None:
     video = episodes['bbt_s07e05']
     with GestdownProvider() as provider:
         subtitles = provider.query('', video.series[:12], video.season, video.episode, Language('eng'))
@@ -255,7 +256,7 @@ def test_query_wrong_series(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_query_parsing(episodes):
+def test_query_parsing(episodes: dict[str, Episode]) -> None:
     lang = Language('por', country='BR')
     video = episodes['got_s03e10']
     with GestdownProvider() as provider:
@@ -278,7 +279,7 @@ def test_query_parsing(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_query_parsing_quote_dots_mixed_case(episodes):
+def test_query_parsing_quote_dots_mixed_case(episodes: dict[str, Episode]) -> None:
     lang = Language('eng')
     video = episodes['marvels_agents_of_shield_s02e06']
     with GestdownProvider() as provider:
@@ -300,7 +301,7 @@ def test_query_parsing_quote_dots_mixed_case(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_query_parsing_colon(episodes):
+def test_query_parsing_colon(episodes: dict[str, Episode]) -> None:
     lang = Language('eng')
     video = episodes['csi_cyber_s02e03']
     with GestdownProvider() as provider:
@@ -322,7 +323,7 @@ def test_query_parsing_colon(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_query_parsing_dash(episodes):
+def test_query_parsing_dash(episodes: dict[str, Episode]) -> None:
     lang = Language('fra')
     video = episodes['the_x_files_s10e02']
     with GestdownProvider() as provider:
@@ -344,7 +345,7 @@ def test_query_parsing_dash(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_query_all_series(episodes):
+def test_query_all_series(episodes: dict[str, Episode]) -> None:
     lang = Language('eng')
     video = episodes['got_s03e10']
     with GestdownProvider() as provider:
@@ -359,7 +360,7 @@ def test_query_all_series(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_list_subtitles(episodes):
+def test_list_subtitles(episodes: dict[str, Episode]) -> None:
     video = episodes['bbt_s07e05']
     languages = {Language('deu'), Language('fra')}
     expected_subtitles = {
@@ -374,7 +375,7 @@ def test_list_subtitles(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_download_subtitle(episodes):
+def test_download_subtitle(episodes: dict[str, Episode]) -> None:
     video = episodes['bbt_s07e05']
     languages = {Language('fra')}
     with GestdownProvider() as provider:
@@ -386,7 +387,7 @@ def test_download_subtitle(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_list_subtitles_episode_alternative_series(episodes):
+def test_list_subtitles_episode_alternative_series(episodes: dict[str, Episode]) -> None:
     video = episodes['turn_s04e03']
     languages = {Language('eng')}
     expected_subtitles = {
@@ -403,7 +404,7 @@ def test_list_subtitles_episode_alternative_series(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_show_with_asterisk(episodes):
+def test_show_with_asterisk(episodes: dict[str, Episode]) -> None:
     video = episodes['the_end_of_the_fucking_world']
     languages = {Language('eng')}
     expected_subtitles = {
@@ -421,7 +422,7 @@ def test_show_with_asterisk(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_download_with_bom(episodes):
+def test_download_with_bom(episodes: dict[str, Episode]) -> None:
     video = episodes['grimsburg_s01e01']
     languages = {Language('eng')}
     with GestdownProvider() as provider:

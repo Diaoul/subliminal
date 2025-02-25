@@ -39,7 +39,7 @@ def test_parse_entry_point_wrong() -> None:
         parse_entry_point(src, group='subliminal.providers')
 
 
-def test_registrable_extension_manager_all_extensions():
+def test_registrable_extension_manager_all_extensions() -> None:
     native_extensions = sorted(e.name for e in provider_manager)
 
     manager = RegistrableExtensionManager(
@@ -50,7 +50,7 @@ def test_registrable_extension_manager_all_extensions():
     assert extensions == sorted(name for name in ('esopensubtitl', *native_extensions))
 
 
-def test_registrable_extension_manager_internal_extension():
+def test_registrable_extension_manager_internal_extension() -> None:
     manager = RegistrableExtensionManager(
         'subliminal.test_providers',
         [
@@ -65,7 +65,7 @@ def test_registrable_extension_manager_internal_extension():
     assert len(manager.internal_extensions) == 5
 
 
-def test_registrable_extension_manager_register():
+def test_registrable_extension_manager_register() -> None:
     manager = RegistrableExtensionManager(
         'subliminal.test_providers',
         [
@@ -92,7 +92,7 @@ def test_registrable_extension_manager_register():
         manager.register('de7cidda = subliminal.providers.opensubtitles:OpenSubtitlesProvider')
 
 
-def test_registrable_extension_manager_unregister():
+def test_registrable_extension_manager_unregister() -> None:
     manager = RegistrableExtensionManager(
         'subliminal.test_providers',
         [
@@ -111,7 +111,7 @@ def test_registrable_extension_manager_unregister():
         manager.unregister('seltitbusnepo = subliminal.providers.opensubtitles:OpenSubtitlesProvider')
 
 
-def test_provider_manager():
+def test_provider_manager() -> None:
     setup_names = {ep.name for ep in entry_points(group=provider_manager.namespace)}
     internal_names = {
         parse_entry_point(iep, provider_manager.namespace).name for iep in provider_manager.internal_extensions
@@ -122,7 +122,7 @@ def test_provider_manager():
     assert internal_names == enabled_names | disabled_names
 
 
-def test_refiner_manager():
+def test_refiner_manager() -> None:
     setup_names = {ep.name for ep in entry_points(group=refiner_manager.namespace)}
     internal_names = {
         parse_entry_point(iep, refiner_manager.namespace).name for iep in refiner_manager.internal_extensions

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import os
 from textwrap import dedent
+from typing import TYPE_CHECKING
 
 import pytest
 from babelfish import Language  # type: ignore[import-untyped]
@@ -14,6 +15,9 @@ from subliminal.subtitle import (
     get_subtitle_path,
     get_subtitle_suffix,
 )
+
+if TYPE_CHECKING:
+    from subliminal.video import Movie
 
 # Core test
 pytestmark = pytest.mark.core
@@ -59,14 +63,14 @@ def test_subtitle_none_content() -> None:
     assert subtitle.is_valid() is False
 
 
-def test_subtitle_guess_format(monkeypatch) -> None:
+def test_subtitle_guess_format(monkeypatch: pytest.MonkeyPatch) -> None:
     subtitle = Subtitle(Language('jpn'))
     text = '1\n2\n間違ったサブタイトル'
     monkeypatch.setattr(Subtitle, 'text', text)
     assert subtitle.is_valid() is False
 
 
-def test_subtitle_other_subtitle_format(monkeypatch) -> None:
+def test_subtitle_other_subtitle_format(monkeypatch: pytest.MonkeyPatch) -> None:
     subtitle = Subtitle(Language('jpn'))
     subtitle.subtitle_format = 'vtt'
     text = '1\n'
@@ -79,7 +83,7 @@ def test_subtitle_is_valid_no_content() -> None:
     assert subtitle.is_valid() is False
 
 
-def test_subtitle_is_valid_valid(monkeypatch) -> None:
+def test_subtitle_is_valid_valid(monkeypatch: pytest.MonkeyPatch) -> None:
     subtitle = Subtitle(Language('fra'))
     text = (
         '1\n'
@@ -92,7 +96,7 @@ def test_subtitle_is_valid_valid(monkeypatch) -> None:
     assert subtitle.subtitle_format == 'srt'
 
 
-def test_subtitle_is_valid_auto_fix(monkeypatch):
+def test_subtitle_is_valid_auto_fix(monkeypatch: pytest.MonkeyPatch) -> None:
     subtitle = Subtitle(Language('fra'))
     text = (
         '1\n'
@@ -105,7 +109,7 @@ def test_subtitle_is_valid_auto_fix(monkeypatch):
     assert subtitle.is_valid(auto_fix_srt=True) is True
 
 
-def test_subtitle_is_valid_valid_begin(monkeypatch):
+def test_subtitle_is_valid_valid_begin(monkeypatch: pytest.MonkeyPatch) -> None:
     subtitle = Subtitle(Language('fra'))
     text = (
         '1\n'
@@ -118,7 +122,7 @@ def test_subtitle_is_valid_valid_begin(monkeypatch):
     assert subtitle.is_valid() is True
 
 
-def test_subtitle_is_valid_sub_format(monkeypatch, movies):
+def test_subtitle_is_valid_sub_format(monkeypatch: pytest.MonkeyPatch, movies: dict[str, Movie]) -> None:
     video = movies['man_of_steel']
     subtitle = Subtitle(Language('pol'))
     text = (
@@ -134,7 +138,7 @@ def test_subtitle_is_valid_sub_format(monkeypatch, movies):
     assert extension == '.sub'
 
 
-def test_subtitle_get_path_extension(monkeypatch, movies):
+def test_subtitle_get_path_extension(monkeypatch: pytest.MonkeyPatch, movies: dict[str, Movie]) -> None:
     video = movies['man_of_steel']
     subtitle = Subtitle(Language('pol'))
     text = (
@@ -150,24 +154,24 @@ def test_subtitle_get_path_extension(monkeypatch, movies):
     assert extension == '.srt'
 
 
-def test_get_subtitle_path(movies):
+def test_get_subtitle_path(movies: dict[str, Movie]) -> None:
     video = movies['man_of_steel']
     assert get_subtitle_path(video.name, extension='.sub') == os.path.splitext(video.name)[0] + '.sub'
 
 
-def test_get_subtitle_path_language(movies):
+def test_get_subtitle_path_language(movies: dict[str, Movie]) -> None:
     video = movies['man_of_steel']
     suffix = get_subtitle_suffix(Language('por', 'BR'))
     assert get_subtitle_path(video.name, suffix) == os.path.splitext(video.name)[0] + '.pt-BR.srt'
 
 
-def test_get_subtitle_path_language_undefined(movies):
+def test_get_subtitle_path_language_undefined(movies: dict[str, Movie]) -> None:
     video = movies['man_of_steel']
     suffix = get_subtitle_suffix(Language('und'))
     assert get_subtitle_path(video.name, suffix) == os.path.splitext(video.name)[0] + '.srt'
 
 
-def test_get_subtitle_path_hearing_impaired(movies):
+def test_get_subtitle_path_hearing_impaired(movies: dict[str, Movie]) -> None:
     video = movies['man_of_steel']
     suffix = get_subtitle_suffix(
         Language('deu', 'CH', 'Latn'),
@@ -177,7 +181,7 @@ def test_get_subtitle_path_hearing_impaired(movies):
     assert get_subtitle_path(video.name, suffix) == os.path.splitext(video.name)[0] + '.hi.de-CH-Latn.srt'
 
 
-def test_get_subtitle_path_foreign_only(movies):
+def test_get_subtitle_path_foreign_only(movies: dict[str, Movie]) -> None:
     video = movies['man_of_steel']
     suffix = get_subtitle_suffix(
         Language('srp', None, 'Cyrl'),
@@ -187,32 +191,32 @@ def test_get_subtitle_path_foreign_only(movies):
     assert get_subtitle_path(video.name, suffix) == os.path.splitext(video.name)[0] + '.fo.sr-Cyrl.srt'
 
 
-def test_get_subtitle_path_alpha3(movies):
+def test_get_subtitle_path_alpha3(movies: dict[str, Movie]) -> None:
     video = movies['man_of_steel']
     suffix = get_subtitle_suffix(Language('fra', 'CA'), language_format='alpha3')
     assert get_subtitle_path(video.name, suffix) == os.path.splitext(video.name)[0] + '.fra-CA.srt'
 
 
-def test_get_subtitle_path_extension(movies):
+def test_get_subtitle_path_extension(movies: dict[str, Movie]) -> None:
     video = movies['man_of_steel']
     suffix = get_subtitle_suffix(Language('zho', 'CN'), language_type_suffix=True)
     assert get_subtitle_path(video.name, suffix, extension='.sub') == os.path.splitext(video.name)[0] + '.zh-CN.sub'
 
 
-def test_fix_line_ending():
+def test_fix_line_ending() -> None:
     content = b'Text\r\nwith\r\nweird\nline ending\r\ncharacters'
     assert fix_line_ending(content) == b'Text\nwith\nweird\nline ending\ncharacters'
 
 
 # https://github.com/pannal/Sub-Zero.bundle/issues/646 replaced all Chinese character “不” with “上”
-def test_fix_line_ending_chinese_characters():
+def test_fix_line_ending_chinese_characters() -> None:
     character = bytes('不', 'utf16')
     content = b''.join([character, b'\r\n', character, b'\n', character])
     expected = b''.join([character, b'\n', character, b'\n', character])
     assert fix_line_ending(content) == expected
 
 
-def test_subtitle_valid_encoding():
+def test_subtitle_valid_encoding() -> None:
     subtitle = Subtitle(
         language=Language('deu'),
         hearing_impaired=False,
@@ -222,7 +226,7 @@ def test_subtitle_valid_encoding():
     assert subtitle.encoding == 'cp1252'
 
 
-def test_subtitle_empty_encoding():
+def test_subtitle_empty_encoding() -> None:
     subtitle = Subtitle(
         language=Language('deu'),
         hearing_impaired=False,
@@ -232,7 +236,7 @@ def test_subtitle_empty_encoding():
     assert subtitle.encoding is None
 
 
-def test_subtitle_invalid_encoding():
+def test_subtitle_invalid_encoding() -> None:
     subtitle = Subtitle(
         language=Language('deu'),
         hearing_impaired=False,
@@ -243,7 +247,7 @@ def test_subtitle_invalid_encoding():
     assert subtitle.hearing_impaired is False
 
 
-def test_subtitle_guess_encoding_utf8():
+def test_subtitle_guess_encoding_utf8() -> None:
     subtitle = Subtitle(
         language=Language('zho'),
         foreign_only=False,
@@ -257,7 +261,7 @@ def test_subtitle_guess_encoding_utf8():
 
 
 # regression for #921
-def test_subtitle_text_guess_encoding_none():
+def test_subtitle_text_guess_encoding_none() -> None:
     content = b'\x00d\x00\x80\x00\x00\xff\xff\xff\xff\xff\xff,\x00\x00\x00\x00d\x00d\x00\x00\x02s\x84\x8f\xa9'
     subtitle = Subtitle(
         language=Language('zho'),
@@ -514,7 +518,7 @@ def test_subtitle_convert_to_ssa() -> None:
     assert subtitle.text == new_text
 
 
-def test_subtitle_info(monkeypatch) -> None:
+def test_subtitle_info(monkeypatch: pytest.MonkeyPatch) -> None:
     subtitle = Subtitle(
         Language('eng'),
         'xv34e',
@@ -527,7 +531,7 @@ def test_subtitle_info(monkeypatch) -> None:
     assert isinstance(subtitle.info, str)
 
 
-def test_embedded_subtitle_info(monkeypatch) -> None:
+def test_embedded_subtitle_info(monkeypatch: pytest.MonkeyPatch) -> None:
     subtitle = EmbeddedSubtitle(
         Language('ita'),
     )
@@ -538,7 +542,7 @@ def test_embedded_subtitle_info(monkeypatch) -> None:
     assert isinstance(subtitle.info, str)
 
 
-def test_embedded_subtitle_info_hearing_impaired(monkeypatch) -> None:
+def test_embedded_subtitle_info_hearing_impaired(monkeypatch: pytest.MonkeyPatch) -> None:
     subtitle = EmbeddedSubtitle(
         Language('spa'),
         hearing_impaired=True,
@@ -551,7 +555,7 @@ def test_embedded_subtitle_info_hearing_impaired(monkeypatch) -> None:
     assert isinstance(subtitle.info, str)
 
 
-def test_embedded_subtitle_info_foreign_only(monkeypatch) -> None:
+def test_embedded_subtitle_info_foreign_only(monkeypatch: pytest.MonkeyPatch) -> None:
     subtitle = EmbeddedSubtitle(
         Language('fra'),
         foreign_only=True,

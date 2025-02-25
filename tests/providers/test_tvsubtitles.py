@@ -5,6 +5,7 @@ from babelfish import Language, language_converters  # type: ignore[import-untyp
 from vcr import VCR  # type: ignore[import-untyped]
 
 from subliminal.providers.tvsubtitles import TVsubtitlesProvider, TVsubtitlesSubtitle
+from subliminal.video import Episode
 
 vcr = VCR(
     path_transformer=lambda path: path + '.yaml',
@@ -16,31 +17,31 @@ vcr = VCR(
 
 
 @pytest.mark.converter
-def test_converter_convert_alpha3_country():
+def test_converter_convert_alpha3_country() -> None:
     assert language_converters['tvsubtitles'].convert('por', 'BR') == 'br'
 
 
 @pytest.mark.converter
-def test_converter_convert_alpha3():
+def test_converter_convert_alpha3() -> None:
     assert language_converters['tvsubtitles'].convert('ukr') == 'ua'
 
 
 @pytest.mark.converter
-def test_converter_convert_alpha3_alpha2_converter():
+def test_converter_convert_alpha3_alpha2_converter() -> None:
     assert language_converters['tvsubtitles'].convert('fra') == 'fr'
 
 
 @pytest.mark.converter
-def test_converter_reverse():
+def test_converter_reverse() -> None:
     assert language_converters['tvsubtitles'].reverse('gr') == ('ell', None, None)
 
 
 @pytest.mark.converter
-def test_converter_reverse_name_converter():
+def test_converter_reverse_name_converter() -> None:
     assert language_converters['tvsubtitles'].reverse('en') == ('eng', None, None)
 
 
-def test_get_matches_format_release_group(episodes):
+def test_get_matches_format_release_group(episodes: dict[str, Episode]) -> None:
     subtitle = TVsubtitlesSubtitle(
         language=Language('fra'),
         subtitle_id='249518',
@@ -56,7 +57,7 @@ def test_get_matches_format_release_group(episodes):
     assert matches == {'series', 'season', 'episode', 'year', 'country', 'source', 'release_group'}
 
 
-def test_get_matches_format_equivalent_release_group(episodes):
+def test_get_matches_format_equivalent_release_group(episodes: dict[str, Episode]) -> None:
     subtitle = TVsubtitlesSubtitle(
         language=Language('fra'),
         subtitle_id='249518',
@@ -72,7 +73,7 @@ def test_get_matches_format_equivalent_release_group(episodes):
     assert matches == {'series', 'season', 'episode', 'year', 'country', 'source', 'release_group'}
 
 
-def test_get_matches_video_codec_resolution(episodes):
+def test_get_matches_video_codec_resolution(episodes: dict[str, Episode]) -> None:
     subtitle = TVsubtitlesSubtitle(
         language=Language('por'),
         subtitle_id='261077',
@@ -88,7 +89,7 @@ def test_get_matches_video_codec_resolution(episodes):
     assert matches == {'series', 'season', 'episode', 'year', 'country', 'video_codec', 'resolution'}
 
 
-def test_get_matches_only_year_country(episodes):
+def test_get_matches_only_year_country(episodes: dict[str, Episode]) -> None:
     subtitle = TVsubtitlesSubtitle(
         language=Language('por'),
         subtitle_id='261077',
@@ -104,7 +105,7 @@ def test_get_matches_only_year_country(episodes):
     assert matches == {'year', 'country'}
 
 
-def test_get_matches_no_match(episodes):
+def test_get_matches_no_match(episodes: dict[str, Episode]) -> None:
     subtitle = TVsubtitlesSubtitle(
         language=Language('por'),
         subtitle_id='261077',
@@ -122,7 +123,7 @@ def test_get_matches_no_match(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_search_show_id():
+def test_search_show_id() -> None:
     with TVsubtitlesProvider() as provider:
         show_id = provider.search_show_id('The Big Bang Theory')
     assert show_id == 154
@@ -130,7 +131,7 @@ def test_search_show_id():
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_search_show_id_incomplete():
+def test_search_show_id_incomplete() -> None:
     with TVsubtitlesProvider() as provider:
         show_id = provider.search_show_id('The Big Bang')
     assert show_id is None
@@ -138,7 +139,7 @@ def test_search_show_id_incomplete():
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_search_show_id_ambiguous():
+def test_search_show_id_ambiguous() -> None:
     with TVsubtitlesProvider() as provider:
         show_id = provider.search_show_id('New Girl')
     assert show_id == 977
@@ -146,7 +147,7 @@ def test_search_show_id_ambiguous():
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_search_show_id_us():
+def test_search_show_id_us() -> None:
     with TVsubtitlesProvider() as provider:
         show_id = provider.search_show_id('House of Cards', 2013)
     assert show_id == 1246
@@ -154,7 +155,7 @@ def test_search_show_id_us():
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_search_show_id_uk():
+def test_search_show_id_uk() -> None:
     with TVsubtitlesProvider() as provider:
         show_id = provider.search_show_id('Beautiful People')
     assert show_id == 657
@@ -162,7 +163,7 @@ def test_search_show_id_uk():
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_search_show_id_no_year():
+def test_search_show_id_no_year() -> None:
     with TVsubtitlesProvider() as provider:
         show_id = provider.search_show_id('Dallas')
     assert show_id == 646
@@ -170,7 +171,7 @@ def test_search_show_id_no_year():
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_search_show_id_year_in_title():
+def test_search_show_id_year_in_title() -> None:
     with TVsubtitlesProvider() as provider:
         show_id = provider.search_show_id('Dallas', 2012)
     assert show_id == 1127
@@ -178,7 +179,7 @@ def test_search_show_id_year_in_title():
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_search_show_id_error():
+def test_search_show_id_error() -> None:
     with TVsubtitlesProvider() as provider:
         show_id = provider.search_show_id('The Big How I Met Your Mother')
     assert show_id is None
@@ -186,7 +187,7 @@ def test_search_show_id_error():
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_get_episode_ids():
+def test_get_episode_ids() -> None:
     expected_episode_ids = {
         1: 34274,
         2: 34275,
@@ -220,7 +221,7 @@ def test_get_episode_ids():
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_get_episode_ids_wrong_season():
+def test_get_episode_ids_wrong_season() -> None:
     with TVsubtitlesProvider() as provider:
         episode_ids = provider.get_episode_ids(154, 55)
     assert len(episode_ids) == 0
@@ -228,7 +229,7 @@ def test_get_episode_ids_wrong_season():
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_query(episodes):
+def test_query(episodes: dict[str, Episode]) -> None:
     video = episodes['bbt_s07e05']
     expected_subtitles = {
         '268673',
@@ -250,7 +251,7 @@ def test_query(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_query_no_year(episodes):
+def test_query_no_year(episodes: dict[str, Episode]) -> None:
     video = episodes['dallas_s01e03']
     expected_subtitles = {'124753', '167064'}
     with TVsubtitlesProvider() as provider:
@@ -262,7 +263,7 @@ def test_query_no_year(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_query_with_quote(episodes):
+def test_query_with_quote(episodes: dict[str, Episode]) -> None:
     video = episodes['marvels_agents_of_shield_s02e06']
     expected_subtitles = {'91420', '278637', '278909', '278910', '278972', '279205', '279216', '279217', '285917'}
     with TVsubtitlesProvider() as provider:
@@ -274,7 +275,7 @@ def test_query_with_quote(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_query_wrong_series(episodes):
+def test_query_wrong_series(episodes: dict[str, Episode]) -> None:
     video = episodes['bbt_s07e05']
     with TVsubtitlesProvider() as provider:
         subtitles = provider.query(155, video.series[:12], video.season, video.episode, video.year)
@@ -283,7 +284,7 @@ def test_query_wrong_series(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_query_wrong_episode(episodes):
+def test_query_wrong_episode(episodes: dict[str, Episode]) -> None:
     video = episodes['bbt_s07e05']
     with TVsubtitlesProvider() as provider:
         show_id = provider.search_show_id(video.series, video.year)
@@ -293,7 +294,7 @@ def test_query_wrong_episode(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_list_subtitles(episodes):
+def test_list_subtitles(episodes: dict[str, Episode]) -> None:
     video = episodes['bbt_s07e05']
     languages = {Language('eng'), Language('fra')}
     expected_subtitles = {'249592', '249499', '32596', '249518'}
@@ -306,7 +307,7 @@ def test_list_subtitles(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_list_subtitles_episode_alternative_series(episodes):
+def test_list_subtitles_episode_alternative_series(episodes: dict[str, Episode]) -> None:
     video = episodes['turn_s03e01']
     languages = {Language('fra')}
     expected_subtitles = {'307588'}
@@ -318,7 +319,7 @@ def test_list_subtitles_episode_alternative_series(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_download_subtitle(episodes):
+def test_download_subtitle(episodes: dict[str, Episode]) -> None:
     video = episodes['bbt_s07e05']
     languages = {Language('eng'), Language('fra')}
     with TVsubtitlesProvider() as provider:
@@ -330,7 +331,7 @@ def test_download_subtitle(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_download_subtitle_with_quote(episodes):
+def test_download_subtitle_with_quote(episodes: dict[str, Episode]) -> None:
     video = episodes['marvels_agents_of_shield_s02e06']
     languages = {Language('eng'), Language('fra')}
     with TVsubtitlesProvider() as provider:

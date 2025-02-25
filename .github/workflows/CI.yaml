@@ -230,12 +230,68 @@ jobs:
           path: python-coverage-comment-action.txt
 
 
+  core-coverage:
+    name: Core Coverage
+    runs-on: ubuntu-latest
+    needs: build-package
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        id: setup
+        with:
+          python-version-file: .python-version-default
+      - name: Install hatch
+        run: python -Im pip install hatch
+
+      - name: Install other test software (on Linux only)
+        uses: awalsh128/cache-apt-pkgs-action@v1
+        with:
+          packages: rar
+          version: 1.0
+
+      - name: Pick environment to run
+        env:
+          PYTHON_VERSION: ${{ steps.setup.outputs.python-version }}
+        run: |
+          import codecs; import os
+          py = os.environ.get('PYTHON_VERSION')
+          py = ".".join(py.split(".")[:2])
+          test_env = f"tests.py{py}"
+          print(f"Picked {test_env}")
+          with codecs.open(os.environ["GITHUB_ENV"], mode="a", encoding="utf-8") as file_handler:
+              file_handler.write(f"ENV={test_env}\n")
+        shell: python
+      - name: Setup test environment
+        run: |
+          hatch -v env create ${ENV}
+        shell: bash
+      - name: Run test suite
+        env:
+          # Make sure to add `passenv=COVERAGE_FILE` to `[testenv]` in tox.ini
+          # Make sure to add `overrides = { env.COVERAGE_FILE.env-vars = "COVERAGE_FILE" }` to `[tests]` in hatch.toml
+          COVERAGE_FILE: ".core-coverage"
+          CI_RUN: "yes"
+        run: hatch -v run ${ENV}:run-cov-core
+        shell: bash
+
+      - name: Store coverage file
+        uses: actions/upload-artifact@v4
+        with:
+          name: core-coverage
+          path: .core-coverage
+          include-hidden-files: true
+          if-no-files-found: error
+
+
   # Ensure everything required is passing for branch protection.
   required-checks-pass:
     if: always()
 
     needs:
       - coverage
+      - core-coverage
       - docs
       - install-dev
       - typing

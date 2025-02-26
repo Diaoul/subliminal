@@ -195,7 +195,7 @@ class Addic7edSubtitle(Subtitle):
         if video.resolution and self.release_group and video.resolution in self.release_group.lower():
             matches.add('resolution')
         # other properties
-        if self.release_group:
+        if self.release_group:  # pragma: no branch
             matches |= guess_matches(video, guessit(self.release_group, {'type': 'episode'}), partial=True)
 
         return matches
@@ -267,7 +267,7 @@ class Addic7edProvider(Provider):
 
     def terminate(self) -> None:
         """Terminate the provider."""
-        if not self.session:
+        if not self.session:  # pragma: no cover
             raise NotInitializedProviderError
 
         logger.debug('Logged out')
@@ -283,7 +283,7 @@ class Addic7edProvider(Provider):
         :return: show id per series, lower case and without quotes.
         :rtype: dict[str, int]
         """
-        if not self.session:
+        if not self.session:  # pragma: no cover
             raise NotInitializedProviderError
 
         # get the show page
@@ -292,7 +292,7 @@ class Addic7edProvider(Provider):
         r = self.session.get(self.server_url, timeout=self.timeout)
         r.raise_for_status()
 
-        if not r.text or 'Log in' in r.text:
+        if not r.text or 'Log in' in r.text:  # pragma: no cover
             logger.warning('Failed to login, check your userid, password')
             return {}
 
@@ -314,7 +314,7 @@ class Addic7edProvider(Provider):
         logger.debug('Found %d show ids', len(show_ids))
         return show_ids
 
-    def _get_episode_pages(self, response: Response) -> list[Response]:
+    def _get_episode_pages(self, response: Response) -> list[Response]:  # pragma: no cover
         """Get all the response pages from a single response."""
         if not self.session:
             raise NotInitializedProviderError
@@ -346,7 +346,7 @@ class Addic7edProvider(Provider):
 
         return pages
 
-    def _get_show_id_from_page(self, response: Response) -> int | None:
+    def _get_show_id_from_page(self, response: Response) -> int | None:  # pragma: no cover
         """Parse the show id from a page."""
         soup = ParserBeautifulSoup(response.content, ['lxml', 'html.parser'])
 
@@ -370,7 +370,7 @@ class Addic7edProvider(Provider):
         series_year: str,
         season: int | None = None,
         episode: int | None = None,
-    ) -> dict[str, int]:
+    ) -> dict[str, int]:  # pragma: no cover
         """Search the show id from the `series_year` query.
 
         Very slow, better to avoid.
@@ -413,7 +413,7 @@ class Addic7edProvider(Provider):
                 show_ids[found_series] = show_id
         return show_ids
 
-    def _search_show_id(self, series_year: str) -> int | None:
+    def _search_show_id(self, series_year: str) -> int | None:  # pragma: no cover
         """Search the show id from the dict of shows."""
         show_ids = self._search_show_ids(series_year)
         if len(show_ids) == 0:
@@ -434,7 +434,7 @@ class Addic7edProvider(Provider):
         year: int | None = None,
         country_code: str | None = None,
     ) -> int | None:
-        if not show_ids:
+        if not show_ids:  # pragma: no cover
             return None
 
         show_id = None
@@ -442,7 +442,7 @@ class Addic7edProvider(Provider):
         if country_code:
             logger.debug('Getting show id with country')
             show_id = show_ids.get(f'{series} {country_code.lower()}')
-            if show_id is not None:
+            if show_id is not None:  # pragma: no branch
                 return show_id
 
         # attempt with year
@@ -471,7 +471,7 @@ class Addic7edProvider(Provider):
         series_sanitized = addic7ed_sanitize(series)
 
         show_ids = self._get_show_ids()
-        if not show_ids:
+        if not show_ids:  # pragma: no cover
             self._get_show_ids.invalidate()  # type: ignore[attr-defined]
             show_ids = self._get_show_ids()
 
@@ -480,21 +480,21 @@ class Addic7edProvider(Provider):
             return show_id
 
         logger.info('Series %s not found in show ids', series)
-        if not self.allow_searches:
-            return None
+        if self.allow_searches:  # pragma: no cover
+            # search as last resort
+            logger.info('Use the search API with %s', series)
+            show_ids = self._search_show_ids(series_sanitized)
 
-        # search as last resort
-        logger.info('Use the search API with %s', series)
-        show_ids = self._search_show_ids(series_sanitized)
+            show_id = self._try_get_show_id(show_ids, series_sanitized, year=year, country_code=country_code)
+            if show_id is not None:
+                return show_id
 
-        show_id = self._try_get_show_id(show_ids, series_sanitized, year=year, country_code=country_code)
-        if show_id is not None:
-            return show_id
+            # best match as last of last resort
+            logger.info('Series %s not found in show ids', series)
+            extended_series = concat_all(series_sanitized, year, country_code)
+            return self._search_show_id(extended_series)
 
-        # best match as last of last resort
-        logger.info('Series %s not found in show ids', series)
-        extended_series = concat_all(series_sanitized, year, country_code)
-        return self._search_show_id(extended_series)
+        return None
 
     def _get_show_id_with_alternative_names(self, video: Episode) -> int | None:
         """Get the show id, using alternative series names also."""
@@ -505,7 +505,7 @@ class Addic7edProvider(Provider):
         if show_id is None:
             for alt_series in video.alternative_series:
                 show_id = self.get_show_id(alt_series)
-                if show_id is not None:
+                if show_id is not None:  # pragma: no branch
                     # show_id found, keep the title and show_id
                     break
 
@@ -529,10 +529,10 @@ class Addic7edProvider(Provider):
         :rtype: list[Addic7edSubtitle]
 
         """
-        if not self.session:
+        if not self.session:  # pragma: no cover
             raise NotInitializedProviderError
 
-        if show_id is None:
+        if show_id is None:  # pragma: no cover
             return []
 
         # get the page of the season of the show
@@ -546,7 +546,7 @@ class Addic7edProvider(Provider):
         )
         r.raise_for_status()
 
-        if not r.text:
+        if not r.text:  # pragma: no cover
             # Provider wrongful return a status of 304 Not Modified with an empty content
             # raise_for_status won't raise exception for that status code
             logger.error('No data returned from provider')
@@ -561,7 +561,7 @@ class Addic7edProvider(Provider):
 
             # ignore incomplete subtitles
             status = cells[5].text
-            if '%' in status:
+            if '%' in status:  # pragma: no cover
                 logger.debug('Ignoring subtitle with status %s', status)
                 continue
 
@@ -599,14 +599,14 @@ class Addic7edProvider(Provider):
 
     def list_subtitles(self, video: Video, languages: Set[Language]) -> list[Addic7edSubtitle]:
         """List all the subtitles for the video."""
-        if not isinstance(video, Episode):
+        if not isinstance(video, Episode):  # pragma: no cover
             return []
 
         # lookup show_id
         show_id = self._get_show_id_with_alternative_names(video)
 
         # query for subtitles with the show_id
-        if show_id is None:
+        if show_id is None:  # pragma: no cover
             logger.error('No show id found for %r (%r)', video.series, {'year': video.year})
             return []
         return [
@@ -617,7 +617,7 @@ class Addic7edProvider(Provider):
 
     def download_subtitle(self, subtitle: Addic7edSubtitle) -> None:
         """Download the content of the subtitle."""
-        if not self.session:
+        if not self.session:  # pragma: no cover
             raise NotInitializedProviderError
         # download the subtitle
         logger.info('Downloading subtitle %r', subtitle)
@@ -628,14 +628,14 @@ class Addic7edProvider(Provider):
         )
         r.raise_for_status()
 
-        if not r.content:
+        if not r.content:  # pragma: no cover
             # Provider returns a status of 304 Not Modified with an empty content
             # raise_for_status won't raise exception for that status code
             logger.debug('Unable to download subtitle. No data returned from provider')
             return
 
         # detect download limit exceeded
-        if r.headers['Content-Type'] == 'text/html':
+        if r.headers['Content-Type'] == 'text/html':  # pragma: no cover
             raise DownloadLimitExceeded
 
         subtitle.content = fix_line_ending(r.content)

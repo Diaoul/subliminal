@@ -345,6 +345,7 @@ def test_download_best_subtitles_only_one(episodes):
 def test_download_bad_subtitle(movies):
     pool = ProviderPool()
     subtitles = pool.list_subtitles_provider('opensubtitles', movies['man_of_steel'], {Language('eng')})
+    assert subtitles is not None
     assert len(subtitles) >= 1
     subtitle = subtitles[0]
     subtitle.subtitle_id = ''

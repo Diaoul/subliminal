@@ -77,6 +77,7 @@ types = [
     "mypy",
     "types-requests",
     "types-beautifulsoup4",
+    "types-decorator",
 ]
 dev = [
     "pre-commit>=2.9.3",
@@ -126,13 +127,14 @@ source = "vcs"
 # https://docs.pytest.org/en/6.2.x/customize.html
 [tool.pytest.ini_options]
 minversion = "6.0"
-addopts = "--import-mode=importlib --doctest-glob='*.rst'"
+addopts = "--import-mode=importlib --doctest-modules --doctest-glob='*.rst' --doctest-glob='*.md'"
 markers = [
     "integration",
     "converter",
     "core",
 ]
 doctest_optionflags = ["NORMALIZE_WHITESPACE", "IGNORE_EXCEPTION_DETAIL"]
+
 
 # https://coverage.readthedocs.io/en/latest/config.html
 [tool.coverage.report]

@@ -103,7 +103,7 @@ class MockProvider(Provider):
     def __init__(self, subtitle_pool: Sequence[MockSubtitle] | None = None) -> None:
         self.logged_in = False
         self.subtitle_pool = list(self.internal_subtitle_pool)
-        if subtitle_pool is not None:
+        if subtitle_pool is not None:  # pragma: no cover
             self.subtitle_pool.extend(list(subtitle_pool))
         self.is_broken = False
 
@@ -114,7 +114,7 @@ class MockProvider(Provider):
 
     def terminate(self) -> None:
         """Terminate the provider."""
-        if not self.logged_in:
+        if not self.logged_in:  # pragma: no cover
             logger.info('Mock provider %s was not terminated', self.__class__.__name__)
             raise NotInitializedProviderError
 
@@ -126,7 +126,7 @@ class MockProvider(Provider):
         languages: Set[Language],
         video: Video | None = None,
         matches: Set[str] | None = None,
-    ) -> list[MockSubtitle]:
+    ) -> list[MockSubtitle]:  # pragma: no cover
         """Query the provider for subtitles."""
         if self.is_broken:
             msg = f'Mock provider {self.__class__.__name__} query raised an error'

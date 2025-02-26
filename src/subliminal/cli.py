@@ -471,6 +471,13 @@ def cache(ctx: click.Context, clear_subliminal: bool) -> None:
 )
 @click.option('-f', '--force', is_flag=True, default=False, help='Force download even if a subtitle already exist.')
 @click.option(
+    '-w',
+    '--skip-wrong-fps',
+    is_flag=True,
+    default=False,
+    help='Skip subtitles with an FPS that do not match the video (if it can be detected).',
+)
+@click.option(
     '-fo',
     '--foreign-only',
     'foreign_only',
@@ -562,6 +569,7 @@ def download(
     subtitle_format: str | None,
     single: bool,
     force: bool,
+    skip_wrong_fps: bool,
     hearing_impaired: tuple[bool | None, ...],
     foreign_only: tuple[bool | None, ...],
     min_score: int,
@@ -751,6 +759,7 @@ def download(
                     min_score=scores['hash'] * min_score // 100,
                     hearing_impaired=hearing_impaired_flag,
                     foreign_only=foreign_only_flag,
+                    skip_wrong_fps=skip_wrong_fps,
                     only_one=single,
                     ignore_subtitles=ignore_subtitles,
                 )

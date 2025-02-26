@@ -145,6 +145,29 @@ def country_matches(video: Video, *, country: Country | None = None, partial: bo
     return False  # pragma: no cover
 
 
+def fps_matches(video: Video, *, fps: float | None = None, strict: bool = True, **kwargs: Any) -> bool:
+    """Whether the video matches the `fps`.
+
+    Frame rates are considered equal if the relative difference is less than 0.1 percent.
+
+    :param video: the video.
+    :type video: :class:`~subliminal.video.Video`
+    :param str fps: the video frame rate.
+    :param bool strict: if strict, an absence of information is a non-match.
+    :return: whether there's a match
+    :rtype: bool
+
+    """
+    # make the difference a bit more than 0.1% to be sure
+    relative_diff = 0.0011
+    # if video and subtitle fps are defined, return True if the match, otherwise False
+    if video.frame_rate is not None and video.frame_rate > 0 and fps is not None and fps > 0:
+        return bool(abs(video.frame_rate - fps) / video.frame_rate < relative_diff)
+
+    # if information is missing, return True only if not strict
+    return not strict
+
+
 def release_group_matches(video: Video, *, release_group: str | None = None, **kwargs: Any) -> bool:
     """Whether the video matches the `release_group`.
 
@@ -238,6 +261,7 @@ matches_manager: dict[str, MatchingFunc] = {
     'episode': episode_matches,
     'year': year_matches,
     'country': country_matches,
+    'fps': fps_matches,
     'release_group': release_group_matches,
     'streaming_service': streaming_service_matches,
     'resolution': resolution_matches,
@@ -247,23 +271,25 @@ matches_manager: dict[str, MatchingFunc] = {
 }
 
 
-def guess_matches(video: Video, guess: Mapping[str, Any], *, partial: bool = False) -> set[str]:
+def guess_matches(video: Video, guess: Mapping[str, Any], *, partial: bool = False, strict: bool = True) -> set[str]:
     """Get matches between a `video` and a `guess`.
 
-    If a guess is `partial`, the absence information won't be counted as a match.
+    If a guess is `partial`, the absence of information won't be counted as a match.
+    If a match is `strict`, the absence of information will be counted as a non-match.
 
     :param video: the video.
     :type video: :class:`~subliminal.video.Video`
     :param guess: the guess.
     :type guess: dict
     :param bool partial: whether or not the guess is partial.
+    :param bool strict: whether or not the match is strict.
     :return: matches between the `video` and the `guess`.
     :rtype: set
 
     """
     matches = set()
     for key in score_keys:
-        if key in matches_manager and matches_manager[key](video, partial=partial, **guess):
+        if key in matches_manager and matches_manager[key](video, partial=partial, strict=strict, **guess):
             matches.add(key)
 
     return matches

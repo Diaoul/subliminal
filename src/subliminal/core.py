@@ -252,7 +252,7 @@ class ProviderPool:
 
         # skip subtitles that do not match the FPS of the video (if defined)
         if skip_wrong_fps and video.frame_rate is not None and video.frame_rate > 0:
-            subtitles = [s for s in subtitles if s.fps is None or fps_matches(video, fps=s.fps)]
+            subtitles = [s for s in subtitles if fps_matches(video, fps=s.fps, strict=False)]
 
         # sort by hearing impaired and foreign only
         language_type = LanguageType.from_flags(hearing_impaired=hearing_impaired, foreign_only=foreign_only)

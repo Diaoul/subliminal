@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import os
 from datetime import datetime, timedelta, timezone
+from pathlib import Path
 from typing import Any
 from unittest.mock import Mock
 
@@ -25,6 +26,23 @@ from subliminal.video import Episode, Movie
 
 # Core test
 pytestmark = pytest.mark.core
+
+
+def ensure(path: str | os.PathLike[str], *, directory: bool = False) -> Path:
+    """Create a file (or directory) at path."""
+    path = Path(path)
+    if directory:
+        # Create a directory at path
+        if not path.is_dir():
+            path.mkdir(parents=True)
+
+    else:
+        # Create a directory at parent
+        if not path.parent.is_dir():
+            path.parent.mkdir(parents=True)
+        # Create a file at path
+        path.touch()
+    return path
 
 
 def test_check_video_languages(movies: dict[str, Movie]) -> None:
@@ -55,10 +73,10 @@ def test_check_video_undefined(movies: dict[str, Movie]) -> None:
     assert not check_video(video, undefined=True)
 
 
-def test_search_external_subtitles(episodes: dict[str, Episode], tmpdir) -> None:
+def test_search_external_subtitles(episodes: dict[str, Episode], tmp_path: Path) -> None:
     video_name = os.path.split(episodes['bbt_s07e05'].name)[1]
     video_root = os.path.splitext(video_name)[0]
-    video_path = str(tmpdir.ensure(video_name))
+    video_path = ensure(tmp_path / video_name)
     expected_subtitles = {
         video_name + '.srt': Language('und'),
         video_root + '.srt': Language('und'),
@@ -69,18 +87,18 @@ def test_search_external_subtitles(episodes: dict[str, Episode], tmpdir) -> None
         video_name + '.re.srt': Language('und'),
         video_name + '.something.srt': Language('und'),
     }
-    tmpdir.ensure(os.path.split(episodes['got_s03e10'].name)[1] + '.srt')
+    ensure(tmp_path / (os.path.basename(episodes['got_s03e10'].name) + '.srt'))
     for path in expected_subtitles:
-        tmpdir.ensure(path)
+        ensure(tmp_path / path)
     subtitles = search_external_subtitles(video_path)
     subtitle_languages = {path: subtitle.language for path, subtitle in subtitles.items()}
     assert subtitle_languages == expected_subtitles
 
 
-def test_search_external_subtitles_archive(movies: dict[str, Movie], tmpdir) -> None:
+def test_search_external_subtitles_archive(movies: dict[str, Movie], tmp_path: Path) -> None:
     video_name = os.path.split(movies['interstellar'].name)[1]
     video_root = os.path.splitext(video_name)[0]
-    video_path = str(tmpdir.ensure(video_name))
+    video_path = ensure(tmp_path / video_name)
     expected_subtitles = {
         video_name + '.srt': Language('und'),
         video_root + '.srt': Language('und'),
@@ -90,9 +108,9 @@ def test_search_external_subtitles_archive(movies: dict[str, Movie], tmpdir) -> 
         video_name + '.sr_cyrl.sub': Language('srp', script='Cyrl'),
         video_name + '.something.srt': Language('und'),
     }
-    tmpdir.ensure(os.path.split(movies['interstellar'].name)[1] + '.srt')
+    ensure(tmp_path / (os.path.split(movies['interstellar'].name)[1] + '.srt'))
     for path in expected_subtitles:
-        tmpdir.ensure(path)
+        ensure(tmp_path / path)
     subtitles = search_external_subtitles(video_path)
     subtitle_languages = {path: subtitle.language for path, subtitle in subtitles.items()}
     assert subtitle_languages == expected_subtitles
@@ -100,39 +118,39 @@ def test_search_external_subtitles_archive(movies: dict[str, Movie], tmpdir) -> 
 
 def test_search_external_subtitles_no_directory(
     movies: dict[str, Movie],
-    tmpdir,
+    tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     video_name = os.path.split(movies['man_of_steel'].name)[1]
     video_root = os.path.splitext(video_name)[0]
-    tmpdir.ensure(video_name)
-    monkeypatch.chdir(str(tmpdir))
+    ensure(tmp_path / video_name)
+    monkeypatch.chdir(tmp_path)
     expected_subtitles = {video_name + '.srt': Language('und'), video_root + '.en.srt': Language('eng')}
     for path in expected_subtitles:
-        tmpdir.ensure(path)
+        ensure(tmp_path / path)
     subtitles = search_external_subtitles(video_name)
     subtitle_languages = {path: subtitle.language for path, subtitle in subtitles.items()}
     assert subtitle_languages == expected_subtitles
 
 
-def test_search_external_subtitles_in_directory(episodes: dict[str, Episode], tmpdir) -> None:
+def test_search_external_subtitles_in_directory(episodes: dict[str, Episode], tmp_path: Path) -> None:
     video_name = episodes['marvels_agents_of_shield_s02e06'].name
     video_root = os.path.splitext(video_name)[0]
-    tmpdir.ensure('tvshows', video_name)
-    subtitles_directory = str(tmpdir.ensure('subtitles', dir=True))
+    ensure(tmp_path / 'tvshows' / video_name)
+    subtitles_directory = ensure(tmp_path / 'subtitles', directory=True)
     expected_subtitles = {video_name + '.srt': Language('und'), video_root + '.en.srt': Language('eng')}
-    tmpdir.ensure('tvshows', video_name + '.fr.srt')
+    ensure(tmp_path / 'tvshows' / (video_name + '.fr.srt'))
     for path in expected_subtitles:
-        tmpdir.ensure('subtitles', path)
+        ensure(tmp_path / 'subtitles' / path)
     subtitles = search_external_subtitles(video_name, directory=subtitles_directory)
     subtitle_languages = {path: subtitle.language for path, subtitle in subtitles.items()}
     assert subtitle_languages == expected_subtitles
 
 
-def test_scan_video_movie(movies: dict[str, Movie], tmpdir, monkeypatch: pytest.MonkeyPatch) -> None:
+def test_scan_video_movie(movies: dict[str, Movie], tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     video = movies['man_of_steel']
-    monkeypatch.chdir(str(tmpdir))
-    tmpdir.ensure(video.name)
+    monkeypatch.chdir(tmp_path)
+    ensure(tmp_path / video.name)
     scanned_video = scan_video(video.name)
     assert isinstance(scanned_video, Movie)
     assert scanned_video.name == video.name
@@ -149,10 +167,10 @@ def test_scan_video_movie(movies: dict[str, Movie], tmpdir, monkeypatch: pytest.
     assert scanned_video.year == video.year
 
 
-def test_scan_video_episode(episodes: dict[str, Episode], tmpdir, monkeypatch: pytest.MonkeyPatch) -> None:
+def test_scan_video_episode(episodes: dict[str, Episode], tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     video = episodes['bbt_s07e05']
-    monkeypatch.chdir(str(tmpdir))
-    tmpdir.ensure(video.name)
+    monkeypatch.chdir(tmp_path)
+    ensure(tmp_path / video.name)
     scanned_video = scan_video(video.name)
     assert isinstance(scanned_video, Episode)
     assert scanned_video.name == video.name
@@ -179,20 +197,24 @@ def test_scan_video_path_does_not_exist(movies: dict[str, Movie]) -> None:
     assert str(excinfo.value) == 'Path does not exist'
 
 
-def test_scan_video_invalid_extension(movies: dict[str, Movie], tmpdir, monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.chdir(str(tmpdir))
+def test_scan_video_invalid_extension(
+    movies: dict[str, Movie],
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.chdir(tmp_path)
     movie_name = os.path.splitext(movies['man_of_steel'].name)[0] + '.mp3'
-    tmpdir.ensure(movie_name)
+    ensure(tmp_path / movie_name)
     with pytest.raises(ValueError) as excinfo:
         scan_video(movie_name)
     assert str(excinfo.value) == "'.mp3' is not a valid video extension"
 
 
-def test_scan_video_broken(mkv: dict[str, str], tmpdir, monkeypatch: pytest.MonkeyPatch) -> None:
+def test_scan_video_broken(mkv: dict[str, str], tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     broken_path = 'test1.mkv'
-    with open(mkv['test1'], 'rb') as original, tmpdir.join(broken_path).open('wb') as broken:
+    with open(mkv['test1'], 'rb') as original, (tmp_path / broken_path).open('wb') as broken:
         broken.write(original.read(512))
-    monkeypatch.chdir(str(tmpdir))
+    monkeypatch.chdir(tmp_path)
     scanned_video = scan_video(broken_path)
     assert type(scanned_video) is Movie
     assert scanned_video.name == str(broken_path)
@@ -276,10 +298,14 @@ def test_scan_video_movie_name_path_does_not_exist(movies: dict[str, Movie]) -> 
     assert scanned_video.year == video.year
 
 
-def test_scan_archive_invalid_extension(movies: dict[str, Movie], tmpdir, monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.chdir(str(tmpdir))
+def test_scan_archive_invalid_extension(
+    movies: dict[str, Movie],
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.chdir(tmp_path)
     movie_name = os.path.splitext(movies['interstellar'].name)[0] + '.mp3'
-    tmpdir.ensure(movie_name)
+    ensure(tmp_path / movie_name)
     with pytest.raises(ArchiveError) as excinfo:
         scan_archive(movie_name)
     assert str(excinfo.value) == "'.mp3' is not a valid archive"
@@ -293,29 +319,29 @@ def test_scan_videos_path_does_not_exist(movies: dict[str, Movie]) -> None:
 
 def test_scan_videos_path_is_not_a_directory(
     movies: dict[str, Movie],
-    tmpdir,
+    tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    monkeypatch.chdir(str(tmpdir))
-    tmpdir.ensure(movies['man_of_steel'].name)
+    video = movies['man_of_steel']
+    monkeypatch.chdir(tmp_path)
+    ensure(tmp_path / video.name)
     with pytest.raises(ValueError) as excinfo:
         scan_videos(movies['man_of_steel'].name)
     assert str(excinfo.value) == 'Path is not a directory'
 
 
-def test_scan_videos(movies: dict[str, Movie], tmpdir, monkeypatch: pytest.MonkeyPatch) -> None:
-    man_of_steel = tmpdir.ensure('movies', movies['man_of_steel'].name)
-    tmpdir.ensure('movies', '.private', 'sextape.mkv')
-    tmpdir.ensure('movies', '.hidden_video.mkv')
-    tmpdir.ensure('movies', 'Sample', 'video.mkv')
-    tmpdir.ensure('movies', 'sample.mkv')
-    tmpdir.ensure('movies', movies['enders_game'].name)
-    tmpdir.ensure('movies', movies['interstellar'].name)
-    tmpdir.ensure('movies', os.path.splitext(movies['enders_game'].name)[0] + '.nfo')
-    tmpdir.ensure('movies', 'watched', dir=True)
-    watched_path = tmpdir.join('movies', 'watched', os.path.split(movies['man_of_steel'].name)[1])
-    if hasattr(watched_path, 'mksymlinkto'):
-        watched_path.mksymlinkto(man_of_steel)
+def test_scan_videos(movies: dict[str, Movie], tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    man_of_steel = ensure(tmp_path / 'movies' / movies['man_of_steel'].name)
+    ensure(tmp_path / 'movies' / '.private' / 'sextape.mkv')
+    ensure(tmp_path / 'movies' / '.hidden_video.mkv')
+    ensure(tmp_path / 'movies' / 'Sample' / 'video.mkv')
+    ensure(tmp_path / 'movies' / 'sample.mkv')
+    ensure(tmp_path / 'movies' / movies['enders_game'].name)
+    ensure(tmp_path / 'movies' / movies['interstellar'].name)
+    ensure(tmp_path / 'movies' / (os.path.splitext(movies['enders_game'].name)[0] + '.nfo'))
+    ensure(tmp_path / 'movies' / 'watched', directory=True)
+    watched_path = tmp_path / 'movies' / 'watched' / os.path.basename(movies['man_of_steel'].name)
+    watched_path.symlink_to(man_of_steel)
 
     # mock scan_video and scan_archive with the correct types
     mock_video = Mock(subtitle_languages=set())
@@ -323,7 +349,7 @@ def test_scan_videos(movies: dict[str, Movie], tmpdir, monkeypatch: pytest.Monke
     monkeypatch.setattr('subliminal.core.scan_video', mock_scan_video)
     mock_scan_archive = Mock(return_value=mock_video)
     monkeypatch.setattr('subliminal.core.scan_archive', mock_scan_archive)
-    monkeypatch.chdir(str(tmpdir))
+    monkeypatch.chdir(tmp_path)
     videos = scan_videos('movies')
 
     # general asserts
@@ -345,11 +371,10 @@ def test_scan_videos(movies: dict[str, Movie], tmpdir, monkeypatch: pytest.Monke
     mock_scan_archive.assert_has_calls(scan_archive_calls, any_order=True)  # type: ignore[arg-type]
 
 
-def test_scan_videos_age(movies: dict[str, Movie], tmpdir, monkeypatch: pytest.MonkeyPatch) -> None:
-    tmpdir.ensure('movies', movies['man_of_steel'].name)
-    tmpdir.ensure('movies', movies['enders_game'].name).setmtime(
-        timestamp(datetime.now(timezone.utc) - timedelta(days=10))
-    )
+def test_scan_videos_age(movies: dict[str, Movie], tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    ensure(tmp_path / 'movies' / movies['man_of_steel'].name)
+    ts = timestamp(datetime.now(timezone.utc) - timedelta(days=10))
+    os.utime(ensure(tmp_path / 'movies' / movies['enders_game'].name), (ts, ts))
 
     # mock scan_video and scan_archive with the correct types
     mock_video = Mock(subtitle_languages=set())
@@ -357,7 +382,7 @@ def test_scan_videos_age(movies: dict[str, Movie], tmpdir, monkeypatch: pytest.M
     monkeypatch.setattr('subliminal.core.scan_video', mock_scan_video)
     mock_scan_archive = Mock(return_value=mock_video)
     monkeypatch.setattr('subliminal.core.scan_archive', mock_scan_archive)
-    monkeypatch.chdir(str(tmpdir))
+    monkeypatch.chdir(tmp_path)
     videos = scan_videos('movies', age=timedelta(days=7))
 
     # general asserts
@@ -371,9 +396,9 @@ def test_scan_videos_age(movies: dict[str, Movie], tmpdir, monkeypatch: pytest.M
     mock_scan_video.assert_has_calls(scan_video_calls, any_order=True)  # type: ignore[arg-type]
 
 
-def test_save_subtitles(movies: dict[str, Movie], tmpdir, monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.chdir(str(tmpdir))
-    tmpdir.ensure(movies['man_of_steel'].name)
+def test_save_subtitles(movies: dict[str, Movie], tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.chdir(tmp_path)
+    ensure(tmp_path / movies['man_of_steel'].name)
     subtitle_no_content = Subtitle(Language('eng'), '')
     subtitle = Subtitle(Language('fra'), '')
     subtitle.content = b'Some content'
@@ -386,30 +411,30 @@ def test_save_subtitles(movies: dict[str, Movie], tmpdir, monkeypatch: pytest.Mo
     save_subtitles(movies['man_of_steel'], subtitles)
 
     # subtitle without content is skipped
-    path = os.path.join(str(tmpdir), os.path.splitext(movies['man_of_steel'].name)[0] + '.en.srt')
-    assert not os.path.exists(path)
+    path = tmp_path / (os.path.splitext(movies['man_of_steel'].name)[0] + '.en.srt')
+    assert not path.is_file()
 
     # first subtitle with language is saved
-    path = os.path.join(str(tmpdir), os.path.splitext(movies['man_of_steel'].name)[0] + '.fr.srt')
-    assert os.path.exists(path)
-    assert open(path, 'rb').read() == b'Some content'
+    path = tmp_path / (os.path.splitext(movies['man_of_steel'].name)[0] + '.fr.srt')
+    assert path.is_file()
+    assert path.open('rb').read() == b'Some content'
 
     # ietf language in path
-    path = os.path.join(str(tmpdir), os.path.splitext(movies['man_of_steel'].name)[0] + '.pt-BR.srt')
-    assert os.path.exists(path)
-    assert open(path, 'rb').read() == b'Some brazilian content'
+    path = tmp_path / (os.path.splitext(movies['man_of_steel'].name)[0] + '.pt-BR.srt')
+    assert path.is_file()
+    assert path.open('rb').read() == b'Some brazilian content'
 
 
-def test_save_subtitles_single_directory_encoding(movies: dict[str, Movie], tmpdir) -> None:
+def test_save_subtitles_single_directory_encoding(movies: dict[str, Movie], tmp_path: Path) -> None:
     subtitle = Subtitle(Language('jpn'), '')
     subtitle.content = 'ハローワールド'.encode('shift-jis')
     subtitle_pt_br = Subtitle(Language('por', 'BR'), '')
     subtitle_pt_br.content = b'Some brazilian content'
     subtitles = [subtitle, subtitle_pt_br]
 
-    save_subtitles(movies['man_of_steel'], subtitles, single=True, directory=str(tmpdir), encoding='utf-8')
+    save_subtitles(movies['man_of_steel'], subtitles, single=True, directory=os.fspath(tmp_path), encoding='utf-8')
 
     # first subtitle only and correctly encoded
-    path = os.path.join(str(tmpdir), os.path.splitext(os.path.split(movies['man_of_steel'].name)[1])[0] + '.srt')
-    assert os.path.exists(path)
-    assert open(path, encoding='utf-8').read() == 'ハローワールド'
+    path = tmp_path / (os.path.splitext(os.path.split(movies['man_of_steel'].name)[1])[0] + '.srt')
+    assert path.is_file()
+    assert path.open(encoding='utf-8').read() == 'ハローワールド'

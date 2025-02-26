@@ -11,6 +11,7 @@ from subliminal.providers.opensubtitles import (
     OpenSubtitlesVipProvider,
     Unauthorized,
 )
+from subliminal.video import Episode, Movie
 
 USERNAME = 'python-subliminal'
 PASSWORD = 'subliminal'
@@ -24,7 +25,7 @@ vcr = VCR(
 )
 
 
-def test_get_matches_movie_hash(movies):
+def test_get_matches_movie_hash(movies: dict[str, Movie]) -> None:
     subtitle = OpenSubtitlesSubtitle(
         language=Language('deu'),
         subtitle_id='1953771409',
@@ -46,7 +47,7 @@ def test_get_matches_movie_hash(movies):
     assert matches == {'title', 'year', 'country', 'video_codec', 'imdb_id', 'hash', 'resolution', 'source'}
 
 
-def test_get_matches_episode(episodes):
+def test_get_matches_episode(episodes: dict[str, Episode]) -> None:
     subtitle = OpenSubtitlesSubtitle(
         language=Language('ell'),
         subtitle_id='1953579014',
@@ -68,7 +69,7 @@ def test_get_matches_episode(episodes):
     assert matches == {'imdb_id', 'series', 'year', 'country', 'episode', 'season', 'title'}
 
 
-def test_get_matches_episode_year(episodes):
+def test_get_matches_episode_year(episodes: dict[str, Episode]) -> None:
     subtitle = OpenSubtitlesSubtitle(
         language=Language('spa'),
         subtitle_id='1953369959',
@@ -90,7 +91,7 @@ def test_get_matches_episode_year(episodes):
     assert matches == {'imdb_id', 'series', 'year', 'episode', 'season', 'title'}
 
 
-def test_get_matches_episode_filename(episodes):
+def test_get_matches_episode_filename(episodes: dict[str, Episode]) -> None:
     subtitle = OpenSubtitlesSubtitle(
         language=Language('por', country='BR'),
         subtitle_id='1954453973',
@@ -122,7 +123,7 @@ def test_get_matches_episode_filename(episodes):
     }
 
 
-def test_get_matches_episode_tag(episodes):
+def test_get_matches_episode_tag(episodes: dict[str, Episode]) -> None:
     subtitle = OpenSubtitlesSubtitle(
         language=Language('por', country='BR'),
         subtitle_id='1954453973',
@@ -144,7 +145,7 @@ def test_get_matches_episode_tag(episodes):
     assert matches == {'series', 'year', 'country', 'season', 'episode', 'source', 'video_codec'}
 
 
-def test_get_matches_imdb_id(movies):
+def test_get_matches_imdb_id(movies: dict[str, Movie]) -> None:
     subtitle = OpenSubtitlesSubtitle(
         language=Language('fra'),
         subtitle_id='1953767650',
@@ -166,7 +167,7 @@ def test_get_matches_imdb_id(movies):
     assert matches == {'title', 'year', 'country', 'video_codec', 'imdb_id', 'resolution', 'source', 'release_group'}
 
 
-def test_get_matches_no_match(episodes):
+def test_get_matches_no_match(episodes: dict[str, Episode]) -> None:
     subtitle = OpenSubtitlesSubtitle(
         language=Language('fra'),
         subtitle_id='1953767650',
@@ -188,12 +189,12 @@ def test_get_matches_no_match(episodes):
     assert matches == set()
 
 
-def test_configuration_error_no_username():
+def test_configuration_error_no_username() -> None:
     with pytest.raises(ConfigurationError):
         OpenSubtitlesProvider(password=PASSWORD)
 
 
-def test_configuration_error_no_password():
+def test_configuration_error_no_password() -> None:
     with pytest.raises(ConfigurationError):
         OpenSubtitlesProvider(username=USERNAME)
 
@@ -201,7 +202,7 @@ def test_configuration_error_no_password():
 @pytest.mark.skip('authorization no longer works on the old API')
 @pytest.mark.integration
 @vcr.use_cassette
-def test_login():
+def test_login() -> None:
     provider = OpenSubtitlesProvider(USERNAME, PASSWORD)
     assert provider.token is None
     provider.initialize()
@@ -210,7 +211,7 @@ def test_login():
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_login_bad_password():
+def test_login_bad_password() -> None:
     provider = OpenSubtitlesProvider(USERNAME, 'lanimilbus')
     with pytest.raises(Unauthorized):
         provider.initialize()
@@ -218,7 +219,7 @@ def test_login_bad_password():
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_login_vip_login():
+def test_login_vip_login() -> None:
     provider = OpenSubtitlesVipProvider(USERNAME, PASSWORD)
     with pytest.raises(Unauthorized):
         provider.initialize()
@@ -226,7 +227,7 @@ def test_login_vip_login():
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_login_vip_bad_password():
+def test_login_vip_bad_password() -> None:
     provider = OpenSubtitlesVipProvider(USERNAME, 'lanimilbus')
     with pytest.raises(Unauthorized):
         provider.initialize()
@@ -235,7 +236,7 @@ def test_login_vip_bad_password():
 @pytest.mark.skip('authorization no longer works on the old API')
 @pytest.mark.integration
 @vcr.use_cassette
-def test_logout():
+def test_logout() -> None:
     provider = OpenSubtitlesProvider(USERNAME, PASSWORD)
     provider.initialize()
     provider.terminate()
@@ -244,14 +245,14 @@ def test_logout():
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_no_operation():
+def test_no_operation() -> None:
     with OpenSubtitlesProvider() as provider:
         provider.no_operation()
 
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_query_not_enough_information():
+def test_query_not_enough_information() -> None:
     languages = {Language('eng')}
     with OpenSubtitlesProvider() as provider:  # noqa: SIM117
         with pytest.raises(ValueError) as excinfo:  # noqa: PT011
@@ -261,7 +262,7 @@ def test_query_not_enough_information():
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_query_query_movie(movies):
+def test_query_query_movie(movies: dict[str, Movie]) -> None:
     video = movies['man_of_steel']
     languages = {Language('fra')}
     expected_subtitles = {
@@ -284,7 +285,7 @@ def test_query_query_movie(movies):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_query_query_episode(episodes):
+def test_query_query_episode(episodes: dict[str, Episode]) -> None:
     video = episodes['dallas_2012_s01e03']
     languages = {Language('fra')}
     expected_subtitles = {'1953147577'}
@@ -297,7 +298,7 @@ def test_query_query_episode(episodes):
 @pytest.mark.skip('query by tag currently broken on opensubtitles')
 @pytest.mark.integration
 @vcr.use_cassette
-def test_query_tag_movie(movies):
+def test_query_tag_movie(movies: dict[str, Movie]) -> None:
     video = movies['interstellar']
     languages = {Language('fra')}
     expected_subtitles = {'1954121830'}
@@ -309,7 +310,7 @@ def test_query_tag_movie(movies):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_query_imdb_id(movies):
+def test_query_imdb_id(movies: dict[str, Movie]) -> None:
     video = movies['man_of_steel']
     languages = {Language('deu')}
     expected_subtitles = {
@@ -329,7 +330,7 @@ def test_query_imdb_id(movies):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_query_hash_size(movies):
+def test_query_hash_size(movies: dict[str, Movie]) -> None:
     video = movies['man_of_steel']
     languages = {Language('eng')}
     expected_subtitles = {
@@ -353,7 +354,7 @@ def test_query_hash_size(movies):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_query_wrong_hash_wrong_size():
+def test_query_wrong_hash_wrong_size() -> None:
     languages = {Language('eng')}
     with OpenSubtitlesProvider() as provider:
         subtitles = provider.query(languages, moviehash='123456787654321', size=99999)
@@ -362,7 +363,7 @@ def test_query_wrong_hash_wrong_size():
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_query_query_season_episode(episodes):
+def test_query_query_season_episode(episodes: dict[str, Episode]) -> None:
     video = episodes['bbt_s07e05']
     languages = {Language('deu')}
     expected_subtitles = {'1953771908', '1956168972'}
@@ -374,7 +375,7 @@ def test_query_query_season_episode(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_list_subtitles_movie(movies):
+def test_list_subtitles_movie(movies: dict[str, Movie]) -> None:
     video = movies['man_of_steel']
     languages = {Language('deu'), Language('fra')}
     expected_subtitles = {
@@ -421,7 +422,7 @@ def test_list_subtitles_movie(movies):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_list_subtitles_movie_no_hash(movies):
+def test_list_subtitles_movie_no_hash(movies: dict[str, Movie]) -> None:
     video = movies['enders_game']
     languages = {Language('deu')}
     expected_subtitles = {'1954157398', '1954156756', '1954443141'}
@@ -433,7 +434,7 @@ def test_list_subtitles_movie_no_hash(movies):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_list_subtitles_episode(episodes):
+def test_list_subtitles_episode(episodes: dict[str, Episode]) -> None:
     video = episodes['marvels_agents_of_shield_s02e06']
     languages = {Language('hun')}
     expected_subtitles = {'1954464403', '1955344515', '1954454544'}
@@ -445,7 +446,7 @@ def test_list_subtitles_episode(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_download_subtitle(movies):
+def test_download_subtitle(movies: dict[str, Movie]) -> None:
     video = movies['man_of_steel']
     languages = {Language('deu'), Language('fra')}
     with OpenSubtitlesProvider() as provider:
@@ -459,7 +460,7 @@ def test_download_subtitle(movies):
 @pytest.mark.skip('query by tag currently broken on opensubtitles')
 @pytest.mark.integration
 @vcr.use_cassette
-def test_tag_match(episodes):
+def test_tag_match(episodes: dict[str, Episode]) -> None:
     video = episodes['the fall']
     languages = {Language('por', 'BR')}
     unwanted_subtitle_id = '1954369181'  # 'Doc.Martin.S03E01.(24 September 2007).[TVRip (Xvid)]-spa.srt'

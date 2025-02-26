@@ -16,6 +16,7 @@ from subliminal.extensions import disabled_providers, provider_manager
 from subliminal.providers.tvsubtitles import TVsubtitlesSubtitle
 from subliminal.score import episode_scores
 from subliminal.subtitle import Subtitle
+from subliminal.video import Episode, Movie
 
 vcr = VCR(
     path_transformer=lambda path: path + '.yaml',
@@ -27,7 +28,7 @@ vcr = VCR(
 
 
 @pytest.fixture
-def _mock_providers(monkeypatch):
+def _mock_providers(monkeypatch: pytest.MonkeyPatch) -> None:
     for provider in provider_manager:
         monkeypatch.setattr(provider.plugin, 'initialize', Mock())
         monkeypatch.setattr(provider.plugin, 'list_subtitles', Mock(return_value=[provider.name]))
@@ -35,20 +36,20 @@ def _mock_providers(monkeypatch):
         monkeypatch.setattr(provider.plugin, 'terminate', Mock())
 
 
-def test_provider_pool_get_keyerror():
+def test_provider_pool_get_keyerror() -> None:
     pool = ProviderPool()
     with pytest.raises(KeyError):
         pool['de7cidda']
 
 
-def test_provider_pool_del_keyerror():
+def test_provider_pool_del_keyerror() -> None:
     pool = ProviderPool()
     with pytest.raises(KeyError):
         del pool['addic7ed']
 
 
 @pytest.mark.usefixtures('_mock_providers')
-def test_provider_pool_iter():
+def test_provider_pool_iter() -> None:
     pool = ProviderPool()
     assert len(list(pool)) == 0
     pool['tvsubtitles']
@@ -56,7 +57,7 @@ def test_provider_pool_iter():
 
 
 @pytest.mark.usefixtures('_mock_providers')
-def test_provider_pool_list_subtitles_provider(episodes):
+def test_provider_pool_list_subtitles_provider(episodes: dict[str, Episode]) -> None:
     pool = ProviderPool()
     subtitles = pool.list_subtitles_provider('tvsubtitles', episodes['bbt_s07e05'], {Language('eng')})
     assert subtitles == ['tvsubtitles']  # type: ignore[comparison-overlap]
@@ -65,7 +66,7 @@ def test_provider_pool_list_subtitles_provider(episodes):
 
 
 @pytest.mark.usefixtures('_mock_providers')
-def test_provider_pool_list_subtitles(episodes):
+def test_provider_pool_list_subtitles(episodes: dict[str, Episode]) -> None:
     pool = ProviderPool()
     subtitles = pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
     assert sorted(subtitles) == [  # type: ignore[type-var,comparison-overlap]
@@ -84,7 +85,7 @@ def test_provider_pool_list_subtitles(episodes):
 
 
 @pytest.mark.usefixtures('_mock_providers')
-def test_async_provider_pool_list_subtitles_provider(episodes):
+def test_async_provider_pool_list_subtitles_provider(episodes: dict[str, Episode]) -> None:
     pool = AsyncProviderPool()
     subtitles = pool.list_subtitles_provider_tuple('tvsubtitles', episodes['bbt_s07e05'], {Language('eng')})
     assert subtitles == ('tvsubtitles', ['tvsubtitles'])  # type: ignore[comparison-overlap]
@@ -93,7 +94,7 @@ def test_async_provider_pool_list_subtitles_provider(episodes):
 
 
 @pytest.mark.usefixtures('_mock_providers')
-def test_async_provider_pool_list_subtitles(episodes):
+def test_async_provider_pool_list_subtitles(episodes: dict[str, Episode]) -> None:
     pool = AsyncProviderPool()
     subtitles = pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
     assert sorted(subtitles) == [  # type: ignore[type-var,comparison-overlap]
@@ -112,7 +113,7 @@ def test_async_provider_pool_list_subtitles(episodes):
 
 
 @pytest.mark.usefixtures('_mock_providers')
-def test_list_subtitles_movie(movies):
+def test_list_subtitles_movie(movies: dict[str, Movie]) -> None:
     video = movies['man_of_steel']
     languages = {Language('eng')}
 
@@ -131,7 +132,7 @@ def test_list_subtitles_movie(movies):
 
 
 @pytest.mark.usefixtures('_mock_providers')
-def test_list_subtitles_episode(episodes):
+def test_list_subtitles_episode(episodes: dict[str, Episode]) -> None:
     video = episodes['bbt_s07e05']
     languages = {Language('eng'), Language('heb')}
 
@@ -168,7 +169,7 @@ def test_list_subtitles_episode(episodes):
 
 
 @pytest.mark.usefixtures('_mock_providers')
-def test_list_subtitles_providers(episodes):
+def test_list_subtitles_providers(episodes: dict[str, Episode]) -> None:
     video = episodes['bbt_s07e05']
     languages = {Language('eng')}
 
@@ -187,7 +188,7 @@ def test_list_subtitles_providers(episodes):
 
 
 @pytest.mark.usefixtures('_mock_providers')
-def test_list_subtitles_episode_no_hash(episodes):
+def test_list_subtitles_episode_no_hash(episodes: dict[str, Episode]) -> None:
     video = episodes['dallas_s01e03']
     languages = {Language('eng'), Language('heb')}
 
@@ -215,7 +216,7 @@ def test_list_subtitles_episode_no_hash(episodes):
 
 
 @pytest.mark.usefixtures('_mock_providers')
-def test_list_subtitles_no_language(episodes):
+def test_list_subtitles_no_language(episodes: dict[str, Episode]) -> None:
     video = episodes['dallas_s01e03']
     languages = {Language('eng')}
     video.subtitles = {Subtitle(lang) for lang in languages}
@@ -239,7 +240,7 @@ def test_list_subtitles_no_language(episodes):
 
 
 @pytest.mark.usefixtures('_mock_providers')
-def test_download_subtitles():
+def test_download_subtitles() -> None:
     subtitles = [
         TVsubtitlesSubtitle(
             language=Language('por'),
@@ -266,7 +267,7 @@ def test_download_subtitles():
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_download_best_subtitles(episodes):
+def test_download_best_subtitles(episodes: dict[str, Episode]) -> None:
     video = episodes['bbt_s07e05']
     languages = {Language('eng'), Language('fra')}
     providers = ['gestdown', 'podnapisi']
@@ -286,7 +287,7 @@ def test_download_best_subtitles(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_download_best_subtitles_min_score(episodes):
+def test_download_best_subtitles_min_score(episodes: dict[str, Episode]) -> None:
     video = episodes['bbt_s07e05']
     languages = {Language('fra')}
     providers = ['gestdown']
@@ -297,7 +298,7 @@ def test_download_best_subtitles_min_score(episodes):
     assert len(subtitles[video]) == 0
 
 
-def test_download_best_subtitles_no_language(episodes):
+def test_download_best_subtitles_no_language(episodes: dict[str, Episode]) -> None:
     video = episodes['bbt_s07e05']
     languages = {Language('fra')}
     video.subtitles = {Subtitle(lang) for lang in languages}
@@ -308,7 +309,7 @@ def test_download_best_subtitles_no_language(episodes):
     assert len(subtitles) == 0
 
 
-def test_download_best_subtitles_undefined(episodes):
+def test_download_best_subtitles_undefined(episodes: dict[str, Episode]) -> None:
     video = episodes['bbt_s07e05']
     languages = {Language('und')}
     video.subtitles = {Subtitle(lang) for lang in languages}
@@ -323,7 +324,7 @@ def test_download_best_subtitles_undefined(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_download_best_subtitles_only_one(episodes):
+def test_download_best_subtitles_only_one(episodes: dict[str, Episode]) -> None:
     video = episodes['bbt_s07e05']
     languages = {Language('eng'), Language('por', 'BR')}
     providers = ['gestdown', 'podnapisi']
@@ -342,7 +343,7 @@ def test_download_best_subtitles_only_one(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_download_bad_subtitle(movies):
+def test_download_bad_subtitle(movies: dict[str, Movie]) -> None:
     pool = ProviderPool()
     subtitles = pool.list_subtitles_provider('opensubtitles', movies['man_of_steel'], {Language('eng')})
     assert subtitles is not None
@@ -358,7 +359,7 @@ def test_download_bad_subtitle(movies):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_list_subtitles_providers_download(episodes):
+def test_list_subtitles_providers_download(episodes: dict[str, Episode]) -> None:
     video = episodes['bbt_s07e05']
     languages = {Language('eng')}
 

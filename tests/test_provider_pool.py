@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-import logging
-import sys
 from typing import TYPE_CHECKING, cast
 from unittest.mock import Mock, call
 
@@ -33,15 +31,6 @@ pytestmark = [
     pytest.mark.usefixtures('provider_manager'),
     pytest.mark.usefixtures('disabled_providers'),
 ]
-
-root = logging.getLogger('subliminal')
-root.setLevel(logging.DEBUG)
-
-handler = logging.StreamHandler(sys.stdout)
-handler.setLevel(logging.DEBUG)
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-handler.setFormatter(formatter)
-root.addHandler(handler)
 
 
 @pytest.fixture

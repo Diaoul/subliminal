@@ -469,9 +469,15 @@ def cache(ctx: click.Context, clear_subliminal: bool) -> None:
         'Do not use this unless your media player requires it.'
     ),
 )
-@click.option('-f', '--force', is_flag=True, default=False, help='Force download even if a subtitle already exist.')
 @click.option(
-    '-w',
+    '-f',
+    '--force',
+    is_flag=True,
+    default=False,
+    help='Force download even if a subtitle already exist.',
+)
+@click.option(
+    '-W',
     '--skip-wrong-fps',
     is_flag=True,
     default=False,
@@ -531,7 +537,13 @@ def cache(ctx: click.Context, clear_subliminal: bool) -> None:
     default='alpha2',
     help='Format of the language code in the saved subtitle name. Default is a 2-letter language code.',
 )
-@click.option('-w', '--max-workers', type=click.IntRange(1, 50), default=None, help='Maximum number of threads to use.')
+@click.option(
+    '-w',
+    '--max-workers',
+    type=click.IntRange(1, 50),
+    default=None,
+    help='Maximum number of threads to use.',
+)
 @click.option(
     '-z/-Z',
     '--archives/--no-archives',

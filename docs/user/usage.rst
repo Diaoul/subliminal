@@ -140,8 +140,8 @@ And then compute a score with those matches with :func:`~subliminal.score.comput
 
     >>> for s in subtitles[video]:
     ...     {s: compute_score(s, video)}
-    {<PodnapisiSubtitle 'ZtAW' [hu]>: 941}
-    {<PodnapisiSubtitle 'ONAW' [hu]>: 922}
+    {<PodnapisiSubtitle 'ZtAW' [hu]>: 789}
+    {<PodnapisiSubtitle 'ONAW' [hu]>: 772}
 
 Now you should have a better idea about which one you should choose.
 

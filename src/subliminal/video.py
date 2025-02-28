@@ -338,7 +338,7 @@ class Episode(Video):
         name: str,
         series: str,
         season: int,
-        episodes: int | Sequence[int],
+        episodes: int | Sequence[int] | None,
         *,
         original_series: bool = True,
         tvdb_id: int | None = None,

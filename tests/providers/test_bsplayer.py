@@ -1,10 +1,12 @@
 import os
+from pathlib import Path
 
 import pytest
 from babelfish import Language  # type: ignore[import-untyped]
 from vcr import VCR  # type: ignore[import-untyped]
 
 from subliminal.providers.bsplayer import BSPlayerProvider, BSPlayerSubtitle
+from subliminal.video import Episode, Movie
 
 vcr = VCR(
     path_transformer=lambda path: path + '.yaml',
@@ -17,16 +19,17 @@ vcr = VCR(
 SEARCH_URL = 'http://s1.api.bsplayer-subtitles.com/v1.php'
 
 
-def test_hash_bsplayer(mkv):
+def test_hash_bsplayer(mkv: dict[str, str]) -> None:
     assert BSPlayerProvider.hash_video(mkv['test1']) == '40b44a7096b71ec3'
 
 
-def test_hash_bsplayer_too_small(tmpdir):
-    path = tmpdir.ensure('test_too_small.mkv')
+def test_hash_bsplayer_too_small(tmp_path: Path) -> None:
+    path = tmp_path / 'test_too_small.mkv'
+    path.touch()
     assert BSPlayerProvider.hash_video(str(path)) is None
 
 
-def test_get_matches_movie_hash(episodes):
+def test_get_matches_movie_hash(episodes: dict[str, Episode]) -> None:
     subtitle = BSPlayerSubtitle(
         subtitle_id='16442520',
         size=12185,
@@ -54,7 +57,7 @@ def test_get_matches_movie_hash(episodes):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_login():
+def test_login() -> None:
     provider = BSPlayerProvider(search_url=SEARCH_URL)
     assert provider.token is None
     provider.initialize()
@@ -63,7 +66,7 @@ def test_login():
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_logout():
+def test_logout() -> None:
     provider = BSPlayerProvider(search_url=SEARCH_URL)
     provider.initialize()
     provider.terminate()
@@ -72,7 +75,7 @@ def test_logout():
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_query_hash_size(movies):
+def test_query_hash_size(movies: dict[str, Movie]) -> None:
     video = movies['man_of_steel']
     languages = {Language('spa')}
     expected_subtitles = {
@@ -106,7 +109,7 @@ def test_query_hash_size(movies):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_list_subtitles_hash(movies):
+def test_list_subtitles_hash(movies: dict[str, Movie]) -> None:
     video = movies['man_of_steel']
     languages = {Language('deu'), Language('fra')}
     expected_subtitles = {'21230278', '16456646', '16448284', '16456702'}
@@ -119,7 +122,7 @@ def test_list_subtitles_hash(movies):
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_download_subtitle(episodes):
+def test_download_subtitle(episodes: dict[str, Episode]) -> None:
     video = episodes['bbt_s07e05']
     languages = {Language('eng'), Language('spa')}
     with BSPlayerProvider(search_url=SEARCH_URL) as provider:

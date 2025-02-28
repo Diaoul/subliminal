@@ -229,7 +229,7 @@ class TVsubtitlesProvider(Provider):
         show_id: int,
         series: str,
         season: int,
-        episode: int,
+        episode: int | None,
         year: int | None = None,
     ) -> list[TVsubtitlesSubtitle]:
         """Query the episode with the show_id."""

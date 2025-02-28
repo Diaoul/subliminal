@@ -47,7 +47,9 @@ jobs:
           python-version-file: .python-version-default
       - name: Install hatch
         run: python -Im pip install hatch
-      - name: type-check
+      - name: Setup types environment
+        run: hatch -v env create types
+      - name: Type check
         run: hatch run types:run
 
   docs:

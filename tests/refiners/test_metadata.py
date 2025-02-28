@@ -52,7 +52,7 @@ def test_get_float_error() -> None:
     ],
 )
 def test_get_subtitle_format(value: str | None, expected: str | None) -> None:
-    """Convert str subrip -> srt"""
+    """Convert str subrip -> srt."""
     subtitle_format = get_subtitle_format(value)
     assert subtitle_format == expected
 
@@ -117,7 +117,7 @@ def test_refine_video_metadata_no_provider(mkv: dict[str, Any]) -> None:
     assert len(scanned_video.subtitle_languages) >= 7
 
 
-def test_refine_video_metadata_wrong_provider(mkv: dict[str, Any], caplog) -> None:
+def test_refine_video_metadata_wrong_provider(mkv: dict[str, Any], caplog: pytest.LogCaptureFixture) -> None:
     scanned_video = scan_video(mkv['test5'])
     with caplog.at_level(logging.WARNING):
         refine(scanned_video, embedded_subtitles=True, metadata_provider='not-a-provider')

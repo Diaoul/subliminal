@@ -651,7 +651,8 @@ def download(
             if debug:
                 # print a new line, so the logs appear below the progressbar
                 click.echo()
-            p = os.path.abspath(os.path.expanduser(p))
+            # expand user in case an absolute path is provided
+            p = os.path.expanduser(p)
             logger.debug('Collecting path %s', p)
 
             video_candidates: list[Video] = []

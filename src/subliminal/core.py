@@ -515,26 +515,58 @@ def scan_video(path: str | os.PathLike, name: str | None = None) -> Video:
     return video
 
 
-def scan_videos(
+def scan_video_or_archive(path: str | os.PathLike, name: str | None = None) -> Video:
+    """Scan a video or an archive from a `path`.
+
+    :param str path: existing path to the video or archive.
+    :param str name: if defined, name to use with guessit instead of the path.
+    :return: the scanned video.
+    :rtype: :class:`~subliminal.video.Video`
+    :raises: :class:`ValueError`: video path is not well defined.
+    """
+    path = os.fspath(path)
+    # check for non-existing path
+    if not os.path.exists(path):
+        msg = 'Path does not exist'
+        raise ValueError(msg)
+
+    # scan
+    filename = os.path.basename(path)
+    if filename.lower().endswith(VIDEO_EXTENSIONS):
+        # scan video
+        return scan_video(path, name=name)
+
+    if is_supported_archive(filename):
+        # scan archive
+        try:
+            video = scan_archive(path, name=name)
+        except ArchiveError as e:
+            # Re-raise as a ValueError
+            msg = 'Error scanning archive'
+            raise ValueError(msg) from e
+        return video
+
+    msg = f'Unsupported file {filename!r}'  # pragma: no cover
+    raise ValueError(msg)  # pragma: no cover
+
+
+def collect_video_filepaths(
     path: str | os.PathLike,
     *,
     age: timedelta | None = None,
     use_ctime: bool = False,
     archives: bool = True,
     name: str | None = None,
-) -> list[Video]:
-    """Scan `path` for videos and their subtitles.
-
-    See :func:`refine` to find additional information for the video.
+) -> list[str]:
+    """Collect video file paths in directory `path`.
 
     :param str path: existing directory path to scan.
     :param datetime.timedelta age: maximum age of the video or archive.
     :param bool use_ctime: use the latest of creation time and modification time to compute the age of the video,
         instead of just modification time.
     :param bool archives: scan videos in archives.
-    :param str name: name to use with guessit instead of the path.
-    :return: the scanned videos.
-    :rtype: list of :class:`~subliminal.video.Video`
+    :return: the collected video file names.
+    :rtype: list of str
     :raises: :class:`ValueError`: video path is not well defined.
     """
     path = os.fspath(path)
@@ -549,7 +581,7 @@ def scan_videos(
         raise ValueError(msg)
 
     # walk the path
-    videos = []
+    video_filepaths = []
     for dirpath, dirnames, filenames in os.walk(path):
         logger.debug('Walking directory %r', dirpath)
 
@@ -599,24 +631,43 @@ def scan_videos(
                     logger.debug('Skipping old file %r in %r', filename, dirpath)
                     continue
 
-            # scan
-            if filename.lower().endswith(VIDEO_EXTENSIONS):  # video
-                try:
-                    video = scan_video(filepath, name=name)
-                except ValueError:  # pragma: no cover
-                    logger.exception('Error scanning video')
-                    continue
-            elif archives and is_supported_archive(filename):  # archive
-                try:
-                    video = scan_archive(filepath, name=name)
-                except (ArchiveError, ValueError):  # pragma: no cover
-                    logger.exception('Error scanning archive')
-                    continue
-            else:  # pragma: no cover
-                msg = f'Unsupported file {filename!r}'
-                raise ValueError(msg)
+            video_filepaths.append(filepath)
 
-            videos.append(video)
+    return video_filepaths
+
+
+def scan_videos(
+    path: str | os.PathLike,
+    *,
+    age: timedelta | None = None,
+    use_ctime: bool = False,
+    archives: bool = True,
+    name: str | None = None,
+) -> list[Video]:
+    """Scan `path` for videos and their subtitles.
+
+    See :func:`refine` to find additional information for the video.
+
+    :param str path: existing directory path to scan.
+    :param datetime.timedelta age: maximum age of the video or archive.
+    :param bool use_ctime: use the latest of creation time and modification time to compute the age of the video,
+        instead of just modification time.
+    :param bool archives: scan videos in archives.
+    :param str name: name to use with guessit instead of the path.
+    :return: the scanned videos.
+    :rtype: list of :class:`~subliminal.video.Video`
+    :raises: :class:`ValueError`: video path is not well defined.
+    """
+    filepaths = collect_video_filepaths(path, age=age, use_ctime=use_ctime, archives=archives)
+
+    videos = []
+    for filepath in filepaths:
+        try:
+            video = scan_video_or_archive(filepath, name=name)
+        except ValueError:
+            logger.exception('Error scanning video')
+            continue
+        videos.append(video)
 
     return videos
 

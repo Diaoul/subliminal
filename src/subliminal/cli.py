@@ -44,6 +44,7 @@ from subliminal.core import (
     scan_video_or_archive,
     search_external_subtitles,
 )
+from subliminal.exceptions import GuessingError
 from subliminal.extensions import get_default_providers, get_default_refiners
 from subliminal.utils import get_parameters_from_signature, merge_extend_and_ignore_unions
 
@@ -679,6 +680,16 @@ def download(
                         video = scan_video_or_archive(filepath, name=name)
                     else:
                         video = scan_name(filepath, name=name)
+
+                except GuessingError as e:
+                    # Show a simple error message
+                    if verbose > 0:
+                        # new line was already added with debug
+                        if not debug:
+                            click.echo()
+                        click.secho(e, fg='yellow')
+                    errored_paths.append(filepath)
+                    continue
 
                 except ValueError:
                     logger.exception(

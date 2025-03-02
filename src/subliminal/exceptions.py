@@ -13,6 +13,12 @@ class ArchiveError(Error):
     pass
 
 
+class GuessingError(Error, ValueError):
+    """ValueError raised when guessit cannot guess a video."""
+
+    pass
+
+
 class ProviderError(Error):
     """Exception raised by providers."""
 

@@ -485,6 +485,25 @@ def test_download_best_subtitles_language_type(episodes: dict[str, Episode]) -> 
     assert {(s.provider_name, s.id) for s in subtitles[video]} == expected_subtitles
 
 
+def test_download_best_subtitles_wrong_fps(episodes: dict[str, Episode]) -> None:
+    video = episodes['bbt_s07e05']
+    languages = {Language('eng'), Language('fra')}
+    providers = ['tvsubtitles', 'gestdown']
+    # with skip_wrong_fps=False, tvsubtitles would be best for Language('eng')
+    expected_subtitles = {
+        # ('tvsubtitles', '23329'),
+        ('gestdown', 'a295515c-a460-44ea-9ba8-8d37bcb9b5a6'),
+        ('gestdown', '90fe1369-fa0c-4154-bd04-d3d332dec587'),
+    }
+
+    assert video.frame_rate == 23.976
+    subtitles = download_best_subtitles({video}, languages, providers=providers, skip_wrong_fps=True)
+
+    assert len(subtitles) == 1
+    assert len(subtitles[video]) == 2
+    assert {(s.provider_name, s.id) for s in subtitles[video]} == expected_subtitles
+
+
 def test_download_bad_subtitle(movies: dict[str, Movie]) -> None:
     pool = ProviderPool()
     subtitles = pool.list_subtitles_provider('opensubtitlescom', movies['man_of_steel'], {Language('tur')})

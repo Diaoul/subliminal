@@ -147,7 +147,8 @@ jobs:
               file_handler.write(f"FORCE_COLOR=1\nENV={py}\n")
         shell: python
       - name: Install other test software (on Linux only)
-        if: matrix.os == 'ubuntu-latest'
+        # Keep python version to latest release
+        if: matrix.os == 'ubuntu-latest' && matrix.py == 3.13
         uses: awalsh128/cache-apt-pkgs-action@v1
         with:
           packages: rar

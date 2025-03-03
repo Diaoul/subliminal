@@ -81,8 +81,9 @@ Video
 ^^^^^
 The :class:`~subliminal.video.Movie` and :class:`~subliminal.video.Episode` classes represent a video,
 existing or not. You can create a video by name (or path) with :meth:`Video.fromname <subliminal.video.Video.fromname>`,
-use :func:`~subliminal.core.scan_video` on an existing file path to get even more information about the video or
-use :func:`~subliminal.core.scan_videos` on an existing directory path to scan a whole directory for videos.
+use :func:`~subliminal.core.scan_video` on an existing file path, or :func:`~subliminal.core.scan_name`
+on a non-existing file path, to get even more information about the video or use :func:`~subliminal.core.scan_videos`
+on an existing directory path to scan a whole directory for videos.
 
     >>> video = Video.fromname('The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.mp4')
     >>> video
@@ -94,6 +95,12 @@ Here video information was guessed based on the name of the video, you can acces
     'H.264'
     >>> video.release_group
     'LOL'
+
+Video information is guessed using the path, not only the file name. This helps guessing episodes such as:
+
+    >>> video = Video.fromname('Mrs.America/01x01.mp4')
+    >>> video
+    <Episode [Mrs America s01e01]>
 
 Configuration
 ^^^^^^^^^^^^^

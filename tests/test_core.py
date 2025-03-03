@@ -4,6 +4,7 @@ from __future__ import annotations
 import os
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from textwrap import dedent
 from typing import Any
 from unittest.mock import Mock
 
@@ -438,3 +439,52 @@ def test_save_subtitles_single_directory_encoding(movies: dict[str, Movie], tmp_
     path = tmp_path / (os.path.splitext(os.path.split(movies['man_of_steel'].name)[1])[0] + '.srt')
     assert path.is_file()
     assert path.open(encoding='utf-8').read() == 'ハローワールド'
+
+
+def test_save_subtitles_convert(movies: dict[str, Movie], tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    video = movies['man_of_steel']
+
+    monkeypatch.chdir(tmp_path)
+    ensure(tmp_path / video.name)
+
+    text = dedent(
+        """\
+        [Script Info]
+        WrapStyle: 0
+        ScaledBorderAndShadow: yes
+        Collisions: Normal
+        ScriptType: v4.00+
+
+        [V4+ Styles]
+        Format: Name, Fontname, Fontsize, PrimaryColour
+        Style: Default,Arial,20,&H00FFFFFF
+
+        [Events]
+        Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+        Dialogue: 0,0:00:49.54,0:00:52.96,Default,,0,0,0,,Tłumaczenie:\\Nsinu6
+        Dialogue: 0,0:02:11.08,0:02:12.88,Default,,0,0,0,,/Nie rozumiecie?
+        """
+    )
+    subtitle = Subtitle(Language('pol'), '')
+    subtitle.content = text.encode('utf-8')
+    subtitles = [subtitle]
+
+    save_subtitles(video, subtitles, single=True, subtitle_format='srt')
+
+    # converted to srt
+    srt_text = dedent(
+        """\
+        1
+        00:00:49,540 --> 00:00:52,960
+        Tłumaczenie:
+        sinu6
+
+        2
+        00:02:11,080 --> 00:02:12,880
+        /Nie rozumiecie?
+
+        """
+    )
+    path = tmp_path / (os.path.splitext(video.name)[0] + '.srt')
+    assert path.is_file()
+    assert path.open(encoding='utf-8').read() == srt_text

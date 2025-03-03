@@ -875,7 +875,7 @@ def rar(mkv: dict[str, str]) -> dict[str, str]:
         existing_videos = [v for v in videos if v and os.path.isfile(v)]
         filename = os.path.join(data_path, name + '.rar')
         if not os.path.exists(filename):
-            subprocess.run(['rar', 'a', '-ep', filename, *existing_videos], check=True)
+            subprocess.run(['rar', 'a', '-ep', filename, *existing_videos])
         if os.path.exists(filename):
             files[name] = filename
 

@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import os
+import sys
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from textwrap import dedent
@@ -28,6 +29,11 @@ from subliminal.video import Episode, Movie
 
 # Core test
 pytestmark = pytest.mark.core
+
+unix_platform = pytest.mark.skipif(
+    not sys.platform.startswith('linux'),
+    reason='only on linux platform',
+)
 
 
 def ensure(path: str | os.PathLike[str], *, directory: bool = False) -> Path:
@@ -302,6 +308,7 @@ def test_scan_video_movie_name_path_does_not_exist(movies: dict[str, Movie]) -> 
     assert scanned_video.year == video.year
 
 
+@unix_platform
 def test_scan_archive_error(
     rar: dict[str, str],
 ) -> None:
@@ -313,6 +320,7 @@ def test_scan_archive_error(
         scan_video_or_archive(path)
 
 
+@unix_platform
 def test_scan_videos_error(
     rar: dict[str, str],
     caplog: pytest.LogCaptureFixture,

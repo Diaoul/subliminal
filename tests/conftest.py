@@ -113,6 +113,7 @@ def episodes() -> dict[str, Episode]:
             resolution='720p',
             video_codec='H.264',
             audio_codec='Dolby Digital',
+            frame_rate=23.976,
             imdb_id='tt3229392',
             size=501910737,
             hashes={
@@ -725,6 +726,7 @@ def provider_manager(monkeypatch: pytest.MonkeyPatch) -> Generator[RegistrableEx
             ),
             'video_name': episode_name,
             'matches': {'episode', 'season', 'series'},
+            'fps': 24,
         },
         {
             'language': Language.fromietf('hu'),
@@ -781,6 +783,7 @@ def provider_manager(monkeypatch: pytest.MonkeyPatch) -> Generator[RegistrableEx
             ),
             'video_name': episode_name,
             'matches': {'country', 'episode', 'season', 'series', 'video_codec', 'year'},
+            'fps': 60,
         },
     ]
 

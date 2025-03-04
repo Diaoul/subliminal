@@ -165,7 +165,7 @@ jobs:
         with:
           python-version: ${{ matrix.py }}
           allow-prereleases: true
-      - uses: actions/download-artifact
+      - uses: actions/download-artifact@v4
         with:
           name: tests-data
           merge-multiple: true
@@ -276,6 +276,10 @@ jobs:
         id: setup
         with:
           python-version-file: .python-version-default
+      - uses: actions/download-artifact@v4
+        with:
+          name: tests-data
+          merge-multiple: true
       - name: Install hatch
         run: python -Im pip install hatch
 

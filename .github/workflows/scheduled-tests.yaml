@@ -5,6 +5,8 @@ on:
     - cron: "12 12 12 * *" # run once a month on the 12th at 12:12
   workflow_dispatch:
 
+permissions: {}
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true

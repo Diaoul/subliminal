@@ -5,6 +5,8 @@ on:
     branches: [main]
   pull_request: {}
 
+permissions: {}
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -115,10 +117,43 @@ jobs:
       # packaging metadata (trove classifiers).
       supported-python-versions: ${{ steps.baipp.outputs.supported_python_classifiers_json_array }}
 
+  prepare-test:
+    name: Download data for tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Install other test software (on Linux only)
+        uses: awalsh128/cache-apt-pkgs-action@v1
+        with:
+          packages: rar
+          version: 1.0
+      - uses: actions/setup-python@v5
+        with:
+          python-version-file: .python-version-default
+          cache: pip
+      - name: Install dependencies
+        run: |
+          python -Im pip install --upgrade pip
+          python -Im pip install tox requests
+      - name: Download tests data
+        run: |
+          tox -e prepare-tests
+      - name: Upload files for test
+        uses: actions/upload-artifact@v4
+        with:
+          name: tests-data
+          path: tests/data/
+          include-hidden-files: false
+          if-no-files-found: error
+
   test:
     name: Test
     runs-on: ${{ matrix.os }}
-    needs: build-package
+    needs: [build-package, prepare-test]
     strategy:
       fail-fast: false
       matrix:
@@ -133,6 +168,14 @@ jobs:
         with:
           python-version: ${{ matrix.py }}
           allow-prereleases: true
+      - uses: actions/download-artifact@v4
+        with:
+          name: tests-data
+          path: tests/data/
+          merge-multiple: true
+      - name: Display downloaded files
+        run: ls -R tests/data
+
       - name: Install hatch
         run: python -Im pip install hatch
 
@@ -146,12 +189,6 @@ jobs:
           with codecs.open(os.environ["GITHUB_ENV"], mode="a", encoding="utf-8") as file_handler:
               file_handler.write(f"FORCE_COLOR=1\nENV={py}\n")
         shell: python
-      - name: Install other test software (on Linux only)
-        if: matrix.os == 'ubuntu-latest'
-        uses: awalsh128/cache-apt-pkgs-action@v1
-        with:
-          packages: rar
-          version: 1.0
       - name: Setup test environment
         run: |
           hatch -v env create ${ENV}
@@ -235,7 +272,7 @@ jobs:
   core-coverage:
     name: Core Coverage
     runs-on: ubuntu-latest
-    needs: build-package
+    needs: [build-package, prepare-test]
     if: false
     steps:
       - uses: actions/checkout@v4
@@ -245,14 +282,12 @@ jobs:
         id: setup
         with:
           python-version-file: .python-version-default
+      - uses: actions/download-artifact@v4
+        with:
+          name: tests-data
+          merge-multiple: true
       - name: Install hatch
         run: python -Im pip install hatch
-
-      - name: Install other test software (on Linux only)
-        uses: awalsh128/cache-apt-pkgs-action@v1
-        with:
-          packages: rar
-          version: 1.0
 
       - name: Pick environment to run
         env:

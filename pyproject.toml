@@ -220,6 +220,7 @@ unfixable = [
 "docs/conf*.py" = ["A001", "D"]
 "src/subliminal/__init__.py" = ["E402"]
 "tests/*.py" = ["D", "S", "RUF012", "FBT"]
+"scripts/*.py" = ["T201"]
 
 # https://docs.astral.sh/ruff/formatter/
 [tool.ruff.format]

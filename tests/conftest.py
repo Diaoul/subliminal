@@ -3,6 +3,7 @@ from __future__ import annotations
 import os
 import subprocess
 from io import BytesIO
+from pathlib import Path
 from typing import TYPE_CHECKING
 from unittest.mock import Mock
 from zipfile import ZipFile
@@ -22,7 +23,7 @@ from subliminal.providers.mock import MockSubtitle, mock_subtitle_provider
 if TYPE_CHECKING:
     from collections.abc import Generator
 
-TESTS = os.path.dirname(__file__)
+TESTS_DIR = Path(__file__).parent
 
 
 @pytest.fixture(autouse=True, scope='session')
@@ -820,7 +821,12 @@ def disabled_providers(monkeypatch: pytest.MonkeyPatch) -> Generator[list[str], 
 
 @pytest.fixture(scope='session')
 def mkv() -> dict[str, str]:
-    data_path = os.path.join(TESTS, 'data', 'mkv')
+    """Collect a dict of mkv paths.
+
+    Run scripts/prepare_tests.py to download the files before if tests are run
+    in parallel or if they are repeated to avoid multiple downloads.
+    """
+    data_path = TESTS_DIR / 'data' / 'mkv'
 
     wanted_files = [f'test{i}.mkv' for i in range(1, 9)]
 
@@ -828,7 +834,10 @@ def mkv() -> dict[str, str]:
     missing_files = [f for f in wanted_files if not os.path.exists(os.path.join(data_path, f))]
     if missing_files:
         # download matroska test suite
-        r = requests.get('https://downloads.sourceforge.net/project/matroska/test_files/matroska_test_w1_1.zip')
+        r = requests.get(
+            'https://downloads.sourceforge.net/project/matroska/test_files/matroska_test_w1_1.zip',
+            timeout=20,
+        )
         with ZipFile(BytesIO(r.content), 'r') as f:
             for missing_file in missing_files:
                 f.extract(missing_file, data_path)
@@ -839,16 +848,19 @@ def mkv() -> dict[str, str]:
         if path not in wanted_files:
             continue
         name, _ = os.path.splitext(path)
-        files[name] = os.path.join(data_path, path)
+        files[name] = os.fspath(data_path / path)
 
     return files
 
 
 @pytest.fixture(scope='session')
 def rar(mkv: dict[str, str]) -> dict[str, str]:
-    data_path = os.path.join(TESTS, 'data', 'rar')
-    if not os.path.exists(data_path):
-        os.makedirs(data_path)
+    """Collect a dict of rar paths.
+
+    Run scripts/prepare_tests.py to download the files before if tests are run
+    in parallel or if they are repeated to avoid multiple downloads.
+    """
+    data_path = TESTS_DIR / 'data' / 'rar'
 
     downloaded_files = {
         'pwd-protected': 'https://github.com/markokr/rarfile/blob/master/test/files/rar5-psw.rar?raw=true',
@@ -865,7 +877,7 @@ def rar(mkv: dict[str, str]) -> dict[str, str]:
     for name, download_url in downloaded_files.items():
         filename = os.path.join(data_path, name + '.rar')
         if not os.path.exists(filename):
-            r = requests.get(download_url)
+            r = requests.get(download_url, timeout=20)
             with open(filename, 'wb') as f:
                 f.write(r.content)
         files[name] = filename
@@ -875,7 +887,11 @@ def rar(mkv: dict[str, str]) -> dict[str, str]:
         existing_videos = [v for v in videos if v and os.path.isfile(v)]
         filename = os.path.join(data_path, name + '.rar')
         if not os.path.exists(filename):
-            subprocess.run(['rar', 'a', '-ep', filename, *existing_videos], check=True)
+            try:
+                subprocess.run(['rar', 'a', '-ep', filename, *existing_videos], check=True)
+            except FileNotFoundError:
+                # rar command line is not installed
+                print('rar is not installed')  # noqa: T201
         if os.path.exists(filename):
             files[name] = filename
 

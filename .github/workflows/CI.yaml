@@ -124,19 +124,27 @@ jobs:
         with:
           persist-credentials: false
           fetch-depth: 0
-
       - name: Install other test software (on Linux only)
         uses: awalsh128/cache-apt-pkgs-action@v1
         with:
           packages: rar
           version: 1.0
-
+      - uses: actions/setup-python@v5
+        with:
+          python-version-file: .python-version-default
+          cache: pip
+      - name: Install dependencies
+        run: |
+          python -Im pip install --upgrade pip
+      - name: Download tests data
+        run: |
+          python scripts/prepare_tests.py
       - name: Upload files for test
         uses: actions/upload-artifact@v4
         with:
-          name: coverage-${{ matrix.os }}-${{ matrix.py }}
-          path: .coverage*
-          include-hidden-files: true
+          name: tests-data
+          path: tests/data/
+          include-hidden-files: false
           if-no-files-found: error
 
   test:
@@ -157,6 +165,11 @@ jobs:
         with:
           python-version: ${{ matrix.py }}
           allow-prereleases: true
+      - uses: actions/download-artifact
+        with:
+          name: tests-data
+          merge-multiple: true
+
       - name: Install hatch
         run: python -Im pip install hatch
 
@@ -170,13 +183,6 @@ jobs:
           with codecs.open(os.environ["GITHUB_ENV"], mode="a", encoding="utf-8") as file_handler:
               file_handler.write(f"FORCE_COLOR=1\nENV={py}\n")
         shell: python
-      - name: Install other test software (on Linux only)
-        # Keep python version to latest release
-        if: matrix.os == 'ubuntu-latest' && matrix.py == 3.13
-        uses: awalsh128/cache-apt-pkgs-action@v1
-        with:
-          packages: rar
-          version: 1.0
       - name: Setup test environment
         run: |
           hatch -v env create ${ENV}

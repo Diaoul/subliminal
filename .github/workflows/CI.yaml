@@ -172,6 +172,8 @@ jobs:
         with:
           name: tests-data
           merge-multiple: true
+      - name: Display structure of downloaded files
+        run: ls -R tests
 
       - name: Install hatch
         run: python -Im pip install hatch

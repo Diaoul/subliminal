@@ -3,6 +3,7 @@ from __future__ import annotations
 import os
 import subprocess
 from io import BytesIO
+from pathlib import Path
 from typing import TYPE_CHECKING
 from unittest.mock import Mock
 from zipfile import ZipFile
@@ -22,7 +23,7 @@ from subliminal.providers.mock import MockSubtitle, mock_subtitle_provider
 if TYPE_CHECKING:
     from collections.abc import Generator
 
-TESTS = os.path.dirname(__file__)
+TESTS_DIR = Path(__file__).parent
 
 
 @pytest.fixture(autouse=True, scope='session')
@@ -820,7 +821,12 @@ def disabled_providers(monkeypatch: pytest.MonkeyPatch) -> Generator[list[str], 
 
 @pytest.fixture(scope='session')
 def mkv() -> dict[str, str]:
-    data_path = os.path.join(TESTS, 'data', 'mkv')
+    """Collect a dict of mkv paths.
+
+    Run scripts/prepare_tests.py to download the files before if tests are run
+    in parallel or if they are repeated to avoid multiple downloads.
+    """
+    data_path = TESTS_DIR / 'data' / 'mkv'
 
     wanted_files = [f'test{i}.mkv' for i in range(1, 9)]
 
@@ -842,16 +848,19 @@ def mkv() -> dict[str, str]:
         if path not in wanted_files:
             continue
         name, _ = os.path.splitext(path)
-        files[name] = os.path.join(data_path, path)
+        files[name] = os.fspath(data_path / path)
 
     return files
 
 
 @pytest.fixture(scope='session')
 def rar(mkv: dict[str, str]) -> dict[str, str]:
-    data_path = os.path.join(TESTS, 'data', 'rar')
-    if not os.path.exists(data_path):
-        os.makedirs(data_path)
+    """Collect a dict of rar paths.
+
+    Run scripts/prepare_tests.py to download the files before if tests are run
+    in parallel or if they are repeated to avoid multiple downloads.
+    """
+    data_path = TESTS_DIR / 'data' / 'rar'
 
     downloaded_files = {
         'pwd-protected': 'https://github.com/markokr/rarfile/blob/master/test/files/rar5-psw.rar?raw=true',

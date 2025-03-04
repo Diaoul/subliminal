@@ -118,7 +118,7 @@ jobs:
       supported-python-versions: ${{ steps.baipp.outputs.supported_python_classifiers_json_array }}
 
   prepare-test:
-    name: Build & verify package
+    name: Download data for tests
     runs-on: ubuntu-latest
 
     steps:
@@ -138,9 +138,10 @@ jobs:
       - name: Install dependencies
         run: |
           python -Im pip install --upgrade pip
+          python -Im pip install tox requests
       - name: Download tests data
         run: |
-          python scripts/prepare_tests.py
+          tox -e prepare-tests
       - name: Upload files for test
         uses: actions/upload-artifact@v4
         with:

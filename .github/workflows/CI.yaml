@@ -171,9 +171,10 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: tests-data
+          path: tests/data/
           merge-multiple: true
-      - name: Display structure of downloaded files
-        run: ls -R tests
+      - name: Display downloaded files
+        run: ls -R tests/data
 
       - name: Install hatch
         run: python -Im pip install hatch

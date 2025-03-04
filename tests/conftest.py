@@ -828,7 +828,10 @@ def mkv() -> dict[str, str]:
     missing_files = [f for f in wanted_files if not os.path.exists(os.path.join(data_path, f))]
     if missing_files:
         # download matroska test suite
-        r = requests.get('https://downloads.sourceforge.net/project/matroska/test_files/matroska_test_w1_1.zip')
+        r = requests.get(
+            'https://downloads.sourceforge.net/project/matroska/test_files/matroska_test_w1_1.zip',
+            timeout=20,
+        )
         with ZipFile(BytesIO(r.content), 'r') as f:
             for missing_file in missing_files:
                 f.extract(missing_file, data_path)
@@ -865,7 +868,7 @@ def rar(mkv: dict[str, str]) -> dict[str, str]:
     for name, download_url in downloaded_files.items():
         filename = os.path.join(data_path, name + '.rar')
         if not os.path.exists(filename):
-            r = requests.get(download_url)
+            r = requests.get(download_url, timeout=20)
             with open(filename, 'wb') as f:
                 f.write(r.content)
         files[name] = filename
@@ -875,7 +878,11 @@ def rar(mkv: dict[str, str]) -> dict[str, str]:
         existing_videos = [v for v in videos if v and os.path.isfile(v)]
         filename = os.path.join(data_path, name + '.rar')
         if not os.path.exists(filename):
-            subprocess.run(['rar', 'a', '-ep', filename, *existing_videos])
+            try:
+                subprocess.run(['rar', 'a', '-ep', filename, *existing_videos], check=True)
+            except FileNotFoundError:
+                # rar command line is not installed
+                print('rar is not installed')  # noqa: T201
         if os.path.exists(filename):
             files[name] = filename
 

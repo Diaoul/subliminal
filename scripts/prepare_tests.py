@@ -92,7 +92,13 @@ def compress_to_rar(rar_dir_path: str | os.PathLike[str], mkv: dict[str, str]) -
         filename = os.fspath(rar_dir_path / (name + '.rar'))
         if not os.path.exists(filename):
             try:
-                subprocess.run(['rar', 'a', '-ep', filename, *existing_videos], check=True)  # noqa: S603, S607
+                subprocess.run(  # noqa: S603
+                    ['rar', 'a', '-ep', filename, *existing_videos],  # noqa: S607
+                    check=True,
+                    timeout=30,
+                )
+            except subprocess.TimeoutExpired:
+                warnings.warn('`rar` command took too long', UserWarning, stacklevel=2)
             except FileNotFoundError:
                 # rar command line is not installed
                 warnings.warn('rar is not installed', UserWarning, stacklevel=2)

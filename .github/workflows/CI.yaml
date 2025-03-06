@@ -149,6 +149,8 @@ jobs:
           path: tests/data/
           include-hidden-files: false
           if-no-files-found: error
+          # heavy artifact should be deleted asap
+          retention-days: 1
 
   test:
     name: Test

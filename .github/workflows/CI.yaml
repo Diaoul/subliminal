@@ -222,7 +222,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          persist-credentials: false
+          # py-cov-action/python-coverage-comment-action needs git credentials
+          persist-credentials: true
       - uses: actions/setup-python@v5
         with:
           python-version-file: .python-version-default
@@ -244,38 +245,31 @@ jobs:
           # Report and write to summary.
           coverage report --skip-covered --skip-empty --show-missing --format=markdown >> $GITHUB_STEP_SUMMARY
 
-          ## Report again and fail if under 100%.
-          #coverage report --fail-under=100
-
       - name: Upload HTML report if check failed.
         uses: actions/upload-artifact@v4
         with:
           name: html-report
           path: htmlcov
-        #if: ${{ failure() }}
 
       - name: Coverage comment
         id: coverage_comment
-        if: github.event_name == 'pull_request'
         uses: py-cov-action/python-coverage-comment-action@v3
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Store Pull Request comment to be posted
         uses: actions/upload-artifact@v4
-        if: |
-          github.event_name == 'pull_request'
-          && steps.coverage_comment.outputs.COMMENT_FILE_WRITTEN == 'true'
+        if: steps.coverage_comment.outputs.COMMENT_FILE_WRITTEN == 'true'
         with:
+          # If you use a different name, update COMMENT_ARTIFACT_NAME accordingly
           name: python-coverage-comment-action
+          # If you use a different name, update COMMENT_FILENAME accordingly
           path: python-coverage-comment-action.txt
-
 
   core-coverage:
     name: Core Coverage
     runs-on: ubuntu-latest
     needs: [build-package, prepare-test]
-    if: false
     steps:
       - uses: actions/checkout@v4
         with:
@@ -287,6 +281,7 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: tests-data
+          path: tests/data/
           merge-multiple: true
       - name: Install hatch
         run: python -Im pip install hatch

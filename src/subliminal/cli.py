@@ -36,10 +36,15 @@ from subliminal import (
     refiner_manager,
     region,
     save_subtitles,
-    scan_video,
-    scan_videos,
 )
-from subliminal.core import ARCHIVE_EXTENSIONS, scan_name, search_external_subtitles
+from subliminal.core import (
+    ARCHIVE_EXTENSIONS,
+    collect_video_filepaths,
+    scan_name,
+    scan_video_or_archive,
+    search_external_subtitles,
+)
+from subliminal.exceptions import GuessingError
 from subliminal.extensions import get_default_providers, get_default_refiners
 from subliminal.utils import get_parameters_from_signature, merge_extend_and_ignore_unions
 
@@ -654,39 +659,47 @@ def download(
             p = os.path.abspath(os.path.expanduser(p))
             logger.debug('Collecting path %s', p)
 
+            # collect files from directory
+            collected_filepaths = [p]
+            if os.path.isdir(p):
+                # collect video files
+                try:
+                    collected_filepaths = collect_video_filepaths(p, age=age, archives=archives)
+                except ValueError:
+                    logger.exception('Unexpected error while collecting directory path %s', p)
+                    errored_paths.append(p)
+                    continue
+
+            # scan videos
             video_candidates: list[Video] = []
-
-            # non-existing
-            if not os.path.exists(p):
+            for filepath in collected_filepaths:
+                exists = os.path.exists(p)
                 try:
-                    video = scan_name(p, name=name)
-                except ValueError:
-                    repl_p = f'{p} ({name})' if name else p
-                    logger.exception('Unexpected error while collecting non-existing path %s', repl_p)
-                    errored_paths.append(p)
-                    continue
-                video_candidates.append(video)
+                    # existing path
+                    if exists:  # noqa: SIM108
+                        video = scan_video_or_archive(filepath, name=name)
+                    else:
+                        video = scan_name(filepath, name=name)
 
-            # directories
-            elif os.path.isdir(p):
-                try:
-                    scanned_videos = scan_videos(p, age=age, archives=archives, name=name)
-                except ValueError:
-                    repl_p = f'{p} ({name})' if name else p
-                    logger.exception('Unexpected error while collecting directory path %s', repl_p)
-                    errored_paths.append(p)
+                except GuessingError as e:
+                    # Show a simple error message
+                    if verbose > 0:
+                        # new line was already added with debug
+                        if not debug:
+                            click.echo()
+                        click.secho(e, fg='yellow')
+                    errored_paths.append(filepath)
                     continue
-                video_candidates.extend(scanned_videos)
 
-            # other inputs
-            else:
-                try:
-                    video = scan_video(p, name=name)
                 except ValueError:
-                    repl_p = f'{p} ({name})' if name else p
-                    logger.exception('Unexpected error while collecting path %s', repl_p)
-                    errored_paths.append(p)
+                    logger.exception(
+                        'Unexpected error while collecting %s %s',
+                        'path' if exists else 'non-existing path',
+                        f'{filepath} ({name})' if name else filepath,
+                    )
+                    errored_paths.append(filepath)
                     continue
+
                 video_candidates.append(video)
 
             # check and refine videos
@@ -740,11 +753,12 @@ def download(
     # exit if no providers are used
     if len(use_providers) == 0:
         click.echo('No provider was selected to download subtitles.')
-        if 'ALL' in ignore_provider:
-            click.echo('All ignored from CLI argument: `--ignore-provider=ALL`')
-        elif 'ALL' in obj['provider_lists']['ignore']:
-            config_ignore = list(obj['provider_lists']['ignore'])
-            click.echo(f'All ignored from configuration: `ignore_provider={config_ignore}`')
+        if verbose > 0:
+            if 'ALL' in ignore_provider:
+                click.echo('All ignored from CLI argument: `--ignore-provider=ALL`')
+            elif 'ALL' in obj['provider_lists']['ignore']:
+                config_ignore = list(obj['provider_lists']['ignore'])
+                click.echo(f'All ignored from configuration: `ignore_provider={config_ignore}`')
         return
 
     # download best subtitles

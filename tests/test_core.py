@@ -17,6 +17,7 @@ from subliminal.core import (
     scan_archive,
     scan_name,
     scan_video,
+    scan_video_or_archive,
     scan_videos,
     search_external_subtitles,
 )
@@ -193,9 +194,12 @@ def test_scan_video_episode(episodes: dict[str, Episode], tmp_path: Path, monkey
 
 
 def test_scan_video_path_does_not_exist(movies: dict[str, Movie]) -> None:
-    with pytest.raises(ValueError) as excinfo:
-        scan_video(movies['man_of_steel'].name)
-    assert str(excinfo.value) == 'Path does not exist'
+    path = movies['man_of_steel'].name
+    with pytest.raises(ValueError, match='Path does not exist'):
+        scan_video(path)
+
+    with pytest.raises(ValueError, match='Path does not exist'):
+        scan_video_or_archive(path)
 
 
 def test_scan_video_invalid_extension(
@@ -206,9 +210,8 @@ def test_scan_video_invalid_extension(
     monkeypatch.chdir(tmp_path)
     movie_name = os.path.splitext(movies['man_of_steel'].name)[0] + '.mp3'
     ensure(tmp_path / movie_name)
-    with pytest.raises(ValueError) as excinfo:
+    with pytest.raises(ValueError, match="'.mp3' is not a valid video extension"):
         scan_video(movie_name)
-    assert str(excinfo.value) == "'.mp3' is not a valid video extension"
 
 
 def test_scan_video_broken(mkv: dict[str, str], tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
@@ -297,6 +300,35 @@ def test_scan_video_movie_name_path_does_not_exist(movies: dict[str, Movie]) -> 
     assert scanned_video.subtitle_languages == set()
     assert scanned_video.title == video.title
     assert scanned_video.year == video.year
+
+
+def test_scan_archive_error(
+    rar: dict[str, str],
+) -> None:
+    if 'pwd-protected' not in rar:
+        return
+    path = rar['pwd-protected']
+    with pytest.raises(ArchiveError):
+        scan_archive(path)
+
+    with pytest.raises(ValueError, match='Error scanning archive'):
+        scan_video_or_archive(path)
+
+
+def test_scan_videos_error(
+    rar: dict[str, str],
+    caplog: pytest.LogCaptureFixture,
+) -> None:
+    if 'pwd-protected' not in rar:
+        return
+    folder = Path(rar['pwd-protected']).parent
+    # Test return without error
+    scan_videos(folder)
+
+    # But error was logged
+    for record in caplog.records:
+        assert record.levelname == 'ERROR'
+    assert 'Error scanning archive' in caplog.text
 
 
 def test_scan_archive_invalid_extension(

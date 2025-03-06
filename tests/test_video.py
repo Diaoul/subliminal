@@ -151,30 +151,26 @@ def test_episode_from_guess_multi_episode(episodes: dict[str, Episode]) -> None:
 
 def test_episode_fromguess_wrong_type(episodes: dict[str, Episode]) -> None:
     guess = {'type': 'subtitle'}
-    with pytest.raises(ValueError) as excinfo:
+    with pytest.raises(ValueError, match='The guess must be an episode guess'):
         Episode.fromguess(episodes['bbt_s07e05'].name, guess)
-    assert str(excinfo.value) == 'The guess must be an episode guess'
 
 
 def test_episode_fromguess_insufficient_data(episodes: dict[str, Episode]) -> None:
     guess = {'type': 'episode'}
-    with pytest.raises(ValueError) as excinfo:
+    with pytest.raises(ValueError, match='Insufficient data to process the guess'):
         Episode.fromguess(episodes['bbt_s07e05'].name, guess)
-    assert str(excinfo.value) == 'Insufficient data to process the guess'
 
 
 def test_movie_fromguess_wrong_type(movies: dict[str, Movie]) -> None:
     guess = {'type': 'subtitle'}
-    with pytest.raises(ValueError) as excinfo:
+    with pytest.raises(ValueError, match='The guess must be a movie guess'):
         Movie.fromguess(movies['man_of_steel'].name, guess)
-    assert str(excinfo.value) == 'The guess must be a movie guess'
 
 
 def test_movie_fromguess_insufficient_data(movies: dict[str, Movie]) -> None:
     guess = {'type': 'movie'}
-    with pytest.raises(ValueError) as excinfo:
+    with pytest.raises(ValueError, match='Insufficient data to process the guess'):
         Movie.fromguess(movies['man_of_steel'].name, guess)
-    assert str(excinfo.value) == 'Insufficient data to process the guess'
 
 
 def test_movie_fromname(movies: dict[str, Movie]) -> None:

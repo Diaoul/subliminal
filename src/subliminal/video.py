@@ -9,6 +9,7 @@ from typing import TYPE_CHECKING, Any
 
 from guessit import guessit  # type: ignore[import-untyped]
 
+from subliminal.exceptions import GuessingError
 from subliminal.utils import ensure_list, get_age, matches_extended_title
 
 if TYPE_CHECKING:
@@ -258,7 +259,7 @@ class Video:
             return Movie.fromguess(name, guess)
 
         msg = 'The guess must be an episode or a movie guess'  # pragma: no-cover
-        raise ValueError(msg)
+        raise GuessingError(msg)
 
     @classmethod
     def fromname(cls, name: str) -> Video:
@@ -380,8 +381,8 @@ class Episode(Video):
             raise ValueError(msg)
 
         if 'title' not in guess or 'episode' not in guess:
-            msg = 'Insufficient data to process the guess'
-            raise ValueError(msg)
+            msg = f'Insufficient data to process the guess for {name!r}'
+            raise GuessingError(msg)
 
         return cls(
             name,
@@ -470,8 +471,8 @@ class Movie(Video):
             raise ValueError(msg)
 
         if 'title' not in guess:
-            msg = 'Insufficient data to process the guess'
-            raise ValueError(msg)
+            msg = f'Insufficient data to process the guess for {name!r}'
+            raise GuessingError(msg)
 
         return cls(
             name,

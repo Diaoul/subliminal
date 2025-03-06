@@ -248,7 +248,6 @@ jobs:
         with:
           name: html-report
           path: htmlcov
-        #if: ${{ failure() }}
 
       - name: Coverage comment
         id: coverage_comment
@@ -260,27 +259,10 @@ jobs:
         uses: actions/upload-artifact@v4
         if: steps.coverage_comment.outputs.COMMENT_FILE_WRITTEN == 'true'
         with:
+          # If you use a different name, update COMMENT_ARTIFACT_NAME accordingly
           name: python-coverage-comment-action
+          # If you use a different name, update COMMENT_FILENAME accordingly
           path: python-coverage-comment-action.txt
-
-
-  post-coverage-comment:
-    name: Display coverage comment
-    runs-on: ubuntu-latest
-    needs: coverage
-    if: github.event_name == 'pull_request'
-    permissions:
-      pull-requests: write
-      contents: write
-      actions: read
-    steps:
-      # DO NOT run actions/checkout here, for security reasons
-      # For details, refer to https://securitylab.github.com/research/github-actions-preventing-pwn-requests/
-      - name: Post comment
-        uses: py-cov-action/python-coverage-comment-action@v3
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
 
   core-coverage:
     name: Core Coverage

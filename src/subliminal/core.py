@@ -466,20 +466,25 @@ def search_external_subtitles(
 
 
 def scan_name(path: str | os.PathLike, name: str | None = None) -> Video:
-    """Scan a video from a `path` that does not exist.
+    """Scan a video from a `path`.
 
-    :param str path: non-existing path to the video.
+    :param str path: path to the video.
     :param str name: if defined, name to use with guessit instead of the path.
     :return: the scanned video.
     :rtype: :class:`~subliminal.video.Video`
     """
     path = os.fspath(path)
     repl = name if name else path
+    if name:
+        logger.info('Scanning video %r, with replacement name %r', path, repl)
+    else:
+        logger.info('Scanning video %r', path)
+
     return Video.fromguess(path, guessit(repl))
 
 
 def scan_video(path: str | os.PathLike, name: str | None = None) -> Video:
-    """Scan a video from a `path`.
+    """Scan a video from an existing `path`.
 
     :param str path: existing path to the video.
     :param str name: if defined, name to use with guessit instead of the path.
@@ -498,15 +503,8 @@ def scan_video(path: str | os.PathLike, name: str | None = None) -> Video:
         msg = f'{os.path.splitext(path)[1]!r} is not a valid video extension'
         raise ValueError(msg)
 
-    dirpath, filename = os.path.split(path)
-    repl = name if name else path
-    if name:
-        logger.info('Scanning video %r in %r, with replacement name %r', filename, dirpath, repl)
-    else:
-        logger.info('Scanning video %r in %r', filename, dirpath)
-
     # guess
-    video = Video.fromguess(path, guessit(repl))
+    video = scan_name(path, name=name)
 
     # size
     video.size = os.path.getsize(path)

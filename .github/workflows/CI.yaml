@@ -220,7 +220,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          persist-credentials: false
+          # py-cov-action/python-coverage-comment-action needs git credentials
+          persist-credentials: true
       - uses: actions/setup-python@v5
         with:
           python-version-file: .python-version-default
@@ -242,9 +243,6 @@ jobs:
           # Report and write to summary.
           coverage report --skip-covered --skip-empty --show-missing --format=markdown >> $GITHUB_STEP_SUMMARY
 
-          ## Report again and fail if under 100%.
-          #coverage report --fail-under=100
-
       - name: Upload HTML report if check failed.
         uses: actions/upload-artifact@v4
         with:
@@ -254,19 +252,34 @@ jobs:
 
       - name: Coverage comment
         id: coverage_comment
-        if: github.event_name == 'pull_request'
         uses: py-cov-action/python-coverage-comment-action@v3
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Store Pull Request comment to be posted
         uses: actions/upload-artifact@v4
-        if: |
-          github.event_name == 'pull_request'
-          && steps.coverage_comment.outputs.COMMENT_FILE_WRITTEN == 'true'
+        if: steps.coverage_comment.outputs.COMMENT_FILE_WRITTEN == 'true'
         with:
           name: python-coverage-comment-action
           path: python-coverage-comment-action.txt
+
+
+  post-coverage-comment:
+    name: Display coverage comment
+    runs-on: ubuntu-latest
+    needs: coverage
+    if: github.event_name == 'pull_request'
+    permissions:
+      pull-requests: write
+      contents: write
+      actions: read
+    steps:
+      # DO NOT run actions/checkout here, for security reasons
+      # For details, refer to https://securitylab.github.com/research/github-actions-preventing-pwn-requests/
+      - name: Post comment
+        uses: py-cov-action/python-coverage-comment-action@v3
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
   core-coverage:

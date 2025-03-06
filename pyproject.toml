@@ -171,7 +171,7 @@ relative_files = true
 # https://docs.astral.sh/ruff/
 [tool.ruff]
 line-length = 120
-src = ["src", "tests"]
+src = ["src", "tests", "scripts"]
 exclude = [
     "_version.py",
 ]

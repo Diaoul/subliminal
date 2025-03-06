@@ -286,7 +286,6 @@ jobs:
     name: Core Coverage
     runs-on: ubuntu-latest
     needs: [build-package, prepare-test]
-    if: false
     steps:
       - uses: actions/checkout@v4
         with:

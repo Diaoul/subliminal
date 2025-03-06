@@ -888,7 +888,13 @@ def rar(mkv: dict[str, str]) -> dict[str, str]:
         filename = os.path.join(data_path, name + '.rar')
         if not os.path.exists(filename):
             try:
-                subprocess.run(['rar', 'a', '-ep', filename, *existing_videos], check=True)
+                subprocess.run(
+                    ['rar', 'a', '-ep', filename, *existing_videos],
+                    check=True,
+                    timeout=30,
+                )
+            except subprocess.TimeoutExpired:
+                print('`rar` command took too long')  # noqa: T201
             except FileNotFoundError:
                 # rar command line is not installed
                 print('rar is not installed')  # noqa: T201

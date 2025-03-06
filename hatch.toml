@@ -43,7 +43,7 @@ dev-mode = false
 features = ["tests", "types"]
 
 [envs.types.scripts]
-run = "mypy --install-types --non-interactive --ignore-missing-imports --config-file={root}/pyproject.toml {args:src tests}"
+run = "mypy --install-types --non-interactive --ignore-missing-imports --config-file={root}/pyproject.toml {args:src tests scripts}"
 
 # ---------------------------------------------------------
 [envs.docs]

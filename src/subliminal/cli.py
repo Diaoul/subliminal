@@ -40,8 +40,7 @@ from subliminal import (
 from subliminal.core import (
     ARCHIVE_EXTENSIONS,
     collect_video_filepaths,
-    scan_name,
-    scan_video_or_archive,
+    scan_path,
     search_external_subtitles,
 )
 from subliminal.exceptions import GuessingError
@@ -675,14 +674,16 @@ def download(
             video_candidates: list[Video] = []
             for filepath in collected_filepaths:
                 exists = os.path.exists(p)
+                filepath_or_name = f'{filepath} ({name})' if name else filepath
                 try:
-                    # existing path
-                    if exists:  # noqa: SIM108
-                        video = scan_video_or_archive(filepath, name=name)
-                    else:
-                        video = scan_name(filepath, name=name)
+                    video = scan_path(filepath, name=name)
 
                 except GuessingError as e:
+                    logger.exception(
+                        'Cannot guess information about %s %s',
+                        'path' if exists else 'non-existing path',
+                        filepath_or_name,
+                    )
                     # Show a simple error message
                     if verbose > 0:
                         # new line was already added with debug
@@ -696,7 +697,7 @@ def download(
                     logger.exception(
                         'Unexpected error while collecting %s %s',
                         'path' if exists else 'non-existing path',
-                        f'{filepath} ({name})' if name else filepath,
+                        filepath_or_name,
                     )
                     errored_paths.append(filepath)
                     continue

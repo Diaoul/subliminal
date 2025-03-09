@@ -548,6 +548,20 @@ def scan_video_or_archive(path: str | os.PathLike, name: str | None = None) -> V
     raise ValueError(msg)  # pragma: no cover
 
 
+def scan_path(filepath: str | os.PathLike[str], *, name: str | None = None) -> Video:
+    """Scan a video or an archive from a `path`, maybe non-existing.
+
+    :param str path: path to the video or archive, may be an existing path or not.
+    :param str name: if defined, name to use with guessit instead of the path.
+    :return: the scanned video.
+    :rtype: :class:`~subliminal.video.Video`
+    :raises: :class:`ValueError`: video path is not well defined.
+    """
+    if not os.path.isfile(filepath):
+        return scan_name(filepath, name=name)
+    return scan_video_or_archive(filepath, name=name)
+
+
 def collect_video_filepaths(
     path: str | os.PathLike,
     *,

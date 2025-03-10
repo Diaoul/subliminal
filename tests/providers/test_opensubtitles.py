@@ -1,7 +1,7 @@
 import os
 
 import pytest
-from babelfish import Language  # type: ignore[import-untyped]
+from babelfish import Language, language_converters  # type: ignore[import-untyped]
 from vcr import VCR  # type: ignore[import-untyped]
 
 from subliminal.exceptions import ConfigurationError
@@ -23,6 +23,16 @@ vcr = VCR(
     match_on=['method', 'scheme', 'host', 'port', 'path', 'query', 'body'],
     cassette_library_dir=os.path.realpath(os.path.join('tests', 'cassettes', 'opensubtitles')),
 )
+
+
+@pytest.mark.converter
+def test_converter_convert_alpha3_country_script() -> None:
+    assert language_converters['opensubtitles'].convert('zho', None, 'Hant') == 'zht'
+
+
+@pytest.mark.converter
+def test_converter_convert_alpha3_country() -> None:
+    assert language_converters['opensubtitles'].convert('por', 'BR') == 'pob'
 
 
 def test_get_matches_movie_hash(movies: dict[str, Movie]) -> None:

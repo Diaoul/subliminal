@@ -38,8 +38,6 @@ class OpenSubtitlesComConverter(LanguageReverseConverter):
         """Convert an alpha3 language code with an alpha2 country code and a script code into a custom code."""
         if (alpha3, country) in self.to_opensubtitlescom:
             return self.to_opensubtitlescom[(alpha3, country)]
-        if (alpha3, None) in self.to_opensubtitlescom:
-            return self.to_opensubtitlescom[(alpha3, None)]
 
         return self.alpha2_converter.convert(alpha3, country, script)  # type: ignore[no-any-return]
 

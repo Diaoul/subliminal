@@ -90,7 +90,7 @@ class LanguageParamType(click.ParamType):
         try:
             return Language.fromietf(value)
         except BabelfishError:
-            self.fail(f'{value} is not a valid language', param, ctx)
+            self.fail(f'{value} is not a valid language', param, ctx)  # pragma: no cover
 
 
 LANGUAGE = LanguageParamType()
@@ -328,7 +328,7 @@ def subliminal(
     # create cache directory
     try:
         cache_dir_path.mkdir(parents=True)
-    except OSError:
+    except OSError:  # pragma: no cover
         if not cache_dir_path.is_dir():
             raise
 
@@ -350,7 +350,7 @@ def subliminal(
         try:
             # make sure the parent directories exist
             logfile_path.parent.mkdir(parents=True)
-        except OSError:
+        except OSError:  # pragma: no cover
             if not logfile_path.parent.is_dir():
                 raise
 

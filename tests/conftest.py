@@ -582,6 +582,7 @@ def provider_manager(monkeypatch: pytest.MonkeyPatch) -> Generator[RegistrableEx
     episode_name = os.path.join(
         'The Big Bang Theory', 'Season 07', 'The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION.mkv'
     )
+    episode2_name = 'Marvels.Agents.of.S.H.I.E.L.D.S02E06.720p.HDTV.x264-KILLERS.mkv'
 
     # Podnapisi, subtitle pool
     subtitle_pool_podnapisi = [
@@ -638,6 +639,18 @@ def provider_manager(monkeypatch: pytest.MonkeyPatch) -> Generator[RegistrableEx
             ),
             'video_name': movie_name,
             'matches': {'title', 'country', 'year'},
+        },
+        {
+            'language': Language.fromietf('en'),
+            'subtitle_id': 'Dadi',
+            'fake_content': (
+                b'1\n00:00:02,090 --> 00:00:03,970\n'
+                b'Greetings.\n\n'
+                b'2\n00:00:04,080 --> 00:00:05,550\n'
+                b'Sgniteerg.\n\n'
+            ),
+            'video_name': episode2_name,
+            'matches': {'episode', 'season', 'series', 'year'},
         },
     ]
 

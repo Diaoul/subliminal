@@ -100,7 +100,7 @@ class MockProvider(Provider):
     subtitle_pool: list[MockSubtitle]
     is_broken: bool
 
-    def __init__(self, subtitle_pool: Sequence[MockSubtitle] | None = None) -> None:
+    def __init__(self, subtitle_pool: Sequence[MockSubtitle] | None = None, **kwargs: Any) -> None:
         self.logged_in = False
         self.subtitle_pool = list(self.internal_subtitle_pool)
         if subtitle_pool is not None:  # pragma: no cover

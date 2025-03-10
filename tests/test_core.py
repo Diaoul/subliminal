@@ -16,6 +16,7 @@ from subliminal.core import (
     save_subtitles,
     scan_archive,
     scan_name,
+    scan_path,
     scan_video,
     scan_video_or_archive,
     scan_videos,
@@ -339,15 +340,36 @@ def test_scan_archive_invalid_extension(
     monkeypatch.chdir(tmp_path)
     movie_name = os.path.splitext(movies['interstellar'].name)[0] + '.mp3'
     ensure(tmp_path / movie_name)
-    with pytest.raises(ArchiveError) as excinfo:
+    with pytest.raises(ArchiveError, match="'.mp3' is not a valid archive"):
         scan_archive(movie_name)
-    assert str(excinfo.value) == "'.mp3' is not a valid archive"
+
+
+def test_scan_path(
+    movies: dict[str, Movie],
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    import subliminal
+
+    mock = Mock()
+    monkeypatch.setattr(subliminal.core, 'scan_video_or_archive', mock)
+
+    video = movies['interstellar']
+    ensure(tmp_path / video.name)
+    monkeypatch.chdir(tmp_path)
+
+    # Non-existing path
+    scan_path(f'non-existing-{video.name}')
+    mock.assert_not_called()
+
+    # Existing path
+    scan_path(video.name)
+    mock.assert_called_once()
 
 
 def test_scan_videos_path_does_not_exist(movies: dict[str, Movie]) -> None:
-    with pytest.raises(ValueError) as excinfo:
+    with pytest.raises(ValueError, match='Path does not exist'):
         scan_videos(movies['man_of_steel'].name)
-    assert str(excinfo.value) == 'Path does not exist'
 
 
 def test_scan_videos_path_is_not_a_directory(
@@ -358,9 +380,8 @@ def test_scan_videos_path_is_not_a_directory(
     video = movies['man_of_steel']
     monkeypatch.chdir(tmp_path)
     ensure(tmp_path / video.name)
-    with pytest.raises(ValueError) as excinfo:
+    with pytest.raises(ValueError, match='Path is not a directory'):
         scan_videos(movies['man_of_steel'].name)
-    assert str(excinfo.value) == 'Path is not a directory'
 
 
 def test_scan_videos(movies: dict[str, Movie], tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:

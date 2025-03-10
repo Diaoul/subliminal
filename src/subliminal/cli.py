@@ -380,7 +380,13 @@ def cache(ctx: click.Context, clear_subliminal: bool) -> None:
     multiple=True,
     help='Language as IETF code, e.g. en, pt-BR (can be used multiple times).',
 )
-@click.option('-p', '--provider', type=PROVIDER, multiple=True, help='Provider to use (can be used multiple times).')
+@click.option(
+    '-p',
+    '--provider',
+    type=PROVIDER,
+    multiple=True,
+    help='Provider to use (can be used multiple times).',
+)
 @click.option(
     '-pp',
     '--extend-provider',
@@ -401,7 +407,13 @@ def cache(ctx: click.Context, clear_subliminal: bool) -> None:
         'Supersedes the providers used or ignored in the configuration file.'
     ),
 )
-@click.option('-r', '--refiner', type=REFINER, multiple=True, help='Refiner to use (can be used multiple times).')
+@click.option(
+    '-r',
+    '--refiner',
+    type=REFINER,
+    multiple=True,
+    help='Refiner to use (can be used multiple times).',
+)
 @click.option(
     '-rr',
     '--extend-refiner',
@@ -429,7 +441,12 @@ def cache(ctx: click.Context, clear_subliminal: bool) -> None:
     multiple=True,
     help='Subtitle ids to ignore (can be used multiple times).',
 )
-@click.option('-a', '--age', type=AGE, help='Filter videos newer than AGE, e.g. 12h, 1w2d.')
+@click.option(
+    '-a',
+    '--age',
+    type=AGE,
+    help='Filter videos newer than AGE, e.g. 12h, 1w2d.',
+)
 @click.option(
     '--use_creation_time',
     'use_ctime',
@@ -475,11 +492,26 @@ def cache(ctx: click.Context, clear_subliminal: bool) -> None:
     ),
 )
 @click.option(
+    '--force-external-subtitles',
+    is_flag=True,
+    default=False,
+    help='Force download even if an external subtitle already exists. Superseded by `--force`.',
+)
+@click.option(
+    '--force-embedded-subtitles',
+    is_flag=True,
+    default=False,
+    help='Force download even if an embedded subtitle already exists. Superseded by `--force`.',
+)
+@click.option(
     '-f',
     '--force',
     is_flag=True,
     default=False,
-    help='Force download even if a subtitle already exist.',
+    help=(
+        'Force download even if a subtitle already exists. '
+        'Supersedes `--force-external-subtitles` and `--force-embedded-subtitles`.'
+    ),
 )
 @click.option(
     '-W',
@@ -585,6 +617,8 @@ def download(
     encoding: str | None,
     subtitle_format: str | None,
     single: bool,
+    force_external_subtitles: bool,
+    force_embedded_subtitles: bool,
     force: bool,
     skip_wrong_fps: bool,
     hearing_impaired: tuple[bool | None, ...],
@@ -705,14 +739,14 @@ def download(
 
             # check and refine videos
             for video in video_candidates:
-                if not force:
+                if not force and not force_external_subtitles:
                     video.subtitles |= set(search_external_subtitles(video.name, directory=directory).values())
                 if check_video(video, languages=language_set, age=age, use_ctime=use_ctime, undefined=single):
                     refine(
                         video,
                         refiners=use_refiners,
                         refiner_configs=obj['refiner_configs'],
-                        embedded_subtitles=not force,
+                        embedded_subtitles=not force and not force_embedded_subtitles,
                         providers=use_providers,
                         languages=language_set,
                     )

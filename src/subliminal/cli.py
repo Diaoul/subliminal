@@ -3,7 +3,6 @@
 
 from __future__ import annotations
 
-import glob
 import logging
 import os
 import pathlib
@@ -11,6 +10,7 @@ import re
 from collections import defaultdict
 from collections.abc import Mapping
 from datetime import timedelta
+from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
 import click
@@ -296,6 +296,21 @@ options_from_refiners = options_from_managers('refiner', refiner_options, group=
 @options_from_providers
 @options_from_refiners
 @click.option('--debug', is_flag=True, help='Print useful information for debugging subliminal and for reporting bugs.')
+@click.option(
+    '--logfile',
+    type=str,
+    default='',
+    help=(
+        'If defined, record information to the specified log file. '
+        'If the file already exists, new logs are appended to the file.'
+    ),
+)
+@click.option(
+    '--logfile-level',
+    type=click.Choice(['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL']),
+    default='DEBUG',
+    help='The logging level used for the log file.',
+)
 @click.version_option(__version__)
 @click.pass_context
 def subliminal(
@@ -303,30 +318,58 @@ def subliminal(
     /,
     cache_dir: str,
     debug: bool,
+    logfile: os.PathLike[str] | None,
+    logfile_level: str,
     **kwargs: Any,
 ) -> None:
     """Subtitles, faster than your thoughts."""
-    cache_dir = os.path.expanduser(cache_dir)
+    # make sure to expand user
+    cache_dir_path = Path(cache_dir).expanduser()
     # create cache directory
     try:
-        os.makedirs(cache_dir)
+        cache_dir_path.mkdir(parents=True)
     except OSError:
-        if not os.path.isdir(cache_dir):
+        if not cache_dir_path.is_dir():
             raise
 
     # configure cache
     region.configure(
         'dogpile.cache.dbm',
         expiration_time=timedelta(days=30),
-        arguments={'filename': os.path.join(cache_dir, cache_file), 'lock_factory': MutexLock},
+        arguments={'filename': os.fspath(cache_dir_path / cache_file), 'lock_factory': MutexLock},
     )
+
+    # Set the logger level to DEBUG in case debug or logfile is defined
+    subliminal_logger = logging.getLogger('subliminal')
+    subliminal_logger.setLevel(logging.DEBUG)
+
+    # configure logging file
+    if logfile:
+        # make sure to expand user
+        logfile_path = Path(logfile).expanduser()
+        try:
+            # make sure the parent directories exist
+            logfile_path.parent.mkdir(parents=True)
+        except OSError:
+            if not logfile_path.parent.is_dir():
+                raise
+
+        file_handler = logging.FileHandler(logfile_path)
+        file_handler.setFormatter(
+            logging.Formatter(
+                '%(asctime)s | %(levelname)-8s | %(name)s | %(message)s',
+                datefmt='%Y-%m-%d %H:%M:%S',
+            ),
+        )
+        file_handler.setLevel(logfile_level)
+        subliminal_logger.addHandler(file_handler)
 
     # configure logging
     if debug:
         handler = logging.StreamHandler()
         handler.setFormatter(logging.Formatter(logging.BASIC_FORMAT))
-        logging.getLogger('subliminal').addHandler(handler)
-        logging.getLogger('subliminal').setLevel(logging.DEBUG)
+        handler.setLevel(logging.DEBUG)
+        subliminal_logger.addHandler(handler)
         # log about the config file
         msg = ctx.obj['debug_message']
         logger.info(msg)
@@ -363,8 +406,9 @@ def subliminal(
 def cache(ctx: click.Context, clear_subliminal: bool) -> None:
     """Cache management."""
     if clear_subliminal and ctx.parent and 'cache_dir' in ctx.parent.params:
-        for file in glob.glob(os.path.join(ctx.parent.params['cache_dir'], cache_file) + '*'):
-            os.remove(file)
+        cache_dir_path = Path(ctx.parent.params['cache_dir'])
+        for file in (cache_dir_path / cache_file).glob('*'):
+            file.unlink()
         click.echo("Subliminal's cache cleared.")
     else:
         click.echo('Nothing done.')
@@ -620,6 +664,8 @@ def download(
     if len(foreign_only) > 0:
         foreign_only_flag = foreign_only[-1]
 
+    logger.info('Download with subliminal version %s', __version__)
+    # Make sure verbose is maximal if debug is specified to show ALL the messages
     debug = obj.get('debug', False)
     if debug:
         verbose = 3

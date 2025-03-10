@@ -10,7 +10,7 @@ from typing import TYPE_CHECKING, Any, ClassVar
 from babelfish import LANGUAGES, Language  # type: ignore[import-untyped]
 from guessit import guessit  # type: ignore[import-untyped]
 
-from subliminal.exceptions import NotInitializedProviderError, ProviderError
+from subliminal.exceptions import DiscardingError, NotInitializedProviderError
 from subliminal.matches import guess_matches
 from subliminal.subtitle import Subtitle
 from subliminal.video import Episode, Movie, Video
@@ -130,7 +130,7 @@ class MockProvider(Provider):
         """Query the provider for subtitles."""
         if self.is_broken:
             msg = f'Mock provider {self.__class__.__name__} query raised an error'
-            raise ProviderError(msg)
+            raise DiscardingError(msg)
 
         subtitles = []
         for lang in languages:
@@ -149,7 +149,7 @@ class MockProvider(Provider):
         """List all the subtitles for the video."""
         if self.is_broken:
             msg = f'Mock provider {self.__class__.__name__} list_subtitles raised an error'
-            raise ProviderError(msg)
+            raise DiscardingError(msg)
 
         subtitles = [
             subtitle
@@ -169,7 +169,7 @@ class MockProvider(Provider):
         """Download the content of the subtitle."""
         if self.is_broken:
             msg = f'Mock provider {self.__class__.__name__} download_subtitle raised an error'
-            raise ProviderError(msg)
+            raise DiscardingError(msg)
 
         logger.info(
             'Mock provider %s download subtitle %s',

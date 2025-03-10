@@ -14,7 +14,7 @@ from babelfish import Language, LanguageReverseError  # type: ignore[import-unty
 from guessit import guessit  # type: ignore[import-untyped]
 
 from .archives import ARCHIVE_ERRORS, ARCHIVE_EXTENSIONS, is_supported_archive, scan_archive
-from .exceptions import ArchiveError
+from .exceptions import ArchiveError, DiscardingError
 from .extensions import (
     discarded_episode_refiners,
     discarded_movie_refiners,
@@ -143,12 +143,17 @@ class ProviderPool:
         # list subtitles
         logger.info('Listing subtitles with provider %r and languages %r', provider, provider_languages)
         try:
-            return self[provider].list_subtitles(video, provider_languages)
-        except Exception as e:  # noqa: BLE001
+            subtitles = self[provider].list_subtitles(video, provider_languages)
+        except DiscardingError as e:
             handle_exception(e, f'Provider {provider}')
+            # return None to discard this provider with a known error
+            return None
+        except Exception as e:  # noqa: BLE001  # pragma: no cover
+            handle_exception(e, f'Provider {provider}')
+            # return [] so the provider is not discarded with unknown error
+            return []
 
-        # return None to discard this provider
-        return None
+        return subtitles
 
     def list_subtitles(self, video: Video, languages: Set[Language]) -> list[Subtitle]:
         """List subtitles.

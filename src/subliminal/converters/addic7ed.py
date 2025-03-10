@@ -47,22 +47,12 @@ class Addic7edConverter(LanguageReverseConverter):
         """Convert an alpha3 language code with an alpha2 country code and a script code into a custom code."""
         if (alpha3, country, script) in self.to_addic7ed:
             return self.to_addic7ed[(alpha3, country, script)]
-        if (alpha3, country, None) in self.to_addic7ed:
-            return self.to_addic7ed[(alpha3, country, None)]
-        if (alpha3, None, None) in self.to_addic7ed:
-            return self.to_addic7ed[(alpha3, None, None)]
 
         return self.name_converter.convert(alpha3, country, script)  # type: ignore[no-any-return]
 
     def reverse(self, code: str) -> LanguageTuple:
         """Reverse a custom code into alpha3, country and script code."""
         if code in self.from_addic7ed:
-            ret = self.from_addic7ed[code]
-            if len(ret) == 1:
-                return (*ret, None, None)
-            if len(ret) == 2:
-                return (*ret, None)
-            # if len(ret) == 3:
-            return ret
+            return self.from_addic7ed[code]
 
         return self.name_converter.reverse(code)  # type: ignore[no-any-return]

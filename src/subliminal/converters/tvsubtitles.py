@@ -30,8 +30,6 @@ class TVsubtitlesConverter(LanguageReverseConverter):
         """Convert an alpha3 language code with an alpha2 country code and a script code into a custom code."""
         if (alpha3, country) in self.to_tvsubtitles:
             return self.to_tvsubtitles[(alpha3, country)]
-        if (alpha3, None) in self.to_tvsubtitles:
-            return self.to_tvsubtitles[(alpha3, None)]
 
         return self.alpha2_converter.convert(alpha3, country, script)  # type: ignore[no-any-return]
 

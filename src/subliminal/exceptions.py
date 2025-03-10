@@ -31,25 +31,31 @@ class NotInitializedProviderError(ProviderError):
     pass
 
 
-class ConfigurationError(ProviderError):
+class DiscardingError(ProviderError):
+    """Exception raised by providers that should lead to discard this provider."""
+
+    pass
+
+
+class ConfigurationError(DiscardingError):
     """Exception raised by providers when badly configured."""
 
     pass
 
 
-class AuthenticationError(ProviderError):
+class AuthenticationError(DiscardingError):
     """Exception raised by providers when authentication failed."""
 
     pass
 
 
-class ServiceUnavailable(ProviderError):
+class ServiceUnavailable(DiscardingError):
     """Exception raised when status is '503 Service Unavailable'."""
 
     pass
 
 
-class DownloadLimitExceeded(ProviderError):
+class DownloadLimitExceeded(DiscardingError):
     """Exception raised by providers when download limit is exceeded."""
 
     pass

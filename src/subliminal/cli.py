@@ -686,9 +686,12 @@ def download(
     # process parameters
     language_set = set(language)
 
-    # no encoding specified, default to None
-    if not encoding:
+    # no encoding specified, default to None. Also convert to None --encoding=''
+    if not encoding or encoding in ['""', "''"]:
         encoding = None
+    # no subtitle_format specified, default to None Also convert to None --subtitle_format=''
+    if not subtitle_format or subtitle_format in ['""', "''"]:
+        subtitle_format = None
 
     # language_type
     hearing_impaired_flag: bool | None = None

@@ -26,6 +26,23 @@ if TYPE_CHECKING:
 TESTS_DIR = Path(__file__).parent
 
 
+def ensure(path: str | os.PathLike[str], *, directory: bool = False) -> Path:
+    """Create a file (or directory) at path."""
+    path = Path(path)
+    if directory:
+        # Create a directory at path
+        if not path.is_dir():
+            path.mkdir(parents=True)
+
+    else:
+        # Create a directory at parent
+        if not path.parent.is_dir():
+            path.parent.mkdir(parents=True)
+        # Create a file at path
+        path.touch()
+    return path
+
+
 @pytest.fixture(autouse=True, scope='session')
 def _configure_region() -> None:
     region.configure('dogpile.cache.null')

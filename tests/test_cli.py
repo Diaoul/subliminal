@@ -338,3 +338,42 @@ def test_cli_download_foreign_only(tmp_path: os.PathLike[str]) -> None:
         content = open(subtitle_filename, encoding='utf-8-sig').read()
 
     assert '[foreign only]' in content
+
+
+@pytest.mark.parametrize('video_exists', [False, True])
+def test_cli_download_ignored_video(video_exists: bool, tmp_path: os.PathLike[str]) -> None:
+    runner = CliRunner()
+    video_name = 'Marvels.Agents.of.S.H.I.E.L.D.S02E06.720p.HDTV.x264-KILLERS.mkv'
+
+    with runner.isolated_filesystem(temp_dir=tmp_path):
+        # Create the video and a subtitle for this language
+        if video_exists:
+            ensure(video_name)
+        ensure(Path(video_name).with_suffix('.en.srt'))
+        result = runner.invoke(subliminal_cli, ['download', '-vv', '-l', 'en', '-p', 'gestdown', video_name])
+
+        assert result.exit_code == 0
+        assert '1 video ignored' in result.output
+
+
+@pytest.mark.parametrize('force', [False, True])
+@pytest.mark.parametrize('force_external', [False, True])
+def test_cli_download_force_external_subtitles(force: bool, force_external: bool, tmp_path: os.PathLike[str]) -> None:
+    runner = CliRunner()
+    video_name = 'Marvels.Agents.of.S.H.I.E.L.D.S02E06.720p.HDTV.x264-KILLERS.mkv'
+
+    with runner.isolated_filesystem(temp_dir=tmp_path):
+        # Create the video and a subtitle for this language
+        ensure(video_name)
+        ensure(Path(video_name).with_suffix('.en.srt'))
+
+        cli_args = ['download', '-vv', '-l', 'en', '-p', 'gestdown', video_name]
+        if force:
+            cli_args.append('--force')
+        if force_external:
+            cli_args.append('--force-external-subtitles')
+        result = runner.invoke(subliminal_cli, cli_args)
+
+        assert result.exit_code == 0
+        match = '1 video ignored' if not force and not force_external else '1 subtitle downloaded'
+        assert match in result.output

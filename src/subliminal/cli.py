@@ -7,6 +7,7 @@ import logging
 import os
 import pathlib
 import re
+import traceback
 from collections import defaultdict
 from collections.abc import Mapping
 from datetime import timedelta
@@ -49,8 +50,16 @@ from subliminal.utils import get_parameters_from_signature, merge_extend_and_ign
 
 if TYPE_CHECKING:
     from collections.abc import Callable, Sequence
+    from typing import TypedDict
 
     from subliminal.utils import Parameter
+
+    class ConfigResultDict(TypedDict):
+        """Information got from the configuration file."""
+
+        obj: dict[str, Any]
+        default_map: dict[str, Any]
+
 
 logger = logging.getLogger(__name__)
 
@@ -128,7 +137,7 @@ PROVIDERS_OPTIONS_CLI_TEMPLATE = '--{ext}.{plugin}.{key}'
 PROVIDERS_OPTIONS_ENVVAR_TEMPLATE = 'SUBLIMINAL_{ext}_{plugin}_{key}'
 
 
-def configure(ctx: click.Context, param: click.Parameter | None, filename: str | os.PathLike) -> None:
+def read_configuration(filename: str | os.PathLike) -> ConfigResultDict:
     """Read a configuration file."""
     filename = pathlib.Path(filename).expanduser()
     msg = ''
@@ -138,18 +147,15 @@ def configure(ctx: click.Context, param: click.Parameter | None, filename: str |
             with open(filename, 'rb') as f:
                 toml_dict = tomli.load(f)
         except tomli.TOMLDecodeError:
-            msg = f'Cannot read the configuration file at "{filename}"'
+            tb = traceback.format_exc()
+            msg = f'Cannot read the configuration file at {os.fspath(filename)!r}:\n{tb}'
         else:
-            msg = f'Using configuration file at "{filename}"'
+            msg = f'Using configuration file at {os.fspath(filename)!r}'
     else:
-        msg = f'Not using any configuration file, not a file "{filename}"'
+        msg = f'Not using any configuration file, not a file {os.fspath(filename)!r}'
 
-    options = {}
-
-    # make default options
-    default_dict = toml_dict.setdefault('default', {})
-    if 'cache_dir' in default_dict:
-        options['cache_dir'] = default_dict.pop('cache_dir')
+    # make options for subliminal from [default] section
+    options = toml_dict.setdefault('default', {})
 
     # make download options
     download_dict = toml_dict.setdefault('download', {})
@@ -175,18 +181,28 @@ def configure(ctx: click.Context, param: click.Parameter | None, filename: str |
     # make provider and refiner options
     for ext in ('provider', 'refiner'):
         for plugin, d in toml_dict.setdefault(ext, {}).items():
-            if not isinstance(d, Mapping):
+            if not isinstance(d, Mapping):  # pragma: no cover
                 continue
             for k, v in d.items():
                 name = PROVIDERS_OPTIONS_TEMPLATE.format(ext=ext, plugin=plugin, key=k)
                 options[name] = v
 
-    ctx.obj = {
-        'debug_message': msg,
-        'provider_lists': provider_lists,
-        'refiner_lists': refiner_lists,
+    return {
+        'obj': {
+            'debug_message': msg,
+            'provider_lists': provider_lists,
+            'refiner_lists': refiner_lists,
+        },
+        'default_map': options,
     }
-    ctx.default_map = options
+
+
+def configure(ctx: click.Context, param: click.Parameter | None, filename: str | os.PathLike) -> None:
+    """Update :class:`click.Context` based on a configuration file."""
+    config = read_configuration(filename)
+
+    ctx.obj = config['obj']
+    ctx.default_map = config['default_map']
 
 
 def plural(quantity: int, name: str, *, bold: bool = True, **kwargs: Any) -> str:

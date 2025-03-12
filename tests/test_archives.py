@@ -8,6 +8,7 @@ from pathlib import Path
 import pytest
 
 from subliminal.archives import is_supported_archive, scan_archive, scan_archive_rar
+from subliminal.core import scan_video_or_archive, scan_videos
 from subliminal.exceptions import ArchiveError
 
 unix_platform = pytest.mark.skipif(
@@ -45,30 +46,54 @@ def test_scan_archive_with_multiple_videos(rar: dict[str, str], mkv: dict[str, s
 
 
 def test_scan_archive_with_no_video(rar: dict[str, str]) -> None:
-    with pytest.raises(ArchiveError) as excinfo:
+    with pytest.raises(ArchiveError, match='No video in archive'):
         scan_archive(rar['simple'])
-    assert excinfo.value.args == ('No video in archive',)
 
 
 def test_scan_bad_archive(mkv: dict[str, str]) -> None:
-    with pytest.raises(ArchiveError) as excinfo:
+    with pytest.raises(ArchiveError, match="'.mkv' is not a valid archive"):
         scan_archive(mkv['test1'])
-    assert excinfo.value.args == ("'.mkv' is not a valid archive",)
 
 
 def test_scan_rar_not_a_file(mkv: dict[str, str]) -> None:
-    with pytest.raises(ValueError) as excinfo:
+    with pytest.raises(ValueError, match="Path does not exist: 'not_a_file.txt'"):
         scan_archive_rar('not_a_file.txt')
-    assert excinfo.value.args == ("Path does not exist: 'not_a_file.txt'",)
 
 
 def test_scan_rar_bad_archive(mkv: dict[str, str]) -> None:
-    with pytest.raises(ValueError) as excinfo:
+    with pytest.raises(ValueError, match="'.mkv' is not a valid archive"):
         scan_archive_rar(mkv['test1'])
-    assert excinfo.value.args == ("'.mkv' is not a valid archive",)
 
 
 def test_scan_password_protected_archive(rar: dict[str, str]) -> None:
-    with pytest.raises(ArchiveError) as excinfo:
+    with pytest.raises(ArchiveError, match='Rar requires a password'):
         scan_archive(rar['pwd-protected'])
-    assert excinfo.value.args == ('Rar requires a password',)
+
+
+def test_scan_archive_error(
+    rar: dict[str, str],
+) -> None:
+    if 'pwd-protected' not in rar:
+        return
+    path = rar['pwd-protected']
+    with pytest.raises(ArchiveError):
+        scan_archive(path)
+
+    with pytest.raises(ValueError, match='Error scanning archive'):
+        scan_video_or_archive(path)
+
+
+def test_scan_videos_error(
+    rar: dict[str, str],
+    caplog: pytest.LogCaptureFixture,
+) -> None:
+    if 'pwd-protected' not in rar:
+        return
+    folder = Path(rar['pwd-protected']).parent
+    # Test return without error
+    scan_videos(folder)
+
+    # But error was logged
+    for record in caplog.records:
+        assert record.levelname == 'ERROR'
+    assert 'Error scanning archive' in caplog.text

@@ -14,7 +14,6 @@ from babelfish import Language  # type: ignore[import-untyped]
 from subliminal.core import (
     check_video,
     save_subtitles,
-    scan_archive,
     scan_name,
     scan_path,
     scan_video,
@@ -22,7 +21,6 @@ from subliminal.core import (
     scan_videos,
     search_external_subtitles,
 )
-from subliminal.exceptions import ArchiveError
 from subliminal.subtitle import Subtitle
 from subliminal.utils import timestamp
 from subliminal.video import Episode, Movie
@@ -301,47 +299,6 @@ def test_scan_video_movie_name_path_does_not_exist(movies: dict[str, Movie]) -> 
     assert scanned_video.subtitle_languages == set()
     assert scanned_video.title == video.title
     assert scanned_video.year == video.year
-
-
-def test_scan_archive_error(
-    rar: dict[str, str],
-) -> None:
-    if 'pwd-protected' not in rar:
-        return
-    path = rar['pwd-protected']
-    with pytest.raises(ArchiveError):
-        scan_archive(path)
-
-    with pytest.raises(ValueError, match='Error scanning archive'):
-        scan_video_or_archive(path)
-
-
-def test_scan_videos_error(
-    rar: dict[str, str],
-    caplog: pytest.LogCaptureFixture,
-) -> None:
-    if 'pwd-protected' not in rar:
-        return
-    folder = Path(rar['pwd-protected']).parent
-    # Test return without error
-    scan_videos(folder)
-
-    # But error was logged
-    for record in caplog.records:
-        assert record.levelname == 'ERROR'
-    assert 'Error scanning archive' in caplog.text
-
-
-def test_scan_archive_invalid_extension(
-    movies: dict[str, Movie],
-    tmp_path: Path,
-    monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    monkeypatch.chdir(tmp_path)
-    movie_name = os.path.splitext(movies['interstellar'].name)[0] + '.mp3'
-    ensure(tmp_path / movie_name)
-    with pytest.raises(ArchiveError, match="'.mp3' is not a valid archive"):
-        scan_archive(movie_name)
 
 
 def test_scan_path(

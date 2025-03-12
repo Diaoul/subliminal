@@ -827,6 +827,7 @@ def mkv() -> dict[str, str]:
     in parallel or if they are repeated to avoid multiple downloads.
     """
     data_path = TESTS_DIR / 'data' / 'mkv'
+    data_path.mkdir(parents=True)
 
     wanted_files = [f'test{i}.mkv' for i in range(1, 9)]
 
@@ -861,6 +862,7 @@ def rar(mkv: dict[str, str]) -> dict[str, str]:
     in parallel or if they are repeated to avoid multiple downloads.
     """
     data_path = TESTS_DIR / 'data' / 'rar'
+    data_path.mkdir(parents=True)
 
     downloaded_files = {
         'pwd-protected': 'https://github.com/markokr/rarfile/blob/master/test/files/rar5-psw.rar?raw=true',

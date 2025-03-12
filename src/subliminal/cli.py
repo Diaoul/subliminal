@@ -607,7 +607,7 @@ def cache(ctx: click.Context, clear_subliminal: bool) -> None:
     help='Minimum score for a subtitle to be downloaded (0 to 100).',
 )
 @click.option(
-    '--language-type-suffix',
+    '--language-type-suffix/--no-language-type-suffix',
     is_flag=True,
     default=False,
     help='Add a suffix to the saved subtitle name to indicate a hearing impaired or foreign only subtitle.',
@@ -748,7 +748,7 @@ def download(
                 # collect video files
                 try:
                     collected_filepaths = collect_video_filepaths(p, age=age, archives=archives)
-                except ValueError:
+                except ValueError:  # pragma: no cover
                     logger.exception('Unexpected error while collecting directory path %s', p)
                     errored_paths.append(p)
                     continue
@@ -768,7 +768,7 @@ def download(
                         filepath_or_name,
                     )
                     # Show a simple error message
-                    if verbose > 0:
+                    if verbose > 0:  # pragma: no cover
                         # new line was already added with debug
                         if not debug:
                             click.echo()
@@ -776,7 +776,7 @@ def download(
                     errored_paths.append(filepath)
                     continue
 
-                except ValueError:
+                except ValueError:  # pragma: no cover
                     logger.exception(
                         'Unexpected error while collecting %s %s',
                         'path' if exists else 'non-existing path',
@@ -838,7 +838,7 @@ def download(
     # exit if no providers are used
     if len(use_providers) == 0:
         click.echo('No provider was selected to download subtitles.')
-        if verbose > 0:
+        if verbose > 0:  # pragma: no cover
             if 'ALL' in ignore_provider:
                 click.echo('All ignored from CLI argument: `--ignore-provider=ALL`')
             elif 'ALL' in obj['provider_lists']['ignore']:
@@ -908,14 +908,14 @@ def download(
                 # score color
                 score_color = None
                 scores = get_scores(v)
-                if isinstance(v, Movie):
+                if isinstance(v, Movie):  # pragma: no cover
                     if score < scores['title']:
                         score_color = 'red'
                     elif score < scores['title'] + scores['year'] + scores['release_group']:
                         score_color = 'yellow'
                     else:
                         score_color = 'green'
-                elif isinstance(v, Episode):
+                elif isinstance(v, Episode):  # pragma: no cover
                     if score < scores['series'] + scores['season'] + scores['episode']:
                         score_color = 'red'
                     elif score < scores['series'] + scores['season'] + scores['episode'] + scores['release_group']:

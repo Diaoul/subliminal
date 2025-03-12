@@ -356,9 +356,8 @@ def test_cli_download_ignored_video(video_exists: bool, tmp_path: os.PathLike[st
         assert '1 video ignored' in result.output
 
 
-@pytest.mark.parametrize('force', [False, True])
-@pytest.mark.parametrize('force_external', [False, True])
-def test_cli_download_force_external_subtitles(force: bool, force_external: bool, tmp_path: os.PathLike[str]) -> None:
+@pytest.mark.parametrize('only_force_external', [False, True])
+def test_cli_download_force_external_subtitles(only_force_external: bool, tmp_path: os.PathLike[str]) -> None:
     runner = CliRunner()
     video_name = 'Marvels.Agents.of.S.H.I.E.L.D.S02E06.720p.HDTV.x264-KILLERS.mkv'
 
@@ -368,12 +367,103 @@ def test_cli_download_force_external_subtitles(force: bool, force_external: bool
         ensure(Path(video_name).with_suffix('.en.srt'))
 
         cli_args = ['download', '-vv', '-l', 'en', '-p', 'gestdown', video_name]
-        if force:
-            cli_args.append('--force')
-        if force_external:
-            cli_args.append('--force-external-subtitles')
+        cli_args.append('--force-external-subtitles' if only_force_external else '--force')
         result = runner.invoke(subliminal_cli, cli_args)
 
         assert result.exit_code == 0
-        match = '1 video ignored' if not force and not force_external else '1 subtitle downloaded'
-        assert match in result.output
+        assert '1 subtitle downloaded' in result.output
+
+
+def test_cli_download_with_config(tmp_path: os.PathLike[str]) -> None:
+    runner = CliRunner()
+    video_name = 'Marvels.Agents.of.S.H.I.E.L.D.S02E06.720p.HDTV.x264-KILLERS.mkv'
+
+    with runner.isolated_filesystem(temp_dir=tmp_path) as td:
+        with open('subliminal.toml', 'w') as f:
+            content = dedent(
+                """\
+                [default]
+                # a default option
+                debug = false
+
+                [download]
+                # a mandatory option is defined in the config file
+                language = ["en"]
+                # an option is used
+                provider = ["gestdown"]
+                # that will be transformed in tuple
+                hearing_impaired = false
+
+                [provider.gestdown]
+                # provider options are parsed
+                timeout = 30
+
+                """
+            )
+            f.write(content)
+
+        result = runner.invoke(subliminal_cli, ['--config', 'subliminal.toml', 'download', video_name])
+
+        assert result.exit_code == 0
+        assert result.output.startswith('Collecting videos')
+        assert '1 subtitle' in result.output
+
+        subtitle_filename = os.path.splitext(video_name)[0] + '.en.srt'
+        # collect files recursively
+        files = [os.fspath(p.relative_to(td)) for p in Path(td).rglob('*')]
+        assert subtitle_filename in files
+
+
+def test_cli_download_with_config_with_toml_error(tmp_path: os.PathLike[str]) -> None:
+    runner = CliRunner()
+    video_name = 'Marvels.Agents.of.S.H.I.E.L.D.S02E06.720p.HDTV.x264-KILLERS.mkv'
+
+    with runner.isolated_filesystem(temp_dir=tmp_path):
+        with open('subliminal.toml', 'w') as f:
+            content = dedent(
+                """\
+                [default]
+                # TOML value error: False -> false
+                debug = False
+
+                """
+            )
+            f.write(content)
+
+        result = runner.invoke(
+            subliminal_cli,
+            ['--debug', '--config', 'subliminal.toml', 'download', '-l', 'en', video_name],
+        )
+
+        assert result.exit_code == 0
+        # TOML error in the config file means that the config file is not used
+        assert 'Cannot read the configuration file' in result.output
+
+
+def test_cli_download_with_config_with_option_error(tmp_path: os.PathLike[str]) -> None:
+    runner = CliRunner()
+    video_name = 'Marvels.Agents.of.S.H.I.E.L.D.S02E06.720p.HDTV.x264-KILLERS.mkv'
+
+    with runner.isolated_filesystem(temp_dir=tmp_path):
+        with open('subliminal.toml', 'w') as f:
+            content = dedent(
+                """\
+                [default]
+                debug = false
+
+                [download]
+                # type error: should be a list
+                language = "en"
+
+                """
+            )
+            f.write(content)
+
+        result = runner.invoke(
+            subliminal_cli,
+            ['--debug', '--config', 'subliminal.toml', 'download', video_name],
+        )
+
+        assert result.exit_code > 0
+        # Error in the config file is treated as an error in the CLI arguments
+        assert 'Value must be an iterable' in result.output

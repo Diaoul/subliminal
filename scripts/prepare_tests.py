@@ -20,8 +20,7 @@ def download_mkv(mkv_dir_path: str | os.PathLike[str]) -> dict[str, str]:
     """Download mkv files to be used in tests."""
     # data_path = TESTS / 'data' / 'mkv'
     mkv_dir_path = Path(mkv_dir_path)
-    if not mkv_dir_path.is_dir():
-        os.makedirs(mkv_dir_path)
+    mkv_dir_path.mkdir(parents=True, exist_ok=True)
 
     wanted_files = [f'test{i}.mkv' for i in range(1, 9)]
 
@@ -52,8 +51,7 @@ def download_rar(rar_dir_path: str | os.PathLike[str]) -> dict[str, str]:
     """Download rar files to be used in tests."""
     # data_path = TESTS / 'data' / 'rar'
     rar_dir_path = Path(rar_dir_path)
-    if not rar_dir_path.is_dir():
-        os.makedirs(rar_dir_path)
+    rar_dir_path.mkdir(parents=True, exist_ok=True)
 
     downloaded_files = {
         'pwd-protected': 'https://github.com/markokr/rarfile/blob/master/test/files/rar5-psw.rar?raw=true',
@@ -77,8 +75,7 @@ def compress_to_rar(rar_dir_path: str | os.PathLike[str], mkv: dict[str, str]) -
     """Compress mkv files to rar files to be used in tests."""
     # data_path = TESTS / 'data' / 'rar'
     rar_dir_path = Path(rar_dir_path)
-    if not rar_dir_path.is_dir():
-        os.makedirs(rar_dir_path)
+    rar_dir_path.mkdir(parents=True, exist_ok=True)
 
     generated_files = {
         'video': [mkv.get('test1')],
@@ -112,7 +109,7 @@ def prepare_files(data_path: str | os.PathLike[str]) -> dict[str, dict[str, str]
     """Download and prepare files for tests."""
     data_path = Path(data_path)
     if not data_path.is_dir():
-        os.makedirs(data_path)
+        data_path.mkdir(parents=True)
 
     # Download mkv files
     mkv = download_mkv(data_path / 'mkv')

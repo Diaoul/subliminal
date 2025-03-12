@@ -669,6 +669,18 @@ def provider_manager(monkeypatch: pytest.MonkeyPatch) -> Generator[RegistrableEx
             'video_name': episode2_name,
             'matches': {'episode', 'season', 'series', 'year'},
         },
+        {
+            'language': Language.fromietf('ukr'),
+            'subtitle_id': 'WeOa',
+            'fake_content': (  # windows-1251
+                b'1\n00:00:02,090 --> 00:00:03,970\n'
+                b'\xcf\xf0\xe8\xe2\xb3\xf2!\n\n'  # Привіт!\n\n
+                b'2\n00:00:04,080 --> 00:00:05,550\n'
+                b'\xd2\xb3\xe2\xe8\xf0\xef!\n\n'  # Тівирп!\n\n
+            ),
+            'video_name': episode2_name,
+            'matches': {'episode', 'season', 'series', 'year'},
+        },
     ]
 
     ep_podnapisi = mock_subtitle_provider('Podnapisi', subtitle_pool_podnapisi)
@@ -786,6 +798,32 @@ def provider_manager(monkeypatch: pytest.MonkeyPatch) -> Generator[RegistrableEx
             ),
             'video_name': episode_name,
             'matches': {'episode', 'season', 'series'},
+        },
+        {
+            'language': Language.fromietf('en'),
+            'subtitle_id': 'f7fe1369-4154-fa0c-bd04-d3d332de614c',
+            'fake_content': (
+                b'1\n00:00:02,090 --> 00:00:03,970\n'
+                b'[hearing impaired] Greetings.\n\n'
+                b'2\n00:00:04,080 --> 00:00:05,550\n'
+                b'Sgniteerg.\n\n'
+            ),
+            'video_name': episode2_name,
+            'matches': {'episode', 'season', 'series', 'year'},
+            'hearing_impaired': True,
+        },
+        {
+            'language': Language.fromietf('en'),
+            'subtitle_id': 'b5fe1369-fa0c-bd04-4154-d3d332d1234e',
+            'fake_content': (
+                b'1\n00:00:02,090 --> 00:00:03,970\n'
+                b'[foreign only] Greetings.\n\n'
+                b'2\n00:00:04,080 --> 00:00:05,550\n'
+                b'Sgniteerg.\n\n'
+            ),
+            'video_name': episode2_name,
+            'matches': {'episode', 'season', 'series', 'year'},
+            'foreign_only': True,
         },
     ]
 

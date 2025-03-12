@@ -154,7 +154,7 @@ class MockProvider(Provider):
         subtitles = [
             subtitle
             for subtitle in self.subtitle_pool
-            if subtitle.language in languages and subtitle.video_name == video.name
+            if subtitle.language in languages and video.name.endswith(subtitle.video_name)
         ]
         logger.info(
             'Mock provider %s list subtitles for video %r and languages %s: %d',

@@ -13,13 +13,13 @@
 | src/subliminal/providers/podnapisi.py        |      127 |       14 |       30 |        9 |     85% |64, 111, 136, 167-168, 171-172, 204-205, 219, 230, 235, 249-250 |
 | src/subliminal/providers/subtitulamos.py     |      139 |        3 |       32 |        2 |     97% |157-158, 255 |
 | src/subliminal/providers/tvsubtitles.py      |      166 |       15 |       46 |       14 |     86% |74, 90->92, 92->95, 148, 163, 176-177, 201, 237, 279, 285->291, 298-299, 304, 312->327, 319-320, 329-330 |
-| src/subliminal/refiners/metadata.py          |       80 |        2 |       34 |        4 |     95% |91-96, 110->115, 121->128, 146->153 |
+| src/subliminal/refiners/metadata.py          |       80 |        2 |       34 |        3 |     96% |91-96, 121->128, 146->153 |
 | src/subliminal/refiners/omdb.py              |      143 |       17 |       46 |        5 |     86% |31, 73-84, 97-98, 125-126, 128, 201, 316 |
 | src/subliminal/refiners/tmdb.py              |      164 |       27 |       48 |       12 |     80% |25-27, 126, 132, 137, 181, 193-197, 209-213, 227->exit, 235-236, 242-243, 263, 280-281, 286-287, 295, 341->344 |
 | src/subliminal/refiners/tvdb.py              |      225 |       27 |       62 |       15 |     85% |39, 182, 184, 256, 273-279, 295, 311, 325, 329, 364-365, 369-370, 374, 380-381, 454-455, 457-458, 478-479 |
-|                                    **TOTAL** | **3791** |  **266** | **1052** |  **142** | **91%** |           |
+|                                    **TOTAL** | **4070** |  **266** | **1130** |  **141** | **91%** |           |
 
-21 files skipped due to complete coverage.
+22 files skipped due to complete coverage.
 
 
 ## Setup coverage badge

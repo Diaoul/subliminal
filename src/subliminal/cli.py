@@ -7,6 +7,7 @@ import logging
 import os
 import pathlib
 import re
+import traceback
 from collections import defaultdict
 from collections.abc import Mapping
 from datetime import timedelta
@@ -52,10 +53,11 @@ if TYPE_CHECKING:
 
     from subliminal.utils import Parameter
 
+
 logger = logging.getLogger(__name__)
 
 
-class MutexLock(AbstractFileLock):
+class MutexLock(AbstractFileLock):  # pragma: no cover
     """:class:`MutexLock` is a thread-based rw lock based on :class:`dogpile.core.ReadWriteMutex`."""
 
     def __init__(self, filename: str) -> None:
@@ -90,7 +92,7 @@ class LanguageParamType(click.ParamType):
         try:
             return Language.fromietf(value)
         except BabelfishError:
-            self.fail(f'{value} is not a valid language', param, ctx)
+            self.fail(f'{value} is not a valid language', param, ctx)  # pragma: no cover
 
 
 LANGUAGE = LanguageParamType()
@@ -128,7 +130,7 @@ PROVIDERS_OPTIONS_CLI_TEMPLATE = '--{ext}.{plugin}.{key}'
 PROVIDERS_OPTIONS_ENVVAR_TEMPLATE = 'SUBLIMINAL_{ext}_{plugin}_{key}'
 
 
-def configure(ctx: click.Context, param: click.Parameter | None, filename: str | os.PathLike) -> None:
+def read_configuration(filename: str | os.PathLike) -> dict[str, dict[str, Any]]:
     """Read a configuration file."""
     filename = pathlib.Path(filename).expanduser()
     msg = ''
@@ -138,18 +140,15 @@ def configure(ctx: click.Context, param: click.Parameter | None, filename: str |
             with open(filename, 'rb') as f:
                 toml_dict = tomli.load(f)
         except tomli.TOMLDecodeError:
-            msg = f'Cannot read the configuration file at "{filename}"'
+            tb = traceback.format_exc()
+            msg = f'Cannot read the configuration file at {os.fspath(filename)!r}:\n{tb}'
         else:
-            msg = f'Using configuration file at "{filename}"'
+            msg = f'Using configuration file at {os.fspath(filename)!r}'
     else:
-        msg = f'Not using any configuration file, not a file "{filename}"'
+        msg = f'Not using any configuration file, not a file {os.fspath(filename)!r}'
 
-    options = {}
-
-    # make default options
-    default_dict = toml_dict.setdefault('default', {})
-    if 'cache_dir' in default_dict:
-        options['cache_dir'] = default_dict.pop('cache_dir')
+    # make options for subliminal from [default] section
+    options = toml_dict.setdefault('default', {})
 
     # make download options
     download_dict = toml_dict.setdefault('download', {})
@@ -175,18 +174,28 @@ def configure(ctx: click.Context, param: click.Parameter | None, filename: str |
     # make provider and refiner options
     for ext in ('provider', 'refiner'):
         for plugin, d in toml_dict.setdefault(ext, {}).items():
-            if not isinstance(d, Mapping):
+            if not isinstance(d, Mapping):  # pragma: no cover
                 continue
             for k, v in d.items():
                 name = PROVIDERS_OPTIONS_TEMPLATE.format(ext=ext, plugin=plugin, key=k)
                 options[name] = v
 
-    ctx.obj = {
-        'debug_message': msg,
-        'provider_lists': provider_lists,
-        'refiner_lists': refiner_lists,
+    return {
+        'obj': {
+            'debug_message': msg,
+            'provider_lists': provider_lists,
+            'refiner_lists': refiner_lists,
+        },
+        'default_map': options,
     }
-    ctx.default_map = options
+
+
+def configure(ctx: click.Context, param: click.Parameter | None, filename: str | os.PathLike) -> None:
+    """Update :class:`click.Context` based on a configuration file."""
+    config = read_configuration(filename)
+
+    ctx.obj = config['obj']
+    ctx.default_map = config['default_map']
 
 
 def plural(quantity: int, name: str, *, bold: bool = True, **kwargs: Any) -> str:
@@ -328,7 +337,7 @@ def subliminal(
     # create cache directory
     try:
         cache_dir_path.mkdir(parents=True)
-    except OSError:
+    except OSError:  # pragma: no cover
         if not cache_dir_path.is_dir():
             raise
 
@@ -350,7 +359,7 @@ def subliminal(
         try:
             # make sure the parent directories exist
             logfile_path.parent.mkdir(parents=True)
-        except OSError:
+        except OSError:  # pragma: no cover
             if not logfile_path.parent.is_dir():
                 raise
 
@@ -407,7 +416,7 @@ def cache(ctx: click.Context, clear_subliminal: bool) -> None:
     """Cache management."""
     if clear_subliminal and ctx.parent and 'cache_dir' in ctx.parent.params:
         cache_dir_path = Path(ctx.parent.params['cache_dir'])
-        for file in (cache_dir_path / cache_file).glob('*'):
+        for file in (cache_dir_path / cache_file).glob('*'):  # pragma: no cover
             file.unlink()
         click.echo("Subliminal's cache cleared.")
     else:
@@ -607,7 +616,7 @@ def cache(ctx: click.Context, clear_subliminal: bool) -> None:
     help='Minimum score for a subtitle to be downloaded (0 to 100).',
 )
 @click.option(
-    '--language-type-suffix',
+    '--language-type-suffix/--no-language-type-suffix',
     is_flag=True,
     default=False,
     help='Add a suffix to the saved subtitle name to indicate a hearing impaired or foreign only subtitle.',
@@ -686,9 +695,12 @@ def download(
     # process parameters
     language_set = set(language)
 
-    # no encoding specified, default to None
-    if not encoding:
+    # no encoding specified, default to None. Also convert to None --encoding=''
+    if not encoding or encoding in ['""', "''"]:
         encoding = None
+    # no subtitle_format specified, default to None Also convert to None --subtitle_format=''
+    if not subtitle_format or subtitle_format in ['""', "''"]:
+        subtitle_format = None
 
     # language_type
     hearing_impaired_flag: bool | None = None
@@ -745,7 +757,7 @@ def download(
                 # collect video files
                 try:
                     collected_filepaths = collect_video_filepaths(p, age=age, archives=archives)
-                except ValueError:
+                except ValueError:  # pragma: no cover
                     logger.exception('Unexpected error while collecting directory path %s', p)
                     errored_paths.append(p)
                     continue
@@ -765,7 +777,7 @@ def download(
                         filepath_or_name,
                     )
                     # Show a simple error message
-                    if verbose > 0:
+                    if verbose > 0:  # pragma: no cover
                         # new line was already added with debug
                         if not debug:
                             click.echo()
@@ -773,7 +785,7 @@ def download(
                     errored_paths.append(filepath)
                     continue
 
-                except ValueError:
+                except ValueError:  # pragma: no cover
                     logger.exception(
                         'Unexpected error while collecting %s %s',
                         'path' if exists else 'non-existing path',
@@ -813,7 +825,8 @@ def download(
             msg = f'{video_name!r} ignored'
             if video.exists:
                 langs = ', '.join(str(s) for s in video.subtitle_languages) or 'none'
-                days = f"{video.age.days:d} day{'s' if video.age.days > 1 else ''}"
+                video_age = video.get_age(use_ctime=use_ctime)
+                days = f"{video_age.days:d} day{'s' if video_age.days > 1 else ''}"
                 msg += f' - subtitles: {langs} / age: {days}'
             else:
                 msg += ' - not a video file'
@@ -835,7 +848,7 @@ def download(
     # exit if no providers are used
     if len(use_providers) == 0:
         click.echo('No provider was selected to download subtitles.')
-        if verbose > 0:
+        if verbose > 0:  # pragma: no cover
             if 'ALL' in ignore_provider:
                 click.echo('All ignored from CLI argument: `--ignore-provider=ALL`')
             elif 'ALL' in obj['provider_lists']['ignore']:
@@ -873,7 +886,7 @@ def download(
                 )
                 downloaded_subtitles[v] = subtitles
 
-        if pp.discarded_providers:
+        if pp.discarded_providers:  # pragma: no cover
             click.secho(
                 f"Some providers have been discarded due to unexpected errors: {', '.join(pp.discarded_providers)}",
                 fg='yellow',
@@ -905,14 +918,14 @@ def download(
                 # score color
                 score_color = None
                 scores = get_scores(v)
-                if isinstance(v, Movie):
+                if isinstance(v, Movie):  # pragma: no cover
                     if score < scores['title']:
                         score_color = 'red'
                     elif score < scores['title'] + scores['year'] + scores['release_group']:
                         score_color = 'yellow'
                     else:
                         score_color = 'green'
-                elif isinstance(v, Episode):
+                elif isinstance(v, Episode):  # pragma: no cover
                     if score < scores['series'] + scores['season'] + scores['episode']:
                         score_color = 'red'
                     elif score < scores['series'] + scores['season'] + scores['episode'] + scores['release_group']:
@@ -940,6 +953,6 @@ def download(
         click.echo(f"Downloaded {plural(total_subtitles, 'subtitle')}")
 
 
-def cli() -> None:
+def cli() -> None:  # pragma: no cover
     """CLI that recognizes environment variables."""
     subliminal(auto_envvar_prefix='SUBLIMINAL')

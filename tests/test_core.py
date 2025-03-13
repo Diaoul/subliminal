@@ -3,9 +3,8 @@ from __future__ import annotations
 
 import os
 from datetime import datetime, timedelta, timezone
-from pathlib import Path
 from textwrap import dedent
-from typing import Any
+from typing import TYPE_CHECKING, Any
 from unittest.mock import Mock
 
 import pytest
@@ -24,26 +23,13 @@ from subliminal.core import (
 from subliminal.subtitle import Subtitle
 from subliminal.utils import timestamp
 from subliminal.video import Episode, Movie
+from tests.conftest import ensure
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 # Core test
 pytestmark = pytest.mark.core
-
-
-def ensure(path: str | os.PathLike[str], *, directory: bool = False) -> Path:
-    """Create a file (or directory) at path."""
-    path = Path(path)
-    if directory:
-        # Create a directory at path
-        if not path.is_dir():
-            path.mkdir(parents=True)
-
-    else:
-        # Create a directory at parent
-        if not path.parent.is_dir():
-            path.parent.mkdir(parents=True)
-        # Create a file at path
-        path.touch()
-    return path
 
 
 def test_check_video_languages(movies: dict[str, Movie]) -> None:

@@ -26,6 +26,23 @@ if TYPE_CHECKING:
 TESTS_DIR = Path(__file__).parent
 
 
+def ensure(path: str | os.PathLike[str], *, directory: bool = False) -> Path:
+    """Create a file (or directory) at path."""
+    path = Path(path)
+    if directory:
+        # Create a directory at path
+        if not path.is_dir():
+            path.mkdir(parents=True)
+
+    else:
+        # Create a directory at parent
+        if not path.parent.is_dir():
+            path.parent.mkdir(parents=True)
+        # Create a file at path
+        path.touch()
+    return path
+
+
 @pytest.fixture(autouse=True, scope='session')
 def _configure_region() -> None:
     region.configure('dogpile.cache.null')
@@ -582,6 +599,7 @@ def provider_manager(monkeypatch: pytest.MonkeyPatch) -> Generator[RegistrableEx
     episode_name = os.path.join(
         'The Big Bang Theory', 'Season 07', 'The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION.mkv'
     )
+    episode2_name = 'Marvels.Agents.of.S.H.I.E.L.D.S02E06.720p.HDTV.x264-KILLERS.mkv'
 
     # Podnapisi, subtitle pool
     subtitle_pool_podnapisi = [
@@ -638,6 +656,30 @@ def provider_manager(monkeypatch: pytest.MonkeyPatch) -> Generator[RegistrableEx
             ),
             'video_name': movie_name,
             'matches': {'title', 'country', 'year'},
+        },
+        {
+            'language': Language.fromietf('en'),
+            'subtitle_id': 'Dadi',
+            'fake_content': (
+                b'1\n00:00:02,090 --> 00:00:03,970\n'
+                b'Greetings.\n\n'
+                b'2\n00:00:04,080 --> 00:00:05,550\n'
+                b'Sgniteerg.\n\n'
+            ),
+            'video_name': episode2_name,
+            'matches': {'episode', 'season', 'series', 'year'},
+        },
+        {
+            'language': Language.fromietf('ukr'),
+            'subtitle_id': 'WeOa',
+            'fake_content': (  # windows-1251
+                b'1\n00:00:02,090 --> 00:00:03,970\n'
+                b'\xcf\xf0\xe8\xe2\xb3\xf2!\n\n'  # Привіт!\n\n
+                b'2\n00:00:04,080 --> 00:00:05,550\n'
+                b'\xd2\xb3\xe2\xe8\xf0\xef!\n\n'  # Тівирп!\n\n
+            ),
+            'video_name': episode2_name,
+            'matches': {'episode', 'season', 'series', 'year'},
         },
     ]
 
@@ -756,6 +798,32 @@ def provider_manager(monkeypatch: pytest.MonkeyPatch) -> Generator[RegistrableEx
             ),
             'video_name': episode_name,
             'matches': {'episode', 'season', 'series'},
+        },
+        {
+            'language': Language.fromietf('en'),
+            'subtitle_id': 'f7fe1369-4154-fa0c-bd04-d3d332de614c',
+            'fake_content': (
+                b'1\n00:00:02,090 --> 00:00:03,970\n'
+                b'[hearing impaired] Greetings.\n\n'
+                b'2\n00:00:04,080 --> 00:00:05,550\n'
+                b'Sgniteerg.\n\n'
+            ),
+            'video_name': episode2_name,
+            'matches': {'episode', 'season', 'series', 'year'},
+            'hearing_impaired': True,
+        },
+        {
+            'language': Language.fromietf('en'),
+            'subtitle_id': 'b5fe1369-fa0c-bd04-4154-d3d332d1234e',
+            'fake_content': (
+                b'1\n00:00:02,090 --> 00:00:03,970\n'
+                b'[foreign only] Greetings.\n\n'
+                b'2\n00:00:04,080 --> 00:00:05,550\n'
+                b'Sgniteerg.\n\n'
+            ),
+            'video_name': episode2_name,
+            'matches': {'episode', 'season', 'series', 'year'},
+            'foreign_only': True,
         },
     ]
 

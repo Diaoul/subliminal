@@ -3,9 +3,8 @@ from __future__ import annotations
 
 import os
 from datetime import datetime, timedelta, timezone
-from pathlib import Path
 from textwrap import dedent
-from typing import Any
+from typing import TYPE_CHECKING, Any
 from unittest.mock import Mock
 
 import pytest
@@ -25,6 +24,9 @@ from subliminal.subtitle import Subtitle
 from subliminal.utils import timestamp
 from subliminal.video import Episode, Movie
 from tests.conftest import ensure
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 # Core test
 pytestmark = pytest.mark.core

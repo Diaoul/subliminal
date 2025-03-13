@@ -40,10 +40,7 @@ provided, it looks for a ``subliminal.toml`` file in the default configuration f
 - MacOS: ``/Users/<user>/Library/Application Support/subliminal/subliminal.toml``
 - Windows: ``C:\\Users\\<user>\\AppData\\Local\\Acme\\subliminal\\subliminal.toml``
 
-Example of a ``subliminal.toml`` file:
-
-.. literalinclude:: ../config.toml
-    :language: toml
+Follow the documentation about the :ref:`configuration-file` with examples.
 
 See :ref:`cli` for more details on the available commands and options.
 

@@ -50,15 +50,8 @@ from subliminal.utils import get_parameters_from_signature, merge_extend_and_ign
 
 if TYPE_CHECKING:
     from collections.abc import Callable, Sequence
-    from typing import TypedDict
 
     from subliminal.utils import Parameter
-
-    class ConfigResultDict(TypedDict):
-        """Information got from the configuration file."""
-
-        obj: dict[str, Any]
-        default_map: dict[str, Any]
 
 
 logger = logging.getLogger(__name__)
@@ -137,7 +130,7 @@ PROVIDERS_OPTIONS_CLI_TEMPLATE = '--{ext}.{plugin}.{key}'
 PROVIDERS_OPTIONS_ENVVAR_TEMPLATE = 'SUBLIMINAL_{ext}_{plugin}_{key}'
 
 
-def read_configuration(filename: str | os.PathLike) -> ConfigResultDict:
+def read_configuration(filename: str | os.PathLike) -> dict[str, dict[str, Any]]:
     """Read a configuration file."""
     filename = pathlib.Path(filename).expanduser()
     msg = ''

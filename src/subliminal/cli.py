@@ -202,7 +202,7 @@ def configure(ctx: click.Context, param: click.Parameter | None, filename: str |
     ctx.default_map = config['default_map']
 
 
-def generate_default_config(*, compact: bool = True) -> tomlkit.toml_document.TOMLDocument:
+def generate_default_config(*, compact: bool = True) -> str:
     """Generate a default configuration file."""
 
     def add_value_to_table(opt: click.Option, table: tomlkit.items.Table, *, name: str | None = None) -> None:
@@ -212,13 +212,12 @@ def generate_default_config(*, compact: bool = True) -> tomlkit.toml_document.TO
         # Override option name
         opt_name = name if name is not None else opt.name
 
-        table.add(tomlkit.comment(opt.help or opt_name))
+        table.add(tomlkit.comment((opt.help or opt_name).capitalize()))
         # default.add(tomlkit.comment(f'{opt.name} = {opt.default}'))
         if opt.default is not None:
             table.add(opt_name, opt.default)
         else:
-            table.add(opt_name, tomlkit.items.Null())
-            table.add(tomlkit.nl())
+            table.add(tomlkit.comment(f'{opt_name} = '))
 
     # Create TOML document
     doc = tomlkit.document()
@@ -299,7 +298,7 @@ def generate_default_config(*, compact: bool = True) -> tomlkit.toml_document.TO
         if not compact:
             doc.add(tomlkit.nl())
 
-    return doc
+    return tomlkit.dumps(doc)
 
 
 def plural(quantity: int, name: str, *, bold: bool = True, **kwargs: Any) -> str:

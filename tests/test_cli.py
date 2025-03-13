@@ -8,7 +8,6 @@ from typing import TYPE_CHECKING
 from unittest.mock import Mock
 
 import pytest
-import tomlkit
 from click.testing import CliRunner
 
 from subliminal.cli import generate_default_config
@@ -513,7 +512,7 @@ def test_cli_download_with_generated_config(tmp_path: os.PathLike[str]) -> None:
     with runner.isolated_filesystem(temp_dir=tmp_path) as td:
         doc = generate_default_config()
         with open('subliminal.toml', 'w') as f:
-            tomlkit.dump(doc, f)
+            f.write(doc)
 
         result = runner.invoke(subliminal_cli, ['--config', 'subliminal.toml', 'download', '-l', 'en', video_name])
 

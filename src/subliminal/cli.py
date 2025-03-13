@@ -354,6 +354,9 @@ def subliminal(
     debug: bool,
     logfile: os.PathLike[str] | None,
     logfile_level: str,
+    addic7ed: tuple[str, str],
+    opensubtitles: tuple[str, str],
+    opensubtitlescom: tuple[str, str],
     **kwargs: Any,
 ) -> None:
     """Subtitles, faster than your thoughts."""
@@ -430,10 +433,14 @@ def subliminal(
     ctx.obj['refiner_configs'] = refiner_configs
 
     # Deprecated options
-    deprecated_options = ['addic7ed', 'opensubtitles', 'opensubtitlescom']
-    for provider in deprecated_options:
-        option_value = kwargs.get(provider)
-        if option_value is not None:
+    # To be remove in next version
+    deprecated_options = {
+        'addic7ed': addic7ed,
+        'opensubtitles': opensubtitles,
+        'opensubtitlescom': opensubtitlescom,
+    }
+    for provider, option_value in deprecated_options.items():
+        if option_value is not None:  # pragma: no cover
             msg = (
                 f'option --{provider} is deprecated, use --provider.{provider}.username and '
                 f'--provider.{provider}.password'

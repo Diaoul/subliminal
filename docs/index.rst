@@ -18,6 +18,7 @@ Documentation
     user/installation
     user/how_it_works
     user/cli
+    user/configuration_file
     user/provider_guide
 
 

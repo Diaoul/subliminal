@@ -150,6 +150,9 @@ def read_configuration(filename: str | os.PathLike) -> dict[str, dict[str, Any]]
     # make options for subliminal from [default] section
     options = toml_dict.setdefault('default', {})
 
+    # make cache options
+    options['cache'] = toml_dict.setdefault('cache', {})
+
     # make download options
     download_dict = toml_dict.setdefault('download', {})
     # handle language types

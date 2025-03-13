@@ -246,9 +246,6 @@ class Video:
     def __repr__(self) -> str:  # pragma: no cover
         return f'<{self.__class__.__name__} [{self.name!r}]>'
 
-    def __hash__(self) -> int:
-        return hash(self.name)
-
 
 @define
 class Episode(Video):

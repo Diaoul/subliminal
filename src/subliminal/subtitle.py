@@ -160,7 +160,7 @@ class Subtitle:
     force_guessing_encoding: bool = field(kw_only=True, default=True, eq=False)
 
     #: Content as bytes
-    _content: bytes | None = field(init=False, default=None, eq=True)
+    _content: bytes | None = field(init=False, default=None, eq=False)
 
     #: Content as string
     _text: str = field(init=False, default='', eq=False)
@@ -195,7 +195,7 @@ class Subtitle:
         return self.language_type.is_hearing_impaired()
 
     @hearing_impaired.setter
-    def hearing_impaired(self, value: bool | None) -> None:
+    def hearing_impaired(self, value: bool | None) -> None:  # pragma: no cover
         """Whether the subtitle is for hearing impaired."""
         self._hearing_impaired = value
 
@@ -205,7 +205,7 @@ class Subtitle:
         return self.language_type.is_foreign_only()
 
     @foreign_only.setter
-    def foreign_only(self, value: bool | None) -> None:
+    def foreign_only(self, value: bool | None) -> None:  # pragma: no cover
         """Whether the subtitle is a foreign only / forced subtitle."""
         self._foreign_only = value
 

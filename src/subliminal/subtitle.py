@@ -136,10 +136,10 @@ class Subtitle:
     subtitle_id: str = ''
 
     #: Whether the subtitle is for hearing impaired
-    _hearing_impaired: bool | None = field(eq=False, default=None)
+    _hearing_impaired: bool | None = field(kw_only=True, eq=False, default=None)
 
     #: Whether the subtitle is a foreign only / forced subtitle
-    _foreign_only: bool | None = field(eq=False, default=None)
+    _foreign_only: bool | None = field(kw_only=True, eq=False, default=None)
 
     #: URL of the web page from which the subtitle can be downloaded
     page_link: str | None = field(kw_only=True, default=None)

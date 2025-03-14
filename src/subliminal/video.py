@@ -2,11 +2,15 @@
 
 from __future__ import annotations
 
+# Do not put timedelta and Sequence in TYPE_CHECKING for avoid error with docs
 import logging
 import os
 import warnings
-from typing import TYPE_CHECKING, Any
+from collections.abc import Mapping, Sequence  # noqa: TC003
+from datetime import timedelta  # noqa: TC003
+from typing import Any
 
+# Do not put babelfish.Language and Subtitle in TYPE_CHECKING so cattrs.unstructure works
 from attrs import define, field
 from babelfish import Country, Language  # noqa: TC002  # type: ignore[import-untyped]
 from guessit import guessit  # type: ignore[import-untyped]
@@ -14,12 +18,6 @@ from guessit import guessit  # type: ignore[import-untyped]
 from subliminal.exceptions import GuessingError
 from subliminal.subtitle import Subtitle  # noqa: TC001
 from subliminal.utils import ensure_list, get_age, matches_extended_title
-
-if TYPE_CHECKING:
-    # Do not put babelfish.Language and Subtitle in TYPE_CHECKING so cattrs.unstructure works
-    from collections.abc import Mapping, Sequence
-    from datetime import timedelta
-
 
 logger = logging.getLogger(__name__)
 

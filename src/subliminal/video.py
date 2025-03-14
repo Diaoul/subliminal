@@ -17,7 +17,7 @@ from subliminal.utils import ensure_list, get_age, matches_extended_title
 
 if TYPE_CHECKING:
     # Do not put babelfish.Language and Subtitle in TYPE_CHECKING so cattrs.unstructure works
-    from collections.abc import Mapping
+    from collections.abc import Mapping, Sequence
     from datetime import timedelta
 
 
@@ -247,6 +247,11 @@ class Video:
         return f'<{self.__class__.__name__} [{self.name!r}]>'
 
 
+def ensure_list_int(value: int | Sequence[int] | None) -> list[int]:
+    """Return None if the value is non-positive."""
+    return ensure_list(value)
+
+
 @define
 class Episode(Video):
     """Episode :class:`Video`.
@@ -269,7 +274,7 @@ class Episode(Video):
     season: int
 
     #: Episode numbers of the episode
-    episodes: list[int] = field(converter=ensure_list)
+    episodes: list[int] = field(converter=ensure_list_int)
 
     #: Title of the episode
     title: str | None = field(kw_only=True, default=None)

@@ -144,7 +144,7 @@ class Subtitle:
     #: URL of the web page from which the subtitle can be downloaded
     page_link: str | None = field(kw_only=True, default=None)
 
-    #: Encoding to decode with when accessing :attr:`text`
+    #: Encoding to decode with when accessing the `text` property
     encoding: str | None = field(kw_only=True, default=None, converter=check_encoding)
 
     #: Subtitle format, None for automatic detection

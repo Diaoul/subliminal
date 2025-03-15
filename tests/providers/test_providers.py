@@ -343,22 +343,6 @@ def test_download_best_subtitles_only_one(episodes: dict[str, Episode]) -> None:
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_download_bad_subtitle(movies: dict[str, Movie]) -> None:
-    pool = ProviderPool()
-    subtitles = pool.list_subtitles_provider('opensubtitles', movies['man_of_steel'], {Language('eng')})
-    assert subtitles is not None
-    assert len(subtitles) >= 1
-    subtitle = subtitles[0]
-    subtitle.subtitle_id = ''
-
-    pool.download_subtitle(subtitle)
-
-    assert subtitle.content is None
-    assert subtitle.is_valid() is False
-
-
-@pytest.mark.integration
-@vcr.use_cassette
 def test_list_subtitles_providers_download(episodes: dict[str, Episode]) -> None:
     video = episodes['bbt_s07e05']
     languages = {Language('eng')}

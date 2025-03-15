@@ -244,6 +244,9 @@ class Video:
     def __repr__(self) -> str:  # pragma: no cover
         return f'<{self.__class__.__name__} [{self.name!r}]>'
 
+    def __hash__(self) -> int:  # pragma: no cover
+        return hash(self.name)
+
 
 def ensure_list_int(value: int | Sequence[int] | None) -> list[int]:
     """Return None if the value is non-positive."""
@@ -329,9 +332,9 @@ class Episode(Video):
 
         return cls(
             name,
-            guess['title'],
-            guess.get('season', 1),
-            guess.get('episode', []),
+            series=guess['title'],
+            season=guess.get('season', 1),
+            episodes=guess.get('episode', []),
             title=guess.get('episode_title'),
             year=guess.get('year'),
             country=guess.get('country'),

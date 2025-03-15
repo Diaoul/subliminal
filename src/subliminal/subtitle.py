@@ -133,7 +133,7 @@ class Subtitle:
     language: Language
 
     #: Subtitle id
-    subtitle_id: str = ''
+    _subtitle_id: str = ''
 
     #: Whether the subtitle is for hearing impaired
     _hearing_impaired: bool | None = field(kw_only=True, eq=False, default=None)
@@ -157,7 +157,7 @@ class Subtitle:
     embedded: bool = field(kw_only=True, default=False)
 
     #: Guess encoding if None is defined
-    force_guessing_encoding: bool = field(kw_only=True, default=True, eq=False)
+    force_guessing_encoding: bool = field(kw_only=True, default=True)
 
     #: Content as bytes
     _content: bytes | None = field(init=False, default=None, eq=False)
@@ -175,9 +175,14 @@ class Subtitle:
     _language_type: LanguageType = field(init=False, default=LanguageType.UNKNOWN, eq=True)
 
     @property
+    def subtitle_id(self) -> str:
+        """Unique identifier of the subtitle, read-only."""
+        return str(self._subtitle_id)
+
+    @property
     def id(self) -> str:
-        """Unique identifier of the subtitle."""
-        return str(self.subtitle_id)
+        """Unique identifier of the subtitle, read-only. Alias of subtitle_id."""
+        return self.subtitle_id
 
     @property
     def info(self) -> str:

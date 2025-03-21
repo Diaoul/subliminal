@@ -8,6 +8,8 @@ subliminal
 .. program-output:: subliminal --help
 
 
+.. _cli-subliminal-download:
+
 subliminal download
 -------------------
 .. program-output:: subliminal download --help

@@ -74,7 +74,7 @@ def test_query_srt_reencode(episodes: dict[str, Episode]) -> None:
     assert subtitle.content
     assert subtitle.is_valid()
     assert subtitle.subtitle_format == 'srt'
-    assert subtitle.encoding == 'windows-1250'
+    assert subtitle.encoding == 'cp1250'
     subtitle.reencode()
     assert subtitle.encoding == 'utf-8'
     assert 'O czym myślisz?' in subtitle.text

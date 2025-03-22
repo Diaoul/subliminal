@@ -1,11 +1,14 @@
 from __future__ import annotations
 
 import os
+from importlib.metadata import version as get_version
 from textwrap import dedent
 from typing import TYPE_CHECKING
 
 import pytest
 from babelfish import Language  # type: ignore[import-untyped]
+from cattrs import structure, unstructure
+from packaging.version import Version
 
 from subliminal.subtitle import (
     EmbeddedSubtitle,
@@ -566,3 +569,24 @@ def test_embedded_subtitle_info_foreign_only(monkeypatch: pytest.MonkeyPatch) ->
     assert subtitle.foreign_only is True
     assert isinstance(subtitle.id, str)
     assert isinstance(subtitle.info, str)
+
+
+@pytest.mark.skipif(
+    Version(get_version('babelfish')) <= Version('0.6.1'),
+    reason='babelfish.Language needs to be a hashable dataclass',
+)
+def test_serialize_subtitle() -> None:
+    content = b'1\n00:01:00 --> 00:02:00\nA long text\n\n'
+
+    subtitle = Subtitle(
+        language=Language('eng'),
+        hearing_impaired=False,
+        page_link=None,
+        encoding=None,
+    )
+    subtitle.content = content
+
+    ser = unstructure(subtitle)
+    new_subtitle = structure(ser, Subtitle)
+
+    assert subtitle == new_subtitle

@@ -11,11 +11,12 @@ from typing import TYPE_CHECKING, ClassVar
 
 import chardet
 import srt  # type: ignore[import-untyped]
+from babelfish import Language, LanguageReverseError  # type: ignore[import-untyped]
 from pysubs2 import SSAFile, UnknownFPSError  # type: ignore[import-untyped]
 
-if TYPE_CHECKING:
-    from babelfish import Language  # type: ignore[import-untyped]
+from subliminal.utils import trim_pattern
 
+if TYPE_CHECKING:
     from subliminal.video import Video
 
 logger = logging.getLogger(__name__)
@@ -505,26 +506,25 @@ class Subtitle:
         raise NotImplementedError
 
     def __hash__(self) -> int:
-        return hash(self.provider_name + '-' + self.id)
+        return hash((self.provider_name, self.id, self.language))
 
     def __repr__(self) -> str:
         return f'<{self.__class__.__name__} {self.id!r} [{self.language}]>'
 
 
 class EmbeddedSubtitle(Subtitle):
-    """Embedded subtitle."""
+    """Embedded subtitle, the id should be the video filename."""
 
     def __init__(
         self,
         language: Language,
+        subtitle_id: str,
         *,
         hearing_impaired: bool | None = None,
         foreign_only: bool | None = None,
         encoding: str | None = None,
         subtitle_format: str | None = None,
     ) -> None:
-        subtitle_id = f'Embedded <{language}>'
-
         super().__init__(
             language,
             subtitle_id,
@@ -544,7 +544,84 @@ class EmbeddedSubtitle(Subtitle):
         elif self.language_type == LanguageType.FOREIGN_ONLY:
             extra = ' [fo]'
 
-        return f'{self.id}{extra}'
+        return f'Embedded {self.language}{extra}'
+
+
+class ExternalSubtitle(Subtitle):
+    """External subtitle, the id should be the subtitle filename."""
+
+    def __init__(
+        self,
+        language: Language,
+        subtitle_id: str,
+        *,
+        hearing_impaired: bool | None = None,
+        foreign_only: bool | None = None,
+        encoding: str | None = None,
+        subtitle_format: str | None = None,
+    ) -> None:
+        super().__init__(
+            language,
+            subtitle_id,
+            hearing_impaired=hearing_impaired,
+            foreign_only=foreign_only,
+            encoding=encoding,
+            subtitle_format=subtitle_format,
+            embedded=False,
+        )
+
+    @classmethod
+    def from_language_code(
+        cls,
+        language_code: str,
+        subtitle_path: str | os.PathLike[str] = '',
+    ) -> ExternalSubtitle | None:
+        """Create a subtitle from the language_code suffix from a subtitle filename."""
+        subtitle_path = os.fspath(subtitle_path)
+        # get the subtitle format from the extension
+        subtitle_ext = os.path.splitext(subtitle_path)[1]
+        formats = [fmt for fmt, ext in FORMAT_TO_EXTENSION.items() if ext == subtitle_ext]
+        subtitle_format = formats[0] if len(formats) > 0 else None
+
+        # Cannot guess language
+        und_language = Language('Und')
+        if not language_code:
+            return cls(und_language, subtitle_id=subtitle_path, subtitle_format=subtitle_format)
+
+        # Try guessing the language alone
+        # this should be done before trimming, because 'hi' is Hindi
+        guessed = guess_language_from_suffix(language_code)
+        if guessed:
+            # Language was guessed
+            return cls(guessed, subtitle_id=subtitle_path, subtitle_format=subtitle_format)
+
+        # Check for hearing_impaired code
+        hearing_impaired_names = ('hi', 'sdh', 'cc')
+        short_language_code, match = trim_pattern(language_code, hearing_impaired_names, sep='.')
+
+        if match and (guessed := guess_language_from_suffix(short_language_code)):
+            return cls(guessed, subtitle_id=subtitle_path, subtitle_format=subtitle_format, hearing_impaired=True)
+
+        # Check for foreign_only code
+        foreign_only_names = ('fo',)
+        short_language_code, match = trim_pattern(language_code, foreign_only_names, sep='.')
+
+        if match and (guessed := guess_language_from_suffix(short_language_code)):
+            return cls(guessed, subtitle_id=subtitle_path, subtitle_format=subtitle_format, foreign_only=True)
+
+        # Language not guessed
+        return cls(und_language, subtitle_id=subtitle_path, subtitle_format=subtitle_format)
+
+    @property
+    def info(self) -> str:
+        """Info of the subtitle, human readable. Usually the subtitle name for GUI rendering."""
+        extra = ''
+        if self.language_type == LanguageType.HEARING_IMPAIRED:
+            extra = ' [hi]'
+        elif self.language_type == LanguageType.FOREIGN_ONLY:
+            extra = ' [fo]'
+
+        return f'External {self.language}{extra}'
 
 
 def get_subtitle_format(
@@ -579,6 +656,7 @@ def get_subtitle_suffix(
     language_format: str = 'alpha2',
     language_type: LanguageType = LanguageType.UNKNOWN,
     language_type_suffix: bool = False,
+    language_first: bool = False,
 ) -> str:
     """Get the subtitle suffix using the `language` and `language_type`.
 
@@ -590,6 +668,8 @@ def get_subtitle_suffix(
         (hearing impaired or foreign only).
     :param bool language_type_suffix: add a suffix 'hi' or 'fo' if needed.
         Default to False.
+    :param bool language_first: the suffix is of the form '.language.language_type',
+        instead of '.language_type.language'
     :return: suffix to the subtitle name.
     :rtype: str
 
@@ -624,7 +704,20 @@ def get_subtitle_suffix(
         elif language_type == LanguageType.FOREIGN_ONLY:
             language_type_part = '.fo'
 
+    if language_first:
+        return language_part + language_type_part
     return language_type_part + language_part
+
+
+def guess_language_from_suffix(language_code: str) -> Language | None:
+    """Guess the language from a string."""
+    try:
+        language = Language.fromietf(language_code)
+    except (ValueError, LanguageReverseError):
+        logger.exception('Cannot parse language code %r', language_code)
+    else:
+        return language
+    return None
 
 
 def find_potential_encodings(language: Language) -> list[str]:  # pragma: no cover

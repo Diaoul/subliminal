@@ -621,6 +621,18 @@ def test_external_subtitle_from_language_code_ambiguous(monkeypatch: pytest.Monk
     assert subtitle.subtitle_format == 'srt'
 
 
+def test_external_subtitle_info(monkeypatch: pytest.MonkeyPatch) -> None:
+    subtitle = ExternalSubtitle(
+        Language('ita'),
+        subtitle_id='test_embedded_subtitle_info',
+    )
+    text = '1\n00:00:20,000 --> 00:00:24,400\nIn risposta alla sua lettera del\n\n'
+    monkeypatch.setattr(Subtitle, 'text', text)
+    assert subtitle.is_valid() is True
+    assert isinstance(subtitle.id, str)
+    assert isinstance(subtitle.info, str)
+
+
 def test_external_subtitle_info_hearing_impaired(monkeypatch: pytest.MonkeyPatch) -> None:
     subtitle = ExternalSubtitle(
         Language('spa'),

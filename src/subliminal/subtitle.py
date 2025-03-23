@@ -646,7 +646,7 @@ class ExternalSubtitle(Subtitle):
         subtitle_format = formats[0] if len(formats) > 0 else None
 
         # Cannot guess language
-        und_language = Language('Und')
+        und_language = Language('und')
         if not language_code:
             return cls(und_language, subtitle_id=subtitle_path, subtitle_format=subtitle_format)
 

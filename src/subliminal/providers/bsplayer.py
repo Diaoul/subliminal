@@ -115,6 +115,7 @@ class BSPlayerSubtitle(Subtitle):
         size: int | None = None,
         page_link: str | None = None,
         filename: str = '',
+        fps: float | None = None,
         subtitle_format: str | None = None,
         subtitle_hash: str | None = None,
         rating: str | None = None,
@@ -127,14 +128,17 @@ class BSPlayerSubtitle(Subtitle):
         movie_name: str | None = None,
         movie_hash: str | None = None,
         movie_size: int | None = None,
-        movie_fps: float | None = None,
     ) -> None:
-        super().__init__(language, subtitle_id, page_link=page_link, encoding=encoding)
+        super().__init__(
+            language,
+            subtitle_id,
+            page_link=page_link,
+            encoding=encoding,
+            fps=fps,
+            subtitle_format=subtitle_format,
+        )
         self.size = size
-        self.page_link = page_link
-        self.language = language
         self.filename = filename
-        self.format = subtitle_format
         self.hash = subtitle_hash
         self.rating = rating
         self.season = season
@@ -146,7 +150,6 @@ class BSPlayerSubtitle(Subtitle):
         self.movie_name = movie_name
         self.movie_hash = movie_hash
         self.movie_size = movie_size
-        self.movie_fps = movie_fps
 
     @property
     def info(self) -> str:
@@ -327,6 +330,7 @@ class BSPlayerProvider(Provider):
                     page_link=find_text(item, 'subDownloadLink', default=''),
                     filename=find_text(item, 'subName', default=''),
                     size=find_int(item, 'subSize'),
+                    fps=find_float(item, 'movieFPS'),
                     subtitle_format=find_text(item, 'subFormat'),
                     subtitle_hash=find_text(item, 'subHash'),
                     rating=find_text(item, 'subRating'),
@@ -339,7 +343,6 @@ class BSPlayerProvider(Provider):
                     movie_name=find_text(item, 'movieName'),
                     movie_hash=find_text(item, 'movieHash'),
                     movie_size=find_int(item, 'movieSize'),
-                    movie_fps=find_float(item, 'movieFPS'),
                 )
                 logger.debug('Found subtitle %s', subtitle)
                 subtitles.append(subtitle)

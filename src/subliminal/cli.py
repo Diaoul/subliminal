@@ -845,7 +845,7 @@ def download(
             # check and refine videos
             for video in video_candidates:
                 if not force and not force_external_subtitles:
-                    video.subtitles |= set(search_external_subtitles(video.name, directory=directory).values())
+                    video.subtitles.extend(search_external_subtitles(video.name, directory=directory).values())
                 if check_video(video, languages=language_set, age=age, undefined=single):
                     refine(
                         video,

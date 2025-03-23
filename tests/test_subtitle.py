@@ -190,6 +190,17 @@ def test_get_subtitle_path_foreign_only(movies: dict[str, Movie]) -> None:
     assert get_subtitle_path(video.name, suffix) == os.path.splitext(video.name)[0] + '.fo.sr-Cyrl.srt'
 
 
+def test_get_subtitle_path_foreign_only_language_first(movies: dict[str, Movie]) -> None:
+    video = movies['man_of_steel']
+    suffix = get_subtitle_suffix(
+        Language('srp', None, 'Cyrl'),
+        language_type=LanguageType.FOREIGN_ONLY,
+        language_type_suffix=True,
+        language_first=True,
+    )
+    assert get_subtitle_path(video.name, suffix) == os.path.splitext(video.name)[0] + '.sr-Cyrl.fo.srt'
+
+
 def test_get_subtitle_path_alpha3(movies: dict[str, Movie]) -> None:
     video = movies['man_of_steel']
     suffix = get_subtitle_suffix(Language('fra', 'CA'), language_format='alpha3')

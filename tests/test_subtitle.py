@@ -71,8 +71,7 @@ def test_subtitle_guess_format(monkeypatch: pytest.MonkeyPatch) -> None:
 
 
 def test_subtitle_other_subtitle_format(monkeypatch: pytest.MonkeyPatch) -> None:
-    subtitle = Subtitle(Language('jpn'))
-    subtitle.subtitle_format = 'vtt'
+    subtitle = Subtitle(Language('jpn'), subtitle_format='vtt')
     text = '1\n'
     monkeypatch.setattr(Subtitle, 'text', text)
     assert subtitle.is_valid() is True
@@ -97,7 +96,7 @@ def test_subtitle_is_valid_valid(monkeypatch: pytest.MonkeyPatch) -> None:
 
 
 def test_subtitle_is_valid_auto_fix(monkeypatch: pytest.MonkeyPatch) -> None:
-    subtitle = Subtitle(Language('fra'))
+    subtitle = Subtitle(Language('fra'), auto_fix_srt=True)
     text = (
         '1\n'
         '00:00:20,000 --> 00:00:24,400\n'
@@ -106,7 +105,7 @@ def test_subtitle_is_valid_auto_fix(monkeypatch: pytest.MonkeyPatch) -> None:
     )
     text += "This line shouldn't be here"
     monkeypatch.setattr(Subtitle, 'text', text)
-    assert subtitle.is_valid(auto_fix_srt=True) is True
+    assert subtitle.is_valid() is True
 
 
 def test_subtitle_is_valid_valid_begin(monkeypatch: pytest.MonkeyPatch) -> None:

@@ -45,6 +45,27 @@ BOMS = (
 )
 
 
+def check_encoding(encoding: str | None) -> str | None:
+    """Check that the encoding name exists."""
+    if not encoding:
+        return None
+
+    # validate the encoding
+    try:
+        encoding = codecs.lookup(encoding).name
+    except (TypeError, LookupError):
+        logger.debug('Unsupported encoding %s', encoding)
+    else:
+        return encoding
+
+    return None
+
+
+def ensure_positive(value: float | None) -> float | None:
+    """Return None if the value is non-positive."""
+    return value if value is not None and value > 0 else None
+
+
 #: Subtitle language types
 class LanguageType(Enum):
     """Subtitle language types."""
@@ -92,6 +113,7 @@ class Subtitle:
 
     :param language: language of the subtitle.
     :type language: :class:`~babelfish.language.Language`
+    :param str subtitle_id: the unique identifier of the subtitle, read-only.
     :param (bool | None) hearing_impaired: whether or not the subtitle is hearing impaired (None if unknown).
     :param (bool | None) foreign_only: whether or not the subtitle is foreign only / forced (None if unknown).
     :param page_link: URL of the web page from which the subtitle can be downloaded.
@@ -104,26 +126,11 @@ class Subtitle:
     #: Name of the provider that returns that class of subtitle
     provider_name: ClassVar[str] = ''
 
-    #: Content as bytes
-    _content: bytes | None
-
-    #: Content as string
-    _text: str
-
-    #: Flag to assert if the subtitle raw content was decoded
-    _is_decoded: bool
-
-    #: Flag to assert if the subtitle is valid (None if it was not checked yet)
-    _is_valid: bool | None
-
-    #: Guess encoding if None is defined
-    _guess_encoding: bool
-
     #: Language of the subtitle
     language: Language
 
     #: Subtitle id
-    subtitle_id: str
+    _subtitle_id: str
 
     #: Whether or not the subtitle is hearing impaired (None if unknown)
     language_type: LanguageType
@@ -131,17 +138,38 @@ class Subtitle:
     #: URL of the web page from which the subtitle can be downloaded
     page_link: str | None
 
-    #: Encoding to decode with when accessing :attr:`text`
-    encoding: str | None
-
     #: Subtitle format, None for automatic detection
     subtitle_format: str | None = None
 
-    #: Framerate for frame-based formats (MicroDVD)
-    fps: float | None
-
     #: Whether the subtitle is embedded in the video or an external file
     embedded: bool
+
+    #: The (str) path of the subtitle (it should exist) or None if it not a file in the system
+    subtitle_path: str | None
+
+    #: Guess encoding if None is defined
+    force_guess_encoding: bool
+
+    #: Automatically fix srt subtitles
+    auto_fix_srt: bool
+
+    #: Content as bytes
+    _content: bytes | None
+
+    #: Content as string
+    _text: str
+
+    #: Encoding used to decode with when accessing the `text` property
+    _encoding: str | None
+
+    #: Framerate for frame-based formats (MicroDVD)
+    _fps: float | None
+
+    #: Flag to assert if the subtitle raw content was decoded
+    _is_decoded: bool
+
+    #: Flag to assert if the subtitle is valid (None if it was not checked yet)
+    _is_valid: bool | None
 
     def __init__(
         self,
@@ -153,35 +181,40 @@ class Subtitle:
         page_link: str | None = None,
         encoding: str | None = None,
         subtitle_format: str | None = None,
+        subtitle_path: str | None = None,
         fps: float | None = None,
         embedded: bool = False,
-        guess_encoding: bool = True,
+        force_guess_encoding: bool = True,
+        auto_fix_srt: bool = False,
     ) -> None:
+        self._subtitle_id = subtitle_id
+
         self._content = None
         self._text = ''
         self._is_decoded = False
         self._is_valid = None
-        self._guess_encoding = guess_encoding
 
         self.language = language
-        self.subtitle_id = subtitle_id
         self.page_link = page_link
         self.subtitle_format = subtitle_format
-        self.fps = fps if fps is not None and fps > 0 else None
+        self.fps = fps
+        self.subtitle_path = subtitle_path
         self.embedded = embedded
+        self.force_guess_encoding = force_guess_encoding
+        self.auto_fix_srt = auto_fix_srt
 
         self.language_type = LanguageType.from_flags(hearing_impaired=hearing_impaired, foreign_only=foreign_only)
-        self.encoding = None
-        # validate the encoding
-        if encoding:
-            try:
-                self.encoding = codecs.lookup(encoding).name
-            except (TypeError, LookupError):
-                logger.debug('Unsupported encoding %s', encoding)
+        self.encoding = encoding
+
+    @property
+    def subtitle_id(self) -> str:
+        """Unique identifier of the subtitle, read-only."""
+        # Because it is used in __hash__, it needs to be immutable.
+        return self._subtitle_id
 
     @property
     def id(self) -> str:
-        """Unique identifier of the subtitle."""
+        """Unique identifier of the subtitle, read-only."""
         return str(self.subtitle_id)
 
     @property
@@ -200,6 +233,26 @@ class Subtitle:
         return self.language_type.is_foreign_only()
 
     @property
+    def encoding(self) -> str | None:
+        """Subtitle encoding."""
+        return self._encoding
+
+    @encoding.setter
+    def encoding(self, value: str | None) -> None:
+        """Subtitle encoding."""
+        self._encoding = check_encoding(value)
+
+    @property
+    def fps(self) -> float | None:
+        """Framerate for frame-based formats (MicroDVD)."""
+        return self._fps
+
+    @fps.setter
+    def fps(self, value: float | None) -> None:
+        """Framerate for frame-based formats (MicroDVD)."""
+        self._fps = ensure_positive(value)
+
+    @property
     def content(self) -> bytes | None:
         """Content as bytes.
 
@@ -210,11 +263,7 @@ class Subtitle:
 
     @content.setter
     def content(self, value: bytes | None) -> None:
-        self.clear_content()
-        self._content = value
-
-        if self._guess_encoding and self.encoding is None:
-            self.encoding = self.guess_encoding()
+        self.set_content(value)
 
     @property
     def text(self) -> str:
@@ -228,6 +277,14 @@ class Subtitle:
         self._text = ''
         self._is_decoded = False
         self._is_valid = None
+
+    def set_content(self, value: bytes | None) -> None:
+        """Set the subtitle content as bytes."""
+        self.clear_content()
+        self._content = value
+
+        if self.force_guess_encoding and self.encoding is None:
+            self.encoding = self.guess_encoding()
 
     def _decode_content(self) -> str:
         self._is_decoded = True
@@ -275,6 +332,7 @@ class Subtitle:
 
     def convert(
         self,
+        text: str | None = None,
         output_format: str = 'srt',
         output_encoding: str | None = 'utf-8',
         fps: float | None = None,
@@ -289,7 +347,8 @@ class Subtitle:
 
         """
         # Compute self._text by calling the property
-        text = self.text
+        if text is None:
+            text = self.text
 
         # Text is empty, maybe because the content was not decoded.
         # Reencoding would erase the content, so return.
@@ -361,7 +420,7 @@ class Subtitle:
 
         return ret
 
-    def is_valid(self, *, auto_fix_srt: bool = False) -> bool:
+    def is_valid(self) -> bool:
         """Check if a :attr:`text` is a valid SubRip format.
 
         :return: whether or not the subtitle is valid.
@@ -369,11 +428,11 @@ class Subtitle:
 
         """
         if self._is_valid is None:  # pragma: no branch
-            self._is_valid = self._check_is_valid(auto_fix_srt=auto_fix_srt)
+            self._is_valid = self._check_is_valid()
 
         return bool(self._is_valid)
 
-    def _check_is_valid(self, *, auto_fix_srt: bool = False) -> bool:
+    def _check_is_valid(self) -> bool:
         """Check if a :attr:`text` is a valid SubRip format.
 
         :return: whether or not the subtitle is valid.
@@ -402,7 +461,7 @@ class Subtitle:
                 logger.exception(msg)
                 return False
             else:
-                if auto_fix_srt:
+                if self.auto_fix_srt:
                     self._text = parsed
                 return True
 
@@ -506,7 +565,8 @@ class Subtitle:
         raise NotImplementedError
 
     def __hash__(self) -> int:
-        return hash((self.provider_name, self.id, self.language))
+        # self.id needs to be immutable
+        return hash((self.provider_name, self.id))
 
     def __repr__(self) -> str:
         return f'<{self.__class__.__name__} {self.id!r} [{self.language}]>'
@@ -532,6 +592,7 @@ class EmbeddedSubtitle(Subtitle):
             foreign_only=foreign_only,
             encoding=encoding,
             subtitle_format=subtitle_format,
+            subtitle_path=subtitle_id,
             embedded=True,
         )
 
@@ -567,6 +628,7 @@ class ExternalSubtitle(Subtitle):
             foreign_only=foreign_only,
             encoding=encoding,
             subtitle_format=subtitle_format,
+            subtitle_path=subtitle_id,
             embedded=False,
         )
 

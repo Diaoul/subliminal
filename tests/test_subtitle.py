@@ -647,3 +647,25 @@ def test_external_subtitle_info_foreign_only(monkeypatch: pytest.MonkeyPatch) ->
     assert subtitle.foreign_only is True
     assert isinstance(subtitle.id, str)
     assert isinstance(subtitle.info, str)
+
+
+def test_subtitle_hash() -> None:
+    subtitle = Subtitle(
+        Language('eng'),
+        'xv34e',
+    )
+    external_subtitle = ExternalSubtitle(
+        Language('fra'),
+        subtitle_id='video-HD.fo.fr.srt',
+        foreign_only=True,
+    )
+    embedded_subtitle = EmbeddedSubtitle(
+        Language('spa'),
+        subtitle_id='video-HD.mkv',
+        hearing_impaired=True,
+    )
+    subtitle_set = {subtitle, external_subtitle, embedded_subtitle}
+    assert len(subtitle_set) == 3
+    assert subtitle in subtitle_set
+    assert external_subtitle in subtitle_set
+    assert embedded_subtitle in subtitle_set

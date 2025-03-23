@@ -533,6 +533,7 @@ def test_subtitle_info(monkeypatch: pytest.MonkeyPatch) -> None:
 def test_embedded_subtitle_info(monkeypatch: pytest.MonkeyPatch) -> None:
     subtitle = EmbeddedSubtitle(
         Language('ita'),
+        subtitle_id='test_embedded_subtitle_info',
     )
     text = '1\n00:00:20,000 --> 00:00:24,400\nIn risposta alla sua lettera del\n\n'
     monkeypatch.setattr(Subtitle, 'text', text)
@@ -544,6 +545,7 @@ def test_embedded_subtitle_info(monkeypatch: pytest.MonkeyPatch) -> None:
 def test_embedded_subtitle_info_hearing_impaired(monkeypatch: pytest.MonkeyPatch) -> None:
     subtitle = EmbeddedSubtitle(
         Language('spa'),
+        subtitle_id='test_embedded_subtitle_info_hearing_impaired',
         hearing_impaired=True,
     )
     text = '1\n00:00:20,000 --> 00:00:24,400\nEn respuesta a su carta de\n\n'
@@ -557,6 +559,7 @@ def test_embedded_subtitle_info_hearing_impaired(monkeypatch: pytest.MonkeyPatch
 def test_embedded_subtitle_info_foreign_only(monkeypatch: pytest.MonkeyPatch) -> None:
     subtitle = EmbeddedSubtitle(
         Language('fra'),
+        subtitle_id='test_embedded_subtitle_info_foreign_only',
         foreign_only=True,
     )
     text = '1\n00:00:20,000 --> 00:00:24,400\nEn réponse à votre honorée du tant\n\n'

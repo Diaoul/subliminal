@@ -414,6 +414,8 @@ def check_video(
 def parse_language_code(subtitle_filename: str, video_filename: str) -> str | None:
     """Parse the subtitle filename to extract the language.
 
+    Return None if the subtitle filename root is not identical to the video filename.
+
     :param str subtitle_filename: path to the subtitle.
     :param str video_filename: path to the video.
     :return: the language code suffixed to the video name or None if the names are different.
@@ -454,7 +456,7 @@ def search_external_subtitles(
     subtitles = {}
     for p in os.listdir(directory or dirpath):
         language_code = parse_language_code(p, filename)
-        if not language_code:
+        if language_code is None:
             continue
 
         subtitle = ExternalSubtitle.from_language_code(language_code, subtitle_path=p)

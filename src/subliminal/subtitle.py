@@ -263,7 +263,11 @@ class Subtitle:
 
     @content.setter
     def content(self, value: bytes | None) -> None:
-        self.set_content(value)
+        self.clear_content()
+        self._content = value
+
+        if self.force_guess_encoding and self.encoding is None:
+            self.encoding = self.guess_encoding()
 
     @property
     def text(self) -> str:
@@ -277,14 +281,6 @@ class Subtitle:
         self._text = ''
         self._is_decoded = False
         self._is_valid = None
-
-    def set_content(self, value: bytes | None) -> None:
-        """Set the subtitle content as bytes."""
-        self.clear_content()
-        self._content = value
-
-        if self.force_guess_encoding and self.encoding is None:
-            self.encoding = self.guess_encoding()
 
     def _decode_content(self) -> str:
         self._is_decoded = True

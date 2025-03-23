@@ -912,7 +912,7 @@ def save_subtitles(
         if subtitle_format:
             # Use the video FPS if the FPS of the subtitle is not defined
             fps = video.frame_rate if subtitle.fps is None else None
-            subtitle.convert(subtitle_format, output_encoding=encoding, fps=fps)
+            subtitle.convert(output_format=subtitle_format, output_encoding=encoding, fps=fps)
 
         # create subtitle path
         subtitle_path = subtitle.get_path(

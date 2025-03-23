@@ -152,23 +152,24 @@ def refine(
     # subtitle tracks
     if embedded_subtitles:
         if 'subtitle' in media and len(media['subtitle']) > 0:
-            embedded_subtitles_set: set[EmbeddedSubtitle] = set()
+            embedded_subtitles_list: list[EmbeddedSubtitle] = []
             for st in media['subtitle']:
                 # language
                 lang = st.get('language', Language('und'))
 
                 sub = EmbeddedSubtitle(
                     lang,
+                    subtitle_id=video.name,
                     hearing_impaired=st.get('hearing_impaired', st.get('closed_caption')),
                     foreign_only=st.get('forced'),
                     subtitle_format=get_subtitle_format(st.get('format', 'srt')),
                 )
 
                 # add to set
-                embedded_subtitles_set.add(sub)
+                embedded_subtitles_list.append(sub)
 
-            logger.debug('Found embedded subtitles %r', embedded_subtitles_set)
-            video.subtitles |= embedded_subtitles_set
+            logger.debug('Found embedded subtitles %r', embedded_subtitles_list)
+            video.subtitles.extend(embedded_subtitles_list)
         else:
             logger.debug('Video has no subtitle track')
 

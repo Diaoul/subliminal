@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+from pathlib import Path
 from textwrap import dedent
 from typing import TYPE_CHECKING
 
@@ -9,6 +10,7 @@ from babelfish import Language  # type: ignore[import-untyped]
 
 from subliminal.subtitle import (
     EmbeddedSubtitle,
+    ExternalSubtitle,
     LanguageType,
     Subtitle,
     fix_line_ending,
@@ -571,6 +573,72 @@ def test_embedded_subtitle_info_foreign_only(monkeypatch: pytest.MonkeyPatch) ->
     subtitle = EmbeddedSubtitle(
         Language('fra'),
         subtitle_id='test_embedded_subtitle_info_foreign_only',
+        foreign_only=True,
+    )
+    text = '1\n00:00:20,000 --> 00:00:24,400\nEn réponse à votre honorée du tant\n\n'
+    monkeypatch.setattr(Subtitle, 'text', text)
+    assert subtitle.is_valid() is True
+    assert subtitle.foreign_only is True
+    assert isinstance(subtitle.id, str)
+    assert isinstance(subtitle.info, str)
+
+
+def test_external_subtitle_from_language_code(monkeypatch: pytest.MonkeyPatch) -> None:
+    filename = 'test_external_subtitle_from_language_code'
+    subtitle = ExternalSubtitle.from_language_code('fr', subtitle_path=filename)
+    assert subtitle.language == Language('fra')
+    assert subtitle.id == 'test_external_subtitle_from_language_code'
+    assert not subtitle.language_type.is_hearing_impaired()
+    assert not subtitle.language_type.is_foreign_only()
+    assert subtitle.subtitle_format is None
+
+
+def test_external_subtitle_from_language_code_hearing_impaired(monkeypatch: pytest.MonkeyPatch) -> None:
+    filename = Path('filename.hi.eng.ass')
+    subtitle = ExternalSubtitle.from_language_code('hi.eng', subtitle_path=filename)
+    assert subtitle.language == Language('eng')
+    assert subtitle.language_type.is_hearing_impaired()
+    assert subtitle.id == os.fspath(filename)
+    assert subtitle.subtitle_format == 'ass'
+
+
+def test_external_subtitle_from_language_code_foreign_only(monkeypatch: pytest.MonkeyPatch) -> None:
+    filename = Path('filename.hu.fo.srt')
+    subtitle = ExternalSubtitle.from_language_code('hu.fo', subtitle_path=filename)
+    assert subtitle.language == Language('hun')
+    assert subtitle.language_type.is_foreign_only()
+    assert subtitle.id == os.fspath(filename)
+    assert subtitle.subtitle_format == 'srt'
+
+
+def test_external_subtitle_from_language_code_ambiguous(monkeypatch: pytest.MonkeyPatch) -> None:
+    filename = Path('filename.hi.fo.srt')
+    subtitle = ExternalSubtitle.from_language_code('hi.fo', subtitle_path=filename)
+    # Hearing impaired code 'hi' is matched first
+    assert subtitle.language == Language('fao')
+    assert subtitle.language_type.is_hearing_impaired()
+    assert subtitle.id == os.fspath(filename)
+    assert subtitle.subtitle_format == 'srt'
+
+
+def test_external_subtitle_info_hearing_impaired(monkeypatch: pytest.MonkeyPatch) -> None:
+    subtitle = ExternalSubtitle(
+        Language('spa'),
+        subtitle_id='test_embedded_subtitle_info_hearing_impaired',
+        hearing_impaired=True,
+    )
+    text = '1\n00:00:20,000 --> 00:00:24,400\nEn respuesta a su carta de\n\n'
+    monkeypatch.setattr(Subtitle, 'text', text)
+    assert subtitle.is_valid() is True
+    assert subtitle.hearing_impaired is True
+    assert isinstance(subtitle.id, str)
+    assert isinstance(subtitle.info, str)
+
+
+def test_external_subtitle_info_foreign_only(monkeypatch: pytest.MonkeyPatch) -> None:
+    subtitle = ExternalSubtitle(
+        Language('fra'),
+        subtitle_id='test_external_subtitle_info_foreign_only',
         foreign_only=True,
     )
     text = '1\n00:00:20,000 --> 00:00:24,400\nEn réponse à votre honorée du tant\n\n'

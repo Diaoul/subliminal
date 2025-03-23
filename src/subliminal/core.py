@@ -460,9 +460,6 @@ def search_external_subtitles(
             continue
 
         subtitle = ExternalSubtitle.from_language_code(language_code, subtitle_path=p)
-        if subtitle is None:
-            continue
-
         subtitles[p] = subtitle
 
     logger.debug('Found subtitles %r', subtitles)

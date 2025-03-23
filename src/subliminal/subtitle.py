@@ -637,7 +637,7 @@ class ExternalSubtitle(Subtitle):
         cls,
         language_code: str,
         subtitle_path: str | os.PathLike[str] = '',
-    ) -> ExternalSubtitle | None:
+    ) -> ExternalSubtitle:
         """Create a subtitle from the language_code suffix from a subtitle filename."""
         subtitle_path = os.fspath(subtitle_path)
         # get the subtitle format from the extension

@@ -219,7 +219,7 @@ def test_list_subtitles_episode_no_hash(episodes: dict[str, Episode]) -> None:
 def test_list_subtitles_no_language(episodes: dict[str, Episode]) -> None:
     video = episodes['dallas_s01e03']
     languages = {Language('eng')}
-    video.subtitles = {Subtitle(lang) for lang in languages}
+    video.subtitles = [Subtitle(lang) for lang in languages]
 
     subtitles = list_subtitles({video}, languages)
 
@@ -301,7 +301,7 @@ def test_download_best_subtitles_min_score(episodes: dict[str, Episode]) -> None
 def test_download_best_subtitles_no_language(episodes: dict[str, Episode]) -> None:
     video = episodes['bbt_s07e05']
     languages = {Language('fra')}
-    video.subtitles = {Subtitle(lang) for lang in languages}
+    video.subtitles = [Subtitle(lang) for lang in languages]
     providers = ['gestdown']
 
     subtitles = download_best_subtitles({video}, languages, min_score=episode_scores['hash'], providers=providers)
@@ -312,7 +312,7 @@ def test_download_best_subtitles_no_language(episodes: dict[str, Episode]) -> No
 def test_download_best_subtitles_undefined(episodes: dict[str, Episode]) -> None:
     video = episodes['bbt_s07e05']
     languages = {Language('und')}
-    video.subtitles = {Subtitle(lang) for lang in languages}
+    video.subtitles = [Subtitle(lang) for lang in languages]
     providers = ['gestdown']
 
     subtitles = download_best_subtitles(

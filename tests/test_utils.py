@@ -329,9 +329,11 @@ def test_get_parameters_from_signature(docstring: str) -> None:
     ('string', 'patterns', 'sep', 'expected'),
     [
         ('en', 'hi', '.', ('en', '')),
-        ('hi.en', 'hi', '.', ('en', 'hi')),
+        ('[hi].en', '[hi]', '.', ('en', '[hi]')),
         ('fra.sdh', ('sdh',), '.', ('fra', 'sdh')),
-        ('ukr-UA-cyrl.fo', ('fo',), '.', ('ukr-UA-cyrl', 'fo')),
+        ('ukr-UA-cyrl.[fo]', ('[fo]',), '.', ('ukr-UA-cyrl', '[fo]')),
+        ('fo.hi', ('fo',), '.', ('hi', 'fo')),
+        ('fo.hi', ('hi',), '.', ('fo', 'hi')),
         ('mkv.it', ('hi', 'cc', 'sdh'), '.', ('mkv.it', '')),
     ],
 )

@@ -311,7 +311,7 @@ def test_cli_download_hearing_impaired(tmp_path: os.PathLike[str]) -> None:
         assert result.exit_code == 0
         assert result.output.endswith('Downloaded 1 subtitle\n')
 
-        subtitle_filename = os.path.splitext(video_name)[0] + '.hi.en.srt'
+        subtitle_filename = os.path.splitext(video_name)[0] + '.[hi].en.srt'
         # collect files recursively
         files = [os.fspath(p.relative_to(td)) for p in Path(td).rglob('*')]
         assert subtitle_filename in files
@@ -332,7 +332,7 @@ def test_cli_download_foreign_only(tmp_path: os.PathLike[str]) -> None:
         assert result.exit_code == 0
         assert result.output.endswith('Downloaded 1 subtitle\n')
 
-        subtitle_filename = os.path.splitext(video_name)[0] + '.fo.en.srt'
+        subtitle_filename = os.path.splitext(video_name)[0] + '.[fo].en.srt'
         assert subtitle_filename in os.listdir(td)
 
         content = open(subtitle_filename, encoding='utf-8-sig').read()

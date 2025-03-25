@@ -654,14 +654,14 @@ class ExternalSubtitle(Subtitle):
             return cls(guessed, subtitle_id=subtitle_path, subtitle_format=subtitle_format)
 
         # Check for hearing_impaired code
-        hearing_impaired_names = ('hi', 'sdh', 'cc')
+        hearing_impaired_names = ('[hi]', '[sdh]', '[cc]', 'hi', 'sdh', 'cc')
         short_language_code, match = trim_pattern(language_code, hearing_impaired_names, sep='.')
 
         if match and (guessed := guess_language_from_suffix(short_language_code)):
             return cls(guessed, subtitle_id=subtitle_path, subtitle_format=subtitle_format, hearing_impaired=True)
 
         # Check for foreign_only code
-        foreign_only_names = ('fo',)
+        foreign_only_names = ('[fo]', 'fo')
         short_language_code, match = trim_pattern(language_code, foreign_only_names, sep='.')
 
         if match and (guessed := guess_language_from_suffix(short_language_code)):
@@ -724,7 +724,7 @@ def get_subtitle_suffix(
         Default to 'alpha2'.
     :param LanguageType language_type: the language type of the subtitle
         (hearing impaired or foreign only).
-    :param bool language_type_suffix: add a suffix 'hi' or 'fo' if needed.
+    :param bool language_type_suffix: add a suffix '[hi]' or '[fo]' if needed.
         Default to False.
     :param bool language_first: the suffix is of the form '.language.language_type',
         instead of '.language_type.language'
@@ -754,13 +754,13 @@ def get_subtitle_suffix(
                 # add script
                 language_part += f'-{language.script!s}'
 
-    # Language type part
+    # Language type part, into bracket to differentiate from Hindi and Faroese languages
     language_type_part = ''
     if language_type_suffix:
         if language_type == LanguageType.HEARING_IMPAIRED:
-            language_type_part = '.hi'
+            language_type_part = '.[hi]'
         elif language_type == LanguageType.FOREIGN_ONLY:
-            language_type_part = '.fo'
+            language_type_part = '.[fo]'
 
     if language_first:
         return language_part + language_type_part

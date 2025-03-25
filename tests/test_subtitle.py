@@ -179,7 +179,7 @@ def test_get_subtitle_path_hearing_impaired(movies: dict[str, Movie]) -> None:
         language_type=LanguageType.HEARING_IMPAIRED,
         language_type_suffix=True,
     )
-    assert get_subtitle_path(video.name, suffix) == os.path.splitext(video.name)[0] + '.hi.de-CH-Latn.srt'
+    assert get_subtitle_path(video.name, suffix) == os.path.splitext(video.name)[0] + '.[hi].de-CH-Latn.srt'
 
 
 def test_get_subtitle_path_foreign_only(movies: dict[str, Movie]) -> None:
@@ -189,7 +189,7 @@ def test_get_subtitle_path_foreign_only(movies: dict[str, Movie]) -> None:
         language_type=LanguageType.FOREIGN_ONLY,
         language_type_suffix=True,
     )
-    assert get_subtitle_path(video.name, suffix) == os.path.splitext(video.name)[0] + '.fo.sr-Cyrl.srt'
+    assert get_subtitle_path(video.name, suffix) == os.path.splitext(video.name)[0] + '.[fo].sr-Cyrl.srt'
 
 
 def test_get_subtitle_path_foreign_only_language_first(movies: dict[str, Movie]) -> None:
@@ -200,7 +200,7 @@ def test_get_subtitle_path_foreign_only_language_first(movies: dict[str, Movie])
         language_type_suffix=True,
         language_first=True,
     )
-    assert get_subtitle_path(video.name, suffix) == os.path.splitext(video.name)[0] + '.sr-Cyrl.fo.srt'
+    assert get_subtitle_path(video.name, suffix) == os.path.splitext(video.name)[0] + '.sr-Cyrl.[fo].srt'
 
 
 def test_get_subtitle_path_alpha3(movies: dict[str, Movie]) -> None:
@@ -594,8 +594,8 @@ def test_external_subtitle_from_language_code(monkeypatch: pytest.MonkeyPatch) -
 
 
 def test_external_subtitle_from_language_code_hearing_impaired(monkeypatch: pytest.MonkeyPatch) -> None:
-    filename = Path('filename.hi.eng.ass')
-    subtitle = ExternalSubtitle.from_language_code('hi.eng', subtitle_path=filename)
+    filename = Path('filename.[hi].eng.ass')
+    subtitle = ExternalSubtitle.from_language_code('[hi].eng', subtitle_path=filename)
     assert subtitle.language == Language('eng')
     assert subtitle.language_type.is_hearing_impaired()
     assert subtitle.id == os.fspath(filename)
@@ -603,7 +603,7 @@ def test_external_subtitle_from_language_code_hearing_impaired(monkeypatch: pyte
 
 
 def test_external_subtitle_from_language_code_foreign_only(monkeypatch: pytest.MonkeyPatch) -> None:
-    filename = Path('filename.hu.fo.srt')
+    filename = Path('filename.hu.[fo].srt')
     subtitle = ExternalSubtitle.from_language_code('hu.fo', subtitle_path=filename)
     assert subtitle.language == Language('hun')
     assert subtitle.language_type.is_foreign_only()
@@ -668,7 +668,7 @@ def test_subtitle_hash() -> None:
     )
     external_subtitle = ExternalSubtitle(
         Language('fra'),
-        subtitle_id='video-HD.fo.fr.srt',
+        subtitle_id='video-HD.[fo].fr.srt',
         foreign_only=True,
     )
     embedded_subtitle = EmbeddedSubtitle(

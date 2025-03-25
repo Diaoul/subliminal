@@ -800,7 +800,7 @@ def download(
             if os.path.isdir(p):
                 # collect video files
                 try:
-                    collected_filepaths = collect_video_filepaths(p, age=age, archives=archives)
+                    collected_filepaths = collect_video_filepaths(p, age=age, archives=archives, use_ctime=use_ctime)
                 except ValueError:  # pragma: no cover
                     logger.exception('Unexpected error while collecting directory path %s', p)
                     errored_paths.append(p)
@@ -838,13 +838,15 @@ def download(
                     errored_paths.append(filepath)
                     continue
 
+                # Set the use_time attribute before refining
+                video.use_ctime = use_ctime
                 video_candidates.append(video)
 
             # check and refine videos
             for video in video_candidates:
                 if not force and not force_external_subtitles:
                     video.subtitles |= set(search_external_subtitles(video.name, directory=directory).values())
-                if check_video(video, languages=language_set, age=age, use_ctime=use_ctime, undefined=single):
+                if check_video(video, languages=language_set, age=age, undefined=single):
                     refine(
                         video,
                         refiners=use_refiners,
@@ -869,8 +871,7 @@ def download(
             msg = f'{video_name!r} ignored'
             if video.exists:
                 langs = ', '.join(str(s) for s in video.subtitle_languages) or 'none'
-                video_age = video.get_age(use_ctime=use_ctime)
-                days = f"{video_age.days:d} day{'s' if video_age.days > 1 else ''}"
+                days = f"{video.age.days:d} day{'s' if video.age.days > 1 else ''}"
                 msg += f' - subtitles: {langs} / age: {days}'
             else:
                 msg += ' - not a video file'

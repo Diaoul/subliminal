@@ -27,13 +27,11 @@ def test_video_exists_age(movies: dict[str, Movie], tmp_path: Path, monkeypatch:
     ts = timestamp(datetime.now(timezone.utc) - timedelta(days=3))
     os.utime(video_path, (ts, ts))
     assert video.exists
-    with pytest.deprecated_call():
-        assert timedelta(days=3) <= video.age < timedelta(days=3, seconds=1)
+    assert timedelta(days=3) <= video.age < timedelta(days=3, seconds=1)
 
 
 def test_video_age(movies: dict[str, Movie]) -> None:
-    with pytest.deprecated_call():
-        assert movies['man_of_steel'].age == timedelta()
+    assert movies['man_of_steel'].age == timedelta()
 
 
 def test_video_fromguess_episode(episodes: dict[str, Episode], monkeypatch: pytest.MonkeyPatch) -> None:

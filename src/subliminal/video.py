@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import logging
 import os
-import warnings
 from typing import TYPE_CHECKING, Any
 
 from guessit import guessit  # type: ignore[import-untyped]
@@ -181,6 +180,9 @@ class Video:
     #: TMDB id of the video
     tmdb_id: int | None
 
+    #: Use the latest of creation time and modification time for the video age
+    use_ctime: bool
+
     #: Existing subtitle languages
     subtitles: set[Subtitle]
 
@@ -198,6 +200,7 @@ class Video:
         duration: float | None = None,
         hashes: Mapping[str, str] | None = None,
         size: int | None = None,
+        use_ctime: bool = True,
         subtitles: Set[Subtitle] | None = None,
         title: str | None = None,
         year: int | None = None,
@@ -216,6 +219,7 @@ class Video:
         self.duration = duration
         self.hashes = dict(hashes) if hashes is not None else {}
         self.size = size
+        self.use_ctime = use_ctime
         self.subtitles = set(subtitles) if subtitles is not None else set()
         self.title = title
         self.year = year
@@ -231,12 +235,7 @@ class Video:
     @property
     def age(self) -> timedelta:
         """Age of the video."""
-        warnings.warn(
-            'Use `get_age(use_ctime)` instead, to specify if modification time is used or also creation time.',
-            DeprecationWarning,
-            stacklevel=1,
-        )
-        return self.get_age(use_ctime=False)
+        return get_age(self.name, use_ctime=self.use_ctime)
 
     @property
     def subtitle_languages(self) -> set[Language]:
@@ -269,10 +268,6 @@ class Video:
 
         """
         return cls.fromguess(name, guessit(name))
-
-    def get_age(self, *, use_ctime: bool = False) -> timedelta:
-        """Age of the video, with an option to take into account creation time."""
-        return get_age(self.name, use_ctime=use_ctime)
 
     def __repr__(self) -> str:  # pragma: no cover
         return f'<{self.__class__.__name__} [{self.name!r}]>'

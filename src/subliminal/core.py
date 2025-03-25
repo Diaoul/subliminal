@@ -372,7 +372,6 @@ def check_video(
     *,
     languages: Set[Language] | None = None,
     age: timedelta | None = None,
-    use_ctime: bool = False,
     undefined: bool = False,
 ) -> bool:
     """Perform some checks on the `video`.
@@ -388,8 +387,6 @@ def check_video(
     :param languages: desired languages.
     :type languages: set of :class:`~babelfish.language.Language`
     :param datetime.timedelta age: maximum age of the video.
-    :param bool use_ctime: use the latest of creation time and modification time to compute the age of the video,
-        instead of just modification time.
     :param bool undefined: fail on existing undefined language.
     :return: `True` if the video passes the checks, `False` otherwise.
     :rtype: bool
@@ -401,8 +398,7 @@ def check_video(
         return False
 
     # age test
-    file_age = video.get_age(use_ctime=use_ctime)
-    if age and file_age > age:
+    if age and video.age > age:
         logger.debug('Video is older than %r', age)
         return False
 
@@ -571,7 +567,7 @@ def collect_video_filepaths(
     path: str | os.PathLike,
     *,
     age: timedelta | None = None,
-    use_ctime: bool = False,
+    use_ctime: bool = True,
     archives: bool = True,
     name: str | None = None,
 ) -> list[str]:

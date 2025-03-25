@@ -546,11 +546,9 @@ def cache(ctx: click.Context, clear_subliminal: bool) -> None:
     help='Filter videos newer than AGE, e.g. 12h, 1w2d.',
 )
 @click.option(
-    '--use_creation_time',
-    'use_ctime',
+    '--use-ctime/--no-use-ctime',
     is_flag=True,
-    default=False,
-    show_envvar=True,
+    default=True,
     help=(
         'Use the latest of modification date and creation date to calculate the age. '
         'Otherwise, just use the modification date.'

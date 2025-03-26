@@ -36,7 +36,7 @@ def test_check_video_languages(movies: dict[str, Movie]) -> None:
     video = movies['man_of_steel']
     languages = {Language('fra'), Language('eng')}
     assert check_video(video, languages=languages)
-    video.subtitles = {Subtitle(lang) for lang in languages}
+    video.subtitles = [Subtitle(lang) for lang in languages]
     assert not check_video(video, languages=languages)
 
 
@@ -51,7 +51,7 @@ def test_check_video_undefined(movies: dict[str, Movie]) -> None:
     video = movies['man_of_steel']
     assert check_video(video, undefined=False)
     assert check_video(video, undefined=True)
-    video.subtitles = {Subtitle(Language('und'))}
+    video.subtitles = [Subtitle(Language('und'))]
     assert check_video(video, undefined=False)
     assert not check_video(video, undefined=True)
 

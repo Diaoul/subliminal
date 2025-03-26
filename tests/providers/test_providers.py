@@ -219,7 +219,7 @@ def test_list_subtitles_episode_no_hash(episodes: dict[str, Episode]) -> None:
 def test_list_subtitles_no_language(episodes: dict[str, Episode]) -> None:
     video = episodes['dallas_s01e03']
     languages = {Language('eng')}
-    video.subtitles = {Subtitle(lang) for lang in languages}
+    video.subtitles = [Subtitle(lang) for lang in languages]
 
     subtitles = list_subtitles({video}, languages)
 
@@ -301,7 +301,7 @@ def test_download_best_subtitles_min_score(episodes: dict[str, Episode]) -> None
 def test_download_best_subtitles_no_language(episodes: dict[str, Episode]) -> None:
     video = episodes['bbt_s07e05']
     languages = {Language('fra')}
-    video.subtitles = {Subtitle(lang) for lang in languages}
+    video.subtitles = [Subtitle(lang) for lang in languages]
     providers = ['gestdown']
 
     subtitles = download_best_subtitles({video}, languages, min_score=episode_scores['hash'], providers=providers)
@@ -312,7 +312,7 @@ def test_download_best_subtitles_no_language(episodes: dict[str, Episode]) -> No
 def test_download_best_subtitles_undefined(episodes: dict[str, Episode]) -> None:
     video = episodes['bbt_s07e05']
     languages = {Language('und')}
-    video.subtitles = {Subtitle(lang) for lang in languages}
+    video.subtitles = [Subtitle(lang) for lang in languages]
     providers = ['gestdown']
 
     subtitles = download_best_subtitles(
@@ -339,22 +339,6 @@ def test_download_best_subtitles_only_one(episodes: dict[str, Episode]) -> None:
     assert len(subtitles[video]) == 1
     subtitle = subtitles[video][0]
     assert (subtitle.provider_name, subtitle.id) in expected_subtitles
-
-
-@pytest.mark.integration
-@vcr.use_cassette
-def test_download_bad_subtitle(movies: dict[str, Movie]) -> None:
-    pool = ProviderPool()
-    subtitles = pool.list_subtitles_provider('opensubtitles', movies['man_of_steel'], {Language('eng')})
-    assert subtitles is not None
-    assert len(subtitles) >= 1
-    subtitle = subtitles[0]
-    subtitle.subtitle_id = ''
-
-    pool.download_subtitle(subtitle)
-
-    assert subtitle.content is None
-    assert subtitle.is_valid() is False
 
 
 @pytest.mark.integration

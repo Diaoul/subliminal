@@ -406,3 +406,28 @@ def get_parameters_from_signature(fun: Callable) -> list[Parameter]:
         {'name': name, 'default': p.default, 'annotation': p.annotation, 'desc': doc.get(name)}
         for name, p in sig.parameters.items()
     ]
+
+
+def trim_pattern(string: str, patterns: str | Sequence[str], *, sep: str = '') -> tuple[str, str]:
+    """Trim a prefix or suffix from a string, with an optional separator.
+
+    If patterns is a list, order is important as the first match will be returned.
+
+    :param str string: the string to trim.
+    :param patterns: a pattern or list of pattern to match as a prefix or suffix to the string.
+    :type patterns: str | Sequence[str]
+    :param str sep: a separator for the pattern.
+    :return: a tuple with the trimmed string and the matching pattern.
+    :rtype: tuple[str, str]
+    """
+    patterns = ensure_list(patterns)
+    # trim hearing_impaired or foreign_only attribute, if present
+    for pattern in patterns:
+        # suppose a string in the form '<pattern><sep><other>'
+        if string.startswith(pattern + sep):
+            return string.removeprefix(pattern + sep), pattern
+        # suppose a string in the form '<other><sep><pattern>'
+        if string.endswith(sep + pattern):
+            return string.removesuffix(sep + pattern), pattern
+
+    return string, ''

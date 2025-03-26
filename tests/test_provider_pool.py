@@ -241,7 +241,7 @@ def test_list_subtitles_no_language(
 ) -> None:
     video = episodes['dallas_s01e03']
     languages = {Language('eng')}
-    video.subtitles = {Subtitle(lang) for lang in languages}
+    video.subtitles = [Subtitle(lang) for lang in languages]
 
     subtitles = list_subtitles({video}, languages)
 
@@ -415,7 +415,7 @@ def test_download_best_subtitles_embedded_language(episodes: dict[str, Episode])
     assert len(subtitles[video]) == 1
 
     # With an embedded subtitle with given language
-    video.subtitles = {Subtitle(lang) for lang in languages}
+    video.subtitles = [Subtitle(lang) for lang in languages]
     subtitles = download_best_subtitles({video}, languages, providers=providers)
 
     assert len(subtitles) == 0
@@ -433,7 +433,7 @@ def test_download_best_subtitles_undefined(episodes: dict[str, Episode]) -> None
     assert len(subtitles[video]) == 0
 
     # With an embedded subtitle with undefined language
-    video.subtitles = {Subtitle(lang) for lang in languages}
+    video.subtitles = [Subtitle(lang) for lang in languages]
     subtitles = download_best_subtitles({video}, languages, only_one=True, providers=providers)
 
     assert len(subtitles) == 0

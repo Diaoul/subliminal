@@ -31,11 +31,12 @@ def test_hash_bsplayer_too_small(tmp_path: Path) -> None:
 
 def test_get_matches_movie_hash(episodes: dict[str, Episode]) -> None:
     subtitle = BSPlayerSubtitle(
+        language=Language('spa'),
         subtitle_id='16442520',
         size=12185,
         page_link=None,
-        language=Language('spa'),
         filename='The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION.srt',
+        fps=0,
         subtitle_format='srt',
         subtitle_hash='dbaf71fc665f83a716ae3f5daa62b7a0',
         rating='5',
@@ -48,7 +49,6 @@ def test_get_matches_movie_hash(episodes: dict[str, Episode]) -> None:
         movie_name=None,
         movie_hash='6878b3ef7c1bd19e',
         movie_size=0,
-        movie_fps=0,
     )
 
     matches = subtitle.get_matches(episodes['bbt_s07e05'])

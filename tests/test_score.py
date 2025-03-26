@@ -87,7 +87,8 @@ def test_compute_score_episode_imdb_id_only(
 ) -> None:
     video = episodes['bbt_s07e05']
     subtitle = subtitles['bbt_s07e05==empty']
-    subtitle.matches = {id_type}
+    subtitle.matches.clear()
+    subtitle.matches.add(id_type)
 
     expected = sum(episode_scores.get(m, 0) for m in ('series', 'year', 'country', 'season', 'episode'))
     assert compute_score(subtitle, video) == expected
@@ -101,7 +102,8 @@ def test_compute_score_episode_series_imdb_id_only(
 ) -> None:
     video = episodes['bbt_s07e05']
     subtitle = subtitles['bbt_s07e05==empty']
-    subtitle.matches = {id_type}
+    subtitle.matches.clear()
+    subtitle.matches.add(id_type)
 
     expected = sum(episode_scores.get(m, 0) for m in ('series', 'year', 'country'))
     assert compute_score(subtitle, video) == expected
@@ -115,7 +117,8 @@ def test_compute_score_movie_imdb_id_only(
 ) -> None:
     video = movies['man_of_steel']
     subtitle = subtitles['man_of_steel==empty']
-    subtitle.matches = {id_type}
+    subtitle.matches.clear()
+    subtitle.matches.add(id_type)
 
     expected = sum(movie_scores.get(m, 0) for m in ('title', 'year', 'country'))
     assert compute_score(subtitle, video) == expected

@@ -10,7 +10,7 @@ from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
 from typing import TYPE_CHECKING, Any
 
-from babelfish import Language, LanguageReverseError  # type: ignore[import-untyped]
+from babelfish import Language  # type: ignore[import-untyped]
 from guessit import guessit  # type: ignore[import-untyped]
 
 from .archives import ARCHIVE_ERRORS, ARCHIVE_EXTENSIONS, is_supported_archive, scan_archive
@@ -25,7 +25,7 @@ from .extensions import (
 )
 from .matches import fps_matches
 from .score import compute_score as default_compute_score
-from .subtitle import SUBTITLE_EXTENSIONS, LanguageType, Subtitle
+from .subtitle import SUBTITLE_EXTENSIONS, ExternalSubtitle, LanguageType
 from .utils import get_age, handle_exception
 from .video import VIDEO_EXTENSIONS, Episode, Movie, Video
 
@@ -36,6 +36,7 @@ if TYPE_CHECKING:
 
     from subliminal.providers import Provider
     from subliminal.score import ComputeScore
+    from subliminal.subtitle import Subtitle
 
 logger = logging.getLogger(__name__)
 
@@ -410,8 +411,17 @@ def check_video(
     return True
 
 
-def parse_subtitle_filename(subtitle_filename: str, video_filename: str) -> Subtitle | None:
-    """Parse the subtitle filename to extract the language."""
+def parse_language_code(subtitle_filename: str, video_filename: str) -> str | None:
+    """Parse the subtitle filename to extract the language.
+
+    Return None if the subtitle filename root is not identical to the video filename.
+
+    :param str subtitle_filename: path to the subtitle.
+    :param str video_filename: path to the video.
+    :return: the language code suffixed to the video name or None if the names are different.
+    :rtype: str | None
+
+    """
     fileroot, fileext = os.path.splitext(video_filename)
 
     # keep only valid subtitle filenames
@@ -419,25 +429,15 @@ def parse_subtitle_filename(subtitle_filename: str, video_filename: str) -> Subt
         return None
 
     # extract the potential language code
-    language = Language('und')
     language_code = subtitle_filename[len(fileroot) : -len(os.path.splitext(subtitle_filename)[1])]
-    language_code = language_code.replace(fileext, '').replace('_', '-')[1:]
-    if language_code:
-        try:
-            language = Language.fromietf(language_code)
-        except (ValueError, LanguageReverseError):
-            logger.exception('Cannot parse language code %r', language_code)
-
-    # TODO: extract the hearing_impaired or foreign_only attribute
-
-    return Subtitle(language, subtitle_id=subtitle_filename)
+    return language_code.replace(fileext, '').replace('_', '-')[1:]
 
 
 def search_external_subtitles(
     path: str | os.PathLike,
     *,
     directory: str | os.PathLike | None = None,
-) -> dict[str, Subtitle]:
+) -> dict[str, ExternalSubtitle]:
     """Search for external subtitles from a video `path` and their associated language.
 
     Unless `directory` is provided, search will be made in the same directory as the video file.
@@ -455,10 +455,11 @@ def search_external_subtitles(
     # search for subtitles
     subtitles = {}
     for p in os.listdir(directory or dirpath):
-        subtitle = parse_subtitle_filename(p, filename)
-        if subtitle is None:
+        language_code = parse_language_code(p, filename)
+        if language_code is None:
             continue
 
+        subtitle = ExternalSubtitle.from_language_code(language_code, subtitle_path=p)
         subtitles[p] = subtitle
 
     logger.debug('Found subtitles %r', subtitles)
@@ -910,7 +911,7 @@ def save_subtitles(
         if subtitle_format:
             # Use the video FPS if the FPS of the subtitle is not defined
             fps = video.frame_rate if subtitle.fps is None else None
-            subtitle.convert(subtitle_format, output_encoding=encoding, fps=fps)
+            subtitle.convert(output_format=subtitle_format, output_encoding=encoding, fps=fps)
 
         # create subtitle path
         subtitle_path = subtitle.get_path(

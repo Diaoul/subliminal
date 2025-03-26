@@ -25,9 +25,11 @@ from subliminal.utils import (
     sanitize_id,
     sanitize_release_group,
     split_doc_args,
+    trim_pattern,
 )
 
 if TYPE_CHECKING:
+    from collections.abc import Sequence
     from pathlib import Path
 
     from babelfish import Language  # type: ignore[import-untyped]
@@ -321,3 +323,20 @@ def test_get_parameters_from_signature(docstring: str) -> None:
     assert params[5]['default'] is False
     assert params[5]['annotation'] == 'bool'
     assert params[5]['desc'] is None
+
+
+@pytest.mark.parametrize(
+    ('string', 'patterns', 'sep', 'expected'),
+    [
+        ('en', 'hi', '.', ('en', '')),
+        ('[hi].en', '[hi]', '.', ('en', '[hi]')),
+        ('fra.sdh', ('sdh',), '.', ('fra', 'sdh')),
+        ('ukr-UA-cyrl.[fo]', ('[fo]',), '.', ('ukr-UA-cyrl', '[fo]')),
+        ('fo.hi', ('fo',), '.', ('hi', 'fo')),
+        ('fo.hi', ('hi',), '.', ('fo', 'hi')),
+        ('mkv.it', ('hi', 'cc', 'sdh'), '.', ('mkv.it', '')),
+    ],
+)
+def test_trim_pattern(string: str, patterns: str | Sequence[str], sep: str, expected: tuple[str, str]) -> None:
+    res = trim_pattern(string, patterns, sep=sep)
+    assert res == expected

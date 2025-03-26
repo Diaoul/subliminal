@@ -233,7 +233,7 @@ name = "subliminal"
 package = "subliminal"
 directory = "changelog.d"
 filename = "HISTORY.rst"
-title_format = "`version <https://github.com/Diaoul/subliminal/tree/{version}>`_ - {project_date}"
+title_format = "`v{version} <https://github.com/Diaoul/subliminal/tree/{version}>`_ ({project_date})"
 issue_format = "`#{issue} <https://github.com/Diaoul/subliminal/issues/{issue}>`_"
 underlines = ["^", "-", "~"]
 
@@ -255,6 +255,11 @@ showcontent = true
 [[tool.towncrier.type]]
 directory = "refiner"
 name = "Refiner Changes"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "cli"
+name = "CLI Changes"
 showcontent = true
 
 [[tool.towncrier.type]]

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Coverage for src/subliminal/providers/opensubtitles.py: 87%</title>
+    <title>Coverage for src/subliminal/providers/opensubtitles.py: 86%</title>
     <link rel="icon" sizes="32x32" href="favicon_32_cb_58284776.png">
     <link rel="stylesheet" href="style_cb_8e611ae1.css" type="text/css">
     <script src="coverage_html_cb_6fb7b396.js" defer></script>
@@ -12,7 +12,7 @@
     <div class="content">
         <h1>
             <span class="text">Coverage for </span><b>src/subliminal/providers/opensubtitles.py</b>:
-            <span class="pc_cov">87%</span>
+            <span class="pc_cov">86%</span>
         </h1>
         <aside id="help_panel_wrapper">
             <input id="help_panel_state" type="checkbox">
@@ -56,10 +56,10 @@
         </aside>
         <h2>
             <span class="text">216 statements &nbsp;</span>
-            <button type="button" class="run button_toggle_run" value="run" data-shortcut="r" title="Toggle lines run">197<span class="text"> run</span></button>
-            <button type="button" class="mis show_mis button_toggle_mis" value="mis" data-shortcut="m" title="Toggle lines missing">19<span class="text"> missing</span></button>
+            <button type="button" class="run button_toggle_run" value="run" data-shortcut="r" title="Toggle lines run">196<span class="text"> run</span></button>
+            <button type="button" class="mis show_mis button_toggle_mis" value="mis" data-shortcut="m" title="Toggle lines missing">20<span class="text"> missing</span></button>
             <button type="button" class="exc show_exc button_toggle_exc" value="exc" data-shortcut="x" title="Toggle lines excluded">2<span class="text"> excluded</span></button>
-            <button type="button" class="par run show_par button_toggle_par" value="par" data-shortcut="p" title="Toggle lines partially run">11<span class="text"> partial</span></button>
+            <button type="button" class="par run show_par button_toggle_par" value="par" data-shortcut="p" title="Toggle lines partially run">12<span class="text"> partial</span></button>
         </h2>
         <p class="text">
             <a id="prevFileLink" class="nav" href="z_e65c4b1b753142a3_napiprojekt_py.html">&#xab; prev</a> &nbsp; &nbsp;
@@ -67,7 +67,7 @@
             <a id="nextFileLink" class="nav" href="z_e65c4b1b753142a3_opensubtitlescom_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.6.4">coverage.py v7.6.4</a>,
-            created at 2025-03-26 19:37 +0000
+            created at 2025-03-26 19:43 +0000
         </p>
         <aside class="hidden">
             <button type="button" class="button_next_chunk" data-shortcut="j"></button>
@@ -506,8 +506,8 @@
     <p class="mis show_mis"><span class="n"><a id="t422" href="#t422">422</a></span><span class="t">        <span class="key">raise</span> <span class="nam">DisabledUserAgent</span>&nbsp;</span><span class="r"></span></p>
     <p class="par run show_par"><span class="n"><a id="t423" href="#t423">423</a></span><span class="t">    <span class="key">if</span> <span class="nam">status_code</span> <span class="op">==</span> <span class="num">503</span><span class="op">:</span>&nbsp;</span><span class="r"><span class="annotate short">423&#x202F;&#x219B;&#x202F;424</span><span class="annotate long">line 423 didn't jump to line 424 because the condition on line 423 was never true</span></span></p>
     <p class="mis show_mis"><span class="n"><a id="t424" href="#t424">424</a></span><span class="t">        <span class="key">raise</span> <span class="nam">ServiceUnavailable</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t425" href="#t425">425</a></span><span class="t">    <span class="key">if</span> <span class="nam">status_code</span> <span class="op">!=</span> <span class="num">200</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t426" href="#t426">426</a></span><span class="t">        <span class="key">raise</span> <span class="nam">OpenSubtitlesError</span><span class="op">(</span><span class="nam">response</span><span class="op">[</span><span class="str">'status'</span><span class="op">]</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="par run show_par"><span class="n"><a id="t425" href="#t425">425</a></span><span class="t">    <span class="key">if</span> <span class="nam">status_code</span> <span class="op">!=</span> <span class="num">200</span><span class="op">:</span>&nbsp;</span><span class="r"><span class="annotate short">425&#x202F;&#x219B;&#x202F;426</span><span class="annotate long">line 425 didn't jump to line 426 because the condition on line 425 was never true</span></span></p>
+    <p class="mis show_mis"><span class="n"><a id="t426" href="#t426">426</a></span><span class="t">        <span class="key">raise</span> <span class="nam">OpenSubtitlesError</span><span class="op">(</span><span class="nam">response</span><span class="op">[</span><span class="str">'status'</span><span class="op">]</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t427" href="#t427">427</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t428" href="#t428">428</a></span><span class="t">    <span class="key">return</span> <span class="nam">response</span>&nbsp;</span><span class="r"></span></p>
 </main>
@@ -519,7 +519,7 @@
             <a class="nav" href="z_e65c4b1b753142a3_opensubtitlescom_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.6.4">coverage.py v7.6.4</a>,
-            created at 2025-03-26 19:37 +0000
+            created at 2025-03-26 19:43 +0000
         </p>
     </div>
 </footer>

@@ -7,6 +7,7 @@ from typing import TYPE_CHECKING
 from unittest.mock import Mock
 
 import pytest
+from win32_setctime import SUPPORTED, setctime
 
 from subliminal.utils import sanitize, timestamp
 from subliminal.video import Episode, Movie, Video
@@ -18,6 +19,26 @@ if TYPE_CHECKING:
 pytestmark = pytest.mark.core
 
 
+def test_video_exists_age_no_use_ctime(
+    movies: dict[str, Movie],
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.chdir(tmp_path)
+    video = movies['man_of_steel']
+    original_use_ctime = video.use_ctime
+    video.use_ctime = False
+    video_path = tmp_path / video.name
+    video_path.parent.mkdir(parents=True)
+    video_path.touch()
+    ts = timestamp(datetime.now(timezone.utc) - timedelta(days=3))
+    os.utime(video_path, (ts, ts))
+    assert video.exists
+    assert timedelta(days=3) <= video.age < timedelta(days=3, seconds=1)
+    # Reset
+    video.use_ctime = original_use_ctime
+
+
 def test_video_exists_age(movies: dict[str, Movie], tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.chdir(tmp_path)
     video = movies['man_of_steel']
@@ -25,6 +46,9 @@ def test_video_exists_age(movies: dict[str, Movie], tmp_path: Path, monkeypatch:
     video_path.parent.mkdir(parents=True)
     video_path.touch()
     ts = timestamp(datetime.now(timezone.utc) - timedelta(days=3))
+    if SUPPORTED:
+        # Modify ctime on Windows
+        setctime(video_path, ts)
     os.utime(video_path, (ts, ts))
     assert video.exists
     assert timedelta(days=3) <= video.age < timedelta(days=3, seconds=1)

@@ -50,6 +50,7 @@ run = "mypy --install-types --non-interactive --ignore-missing-imports --config-
 template = "docs"
 installer = "uv pip install"
 description = "build and check documentation"
+dev-mode = false
 features = ["docs"]
 # Keep in sync with CI.yaml/docs, tox/docs and .readthedocs.yaml.
 python = "3.12"
@@ -66,7 +67,6 @@ all = ["build", "linkcheck", "doctest"]
 template = "changelog"
 installer = "uv pip install"
 description = "build changelog with towncrier"
-dev-mode = false
 dependencies = ["towncrier"]
 
 [envs.changelog.scripts]
@@ -77,7 +77,6 @@ run = "towncrier build --version main --draft"
 template = "tests"
 #installer = "uv pip install"
 description = "Run the tests suite"
-dev-mode = false
 features = ["tests"]
 
 [[envs.tests.matrix]]

@@ -37,7 +37,7 @@ repos:
       - id: changelog-fragment-filenames
         name: changelog fragment
         language: fail
-        entry: changelog fragment files must be named *.(breaking|change|provider|refiner|deprecation|doc|misc).rst
+        entry: changelog fragment files must be named *.(breaking|change|provider|refiner|cli|deprecation|doc|misc).rst
         exclude:
-          ^changelog.d/(\..*|towncrier_template.rst|.*\.(breaking|change|provider|refiner|deprecation|doc|misc).rst)
+          ^changelog.d/(\..*|towncrier_template.rst|.*\.(breaking|change|provider|refiner|cli|deprecation|doc|misc).rst)
         files: ^changelog.d/

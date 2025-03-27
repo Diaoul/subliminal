@@ -14,7 +14,7 @@ from requests import Session
 
 from subliminal.exceptions import NotInitializedProviderError, ProviderError
 from subliminal.matches import guess_matches
-from subliminal.subtitle import Subtitle, fix_line_ending
+from subliminal.subtitle import Subtitle
 from subliminal.video import Episode, Movie, Video
 
 from . import Provider, SecLevelOneTLSAdapter
@@ -249,4 +249,4 @@ class PodnapisiProvider(Provider):
                 msg = 'More than one file to unzip'
                 raise ProviderError(msg)
 
-            subtitle.content = fix_line_ending(zf.read(zf.namelist()[0]))
+            subtitle.set_content(zf.read(zf.namelist()[0]))

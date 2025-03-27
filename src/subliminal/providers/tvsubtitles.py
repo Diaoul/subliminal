@@ -16,7 +16,7 @@ from requests import Session
 from subliminal.cache import EPISODE_EXPIRATION_TIME, SHOW_EXPIRATION_TIME, region
 from subliminal.exceptions import NotInitializedProviderError, ProviderError
 from subliminal.matches import guess_matches
-from subliminal.subtitle import Subtitle, fix_line_ending
+from subliminal.subtitle import Subtitle
 from subliminal.utils import sanitize
 from subliminal.video import Episode, Video
 
@@ -329,4 +329,4 @@ class TVsubtitlesProvider(Provider):
                 msg = 'More than one file to unzip'
                 raise ProviderError(msg)
 
-            subtitle.content = fix_line_ending(zf.read(zf.namelist()[0]))
+            subtitle.set_content(zf.read(zf.namelist()[0]))

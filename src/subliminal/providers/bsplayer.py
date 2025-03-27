@@ -16,7 +16,7 @@ from defusedxml import ElementTree  # type: ignore[import-untyped]
 from requests import Session
 
 from subliminal.exceptions import AuthenticationError, NotInitializedProviderError
-from subliminal.subtitle import Subtitle, fix_line_ending
+from subliminal.subtitle import Subtitle
 
 from . import Provider
 
@@ -361,4 +361,4 @@ class BSPlayerProvider(Provider):
             'Content-Length': '0',
         }
         r = self.session.get(subtitle.page_link or '', headers=headers, timeout=self.timeout)
-        subtitle.content = fix_line_ending(zlib.decompress(r.content, 47))
+        subtitle.set_content(zlib.decompress(r.content, 47))

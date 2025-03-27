@@ -16,7 +16,7 @@ from subliminal import __short_version__
 from subliminal.cache import SHOW_EXPIRATION_TIME, region
 from subliminal.exceptions import NotInitializedProviderError, ProviderError
 from subliminal.matches import guess_matches
-from subliminal.subtitle import Subtitle, fix_line_ending
+from subliminal.subtitle import Subtitle
 from subliminal.video import Episode
 
 from . import ParserBeautifulSoup, Provider
@@ -330,7 +330,7 @@ class SubtitulamosProvider(Provider):
         r = self.session.get(subtitle.download_link, headers={'Referer': subtitle.page_link}, timeout=10)
         r.raise_for_status()
 
-        subtitle.content = fix_line_ending(r.content)
+        subtitle.set_content(r.content)
 
 
 class SubtitulamosError(ProviderError):

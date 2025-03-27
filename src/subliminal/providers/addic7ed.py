@@ -21,7 +21,7 @@ from requests.cookies import RequestsCookieJar
 from subliminal.cache import SHOW_EXPIRATION_TIME, region
 from subliminal.exceptions import ConfigurationError, DownloadLimitExceeded, NotInitializedProviderError
 from subliminal.matches import guess_matches
-from subliminal.subtitle import Subtitle, fix_line_ending
+from subliminal.subtitle import Subtitle
 from subliminal.utils import sanitize
 from subliminal.video import Episode, Video
 
@@ -638,4 +638,4 @@ class Addic7edProvider(Provider):
         if r.headers['Content-Type'] == 'text/html':  # pragma: no cover
             raise DownloadLimitExceeded
 
-        subtitle.content = fix_line_ending(r.content)
+        subtitle.set_content(r.content)

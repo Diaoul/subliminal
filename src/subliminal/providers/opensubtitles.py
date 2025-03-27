@@ -22,7 +22,7 @@ from subliminal.exceptions import (
     ServiceUnavailable,
 )
 from subliminal.matches import guess_matches
-from subliminal.subtitle import Subtitle, fix_line_ending
+from subliminal.subtitle import Subtitle
 from subliminal.utils import decorate_imdb_id, sanitize_id
 from subliminal.video import Episode, Movie, Video
 
@@ -341,7 +341,7 @@ class OpenSubtitlesProvider(Provider):
         """Download the content of the subtitle."""
         logger.info('Downloading subtitle %r', subtitle)
         response = checked(self.server.DownloadSubtitles(self.token, [str(subtitle.subtitle_id)]))  # type: ignore[arg-type]
-        subtitle.content = fix_line_ending(zlib.decompress(base64.b64decode(response['data'][0]['data']), 47))
+        subtitle.set_content(zlib.decompress(base64.b64decode(response['data'][0]['data']), 47))
 
 
 class OpenSubtitlesVipSubtitle(OpenSubtitlesSubtitle):

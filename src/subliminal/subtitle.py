@@ -263,11 +263,7 @@ class Subtitle:
 
     @content.setter
     def content(self, value: bytes | None) -> None:
-        self.clear_content()
-        self._content = value
-
-        if self.force_guess_encoding and self.encoding is None:
-            self.encoding = self.guess_encoding()
+        self.set_content(value)
 
     @property
     def text(self) -> str:
@@ -275,6 +271,18 @@ class Subtitle:
         if not self._is_decoded:
             self._text = self._decode_content()
         return self._text
+
+    def set_content(self, value: bytes | None, *, fix: bool = True) -> None:
+        """Set subtitle bytes content."""
+        if fix and value:
+            value = fix_line_ending(value)
+
+        # Clear the previous content before adding new content
+        self.clear_content()
+        self._content = value
+
+        if self.force_guess_encoding and self.encoding is None:
+            self.encoding = self.guess_encoding()
 
     def clear_content(self) -> None:
         """Clear the content of the subtitle."""

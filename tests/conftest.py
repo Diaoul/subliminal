@@ -4,7 +4,7 @@ import os
 import subprocess
 from io import BytesIO
 from pathlib import Path
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 from unittest.mock import Mock
 from zipfile import ZipFile
 
@@ -13,12 +13,10 @@ import requests
 from babelfish import Country, Language  # type: ignore[import-untyped]
 
 import subliminal
-import subliminal.cli
-import subliminal.refiners.hash
-from subliminal import Episode, Movie
 from subliminal.cache import region
 from subliminal.extensions import RegistrableExtensionManager
 from subliminal.providers.mock import MockSubtitle, mock_subtitle_provider
+from subliminal.video import Episode, Movie
 
 if TYPE_CHECKING:
     from collections.abc import Generator
@@ -687,7 +685,7 @@ def provider_manager(monkeypatch: pytest.MonkeyPatch) -> Generator[RegistrableEx
     patched_provider_manager.register(ep_podnapisi)
 
     # OpenSubtitlesCom, subtitle pool
-    subtitle_pool_opensubtitlescom = [
+    subtitle_pool_opensubtitlescom: list[dict[str, Any]] = [
         {
             'language': Language.fromietf('en'),
             'fake_content': (
@@ -871,8 +869,6 @@ def provider_manager(monkeypatch: pytest.MonkeyPatch) -> Generator[RegistrableEx
 
 @pytest.fixture
 def disabled_providers(monkeypatch: pytest.MonkeyPatch) -> Generator[list[str], None, None]:
-    import subliminal.extensions
-
     original_disabled_providers = subliminal.extensions.disabled_providers
 
     patched_disabled_providers: list[str] = ['opensubtitlescomvip']

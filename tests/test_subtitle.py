@@ -259,6 +259,14 @@ def test_subtitle_invalid_encoding() -> None:
     assert subtitle.hearing_impaired is False
 
 
+def test_subtitle_set_content() -> None:
+    subtitle = Subtitle(language=Language('kur'), encoding=None)
+    content = b'Ti\xc5\x9ftek li vir'
+    subtitle.content = content
+    assert subtitle.content == content
+    assert subtitle.text == content.decode()
+
+
 def test_subtitle_guess_encoding_utf8() -> None:
     subtitle = Subtitle(
         language=Language('zho'),

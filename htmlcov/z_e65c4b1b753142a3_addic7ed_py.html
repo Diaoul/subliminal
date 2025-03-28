@@ -67,7 +67,7 @@
             <a id="nextFileLink" class="nav" href="z_e65c4b1b753142a3_bsplayer_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.6.4">coverage.py v7.6.4</a>,
-            created at 2025-03-27 19:32 +0000
+            created at 2025-03-28 02:09 +0000
         </p>
         <aside class="hidden">
             <button type="button" class="button_next_chunk" data-shortcut="j"></button>
@@ -105,7 +105,7 @@
     <p class="run"><span class="n"><a id="t21" href="#t21">21</a></span><span class="t"><span class="key">from</span> <span class="nam">subliminal</span><span class="op">.</span><span class="nam">cache</span> <span class="key">import</span> <span class="nam">SHOW_EXPIRATION_TIME</span><span class="op">,</span> <span class="nam">region</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t22" href="#t22">22</a></span><span class="t"><span class="key">from</span> <span class="nam">subliminal</span><span class="op">.</span><span class="nam">exceptions</span> <span class="key">import</span> <span class="nam">ConfigurationError</span><span class="op">,</span> <span class="nam">DownloadLimitExceeded</span><span class="op">,</span> <span class="nam">NotInitializedProviderError</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t23" href="#t23">23</a></span><span class="t"><span class="key">from</span> <span class="nam">subliminal</span><span class="op">.</span><span class="nam">matches</span> <span class="key">import</span> <span class="nam">guess_matches</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t24" href="#t24">24</a></span><span class="t"><span class="key">from</span> <span class="nam">subliminal</span><span class="op">.</span><span class="nam">subtitle</span> <span class="key">import</span> <span class="nam">Subtitle</span><span class="op">,</span> <span class="nam">fix_line_ending</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t24" href="#t24">24</a></span><span class="t"><span class="key">from</span> <span class="nam">subliminal</span><span class="op">.</span><span class="nam">subtitle</span> <span class="key">import</span> <span class="nam">Subtitle</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t25" href="#t25">25</a></span><span class="t"><span class="key">from</span> <span class="nam">subliminal</span><span class="op">.</span><span class="nam">utils</span> <span class="key">import</span> <span class="nam">sanitize</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t26" href="#t26">26</a></span><span class="t"><span class="key">from</span> <span class="nam">subliminal</span><span class="op">.</span><span class="nam">video</span> <span class="key">import</span> <span class="nam">Episode</span><span class="op">,</span> <span class="nam">Video</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t27" href="#t27">27</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
@@ -722,7 +722,7 @@
     <p class="exc show_exc"><span class="n"><a id="t638" href="#t638">638</a></span><span class="t">        <span class="key">if</span> <span class="nam">r</span><span class="op">.</span><span class="nam">headers</span><span class="op">[</span><span class="str">'Content-Type'</span><span class="op">]</span> <span class="op">==</span> <span class="str">'text/html'</span><span class="op">:</span>  <span class="com"># pragma: no cover</span>&nbsp;</span><span class="r"></span></p>
     <p class="exc show_exc"><span class="n"><a id="t639" href="#t639">639</a></span><span class="t">            <span class="key">raise</span> <span class="nam">DownloadLimitExceeded</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t640" href="#t640">640</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t641" href="#t641">641</a></span><span class="t">        <span class="nam">subtitle</span><span class="op">.</span><span class="nam">content</span> <span class="op">=</span> <span class="nam">fix_line_ending</span><span class="op">(</span><span class="nam">r</span><span class="op">.</span><span class="nam">content</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t641" href="#t641">641</a></span><span class="t">        <span class="nam">subtitle</span><span class="op">.</span><span class="nam">set_content</span><span class="op">(</span><span class="nam">r</span><span class="op">.</span><span class="nam">content</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
 </main>
 <footer>
     <div class="content">
@@ -732,7 +732,7 @@
             <a class="nav" href="z_e65c4b1b753142a3_bsplayer_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.6.4">coverage.py v7.6.4</a>,
-            created at 2025-03-27 19:32 +0000
+            created at 2025-03-28 02:09 +0000
         </p>
     </div>
 </footer>

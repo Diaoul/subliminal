@@ -67,7 +67,7 @@
             <a id="nextFileLink" class="nav" href="z_e65c4b1b753142a3_podnapisi_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.6.4">coverage.py v7.6.4</a>,
-            created at 2025-03-27 19:32 +0000
+            created at 2025-03-28 02:09 +0000
         </p>
         <aside class="hidden">
             <button type="button" class="button_next_chunk" data-shortcut="j"></button>
@@ -109,7 +109,7 @@
     <p class="pln"><span class="n"><a id="t25" href="#t25">25</a></span><span class="t">    <span class="nam">ServiceUnavailable</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t26" href="#t26">26</a></span><span class="t"><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t27" href="#t27">27</a></span><span class="t"><span class="key">from</span> <span class="nam">subliminal</span><span class="op">.</span><span class="nam">matches</span> <span class="key">import</span> <span class="nam">guess_matches</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t28" href="#t28">28</a></span><span class="t"><span class="key">from</span> <span class="nam">subliminal</span><span class="op">.</span><span class="nam">subtitle</span> <span class="key">import</span> <span class="nam">Subtitle</span><span class="op">,</span> <span class="nam">fix_line_ending</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t28" href="#t28">28</a></span><span class="t"><span class="key">from</span> <span class="nam">subliminal</span><span class="op">.</span><span class="nam">subtitle</span> <span class="key">import</span> <span class="nam">Subtitle</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t29" href="#t29">29</a></span><span class="t"><span class="key">from</span> <span class="nam">subliminal</span><span class="op">.</span><span class="nam">video</span> <span class="key">import</span> <span class="nam">Episode</span><span class="op">,</span> <span class="nam">Movie</span><span class="op">,</span> <span class="nam">Video</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t30" href="#t30">30</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t31" href="#t31">31</a></span><span class="t"><span class="key">from</span> <span class="op">.</span> <span class="key">import</span> <span class="nam">Provider</span>&nbsp;</span><span class="r"></span></p>
@@ -866,7 +866,7 @@
     <p class="mis show_mis"><span class="n"><a id="t782" href="#t782">782</a></span><span class="t">            <span class="nam">logger</span><span class="op">.</span><span class="nam">debug</span><span class="op">(</span><span class="str">'Unable to download subtitle. No data returned from provider'</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="mis show_mis"><span class="n"><a id="t783" href="#t783">783</a></span><span class="t">            <span class="key">return</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t784" href="#t784">784</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t785" href="#t785">785</a></span><span class="t">        <span class="nam">subtitle</span><span class="op">.</span><span class="nam">content</span> <span class="op">=</span> <span class="nam">fix_line_ending</span><span class="op">(</span><span class="nam">download_response</span><span class="op">.</span><span class="nam">content</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t785" href="#t785">785</a></span><span class="t">        <span class="nam">subtitle</span><span class="op">.</span><span class="nam">set_content</span><span class="op">(</span><span class="nam">download_response</span><span class="op">.</span><span class="nam">content</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t786" href="#t786">786</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t787" href="#t787">787</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t788" href="#t788">788</a></span><span class="t"><span class="key">class</span> <span class="nam">OpenSubtitlesComVipSubtitle</span><span class="op">(</span><span class="nam">OpenSubtitlesComSubtitle</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
@@ -960,7 +960,7 @@
             <a class="nav" href="z_e65c4b1b753142a3_podnapisi_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.6.4">coverage.py v7.6.4</a>,
-            created at 2025-03-27 19:32 +0000
+            created at 2025-03-28 02:09 +0000
         </p>
     </div>
 </footer>

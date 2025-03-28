@@ -67,7 +67,7 @@
             <a id="nextFileLink" class="nav" href="z_e65c4b1b753142a3_napiprojekt_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.6.4">coverage.py v7.6.4</a>,
-            created at 2025-03-27 19:32 +0000
+            created at 2025-03-28 02:09 +0000
         </p>
         <aside class="hidden">
             <button type="button" class="button_next_chunk" data-shortcut="j"></button>
@@ -96,7 +96,7 @@
     <p class="pln"><span class="n"><a id="t12" href="#t12">12</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t13" href="#t13">13</a></span><span class="t"><span class="key">from</span> <span class="nam">subliminal</span><span class="op">.</span><span class="nam">exceptions</span> <span class="key">import</span> <span class="nam">DownloadLimitExceeded</span><span class="op">,</span> <span class="nam">NotInitializedProviderError</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t14" href="#t14">14</a></span><span class="t"><span class="key">from</span> <span class="nam">subliminal</span><span class="op">.</span><span class="nam">matches</span> <span class="key">import</span> <span class="nam">guess_matches</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t15" href="#t15">15</a></span><span class="t"><span class="key">from</span> <span class="nam">subliminal</span><span class="op">.</span><span class="nam">subtitle</span> <span class="key">import</span> <span class="nam">Subtitle</span><span class="op">,</span> <span class="nam">fix_line_ending</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t15" href="#t15">15</a></span><span class="t"><span class="key">from</span> <span class="nam">subliminal</span><span class="op">.</span><span class="nam">subtitle</span> <span class="key">import</span> <span class="nam">Subtitle</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t16" href="#t16">16</a></span><span class="t"><span class="key">from</span> <span class="nam">subliminal</span><span class="op">.</span><span class="nam">utils</span> <span class="key">import</span> <span class="nam">sanitize</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t17" href="#t17">17</a></span><span class="t"><span class="key">from</span> <span class="nam">subliminal</span><span class="op">.</span><span class="nam">video</span> <span class="key">import</span> <span class="nam">Episode</span><span class="op">,</span> <span class="nam">Video</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t18" href="#t18">18</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
@@ -504,7 +504,7 @@
     <p class="par run show_par"><span class="n"><a id="t420" href="#t420">420</a></span><span class="t">        <span class="key">if</span> <span class="nam">r</span><span class="op">.</span><span class="nam">headers</span><span class="op">[</span><span class="str">'Content-Type'</span><span class="op">]</span> <span class="op">==</span> <span class="str">'text/html'</span><span class="op">:</span>&nbsp;</span><span class="r"><span class="annotate short">420&#x202F;&#x219B;&#x202F;421</span><span class="annotate long">line 420 didn't jump to line 421 because the condition on line 420 was never true</span></span></p>
     <p class="mis show_mis"><span class="n"><a id="t421" href="#t421">421</a></span><span class="t">            <span class="key">raise</span> <span class="nam">DownloadLimitExceeded</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t422" href="#t422">422</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t423" href="#t423">423</a></span><span class="t">        <span class="nam">subtitle</span><span class="op">.</span><span class="nam">content</span> <span class="op">=</span> <span class="nam">fix_line_ending</span><span class="op">(</span><span class="nam">r</span><span class="op">.</span><span class="nam">content</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t423" href="#t423">423</a></span><span class="t">        <span class="nam">subtitle</span><span class="op">.</span><span class="nam">set_content</span><span class="op">(</span><span class="nam">r</span><span class="op">.</span><span class="nam">content</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
 </main>
 <footer>
     <div class="content">
@@ -514,7 +514,7 @@
             <a class="nav" href="z_e65c4b1b753142a3_napiprojekt_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.6.4">coverage.py v7.6.4</a>,
-            created at 2025-03-27 19:32 +0000
+            created at 2025-03-28 02:09 +0000
         </p>
     </div>
 </footer>

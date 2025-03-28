@@ -67,7 +67,7 @@
             <a id="nextFileLink" class="nav" href="z_e65c4b1b753142a3_subtitulamos_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.6.4">coverage.py v7.6.4</a>,
-            created at 2025-03-27 19:32 +0000
+            created at 2025-03-28 02:09 +0000
         </p>
         <aside class="hidden">
             <button type="button" class="button_next_chunk" data-shortcut="j"></button>
@@ -98,7 +98,7 @@
     <p class="pln"><span class="n"><a id="t14" href="#t14">14</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t15" href="#t15">15</a></span><span class="t"><span class="key">from</span> <span class="nam">subliminal</span><span class="op">.</span><span class="nam">exceptions</span> <span class="key">import</span> <span class="nam">NotInitializedProviderError</span><span class="op">,</span> <span class="nam">ProviderError</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t16" href="#t16">16</a></span><span class="t"><span class="key">from</span> <span class="nam">subliminal</span><span class="op">.</span><span class="nam">matches</span> <span class="key">import</span> <span class="nam">guess_matches</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t17" href="#t17">17</a></span><span class="t"><span class="key">from</span> <span class="nam">subliminal</span><span class="op">.</span><span class="nam">subtitle</span> <span class="key">import</span> <span class="nam">Subtitle</span><span class="op">,</span> <span class="nam">fix_line_ending</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t17" href="#t17">17</a></span><span class="t"><span class="key">from</span> <span class="nam">subliminal</span><span class="op">.</span><span class="nam">subtitle</span> <span class="key">import</span> <span class="nam">Subtitle</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t18" href="#t18">18</a></span><span class="t"><span class="key">from</span> <span class="nam">subliminal</span><span class="op">.</span><span class="nam">video</span> <span class="key">import</span> <span class="nam">Episode</span><span class="op">,</span> <span class="nam">Movie</span><span class="op">,</span> <span class="nam">Video</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t19" href="#t19">19</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t20" href="#t20">20</a></span><span class="t"><span class="key">from</span> <span class="op">.</span> <span class="key">import</span> <span class="nam">Provider</span><span class="op">,</span> <span class="nam">SecLevelOneTLSAdapter</span>&nbsp;</span><span class="r"></span></p>
@@ -333,7 +333,7 @@
     <p class="mis show_mis"><span class="n"><a id="t249" href="#t249">249</a></span><span class="t">                <span class="nam">msg</span> <span class="op">=</span> <span class="str">'More than one file to unzip'</span>&nbsp;</span><span class="r"></span></p>
     <p class="mis show_mis"><span class="n"><a id="t250" href="#t250">250</a></span><span class="t">                <span class="key">raise</span> <span class="nam">ProviderError</span><span class="op">(</span><span class="nam">msg</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t251" href="#t251">251</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t252" href="#t252">252</a></span><span class="t">            <span class="nam">subtitle</span><span class="op">.</span><span class="nam">content</span> <span class="op">=</span> <span class="nam">fix_line_ending</span><span class="op">(</span><span class="nam">zf</span><span class="op">.</span><span class="nam">read</span><span class="op">(</span><span class="nam">zf</span><span class="op">.</span><span class="nam">namelist</span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="num">0</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t252" href="#t252">252</a></span><span class="t">            <span class="nam">subtitle</span><span class="op">.</span><span class="nam">set_content</span><span class="op">(</span><span class="nam">zf</span><span class="op">.</span><span class="nam">read</span><span class="op">(</span><span class="nam">zf</span><span class="op">.</span><span class="nam">namelist</span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="num">0</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
 </main>
 <footer>
     <div class="content">
@@ -343,7 +343,7 @@
             <a class="nav" href="z_e65c4b1b753142a3_subtitulamos_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.6.4">coverage.py v7.6.4</a>,
-            created at 2025-03-27 19:32 +0000
+            created at 2025-03-28 02:09 +0000
         </p>
     </div>
 </footer>

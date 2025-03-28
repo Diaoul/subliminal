@@ -394,11 +394,11 @@ def test_save_subtitles(movies: dict[str, Movie], tmp_path: Path, monkeypatch: p
     ensure(tmp_path / movies['man_of_steel'].name)
     subtitle_no_content = Subtitle(Language('eng'), '')
     subtitle = Subtitle(Language('fra'), '')
-    subtitle.content = b'Some content'
+    subtitle.set_content(b'Some content')
     subtitle_other = Subtitle(Language('fra'), '')
-    subtitle_other.content = b'Some other content'
+    subtitle_other.set_content(b'Some other content')
     subtitle_pt_br = Subtitle(Language('por', 'BR'), '')
-    subtitle_pt_br.content = b'Some brazilian content'
+    subtitle_pt_br.set_content(b'Some brazilian content')
     subtitles = [subtitle_no_content, subtitle, subtitle_other, subtitle_pt_br]
 
     save_subtitles(movies['man_of_steel'], subtitles)
@@ -420,9 +420,9 @@ def test_save_subtitles(movies: dict[str, Movie], tmp_path: Path, monkeypatch: p
 
 def test_save_subtitles_single_directory_encoding(movies: dict[str, Movie], tmp_path: Path) -> None:
     subtitle = Subtitle(Language('jpn'), '')
-    subtitle.content = 'ハローワールド'.encode('shift-jis')
+    subtitle.set_content('ハローワールド'.encode('shift-jis'))
     subtitle_pt_br = Subtitle(Language('por', 'BR'), '')
-    subtitle_pt_br.content = b'Some brazilian content'
+    subtitle_pt_br.set_content(b'Some brazilian content')
     subtitles = [subtitle, subtitle_pt_br]
 
     save_subtitles(movies['man_of_steel'], subtitles, single=True, directory=os.fspath(tmp_path), encoding='utf-8')
@@ -458,7 +458,7 @@ def test_save_subtitles_convert(movies: dict[str, Movie], tmp_path: Path, monkey
         """
     )
     subtitle = Subtitle(Language('pol'), '')
-    subtitle.content = text.encode('utf-8')
+    subtitle.set_content(text.encode('utf-8'))
     subtitles = [subtitle]
 
     save_subtitles(video, subtitles, single=True, subtitle_format='srt')

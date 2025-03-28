@@ -64,7 +64,6 @@ class NapiProjektSubtitle(Subtitle):
         fps: float = 24,
     ) -> None:
         super().__init__(language, subtitle_id, fps=fps)
-        self.content = None
 
     @property
     def info(self) -> str:
@@ -177,7 +176,7 @@ class NapiProjektProvider(Provider):
 
         # Create subtitle object
         subtitle = self.subtitle_class(language=language, subtitle_id=video_hash)
-        subtitle.content = content
+        subtitle.set_content(content)
         logger.debug('Found subtitle %r', subtitle)
 
         return [subtitle]

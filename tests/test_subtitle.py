@@ -50,7 +50,7 @@ def test_languague_type(hearing_impaired: bool | None, foreign_only: bool | None
 
 def test_subtitle_text() -> None:
     subtitle = Subtitle(Language('eng'))
-    subtitle.content = b'Some ascii text'
+    subtitle.set_content(b'Some ascii text')
     assert subtitle.text == 'Some ascii text'
 
 
@@ -61,7 +61,7 @@ def test_subtitle_text_no_content() -> None:
 
 def test_subtitle_none_content() -> None:
     subtitle = Subtitle(Language('jpn'))
-    subtitle.content = None
+    subtitle.set_content(None)
     assert subtitle.is_valid() is False
 
 
@@ -259,6 +259,14 @@ def test_subtitle_invalid_encoding() -> None:
     assert subtitle.hearing_impaired is False
 
 
+def test_subtitle_set_content() -> None:
+    subtitle = Subtitle(language=Language('kur'), encoding=None)
+    content = b'Ti\xc5\x9ftek li vir'
+    subtitle.content = content
+    assert subtitle.content == content
+    assert subtitle.text == content.decode()
+
+
 def test_subtitle_guess_encoding_utf8() -> None:
     subtitle = Subtitle(
         language=Language('zho'),
@@ -266,7 +274,7 @@ def test_subtitle_guess_encoding_utf8() -> None:
         page_link=None,
         encoding=None,
     )
-    subtitle.content = b'Something here'
+    subtitle.set_content(b'Something here')
     assert subtitle.foreign_only is False
     assert subtitle.guess_encoding() == 'utf-8'
     assert subtitle.text == 'Something here'
@@ -281,7 +289,7 @@ def test_subtitle_text_guess_encoding_none() -> None:
         page_link=None,
         encoding=None,
     )
-    subtitle.content = content
+    subtitle.set_content(content)
 
     assert subtitle.guess_encoding() is None
     assert not subtitle.is_valid()
@@ -294,7 +302,7 @@ def test_subtitle_reencode() -> None:
         language=Language('por'),
         encoding='latin1',
     )
-    subtitle.content = content
+    subtitle.set_content(content)
     success = subtitle.reencode()
     assert success
     assert subtitle.content == b'Uma palavra longa \xc3\xa9 melhor do que um p\xc3\xa3o curto'
@@ -329,7 +337,7 @@ def test_subtitle_convert_same_format_same_encoding() -> None:
         encoding='utf-8',
     )
     text = "1\n00:00:05,000 --> 00:00:10,000\n«Attention, ce flim n'est pas un flim sur le cyclimse»\n\n"
-    subtitle.content = text.encode('utf-8')
+    subtitle.set_content(text.encode('utf-8'))
     assert subtitle.encoding == 'utf-8'
     assert subtitle.text == text
 
@@ -342,7 +350,7 @@ def test_subtitle_convert_same_format_different_encoding() -> None:
         encoding='latin1',
     )
     text = "1\n00:00:05,000 --> 00:00:10,000\n«Attention, ce flim n'est pas un flim sur le cyclimse»\n\n"
-    subtitle.content = text.encode('latin1')
+    subtitle.set_content(text.encode('latin1'))
     assert subtitle.encoding == 'iso8859-1'
     assert subtitle.text == text
 
@@ -362,7 +370,7 @@ def test_subtitle_convert_from_microdvd_no_fps() -> None:
     {3244}{3299}To kwestia tygodni.
     {3299}{3390}Ostrzegałem, że eksploatacja jądra|to samobójstwo.
     """
-    subtitle.content = text.encode('utf-8')
+    subtitle.set_content(text.encode('utf-8'))
 
     assert not subtitle.convert(output_format='srt', output_encoding='utf-8')
 
@@ -379,7 +387,7 @@ def test_subtitle_convert_from_microdvd_subtitle_fps() -> None:
     {3244}{3299}To kwestia tygodni.
     {3299}{3390}Ostrzegałem, że eksploatacja jądra|to samobójstwo.
     """
-    subtitle.content = text.encode('utf-8')
+    subtitle.set_content(text.encode('utf-8'))
 
     assert subtitle.convert(output_format='srt', output_encoding='utf-8')
     assert subtitle.subtitle_format == 'srt'
@@ -426,7 +434,7 @@ def test_subtitle_convert_from_microdvd_argument_fps() -> None:
     {3244}{3299}To kwestia tygodni.
     {3299}{3390}Ostrzegałem, że eksploatacja jądra|to samobójstwo.
     """
-    subtitle.content = text.encode('utf-8')
+    subtitle.set_content(text.encode('utf-8'))
 
     assert subtitle.convert(output_format='srt', output_encoding='utf-8', fps=24)
     assert subtitle.subtitle_format == 'srt'
@@ -492,7 +500,7 @@ def test_subtitle_convert_to_ssa() -> None:
 
         """
     )
-    subtitle.content = text.encode('utf-8')
+    subtitle.set_content(text.encode('utf-8'))
 
     assert subtitle.convert(output_format='ass')
     assert subtitle.subtitle_format == 'ass'

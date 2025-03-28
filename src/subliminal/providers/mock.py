@@ -176,7 +176,7 @@ class MockProvider(Provider):
             self.__class__.__name__,
             subtitle,
         )
-        subtitle.content = subtitle.fake_content
+        subtitle.set_content(subtitle.fake_content)
 
 
 def mock_subtitle_provider(

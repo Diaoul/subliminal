@@ -64,7 +64,6 @@ class NapiProjektSubtitle(Subtitle):
         fps: float = 24,
     ) -> None:
         super().__init__(language, subtitle_id, fps=fps)
-        self.content = None
 
     @property
     def info(self) -> str:

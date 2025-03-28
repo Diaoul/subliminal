@@ -93,7 +93,8 @@ Here video information was guessed based on the name of the video, you can acces
     >>> video.release_group
     'LOL'
 
-Video information is guessed using the path, not only the file name. This helps guessing episodes such as:
+Video information is guessed using the path with parent directories, not only the file name.
+This helps guessing episodes such as:
 
     >>> episode = Video.fromname('Mrs.America/01x01.mp4')
     >>> episode

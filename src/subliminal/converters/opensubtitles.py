@@ -69,7 +69,7 @@ class OpenSubtitlesConverter(LanguageReverseConverter):
         if code in self.from_opensubtitles:
             return self.from_opensubtitles[code]  # type: ignore[no-any-return]
         for conv in [self.alpha3b_converter, self.alpha2_converter]:
-            conv = cast(LanguageReverseConverter, conv)
+            conv = cast('LanguageReverseConverter', conv)
             try:
                 return conv.reverse(code)  # type: ignore[no-any-return]
             except LanguageReverseError:

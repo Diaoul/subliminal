@@ -8,7 +8,6 @@ import struct
 from typing import TYPE_CHECKING, Any, cast
 
 from subliminal.extensions import get_default_providers, provider_manager
-from subliminal.providers import Provider
 
 if TYPE_CHECKING:
     from collections.abc import Sequence, Set
@@ -16,6 +15,7 @@ if TYPE_CHECKING:
 
     from babelfish import Language  # type: ignore[import-untyped]
 
+    from subliminal.providers import Provider
     from subliminal.video import Video
 
     HashFunc: TypeAlias = Callable[[str | os.PathLike], str | None]
@@ -86,7 +86,7 @@ def refine(
 
     logger.debug('Computing hashes for %r', video.name)
     for name in providers:
-        provider = cast(Provider, provider_manager[name].plugin)
+        provider = cast('Provider', provider_manager[name].plugin)
         if not provider.check_types(video):
             continue
 

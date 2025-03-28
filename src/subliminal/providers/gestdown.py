@@ -351,7 +351,7 @@ class GestdownProvider(Provider):
             for subtitle in found['subtitles']:
                 # read the item
                 hearing_impaired = subtitle['hearingImpaired']
-                page_link = f"{self.server_url}{subtitle['downloadUri']}"
+                page_link = f'{self.server_url}{subtitle["downloadUri"]}'
                 release_group = subtitle['version']
 
                 m = id_pattern.match(page_link)

@@ -871,7 +871,7 @@ def download(
             msg = f'{video_name!r} ignored'
             if video.exists:
                 langs = ', '.join(str(s) for s in video.subtitle_languages) or 'none'
-                days = f"{video.age.days:d} day{'s' if video.age.days > 1 else ''}"
+                days = f'{video.age.days:d} day{"s" if video.age.days > 1 else ""}'
                 msg += f' - subtitles: {langs} / age: {days}'
             else:
                 msg += ' - not a video file'
@@ -933,7 +933,7 @@ def download(
 
         if pp.discarded_providers:  # pragma: no cover
             click.secho(
-                f"Some providers have been discarded due to unexpected errors: {', '.join(pp.discarded_providers)}",
+                f'Some providers have been discarded due to unexpected errors: {", ".join(pp.discarded_providers)}',
                 fg='yellow',
             )
 
@@ -953,7 +953,7 @@ def download(
         total_subtitles += len(saved_subtitles)
 
         if verbose > 0:
-            click.echo(f"{plural(len(saved_subtitles), 'subtitle')} downloaded for {os.path.split(v.name)[1]}")
+            click.echo(f'{plural(len(saved_subtitles), "subtitle")} downloaded for {os.path.split(v.name)[1]}')
 
         if verbose > 1:
             for s in saved_subtitles:
@@ -995,7 +995,7 @@ def download(
                 )
 
     if verbose == 0:
-        click.echo(f"Downloaded {plural(total_subtitles, 'subtitle')}")
+        click.echo(f'Downloaded {plural(total_subtitles, "subtitle")}')
 
 
 def cli() -> None:  # pragma: no cover

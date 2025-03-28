@@ -15,7 +15,6 @@ from subliminal.core import (
     refine,
     refiner_manager,
 )
-from subliminal.providers.mock import MockProvider
 from subliminal.score import episode_scores
 from subliminal.subtitle import Subtitle
 
@@ -23,6 +22,7 @@ if TYPE_CHECKING:
     from typing import Callable
 
     from subliminal.extensions import RegistrableExtensionManager
+    from subliminal.providers.mock import MockProvider
     from subliminal.video import Episode, Movie, Video
 
 # Core test
@@ -305,7 +305,7 @@ def test_list_subtitles_discarded_provider(
     # keep listed subtitle
     subtitle = subtitles[0]
 
-    provider = cast(MockProvider, pool['opensubtitlescom'])
+    provider = cast('MockProvider', pool['opensubtitlescom'])
 
     # Mock a broken provider
     provider.is_broken = True
@@ -332,7 +332,7 @@ def test_async_provider_pool_list_subtitles_discarded_providers(
 
     pool = AsyncProviderPool(max_workers=1)
     # One provider is broken
-    cast(MockProvider, pool['opensubtitlescom']).is_broken = True
+    cast('MockProvider', pool['opensubtitlescom']).is_broken = True
 
     subtitles = pool.list_subtitles(video, languages)
     assert {s.provider_name for s in subtitles} == {
@@ -360,7 +360,7 @@ def test_download_subtitles_discarded_provider(
     assert 'opensubtitlescom' not in pool.discarded_providers
 
     # Mock a broken provider
-    cast(MockProvider, pool['opensubtitlescom']).is_broken = True
+    cast('MockProvider', pool['opensubtitlescom']).is_broken = True
     # Try failing downloading subtitle
     assert not pool.download_subtitle(subtitle)
 

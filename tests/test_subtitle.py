@@ -86,12 +86,7 @@ def test_subtitle_is_valid_no_content() -> None:
 
 def test_subtitle_is_valid_valid(monkeypatch: pytest.MonkeyPatch) -> None:
     subtitle = Subtitle(Language('fra'))
-    text = (
-        '1\n'
-        '00:00:20,000 --> 00:00:24,400\n'
-        "En réponse à l'augmentation de la criminalité\n"
-        'dans certains quartiers,\n'
-    )
+    text = "1\n00:00:20,000 --> 00:00:24,400\nEn réponse à l'augmentation de la criminalité\ndans certains quartiers,\n"
     monkeypatch.setattr(Subtitle, 'text', text)
     assert subtitle.is_valid() is True
     assert subtitle.subtitle_format == 'srt'
@@ -100,10 +95,7 @@ def test_subtitle_is_valid_valid(monkeypatch: pytest.MonkeyPatch) -> None:
 def test_subtitle_is_valid_auto_fix(monkeypatch: pytest.MonkeyPatch) -> None:
     subtitle = Subtitle(Language('fra'), auto_fix_srt=True)
     text = (
-        '1\n'
-        '00:00:20,000 --> 00:00:24,400\n'
-        "En réponse à l'augmentation de la criminalité\n"
-        'dans certains quartiers,\n\n'
+        "1\n00:00:20,000 --> 00:00:24,400\nEn réponse à l'augmentation de la criminalité\ndans certains quartiers,\n\n"
     )
     text += "This line shouldn't be here"
     monkeypatch.setattr(Subtitle, 'text', text)
@@ -113,10 +105,7 @@ def test_subtitle_is_valid_auto_fix(monkeypatch: pytest.MonkeyPatch) -> None:
 def test_subtitle_is_valid_valid_begin(monkeypatch: pytest.MonkeyPatch) -> None:
     subtitle = Subtitle(Language('fra'))
     text = (
-        '1\n'
-        '00:00:20,000 --> 00:00:24,400\n'
-        "En réponse à l'augmentation de la criminalité\n"
-        'dans certains quartiers,\n\n'
+        "1\n00:00:20,000 --> 00:00:24,400\nEn réponse à l'augmentation de la criminalité\ndans certains quartiers,\n\n"
     ) * 20
     text += "This line shouldn't be here"
     monkeypatch.setattr(Subtitle, 'text', text)
@@ -126,11 +115,7 @@ def test_subtitle_is_valid_valid_begin(monkeypatch: pytest.MonkeyPatch) -> None:
 def test_subtitle_is_valid_sub_format(monkeypatch: pytest.MonkeyPatch, movies: dict[str, Movie]) -> None:
     video = movies['man_of_steel']
     subtitle = Subtitle(Language('pol'))
-    text = (
-        '{3146}{3189}/Nie rozumiecie?\n'
-        '{3189}{3244}/Jšdro Kryptona się rozpada.\n'
-        '{3244}{3299}To kwestia tygodni.\n'
-    )
+    text = '{3146}{3189}/Nie rozumiecie?\n{3189}{3244}/Jšdro Kryptona się rozpada.\n{3244}{3299}To kwestia tygodni.\n'
     monkeypatch.setattr(Subtitle, 'text', text)
     assert subtitle.is_valid() is True
     assert subtitle.subtitle_format == 'microdvd'
@@ -142,11 +127,7 @@ def test_subtitle_is_valid_sub_format(monkeypatch: pytest.MonkeyPatch, movies: d
 def test_subtitle_get_path_extension(monkeypatch: pytest.MonkeyPatch, movies: dict[str, Movie]) -> None:
     video = movies['man_of_steel']
     subtitle = Subtitle(Language('pol'))
-    text = (
-        '{3146}{3189}/Nie rozumiecie?\n'
-        '{3189}{3244}/Jšdro Kryptona się rozpada.\n'
-        '{3244}{3299}To kwestia tygodni.\n'
-    )
+    text = '{3146}{3189}/Nie rozumiecie?\n{3189}{3244}/Jšdro Kryptona się rozpada.\n{3244}{3299}To kwestia tygodni.\n'
     monkeypatch.setattr(Subtitle, 'text', text)
     assert subtitle.is_valid() is True
     assert subtitle.subtitle_format == 'microdvd'

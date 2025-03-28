@@ -201,7 +201,7 @@ def ensure_list(value: T | Sequence[T] | None) -> list[T]:
     if value is None:
         return []
     if not is_iterable(value):
-        return [cast(T, value)]
+        return [cast('T', value)]
     return list(value)
 
 

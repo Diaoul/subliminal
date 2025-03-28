@@ -73,11 +73,11 @@ class OMDBClient:
         is_movie: bool | None = None if type is None else (type == 'movie')
         if id is not None:
             res = self.search_by_id(id, is_movie=is_movie, plot=plot)
-            return cast(dict, res)
+            return cast('dict', res)
 
         if title is not None:
             res = self.search_by_title(title, is_movie=is_movie, year=year, plot=plot)
-            return cast(dict, res)
+            return cast('dict', res)
 
         # missing one required argument
         msg = 'At least id or title is required'
@@ -108,7 +108,7 @@ class OMDBClient:
         if j['Response'] == 'False':
             return {}
 
-        return cast(dict, j)
+        return cast('dict', j)
 
     @region.cache_on_arguments(expiration_time=REFINER_EXPIRATION_TIME)
     def search_by_title(
@@ -138,7 +138,7 @@ class OMDBClient:
         if j['Response'] == 'False':
             return {}
 
-        return cast(dict, j)
+        return cast('dict', j)
 
     @region.cache_on_arguments(expiration_time=REFINER_EXPIRATION_TIME)
     def search(
@@ -168,7 +168,7 @@ class OMDBClient:
         if j['Response'] == 'False':
             return {}
 
-        return cast(dict, j)
+        return cast('dict', j)
 
     @region.cache_on_arguments(expiration_time=REFINER_EXPIRATION_TIME)
     def search_all(self, title: str, is_movie: bool | None = None, year: int | None = None) -> list:
@@ -178,14 +178,14 @@ class OMDBClient:
             return []
 
         # fetch all paginated results
-        all_results = cast(list, results['Search'])
+        all_results = cast('list', results['Search'])
         total_results = int(results['totalResults'])
         page = 1
         while total_results > page * 10:
             page += 1
             results = self.search(title=title, is_movie=is_movie, year=year, page=page)
             if results:  # pragma: no branch
-                all_results.extend(cast(list, results['Search']))
+                all_results.extend(cast('list', results['Search']))
 
         return all_results
 

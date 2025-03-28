@@ -659,10 +659,7 @@ def provider_manager(monkeypatch: pytest.MonkeyPatch) -> Generator[RegistrableEx
             'language': Language.fromietf('en'),
             'subtitle_id': 'Dadi',
             'fake_content': (
-                b'1\n00:00:02,090 --> 00:00:03,970\n'
-                b'Greetings.\n\n'
-                b'2\n00:00:04,080 --> 00:00:05,550\n'
-                b'Sgniteerg.\n\n'
+                b'1\n00:00:02,090 --> 00:00:03,970\nGreetings.\n\n2\n00:00:04,080 --> 00:00:05,550\nSgniteerg.\n\n'
             ),
             'video_name': episode2_name,
             'matches': {'episode', 'season', 'series', 'year'},

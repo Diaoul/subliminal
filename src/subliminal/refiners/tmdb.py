@@ -96,7 +96,7 @@ class TMDBClient:
         r = self.session.get(self.base_url + f'/search/{category}', params=params)
 
         r.raise_for_status()
-        return cast(list, r.json().get('results'))
+        return cast('list', r.json().get('results'))
 
     @region.cache_on_arguments(expiration_time=REFINER_EXPIRATION_TIME)
     def get_id(
@@ -166,7 +166,7 @@ class TMDBClient:
         r = self.session.get(self.base_url + path, params=params)
         r.raise_for_status()
 
-        return cast(dict, r.json())
+        return cast('dict', r.json())
 
     @region.cache_on_arguments(expiration_time=REFINER_EXPIRATION_TIME)
     def search_movie(
@@ -180,7 +180,7 @@ class TMDBClient:
         if tmdb_id is None:
             return {}
         res = self.query(tmdb_id, is_movie=True)
-        return cast(dict, res)
+        return cast('dict', res)
 
     @region.cache_on_arguments(expiration_time=REFINER_EXPIRATION_TIME)
     def search_series(
@@ -194,7 +194,7 @@ class TMDBClient:
         if tmdb_id is None:
             return {}
         res = self.query(tmdb_id, is_movie=False)
-        return cast(dict, res)
+        return cast('dict', res)
 
     @region.cache_on_arguments(expiration_time=REFINER_EXPIRATION_TIME)
     def search_episode(
@@ -210,7 +210,7 @@ class TMDBClient:
         if tmdb_id is None:
             return {}
         res = self.query(tmdb_id, is_movie=False, season=season, episode=episode)
-        return cast(dict, res)
+        return cast('dict', res)
 
     @property
     def apikey(self) -> str | None:

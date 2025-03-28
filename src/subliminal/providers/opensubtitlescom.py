@@ -364,7 +364,7 @@ def requires_auth(func: C) -> C:
 
         return func(self, *args, **kwargs)
 
-    return cast(C, wrapper)
+    return cast('C', wrapper)
 
 
 class OpenSubtitlesComProvider(Provider):

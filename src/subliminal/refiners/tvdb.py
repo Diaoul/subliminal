@@ -39,7 +39,7 @@ def requires_auth(func: C) -> C:
             self.refresh_token()
         return func(self, *args, **kwargs)
 
-    return cast(C, wrapper)
+    return cast('C', wrapper)
 
 
 class TVDBClient:
@@ -187,7 +187,7 @@ class TVDBClient:
             return {}
         r.raise_for_status()
 
-        return cast(dict, r.json()['data'])
+        return cast('dict', r.json()['data'])
 
     @requires_auth
     def query_series_episodes(
@@ -221,7 +221,7 @@ class TVDBClient:
             return {}
         r.raise_for_status()
 
-        return cast(dict, r.json())
+        return cast('dict', r.json())
 
     @region.cache_on_arguments(expiration_time=REFINER_EXPIRATION_TIME)
     @requires_auth
@@ -239,7 +239,7 @@ class TVDBClient:
             return {}
         r.raise_for_status()
 
-        return cast(dict, r.json()['data'])
+        return cast('dict', r.json()['data'])
 
     @region.cache_on_arguments(expiration_time=REFINER_EXPIRATION_TIME)
     @requires_auth
@@ -256,7 +256,7 @@ class TVDBClient:
             return {}
         r.raise_for_status()
 
-        return cast(dict, r.json()['data'])
+        return cast('dict', r.json()['data'])
 
     @region.cache_on_arguments(expiration_time=REFINER_EXPIRATION_TIME)
     @requires_auth
@@ -276,7 +276,7 @@ class TVDBClient:
             return {}
         r.raise_for_status()
 
-        return cast(dict, r.json())
+        return cast('dict', r.json())
 
     @region.cache_on_arguments(expiration_time=REFINER_EXPIRATION_TIME)
     @requires_auth
@@ -311,7 +311,7 @@ class TVDBClient:
             return []
         r.raise_for_status()
 
-        return cast(list, r.json()['data'])
+        return cast('list', r.json()['data'])
 
     @property
     def apikey(self) -> str:

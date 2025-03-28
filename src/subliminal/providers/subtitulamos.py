@@ -168,7 +168,7 @@ class SubtitulamosProvider(Provider):
             timeout=self.timeout,
         )
         data = json.loads(r.text)
-        return cast(list[dict[str, str]], data)
+        return cast('list[dict[str, str]]', data)
 
     def _read_series(self, series_url: str) -> ParserBeautifulSoup:
         """Read series information from provider."""
@@ -216,7 +216,7 @@ class SubtitulamosProvider(Provider):
             msg = 'Season not found'
             raise NotExists(msg)
 
-        if 'selected' not in cast(list[str], season_element.get('class', [])):
+        if 'selected' not in cast('list[str]', season_element.get('class', [])):
             page_content = self._read_series(str(season_element.get('href', '')))
 
         # Select episode
@@ -229,7 +229,7 @@ class SubtitulamosProvider(Provider):
             raise NotExists(msg)
 
         episode_url = str(episode_element.get('href', ''))
-        if 'selected' not in cast(list[str], episode_element.get('class', [])):
+        if 'selected' not in cast('list[str]', episode_element.get('class', [])):
             page_content = self._read_series(episode_url)
 
         return page_content, episode_url

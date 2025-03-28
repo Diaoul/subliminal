@@ -12,6 +12,8 @@ on:
         default: NONE
         required: true
 
+permissions: {}
+
 env:
   FORCE_COLOR: "1"
 
@@ -33,7 +35,8 @@ jobs:
     name: Tag a new release
     # tag a release after a release PR was accepted
     if: |
-      github.event_name == 'pull_request'
+      github.repository == 'Diaoul/subliminal'
+      && github.event_name == 'pull_request'
       && github.event.action == 'closed'
       && github.event.pull_request.merged == true
       && startsWith(github.head_ref, 'release-')

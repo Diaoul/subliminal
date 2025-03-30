@@ -79,7 +79,7 @@ def find_next_version(base_branch: str, *, is_major: bool, is_minor: bool, prere
     print(f'Bump {bump_str} version')
 
     if is_major:
-        return f'{last_version[0]+1}.0.0{prerelease}'
+        return f'{last_version[0] + 1}.0.0{prerelease}'
     if is_minor:
         return f'{last_version[0]}.{last_version[1] + 1}.0{prerelease}'
     return f'{last_version[0]}.{last_version[1]}.{last_version[2] + 1}{prerelease}'

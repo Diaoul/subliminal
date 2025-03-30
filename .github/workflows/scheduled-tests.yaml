@@ -31,7 +31,7 @@ jobs:
         with:
           python-version: "3.x"
       - name: Prepare tests
-        uses: .github/actions/prepare-tests
+        uses: ./.github/actions/prepare-tests
       - name: Display downloaded files
         run: ls -R tests/data
       - name: install

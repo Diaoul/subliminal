@@ -171,7 +171,7 @@ jobs:
           python-version: ${{ matrix.py }}
           allow-prereleases: true
       - name: Prepare tests
-        uses: .github/actions/prepare-tests
+        uses: ./.github/actions/prepare-tests
       - name: Display downloaded files
         run: ls -R tests/data
 

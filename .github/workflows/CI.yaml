@@ -170,11 +170,8 @@ jobs:
         with:
           python-version: ${{ matrix.py }}
           allow-prereleases: true
-      - uses: actions/download-artifact@v4
-        with:
-          name: tests-data
-          path: tests/data/
-          merge-multiple: true
+      - name: Prepare tests
+        uses: .github/actions/prepare-tests
       - name: Display downloaded files
         run: ls -R tests/data
 

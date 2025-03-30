@@ -227,6 +227,41 @@ def test_cli_download_directory(tmp_path: os.PathLike[str]) -> None:
         assert subtitle_episode_filename in files
 
 
+@pytest.mark.parametrize('use_absolute_path', ['never', 'always', 'fallback'])
+def test_cli_download_use_absolute_path(
+    use_absolute_path: str,
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: os.PathLike[str],
+) -> None:
+    runner = CliRunner()
+    folder_name = Path(tmp_path) / 'Doctor Who S01'
+    video_name = '1x1.mkv'
+
+    with runner.isolated_filesystem(temp_dir=tmp_path):
+        full_video_path = folder_name / video_name
+        ensure(full_video_path)
+        monkeypatch.chdir(folder_name)
+
+        # Need --verbose for the message to appear
+        result = runner.invoke(
+            subliminal_cli,
+            ['download', '-l', 'en', '--use-absolute-path', use_absolute_path, '-v', '-p', 'podnapisi', video_name],
+        )
+
+        assert result.exit_code == 0
+        if use_absolute_path == 'never':
+            assert 'Insufficient data to process the guess' in result.output
+            assert '0 video collected / 0 video ignored / 1 error' in result.output
+
+        elif use_absolute_path == 'fallback':
+            assert 'Insufficient data to process the guess' in result.output
+            assert '1 video collected / 0 video ignored / 0 error' in result.output
+
+        elif use_absolute_path == 'always':
+            assert 'Insufficient data to process the guess' not in result.output
+            assert '1 video collected / 0 video ignored / 0 error' in result.output
+
+
 @pytest.mark.parametrize(
     ('encoding', 'real_encoding'),
     [

@@ -211,6 +211,50 @@ def plural(quantity: int, name: str, *, bold: bool = True, **kwargs: Any) -> str
     )
 
 
+def scan_video_path(
+    filepath: str | os.PathLike[str],
+    *,
+    name: str | None = None,
+    absolute_path: bool = False,
+    verbose: int = 0,
+    debug: bool = False,
+) -> Video | None:
+    """Try to scan a video at path, with a option to convert to absolute path before."""
+    exists = os.path.exists(filepath)
+    # Take the absolute path, and only if the path exists
+    if absolute_path and exists:
+        filepath = os.path.abspath(filepath)
+    # Used for print
+    filepath_or_name = f'{filepath} ({name})' if name else filepath
+
+    try:
+        video = scan_path(filepath, name=name)
+
+    except GuessingError as e:
+        logger.exception(
+            'Cannot guess information about %s %s',
+            'path' if exists else 'non-existing path',
+            filepath_or_name,
+        )
+        # Show a simple error message
+        if verbose > 0:  # pragma: no cover
+            # new line was already added with debug
+            if not debug:
+                click.echo()
+            click.secho(e, fg='yellow')
+        return None
+
+    except ValueError:  # pragma: no cover
+        logger.exception(
+            'Unexpected error while collecting %s %s',
+            'path' if exists else 'non-existing path',
+            filepath_or_name,
+        )
+        return None
+
+    return video
+
+
 AGE = AgeParamType()
 
 PROVIDER = click.Choice(['ALL', *sorted(provider_manager.names())])
@@ -685,6 +729,18 @@ def cache(ctx: click.Context, clear_subliminal: bool) -> None:
     help=f'Scan archives for videos (supported extensions: {", ".join(ARCHIVE_EXTENSIONS)}).',
 )
 @click.option(
+    '--use-absolute-path',
+    type=click.Choice(['fallback', 'always', 'never']),
+    default='fallback',
+    show_default=True,
+    show_choices=True,
+    help=(
+        'Convert the given path to an absolute path if "always" or leave the path as-is if "never". '
+        'If "fallback", first try without converting to absolute path, then if the guess failed, '
+        'retry after converting to absolute path.'
+    ),
+)
+@click.option(
     '-n',
     '--name',
     type=click.STRING,
@@ -724,6 +780,7 @@ def download(
     language_format: str,
     max_workers: int,
     archives: bool,
+    use_absolute_path: str,
     name: str | None,
     verbose: int,
     path: list[str],
@@ -782,6 +839,9 @@ def download(
     )
     logger.info('Use refiners: %s', use_refiners)
 
+    # Convert to absolute path only with 'always'
+    absolute_path = use_absolute_path == 'always'
+
     # scan videos
     videos = []
     ignored_videos = []
@@ -809,34 +869,22 @@ def download(
             # scan videos
             video_candidates: list[Video] = []
             for filepath in collected_filepaths:
-                exists = os.path.exists(p)
-                filepath_or_name = f'{filepath} ({name})' if name else filepath
-                try:
-                    video = scan_path(filepath, name=name)
-
-                except GuessingError as e:
-                    logger.exception(
-                        'Cannot guess information about %s %s',
-                        'path' if exists else 'non-existing path',
-                        filepath_or_name,
-                    )
-                    # Show a simple error message
-                    if verbose > 0:  # pragma: no cover
-                        # new line was already added with debug
-                        if not debug:
-                            click.echo()
-                        click.secho(e, fg='yellow')
-                    errored_paths.append(filepath)
-                    continue
-
-                except ValueError:  # pragma: no cover
-                    logger.exception(
-                        'Unexpected error while collecting %s %s',
-                        'path' if exists else 'non-existing path',
-                        filepath_or_name,
-                    )
-                    errored_paths.append(filepath)
-                    continue
+                # Try scanning the video at path
+                video = scan_video_path(filepath, absolute_path=absolute_path, name=name, verbose=verbose, debug=debug)
+                if video is None:
+                    # Fallback to scanning with absolute path
+                    if use_absolute_path == 'fallback':
+                        video = scan_video_path(
+                            filepath,
+                            absolute_path=True,
+                            name=name,
+                            verbose=verbose,
+                            debug=debug,
+                        )
+                    # Cannot scan the video
+                    if video is None:
+                        errored_paths.append(filepath)
+                        continue
 
                 # Set the use_time attribute before refining
                 video.use_ctime = use_ctime

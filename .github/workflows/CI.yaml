@@ -302,7 +302,7 @@ jobs:
 
     needs:
       - coverage
-      # - core-coverage
+      - core-coverage
       - docs
       - install-dev
       - typing

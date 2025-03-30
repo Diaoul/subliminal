@@ -20,8 +20,14 @@ runs:
       with:
         path: tests/data/
         enableCrossOsArchive: true
-        key: ${{ runner.os }}-prepare-tests
+        key: prepare-tests
 
+    - name: Check Runner OS
+      if: steps.cache-test-data.outputs.cache-hit != 'true' && ${{ runner.os != 'Linux' }}
+      shell: bash
+      run: |
+        echo "::error title=⛔ error hint::Download cache only from Linux."
+        exit 1
     - name: Install other test software (on Linux only)
       if: steps.cache-test-data.outputs.cache-hit != 'true'
       uses: awalsh128/cache-apt-pkgs-action@v1

@@ -23,7 +23,7 @@ runs:
         key: prepare-tests
 
     - name: Download only from Linux Runner OS
-      if: steps.cache-test-data.outputs.cache-hit != 'true' && ${{ runner.os != 'Linux' }}
+      if: ${{ steps.cache-test-data.outputs.cache-hit != 'true' && runner.os != 'Linux' }}
       shell: bash
       run: |
         echo "::error title=⛔ error hint::Download cache only from Linux: ${{ runner.os }}."

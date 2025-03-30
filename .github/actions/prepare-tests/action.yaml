@@ -22,11 +22,11 @@ runs:
         enableCrossOsArchive: true
         key: prepare-tests
 
-    - name: Check Runner OS
+    - name: Download only from Linux Runner OS
       if: steps.cache-test-data.outputs.cache-hit != 'true' && ${{ runner.os != 'Linux' }}
       shell: bash
       run: |
-        echo "::error title=⛔ error hint::Download cache only from Linux."
+        echo "::error title=⛔ error hint::Download cache only from Linux: ${{ runner.os }}."
         exit 1
     - name: Install other test software (on Linux only)
       if: steps.cache-test-data.outputs.cache-hit != 'true'

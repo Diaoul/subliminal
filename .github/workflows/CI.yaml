@@ -126,31 +126,10 @@ jobs:
         with:
           persist-credentials: false
           fetch-depth: 0
-      - name: Install other test software (on Linux only)
-        uses: awalsh128/cache-apt-pkgs-action@v1
-        with:
-          packages: rar
-          version: 1.0
-      - uses: actions/setup-python@v5
-        with:
-          python-version-file: .python-version-default
-          cache: pip
-      - name: Install dependencies
-        run: |
-          python -Im pip install --upgrade pip
-          python -Im pip install tox requests
-      - name: Download tests data
-        run: |
-          tox -e prepare-tests
-      - name: Upload files for test
-        uses: actions/upload-artifact@v4
-        with:
-          name: tests-data
-          path: tests/data/
-          include-hidden-files: false
-          if-no-files-found: error
-          # heavy artifact should be deleted asap
-          retention-days: 1
+      - name: Prepare tests
+        uses: ./.github/actions/prepare-tests
+      - name: Display downloaded files
+        run: ls -R tests/data
 
   test:
     name: Test

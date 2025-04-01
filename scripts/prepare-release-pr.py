@@ -12,8 +12,7 @@ The appropriate version will be obtained based on the given branch automatically
 
 After that, it will create a release using the `release` tox environment, and push a new PR.
 
-**Token**: currently the token from the GitHub Actions is used, pushed with
-`pytest bot <pytestbot@gmail.com>` commit author.
+Note: the script uses the `gh` command-line tool, so `GH_TOKEN` must be set in the environment.
 """
 
 from __future__ import annotations
@@ -22,12 +21,8 @@ import argparse
 import re
 from pathlib import Path
 from subprocess import check_call, check_output, run
-from typing import TYPE_CHECKING
 
 from colorama import Fore, init
-
-if TYPE_CHECKING:
-    from github3.repos import Repository
 
 
 class InvalidFeatureRelease(Exception):  # noqa: D101
@@ -50,15 +45,6 @@ it will trigger the [publish]\
 
 This is all done automatically when this PR is merged.
 """
-
-
-def login(token: str) -> Repository:
-    """Login to Github."""
-    import github3
-
-    github = github3.login(token=token)
-    owner, repo = SLUG.split('/')
-    return github.repository(owner, repo)
 
 
 def find_next_version(base_branch: str, *, is_major: bool, is_minor: bool, prerelease: str) -> str:
@@ -85,7 +71,7 @@ def find_next_version(base_branch: str, *, is_major: bool, is_minor: bool, prere
     return f'{last_version[0]}.{last_version[1]}.{last_version[2] + 1}{prerelease}'
 
 
-def prepare_release_pr(base_branch: str, bump: str, token: str, prerelease: str) -> None:
+def prepare_release_pr(base_branch: str, bump: str, prerelease: str) -> None:
     """Find the bumped version and make a release PR."""
     print()
     print(f'Processing release for branch {Fore.CYAN}{base_branch}')
@@ -112,7 +98,9 @@ def prepare_release_pr(base_branch: str, bump: str, token: str, prerelease: str)
 
     print(f'Version: {Fore.CYAN}{version}')
 
-    release_branch = f'release-{version}'
+    # for security, the PR must be from a 'releases/*' branch AND have the 'release' label
+    release_branch = f'releases/{version}'
+    label = 'release'
 
     run(
         ['git', 'config', 'user.name', 'subliminal bot'],
@@ -156,36 +144,38 @@ def prepare_release_pr(base_branch: str, bump: str, token: str, prerelease: str)
         check=True,
     )
 
-    oauth_url = f'https://{token}:x-oauth-basic@github.com/{SLUG}.git'
     run(
-        ['git', 'push', oauth_url, f'HEAD:{release_branch}', '--force'],
+        ['git', 'push', 'origin', f'HEAD:{release_branch}', '--force'],
         check=True,
     )
     print(f'Branch {Fore.CYAN}{release_branch}{Fore.RESET} pushed.')
 
     body = PR_BODY.format(version=version)
-    repo = login(token)
-    pr = repo.create_pull(
-        f'Prepare release {version}',
-        base=base_branch,
-        head=release_branch,
-        body=body,
+    run(
+        [
+            'gh',
+            'pr',
+            'new',
+            f'--base={base_branch}',
+            f'--head={release_branch}',
+            f'--title=Release {version}',
+            f'--body={body}',
+            f'--label={label}',
+        ],
+        check=True,
     )
-    print(f'Pull request {Fore.CYAN}{pr.url}{Fore.RESET} created.')
 
 
 def main() -> None:  # noqa: D103
     init(autoreset=True)
     parser = argparse.ArgumentParser()
     parser.add_argument('base_branch')
-    parser.add_argument('token')
     parser.add_argument('--bump', default='')
     parser.add_argument('--prerelease', default='')
     options = parser.parse_args()
     prepare_release_pr(
         base_branch=options.base_branch,
         bump=options.bump,
-        token=options.token,
         prerelease=options.prerelease,
     )
 

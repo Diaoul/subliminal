@@ -31,15 +31,43 @@ jobs:
 
       - uses: hynek/build-and-inspect-python-package@v2
 
-  tag:
-    name: Tag a new release
+  tag-manually:
+    name: Tag a new release manually
     # tag a release after a release PR was accepted
+    if: github.event_name == 'workflow_dispatch'
+    needs: [build-package]
+    env:
+      RELEASE_VERSION: ${{ inputs.version }}
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Tag the commit
+        run: |
+          RELEASE_VERSION=${GITHUB_HEAD_REF#release-}
+          echo Release version: $RELEASE_VERSION
+          git config user.name 'subliminal bot'
+          git config user.email diaoulael@gmail.com
+          git tag --annotate --message="Release version $RELEASE_VERSION" $RELEASE_VERSION ${{ github.sha }}
+          git push origin $RELEASE_VERSION
+
+
+  tag-release:
+    name: Tag a new release, from a release PR
+    # for security, the PR must be from a 'releases/*' branch AND have the 'release' label
     if: |
       github.repository == 'Diaoul/subliminal'
       && github.event_name == 'pull_request'
       && github.event.action == 'closed'
       && github.event.pull_request.merged == true
-      && startsWith(github.head_ref, 'release-')
+      && contains(github.event.pull_request.labels.*.name, 'release')
+      && startsWith(github.head_ref, 'releases/')
     needs: [build-package]
     env:
       GITHUB_HEAD_REF: ${{ github.head_ref }}

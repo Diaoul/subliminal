@@ -29,8 +29,9 @@ VOLUME /usr/src/cache
 COPY . .
 # Add git for setuptools-scm
 RUN apk add --no-cache git
-RUN python -m pip install .
-
+RUN \
+    --mount=type=cache,id=pip,target=/root/.cache/pip \
+    python -m pip install .
 
 ENTRYPOINT ["subliminal", "--cache-dir", "/usr/src/cache"]
 CMD ["--help"]

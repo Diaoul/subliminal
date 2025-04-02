@@ -29,7 +29,6 @@ VOLUME /usr/src/cache
 COPY . .
 # Add git for setuptools-scm
 RUN apk add --no-cache git
-RUN python -m pip install -U pip
 RUN python -m pip install .
 
 

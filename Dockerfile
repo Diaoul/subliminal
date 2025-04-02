@@ -23,8 +23,6 @@ fi
 # install libmediainfo for metadata refiner
 RUN apk add --no-cache libmediainfo
 
-RUN mkdir -p /usr/src/app /usr/src/cache
-
 WORKDIR /usr/src/app
 VOLUME /usr/src/cache
 

@@ -26,10 +26,10 @@ RUN apk add --no-cache libmediainfo
 WORKDIR /usr/src/app
 VOLUME /usr/src/cache
 
-COPY . .
 # Add git for setuptools-scm
 RUN apk add --no-cache git
 RUN \
+    --mount=type=bind,source=.,target=. \
     --mount=type=cache,id=pip,target=/root/.cache/pip \
     python -m pip install .
 

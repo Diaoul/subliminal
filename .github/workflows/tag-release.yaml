@@ -60,13 +60,14 @@ jobs:
 
   tag-release:
     name: Tag a new release, from a release PR
-    # for security, the PR must be from a 'releases/*' branch AND have the 'release' label
+    # for security, the PR must be from a 'releases/*' branch AND have the 'type/release' label
+    # keep in sync with scripts/prepare-release-pr.py
     if: |
       github.repository == 'Diaoul/subliminal'
       && github.event_name == 'pull_request'
       && github.event.action == 'closed'
       && github.event.pull_request.merged == true
-      && contains(github.event.pull_request.labels.*.name, 'release')
+      && contains(github.event.pull_request.labels.*.name, 'type/release')
       && startsWith(github.head_ref, 'releases/')
     needs: [build-package]
     env:

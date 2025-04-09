@@ -29,7 +29,7 @@ class InvalidFeatureRelease(Exception):  # noqa: D101
     pass
 
 
-SLUG = 'Diaoul/subliminal'
+SLUG = 'getzze/subliminal'
 
 PR_BODY = """\
 Created by the [prepare release pr]\

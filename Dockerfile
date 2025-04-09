@@ -1,6 +1,6 @@
 FROM python:3.12-alpine
 
-MAINTAINER Antoine Bertin <diaoulael@gmail.com>
+LABEL org.opencontainers.image.authors="Antoine Bertin <diaoulael@gmail.com>"
 
 # set version label
 ARG BUILD_WITH_UNRAR=false

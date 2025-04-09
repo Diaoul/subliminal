@@ -146,7 +146,7 @@ def prepare_release_pr(base_branch: str, bump: str, prerelease: str) -> None:
     print(f'Branch {Fore.CYAN}{release_branch}{Fore.RESET} pushed.')
 
     print(f'Create label {Fore.MAGENTA}{label}{Fore.RESET}.')
-    run(['gh', 'label', 'create', label], check=True)
+    run(['gh', 'label', 'create', label], check=False)
 
     body = PR_BODY.format(version=version)
     cmdline = [

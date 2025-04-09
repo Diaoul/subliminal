@@ -53,7 +53,5 @@ jobs:
         PRERELEASE: ${{ github.event.inputs.prerelease }}
         GH_TOKEN: ${{ github.token }}
       run: |
-        git config user.name 'subliminal bot'
-        git config user.email diaoulael@gmail.com
         gh auth login
         tox -e prepare-release-pr -- ${BRANCH} --bump=${BUMP} --prerelease=${PRERELEASE}

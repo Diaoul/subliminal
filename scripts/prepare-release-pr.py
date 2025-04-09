@@ -140,31 +140,27 @@ def prepare_release_pr(base_branch: str, bump: str, prerelease: str) -> None:
         release_branch,  # doc_version
     ]
     print('Running', ' '.join(cmdline))
-    run(
-        cmdline,
-        check=True,
-    )
+    run(cmdline, check=True)
 
-    run(
-        ['git', 'push', 'origin', f'HEAD:{release_branch}', '--force'],
-        check=True,
-    )
+    run(['git', 'push', 'origin', f'HEAD:{release_branch}', '--force'], check=True)
     print(f'Branch {Fore.CYAN}{release_branch}{Fore.RESET} pushed.')
 
+    print(f'Create label {Fore.MAGENTA}{label}{Fore.RESET}.')
+    run(['gh', 'label', 'create', label], check=True)
+
     body = PR_BODY.format(version=version)
-    run(
-        [
-            'gh',
-            'pr',
-            'new',
-            f'--base={base_branch}',
-            f'--head={release_branch}',
-            f'--title=Release {version}',
-            f'--body={body}',
-            f'--label={label}',
-        ],
-        check=True,
-    )
+    cmdline = [
+        'gh',
+        'pr',
+        'new',
+        f'--base={base_branch}',
+        f'--head={release_branch}',
+        f'--title=Release {version}',
+        f'--body={body}',
+        f'--label={label}',
+    ]
+    run(cmdline, check=True)
+    print(f'PR created for {Fore.CYAN}{release_branch}{Fore.RESET}.')
 
 
 def main() -> None:  # noqa: D103

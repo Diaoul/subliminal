@@ -107,7 +107,7 @@ def pre_release(version: str, template_name: str, doc_version: str, *, skip_chec
     fix_formatting()
     if not skip_check_docs:
         check_docs()
-    bump_version(version)
+    # bump_version(version)
 
     msg = f'Prepare release version {version}'
     check_call(['git', 'commit', '-a', '-m', msg])

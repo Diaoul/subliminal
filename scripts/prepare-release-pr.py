@@ -152,7 +152,7 @@ def prepare_release_pr(base_branch: str, bump: str, prerelease: str) -> None:
     cmdline = [
         'gh',
         'pr',
-        'new',
+        'create',
         f'--base={base_branch}',
         f'--head={release_branch}',
         f'--title=Release {version}',

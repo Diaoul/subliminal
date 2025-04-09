@@ -29,8 +29,6 @@ class InvalidFeatureRelease(Exception):  # noqa: D101
     pass
 
 
-SLUG = 'getzze/subliminal'
-
 PR_BODY = """\
 Created by the [prepare release pr]\
 (https://github.com/Diaoul/subliminal/actions/workflows/prepare-release-pr.yaml) workflow.
@@ -71,12 +69,16 @@ def find_next_version(base_branch: str, *, is_major: bool, is_minor: bool, prere
     return f'{last_version[0]}.{last_version[1]}.{last_version[2] + 1}{prerelease}'
 
 
-def prepare_release_pr(base_branch: str, bump: str, prerelease: str) -> None:
+def prepare_release_pr(base_branch: str, bump: str, prerelease: str, remote: str) -> None:
     """Find the bumped version and make a release PR."""
     print()
     print(f'Processing release for branch {Fore.CYAN}{base_branch}')
 
-    check_call(['git', 'checkout', f'origin/{base_branch}'])
+    check_call(['git', 'checkout', f'{remote}/{base_branch}'])
+
+    # Get repo
+    ret = run(['git', 'remote', 'get-url', remote], check=True, capture_output=True)
+    repo = ret.stdout.decode().strip()
 
     changelog = Path('changelog.d')
 
@@ -113,7 +115,7 @@ def prepare_release_pr(base_branch: str, bump: str, prerelease: str) -> None:
     )
 
     run(
-        ['git', 'checkout', '-b', release_branch, f'origin/{base_branch}'],
+        ['git', 'checkout', '-b', release_branch, f'{remote}/{base_branch}'],
         check=True,
     )
 
@@ -142,17 +144,18 @@ def prepare_release_pr(base_branch: str, bump: str, prerelease: str) -> None:
     print('Running', ' '.join(cmdline))
     run(cmdline, check=True)
 
-    run(['git', 'push', 'origin', f'HEAD:{release_branch}', '--force'], check=True)
+    run(['git', 'push', remote, f'HEAD:{release_branch}', '--force'], check=True)
     print(f'Branch {Fore.CYAN}{release_branch}{Fore.RESET} pushed.')
 
     print(f'Create label {Fore.MAGENTA}{label}{Fore.RESET}.')
-    run(['gh', 'label', 'create', label], check=False)
+    run(['gh', 'label', 'create', label, f'--repo={repo}'], check=False)
 
     body = PR_BODY.format(version=version)
     cmdline = [
         'gh',
         'pr',
         'create',
+        f'--repo={repo}',
         f'--base={base_branch}',
         f'--head={release_branch}',
         f'--title=Release {version}',
@@ -169,11 +172,13 @@ def main() -> None:  # noqa: D103
     parser.add_argument('base_branch')
     parser.add_argument('--bump', default='')
     parser.add_argument('--prerelease', default='')
+    parser.add_argument('--remote', default='origin')
     options = parser.parse_args()
     prepare_release_pr(
         base_branch=options.base_branch,
         bump=options.bump,
         prerelease=options.prerelease,
+        remote=options.remote,
     )
 
 

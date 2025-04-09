@@ -70,6 +70,7 @@ tests = [
     "pytest-cov",
     "pytest-xdist",
     "sympy",
+    "colorama",  # used in scripts/
     "vcrpy>=5",  # keep synchronized with docs dependencies
     "win32-setctime",
     "importlib_metadata>=4.6; python_version<'3.10'",
@@ -236,7 +237,7 @@ package = "subliminal"
 directory = "changelog.d"
 filename = "HISTORY.rst"
 title_format = "`v{version} <https://github.com/Diaoul/subliminal/tree/{version}>`_ ({project_date})"
-issue_format = "`#{issue} <https://github.com/Diaoul/subliminal/issues/{issue}>`_"
+issue_format = "`#{issue} <https://github.com/Diaoul/subliminal/issues/{issue}>`__"
 underlines = ["^", "-", "~"]
 
 [[tool.towncrier.type]]

@@ -106,15 +106,6 @@ def prepare_release_pr(base_branch: str, bump: str, prerelease: str, remote: str
     label = 'type/release'
 
     run(
-        ['git', 'config', 'user.name', 'subliminal bot'],
-        check=True,
-    )
-    run(
-        ['git', 'config', 'user.email', 'diaoulael@gmail.com'],
-        check=True,
-    )
-
-    run(
         ['git', 'checkout', '-b', release_branch, f'{remote}/{base_branch}'],
         check=True,
     )

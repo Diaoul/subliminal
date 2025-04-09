@@ -134,7 +134,7 @@ def main() -> None:  # noqa: D103
         help='For prereleases, the version to link to in the docs',
         default='',
     )
-    parser.add_argument('--skip-check-docs', help='Skip doc tests', action='store_true', default=False)
+    parser.add_argument('--skip-check-docs', help='Skip doc tests', action='store_false', default=True)
     options = parser.parse_args()
     pre_release(
         options.version,

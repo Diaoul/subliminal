@@ -15,7 +15,8 @@ CLI
             match_on=['method', 'scheme', 'host', 'port', 'path', 'query', 'body'],
             cassette_library_dir=os.path.realpath(os.path.join('docs', 'cassettes')),
         )
-        vcr.use_cassette('test_usage')
+        context = vcr.use_cassette('test_usage')
+        context.__enter__()
 
 
 Download English subtitles::
@@ -192,6 +193,8 @@ We got ourselves a nice subtitle, now we can save it on the file system using :f
 
 
     .. testcleanup::
+
+        context.__exit__()
 
         import os
 

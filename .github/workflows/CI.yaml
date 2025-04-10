@@ -81,8 +81,9 @@ jobs:
 
       - name: Build and check docs
         run: hatch run docs:run
-      # - name: Run doctests
-      #   run: hatch run docs:doctest
+
+      - name: Run doctests
+        run: hatch run docs:doctest
 
       - name: Determine directory to publish docs to
         id: docs-publish-dir

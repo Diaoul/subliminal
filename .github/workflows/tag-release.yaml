@@ -52,21 +52,23 @@ jobs:
         run: |
           RELEASE_VERSION=${GITHUB_HEAD_REF#release-}
           echo Release version: $RELEASE_VERSION
-          git config user.name 'subliminal bot'
-          git config user.email diaoulael@gmail.com
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git tag --annotate --message="Release version $RELEASE_VERSION" $RELEASE_VERSION ${{ github.sha }}
           git push origin $RELEASE_VERSION
 
 
   tag-release:
     name: Tag a new release, from a release PR
-    # for security, the PR must be from a 'releases/*' branch AND have the 'type/release' label
-    # keep in sync with scripts/prepare-release-pr.py
+    # for security, the PR must be from a 'releases/*' branch of the same repo
+    # AND have the 'type/release' label.
+    # keep the label in sync with scripts/prepare-release-pr.py
     if: |
       github.repository == 'Diaoul/subliminal'
       && github.event_name == 'pull_request'
       && github.event.action == 'closed'
       && github.event.pull_request.merged == true
+      && github.event.pull_request.head.repo.full_name == github.repository
       && contains(github.event.pull_request.labels.*.name, 'type/release')
       && startsWith(github.head_ref, 'releases/')
     needs: [build-package]
@@ -86,7 +88,7 @@ jobs:
         run: |
           RELEASE_VERSION=${GITHUB_HEAD_REF#release-}
           echo Release version: $RELEASE_VERSION
-          git config user.name 'subliminal bot'
-          git config user.email diaoulael@gmail.com
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git tag --annotate --message="Release version $RELEASE_VERSION" $RELEASE_VERSION ${{ github.sha }}
           git push origin $RELEASE_VERSION

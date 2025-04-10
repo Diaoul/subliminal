@@ -138,7 +138,7 @@ def prepare_release_pr(base_branch: str, bump: str, prerelease: str, remote: str
     run(['git', 'push', remote, f'HEAD:{release_branch}', '--force'], check=True)
     print(f'Branch {Fore.CYAN}{release_branch}{Fore.RESET} pushed.')
 
-    run(['gh', 'auth', 'login'], check=False)
+    run(['gh', 'auth', 'login'], check=True)
     print('Authenticated with gh.')
 
     print(f'Create label {Fore.MAGENTA}{label}{Fore.RESET}.')

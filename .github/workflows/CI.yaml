@@ -3,6 +3,7 @@ name: CI
 on:
   push:
     branches: [main]
+    tags: ["*"]
   pull_request: {}
 
 permissions: {}
@@ -65,7 +66,6 @@ jobs:
         with:
           # Keep in sync with tox/docs, hatch.toml and .readthedocs.yaml.
           python-version-file: .python-version-default
-          cache: pip
 
       - name: Install hatch
         run: python -Im pip install hatch
@@ -92,7 +92,6 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version-file: .python-version-default
-          cache: pip
 
       - name: Install in dev mode & import
         run: |

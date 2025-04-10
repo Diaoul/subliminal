@@ -52,8 +52,8 @@ jobs:
         run: |
           RELEASE_VERSION=${GITHUB_HEAD_REF#release-}
           echo Release version: $RELEASE_VERSION
-          git config user.name 'subliminal bot'
-          git config user.email diaoulael@gmail.com
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git tag --annotate --message="Release version $RELEASE_VERSION" $RELEASE_VERSION ${{ github.sha }}
           git push origin $RELEASE_VERSION
 
@@ -86,7 +86,7 @@ jobs:
         run: |
           RELEASE_VERSION=${GITHUB_HEAD_REF#release-}
           echo Release version: $RELEASE_VERSION
-          git config user.name 'subliminal bot'
-          git config user.email diaoulael@gmail.com
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git tag --annotate --message="Release version $RELEASE_VERSION" $RELEASE_VERSION ${{ github.sha }}
           git push origin $RELEASE_VERSION

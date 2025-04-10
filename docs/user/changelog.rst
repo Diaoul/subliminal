@@ -1,9 +1,6 @@
 Release notes
 =============
 
-Changelog
-=========
-
 .. changelog::
    :towncrier: ../../
    :towncrier-skip-if-empty:

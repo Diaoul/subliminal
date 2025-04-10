@@ -76,6 +76,29 @@ jobs:
       - name: Check changelog
         run: hatch run changelog:run
 
+      - name: Determine directory to publish docs to
+        id: docs-publish-dir
+        if: github.event_name == 'push'
+        run: |
+          python -c "
+          import os, re
+          github_ref = os.environ.get('GITHUB_REF')
+          if github_ref == 'refs/heads/main':
+            target = 'dev'
+          elif github_ref.startswith('refs/tags/'):
+            m = re.match(r'^refs/tags/v?([0-9]+\.[0-9]+\.[0-9]+)$', github_ref);
+            target = m.group(1)
+          else:
+            target = ''
+          print(f'::set-output name=target::{target}')"
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs/_build/html
+          destination_dir: ${{ steps.docs-publish-dir.outputs.target }}
+          keep_files: true
+
       - uses: actions/upload-artifact@v4
         with:
           name: docs

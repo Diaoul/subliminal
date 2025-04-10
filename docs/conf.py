@@ -36,6 +36,7 @@ extensions = [
     'sphinxcontrib.programoutput',
     'sphinx_autodoc_typehints',
     'sphinx_rtd_theme',
+    'sphinx_changelog',
 ]
 
 # Add any paths that contain templates here, relative to this directory.

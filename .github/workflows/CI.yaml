@@ -69,12 +69,20 @@ jobs:
 
       - name: Install hatch
         run: python -Im pip install hatch
+
+      - name: Build changelog
+        # On push tags, just check changelog, docs will build the changelog also
+        if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+        run: hatch run changelog:run --yes
+      - name: Build changelog
+        # On PR and push main, the version needs to be set to main to avoid broken link
+        if: github.event_name != 'push' || ${{ !contains(github.ref, 'refs/tags/') }}
+        run: hatch run changelog:run --version main --yes
+
       - name: Build and check docs
         run: hatch run docs:run
       - name: Run doctests
         run: hatch run docs:doctest
-      - name: Check changelog
-        run: hatch run changelog:run
 
       - name: Determine directory to publish docs to
         id: docs-publish-dir

@@ -101,7 +101,7 @@ def prepare_release_pr(base_branch: str, bump: str, prerelease: str, remote: str
     print(f'Version: {Fore.CYAN}{version}')
 
     # for security, the PR must be from a 'releases/*' branch AND have the 'type/release' label
-    # keep synchronzed with tag-release.yaml/tag-release
+    # keep the label in sync with tag-release.yaml/tag-release
     release_branch = f'releases/{version}'
     label = 'type/release'
 

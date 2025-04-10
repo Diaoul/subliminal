@@ -3,6 +3,6 @@ Changelog
 =========
 
 .. changelog::
-   :towncrier: ../
+   :towncrier: ../../
    :towncrier-skip-if-empty:
-   :changelog_file: ../HISTORY.rst
+   :changelog_file: ../../HISTORY.rst

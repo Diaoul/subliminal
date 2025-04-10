@@ -14,7 +14,7 @@ env:
   TEST_IMAGE: subliminal
 
 jobs:
-  docker:
+  build-docker:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -27,6 +27,7 @@ jobs:
           persist-credentials: false
 
       - name: Set up QEMU
+        if: github.event_name == 'push'
         uses: docker/setup-qemu-action@v3
 
       - name: Set up Docker Buildx
@@ -52,8 +53,9 @@ jobs:
             type=semver,pattern={{major}}.{{minor}}
             type=semver,pattern={{major}},enable=${{ !startsWith(github.ref, 'refs/tags/0.') }}
 
-      - name: Build and export to Docker
+      - name: Test building Docker image
         uses: docker/build-push-action@v6
+        if: github.event_name == 'pull_request'
         with:
           context: .
           load: true
@@ -63,10 +65,11 @@ jobs:
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
+        if: github.event_name == 'push'
         with:
           context: .
           platforms: linux/amd64,linux/arm64,linux/arm/v7
-          push: ${{ startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/main' }}
+          push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha

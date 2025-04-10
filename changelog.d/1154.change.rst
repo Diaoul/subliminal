@@ -1,8 +1,0 @@
-Use `knowit` to extract information from video file, instead of `enzyme`:
-frame rate, duration and subtitles.
-`knowit` relies on external programs (`mediainfo`, `ffmpeg`, `mkvmerge`)
-and falls back to using `enzyme` if none is installed.
-On Windows and MacOS, `libmediainfo` is installed automatically
-via the `pymediainfo` python package dependency.
-On Linux, the `libmediainfo` or `mediainfo` package needs to be installed
-with the package manager of your distribution.

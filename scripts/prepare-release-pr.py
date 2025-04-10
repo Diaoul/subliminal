@@ -74,11 +74,19 @@ def prepare_release_pr(base_branch: str, bump: str, prerelease: str, remote: str
     print()
     print(f'Processing release for branch {Fore.CYAN}{base_branch}')
 
-    check_call(['git', 'checkout', f'{remote}/{base_branch}'])
+    # if remote is not specified, default to 'origin' and do not specify the repo
+    repo = ''
+    if remote:
+        # Get repo
+        ret = run(['git', 'remote', 'get-url', remote], check=True, capture_output=True)
+        repo = ret.stdout.decode().strip()
 
-    # Get repo
-    ret = run(['git', 'remote', 'get-url', remote], check=True, capture_output=True)
-    repo = ret.stdout.decode().strip()
+    else:
+        remote = 'origin'
+        repo = ''
+
+    # checkout the base branch
+    check_call(['git', 'checkout', f'{remote}/{base_branch}'])
 
     changelog = Path('changelog.d')
 
@@ -141,15 +149,16 @@ def prepare_release_pr(base_branch: str, bump: str, prerelease: str, remote: str
     run(['gh', 'auth', 'login'], check=False)
     print('Authenticated with gh.')
 
+    # use --repo only if using a remote
     print(f'Create label {Fore.MAGENTA}{label}{Fore.RESET}.')
-    run(['gh', 'label', 'create', label, f'--repo={repo}'], check=False)
+    run(['gh', 'label', 'create', label, f'--repo={repo}' if repo else ''], check=False)
 
     body = PR_BODY.format(version=version)
     cmdline = [
         'gh',
         'pr',
         'create',
-        f'--repo={repo}',
+        f'--repo={repo}' if repo else '',
         f'--base={base_branch}',
         f'--head={release_branch}',
         f'--title=Release {version}',
@@ -166,7 +175,7 @@ def main() -> None:  # noqa: D103
     parser.add_argument('base_branch')
     parser.add_argument('--bump', default='')
     parser.add_argument('--prerelease', default='')
-    parser.add_argument('--remote', default='origin')
+    parser.add_argument('--remote', default='')
     options = parser.parse_args()
     prepare_release_pr(
         base_branch=options.base_branch,

@@ -20,6 +20,7 @@ Documentation
     user/cli
     user/configuration_file
     user/provider_guide
+    user/changelog
 
 .. toctree::
    :maxdepth: 1

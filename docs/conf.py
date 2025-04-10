@@ -37,6 +37,7 @@ extensions = [
     'sphinx_autodoc_typehints',
     'sphinx_changelog',
     'sphinx_rtd_theme',
+    'sphinx_changelog',
 ]
 
 # Add any paths that contain templates here, relative to this directory.

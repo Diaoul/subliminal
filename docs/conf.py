@@ -154,7 +154,7 @@ html_css_files = [
 html_js_files = ['js/version-selector.js']
 
 html_context = {
-    'current_version': 'stable',
+    'current_version': release,
 }
 
 # Custom sidebar templates, maps document names to template names.

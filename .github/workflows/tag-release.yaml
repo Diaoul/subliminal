@@ -31,17 +31,44 @@ jobs:
 
       - uses: hynek/build-and-inspect-python-package@v2
 
-  tag-manually:
-    name: Tag a new release manually
+  define-tag:
+    name: Define tag
     # tag a release after a release PR was accepted
-    if: github.event_name == 'workflow_dispatch'
-    needs: [build-package]
+    runs-on: ubuntu-latest
     env:
-      RELEASE_VERSION: ${{ inputs.version }}
+      RELEASE_VERSION: ''
+    steps:
+      - if: github.event_name == 'workflow_dispatch'
+        name: from workflow_dispatch
+        env:
+          RELEASE_VERSION: ${{ inputs.version }}
+        run: TRUE
+      - if: |
+          github.repository == 'Diaoul/subliminal'
+          && github.event_name == 'pull_request'
+          && github.event.action == 'closed'
+          && github.event.pull_request.merged == true
+          && github.event.pull_request.head.repo.full_name == github.repository
+          && contains(github.event.pull_request.labels.*.name, 'type/release')
+          && startsWith(github.head_ref, 'releases/')
+        name: from merged PR
+        run: |
+          echo "RELEASE_VERSION=${GITHUB_HEAD_REF#release-}" >> $GITHUB_ENV
+      - run: echo "$RELEASE_VERSION"
+
+    outputs:
+      tag: $RELEASE_VERSION
+
+  tag-and-release:
+    name: Tag and publish a release draft
+    needs: [define-tag, build-package]
     runs-on: ubuntu-latest
     permissions:
       id-token: write
       contents: write
+    if: ${{ define-tag.outputs.tag != ''}}
+    env:
+      RELEASE_VERSION: ${{ define-tag.outputs.tag }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -50,45 +77,13 @@ jobs:
 
       - name: Tag the commit
         run: |
-          RELEASE_VERSION=${GITHUB_HEAD_REF#release-}
           echo Release version: $RELEASE_VERSION
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git tag --annotate --message="Release version $RELEASE_VERSION" $RELEASE_VERSION ${{ github.sha }}
           git push origin $RELEASE_VERSION
 
-
-  tag-release:
-    name: Tag a new release, from a release PR
-    # for security, the PR must be from a 'releases/*' branch of the same repo
-    # AND have the 'type/release' label.
-    # keep the label in sync with scripts/prepare-release-pr.py
-    if: |
-      github.repository == 'Diaoul/subliminal'
-      && github.event_name == 'pull_request'
-      && github.event.action == 'closed'
-      && github.event.pull_request.merged == true
-      && github.event.pull_request.head.repo.full_name == github.repository
-      && contains(github.event.pull_request.labels.*.name, 'type/release')
-      && startsWith(github.head_ref, 'releases/')
-    needs: [build-package]
-    env:
-      GITHUB_HEAD_REF: ${{ github.head_ref }}
-    runs-on: ubuntu-latest
-    permissions:
-      id-token: write
-      contents: write
-    steps:
-      - uses: actions/checkout@v4
+      - uses: ./.github/workflows/publish-release.yml
+        # publish a release draft after pushing the release tag
         with:
-          fetch-depth: 0
-          persist-credentials: false
-
-      - name: Tag the commit
-        run: |
-          RELEASE_VERSION=${GITHUB_HEAD_REF#release-}
-          echo Release version: $RELEASE_VERSION
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git tag --annotate --message="Release version $RELEASE_VERSION" $RELEASE_VERSION ${{ github.sha }}
-          git push origin $RELEASE_VERSION
+          tag-name: $RELEASE_VERSION

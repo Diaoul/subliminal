@@ -1,13 +1,6 @@
-name: Publish
+name: Publish on PyPI
 
 on:
-  push:
-    tags:
-      - '*'
-  workflow_run:
-    workflows: ["Tag release"]
-    types:
-      - completed
   release:
     types:
       - published
@@ -33,48 +26,6 @@ jobs:
 
       - uses: hynek/build-and-inspect-python-package@v2
         id: baipp
-
-    outputs:
-      # Used to define the matrix for tests below. The value is based on
-      # packaging metadata (trove classifiers).
-      supported-python-versions: ${{ steps.baipp.outputs.supported_python_classifiers_json_array }}
-
-  github-release:
-    name: Make a GitHub Release
-    needs: [build-package]
-    # only publish a Github release on push tag
-    if: |
-      github.repository == 'Diaoul/subliminal'
-      && (
-        (github.event_name == 'push' && startsWith(github.ref, 'refs/tags/'))
-        || github.event_name == 'workflow_run'
-      )
-    runs-on: ubuntu-latest
-
-    permissions:
-      # IMPORTANT: mandatory for making GitHub Releases
-      contents: write
-      id-token: write
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          persist-credentials: false
-
-      - name: Download packages built by build-and-inspect-python-package
-        uses: actions/download-artifact@v4
-        with:
-          name: Packages
-          path: dist
-
-      - name: Publish GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
-          files: dist/*
-          generate_release_notes: true
-          draft: true
 
   publish-to-pypi:
     name: Publish package to pypi.

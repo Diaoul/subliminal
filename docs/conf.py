@@ -36,8 +36,6 @@ extensions = [
     'sphinxcontrib.programoutput',
     'sphinx_autodoc_typehints',
     'sphinx_changelog',
-    'sphinx_rtd_theme',
-    'sphinx_changelog',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -118,22 +116,62 @@ todo_include_todos = False
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'sphinx_rtd_theme'
+html_theme = 'furo'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
-# html_theme_options = {}
-# html_theme_options = {
-#     'github_user': 'Diaoul',
-#     'github_repo': project,
-#     'travis_button': True,
-#     'gratipay_user': 'Diaoul'
-# }
+html_theme_options = {
+    # configure 'edit source' button
+    'source_repository': repository,
+    'source_directory': 'docs/',
+    'source_branch': 'main',
+    # Add link to repository
+    'footer_icons': [
+        {
+            'name': 'GitHub',
+            'url': repository,
+            'class': 'bi bi-github bi-2x',
+        },
+    ],
+}
+
+html_static_path = ['_static']
+
+templates_path = ['_templates']
+
+html_css_files = [
+    # add icon after external links
+    'css/ext-links.css',
+    # load the open source bootstrap icon set
+    'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css',
+    #
+    # style the version selector
+    'css/version-selector.css',
+    'css/api-docs.css',
+]
+
+html_js_files = ['js/version-selector.js']
+
+html_context = {
+    'current_version': 'stable',
+}
+
+# Custom sidebar templates, maps document names to template names.
+html_sidebars = {
+    '**': [
+        'sidebar/brand.html',  # override `furo/sidebar/brand.html` to show version
+        'sidebar/search.html',
+        'sidebar/scroll-start.html',
+        'sidebar/navigation.html',
+        'sidebar/scroll-end.html',
+        'sidebar/version-selector.html',  # add version selector
+    ],
+}
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
-# html_title = None
+html_title = project
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
 # html_short_title = None
@@ -147,11 +185,6 @@ html_theme = 'sphinx_rtd_theme'
 # pixels large.
 # html_favicon = None
 
-# Add any paths that contain custom static files (such as style sheets) here,
-# relative to this directory. They are copied after the builtin static files,
-# so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
-
 # Add any extra paths that contain custom files (such as robots.txt or
 # .htaccess) here, relative to this directory. These files are copied
 # directly to the root of the documentation.
@@ -164,9 +197,6 @@ html_static_path = ['_static']
 # If true, SmartyPants will be used to convert quotes and dashes to
 # typographically correct entities.
 # html_use_smartypants = True
-
-# Custom sidebar templates, maps document names to template names.
-# html_sidebars = {}
 
 # Additional templates that should be rendered to pages, maps page names to
 # template names.

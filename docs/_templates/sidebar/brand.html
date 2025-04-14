@@ -1,0 +1,6 @@
+{# Style darglint logo in the sidebar This adds the version number as a
+superscript. #} {% extends "!sidebar/brand.html" %} {% block brand_content %}
+<span class="sidebar-brand-text">
+    {{ project }}<sup><i>{{ release }}</i></sup>
+</span>
+{% endblock brand_content %}

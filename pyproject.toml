@@ -60,6 +60,7 @@ docs = [
     "sphinx_rtd_theme>=2",
     "sphinxcontrib-programoutput",
     "sphinx_autodoc_typehints",
+    "sphinx_changelog",
     "vcrpy>=5",  # keep synchronized with tests dependencies
     "towncrier",
 ]
@@ -236,7 +237,7 @@ name = "subliminal"
 package = "subliminal"
 directory = "changelog.d"
 filename = "HISTORY.rst"
-title_format = "`v{version} <https://github.com/Diaoul/subliminal/tree/{version}>`_ ({project_date})"
+title_format = "{version} ({project_date})"
 issue_format = "`#{issue} <https://github.com/Diaoul/subliminal/issues/{issue}>`__"
 underlines = ["^", "-", "~"]
 

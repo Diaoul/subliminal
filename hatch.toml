@@ -70,7 +70,7 @@ description = "build changelog with towncrier"
 dependencies = ["towncrier"]
 
 [envs.changelog.scripts]
-run = "towncrier build --version main --draft"
+run = "towncrier build {args:--version main --draft}"
 
 # ---------------------------------------------------------
 [envs.tests]

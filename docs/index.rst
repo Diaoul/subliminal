@@ -26,11 +26,6 @@ Documentation
 
    user/changelog
 
-.. toctree::
-   :maxdepth: 1
-
-   user/changelog
-
 
 API Documentation
 -----------------

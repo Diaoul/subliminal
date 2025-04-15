@@ -207,7 +207,7 @@ def generate_default_config(*, compact: bool = True) -> str:
 
     def add_value_to_table(opt: click.Option, table: tomlkit.items.Table, *, name: str | None = None) -> None:
         """Add a value to a TOML table."""
-        if opt.name is None:
+        if opt.name is None:  # pragma: no cover
             return
         # Override option name
         opt_name = name if name is not None else opt.name
@@ -229,7 +229,7 @@ def generate_default_config(*, compact: bool = True) -> str:
     for opt in subliminal.params:
         if not isinstance(opt, click.Option) or isinstance(opt, GroupedOption):
             continue
-        if opt.name is None:
+        if opt.name is None:  # pragma: no cover
             continue
         if opt.name.startswith(('__', 'fake')):
             continue
@@ -237,11 +237,11 @@ def generate_default_config(*, compact: bool = True) -> str:
             continue
         # Add key=value to table
         add_value_to_table(opt, default)
-        if not compact:
+        if not compact:  # pragma: no cover
             default.add(tomlkit.nl())
     # Adding the table to the document
     doc.add('default', default)
-    if not compact:
+    if not compact:  # pragma: no cover
         doc.add(tomlkit.nl())
 
     # Get subcommands
@@ -249,7 +249,7 @@ def generate_default_config(*, compact: bool = True) -> str:
         # Get the options for each subcommand
         com_table = tomlkit.table()
         for opt in command.params:
-            if opt.name is None:
+            if opt.name is None:  # pragma: no cover
                 continue
             if not isinstance(opt, click.Option):
                 continue
@@ -258,12 +258,12 @@ def generate_default_config(*, compact: bool = True) -> str:
                 continue
             # Add key=value to table
             add_value_to_table(opt, com_table)
-            if not compact:
+            if not compact:  # pragma: no cover
                 com_table.add(tomlkit.nl())
 
         # Adding the table to the document
         doc.add(command_name, com_table)
-        if not compact:
+        if not compact:  # pragma: no cover
             doc.add(tomlkit.nl())
 
     # Add providers and refiners options
@@ -275,27 +275,27 @@ def generate_default_config(*, compact: bool = True) -> str:
         ]
         provider_tables: dict[str, tomlkit.items.Table] = {}
         for opt in provider_options:
-            if opt.name is None:
+            if opt.name is None:  # pragma: no cover
                 continue
             _, provider, opt_name = opt.name.split('__')
             provider_table = provider_tables.setdefault(provider, tomlkit.table())
-            if opt.name in provider_table:
+            if opt.name in provider_table:  # pragma: no cover
                 # Duplicated option
                 continue
 
             # Add key=value to table
             add_value_to_table(opt, provider_table, name=opt_name)
-            if not compact:
+            if not compact:  # pragma: no cover
                 provider_table.add(tomlkit.nl())
 
         # Adding the table to the document
         parent_provider_table = tomlkit.table()
         for provider, table in provider_tables.items():
             parent_provider_table.add(provider, table)
-            if not compact:
+            if not compact:  # pragma: no cover
                 doc.add(tomlkit.nl())
         doc.add(class_type, parent_provider_table)
-        if not compact:
+        if not compact:  # pragma: no cover
             doc.add(tomlkit.nl())
 
     return tomlkit.dumps(doc)

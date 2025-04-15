@@ -21,6 +21,11 @@ Documentation
     user/configuration_file
     user/provider_guide
 
+.. toctree::
+   :maxdepth: 1
+
+   user/changelog
+
 
 API Documentation
 -----------------

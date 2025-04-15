@@ -35,6 +35,7 @@ extensions = [
     'sphinx.ext.viewcode',
     'sphinxcontrib.programoutput',
     'sphinx_autodoc_typehints',
+    'sphinx_changelog',
     'sphinx_rtd_theme',
 ]
 
@@ -56,6 +57,7 @@ master_doc = 'index'
 project = subliminal.__title__
 copyright = ' '.join(subliminal.__copyright__.split()[1:])
 author = subliminal.__copyright__.split(', ')[1]
+repository = f'https://github.com/Diaoul/{project}/'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the

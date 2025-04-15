@@ -66,9 +66,9 @@ jobs:
     permissions:
       id-token: write
       contents: write
-    if: ${{ define-tag.outputs.tag != ''}}
+    if: ${{ needs.define-tag.outputs.tag != ''}}
     env:
-      RELEASE_VERSION: ${{ define-tag.outputs.tag }}
+      RELEASE_VERSION: ${{ needs.define-tag.outputs.tag }}
     steps:
       - uses: actions/checkout@v4
         with:

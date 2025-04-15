@@ -11,8 +11,6 @@ subliminal
 
 .. _cli-subliminal-download:
 
-.. _cli-subliminal-download:
-
 subliminal download
 -------------------
 .. program-output:: subliminal download --help

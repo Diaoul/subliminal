@@ -207,6 +207,7 @@ def generate_default_config(*, compact: bool = True, commented: bool = True) -> 
 
     :param compact: if True, generate a compact configuration without newlines between options.
     :param commented: if True, all the options are commented out.
+    :return: the default configuration as a string.
     """
 
     def add_value_to_table(opt: click.Option, table: tomlkit.items.Table, *, name: str | None = None) -> str | None:
@@ -230,6 +231,7 @@ def generate_default_config(*, compact: bool = True, commented: bool = True) -> 
         else:
             table.add(tomlkit.comment(f'{opt_name} = '))
 
+        # Return the key to keep track of duplicates
         return opt_name
 
     # Create TOML document

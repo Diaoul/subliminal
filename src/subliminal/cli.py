@@ -16,10 +16,10 @@ from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
 import click
-import tomli
+import tomlkit
 from babelfish import Error as BabelfishError  # type: ignore[import-untyped]
 from babelfish import Language
-from click_option_group import OptionGroup
+from click_option_group import GroupedOption, OptionGroup
 from dogpile.cache.backends.file import AbstractFileLock
 from dogpile.util.readwrite_lock import ReadWriteMutex
 from platformdirs import PlatformDirs
@@ -50,7 +50,7 @@ from subliminal.extensions import get_default_providers, get_default_refiners
 from subliminal.utils import get_parameters_from_signature, merge_extend_and_ignore_unions
 
 if TYPE_CHECKING:
-    from collections.abc import Callable, Sequence
+    from collections.abc import Callable, MutableMapping, Sequence
 
     from subliminal.utils import Parameter
 
@@ -135,12 +135,12 @@ def read_configuration(filename: str | os.PathLike) -> dict[str, dict[str, Any]]
     """Read a configuration file."""
     filename = pathlib.Path(filename).expanduser()
     msg = ''
-    toml_dict = {}
+    toml_dict: MutableMapping[str, Any] = {}
     if filename.is_file():
         try:
             with open(filename, 'rb') as f:
-                toml_dict = tomli.load(f)
-        except tomli.TOMLDecodeError:
+                toml_dict = tomlkit.load(f)
+        except tomlkit.exceptions.TOMLKitError:
             tb = traceback.format_exc()
             msg = f'Cannot read the configuration file at {os.fspath(filename)!r}:\n{tb}'
         else:
@@ -200,6 +200,124 @@ def configure(ctx: click.Context, param: click.Parameter | None, filename: str |
 
     ctx.obj = config['obj']
     ctx.default_map = config['default_map']
+
+
+def generate_default_config(*, compact: bool = True, commented: bool = True) -> str:
+    """Generate a default configuration file.
+
+    :param compact: if True, generate a compact configuration without newlines between options.
+    :param commented: if True, all the options are commented out.
+    :return: the default configuration as a string.
+    """
+
+    def add_value_to_table(opt: click.Option, table: tomlkit.items.Table, *, name: str | None = None) -> str | None:
+        """Add a value to a TOML table."""
+        if opt.name is None:  # pragma: no cover
+            return None
+        # Override option name
+        opt_name = name if name is not None else opt.name
+
+        table.add(tomlkit.comment((opt.help or opt_name).capitalize()))
+        # table.add(tomlkit.comment(f'{opt_name} = {opt.default}'))
+        if opt.default is not None:
+            if not commented:
+                table.add(opt_name, opt.default)
+            else:
+                # Generate the entry in a dumb table
+                dumb = tomlkit.table()
+                dumb.add(opt_name, opt.default)
+                # Add the string to the final table as a comment
+                table.add(tomlkit.comment(dumb.as_string().strip('\n')))
+        else:
+            table.add(tomlkit.comment(f'{opt_name} = '))
+
+        # Return the key to keep track of duplicates
+        return opt_name
+
+    # Create TOML document
+    doc = tomlkit.document()
+    doc.add(tomlkit.comment('Subliminal default configuration file'))
+    doc.add(tomlkit.nl())
+
+    # Get the options to the main command line
+    default = tomlkit.table()
+    for opt in subliminal.params:
+        if not isinstance(opt, click.Option) or isinstance(opt, GroupedOption):
+            continue
+        if opt.name is None:  # pragma: no cover
+            continue
+        if opt.name.startswith(('__', 'fake')):
+            continue
+        if opt.name in ['version', 'config']:
+            continue
+        # Add key=value to table
+        add_value_to_table(opt, default)
+        if not compact:  # pragma: no cover
+            default.add(tomlkit.nl())
+    # Adding the table to the document
+    doc.add('default', default)
+    if not compact:  # pragma: no cover
+        doc.add(tomlkit.nl())
+
+    # Get subcommands
+    for command_name, command in subliminal.commands.items():
+        # Get the options for each subcommand
+        com_table = tomlkit.table()
+        # We need to keep track of duplicated options
+        existing_options: set[str] = set()
+        for opt in command.params:
+            if opt.name is None:  # pragma: no cover
+                continue
+            if not isinstance(opt, click.Option):
+                continue
+            if opt.name in existing_options:
+                # Duplicated option
+                continue
+            # Add key=value to table
+            opt_name = add_value_to_table(opt, com_table)
+            if opt_name is not None:
+                existing_options.add(opt_name)
+            if not compact:  # pragma: no cover
+                com_table.add(tomlkit.nl())
+
+        # Adding the table to the document
+        doc.add(command_name, com_table)
+        if not compact:  # pragma: no cover
+            doc.add(tomlkit.nl())
+
+    # Add providers and refiners options
+    for class_type in ['provider', 'refiner']:
+        provider_options = [
+            o
+            for o in subliminal.params
+            if isinstance(o, click.Option) and o.name and o.name.startswith(f'_{class_type}__')
+        ]
+        provider_tables: dict[str, tomlkit.items.Table] = {}
+        for opt in provider_options:
+            if opt.name is None:  # pragma: no cover
+                continue
+            _, provider, opt_name = opt.name.split('__')
+            provider_table = provider_tables.setdefault(provider, tomlkit.table())
+            if opt.name in provider_table:  # pragma: no cover
+                # Duplicated option
+                continue
+
+            # Add key=value to table
+            add_value_to_table(opt, provider_table, name=opt_name)
+            if not compact:  # pragma: no cover
+                provider_table.add(tomlkit.nl())
+
+        # Adding the table to the document
+        parent_provider_table = tomlkit.table()
+        for provider, table in provider_tables.items():
+            parent_provider_table.add(provider, table)
+            if not compact:  # pragma: no cover
+                doc.add(tomlkit.nl())
+        doc.add(class_type, parent_provider_table)
+        if not compact:  # pragma: no cover
+            doc.add(tomlkit.nl())
+
+    return str(tomlkit.dumps(doc))
 
 
 def plural(quantity: int, name: str, *, bold: bool = True, **kwargs: Any) -> str:

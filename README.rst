@@ -40,6 +40,19 @@ Download English subtitles::
     Downloading subtitles  [####################################]  100%
     Downloaded 1 subtitle
 
+Configuration
+^^^^^^^^^^^^^
+Arguments can be passed to the CLI using a configuration file.
+By default it looks for a `subliminal.toml` file in the default configuration folder
+(see the CLI help for the exact platform-specific default path).
+Or use the `-c` option to specify the path to the configuration file.
+
+`Look for this example configuration file <https://github.com/Diaoul/subliminal/blob/main/docs/config.toml>`__
+or use the `generate_default_config` function from the `subliminal.cli` module to generate a
+configuration file with all the options and their default values.
+
+    $ python -c "from subliminal.cli import generate_default_config; print(generate_default_config())"
+
 Library
 ^^^^^^^
 Download best subtitles in French and English for videos less than two weeks old in a video folder:

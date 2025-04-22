@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import os
+from difflib import SequenceMatcher
 from pathlib import Path
 from textwrap import dedent
 from typing import TYPE_CHECKING
@@ -10,6 +11,7 @@ from unittest.mock import Mock
 import pytest
 from click.testing import CliRunner
 
+from subliminal.cli import generate_default_config
 from subliminal.cli import subliminal as subliminal_cli
 from tests.conftest import ensure
 
@@ -502,3 +504,45 @@ def test_cli_download_with_config_with_option_error(tmp_path: os.PathLike[str]) 
         assert result.exit_code > 0
         # Error in the config file is treated as an error in the CLI arguments
         assert 'Value must be an iterable' in result.output
+
+
+def test_cli_download_with_generated_config(tmp_path: os.PathLike[str]) -> None:
+    runner = CliRunner()
+    video_name = 'Marvels.Agents.of.S.H.I.E.L.D.S02E06.720p.HDTV.x264-KILLERS.mkv'
+
+    with runner.isolated_filesystem(temp_dir=tmp_path) as td:
+        doc = generate_default_config(commented=False)
+        with open('subliminal.toml', 'w') as f:
+            f.write(doc)
+
+        result = runner.invoke(subliminal_cli, ['--config', 'subliminal.toml', 'download', '-l', 'en', video_name])
+
+        assert result.exit_code == 0
+        assert result.output.startswith('Collecting videos')
+        assert '1 subtitle' in result.output
+
+        subtitle_filename = os.path.splitext(video_name)[0] + '.en.srt'
+        # collect files recursively
+        files = [os.fspath(p.relative_to(td)) for p in Path(td).rglob('*')]
+        assert subtitle_filename in files
+
+
+def test_generated_config() -> None:
+    doc = generate_default_config(commented=False)
+    doc_commented = generate_default_config(commented=True)
+
+    doc_force_commented = ''.join(
+        [
+            f'# {line}' if line and not line.startswith(('[', '#', '\n')) else line
+            for line in doc.splitlines(keepends=True)
+        ]
+    )
+
+    x = SequenceMatcher(None, doc_commented, doc_force_commented)
+    blocks = x.get_matching_blocks()
+
+    assert len(blocks) == 2
+
+    length = len(doc_commented)
+    for match in blocks:
+        assert match.size == 0 or match.size == length

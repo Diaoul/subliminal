@@ -50,7 +50,7 @@ from subliminal.extensions import get_default_providers, get_default_refiners
 from subliminal.utils import get_parameters_from_signature, merge_extend_and_ignore_unions
 
 if TYPE_CHECKING:
-    from collections.abc import Callable, MutableMapping, Sequence, Set
+    from collections.abc import Callable, MutableMapping, Sequence
 
     from subliminal.utils import Parameter
 
@@ -262,7 +262,7 @@ def generate_default_config(*, compact: bool = True, commented: bool = True) -> 
         # Get the options for each subcommand
         com_table = tomlkit.table()
         # We need to keep track of duplicated options
-        existing_options: Set[str] = set()
+        existing_options: set[str] = set()
         for opt in command.params:
             if opt.name is None:  # pragma: no cover
                 continue
@@ -315,7 +315,7 @@ def generate_default_config(*, compact: bool = True, commented: bool = True) -> 
         if not compact:  # pragma: no cover
             doc.add(tomlkit.nl())
 
-    return tomlkit.dumps(doc)
+    return str(tomlkit.dumps(doc))
 
 
 def plural(quantity: int, name: str, *, bold: bool = True, **kwargs: Any) -> str:

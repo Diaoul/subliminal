@@ -40,5 +40,5 @@ Default configuration
 Here is a list of all the options of the configuration file.
 Commented options need a value to be valid.
 
-.. program-output:: python -c "from subliminal.cli import generate_default_config; print(generate_default_config())"
+.. program-output:: python -c "from subliminal.cli import generate_default_config; print(generate_default_config(commented=False))"
     :language: toml

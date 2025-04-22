@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import os
+from difflib import SequenceMatcher
 from pathlib import Path
 from textwrap import dedent
 from typing import TYPE_CHECKING
@@ -510,7 +511,7 @@ def test_cli_download_with_generated_config(tmp_path: os.PathLike[str]) -> None:
     video_name = 'Marvels.Agents.of.S.H.I.E.L.D.S02E06.720p.HDTV.x264-KILLERS.mkv'
 
     with runner.isolated_filesystem(temp_dir=tmp_path) as td:
-        doc = generate_default_config()
+        doc = generate_default_config(commented=False)
         with open('subliminal.toml', 'w') as f:
             f.write(doc)
 
@@ -524,3 +525,24 @@ def test_cli_download_with_generated_config(tmp_path: os.PathLike[str]) -> None:
         # collect files recursively
         files = [os.fspath(p.relative_to(td)) for p in Path(td).rglob('*')]
         assert subtitle_filename in files
+
+
+def test_generated_config() -> None:
+    doc = generate_default_config(commented=False)
+    doc_commented = generate_default_config(commented=True)
+
+    doc_force_commented = ''.join(
+        [
+            f'# {line}' if line and not line.startswith(('[', '#', '\n')) else line
+            for line in doc.splitlines(keepends=True)
+        ]
+    )
+
+    x = SequenceMatcher(None, doc_commented, doc_force_commented)
+    blocks = x.get_matching_blocks()
+
+    assert len(blocks) == 2
+
+    length = len(doc_commented)
+    for match in blocks:
+        assert match.size == 0 or match.size == length

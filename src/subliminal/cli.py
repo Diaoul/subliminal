@@ -50,7 +50,7 @@ from subliminal.extensions import get_default_providers, get_default_refiners
 from subliminal.utils import get_parameters_from_signature, merge_extend_and_ignore_unions
 
 if TYPE_CHECKING:
-    from collections.abc import Callable, MutableMapping, Sequence
+    from collections.abc import Callable, MutableMapping, Sequence, Set
 
     from subliminal.utils import Parameter
 
@@ -202,22 +202,35 @@ def configure(ctx: click.Context, param: click.Parameter | None, filename: str |
     ctx.default_map = config['default_map']
 
 
-def generate_default_config(*, compact: bool = True) -> str:
-    """Generate a default configuration file."""
+def generate_default_config(*, compact: bool = True, commented: bool = True) -> str:
+    """Generate a default configuration file.
 
-    def add_value_to_table(opt: click.Option, table: tomlkit.items.Table, *, name: str | None = None) -> None:
+    :param compact: if True, generate a compact configuration without newlines between options.
+    :param commented: if True, all the options are commented out.
+    """
+
+    def add_value_to_table(opt: click.Option, table: tomlkit.items.Table, *, name: str | None = None) -> str | None:
         """Add a value to a TOML table."""
         if opt.name is None:  # pragma: no cover
-            return
+            return None
         # Override option name
         opt_name = name if name is not None else opt.name
 
         table.add(tomlkit.comment((opt.help or opt_name).capitalize()))
-        # default.add(tomlkit.comment(f'{opt.name} = {opt.default}'))
+        # table.add(tomlkit.comment(f'{opt_name} = {opt.default}'))
         if opt.default is not None:
-            table.add(opt_name, opt.default)
+            if not commented:
+                table.add(opt_name, opt.default)
+            else:
+                # Generate the entry in a dumb table
+                dumb = tomlkit.table()
+                dumb.add(opt_name, opt.default)
+                # Add the string to the final table as a comment
+                table.add(tomlkit.comment(dumb.as_string().strip('\n')))
         else:
             table.add(tomlkit.comment(f'{opt_name} = '))
+
+        return opt_name
 
     # Create TOML document
     doc = tomlkit.document()
@@ -248,16 +261,20 @@ def generate_default_config(*, compact: bool = True) -> str:
     for command_name, command in subliminal.commands.items():
         # Get the options for each subcommand
         com_table = tomlkit.table()
+        # We need to keep track of duplicated options
+        existing_options: Set[str] = set()
         for opt in command.params:
             if opt.name is None:  # pragma: no cover
                 continue
             if not isinstance(opt, click.Option):
                 continue
-            if opt.name in com_table:
+            if opt.name in existing_options:
                 # Duplicated option
                 continue
             # Add key=value to table
-            add_value_to_table(opt, com_table)
+            opt_name = add_value_to_table(opt, com_table)
+            if opt_name is not None:
+                existing_options.add(opt_name)
             if not compact:  # pragma: no cover
                 com_table.add(tomlkit.nl())
 

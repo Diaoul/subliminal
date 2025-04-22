@@ -42,10 +42,10 @@ Download English subtitles::
 
 Configuration
 ^^^^^^^^^^^^^
-Arguments can be passed to the CLI with a configuration file. By default, it looks for
-a `subliminal.toml` file in the default configuration folder (see the CLI help for
-the exact platform-dependent default path). Or specify the path to the configuration
-file with the `-c` option.
+Arguments can be passed to the CLI using a configuration file.
+By default it looks for a `subliminal.toml` file in the default configuration folder
+(see the CLI help for the exact platform-specific default path).
+Or use the `-c` option to specify the path to the configuration file.
 
 `Look for this example configuration file <https://github.com/Diaoul/subliminal/blob/main/docs/config.toml>`__
 or use the `generate_default_config` function from the `subliminal.cli` module to generate a

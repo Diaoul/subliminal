@@ -49,7 +49,7 @@ Or use the `-c` option to specify the path to the configuration file.
 
 `Look for this example configuration file <https://github.com/Diaoul/subliminal/blob/main/docs/config.toml>`__
 or use the `generate_default_config` function from the `subliminal.cli` module to generate a
-configuration file with all the options and their default values.
+configuration file with all the options and their default values::
 
     $ python -c "from subliminal.cli import generate_default_config; print(generate_default_config())"
 

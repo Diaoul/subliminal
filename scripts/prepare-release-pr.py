@@ -69,7 +69,7 @@ def find_next_version(base_branch: str, *, is_major: bool, is_minor: bool, prere
     return f'{last_version[0]}.{last_version[1]}.{last_version[2] + 1}{prerelease}'
 
 
-def prepare_release_pr(base_branch: str, bump: str, prerelease: str, remote: str) -> None:
+def prepare_release_pr(base_branch: str, bump: str, prerelease: str, remote: str, *, login: bool = False) -> None:
     """Find the bumped version and make a release PR."""
     print()
     print(f'Processing release for branch {Fore.CYAN}{base_branch}')
@@ -146,19 +146,20 @@ def prepare_release_pr(base_branch: str, bump: str, prerelease: str, remote: str
     run(['git', 'push', remote, f'HEAD:{release_branch}', '--force'], check=True)
     print(f'Branch {Fore.CYAN}{release_branch}{Fore.RESET} pushed.')
 
-    run(['gh', 'auth', 'login'], check=False)
-    print('Authenticated with gh.')
+    if login:
+        run(['gh', 'auth', 'login'], check=False)
+        print('Authenticated with gh.')
 
     # use --repo only if using a remote
     print(f'Create label {Fore.MAGENTA}{label}{Fore.RESET}.')
-    run(['gh', 'label', 'create', label, f'--repo={repo}' if repo else ''], check=False)
+    run(['gh', 'label', 'create', label, f'--repo={repo}'], check=False)
 
     body = PR_BODY.format(version=version)
     cmdline = [
         'gh',
         'pr',
         'create',
-        f'--repo={repo}' if repo else '',
+        f'--repo={repo}',
         f'--base={base_branch}',
         f'--head={release_branch}',
         f'--title=Release {version}',
@@ -176,12 +177,15 @@ def main() -> None:  # noqa: D103
     parser.add_argument('--bump', default='')
     parser.add_argument('--prerelease', default='')
     parser.add_argument('--remote', default='')
+    parser.add_argument('--login', action='store_true')
     options = parser.parse_args()
+
     prepare_release_pr(
         base_branch=options.base_branch,
         bump=options.bump,
         prerelease=options.prerelease,
         remote=options.remote,
+        login=options.login,
     )
 
 

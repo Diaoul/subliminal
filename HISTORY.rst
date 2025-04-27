@@ -1,5 +1,91 @@
 
+
 .. towncrier release notes start
+
+2.3.0 (2025-04-27)
+^^^^^^^^^^^^^^^^^^
+
+Changes
+-------
+
+- By default, use the latest of creation and modification date to compute the age of the file.
+  Use the CLI option `--no-use-ctime` to use the modification date only, that was the previous behavior. (`#860 <https://github.com/Diaoul/subliminal/issues/860>`__)
+- Make `rarfile` an optional dependency, install with subliminal[rar] (`#1096 <https://github.com/Diaoul/subliminal/issues/1096>`__)
+- add `subtitles` attribute to Video (`#1151 <https://github.com/Diaoul/subliminal/issues/1151>`__)
+- Use `knowit` to extract information from video file, instead of `enzyme`:
+  frame rate, duration and subtitles.
+  `knowit` relies on external programs (`mediainfo`, `ffmpeg`, `mkvmerge`)
+  and falls back to using `enzyme` if none is installed.
+  On Windows and MacOS, `libmediainfo` is installed automatically
+  via the `pymediainfo` python package dependency.
+  On Linux, the `libmediainfo` or `mediainfo` package needs to be installed
+  with the package manager of your distribution. (`#1154 <https://github.com/Diaoul/subliminal/issues/1154>`__)
+- show "Insufficient data to process the guess" without debug, but with verbose (`#1164 <https://github.com/Diaoul/subliminal/issues/1164>`__)
+- Add Provider.hash_video staticmethod, to allow creating standalone providers. (`#1172 <https://github.com/Diaoul/subliminal/issues/1172>`__)
+- Drop python 3.8, support python 3.13. (`#1176 <https://github.com/Diaoul/subliminal/issues/1176>`__)
+- Remove addic7ed and napiprojekt from the list of disabled providers.
+  Remove the default_providers and default_refiners variables,
+  instead the get_default_providers() and get_default_refiners() functions can be used. (`#1181 <https://github.com/Diaoul/subliminal/issues/1181>`__)
+- Add a mock provider.
+  Fix doctest. (`#1185 <https://github.com/Diaoul/subliminal/issues/1185>`__)
+- Add release scripts, documentation and Github Actions (`#1186 <https://github.com/Diaoul/subliminal/issues/1186>`__)
+- Rename optional dependency test -> tests.
+  Improve security of github actions using woodruffw/zizmor. (`#1190 <https://github.com/Diaoul/subliminal/issues/1190>`__)
+- Use hatch builder and hatch-vcs (`#1192 <https://github.com/Diaoul/subliminal/issues/1192>`__)
+- Add a Github action to publish the docker images to ghcr.io (`#1196 <https://github.com/Diaoul/subliminal/issues/1196>`__)
+- Can use `python -m subliminal` (`#1197 <https://github.com/Diaoul/subliminal/issues/1197>`__)
+- create a prepare_tests.py script to download the tests data beforehand and avoid repeated downloads (`#1220 <https://github.com/Diaoul/subliminal/issues/1220>`__)
+- CLI option --use-ctime is set to True by default (`#1238 <https://github.com/Diaoul/subliminal/issues/1238>`__)
+
+
+Provider Changes
+----------------
+
+- Added BSPlayer provider (`#996 <https://github.com/Diaoul/subliminal/issues/996>`__)
+- [OpenSubtitlesCom] Avoid duplicate subtitles (`#1146 <https://github.com/Diaoul/subliminal/issues/1146>`__)
+- Added Subtitulamos provider (`#1170 <https://github.com/Diaoul/subliminal/issues/1170>`__)
+
+
+CLI Changes
+-----------
+
+- Add a --subtitle-format CLI option to force converting subtitles to another format (`#536 <https://github.com/Diaoul/subliminal/issues/536>`__)
+- Add CLI `ignore` option for refiners, providers and subtitle ids. (`#585 <https://github.com/Diaoul/subliminal/issues/585>`__, `#1018 <https://github.com/Diaoul/subliminal/issues/1018>`__)
+- Add a --skip-wrong-fps cli option to completely skip subtitles with FPS different from the video FPS (if detected) (`#748 <https://github.com/Diaoul/subliminal/issues/748>`__)
+- add CLI options --force-embedded-subtitles and --force-external-subtitles.
+  They are fine-tuned --force options to ignore only embedded or external existing subtitles.
+  They are superseded by --force. (`#891 <https://github.com/Diaoul/subliminal/issues/891>`__)
+- Add a `-n/--name` option to use a replacement name for the video.
+  Sort files alphabetically before scanning a directory. (`#991 <https://github.com/Diaoul/subliminal/issues/991>`__, `#1132 <https://github.com/Diaoul/subliminal/issues/1132>`__)
+- Add an option to change the style of the language suffix of saved subtitles.
+  Allow adding the language type, hi or forced. (`#1022 <https://github.com/Diaoul/subliminal/issues/1022>`__)
+- Remove the original-encoding CLI option, pass `--encoding=` for the same effect. (`#1125 <https://github.com/Diaoul/subliminal/issues/1125>`__)
+- Add cli option to prefer or disfavor hearing impaired (-hi/-HI) or foreign only (-fo/-FO) subtitles. (`#1175 <https://github.com/Diaoul/subliminal/issues/1175>`__)
+- Add a CLI option `--use-absolute-path` that can take the values 'fallback' (default), 'never' or 'always'
+  to choose if the given path is transformed to an absolute path before guessing information from the path. (`#1216 <https://github.com/Diaoul/subliminal/issues/1216>`__)
+- add a CLI option --logfile to log to file. Level can be specified with --logfile-level, default to DEBUG (`#1223 <https://github.com/Diaoul/subliminal/issues/1223>`__)
+
+
+Deprecations
+------------
+
+- Deprecate the `--addic7ed USERNAME PASSWORD`, `--opensubtitles` and `--opensubtitlescom` CLI options
+  in favor of `--provider.addic7ed.username USERNAME`, `--provider.addic7ed.password PASSWORD`, etc...
+  Add a generic way of passing arguments to the providers using CLI options.
+  Use environment variables to pass options to the CLI. (`#1179 <https://github.com/Diaoul/subliminal/issues/1179>`__)
+
+
+Documentation
+-------------
+
+- `#1142 <https://github.com/Diaoul/subliminal/issues/1142>`__, `#1143 <https://github.com/Diaoul/subliminal/issues/1143>`__, `#1144 <https://github.com/Diaoul/subliminal/issues/1144>`__, `#1147 <https://github.com/Diaoul/subliminal/issues/1147>`__, `#1148 <https://github.com/Diaoul/subliminal/issues/1148>`__, `#1157 <https://github.com/Diaoul/subliminal/issues/1157>`__, `#1178 <https://github.com/Diaoul/subliminal/issues/1178>`__, `#1263 <https://github.com/Diaoul/subliminal/issues/1263>`__, `#1266 <https://github.com/Diaoul/subliminal/issues/1266>`__
+
+
+Misc
+----
+
+- `#1134 <https://github.com/Diaoul/subliminal/issues/1134>`__, `#1153 <https://github.com/Diaoul/subliminal/issues/1153>`__, `#1171 <https://github.com/Diaoul/subliminal/issues/1171>`__, `#1174 <https://github.com/Diaoul/subliminal/issues/1174>`__, `#1187 <https://github.com/Diaoul/subliminal/issues/1187>`__, `#1191 <https://github.com/Diaoul/subliminal/issues/1191>`__, `#1209 <https://github.com/Diaoul/subliminal/issues/1209>`__, `#1211 <https://github.com/Diaoul/subliminal/issues/1211>`__, `#1228 <https://github.com/Diaoul/subliminal/issues/1228>`__, `#1229 <https://github.com/Diaoul/subliminal/issues/1229>`__, `#1237 <https://github.com/Diaoul/subliminal/issues/1237>`__, `#1243 <https://github.com/Diaoul/subliminal/issues/1243>`__
+
 
 2.2.1
 ^^^^^

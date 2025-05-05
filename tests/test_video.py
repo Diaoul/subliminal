@@ -7,7 +7,6 @@ from typing import TYPE_CHECKING
 from unittest.mock import Mock
 
 import pytest
-from win32_setctime import SUPPORTED, setctime
 
 from subliminal.utils import sanitize, timestamp
 from subliminal.video import Episode, Movie, Video
@@ -40,6 +39,12 @@ def test_video_exists_age_no_use_ctime(
 
 
 def test_video_exists_age(movies: dict[str, Movie], tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    try:
+        from win32_setctime import SUPPORTED, setctime
+    except (ImportError, ModuleNotFoundError):
+        SUPPORTED = False
+        setctime = None
+
     monkeypatch.chdir(tmp_path)
     video = movies['man_of_steel']
     video_path = tmp_path / video.name

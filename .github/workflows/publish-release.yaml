@@ -25,22 +25,8 @@ env:
   PIP_NO_PYTHON_VERSION_WARNING: "1"
 
 jobs:
-  # Always build & lint package.
-  build-package:
-    name: Build & verify package
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          persist-credentials: false
-
-      - uses: hynek/build-and-inspect-python-package@v2
-        id: baipp
-
   github-release:
     name: Make a GitHub Release
-    needs: [build-package]
     # Publish a Github release when a tag was pushed, or it's called with a tag.
     if: |
       (github.event_name == 'push' && startsWith(github.ref, 'refs/tags/'))
@@ -71,11 +57,8 @@ jobs:
           ref: ${{ inputs.tag-name }}
           persist-credentials: false
 
-      - name: Download packages built by build-and-inspect-python-package
-        uses: actions/download-artifact@v4
-        with:
-          name: Packages
-          path: dist
+      - uses: hynek/build-and-inspect-python-package@v2
+        id: baipp
 
       - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2

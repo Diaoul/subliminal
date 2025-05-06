@@ -47,8 +47,29 @@ jobs:
           ref: ${{ inputs.tag-name }}
           persist-credentials: false
 
-      - uses: hynek/build-and-inspect-python-package@v2
+      - name: Build dist
+        uses: hynek/build-and-inspect-python-package@v2
         id: baipp
+
+      - name: Install tox
+        run: |
+          python -m pip install --upgrade pip
+          pip install --upgrade tox
+
+      - name: Generate Release Notes
+        env:
+          VERSION: ${{ inputs.tag-name }}
+        run: |
+          sudo apt-get install pandoc
+          tox -e generate-gh-release-notes -- "$VERSION" scripts/latest-release-notes.md
+
+      - name: Upload release notes
+        uses: actions/upload-artifact@v4
+        with:
+          name: latest-release-notes
+          path: scripts/latest-release-notes.md
+          include-hidden-files: false
+          if-no-files-found: error
 
   github-release:
     name: Make a GitHub Release
@@ -67,9 +88,14 @@ jobs:
         with:
           name: Packages
           path: dist
+      - name: Download release notes
+        uses: actions/download-artifact@v4
+        with:
+          name: latest-release-notes
+          path: scripts/latest-release-notes.md
       - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           files: dist/*
-          generate_release_notes: true
+          body_path: scripts/latest-release-notes.md
           draft: true

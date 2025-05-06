@@ -26,10 +26,12 @@ def extract_changelog_entries_for(history_file: str, version: str) -> str:
     p = Path(__file__).parent.parent / history_file
     changelog_lines = p.read_text(encoding='UTF-8').splitlines()
 
-    title_regex = re.compile(r'$(\d+\.\d+\.\d+\w*)( \(\d{4}-\d{2}-\d{2}\))?^')
+    title_regex = re.compile(r'^(\d+\.\d+\.\d+\w*)( \(\d{4}-\d{2}-\d{2}\))?$')
     consuming_version = False
     version_lines = []
     for line in changelog_lines:
+        # Make sure backticks are doubled
+        # line = re.sub('([^`])`([^`#])', r'\g<1>``\g<2>', line)
         m = title_regex.match(line)
         if m:
             # Found the version we want: start to consume lines until we find the next version title.

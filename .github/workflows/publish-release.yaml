@@ -30,30 +30,6 @@ jobs:
     name: Build & verify package
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          persist-credentials: false
-
-      - uses: hynek/build-and-inspect-python-package@v2
-        id: baipp
-
-  github-release:
-    name: Make a GitHub Release
-    needs: [build-package]
-    # Publish a Github release when a tag was pushed, or it's called with a tag.
-    if: |
-      (github.event_name == 'push' && startsWith(github.ref, 'refs/tags/'))
-      || github.event_name == 'workflow_call'
-      || github.event_name == 'workflow_dispatch'
-    runs-on: ubuntu-latest
-
-    permissions:
-      # IMPORTANT: mandatory for making GitHub Releases
-      contents: write
-      id-token: write
-
-    steps:
       - name: Checkout
         uses: actions/checkout@v4
         if: github.event_name == 'push'
@@ -71,12 +47,26 @@ jobs:
           ref: ${{ inputs.tag-name }}
           persist-credentials: false
 
+      - uses: hynek/build-and-inspect-python-package@v2
+        id: baipp
+
+  github-release:
+    name: Make a GitHub Release
+    needs: [build-package]
+    if: github.repository == 'Diaoul/subliminal'
+    runs-on: ubuntu-latest
+    permissions:
+      # IMPORTANT: mandatory for making GitHub Releases
+      contents: write
+      id-token: write
+
+    # Publish a Github release when a tag was pushed, or it's called with a tag.
+    steps:
       - name: Download packages built by build-and-inspect-python-package
         uses: actions/download-artifact@v4
         with:
           name: Packages
           path: dist
-
       - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2
         with:

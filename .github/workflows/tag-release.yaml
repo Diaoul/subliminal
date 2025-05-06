@@ -75,7 +75,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          persist-credentials: false
+          # keep credentials to create a tag
+          persist-credentials: true
 
       - name: Tag the commit
         run: |

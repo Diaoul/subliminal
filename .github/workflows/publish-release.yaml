@@ -47,6 +47,11 @@ jobs:
           ref: ${{ inputs.tag-name }}
           persist-credentials: false
 
+      - name: Get release version
+        id: release-version
+        run: |
+          echo "RELEASE_VERSION=$(git describe --exact-match --tags)" >> $GITHUB_ENV
+
       - name: Build dist
         uses: hynek/build-and-inspect-python-package@v2
         id: baipp
@@ -57,11 +62,10 @@ jobs:
           pip install --upgrade tox
 
       - name: Generate Release Notes
-        env:
-          VERSION: ${{ inputs.tag-name }}
         run: |
           sudo apt-get install pandoc
-          tox -e generate-gh-release-notes -- "$VERSION" scripts/latest-release-notes.md
+          # use $RELEASE_VERSION computed in step release-version
+          tox -e generate-gh-release-notes -- "$RELEASE_VERSION" scripts/latest-release-notes.md
 
       - name: Upload release notes
         uses: actions/upload-artifact@v4

@@ -3,7 +3,7 @@ name: Publish Github release
 on:
   push:
     tags:
-      - '*'
+      - "*.*.*"
   workflow_call:
     inputs:
       tag-name:
@@ -34,7 +34,7 @@ jobs:
         uses: actions/checkout@v4
         if: github.event_name == 'push'
         with:
-          fetch-depth: 0
+          fetch-tags: true
           persist-credentials: false
 
       - name: Checkout
@@ -43,14 +43,9 @@ jobs:
           github.event_name == 'workflow_dispatch'
           || github.event_name == 'workflow_call'
         with:
-          fetch-depth: 0
+          fetch-tags: true
           ref: ${{ inputs.tag-name }}
-          persist-credentials: false
-
-      - name: Get release version
-        id: release-version
-        run: |
-          echo "RELEASE_VERSION=$(git describe --exact-match --tags)" >> $GITHUB_ENV
+          persist-credentials: true
 
       - name: Build dist
         uses: hynek/build-and-inspect-python-package@v2
@@ -62,9 +57,11 @@ jobs:
           pip install --upgrade tox
 
       - name: Generate Release Notes
+        env:
+          RELEASE_VERSION: ${{ steps.baipp.outputs.package_version }} }}
         run: |
           sudo apt-get install pandoc
-          # use $RELEASE_VERSION computed in step release-version
+          # use package_version computed in step 'baipp'
           tox -e generate-gh-release-notes -- "$RELEASE_VERSION" scripts/latest-release-notes.md
 
       - name: Upload release notes

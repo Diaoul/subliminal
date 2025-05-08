@@ -139,7 +139,7 @@ provider_manager = RegistrableExtensionManager(
 )
 
 #: Disabled providers
-disabled_providers = ['opensubtitlesvip', 'opensubtitlescomvip']
+disabled_providers = ['bsplayer', 'opensubtitlesvip', 'opensubtitlescomvip']
 
 
 def get_default_providers() -> list[str]:

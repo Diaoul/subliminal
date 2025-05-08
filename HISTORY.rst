@@ -2,6 +2,21 @@
 
 .. towncrier release notes start
 
+2.3.2 (2025-05-08)
+^^^^^^^^^^^^^^^^^^
+
+Provider Changes
+----------------
+
+- [BSPlayer] disabled by default because it is slow. Can be enabled with the ``-pp bsplayer`` CLI option (`#1293 <https://github.com/Diaoul/subliminal/issues/1293>`__)
+
+
+Misc
+----
+
+- `#1276 <https://github.com/Diaoul/subliminal/issues/1276>`__, `#1289 <https://github.com/Diaoul/subliminal/issues/1289>`__
+
+
 2.3.1 (2025-05-08)
 ^^^^^^^^^^^^^^^^^^
 

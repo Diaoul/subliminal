@@ -35,7 +35,6 @@ jobs:
         if: github.event_name == 'push'
         with:
           persist-credentials: false
-
       - name: Checkout
         uses: actions/checkout@v4
         if: |
@@ -44,33 +43,12 @@ jobs:
         with:
           ref: ${{ inputs.tag-name }}
           persist-credentials: false
-
       - name: Build dist
         uses: hynek/build-and-inspect-python-package@v2
         id: baipp
-
-      - name: Install tox
-        run: |
-          python -m pip install --upgrade pip
-          pip install --upgrade tox
-
-      - name: Generate Release Notes
-        env:
-          RELEASE_VERSION: ${{ steps.baipp.outputs.package_version }}
-        run: |
-          sudo apt-get install pandoc
-          # use package_version computed in step 'baipp'
-          tox -e generate-gh-release-notes -- "$RELEASE_VERSION" latest-release-notes.md
-
-      - name: Upload release notes
-        uses: actions/upload-artifact@v4
-        with:
-          name: latest-release-notes
-          path: latest-release-notes.md
-          include-hidden-files: false
-          if-no-files-found: error
     outputs:
       tag: ${{ steps.baipp.outputs.package_version }}
+
 
   github-release:
     name: Make a GitHub Release
@@ -96,15 +74,9 @@ jobs:
         with:
           name: Packages
           path: dist
-      - name: Download release notes
-        uses: actions/download-artifact@v4
-        with:
-          name: latest-release-notes
-          path: latest-release-notes.md
-
       - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           files: dist/*
-          body_path: latest-release-notes.md
+          generate_release_notes: true
           draft: true

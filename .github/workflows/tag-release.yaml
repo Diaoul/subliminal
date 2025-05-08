@@ -79,14 +79,30 @@ jobs:
           persist-credentials: true
 
       - name: Tag the commit
+        id: create-tag
         run: |
           echo "Release version: $RELEASE_VERSION"
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git tag --annotate --message="Release version $RELEASE_VERSION" $RELEASE_VERSION ${{ github.sha }}
           git push origin $RELEASE_VERSION
+          echo "RELEASE_VERSION=$RELEASE_VERSION" >> $GITHUB_OUTPUT
+    outputs:
+      tag-name: ${{ steps.create-tag.outputs.RELEASE_VERSION }}
 
-      - uses: ./.github/workflows/publish-release.yml
-        # publish a release draft after pushing the release tag
-        with:
-          tag-name: $RELEASE_VERSION
+
+  trigger-release:
+    # Tagging from an action does not trigger a push>tag event, therefore we use workflow_call
+    # Publish a release draft after pushing the release tag
+    needs: [tag-and-release]
+    uses: ./.github/workflows/publish-release.yml
+    with:
+      tag-name: ${{ needs.tag-and-release.outputs.tag-name }}
+
+  trigger-docker-build:
+    # Tagging from an action does not trigger a push>tag event, therefore we use workflow_call
+    # Publish a docker image for the release tag
+    needs: [tag-and-release]
+    uses: ./.github/workflows/docker-build.yml
+    with:
+      tag-name: ${{ needs.tag-and-release.outputs.tag-name }}

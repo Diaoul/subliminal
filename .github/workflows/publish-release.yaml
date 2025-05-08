@@ -45,7 +45,7 @@ jobs:
         with:
           fetch-tags: true
           ref: ${{ inputs.tag-name }}
-          persist-credentials: true
+          persist-credentials: false
 
       - name: Build dist
         uses: hynek/build-and-inspect-python-package@v2
@@ -71,6 +71,8 @@ jobs:
           path: scripts/latest-release-notes.md
           include-hidden-files: false
           if-no-files-found: error
+    outputs:
+      tag: ${{ steps.baipp.outputs.package_version }}
 
   github-release:
     name: Make a GitHub Release
@@ -84,6 +86,13 @@ jobs:
 
     # Publish a Github release when a tag was pushed, or it's called with a tag.
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-tags: true
+          ref: ${{ needs.build-package.outputs.tag }}
+          persist-credentials: false
+
       - name: Download packages built by build-and-inspect-python-package
         uses: actions/download-artifact@v4
         with:

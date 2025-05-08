@@ -1,7 +1,7 @@
 # mypy: disallow-untyped-defs
 """Generate a Markdown file containing only the changelog entries of a specific release.
 
-The markdown file is used as body for the GitHub Release during deploy (see workflows/publish.yml).
+The markdown file is used as body for the GitHub Release during deploy (see workflows/publish.yaml).
 
 The script requires ``pandoc`` to be previously installed in the system -- we need to convert from RST (the format of
 our HISTORY) into Markdown (which is required by GitHub Releases).

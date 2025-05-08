@@ -31,13 +31,11 @@ jobs:
         if: github.event_name == 'push' || github.event_name == 'pull_request'
         uses: actions/checkout@v4
         with:
-          fetch-tags: true
           persist-credentials: false
       - name: Checkout repository
         if: github.event_name == 'workflow_call'
         uses: actions/checkout@v4
         with:
-          fetch-tags: true
           ref: ${{ inputs.tag-name }}
           persist-credentials: false
 

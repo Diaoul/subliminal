@@ -86,12 +86,15 @@ To release a version ``MAJOR.MINOR.PATCH-PRERELEASE``, follow these steps:
 Both automatic and manual processes described above follow the same steps from this point onward.
 
 * After all tests pass and the PR has been approved, merge the PR.
-  Merging the PR will trigger the
-  [tag-release workflow](https://github.com/Diaoul/subliminal/actions/workflows/tag-release.yaml), that will add a release tag.
 
-  This new tag will then trigger the
-  [publish workflow](https://github.com/Diaoul/subliminal/actions/workflows/publish.yaml),
-  using the ``release-MAJOR.MINOR.PATCH`` branch as source.
+* Then tag and push the new release with ``git tag <version>`` followed by ``git push upstream <version>``.
+  Or manually trigger the [tag-release workflow](https://github.com/Diaoul/subliminal/actions/workflows/tag-release.yaml).
+
+* This new tag will then trigger the
+  [publish-release workflow](https://github.com/Diaoul/subliminal/actions/workflows/publish-release.yaml),
+  using the tag as source.
 
   This job will publish a draft for a Github release.
-  When the Github release draft is published, the same workflow will publish to PyPI.
+
+* When the Github release draft is published, the
+  [publish workflow](https://github.com/Diaoul/subliminal/actions/workflows/publish.yaml) will publish to PyPI.

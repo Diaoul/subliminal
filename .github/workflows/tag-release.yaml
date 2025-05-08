@@ -95,7 +95,7 @@ jobs:
     # Tagging from an action does not trigger a push>tag event, therefore we use workflow_call
     # Publish a release draft after pushing the release tag
     needs: [tag-and-release]
-    uses: ./.github/workflows/publish-release.yml
+    uses: ./.github/workflows/publish-release.yaml
     with:
       tag-name: ${{ needs.tag-and-release.outputs.tag-name }}
 
@@ -103,6 +103,6 @@ jobs:
     # Tagging from an action does not trigger a push>tag event, therefore we use workflow_call
     # Publish a docker image for the release tag
     needs: [tag-and-release]
-    uses: ./.github/workflows/docker-build.yml
+    uses: ./.github/workflows/docker-build.yaml
     with:
       tag-name: ${{ needs.tag-and-release.outputs.tag-name }}

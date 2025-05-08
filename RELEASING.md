@@ -52,7 +52,11 @@ The choice of the bumped version can be bypassed by the "bump" input
 
 Or via the commandline::
 
-    gh workflow run prepare-release-pr.yml -f branch=main -f bump=major -f prerelease=
+    gh workflow run prepare-release-pr.yaml -f branch=main -f bump=major -f prerelease=
+
+Or you can create the PR using ``tox``::
+
+    tox -e prepare-release-pr -- main --remote=upstream
 
 The automated workflow will publish a PR for a branch ``release-8.0.0``.
 

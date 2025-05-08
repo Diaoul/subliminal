@@ -69,6 +69,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          context: git
           tags: |
             type=ref,event=branch
             type=semver,pattern={{version}}

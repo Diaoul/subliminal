@@ -12,6 +12,12 @@ on:
         description: 'Tag name'
         required: true
         type: 'string'
+  workflow_dispatch:
+    inputs:
+      tag-name:
+        description: 'Tag name'
+        required: true
+        type: 'string'
   pull_request:
 
 env:
@@ -33,14 +39,17 @@ jobs:
         with:
           persist-credentials: false
       - name: Checkout repository
-        if: github.event_name == 'workflow_call'
+        if: github.event_name == 'workflow_call' || github.event_name == 'workflow_dispatch'
         uses: actions/checkout@v4
         with:
           ref: ${{ inputs.tag-name }}
           persist-credentials: false
 
       - name: Set up QEMU
-        if: github.event_name == 'push' || github.event_name == 'workflow_call'
+        if: |
+          github.event_name == 'push'
+          || github.event_name == 'workflow_call'
+          || github.event_name == 'workflow_dispatch'
         uses: docker/setup-qemu-action@v3
 
       - name: Set up Docker Buildx
@@ -78,7 +87,10 @@ jobs:
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
-        if: github.event_name == 'push' || github.event_name == 'workflow_call'
+        if: |
+          github.event_name == 'push'
+          || github.event_name == 'workflow_call'
+          || github.event_name == 'workflow_dispatch'
         with:
           context: .
           platforms: linux/amd64,linux/arm64,linux/arm/v7

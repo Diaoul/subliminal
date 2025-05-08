@@ -2,15 +2,6 @@
 
 .. towncrier release notes start
 
-2.3.2 (2025-05-08)
-^^^^^^^^^^^^^^^^^^
-
-Misc
-----
-
-- `#1276 <https://github.com/Diaoul/subliminal/issues/1276>`__
-
-
 2.3.1 (2025-05-08)
 ^^^^^^^^^^^^^^^^^^
 

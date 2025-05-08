@@ -60,13 +60,13 @@ jobs:
         run: |
           sudo apt-get install pandoc
           # use package_version computed in step 'baipp'
-          tox -e generate-gh-release-notes -- "$RELEASE_VERSION" scripts/latest-release-notes.md
+          tox -e generate-gh-release-notes -- "$RELEASE_VERSION" latest-release-notes.md
 
       - name: Upload release notes
         uses: actions/upload-artifact@v4
         with:
           name: latest-release-notes
-          path: scripts/latest-release-notes.md
+          path: latest-release-notes.md
           include-hidden-files: false
           if-no-files-found: error
     outputs:
@@ -100,10 +100,11 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: latest-release-notes
-          path: scripts/latest-release-notes.md
+          path: latest-release-notes.md
+
       - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           files: dist/*
-          body_path: scripts/latest-release-notes.md
+          body_path: latest-release-notes.md
           draft: true

@@ -37,15 +37,11 @@ jobs:
         if: github.event_name == 'push' || github.event_name == 'pull_request'
         uses: actions/checkout@v4
         with:
-          # fetch all history to properly tag the build
-          fetch-depth: 0
           persist-credentials: false
       - name: Checkout repository
         if: github.event_name == 'workflow_call' || github.event_name == 'workflow_dispatch'
         uses: actions/checkout@v4
         with:
-          # fetch all history to properly tag the build
-          fetch-depth: 0
           ref: ${{ inputs.tag-name }}
           persist-credentials: false
 
@@ -73,7 +69,6 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-          context: git
           tags: |
             type=ref,event=branch
             type=semver,pattern={{version}}

@@ -12,7 +12,7 @@ import pytest
 from click.testing import CliRunner
 
 from subliminal.cli import generate_default_config
-from subliminal.cli import subliminal as subliminal_cli
+from subliminal.cli.cli import subliminal as subliminal_cli
 from tests.conftest import ensure
 
 if TYPE_CHECKING:

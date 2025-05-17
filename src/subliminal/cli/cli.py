@@ -19,7 +19,7 @@ from subliminal import (
     region,
 )
 
-from .commands import cache, cache_file, download
+from .commands import download
 from .helpers import (
     MutexLock,
     options_from_providers,
@@ -40,6 +40,7 @@ def configure(ctx: click.Context, param: click.Parameter | None, filename: str |
 
 
 dirs = PlatformDirs('subliminal')
+cache_file = 'subliminal.dbm'
 default_config_path = dirs.user_config_path / 'subliminal.toml'
 
 
@@ -212,9 +213,25 @@ def subliminal(
             provider_configs[provider]['password'] = option_value[1]
 
 
+@subliminal.command()
+@click.option(
+    '--clear-subliminal',
+    is_flag=True,
+    help='Clear subliminal cache. Use this ONLY if your cache is corrupted or if you experience issues.',
+)
+@click.pass_context
+def cache(ctx: click.Context, clear_subliminal: bool) -> None:
+    """Cache management."""
+    if clear_subliminal and ctx.parent and 'cache_dir' in ctx.parent.params:
+        cache_dir_path = Path(ctx.parent.params['cache_dir'])
+        for file in (cache_dir_path / cache_file).glob('*'):  # pragma: no cover
+            file.unlink()
+        click.echo("Subliminal's cache cleared.")
+    else:
+        click.echo('Nothing done.')
+
+
 # Add commands
-# Cache management
-subliminal.add_command(cache)
 # Download best subtitle
 subliminal.add_command(download)
 

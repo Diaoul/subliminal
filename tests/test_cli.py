@@ -5,8 +5,6 @@ import os
 from difflib import SequenceMatcher
 from pathlib import Path
 from textwrap import dedent
-from typing import TYPE_CHECKING
-from unittest.mock import Mock
 
 import pytest
 from click.testing import CliRunner
@@ -15,9 +13,6 @@ from subliminal.cli import generate_default_config
 from subliminal.cli.cli import subliminal as subliminal_cli
 from tests.conftest import ensure
 
-if TYPE_CHECKING:
-    from collections.abc import Generator
-
 # Core test
 # Core test
 pytestmark = [
@@ -25,21 +20,6 @@ pytestmark = [
     pytest.mark.usefixtures('provider_manager'),
     pytest.mark.usefixtures('disabled_providers'),
 ]
-
-
-@pytest.fixture
-def _mock_save_subtitles() -> Generator[None, None, None]:
-    import subliminal.cli
-
-    original_save_subtitles = subliminal.cli.save_subtitles
-
-    # Use mock
-    subliminal.cli.save_subtitles = Mock()
-
-    yield
-
-    # Restore value
-    subliminal.cli.save_subtitles = original_save_subtitles
 
 
 def test_cli_help() -> None:

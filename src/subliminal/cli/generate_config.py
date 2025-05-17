@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import logging
-from typing import Any
 
 import click
 import tomlkit
@@ -131,12 +130,3 @@ def generate_default_config(*, compact: bool = True, commented: bool = True) -> 
             doc.add(tomlkit.nl())
 
     return str(tomlkit.dumps(doc))
-
-
-def plural(quantity: int, name: str, *, bold: bool = True, **kwargs: Any) -> str:
-    """Format a quantity with plural."""
-    return '{} {}{}'.format(
-        click.style(str(quantity), bold=bold, **kwargs),
-        name,
-        's' if quantity > 1 else '',
-    )

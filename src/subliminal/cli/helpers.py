@@ -124,14 +124,6 @@ def read_configuration(filename: str | os.PathLike) -> dict[str, dict[str, Any]]
     }
 
 
-def configure(ctx: click.Context, param: click.Parameter | None, filename: str | os.PathLike) -> None:
-    """Update :class:`click.Context` based on a configuration file."""
-    config = read_configuration(filename)
-
-    ctx.obj = config['obj']
-    ctx.default_map = config['default_map']
-
-
 providers_config = OptionGroup('Providers configuration')
 refiners_config = OptionGroup('Refiners configuration')
 

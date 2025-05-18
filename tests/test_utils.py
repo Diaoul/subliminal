@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import datetime
-from typing import TYPE_CHECKING, Any, Callable
+from typing import TYPE_CHECKING, Any
 from xmlrpc.client import ProtocolError
 
 import pytest
@@ -14,9 +14,7 @@ from subliminal.utils import (
     decorate_imdb_id,
     ensure_list,
     get_age,
-    get_argument_doc,
     get_extend_and_ignore_union,
-    get_parameters_from_signature,
     handle_exception,
     matches_extended_title,
     merge_extend_and_ignore_unions,
@@ -24,15 +22,12 @@ from subliminal.utils import (
     sanitize,
     sanitize_id,
     sanitize_release_group,
-    split_doc_args,
     trim_pattern,
 )
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
     from pathlib import Path
-
-    from babelfish import Language  # type: ignore[import-untyped]
 
 # Core test
 pytestmark = pytest.mark.core
@@ -263,66 +258,6 @@ def test_merge_extend_and_ignore_unions(
 def test_clip(value: float, minimum: float | None, maximum: float | None, expected: float) -> None:
     out = clip(value, minimum, maximum)
     assert out == expected
-
-
-def test_split_doc_args(docstring: str) -> None:
-    parts = split_doc_args(docstring)
-    assert len(parts) == 5
-    assert all(p.startswith(':param ') for p in parts)
-    assert '\n' in parts[4]
-
-
-@pytest.mark.parametrize('is_class', [False, True])
-def test_get_argument_doc(docstring: str, is_class: bool) -> None:
-    obj: Callable
-    if is_class:
-
-        def obj() -> None:
-            pass
-
-    else:
-
-        class obj:  # type: ignore[no-redef]
-            pass
-
-    obj.__doc__ = docstring
-
-    d = get_argument_doc(obj)
-    assert d == {
-        'language': 'the language of the subtitles.',
-        'keyword': 'the query term.',
-        'season': 'the season number.',
-        'episode': 'the episode number.',
-        'year': 'the video year and on another line.',
-    }
-
-
-def test_get_parameters_from_signature(docstring: str) -> None:
-    def fun(
-        language: Language | None = None,
-        keyword: str = 'key',
-        season: int = 0,
-        episode: int | None = None,
-        year: str | None = None,
-        no_desc: bool = False,
-    ) -> None:
-        pass
-
-    fun.__doc__ = docstring
-
-    params = get_parameters_from_signature(fun)
-
-    assert len(params) == 6
-
-    assert params[0]['name'] == 'language'
-    assert params[0]['default'] is None
-    assert params[0]['annotation'] == 'Language | None'
-    assert params[0]['desc'] == 'the language of the subtitles.'
-
-    assert params[5]['name'] == 'no_desc'
-    assert params[5]['default'] is False
-    assert params[5]['annotation'] == 'bool'
-    assert params[5]['desc'] is None
 
 
 @pytest.mark.parametrize(

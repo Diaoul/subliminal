@@ -6,8 +6,10 @@ from __future__ import annotations
 import logging
 import os
 import pathlib
+import re
 import traceback
 from collections.abc import Mapping
+from inspect import signature
 from typing import TYPE_CHECKING, Any
 
 import click
@@ -20,7 +22,6 @@ from subliminal import (
     provider_manager,
     refiner_manager,
 )
-from subliminal.utils import get_parameters_from_signature
 
 if TYPE_CHECKING:
     from collections.abc import Callable, MutableMapping, Sequence
@@ -54,6 +55,50 @@ class MutexLock(AbstractFileLock):  # pragma: no cover
     def release_write_lock(self) -> None:
         """Release a writer lock."""
         return self.mutex.release_write_lock()  # type: ignore[no-untyped-call,no-any-return]
+
+
+def split_doc_args(args: str | None) -> list[str]:
+    """Split the arguments of a docstring (in Sphinx docstyle)."""
+    if not args:  # pragma: no cover
+        return []
+    split_regex = re.compile(r'(?m):((param|type)\s|(return|yield|raise|rtype|ytype)s?:)')
+    split_indices = [m.start() for m in split_regex.finditer(args)]
+    if len(split_indices) == 0:  # pragma: no cover
+        return []
+    next_indices = [*split_indices[1:], None]
+    parts = [args[i:j].strip() for i, j in zip(split_indices, next_indices)]
+    return [p for p in parts if p.startswith(':param')]
+
+
+def get_argument_doc(fun: Callable) -> dict[str, str]:
+    """Get documentation for the arguments of the function."""
+    param_regex = re.compile(
+        r'^:param\s+(?P<type>[\w\s\[\].,:`~!]+\s+|\([^\)]+\)\s+)?(?P<param>\w+):\s+(?P<doc>[^:]*)$'
+    )
+
+    parts = split_doc_args(fun.__doc__)
+
+    ret = {}
+    for p in parts:
+        m = param_regex.match(p)
+        if not m:  # pragma: no cover
+            continue
+        _, name, desc = m.groups()
+        if name is None:  # pragma: no cover
+            continue
+        ret[name] = ' '.join(desc.strip().split())
+
+    return ret
+
+
+def get_parameters_from_signature(fun: Callable) -> list[Parameter]:
+    """Get keyword arguments with default and type."""
+    sig = signature(fun)
+    doc = get_argument_doc(fun)
+    return [
+        {'name': name, 'default': p.default, 'annotation': p.annotation, 'desc': doc.get(name)}
+        for name, p in sig.parameters.items()
+    ]
 
 
 PROVIDERS_OPTIONS_TEMPLATE = '_{ext}__{plugin}__{key}'

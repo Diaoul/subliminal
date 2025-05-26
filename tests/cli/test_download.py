@@ -2,21 +2,15 @@
 from __future__ import annotations
 
 import os
-from difflib import SequenceMatcher
 from pathlib import Path
 from textwrap import dedent
-from typing import TYPE_CHECKING
-from unittest.mock import Mock
 
 import pytest
 from click.testing import CliRunner
-
-from subliminal.cli import generate_default_config
-from subliminal.cli import subliminal as subliminal_cli
 from tests.conftest import ensure
 
-if TYPE_CHECKING:
-    from collections.abc import Generator
+from subliminal.cli import generate_default_config
+from subliminal.cli.cli import subliminal as subliminal_cli
 
 # Core test
 # Core test
@@ -25,42 +19,6 @@ pytestmark = [
     pytest.mark.usefixtures('provider_manager'),
     pytest.mark.usefixtures('disabled_providers'),
 ]
-
-
-@pytest.fixture
-def _mock_save_subtitles() -> Generator[None, None, None]:
-    import subliminal.cli
-
-    original_save_subtitles = subliminal.cli.save_subtitles
-
-    # Use mock
-    subliminal.cli.save_subtitles = Mock()
-
-    yield
-
-    # Restore value
-    subliminal.cli.save_subtitles = original_save_subtitles
-
-
-def test_cli_help() -> None:
-    runner = CliRunner()
-    result = runner.invoke(subliminal_cli, ['--help'])
-    assert result.exit_code == 0
-    assert result.output.startswith('Usage: subliminal [OPTIONS] COMMAND [ARGS]...')
-
-
-def test_cli_cache() -> None:
-    runner = CliRunner()
-
-    # Do nothing
-    result = runner.invoke(subliminal_cli, ['cache'])
-    assert result.exit_code == 0
-    assert result.output == 'Nothing done.\n'
-
-    # Clean cache
-    result = runner.invoke(subliminal_cli, ['cache', '--clear-subliminal'])
-    assert result.exit_code == 0
-    assert result.output == "Subliminal's cache cleared.\n"
 
 
 def test_cli_download_wrong_language(tmp_path: os.PathLike[str]) -> None:
@@ -525,24 +483,3 @@ def test_cli_download_with_generated_config(tmp_path: os.PathLike[str]) -> None:
         # collect files recursively
         files = [os.fspath(p.relative_to(td)) for p in Path(td).rglob('*')]
         assert subtitle_filename in files
-
-
-def test_generated_config() -> None:
-    doc = generate_default_config(commented=False)
-    doc_commented = generate_default_config(commented=True)
-
-    doc_force_commented = ''.join(
-        [
-            f'# {line}' if line and not line.startswith(('[', '#', '\n')) else line
-            for line in doc.splitlines(keepends=True)
-        ]
-    )
-
-    x = SequenceMatcher(None, doc_commented, doc_force_commented)
-    blocks = x.get_matching_blocks()
-
-    assert len(blocks) == 2
-
-    length = len(doc_commented)
-    for match in blocks:
-        assert match.size == 0 or match.size == length

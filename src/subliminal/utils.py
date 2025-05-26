@@ -10,7 +10,6 @@ import re
 import socket
 from collections.abc import Iterable
 from datetime import datetime, timedelta, timezone
-from inspect import signature
 from types import GeneratorType
 from typing import TYPE_CHECKING, Any, Callable, Generic, TypeVar, cast, overload
 from xmlrpc.client import ProtocolError
@@ -362,50 +361,6 @@ def clip(value: float, minimum: float | None, maximum: float | None) -> float:
     if minimum is not None:
         value = max(value, minimum)
     return value
-
-
-def split_doc_args(args: str | None) -> list[str]:
-    """Split the arguments of a docstring (in Sphinx docstyle)."""
-    if not args:  # pragma: no cover
-        return []
-    split_regex = re.compile(r'(?m):((param|type)\s|(return|yield|raise|rtype|ytype)s?:)')
-    split_indices = [m.start() for m in split_regex.finditer(args)]
-    if len(split_indices) == 0:  # pragma: no cover
-        return []
-    next_indices = [*split_indices[1:], None]
-    parts = [args[i:j].strip() for i, j in zip(split_indices, next_indices)]
-    return [p for p in parts if p.startswith(':param')]
-
-
-def get_argument_doc(fun: Callable) -> dict[str, str]:
-    """Get documentation for the arguments of the function."""
-    param_regex = re.compile(
-        r'^:param\s+(?P<type>[\w\s\[\].,:`~!]+\s+|\([^\)]+\)\s+)?(?P<param>\w+):\s+(?P<doc>[^:]*)$'
-    )
-
-    parts = split_doc_args(fun.__doc__)
-
-    ret = {}
-    for p in parts:
-        m = param_regex.match(p)
-        if not m:  # pragma: no cover
-            continue
-        _, name, desc = m.groups()
-        if name is None:  # pragma: no cover
-            continue
-        ret[name] = ' '.join(desc.strip().split())
-
-    return ret
-
-
-def get_parameters_from_signature(fun: Callable) -> list[Parameter]:
-    """Get keyword arguments with default and type."""
-    sig = signature(fun)
-    doc = get_argument_doc(fun)
-    return [
-        {'name': name, 'default': p.default, 'annotation': p.annotation, 'desc': doc.get(name)}
-        for name, p in sig.parameters.items()
-    ]
 
 
 def trim_pattern(string: str, patterns: str | Sequence[str], *, sep: str = '') -> tuple[str, str]:

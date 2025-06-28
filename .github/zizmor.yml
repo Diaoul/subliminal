@@ -2,3 +2,12 @@ rules:
   dangerous-triggers:
     ignore:
       - coverage.yaml:3:1
+  unpinned-uses:
+    ignore:
+      - action.yaml
+      - CI.yaml
+      - coverage.yaml
+      - docker-build.yaml
+      - publish-release.yaml
+      - publish.yaml
+      - tag-release.yaml

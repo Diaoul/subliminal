@@ -73,6 +73,7 @@ class SubtitulamosSubtitle(Subtitle):
         self,
         language: Language,
         subtitle_id: str = '',
+        *,
         hearing_impaired: bool | None = None,
         page_link: str | None = None,
         series: str | None = None,

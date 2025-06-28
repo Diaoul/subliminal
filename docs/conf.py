@@ -304,7 +304,7 @@ intersphinx_mapping = {
     'dogpilecache': ('https://dogpilecache.sqlalchemy.org/en/latest', None),
     'stevedore': ('https://docs.openstack.org/stevedore/latest', None),
     'click': ('https://click.palletsprojects.com/en/latest/', None),
-    'requests': ('https://docs.python-requests.org/en/latest/', None),
+    'requests': ('https://https://requests.readthedocs.io/en/latest/', None),
     'sympy': ('https://docs.sympy.org/latest/', None),
     'bs4': ('https://www.crummy.com/software/BeautifulSoup/bs4/doc/', None),
     'importlib.metadata': ('https://docs.python.org/3/', '_intersphinx/importlib_metadata_objects.inv'),

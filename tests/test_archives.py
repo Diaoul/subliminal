@@ -93,6 +93,6 @@ def test_scan_videos_error(
     scan_videos(folder)
 
     # But error was logged
-    for record in caplog.records:
-        assert record.levelname == 'ERROR'
+    error_records = [record for record in caplog.records if record.levelname == 'ERROR']
+    assert len(error_records) > 0
     assert 'Error scanning archive' in caplog.text

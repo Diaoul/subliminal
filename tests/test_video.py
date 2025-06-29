@@ -236,3 +236,18 @@ def test_episode_fromname(episodes: dict[str, Episode]) -> None:
     assert video.title is None
     assert video.year is None
     assert video.tvdb_id is None
+
+
+def test_episode_fromname_guessit_bug(episodes: dict[str, Episode]) -> None:
+    # Only works with Video.fromname, not Episode.fromname
+    video = Video.fromname(episodes['adam-12_s01e02'].name)
+    assert isinstance(video, Episode)
+    assert video.name == episodes['adam-12_s01e02'].name
+    assert video.release_group == episodes['adam-12_s01e02'].release_group
+    assert video.resolution == episodes['adam-12_s01e02'].resolution
+    assert video.video_codec == episodes['adam-12_s01e02'].video_codec
+    assert video.series == episodes['adam-12_s01e02'].series
+    assert video.season == episodes['adam-12_s01e02'].season
+    assert video.episode == episodes['adam-12_s01e02'].episode
+    assert video.title is None
+    assert video.year == episodes['adam-12_s01e02'].year

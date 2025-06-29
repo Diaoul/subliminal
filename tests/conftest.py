@@ -507,6 +507,15 @@ def episodes() -> dict[str, Episode]:
             2,
             year=1914,
         ),
+        'adam-12_s01e02': Episode(
+            'Adam-12 1968 Season 1 Complete x264 [i_c]/Adam-12 S01E02 Log 141 The Color TV Bandit.mkv',
+            'Adam 12',
+            1,
+            2,
+            year=1968,
+            release_group='[i_c]',
+            video_codec='H.264',
+        ),
     }
 
 

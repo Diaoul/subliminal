@@ -13,6 +13,7 @@ from subliminal.utils import (
     creation_date,
     decorate_imdb_id,
     ensure_list,
+    ensure_str,
     get_age,
     get_extend_and_ignore_union,
     handle_exception,
@@ -166,6 +167,24 @@ def test_ensure_list() -> None:
     ret = ensure_list({'a', 'b'})  # type: ignore[arg-type]
     assert isinstance(ret, list)
     assert set(ret) == {'a', 'b'}
+
+
+def test_ensure_str() -> None:
+    ret: str = ensure_str(None)
+    assert isinstance(ret, str)
+    assert ret == ''
+
+    ret = ensure_str('a')
+    assert isinstance(ret, str)
+    assert ret == 'a'
+
+    ret = ensure_str(('a', 'b'))
+    assert isinstance(ret, str)
+    assert ret == 'a b'
+
+    ret = ensure_str(['a', 'b'], sep=' - ')
+    assert isinstance(ret, str)
+    assert ret == 'a - b'
 
 
 @pytest.mark.parametrize(

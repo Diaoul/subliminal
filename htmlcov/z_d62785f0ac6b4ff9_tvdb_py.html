@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Coverage for src/subliminal/refiners/tvdb.py: 86%</title>
     <link rel="icon" sizes="32x32" href="favicon_32_cb_58284776.png">
-    <link rel="stylesheet" href="style_cb_8e611ae1.css" type="text/css">
+    <link rel="stylesheet" href="style_cb_81f8c14c.css" type="text/css">
     <script src="coverage_html_cb_6fb7b396.js" defer></script>
 </head>
 <body class="pyfile">
@@ -55,8 +55,8 @@
             </div>
         </aside>
         <h2>
-            <span class="text">225 statements &nbsp;</span>
-            <button type="button" class="run button_toggle_run" value="run" data-shortcut="r" title="Toggle lines run">200<span class="text"> run</span></button>
+            <span class="text">227 statements &nbsp;</span>
+            <button type="button" class="run button_toggle_run" value="run" data-shortcut="r" title="Toggle lines run">202<span class="text"> run</span></button>
             <button type="button" class="mis show_mis button_toggle_mis" value="mis" data-shortcut="m" title="Toggle lines missing">25<span class="text"> missing</span></button>
             <button type="button" class="exc show_exc button_toggle_exc" value="exc" data-shortcut="x" title="Toggle lines excluded">6<span class="text"> excluded</span></button>
             <button type="button" class="par run show_par button_toggle_par" value="par" data-shortcut="p" title="Toggle lines partially run">14<span class="text"> partial</span></button>
@@ -66,8 +66,8 @@
             <a id="indexLink" class="nav" href="index.html">&Hat; index</a> &nbsp; &nbsp;
             <a id="nextFileLink" class="nav" href="index.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
-            <a class="nav" href="https://coverage.readthedocs.io/en/7.8.1">coverage.py v7.8.1</a>,
-            created at 2025-05-26 22:51 +0000
+            <a class="nav" href="https://coverage.readthedocs.io/en/7.9.1">coverage.py v7.9.1</a>,
+            created at 2025-06-29 00:33 +0000
         </p>
         <aside class="hidden">
             <button type="button" class="button_next_chunk" data-shortcut="j"></button>
@@ -547,11 +547,11 @@
     <p class="pln"><span class="n"><a id="t463" href="#t463">463</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t464" href="#t464">464</a></span><span class="t">    <span class="com"># add series information</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t465" href="#t465">465</a></span><span class="t">    <span class="nam">logger</span><span class="op">.</span><span class="nam">debug</span><span class="op">(</span><span class="str">'Found series %r'</span><span class="op">,</span> <span class="nam">series</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t466" href="#t466">466</a></span><span class="t">    <span class="nam">video</span><span class="op">.</span><span class="nam">series</span> <span class="op">=</span> <span class="nam">matching_result</span><span class="op">[</span><span class="str">'match'</span><span class="op">]</span><span class="op">[</span><span class="str">'series'</span><span class="op">]</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t466" href="#t466">466</a></span><span class="t">    <span class="nam">video</span><span class="op">.</span><span class="nam">series</span> <span class="op">=</span> <span class="nam">str</span><span class="op">(</span><span class="nam">matching_result</span><span class="op">[</span><span class="str">'match'</span><span class="op">]</span><span class="op">[</span><span class="str">'series'</span><span class="op">]</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t467" href="#t467">467</a></span><span class="t">    <span class="nam">video</span><span class="op">.</span><span class="nam">alternative_series</span><span class="op">.</span><span class="nam">extend</span><span class="op">(</span><span class="nam">series</span><span class="op">[</span><span class="str">'aliases'</span><span class="op">]</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t468" href="#t468">468</a></span><span class="t">    <span class="nam">video</span><span class="op">.</span><span class="nam">year</span> <span class="op">=</span> <span class="nam">matching_result</span><span class="op">[</span><span class="str">'match'</span><span class="op">]</span><span class="op">[</span><span class="str">'year'</span><span class="op">]</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t468" href="#t468">468</a></span><span class="t">    <span class="nam">video</span><span class="op">.</span><span class="nam">year</span> <span class="op">=</span> <span class="nam">int_or_none</span><span class="op">(</span><span class="nam">matching_result</span><span class="op">[</span><span class="str">'match'</span><span class="op">]</span><span class="op">[</span><span class="str">'year'</span><span class="op">]</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t469" href="#t469">469</a></span><span class="t">    <span class="nam">video</span><span class="op">.</span><span class="nam">country</span> <span class="op">=</span> <span class="nam">matching_result</span><span class="op">[</span><span class="str">'match'</span><span class="op">]</span><span class="op">[</span><span class="str">'country'</span><span class="op">]</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t470" href="#t470">470</a></span><span class="t">    <span class="nam">video</span><span class="op">.</span><span class="nam">original_series</span> <span class="op">=</span> <span class="nam">matching_result</span><span class="op">[</span><span class="str">'match'</span><span class="op">]</span><span class="op">[</span><span class="str">'original_series'</span><span class="op">]</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t470" href="#t470">470</a></span><span class="t">    <span class="nam">video</span><span class="op">.</span><span class="nam">original_series</span> <span class="op">=</span> <span class="nam">bool</span><span class="op">(</span><span class="nam">matching_result</span><span class="op">[</span><span class="str">'match'</span><span class="op">]</span><span class="op">[</span><span class="str">'original_series'</span><span class="op">]</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t471" href="#t471">471</a></span><span class="t">    <span class="nam">video</span><span class="op">.</span><span class="nam">series_tvdb_id</span> <span class="op">=</span> <span class="nam">sanitize_id</span><span class="op">(</span><span class="nam">series</span><span class="op">[</span><span class="str">'id'</span><span class="op">]</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t472" href="#t472">472</a></span><span class="t">    <span class="nam">video</span><span class="op">.</span><span class="nam">series_imdb_id</span> <span class="op">=</span> <span class="nam">decorate_imdb_id</span><span class="op">(</span><span class="nam">sanitize_id</span><span class="op">(</span><span class="nam">series</span><span class="op">[</span><span class="str">'imdbId'</span><span class="op">]</span> <span class="key">or</span> <span class="key">None</span><span class="op">)</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t473" href="#t473">473</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
@@ -569,6 +569,11 @@
     <p class="run"><span class="n"><a id="t485" href="#t485">485</a></span><span class="t">    <span class="nam">video</span><span class="op">.</span><span class="nam">imdb_id</span> <span class="op">=</span> <span class="nam">decorate_imdb_id</span><span class="op">(</span><span class="nam">sanitize_id</span><span class="op">(</span><span class="nam">episode</span><span class="op">[</span><span class="str">'imdbId'</span><span class="op">]</span> <span class="key">or</span> <span class="key">None</span><span class="op">)</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t486" href="#t486">486</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t487" href="#t487">487</a></span><span class="t">    <span class="key">return</span> <span class="nam">video</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t488" href="#t488">488</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t489" href="#t489">489</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t490" href="#t490">490</a></span><span class="t"><span class="key">def</span> <span class="nam">int_or_none</span><span class="op">(</span><span class="nam">value</span><span class="op">:</span> <span class="nam">Any</span><span class="op">)</span> <span class="op">-></span> <span class="nam">int</span> <span class="op">|</span> <span class="key">None</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t491" href="#t491">491</a></span><span class="t">    <span class="str">"""Convert to int or None."""</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t492" href="#t492">492</a></span><span class="t">    <span class="key">return</span> <span class="key">None</span> <span class="key">if</span> <span class="nam">value</span> <span class="key">is</span> <span class="key">None</span> <span class="key">else</span> <span class="nam">int</span><span class="op">(</span><span class="nam">value</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
 </main>
 <footer>
     <div class="content">
@@ -577,8 +582,8 @@
             <a class="nav" href="index.html">&Hat; index</a> &nbsp; &nbsp;
             <a class="nav" href="index.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
-            <a class="nav" href="https://coverage.readthedocs.io/en/7.8.1">coverage.py v7.8.1</a>,
-            created at 2025-05-26 22:51 +0000
+            <a class="nav" href="https://coverage.readthedocs.io/en/7.9.1">coverage.py v7.9.1</a>,
+            created at 2025-06-29 00:33 +0000
         </p>
     </div>
 </footer>

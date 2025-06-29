@@ -1,4 +1,3 @@
-# ruff: noqa: PT011, SIM115
 from __future__ import annotations
 
 from difflib import SequenceMatcher

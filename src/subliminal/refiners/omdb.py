@@ -67,17 +67,15 @@ class OMDBClient:
         type: str | None = None,  # noqa: A002
         year: int | None = None,
         plot: str = 'short',
-    ) -> dict:
+    ) -> dict[str, Any]:
         """Search with the specified parameters."""
         # build the params
         is_movie: bool | None = None if type is None else (type == 'movie')
         if id is not None:
-            res = self.search_by_id(id, is_movie=is_movie, plot=plot)
-            return cast('dict', res)
+            return cast('dict[str, Any]', self.search_by_id(id, is_movie=is_movie, plot=plot))
 
         if title is not None:
-            res = self.search_by_title(title, is_movie=is_movie, year=year, plot=plot)
-            return cast('dict', res)
+            return cast('dict[str, Any]', self.search_by_title(title, is_movie=is_movie, year=year, plot=plot))
 
         # missing one required argument
         msg = 'At least id or title is required'
@@ -87,9 +85,9 @@ class OMDBClient:
     def search_by_id(
         self,
         imdb_id: int,
-        is_movie: bool | None = None,
+        is_movie: bool | None = None,  # noqa: FBT001
         plot: str = 'short',
-    ) -> dict:
+    ) -> dict[str, Any]:
         """Search by IMDB id."""
         # build the params
         params: dict[str, Any] = {'i': imdb_id, 'plot': plot}
@@ -106,18 +104,18 @@ class OMDBClient:
 
         # check response status
         if j['Response'] == 'False':
-            return {}
+            return cast('dict[str, Any]', {})
 
-        return cast('dict', j)
+        return cast('dict[str, Any]', j)
 
     @region.cache_on_arguments(expiration_time=REFINER_EXPIRATION_TIME)
     def search_by_title(
         self,
         title: str,
-        is_movie: bool | None = None,
+        is_movie: bool | None = None,  # noqa: FBT001
         year: int | None = None,
         plot: str = 'short',
-    ) -> dict:
+    ) -> dict[str, Any]:
         """Search by title."""
         # build the params
         params: dict[str, Any] = {'t': title, 'plot': plot}
@@ -136,18 +134,18 @@ class OMDBClient:
 
         # check response status
         if j['Response'] == 'False':
-            return {}
+            return cast('dict[str, Any]', {})
 
-        return cast('dict', j)
+        return cast('dict[str, Any]', j)
 
     @region.cache_on_arguments(expiration_time=REFINER_EXPIRATION_TIME)
     def search(
         self,
         title: str,
-        is_movie: bool | None = None,
+        is_movie: bool | None = None,  # noqa: FBT001
         year: int | None = None,
         page: int = 1,
-    ) -> dict:
+    ) -> dict[str, Any]:
         """Search with the specified parameters."""
         # build the params
         params: dict[str, Any] = {'s': title, 'page': page}
@@ -166,26 +164,31 @@ class OMDBClient:
 
         # check response status
         if j['Response'] == 'False':
-            return {}
+            return cast('dict[str, Any]', {})
 
-        return cast('dict', j)
+        return cast('dict[str, Any]', j)
 
     @region.cache_on_arguments(expiration_time=REFINER_EXPIRATION_TIME)
-    def search_all(self, title: str, is_movie: bool | None = None, year: int | None = None) -> list:
+    def search_all(
+        self,
+        title: str,
+        is_movie: bool | None = None,  # noqa: FBT001
+        year: int | None = None,
+    ) -> list[dict[str, Any]]:
         """Search with the specified parameters and return all the results."""
         results = self.search(title=title, is_movie=is_movie, year=year)
         if not results:  # pragma: no cover
             return []
 
         # fetch all paginated results
-        all_results = cast('list', results['Search'])
+        all_results: list[dict[str, Any]] = cast('list[dict[str, Any]]', results['Search'])
         total_results = int(results['totalResults'])
         page = 1
         while total_results > page * 10:
             page += 1
             results = self.search(title=title, is_movie=is_movie, year=year, page=page)
             if results:  # pragma: no branch
-                all_results.extend(cast('list', results['Search']))
+                all_results.extend(cast('list[dict[str, Any]]', results['Search']))
 
         return all_results
 

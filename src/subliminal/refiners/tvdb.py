@@ -463,11 +463,11 @@ def refine(video: Video, *, apikey: str | None = None, force: bool = False, **kw
 
     # add series information
     logger.debug('Found series %r', series)
-    video.series = matching_result['match']['series']
+    video.series = str(matching_result['match']['series'])
     video.alternative_series.extend(series['aliases'])
-    video.year = matching_result['match']['year']
+    video.year = int_or_none(matching_result['match']['year'])
     video.country = matching_result['match']['country']
-    video.original_series = matching_result['match']['original_series']
+    video.original_series = bool(matching_result['match']['original_series'])
     video.series_tvdb_id = sanitize_id(series['id'])
     video.series_imdb_id = decorate_imdb_id(sanitize_id(series['imdbId'] or None))
 
@@ -485,3 +485,8 @@ def refine(video: Video, *, apikey: str | None = None, force: bool = False, **kw
     video.imdb_id = decorate_imdb_id(sanitize_id(episode['imdbId'] or None))
 
     return video
+
+
+def int_or_none(value: Any) -> int | None:
+    """Convert to int or None."""
+    return None if value is None else int(value)

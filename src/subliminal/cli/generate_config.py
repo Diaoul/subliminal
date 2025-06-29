@@ -1,4 +1,3 @@
-# ruff: noqa: FBT001
 """Subliminal uses `click <https://click.palletsprojects.com>`_ to provide a :abbr:`CLI (command-line interface)`."""
 
 from __future__ import annotations

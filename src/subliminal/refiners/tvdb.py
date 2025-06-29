@@ -487,6 +487,6 @@ def refine(video: Video, *, apikey: str | None = None, force: bool = False, **kw
     return video
 
 
-def int_or_none(value: int | None) -> int | None:
+def int_or_none(value: Any) -> int | None:
     """Convert to int or None."""
     return None if value is None else int(value)

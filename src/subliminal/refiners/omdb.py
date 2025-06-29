@@ -72,10 +72,10 @@ class OMDBClient:
         # build the params
         is_movie: bool | None = None if type is None else (type == 'movie')
         if id is not None:
-            return self.search_by_id(id, is_movie=is_movie, plot=plot)
+            return cast('dict[str, Any]', self.search_by_id(id, is_movie=is_movie, plot=plot))
 
         if title is not None:
-            return self.search_by_title(title, is_movie=is_movie, year=year, plot=plot)
+            return cast('dict[str, Any]', self.search_by_title(title, is_movie=is_movie, year=year, plot=plot))
 
         # missing one required argument
         msg = 'At least id or title is required'
@@ -85,8 +85,7 @@ class OMDBClient:
     def search_by_id(
         self,
         imdb_id: int,
-        *,
-        is_movie: bool | None = None,
+        is_movie: bool | None = None,  # noqa: FBT001
         plot: str = 'short',
     ) -> dict[str, Any]:
         """Search by IMDB id."""
@@ -113,8 +112,7 @@ class OMDBClient:
     def search_by_title(
         self,
         title: str,
-        *,
-        is_movie: bool | None = None,
+        is_movie: bool | None = None,  # noqa: FBT001
         year: int | None = None,
         plot: str = 'short',
     ) -> dict[str, Any]:
@@ -144,8 +142,7 @@ class OMDBClient:
     def search(
         self,
         title: str,
-        *,
-        is_movie: bool | None = None,
+        is_movie: bool | None = None,  # noqa: FBT001
         year: int | None = None,
         page: int = 1,
     ) -> dict[str, Any]:
@@ -175,8 +172,7 @@ class OMDBClient:
     def search_all(
         self,
         title: str,
-        *,
-        is_movie: bool | None = None,
+        is_movie: bool | None = None,  # noqa: FBT001
         year: int | None = None,
     ) -> list[dict[str, Any]]:
         """Search with the specified parameters and return all the results."""

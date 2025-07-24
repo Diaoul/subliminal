@@ -204,6 +204,17 @@ def ensure_list(value: T | Sequence[T] | None) -> list[T]:
     return list(value)
 
 
+def ensure_str(value: Any, *, sep: str = ' ') -> str:
+    """Ensure to return a str."""
+    if value is None:
+        return ''
+    # If a list of str, join them
+    if is_iterable(value):
+        return sep.join([str(v) for v in value])
+    # Make sure the output is a string
+    return str(value)
+
+
 def modification_date(filepath: os.PathLike | str) -> float:
     """Get the modification date of the file."""
     # Use the more cross-platform modification time.

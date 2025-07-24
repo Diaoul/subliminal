@@ -9,7 +9,7 @@ from typing import TYPE_CHECKING, Any
 from guessit import guessit  # type: ignore[import-untyped]
 
 from subliminal.exceptions import GuessingError
-from subliminal.utils import ensure_list, get_age, matches_extended_title
+from subliminal.utils import ensure_list, ensure_str, get_age, matches_extended_title
 
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
@@ -388,7 +388,7 @@ class Episode(Video):
 
         return cls(
             name,
-            series=guess['title'],
+            series=ensure_str(guess['title']),
             season=guess.get('season', 1),
             episodes=guess.get('episode', []),
             title=guess.get('episode_title'),

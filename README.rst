@@ -86,6 +86,14 @@ Run subliminal in a docker container::
 
     $ docker run --rm --name subliminal -v subliminal_cache:/usr/src/cache -v /tvshows:/tvshows -it ghcr.io/diaoul/subliminal download -l en /tvshows/The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.mp4
 
+Debugging
+^^^^^^^^^
+
+By default, subliminal output is minimal. Run with the `--debug` flag before the `download` command to get more information::
+
+    $ subliminal --debug download -l en The.Big.Bang.Theory.S05E18.HDTV.x264-LOL.mp4
+
+
 Installation
 ------------
 For a better isolation with your system you should use a dedicated virtualenv.

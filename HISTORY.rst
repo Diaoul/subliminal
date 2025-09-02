@@ -2,6 +2,33 @@
 
 .. towncrier release notes start
 
+2.4.0 (2025-09-03)
+^^^^^^^^^^^^^^^^^^
+
+Changes
+-------
+
+- score: add fps match, remove hearing_impaired match (`#1250 <https://github.com/Diaoul/subliminal/issues/1250>`__)
+
+
+CLI Changes
+-----------
+
+- cli: refactor the cli.py file into a folder (`#1299 <https://github.com/Diaoul/subliminal/issues/1299>`__)
+
+
+Documentation
+-------------
+
+- doc: add a section in the README to run subliminal with the ``--debug`` flag. (`#1308 <https://github.com/Diaoul/subliminal/issues/1308>`__)
+
+
+Misc
+----
+
+- ensure Episode.series is always a string, not a list from guessit bug (`#1304 <https://github.com/Diaoul/subliminal/issues/1304>`__)
+
+
 2.3.2 (2025-05-08)
 ^^^^^^^^^^^^^^^^^^
 

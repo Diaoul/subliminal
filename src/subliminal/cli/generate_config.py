@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+from typing import Any
 
 import click
 import tomlkit
@@ -13,6 +14,61 @@ from .cli import subliminal
 logger = logging.getLogger(__name__)
 
 
+def _validate(name: str, value: Any) -> str | None:
+    """Validate the value to be sure it is a valid TOML value.
+
+    E.g., Sentinel.UNSET was introduced in click 8.3 to be used as default value
+    and it is not convertible to valid TOML.
+    """
+    # Create a stub table to try importing the key and value
+    stub = tomlkit.table()
+    try:
+        stub.add(name, value)
+    except (ValueError, tomlkit.exceptions.ConvertError):
+        return None
+
+    return stub.as_string().strip('\n')
+
+
+def _add_value_to_table(
+    opt: click.Option,
+    table: tomlkit.items.Table,
+    *,
+    name: str | None = None,
+    commented: bool = True,
+) -> str | None:
+    """Add a value to a TOML table."""
+    if opt.name is None:  # pragma: no cover
+        return None
+    # Override option name
+    opt_name = name if name is not None else opt.name
+
+    # Add the description of the option as a comment above
+    if opt.help:
+        table.add(tomlkit.comment(opt.help.capitalize()))
+
+    # Add the option name with default value
+    if opt.default is None:
+        # None value is not defined in TOML, it needs to be a comment
+        table.add(tomlkit.comment(f'{opt_name} = '))
+
+    elif (validated := _validate(opt_name, opt.default)) is not None:
+        # The default value is valid TOML
+        if commented:
+            # Add the string to the final table as a comment
+            table.add(tomlkit.comment(validated))
+        else:
+            # Add the key and valid value to the table
+            table.add(opt_name, opt.default)
+
+    else:
+        # The default value is not valid TOML, add a comment
+        table.add(tomlkit.comment(f'{opt_name} = '))
+
+    # Return the key to keep track of duplicates
+    return opt_name
+
+
 def generate_default_config(*, compact: bool = True, commented: bool = True) -> str:
     """Generate a default configuration file.
 
@@ -20,31 +76,6 @@ def generate_default_config(*, compact: bool = True, commented: bool = True) -> 
     :param commented: if True, all the options are commented out.
     :return: the default configuration as a string.
     """
-
-    def add_value_to_table(opt: click.Option, table: tomlkit.items.Table, *, name: str | None = None) -> str | None:
-        """Add a value to a TOML table."""
-        if opt.name is None:  # pragma: no cover
-            return None
-        # Override option name
-        opt_name = name if name is not None else opt.name
-
-        table.add(tomlkit.comment((opt.help or opt_name).capitalize()))
-        # table.add(tomlkit.comment(f'{opt_name} = {opt.default}'))
-        if opt.default is not None:
-            if not commented:
-                table.add(opt_name, opt.default)
-            else:
-                # Generate the entry in a dumb table
-                dumb = tomlkit.table()
-                dumb.add(opt_name, opt.default)
-                # Add the string to the final table as a comment
-                table.add(tomlkit.comment(dumb.as_string().strip('\n')))
-        else:
-            table.add(tomlkit.comment(f'{opt_name} = '))
-
-        # Return the key to keep track of duplicates
-        return opt_name
-
     # Create TOML document
     doc = tomlkit.document()
     doc.add(tomlkit.comment('Subliminal default configuration file'))
@@ -62,7 +93,7 @@ def generate_default_config(*, compact: bool = True, commented: bool = True) -> 
         if opt.name in ['version', 'config']:
             continue
         # Add key=value to table
-        add_value_to_table(opt, default)
+        _add_value_to_table(opt, default, commented=commented)
         if not compact:  # pragma: no cover
             default.add(tomlkit.nl())
     # Adding the table to the document
@@ -85,7 +116,7 @@ def generate_default_config(*, compact: bool = True, commented: bool = True) -> 
                 # Duplicated option
                 continue
             # Add key=value to table
-            opt_name = add_value_to_table(opt, com_table)
+            opt_name = _add_value_to_table(opt, com_table, commented=commented)
             if opt_name is not None:
                 existing_options.add(opt_name)
             if not compact:  # pragma: no cover
@@ -114,7 +145,7 @@ def generate_default_config(*, compact: bool = True, commented: bool = True) -> 
                 continue
 
             # Add key=value to table
-            add_value_to_table(opt, provider_table, name=opt_name)
+            _add_value_to_table(opt, provider_table, name=opt_name, commented=commented)
             if not compact:  # pragma: no cover
                 provider_table.add(tomlkit.nl())
 

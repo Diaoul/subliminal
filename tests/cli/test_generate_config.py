@@ -2,14 +2,40 @@ from __future__ import annotations
 
 from difflib import SequenceMatcher
 
+import click
 import pytest
+import tomlkit
 
 from subliminal.cli import generate_default_config
+from subliminal.cli.generate_config import _add_value_to_table
 
 # Core test
 pytestmark = [
     pytest.mark.core,
 ]
+
+
+@pytest.mark.parametrize('commented', [False, True])
+def test_add_value_to_table(commented: bool) -> None:
+    table = tomlkit.table()
+
+    opt = click.Option(['--title'], default=True)
+
+    ret = _add_value_to_table(opt, table, commented=commented)
+    expected = 'title'
+    assert ret == expected
+
+
+@pytest.mark.parametrize('commented', [False, True])
+def test_add_value_to_table_not_valid(commented: bool) -> None:
+    table = tomlkit.table()
+
+    # The default value is not a valid TOML value
+    opt = click.Option(['--title'], default=[None, None], multiple=True)
+
+    ret = _add_value_to_table(opt, table, commented=commented)
+    expected = 'title'
+    assert ret == expected
 
 
 def test_generated_config() -> None:

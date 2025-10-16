@@ -6,9 +6,7 @@ from click.testing import CliRunner
 from subliminal.cli.cli import subliminal as subliminal_cli
 
 # Core test
-pytestmark = [
-    pytest.mark.core,
-]
+pytestmark = pytest.mark.core
 
 
 def test_cli_help() -> None:

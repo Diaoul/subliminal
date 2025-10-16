@@ -24,6 +24,10 @@ CLI arguments (like ``path``) cannot be specified in the configuration file.
 
 Options that can be used multiple times (like ``--language``) need to be defined as arrays.
 
+``hearing_impaired`` and ``foreign_only`` can take three values: "true", "false" or "[]".
+They mean that hearing impaired (or foreign-only) subtitles will be, respectively,
+ranked first, ranked last or not given any particular rank, for subtitles with identical scores.
+
 
 Example
 -------

@@ -887,6 +887,26 @@ def disabled_providers(monkeypatch: pytest.MonkeyPatch) -> Generator[list[str], 
     subliminal.extensions.disabled_providers = original_disabled_providers
 
 
+@pytest.fixture
+def refiner_manager(monkeypatch: pytest.MonkeyPatch) -> Generator[RegistrableExtensionManager, None, None]:
+    """Patch the subliminal.extensions.refiner_manager to use a mock refiner."""
+    original_refiner_manager = subliminal.extensions.refiner_manager
+
+    # Create a mock refiner manager (namespace cannot be 'subliminal.refiners')
+    patched_refiner_manager = RegistrableExtensionManager('subliminal.mock-refiners', [])
+
+    # Replace the provider_manager in all the module were it is imported
+    subliminal.extensions.refiner_manager = patched_refiner_manager
+    subliminal.core.refiner_manager = patched_refiner_manager
+
+    # Yield the mocked refiner_manager
+    yield patched_refiner_manager
+
+    # Recover the original refiner_manager in all the modules
+    subliminal.extensions.refiner_manager = original_refiner_manager
+    subliminal.core.refiner_manager = original_refiner_manager
+
+
 @pytest.fixture(scope='session')
 def mkv() -> dict[str, str]:
     """Collect a dict of mkv paths.

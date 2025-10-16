@@ -10,9 +10,7 @@ from subliminal.cli import generate_default_config
 from subliminal.cli.generate_config import _add_value_to_table
 
 # Core test
-pytestmark = [
-    pytest.mark.core,
-]
+pytestmark = pytest.mark.core
 
 
 @pytest.mark.parametrize('commented', [False, True])

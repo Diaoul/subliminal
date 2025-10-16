@@ -13,11 +13,11 @@ from subliminal.cli import generate_default_config
 from subliminal.cli.cli import subliminal as subliminal_cli
 
 # Core test
-# Core test
 pytestmark = [
     pytest.mark.core,
     pytest.mark.usefixtures('provider_manager'),
     pytest.mark.usefixtures('disabled_providers'),
+    pytest.mark.usefixtures('refiner_manager'),
 ]
 
 

@@ -645,7 +645,8 @@ class OpenSubtitlesComProvider(Provider):
         if query:
             criterion.update({'query': query.replace("'", '')})
 
-        if season and episode:
+        # Check for None to allow season=0 and episode=0
+        if season is not None and episode is not None:
             criterion.update({'season_number': season, 'episode_number': episode})
         if year:
             criterion.update({'year': year})

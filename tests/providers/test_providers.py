@@ -327,6 +327,7 @@ def test_download_best_subtitles_only_one(episodes: dict[str, Episode]) -> None:
     providers = ['gestdown', 'podnapisi']
     expected_subtitles = {
         ('gestdown', 'a295515c-a460-44ea-9ba8-8d37bcb9b5a6'),
+        ('gestdown', 'a245f3f1-920f-41f5-b9af-876a633cc8dd'),
         ('podnapisi', 'EdQo'),
     }
 

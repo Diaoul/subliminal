@@ -588,11 +588,14 @@ class OpenSubtitlesComProvider(Provider):
         return r.json()  # type: ignore[no-any-return]
 
     def _search(self, *, page: int = 1, **params: Any) -> list[dict[str, Any]]:
+        # Extended params with page
+        ext_params = {'page': page, **params}
+
         # query the server
-        logger.info('Searching subtitles %r', params)
+        logger.info('Searching subtitles %r', ext_params)
 
         # GET request and add page information
-        response = self.api_get('subtitles', {'page': page, **params})
+        response = self.api_get('subtitles', ext_params)
 
         if not response or not response['data']:
             return []

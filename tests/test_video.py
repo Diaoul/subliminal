@@ -59,7 +59,8 @@ def test_video_exists_age(movies: dict[str, Movie], tmp_path: Path, monkeypatch:
     assert timedelta(days=3) <= video.age < timedelta(days=3, seconds=1)
 
 
-def test_video_age(movies: dict[str, Movie]) -> None:
+def test_video_age(movies: dict[str, Movie], tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.chdir(tmp_path)
     assert movies['man_of_steel'].age == timedelta()
 
 

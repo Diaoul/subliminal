@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import inspect
 import re
 from importlib.metadata import EntryPoint
 from typing import TYPE_CHECKING, Any
@@ -31,6 +32,7 @@ class RegistrableExtensionManager(ExtensionManager):
 
     registered_extensions: list[str]
     internal_extensions: list[str]
+    _old_api: bool
 
     def __init__(self, namespace: str, internal_extensions: Sequence[str], **kwargs: Any) -> None:
         #: Registered extensions with entry point syntax
@@ -38,6 +40,8 @@ class RegistrableExtensionManager(ExtensionManager):
 
         #: Internal extensions with entry point syntax
         self.internal_extensions = list(internal_extensions)
+
+        self._old_api = 'verify_requirements' in inspect.signature(self._load_one_plugin).parameters
 
         super().__init__(namespace, **kwargs)
 
@@ -76,13 +80,22 @@ class RegistrableExtensionManager(ExtensionManager):
             msg = 'An extension with the same name already exist'
             raise ValueError(msg)
 
-        ext = self._load_one_plugin(
-            ep,
-            invoke_on_load=False,
-            invoke_args=(),
-            invoke_kwds={},
-            verify_requirements=False,
-        )
+        if self._old_api:
+            ext = self._load_one_plugin(
+                ep,
+                invoke_on_load=False,
+                invoke_args=(),
+                invoke_kwds={},
+                verify_requirements=False,
+            )
+        else:
+            ext = self._load_one_plugin(
+                ep,
+                invoke_on_load=False,
+                invoke_args=(),
+                invoke_kwds={},
+            )
+
         self.extensions.append(ext)
         if self._extensions_by_name is not None:  # pragma: no branch
             self._extensions_by_name[ext.name] = ext

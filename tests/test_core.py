@@ -173,7 +173,12 @@ def test_scan_video_episode(episodes: dict[str, Episode], tmp_path: Path, monkey
     assert scanned_video.tvdb_id is None
 
 
-def test_scan_video_path_does_not_exist(movies: dict[str, Movie]) -> None:
+def test_scan_video_path_does_not_exist(
+    movies: dict[str, Movie],
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.chdir(tmp_path)
     path = movies['man_of_steel'].name
     with pytest.raises(ValueError, match='Path does not exist'):
         scan_video(path)
@@ -305,7 +310,12 @@ def test_scan_path(
     mock.assert_called_once()
 
 
-def test_scan_videos_path_does_not_exist(movies: dict[str, Movie]) -> None:
+def test_scan_videos_path_does_not_exist(
+    movies: dict[str, Movie],
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.chdir(tmp_path)
     with pytest.raises(ValueError, match='Path does not exist'):
         scan_videos(movies['man_of_steel'].name)
 

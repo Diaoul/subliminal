@@ -203,7 +203,7 @@ def test_fix_line_ending() -> None:
 
 # https://github.com/pannal/Sub-Zero.bundle/issues/646 replaced all Chinese character “不” with “上”
 def test_fix_line_ending_chinese_characters() -> None:
-    character = bytes('不', 'utf16')
+    character = bytes('不', 'utf-16-le')
     content = b''.join([character, b'\r\n', character, b'\n', character])
     expected = b''.join([character, b'\n', character, b'\n', character])
     assert fix_line_ending(content) == expected

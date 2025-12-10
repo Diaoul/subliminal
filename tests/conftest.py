@@ -599,7 +599,7 @@ def provider_manager(monkeypatch: pytest.MonkeyPatch) -> Generator[RegistrableEx
     # Replace the provider_manager in all the module were it is imported
     subliminal.extensions.provider_manager = patched_provider_manager
     subliminal.core.provider_manager = patched_provider_manager
-    subliminal.refiners.hash.provider_manager = patched_provider_manager
+    subliminal.refiners.hash.provider_manager = patched_provider_manager  # type: ignore[attr-defined]
 
     movie_name = os.path.join('Man of Steel (2013)', 'man.of.steel.2013.720p.bluray.x264-felony.mkv')
     episode_name = os.path.join(
@@ -868,7 +868,7 @@ def provider_manager(monkeypatch: pytest.MonkeyPatch) -> Generator[RegistrableEx
     # Recover the original provider_manager in all the modules
     subliminal.extensions.provider_manager = original_provider_manager
     subliminal.core.provider_manager = original_provider_manager
-    subliminal.refiners.hash.provider_manager = original_provider_manager
+    subliminal.refiners.hash.provider_manager = original_provider_manager  # type: ignore[attr-defined]
 
 
 @pytest.fixture

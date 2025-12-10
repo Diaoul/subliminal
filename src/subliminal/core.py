@@ -131,12 +131,12 @@ class ProviderPool:
 
         """
         # check video validity
-        if not provider_manager[provider].plugin.check(video):
+        if not provider_manager[provider].plugin.check(video):  # type: ignore[attr-defined]
             logger.info('Skipping provider %r: not a valid video', provider)
             return []
 
         # check supported languages
-        provider_languages = provider_manager[provider].plugin.check_languages(languages)
+        provider_languages = provider_manager[provider].plugin.check_languages(languages)  # type: ignore[attr-defined]
         if not provider_languages:
             logger.info('Skipping provider %r: no language to search for', provider)
             return []

@@ -1,4 +1,5 @@
 import os
+from typing import cast
 from unittest.mock import Mock
 
 import pytest
@@ -61,8 +62,8 @@ def test_provider_pool_list_subtitles_provider(episodes: dict[str, Episode]) -> 
     pool = ProviderPool()
     subtitles = pool.list_subtitles_provider('tvsubtitles', episodes['bbt_s07e05'], {Language('eng')})
     assert subtitles == ['tvsubtitles']  # type: ignore[comparison-overlap]
-    assert provider_manager['tvsubtitles'].plugin.initialize.called
-    assert provider_manager['tvsubtitles'].plugin.list_subtitles.called
+    assert provider_manager['tvsubtitles'].plugin.initialize.called  # type: ignore[attr-defined]
+    assert provider_manager['tvsubtitles'].plugin.list_subtitles.called  # type: ignore[attr-defined]
 
 
 @pytest.mark.usefixtures('_mock_providers')
@@ -79,8 +80,9 @@ def test_provider_pool_list_subtitles(episodes: dict[str, Episode]) -> None:
         'tvsubtitles',
     ]
     for provider in subtitles:
-        assert provider_manager[provider].plugin.initialize.called
-        assert provider_manager[provider].plugin.list_subtitles.called
+        provider_s = cast('str', provider)
+        assert provider_manager[provider_s].plugin.initialize.called  # type: ignore[attr-defined]
+        assert provider_manager[provider_s].plugin.list_subtitles.called  # type: ignore[attr-defined]
 
 
 @pytest.mark.usefixtures('_mock_providers')
@@ -88,8 +90,8 @@ def test_async_provider_pool_list_subtitles_provider(episodes: dict[str, Episode
     pool = AsyncProviderPool()
     subtitles = pool.list_subtitles_provider_tuple('tvsubtitles', episodes['bbt_s07e05'], {Language('eng')})
     assert subtitles == ('tvsubtitles', ['tvsubtitles'])  # type: ignore[comparison-overlap]
-    assert provider_manager['tvsubtitles'].plugin.initialize.called
-    assert provider_manager['tvsubtitles'].plugin.list_subtitles.called
+    assert provider_manager['tvsubtitles'].plugin.initialize.called  # type: ignore[attr-defined]
+    assert provider_manager['tvsubtitles'].plugin.list_subtitles.called  # type: ignore[attr-defined]
 
 
 @pytest.mark.usefixtures('_mock_providers')
@@ -106,8 +108,9 @@ def test_async_provider_pool_list_subtitles(episodes: dict[str, Episode]) -> Non
         'tvsubtitles',
     ]
     for provider in subtitles:
-        assert provider_manager[provider].plugin.initialize.called
-        assert provider_manager[provider].plugin.list_subtitles.called
+        provider_s = cast('str', provider)
+        assert provider_manager[provider_s].plugin.initialize.called  # type: ignore[attr-defined]
+        assert provider_manager[provider_s].plugin.list_subtitles.called  # type: ignore[attr-defined]
 
 
 @pytest.mark.usefixtures('_mock_providers')
@@ -119,10 +122,10 @@ def test_list_subtitles_movie(movies: dict[str, Movie]) -> None:
 
     # test providers
     for name in ('addic7ed', 'napiprojekt', 'opensubtitlesvip', 'tvsubtitles'):
-        assert not provider_manager[name].plugin.list_subtitles.called
+        assert not provider_manager[name].plugin.list_subtitles.called  # type: ignore[attr-defined]
 
     for name in ('opensubtitles', 'opensubtitlescom', 'podnapisi'):
-        assert provider_manager[name].plugin.list_subtitles.called
+        assert provider_manager[name].plugin.list_subtitles.called  # type: ignore[attr-defined]
 
     # test result
     assert len(subtitles) == 1
@@ -138,7 +141,7 @@ def test_list_subtitles_episode(episodes: dict[str, Episode]) -> None:
 
     # test providers
     for name in ('napiprojekt', 'opensubtitlesvip', 'opensubtitlescomvip'):
-        assert not provider_manager[name].plugin.list_subtitles.called
+        assert not provider_manager[name].plugin.list_subtitles.called  # type: ignore[attr-defined]
 
     for name in (
         'addic7ed',
@@ -149,7 +152,7 @@ def test_list_subtitles_episode(episodes: dict[str, Episode]) -> None:
         'subtitulamos',
         'tvsubtitles',
     ):
-        assert provider_manager[name].plugin.list_subtitles.called
+        assert provider_manager[name].plugin.list_subtitles.called  # type: ignore[attr-defined]
 
     # test result
     assert len(subtitles) == 1
@@ -173,10 +176,10 @@ def test_list_subtitles_providers(episodes: dict[str, Episode]) -> None:
 
     # test providers
     for name in ('addic7ed', 'napiprojekt', 'opensubtitlesvip', 'podnapisi', 'tvsubtitles'):
-        assert not provider_manager[name].plugin.list_subtitles.called
+        assert not provider_manager[name].plugin.list_subtitles.called  # type: ignore[attr-defined]
 
     for name in ('opensubtitles',):
-        assert provider_manager[name].plugin.list_subtitles.called
+        assert provider_manager[name].plugin.list_subtitles.called  # type: ignore[attr-defined]
 
     # test result
     assert len(subtitles) == 1
@@ -192,10 +195,10 @@ def test_list_subtitles_episode_no_hash(episodes: dict[str, Episode]) -> None:
 
     # test providers
     for name in ('napiprojekt', 'opensubtitlesvip', 'opensubtitlescomvip'):
-        assert not provider_manager[name].plugin.list_subtitles.called
+        assert not provider_manager[name].plugin.list_subtitles.called  # type: ignore[attr-defined]
 
     for name in ('addic7ed', 'gestdown', 'opensubtitles', 'podnapisi', 'subtitulamos', 'tvsubtitles'):
-        assert provider_manager[name].plugin.list_subtitles.called
+        assert provider_manager[name].plugin.list_subtitles.called  # type: ignore[attr-defined]
 
     # test result
     assert len(subtitles) == 1
@@ -227,7 +230,7 @@ def test_list_subtitles_no_language(episodes: dict[str, Episode]) -> None:
         'podnapisi',
         'tvsubtitles',
     ):
-        assert not provider_manager[name].plugin.list_subtitles.called
+        assert not provider_manager[name].plugin.list_subtitles.called  # type: ignore[attr-defined]
 
     # test result
     assert len(subtitles) == 0
@@ -253,10 +256,10 @@ def test_download_subtitles() -> None:
 
     # test providers
     for name in ('addic7ed', 'napiprojekt', 'opensubtitles', 'opensubtitlesvip', 'podnapisi'):
-        assert not provider_manager[name].plugin.download_subtitle.called
+        assert not provider_manager[name].plugin.download_subtitle.called  # type: ignore[attr-defined]
 
     for name in ('tvsubtitles',):
-        assert provider_manager[name].plugin.download_subtitle.called
+        assert provider_manager[name].plugin.download_subtitle.called  # type: ignore[attr-defined]
 
 
 @pytest.mark.integration

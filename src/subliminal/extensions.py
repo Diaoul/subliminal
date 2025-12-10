@@ -7,10 +7,12 @@ import re
 from importlib.metadata import EntryPoint
 from typing import TYPE_CHECKING, Any
 
-from stevedore import ExtensionManager  # type: ignore[import-untyped]
+from stevedore import ExtensionManager
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
+
+    from stevedore.extension import Extension
 
 
 class RegistrableExtensionManager(ExtensionManager):
@@ -30,17 +32,19 @@ class RegistrableExtensionManager(ExtensionManager):
 
     """
 
+    #: Registered extensions with entry point syntax
     registered_extensions: list[str]
+
+    #: Internal extensions with entry point syntax
     internal_extensions: list[str]
+
     _old_api: bool
 
     def __init__(self, namespace: str, internal_extensions: Sequence[str], **kwargs: Any) -> None:
-        #: Registered extensions with entry point syntax
         self.registered_extensions = []
-
-        #: Internal extensions with entry point syntax
         self.internal_extensions = list(internal_extensions)
 
+        # 'verify_requirements' argument was remove in stevedore version 5.6.0
         self._old_api = 'verify_requirements' in inspect.signature(self._load_one_plugin).parameters
 
         super().__init__(namespace, **kwargs)
@@ -64,6 +68,25 @@ class RegistrableExtensionManager(ExtensionManager):
 
         return eps
 
+    def __compat_load_one_plugin(self, ep: EntryPoint) -> Extension | None:  # pragma: no cover
+        if self._old_api:
+            # The 'verify_requirements' argument is needed
+            return self._load_one_plugin(  # type: ignore[call-arg]
+                ep,
+                invoke_on_load=False,
+                invoke_args=(),  # type: ignore[arg-type]
+                invoke_kwds={},
+                verify_requirements=False,
+            )
+
+        # The 'verify_requirements' argument is forbidden
+        return self._load_one_plugin(  # type: ignore[call-arg]
+            ep,
+            invoke_on_load=False,
+            invoke_args=(),  # type: ignore[arg-type]
+            invoke_kwds={},
+        )
+
     def register(self, entry_point: str) -> None:
         """Register an extension.
 
@@ -80,21 +103,9 @@ class RegistrableExtensionManager(ExtensionManager):
             msg = 'An extension with the same name already exist'
             raise ValueError(msg)
 
-        if self._old_api:
-            ext = self._load_one_plugin(
-                ep,
-                invoke_on_load=False,
-                invoke_args=(),
-                invoke_kwds={},
-                verify_requirements=False,
-            )
-        else:
-            ext = self._load_one_plugin(
-                ep,
-                invoke_on_load=False,
-                invoke_args=(),
-                invoke_kwds={},
-            )
+        ext = self.__compat_load_one_plugin(ep)
+        if ext is None:  # pragma: no cover
+            return
 
         self.extensions.append(ext)
         if self._extensions_by_name is not None:  # pragma: no branch

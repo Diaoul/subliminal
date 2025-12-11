@@ -26,8 +26,11 @@ from subliminal.video import Episode, Movie
 if TYPE_CHECKING:
     from collections.abc import Callable, Generator, Iterator, Mapping, Sequence
     from types import TracebackType
+    from typing import TypeAlias
 
     import click
+
+    OptExcInfo: TypeAlias = tuple[type[BaseException], BaseException, TracebackType] | tuple[None, None, None]
 
 TESTS_DIR = Path(__file__).parent
 
@@ -1009,7 +1012,7 @@ class CliResult:
     return_value: Any
     exit_code: int
     exception: BaseException | None = None
-    exc_info: tuple[type[BaseException], BaseException, TracebackType] | None = None
+    exc_info: OptExcInfo | None = None
     out: str = ''
     err: str = ''
 
@@ -1042,7 +1045,7 @@ class CliRunner:
         return rv
 
     @contextlib.contextmanager
-    def setenv(self, env: Mapping[str, str | None] | None = None) -> None:
+    def setenv(self, env: Mapping[str, str | None] | None = None) -> Iterator[None]:
         env = self.make_env(env)
 
         old_env = {}
@@ -1066,6 +1069,25 @@ class CliRunner:
                 else:
                     os.environ[key] = value
 
+    @contextlib.contextmanager
+    def isolated_filesystem(self, temp_dir: str | os.PathLike[str] | None = None) -> Iterator[str]:
+        """A context manager change directory. This isolates tests
+        that affect the contents of the CWD to prevent them from
+        interfering with each other.
+
+        :param temp_dir: The given temporary directory, otherwise
+            defaults to the current directory.
+
+        """
+        cwd = os.getcwd()
+        dt = os.fspath(temp_dir or Path('.').resolve())
+        os.chdir(dt)
+
+        try:
+            yield dt
+        finally:
+            os.chdir(cwd)
+
     def run(
         self,
         cli: click.Command,
@@ -1076,7 +1098,7 @@ class CliRunner:
         **extra: Any,
     ) -> CliResult:
         """Run the cli and return the output."""
-        exc_info = None
+        exc_info: OptExcInfo | None = None
         return_value = None
         exception: BaseException | None = None
         exit_code = 0
@@ -1124,9 +1146,12 @@ class CliRunner:
 def cli_runner(capsys: pytest.CaptureFixture[str], tmp_path: os.PathLike[str]) -> dict[str, str]:
     """Click CLI runner withoud stdin/stdout/stderr catching."""
 
-    def with_capture(method: Callable[[Any, ...], CliResult]) -> Callable[[Any, ...], CliResult]:
+    def with_capture(method: Callable[..., CliResult]) -> Callable[..., CliResult]:
+        """Capture stdout and stderr when running the command."""
+
         @functools.wraps(method)
         def run_with_capture(self: CliRunner, *args: Any, **kwargs: Any) -> CliResult:
+            """Run command while capturing stdout/stderr."""
             # Clear stdout/stderr buffers
             capsys.readouterr()
 
@@ -1160,9 +1185,9 @@ def cli_runner(capsys: pytest.CaptureFixture[str], tmp_path: os.PathLike[str]) -
 
     # Decorate the run method to capture stdout and stderr
     CliRunner_s = type('CliRunner_s', (CliRunner,), {})
-    CliRunner_s.run = with_capture(CliRunner.run)
+    CliRunner_s.run = with_capture(CliRunner.run)  # type: ignore[attr-defined]
 
     # Change directory to the temporary path
-    CliRunner_s.isolated_filesystem = isolated_filesystem
+    CliRunner_s.isolated_filesystem = isolated_filesystem  # type: ignore[attr-defined]
 
     return CliRunner_s()

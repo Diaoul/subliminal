@@ -1,10 +1,15 @@
 from __future__ import annotations
 
+import contextlib
+import functools
 import os
+import shlex
 import subprocess
+import sys
+from dataclasses import dataclass
 from io import BytesIO
 from pathlib import Path
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Any, cast
 from unittest.mock import Mock
 from zipfile import ZipFile
 
@@ -19,7 +24,13 @@ from subliminal.providers.mock import MockSubtitle, mock_subtitle_provider
 from subliminal.video import Episode, Movie
 
 if TYPE_CHECKING:
-    from collections.abc import Generator
+    from collections.abc import Callable, Generator, Iterator, Mapping, Sequence
+    from types import TracebackType
+    from typing import TypeAlias
+
+    import click
+
+    OptExcInfo: TypeAlias = tuple[type[BaseException], BaseException, TracebackType] | tuple[None, None, None]
 
 TESTS_DIR = Path(__file__).parent
 
@@ -992,3 +1003,191 @@ def rar(mkv: dict[str, str]) -> dict[str, str]:
             files[name] = filename
 
     return files
+
+
+@dataclass
+class CliResult:
+    """Result of the CLI command."""
+
+    return_value: Any
+    exit_code: int
+    exception: BaseException | None = None
+    exc_info: OptExcInfo | None = None
+    out: str = ''
+    err: str = ''
+
+
+class CliRunner:
+    env: dict[str, str | None]
+    temp_dir: str | os.PathLike[str] | None
+
+    def __init__(
+        self,
+        env: Mapping[str, str | None] | None = None,
+        temp_dir: str | os.PathLike[str] | None = None,
+    ) -> None:
+        self.env = dict(env) if env else {}
+        self.temp_dir = temp_dir
+
+    def get_default_prog_name(self, cli: click.Command) -> str:
+        """Given a command object it will return the default program name
+        for it.  The default is the `name` attribute or ``"root"`` if not
+        set.
+        """
+        return cli.name or 'root'
+
+    def make_env(self, overrides: Mapping[str, str | None] | None = None) -> dict[str, str | None]:
+        """Returns the environment overrides for invoking a script."""
+        # Copy the envs
+        rv = dict(self.env)
+        if overrides:
+            rv.update(overrides)
+        return rv
+
+    @contextlib.contextmanager
+    def setenv(self, env: Mapping[str, str | None] | None = None) -> Iterator[None]:
+        env = self.make_env(env)
+
+        old_env = {}
+        try:
+            # Set new env variables
+            for key, value in env.items():
+                old_env[key] = os.environ.get(key)
+                if value is None:
+                    with contextlib.suppress(Exception):
+                        del os.environ[key]
+                else:
+                    os.environ[key] = value
+            yield
+
+        finally:
+            # Reset old env variables
+            for key, value in old_env.items():
+                if value is None:
+                    with contextlib.suppress(Exception):
+                        del os.environ[key]
+                else:
+                    os.environ[key] = value
+
+    @contextlib.contextmanager
+    def isolated_filesystem(self, temp_dir: str | os.PathLike[str] | None = None) -> Iterator[str]:
+        """A context manager change directory. This isolates tests
+        that affect the contents of the CWD to prevent them from
+        interfering with each other.
+
+        :param temp_dir: The given temporary directory, otherwise
+            defaults to the current directory.
+
+        """
+        cwd = os.getcwd()
+        dt = os.fspath(temp_dir or Path('.').resolve())
+        os.chdir(dt)
+
+        try:
+            yield dt
+        finally:
+            os.chdir(cwd)
+
+    def run(
+        self,
+        cli: click.Command,
+        args: str | Sequence[str] | None = None,
+        *,
+        env: Mapping[str, str | None] | None = None,
+        prog_name: str | None = None,
+        **extra: Any,
+    ) -> CliResult:
+        """Run the cli and return the output."""
+        exc_info: OptExcInfo | None = None
+        return_value = None
+        exception: BaseException | None = None
+        exit_code = 0
+
+        if isinstance(args, str):
+            args = shlex.split(args)
+
+        if prog_name is None:
+            prog_name = self.get_default_prog_name(cli)
+
+        with self.setenv(env):
+            try:
+                return_value = cli.main(args=args or (), prog_name=prog_name, **extra)
+            except SystemExit as e:
+                exc_info = sys.exc_info()
+                e_code = cast('int | Any | None', e.code)
+
+                if e_code is None:
+                    e_code = 0
+
+                if e_code != 0:
+                    exception = e
+
+                if not isinstance(e_code, int):
+                    sys.stdout.write(str(e_code))
+                    sys.stdout.write('\n')
+                    e_code = 1
+
+                exit_code = e_code
+
+            except Exception as e:  # noqa: BLE001
+                exception = e
+                exit_code = 1
+                exc_info = sys.exc_info()
+
+        return CliResult(
+            return_value=return_value,
+            exit_code=exit_code,
+            exception=exception,
+            exc_info=exc_info,
+        )
+
+
+@pytest.fixture
+def cli_runner(capsys: pytest.CaptureFixture[str], tmp_path: os.PathLike[str]) -> dict[str, str]:
+    """Click CLI runner withoud stdin/stdout/stderr catching."""
+
+    def with_capture(method: Callable[..., CliResult]) -> Callable[..., CliResult]:
+        """Capture stdout and stderr when running the command."""
+
+        @functools.wraps(method)
+        def run_with_capture(self: CliRunner, *args: Any, **kwargs: Any) -> CliResult:
+            """Run command while capturing stdout/stderr."""
+            # Clear stdout/stderr buffers
+            capsys.readouterr()
+
+            # Run
+            ret = method(self, *args, **kwargs)
+
+            # Attach captured buffers
+            captured = capsys.readouterr()
+            ret.err = captured.err
+            ret.out = captured.out
+
+            return ret
+
+        return run_with_capture
+
+    @contextlib.contextmanager
+    def isolated_filesystem(self: CliRunner) -> Iterator[str]:
+        """A context manager that creates a temporary directory and
+        changes the current working directory to it. This isolates tests
+        that affect the contents of the CWD to prevent them from
+        interfering with each other.
+
+        """
+        cwd = os.getcwd()
+        os.chdir(tmp_path)
+
+        try:
+            yield os.fspath(tmp_path)
+        finally:
+            os.chdir(cwd)
+
+    # Decorate the run method to capture stdout and stderr
+    CliRunner_s = type('CliRunner_s', (CliRunner,), {})
+    CliRunner_s.run = with_capture(CliRunner.run)  # type: ignore[attr-defined]
+
+    # Change directory to the temporary path
+    CliRunner_s.isolated_filesystem = isolated_filesystem  # type: ignore[attr-defined]
+
+    return CliRunner_s()

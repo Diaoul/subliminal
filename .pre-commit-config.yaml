@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
       - id: check-toml
       - id: check-yaml
@@ -8,12 +8,12 @@ repos:
       - id: end-of-file-fixer
 
   - repo: https://github.com/crate-ci/typos
-    rev: v1.33.1
+    rev: v1.40.0
     hooks:
       - id: typos
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.12.1
+    rev: v0.14.9
     hooks:
       - id: ruff
         args: [--fix, --unsafe-fixes]
@@ -33,7 +33,7 @@ repos:
         require_serial: true
 
   - repo: https://github.com/woodruffw/zizmor-pre-commit
-    rev: v1.10.0
+    rev: v1.18.0
     hooks:
     - id: zizmor
 

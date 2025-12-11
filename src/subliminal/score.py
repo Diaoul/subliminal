@@ -312,7 +312,7 @@ if WITH_SYMPY:  # pragma: no cover
         """
         hash, title, year, country, release_group = symbols('hash title year country release_group')  # noqa: A001
         streaming_service, fps, source, audio_codec = symbols('streaming_service fps source audio_codec')
-        resolution, video_codec, hearing_impaired = symbols('resolution video_codec hearing_impaired')
+        resolution, video_codec = symbols('resolution video_codec')
 
         equations = [
             # hash is best

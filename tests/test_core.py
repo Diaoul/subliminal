@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+import re
 from datetime import datetime, timedelta, timezone
 from textwrap import dedent
 from typing import TYPE_CHECKING, Any
@@ -195,7 +196,7 @@ def test_scan_video_invalid_extension(
     monkeypatch.chdir(tmp_path)
     movie_name = os.path.splitext(movies['man_of_steel'].name)[0] + '.mp3'
     ensure(tmp_path / movie_name)
-    with pytest.raises(ValueError, match="'.mp3' is not a valid video extension"):
+    with pytest.raises(ValueError, match=re.escape("'.mp3' is not a valid video extension")):
         scan_video(movie_name)
 
 

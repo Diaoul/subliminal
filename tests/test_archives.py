@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+import re
 import sys
 from pathlib import Path
 
@@ -50,17 +51,17 @@ def test_scan_archive_with_no_video(rar: dict[str, str]) -> None:
 
 
 def test_scan_bad_archive(mkv: dict[str, str]) -> None:
-    with pytest.raises(ArchiveError, match="'.mkv' is not a valid archive"):
+    with pytest.raises(ArchiveError, match=re.escape("'.mkv' is not a valid archive")):
         scan_archive(mkv['test1'])
 
 
 def test_scan_rar_not_a_file(mkv: dict[str, str]) -> None:
-    with pytest.raises(ValueError, match="Path does not exist: 'not_a_file.txt'"):
+    with pytest.raises(ValueError, match=re.escape("Path does not exist: 'not_a_file.txt'")):
         scan_archive_rar('not_a_file.txt')
 
 
 def test_scan_rar_bad_archive(mkv: dict[str, str]) -> None:
-    with pytest.raises(ValueError, match="'.mkv' is not a valid archive"):
+    with pytest.raises(ValueError, match=re.escape("'.mkv' is not a valid archive")):
         scan_archive_rar(mkv['test1'])
 
 

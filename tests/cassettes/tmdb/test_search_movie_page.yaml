@@ -5,7 +5,7 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, zstd
       Accept-Language:
       - en
       Connection:
@@ -13,133 +13,300 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - Subliminal/2.2
+      - Subliminal/2.4
     method: GET
-    uri: https://api.themoviedb.org/3/search/movie?api_key=3dac925d5d494853ea6ef9161011fbb3&query=James+Bond&language=en-US&page=2
+    uri: https://api.themoviedb.org/3/search/movie?api_key=3dac925d5d494853ea6ef9161011fbb3&query=James+Bond&language=en-US&page=1
   response:
     body:
-      string: "{\"page\":2,\"results\":[{\"adult\":false,\"backdrop_path\":null,\"genre_ids\":[99],\"id\":264022,\"original_language\":\"en\",\"original_title\":\"In
-        Search of James Bond with Jonathan Ross\",\"overview\":\"Jonathan Ross delves
-        into the world of James Bond and meets with new and former cast members who
-        reveal humorous stories and anecdotes in a series of interviews. All the 5
-        Bonds at the time are featured, though only Lazenby (reflecting in the usual
-        frank, self criticizing manner), Moore and Brosnan granted an interview. Connery
-        and Dalton are featured through some unused footage from LWT's 30 years of
-        James Bond program. The ever faithful Desmond Llewelyn turns up in character
-        as well as some other less related peeps like Christopher Lee, Paul McCartney
-        and the ultimate playboy: Hugh Hefner -- who all give an interesting perspective
-        on the worlds most famous spy.\",\"popularity\":1.205,\"poster_path\":\"/d416YCqX42GzWaX6uzRe8iCnGtd.jpg\",\"release_date\":\"1995-12-10\",\"title\":\"In
-        Search of James Bond with Jonathan Ross\",\"video\":false,\"vote_average\":3.0,\"vote_count\":2},{\"adult\":false,\"backdrop_path\":null,\"genre_ids\":[99],\"id\":696912,\"original_language\":\"en\",\"original_title\":\"The
+      string: "{\"page\":1,\"results\":[{\"adult\":false,\"backdrop_path\":null,\"genre_ids\":[],\"id\":360133,\"original_language\":\"te\",\"original_title\":\"\u0C1C\u0C47\u0C2E\u0C4D\u0C38\u0C4D
+        \u0C2C\u0C3E\u0C02\u0C21\u0C4D\",\"overview\":\"Nani is a trepid and fearful
+        guy who works as a software engineer. Bullet is a mafia don in Dubai. Her
+        mother doesn't know about Bullet's profession. Bullet is forced to come back
+        to India when her mother falls ill. Her mother's last wish is to get Bullet
+        married. That's when Nani falls in love at first sight with Bullet when she
+        visits a temple wearing a traditional dress. Rest of the story is all about
+        what happens when a coward like Nani marries a gangster girl without knowing
+        her real profession.\",\"popularity\":1.0974,\"poster_path\":\"/lQTdCg0BujgmnNno51BHgHx063Z.jpg\",\"release_date\":\"2015-07-24\",\"title\":\"James
+        Bond\",\"video\":false,\"vote_average\":6.7,\"vote_count\":3},{\"adult\":false,\"backdrop_path\":null,\"genre_ids\":[35],\"id\":793453,\"original_language\":\"ml\",\"original_title\":\"\u0D1C\u0D2F\u0D3F\u0D02\u0D38\u0D4D
+        \u0D2C\u0D4B\u0D23\u0D4D\u0D1F\u0D4D\",\"overview\":\"Five friends in hiding
+        after their local business goes bankrupt stumble upon a baby that changes
+        their lives.\",\"popularity\":0.9564,\"poster_path\":\"/9frcxN4LZX2pQLJ7YNrrdrRgQUW.jpg\",\"release_date\":\"1999-01-01\",\"title\":\"James
+        Bond\",\"video\":false,\"vote_average\":0.0,\"vote_count\":0},{\"adult\":false,\"backdrop_path\":\"/3zpR0XaPfXxmoh7inMDuim2Uc3S.jpg\",\"genre_ids\":[35,18,53],\"id\":266315,\"original_language\":\"pa\",\"original_title\":\"\u0A1C\u0A71\u0A1F
+        \u0A1C\u0A47\u0A2E\u0A38 \u0A2C\u0A3E\u0A02\u0A21\",\"overview\":\"Shinda
+        was mistreated by his relatives therefore he finds other ways to have his
+        love Laali. Shinda and his two other friends come up with a plan to solve
+        all of their problems.\",\"popularity\":1.0658,\"poster_path\":\"/kgeAS28rBZJSEVypaKpEaI4wunn.jpg\",\"release_date\":\"2014-04-25\",\"title\":\"Jatt
+        James Bond\",\"video\":false,\"vote_average\":5.3,\"vote_count\":6},{\"adult\":false,\"backdrop_path\":null,\"genre_ids\":[99],\"id\":209912,\"original_language\":\"en\",\"original_title\":\"Silhouettes:
+        The James Bond Titles\",\"overview\":\"Documentary exploring the famous title
+        sequences used in the Bond movies. Narrated by Patrick Macnee. Included on
+        the 'You Only Live Twice' Bluray disc\",\"popularity\":1.1508,\"poster_path\":\"/9YJVDUPQmQnHbl8S4UNbTDZDyU7.jpg\",\"release_date\":\"2000-07-25\",\"title\":\"Silhouettes:
+        The James Bond Titles\",\"video\":false,\"vote_average\":4.429,\"vote_count\":7},{\"adult\":false,\"backdrop_path\":\"/xptBI2iwXQWS3G9v1yfNKJX6Cag.jpg\",\"genre_ids\":[99,36,10770],\"id\":688656,\"original_language\":\"de\",\"original_title\":\"Richard
+        Sorge - Stalins James Bond\",\"overview\":\"An account of the troubled life
+        of Richard Sorge (1895-1944), a Soviet spy of German origin who played a decisive
+        role in the outcome of World War II.\",\"popularity\":0.1022,\"poster_path\":\"/j523NJfe7KRUfBLSOPsGxrTgoyR.jpg\",\"release_date\":\"2017-12-30\",\"title\":\"Stalin's
+        James Bond\",\"video\":false,\"vote_average\":6.7,\"vote_count\":3},{\"adult\":false,\"backdrop_path\":null,\"genre_ids\":[35],\"id\":820496,\"original_language\":\"it\",\"original_title\":\"L'uomo
+        che uccise James Bond\",\"overview\":\"Fabrizio, a poor thief from the Roman
+        suburbs, finally has in his hands the man who ruined his life: James Bond.\",\"popularity\":1.3289,\"poster_path\":\"/xKraOJJXzilFK4l3F72J93jchZi.jpg\",\"release_date\":\"2019-04-19\",\"title\":\"The
+        Man Who Killed James Bond\",\"video\":false,\"vote_average\":7.0,\"vote_count\":1},{\"adult\":false,\"backdrop_path\":null,\"genre_ids\":[],\"id\":147532,\"original_language\":\"en\",\"original_title\":\"Noi
+        non siamo come James Bond\",\"overview\":\"How two friends, thanks to the
+        strong relationship between them, piece back together the fragments of their
+        existence sent topsy-turvy by serious illness? Through a peculiar kind of
+        road movie, alternating the dense reflections of the two main characters on
+        life, with their easy positive glances towards the future. Starting from a
+        weird juvenile infatuation with James Bond: he utterly immortal, they extremely
+        mortal. Now more than before.\",\"popularity\":0.4022,\"poster_path\":null,\"release_date\":\"2012-11-29\",\"title\":\"We're
+        Nothing Like James Bond\",\"video\":false,\"vote_average\":6.2,\"vote_count\":4},{\"adult\":false,\"backdrop_path\":null,\"genre_ids\":[99],\"id\":885424,\"original_language\":\"de\",\"original_title\":\"Das
+        geheime Leben des James Bond\",\"overview\":\"A journey back to the historical
+        inspirations for 007.\",\"popularity\":0.8491,\"poster_path\":\"/fJzbLl519DGCshP1lV7xaslyhZ3.jpg\",\"release_date\":\"2020-03-27\",\"title\":\"The
+        Secret Life of James Bond\",\"video\":false,\"vote_average\":0.0,\"vote_count\":0},{\"adult\":false,\"backdrop_path\":\"/4BpnQrfEp0g6TUOtNZL4LntYCCA.jpg\",\"genre_ids\":[99,36,10770],\"id\":784053,\"original_language\":\"de\",\"original_title\":\"Napoleons
+        deutscher 007 \u2013 Karl Ludwig Schulmeister\",\"overview\":\"Charles Louis
+        Schulmeister (1770-1853) was a smuggler and a revolutionary, but also a chief
+        of police and Napoleon Bonaparte's favorite spy. A look back on his adventurous
+        life with the purpose of unraveling the many mysteries of his unique path.\",\"popularity\":0.6947,\"poster_path\":\"/ryisqDj7Bp0e6pKwuUWiMJLL4NG.jpg\",\"release_date\":\"2017-10-07\",\"title\":\"Napoleon\u2019s
+        James Bond\",\"video\":false,\"vote_average\":5.5,\"vote_count\":2},{\"adult\":false,\"backdrop_path\":\"/gFezenblFOcEkKhnE5Wpt9qpW5n.jpg\",\"genre_ids\":[28,35],\"id\":763272,\"original_language\":\"ar\",\"original_title\":\"\u063A\u0648\u0627\u0631
+        \u062C\u064A\u0645\u0633 \u0628\u0648\u0646\u062F\",\"overview\":\"The events
+        revolve around a three-person gang led by Abu Al-Ghawar (Duraid Lahham), who
+        plans to steal Simon Bay, and the gang members succeed in deceiving him and
+        stealing his locker. Whereas the husband of his sister (Nihad al-Qala'i) is
+        a person who has many problems and disputes with the people of the region
+        due to the mockery of the people of the region of Abu al-Ghawar Who uses this
+        money to do amazing inventions that have no use.\",\"popularity\":0.08,\"poster_path\":\"/9OaAUpjcc9qKfERMs2Hlso6lZTN.jpg\",\"release_date\":\"1974-01-01\",\"title\":\"Ghawar
+        James Bond\",\"video\":false,\"vote_average\":0.0,\"vote_count\":0},{\"adult\":false,\"backdrop_path\":null,\"genre_ids\":[99],\"id\":378266,\"original_language\":\"sr\",\"original_title\":\"D\u017Eejms
+        Bond je Srbin\",\"overview\":\"Feature documentary film about the Serbian
+        James Bond, Du\u0161ko Popov, intelligence agent that inspired the writer
+        Ian Fleming to create the indestructible agent 007.\",\"popularity\":0.9771,\"poster_path\":null,\"release_date\":\"2016-01-06\",\"title\":\"James
+        Bond is a Serb\",\"video\":false,\"vote_average\":10.0,\"vote_count\":1},{\"adult\":false,\"backdrop_path\":\"/wmeaIRdbWrSWxzdESsQDA4rAuSM.jpg\",\"genre_ids\":[35,28],\"id\":896864,\"original_language\":\"te\",\"original_title\":\"Lady
+        James Bond\",\"overview\":\"Indian superspy Lady James Bond is assigned to
+        protect a professor and his top-secret research.\",\"popularity\":0.3728,\"poster_path\":\"/rxB8DXkWgvFFSQTbYWWLUdpGsNd.jpg\",\"release_date\":\"1985-05-01\",\"title\":\"Lady
+        James Bond\",\"video\":false,\"vote_average\":0.0,\"vote_count\":0},{\"adult\":false,\"backdrop_path\":null,\"genre_ids\":[99,10770],\"id\":508744,\"original_language\":\"en\",\"original_title\":\"James
+        Bond: The First 21 Years\",\"overview\":\"A look back at the first 21 years
+        of Britain's most successful film series.\",\"popularity\":1.4173,\"poster_path\":\"/i27tAbaQBSNMWzcv8QCwfMCxmkz.jpg\",\"release_date\":\"1983-05-27\",\"title\":\"James
+        Bond: The First 21 Years\",\"video\":false,\"vote_average\":5.0,\"vote_count\":2},{\"adult\":false,\"backdrop_path\":null,\"genre_ids\":[99],\"id\":465739,\"original_language\":\"en\",\"original_title\":\"James
+        Bond Supports International Women's Day\",\"overview\":\"This short film is
+        made by 'We Are Equals' to celebrate International Women's Day. James Bond
+        video for international women's day shows 007's feminine side. Daniel Craig
+        and Dame Judi Dench team up for two-minute film highlighting the need for
+        gender equality. 007 star Daniel Craig undergo a dramatic makeover as he puts
+        himself, quite literally, in a woman's shoes.\",\"popularity\":3.1186,\"poster_path\":\"/oiBCjrSexJd9O51KJtuWeMxSN8O.jpg\",\"release_date\":\"2011-03-05\",\"title\":\"James
+        Bond Supports International Women's Day\",\"video\":false,\"vote_average\":4.6,\"vote_count\":10},{\"adult\":false,\"backdrop_path\":null,\"genre_ids\":[28,16],\"id\":332654,\"original_language\":\"en\",\"original_title\":\"James
+        Bond: In Service of Nothing\",\"overview\":\"An aging former super spy struggles
+        to find his place in a self absorbed world without boarders, where service
+        to one's nation is an antiquated concept.\",\"popularity\":0.0998,\"poster_path\":\"/6uAQnCZtSukYIreGcL0EklrDDzs.jpg\",\"release_date\":\"2015-03-02\",\"title\":\"James
+        Bond: In Service of Nothing\",\"video\":false,\"vote_average\":7.0,\"vote_count\":1},{\"adult\":false,\"backdrop_path\":\"/8Bcm0qBnS6yjwTFad8eI6thzRub.jpg\",\"genre_ids\":[99],\"id\":869250,\"original_language\":\"en\",\"original_title\":\"Being
+        James Bond\",\"overview\":\"Daniel Craig candidly reflects on his 15 year
+        adventure as James Bond. Including never-before-seen archival footage from
+        Casino Royale to the upcoming 25th film No Time To Die, Craig shares his personal
+        memories in conversation with 007 producers, Michael G Wilson and Barbara
+        Broccoli.\",\"popularity\":1.7779,\"poster_path\":\"/kKG9gieki5wgEcVXLfnX1lbOcrO.jpg\",\"release_date\":\"2021-08-29\",\"title\":\"Being
+        James Bond\",\"video\":false,\"vote_average\":7.8,\"vote_count\":89},{\"adult\":false,\"backdrop_path\":\"/oc16U0MqBvz2wdvPSvvMly83nh7.jpg\",\"genre_ids\":[99,10770],\"id\":696912,\"original_language\":\"en\",\"original_title\":\"The
         Incredible World of James Bond\",\"overview\":\"This promotional film was
         aired on American television on 26 November 1965, one month before the release
         of Thunderball (1965). Narrated by Alexander Scourby, the 48 minute documentary
         aired as a one hour special. It included footage of the filming at Silverstone
         Racetrack, Northamptonshire and of the fight aboard the Disco Volante at Pinewood
         Studios; media coverage of Martine Beswick, Luciana Paluzzi and Claudine Auger;
-        and archive footage of Ian Fleming at 'Goldeneye', Jamaica.\",\"popularity\":2.741,\"poster_path\":\"/yvkZlSh4h3ry2GJq0yJxB19OfrV.jpg\",\"release_date\":\"1965-11-26\",\"title\":\"The
-        Incredible World of James Bond\",\"video\":false,\"vote_average\":6.0,\"vote_count\":1},{\"adult\":false,\"backdrop_path\":null,\"genre_ids\":[],\"id\":433250,\"original_language\":\"hi\",\"original_title\":\"James
-        Bond 777\",\"overview\":\"The adventures of Kishore, a \\\"James Bond 777\\\"
-        CBI agent, as he and heroine Sopa battle criminal mastermind \\\"Boss\\\"
-        and his gang which includes whip-cracking Jamilla and a trio of highly trained
-        dogs.\",\"popularity\":0.265,\"poster_path\":\"/rfcIslCBq94EzcDvTQqkRqP43Bj.jpg\",\"release_date\":\"1971-01-01\",\"title\":\"James
-        Bond 777\",\"video\":false,\"vote_average\":0.0,\"vote_count\":0},{\"adult\":false,\"backdrop_path\":null,\"genre_ids\":[99],\"id\":264017,\"original_language\":\"en\",\"original_title\":\"30
-        Years of James Bond\",\"overview\":\"An examination of why the James Bond
-        films have proved so popular including a discussion between the four actors
-        who have played Bond, an interview with Cubby Broccoli and contributions from
-        the directors, production designers, special effects and stuntmen.\",\"popularity\":1.307,\"poster_path\":\"/nNSkinqAnUdOlbHG8EG3fWloSsf.jpg\",\"release_date\":\"1992-10-03\",\"title\":\"30
-        Years of James Bond\",\"video\":false,\"vote_average\":5.3,\"vote_count\":3},{\"adult\":false,\"backdrop_path\":null,\"genre_ids\":[],\"id\":685340,\"original_language\":\"en\",\"original_title\":\"James
-        Bond's Greatest Hits\",\"overview\":\"A review of the best James Bond songs\",\"popularity\":0.001,\"poster_path\":\"/mQHrQvIzK3KX18fQ9IEj1h1uXQA.jpg\",\"release_date\":\"\",\"title\":\"James
-        Bond's Greatest Hits\",\"video\":true,\"vote_average\":0.0,\"vote_count\":0},{\"adult\":false,\"backdrop_path\":\"/piYhvgz5Epk8URWPKdMUtdXvXV.jpg\",\"genre_ids\":[35],\"id\":940829,\"original_language\":\"en\",\"original_title\":\"James
-        Bond vs Nan\",\"overview\":\"James Bond joins a call to talk with M but is
-        surprised to stumble across Nan (Catherine Tate), who is cleaning the office.\",\"popularity\":1.297,\"poster_path\":\"/kxqyFDJhAoQqttnRQzBauoKv0uZ.jpg\",\"release_date\":\"2021-03-20\",\"title\":\"James
-        Bond vs Nan\",\"video\":false,\"vote_average\":8.4,\"vote_count\":4},{\"adult\":false,\"backdrop_path\":\"/wmeaIRdbWrSWxzdESsQDA4rAuSM.jpg\",\"genre_ids\":[35,28],\"id\":896864,\"original_language\":\"te\",\"original_title\":\"Lady
-        James Bond\",\"overview\":\"Indian superspy Lady James Bond is assigned to
-        protect a professor and his top-secret research.\",\"popularity\":0.036,\"poster_path\":\"/rxB8DXkWgvFFSQTbYWWLUdpGsNd.jpg\",\"release_date\":\"1985-05-01\",\"title\":\"Lady
-        James Bond\",\"video\":false,\"vote_average\":0.0,\"vote_count\":0},{\"adult\":false,\"backdrop_path\":null,\"genre_ids\":[99],\"id\":763411,\"original_language\":\"fr\",\"original_title\":\"Stierlitz,
-        le James Bond russe\",\"overview\":\"\",\"popularity\":0.058,\"poster_path\":\"/xmC3HLzNbeU8WfMXV72KCAdS0v0.jpg\",\"release_date\":\"2020-11-11\",\"title\":\"Stierlitz,
-        le James Bond russe\",\"video\":false,\"vote_average\":8.0,\"vote_count\":1},{\"adult\":false,\"backdrop_path\":null,\"genre_ids\":[],\"id\":368235,\"original_language\":\"en\",\"original_title\":\"James
-        Bond: License to Thrill\",\"overview\":\"Promotional documentary television
-        special celebrating the 25th Anniversary of James Bond and release of the
-        then new James Bond film _Living Daylights, The (1987)_.\",\"popularity\":0.001,\"poster_path\":\"/89tjBX57wX3tXI5XYI6Ox9YIfPh.jpg\",\"release_date\":\"\",\"title\":\"James
-        Bond: License to Thrill\",\"video\":false,\"vote_average\":0.0,\"vote_count\":0},{\"adult\":false,\"backdrop_path\":null,\"genre_ids\":[99],\"id\":368155,\"original_language\":\"en\",\"original_title\":\"Happy
+        and archive footage of Ian Fleming at 'Goldeneye', Jamaica.\",\"popularity\":0.2082,\"poster_path\":\"/yvkZlSh4h3ry2GJq0yJxB19OfrV.jpg\",\"release_date\":\"1965-11-26\",\"title\":\"The
+        Incredible World of James Bond\",\"video\":false,\"vote_average\":6.0,\"vote_count\":1},{\"adult\":false,\"backdrop_path\":null,\"genre_ids\":[99,10770],\"id\":368155,\"original_language\":\"en\",\"original_title\":\"Happy
         Anniversary 007: 25 Years of James Bond\",\"overview\":\"An hour documentary
-        on the history of Bond for the 25th anniversary of the film series.\",\"popularity\":1.2,\"poster_path\":\"/7YqTYxzukFJzwlfrxpqqd32Vecj.jpg\",\"release_date\":\"1987-05-13\",\"title\":\"Happy
-        Anniversary 007: 25 Years of James Bond\",\"video\":false,\"vote_average\":6.313,\"vote_count\":8},{\"adult\":false,\"backdrop_path\":null,\"genre_ids\":[28],\"id\":822110,\"original_language\":\"en\",\"original_title\":\"Daniel
-        Craig vs James Bond\",\"overview\":\"Starting with a high-speed taxi sequence,
-        Daniel is constantly recognized as James Bond by surprised locals as he hunts
-        down his missing passport.\",\"popularity\":0.624,\"poster_path\":\"/7hknQnJPd5lfrW1QFJUxmSxp3e4.jpg\",\"release_date\":\"2020-01-25\",\"title\":\"Daniel
-        Craig vs James Bond\",\"video\":false,\"vote_average\":5.25,\"vote_count\":4},{\"adult\":false,\"backdrop_path\":null,\"genre_ids\":[28,16],\"id\":332654,\"original_language\":\"en\",\"original_title\":\"James
-        Bond: In Service of Nothing\",\"overview\":\"An aging former super spy struggles
-        to find his place in a self absorbed world without boarders, where service
-        to one's nation is an antiquated concept.\",\"popularity\":0.483,\"poster_path\":null,\"release_date\":\"2015-03-02\",\"title\":\"James
-        Bond: In Service of Nothing\",\"video\":false,\"vote_average\":7.0,\"vote_count\":1},{\"adult\":false,\"backdrop_path\":null,\"genre_ids\":[99],\"id\":827281,\"original_language\":\"en\",\"original_title\":\"James
-        Bond in the Bahamas\",\"overview\":\"A documentary about James Bond in the
-        Bahamas.\",\"popularity\":0.516,\"poster_path\":null,\"release_date\":\"2008-10-21\",\"title\":\"James
-        Bond in the Bahamas\",\"video\":false,\"vote_average\":0.0,\"vote_count\":0},{\"adult\":false,\"backdrop_path\":null,\"genre_ids\":[99],\"id\":1180189,\"original_language\":\"en\",\"original_title\":\"The
-        Guns of James Bond\",\"overview\":\"Short 1964 black-and-white documentary
-        featurette hosted by Sean Connery and featuring the real-life inspiration
-        for the character of Q, Major Geoffrey Boothroyd with a discussion of the
-        gun weaponry used by James Bond.\",\"popularity\":0.85,\"poster_path\":\"/gMovlYutnPE2h7BGRyaxQMgnhTf.jpg\",\"release_date\":\"1964-09-17\",\"title\":\"The
-        Guns of James Bond\",\"video\":false,\"vote_average\":6.0,\"vote_count\":1},{\"adult\":false,\"backdrop_path\":\"/fQCsl9zyQcGkOYr8u7QYiPGMnIc.jpg\",\"genre_ids\":[99],\"id\":252362,\"original_language\":\"en\",\"original_title\":\"The
-        Men Behind the Mayhem: The Special Effects of James Bond\",\"overview\":\"Documentary
-        looking at the special effects from the bond movies and the men who created
-        them.  Narrated by Marie Clairu.\",\"popularity\":0.3,\"poster_path\":\"/g729oZhc8NMqbhNGcuTE4bNZ9h1.jpg\",\"release_date\":\"2000-01-25\",\"title\":\"The
-        Men Behind the Mayhem: The Special Effects of James Bond\",\"video\":false,\"vote_average\":6.3,\"vote_count\":3},{\"adult\":false,\"backdrop_path\":null,\"genre_ids\":[],\"id\":1433694,\"original_language\":\"en\",\"original_title\":\"Raju
-        James Bond\",\"overview\":\"Raju James Bond is a Kannada movie starring Guru
-        Nandan, Achyuth Kumar, Chikkanna and Sadhu Kokila in prominent roles. It is
-        directed by Deepak Madhuvanahalli.\",\"popularity\":0.0,\"poster_path\":\"/t0xaEXRIKylMdkIFXSenuObanDM.jpg\",\"release_date\":\"\",\"title\":\"Raju
-        James Bond\",\"video\":false,\"vote_average\":0.0,\"vote_count\":0},{\"adult\":false,\"backdrop_path\":\"/yzvifxX9OMlFGG11YYjaDNR95xq.jpg\",\"genre_ids\":[],\"id\":389491,\"original_language\":\"en\",\"original_title\":\"James
-        Bond 50th Anniversary Gala Concert\",\"overview\":\"In 2012, to celebrate
-        50 years of James Bond films, the BBC broadcast a concert from the Royal Festival
-        Hall in London celebrating the themes from Bond films over the years.\",\"popularity\":0.004,\"poster_path\":\"/iXREUxR8SAPihjoGVKsQ3VVQGKr.jpg\",\"release_date\":\"2012-12-14\",\"title\":\"James
-        Bond 50th Anniversary Gala Concert\",\"video\":false,\"vote_average\":0.0,\"vote_count\":0},{\"adult\":false,\"backdrop_path\":\"/4mNEIpRylGtqJXdI3xzrUYh7Jf2.jpg\",\"genre_ids\":[99],\"id\":828826,\"original_language\":\"fr\",\"original_title\":\"Sean
-        Connery, de James Bond \xE0 Indiana Jones\",\"overview\":\"\",\"popularity\":0.048,\"poster_path\":\"/nztpCQdCtTDIiVJ7KMMFQpPEEWs.jpg\",\"release_date\":\"2019-01-09\",\"title\":\"Sean
-        Connery, de James Bond \xE0 Indiana Jones\",\"video\":false,\"vote_average\":6.0,\"vote_count\":1},{\"adult\":false,\"backdrop_path\":null,\"genre_ids\":[99],\"id\":1323224,\"original_language\":\"en\",\"original_title\":\"The
-        Real James Bond's Gadgets\",\"overview\":\"A look at the special technical
-        gadget of Secret Agent 007 James Bonds movies. Some of them are real.\",\"popularity\":0.001,\"poster_path\":\"/b4QOgyUnOpaG6vtoTd9CIrBHb1a.jpg\",\"release_date\":\"2002-01-01\",\"title\":\"The
-        Real James Bond's Gadgets\",\"video\":false,\"vote_average\":0.0,\"vote_count\":0},{\"adult\":false,\"backdrop_path\":null,\"genre_ids\":[99],\"id\":1102549,\"original_language\":\"en\",\"original_title\":\"Nobody
-        Does It Better: The Music of James Bond\",\"overview\":\"TV documentary exploring
-        the musical world of James Bond through interviews with key figures and discussion
-        of work of David Arnold.\",\"popularity\":0.394,\"poster_path\":null,\"release_date\":\"1997-12-28\",\"title\":\"Nobody
-        Does It Better: The Music of James Bond\",\"video\":false,\"vote_average\":7.0,\"vote_count\":1}],\"total_pages\":5,\"total_results\":85}"
+        on the history of Bond for the 25th anniversary of the film series.\",\"popularity\":4.4355,\"poster_path\":\"/7YqTYxzukFJzwlfrxpqqd32Vecj.jpg\",\"release_date\":\"1987-05-13\",\"title\":\"Happy
+        Anniversary 007: 25 Years of James Bond\",\"video\":false,\"vote_average\":6.3,\"vote_count\":8},{\"adult\":false,\"backdrop_path\":null,\"genre_ids\":[99],\"id\":252359,\"original_language\":\"en\",\"original_title\":\"James
+        Bond in India\",\"overview\":\"The making of the James Bond movie Octopussy
+        (1983) in Udaipur, India during 1982.\",\"popularity\":0.3937,\"poster_path\":\"/lCiDDPJyeM9NdQ7XQwMEkHamxBk.jpg\",\"release_date\":\"1983-01-25\",\"title\":\"James
+        Bond in India\",\"video\":false,\"vote_average\":4.0,\"vote_count\":3},{\"adult\":false,\"backdrop_path\":null,\"genre_ids\":[99],\"id\":798071,\"original_language\":\"en\",\"original_title\":\"James
+        Bond Down River\",\"overview\":\"Promotional documentary filmed at the London
+        East End Docklands area and River Thames for the filming of the opening boat
+        chase for The World Is Not Enough (1999).\",\"popularity\":0.4177,\"poster_path\":\"/5MzyjHK7rLV6wCq7BMuuR4iZiLN.jpg\",\"release_date\":\"2000-02-26\",\"title\":\"James
+        Bond Down River\",\"video\":false,\"vote_average\":5.0,\"vote_count\":1}],\"total_pages\":5,\"total_results\":86}"
     headers:
       Alt-Svc:
       - h3=":443"; ma=86400
       Cache-Control:
-      - public, max-age=6219
+      - public, max-age=14452
       Connection:
       - keep-alive
       Content-Type:
       - application/json;charset=utf-8
       Date:
-      - Thu, 13 Feb 2025 23:30:15 GMT
+      - Fri, 12 Dec 2025 00:11:10 GMT
       ETag:
-      - W/"827ad673f4ae4e24289adfe175d0dffe"
+      - W/"bbe4754e63be47dec611b354bcdc59a1"
       Server:
       - openresty
       Transfer-Encoding:
       - chunked
       Vary:
-      - Accept-Encoding,accept-encoding
+      - accept-encoding
       - Origin
       Via:
-      - 1.1 735dd7fa3c296627cd805d04e3e3a3e8.cloudfront.net (CloudFront)
+      - 1.1 af27d8f497c4d326909accf8eaaccca4.cloudfront.net (CloudFront)
       X-Amz-Cf-Id:
-      - An9HL4WkLaKg9WRIMW35_fDdVV9RA7pmFdS-AXjgwfXM9sKdRaI5cg==
+      - FBRNPolBHjW9zBUjYzbQz8rpo7pff_DkBE7A5WlLAdYW6OoHmyogjA==
       X-Amz-Cf-Pop:
-      - LIS50-P1
+      - MAD53-P8
       X-Cache:
       - Miss from cloudfront
       content-length:
-      - '10279'
+      - '11332'
+      x-az:
+      - us-east-1b
       x-memc:
       - HIT
       x-memc-age:
-      - '19166'
+      - '8903'
       x-memc-expires:
-      - '6219'
+      - '14452'
       x-memc-key:
-      - 62318023e63a028192e43268a9a94d7c
+      - e87c8661b4244b57765697a963308faced74945e3a6decc5ee1e95831dabf7d4
+      x-task-id:
+      - 13ab9bcd99174e35851dc5e0849a866f
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, zstd
+      Accept-Language:
+      - en
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Subliminal/2.4
+    method: GET
+    uri: https://api.themoviedb.org/3/search/movie?api_key=3dac925d5d494853ea6ef9161011fbb3&query=James+Bond&language=en-US&page=2
+  response:
+    body:
+      string: '{"page":2,"results":[{"adult":false,"backdrop_path":"/Lz17qcjUuLAjHokrnmBAC1wasT.jpg","genre_ids":[99],"id":338749,"original_language":"en","original_title":"James
+        Bond: For Real","overview":"The stunts and action set pieces for the the 2006
+        James Bond adventure ''Casino Royale''.","popularity":0.4908,"poster_path":"/somhy1VMSbY0t3fcOA4ZqEglUIk.jpg","release_date":"2006-11-22","title":"James
+        Bond: For Real","video":false,"vote_average":7.7,"vote_count":5},{"adult":false,"backdrop_path":"/fQCsl9zyQcGkOYr8u7QYiPGMnIc.jpg","genre_ids":[99],"id":252362,"original_language":"en","original_title":"The
+        Men Behind the Mayhem: The Special Effects of James Bond","overview":"Documentary
+        looking at the special effects from the bond movies and the men who created
+        them.  Narrated by Marie Clairu.","popularity":0.2044,"poster_path":"/g729oZhc8NMqbhNGcuTE4bNZ9h1.jpg","release_date":"2000-01-25","title":"The
+        Men Behind the Mayhem: The Special Effects of James Bond","video":false,"vote_average":6.3,"vote_count":3},{"adult":false,"backdrop_path":null,"genre_ids":[99],"id":1102549,"original_language":"en","original_title":"Nobody
+        Does It Better: The Music of James Bond","overview":"TV documentary exploring
+        the musical world of James Bond through interviews with key figures and discussion
+        of work of David Arnold.","popularity":3.4186,"poster_path":null,"release_date":"1997-12-28","title":"Nobody
+        Does It Better: The Music of James Bond","video":false,"vote_average":7.0,"vote_count":1},{"adult":false,"backdrop_path":null,"genre_ids":[28,12],"id":1184696,"original_language":"en","original_title":"Untitled
+        James Bond Film","overview":"A new iteration of the character and the first
+        film under the control of Amazon MGM. Details TBA.","popularity":0.4713,"poster_path":"/5nUWWB9rLmUixtKqjiVUn4WBpUT.jpg","release_date":"","title":"Untitled
+        James Bond Film","video":false,"vote_average":0.0,"vote_count":0},{"adult":false,"backdrop_path":null,"genre_ids":[99,10770],"id":685325,"original_language":"en","original_title":"The
+        World of James Bond","overview":"Elizabeth Hurley hosts a one hour documentary
+        on the history of the James Bond film series to tie in with the seventeenth
+        Bond film, GoldenEye.","popularity":1.4939,"poster_path":"/qlWcj1XNfvUQ3npoTrkmNdYPrAX.jpg","release_date":"1995-10-29","title":"The
+        World of James Bond","video":false,"vote_average":6.0,"vote_count":2},{"adult":false,"backdrop_path":"/rEufCpXOzTH1u3v7vn2VibngxfH.jpg","genre_ids":[99],"id":1012041,"original_language":"fr","original_title":"Sean
+        Connery vs James Bond","overview":"Having become a world star thanks to James
+        Bond, Sean Connery, who died in 2020, has never stopped trying to shed the
+        image of a sexy and slightly brutal macho that stuck to 007. A look back at
+        an eclectic career, carried out with panache.","popularity":0.2369,"poster_path":"/xlsfWXn0eR1EEyYUoq18rnWSQfV.jpg","release_date":"2022-07-28","title":"The
+        Sean Connery Paradox","video":false,"vote_average":7.273,"vote_count":11},{"adult":false,"backdrop_path":"/xIzw0rE6tWCgK3eGPqnyvFP15V9.jpg","genre_ids":[99],"id":44650,"original_language":"en","original_title":"The
+        James Bond Story","overview":"Bond... James Bond! Perhaps the greatest fictional
+        cinema icon ever. He first appeared on the big screen in 1962 in Dr. No and
+        has remained the most powerful action hero ever since. The secret to his success
+        is his adaptability. No matter what tight spots he finds himself in, he always
+        appears to be suave, sophisticated and cool. This is the full story -- from
+        the creation of the character, the men who played him, all the toys, and all
+        the women. Everything you wanted to know about James Bond... and more.","popularity":0.2773,"poster_path":"/wG1iksqapNCNNZuIneHuF6j9Sg0.jpg","release_date":"1999-10-09","title":"The
+        James Bond Story","video":false,"vote_average":6.2,"vote_count":15},{"adult":false,"backdrop_path":null,"genre_ids":[99],"id":264017,"original_language":"en","original_title":"30
+        Years of James Bond","overview":"An examination of why the James Bond films
+        have proved so popular including a discussion between the four actors who
+        have played Bond, an interview with Cubby Broccoli and contributions from
+        the directors, production designers, special effects and stuntmen.","popularity":2.0271,"poster_path":"/nNSkinqAnUdOlbHG8EG3fWloSsf.jpg","release_date":"1992-10-03","title":"30
+        Years of James Bond","video":false,"vote_average":5.3,"vote_count":3},{"adult":false,"backdrop_path":null,"genre_ids":[],"id":433250,"original_language":"hi","original_title":"James
+        Bond 777","overview":"The adventures of Kishore, a \"James Bond 777\" CBI
+        agent, as he and heroine Sopa battle criminal mastermind \"Boss\" and his
+        gang which includes whip-cracking Jamilla and a trio of highly trained dogs.","popularity":0.1256,"poster_path":"/bjRcdYNo7DX0WPegTAAvZAxKtPu.jpg","release_date":"1971-01-01","title":"James
+        Bond 777","video":false,"vote_average":0.0,"vote_count":0},{"adult":false,"backdrop_path":null,"genre_ids":[99],"id":827281,"original_language":"en","original_title":"James
+        Bond in the Bahamas","overview":"A documentary about James Bond in the Bahamas.","popularity":1.0703,"poster_path":null,"release_date":"2008-10-21","title":"James
+        Bond in the Bahamas","video":false,"vote_average":0.0,"vote_count":0},{"adult":false,"backdrop_path":null,"genre_ids":[],"id":685340,"original_language":"en","original_title":"James
+        Bond''s Greatest Hits","overview":"A review of the best James Bond songs","popularity":0.0071,"poster_path":"/mQHrQvIzK3KX18fQ9IEj1h1uXQA.jpg","release_date":"2006-11-18","title":"James
+        Bond''s Greatest Hits","video":true,"vote_average":0.0,"vote_count":0},{"adult":false,"backdrop_path":null,"genre_ids":[],"id":1433694,"original_language":"en","original_title":"Raju
+        James Bond","overview":"Raju James Bond is a Kannada movie starring Guru Nandan,
+        Achyuth Kumar, Chikkanna and Sadhu Kokila in prominent roles. It is directed
+        by Deepak Madhuvanahalli.","popularity":0.0071,"poster_path":"/t0xaEXRIKylMdkIFXSenuObanDM.jpg","release_date":"","title":"Raju
+        James Bond","video":false,"vote_average":0.0,"vote_count":0},{"adult":false,"backdrop_path":null,"genre_ids":[99],"id":1180189,"original_language":"en","original_title":"The
+        Guns of James Bond","overview":"Short 1964 black-and-white documentary featurette
+        hosted by Sean Connery and featuring the real-life inspiration for the character
+        of Q, Major Geoffrey Boothroyd with a discussion of the gun weaponry used
+        by James Bond.","popularity":0.251,"poster_path":"/gMovlYutnPE2h7BGRyaxQMgnhTf.jpg","release_date":"1964-09-17","title":"The
+        Guns of James Bond","video":false,"vote_average":6.5,"vote_count":2},{"adult":false,"backdrop_path":null,"genre_ids":[28],"id":822110,"original_language":"en","original_title":"Daniel
+        Craig vs James Bond","overview":"Starting with a high-speed taxi sequence,
+        Daniel is constantly recognized as James Bond by surprised locals as he hunts
+        down his missing passport.","popularity":0.8227,"poster_path":"/7hknQnJPd5lfrW1QFJUxmSxp3e4.jpg","release_date":"2020-01-25","title":"Daniel
+        Craig vs James Bond","video":false,"vote_average":5.2,"vote_count":4},{"adult":false,"backdrop_path":"/ujh3FEZm22YBmhPpkGNaaJzG78F.jpg","genre_ids":[99],"id":1178671,"original_language":"de","original_title":"Die
+        James Bond Story","overview":"","popularity":0.065,"poster_path":"/6bPq6Rpx0Nox6JHcyS6TzJ7IPa9.jpg","release_date":"2023-09-08","title":"Die
+        James Bond Story","video":false,"vote_average":0.0,"vote_count":0},{"adult":false,"backdrop_path":null,"genre_ids":[],"id":368235,"original_language":"en","original_title":"James
+        Bond: License to Thrill","overview":"Promotional documentary television special
+        celebrating the 25th Anniversary of James Bond and release of the then new
+        James Bond film _Living Daylights, The (1987)_.","popularity":0.0,"poster_path":"/89tjBX57wX3tXI5XYI6Ox9YIfPh.jpg","release_date":"","title":"James
+        Bond: License to Thrill","video":false,"vote_average":0.0,"vote_count":0},{"adult":false,"backdrop_path":null,"genre_ids":[99],"id":1323224,"original_language":"en","original_title":"The
+        Real James Bond''s Gadgets","overview":"A look at the special technical gadget
+        of Secret Agent 007 James Bonds movies. Some of them are real.","popularity":0.0362,"poster_path":"/b4QOgyUnOpaG6vtoTd9CIrBHb1a.jpg","release_date":"2002-01-01","title":"The
+        Real James Bond''s Gadgets","video":false,"vote_average":0.0,"vote_count":0},{"adult":false,"backdrop_path":null,"genre_ids":[],"id":1461657,"original_language":"en","original_title":"James
+        Bond: A BAFTA Tribute","overview":"Michael Parkinson hosts a celebration of
+        forty years of the most successful movie series ever. Tribute is paid to the
+        talent behind the stunts, gadgets, music and design.","popularity":0.0,"poster_path":null,"release_date":"2002-12-28","title":"James
+        Bond: A BAFTA Tribute","video":false,"vote_average":0.0,"vote_count":0},{"adult":false,"backdrop_path":null,"genre_ids":[99],"id":763411,"original_language":"fr","original_title":"Stierlitz,
+        le James Bond russe","overview":"","popularity":0.0071,"poster_path":"/xmC3HLzNbeU8WfMXV72KCAdS0v0.jpg","release_date":"2020-11-11","title":"Stierlitz,
+        le James Bond russe","video":false,"vote_average":8.0,"vote_count":1},{"adult":false,"backdrop_path":null,"genre_ids":[],"id":1319496,"original_language":"en","original_title":"James
+        Bond''s Spectre with Jonathan Ross","overview":"In James Bond''s Spectre -
+        with Jonathan Ross, film buff and huge Bond fan Jonathan fronts this one-off
+        hour-long special about one of the world''s longest running and most successful
+        film series, as the latest instalment is about to hit cinemas. And as well
+        as securing a one-on-one chat with Daniel, aka Bond, on set, Jonathan will
+        also speak to other leading cast members including Naomie Harris, Andrew Scott,
+        Monica Bellucci, Christoph Waltz and Lea Seydoux. He''ll also be finding out
+        some hints about the plot of the new thriller, as well as the other elements
+        that make up a Bond movie, including the classic cars, impressive gadgets,
+        evil villains and beautiful Bond girls.","popularity":0.0168,"poster_path":"/pGiIDZFEZLPFZTecPyyKVNKjeMs.jpg","release_date":"","title":"James
+        Bond''s Spectre with Jonathan Ross","video":false,"vote_average":0.0,"vote_count":0}],"total_pages":5,"total_results":86}'
+    headers:
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      Cache-Control:
+      - public, max-age=659
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Fri, 12 Dec 2025 00:11:11 GMT
+      ETag:
+      - W/"836dd13a666f1c70b7c64316649d349a"
+      Server:
+      - openresty
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - accept-encoding
+      - Origin
+      Via:
+      - 1.1 af27d8f497c4d326909accf8eaaccca4.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - QDnLyARz4GwouA-yYRyWVF3pXCBUf1O2gZEy96BqJXg-vixNTQG4VQ==
+      X-Amz-Cf-Pop:
+      - MAD53-P8
+      X-Cache:
+      - Miss from cloudfront
+      content-length:
+      - '10289'
+      x-az:
+      - us-east-1b
+      x-memc:
+      - HIT
+      x-memc-age:
+      - '22706'
+      x-memc-expires:
+      - '659'
+      x-memc-key:
+      - 33f3d992942f502f732de7de13d3ff28396717733255e525d530c35d4af3e750
+      x-task-id:
+      - 1d716745022a4057a20c6a013f7f0a4a
     status:
       code: 200
       message: OK

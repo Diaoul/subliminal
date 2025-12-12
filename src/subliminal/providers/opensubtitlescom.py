@@ -370,8 +370,13 @@ def requires_auth(func: C) -> C:
 class OpenSubtitlesComProvider(Provider):
     """OpenSubtitles.com Provider.
 
-    :param str username: username.
-    :param str password: password.
+    :param str username: username
+    :param str password: password
+    :param str apikey: private API key
+    :param int max_result_pages: maximum number of result pages to process,
+        set to non-zero to search faster, although the correct match can be
+        missing. Default to 0 (unlimited).
+    :param int timeout: timeout in seconds. Default to 20.
 
     """
 
@@ -385,6 +390,7 @@ class OpenSubtitlesComProvider(Provider):
     username: str | None
     password: str | None
     apikey: str
+    max_result_pages: int
     timeout: int
     token_expires_at: datetime | None
     session: Session | None
@@ -395,6 +401,7 @@ class OpenSubtitlesComProvider(Provider):
         password: str | None = None,
         *,
         apikey: str | None = None,
+        max_result_pages: int = 0,
         timeout: int = 20,
     ) -> None:
         if any((username, password)) and not all((username, password)):
@@ -404,6 +411,7 @@ class OpenSubtitlesComProvider(Provider):
         self.username = username
         self.password = password
         self.apikey = apikey or OPENSUBTITLESCOM_API_KEY
+        self.max_result_pages = max_result_pages
         self.timeout = timeout
         self.token_expires_at = None
         self.session = None
@@ -602,8 +610,11 @@ class OpenSubtitlesComProvider(Provider):
 
         ret = response['data']
 
+        # check that the maximum number of pages has not been exceeded
+        allow_more_pages = self.max_result_pages <= 0 or page < self.max_result_pages
+
         # retrieve other pages maybe
-        if 'total_pages' in response and page < response['total_pages']:
+        if allow_more_pages and 'total_pages' in response and page < response['total_pages']:
             # missing pages
             ret.extend(self._search(page=page + 1, **params))
 

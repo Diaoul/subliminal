@@ -171,8 +171,9 @@ class OpenSubtitlesSubtitle(Subtitle):
 class OpenSubtitlesProvider(Provider):
     """OpenSubtitles Provider.
 
-    :param str username: username.
-    :param str password: password.
+    :param str username: username
+    :param str password: password
+    :param int timeout: timeout in seconds. Default to 10.
 
     """
 
@@ -195,6 +196,7 @@ class OpenSubtitlesProvider(Provider):
         username: str | None = None,
         password: str | None = None,
         *,
+        max_result_pages: int = 0,
         timeout: int = 10,
     ) -> None:
         transport = TimeoutSafeTransport(timeout=timeout, user_agent='VLSub')

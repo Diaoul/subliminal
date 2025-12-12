@@ -456,3 +456,18 @@ def test_tag_match(episodes: dict[str, Episode]) -> None:
     matches = found_subtitle.get_matches(video)
     # Assert is not a tag match: {'series', 'year', 'season', 'episode'}
     assert matches == {'episode', 'year', 'country', 'season'}
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_query_max_result_pages(movies: dict[str, Movie]) -> None:
+    # choose a movie with a lot of results
+    query = 'James Bond'
+    languages = {Language('eng')}
+
+    with OpenSubtitlesComProvider(USERNAME, PASSWORD, max_result_pages=0) as provider:
+        all_subtitles = provider.query(languages, query=query)
+
+    with OpenSubtitlesComProvider(USERNAME, PASSWORD, max_result_pages=1) as provider:
+        subtitles = provider.query(languages, query=query)
+    assert len(subtitles) < len(all_subtitles)

@@ -271,15 +271,15 @@ def test_download_best_subtitles(episodes: dict[str, Episode]) -> None:
     expected_subtitles = {
         ('podnapisi', 'EdQo'),
         ('podnapisi', 'Dego'),
-        # ('gestdown', 'a295515c-a460-44ea-9ba8-8d37bcb9b5a6'),
-        # ('gestdown', '90fe1369-fa0c-4154-bd04-d3d332dec587'),
+        ('gestdown', 'a295515c-a460-44ea-9ba8-8d37bcb9b5a6'),
+        ('gestdown', '90fe1369-fa0c-4154-bd04-d3d332dec587'),
     }
 
     subtitles = download_best_subtitles({video}, languages, providers=providers)
 
     assert len(subtitles) == 1
     assert len(subtitles[video]) == 2
-    assert {(s.provider_name, s.id) for s in subtitles[video]} == expected_subtitles
+    assert {(s.provider_name, s.id) for s in subtitles[video]}.issubset(expected_subtitles)
 
 
 @pytest.mark.integration

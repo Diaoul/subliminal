@@ -2,6 +2,33 @@
 
 .. towncrier release notes start
 
+2.5.0 (2025-12-14)
+^^^^^^^^^^^^^^^^^^
+
+Provider Changes
+----------------
+
+- OpenSubtitlesCom: add a max_result_pages parameter to limit the number of result pages to speed up the search (`#1321 <https://github.com/Diaoul/subliminal/issues/1321>`__)
+
+
+Documentation
+-------------
+
+- fix ``generate_default_config`` for ``click==8.3`` and pin to ``click<8.3`` until another regression is fixed. (`#1318 <https://github.com/Diaoul/subliminal/issues/1318>`__)
+
+
+Misc
+----
+
+- add support for python 3.14 (`#1317 <https://github.com/Diaoul/subliminal/issues/1317>`__)
+- Fix test with click 8.3.0 running in parallel (`#1320 <https://github.com/Diaoul/subliminal/issues/1320>`__)
+- fix test on big-endian system (`#1323 <https://github.com/Diaoul/subliminal/issues/1323>`__)
+- compatibility with stevedore 5.6.0 (`#1325 <https://github.com/Diaoul/subliminal/issues/1325>`__)
+- fix some tests to pass in a dirty environment (`#1326 <https://github.com/Diaoul/subliminal/issues/1326>`__)
+- update pre-commit hook versions (`#1329 <https://github.com/Diaoul/subliminal/issues/1329>`__)
+- Fix some test so they are more reliable and stable (`#1331 <https://github.com/Diaoul/subliminal/issues/1331>`__)
+
+
 2.4.0 (2025-09-03)
 ^^^^^^^^^^^^^^^^^^
 

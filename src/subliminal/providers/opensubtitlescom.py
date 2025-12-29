@@ -31,7 +31,7 @@ from subliminal.video import Episode, Movie, Video
 from . import Provider
 
 if TYPE_CHECKING:
-    from collections.abc import Mapping, Set
+    from collections.abc import Generator, Mapping, Set
 
 C = TypeVar('C', bound=Callable)
 
@@ -595,30 +595,28 @@ class OpenSubtitlesComProvider(Provider):
 
         return r.json()  # type: ignore[no-any-return]
 
-    def _search(self, *, page: int = 1, **params: Any) -> list[dict[str, Any]]:
-        # Extended params with page
-        ext_params = {'page': page, **params}
+    def _search(self, **params: Any) -> Generator[dict[str, Any], None, None]:
+        page = 1
 
-        # query the server
-        logger.info('Searching subtitles %r', ext_params)
+        while True:
+            # Extended params with page
+            ext_params = {'page': page, **params}
+            logger.info('Searching subtitles %r', ext_params)
+            # GET request and add page information
+            response = self.api_get('subtitles', ext_params)
+            if not response or not response['data']:
+                break
+            yield from response['data']
 
-        # GET request and add page information
-        response = self.api_get('subtitles', ext_params)
+            page += 1
 
-        if not response or not response['data']:
-            return []
+            # check that the maximum number of pages has not been exceeded
+            if self.max_result_pages > 0 and page > self.max_result_pages:
+                break
 
-        ret = response['data']
-
-        # check that the maximum number of pages has not been exceeded
-        allow_more_pages = self.max_result_pages <= 0 or page < self.max_result_pages
-
-        # retrieve other pages maybe
-        if allow_more_pages and 'total_pages' in response and page < response['total_pages']:
-            # missing pages
-            ret.extend(self._search(page=page + 1, **params))
-
-        return ret  # type: ignore[no-any-return]
+            # check if we fetched all pages already
+            if 'total_pages' not in response or page > response['total_pages']:
+                break
 
     def _make_query(
         self,
@@ -711,14 +709,11 @@ class OpenSubtitlesComProvider(Provider):
             # add the language and query the server
             criterion.update({'languages': ','.join(sorted(lang.opensubtitlescom for lang in languages))})
 
-            # query the server
-            responses = self._search(**criterion)
-
             imdb_match = 'imdb_id' in criterion or 'show_imdb_id' in criterion
             tmdb_match = 'tmdb_id' in criterion or 'show_tmdb_id' in criterion
 
             # loop over subtitle items
-            for response in responses:
+            for response in self._search(**criterion):
                 # read single response
                 subtitle = self.subtitle_class.from_response(
                     response,

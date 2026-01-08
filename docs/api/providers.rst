@@ -43,6 +43,11 @@ Subtitulamos
 .. automodule:: subliminal.providers.subtitulamos
    :members:
 
+Subtis
+------
+.. automodule:: subliminal.providers.subtis
+   :members:
+
 TVsubtitles
 -----------
 .. automodule:: subliminal.providers.tvsubtitles

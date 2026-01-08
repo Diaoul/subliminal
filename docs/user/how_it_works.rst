@@ -13,6 +13,7 @@ subtitles. Current supported providers are:
 * OpenSubtitles
 * OpenSubtitles.com
 * Podnapisi
+* Subtis
 * Subtitulamos
 * TvSubtitles
 

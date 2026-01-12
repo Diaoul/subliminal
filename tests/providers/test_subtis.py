@@ -54,6 +54,41 @@ def test_get_matches_movie_with_release_info() -> None:
     matches = subtitle.get_matches(video)
     assert 'title' in matches
     assert 'year' in matches
+    # Synced subtitle should also match release-level attributes
+    assert 'release_group' in matches
+    assert 'source' in matches
+    assert 'resolution' in matches
+    assert 'video_codec' in matches
+
+
+def test_get_matches_movie_not_synced_no_release_matches() -> None:
+    """Non-synced subtitles should not get release-level matches."""
+    video = Movie(
+        'Novocaine.2025.1080p.WEBRip.V2.x264.Dual.YG.mkv',
+        'Novocaine',
+        source='Web',
+        release_group='YG',
+        resolution='1080p',
+        video_codec='H.264',
+        year=2025,
+    )
+    subtitle = SubtisSubtitle(
+        language=Language('spa'),
+        subtitle_id='test-id',
+        page_link='https://api.subt.is/v1/subtitle/file/alternative/test.mkv',
+        title='Novocaine 2025',
+        download_link='https://example.com/subtitle.srt',
+        is_synced=False,
+    )
+
+    matches = subtitle.get_matches(video)
+    assert 'title' in matches
+    assert 'year' in matches
+    # Non-synced subtitle should NOT get release-level matches
+    assert 'release_group' not in matches
+    assert 'source' not in matches
+    assert 'resolution' not in matches
+    assert 'video_codec' not in matches
 
 
 def test_get_matches_episode_returns_empty() -> None:

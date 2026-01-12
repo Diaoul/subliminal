@@ -67,7 +67,11 @@ class SubtisSubtitle(Subtitle):
         if not isinstance(video, Movie):
             return matches
 
-        if self.title:
+        if self.is_synced and video.name:
+            # Synced means exact file match - use video filename for full release-level matching
+            matches |= guess_matches(video, guessit(os.path.basename(video.name), {'type': 'movie'}))
+        elif self.title:
+            # Non-synced (fuzzy match) - use subtitle title for basic matching
             matches |= guess_matches(video, guessit(self.title, {'type': 'movie'}))
 
         return matches

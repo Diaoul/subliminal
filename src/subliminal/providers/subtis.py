@@ -26,6 +26,31 @@ if TYPE_CHECKING:
 
 logger = logging.getLogger(__name__)
 
+subtis_languages: set[Language] = {
+    Language('spa', country)
+    for country in [
+        'AR',  # Argentina
+        'BO',  # Bolivia
+        'CL',  # Chile
+        'CO',  # Colombia
+        'CR',  # Costa Rica
+        'DO',  # República Dominicana
+        'EC',  # Ecuador
+        'GT',  # Guatemala
+        'HN',  # Honduras
+        'MX',  # México
+        'NI',  # Nicaragua
+        'PA',  # Panamá
+        'PE',  # Perú
+        'PR',  # Puerto Rico
+        'PY',  # Paraguay
+        'SV',  # El Salvador
+        'US',  # United States
+        'UY',  # Uruguay
+        'VE',  # Venezuela
+    ]
+} | {Language('spa')}
+
 
 class SubtisSubtitle(Subtitle):
     """Subtis Subtitle."""
@@ -83,7 +108,7 @@ class SubtisProvider(Provider[SubtisSubtitle]):
     Provides Spanish subtitles for movies from the subt.is API.
     """
 
-    languages: ClassVar[Set[Language]] = {Language('spa')}
+    languages: ClassVar[Set[Language]] = subtis_languages
     video_types: ClassVar = (Movie,)
     subtitle_class: ClassVar = SubtisSubtitle
 
@@ -156,10 +181,13 @@ class SubtisProvider(Provider[SubtisSubtitle]):
 
         return subtitle_link, str(title_name)
 
-    def query(self, video: Movie) -> list[SubtisSubtitle]:
+    def query(self, video: Movie, languages: Set[Language]) -> list[SubtisSubtitle]:
         """Query the provider for subtitles."""
         if not video.name:
             return []
+
+        # Find a Spanish language from the requested languages
+        language = next((lang for lang in languages if lang.alpha3 == 'spa'), Language('spa'))
 
         filename = os.path.basename(video.name)
         encoded_filename = quote(filename, safe='')
@@ -176,7 +204,7 @@ class SubtisProvider(Provider[SubtisSubtitle]):
                     logger.debug('Found subtitle via primary search')
                     return [
                         SubtisSubtitle(
-                            language=Language('spa'),
+                            language=language,
                             subtitle_id=subtitle_link,
                             page_link=primary_url,
                             title=title_name,
@@ -196,7 +224,7 @@ class SubtisProvider(Provider[SubtisSubtitle]):
                 logger.debug('Found subtitle via alternative search (fuzzy)')
                 return [
                     SubtisSubtitle(
-                        language=Language('spa'),
+                        language=language,
                         subtitle_id=subtitle_link,
                         page_link=alternative_url,
                         title=title_name,
@@ -210,11 +238,10 @@ class SubtisProvider(Provider[SubtisSubtitle]):
 
     def list_subtitles(self, video: Video, languages: Set[Language]) -> list[SubtisSubtitle]:
         """List all the subtitles for the video."""
-        # Only support movies
         if not isinstance(video, Movie):
             return []
 
-        return self.query(video)
+        return self.query(video, languages)
 
     def download_subtitle(self, subtitle: SubtisSubtitle) -> None:
         """Download the content of the subtitle."""

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import logging
 import os
+import struct
 from typing import TYPE_CHECKING, Any, ClassVar
 from urllib.parse import quote
 
@@ -27,40 +28,40 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 subtis_languages: set[Language] = {
-    Language('spa', country)
+    Language("spa", country)
     for country in [
-        'AR',  # Argentina
-        'BO',  # Bolivia
-        'CL',  # Chile
-        'CO',  # Colombia
-        'CR',  # Costa Rica
-        'DO',  # República Dominicana
-        'EC',  # Ecuador
-        'GT',  # Guatemala
-        'HN',  # Honduras
-        'MX',  # México
-        'NI',  # Nicaragua
-        'PA',  # Panamá
-        'PE',  # Perú
-        'PR',  # Puerto Rico
-        'PY',  # Paraguay
-        'SV',  # El Salvador
-        'US',  # United States
-        'UY',  # Uruguay
-        'VE',  # Venezuela
+        "AR",
+        "BO",
+        "CL",
+        "CO",
+        "CR",
+        "DO",
+        "EC",
+        "GT",
+        "HN",
+        "MX",
+        "NI",
+        "PA",
+        "PE",
+        "PR",
+        "PY",
+        "SV",
+        "US",
+        "UY",
+        "VE",
     ]
-} | {Language('spa')}
+} | {Language("spa")}
 
 
 class SubtisSubtitle(Subtitle):
     """Subtis Subtitle."""
 
-    provider_name: ClassVar[str] = 'subtis'
+    provider_name: ClassVar[str] = "subtis"
 
     def __init__(
         self,
         language: Language,
-        subtitle_id: str = '',
+        subtitle_id: str = "",
         *,
         page_link: str | None = None,
         title: str | None = None,
@@ -82,8 +83,8 @@ class SubtisSubtitle(Subtitle):
         """Information about the subtitle."""
         if not self.title:
             return self.id
-        sync_indicator = '' if self.is_synced else ' [fuzzy match]'
-        return f'{self.title}{sync_indicator}'
+        sync_indicator = "" if self.is_synced else " [fuzzy match]"
+        return f"{self.title}{sync_indicator}"
 
     def get_matches(self, video: Video) -> set[str]:
         """Get the matches against the `video`."""
@@ -93,11 +94,11 @@ class SubtisSubtitle(Subtitle):
             return matches
 
         if self.is_synced and video.name:
-            # Synced means exact file match - use video filename for full release-level matching
-            matches |= guess_matches(video, guessit(os.path.basename(video.name), {'type': 'movie'}))
+            matches |= guess_matches(
+                video, guessit(os.path.basename(video.name), {"type": "movie"})
+            )
         elif self.title:
-            # Non-synced (fuzzy match) - use subtitle title for basic matching
-            matches |= guess_matches(video, guessit(self.title, {'type': 'movie'}))
+            matches |= guess_matches(video, guessit(self.title, {"type": "movie"}))
 
         return matches
 
@@ -112,7 +113,7 @@ class SubtisProvider(Provider[SubtisSubtitle]):
     video_types: ClassVar = (Movie,)
     subtitle_class: ClassVar = SubtisSubtitle
 
-    server_url: ClassVar[str] = 'https://api.subt.is/v1'
+    server_url: ClassVar[str] = "https://api.subt.is/v1"
 
     timeout: int
     session: Session | None
@@ -124,8 +125,8 @@ class SubtisProvider(Provider[SubtisSubtitle]):
     def initialize(self) -> None:
         """Initialize the provider."""
         self.session = Session()
-        self.session.headers['User-Agent'] = self.user_agent
-        self.session.headers['Accept'] = 'application/json'
+        self.session.headers["User-Agent"] = self.user_agent
+        self.session.headers["Accept"] = "application/json"
 
     def terminate(self) -> None:
         """Terminate the provider."""
@@ -142,7 +143,7 @@ class SubtisProvider(Provider[SubtisSubtitle]):
         try:
             r = self.session.get(url, timeout=self.timeout)
         except RequestException:
-            logger.exception('Request error for %s', url)
+            logger.exception("Request error for %s", url)
             raise SubtisError from None
 
         if r.status_code in (400, 404):
@@ -151,15 +152,15 @@ class SubtisProvider(Provider[SubtisSubtitle]):
         try:
             r.raise_for_status()
         except HTTPError:
-            msg = f'Unexpected status {r.status_code}'
-            logger.warning('%s for %s', msg, url)
+            msg = f"Unexpected status {r.status_code}"
+            logger.warning("%s for %s", msg, url)
             raise SubtisError(msg) from None
 
         try:
             return r.json()  # type: ignore[no-any-return]
         except JSONDecodeError:
-            msg = 'Invalid JSON response'
-            logger.exception('%s for %s', msg, url)
+            msg = "Invalid JSON response"
+            logger.exception("%s for %s", msg, url)
             raise SubtisError(msg) from None
 
     def _parse_response(self, data: dict[str, Any]) -> tuple[str, str] | None:
@@ -168,60 +169,142 @@ class SubtisProvider(Provider[SubtisSubtitle]):
         Returns:
             Tuple of (subtitle_link, title_name), or None if required fields are missing.
         """
-        subtitle_data = data.get('subtitle')
+        subtitle_data = data.get("subtitle")
         if not isinstance(subtitle_data, dict):
             return None
 
-        subtitle_link = subtitle_data.get('subtitle_link')
+        subtitle_link = subtitle_data.get("subtitle_link")
         if not isinstance(subtitle_link, str) or not subtitle_link:
             return None
 
-        title_data = data.get('title', {})
-        title_name = title_data.get('title_name', 'Unknown') if isinstance(title_data, dict) else 'Unknown'
+        title_data = data.get("title", {})
+        title_name = (
+            title_data.get("title_name", "Unknown")
+            if isinstance(title_data, dict)
+            else "Unknown"
+        )
 
         return subtitle_link, str(title_name)
 
+    def _compute_opensubtitles_hash(self, video_path: str) -> str | None:
+        """Compute a hash using OpenSubtitles' algorithm.
+
+        :param video_path: path of the video file.
+        :return: the hash string, or None if file is too small or error occurs.
+        """
+        try:
+            bytesize = struct.calcsize(b"<q")
+            with open(video_path, "rb") as f:
+                filesize = os.path.getsize(video_path)
+                filehash = filesize
+                if filesize < 65536 * 2:
+                    return None
+                for _ in range(65536 // bytesize):
+                    filebuffer = f.read(bytesize)
+                    (l_value,) = struct.unpack(b"<q", filebuffer)
+                    filehash += l_value
+                    filehash &= 0xFFFFFFFFFFFFFFFF
+                f.seek(max(0, filesize - 65536), 0)
+                for _ in range(65536 // bytesize):
+                    filebuffer = f.read(bytesize)
+                    (l_value,) = struct.unpack(b"<q", filebuffer)
+                    filehash += l_value
+                    filehash &= 0xFFFFFFFFFFFFFFFF
+            return f"{filehash:016x}"
+        except (OSError, IOError):
+            logger.debug("Could not compute hash for %s", video_path)
+            return None
+
     def query(self, video: Movie, languages: Set[Language]) -> list[SubtisSubtitle]:
-        """Query the provider for subtitles."""
+        """Query the provider for subtitles using cascade search.
+
+        Cascade order (from most to least specific):
+        1. Hash - OpenSubtitles video hash (most precise)
+        2. Bytes - File size match
+        3. Filename - Exact filename match
+        4. Alternative - Fuzzy match (fallback)
+        """
         if not video.name:
             return []
 
-        # Find a Spanish language from the requested languages
-        language = next((lang for lang in languages if lang.alpha3 == 'spa'), Language('spa'))
+        language = next(
+            (lang for lang in languages if lang.alpha3 == "spa"), Language("spa")
+        )
 
         filename = os.path.basename(video.name)
-        encoded_filename = quote(filename, safe='')
+        encoded_filename = quote(filename, safe="")
 
-        # Try primary search (exact match by size + filename)
+        if video.name and os.path.isfile(video.name):
+            video_hash = self._compute_opensubtitles_hash(video.name)
+            if video_hash:
+                hash_url = f"{self.server_url}/subtitle/find/file/hash/{video_hash}"
+                logger.info("Searching subtitles by hash for %s", filename)
+                data = self._session_request(hash_url)
+                if data:
+                    parsed = self._parse_response(data)
+                    if parsed:
+                        subtitle_link, title_name = parsed
+                        logger.debug("Found subtitle via hash search")
+                        return [
+                            SubtisSubtitle(
+                                language=language,
+                                subtitle_id=subtitle_link,
+                                page_link=hash_url,
+                                title=title_name,
+                                download_link=subtitle_link,
+                                is_synced=True,
+                            )
+                        ]
+
         if video.size:
-            primary_url = f'{self.server_url}/subtitle/file/name/{video.size}/{encoded_filename}'
-            logger.info('Searching subtitles (primary) for %s', filename)
-            data = self._session_request(primary_url)
+            bytes_url = f"{self.server_url}/subtitle/find/file/bytes/{video.size}"
+            logger.info("Searching subtitles by bytes for %s", filename)
+            data = self._session_request(bytes_url)
             if data:
                 parsed = self._parse_response(data)
                 if parsed:
                     subtitle_link, title_name = parsed
-                    logger.debug('Found subtitle via primary search')
+                    logger.debug("Found subtitle via bytes search")
                     return [
                         SubtisSubtitle(
                             language=language,
                             subtitle_id=subtitle_link,
-                            page_link=primary_url,
+                            page_link=bytes_url,
                             title=title_name,
                             download_link=subtitle_link,
                             is_synced=True,
                         )
                     ]
 
-        # Fallback to alternative search (fuzzy match by filename only)
-        alternative_url = f'{self.server_url}/subtitle/file/alternative/{encoded_filename}'
-        logger.info('Searching subtitles (alternative) for %s', filename)
+        filename_url = f"{self.server_url}/subtitle/find/file/name/{encoded_filename}"
+        logger.info("Searching subtitles by filename for %s", filename)
+        data = self._session_request(filename_url)
+        if data:
+            parsed = self._parse_response(data)
+            if parsed:
+                subtitle_link, title_name = parsed
+                logger.debug("Found subtitle via filename search")
+                return [
+                    SubtisSubtitle(
+                        language=language,
+                        subtitle_id=subtitle_link,
+                        page_link=filename_url,
+                        title=title_name,
+                        download_link=subtitle_link,
+                        is_synced=True,
+                    )
+                ]
+
+        alternative_url = (
+            f"{self.server_url}/subtitle/file/alternative/{encoded_filename}"
+        )
+        logger.info("Searching subtitles (alternative) for %s", filename)
         data = self._session_request(alternative_url)
         if data:
             parsed = self._parse_response(data)
             if parsed:
                 subtitle_link, title_name = parsed
-                logger.debug('Found subtitle via alternative search (fuzzy)')
+                logger.debug("Found subtitle via alternative search (fuzzy)")
                 return [
                     SubtisSubtitle(
                         language=language,
@@ -233,10 +316,12 @@ class SubtisProvider(Provider[SubtisSubtitle]):
                     )
                 ]
 
-        logger.info('No subtitle found for %s', filename)
+        logger.info("No subtitle found for %s", filename)
         return []
 
-    def list_subtitles(self, video: Video, languages: Set[Language]) -> list[SubtisSubtitle]:
+    def list_subtitles(
+        self, video: Video, languages: Set[Language]
+    ) -> list[SubtisSubtitle]:
         """List all the subtitles for the video."""
         if not isinstance(video, Movie):
             return []
@@ -251,17 +336,17 @@ class SubtisProvider(Provider[SubtisSubtitle]):
         if not subtitle.download_link:
             return
 
-        logger.info('Downloading subtitle %s', subtitle.download_link)
+        logger.info("Downloading subtitle %s", subtitle.download_link)
 
         try:
             r = self.session.get(subtitle.download_link, timeout=self.timeout)
             r.raise_for_status()
         except RequestException:
-            logger.exception('Download error for %s', subtitle.download_link)
+            logger.exception("Download error for %s", subtitle.download_link)
             raise SubtisError from None
 
         if not r.content:
-            logger.warning('Empty subtitle content from %s', subtitle.download_link)
+            logger.warning("Empty subtitle content from %s", subtitle.download_link)
             return
 
         subtitle.set_content(r.content)

@@ -1,4 +1,5 @@
 import os
+from unittest.mock import MagicMock, patch
 
 import pytest
 from babelfish import Language  # type: ignore[import-untyped]
@@ -54,7 +55,6 @@ def test_get_matches_movie_with_release_info() -> None:
     matches = subtitle.get_matches(video)
     assert 'title' in matches
     assert 'year' in matches
-    # Synced subtitle should also match release-level attributes
     assert 'release_group' in matches
     assert 'source' in matches
     assert 'resolution' in matches
@@ -84,7 +84,6 @@ def test_get_matches_movie_not_synced_no_release_matches() -> None:
     matches = subtitle.get_matches(video)
     assert 'title' in matches
     assert 'year' in matches
-    # Non-synced subtitle should NOT get release-level matches
     assert 'release_group' not in matches
     assert 'source' not in matches
     assert 'resolution' not in matches
@@ -190,13 +189,53 @@ def test_list_subtitles_movie(movies: dict[str, Movie]) -> None:
 
     with SubtisProvider() as provider:
         subtitles = provider.list_subtitles(video, languages)
-        # The API may or may not have this movie, but the call should work
         assert isinstance(subtitles, list)
 
 
 @pytest.mark.integration
 @vcr.use_cassette
+def test_list_subtitles_hash(movies: dict[str, Movie], monkeypatch: pytest.MonkeyPatch) -> None:
+    """Test searching by hash (Step 1 of cascade)."""
+
+    import tempfile
+
+    with tempfile.NamedTemporaryFile(delete=False) as f:
+        video_path = f.name
+
+    try:
+        video = Movie(
+            video_path,
+            'Novocaine',
+            year=2025,
+            size=123456789,
+        )
+        languages = {Language('spa')}
+
+        def mock_compute_hash(self, path: str) -> str | None:
+            return '1234567890abcdef'
+
+        monkeypatch.setattr(SubtisProvider, '_compute_opensubtitles_hash', mock_compute_hash)
+
+        with SubtisProvider() as provider:
+            subtitles = provider.list_subtitles(video, languages)
+            assert isinstance(subtitles, list)
+            if len(subtitles) > 0:
+                assert subtitles[0].language == Language('spa')
+                assert subtitles[0].is_synced is True
+                assert '/file/hash/' in subtitles[0].page_link
+    finally:
+        if os.path.exists(video_path):
+            os.remove(video_path)
+
+
+@pytest.mark.integration
+@vcr.use_cassette
 def test_list_subtitles_movie_with_size() -> None:
+    """Test searching by size/bytes (Step 2 of cascade).
+
+    This test uses a non-existent file path, so hash search (Step 1) is skipped.
+    It has a size, so it triggers the bytes search.
+    """
     video = Movie(
         'Novocaine.2025.1080p.WEBRip.V2.x264.Dual.YG.mkv',
         'Novocaine',
@@ -215,11 +254,55 @@ def test_list_subtitles_movie_with_size() -> None:
         if len(subtitles) > 0:
             assert subtitles[0].language == Language('spa')
             assert subtitles[0].is_synced is True
+            assert '/file/bytes/' in subtitles[0].page_link
+
+
+@pytest.mark.integration
+def test_list_subtitles_filename() -> None:
+    """Test searching by filename (Step 3 of cascade).
+
+    This test uses a non-existent file path (skips Step 1 Hash).
+    It has NO size (skips Step 2 Bytes).
+    It forces the filename search.
+
+    We mock the API response here because obtaining an EXACT filename match
+    guaranteed to exist in the live API is difficult and flaky.
+    """
+    video = Movie(
+        'Mocked.Movie.2025.1080p.mkv',
+        'Mocked Movie',
+        year=2025,
+    )
+    languages = {Language('spa')}
+
+    with SubtisProvider() as provider:
+        mock_response = MagicMock()
+        mock_response.status_code = 200
+        mock_response.json.return_value = {
+            'subtitle': {'subtitle_link': 'http://mock.com/dl'},
+            'title': {'title_name': 'Mocked Movie'},
+        }
+
+        with patch.object(provider.session, 'get', return_value=mock_response) as mock_get:
+            subtitles = provider.list_subtitles(video, languages)
+
+            assert isinstance(subtitles, list)
+            assert len(subtitles) > 0
+            assert subtitles[0].language == Language('spa')
+            assert subtitles[0].is_synced is True
+
+            args, _ = mock_get.call_args
+            assert '/find/file/name/' in args[0]
+            assert 'Mocked.Movie.2025.1080p.mkv' in args[0]
 
 
 @pytest.mark.integration
 @vcr.use_cassette
 def test_list_subtitles_movie_alternative() -> None:
+    """Test searching by alternative/fuzzy (Step 4 of cascade).
+
+    This test relies on previous steps failing to find a match.
+    """
     video = Movie(
         'Novocaine.2025.1080p.WEBRip.mkv',
         'Novocaine',

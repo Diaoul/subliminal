@@ -9,21 +9,19 @@ interactions:
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/0.1
+      - Subliminal/2.5
     method: GET
-    uri: https://api.subt.is/v1/subtitle/file/alternative/NonExistentMovie.2099.mkv
+    uri: https://api.subt.is/v1/subtitle/find/file/name/NonExistentMovie.2099.mkv
   response:
     body:
-      string: '{"message":"File name is not valid (Could not parse metadata)"}'
+      string: '{"message":"Subtitle not found for file name"}'
     headers:
       Access-Control-Allow-Origin:
       - '*'
       CF-RAY:
-      - 9ba8128c1a71322d-EZE
+      - 9c09125c8c051e74-EZE
       Connection:
       - keep-alive
-      Content-Length:
-      - '63'
       Content-Type:
       - application/json
       Cross-Origin-Opener-Policy:
@@ -31,7 +29,7 @@ interactions:
       Cross-Origin-Resource-Policy:
       - same-origin
       Date:
-      - Thu, 08 Jan 2026 01:55:24 GMT
+      - Mon, 19 Jan 2026 20:27:15 GMT
       Nel:
       - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Origin-Agent-Cluster:
@@ -39,11 +37,13 @@ interactions:
       Referrer-Policy:
       - no-referrer
       Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=5xrLEvXJifp2Kb7yfTY6AH8z3sdURhYTQ1YErOu%2FQYtiQvegYbrGiMz%2BkDVCvboiuXxTYPAzKOeinlwRPqHLYdJtCR%2BYEGX777c%3D"}]}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=pneeDj0gPm7EWuU1SHE24kn0aLVOsmnvKgbXL70HqxHyGDni00nZQWRBMIhD7%2FhP2%2BVS2DeS56iBHQyLtv2C5Low2GOqu5S87mBDytTAvM%2FIQTd7"}]}'
       Server:
       - cloudflare
       Strict-Transport-Security:
       - max-age=15552000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
       Vary:
       - accept-encoding
       X-Content-Type-Options:
@@ -58,9 +58,11 @@ interactions:
       - none
       X-XSS-Protection:
       - '0'
+      content-length:
+      - '46'
     status:
-      code: 400
-      message: Bad Request
+      code: 404
+      message: Not Found
 - request:
     body: null
     headers:
@@ -71,7 +73,7 @@ interactions:
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/0.1
+      - Subliminal/2.5
     method: GET
     uri: https://api.subt.is/v1/subtitle/file/alternative/NonExistentMovie.2099.mkv
   response:
@@ -81,7 +83,7 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       CF-RAY:
-      - 9ba81ac9c93757e9-EZE
+      - 9c09125eb88f50bd-EZE
       Connection:
       - keep-alive
       Content-Length:
@@ -93,7 +95,7 @@ interactions:
       Cross-Origin-Resource-Policy:
       - same-origin
       Date:
-      - Thu, 08 Jan 2026 02:01:01 GMT
+      - Mon, 19 Jan 2026 20:27:15 GMT
       Nel:
       - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Origin-Agent-Cluster:
@@ -101,7 +103,7 @@ interactions:
       Referrer-Policy:
       - no-referrer
       Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=n0YOGxc5i0dMoDBWFY6kNJNzG4NO27rwmJC%2FUM7Kw6TyDUvGBvNJDmB25kDd6Rzc5dbei%2FRtm1ETgZLwNUb339tTubRA2ySYMnrU79txQNVyM9kI"}]}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=4a5SKML66AH0y9ip2oBr6gHvJGprTUIHkB3Hpi5l7Uio75ES4aTZ%2FjLOdOB7Unm7V7QfeYNOwm8vBQivFXQpxPTSTOAUREq3ODR9m2AMVYuWgjFXjTU%3D"}]}'
       Server:
       - cloudflare
       Strict-Transport-Security:

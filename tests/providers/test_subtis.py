@@ -2,8 +2,8 @@ import os
 from unittest.mock import MagicMock, patch
 
 import pytest
-from babelfish import Language  # type: ignore[import-untyped]
-from vcr import VCR  # type: ignore[import-untyped]
+from babelfish import Language
+from vcr import VCR
 
 from subliminal.exceptions import NotInitializedProviderError
 from subliminal.providers.subtis import SubtisProvider, SubtisSubtitle
@@ -211,7 +211,7 @@ def test_list_subtitles_hash(movies: dict[str, Movie], monkeypatch: pytest.Monke
         )
         languages = {Language('spa')}
 
-        def mock_compute_hash(self, path: str) -> str | None:
+        def mock_compute_hash(self: SubtisProvider, path: str) -> str | None:
             return '1234567890abcdef'
 
         monkeypatch.setattr(SubtisProvider, '_compute_opensubtitles_hash', mock_compute_hash)
@@ -222,6 +222,7 @@ def test_list_subtitles_hash(movies: dict[str, Movie], monkeypatch: pytest.Monke
             if len(subtitles) > 0:
                 assert subtitles[0].language == Language('spa')
                 assert subtitles[0].is_synced is True
+                assert subtitles[0].page_link is not None
                 assert '/file/hash/' in subtitles[0].page_link
     finally:
         if os.path.exists(video_path):
@@ -254,6 +255,7 @@ def test_list_subtitles_movie_with_size() -> None:
         if len(subtitles) > 0:
             assert subtitles[0].language == Language('spa')
             assert subtitles[0].is_synced is True
+            assert subtitles[0].page_link is not None
             assert '/file/bytes/' in subtitles[0].page_link
 
 

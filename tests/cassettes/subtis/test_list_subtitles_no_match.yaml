@@ -19,7 +19,7 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       CF-RAY:
-      - 9c09125c8c051e74-EZE
+      - 9c1f9ba56bb9379c-EZE
       Connection:
       - keep-alive
       Content-Type:
@@ -29,7 +29,7 @@ interactions:
       Cross-Origin-Resource-Policy:
       - same-origin
       Date:
-      - Mon, 19 Jan 2026 20:27:15 GMT
+      - Thu, 22 Jan 2026 14:05:45 GMT
       Nel:
       - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Origin-Agent-Cluster:
@@ -37,7 +37,7 @@ interactions:
       Referrer-Policy:
       - no-referrer
       Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=pneeDj0gPm7EWuU1SHE24kn0aLVOsmnvKgbXL70HqxHyGDni00nZQWRBMIhD7%2FhP2%2BVS2DeS56iBHQyLtv2C5Low2GOqu5S87mBDytTAvM%2FIQTd7"}]}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=c4j%2B4vQgz1JA4TkifyPWl%2Fo18PRNNWQ1Kzfjy3M0%2B6ZTQJwsbbbUW5CuHU%2FjdWkfrhH%2BgCG62khA%2F6BjxRjTmmmKUAjKrbs3BHIt8U1eC9JTskRj"}]}'
       Server:
       - cloudflare
       Strict-Transport-Security:
@@ -83,7 +83,7 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       CF-RAY:
-      - 9c09125eb88f50bd-EZE
+      - 9c1f9ba77e1cc6eb-EZE
       Connection:
       - keep-alive
       Content-Length:
@@ -95,7 +95,7 @@ interactions:
       Cross-Origin-Resource-Policy:
       - same-origin
       Date:
-      - Mon, 19 Jan 2026 20:27:15 GMT
+      - Thu, 22 Jan 2026 14:05:45 GMT
       Nel:
       - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Origin-Agent-Cluster:
@@ -103,7 +103,511 @@ interactions:
       Referrer-Policy:
       - no-referrer
       Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=4a5SKML66AH0y9ip2oBr6gHvJGprTUIHkB3Hpi5l7Uio75ES4aTZ%2FjLOdOB7Unm7V7QfeYNOwm8vBQivFXQpxPTSTOAUREq3ODR9m2AMVYuWgjFXjTU%3D"}]}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=5m92PgchTbAydzFZCa7wrCuglakt8BSSzQ09Wq2z5aZ6hDIR9NEMVfCOWI5jk0UlsHLoRvG0%2FPrNnPMkyleUQg4D5MpLgv%2BWB1RWXapEg9o%2FZyjbDFQ%3D"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Vary:
+      - accept-encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-DNS-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-XSS-Protection:
+      - '0'
+    status:
+      code: 400
+      message: Bad Request
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.5
+    method: GET
+    uri: https://api.subt.is/v1/subtitle/find/file/name/NonExistentMovie.2099.mkv
+  response:
+    body:
+      string: '{"message":"Subtitle not found for file name"}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-RAY:
+      - 9c1fa02d3e31a78a-EZE
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Date:
+      - Thu, 22 Jan 2026 14:08:50 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Origin-Agent-Cluster:
+      - ?1
+      Referrer-Policy:
+      - no-referrer
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=1xhQMN%2FlXqcB8OGGzhNI40C2ROhBO241JZQxDe1JaXSpnGQswb2rpoBjgXAdM8d%2B4XN6H8UwHCdoGSjdsiRlKh%2BI75mWExtb4oeTz044%2FYcqaPvJ"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - accept-encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-DNS-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-XSS-Protection:
+      - '0'
+      content-length:
+      - '46'
+    status:
+      code: 404
+      message: Not Found
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.5
+    method: GET
+    uri: https://api.subt.is/v1/subtitle/file/alternative/NonExistentMovie.2099.mkv
+  response:
+    body:
+      string: '{"message":"File name is not valid (Could not parse metadata)"}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-RAY:
+      - 9c1fa02f2a6cacf7-EZE
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '63'
+      Content-Type:
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Date:
+      - Thu, 22 Jan 2026 14:08:51 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Origin-Agent-Cluster:
+      - ?1
+      Referrer-Policy:
+      - no-referrer
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=CBbWOElhoJas26VMWYH90Rk9nIJpA27KnQ1CvlbJC1Mcclqz5ebrqPN2PWhEnzj706Ga8y0QhHLAqFPQlMLf40kDB1p1YEAnnGQujNvPnwWOk41uEFk%3D"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Vary:
+      - accept-encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-DNS-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-XSS-Protection:
+      - '0'
+    status:
+      code: 400
+      message: Bad Request
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.5
+    method: GET
+    uri: https://api.subt.is/v1/subtitle/find/file/name/NonExistentMovie.2099.mkv
+  response:
+    body:
+      string: '{"message":"Subtitle not found for file name"}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-RAY:
+      - 9c1fa3efbeb63557-EZE
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Date:
+      - Thu, 22 Jan 2026 14:11:24 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Origin-Agent-Cluster:
+      - ?1
+      Referrer-Policy:
+      - no-referrer
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=71EyTu5xVBEpE3vu4GCWyCjWv3LjEAaK3D%2FOjCiEbviDVL8qeUYb5JYRM5NtP%2F9l4Q%2BqLHriwT2z8%2FLJP4HOdkewSI9IqrW6hAlQRnNVFidh81%2BCzi4%3D"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - accept-encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-DNS-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-XSS-Protection:
+      - '0'
+      content-length:
+      - '46'
+    status:
+      code: 404
+      message: Not Found
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.5
+    method: GET
+    uri: https://api.subt.is/v1/subtitle/file/alternative/NonExistentMovie.2099.mkv
+  response:
+    body:
+      string: '{"message":"File name is not valid (Could not parse metadata)"}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-RAY:
+      - 9c1fa3f1ddac1e74-EZE
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '63'
+      Content-Type:
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Date:
+      - Thu, 22 Jan 2026 14:11:25 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Origin-Agent-Cluster:
+      - ?1
+      Referrer-Policy:
+      - no-referrer
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=TutirUhp0hFMmHMAFOakfugmeOMdmh5aoblSnAtdVkxckDBstMrOg15CMN6%2BbAMwl%2Fsa%2BHHMYUhsC5NCTyJ28ZcvIa1V7vR%2FZOFaDwIvEnrf%2Bn2l"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Vary:
+      - accept-encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-DNS-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-XSS-Protection:
+      - '0'
+    status:
+      code: 400
+      message: Bad Request
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.5
+    method: GET
+    uri: https://api.subt.is/v1/subtitle/find/file/name/NonExistentMovie.2099.mkv
+  response:
+    body:
+      string: '{"message":"Subtitle not found for file name"}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-RAY:
+      - 9c1fae985bc5a796-EZE
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Date:
+      - Thu, 22 Jan 2026 14:18:41 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Origin-Agent-Cluster:
+      - ?1
+      Referrer-Policy:
+      - no-referrer
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=XfCTK2iywvBNGdUqfg1DluHUvbxwp%2B%2FzpPHIINPjOZJbIUoFdwZiMddF6w5xwfaW2uyn2b7SCAt%2BcLjeEHK%2FlcQYn9Uh4Il8%2FWaddh%2Fxx4jmtz5%2F"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - accept-encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-DNS-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-XSS-Protection:
+      - '0'
+      content-length:
+      - '46'
+    status:
+      code: 404
+      message: Not Found
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.5
+    method: GET
+    uri: https://api.subt.is/v1/subtitle/file/alternative/NonExistentMovie.2099.mkv
+  response:
+    body:
+      string: '{"message":"File name is not valid (Could not parse metadata)"}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-RAY:
+      - 9c1fae9a883c1e76-EZE
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '63'
+      Content-Type:
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Date:
+      - Thu, 22 Jan 2026 14:18:41 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Origin-Agent-Cluster:
+      - ?1
+      Referrer-Policy:
+      - no-referrer
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=axDLNAEaq9yXRiktr5bcuSQwIDro3jTb3R2D2tKe3kqwdipwTPp%2BLfowLI%2F3P7PA8hQYF%2FciK4ROKW%2BvUi0c%2BCf2p81dLu07%2BGaKxCzwjLdb190D"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Vary:
+      - accept-encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-DNS-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-XSS-Protection:
+      - '0'
+    status:
+      code: 400
+      message: Bad Request
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.5
+    method: GET
+    uri: https://api.subt.is/v1/subtitle/find/file/name/NonExistentMovie.2099.mkv
+  response:
+    body:
+      string: '{"message":"Subtitle not found for file name"}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-RAY:
+      - 9c1fb22219234c58-EZE
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Date:
+      - Thu, 22 Jan 2026 14:21:06 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Origin-Agent-Cluster:
+      - ?1
+      Referrer-Policy:
+      - no-referrer
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=iK6%2FYq6zcazqvIB65uhTw7TXDlG%2FFDG5FL4czR7PaBNP7w4flvl5c0IPyJIC%2Fm01h8dl%2BVRmrqg9ciLX2ZC8WaKeV7t7UL0QN%2Bit2LousF5GIQ5pd%2BU%3D"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - accept-encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-DNS-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-XSS-Protection:
+      - '0'
+      content-length:
+      - '46'
+    status:
+      code: 404
+      message: Not Found
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.5
+    method: GET
+    uri: https://api.subt.is/v1/subtitle/file/alternative/NonExistentMovie.2099.mkv
+  response:
+    body:
+      string: '{"message":"File name is not valid (Could not parse metadata)"}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-RAY:
+      - 9c1fb2241fbda79c-EZE
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '63'
+      Content-Type:
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Date:
+      - Thu, 22 Jan 2026 14:21:06 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Origin-Agent-Cluster:
+      - ?1
+      Referrer-Policy:
+      - no-referrer
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=fBQ8DffWBUBJD0P3wuDYVXLXbVmoKcgQ26BG4rbBfpLaqYF%2BvmpnfWoR7KyCwzlDe1EwGViQbRH8SGACHVXhSEUMDXTFVJJItbyDmwCkiZvxRjno"}]}'
       Server:
       - cloudflare
       Strict-Transport-Security:

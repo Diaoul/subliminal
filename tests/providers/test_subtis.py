@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import os
 from unittest.mock import MagicMock, patch
 
@@ -211,10 +213,10 @@ def test_list_subtitles_hash(movies: dict[str, Movie], monkeypatch: pytest.Monke
         )
         languages = {Language('spa')}
 
-        def mock_compute_hash(self: SubtisProvider, path: str) -> str | None:
+        def mock_compute_hash(path: str) -> str | None:
             return '1234567890abcdef'
 
-        monkeypatch.setattr(SubtisProvider, '_compute_opensubtitles_hash', mock_compute_hash)
+        monkeypatch.setattr(SubtisProvider, 'hash_video', staticmethod(mock_compute_hash))
 
         with SubtisProvider() as provider:
             subtitles = provider.list_subtitles(video, languages)

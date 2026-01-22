@@ -1,197 +1,1014 @@
 interactions:
 - request:
-    body: '<?xml version="1.0" encoding="UTF-8"?>
-
-      <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
-      xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://s1.api.bsplayer-subtitles.com/v1.php"><SOAP-ENV:Body
-      SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><ns1:logIn><username></username><password></password><AppID>BSPlayer
-      v2.67</AppID></ns1:logIn></SOAP-ENV:Body></SOAP-ENV:Envelope>'
+    body: null
     headers:
       Accept:
-      - '*/*'
+      - application/json
       Accept-Encoding:
       - gzip, deflate
       Connection:
-      - close
-      Content-Length:
-      - '543'
-      Content-Type:
-      - text/xml; charset=utf-8
-      SOAPAction:
-      - '"http://api.bsplayer-subtitles.com/v1.php#logIn"'
+      - keep-alive
       User-Agent:
-      - BSPlayer/2.x (1022.12360)
-    method: POST
-    uri: http://s1.api.bsplayer-subtitles.com/v1.php
+      - Subliminal/2.5
+    method: GET
+    uri: https://api.subt.is/v1/subtitle/find/file/hash/1234567890abcdef
   response:
     body:
-      string: '<?xml version="1.0" encoding="UTF-8"?>
-
-        <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
-        xmlns:ns1="http://api.bsplayer-subtitles.com/v1.php" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
-        SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><SOAP-ENV:Body><ns1:logInResponse><return
-        xsi:type="ns1:SubtitlesResult"><result xsi:type="xsd:string">200</result><status
-        xsi:type="xsd:string">OK</status><data xsi:type="xsd:string">5002dd610d1b047d03f1cdea286f92a8</data></return></ns1:logInResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>
-
-        '
+      string: '{"message":"Subtitle not found for video hash"}'
     headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-RAY:
+      - 9c1fa01f5f0d0652-EZE
       Connection:
-      - close
+      - keep-alive
       Content-Type:
-      - text/xml; charset=utf-8
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
       Date:
-      - Thu, 13 Feb 2025 23:29:45 GMT
+      - Thu, 22 Jan 2026 14:08:48 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Origin-Agent-Cluster:
+      - ?1
+      Referrer-Policy:
+      - no-referrer
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=tDttaJmbDuz6alf0%2BB%2F5uomEOj2o0zUfHQjmAIsE%2BIo1LHQLIhkiJRr%2FSgHSo2eY01hgOosOlx18r2XqHMLnU9C00Tw3WFTtocfxFovg5HahLfjAlUU%3D"}]}'
       Server:
-      - Apache/2.4.62 (Debian)
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
       Vary:
-      - Accept-Encoding
+      - accept-encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-DNS-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-XSS-Protection:
+      - '0'
       content-length:
-      - '684'
+      - '47'
     status:
-      code: 200
-      message: OK
+      code: 404
+      message: Not Found
 - request:
-    body: '<?xml version="1.0" encoding="UTF-8"?>
-
-      <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
-      xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://s1.api.bsplayer-subtitles.com/v1.php"><SOAP-ENV:Body
-      SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><ns1:searchSubtitles><handle>5002dd610d1b047d03f1cdea286f92a8</handle><movieHash>5b8f8f4e41ccb21e</movieHash><movieSize>7033732714</movieSize><languageId>deu,fra</languageId><imdbId>*</imdbId></ns1:searchSubtitles></SOAP-ENV:Body></SOAP-ENV:Envelope>'
+    body: null
     headers:
       Accept:
-      - '*/*'
+      - application/json
       Accept-Encoding:
       - gzip, deflate
       Connection:
-      - close
-      Content-Length:
-      - '663'
-      Content-Type:
-      - text/xml; charset=utf-8
-      SOAPAction:
-      - '"http://api.bsplayer-subtitles.com/v1.php#searchSubtitles"'
+      - keep-alive
       User-Agent:
-      - BSPlayer/2.x (1022.12360)
-    method: POST
-    uri: http://s1.api.bsplayer-subtitles.com/v1.php
+      - Subliminal/2.5
+    method: GET
+    uri: https://api.subt.is/v1/subtitle/find/file/bytes/123456789
   response:
     body:
-      string: '<?xml version="1.0" encoding="UTF-8"?>
-
-        <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
-        xmlns:ns1="http://api.bsplayer-subtitles.com/v1.php" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
-        SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><SOAP-ENV:Body><ns1:searchSubtitlesResponse><return
-        xsi:type="ns1:SearchResult"><result xsi:type="ns1:SubtitlesResult"><result
-        xsi:type="xsd:string">200</result><status xsi:type="xsd:string">OK</status><data
-        xsi:type="xsd:string">0</data></result><data SOAP-ENC:arrayType="ns1:SubtitleData[4]"
-        xsi:type="ns1:ArrayOfSubtitleData"><item xsi:type="ns1:SubtitleData"><subID
-        xsi:type="xsd:int">16448284</subID><subSize xsi:type="xsd:int">32914</subSize><subDownloadLink
-        xsi:type="xsd:string">http://download.bsplayer-subtitles.com/download/file/16448284/d5002dd610d1b047d03f1cdea286f92a8</subDownloadLink><subLang
-        xsi:type="xsd:string">fre</subLang><subName xsi:type="xsd:string">Man.Of.Steel.2013.1080p.BluRay.AVC.DTS-HD.MA.7.1-TRUEDEF.Fr.srt</subName><subFormat
-        xsi:type="xsd:string">srt</subFormat><subHash xsi:type="xsd:string">7054beaba53a11728a66cf4ddf17e999</subHash><subRating
-        xsi:nil="true"/><season xsi:nil="true"/><episode xsi:nil="true"/><encsubtitle
-        xsi:nil="true"/><movieIMBDID xsi:type="xsd:string">0770828</movieIMBDID><movieIMBDRating
-        xsi:nil="true"/><movieYear xsi:nil="true"/><movieName xsi:nil="true"/><movieHash
-        xsi:type="xsd:string">5b8f8f4e41ccb21e</movieHash><movieSize xsi:type="xsd:long">0</movieSize><movieFPS
-        xsi:type="xsd:float">0</movieFPS></item><item xsi:type="ns1:SubtitleData"><subID
-        xsi:type="xsd:int">16456646</subID><subSize xsi:type="xsd:int">37758</subSize><subDownloadLink
-        xsi:type="xsd:string">http://download.bsplayer-subtitles.com/download/file/16456646/d5002dd610d1b047d03f1cdea286f92a8</subDownloadLink><subLang
-        xsi:type="xsd:string">ger</subLang><subName xsi:type="xsd:string">Man.of.Steel.German.720p.BluRay.x264-EXQUiSiTE.srt</subName><subFormat
-        xsi:type="xsd:string">srt</subFormat><subHash xsi:type="xsd:string">987cc67a38e2c0838fa47344325026c3</subHash><subRating
-        xsi:nil="true"/><season xsi:nil="true"/><episode xsi:nil="true"/><encsubtitle
-        xsi:nil="true"/><movieIMBDID xsi:type="xsd:string">0770828</movieIMBDID><movieIMBDRating
-        xsi:nil="true"/><movieYear xsi:nil="true"/><movieName xsi:nil="true"/><movieHash
-        xsi:type="xsd:string">5b8f8f4e41ccb21e</movieHash><movieSize xsi:type="xsd:long">0</movieSize><movieFPS
-        xsi:type="xsd:float">0</movieFPS></item><item xsi:type="ns1:SubtitleData"><subID
-        xsi:type="xsd:int">16456702</subID><subSize xsi:type="xsd:int">32585</subSize><subDownloadLink
-        xsi:type="xsd:string">http://download.bsplayer-subtitles.com/download/file/16456702/d5002dd610d1b047d03f1cdea286f92a8</subDownloadLink><subLang
-        xsi:type="xsd:string">fre</subLang><subName xsi:type="xsd:string">man.of.steel.2013.720p.bluray.x264-felony.srt</subName><subFormat
-        xsi:type="xsd:string">srt</subFormat><subHash xsi:type="xsd:string">2400948861b6f74da73fb2b720f776f8</subHash><subRating
-        xsi:nil="true"/><season xsi:nil="true"/><episode xsi:nil="true"/><encsubtitle
-        xsi:nil="true"/><movieIMBDID xsi:type="xsd:string">0770828</movieIMBDID><movieIMBDRating
-        xsi:nil="true"/><movieYear xsi:nil="true"/><movieName xsi:nil="true"/><movieHash
-        xsi:type="xsd:string">5b8f8f4e41ccb21e</movieHash><movieSize xsi:type="xsd:long">0</movieSize><movieFPS
-        xsi:type="xsd:float">0</movieFPS></item><item xsi:type="ns1:SubtitleData"><subID
-        xsi:type="xsd:int">21230278</subID><subSize xsi:type="xsd:int">32582</subSize><subDownloadLink
-        xsi:type="xsd:string">http://download.bsplayer-subtitles.com/download/file/21230278/d5002dd610d1b047d03f1cdea286f92a8</subDownloadLink><subLang
-        xsi:type="xsd:string">fre</subLang><subName xsi:type="xsd:string">Ginie-ManOfSteal-fre.srt</subName><subFormat
-        xsi:type="xsd:string">srt</subFormat><subHash xsi:type="xsd:string">19a5e0f72e40eb953c2ea3d1195ce10f</subHash><subRating
-        xsi:nil="true"/><season xsi:nil="true"/><episode xsi:nil="true"/><encsubtitle
-        xsi:nil="true"/><movieIMBDID xsi:type="xsd:string">0770828</movieIMBDID><movieIMBDRating
-        xsi:nil="true"/><movieYear xsi:nil="true"/><movieName xsi:nil="true"/><movieHash
-        xsi:type="xsd:string">5b8f8f4e41ccb21e</movieHash><movieSize xsi:type="xsd:long">0</movieSize><movieFPS
-        xsi:type="xsd:float">0</movieFPS></item></data></return></ns1:searchSubtitlesResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>
-
-        '
+      string: '{"message":"Subtitle not found for file size"}'
     headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-RAY:
+      - 9c1fa0214a071f0d-EZE
       Connection:
-      - close
+      - keep-alive
       Content-Type:
-      - text/xml; charset=utf-8
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
       Date:
-      - Thu, 13 Feb 2025 23:29:45 GMT
+      - Thu, 22 Jan 2026 14:08:48 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Origin-Agent-Cluster:
+      - ?1
+      Referrer-Policy:
+      - no-referrer
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=A%2ByeFViaebQY9vdV7V6mOX3f%2BIjvWnlpnOv58soXzJLKLQyKRwRtzUDF14%2BIBcoXI89YhkdThvyzby9E8kuLYTvdQ%2FJ2dpXsK8yfXYKp5HrQxqye"}]}'
       Server:
-      - Apache/2.4.62 (Debian)
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
       Vary:
-      - Accept-Encoding
+      - accept-encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-DNS-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-XSS-Protection:
+      - '0'
       content-length:
-      - '4509'
+      - '46'
     status:
-      code: 200
-      message: OK
+      code: 404
+      message: Not Found
 - request:
-    body: '<?xml version="1.0" encoding="UTF-8"?>
-
-      <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
-      xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://s1.api.bsplayer-subtitles.com/v1.php"><SOAP-ENV:Body
-      SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><ns1:logOut><handle>5002dd610d1b047d03f1cdea286f92a8</handle></ns1:logOut></SOAP-ENV:Body></SOAP-ENV:Envelope>'
+    body: null
     headers:
       Accept:
-      - '*/*'
+      - application/json
       Accept-Encoding:
       - gzip, deflate
       Connection:
-      - close
-      Content-Length:
-      - '523'
-      Content-Type:
-      - text/xml; charset=utf-8
-      SOAPAction:
-      - '"http://api.bsplayer-subtitles.com/v1.php#logOut"'
+      - keep-alive
       User-Agent:
-      - BSPlayer/2.x (1022.12360)
-    method: POST
-    uri: http://s1.api.bsplayer-subtitles.com/v1.php
+      - Subliminal/2.5
+    method: GET
+    uri: https://api.subt.is/v1/subtitle/find/file/name/tmpp0fuurue
   response:
     body:
-      string: '<?xml version="1.0" encoding="UTF-8"?>
-
-        <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
-        xmlns:ns1="http://api.bsplayer-subtitles.com/v1.php" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
-        SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><SOAP-ENV:Body><ns1:logOutResponse><return
-        xsi:type="ns1:SubtitlesResult"><result xsi:type="xsd:string">200</result><status
-        xsi:type="xsd:string">OK</status><data xsi:type="xsd:string">0</data></return></ns1:logOutResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>
-
-        '
+      string: '{"data":{"fileName":"tmpp0fuurue"},"error":[{"code":"custom","path":["fileName"],"message":"File
+        extension not supported"}],"success":false}'
     headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-RAY:
+      - 9c1fa023380c83ea-EZE
       Connection:
-      - close
+      - keep-alive
+      Content-Length:
+      - '140'
       Content-Type:
-      - text/xml; charset=utf-8
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
       Date:
-      - Thu, 13 Feb 2025 23:29:45 GMT
+      - Thu, 22 Jan 2026 14:08:49 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Origin-Agent-Cluster:
+      - ?1
+      Referrer-Policy:
+      - no-referrer
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=yGyiPFzrjuBgKcX0oO4gg7ut4xm6xIgfFE0gVG6fE3lAEuNJ%2B3cyMFaj%2BWr8Cac5cYs%2Fi3VKfsHd2CbW1Wly2IZsnCX777U0GWscODcvqZDBdiTX"}]}'
       Server:
-      - Apache/2.4.62 (Debian)
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
       Vary:
-      - Accept-Encoding
-      content-length:
-      - '655'
+      - accept-encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-DNS-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-XSS-Protection:
+      - '0'
     status:
-      code: 200
-      message: OK
+      code: 400
+      message: Bad Request
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.5
+    method: GET
+    uri: https://api.subt.is/v1/subtitle/file/alternative/tmpp0fuurue
+  response:
+    body:
+      string: '{"message":"File extension not supported"}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-RAY:
+      - 9c1fa024c982a12e-EZE
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '42'
+      Content-Type:
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Date:
+      - Thu, 22 Jan 2026 14:08:49 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Origin-Agent-Cluster:
+      - ?1
+      Referrer-Policy:
+      - no-referrer
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=tFNkIDqvaZn2R9c27QX5w1v1t3vHSfggko9tPD%2FtfY0Z4hSMM0SC5hJxsxW90LM2HuRe%2FuluKRuc3P9wPi47DU4Lb7XwdLtPD9V6EujzeQ3%2BF9YT%2FaQ%3D"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Vary:
+      - accept-encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-DNS-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-XSS-Protection:
+      - '0'
+    status:
+      code: 400
+      message: Bad Request
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.5
+    method: GET
+    uri: https://api.subt.is/v1/subtitle/find/file/hash/1234567890abcdef
+  response:
+    body:
+      string: '{"message":"Subtitle not found for video hash"}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-RAY:
+      - 9c1fa3e0ae981d14-EZE
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Date:
+      - Thu, 22 Jan 2026 14:11:22 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Origin-Agent-Cluster:
+      - ?1
+      Referrer-Policy:
+      - no-referrer
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=Owotds194B0pvCbC%2F0peWYRruZVaJAfIWPrDZKQTFGgekzNL1oFj7pJTrIZcGAYZmXwqrUnRL3Z0yJHbk1X4jfWQDugtpvKfqZOYXFXJ9irO2XE7"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - accept-encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-DNS-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-XSS-Protection:
+      - '0'
+      content-length:
+      - '47'
+    status:
+      code: 404
+      message: Not Found
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.5
+    method: GET
+    uri: https://api.subt.is/v1/subtitle/find/file/bytes/123456789
+  response:
+    body:
+      string: '{"message":"Subtitle not found for file size"}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-RAY:
+      - 9c1fa3e30a94379c-EZE
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Date:
+      - Thu, 22 Jan 2026 14:11:22 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Origin-Agent-Cluster:
+      - ?1
+      Referrer-Policy:
+      - no-referrer
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=K7KE7gMRFYhAfv6AhOSHBO5PGjElJlCsiu4rWvSQ5JIvdM7GsDR9Y2uCeskd%2BrAN6qTvLE0%2BZ6fumdCjzSCaYg2hUMxVI23%2BPcjT1RRgZhT%2F9lQs"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - accept-encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-DNS-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-XSS-Protection:
+      - '0'
+      content-length:
+      - '46'
+    status:
+      code: 404
+      message: Not Found
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.5
+    method: GET
+    uri: https://api.subt.is/v1/subtitle/find/file/name/tmpcbu26jdb
+  response:
+    body:
+      string: '{"data":{"fileName":"tmpcbu26jdb"},"error":[{"code":"custom","path":["fileName"],"message":"File
+        extension not supported"}],"success":false}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-RAY:
+      - 9c1fa3e519e92569-EZE
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '140'
+      Content-Type:
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Date:
+      - Thu, 22 Jan 2026 14:11:23 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Origin-Agent-Cluster:
+      - ?1
+      Referrer-Policy:
+      - no-referrer
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=vBiBt%2B0SqzmK33%2F9Bzc8Jd8ys7H3iFMoEScULcTcd0YjoP90UO2c%2FGPuZWRrx44TKZIgyfrr%2FfLdYzIFjplhSY5r5Ob4YMGw%2B7YiKbvZJTxoFi8q5A8%3D"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Vary:
+      - accept-encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-DNS-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-XSS-Protection:
+      - '0'
+    status:
+      code: 400
+      message: Bad Request
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.5
+    method: GET
+    uri: https://api.subt.is/v1/subtitle/file/alternative/tmpcbu26jdb
+  response:
+    body:
+      string: '{"message":"File extension not supported"}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-RAY:
+      - 9c1fa3e71fab3f06-EZE
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '42'
+      Content-Type:
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Date:
+      - Thu, 22 Jan 2026 14:11:23 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Origin-Agent-Cluster:
+      - ?1
+      Referrer-Policy:
+      - no-referrer
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=JvIgszDUUa0SWK%2FvvIPFV818hIwDa5vF9DUegLBJlFz4vZEJ3pxcVHGxATq4czKutcU92TZb2xSMYV3pNJiMm3v5mpgEKwtO3cp9BmYI%2Fl1jPdqr"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Vary:
+      - accept-encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-DNS-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-XSS-Protection:
+      - '0'
+    status:
+      code: 400
+      message: Bad Request
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.5
+    method: GET
+    uri: https://api.subt.is/v1/subtitle/find/file/hash/1234567890abcdef
+  response:
+    body:
+      string: '{"message":"Subtitle not found for video hash"}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-RAY:
+      - 9c1fae88ffeb83fc-EZE
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Date:
+      - Thu, 22 Jan 2026 14:18:38 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Origin-Agent-Cluster:
+      - ?1
+      Referrer-Policy:
+      - no-referrer
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=FrP7OJEZJqdKdkFIUTwnRhZvVkIE5YTN8mSbftqjKLBhoZ7IdQXpSSRBGjs%2FkkwlSLgML7oV6EWwXRKn3nYnzhQKKSCfiz5Kje4HNrX%2Fey2FCq5g4zY%3D"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - accept-encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-DNS-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-XSS-Protection:
+      - '0'
+      content-length:
+      - '47'
+    status:
+      code: 404
+      message: Not Found
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.5
+    method: GET
+    uri: https://api.subt.is/v1/subtitle/find/file/bytes/123456789
+  response:
+    body:
+      string: '{"message":"Subtitle not found for file size"}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-RAY:
+      - 9c1fae8b7f1bc199-EZE
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Date:
+      - Thu, 22 Jan 2026 14:18:39 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Origin-Agent-Cluster:
+      - ?1
+      Referrer-Policy:
+      - no-referrer
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=7vW7aHRiPncYtBFLSYwPk1gvGSk0fQFVk4KOO3dIhzJPJFj3YI5E%2B2ryhcqO4qeUC88s1pX1z0ftRWI%2FUai3rcUn%2FoOH1Ruo%2BMR%2FCaZ1CMZocYu8"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - accept-encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-DNS-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-XSS-Protection:
+      - '0'
+      content-length:
+      - '46'
+    status:
+      code: 404
+      message: Not Found
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.5
+    method: GET
+    uri: https://api.subt.is/v1/subtitle/find/file/name/tmpz2oy973q
+  response:
+    body:
+      string: '{"data":{"fileName":"tmpz2oy973q"},"error":[{"code":"custom","path":["fileName"],"message":"File
+        extension not supported"}],"success":false}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-RAY:
+      - 9c1fae8d782d0c34-EZE
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '140'
+      Content-Type:
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Date:
+      - Thu, 22 Jan 2026 14:18:39 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Origin-Agent-Cluster:
+      - ?1
+      Referrer-Policy:
+      - no-referrer
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=%2FwRmHdO%2FdF9lbDrxymd1dNKYmqq9A%2FMIWEVRqk0KGAdrHPcmwlImPuTl21JV%2BYAgW%2BuK2mnna2xZBcsb1ay22WzH1J2Ry14hehy5%2F1C2o3ogC28e"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Vary:
+      - accept-encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-DNS-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-XSS-Protection:
+      - '0'
+    status:
+      code: 400
+      message: Bad Request
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.5
+    method: GET
+    uri: https://api.subt.is/v1/subtitle/file/alternative/tmpz2oy973q
+  response:
+    body:
+      string: '{"message":"File extension not supported"}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-RAY:
+      - 9c1fae8f39be17d3-EZE
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '42'
+      Content-Type:
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Date:
+      - Thu, 22 Jan 2026 14:18:39 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Origin-Agent-Cluster:
+      - ?1
+      Referrer-Policy:
+      - no-referrer
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=GK7%2BcufM6EbiF0lTuG%2FWanONmQ8lZJGtnPM%2BZ9l4RPAnpn%2FNJm0r9e9Y8dVLFEEVCibiEtuxE%2FplGI9n5o8mgNxDrEDq7didCiQQW3vgddKdKl0Xw1s%3D"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Vary:
+      - accept-encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-DNS-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-XSS-Protection:
+      - '0'
+    status:
+      code: 400
+      message: Bad Request
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.5
+    method: GET
+    uri: https://api.subt.is/v1/subtitle/find/file/hash/1234567890abcdef
+  response:
+    body:
+      string: '{"message":"Subtitle not found for video hash"}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-RAY:
+      - 9c1fb2130d2f0c34-EZE
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Date:
+      - Thu, 22 Jan 2026 14:21:03 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Origin-Agent-Cluster:
+      - ?1
+      Referrer-Policy:
+      - no-referrer
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=hEz3c%2Be6pq0tw6DdwhqGp2U6pXaAhShTdSkcxEumooFqCidi5oFW9noXdeKyGfqe81k2fKoRZvUdynSy%2FosRK%2BkxE%2F7uZvzNhN%2BJXn8JnKs9Jgt4"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - accept-encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-DNS-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-XSS-Protection:
+      - '0'
+      content-length:
+      - '47'
+    status:
+      code: 404
+      message: Not Found
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.5
+    method: GET
+    uri: https://api.subt.is/v1/subtitle/find/file/bytes/123456789
+  response:
+    body:
+      string: '{"message":"Subtitle not found for file size"}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-RAY:
+      - 9c1fb2150a8ec6eb-EZE
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Date:
+      - Thu, 22 Jan 2026 14:21:04 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Origin-Agent-Cluster:
+      - ?1
+      Referrer-Policy:
+      - no-referrer
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=2JVYyEgVWJGvfBYUqdMKNpX5gJYZsZq6EfBbgjwPoc21AVs0JbWy51%2BfML0GX7ZfzezeFdd9wV7%2FaHavJzaUVnLNI4ApP4tjTtzVL60t9JNvGPGMVaQ%3D"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - accept-encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-DNS-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-XSS-Protection:
+      - '0'
+      content-length:
+      - '46'
+    status:
+      code: 404
+      message: Not Found
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.5
+    method: GET
+    uri: https://api.subt.is/v1/subtitle/find/file/name/tmplew_q9yb
+  response:
+    body:
+      string: '{"data":{"fileName":"tmplew_q9yb"},"error":[{"code":"custom","path":["fileName"],"message":"File
+        extension not supported"}],"success":false}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-RAY:
+      - 9c1fb2170a771ea5-EZE
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '140'
+      Content-Type:
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Date:
+      - Thu, 22 Jan 2026 14:21:04 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Origin-Agent-Cluster:
+      - ?1
+      Referrer-Policy:
+      - no-referrer
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=8FAO9RVn6nVTE%2FMT%2Bam1JjrV4DZ2BbgNUXxKz0p%2BcNxO9J%2BvYW3ohXrI4bbfEtK6TP6PkwIQE3Njb2klbbQtc5sJH82Jn%2FZpNMWCmvNEeJGGBLIJ"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Vary:
+      - accept-encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-DNS-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-XSS-Protection:
+      - '0'
+    status:
+      code: 400
+      message: Bad Request
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.5
+    method: GET
+    uri: https://api.subt.is/v1/subtitle/file/alternative/tmplew_q9yb
+  response:
+    body:
+      string: '{"message":"File extension not supported"}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-RAY:
+      - 9c1fb218fb77988b-EZE
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '42'
+      Content-Type:
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Date:
+      - Thu, 22 Jan 2026 14:21:04 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Origin-Agent-Cluster:
+      - ?1
+      Referrer-Policy:
+      - no-referrer
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=jl6ggszHZzUzaIr1In4yGdDzdjLd245jUvfU9mpRke8LXziuSHp0iraf%2FvzZ3KsPDZ5EmFeEisT3roecc7RWlH%2F9aISTa%2B8hrUlOR0aiIAdalZa8jGw%3D"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Vary:
+      - accept-encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-DNS-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-XSS-Protection:
+      - '0'
+    status:
+      code: 400
+      message: Bad Request
 version: 1

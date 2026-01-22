@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import logging
 import os
-import struct
 from typing import TYPE_CHECKING, Any, ClassVar
 from urllib.parse import quote
 
@@ -67,6 +66,7 @@ class SubtisSubtitle(Subtitle):
         title: str | None = None,
         download_link: str | None = None,
         is_synced: bool = True,
+        video_hash: str | None = None,
     ) -> None:
         super().__init__(
             language=language,
@@ -77,6 +77,7 @@ class SubtisSubtitle(Subtitle):
         self.title = title
         self.download_link = download_link
         self.is_synced = is_synced
+        self.video_hash = video_hash
 
     @property
     def info(self) -> str:
@@ -92,6 +93,9 @@ class SubtisSubtitle(Subtitle):
 
         if not isinstance(video, Movie):
             return matches
+
+        if self.video_hash and 'subtis' in video.hashes and self.video_hash == video.hashes['subtis']:
+            matches.add('hash')
 
         if self.is_synced and video.name:
             matches |= guess_matches(video, guessit(os.path.basename(video.name), {'type': 'movie'}))
@@ -119,6 +123,21 @@ class SubtisProvider(Provider[SubtisSubtitle]):
     def __init__(self, *, timeout: int = 10) -> None:
         self.timeout = timeout
         self.session = None
+
+    @staticmethod
+    def hash_video(video_path: str | os.PathLike) -> str | None:
+        """Compute a hash using OpenSubtitles' algorithm.
+
+        :param video_path: path of the video file.
+        :return: the hash string, or None if file is too small or error occurs.
+        """
+        from subliminal.refiners.hash import hash_opensubtitles
+
+        try:
+            return hash_opensubtitles(video_path)
+        except (OSError, IOError):
+            logger.debug('Could not compute hash for %s', video_path)
+            return None
 
     def initialize(self) -> None:
         """Initialize the provider."""
@@ -180,36 +199,6 @@ class SubtisProvider(Provider[SubtisSubtitle]):
 
         return subtitle_link, str(title_name)
 
-    def _compute_opensubtitles_hash(self, video_path: str) -> str | None:
-        """Compute a hash using OpenSubtitles' algorithm.
-
-        :param video_path: path of the video file.
-        :return: the hash string, or None if file is too small or error occurs.
-        """
-        try:
-            bytesize = struct.calcsize(b'<q')
-            with open(video_path, 'rb') as f:
-                filesize = os.path.getsize(video_path)
-                filehash = filesize
-                if filesize < 65536 * 2:
-                    return None
-                for _ in range(65536 // bytesize):
-                    filebuffer = f.read(bytesize)
-                    (l_value,) = struct.unpack(b'<q', filebuffer)
-                    filehash += l_value
-                    filehash &= 0xFFFFFFFFFFFFFFFF
-                f.seek(max(0, filesize - 65536), 0)
-                for _ in range(65536 // bytesize):
-                    filebuffer = f.read(bytesize)
-                    (l_value,) = struct.unpack(b'<q', filebuffer)
-                    filehash += l_value
-                    filehash &= 0xFFFFFFFFFFFFFFFF
-        except (OSError, IOError):
-            logger.debug('Could not compute hash for %s', video_path)
-            return None
-        else:
-            return f'{filehash:016x}'
-
     def query(self, video: Movie, languages: Set[Language]) -> list[SubtisSubtitle]:
         """Query the provider for subtitles using cascade search.
 
@@ -228,7 +217,7 @@ class SubtisProvider(Provider[SubtisSubtitle]):
         encoded_filename = quote(filename, safe='')
 
         if video.name and os.path.isfile(video.name):
-            video_hash = self._compute_opensubtitles_hash(video.name)
+            video_hash = video.hashes.get('subtis') or self.hash_video(video.name)
             if video_hash:
                 hash_url = f'{self.server_url}/subtitle/find/file/hash/{video_hash}'
                 logger.info('Searching subtitles by hash for %s', filename)
@@ -246,6 +235,7 @@ class SubtisProvider(Provider[SubtisSubtitle]):
                                 title=title_name,
                                 download_link=subtitle_link,
                                 is_synced=True,
+                                video_hash=video_hash,
                             )
                         ]
 

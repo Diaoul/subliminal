@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import logging
 import os
-from typing import TYPE_CHECKING, Any, ClassVar
+from typing import TYPE_CHECKING, Any, ClassVar, cast
 from urllib.parse import quote
 
 from babelfish import Language
@@ -135,7 +135,7 @@ class SubtisProvider(Provider[SubtisSubtitle]):
 
         try:
             return hash_opensubtitles(video_path)
-        except (OSError, IOError):
+        except OSError:
             logger.debug('Could not compute hash for %s', video_path)
             return None
 
@@ -174,7 +174,7 @@ class SubtisProvider(Provider[SubtisSubtitle]):
             raise SubtisError(msg) from None
 
         try:
-            return r.json()
+            return cast('dict[str, Any]', r.json())
         except JSONDecodeError:
             msg = 'Invalid JSON response'
             logger.exception('%s for %s', msg, url)

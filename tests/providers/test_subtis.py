@@ -1,15 +1,20 @@
 from __future__ import annotations
 
 import os
+from typing import TYPE_CHECKING
 from unittest.mock import MagicMock, patch
 
 import pytest
 from babelfish import Language
+from tests.conftest import ensure
 from vcr import VCR
 
 from subliminal.exceptions import NotInitializedProviderError
 from subliminal.providers.subtis import SubtisProvider, SubtisSubtitle
 from subliminal.video import Episode, Movie
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 vcr = VCR(
     path_transformer=lambda path: path + '.yaml',
@@ -142,8 +147,6 @@ def test_subtitle_info_no_title() -> None:
     assert subtitle.info == 'test-id'
 
 
-@pytest.mark.integration
-@vcr.use_cassette
 def test_initialize() -> None:
     provider = SubtisProvider()
     assert provider.session is None
@@ -152,8 +155,6 @@ def test_initialize() -> None:
     provider.terminate()
 
 
-@pytest.mark.integration
-@vcr.use_cassette
 def test_terminate() -> None:
     provider = SubtisProvider()
     provider.initialize()
@@ -161,14 +162,12 @@ def test_terminate() -> None:
     assert provider.session is None
 
 
-@pytest.mark.integration
 def test_terminate_without_initialization() -> None:
     provider = SubtisProvider()
     with pytest.raises(NotInitializedProviderError):
         provider.terminate()
 
 
-@pytest.mark.integration
 def test_list_subtitles_episode_returns_empty() -> None:
     video = Episode(
         'The.Show.S01E01.mkv',
@@ -196,39 +195,32 @@ def test_list_subtitles_movie(movies: dict[str, Movie]) -> None:
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_list_subtitles_hash(movies: dict[str, Movie], monkeypatch: pytest.MonkeyPatch) -> None:
+def test_list_subtitles_hash(movies: dict[str, Movie], tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     """Test searching by hash (Step 1 of cascade)."""
 
-    import tempfile
+    video_path = ensure(tmp_path / 'Hash.Movie.2025.1080p.mkv')
 
-    with tempfile.NamedTemporaryFile(delete=False) as f:
-        video_path = f.name
+    video = Movie(
+        os.fspath(video_path),
+        'Novocaine',
+        year=2025,
+        size=123456789,
+    )
+    languages = {Language('spa')}
 
-    try:
-        video = Movie(
-            video_path,
-            'Novocaine',
-            year=2025,
-            size=123456789,
-        )
-        languages = {Language('spa')}
+    def mock_compute_hash(path: str) -> str | None:
+        return '1234567890abcdef'
 
-        def mock_compute_hash(path: str) -> str | None:
-            return '1234567890abcdef'
+    monkeypatch.setattr(SubtisProvider, 'hash_video', staticmethod(mock_compute_hash))
 
-        monkeypatch.setattr(SubtisProvider, 'hash_video', staticmethod(mock_compute_hash))
-
-        with SubtisProvider() as provider:
-            subtitles = provider.list_subtitles(video, languages)
-            assert isinstance(subtitles, list)
-            if len(subtitles) > 0:
-                assert subtitles[0].language == Language('spa')
-                assert subtitles[0].is_synced is True
-                assert subtitles[0].page_link is not None
-                assert '/file/hash/' in subtitles[0].page_link
-    finally:
-        if os.path.exists(video_path):
-            os.remove(video_path)
+    with SubtisProvider() as provider:
+        subtitles = provider.list_subtitles(video, languages)
+        assert isinstance(subtitles, list)
+        if len(subtitles) > 0:
+            assert subtitles[0].language == Language('spa')
+            assert subtitles[0].is_synced is True
+            assert subtitles[0].page_link is not None
+            assert '/file/hash/' in subtitles[0].page_link
 
 
 @pytest.mark.integration
@@ -261,7 +253,6 @@ def test_list_subtitles_movie_with_size() -> None:
             assert '/file/bytes/' in subtitles[0].page_link
 
 
-@pytest.mark.integration
 def test_list_subtitles_filename() -> None:
     """Test searching by filename (Step 3 of cascade).
 
@@ -361,7 +352,6 @@ def test_download_subtitle() -> None:
             assert subtitle.is_valid() is True
 
 
-@pytest.mark.integration
 def test_download_subtitle_missing_download_link() -> None:
     subtitle = SubtisSubtitle(
         language=Language('spa'),
@@ -377,7 +367,6 @@ def test_download_subtitle_missing_download_link() -> None:
         assert subtitle.is_valid() is False
 
 
-@pytest.mark.integration
 def test_download_subtitle_without_initialization() -> None:
     subtitle = SubtisSubtitle(
         language=Language('spa'),
@@ -392,7 +381,6 @@ def test_download_subtitle_without_initialization() -> None:
         provider.download_subtitle(subtitle)
 
 
-@pytest.mark.integration
 def test_list_subtitles_without_initialization(movies: dict[str, Movie]) -> None:
     video = movies['man_of_steel']
     languages = {Language('spa')}

@@ -1,0 +1,367 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.5
+    method: GET
+    uri: https://api.subt.is/v1/subtitle/find/file/bytes/4541737725
+  response:
+    body:
+      string: "{\"title\":{\"id\":10202,\"slug\":\"novocaine-2025\",\"imdb_id\":\"29603959\",\"queried_times\":2485,\"searched_times\":16,\"type\":\"movie\",\"year\":2025,\"title_name\":\"Novocaine\",\"optimized_logo\":\"https://yelhsmnvfyyjuamxbobs.supabase.co/storage/v1/object/public/images/5fsINfIZOQ3JK3ST9TJaXL8Mg6v-logo.webp\",\"optimized_poster\":\"https://yelhsmnvfyyjuamxbobs.supabase.co/storage/v1/object/public/images/xmMHGz9dVRaMY6rRAlEX4W0Wdhm-poster-lg.webp\",\"optimized_backdrop\":\"https://yelhsmnvfyyjuamxbobs.supabase.co/storage/v1/object/public/images/doI4G4wbGz7uNYYdRa4pSfXWfRr.webp\",\"optimized_backdrop_main\":\"https://yelhsmnvfyyjuamxbobs.supabase.co/storage/v1/object/public/images/1Eu4grfwoQ1EigaZ5KGfPXVHhT0_main.webp\",\"overview\":\"Cuando
+        la chica de sus sue\xF1os es secuestrada, un hombre com\xFAn Nate convierte
+        su incapacidad de no sentir dolor en una fortaleza inesperada en su lucha
+        por recuperarla.\",\"runtime\":110,\"rating\":6.9,\"poster_thumbhash\":\"kQgGFQJiaXaIB3hWqJR4R2RgSHcG\",\"backdrop_thumbhash\":\"jQgKHIKAiViGiHdyiId4hgA4OQ==\",\"youtube_id\":\"-PyOIlJEdqA\",\"certification\":\"R\"},\"release_group\":{\"id\":1760,\"release_group_name\":\"Dual
+        YG\"},\"subtitle_group\":{\"id\":2,\"website\":\"https://subdl.com\",\"subtitle_group_name\":\"SUBDL\"},\"subtitle\":{\"id\":11584,\"bytes\":4541737725,\"is_valid\":false,\"resolution\":\"1080p\",\"external_id\":\"5fR7OhtYVkD\",\"uploaded_by\":\"indexer-cron\",\"subtitle_link\":\"https://api.subt.is/v1/subtitle/link/11584\",\"queried_times\":46,\"current_season\":null,\"current_episode\":null,\"title_file_name\":\"Novocaine.2025.1080p.WEBRip.V2.x264.Dual
+        YG.mkv\",\"subtitle_file_name\":\"Novocaine.2025.1080p.WEBRip.V2.x264.Dual.YG.srt\",\"preview\":[{\"id\":\"2\",\"startTime\":\"00:01:04,483\",\"startSeconds\":64.483,\"endTime\":\"00:01:06,730\",\"endSeconds\":66.73,\"text\":\"Y
+        escuchen, si he aprendido una cosa es\"},{\"id\":\"4\",\"startTime\":\"00:01:06,730\",\"startSeconds\":66.73,\"endTime\":\"00:01:09,290\",\"endSeconds\":69.29,\"text\":\"esta,
+        no puedes dejar que tu discapacidad te\"},{\"id\":\"5\",\"startTime\":\"00:01:09,290\",\"startSeconds\":69.29,\"endTime\":\"00:01:11,730\",\"endSeconds\":71.73,\"text\":\"detenga,
+        tienes que usarla como medalla de honor,\"},{\"id\":\"6\",\"startTime\":\"00:01:12,070\",\"startSeconds\":72.07,\"endTime\":\"00:01:14,390\",\"endSeconds\":74.39,\"text\":\"tienes
+        que salir y decir, mundo, este soy\"}],\"rip_type\":\"WEBRip\"}}"
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-RAY:
+      - 9c1f9b9eef9e8bbf-EZE
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Date:
+      - Thu, 22 Jan 2026 14:05:44 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Origin-Agent-Cluster:
+      - ?1
+      Referrer-Policy:
+      - no-referrer
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=kCKaitgIvPLY1ufGerRVeGTHLXPNwXw%2B01zfYI5RoWWX2pua8paJZda1NTI1ZN%2BE6kh4TxGwfOtwPjB%2FaGbSyMP%2F62RDe0y6j8XEY615cS2JyvRq"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - accept-encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-DNS-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-XSS-Protection:
+      - '0'
+      content-length:
+      - '2259'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.5
+    method: GET
+    uri: https://api.subt.is/v1/subtitle/find/file/bytes/4541737725
+  response:
+    body:
+      string: "{\"title\":{\"id\":10202,\"slug\":\"novocaine-2025\",\"imdb_id\":\"29603959\",\"queried_times\":2486,\"searched_times\":16,\"type\":\"movie\",\"year\":2025,\"title_name\":\"Novocaine\",\"optimized_logo\":\"https://yelhsmnvfyyjuamxbobs.supabase.co/storage/v1/object/public/images/5fsINfIZOQ3JK3ST9TJaXL8Mg6v-logo.webp\",\"optimized_poster\":\"https://yelhsmnvfyyjuamxbobs.supabase.co/storage/v1/object/public/images/xmMHGz9dVRaMY6rRAlEX4W0Wdhm-poster-lg.webp\",\"optimized_backdrop\":\"https://yelhsmnvfyyjuamxbobs.supabase.co/storage/v1/object/public/images/doI4G4wbGz7uNYYdRa4pSfXWfRr.webp\",\"optimized_backdrop_main\":\"https://yelhsmnvfyyjuamxbobs.supabase.co/storage/v1/object/public/images/1Eu4grfwoQ1EigaZ5KGfPXVHhT0_main.webp\",\"overview\":\"Cuando
+        la chica de sus sue\xF1os es secuestrada, un hombre com\xFAn Nate convierte
+        su incapacidad de no sentir dolor en una fortaleza inesperada en su lucha
+        por recuperarla.\",\"runtime\":110,\"rating\":6.9,\"poster_thumbhash\":\"kQgGFQJiaXaIB3hWqJR4R2RgSHcG\",\"backdrop_thumbhash\":\"jQgKHIKAiViGiHdyiId4hgA4OQ==\",\"youtube_id\":\"-PyOIlJEdqA\",\"certification\":\"R\"},\"release_group\":{\"id\":1760,\"release_group_name\":\"Dual
+        YG\"},\"subtitle_group\":{\"id\":2,\"website\":\"https://subdl.com\",\"subtitle_group_name\":\"SUBDL\"},\"subtitle\":{\"id\":11584,\"bytes\":4541737725,\"is_valid\":false,\"resolution\":\"1080p\",\"external_id\":\"5fR7OhtYVkD\",\"uploaded_by\":\"indexer-cron\",\"subtitle_link\":\"https://api.subt.is/v1/subtitle/link/11584\",\"queried_times\":47,\"current_season\":null,\"current_episode\":null,\"title_file_name\":\"Novocaine.2025.1080p.WEBRip.V2.x264.Dual
+        YG.mkv\",\"subtitle_file_name\":\"Novocaine.2025.1080p.WEBRip.V2.x264.Dual.YG.srt\",\"preview\":[{\"id\":\"2\",\"startTime\":\"00:01:04,483\",\"startSeconds\":64.483,\"endTime\":\"00:01:06,730\",\"endSeconds\":66.73,\"text\":\"Y
+        escuchen, si he aprendido una cosa es\"},{\"id\":\"4\",\"startTime\":\"00:01:06,730\",\"startSeconds\":66.73,\"endTime\":\"00:01:09,290\",\"endSeconds\":69.29,\"text\":\"esta,
+        no puedes dejar que tu discapacidad te\"},{\"id\":\"5\",\"startTime\":\"00:01:09,290\",\"startSeconds\":69.29,\"endTime\":\"00:01:11,730\",\"endSeconds\":71.73,\"text\":\"detenga,
+        tienes que usarla como medalla de honor,\"},{\"id\":\"6\",\"startTime\":\"00:01:12,070\",\"startSeconds\":72.07,\"endTime\":\"00:01:14,390\",\"endSeconds\":74.39,\"text\":\"tienes
+        que salir y decir, mundo, este soy\"}],\"rip_type\":\"WEBRip\"}}"
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-RAY:
+      - 9c1fa0267f062001-EZE
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Date:
+      - Thu, 22 Jan 2026 14:08:49 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Origin-Agent-Cluster:
+      - ?1
+      Referrer-Policy:
+      - no-referrer
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=8YFEeJO%2BwIuc1T82oyySP3JOqILTizYX2FvBjWXNSIAWi%2BPFvWnTA%2BeYwCEGI%2BSTis6QBfriQM3XFG%2Fx4%2FxML5zEJS%2B%2BmvNkGsLOqAylOMP%2Fxksu"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - accept-encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-DNS-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-XSS-Protection:
+      - '0'
+      content-length:
+      - '2259'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.5
+    method: GET
+    uri: https://api.subt.is/v1/subtitle/find/file/bytes/4541737725
+  response:
+    body:
+      string: "{\"title\":{\"id\":10202,\"slug\":\"novocaine-2025\",\"imdb_id\":\"29603959\",\"queried_times\":2487,\"searched_times\":16,\"type\":\"movie\",\"year\":2025,\"title_name\":\"Novocaine\",\"optimized_logo\":\"https://yelhsmnvfyyjuamxbobs.supabase.co/storage/v1/object/public/images/5fsINfIZOQ3JK3ST9TJaXL8Mg6v-logo.webp\",\"optimized_poster\":\"https://yelhsmnvfyyjuamxbobs.supabase.co/storage/v1/object/public/images/xmMHGz9dVRaMY6rRAlEX4W0Wdhm-poster-lg.webp\",\"optimized_backdrop\":\"https://yelhsmnvfyyjuamxbobs.supabase.co/storage/v1/object/public/images/doI4G4wbGz7uNYYdRa4pSfXWfRr.webp\",\"optimized_backdrop_main\":\"https://yelhsmnvfyyjuamxbobs.supabase.co/storage/v1/object/public/images/1Eu4grfwoQ1EigaZ5KGfPXVHhT0_main.webp\",\"overview\":\"Cuando
+        la chica de sus sue\xF1os es secuestrada, un hombre com\xFAn Nate convierte
+        su incapacidad de no sentir dolor en una fortaleza inesperada en su lucha
+        por recuperarla.\",\"runtime\":110,\"rating\":6.9,\"poster_thumbhash\":\"kQgGFQJiaXaIB3hWqJR4R2RgSHcG\",\"backdrop_thumbhash\":\"jQgKHIKAiViGiHdyiId4hgA4OQ==\",\"youtube_id\":\"-PyOIlJEdqA\",\"certification\":\"R\"},\"release_group\":{\"id\":1760,\"release_group_name\":\"Dual
+        YG\"},\"subtitle_group\":{\"id\":2,\"website\":\"https://subdl.com\",\"subtitle_group_name\":\"SUBDL\"},\"subtitle\":{\"id\":11584,\"bytes\":4541737725,\"is_valid\":false,\"resolution\":\"1080p\",\"external_id\":\"5fR7OhtYVkD\",\"uploaded_by\":\"indexer-cron\",\"subtitle_link\":\"https://api.subt.is/v1/subtitle/link/11584\",\"queried_times\":48,\"current_season\":null,\"current_episode\":null,\"title_file_name\":\"Novocaine.2025.1080p.WEBRip.V2.x264.Dual
+        YG.mkv\",\"subtitle_file_name\":\"Novocaine.2025.1080p.WEBRip.V2.x264.Dual.YG.srt\",\"preview\":[{\"id\":\"2\",\"startTime\":\"00:01:04,483\",\"startSeconds\":64.483,\"endTime\":\"00:01:06,730\",\"endSeconds\":66.73,\"text\":\"Y
+        escuchen, si he aprendido una cosa es\"},{\"id\":\"4\",\"startTime\":\"00:01:06,730\",\"startSeconds\":66.73,\"endTime\":\"00:01:09,290\",\"endSeconds\":69.29,\"text\":\"esta,
+        no puedes dejar que tu discapacidad te\"},{\"id\":\"5\",\"startTime\":\"00:01:09,290\",\"startSeconds\":69.29,\"endTime\":\"00:01:11,730\",\"endSeconds\":71.73,\"text\":\"detenga,
+        tienes que usarla como medalla de honor,\"},{\"id\":\"6\",\"startTime\":\"00:01:12,070\",\"startSeconds\":72.07,\"endTime\":\"00:01:14,390\",\"endSeconds\":74.39,\"text\":\"tienes
+        que salir y decir, mundo, este soy\"}],\"rip_type\":\"WEBRip\"}}"
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-RAY:
+      - 9c1fa3e8e8bfb368-EZE
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Date:
+      - Thu, 22 Jan 2026 14:11:23 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Origin-Agent-Cluster:
+      - ?1
+      Referrer-Policy:
+      - no-referrer
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=JJQ9w%2B64U39uj%2FnT%2B41Gu4u%2BLvygc9PYVIlanDDJr61Nj8eBDATpflDMuvefJS79yb2Kg6JvsBj6OzuJmfj7bDVO7Fm4zPGjRmDPpEg0cAUJx0hfE%2FA%3D"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - accept-encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-DNS-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-XSS-Protection:
+      - '0'
+      content-length:
+      - '2259'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.5
+    method: GET
+    uri: https://api.subt.is/v1/subtitle/find/file/bytes/4541737725
+  response:
+    body:
+      string: "{\"title\":{\"id\":10202,\"slug\":\"novocaine-2025\",\"imdb_id\":\"29603959\",\"queried_times\":2488,\"searched_times\":16,\"type\":\"movie\",\"year\":2025,\"title_name\":\"Novocaine\",\"optimized_logo\":\"https://yelhsmnvfyyjuamxbobs.supabase.co/storage/v1/object/public/images/5fsINfIZOQ3JK3ST9TJaXL8Mg6v-logo.webp\",\"optimized_poster\":\"https://yelhsmnvfyyjuamxbobs.supabase.co/storage/v1/object/public/images/xmMHGz9dVRaMY6rRAlEX4W0Wdhm-poster-lg.webp\",\"optimized_backdrop\":\"https://yelhsmnvfyyjuamxbobs.supabase.co/storage/v1/object/public/images/doI4G4wbGz7uNYYdRa4pSfXWfRr.webp\",\"optimized_backdrop_main\":\"https://yelhsmnvfyyjuamxbobs.supabase.co/storage/v1/object/public/images/1Eu4grfwoQ1EigaZ5KGfPXVHhT0_main.webp\",\"overview\":\"Cuando
+        la chica de sus sue\xF1os es secuestrada, un hombre com\xFAn Nate convierte
+        su incapacidad de no sentir dolor en una fortaleza inesperada en su lucha
+        por recuperarla.\",\"runtime\":110,\"rating\":6.9,\"poster_thumbhash\":\"kQgGFQJiaXaIB3hWqJR4R2RgSHcG\",\"backdrop_thumbhash\":\"jQgKHIKAiViGiHdyiId4hgA4OQ==\",\"youtube_id\":\"-PyOIlJEdqA\",\"certification\":\"R\"},\"release_group\":{\"id\":1760,\"release_group_name\":\"Dual
+        YG\"},\"subtitle_group\":{\"id\":2,\"website\":\"https://subdl.com\",\"subtitle_group_name\":\"SUBDL\"},\"subtitle\":{\"id\":11584,\"bytes\":4541737725,\"is_valid\":false,\"resolution\":\"1080p\",\"external_id\":\"5fR7OhtYVkD\",\"uploaded_by\":\"indexer-cron\",\"subtitle_link\":\"https://api.subt.is/v1/subtitle/link/11584\",\"queried_times\":49,\"current_season\":null,\"current_episode\":null,\"title_file_name\":\"Novocaine.2025.1080p.WEBRip.V2.x264.Dual
+        YG.mkv\",\"subtitle_file_name\":\"Novocaine.2025.1080p.WEBRip.V2.x264.Dual.YG.srt\",\"preview\":[{\"id\":\"2\",\"startTime\":\"00:01:04,483\",\"startSeconds\":64.483,\"endTime\":\"00:01:06,730\",\"endSeconds\":66.73,\"text\":\"Y
+        escuchen, si he aprendido una cosa es\"},{\"id\":\"4\",\"startTime\":\"00:01:06,730\",\"startSeconds\":66.73,\"endTime\":\"00:01:09,290\",\"endSeconds\":69.29,\"text\":\"esta,
+        no puedes dejar que tu discapacidad te\"},{\"id\":\"5\",\"startTime\":\"00:01:09,290\",\"startSeconds\":69.29,\"endTime\":\"00:01:11,730\",\"endSeconds\":71.73,\"text\":\"detenga,
+        tienes que usarla como medalla de honor,\"},{\"id\":\"6\",\"startTime\":\"00:01:12,070\",\"startSeconds\":72.07,\"endTime\":\"00:01:14,390\",\"endSeconds\":74.39,\"text\":\"tienes
+        que salir y decir, mundo, este soy\"}],\"rip_type\":\"WEBRip\"}}"
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-RAY:
+      - 9c1fae91282a8692-EZE
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Date:
+      - Thu, 22 Jan 2026 14:18:40 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Origin-Agent-Cluster:
+      - ?1
+      Referrer-Policy:
+      - no-referrer
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=V6kwg%2FIKoRGBC%2B8%2BfDZ4tMa0xMUMyrUKHw4FVDGnZ0d%2FgHkXn%2B0amudH59L6x79d5matFK71f%2BVTe6sNpdMX4Pp0Gx2oW0fcUO1BhNBPaK1RM0Nk"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - accept-encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-DNS-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-XSS-Protection:
+      - '0'
+      content-length:
+      - '2259'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.5
+    method: GET
+    uri: https://api.subt.is/v1/subtitle/find/file/bytes/4541737725
+  response:
+    body:
+      string: "{\"title\":{\"id\":10202,\"slug\":\"novocaine-2025\",\"imdb_id\":\"29603959\",\"queried_times\":2489,\"searched_times\":16,\"type\":\"movie\",\"year\":2025,\"title_name\":\"Novocaine\",\"optimized_logo\":\"https://yelhsmnvfyyjuamxbobs.supabase.co/storage/v1/object/public/images/5fsINfIZOQ3JK3ST9TJaXL8Mg6v-logo.webp\",\"optimized_poster\":\"https://yelhsmnvfyyjuamxbobs.supabase.co/storage/v1/object/public/images/xmMHGz9dVRaMY6rRAlEX4W0Wdhm-poster-lg.webp\",\"optimized_backdrop\":\"https://yelhsmnvfyyjuamxbobs.supabase.co/storage/v1/object/public/images/doI4G4wbGz7uNYYdRa4pSfXWfRr.webp\",\"optimized_backdrop_main\":\"https://yelhsmnvfyyjuamxbobs.supabase.co/storage/v1/object/public/images/1Eu4grfwoQ1EigaZ5KGfPXVHhT0_main.webp\",\"overview\":\"Cuando
+        la chica de sus sue\xF1os es secuestrada, un hombre com\xFAn Nate convierte
+        su incapacidad de no sentir dolor en una fortaleza inesperada en su lucha
+        por recuperarla.\",\"runtime\":110,\"rating\":6.9,\"poster_thumbhash\":\"kQgGFQJiaXaIB3hWqJR4R2RgSHcG\",\"backdrop_thumbhash\":\"jQgKHIKAiViGiHdyiId4hgA4OQ==\",\"youtube_id\":\"-PyOIlJEdqA\",\"certification\":\"R\"},\"release_group\":{\"id\":1760,\"release_group_name\":\"Dual
+        YG\"},\"subtitle_group\":{\"id\":2,\"website\":\"https://subdl.com\",\"subtitle_group_name\":\"SUBDL\"},\"subtitle\":{\"id\":11584,\"bytes\":4541737725,\"is_valid\":false,\"resolution\":\"1080p\",\"external_id\":\"5fR7OhtYVkD\",\"uploaded_by\":\"indexer-cron\",\"subtitle_link\":\"https://api.subt.is/v1/subtitle/link/11584\",\"queried_times\":50,\"current_season\":null,\"current_episode\":null,\"title_file_name\":\"Novocaine.2025.1080p.WEBRip.V2.x264.Dual
+        YG.mkv\",\"subtitle_file_name\":\"Novocaine.2025.1080p.WEBRip.V2.x264.Dual.YG.srt\",\"preview\":[{\"id\":\"2\",\"startTime\":\"00:01:04,483\",\"startSeconds\":64.483,\"endTime\":\"00:01:06,730\",\"endSeconds\":66.73,\"text\":\"Y
+        escuchen, si he aprendido una cosa es\"},{\"id\":\"4\",\"startTime\":\"00:01:06,730\",\"startSeconds\":66.73,\"endTime\":\"00:01:09,290\",\"endSeconds\":69.29,\"text\":\"esta,
+        no puedes dejar que tu discapacidad te\"},{\"id\":\"5\",\"startTime\":\"00:01:09,290\",\"startSeconds\":69.29,\"endTime\":\"00:01:11,730\",\"endSeconds\":71.73,\"text\":\"detenga,
+        tienes que usarla como medalla de honor,\"},{\"id\":\"6\",\"startTime\":\"00:01:12,070\",\"startSeconds\":72.07,\"endTime\":\"00:01:14,390\",\"endSeconds\":74.39,\"text\":\"tienes
+        que salir y decir, mundo, este soy\"}],\"rip_type\":\"WEBRip\"}}"
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-RAY:
+      - 9c1fb21afafadd2e-EZE
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Date:
+      - Thu, 22 Jan 2026 14:21:05 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Origin-Agent-Cluster:
+      - ?1
+      Referrer-Policy:
+      - no-referrer
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=RMyELizuYgXfkk%2BhMq%2FsQfdl%2BlxYpDBm5EJ7wU9Z4MBFzL8s%2BxLo14aO7i8A1p6P5kegwYqHBzRc9bowBwJFmVXcbAVxkIa4rbs3q054fePJoAyO"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - accept-encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-DNS-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-XSS-Protection:
+      - '0'
+      content-length:
+      - '2259'
+    status:
+      code: 200
+      message: OK
+version: 1

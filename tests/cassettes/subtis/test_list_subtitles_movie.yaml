@@ -1,0 +1,997 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.5
+    method: GET
+    uri: https://api.subt.is/v1/subtitle/find/file/bytes/7033732714
+  response:
+    body:
+      string: '{"message":"Subtitle not found for file size"}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-RAY:
+      - 9c1f9b969f208bea-EZE
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Date:
+      - Thu, 22 Jan 2026 14:05:42 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Origin-Agent-Cluster:
+      - ?1
+      Referrer-Policy:
+      - no-referrer
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=FWeJkvKTvvzh4hY%2B96TMcfcCd5oWF9J%2Fmloy7MwffPwBeTsEcYXovnj4IUdAocFKaFSydLwEHFpa6rPbBjBb%2FOtBm2IDcA9KPtcxt1mVCuuMObfjqW4%3D"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - accept-encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-DNS-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-XSS-Protection:
+      - '0'
+      content-length:
+      - '46'
+    status:
+      code: 404
+      message: Not Found
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.5
+    method: GET
+    uri: https://api.subt.is/v1/subtitle/find/file/name/man.of.steel.2013.720p.bluray.x264-felony.mkv
+  response:
+    body:
+      string: '{"message":"Subtitle not found for file name"}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-RAY:
+      - 9c1f9b993b49a79c-EZE
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Date:
+      - Thu, 22 Jan 2026 14:05:43 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Origin-Agent-Cluster:
+      - ?1
+      Referrer-Policy:
+      - no-referrer
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=H%2FboejXe7v4Ms6TGkSpqFXj6w7b%2FRFVpM0UKwgyJ4kpPchhW%2Fbrju5HwCZ5aRweOLtR3UAH51gvmDvq4P8Mzx3JUpz4AqaQfnbN6n%2Fee7%2Fteg%2F9%2F"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - accept-encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-DNS-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-XSS-Protection:
+      - '0'
+      content-length:
+      - '46'
+    status:
+      code: 404
+      message: Not Found
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.5
+    method: GET
+    uri: https://api.subt.is/v1/subtitle/file/alternative/man.of.steel.2013.720p.bluray.x264-felony.mkv
+  response:
+    body:
+      string: "{\"title\":{\"id\":11693,\"slug\":\"man-of-steel-2013\",\"imdb_id\":\"0770828\",\"queried_times\":2019,\"searched_times\":1,\"type\":\"movie\",\"year\":2013,\"title_name\":\"Man
+        of Steel\",\"optimized_logo\":\"https://yelhsmnvfyyjuamxbobs.supabase.co/storage/v1/object/public/images/qBtAryVKg11iEOmxeb31fxIHuvN-logo.webp\",\"optimized_poster\":\"https://yelhsmnvfyyjuamxbobs.supabase.co/storage/v1/object/public/images/8GFtkImmK0K1VaUChR0n9O61CFU-poster-lg.webp\",\"optimized_backdrop\":\"https://yelhsmnvfyyjuamxbobs.supabase.co/storage/v1/object/public/images/zQmawynS76X7SXGS39g8Z7aiXI2.webp\",\"optimized_backdrop_main\":\"https://yelhsmnvfyyjuamxbobs.supabase.co/storage/v1/object/public/images/z3Z5PKootkXs6Jd7kOdzLZoslb3_main.webp\",\"overview\":\"Un
+        ni\xF1o extraterrestre es evacuado de su mundo moribundo y enviado a la Tierra
+        para vivir entre los humanos. Su paz se ve amenazada cuando los sobrevivientes
+        de su planeta invaden la Tierra.\",\"runtime\":143,\"rating\":6.6,\"poster_thumbhash\":\"zQcKFQTAtqSFdliphpZpSAabl5BZ\",\"backdrop_thumbhash\":\"mfcJFIaG0HeReIhyuFG5r4z5ug==\",\"youtube_id\":\"T6DJcgm3wNY\",\"certification\":\"PG-13\"},\"release_group\":{\"id\":1739,\"release_group_name\":\"YTS\"},\"subtitle_group\":{\"id\":1,\"website\":\"https://subdivx.com\",\"subtitle_group_name\":\"SubDivX\"},\"subtitle\":{\"id\":13217,\"bytes\":1026441629,\"is_valid\":false,\"resolution\":\"720p\",\"external_id\":\"351732\",\"uploaded_by\":\"indexer-movie\",\"subtitle_link\":\"https://api.subt.is/v1/subtitle/link/13217\",\"queried_times\":166,\"current_season\":null,\"current_episode\":null,\"title_file_name\":\"Man.of.Steel.2013.720p.BluRay.x264.YIFY.mp4\",\"subtitle_file_name\":\"Man.of.Steel.2013.720p.BluRay.x264.YIFY.srt\",\"preview\":[{\"id\":\"2\",\"startTime\":\"00:00:58,650\",\"startSeconds\":58.65,\"endTime\":\"00:01:00,163\",\"endSeconds\":60.163,\"text\":\"<i>\xA1R\xE1pido!</i>\"},{\"id\":\"4\",\"startTime\":\"00:02:11,156\",\"startSeconds\":131.156,\"endTime\":\"00:02:15,115\",\"endSeconds\":135.115,\"text\":\"<i>\xBFNo
+        entienden? El n\xFAcleo\\nde Krypton est\xE1 colapsando.</i>\"},{\"id\":\"5\",\"startTime\":\"00:02:15,327\",\"startSeconds\":135.327,\"endTime\":\"00:02:18,683\",\"endSeconds\":138.683,\"text\":\"Quiz\xE1s
+        tengamos solo unas\\ncuantas semanas. Se los advert\xED.\"},{\"id\":\"6\",\"startTime\":\"00:02:18,930\",\"startSeconds\":138.93,\"endTime\":\"00:02:22,445\",\"endSeconds\":142.445,\"text\":\"Cosechar
+        el n\xFAcleo fue un\\nsuicidio. Ha acelerado...\"}],\"rip_type\":\"BluRay\"}}"
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-RAY:
+      - 9c1f9b9b48c57842-EZE
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Date:
+      - Thu, 22 Jan 2026 14:05:43 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Origin-Agent-Cluster:
+      - ?1
+      Referrer-Policy:
+      - no-referrer
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=tsvDiM47dg%2BvDGAJleYFLLXcCvcO3mfMVDQ7wrkKAov%2BxjZ4ZzrHnKn1xx0fG3e%2BPfddnuVSU5s4Ed18av9d0FUVnc4grr3qroEyHO5WCTl0DQAQ"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - accept-encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-DNS-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-XSS-Protection:
+      - '0'
+      content-length:
+      - '2309'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.5
+    method: GET
+    uri: https://api.subt.is/v1/subtitle/find/file/bytes/7033732714
+  response:
+    body:
+      string: '{"message":"Subtitle not found for file size"}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-RAY:
+      - 9c1fa0173bf269a7-EZE
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Date:
+      - Thu, 22 Jan 2026 14:08:47 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Origin-Agent-Cluster:
+      - ?1
+      Referrer-Policy:
+      - no-referrer
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=8N%2F9g5brzVqjkE3wBiW73KX1wG%2BbJQxpt8hZZ4Q6Ok5%2FkSWivEvz1pJOQVkj8hszIlsAP0UzakojkC%2Bxhrw%2F1l5dsqg0rtdWNNZFPoVOsD0z4kZ0xcU%3D"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - accept-encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-DNS-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-XSS-Protection:
+      - '0'
+      content-length:
+      - '46'
+    status:
+      code: 404
+      message: Not Found
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.5
+    method: GET
+    uri: https://api.subt.is/v1/subtitle/find/file/name/man.of.steel.2013.720p.bluray.x264-felony.mkv
+  response:
+    body:
+      string: '{"message":"Subtitle not found for file name"}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-RAY:
+      - 9c1fa01abdef75f3-EZE
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Date:
+      - Thu, 22 Jan 2026 14:08:47 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Origin-Agent-Cluster:
+      - ?1
+      Referrer-Policy:
+      - no-referrer
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=ZKfu4yejX2jVG37tP%2F1l7n9iTT94sbcysjKrKiA9ezN40FD92C%2FVUlnSsJbdXbMp7mbqhyq6XkUfdMHEPJLaYhM2dsZKYCWt55ekCAIeigYt1p%2F%2FogU%3D"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - accept-encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-DNS-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-XSS-Protection:
+      - '0'
+      content-length:
+      - '46'
+    status:
+      code: 404
+      message: Not Found
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.5
+    method: GET
+    uri: https://api.subt.is/v1/subtitle/file/alternative/man.of.steel.2013.720p.bluray.x264-felony.mkv
+  response:
+    body:
+      string: "{\"title\":{\"id\":11693,\"slug\":\"man-of-steel-2013\",\"imdb_id\":\"0770828\",\"queried_times\":2019,\"searched_times\":1,\"type\":\"movie\",\"year\":2013,\"title_name\":\"Man
+        of Steel\",\"optimized_logo\":\"https://yelhsmnvfyyjuamxbobs.supabase.co/storage/v1/object/public/images/qBtAryVKg11iEOmxeb31fxIHuvN-logo.webp\",\"optimized_poster\":\"https://yelhsmnvfyyjuamxbobs.supabase.co/storage/v1/object/public/images/8GFtkImmK0K1VaUChR0n9O61CFU-poster-lg.webp\",\"optimized_backdrop\":\"https://yelhsmnvfyyjuamxbobs.supabase.co/storage/v1/object/public/images/zQmawynS76X7SXGS39g8Z7aiXI2.webp\",\"optimized_backdrop_main\":\"https://yelhsmnvfyyjuamxbobs.supabase.co/storage/v1/object/public/images/z3Z5PKootkXs6Jd7kOdzLZoslb3_main.webp\",\"overview\":\"Un
+        ni\xF1o extraterrestre es evacuado de su mundo moribundo y enviado a la Tierra
+        para vivir entre los humanos. Su paz se ve amenazada cuando los sobrevivientes
+        de su planeta invaden la Tierra.\",\"runtime\":143,\"rating\":6.6,\"poster_thumbhash\":\"zQcKFQTAtqSFdliphpZpSAabl5BZ\",\"backdrop_thumbhash\":\"mfcJFIaG0HeReIhyuFG5r4z5ug==\",\"youtube_id\":\"T6DJcgm3wNY\",\"certification\":\"PG-13\"},\"release_group\":{\"id\":1739,\"release_group_name\":\"YTS\"},\"subtitle_group\":{\"id\":1,\"website\":\"https://subdivx.com\",\"subtitle_group_name\":\"SubDivX\"},\"subtitle\":{\"id\":13217,\"bytes\":1026441629,\"is_valid\":false,\"resolution\":\"720p\",\"external_id\":\"351732\",\"uploaded_by\":\"indexer-movie\",\"subtitle_link\":\"https://api.subt.is/v1/subtitle/link/13217\",\"queried_times\":166,\"current_season\":null,\"current_episode\":null,\"title_file_name\":\"Man.of.Steel.2013.720p.BluRay.x264.YIFY.mp4\",\"subtitle_file_name\":\"Man.of.Steel.2013.720p.BluRay.x264.YIFY.srt\",\"preview\":[{\"id\":\"2\",\"startTime\":\"00:00:58,650\",\"startSeconds\":58.65,\"endTime\":\"00:01:00,163\",\"endSeconds\":60.163,\"text\":\"<i>\xA1R\xE1pido!</i>\"},{\"id\":\"4\",\"startTime\":\"00:02:11,156\",\"startSeconds\":131.156,\"endTime\":\"00:02:15,115\",\"endSeconds\":135.115,\"text\":\"<i>\xBFNo
+        entienden? El n\xFAcleo\\nde Krypton est\xE1 colapsando.</i>\"},{\"id\":\"5\",\"startTime\":\"00:02:15,327\",\"startSeconds\":135.327,\"endTime\":\"00:02:18,683\",\"endSeconds\":138.683,\"text\":\"Quiz\xE1s
+        tengamos solo unas\\ncuantas semanas. Se los advert\xED.\"},{\"id\":\"6\",\"startTime\":\"00:02:18,930\",\"startSeconds\":138.93,\"endTime\":\"00:02:22,445\",\"endSeconds\":142.445,\"text\":\"Cosechar
+        el n\xFAcleo fue un\\nsuicidio. Ha acelerado...\"}],\"rip_type\":\"BluRay\"}}"
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-RAY:
+      - 9c1fa01cee8550bd-EZE
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Date:
+      - Thu, 22 Jan 2026 14:08:48 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Origin-Agent-Cluster:
+      - ?1
+      Referrer-Policy:
+      - no-referrer
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=61KkoEIXMbkSd35wEnydY6Sl3UtKP1e5YqbC6TCZCuw0qNrtA20cBGcSjExBjWlgK8tAGkQphJqW%2FmZ2bIRn6kCSygXVopJUAuSlQ9ApCwYR38TGt%2F0%3D"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - accept-encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-DNS-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-XSS-Protection:
+      - '0'
+      content-length:
+      - '2309'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.5
+    method: GET
+    uri: https://api.subt.is/v1/subtitle/find/file/bytes/7033732714
+  response:
+    body:
+      string: '{"message":"Subtitle not found for file size"}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-RAY:
+      - 9c1fa3d9defdc084-EZE
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Date:
+      - Thu, 22 Jan 2026 14:11:21 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Origin-Agent-Cluster:
+      - ?1
+      Referrer-Policy:
+      - no-referrer
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=tFvppm%2B71gBPLNQLUD8d6zzWA2hFdE4CAO6PavAgAIvKsHIvBTM7ho7AEgX8069RCG%2FH4sNEsZR6eoIvMlS1ZRkyWu5%2FTqhbHuDYtkf60Vvs4iIo7oc%3D"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - accept-encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-DNS-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-XSS-Protection:
+      - '0'
+      content-length:
+      - '46'
+    status:
+      code: 404
+      message: Not Found
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.5
+    method: GET
+    uri: https://api.subt.is/v1/subtitle/find/file/name/man.of.steel.2013.720p.bluray.x264-felony.mkv
+  response:
+    body:
+      string: '{"message":"Subtitle not found for file name"}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-RAY:
+      - 9c1fa3dbebb7dfb2-EZE
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Date:
+      - Thu, 22 Jan 2026 14:11:21 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Origin-Agent-Cluster:
+      - ?1
+      Referrer-Policy:
+      - no-referrer
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=G5zyF1ZNPw10h49jAwEbl9Cm5nb%2FfIJXFSRZhgSiTWyIOvrDdkftkBkKDqFVsJG7FANy%2FLguKRI6RU3afCp0eCbfXcrgl7x3hFPgtPxOZc%2FxdiUk96Y%3D"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - accept-encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-DNS-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-XSS-Protection:
+      - '0'
+      content-length:
+      - '46'
+    status:
+      code: 404
+      message: Not Found
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.5
+    method: GET
+    uri: https://api.subt.is/v1/subtitle/file/alternative/man.of.steel.2013.720p.bluray.x264-felony.mkv
+  response:
+    body:
+      string: "{\"title\":{\"id\":11693,\"slug\":\"man-of-steel-2013\",\"imdb_id\":\"0770828\",\"queried_times\":2019,\"searched_times\":1,\"type\":\"movie\",\"year\":2013,\"title_name\":\"Man
+        of Steel\",\"optimized_logo\":\"https://yelhsmnvfyyjuamxbobs.supabase.co/storage/v1/object/public/images/qBtAryVKg11iEOmxeb31fxIHuvN-logo.webp\",\"optimized_poster\":\"https://yelhsmnvfyyjuamxbobs.supabase.co/storage/v1/object/public/images/8GFtkImmK0K1VaUChR0n9O61CFU-poster-lg.webp\",\"optimized_backdrop\":\"https://yelhsmnvfyyjuamxbobs.supabase.co/storage/v1/object/public/images/zQmawynS76X7SXGS39g8Z7aiXI2.webp\",\"optimized_backdrop_main\":\"https://yelhsmnvfyyjuamxbobs.supabase.co/storage/v1/object/public/images/z3Z5PKootkXs6Jd7kOdzLZoslb3_main.webp\",\"overview\":\"Un
+        ni\xF1o extraterrestre es evacuado de su mundo moribundo y enviado a la Tierra
+        para vivir entre los humanos. Su paz se ve amenazada cuando los sobrevivientes
+        de su planeta invaden la Tierra.\",\"runtime\":143,\"rating\":6.6,\"poster_thumbhash\":\"zQcKFQTAtqSFdliphpZpSAabl5BZ\",\"backdrop_thumbhash\":\"mfcJFIaG0HeReIhyuFG5r4z5ug==\",\"youtube_id\":\"T6DJcgm3wNY\",\"certification\":\"PG-13\"},\"release_group\":{\"id\":1739,\"release_group_name\":\"YTS\"},\"subtitle_group\":{\"id\":1,\"website\":\"https://subdivx.com\",\"subtitle_group_name\":\"SubDivX\"},\"subtitle\":{\"id\":13217,\"bytes\":1026441629,\"is_valid\":false,\"resolution\":\"720p\",\"external_id\":\"351732\",\"uploaded_by\":\"indexer-movie\",\"subtitle_link\":\"https://api.subt.is/v1/subtitle/link/13217\",\"queried_times\":166,\"current_season\":null,\"current_episode\":null,\"title_file_name\":\"Man.of.Steel.2013.720p.BluRay.x264.YIFY.mp4\",\"subtitle_file_name\":\"Man.of.Steel.2013.720p.BluRay.x264.YIFY.srt\",\"preview\":[{\"id\":\"2\",\"startTime\":\"00:00:58,650\",\"startSeconds\":58.65,\"endTime\":\"00:01:00,163\",\"endSeconds\":60.163,\"text\":\"<i>\xA1R\xE1pido!</i>\"},{\"id\":\"4\",\"startTime\":\"00:02:11,156\",\"startSeconds\":131.156,\"endTime\":\"00:02:15,115\",\"endSeconds\":135.115,\"text\":\"<i>\xBFNo
+        entienden? El n\xFAcleo\\nde Krypton est\xE1 colapsando.</i>\"},{\"id\":\"5\",\"startTime\":\"00:02:15,327\",\"startSeconds\":135.327,\"endTime\":\"00:02:18,683\",\"endSeconds\":138.683,\"text\":\"Quiz\xE1s
+        tengamos solo unas\\ncuantas semanas. Se los advert\xED.\"},{\"id\":\"6\",\"startTime\":\"00:02:18,930\",\"startSeconds\":138.93,\"endTime\":\"00:02:22,445\",\"endSeconds\":142.445,\"text\":\"Cosechar
+        el n\xFAcleo fue un\\nsuicidio. Ha acelerado...\"}],\"rip_type\":\"BluRay\"}}"
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-RAY:
+      - 9c1fa3de2c68d841-EZE
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Date:
+      - Thu, 22 Jan 2026 14:11:22 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Origin-Agent-Cluster:
+      - ?1
+      Referrer-Policy:
+      - no-referrer
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=dBiqUdZuHuhaYsuGPbOJBRZr7sxmBm3W21wXXuDV8XKiYOi0F%2FLWaP8o8DrI3qYwMGPaZKdco8kh7b7v0oRjpGWoJ%2F1PhIRJrNQceV0IhOT8nCdtlJk%3D"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - accept-encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-DNS-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-XSS-Protection:
+      - '0'
+      content-length:
+      - '2309'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.5
+    method: GET
+    uri: https://api.subt.is/v1/subtitle/find/file/bytes/7033732714
+  response:
+    body:
+      string: '{"message":"Subtitle not found for file size"}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-RAY:
+      - 9c1fae809e4c1f0d-EZE
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Date:
+      - Thu, 22 Jan 2026 14:18:37 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Origin-Agent-Cluster:
+      - ?1
+      Referrer-Policy:
+      - no-referrer
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=ELJmKERkVRCntYpZzpFfEGCDP9dqwq5nLZkEMU1ShNEyQlQu%2Fs7fohVEZ4j80Qocks0l33Y52XiTNgW1AzIOinN4az9JqLDrJxHqygjFGIEA7nBb"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - accept-encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-DNS-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-XSS-Protection:
+      - '0'
+      content-length:
+      - '46'
+    status:
+      code: 404
+      message: Not Found
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.5
+    method: GET
+    uri: https://api.subt.is/v1/subtitle/find/file/name/man.of.steel.2013.720p.bluray.x264-felony.mkv
+  response:
+    body:
+      string: '{"message":"Subtitle not found for file name"}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-RAY:
+      - 9c1fae842836c813-EZE
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Date:
+      - Thu, 22 Jan 2026 14:18:38 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Origin-Agent-Cluster:
+      - ?1
+      Referrer-Policy:
+      - no-referrer
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=z2epASO30pluGREaFx43tAW7f%2BItcB55iIMTzjoaXkhSrAoHTaZO%2B2WgLa7XHjTs7YHWYAr5kKuW3327gFRCdeWwens8UWk7VBx4PTJtiFSZdACd"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - accept-encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-DNS-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-XSS-Protection:
+      - '0'
+      content-length:
+      - '46'
+    status:
+      code: 404
+      message: Not Found
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.5
+    method: GET
+    uri: https://api.subt.is/v1/subtitle/file/alternative/man.of.steel.2013.720p.bluray.x264-felony.mkv
+  response:
+    body:
+      string: "{\"title\":{\"id\":11693,\"slug\":\"man-of-steel-2013\",\"imdb_id\":\"0770828\",\"queried_times\":2019,\"searched_times\":1,\"type\":\"movie\",\"year\":2013,\"title_name\":\"Man
+        of Steel\",\"optimized_logo\":\"https://yelhsmnvfyyjuamxbobs.supabase.co/storage/v1/object/public/images/qBtAryVKg11iEOmxeb31fxIHuvN-logo.webp\",\"optimized_poster\":\"https://yelhsmnvfyyjuamxbobs.supabase.co/storage/v1/object/public/images/8GFtkImmK0K1VaUChR0n9O61CFU-poster-lg.webp\",\"optimized_backdrop\":\"https://yelhsmnvfyyjuamxbobs.supabase.co/storage/v1/object/public/images/zQmawynS76X7SXGS39g8Z7aiXI2.webp\",\"optimized_backdrop_main\":\"https://yelhsmnvfyyjuamxbobs.supabase.co/storage/v1/object/public/images/z3Z5PKootkXs6Jd7kOdzLZoslb3_main.webp\",\"overview\":\"Un
+        ni\xF1o extraterrestre es evacuado de su mundo moribundo y enviado a la Tierra
+        para vivir entre los humanos. Su paz se ve amenazada cuando los sobrevivientes
+        de su planeta invaden la Tierra.\",\"runtime\":143,\"rating\":6.6,\"poster_thumbhash\":\"zQcKFQTAtqSFdliphpZpSAabl5BZ\",\"backdrop_thumbhash\":\"mfcJFIaG0HeReIhyuFG5r4z5ug==\",\"youtube_id\":\"T6DJcgm3wNY\",\"certification\":\"PG-13\"},\"release_group\":{\"id\":1739,\"release_group_name\":\"YTS\"},\"subtitle_group\":{\"id\":1,\"website\":\"https://subdivx.com\",\"subtitle_group_name\":\"SubDivX\"},\"subtitle\":{\"id\":13217,\"bytes\":1026441629,\"is_valid\":false,\"resolution\":\"720p\",\"external_id\":\"351732\",\"uploaded_by\":\"indexer-movie\",\"subtitle_link\":\"https://api.subt.is/v1/subtitle/link/13217\",\"queried_times\":166,\"current_season\":null,\"current_episode\":null,\"title_file_name\":\"Man.of.Steel.2013.720p.BluRay.x264.YIFY.mp4\",\"subtitle_file_name\":\"Man.of.Steel.2013.720p.BluRay.x264.YIFY.srt\",\"preview\":[{\"id\":\"2\",\"startTime\":\"00:00:58,650\",\"startSeconds\":58.65,\"endTime\":\"00:01:00,163\",\"endSeconds\":60.163,\"text\":\"<i>\xA1R\xE1pido!</i>\"},{\"id\":\"4\",\"startTime\":\"00:02:11,156\",\"startSeconds\":131.156,\"endTime\":\"00:02:15,115\",\"endSeconds\":135.115,\"text\":\"<i>\xBFNo
+        entienden? El n\xFAcleo\\nde Krypton est\xE1 colapsando.</i>\"},{\"id\":\"5\",\"startTime\":\"00:02:15,327\",\"startSeconds\":135.327,\"endTime\":\"00:02:18,683\",\"endSeconds\":138.683,\"text\":\"Quiz\xE1s
+        tengamos solo unas\\ncuantas semanas. Se los advert\xED.\"},{\"id\":\"6\",\"startTime\":\"00:02:18,930\",\"startSeconds\":138.93,\"endTime\":\"00:02:22,445\",\"endSeconds\":142.445,\"text\":\"Cosechar
+        el n\xFAcleo fue un\\nsuicidio. Ha acelerado...\"}],\"rip_type\":\"BluRay\"}}"
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-RAY:
+      - 9c1fae864e5eda0e-EZE
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Date:
+      - Thu, 22 Jan 2026 14:18:38 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Origin-Agent-Cluster:
+      - ?1
+      Referrer-Policy:
+      - no-referrer
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=nL2OSXqIglkyB%2FF1LHbwc3j7GuxFHtZUeGrivT2pefcWXB0rDRgZvO6OzeNm9A3Cz36EF3iL2qewxVLdCxLG%2BIbfwj6HeMZRDqy6ywWLHywMejjZ"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - accept-encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-DNS-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-XSS-Protection:
+      - '0'
+      content-length:
+      - '2309'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.5
+    method: GET
+    uri: https://api.subt.is/v1/subtitle/find/file/bytes/7033732714
+  response:
+    body:
+      string: '{"message":"Subtitle not found for file size"}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-RAY:
+      - 9c1fb20c8ca31f0d-EZE
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Date:
+      - Thu, 22 Jan 2026 14:21:02 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Origin-Agent-Cluster:
+      - ?1
+      Referrer-Policy:
+      - no-referrer
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=XrnXwdTQPQAO3ZsMZv0hCAiwWkS%2Fy10qsFej1zQXQIyeIzdpm%2Fgoaq0N8NxxY6grrxEcBUOMQzSqiJnDIFsyKN1FUkrfnxcZTfwbAHsfqr7an2qS"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - accept-encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-DNS-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-XSS-Protection:
+      - '0'
+      content-length:
+      - '46'
+    status:
+      code: 404
+      message: Not Found
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.5
+    method: GET
+    uri: https://api.subt.is/v1/subtitle/find/file/name/man.of.steel.2013.720p.bluray.x264-felony.mkv
+  response:
+    body:
+      string: '{"message":"Subtitle not found for file name"}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-RAY:
+      - 9c1fb20e78299ce3-EZE
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Date:
+      - Thu, 22 Jan 2026 14:21:03 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Origin-Agent-Cluster:
+      - ?1
+      Referrer-Policy:
+      - no-referrer
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=vgTR9e5FsiRs%2FQPQ5cSc36ZLCHR%2B3SFzQYaMYvv8ujxA4wgAiJ1iu04KG6SABlMDpBZDzq9hn%2FB982ZOoqo7QiLrjrJYcB8Vqv0d5pRhnApxZXK7DPQ%3D"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - accept-encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-DNS-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-XSS-Protection:
+      - '0'
+      content-length:
+      - '46'
+    status:
+      code: 404
+      message: Not Found
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.5
+    method: GET
+    uri: https://api.subt.is/v1/subtitle/file/alternative/man.of.steel.2013.720p.bluray.x264-felony.mkv
+  response:
+    body:
+      string: "{\"title\":{\"id\":11693,\"slug\":\"man-of-steel-2013\",\"imdb_id\":\"0770828\",\"queried_times\":2019,\"searched_times\":1,\"type\":\"movie\",\"year\":2013,\"title_name\":\"Man
+        of Steel\",\"optimized_logo\":\"https://yelhsmnvfyyjuamxbobs.supabase.co/storage/v1/object/public/images/qBtAryVKg11iEOmxeb31fxIHuvN-logo.webp\",\"optimized_poster\":\"https://yelhsmnvfyyjuamxbobs.supabase.co/storage/v1/object/public/images/8GFtkImmK0K1VaUChR0n9O61CFU-poster-lg.webp\",\"optimized_backdrop\":\"https://yelhsmnvfyyjuamxbobs.supabase.co/storage/v1/object/public/images/zQmawynS76X7SXGS39g8Z7aiXI2.webp\",\"optimized_backdrop_main\":\"https://yelhsmnvfyyjuamxbobs.supabase.co/storage/v1/object/public/images/z3Z5PKootkXs6Jd7kOdzLZoslb3_main.webp\",\"overview\":\"Un
+        ni\xF1o extraterrestre es evacuado de su mundo moribundo y enviado a la Tierra
+        para vivir entre los humanos. Su paz se ve amenazada cuando los sobrevivientes
+        de su planeta invaden la Tierra.\",\"runtime\":143,\"rating\":6.6,\"poster_thumbhash\":\"zQcKFQTAtqSFdliphpZpSAabl5BZ\",\"backdrop_thumbhash\":\"mfcJFIaG0HeReIhyuFG5r4z5ug==\",\"youtube_id\":\"T6DJcgm3wNY\",\"certification\":\"PG-13\"},\"release_group\":{\"id\":1739,\"release_group_name\":\"YTS\"},\"subtitle_group\":{\"id\":1,\"website\":\"https://subdivx.com\",\"subtitle_group_name\":\"SubDivX\"},\"subtitle\":{\"id\":13217,\"bytes\":1026441629,\"is_valid\":false,\"resolution\":\"720p\",\"external_id\":\"351732\",\"uploaded_by\":\"indexer-movie\",\"subtitle_link\":\"https://api.subt.is/v1/subtitle/link/13217\",\"queried_times\":166,\"current_season\":null,\"current_episode\":null,\"title_file_name\":\"Man.of.Steel.2013.720p.BluRay.x264.YIFY.mp4\",\"subtitle_file_name\":\"Man.of.Steel.2013.720p.BluRay.x264.YIFY.srt\",\"preview\":[{\"id\":\"2\",\"startTime\":\"00:00:58,650\",\"startSeconds\":58.65,\"endTime\":\"00:01:00,163\",\"endSeconds\":60.163,\"text\":\"<i>\xA1R\xE1pido!</i>\"},{\"id\":\"4\",\"startTime\":\"00:02:11,156\",\"startSeconds\":131.156,\"endTime\":\"00:02:15,115\",\"endSeconds\":135.115,\"text\":\"<i>\xBFNo
+        entienden? El n\xFAcleo\\nde Krypton est\xE1 colapsando.</i>\"},{\"id\":\"5\",\"startTime\":\"00:02:15,327\",\"startSeconds\":135.327,\"endTime\":\"00:02:18,683\",\"endSeconds\":138.683,\"text\":\"Quiz\xE1s
+        tengamos solo unas\\ncuantas semanas. Se los advert\xED.\"},{\"id\":\"6\",\"startTime\":\"00:02:18,930\",\"startSeconds\":138.93,\"endTime\":\"00:02:22,445\",\"endSeconds\":142.445,\"text\":\"Cosechar
+        el n\xFAcleo fue un\\nsuicidio. Ha acelerado...\"}],\"rip_type\":\"BluRay\"}}"
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-RAY:
+      - 9c1fb21068b2e845-EZE
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Cross-Origin-Opener-Policy:
+      - same-origin
+      Cross-Origin-Resource-Policy:
+      - same-origin
+      Date:
+      - Thu, 22 Jan 2026 14:21:03 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Origin-Agent-Cluster:
+      - ?1
+      Referrer-Policy:
+      - no-referrer
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=tJIDQSh1g11mk0OXVlhg3pWqvwaPIdlljGoGhwKyZCPixYF9%2B2cbsjgbGquwF9mR66SzTy2oG5QyhN9KP5cTOYJs0vNUoo7%2BDM%2FNO0Rxwg34CXmC6gU%3D"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - accept-encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-DNS-Prefetch-Control:
+      - 'off'
+      X-Download-Options:
+      - noopen
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      X-XSS-Protection:
+      - '0'
+      content-length:
+      - '2309'
+    status:
+      code: 200
+      message: OK
+version: 1

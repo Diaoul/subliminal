@@ -104,6 +104,9 @@ def sanitize_release_group(string: str) -> str:
     :rtype: str
 
     """
+    # Ensure string type (handles list case from guessit)
+    string = ensure_str(string)
+    
     # remove content in square brackets
     string = re.sub(r'\[\w+\]', '', string)
 

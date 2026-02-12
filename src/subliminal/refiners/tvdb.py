@@ -35,8 +35,6 @@ def requires_auth(func: C) -> C:
     def wrapper(self: TVDBClient, *args: Any, **kwargs: Any) -> Any:
         if self.token is None or self.token_expired:
             self.login()
-        elif self.token_needs_refresh:
-            self.refresh_token()
         return func(self, *args, **kwargs)
 
     return cast('C', wrapper)
@@ -62,14 +60,11 @@ class TVDBClient:
     #: User agent
     user_agent: ClassVar[str] = f'Subliminal/{__short_version__}'
 
-    #: Token lifespan
+    #: Token lifespan, API says the token is valid 1 month, but we use 1h
     token_lifespan: ClassVar[timedelta] = timedelta(hours=1)
 
     #: API version
     apiversion: ClassVar[int] = 1
-
-    #: Minimum token age before a :meth:`refresh_token` is triggered
-    refresh_token_every: ClassVar[timedelta] = timedelta(minutes=30)
 
     #: API key
     _apikey: str
@@ -134,28 +129,11 @@ class TVDBClient:
         """Check if the token expired."""
         return datetime.now(timezone.utc) - self.token_date >= self.token_lifespan
 
-    @property
-    def token_needs_refresh(self) -> bool:
-        """Check if the token needs to be refreshed."""
-        return datetime.now(timezone.utc) - self.token_date > self.refresh_token_every
-
     def login(self) -> None:
         """Login."""
         # perform the request
         data = {'apikey': self.apikey, 'username': self.username, 'password': self.password}
         r = self.session.post(self.base_url + '/login', json=data, timeout=self.timeout)
-        r.raise_for_status()
-
-        # set the Authorization header
-        self.session.headers['Authorization'] = 'Bearer ' + r.json()['token']
-
-        # update token_date
-        self.token_date = datetime.now(timezone.utc)
-
-    def refresh_token(self) -> None:
-        """Refresh token."""
-        # perform the request
-        r = self.session.get(self.base_url + '/refresh_token', timeout=self.timeout)
         r.raise_for_status()
 
         # set the Authorization header

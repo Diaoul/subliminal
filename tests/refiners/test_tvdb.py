@@ -1,5 +1,4 @@
 import os
-import time
 from datetime import datetime, timedelta, timezone
 
 import pytest
@@ -113,27 +112,6 @@ def test_login(client: TVDBClient) -> None:
     assert client.token is not None
     assert client.token_date > datetime.now(timezone.utc) - timedelta(seconds=1)
     assert client.token_expired is False
-
-
-@pytest.mark.integration
-@vcr.use_cassette
-def test_token_needs_refresh(client: TVDBClient, monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.setattr(client, 'refresh_token_every', timedelta(milliseconds=100))
-    assert client.token_needs_refresh
-    client.login()
-    assert not client.token_needs_refresh
-    time.sleep(0.5)
-    assert client.token_needs_refresh
-
-
-@pytest.mark.integration
-@vcr.use_cassette
-def test_refresh_token(client: TVDBClient) -> None:
-    client.login()
-    old_token = client.token
-    time.sleep(0.5)
-    client.refresh_token()
-    assert client.token != old_token
 
 
 @pytest.mark.integration

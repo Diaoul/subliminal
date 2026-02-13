@@ -5,55 +5,53 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, zstd
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.2
+      - Subliminal/2.5
     method: GET
-    uri: https://www.omdbapi.com/?r=json&v=1&apikey=44d5b275&s=dallas&page=1&type=series
+    uri: https://www.omdbapi.com/?r=json&v=1&apikey=7a541ee4&s=dallas&page=1&type=series
   response:
     body:
       string: "{\"Search\":[{\"Title\":\"Dallas\",\"Year\":\"1978\u20131991\",\"imdbID\":\"tt0077000\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BMTIwOTYxZTItYWU4Ny00YTI5LTk0NzgtNDdjODE4YjUwMTdiXkEyXkFqcGc@._V1_SX300.jpg\"},{\"Title\":\"Dallas\",\"Year\":\"2012\u20132014\",\"imdbID\":\"tt1723760\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BMjE5NTExNDc5MF5BMl5BanBnXkFtZTcwMjc1NzAwOQ@@._V1_SX300.jpg\"},{\"Title\":\"America's
         Sweethearts: Dallas Cowboys Cheerleaders\",\"Year\":\"2024\u2013\",\"imdbID\":\"tt32146518\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BYjhkZWJjY2ItN2MwOS00ODk2LTg1ZDUtOGIzZDBjYjQwZDIwXkEyXkFqcGc@._V1_SX300.jpg\"},{\"Title\":\"All
         or Nothing: The Dallas Cowboys\",\"Year\":\"2018\",\"imdbID\":\"tt8077544\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BNTU4NmFlNTctN2RjMy00ODI1LThkMTYtZmJiZjgxMzIxZDA1XkEyXkFqcGdeQXVyNjI4OTg2Njg@._V1_SX300.jpg\"},{\"Title\":\"The
         Real Housewives of Dallas\",\"Year\":\"2016\u20132021\",\"imdbID\":\"tt5512352\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BZDQ2ZGUzZTYtMTc0Yy00MzhmLWI3ODAtMTdmYjBmZjEwNTFhXkEyXkFqcGc@._V1_SX300.jpg\"},{\"Title\":\"Dallas
-        Cowboys Cheerleaders: Making the Team\",\"Year\":\"2006\u2013\",\"imdbID\":\"tt0491758\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BYTlmODMyOGItMjM1Yi00ODBjLTk3NWQtYzE0OWExNGMwZjZkXkEyXkFqcGc@._V1_SX300.jpg\"},{\"Title\":\"Dallas
+        Cowboys Cheerleaders: Making the Team\",\"Year\":\"2006\u20132021\",\"imdbID\":\"tt0491758\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BYTlmODMyOGItMjM1Yi00ODBjLTk3NWQtYzE0OWExNGMwZjZkXkEyXkFqcGc@._V1_SX300.jpg\"},{\"Title\":\"Dallas
         & Robo\",\"Year\":\"2018\",\"imdbID\":\"tt7896392\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BZmI2NTUyZTMtZjc1Yy00ZDY4LTk5YWItMzdjYzZiYjMxOTg0XkEyXkFqcGc@._V1_SX300.jpg\"},{\"Title\":\"Little
         Women: Dallas\",\"Year\":\"2016\u2013\",\"imdbID\":\"tt6306584\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BMjk5NGNkNWEtNjMwMS00ZmI5LWIwYzgtZDJjNGJmNmY3MzlhXkEyXkFqcGc@._V1_SX300.jpg\"},{\"Title\":\"Debbie
         Does Dallas... Again\",\"Year\":\"2007\",\"imdbID\":\"tt1675910\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BYWE0ZDVkMDQtOGY3YS00YjNhLWI0ZDYtZDYyZjEwNjdlZDE0XkEyXkFqcGdeQXVyMTIxMDUyOTI@._V1_SX300.jpg\"},{\"Title\":\"Dallas
         SWAT\",\"Year\":\"2006\u2013\",\"imdbID\":\"tt0497290\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BMjBiMWEyYTctNTI1ZS00MWYxLTgxZGEtNjJhYmY5NTFmODAwXkEyXkFqcGdeQXVyNzM3MjY2MjU@._V1_SX300.jpg\"}],\"totalResults\":\"51\",\"Response\":\"True\"}"
     headers:
-      CF-Cache-Status:
-      - MISS
       CF-RAY:
-      - 91189ab86e6fef29-LHR
+      - 9cd036579da65f9a-LIS
       Cache-Control:
-      - public, max-age=86400
+      - public, max-age=3600
       Connection:
       - keep-alive
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 13 Feb 2025 23:30:07 GMT
+      - Fri, 13 Feb 2026 00:29:35 GMT
       Server:
       - cloudflare
       Transfer-Encoding:
       - chunked
       access-control-allow-origin:
       - '*'
+      cf-cache-status:
+      - DYNAMIC
       content-length:
-      - '2256'
+      - '2260'
       expires:
-      - Fri, 14 Feb 2025 00:30:07 GMT
+      - Fri, 13 Feb 2026 01:29:35 GMT
       last-modified:
-      - Thu, 13 Feb 2025 23:30:07 GMT
+      - Fri, 13 Feb 2026 00:29:35 GMT
       vary:
-      - '*, Accept-Encoding'
+      - '*'
       x-aspnet-version:
       - 4.0.30319
-      x-powered-by:
-      - ASP.NET
     status:
       code: 200
       message: OK
@@ -63,13 +61,13 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, zstd
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.2
+      - Subliminal/2.5
     method: GET
-    uri: https://www.omdbapi.com/?r=json&v=1&apikey=44d5b275&s=dallas&page=2&type=series
+    uri: https://www.omdbapi.com/?r=json&v=1&apikey=7a541ee4&s=dallas&page=2&type=series
   response:
     body:
       string: "{\"Search\":[{\"Title\":\"The A-List: Dallas\",\"Year\":\"2011\u2013\",\"imdbID\":\"tt2084665\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BMjU4MzAzOTkzM15BMl5BanBnXkFtZTgwNzg0NjAxMzE@._V1_SX300.jpg\"},{\"Title\":\"Dallas
@@ -83,36 +81,34 @@ interactions:
         DNA\",\"Year\":\"2009\u2013\",\"imdbID\":\"tt1489323\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BOGVhN2ZhMDAtNzY3ZC00ZDZmLTlhZmEtMjYyOWRhOGE1ZGFiXkEyXkFqcGdeQXVyMTUyNjc3NDQ4._V1_SX300.jpg\"},{\"Title\":\"Sheer
         Dallas\",\"Year\":\"2005\u2013\",\"imdbID\":\"tt1030468\",\"Type\":\"series\",\"Poster\":\"N/A\"}],\"totalResults\":\"51\",\"Response\":\"True\"}"
     headers:
-      CF-Cache-Status:
-      - MISS
       CF-RAY:
-      - 91189abc39eaedf6-LHR
+      - 9cd036590ccde3b4-LIS
       Cache-Control:
-      - public, max-age=86400
+      - public, max-age=3600
       Connection:
       - keep-alive
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 13 Feb 2025 23:30:07 GMT
+      - Fri, 13 Feb 2026 00:29:35 GMT
       Server:
       - cloudflare
       Transfer-Encoding:
       - chunked
       access-control-allow-origin:
       - '*'
+      cf-cache-status:
+      - DYNAMIC
       content-length:
       - '2029'
       expires:
-      - Fri, 14 Feb 2025 00:30:07 GMT
+      - Fri, 13 Feb 2026 01:29:35 GMT
       last-modified:
-      - Thu, 13 Feb 2025 23:30:07 GMT
+      - Fri, 13 Feb 2026 00:29:35 GMT
       vary:
-      - '*, Accept-Encoding'
+      - '*'
       x-aspnet-version:
       - 4.0.30319
-      x-powered-by:
-      - ASP.NET
     status:
       code: 200
       message: OK
@@ -122,13 +118,13 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, zstd
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.2
+      - Subliminal/2.5
     method: GET
-    uri: https://www.omdbapi.com/?r=json&v=1&apikey=44d5b275&s=dallas&page=3&type=series
+    uri: https://www.omdbapi.com/?r=json&v=1&apikey=7a541ee4&s=dallas&page=3&type=series
   response:
     body:
       string: "{\"Search\":[{\"Title\":\"The Daily Buzz: Dallas\",\"Year\":\"2004\u2013\",\"imdbID\":\"tt0498424\",\"Type\":\"series\",\"Poster\":\"N/A\"},{\"Title\":\"Dallas
@@ -142,36 +138,34 @@ interactions:
         the Gates: Dazzling Dallas\",\"Year\":\"2013\u2013\",\"imdbID\":\"tt3058296\",\"Type\":\"series\",\"Poster\":\"N/A\"},{\"Title\":\"Dancing
         Dallas\",\"Year\":\"2015\u2013\",\"imdbID\":\"tt5052446\",\"Type\":\"series\",\"Poster\":\"N/A\"}],\"totalResults\":\"51\",\"Response\":\"True\"}"
     headers:
-      CF-Cache-Status:
-      - MISS
       CF-RAY:
-      - 91189abdd9b9ef41-LHR
+      - 9cd0365a9e888e38-LIS
       Cache-Control:
-      - public, max-age=86400
+      - public, max-age=3600
       Connection:
       - keep-alive
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 13 Feb 2025 23:30:08 GMT
+      - Fri, 13 Feb 2026 00:29:35 GMT
       Server:
       - cloudflare
       Transfer-Encoding:
       - chunked
       access-control-allow-origin:
       - '*'
+      cf-cache-status:
+      - DYNAMIC
       content-length:
       - '1373'
       expires:
-      - Fri, 14 Feb 2025 00:30:08 GMT
+      - Fri, 13 Feb 2026 01:29:35 GMT
       last-modified:
-      - Thu, 13 Feb 2025 23:30:08 GMT
+      - Fri, 13 Feb 2026 00:29:35 GMT
       vary:
-      - '*, Accept-Encoding'
+      - '*'
       x-aspnet-version:
       - 4.0.30319
-      x-powered-by:
-      - ASP.NET
     status:
       code: 200
       message: OK
@@ -181,13 +175,13 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, zstd
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.2
+      - Subliminal/2.5
     method: GET
-    uri: https://www.omdbapi.com/?r=json&v=1&apikey=44d5b275&s=dallas&page=4&type=series
+    uri: https://www.omdbapi.com/?r=json&v=1&apikey=7a541ee4&s=dallas&page=4&type=series
   response:
     body:
       string: "{\"Search\":[{\"Title\":\"The Dallas Market Report\",\"Year\":\"2016\u2013\",\"imdbID\":\"tt5360352\",\"Type\":\"series\",\"Poster\":\"N/A\"},{\"Title\":\"The
@@ -201,36 +195,34 @@ interactions:
         Dallas Pets Alive\",\"Year\":\"2018\",\"imdbID\":\"tt10575872\",\"Type\":\"series\",\"Poster\":\"N/A\"},{\"Title\":\"School
         Zone Dallas\",\"Year\":\"2002\u20132014\",\"imdbID\":\"tt10978836\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BZTEwOGQ4N2YtYzE4ZS00NDZmLWEyMDMtODI1MGRiNWJjYzc5XkEyXkFqcGdeQXVyNjg1MjEzMDU@._V1_SX300.jpg\"}],\"totalResults\":\"51\",\"Response\":\"True\"}"
     headers:
-      CF-Cache-Status:
-      - MISS
       CF-RAY:
-      - 91189ac19c4048b5-LHR
+      - 9cd0365c297be32c-LIS
       Cache-Control:
-      - public, max-age=86400
+      - public, max-age=3600
       Connection:
       - keep-alive
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 13 Feb 2025 23:30:08 GMT
+      - Fri, 13 Feb 2026 00:29:36 GMT
       Server:
       - cloudflare
       Transfer-Encoding:
       - chunked
       access-control-allow-origin:
       - '*'
+      cf-cache-status:
+      - DYNAMIC
       content-length:
       - '1877'
       expires:
-      - Fri, 14 Feb 2025 00:30:08 GMT
+      - Fri, 13 Feb 2026 01:29:36 GMT
       last-modified:
-      - Thu, 13 Feb 2025 23:30:08 GMT
+      - Fri, 13 Feb 2026 00:29:36 GMT
       vary:
-      - '*, Accept-Encoding'
+      - '*'
       x-aspnet-version:
       - 4.0.30319
-      x-powered-by:
-      - ASP.NET
     status:
       code: 200
       message: OK
@@ -240,13 +232,13 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, zstd
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.2
+      - Subliminal/2.5
     method: GET
-    uri: https://www.omdbapi.com/?r=json&v=1&apikey=44d5b275&s=dallas&page=5&type=series
+    uri: https://www.omdbapi.com/?r=json&v=1&apikey=7a541ee4&s=dallas&page=5&type=series
   response:
     body:
       string: "{\"Search\":[{\"Title\":\"Chasing: Dallas Presents 'The Retreat'\",\"Year\":\"2021\",\"imdbID\":\"tt13935796\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BZGQwZWE0NWItZWE1Zi00ODNjLTk0ZDAtOGQxYjBhYWFlNjU0XkEyXkFqcGdeQXVyMjYzOTY5NDg@._V1_SX300.jpg\"},{\"Title\":\"Fraud
@@ -260,36 +252,34 @@ interactions:
         Dallas\",\"Year\":\"2018\",\"imdbID\":\"tt8386602\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BNWVmNjIxNmQtZWZkOS00ZTQxLWFhY2QtYjk0ZWFkM2I5NDcwXkEyXkFqcGdeQXVyNTA2MjA5NTg@._V1_SX300.jpg\"},{\"Title\":\"Cameron
         Dallas\",\"Year\":\"2013\u2013\",\"imdbID\":\"tt8742736\",\"Type\":\"series\",\"Poster\":\"N/A\"}],\"totalResults\":\"51\",\"Response\":\"True\"}"
     headers:
-      CF-Cache-Status:
-      - MISS
       CF-RAY:
-      - 91189ac55d2291f1-LHR
+      - 9cd0365ddf14e3cd-LIS
       Cache-Control:
-      - public, max-age=86400
+      - public, max-age=3600
       Connection:
       - keep-alive
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 13 Feb 2025 23:30:09 GMT
+      - Fri, 13 Feb 2026 00:29:36 GMT
       Server:
       - cloudflare
       Transfer-Encoding:
       - chunked
       access-control-allow-origin:
       - '*'
+      cf-cache-status:
+      - DYNAMIC
       content-length:
       - '1987'
       expires:
-      - Fri, 14 Feb 2025 00:30:09 GMT
+      - Fri, 13 Feb 2026 01:29:36 GMT
       last-modified:
-      - Thu, 13 Feb 2025 23:30:09 GMT
+      - Fri, 13 Feb 2026 00:29:36 GMT
       vary:
-      - '*, Accept-Encoding'
+      - '*'
       x-aspnet-version:
       - 4.0.30319
-      x-powered-by:
-      - ASP.NET
     status:
       code: 200
       message: OK
@@ -299,47 +289,45 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, zstd
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.2
+      - Subliminal/2.5
     method: GET
-    uri: https://www.omdbapi.com/?r=json&v=1&apikey=44d5b275&s=dallas&page=6&type=series
+    uri: https://www.omdbapi.com/?r=json&v=1&apikey=7a541ee4&s=dallas&page=6&type=series
   response:
     body:
       string: "{\"Search\":[{\"Title\":\"This Is Dallas\",\"Year\":\"2019\u2013\",\"imdbID\":\"tt9397890\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BMGZkYTY0YjQtMWJiYi00ZTkzLTljNDUtY2IwNTgxYjlmMjExXkEyXkFqcGdeQXVyODYyNDkxMTM@._V1_SX300.jpg\"}],\"totalResults\":\"51\",\"Response\":\"True\"}"
     headers:
-      CF-Cache-Status:
-      - MISS
       CF-RAY:
-      - 91189ac90857f662-LHR
+      - 9cd0365f492b1df8-LIS
       Cache-Control:
-      - public, max-age=86400
+      - public, max-age=3600
       Connection:
       - keep-alive
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 13 Feb 2025 23:30:09 GMT
+      - Fri, 13 Feb 2026 00:29:36 GMT
       Server:
       - cloudflare
       Transfer-Encoding:
       - chunked
       access-control-allow-origin:
       - '*'
+      cf-cache-status:
+      - DYNAMIC
       content-length:
       - '273'
       expires:
-      - Fri, 14 Feb 2025 00:30:09 GMT
+      - Fri, 13 Feb 2026 01:29:36 GMT
       last-modified:
-      - Thu, 13 Feb 2025 23:30:09 GMT
+      - Fri, 13 Feb 2026 00:29:36 GMT
       vary:
-      - '*, Accept-Encoding'
+      - '*'
       x-aspnet-version:
       - 4.0.30319
-      x-powered-by:
-      - ASP.NET
     status:
       code: 200
       message: OK

@@ -5,47 +5,46 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate, zstd
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.5
     method: GET
-    uri: https://www.omdbapi.com/?r=json&v=1&apikey=44d5b275&s=Jack+Reacher&page=1&type=movie&y=2016
+    uri: https://www.omdbapi.com/?r=json&v=1&apikey=7a541ee4&s=Jack+Reacher&page=1&type=movie&y=2016
   response:
     body:
-      string: '{"Search":[{"Title":"Jack Reacher: Never Go Back","Year":"2016","imdbID":"tt3393786","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BMTA2MDIwNzAyNzReQTJeQWpwZ15BbWU4MDAxNjI5Njkx._V1_SX300.jpg"}],"totalResults":"1","Response":"True"}'
+      string: '{"Search":[{"Title":"Jack Reacher: Never Go Back","Year":"2016","imdbID":"tt3393786","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BODQ3ODQ3NDI4NV5BMl5BanBnXkFtZTgwMDY1Mzk5OTE@._V1_SX300.jpg"},{"Title":"Jack
+        Reacher VS Jason Bourne: A Fan Film","Year":"2016","imdbID":"tt30574880","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BNWRjNWNmYjgtOWVkMy00MGY5LThiNTItMTFhODljZThmZTgyXkEyXkFqcGc@._V1_SX300.jpg"}],"totalResults":"2","Response":"True"}'
     headers:
-      CF-Cache-Status:
-      - MISS
       CF-RAY:
-      - 887d96bf7a9f3cf3-CDG
+      - 9cd03669c81ebd0e-LIS
       Cache-Control:
-      - public, max-age=86400
+      - public, max-age=3600
       Connection:
       - keep-alive
-      Content-Encoding:
-      - gzip
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 22 May 2024 14:45:15 GMT
+      - Fri, 13 Feb 2026 00:29:38 GMT
       Server:
       - cloudflare
       Transfer-Encoding:
       - chunked
       access-control-allow-origin:
       - '*'
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '479'
       expires:
-      - Wed, 22 May 2024 15:45:15 GMT
+      - Fri, 13 Feb 2026 01:29:38 GMT
       last-modified:
-      - Wed, 22 May 2024 14:45:15 GMT
+      - Fri, 13 Feb 2026 00:29:38 GMT
       vary:
-      - '*, Accept-Encoding'
+      - '*'
       x-aspnet-version:
       - 4.0.30319
-      x-powered-by:
-      - ASP.NET
     status:
       code: 200
       message: OK

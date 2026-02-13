@@ -5,41 +5,43 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, zstd
       Connection:
       - keep-alive
       Referer:
       - https://www.subtitulamos.tv
       User-Agent:
-      - Subliminal/2.2
+      - Subliminal/2.5
     method: GET
-    uri: https://www.subtitulamos.tv/search/query?q=Fake+Show+%281914%29
+    uri: https://www.subtitulamos.tv/search/query?q=ZZZZZZ+Fake+Show+%281914%29
   response:
     body:
       string: '[]'
     headers:
       CF-RAY:
-      - 91189a59cdfd5bec-LIS
+      - 9cd029fe4e32bd0e-LIS
       Cache-Control:
       - no-store, no-cache, must-revalidate
       Connection:
       - keep-alive
+      Content-Encoding:
+      - zstd
       Content-Type:
       - text/html; charset=UTF-8
       Date:
-      - Thu, 13 Feb 2025 23:29:51 GMT
+      - Fri, 13 Feb 2026 00:21:09 GMT
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
-      NEL:
-      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Pragma:
       - no-cache
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=M5sJM2sZfaMoCw5BIHFt6Ns07bj2Zs8XK40Pscv%2B2hLzkaO0XpwzBKHbO6kFx1WGszK9TA6q8OyizZZrYkzY0PZHXBHBXsvkxgVQa2U5woYTwrnhWMb9deefXhup5hY1oTNkEqMH"}],"group":"cf-nel","max_age":604800}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=iBi%2FkpzZV%2B%2FIY%2FxDdnO3lkB4utunip%2FZwAg9mp%2BooJTUtrkJzBsPxkKSXxjKRuYOfurORwWe18BAWy70uPbvI76f3h45dtHeXpxk4K6upg3a"}]}'
       Server:
       - cloudflare
       Set-Cookie:
-      - PHPSESSID=48aefenij92rg03n0fqokr68dt; path=/; HttpOnly
+      - PHPSESSID=8kdko67c6hk26m8ftquc3f3f38; path=/; HttpOnly
       Transfer-Encoding:
       - chunked
       X-Powered-By:
@@ -48,10 +50,6 @@ interactions:
       - h3=":443"; ma=86400
       cf-cache-status:
       - DYNAMIC
-      content-length:
-      - '2'
-      server-timing:
-      - cfL4;desc="?proto=TCP&rtt=3908&min_rtt=3524&rtt_var=1596&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2849&recv_bytes=834&delivery_rate=821793&cwnd=241&unsent_bytes=0&cid=0b1c35fccac5daa9&ts=284&x=0"
     status:
       code: 200
       message: OK
@@ -61,39 +59,41 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, zstd
       Connection:
       - keep-alive
       Cookie:
-      - PHPSESSID=48aefenij92rg03n0fqokr68dt
+      - PHPSESSID=8kdko67c6hk26m8ftquc3f3f38
       Referer:
       - https://www.subtitulamos.tv
       User-Agent:
-      - Subliminal/2.2
+      - Subliminal/2.5
     method: GET
-    uri: https://www.subtitulamos.tv/search/query?q=Fake+Show
+    uri: https://www.subtitulamos.tv/search/query?q=ZZZZZZ+Fake+Show
   response:
     body:
       string: '[]'
     headers:
       CF-RAY:
-      - 91189a5ba9aa5bd5-LIS
+      - 9cd029ffcb865910-LIS
       Cache-Control:
       - no-store, no-cache, must-revalidate
       Connection:
       - keep-alive
+      Content-Encoding:
+      - zstd
       Content-Type:
       - text/html; charset=UTF-8
       Date:
-      - Thu, 13 Feb 2025 23:29:52 GMT
+      - Fri, 13 Feb 2026 00:21:09 GMT
       Expires:
       - Thu, 19 Nov 1981 08:52:00 GMT
-      NEL:
-      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Pragma:
       - no-cache
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=xfSsUqS2uKAT4hMZbJU5qVwENE7jK%2FvWcn5kBuNh1wnMwTp%2Fsn5vjnF43ilhtwQzF%2BEgIcuwy8E1iHD%2FZYw9MU36buGLzKhweh33jDY86mb%2BhiJJrAjAq4Hwif1GbfhFklQcvYV3"}],"group":"cf-nel","max_age":604800}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=TL%2FeRT0lwbuXpZNz6BvarSrX5b0Al9PcSI6XTmnmyLXNQYDYvTz87x1i71izKtjFXnYkLXYU48EDPwa%2FAirBRq3BME8yzZeLl%2B37XAETtIP0"}]}'
       Server:
       - cloudflare
       Transfer-Encoding:
@@ -104,10 +104,6 @@ interactions:
       - h3=":443"; ma=86400
       cf-cache-status:
       - DYNAMIC
-      content-length:
-      - '2'
-      server-timing:
-      - cfL4;desc="?proto=TCP&rtt=3024&min_rtt=2988&rtt_var=1193&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2849&recv_bytes=869&delivery_rate=882657&cwnd=240&unsent_bytes=0&cid=ddb79315885ce615&ts=251&x=0"
     status:
       code: 200
       message: OK

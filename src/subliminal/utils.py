@@ -158,7 +158,11 @@ def matches_extended_title(
 
     if alternative_titles is not None:
         alternative_titles_set = {sanitize(t) for t in alternative_titles if t}
+        # Check alternative title alone
         if actual in alternative_titles_set:
+            return True
+        # Check title + alternative title
+        if actual == ' '.join([title, *alternative_titles_set]):
             return True
 
     return False

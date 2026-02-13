@@ -5,13 +5,13 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, zstd
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.2
+      - Subliminal/2.5
     method: GET
-    uri: https://www.omdbapi.com/?r=json&v=1&apikey=44d5b275&s=Man+of+Steel&page=1
+    uri: https://www.omdbapi.com/?r=json&v=1&apikey=7a541ee4&s=Man+of+Steel&page=1
   response:
     body:
       string: '{"Search":[{"Title":"Man of Steel","Year":"2013","imdbID":"tt0770828","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BMTk5ODk1NDkxMF5BMl5BanBnXkFtZTcwNTA5OTY0OQ@@._V1_SX300.jpg"},{"Title":"World
@@ -25,36 +25,34 @@ interactions:
         Bacon: Man of Steel","Year":"2014","imdbID":"tt3560162","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BNzg2MzQ2MTI3NF5BMl5BanBnXkFtZTgwNjI1OTkyMTE@._V1_SX300.jpg"},{"Title":"Superman:
         Man of Steel","Year":"2019","imdbID":"tt10069974","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BODcxNDg4YjYtZjZmYS00NDAwLTg2NjctYTNiMjFiMDRlNmU5XkEyXkFqcGdeQXVyODc5OTgyODQ@._V1_SX300.jpg"}],"totalResults":"32","Response":"True"}'
     headers:
-      CF-Cache-Status:
-      - MISS
       CF-RAY:
-      - 91189aa3c82bedf7-LHR
+      - 9cd0364bd89ff4f9-LIS
       Cache-Control:
-      - public, max-age=86400
+      - public, max-age=3600
       Connection:
       - keep-alive
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 13 Feb 2025 23:30:03 GMT
+      - Fri, 13 Feb 2026 00:29:33 GMT
       Server:
       - cloudflare
       Transfer-Encoding:
       - chunked
       access-control-allow-origin:
       - '*'
+      cf-cache-status:
+      - DYNAMIC
       content-length:
       - '1853'
       expires:
-      - Fri, 14 Feb 2025 00:30:03 GMT
+      - Fri, 13 Feb 2026 01:29:33 GMT
       last-modified:
-      - Thu, 13 Feb 2025 23:30:03 GMT
+      - Fri, 13 Feb 2026 00:29:33 GMT
       vary:
-      - '*, Accept-Encoding'
+      - '*'
       x-aspnet-version:
       - 4.0.30319
-      x-powered-by:
-      - ASP.NET
     status:
       code: 200
       message: OK

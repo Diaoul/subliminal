@@ -5,13 +5,13 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, zstd
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.2
+      - Subliminal/2.5
     method: GET
-    uri: https://www.omdbapi.com/?r=json&v=1&apikey=44d5b275&s=dallas&page=1&type=series&y=2012
+    uri: https://www.omdbapi.com/?r=json&v=1&apikey=7a541ee4&s=dallas&page=1&type=series&y=2012
   response:
     body:
       string: "{\"Search\":[{\"Title\":\"Dallas\",\"Year\":\"2012\u20132014\",\"imdbID\":\"tt1723760\",\"Type\":\"series\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BMjE5NTExNDc5MF5BMl5BanBnXkFtZTcwMjc1NzAwOQ@@._V1_SX300.jpg\"},{\"Title\":\"The
@@ -22,36 +22,34 @@ interactions:
         Barrowman's Dallas\",\"Year\":\"2012\",\"imdbID\":\"tt27329542\",\"Type\":\"series\",\"Poster\":\"N/A\"},{\"Title\":\"Luxury
         Dallas\",\"Year\":\"2012\",\"imdbID\":\"tt2332492\",\"Type\":\"series\",\"Poster\":\"N/A\"}],\"totalResults\":\"7\",\"Response\":\"True\"}"
     headers:
-      CF-Cache-Status:
-      - MISS
       CF-RAY:
-      - 91189acd4decf666-LHR
+      - 9cd03661c888e3c8-LIS
       Cache-Control:
-      - public, max-age=86400
+      - public, max-age=3600
       Connection:
       - keep-alive
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 13 Feb 2025 23:30:10 GMT
+      - Fri, 13 Feb 2026 00:29:37 GMT
       Server:
       - cloudflare
       Transfer-Encoding:
       - chunked
       access-control-allow-origin:
       - '*'
+      cf-cache-status:
+      - DYNAMIC
       content-length:
       - '954'
       expires:
-      - Fri, 14 Feb 2025 00:30:10 GMT
+      - Fri, 13 Feb 2026 01:29:36 GMT
       last-modified:
-      - Thu, 13 Feb 2025 23:30:10 GMT
+      - Fri, 13 Feb 2026 00:29:36 GMT
       vary:
-      - '*, Accept-Encoding'
+      - '*'
       x-aspnet-version:
       - 4.0.30319
-      x-powered-by:
-      - ASP.NET
     status:
       code: 200
       message: OK

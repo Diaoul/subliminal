@@ -5,47 +5,45 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, zstd
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.2
+      - Subliminal/2.5
     method: GET
-    uri: https://www.omdbapi.com/?r=json&v=1&apikey=44d5b275&s=Meen+of+Stal&page=1
+    uri: https://www.omdbapi.com/?r=json&v=1&apikey=7a541ee4&s=Meen+of+Stal&page=1
   response:
     body:
       string: '{"Response":"False","Error":"Movie not found!"}'
     headers:
-      Accept-Ranges:
-      - bytes
-      CF-Cache-Status:
-      - MISS
       CF-RAY:
-      - 91189aa77f3decfe-LHR
+      - 9cd0364e0ab148a4-LIS
       Cache-Control:
-      - public, max-age=86400
+      - public, max-age=3600
       Connection:
       - keep-alive
-      Content-Length:
-      - '47'
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 13 Feb 2025 23:30:04 GMT
+      - Fri, 13 Feb 2026 00:29:33 GMT
       Server:
       - cloudflare
+      Transfer-Encoding:
+      - chunked
       access-control-allow-origin:
       - '*'
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '47'
       expires:
-      - Fri, 14 Feb 2025 00:30:04 GMT
+      - Fri, 13 Feb 2026 01:29:33 GMT
       last-modified:
-      - Thu, 13 Feb 2025 23:30:04 GMT
+      - Fri, 13 Feb 2026 00:29:33 GMT
       vary:
-      - '*, Accept-Encoding'
+      - '*'
       x-aspnet-version:
       - 4.0.30319
-      x-powered-by:
-      - ASP.NET
     status:
       code: 200
       message: OK

@@ -512,8 +512,8 @@ def episodes() -> dict[str, Episode]:
             year=2018,
         ),
         'fake_show_s13e03': Episode(
-            'Fake.Show.S13E03.Chapter.This.Show.Does.Not.Exist.1080p.AMZN.WEB-DL.DDP5.1.H.264-NOSIVID.mkv',
-            'Fake Show',
+            'ZZZZZZ.Fake.Show.S13E03.Chapter.This.Show.Does.Not.Exist.1080p.AMZN.WEB-DL.DDP5.1.H.264-NOSIVID.mkv',
+            'ZZZZZZ Fake Show',
             4,
             2,
             year=1914,

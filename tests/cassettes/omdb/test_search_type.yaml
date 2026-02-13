@@ -5,13 +5,13 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, zstd
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.2
+      - Subliminal/2.5
     method: GET
-    uri: https://www.omdbapi.com/?r=json&v=1&apikey=44d5b275&s=Man+of+Steel&page=1&type=movie
+    uri: https://www.omdbapi.com/?r=json&v=1&apikey=7a541ee4&s=Man+of+Steel&page=1&type=movie
   response:
     body:
       string: '{"Search":[{"Title":"Man of Steel","Year":"2013","imdbID":"tt0770828","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BMTk5ODk1NDkxMF5BMl5BanBnXkFtZTcwNTA5OTY0OQ@@._V1_SX300.jpg"},{"Title":"World
@@ -25,36 +25,34 @@ interactions:
         Man of Steel","Year":"2019","imdbID":"tt10069974","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BODcxNDg4YjYtZjZmYS00NDAwLTg2NjctYTNiMjFiMDRlNmU5XkEyXkFqcGdeQXVyODc5OTgyODQ@._V1_SX300.jpg"},{"Title":"Stalin:
         Man of Steel","Year":"2003","imdbID":"tt6643772","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BNGI0NjJiM2QtNDlkNS00NWYxLWI0MjctNjQwZDA4YmY0ZmNkXkEyXkFqcGdeQXVyNzI4MDMyMTU@._V1_SX300.jpg"}],"totalResults":"30","Response":"True"}'
     headers:
-      CF-Cache-Status:
-      - MISS
       CF-RAY:
-      - 91189aab3fbaede4-LHR
+      - 9cd0364fd900e3b1-LIS
       Cache-Control:
-      - public, max-age=86400
+      - public, max-age=3600
       Connection:
       - keep-alive
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 13 Feb 2025 23:30:05 GMT
+      - Fri, 13 Feb 2026 00:29:34 GMT
       Server:
       - cloudflare
       Transfer-Encoding:
       - chunked
       access-control-allow-origin:
       - '*'
+      cf-cache-status:
+      - DYNAMIC
       content-length:
       - '1848'
       expires:
-      - Fri, 14 Feb 2025 00:30:05 GMT
+      - Fri, 13 Feb 2026 01:29:34 GMT
       last-modified:
-      - Thu, 13 Feb 2025 23:30:05 GMT
+      - Fri, 13 Feb 2026 00:29:34 GMT
       vary:
-      - '*, Accept-Encoding'
+      - '*'
       x-aspnet-version:
       - 4.0.30319
-      x-powered-by:
-      - ASP.NET
     status:
       code: 200
       message: OK

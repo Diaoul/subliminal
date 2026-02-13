@@ -5,17 +5,17 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate, zstd
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.5
     method: GET
-    uri: https://www.omdbapi.com/?r=json&v=1&apikey=44d5b275&s=man+of+steel&page=1&type=movie
+    uri: https://www.omdbapi.com/?r=json&v=1&apikey=7a541ee4&s=man+of+steel&page=1&type=movie
   response:
     body:
       string: '{"Search":[{"Title":"Man of Steel","Year":"2013","imdbID":"tt0770828","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BMTk5ODk1NDkxMF5BMl5BanBnXkFtZTcwNTA5OTY0OQ@@._V1_SX300.jpg"},{"Title":"World
-        War Two: 1941 and the Man of Steel","Year":"2011","imdbID":"tt5537126","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BYmI0YjFkZTYtMmE3NC00ZmZmLTkxZGYtMWUxZjBkN2VlMDM2XkEyXkFqcGdeQXVyNTM3MDMyMDQ@._V1_SX300.jpg"},{"Title":"Man
+        War Two: 1941 and the Man of Steel","Year":"2011","imdbID":"tt5537126","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BNTg4NmI5ZTgtMWU2Yi00ZGYyLTg1OWUtYjVhN2EwODg2YTVjXkEyXkFqcGc@._V1_SX300.jpg"},{"Title":"Man
         of Steel: The Yahoo Live Fan Event","Year":"2013","imdbID":"tt3327446","Type":"movie","Poster":"N/A"},{"Title":"Little
         Man of Steel","Year":"2013","imdbID":"tt2557780","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BZjE1MjE4MTItZjJjMC00NDFjLWExNjAtMjViMzQzYTA4ZWUzXkEyXkFqcGdeQXVyMzYzNzc1NjY@._V1_SX300.jpg"},{"Title":"Man
         of Steel","Year":"1967","imdbID":"tt0263704","Type":"movie","Poster":"N/A"},{"Title":"Christopher
@@ -23,38 +23,36 @@ interactions:
         of Steel Song","Year":"2013","imdbID":"tt2754626","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BMjAwNzE4MzU4OF5BMl5BanBnXkFtZTcwNzk1NTk1OQ@@._V1_SX300.jpg"},{"Title":"Chris
         Bacon: Man of Steel","Year":"2014","imdbID":"tt3560162","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BNzg2MzQ2MTI3NF5BMl5BanBnXkFtZTgwNjI1OTkyMTE@._V1_SX300.jpg"},{"Title":"Superman:
         Man of Steel","Year":"2019","imdbID":"tt10069974","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BODcxNDg4YjYtZjZmYS00NDAwLTg2NjctYTNiMjFiMDRlNmU5XkEyXkFqcGdeQXVyODc5OTgyODQ@._V1_SX300.jpg"},{"Title":"Stalin:
-        Man of Steel","Year":"2003","imdbID":"tt6643772","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BNGI0NjJiM2QtNDlkNS00NWYxLWI0MjctNjQwZDA4YmY0ZmNkXkEyXkFqcGdeQXVyNzI4MDMyMTU@._V1_SX300.jpg"}],"totalResults":"28","Response":"True"}'
+        Man of Steel","Year":"2003","imdbID":"tt6643772","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BNGI0NjJiM2QtNDlkNS00NWYxLWI0MjctNjQwZDA4YmY0ZmNkXkEyXkFqcGdeQXVyNzI4MDMyMTU@._V1_SX300.jpg"}],"totalResults":"30","Response":"True"}'
     headers:
-      CF-Cache-Status:
-      - MISS
       CF-RAY:
-      - 887d96b338040403-CDG
+      - 9cd036640fdf3a95-LIS
       Cache-Control:
-      - public, max-age=86400
+      - public, max-age=3600
       Connection:
       - keep-alive
-      Content-Encoding:
-      - gzip
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 22 May 2024 14:45:13 GMT
+      - Fri, 13 Feb 2026 00:29:37 GMT
       Server:
       - cloudflare
       Transfer-Encoding:
       - chunked
       access-control-allow-origin:
       - '*'
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '1848'
       expires:
-      - Wed, 22 May 2024 15:45:13 GMT
+      - Fri, 13 Feb 2026 01:29:37 GMT
       last-modified:
-      - Wed, 22 May 2024 14:45:13 GMT
+      - Fri, 13 Feb 2026 00:29:37 GMT
       vary:
-      - '*, Accept-Encoding'
+      - '*'
       x-aspnet-version:
       - 4.0.30319
-      x-powered-by:
-      - ASP.NET
     status:
       code: 200
       message: OK
@@ -64,56 +62,54 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate, zstd
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.5
     method: GET
-    uri: https://www.omdbapi.com/?r=json&v=1&apikey=44d5b275&s=man+of+steel&page=2&type=movie
+    uri: https://www.omdbapi.com/?r=json&v=1&apikey=7a541ee4&s=man+of+steel&page=2&type=movie
   response:
     body:
       string: '{"Search":[{"Title":"Superman IV: The Man of Steel and Glass","Year":"2017","imdbID":"tt11783846","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BZTIzMjNmMDUtYzI0ZS00ZDY0LWI4NDUtZmY5ODY4N2I0ZWY2XkEyXkFqcGdeQXVyNDA1NzI5NDk@._V1_SX300.jpg"},{"Title":"John
         henry man of steel the movie","Year":"2023","imdbID":"tt18926960","Type":"movie","Poster":"N/A"},{"Title":"The
         Man of Steel","Year":"2022","imdbID":"tt22021586","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BMzU1ZDY1N2MtYjlkMy00ZTg3LWJiOGQtMjllZGU2MmZhYTBhXkEyXkFqcGdeQXVyMjQ2Mzg4Ng@@._V1_SX300.jpg"},{"Title":"Hyperbaric
         Reviews - Man of Steel (2013)","Year":"2013","imdbID":"tt22355224","Type":"movie","Poster":"N/A"},{"Title":"Episode
-        41 - Man of Steel (2013)","Year":"2013","imdbID":"tt24266808","Type":"movie","Poster":"N/A"},{"Title":"Movieclips:
+        41 - Man of Steel (2013)","Year":"2013","imdbID":"tt24266808","Type":"movie","Poster":"N/A"},{"Title":"Man
+        of Steel (2013)","Year":"2013","imdbID":"tt28268482","Type":"movie","Poster":"N/A"},{"Title":"Man
+        of Steel (2013)","Year":"2013","imdbID":"tt29176865","Type":"movie","Poster":"N/A"},{"Title":"Movieclips:
         Man of Steel Alien Invasion","Year":"2013","imdbID":"tt10244568","Type":"movie","Poster":"N/A"},{"Title":"The
         Legacy of Gilbert Klingel: Man of Steel","Year":"2018","imdbID":"tt8359232","Type":"movie","Poster":"https://m.media-amazon.com/images/M/MV5BYWQ5ODFjNTEtZmMzNS00M2U4LTgxMDUtOWY2MTAxNzVhNWZkXkEyXkFqcGdeQXVyODc4Nzg1MzM@._V1_SX300.jpg"},{"Title":"Man
-        of Steel","Year":"2010","imdbID":"tt2215295","Type":"movie","Poster":"N/A"},{"Title":"Kurt
-        Morrow: Man of Steel","Year":"2015","imdbID":"tt2378339","Type":"movie","Poster":"N/A"},{"Title":"Man
-        of Steel: Title Sequence","Year":"2013","imdbID":"tt3748934","Type":"movie","Poster":"N/A"}],"totalResults":"28","Response":"True"}'
+        of Steel","Year":"2010","imdbID":"tt2215295","Type":"movie","Poster":"N/A"}],"totalResults":"30","Response":"True"}'
     headers:
-      CF-Cache-Status:
-      - MISS
       CF-RAY:
-      - 887d96b7be4599f1-CDG
+      - 9cd0366629f4e3c0-LIS
       Cache-Control:
-      - public, max-age=86400
+      - public, max-age=3600
       Connection:
       - keep-alive
-      Content-Encoding:
-      - gzip
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 22 May 2024 14:45:13 GMT
+      - Fri, 13 Feb 2026 00:29:37 GMT
       Server:
       - cloudflare
       Transfer-Encoding:
       - chunked
       access-control-allow-origin:
       - '*'
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '1511'
       expires:
-      - Wed, 22 May 2024 15:45:13 GMT
+      - Fri, 13 Feb 2026 01:29:37 GMT
       last-modified:
-      - Wed, 22 May 2024 14:45:13 GMT
+      - Fri, 13 Feb 2026 00:29:37 GMT
       vary:
-      - '*, Accept-Encoding'
+      - '*'
       x-aspnet-version:
       - 4.0.30319
-      x-powered-by:
-      - ASP.NET
     status:
       code: 200
       message: OK
@@ -123,55 +119,54 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate, br, zstd
+      - gzip, deflate, zstd
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.1
+      - Subliminal/2.5
     method: GET
-    uri: https://www.omdbapi.com/?r=json&v=1&apikey=44d5b275&s=man+of+steel&page=3&type=movie
+    uri: https://www.omdbapi.com/?r=json&v=1&apikey=7a541ee4&s=man+of+steel&page=3&type=movie
   response:
     body:
-      string: '{"Search":[{"Title":"Tales from Development Hell: Waiting for Man of
-        Steel","Year":"2014","imdbID":"tt3799858","Type":"movie","Poster":"N/A"},{"Title":"The
+      string: '{"Search":[{"Title":"Kurt Morrow: Man of Steel","Year":"2015","imdbID":"tt2378339","Type":"movie","Poster":"N/A"},{"Title":"Man
+        of Steel: Title Sequence","Year":"2013","imdbID":"tt3748934","Type":"movie","Poster":"N/A"},{"Title":"Tales
+        from Development Hell: Waiting for Man of Steel","Year":"2014","imdbID":"tt3799858","Type":"movie","Poster":"N/A"},{"Title":"The
         Heroes Behind Man of Steel: Heroic Storytelling","Year":"2013","imdbID":"tt4158100","Type":"movie","Poster":"N/A"},{"Title":"The
         Military Might of Man of Steel","Year":"2013","imdbID":"tt4158128","Type":"movie","Poster":"N/A"},{"Title":"The
         Heroes Behind Man of Steel: Composing a Heroic Score","Year":"2013","imdbID":"tt4160502","Type":"movie","Poster":"N/A"},{"Title":"Journey
         of Discovery: Creating Man of Steel","Year":"2013","imdbID":"tt4160544","Type":"movie","Poster":"N/A"},{"Title":"The
         Sonic Landscape of ''Man of Steel''","Year":"2013","imdbID":"tt5312384","Type":"movie","Poster":"N/A"},{"Title":"The
         Iconic Characters of ''Man of Steel''","Year":"2013","imdbID":"tt5312388","Type":"movie","Poster":"N/A"},{"Title":"BigHead
-        Man of Steel","Year":"2015","imdbID":"tt5369598","Type":"movie","Poster":"N/A"}],"totalResults":"28","Response":"True"}'
+        Man of Steel","Year":"2015","imdbID":"tt5369598","Type":"movie","Poster":"N/A"}],"totalResults":"30","Response":"True"}'
     headers:
-      CF-Cache-Status:
-      - MISS
       CF-RAY:
-      - 887d96ba28a199ed-CDG
+      - 9cd0366799b14610-LIS
       Cache-Control:
-      - public, max-age=86400
+      - public, max-age=3600
       Connection:
       - keep-alive
-      Content-Encoding:
-      - gzip
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Wed, 22 May 2024 14:45:14 GMT
+      - Fri, 13 Feb 2026 00:29:37 GMT
       Server:
       - cloudflare
       Transfer-Encoding:
       - chunked
       access-control-allow-origin:
       - '*'
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '1216'
       expires:
-      - Wed, 22 May 2024 15:45:14 GMT
+      - Fri, 13 Feb 2026 01:29:37 GMT
       last-modified:
-      - Wed, 22 May 2024 14:45:14 GMT
+      - Fri, 13 Feb 2026 00:29:37 GMT
       vary:
-      - '*, Accept-Encoding'
+      - '*'
       x-aspnet-version:
       - 4.0.30319
-      x-powered-by:
-      - ASP.NET
     status:
       code: 200
       message: OK

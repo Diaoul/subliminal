@@ -126,6 +126,7 @@ def test_get_age(monkeypatch: pytest.MonkeyPatch) -> None:
         ('the.big.bang.theory', 'Big Bang Theory', None, False),
         ('the.big.bang.theory', 'Big Bang Theory', ['The Big Bang Theory'], True),
         ('the.big.bang.theory', 'Big Bang Theory', ['Not The Big Bang Theory'], False),
+        ('the.big.bang.theory', 'The Big', ['Bang Theory'], True),
     ],
 )
 def test_matches_extended_title(actual: str | None, title: str | None, alt: list[str], expected: bool) -> None:

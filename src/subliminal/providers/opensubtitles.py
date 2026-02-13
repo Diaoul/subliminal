@@ -196,7 +196,6 @@ class OpenSubtitlesProvider(Provider):
         username: str | None = None,
         password: str | None = None,
         *,
-        max_result_pages: int = 0,
         timeout: int = 10,
     ) -> None:
         transport = TimeoutSafeTransport(timeout=timeout, user_agent='VLSub')

@@ -34,7 +34,7 @@ Example
 
 An example of configuration file:
 
-.. literalinclude:: ../config.toml
+.. literalinclude:: ../assets/config.toml
     :language: toml
 
 

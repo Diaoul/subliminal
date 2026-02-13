@@ -5,6 +5,7 @@ from __future__ import annotations
 import logging
 import os
 import struct
+from functools import cache
 from typing import TYPE_CHECKING, Any, cast
 
 from subliminal.extensions import get_default_providers, provider_manager
@@ -23,8 +24,11 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 
+@cache
 def hash_opensubtitles(video_path: str | os.PathLike) -> str | None:
     """Compute a hash using OpenSubtitles' algorithm.
+
+    The result is cached so it can be reused by several providers without cost.
 
     :param (str | os.PathLike) video_path: path of the video.
     :return: the hash.

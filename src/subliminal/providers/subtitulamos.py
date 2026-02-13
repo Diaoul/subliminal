@@ -182,21 +182,25 @@ class SubtitulamosProvider(Provider):
 
     @region.cache_on_arguments(expiration_time=SHOW_EXPIRATION_TIME)
     def _read_episode_page(
-        self, series: str, season: int, episode: int, year: int | None = None
+        self,
+        series: str,
+        season: int,
+        episode: int,
+        year: int | None = None,
     ) -> tuple[ParserBeautifulSoup, str]:
         """Search the URL titles by kind for the given `title`, `season` and `episode`.
 
         :param str series: Series to search for.
         :param int season: Season to search for.
         :param int episode: Episode to search for.
-        :param int year: Year to search for.
+        :param (int | None) year: Year to search for.
         :return: The episode URL.
 
         """
         logger.info('Searching episode url for %s, season %d, episode %d', series, season, episode)
 
         # attempt first with year
-        series_response = self._query_search(f'{series} ({year})')
+        series_response = self._query_search(f'{series} ({year})') if year else []
         if len(series_response) == 0:
             series_response = self._query_search(series)
 

@@ -17,7 +17,6 @@ from subliminal.subtitle import Subtitle, fix_line_ending
 from . import Provider
 
 if TYPE_CHECKING:
-    import os
     from collections.abc import Set
 
     from subliminal.video import Video
@@ -98,7 +97,7 @@ class NapiProjektProvider(Provider):
         self.session = None
 
     @staticmethod
-    def hash_video(video_path: str | os.PathLike) -> str | None:
+    def hash_video(video_path: str) -> str | None:
         """Compute a hash using NapiProjekt's algorithm.
 
         :param str video_path: path of the video.

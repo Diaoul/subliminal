@@ -217,7 +217,7 @@ class SubtisProvider(Provider[SubtisSubtitle]):
         encoded_filename = quote(filename, safe='')
 
         if video.name and os.path.isfile(video.name):
-            video_hash = video.hashes.get('subtis') or self.hash_video(video.name)
+            video_hash = video.hashes.get('subtis')
             if video_hash:
                 hash_url = f'{self.server_url}/subtitle/find/file/hash/{video_hash}'
                 logger.info('Searching subtitles by hash for %s', filename)

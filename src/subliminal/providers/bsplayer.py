@@ -200,7 +200,7 @@ class BSPlayerProvider(Provider):
         self.search_url = search_url or get_sub_domain()
 
     @staticmethod
-    def hash_video(video_path: str | os.PathLike) -> str | None:
+    def hash_video(video_path: str) -> str | None:
         """Compute a hash using BSPlayer algorithm.
 
         :param str video_path: path of the video.

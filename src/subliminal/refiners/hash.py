@@ -19,26 +19,26 @@ if TYPE_CHECKING:
     from subliminal.providers import Provider
     from subliminal.video import Video
 
-    HashFunc: TypeAlias = Callable[[str | os.PathLike], str | None]
+    HashFunc: TypeAlias = Callable[[str], str | None]
 
 logger = logging.getLogger(__name__)
 
 
 @cache
-def hash_opensubtitles(video_path: str | os.PathLike) -> str | None:
+def hash_opensubtitles(video_name: str) -> str | None:
     """Compute a hash using OpenSubtitles' algorithm.
 
     The result is cached so it can be reused by several providers without cost.
 
-    :param (str | os.PathLike) video_path: path of the video.
-    :return: the hash.
-    :rtype: str
+    :param str video_name: filename of the video.
+    :return: the hash or None if it failed.
+    :rtype: str | None
 
     """
-    video_path = os.fspath(video_path)
+    video_name = os.fspath(video_name)
     bytesize = struct.calcsize(b'<q')
-    with open(video_path, 'rb') as f:
-        filesize = os.path.getsize(video_path)
+    with open(video_name, 'rb') as f:
+        filesize = os.path.getsize(video_name)
         filehash = filesize
         if filesize < 65536 * 2:
             return None

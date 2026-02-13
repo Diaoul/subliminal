@@ -24,7 +24,6 @@ from subliminal.subtitle import Subtitle
 from subliminal.video import Episode, Movie, Video
 
 if TYPE_CHECKING:
-    import os
     from collections.abc import Sequence, Set
     from http.client import HTTPSConnection
     from types import TracebackType
@@ -146,7 +145,7 @@ class Provider(Generic[S]):
     user_agent: str = f'Subliminal/{__short_version__}'
 
     @staticmethod
-    def hash_video(video_path: str | os.PathLike) -> str | None:
+    def hash_video(video_path: str) -> str | None:
         """Hash the video to be used by the provider."""
         return None
 

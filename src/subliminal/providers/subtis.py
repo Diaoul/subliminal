@@ -125,7 +125,7 @@ class SubtisProvider(Provider[SubtisSubtitle]):
         self.session = None
 
     @staticmethod
-    def hash_video(video_path: str | os.PathLike) -> str | None:
+    def hash_video(video_path: str) -> str | None:
         """Compute a hash using OpenSubtitles' algorithm.
 
         :param video_path: path of the video file.
@@ -133,6 +133,7 @@ class SubtisProvider(Provider[SubtisSubtitle]):
         """
         from subliminal.refiners.hash import hash_opensubtitles
 
+        video_path = os.fspath(video_path)
         try:
             return hash_opensubtitles(video_path)
         except OSError:

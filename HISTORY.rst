@@ -2,6 +2,29 @@
 
 .. towncrier release notes start
 
+2.6.0 (2026-02-20)
+^^^^^^^^^^^^^^^^^^
+
+Provider Changes
+----------------
+
+- OpenSubtitlesCom: replace recursive ``_search()`` implementation to prevent a stack overflow in some edge case (`#1336 <https://github.com/Diaoul/subliminal/issues/1336>`__)
+- Add Subtis provider for Spanish subtitles (`#1337 <https://github.com/Diaoul/subliminal/issues/1337>`__)
+
+
+Refiner Changes
+---------------
+
+- hash: cache the result of hash_opensubtitles so it can be reused costlessly (`#1340 <https://github.com/Diaoul/subliminal/issues/1340>`__)
+
+
+Misc
+----
+
+- Fixes for some scheduled tests failures (`#1339 <https://github.com/Diaoul/subliminal/issues/1339>`__)
+- add a gif to show CLI usage (`#1341 <https://github.com/Diaoul/subliminal/issues/1341>`__)
+
+
 2.5.0 (2025-12-14)
 ^^^^^^^^^^^^^^^^^^
 

@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import logging
 import os
+import warnings
 from collections import defaultdict
 from typing import TYPE_CHECKING, Any
 
@@ -248,8 +249,22 @@ REFINER = click.Choice(['ALL', *sorted(refiner_manager.names())])
 @click.option(
     '--language-type-suffix/--no-language-type-suffix',
     is_flag=True,
+    type=bool,
+    default=None,
+    deprecated='use `--category-suffix` instead',
+    help=(
+        'Add a suffix ("hi" or "fo") to the saved subtitle name with the subtitle category, '
+        'hearing impaired or foreign only.'
+    ),
+)
+@click.option(
+    '--category-suffix/--no-category-suffix',
+    is_flag=True,
     default=False,
-    help='Add a suffix to the saved subtitle name to indicate a hearing impaired or foreign only subtitle.',
+    help=(
+        'Add a suffix ("hi" or "fo") to the saved subtitle name with the subtitle category, '
+        'hearing impaired or foreign only.'
+    ),
 )
 @click.option(
     '--language-format',
@@ -318,7 +333,8 @@ def download(
     hearing_impaired: tuple[bool | None, ...],
     foreign_only: tuple[bool | None, ...],
     min_score: int,
-    language_type_suffix: bool,
+    language_type_suffix: bool | None,
+    category_suffix: bool,
     language_format: str,
     max_workers: int,
     archives: bool,
@@ -345,13 +361,18 @@ def download(
     if not subtitle_format or subtitle_format in ['""', "''"]:
         subtitle_format = None
 
-    # language_type
+    # subtitle category
     hearing_impaired_flag: bool | None = None
     if len(hearing_impaired) > 0:
         hearing_impaired_flag = hearing_impaired[-1]
     foreign_only_flag: bool | None = None
     if len(foreign_only) > 0:
         foreign_only_flag = foreign_only[-1]
+
+    if language_type_suffix in [False, True]:  # pragma: no cover
+        msg = '`--[no-]language_type_suffix` has been renamed `--[no-]category-suffix`'
+        warnings.warn(msg, DeprecationWarning, stacklevel=2)
+        category_suffix = language_type_suffix
 
     logger.info('Download with subliminal version %s', __version__)
     # Make sure verbose is maximal if debug is specified to show ALL the messages
@@ -537,7 +558,7 @@ def download(
             directory=directory,
             encoding=encoding,
             subtitle_format=subtitle_format,
-            language_type_suffix=language_type_suffix,
+            category_suffix=category_suffix,
             language_format=language_format,
         )
         total_subtitles += len(saved_subtitles)

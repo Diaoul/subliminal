@@ -298,7 +298,7 @@ def test_cli_download_subtitle_format(cli_runner: CliRunner) -> None:
 def test_cli_download_hearing_impaired(cli_runner: CliRunner) -> None:
     video_name = 'Marvels.Agents.of.S.H.I.E.L.D.S02E06.720p.HDTV.x264-KILLERS.mkv'
 
-    cli_args = ['download', '-l', 'en', '--hearing-impaired', '--language-type-suffix', '-p', 'gestdown', video_name]
+    cli_args = ['download', '-l', 'en', '--hearing-impaired', '--category-suffix', '-p', 'gestdown', video_name]
     with cli_runner.isolated_filesystem() as td:
         result = cli_runner.run(subliminal_cli, cli_args)
 
@@ -318,7 +318,7 @@ def test_cli_download_hearing_impaired(cli_runner: CliRunner) -> None:
 def test_cli_download_foreign_only(cli_runner: CliRunner) -> None:
     video_name = 'Marvels.Agents.of.S.H.I.E.L.D.S02E06.720p.HDTV.x264-KILLERS.mkv'
 
-    cli_args = ['download', '-l', 'en', '--foreign-only', '--language-type-suffix', '-p', 'gestdown', video_name]
+    cli_args = ['download', '-l', 'en', '--foreign-only', '--category-suffix', '-p', 'gestdown', video_name]
     with cli_runner.isolated_filesystem() as td:
         result = cli_runner.run(subliminal_cli, cli_args)
 

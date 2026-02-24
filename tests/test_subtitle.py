@@ -11,8 +11,8 @@ from babelfish import Language  # type: ignore[import-untyped]
 from subliminal.subtitle import (
     EmbeddedSubtitle,
     ExternalSubtitle,
-    LanguageType,
     Subtitle,
+    SubtitleCategory,
     fix_line_ending,
     get_subtitle_path,
     get_subtitle_suffix,
@@ -28,24 +28,24 @@ pytestmark = pytest.mark.core
 @pytest.mark.parametrize('hearing_impaired', [None, True, False])
 @pytest.mark.parametrize('foreign_only', [None, True, False])
 def test_languague_type(hearing_impaired: bool | None, foreign_only: bool | None) -> None:
-    language_type = LanguageType.from_flags(hearing_impaired=hearing_impaired, foreign_only=foreign_only)
+    category = SubtitleCategory.from_flags(hearing_impaired=hearing_impaired, foreign_only=foreign_only)
 
     if hearing_impaired is True:
-        assert language_type == LanguageType.HEARING_IMPAIRED
-        assert language_type.is_hearing_impaired() is True
-        assert language_type.is_foreign_only() is False
+        assert category == SubtitleCategory.HEARING_IMPAIRED
+        assert category.is_hearing_impaired() is True
+        assert category.is_foreign_only() is False
     elif foreign_only is True:
-        assert language_type == LanguageType.FOREIGN_ONLY
-        assert language_type.is_hearing_impaired() is False
-        assert language_type.is_foreign_only() is True
+        assert category == SubtitleCategory.FOREIGN_ONLY
+        assert category.is_hearing_impaired() is False
+        assert category.is_foreign_only() is True
     elif hearing_impaired is False or foreign_only is False:
-        assert language_type == LanguageType.NORMAL
-        assert language_type.is_hearing_impaired() is False
-        assert language_type.is_foreign_only() is False
+        assert category == SubtitleCategory.NARRATIVE
+        assert category.is_hearing_impaired() is False
+        assert category.is_foreign_only() is False
     else:
-        assert language_type == LanguageType.UNKNOWN
-        assert language_type.is_hearing_impaired() is None
-        assert language_type.is_foreign_only() is None
+        assert category == SubtitleCategory.UNKNOWN
+        assert category.is_hearing_impaired() is None
+        assert category.is_foreign_only() is None
 
 
 def test_subtitle_text() -> None:
@@ -157,8 +157,8 @@ def test_get_subtitle_path_hearing_impaired(movies: dict[str, Movie]) -> None:
     video = movies['man_of_steel']
     suffix = get_subtitle_suffix(
         Language('deu', 'CH', 'Latn'),
-        language_type=LanguageType.HEARING_IMPAIRED,
-        language_type_suffix=True,
+        category=SubtitleCategory.HEARING_IMPAIRED,
+        category_suffix=True,
     )
     assert get_subtitle_path(video.name, suffix) == os.path.splitext(video.name)[0] + '.[hi].de-CH-Latn.srt'
 
@@ -167,8 +167,8 @@ def test_get_subtitle_path_foreign_only(movies: dict[str, Movie]) -> None:
     video = movies['man_of_steel']
     suffix = get_subtitle_suffix(
         Language('srp', None, 'Cyrl'),
-        language_type=LanguageType.FOREIGN_ONLY,
-        language_type_suffix=True,
+        category=SubtitleCategory.FOREIGN_ONLY,
+        category_suffix=True,
     )
     assert get_subtitle_path(video.name, suffix) == os.path.splitext(video.name)[0] + '.[fo].sr-Cyrl.srt'
 
@@ -177,8 +177,8 @@ def test_get_subtitle_path_foreign_only_language_first(movies: dict[str, Movie])
     video = movies['man_of_steel']
     suffix = get_subtitle_suffix(
         Language('srp', None, 'Cyrl'),
-        language_type=LanguageType.FOREIGN_ONLY,
-        language_type_suffix=True,
+        category=SubtitleCategory.FOREIGN_ONLY,
+        category_suffix=True,
         language_first=True,
     )
     assert get_subtitle_path(video.name, suffix) == os.path.splitext(video.name)[0] + '.sr-Cyrl.[fo].srt'
@@ -192,7 +192,7 @@ def test_get_subtitle_path_alpha3(movies: dict[str, Movie]) -> None:
 
 def test_get_subtitle_path_extension(movies: dict[str, Movie]) -> None:
     video = movies['man_of_steel']
-    suffix = get_subtitle_suffix(Language('zho', 'CN'), language_type_suffix=True)
+    suffix = get_subtitle_suffix(Language('zho', 'CN'), category_suffix=True)
     assert get_subtitle_path(video.name, suffix, extension='.sub') == os.path.splitext(video.name)[0] + '.zh-CN.sub'
 
 
@@ -577,8 +577,8 @@ def test_external_subtitle_from_language_code(monkeypatch: pytest.MonkeyPatch) -
     subtitle = ExternalSubtitle.from_language_code('fr', subtitle_path=filename)
     assert subtitle.language == Language('fra')
     assert subtitle.id == 'test_external_subtitle_from_language_code'
-    assert not subtitle.language_type.is_hearing_impaired()
-    assert not subtitle.language_type.is_foreign_only()
+    assert not subtitle.category.is_hearing_impaired()
+    assert not subtitle.category.is_foreign_only()
     assert subtitle.subtitle_format is None
 
 
@@ -586,7 +586,7 @@ def test_external_subtitle_from_language_code_hearing_impaired(monkeypatch: pyte
     filename = Path('filename.[hi].eng.ass')
     subtitle = ExternalSubtitle.from_language_code('[hi].eng', subtitle_path=filename)
     assert subtitle.language == Language('eng')
-    assert subtitle.language_type.is_hearing_impaired()
+    assert subtitle.category.is_hearing_impaired()
     assert subtitle.id == os.fspath(filename)
     assert subtitle.subtitle_format == 'ass'
 
@@ -595,7 +595,7 @@ def test_external_subtitle_from_language_code_foreign_only(monkeypatch: pytest.M
     filename = Path('filename.hu.[fo].srt')
     subtitle = ExternalSubtitle.from_language_code('hu.fo', subtitle_path=filename)
     assert subtitle.language == Language('hun')
-    assert subtitle.language_type.is_foreign_only()
+    assert subtitle.category.is_foreign_only()
     assert subtitle.id == os.fspath(filename)
     assert subtitle.subtitle_format == 'srt'
 
@@ -605,7 +605,7 @@ def test_external_subtitle_from_language_code_ambiguous(monkeypatch: pytest.Monk
     subtitle = ExternalSubtitle.from_language_code('hi.fo', subtitle_path=filename)
     # Hearing impaired code 'hi' is matched first
     assert subtitle.language == Language('fao')
-    assert subtitle.language_type.is_hearing_impaired()
+    assert subtitle.category.is_hearing_impaired()
     assert subtitle.id == os.fspath(filename)
     assert subtitle.subtitle_format == 'srt'
 

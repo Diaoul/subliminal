@@ -25,7 +25,7 @@ from .extensions import (
 )
 from .matches import fps_matches
 from .score import compute_score as default_compute_score
-from .subtitle import SUBTITLE_EXTENSIONS, ExternalSubtitle, LanguageType
+from .subtitle import SUBTITLE_EXTENSIONS, ExternalSubtitle, SubtitleCategory
 from .utils import get_age, handle_exception
 from .video import VIDEO_EXTENSIONS, Episode, Movie, Video
 
@@ -262,12 +262,12 @@ class ProviderPool:
             subtitles = [s for s in subtitles if fps_matches(video, fps=s.fps, strict=False)]
 
         # sort by hearing impaired and foreign only
-        language_type = LanguageType.from_flags(hearing_impaired=hearing_impaired, foreign_only=foreign_only)
-        if language_type != LanguageType.UNKNOWN:
-            logger.info('Sort subtitles by %s types first', language_type.value)
+        category = SubtitleCategory.from_flags(hearing_impaired=hearing_impaired, foreign_only=foreign_only)
+        if category != SubtitleCategory.UNKNOWN:
+            logger.info('Sort subtitles by %s types first', category.value)
             subtitles = sorted(
                 subtitles,
-                key=lambda s: s.language_type == language_type,
+                key=lambda s: s.category == category,
                 reverse=True,
             )
 
@@ -869,7 +869,7 @@ def save_subtitles(
     encoding: str | None = None,
     subtitle_format: str | None = None,
     extension: str | None = None,
-    language_type_suffix: bool = False,
+    category_suffix: bool = False,
     language_format: str = 'alpha2',
 ) -> list[Subtitle]:
     """Save subtitles on filesystem.
@@ -889,7 +889,7 @@ def save_subtitles(
     :param str encoding: encoding in which to save the subtitles, default is to keep original encoding.
     :param str subtitle_format: format in which to save the subtitles, default is to keep original format.
     :param (str | None) extension: the subtitle extension, default is to match to the subtitle format.
-    :param bool language_type_suffix: add a suffix 'hi' or 'fo' if needed. Default to False.
+    :param bool category_suffix: add a suffix with the subtitle category ('hi' or 'fo') if needed. Default to False.
     :param str language_format: format of the language suffix. Default to 'alpha2'.
     :return: the saved subtitles
     :rtype: list of :class:`~subliminal.subtitle.Subtitle`
@@ -918,7 +918,7 @@ def save_subtitles(
             video,
             single=single,
             extension=extension,
-            language_type_suffix=language_type_suffix,
+            category_suffix=category_suffix,
             language_format=language_format,
         )
         if directory is not None:

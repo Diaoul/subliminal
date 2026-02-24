@@ -470,7 +470,7 @@ def test_download_best_subtitles_only_one(episodes: dict[str, Episode]) -> None:
     assert (subtitle.provider_name, subtitle.id) in expected_subtitles
 
 
-def test_download_best_subtitles_language_type(episodes: dict[str, Episode]) -> None:
+def test_download_best_subtitles_category(episodes: dict[str, Episode]) -> None:
     video = episodes['bbt_s07e05']
     languages = {Language('eng')}
     providers = ['gestdown', 'podnapisi', 'tvsubtitles']

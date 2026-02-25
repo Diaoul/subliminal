@@ -7,11 +7,13 @@ import pytest
 from subliminal.cli.helpers import (
     get_argument_doc,
     get_parameters_from_signature,
+    read_configuration,
     split_doc_args,
 )
 
 if TYPE_CHECKING:
     from collections.abc import Callable
+    from pathlib import Path
 
     from babelfish import Language  # type: ignore[import-untyped]
 
@@ -95,3 +97,10 @@ def test_get_parameters_from_signature(docstring: str) -> None:
     assert params[5]['default'] is False
     assert params[5]['annotation'] == 'bool'
     assert params[5]['desc'] is None
+
+
+def test_read_configuration_file_not_found(tmp_path: Path) -> None:
+    path = tmp_path / 'config.toml'
+    conf = read_configuration(path)
+    msg = 'Not using any configuration file'
+    assert conf['obj']['debug_message'].startswith(msg)

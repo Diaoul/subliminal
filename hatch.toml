@@ -80,7 +80,7 @@ description = "Run the tests suite"
 features = ["tests"]
 
 [[envs.tests.matrix]]
-python = ["3.9", "3.10", "3.11", "3.12", "3.13", "3.14"]
+python = ["3.10", "3.11", "3.12", "3.13", "3.14"]
 
 [envs.tests.env-vars]
 COVERAGE_PROCESS_START = "pyproject.toml"

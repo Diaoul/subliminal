@@ -35,6 +35,18 @@ episode_id_re = re.compile(r'^episode-\d+\.html$')
 script_re = re.compile(r'var\s*s(?P<num>\d+)\s*=\s*\'(?P<string>[^\']+)\'')
 
 
+# fmt: off
+tvsubtitles_languages = {
+    Language('por', 'BR')
+} | {
+    Language(lang) for lang in [
+        'ara', 'bul', 'ces', 'dan', 'deu', 'ell', 'eng', 'fin', 'fra', 'hun', 'ita', 'jpn', 'kor', 'nld', 'pol', 'por',
+        'ron', 'rus', 'spa', 'swe', 'tur', 'ukr', 'zho',
+    ]
+}
+# fmt: on
+
+
 class TVsubtitlesSubtitle(Subtitle):
     """TVsubtitles Subtitle."""
 
@@ -98,34 +110,7 @@ class TVsubtitlesSubtitle(Subtitle):
 class TVsubtitlesProvider(Provider):
     """TVsubtitles Provider."""
 
-    languages: ClassVar[Set[Language]] = {Language('por', 'BR')} | {
-        Language(lang)
-        for lang in [
-            'ara',
-            'bul',
-            'ces',
-            'dan',
-            'deu',
-            'ell',
-            'eng',
-            'fin',
-            'fra',
-            'hun',
-            'ita',
-            'jpn',
-            'kor',
-            'nld',
-            'pol',
-            'por',
-            'ron',
-            'rus',
-            'spa',
-            'swe',
-            'tur',
-            'ukr',
-            'zho',
-        ]
-    }
+    languages: ClassVar[Set[Language]] = tvsubtitles_languages
     video_types: ClassVar = (Episode,)
     server_url: ClassVar[str] = 'https://www.tvsubtitles.net'
     subtitle_class: ClassVar = TVsubtitlesSubtitle

@@ -26,54 +26,15 @@ logger = logging.getLogger(__name__)
 #: Subtitle id pattern
 id_pattern = re.compile(r'.*\/subtitles\/download\/([a-z0-9-]+)')
 
-gestdown_languages: Set[Language] = {
-    Language(lang)
-    for lang in [
-        'ara',
-        'aze',
-        'ben',
-        'bos',
-        'bul',
-        'cat',
-        'ces',
-        'dan',
-        'deu',
-        'ell',
-        'eng',
-        'eus',
-        'fas',
-        'fin',
-        'fra',
-        'glg',
-        'heb',
-        'hrv',
-        'hun',
-        'hye',
-        'ind',
-        'ita',
-        'jpn',
-        'kor',
-        'mkd',
-        'msa',
-        'nld',
-        'nor',
-        'pol',
-        'por',
-        'ron',
-        'rus',
-        'slk',
-        'slv',
-        'spa',
-        'sqi',
-        'srp',
-        'swe',
-        'tha',
-        'tur',
-        'ukr',
-        'vie',
-        'zho',
+# fmt: off
+gestdown_languages = {
+    Language(lang) for lang in [
+        'ara', 'aze', 'ben', 'bos', 'bul', 'cat', 'ces', 'dan', 'deu', 'ell', 'eng', 'eus', 'fas', 'fin', 'fra', 'glg',
+        'heb', 'hrv', 'hun', 'hye', 'ind', 'ita', 'jpn', 'kor', 'mkd', 'msa', 'nld', 'nor', 'pol', 'por', 'ron', 'rus',
+        'slk', 'slv', 'spa', 'sqi', 'srp', 'swe', 'tha', 'tur', 'ukr', 'vie', 'zho',
     ]
 }
+# fmt: on
 
 
 class GestdownSubtitle(Subtitle):

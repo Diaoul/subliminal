@@ -6,7 +6,7 @@ import logging
 import re
 from datetime import datetime, timedelta, timezone
 from functools import wraps
-from typing import Any, Callable, ClassVar, TypeVar, cast
+from typing import TYPE_CHECKING, Any, ClassVar, cast
 
 import guessit  # type: ignore[import-untyped]
 import requests
@@ -17,7 +17,11 @@ from subliminal.cache import REFINER_EXPIRATION_TIME, region
 from subliminal.utils import decorate_imdb_id, sanitize, sanitize_id
 from subliminal.video import Episode, Video
 
-C = TypeVar('C', bound=Callable)
+if TYPE_CHECKING:
+    from collections.abc import Callable
+    from typing import TypeVar
+
+    C = TypeVar('C', bound=Callable)
 
 
 logger = logging.getLogger(__name__)

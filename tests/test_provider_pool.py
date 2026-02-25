@@ -19,7 +19,7 @@ from subliminal.score import episode_scores
 from subliminal.subtitle import Subtitle
 
 if TYPE_CHECKING:
-    from typing import Callable
+    from collections.abc import Callable
 
     from subliminal.extensions import RegistrableExtensionManager
     from subliminal.providers.mock import MockProvider

@@ -11,7 +11,7 @@ import socket
 from collections.abc import Iterable
 from datetime import datetime, timedelta, timezone
 from types import GeneratorType
-from typing import TYPE_CHECKING, Any, Callable, Generic, TypeVar, cast, overload
+from typing import TYPE_CHECKING, Any, Generic, TypeVar, cast, overload
 from xmlrpc.client import ProtocolError
 
 import requests
@@ -20,7 +20,7 @@ from requests.exceptions import SSLError
 from .exceptions import ServiceUnavailable
 
 if TYPE_CHECKING:
-    from collections.abc import Sequence, Set
+    from collections.abc import Callable, Sequence, Set
     from typing import TypedDict, TypeGuard
 
     S = TypeVar('S')

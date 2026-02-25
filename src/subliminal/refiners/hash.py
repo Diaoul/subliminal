@@ -11,8 +11,8 @@ from typing import TYPE_CHECKING, Any, cast
 from subliminal.extensions import get_default_providers, provider_manager
 
 if TYPE_CHECKING:
-    from collections.abc import Sequence, Set
-    from typing import Callable, TypeAlias
+    from collections.abc import Callable, Sequence, Set
+    from typing import TypeAlias
 
     from babelfish import Language  # type: ignore[import-untyped]
 

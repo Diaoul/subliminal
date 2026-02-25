@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Callable
+from typing import TYPE_CHECKING
 
 import pytest
 
@@ -11,6 +11,8 @@ from subliminal.cli.helpers import (
 )
 
 if TYPE_CHECKING:
+    from collections.abc import Callable
+
     from babelfish import Language  # type: ignore[import-untyped]
 
 # Core test

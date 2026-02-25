@@ -11,7 +11,7 @@ from knowit.units import units  # type: ignore[import-untyped]
 from subliminal.core import scan_video
 from subliminal.refiners.metadata import (
     get_float,
-    get_subtitle_format,
+    get_subtitle_format_from_knowit,
     loaded_providers,
     refine,
 )
@@ -51,9 +51,9 @@ def test_get_float_error() -> None:
         ('pgs', 'pgs'),
     ],
 )
-def test_get_subtitle_format(value: str | None, expected: str | None) -> None:
+def test_get_subtitle_format_from_knowit(value: str | None, expected: str | None) -> None:
     """Convert str subrip -> srt."""
-    subtitle_format = get_subtitle_format(value)
+    subtitle_format = get_subtitle_format_from_knowit(value)
     assert subtitle_format == expected
 
 

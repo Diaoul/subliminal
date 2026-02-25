@@ -157,12 +157,14 @@ def refine(
                 # language
                 lang = st.get('language', Language('und'))
 
-                sub = EmbeddedSubtitle(
+                sub = EmbeddedSubtitle.from_video_path(
                     lang,
-                    subtitle_id=video.name,
+                    movie_path=video.name,
                     hearing_impaired=st.get('hearing_impaired', st.get('closed_caption')),
                     foreign_only=st.get('forced'),
-                    subtitle_format=get_subtitle_format(st.get('format', 'srt')),
+                    subtitle_format=get_subtitle_format_from_knowit(st.get('format', 'srt')),
+                    subtitle_track=st.get('id'),
+                    subtitle_title=st.get('name', ''),
                 )
 
                 # add to set
@@ -196,7 +198,7 @@ def get_float(value: Any) -> float | None:
     return float(value)
 
 
-def get_subtitle_format(value: str | None) -> str | None:
+def get_subtitle_format_from_knowit(value: str | None) -> str | None:
     """Normalize the subtitle format name."""
     if value is None:
         return None

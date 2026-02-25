@@ -7,7 +7,8 @@ import logging
 import os
 from codecs import BOM_UTF8, BOM_UTF16_BE, BOM_UTF16_LE, BOM_UTF32_BE, BOM_UTF32_LE
 from enum import Enum
-from typing import TYPE_CHECKING, ClassVar
+from pathlib import Path
+from typing import TYPE_CHECKING, Any, ClassVar
 
 import chardet
 import srt  # type: ignore[import-untyped]
@@ -577,7 +578,9 @@ class Subtitle:
 
 
 class EmbeddedSubtitle(Subtitle):
-    """Embedded subtitle, the id should be the video filename."""
+    """Embedded subtitle, the id should be the video filename extended with the language and category."""
+
+    provider_name: ClassVar[str] = 'Embedded'
 
     def __init__(
         self,
@@ -588,6 +591,8 @@ class EmbeddedSubtitle(Subtitle):
         foreign_only: bool | None = None,
         encoding: str | None = None,
         subtitle_format: str | None = None,
+        subtitle_path: str | None = None,
+        **kwargs: Any,
     ) -> None:
         super().__init__(
             language,
@@ -596,8 +601,43 @@ class EmbeddedSubtitle(Subtitle):
             foreign_only=foreign_only,
             encoding=encoding,
             subtitle_format=subtitle_format,
-            subtitle_path=subtitle_id,
+            subtitle_path=subtitle_path,
             embedded=True,
+        )
+
+    @classmethod
+    def from_video_path(
+        cls,
+        language: Language,
+        *,
+        hearing_impaired: bool | None = None,
+        foreign_only: bool | None = None,
+        video_path: str | os.PathLike[str] = '',
+        subtitle_format: str | None = None,
+        subtitle_track: int | None = None,
+        subtitle_title: str | None = None,
+    ) -> EmbeddedSubtitle:
+        """Create an embedded subtitle from the language_code suffix and the movie filename.
+
+        To be sure that the subtitle_id is unique, it includes the video path, language,
+        subtitle category, subtitle track and subtitle name.
+        """
+        video_path = Path(video_path)
+        language_type = LanguageType.from_flags(hearing_impaired=hearing_impaired, foreign_only=foreign_only)
+        suffix = get_subtitle_suffix(language, language_type=language_type, language_type_suffix=True)
+        fake_path = video_path.parent / f'{video_path.stem}{suffix}{video_path.suffix}'
+        if subtitle_track is not None:
+            fake_path += f':{subtitle_track}'
+        if subtitle_title:
+            fake_path += f':{subtitle_title}'
+
+        return cls(
+            language,
+            subtitle_id=fake_path,
+            hearing_impaired=hearing_impaired,
+            foreign_only=foreign_only,
+            subtitle_format=subtitle_format,
+            subtitle_path=os.fspath(video_path),
         )
 
     @property
@@ -615,6 +655,8 @@ class EmbeddedSubtitle(Subtitle):
 class ExternalSubtitle(Subtitle):
     """External subtitle, the id should be the subtitle filename."""
 
+    provider_name: ClassVar[str] = 'External'
+
     def __init__(
         self,
         language: Language,
@@ -624,6 +666,7 @@ class ExternalSubtitle(Subtitle):
         foreign_only: bool | None = None,
         encoding: str | None = None,
         subtitle_format: str | None = None,
+        **kwargs: Any,
     ) -> None:
         super().__init__(
             language,

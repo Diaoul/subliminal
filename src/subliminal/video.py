@@ -5,9 +5,16 @@ from __future__ import annotations
 # Do not put timedelta and Sequence in TYPE_CHECKING for avoid error with docs
 import logging
 import os
+import sys
 from collections.abc import Mapping, MutableMapping, MutableSequence, Sequence, Set
 from datetime import timedelta  # noqa: TC003
 from typing import Any, TypedDict, cast
+
+if sys.version_info >= (3, 12):
+    from typing import override
+else:  # pragma: no cover
+    from typing_extensions import override
+
 
 # Do not put babelfish.Language and Subtitle in TYPE_CHECKING so cattrs.unstructure works
 from attrs import define, field
@@ -213,9 +220,6 @@ class Video:
             else:
                 setattr(self, k, v)
 
-    def __repr__(self) -> str:  # pragma: no cover
-        return f'<{self.__class__.__name__} [{self.name!r}]>'
-
     #: Name or path of the video, read-only.
     _name: str = field(kw_only=False)
 
@@ -262,8 +266,13 @@ class Video:
     tmdb_id: int | None = None
 
     #: Use the latest of creation time and modification time for the video age
-    use_ctime: bool = field(default=True)
+    use_ctime: bool = True
 
+    @override
+    def __repr__(self) -> str:  # pragma: no cover
+        return f'<{self.__class__.__name__} [{self.name!r}]>'
+
+    @override
     def __hash__(self) -> int:  # pragma: no cover
         # This method needs to be overridden in subclasses, otherwise attrs overwrites it with a default method
         return hash(self.name)
@@ -324,10 +333,7 @@ class Episode(Video):
         """
         return min(self.episodes) if self.episodes else None
 
-    def matches(self, series: str | None) -> bool:
-        """Match the name to the series name, using alternative series names also.."""
-        return matches_extended_title(series, self.series, self.alternative_series)
-
+    @override
     @classmethod
     def fromguess(cls, name: str, guess: Mapping[str, Any]) -> Episode:
         """Return an :class:`Episode` from a dict guess."""
@@ -357,21 +363,13 @@ class Episode(Video):
             audio_codec=guess.get('audio_codec'),
         )
 
+    @override
     @classmethod
     def fromname(cls, name: str) -> Episode:
         """Return an :class:`Episode` from the file name."""
         return cls.fromguess(name, safely_guessit(name, {'type': 'episode'}))
 
-    def __repr__(self) -> str:
-        return '<{cn} [{series}{country}{year} s{season:02d}e{episodes}]>'.format(
-            cn=self.__class__.__name__,
-            series=self.series,
-            country=f' ({self.country})' if not self.original_series and self.country else '',
-            year=f' ({self.year})' if not self.original_series and self.year else '',
-            season=self.season,
-            episodes='-'.join(f'{num:02d}' for num in self.episodes),
-        )
-
+    @override
     def __hash__(self) -> int:
         return hash(self.name)
 
@@ -388,7 +386,7 @@ class Episode(Video):
     year: int | None = None
 
     #: The series is the first with this name
-    original_series: bool = field(default=True)
+    original_series: bool = True
 
     #: IMDb id of the episode
     imdb_id: str | None = None
@@ -407,6 +405,22 @@ class Episode(Video):
 
     #: TVDB id of the series
     series_tvdb_id: int | None = None
+
+    @override
+    def matches(self, series: str | None) -> bool:
+        """Match the name to the series name, using alternative series names also.."""
+        return matches_extended_title(series, self.series, self.alternative_series)
+
+    @override
+    def __repr__(self) -> str:
+        return '<{cn} [{series}{country}{year} s{season:02d}e{episodes}]>'.format(
+            cn=self.__class__.__name__,
+            series=self.series,
+            country=f' ({self.country})' if not self.original_series and self.country else '',
+            year=f' ({self.year})' if not self.original_series and self.year else '',
+            season=self.season,
+            episodes='-'.join(f'{num:02d}' for num in self.episodes),
+        )
 
 
 @define(kw_only=True)
@@ -439,10 +453,7 @@ class Movie(Video):
         super().__init__(name, title=title, **kwargs)
         self.alternative_titles = list(alternative_titles) if alternative_titles is not None else []
 
-    def matches(self, title: str) -> bool:
-        """Match the name to the movie title, using alternative titles also.."""
-        return matches_extended_title(title, self.title, self.alternative_titles)
-
+    @override
     @classmethod
     def fromguess(cls, name: str, guess: Mapping[str, Any]) -> Movie:
         """Return an :class:`Movie` from a dict guess."""
@@ -468,19 +479,13 @@ class Movie(Video):
             country=guess.get('country'),
         )
 
+    @override
     @classmethod
     def fromname(cls, name: str) -> Movie:
         """Return an :class:`Movie` from the file name."""
         return cls.fromguess(name, safely_guessit(name, {'type': 'movie'}))
 
-    def __repr__(self) -> str:
-        return '<{cn} [{title}{country}{year}]>'.format(
-            cn=self.__class__.__name__,
-            title=self.title,
-            country=f' ({self.country})' if self.country else '',
-            year=f' ({self.year})' if self.year else '',
-        )
-
+    @override
     def __hash__(self) -> int:
         return hash(self.name)
 
@@ -498,3 +503,17 @@ class Movie(Video):
 
     #: TMDB id of the episode
     tmdb_id: int | None = None
+
+    @override
+    def matches(self, title: str) -> bool:
+        """Match the name to the movie title, using alternative titles also.."""
+        return matches_extended_title(title, self.title, self.alternative_titles)
+
+    @override
+    def __repr__(self) -> str:
+        return '<{cn} [{title}{country}{year}]>'.format(
+            cn=self.__class__.__name__,
+            title=self.title,
+            country=f' ({self.country})' if self.country else '',
+            year=f' ({self.year})' if self.year else '',
+        )

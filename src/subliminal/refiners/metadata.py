@@ -159,7 +159,7 @@ def refine(
 
                 sub = EmbeddedSubtitle.from_video_path(
                     lang,
-                    movie_path=video.name,
+                    video_path=video.name,
                     hearing_impaired=st.get('hearing_impaired', st.get('closed_caption')),
                     foreign_only=st.get('forced'),
                     subtitle_format=get_subtitle_format_from_knowit(st.get('format', 'srt')),

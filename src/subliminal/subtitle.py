@@ -624,12 +624,14 @@ class EmbeddedSubtitle(Subtitle):
         """
         video_path = Path(video_path)
         category = SubtitleCategory.from_flags(hearing_impaired=hearing_impaired, foreign_only=foreign_only)
-        suffix = get_subtitle_suffix(language, category=category, language_type_suffix=True)
-        fake_path = video_path.parent / f'{video_path.stem}{suffix}{video_path.suffix}'
+        language_suffix = get_subtitle_suffix(language, category=category, category_suffix=True)
+        fake_path = os.fspath(video_path)
         if subtitle_track is not None:
             fake_path += f':{subtitle_track}'
         if subtitle_title:
             fake_path += f':{subtitle_title}'
+        if language_suffix:
+            fake_path += f':{language_suffix}'
 
         return cls(
             language,

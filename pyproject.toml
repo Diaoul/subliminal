@@ -74,7 +74,6 @@ tests = [
     "colorama",  # used in scripts/
     "vcrpy>=5",  # keep synchronized with docs dependencies
     "win32-setctime; sys_platform=='win32'",
-    "importlib_metadata>=4.6; python_version<'3.10'",
 ]
 types = [
     "mypy",

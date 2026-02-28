@@ -532,6 +532,63 @@ def test_subtitle_info(monkeypatch: pytest.MonkeyPatch) -> None:
     assert isinstance(subtitle.info, str)
 
 
+def test_embedded_subtitle_from_video_path(monkeypatch: pytest.MonkeyPatch) -> None:
+    video_path = 'My video.mp4'
+    name = 'forced'
+
+    # No track, no title
+    subtitle_0 = EmbeddedSubtitle.from_video_path(
+        Language('ita'),
+        video_path=video_path,
+        subtitle_format=None,
+        subtitle_track=None,
+        subtitle_title=None,
+    )
+
+    assert 'it' in subtitle_0.id
+    assert name not in subtitle_0.id
+    assert '0' not in subtitle_0.id
+
+    # No title
+    subtitle_1 = EmbeddedSubtitle.from_video_path(
+        Language('ita'),
+        video_path=video_path,
+        subtitle_format=None,
+        subtitle_track=1,
+        subtitle_title=None,
+    )
+
+    assert 'it' in subtitle_1.id
+    assert name not in subtitle_1.id
+    assert '1' in subtitle_1.id
+
+    # No track
+    subtitle_2 = EmbeddedSubtitle.from_video_path(
+        Language('ita'),
+        video_path=video_path,
+        subtitle_format=None,
+        subtitle_track=None,
+        subtitle_title='forced',
+    )
+
+    assert 'it' in subtitle_2.id
+    assert name in subtitle_2.id
+    assert '2' not in subtitle_2.id
+
+    # Everything
+    subtitle_3 = EmbeddedSubtitle.from_video_path(
+        Language('ita'),
+        video_path=video_path,
+        subtitle_format=None,
+        subtitle_track=3,
+        subtitle_title='forced',
+    )
+
+    assert 'it' in subtitle_3.id
+    assert name in subtitle_3.id
+    assert '3' in subtitle_3.id
+
+
 def test_embedded_subtitle_info(monkeypatch: pytest.MonkeyPatch) -> None:
     subtitle = EmbeddedSubtitle(
         Language('ita'),

@@ -44,7 +44,7 @@ VIDEO_EXTENSIONS = (
 # fmt: on
 
 
-@define
+@define(kw_only=True)
 class Video:
     """Base class for videos.
 
@@ -73,56 +73,14 @@ class Video:
 
     """
 
-    #: Name or path of the video, read-only.
-    _name: str
-
-    #: Source of the video (HDTV, Web, Blu-ray, ...)
-    source: str | None = field(kw_only=True, default=None)
-
-    #: Release group of the video
-    release_group: str | None = field(kw_only=True, default=None)
-
-    #: Streaming service of the video
-    streaming_service: str | None = field(kw_only=True, default=None)
-
-    #: Resolution of the video stream (480p, 720p, 1080p or 1080i)
-    resolution: str | None = field(kw_only=True, default=None)
-
-    #: Codec of the video stream
-    video_codec: str | None = field(kw_only=True, default=None)
-
-    #: Codec of the main audio stream
-    audio_codec: str | None = field(kw_only=True, default=None)
-
-    #: Frame rate in frame per seconds
-    frame_rate: float | None = field(kw_only=True, default=None)
-
-    #: Duration of the video in seconds
-    duration: float | None = field(kw_only=True, default=None)
-
     #: Hashes of the video file by provider names
-    hashes: dict[str, str] = field(kw_only=True, factory=dict)
-
-    #: Size of the video file in bytes
-    size: int | None = field(kw_only=True, default=None)
-
-    #: Title of the video
-    title: str | None = field(kw_only=True, default=None)
-
-    #: Year of the video
-    year: int | None = field(kw_only=True, default=None)
-
-    #: Country of the video
-    country: Country | None = field(kw_only=True, default=None)
+    hashes: dict[str, str] = field(factory=dict)
 
     #: External ids of the video from different databases (IMDb, TMDB, ...)
-    external_ids: VideoExternalIds = field(kw_only=True, factory=dict)
-
-    #: Use the latest of creation time and modification time for the video age
-    use_ctime: bool = field(kw_only=True, default=True)
+    external_ids: VideoExternalIds = field(factory=dict)
 
     #: Existing subtitles
-    subtitles: list[Subtitle]
+    subtitles: list[Subtitle] = field(factory=list)
 
     def __init__(
         self,
@@ -258,7 +216,56 @@ class Video:
     def __repr__(self) -> str:  # pragma: no cover
         return f'<{self.__class__.__name__} [{self.name!r}]>'
 
+    #: Name or path of the video, read-only.
+    _name: str = field(kw_only=False)
+
+    #: Source of the video (HDTV, Web, Blu-ray, ...)
+    source: str | None = None
+
+    #: Release group of the video
+    release_group: str | None = None
+
+    #: Streaming service of the video
+    streaming_service: str | None = None
+
+    #: Resolution of the video stream (480p, 720p, 1080p or 1080i)
+    resolution: str | None = None
+
+    #: Codec of the video stream
+    video_codec: str | None = None
+
+    #: Codec of the main audio stream
+    audio_codec: str | None = None
+
+    #: Frame rate in frame per seconds
+    frame_rate: float | None = None
+
+    #: Duration of the video in seconds
+    duration: float | None = None
+
+    #: Size of the video file in bytes
+    size: int | None = None
+
+    #: Title of the video
+    title: str | None = None
+
+    #: Year of the video
+    year: int | None = None
+
+    #: Country of the video
+    country: Country | None = None
+
+    #: IMDb id of the video
+    imdb_id: str | None = None
+
+    #: TMDB id of the video
+    tmdb_id: int | None = None
+
+    #: Use the latest of creation time and modification time for the video age
+    use_ctime: bool = field(default=True)
+
     def __hash__(self) -> int:  # pragma: no cover
+        # This method needs to be overridden in subclasses, otherwise attrs overwrites it with a default method
         return hash(self.name)
 
 
@@ -267,7 +274,7 @@ def ensure_list_int(value: int | Sequence[int] | None) -> list[int]:
     return ensure_list(value)
 
 
-@define
+@define(kw_only=True)
 class Episode(Video):
     """Episode :class:`Video`.
 
@@ -281,26 +288,11 @@ class Episode(Video):
 
     """
 
-    #: Series of the episode
-    series: str
-
-    #: Season number of the episode
-    season: int
-
     #: Episode numbers of the episode
-    episodes: list[int] = field(converter=ensure_list_int)
-
-    #: Title of the episode
-    title: str | None = field(kw_only=True, default=None)
-
-    #: Year of series
-    year: int | None = field(kw_only=True, default=None)
-
-    #: The series is the first with this name
-    original_series: bool = field(kw_only=True, default=True)
+    episodes: list[int] = field(kw_only=False, converter=ensure_list_int)
 
     #: Alternative names of the series
-    alternative_series: list[str]
+    alternative_series: list[str] = field(factory=list)
 
     #: External ids of the video from different databases (IMDb, TMDB, ...)
     external_ids: VideoExternalIds
@@ -383,8 +375,41 @@ class Episode(Video):
     def __hash__(self) -> int:
         return hash(self.name)
 
+    #: Series of the episode
+    series: str = field(kw_only=False)
 
-@define
+    #: Season number of the episode
+    season: int = field(kw_only=False)
+
+    #: Title of the episode
+    title: str | None = None
+
+    #: Year of series
+    year: int | None = None
+
+    #: The series is the first with this name
+    original_series: bool = field(default=True)
+
+    #: IMDb id of the episode
+    imdb_id: str | None = None
+
+    #: IMDb id of the series
+    series_imdb_id: str | None = None
+
+    #: TMDB id of the episode
+    tmdb_id: int | None = None
+
+    #: TMDB id of the series
+    series_tmdb_id: int | None = None
+
+    #: TVDB id of the episode
+    tvdb_id: int | None = None
+
+    #: TVDB id of the series
+    series_tvdb_id: int | None = None
+
+
+@define(kw_only=True)
 class Movie(Video):
     """Movie :class:`Video`.
 
@@ -397,17 +422,8 @@ class Movie(Video):
 
     """
 
-    #: Title of the movie
-    title: str
-
-    #: Year of the movie
-    year: int | None = field(kw_only=True, default=None)
-
-    #: Country of the movie
-    country: Country | None = field(kw_only=True, default=None)
-
     #: Alternative titles of the movie
-    alternative_titles: list[str]
+    alternative_titles: list[str] = field(factory=list)
 
     #: External ids of the video from different databases (IMDb, TMDB, ...)
     external_ids: VideoExternalIds
@@ -467,3 +483,18 @@ class Movie(Video):
 
     def __hash__(self) -> int:
         return hash(self.name)
+
+    #: Title of the movie
+    title: str = field(kw_only=False)
+
+    #: Year of the movie
+    year: int | None = None
+
+    #: Country of the movie
+    country: Country | None = None
+
+    #: IMDb id of the episode
+    imdb_id: str | None = None
+
+    #: TMDB id of the episode
+    tmdb_id: int | None = None

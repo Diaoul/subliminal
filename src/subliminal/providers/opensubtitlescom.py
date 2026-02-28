@@ -5,9 +5,10 @@ from __future__ import annotations
 import contextlib
 import logging
 import time
+from collections.abc import Callable
 from datetime import datetime, timedelta, timezone
 from functools import wraps
-from typing import TYPE_CHECKING, Any, Callable, ClassVar, TypeVar, cast
+from typing import TYPE_CHECKING, Any, ClassVar, cast
 
 from babelfish import Language, language_converters  # type: ignore[import-untyped]
 from dogpile.cache.api import NO_VALUE
@@ -31,9 +32,11 @@ from subliminal.video import Episode, Movie, Video
 from . import Provider
 
 if TYPE_CHECKING:
-    from collections.abc import Generator, Mapping, Set
+    from collections.abc import Callable, Generator, Mapping, Set
+    from typing import TypeVar
 
-C = TypeVar('C', bound=Callable)
+    C = TypeVar('C', bound=Callable)
+
 
 logger = logging.getLogger(__name__)
 
@@ -52,85 +55,22 @@ TOKEN_EXPIRATION_TIME = timedelta(hours=24).total_seconds()
 #: Expiration time for download link
 DOWNLOAD_EXPIRATION_TIME = timedelta(hours=3).total_seconds()
 
-
+# fmt: off
 opensubtitlescom_languages = {
     Language('por', 'BR'),
     Language('srp', 'ME'),
     Language('zho', 'TW'),
     Language('zho', 'US'),
 } | {
-    Language(lang)
-    for lang in [
-        'afr',
-        'ara',
-        'arg',
-        'ast',
-        'bel',
-        'ben',
-        'bos',
-        'bre',
-        'bul',
-        'cat',
-        'ces',
-        'dan',
-        'deu',
-        'ell',
-        'eng',
-        'epo',
-        'est',
-        'eus',
-        'fas',
-        'fin',
-        'fra',
-        'glg',
-        'heb',
-        'hin',
-        'hrv',
-        'hun',
-        'hye',
-        'ind',
-        'isl',
-        'ita',
-        'jpn',
-        'kat',
-        'kaz',
-        'khm',
-        'kor',
-        'lav',
-        'lit',
-        'ltz',
-        'mal',
-        'mkd',
-        'mni',
-        'mon',
-        'msa',
-        'mya',
-        'nld',
-        'nor',
-        'oci',
-        'pol',
-        'ron',
-        'rus',
-        'sin',
-        'slk',
-        'slv',
-        'spa',
-        'sqi',
-        'srp',
-        'swa',
-        'swe',
-        'syr',
-        'tam',
-        'tel',
-        'tgl',
-        'tha',
-        'tur',
-        'ukr',
-        'urd',
-        'uzb',
-        'vie',
+    Language(lang) for lang in [
+        'afr', 'ara', 'arg', 'ast', 'bel', 'ben', 'bos', 'bre', 'bul', 'cat', 'ces', 'dan', 'deu', 'ell', 'eng', 'epo',
+        'est', 'eus', 'fas', 'fin', 'fra', 'glg', 'heb', 'hin', 'hrv', 'hun', 'hye', 'ind', 'isl', 'ita', 'jpn', 'kat',
+        'kaz', 'khm', 'kor', 'lav', 'lit', 'ltz', 'mal', 'mkd', 'mni', 'mon', 'msa', 'mya', 'nld', 'nor', 'oci', 'pol',
+        'ron', 'rus', 'sin', 'slk', 'slv', 'spa', 'sqi', 'srp', 'swa', 'swe', 'syr', 'tam', 'tel', 'tgl', 'tha', 'tur',
+        'ukr', 'urd', 'uzb', 'vie'
     ]
 }
+# fmt: on
 
 
 def sanitize_id(id_: int | str | None) -> int | None:

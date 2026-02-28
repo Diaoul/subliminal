@@ -1,10 +1,4 @@
-from sys import version_info
-
-if version_info >= (3, 10):
-    # 'group' keyword argument was introduced in 3.10
-    from importlib.metadata import entry_points
-else:
-    from importlib_metadata import entry_points  # type: ignore[assignment,no-redef,import-not-found]
+from importlib.metadata import entry_points
 
 import pytest
 

@@ -66,7 +66,7 @@ def split_doc_args(args: str | None) -> list[str]:
     if len(split_indices) == 0:  # pragma: no cover
         return []
     next_indices = [*split_indices[1:], None]
-    parts = [args[i:j].strip() for i, j in zip(split_indices, next_indices)]
+    parts = [args[i:j].strip() for i, j in zip(split_indices, next_indices, strict=True)]
     return [p for p in parts if p.startswith(':param')]
 
 

@@ -66,44 +66,44 @@ def ensure_positive(value: float | None) -> float | None:
     return value if value is not None and value > 0 else None
 
 
-#: Subtitle language types
-class LanguageType(Enum):
-    """Subtitle language types."""
+#: Subtitle category
+class SubtitleCategory(Enum):
+    """Subtitle category."""
 
     UNKNOWN = 'unknown'
     FOREIGN_ONLY = 'foreign_only'
-    NORMAL = 'normal'
+    NARRATIVE = 'narrative'
     HEARING_IMPAIRED = 'hearing_impaired'
 
     @classmethod
-    def from_flags(cls, *, hearing_impaired: bool | None = None, foreign_only: bool | None = None) -> LanguageType:
-        """Convert to LanguageType from flags."""
-        language_type = cls.UNKNOWN
+    def from_flags(cls, *, hearing_impaired: bool | None = None, foreign_only: bool | None = None) -> SubtitleCategory:
+        """Convert to SubtitleCategory from flags."""
+        category = cls.UNKNOWN
         # hearing_impaired takes precedence over foreign_only if both are True
         if hearing_impaired:
-            language_type = cls.HEARING_IMPAIRED
+            category = cls.HEARING_IMPAIRED
         elif foreign_only:
-            language_type = cls.FOREIGN_ONLY
+            category = cls.FOREIGN_ONLY
         # if hearing_impaired or foreign_only is specified to be False
         # then for sure the subtitle is normal.
         elif hearing_impaired is False or foreign_only is False:
-            language_type = cls.NORMAL
+            category = cls.NARRATIVE
 
-        return language_type
+        return category
 
     def is_hearing_impaired(self) -> bool | None:
         """Flag for hearing impaired."""
-        if self == LanguageType.HEARING_IMPAIRED:
+        if self == SubtitleCategory.HEARING_IMPAIRED:
             return True
-        if self == LanguageType.UNKNOWN:
+        if self == SubtitleCategory.UNKNOWN:
             return None
         return False
 
     def is_foreign_only(self) -> bool | None:
         """Flag for foreign only."""
-        if self == LanguageType.FOREIGN_ONLY:
+        if self == SubtitleCategory.FOREIGN_ONLY:
             return True
-        if self == LanguageType.UNKNOWN:
+        if self == SubtitleCategory.UNKNOWN:
             return None
         return False
 
@@ -132,8 +132,8 @@ class Subtitle:
     #: Subtitle id
     _subtitle_id: str
 
-    #: Whether or not the subtitle is hearing impaired (None if unknown)
-    language_type: LanguageType
+    #: Subtitle category (hearing impaired, narrative, foreign only or unknown)
+    category: SubtitleCategory
 
     #: URL of the web page from which the subtitle can be downloaded
     page_link: str | None
@@ -203,7 +203,7 @@ class Subtitle:
         self.force_guess_encoding = force_guess_encoding
         self.auto_fix_srt = auto_fix_srt
 
-        self.language_type = LanguageType.from_flags(hearing_impaired=hearing_impaired, foreign_only=foreign_only)
+        self.category = SubtitleCategory.from_flags(hearing_impaired=hearing_impaired, foreign_only=foreign_only)
         self.encoding = encoding
 
     @property
@@ -225,12 +225,12 @@ class Subtitle:
     @property
     def hearing_impaired(self) -> bool | None:
         """Whether the subtitle is for hearing impaired."""
-        return self.language_type.is_hearing_impaired()
+        return self.category.is_hearing_impaired()
 
     @property
     def foreign_only(self) -> bool | None:
         """Whether the subtitle is a foreign only / forced subtitle."""
-        return self.language_type.is_foreign_only()
+        return self.category.is_foreign_only()
 
     @property
     def encoding(self) -> str | None:
@@ -527,7 +527,7 @@ class Subtitle:
         *,
         single: bool = False,
         extension: str | None = None,
-        language_type_suffix: bool = False,
+        category_suffix: bool = False,
         language_format: str = 'alpha2',
     ) -> str:
         """Get the subtitle path using the `video`, `language` and `extension`.
@@ -536,7 +536,7 @@ class Subtitle:
         :type video: :class:`~subliminal.video.Video`
         :param bool single: save a single subtitle, default is to save one subtitle per language.
         :param (str | None) extension: the subtitle extension, default is to match to the subtitle format.
-        :param bool language_type_suffix: add a suffix 'hi' or 'fo' if needed. Default to False.
+        :param bool category_suffix: add a suffix ('hi' or 'fo') with the subtitle category if needed. Default to False.
         :param str language_format: format of the language suffix. Default to 'alpha2'.
         :return: path of the subtitle.
         :rtype: str
@@ -551,8 +551,8 @@ class Subtitle:
             else get_subtitle_suffix(
                 self.language,
                 language_format=language_format,
-                language_type=self.language_type,
-                language_type_suffix=language_type_suffix,
+                category=self.category,
+                category_suffix=category_suffix,
             )
         )
         return get_subtitle_path(video.name, suffix=suffix, extension=extension)
@@ -604,9 +604,9 @@ class EmbeddedSubtitle(Subtitle):
     def info(self) -> str:
         """Info of the subtitle, human readable. Usually the subtitle name for GUI rendering."""
         extra = ''
-        if self.language_type == LanguageType.HEARING_IMPAIRED:
+        if self.category == SubtitleCategory.HEARING_IMPAIRED:
             extra = ' [hi]'
-        elif self.language_type == LanguageType.FOREIGN_ONLY:
+        elif self.category == SubtitleCategory.FOREIGN_ONLY:
             extra = ' [fo]'
 
         return f'Embedded {self.language}{extra}'
@@ -682,9 +682,9 @@ class ExternalSubtitle(Subtitle):
     def info(self) -> str:
         """Info of the subtitle, human readable. Usually the subtitle name for GUI rendering."""
         extra = ''
-        if self.language_type == LanguageType.HEARING_IMPAIRED:
+        if self.category == SubtitleCategory.HEARING_IMPAIRED:
             extra = ' [hi]'
-        elif self.language_type == LanguageType.FOREIGN_ONLY:
+        elif self.category == SubtitleCategory.FOREIGN_ONLY:
             extra = ' [fo]'
 
         return f'External {self.language}{extra}'
@@ -720,22 +720,21 @@ def get_subtitle_suffix(
     language: Language,
     *,
     language_format: str = 'alpha2',
-    language_type: LanguageType = LanguageType.UNKNOWN,
-    language_type_suffix: bool = False,
+    category: SubtitleCategory = SubtitleCategory.UNKNOWN,
+    category_suffix: bool = False,
     language_first: bool = False,
 ) -> str:
-    """Get the subtitle suffix using the `language` and `language_type`.
+    """Get the subtitle suffix using the `language` and `category`.
 
     :param language: language of the subtitle to put in the path.
     :type language: :class:`~babelfish.language.Language`
     :param str language_format: format of the language suffix.
         Default to 'alpha2'.
-    :param LanguageType language_type: the language type of the subtitle
-        (hearing impaired or foreign only).
-    :param bool language_type_suffix: add a suffix '[hi]' or '[fo]' if needed.
+    :param SubtitleCategory category: the subtitle category (hearing impaired or foreign only).
+    :param bool category_suffix: add a suffix '[hi]' or '[fo]' if needed.
         Default to False.
-    :param bool language_first: the suffix is of the form '.language.language_type',
-        instead of '.language_type.language'
+    :param bool language_first: the suffix is of the form '.language.category',
+        instead of '.category.language'
     :return: suffix to the subtitle name.
     :rtype: str
 
@@ -762,17 +761,17 @@ def get_subtitle_suffix(
                 # add script
                 language_part += f'-{language.script!s}'
 
-    # Language type part, into bracket to differentiate from Hindi and Faroese languages
-    language_type_part = ''
-    if language_type_suffix:
-        if language_type == LanguageType.HEARING_IMPAIRED:
-            language_type_part = '.[hi]'
-        elif language_type == LanguageType.FOREIGN_ONLY:
-            language_type_part = '.[fo]'
+    # Subtitle category part, into bracket to differentiate from Hindi and Faroese languages
+    category_part = ''
+    if category_suffix:
+        if category == SubtitleCategory.HEARING_IMPAIRED:
+            category_part = '.[hi]'
+        elif category == SubtitleCategory.FOREIGN_ONLY:
+            category_part = '.[fo]'
 
     if language_first:
-        return language_part + language_type_part
-    return language_type_part + language_part
+        return language_part + category_part
+    return category_part + language_part
 
 
 def guess_language_from_suffix(language_code: str) -> Language | None:
@@ -865,10 +864,10 @@ def get_subtitle_path(
     suffix: str = '',
     extension: str = '.srt',
 ) -> str:
-    """Get the subtitle path using the `video_path` and `language`.
+    """Get the subtitle path using the `video_path`, `suffix` and `extension`.
 
     :param str video_path: path to the video.
-    :param str suffix: suffix with the language of the subtitle to put in the path.
+    :param str suffix: suffix with the language of the subtitle.
     :param str extension: extension of the subtitle.
     :return: path of the subtitle.
     :rtype: str
@@ -877,7 +876,7 @@ def get_subtitle_path(
     # Full name and path
     subtitle_root = os.path.splitext(video_path)[0]
 
-    return subtitle_root + suffix + extension
+    return f'{subtitle_root}{suffix}{extension}'
 
 
 def find_encoding_with_bom(data: bytes) -> list[str]:

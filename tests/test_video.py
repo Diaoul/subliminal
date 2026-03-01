@@ -3,10 +3,13 @@ from __future__ import annotations
 
 import os
 from datetime import datetime, timedelta, timezone
+from importlib.metadata import version as get_version
 from typing import TYPE_CHECKING
 from unittest.mock import Mock
 
 import pytest
+from cattrs import structure, unstructure
+from packaging.version import Version
 
 from subliminal.utils import sanitize, timestamp
 from subliminal.video import Episode, Movie, Video
@@ -252,3 +255,29 @@ def test_episode_fromname_guessit_bug(episodes: dict[str, Episode]) -> None:
     assert video.episode == episodes['adam-12_s01e02'].episode
     assert video.title is None
     assert video.year == episodes['adam-12_s01e02'].year
+
+
+@pytest.mark.skipif(
+    Version(get_version('babelfish')) <= Version('0.6.1'),
+    reason='babelfish.Language needs to be a hashable dataclass',
+)
+def test_serialize_movie(movies: dict[str, Movie]) -> None:
+    video = movies['man_of_steel']
+
+    ser = unstructure(video)
+    new_video = structure(ser, Movie)
+
+    assert video == new_video
+
+
+@pytest.mark.skipif(
+    Version(get_version('babelfish')) <= Version('0.6.1'),
+    reason='babelfish.Language needs to be a hashable dataclass',
+)
+def test_serialize_episode(episodes: dict[str, Episode]) -> None:
+    video = episodes['bbt_s07e05']
+
+    ser = unstructure(video)
+    new_video = structure(ser, Episode)
+
+    assert video == new_video

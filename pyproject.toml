@@ -34,6 +34,7 @@ classifiers = [
 ]
 dynamic = ["version"]
 dependencies = [
+    "attrs>=22.2",
     "babelfish>=0.6.1",
     "beautifulsoup4>=4.4.0",
     "defusedxml>=0.7.1",
@@ -49,6 +50,7 @@ dependencies = [
     "srt>=3.5",
     "stevedore>=3.0",
     "tomlkit>=0.13.2",
+    "typing_extension; python_version<='3.11'",
 ]
 
 # extras
@@ -70,6 +72,8 @@ tests = [
     "pytest>=6.0",
     "pytest-cov",
     "pytest-xdist",
+    "cattrs",
+    "packaging",
     "sympy",
     "colorama",  # used in scripts/
     "vcrpy>=5",  # keep synchronized with docs dependencies

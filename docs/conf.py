@@ -299,6 +299,7 @@ texinfo_documents = [
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {
     'python': ('https://docs.python.org/3.12', None),
+    'attrs': ('https://www.attrs.org/en/stable/', None),
     'guessit': ('https://guessit.readthedocs.org/en/latest', None),
     'babelfish': ('https://babelfish.readthedocs.org/en/latest', None),
     'dogpilecache': ('https://dogpilecache.sqlalchemy.org/en/latest', None),

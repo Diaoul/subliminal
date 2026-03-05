@@ -9,7 +9,7 @@ import warnings
 from pathlib import Path
 from zipfile import BadZipfile
 
-from guessit import guessit  # type: ignore[import-untyped]
+from subliminal.utils import safe_guessit
 
 from .exceptions import ArchiveError
 from .video import VIDEO_EXTENSIONS, Video
@@ -131,7 +131,7 @@ def scan_archive_rar(path: str | os.PathLike, name: str | None = None) -> Video:
     video_path = os.path.join(dir_path, video_filename)
 
     repl = name if name else video_path
-    video = Video.fromguess(video_path, guessit(repl))
+    video = Video.fromguess(video_path, safe_guessit(repl))
 
     # size
     video.size = file_info.file_size

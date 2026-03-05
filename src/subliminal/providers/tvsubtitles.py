@@ -10,7 +10,7 @@ from typing import TYPE_CHECKING, ClassVar
 from zipfile import ZipFile
 
 from babelfish import Language, language_converters  # type: ignore[import-untyped]
-from guessit import guessit  # type: ignore[import-untyped]
+from subliminal.utils import safe_guessit
 from requests import Session
 
 from subliminal.cache import EPISODE_EXPIRATION_TIME, SHOW_EXPIRATION_TIME, region
@@ -100,9 +100,9 @@ class TVsubtitlesSubtitle(Subtitle):
 
         # other properties
         if self.release is not None:
-            matches |= guess_matches(video, guessit(self.release, {'type': 'episode'}), partial=True)
+            matches |= guess_matches(video, safe_guessit(self.release, {'type': 'episode'}), partial=True)
         if self.rip is not None:
-            matches |= guess_matches(video, guessit(self.rip, {'type': 'episode'}), partial=True)
+            matches |= guess_matches(video, safe_guessit(self.rip, {'type': 'episode'}), partial=True)
 
         return matches
 

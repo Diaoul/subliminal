@@ -15,6 +15,7 @@ from typing import TYPE_CHECKING, Any, Generic, TypeVar, cast, overload
 from xmlrpc.client import ProtocolError
 
 import requests
+from guessit import guessit  # type: ignore[import-untyped]
 from requests.exceptions import SSLError
 
 from .exceptions import ServiceUnavailable
@@ -45,6 +46,19 @@ T = TypeVar('T')
 R = TypeVar('R')
 
 logger = logging.getLogger(__name__)
+
+
+def safe_guessit(string: str, options: dict[str, Any] | None = None) -> dict[str, Any]:
+    """Wrap guessit to catch internal errors and return an empty dict instead of crashing.
+
+    Guessit can raise on certain inputs (e.g. ed2k URLs with brackets that
+    Python 3.13's urllib.parse misinterprets as IPv6 addresses).
+    """
+    try:
+        return guessit(string, options)
+    except Exception:
+        logger.warning('guessit failed to parse %r', string)
+        return {}
 
 
 class none_passthrough(Generic[T, R]):

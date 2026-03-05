@@ -14,7 +14,7 @@ from urllib.parse import unquote
 
 from babelfish import Language, language_converters  # type: ignore[import-untyped]
 from babelfish.exceptions import LanguageReverseError  # type: ignore[import-untyped]
-from guessit import guessit  # type: ignore[import-untyped]
+from subliminal.utils import safe_guessit
 from requests import Response, Session
 from requests.cookies import RequestsCookieJar
 
@@ -196,7 +196,7 @@ class Addic7edSubtitle(Subtitle):
             matches.add('resolution')
         # other properties
         if self.release_group:  # pragma: no branch
-            matches |= guess_matches(video, guessit(self.release_group, {'type': 'episode'}), partial=True)
+            matches |= guess_matches(video, safe_guessit(self.release_group, {'type': 'episode'}), partial=True)
 
         return matches
 

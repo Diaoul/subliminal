@@ -9,7 +9,7 @@ from typing import TYPE_CHECKING, Any, ClassVar
 from zipfile import ZipFile
 
 from babelfish import Language, language_converters  # type: ignore[import-untyped]
-from subliminal.utils import safe_guessit
+from subliminal.utils import safely_guessit
 from requests import Session
 
 from subliminal.exceptions import NotInitializedProviderError, ProviderError
@@ -77,7 +77,7 @@ class PodnapisiSubtitle(Subtitle):
 
         video_type = 'episode' if isinstance(video, Episode) else 'movie'
         for release in self.releases:
-            matches |= guess_matches(video, safe_guessit(release, {'type': video_type}))
+            matches |= guess_matches(video, safely_guessit(release, {'type': video_type}))
 
         return matches
 

@@ -9,7 +9,7 @@ from typing import TYPE_CHECKING, Any, ClassVar, cast
 
 from babelfish import Language, language_converters  # type: ignore[import-untyped]
 from bs4 import Tag
-from subliminal.utils import safe_guessit
+from subliminal.utils import safely_guessit
 from requests import Session
 
 from subliminal import __short_version__
@@ -113,7 +113,7 @@ class SubtitulamosSubtitle(Subtitle):
         )
 
         # other properties
-        matches |= guess_matches(video, safe_guessit(self.release_group), partial=True)
+        matches |= guess_matches(video, safely_guessit(self.release_group), partial=True)
 
         return matches
 

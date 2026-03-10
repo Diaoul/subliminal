@@ -11,7 +11,7 @@ from concurrent.futures import ThreadPoolExecutor
 from typing import TYPE_CHECKING, Any
 
 from babelfish import Language  # type: ignore[import-untyped]
-from subliminal.utils import safe_guessit
+from subliminal.utils import safely_guessit
 
 from .archives import ARCHIVE_ERRORS, ARCHIVE_EXTENSIONS, is_supported_archive, scan_archive
 from .exceptions import ArchiveError, DiscardingError
@@ -482,7 +482,7 @@ def scan_name(path: str | os.PathLike, name: str | None = None) -> Video:
     else:
         logger.info('Scanning video %r', path)
 
-    return Video.fromguess(path, safe_guessit(repl))
+    return Video.fromguess(path, safely_guessit(repl))
 
 
 def scan_video(path: str | os.PathLike, name: str | None = None) -> Video:

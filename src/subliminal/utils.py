@@ -48,17 +48,16 @@ R = TypeVar('R')
 logger = logging.getLogger(__name__)
 
 
-def safe_guessit(string: str, options: dict[str, Any] | None = None) -> dict[str, Any]:
-    """Wrap guessit to catch internal errors and return an empty dict instead of crashing.
-
-    Guessit can raise on certain inputs (e.g. ed2k URLs with brackets that
-    Python 3.13's urllib.parse misinterprets as IPv6 addresses).
-    """
-    try:
-        return guessit(string, options)
-    except Exception:
-        logger.warning('guessit failed to parse %r', string)
+def safely_guessit(string: str | None, options: dict[str, Any] | None = None) -> dict[str, Any]:
+    """Wrap guessit to catch internal errors and format the output correctly."""
+    if not string:
         return {}
+    try:
+        result: dict[str, Any] = guessit(string, options)
+    except Exception:
+        logger.exception('guessit failed to parse %r', string)
+        return {}
+    return result
 
 
 class none_passthrough(Generic[T, R]):

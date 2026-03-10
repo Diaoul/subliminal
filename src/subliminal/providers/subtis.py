@@ -8,7 +8,7 @@ from typing import TYPE_CHECKING, Any, ClassVar, cast
 from urllib.parse import quote
 
 from babelfish import Language
-from subliminal.utils import safe_guessit
+from subliminal.utils import safely_guessit
 from requests import Session
 from requests.exceptions import HTTPError, JSONDecodeError, RequestException
 
@@ -98,9 +98,9 @@ class SubtisSubtitle(Subtitle):
             matches.add('hash')
 
         if self.is_synced and video.name:
-            matches |= guess_matches(video, safe_guessit(os.path.basename(video.name), {'type': 'movie'}))
+            matches |= guess_matches(video, safely_guessit(os.path.basename(video.name), {'type': 'movie'}))
         elif self.title:
-            matches |= guess_matches(video, safe_guessit(self.title, {'type': 'movie'}))
+            matches |= guess_matches(video, safely_guessit(self.title, {'type': 'movie'}))
 
         return matches
 

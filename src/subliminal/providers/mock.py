@@ -8,7 +8,7 @@ from itertools import count
 from typing import TYPE_CHECKING, Any, ClassVar
 
 from babelfish import LANGUAGES, Language  # type: ignore[import-untyped]
-from subliminal.utils import safe_guessit
+from subliminal.utils import safely_guessit
 
 from subliminal.exceptions import DiscardingError, NotInitializedProviderError
 from subliminal.matches import guess_matches
@@ -81,7 +81,7 @@ class MockSubtitle(Subtitle):
         # Parse the release_name and guess more matches
         if self.release_name:
             video_type = 'episode' if isinstance(video, Episode) else 'movie'
-            matches |= guess_matches(video, safe_guessit(self.release_name, {'type': video_type}))
+            matches |= guess_matches(video, safely_guessit(self.release_name, {'type': video_type}))
 
         # Force add more matches
         return matches | self.matches

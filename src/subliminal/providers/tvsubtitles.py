@@ -10,14 +10,13 @@ from typing import TYPE_CHECKING, ClassVar
 from zipfile import ZipFile
 
 from babelfish import Language, language_converters  # type: ignore[import-untyped]
-from subliminal.utils import safe_guessit
 from requests import Session
 
 from subliminal.cache import EPISODE_EXPIRATION_TIME, SHOW_EXPIRATION_TIME, region
 from subliminal.exceptions import NotInitializedProviderError, ProviderError
 from subliminal.matches import guess_matches
 from subliminal.subtitle import Subtitle
-from subliminal.utils import sanitize
+from subliminal.utils import safely_guessit, sanitize
 from subliminal.video import Episode, Video
 
 from . import ParserBeautifulSoup, Provider
@@ -100,9 +99,9 @@ class TVsubtitlesSubtitle(Subtitle):
 
         # other properties
         if self.release is not None:
-            matches |= guess_matches(video, safe_guessit(self.release, {'type': 'episode'}), partial=True)
+            matches |= guess_matches(video, safely_guessit(self.release, {'type': 'episode'}), partial=True)
         if self.rip is not None:
-            matches |= guess_matches(video, safe_guessit(self.rip, {'type': 'episode'}), partial=True)
+            matches |= guess_matches(video, safely_guessit(self.rip, {'type': 'episode'}), partial=True)
 
         return matches
 

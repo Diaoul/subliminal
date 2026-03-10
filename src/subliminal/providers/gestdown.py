@@ -7,7 +7,7 @@ import re
 from typing import TYPE_CHECKING, Any, ClassVar
 
 from babelfish import Language  # type: ignore[import-untyped]
-from subliminal.utils import safe_guessit
+from subliminal.utils import safely_guessit
 from requests import HTTPError, Session
 
 from subliminal.exceptions import DownloadLimitExceeded, NotInitializedProviderError
@@ -101,7 +101,7 @@ class GestdownSubtitle(Subtitle):
         if self.release_group:
             matches |= guess_matches(
                 video,
-                safe_guessit(self.release_group, {'type': 'episode'}),
+                safely_guessit(self.release_group, {'type': 'episode'}),
                 partial=True,
             )
 

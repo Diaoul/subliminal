@@ -12,7 +12,7 @@ from typing import TYPE_CHECKING, Any, ClassVar, cast
 
 from babelfish import Language, language_converters  # type: ignore[import-untyped]
 from dogpile.cache.api import NO_VALUE
-from guessit import guessit  # type: ignore[import-untyped]
+from subliminal.utils import safely_guessit
 from requests import Response, Session
 
 from subliminal import __short_version__
@@ -271,8 +271,8 @@ class OpenSubtitlesComSubtitle(Subtitle):
         )
 
         # guess
-        matches |= guess_matches(video, guessit(self.release, {'type': self.movie_kind}))
-        matches |= guess_matches(video, guessit(self.file_name, {'type': self.movie_kind}))
+        matches |= guess_matches(video, safely_guessit(self.release, {'type': self.movie_kind}))
+        matches |= guess_matches(video, safely_guessit(self.file_name, {'type': self.movie_kind}))
 
         # imdb_id
         if self.imdb_match:

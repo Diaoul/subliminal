@@ -20,6 +20,7 @@ from subliminal.utils import (
     matches_extended_title,
     merge_extend_and_ignore_unions,
     modification_date,
+    safely_guessit,
     sanitize,
     sanitize_id,
     sanitize_release_group,
@@ -50,6 +51,49 @@ def docstring() -> str:
             on another line.
         :return: something
         """
+
+
+def test_safely_guessit_with_valid_string() -> None:
+    result = safely_guessit('The.Big.Bang.Theory.S01E01.720p.BluRay.x264')
+    assert isinstance(result, dict)
+    assert result.get('title') == 'The Big Bang Theory'
+    assert result.get('season') == 1
+    assert result.get('episode') == 1
+
+
+def test_safely_guessit_with_options() -> None:
+    result = safely_guessit('The.Matrix.1999.1080p', {'type': 'movie'})
+    assert isinstance(result, dict)
+    assert result.get('title') == 'The Matrix'
+    assert result.get('year') == 1999
+
+
+def test_safely_guessit_with_none() -> None:
+    result = safely_guessit(None)
+    assert result == {}
+
+
+def test_safely_guessit_with_empty_string() -> None:
+    result = safely_guessit('')
+    assert result == {}
+
+
+def test_safely_guessit_with_ed2k_bracketed_url() -> None:
+    """Regression test for https://github.com/Diaoul/subliminal/issues/1351"""
+    result = safely_guessit(
+        'ed2k://|file|ehad%20mishelanu.[wnet.co.il].avi|734373888|D26A70D1ECD306AFA3E8B9A55D681E4B|/',
+        {'type': 'movie'},
+    )
+    assert isinstance(result, dict)
+
+
+def test_safely_guessit_with_unparseable_input(monkeypatch: pytest.MonkeyPatch) -> None:
+    def mock_guessit(string: str, options: dict | None = None) -> dict:
+        raise ValueError('unparseable')
+
+    monkeypatch.setattr('subliminal.utils.guessit', mock_guessit)
+    result = safely_guessit('some-bad-input')
+    assert result == {}
 
 
 def test_sanitize() -> None:

@@ -15,6 +15,7 @@ from typing import TYPE_CHECKING, Any, Generic, TypeVar, cast, overload
 from xmlrpc.client import ProtocolError
 
 import requests
+from guessit import guessit  # type: ignore[import-untyped]
 from requests.exceptions import SSLError
 
 from .exceptions import ServiceUnavailable
@@ -45,6 +46,18 @@ T = TypeVar('T')
 R = TypeVar('R')
 
 logger = logging.getLogger(__name__)
+
+
+def safely_guessit(string: str | None, options: dict[str, Any] | None = None) -> dict[str, Any]:
+    """Wrap guessit to catch internal errors and format the output correctly."""
+    if not string:
+        return {}
+    try:
+        result: dict[str, Any] = guessit(string, options)
+    except Exception:
+        logger.exception('guessit failed to parse %r', string)
+        return {}
+    return result
 
 
 class none_passthrough(Generic[T, R]):

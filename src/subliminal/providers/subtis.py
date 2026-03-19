@@ -8,13 +8,13 @@ from typing import TYPE_CHECKING, Any, ClassVar, cast
 from urllib.parse import quote
 
 from babelfish import Language
-from subliminal.utils import safely_guessit
 from requests import Session
 from requests.exceptions import HTTPError, JSONDecodeError, RequestException
 
 from subliminal.exceptions import NotInitializedProviderError, ProviderError
 from subliminal.matches import guess_matches
 from subliminal.subtitle import Subtitle
+from subliminal.utils import safely_guessit
 from subliminal.video import Movie
 
 from . import Provider

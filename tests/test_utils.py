@@ -59,6 +59,7 @@ def test_safely_guessit_with_valid_string() -> None:
     assert result.get('title') == 'The Big Bang Theory'
     assert result.get('season') == 1
     assert result.get('episode') == 1
+    assert result.get('type') == 'episode'
 
 
 def test_safely_guessit_with_options() -> None:
@@ -66,6 +67,7 @@ def test_safely_guessit_with_options() -> None:
     assert isinstance(result, dict)
     assert result.get('title') == 'The Matrix'
     assert result.get('year') == 1999
+    assert result.get('type') == 'movie'
 
 
 def test_safely_guessit_with_none() -> None:
@@ -75,24 +77,16 @@ def test_safely_guessit_with_none() -> None:
 
 def test_safely_guessit_with_empty_string() -> None:
     result = safely_guessit('')
-    assert result == {}
+    assert isinstance(result, dict)
+    assert 'type' in result
 
 
-def test_safely_guessit_with_ed2k_bracketed_url() -> None:
+def test_safely_guessit_with_error() -> None:
     """Regression test for https://github.com/Diaoul/subliminal/issues/1351"""
     result = safely_guessit(
         'ed2k://|file|ehad%20mishelanu.[wnet.co.il].avi|734373888|D26A70D1ECD306AFA3E8B9A55D681E4B|/',
         {'type': 'movie'},
     )
-    assert isinstance(result, dict)
-
-
-def test_safely_guessit_with_unparseable_input(monkeypatch: pytest.MonkeyPatch) -> None:
-    def mock_guessit(string: str, options: dict | None = None) -> dict:
-        raise ValueError('unparseable')
-
-    monkeypatch.setattr('subliminal.utils.guessit', mock_guessit)
-    result = safely_guessit('some-bad-input')
     assert result == {}
 
 

@@ -6,10 +6,8 @@ import logging
 import os
 from typing import TYPE_CHECKING, Any
 
-from guessit import guessit  # type: ignore[import-untyped]
-
 from subliminal.exceptions import GuessingError
-from subliminal.utils import ensure_list, ensure_str, get_age, matches_extended_title
+from subliminal.utils import ensure_list, ensure_str, get_age, matches_extended_title, safely_guessit
 
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
@@ -274,7 +272,7 @@ class Video:
         :param str name: name of the video.
 
         """
-        return cls.fromguess(name, guessit(name))
+        return cls.fromguess(name, safely_guessit(name))
 
     def __repr__(self) -> str:  # pragma: no cover
         return f'<{self.__class__.__name__} [{self.name!r}]>'
@@ -407,7 +405,7 @@ class Episode(Video):
     @classmethod
     def fromname(cls, name: str) -> Episode:
         """Return an :class:`Episode` from the file name."""
-        return cls.fromguess(name, guessit(name, {'type': 'episode'}))
+        return cls.fromguess(name, safely_guessit(name, {'type': 'episode'}))
 
     def __repr__(self) -> str:
         return '<{cn} [{series}{country}{year} s{season:02d}e{episodes}]>'.format(
@@ -493,7 +491,7 @@ class Movie(Video):
     @classmethod
     def fromname(cls, name: str) -> Movie:
         """Return an :class:`Movie` from the file name."""
-        return cls.fromguess(name, guessit(name, {'type': 'movie'}))
+        return cls.fromguess(name, safely_guessit(name, {'type': 'movie'}))
 
     def __repr__(self) -> str:
         return '<{cn} [{title}{country}{year}]>'.format(

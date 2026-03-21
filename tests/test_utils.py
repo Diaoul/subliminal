@@ -20,6 +20,7 @@ from subliminal.utils import (
     matches_extended_title,
     merge_extend_and_ignore_unions,
     modification_date,
+    safely_guessit,
     sanitize,
     sanitize_id,
     sanitize_release_group,
@@ -50,6 +51,67 @@ def docstring() -> str:
             on another line.
         :return: something
         """
+
+
+def test_safely_guessit_with_valid_string() -> None:
+    result = safely_guessit('The.Big.Bang.Theory.S01E01.720p.BluRay.x264')
+    assert isinstance(result, dict)
+    assert result.get('title') == 'The Big Bang Theory'
+    assert result.get('season') == 1
+    assert result.get('episode') == 1
+    assert result.get('type') == 'episode'
+
+
+def test_safely_guessit_with_options() -> None:
+    result = safely_guessit('The.Matrix.1999.1080p', {'type': 'movie'})
+    assert isinstance(result, dict)
+    assert result.get('title') == 'The Matrix'
+    assert result.get('year') == 1999
+    assert result.get('type') == 'movie'
+
+
+def test_safely_guessit_with_none() -> None:
+    result = safely_guessit(None)
+    assert result == {}
+
+
+def test_safely_guessit_with_empty_string() -> None:
+    result = safely_guessit('')
+    assert isinstance(result, dict)
+    assert 'type' in result
+
+
+def test_safely_guessit_with_error(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Regression test for https://github.com/Diaoul/subliminal/issues/1351"""
+
+    def mock_guessit(string: str, options: dict[str, Any] | None = None) -> None:
+        msg = 'guessit internal error'
+        raise ValueError(msg)
+
+    monkeypatch.setattr('subliminal.utils.guessit', mock_guessit)
+    result = safely_guessit('some_unparseable_release_name', {'type': 'movie'})
+    assert result == {}
+
+
+def test_safely_guessit_formatting(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Test that safely_guessit formats outputs correctly (force_int, force_list_str, str)."""
+
+    def mock_guessit(string: str, options: dict[str, Any] | None = None) -> dict[str, Any]:
+        return {
+            'title': 'Test Movie',
+            'alternative_title': 'Alt Title',
+            'season': 1,
+            'year': 2020,
+            'type': 'episode',
+        }
+
+    monkeypatch.setattr('subliminal.utils.guessit', mock_guessit)
+    result = safely_guessit('test_string')
+    assert result['title'] == 'Test Movie'
+    assert result['alternative_title'] == ['Alt Title']
+    assert result['season'] == 1
+    assert result['year'] == 2020
+    assert result['type'] == 'episode'
 
 
 def test_sanitize() -> None:

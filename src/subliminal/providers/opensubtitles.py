@@ -12,7 +12,6 @@ from typing import TYPE_CHECKING, Any, ClassVar
 from xmlrpc.client import ServerProxy
 
 from babelfish import Language, language_converters  # type: ignore[import-untyped]
-from guessit import guessit  # type: ignore[import-untyped]
 
 from subliminal.exceptions import (
     AuthenticationError,
@@ -23,7 +22,7 @@ from subliminal.exceptions import (
 )
 from subliminal.matches import guess_matches
 from subliminal.subtitle import Subtitle
-from subliminal.utils import decorate_imdb_id, sanitize_id
+from subliminal.utils import decorate_imdb_id, safely_guessit, sanitize_id
 from subliminal.video import Episode, Movie, Video
 
 from . import Provider, TimeoutSafeTransport
@@ -149,8 +148,8 @@ class OpenSubtitlesSubtitle(Subtitle):
                 matches |= {'title', 'year'}
 
         # guess
-        matches |= guess_matches(video, guessit(self.movie_release_name, {'type': self.movie_kind}))
-        matches |= guess_matches(video, guessit(self.filename, {'type': self.movie_kind}))
+        matches |= guess_matches(video, safely_guessit(self.movie_release_name, {'type': self.movie_kind}))
+        matches |= guess_matches(video, safely_guessit(self.filename, {'type': self.movie_kind}))
 
         # moviehash
         if 'opensubtitles' in video.hashes and self.moviehash == video.hashes['opensubtitles']:

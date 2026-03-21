@@ -68,7 +68,7 @@ def safely_guessit(string: str, options: dict[str, Any] | None = None) -> dict[s
         else:
             # Default format to str
             result[k] = ensure_str(v)
-    
+
     return result
 
 

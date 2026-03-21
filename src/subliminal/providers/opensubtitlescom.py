@@ -12,7 +12,6 @@ from typing import TYPE_CHECKING, Any, ClassVar, cast
 
 from babelfish import Language, language_converters  # type: ignore[import-untyped]
 from dogpile.cache.api import NO_VALUE
-from subliminal.utils import safely_guessit
 from requests import Response, Session
 
 from subliminal import __short_version__
@@ -27,6 +26,7 @@ from subliminal.exceptions import (
 )
 from subliminal.matches import guess_matches
 from subliminal.subtitle import Subtitle
+from subliminal.utils import safely_guessit
 from subliminal.video import Episode, Movie, Video
 
 from . import Provider

@@ -81,13 +81,37 @@ def test_safely_guessit_with_empty_string() -> None:
     assert 'type' in result
 
 
-def test_safely_guessit_with_error() -> None:
+def test_safely_guessit_with_error(monkeypatch: pytest.MonkeyPatch) -> None:
     """Regression test for https://github.com/Diaoul/subliminal/issues/1351"""
-    result = safely_guessit(
-        'ed2k://|file|ehad%20mishelanu.[wnet.co.il].avi|734373888|D26A70D1ECD306AFA3E8B9A55D681E4B|/',
-        {'type': 'movie'},
-    )
+
+    def mock_guessit(string: str, options: dict[str, Any] | None = None) -> None:
+        msg = 'guessit internal error'
+        raise ValueError(msg)
+
+    monkeypatch.setattr('subliminal.utils.guessit', mock_guessit)
+    result = safely_guessit('some_unparseable_release_name', {'type': 'movie'})
     assert result == {}
+
+
+def test_safely_guessit_formatting(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Test that safely_guessit formats outputs correctly (force_int, force_list_str, str)."""
+
+    def mock_guessit(string: str, options: dict[str, Any] | None = None) -> dict[str, Any]:
+        return {
+            'title': 'Test Movie',
+            'alternative_title': 'Alt Title',
+            'season': 1,
+            'year': 2020,
+            'type': 'episode',
+        }
+
+    monkeypatch.setattr('subliminal.utils.guessit', mock_guessit)
+    result = safely_guessit('test_string')
+    assert result['title'] == 'Test Movie'
+    assert result['alternative_title'] == ['Alt Title']
+    assert result['season'] == 1
+    assert result['year'] == 2020
+    assert result['type'] == 'episode'
 
 
 def test_sanitize() -> None:

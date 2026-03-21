@@ -12,7 +12,6 @@ from typing import TYPE_CHECKING, Any, ClassVar
 from xmlrpc.client import ServerProxy
 
 from babelfish import Language, language_converters  # type: ignore[import-untyped]
-from subliminal.utils import safely_guessit
 
 from subliminal.exceptions import (
     AuthenticationError,
@@ -23,7 +22,7 @@ from subliminal.exceptions import (
 )
 from subliminal.matches import guess_matches
 from subliminal.subtitle import Subtitle
-from subliminal.utils import decorate_imdb_id, sanitize_id
+from subliminal.utils import decorate_imdb_id, safely_guessit, sanitize_id
 from subliminal.video import Episode, Movie, Video
 
 from . import Provider, TimeoutSafeTransport

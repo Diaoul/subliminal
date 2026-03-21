@@ -9,12 +9,12 @@ from typing import TYPE_CHECKING, Any, ClassVar
 from zipfile import ZipFile
 
 from babelfish import Language, language_converters  # type: ignore[import-untyped]
-from subliminal.utils import safely_guessit
 from requests import Session
 
 from subliminal.exceptions import NotInitializedProviderError, ProviderError
 from subliminal.matches import guess_matches
 from subliminal.subtitle import Subtitle
+from subliminal.utils import safely_guessit
 from subliminal.video import Episode, Movie, Video
 
 from . import Provider, SecLevelOneTLSAdapter

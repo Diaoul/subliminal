@@ -8,11 +8,11 @@ from itertools import count
 from typing import TYPE_CHECKING, Any, ClassVar
 
 from babelfish import LANGUAGES, Language  # type: ignore[import-untyped]
-from subliminal.utils import safely_guessit
 
 from subliminal.exceptions import DiscardingError, NotInitializedProviderError
 from subliminal.matches import guess_matches
 from subliminal.subtitle import Subtitle
+from subliminal.utils import safely_guessit
 from subliminal.video import Episode, Movie, Video
 
 from . import Provider

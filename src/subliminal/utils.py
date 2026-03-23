@@ -48,7 +48,7 @@ R = TypeVar('R')
 logger = logging.getLogger(__name__)
 
 
-def safely_guessit(string: str, options: dict[str, Any] | None = None) -> dict[str, Any]:
+def safely_guessit(string: str | None, options: dict[str, Any] | None = None) -> dict[str, Any]:
     """Wrap guessit to catch internal errors and format the output correctly."""
     if string is None:
         return {}

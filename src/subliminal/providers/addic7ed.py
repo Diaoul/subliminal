@@ -14,7 +14,6 @@ from urllib.parse import unquote
 
 from babelfish import Language, language_converters  # type: ignore[import-untyped]
 from babelfish.exceptions import LanguageReverseError  # type: ignore[import-untyped]
-from subliminal.utils import safely_guessit
 from requests import Response, Session
 from requests.cookies import RequestsCookieJar
 
@@ -22,7 +21,7 @@ from subliminal.cache import SHOW_EXPIRATION_TIME, region
 from subliminal.exceptions import ConfigurationError, DownloadLimitExceeded, NotInitializedProviderError
 from subliminal.matches import guess_matches
 from subliminal.subtitle import Subtitle
-from subliminal.utils import sanitize
+from subliminal.utils import safely_guessit, sanitize
 from subliminal.video import Episode, Video
 
 from . import ParserBeautifulSoup, Provider

@@ -103,11 +103,14 @@ def test_cli_download_verbose(cli_runner: CliRunner, count: int, video_type: str
     else:  # elif video_type == 'movie':
         video_name = os.path.join('Man of Steel (2013)', 'man.of.steel.2013.720p.bluray.x264-felony.mkv')
 
-    verbose = '' if not count else f'-{"v" * count}'
     with cli_runner.isolated_filesystem():
         # Ensure that the file exists, otherwise the movie errors
         ensure(video_name)
-        result = cli_runner.run(subliminal_cli, ['download', verbose, '-l', 'en', '-p', 'podnapisi', video_name])
+        cli_args = ['download', '-l', 'en', '-p', 'podnapisi', video_name]
+        if count:
+            # Add verbose flag
+            cli_args.append(f'-{"v" * count}')
+        result = cli_runner.run(subliminal_cli, cli_args)
 
         assert result.exit_code == 0
         if count > 0:

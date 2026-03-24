@@ -77,20 +77,25 @@ def test_safely_guessit_with_none() -> None:
 
 def test_safely_guessit_with_empty_string() -> None:
     result = safely_guessit('')
-    assert isinstance(result, dict)
-    assert 'type' in result
-
-
-def test_safely_guessit_with_error(monkeypatch: pytest.MonkeyPatch) -> None:
-    """Regression test for https://github.com/Diaoul/subliminal/issues/1351"""
-
-    def mock_guessit(string: str, options: dict[str, Any] | None = None) -> None:
-        msg = 'guessit internal error'
-        raise ValueError(msg)
-
-    monkeypatch.setattr('subliminal.utils.guessit', mock_guessit)
-    result = safely_guessit('some_unparseable_release_name', {'type': 'movie'})
     assert result == {}
+
+
+def test_safely_guessit_with_error() -> None:
+    """Regression test for https://github.com/Diaoul/subliminal/issues/1351"""
+    result = safely_guessit(
+        'ed2k://|file|ehad%20mishelanu.[wnet.co.il].avi|734373888|D26A70D1ECD306AFA3E8B9A55D681E4B|/',
+        {'type': 'movie'},
+    )
+    assert result == {}
+
+
+def test_safely_guessit_force_formatting() -> None:
+    """Regression test for https://github.com/Diaoul/subliminal/issues/1235"""
+    name = 'Adam-12 1968 Season 1 Complete x264 [i_c]/Adam-12 S01E02 Log 141 The Color TV Bandit.mkv'
+    result = safely_guessit(name)
+
+    assert 'title' in result
+    assert isinstance(result['title'], str)
 
 
 def test_safely_guessit_formatting(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -101,7 +106,7 @@ def test_safely_guessit_formatting(monkeypatch: pytest.MonkeyPatch) -> None:
             'title': 'Test Movie',
             'alternative_title': 'Alt Title',
             'season': 1,
-            'year': 2020,
+            'year': '2020',
             'type': 'episode',
         }
 

@@ -67,7 +67,7 @@
             <a id="nextFileLink" class="nav" href="z_e65c4b1b753142a3_subtis_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.13.1">coverage.py v7.13.1</a>,
-            created at 2026-02-28 23:25 +0000
+            created at 2026-03-24 11:00 +0000
         </p>
         <aside class="hidden">
             <button type="button" class="button_next_chunk" data-shortcut="j"></button>
@@ -93,12 +93,12 @@
     <p class="run"><span class="n"><a id="t9" href="#t9">9</a></span><span class="t"><span class="key">from</span> <span class="nam">zipfile</span> <span class="key">import</span> <span class="nam">ZipFile</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t10" href="#t10">10</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t11" href="#t11">11</a></span><span class="t"><span class="key">from</span> <span class="nam">babelfish</span> <span class="key">import</span> <span class="nam">Language</span><span class="op">,</span> <span class="nam">language_converters</span>  <span class="com"># type: ignore[import-untyped]</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t12" href="#t12">12</a></span><span class="t"><span class="key">from</span> <span class="nam">guessit</span> <span class="key">import</span> <span class="nam">guessit</span>  <span class="com"># type: ignore[import-untyped]</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t13" href="#t13">13</a></span><span class="t"><span class="key">from</span> <span class="nam">requests</span> <span class="key">import</span> <span class="nam">Session</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t14" href="#t14">14</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t15" href="#t15">15</a></span><span class="t"><span class="key">from</span> <span class="nam">subliminal</span><span class="op">.</span><span class="nam">exceptions</span> <span class="key">import</span> <span class="nam">NotInitializedProviderError</span><span class="op">,</span> <span class="nam">ProviderError</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t16" href="#t16">16</a></span><span class="t"><span class="key">from</span> <span class="nam">subliminal</span><span class="op">.</span><span class="nam">matches</span> <span class="key">import</span> <span class="nam">guess_matches</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t17" href="#t17">17</a></span><span class="t"><span class="key">from</span> <span class="nam">subliminal</span><span class="op">.</span><span class="nam">subtitle</span> <span class="key">import</span> <span class="nam">Subtitle</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t12" href="#t12">12</a></span><span class="t"><span class="key">from</span> <span class="nam">requests</span> <span class="key">import</span> <span class="nam">Session</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t13" href="#t13">13</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t14" href="#t14">14</a></span><span class="t"><span class="key">from</span> <span class="nam">subliminal</span><span class="op">.</span><span class="nam">exceptions</span> <span class="key">import</span> <span class="nam">NotInitializedProviderError</span><span class="op">,</span> <span class="nam">ProviderError</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t15" href="#t15">15</a></span><span class="t"><span class="key">from</span> <span class="nam">subliminal</span><span class="op">.</span><span class="nam">matches</span> <span class="key">import</span> <span class="nam">guess_matches</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t16" href="#t16">16</a></span><span class="t"><span class="key">from</span> <span class="nam">subliminal</span><span class="op">.</span><span class="nam">subtitle</span> <span class="key">import</span> <span class="nam">Subtitle</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t17" href="#t17">17</a></span><span class="t"><span class="key">from</span> <span class="nam">subliminal</span><span class="op">.</span><span class="nam">utils</span> <span class="key">import</span> <span class="nam">safely_guessit</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t18" href="#t18">18</a></span><span class="t"><span class="key">from</span> <span class="nam">subliminal</span><span class="op">.</span><span class="nam">video</span> <span class="key">import</span> <span class="nam">Episode</span><span class="op">,</span> <span class="nam">Movie</span><span class="op">,</span> <span class="nam">Video</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t19" href="#t19">19</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t20" href="#t20">20</a></span><span class="t"><span class="key">from</span> <span class="op">.</span> <span class="key">import</span> <span class="nam">Provider</span><span class="op">,</span> <span class="nam">SecLevelOneTLSAdapter</span>&nbsp;</span><span class="r"></span></p>
@@ -161,7 +161,7 @@
     <p class="pln"><span class="n"><a id="t77" href="#t77">77</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t78" href="#t78">78</a></span><span class="t">        <span class="nam">video_type</span> <span class="op">=</span> <span class="str">'episode'</span> <span class="key">if</span> <span class="nam">isinstance</span><span class="op">(</span><span class="nam">video</span><span class="op">,</span> <span class="nam">Episode</span><span class="op">)</span> <span class="key">else</span> <span class="str">'movie'</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t79" href="#t79">79</a></span><span class="t">        <span class="key">for</span> <span class="nam">release</span> <span class="key">in</span> <span class="nam">self</span><span class="op">.</span><span class="nam">releases</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t80" href="#t80">80</a></span><span class="t">            <span class="nam">matches</span> <span class="op">|=</span> <span class="nam">guess_matches</span><span class="op">(</span><span class="nam">video</span><span class="op">,</span> <span class="nam">guessit</span><span class="op">(</span><span class="nam">release</span><span class="op">,</span> <span class="op">{</span><span class="str">'type'</span><span class="op">:</span> <span class="nam">video_type</span><span class="op">}</span><span class="op">)</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t80" href="#t80">80</a></span><span class="t">            <span class="nam">matches</span> <span class="op">|=</span> <span class="nam">guess_matches</span><span class="op">(</span><span class="nam">video</span><span class="op">,</span> <span class="nam">safely_guessit</span><span class="op">(</span><span class="nam">release</span><span class="op">,</span> <span class="op">{</span><span class="str">'type'</span><span class="op">:</span> <span class="nam">video_type</span><span class="op">}</span><span class="op">)</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t81" href="#t81">81</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t82" href="#t82">82</a></span><span class="t">        <span class="key">return</span> <span class="nam">matches</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t83" href="#t83">83</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
@@ -343,7 +343,7 @@
             <a class="nav" href="z_e65c4b1b753142a3_subtis_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.13.1">coverage.py v7.13.1</a>,
-            created at 2026-02-28 23:25 +0000
+            created at 2026-03-24 11:00 +0000
         </p>
     </div>
 </footer>

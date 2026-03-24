@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import datetime
+import sys
 from typing import TYPE_CHECKING, Any
 from xmlrpc.client import ProtocolError
 
@@ -80,6 +81,7 @@ def test_safely_guessit_with_empty_string() -> None:
     assert result == {}
 
 
+@pytest.mark.skipif(sys.version_info < (3, 11), reason='not a bug in python3.10...')
 def test_safely_guessit_with_error() -> None:
     """Regression test for https://github.com/Diaoul/subliminal/issues/1351"""
     result = safely_guessit(

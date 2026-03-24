@@ -8,13 +8,13 @@ from typing import TYPE_CHECKING, Any, ClassVar, cast
 from urllib.parse import quote
 
 from babelfish import Language
-from guessit import guessit
 from requests import Session
 from requests.exceptions import HTTPError, JSONDecodeError, RequestException
 
 from subliminal.exceptions import NotInitializedProviderError, ProviderError
 from subliminal.matches import guess_matches
 from subliminal.subtitle import Subtitle
+from subliminal.utils import safely_guessit
 from subliminal.video import Movie
 
 from . import Provider
@@ -98,9 +98,9 @@ class SubtisSubtitle(Subtitle):
             matches.add('hash')
 
         if self.is_synced and video.name:
-            matches |= guess_matches(video, guessit(os.path.basename(video.name), {'type': 'movie'}))
+            matches |= guess_matches(video, safely_guessit(os.path.basename(video.name), {'type': 'movie'}))
         elif self.title:
-            matches |= guess_matches(video, guessit(self.title, {'type': 'movie'}))
+            matches |= guess_matches(video, safely_guessit(self.title, {'type': 'movie'}))
 
         return matches
 

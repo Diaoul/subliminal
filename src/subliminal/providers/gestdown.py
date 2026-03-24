@@ -7,13 +7,12 @@ import re
 from typing import TYPE_CHECKING, Any, ClassVar
 
 from babelfish import Language  # type: ignore[import-untyped]
-from guessit import guessit  # type: ignore[import-untyped]
 from requests import HTTPError, Session
 
 from subliminal.exceptions import DownloadLimitExceeded, NotInitializedProviderError
 from subliminal.matches import guess_matches
 from subliminal.subtitle import Subtitle
-from subliminal.utils import sanitize
+from subliminal.utils import safely_guessit, sanitize
 from subliminal.video import Episode, Video
 
 from . import Provider
@@ -101,7 +100,7 @@ class GestdownSubtitle(Subtitle):
         if self.release_group:
             matches |= guess_matches(
                 video,
-                guessit(self.release_group, {'type': 'episode'}),
+                safely_guessit(self.release_group, {'type': 'episode'}),
                 partial=True,
             )
 

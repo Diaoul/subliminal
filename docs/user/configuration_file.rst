@@ -46,4 +46,3 @@ Commented options need a value to be valid.
 
 .. program-output:: python -c "from subliminal.cli.generate_config import generate_default_config; print(generate_default_config(commented=False))"
     :language: toml
-    :nostderr:

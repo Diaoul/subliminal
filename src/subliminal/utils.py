@@ -48,21 +48,25 @@ R = TypeVar('R')
 logger = logging.getLogger(__name__)
 
 
-def safely_guessit(string: str | None, options: dict[str, Any] | None = None) -> dict[str, Any]:
+def safely_guessit(name: str | None, options: dict[str, Any] | None = None) -> dict[str, Any]:
     """Wrap guessit to catch internal errors and format the output correctly."""
-    if string is None:
+    # Return an empty dict with None or ''
+    if not name:
         return {}
+
+    # Try calling guessit
     try:
-        result: dict[str, Any] = guessit(string, options)
+        result: dict[str, Any] = guessit(name, options)
     except Exception:
-        logger.exception('guessit failed to parse %r', string)
+        logger.exception('guessit failed to parse %r', name)
         return {}
+
     # Format the outputs
-    force_int = ('season', 'year', 'episode')
+    force_int = ('season', 'episode', 'year')
     force_list_str = ('alternative_title',)
     for k, v in result.items():
         if k in force_int:
-            result[k] = [int(x) for x in v] if isinstance(v, list) else int(v)
+            result[k] = [int(x) for x in v] if is_iterable(v) else int(v)
         elif k in force_list_str:
             result[k] = ensure_list(v)
         else:

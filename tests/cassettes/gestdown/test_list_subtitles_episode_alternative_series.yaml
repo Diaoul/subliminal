@@ -3,11 +3,11 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, zstd
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.2
+      - Subliminal/2.6
       accept:
       - application/json
     method: GET
@@ -16,26 +16,28 @@ interactions:
     body:
       string: '{"shows":[{"id":"b366047d-4e8f-4430-b9da-e1a8b9dc4d00","name":"TURN","nbSeasons":4,"seasons":[1,2,3,4],"tvDbId":272135,"tmdbId":57276,"slug":"turn"}]}'
     headers:
-      CF-Cache-Status:
-      - HIT
+      Age:
+      - '109144'
       CF-RAY:
-      - 91189a301ab9edef-LHR
+      - 9eb5e0dfaab7f437-LIS
       Cache-Control:
       - public, max-age=14400
       Connection:
       - keep-alive
+      Content-Encoding:
+      - zstd
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 13 Feb 2025 23:29:44 GMT
-      Last-Modified:
-      - Thu, 13 Feb 2025 16:22:06 GMT
-      NEL:
-      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      - Sun, 12 Apr 2026 23:05:53 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=Z0jkRq60GOlSEBO09Er3F7dlKVdd8y%2Bk3NT7LkjmkKHLcaxn6KRjQTwEFtnQy7yLP0Ds9VhcQA8LQZDcuWFiCFDx1gCSpAPJeKDNtxm73Tn4705dM3sD%2BiGX6GfZRBiDsmDxNQ%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=Isl0kphSTrZE5rwjkqaXDx76ly9eBAEWkYo1ocM9co9k%2F9qpiEsM1yK6hkxvx4m8SDVtGwycka7MBv1rFMNaYMKRlRFrVNu73pA%2FZYNvmYuC8KqoIZ%2B%2BH23H6Mz4uedJIhiSwg%3D%3D"}]}'
       Server:
       - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
       Strict-Transport-Security:
       - max-age=15552000; includeSubDomains; preload
       Transfer-Encoding:
@@ -44,10 +46,10 @@ interactions:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
-      content-length:
-      - '150'
-      server-timing:
-      - cfL4;desc="?proto=TCP&rtt=32044&min_rtt=32023&rtt_var=12051&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2847&recv_bytes=798&delivery_rate=89951&cwnd=251&unsent_bytes=0&cid=aea4d4ca97ce8444&ts=61&x=0"
+      cf-cache-status:
+      - HIT
+      last-modified:
+      - Sat, 11 Apr 2026 16:46:49 GMT
       vary:
       - Accept-Encoding
       - Accept-Encoding
@@ -58,11 +60,11 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, zstd
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.2
+      - Subliminal/2.6
       accept:
       - application/json
     method: GET
@@ -74,7 +76,7 @@ interactions:
         Drag\xF3n: Return of a Warrior\",\"nbSeasons\":2,\"seasons\":[1,2],\"tvDbId\":370131,\"tmdbId\":94154,\"slug\":\"el-dragon-return-of-a-warrior\"},{\"id\":\"b964a19e-f40c-4d3b-9f32-f17d31003f49\",\"name\":\"Hot
         Girls Wanted: Turned On\",\"nbSeasons\":1,\"seasons\":[1],\"tvDbId\":326030,\"tmdbId\":71373,\"slug\":\"hot-girls-wanted-turned-on\"},{\"id\":\"22296d26-c773-487b-be4b-a305bf9aee1e\",\"name\":\"King
         of Boys: The Return of the King\",\"nbSeasons\":1,\"seasons\":[1],\"tvDbId\":408917,\"tmdbId\":131584,\"slug\":\"king-of-boys-the-return-of-the-king\"},{\"id\":\"fc23574c-c421-4483-be2a-ef0a370ab26a\",\"name\":\"Luna
-        Petunia: Return to Amazia\",\"nbSeasons\":1,\"seasons\":[1],\"tvDbId\":null,\"tmdbId\":76809,\"slug\":\"luna-petunia-return-to-amazia\"},{\"id\":\"10c2fe37-bee3-4dc2-9942-dc76efe835e3\",\"name\":\"Mystery
+        Petunia: Return to Amazia\",\"nbSeasons\":1,\"seasons\":[1],\"tvDbId\":342210,\"tmdbId\":76809,\"slug\":\"luna-petunia-return-to-amazia\"},{\"id\":\"10c2fe37-bee3-4dc2-9942-dc76efe835e3\",\"name\":\"Mystery
         Science Theater 3000: The Return\",\"nbSeasons\":1,\"seasons\":[1],\"tvDbId\":null,\"tmdbId\":null,\"slug\":\"mystery-science-theater-3000-the-return\"},{\"id\":\"d1a435da-46f5-4794-ac5e-a241f38e87f1\",\"name\":\"Return
         of the Mac\",\"nbSeasons\":1,\"seasons\":[1],\"tvDbId\":325304,\"tmdbId\":71112,\"slug\":\"return-of-the-mac\"},{\"id\":\"7047c013-04ff-47d5-a8f7-eb047912863d\",\"name\":\"Return
         to Eden\",\"nbSeasons\":1,\"seasons\":[1],\"tvDbId\":74274,\"tmdbId\":727,\"slug\":\"return-to-eden\"},{\"id\":\"06fe47a2-b8a9-44c7-afb3-5d0e8b25d235\",\"name\":\"The
@@ -84,30 +86,40 @@ interactions:
         Up Charlie\",\"nbSeasons\":1,\"seasons\":[1],\"tvDbId\":351581,\"tmdbId\":85486,\"slug\":\"turn-up-charlie\"},{\"id\":\"9c155f24-374c-4dbd-8dc8-d4291b95c2b5\",\"name\":\"Turner
         & Hooch\",\"nbSeasons\":1,\"seasons\":[1],\"tvDbId\":393235,\"tmdbId\":114503,\"slug\":\"turner-hooch\"},{\"id\":\"0ae05d21-9666-4561-98f1-f26fc2babc15\",\"name\":\"Turning
         Point: 9/11 and the War on Terror\",\"nbSeasons\":1,\"seasons\":[1],\"tvDbId\":408892,\"tmdbId\":131651,\"slug\":\"turning-point-911-and-the-war-on-terror\"},{\"id\":\"9b418844-063f-4fc9-8d6b-bcd9200174d2\",\"name\":\"The
-        Summer I Turned Pretty\",\"nbSeasons\":2,\"seasons\":[1,2],\"tvDbId\":396505,\"tmdbId\":194766,\"slug\":\"the-summer-i-turned-pretty\"},{\"id\":\"018adeaa-1554-4425-aa69-bd2d957b2da2\",\"name\":\"Castlevania:
-        Nocturne\",\"nbSeasons\":1,\"seasons\":[1],\"tvDbId\":421113,\"tmdbId\":123548,\"slug\":\"castlevania-nocturne\"},{\"id\":\"018e3589-c6f1-47f8-b1bf-370d33fd26ca\",\"name\":\"Turning
-        Point: The Bomb and the Cold War\",\"nbSeasons\":1,\"seasons\":[1],\"tvDbId\":446555,\"tmdbId\":245926,\"slug\":\"turning-point-the-bomb-and-the-cold-war\"}]}"
+        Summer I Turned Pretty\",\"nbSeasons\":3,\"seasons\":[1,2,3],\"tvDbId\":396505,\"tmdbId\":194766,\"slug\":\"the-summer-i-turned-pretty\"},{\"id\":\"018adeaa-1554-4425-aa69-bd2d957b2da2\",\"name\":\"Castlevania:
+        Nocturne\",\"nbSeasons\":2,\"seasons\":[1,2],\"tvDbId\":421113,\"tmdbId\":123548,\"slug\":\"castlevania-nocturne\"},{\"id\":\"018e3589-c6f1-47f8-b1bf-370d33fd26ca\",\"name\":\"Turning
+        Point: The Bomb and the Cold War\",\"nbSeasons\":1,\"seasons\":[1],\"tvDbId\":446555,\"tmdbId\":245926,\"slug\":\"turning-point-the-bomb-and-the-cold-war\"},{\"id\":\"019c78ec-63fc-7974-a6a4-fe2feb7e9a8f\",\"name\":\"Feuds
+        Turned Fatal\",\"nbSeasons\":1,\"seasons\":[1],\"tvDbId\":456137,\"tmdbId\":275600,\"slug\":\"feuds-turned-fatal\"},{\"id\":\"019c78f0-8f51-7e1b-a87c-0336d4e4f543\",\"name\":\"Turning
+        the Tables with Robin Roberts\",\"nbSeasons\":2,\"seasons\":[1,2],\"tvDbId\":403377,\"tmdbId\":124965,\"slug\":\"turning-the-tables-with-robin-roberts\"},{\"id\":\"019c78f3-2444-7661-82ff-33796dbe0d2a\",\"name\":\"Fiennes:
+        Return to the Wild\",\"nbSeasons\":1,\"seasons\":[1],\"tvDbId\":449839,\"tmdbId\":255919,\"slug\":\"fiennes-return-to-the-wild\"},{\"id\":\"019c78f3-a2cd-71a7-ade9-ac2de5cae407\",\"name\":\"No
+        Return  (Aller simple)\",\"nbSeasons\":1,\"seasons\":[2],\"tvDbId\":414223,\"tmdbId\":133923,\"slug\":\"no-return-aller-simple\"},{\"id\":\"019c78f4-d4d3-7807-9944-8cd676e9439c\",\"name\":\"Turn
+        to Me Mukai-kun  (Kocchi muiteyo Mukai-kun)\",\"nbSeasons\":1,\"seasons\":[1],\"tvDbId\":435923,\"tmdbId\":228920,\"slug\":\"turn-to-me-mukai-kun-kocchi-muiteyo-mukai-kun\"},{\"id\":\"019c78f6-ba86-78dd-a6bd-9b19e443b8b3\",\"name\":\"Your
+        Turn to Kill  (Anata no ban desu)\",\"nbSeasons\":1,\"seasons\":[1],\"tvDbId\":361968,\"tmdbId\":88570,\"slug\":\"your-turn-to-kill-anata-no-ban-desu\"},{\"id\":\"019c7901-5f6f-7157-a186-505193f07a9f\",\"name\":\"Return
+        to Jupiter\",\"nbSeasons\":1,\"seasons\":[1],\"tvDbId\":72750,\"tmdbId\":20207,\"slug\":\"return-to-jupiter\"},{\"id\":\"019c7903-30d6-7694-9ed5-94cb55eb3a91\",\"name\":\"The
+        Prince Who Turns into a Frog  (Wangzi bian qingwa)\",\"nbSeasons\":1,\"seasons\":[1],\"tvDbId\":84085,\"tmdbId\":6363,\"slug\":\"the-prince-who-turns-into-a-frog-wangzi-bian-qingw\"}]}"
     headers:
-      CF-Cache-Status:
-      - EXPIRED
+      Age:
+      - '38233'
       CF-RAY:
-      - 91189a30def5eefd-LHR
+      - 9eb5e0e04e61d852-LIS
       Cache-Control:
       - public, max-age=14400
       Connection:
       - keep-alive
+      Content-Encoding:
+      - zstd
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 13 Feb 2025 23:29:45 GMT
-      Last-Modified:
-      - Thu, 13 Feb 2025 23:29:45 GMT
-      NEL:
-      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      - Sun, 12 Apr 2026 23:05:53 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=b6IG8QnJvlHrQj80%2B8TF6SdoAyJxeILU8YQCc6AgYYZdC8PB8E4Whiggo001OtDEkVaftLFyvCHTeYotaqu0DK6H6JM%2BPTd3fw9a27fy7ooSIz%2F7kha5VrbfkF4XvBVeOYW6iw%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=cyBnhlLwVPmavioDkYZxufheHX3VwCY0Cfalz70hvZ%2FqmxCXXrsf9rSC5SjJ7YEa3QUgc%2F2Xd%2FcqFrXWHHVS14L0sDIyJoKWyRHorb9abLsLDGa5Dg7C%2Fl4xVVqmSkHfHsdXnA%3D%3D"}]}'
       Server:
       - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
       Strict-Transport-Security:
       - max-age=15552000; includeSubDomains; preload
       Transfer-Encoding:
@@ -116,10 +128,10 @@ interactions:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
-      content-length:
-      - '3162'
-      server-timing:
-      - cfL4;desc="?proto=TCP&rtt=32019&min_rtt=31996&rtt_var=12015&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2846&recv_bytes=789&delivery_rate=90511&cwnd=239&unsent_bytes=0&cid=00ad54a0eb956028&ts=88&x=0"
+      cf-cache-status:
+      - HIT
+      last-modified:
+      - Sun, 12 Apr 2026 12:28:40 GMT
       vary:
       - Accept-Encoding
       - Accept-Encoding
@@ -130,40 +142,43 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, zstd
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.2
+      - Subliminal/2.6
       accept:
       - application/json
     method: GET
     uri: https://api.gestdown.info/subtitles/get/b366047d-4e8f-4430-b9da-e1a8b9dc4d00/4/3/eng
   response:
     body:
-      string: '{"matchingSubtitles":[{"subtitleId":"6081b9e1-a57c-4082-8e65-aa07d5547b64","version":"SVA","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/6081b9e1-a57c-4082-8e65-aa07d5547b64","language":"English","discovered":"2022-11-30T07:37:56.705336Z","downloadCount":61},{"subtitleId":"6b789fec-02e9-4a8d-b0a1-fd701a817d75","version":"SVA","completed":true,"hearingImpaired":true,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/6b789fec-02e9-4a8d-b0a1-fd701a817d75","language":"English","discovered":"2022-11-30T07:37:56.705778Z","downloadCount":4}],"episode":{"season":4,"number":3,"title":"Blood
-        for Blood","show":"TURN","discovered":"2022-11-30T07:37:56.705328Z"}}'
+      string: '{"matchingSubtitles":[{"subtitleId":"6081b9e1-a57c-4082-8e65-aa07d5547b64","version":"SVA","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/6081b9e1-a57c-4082-8e65-aa07d5547b64","language":"English","discovered":"2022-11-30T07:37:56.705336Z","downloadCount":95,"source":"Addic7ed","qualities":["720p","1080p"],"release":null},{"subtitleId":"6b789fec-02e9-4a8d-b0a1-fd701a817d75","version":"SVA","completed":true,"hearingImpaired":true,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/6b789fec-02e9-4a8d-b0a1-fd701a817d75","language":"English","discovered":"2022-11-30T07:37:56.705778Z","downloadCount":14,"source":"Addic7ed","qualities":["720p","1080p"],"release":null},{"subtitleId":"sp_019c82e2-9a0a-71f5-a7f9-cc240f47cb46_ep_3","version":"HDTV,
+        720p","completed":true,"hearingImpaired":false,"corrected":false,"hd":true,"downloadUri":"/subtitles/download/sp_019c82e2-9a0a-71f5-a7f9-cc240f47cb46_ep_3","language":"English","discovered":"2026-02-22T01:06:54.594598Z","downloadCount":17,"source":"SuperSubtitles","qualities":["720p"],"release":"HDTV,
+        720p"}],"episode":{"season":4,"number":3,"title":"Blood for Blood","show":"TURN","discovered":"2022-11-30T07:37:56.705328Z"}}'
     headers:
-      CF-Cache-Status:
-      - MISS
+      Age:
+      - '937'
       CF-RAY:
-      - 91189a31688a5be8-LIS
+      - 9eb5e0e0cb165910-LIS
       Cache-Control:
       - public, max-age=7200
       Connection:
       - keep-alive
+      Content-Encoding:
+      - zstd
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 13 Feb 2025 23:29:45 GMT
-      Last-Modified:
-      - Thu, 13 Feb 2025 23:29:45 GMT
-      NEL:
-      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      - Sun, 12 Apr 2026 23:05:54 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=THGwPsQ3%2BzWb0x7bxgXh3gJTRGGtLEkrcFvJL7Np6SNV79yovm%2BENOtLakYI6QsrBwtW0dzP2KDQo1Um5ccTRGbSxbh3BUDDX5riSPsBEggB85KsqXvnakkWmMbL4lgIkMhDdQ%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=3scIOVsTjW%2B344bqvpj%2FVa4RPD%2FdmWcdAIMPTll2PTjoC%2FfjzImAiV%2FiblwWrA2wI2LEhDkseuslsCVbji7Ei8oTuys3pHsFx7apVw6d98iUbES2%2Bv%2B62lXVYfzSKV1CnulVnA%3D%3D"}]}'
       Server:
       - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
       Strict-Transport-Security:
       - max-age=15552000; includeSubDomains; preload
       Transfer-Encoding:
@@ -172,10 +187,10 @@ interactions:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
-      content-length:
-      - '726'
-      server-timing:
-      - cfL4;desc="?proto=TCP&rtt=3007&min_rtt=2978&rtt_var=1176&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2848&recv_bytes=830&delivery_rate=900497&cwnd=251&unsent_bytes=0&cid=2544edce29eddc12&ts=108&x=0"
+      cf-cache-status:
+      - HIT
+      last-modified:
+      - Sun, 12 Apr 2026 22:50:16 GMT
       vary:
       - Accept-Encoding
       - Accept-Encoding

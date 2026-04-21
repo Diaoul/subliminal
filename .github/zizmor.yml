@@ -6,3 +6,6 @@ rules:
     config:
       policies:
         "*": ref-pin
+  superfluous-actions:
+    ignore:
+      - publish-release.yaml:78:15

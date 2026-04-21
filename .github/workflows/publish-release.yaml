@@ -31,12 +31,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         if: github.event_name == 'push'
         with:
           persist-credentials: false
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         if: |
           github.event_name == 'workflow_dispatch'
           || github.event_name == 'workflow_call'
@@ -63,7 +63,7 @@ jobs:
     # Publish a Github release when a tag was pushed, or it's called with a tag.
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-tags: true
           ref: ${{ needs.build-package.outputs.tag }}

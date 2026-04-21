@@ -23,7 +23,7 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 #: Subtitle id pattern
-id_pattern = re.compile(r'.*\/subtitles\/download\/([a-z0-9-]+)')
+id_pattern = re.compile(r'.*\/subtitles\/download\/([_a-z0-9-]+)')
 
 # fmt: off
 gestdown_languages = {

@@ -393,6 +393,7 @@ def test_list_subtitles_episode_alternative_series(episodes: dict[str, Episode])
     expected_subtitles = {
         '6081b9e1-a57c-4082-8e65-aa07d5547b64',
         '6b789fec-02e9-4a8d-b0a1-fd701a817d75',
+        'sp_019c82e2-9a0a-71f5-a7f9-cc240f47cb46_ep_3',
     }
     with GestdownProvider() as provider:
         subtitles = provider.list_subtitles(video, languages)

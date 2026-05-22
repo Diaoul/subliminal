@@ -135,7 +135,8 @@ def read_configuration(filename: str | os.PathLike) -> dict[str, dict[str, Any]]
     for lt in ('hearing_impaired', 'foreign_only'):
         # if an option was defined in the config file, make it a tuple, the expected type
         if lt in download_dict and (isinstance(download_dict[lt], bool) or download_dict[lt] is None):
-            download_dict[lt] = (download_dict[lt],)
+            # The value of the tuple needs to be a string (change introduced with click==8.3)
+            download_dict[lt] = (str(download_dict[lt]),)
 
     # remove the provider and refiner lists to select, extend and ignore
     provider_lists = {

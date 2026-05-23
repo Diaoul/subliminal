@@ -26,7 +26,7 @@ from .extensions import (
 )
 from .matches import fps_matches
 from .score import compute_score as default_compute_score
-from .subtitle import SUBTITLE_EXTENSIONS, ExternalSubtitle, SubtitleCategory
+from .subtitle import SUBTITLE_EXTENSIONS, ExternalSubtitle, filter_and_sort_categories
 from .utils import get_age, handle_exception
 from .video import VIDEO_EXTENSIONS, Episode, Movie, Video
 
@@ -267,16 +267,6 @@ class ProviderPool:
         # filter and sort by subtitle categories
         subtitles = filter_and_sort_categories(subtitles, subtitle_categories=subtitle_categories)
 
-        # # sort by hearing impaired and foreign only
-        # category = SubtitleCategory.from_flags(hearing_impaired=hearing_impaired, foreign_only=foreign_only)
-        # if category != SubtitleCategory.UNKNOWN:
-        #     logger.info('Sort subtitles by %s types first', category.value)
-        #     subtitles = sorted(
-        #         subtitles,
-        #         key=lambda s: s.category == category,
-        #         reverse=True,
-        #     )
-
         # sort subtitles by score
         scored_subtitles = sorted(
             [(s, compute_score(s, video)) for s in subtitles],
@@ -372,49 +362,6 @@ class AsyncProviderPool(ProviderPool):
                 subtitles.extend(provider_subtitles)
 
         return subtitles
-
-
-def filter_and_sort_categories(subtitles: Sequence[Subtitle], subtitle_categories: str = 'n,hi,fo') -> list[Subtitle]:
-    """Filter and sort subtitles by categories.
-
-    :param subtitles: list of subtitles
-    :type subtitles: Sequence of :class:`~subliminal.subtitle.Subtitle`
-    :param str subtitle_categories: ordered list of categories to download, omitted categories are filtered out.
-    :return: the filtered and sorted list of subtitles.
-    :rtype: list of :class:`~subliminal.subtitle.Subtitle`
-    """
-    correspond = {
-        'n': SubtitleCategory.NARRATIVE,
-        'hi': SubtitleCategory.HEARING_IMPAIRED,
-        'fo': SubtitleCategory.FOREIGN_ONLY,
-    }
-
-    # default categories, if empty, reset to default
-    # this is on purpose, no need to write a log message
-    if not subtitle_categories:
-        subtitle_categories = 'n,hi,fo'
-
-    # parse categories
-    categories = [vv for v in subtitle_categories.split(',') if (vv := correspond.get(v))]
-
-    if not categories:
-        msg = (
-            'fallback to "n,hi,fo", cannot parse the comma-separated list of subtitle categories: '
-            f'{subtitle_categories}'
-        )
-        logger.warning(msg)
-        categories = list(correspond.values())
-
-    else:
-        categories_str = ','.join([k for k, v in correspond.items() for c in categories if v == c])
-        msg = f'Filter and sort subtitles by categories: {categories_str}'
-        logger.info(msg)
-
-    # filter
-    subtitles = filter(lambda s: s.category in categories, subtitles)
-
-    # sort
-    return sorted(subtitles, key=lambda s: categories.index(s.category))
 
 
 def check_video(

@@ -6,7 +6,7 @@ import codecs
 import logging
 import os
 from codecs import BOM_UTF8, BOM_UTF16_BE, BOM_UTF16_LE, BOM_UTF32_BE, BOM_UTF32_LE
-from enum import Enum
+from enum import Flag, auto
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, ClassVar
 
@@ -18,6 +18,8 @@ from pysubs2 import SSAFile, UnknownFPSError  # type: ignore[import-untyped]
 from subliminal.utils import trim_pattern
 
 if TYPE_CHECKING:
+    from collections.abc import Sequence
+
     from subliminal.video import Video
 
 logger = logging.getLogger(__name__)
@@ -68,13 +70,13 @@ def ensure_positive(value: float | None) -> float | None:
 
 
 #: Subtitle category
-class SubtitleCategory(Enum):
+class SubtitleCategory(Flag):
     """Subtitle category."""
 
-    UNKNOWN = 'unknown'
-    FOREIGN_ONLY = 'foreign_only'
-    NARRATIVE = 'narrative'
-    HEARING_IMPAIRED = 'hearing_impaired'
+    UNKNOWN = auto()
+    FOREIGN_ONLY = auto()
+    NARRATIVE = auto()
+    HEARING_IMPAIRED = auto()
 
     @classmethod
     def from_flags(cls, *, hearing_impaired: bool | None = None, foreign_only: bool | None = None) -> SubtitleCategory:
@@ -107,6 +109,50 @@ class SubtitleCategory(Enum):
         if self == SubtitleCategory.UNKNOWN:
             return None
         return False
+
+
+def filter_and_sort_categories(subtitles: Sequence[Subtitle], subtitle_categories: str = 'n,hi,fo') -> list[Subtitle]:
+    """Filter and sort subtitles by categories.
+
+    :param subtitles: list of subtitles
+    :type subtitles: Sequence of :class:`~subliminal.subtitle.Subtitle`
+    :param str subtitle_categories: ordered list of categories to download, omitted categories are filtered out.
+    :return: the filtered and sorted list of subtitles.
+    :rtype: list of :class:`~subliminal.subtitle.Subtitle`
+    """
+    correspond = {
+        'n': SubtitleCategory.NARRATIVE | SubtitleCategory.UNKNOWN,
+        'hi': SubtitleCategory.HEARING_IMPAIRED,
+        'fo': SubtitleCategory.FOREIGN_ONLY,
+    }
+
+    # default categories, if empty, reset to default
+    # this is on purpose, no need to write a log message
+    if not subtitle_categories:
+        subtitle_categories = 'n,hi,fo'
+
+    # parse categories
+    categories = [vv for v in subtitle_categories.split(',') if (vv := correspond.get(v))]
+
+    if not categories:
+        msg = (
+            'fallback to "n,hi,fo", cannot parse the comma-separated list of subtitle categories: '
+            f'{subtitle_categories}'
+        )
+        logger.warning(msg)
+        categories = list(correspond.values())
+
+    else:
+        categories_str = ','.join([k for k, v in correspond.items() for c in categories if v == c])
+        msg = f'Filter and sort subtitles by categories: {categories_str}'
+        logger.info(msg)
+
+    # filter and sort
+    return sorted(
+        # TODO: with python 3.11+ replace `bool(s.category & cc)` with `s.category in cc`
+        filter(lambda s: any(bool(s.category & cc) for cc in categories), subtitles),
+        key=lambda s: [bool(s.category & cc) for cc in categories].index(True),
+    )
 
 
 class Subtitle:

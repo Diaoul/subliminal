@@ -73,42 +73,29 @@ def ensure_positive(value: float | None) -> float | None:
 class SubtitleCategory(Flag):
     """Subtitle category."""
 
-    UNKNOWN = auto()
-    FOREIGN_ONLY = auto()
     NARRATIVE = auto()
     HEARING_IMPAIRED = auto()
+    FOREIGN_ONLY = auto()
 
     @classmethod
     def from_flags(cls, *, hearing_impaired: bool | None = None, foreign_only: bool | None = None) -> SubtitleCategory:
         """Convert to SubtitleCategory from flags."""
-        category = cls.UNKNOWN
+        category = cls.NARRATIVE
         # hearing_impaired takes precedence over foreign_only if both are True
         if hearing_impaired:
             category = cls.HEARING_IMPAIRED
         elif foreign_only:
             category = cls.FOREIGN_ONLY
-        # if hearing_impaired or foreign_only is specified to be False
-        # then for sure the subtitle is normal.
-        elif hearing_impaired is False or foreign_only is False:
-            category = cls.NARRATIVE
 
         return category
 
-    def is_hearing_impaired(self) -> bool | None:
+    def is_hearing_impaired(self) -> bool:
         """Flag for hearing impaired."""
-        if self == SubtitleCategory.HEARING_IMPAIRED:
-            return True
-        if self == SubtitleCategory.UNKNOWN:
-            return None
-        return False
+        return bool(self == SubtitleCategory.HEARING_IMPAIRED)
 
-    def is_foreign_only(self) -> bool | None:
+    def is_foreign_only(self) -> bool:
         """Flag for foreign only."""
-        if self == SubtitleCategory.FOREIGN_ONLY:
-            return True
-        if self == SubtitleCategory.UNKNOWN:
-            return None
-        return False
+        return bool(self == SubtitleCategory.FOREIGN_ONLY)
 
 
 def filter_and_sort_categories(subtitles: Sequence[Subtitle], subtitle_categories: str = 'n,hi,fo') -> list[Subtitle]:
@@ -121,7 +108,7 @@ def filter_and_sort_categories(subtitles: Sequence[Subtitle], subtitle_categorie
     :rtype: list of :class:`~subliminal.subtitle.Subtitle`
     """
     correspond = {
-        'n': SubtitleCategory.NARRATIVE | SubtitleCategory.UNKNOWN,
+        'n': SubtitleCategory.NARRATIVE,
         'hi': SubtitleCategory.HEARING_IMPAIRED,
         'fo': SubtitleCategory.FOREIGN_ONLY,
     }
@@ -150,8 +137,8 @@ def filter_and_sort_categories(subtitles: Sequence[Subtitle], subtitle_categorie
     # filter and sort
     return sorted(
         # TODO: with python 3.11+ replace `bool(s.category & cc)` with `s.category in cc`
-        filter(lambda s: any(bool(s.category & cc) for cc in categories), subtitles),
-        key=lambda s: [bool(s.category & cc) for cc in categories].index(True),
+        filter(lambda s: s.category in categories, subtitles),
+        key=lambda s: categories.index(s.category),
     )
 
 
@@ -811,7 +798,7 @@ def get_subtitle_suffix(
     language: Language,
     *,
     language_format: str = 'alpha2',
-    category: SubtitleCategory = SubtitleCategory.UNKNOWN,
+    category: SubtitleCategory = SubtitleCategory.NARRATIVE,
     category_suffix: bool = False,
     language_first: bool = False,
 ) -> str:

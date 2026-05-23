@@ -210,6 +210,7 @@ REFINER = click.Choice(['ALL', *sorted(refiner_manager.names())])
     is_flag=True,
     flag_value=True,
     multiple=True,
+    deprecated='use `--subtitle-categories fo,n,hi` to favor fo or `--subtitle-categories fo` to download fo only.',
     help='Prefer foreign-only subtitles.',
 )
 @click.option(
@@ -219,6 +220,7 @@ REFINER = click.Choice(['ALL', *sorted(refiner_manager.names())])
     is_flag=True,
     flag_value=False,
     multiple=True,
+    deprecated='use `--subtitle-categories n,hi,fo` to disfavor fo or `--subtitle-categories n,hi` to avoid fo.',
     help='Disfavor foreign-only subtitles.',
 )
 @click.option(
@@ -228,6 +230,7 @@ REFINER = click.Choice(['ALL', *sorted(refiner_manager.names())])
     is_flag=True,
     flag_value=True,
     multiple=True,
+    deprecated='use `--subtitle-categories hi,n,fo` to favor hi or `--subtitle-categories hi` to download hi only.',
     help='Prefer hearing-impaired subtitles.',
 )
 @click.option(
@@ -237,7 +240,18 @@ REFINER = click.Choice(['ALL', *sorted(refiner_manager.names())])
     is_flag=True,
     flag_value=False,
     multiple=True,
+    deprecated='use `--subtitle-categories n,fo,hi` to disfavor hi or `--subtitle-categories n,fo` to avoid hi.',
     help='Disfavor hearing-impaired subtitles.',
+)
+@click.option(
+    '-C',
+    '--subtitle-categories',
+    default='n,hi,fo',
+    help=(
+        'Comma-separated ordered list of subtitle categories to download. Skipping one category means to avoid '
+        'downloading subtitles of such category. The (exclusive) categories are: hi (hearing impaired), '
+        'fo (foreign only) and n (narrative, standard subtitles).'
+    ),
 )
 @click.option(
     '-m',
@@ -332,6 +346,7 @@ def download(
     skip_wrong_fps: bool,
     hearing_impaired: tuple[bool | None, ...],
     foreign_only: tuple[bool | None, ...],
+    subtitle_categories: str,
     min_score: int,
     language_type_suffix: bool | None,
     category_suffix: bool,
@@ -536,6 +551,7 @@ def download(
                     min_score=scores['hash'] * min_score // 100,
                     hearing_impaired=hearing_impaired_flag,
                     foreign_only=foreign_only_flag,
+                    subtitle_categories=subtitle_categories,
                     skip_wrong_fps=skip_wrong_fps,
                     only_one=single,
                     ignore_subtitles=ignore_subtitles,

@@ -210,7 +210,10 @@ REFINER = click.Choice(['ALL', *sorted(refiner_manager.names())])
     is_flag=True,
     flag_value=True,
     multiple=True,
-    deprecated='use `--subtitle-categories fo,n,hi` to favor fo or `--subtitle-categories fo` to download fo only.',
+    deprecated=(
+        'use `--subtitle-categories fo,n,hi` to favor fo (the current fallback) or `--subtitle-categories fo` '
+        'to download fo only.'
+    ),
     help='Prefer foreign-only subtitles.',
 )
 @click.option(
@@ -220,7 +223,10 @@ REFINER = click.Choice(['ALL', *sorted(refiner_manager.names())])
     is_flag=True,
     flag_value=False,
     multiple=True,
-    deprecated='use `--subtitle-categories n,hi,fo` to disfavor fo or `--subtitle-categories n,hi` to avoid fo.',
+    deprecated=(
+        'use `--subtitle-categories n,hi,fo` to disfavor fo (the current fallback) or `--subtitle-categories n,hi` '
+        'to skip fo.'
+    ),
     help='Disfavor foreign-only subtitles.',
 )
 @click.option(
@@ -230,7 +236,10 @@ REFINER = click.Choice(['ALL', *sorted(refiner_manager.names())])
     is_flag=True,
     flag_value=True,
     multiple=True,
-    deprecated='use `--subtitle-categories hi,n,fo` to favor hi or `--subtitle-categories hi` to download hi only.',
+    deprecated=(
+        'use `--subtitle-categories hi,n,fo` to favor hi (the current fallback) or `--subtitle-categories hi` '
+        'to download hi only.'
+    ),
     help='Prefer hearing-impaired subtitles.',
 )
 @click.option(
@@ -240,17 +249,22 @@ REFINER = click.Choice(['ALL', *sorted(refiner_manager.names())])
     is_flag=True,
     flag_value=False,
     multiple=True,
-    deprecated='use `--subtitle-categories n,fo,hi` to disfavor hi or `--subtitle-categories n,fo` to avoid hi.',
+    deprecated=(
+        'use `--subtitle-categories n,fo,hi` to disfavor hi (the current fallback) or `--subtitle-categories n,fo` '
+        'to skip hi.'
+    ),
     help='Disfavor hearing-impaired subtitles.',
 )
 @click.option(
     '-C',
     '--subtitle-categories',
-    default='n,hi,fo',
+    default='',
     help=(
-        'Comma-separated ordered list of subtitle categories to download. Skipping one category means to avoid '
-        'downloading subtitles of such category. The (exclusive) categories are: hi (hearing impaired), '
-        'fo (foreign only) and n (narrative, standard subtitles).'
+        'Comma-separated ordered list of subtitle categories to download. Skip one or two categories to filter out '
+        'subtitles of these categories. The (exclusive) categories are: hi (hearing impaired), '
+        'fo (foreign only) and n (narrative, standard subtitles). For instance, "hi,n,fo" would sort hearing impaired '
+        'subtitles first and foreign only subtitles last; "hi" would only download hearing impaired subtitles. '
+        'If set to an empty string (the default), no filtering or sorting is carried out.'
     ),
 )
 @click.option(
@@ -376,6 +390,7 @@ def download(
     if not subtitle_format or subtitle_format in ['""', "''"]:
         subtitle_format = None
 
+    # TODO: deprecate
     # subtitle category
     hearing_impaired_flag: bool | None = None
     if len(hearing_impaired) > 0:
@@ -383,6 +398,10 @@ def download(
     foreign_only_flag: bool | None = None
     if len(foreign_only) > 0:
         foreign_only_flag = foreign_only[-1]
+    if hearing_impaired_flag is not None:
+        subtitle_categories = 'hi,n,fo' if hearing_impaired_flag else 'n,fo,hi'
+    elif foreign_only_flag is not None:
+        subtitle_categories = 'fo,n,hi' if foreign_only_flag else 'n,hi,fo'
 
     if language_type_suffix in [False, True]:  # pragma: no cover
         msg = '`--[no-]language_type_suffix` has been renamed `--[no-]category-suffix`'
@@ -549,8 +568,6 @@ def download(
                     v,
                     language_set,
                     min_score=scores['hash'] * min_score // 100,
-                    hearing_impaired=hearing_impaired_flag,
-                    foreign_only=foreign_only_flag,
                     subtitle_categories=subtitle_categories,
                     skip_wrong_fps=skip_wrong_fps,
                     only_one=single,

@@ -98,41 +98,40 @@ class SubtitleCategory(Flag):
         return bool(self == SubtitleCategory.FOREIGN_ONLY)
 
 
-def filter_and_sort_categories(subtitles: Sequence[Subtitle], subtitle_categories: str = 'n,hi,fo') -> list[Subtitle]:
+def filter_and_sort_categories(subtitles: Sequence[Subtitle], subtitle_categories: str = '') -> list[Subtitle]:
     """Filter and sort subtitles by categories.
 
     :param subtitles: list of subtitles
     :type subtitles: Sequence of :class:`~subliminal.subtitle.Subtitle`
     :param str subtitle_categories: ordered list of categories to download, omitted categories are filtered out.
+        Empty string corresponds to no filtering or sorting.
     :return: the filtered and sorted list of subtitles.
     :rtype: list of :class:`~subliminal.subtitle.Subtitle`
     """
-    correspond = {
+    correspondence = {
         'n': SubtitleCategory.NARRATIVE,
         'hi': SubtitleCategory.HEARING_IMPAIRED,
         'fo': SubtitleCategory.FOREIGN_ONLY,
     }
 
-    # default categories, if empty, reset to default
-    # this is on purpose, no need to write a log message
+    # if empty, no filtering or sorting
     if not subtitle_categories:
-        subtitle_categories = 'n,hi,fo'
+        return list(subtitles)
 
     # parse categories
-    categories = [vv for v in subtitle_categories.split(',') if (vv := correspond.get(v))]
+    categories = [vv for v in subtitle_categories.split(',') if (vv := correspondence.get(v))]
 
     if not categories:
         msg = (
-            'fallback to "n,hi,fo", cannot parse the comma-separated list of subtitle categories: '
+            'No filtering or sorting by category, cannot parse the comma-separated list of subtitle categories: '
             f'{subtitle_categories}'
         )
         logger.warning(msg)
-        categories = list(correspond.values())
+        return list(subtitles)
 
-    else:
-        categories_str = ','.join([k for k, v in correspond.items() for c in categories if v == c])
-        msg = f'Filter and sort subtitles by categories: {categories_str}'
-        logger.info(msg)
+    categories_str = ','.join([k for k, v in correspondence.items() for c in categories if v == c])
+    msg = f'Filter and sort subtitles by categories: {categories_str}'
+    logger.info(msg)
 
     # filter and sort
     return sorted(

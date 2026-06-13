@@ -131,7 +131,8 @@ def read_configuration(filename: str | os.PathLike) -> dict[str, dict[str, Any]]
 
     # make download options
     download_dict = toml_dict.setdefault('download', {})
-    # handle language types
+    # TODO: deprecated
+    # handle language categories
     for lt in ('hearing_impaired', 'foreign_only'):
         # if an option was defined in the config file, make it a tuple, the expected type
         if lt in download_dict and (isinstance(download_dict[lt], bool) or download_dict[lt] is None):

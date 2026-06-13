@@ -13,12 +13,15 @@ from subliminal.subtitle import (
     ExternalSubtitle,
     Subtitle,
     SubtitleCategory,
+    filter_and_sort_categories,
     fix_line_ending,
     get_subtitle_path,
     get_subtitle_suffix,
 )
 
 if TYPE_CHECKING:
+    from collections.abc import Sequence
+
     from subliminal.video import Movie
 
 # Core test
@@ -43,9 +46,38 @@ def test_languague_type(hearing_impaired: bool | None, foreign_only: bool | None
         assert category.is_hearing_impaired() is False
         assert category.is_foreign_only() is False
     else:
-        assert category == SubtitleCategory.UNKNOWN
-        assert category.is_hearing_impaired() is None
-        assert category.is_foreign_only() is None
+        assert category == SubtitleCategory.NARRATIVE
+        assert category.is_hearing_impaired() is False
+        assert category.is_foreign_only() is False
+
+
+@pytest.mark.parametrize(
+    ('categories', 'sorting_indices'),
+    [
+        ('', (0, 1, 2, 3, 4, 5, 6)),
+        ('hi,n,fo', (2, 6, 0, 3, 4, 1, 5)),
+        ('fo,n,hi', (1, 5, 0, 3, 4, 2, 6)),
+        ('hi,fo,n', (2, 6, 1, 5, 0, 3, 4)),
+        ('hi,n', (2, 6, 0, 3, 4)),
+        ('hi', (2, 6)),
+        ('unknown', (0, 1, 2, 3, 4, 5, 6)),
+    ],
+)
+def test_filter_and_sort_categories(categories: str, sorting_indices: Sequence[int]) -> None:
+    subtitles = [
+        Subtitle(Language('eng'), hearing_impaired=None, foreign_only=None),
+        Subtitle(Language('ita'), hearing_impaired=None, foreign_only=True),
+        Subtitle(Language('fra'), hearing_impaired=True, foreign_only=None),
+        Subtitle(Language('deu'), hearing_impaired=None, foreign_only=False),
+        Subtitle(Language('spa'), hearing_impaired=False, foreign_only=None),
+        Subtitle(Language('zho'), hearing_impaired=False, foreign_only=True),
+        Subtitle(Language('jpn'), hearing_impaired=True, foreign_only=False),
+    ]
+
+    sorted_subtitles = filter_and_sort_categories(subtitles, subtitle_categories=categories)
+
+    expected = [subtitles[i] for i in sorting_indices]
+    assert sorted_subtitles == expected
 
 
 def test_subtitle_text() -> None:

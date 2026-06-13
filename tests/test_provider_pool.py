@@ -480,7 +480,7 @@ def test_download_best_subtitles_category(episodes: dict[str, Episode]) -> None:
         # ('gestdown', 'a295515c-a460-44ea-9ba8-8d37bcb9b5a6'),
     }
 
-    subtitles = download_best_subtitles({video}, languages, hearing_impaired=True, providers=providers)
+    subtitles = download_best_subtitles({video}, languages, subtitle_categories='hi,n,fo', providers=providers)
 
     assert len(subtitles) == 1
     assert len(subtitles[video]) == 1

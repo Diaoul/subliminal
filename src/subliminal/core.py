@@ -788,8 +788,7 @@ def download_best_subtitles(
     languages: Set[Language],
     *,
     min_score: int = 0,
-    hearing_impaired: bool | None = None,
-    foreign_only: bool | None = None,
+    subtitle_categories: str = '',
     skip_wrong_fps: bool = False,
     only_one: bool = False,
     compute_score: ComputeScore | None = None,
@@ -805,8 +804,8 @@ def download_best_subtitles(
     :param languages: languages to download.
     :type languages: set of :class:`~babelfish.language.Language`
     :param int min_score: minimum score for a subtitle to be downloaded.
-    :param (bool | None) hearing_impaired: hearing impaired preference (yes/no/indifferent).
-    :param (bool | None) foreign_only: foreign only preference (yes/no/indifferent).
+    :param str subtitle_categories: ordered list of categories to download, omitted categories are filtered out.
+        Empty string corresponds to no filtering or sorting.
     :param bool skip_wrong_fps: skip subtitles with an FPS that do not match the video (False).
     :param bool only_one: download only one subtitle, not one per language.
     :param compute_score: function that takes `subtitle` and `video` as positional arguments,
@@ -841,8 +840,7 @@ def download_best_subtitles(
                 video,
                 languages,
                 min_score=min_score,
-                hearing_impaired=hearing_impaired,
-                foreign_only=foreign_only,
+                subtitle_categories=subtitle_categories,
                 skip_wrong_fps=skip_wrong_fps,
                 only_one=only_one,
                 compute_score=compute_score,

@@ -22,6 +22,7 @@ from subliminal import (
 from .commands import download
 from .helpers import (
     MutexLock,
+    check_parameters,
     options_from_providers,
     options_from_refiners,
     providers_config,
@@ -34,6 +35,9 @@ logger = logging.getLogger(__name__)
 def configure(ctx: click.Context, param: click.Parameter | None, filename: str | os.PathLike) -> None:
     """Update :class:`click.Context` based on a configuration file."""
     config = read_configuration(filename)
+
+    # Check for undefined parameters and deprecated parameters
+    check_parameters(ctx, config['default_map'])
 
     ctx.obj = config['obj']
     ctx.default_map = config['default_map']

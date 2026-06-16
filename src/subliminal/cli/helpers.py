@@ -24,7 +24,7 @@ from subliminal import (
 )
 
 if TYPE_CHECKING:
-    from collections.abc import Callable, MutableMapping, Sequence
+    from collections.abc import Callable, MutableMapping, Sequence, Set
 
     from subliminal.utils import Parameter
 
@@ -179,7 +179,7 @@ def _cleanup_parameter(param_name: str | None, *, exclude: bool = False, only: b
     :param bool only: only return the special auto-generated parameters (return an empty string otherwise).
     """
     # Deal with None
-    if not param_name:
+    if not param_name:  # pragma: no cover
         return ''
     try_split = param_name.split('__')
     if len(try_split) != 3:  # pragma: no cover
@@ -199,13 +199,13 @@ def _format_deprecated_suffix(deprecated: bool | str) -> str:
     """Format extra deprecations message."""
     if isinstance(deprecated, str):
         return f' {deprecated}'
-    return ''
+    return ''  # pragma: no cover
 
 
 def _check_command_params(
     ctx: click.Context,
-    ctx_params: Sequence[click.Parameter],
-    defined_params: Sequence[str],
+    ctx_params: Sequence[click.Parameter] | Set[click.Parameter],
+    defined_params: Sequence[str] | Set[str],
 ) -> None:
     """Check the parameters of a command."""
     valid_params = {p.name for p in ctx_params}
@@ -242,8 +242,8 @@ def _check_command_params(
 
 def _check_group_commands(
     ctx: click.Context,
-    ctx_commands: Sequence[click.Command],
-    defined_commands: Sequence[str],
+    ctx_commands: Sequence[click.Command] | Set[click.Parameter],
+    defined_commands: Sequence[str] | Set[str],
 ) -> None:  # pragma: no cover
     """Check the commands of a group."""
     valid_commands = {c.name for c in ctx_commands}

@@ -171,11 +171,24 @@ def read_configuration(filename: str | os.PathLike) -> dict[str, dict[str, Any]]
     }
 
 
-def _cleanup_parameter(param_name: str | None) -> str:
-    """Clean up constructed parameters."""
+def _cleanup_parameter(param_name: str | None, *, exclude: bool = False, only: bool = False) -> str:
+    """Clean up the special auto-generated parameter names.
+
+    :param (str | None) param_name: parameter name.
+    :param bool exclude: exclude (return an empty string) the special auto-generated parameters.
+    :param bool only: only return the special auto-generated parameters (return an empty string otherwise).
+    """
+    # Deal with None
+    if not param_name:
+        return ''
     try_split = param_name.split('__')
     if len(try_split) != 3:  # pragma: no cover
-        return param_name or ''
+        return param_name if not only else ''
+
+    # Exclude the provider/refiner parameters
+    if exclude:
+        return ''
+
     group, plugin, key = try_split
     # Remove leading underscore; the only possible groups are '_provider' and '_refiner'
     group = group.removeprefix('_')
@@ -196,13 +209,21 @@ def _check_command_params(
 ) -> None:
     """Check the parameters of a command."""
     valid_params = {p.name for p in ctx_params}
-    unknown_params = set(defined_params).difference(valid_params)
+    all_unknown_params = set(defined_params).difference(valid_params)
 
-    # Raise an error if a parameter in undefined
+    # Raise an error if a parameter is undefined (except provider/refiner options)
+    unknown_params = [clean_name for p in all_unknown_params if (clean_name := _cleanup_parameter(p, exclude=True))]
     if unknown_params:
-        unknown_params = [_cleanup_parameter(p) for p in unknown_params]
         msg = f'Invalid configuration file, the following keys are not supported: {unknown_params}'
         raise click.BadParameter(msg, ctx)
+
+    # Show a warning if a provider/refiner parameter is undefined
+    unknown_special_params = [
+        clean_name for p in all_unknown_params if (clean_name := _cleanup_parameter(p, only=True))
+    ]
+    if unknown_special_params:
+        msg = f'Warning: Unused entries in the configuration file: {unknown_special_params}'
+        click.echo(click.style(msg, fg='magenta'), err=True)
 
     # Show a deprecation warning if a parameter in deprecated
     deprecated_params = [p for p in ctx_params if p.name in defined_params and p.deprecated]

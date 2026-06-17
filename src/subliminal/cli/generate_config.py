@@ -93,7 +93,7 @@ def generate_default_config(*, compact: bool = True, commented: bool = True, wit
             continue
         if opt.name in ['version', 'config']:
             continue
-        if not with_deprecated and opt.deprecated:
+        if not with_deprecated and opt.deprecated:  # pragma: no cover
             continue
         # Add key=value to table
         _add_value_to_table(opt, default, commented=commented)

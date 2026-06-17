@@ -5,6 +5,7 @@ from typing import TYPE_CHECKING
 import pytest
 
 from subliminal.cli.helpers import (
+    _parse_auto_generated,
     get_argument_doc,
     get_parameters_from_signature,
     read_configuration,
@@ -104,3 +105,16 @@ def test_read_configuration_file_not_found(tmp_path: Path) -> None:
     conf = read_configuration(path)
     msg = 'Not using any configuration file'
     assert conf['obj']['debug_message'].startswith(msg)
+
+
+@pytest.mark.parametrize(
+    ('param', 'check'),
+    [
+        (None, False),
+        ('language', False),
+        ('_provider__opensubtitlescom__username', True),
+    ],
+)
+def test_parse_auto_generated(param: str, check: bool) -> None:
+    parsed = _parse_auto_generated(param)
+    assert (parsed is None) is not check

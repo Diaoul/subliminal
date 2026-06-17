@@ -460,6 +460,35 @@ def test_cli_download_with_config_with_option_error(cli_runner: CliRunner) -> No
         assert 'Value must be an iterable' in result.err
 
 
+def test_cli_download_with_config_with_undefined_option(cli_runner: CliRunner) -> None:
+    video_name = 'Marvels.Agents.of.S.H.I.E.L.D.S02E06.720p.HDTV.x264-KILLERS.mkv'
+
+    with cli_runner.isolated_filesystem():
+        with open('subliminal.toml', 'w') as f:
+            content = dedent(
+                """\
+                [default]
+                debug = false
+
+                [download]
+                language = ["en"]
+                # BadParameter: not defined
+                undefined_option = true
+
+                """
+            )
+            f.write(content)
+
+        result = cli_runner.run(
+            subliminal_cli,
+            ['--debug', '--config', 'subliminal.toml', 'download', video_name],
+        )
+
+        assert result.exit_code > 0
+        # Error in the config file is treated as an error in the CLI arguments
+        assert 'Invalid configuration file' in result.err
+
+
 def test_cli_download_with_generated_config(cli_runner: CliRunner) -> None:
     video_name = 'Marvels.Agents.of.S.H.I.E.L.D.S02E06.720p.HDTV.x264-KILLERS.mkv'
 

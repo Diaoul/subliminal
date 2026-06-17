@@ -171,23 +171,14 @@ def read_configuration(filename: str | os.PathLike) -> dict[str, dict[str, Any]]
     }
 
 
-def _cleanup_parameter(param_name: str | None, *, exclude: bool = False, only: bool = False) -> str:
-    """Clean up the special auto-generated parameter names.
-
-    :param (str | None) param_name: parameter name.
-    :param bool exclude: exclude (return an empty string) the special auto-generated parameters.
-    :param bool only: only return the special auto-generated parameters (return an empty string otherwise).
-    """
+def _parse_auto_generated(param_name: str | None) -> str | None:
+    """Parse special auto-generated parameters, return None if it's a normal parameter."""
     # Deal with None
-    if not param_name:  # pragma: no cover
-        return ''
+    if not param_name:
+        return None
     try_split = param_name.split('__')
-    if len(try_split) != 3:  # pragma: no cover
-        return param_name if not only else ''
-
-    # Exclude the provider/refiner parameters
-    if exclude:
-        return ''
+    if len(try_split) != 3:
+        return None
 
     group, plugin, key = try_split
     # Remove leading underscore; the only possible groups are '_provider' and '_refiner'
@@ -209,20 +200,26 @@ def _check_command_params(
 ) -> None:
     """Check the parameters of a command."""
     valid_params = {p.name for p in ctx_params}
-    all_unknown_params = set(defined_params).difference(valid_params)
+    unknown_params = set(defined_params).difference(valid_params)
 
-    # Raise an error if a parameter is undefined (except provider/refiner options)
-    unknown_params = [clean_name for p in all_unknown_params if (clean_name := _cleanup_parameter(p, exclude=True))]
-    if unknown_params:
-        msg = f'Invalid configuration file, the following keys are not supported: {unknown_params}'
+    # Split normal parameters and special auto-generated provider/refiner parameters
+    unknown_error_params = []
+    unknown_warning_params = []
+    for p in unknown_params:
+        parsed = _parse_auto_generated(p)
+        if parsed is None:
+            unknown_error_params.append(p)
+        else:
+            unknown_warning_params.append(parsed)
+
+    # Raise an error if a normal parameter is undefined
+    if unknown_error_params:
+        msg = f'Invalid configuration file, the following keys are not supported: {unknown_error_params}'
         raise click.BadParameter(msg, ctx)
 
-    # Show a warning if a provider/refiner parameter is undefined
-    unknown_special_params = [
-        clean_name for p in all_unknown_params if (clean_name := _cleanup_parameter(p, only=True))
-    ]
-    if unknown_special_params:
-        msg = f'Warning: Unused entries in the configuration file: {unknown_special_params}'
+    # Show a warning if a special auto-generated provider/refiner parameter is undefined
+    if unknown_warning_params:
+        msg = f'Warning: Unused entries in the configuration file: {unknown_warning_params}'
         click.echo(click.style(msg, fg='magenta'), err=True)
 
     # Show a deprecation warning if a parameter in deprecated

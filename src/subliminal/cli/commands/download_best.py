@@ -258,6 +258,7 @@ REFINER = click.Choice(['ALL', *sorted(refiner_manager.names())])
 @click.option(
     '-C',
     '--subtitle-categories',
+    type=click.STRING,
     default='',
     help=(
         'Comma-separated ordered list of subtitle categories to download. Skip one or two categories to filter out '

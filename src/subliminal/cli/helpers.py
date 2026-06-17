@@ -205,10 +205,10 @@ def _check_command_params(
     # Split normal parameters and special auto-generated provider/refiner parameters
     unknown_error_params = []
     unknown_warning_params = []
-    for p in unknown_params:
-        parsed = _parse_auto_generated(p)
+    for param_name in unknown_params:
+        parsed = _parse_auto_generated(param_name)
         if parsed is None:
-            unknown_error_params.append(p)
+            unknown_error_params.append(param_name)
         else:
             unknown_warning_params.append(parsed)
 

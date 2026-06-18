@@ -45,7 +45,7 @@ jobs:
       && github.event.action == 'published'
     steps:
       - name: Download packages built by build-and-inspect-python-package
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: Packages
           path: dist

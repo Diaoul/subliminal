@@ -115,8 +115,10 @@ def generate_default_config(*, compact: bool = True, commented: bool = True, wit
                 continue
             if not isinstance(opt, click.Option):
                 continue
-            if opt.name in existing_options:
+            if opt.name in existing_options:  # pragma: no cover
                 # Duplicated option
+                continue
+            if not with_deprecated and opt.deprecated:  # pragma: no cover
                 continue
             # Add key=value to table
             opt_name = _add_value_to_table(opt, com_table, commented=commented)
@@ -140,6 +142,8 @@ def generate_default_config(*, compact: bool = True, commented: bool = True, wit
         provider_tables: dict[str, tomlkit.items.Table] = {}
         for opt in provider_options:
             if opt.name is None:  # pragma: no cover
+                continue
+            if not with_deprecated and opt.deprecated:  # pragma: no cover
                 continue
             _, provider, opt_name = opt.name.split('__')
             provider_table = provider_tables.setdefault(provider, tomlkit.table())

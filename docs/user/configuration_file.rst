@@ -12,7 +12,7 @@ Sections
 
 The configuration file supports different sections or tables:
 
-    - a ``[default]`` table, corresponding to the options of the :ref:`cli-subliminal-download` command.
+    - a ``[default]`` table, corresponding to the options of the :ref:`cli-subliminal` command.
 
     - ``[refiner.<refiner_name>]`` and ``[provider.<provider_name>]`` tables to specify refiner and provider options.
 
@@ -24,9 +24,16 @@ CLI arguments (like ``path``) cannot be specified in the configuration file.
 
 Options that can be used multiple times (like ``--language``) need to be defined as arrays.
 
-``hearing_impaired`` and ``foreign_only`` can take three values: "true", "false" or "[]".
-They mean that hearing impaired (or foreign-only) subtitles will be, respectively,
-ranked first, ranked last or not given any particular rank, for subtitles with identical scores.
+Hyphens in parameter names need to be substituted by underscores in the config file:
+``--cache-dir=/tmp`` → ``cache_dir = "/tmp"``.
+
+.. note::
+    ``hearing_impaired`` and ``foreign_only`` can take three values: "true", "false" or "[]".
+    They mean that hearing impaired (or foreign-only) subtitles will be, respectively,
+    ranked first, ranked last or not given any particular rank, for subtitles with identical scores.
+
+    .. deprecated:: 2.7.04
+        Use ``--subtitle-categories`` instead.
 
 
 Example

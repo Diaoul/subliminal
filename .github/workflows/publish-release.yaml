@@ -31,12 +31,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         if: github.event_name == 'push'
         with:
           persist-credentials: false
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         if: |
           github.event_name == 'workflow_dispatch'
           || github.event_name == 'workflow_call'
@@ -63,19 +63,19 @@ jobs:
     # Publish a Github release when a tag was pushed, or it's called with a tag.
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-tags: true
           ref: ${{ needs.build-package.outputs.tag }}
           persist-credentials: false
 
       - name: Download packages built by build-and-inspect-python-package
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: Packages
           path: dist
       - name: Publish GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           files: dist/*
           generate_release_notes: true

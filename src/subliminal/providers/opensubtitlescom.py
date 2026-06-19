@@ -691,7 +691,7 @@ class OpenSubtitlesComProvider(Provider):
         return self.query(
             languages,
             moviehash=video.hashes.get('opensubtitles'),
-            imdb_id=video.imdb_id,
+            imdb_id=video.external_ids.get('imdb_id'),
             query=query,
             season=season,
             episode=episode,

@@ -207,18 +207,18 @@ class OMDBClient:
         self.session.params['apikey'] = self.apikey  # type: ignore[index]
 
 
-def refine_episode(client: OMDBClient, video: Episode, *, force: bool = False, **kwargs: Any) -> None:
+def refine_episode(client: OMDBClient, video: Episode, *, force: bool = False, **kwargs: Any) -> dict[str, Any]:
     """Refine an Episode by searching `OMDb API <https://omdbapi.com/>`_."""
     # exit if the information is complete
-    if not force and video.series_imdb_id and video.imdb_id:  # pragma: no cover
+    if not force and video.external_ids.get('series_imdb_id') and video.external_ids.get('imdb_id'):  # pragma: no cover
         logger.debug('No need to search, IMDB ids already exist for the video.')
-        return
+        return {}
 
     # search the series
     results = client.search_all(video.series, is_movie=False, year=video.year)
     if not results:  # pragma: no cover
         logger.warning('No results for series')
-        return
+        return {}
     logger.debug('Found %d results', len(results))
 
     # filter the results, only if multiple results
@@ -226,7 +226,7 @@ def refine_episode(client: OMDBClient, video: Episode, *, force: bool = False, *
         results = [r for r in results if video.matches(r['Title'])]
         if not results:  # pragma: no cover
             logger.warning('No matching series found')
-            return
+            return {}
 
     # process the results
     for result in sorted(results, key=operator.itemgetter('Year')):
@@ -239,27 +239,29 @@ def refine_episode(client: OMDBClient, video: Episode, *, force: bool = False, *
             break
     else:
         logger.warning('No matching series found')
-        return
+        return {}
 
     # add series information
     logger.debug('Found series %r', result)
-    video.series = result['Title']
-    video.year = split_year_omdb(result['Year'])
-    video.series_imdb_id = decorate_imdb_id(sanitize_id(result['imdbID']))
+    return {
+        'series': result['Title'],
+        'year': split_year_omdb(result['Year']),
+        'external_ids': {'series_imdb_id': decorate_imdb_id(sanitize_id(result['imdbID']))},
+    }
 
 
-def refine_movie(client: OMDBClient, video: Movie, *, force: bool = False, **kwargs: Any) -> None:
+def refine_movie(client: OMDBClient, video: Movie, *, force: bool = False, **kwargs: Any) -> dict[str, Any]:
     """Refine a Movie by searching `OMDb API <https://omdbapi.com/>`_."""
     # exit if the information is complete
-    if not force and video.imdb_id:  # pragma: no cover
+    if not force and video.external_ids.get('imdb_id'):  # pragma: no cover
         logger.debug('No need to search, IMDB ids already exist for the video.')
-        return
+        return {}
 
     # search the movie
     results = client.search_all(video.title, is_movie=True, year=video.year)
     if not results:  # pragma: no cover
         logger.warning('No results for movie')
-        return
+        return {}
     logger.debug('Found %d results', len(results))
 
     # filter the results, only if multiple results
@@ -267,7 +269,7 @@ def refine_movie(client: OMDBClient, video: Movie, *, force: bool = False, **kwa
         results = [r for r in results if video.matches(r['Title'])]
         if not results:  # pragma: no cover
             logger.warning('No matching movie found')
-            return
+            return {}
 
     # process the results
     for result in results:
@@ -280,13 +282,15 @@ def refine_movie(client: OMDBClient, video: Movie, *, force: bool = False, **kwa
             break
     else:  # pragma: no cover
         logger.warning('No matching movie found')
-        return
+        return {}
 
     # add movie information
     logger.debug('Found movie %r', result)
-    video.title = result['Title']
-    video.year = split_year_omdb(result['Year'])
-    video.imdb_id = decorate_imdb_id(sanitize_id(result['imdbID']))
+    return {
+        'title': result['Title'],
+        'year': split_year_omdb(result['Year']),
+        'external_ids': {'imdb_id': decorate_imdb_id(sanitize_id(result['imdbID']))},
+    }
 
 
 #: Default client
@@ -300,13 +304,13 @@ def refine(video: Video, *, apikey: str | None = None, force: bool = False, **kw
 
       * :attr:`~subliminal.video.Episode.series`
       * :attr:`~subliminal.video.Episode.year`
-      * :attr:`~subliminal.video.Episode.series_imdb_id`
+      * :attr:`~subliminal.video.Episode.external_ids['series_imdb_id']`
 
     Similarly, for a :class:`~subliminal.video.Movie`:
 
       * :attr:`~subliminal.video.Movie.title`
       * :attr:`~subliminal.video.Movie.year`
-      * :attr:`~subliminal.video.Video.imdb_id`
+      * :attr:`~subliminal.video.Video.external_ids['imdb_id']`
 
     :param Video video: the Video to refine.
     :param (str | None) apikey: a personal API key to use OMDb.
@@ -320,10 +324,12 @@ def refine(video: Video, *, apikey: str | None = None, force: bool = False, **kw
 
     # refine for Episode
     if isinstance(video, Episode):
-        refine_episode(omdb_client, video, force=force, **kwargs)
+        update = refine_episode(omdb_client, video, force=force, **kwargs)
+        video.update(update)
 
     # refine for Movie
     elif isinstance(video, Movie):  # pragma: no branch
-        refine_movie(omdb_client, video, force=force, **kwargs)
+        update = refine_movie(omdb_client, video, force=force, **kwargs)
+        video.update(update)
 
     return video

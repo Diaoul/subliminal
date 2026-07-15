@@ -121,7 +121,7 @@ class Video:
     country: Country | None
 
     #: External ids of the video from different databases (IMDb, TMDB, ...)
-    external_ids: str | None
+    external_ids: MovieExternalIds
 
     #: Use the latest of creation time and modification time for the video age
     use_ctime: bool
@@ -257,6 +257,9 @@ class Episode(Video):
     #: Alternative names of the series
     alternative_series: list[str]
 
+    #: External ids of the video from different databases (IMDb, TMDB, ...)
+    external_ids: EpisodeExternalIds
+
     def __init__(
         self,
         name: str,
@@ -376,6 +379,9 @@ class Movie(Video):
 
     #: Alternative titles of the movie
     alternative_titles: list[str]
+
+    #: External ids of the video from different databases (IMDb, TMDB, ...)
+    external_ids: MovieExternalIds
 
     def __init__(
         self,

@@ -33,7 +33,7 @@ from subliminal.core import (
 )
 from subliminal.exceptions import GuessingError
 from subliminal.extensions import get_default_providers, get_default_refiners
-from subliminal.utils import merge_extend_and_ignore_unions
+from subliminal.utils import NameResolver, merge_extend_and_ignore_unions
 
 from ._format import AgeParamType, LanguageParamType, plural
 
@@ -333,7 +333,11 @@ REFINER = click.Choice(['ALL', *sorted(refiner_manager.names())])
     metavar='NAME',
     help=(
         'Name used instead of the path name for guessing information about the file. '
-        'If used with multiple paths or a directory, `name` is passed to ALL the files.'
+        'If used with multiple paths or a directory, `name` is passed to ALL the files. '
+        'NAME may also be a sed-like substitution `s/pattern/replacement/flags`, applied '
+        r'to each file path individually: back-references (\1, \2, ...) are available in '
+        'the replacement, `&` is a literal character (unlike in sed) and the `g` (replace all) and `i` '
+        '(case-insensitive) flags are supported.'
     ),
 )
 @click.option('-v', '--verbose', count=True, help='Increase verbosity.')
@@ -390,6 +394,12 @@ def download(
     # no subtitle_format specified, default to None Also convert to None --subtitle_format=''
     if not subtitle_format or subtitle_format in ['""', "''"]:
         subtitle_format = None
+
+    # build the per-file name resolver (static name or sed-like substitution)
+    try:
+        name_resolver = NameResolver(name)
+    except ValueError as e:
+        raise click.BadParameter(str(e), param_hint='--name') from e
 
     # TODO: deprecate
     # subtitle category
@@ -468,14 +478,16 @@ def download(
             video_candidates: list[Video] = []
             for filepath in collected_filepaths:
                 # Try scanning the video at path
-                video = scan_video_path(filepath, absolute_path=absolute_path, name=name, verbose=verbose, debug=debug)
+                video = scan_video_path(
+                    filepath, absolute_path=absolute_path, name=name_resolver, verbose=verbose, debug=debug
+                )
                 if video is None:
                     # Fallback to scanning with absolute path
                     if use_absolute_path == 'fallback':
                         video = scan_video_path(
                             filepath,
                             absolute_path=True,
-                            name=name,
+                            name=name_resolver,
                             verbose=verbose,
                             debug=debug,
                         )
@@ -646,7 +658,7 @@ def download(
 def scan_video_path(
     filepath: str | os.PathLike[str],
     *,
-    name: str | None = None,
+    name: str | NameResolver | None = None,
     absolute_path: bool = False,
     verbose: int = 0,
     debug: bool = False,
@@ -656,11 +668,13 @@ def scan_video_path(
     # Take the absolute path, and only if the path exists
     if absolute_path and exists:
         filepath = os.path.abspath(filepath)
+    # Resolve the name for this specific file, after the conversion to absolute path
+    file_name = name(filepath) if isinstance(name, NameResolver) else name
     # Used for print
-    filepath_or_name = f'{filepath} ({name})' if name else filepath
+    filepath_or_name = f'{filepath} ({file_name})' if file_name else filepath
 
     try:
-        video = scan_path(filepath, name=name)
+        video = scan_path(filepath, name=file_name)
 
     except GuessingError as e:
         logger.exception(

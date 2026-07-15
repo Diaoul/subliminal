@@ -52,6 +52,31 @@ See :ref:`cli` for more details on the available commands and options.
         $ python -m subliminal download -h
 
 
+Parameterized name
+^^^^^^^^^^^^^^^^^^^
+
+The ``--name/-n`` option lets you override the file name that is used to guess information about a video.
+In addition to a static alternative name, you can use a
+`sed <https://www.man7.org/linux/man-pages/man1/sed.1.html>`_-like substitution pattern
+``s/pattern/replacement/flags`` to override the names of all the files in a folder.
+The pattern needs to be a valid Python regex. Back-references (``\1``, ``\2``, …) are available in the
+replacement, and the ``g`` (replace all occurrences) and ``i`` (case-insensitive) flags are supported::
+
+    $ subliminal download -l pl \
+        --name 's/.*YP-1R-([0-9]+)x([0-9]+).*/My Little Pony Friendship Is Magic S\1E\2.mkv/' \
+        */YP-1R-*.mkv
+
+Unlike sed, ``&`` is a literal character (not the whole match), so titles containing an ampersand need
+no escaping::
+
+    $ subliminal download -l pl \
+        --name 's/.*_-_([0-9]+)_.*/Panty & Stocking with Garterbelt S01E\1.mkv/' \
+        *Garterbelt_-_*.mkv
+
+The substitution is applied to the path of each file (after the optional conversion to an absolute path
+with ``--use-absolute-path``), so the pattern can also match parent directories. Any file whose path does
+not match is left untouched and scanned as-is.
+
 Nautilus/Nemo integration
 -------------------------
 See the dedicated `project page <https://github.com/Diaoul/nautilus-subliminal>`_ for more information.

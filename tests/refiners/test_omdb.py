@@ -124,7 +124,7 @@ def test_refine_episode(episodes: dict[str, Episode]) -> None:
     refine(episode, apikey=TEST_OMDB_API_KEY)
     assert episode.series == episodes['bbt_s07e05'].series
     assert episode.year == episodes['bbt_s07e05'].year
-    assert episode.series_imdb_id == episodes['bbt_s07e05'].series_imdb_id
+    assert episode.external_ids['series_imdb_id'] == episodes['bbt_s07e05'].external_ids['series_imdb_id']
 
 
 @pytest.mark.integration
@@ -139,7 +139,7 @@ def test_refine_episode_original_series(episodes: dict[str, Episode]) -> None:
     refine(episode, apikey=TEST_OMDB_API_KEY)
     assert episode.series == episodes['dallas_s01e03'].series
     assert episode.year == 1978
-    assert episode.series_imdb_id == 'tt0077000'
+    assert episode.external_ids['series_imdb_id'] == 'tt0077000'
 
 
 @pytest.mark.integration
@@ -156,7 +156,7 @@ def test_refine_episode_year(episodes: dict[str, Episode]) -> None:
     refine(episode, apikey=TEST_OMDB_API_KEY)
     assert episode.series == episodes['dallas_2012_s01e03'].series
     assert episode.year == episodes['dallas_2012_s01e03'].year
-    assert episode.series_imdb_id == 'tt1723760'
+    assert episode.external_ids['series_imdb_id'] == 'tt1723760'
 
 
 @pytest.mark.integration
@@ -167,7 +167,7 @@ def test_refine_movie(movies: dict[str, Movie]) -> None:
     refine(movie, apikey=TEST_OMDB_API_KEY)
     assert movie.title == original_movie.title
     assert movie.year == original_movie.year
-    assert movie.imdb_id == original_movie.imdb_id
+    assert movie.external_ids['imdb_id'] == original_movie.external_ids['imdb_id']
 
 
 @pytest.mark.integration
@@ -178,7 +178,7 @@ def test_refine_movie_guess_alternative_title(movies: dict[str, Movie]) -> None:
     refine(movie, apikey=TEST_OMDB_API_KEY)
     assert movie.title == original_movie.title
     assert movie.year == original_movie.year
-    assert movie.imdb_id == original_movie.imdb_id
+    assert movie.external_ids['imdb_id'] == original_movie.external_ids['imdb_id']
 
 
 @pytest.mark.integration
@@ -189,7 +189,7 @@ def test_refine_episode_with_country(episodes: dict[str, Episode]) -> None:
     refine(episode, apikey=TEST_OMDB_API_KEY)
     # omdb has no country info. No match
     assert episode.series == video_series
-    assert episode.series_imdb_id is None
+    assert episode.external_ids.get('series_imdb_id') is None
 
 
 @pytest.mark.integration
@@ -200,4 +200,4 @@ def test_refine_episode_with_country_hoc_us(episodes: dict[str, Episode]) -> Non
     refine(episode, apikey=TEST_OMDB_API_KEY)
     # omdb has no country info. No match
     assert episode.series == video_series
-    assert episode.series_imdb_id is None
+    assert episode.external_ids.get('series_imdb_id') is None

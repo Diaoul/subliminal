@@ -96,12 +96,12 @@ def test_video_fromname_movie(movies: dict[str, Movie]) -> None:
     assert video.resolution == movies['man_of_steel'].resolution
     assert video.video_codec == movies['man_of_steel'].video_codec
     assert video.audio_codec is None
-    assert video.imdb_id is None
     assert video.hashes == {}
     assert video.size is None
     assert video.subtitle_languages == set()
     assert video.title == movies['man_of_steel'].title
     assert video.year == movies['man_of_steel'].year
+    assert not video.external_ids
 
 
 def test_video_fromname_episode(episodes: dict[str, Episode]) -> None:
@@ -113,7 +113,6 @@ def test_video_fromname_episode(episodes: dict[str, Episode]) -> None:
     assert video.resolution == episodes['bbt_s07e05'].resolution
     assert video.video_codec == episodes['bbt_s07e05'].video_codec
     assert video.audio_codec is None
-    assert video.imdb_id is None
     assert video.hashes == {}
     assert video.size is None
     assert video.subtitle_languages == set()
@@ -122,7 +121,7 @@ def test_video_fromname_episode(episodes: dict[str, Episode]) -> None:
     assert video.episode == episodes['bbt_s07e05'].episode
     assert video.title is None
     assert video.year is None
-    assert video.tvdb_id is None
+    assert not video.external_ids
 
 
 def test_video_fromname_episode_no_season(episodes: dict[str, Episode]) -> None:
@@ -134,7 +133,6 @@ def test_video_fromname_episode_no_season(episodes: dict[str, Episode]) -> None:
     assert video.resolution == episodes['the_jinx_e05'].resolution
     assert video.video_codec == episodes['the_jinx_e05'].video_codec
     assert video.audio_codec is None
-    assert video.imdb_id is None
     assert video.hashes == {}
     assert video.size is None
     assert video.subtitle_languages == set()
@@ -143,7 +141,7 @@ def test_video_fromname_episode_no_season(episodes: dict[str, Episode]) -> None:
     assert video.episode == episodes['the_jinx_e05'].episode
     assert video.title is None
     assert video.year is None
-    assert video.tvdb_id is None
+    assert not video.external_ids
 
 
 def test_video_hash(episodes: dict[str, Episode]) -> None:
@@ -212,12 +210,12 @@ def test_movie_fromname(movies: dict[str, Movie]) -> None:
     assert video.resolution == movies['man_of_steel'].resolution
     assert video.video_codec == movies['man_of_steel'].video_codec
     assert video.audio_codec is None
-    assert video.imdb_id is None
     assert video.hashes == {}
     assert video.size is None
     assert video.subtitle_languages == set()
     assert video.title == movies['man_of_steel'].title
     assert video.year == movies['man_of_steel'].year
+    assert not video.external_ids
 
 
 def test_episode_fromname(episodes: dict[str, Episode]) -> None:
@@ -229,7 +227,6 @@ def test_episode_fromname(episodes: dict[str, Episode]) -> None:
     assert video.resolution == episodes['bbt_s07e05'].resolution
     assert video.video_codec == episodes['bbt_s07e05'].video_codec
     assert video.audio_codec is None
-    assert video.imdb_id is None
     assert video.hashes == {}
     assert video.size is None
     assert video.subtitle_languages == set()
@@ -238,7 +235,7 @@ def test_episode_fromname(episodes: dict[str, Episode]) -> None:
     assert video.episode == episodes['bbt_s07e05'].episode
     assert video.title is None
     assert video.year is None
-    assert video.tvdb_id is None
+    assert not video.external_ids
 
 
 @pytest.mark.skipif(

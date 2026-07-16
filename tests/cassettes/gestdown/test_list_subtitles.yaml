@@ -3,111 +3,57 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, zstd
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.2
+      - Subliminal/2.6
       accept:
       - application/json
     method: GET
-    uri: https://api.gestdown.info/shows/external/tvdb/80379
+    uri: https://api.gestdown.info/shows/search/The%20Big%20Bang%20Theory
   response:
     body:
       string: '{"shows":[{"id":"91eb9278-8cf5-4ddd-9111-7f60b15958cb","name":"The
         Big Bang Theory","nbSeasons":12,"seasons":[1,2,3,4,5,6,7,8,9,10,11,12],"tvDbId":80379,"tmdbId":1418,"slug":"the-big-bang-theory"}]}'
     headers:
+      Age:
+      - '48140'
       CF-RAY:
-      - 91189a2c7e195be2-LIS
+      - a1bcc3903c5a62e8-LIS
       Cache-Control:
       - public, max-age=14400
-      Connection:
-      - keep-alive
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 13 Feb 2025 23:29:44 GMT
-      NEL:
-      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
-      Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=TBqtJCUBHJjflwfVfD0GxgG1poLQUOeMLoGrQk8ZL3EsDqeklyMTlb4Au44bG1wIe1tXMrYzRZnqPMhhnOxn%2BsH8mdPo8SWUVamyvS3afrGKiIjB%2Bz2e1V9hIbVovnrgnk5OTw%3D%3D"}],"group":"cf-nel","max_age":604800}'
-      Server:
-      - cloudflare
-      Strict-Transport-Security:
-      - max-age=15552000; includeSubDomains; preload
-      Transfer-Encoding:
-      - chunked
-      X-Content-Type-Options:
-      - nosniff
-      alt-svc:
-      - h3=":443"; ma=86400
-      cf-cache-status:
+      Cf-Cache-Status:
       - HIT
-      content-length:
-      - '198'
-      last-modified:
-      - Wed, 12 Feb 2025 22:02:09 GMT
-      server-timing:
-      - cfL4;desc="?proto=TCP&rtt=2923&min_rtt=2660&rtt_var=1185&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2847&recv_bytes=797&delivery_rate=1088721&cwnd=183&unsent_bytes=0&cid=78d7e778b9ec78f4&ts=73&x=0"
-      vary:
-      - Accept-Encoding
-      - Accept-Encoding
-    status:
-      code: 200
-      message: OK
-- request:
-    body: null
-    headers:
-      Accept-Encoding:
-      - gzip, deflate
       Connection:
       - keep-alive
-      User-Agent:
-      - Subliminal/2.2
-      accept:
-      - application/json
-    method: GET
-    uri: https://api.gestdown.info/subtitles/get/91eb9278-8cf5-4ddd-9111-7f60b15958cb/7/5/deu
-  response:
-    body:
-      string: '{"matchingSubtitles":[{"subtitleId":"712de981-a7cc-4ce0-842c-0da9a06d1472","version":"LOL","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/712de981-a7cc-4ce0-842c-0da9a06d1472","language":"German","discovered":"2022-05-30T14:51:00.621711Z","downloadCount":101}],"episode":{"season":7,"number":5,"title":"The
-        Workplace Proximity","show":"The Big Bang Theory","discovered":"2022-05-30T14:51:00.621694Z"}}'
-    headers:
-      CF-Cache-Status:
-      - EXPIRED
-      CF-RAY:
-      - 91189a2d0afb5be0-LIS
-      Cache-Control:
-      - public, max-age=7200
-      Connection:
-      - keep-alive
+      Content-Encoding:
+      - zstd
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 13 Feb 2025 23:29:44 GMT
+      - Thu, 16 Jul 2026 00:06:57 GMT
       Last-Modified:
-      - Thu, 13 Feb 2025 23:29:44 GMT
-      NEL:
-      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      - Thu, 16 Jul 2026 00:06:53 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=5L0OhTKKJjIbpxQzWqLptudRs4FRkouH8noYL5R4%2B5aXrihoPLNY4gYIp0P1wEHzej0ZI60tFZPrCm192tCRC6Owvv4%2FxZXFr4tNJTET37fbGju7W2VzIRmAFVztzyqH%2B3EEYA%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=bRuW5S7e9qa0ew6qrZ35T0JgWBYB54snbaWCN%2BI%2Bm7pbXrOf%2FTqQCPWGAwnYQTSb7xOKrs0GuLxIAOvye04bMcszPw%2FQx%2F3amyHp4De8OTE2O%2BJzs7dFlUnUafKzfXJ8WZlxAQ%3D%3D"}]}'
       Server:
       - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
       Strict-Transport-Security:
       - max-age=15552000; includeSubDomains; preload
       Transfer-Encoding:
       - chunked
+      Vary:
+      - Accept-Encoding
+      - Accept-Encoding
       X-Content-Type-Options:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
-      content-length:
-      - '457'
-      server-timing:
-      - cfL4;desc="?proto=TCP&rtt=2816&min_rtt=1679&rtt_var=1442&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2848&recv_bytes=830&delivery_rate=1724836&cwnd=247&unsent_bytes=0&cid=e24706222a959bff&ts=85&x=0"
-      vary:
-      - Accept-Encoding
-      - Accept-Encoding
     status:
       code: 200
       message: OK
@@ -115,55 +61,111 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, zstd
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.2
+      - Subliminal/2.6
       accept:
       - application/json
     method: GET
     uri: https://api.gestdown.info/subtitles/get/91eb9278-8cf5-4ddd-9111-7f60b15958cb/7/5/fra
   response:
     body:
-      string: '{"matchingSubtitles":[{"subtitleId":"90fe1369-fa0c-4154-bd04-d3d332dec587","version":"DIMENSION","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/90fe1369-fa0c-4154-bd04-d3d332dec587","language":"French","discovered":"2022-05-30T14:51:00.621699Z","downloadCount":168}],"episode":{"season":7,"number":5,"title":"The
+      string: '{"matchingSubtitles":[{"subtitleId":"90fe1369-fa0c-4154-bd04-d3d332dec587","version":"DIMENSION","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/90fe1369-fa0c-4154-bd04-d3d332dec587","language":"French","discovered":"2022-05-30T14:51:00.621699Z","downloadCount":237,"source":"Addic7ed","qualities":["720p","1080p"],"release":null}],"episode":{"season":7,"number":5,"title":"The
         Workplace Proximity","show":"The Big Bang Theory","discovered":"2022-05-30T14:51:00.621694Z"}}'
     headers:
-      CF-Cache-Status:
-      - EXPIRED
       CF-RAY:
-      - 91189a2d9f375bd4-LIS
+      - a1bcc390ba68e3b0-LIS
       Cache-Control:
       - public, max-age=7200
+      Cf-Cache-Status:
+      - MISS
       Connection:
       - keep-alive
+      Content-Encoding:
+      - zstd
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 13 Feb 2025 23:29:44 GMT
+      - Thu, 16 Jul 2026 00:06:57 GMT
       Last-Modified:
-      - Thu, 13 Feb 2025 23:29:44 GMT
-      NEL:
-      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      - Thu, 16 Jul 2026 00:06:57 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=dXlJiIh5qP4moTRjg2ts5bcWkQQoTWNDr5Z6Nai%2BXqDYh18QH0PXdEth4U%2FjUJIzAlg40CVFdCz5TMEsn8%2F8839EdNaaA%2FZU5sTYowwitRtfGabo2bF5FbCgDX1dVNYq0gM8qg%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=L6xnosFAjVeLIr4eNxskb527VWwFlrgZ6P%2FZqQ%2Ba9JdHEkDZWTCF8E5r2cJpc8NphSoaLSrKumgfwlj2cb5mcpWQgBQrQ%2F0izILV5LrbX5Ujl%2FwwoBkqSTWrXmMbRx0xDgmqvw%3D%3D"}]}'
       Server:
       - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
       Strict-Transport-Security:
       - max-age=15552000; includeSubDomains; preload
       Transfer-Encoding:
       - chunked
+      Vary:
+      - Accept-Encoding
+      - Accept-Encoding
       X-Content-Type-Options:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
-      content-length:
-      - '463'
-      server-timing:
-      - cfL4;desc="?proto=TCP&rtt=3019&min_rtt=2977&rtt_var=1201&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2846&recv_bytes=830&delivery_rate=873341&cwnd=241&unsent_bytes=0&cid=5673fd900626514f&ts=92&x=0"
-      vary:
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept-Encoding:
+      - gzip, deflate, zstd
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.6
+      accept:
+      - application/json
+    method: GET
+    uri: https://api.gestdown.info/subtitles/get/91eb9278-8cf5-4ddd-9111-7f60b15958cb/7/5/deu
+  response:
+    body:
+      string: '{"matchingSubtitles":[{"subtitleId":"712de981-a7cc-4ce0-842c-0da9a06d1472","version":"LOL","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/712de981-a7cc-4ce0-842c-0da9a06d1472","language":"German","discovered":"2022-05-30T14:51:00.621711Z","downloadCount":161,"source":"Addic7ed","qualities":["720p","1080p"],"release":null}],"episode":{"season":7,"number":5,"title":"The
+        Workplace Proximity","show":"The Big Bang Theory","discovered":"2022-05-30T14:51:00.621694Z"}}'
+    headers:
+      CF-RAY:
+      - a1bcc3918bdd0b12-LIS
+      Cache-Control:
+      - public, max-age=7200
+      Cf-Cache-Status:
+      - MISS
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - zstd
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 16 Jul 2026 00:06:57 GMT
+      Last-Modified:
+      - Thu, 16 Jul 2026 00:06:57 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=HQ2neIVFiWV0v2GIbZsvvn2F%2Fm6osxd9qOnXBicQ6jautQnBl7heuHh2jT76%2BzVIs8ApQc5gQ%2BARR0NeD62twVn2i%2BeMrmboWFYEeZNamZoRld667Osxs1hG46A5x968h3Q20A%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      Vary:
       - Accept-Encoding
       - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      alt-svc:
+      - h3=":443"; ma=86400
     status:
       code: 200
       message: OK

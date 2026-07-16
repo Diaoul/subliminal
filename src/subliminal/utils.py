@@ -379,10 +379,10 @@ def sanitize_release_group(string: str) -> str:
 
 
 @none_passthrough
-def sanitize_id(id_: str | int) -> int:
+def sanitize_id(id_: str | int) -> str:
     """Sanitize the IMDB (or other) id and transform it to a string (without leading 'tt' or zeroes)."""
     id_ = str(id_).lower().removeprefix('tt')
-    return int(id_)
+    return str(int(id_))
 
 
 @none_passthrough

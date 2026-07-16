@@ -142,12 +142,12 @@ def test_scan_video_movie(movies: dict[str, Movie], tmp_path: Path, monkeypatch:
     assert scanned_video.resolution == video.resolution
     assert scanned_video.video_codec == video.video_codec
     assert scanned_video.audio_codec is None
-    assert scanned_video.imdb_id is None
     assert scanned_video.hashes == {}
     assert scanned_video.size == 0
     assert scanned_video.subtitle_languages == set()
     assert scanned_video.title == video.title
     assert scanned_video.year == video.year
+    assert not scanned_video.external_ids
 
 
 def test_scan_video_episode(episodes: dict[str, Episode], tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
@@ -162,7 +162,6 @@ def test_scan_video_episode(episodes: dict[str, Episode], tmp_path: Path, monkey
     assert scanned_video.resolution == video.resolution
     assert scanned_video.video_codec == video.video_codec
     assert scanned_video.audio_codec is None
-    assert scanned_video.imdb_id is None
     assert scanned_video.hashes == {}
     assert scanned_video.size == 0
     assert scanned_video.subtitle_languages == set()
@@ -171,7 +170,7 @@ def test_scan_video_episode(episodes: dict[str, Episode], tmp_path: Path, monkey
     assert scanned_video.episode == video.episode
     assert scanned_video.title is None
     assert scanned_video.year is None
-    assert scanned_video.tvdb_id is None
+    assert not scanned_video.external_ids
 
 
 def test_scan_video_path_does_not_exist(
@@ -213,12 +212,12 @@ def test_scan_video_broken(mkv: dict[str, str], tmp_path: Path, monkeypatch: pyt
     assert scanned_video.resolution is None
     assert scanned_video.video_codec is None
     assert scanned_video.audio_codec is None
-    assert scanned_video.imdb_id is None
     assert scanned_video.hashes == {}
     assert scanned_video.size == 512
     assert scanned_video.subtitle_languages == set()
     assert scanned_video.title == 'test1'
     assert scanned_video.year is None
+    assert not scanned_video.external_ids
 
 
 def test_scan_video_movie_name(movies: dict[str, Movie], mkv: dict[str, str]) -> None:
@@ -235,11 +234,11 @@ def test_scan_video_movie_name(movies: dict[str, Movie], mkv: dict[str, str]) ->
     assert scanned_video.resolution == video.resolution
     assert scanned_video.video_codec == video.video_codec
     assert scanned_video.audio_codec is None
-    assert scanned_video.imdb_id is None
     assert scanned_video.hashes == {}
     assert scanned_video.subtitle_languages == set()
     assert scanned_video.title == video.title
     assert scanned_video.year == video.year
+    assert not scanned_video.external_ids
 
 
 def test_scan_video_episode_name(episodes: dict[str, Episode], mkv: dict[str, str]) -> None:
@@ -256,7 +255,6 @@ def test_scan_video_episode_name(episodes: dict[str, Episode], mkv: dict[str, st
     assert scanned_video.resolution == video.resolution
     assert scanned_video.video_codec == video.video_codec
     assert scanned_video.audio_codec is None
-    assert scanned_video.imdb_id is None
     assert scanned_video.hashes == {}
     assert scanned_video.subtitle_languages == set()
     assert scanned_video.series == video.series
@@ -264,7 +262,7 @@ def test_scan_video_episode_name(episodes: dict[str, Episode], mkv: dict[str, st
     assert scanned_video.episode == video.episode
     assert scanned_video.title is None
     assert scanned_video.year is None
-    assert scanned_video.tvdb_id is None
+    assert not scanned_video.external_ids
 
 
 def test_scan_video_movie_name_path_does_not_exist(movies: dict[str, Movie]) -> None:
@@ -280,12 +278,12 @@ def test_scan_video_movie_name_path_does_not_exist(movies: dict[str, Movie]) -> 
     assert scanned_video.resolution == video.resolution
     assert scanned_video.video_codec == video.video_codec
     assert scanned_video.audio_codec is None
-    assert scanned_video.imdb_id is None
     assert scanned_video.hashes == {}
     assert scanned_video.size is None
     assert scanned_video.subtitle_languages == set()
     assert scanned_video.title == video.title
     assert scanned_video.year == video.year
+    assert not scanned_video.external_ids
 
 
 def test_scan_path(

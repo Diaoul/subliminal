@@ -3,11 +3,11 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, zstd
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.2
+      - Subliminal/2.6
       accept:
       - application/json
     method: GET
@@ -15,43 +15,44 @@ interactions:
   response:
     body:
       string: '{"shows":[{"id":"226d7f34-a9f5-4fe2-98d7-ecf944243714","name":"Dallas","nbSeasons":11,"seasons":[1,2,3,4,5,6,8,9,11,12,13],"tvDbId":77092,"tmdbId":40,"slug":"dallas"},{"id":"4e56a466-31a3-4b05-9696-671a1cd6954e","name":"Dallas
-        (2012)","nbSeasons":3,"seasons":[1,2,3],"tvDbId":242521,"tmdbId":37759,"slug":"dallas-2012"}]}'
+        (2012)","nbSeasons":3,"seasons":[1,2,3],"tvDbId":242521,"tmdbId":37759,"slug":"dallas-2012"},{"id":"019c78ec-2ced-73ba-83b6-02a3c8c99a8c","name":"America''s
+        Sweethearts: Dallas Cowboys Cheerleaders","nbSeasons":2,"seasons":[1,3],"tvDbId":449142,"tmdbId":252257,"slug":"americas-sweethearts-dallas-cowboys-cheerleaders"}]}'
     headers:
-      CF-Cache-Status:
-      - MISS
       CF-RAY:
-      - 91189a3d1a0eedf8-LHR
+      - a1bcc379eae3e6fd-LIS
       Cache-Control:
       - public, max-age=14400
+      Cf-Cache-Status:
+      - EXPIRED
       Connection:
       - keep-alive
+      Content-Encoding:
+      - zstd
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 13 Feb 2025 23:29:47 GMT
+      - Thu, 16 Jul 2026 00:06:53 GMT
       Last-Modified:
-      - Thu, 13 Feb 2025 23:29:47 GMT
-      NEL:
-      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      - Thu, 16 Jul 2026 00:06:53 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=yb2etjFaHp212nP5vSwRqiB4hPwTtAnwcOCHjVga0TknLga%2FCvtt9utAGQTTAzHGFSX90wv4x%2F6f4mw9SHDaEw5fhPRnZ4myZ6eIOBc8hkR3HvVEWvQ0ANn76AGBtDYcQiN1Fw%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=PhFUD8DCQAbfIf6yJnxu4BEvQXcheiYwiA1HUVptnx1WRZu3SwzyykCcy3VkycUPKRmZ07ummq57QBaabJD4WkLWceI%2BbZIQGgdgtU3%2FKf1dcwrKYUIwPqeZ%2FlNop1DQPWJJbQ%3D%3D"}]}'
       Server:
       - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
       Strict-Transport-Security:
       - max-age=15552000; includeSubDomains; preload
       Transfer-Encoding:
       - chunked
+      Vary:
+      - Accept-Encoding
+      - Accept-Encoding
       X-Content-Type-Options:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
-      content-length:
-      - '321'
-      server-timing:
-      - cfL4;desc="?proto=TCP&rtt=32042&min_rtt=31978&rtt_var=12121&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2847&recv_bytes=791&delivery_rate=89121&cwnd=251&unsent_bytes=0&cid=ab76998768b8fe85&ts=94&x=0"
-      vary:
-      - Accept-Encoding
-      - Accept-Encoding
     status:
       code: 200
       message: OK

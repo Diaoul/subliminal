@@ -50,8 +50,8 @@ interactions:
     uri: https://api.opensubtitles.org/xml-rpc
   response:
     body:
-      string: <?xml version="1.0" encoding="utf-8"?><methodResponse><params><param><value><struct><member><name>token</name><value><string>KNHASPwhAeksor0TYFuPZetlk71</string></value></member><member><name>status</name><value><string>200
-        OK</string></value></member><member><name>seconds</name><value><double>0.007000</double></value></member></struct></value></param></params></methodResponse>
+      string: <?xml version="1.0" encoding="utf-8"?><methodResponse><params><param><value><struct><member><name>token</name><value><string>stvXnihEc-fBEe-4YGg4QSh9xL1</string></value></member><member><name>status</name><value><string>200
+        OK</string></value></member><member><name>seconds</name><value><double>0.004000</double></value></member></struct></value></param></params></methodResponse>
     headers:
       Access-Control-Allow-Credentials:
       - ''
@@ -61,53 +61,48 @@ interactions:
       - GET, POST, OPTIONS
       Access-Control-Allow-Origin:
       - '*'
-      Age:
-      - '0'
       CF-RAY:
-      - 9118a52bedf85bda-LIS
+      - a1bcc3bf8c45f4f9-LIS
+      Cf-Cache-Status:
+      - DYNAMIC
       Connection:
       - keep-alive
       Content-Type:
       - text/xml;charset=UTF-8
       Date:
-      - Thu, 13 Feb 2025 23:37:14 GMT
+      - Thu, 16 Jul 2026 00:07:04 GMT
       Download-Quota:
       - '999999999'
-      NEL:
-      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=QtjkJrwdyU9s%2F2cpbOtA1xtS6LZcFC7ZX44E79QRcnpiq5X7sbNssPwMpLJLxd3Ie74k2YXYFq2WSuSzwiAcIzMOakCEQUVkStvjMmRNqL16ctrMgtH1i9svv7Va8ZC1Er37boQP4KU%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=xjz9BBYHeCYuoTj%2FHY3pns%2FRnV4eMTfEPdnNGVr%2BaCVbS7G5u4NKxe9dcKYekQ3jyHVeQXerMcLi2r2ah9ayURg5PMatKqhOVdJtvVf0GfCrBPWQYMymmAeM9xRXS6T7a%2Fu6sO%2BhY5s%3D"}]}'
       Server:
       - cloudflare
+      Server-Timing:
+      - miss, 0_TR_client_wait;dur=0, _Tw_queues;dur=0, 2_Tc_bak_connect;dur=0, 3_Tr_bak_response;dur=20
+      - cfCacheStatus;desc="DYNAMIC"
+      - cfEdge;dur=3,cfOrigin;dur=77
       Set-Cookie:
-      - PHPSESSID=KNHASPwhAeksor0TYFuPZetlk71; expires=Fri, 14-Feb-2025 05:37:14 GMT;
+      - PHPSESSID=stvXnihEc-fBEe-4YGg4QSh9xL1; expires=Thu, 16-Jul-2026 06:07:04 GMT;
         Max-Age=21600; path=/; domain=.opensubtitles.org; HttpOnly
+      - server=; Expires=Thu, 01-Jan-1970 00:00:01 GMT; path=/
       Vary:
-      - Accept-Encoding
-      X-Cache-Backend:
-      - lw1
+      - accept-encoding
+      X-Backend-Server:
+      - lw2
       X-Compressed-Content-Length:
-      - '209'
+      - '210'
       X-Content-Encoding:
       - gzip
-      X-HTTP-Version:
+      X-Http-Version:
       - '1.0'
-      X-RateLimit-Remaining:
-      - '39'
       X-Uncompressed-Content-Length:
       - '380'
-      X-Var-Cache:
-      - MISS
-      X-Via:
-      - lb2
       alt-svc:
       - h3=":443"; ma=86400
-      cf-cache-status:
-      - DYNAMIC
       content-length:
       - '380'
-      server-timing:
-      - cfL4;desc="?proto=TCP&rtt=2955&min_rtt=2841&rtt_var=1147&sent=4&recv=7&lost=0&retrans=0&sent_bytes=2367&recv_bytes=1097&delivery_rate=1019359&cwnd=251&unsent_bytes=0&cid=0982b4e6345ba6d9&ts=138&x=0"
     status:
       code: 200
       message: OK
@@ -122,7 +117,7 @@ interactions:
 
       <param>
 
-      <value><string>KNHASPwhAeksor0TYFuPZetlk71</string></value>
+      <value><string>stvXnihEc-fBEe-4YGg4QSh9xL1</string></value>
 
       </param>
 
@@ -210,19 +205,19 @@ interactions:
     body:
       string: <?xml version="1.0" encoding="utf-8"?><methodResponse><params><param><value><struct><member><name>status</name><value><string>200
         OK</string></value></member><member><name>data</name><value><array><data><value><struct><member><name>MatchedBy</name><value><string>fulltext</string></value></member><member><name>IDSubMovieFile</name><value><string>0</string></value></member><member><name>MovieHash</name><value><string>0</string></value></member><member><name>MovieByteSize</name><value><string>0</string></value></member><member><name>MovieTimeMS</name><value><string>0</string></value></member><member><name>IDSubtitleFile</name><value><string>1954464403</string></value></member><member><name>SubFileName</name><value><string>Marvels.Agents.of.S.H.I.E.L.D.S02E06.A.Fractured.House.720p.WEB-DL.DD5.1.H.264-BS.srt</string></value></member><member><name>SubActualCD</name><value><string>1</string></value></member><member><name>SubSize</name><value><string>46923</string></value></member><member><name>SubHash</name><value><string>03fc3dcdbe7974ff8d2ed6da54bf11d1</string></value></member><member><name>SubLastTS</name><value><string>00:41:03</string></value></member><member><name>SubTSGroup</name><value><string>1</string></value></member><member><name>InfoReleaseGroup</name><value><string>BS</string></value></member><member><name>InfoFormat</name><value><string>WEB-DL</string></value></member><member><name>InfoOther</name><value><string/></value></member><member><name>IDSubtitle</name><value><string>5885999</string></value></member><member><name>UserID</name><value><string>0</string></value></member><member><name>SubLanguageID</name><value><string>hun</string></value></member><member><name>SubFormat</name><value><string>srt</string></value></member><member><name>SubSumCD</name><value><string>1</string></value></member><member><name>SubAuthorComment</name><value><string/></value></member><member><name>SubAddDate</name><value><string>2014-11-08
-        00:39:41</string></value></member><member><name>SubBad</name><value><string>0</string></value></member><member><name>SubRating</name><value><string>0.0</string></value></member><member><name>SubSumVotes</name><value><string>0</string></value></member><member><name>SubDownloadsCnt</name><value><string>6949</string></value></member><member><name>MovieReleaseName</name><value><string>
+        00:39:41</string></value></member><member><name>SubBad</name><value><string>0</string></value></member><member><name>SubRating</name><value><string>0.0</string></value></member><member><name>SubSumVotes</name><value><string>0</string></value></member><member><name>SubDownloadsCnt</name><value><string>7032</string></value></member><member><name>MovieReleaseName</name><value><string>
         Marvels.Agents.of.S.H.I.E.L.D.S02E06.A.Fractured.House.720p.WEB-DL.DD5.1.H.264-BS</string></value></member><member><name>MovieFPS</name><value><string>25.000</string></value></member><member><name>IDMovie</name><value><string>184728</string></value></member><member><name>IDMovieImdb</name><value><string>4078580</string></value></member><member><name>MovieName</name><value><string>&#34;Agents
-        of S.H.I.E.L.D.&#34; A Fractured House</string></value></member><member><name>MovieNameEng</name><value><string/></value></member><member><name>MovieYear</name><value><string>2014</string></value></member><member><name>MovieImdbRating</name><value><string>8.1</string></value></member><member><name>SubFeatured</name><value><string>0</string></value></member><member><name>UserNickName</name><value><string/></value></member><member><name>SubTranslator</name><value><string/></value></member><member><name>ISO639</name><value><string>hu</string></value></member><member><name>LanguageName</name><value><string>Hungarian</string></value></member><member><name>SubComments</name><value><string>0</string></value></member><member><name>SubHearingImpaired</name><value><string>0</string></value></member><member><name>UserRank</name><value><string/></value></member><member><name>SeriesSeason</name><value><string>2</string></value></member><member><name>SeriesEpisode</name><value><string>6</string></value></member><member><name>MovieKind</name><value><string>episode</string></value></member><member><name>SubHD</name><value><string>1</string></value></member><member><name>SeriesIMDBParent</name><value><string>2364582</string></value></member><member><name>SubEncoding</name><value><string>CP1250</string></value></member><member><name>SubAutoTranslation</name><value><string>0</string></value></member><member><name>SubForeignPartsOnly</name><value><string>0</string></value></member><member><name>SubFromTrusted</name><value><string>0</string></value></member><member><name>QueryParameters</name><value><struct><member><name>query</name><value><string>marvels
-        agents of s.h.i.e.l.d.</string></value></member><member><name>episode</name><value><string>6</string></value></member><member><name>season</name><value><string>2</string></value></member><member><name>sublanguageid</name><value><string>hun</string></value></member></struct></value></member><member><name>SubTSGroupHash</name><value><string>abeeac43295eaa3a650dd59b9493a33f</string></value></member><member><name>SubDownloadLink</name><value><string>https://dl.opensubtitles.org/en/download/src-api/vrf-19b70c51/sid-KNHASPwhAeksor0TYFuPZetlk71/file/1954464403.gz</string></value></member><member><name>ZipDownloadLink</name><value><string>https://dl.opensubtitles.org/en/download/src-api/vrf-f58e0bce/sid-KNHASPwhAeksor0TYFuPZetlk71/sub/5885999</string></value></member><member><name>SubtitlesLink</name><value><string>http://www.opensubtitles.org/en/subtitles/5885999/sid-KNHASPwhAeksor0TYFuPZetlk71/agents-of-s-h-i-e-l-d-a-fractured-house-hu</string></value></member><member><name>QueryNumber</name><value><string>1</string></value></member><member><name>Score</name><value><double>0.069490</double></value></member></struct></value><value><struct><member><name>MatchedBy</name><value><string>fulltext</string></value></member><member><name>IDSubMovieFile</name><value><string>0</string></value></member><member><name>MovieHash</name><value><string>0</string></value></member><member><name>MovieByteSize</name><value><string>0</string></value></member><member><name>MovieTimeMS</name><value><string>0</string></value></member><member><name>IDSubtitleFile</name><value><string>1954454544</string></value></member><member><name>SubFileName</name><value><string>Marvels
+        of S.H.I.E.L.D.&#34; A Fractured House</string></value></member><member><name>MovieNameEng</name><value><string/></value></member><member><name>MovieYear</name><value><string>2014</string></value></member><member><name>MovieImdbRating</name><value><string>8.0</string></value></member><member><name>SubFeatured</name><value><string>0</string></value></member><member><name>UserNickName</name><value><string/></value></member><member><name>SubTranslator</name><value><string/></value></member><member><name>ISO639</name><value><string>hu</string></value></member><member><name>LanguageName</name><value><string>Hungarian</string></value></member><member><name>SubComments</name><value><string>0</string></value></member><member><name>SubHearingImpaired</name><value><string>0</string></value></member><member><name>UserRank</name><value><string/></value></member><member><name>SeriesSeason</name><value><string>2</string></value></member><member><name>SeriesEpisode</name><value><string>6</string></value></member><member><name>MovieKind</name><value><string>episode</string></value></member><member><name>SubHD</name><value><string>1</string></value></member><member><name>SeriesIMDBParent</name><value><string>2364582</string></value></member><member><name>SubEncoding</name><value><string>CP1250</string></value></member><member><name>SubAutoTranslation</name><value><string>0</string></value></member><member><name>SubForeignPartsOnly</name><value><string>0</string></value></member><member><name>SubFromTrusted</name><value><string>0</string></value></member><member><name>QueryParameters</name><value><struct><member><name>query</name><value><string>marvels
+        agents of s.h.i.e.l.d.</string></value></member><member><name>episode</name><value><string>6</string></value></member><member><name>season</name><value><string>2</string></value></member><member><name>sublanguageid</name><value><string>hun</string></value></member></struct></value></member><member><name>SubTSGroupHash</name><value><string>abeeac43295eaa3a650dd59b9493a33f</string></value></member><member><name>SubDownloadLink</name><value><string>https://dl.opensubtitles.org/en/download/src-api/vrf-19b70c51/sid-stvXnihEc-fBEe-4YGg4QSh9xL1/file/1954464403.gz</string></value></member><member><name>ZipDownloadLink</name><value><string>https://dl.opensubtitles.org/en/download/src-api/vrf-f58e0bce/sid-stvXnihEc-fBEe-4YGg4QSh9xL1/sub/5885999</string></value></member><member><name>SubtitlesLink</name><value><string>http://www.opensubtitles.org/en/subtitles/5885999/sid-stvXnihEc-fBEe-4YGg4QSh9xL1/agents-of-s-h-i-e-l-d-a-fractured-house-hu</string></value></member><member><name>QueryNumber</name><value><string>1</string></value></member><member><name>Score</name><value><double>0.070320</double></value></member></struct></value><value><struct><member><name>MatchedBy</name><value><string>fulltext</string></value></member><member><name>IDSubMovieFile</name><value><string>0</string></value></member><member><name>MovieHash</name><value><string>0</string></value></member><member><name>MovieByteSize</name><value><string>0</string></value></member><member><name>MovieTimeMS</name><value><string>0</string></value></member><member><name>IDSubtitleFile</name><value><string>1954454544</string></value></member><member><name>SubFileName</name><value><string>Marvels
         Agents of S.H.I.E.L.D. - 2x06 - A Fractured House.HDTV.HDTV.EVO.hu.srt</string></value></member><member><name>SubActualCD</name><value><string>1</string></value></member><member><name>SubSize</name><value><string>52605</string></value></member><member><name>SubHash</name><value><string>a76ac640fe0e16f93486df273499a16b</string></value></member><member><name>SubLastTS</name><value><string>00:40:59</string></value></member><member><name>SubTSGroup</name><value><string>1</string></value></member><member><name>InfoReleaseGroup</name><value><string>EVO</string></value></member><member><name>InfoFormat</name><value><string>HDTV</string></value></member><member><name>InfoOther</name><value><string/></value></member><member><name>IDSubtitle</name><value><string>5876161</string></value></member><member><name>UserID</name><value><string>0</string></value></member><member><name>SubLanguageID</name><value><string>hun</string></value></member><member><name>SubFormat</name><value><string>srt</string></value></member><member><name>SubSumCD</name><value><string>1</string></value></member><member><name>SubAuthorComment</name><value><string/></value></member><member><name>SubAddDate</name><value><string>2014-10-30
-        18:21:18</string></value></member><member><name>SubBad</name><value><string>0</string></value></member><member><name>SubRating</name><value><string>0.0</string></value></member><member><name>SubSumVotes</name><value><string>0</string></value></member><member><name>SubDownloadsCnt</name><value><string>3244</string></value></member><member><name>MovieReleaseName</name><value><string>
+        18:21:18</string></value></member><member><name>SubBad</name><value><string>0</string></value></member><member><name>SubRating</name><value><string>0.0</string></value></member><member><name>SubSumVotes</name><value><string>0</string></value></member><member><name>SubDownloadsCnt</name><value><string>3286</string></value></member><member><name>MovieReleaseName</name><value><string>
         Marvels Agents of S.H.I.E.L.D. - 2x06 - A Fractured House.HDTV.HDTV.EVO</string></value></member><member><name>MovieFPS</name><value><string>0.000</string></value></member><member><name>IDMovie</name><value><string>184728</string></value></member><member><name>IDMovieImdb</name><value><string>4078580</string></value></member><member><name>MovieName</name><value><string>&#34;Agents
-        of S.H.I.E.L.D.&#34; A Fractured House</string></value></member><member><name>MovieNameEng</name><value><string/></value></member><member><name>MovieYear</name><value><string>2014</string></value></member><member><name>MovieImdbRating</name><value><string>8.1</string></value></member><member><name>SubFeatured</name><value><string>0</string></value></member><member><name>UserNickName</name><value><string/></value></member><member><name>SubTranslator</name><value><string/></value></member><member><name>ISO639</name><value><string>hu</string></value></member><member><name>LanguageName</name><value><string>Hungarian</string></value></member><member><name>SubComments</name><value><string>0</string></value></member><member><name>SubHearingImpaired</name><value><string>0</string></value></member><member><name>UserRank</name><value><string/></value></member><member><name>SeriesSeason</name><value><string>2</string></value></member><member><name>SeriesEpisode</name><value><string>6</string></value></member><member><name>MovieKind</name><value><string>episode</string></value></member><member><name>SubHD</name><value><string>1</string></value></member><member><name>SeriesIMDBParent</name><value><string>2364582</string></value></member><member><name>SubEncoding</name><value><string>CP1250</string></value></member><member><name>SubAutoTranslation</name><value><string>0</string></value></member><member><name>SubForeignPartsOnly</name><value><string>0</string></value></member><member><name>SubFromTrusted</name><value><string>0</string></value></member><member><name>QueryParameters</name><value><struct><member><name>query</name><value><string>marvels
-        agents of s.h.i.e.l.d.</string></value></member><member><name>episode</name><value><string>6</string></value></member><member><name>season</name><value><string>2</string></value></member><member><name>sublanguageid</name><value><string>hun</string></value></member></struct></value></member><member><name>SubTSGroupHash</name><value><string>abeeac43295eaa3a650dd59b9493a33f</string></value></member><member><name>SubDownloadLink</name><value><string>https://dl.opensubtitles.org/en/download/src-api/vrf-19be0c56/sid-KNHASPwhAeksor0TYFuPZetlk71/file/1954454544.gz</string></value></member><member><name>ZipDownloadLink</name><value><string>https://dl.opensubtitles.org/en/download/src-api/vrf-f5670bbb/sid-KNHASPwhAeksor0TYFuPZetlk71/sub/5876161</string></value></member><member><name>SubtitlesLink</name><value><string>http://www.opensubtitles.org/en/subtitles/5876161/sid-KNHASPwhAeksor0TYFuPZetlk71/agents-of-s-h-i-e-l-d-a-fractured-house-hu</string></value></member><member><name>QueryNumber</name><value><string>1</string></value></member><member><name>Score</name><value><double>0.032440</double></value></member></struct></value><value><struct><member><name>MatchedBy</name><value><string>fulltext</string></value></member><member><name>IDSubMovieFile</name><value><string>0</string></value></member><member><name>MovieHash</name><value><string>0</string></value></member><member><name>MovieByteSize</name><value><string>0</string></value></member><member><name>MovieTimeMS</name><value><string>0</string></value></member><member><name>IDSubtitleFile</name><value><string>1955344515</string></value></member><member><name>SubFileName</name><value><string>Marvels.Agents.of.S.H.I.E.L.D.S02E06.BDRIP.x264.Hun.Eng-Krissz.hu.srt</string></value></member><member><name>SubActualCD</name><value><string>1</string></value></member><member><name>SubSize</name><value><string>46923</string></value></member><member><name>SubHash</name><value><string>5ef2da9e059dde8e68e462524b04d2f3</string></value></member><member><name>SubLastTS</name><value><string>00:41:04</string></value></member><member><name>SubTSGroup</name><value><string>1</string></value></member><member><name>InfoReleaseGroup</name><value><string>Krissz</string></value></member><member><name>InfoFormat</name><value><string>BluRay</string></value></member><member><name>InfoOther</name><value><string/></value></member><member><name>IDSubtitle</name><value><string>6764373</string></value></member><member><name>UserID</name><value><string>0</string></value></member><member><name>SubLanguageID</name><value><string>hun</string></value></member><member><name>SubFormat</name><value><string>srt</string></value></member><member><name>SubSumCD</name><value><string>1</string></value></member><member><name>SubAuthorComment</name><value><string/></value></member><member><name>SubAddDate</name><value><string>2016-10-15
-        18:19:23</string></value></member><member><name>SubBad</name><value><string>0</string></value></member><member><name>SubRating</name><value><string>0.0</string></value></member><member><name>SubSumVotes</name><value><string>0</string></value></member><member><name>SubDownloadsCnt</name><value><string>429</string></value></member><member><name>MovieReleaseName</name><value><string>
+        of S.H.I.E.L.D.&#34; A Fractured House</string></value></member><member><name>MovieNameEng</name><value><string/></value></member><member><name>MovieYear</name><value><string>2014</string></value></member><member><name>MovieImdbRating</name><value><string>8.0</string></value></member><member><name>SubFeatured</name><value><string>0</string></value></member><member><name>UserNickName</name><value><string/></value></member><member><name>SubTranslator</name><value><string/></value></member><member><name>ISO639</name><value><string>hu</string></value></member><member><name>LanguageName</name><value><string>Hungarian</string></value></member><member><name>SubComments</name><value><string>0</string></value></member><member><name>SubHearingImpaired</name><value><string>0</string></value></member><member><name>UserRank</name><value><string/></value></member><member><name>SeriesSeason</name><value><string>2</string></value></member><member><name>SeriesEpisode</name><value><string>6</string></value></member><member><name>MovieKind</name><value><string>episode</string></value></member><member><name>SubHD</name><value><string>1</string></value></member><member><name>SeriesIMDBParent</name><value><string>2364582</string></value></member><member><name>SubEncoding</name><value><string>CP1250</string></value></member><member><name>SubAutoTranslation</name><value><string>0</string></value></member><member><name>SubForeignPartsOnly</name><value><string>0</string></value></member><member><name>SubFromTrusted</name><value><string>0</string></value></member><member><name>QueryParameters</name><value><struct><member><name>query</name><value><string>marvels
+        agents of s.h.i.e.l.d.</string></value></member><member><name>episode</name><value><string>6</string></value></member><member><name>season</name><value><string>2</string></value></member><member><name>sublanguageid</name><value><string>hun</string></value></member></struct></value></member><member><name>SubTSGroupHash</name><value><string>abeeac43295eaa3a650dd59b9493a33f</string></value></member><member><name>SubDownloadLink</name><value><string>https://dl.opensubtitles.org/en/download/src-api/vrf-19be0c56/sid-stvXnihEc-fBEe-4YGg4QSh9xL1/file/1954454544.gz</string></value></member><member><name>ZipDownloadLink</name><value><string>https://dl.opensubtitles.org/en/download/src-api/vrf-f5670bbb/sid-stvXnihEc-fBEe-4YGg4QSh9xL1/sub/5876161</string></value></member><member><name>SubtitlesLink</name><value><string>http://www.opensubtitles.org/en/subtitles/5876161/sid-stvXnihEc-fBEe-4YGg4QSh9xL1/agents-of-s-h-i-e-l-d-a-fractured-house-hu</string></value></member><member><name>QueryNumber</name><value><string>1</string></value></member><member><name>Score</name><value><double>0.032860</double></value></member></struct></value><value><struct><member><name>MatchedBy</name><value><string>fulltext</string></value></member><member><name>IDSubMovieFile</name><value><string>0</string></value></member><member><name>MovieHash</name><value><string>0</string></value></member><member><name>MovieByteSize</name><value><string>0</string></value></member><member><name>MovieTimeMS</name><value><string>0</string></value></member><member><name>IDSubtitleFile</name><value><string>1955344515</string></value></member><member><name>SubFileName</name><value><string>Marvels.Agents.of.S.H.I.E.L.D.S02E06.BDRIP.x264.Hun.Eng-Krissz.hu.srt</string></value></member><member><name>SubActualCD</name><value><string>1</string></value></member><member><name>SubSize</name><value><string>46923</string></value></member><member><name>SubHash</name><value><string>5ef2da9e059dde8e68e462524b04d2f3</string></value></member><member><name>SubLastTS</name><value><string>00:41:04</string></value></member><member><name>SubTSGroup</name><value><string>1</string></value></member><member><name>InfoReleaseGroup</name><value><string>Krissz</string></value></member><member><name>InfoFormat</name><value><string>BluRay</string></value></member><member><name>InfoOther</name><value><string/></value></member><member><name>IDSubtitle</name><value><string>6764373</string></value></member><member><name>UserID</name><value><string>0</string></value></member><member><name>SubLanguageID</name><value><string>hun</string></value></member><member><name>SubFormat</name><value><string>srt</string></value></member><member><name>SubSumCD</name><value><string>1</string></value></member><member><name>SubAuthorComment</name><value><string/></value></member><member><name>SubAddDate</name><value><string>2016-10-15
+        18:19:23</string></value></member><member><name>SubBad</name><value><string>0</string></value></member><member><name>SubRating</name><value><string>0.0</string></value></member><member><name>SubSumVotes</name><value><string>0</string></value></member><member><name>SubDownloadsCnt</name><value><string>476</string></value></member><member><name>MovieReleaseName</name><value><string>
         Marvels.Agents.of.S.H.I.E.L.D.S02E06.BDRIP.x264.Hun.Eng-Krissz</string></value></member><member><name>MovieFPS</name><value><string>23.976</string></value></member><member><name>IDMovie</name><value><string>184728</string></value></member><member><name>IDMovieImdb</name><value><string>4078580</string></value></member><member><name>MovieName</name><value><string>&#34;Agents
-        of S.H.I.E.L.D.&#34; A Fractured House</string></value></member><member><name>MovieNameEng</name><value><string/></value></member><member><name>MovieYear</name><value><string>2014</string></value></member><member><name>MovieImdbRating</name><value><string>8.1</string></value></member><member><name>SubFeatured</name><value><string>0</string></value></member><member><name>UserNickName</name><value><string/></value></member><member><name>SubTranslator</name><value><string/></value></member><member><name>ISO639</name><value><string>hu</string></value></member><member><name>LanguageName</name><value><string>Hungarian</string></value></member><member><name>SubComments</name><value><string>0</string></value></member><member><name>SubHearingImpaired</name><value><string>0</string></value></member><member><name>UserRank</name><value><string/></value></member><member><name>SeriesSeason</name><value><string>2</string></value></member><member><name>SeriesEpisode</name><value><string>6</string></value></member><member><name>MovieKind</name><value><string>episode</string></value></member><member><name>SubHD</name><value><string>1</string></value></member><member><name>SeriesIMDBParent</name><value><string>2364582</string></value></member><member><name>SubEncoding</name><value><string>CP1250</string></value></member><member><name>SubAutoTranslation</name><value><string>0</string></value></member><member><name>SubForeignPartsOnly</name><value><string>0</string></value></member><member><name>SubFromTrusted</name><value><string>0</string></value></member><member><name>QueryParameters</name><value><struct><member><name>query</name><value><string>marvels
-        agents of s.h.i.e.l.d.</string></value></member><member><name>episode</name><value><string>6</string></value></member><member><name>season</name><value><string>2</string></value></member><member><name>sublanguageid</name><value><string>hun</string></value></member></struct></value></member><member><name>SubTSGroupHash</name><value><string>abeeac43295eaa3a650dd59b9493a33f</string></value></member><member><name>SubDownloadLink</name><value><string>https://dl.opensubtitles.org/en/download/src-api/vrf-19b50c53/sid-KNHASPwhAeksor0TYFuPZetlk71/file/1955344515.gz</string></value></member><member><name>ZipDownloadLink</name><value><string>https://dl.opensubtitles.org/en/download/src-api/vrf-f5650bbd/sid-KNHASPwhAeksor0TYFuPZetlk71/sub/6764373</string></value></member><member><name>SubtitlesLink</name><value><string>http://www.opensubtitles.org/en/subtitles/6764373/sid-KNHASPwhAeksor0TYFuPZetlk71/agents-of-s-h-i-e-l-d-a-fractured-house-hu</string></value></member><member><name>QueryNumber</name><value><string>1</string></value></member><member><name>Score</name><value><double>0.004290</double></value></member></struct></value></data></array></value></member><member><name>seconds</name><value><double>0.142000</double></value></member></struct></value></param></params></methodResponse>
+        of S.H.I.E.L.D.&#34; A Fractured House</string></value></member><member><name>MovieNameEng</name><value><string/></value></member><member><name>MovieYear</name><value><string>2014</string></value></member><member><name>MovieImdbRating</name><value><string>8.0</string></value></member><member><name>SubFeatured</name><value><string>0</string></value></member><member><name>UserNickName</name><value><string/></value></member><member><name>SubTranslator</name><value><string/></value></member><member><name>ISO639</name><value><string>hu</string></value></member><member><name>LanguageName</name><value><string>Hungarian</string></value></member><member><name>SubComments</name><value><string>0</string></value></member><member><name>SubHearingImpaired</name><value><string>0</string></value></member><member><name>UserRank</name><value><string/></value></member><member><name>SeriesSeason</name><value><string>2</string></value></member><member><name>SeriesEpisode</name><value><string>6</string></value></member><member><name>MovieKind</name><value><string>episode</string></value></member><member><name>SubHD</name><value><string>1</string></value></member><member><name>SeriesIMDBParent</name><value><string>2364582</string></value></member><member><name>SubEncoding</name><value><string>CP1250</string></value></member><member><name>SubAutoTranslation</name><value><string>0</string></value></member><member><name>SubForeignPartsOnly</name><value><string>0</string></value></member><member><name>SubFromTrusted</name><value><string>0</string></value></member><member><name>QueryParameters</name><value><struct><member><name>query</name><value><string>marvels
+        agents of s.h.i.e.l.d.</string></value></member><member><name>episode</name><value><string>6</string></value></member><member><name>season</name><value><string>2</string></value></member><member><name>sublanguageid</name><value><string>hun</string></value></member></struct></value></member><member><name>SubTSGroupHash</name><value><string>abeeac43295eaa3a650dd59b9493a33f</string></value></member><member><name>SubDownloadLink</name><value><string>https://dl.opensubtitles.org/en/download/src-api/vrf-19b50c53/sid-stvXnihEc-fBEe-4YGg4QSh9xL1/file/1955344515.gz</string></value></member><member><name>ZipDownloadLink</name><value><string>https://dl.opensubtitles.org/en/download/src-api/vrf-f5650bbd/sid-stvXnihEc-fBEe-4YGg4QSh9xL1/sub/6764373</string></value></member><member><name>SubtitlesLink</name><value><string>http://www.opensubtitles.org/en/subtitles/6764373/sid-stvXnihEc-fBEe-4YGg4QSh9xL1/agents-of-s-h-i-e-l-d-a-fractured-house-hu</string></value></member><member><name>QueryNumber</name><value><string>1</string></value></member><member><name>Score</name><value><double>0.004760</double></value></member></struct></value></data></array></value></member><member><name>seconds</name><value><double>0.113000</double></value></member></struct></value></param></params></methodResponse>
     headers:
       Access-Control-Allow-Credentials:
       - ''
@@ -232,51 +227,46 @@ interactions:
       - GET, POST, OPTIONS
       Access-Control-Allow-Origin:
       - '*'
-      Age:
-      - '0'
       CF-RAY:
-      - 9118a52d1f6e5bda-LIS
+      - a1bcc3c02d86f4f9-LIS
+      Cf-Cache-Status:
+      - DYNAMIC
       Connection:
       - keep-alive
       Content-Type:
       - text/xml;charset=UTF-8
       Date:
-      - Thu, 13 Feb 2025 23:37:15 GMT
-      NEL:
-      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      - Thu, 16 Jul 2026 00:07:05 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=C6O4wG3qWmGH8CHiHQO7MOaLrmmlOBVYNZhE%2BsEtLhqgr3pHQ9Cd4QSKVC1yy%2BbCHbce8nzyHN%2BKWCOnPgmVgh1Uwh1D2j7%2F0lQLaHQRWtplRupYgi6%2FECduq%2BmSxS7qX7gY4d2DRo0%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=%2B86TaQhBEQUB3nguivsrA2tX7m8uWE5tqM3wgTgY0EOdqut5LwAGC7tm5gO5obqL%2FWgGQ3Z8lPVAysUt9C7T%2B7rd9UccnBbUsx5RsKwHg%2BWsTBvzEG9XQHuHNSTdvfQksurHRSPmHhk%3D"}]}'
       Server:
       - cloudflare
+      Server-Timing:
+      - miss, 0_TR_client_wait;dur=0, _Tw_queues;dur=0, 2_Tc_bak_connect;dur=1, 3_Tr_bak_response;dur=125
+      - cfCacheStatus;desc="DYNAMIC"
+      - cfEdge;dur=3,cfOrigin;dur=177
       Set-Cookie:
-      - PHPSESSID=KNHASPwhAeksor0TYFuPZetlk71; expires=Fri, 14-Feb-2025 05:37:15 GMT;
+      - PHPSESSID=stvXnihEc-fBEe-4YGg4QSh9xL1; expires=Thu, 16-Jul-2026 06:07:05 GMT;
         Max-Age=21600; path=/; domain=.opensubtitles.org; HttpOnly
+      - server=; Expires=Thu, 01-Jan-1970 00:00:01 GMT; path=/
       Vary:
-      - Accept-Encoding
-      X-Cache-Backend:
-      - lw5
+      - accept-encoding
+      X-Backend-Server:
+      - lw4
       X-Compressed-Content-Length:
-      - '1545'
+      - '1542'
       X-Content-Encoding:
       - gzip
-      X-HTTP-Version:
+      X-Http-Version:
       - '1.0'
-      X-RateLimit-Remaining:
-      - '37'
       X-Uncompressed-Content-Length:
       - '16317'
-      X-Var-Cache:
-      - MISS
-      X-Via:
-      - lb2
       alt-svc:
       - h3=":443"; ma=86400
-      cf-cache-status:
-      - DYNAMIC
       content-length:
       - '16317'
-      server-timing:
-      - cfL4;desc="?proto=TCP&rtt=12979&min_rtt=2841&rtt_var=17683&sent=9&recv=11&lost=0&retrans=1&sent_bytes=4918&recv_bytes=2131&delivery_rate=1019359&cwnd=255&unsent_bytes=0&cid=0982b4e6345ba6d9&ts=443&x=0"
     status:
       code: 200
       message: OK
@@ -291,7 +281,7 @@ interactions:
 
       <param>
 
-      <value><string>KNHASPwhAeksor0TYFuPZetlk71</string></value>
+      <value><string>stvXnihEc-fBEe-4YGg4QSh9xL1</string></value>
 
       </param>
 
@@ -314,7 +304,7 @@ interactions:
   response:
     body:
       string: <?xml version="1.0" encoding="utf-8"?><methodResponse><params><param><value><struct><member><name>status</name><value><string>200
-        OK</string></value></member><member><name>seconds</name><value><double>0.002000</double></value></member></struct></value></param></params></methodResponse>
+        OK</string></value></member><member><name>seconds</name><value><double>0.003000</double></value></member></struct></value></param></params></methodResponse>
     headers:
       Access-Control-Allow-Credentials:
       - ''
@@ -324,51 +314,46 @@ interactions:
       - GET, POST, OPTIONS
       Access-Control-Allow-Origin:
       - '*'
-      Age:
-      - '0'
       CF-RAY:
-      - 9118a52eda055bda-LIS
+      - a1bcc3c1b891f4f9-LIS
+      Cf-Cache-Status:
+      - DYNAMIC
       Connection:
       - keep-alive
       Content-Type:
       - text/xml;charset=UTF-8
       Date:
-      - Thu, 13 Feb 2025 23:37:15 GMT
-      NEL:
-      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      - Thu, 16 Jul 2026 00:07:05 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=Lt3itQFA4LQotSSIVWv04lc3JcbJmtPhuj0VW%2F22YT%2Blq4%2BZDORD3we19KXcXoQbKLs2zm%2B2vy98937QaUgEavm5hIDt7zqmwHhuVmDNKtTeO9NetEkQjCoD87ulcwKzMbJhZp2UxoU%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=6h7IiEDX9hB16ErLduZ9iC8QgPiKuWWki%2Fb6yzwcg5SbtfkVW0g7869dU8ZaAWsgNrttfuzOodVzzFImVCHyFSIDw6r9ejmHu2yp%2BStfP6Gozzq4xBeorog4GcfzPlR%2F%2F3pivGBF7T4%3D"}]}'
       Server:
       - cloudflare
+      Server-Timing:
+      - miss, 0_TR_client_wait;dur=0, _Tw_queues;dur=0, 2_Tc_bak_connect;dur=0, 3_Tr_bak_response;dur=9
+      - cfCacheStatus;desc="DYNAMIC"
+      - cfEdge;dur=3,cfOrigin;dur=65
       Set-Cookie:
-      - PHPSESSID=KNHASPwhAeksor0TYFuPZetlk71; expires=Fri, 14-Feb-2025 05:37:15 GMT;
+      - PHPSESSID=stvXnihEc-fBEe-4YGg4QSh9xL1; expires=Thu, 16-Jul-2026 06:07:05 GMT;
         Max-Age=21600; path=/; domain=.opensubtitles.org; HttpOnly
+      - server=; Expires=Thu, 01-Jan-1970 00:00:01 GMT; path=/
       Vary:
-      - Accept-Encoding
-      X-Cache-Backend:
-      - lw2
+      - accept-encoding
+      X-Backend-Server:
+      - lw1
       X-Compressed-Content-Length:
       - '172'
       X-Content-Encoding:
       - gzip
-      X-HTTP-Version:
+      X-Http-Version:
       - '1.0'
-      X-RateLimit-Remaining:
-      - '35'
       X-Uncompressed-Content-Length:
       - '286'
-      X-Var-Cache:
-      - MISS
-      X-Via:
-      - lb2
       alt-svc:
       - h3=":443"; ma=86400
-      cf-cache-status:
-      - DYNAMIC
       content-length:
       - '286'
-      server-timing:
-      - cfL4;desc="?proto=TCP&rtt=16260&min_rtt=2841&rtt_var=15797&sent=13&recv=14&lost=0&retrans=1&sent_bytes=7988&recv_bytes=2494&delivery_rate=1019359&cwnd=257&unsent_bytes=0&cid=0982b4e6345ba6d9&ts=534&x=0"
     status:
       code: 200
       message: OK
@@ -410,48 +395,44 @@ interactions:
       - GET, POST, OPTIONS
       Access-Control-Allow-Origin:
       - '*'
-      Age:
-      - '0'
       CF-RAY:
-      - 9118a52f3a7b5bda-LIS
+      - a1bcc3c249c9f4f9-LIS
+      Cf-Cache-Status:
+      - DYNAMIC
       Connection:
       - keep-alive
       Content-Type:
       - text/xml;charset=UTF-8
       Date:
-      - Thu, 13 Feb 2025 23:37:15 GMT
-      NEL:
-      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      - Thu, 16 Jul 2026 00:07:05 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=vVButlS%2B45NBsqHBBzp9vTfHpj5edDC2cjYyHT8E6XM0MKVt3V9TxwwQ%2FxM2FYfEqX8CoXF6VBVnL8%2B0%2FxnZTUenkyE37%2FqdG3quODbZhefBXJf%2BxSBnqNgEUGABpW%2BE8R%2FyewzbnqI%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=shEpp98mGoATXBaaxDntgpoXL5uQyMVOZJqEYtJNtxDgcl9Eb1vt%2BnJpSR8Im18y6M70AZjJMUwksYISPT12MDtvOzHROIgvfQdOdSkjVP1gZtXeRacuAO5owi3h0Q4p7YaEW563bHQ%3D"}]}'
       Server:
       - cloudflare
+      Server-Timing:
+      - miss, 0_TR_client_wait;dur=0, _Tw_queues;dur=0, 2_Tc_bak_connect;dur=0, 3_Tr_bak_response;dur=8
+      - cfCacheStatus;desc="DYNAMIC"
+      - cfEdge;dur=5,cfOrigin;dur=58
+      Set-Cookie:
+      - server=; Expires=Thu, 01-Jan-1970 00:00:01 GMT; path=/
       Vary:
-      - Accept-Encoding
-      X-Cache-Backend:
-      - lw5
+      - accept-encoding
+      X-Backend-Server:
+      - lw1
       X-Compressed-Content-Length:
       - '180'
       X-Content-Encoding:
       - gzip
-      X-HTTP-Version:
+      X-Http-Version:
       - '1.0'
-      X-RateLimit-Remaining:
-      - '34'
       X-Uncompressed-Content-Length:
       - '300'
-      X-Var-Cache:
-      - MISS
-      X-Via:
-      - lb2
       alt-svc:
       - h3=":443"; ma=86400
-      cf-cache-status:
-      - DYNAMIC
       content-length:
       - '300'
-      server-timing:
-      - cfL4;desc="?proto=TCP&rtt=14581&min_rtt=2782&rtt_var=15205&sent=16&recv=17&lost=0&retrans=1&sent_bytes=9656&recv_bytes=2778&delivery_rate=1023321&cwnd=257&unsent_bytes=0&cid=0982b4e6345ba6d9&ts=610&x=0"
     status:
       code: 200
       message: OK

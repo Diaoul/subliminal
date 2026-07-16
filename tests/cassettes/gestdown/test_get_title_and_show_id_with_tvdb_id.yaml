@@ -3,55 +3,55 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, zstd
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.2
+      - Subliminal/2.6
       accept:
       - application/json
     method: GET
-    uri: https://api.gestdown.info/shows/external/tvdb/328635
+    uri: https://api.gestdown.info/shows/search/Alex,%20Inc.
   response:
     body:
       string: '{"shows":[{"id":"6e507429-0994-443f-833e-1b06cbc18705","name":"Alex,
         Inc.","nbSeasons":1,"seasons":[1],"tvDbId":328635,"tmdbId":71763,"slug":"alex-inc"}]}'
     headers:
-      CF-Cache-Status:
-      - HIT
       CF-RAY:
-      - 91189a3ffd2f5bd6-LIS
+      - a1bcc37ecdd32134-LIS
       Cache-Control:
       - public, max-age=14400
+      Cf-Cache-Status:
+      - MISS
       Connection:
       - keep-alive
+      Content-Encoding:
+      - zstd
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 13 Feb 2025 23:29:47 GMT
+      - Thu, 16 Jul 2026 00:06:54 GMT
       Last-Modified:
-      - Sat, 08 Feb 2025 13:32:07 GMT
-      NEL:
-      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      - Thu, 16 Jul 2026 00:06:54 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=rIFs4g4lEzDxjm5QQuqq%2FvT4TJ0Dp1pVaRElNzqQQAnj4WKKCSnn%2BaD1sF63CDHrVAUTaV3TBraeeTcjwQzszpVX8vLP9A7%2FECqZYn1%2FemPVpZw9wfQ4p7SMi6I3BdX8Fhty6w%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=zERPUWKZnYwJ%2F1SdHx0QgfTX2r4uNjEnctSlS8%2BJnF0xQHEAeVKJlap%2FsHuRPgR4YtFuUvFMMNz6CB7AfuClNs%2Fb3ikp9MsBJkGHo2xMPalvndPtBCQ9H%2B49Ng%2FOGD93chlk%2Fw%3D%3D"}]}'
       Server:
       - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
       Strict-Transport-Security:
       - max-age=15552000; includeSubDomains; preload
       Transfer-Encoding:
       - chunked
+      Vary:
+      - Accept-Encoding
+      - Accept-Encoding
       X-Content-Type-Options:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
-      content-length:
-      - '154'
-      server-timing:
-      - cfL4;desc="?proto=TCP&rtt=3858&min_rtt=3212&rtt_var=1666&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2846&recv_bytes=798&delivery_rate=901618&cwnd=226&unsent_bytes=0&cid=cdd85987a4c9d613&ts=74&x=0"
-      vary:
-      - Accept-Encoding
-      - Accept-Encoding
     status:
       code: 200
       message: OK

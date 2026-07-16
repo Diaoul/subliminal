@@ -333,7 +333,7 @@ def test_query_imdb_id(movies: dict[str, Movie]) -> None:
         '1957720375',
     }
     with OpenSubtitlesProvider() as provider:
-        subtitles = provider.query(languages, imdb_id=video.imdb_id)
+        subtitles = provider.query(languages, imdb_id=video.external_ids.get('imdb_id'))
     assert {subtitle.id for subtitle in subtitles} == expected_subtitles
     assert {subtitle.language for subtitle in subtitles} == languages
 
@@ -423,6 +423,7 @@ def test_list_subtitles_movie(movies: dict[str, Movie]) -> None:
         '1957400516',
         '1957720375',
         '1957200647',
+        '1962454753',
     }
     with OpenSubtitlesProvider() as provider:
         subtitles = provider.list_subtitles(video, languages)

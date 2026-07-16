@@ -191,10 +191,7 @@ def test_refine(episodes: dict[str, Episode]) -> None:
     assert episode.year == video.year
     assert episode.original_series == video.original_series
     assert episode.title == video.title
-    assert episode.imdb_id == video.imdb_id
-    assert episode.series_imdb_id == video.series_imdb_id
-    assert episode.tvdb_id == video.tvdb_id
-    assert episode.series_tvdb_id == video.series_tvdb_id
+    assert episode.external_ids == video.external_ids
 
 
 @pytest.mark.integration
@@ -207,10 +204,7 @@ def test_refine_episode_partial(episodes: dict[str, Episode]) -> None:
     assert episode.year == video.year
     assert episode.original_series == video.original_series
     assert episode.title == video.title
-    assert episode.imdb_id == video.imdb_id
-    assert episode.series_imdb_id == video.series_imdb_id
-    assert episode.tvdb_id == video.tvdb_id
-    assert episode.series_tvdb_id == video.series_tvdb_id
+    assert episode.external_ids == video.external_ids
 
 
 @pytest.mark.integration
@@ -223,10 +217,7 @@ def test_refine_ambiguous(episodes: dict[str, Episode]) -> None:
     assert episode.year == video.year
     assert episode.original_series == video.original_series
     assert episode.title == video.title
-    assert episode.imdb_id == video.imdb_id
-    assert episode.series_imdb_id == video.series_imdb_id
-    assert episode.tvdb_id == video.tvdb_id
-    assert episode.series_tvdb_id == video.series_tvdb_id
+    assert episode.external_ids == video.external_ids
 
 
 @pytest.mark.integration
@@ -239,10 +230,7 @@ def test_refine_ambiguous_2(episodes: dict[str, Episode]) -> None:
     assert episode.year == video.year
     assert episode.original_series == video.original_series
     assert episode.title == video.title
-    assert episode.imdb_id == video.imdb_id
-    assert episode.series_imdb_id == video.series_imdb_id
-    assert episode.tvdb_id == video.tvdb_id
-    assert episode.series_tvdb_id == video.series_tvdb_id
+    assert episode.external_ids == video.external_ids
 
 
 @pytest.mark.integration
@@ -262,10 +250,7 @@ def test_refine_episode_year(episodes: dict[str, Episode]) -> None:
     assert episode.year == video.year
     assert episode.original_series == video.original_series
     assert episode.title == video.title
-    assert episode.imdb_id == video.imdb_id
-    assert episode.series_imdb_id == video.series_imdb_id
-    assert episode.tvdb_id == video.tvdb_id
-    assert episode.series_tvdb_id == video.series_tvdb_id
+    assert episode.external_ids == video.external_ids
 
 
 @pytest.mark.integration
@@ -278,10 +263,7 @@ def test_refine_episode_no_year(episodes: dict[str, Episode]) -> None:
     assert episode.year == video.year
     assert episode.original_series == video.original_series
     assert episode.title == video.title
-    assert episode.imdb_id == video.imdb_id
-    assert episode.series_imdb_id == video.series_imdb_id
-    assert episode.tvdb_id == video.tvdb_id
-    assert episode.series_tvdb_id == video.series_tvdb_id
+    assert episode.external_ids == video.external_ids
 
 
 @pytest.mark.integration
@@ -294,10 +276,7 @@ def test_refine_episode_alternative_series(episodes: dict[str, Episode]) -> None
     assert episode.year == video.year
     assert episode.original_series == video.original_series
     assert episode.title == video.title
-    assert episode.imdb_id == video.imdb_id
-    assert episode.series_imdb_id == video.series_imdb_id
-    assert episode.tvdb_id == video.tvdb_id
-    assert episode.series_tvdb_id == video.series_tvdb_id
+    assert episode.external_ids == video.external_ids
     assert episode.alternative_series == video.alternative_series
 
 
@@ -311,10 +290,7 @@ def test_refine_episode_with_comma(episodes: dict[str, Episode]) -> None:
     assert episode.year == video.year
     assert episode.original_series == video.original_series
     assert episode.title == video.title
-    assert episode.imdb_id == video.imdb_id
-    assert episode.series_imdb_id == video.series_imdb_id
-    assert episode.tvdb_id == video.tvdb_id
-    assert episode.series_tvdb_id == video.series_tvdb_id
+    assert episode.external_ids == video.external_ids
     assert episode.alternative_series == video.alternative_series
 
 
@@ -328,10 +304,7 @@ def test_refine_episode_with_country(episodes: dict[str, Episode]) -> None:
     assert episode.year == video.year
     assert episode.original_series == video.original_series
     assert episode.title == video.title
-    assert episode.imdb_id == video.imdb_id
-    assert episode.series_imdb_id == video.series_imdb_id
-    assert episode.tvdb_id == video.tvdb_id
-    assert episode.series_tvdb_id == video.series_tvdb_id
+    assert episode.external_ids == video.external_ids
     assert episode.alternative_series == video.alternative_series
 
 
@@ -345,8 +318,5 @@ def test_refine_episode_with_country_hoc_us(episodes: dict[str, Episode]) -> Non
     assert episode.year == video.year
     assert episode.original_series == video.original_series
     assert episode.title == video.title
-    assert episode.imdb_id == video.imdb_id
-    assert episode.series_imdb_id == video.series_imdb_id
-    assert episode.tvdb_id == video.tvdb_id
-    assert episode.series_tvdb_id == video.series_tvdb_id
+    assert episode.external_ids == video.external_ids
     assert episode.alternative_series == video.alternative_series

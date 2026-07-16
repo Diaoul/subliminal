@@ -50,7 +50,7 @@ interactions:
     uri: https://api.opensubtitles.org/xml-rpc
   response:
     body:
-      string: <?xml version="1.0" encoding="utf-8"?><methodResponse><params><param><value><struct><member><name>token</name><value><string>uq4k9xdT6SdahEO2B,OS2JPfVo0</string></value></member><member><name>status</name><value><string>200
+      string: <?xml version="1.0" encoding="utf-8"?><methodResponse><params><param><value><struct><member><name>token</name><value><string>v4fztX7PpPkaZAIN1yq1i9FDQj6</string></value></member><member><name>status</name><value><string>200
         OK</string></value></member><member><name>seconds</name><value><double>0.005000</double></value></member></struct></value></param></params></methodResponse>
     headers:
       Access-Control-Allow-Credentials:
@@ -61,53 +61,48 @@ interactions:
       - GET, POST, OPTIONS
       Access-Control-Allow-Origin:
       - '*'
-      Age:
-      - '0'
       CF-RAY:
-      - 91189a4c5f885bd4-LIS
+      - a1bcc3b2fea8f369-LIS
+      Cf-Cache-Status:
+      - DYNAMIC
       Connection:
       - keep-alive
       Content-Type:
       - text/xml;charset=UTF-8
       Date:
-      - Thu, 13 Feb 2025 23:29:49 GMT
+      - Thu, 16 Jul 2026 00:07:02 GMT
       Download-Quota:
       - '999999999'
-      NEL:
-      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=Ri%2FTDDUrA7YRw2N38Acc3KdPt0XFaUl0KTC9eEurI%2B6IJevT64ReFoC1IjDslR8K1aoQTMXF0Q27XbZvh8pPdiWB%2F0IYFGYjoYY6P8BKSRgy1%2BPvIihXzGrn9ahFhO%2BHGn%2Bh7LPqNeE%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=xYUolV2qJhB%2BEKdtuvssMp5YO9NhKGs4jST9SW6PeQiJKtJdljVNRNmNIeuC8lcNgwoaUZ0DzZ6ecLVZxNwP%2Ft6zHIZRHQ53okPJq%2B07p1bJ9yGamq67yPBCPniWCEmHrzw025nImP4%3D"}]}'
       Server:
       - cloudflare
+      Server-Timing:
+      - miss, 0_TR_client_wait;dur=0, _Tw_queues;dur=0, 2_Tc_bak_connect;dur=4, 3_Tr_bak_response;dur=19
+      - cfCacheStatus;desc="DYNAMIC"
+      - cfEdge;dur=3,cfOrigin;dur=80
       Set-Cookie:
-      - PHPSESSID=uq4k9xdT6SdahEO2B%2COS2JPfVo0; expires=Fri, 14-Feb-2025 05:29:49
-        GMT; Max-Age=21600; path=/; domain=.opensubtitles.org; HttpOnly
+      - PHPSESSID=v4fztX7PpPkaZAIN1yq1i9FDQj6; expires=Thu, 16-Jul-2026 06:07:02 GMT;
+        Max-Age=21600; path=/; domain=.opensubtitles.org; HttpOnly
+      - server=; Expires=Thu, 01-Jan-1970 00:00:01 GMT; path=/
       Vary:
-      - Accept-Encoding
-      X-Cache-Backend:
-      - lw5
+      - accept-encoding
+      X-Backend-Server:
+      - lw2
       X-Compressed-Content-Length:
-      - '211'
+      - '217'
       X-Content-Encoding:
       - gzip
-      X-HTTP-Version:
+      X-Http-Version:
       - '1.0'
-      X-RateLimit-Remaining:
-      - '22'
       X-Uncompressed-Content-Length:
       - '380'
-      X-Var-Cache:
-      - MISS
-      X-Via:
-      - lb2
       alt-svc:
       - h3=":443"; ma=86400
-      cf-cache-status:
-      - DYNAMIC
       content-length:
       - '380'
-      server-timing:
-      - cfL4;desc="?proto=TCP&rtt=3004&min_rtt=2994&rtt_var=1144&sent=4&recv=7&lost=0&retrans=0&sent_bytes=2366&recv_bytes=1097&delivery_rate=939954&cwnd=241&unsent_bytes=0&cid=1bb7c99fe3398c19&ts=134&x=0"
     status:
       code: 200
       message: OK
@@ -122,7 +117,7 @@ interactions:
 
       <param>
 
-      <value><string>uq4k9xdT6SdahEO2B,OS2JPfVo0</string></value>
+      <value><string>v4fztX7PpPkaZAIN1yq1i9FDQj6</string></value>
 
       </param>
 
@@ -190,13 +185,13 @@ interactions:
     body:
       string: <?xml version="1.0" encoding="utf-8"?><methodResponse><params><param><value><struct><member><name>status</name><value><string>200
         OK</string></value></member><member><name>data</name><value><array><data><value><struct><member><name>MatchedBy</name><value><string>fulltext</string></value></member><member><name>IDSubMovieFile</name><value><string>0</string></value></member><member><name>MovieHash</name><value><string>0</string></value></member><member><name>MovieByteSize</name><value><string>0</string></value></member><member><name>MovieTimeMS</name><value><string>0</string></value></member><member><name>IDSubtitleFile</name><value><string>1953771908</string></value></member><member><name>SubFileName</name><value><string>The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION.de-SC+TV4U.srt</string></value></member><member><name>SubActualCD</name><value><string>1</string></value></member><member><name>SubSize</name><value><string>29791</string></value></member><member><name>SubHash</name><value><string>df97284ba9699282079ab3dc39684fda</string></value></member><member><name>SubLastTS</name><value><string>00:18:49</string></value></member><member><name>SubTSGroup</name><value><string>1</string></value></member><member><name>InfoReleaseGroup</name><value><string/></value></member><member><name>InfoFormat</name><value><string>HDTV</string></value></member><member><name>InfoOther</name><value><string/></value></member><member><name>IDSubtitle</name><value><string>5230500</string></value></member><member><name>UserID</name><value><string>0</string></value></member><member><name>SubLanguageID</name><value><string>ger</string></value></member><member><name>SubFormat</name><value><string>srt</string></value></member><member><name>SubSumCD</name><value><string>1</string></value></member><member><name>SubAuthorComment</name><value><string/></value></member><member><name>SubAddDate</name><value><string>2013-10-19
-        11:58:22</string></value></member><member><name>SubBad</name><value><string>0</string></value></member><member><name>SubRating</name><value><string>0.0</string></value></member><member><name>SubSumVotes</name><value><string>0</string></value></member><member><name>SubDownloadsCnt</name><value><string>19305</string></value></member><member><name>MovieReleaseName</name><value><string>The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION.de-SC+TV4U</string></value></member><member><name>MovieFPS</name><value><string>23.976</string></value></member><member><name>IDMovie</name><value><string>160367</string></value></member><member><name>IDMovieImdb</name><value><string>3229392</string></value></member><member><name>MovieName</name><value><string>&#34;The
+        11:58:22</string></value></member><member><name>SubBad</name><value><string>0</string></value></member><member><name>SubRating</name><value><string>0.0</string></value></member><member><name>SubSumVotes</name><value><string>0</string></value></member><member><name>SubDownloadsCnt</name><value><string>20325</string></value></member><member><name>MovieReleaseName</name><value><string>The.Big.Bang.Theory.S07E05.720p.HDTV.X264-DIMENSION.de-SC+TV4U</string></value></member><member><name>MovieFPS</name><value><string>23.976</string></value></member><member><name>IDMovie</name><value><string>160367</string></value></member><member><name>IDMovieImdb</name><value><string>3229392</string></value></member><member><name>MovieName</name><value><string>&#34;The
         Big Bang Theory&#34; The Workplace Proximity</string></value></member><member><name>MovieNameEng</name><value><string/></value></member><member><name>MovieYear</name><value><string>2013</string></value></member><member><name>MovieImdbRating</name><value><string>7.6</string></value></member><member><name>SubFeatured</name><value><string>0</string></value></member><member><name>UserNickName</name><value><string/></value></member><member><name>SubTranslator</name><value><string/></value></member><member><name>ISO639</name><value><string>de</string></value></member><member><name>LanguageName</name><value><string>German</string></value></member><member><name>SubComments</name><value><string>0</string></value></member><member><name>SubHearingImpaired</name><value><string>0</string></value></member><member><name>UserRank</name><value><string/></value></member><member><name>SeriesSeason</name><value><string>7</string></value></member><member><name>SeriesEpisode</name><value><string>5</string></value></member><member><name>MovieKind</name><value><string>episode</string></value></member><member><name>SubHD</name><value><string>1</string></value></member><member><name>SeriesIMDBParent</name><value><string>898266</string></value></member><member><name>SubEncoding</name><value><string>CP1252</string></value></member><member><name>SubAutoTranslation</name><value><string>0</string></value></member><member><name>SubForeignPartsOnly</name><value><string>0</string></value></member><member><name>SubFromTrusted</name><value><string>0</string></value></member><member><name>QueryParameters</name><value><struct><member><name>query</name><value><string>the
-        big bang theory</string></value></member><member><name>episode</name><value><string>5</string></value></member><member><name>season</name><value><string>7</string></value></member><member><name>sublanguageid</name><value><string>ger</string></value></member></struct></value></member><member><name>SubTSGroupHash</name><value><string>ed93176baadc0d02f4b94d140b339ec8</string></value></member><member><name>SubDownloadLink</name><value><string>https://dl.opensubtitles.org/en/download/src-api/vrf-19cf0c5b/sid-uq4k9xdT6SdahEO2B,OS2JPfVo0/file/1953771908.gz</string></value></member><member><name>ZipDownloadLink</name><value><string>https://dl.opensubtitles.org/en/download/src-api/vrf-f5160ba8/sid-uq4k9xdT6SdahEO2B,OS2JPfVo0/sub/5230500</string></value></member><member><name>SubtitlesLink</name><value><string>http://www.opensubtitles.org/en/subtitles/5230500/sid-uq4k9xdT6SdahEO2B,OS2JPfVo0/the-big-bang-theory-the-workplace-proximity-de</string></value></member><member><name>QueryNumber</name><value><string>0</string></value></member><member><name>Score</name><value><double>0.193050</double></value></member></struct></value><value><struct><member><name>MatchedBy</name><value><string>fulltext</string></value></member><member><name>IDSubMovieFile</name><value><string>0</string></value></member><member><name>MovieHash</name><value><string>0</string></value></member><member><name>MovieByteSize</name><value><string>0</string></value></member><member><name>MovieTimeMS</name><value><string>0</string></value></member><member><name>IDSubtitleFile</name><value><string>1956168972</string></value></member><member><name>SubFileName</name><value><string>The.Big.Bang.Theory.S07E05.German.DL.1080p.BluRay.x264-iND.srt</string></value></member><member><name>SubActualCD</name><value><string>1</string></value></member><member><name>SubSize</name><value><string>24967</string></value></member><member><name>SubHash</name><value><string>a4b84ae89731eea6e33f62fefb48af9c</string></value></member><member><name>SubLastTS</name><value><string>00:18:57</string></value></member><member><name>SubTSGroup</name><value><string>1</string></value></member><member><name>InfoReleaseGroup</name><value><string>iND</string></value></member><member><name>InfoFormat</name><value><string>BluRay</string></value></member><member><name>InfoOther</name><value><string/></value></member><member><name>IDSubtitle</name><value><string>7593069</string></value></member><member><name>UserID</name><value><string>0</string></value></member><member><name>SubLanguageID</name><value><string>ger</string></value></member><member><name>SubFormat</name><value><string>srt</string></value></member><member><name>SubSumCD</name><value><string>1</string></value></member><member><name>SubAuthorComment</name><value><string/></value></member><member><name>SubAddDate</name><value><string>2018-12-31
-        06:00:27</string></value></member><member><name>SubBad</name><value><string>0</string></value></member><member><name>SubRating</name><value><string>0.0</string></value></member><member><name>SubSumVotes</name><value><string>0</string></value></member><member><name>SubDownloadsCnt</name><value><string>352</string></value></member><member><name>MovieReleaseName</name><value><string>
+        big bang theory</string></value></member><member><name>episode</name><value><string>5</string></value></member><member><name>season</name><value><string>7</string></value></member><member><name>sublanguageid</name><value><string>ger</string></value></member></struct></value></member><member><name>SubTSGroupHash</name><value><string>ed93176baadc0d02f4b94d140b339ec8</string></value></member><member><name>SubDownloadLink</name><value><string>https://dl.opensubtitles.org/en/download/src-api/vrf-19cf0c5b/sid-v4fztX7PpPkaZAIN1yq1i9FDQj6/file/1953771908.gz</string></value></member><member><name>ZipDownloadLink</name><value><string>https://dl.opensubtitles.org/en/download/src-api/vrf-f5160ba8/sid-v4fztX7PpPkaZAIN1yq1i9FDQj6/sub/5230500</string></value></member><member><name>SubtitlesLink</name><value><string>http://www.opensubtitles.org/en/subtitles/5230500/sid-v4fztX7PpPkaZAIN1yq1i9FDQj6/the-big-bang-theory-the-workplace-proximity-de</string></value></member><member><name>QueryNumber</name><value><string>0</string></value></member><member><name>Score</name><value><double>0.203250</double></value></member></struct></value><value><struct><member><name>MatchedBy</name><value><string>fulltext</string></value></member><member><name>IDSubMovieFile</name><value><string>0</string></value></member><member><name>MovieHash</name><value><string>0</string></value></member><member><name>MovieByteSize</name><value><string>0</string></value></member><member><name>MovieTimeMS</name><value><string>0</string></value></member><member><name>IDSubtitleFile</name><value><string>1956168972</string></value></member><member><name>SubFileName</name><value><string>The.Big.Bang.Theory.S07E05.German.DL.1080p.BluRay.x264-iND.srt</string></value></member><member><name>SubActualCD</name><value><string>1</string></value></member><member><name>SubSize</name><value><string>24967</string></value></member><member><name>SubHash</name><value><string>a4b84ae89731eea6e33f62fefb48af9c</string></value></member><member><name>SubLastTS</name><value><string>00:18:57</string></value></member><member><name>SubTSGroup</name><value><string>1</string></value></member><member><name>InfoReleaseGroup</name><value><string>iND</string></value></member><member><name>InfoFormat</name><value><string>BluRay</string></value></member><member><name>InfoOther</name><value><string/></value></member><member><name>IDSubtitle</name><value><string>7593069</string></value></member><member><name>UserID</name><value><string>0</string></value></member><member><name>SubLanguageID</name><value><string>ger</string></value></member><member><name>SubFormat</name><value><string>srt</string></value></member><member><name>SubSumCD</name><value><string>1</string></value></member><member><name>SubAuthorComment</name><value><string/></value></member><member><name>SubAddDate</name><value><string>2018-12-31
+        06:00:27</string></value></member><member><name>SubBad</name><value><string>0</string></value></member><member><name>SubRating</name><value><string>0.0</string></value></member><member><name>SubSumVotes</name><value><string>0</string></value></member><member><name>SubDownloadsCnt</name><value><string>379</string></value></member><member><name>MovieReleaseName</name><value><string>
         The.Big.Bang.Theory.S07E05.German.DL.1080p.BluRay.x264</string></value></member><member><name>MovieFPS</name><value><string>23.976</string></value></member><member><name>IDMovie</name><value><string>160367</string></value></member><member><name>IDMovieImdb</name><value><string>3229392</string></value></member><member><name>MovieName</name><value><string>&#34;The
         Big Bang Theory&#34; The Workplace Proximity</string></value></member><member><name>MovieNameEng</name><value><string/></value></member><member><name>MovieYear</name><value><string>2013</string></value></member><member><name>MovieImdbRating</name><value><string>7.6</string></value></member><member><name>SubFeatured</name><value><string>0</string></value></member><member><name>UserNickName</name><value><string/></value></member><member><name>SubTranslator</name><value><string/></value></member><member><name>ISO639</name><value><string>de</string></value></member><member><name>LanguageName</name><value><string>German</string></value></member><member><name>SubComments</name><value><string>0</string></value></member><member><name>SubHearingImpaired</name><value><string>1</string></value></member><member><name>UserRank</name><value><string/></value></member><member><name>SeriesSeason</name><value><string>7</string></value></member><member><name>SeriesEpisode</name><value><string>5</string></value></member><member><name>MovieKind</name><value><string>episode</string></value></member><member><name>SubHD</name><value><string>1</string></value></member><member><name>SeriesIMDBParent</name><value><string>898266</string></value></member><member><name>SubEncoding</name><value><string>UTF-8</string></value></member><member><name>SubAutoTranslation</name><value><string>0</string></value></member><member><name>SubForeignPartsOnly</name><value><string>0</string></value></member><member><name>SubFromTrusted</name><value><string>0</string></value></member><member><name>QueryParameters</name><value><struct><member><name>query</name><value><string>the
-        big bang theory</string></value></member><member><name>episode</name><value><string>5</string></value></member><member><name>season</name><value><string>7</string></value></member><member><name>sublanguageid</name><value><string>ger</string></value></member></struct></value></member><member><name>SubTSGroupHash</name><value><string>ed93176baadc0d02f4b94d140b339ec8</string></value></member><member><name>SubDownloadLink</name><value><string>https://dl.opensubtitles.org/en/download/src-api/vrf-19df0c5f/sid-uq4k9xdT6SdahEO2B,OS2JPfVo0/file/1956168972.gz</string></value></member><member><name>ZipDownloadLink</name><value><string>https://dl.opensubtitles.org/en/download/src-api/vrf-f5660bc0/sid-uq4k9xdT6SdahEO2B,OS2JPfVo0/sub/7593069</string></value></member><member><name>SubtitlesLink</name><value><string>http://www.opensubtitles.org/en/subtitles/7593069/sid-uq4k9xdT6SdahEO2B,OS2JPfVo0/the-big-bang-theory-the-workplace-proximity-de</string></value></member><member><name>QueryNumber</name><value><string>0</string></value></member><member><name>Score</name><value><double>0.003520</double></value></member></struct></value></data></array></value></member><member><name>seconds</name><value><double>0.189000</double></value></member></struct></value></param></params></methodResponse>
+        big bang theory</string></value></member><member><name>episode</name><value><string>5</string></value></member><member><name>season</name><value><string>7</string></value></member><member><name>sublanguageid</name><value><string>ger</string></value></member></struct></value></member><member><name>SubTSGroupHash</name><value><string>ed93176baadc0d02f4b94d140b339ec8</string></value></member><member><name>SubDownloadLink</name><value><string>https://dl.opensubtitles.org/en/download/src-api/vrf-19df0c5f/sid-v4fztX7PpPkaZAIN1yq1i9FDQj6/file/1956168972.gz</string></value></member><member><name>ZipDownloadLink</name><value><string>https://dl.opensubtitles.org/en/download/src-api/vrf-f5660bc0/sid-v4fztX7PpPkaZAIN1yq1i9FDQj6/sub/7593069</string></value></member><member><name>SubtitlesLink</name><value><string>http://www.opensubtitles.org/en/subtitles/7593069/sid-v4fztX7PpPkaZAIN1yq1i9FDQj6/the-big-bang-theory-the-workplace-proximity-de</string></value></member><member><name>QueryNumber</name><value><string>0</string></value></member><member><name>Score</name><value><double>0.003790</double></value></member></struct></value></data></array></value></member><member><name>seconds</name><value><double>0.170000</double></value></member></struct></value></param></params></methodResponse>
     headers:
       Access-Control-Allow-Credentials:
       - ''
@@ -206,51 +201,46 @@ interactions:
       - GET, POST, OPTIONS
       Access-Control-Allow-Origin:
       - '*'
-      Age:
-      - '0'
       CF-RAY:
-      - 91189a4d385a5bd4-LIS
+      - a1bcc3b39f7bf369-LIS
+      Cf-Cache-Status:
+      - DYNAMIC
       Connection:
       - keep-alive
       Content-Type:
       - text/xml;charset=UTF-8
       Date:
-      - Thu, 13 Feb 2025 23:29:49 GMT
-      NEL:
-      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      - Thu, 16 Jul 2026 00:07:03 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=wsQ7TFXzRUJfWXuRVdth7Z3PUgBxnGHiV5qBK98pNf1%2BMKjbj9mvh3GAPeTqqEnBDIYc2scll2W6W3cGKc5KXekAdNJwuwHMLJuImWscgv5UkM9uhUM4kAI1p6q8fvHHaSn3%2BdmqDNo%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=CBTBtEvTlQ9ykniyQeStFSYxDRslV%2FnGD7s0nlr7sSrfkfC9LMBV%2Bf7usxD5a0Ir%2FXgWR0SAWEmh1pkxVtbNEXjX188Sg5fNX7l24%2FEGZubmG1SXTKoJM0R9i2L9FcDszLdMzE1O6rI%3D"}]}'
       Server:
       - cloudflare
+      Server-Timing:
+      - miss, 0_TR_client_wait;dur=0, _Tw_queues;dur=0, 2_Tc_bak_connect;dur=1, 3_Tr_bak_response;dur=181
+      - cfCacheStatus;desc="DYNAMIC"
+      - cfEdge;dur=3,cfOrigin;dur=233
       Set-Cookie:
-      - PHPSESSID=uq4k9xdT6SdahEO2B%2COS2JPfVo0; expires=Fri, 14-Feb-2025 05:29:49
-        GMT; Max-Age=21600; path=/; domain=.opensubtitles.org; HttpOnly
+      - PHPSESSID=v4fztX7PpPkaZAIN1yq1i9FDQj6; expires=Thu, 16-Jul-2026 06:07:03 GMT;
+        Max-Age=21600; path=/; domain=.opensubtitles.org; HttpOnly
+      - server=; Expires=Thu, 01-Jan-1970 00:00:01 GMT; path=/
       Vary:
-      - Accept-Encoding
-      X-Cache-Backend:
-      - lw5
+      - accept-encoding
+      X-Backend-Server:
+      - lw2
       X-Compressed-Content-Length:
-      - '1355'
+      - '1357'
       X-Content-Encoding:
       - gzip
-      X-HTTP-Version:
+      X-Http-Version:
       - '1.0'
-      X-RateLimit-Remaining:
-      - '20'
       X-Uncompressed-Content-Length:
       - '10916'
-      X-Var-Cache:
-      - MISS
-      X-Via:
-      - lb2
       alt-svc:
       - h3=":443"; ma=86400
-      cf-cache-status:
-      - DYNAMIC
       content-length:
       - '10916'
-      server-timing:
-      - cfL4;desc="?proto=TCP&rtt=3672&min_rtt=2673&rtt_var=2124&sent=8&recv=10&lost=0&retrans=0&sent_bytes=4599&recv_bytes=1872&delivery_rate=1083426&cwnd=244&unsent_bytes=0&cid=1bb7c99fe3398c19&ts=391&x=0"
     status:
       code: 200
       message: OK
@@ -265,7 +255,7 @@ interactions:
 
       <param>
 
-      <value><string>uq4k9xdT6SdahEO2B,OS2JPfVo0</string></value>
+      <value><string>v4fztX7PpPkaZAIN1yq1i9FDQj6</string></value>
 
       </param>
 
@@ -288,7 +278,7 @@ interactions:
   response:
     body:
       string: <?xml version="1.0" encoding="utf-8"?><methodResponse><params><param><value><struct><member><name>status</name><value><string>200
-        OK</string></value></member><member><name>seconds</name><value><double>0.002000</double></value></member></struct></value></param></params></methodResponse>
+        OK</string></value></member><member><name>seconds</name><value><double>0.018000</double></value></member></struct></value></param></params></methodResponse>
     headers:
       Access-Control-Allow-Credentials:
       - ''
@@ -298,51 +288,46 @@ interactions:
       - GET, POST, OPTIONS
       Access-Control-Allow-Origin:
       - '*'
-      Age:
-      - '0'
       CF-RAY:
-      - 91189a4eca305bd4-LIS
+      - a1bcc3b56a2bf369-LIS
+      Cf-Cache-Status:
+      - DYNAMIC
       Connection:
       - keep-alive
       Content-Type:
       - text/xml;charset=UTF-8
       Date:
-      - Thu, 13 Feb 2025 23:29:49 GMT
-      NEL:
-      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      - Thu, 16 Jul 2026 00:07:03 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=%2BRpnRh50KgwfPHnN1mvQu%2FXO%2Ftn4XP3nVcK9lfE7hSLDstWBNgGqYuVK8%2BKPx8laMFnOM38WdquzeM7mOYbhmEPulMqMuv%2BOczhuG9z6tpmTRnN7soxp7O8YKRsMC2Y5y8ApvzoRvpw%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=14obupuM%2FFEvjQ7FaL6ViAC4SuF%2Bv%2Fj5Oh1pEpRSTokRZ0ahb%2BKiAHM%2FDYUejYx3e7EJQ2INfecZNxBs0WxHphrxjRdCO%2FojhMNVRKoI24iTduIXGrbB74x58J1eCX7%2F4dc1nXvX4ZQ%3D"}]}'
       Server:
       - cloudflare
+      Server-Timing:
+      - miss, 0_TR_client_wait;dur=0, _Tw_queues;dur=0, 2_Tc_bak_connect;dur=0, 3_Tr_bak_response;dur=30
+      - cfCacheStatus;desc="DYNAMIC"
+      - cfEdge;dur=2,cfOrigin;dur=86
       Set-Cookie:
-      - PHPSESSID=uq4k9xdT6SdahEO2B%2COS2JPfVo0; expires=Fri, 14-Feb-2025 05:29:49
-        GMT; Max-Age=21600; path=/; domain=.opensubtitles.org; HttpOnly
+      - PHPSESSID=v4fztX7PpPkaZAIN1yq1i9FDQj6; expires=Thu, 16-Jul-2026 06:07:03 GMT;
+        Max-Age=21600; path=/; domain=.opensubtitles.org; HttpOnly
+      - server=; Expires=Thu, 01-Jan-1970 00:00:01 GMT; path=/
       Vary:
-      - Accept-Encoding
-      X-Cache-Backend:
-      - lw5
+      - accept-encoding
+      X-Backend-Server:
+      - lw4
       X-Compressed-Content-Length:
-      - '172'
+      - '171'
       X-Content-Encoding:
       - gzip
-      X-HTTP-Version:
+      X-Http-Version:
       - '1.0'
-      X-RateLimit-Remaining:
-      - '19'
       X-Uncompressed-Content-Length:
       - '286'
-      X-Var-Cache:
-      - MISS
-      X-Via:
-      - lb2
       alt-svc:
       - h3=":443"; ma=86400
-      cf-cache-status:
-      - DYNAMIC
       content-length:
       - '286'
-      server-timing:
-      - cfL4;desc="?proto=TCP&rtt=3557&min_rtt=2673&rtt_var=1824&sent=12&recv=13&lost=0&retrans=0&sent_bytes=7471&recv_bytes=2235&delivery_rate=1580210&cwnd=247&unsent_bytes=0&cid=1bb7c99fe3398c19&ts=456&x=0"
     status:
       code: 200
       message: OK
@@ -384,48 +369,44 @@ interactions:
       - GET, POST, OPTIONS
       Access-Control-Allow-Origin:
       - '*'
-      Age:
-      - '0'
       CF-RAY:
-      - 91189a4f2aab5bd4-LIS
+      - a1bcc3b61b27f369-LIS
+      Cf-Cache-Status:
+      - DYNAMIC
       Connection:
       - keep-alive
       Content-Type:
       - text/xml;charset=UTF-8
       Date:
-      - Thu, 13 Feb 2025 23:29:50 GMT
-      NEL:
-      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      - Thu, 16 Jul 2026 00:07:03 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=7q0pyUFe8iGzM8mEHNSQTfEdqoSjPoM%2FnCcqZ7rqCv4MhyQPBS%2Bs2vw6EkU9KVnOykUx3nQtobJ%2B3nuTPrroixB%2BdcRmxhtkqsuBnspnR7hB2AaEDQo6R9Kj1pABUm7UV7bCYsEdbJ4%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=sAtp8fTVq0AxCBX9%2FBYX4uqcRzblcWO7DDngoddyr0y0n4xi1JUgxaTvzGkThhdtNS27Sv61pC%2BdxpJNHqd%2BY%2FmNtfZvEopsNYMjbEeO93j33TI7YaRI4Jz%2BEnpvdbCYXytGuEogNIs%3D"}]}'
       Server:
       - cloudflare
+      Server-Timing:
+      - miss, 0_TR_client_wait;dur=0, _Tw_queues;dur=0, 2_Tc_bak_connect;dur=1, 3_Tr_bak_response;dur=10
+      - cfCacheStatus;desc="DYNAMIC"
+      - cfEdge;dur=2,cfOrigin;dur=62
+      Set-Cookie:
+      - server=; Expires=Thu, 01-Jan-1970 00:00:01 GMT; path=/
       Vary:
-      - Accept-Encoding
-      X-Cache-Backend:
-      - lw5
+      - accept-encoding
+      X-Backend-Server:
+      - lw4
       X-Compressed-Content-Length:
       - '180'
       X-Content-Encoding:
       - gzip
-      X-HTTP-Version:
+      X-Http-Version:
       - '1.0'
-      X-RateLimit-Remaining:
-      - '18'
       X-Uncompressed-Content-Length:
       - '300'
-      X-Var-Cache:
-      - MISS
-      X-Via:
-      - lb2
       alt-svc:
       - h3=":443"; ma=86400
-      cf-cache-status:
-      - DYNAMIC
       content-length:
       - '300'
-      server-timing:
-      - cfL4;desc="?proto=TCP&rtt=3463&min_rtt=2673&rtt_var=1555&sent=15&recv=16&lost=0&retrans=0&sent_bytes=9141&recv_bytes=2519&delivery_rate=1580210&cwnd=247&unsent_bytes=0&cid=1bb7c99fe3398c19&ts=520&x=0"
     status:
       code: 200
       message: OK

@@ -3,11 +3,11 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, zstd
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.2
+      - Subliminal/2.6
       accept:
       - application/json
     method: GET
@@ -17,41 +17,41 @@ interactions:
       string: '{"shows":[{"id":"91eb9278-8cf5-4ddd-9111-7f60b15958cb","name":"The
         Big Bang Theory","nbSeasons":12,"seasons":[1,2,3,4,5,6,7,8,9,10,11,12],"tvDbId":80379,"tmdbId":1418,"slug":"the-big-bang-theory"}]}'
     headers:
-      CF-Cache-Status:
-      - HIT
       CF-RAY:
-      - 91189a3b2e245be8-LIS
+      - a1bcc3777ce75816-LIS
       Cache-Control:
       - public, max-age=14400
+      Cf-Cache-Status:
+      - HIT
       Connection:
       - keep-alive
+      Content-Encoding:
+      - zstd
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 13 Feb 2025 23:29:46 GMT
+      - Thu, 16 Jul 2026 00:06:53 GMT
       Last-Modified:
-      - Thu, 13 Feb 2025 20:16:17 GMT
-      NEL:
-      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      - Thu, 16 Jul 2026 00:06:53 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=qICbmX3AgwKMtYv%2BsM264kQKAUXoK5fmbFkBE0oRv1%2Fy%2B6wYxcRM92Y0NBddXmoWSXequM3hwacl1z51WqnASungSt8RnL5ACFS9UFlVdy7YJKYk89X51OsoSIhBvRfod9b2mA%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=UXVHyBQ9TwWT53w4ubAD%2Bx2mY5XVplJQX2tvjFJyC3igjTIWMshSFBwYMhVo2Y8MtXjaPip%2BgTLKUWqFOi8e0Y3K35urAvxnq6bzSKnQbn21bU8Akd%2FwqclnbzfyiAaeZM2DQQ%3D%3D"}]}'
       Server:
       - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
       Strict-Transport-Security:
       - max-age=15552000; includeSubDomains; preload
       Transfer-Encoding:
       - chunked
+      Vary:
+      - Accept-Encoding
+      - Accept-Encoding
       X-Content-Type-Options:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
-      content-length:
-      - '198'
-      server-timing:
-      - cfL4;desc="?proto=TCP&rtt=3011&min_rtt=2980&rtt_var=1180&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2848&recv_bytes=810&delivery_rate=896039&cwnd=251&unsent_bytes=0&cid=64188512408efddd&ts=61&x=0"
-      vary:
-      - Accept-Encoding
-      - Accept-Encoding
     status:
       code: 200
       message: OK

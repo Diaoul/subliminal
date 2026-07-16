@@ -3,57 +3,55 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, zstd
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.2
+      - Subliminal/2.6
       accept:
       - application/json
     method: GET
-    uri: https://api.gestdown.info/shows/external/tvdb/121361
+    uri: https://api.gestdown.info/shows/search/Game%20of%20Thrones
   response:
     body:
       string: '{"shows":[{"id":"b88a8594-d158-4fde-b93e-38f37cb7b50b","name":"Game
         of Thrones","nbSeasons":9,"seasons":[0,1,2,3,4,5,6,7,8],"tvDbId":121361,"tmdbId":1399,"slug":"game-of-thrones"}]}'
     headers:
-      Age:
-      - '52289'
-      CF-Cache-Status:
-      - HIT
       CF-RAY:
-      - 91189a451c5bef44-LHR
+      - a1bcc38738a03b82-LIS
       Cache-Control:
       - public, max-age=14400
+      Cf-Cache-Status:
+      - HIT
       Connection:
       - keep-alive
+      Content-Encoding:
+      - zstd
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 13 Feb 2025 23:29:48 GMT
+      - Thu, 16 Jul 2026 00:06:55 GMT
       Last-Modified:
-      - Mon, 10 Feb 2025 20:33:58 GMT
-      NEL:
-      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      - Thu, 16 Jul 2026 00:06:55 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=XVCRtxrj38ejlLJahNRtAn7dj6lHf%2FFWVBhqNa4QSJbvV07VlvbUKzHLU60SKHiIXrpiXORcBlBl3jF74fdNlmgksrjEQKYOU%2FnLQto70vHI2xDU%2FAr2DFPUUK5fNrtvfSJ0jg%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=FZpe64HC3m7LtWFbpqsTnez289HJPnCwxyjdNR5Nc8Vm%2F3%2Fn9PeeBmTdoGwKrRb4pvOqo5HHrkikP76D%2FvBo1uTFihBTP4UcDXvkhtF10uq%2BtVirUSwCw2BIS6mV2aUzQCUEyQ%3D%3D"}]}'
       Server:
       - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
       Strict-Transport-Security:
       - max-age=15552000; includeSubDomains; preload
       Transfer-Encoding:
       - chunked
+      Vary:
+      - Accept-Encoding
+      - Accept-Encoding
       X-Content-Type-Options:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
-      content-length:
-      - '181'
-      server-timing:
-      - cfL4;desc="?proto=TCP&rtt=33072&min_rtt=32997&rtt_var=12525&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2846&recv_bytes=798&delivery_rate=86180&cwnd=250&unsent_bytes=0&cid=1f91349795e4f7dd&ts=51&x=0"
-      vary:
-      - Accept-Encoding
-      - Accept-Encoding
     status:
       code: 200
       message: OK
@@ -61,55 +59,55 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, zstd
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.2
+      - Subliminal/2.6
       accept:
       - application/json
     method: GET
     uri: https://api.gestdown.info/subtitles/get/b88a8594-d158-4fde-b93e-38f37cb7b50b/3/10/por
   response:
     body:
-      string: '{"matchingSubtitles":[{"subtitleId":"9f486fef-ce86-4918-a292-dacd5dda07c8","version":"All_with_preview","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/9f486fef-ce86-4918-a292-dacd5dda07c8","language":"Portuguese","discovered":"2022-05-31T17:21:37.386235Z","downloadCount":213},{"subtitleId":"4db010e2-d271-4bd5-bda8-9756c8f4a437","version":"All_without_preview","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/4db010e2-d271-4bd5-bda8-9756c8f4a437","language":"Portuguese","discovered":"2022-05-31T17:21:37.386236Z","downloadCount":48}],"episode":{"season":3,"number":10,"title":"Mhysa","show":"Game
+      string: '{"matchingSubtitles":[{"subtitleId":"9f486fef-ce86-4918-a292-dacd5dda07c8","version":"All_with_preview","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/9f486fef-ce86-4918-a292-dacd5dda07c8","language":"Portuguese","discovered":"2022-05-31T17:21:37.386235Z","downloadCount":278,"source":"Addic7ed","qualities":["720p","1080p"],"release":null},{"subtitleId":"4db010e2-d271-4bd5-bda8-9756c8f4a437","version":"All_without_preview","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/4db010e2-d271-4bd5-bda8-9756c8f4a437","language":"Portuguese","discovered":"2022-05-31T17:21:37.386236Z","downloadCount":48,"source":"Addic7ed","qualities":["720p","1080p"],"release":null}],"episode":{"season":3,"number":10,"title":"Mhysa","show":"Game
         of Thrones","discovered":"2022-05-31T17:21:37.386209Z"}}'
     headers:
       CF-RAY:
-      - 91189a45ec1cef3c-LHR
+      - a1bcc3880c076924-LIS
       Cache-Control:
       - public, max-age=7200
+      Cf-Cache-Status:
+      - MISS
       Connection:
       - keep-alive
+      Content-Encoding:
+      - zstd
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 13 Feb 2025 23:29:48 GMT
-      NEL:
-      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      - Thu, 16 Jul 2026 00:06:56 GMT
+      Last-Modified:
+      - Thu, 16 Jul 2026 00:06:56 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=ReCwGyf%2BF9WcgknAFV%2FJ57WVBtpHt61eI2ZgvXM9XaYFAG2Kk2%2F%2FApocYsJq6LL32luOh2vTfMArOLeWG%2Fj%2F3R4IYXUm8ZSTzarCy%2Blxz9B7MNct7VxhOuSwaj0%2FyZyIMZ1G6A%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=rghv39RvZt4zwB0ccN5M%2Fn%2FtH%2BlXi%2BwYzlDpEFykP9d%2FicIOuOxRz%2F%2FEoFEINOzoBviS5xyi8tgORAHc5L%2BiHuW%2B2sY46iBeYBHPyYcXPp4UWRKxu4r%2FVFh3gbXlzEn9WLQUBA%3D%3D"}]}'
       Server:
       - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
       Strict-Transport-Security:
       - max-age=15552000; includeSubDomains; preload
       Transfer-Encoding:
       - chunked
+      Vary:
+      - Accept-Encoding
+      - Accept-Encoding
       X-Content-Type-Options:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
-      cf-cache-status:
-      - EXPIRED
-      content-length:
-      - '766'
-      last-modified:
-      - Thu, 13 Feb 2025 23:29:48 GMT
-      server-timing:
-      - cfL4;desc="?proto=TCP&rtt=32108&min_rtt=31987&rtt_var=12238&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2847&recv_bytes=831&delivery_rate=87866&cwnd=250&unsent_bytes=0&cid=df7102422e3b7599&ts=94&x=0"
-      vary:
-      - Accept-Encoding
-      - Accept-Encoding
     status:
       code: 200
       message: OK

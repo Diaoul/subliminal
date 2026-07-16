@@ -129,7 +129,7 @@ def test_get_series_wrong_id(client: TMDBClient) -> None:
 def test_refine_no_apikey(movies: dict[str, Movie]) -> None:
     movie = Movie(movies['man_of_steel'].name, movies['man_of_steel'].title.lower())
     refine(movie)
-    assert movie.tmdb_id is None
+    assert not movie.external_ids
 
 
 @pytest.mark.integration
@@ -144,7 +144,7 @@ def test_refine_episode(episodes: dict[str, Episode]) -> None:
     refine(episode, apikey=TMDB_API_KEY)
     assert episode.series == episodes['bbt_s07e05'].series
     assert episode.year == episodes['bbt_s07e05'].year
-    assert episode.series_imdb_id == episodes['bbt_s07e05'].series_imdb_id
+    assert episode.external_ids.get('series_imdb_id') == episodes['bbt_s07e05'].external_ids.get('series_imdb_id')
 
 
 @pytest.mark.integration
@@ -159,7 +159,7 @@ def test_refine_episode_original_series(episodes: dict[str, Episode]) -> None:
     refine(episode, apikey=TMDB_API_KEY)
     assert episode.series == episodes['dallas_s01e03'].series
     assert episode.year == 1978
-    assert episode.series_imdb_id == 'tt0077000'
+    assert episode.external_ids.get('series_imdb_id') == 'tt0077000'
 
 
 @pytest.mark.integration
@@ -176,7 +176,7 @@ def test_refine_episode_year(episodes: dict[str, Episode]) -> None:
     refine(episode, apikey=TMDB_API_KEY)
     assert episode.series == episodes['dallas_2012_s01e03'].series
     assert episode.year == episodes['dallas_2012_s01e03'].year
-    assert episode.series_imdb_id == 'tt1723760'
+    assert episode.external_ids.get('series_imdb_id') == 'tt1723760'
 
 
 @pytest.mark.integration
@@ -186,7 +186,7 @@ def test_refine_movie(movies: dict[str, Movie]) -> None:
     refine(movie, apikey=TMDB_API_KEY)
     assert movie.title == movies['man_of_steel'].title
     assert movie.year == movies['man_of_steel'].year
-    assert movie.imdb_id == movies['man_of_steel'].imdb_id
+    assert movie.external_ids.get('imdb_id') == movies['man_of_steel'].external_ids.get('imdb_id')
 
 
 @pytest.mark.integration
@@ -196,7 +196,7 @@ def test_refine_movie_guess_alternative_title(movies: dict[str, Movie]) -> None:
     refine(movie, apikey=TMDB_API_KEY)
     assert movie.title == movies['jack_reacher_never_go_back'].title
     assert movie.year == movies['jack_reacher_never_go_back'].year
-    assert movie.imdb_id == movies['jack_reacher_never_go_back'].imdb_id
+    assert movie.external_ids.get('imdb_id') == movies['jack_reacher_never_go_back'].external_ids.get('imdb_id')
 
 
 @pytest.mark.integration
@@ -206,8 +206,8 @@ def test_refine_episode_with_country(episodes: dict[str, Episode]) -> None:
     refine(episode, apikey=TMDB_API_KEY)
     # omdb has no country info. No match
     assert episode.series == episodes['shameless_us_s08e01'].series
-    assert episode.series_tmdb_id == 34307
-    assert episode.series_imdb_id == 'tt1586680'
+    assert episode.external_ids.get('series_tmdb_id') == '34307'
+    assert episode.external_ids.get('series_imdb_id') == 'tt1586680'
 
 
 @pytest.mark.integration
@@ -217,5 +217,5 @@ def test_refine_episode_with_country_hoc_us(episodes: dict[str, Episode]) -> Non
     refine(episode, apikey=TMDB_API_KEY)
     # omdb has no country info. No match
     assert episode.series == episodes['house_of_cards_us_s06e01'].series
-    assert episode.series_tmdb_id == 1425
-    assert episode.series_imdb_id == 'tt1856010'
+    assert episode.external_ids.get('series_tmdb_id') == '1425'
+    assert episode.external_ids.get('series_imdb_id') == 'tt1856010'

@@ -3,11 +3,11 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, zstd
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.2
+      - Subliminal/2.6
       accept:
       - application/json
     method: GET
@@ -17,41 +17,41 @@ interactions:
       string: '{"shows":[{"id":"b23a6864-d99c-48f1-95f7-b675289ca8a8","name":"CSI:
         Cyber","nbSeasons":2,"seasons":[1,2],"tvDbId":281551,"tmdbId":61811,"slug":"csi-cyber"}]}'
     headers:
-      CF-Cache-Status:
-      - MISS
       CF-RAY:
-      - 91189a486ab55be2-LIS
+      - a1bcc38aba24e3bd-LIS
       Cache-Control:
       - public, max-age=14400
+      Cf-Cache-Status:
+      - MISS
       Connection:
       - keep-alive
+      Content-Encoding:
+      - zstd
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 13 Feb 2025 23:29:48 GMT
+      - Thu, 16 Jul 2026 00:06:56 GMT
       Last-Modified:
-      - Thu, 13 Feb 2025 23:29:48 GMT
-      NEL:
-      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      - Thu, 16 Jul 2026 00:06:56 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=RKYiJqrE2KKunpU1ZD80TbI3QGmyJF4S4q5Ebjk77i%2BF%2B0GK8XCYNKYFHGver9vYEZ0fEky6hU6vzhRAVcZNjpJWLQL2LEYUI2l7b1bP%2FHg8EGA3%2Bv15VugLP2kRxZdLWVsz0g%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=khMuyfpecbIZ5Sch6SpjxvGhhTgsiPB6YGCn2P%2FdyYMQh1jD5xHHl4EJ%2BgDpHgCo6RBAPJ73nACEXDQBd9W4vsVnySWROhg9wAKia%2BOO%2FbpzcUWrh9GODOF5KZF5pg5ikiVJ4A%3D%3D"}]}'
       Server:
       - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
       Strict-Transport-Security:
       - max-age=15552000; includeSubDomains; preload
       Transfer-Encoding:
       - chunked
+      Vary:
+      - Accept-Encoding
+      - Accept-Encoding
       X-Content-Type-Options:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
-      content-length:
-      - '157'
-      server-timing:
-      - cfL4;desc="?proto=TCP&rtt=3057&min_rtt=2994&rtt_var=1248&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2846&recv_bytes=797&delivery_rate=827901&cwnd=183&unsent_bytes=0&cid=2e43278c80d97922&ts=81&x=0"
-      vary:
-      - Accept-Encoding
-      - Accept-Encoding
     status:
       code: 200
       message: OK
@@ -59,55 +59,55 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, zstd
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.2
+      - Subliminal/2.6
       accept:
       - application/json
     method: GET
     uri: https://api.gestdown.info/subtitles/get/b23a6864-d99c-48f1-95f7-b675289ca8a8/2/3/eng
   response:
     body:
-      string: '{"matchingSubtitles":[{"subtitleId":"05785d75-5fdc-4f5a-8a06-94da5b82faf6","version":"DIMENSION","completed":true,"hearingImpaired":true,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/05785d75-5fdc-4f5a-8a06-94da5b82faf6","language":"English","discovered":"2022-07-27T23:38:13.786172Z","downloadCount":43},{"subtitleId":"5a1eef38-0058-4f19-8083-e4e73eb41068","version":"DIMENSION.colored","completed":true,"hearingImpaired":true,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/5a1eef38-0058-4f19-8083-e4e73eb41068","language":"English","discovered":"2022-07-27T23:38:13.786174Z","downloadCount":0},{"subtitleId":"be0fedf1-3863-42bc-a026-88af7f6a9461","version":"DIMENSION","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/be0fedf1-3863-42bc-a026-88af7f6a9461","language":"English","discovered":"2022-07-27T23:38:13.786175Z","downloadCount":66}],"episode":{"season":2,"number":3,"title":"Brown
+      string: '{"matchingSubtitles":[{"subtitleId":"05785d75-5fdc-4f5a-8a06-94da5b82faf6","version":"DIMENSION","completed":true,"hearingImpaired":true,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/05785d75-5fdc-4f5a-8a06-94da5b82faf6","language":"English","discovered":"2022-07-27T23:38:13.786172Z","downloadCount":74,"source":"Addic7ed","qualities":["720p","1080p"],"release":null},{"subtitleId":"5a1eef38-0058-4f19-8083-e4e73eb41068","version":"DIMENSION.colored","completed":true,"hearingImpaired":true,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/5a1eef38-0058-4f19-8083-e4e73eb41068","language":"English","discovered":"2022-07-27T23:38:13.786174Z","downloadCount":0,"source":"Addic7ed","qualities":["720p","1080p"],"release":null},{"subtitleId":"be0fedf1-3863-42bc-a026-88af7f6a9461","version":"DIMENSION","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/be0fedf1-3863-42bc-a026-88af7f6a9461","language":"English","discovered":"2022-07-27T23:38:13.786175Z","downloadCount":112,"source":"Addic7ed","qualities":["720p","1080p"],"release":null}],"episode":{"season":2,"number":3,"title":"Brown
         Eyes, Blue Eyes","show":"CSI: Cyber","discovered":"2022-07-27T23:38:13.786171Z"}}'
     headers:
-      CF-Cache-Status:
-      - MISS
       CF-RAY:
-      - 91189a4979c6ef54-LHR
+      - a1bcc38ba9c23a95-LIS
       Cache-Control:
       - public, max-age=7200
+      Cf-Cache-Status:
+      - MISS
       Connection:
       - keep-alive
+      Content-Encoding:
+      - zstd
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 13 Feb 2025 23:29:49 GMT
+      - Thu, 16 Jul 2026 00:06:56 GMT
       Last-Modified:
-      - Thu, 13 Feb 2025 23:29:49 GMT
-      NEL:
-      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      - Thu, 16 Jul 2026 00:06:56 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=52ZtqyC2qXen5Z4VxXooDsFDIu0Dqd5FtOWspZm7NMxqTeueql%2FO58OBNvn9YhrsluU3ODlILVcx8S2ivcwNXW%2FWE6rQ%2BeEkZKUeCyMyBtgn4jtj1hrYMxhmTfX855wyD7uZig%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=zPxPok7Fk%2B6yelwFTs5UZbt2l2Rcm6Dsj3jLRDop6FOPQpewovuwXbfJnLlxXsWOT908sY1xpKhCAJ0%2BRlo%2F%2BJP%2Bqxj7Fz%2BhR4fKe2RSs2bOVgjPIpvDjkH529A2bb0742C4Tw%3D%3D"}]}'
       Server:
       - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
       Strict-Transport-Security:
       - max-age=15552000; includeSubDomains; preload
       Transfer-Encoding:
       - chunked
+      Vary:
+      - Accept-Encoding
+      - Accept-Encoding
       X-Content-Type-Options:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
-      content-length:
-      - '1057'
-      server-timing:
-      - cfL4;desc="?proto=TCP&rtt=32881&min_rtt=32174&rtt_var=12570&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2846&recv_bytes=830&delivery_rate=90010&cwnd=252&unsent_bytes=0&cid=311fe27e858cdec4&ts=96&x=0"
-      vary:
-      - Accept-Encoding
-      - Accept-Encoding
     status:
       code: 200
       message: OK

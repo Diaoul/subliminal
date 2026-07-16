@@ -216,6 +216,26 @@ class Video:
         """
         return cls.fromguess(name, safely_guessit(name))
 
+    def update(self, update: Mapping[str, Any]) -> None:
+        """Update video attributes with the dict items."""
+        for k, v in update.items():
+            if not hasattr(self, k):
+                msg = f'Attribute does not exist, skip setting {self.__class__.__name__}.{k} to {v}'
+                logger.warning(msg)
+                continue
+
+            attribute = getattr(self, k)
+            if isinstance(attribute, MutableSequence) and isinstance(v, Sequence):
+                msg = f'Extend list attribute {self.__class__.__name__}.{k} with {v}'
+                logger.debug(msg)
+                attribute.extend(v)
+            elif isinstance(attribute, MutableMapping) and isinstance(v, Mapping):
+                msg = f'Update dict attribute {self.__class__.__name__}.{k} with {v}'
+                logger.debug(msg)
+                attribute.update(v)
+            else:
+                setattr(self, k, v)
+
     def __repr__(self) -> str:  # pragma: no cover
         return f'<{self.__class__.__name__} [{self.name!r}]>'
 
@@ -290,26 +310,6 @@ class Episode(Video):
     def matches(self, series: str | None) -> bool:
         """Match the name to the series name, using alternative series names also.."""
         return matches_extended_title(series, self.series, self.alternative_series)
-
-    def update(self, update: Mapping[str, Any]) -> None:
-        """Update video attributes with the dict items."""
-        for k, v in update.items():
-            if not hasattr(self, k):
-                msg = f'Attribute does not exist, skip setting {self.__class__.__name__}.{k} to {v}'
-                logger.warning(msg)
-                continue
-
-            attribute = getattr(self, k)
-            if isinstance(attribute, MutableSequence) and isinstance(v, Sequence):
-                msg = f'Extend list attribute {self.__class__.__name__}.{k} with {v}'
-                logger.debug(msg)
-                attribute.extend(v)
-            elif isinstance(attribute, MutableMapping) and isinstance(v, Mapping):
-                msg = f'Update dict attribute {self.__class__.__name__}.{k} with {v}'
-                logger.debug(msg)
-                attribute.update(v)
-            else:
-                setattr(self, k, v)
 
     @classmethod
     def fromguess(cls, name: str, guess: Mapping[str, Any]) -> Episode:

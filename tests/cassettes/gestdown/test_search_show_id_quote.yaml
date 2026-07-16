@@ -3,11 +3,11 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, zstd
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.2
+      - Subliminal/2.6
       accept:
       - application/json
     method: GET
@@ -15,43 +15,43 @@ interactions:
   response:
     body:
       string: '{"shows":[{"id":"cb13bb68-c637-4e0f-b79d-d4f1b4972380","name":"Grey''s
-        Anatomy","nbSeasons":21,"seasons":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21],"tvDbId":73762,"tmdbId":1416,"slug":"greys-anatomy"}]}'
+        Anatomy","nbSeasons":22,"seasons":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22],"tvDbId":73762,"tmdbId":1416,"slug":"greys-anatomy"}]}'
     headers:
-      CF-Cache-Status:
-      - MISS
       CF-RAY:
-      - 91189a3e5cc35bd4-LIS
+      - a1bcc37c2c7cc156-LIS
       Cache-Control:
       - public, max-age=14400
+      Cf-Cache-Status:
+      - HIT
       Connection:
       - keep-alive
+      Content-Encoding:
+      - zstd
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 13 Feb 2025 23:29:47 GMT
+      - Thu, 16 Jul 2026 00:06:54 GMT
       Last-Modified:
-      - Thu, 13 Feb 2025 23:29:47 GMT
-      NEL:
-      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      - Thu, 16 Jul 2026 00:06:54 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=r19gGjhTR2MiVlu3yoxOR9UkGKVsssnEbgAKrHWxpRWonfSsiPOSc72QAcw8JqpT4zUMtKjpSndGPXAFKDzVDv%2BQ8%2Fb9KO1lD%2BXBK998wJfXnecuU0HpFQnRLX3mMflrvh8liw%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=lESqZC%2Be8rjGOd%2BG5dkcJxh%2BJdL0tpD7uSY6l8VwdEgWd%2BORciPhZyY34naaoUDiuT1Rac0BFhytt%2F8ATgQjMhVIyAkkYBqrHSGwR6pKJ5hAhhqEV1x2ze%2FEsgq3qUAwQi6VrQ%3D%3D"}]}'
       Server:
       - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
       Strict-Transport-Security:
       - max-age=15552000; includeSubDomains; preload
       Transfer-Encoding:
       - chunked
+      Vary:
+      - Accept-Encoding
+      - Accept-Encoding
       X-Content-Type-Options:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
-      content-length:
-      - '214'
-      server-timing:
-      - cfL4;desc="?proto=TCP&rtt=2948&min_rtt=2738&rtt_var=1177&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2847&recv_bytes=801&delivery_rate=1057706&cwnd=241&unsent_bytes=0&cid=2e1bda9ce9ae6fa5&ts=89&x=0"
-      vary:
-      - Accept-Encoding
-      - Accept-Encoding
     status:
       code: 200
       message: OK

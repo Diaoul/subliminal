@@ -174,7 +174,7 @@ class TVDBClient:
     @requires_auth
     def query_series_episodes(
         self,
-        series_id: int,
+        series_id: int | str,
         absolute_number: int | None = None,
         aired_season: int | None = None,
         aired_episode: int | None = None,
@@ -185,6 +185,7 @@ class TVDBClient:
     ) -> dict[str, Any]:
         """Query series episodes."""
         # perform the request
+        series_id = int(series_id)
         params = {
             'absoluteNumber': absolute_number,
             'airedSeason': aired_season,
@@ -242,7 +243,7 @@ class TVDBClient:
 
     @region.cache_on_arguments(expiration_time=REFINER_EXPIRATION_TIME)
     @requires_auth
-    def get_series_episodes(self, series_id: int, page: int = 1) -> dict[str, Any]:
+    def get_series_episodes(self, series_id: int | str, page: int = 1) -> dict[str, Any]:
         """Get all the episodes of a series.
 
         :param int series_id: id of the series.
@@ -252,6 +253,7 @@ class TVDBClient:
 
         """
         # perform the request
+        series_id = int(series_id)
         params = {'page': page}
         r = self.session.get(self.base_url + f'/series/{series_id:d}/episodes', params=params, timeout=self.timeout)
         if r.status_code == 404:
@@ -262,7 +264,7 @@ class TVDBClient:
 
     @region.cache_on_arguments(expiration_time=REFINER_EXPIRATION_TIME)
     @requires_auth
-    def get_series_episode(self, series_id: int, season: int, episode: int) -> dict[str, Any]:
+    def get_series_episode(self, series_id: int | str, season: int, episode: int) -> dict[str, Any]:
         """Get an episode of a series.
 
         :param int series_id: id of the series.
@@ -415,6 +417,7 @@ def refine_episode(client: TVDBClient, video: Episode, *, force: bool = False, *
 
     # add series information
     logger.debug('Found series %r', series)
+    series_tvdb_id = sanitize_id(series['id'])
     ret = {
         'series': str(matching_result['match']['series']),
         'alternative_series': list(series['aliases']),
@@ -422,14 +425,14 @@ def refine_episode(client: TVDBClient, video: Episode, *, force: bool = False, *
         'country': matching_result['match']['country'],
         'original_series': bool(matching_result['match']['original_series']),
         'external_ids': {
-            'series_tvdb_id': sanitize_id(series['id']),
+            'series_tvdb_id': series_tvdb_id,
             'series_imdb_id': decorate_imdb_id(sanitize_id(series['imdbId'] or None)),
         },
     }
 
     # get the episode
     logger.info('Getting series episode %dx%d', video.season, video.episode)
-    episode = client.get_series_episode(video.external_ids.get('series_tvdb_id'), video.season, video.episode)
+    episode = client.get_series_episode(series_tvdb_id, video.season, video.episode)
     if not episode:
         logger.warning('No results for episode')
         return ret

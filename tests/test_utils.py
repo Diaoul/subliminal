@@ -137,7 +137,7 @@ def test_sanitize_release_group() -> None:
 
 def test_sanitize_id() -> None:
     assert sanitize_id(None) is None
-    assert sanitize_id('tt0770828') == 770828
+    assert sanitize_id('tt0770828') == '770828'
 
     assert decorate_imdb_id(sanitize_id(None)) is None
     assert decorate_imdb_id(sanitize_id('tt0770828')) == 'tt0770828'

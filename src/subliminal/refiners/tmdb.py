@@ -228,7 +228,7 @@ class TMDBClient:
             self.session.params['api_key'] = self.apikey  # type: ignore[index]
 
 
-def refine_episode(client: TMDBClient, video: Episode, *, force: bool = False, **kwargs: Any) -> None:
+def refine_episode(client: TMDBClient, video: Episode, *, force: bool = False, **kwargs: Any) -> dict[str, Any]:
     """Refine an Episode by searching `TMDB API <https://api.themoviedb.org>`_."""
     # exit if the information is complete
     if not force and video.external_ids.get('series_tmdb_id') and video.external_ids.get('tmdb_id'):

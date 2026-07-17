@@ -4,27 +4,33 @@ from __future__ import annotations
 
 import logging
 import os
-from collections.abc import Mapping, MutableMapping, MutableSequence, Sequence
-from typing import TYPE_CHECKING, Any
+from collections.abc import Mapping, MutableMapping, MutableSequence, Sequence, Set
+from typing import TYPE_CHECKING, Any, cast
 
 from subliminal.exceptions import GuessingError
 from subliminal.utils import ensure_list, ensure_str, get_age, matches_extended_title, safely_guessit
 
 if TYPE_CHECKING:
+    import sys
     from datetime import timedelta
-    from typing import TypedDict
 
     from babelfish import Country, Language  # type: ignore[import-untyped]
 
     from subliminal.subtitle import Subtitle
 
-    class MovieExternalIds(TypedDict, total=False, extra_items=str):
+    if sys.version_info >= (3, 15):  # pragma: no cover
+        from typing import TypedDict
+    else:  # pragma: no cover
+        # extra_items is defined in typing_extensions>=4.10
+        from typing_extensions import TypedDict
+
+    class MovieExternalIds(TypedDict, total=False, extra_items=str):  # type: ignore[call-arg]
         """External Ids for a movie."""
 
         imdb_id: str
         tmdb_id: str
 
-    class EpisodeExternalIds(TypedDict, total=False, extra_items=str):
+    class EpisodeExternalIds(TypedDict, total=False, extra_items=str):  # type: ignore[call-arg]
         """External Ids for an episode."""
 
         series_imdb_id: str
@@ -68,7 +74,7 @@ class Video:
     :type hashes: dict[str, str]
     :param int size: size of the video file in bytes.
     :param subtitles: existing subtitles.
-    :type subtitles: set[:class:`~subliminal.subtitle.Subtitle`]
+    :type subtitles: list[:class:`~subliminal.subtitle.Subtitle`]
     :param int year: year of the video.
     :param country: country of the video.
     :type country: :class:`~babelfish.country.Country`
@@ -121,7 +127,7 @@ class Video:
     country: Country | None
 
     #: External ids of the video from different databases (IMDb, TMDB, ...)
-    external_ids: MovieExternalIds
+    external_ids: MovieExternalIds | EpisodeExternalIds
 
     #: Use the latest of creation time and modification time for the video age
     use_ctime: bool
@@ -148,7 +154,7 @@ class Video:
         title: str | None = None,
         year: int | None = None,
         country: Country | None = None,
-        external_ids: Mapping[str, str] | None = None,
+        external_ids: MovieExternalIds | EpisodeExternalIds | None = None,
     ) -> None:
         self._name = name
         self.source = source
@@ -166,7 +172,7 @@ class Video:
         self.title = title
         self.year = year
         self.country = country
-        self.external_ids = dict(external_ids) if external_ids else {}
+        self.external_ids = cast('MovieExternalIds | EpisodeExternalIds', dict(external_ids) if external_ids else {})
 
     @property
     def name(self) -> str:
@@ -225,14 +231,38 @@ class Video:
                 continue
 
             attribute = getattr(self, k)
-            if isinstance(attribute, MutableSequence) and isinstance(v, Sequence):
+            # Do not replace containers, but extend/update them
+            # List attribute
+            if isinstance(attribute, MutableSequence):
+                if not isinstance(v, Sequence):
+                    msg = f'List cannot be extended, skip setting {self.__class__.__name__}.{k} to {v}'
+                    logger.warning(msg)
+                    continue
                 msg = f'Extend list attribute {self.__class__.__name__}.{k} with {v}'
                 logger.debug(msg)
                 attribute.extend(v)
-            elif isinstance(attribute, MutableMapping) and isinstance(v, Mapping):
+
+            # Dict attribute
+            elif isinstance(attribute, MutableMapping):
+                if not isinstance(v, Mapping):
+                    msg = f'Dict cannot be updated, skip setting {self.__class__.__name__}.{k} to {v}'
+                    logger.warning(msg)
+                    continue
                 msg = f'Update dict attribute {self.__class__.__name__}.{k} with {v}'
                 logger.debug(msg)
                 attribute.update(v)
+
+            # Set attribute (do not use MutableSet as it does not define the update method)
+            elif isinstance(attribute, set):
+                if not isinstance(v, Set):
+                    msg = f'Set cannot be updated, skip setting {self.__class__.__name__}.{k} to {v}'
+                    logger.warning(msg)
+                    continue
+                msg = f'Update set attribute {self.__class__.__name__}.{k} with {v}'
+                logger.debug(msg)
+                attribute.update(v)
+
+            # Not a container, set the value
             else:
                 setattr(self, k, v)
 

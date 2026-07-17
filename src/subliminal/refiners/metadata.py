@@ -105,7 +105,7 @@ def refine(
     provider_info = media['provider']
     logger.debug('Using provider %r', provider_info)
 
-    ret = {}
+    ret: dict[str, Any] = {}
     # duration, in seconds
     # more reliable to take it from here than from the 'video' track
     if 'duration' in media:

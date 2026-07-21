@@ -650,7 +650,7 @@ def test_cli_download_name_no_match_falls_back(cli_runner: CliRunner, monkeypatc
 
         assert result.exit_code == 0
         # name could not be resolved, fall back to scanning the path as-is
-        assert (video_name, None) in captured
+        assert (video_name, video_name) in captured
 
 
 def test_cli_download_name_invalid_expression(cli_runner: CliRunner) -> None:
@@ -662,3 +662,76 @@ def test_cli_download_name_invalid_expression(cli_runner: CliRunner) -> None:
 
         assert result.exit_code == 2
         assert 'Invalid value for --name' in result.err
+
+
+def test_cli_download_multiple_name(cli_runner: CliRunner, monkeypatch: pytest.MonkeyPatch) -> None:
+    import subliminal.cli.commands.download_best as dl
+
+    captured: list[tuple[str, str | None]] = []
+    orig_scan_path = dl.scan_path
+
+    def spy_scan_path(filepath: str, *, name: str | None = None) -> object:
+        captured.append((os.path.basename(os.fspath(filepath)), name))
+        return orig_scan_path(filepath, name=name)
+
+    monkeypatch.setattr(dl, 'scan_path', spy_scan_path)
+
+    sed_name_1 = r's/.*YP-1R-([0-9]+)x([0-9]+).*/My Little Pony S\1E\2.mkv/'
+    sed_name_2 = r's/.*_-_([0-9]+)_.*/Panty & Stocking S01E\1.mkv/'
+    with cli_runner.isolated_filesystem():
+        result = cli_runner.run(
+            subliminal_cli,
+            [
+                'download',
+                '-l',
+                'en',
+                '-p',
+                'podnapisi',
+                '--name',
+                sed_name_1,
+                '--name',
+                sed_name_2,
+                'YP-1R-01x05-720p.mkv',
+                'Garterbelt_-_07_xyz.mkv',
+            ],
+        )
+
+        assert result.exit_code == 0
+        assert ('YP-1R-01x05-720p.mkv', 'My Little Pony S01E05.mkv') in captured
+        assert ('Garterbelt_-_07_xyz.mkv', 'Panty & Stocking S01E07.mkv') in captured
+
+
+def test_cli_download_multiple_name_invalid_mixedin(cli_runner: CliRunner, monkeypatch: pytest.MonkeyPatch) -> None:
+    import subliminal.cli.commands.download_best as dl
+
+    captured: list[tuple[str, str | None]] = []
+    orig_scan_path = dl.scan_path
+
+    def spy_scan_path(filepath: str, *, name: str | None = None) -> object:
+        captured.append((os.path.basename(os.fspath(filepath)), name))
+        return orig_scan_path(filepath, name=name)
+
+    monkeypatch.setattr(dl, 'scan_path', spy_scan_path)
+
+    sed_name = r's/.*YP-1R-([0-9]+)x([0-9]+).*/My Little Pony S\1E\2.mkv/'
+    static_name = 's.w.a.t.2017.s01e01.720p.hdtv.x264-killers.mkv'
+    with cli_runner.isolated_filesystem():
+        result = cli_runner.run(
+            subliminal_cli,
+            [
+                'download',
+                '-l',
+                'en',
+                '-p',
+                'podnapisi',
+                '--name',
+                sed_name,
+                '--name',
+                static_name,
+                'YP-1R-01x05-720p.mkv',
+                'Garterbelt_-_07_xyz.mkv',
+            ],
+        )
+
+        assert result.exit_code == 2
+        assert 'A static name was found mixed-in' in result.err

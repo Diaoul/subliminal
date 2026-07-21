@@ -331,13 +331,16 @@ REFINER = click.Choice(['ALL', *sorted(refiner_manager.names())])
     '--name',
     type=click.STRING,
     metavar='NAME',
+    multiple=True,
     help=(
-        'Name used instead of the path name for guessing information about the file. '
-        'If used with multiple paths or a directory, `name` is passed to ALL the files. '
+        'Name used instead of the path name for guessing information about the file '
+        '(can be used multiple times). If used with a directory, `name` is passed to ALL the files. '
         'NAME may also be a sed-like substitution `s/pattern/replacement/flags`, applied '
         r'to each file path individually: back-references (\1, \2, ...) are available in '
         'the replacement, `&` is a literal character (unlike in sed) and the `g` (replace all) and `i` '
-        '(case-insensitive) flags are supported.'
+        '(case-insensitive) flags are supported. When used multiple times, the substitutions are '
+        'applied in the order they are provided, mixing a static name with substitutions '
+        '(or with other static names) is not allowed and it will result in an error.'
     ),
 )
 @click.option('-v', '--verbose', count=True, help='Increase verbosity.')
@@ -373,7 +376,7 @@ def download(
     max_workers: int,
     archives: bool,
     use_absolute_path: str,
-    name: str | None,
+    name: Sequence[str],
     verbose: int,
     path: list[str],
 ) -> None:
@@ -395,9 +398,9 @@ def download(
     if not subtitle_format or subtitle_format in ['""', "''"]:
         subtitle_format = None
 
-    # build the per-file name resolver (static name or sed-like substitution)
+    # build the per-file name resolver (static name or sed-like substitutions)
     try:
-        name_resolver = NameResolver(name)
+        name_resolver = NameResolver.from_name(name)
     except ValueError as e:
         raise click.BadParameter(str(e), param_hint='--name') from e
 

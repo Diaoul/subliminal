@@ -417,7 +417,7 @@ def test_parse_sed_expression(expr: str, expected: tuple[str, str, str] | None) 
 
 
 def test_name_resolver_static() -> None:
-    resolver = NameResolver('My Show S01E01.mkv')
+    resolver = NameResolver.from_name('My Show S01E01.mkv')
     assert resolver.mode == 'static'
     # same name returned for every file
     assert resolver('whatever.mkv') == 'My Show S01E01.mkv'
@@ -425,59 +425,97 @@ def test_name_resolver_static() -> None:
 
 
 def test_name_resolver_none() -> None:
-    resolver = NameResolver(None)
+    resolver = NameResolver.from_name(None)
     assert resolver('whatever.mkv') is None
 
 
 def test_name_resolver_sed() -> None:
-    resolver = NameResolver(r's/.*YP-1R-([0-9]+)x([0-9]+).*/My Little Pony S\1E\2.mkv/')
+    resolver = NameResolver.from_name(r's/.*YP-1R-([0-9]+)x([0-9]+).*/My Little Pony S\1E\2.mkv/')
     assert resolver.mode == 'sed'
     assert resolver('/path/to/YP-1R-01x05-720p.mkv') == 'My Little Pony S01E05.mkv'
-    # non-matching file falls back to None
-    assert resolver('unrelated.mkv') is None
+    # non-matching file falls back to filepath
+    assert resolver('unrelated.mkv') == 'unrelated.mkv'
 
 
 def test_name_resolver_sed_matches_full_path() -> None:
     # the substitution is applied to the whole path, so it can match parent directories
-    resolver = NameResolver(r's#.*Season ([0-9]+)/Episode ([0-9]+).*#My Show S\1E\2.mkv#')
+    resolver = NameResolver.from_name(r's#.*Season ([0-9]+)/Episode ([0-9]+).*#My Show S\1E\2.mkv#')
     assert resolver('/videos/My Show/Season 02/Episode 05.mkv') == 'My Show S02E05.mkv'
-    assert resolver('Episode 05.mkv') is None
+    assert resolver('Episode 05.mkv') == 'Episode 05.mkv'
 
 
 def test_name_resolver_sed_flags() -> None:
     # without g, only the first occurrence is replaced
-    assert NameResolver('s/a/X/')('aaa.mkv') == 'Xaa.mkv'
+    assert NameResolver.from_name('s/a/X/')('aaa.mkv') == 'Xaa.mkv'
     # g replaces all occurrences
-    assert NameResolver('s/a/X/g')('aaa.mkv') == 'XXX.mkv'
+    assert NameResolver.from_name('s/a/X/g')('aaa.mkv') == 'XXX.mkv'
     # i is case-insensitive
-    assert NameResolver('s/a/X/gi')('AaA.mkv') == 'XXX.mkv'
+    assert NameResolver.from_name('s/a/X/gi')('AaA.mkv') == 'XXX.mkv'
 
 
 def test_name_resolver_sed_ampersand_is_literal() -> None:
     # unlike sed, & is a literal character (not the whole match)
-    assert NameResolver('s/[0-9]+/[&]/')('ep12.mkv') == 'ep[&].mkv'
+    assert NameResolver.from_name('s/[0-9]+/[&]/')('ep12.mkv') == 'ep[&].mkv'
     # \& is not unescaped, it is passed as-is to re.sub which keeps it verbatim
-    assert NameResolver(r's/[0-9]+/\&/')('ep12.mkv') == r'ep\&.mkv'
+    assert NameResolver.from_name(r's/[0-9]+/\&/')('ep12.mkv') == r'ep\&.mkv'
     # so a real-world title with & needs no escaping
-    resolver = NameResolver(r's/.*_-_([0-9]+)_.*/Panty & Stocking S01E\1.mkv/')
+    resolver = NameResolver.from_name(r's/.*_-_([0-9]+)_.*/Panty & Stocking S01E\1.mkv/')
     assert resolver('Garterbelt_-_07_xyz.mkv') == 'Panty & Stocking S01E07.mkv'
-    # non-matching file falls back to None
-    assert resolver('Garterbelt.mkv') is None
+    # non-matching file falls back to filepath
+    assert resolver('Garterbelt.mkv') == 'Garterbelt.mkv'
 
 
 def test_name_resolver_bad_group_reference() -> None:
     # the pattern compiles, but the replacement references a missing group: the
     # substitution fails at call time and the file is left untouched
-    resolver = NameResolver(r's/(a)/X\2Y/')
+    resolver = NameResolver.from_name(r's/(a)/X\2Y/')
     assert resolver.mode == 'sed'
-    assert resolver('aaa.mkv') is None
+    assert resolver('aaa.mkv') == 'aaa.mkv'
 
 
 def test_name_resolver_invalid_sed_flag() -> None:
     with pytest.raises(ValueError, match='Unsupported flag'):
-        NameResolver('s/a/b/x')
+        NameResolver.from_name('s/a/b/x')
 
 
 def test_name_resolver_invalid_regex() -> None:
     with pytest.raises(ValueError, match='Invalid regular expression'):
-        NameResolver('s/(/x/')
+        NameResolver.from_name('s/(/x/')
+
+
+def test_name_resolver_multiple_sed() -> None:
+    resolver = NameResolver.from_name(
+        [
+            r's#.*path/to/(.*)#My Little Pony/\1#',
+            r's/(.*)YP-1R-([0-9]+)x([0-9]+).*/\1My Little Pony S\2E\3.mkv/',
+        ],
+    )
+    assert resolver.mode == 'sed'
+
+    # only one match
+    assert resolver('/path/to/s01e05.mkv') == 'My Little Pony/s01e05.mkv'
+    assert resolver('YP-1R-01x05-720p.mkv') == 'My Little Pony S01E05.mkv'
+    # all matches
+    assert resolver('/path/to/YP-1R-01x05-720p.mkv') == 'My Little Pony/My Little Pony S01E05.mkv'
+    # non-matching file falls back to filepath
+    assert resolver('unrelated.mkv') == 'unrelated.mkv'
+
+
+def test_name_resolver_multiple_invalid_mixedin() -> None:
+    # Static mixed-in with sed
+    with pytest.raises(ValueError, match='A static name was found mixed-in'):
+        NameResolver.from_name(
+            [
+                r's#path/to/#My Little Pony/#',
+                'My Show S01E01.mkv',
+            ],
+        )
+
+    # Several static names
+    with pytest.raises(ValueError, match='A static name was found mixed-in'):
+        NameResolver.from_name(
+            [
+                'My Show S01E01.mkv',
+                'Other Show S02E04.mkv',
+            ],
+        )

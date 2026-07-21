@@ -38,12 +38,14 @@ dependencies = [
     "babelfish>=0.6.1",
     "beautifulsoup4>=4.4.0",
     "defusedxml>=0.7.1",
+    "cattrs",
     "chardet>=5.0",
     "click",
     "click-option-group>=0.5.6",
     "dogpile.cache>=1.0",
     "guessit>=3.0.0",
     "knowit>=0.5.5",
+    "packaging",  # until babelfish>0.6.1
     "platformdirs>=3",
     "pysubs2>=1.7",
     "requests>=2.0",
@@ -74,7 +76,6 @@ tests = [
     "pytest>=6.0",
     "pytest-cov",
     "pytest-xdist",
-    "cattrs",
     "sympy",
     "colorama",  # used in scripts/
     "vcrpy>=5",  # keep synchronized with docs dependencies

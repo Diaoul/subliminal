@@ -8,6 +8,7 @@ import os
 import sys
 from collections.abc import Mapping, MutableMapping, MutableSequence, Sequence, Set
 from datetime import timedelta  # noqa: TC003
+from importlib.metadata import version as get_version
 from typing import Any, TypedDict, cast
 
 if sys.version_info >= (3, 12):
@@ -15,13 +16,14 @@ if sys.version_info >= (3, 12):
 else:  # pragma: no cover
     from typing_extensions import override
 
-
 # Do not put babelfish.Language and Subtitle in TYPE_CHECKING so cattrs.unstructure works
+import cattrs
 from attrs import define, field
-from babelfish import Country, Language  # noqa: TC002  # type: ignore[import-untyped]
+from babelfish import Country, Language  # type: ignore[import-untyped]
+from packaging.version import Version
 
 from subliminal.exceptions import GuessingError
-from subliminal.subtitle import Subtitle  # noqa: TC001
+from subliminal.subtitle import Subtitle
 from subliminal.utils import ensure_list, ensure_str, get_age, matches_extended_title, safely_guessit
 
 logger = logging.getLogger(__name__)
@@ -81,13 +83,13 @@ class Video:
     """
 
     #: Hashes of the video file by provider names
-    hashes: dict[str, str] = field(factory=dict)
+    hashes: dict[str, str] = field(factory=dict, eq=False)
 
     #: External ids of the video from different databases (IMDb, TMDB, ...)
     external_ids: VideoExternalIds = field(factory=dict)
 
     #: Existing subtitles
-    subtitles: list[Subtitle] = field(factory=list)
+    subtitles: list[Subtitle] = field(factory=list, eq=False)
 
     def __init__(
         self,
@@ -517,3 +519,42 @@ class Movie(Video):
             country=f' ({self.country})' if self.country else '',
             year=f' ({self.year})' if self.year else '',
         )
+
+
+converter = cattrs.Converter()
+
+
+@converter.register_structure_hook
+def subtitle_structure_hook(val: Any, _: Any) -> Subtitle:
+    """This hook will be registered for structuring ``Subtitle``s."""
+    if not isinstance(val, dict):
+        msg = f'A dict was expected to structure a Subtitle: {val}'
+        raise TypeError(msg)
+    val = {k: v for k, v in val.items() if k not in ['provider_name']}
+    return Subtitle(**val)
+
+
+@converter.register_unstructure_hook
+def subtitle_unstructure_hook(val: Subtitle) -> dict[str, Any]:
+    """This hook will be registered for unstructuring ``Subtitle``s."""
+    return {
+        'language': val.language,
+        'subtitle_id': val.subtitle_id,
+        'provider_name': val.provider_name,
+        # 'category': val.category,
+        'embedded': val.embedded,
+    }
+
+
+# Special un/structure hooks for languages
+if Version(get_version('babelfish')) <= Version('0.6.1'):
+
+    @converter.register_structure_hook
+    def language_structure_hook(val: str, _: Any) -> Language:
+        """This hook will be registered for structuring ``Language``s."""
+        return Language.fromietf(val)
+
+    @converter.register_unstructure_hook
+    def language_unstructure_hook(val: Language) -> str:
+        """This hook will be registered for unstructuring ``Language``s."""
+        return f'{val.alpha3}-{val.country.alpha2}-{val.script.code}'

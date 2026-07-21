@@ -2,6 +2,40 @@
 
 .. towncrier release notes start
 
+2.7.0 (2026-07-21)
+^^^^^^^^^^^^^^^^^^
+
+Changes
+-------
+
+- Rename language_type to category. Deprecate ``--language-type-suffix`` for ``--category-suffix`` (`#1344 <https://github.com/Diaoul/subliminal/issues/1344>`__)
+- make EmbeddedSubtitle subtitle_id unique (`#1347 <https://github.com/Diaoul/subliminal/issues/1347>`__)
+- Safely call Guessit and format output (`#1351 <https://github.com/Diaoul/subliminal/issues/1351>`__)
+
+
+CLI Changes
+-----------
+
+- add a ``--subtitle-categories`` option to replace ``-hi/-HI`` and ``-fo/-FO`` (`#1357 <https://github.com/Diaoul/subliminal/issues/1357>`__)
+- check for undefined or deprecated entries in the config file (`#1358 <https://github.com/Diaoul/subliminal/issues/1358>`__)
+- Allow ``--name`` to be a sed-like ``s/pattern/replacement/flags`` substitution, applied to the path of each
+  file individually, to parameterize the guessed name per file (`#1362 <https://github.com/Diaoul/subliminal/issues/1362>`__)
+- allow multiple use of sed-like ``--name`` options (`#1364 <https://github.com/Diaoul/subliminal/issues/1364>`__)
+
+
+Documentation
+-------------
+
+- fix docs for config file with the subtitle_categories option (`#1360 <https://github.com/Diaoul/subliminal/issues/1360>`__)
+
+
+Misc
+----
+
+- Drop Python 3.9 (`#1345 <https://github.com/Diaoul/subliminal/issues/1345>`__)
+- fix gestdown tests (`#1354 <https://github.com/Diaoul/subliminal/issues/1354>`__)
+
+
 2.6.0 (2026-02-20)
 ^^^^^^^^^^^^^^^^^^
 

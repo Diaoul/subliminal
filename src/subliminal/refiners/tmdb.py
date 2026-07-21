@@ -327,17 +327,13 @@ def refine(video: Video, *, apikey: str | None = None, force: bool = False, **kw
 
       * :attr:`~subliminal.video.Episode.series`
       * :attr:`~subliminal.video.Episode.year`
-      * :attr:`~subliminal.video.Episode.external_ids['series_tmdb_id']`
-      * :attr:`~subliminal.video.Episode.external_ids['tmdb_id']`
-      * :attr:`~subliminal.video.Episode.external_ids['series_imdb_id']`
-      * :attr:`~subliminal.video.Episode.external_ids['imdb_id']`
+      * :attr:`~subliminal.video.Episode.external_ids`, keys 'imdb_id', 'tmdb_id', 'series_imdb_id', 'series_tmdb_id'
 
     Similarly, for a :class:`~subliminal.video.Movie`:
 
       * :attr:`~subliminal.video.Movie.title`
       * :attr:`~subliminal.video.Movie.year`
-      * :attr:`~subliminal.video.Video.external_ids['tmdb_id']`
-      * :attr:`~subliminal.video.Video.external_ids['imdb_id']`
+      * :attr:`~subliminal.video.Movie.external_ids`, keys 'imdb_id', 'tmdb_id'
 
     :param Video video: the Video to refine.
     :param (str | None) apikey: a personal API key to use TMDB.

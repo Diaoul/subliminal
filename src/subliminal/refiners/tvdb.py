@@ -460,11 +460,8 @@ def refine(video: Video, *, apikey: str | None = None, force: bool = False, **kw
 
       * :attr:`~subliminal.video.Episode.series`
       * :attr:`~subliminal.video.Episode.year`
-      * :attr:`~subliminal.video.Episode.series_imdb_id`
-      * :attr:`~subliminal.video.Episode.series_tvdb_id`
       * :attr:`~subliminal.video.Episode.title`
-      * :attr:`~subliminal.video.Video.imdb_id`
-      * :attr:`~subliminal.video.Episode.tvdb_id`
+      * :attr:`~subliminal.video.Episode.external_ids`, keys 'imdb_id', 'tvdb_id', 'series_imdb_id' and 'series_tvdb_id'
 
     :param Video video: the Video to refine.
     :param (str | None) apikey: a personal API key to use TheTVDB.

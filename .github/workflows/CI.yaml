@@ -207,7 +207,7 @@ jobs:
           release: "15.0"
           usesh: true
           prepare: |
-            pkg install -y python3 rust
+            pkg install -y python3 rust uv
             python3 -m ensurepip --upgrade
             python3 -m pip install hatch
           run: |

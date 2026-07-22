@@ -192,7 +192,7 @@ jobs:
     name: Test on FreeBSD
     runs-on: ubuntu-latest
     needs: prepare-test
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7
         with:

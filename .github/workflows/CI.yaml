@@ -193,6 +193,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: prepare-test
     timeout-minutes: 10
+    if: github.event_name == 'push'
     steps:
       - uses: actions/checkout@v7
         with:
@@ -232,6 +233,7 @@ jobs:
     name: Coverage
     runs-on: ubuntu-latest
     needs: [test, test-freebsd]
+    if: ${{ !cancelled() && needs.test.result == 'success' && (needs.test-freebsd.result == 'success' || needs.test-freebsd.result == 'skipped') }}
     permissions:
       pull-requests: write
       contents: write

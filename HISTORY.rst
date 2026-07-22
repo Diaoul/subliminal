@@ -2,6 +2,16 @@
 
 .. towncrier release notes start
 
+2.7.1 (2026-07-22)
+^^^^^^^^^^^^^^^^^^
+
+Misc
+----
+
+- fix test for compatibility with guessit>=4 (`#1368 <https://github.com/Diaoul/subliminal/issues/1368>`__)
+- add CI tests for FreeBSD (`#1370 <https://github.com/Diaoul/subliminal/issues/1370>`__)
+
+
 2.7.0 (2026-07-21)
 ^^^^^^^^^^^^^^^^^^
 

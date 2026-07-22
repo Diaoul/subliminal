@@ -207,9 +207,8 @@ jobs:
           release: "15.0"
           usesh: true
           prepare: |
-            pkg install -y python3 rust uv
+            pkg install -y python3 rust py-hatch uv
             python3 -m ensurepip --upgrade
-            python3 -m pip install hatch
           run: |
             set -e
             PY_VERSION=$(python3 -c 'import platform; print(".".join(platform.python_version_tuple()[:2]))')

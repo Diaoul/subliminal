@@ -188,10 +188,52 @@ jobs:
           include-hidden-files: true
           if-no-files-found: error
 
+  test-freebsd:
+    name: Test on FreeBSD
+    runs-on: ubuntu-latest
+    needs: prepare-test
+    timeout-minutes: 10
+    if: github.event_name == 'push'
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Prepare tests
+        uses: ./.github/actions/prepare-tests
+      - name: Display downloaded files
+        run: ls -R tests/data
+      - name: Test in FreeBSD
+        uses: vmactions/freebsd-vm@v1
+        with:
+          release: "15.0"
+          usesh: true
+          prepare: |
+            pkg install -y python3 databases/py-sqlite3 devel/py-hatch git-lite
+          run: |
+            set -e
+            PY_VERSION=$(python3 -c 'import platform; print(".".join(platform.python_version_tuple()[:2]))')
+            echo "Picked Python ${PY_VERSION}"
+            export ENV="tests.py${PY_VERSION}"
+            export FORCE_COLOR="1"
+            export CI_RUN="yes"
+            export COVERAGE_FILE=".coverage.freebsd.${PY_VERSION}"
+            hatch -v env create "${ENV}"
+            hatch -v run "${ENV}:test-cov"
+
+      - name: Store coverage file
+        uses: actions/upload-artifact@v7
+        with:
+          name: coverage-freebsd
+          path: .coverage*
+          include-hidden-files: true
+          if-no-files-found: error
+
   coverage:
     name: Coverage
     runs-on: ubuntu-latest
-    needs: test
+    needs: [test, test-freebsd]
+    if: ${{ !cancelled() && needs.test.result == 'success' && (needs.test-freebsd.result == 'success' || needs.test-freebsd.result == 'skipped') }}
     permissions:
       pull-requests: write
       contents: write

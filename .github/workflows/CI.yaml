@@ -208,8 +208,7 @@ jobs:
           release: "15.0"
           usesh: true
           prepare: |
-            pkg install -y python3 rust devel/py-hatch git-lite
-            python3 -m ensurepip --upgrade
+            pkg install -y python3 databases/py-sqlite3 devel/py-hatch git-lite
           run: |
             set -e
             PY_VERSION=$(python3 -c 'import platform; print(".".join(platform.python_version_tuple()[:2]))')

@@ -208,7 +208,7 @@ jobs:
           release: "15.0"
           usesh: true
           prepare: |
-            pkg install -y python3 rust devel/py-hatch uv
+            pkg install -y python3 rust devel/py-hatch git-lite
             python3 -m ensurepip --upgrade
           run: |
             set -e

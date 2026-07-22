@@ -207,7 +207,7 @@ jobs:
           release: "15.0"
           usesh: true
           prepare: |
-            pkg install -y python3
+            pkg install -y python3 devel/py-maturin
             python3 -m ensurepip --upgrade
             python3 -m pip install hatch
           run: |

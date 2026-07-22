@@ -67,6 +67,7 @@ docs = [
 tests = [
     "subliminal[rar]",
     "coverage[toml]>=7",
+    "packaging",
     "pytest>=6.0",
     "pytest-cov",
     "pytest-xdist",

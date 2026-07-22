@@ -3,10 +3,12 @@ from __future__ import annotations
 
 import os
 from datetime import datetime, timedelta, timezone
+from importlib.metadata import version as get_version
 from typing import TYPE_CHECKING
 from unittest.mock import Mock
 
 import pytest
+from packaging.version import Version
 
 from subliminal.utils import sanitize, timestamp
 from subliminal.video import Episode, Movie, Video
@@ -239,8 +241,14 @@ def test_episode_fromname(episodes: dict[str, Episode]) -> None:
     assert video.tvdb_id is None
 
 
+@pytest.mark.skipif(
+    Version(get_version('guessit')) < Version('4'),
+    reason='guessit was not correctly parsing this video in older versions',
+)
 def test_episode_fromname_guessit_bug(episodes: dict[str, Episode]) -> None:
-    # Only works with Video.fromname, not Episode.fromname
+    # Only works with Video.fromname
+    # With Episode.fromname, the episode is incorrectly guessed as 12
+    # See https://github.com/guessit-io/guessit/issues/929
     video = Video.fromname(episodes['adam-12_s01e02'].name)
     assert isinstance(video, Episode)
     assert video.name == episodes['adam-12_s01e02'].name
@@ -250,5 +258,5 @@ def test_episode_fromname_guessit_bug(episodes: dict[str, Episode]) -> None:
     assert video.series == episodes['adam-12_s01e02'].series
     assert video.season == episodes['adam-12_s01e02'].season
     assert video.episode == episodes['adam-12_s01e02'].episode
-    assert video.title is None
+    assert video.title == episodes['adam-12_s01e02'].title
     assert video.year == episodes['adam-12_s01e02'].year

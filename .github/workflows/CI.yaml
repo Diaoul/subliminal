@@ -192,6 +192,7 @@ jobs:
     name: Test on FreeBSD
     runs-on: ubuntu-latest
     needs: prepare-test
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v7
         with:
@@ -207,7 +208,7 @@ jobs:
           release: "15.0"
           usesh: true
           prepare: |
-            pkg install -y python3 rust py-hatch uv
+            pkg install -y python3 rust devel/py-hatch uv
             python3 -m ensurepip --upgrade
           run: |
             set -e

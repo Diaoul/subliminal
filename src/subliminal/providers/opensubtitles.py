@@ -141,11 +141,17 @@ class OpenSubtitlesSubtitle(Subtitle):
         )
 
         # tag
-        if self.matched_by == 'tag' and (not video.imdb_id or self.movie_imdb_id == video.imdb_id):
+        video_imdb_id = video.external_ids.get('imdb_id')
+        imdb_id_match = video_imdb_id and self.movie_imdb_id == video_imdb_id
+        if self.matched_by == 'tag' and not imdb_id_match:
             if self.movie_kind == 'episode':
                 matches |= {'series', 'year', 'season', 'episode'}
             elif self.movie_kind == 'movie':
                 matches |= {'title', 'year'}
+
+        # imdb_id
+        if imdb_id_match:
+            matches.add('imdb_id')
 
         # guess
         matches |= guess_matches(video, safely_guessit(self.movie_release_name, {'type': self.movie_kind}))
@@ -159,10 +165,6 @@ class OpenSubtitlesSubtitle(Subtitle):
                 matches.add('hash')
             else:
                 logger.debug('Match on hash discarded')
-
-        # imdb_id
-        if video.imdb_id and self.movie_imdb_id == video.imdb_id:
-            matches.add('imdb_id')
 
         return matches
 
@@ -330,7 +332,7 @@ class OpenSubtitlesProvider(Provider):
             languages,
             moviehash=video.hashes.get('opensubtitles'),
             size=video.size,
-            imdb_id=video.imdb_id,
+            imdb_id=video.external_ids.get('imdb_id'),
             query=query,
             season=season,
             episode=episode,

@@ -228,73 +228,92 @@ class TMDBClient:
             self.session.params['api_key'] = self.apikey  # type: ignore[index]
 
 
-def refine_episode(client: TMDBClient, video: Episode, *, force: bool = False, **kwargs: Any) -> None:
+def refine_episode(client: TMDBClient, video: Episode, *, force: bool = False, **kwargs: Any) -> dict[str, Any]:
     """Refine an Episode by searching `TMDB API <https://api.themoviedb.org>`_."""
     # exit if the information is complete
-    if not force and video.series_tmdb_id and video.tmdb_id:
+    if not force and video.external_ids.get('series_tmdb_id') and video.external_ids.get('tmdb_id'):
         logger.debug('No need to search, TMDB ids already exist for the video.')
-        return
+        return {}
 
     # search the series id
     country_code = None if video.country is None else str(video.country)
     tmdb_id = client.get_id(video.series, is_movie=False, year=video.year, country=country_code)
     if tmdb_id is None:
         logger.warning('No results for series')
-        return
+        return {}
 
     # search the series
     result_series = client.query(tmdb_id, is_movie=False)
     if not result_series:  # pragma: no-cover
         logger.warning('No results for series')
-        return
+        return {}
 
     # search the episode
     result_episode = client.query(tmdb_id, is_movie=False, season=video.season, episode=video.episode)
     if not result_episode:  # pragma: no-cover
         logger.warning('No results for series')
-        return
+        return {}
+
+    # alternative titles
+    series_original_name = result_series['original_name']
+    alternative_series = []
+    if series_original_name != video.series and series_original_name not in video.alternative_series:
+        alternative_series = [series_original_name]
 
     # add series information
     logger.debug('Found series %r', result_episode)
-    video.series = result_series['name']
-    video.year = split_year(result_series, 'first_air_date')
-    series_original_name = result_series['original_name']
-    if series_original_name != video.series and series_original_name not in video.alternative_series:
-        video.alternative_series.append(series_original_name)
-    video.series_tmdb_id = sanitize_id(result_series['id'])
-    video.series_imdb_id = decorate_imdb_id(
-        sanitize_id(result_series['external_ids'].get('imdb_id', video.series_imdb_id))
-    )
-    video.series_tvdb_id = sanitize_id(result_series['external_ids'].get('tvdb_id', video.series_tvdb_id))
+    return {
+        'series': result_series['name'],
+        'title': result_episode['name'],
+        'year': split_year(result_series, 'first_air_date'),
+        'alternative_series': alternative_series,
+        'external_ids': {
+            'series_tmdb_id': sanitize_id(result_series['id']),
+            'series_imdb_id': decorate_imdb_id(
+                sanitize_id(result_series['external_ids'].get('imdb_id', video.external_ids.get('series_imdb_id')))
+            ),
+            'series_tvdb_id': sanitize_id(
+                result_series['external_ids'].get('tvdb_id', video.external_ids.get('series_tvdb_id'))
+            ),
+            'tmdb_id': sanitize_id(result_episode['id']),
+            'imdb_id': decorate_imdb_id(
+                sanitize_id(result_episode['external_ids'].get('imdb_id', video.external_ids.get('imdb_id')))
+            ),
+            'tvdb_id': sanitize_id(result_episode['external_ids'].get('tvdb_id', video.external_ids.get('tvdb_id'))),
+        },
+    }
 
-    video.title = result_episode['name']
-    video.tmdb_id = sanitize_id(result_episode['id'])
-    video.imdb_id = decorate_imdb_id(sanitize_id(result_episode['external_ids'].get('imdb_id', video.imdb_id)))
-    video.tvdb_id = sanitize_id(result_episode['external_ids'].get('tvdb_id', video.tvdb_id))
 
-
-def refine_movie(client: TMDBClient, video: Movie, *, force: bool = False, **kwargs: Any) -> None:
+def refine_movie(client: TMDBClient, video: Movie, *, force: bool = False, **kwargs: Any) -> dict[str, Any]:
     """Refine a Movie by searching `TMDB API <https://api.themoviedb.org>`_."""
     # exit if the information is complete
-    if not force and video.tmdb_id:
+    if not force and video.external_ids.get('tmdb_id'):
         logger.debug('No need to search, TMDB ids already exist for the video.')
-        return
+        return {}
 
     # search the movie
     result = client.search_movie(video.title, year=video.year)
     if not result:
         logger.warning('No results for movie')
-        return
+        return {}
+
+    # alternative titles
+    original_name = result['original_title']
+    alternative_titles = []
+    if original_name != video.title and original_name not in video.alternative_titles:
+        alternative_titles = [original_name]
 
     # add movie information
     logger.debug('Found movie %r', result)
-    video.title = result['title']
-    video.year = split_year(result, 'release_date')
-    original_name = result['original_title']
-    if original_name != video.title and original_name not in video.alternative_titles:
-        video.alternative_titles.append(original_name)
-    video.tmdb_id = sanitize_id(result['id'])
-    video.imdb_id = decorate_imdb_id(sanitize_id(result['imdb_id']))
+    return {
+        'title': result['title'],
+        'year': split_year(result, 'release_date'),
+        'alternative_titles': alternative_titles,
+        'external_ids': {
+            'tmdb_id': sanitize_id(result['id']),
+            'imdb_id': decorate_imdb_id(sanitize_id(result['imdb_id'])),
+        },
+    }
 
 
 #: Default client
@@ -308,17 +327,13 @@ def refine(video: Video, *, apikey: str | None = None, force: bool = False, **kw
 
       * :attr:`~subliminal.video.Episode.series`
       * :attr:`~subliminal.video.Episode.year`
-      * :attr:`~subliminal.video.Episode.series_tmdb_id`
-      * :attr:`~subliminal.video.Episode.tmdb_id`
-      * :attr:`~subliminal.video.Episode.series_imdb_id`
-      * :attr:`~subliminal.video.Episode.imdb_id`
+      * :attr:`~subliminal.video.Episode.external_ids`, keys 'imdb_id', 'tmdb_id', 'series_imdb_id', 'series_tmdb_id'
 
     Similarly, for a :class:`~subliminal.video.Movie`:
 
       * :attr:`~subliminal.video.Movie.title`
       * :attr:`~subliminal.video.Movie.year`
-      * :attr:`~subliminal.video.Video.tmdb_id`
-      * :attr:`~subliminal.video.Video.imdb_id`
+      * :attr:`~subliminal.video.Movie.external_ids`, keys 'imdb_id', 'tmdb_id'
 
     :param Video video: the Video to refine.
     :param (str | None) apikey: a personal API key to use TMDB.
@@ -335,10 +350,12 @@ def refine(video: Video, *, apikey: str | None = None, force: bool = False, **kw
 
     # refine for Episode
     if isinstance(video, Episode):
-        refine_episode(tmdb_client, video, force=force, **kwargs)
+        update = refine_episode(tmdb_client, video, force=force, **kwargs)
+        video.update(update)
 
     # refine for Movie
     elif isinstance(video, Movie):
-        refine_movie(tmdb_client, video, force=force, **kwargs)
+        update = refine_movie(tmdb_client, video, force=force, **kwargs)
+        video.update(update)
 
     return video

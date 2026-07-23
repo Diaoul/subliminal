@@ -174,7 +174,7 @@ class TVDBClient:
     @requires_auth
     def query_series_episodes(
         self,
-        series_id: int,
+        series_id: int | str,
         absolute_number: int | None = None,
         aired_season: int | None = None,
         aired_episode: int | None = None,
@@ -185,6 +185,7 @@ class TVDBClient:
     ) -> dict[str, Any]:
         """Query series episodes."""
         # perform the request
+        series_id = int(series_id)
         params = {
             'absoluteNumber': absolute_number,
             'airedSeason': aired_season,
@@ -242,7 +243,7 @@ class TVDBClient:
 
     @region.cache_on_arguments(expiration_time=REFINER_EXPIRATION_TIME)
     @requires_auth
-    def get_series_episodes(self, series_id: int, page: int = 1) -> dict[str, Any]:
+    def get_series_episodes(self, series_id: int | str, page: int = 1) -> dict[str, Any]:
         """Get all the episodes of a series.
 
         :param int series_id: id of the series.
@@ -252,6 +253,7 @@ class TVDBClient:
 
         """
         # perform the request
+        series_id = int(series_id)
         params = {'page': page}
         r = self.session.get(self.base_url + f'/series/{series_id:d}/episodes', params=params, timeout=self.timeout)
         if r.status_code == 404:
@@ -262,7 +264,7 @@ class TVDBClient:
 
     @region.cache_on_arguments(expiration_time=REFINER_EXPIRATION_TIME)
     @requires_auth
-    def get_series_episode(self, series_id: int, season: int, episode: int) -> dict[str, Any]:
+    def get_series_episode(self, series_id: int | str, season: int, episode: int) -> dict[str, Any]:
         """Get an episode of a series.
 
         :param int series_id: id of the series.
@@ -318,49 +320,19 @@ tvdb_client = TVDBClient()
 guessit.api.configure()
 
 
-def refine(video: Video, *, apikey: str | None = None, force: bool = False, **kwargs: Any) -> Video:
-    """Refine a video by searching `TheTVDB <https://thetvdb.com/>`_.
-
-    .. note::
-
-        This refiner only work for instances of :class:`~subliminal.video.Episode`.
-
-    Several attributes can be found:
-
-      * :attr:`~subliminal.video.Episode.series`
-      * :attr:`~subliminal.video.Episode.year`
-      * :attr:`~subliminal.video.Episode.series_imdb_id`
-      * :attr:`~subliminal.video.Episode.series_tvdb_id`
-      * :attr:`~subliminal.video.Episode.title`
-      * :attr:`~subliminal.video.Video.imdb_id`
-      * :attr:`~subliminal.video.Episode.tvdb_id`
-
-    :param Video video: the Video to refine.
-    :param (str | None) apikey: a personal API key to use TheTVDB.
-    :param bool force: if True, refine even if both the IMDB ids of the series and
-        of the episodes are known for an Episode.
-
-    """
-    # only deal with Episode videos
-    if not isinstance(video, Episode):
-        logger.error('Cannot refine movies')
-        return video
-
+def refine_episode(client: TVDBClient, video: Episode, *, force: bool = False, **kwargs: Any) -> dict[str, Any]:
+    """Refine an Episode by searching `TheTVDB API <https://thetvdb.com>`_."""
     # exit if the information is complete
-    if not force and video.series_tvdb_id and video.tvdb_id:
+    if not force and video.external_ids.get('series_tvdb_id') and video.external_ids.get('tvdb_id'):
         logger.debug('No need to search, TheTVDB ids already exist for the video.')
-        return video
-
-    # update the API key
-    if apikey is not None:
-        tvdb_client.apikey = apikey
+        return {}
 
     # search the series
     logger.info('Searching series %r', video.series)
-    results = tvdb_client.search_series(video.series.lower())
+    results = client.search_series(video.series.lower())
     if not results:
         logger.warning('No results for series')
-        return video
+        return {}
     logger.debug('Found %d results', len(results))
 
     # search for exact matches
@@ -434,37 +406,81 @@ def refine(video: Video, *, apikey: str | None = None, force: bool = False, **kw
     # exit if we don't have exactly 1 matching result
     if not matching_results:
         logger.error('No matching series found')
-        return video
+        return {}
     if len(matching_results) > 1:
         logger.error('Multiple matches found')
-        return video
+        return {}
 
     # get the series
     matching_result = matching_results[0]
-    series = tvdb_client.get_series(matching_result['data']['id'])
+    series = client.get_series(matching_result['data']['id'])
 
     # add series information
     logger.debug('Found series %r', series)
-    video.series = str(matching_result['match']['series'])
-    video.alternative_series.extend(series['aliases'])
-    video.year = int_or_none(matching_result['match']['year'])
-    video.country = matching_result['match']['country']
-    video.original_series = bool(matching_result['match']['original_series'])
-    video.series_tvdb_id = sanitize_id(series['id'])
-    video.series_imdb_id = decorate_imdb_id(sanitize_id(series['imdbId'] or None))
+    series_tvdb_id = sanitize_id(series['id'])
+    ret = {
+        'series': str(matching_result['match']['series']),
+        'alternative_series': list(series['aliases']),
+        'year': int_or_none(matching_result['match']['year']),
+        'country': matching_result['match']['country'],
+        'original_series': bool(matching_result['match']['original_series']),
+        'external_ids': {
+            'series_tvdb_id': series_tvdb_id,
+            'series_imdb_id': decorate_imdb_id(sanitize_id(series['imdbId'] or None)),
+        },
+    }
 
     # get the episode
     logger.info('Getting series episode %dx%d', video.season, video.episode)
-    episode = tvdb_client.get_series_episode(video.series_tvdb_id, video.season, video.episode)
+    episode = client.get_series_episode(series_tvdb_id, video.season, video.episode)
     if not episode:
         logger.warning('No results for episode')
-        return video
+        return ret
 
     # add episode information
     logger.debug('Found episode %r', episode)
-    video.tvdb_id = sanitize_id(episode['id'])
-    video.title = episode['episodeName'] or None
-    video.imdb_id = decorate_imdb_id(sanitize_id(episode['imdbId'] or None))
+    ret['title'] = episode['episodeName'] or None
+    ret['external_ids'].update(  # type: ignore[union-attr]
+        {
+            'tvdb_id': sanitize_id(episode['id']),
+            'imdb_id': decorate_imdb_id(sanitize_id(episode['imdbId'] or None)),
+        }
+    )
+    return ret
+
+
+def refine(video: Video, *, apikey: str | None = None, force: bool = False, **kwargs: Any) -> Video:
+    """Refine a video by searching `TheTVDB <https://thetvdb.com/>`_.
+
+    .. note::
+
+        This refiner only work for instances of :class:`~subliminal.video.Episode`.
+
+    Several attributes can be found:
+
+      * :attr:`~subliminal.video.Episode.series`
+      * :attr:`~subliminal.video.Episode.year`
+      * :attr:`~subliminal.video.Episode.title`
+      * :attr:`~subliminal.video.Episode.external_ids`, keys 'imdb_id', 'tvdb_id', 'series_imdb_id' and 'series_tvdb_id'
+
+    :param Video video: the Video to refine.
+    :param (str | None) apikey: a personal API key to use TheTVDB.
+    :param bool force: if True, refine even if both the IMDB ids of the series and
+        of the episodes are known for an Episode.
+
+    """
+    # only deal with Episode videos
+    if not isinstance(video, Episode):
+        logger.error('Cannot refine movies')
+        return video
+
+    # update the API key
+    if apikey is not None:
+        tvdb_client.apikey = apikey
+
+    # refine episode
+    update = refine_episode(tvdb_client, video, force=force, **kwargs)
+    video.update(update)
 
     return video
 

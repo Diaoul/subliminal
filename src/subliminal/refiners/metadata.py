@@ -105,11 +105,12 @@ def refine(
     provider_info = media['provider']
     logger.debug('Using provider %r', provider_info)
 
+    ret: dict[str, Any] = {}
     # duration, in seconds
     # more reliable to take it from here than from the 'video' track
     if 'duration' in media:
-        video.duration = get_float(media['duration'])
-        logger.debug('Found duration %.2f', video.duration)
+        ret['duration'] = get_float(media['duration'])
+        logger.debug('Found duration %.2f', ret['duration'])
 
     # main video track
     if 'video' in media and len(media['video']) > 0:
@@ -121,18 +122,18 @@ def refine(
         if 'resolution' in video_track:
             resolution = str(video_track['resolution'])
             if resolution in ('480p', '720p', '1080p'):
-                video.resolution = resolution
-                logger.debug('Found resolution %s', video.resolution)
+                ret['resolution'] = resolution
+                logger.debug('Found resolution %s', ret['resolution'])
 
         # frame rate
         if 'frame_rate' in video_track:
-            video.frame_rate = get_float(video_track['frame_rate'])
-            logger.debug('Found frame_rate %.2f', video.frame_rate)
+            ret['frame_rate'] = get_float(video_track['frame_rate'])
+            logger.debug('Found frame_rate %.2f', ret['frame_rate'])
 
         # video codec
         if 'codec' in video_track:
-            video.video_codec = video_track['codec']
-            logger.debug('Found video_codec %s', video.video_codec)
+            ret['video_codec'] = video_track['codec']
+            logger.debug('Found video_codec %s', ret['video_codec'])
     else:  # pragma: no cover
         logger.warning('Video has no video track')
 
@@ -144,8 +145,8 @@ def refine(
 
         # audio codec
         if 'codec' in audio_track:
-            video.audio_codec = audio_track['codec']
-            logger.debug('Found audio_codec %s', video.audio_codec)
+            ret['audio_codec'] = audio_track['codec']
+            logger.debug('Found audio_codec %s', ret['audio_codec'])
     else:  # pragma: no cover
         logger.warning('Video has no audio track')
 
@@ -171,9 +172,12 @@ def refine(
                 embedded_subtitles_list.append(sub)
 
             logger.debug('Found embedded subtitles %r', embedded_subtitles_list)
-            video.subtitles.extend(embedded_subtitles_list)
+            ret['subtitles'] = embedded_subtitles_list
         else:
             logger.debug('Video has no subtitle track')
+
+    # Update video
+    video.update(ret)
 
     return video
 

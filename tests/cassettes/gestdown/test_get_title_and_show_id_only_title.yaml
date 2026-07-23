@@ -3,11 +3,11 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, zstd
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.2
+      - Subliminal/2.6
       accept:
       - application/json
     method: GET
@@ -16,43 +16,43 @@ interactions:
     body:
       string: '{"shows":[{"id":"8976d3bb-a213-4210-9a03-f4b6d17ce540","name":"Marvel''s
         Agents of S.H.I.E.L.D.","nbSeasons":7,"seasons":[1,2,3,4,5,6,7],"tvDbId":263365,"tmdbId":1403,"slug":"marvels-agents-of-shield"},{"id":"9039b72e-89eb-401e-9d03-0419bf7d1273","name":"Marvel''s
-        Agents of S.H.I.E.L.D.: Slingshot","nbSeasons":0,"seasons":[],"tvDbId":null,"tmdbId":69088,"slug":"marvels-agents-of-shield-slingshot"}]}'
+        Agents of S.H.I.E.L.D.: Slingshot","nbSeasons":1,"seasons":[1],"tvDbId":467615,"tmdbId":69088,"slug":"marvels-agents-of-shield-slingshot"}]}'
     headers:
       CF-RAY:
-      - 91189a3f4b405bea-LIS
+      - a1bcc37dae43d665-LIS
       Cache-Control:
       - public, max-age=14400
+      Cf-Cache-Status:
+      - MISS
       Connection:
       - keep-alive
+      Content-Encoding:
+      - zstd
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 13 Feb 2025 23:29:47 GMT
-      NEL:
-      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      - Thu, 16 Jul 2026 00:06:54 GMT
+      Last-Modified:
+      - Thu, 16 Jul 2026 00:06:54 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=Uea1Hvut%2BnxgXjELr8MptMoiEP0j7MH4BVvbn4umA3QkYkHeRzwDJWdukb0aQkso4PN9q7WFLorY6xmachyvBQycTWpFvX4j8fTmDGr2lz%2Fu3yU8hb3Ry2r8b99xEdL1el2TwA%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=HwOezKCIM%2Fvs%2Fa3JBn2Cr2A4XSpLrCLpBI0xTi53SRLAAXAvTRElgWnHi%2BvkYgzRIpi4UCF53hPkxXoAjE4cfBBOVw%2BPf9sPS3WPGX4Q1a6qe8ExWNuxG%2BemG3gK6kN69lyqWA%3D%3D"}]}'
       Server:
       - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
       Strict-Transport-Security:
       - max-age=15552000; includeSubDomains; preload
       Transfer-Encoding:
       - chunked
+      Vary:
+      - Accept-Encoding
+      - Accept-Encoding
       X-Content-Type-Options:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
-      cf-cache-status:
-      - MISS
-      content-length:
-      - '400'
-      last-modified:
-      - Thu, 13 Feb 2025 23:29:47 GMT
-      server-timing:
-      - cfL4;desc="?proto=TCP&rtt=3031&min_rtt=2978&rtt_var=1224&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2847&recv_bytes=822&delivery_rate=849515&cwnd=243&unsent_bytes=0&cid=21af27cf8c3e1958&ts=88&x=0"
-      vary:
-      - Accept-Encoding
-      - Accept-Encoding
     status:
       code: 200
       message: OK

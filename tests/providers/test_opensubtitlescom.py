@@ -318,7 +318,7 @@ def test_query_imdb_id(movies: dict[str, Movie]) -> None:
         '6632511',
     }
     with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
-        subtitles = provider.query(languages, imdb_id=video.imdb_id)
+        subtitles = provider.query(languages, imdb_id=video.external_ids.get('imdb_id'))
     assert {subtitle.id for subtitle in subtitles} == expected_subtitles
     assert {subtitle.language for subtitle in subtitles} == languages
 

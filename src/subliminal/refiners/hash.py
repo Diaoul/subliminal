@@ -89,6 +89,7 @@ def refine(
     providers = providers if providers is not None else get_default_providers()
 
     logger.debug('Computing hashes for %r', video.name)
+    hashes = {}
     for name in providers:
         provider = cast('Provider', provider_manager[name].plugin)
         if not provider.check_types(video):
@@ -106,7 +107,8 @@ def refine(
 
         # Add hash
         if h is not None:
-            video.hashes[name] = h
+            hashes[name] = h
 
-    logger.debug('Computed hashes %r', video.hashes)
+    logger.debug('Computed hashes %r', hashes)
+    video.update({'hashes': hashes})
     return video

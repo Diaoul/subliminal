@@ -4,12 +4,14 @@ from __future__ import annotations
 import os
 from datetime import datetime, timedelta, timezone
 from importlib.metadata import version as get_version
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 from unittest.mock import Mock
 
 import pytest
+from babelfish import Language
 from packaging.version import Version
 
+from subliminal.subtitle import Subtitle
 from subliminal.utils import sanitize, timestamp
 from subliminal.video import Episode, Movie, Video
 
@@ -96,12 +98,12 @@ def test_video_fromname_movie(movies: dict[str, Movie]) -> None:
     assert video.resolution == movies['man_of_steel'].resolution
     assert video.video_codec == movies['man_of_steel'].video_codec
     assert video.audio_codec is None
-    assert video.imdb_id is None
     assert video.hashes == {}
     assert video.size is None
     assert video.subtitle_languages == set()
     assert video.title == movies['man_of_steel'].title
     assert video.year == movies['man_of_steel'].year
+    assert not video.external_ids
 
 
 def test_video_fromname_episode(episodes: dict[str, Episode]) -> None:
@@ -113,7 +115,6 @@ def test_video_fromname_episode(episodes: dict[str, Episode]) -> None:
     assert video.resolution == episodes['bbt_s07e05'].resolution
     assert video.video_codec == episodes['bbt_s07e05'].video_codec
     assert video.audio_codec is None
-    assert video.imdb_id is None
     assert video.hashes == {}
     assert video.size is None
     assert video.subtitle_languages == set()
@@ -122,7 +123,7 @@ def test_video_fromname_episode(episodes: dict[str, Episode]) -> None:
     assert video.episode == episodes['bbt_s07e05'].episode
     assert video.title is None
     assert video.year is None
-    assert video.tvdb_id is None
+    assert not video.external_ids
 
 
 def test_video_fromname_episode_no_season(episodes: dict[str, Episode]) -> None:
@@ -134,7 +135,6 @@ def test_video_fromname_episode_no_season(episodes: dict[str, Episode]) -> None:
     assert video.resolution == episodes['the_jinx_e05'].resolution
     assert video.video_codec == episodes['the_jinx_e05'].video_codec
     assert video.audio_codec is None
-    assert video.imdb_id is None
     assert video.hashes == {}
     assert video.size is None
     assert video.subtitle_languages == set()
@@ -143,7 +143,7 @@ def test_video_fromname_episode_no_season(episodes: dict[str, Episode]) -> None:
     assert video.episode == episodes['the_jinx_e05'].episode
     assert video.title is None
     assert video.year is None
-    assert video.tvdb_id is None
+    assert not video.external_ids
 
 
 def test_video_hash(episodes: dict[str, Episode]) -> None:
@@ -212,12 +212,12 @@ def test_movie_fromname(movies: dict[str, Movie]) -> None:
     assert video.resolution == movies['man_of_steel'].resolution
     assert video.video_codec == movies['man_of_steel'].video_codec
     assert video.audio_codec is None
-    assert video.imdb_id is None
     assert video.hashes == {}
     assert video.size is None
     assert video.subtitle_languages == set()
     assert video.title == movies['man_of_steel'].title
     assert video.year == movies['man_of_steel'].year
+    assert not video.external_ids
 
 
 def test_episode_fromname(episodes: dict[str, Episode]) -> None:
@@ -229,7 +229,6 @@ def test_episode_fromname(episodes: dict[str, Episode]) -> None:
     assert video.resolution == episodes['bbt_s07e05'].resolution
     assert video.video_codec == episodes['bbt_s07e05'].video_codec
     assert video.audio_codec is None
-    assert video.imdb_id is None
     assert video.hashes == {}
     assert video.size is None
     assert video.subtitle_languages == set()
@@ -238,7 +237,7 @@ def test_episode_fromname(episodes: dict[str, Episode]) -> None:
     assert video.episode == episodes['bbt_s07e05'].episode
     assert video.title is None
     assert video.year is None
-    assert video.tvdb_id is None
+    assert not video.external_ids
 
 
 @pytest.mark.skipif(
@@ -260,3 +259,147 @@ def test_episode_fromname_guessit_bug(episodes: dict[str, Episode]) -> None:
     assert video.episode == episodes['adam-12_s01e02'].episode
     assert video.title == episodes['adam-12_s01e02'].title
     assert video.year == episodes['adam-12_s01e02'].year
+
+
+def test_movie_update(movies: dict[str, Movie]) -> None:
+    video = Movie.fromname(movies['man_of_steel'].name)
+    assert isinstance(video, Movie)
+    assert video.name == movies['man_of_steel'].name
+    assert video.hashes == {}
+    assert video.size is None
+    assert video.subtitle_languages == set()
+    assert video.year == movies['man_of_steel'].year
+    assert not video.external_ids
+
+    # Update
+    subtitle_en = Subtitle(Language('eng'))
+    data: dict[str, Any] = {
+        'hashes': {'opensubtitles': '5b8f8f4e41ccb21e'},
+        'size': 7033732714,
+        'subtitles': [subtitle_en],
+        'external_ids': {'imdb_id': 'tt0770828'},
+        'not_an_attribute': 1,  # will not be set
+    }
+    video.update(data)
+
+    assert video.hashes == {'opensubtitles': '5b8f8f4e41ccb21e'}
+    assert video.year == movies['man_of_steel'].year
+    assert video.size == 7033732714
+    assert video.subtitle_languages == {Language('eng')}
+    assert video.external_ids == {'imdb_id': 'tt0770828'}
+    assert not hasattr(video, 'not_an_attribute')
+
+    # Update containers
+    subtitle_it = Subtitle(Language('ita'))
+    data = {
+        'hashes': {'napiprojekt': '6303e7ee6a835e9fcede9fb2fb00cb36'},
+        'year': 2000,
+        'subtitles': [subtitle_it],
+        'external_ids': {'tmdb_id': '49521'},
+    }
+    video.update(data)
+
+    assert video.hashes == {'opensubtitles': '5b8f8f4e41ccb21e', 'napiprojekt': '6303e7ee6a835e9fcede9fb2fb00cb36'}
+    assert video.year == 2000
+    assert video.size == 7033732714
+    assert video.subtitle_languages == {Language('eng'), Language('ita')}
+    assert video.external_ids == {'imdb_id': 'tt0770828', 'tmdb_id': '49521'}
+
+    # Update containers, fails
+    subtitle_zh = Subtitle(Language('zho'))
+    data = {
+        'hashes': None,  # wrong type
+        'subtitles': {subtitle_zh},  # wrong type
+    }
+    video.update(data)
+
+    assert video.hashes == {'opensubtitles': '5b8f8f4e41ccb21e', 'napiprojekt': '6303e7ee6a835e9fcede9fb2fb00cb36'}
+    assert video.subtitle_languages == {Language('eng'), Language('ita')}
+
+
+def test_episode_update(episodes: dict[str, Episode]) -> None:
+    video = Episode.fromname(episodes['bbt_s07e05'].name)
+    assert isinstance(video, Episode)
+    assert video.name == episodes['bbt_s07e05'].name
+    assert video.hashes == {}
+    assert video.size is None
+    assert video.subtitle_languages == set()
+    assert video.series == episodes['bbt_s07e05'].series
+    assert video.season == episodes['bbt_s07e05'].season
+    assert video.year is None
+    assert not video.external_ids
+
+    # Update
+    subtitle_en = Subtitle(Language('eng'))
+    data: dict[str, Any] = {
+        'hashes': {'opensubtitles': '6878b3ef7c1bd19e'},
+        'size': 501910737,
+        'subtitles': [subtitle_en],
+        'external_ids': {'imdb_id': 'tt3229392'},
+        'not_an_attribute': 1,  # will not be set
+    }
+    video.update(data)
+
+    assert video.hashes == {'opensubtitles': '6878b3ef7c1bd19e'}
+    assert video.year is None
+    assert video.size == 501910737
+    assert video.subtitle_languages == {Language('eng')}
+    assert video.external_ids == {'imdb_id': 'tt3229392'}
+    assert not hasattr(video, 'not_an_attribute')
+
+    # Update containers
+    subtitle_it = Subtitle(Language('ita'))
+    data = {
+        'hashes': {'napiprojekt': '6303e7ee6a835e9fcede9fb2fb00cb36'},
+        'year': 2007,
+        'subtitles': [subtitle_it],
+        'external_ids': {'series_imdb_id': 'tt0898266'},
+    }
+    video.update(data)
+
+    assert video.hashes == {'opensubtitles': '6878b3ef7c1bd19e', 'napiprojekt': '6303e7ee6a835e9fcede9fb2fb00cb36'}
+    assert video.year == 2007
+    assert video.size == 501910737
+    assert video.subtitle_languages == {Language('eng'), Language('ita')}
+    assert video.external_ids == {'imdb_id': 'tt3229392', 'series_imdb_id': 'tt0898266'}
+
+    # Update containers, fails
+    subtitle_zh = Subtitle(Language('zho'))
+    data = {
+        'hashes': None,  # wrong type
+        'subtitles': {subtitle_zh},  # wrong type
+    }
+    video.update(data)
+
+    assert video.hashes == {'opensubtitles': '6878b3ef7c1bd19e', 'napiprojekt': '6303e7ee6a835e9fcede9fb2fb00cb36'}
+    assert video.subtitle_languages == {Language('eng'), Language('ita')}
+
+
+def test_episode_update_fake_set(episodes: dict[str, Episode]) -> None:
+    video = Episode.fromname(episodes['bbt_s07e05'].name)
+    assert isinstance(video, Episode)
+    assert video.name == episodes['bbt_s07e05'].name
+    assert video.year is None
+
+    # Add a fake set attribute
+    video.fake_set = {1, 2}  # type: ignore[attr-defined]
+
+    # Update containers
+    data: dict[str, Any] = {
+        'fake_set': {3, 4},
+        'year': 2007,
+    }
+    video.update(data)
+
+    assert video.fake_set == {1, 2, 3, 4}  # type: ignore[attr-defined]
+    assert video.year == 2007
+
+    # Update containers, fails
+    data = {
+        'fake_set': [5, 6],  # wrong type
+        'year': 2057,
+    }
+    video.update(data)
+
+    assert video.fake_set == {1, 2, 3, 4}  # type: ignore[attr-defined]
+    assert video.year == 2057

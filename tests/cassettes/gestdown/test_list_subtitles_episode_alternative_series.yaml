@@ -11,17 +11,19 @@ interactions:
       accept:
       - application/json
     method: GET
-    uri: https://api.gestdown.info/shows/external/tvdb/272135
+    uri: https://api.gestdown.info/shows/search/TURN:%20Washington's%20Spies
   response:
     body:
-      string: '{"shows":[{"id":"b366047d-4e8f-4430-b9da-e1a8b9dc4d00","name":"TURN","nbSeasons":4,"seasons":[1,2,3,4],"tvDbId":272135,"tmdbId":57276,"slug":"turn"}]}'
+      string: '"Couldn''t find show: TURN: Washington''s Spies"'
     headers:
       Age:
-      - '109144'
+      - '2045'
       CF-RAY:
-      - 9eb5e0dfaab7f437-LIS
+      - a1bcf583b847e3bd-LIS
       Cache-Control:
-      - public, max-age=14400
+      - public, max-age=43200
+      Cf-Cache-Status:
+      - HIT
       Connection:
       - keep-alive
       Content-Encoding:
@@ -29,11 +31,11 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Sun, 12 Apr 2026 23:05:53 GMT
+      - Thu, 16 Jul 2026 00:41:03 GMT
       Nel:
       - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=Isl0kphSTrZE5rwjkqaXDx76ly9eBAEWkYo1ocM9co9k%2F9qpiEsM1yK6hkxvx4m8SDVtGwycka7MBv1rFMNaYMKRlRFrVNu73pA%2FZYNvmYuC8KqoIZ%2B%2BH23H6Mz4uedJIhiSwg%3D%3D"}]}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=rEOu0R3T%2FvAmK1m1SQCNZ9%2F89aoIJUriNfNucCyy2%2BtrNLlb3a4c91kvtSvZSrYk0HZPvpNr5bvKERSXAHbNm2eYrt0P63nSYtpM09DXIFMsD2BI7%2F84mBSEo7pgEcmPhgpLog%3D%3D"}]}'
       Server:
       - cloudflare
       Speculation-Rules:
@@ -42,20 +44,16 @@ interactions:
       - max-age=15552000; includeSubDomains; preload
       Transfer-Encoding:
       - chunked
+      Vary:
+      - Accept-Encoding
+      - Accept-Encoding
       X-Content-Type-Options:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
-      cf-cache-status:
-      - HIT
-      last-modified:
-      - Sat, 11 Apr 2026 16:46:49 GMT
-      vary:
-      - Accept-Encoding
-      - Accept-Encoding
     status:
-      code: 200
-      message: OK
+      code: 404
+      message: Not Found
 - request:
     body: null
     headers:
@@ -96,14 +94,17 @@ interactions:
         to Me Mukai-kun  (Kocchi muiteyo Mukai-kun)\",\"nbSeasons\":1,\"seasons\":[1],\"tvDbId\":435923,\"tmdbId\":228920,\"slug\":\"turn-to-me-mukai-kun-kocchi-muiteyo-mukai-kun\"},{\"id\":\"019c78f6-ba86-78dd-a6bd-9b19e443b8b3\",\"name\":\"Your
         Turn to Kill  (Anata no ban desu)\",\"nbSeasons\":1,\"seasons\":[1],\"tvDbId\":361968,\"tmdbId\":88570,\"slug\":\"your-turn-to-kill-anata-no-ban-desu\"},{\"id\":\"019c7901-5f6f-7157-a186-505193f07a9f\",\"name\":\"Return
         to Jupiter\",\"nbSeasons\":1,\"seasons\":[1],\"tvDbId\":72750,\"tmdbId\":20207,\"slug\":\"return-to-jupiter\"},{\"id\":\"019c7903-30d6-7694-9ed5-94cb55eb3a91\",\"name\":\"The
-        Prince Who Turns into a Frog  (Wangzi bian qingwa)\",\"nbSeasons\":1,\"seasons\":[1],\"tvDbId\":84085,\"tmdbId\":6363,\"slug\":\"the-prince-who-turns-into-a-frog-wangzi-bian-qingw\"}]}"
+        Prince Who Turns into a Frog  (Wangzi bian qingwa)\",\"nbSeasons\":1,\"seasons\":[1],\"tvDbId\":84085,\"tmdbId\":6363,\"slug\":\"the-prince-who-turns-into-a-frog-wangzi-bian-qingw\"},{\"id\":\"019e6c4f-aebe-709c-813f-08c6f6a4fe54\",\"name\":\"History's
+        Turning Points\",\"nbSeasons\":0,\"seasons\":[],\"tvDbId\":null,\"tmdbId\":57590,\"slug\":\"historys-turning-points\"}]}"
     headers:
       Age:
-      - '38233'
+      - '2045'
       CF-RAY:
-      - 9eb5e0e04e61d852-LIS
+      - a1bcf5846b634610-LIS
       Cache-Control:
       - public, max-age=14400
+      Cf-Cache-Status:
+      - HIT
       Connection:
       - keep-alive
       Content-Encoding:
@@ -111,11 +112,13 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Sun, 12 Apr 2026 23:05:53 GMT
+      - Thu, 16 Jul 2026 00:41:03 GMT
+      Last-Modified:
+      - Thu, 16 Jul 2026 00:06:58 GMT
       Nel:
       - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=cyBnhlLwVPmavioDkYZxufheHX3VwCY0Cfalz70hvZ%2FqmxCXXrsf9rSC5SjJ7YEa3QUgc%2F2Xd%2FcqFrXWHHVS14L0sDIyJoKWyRHorb9abLsLDGa5Dg7C%2Fl4xVVqmSkHfHsdXnA%3D%3D"}]}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=ulFLwOMRpfEBO5bdJLD%2BSUGhqhIA3fciGc%2FmhwZQOgKAFuqUnWurVEdIXeLnuIrvFhyjSuySdH9gUN0p8cqea0%2FpZ8doACjLzZRw60g7oDDxjPVU7BxxkZX1HYn%2Bk5wbbkTAjA%3D%3D"}]}'
       Server:
       - cloudflare
       Speculation-Rules:
@@ -124,17 +127,13 @@ interactions:
       - max-age=15552000; includeSubDomains; preload
       Transfer-Encoding:
       - chunked
+      Vary:
+      - Accept-Encoding
+      - Accept-Encoding
       X-Content-Type-Options:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
-      cf-cache-status:
-      - HIT
-      last-modified:
-      - Sun, 12 Apr 2026 12:28:40 GMT
-      vary:
-      - Accept-Encoding
-      - Accept-Encoding
     status:
       code: 200
       message: OK
@@ -153,16 +152,19 @@ interactions:
     uri: https://api.gestdown.info/subtitles/get/b366047d-4e8f-4430-b9da-e1a8b9dc4d00/4/3/eng
   response:
     body:
-      string: '{"matchingSubtitles":[{"subtitleId":"6081b9e1-a57c-4082-8e65-aa07d5547b64","version":"SVA","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/6081b9e1-a57c-4082-8e65-aa07d5547b64","language":"English","discovered":"2022-11-30T07:37:56.705336Z","downloadCount":95,"source":"Addic7ed","qualities":["720p","1080p"],"release":null},{"subtitleId":"6b789fec-02e9-4a8d-b0a1-fd701a817d75","version":"SVA","completed":true,"hearingImpaired":true,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/6b789fec-02e9-4a8d-b0a1-fd701a817d75","language":"English","discovered":"2022-11-30T07:37:56.705778Z","downloadCount":14,"source":"Addic7ed","qualities":["720p","1080p"],"release":null},{"subtitleId":"sp_019c82e2-9a0a-71f5-a7f9-cc240f47cb46_ep_3","version":"HDTV,
-        720p","completed":true,"hearingImpaired":false,"corrected":false,"hd":true,"downloadUri":"/subtitles/download/sp_019c82e2-9a0a-71f5-a7f9-cc240f47cb46_ep_3","language":"English","discovered":"2026-02-22T01:06:54.594598Z","downloadCount":17,"source":"SuperSubtitles","qualities":["720p"],"release":"HDTV,
+      string: '{"matchingSubtitles":[{"subtitleId":"6081b9e1-a57c-4082-8e65-aa07d5547b64","version":"SVA","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/6081b9e1-a57c-4082-8e65-aa07d5547b64","language":"English","discovered":"2022-11-30T07:37:56.705336Z","downloadCount":106,"source":"Addic7ed","qualities":["720p","1080p"],"release":null},{"subtitleId":"6b789fec-02e9-4a8d-b0a1-fd701a817d75","version":"SVA","completed":true,"hearingImpaired":true,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/6b789fec-02e9-4a8d-b0a1-fd701a817d75","language":"English","discovered":"2022-11-30T07:37:56.705778Z","downloadCount":28,"source":"Addic7ed","qualities":["720p","1080p"],"release":null},{"subtitleId":"sp_019e4578-cd2f-774a-b6d7-8eb46fe7cc5e_entry_019e4578-d0cc-74df-b483-1cee08af2704","version":"NF,
+        WEB-DL","completed":true,"hearingImpaired":false,"corrected":false,"hd":false,"downloadUri":"/subtitles/download/sp_019e4578-cd2f-774a-b6d7-8eb46fe7cc5e_entry_019e4578-d0cc-74df-b483-1cee08af2704","language":"English","discovered":"2026-05-20T13:00:05.269248Z","downloadCount":43,"source":"SuperSubtitles","qualities":[],"release":"NF.WEBRip"},{"subtitleId":"sp_019c82e2-9a0a-71f5-a7f9-cc240f47cb46_ep_3","version":"HDTV,
+        720p","completed":true,"hearingImpaired":false,"corrected":false,"hd":true,"downloadUri":"/subtitles/download/sp_019c82e2-9a0a-71f5-a7f9-cc240f47cb46_ep_3","language":"English","discovered":"2026-02-22T01:06:54.594598Z","downloadCount":68,"source":"SuperSubtitles","qualities":["720p"],"release":"HDTV,
         720p"}],"episode":{"season":4,"number":3,"title":"Blood for Blood","show":"TURN","discovered":"2022-11-30T07:37:56.705328Z"}}'
     headers:
       Age:
-      - '937'
+      - '2045'
       CF-RAY:
-      - 9eb5e0e0cb165910-LIS
+      - a1bcf584ebfc4610-LIS
       Cache-Control:
       - public, max-age=7200
+      Cf-Cache-Status:
+      - HIT
       Connection:
       - keep-alive
       Content-Encoding:
@@ -170,11 +172,13 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Sun, 12 Apr 2026 23:05:54 GMT
+      - Thu, 16 Jul 2026 00:41:03 GMT
+      Last-Modified:
+      - Thu, 16 Jul 2026 00:06:58 GMT
       Nel:
       - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=3scIOVsTjW%2B344bqvpj%2FVa4RPD%2FdmWcdAIMPTll2PTjoC%2FfjzImAiV%2FiblwWrA2wI2LEhDkseuslsCVbji7Ei8oTuys3pHsFx7apVw6d98iUbES2%2Bv%2B62lXVYfzSKV1CnulVnA%3D%3D"}]}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=4Uh%2Fndbir22uyN%2FEpF%2BF9FD9j%2BsZpMpqp6eOsErfCLxAnw0BMd2SYZTMzjIDKmI%2BjHX%2F6GfcTwkYyJiGhgmHrfY%2FO7vQDEcSLYIlpQn9meaaV%2FZBD8vuuIbSTXEUheLkaHRZjw%3D%3D"}]}'
       Server:
       - cloudflare
       Speculation-Rules:
@@ -183,17 +187,13 @@ interactions:
       - max-age=15552000; includeSubDomains; preload
       Transfer-Encoding:
       - chunked
+      Vary:
+      - Accept-Encoding
+      - Accept-Encoding
       X-Content-Type-Options:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
-      cf-cache-status:
-      - HIT
-      last-modified:
-      - Sun, 12 Apr 2026 22:50:16 GMT
-      vary:
-      - Accept-Encoding
-      - Accept-Encoding
     status:
       code: 200
       message: OK

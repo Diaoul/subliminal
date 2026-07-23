@@ -3,11 +3,11 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, zstd
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.2
+      - Subliminal/2.6
       accept:
       - application/json
     method: GET
@@ -16,34 +16,34 @@ interactions:
     body:
       string: ''
     headers:
-      CF-Cache-Status:
-      - EXPIRED
       CF-RAY:
-      - 91189a441cf15bd5-LIS
+      - a1bcc3860d224813-LIS
       Cache-Control:
       - max-age=7200
+      Cf-Cache-Status:
+      - MISS
       Connection:
       - keep-alive
       Content-Length:
       - '0'
       Date:
-      - Thu, 13 Feb 2025 23:29:48 GMT
-      NEL:
-      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      - Thu, 16 Jul 2026 00:06:55 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=xhB4e4QNfvxBRuqjQdXWJPCqTkQWneAC7tmikZq8XzWRz7yox1s3Bb%2BG565y66RNdJ3mIhdbAQkWX8saQatuUqpcaBr2qp3cuu%2B2EnIoIBHnQuW6qRyxmdZ44GOB8wvqxIk8PQ%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=zD2%2F2zE5ErZXyC2JSx%2F2FBKvmoZGX95A2navN8JF1NMOqdu85mYQPbRFYs3VrspqbCuITDJGYsKJpPT7WCNnBZsH1XphSluow%2FRObpPKyUfkTwdiMc6Ul%2FnpzBk0vFDNf3UokA%3D%3D"}]}'
       Server:
       - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
       Strict-Transport-Security:
       - max-age=15552000; includeSubDomains; preload
+      Vary:
+      - Accept-Encoding
       X-Content-Type-Options:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
-      server-timing:
-      - cfL4;desc="?proto=TCP&rtt=3041&min_rtt=2974&rtt_var=1250&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2846&recv_bytes=794&delivery_rate=823663&cwnd=240&unsent_bytes=0&cid=0c1072a1fb741203&ts=75&x=0"
-      vary:
-      - Accept-Encoding
     status:
       code: 404
       message: Not Found

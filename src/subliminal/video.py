@@ -4,104 +4,45 @@ from __future__ import annotations
 
 import logging
 import os
-from typing import TYPE_CHECKING, Any
+from collections.abc import Mapping, MutableMapping, MutableSequence, Sequence, Set
+from typing import TYPE_CHECKING, Any, TypedDict, cast
 
 from subliminal.exceptions import GuessingError
 from subliminal.utils import ensure_list, ensure_str, get_age, matches_extended_title, safely_guessit
 
 if TYPE_CHECKING:
-    from collections.abc import Mapping, Sequence
     from datetime import timedelta
 
     from babelfish import Country, Language  # type: ignore[import-untyped]
 
     from subliminal.subtitle import Subtitle
 
+
 logger = logging.getLogger(__name__)
 
+
+class VideoExternalIds(TypedDict, total=False):
+    """External Ids of a video."""
+
+    imdb_id: str
+    tmdb_id: str
+    tvdb_id: str
+    series_imdb_id: str
+    series_tmdb_id: str
+    series_tvdb_id: str
+
+
+# fmt: off
 #: Video extensions
 VIDEO_EXTENSIONS = (
-    '.3g2',
-    '.3gp',
-    '.3gp2',
-    '.3gpp',
-    '.60d',
-    '.ajp',
-    '.asf',
-    '.asx',
-    '.avchd',
-    '.avi',
-    '.bik',
-    '.bix',
-    '.box',
-    '.cam',
-    '.dat',
-    '.divx',
-    '.dmf',
-    '.dv',
-    '.dvr-ms',
-    '.evo',
-    '.flc',
-    '.fli',
-    '.flic',
-    '.flv',
-    '.flx',
-    '.gvi',
-    '.gvp',
-    '.h264',
-    '.m1v',
-    '.m2p',
-    '.m2ts',
-    '.m2v',
-    '.m4e',
-    '.m4v',
-    '.mjp',
-    '.mjpeg',
-    '.mjpg',
-    '.mk3d',
-    '.mkv',
-    '.moov',
-    '.mov',
-    '.movhd',
-    '.movie',
-    '.movx',
-    '.mp4',
-    '.mpe',
-    '.mpeg',
-    '.mpg',
-    '.mpv',
-    '.mpv2',
-    '.mxf',
-    '.nsv',
-    '.nut',
-    '.ogg',
-    '.ogm',
-    '.ogv',
-    '.omf',
-    '.ps',
-    '.qt',
-    '.ram',
-    '.rm',
-    '.rmvb',
-    '.swf',
-    '.ts',
-    '.vfw',
-    '.vid',
-    '.video',
-    '.viv',
-    '.vivo',
-    '.vob',
-    '.vro',
-    '.webm',
-    '.wm',
-    '.wmv',
-    '.wmx',
-    '.wrap',
-    '.wvx',
-    '.wx',
-    '.x264',
-    '.xvid',
+    '.3g2', '.3gp', '.3gp2', '.3gpp', '.60d', '.ajp', '.asf', '.asx', '.avchd', '.avi', '.bik', '.bix', '.box', '.cam',
+    '.dat', '.divx', '.dmf', '.dv', '.dvr-ms', '.evo', '.flc', '.fli', '.flic', '.flv', '.flx', '.gvi', '.gvp', '.h264',
+    '.m1v', '.m2p', '.m2ts', '.m2v', '.m4e', '.m4v', '.mjp', '.mjpeg', '.mjpg', '.mk3d', '.mkv', '.moov', '.mov',
+    '.movhd', '.movie', '.movx', '.mp4', '.mpe', '.mpeg', '.mpg', '.mpv', '.mpv2', '.mxf', '.nsv', '.nut', '.ogg',
+    '.ogm', '.ogv', '.omf', '.ps', '.qt', '.ram', '.rm', '.rmvb', '.swf', '.ts', '.vfw', '.vid', '.video', '.viv',
+    '.vivo', '.vob', '.vro', '.webm', '.wm', '.wmv', '.wmx', '.wrap', '.wvx', '.wx', '.x264', '.xvid',
 )
+# fmt: on
 
 
 class Video:
@@ -122,12 +63,13 @@ class Video:
     :type hashes: dict[str, str]
     :param int size: size of the video file in bytes.
     :param subtitles: existing subtitles.
-    :type subtitles: set[:class:`~subliminal.subtitle.Subtitle`]
+    :type subtitles: list[:class:`~subliminal.subtitle.Subtitle`]
     :param int year: year of the video.
-    :param country: Country of the video.
+    :param country: country of the video.
     :type country: :class:`~babelfish.country.Country`
-    :param str imdb_id: IMDb id of the video.
-    :param str tmdb_id: TMDB id of the video.
+    :param external_ids: external ids of the videos from different databases (IMDb, TMDB, ...)
+    :type external_ids: dict[str, str]
+    :param bool use_ctime: use the latest of creation time and modification time for the video age
 
     """
 
@@ -173,16 +115,13 @@ class Video:
     #: Country of the video
     country: Country | None
 
-    #: IMDb id of the video
-    imdb_id: str | None
-
-    #: TMDB id of the video
-    tmdb_id: int | None
+    #: External ids of the video from different databases (IMDb, TMDB, ...)
+    external_ids: VideoExternalIds
 
     #: Use the latest of creation time and modification time for the video age
     use_ctime: bool
 
-    #: Existing subtitle languages
+    #: Existing subtitles
     subtitles: list[Subtitle]
 
     def __init__(
@@ -204,8 +143,7 @@ class Video:
         title: str | None = None,
         year: int | None = None,
         country: Country | None = None,
-        imdb_id: str | None = None,
-        tmdb_id: int | None = None,
+        external_ids: VideoExternalIds | None = None,
     ) -> None:
         self._name = name
         self.source = source
@@ -223,8 +161,7 @@ class Video:
         self.title = title
         self.year = year
         self.country = country
-        self.imdb_id = imdb_id
-        self.tmdb_id = tmdb_id
+        self.external_ids = cast('VideoExternalIds', dict(external_ids) if external_ids else {})
 
     @property
     def name(self) -> str:
@@ -274,6 +211,50 @@ class Video:
         """
         return cls.fromguess(name, safely_guessit(name))
 
+    def update(self, update: Mapping[str, Any]) -> None:
+        """Update video attributes with the dict items."""
+        for k, v in update.items():
+            if not hasattr(self, k):
+                msg = f'Attribute does not exist, skip setting {self.__class__.__name__}.{k} to {v}'
+                logger.warning(msg)
+                continue
+
+            attribute = getattr(self, k)
+            # Do not replace containers, but extend/update them
+            # List attribute
+            if isinstance(attribute, MutableSequence):
+                if not isinstance(v, Sequence):
+                    msg = f'List cannot be extended, skip setting {self.__class__.__name__}.{k} to {v}'
+                    logger.warning(msg)
+                    continue
+                msg = f'Extend list attribute {self.__class__.__name__}.{k} with {v}'
+                logger.debug(msg)
+                attribute.extend(v)
+
+            # Dict attribute
+            elif isinstance(attribute, MutableMapping):
+                if not isinstance(v, Mapping):
+                    msg = f'Dict cannot be updated, skip setting {self.__class__.__name__}.{k} to {v}'
+                    logger.warning(msg)
+                    continue
+                msg = f'Update dict attribute {self.__class__.__name__}.{k} with {v}'
+                logger.debug(msg)
+                attribute.update(v)
+
+            # Set attribute (do not use MutableSet as it does not define the update method)
+            elif isinstance(attribute, set):
+                if not isinstance(v, Set):
+                    msg = f'Set cannot be updated, skip setting {self.__class__.__name__}.{k} to {v}'
+                    logger.warning(msg)
+                    continue
+                msg = f'Update set attribute {self.__class__.__name__}.{k} with {v}'
+                logger.debug(msg)
+                attribute.update(v)
+
+            # Not a container, set the value
+            else:
+                setattr(self, k, v)
+
     def __repr__(self) -> str:  # pragma: no cover
         return f'<{self.__class__.__name__} [{self.name!r}]>'
 
@@ -289,7 +270,6 @@ class Episode(Video):
     :param int or list episodes: episode numbers of the episode.
     :param str title: title of the episode.
     :param bool original_series: whether the series is the first with this name.
-    :param int tvdb_id: TVDB id of the episode.
     :param list alternative_series: alternative names of the series
     :param kwargs: additional parameters for the :class:`Video` constructor.
 
@@ -313,26 +293,11 @@ class Episode(Video):
     #: The series is the first with this name
     original_series: bool
 
-    #: IMDb id of the episode
-    imdb_id: str | None
-
-    #: IMDb id of the series
-    series_imdb_id: str | None
-
-    #: TMDB id of the episode
-    tmdb_id: int | None
-
-    #: TMDB id of the series
-    series_tmdb_id: int | None
-
-    #: TVDB id of the episode
-    tvdb_id: int | None
-
-    #: TVDB id of the series
-    series_tvdb_id: int | None
-
     #: Alternative names of the series
     alternative_series: list[str]
+
+    #: External ids of the video from different databases (IMDb, TMDB, ...)
+    external_ids: VideoExternalIds
 
     def __init__(
         self,
@@ -342,10 +307,6 @@ class Episode(Video):
         episodes: int | Sequence[int] | None,
         *,
         original_series: bool = True,
-        tvdb_id: int | None = None,
-        series_tvdb_id: int | None = None,
-        series_imdb_id: str | None = None,
-        series_tmdb_id: int | None = None,
         alternative_series: Sequence[str] | None = None,
         **kwargs: Any,
     ) -> None:
@@ -355,10 +316,6 @@ class Episode(Video):
         self.season = season
         self.episodes = ensure_list(episodes)
         self.original_series = original_series
-        self.tvdb_id = tvdb_id
-        self.series_tvdb_id = series_tvdb_id
-        self.series_imdb_id = series_imdb_id
-        self.series_tmdb_id = series_tmdb_id
         self.alternative_series = list(alternative_series) if alternative_series is not None else []
 
     @property
@@ -439,14 +396,11 @@ class Movie(Video):
     #: Country of the movie
     country: Country | None
 
-    #: IMDb id of the episode
-    imdb_id: str | None
-
-    #: TMDB id of the episode
-    tmdb_id: int | None
-
     #: Alternative titles of the movie
     alternative_titles: list[str]
+
+    #: External ids of the video from different databases (IMDb, TMDB, ...)
+    external_ids: VideoExternalIds
 
     def __init__(
         self,

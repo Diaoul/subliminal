@@ -3,57 +3,57 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, zstd
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.2
+      - Subliminal/2.6
       accept:
       - application/json
     method: GET
-    uri: https://api.gestdown.info/shows/external/tvdb/80379
+    uri: https://api.gestdown.info/shows/search/The%20Big%20Bang%20Theory
   response:
     body:
       string: '{"shows":[{"id":"91eb9278-8cf5-4ddd-9111-7f60b15958cb","name":"The
         Big Bang Theory","nbSeasons":12,"seasons":[1,2,3,4,5,6,7,8,9,10,11,12],"tvDbId":80379,"tmdbId":1418,"slug":"the-big-bang-theory"}]}'
     headers:
       Age:
-      - '0'
+      - '48140'
       CF-RAY:
-      - 91189a2e6fb35bdc-LIS
+      - a1bcc3928d61e3b5-LIS
       Cache-Control:
       - public, max-age=14400
+      Cf-Cache-Status:
+      - HIT
       Connection:
       - keep-alive
+      Content-Encoding:
+      - zstd
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 13 Feb 2025 23:29:44 GMT
-      NEL:
-      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      - Thu, 16 Jul 2026 00:06:57 GMT
+      Last-Modified:
+      - Thu, 16 Jul 2026 00:06:53 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=KRotLSbrMn63PYSiUsEnHiKYNxiIfVPVaaUNDB1x901i0eEBJvYHv9GcnD6UuzUSTPKgLZiXgBowqOx7xuW%2Ff5Kf%2Ftb6sh%2B%2FVfZMahOhzy6EBIpuQIPoHXCW%2FoGzgxLUzB3vuQ%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=dT5Vx95%2BlgDp%2BmtR%2FCa8iSiJrjYpCuUjnUeI%2BEBbX4L8iHym98ZszdFV9qfuJBsmgQ5PCGBkIw1xzjV4%2BReP6vRVIvVy9Xr05V1%2BGBcpz9qQnt2odolhHjvPgbiTw%2Fa%2BXPwV6w%3D%3D"}]}'
       Server:
       - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
       Strict-Transport-Security:
       - max-age=15552000; includeSubDomains; preload
       Transfer-Encoding:
       - chunked
+      Vary:
+      - Accept-Encoding
+      - Accept-Encoding
       X-Content-Type-Options:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
-      cf-cache-status:
-      - HIT
-      content-length:
-      - '198'
-      last-modified:
-      - Wed, 12 Feb 2025 22:02:09 GMT
-      server-timing:
-      - cfL4;desc="?proto=TCP&rtt=3007&min_rtt=2983&rtt_var=1168&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2847&recv_bytes=797&delivery_rate=910405&cwnd=211&unsent_bytes=0&cid=4bf8b0c141be49a1&ts=27&x=0"
-      vary:
-      - Accept-Encoding
-      - Accept-Encoding
     status:
       code: 200
       message: OK
@@ -61,57 +61,57 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, zstd
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.2
+      - Subliminal/2.6
       accept:
       - application/json
     method: GET
     uri: https://api.gestdown.info/subtitles/get/91eb9278-8cf5-4ddd-9111-7f60b15958cb/7/5/fra
   response:
     body:
-      string: '{"matchingSubtitles":[{"subtitleId":"90fe1369-fa0c-4154-bd04-d3d332dec587","version":"DIMENSION","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/90fe1369-fa0c-4154-bd04-d3d332dec587","language":"French","discovered":"2022-05-30T14:51:00.621699Z","downloadCount":168}],"episode":{"season":7,"number":5,"title":"The
+      string: '{"matchingSubtitles":[{"subtitleId":"90fe1369-fa0c-4154-bd04-d3d332dec587","version":"DIMENSION","completed":true,"hearingImpaired":false,"corrected":true,"hd":true,"downloadUri":"/subtitles/download/90fe1369-fa0c-4154-bd04-d3d332dec587","language":"French","discovered":"2022-05-30T14:51:00.621699Z","downloadCount":237,"source":"Addic7ed","qualities":["720p","1080p"],"release":null}],"episode":{"season":7,"number":5,"title":"The
         Workplace Proximity","show":"The Big Bang Theory","discovered":"2022-05-30T14:51:00.621694Z"}}'
     headers:
       Age:
       - '0'
-      CF-Cache-Status:
-      - HIT
       CF-RAY:
-      - 91189a2ead455be0-LIS
+      - a1bcc3935d585910-LIS
       Cache-Control:
       - public, max-age=7200
+      Cf-Cache-Status:
+      - HIT
       Connection:
       - keep-alive
+      Content-Encoding:
+      - zstd
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 13 Feb 2025 23:29:44 GMT
+      - Thu, 16 Jul 2026 00:06:57 GMT
       Last-Modified:
-      - Thu, 13 Feb 2025 23:29:44 GMT
-      NEL:
-      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      - Thu, 16 Jul 2026 00:06:57 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=mdCNBej1qcGpOVfWWlmW%2FLFBuDV7ro8GXym%2FhpFHB7miRsmAt4tb4I0%2BMJ8l7pEWGyDN3vMROBTk6mJJMD1OmNoikic5hD8YBrVFQTe63lIHde0JkuAipPnxm%2BFf%2BNMKqr1baw%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=9oQanL52o7eqWYqnyFWhZjxTkKntsH3st4uS8w11UC1f0PCkUk0oat5lcsDJIxDMSw8kOWrTkzeGLFEerYTkV9Anf%2FxV65Iu6ND3fjYnlq%2BVB1nAUoRXOrv1fs%2F4p6zafoKOVA%3D%3D"}]}'
       Server:
       - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
       Strict-Transport-Security:
       - max-age=15552000; includeSubDomains; preload
       Transfer-Encoding:
       - chunked
+      Vary:
+      - Accept-Encoding
+      - Accept-Encoding
       X-Content-Type-Options:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
-      content-length:
-      - '463'
-      server-timing:
-      - cfL4;desc="?proto=TCP&rtt=3066&min_rtt=2645&rtt_var=1293&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2847&recv_bytes=830&delivery_rate=1094896&cwnd=247&unsent_bytes=0&cid=d89f14a876c8a4b2&ts=20&x=0"
-      vary:
-      - Accept-Encoding
-      - Accept-Encoding
     status:
       code: 200
       message: OK
@@ -119,11 +119,11 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, zstd
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.2
+      - Subliminal/2.6
       accept:
       - application/json
     method: GET
@@ -530,43 +530,43 @@ interactions:
         --> 00:18:41,928\r\nFeu !\r\n\r\n392\r\n00:18:44,274 --> 00:18:49,274\r\n-=
         Synchro par elderman =-\r\n-= www.addic7ed.com =-\r\n\r\n"
     headers:
-      CF-Cache-Status:
-      - HIT
       CF-RAY:
-      - 91189a2eef875bd3-LIS
+      - a1bcc393cfaa48a4-LIS
       Cache-Control:
       - public, max-age=691200
+      Cf-Cache-Status:
+      - HIT
       Connection:
       - keep-alive
+      Content-Disposition:
+      - attachment; filename=The.Big.Bang.Theory.S07E05.DIMENSION.fr.srt; filename*=UTF-8''The.Big.Bang.Theory.S07E05.DIMENSION.fr.srt
       Content-Type:
       - text/srt
       Date:
-      - Thu, 13 Feb 2025 23:29:44 GMT
-      NEL:
-      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      - Thu, 16 Jul 2026 00:06:57 GMT
+      Etag:
+      - W/"90fe1369-fa0c-4154-bd04-d3d332dec587-637949927070602570"
+      Last-Modified:
+      - Mon, 01 Aug 2022 23:18:27 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=9Mnk45pOWXqpcbKae0GrA1r2XG4HwvKIispzc03bzI%2FvTkXSgI2NES%2FjaXriRrSZ1%2F0F0Wvy6YyD6KJ1bwc%2F1aPtpbnbTT7wTTDIlOAnUJQ0S3goURJA4PNWNMwd00ITVOjwWQ%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=VvnIISY7cst%2Fgg%2FoyeZ4W5ck%2F52rZFIKw7ihEEaQcS4teNOKONpBt6qkASh5%2BpIJ13z7ILJTfvZ7W7%2BNxpnqQ5KgZs3BgRm1jebm%2FRi1JJBcS555f6IZGMkr9aII6gSCSdB1zw%3D%3D"}]}'
       Server:
       - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
       Strict-Transport-Security:
       - max-age=15552000; includeSubDomains; preload
       Transfer-Encoding:
       - chunked
+      Vary:
+      - Accept-Encoding
+      - Accept-Encoding
       X-Content-Type-Options:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
-      content-disposition:
-      - attachment; filename=The.Big.Bang.Theory.S07E05.DIMENSION.fr.srt; filename*=UTF-8''The.Big.Bang.Theory.S07E05.DIMENSION.fr.srt
-      etag:
-      - W/"90fe1369-fa0c-4154-bd04-d3d332dec587-637949927070602570"
-      last-modified:
-      - Mon, 01 Aug 2022 23:18:27 GMT
-      server-timing:
-      - cfL4;desc="?proto=TCP&rtt=2984&min_rtt=2916&rtt_var=1230&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2848&recv_bytes=827&delivery_rate=835786&cwnd=230&unsent_bytes=0&cid=8e4888de8948b829&ts=85&x=0"
-      vary:
-      - Accept-Encoding
-      - Accept-Encoding
     status:
       code: 200
       message: OK

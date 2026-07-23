@@ -3,11 +3,11 @@ interactions:
     body: null
     headers:
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, zstd
       Connection:
       - keep-alive
       User-Agent:
-      - Subliminal/2.2
+      - Subliminal/2.6
       accept:
       - application/json
     method: GET
@@ -16,39 +16,39 @@ interactions:
     body:
       string: '"Couldn''t find show: The Big How I Met Your Mother"'
     headers:
-      CF-Cache-Status:
-      - EXPIRED
       CF-RAY:
-      - 91189a3dba095be8-LIS
+      - a1bcc37b28a5785c-LIS
       Cache-Control:
       - public, max-age=43200
+      Cf-Cache-Status:
+      - MISS
       Connection:
       - keep-alive
+      Content-Encoding:
+      - zstd
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 13 Feb 2025 23:29:47 GMT
-      NEL:
-      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      - Thu, 16 Jul 2026 00:06:54 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=9k5gIvKsfBitsKH8f5nrTi1AJCEhP%2Bu1%2BUFsMKwS9VNzBFCgXgyNnpsW7X40zV0Nhb9f26sIJNrUzEODyeZ1ftX%2Fwf1652D3V9GR3XzqCYAKigjOIURD60YEG1NrCRvJ1M1uLQ%3D%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=b9OGNJ5sZmBMuITHOjEbPvhgDDD3uGG%2FM%2FQ7rC7ckI8ACHlk762NWFpsotysF2eTPRC2bLM%2F0DF27vRSXM9cWYRRUiNRYZUzGh6Sua9guknhp3m9wu%2FIqxao3qU4k%2FYuR4tYUw%3D%3D"}]}'
       Server:
       - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
       Strict-Transport-Security:
       - max-age=15552000; includeSubDomains; preload
       Transfer-Encoding:
       - chunked
+      Vary:
+      - Accept-Encoding
+      - Accept-Encoding
       X-Content-Type-Options:
       - nosniff
       alt-svc:
       - h3=":443"; ma=86400
-      content-length:
-      - '51'
-      server-timing:
-      - cfL4;desc="?proto=TCP&rtt=2981&min_rtt=2955&rtt_var=1162&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2848&recv_bytes=826&delivery_rate=913564&cwnd=251&unsent_bytes=0&cid=a839341109cba928&ts=80&x=0"
-      vary:
-      - Accept-Encoding
-      - Accept-Encoding
     status:
       code: 404
       message: Not Found

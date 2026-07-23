@@ -372,6 +372,9 @@ class Movie(Video):
     #: Country of the movie
     country: Country | None = None
 
+    #: External ids of the movie from different databases (IMDb, TMDB, ...)
+    external_ids: VideoExternalIds = field(factory=VideoExternalIds, eq=False)
+
     #: Alternative titles of the movie
     alternative_titles: list[str] = field(factory=list)
 

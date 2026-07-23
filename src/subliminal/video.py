@@ -5,43 +5,32 @@ from __future__ import annotations
 import logging
 import os
 from collections.abc import Mapping, MutableMapping, MutableSequence, Sequence, Set
-from typing import TYPE_CHECKING, Any, cast
+from typing import TYPE_CHECKING, Any, TypedDict, cast
 
 from subliminal.exceptions import GuessingError
 from subliminal.utils import ensure_list, ensure_str, get_age, matches_extended_title, safely_guessit
 
 if TYPE_CHECKING:
-    import sys
     from datetime import timedelta
 
     from babelfish import Country, Language  # type: ignore[import-untyped]
 
     from subliminal.subtitle import Subtitle
 
-    if sys.version_info >= (3, 15):  # pragma: no cover
-        from typing import TypedDict
-    else:  # pragma: no cover
-        # extra_items is defined in typing_extensions>=4.10
-        from typing_extensions import TypedDict
-
-    class MovieExternalIds(TypedDict, total=False, extra_items=str):  # type: ignore[call-arg]
-        """External Ids for a movie."""
-
-        imdb_id: str
-        tmdb_id: str
-
-    class EpisodeExternalIds(TypedDict, total=False, extra_items=str):  # type: ignore[call-arg]
-        """External Ids for an episode."""
-
-        series_imdb_id: str
-        series_tmdb_id: str
-        series_tvdb_id: str
-        imdb_id: str
-        tmdb_id: str
-        tvdb_id: str
-
 
 logger = logging.getLogger(__name__)
+
+
+class VideoExternalIds(TypedDict, total=False):
+    """External Ids of a video."""
+
+    imdb_id: str
+    tmdb_id: str
+    tvdb_id: str
+    series_imdb_id: str
+    series_tmdb_id: str
+    series_tvdb_id: str
+
 
 # fmt: off
 #: Video extensions
@@ -127,7 +116,7 @@ class Video:
     country: Country | None
 
     #: External ids of the video from different databases (IMDb, TMDB, ...)
-    external_ids: MovieExternalIds | EpisodeExternalIds
+    external_ids: VideoExternalIds
 
     #: Use the latest of creation time and modification time for the video age
     use_ctime: bool
@@ -154,7 +143,7 @@ class Video:
         title: str | None = None,
         year: int | None = None,
         country: Country | None = None,
-        external_ids: MovieExternalIds | EpisodeExternalIds | None = None,
+        external_ids: VideoExternalIds | None = None,
     ) -> None:
         self._name = name
         self.source = source
@@ -172,7 +161,7 @@ class Video:
         self.title = title
         self.year = year
         self.country = country
-        self.external_ids = cast('MovieExternalIds | EpisodeExternalIds', dict(external_ids) if external_ids else {})
+        self.external_ids = cast('VideoExternalIds', dict(external_ids) if external_ids else {})
 
     @property
     def name(self) -> str:
@@ -308,7 +297,7 @@ class Episode(Video):
     alternative_series: list[str]
 
     #: External ids of the video from different databases (IMDb, TMDB, ...)
-    external_ids: EpisodeExternalIds
+    external_ids: VideoExternalIds
 
     def __init__(
         self,
@@ -411,7 +400,7 @@ class Movie(Video):
     alternative_titles: list[str]
 
     #: External ids of the video from different databases (IMDb, TMDB, ...)
-    external_ids: MovieExternalIds
+    external_ids: VideoExternalIds
 
     def __init__(
         self,

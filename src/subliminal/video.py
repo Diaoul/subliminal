@@ -434,7 +434,7 @@ converter = cattrs.Converter()
 
 @converter.register_structure_hook
 def subtitle_structure_hook(val: Any, _: Any) -> Subtitle:
-    """This hook will be registered for structuring :class:`~subliminal.subtitle.Subtitle`s."""
+    """This hook will be registered for structuring :class:`~subliminal.subtitle.Subtitle` instances."""
     if not isinstance(val, dict):  # pragma: no cover
         msg = f'A dict was expected to structure a Subtitle: {val}'
         raise TypeError(msg)
@@ -444,7 +444,7 @@ def subtitle_structure_hook(val: Any, _: Any) -> Subtitle:
 
 @converter.register_unstructure_hook
 def subtitle_unstructure_hook(val: Subtitle) -> dict[str, Any]:
-    """This hook will be registered for unstructuring :class:`~subliminal.subtitle.Subtitle`s."""
+    """This hook will be registered for unstructuring :class:`~subliminal.subtitle.Subtitle` instances."""
     return {
         'language': val.language,
         'subtitle_id': val.subtitle_id,
@@ -459,10 +459,10 @@ if Version(get_version('babelfish')) <= Version('0.6.1'):  # pragma: no cover
 
     @converter.register_structure_hook
     def language_structure_hook(val: str, _: Any) -> Language:
-        """This hook will be registered for structuring :class:`~babelfish.language.Language`s."""
+        """This hook will be registered for structuring :class:`~babelfish.language.Language` instances."""
         return Language.fromietf(val)
 
     @converter.register_unstructure_hook
     def language_unstructure_hook(val: Language) -> str:
-        """This hook will be registered for unstructuring :class:`~babelfish.language.Language`s."""
+        """This hook will be registered for unstructuring :class:`~babelfish.language.Language` instances."""
         return f'{val.alpha3}-{val.country.alpha2}-{val.script.code}'

@@ -128,7 +128,7 @@ class Video:
     use_ctime: bool = True
 
     #: External ids of the video from different databases (IMDb, TMDB, ...)
-    external_ids: VideoExternalIds = field(factory=dict, eq=False)
+    external_ids: VideoExternalIds = field(factory=VideoExternalIds, eq=False)
 
     #: Existing subtitles
     subtitles: list[Subtitle] = field(factory=list, eq=False)
@@ -225,14 +225,18 @@ class Video:
             else:
                 setattr(self, k, v)
 
-    @override
-    def __repr__(self) -> str:  # pragma: no cover
-        return f'<{self.__class__.__name__} [{self.name!r}]>'
+    def matches(self, title: str) -> bool:  # pragma: no cover
+        """Match the name to the video title."""
+        return matches_extended_title(title, self.title)
 
     @override
     def __hash__(self) -> int:  # pragma: no cover
         # This method needs to be overridden in subclasses, otherwise attrs overwrites it with a default method
         return hash(self.name)
+
+    @override
+    def __repr__(self) -> str:  # pragma: no cover
+        return f'<{self.__class__.__name__} [{self.name!r}]>'
 
 
 def ensure_list_int(value: int | Sequence[int] | None) -> list[int]:
@@ -276,7 +280,7 @@ class Episode(Video):
     original_series: bool = True
 
     #: External ids of the episode from different databases (IMDb, TMDB, Series IMDb, ...)
-    external_ids: VideoExternalIds = field(factory=dict, eq=False)
+    external_ids: VideoExternalIds = field(factory=VideoExternalIds, eq=False)
 
     #: Alternative names of the series
     alternative_series: list[str] = field(factory=list)
@@ -326,13 +330,13 @@ class Episode(Video):
         return cls.fromguess(name, safely_guessit(name, {'type': 'episode'}))
 
     @override
-    def __hash__(self) -> int:
-        return hash(self.name)
+    def matches(self, series: str | None) -> bool:
+        """Match the name to the series name, using alternative series names also."""
+        return matches_extended_title(series, self.series, self.alternative_series)
 
     @override
-    def matches(self, series: str | None) -> bool:
-        """Match the name to the series name, using alternative series names also.."""
-        return matches_extended_title(series, self.series, self.alternative_series)
+    def __hash__(self) -> int:
+        return hash(self.name)
 
     @override
     def __repr__(self) -> str:
@@ -404,13 +408,13 @@ class Movie(Video):
         return cls.fromguess(name, safely_guessit(name, {'type': 'movie'}))
 
     @override
-    def __hash__(self) -> int:
-        return hash(self.name)
+    def matches(self, title: str) -> bool:
+        """Match the name to the movie title, using alternative titles also."""
+        return matches_extended_title(title, self.title, self.alternative_titles)
 
     @override
-    def matches(self, title: str) -> bool:
-        """Match the name to the movie title, using alternative titles also.."""
-        return matches_extended_title(title, self.title, self.alternative_titles)
+    def __hash__(self) -> int:
+        return hash(self.name)
 
     @override
     def __repr__(self) -> str:
@@ -428,7 +432,7 @@ converter = cattrs.Converter()
 @converter.register_structure_hook
 def subtitle_structure_hook(val: Any, _: Any) -> Subtitle:
     """This hook will be registered for structuring ``Subtitle``s."""
-    if not isinstance(val, dict):
+    if not isinstance(val, dict):  # pragma: no cover
         msg = f'A dict was expected to structure a Subtitle: {val}'
         raise TypeError(msg)
     val = {k: v for k, v in val.items() if k not in ['provider_name']}
@@ -448,7 +452,7 @@ def subtitle_unstructure_hook(val: Subtitle) -> dict[str, Any]:
 
 
 # Special un/structure hooks for languages
-if Version(get_version('babelfish')) <= Version('0.6.1'):
+if Version(get_version('babelfish')) <= Version('0.6.1'):  # pragma: no cover
 
     @converter.register_structure_hook
     def language_structure_hook(val: str, _: Any) -> Language:

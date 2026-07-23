@@ -52,8 +52,7 @@ dependencies = [
     "srt>=3.5",
     "stevedore>=3.0",
     "tomlkit>=0.13.2",
-    "typing_extensions>=4.10",
-    "typing_extension; python_version<='3.11'",  # TypedDict extra_items
+    "typing_extension; python_version<='3.11'",  # override
 ]
 
 # extras

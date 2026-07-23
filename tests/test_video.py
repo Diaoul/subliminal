@@ -8,6 +8,7 @@ from typing import TYPE_CHECKING, Any
 from unittest.mock import Mock
 
 import pytest
+from attrs import define
 from babelfish import Language
 from packaging.version import Version
 
@@ -376,7 +377,13 @@ def test_episode_update(episodes: dict[str, Episode]) -> None:
 
 
 def test_episode_update_fake_set(episodes: dict[str, Episode]) -> None:
-    video = Episode.fromname(episodes['bbt_s07e05'].name)
+    # We need a non-slotted class to be able to add a fake set attribute
+
+    @define(slots=False)
+    class DictedEpisode(Episode):
+        pass
+
+    video = DictedEpisode.fromname(episodes['bbt_s07e05'].name)
     assert isinstance(video, Episode)
     assert video.name == episodes['bbt_s07e05'].name
     assert video.year is None

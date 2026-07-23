@@ -405,7 +405,7 @@ def timestamp(date: datetime) -> float:
 def matches_extended_title(
     actual: str | None,
     title: str | None,
-    alternative_titles: Sequence[str],
+    alternative_titles: Sequence[str] | None = None,
 ) -> bool:
     """Whether `actual` matches the `title` or `alternative_titles`.
 

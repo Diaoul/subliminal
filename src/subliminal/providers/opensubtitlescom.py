@@ -13,12 +13,14 @@ from typing import TYPE_CHECKING, Any, ClassVar, cast
 from babelfish import Language, language_converters  # type: ignore[import-untyped]
 from dogpile.cache.api import NO_VALUE
 from requests import Response, Session
+from requests.exceptions import RequestException
 
 from subliminal import __short_version__
 from subliminal.cache import region
 from subliminal.exceptions import (
     AuthenticationError,
     ConfigurationError,
+    DiscardingError,
     DownloadLimitExceeded,
     NotInitializedProviderError,
     ProviderError,
@@ -527,8 +529,11 @@ class OpenSubtitlesComProvider(Provider):
         try:
             r = self.session.get(self.server_url + path, params=params, timeout=self.timeout)
             r = checked(r)
-        except ProviderError:
-            logger.exception('An error occurred')
+        except RequestException as error:
+            logger.debug('Request to %r failed: %s', path, error)
+            raise OpenSubtitlesComError(str(error)) from error
+        except ProviderError as error:
+            logger.debug('Request to %r failed: %s', path, error)
             if raises:
                 raise
             return {}
@@ -543,7 +548,19 @@ class OpenSubtitlesComProvider(Provider):
             ext_params = {'page': page, **params}
             logger.info('Searching subtitles %r', ext_params)
             # GET request and add page information
-            response = self.api_get('subtitles', ext_params)
+            try:
+                response = self.api_get('subtitles', ext_params)
+            # If an iteration fails after results were collected, the generator fails and the caller gets no results.
+            # To prevent that from happening, we don't treat errors as failures if some results are already collected.
+            # An error is raised only if the first page failed, or if it is a `DiscardingError`.
+            # A `DiscardingError` means the provider is unusable.
+            except DiscardingError:
+                raise
+            except ProviderError:
+                if page == 1:
+                    raise
+                logger.warning('Pagination stopped at page %d', page)
+                break
             if not response or not response['data']:
                 break
             yield from response['data']

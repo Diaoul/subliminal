@@ -35,7 +35,7 @@ from subliminal.exceptions import GuessingError
 from subliminal.extensions import get_default_providers, get_default_refiners
 from subliminal.utils import NameResolver, merge_extend_and_ignore_unions
 
-from ._format import AgeParamType, LanguageParamType, plural
+from ._format import AgeParamType, LanguageParamType, format_provider_errors, plural
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -591,9 +591,9 @@ def download(
                 )
                 downloaded_subtitles[v] = subtitles
 
-        if pp.discarded_providers:  # pragma: no cover
+        if pp.failed_providers:
             click.secho(
-                f'Some providers have been discarded due to unexpected errors: {", ".join(pp.discarded_providers)}',
+                format_provider_errors(pp.failed_providers, pp.discarded_providers, video_count=len(videos)),
                 fg='yellow',
             )
 

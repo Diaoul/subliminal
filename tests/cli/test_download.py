@@ -4,16 +4,19 @@ from __future__ import annotations
 import os
 from pathlib import Path
 from textwrap import dedent
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 import pytest
 from tests.conftest import ensure
 
 from subliminal.cli import generate_default_config
 from subliminal.cli.cli import subliminal as subliminal_cli
+from subliminal.exceptions import DiscardingError
 
 if TYPE_CHECKING:
     from tests.conftest import CliRunner
+
+    from subliminal.extensions import RegistrableExtensionManager
 
 
 # Core test
@@ -134,6 +137,33 @@ def test_cli_download_no_provider(cli_runner: CliRunner) -> None:
 
         assert result.exit_code == 0
         assert 'No provider was selected to download subtitles.' in result.out
+
+
+def test_cli_download_failed_providers(
+    cli_runner: CliRunner,
+    monkeypatch: pytest.MonkeyPatch,
+    provider_manager: RegistrableExtensionManager,
+) -> None:
+    """The warning names each provider that had an error, discarded or not."""
+    video_name = 'Marvels.Agents.of.S.H.I.E.L.D.S02E06.720p.HDTV.x264-KILLERS.mkv'
+
+    def raise_unexpected_error(self: Any, video: Any, languages: Any) -> None:
+        raise KeyError('id')
+
+    def raise_discarding_error(self: Any, video: Any, languages: Any) -> None:
+        raise DiscardingError
+
+    monkeypatch.setattr(provider_manager['podnapisi'].plugin, 'list_subtitles', raise_unexpected_error)
+    monkeypatch.setattr(provider_manager['tvsubtitles'].plugin, 'list_subtitles', raise_discarding_error)
+
+    with cli_runner.isolated_filesystem():
+        result = cli_runner.run(
+            subliminal_cli,
+            ['download', '-l', 'en', '-p', 'podnapisi', '-p', 'tvsubtitles', video_name],
+        )
+
+        assert result.exit_code == 0
+        assert 'These providers had an error and found no subtitles: podnapisi, tvsubtitles.' in result.out
 
 
 def test_cli_download(cli_runner: CliRunner) -> None:

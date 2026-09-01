@@ -1,10 +1,13 @@
 import os
+from typing import Any
+from unittest.mock import MagicMock, patch
 
 import pytest
+import requests
 from babelfish import Language  # type: ignore[import-untyped]
 from vcr import VCR  # type: ignore[import-untyped]
 
-from subliminal.exceptions import ConfigurationError
+from subliminal.exceptions import ConfigurationError, ServiceUnavailable
 from subliminal.providers.opensubtitlescom import (
     OpenSubtitlesComError,
     OpenSubtitlesComProvider,
@@ -471,3 +474,50 @@ def test_query_max_result_pages(movies: dict[str, Movie]) -> None:
     with OpenSubtitlesComProvider(USERNAME, PASSWORD, max_result_pages=1) as provider:
         subtitles = provider.query(languages, query=query)
     assert len(subtitles) < len(all_subtitles)
+
+
+def test_search_keeps_results_when_a_page_fails() -> None:
+    """Pagination stops at the failing page and keeps the results already found."""
+
+    def api_get(path: str, params: dict[str, Any], **kwargs: Any) -> dict[str, Any]:
+        if params['page'] == 3:
+            msg = 'Bad Request'
+            raise OpenSubtitlesComError(msg)
+        return {'data': [{'id': params['page']}], 'total_pages': 100}
+
+    provider = OpenSubtitlesComProvider(USERNAME, PASSWORD)
+    with patch.object(provider, 'api_get', side_effect=api_get):
+        results = list(provider._search(query='Man of Steel'))
+
+    assert [result['id'] for result in results] == [1, 2]
+
+
+def test_search_does_not_swallow_a_discarding_error() -> None:
+    """An error that discards the provider is raised, even in the middle of the pagination."""
+
+    def api_get(path: str, params: dict[str, Any], **kwargs: Any) -> dict[str, Any]:
+        if params['page'] == 3:
+            raise ServiceUnavailable
+        return {'data': [{'id': params['page']}], 'total_pages': 100}
+
+    provider = OpenSubtitlesComProvider(USERNAME, PASSWORD)
+    with patch.object(provider, 'api_get', side_effect=api_get), pytest.raises(ServiceUnavailable):
+        list(provider._search(query='Man of Steel'))
+
+
+def test_search_keeps_results_when_the_connection_fails() -> None:
+    """A connection error stops the pagination, like an error status does."""
+
+    def get(url: str, params: dict[str, Any], timeout: int) -> MagicMock:
+        if params['page'] == 3:
+            raise requests.ConnectionError
+        response = MagicMock(status_code=200)
+        response.json.return_value = {'data': [{'id': params['page']}], 'total_pages': 100}
+        return response
+
+    provider = OpenSubtitlesComProvider(USERNAME, PASSWORD)
+    provider.initialize()
+    with patch.object(provider.session, 'get', side_effect=get):
+        results = list(provider._search(query='Man of Steel'))
+
+    assert [result['id'] for result in results] == [1, 2]

@@ -307,6 +307,30 @@ def requires_auth(func: C) -> C:
     return cast('C', wrapper)
 
 
+def requires_auth_if_credentials(func: C) -> C:
+    """Decorator for methods that only need a token when credentials were configured.
+
+    :meth:`OpenSubtitlesComProvider.initialize` sets the ``Api-Key`` header on every
+    request, and some endpoints accept it on its own. Requiring a token for those
+    would reject an api-key-only configuration that the API itself allows, and
+    :meth:`OpenSubtitlesComProvider.login` does not even attempt a login without both
+    a username and a password.
+
+    When credentials *are* configured, authentication is still required, so a wrong
+    password raises instead of silently falling back to the anonymous quota.
+    """
+    authenticated = requires_auth(func)
+
+    @wraps(func)
+    def wrapper(self: OpenSubtitlesComProvider, *args: Any, **kwargs: Any) -> Any:
+        if not self.username or not self.password:
+            return func(self, *args, **kwargs)
+
+        return authenticated(self, *args, **kwargs)
+
+    return cast('C', wrapper)
+
+
 class OpenSubtitlesComProvider(Provider):
     """OpenSubtitles.com Provider.
 
@@ -699,7 +723,7 @@ class OpenSubtitlesComProvider(Provider):
             sort_by_download_count=True,
         )
 
-    @requires_auth
+    @requires_auth_if_credentials
     def download_subtitle(self, subtitle: OpenSubtitlesComSubtitle) -> None:
         """Download the content of the subtitle."""
         if not self.session:

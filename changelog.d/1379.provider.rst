@@ -1,0 +1,1 @@
+Fix ``opensubtitlescom`` downloads when an api key is configured without a username and password. ``download_subtitle`` required a login token, but the download endpoint accepts the ``Api-Key`` header on its own, so key-only configurations raised ``AuthenticationError`` on every download.

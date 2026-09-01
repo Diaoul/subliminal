@@ -311,15 +311,18 @@ intersphinx_mapping = {
 }
 
 
-# -- Options for autodoc -----------------------------------------------------
+# -- Options for autodoc -------------------------------------------------------
 autodoc_member_order = 'bysource'
 
 autodoc_default_flags = ['members']
 
 
-# -- Options for sphinx-autodoc-typehints ------------------------------------
+# -- Options for sphinx-autodoc-typehints --------------------------------------
 # https://github.com/tox-dev/sphinx-autodoc-typehints
 
 always_use_bars_union = True
 
 set_type_checking_flag = False
+
+# -- Options for the linkcheck builder -----------------------------------------
+linkcheck_ignore = [r'https://stackoverflow.com/.*']

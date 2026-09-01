@@ -1,10 +1,11 @@
 import os
+from types import SimpleNamespace
 
 import pytest
 from babelfish import Language  # type: ignore[import-untyped]
 from vcr import VCR  # type: ignore[import-untyped]
 
-from subliminal.exceptions import ConfigurationError
+from subliminal.exceptions import AuthenticationError, ConfigurationError
 from subliminal.providers.opensubtitlescom import (
     OpenSubtitlesComError,
     OpenSubtitlesComProvider,
@@ -471,3 +472,45 @@ def test_query_max_result_pages(movies: dict[str, Movie]) -> None:
     with OpenSubtitlesComProvider(USERNAME, PASSWORD, max_result_pages=1) as provider:
         subtitles = provider.query(languages, query=query)
     assert len(subtitles) < len(all_subtitles)
+
+
+def test_download_subtitle_with_apikey_only(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Downloading with an api key and no account does not require a token."""
+    provider = OpenSubtitlesComProvider(apikey='fake-apikey')
+    provider.initialize()
+    assert provider.token is None
+
+    subtitle = OpenSubtitlesComSubtitle(language=Language('eng'), subtitle_id='1', file_id=42)
+
+    monkeypatch.setattr(
+        provider,
+        'api_post',
+        lambda path, body: {'link': 'https://example.invalid/subtitle.srt', 'remaining': 99},
+    )
+    monkeypatch.setattr(
+        provider.session,
+        'get',
+        lambda *args, **kwargs: SimpleNamespace(content=b'1\n00:00:01,000 --> 00:00:02,000\nSubtitle\n'),
+    )
+
+    provider.download_subtitle(subtitle)
+
+    assert subtitle.content is not None
+
+
+def test_download_subtitle_with_credentials_still_requires_auth(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Configured credentials that cannot log in still raise, rather than downloading anonymously."""
+    provider = OpenSubtitlesComProvider(USERNAME, 'lanimilbus', apikey='fake-apikey')
+    provider.initialize()
+
+    def unreachable(*args: object, **kwargs: object) -> None:
+        pytest.fail('the download endpoint must not be reached without a token')
+
+    # a login that fails to obtain a token, without touching the network
+    monkeypatch.setattr(provider, 'login', lambda **kwargs: None)
+    monkeypatch.setattr(provider, 'api_post', unreachable)
+
+    subtitle = OpenSubtitlesComSubtitle(language=Language('eng'), subtitle_id='1', file_id=42)
+
+    with pytest.raises(AuthenticationError):
+        provider.download_subtitle(subtitle)

@@ -1,2 +1,4 @@
 Added `ProviderPool.failed_providers` - a set of providers that had an error during a search.
-Changed the user-facing error messages of the `download` command to explicitly distinguish discarded providers, which are not used for the rest of the download, from those that errored out but were still kept in the pool.
+Changed the user-facing error messages of the `download` command to explicitly distinguish
+discarded providers, which are not used for the rest of the download, from those that errored
+out but were still kept in the pool.

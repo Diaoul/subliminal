@@ -103,9 +103,15 @@ def test_provider_pool_list_subtitles_provider(
     episodes: dict[str, Episode],
     provider_manager: RegistrableExtensionManager,
 ) -> None:
+    episode = episodes['bbt_s07e05']
+    languages = {Language('eng')}
     pool = ProviderPool()
-    subtitles = pool.list_subtitles_provider('tvsubtitles', episodes['bbt_s07e05'], {Language('eng')})
-    assert subtitles == ['tvsubtitles']  # type: ignore[comparison-overlap]
+    provider_result = pool.list_subtitles_provider('tvsubtitles', episode, languages)
+    assert provider_result.provider == 'tvsubtitles'
+    assert provider_result.video == episode
+    assert provider_result.languages == languages
+    assert provider_result.subtitles == ['tvsubtitles']  # type: ignore[comparison-overlap]
+    assert provider_result.exception is None
     assert provider_manager['tvsubtitles'].plugin.initialize.called  # type: ignore[attr-defined]
     assert provider_manager['tvsubtitles'].plugin.list_subtitles.called  # type: ignore[attr-defined]
 
@@ -127,18 +133,6 @@ def test_provider_pool_list_subtitles(
         provider_s = cast('str', provider)
         assert provider_manager[provider_s].plugin.initialize.called  # type: ignore[attr-defined]
         assert provider_manager[provider_s].plugin.list_subtitles.called  # type: ignore[attr-defined]
-
-
-@pytest.mark.usefixtures('_mock_providers')
-def test_async_provider_pool_list_subtitles_provider(
-    episodes: dict[str, Episode],
-    provider_manager: RegistrableExtensionManager,
-) -> None:
-    pool = AsyncProviderPool()
-    subtitles = pool.list_subtitles_provider_tuple('tvsubtitles', episodes['bbt_s07e05'], {Language('eng')})
-    assert subtitles == ('tvsubtitles', ['tvsubtitles'])  # type: ignore[comparison-overlap]
-    assert provider_manager['tvsubtitles'].plugin.initialize.called  # type: ignore[attr-defined]
-    assert provider_manager['tvsubtitles'].plugin.list_subtitles.called  # type: ignore[attr-defined]
 
 
 @pytest.mark.usefixtures('_mock_providers')
@@ -508,10 +502,10 @@ def test_download_best_subtitles_wrong_fps(episodes: dict[str, Episode]) -> None
 
 def test_download_bad_subtitle(movies: dict[str, Movie]) -> None:
     pool = ProviderPool()
-    subtitles = pool.list_subtitles_provider('opensubtitlescom', movies['man_of_steel'], {Language('tur')})
-    assert subtitles is not None
-    assert len(subtitles) >= 1
-    subtitle = subtitles[0]
+    provider_result = pool.list_subtitles_provider('opensubtitlescom', movies['man_of_steel'], {Language('tur')})
+    assert provider_result.exception is None
+    assert len(provider_result.subtitles) >= 1
+    subtitle = provider_result.subtitles[0]
 
     # The subtitle has no content
     pool.download_subtitle(subtitle)

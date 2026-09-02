@@ -49,7 +49,7 @@ class ProviderResult:
 
     provider: str
     video: Video
-    languages: list[Language]
+    languages: set[Language]
     subtitles: list[Subtitle] = field(default_factory=list)
     exception: Exception | None = None
 
@@ -143,6 +143,9 @@ class ProviderPool:
         :rtype: list of :class:`~subliminal.subtitle.Subtitle` or None
 
         """
+        # make sure the type is correct
+        languages = set(languages)
+
         # check video validity
         if not provider_manager[provider].plugin.check(video):  # type: ignore[attr-defined]
             msg = f'Skipping provider {provider}: not a valid provider for this video type'

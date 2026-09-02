@@ -58,15 +58,6 @@ def test_provider_pool_iter() -> None:
 
 
 @pytest.mark.usefixtures('_mock_providers')
-def test_provider_pool_list_subtitles_provider(episodes: dict[str, Episode]) -> None:
-    pool = ProviderPool()
-    subtitles = pool.list_subtitles_provider('tvsubtitles', episodes['bbt_s07e05'], {Language('eng')})
-    assert subtitles == ['tvsubtitles']  # type: ignore[comparison-overlap]
-    assert provider_manager['tvsubtitles'].plugin.initialize.called  # type: ignore[attr-defined]
-    assert provider_manager['tvsubtitles'].plugin.list_subtitles.called  # type: ignore[attr-defined]
-
-
-@pytest.mark.usefixtures('_mock_providers')
 def test_provider_pool_list_subtitles(episodes: dict[str, Episode]) -> None:
     pool = ProviderPool()
     subtitles = pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
@@ -83,15 +74,6 @@ def test_provider_pool_list_subtitles(episodes: dict[str, Episode]) -> None:
         provider_s = cast('str', provider)
         assert provider_manager[provider_s].plugin.initialize.called  # type: ignore[attr-defined]
         assert provider_manager[provider_s].plugin.list_subtitles.called  # type: ignore[attr-defined]
-
-
-@pytest.mark.usefixtures('_mock_providers')
-def test_async_provider_pool_list_subtitles_provider(episodes: dict[str, Episode]) -> None:
-    pool = AsyncProviderPool()
-    subtitles = pool.list_subtitles_provider_tuple('tvsubtitles', episodes['bbt_s07e05'], {Language('eng')})
-    assert subtitles == ('tvsubtitles', ['tvsubtitles'])  # type: ignore[comparison-overlap]
-    assert provider_manager['tvsubtitles'].plugin.initialize.called  # type: ignore[attr-defined]
-    assert provider_manager['tvsubtitles'].plugin.list_subtitles.called  # type: ignore[attr-defined]
 
 
 @pytest.mark.usefixtures('_mock_providers')

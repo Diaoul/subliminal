@@ -172,6 +172,61 @@ def test_refine_movie(movies: dict[str, Movie]) -> None:
 
 @pytest.mark.integration
 @vcr.use_cassette
+def test_refine_episode_from_series_imdb_id(episodes: dict[str, Episode]) -> None:
+    """The series and the year come from the series IMDB id when the series is missing."""
+    original_episode = episodes['dallas_2012_s01e03']
+    episode = Episode(
+        original_episode.name,
+        '',
+        original_episode.season,
+        original_episode.episodes,
+        external_ids={'series_imdb_id': original_episode.external_ids['series_imdb_id']},
+    )
+    refine(episode, apikey=TEST_OMDB_API_KEY)
+    assert episode.series == original_episode.series
+    assert episode.year == original_episode.year
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_refine_episode_from_unknown_series_imdb_id(episodes: dict[str, Episode]) -> None:
+    """The episode does not change when OMDb does not know the series IMDB id."""
+    original_episode = episodes['dallas_2012_s01e03']
+    episode = Episode(
+        original_episode.name,
+        '',
+        original_episode.season,
+        original_episode.episodes,
+        external_ids={'series_imdb_id': 'tt9999999'},
+    )
+    refine(episode, apikey=TEST_OMDB_API_KEY)
+    assert episode.series == ''
+    assert episode.year is None
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_refine_movie_from_imdb_id(movies: dict[str, Movie]) -> None:
+    """The title and the year come from the IMDB id when the movie has no title."""
+    original_movie = movies['man_of_steel']
+    movie = Movie(original_movie.name, '', external_ids=dict(original_movie.external_ids))
+    refine(movie, apikey=TEST_OMDB_API_KEY)
+    assert movie.title == original_movie.title
+    assert movie.year == original_movie.year
+
+
+@pytest.mark.integration
+@vcr.use_cassette
+def test_refine_movie_from_unknown_imdb_id(movies: dict[str, Movie]) -> None:
+    """The movie does not change when OMDb does not know the IMDB id."""
+    movie = Movie(movies['man_of_steel'].name, '', external_ids={'imdb_id': 'tt9999999'})
+    refine(movie, apikey=TEST_OMDB_API_KEY)
+    assert movie.title == ''
+    assert movie.year is None
+
+
+@pytest.mark.integration
+@vcr.use_cassette
 def test_refine_movie_guess_alternative_title(movies: dict[str, Movie]) -> None:
     original_movie = movies['jack_reacher_never_go_back']
     movie = Movie.fromname(original_movie.name)

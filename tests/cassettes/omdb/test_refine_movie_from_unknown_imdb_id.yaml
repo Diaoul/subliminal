@@ -1,0 +1,50 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.7
+    method: GET
+    uri: https://www.omdbapi.com/?r=json&v=1&apikey=7a541ee4&i=tt9999999&plot=short&type=movie
+  response:
+    body:
+      string: '{"Response":"False","Error":"Error getting data."}'
+    headers:
+      CF-RAY:
+      - a2b0ba78fed91bf9-WAW
+      Cache-Control:
+      - public, max-age=3600
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 14 Aug 2026 14:42:50 GMT
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      access-control-allow-origin:
+      - '*'
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '50'
+      expires:
+      - Fri, 14 Aug 2026 15:42:50 GMT
+      last-modified:
+      - Fri, 14 Aug 2026 14:42:50 GMT
+      vary:
+      - '*'
+      x-aspnet-version:
+      - 4.0.30319
+    status:
+      code: 200
+      message: OK
+version: 1

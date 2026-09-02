@@ -1,0 +1,57 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.7
+    method: GET
+    uri: https://www.omdbapi.com/?r=json&v=1&apikey=7a541ee4&i=tt1723760&plot=short&type=series
+  response:
+    body:
+      string: "{\"Title\":\"Dallas\",\"Year\":\"2012\u20132014\",\"Rated\":\"TV-14\",\"Released\":\"13
+        Jun 2012\",\"Runtime\":\"33S min\",\"Genre\":\"Drama, Romance\",\"Director\":\"N/A\",\"Writer\":\"Cynthia
+        Cidre, David Jacobs\",\"Actors\":\"Josh Henderson, Jesse Metcalfe, Jordana
+        Brewster\",\"Plot\":\"The next generation of the Ewing family, cousins John
+        Ross Ewing and Christopher Ewing, clash over the family's oil business and
+        vast fortune.\",\"Language\":\"English\",\"Country\":\"United States\",\"Awards\":\"10
+        nominations total\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BMjE5NTExNDc5MF5BMl5BanBnXkFtZTcwMjc1NzAwOQ@@._V1_SX300.jpg\",\"Ratings\":[{\"Source\":\"Internet
+        Movie Database\",\"Value\":\"7.2/10\"}],\"Metascore\":\"N/A\",\"imdbRating\":\"7.2\",\"imdbVotes\":\"10,973\",\"imdbID\":\"tt1723760\",\"Type\":\"series\",\"totalSeasons\":\"3\",\"Response\":\"True\"}"
+    headers:
+      CF-RAY:
+      - a2b0c5a1df19c3bd-WAW
+      Cache-Control:
+      - public, max-age=3600
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 14 Aug 2026 14:50:27 GMT
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      access-control-allow-origin:
+      - '*'
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '780'
+      expires:
+      - Fri, 14 Aug 2026 15:50:27 GMT
+      last-modified:
+      - Fri, 14 Aug 2026 14:50:27 GMT
+      vary:
+      - '*'
+      x-aspnet-version:
+      - 4.0.30319
+    status:
+      code: 200
+      message: OK
+version: 1

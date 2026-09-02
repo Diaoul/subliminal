@@ -1,0 +1,58 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal/2.7
+    method: GET
+    uri: https://www.omdbapi.com/?r=json&v=1&apikey=7a541ee4&i=tt0770828&plot=short&type=movie
+  response:
+    body:
+      string: '{"Title":"Man of Steel","Year":"2013","Rated":"PG-13","Released":"14
+        Jun 2013","Runtime":"143 min","Genre":"Action, Adventure, Sci-Fi","Director":"Zack
+        Snyder","Writer":"David S. Goyer, Christopher Nolan, Jerry Siegel","Actors":"Henry
+        Cavill, Amy Adams, Michael Shannon","Plot":"An alien child is evacuated from
+        his dying world and sent to Earth to live among humans. His peace is threatened
+        when other survivors of his home planet invade Earth.","Language":"English","Country":"United
+        Kingdom, United States","Awards":"Nominated for 1 BAFTA Award. 7 wins & 46
+        nominations total","Poster":"https://m.media-amazon.com/images/M/MV5BMTk5ODk1NDkxMF5BMl5BanBnXkFtZTcwNTA5OTY0OQ@@._V1_QL75_UY562_CR0,0,380,562_.jpg","Ratings":[{"Source":"Internet
+        Movie Database","Value":"7.1/10"},{"Source":"Rotten Tomatoes","Value":"56%"},{"Source":"Metacritic","Value":"55/100"}],"Metascore":"55","imdbRating":"7.1","imdbVotes":"865,769","imdbID":"tt0770828","Type":"movie","DVD":"N/A","BoxOffice":"$291,045,518","Production":"N/A","Website":"N/A","Response":"True"}'
+    headers:
+      CF-RAY:
+      - a2b0b7859a10ef99-WAW
+      Cache-Control:
+      - public, max-age=3600
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 14 Aug 2026 14:40:49 GMT
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      access-control-allow-origin:
+      - '*'
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '1046'
+      expires:
+      - Fri, 14 Aug 2026 15:40:49 GMT
+      last-modified:
+      - Fri, 14 Aug 2026 14:40:49 GMT
+      vary:
+      - '*'
+      x-aspnet-version:
+      - 4.0.30319
+    status:
+      code: 200
+      message: OK
+version: 1

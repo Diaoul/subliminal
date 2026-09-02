@@ -209,8 +209,18 @@ class OMDBClient:
 
 def refine_episode(client: OMDBClient, video: Episode, *, force: bool = False, **kwargs: Any) -> dict[str, Any]:
     """Refine an Episode by searching `OMDb API <https://omdbapi.com/>`_."""
+    series_imdb_id = video.external_ids.get('series_imdb_id')
+
+    if series_imdb_id and not video.series:
+        result = client.search_by_id(series_imdb_id, is_movie=False)
+        if not result:
+            logger.warning('No results for series with IMDB id %r', series_imdb_id)
+            return {}
+        logger.debug('Found series %r', result)
+        return {'series': result['Title'], 'year': split_year_omdb(result['Year'])}
+
     # exit if the information is complete
-    if not force and video.external_ids.get('series_imdb_id') and video.external_ids.get('imdb_id'):  # pragma: no cover
+    if not force and series_imdb_id and video.external_ids.get('imdb_id'):  # pragma: no cover
         logger.debug('No need to search, IMDB ids already exist for the video.')
         return {}
 
@@ -252,8 +262,18 @@ def refine_episode(client: OMDBClient, video: Episode, *, force: bool = False, *
 
 def refine_movie(client: OMDBClient, video: Movie, *, force: bool = False, **kwargs: Any) -> dict[str, Any]:
     """Refine a Movie by searching `OMDb API <https://omdbapi.com/>`_."""
+    imdb_id = video.external_ids.get('imdb_id')
+
+    if imdb_id and not video.title:
+        result = client.search_by_id(imdb_id, is_movie=True)
+        if not result:
+            logger.warning('No results for movie with IMDB id %r', imdb_id)
+            return {}
+        logger.debug('Found movie %r', result)
+        return {'title': result['Title'], 'year': split_year_omdb(result['Year'])}
+
     # exit if the information is complete
-    if not force and video.external_ids.get('imdb_id'):  # pragma: no cover
+    if not force and imdb_id:  # pragma: no cover
         logger.debug('No need to search, IMDB ids already exist for the video.')
         return {}
 
@@ -311,6 +331,11 @@ def refine(video: Video, *, apikey: str | None = None, force: bool = False, **kw
       * :attr:`~subliminal.video.Movie.title`
       * :attr:`~subliminal.video.Movie.year`
       * :attr:`~subliminal.video.Episode.external_ids`, keys 'imdb_id'
+
+    Depending on the metadata of the video, the refiner backfills:
+
+      * the IMDB id, if the title is present
+      * the title and the year, if the IMDB id is present
 
     :param Video video: the Video to refine.
     :param (str | None) apikey: a personal API key to use OMDb.

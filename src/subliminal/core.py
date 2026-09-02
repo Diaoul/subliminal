@@ -66,8 +66,11 @@ class ProviderPool:
     #: Initialized providers
     initialized_providers: dict[str, Provider]
 
-    #: Discarded providers
+    #: Providers that had an error that makes them unusable - they're discarded once the error is reported.
     discarded_providers: set[str]
+
+    #: Providers that had an error, discarded or not. A superset of :attr:`discarded_providers`
+    failed_providers: set[str]
 
     def __init__(
         self,
@@ -78,6 +81,7 @@ class ProviderPool:
         self.provider_configs = provider_configs or {}
         self.initialized_providers = {}
         self.discarded_providers = set()
+        self.failed_providers = set()
 
     def __enter__(self) -> ProviderPool:
         return self
@@ -117,6 +121,14 @@ class ProviderPool:
     def __iter__(self) -> Iterator[str]:
         return iter(self.initialized_providers)
 
+    def _discard_provider(self, name: str) -> None:
+        """Stop using a provider, and record its error.
+
+        A discarded provider is always a failed provider - that's why one function writes the two sets.
+        """
+        self.failed_providers.add(name)
+        self.discarded_providers.add(name)
+
     def list_subtitles_provider(self, provider: str, video: Video, languages: Set[Language]) -> list[Subtitle] | None:
         """List subtitles with a single provider.
 
@@ -150,9 +162,10 @@ class ProviderPool:
             handle_exception(e, f'Provider {provider}')
             # return None to discard this provider with a known error
             return None
-        except Exception as e:  # noqa: BLE001  # pragma: no cover
+        except Exception as e:  # noqa: BLE001
             handle_exception(e, f'Provider {provider}')
-            # return [] so the provider is not discarded with unknown error
+            # an unknown error can come from one video only, thus keep the provider for the next ones
+            self.failed_providers.add(provider)
             return []
 
         return subtitles
@@ -180,7 +193,7 @@ class ProviderPool:
             provider_subtitles = self.list_subtitles_provider(name, video, languages)
             if provider_subtitles is None:
                 logger.info('Discarding provider %s', name)
-                self.discarded_providers.add(name)
+                self._discard_provider(name)
                 continue
 
             # add the subtitles
@@ -209,7 +222,7 @@ class ProviderPool:
             logger.exception('Bad archive for subtitle %r', subtitle)
         except Exception as e:  # noqa: BLE001
             handle_exception(e, f'Discarding provider {subtitle.provider_name}')
-            self.discarded_providers.add(subtitle.provider_name)
+            self._discard_provider(subtitle.provider_name)
 
         # check subtitle validity
         if not subtitle.is_valid():
@@ -352,7 +365,7 @@ class AsyncProviderPool(ProviderPool):
                 # discard provider that failed
                 if provider_subtitles is None:
                     logger.info('Discarding provider %s', provider)
-                    self.discarded_providers.add(provider)
+                    self._discard_provider(provider)
                     continue
 
                 # add subtitles

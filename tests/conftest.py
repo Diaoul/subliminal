@@ -446,7 +446,7 @@ def episodes() -> dict[str, Episode]:
             year=2018,
             title='The Nanny',
             external_ids={
-                'imdb_id': None,
+                'imdb_id': None,  # type: ignore[typeddict-item]
                 'tvdb_id': '6627151',
                 'series_imdb_id': 'tt6466948',
                 'series_tvdb_id': '328635',

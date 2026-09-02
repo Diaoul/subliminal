@@ -8,12 +8,13 @@ from typing import TYPE_CHECKING, Any
 from unittest.mock import Mock
 
 import pytest
+from attrs import define
 from babelfish import Language
 from packaging.version import Version
 
 from subliminal.subtitle import Subtitle
 from subliminal.utils import sanitize, timestamp
-from subliminal.video import Episode, Movie, Video
+from subliminal.video import Episode, Movie, Video, converter
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -376,7 +377,13 @@ def test_episode_update(episodes: dict[str, Episode]) -> None:
 
 
 def test_episode_update_fake_set(episodes: dict[str, Episode]) -> None:
-    video = Episode.fromname(episodes['bbt_s07e05'].name)
+    # We need a non-slotted class to be able to add a fake set attribute
+
+    @define(slots=False)
+    class DictedEpisode(Episode):
+        pass
+
+    video = DictedEpisode.fromname(episodes['bbt_s07e05'].name)
     assert isinstance(video, Episode)
     assert video.name == episodes['bbt_s07e05'].name
     assert video.year is None
@@ -403,3 +410,32 @@ def test_episode_update_fake_set(episodes: dict[str, Episode]) -> None:
 
     assert video.fake_set == {1, 2, 3, 4}  # type: ignore[attr-defined]
     assert video.year == 2057
+
+
+def test_serialize_movie(movies: dict[str, Movie]) -> None:
+    video = movies['man_of_steel']
+
+    ser = converter.unstructure(video)
+    new_video = converter.structure(ser, Movie)
+
+    assert video == new_video
+
+
+def test_serialize_episode(episodes: dict[str, Episode]) -> None:
+    video = episodes['bbt_s07e05']
+
+    ser = converter.unstructure(video)
+    new_video = converter.structure(ser, Episode)
+
+    assert video == new_video
+
+
+def test_serialize_movie_with_subtitles(movies: dict[str, Movie]) -> None:
+    video = movies['man_of_steel']
+    subtitle = Subtitle(Language('eng'), 'man-of-steel.en.srt')
+    video.subtitles.append(subtitle)
+
+    ser = converter.unstructure(video)
+    new_video = converter.structure(ser, Movie)
+
+    assert video == new_video

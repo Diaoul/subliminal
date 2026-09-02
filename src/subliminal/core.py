@@ -8,6 +8,7 @@ import operator
 import os
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
+from dataclasses import dataclass, field
 from typing import TYPE_CHECKING, Any
 
 from babelfish import Language  # type: ignore[import-untyped]
@@ -15,7 +16,7 @@ from babelfish import Language  # type: ignore[import-untyped]
 from subliminal.utils import safely_guessit
 
 from .archives import ARCHIVE_ERRORS, ARCHIVE_EXTENSIONS, is_supported_archive, scan_archive
-from .exceptions import ArchiveError, DiscardingError
+from .exceptions import ArchiveError, DiscardingError, ProviderQueryError
 from .extensions import (
     discarded_episode_refiners,
     discarded_movie_refiners,
@@ -40,6 +41,17 @@ if TYPE_CHECKING:
     from subliminal.subtitle import Subtitle
 
 logger = logging.getLogger(__name__)
+
+
+@dataclass
+class ProviderResult:
+    """Result of asking a provider to list subtitles for the video."""
+
+    provider: str
+    video: Video
+    languages: list[Language]
+    subtitles: list[Subtitle] = field(default_factory=list)
+    exception: Exception | None = None
 
 
 class ProviderPool:
@@ -117,7 +129,7 @@ class ProviderPool:
     def __iter__(self) -> Iterator[str]:
         return iter(self.initialized_providers)
 
-    def list_subtitles_provider(self, provider: str, video: Video, languages: Set[Language]) -> list[Subtitle] | None:
+    def list_subtitles_provider(self, provider: str, video: Video, languages: Set[Language]) -> ProviderResult:
         """List subtitles with a single provider.
 
         The video and languages are checked against the provider.
@@ -133,29 +145,26 @@ class ProviderPool:
         """
         # check video validity
         if not provider_manager[provider].plugin.check(video):  # type: ignore[attr-defined]
-            logger.info('Skipping provider %r: not a valid video', provider)
-            return []
+            msg = f'Skipping provider {provider}: not a valid provider for this video type'
+            logger.info(msg)
+            return ProviderResult(provider, video, languages, subtitles=[], exception=ProviderQueryError(msg))
 
         # check supported languages
         provider_languages = provider_manager[provider].plugin.check_languages(languages)  # type: ignore[attr-defined]
         if not provider_languages:
-            logger.info('Skipping provider %r: no language to search for', provider)
-            return []
+            msg = f'Skipping provider {provider}: not a valid provider for the query languages'
+            logger.info(msg)
+            return ProviderResult(provider, video, languages, subtitles=[], exception=ProviderQueryError(msg))
 
         # list subtitles
         logger.info('Listing subtitles with provider %r and languages %r', provider, provider_languages)
         try:
             subtitles = self[provider].list_subtitles(video, provider_languages)
-        except DiscardingError as e:
-            handle_exception(e, f'Provider {provider}')
-            # return None to discard this provider with a known error
-            return None
         except Exception as e:  # noqa: BLE001  # pragma: no cover
             handle_exception(e, f'Provider {provider}')
-            # return [] so the provider is not discarded with unknown error
-            return []
+            return ProviderResult(provider, video, languages, subtitles=[], exception=e)
 
-        return subtitles
+        return ProviderResult(provider, video, languages, subtitles=subtitles)
 
     def list_subtitles(self, video: Video, languages: Set[Language]) -> list[Subtitle]:
         """List subtitles.
@@ -177,14 +186,14 @@ class ProviderPool:
                 continue
 
             # list subtitles
-            provider_subtitles = self.list_subtitles_provider(name, video, languages)
-            if provider_subtitles is None:
+            provider_result = self.list_subtitles_provider(name, video, languages)
+            if isinstance(provider_result.exception, DiscardingError):
                 logger.info('Discarding provider %s', name)
                 self.discarded_providers.add(name)
                 continue
 
             # add the subtitles
-            subtitles.extend(provider_subtitles)
+            subtitles.extend(provider_result.subtitles)
 
         return subtitles
 
@@ -324,15 +333,6 @@ class AsyncProviderPool(ProviderPool):
         #: Maximum number of threads to use
         self.max_workers = max_workers or len(self.providers)
 
-    def list_subtitles_provider_tuple(
-        self,
-        provider: str,
-        video: Video,
-        languages: Set[Language],
-    ) -> tuple[str, list[Subtitle] | None]:
-        """List subtitles with a single provider, multi-threaded."""
-        return provider, super().list_subtitles_provider(provider, video, languages)
-
     def list_subtitles(self, video: Video, languages: Set[Language]) -> list[Subtitle]:
         """List subtitles, multi-threaded."""
         subtitles: list[Subtitle] = []
@@ -343,20 +343,20 @@ class AsyncProviderPool(ProviderPool):
 
         with ThreadPoolExecutor(self.max_workers) as executor:
             executor_map = executor.map(
-                self.list_subtitles_provider_tuple,
+                self.list_subtitles_provider,
                 self.providers,
                 itertools.repeat(video, len(self.providers)),
                 itertools.repeat(languages, len(self.providers)),
             )
-            for provider, provider_subtitles in executor_map:
+            for provider_result in executor_map:
                 # discard provider that failed
-                if provider_subtitles is None:
-                    logger.info('Discarding provider %s', provider)
-                    self.discarded_providers.add(provider)
+                if isinstance(provider_result.exception, DiscardingError):
+                    logger.info('Discarding provider %s', provider_result.provider)
+                    self.discarded_providers.add(provider_result.provider)
                     continue
 
                 # add subtitles
-                subtitles.extend(provider_subtitles)
+                subtitles.extend(provider_result.subtitles)
 
         return subtitles
 

@@ -19,6 +19,12 @@ class GuessingError(Error, ValueError):
     pass
 
 
+class ProviderQueryError(Error):
+    """Exception raised when a query to a provider is invalid."""
+
+    pass
+
+
 class ProviderError(Error):
     """Exception raised by providers."""
 

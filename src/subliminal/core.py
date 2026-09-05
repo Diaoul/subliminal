@@ -250,8 +250,8 @@ class ProviderPool:
         except DiscardingError as e:
             handle_exception(e, f'Discarding provider {subtitle.provider_name}')
             self.discarded_providers.add(subtitle.provider_name)
-        except Exception as e:  # noqa: BLE001
-            handle_exception(e, f'Failed downloading subtitle with provider {subtitle.provider_name}')
+        except Exception as e:  # noqa: BLE001  # pragma: no cover
+            handle_exception(e, f'Failed to download subtitle with provider {subtitle.provider_name}')
 
         # check subtitle validity
         if not subtitle.is_valid():

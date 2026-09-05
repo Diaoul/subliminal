@@ -112,6 +112,9 @@ def test_provider_pool_list_subtitles_provider(
     assert provider_result.languages == languages
     assert provider_result.subtitles == ['tvsubtitles']  # type: ignore[comparison-overlap]
     assert provider_result.ok()
+    assert not provider_result.unsupported()
+    assert not provider_result.failure()
+    assert not provider_result.outage()
     assert provider_manager['tvsubtitles'].plugin.initialize.called  # type: ignore[attr-defined]
     assert provider_manager['tvsubtitles'].plugin.list_subtitles.called  # type: ignore[attr-defined]
 

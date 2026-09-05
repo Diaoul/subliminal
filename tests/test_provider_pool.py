@@ -111,7 +111,7 @@ def test_provider_pool_list_subtitles_provider(
     assert provider_result.video == episode
     assert provider_result.languages == languages
     assert provider_result.subtitles == ['tvsubtitles']  # type: ignore[comparison-overlap]
-    assert provider_result.exception is None
+    assert provider_result.ok()
     assert provider_manager['tvsubtitles'].plugin.initialize.called  # type: ignore[attr-defined]
     assert provider_manager['tvsubtitles'].plugin.list_subtitles.called  # type: ignore[attr-defined]
 
@@ -503,7 +503,7 @@ def test_download_best_subtitles_wrong_fps(episodes: dict[str, Episode]) -> None
 def test_download_bad_subtitle(movies: dict[str, Movie]) -> None:
     pool = ProviderPool()
     provider_result = pool.list_subtitles_provider('opensubtitlescom', movies['man_of_steel'], {Language('tur')})
-    assert provider_result.exception is None
+    assert provider_result.ok()
     assert len(provider_result.subtitles) >= 1
     subtitle = provider_result.subtitles[0]
 

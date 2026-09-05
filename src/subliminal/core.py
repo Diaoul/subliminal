@@ -8,6 +8,8 @@ import operator
 import os
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
+from dataclasses import dataclass, field
+from enum import Enum, auto
 from typing import TYPE_CHECKING, Any
 
 from babelfish import Language  # type: ignore[import-untyped]
@@ -40,6 +42,43 @@ if TYPE_CHECKING:
     from subliminal.subtitle import Subtitle
 
 logger = logging.getLogger(__name__)
+
+
+class ProviderResultStatus(Enum):
+    """The status of the result of a query to a provider."""
+
+    OK = auto()
+    UNSUPPORTED_VIDEO = auto()
+    UNSUPPORTED_LANGUAGES = auto()
+    FAILURE = auto()
+    OUTAGE = auto()
+
+
+@dataclass
+class ProviderResult:
+    """Result of asking a provider to list subtitles for the video."""
+
+    provider: str
+    video: Video
+    languages: set[Language]
+    subtitles: list[Subtitle] = field(default_factory=list)
+    status: ProviderResultStatus = ProviderResultStatus.OK
+
+    def ok(self) -> bool:
+        """Check if the result is valid and triggered no error."""
+        return self.status == ProviderResultStatus.OK
+
+    def unsupported(self) -> bool:
+        """Check if the video or language was unsupported by the provider."""
+        return self.status in [ProviderResultStatus.UNSUPPORTED_VIDEO, ProviderResultStatus.UNSUPPORTED_LANGUAGES]
+
+    def failure(self) -> bool:
+        """Check if provider failed to return a result because of an error."""
+        return self.status == ProviderResultStatus.FAILURE
+
+    def outage(self) -> bool:
+        """Check if the query triggered an error that requires discarding the provider."""
+        return self.status == ProviderResultStatus.OUTAGE
 
 
 class ProviderPool:
@@ -117,7 +156,7 @@ class ProviderPool:
     def __iter__(self) -> Iterator[str]:
         return iter(self.initialized_providers)
 
-    def list_subtitles_provider(self, provider: str, video: Video, languages: Set[Language]) -> list[Subtitle] | None:
+    def list_subtitles_provider(self, provider: str, video: Video, languages: Set[Language]) -> ProviderResult:
         """List subtitles with a single provider.
 
         The video and languages are checked against the provider.
@@ -131,16 +170,19 @@ class ProviderPool:
         :rtype: list of :class:`~subliminal.subtitle.Subtitle` or None
 
         """
+        # make sure the type is correct
+        languages = set(languages)
+
         # check video validity
         if not provider_manager[provider].plugin.check(video):  # type: ignore[attr-defined]
-            logger.info('Skipping provider %r: not a valid video', provider)
-            return []
+            logger.info('Skipping provider %r: not a valid provider for this video type', provider)
+            return ProviderResult(provider, video, languages, status=ProviderResultStatus.UNSUPPORTED_VIDEO)
 
         # check supported languages
         provider_languages = provider_manager[provider].plugin.check_languages(languages)  # type: ignore[attr-defined]
         if not provider_languages:
-            logger.info('Skipping provider %r: no language to search for', provider)
-            return []
+            logger.info('Skipping provider %r: not a valid provider for the query languages', provider)
+            return ProviderResult(provider, video, languages, status=ProviderResultStatus.UNSUPPORTED_LANGUAGES)
 
         # list subtitles
         logger.info('Listing subtitles with provider %r and languages %r', provider, provider_languages)
@@ -148,14 +190,12 @@ class ProviderPool:
             subtitles = self[provider].list_subtitles(video, provider_languages)
         except DiscardingError as e:
             handle_exception(e, f'Provider {provider}')
-            # return None to discard this provider with a known error
-            return None
+            return ProviderResult(provider, video, languages, status=ProviderResultStatus.OUTAGE)
         except Exception as e:  # noqa: BLE001  # pragma: no cover
             handle_exception(e, f'Provider {provider}')
-            # return [] so the provider is not discarded with unknown error
-            return []
+            return ProviderResult(provider, video, languages, status=ProviderResultStatus.FAILURE)
 
-        return subtitles
+        return ProviderResult(provider, video, languages, subtitles=subtitles)
 
     def list_subtitles(self, video: Video, languages: Set[Language]) -> list[Subtitle]:
         """List subtitles.
@@ -177,14 +217,14 @@ class ProviderPool:
                 continue
 
             # list subtitles
-            provider_subtitles = self.list_subtitles_provider(name, video, languages)
-            if provider_subtitles is None:
+            provider_result = self.list_subtitles_provider(name, video, languages)
+            if provider_result.outage():
                 logger.info('Discarding provider %s', name)
                 self.discarded_providers.add(name)
                 continue
 
             # add the subtitles
-            subtitles.extend(provider_subtitles)
+            subtitles.extend(provider_result.subtitles)
 
         return subtitles
 
@@ -207,9 +247,11 @@ class ProviderPool:
             self[subtitle.provider_name].download_subtitle(subtitle)
         except ARCHIVE_ERRORS:  # type: ignore[misc]  # pragma: no cover
             logger.exception('Bad archive for subtitle %r', subtitle)
-        except Exception as e:  # noqa: BLE001
+        except DiscardingError as e:
             handle_exception(e, f'Discarding provider {subtitle.provider_name}')
             self.discarded_providers.add(subtitle.provider_name)
+        except Exception as e:  # noqa: BLE001  # pragma: no cover
+            handle_exception(e, f'Failed to download subtitle with provider {subtitle.provider_name}')
 
         # check subtitle validity
         if not subtitle.is_valid():
@@ -324,15 +366,6 @@ class AsyncProviderPool(ProviderPool):
         #: Maximum number of threads to use
         self.max_workers = max_workers or len(self.providers)
 
-    def list_subtitles_provider_tuple(
-        self,
-        provider: str,
-        video: Video,
-        languages: Set[Language],
-    ) -> tuple[str, list[Subtitle] | None]:
-        """List subtitles with a single provider, multi-threaded."""
-        return provider, super().list_subtitles_provider(provider, video, languages)
-
     def list_subtitles(self, video: Video, languages: Set[Language]) -> list[Subtitle]:
         """List subtitles, multi-threaded."""
         subtitles: list[Subtitle] = []
@@ -343,20 +376,20 @@ class AsyncProviderPool(ProviderPool):
 
         with ThreadPoolExecutor(self.max_workers) as executor:
             executor_map = executor.map(
-                self.list_subtitles_provider_tuple,
+                self.list_subtitles_provider,
                 self.providers,
                 itertools.repeat(video, len(self.providers)),
                 itertools.repeat(languages, len(self.providers)),
             )
-            for provider, provider_subtitles in executor_map:
+            for provider_result in executor_map:
                 # discard provider that failed
-                if provider_subtitles is None:
-                    logger.info('Discarding provider %s', provider)
-                    self.discarded_providers.add(provider)
+                if provider_result.outage():
+                    logger.info('Discarding provider %s', provider_result.provider)
+                    self.discarded_providers.add(provider_result.provider)
                     continue
 
                 # add subtitles
-                subtitles.extend(provider_subtitles)
+                subtitles.extend(provider_result.subtitles)
 
         return subtitles
 

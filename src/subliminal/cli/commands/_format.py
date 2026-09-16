@@ -5,11 +5,14 @@ from __future__ import annotations
 import logging
 import re
 from datetime import timedelta
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 import click
 from babelfish import Error as BabelfishError  # type: ignore[import-untyped]
 from babelfish import Language
+
+if TYPE_CHECKING:
+    from collections.abc import Set
 
 logger = logging.getLogger(__name__)
 
@@ -52,6 +55,22 @@ class AgeParamType(click.ParamType):
             self.fail(f'{value} is not a valid age', param, ctx)
 
         return timedelta(**{k: int(v) for k, v in match.groupdict(0).items()})
+
+
+def format_provider_errors(failed_providers: Set[str], discarded_providers: Set[str], *, video_count: int) -> str:
+    """Tell the user which providers had an error, and how the error affected the end results.
+
+    With one video both kinds of error have the same result, so one sentence covers them.
+    """
+    if video_count == 1:
+        return f'These providers had an error and found no subtitles: {", ".join(sorted(failed_providers))}.'
+
+    groups = (
+        ('These providers had an error and were skipped for the rest of the download', sorted(discarded_providers)),
+        ('These providers had an error on some videos', sorted(failed_providers - discarded_providers)),
+    )
+    sentences = [f'{label}: {", ".join(names)}.' for label, names in groups if names]
+    return ' '.join([*sentences, 'Some subtitles can be missing.'])
 
 
 def plural(quantity: int, name: str, *, bold: bool = True, **kwargs: Any) -> str:

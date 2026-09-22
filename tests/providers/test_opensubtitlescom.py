@@ -346,7 +346,7 @@ def test_query_hash_size(movies: dict[str, Movie]) -> None:
         '3178800',
     }
     with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
-        subtitles = provider.query(languages, moviehash=video.hashes['opensubtitles'])
+        subtitles = provider.query(languages, moviehash=video.hashes['opensubtitlescom'])
     assert {subtitle.id for subtitle in subtitles} == expected_subtitles
     assert {subtitle.language for subtitle in subtitles} == languages
 

@@ -328,9 +328,12 @@ class OpenSubtitlesProvider(Provider):
         else:
             return []
 
+        # Make sure OpenSubtitlesVip gets the correct hash
+        hash_name = self.subtitle_class.provider_name
+
         return self.query(
             languages,
-            moviehash=video.hashes.get('opensubtitles'),
+            moviehash=video.hashes.get(hash_name),
             size=video.size,
             imdb_id=video.external_ids.get('imdb_id'),
             query=query,

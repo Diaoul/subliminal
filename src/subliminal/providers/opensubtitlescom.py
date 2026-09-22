@@ -705,9 +705,12 @@ class OpenSubtitlesComProvider(Provider):
         elif isinstance(video, Movie):
             query = video.title
 
+        # Make sure OpenSubtitlesComVip gets the correct hash
+        hash_name = self.subtitle_class.provider_name
+
         return self.query(
             languages,
-            moviehash=video.hashes.get('opensubtitlescom'),
+            moviehash=video.hashes.get(hash_name),
             imdb_id=video.external_ids.get('imdb_id'),
             query=query,
             season=season,

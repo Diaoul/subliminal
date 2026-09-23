@@ -597,13 +597,13 @@ class OpenSubtitlesComProvider(Provider):
 
         if imdb_id:
             criterion.update({'imdb_id': sanitize_id(imdb_id)})
-            if show_imdb_id:
-                criterion.update({'parent_imdb_id': sanitize_id(show_imdb_id)})
+        if show_imdb_id:
+            criterion.update({'parent_imdb_id': sanitize_id(show_imdb_id)})
 
         if tmdb_id:
             criterion.update({'tmdb_id': sanitize_id(tmdb_id)})
-            if show_tmdb_id:
-                criterion.update({'parent_tmdb_id': sanitize_id(show_tmdb_id)})
+        if show_tmdb_id:
+            criterion.update({'parent_tmdb_id': sanitize_id(show_tmdb_id)})
 
         if opensubtitles_id:
             criterion.update({'id': opensubtitles_id})
@@ -630,6 +630,14 @@ class OpenSubtitlesComProvider(Provider):
                 criteria.append({'id': criterion['id']})
             if 'imdb_id' in criterion:
                 criteria.append({'imdb_id': criterion['imdb_id']})
+            if 'parent_imdb_id' in criterion and 'season_number' in criterion and 'episode_number' in criterion:
+                criteria.append(
+                    {
+                        'parent_imdb_id': criterion['parent_imdb_id'],
+                        'season_number': criterion['season_number'],
+                        'episode_number': criterion['episode_number'],
+                    }
+                )
             if 'tmdb_id' in criterion:
                 criteria.append({'tmdb_id': criterion['tmdb_id']})
             if 'moviehash' in criterion:
@@ -696,12 +704,13 @@ class OpenSubtitlesComProvider(Provider):
 
     def list_subtitles(self, video: Video, languages: Set[Language]) -> list[OpenSubtitlesComSubtitle]:
         """List all the subtitles for the video."""
-        query = season = episode = None
+        query = season = episode = show_imdb_id = show_tmdb_id = None
         if isinstance(video, Episode):
-            # TODO: add show_imdb_id and show_tmdb_id
             query = video.series
             season = video.season
             episode = video.episode
+            show_imdb_id = video.external_ids.get('series_imdb_id')
+            show_tmdb_id = video.external_ids.get('series_tmdb_id')
         elif isinstance(video, Movie):
             query = video.title
 
@@ -712,6 +721,8 @@ class OpenSubtitlesComProvider(Provider):
             languages,
             moviehash=video.hashes.get(hash_name),
             imdb_id=video.external_ids.get('imdb_id'),
+            show_imdb_id=show_imdb_id,
+            show_tmdb_id=show_tmdb_id,
             query=query,
             season=season,
             episode=episode,

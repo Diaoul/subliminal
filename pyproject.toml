@@ -34,22 +34,25 @@ classifiers = [
 ]
 dynamic = ["version"]
 dependencies = [
+    "attrs>=22.2",
     "babelfish>=0.6.1",
     "beautifulsoup4>=4.4.0",
     "defusedxml>=0.7.1",
+    "cattrs",
     "chardet>=5.0",
     "click",
     "click-option-group>=0.5.6",
     "dogpile.cache>=1.0",
     "guessit>=3.0.0",
     "knowit>=0.5.5",
+    "packaging",  # until babelfish>0.6.1
     "platformdirs>=3",
     "pysubs2>=1.7",
     "requests>=2.0",
     "srt>=3.5",
     "stevedore>=3.0",
     "tomlkit>=0.13.2",
-    "typing_extensions>=4.10",  # TypedDict extra_items
+    "typing_extensions; python_version<='3.11'",  # override
 ]
 
 # extras

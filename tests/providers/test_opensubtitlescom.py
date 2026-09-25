@@ -482,6 +482,20 @@ def test_tag_match(episodes: dict[str, Episode]) -> None:
 
 @pytest.mark.integration
 @vcr.use_cassette
+def test_list_subtitles_episode_series_imdb_id() -> None:
+    # folder named after a localized title: the show's IMDb id finds the episode, the title alone does not
+    video = Episode('Die.Sopranos.S01E01.mkv', 'Die Sopranos', 1, 1, external_ids={'series_imdb_id': 'tt0141842'})
+    languages = {Language('eng')}
+    with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
+        subtitles = provider.list_subtitles(video, languages)
+
+    assert len(subtitles) > 0
+    assert {subtitle.series_title for subtitle in subtitles} == {'The Sopranos'}
+    assert {subtitle.language for subtitle in subtitles} == languages
+
+
+@pytest.mark.integration
+@vcr.use_cassette
 def test_query_max_result_pages(movies: dict[str, Movie]) -> None:
     # choose a movie with a lot of results
     query = 'James Bond'

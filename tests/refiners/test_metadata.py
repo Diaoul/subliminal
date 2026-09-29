@@ -2,11 +2,13 @@ from __future__ import annotations
 
 import logging
 from datetime import timedelta
+from importlib.metadata import version as get_version
 from typing import Any
 
 import pytest
 from babelfish import Language  # type: ignore[import-untyped]
 from knowit.units import units  # type: ignore[import-untyped]
+from packaging.version import Version
 
 from subliminal.core import scan_video
 from subliminal.refiners.metadata import (
@@ -17,6 +19,8 @@ from subliminal.refiners.metadata import (
 )
 
 providers = ['mediainfo', 'ffmpeg', 'mkvmerge', 'enzyme']
+
+KNOWIT_NO_FIX_ENZYME = Version(get_version('knowit')) < Version('0.7.1')
 
 
 @pytest.mark.parametrize(
@@ -76,34 +80,31 @@ def test_refine_video_metadata(mkv: dict[str, Any], provider: str) -> None:
     assert scanned_video.video_codec == 'H.264'
     assert scanned_video.audio_codec == 'AAC'
 
+    expected_languages = {
+        Language('eng'),
+        Language('spa'),
+        Language('deu'),
+        Language('jpn'),
+        Language('und'),
+        Language('ita'),
+        Language('fra'),
+        Language('hun'),
+    }
+
     # Enzyme has limited functionalities
     if provider == 'enzyme':
-        assert scanned_video.subtitle_languages == {
-            # Language('eng'),  # bug with enzyme
-            Language('spa'),
-            Language('deu'),
-            Language('jpn'),
-            Language('und'),
-            Language('ita'),
-            Language('fra'),
-            Language('hun'),
-        }
+        if KNOWIT_NO_FIX_ENZYME:
+            # bug with enzyme, only fixed with knowit>=0.7.1
+            assert scanned_video.subtitle_languages == {lang for lang in expected_languages if lang != Language('eng')}
+        else:
+            assert scanned_video.subtitle_languages == expected_languages
 
     # other providers
     else:
         if provider != 'mkvmerge':
             assert scanned_video.frame_rate == 24
 
-        assert scanned_video.subtitle_languages == {
-            Language('eng'),
-            Language('spa'),
-            Language('deu'),
-            Language('jpn'),
-            Language('und'),
-            Language('ita'),
-            Language('fra'),
-            Language('hun'),
-        }
+        assert scanned_video.subtitle_languages == expected_languages
         for subtitle in scanned_video.subtitles:
             assert subtitle.subtitle_format == 'srt'
 

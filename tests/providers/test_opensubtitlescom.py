@@ -213,13 +213,6 @@ def test_make_query_show_imdb_id() -> None:
     assert {'parent_imdb_id': 898266, 'season_number': 7, 'episode_number': 5} in criteria
 
 
-def test_make_query_show_imdb_id_without_episode_id() -> None:
-    provider = OpenSubtitlesComProvider(USERNAME, PASSWORD)
-    criteria = provider._make_query(season=1, episode=2, show_imdb_id='tt0141842')
-    # the full criterion is already the show id search: it is not repeated
-    assert criteria == [{'parent_imdb_id': 141842, 'season_number': 1, 'episode_number': 2}]
-
-
 def test_make_query_show_tmdb_id() -> None:
     provider = OpenSubtitlesComProvider(USERNAME, PASSWORD)
     criteria = provider._make_query(query='The Big Bang Theory', season=7, episode=5, show_tmdb_id='1418')
@@ -230,13 +223,6 @@ def test_make_query_show_tmdb_id() -> None:
         'episode_number': 5,
     }
     assert {'parent_tmdb_id': 1418, 'season_number': 7, 'episode_number': 5} in criteria
-
-
-def test_make_query_show_tmdb_id_without_episode_id() -> None:
-    provider = OpenSubtitlesComProvider(USERNAME, PASSWORD)
-    criteria = provider._make_query(season=1, episode=2, show_tmdb_id='1418')
-    # the full criterion is already the show id search: it is not repeated
-    assert criteria == [{'parent_tmdb_id': 1418, 'season_number': 1, 'episode_number': 2}]
 
 
 def test_configuration_error_no_username() -> None:

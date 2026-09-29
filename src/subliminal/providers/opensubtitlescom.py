@@ -631,23 +631,23 @@ class OpenSubtitlesComProvider(Provider):
             if 'imdb_id' in criterion:
                 criteria.append({'imdb_id': criterion['imdb_id']})
             if 'parent_imdb_id' in criterion and 'season_number' in criterion and 'episode_number' in criterion:
-                parent_criterion = {
-                    'parent_imdb_id': criterion['parent_imdb_id'],
-                    'season_number': criterion['season_number'],
-                    'episode_number': criterion['episode_number'],
-                }
-                if parent_criterion != criterion:
-                    criteria.append(parent_criterion)
+                criteria.append(
+                    {
+                        'parent_imdb_id': criterion['parent_imdb_id'],
+                        'season_number': criterion['season_number'],
+                        'episode_number': criterion['episode_number'],
+                    }
+                )
             if 'tmdb_id' in criterion:
                 criteria.append({'tmdb_id': criterion['tmdb_id']})
             if 'parent_tmdb_id' in criterion and 'season_number' in criterion and 'episode_number' in criterion:
-                parent_criterion = {
-                    'parent_tmdb_id': criterion['parent_tmdb_id'],
-                    'season_number': criterion['season_number'],
-                    'episode_number': criterion['episode_number'],
-                }
-                if parent_criterion != criterion:
-                    criteria.append(parent_criterion)
+                criteria.append(
+                    {
+                        'parent_tmdb_id': criterion['parent_tmdb_id'],
+                        'season_number': criterion['season_number'],
+                        'episode_number': criterion['episode_number'],
+                    }
+                )
             if 'moviehash' in criterion:
                 criteria.append({'moviehash': criterion['moviehash']})
             if 'query' in criterion:

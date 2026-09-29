@@ -438,6 +438,13 @@ def episodes() -> dict[str, Episode]:
             video_codec='H.264',
             release_group='AVS',
         ),
+        'die_sopranos_s01e01': Episode(
+            'Die.Sopranos.S01E01.mkv',
+            'Die Sopranos',
+            1,
+            1,
+            external_ids={'series_imdb_id': 'tt0141842'},
+        ),
         'alex_inc_s01e04': Episode(
             'Alex.Inc.S01E04.HDTV.x264-SVA.mkv',
             'Alex, Inc.',

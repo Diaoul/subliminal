@@ -1,0 +1,560 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Api-Key:
+      - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Subliminal v0.1
+    method: GET
+    uri: https://api.opensubtitles.com/api/v1/subtitles?episode_number=1&languages=en&page=1&parent_imdb_id=141842&query=die+sopranos&season_number=1
+  response:
+    body:
+      string: "<html>\r\n<head><title>301 Moved Permanently</title></head>\r\n<body>\r\n<center><h1>301
+        Moved Permanently</h1></center>\r\n</body>\r\n</html>\r\n"
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Expose-Headers:
+      - X-Auth-Token
+      CF-RAY:
+      - a40bff506a11a0c4-VIE
+      Cache-Control:
+      - public, max-age=86400
+      Connection:
+      - keep-alive
+      Content-Type:
+      - text/html
+      Date:
+      - Fri, 25 Sep 2026 18:12:28 GMT
+      Location:
+      - /api/v1/subtitles?episode_number=1&languages=en&parent_imdb_id=141842&query=die+sopranos&season_number=1
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=4aWPNM1GcehB3Xep1A3SLsVOICGn%2BAjX0fbutrPGvTznMeqr3h7Of87xkUKO7mf6XDVEEuZkqmhM6OD7IVfRVZqQzD%2FfsZ8hMLbEYSjiLfuYw1C4MkTEF8uJ2Ripk9dmnpGoM%2BoA7v0%3D"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      X-Canonical:
+      - '1'
+      X-Content-Type-Options:
+      - nosniff
+      X-Kong-Request-Id:
+      - c2ad3a7826d3544019a188253cf2496b
+      X-Kong-Response-Latency:
+      - '1'
+      X-OS-Rule:
+      - canonical
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - EXPIRED
+    status:
+      code: 301
+      message: Moved Permanently
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Api-Key:
+      - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal v0.1
+    method: GET
+    uri: https://api.opensubtitles.com/api/v1/subtitles?episode_number=1&languages=en&parent_imdb_id=141842&query=die+sopranos&season_number=1
+  response:
+    body:
+      string: '{"total_pages":0,"total_count":0,"per_page":50,"page":1,"data":[]}'
+    headers:
+      Access-Control-Expose-Headers:
+      - X-Auth-Token
+      CF-RAY:
+      - a40bff52caf43250-VIE
+      Cache-Control:
+      - public, max-age=86400
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 25 Sep 2026 18:12:29 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      RateLimit-Limit:
+      - '5'
+      RateLimit-Remaining:
+      - '4'
+      RateLimit-Reset:
+      - '1'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=SLpvkX71ZqMxaGqDO3UUzBNTn5G9LjVQNvQ%2FEkyX74PvD2BR5%2FUkk7mJ2Jvar562lZkbfYXIbU5d8x3N75tJk1assiVtSC9iVVBXTL3%2Boy4TWBDx2PDLhsO7PpEocFahND6EczZGXow%3D"}]}'
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      Via:
+      - 1.1 kong/3.9.1
+      X-Kong-Proxy-Latency:
+      - '3'
+      X-Kong-Request-Id:
+      - 6833cc113937be4723ac6d138e96d065
+      X-Kong-Upstream-Latency:
+      - '37'
+      X-RateLimit-Limit-Second:
+      - '5'
+      X-RateLimit-Remaining-Second:
+      - '4'
+      access-control-allow-headers:
+      - Origin, Authorization, Accept, Api-Key, Content-Type, X-User-Agent
+      access-control-allow-methods:
+      - GET, HEAD, POST, OPTIONS
+      access-control-allow-origin:
+      - '*'
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - EXPIRED
+      content-length:
+      - '66'
+      last-modified:
+      - Fri, 25 Sep 2026 18:12:29 GMT
+      server:
+      - cloudflare
+      server-timing:
+      - miss, 0_TR_client_wait;dur=0, _Tw_queues;dur=0, 2_Tc_bak_connect;dur=1, 3_Tr_bak_response;dur=33
+      vary:
+      - accept-encoding
+      x-backend-server:
+      - rb13
+      x-content-type-options:
+      - nosniff
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - SAMEORIGIN
+      x-request-id:
+      - f40b6a07-914b-4c28-bcf0-69d699f6af45
+      x-runtime:
+      - '0.031701'
+      x-vip:
+      - 'false'
+      x-vip-consumer:
+      - 'false'
+      x-vip-user:
+      - 'false'
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Api-Key:
+      - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Subliminal v0.1
+    method: GET
+    uri: https://api.opensubtitles.com/api/v1/subtitles?episode_number=1&languages=en&page=1&parent_imdb_id=141842&season_number=1
+  response:
+    body:
+      string: "<html>\r\n<head><title>301 Moved Permanently</title></head>\r\n<body>\r\n<center><h1>301
+        Moved Permanently</h1></center>\r\n</body>\r\n</html>\r\n"
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Expose-Headers:
+      - X-Auth-Token
+      CF-RAY:
+      - a40bff554c7e83f0-VIE
+      Cache-Control:
+      - public, max-age=86400
+      Connection:
+      - keep-alive
+      Content-Type:
+      - text/html
+      Date:
+      - Fri, 25 Sep 2026 18:12:29 GMT
+      Location:
+      - /api/v1/subtitles?episode_number=1&languages=en&parent_imdb_id=141842&season_number=1
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=VeIlB6GFCWOoJU11cAKcs79cpYUyO%2Ft%2FfqFAWf0CybFC1RufP3%2Bxk08vCN9PTse4VX2kPUjWswyTsBrvymaPVUVBiM9heUmybGNYPoIAfO5vu%2Fqc0GC%2BzfiR5X4iX5YufWqatsYoPC4%3D"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      X-Canonical:
+      - '1'
+      X-Content-Type-Options:
+      - nosniff
+      X-Kong-Request-Id:
+      - 276b053c358c1733b986a37f4191d56b
+      X-Kong-Response-Latency:
+      - '0'
+      X-OS-Rule:
+      - canonical
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - EXPIRED
+    status:
+      code: 301
+      message: Moved Permanently
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Api-Key:
+      - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal v0.1
+    method: GET
+    uri: https://api.opensubtitles.com/api/v1/subtitles?episode_number=1&languages=en&parent_imdb_id=141842&season_number=1
+  response:
+    body:
+      string: '{"total_pages":1,"total_count":15,"per_page":50,"page":1,"data":[{"id":"7774358","type":"subtitle","attributes":{"subtitle_id":"7774358","language":"en","download_count":4362,"new_download_count":6984,"hearing_impaired":false,"hd":false,"fps":29.97,"votes":0,"ratings":0.0,"from_trusted":true,"foreign_parts_only":false,"upload_date":"2024-05-15T16:51:48Z","ai_translated":false,"nb_cd":1,"slug":"sopranos-s01e01-pilot-dvd-nonhi-pcc-en-hbo","machine_translated":false,"release":"Sopranos
+        S01E01 Pilot.DVD.NonHI.pcc.en.HBO","comments":"HBO Retail DVD","legacy_subtitle_id":10036138,"legacy_uploader_id":7755957,"uploader":{"uploader_id":215338,"name":"mrtinkles","rank":"Administrator"},"feature_details":{"feature_id":658270,"feature_type":"Episode","year":1999,"title":"The
+        Sopranos","movie_name":"The Sopranos - S01E01  The Sopranos","imdb_id":705282,"tmdb_id":62970,"season_number":1,"episode_number":1,"parent_imdb_id":141842,"parent_title":"The
+        Sopranos","parent_tmdb_id":1398,"parent_feature_id":7169},"url":null,"related_links":null,"files":[{"file_id":8698297,"cd_number":1,"file_name":"Sopranos
+        S01E01 Pilot.DVD.NonHI.pcc.en.HBO"}]}},{"id":"7774359","type":"subtitle","attributes":{"subtitle_id":"7774359","language":"en","download_count":4730,"new_download_count":2120,"hearing_impaired":true,"hd":false,"fps":29.97,"votes":0,"ratings":0.0,"from_trusted":true,"foreign_parts_only":false,"upload_date":"2024-05-15T16:49:35Z","ai_translated":false,"nb_cd":1,"slug":"sopranos-s01e01-pilot-dvd-hi-pcc-en-hbo","machine_translated":false,"release":"Sopranos
+        S01E01 Pilot.DVD.HI.pcc.en.HBO","comments":"HBO Retail DVD","legacy_subtitle_id":10036111,"legacy_uploader_id":7755957,"uploader":{"uploader_id":215338,"name":"mrtinkles","rank":"Administrator"},"feature_details":{"feature_id":658270,"feature_type":"Episode","year":1999,"title":"The
+        Sopranos","movie_name":"The Sopranos - S01E01  The Sopranos","imdb_id":705282,"tmdb_id":62970,"season_number":1,"episode_number":1,"parent_imdb_id":141842,"parent_title":"The
+        Sopranos","parent_tmdb_id":1398,"parent_feature_id":7169},"url":null,"related_links":null,"files":[{"file_id":8698298,"cd_number":1,"file_name":"Sopranos
+        S01E01 Pilot.DVD.HI.pcc.en.HBO"}]}},{"id":"6612475","type":"subtitle","attributes":{"subtitle_id":"6612475","language":"en","download_count":186885,"new_download_count":10322,"hearing_impaired":false,"hd":true,"fps":29.97,"votes":0,"ratings":0.0,"from_trusted":true,"foreign_parts_only":false,"upload_date":"2022-06-09T09:13:59Z","ai_translated":false,"nb_cd":1,"slug":"the-sopranos-s01e01-the-sopranos-1080p-hmax-web-dl-dd-2-0-h-264-slignome-nhi","machine_translated":false,"release":"The.Sopranos.S01E01.The.Sopranos.1080p.HMAX.WEB-DL.DD.2.0.H.264-SLiGNOME-NHI","comments":"","legacy_subtitle_id":9129453,"legacy_uploader_id":4734104,"uploader":{"uploader_id":118487,"name":"capnchron","rank":"Trusted
+        member"},"feature_details":{"feature_id":658270,"feature_type":"Episode","year":1999,"title":"The
+        Sopranos","movie_name":"The Sopranos - S01E01  The Sopranos","imdb_id":705282,"tmdb_id":62970,"season_number":1,"episode_number":1,"parent_imdb_id":141842,"parent_title":"The
+        Sopranos","parent_tmdb_id":1398,"parent_feature_id":7169},"url":null,"related_links":null,"files":[{"file_id":7581915,"cd_number":1,"file_name":"The.Sopranos.S01E01.The.Sopranos.1080p.HMAX.WEB-DL.DD.2.0.H.264-SLiGNOME-NHI"}]}},{"id":"6612424","type":"subtitle","attributes":{"subtitle_id":"6612424","language":"en","download_count":24205,"new_download_count":2153,"hearing_impaired":true,"hd":true,"fps":29.97,"votes":0,"ratings":0.0,"from_trusted":true,"foreign_parts_only":false,"upload_date":"2022-06-09T09:13:50Z","ai_translated":false,"nb_cd":1,"slug":"the-sopranos-s01e01-the-sopranos-1080p-hmax-web-dl-dd-2-0-h-264-slignome","machine_translated":false,"release":"The.Sopranos.S01E01.The.Sopranos.1080p.HMAX.WEB-DL.DD.2.0.H.264-SLiGNOME","comments":"","legacy_subtitle_id":9129452,"legacy_uploader_id":4734104,"uploader":{"uploader_id":118487,"name":"capnchron","rank":"Trusted
+        member"},"feature_details":{"feature_id":658270,"feature_type":"Episode","year":1999,"title":"The
+        Sopranos","movie_name":"The Sopranos - S01E01  The Sopranos","imdb_id":705282,"tmdb_id":62970,"season_number":1,"episode_number":1,"parent_imdb_id":141842,"parent_title":"The
+        Sopranos","parent_tmdb_id":1398,"parent_feature_id":7169},"url":null,"related_links":null,"files":[{"file_id":7581872,"cd_number":1,"file_name":"The.Sopranos.S01E01.The.Sopranos.1080p.HMAX.WEB-DL.DD.2.0.H.264-SLiGNOME"}]}},{"id":"4592107","type":"subtitle","attributes":{"subtitle_id":"4592107","language":"en","download_count":25009,"new_download_count":6783,"hearing_impaired":false,"hd":false,"fps":0.0,"votes":1,"ratings":10.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2017-08-27T05:53:28Z","ai_translated":false,"nb_cd":1,"slug":"7078780-the-sopranos-1x01-the-sopranos","machine_translated":false,"release":"The
+        Sopranos - 1x01 - The Sopranos","comments":"","legacy_subtitle_id":7078780,"legacy_uploader_id":4080688,"uploader":{"uploader_id":75322,"name":"opentitles55","rank":"Bronze
+        Member"},"feature_details":{"feature_id":658270,"feature_type":"Episode","year":1999,"title":"The
+        Sopranos","movie_name":"The Sopranos - S01E01  The Sopranos","imdb_id":705282,"tmdb_id":62970,"season_number":1,"episode_number":1,"parent_imdb_id":141842,"parent_title":"The
+        Sopranos","parent_tmdb_id":1398,"parent_feature_id":7169},"url":null,"related_links":null,"files":[{"file_id":4714868,"cd_number":1,"file_name":"The
+        Sopranos - 1x01 - The Sopranos"}]}},{"id":"4592047","type":"subtitle","attributes":{"subtitle_id":"4592047","language":"en","download_count":31368,"new_download_count":15592,"hearing_impaired":true,"hd":true,"fps":25.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2015-07-27T22:22:15Z","ai_translated":false,"nb_cd":1,"slug":"the-sopranos-s01e01-1080p-5-1ch-bluray-reenc-deejayahmed","machine_translated":false,"release":"The.Sopranos.S01E01.1080p.5.1Ch.BluRay.ReEnc-DeeJayAhmed","comments":"","legacy_subtitle_id":6250433,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":658270,"feature_type":"Episode","year":1999,"title":"The
+        Sopranos","movie_name":"The Sopranos - S01E01  The Sopranos","imdb_id":705282,"tmdb_id":62970,"season_number":1,"episode_number":1,"parent_imdb_id":141842,"parent_title":"The
+        Sopranos","parent_tmdb_id":1398,"parent_feature_id":7169},"url":null,"related_links":null,"files":[{"file_id":4714808,"cd_number":1,"file_name":"The.Sopranos.S01E01.1080p.5.1Ch.BluRay.ReEnc-DeeJayAhmed-eng"}]}},{"id":"4591979","type":"subtitle","attributes":{"subtitle_id":"4591979","language":"en","download_count":11350,"new_download_count":1689,"hearing_impaired":false,"hd":false,"fps":0.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2014-06-04T22:48:07Z","ai_translated":false,"nb_cd":1,"slug":"los-soprano-1x01-the-sopranos-1x01-piloto-dvdrip-ws-dual-english-ac3-spanish-commentary","machine_translated":false,"release":"[Los
+        Soprano 1x01] The Sopranos 1x01 Piloto - DVDRip.WS.Dual English AC3-Spanish-Commentary","comments":"","legacy_subtitle_id":5712099,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":658270,"feature_type":"Episode","year":1999,"title":"The
+        Sopranos","movie_name":"The Sopranos - S01E01  The Sopranos","imdb_id":705282,"tmdb_id":62970,"season_number":1,"episode_number":1,"parent_imdb_id":141842,"parent_title":"The
+        Sopranos","parent_tmdb_id":1398,"parent_feature_id":7169},"url":null,"related_links":null,"files":[{"file_id":4714739,"cd_number":1,"file_name":"[Los
+        Soprano 1x01] The Sopranos 1x01 Piloto - DVDRip.WS.Dual English AC3-Spanish-Commentary-eng"}]}},{"id":"4591912","type":"subtitle","attributes":{"subtitle_id":"4591912","language":"en","download_count":44311,"new_download_count":3955,"hearing_impaired":false,"hd":true,"fps":23.976,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-04-16T11:15:27Z","ai_translated":false,"nb_cd":1,"slug":"4935920-the-sopranos-s03e01-mr-ruggerio-s-neighborhood-720p-web-dl-dd5-1-h-264-tb","machine_translated":false,"release":"The.Sopranos.S03E01.Mr.Ruggerio''s.Neighborhood.720p.WEB-DL.DD5.1.H.264-TB","comments":"","legacy_subtitle_id":4935920,"legacy_uploader_id":1567347,"uploader":{"uploader_id":63335,"name":"joritdk","rank":"Silver
+        Member"},"feature_details":{"feature_id":658270,"feature_type":"Episode","year":1999,"title":"The
+        Sopranos","movie_name":"The Sopranos - S01E01  The Sopranos","imdb_id":705282,"tmdb_id":62970,"season_number":1,"episode_number":1,"parent_imdb_id":141842,"parent_title":"The
+        Sopranos","parent_tmdb_id":1398,"parent_feature_id":7169},"url":null,"related_links":null,"files":[{"file_id":4714671,"cd_number":1,"file_name":"The.Sopranos.S03E01.Mr.Ruggerios.Neighborhood.720p.WEB-DL.DD5.1.H.264-TB"}]}},{"id":"4591824","type":"subtitle","attributes":{"subtitle_id":"4591824","language":"en","download_count":119119,"new_download_count":3208,"hearing_impaired":false,"hd":true,"fps":23.976,"votes":1,"ratings":10.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2011-05-23T18:34:55Z","ai_translated":false,"nb_cd":1,"slug":"4331560-the-sopranos-s01-720p-bluray-x264-unit3d-mkv","machine_translated":false,"release":"The.Sopranos.S01
+        .720p.BluRay.x264-UNIT3D.mkv","comments":"","legacy_subtitle_id":4331560,"legacy_uploader_id":1329791,"uploader":{"uploader_id":56824,"name":"priceless009","rank":"Bronze
+        Member"},"feature_details":{"feature_id":658270,"feature_type":"Episode","year":1999,"title":"The
+        Sopranos","movie_name":"The Sopranos - S01E01  The Sopranos","imdb_id":705282,"tmdb_id":62970,"season_number":1,"episode_number":1,"parent_imdb_id":141842,"parent_title":"The
+        Sopranos","parent_tmdb_id":1398,"parent_feature_id":7169},"url":null,"related_links":null,"files":[{"file_id":4714583,"cd_number":1,"file_name":"The.Sopranos.S01E01.720p.BluRay.x264-UNIT3D.mkv_subs1"}]}},{"id":"6827918","type":"subtitle","attributes":{"subtitle_id":"6827918","language":"en","download_count":8575,"new_download_count":1592,"hearing_impaired":false,"hd":false,"fps":25.0,"votes":1,"ratings":2.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2009-11-17T02:17:46Z","ai_translated":false,"nb_cd":1,"slug":"4269661-saison-1","machine_translated":false,"release":"Saison
+        1","comments":"","legacy_subtitle_id":4269661,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":658270,"feature_type":"Episode","year":1999,"title":"The
+        Sopranos","movie_name":"The Sopranos - S01E01  The Sopranos","imdb_id":705282,"tmdb_id":62970,"season_number":1,"episode_number":1,"parent_imdb_id":141842,"parent_title":"The
+        Sopranos","parent_tmdb_id":1398,"parent_feature_id":7169},"url":null,"related_links":null,"files":[{"file_id":7797362,"cd_number":1,"file_name":"Episode
+        1 - The Sopranos (Eng)"}]}},{"id":"4588694","type":"subtitle","attributes":{"subtitle_id":"4588694","language":"en","download_count":54551,"new_download_count":5454,"hearing_impaired":false,"hd":false,"fps":23.98,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2009-04-17T14:12:23Z","ai_translated":false,"nb_cd":1,"slug":"the-sopranos-s01-e01-pilot-occor-avi","machine_translated":false,"release":"The
+        Sopranos - S01 E01 - Pilot Occor.avi","comments":"","legacy_subtitle_id":3494524,"legacy_uploader_id":638753,"uploader":{"uploader_id":44589,"name":"effkey","rank":"Bronze
+        Member"},"feature_details":{"feature_id":658270,"feature_type":"Episode","year":1999,"title":"The
+        Sopranos","movie_name":"The Sopranos - S01E01  The Sopranos","imdb_id":705282,"tmdb_id":62970,"season_number":1,"episode_number":1,"parent_imdb_id":141842,"parent_title":"The
+        Sopranos","parent_tmdb_id":1398,"parent_feature_id":7169},"url":null,"related_links":null,"files":[{"file_id":4711465,"cd_number":1,"file_name":"The
+        Sopranos - S01 E01 - Pilot Occor"}]}},{"id":"4591772","type":"subtitle","attributes":{"subtitle_id":"4591772","language":"en","download_count":209412,"new_download_count":9221,"hearing_impaired":false,"hd":false,"fps":23.976,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2008-07-08T12:41:23Z","ai_translated":false,"nb_cd":1,"slug":"4325774-the-sopranos-complete-1st-season-dvdrip-xvid","machine_translated":false,"release":"The
+        Sopranos - Complete 1st Season [DVDRip.XviD]","comments":"","legacy_subtitle_id":4325774,"legacy_uploader_id":206314,"uploader":{"uploader_id":37617,"name":"Abu-Dun","rank":"Gold
+        member"},"feature_details":{"feature_id":658270,"feature_type":"Episode","year":1999,"title":"The
+        Sopranos","movie_name":"The Sopranos - S01E01  The Sopranos","imdb_id":705282,"tmdb_id":62970,"season_number":1,"episode_number":1,"parent_imdb_id":141842,"parent_title":"The
+        Sopranos","parent_tmdb_id":1398,"parent_feature_id":7169},"url":null,"related_links":null,"files":[{"file_id":4714532,"cd_number":1,"file_name":"The
+        Sopranos - S01E01 - Pilot"}]}},{"id":"4586772","type":"subtitle","attributes":{"subtitle_id":"4586772","language":"en","download_count":42959,"new_download_count":797,"hearing_impaired":false,"hd":false,"fps":25.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2005-07-03T00:00:00Z","ai_translated":false,"nb_cd":1,"slug":"212904-sopranos-the-1999","machine_translated":false,"release":"Sopranos,
+        The (1999)","comments":null,"legacy_subtitle_id":212904,"legacy_uploader_id":47419,"uploader":{"uploader_id":13614,"name":"miskon
+        (a)","rank":"Platinum Member"},"feature_details":{"feature_id":658270,"feature_type":"Episode","year":1999,"title":"The
+        Sopranos","movie_name":"The Sopranos - S01E01  The Sopranos","imdb_id":705282,"tmdb_id":62970,"season_number":1,"episode_number":1,"parent_imdb_id":141842,"parent_title":"The
+        Sopranos","parent_tmdb_id":1398,"parent_feature_id":7169},"url":null,"related_links":null,"files":[{"file_id":4709550,"cd_number":1,"file_name":"The_Sopranos-1x01-Pilot.(DVD).ReBirTh"}]}},{"id":"4591623","type":"subtitle","attributes":{"subtitle_id":"4591623","language":"en","download_count":53074,"new_download_count":758,"hearing_impaired":false,"hd":false,"fps":0.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2005-02-02T00:00:00Z","ai_translated":false,"nb_cd":1,"slug":"4282670-sopranos-the-1999","machine_translated":false,"release":"\"Sopranos,
+        The\" (1999)","comments":null,"legacy_subtitle_id":4282670,"legacy_uploader_id":45769,"uploader":{"uploader_id":11954,"name":"Foratul
+        (a)","rank":"Gold member"},"feature_details":{"feature_id":658270,"feature_type":"Episode","year":1999,"title":"The
+        Sopranos","movie_name":"The Sopranos - S01E01  The Sopranos","imdb_id":705282,"tmdb_id":62970,"season_number":1,"episode_number":1,"parent_imdb_id":141842,"parent_title":"The
+        Sopranos","parent_tmdb_id":1398,"parent_feature_id":7169},"url":null,"related_links":null,"files":[{"file_id":4714379,"cd_number":1,"file_name":"\"Sopranos_
+        The\" (1999)"}]}},{"id":"4591703","type":"subtitle","attributes":{"subtitle_id":"4591703","language":"en","download_count":160793,"new_download_count":8993,"hearing_impaired":false,"hd":false,"fps":25.0,"votes":4,"ratings":7.8,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2004-04-07T00:00:00Z","ai_translated":false,"nb_cd":1,"slug":"4323012-sopranos-the-1999","machine_translated":false,"release":"Sopranos,
+        The (1999)","comments":null,"legacy_subtitle_id":4323012,"legacy_uploader_id":47547,"uploader":{"uploader_id":13743,"name":"rookk
+        (a)","rank":"Gold member"},"feature_details":{"feature_id":658270,"feature_type":"Episode","year":1999,"title":"The
+        Sopranos","movie_name":"The Sopranos - S01E01  The Sopranos","imdb_id":705282,"tmdb_id":62970,"season_number":1,"episode_number":1,"parent_imdb_id":141842,"parent_title":"The
+        Sopranos","parent_tmdb_id":1398,"parent_feature_id":7169},"url":null,"related_links":null,"files":[{"file_id":4714462,"cd_number":1,"file_name":"Sopranos
+        - 1x01.EN"}]}}]}'
+    headers:
+      Access-Control-Expose-Headers:
+      - X-Auth-Token
+      CF-RAY:
+      - a40bff578a2a5e99-VIE
+      Cache-Control:
+      - public, max-age=86400
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 25 Sep 2026 18:12:30 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      RateLimit-Limit:
+      - '5'
+      RateLimit-Remaining:
+      - '4'
+      RateLimit-Reset:
+      - '1'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=iU%2BGXBDOQYm7MO3n837tcezLnjIq%2ByrOawsBpgeJFvtLWYpaYsHVE92TxgSbse3M6MjPtyIHhyzjS8lI3d%2B0Asp8X9Beze9fRYHLh37t22GSgJ0a6HjQ8AVd%2Bz14Das8FceoTW26Ovg%3D"}]}'
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      Via:
+      - 1.1 kong/3.9.1
+      X-Kong-Proxy-Latency:
+      - '2'
+      X-Kong-Request-Id:
+      - 68e3892383c7a4466aed615729a58478
+      X-Kong-Upstream-Latency:
+      - '60'
+      X-RateLimit-Limit-Second:
+      - '5'
+      X-RateLimit-Remaining-Second:
+      - '4'
+      access-control-allow-headers:
+      - Origin, Authorization, Accept, Api-Key, Content-Type, X-User-Agent
+      access-control-allow-methods:
+      - GET, HEAD, POST, OPTIONS
+      access-control-allow-origin:
+      - '*'
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - EXPIRED
+      content-length:
+      - '16277'
+      last-modified:
+      - Fri, 25 Sep 2026 18:12:30 GMT
+      server:
+      - cloudflare
+      server-timing:
+      - miss, 0_TR_client_wait;dur=0, _Tw_queues;dur=0, 2_Tc_bak_connect;dur=0, 3_Tr_bak_response;dur=58
+      vary:
+      - accept-encoding
+      x-backend-server:
+      - rb14
+      x-content-type-options:
+      - nosniff
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - SAMEORIGIN
+      x-request-id:
+      - 84c64ff9-8816-450d-a929-048f2fb491bc
+      x-runtime:
+      - '0.056524'
+      x-vip:
+      - 'false'
+      x-vip-consumer:
+      - 'false'
+      x-vip-user:
+      - 'false'
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Api-Key:
+      - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Subliminal v0.1
+    method: GET
+    uri: https://api.opensubtitles.com/api/v1/subtitles?episode_number=1&languages=en&page=1&query=die+sopranos&season_number=1
+  response:
+    body:
+      string: "<html>\r\n<head><title>301 Moved Permanently</title></head>\r\n<body>\r\n<center><h1>301
+        Moved Permanently</h1></center>\r\n</body>\r\n</html>\r\n"
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Expose-Headers:
+      - X-Auth-Token
+      CF-RAY:
+      - a40bff5aba5927b8-VIE
+      Cache-Control:
+      - public, max-age=86400
+      Connection:
+      - keep-alive
+      Content-Type:
+      - text/html
+      Date:
+      - Fri, 25 Sep 2026 18:12:30 GMT
+      Location:
+      - /api/v1/subtitles?episode_number=1&languages=en&query=die+sopranos&season_number=1
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=0c6L%2FE%2FRHNW7u8NQQpJS%2BreE2jpacbQ5p7486kQS8s42URJgR11C7XqkXFCSD5cMHNZDltAAWDN9lng4e6ASUcIgrYDrbx0Jo%2FB6CLCetdIeCJvl%2FdYuMJEI%2B%2B%2B%2FoLvtoRJG9%2BsZ9FY%3D"}]}'
+      Server:
+      - cloudflare
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      X-Canonical:
+      - '1'
+      X-Content-Type-Options:
+      - nosniff
+      X-Kong-Request-Id:
+      - 7ee3ce081f391b2d98bd93218c39336a
+      X-Kong-Response-Latency:
+      - '0'
+      X-OS-Rule:
+      - canonical
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - EXPIRED
+    status:
+      code: 301
+      message: Moved Permanently
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Api-Key:
+      - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
+      Connection:
+      - keep-alive
+      User-Agent:
+      - Subliminal v0.1
+    method: GET
+    uri: https://api.opensubtitles.com/api/v1/subtitles?episode_number=1&languages=en&query=die+sopranos&season_number=1
+  response:
+    body:
+      string: '{"total_pages":0,"total_count":0,"per_page":50,"page":1,"data":[]}'
+    headers:
+      Access-Control-Expose-Headers:
+      - X-Auth-Token
+      CF-RAY:
+      - a40bff5d09755a8f-VIE
+      Cache-Control:
+      - public, max-age=86400
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 25 Sep 2026 18:12:30 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      RateLimit-Limit:
+      - '5'
+      RateLimit-Remaining:
+      - '3'
+      RateLimit-Reset:
+      - '1'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=pThlexE%2BszS822jOp41Mqg04c4FTJhSfKbdNNNh7U912ViqrxhZxxfZG7uUrp%2BfIsb9WlSqX6oDYnFQoA4FxwYW9sL8sZ1ocDE64q%2BOhhL%2BKQsoP4fSSF4dVJ1Mw6ILV%2FJXwjTiNI3k%3D"}]}'
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      Via:
+      - 1.1 kong/3.9.1
+      X-Kong-Proxy-Latency:
+      - '1'
+      X-Kong-Request-Id:
+      - e2a3df2a230bc13f2f8ad84cd7b03f42
+      X-Kong-Upstream-Latency:
+      - '40'
+      X-RateLimit-Limit-Second:
+      - '5'
+      X-RateLimit-Remaining-Second:
+      - '3'
+      access-control-allow-headers:
+      - Origin, Authorization, Accept, Api-Key, Content-Type, X-User-Agent
+      access-control-allow-methods:
+      - GET, HEAD, POST, OPTIONS
+      access-control-allow-origin:
+      - '*'
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - EXPIRED
+      content-length:
+      - '66'
+      last-modified:
+      - Fri, 25 Sep 2026 18:12:30 GMT
+      server:
+      - cloudflare
+      server-timing:
+      - miss, 0_TR_client_wait;dur=0, _Tw_queues;dur=0, 2_Tc_bak_connect;dur=0, 3_Tr_bak_response;dur=37
+      vary:
+      - accept-encoding
+      x-backend-server:
+      - rb7
+      x-content-type-options:
+      - nosniff
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - SAMEORIGIN
+      x-request-id:
+      - a13407e3-1532-460b-b7ce-8974f0e658fe
+      x-runtime:
+      - '0.035192'
+      x-vip:
+      - 'false'
+      x-vip-consumer:
+      - 'false'
+      x-vip-user:
+      - 'false'
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
+version: 1

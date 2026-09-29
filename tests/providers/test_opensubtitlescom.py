@@ -201,6 +201,30 @@ def test_get_matches_no_match(episodes: dict[str, Episode]) -> None:
     assert matches == set()
 
 
+def test_make_query_show_imdb_id() -> None:
+    provider = OpenSubtitlesComProvider(USERNAME, PASSWORD)
+    criteria = provider._make_query(query='The Big Bang Theory', season=7, episode=5, show_imdb_id='tt0898266')
+    assert criteria[0] == {
+        'parent_imdb_id': 898266,
+        'query': 'The Big Bang Theory',
+        'season_number': 7,
+        'episode_number': 5,
+    }
+    assert {'parent_imdb_id': 898266, 'season_number': 7, 'episode_number': 5} in criteria
+
+
+def test_make_query_show_tmdb_id() -> None:
+    provider = OpenSubtitlesComProvider(USERNAME, PASSWORD)
+    criteria = provider._make_query(query='The Big Bang Theory', season=7, episode=5, show_tmdb_id='1418')
+    assert criteria[0] == {
+        'parent_tmdb_id': 1418,
+        'query': 'The Big Bang Theory',
+        'season_number': 7,
+        'episode_number': 5,
+    }
+    assert {'parent_tmdb_id': 1418, 'season_number': 7, 'episode_number': 5} in criteria
+
+
 def test_configuration_error_no_username() -> None:
     with pytest.raises(ConfigurationError):
         OpenSubtitlesComProvider(password=PASSWORD)
@@ -442,23 +466,16 @@ def test_download_subtitle(movies: dict[str, Movie]) -> None:
 
 @pytest.mark.integration
 @vcr.use_cassette
-def test_tag_match(episodes: dict[str, Episode]) -> None:
-    video = episodes['the fall']
-    languages = {Language('por', 'BR')}
+def test_list_subtitles_episode_series_imdb_id(episodes: dict[str, Episode]) -> None:
+    # folder named after a localized title: the show's IMDb id finds the episode, the title alone does not
+    video = episodes['die_sopranos_s01e01']
+    languages = {Language('eng')}
     with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
         subtitles = provider.list_subtitles(video, languages)
 
     assert len(subtitles) > 0
-
-    # 'Doc.Martin.S03E01.(24 September 2007).[TVRip (Xvid)]-spa.srt'
-    unwanted_subtitle_id = '2852678'
-    found_subtitles = [s for s in subtitles if s.subtitle_id == unwanted_subtitle_id]
-    assert len(found_subtitles) > 0
-
-    found_subtitle = found_subtitles[0]
-    matches = found_subtitle.get_matches(video)
-    # Assert is not a tag match: {'series', 'year', 'season', 'episode'}
-    assert matches == {'episode', 'year', 'country', 'season'}
+    assert {subtitle.series_title for subtitle in subtitles} == {'The Sopranos'}
+    assert {subtitle.language for subtitle in subtitles} == languages
 
 
 @pytest.mark.integration

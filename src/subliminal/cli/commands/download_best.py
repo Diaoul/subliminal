@@ -530,10 +530,14 @@ def download(
         for video in ignored_videos:
             video_name = os.path.split(video.name)[1]
             msg = f'{video_name!r} ignored'
+            # Add information about existing subtitle languages
+            langs = ', '.join(str(s) for s in video.subtitle_languages) or 'none'
+            days = f'{video.age.days:d} day{"s" if video.age.days > 1 else ""}'
+            msg += f' - existing subtitles: {langs}'
+            # Add information about the video age
             if video.exists:
-                langs = ', '.join(str(s) for s in video.subtitle_languages) or 'none'
                 days = f'{video.age.days:d} day{"s" if video.age.days > 1 else ""}'
-                msg += f' - subtitles: {langs} / age: {days}'
+                msg += f' - age: {days}'
             else:
                 msg += ' - not a video file'
             click.secho(msg, fg='yellow')

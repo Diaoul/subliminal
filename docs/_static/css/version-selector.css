@@ -1,0 +1,65 @@
+/* Style our version picker
+
+The version picker is defined in `_templates/versioning.html` and uses the same classes
+and ids as the one provided by the theme for use with readthedocs.io
+This allows us to load the styles by readthedocs as a basis
+and adjust them to our likings.
+*/
+
+/* Import RTD styles */
+@import url("https://assets.readthedocs.org/static/css/readthedocs-doc-embed.css");
+@import url("https://assets.readthedocs.org/static/css/badge_only.css");
+
+/* remove border around version picker */
+#furo-readthedocs-versions:focus-within,
+#furo-readthedocs-versions:hover {
+    box-shadow: none;
+}
+
+/* adjust the element showing the selected version */
+.rst-versions .rst-current-version {
+    padding: var(--sidebar-item-spacing-vertical)
+        var(--sidebar-item-spacing-horizontal);
+    border-top: 1px solid var(--color-sidebar-search-border);
+    color: var(--color-foreground-primary);
+}
+
+/* .rst-versions .rst-current-version.rst-out-of-date {
+    color: #c64334;
+}
+
+.rst-versions .rst-current-version.rst-active-old-version {
+    color: #634f00;
+} */
+
+/* adjust the element listing all available versions */
+#furo-readthedocs-versions > .rst-other-versions {
+    padding: var(--sidebar-item-spacing-vertical)
+        var(--sidebar-item-spacing-horizontal);
+    border-style: none;
+    border-top: 1px solid var(--color-sidebar-search-border);
+}
+
+/* adjust list headings */
+.rst-versions .rst-other-versions dt {
+    color: var(--color-foreground-secondary);
+}
+
+/* adjust selectable version items */
+.rst-versions .rst-other-versions dd a {
+    color: var(--color-sidebar-link-text--top-level);
+    padding-left: 0px;
+    padding-right: 12px;
+}
+
+/* adjust icons for the list headings */
+.bi.version-header {
+    margin-right: 1ch;
+}
+
+/* adjust icon for the version picker */
+.rst-current-version .bi-git {
+    float: left;
+    color: var(--color-foreground-primary);
+    left: var(--sidebar-item-spacing-horizontal);
+}

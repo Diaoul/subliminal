@@ -2,6 +2,12 @@
 
 .. towncrier release notes start
 
+2.7.2 (2026-10-13)
+^^^^^^^^^^^^^^^^^^
+
+No significant changes.
+
+
 2.8.0 (2026-10-13)
 ^^^^^^^^^^^^^^^^^^
 

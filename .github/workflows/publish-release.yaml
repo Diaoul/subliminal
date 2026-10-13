@@ -44,7 +44,7 @@ jobs:
           ref: ${{ inputs.tag-name }}
           persist-credentials: false
       - name: Build dist
-        uses: hynek/build-and-inspect-python-package@v2
+        uses: hynek/build-and-inspect-python-package@v3.0.1
         id: baipp
     outputs:
       tag: ${{ steps.baipp.outputs.package_version }}

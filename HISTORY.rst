@@ -2,6 +2,39 @@
 
 .. towncrier release notes start
 
+2.8.0 (2026-10-13)
+^^^^^^^^^^^^^^^^^^
+
+Changes
+-------
+
+- Added `ProviderPool.failed_providers` - a set of providers that had an error.
+  Changed the user-facing error messages of the `download` command to explicitly distinguish
+  discarded providers, which are not used for the rest of the download, from those that errored
+  out but were still kept in the pool. (`#1374 <https://github.com/Diaoul/subliminal/issues/1374>`__)
+- add ProviderResult class to keep track of queries to providers (`#1381 <https://github.com/Diaoul/subliminal/issues/1381>`__)
+
+
+Provider Changes
+----------------
+
+- Stop the opensubtitlescom pagination when a page fails and keep the subtitles already found (`#1373 <https://github.com/Diaoul/subliminal/issues/1373>`__)
+- fix: OpenSubtitlesCom was not using hash if OpenSubtitles was not used also (`#1382 <https://github.com/Diaoul/subliminal/issues/1382>`__)
+- Search episodes with OpenSubtitlesCom by the show's IMDb/TMDB id. (`#1384 <https://github.com/Diaoul/subliminal/issues/1384>`__)
+
+
+Refiner Changes
+---------------
+
+- omdb: use the IMDB id to backfill missing title and year metadata (`#1375 <https://github.com/Diaoul/subliminal/issues/1375>`__)
+
+
+CLI Changes
+-----------
+
+- improve message for ignored videos (`#1387 <https://github.com/Diaoul/subliminal/issues/1387>`__)
+
+
 2.7.1 (2026-07-22)
 ^^^^^^^^^^^^^^^^^^
 

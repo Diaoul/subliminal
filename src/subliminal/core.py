@@ -10,7 +10,7 @@ from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, field
 from enum import Enum, auto
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Any, cast
 
 from babelfish import Language  # type: ignore[import-untyped]
 
@@ -185,13 +185,15 @@ class ProviderPool:
         # make sure the type is correct
         languages = set(languages)
 
+        plugin = cast('Provider', provider_manager[provider].plugin)
+
         # check video validity
-        if not provider_manager[provider].plugin.check(video):  # type: ignore[attr-defined]
+        if not plugin.check(video):  # type: ignore[attr-defined]
             logger.info('Skipping provider %r: not a valid provider for this video type', provider)
             return ProviderResult(provider, video, languages, status=ProviderResultStatus.UNSUPPORTED_VIDEO)
 
         # check supported languages
-        provider_languages = provider_manager[provider].plugin.check_languages(languages)  # type: ignore[attr-defined]
+        provider_languages = plugin.check_languages(languages)  # type: ignore[attr-defined]
         if not provider_languages:
             logger.info('Skipping provider %r: not a valid provider for the query languages', provider)
             return ProviderResult(provider, video, languages, status=ProviderResultStatus.UNSUPPORTED_LANGUAGES)

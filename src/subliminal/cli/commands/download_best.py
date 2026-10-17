@@ -21,7 +21,6 @@ from subliminal import (
     compute_score,
     get_scores,
     provider_manager,
-    refine,
     refiner_manager,
     save_subtitles,
 )
@@ -33,6 +32,9 @@ from subliminal.core import (
 )
 from subliminal.exceptions import GuessingError
 from subliminal.extensions import get_default_providers, get_default_refiners
+
+# from subliminal.provider_pool import AsyncProviderPool, refine
+from subliminal.provider_pool import refine
 from subliminal.utils import NameResolver, merge_extend_and_ignore_unions
 
 from ._format import AgeParamType, LanguageParamType, format_provider_errors, plural
@@ -509,7 +511,7 @@ def download(
                     video.subtitles.extend(search_external_subtitles(video.name, directory=directory).values())
                 if check_video(video, languages=language_set, age=age, undefined=single):
                     refine(
-                        video,
+                        [video],
                         refiners=use_refiners,
                         refiner_configs=obj['refiner_configs'],
                         embedded_subtitles=not force and not force_embedded_subtitles,

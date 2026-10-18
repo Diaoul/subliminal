@@ -271,6 +271,14 @@ class ProxyRefiner:
     stage: ClassVar[int] = 5
     priority: int = 0
 
+    def __init__(
+        self,
+        session: aiohttp.ClientSession | None = None,
+        **kwargs: Any,
+    ) -> None:
+        self.session = session if session is not None else aiohttp.ClientSession()
+        self.configs = dict(kwargs)
+
     @classmethod
     def check(cls, video: Video) -> bool:
         """Check if the `video` type is supported by the provider."""
@@ -299,7 +307,7 @@ class ProxyRefiner:
 
     def refine(self, video: Video, **kwargs: Any) -> dict[str, Any]:
         """Refine the video and return a dict."""
-        self._refine(video, **kwargs)
+        self._refine(video, **self.configs, **kwargs)
         return {}
 
 

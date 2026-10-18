@@ -521,6 +521,17 @@ def download(
                 else:
                     ignored_videos.append(video)
 
+            # videos = refine(
+            #     [video_candidates],
+            #     refiners=use_refiners,
+            #     refiner_configs=obj['refiner_configs'],
+            #     check_kwargs={'languages': language_set, 'age': age, 'undefined': single},
+            #     embedded_subtitles=not force and not force_embedded_subtitles,
+            #     providers=use_providers,
+            #     languages=language_set,
+            # )
+            # ignored_videos.extend(list(set(video_candidates) - set(videos)))
+
     # output errored paths
     if verbose > 0:
         for p in errored_paths:

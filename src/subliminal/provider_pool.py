@@ -302,19 +302,20 @@ class ProxyRefiner:
     def terminate(self) -> None:
         """Terminate the provider (logout, cleanup, ...)."""
 
-    def _refine(self, video: Video, **kwargs: Any) -> None:
-        """Refine the video."""
-
     def refine(self, video: Video, **kwargs: Any) -> dict[str, Any]:
         """Refine the video and return a dict."""
-        self._refine(video, **self.configs, **kwargs)
-        return {}
+        raise NotImplementedError
 
 
 def create_refiner_factory(name: str, refine: Callable) -> type[Refiner]:
     """Create a Refiner class from a refine function."""
     class_name = f'{name.title()}Refiner'
-    return type(class_name, (ProxyRefiner,), {'_refiner': refine})
+
+    def refine_method(cls: ProxyRefiner, *args: Any, **kwargs: Any) -> dict[str, Any]:
+        refine(*args, **kwargs)
+        return {}
+
+    return type(class_name, (ProxyRefiner,), {'refine': refine_method})
 
 
 def parse_timeout(timeout: float | None) -> float | None:
@@ -860,18 +861,24 @@ class AsyncRefinerPool(AsyncPool[Refiner | AsyncRefiner]):
     #: Refiners that had an error, discarded or not. A superset of :attr:`discarded_refiners`
     failed_refiners: set[str]
 
+    #: Videos that didn't pass the check and should be ignored
+    ignored_videos: set[Video]
+
     def __init__(
         self,
         refiners: Sequence[str] | None = None,
         refiner_configs: Mapping[str, Any] | None = None,
+        check_kwargs: Mapping[str, Any] | None = None,
         *,
         max_concurrency: int = DEFAULT_MAX_CONCURRENCY,
         timeout: float | None = DEFAULT_TIMEOUT,
         session: aiohttp.ClientSession | None = None,
     ) -> None:
         super().__init__(refiners, refiner_configs, max_concurrency=max_concurrency, timeout=timeout, session=session)
+        self.check_kwargs = dict(check_kwargs) if check_kwargs is not None else {}
         self.discarded_refiners = set()
         self.failed_refiners = set()
+        self.ignored_videos = set()
 
     @staticmethod
     def _get_default_providers() -> list[str]:
@@ -964,10 +971,13 @@ class AsyncRefinerPool(AsyncPool[Refiner | AsyncRefiner]):
 
         return RefinerResult(refiner, status=ResultStatus.OK, video=video, priority=priority, update=update)
 
-    async def refine_by_stage(self, stage: int, refiners: Sequence[str], video: Video, **kwargs: Any) -> None:
-        """Refine video of a specified stage, querying all the providers concurrently."""
+    async def refine_by_stage(self, stage: int, refiners: Sequence[str], video: Video, **kwargs: Any) -> bool:
+        """Refine video of a specified stage, querying all the providers concurrently.
+
+        :return: if the video pass the check
+        """
         if not refiners:
-            return
+            return check_video(video, **self.check_kwargs)
 
         logger.info('Refining video with refiners at stage %i', stage)
 
@@ -990,6 +1000,9 @@ class AsyncRefinerPool(AsyncPool[Refiner | AsyncRefiner]):
         merged_update = {k: v for _, d in sorted_updates for k, v in d.items()}
         video.update(merged_update)
 
+        # Check the video after updating
+        return check_video(video, **self.check_kwargs)
+
     async def refine(self, video: Video, **kwargs: Any) -> None:
         """Refine video, querying all the providers concurrently.
 
@@ -1008,7 +1021,11 @@ class AsyncRefinerPool(AsyncPool[Refiner | AsyncRefiner]):
         # Refine video by stage
         for refiner_stage in sorted(set(refiner_stages.values())):
             refiners = [name for name, stage in refiner_stages.items() if stage == refiner_stage]
-            await self.refine_by_stage(refiner_stage, refiners, video, **kwargs)
+            ok = await self.refine_by_stage(refiner_stage, refiners, video, **kwargs)
+            if not ok:
+                # Check video returned False, no need to refine more
+                self.ignored_videos.add(video)
+                break
 
     async def refine_videos(self, videos: Sequence[Video], **kwargs: Any) -> None:
         """Refine several videos, one video at a time.
@@ -1345,9 +1362,10 @@ async def async_refine(
     *,
     refiners: Sequence[str] | None = None,
     refiner_configs: Mapping[str, Any] | None = None,
+    check_kwargs: Mapping[str, Any] | None = None,
     pool_class: type[AsyncRefinerPool] = AsyncRefinerPool,
     **kwargs: Any,
-) -> None:
+) -> set[Video]:
     """Refine a video using :ref:`refiners`.
 
     .. note::
@@ -1359,21 +1377,24 @@ async def async_refine(
     :param Sequence refiners: refiners to select. None defaults to all refiners.
     :param dict refiner_configs: refiner configuration as keyword arguments per refiner name to pass when
         calling the refine method
+    :param dict check_kwargs: arguments to pass to the check_video function
     :param pool_class: class to use as refiner pool.
     :type pool_class: :class:`AsyncRefinerPool` or similar
     :param kwargs: additional parameters for the `refine` method.
-
+    :return: the videos that are not ignored.
+    :rtype: set of :class:`~subliminal.video.Video`
     """
     # return immediately if no video passed the checks
     if not videos:
-        return None
+        return set()
 
     # refine videos
-    async with pool_class(refiners=refiners, refiner_configs=refiner_configs) as pool:
-        return await pool.refine_videos(videos, **kwargs)
+    async with pool_class(refiners=refiners, refiner_configs=refiner_configs, check_kwargs=check_kwargs) as pool:
+        await pool.refine_videos(videos, **kwargs)
+        return set(videos) - pool.ignored_videos
 
 
-def refine(*args: Any, **kwargs: Any) -> None:
+def refine(*args: Any, **kwargs: Any) -> set[Video]:
     """Refine videos using :ref:`refiners`."""
     _check_no_running_loop()
     return asyncio.run(async_refine(*args, **kwargs))

@@ -6,7 +6,8 @@ import os
 import shlex
 import subprocess
 import sys
-from dataclasses import dataclass
+import traceback
+from dataclasses import dataclass, field
 from io import BytesIO
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, cast
@@ -20,7 +21,7 @@ from babelfish import Country, Language  # type: ignore[import-untyped]
 import subliminal
 import subliminal.refiners.hash
 from subliminal.cache import region
-from subliminal.extensions import RegistrableExtensionManager
+from subliminal.extensions import RegistrableExtensionManager, parse_extension_error
 from subliminal.providers.mock import MockSubtitle, mock_subtitle_provider
 from subliminal.video import Episode, Movie
 
@@ -949,7 +950,11 @@ def refiner_manager(monkeypatch: pytest.MonkeyPatch) -> Generator[RegistrableExt
     original_refiner_manager = subliminal.extensions.refiner_manager
 
     # Create a mock refiner manager (namespace cannot be 'subliminal.refiners')
-    patched_refiner_manager = RegistrableExtensionManager('subliminal.mock-refiners', [])
+    patched_refiner_manager = RegistrableExtensionManager(
+        'subliminal.mock-refiners',
+        ['external_subtitles = subliminal.refiners.external_subtitles:ExternalSubtitlesRefiner'],
+        on_load_failure_callback=parse_extension_error,
+    )
 
     # Replace the provider_manager in all the module were it is imported
     subliminal.extensions.refiner_manager = patched_refiner_manager
@@ -1059,7 +1064,8 @@ class CliResult:
     return_value: Any
     exit_code: int
     exception: BaseException | None = None
-    exc_info: OptExcInfo | None = None
+    # exc_info: OptExcInfo | None = None
+    traceback_messages: list[str] = field(default_factory=list)
     out: str = ''
     err: str = ''
 
@@ -1181,11 +1187,14 @@ class CliRunner:
                 exit_code = 1
                 exc_info = sys.exc_info()
 
+        # Get the traceback message
+        traceback_messages = traceback.format_exception(*exc_info) if exc_info is not None else []
+
         return CliResult(
             return_value=return_value,
             exit_code=exit_code,
             exception=exception,
-            exc_info=exc_info,
+            traceback_messages=traceback_messages,
         )
 
 

@@ -17,7 +17,6 @@ from subliminal import (
     Movie,
     Video,
     __version__,
-    check_video,
     compute_score,
     get_scores,
     provider_manager,
@@ -28,7 +27,6 @@ from subliminal.core import (
     ARCHIVE_EXTENSIONS,
     collect_video_filepaths,
     scan_path,
-    search_external_subtitles,
 )
 from subliminal.exceptions import GuessingError
 from subliminal.extensions import get_default_providers, get_default_refiners
@@ -505,32 +503,34 @@ def download(
                 video_candidates.append(video)
 
             # check and refine videos
-            for video in video_candidates:
-                if not force and not force_external_subtitles:
-                    video.subtitles.extend(search_external_subtitles(video.name, directory=directory).values())
-                if check_video(video, languages=language_set, age=age, undefined=single):
-                    refine(
-                        [video],
-                        refiners=use_refiners,
-                        refiner_configs=obj['refiner_configs'],
-                        embedded_subtitles=not force and not force_embedded_subtitles,
-                        providers=use_providers,
-                        languages=language_set,
-                    )
-                    videos.append(video)
-                else:
-                    ignored_videos.append(video)
+            # for video in video_candidates:
+            #     if not force and not force_external_subtitles:
+            #         video.subtitles.extend(search_external_subtitles(video.name, directory=directory).values())
+            #     if check_video(video, languages=language_set, age=age, undefined=single):
+            #         refine(
+            #             [video],
+            #             refiners=use_refiners,
+            #             refiner_configs=obj['refiner_configs'],
+            #             embedded_subtitles=not force and not force_embedded_subtitles,
+            #             providers=use_providers,
+            #             languages=language_set,
+            #         )
+            #         videos.append(video)
+            #     else:
+            #         ignored_videos.append(video)
 
-            # videos = refine(
-            #     [video_candidates],
-            #     refiners=use_refiners,
-            #     refiner_configs=obj['refiner_configs'],
-            #     check_kwargs={'languages': language_set, 'age': age, 'undefined': single},
-            #     embedded_subtitles=not force and not force_embedded_subtitles,
-            #     providers=use_providers,
-            #     languages=language_set,
-            # )
-            # ignored_videos.extend(list(set(video_candidates) - set(videos)))
+            videos = refine(
+                video_candidates,
+                languages=language_set,
+                refiners=use_refiners,
+                refiner_configs=obj['refiner_configs'],
+                check_kwargs={'languages': language_set, 'age': age, 'undefined': single},
+                embedded_subtitles=not force and not force_embedded_subtitles,
+                external_subtitles=not force and not force_external_subtitles,
+                directory=directory,
+                providers=use_providers,
+            )
+            ignored_videos.extend(list(set(video_candidates) - set(videos)))
 
     # output errored paths
     if verbose > 0:
@@ -712,7 +712,7 @@ async def async_list_subtitles(
     providers: Sequence[str] | None = None,
     provider_configs: dict[str, Any] | None = None,
     debug: bool = False,
-    min_score: int = 100,
+    min_score: int = 0,
     **kwargs: Any,
 ) -> dict[Video, list[Subtitle]]:
     """List subtitles from asynchronous AsyncRefinerPool."""

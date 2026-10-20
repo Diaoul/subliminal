@@ -126,6 +126,7 @@ tvsubtitles = "subliminal.providers.tvsubtitles:TVsubtitlesProvider"
 
 [project.entry-points."subliminal.refiners"]
 hash = "subliminal.refiners.hash:refine"
+external_subtitles = "subliminal.refiners.external_subtitles:ExternalSubtitlesRefiner"
 metadata = "subliminal.refiners.metadata:refine"
 omdb = "subliminal.refiners.omdb:refine"
 tmdb = "subliminal.refiners.tmdb:refine"

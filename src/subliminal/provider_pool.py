@@ -28,6 +28,7 @@ from .extensions import (
 )
 from .matches import fps_matches
 from .providers import Provider
+from .refiners import AsyncRefiner
 from .score import compute_score as default_compute_score
 from .subtitle import SUBTITLE_EXTENSIONS, ExternalSubtitle, filter_and_sort_categories
 from .utils import get_age, handle_exception
@@ -226,31 +227,6 @@ class Refiner(Protocol):
         ...
 
     def refine(self, video: Video, **kwargs: Any) -> dict[str, Any]:
-        """Refine the video."""
-        ...
-
-
-@runtime_checkable
-class AsyncRefiner(Protocol):
-    """Structural type for providers that have been ported to :mod:`aiohttp`."""
-
-    stage: ClassVar[int]
-    priority: int
-
-    @classmethod
-    def check(cls, video: Video) -> bool:
-        """Check if the `video` type is supported by the provider."""
-        ...
-
-    async def initialize(self) -> None:
-        """Initialize the provider (login, session setup, ...)."""
-        ...
-
-    async def terminate(self) -> None:
-        """Terminate the provider (logout, cleanup, ...)."""
-        ...
-
-    async def refine(self, video: Video, **kwargs: Any) -> dict[str, Any]:
         """Refine the video."""
         ...
 
@@ -693,14 +669,17 @@ class AsyncProviderPool(AsyncPool[Provider | AsyncProvider]):
             return []
 
         results = await asyncio.gather(*(self.list_subtitles_provider(name, video, languages) for name in names))
+        logger.debug('Results of list_subtitles: %r', results)
 
         subtitles: list[Subtitle] = []
         for provider_result in results:
+            name = provider_result.provider
             if provider_result.outage():
-                logger.info('Discarding provider %s', provider_result.provider)
+                logger.info('Discarding provider %s', name)
                 self._discard_provider(name)
                 continue
             if provider_result.failure():
+                logger.info('Provider failed with a non-discarding error: %s', name)
                 self.failed_providers.add(name)
 
             # add the subtitles
@@ -971,10 +950,16 @@ class AsyncRefinerPool(AsyncPool[Refiner | AsyncRefiner]):
 
         return RefinerResult(refiner, status=ResultStatus.OK, video=video, priority=priority, update=update)
 
-    async def refine_by_stage(self, stage: int, refiners: Sequence[str], video: Video, **kwargs: Any) -> bool:
-        """Refine video of a specified stage, querying all the providers concurrently.
+    async def refine_by_stage(
+        self,
+        stage: int,
+        refiners: Sequence[str],
+        video: Video,
+        **kwargs: Any,
+    ) -> bool:
+        """Refine video at a specified stage, querying all the providers concurrently, then check the video.
 
-        :return: if the video pass the check
+        :return: True if the video pass the check
         """
         if not refiners:
             return check_video(video, **self.check_kwargs)
@@ -982,6 +967,7 @@ class AsyncRefinerPool(AsyncPool[Refiner | AsyncRefiner]):
         logger.info('Refining video with refiners at stage %i', stage)
 
         results = await asyncio.gather(*(self.refine_provider(refiner, video, **kwargs) for refiner in refiners))
+        logger.debug('Results of refining at stage %i: %r', stage, results)
 
         updates: list[tuple[int, dict[str, Any]]] = []
         for refiner_result in results:
@@ -1003,40 +989,53 @@ class AsyncRefinerPool(AsyncPool[Refiner | AsyncRefiner]):
         # Check the video after updating
         return check_video(video, **self.check_kwargs)
 
-    async def refine(self, video: Video, **kwargs: Any) -> None:
+    async def refine(self, video: Video, **kwargs: Any) -> Video | None:
         """Refine video, querying all the providers concurrently.
 
-        :return: found subtitles, in :attr:`providers` order.
+        :return: :class:`~subliminal.video.Video` if it passed the check or None
+        :rtype: :class:`~subliminal.video.Video` or None
         """
         names = [name for name in self.refiners if name not in self.discarded_refiners]
         for name in set(self.refiners) & self.discarded_refiners:
             logger.debug('Skipping discarded refiners %r', name)
 
         if not names:
-            return
+            # No refiners for this stage, but there can be refiners at later stages. Pass the video
+            return video
 
         # Get refiner stages
         refiner_stages = {name: self._get_plugin(name).stage for name in names}
+        stages = sorted(set(refiner_stages.values()))
+        logger.debug('Found refining stages: %r', stages)
 
         # Refine video by stage
-        for refiner_stage in sorted(set(refiner_stages.values())):
+        for refiner_stage in stages:
             refiners = [name for name, stage in refiner_stages.items() if stage == refiner_stage]
             ok = await self.refine_by_stage(refiner_stage, refiners, video, **kwargs)
             if not ok:
-                # Check video returned False, no need to refine more
-                self.ignored_videos.add(video)
-                break
+                # Check video returned False, no need to refine more, do not pass the video
+                logger.info('After stage %i refining, ignoring video: %r', refiner_stage, video)
+                return None
+        return video
 
-    async def refine_videos(self, videos: Sequence[Video], **kwargs: Any) -> None:
+    async def refine_videos(self, videos: Sequence[Video], **kwargs: Any) -> set[Video]:
         """Refine several videos, one video at a time.
 
         Videos are handled sequentially on purpose: providers are queried concurrently within
         a video already, and going wider mostly buys rate-limit errors. Use
         :attr:`max_concurrency` to tune the actual parallelism.
+
+        :return: videos that passed the checks
+        :rtype: set of :class:`~subliminal.video.Video`
         """
+        final_videos = set()
         for video in videos:
             logger.info('Refine video %r', video)
-            await self.refine(video, **kwargs)
+            video_or_none = await self.refine(video, **kwargs)
+            if video_or_none is not None:
+                final_videos.add(video_or_none)
+
+        return final_videos
 
 
 def check_video(
@@ -1384,14 +1383,13 @@ async def async_refine(
     :return: the videos that are not ignored.
     :rtype: set of :class:`~subliminal.video.Video`
     """
-    # return immediately if no video passed the checks
+    # return immediately if no videos
     if not videos:
         return set()
 
     # refine videos
     async with pool_class(refiners=refiners, refiner_configs=refiner_configs, check_kwargs=check_kwargs) as pool:
-        await pool.refine_videos(videos, **kwargs)
-        return set(videos) - pool.ignored_videos
+        return await pool.refine_videos(videos, **kwargs)
 
 
 def refine(*args: Any, **kwargs: Any) -> set[Video]:

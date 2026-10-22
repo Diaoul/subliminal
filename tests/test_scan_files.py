@@ -3,24 +3,18 @@ from __future__ import annotations
 import os
 import re
 from datetime import datetime, timedelta, timezone
-from textwrap import dedent
 from typing import TYPE_CHECKING, Any
 from unittest.mock import Mock
 
 import pytest
-from babelfish import Language  # type: ignore[import-untyped]
 
-from subliminal.core import (
-    check_video,
-    save_subtitles,
+from subliminal.scan_files import (
     scan_name,
     scan_path,
     scan_video,
     scan_video_or_archive,
     scan_videos,
-    search_external_subtitles,
 )
-from subliminal.subtitle import Subtitle
 from subliminal.utils import timestamp
 from subliminal.video import Episode, Movie
 from tests.conftest import ensure
@@ -30,104 +24,6 @@ if TYPE_CHECKING:
 
 # Core test
 pytestmark = pytest.mark.core
-
-
-def test_check_video_languages(movies: dict[str, Movie]) -> None:
-    video = movies['man_of_steel']
-    languages = {Language('fra'), Language('eng')}
-    assert check_video(video, languages=languages)
-    video.subtitles = [Subtitle(lang) for lang in languages]
-    assert not check_video(video, languages=languages)
-
-
-def test_check_video_age(movies: dict[str, Movie], monkeypatch: pytest.MonkeyPatch) -> None:
-    video = movies['man_of_steel']
-    monkeypatch.setattr('subliminal.video.Video.age', timedelta(weeks=2))
-    assert check_video(video, age=timedelta(weeks=3))
-    assert not check_video(video, age=timedelta(weeks=1))
-
-
-def test_check_video_undefined(movies: dict[str, Movie]) -> None:
-    video = movies['man_of_steel']
-    assert check_video(video, undefined=False)
-    assert check_video(video, undefined=True)
-    video.subtitles = [Subtitle(Language('und'))]
-    assert check_video(video, undefined=False)
-    assert not check_video(video, undefined=True)
-
-
-def test_search_external_subtitles(episodes: dict[str, Episode], tmp_path: Path) -> None:
-    video_name = os.path.split(episodes['bbt_s07e05'].name)[1]
-    video_root = os.path.splitext(video_name)[0]
-    video_path = ensure(tmp_path / video_name)
-    expected_subtitles = {
-        video_name + '.srt': Language('und'),
-        video_root + '.srt': Language('und'),
-        video_root + '.en.srt': Language('eng'),
-        video_name + '.fra.srt': Language('fra'),
-        video_root + '.pt-BR.srt': Language('por', 'BR'),
-        video_name + '.sr_cyrl.sub': Language('srp', script='Cyrl'),
-        video_name + '.re.srt': Language('und'),
-        video_name + '.something.srt': Language('und'),
-    }
-    ensure(tmp_path / (os.path.basename(episodes['got_s03e10'].name) + '.srt'))
-    for path in expected_subtitles:
-        ensure(tmp_path / path)
-    subtitles = search_external_subtitles(video_path)
-    subtitle_languages = {path: subtitle.language for path, subtitle in subtitles.items()}
-    assert subtitle_languages == expected_subtitles
-
-
-def test_search_external_subtitles_archive(movies: dict[str, Movie], tmp_path: Path) -> None:
-    video_name = os.path.split(movies['interstellar'].name)[1]
-    video_root = os.path.splitext(video_name)[0]
-    video_path = ensure(tmp_path / video_name)
-    expected_subtitles = {
-        video_name + '.srt': Language('und'),
-        video_root + '.srt': Language('und'),
-        video_root + '.en.srt': Language('eng'),
-        video_name + '.fra.srt': Language('fra'),
-        video_root + '.pt-BR.srt': Language('por', 'BR'),
-        video_name + '.sr_cyrl.sub': Language('srp', script='Cyrl'),
-        video_name + '.something.srt': Language('und'),
-    }
-    ensure(tmp_path / (os.path.split(movies['interstellar'].name)[1] + '.srt'))
-    for path in expected_subtitles:
-        ensure(tmp_path / path)
-    subtitles = search_external_subtitles(video_path)
-    subtitle_languages = {path: subtitle.language for path, subtitle in subtitles.items()}
-    assert subtitle_languages == expected_subtitles
-
-
-def test_search_external_subtitles_no_directory(
-    movies: dict[str, Movie],
-    tmp_path: Path,
-    monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    video_name = os.path.split(movies['man_of_steel'].name)[1]
-    video_root = os.path.splitext(video_name)[0]
-    ensure(tmp_path / video_name)
-    monkeypatch.chdir(tmp_path)
-    expected_subtitles = {video_name + '.srt': Language('und'), video_root + '.en.srt': Language('eng')}
-    for path in expected_subtitles:
-        ensure(tmp_path / path)
-    subtitles = search_external_subtitles(video_name)
-    subtitle_languages = {path: subtitle.language for path, subtitle in subtitles.items()}
-    assert subtitle_languages == expected_subtitles
-
-
-def test_search_external_subtitles_in_directory(episodes: dict[str, Episode], tmp_path: Path) -> None:
-    video_name = episodes['marvels_agents_of_shield_s02e06'].name
-    video_root = os.path.splitext(video_name)[0]
-    ensure(tmp_path / 'tvshows' / video_name)
-    subtitles_directory = ensure(tmp_path / 'subtitles', directory=True)
-    expected_subtitles = {video_name + '.srt': Language('und'), video_root + '.en.srt': Language('eng')}
-    ensure(tmp_path / 'tvshows' / (video_name + '.fr.srt'))
-    for path in expected_subtitles:
-        ensure(tmp_path / 'subtitles' / path)
-    subtitles = search_external_subtitles(video_name, directory=subtitles_directory)
-    subtitle_languages = {path: subtitle.language for path, subtitle in subtitles.items()}
-    assert subtitle_languages == expected_subtitles
 
 
 def test_scan_video_movie(movies: dict[str, Movie], tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
@@ -294,7 +190,7 @@ def test_scan_path(
     import subliminal
 
     mock = Mock()
-    monkeypatch.setattr(subliminal.core, 'scan_video_or_archive', mock)
+    monkeypatch.setattr(subliminal.scan_files, 'scan_video_or_archive', mock)
 
     video = movies['interstellar']
     ensure(tmp_path / video.name)
@@ -347,9 +243,9 @@ def test_scan_videos(movies: dict[str, Movie], tmp_path: Path, monkeypatch: pyte
     # mock scan_video and scan_archive with the correct types
     mock_video = Mock(subtitle_languages=set())
     mock_scan_video = Mock(return_value=mock_video)
-    monkeypatch.setattr('subliminal.core.scan_video', mock_scan_video)
+    monkeypatch.setattr('subliminal.scan_files.scan_video', mock_scan_video)
     mock_scan_archive = Mock(return_value=mock_video)
-    monkeypatch.setattr('subliminal.core.scan_archive', mock_scan_archive)
+    monkeypatch.setattr('subliminal.scan_files.scan_archive', mock_scan_archive)
     monkeypatch.chdir(tmp_path)
     videos = scan_videos('movies')
 
@@ -380,9 +276,9 @@ def test_scan_videos_age(movies: dict[str, Movie], tmp_path: Path, monkeypatch: 
     # mock scan_video and scan_archive with the correct types
     mock_video = Mock(subtitle_languages=set())
     mock_scan_video = Mock(return_value=mock_video)
-    monkeypatch.setattr('subliminal.core.scan_video', mock_scan_video)
+    monkeypatch.setattr('subliminal.scan_files.scan_video', mock_scan_video)
     mock_scan_archive = Mock(return_value=mock_video)
-    monkeypatch.setattr('subliminal.core.scan_archive', mock_scan_archive)
+    monkeypatch.setattr('subliminal.scan_files.scan_archive', mock_scan_archive)
     monkeypatch.chdir(tmp_path)
     videos = scan_videos('movies', age=timedelta(days=7))
 
@@ -395,96 +291,3 @@ def test_scan_videos_age(movies: dict[str, Movie], tmp_path: Path, monkeypatch: 
     kwargs: dict[str, Any] = {'name': None}
     scan_video_calls = [((os.path.join('movies', movies['man_of_steel'].name),), kwargs)]
     mock_scan_video.assert_has_calls(scan_video_calls, any_order=True)  # type: ignore[arg-type]  # ty: ignore[invalid-argument-type]
-
-
-def test_save_subtitles(movies: dict[str, Movie], tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.chdir(tmp_path)
-    ensure(tmp_path / movies['man_of_steel'].name)
-    subtitle_no_content = Subtitle(Language('eng'), '')
-    subtitle = Subtitle(Language('fra'), '')
-    subtitle.set_content(b'Some content')
-    subtitle_other = Subtitle(Language('fra'), '')
-    subtitle_other.set_content(b'Some other content')
-    subtitle_pt_br = Subtitle(Language('por', 'BR'), '')
-    subtitle_pt_br.set_content(b'Some brazilian content')
-    subtitles = [subtitle_no_content, subtitle, subtitle_other, subtitle_pt_br]
-
-    save_subtitles(movies['man_of_steel'], subtitles)
-
-    # subtitle without content is skipped
-    path = tmp_path / (os.path.splitext(movies['man_of_steel'].name)[0] + '.en.srt')
-    assert not path.is_file()
-
-    # first subtitle with language is saved
-    path = tmp_path / (os.path.splitext(movies['man_of_steel'].name)[0] + '.fr.srt')
-    assert path.is_file()
-    assert path.open('rb').read() == b'Some content'
-
-    # ietf language in path
-    path = tmp_path / (os.path.splitext(movies['man_of_steel'].name)[0] + '.pt-BR.srt')
-    assert path.is_file()
-    assert path.open('rb').read() == b'Some brazilian content'
-
-
-def test_save_subtitles_single_directory_encoding(movies: dict[str, Movie], tmp_path: Path) -> None:
-    subtitle = Subtitle(Language('jpn'), '')
-    subtitle.set_content('ハローワールド'.encode('shift-jis'))
-    subtitle_pt_br = Subtitle(Language('por', 'BR'), '')
-    subtitle_pt_br.set_content(b'Some brazilian content')
-    subtitles = [subtitle, subtitle_pt_br]
-
-    save_subtitles(movies['man_of_steel'], subtitles, single=True, directory=os.fspath(tmp_path), encoding='utf-8')
-
-    # first subtitle only and correctly encoded
-    path = tmp_path / (os.path.splitext(os.path.split(movies['man_of_steel'].name)[1])[0] + '.srt')
-    assert path.is_file()
-    assert path.open(encoding='utf-8').read() == 'ハローワールド'
-
-
-def test_save_subtitles_convert(movies: dict[str, Movie], tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    video = movies['man_of_steel']
-
-    monkeypatch.chdir(tmp_path)
-    ensure(tmp_path / video.name)
-
-    text = dedent(
-        """\
-        [Script Info]
-        WrapStyle: 0
-        ScaledBorderAndShadow: yes
-        Collisions: Normal
-        ScriptType: v4.00+
-
-        [V4+ Styles]
-        Format: Name, Fontname, Fontsize, PrimaryColour
-        Style: Default,Arial,20,&H00FFFFFF
-
-        [Events]
-        Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
-        Dialogue: 0,0:00:49.54,0:00:52.96,Default,,0,0,0,,Tłumaczenie:\\Nsinu6
-        Dialogue: 0,0:02:11.08,0:02:12.88,Default,,0,0,0,,/Nie rozumiecie?
-        """
-    )
-    subtitle = Subtitle(Language('pol'), '')
-    subtitle.set_content(text.encode('utf-8'))
-    subtitles = [subtitle]
-
-    save_subtitles(video, subtitles, single=True, subtitle_format='srt')
-
-    # converted to srt
-    srt_text = dedent(
-        """\
-        1
-        00:00:49,540 --> 00:00:52,960
-        Tłumaczenie:
-        sinu6
-
-        2
-        00:02:11,080 --> 00:02:12,880
-        /Nie rozumiecie?
-
-        """
-    )
-    path = tmp_path / (os.path.splitext(video.name)[0] + '.srt')
-    assert path.is_file()
-    assert path.open(encoding='utf-8').read() == srt_text

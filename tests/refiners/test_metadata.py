@@ -10,13 +10,13 @@ from babelfish import Language  # type: ignore[import-untyped]
 from knowit.units import units  # type: ignore[import-untyped]
 from packaging.version import Version
 
-from subliminal.core import scan_video
 from subliminal.refiners.metadata import (
     get_float,
     get_subtitle_format_from_knowit,
     loaded_providers,
     refine,
 )
+from subliminal.scan_files import scan_video
 
 providers = ['mediainfo', 'ffmpeg', 'mkvmerge', 'enzyme']
 

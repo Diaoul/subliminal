@@ -6,12 +6,15 @@ import logging
 import os
 from typing import TYPE_CHECKING, Any, ClassVar
 
+import aiofiles.os
+
 from subliminal.subtitle import SUBTITLE_EXTENSIONS, ExternalSubtitle
 from subliminal.video import Episode, Movie
 
 from . import AsyncRefiner
 
 if TYPE_CHECKING:
+    from subliminal.subtitle import ExternalSubtitles
     from subliminal.video import Video
 
 logger = logging.getLogger(__name__)
@@ -37,6 +40,37 @@ def parse_language_code(subtitle_filename: str, video_filename: str) -> str | No
     # extract the potential language code
     language_code = subtitle_filename[len(fileroot) : -len(os.path.splitext(subtitle_filename)[1])]
     return language_code.replace(fileext, '').replace('_', '-')[1:]
+
+
+async def search_external_subtitles(
+    path: str | os.PathLike,
+    *,
+    directory: str | os.PathLike | None = None,
+) -> list[ExternalSubtitles]:
+    """Search for external subtitles from a video `path` and their associated language.
+
+    Unless `directory` is provided, search will be made in the same directory as the video file.
+
+    :param str path: path to the video.
+    :param str directory: directory to search for subtitles.
+    :return: found subtitles with their languages.
+    :rtype: list
+
+    """
+    # split path
+    dirpath, filename = os.path.split(path)
+    dirpath = dirpath or '.'
+
+    # search for subtitles
+    subtitles = []
+    for p in await aiofiles.os.listdir(directory or dirpath):
+        language_code = parse_language_code(p, filename)
+        if language_code is None:
+            continue
+
+        subtitle = ExternalSubtitle.from_language_code(language_code, subtitle_path=p)
+        subtitles.append(subtitle)
+    return subtitles
 
 
 class ExternalSubtitlesRefiner(AsyncRefiner):
@@ -82,20 +116,8 @@ class ExternalSubtitlesRefiner(AsyncRefiner):
             logger.debug('Ignoring external subtitles')
             return {}
 
-        path = video.name
-        # split path
-        dirpath, filename = os.path.split(path)
-        dirpath = dirpath or '.'
-
-        # search for subtitles
-        subtitles = []
-        for p in os.listdir(directory or dirpath):
-            language_code = parse_language_code(p, filename)
-            if language_code is None:
-                continue
-
-            subtitle = ExternalSubtitle.from_language_code(language_code, subtitle_path=p)
-            subtitles.append(subtitle)
+        # List external subtitles
+        subtitles = await search_external_subtitles(video.name, directory=directory)
 
         if subtitles:
             logger.debug('Found subtitles %r', subtitles)

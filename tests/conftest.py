@@ -653,7 +653,6 @@ def provider_manager(monkeypatch: pytest.MonkeyPatch) -> Generator[RegistrableEx
 
     # Replace the provider_manager in all the module were it is imported
     subliminal.extensions.provider_manager = patched_provider_manager
-    subliminal.core.provider_manager = patched_provider_manager
     subliminal.refiners.hash.provider_manager = patched_provider_manager  # type: ignore[attr-defined]
     subliminal.provider_pool.provider_manager = patched_provider_manager
 
@@ -923,7 +922,6 @@ def provider_manager(monkeypatch: pytest.MonkeyPatch) -> Generator[RegistrableEx
 
     # Recover the original provider_manager in all the modules
     subliminal.extensions.provider_manager = original_provider_manager
-    subliminal.core.provider_manager = original_provider_manager
     subliminal.refiners.hash.provider_manager = original_provider_manager  # type: ignore[attr-defined]
     subliminal.provider_pool.provider_manager = original_provider_manager
 
@@ -958,7 +956,6 @@ def refiner_manager(monkeypatch: pytest.MonkeyPatch) -> Generator[RegistrableExt
 
     # Replace the provider_manager in all the module were it is imported
     subliminal.extensions.refiner_manager = patched_refiner_manager
-    subliminal.core.refiner_manager = patched_refiner_manager
     subliminal.provider_pool.refiner_manager = patched_refiner_manager
 
     # Yield the mocked refiner_manager
@@ -966,7 +963,6 @@ def refiner_manager(monkeypatch: pytest.MonkeyPatch) -> Generator[RegistrableExt
 
     # Recover the original refiner_manager in all the modules
     subliminal.extensions.refiner_manager = original_refiner_manager
-    subliminal.core.refiner_manager = original_refiner_manager
     subliminal.provider_pool.refiner_manager = original_refiner_manager
 
 

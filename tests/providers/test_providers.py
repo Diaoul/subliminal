@@ -1,19 +1,16 @@
 import os
-from typing import cast
 from unittest.mock import Mock
 
 import pytest
 from babelfish import Language  # type: ignore[import-untyped]
 from vcr import VCR  # type: ignore[import-untyped]
 
-from subliminal.core import (
-    AsyncProviderPool,
-    ProviderPool,
+from subliminal.extensions import disabled_providers, provider_manager
+from subliminal.provider_pool import (
     download_best_subtitles,
     download_subtitles,
     list_subtitles,
 )
-from subliminal.extensions import disabled_providers, provider_manager
 from subliminal.providers.tvsubtitles import TVsubtitlesSubtitle
 from subliminal.score import episode_scores
 from subliminal.subtitle import Subtitle
@@ -37,6 +34,7 @@ def _mock_providers(monkeypatch: pytest.MonkeyPatch) -> None:
         monkeypatch.setattr(provider.plugin, 'terminate', Mock())
 
 
+<<<<<<< HEAD
 @pytest.mark.usefixtures('_mock_providers')
 def test_provider_pool_list_subtitles(episodes: dict[str, Episode]) -> None:
     pool = ProviderPool()
@@ -75,6 +73,67 @@ def test_async_provider_pool_list_subtitles(episodes: dict[str, Episode]) -> Non
         assert provider_manager[provider_s].plugin.list_subtitles.called  # type: ignore[attr-defined]
 
 
+||||||| parent of 1c11dc4 (Refactor and rename files; add aiofiles dependency)
+def test_provider_pool_get_keyerror() -> None:
+    pool = ProviderPool()
+    with pytest.raises(KeyError):
+        pool['de7cidda']
+
+
+def test_provider_pool_del_keyerror() -> None:
+    pool = ProviderPool()
+    with pytest.raises(KeyError):
+        del pool['addic7ed']
+
+
+@pytest.mark.usefixtures('_mock_providers')
+def test_provider_pool_iter() -> None:
+    pool = ProviderPool()
+    assert len(list(pool)) == 0
+    pool['tvsubtitles']
+    assert len(list(pool)) == 1
+
+
+@pytest.mark.usefixtures('_mock_providers')
+def test_provider_pool_list_subtitles(episodes: dict[str, Episode]) -> None:
+    pool = ProviderPool()
+    subtitles = pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
+    assert sorted(subtitles) == [  # type: ignore[type-var,comparison-overlap]
+        'addic7ed',
+        'gestdown',
+        'opensubtitles',
+        'opensubtitlescom',
+        'podnapisi',
+        'subtitulamos',
+        'tvsubtitles',
+    ]
+    for provider in subtitles:
+        provider_s = cast('str', provider)
+        assert provider_manager[provider_s].plugin.initialize.called  # type: ignore[attr-defined]
+        assert provider_manager[provider_s].plugin.list_subtitles.called  # type: ignore[attr-defined]
+
+
+@pytest.mark.usefixtures('_mock_providers')
+def test_async_provider_pool_list_subtitles(episodes: dict[str, Episode]) -> None:
+    pool = AsyncProviderPool()
+    subtitles = pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
+    assert sorted(subtitles) == [  # type: ignore[type-var,comparison-overlap]
+        'addic7ed',
+        'gestdown',
+        'opensubtitles',
+        'opensubtitlescom',
+        'podnapisi',
+        'subtitulamos',
+        'tvsubtitles',
+    ]
+    for provider in subtitles:
+        provider_s = cast('str', provider)
+        assert provider_manager[provider_s].plugin.initialize.called  # type: ignore[attr-defined]
+        assert provider_manager[provider_s].plugin.list_subtitles.called  # type: ignore[attr-defined]
+
+
+=======
+>>>>>>> 1c11dc4 (Refactor and rename files; add aiofiles dependency)
 @pytest.mark.usefixtures('_mock_providers')
 def test_list_subtitles_movie(movies: dict[str, Movie]) -> None:
     video = movies['man_of_steel']

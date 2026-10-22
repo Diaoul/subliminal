@@ -1,25 +1,31 @@
 from __future__ import annotations
 
+import os
+from datetime import timedelta
+from textwrap import dedent
 from typing import TYPE_CHECKING, Any, cast
-from unittest.mock import Mock, call, patch
+from unittest.mock import AsyncMock, Mock, call, patch
 
 import pytest
 from babelfish import Language  # type: ignore[import-untyped]
 
-from subliminal.core import (
+from subliminal.provider_pool import (
     AsyncProviderPool,
-    ProviderPool,
+    check_video,
     download_best_subtitles,
     download_subtitles,
     list_subtitles,
     refine,
     refiner_manager,
+    save_subtitles,
 )
 from subliminal.score import episode_scores
 from subliminal.subtitle import Subtitle
+from tests.conftest import ensure
 
 if TYPE_CHECKING:
     from collections.abc import Callable
+    from pathlib import Path
 
     from subliminal.extensions import RegistrableExtensionManager
     from subliminal.providers.mock import MockProvider
@@ -36,10 +42,10 @@ pytestmark = [
 @pytest.fixture
 def _mock_providers(monkeypatch: pytest.MonkeyPatch, provider_manager: RegistrableExtensionManager) -> None:
     for provider in provider_manager:
-        monkeypatch.setattr(provider.plugin, 'initialize', Mock())
-        monkeypatch.setattr(provider.plugin, 'list_subtitles', Mock(return_value=[provider.name]))
-        monkeypatch.setattr(provider.plugin, 'download_subtitle', Mock())
-        monkeypatch.setattr(provider.plugin, 'terminate', Mock())
+        monkeypatch.setattr(provider.plugin, 'initialize', AsyncMock())
+        monkeypatch.setattr(provider.plugin, 'list_subtitles', AsyncMock(return_value=[provider.name]))
+        monkeypatch.setattr(provider.plugin, 'download_subtitle', AsyncMock())
+        monkeypatch.setattr(provider.plugin, 'terminate', AsyncMock())
 
 
 @pytest.fixture
@@ -76,37 +82,61 @@ def mock_refiners_hash_broken(monkeypatch: pytest.MonkeyPatch) -> Mock:
     return mock
 
 
-def test_provider_pool_get_keyerror() -> None:
-    pool = ProviderPool()
+def test_check_video_languages(movies: dict[str, Movie]) -> None:
+    video = movies['man_of_steel']
+    languages = {Language('fra'), Language('eng')}
+    assert check_video(video, languages=languages)
+    video.subtitles = [Subtitle(lang) for lang in languages]
+    assert not check_video(video, languages=languages)
+
+
+def test_check_video_age(movies: dict[str, Movie], monkeypatch: pytest.MonkeyPatch) -> None:
+    video = movies['man_of_steel']
+    monkeypatch.setattr('subliminal.video.Video.age', timedelta(weeks=2))
+    assert check_video(video, age=timedelta(weeks=3))
+    assert not check_video(video, age=timedelta(weeks=1))
+
+
+def test_check_video_undefined(movies: dict[str, Movie]) -> None:
+    video = movies['man_of_steel']
+    assert check_video(video, undefined=False)
+    assert check_video(video, undefined=True)
+    video.subtitles = [Subtitle(Language('und'))]
+    assert check_video(video, undefined=False)
+    assert not check_video(video, undefined=True)
+
+
+@pytest.mark.asyncio
+async def test_provider_pool_get_keyerror() -> None:
+    pool = AsyncProviderPool()
+    await pool.initialize()
     with pytest.raises(KeyError):
-        pool['nwodtseg']
+        await pool.get_provider('nwodtseg')
 
 
-def test_provider_pool_del_keyerror() -> None:
-    pool = ProviderPool()
-    with pytest.raises(KeyError):
-        del pool['gestdown']
-
-
+@pytest.mark.asyncio
 @pytest.mark.usefixtures('_mock_providers')
-def test_provider_pool_iter() -> None:
-    pool = ProviderPool()
+async def test_provider_pool_iter() -> None:
+    pool = AsyncProviderPool()
+    await pool.initialize()
     assert len(list(pool)) == 0
-    pool['tvsubtitles']
+    await pool.get_provider('tvsubtitles')
     # test printing
-    print(pool['tvsubtitles'])  # noqa: T201
+    print(await pool.get_provider('tvsubtitles'))  # noqa: T201
     assert len(list(pool)) == 1
 
 
+@pytest.mark.asyncio
 @pytest.mark.usefixtures('_mock_providers')
-def test_provider_pool_list_subtitles_provider(
+async def test_provider_pool_list_subtitles_provider(
     episodes: dict[str, Episode],
     provider_manager: RegistrableExtensionManager,
 ) -> None:
     episode = episodes['bbt_s07e05']
     languages = {Language('eng')}
-    pool = ProviderPool()
-    provider_result = pool.list_subtitles_provider('tvsubtitles', episode, languages)
+    pool = AsyncProviderPool()
+    await pool.initialize()
+    provider_result = await pool.list_subtitles_provider('tvsubtitles', episode, languages)
     assert provider_result.provider == 'tvsubtitles'
     assert provider_result.video == episode
     assert provider_result.languages == languages
@@ -115,37 +145,20 @@ def test_provider_pool_list_subtitles_provider(
     assert not provider_result.unsupported()
     assert not provider_result.failure()
     assert not provider_result.outage()
-    assert provider_manager['tvsubtitles'].plugin.initialize.called  # type: ignore[attr-defined]
-    assert provider_manager['tvsubtitles'].plugin.list_subtitles.called  # type: ignore[attr-defined]
+    assert pool._get_plugin('tvsubtitles').initialize.called  # type: ignore[attr-defined]
+    assert pool._get_plugin('tvsubtitles').list_subtitles.called  # type: ignore[attr-defined]
 
 
+@pytest.mark.asyncio
 @pytest.mark.usefixtures('_mock_providers')
-def test_provider_pool_list_subtitles(
-    episodes: dict[str, Episode],
-    provider_manager: RegistrableExtensionManager,
-) -> None:
-    pool = ProviderPool()
-    subtitles = pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
-    assert sorted(subtitles) == [  # type: ignore[type-var,comparison-overlap]  # ty: ignore[invalid-argument-type]
-        'gestdown',
-        'opensubtitlescom',
-        'podnapisi',
-        'tvsubtitles',
-    ]
-    for provider in subtitles:
-        provider_s = cast('str', provider)
-        assert provider_manager[provider_s].plugin.initialize.called  # type: ignore[attr-defined]
-        assert provider_manager[provider_s].plugin.list_subtitles.called  # type: ignore[attr-defined]
-
-
-@pytest.mark.usefixtures('_mock_providers')
-def test_async_provider_pool_list_subtitles(
+async def test_provider_pool_list_subtitles(
     episodes: dict[str, Episode],
     provider_manager: RegistrableExtensionManager,
 ) -> None:
     pool = AsyncProviderPool()
-    subtitles = pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
-    assert sorted(subtitles) == [  # type: ignore[type-var,comparison-overlap]  # ty: ignore[invalid-argument-type]
+    await pool.initialize()
+    subtitles = await pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
+    assert sorted(subtitles) == [  # type: ignore[type-var,comparison-overlap]
         'gestdown',
         'opensubtitlescom',
         'podnapisi',
@@ -155,6 +168,26 @@ def test_async_provider_pool_list_subtitles(
         provider_s = cast('str', provider)
         assert provider_manager[provider_s].plugin.initialize.called  # type: ignore[attr-defined]
         assert provider_manager[provider_s].plugin.list_subtitles.called  # type: ignore[attr-defined]
+
+
+@pytest.mark.asyncio
+@pytest.mark.usefixtures('_mock_providers')
+async def test_async_provider_pool_list_subtitles(
+    episodes: dict[str, Episode],
+    provider_manager: RegistrableExtensionManager,
+) -> None:
+    async with AsyncProviderPool() as pool:
+        subtitles = await pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
+        assert sorted(subtitles) == [  # type: ignore[type-var,comparison-overlap]
+            'gestdown',
+            'opensubtitlescom',
+            'podnapisi',
+            'tvsubtitles',
+        ]
+        for provider in subtitles:
+            provider_s = cast('str', provider)
+            assert provider_manager[provider_s].plugin.initialize.called  # type: ignore[attr-defined]
+            assert provider_manager[provider_s].plugin.list_subtitles.called  # type: ignore[attr-defined]
 
 
 @pytest.mark.usefixtures('_mock_providers')
@@ -288,86 +321,86 @@ def test_download_subtitles(provider_manager: RegistrableExtensionManager) -> No
         assert provider_manager[name].plugin.download_subtitle.called  # type: ignore[attr-defined]
 
 
-def test_list_subtitles_discarded_provider(
-    movies: dict[str, Movie],
-    provider_manager: RegistrableExtensionManager,
-) -> None:
+@pytest.mark.asyncio
+async def test_list_subtitles_discarded_provider(movies: dict[str, Movie]) -> None:
     video = movies['man_of_steel']
     languages = {Language('eng')}
 
-    pool = ProviderPool(['opensubtitlescom'])
+    pool = AsyncProviderPool(['opensubtitlescom'])
+    await pool.initialize()
 
     # Working provider
-    subtitles = pool.list_subtitles(video, languages)
+    subtitles = await pool.list_subtitles(video, languages)
     assert len(subtitles) == 1
     # keep listed subtitle
     subtitle = subtitles[0]
 
-    provider = cast('MockProvider', pool['opensubtitlescom'])
+    provider = cast('MockProvider', await pool.get_provider('opensubtitlescom'))
 
     # Mock a broken provider
     provider.is_broken = True
-    subtitles = pool.list_subtitles(video, languages)
+    subtitles = await pool.list_subtitles(video, languages)
     assert len(subtitles) == 0
 
     # Mock the provider now works, but it was discarded
     provider.is_broken = False
     assert 'opensubtitlescom' in pool.discarded_providers
 
-    subtitles = pool.list_subtitles(video, languages)
+    subtitles = await pool.list_subtitles(video, languages)
     assert len(subtitles) == 0
 
     # Try failing downloading from discarded provider
-    assert not pool.download_subtitle(subtitle)
+    assert not await pool.download_subtitle(subtitle)
 
 
-def test_list_subtitles_discarding_error_reports_failed_and_discarded(
-    movies: dict[str, Movie],
-    provider_manager: RegistrableExtensionManager,
-) -> None:
+@pytest.mark.asyncio
+async def test_list_subtitles_discarding_error_reports_failed_and_discarded(movies: dict[str, Movie]) -> None:
     """A discarding error puts the provider in `failed_providers` and in `discarded_providers`."""
     video = movies['man_of_steel']
     languages = {Language('eng')}
 
-    pool = ProviderPool(['opensubtitlescom'])
-    # a broken mock provider raises a DiscardingError
-    cast('MockProvider', pool['opensubtitlescom']).is_broken = True
+    pool = AsyncProviderPool(['opensubtitlescom'])
+    await pool.initialize()
 
-    assert pool.list_subtitles(video, languages) == []
+    # a broken mock provider raises a DiscardingError
+    cast('MockProvider', await pool.get_provider('opensubtitlescom')).is_broken = True
+
+    subtitles = await pool.list_subtitles(video, languages)
+    assert subtitles == []
 
     assert pool.failed_providers == {'opensubtitlescom'}
     assert pool.discarded_providers == {'opensubtitlescom'}
 
 
-def test_list_subtitles_unknown_error_reports_failed_only(
-    movies: dict[str, Movie],
-    provider_manager: RegistrableExtensionManager,
-) -> None:
+@pytest.mark.asyncio
+async def test_list_subtitles_unknown_error_reports_failed_only(movies: dict[str, Movie]) -> None:
     """An unknown error puts the provider in `failed_providers` only."""
     video = movies['man_of_steel']
     languages = {Language('eng')}
 
-    pool = ProviderPool(['opensubtitlescom'])
+    pool = AsyncProviderPool(['opensubtitlescom'])
+    await pool.initialize()
 
-    with patch.object(pool['opensubtitlescom'], 'list_subtitles', side_effect=KeyError('id')):
-        assert pool.list_subtitles(video, languages) == []
+    with patch.object(await pool.get_provider('opensubtitlescom'), 'list_subtitles', side_effect=KeyError('id')):
+        subtitles = await pool.list_subtitles(video, languages)
+        assert subtitles == []
 
     assert pool.failed_providers == {'opensubtitlescom'}
     assert pool.discarded_providers == set()
 
 
-def test_async_provider_pool_list_subtitles_discarded_providers(
-    episodes: dict[str, Episode],
-    provider_manager: RegistrableExtensionManager,
-) -> None:
+@pytest.mark.asyncio
+async def test_async_provider_pool_list_subtitles_discarded_providers(episodes: dict[str, Episode]) -> None:
     video = episodes['bbt_s07e05']
     languages = {Language('eng')}
 
-    pool = AsyncProviderPool(max_workers=1)
-    # One provider is broken
-    cast('MockProvider', pool['opensubtitlescom']).is_broken = True
+    pool = AsyncProviderPool()
+    await pool.initialize()
 
-    subtitles = pool.list_subtitles(video, languages)
+    # One provider is broken
+    cast('MockProvider', await pool.get_provider('opensubtitlescom')).is_broken = True
+
+    subtitles = await pool.list_subtitles(video, languages)
     assert {s.provider_name for s in subtitles} == {
         'gestdown',
         'podnapisi',
@@ -378,33 +411,36 @@ def test_async_provider_pool_list_subtitles_discarded_providers(
     assert 'opensubtitlescom' in pool.failed_providers
 
 
-def test_download_subtitles_discarded_provider(
+@pytest.mark.asyncio
+async def test_download_subtitles_discarded_provider(
     movies: dict[str, Movie],
     provider_manager: RegistrableExtensionManager,
 ) -> None:
     video = movies['man_of_steel']
     languages = {Language('eng')}
 
-    pool = ProviderPool(['opensubtitlescom'])
+    pool = AsyncProviderPool(['opensubtitlescom'])
+    await pool.initialize()
 
     # Working provider
-    subtitles = pool.list_subtitles(video, languages)
+    subtitles = await pool.list_subtitles(video, languages)
     assert len(subtitles) == 1
     # keep listed subtitle
     subtitle = subtitles[0]
     assert 'opensubtitlescom' not in pool.discarded_providers
 
     # Mock a broken provider
-    cast('MockProvider', pool['opensubtitlescom']).is_broken = True
+    cast('MockProvider', await pool.get_provider('opensubtitlescom')).is_broken = True
     # Try failing downloading subtitle
-    assert not pool.download_subtitle(subtitle)
+    assert not await pool.download_subtitle(subtitle)
 
     assert 'opensubtitlescom' in pool.discarded_providers
     # a discarded provider is also a failed provider
     assert 'opensubtitlescom' in pool.failed_providers
 
 
-def test_download_subtitle_unknown_error_reports_failed_only(
+@pytest.mark.asyncio
+async def test_download_subtitle_unknown_error_reports_failed_only(
     movies: dict[str, Movie],
     provider_manager: RegistrableExtensionManager,
 ) -> None:
@@ -412,11 +448,15 @@ def test_download_subtitle_unknown_error_reports_failed_only(
     video = movies['man_of_steel']
     languages = {Language('eng')}
 
-    pool = ProviderPool(['opensubtitlescom'])
-    subtitle = pool.list_subtitles(video, languages)[0]
+    pool = AsyncProviderPool(['opensubtitlescom'])
+    await pool.initialize()
 
-    with patch.object(pool['opensubtitlescom'], 'download_subtitle', side_effect=KeyError('id')):
-        assert not pool.download_subtitle(subtitle)
+    subtitles = await pool.list_subtitles(video, languages)
+    assert len(subtitles) > 0
+    subtitle = subtitles[0]
+
+    with patch.object(await pool.get_provider('opensubtitlescom'), 'download_subtitle', side_effect=KeyError('id')):
+        assert not await pool.download_subtitle(subtitle)
 
     assert pool.failed_providers == {'opensubtitlescom'}
     assert pool.discarded_providers == set()
@@ -559,15 +599,18 @@ def test_download_best_subtitles_wrong_fps(episodes: dict[str, Episode]) -> None
     assert {(s.provider_name, s.id) for s in subtitles[video]} == expected_subtitles
 
 
-def test_download_bad_subtitle(movies: dict[str, Movie]) -> None:
-    pool = ProviderPool()
-    provider_result = pool.list_subtitles_provider('opensubtitlescom', movies['man_of_steel'], {Language('tur')})
+@pytest.mark.asyncio
+async def test_download_bad_subtitle(movies: dict[str, Movie]) -> None:
+    pool = AsyncProviderPool()
+    await pool.initialize()
+
+    provider_result = await pool.list_subtitles_provider('opensubtitlescom', movies['man_of_steel'], {Language('tur')})
     assert provider_result.ok()
     assert len(provider_result.subtitles) >= 1
     subtitle = provider_result.subtitles[0]
 
     # The subtitle has no content
-    pool.download_subtitle(subtitle)
+    await pool.download_subtitle(subtitle)
 
     assert subtitle.content is None
     assert subtitle.is_valid() is False
@@ -628,3 +671,96 @@ def test_refine_movie_broken(movies: dict[str, Episode], mock_refiners_hash_brok
 
     calls = [call('metadata'), call('omdb'), call('tmdb')]
     mock_refiners_hash_broken.assert_has_calls(calls, any_order=True)
+
+
+def test_save_subtitles(movies: dict[str, Movie], tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.chdir(tmp_path)
+    ensure(tmp_path / movies['man_of_steel'].name)
+    subtitle_no_content = Subtitle(Language('eng'), '')
+    subtitle = Subtitle(Language('fra'), '')
+    subtitle.set_content(b'Some content')
+    subtitle_other = Subtitle(Language('fra'), '')
+    subtitle_other.set_content(b'Some other content')
+    subtitle_pt_br = Subtitle(Language('por', 'BR'), '')
+    subtitle_pt_br.set_content(b'Some brazilian content')
+    subtitles = [subtitle_no_content, subtitle, subtitle_other, subtitle_pt_br]
+
+    save_subtitles(movies['man_of_steel'], subtitles)
+
+    # subtitle without content is skipped
+    path = tmp_path / (os.path.splitext(movies['man_of_steel'].name)[0] + '.en.srt')
+    assert not path.is_file()
+
+    # first subtitle with language is saved
+    path = tmp_path / (os.path.splitext(movies['man_of_steel'].name)[0] + '.fr.srt')
+    assert path.is_file()
+    assert path.open('rb').read() == b'Some content'
+
+    # ietf language in path
+    path = tmp_path / (os.path.splitext(movies['man_of_steel'].name)[0] + '.pt-BR.srt')
+    assert path.is_file()
+    assert path.open('rb').read() == b'Some brazilian content'
+
+
+def test_save_subtitles_single_directory_encoding(movies: dict[str, Movie], tmp_path: Path) -> None:
+    subtitle = Subtitle(Language('jpn'), '')
+    subtitle.set_content('ハローワールド'.encode('shift-jis'))
+    subtitle_pt_br = Subtitle(Language('por', 'BR'), '')
+    subtitle_pt_br.set_content(b'Some brazilian content')
+    subtitles = [subtitle, subtitle_pt_br]
+
+    save_subtitles(movies['man_of_steel'], subtitles, single=True, directory=os.fspath(tmp_path), encoding='utf-8')
+
+    # first subtitle only and correctly encoded
+    path = tmp_path / (os.path.splitext(os.path.split(movies['man_of_steel'].name)[1])[0] + '.srt')
+    assert path.is_file()
+    assert path.open(encoding='utf-8').read() == 'ハローワールド'
+
+
+def test_save_subtitles_convert(movies: dict[str, Movie], tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    video = movies['man_of_steel']
+
+    monkeypatch.chdir(tmp_path)
+    ensure(tmp_path / video.name)
+
+    text = dedent(
+        """\
+        [Script Info]
+        WrapStyle: 0
+        ScaledBorderAndShadow: yes
+        Collisions: Normal
+        ScriptType: v4.00+
+
+        [V4+ Styles]
+        Format: Name, Fontname, Fontsize, PrimaryColour
+        Style: Default,Arial,20,&H00FFFFFF
+
+        [Events]
+        Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+        Dialogue: 0,0:00:49.54,0:00:52.96,Default,,0,0,0,,Tłumaczenie:\\Nsinu6
+        Dialogue: 0,0:02:11.08,0:02:12.88,Default,,0,0,0,,/Nie rozumiecie?
+        """
+    )
+    subtitle = Subtitle(Language('pol'), '')
+    subtitle.set_content(text.encode('utf-8'))
+    subtitles = [subtitle]
+
+    save_subtitles(video, subtitles, single=True, subtitle_format='srt')
+
+    # converted to srt
+    srt_text = dedent(
+        """\
+        1
+        00:00:49,540 --> 00:00:52,960
+        Tłumaczenie:
+        sinu6
+
+        2
+        00:02:11,080 --> 00:02:12,880
+        /Nie rozumiecie?
+
+        """
+    )
+    path = tmp_path / (os.path.splitext(video.name)[0] + '.srt')
+    assert path.is_file()
+    assert path.open(encoding='utf-8').read() == srt_text

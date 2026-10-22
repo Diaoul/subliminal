@@ -202,10 +202,3 @@ disabled_refiners: list[str] = []
 def get_default_refiners() -> list[str]:
     """Return the default enabled refiners."""
     return [r for r in refiner_manager.names() if r not in disabled_refiners]
-
-
-#: Discarded Movie refiners
-discarded_movie_refiners: list[str] = ['tvdb']
-
-#: Discarded Episode refiners
-discarded_episode_refiners: list[str] = []

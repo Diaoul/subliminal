@@ -450,7 +450,7 @@ def handle_exception(e: Exception, msg: str) -> None:
         logger.error('Service unavailable. %s', msg)
     elif isinstance(e, requests.exceptions.HTTPError):
         resp = e.response
-        if resp is None:
+        if resp is None:  # pragma: no cover
             logger.error('HTTP error. %s', msg)
         else:
             logger.error('HTTP error %r. %s', resp.status_code, msg, exc_info=resp.status_code not in range(500, 600))

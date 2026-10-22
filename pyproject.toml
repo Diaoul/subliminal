@@ -34,6 +34,7 @@ classifiers = [
 ]
 dynamic = ["version"]
 dependencies = [
+    "aiofiles",
     "aiohttp",
     "babelfish>=0.6.1",
     "beautifulsoup4>=4.4.0",
@@ -84,6 +85,7 @@ tests = [
     "coverage[toml]>=7",
     "packaging",
     "pytest>=6.0",
+    "pytest-asyncio",
     "pytest-cov",
     "pytest-xdist",
     "sympy",

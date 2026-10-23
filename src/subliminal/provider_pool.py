@@ -1,4 +1,4 @@
-"""Core functions."""
+"""Asynchronous pools for providers and refiners."""
 
 from __future__ import annotations
 
@@ -8,6 +8,7 @@ import logging
 import operator
 import os
 from collections import defaultdict
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, field
 from enum import Enum, auto
 from typing import TYPE_CHECKING, Any, ClassVar, Generic, Protocol, TypeVar, cast, runtime_checkable
@@ -25,8 +26,8 @@ from .extensions import (
     refiner_manager,
 )
 from .matches import fps_matches
-from .providers import Provider
-from .refiners import AsyncRefiner
+from .providers import AsyncProvider, Provider
+from .refiners import AsyncRefiner, Refiner
 from .score import compute_score as default_compute_score
 from .subtitle import filter_and_sort_categories
 from .utils import handle_exception
@@ -117,7 +118,7 @@ def _check_no_running_loop(*, raises: bool = True) -> bool:
     except RuntimeError:
         # no running loop, this is what we want
         pass
-    else:
+    else:  # pragma: no cover
         msg = 'Already inside an event loop, await the associated coroutine instead'
         if raises:  # pragma: no branch
             raise RuntimeError(msg)
@@ -173,62 +174,6 @@ class GenericProvider(Protocol):
 AnyGenericProvider: TypeAlias = GenericProvider | GenericAsyncProvider
 
 
-@runtime_checkable
-class AsyncProvider(Protocol):
-    """Structural type for providers that have been ported to :mod:`aiohttp`."""
-
-    @classmethod
-    def check(cls, video: Video) -> bool:
-        """Check if the `video` type is supported by the provider."""
-        ...
-
-    @classmethod
-    def check_languages(cls, languages: Set[Language]) -> Set[Language]:
-        """Check if the `languages` are supported by the provider."""
-        ...
-
-    async def initialize(self) -> None:
-        """Initialize the provider (login, session setup, ...)."""
-        ...
-
-    async def terminate(self) -> None:
-        """Terminate the provider (logout, cleanup, ...)."""
-        ...
-
-    async def list_subtitles(self, video: Video, languages: Set[Language]) -> list[Subtitle]:
-        """List subtitles for the video in the given languages."""
-        ...
-
-    async def download_subtitle(self, subtitle: Subtitle) -> None:
-        """Download the content of the subtitle."""
-        ...
-
-
-@runtime_checkable
-class Refiner(Protocol):
-    """Structural type for synchronous refiners."""
-
-    stage: ClassVar[int]
-    priority: int
-
-    @classmethod
-    def check(cls, video: Video) -> bool:
-        """Check if the `video` type is supported by the provider."""
-        ...
-
-    def initialize(self) -> None:
-        """Initialize the provider (login, session setup, ...)."""
-        ...
-
-    def terminate(self) -> None:
-        """Terminate the provider (logout, cleanup, ...)."""
-        ...
-
-    def refine(self, video: Video, **kwargs: Any) -> dict[str, Any]:
-        """Refine the video."""
-        ...
-
-
 def is_async_provider(provider: Provider | AsyncProvider) -> bool:
     """Return `True` if the provider exposes a coroutine-based API."""
     return inspect.iscoroutinefunction(provider.list_subtitles)
@@ -239,7 +184,7 @@ def is_async_refiner(refiner: Refiner | AsyncRefiner) -> bool:
     return inspect.iscoroutinefunction(refiner.refine)
 
 
-class ProxyRefiner:
+class ProxyRefiner(Refiner):
     """Proxy class to create a synchronous Refiner from a refine function."""
 
     stage: ClassVar[int] = 5
@@ -257,18 +202,6 @@ class ProxyRefiner:
     def check(cls, video: Video) -> bool:
         """Check if the `video` type is supported by the provider."""
         return True
-
-    def __enter__(self) -> Self:
-        self.initialize()
-        return self
-
-    def __exit__(
-        self,
-        exc_type: type[BaseException] | None,
-        exc_value: BaseException | None,
-        traceback: TracebackType | None,
-    ) -> None:
-        self.terminate()
 
     def initialize(self) -> None:
         """Initialize the provider (login, session setup, ...)."""
@@ -292,7 +225,7 @@ def create_refiner_factory(name: str, refine: Callable) -> type[Refiner]:
     return type(class_name, (ProxyRefiner,), {'refine': refine_method})
 
 
-def parse_timeout(timeout: float | None) -> float | None:
+def parse_timeout(timeout: float | None) -> float | None:  # pragma: no cover
     """Parse the timeout value.
 
     Non-positive value are converted to None.
@@ -308,18 +241,14 @@ T = TypeVar('T', bound=AnyGenericProvider)
 
 
 class AsyncPool(Generic[T]):
-    """An asynchronous pool of providers with the same API as a single provider.
+    """An asynchronous pool of providers.
 
     Providers are lazily initialized, queried concurrently, and automatically discarded on failure.
     The pool is an asynchronous context manager and must be used as such (or terminated explicitly),
     otherwise the underlying :class:`aiohttp.ClientSession` is left open::
 
-        async with AsyncProviderPool(providers=['opensubtitlescom']) as pool:
-            subtitles = await pool.list_subtitles(video, {Language('eng')})
-            await pool.download_best_subtitles(subtitles, video, {Language('eng')})
-
-    :param list providers: name of providers to use, if not all.
-    :param dict provider_configs: provider configuration as keyword arguments per provider name to pass
+    :param list[str] providers: name of providers to use, if not all.
+    :param dict[str, Any] provider_configs: provider configuration as keyword arguments per provider name to pass
         when instantiating the :class:`~subliminal.providers.Provider`.
     :param int max_concurrency: maximum number of provider operations running at the same time.
     :param (float | None) timeout: timeout in seconds for a single provider operation, None to disable.
@@ -338,8 +267,11 @@ class AsyncPool(Generic[T]):
     #: Initialized providers
     _initialized_providers: dict[str, T]
 
-    #: Maximum number of concurrent provider operations
+    #: Maximum number of concurrent async operations
     max_concurrency: int
+
+    #: Maximum number of threads for running synchronous functions
+    max_workers: int
 
     #: Timeout in seconds for a single provider operation, None to disable
     timeout: float | None
@@ -355,6 +287,7 @@ class AsyncPool(Generic[T]):
         provider_configs: Mapping[str, Any] | None = None,
         *,
         max_concurrency: int = DEFAULT_MAX_CONCURRENCY,
+        max_workers: int | None = None,
         timeout: float | None = DEFAULT_TIMEOUT,
         session: aiohttp.ClientSession | None = None,
     ) -> None:
@@ -362,6 +295,7 @@ class AsyncPool(Generic[T]):
         self._provider_configs = dict(provider_configs) if provider_configs is not None else {}
         self._initialized_providers = {}
         self.max_concurrency = max(1, max_concurrency)
+        self.max_workers = max(1, max_workers or len(self._providers))
         self.timeout = parse_timeout(timeout)
 
         self._session = session
@@ -395,14 +329,24 @@ class AsyncPool(Generic[T]):
         called twice, and must run inside the event loop that will drive the pool.
 
         """
-        if self._semaphore is None:
+        # Set the semaphore (number of concurrent coroutine)
+        if self._semaphore is None:  # pragma: no branch
             self._semaphore = asyncio.Semaphore(self.max_concurrency)
 
-        if self._session is None:
+        # Create the session
+        if self._session is None:  # pragma: no branch
             self._session = aiohttp.ClientSession(
                 timeout=aiohttp.ClientTimeout(total=self.timeout),
                 connector=aiohttp.TCPConnector(limit=self.max_concurrency, limit_per_host=4),
             )
+
+        # Set the number of threads
+        try:
+            loop = asyncio.get_running_loop()
+            loop.set_default_executor(ThreadPoolExecutor(max_workers=self.max_workers))
+        except RuntimeError:  # pragma: no cover
+            # no running loop, this is not normal, but pass
+            logger.warning('No running asyncio loop')
 
     @property
     def session(self) -> aiohttp.ClientSession:
@@ -428,14 +372,14 @@ class AsyncPool(Generic[T]):
             return_exceptions=True,
         )
 
-        if self._owns_session and self._session is not None:
+        if self._owns_session and self._session is not None:  # pragma: no branch
             await self._session.close()
             self._session = None
 
     async def _terminate_provider(self, name: str) -> None:
         """Terminate a single initialized provider, ignoring errors."""
         provider = self._initialized_providers.pop(name, None)
-        if provider is None:
+        if provider is None:  # pragma: no cover
             return
 
         try:
@@ -453,7 +397,7 @@ class AsyncPool(Generic[T]):
     @staticmethod
     def _get_default_providers() -> list[str]:
         """Return a list of the default providers to use if no provider is given at initialization."""
-        return []
+        raise NotImplementedError
 
     @staticmethod
     def _get_provider_manager() -> RegistrableExtensionManager:
@@ -474,7 +418,7 @@ class AsyncPool(Generic[T]):
         lock = self._locks.setdefault(name, asyncio.Lock())
         async with lock:
             # another coroutine may have initialized it while waiting for the lock
-            if name in self._initialized_providers:
+            if name in self._initialized_providers:  # pragma: no cover
                 return self._initialized_providers[name]
 
             logger.info('Initializing %s %s', self.providers_generic_name, name)
@@ -536,8 +480,8 @@ class AsyncProviderPool(AsyncPool[Provider | AsyncProvider]):
             subtitles = await pool.list_subtitles(video, {Language('eng')})
             await pool.download_best_subtitles(subtitles, video, {Language('eng')})
 
-    :param list providers: name of providers to use, if not all.
-    :param dict provider_configs: provider configuration as keyword arguments per provider name to pass
+    :param list[str] providers: name of providers to use, if not all.
+    :param dict[str, Any] provider_configs: provider configuration as keyword arguments per provider name to pass
         when instantiating the :class:`~subliminal.providers.Provider`.
     :param int max_concurrency: maximum number of provider operations running at the same time.
     :param (float | None) timeout: timeout in seconds for a single provider operation, None to disable.
@@ -812,7 +756,7 @@ class AsyncProviderPool(AsyncPool[Provider | AsyncProvider]):
 
 
 class AsyncRefinerPool(AsyncPool[Refiner | AsyncRefiner]):
-    """An asynchronous pool of refiners with the same API as a single :class:`~subliminal.refiners.Refiner`.
+    """An asynchronous pool of refiners.
 
     Refiners are lazily initialized, queried concurrently, and automatically discarded on failure.
     The pool is an asynchronous context manager and must be used as such (or terminated explicitly),
@@ -821,8 +765,8 @@ class AsyncRefinerPool(AsyncPool[Refiner | AsyncRefiner]):
         async with AsyncRefinerPool(refiners=['hash']) as pool:
             await pool.refine(video)
 
-    :param list refiners: name of refiners to use, if not all.
-    :param dict refiner_configs: refiner configuration as keyword arguments per refiner name to pass
+    :param list[str] refiners: name of refiners to use, if not all.
+    :param dict[str, Any] refiner_configs: refiner configuration as keyword arguments per refiner name to pass
         when instantiating the :class:`~subliminal.refiners.Refiner`.
     :param int max_concurrency: maximum number of refiner operations running at the same time.
     :param (float | None) timeout: timeout in seconds for a single refiner operation, None to disable.
@@ -1016,7 +960,7 @@ class AsyncRefinerPool(AsyncPool[Refiner | AsyncRefiner]):
                 return None
         return video
 
-    async def refine_videos(self, videos: Sequence[Video], **kwargs: Any) -> set[Video]:
+    async def refine_videos(self, videos: Set[Video], **kwargs: Any) -> set[Video]:
         """Refine several videos, one video at a time.
 
         Videos are handled sequentially on purpose: providers are queried concurrently within
@@ -1080,7 +1024,7 @@ def check_video(
 
 
 async def async_refine(
-    videos: Video | Sequence[Video],
+    videos: Video | Set[Video],
     *,
     refiners: Sequence[str] | None = None,
     refiner_configs: Mapping[str, Any] | None = None,
@@ -1088,14 +1032,14 @@ async def async_refine(
     pool_class: type[AsyncRefinerPool] = AsyncRefinerPool,
     **kwargs: Any,
 ) -> set[Video]:
-    """Refine a video using :ref:`refiners`.
+    """Refine one or several videos using :ref:`refiners`.
 
     .. note::
 
         Exceptions raised in refiners are silently passed and logged.
 
     :param videos: the videos to refine.
-    :type videos: list of :class:`~subliminal.video.Video`
+    :type videos: set of :class:`~subliminal.video.Video`
     :param Sequence refiners: refiners to select. None defaults to all refiners.
     :param dict refiner_configs: refiner configuration as keyword arguments per refiner name to pass when
         calling the refine method
@@ -1108,7 +1052,7 @@ async def async_refine(
     """
     # make sure videos is a list
     if isinstance(videos, Video):
-        videos = [videos]
+        videos = {videos}
     # return immediately if no videos
     if not videos:
         return set()

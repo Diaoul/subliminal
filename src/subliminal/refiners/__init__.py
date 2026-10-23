@@ -24,8 +24,8 @@ if TYPE_CHECKING:
     from subliminal.video import Video
 
 
-class AsyncRefiner:
-    """Asynchronous refiner."""
+class Refiner:
+    """Base class for synchronous refiners."""
 
     #: Supported video types
     video_types: ClassVar[tuple[type[Video], ...]] = (Episode, Movie)
@@ -35,6 +35,91 @@ class AsyncRefiner:
 
     #: Priority of the refiner (inside its stage), higher value takes precedence
     priority: int = 0
+
+    def __repr__(self) -> str:
+        return f'<{self.__class__.__name__} [{self.video_types!r}] - S{self.stage}>'
+
+    @classmethod
+    def check(cls, video: Video) -> bool:
+        """Check if the `video` can be processed.
+
+        The `video` is considered invalid if not an instance of :attr:`video_types`.
+
+        :param video: the video to check.
+        :type video: :class:`~subliminal.video.Video`
+        :return: `True` if the `video` is valid, `False` otherwise.
+        :rtype: bool
+
+        """
+        return cls.check_types(video)
+
+    @classmethod
+    def check_types(cls, video: Video) -> bool:
+        """Check if the `video` type is supported by the provider.
+
+        The `video` is considered invalid if not an instance of :attr:`video_types`.
+
+        :param video: the video to check.
+        :type video: :class:`~subliminal.video.Video`
+        :return: `True` if the `video` is valid, `False` otherwise.
+        :rtype: bool
+
+        """
+        return isinstance(video, cls.video_types)
+
+    def __enter__(self) -> Self:
+        self.initialize()
+        return self
+
+    def __exit__(
+        self,
+        exc_type: type[BaseException] | None,
+        exc_value: BaseException | None,
+        traceback: TracebackType | None,
+    ) -> None:
+        self.terminate()
+
+    def initialize(self) -> None:
+        """Initialize the refiner.
+
+        Must be called when starting to work with the refiner. This is the place for network initialization
+        or login operations.
+
+        .. note::
+            This is called automatically when entering the `with` statement
+
+        """
+        raise NotImplementedError
+
+    def terminate(self) -> None:
+        """Terminate the refiner.
+
+        Must be called when done with the refiner. This is the place for network shutdown or logout operations.
+
+        .. note::
+            This is called automatically when exiting the `with` statement
+        """
+        raise NotImplementedError
+
+    def refine(self, video: Video, **kwargs: Any) -> dict[str, Any]:
+        """Refine the video."""
+        raise NotImplementedError
+
+
+class AsyncRefiner:
+    """Base class for asynchronous refiners."""
+
+    #: Supported video types
+    video_types: ClassVar[tuple[type[Video], ...]] = (Episode, Movie)
+
+    #: Stage of the refiner, lower is called first
+    stage: ClassVar[int] = 5
+
+    #: Priority of the refiner (inside its stage), higher value takes precedence
+    priority: int = 0
+
+    def __repr__(self) -> str:
+        return f'<{self.__class__.__name__} [{self.video_types!r}] - S{self.stage}>'
 
     @classmethod
     def check(cls, video: Video) -> bool:

@@ -4,7 +4,7 @@ import os
 from datetime import timedelta
 from textwrap import dedent
 from typing import TYPE_CHECKING, Any, cast
-from unittest.mock import AsyncMock, Mock, call, patch
+from unittest.mock import Mock, call, patch
 
 import pytest
 from babelfish import Language  # type: ignore[import-untyped]
@@ -42,10 +42,10 @@ pytestmark = [
 @pytest.fixture
 def _mock_providers(monkeypatch: pytest.MonkeyPatch, provider_manager: RegistrableExtensionManager) -> None:
     for provider in provider_manager:
-        monkeypatch.setattr(provider.plugin, 'initialize', AsyncMock())
-        monkeypatch.setattr(provider.plugin, 'list_subtitles', AsyncMock(return_value=[provider.name]))
-        monkeypatch.setattr(provider.plugin, 'download_subtitle', AsyncMock())
-        monkeypatch.setattr(provider.plugin, 'terminate', AsyncMock())
+        monkeypatch.setattr(provider.plugin, 'initialize', Mock())
+        monkeypatch.setattr(provider.plugin, 'list_subtitles', Mock(return_value=[provider.name]))
+        monkeypatch.setattr(provider.plugin, 'download_subtitle', Mock())
+        monkeypatch.setattr(provider.plugin, 'terminate', Mock())
 
 
 @pytest.fixture

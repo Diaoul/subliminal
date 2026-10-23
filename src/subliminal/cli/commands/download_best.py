@@ -473,7 +473,7 @@ def download(
                     continue
 
             # scan videos
-            video_candidates: list[Video] = []
+            video_candidates: set[Video] = set()
             for filepath in collected_filepaths:
                 # Try scanning the video at path
                 video = scan_video_path(
@@ -496,7 +496,7 @@ def download(
 
                 # Set the use_time attribute before refining
                 video.use_ctime = use_ctime
-                video_candidates.append(video)
+                video_candidates.add(video)
 
             # check and refine videos
             # for video in video_candidates:
@@ -526,7 +526,7 @@ def download(
                 directory=directory,
                 providers=use_providers,
             )
-            ignored_videos.extend(list(set(video_candidates) - set(videos)))
+            ignored_videos.extend(list(video_candidates - videos))
 
     # output errored paths
     if verbose > 0:

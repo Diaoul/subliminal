@@ -440,7 +440,7 @@ def refine_episode(client: TVDBClient, video: Episode, *, force: bool = False, *
     # add episode information
     logger.debug('Found episode %r', episode)
     ret['title'] = episode['episodeName'] or None
-    ret['external_ids'].update(  # type: ignore[union-attr]
+    ret['external_ids'].update(  # type: ignore[union-attr]  # ty: ignore[unresolved-attribute]
         {
             'tvdb_id': sanitize_id(episode['id']),
             'imdb_id': decorate_imdb_id(sanitize_id(episode['imdbId'] or None)),

@@ -183,7 +183,7 @@ class OpenSubtitlesComSubtitle(Subtitle):
     ) -> OpenSubtitlesComSubtitle:
         """Parse a single subtitle query response to a :class:`OpenSubtitlesComSubtitle`."""
         # read the response
-        subtitle_id = str(int(response.get('id')))  # type: ignore[arg-type]
+        subtitle_id = str(int(response.get('id')))  # type: ignore[arg-type]  # ty: ignore[invalid-argument-type]
 
         attributes = response.get('attributes', {})
         language = Language.fromopensubtitlescom(str(attributes.get('language')))
@@ -213,7 +213,7 @@ class OpenSubtitlesComSubtitle(Subtitle):
 
         files = attributes.get('files', [])
         srt_file: dict[str, Any] = {'file_id': 0, 'file_name': ''} if len(files) == 0 else files[0]
-        file_id = int(srt_file.get('file_id'))  # type: ignore[arg-type]
+        file_id = int(srt_file.get('file_id'))  # type: ignore[arg-type]  # ty: ignore[invalid-argument-type]
         file_name = str(srt_file.get('file_name'))
 
         return cls(

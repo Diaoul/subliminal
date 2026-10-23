@@ -25,8 +25,10 @@ pytestmark = pytest.mark.core
             {'gestdown'},
             {'gestdown'},
             3,
-            'These providers had an error and were skipped for the rest of the download: gestdown. '
-            'Some subtitles can be missing.',
+            (
+                'These providers had an error and were skipped for the rest of the download: gestdown. '
+                'Some subtitles can be missing.'
+            ),
         ),
         (
             {'podnapisi', 'tvsubtitles'},
@@ -38,9 +40,11 @@ pytestmark = pytest.mark.core
             {'gestdown', 'podnapisi', 'tvsubtitles'},
             {'gestdown'},
             3,
-            'These providers had an error and were skipped for the rest of the download: gestdown. '
-            'These providers had an error on some videos: podnapisi, tvsubtitles. '
-            'Some subtitles can be missing.',
+            (
+                'These providers had an error and were skipped for the rest of the download: gestdown. '
+                'These providers had an error on some videos: podnapisi, tvsubtitles. '
+                'Some subtitles can be missing.'
+            ),
         ),
     ],
 )

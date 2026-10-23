@@ -315,10 +315,19 @@ warn_return_any = false
 disable_error_code = ["var-annotated"]
 
 
+# https://docs.astral.sh/ty/
+[tool.ty.environment]
+python-version = "3.14"
+
+[tool.ty.rules]
+#unused-ignore-comment = "ignore"
+
+
 # https://github.com/PyCQA/doc8
 [tool.doc8]
 allow-long-titles = true
 max-line-length = 120
+
 
 # https://github.com/crate-ci/typos/blob/master/docs/reference.md
 [tool.typos.files]

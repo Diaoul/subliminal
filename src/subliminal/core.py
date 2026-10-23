@@ -127,7 +127,7 @@ class ProviderPool:
 
     def __exit__(
         self,
-        exc_type: type[BaseException],
+        exc_type: type[BaseException] | None,
         exc_value: BaseException | None,
         traceback: TracebackType | None,
     ) -> None:
@@ -259,7 +259,7 @@ class ProviderPool:
         logger.info('Downloading subtitle %r', subtitle)
         try:
             self[subtitle.provider_name].download_subtitle(subtitle)
-        except ARCHIVE_ERRORS:  # type: ignore[misc]  # pragma: no cover
+        except ARCHIVE_ERRORS:  # type: ignore[misc]  # pragma: no cover  # ty: ignore[invalid-exception-caught]
             logger.exception('Bad archive for subtitle %r', subtitle)
         except DiscardingError as e:
             handle_exception(e, f'Discarding provider {subtitle.provider_name}')

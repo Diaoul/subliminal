@@ -72,14 +72,14 @@ def test_video_fromguess_episode(episodes: dict[str, Episode], monkeypatch: pyte
     guess = {'type': 'episode'}
     monkeypatch.setattr(Episode, 'fromguess', Mock())
     Video.fromguess(episodes['bbt_s07e05'].name, guess)
-    assert Episode.fromguess.called  # type: ignore[attr-defined]
+    assert Episode.fromguess.called  # type: ignore[attr-defined]  # ty: ignore[unresolved-attribute]
 
 
 def test_video_fromguess_movie(movies: dict[str, Movie], monkeypatch: pytest.MonkeyPatch) -> None:
     guess = {'type': 'movie'}
     monkeypatch.setattr(Movie, 'fromguess', Mock())
     Video.fromguess(movies['man_of_steel'].name, guess)
-    assert Movie.fromguess.called  # type: ignore[attr-defined]
+    assert Movie.fromguess.called  # type: ignore[attr-defined]  # ty: ignore[unresolved-attribute]
 
 
 def test_video_fromguess_wrong_type(episodes: dict[str, Episode]) -> None:
@@ -382,7 +382,7 @@ def test_episode_update_fake_set(episodes: dict[str, Episode]) -> None:
     assert video.year is None
 
     # Add a fake set attribute
-    video.fake_set = {1, 2}  # type: ignore[attr-defined]
+    video.fake_set = {1, 2}  # type: ignore[attr-defined]  # ty: ignore[unresolved-attribute]
 
     # Update containers
     data: dict[str, Any] = {
@@ -391,7 +391,7 @@ def test_episode_update_fake_set(episodes: dict[str, Episode]) -> None:
     }
     video.update(data)
 
-    assert video.fake_set == {1, 2, 3, 4}  # type: ignore[attr-defined]
+    assert video.fake_set == {1, 2, 3, 4}  # type: ignore[attr-defined]  # ty: ignore[unresolved-attribute]
     assert video.year == 2007
 
     # Update containers, fails

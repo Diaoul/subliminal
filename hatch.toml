@@ -46,6 +46,18 @@ features = ["tests", "types"]
 run = "mypy --install-types --non-interactive --ignore-missing-imports --config-file={root}/pyproject.toml {args:src tests scripts}"
 
 # ---------------------------------------------------------
+[envs.fasttypes]
+template = "fasttypes"
+installer = "uv pip install"
+description = "Run the fast type checker"
+dev-mode = false
+dependencies = ["ty"]
+features = ["tests", "types"]
+
+[envs.fasttypes.scripts]
+run = "ty check {args:--fix src tests}"
+
+# ---------------------------------------------------------
 [envs.docs]
 template = "docs"
 installer = "uv pip install"

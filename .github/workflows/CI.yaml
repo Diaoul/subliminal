@@ -127,7 +127,7 @@ jobs:
           persist-credentials: false
           fetch-depth: 0
       - name: Prepare tests
-        uses: ./.github/actions/prepare-tests
+        uses: $/.github/actions/prepare-tests
       - name: Display downloaded files
         run: ls -R tests/data
 
@@ -150,7 +150,7 @@ jobs:
           python-version: ${{ matrix.py }}
           allow-prereleases: true
       - name: Prepare tests
-        uses: ./.github/actions/prepare-tests
+        uses: $/.github/actions/prepare-tests
       - name: Display downloaded files
         run: ls -R tests/data
 
@@ -200,7 +200,7 @@ jobs:
           persist-credentials: false
           fetch-depth: 0
       - name: Prepare tests
-        uses: ./.github/actions/prepare-tests
+        uses: $/.github/actions/prepare-tests
       - name: Display downloaded files
         run: ls -R tests/data
       - name: Test in FreeBSD
@@ -297,7 +297,7 @@ jobs:
         with:
           python-version-file: .python-version-default
       - name: Prepare tests
-        uses: ./.github/actions/prepare-tests
+        uses: $/.github/actions/prepare-tests
       - name: Display downloaded files
         run: ls -R tests/data
       - name: Install hatch

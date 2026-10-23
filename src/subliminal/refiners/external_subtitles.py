@@ -14,7 +14,6 @@ from subliminal.video import Episode, Movie
 from . import AsyncRefiner
 
 if TYPE_CHECKING:
-    from subliminal.subtitle import ExternalSubtitles
     from subliminal.video import Video
 
 logger = logging.getLogger(__name__)
@@ -46,7 +45,7 @@ async def search_external_subtitles(
     path: str | os.PathLike,
     *,
     directory: str | os.PathLike | None = None,
-) -> list[ExternalSubtitles]:
+) -> list[ExternalSubtitle]:
     """Search for external subtitles from a video `path` and their associated language.
 
     Unless `directory` is provided, search will be made in the same directory as the video file.

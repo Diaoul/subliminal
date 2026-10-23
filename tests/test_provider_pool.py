@@ -145,20 +145,20 @@ async def test_provider_pool_list_subtitles_provider(
     assert not provider_result.unsupported()
     assert not provider_result.failure()
     assert not provider_result.outage()
-    assert pool._get_plugin('tvsubtitles').initialize.called  # type: ignore[attr-defined]
-    assert pool._get_plugin('tvsubtitles').list_subtitles.called  # type: ignore[attr-defined]
+    assert provider_manager['tvsubtitles'].plugin.initialize.called  # type: ignore[attr-defined]
+    assert provider_manager['tvsubtitles'].plugin.list_subtitles.called  # type: ignore[attr-defined]
 
 
 @pytest.mark.asyncio
 @pytest.mark.usefixtures('_mock_providers')
-async def test_provider_pool_list_subtitles(
+async def test_async_provider_pool_list_subtitles(
     episodes: dict[str, Episode],
     provider_manager: RegistrableExtensionManager,
 ) -> None:
     pool = AsyncProviderPool()
     await pool.initialize()
     subtitles = await pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
-    assert sorted(subtitles) == [  # type: ignore[type-var,comparison-overlap]
+    assert sorted(subtitles) == [  # type: ignore[type-var,comparison-overlap]  # ty: ignore[invalid-argument-type]
         'gestdown',
         'opensubtitlescom',
         'podnapisi',
@@ -172,13 +172,13 @@ async def test_provider_pool_list_subtitles(
 
 @pytest.mark.asyncio
 @pytest.mark.usefixtures('_mock_providers')
-async def test_async_provider_pool_list_subtitles(
+async def test_async_with_provider_pool_list_subtitles(
     episodes: dict[str, Episode],
     provider_manager: RegistrableExtensionManager,
 ) -> None:
     async with AsyncProviderPool() as pool:
         subtitles = await pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
-        assert sorted(subtitles) == [  # type: ignore[type-var,comparison-overlap]
+        assert sorted(subtitles) == [  # type: ignore[type-var,comparison-overlap]  # ty: ignore[invalid-argument-type]
             'gestdown',
             'opensubtitlescom',
             'podnapisi',

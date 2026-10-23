@@ -131,11 +131,10 @@ def _check_no_running_loop(*, raises: bool = True) -> bool:
 def handle_async_exception(e: BaseException, msg: str) -> None:
     """Log `e` with a sensible message, adding :mod:`aiohttp` errors to :func:`handle_exception`."""
     if isinstance(e, asyncio.TimeoutError):
+        # also catches `aiohttp.ServerTimeoutError`, which is a subclass of `asyncio.TimeoutError`
         logger.error('Request timed out. %s', msg)
     elif isinstance(e, aiohttp.ClientResponseError):
         logger.error('HTTP error %r. %s', e.status, msg, exc_info=e.status not in range(500, 600))
-    elif isinstance(e, aiohttp.ServerTimeoutError):
-        logger.error('Request timed out. %s', msg)
     elif isinstance(e, aiohttp.ClientConnectionError):
         logger.error('Connection error %r. %s', e, msg)
     elif isinstance(e, Exception):
@@ -466,7 +465,7 @@ class AsyncPool(Generic[T]):
         return iter(self._initialized_providers)
 
     def __repr__(self) -> str:
-        return f'<{self.__class__.__name__} [{list(self._providers)!r}]>'
+        return f'<{self.__class__.__name__} {list(self._providers)!r}>'
 
 
 class AsyncProviderPool(AsyncPool[Provider | AsyncProvider]):
@@ -673,6 +672,7 @@ class AsyncProviderPool(AsyncPool[Provider | AsyncProvider]):
                 raise
             except ARCHIVE_ERRORS:  # type: ignore[misc]  # ty: ignore[invalid-exception-caught]
                 logger.exception('Bad archive for subtitle %r', subtitle)
+                self.failed_providers.add(subtitle.provider_name)
             except DiscardingError as e:
                 handle_async_exception(e, f'Discarding provider {subtitle.provider_name}')
                 self._discard_provider(subtitle.provider_name)

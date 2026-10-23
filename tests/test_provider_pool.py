@@ -1,35 +1,49 @@
 from __future__ import annotations
 
+import asyncio
+import logging
 import os
+import zipfile
 from datetime import timedelta
 from textwrap import dedent
-from typing import TYPE_CHECKING, Any, cast
-from unittest.mock import Mock, call, patch
+from types import SimpleNamespace
+from typing import TYPE_CHECKING, Any, ClassVar, cast
+from unittest.mock import AsyncMock, Mock, call, patch
 
+import aiohttp
 import pytest
 from babelfish import Language  # type: ignore[import-untyped]
 
+from subliminal.exceptions import DiscardingError
 from subliminal.provider_pool import (
     AsyncProviderPool,
+    AsyncRefinerPool,
+    ResultStatus,
     check_video,
     download_best_subtitles,
     download_subtitles,
+    handle_async_exception,
+    is_async_provider,
+    is_async_refiner,
     list_subtitles,
     refine,
     refiner_manager,
     save_subtitles,
 )
+from subliminal.providers import AsyncProvider, Provider
+from subliminal.refiners import AsyncRefiner, Refiner
 from subliminal.score import episode_scores
 from subliminal.subtitle import Subtitle
+from subliminal.video import Episode
 from tests.conftest import ensure
 
 if TYPE_CHECKING:
-    from collections.abc import Callable
+    from collections.abc import Callable, Set
     from pathlib import Path
 
     from subliminal.extensions import RegistrableExtensionManager
     from subliminal.providers.mock import MockProvider
-    from subliminal.video import Episode, Movie, Video
+    from subliminal.video import Movie, Video
 
 # Core test
 pytestmark = [
@@ -764,3 +778,345 @@ def test_save_subtitles_convert(movies: dict[str, Movie], tmp_path: Path, monkey
     path = tmp_path / (os.path.splitext(video.name)[0] + '.srt')
     assert path.is_file()
     assert path.open(encoding='utf-8').read() == srt_text
+
+
+# ----------------------------------------------------------------------
+# error handling
+# ----------------------------------------------------------------------
+
+
+@pytest.mark.parametrize(
+    ('error', 'expected'),
+    [
+        (asyncio.TimeoutError(), 'Request timed out'),
+        (aiohttp.ServerTimeoutError(), 'Request timed out'),
+        (aiohttp.ClientResponseError(Mock(), (), status=404), 'HTTP error 404'),
+        (aiohttp.ClientResponseError(Mock(), (), status=503), 'HTTP error 503'),
+        (aiohttp.ClientConnectionError('no route to host'), 'Connection error'),
+    ],
+    ids=['timeout', 'server-timeout', 'http-client-error', 'http-server-error', 'connection-error'],
+)
+def test_handle_async_exception(error: Exception, expected: str, caplog: pytest.LogCaptureFixture) -> None:
+    with caplog.at_level(logging.ERROR, logger='subliminal.provider_pool'):
+        handle_async_exception(error, 'Provider foo')
+
+    assert expected in caplog.text
+    assert 'Provider foo' in caplog.text
+
+
+def test_is_async_provider() -> None:
+    class SyncProvider(Provider):
+        def list_subtitles(self, video: Video, languages: Set[Language]) -> list[Subtitle]:
+            return []
+
+    class MyAsyncProvider(AsyncProvider):  # type: ignore[type-arg]
+        async def list_subtitles(self, video: Video, languages: Set[Language]) -> list[Subtitle]:
+            return []
+
+    assert not is_async_provider(SyncProvider())
+    assert is_async_provider(MyAsyncProvider())
+
+
+def test_is_async_refiner() -> None:
+    class SyncRefiner(Refiner):
+        def refine(self, video: Video, **kwargs: Any) -> dict[str, Any]:
+            return {}
+
+    class MyAsyncRefiner(AsyncRefiner):
+        async def refine(self, video: Video, **kwargs: Any) -> dict[str, Any]:
+            return {}
+
+    assert not is_async_refiner(SyncRefiner())
+    assert is_async_refiner(MyAsyncRefiner())
+
+
+# ----------------------------------------------------------------------
+# provider pool
+# ----------------------------------------------------------------------
+
+
+@pytest.mark.asyncio
+async def test_provider_pool_repr_and_accessors() -> None:
+    provider_configs = {'podnapisi': {'foo': 'bar'}}
+    async with AsyncProviderPool(['opensubtitlescom', 'podnapisi'], provider_configs) as pool:
+        assert repr(pool) == "<AsyncProviderPool ['opensubtitlescom', 'podnapisi']>"
+        assert pool.providers == ['opensubtitlescom', 'podnapisi']
+        assert pool.provider_configs == provider_configs
+        assert pool.initialized_providers == {}
+
+        provider = await pool.get_provider('podnapisi')
+        assert pool.initialized_providers == {'podnapisi': provider}
+
+
+@pytest.mark.asyncio
+async def test_list_subtitles_provider_cancelled(movies: dict[str, Movie]) -> None:
+    """A cancellation is never swallowed."""
+    async with AsyncProviderPool(['opensubtitlescom']) as pool:
+        provider = await pool.get_provider('opensubtitlescom')
+        with (
+            patch.object(provider, 'list_subtitles', new=AsyncMock(side_effect=asyncio.CancelledError)),
+            pytest.raises(asyncio.CancelledError),
+        ):
+            await pool.list_subtitles_provider('opensubtitlescom', movies['man_of_steel'], {Language('eng')})
+
+
+@pytest.mark.asyncio
+async def test_download_subtitle_cancelled(movies: dict[str, Movie]) -> None:
+    """A cancellation is never swallowed."""
+    async with AsyncProviderPool(['opensubtitlescom']) as pool:
+        subtitles = await pool.list_subtitles(movies['man_of_steel'], {Language('eng')})
+        assert len(subtitles) > 0
+
+        provider = await pool.get_provider('opensubtitlescom')
+        with (
+            patch.object(provider, 'download_subtitle', new=AsyncMock(side_effect=asyncio.CancelledError)),
+            pytest.raises(asyncio.CancelledError),
+        ):
+            await pool.download_subtitle(subtitles[0])
+
+
+@pytest.mark.asyncio
+async def test_download_subtitle_bad_archive(movies: dict[str, Movie], caplog: pytest.LogCaptureFixture) -> None:
+    """A bad archive invalidates the subtitle, but the provider is kept."""
+    async with AsyncProviderPool(['opensubtitlescom']) as pool:
+        subtitles = await pool.list_subtitles(movies['man_of_steel'], {Language('eng')})
+        assert len(subtitles) > 0
+
+        provider = await pool.get_provider('opensubtitlescom')
+        with (
+            caplog.at_level(logging.ERROR, logger='subliminal.provider_pool'),
+            patch.object(provider, 'download_subtitle', side_effect=zipfile.BadZipFile),
+        ):
+            assert not await pool.download_subtitle(subtitles[0])
+
+    assert 'Bad archive for subtitle' in caplog.text
+    assert pool.failed_providers == {'opensubtitlescom'}
+    assert pool.discarded_providers == set()
+
+
+@pytest.mark.asyncio
+async def test_download_best_subtitles_skip_downloaded_language(movies: dict[str, Movie]) -> None:
+    """Only the best subtitle of each language is downloaded."""
+    video = movies['man_of_steel']
+    eng_best = Subtitle(Language('eng'), 'eng-best')
+    eng_other = Subtitle(Language('eng'), 'eng-other')
+    fra = Subtitle(Language('fra'), 'fra')
+    scores = {'eng-best': 30, 'eng-other': 20, 'fra': 10}
+
+    pool = AsyncProviderPool(['opensubtitlescom'])
+    download = AsyncMock(return_value=True)
+    with patch.object(pool, 'download_subtitle', new=download):
+        downloaded = await pool.download_best_subtitles(
+            [eng_other, fra, eng_best],
+            video,
+            {Language('eng'), Language('fra')},
+            compute_score=lambda subtitle, video: scores[subtitle.id],
+        )
+
+    assert downloaded == [eng_best, fra]
+    # the second english subtitle is skipped without being downloaded
+    assert download.await_args_list == [call(eng_best), call(fra)]
+
+
+# ----------------------------------------------------------------------
+# refiner pool
+# ----------------------------------------------------------------------
+
+
+class ConstantRefiner(Refiner):
+    """Synchronous refiner that returns a fixed update."""
+
+    update: ClassVar[dict[str, Any]] = {}
+
+    def __init__(self, **kwargs: Any) -> None:
+        self.configs = kwargs
+
+    def initialize(self) -> None:
+        """Initialize the refiner."""
+
+    def terminate(self) -> None:
+        """Terminate the refiner."""
+
+    def refine(self, video: Video, **kwargs: Any) -> dict[str, Any]:
+        """Return the fixed update."""
+        return dict(self.update)
+
+
+class GoodRefiner(ConstantRefiner):
+    """Refiner that works."""
+
+    update: ClassVar[dict[str, Any]] = {'resolution': 'test-resolution'}
+
+
+class EpisodeRefiner(ConstantRefiner):
+    """Refiner that only supports episodes."""
+
+    video_types = (Episode,)
+
+
+class BrokenRefiner(ConstantRefiner):
+    """Refiner with an error that makes it unusable."""
+
+    def refine(self, video: Video, **kwargs: Any) -> dict[str, Any]:
+        """Raise a discarding error."""
+        msg = 'Broken refiner'
+        raise DiscardingError(msg)
+
+
+class AsyncConstantRefiner(AsyncRefiner):
+    """Asynchronous refiner base class."""
+
+    def __init__(self, **kwargs: Any) -> None:
+        self.configs = kwargs
+
+    async def initialize(self) -> None:
+        """Initialize the refiner."""
+
+    async def terminate(self) -> None:
+        """Terminate the refiner."""
+
+
+class SlowRefiner(AsyncConstantRefiner):
+    """Refiner that takes too long."""
+
+    async def refine(self, video: Video, **kwargs: Any) -> dict[str, Any]:
+        """Wait for much longer than the timeout used in the tests."""
+        await asyncio.sleep(30)
+        return {}
+
+
+class CancelledRefiner(AsyncConstantRefiner):
+    """Refiner that is cancelled."""
+
+    async def refine(self, video: Video, **kwargs: Any) -> dict[str, Any]:
+        """Raise a cancellation."""
+        raise asyncio.CancelledError
+
+
+@pytest.fixture
+def refiner_plugins(monkeypatch: pytest.MonkeyPatch) -> dict[str, Any]:
+    """Make the refiner plugins added to the returned dict available to :class:`AsyncRefinerPool`."""
+    plugins: dict[str, Any] = {}
+
+    class FakeRefinerManager:
+        def __getitem__(self, name: str) -> SimpleNamespace:
+            return SimpleNamespace(plugin=plugins[name])
+
+    manager = FakeRefinerManager()
+    monkeypatch.setattr(AsyncRefinerPool, '_get_provider_manager', staticmethod(lambda: manager))
+    return plugins
+
+
+@pytest.mark.asyncio
+async def test_refiner_pool_accessors(refiner_plugins: dict[str, Any]) -> None:
+    refiner_plugins['good'] = GoodRefiner
+    refiner_configs = {'good': {'foo': 'bar'}}
+
+    async with AsyncRefinerPool(['good'], refiner_configs) as pool:
+        assert pool.refiners == ['good']
+        assert pool.refiner_configs == refiner_configs
+        assert pool.initialized_refiners == {}
+
+        refiner = await pool.get_provider('good')
+        assert pool.initialized_refiners == {'good': refiner}
+        assert cast('GoodRefiner', refiner).configs == {'foo': 'bar'}
+
+
+@pytest.mark.asyncio
+async def test_refine_provider_unsupported_video(
+    movies: dict[str, Movie],
+    episodes: dict[str, Episode],
+    refiner_plugins: dict[str, Any],
+) -> None:
+    refiner_plugins['episode'] = EpisodeRefiner
+
+    async with AsyncRefinerPool(['episode']) as pool:
+        result = await pool.refine_provider('episode', movies['man_of_steel'])
+        assert result.status == ResultStatus.UNSUPPORTED_VIDEO
+        assert result.unsupported()
+
+        result = await pool.refine_provider('episode', episodes['bbt_s07e05'])
+        assert result.ok()
+
+
+@pytest.mark.asyncio
+async def test_refine_provider_cancelled(movies: dict[str, Movie], refiner_plugins: dict[str, Any]) -> None:
+    """A cancellation is never swallowed, and does not count as a refiner error."""
+    refiner_plugins['cancelled'] = CancelledRefiner
+
+    async with AsyncRefinerPool(['cancelled']) as pool:
+        with pytest.raises(asyncio.CancelledError):
+            await pool.refine_provider('cancelled', movies['man_of_steel'])
+
+    assert pool.failed_refiners == set()
+    assert pool.discarded_refiners == set()
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize('refiner_class', [BrokenRefiner, SlowRefiner], ids=['discarding-error', 'timeout'])
+async def test_refine_provider_outage(
+    movies: dict[str, Movie],
+    refiner_plugins: dict[str, Any],
+    refiner_class: type[Refiner | AsyncRefiner],
+) -> None:
+    refiner_plugins['refiner'] = refiner_class
+
+    async with AsyncRefinerPool(['refiner'], timeout=0.05) as pool:
+        result = await pool.refine_provider('refiner', movies['man_of_steel'])
+
+    assert result.status == ResultStatus.OUTAGE
+    assert result.outage()
+
+
+@pytest.mark.asyncio
+async def test_refine_by_stage_no_refiners(movies: dict[str, Movie], refiner_plugins: dict[str, Any]) -> None:
+    """Without refiners, the video is only checked."""
+    languages = {Language('eng')}
+    video = movies['man_of_steel']
+
+    async with AsyncRefinerPool([], check_kwargs={'languages': languages}) as pool:
+        assert await pool.refine_by_stage(5, [], video)
+
+        # the video already has a subtitle for each language, it does not pass the check
+        video.subtitles = [Subtitle(lang) for lang in languages]
+        assert not await pool.refine_by_stage(5, [], video)
+
+
+@pytest.mark.asyncio
+async def test_refine_discards_broken_refiner(
+    movies: dict[str, Movie],
+    refiner_plugins: dict[str, Any],
+    caplog: pytest.LogCaptureFixture,
+) -> None:
+    refiner_plugins.update({'good': GoodRefiner, 'broken': BrokenRefiner})
+    video = movies['man_of_steel']
+
+    async with AsyncRefinerPool(['good', 'broken']) as pool:
+        # the broken refiner is discarded, the video is still refined by the others
+        assert await pool.refine(video) is video
+        assert video.resolution == 'test-resolution'
+        # a discarded refiner is also a failed refiner
+        assert pool.failed_refiners == {'broken'}
+        assert pool.discarded_refiners == {'broken'}
+
+        # the discarded refiner is skipped, the others are still used
+        video.resolution = None
+        with caplog.at_level(logging.DEBUG, logger='subliminal.provider_pool'):
+            assert await pool.refine(video) is video
+        assert video.resolution == 'test-resolution'
+        assert "Skipping discarded refiners 'broken'" in caplog.text
+        assert pool.discarded_refiners == {'broken'}
+
+
+@pytest.mark.asyncio
+async def test_refine_all_refiners_discarded(movies: dict[str, Movie], refiner_plugins: dict[str, Any]) -> None:
+    refiner_plugins['broken'] = BrokenRefiner
+    video = movies['man_of_steel']
+
+    async with AsyncRefinerPool(['broken']) as pool:
+        assert await pool.refine(video) is video
+        assert pool.discarded_refiners == {'broken'}
+
+        # no refiner left, the video is passed along untouched
+        assert await pool.refine(video) is video
+        assert pool.discarded_refiners == {'broken'}

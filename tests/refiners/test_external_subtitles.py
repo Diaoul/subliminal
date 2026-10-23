@@ -7,7 +7,7 @@ import pytest
 from babelfish import Language  # type: ignore[import-untyped]
 from tests.conftest import ensure
 
-from subliminal.refiners.external_subtitles import search_external_subtitles
+from subliminal.refiners.external_subtitles import ExternalSubtitlesRefiner, search_external_subtitles
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -94,3 +94,39 @@ async def test_search_external_subtitles_in_directory(episodes: dict[str, Episod
     subtitles = await search_external_subtitles(video_name, directory=subtitles_directory)
     subtitle_languages = {subtitle.subtitle_id: subtitle.language for subtitle in subtitles}
     assert subtitle_languages == expected_subtitles
+
+
+@pytest.mark.integration
+@pytest.mark.asyncio
+async def test_refine_movie(
+    movies: dict[str, Movie],
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    video = movies['man_of_steel']
+    video_name = video.name
+    video_root = tmp_path / 'movies'
+    ensure(tmp_path / 'movies' / video_name)
+    monkeypatch.chdir(tmp_path)
+
+    async with ExternalSubtitlesRefiner() as refiner:
+        res = await refiner.refine(video, directory=video_root)
+        assert 'subtitles' in res
+
+
+@pytest.mark.integration
+@pytest.mark.asyncio
+async def test_refine_episode(
+    episodes: dict[str, Episode],
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    video = episodes['bbt_s11e16']
+    video_name = video.name
+    video_root = tmp_path / 'tvshows'
+    ensure(tmp_path / 'tvshows' / video_name)
+    monkeypatch.chdir(tmp_path)
+
+    async with ExternalSubtitlesRefiner() as refiner:
+        res = await refiner.refine(video, directory=video_root)
+        assert 'subtitles' in res

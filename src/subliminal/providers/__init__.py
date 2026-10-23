@@ -119,7 +119,7 @@ S = TypeVar('S', bound=Subtitle)
 
 
 class Provider(Generic[S]):
-    """Base class for providers.
+    """Base class for synchronous providers.
 
     Each Provider returns subtitles from a specialized subclass of :class:`~subliminal.subtitle.Subtitle`.
 
@@ -144,45 +144,13 @@ class Provider(Generic[S]):
     #: User Agent to use
     user_agent: str = f'Subliminal/{__short_version__}'
 
+    def __repr__(self) -> str:
+        return f'<{self.__class__.__name__} [{self.video_types!r}]>'
+
     @staticmethod
     def hash_video(video_path: str) -> str | None:
         """Hash the video to be used by the provider."""
         return None
-
-    def __enter__(self) -> Self:
-        self.initialize()
-        return self
-
-    def __exit__(
-        self,
-        exc_type: type[BaseException] | None,
-        exc_value: BaseException | None,
-        traceback: TracebackType | None,
-    ) -> None:
-        self.terminate()
-
-    def initialize(self) -> None:
-        """Initialize the provider.
-
-        Must be called when starting to work with the provider. This is the place for network initialization
-        or login operations.
-
-        .. note::
-            This is called automatically when entering the `with` statement
-
-        """
-        raise NotImplementedError
-
-    def terminate(self) -> None:
-        """Terminate the provider.
-
-        Must be called when done with the provider. This is the place for network shutdown or logout operations.
-
-        .. note::
-            This is called automatically when exiting the `with` statement
-
-        """
-        raise NotImplementedError
 
     @classmethod
     def check(cls, video: Video) -> bool:
@@ -229,6 +197,41 @@ class Provider(Generic[S]):
         """
         return cls.languages & languages
 
+    def __enter__(self) -> Self:
+        self.initialize()
+        return self
+
+    def __exit__(
+        self,
+        exc_type: type[BaseException] | None,
+        exc_value: BaseException | None,
+        traceback: TracebackType | None,
+    ) -> None:
+        self.terminate()
+
+    def initialize(self) -> None:
+        """Initialize the provider.
+
+        Must be called when starting to work with the provider. This is the place for network initialization
+        or login operations.
+
+        .. note::
+            This is called automatically when entering the `with` statement
+
+        """
+        raise NotImplementedError
+
+    def terminate(self) -> None:
+        """Terminate the provider.
+
+        Must be called when done with the provider. This is the place for network shutdown or logout operations.
+
+        .. note::
+            This is called automatically when exiting the `with` statement
+
+        """
+        raise NotImplementedError
+
     def query(self, *args: Any, **kwargs: Any) -> list[S]:
         """Query the provider for subtitles.
 
@@ -268,5 +271,156 @@ class Provider(Generic[S]):
         """
         raise NotImplementedError
 
+
+class AsyncProvider(Generic[S]):
+    """Base class for asynchronous providers.
+
+    Each Provider returns subtitles from a specialized subclass of :class:`~subliminal.subtitle.Subtitle`.
+
+    If any configuration is possible for the provider, like credentials, it must take place during instantiation.
+
+    :raises: :class:`~subliminal.exceptions.ConfigurationError` if there is a configuration error
+
+    """
+
+    #: Supported set of :class:`~babelfish.language.Language`
+    languages: ClassVar[Set[Language]] = frozenset()
+
+    #: Supported video types
+    video_types: ClassVar[tuple[type[Video], ...]] = (Episode, Movie)
+
+    #: Required hash, if any
+    required_hash: ClassVar[str | None] = None
+
+    #: Subtitle class to use
+    subtitle_class: ClassVar[type[S] | None] = None  # type: ignore[misc]  # ty: ignore[invalid-type-form]
+
+    #: User Agent to use
+    user_agent: str = f'Subliminal/{__short_version__}'
+
     def __repr__(self) -> str:
         return f'<{self.__class__.__name__} [{self.video_types!r}]>'
+
+    @staticmethod
+    def hash_video(video_path: str) -> str | None:
+        """Hash the video to be used by the provider."""
+        return None
+
+    @classmethod
+    def check(cls, video: Video) -> bool:
+        """Check if the `video` can be processed.
+
+        The `video` is considered invalid if not an instance of :attr:`video_types` or if the :attr:`required_hash` is
+        not present in :attr:`~subliminal.video.Video.hashes` attribute of the `video`.
+
+        :param video: the video to check.
+        :type video: :class:`~subliminal.video.Video`
+        :return: `True` if the `video` is valid, `False` otherwise.
+        :rtype: bool
+
+        """
+        if not cls.check_types(video):
+            return False
+        return cls.required_hash is None or cls.required_hash in video.hashes
+
+    @classmethod
+    def check_types(cls, video: Video) -> bool:
+        """Check if the `video` type is supported by the provider.
+
+        The `video` is considered invalid if not an instance of :attr:`video_types`.
+
+        :param video: the video to check.
+        :type video: :class:`~subliminal.video.Video`
+        :return: `True` if the `video` is valid, `False` otherwise.
+        :rtype: bool
+
+        """
+        return isinstance(video, cls.video_types)
+
+    @classmethod
+    def check_languages(cls, languages: Set[Language]) -> Set[Language]:
+        """Check if the `languages` are supported by the provider.
+
+        A subset of the supported languages is returned.
+
+        :param languages: the languages to check.
+        :type languages: set of :class:`~babelfish.language.Language`
+        :return: subset of the supported languages.
+        :rtype: set of :class:`~babelfish.language.Language`
+
+        """
+        return cls.languages & languages
+
+    async def __aenter__(self) -> Self:
+        await self.initialize()
+        return self
+
+    async def __aexit__(
+        self,
+        exc_type: type[BaseException] | None,
+        exc_value: BaseException | None,
+        traceback: TracebackType | None,
+    ) -> None:
+        await self.terminate()
+
+    async def initialize(self) -> None:
+        """Initialize the provider.
+
+        Must be called when starting to work with the provider. This is the place for network initialization
+        or login operations.
+
+        .. note::
+            This is called automatically when entering the `with` statement
+
+        """
+        raise NotImplementedError
+
+    async def terminate(self) -> None:
+        """Terminate the provider.
+
+        Must be called when done with the provider. This is the place for network shutdown or logout operations.
+
+        .. note::
+            This is called automatically when exiting the `with` statement
+
+        """
+        raise NotImplementedError
+
+    async def query(self, *args: Any, **kwargs: Any) -> list[S]:
+        """Query the provider for subtitles.
+
+        Arguments should match as much as possible the actual parameters for querying the provider
+
+        :return: found subtitles.
+        :rtype: list of :class:`~subliminal.subtitle.Subtitle`
+        :raise: :class:`~subliminal.exceptions.ProviderError`
+
+        """
+        raise NotImplementedError
+
+    async def list_subtitles(self, video: Video, languages: Set[Language]) -> list[S]:
+        """List subtitles for the `video` with the given `languages`.
+
+        This will call the :meth:`query` method internally. The parameters passed to the :meth:`query` method may
+        vary depending on the amount of information available in the `video`.
+
+        :param video: video to list subtitles for.
+        :type video: :class:`~subliminal.video.Video`
+        :param languages: languages to search for.
+        :type languages: set of :class:`~babelfish.language.Language`
+        :return: found subtitles.
+        :rtype: list of :class:`~subliminal.subtitle.Subtitle`
+        :raise: :class:`~subliminal.exceptions.ProviderError`
+
+        """
+        raise NotImplementedError
+
+    async def download_subtitle(self, subtitle: S) -> None:
+        """Download `subtitle`'s :attr:`~subliminal.subtitle.Subtitle.content`.
+
+        :param subtitle: subtitle to download.
+        :type subtitle: :class:`~subliminal.subtitle.Subtitle`
+        :raise: :class:`~subliminal.exceptions.ProviderError`
+
+        """
+        raise NotImplementedError

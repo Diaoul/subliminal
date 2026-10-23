@@ -126,7 +126,7 @@ def test_provider_pool_list_subtitles(
 ) -> None:
     pool = ProviderPool()
     subtitles = pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
-    assert sorted(subtitles) == [  # type: ignore[type-var,comparison-overlap]
+    assert sorted(subtitles) == [  # type: ignore[type-var,comparison-overlap]  # ty: ignore[invalid-argument-type]
         'gestdown',
         'opensubtitlescom',
         'podnapisi',
@@ -145,7 +145,7 @@ def test_async_provider_pool_list_subtitles(
 ) -> None:
     pool = AsyncProviderPool()
     subtitles = pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
-    assert sorted(subtitles) == [  # type: ignore[type-var,comparison-overlap]
+    assert sorted(subtitles) == [  # type: ignore[type-var,comparison-overlap]  # ty: ignore[invalid-argument-type]
         'gestdown',
         'opensubtitlescom',
         'podnapisi',
@@ -176,7 +176,7 @@ def test_list_subtitles_movie(
 
     # test result
     assert len(subtitles) == 1
-    assert sorted(subtitles[movies['man_of_steel']]) == ['opensubtitlescom', 'podnapisi']  # type: ignore[type-var,comparison-overlap]
+    assert sorted(subtitles[movies['man_of_steel']]) == ['opensubtitlescom', 'podnapisi']  # type: ignore[type-var,comparison-overlap]  # ty: ignore[invalid-argument-type]
 
 
 @pytest.mark.usefixtures('_mock_providers')
@@ -203,7 +203,7 @@ def test_list_subtitles_episode(
 
     # test result
     assert len(subtitles) == 1
-    assert sorted(subtitles[episodes['bbt_s07e05']]) == [  # type: ignore[type-var,comparison-overlap]
+    assert sorted(subtitles[episodes['bbt_s07e05']]) == [  # type: ignore[type-var,comparison-overlap]  # ty: ignore[invalid-argument-type]
         'gestdown',
         'opensubtitlescom',
         'podnapisi',
@@ -227,10 +227,9 @@ def test_list_subtitles_providers(
 
     for name in ('opensubtitlescom',):
         assert provider_manager[name].plugin.list_subtitles.called  # type: ignore[attr-defined]
-
     # test result
     assert len(subtitles) == 1
-    assert sorted(subtitles[episodes['bbt_s07e05']]) == ['opensubtitlescom']  # type: ignore[type-var,comparison-overlap]
+    assert sorted(subtitles[episodes['bbt_s07e05']]) == ['opensubtitlescom']  # type: ignore[type-var,comparison-overlap]  # ty: ignore[invalid-argument-type]
 
 
 @pytest.mark.usefixtures('_mock_providers')

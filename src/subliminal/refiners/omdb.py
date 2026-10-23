@@ -104,7 +104,7 @@ class OMDBClient:
 
         # check response status
         if j['Response'] == 'False':
-            return cast('dict[str, Any]', {})
+            return {}
 
         return cast('dict[str, Any]', j)
 
@@ -134,7 +134,7 @@ class OMDBClient:
 
         # check response status
         if j['Response'] == 'False':
-            return cast('dict[str, Any]', {})
+            return {}
 
         return cast('dict[str, Any]', j)
 
@@ -164,7 +164,7 @@ class OMDBClient:
 
         # check response status
         if j['Response'] == 'False':
-            return cast('dict[str, Any]', {})
+            return {}
 
         return cast('dict[str, Any]', j)
 

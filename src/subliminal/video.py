@@ -388,7 +388,7 @@ class Movie(Video):
     """
 
     #: Title of the movie
-    title: str
+    title: str  # ty: ignore[invalid-mutable-override]
 
     #: Year of the movie
     year: int | None

@@ -198,7 +198,7 @@ class TVsubtitlesProvider(Provider):
             # extract data from the cells
             cells = row('td')
             episode = int(cells[0].text.split('x')[1])
-            episode_id = int(cells[1].a['href'][8:-5])  # ty: ignore[invalid-argument-type, not-subscriptable]
+            episode_id = int(cells[1].a['href'][8:-5])
             episode_ids[episode] = episode_id
 
         if episode_ids:

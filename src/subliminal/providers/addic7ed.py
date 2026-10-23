@@ -355,7 +355,7 @@ class Addic7edProvider(Provider):
             logger.warning('Show id not found: cannot find season href')
             return None
 
-        href = str(tag['href'])  # type: ignore[index]  # ty: ignore[invalid-assignment,invalid-argument-type]
+        href = str(tag['href'])  # type: ignore[index]  # ty: ignore[invalid-argument-type]
         match = show_id_re.search(href)
         if not match:
             logger.warning('Show id not found: cannot match season %s', href)

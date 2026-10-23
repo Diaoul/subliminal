@@ -52,18 +52,31 @@ dependencies = [
     "typing_extensions>=4.10",  # TypedDict extra_items
 ]
 
-# extras
 # https://peps.python.org/pep-0621/#dependencies-optional-dependencies
 [project.optional-dependencies]
 rar = ["rarfile>=2.7"]
-docs = [
-    "sphinx<8.2",
-    "sphinx_rtd_theme>=2",
-    "sphinxcontrib-programoutput",
-    "sphinx_autodoc_typehints",
-    "sphinx_changelog",
-    "vcrpy>=5",  # keep synchronized with tests dependencies
-    "towncrier",
+
+
+# https://packaging.python.org/en/latest/specifications/dependency-groups/#dependency-groups
+[dependency-groups]
+dev = [
+    {include-group = "helpers"},
+    {include-group = "lint"},
+    {include-group = "types"},
+    {include-group = "tests"},
+]
+helpers = [
+    "tox",
+    "ruff",
+]
+lint = [
+    "pre-commit>=2.9.3",
+]
+types = [
+    "mypy",
+    "types-requests",
+    "types-beautifulsoup4",
+    "types-decorator",
 ]
 tests = [
     "subliminal[rar]",
@@ -77,16 +90,16 @@ tests = [
     "vcrpy>=5",  # keep synchronized with docs dependencies
     "win32-setctime; sys_platform=='win32'",
 ]
-types = [
-    "mypy",
-    "types-requests",
-    "types-beautifulsoup4",
-    "types-decorator",
+docs = [
+    "sphinx<8.2",
+    "sphinx_rtd_theme>=2",
+    "sphinxcontrib-programoutput",
+    "sphinx_autodoc_typehints",
+    "sphinx_changelog",
+    "vcrpy>=5",  # keep synchronized with tests dependencies
+    "towncrier",
 ]
-dev = [
-    "pre-commit>=2.9.3",
-    "tox",
-]
+
 
 [project.urls]
 homepage = "https://github.com/Diaoul/subliminal"

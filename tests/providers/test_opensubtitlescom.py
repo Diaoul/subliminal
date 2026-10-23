@@ -192,7 +192,7 @@ def test_get_matches_no_match(episodes: dict[str, Episode]) -> None:
         movie_title='Man of Steel',
         release='man.of.steel.2013.720p.bluray.x264-felony',
         movie_year=2013,
-        movie_imdb_id=770828,  # type: ignore[arg-type]
+        movie_imdb_id='770828',
         series_season=0,
         series_episode=0,
         file_name='man.of.steel.2013.720p.bluray.x264-felony.srt',

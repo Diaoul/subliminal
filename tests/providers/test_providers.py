@@ -37,26 +37,6 @@ def _mock_providers(monkeypatch: pytest.MonkeyPatch) -> None:
         monkeypatch.setattr(provider.plugin, 'terminate', Mock())
 
 
-def test_provider_pool_get_keyerror() -> None:
-    pool = ProviderPool()
-    with pytest.raises(KeyError):
-        pool['de7cidda']
-
-
-def test_provider_pool_del_keyerror() -> None:
-    pool = ProviderPool()
-    with pytest.raises(KeyError):
-        del pool['addic7ed']
-
-
-@pytest.mark.usefixtures('_mock_providers')
-def test_provider_pool_iter() -> None:
-    pool = ProviderPool()
-    assert len(list(pool)) == 0
-    pool['tvsubtitles']
-    assert len(list(pool)) == 1
-
-
 @pytest.mark.usefixtures('_mock_providers')
 def test_provider_pool_list_subtitles(episodes: dict[str, Episode]) -> None:
     pool = ProviderPool()

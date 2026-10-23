@@ -185,11 +185,11 @@ def test_get_matches_no_match(episodes: dict[str, Episode]) -> None:
         page_link=None,
         matched_by='imdbid',
         movie_kind='movie',
-        moviehash=0,  # type: ignore[arg-type]
+        moviehash=0,  # type: ignore[arg-type]  # ty: ignore[invalid-argument-type]
         movie_name='Man of Steel',
         movie_release_name='man.of.steel.2013.720p.bluray.x264-felony',
         movie_year=2013,
-        movie_imdb_id=770828,  # type: ignore[arg-type]
+        movie_imdb_id=770828,  # type: ignore[arg-type]  # ty: ignore[invalid-argument-type]
         series_season=0,
         series_episode=0,
         filename='man.of.steel.2013.720p.bluray.x264-felony.srt',

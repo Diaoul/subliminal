@@ -39,8 +39,8 @@ def test_apikey() -> None:
     apikey = '000000000'
     client = TMDBClient(headers={'X-Test': 'Value'})
     client.apikey = apikey
-    assert 'api_key' in client.session.params  # type: ignore[operator]
-    assert client.session.params['api_key'] == apikey  # type: ignore[index,call-overload]
+    assert 'api_key' in client.session.params  # type: ignore[operator]  # ty: ignore[unsupported-operator]
+    assert client.session.params['api_key'] == apikey  # type: ignore[index,call-overload]  # ty: ignore[not-subscriptable,invalid-argument-type]
 
 
 @pytest.mark.integration

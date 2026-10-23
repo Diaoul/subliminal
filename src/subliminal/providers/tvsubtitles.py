@@ -154,7 +154,7 @@ class TVsubtitlesProvider(Provider):
         soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
         sanitized = sanitize(series)
         show_id = None
-        for suggestion in soup.select('div.left li div a', href=re.compile(r'\/tvshow-')):  # type: ignore[call-arg]
+        for suggestion in soup.select('div.left li div a', href=re.compile(r'\/tvshow-')):  # type: ignore[call-arg]  # ty: ignore[unknown-argument]
             match = link_re.match(suggestion.text)
             if not match:
                 logger.error('Failed to match %s', suggestion.text)
@@ -165,7 +165,7 @@ class TVsubtitlesProvider(Provider):
                 if year is not None and int(match.group('first_year')) != year:
                     logger.debug('Year does not match')
                     continue
-                show_id = int(suggestion['href'][8:-5])  # type: ignore[arg-type]
+                show_id = int(suggestion['href'][8:-5])  # type: ignore[arg-type]  # ty: ignore[invalid-argument-type]
                 logger.debug('Found show id %d', show_id)
                 break
 
@@ -235,11 +235,11 @@ class TVsubtitlesProvider(Provider):
         subtitles = []
         for row in soup.select('.subtitlen'):
             # read the item
-            language = Language.fromtvsubtitles(row.h5.img['src'][13:-4])  # type: ignore[union-attr,index]
-            subtitle_id = str(int(row.parent['href'][10:-5]))  # type: ignore[arg-type,index]
+            language = Language.fromtvsubtitles(row.h5.img['src'][13:-4])  # type: ignore[union-attr,index]  # ty: ignore[not-subscriptable, unresolved-attribute]
+            subtitle_id = str(int(row.parent['href'][10:-5]))  # type: ignore[arg-type,index]  # ty: ignore[invalid-argument-type, not-subscriptable]
             page_link = self.server_url + f'/subtitle-{subtitle_id}.html'
-            rip = row.find('p', title='rip').text.strip() or None  # type: ignore[union-attr]
-            release = row.find('h5').text.strip() or None  # type: ignore[union-attr]
+            rip = row.find('p', title='rip').text.strip() or None  # type: ignore[union-attr]  # ty: ignore[unresolved-attribute]
+            release = row.find('h5').text.strip() or None  # type: ignore[union-attr]  # ty: ignore[unresolved-attribute]
 
             subtitle = self.subtitle_class(
                 language=language,
@@ -296,7 +296,7 @@ class TVsubtitlesProvider(Provider):
         if '</script>' in r.text:
             # Find the filename
             soup = ParserBeautifulSoup(r.content, ['lxml', 'html.parser'])
-            parts = script_re.findall(soup.script.text)  # type: ignore[union-attr]
+            parts = script_re.findall(soup.script.text)  # type: ignore[union-attr]  # ty: ignore[unresolved-attribute]
             filepath = ''.join(p[1] for p in parts)
 
             if not filepath:

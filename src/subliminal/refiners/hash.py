@@ -91,7 +91,7 @@ def refine(
     logger.debug('Computing hashes for %r', video.name)
     hashes = {}
     for name in providers:
-        provider = cast('Provider', provider_manager[name].plugin)
+        provider = cast('type[Provider]', provider_manager[name].plugin)
         if not provider.check_types(video):
             continue
 

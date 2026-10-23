@@ -212,14 +212,14 @@ class OpenSubtitlesProvider(Provider):
     def initialize(self) -> None:
         """Initialize the provider."""
         logger.info('Logging in')
-        response = checked(self.server.LogIn(self.username, self.password, 'eng', self.user_agent))  # type: ignore[arg-type]
+        response = checked(self.server.LogIn(self.username, self.password, 'eng', self.user_agent))  # type: ignore[arg-type]  # ty: ignore[invalid-argument-type]
         self.token = str(response['token'])
         logger.debug('Logged in with token %r', self.token)
 
     def terminate(self) -> None:
         """Terminate the provider."""
         logger.info('Logging out')
-        checked(self.server.LogOut(self.token))  # type: ignore[arg-type]
+        checked(self.server.LogOut(self.token))  # type: ignore[arg-type]  # ty: ignore[invalid-argument-type]
         self.server.close()
         self.token = None
         logger.debug('Logged out')
@@ -227,7 +227,7 @@ class OpenSubtitlesProvider(Provider):
     def no_operation(self) -> None:
         """No-operation on the server."""
         logger.debug('No operation')
-        checked(self.server.NoOperation(self.token))  # type: ignore[arg-type]
+        checked(self.server.NoOperation(self.token))  # type: ignore[arg-type]  # ty: ignore[invalid-argument-type]
 
     def query(
         self,
@@ -267,7 +267,7 @@ class OpenSubtitlesProvider(Provider):
 
         # query the server
         logger.info('Searching subtitles %r', criteria)
-        response = checked(self.server.SearchSubtitles(self.token, criteria))  # type: ignore[arg-type]
+        response = checked(self.server.SearchSubtitles(self.token, criteria))  # type: ignore[arg-type]  # ty: ignore[invalid-argument-type]
         subtitles: list[OpenSubtitlesSubtitle] = []
 
         # exit if no data
@@ -345,7 +345,7 @@ class OpenSubtitlesProvider(Provider):
     def download_subtitle(self, subtitle: OpenSubtitlesSubtitle) -> None:
         """Download the content of the subtitle."""
         logger.info('Downloading subtitle %r', subtitle)
-        response = checked(self.server.DownloadSubtitles(self.token, [str(subtitle.subtitle_id)]))  # type: ignore[arg-type]
+        response = checked(self.server.DownloadSubtitles(self.token, [str(subtitle.subtitle_id)]))  # type: ignore[arg-type]  # ty: ignore[invalid-argument-type]
         subtitle.set_content(zlib.decompress(base64.b64decode(response['data'][0]['data']), 47))
 
 

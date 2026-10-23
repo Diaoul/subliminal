@@ -73,7 +73,7 @@ class TMDBClient:
         self.session.headers['Content-Type'] = 'application/json'
         self.session.headers['Accept-Language'] = 'en'
         if apikey is not None:
-            self.session.params['api_key'] = self.apikey  # type: ignore[index]
+            self.session.params['api_key'] = self.apikey  # type: ignore[index]  # ty: ignore[invalid-assignment]
 
     @region.cache_on_arguments(expiration_time=REFINER_EXPIRATION_TIME)
     def search(
@@ -225,7 +225,7 @@ class TMDBClient:
         self._apikey = value
         # update the default session parameters
         if value:
-            self.session.params['api_key'] = self.apikey  # type: ignore[index]
+            self.session.params['api_key'] = self.apikey  # type: ignore[index]  # ty: ignore[invalid-assignment]
 
 
 def refine_episode(client: TMDBClient, video: Episode, *, force: bool = False, **kwargs: Any) -> dict[str, Any]:

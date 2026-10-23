@@ -504,7 +504,7 @@ def creation_date(filepath: os.PathLike | str) -> float:
         return os.path.getctime(filepath)
     stat = os.stat(filepath)
     try:
-        return stat.st_birthtime  # type: ignore[no-any-return,attr-defined]
+        return stat.st_birthtime  # type: ignore[no-any-return,attr-defined]  # ty: ignore[unresolved-attribute]
     except AttributeError:
         # We're probably on Linux. No easy way to get creation dates here,
         # so we'll settle for when its content was last modified.
@@ -657,7 +657,7 @@ def trim_pattern(string: str, patterns: str | Sequence[str], *, sep: str = '') -
     :return: a tuple with the trimmed string and the matching pattern.
     :rtype: tuple[str, str]
     """
-    patterns = ensure_list(patterns)
+    patterns = ensure_list(patterns)  # ty: ignore[invalid-assignment]
     # trim hearing_impaired or foreign_only attribute, if present
     for pattern in patterns:
         # suppose a string in the form '<pattern><sep><other>'

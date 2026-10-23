@@ -139,7 +139,7 @@ class Provider(Generic[S]):
     required_hash: ClassVar[str | None] = None
 
     #: Subtitle class to use
-    subtitle_class: ClassVar[type[S] | None] = None  # type: ignore[misc]
+    subtitle_class: ClassVar[type[S] | None] = None  # type: ignore[misc]  # ty: ignore[invalid-type-form]
 
     #: User Agent to use
     user_agent: str = f'Subliminal/{__short_version__}'
@@ -155,7 +155,7 @@ class Provider(Generic[S]):
 
     def __exit__(
         self,
-        exc_type: type[BaseException],
+        exc_type: type[BaseException] | None,
         exc_value: BaseException | None,
         traceback: TracebackType | None,
     ) -> None:

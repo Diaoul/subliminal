@@ -334,7 +334,7 @@ def test_merge_extend_and_ignore_unions(
     defaults: list[str],
     expected: set[str],
 ) -> None:
-    final = set(merge_extend_and_ignore_unions(lists, default_lists, defaults))  # type: ignore[arg-type]
+    final = set(merge_extend_and_ignore_unions(lists, default_lists, defaults))  # type: ignore[arg-type]  # ty: ignore[invalid-argument-type]
     assert final == expected
 
 

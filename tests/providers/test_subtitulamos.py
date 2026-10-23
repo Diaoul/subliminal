@@ -118,7 +118,7 @@ def test_list_subtitles_no_video_type() -> None:
     languages = {Language('spa')}
 
     with SubtitulamosProvider() as provider:
-        subtitles = provider.list_subtitles(video, languages)  # type: ignore[arg-type]
+        subtitles = provider.list_subtitles(video, languages)  # type: ignore[arg-type]  # ty: ignore[invalid-argument-type]
         assert len(subtitles) == 0
 
 

@@ -18,13 +18,14 @@ import requests
 from babelfish import Country, Language  # type: ignore[import-untyped]
 
 import subliminal
+import subliminal.refiners.hash
 from subliminal.cache import region
 from subliminal.extensions import RegistrableExtensionManager
 from subliminal.providers.mock import MockSubtitle, mock_subtitle_provider
 from subliminal.video import Episode, Movie
 
 if TYPE_CHECKING:
-    from collections.abc import Callable, Generator, Iterator, Mapping, Sequence
+    from collections.abc import Callable, Generator, Mapping, Sequence
     from types import TracebackType
     from typing import TypeAlias
 
@@ -1087,7 +1088,7 @@ class CliRunner:
         return rv
 
     @contextlib.contextmanager
-    def setenv(self, env: Mapping[str, str | None] | None = None) -> Iterator[None]:
+    def setenv(self, env: Mapping[str, str | None] | None = None) -> Generator[None, None, None]:
         env = self.make_env(env)
 
         old_env = {}
@@ -1112,7 +1113,7 @@ class CliRunner:
                     os.environ[key] = value
 
     @contextlib.contextmanager
-    def isolated_filesystem(self, temp_dir: str | os.PathLike[str] | None = None) -> Iterator[str]:
+    def isolated_filesystem(self, temp_dir: str | os.PathLike[str] | None = None) -> Generator[str, None, None]:
         """A context manager change directory. This isolates tests
         that affect the contents of the CWD to prevent them from
         interfering with each other.
@@ -1185,7 +1186,7 @@ class CliRunner:
 
 
 @pytest.fixture
-def cli_runner(capsys: pytest.CaptureFixture[str], tmp_path: os.PathLike[str]) -> dict[str, str]:
+def cli_runner(capsys: pytest.CaptureFixture[str], tmp_path: os.PathLike[str]) -> CliRunner:
     """Click CLI runner withoud stdin/stdout/stderr catching."""
 
     def with_capture(method: Callable[..., CliResult]) -> Callable[..., CliResult]:
@@ -1208,7 +1209,7 @@ def cli_runner(capsys: pytest.CaptureFixture[str], tmp_path: os.PathLike[str]) -
         return run_with_capture
 
     @contextlib.contextmanager
-    def isolated_filesystem(self: CliRunner) -> Iterator[str]:
+    def isolated_filesystem(self: CliRunner) -> Generator[str, None, None]:
         """A context manager that creates a temporary directory and
         changes the current working directory to it. This isolates tests
         that affect the contents of the CWD to prevent them from
@@ -1223,11 +1224,10 @@ def cli_runner(capsys: pytest.CaptureFixture[str], tmp_path: os.PathLike[str]) -
         finally:
             os.chdir(cwd)
 
-    # Decorate the run method to capture stdout and stderr
-    CliRunner_s = type('CliRunner_s', (CliRunner,), {})
-    CliRunner_s.run = with_capture(CliRunner.run)  # type: ignore[attr-defined]
-
-    # Change directory to the temporary path
-    CliRunner_s.isolated_filesystem = isolated_filesystem  # type: ignore[attr-defined]
-
+    # Decorate the run method to capture stdout and stderr and change directory to the temporary path
+    CliRunner_s = type(
+        'CliRunner_s',
+        (CliRunner,),
+        {'run': with_capture(CliRunner.run), 'isolated_filesystem': isolated_filesystem},
+    )
     return CliRunner_s()

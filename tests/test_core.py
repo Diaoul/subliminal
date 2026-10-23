@@ -364,12 +364,12 @@ def test_scan_videos(movies: dict[str, Movie], tmp_path: Path, monkeypatch: pyte
         ((os.path.join('movies', movies['man_of_steel'].name),), kwargs),
         ((os.path.join('movies', movies['enders_game'].name),), kwargs),
     ]
-    mock_scan_video.assert_has_calls(scan_video_calls, any_order=True)  # type: ignore[arg-type]
+    mock_scan_video.assert_has_calls(scan_video_calls, any_order=True)  # type: ignore[arg-type]  # ty: ignore[invalid-argument-type]
 
     # scan_archive calls
     kwargs = {'name': None}
     scan_archive_calls = [((os.path.join('movies', movies['interstellar'].name),), kwargs)]
-    mock_scan_archive.assert_has_calls(scan_archive_calls, any_order=True)  # type: ignore[arg-type]
+    mock_scan_archive.assert_has_calls(scan_archive_calls, any_order=True)  # type: ignore[arg-type]  # ty: ignore[invalid-argument-type]
 
 
 def test_scan_videos_age(movies: dict[str, Movie], tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
@@ -394,7 +394,7 @@ def test_scan_videos_age(movies: dict[str, Movie], tmp_path: Path, monkeypatch: 
     # scan_video calls
     kwargs: dict[str, Any] = {'name': None}
     scan_video_calls = [((os.path.join('movies', movies['man_of_steel'].name),), kwargs)]
-    mock_scan_video.assert_has_calls(scan_video_calls, any_order=True)  # type: ignore[arg-type]
+    mock_scan_video.assert_has_calls(scan_video_calls, any_order=True)  # type: ignore[arg-type]  # ty: ignore[invalid-argument-type]
 
 
 def test_save_subtitles(movies: dict[str, Movie], tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:

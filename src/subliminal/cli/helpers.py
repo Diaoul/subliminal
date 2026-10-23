@@ -14,6 +14,7 @@ from typing import TYPE_CHECKING, Any
 
 import click
 import tomlkit
+import tomlkit.exceptions
 from click_option_group import OptionGroup
 from dogpile.cache.backends.file import AbstractFileLock
 from dogpile.util.readwrite_lock import ReadWriteMutex
@@ -312,7 +313,7 @@ def options_from_managers(
                     PROVIDERS_OPTIONS_TEMPLATE.format(ext=group_name, plugin=plugin_name, key=name),
                 )
                 # Setting the default value also decides on the type
-                attrs = {
+                attrs: dict[str, Any] = {
                     'default': opt['default'],
                     'help': opt['desc'],
                     'show_default': True,

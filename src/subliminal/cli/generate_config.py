@@ -7,6 +7,8 @@ from typing import Any
 
 import click
 import tomlkit
+import tomlkit.exceptions
+import tomlkit.items
 from click_option_group import GroupedOption
 
 from .cli import subliminal

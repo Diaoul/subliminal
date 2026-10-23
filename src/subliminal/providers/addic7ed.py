@@ -300,12 +300,12 @@ class Addic7edProvider(Provider):
 
         # populate the show ids
         show_ids = {}
-        for show in soup.select('option', value=re.compile(r'\d+')):  # type: ignore[call-arg]
+        for show in soup.select('option', value=re.compile(r'\d+')):  # type: ignore[call-arg]  # ty: ignore[unknown-argument]
             # Not a show, the combobox selector
             if 'selected' in show.attrs or 'value' not in show.attrs:
                 continue
             try:
-                show_id = int(show['value'])  # type: ignore[arg-type]
+                show_id = int(show['value'])  # type: ignore[arg-type]  # ty: ignore[invalid-argument-type]
             except ValueError:
                 continue
             title = addic7ed_sanitize(show.text)
@@ -333,7 +333,7 @@ class Addic7edProvider(Provider):
             return []
 
         pages = []
-        episode_matches = table.select('tr > td > a')  # type: ignore[union-attr]
+        episode_matches = table.select('tr > td > a')  # type: ignore[union-attr]  # ty: ignore[unresolved-attribute]
         for match in episode_matches:
             path = match['href']
             link = f'{self.server_url}/{path}'
@@ -355,7 +355,7 @@ class Addic7edProvider(Provider):
             logger.warning('Show id not found: cannot find season href')
             return None
 
-        href = str(tag['href'])  # type: ignore[index]
+        href = str(tag['href'])  # type: ignore[index]  # ty: ignore[invalid-argument-type]
         match = show_id_re.search(href)
         if not match:
             logger.warning('Show id not found: cannot match season %s', href)
@@ -471,7 +471,7 @@ class Addic7edProvider(Provider):
 
         show_ids = self._get_show_ids()
         if not show_ids:  # pragma: no cover
-            self._get_show_ids.invalidate()  # type: ignore[attr-defined]
+            self._get_show_ids.invalidate()  # type: ignore[attr-defined]  # ty: ignore[unresolved-attribute]
             show_ids = self._get_show_ids()
 
         show_id = self._try_get_show_id(show_ids, series_sanitized, year=year, country_code=country_code)

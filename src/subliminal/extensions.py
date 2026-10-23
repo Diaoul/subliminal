@@ -74,16 +74,16 @@ class RegistrableExtensionManager(ExtensionManager):
             return self._load_one_plugin(  # type: ignore[call-arg]
                 ep,
                 invoke_on_load=False,
-                invoke_args=(),  # type: ignore[arg-type]
+                invoke_args=(),  # type: ignore[arg-type]  # ty: ignore[invalid-argument-type]
                 invoke_kwds={},
-                verify_requirements=False,
+                verify_requirements=False,  # ty: ignore[unknown-argument]
             )
 
         # The 'verify_requirements' argument is forbidden
         return self._load_one_plugin(  # type: ignore[call-arg]
             ep,
             invoke_on_load=False,
-            invoke_args=(),  # type: ignore[arg-type]
+            invoke_args=(),  # type: ignore[arg-type]  # ty: ignore[invalid-argument-type]
             invoke_kwds={},
         )
 

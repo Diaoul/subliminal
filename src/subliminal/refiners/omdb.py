@@ -55,9 +55,9 @@ class OMDBClient:
         self.session = session if session is not None else requests.Session()
         self.session.headers['User-Agent'] = self.user_agent
         self.session.headers.update(headers or {})
-        self.session.params['r'] = 'json'  # type: ignore[index]
-        self.session.params['v'] = version  # type: ignore[index]
-        self.session.params['apikey'] = self.apikey  # type: ignore[index]
+        self.session.params['r'] = 'json'  # type: ignore[index]  # ty: ignore[invalid-assignment]
+        self.session.params['v'] = version  # type: ignore[index]  # ty: ignore[invalid-assignment]
+        self.session.params['apikey'] = self.apikey  # type: ignore[index]  # ty: ignore[invalid-assignment]
 
     def get(
         self,
@@ -104,7 +104,7 @@ class OMDBClient:
 
         # check response status
         if j['Response'] == 'False':
-            return cast('dict[str, Any]', {})
+            return {}
 
         return cast('dict[str, Any]', j)
 
@@ -134,7 +134,7 @@ class OMDBClient:
 
         # check response status
         if j['Response'] == 'False':
-            return cast('dict[str, Any]', {})
+            return {}
 
         return cast('dict[str, Any]', j)
 
@@ -164,7 +164,7 @@ class OMDBClient:
 
         # check response status
         if j['Response'] == 'False':
-            return cast('dict[str, Any]', {})
+            return {}
 
         return cast('dict[str, Any]', j)
 
@@ -204,7 +204,7 @@ class OMDBClient:
             return
         self._apikey = value
         # update the default session parameters
-        self.session.params['apikey'] = self.apikey  # type: ignore[index]
+        self.session.params['apikey'] = self.apikey  # type: ignore[index]  # ty: ignore[invalid-assignment]
 
 
 def refine_episode(client: OMDBClient, video: Episode, *, force: bool = False, **kwargs: Any) -> dict[str, Any]:

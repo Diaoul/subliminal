@@ -59,7 +59,7 @@ These changes apply because we have **2** things in `conf.py`:
 
    ```py
    intersphinx_mapping = {
-      'bs4':    ('https://www.crummy.com/software/BeautifulSoup/bs4/doc/', "_intersphinx/bs4_objects.inv")
+       'bs4': ('https://www.crummy.com/software/BeautifulSoup/bs4/doc/', '_intersphinx/bs4_objects.inv')
    }
    ```
 

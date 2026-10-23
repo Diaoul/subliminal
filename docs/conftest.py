@@ -1,13 +1,19 @@
 """Docs conftest.py."""
 
+from __future__ import annotations
+
 import os
-from pathlib import Path
+from typing import TYPE_CHECKING
 from unittest.mock import Mock
 
 import pytest
 from vcr import VCR
 
 from subliminal.cache import region
+
+if TYPE_CHECKING:
+    from collections.abc import Generator
+    from pathlib import Path
 
 vcr = VCR(
     path_transformer=lambda path: path + '.yaml',
@@ -29,7 +35,7 @@ def _chdir(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
 
 
 @pytest.fixture(autouse=True)
-def use_cassette(request: pytest.FixtureRequest) -> None:
+def use_cassette(request: pytest.FixtureRequest) -> Generator[None, None, None]:
     """Use VCR cassette automatically."""
-    with vcr.use_cassette('test_' + request.fspath.purebasename):
+    with vcr.use_cassette('test_' + request.fspath.purebasename):  # ty: ignore[unresolved-attribute]
         yield

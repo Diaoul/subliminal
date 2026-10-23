@@ -241,7 +241,7 @@ def test_query_no_language(episodes: dict[str, Episode]) -> None:
     video = episodes['bbt_s07e05']
     with GestdownProvider() as provider:
         title, show_id = provider.get_title_and_show_id(video)
-        subtitles = provider.query(show_id, title, video.season, video.episode, None)
+        subtitles = provider.query(show_id, title, video.season, video.episode, None)  # ty: ignore[invalid-argument-type]
     assert len(subtitles) == 0
 
 

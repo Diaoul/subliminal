@@ -28,17 +28,17 @@ try:
     )
 
     #: Supported archive extensions (.rar)
-    ARCHIVE_EXTENSIONS: tuple[str] = ('.rar',)
+    ARCHIVE_EXTENSIONS: tuple[str, ...] = ('.rar',)
 
     #: Supported archive errors
-    ARCHIVE_ERRORS: tuple[Exception] = (ArchiveError, BadZipfile, BadRarFile)  # type: ignore[assignment]  # ty: ignore[invalid-assignment]
+    ARCHIVE_ERRORS: tuple[Exception, ...] = (ArchiveError, BadZipfile, BadRarFile)  # type: ignore[assignment]  # ty: ignore[invalid-assignment]
 
 except ImportError:
     #: Supported archive extensions
-    ARCHIVE_EXTENSIONS: tuple[str] = ()  # type: ignore[no-redef]  # ty: ignore[invalid-assignment]
+    ARCHIVE_EXTENSIONS: tuple[str, ...] = ()  # type: ignore[no-redef]  # ty: ignore[invalid-assignment]
 
     #: Supported archive errors
-    ARCHIVE_ERRORS: tuple[Exception] = (ArchiveError, BadZipfile)  # type: ignore[no-redef]  # ty: ignore[invalid-assignment]
+    ARCHIVE_ERRORS: tuple[Exception, ...] = (ArchiveError, BadZipfile)  # type: ignore[no-redef]  # ty: ignore[invalid-assignment]
 
 
 def is_supported_archive(filename: str) -> bool:

@@ -1,4 +1,7 @@
+from __future__ import annotations
+
 import os
+from typing import TYPE_CHECKING
 from unittest.mock import Mock
 
 import pytest
@@ -14,7 +17,9 @@ from subliminal.provider_pool import (
 from subliminal.providers.tvsubtitles import TVsubtitlesSubtitle
 from subliminal.score import episode_scores
 from subliminal.subtitle import Subtitle
-from subliminal.video import Episode, Movie
+
+if TYPE_CHECKING:
+    from subliminal.video import Episode, Movie
 
 vcr = VCR(
     path_transformer=lambda path: path + '.yaml',
@@ -34,106 +39,6 @@ def _mock_providers(monkeypatch: pytest.MonkeyPatch) -> None:
         monkeypatch.setattr(provider.plugin, 'terminate', Mock())
 
 
-<<<<<<< HEAD
-@pytest.mark.usefixtures('_mock_providers')
-def test_provider_pool_list_subtitles(episodes: dict[str, Episode]) -> None:
-    pool = ProviderPool()
-    subtitles = pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
-    assert sorted(subtitles) == [  # type: ignore[type-var,comparison-overlap]  # ty: ignore[invalid-argument-type]
-        'addic7ed',
-        'gestdown',
-        'opensubtitles',
-        'opensubtitlescom',
-        'podnapisi',
-        'subtitulamos',
-        'tvsubtitles',
-    ]
-    for provider in subtitles:
-        provider_s = cast('str', provider)
-        assert provider_manager[provider_s].plugin.initialize.called  # type: ignore[attr-defined]
-        assert provider_manager[provider_s].plugin.list_subtitles.called  # type: ignore[attr-defined]
-
-
-@pytest.mark.usefixtures('_mock_providers')
-def test_async_provider_pool_list_subtitles(episodes: dict[str, Episode]) -> None:
-    pool = AsyncProviderPool()
-    subtitles = pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
-    assert sorted(subtitles) == [  # type: ignore[type-var,comparison-overlap]  # ty: ignore[invalid-argument-type]
-        'addic7ed',
-        'gestdown',
-        'opensubtitles',
-        'opensubtitlescom',
-        'podnapisi',
-        'subtitulamos',
-        'tvsubtitles',
-    ]
-    for provider in subtitles:
-        provider_s = cast('str', provider)
-        assert provider_manager[provider_s].plugin.initialize.called  # type: ignore[attr-defined]
-        assert provider_manager[provider_s].plugin.list_subtitles.called  # type: ignore[attr-defined]
-
-
-||||||| parent of 1c11dc4 (Refactor and rename files; add aiofiles dependency)
-def test_provider_pool_get_keyerror() -> None:
-    pool = ProviderPool()
-    with pytest.raises(KeyError):
-        pool['de7cidda']
-
-
-def test_provider_pool_del_keyerror() -> None:
-    pool = ProviderPool()
-    with pytest.raises(KeyError):
-        del pool['addic7ed']
-
-
-@pytest.mark.usefixtures('_mock_providers')
-def test_provider_pool_iter() -> None:
-    pool = ProviderPool()
-    assert len(list(pool)) == 0
-    pool['tvsubtitles']
-    assert len(list(pool)) == 1
-
-
-@pytest.mark.usefixtures('_mock_providers')
-def test_provider_pool_list_subtitles(episodes: dict[str, Episode]) -> None:
-    pool = ProviderPool()
-    subtitles = pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
-    assert sorted(subtitles) == [  # type: ignore[type-var,comparison-overlap]
-        'addic7ed',
-        'gestdown',
-        'opensubtitles',
-        'opensubtitlescom',
-        'podnapisi',
-        'subtitulamos',
-        'tvsubtitles',
-    ]
-    for provider in subtitles:
-        provider_s = cast('str', provider)
-        assert provider_manager[provider_s].plugin.initialize.called  # type: ignore[attr-defined]
-        assert provider_manager[provider_s].plugin.list_subtitles.called  # type: ignore[attr-defined]
-
-
-@pytest.mark.usefixtures('_mock_providers')
-def test_async_provider_pool_list_subtitles(episodes: dict[str, Episode]) -> None:
-    pool = AsyncProviderPool()
-    subtitles = pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
-    assert sorted(subtitles) == [  # type: ignore[type-var,comparison-overlap]
-        'addic7ed',
-        'gestdown',
-        'opensubtitles',
-        'opensubtitlescom',
-        'podnapisi',
-        'subtitulamos',
-        'tvsubtitles',
-    ]
-    for provider in subtitles:
-        provider_s = cast('str', provider)
-        assert provider_manager[provider_s].plugin.initialize.called  # type: ignore[attr-defined]
-        assert provider_manager[provider_s].plugin.list_subtitles.called  # type: ignore[attr-defined]
-
-
-=======
->>>>>>> 1c11dc4 (Refactor and rename files; add aiofiles dependency)
 @pytest.mark.usefixtures('_mock_providers')
 def test_list_subtitles_movie(movies: dict[str, Movie]) -> None:
     video = movies['man_of_steel']

@@ -28,7 +28,7 @@ vcr = VCR(
 def _mock_refiners(monkeypatch: pytest.MonkeyPatch) -> None:
     for refiner in refiner_manager:
         if inspect.isclass(refiner.plugin):
-            if inspect.iscoroutinefunction(refiner.plugin.initialize):
+            if inspect.iscoroutinefunction(refiner.plugin.initialize):  # type: ignore[attr-defined]
                 monkeypatch.setattr(refiner.plugin, 'initialize', AsyncMock())
                 monkeypatch.setattr(
                     refiner.plugin,

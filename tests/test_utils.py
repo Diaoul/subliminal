@@ -242,7 +242,7 @@ def test_handle_exception(caplog: pytest.LogCaptureFixture, err: Exception, msg:
     ids=['timeout', 'server-timeout', 'http-client-error', 'http-server-error', 'connection-error'],
 )
 def test_handle_async_exception(error: Exception, expected: str, caplog: pytest.LogCaptureFixture) -> None:
-    with caplog.at_level(logging.ERROR, logger='subliminal.provider_pool'):
+    with caplog.at_level(logging.ERROR):
         handle_async_exception(error, 'Provider foo')
 
     assert expected in caplog.text

@@ -515,7 +515,7 @@ def download(
             #     else:
             #         ignored_videos.append(video)
 
-            videos = refine(
+            refined_videos = refine(
                 video_candidates,
                 languages=language_set,
                 refiners=use_refiners,
@@ -526,7 +526,8 @@ def download(
                 directory=directory,
                 providers=use_providers,
             )
-            ignored_videos.extend(list(video_candidates - videos))
+            videos.extend(list(refined_videos))
+            ignored_videos.extend(list(video_candidates - refined_videos))
 
     # output errored paths
     if verbose > 0:

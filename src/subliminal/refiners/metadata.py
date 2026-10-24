@@ -87,7 +87,7 @@ def refine(
             )
             logger.warning(msg)
         # provider library or executable not found
-        elif not providers[metadata_provider]:
+        elif not providers[metadata_provider]:  # pragma: no cover
             msg = (
                 'The metadata_provider library or executable was not found, '
                 'you can specify the path with the argument to the refine function: '
@@ -108,7 +108,7 @@ def refine(
     ret: dict[str, Any] = {}
     # duration, in seconds
     # more reliable to take it from here than from the 'video' track
-    if 'duration' in media:
+    if 'duration' in media:  # pragma: no branch
         ret['duration'] = get_float(media['duration'])
         logger.debug('Found duration %.2f', ret['duration'])
 
@@ -119,7 +119,7 @@ def refine(
         video_track = default_videos[0] if len(default_videos) > 0 else media['video'][0]
 
         # resolution
-        if 'resolution' in video_track:
+        if 'resolution' in video_track:  # pragma: no branch
             resolution = str(video_track['resolution'])
             if resolution in ('480p', '720p', '1080p'):
                 ret['resolution'] = resolution
@@ -131,7 +131,7 @@ def refine(
             logger.debug('Found frame_rate %.2f', ret['frame_rate'])
 
         # video codec
-        if 'codec' in video_track:
+        if 'codec' in video_track:  # pragma: no branch
             ret['video_codec'] = video_track['codec']
             logger.debug('Found video_codec %s', ret['video_codec'])
     else:  # pragma: no cover
@@ -144,7 +144,7 @@ def refine(
         audio_track = default_audios[0] if len(default_audios) > 0 else media['audio'][0]
 
         # audio codec
-        if 'codec' in audio_track:
+        if 'codec' in audio_track:  # pragma: no branch
             ret['audio_codec'] = audio_track['codec']
             logger.debug('Found audio_codec %s', ret['audio_codec'])
     else:  # pragma: no cover

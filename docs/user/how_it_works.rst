@@ -21,8 +21,8 @@ Providers all inherit the same :class:`~subliminal.providers.Provider` base clas
 They are registered on the ``subliminal.providers`` entry point and are exposed through the
 :data:`~subliminal.extensions.provider_manager` for easy access.
 
-To work with multiple providers seamlessly, the :class:`~subliminal.core.ProviderPool` exposes the same API but
-distributes it to its providers and :class:`~subliminal.core.AsyncProviderPool` does it asynchronously.
+To work with multiple providers seamlessly, the :class:`~subliminal.provider_pool.AsyncProviderPool` exposes the
+same API but distributes it to its providers asynchronously.
 
 .. _scoring:
 

@@ -34,6 +34,8 @@ classifiers = [
 ]
 dynamic = ["version"]
 dependencies = [
+    "aiofiles",
+    "aiohttp",
     "babelfish>=0.6.1",
     "beautifulsoup4>=4.4.0",
     "defusedxml>=0.7.1",
@@ -83,6 +85,7 @@ tests = [
     "coverage[toml]>=7",
     "packaging",
     "pytest>=6.0",
+    "pytest-asyncio",
     "pytest-cov",
     "pytest-xdist",
     "sympy",
@@ -125,6 +128,7 @@ tvsubtitles = "subliminal.providers.tvsubtitles:TVsubtitlesProvider"
 
 [project.entry-points."subliminal.refiners"]
 hash = "subliminal.refiners.hash:refine"
+external_subtitles = "subliminal.refiners.external_subtitles:ExternalSubtitlesRefiner"
 metadata = "subliminal.refiners.metadata:refine"
 omdb = "subliminal.refiners.omdb:refine"
 tmdb = "subliminal.refiners.tmdb:refine"

@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import logging
 import os
 import warnings
@@ -12,37 +13,31 @@ from typing import TYPE_CHECKING, Any
 import click
 
 from subliminal import (
-    AsyncProviderPool,
     Episode,
     Movie,
     Video,
     __version__,
-    check_video,
     compute_score,
     get_scores,
     provider_manager,
-    refine,
     refiner_manager,
     save_subtitles,
 )
-from subliminal.core import (
-    ARCHIVE_EXTENSIONS,
-    collect_video_filepaths,
-    scan_path,
-    search_external_subtitles,
-)
+from subliminal.core import ARCHIVE_EXTENSIONS, collect_video_filepaths, refine, scan_path
 from subliminal.exceptions import GuessingError
 from subliminal.extensions import get_default_providers, get_default_refiners
+from subliminal.provider_pool import AsyncProviderPool, _check_no_running_loop
 from subliminal.utils import NameResolver, merge_extend_and_ignore_unions
 
 from ._format import AgeParamType, LanguageParamType, format_provider_errors, plural
 
 if TYPE_CHECKING:
-    from collections.abc import Sequence
+    from collections.abc import Sequence, Set
     from datetime import timedelta
 
     from babelfish import Language
 
+    from subliminal import Subtitle
 
 logger = logging.getLogger(__name__)
 
@@ -478,7 +473,7 @@ def download(
                     continue
 
             # scan videos
-            video_candidates: list[Video] = []
+            video_candidates: set[Video] = set()
             for filepath in collected_filepaths:
                 # Try scanning the video at path
                 video = scan_video_path(
@@ -501,24 +496,38 @@ def download(
 
                 # Set the use_time attribute before refining
                 video.use_ctime = use_ctime
-                video_candidates.append(video)
+                video_candidates.add(video)
 
             # check and refine videos
-            for video in video_candidates:
-                if not force and not force_external_subtitles:
-                    video.subtitles.extend(search_external_subtitles(video.name, directory=directory).values())
-                if check_video(video, languages=language_set, age=age, undefined=single):
-                    refine(
-                        video,
-                        refiners=use_refiners,
-                        refiner_configs=obj['refiner_configs'],
-                        embedded_subtitles=not force and not force_embedded_subtitles,
-                        providers=use_providers,
-                        languages=language_set,
-                    )
-                    videos.append(video)
-                else:
-                    ignored_videos.append(video)
+            # for video in video_candidates:
+            #     if not force and not force_external_subtitles:
+            #         video.subtitles.extend(search_external_subtitles(video.name, directory=directory).values())
+            #     if check_video(video, languages=language_set, age=age, undefined=single):
+            #         refine(
+            #             [video],
+            #             refiners=use_refiners,
+            #             refiner_configs=obj['refiner_configs'],
+            #             embedded_subtitles=not force and not force_embedded_subtitles,
+            #             providers=use_providers,
+            #             languages=language_set,
+            #         )
+            #         videos.append(video)
+            #     else:
+            #         ignored_videos.append(video)
+
+            refined_videos = refine(
+                video_candidates,
+                languages=language_set,
+                refiners=use_refiners,
+                refiner_configs=obj['refiner_configs'],
+                check_kwargs={'languages': language_set, 'age': age, 'undefined': single},
+                embedded_subtitles=not force and not force_embedded_subtitles,
+                external_subtitles=not force and not force_external_subtitles,
+                directory=directory,
+                providers=use_providers,
+            )
+            videos.extend(list(refined_videos))
+            ignored_videos.extend(list(video_candidates - refined_videos))
 
     # output errored paths
     if verbose > 0:
@@ -567,39 +576,18 @@ def download(
         return
 
     # download best subtitles
-    downloaded_subtitles = defaultdict(list)
-    with AsyncProviderPool(
-        max_workers=max_workers,
+    downloaded_subtitles = list_subtitles(
+        videos,
+        language_set,
         providers=use_providers,
         provider_configs=obj['provider_configs'],
-    ) as pp:
-        with click.progressbar(
-            videos,
-            label='Downloading subtitles',
-            item_show_func=lambda v: os.path.split(v.name)[1] if v is not None else '',
-        ) as bar:
-            for v in bar:
-                if debug:
-                    # print a new line, so the logs appear below the progressbar
-                    click.echo()
-                scores = get_scores(v)
-                subtitles = pp.download_best_subtitles(
-                    pp.list_subtitles(v, language_set - v.subtitle_languages),
-                    v,
-                    language_set,
-                    min_score=scores['hash'] * min_score // 100,
-                    subtitle_categories=subtitle_categories,
-                    skip_wrong_fps=skip_wrong_fps,
-                    only_one=single,
-                    ignore_subtitles=ignore_subtitles,
-                )
-                downloaded_subtitles[v] = subtitles
-
-        if pp.failed_providers:
-            click.secho(
-                format_provider_errors(pp.failed_providers, pp.discarded_providers, video_count=len(videos)),
-                fg='yellow',
-            )
+        debug=debug,
+        min_score=min_score,
+        subtitle_categories=subtitle_categories,
+        skip_wrong_fps=skip_wrong_fps,
+        only_one=single,
+        ignore_subtitles=ignore_subtitles,
+    )
 
     # save subtitles
     total_subtitles = 0
@@ -706,3 +694,56 @@ def scan_video_path(
         return None
 
     return video
+
+
+def list_subtitles(*args: Any, **kwargs: Any) -> dict[Video, list[Subtitle]]:
+    """Synchronous wrapper around :func:`async_list_subtitles`."""
+    _check_no_running_loop()
+    return asyncio.run(async_list_subtitles(*args, **kwargs))
+
+
+async def async_list_subtitles(
+    videos: Sequence[Video],
+    language_set: Set[Language],
+    *,
+    providers: Sequence[str] | None = None,
+    provider_configs: dict[str, Any] | None = None,
+    debug: bool = False,
+    min_score: int = 0,
+    **kwargs: Any,
+) -> dict[Video, list[Subtitle]]:
+    """List subtitles from asynchronous AsyncRefinerPool."""
+    providers = providers or []
+    provider_configs = provider_configs or {}
+
+    downloaded_subtitles = defaultdict(list)
+    async with AsyncProviderPool(
+        # max_workers=max_workers,
+        providers=providers,
+        provider_configs=provider_configs,
+    ) as pp:
+        with click.progressbar(
+            videos,
+            label='Downloading subtitles',
+            item_show_func=lambda v: os.path.split(v.name)[1] if v is not None else '',
+        ) as bar:
+            for v in bar:
+                if debug:
+                    # print a new line, so the logs appear below the progressbar
+                    click.echo()
+                scores = get_scores(v)
+                subtitles = await pp.list_subtitles(v, language_set - v.subtitle_languages)
+                downloaded_subtitles[v] = await pp.download_best_subtitles(
+                    subtitles,
+                    v,
+                    language_set,
+                    min_score=scores['hash'] * min_score // 100,
+                    **kwargs,
+                )
+
+        if pp.failed_providers:
+            click.secho(
+                format_provider_errors(pp.failed_providers, pp.discarded_providers, video_count=len(videos)),
+                fg='yellow',
+            )
+    return downloaded_subtitles

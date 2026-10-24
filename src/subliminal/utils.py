@@ -449,9 +449,11 @@ def handle_exception(e: Exception, msg: str) -> None:
         # OpenSubtitles raises xmlrpclib.ProtocolError when unavailable
         logger.error('Service unavailable. %s', msg)
     elif isinstance(e, requests.exceptions.HTTPError):
-        logger.error(
-            'HTTP error %r. %s', e.response.status_code, msg, exc_info=e.response.status_code not in range(500, 600)
-        )
+        resp = e.response
+        if resp is None:  # pragma: no cover
+            logger.error('HTTP error. %s', msg)
+        else:
+            logger.error('HTTP error %r. %s', resp.status_code, msg, exc_info=resp.status_code not in range(500, 600))
     elif isinstance(e, SSLError):
         logger.error('SSL error %r. %s', e.args[0], msg, exc_info=e.args[0] != 'The read operation timed out')
     else:

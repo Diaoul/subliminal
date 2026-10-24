@@ -10,6 +10,7 @@ from subliminal.extensions import (
     get_default_providers,
     get_default_refiners,
     parse_entry_point,
+    parse_extension_error,
     provider_manager,
     refiner_manager,
 )
@@ -125,3 +126,15 @@ def test_refiner_manager() -> None:
     disabled_names = set(disabled_refiners)
     assert enabled_names == setup_names - disabled_names
     assert internal_names == enabled_names | disabled_names
+
+
+def test_registrable_extension_manager_error() -> None:
+    manager = RegistrableExtensionManager(
+        'subliminal.test_providers',
+        [
+            'notfound = subliminal.providers.notfound:NotFoundProvider',
+        ],
+        on_load_failure_callback=parse_extension_error,
+    )
+
+    assert len(list(manager)) == 0

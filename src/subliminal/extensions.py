@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import inspect
+import logging
 import re
 from importlib.metadata import EntryPoint
 from typing import TYPE_CHECKING, Any
@@ -13,6 +14,8 @@ if TYPE_CHECKING:
     from collections.abc import Sequence
 
     from stevedore.extension import Extension
+
+logger = logging.getLogger(__name__)
 
 
 class RegistrableExtensionManager(ExtensionManager):
@@ -43,7 +46,6 @@ class RegistrableExtensionManager(ExtensionManager):
     def __init__(self, namespace: str, internal_extensions: Sequence[str], **kwargs: Any) -> None:
         self.registered_extensions = []
         self.internal_extensions = list(internal_extensions)
-
         # 'verify_requirements' argument was remove in stevedore version 5.6.0
         self._old_api = 'verify_requirements' in inspect.signature(self._load_one_plugin).parameters
 
@@ -144,6 +146,12 @@ def parse_entry_point(src: str, group: str) -> EntryPoint:
     return EntryPoint(res['name'], res['value'], group)
 
 
+def parse_extension_error(manager: RegistrableExtensionManager, extension: EntryPoint, exc: Exception) -> None:
+    """Log the error from loading and extension."""
+    msg = f'Extension manager {manager.namespace!r} cannot load extension {extension.name!r}: {exc}'
+    logger.exception(msg)
+
+
 #: Provider manager
 provider_manager = RegistrableExtensionManager(
     'subliminal.providers',
@@ -161,6 +169,7 @@ provider_manager = RegistrableExtensionManager(
         'subtitulamos = subliminal.providers.subtitulamos:SubtitulamosProvider',
         'tvsubtitles = subliminal.providers.tvsubtitles:TVsubtitlesProvider',
     ],
+    on_load_failure_callback=parse_extension_error,
 )
 
 #: Disabled providers
@@ -177,11 +186,13 @@ refiner_manager = RegistrableExtensionManager(
     'subliminal.refiners',
     [
         'hash = subliminal.refiners.hash:refine',
+        'external_subtitles = subliminal.refiners.external_subtitles:ExternalSubtitlesRefiner',
         'metadata = subliminal.refiners.metadata:refine',
         'omdb = subliminal.refiners.omdb:refine',
         'tvdb = subliminal.refiners.tvdb:refine',
         'tmdb = subliminal.refiners.tmdb:refine',
     ],
+    on_load_failure_callback=parse_extension_error,
 )
 
 #: Disabled refiners
@@ -191,10 +202,3 @@ disabled_refiners: list[str] = []
 def get_default_refiners() -> list[str]:
     """Return the default enabled refiners."""
     return [r for r in refiner_manager.names() if r not in disabled_refiners]
-
-
-#: Discarded Movie refiners
-discarded_movie_refiners: list[str] = ['tvdb']
-
-#: Discarded Episode refiners
-discarded_episode_refiners: list[str] = []

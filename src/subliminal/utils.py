@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import functools
 import logging
 import os
@@ -21,6 +22,7 @@ if sys.version_info >= (3, 12):
 else:  # pragma: no cover
     from typing_extensions import override
 
+import aiohttp
 import requests
 from guessit import guessit  # type: ignore[import-untyped]
 from requests.exceptions import SSLError
@@ -457,6 +459,25 @@ def handle_exception(e: Exception, msg: str) -> None:
     elif isinstance(e, SSLError):
         logger.error('SSL error %r. %s', e.args[0], msg, exc_info=e.args[0] != 'The read operation timed out')
     else:
+        logger.exception('Unexpected error. %s', msg)
+
+
+def handle_async_exception(e: BaseException, msg: str) -> None:
+    """Handle exception, logging `e` with a sensible message.
+
+    Adding :mod:`aiohttp` errors to :func:`handle_exception`.
+    """
+    if isinstance(e, asyncio.TimeoutError):
+        # also catches `aiohttp.ServerTimeoutError`, which is a subclass of `asyncio.TimeoutError`
+        logger.error('Request timed out. %s', msg)
+    elif isinstance(e, aiohttp.ClientResponseError):
+        logger.error('HTTP error %r. %s', e.status, msg, exc_info=e.status not in range(500, 600))
+    elif isinstance(e, aiohttp.ClientConnectionError):
+        logger.error('Connection error %r. %s', e, msg)
+    elif isinstance(e, Exception):
+        # fall back on the synchronous handler, it knows about requests and xmlrpc errors
+        handle_exception(e, msg)
+    else:  # pragma: no cover
         logger.exception('Unexpected error. %s', msg)
 
 

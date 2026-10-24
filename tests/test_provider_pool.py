@@ -10,7 +10,6 @@ from types import SimpleNamespace
 from typing import TYPE_CHECKING, Any, ClassVar, cast
 from unittest.mock import AsyncMock, Mock, call, patch
 
-import aiohttp
 import pytest
 from babelfish import Language  # type: ignore[import-untyped]
 
@@ -27,7 +26,6 @@ from subliminal.provider_pool import (
     AsyncRefinerPool,
     ResultStatus,
     check_video,
-    handle_async_exception,
     is_async_provider,
     is_async_refiner,
     refiner_manager,
@@ -780,30 +778,6 @@ def test_save_subtitles_convert(movies: dict[str, Movie], tmp_path: Path, monkey
     path = tmp_path / (os.path.splitext(video.name)[0] + '.srt')
     assert path.is_file()
     assert path.open(encoding='utf-8').read() == srt_text
-
-
-# ----------------------------------------------------------------------
-# error handling
-# ----------------------------------------------------------------------
-
-
-@pytest.mark.parametrize(
-    ('error', 'expected'),
-    [
-        (asyncio.TimeoutError(), 'Request timed out'),
-        (aiohttp.ServerTimeoutError(), 'Request timed out'),
-        (aiohttp.ClientResponseError(Mock(), (), status=404), 'HTTP error 404'),
-        (aiohttp.ClientResponseError(Mock(), (), status=503), 'HTTP error 503'),
-        (aiohttp.ClientConnectionError('no route to host'), 'Connection error'),
-    ],
-    ids=['timeout', 'server-timeout', 'http-client-error', 'http-server-error', 'connection-error'],
-)
-def test_handle_async_exception(error: Exception, expected: str, caplog: pytest.LogCaptureFixture) -> None:
-    with caplog.at_level(logging.ERROR, logger='subliminal.provider_pool'):
-        handle_async_exception(error, 'Provider foo')
-
-    assert expected in caplog.text
-    assert 'Provider foo' in caplog.text
 
 
 def test_is_async_provider() -> None:

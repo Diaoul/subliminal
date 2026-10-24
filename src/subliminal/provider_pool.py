@@ -29,7 +29,7 @@ from .providers import AsyncProvider, Provider
 from .refiners import AsyncRefiner, Refiner
 from .score import compute_score as default_compute_score
 from .subtitle import filter_and_sort_categories
-from .utils import handle_exception
+from .utils import handle_async_exception
 
 if TYPE_CHECKING:
     from collections.abc import Callable, Coroutine, Mapping, Sequence, Set
@@ -126,22 +126,6 @@ def _check_no_running_loop(*, raises: bool = True) -> bool:
         return False
 
     return True
-
-
-def handle_async_exception(e: BaseException, msg: str) -> None:
-    """Log `e` with a sensible message, adding :mod:`aiohttp` errors to :func:`~subliminal.utils.handle_exception`."""
-    if isinstance(e, asyncio.TimeoutError):
-        # also catches `aiohttp.ServerTimeoutError`, which is a subclass of `asyncio.TimeoutError`
-        logger.error('Request timed out. %s', msg)
-    elif isinstance(e, aiohttp.ClientResponseError):
-        logger.error('HTTP error %r. %s', e.status, msg, exc_info=e.status not in range(500, 600))
-    elif isinstance(e, aiohttp.ClientConnectionError):
-        logger.error('Connection error %r. %s', e, msg)
-    elif isinstance(e, Exception):
-        # fall back on the synchronous handler, it knows about requests and xmlrpc errors
-        handle_exception(e, msg)
-    else:  # pragma: no cover
-        logger.exception('Unexpected error. %s', msg)
 
 
 @runtime_checkable

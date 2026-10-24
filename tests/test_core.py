@@ -8,7 +8,7 @@ from unittest.mock import Mock
 
 import pytest
 
-from subliminal.scan_files import (
+from subliminal.core import (
     scan_name,
     scan_path,
     scan_video,
@@ -190,7 +190,7 @@ def test_scan_path(
     import subliminal
 
     mock = Mock()
-    monkeypatch.setattr(subliminal.scan_files, 'scan_video_or_archive', mock)
+    monkeypatch.setattr(subliminal.core, 'scan_video_or_archive', mock)
 
     video = movies['interstellar']
     ensure(tmp_path / video.name)
@@ -243,9 +243,9 @@ def test_scan_videos(movies: dict[str, Movie], tmp_path: Path, monkeypatch: pyte
     # mock scan_video and scan_archive with the correct types
     mock_video = Mock(subtitle_languages=set())
     mock_scan_video = Mock(return_value=mock_video)
-    monkeypatch.setattr('subliminal.scan_files.scan_video', mock_scan_video)
+    monkeypatch.setattr('subliminal.core.scan_video', mock_scan_video)
     mock_scan_archive = Mock(return_value=mock_video)
-    monkeypatch.setattr('subliminal.scan_files.scan_archive', mock_scan_archive)
+    monkeypatch.setattr('subliminal.core.scan_archive', mock_scan_archive)
     monkeypatch.chdir(tmp_path)
     videos = scan_videos('movies')
 
@@ -276,9 +276,9 @@ def test_scan_videos_age(movies: dict[str, Movie], tmp_path: Path, monkeypatch: 
     # mock scan_video and scan_archive with the correct types
     mock_video = Mock(subtitle_languages=set())
     mock_scan_video = Mock(return_value=mock_video)
-    monkeypatch.setattr('subliminal.scan_files.scan_video', mock_scan_video)
+    monkeypatch.setattr('subliminal.core.scan_video', mock_scan_video)
     mock_scan_archive = Mock(return_value=mock_video)
-    monkeypatch.setattr('subliminal.scan_files.scan_archive', mock_scan_archive)
+    monkeypatch.setattr('subliminal.core.scan_archive', mock_scan_archive)
     monkeypatch.chdir(tmp_path)
     videos = scan_videos('movies', age=timedelta(days=7))
 

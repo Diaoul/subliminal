@@ -38,6 +38,7 @@ If you are looking for information on a specific function, class or method, this
     api/core
     api/video
     api/subtitle
+    api/provider_pool
     api/providers
     api/refiners
     api/extensions

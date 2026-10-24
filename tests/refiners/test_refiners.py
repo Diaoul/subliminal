@@ -9,8 +9,8 @@ import pytest
 from babelfish import Language  # type: ignore[import-untyped]
 from vcr import VCR  # type: ignore[import-untyped]
 
+from subliminal.core import refine
 from subliminal.extensions import refiner_manager
-from subliminal.provider_pool import refine
 
 if TYPE_CHECKING:
     from subliminal.video import Episode, Movie

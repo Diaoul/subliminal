@@ -23,10 +23,10 @@ from subliminal import (
     refiner_manager,
     save_subtitles,
 )
+from subliminal.core import ARCHIVE_EXTENSIONS, collect_video_filepaths, refine, scan_path
 from subliminal.exceptions import GuessingError
 from subliminal.extensions import get_default_providers, get_default_refiners
-from subliminal.provider_pool import AsyncProviderPool, _check_no_running_loop, refine
-from subliminal.scan_files import ARCHIVE_EXTENSIONS, collect_video_filepaths, scan_path
+from subliminal.provider_pool import AsyncProviderPool, _check_no_running_loop
 from subliminal.utils import NameResolver, merge_extend_and_ignore_unions
 
 from ._format import AgeParamType, LanguageParamType, format_provider_errors, plural

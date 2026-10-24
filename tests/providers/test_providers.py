@@ -8,12 +8,12 @@ import pytest
 from babelfish import Language  # type: ignore[import-untyped]
 from vcr import VCR  # type: ignore[import-untyped]
 
-from subliminal.extensions import disabled_providers, provider_manager
-from subliminal.provider_pool import (
+from subliminal.core import (
     download_best_subtitles,
     download_subtitles,
     list_subtitles,
 )
+from subliminal.extensions import disabled_providers, provider_manager
 from subliminal.providers.tvsubtitles import TVsubtitlesSubtitle
 from subliminal.score import episode_scores
 from subliminal.subtitle import Subtitle

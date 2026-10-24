@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import os
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 from unittest.mock import Mock
 
 import pytest
@@ -14,6 +14,7 @@ from subliminal.core import (
     list_subtitles,
 )
 from subliminal.extensions import disabled_providers, provider_manager
+from subliminal.provider_pool import AsyncProviderPool
 from subliminal.providers.tvsubtitles import TVsubtitlesSubtitle
 from subliminal.score import episode_scores
 from subliminal.subtitle import Subtitle
@@ -28,6 +29,24 @@ vcr = VCR(
     match_on=['method', 'scheme', 'host', 'port', 'path', 'query', 'body'],
     cassette_library_dir=os.path.realpath(os.path.join('tests', 'cassettes', 'providers')),
 )
+
+
+@pytest.fixture(autouse=True)
+def _serialize_providers(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Query the providers one at a time.
+
+    VCR patches the HTTP connection classes globally and is not thread safe, but the providers
+    run in worker threads. Querying several providers concurrently against the same cassette
+    makes the tests flaky: a provider can end up sending requests that are not in the cassette,
+    or bypassing it.
+    """
+    init = AsyncProviderPool.__init__
+
+    def init_serialized(self: AsyncProviderPool, *args: Any, **kwargs: Any) -> None:
+        kwargs['max_concurrency'] = 1
+        init(self, *args, **kwargs)
+
+    monkeypatch.setattr(AsyncProviderPool, '__init__', init_serialized)
 
 
 @pytest.fixture

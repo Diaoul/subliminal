@@ -307,6 +307,7 @@ intersphinx_mapping = {
     'requests': ('https://requests.readthedocs.io/en/latest/', None),
     'sympy': ('https://docs.sympy.org/latest/', None),
     'bs4': ('https://www.crummy.com/software/BeautifulSoup/bs4/doc/', None),
+    'aiohttp': ('https://docs.aiohttp.org/en/stable/', None),
     'importlib.metadata': ('https://docs.python.org/3/', '_intersphinx/importlib_metadata_objects.inv'),
 }
 

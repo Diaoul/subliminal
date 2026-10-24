@@ -14,21 +14,23 @@ import aiohttp
 import pytest
 from babelfish import Language  # type: ignore[import-untyped]
 
+from subliminal.core import (
+    download_best_subtitles,
+    download_subtitles,
+    list_subtitles,
+    refine,
+    save_subtitles,
+)
 from subliminal.exceptions import DiscardingError
 from subliminal.provider_pool import (
     AsyncProviderPool,
     AsyncRefinerPool,
     ResultStatus,
     check_video,
-    download_best_subtitles,
-    download_subtitles,
     handle_async_exception,
     is_async_provider,
     is_async_refiner,
-    list_subtitles,
-    refine,
     refiner_manager,
-    save_subtitles,
 )
 from subliminal.providers import AsyncProvider, Provider
 from subliminal.refiners import AsyncRefiner, Refiner

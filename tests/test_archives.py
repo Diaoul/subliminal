@@ -8,8 +8,8 @@ from pathlib import Path
 import pytest
 
 from subliminal.archives import is_supported_archive, scan_archive, scan_archive_rar
+from subliminal.core import scan_video_or_archive, scan_videos
 from subliminal.exceptions import ArchiveError
-from subliminal.scan_files import scan_video_or_archive, scan_videos
 
 unix_platform = pytest.mark.skipif(
     not sys.platform.startswith('linux'),

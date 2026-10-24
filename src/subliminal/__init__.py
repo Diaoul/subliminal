@@ -18,20 +18,23 @@ __copyright__: str = 'Copyright 2016, Antoine Bertin'
 
 
 from .cache import region
+from .core import (
+    download_best_subtitles,
+    download_subtitles,
+    list_subtitles,
+    refine,
+    save_subtitles,
+    scan_video,
+    scan_videos,
+)
 from .exceptions import Error, ProviderError
 from .extensions import provider_manager, refiner_manager
 from .provider_pool import (
     AsyncProviderPool,
     AsyncRefinerPool,
     check_video,
-    download_best_subtitles,
-    download_subtitles,
-    list_subtitles,
-    refine,
-    save_subtitles,
 )
 from .providers import Provider
-from .scan_files import scan_video, scan_videos
 from .score import compute_score, get_scores
 from .subtitle import SUBTITLE_EXTENSIONS, Subtitle
 from .video import VIDEO_EXTENSIONS, Episode, Movie, Video

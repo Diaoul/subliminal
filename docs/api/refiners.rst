@@ -3,6 +3,7 @@
 Refiners
 ========
 .. automodule:: subliminal.refiners
+   :members:
 
 
 Hash

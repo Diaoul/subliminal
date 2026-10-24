@@ -268,7 +268,7 @@ async def async_refine(
         calling the refine method
     :param dict check_kwargs: arguments to pass to the check_video function
     :param pool_class: class to use as refiner pool.
-    :type pool_class: :class:`AsyncRefinerPool` or similar
+    :type pool_class: :class:`~subliminal.provider_pool.AsyncRefinerPool` or similar
     :param kwargs: additional parameters for the `refine` method.
     :return: the videos that are not ignored.
     :rtype: set of :class:`~subliminal.video.Video`
@@ -300,14 +300,14 @@ async def async_list_subtitles(
 ) -> dict[Video, list[Subtitle]]:
     """List subtitles.
 
-    The `videos` must pass the `languages` check of :func:`check_video`.
+    The `videos` must pass the `languages` check of :func:`~subliminal.provider_pool.check_video`.
 
     :param videos: videos to list subtitles for.
     :type videos: set of :class:`~subliminal.video.Video`
     :param languages: languages to search for.
     :type languages: set of :class:`~babelfish.language.Language`
     :param pool_class: class to use as provider pool.
-    :type pool_class: :class:`AsyncProviderPool` or similar
+    :type pool_class: :class:`~subliminal.provider_pool.AsyncProviderPool` or similar
     :param kwargs: additional parameters for the provided `pool_class` constructor.
     :return: found subtitles per video.
     :rtype: dict of :class:`~subliminal.video.Video` to list of :class:`~subliminal.subtitle.Subtitle`
@@ -349,7 +349,7 @@ async def async_download_subtitles(
     :param subtitles: subtitles to download.
     :type subtitles: list of :class:`~subliminal.subtitle.Subtitle`
     :param pool_class: class to use as provider pool.
-    :type pool_class: :class:`AsyncProviderPool` or similar
+    :type pool_class: :class:`~subliminal.provider_pool.AsyncProviderPool` or similar
     :param kwargs: additional parameters for the provided `pool_class` constructor.
 
     """
@@ -380,14 +380,15 @@ async def async_download_best_subtitles(
 ) -> dict[Video, list[Subtitle]]:
     """List and download the best matching subtitles.
 
-    The `videos` must pass the `languages` and `undefined` (`only_one`) checks of :func:`check_video`.
+    The `videos` must pass the `languages` and `undefined` (`only_one`) checks of
+    :func:`~subliminal.provider_pool.check_video`.
 
     :param videos: videos to download subtitles for.
     :type videos: set of :class:`~subliminal.video.Video`
     :param languages: languages to download.
     :type languages: set of :class:`~babelfish.language.Language`
     :param pool_class: class to use as async provider pool.
-    :type pool_class: :class:`AsyncProviderPool` or similar
+    :type pool_class: :class:`~subliminal.provider_pool.AsyncProviderPool` or similar
     :param int min_score: minimum score for a subtitle to be downloaded.
     :param str subtitle_categories: ordered list of categories to download, omitted categories are filtered out.
         Empty string corresponds to no filtering or sorting.

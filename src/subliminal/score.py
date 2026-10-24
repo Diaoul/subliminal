@@ -2,7 +2,8 @@
 """Default implementation of the `compute_score` function.
 
 It is the default for the `compute_score` parameter in
-:meth:`~subliminal.core.AsyncProviderPool.download_best_subtitles` and :func:`~subliminal.core.download_best_subtitles`.
+:meth:`~subliminal.provider_pool.AsyncProviderPool.download_best_subtitles` and
+:func:`~subliminal.core.download_best_subtitles`.
 
 .. note::
 

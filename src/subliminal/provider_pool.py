@@ -129,7 +129,7 @@ def _check_no_running_loop(*, raises: bool = True) -> bool:
 
 
 def handle_async_exception(e: BaseException, msg: str) -> None:
-    """Log `e` with a sensible message, adding :mod:`aiohttp` errors to :func:`handle_exception`."""
+    """Log `e` with a sensible message, adding :mod:`aiohttp` errors to :func:`~subliminal.utils.handle_exception`."""
     if isinstance(e, asyncio.TimeoutError):
         # also catches `aiohttp.ServerTimeoutError`, which is a subclass of `asyncio.TimeoutError`
         logger.error('Request timed out. %s', msg)
@@ -244,7 +244,7 @@ class AsyncPool(Generic[T]):
 
     Providers are lazily initialized, queried concurrently, and automatically discarded on failure.
     The pool is an asynchronous context manager and must be used as such (or terminated explicitly),
-    otherwise the underlying :class:`aiohttp.ClientSession` is left open::
+    otherwise the underlying :class:`aiohttp.ClientSession` is left open.
 
     :param list[str] providers: name of providers to use, if not all.
     :param dict[str, Any] provider_configs: provider configuration as keyword arguments per provider name to pass
@@ -364,7 +364,7 @@ class AsyncPool(Generic[T]):
         return self._semaphore
 
     async def terminate(self) -> None:
-        """Terminate all the :attr:`initialized_providers` and close the session if owned."""
+        """Terminate all the ``initialized_providers`` and close the session if owned."""
         logger.debug('Terminating initialized %ss', self.providers_generic_name)
         await asyncio.gather(
             *(self._terminate_provider(name) for name in list(self._initialized_providers)),
@@ -406,7 +406,7 @@ class AsyncPool(Generic[T]):
     async def get_provider(self, name: str) -> T:
         """Return the initialized provider `name`, initializing it on first use.
 
-        :raise KeyError: if `name` is not part of :attr:`providers`.
+        :raise KeyError: if `name` is not part of ``providers``.
         """
         if name not in self._providers:
             raise KeyError(name)
@@ -637,7 +637,7 @@ class AsyncProviderPool(AsyncPool[Provider | AsyncProvider]):
 
         Videos are handled sequentially on purpose: providers are queried concurrently within
         a video already, and going wider mostly buys rate-limit errors. Use
-        :attr:`max_concurrency` to tune the actual parallelism.
+        :attr:`~subliminal.provider_pool.AsyncPool.max_concurrency` to tune the actual parallelism.
         """
         listed_subtitles: dict[Video, list[Subtitle]] = defaultdict(list)
         for video in videos:
@@ -965,7 +965,7 @@ class AsyncRefinerPool(AsyncPool[Refiner | AsyncRefiner]):
 
         Videos are handled sequentially on purpose: providers are queried concurrently within
         a video already, and going wider mostly buys rate-limit errors. Use
-        :attr:`max_concurrency` to tune the actual parallelism.
+        :attr:`~subliminal.provider_pool.AsyncPool.max_concurrency` to tune the actual parallelism.
 
         :return: videos that passed the checks
         :rtype: set of :class:`~subliminal.video.Video`

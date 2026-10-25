@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import contextlib
 import functools
+import logging
 import os
 import shlex
 import subprocess
@@ -1153,6 +1154,10 @@ class CliRunner:
             prog_name = self.get_default_prog_name(cli)
 
         with self.setenv(env):
+            subliminal_logger = logging.getLogger('subliminal')
+            level = subliminal_logger.level
+            handlers = list(subliminal_logger.handlers)
+
             try:
                 return_value = cli.main(args=args or (), prog_name=prog_name, **extra)
             except SystemExit as e:
@@ -1176,6 +1181,14 @@ class CliRunner:
                 exception = e
                 exit_code = 1
                 exc_info = sys.exc_info()
+
+            finally:
+                # Reset logger level and delete extra handlers
+                subliminal_logger.setLevel(level)
+                for handler in list(subliminal_logger.handlers):
+                    if handler not in handlers:
+                        subliminal_logger.removeHandler(handler)
+                        handler.close()
 
         return CliResult(
             return_value=return_value,

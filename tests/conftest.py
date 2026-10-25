@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import contextlib
 import functools
+import logging
 import os
 import shlex
 import subprocess
@@ -51,6 +52,27 @@ def ensure(path: str | os.PathLike[str], *, directory: bool = False) -> Path:
         # Create a file at path
         path.touch()
     return path
+
+
+@pytest.fixture(autouse=True)
+def _restore_subliminal_logger() -> Generator[None, None, None]:
+    """Reset logging to a clean state after running tests.
+
+    The CLI sets the level of the logger and adds handlers to it, that write on the (captured) stderr
+    of the test or on a log file. They are never removed, so the next tests that log write on a closed
+    stream ("Logging error: I/O operation on closed file") and flood the output of the failed tests.
+    """
+    subliminal_logger = logging.getLogger('subliminal')
+    level = subliminal_logger.level
+    handlers = list(subliminal_logger.handlers)
+
+    yield
+
+    subliminal_logger.setLevel(level)
+    for handler in list(subliminal_logger.handlers):
+        if handler not in handlers:
+            subliminal_logger.removeHandler(handler)
+            handler.close()
 
 
 @pytest.fixture(autouse=True, scope='session')

@@ -54,27 +54,6 @@ def ensure(path: str | os.PathLike[str], *, directory: bool = False) -> Path:
     return path
 
 
-@pytest.fixture(autouse=True)
-def _restore_subliminal_logger() -> Generator[None, None, None]:
-    """Reset logging to a clean state after running tests.
-
-    The CLI sets the level of the logger and adds handlers to it, that write on the (captured) stderr
-    of the test or on a log file. They are never removed, so the next tests that log write on a closed
-    stream ("Logging error: I/O operation on closed file") and flood the output of the failed tests.
-    """
-    subliminal_logger = logging.getLogger('subliminal')
-    level = subliminal_logger.level
-    handlers = list(subliminal_logger.handlers)
-
-    yield
-
-    subliminal_logger.setLevel(level)
-    for handler in list(subliminal_logger.handlers):
-        if handler not in handlers:
-            subliminal_logger.removeHandler(handler)
-            handler.close()
-
-
 @pytest.fixture(autouse=True, scope='session')
 def _configure_region() -> None:
     region.configure('dogpile.cache.null')
@@ -1175,6 +1154,10 @@ class CliRunner:
             prog_name = self.get_default_prog_name(cli)
 
         with self.setenv(env):
+            subliminal_logger = logging.getLogger('subliminal')
+            level = subliminal_logger.level
+            handlers = list(subliminal_logger.handlers)
+
             try:
                 return_value = cli.main(args=args or (), prog_name=prog_name, **extra)
             except SystemExit as e:
@@ -1198,6 +1181,14 @@ class CliRunner:
                 exception = e
                 exit_code = 1
                 exc_info = sys.exc_info()
+
+            finally:
+                # Reset logger level and delete extra handlers
+                subliminal_logger.setLevel(level)
+                for handler in list(subliminal_logger.handlers):
+                    if handler not in handlers:
+                        subliminal_logger.removeHandler(handler)
+                        handler.close()
 
         return CliResult(
             return_value=return_value,

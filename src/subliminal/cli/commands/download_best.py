@@ -499,22 +499,6 @@ def download(
                 video_candidates.add(video)
 
             # check and refine videos
-            # for video in video_candidates:
-            #     if not force and not force_external_subtitles:
-            #         video.subtitles.extend(search_external_subtitles(video.name, directory=directory).values())
-            #     if check_video(video, languages=language_set, age=age, undefined=single):
-            #         refine(
-            #             [video],
-            #             refiners=use_refiners,
-            #             refiner_configs=obj['refiner_configs'],
-            #             embedded_subtitles=not force and not force_embedded_subtitles,
-            #             providers=use_providers,
-            #             languages=language_set,
-            #         )
-            #         videos.append(video)
-            #     else:
-            #         ignored_videos.append(video)
-
             refined_videos = refine(
                 video_candidates,
                 languages=language_set,

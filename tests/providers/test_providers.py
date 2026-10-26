@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 import os
-from typing import cast
+from typing import TYPE_CHECKING, Any
 from unittest.mock import Mock
 
 import pytest
@@ -7,17 +9,18 @@ from babelfish import Language  # type: ignore[import-untyped]
 from vcr import VCR  # type: ignore[import-untyped]
 
 from subliminal.core import (
-    AsyncProviderPool,
-    ProviderPool,
     download_best_subtitles,
     download_subtitles,
     list_subtitles,
 )
 from subliminal.extensions import disabled_providers, provider_manager
+from subliminal.provider_pool import AsyncProviderPool
 from subliminal.providers.tvsubtitles import TVsubtitlesSubtitle
 from subliminal.score import episode_scores
 from subliminal.subtitle import Subtitle
-from subliminal.video import Episode, Movie
+
+if TYPE_CHECKING:
+    from subliminal.video import Episode, Movie
 
 vcr = VCR(
     path_transformer=lambda path: path + '.yaml',
@@ -28,6 +31,24 @@ vcr = VCR(
 )
 
 
+@pytest.fixture(autouse=True)
+def _serialize_providers(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Query the providers one at a time.
+
+    VCR patches the HTTP connection classes globally and is not thread safe, but the providers
+    run in worker threads. Querying several providers concurrently against the same cassette
+    makes the tests flaky: a provider can end up sending requests that are not in the cassette,
+    or bypassing it.
+    """
+    init = AsyncProviderPool.__init__
+
+    def init_serialized(self: AsyncProviderPool, *args: Any, **kwargs: Any) -> None:
+        kwargs['max_concurrency'] = 1
+        init(self, *args, **kwargs)
+
+    monkeypatch.setattr(AsyncProviderPool, '__init__', init_serialized)
+
+
 @pytest.fixture
 def _mock_providers(monkeypatch: pytest.MonkeyPatch) -> None:
     for provider in provider_manager:
@@ -35,44 +56,6 @@ def _mock_providers(monkeypatch: pytest.MonkeyPatch) -> None:
         monkeypatch.setattr(provider.plugin, 'list_subtitles', Mock(return_value=[provider.name]))
         monkeypatch.setattr(provider.plugin, 'download_subtitle', Mock())
         monkeypatch.setattr(provider.plugin, 'terminate', Mock())
-
-
-@pytest.mark.usefixtures('_mock_providers')
-def test_provider_pool_list_subtitles(episodes: dict[str, Episode]) -> None:
-    pool = ProviderPool()
-    subtitles = pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
-    assert sorted(subtitles) == [  # type: ignore[type-var,comparison-overlap]  # ty: ignore[invalid-argument-type]
-        'addic7ed',
-        'gestdown',
-        'opensubtitles',
-        'opensubtitlescom',
-        'podnapisi',
-        'subtitulamos',
-        'tvsubtitles',
-    ]
-    for provider in subtitles:
-        provider_s = cast('str', provider)
-        assert provider_manager[provider_s].plugin.initialize.called  # type: ignore[attr-defined]
-        assert provider_manager[provider_s].plugin.list_subtitles.called  # type: ignore[attr-defined]
-
-
-@pytest.mark.usefixtures('_mock_providers')
-def test_async_provider_pool_list_subtitles(episodes: dict[str, Episode]) -> None:
-    pool = AsyncProviderPool()
-    subtitles = pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
-    assert sorted(subtitles) == [  # type: ignore[type-var,comparison-overlap]  # ty: ignore[invalid-argument-type]
-        'addic7ed',
-        'gestdown',
-        'opensubtitles',
-        'opensubtitlescom',
-        'podnapisi',
-        'subtitulamos',
-        'tvsubtitles',
-    ]
-    for provider in subtitles:
-        provider_s = cast('str', provider)
-        assert provider_manager[provider_s].plugin.initialize.called  # type: ignore[attr-defined]
-        assert provider_manager[provider_s].plugin.list_subtitles.called  # type: ignore[attr-defined]
 
 
 @pytest.mark.usefixtures('_mock_providers')

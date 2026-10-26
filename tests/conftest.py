@@ -7,7 +7,8 @@ import os
 import shlex
 import subprocess
 import sys
-from dataclasses import dataclass
+import traceback
+from dataclasses import dataclass, field
 from io import BytesIO
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, cast
@@ -21,7 +22,7 @@ from babelfish import Country, Language  # type: ignore[import-untyped]
 import subliminal
 import subliminal.refiners.hash
 from subliminal.cache import region
-from subliminal.extensions import RegistrableExtensionManager
+from subliminal.extensions import RegistrableExtensionManager, parse_extension_error
 from subliminal.providers.mock import MockSubtitle, mock_subtitle_provider
 from subliminal.video import Episode, Movie
 
@@ -653,8 +654,8 @@ def provider_manager(monkeypatch: pytest.MonkeyPatch) -> Generator[RegistrableEx
 
     # Replace the provider_manager in all the module were it is imported
     subliminal.extensions.provider_manager = patched_provider_manager
-    subliminal.core.provider_manager = patched_provider_manager
     subliminal.refiners.hash.provider_manager = patched_provider_manager  # type: ignore[attr-defined]
+    subliminal.provider_pool.provider_manager = patched_provider_manager
 
     movie_name = os.path.join('Man of Steel (2013)', 'man.of.steel.2013.720p.bluray.x264-felony.mkv')
     episode_name = os.path.join(
@@ -922,8 +923,8 @@ def provider_manager(monkeypatch: pytest.MonkeyPatch) -> Generator[RegistrableEx
 
     # Recover the original provider_manager in all the modules
     subliminal.extensions.provider_manager = original_provider_manager
-    subliminal.core.provider_manager = original_provider_manager
     subliminal.refiners.hash.provider_manager = original_provider_manager  # type: ignore[attr-defined]
+    subliminal.provider_pool.provider_manager = original_provider_manager
 
 
 @pytest.fixture
@@ -948,18 +949,22 @@ def refiner_manager(monkeypatch: pytest.MonkeyPatch) -> Generator[RegistrableExt
     original_refiner_manager = subliminal.extensions.refiner_manager
 
     # Create a mock refiner manager (namespace cannot be 'subliminal.refiners')
-    patched_refiner_manager = RegistrableExtensionManager('subliminal.mock-refiners', [])
+    patched_refiner_manager = RegistrableExtensionManager(
+        'subliminal.mock-refiners',
+        ['external_subtitles = subliminal.refiners.external_subtitles:ExternalSubtitlesRefiner'],
+        on_load_failure_callback=parse_extension_error,
+    )
 
     # Replace the provider_manager in all the module were it is imported
     subliminal.extensions.refiner_manager = patched_refiner_manager
-    subliminal.core.refiner_manager = patched_refiner_manager
+    subliminal.provider_pool.refiner_manager = patched_refiner_manager
 
     # Yield the mocked refiner_manager
     yield patched_refiner_manager
 
     # Recover the original refiner_manager in all the modules
     subliminal.extensions.refiner_manager = original_refiner_manager
-    subliminal.core.refiner_manager = original_refiner_manager
+    subliminal.provider_pool.refiner_manager = original_refiner_manager
 
 
 @pytest.fixture(scope='session')
@@ -1056,7 +1061,8 @@ class CliResult:
     return_value: Any
     exit_code: int
     exception: BaseException | None = None
-    exc_info: OptExcInfo | None = None
+    # exc_info: OptExcInfo | None = None
+    traceback_messages: list[str] = field(default_factory=list)
     out: str = ''
     err: str = ''
 
@@ -1190,11 +1196,14 @@ class CliRunner:
                         subliminal_logger.removeHandler(handler)
                         handler.close()
 
+        # Get the traceback message
+        traceback_messages = traceback.format_exception(*exc_info) if exc_info is not None else []
+
         return CliResult(
             return_value=return_value,
             exit_code=exit_code,
             exception=exception,
-            exc_info=exc_info,
+            traceback_messages=traceback_messages,
         )
 
 

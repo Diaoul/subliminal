@@ -92,13 +92,15 @@ def get_argument_doc(fun: Callable) -> dict[str, str]:
     return ret
 
 
-def get_parameters_from_signature(fun: Callable) -> list[Parameter]:
+def get_parameters_from_signature(fun: Callable, *, exclude: Sequence[str] | None = None) -> list[Parameter]:
     """Get keyword arguments with default and type."""
+    exclude = exclude or []
     sig = signature(fun)
     doc = get_argument_doc(fun)
     return [
         {'name': name, 'default': p.default, 'annotation': p.annotation, 'desc': doc.get(name)}
         for name, p in sig.parameters.items()
+        if name not in exclude
     ]
 
 
@@ -336,11 +338,10 @@ provider_options = {
 }
 
 refiner_options = {
-    name: [
-        opt
-        for opt in get_parameters_from_signature(refiner_manager[name].plugin)
-        if opt['name'] not in ('video', 'kwargs', 'embedded_subtitles', 'providers', 'languages')
-    ]
+    name: get_parameters_from_signature(
+        refiner_manager[name].plugin,
+        exclude=('video', 'kwargs', 'embedded_subtitles', 'external_subtitles', 'directory', 'providers', 'languages'),
+    )
     for name in refiner_manager.names()
 }
 

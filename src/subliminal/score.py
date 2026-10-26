@@ -1,8 +1,9 @@
 # mypy: disable-error-code="no-untyped-call"
 """Default implementation of the `compute_score` function.
 
-It is the default for the `compute_score` parameter in :meth:`~subliminal.core.ProviderPool.download_best_subtitles`
-and :func:`~subliminal.core.download_best_subtitles`.
+It is the default for the `compute_score` parameter in
+:meth:`~subliminal.provider_pool.AsyncProviderPool.download_best_subtitles` and
+:func:`~subliminal.core.download_best_subtitles`.
 
 .. note::
 

@@ -26,6 +26,14 @@ from subliminal.cli import generate_default_config  # noqa: F401
 # If true, Sphinx will warn about all references where the target cannot be found.
 nitpicky = True
 
+# Type hints are rendered with the module where the class is defined, but the intersphinx
+# inventories only know the public names (`aiohttp.ClientSession`, `asyncio.Semaphore`).
+nitpick_ignore = [
+    ('py:class', 'aiohttp.client.ClientSession'),
+    ('py:class', 'asyncio.locks.Semaphore'),
+]
+
+
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
@@ -307,6 +315,7 @@ intersphinx_mapping = {
     'requests': ('https://requests.readthedocs.io/en/latest/', None),
     'sympy': ('https://docs.sympy.org/latest/', None),
     'bs4': ('https://www.crummy.com/software/BeautifulSoup/bs4/doc/', None),
+    'aiohttp': ('https://docs.aiohttp.org/en/stable/', None),
     'importlib.metadata': ('https://docs.python.org/3/', '_intersphinx/importlib_metadata_objects.inv'),
 }
 

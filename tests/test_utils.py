@@ -1,10 +1,14 @@
 from __future__ import annotations
 
+import asyncio
 import datetime
+import logging
 import sys
 from typing import TYPE_CHECKING, Any
+from unittest.mock import Mock
 from xmlrpc.client import ProtocolError
 
+import aiohttp
 import pytest
 import requests
 
@@ -18,6 +22,7 @@ from subliminal.utils import (
     ensure_str,
     get_age,
     get_extend_and_ignore_union,
+    handle_async_exception,
     handle_exception,
     matches_extended_title,
     merge_extend_and_ignore_unions,
@@ -223,6 +228,25 @@ def test_handle_exception(caplog: pytest.LogCaptureFixture, err: Exception, msg:
     for record in caplog.records:
         assert record.levelname == 'ERROR'
         assert record.message.startswith(msg)
+
+
+@pytest.mark.parametrize(
+    ('error', 'expected'),
+    [
+        (asyncio.TimeoutError(), 'Request timed out'),
+        (aiohttp.ServerTimeoutError(), 'Request timed out'),
+        (aiohttp.ClientResponseError(Mock(), (), status=404), 'HTTP error 404'),
+        (aiohttp.ClientResponseError(Mock(), (), status=503), 'HTTP error 503'),
+        (aiohttp.ClientConnectionError('no route to host'), 'Connection error'),
+    ],
+    ids=['timeout', 'server-timeout', 'http-client-error', 'http-server-error', 'connection-error'],
+)
+def test_handle_async_exception(error: Exception, expected: str, caplog: pytest.LogCaptureFixture) -> None:
+    with caplog.at_level(logging.ERROR):
+        handle_async_exception(error, 'Provider foo')
+
+    assert expected in caplog.text
+    assert 'Provider foo' in caplog.text
 
 
 def test_ensure_list() -> None:

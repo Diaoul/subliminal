@@ -147,7 +147,18 @@ def subliminal(
 
     # Set the logger level to DEBUG in case debug or logfile is defined
     subliminal_logger = logging.getLogger('subliminal')
+    previous_level = subliminal_logger.level
     subliminal_logger.setLevel(logging.DEBUG)
+
+    # Restore the logger when the command ends and close the handlers
+    added_handlers: list[logging.Handler] = []
+
+    @ctx.call_on_close
+    def restore_logger() -> None:
+        subliminal_logger.setLevel(previous_level)
+        for added_handler in added_handlers:
+            subliminal_logger.removeHandler(added_handler)
+            added_handler.close()
 
     # configure logging file
     if logfile:
@@ -169,6 +180,7 @@ def subliminal(
         )
         file_handler.setLevel(logfile_level)
         subliminal_logger.addHandler(file_handler)
+        added_handlers.append(file_handler)
 
     # configure logging
     if debug:
@@ -176,6 +188,7 @@ def subliminal(
         handler.setFormatter(logging.Formatter(logging.BASIC_FORMAT))
         handler.setLevel(logging.DEBUG)
         subliminal_logger.addHandler(handler)
+        added_handlers.append(handler)
         # log about the config file
         msg = ctx.obj['debug_message']
         logger.info(msg)

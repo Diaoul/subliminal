@@ -93,10 +93,9 @@ class _BaseMockProvider:
     """Base for synchronous and asynchronous mock Provider."""
 
     languages: ClassVar[Set[Language]] = {Language(lang) for lang in LANGUAGES}
-    subtitle_class: ClassVar = MockSubtitle
+    subtitle_class: ClassVar[type[MockSubtitle] | None] = MockSubtitle
     internal_subtitle_pool: ClassVar[list[MockSubtitle]] = []
-
-    video_types: ClassVar = (Episode, Movie)
+    video_types: ClassVar[tuple[type[Video], ...]] = (Episode, Movie)
 
     logged_in: bool
     subtitle_pool: list[MockSubtitle]
@@ -151,7 +150,7 @@ class _BaseMockProvider:
 
         subtitles = []
         for lang in languages:
-            subtitle = self.subtitle_class(language=lang, video=video, matches=matches)
+            subtitle = self.subtitle_class(language=lang, video=video, matches=matches)  # type: ignore[misc]  # ty: ignore[call-non-callable]
             subtitles.append(subtitle)
         logger.info(
             'Mock provider %s query for video %r and languages %s: %d',

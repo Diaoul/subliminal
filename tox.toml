@@ -2,7 +2,7 @@ min_version = "4"
 env_list = [
     "pre-commit",
     "mypy",
-    { product = [["3.10", "3.14"], ["tests"]] },
+    { product = [["3.11", "3.15"], ["tests"]] },
     "coverage",
     "docs",
     "changelog",
@@ -33,7 +33,7 @@ commands = [["python", "scripts/prepare_tests.py", { replace = "posargs", extend
 commands = [["pytest", { replace = "posargs", default = ["-n", "auto"], extend = true }]]
 
 [env_base.tests]
-factors = [{ py_version = { prefix = "3.", start = 10, stop = 14 } }]
+factors = [{ py_version = { prefix = "3.", start = 11, stop = 15 } }]
 commands = [{ replace = "ref", of = ["env", "tests", "commands"], extend = false }]
 
 [env.mypy]
@@ -50,7 +50,7 @@ commands = [
 set_env.COVERAGE_PROCESS_START = "pyproject.toml"
 
 [env_base.coverage]
-factors = [{ py_version = { prefix = "3.", start = 10, stop = 14 } }]
+factors = [{ py_version = { prefix = "3.", start = 11, stop = 15 } }]
 commands = [{ replace = "ref", of = ["env", "coverage", "commands"], extend = false }]
 
 [env.coverage-core]
@@ -63,7 +63,7 @@ commands = [
 set_env.COVERAGE_PROCESS_START = "pyproject.toml"
 
 [env_base.coverage-base]
-factors = [{ py_version = { prefix = "3.", start = 10, stop = 14 } }]
+factors = [{ py_version = { prefix = "3.", start = 11, stop = 15 } }]
 commands = [{ replace = "ref", of = ["env", "coverage-base", "commands"], extend = false }]
 
 [env.pre-commit]

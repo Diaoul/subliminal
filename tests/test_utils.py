@@ -1,9 +1,7 @@
 from __future__ import annotations
 
-import asyncio
 import datetime
 import logging
-import sys
 from typing import TYPE_CHECKING, Any
 from unittest.mock import Mock
 from xmlrpc.client import ProtocolError
@@ -90,7 +88,6 @@ def test_safely_guessit_with_empty_string() -> None:
     assert result == {}
 
 
-@pytest.mark.skipif(sys.version_info < (3, 11), reason='not a bug in python3.10...')
 def test_safely_guessit_with_error() -> None:
     """Regression test for https://github.com/Diaoul/subliminal/issues/1351"""
     result = safely_guessit(
@@ -151,20 +148,20 @@ def test_sanitize_id() -> None:
 
 
 def test_get_creation_date(tmp_path: Path) -> None:
-    NOW = datetime.datetime.now(datetime.timezone.utc)
+    NOW = datetime.datetime.now(datetime.UTC)
 
     content = 'content'
     p = tmp_path / 'test.txt'
     p.write_text(content, encoding='utf-8')
 
-    mdate = datetime.datetime.fromtimestamp(modification_date(p), tz=datetime.timezone.utc)
-    cdate = datetime.datetime.fromtimestamp(creation_date(p), tz=datetime.timezone.utc)
+    mdate = datetime.datetime.fromtimestamp(modification_date(p), tz=datetime.UTC)
+    cdate = datetime.datetime.fromtimestamp(creation_date(p), tz=datetime.UTC)
     assert abs((cdate - mdate).total_seconds()) < 2
     assert abs((cdate - NOW).total_seconds()) < 2
 
 
 def test_get_age(monkeypatch: pytest.MonkeyPatch) -> None:
-    NOW = datetime.datetime.now(datetime.timezone.utc)
+    NOW = datetime.datetime.now(datetime.UTC)
 
     # mock file age
     def mock_modification_date(filepath: str, **kwargs: Any) -> float:
@@ -233,7 +230,7 @@ def test_handle_exception(caplog: pytest.LogCaptureFixture, err: Exception, msg:
 @pytest.mark.parametrize(
     ('error', 'expected'),
     [
-        (asyncio.TimeoutError(), 'Request timed out'),
+        (TimeoutError(), 'Request timed out'),
         (aiohttp.ServerTimeoutError(), 'Request timed out'),
         (aiohttp.ClientResponseError(Mock(), (), status=404), 'HTTP error 404'),
         (aiohttp.ClientResponseError(Mock(), (), status=503), 'HTTP error 503'),

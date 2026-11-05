@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import logging
 import re
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from functools import wraps
 from typing import TYPE_CHECKING, Any, ClassVar, cast
 
@@ -102,7 +102,7 @@ class TVDBClient:
         self.username = username
         self.password = password
 
-        self.token_date = datetime.now(timezone.utc) - self.token_lifespan
+        self.token_date = datetime.now(UTC) - self.token_lifespan
         self.timeout = timeout
 
         #: Session for the requests
@@ -131,7 +131,7 @@ class TVDBClient:
     @property
     def token_expired(self) -> bool:
         """Check if the token expired."""
-        return datetime.now(timezone.utc) - self.token_date >= self.token_lifespan
+        return datetime.now(UTC) - self.token_date >= self.token_lifespan
 
     def login(self) -> None:
         """Login."""
@@ -144,7 +144,7 @@ class TVDBClient:
         self.session.headers['Authorization'] = 'Bearer ' + r.json()['token']
 
         # update token_date
-        self.token_date = datetime.now(timezone.utc)
+        self.token_date = datetime.now(UTC)
 
     @region.cache_on_arguments(expiration_time=REFINER_EXPIRATION_TIME)
     @requires_auth
@@ -354,7 +354,7 @@ def refine_episode(client: TVDBClient, video: Episode, *, force: bool = False, *
         # parse series year
         series_year = None
         if result['firstAired']:
-            first_aired = datetime.strptime(result['firstAired'], '%Y-%m-%d').replace(tzinfo=timezone.utc)
+            first_aired = datetime.strptime(result['firstAired'], '%Y-%m-%d').replace(tzinfo=UTC)
             series_year = first_aired.year
 
         # discard mismatches on year

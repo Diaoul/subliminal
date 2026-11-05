@@ -7,7 +7,7 @@ build-backend = "hatchling.build"
 [project]
 name = "subliminal"
 description = "Subtitles, faster than your thoughts"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 readme = "README.rst"
 license = { text = "MIT" }
 authors = [{ name = "Antoine Bertin", email = "diaoulael@gmail.com" }]
@@ -24,11 +24,11 @@ classifiers = [
     "Operating System :: OS Independent",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3.15",
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Topic :: Multimedia :: Video",
 ]
@@ -51,7 +51,7 @@ dependencies = [
     "srt>=3.5",
     "stevedore>=3.0",
     "tomlkit>=0.13.2",
-    "typing_extensions>=4.10",  # TypedDict extra_items
+    "typing_extensions>=4.10; python_version<'3.15'",  # TypedDict extra_items
 ]
 
 # https://peps.python.org/pep-0621/#dependencies-optional-dependencies

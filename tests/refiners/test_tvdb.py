@@ -1,5 +1,5 @@
 import os
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 
 import pytest
 import requests
@@ -106,11 +106,11 @@ def test_login_error() -> None:
 @vcr.use_cassette
 def test_login(client: TVDBClient) -> None:
     assert client.token is None
-    assert client.token_date <= datetime.now(timezone.utc) - timedelta(hours=1)
+    assert client.token_date <= datetime.now(UTC) - timedelta(hours=1)
     assert client.token_expired
     client.login()
     assert client.token is not None
-    assert client.token_date > datetime.now(timezone.utc) - timedelta(seconds=1)
+    assert client.token_date > datetime.now(UTC) - timedelta(seconds=1)
     assert client.token_expired is False
 
 

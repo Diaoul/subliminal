@@ -12,7 +12,7 @@ import socket
 import sys
 from abc import ABC, abstractmethod
 from collections.abc import Iterable, Iterator
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from types import GeneratorType
 from typing import TYPE_CHECKING, Any, ClassVar, Generic, TypeVar, cast, overload
 from xmlrpc.client import ProtocolError
@@ -401,7 +401,7 @@ def timestamp(date: datetime) -> float:
     :rtype: float
 
     """
-    return (date - datetime(1970, 1, 1, tzinfo=timezone.utc)).total_seconds()
+    return (date - datetime(1970, 1, 1, tzinfo=UTC)).total_seconds()
 
 
 def matches_extended_title(
@@ -558,8 +558,8 @@ def get_age(
     file_date = modification_date(filepath)
     if use_ctime:
         file_date = max(file_date, creation_date(filepath))
-    reference_date = reference_date if reference_date is not None else datetime.now(timezone.utc)
-    return reference_date - datetime.fromtimestamp(file_date, timezone.utc)
+    reference_date = reference_date if reference_date is not None else datetime.now(UTC)
+    return reference_date - datetime.fromtimestamp(file_date, UTC)
 
 
 def merge_extend_and_ignore_unions(

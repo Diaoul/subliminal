@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import os
 import re
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from typing import TYPE_CHECKING, Any
 from unittest.mock import Mock
 
@@ -270,7 +270,7 @@ def test_scan_videos(movies: dict[str, Movie], tmp_path: Path, monkeypatch: pyte
 
 def test_scan_videos_age(movies: dict[str, Movie], tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     ensure(tmp_path / 'movies' / movies['man_of_steel'].name)
-    ts = timestamp(datetime.now(timezone.utc) - timedelta(days=10))
+    ts = timestamp(datetime.now(UTC) - timedelta(days=10))
     os.utime(ensure(tmp_path / 'movies' / movies['enders_game'].name), (ts, ts))
 
     # mock scan_video and scan_archive with the correct types

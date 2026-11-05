@@ -86,6 +86,7 @@ tests = [
     "packaging",
     "pytest>=6.0",
     "pytest-asyncio",
+    "pytest-aiohttp",
     "pytest-cov",
     "pytest-xdist",
     "sympy",
@@ -156,6 +157,7 @@ markers = [
     "core",
 ]
 doctest_optionflags = ["NORMALIZE_WHITESPACE", "IGNORE_EXCEPTION_DETAIL"]
+asyncio_mode = "auto"
 
 
 # https://coverage.readthedocs.io/en/latest/config.html

@@ -226,4 +226,664 @@ interactions:
     status:
       code: 200
       message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, zstd
+      Api-Key:
+      - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
+      Content-Type:
+      - application/json
+      Host:
+      - api.opensubtitles.com
+      User-Agent:
+      - Subliminal v2.8
+    method: GET
+    uri: https://api.opensubtitles.com/api/v1/subtitles?languages=en&moviehash=5b8f8f4e41ccb21e&page=1
+  response:
+    body: {}
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Expose-Headers:
+      - X-Auth-Token
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      CF-RAY:
+      - a54773aedf909b7d-LIS
+      Cache-Control:
+      - public, max-age=86400
+      Connection:
+      - keep-alive
+      Content-Type:
+      - text/html
+      Date:
+      - Tue, 03 Nov 2026 01:02:09 GMT
+      Location:
+      - /api/v1/subtitles?languages=en&moviehash=5b8f8f4e41ccb21e
+      NEL:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=r0X1fHfmXgK%2FdV0%2F4oek0g1j%2BsBZzFvX9tu5kfcO2B7EIXahDe4AneMpUs09ZGe2jfocVs%2B9XEW32jCIuinAjb%2Fw%2Fi1I2u0egXq363fZZ9TWOQavnJC13oOWFU17achaGANnmA7W%2FrY%3D"}]}'
+      Server:
+      - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      X-Canonical:
+      - '1'
+      X-Content-Type-Options:
+      - nosniff
+      X-Kong-Request-Id:
+      - eccced19662e7b18cfa5c135a4d0962f
+      X-Kong-Response-Latency:
+      - '1'
+      X-OS-Rule:
+      - canonical
+      cf-cache-status:
+      - EXPIRED
+    status:
+      code: 301
+      message: Moved Permanently
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, zstd
+      Api-Key:
+      - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
+      Content-Type:
+      - application/json
+      Host:
+      - api.opensubtitles.com
+      User-Agent:
+      - Subliminal v2.8
+    method: GET
+    uri: https://api.opensubtitles.com/api/v1/subtitles?languages=en&moviehash=5b8f8f4e41ccb21e
+  response:
+    body:
+      string: '{"total_pages":1,"total_count":12,"per_page":50,"page":1,"data":[{"id":"3178800","type":"subtitle","attributes":{"subtitle_id":"3178800","language":"en","download_count":215527,"new_download_count":3270,"hearing_impaired":false,"hd":true,"fps":23.976,"votes":2,"ratings":10.0,"from_trusted":true,"foreign_parts_only":false,"upload_date":"2013-11-07T04:48:10Z","ai_translated":false,"nb_cd":1,"slug":"5259348-arrow-s02e05-hdtv-x264-lol","machine_translated":false,"release":"Arrow.S02E05.HDTV.x264-LOL","comments":"sync,
+        corrected by elderman","legacy_subtitle_id":5259348,"legacy_uploader_id":1332962,"uploader":{"uploader_id":56900,"name":"elderman","rank":"translator"},"feature_details":{"feature_id":348318,"feature_type":"Episode","year":2013,"title":"League
+        of Assassins","movie_name":"Arrow - S02E05  League of Assassins","imdb_id":3128398,"tmdb_id":64139,"season_number":2,"episode_number":5,"parent_imdb_id":2193021,"parent_title":"Arrow","parent_tmdb_id":1412,"parent_feature_id":12491},"url":"https://www.opensubtitles.com/en/subtitles/5259348-arrow-s02e05-hdtv-x264-lol","related_links":[{"label":"All
+        subtitles for Tv Show Arrow","url":"https://www.opensubtitles.com/en/features/redirect/12491","img_url":"https://s6.opensubtitles.com/features/1/9/4/12491.jpg"},{"label":"All
+        subtitles for Episode league of assassins","url":"https://www.opensubtitles.com/en/features/redirect/348318","img_url":"https://s5.opensubtitles.com/features/8/1/3/348318.jpg"}],"files":[{"file_id":3249003,"cd_number":1,"file_name":"Arrow.S02E05.HDTV.x264-LOL"}],"moviehash_match":true}},{"id":"882182","type":"subtitle","attributes":{"subtitle_id":"882182","language":"en","download_count":10906,"new_download_count":431,"hearing_impaired":false,"hd":true,"fps":23.98,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-10-28T01:20:44Z","ai_translated":false,"nb_cd":1,"slug":"man-of-steel-2013-brrip-xvidhd-720p-npw","machine_translated":false,"release":"Man
+        of Steel 2013 BRRip XvidHD 720p-NPW","comments":"","legacy_subtitle_id":5244413,"legacy_uploader_id":429031,"uploader":{"uploader_id":41158,"name":"willygeerts","rank":"VIP
+        Member"},"feature_details":{"feature_id":580760,"feature_type":"Movie","year":2013,"title":"Man
+        of Steel","movie_name":"2013 - Man of Steel","imdb_id":770828,"tmdb_id":49521},"url":"https://www.opensubtitles.com/en/subtitles/man-of-steel-2013-brrip-xvidhd-720p-npw","related_links":[{"label":"All
+        subtitles for man of steel","url":"https://www.opensubtitles.com/en/movies/man-of-steel-2013-brrip-xvidhd-720p-npw","img_url":"https://s7.opensubtitles.com/features/0/6/7/580760.jpg"}],"files":[{"file_id":963880,"cd_number":1,"file_name":"Man
+        of Steel 2013 BRRip XvidHD 720p-NPW"}],"moviehash_match":true}},{"id":"879204","type":"subtitle","attributes":{"subtitle_id":"879204","language":"en","download_count":57902,"new_download_count":2231,"hearing_impaired":false,"hd":true,"fps":23.976,"votes":1,"ratings":10.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-10-16T17:30:21Z","ai_translated":false,"nb_cd":1,"slug":"5226279-man-of-steel-2013-720p-bluray-x264-felony","machine_translated":false,"release":"Man.Of.Steel.2013.720p.BluRay.x264-Felony","comments":"","legacy_subtitle_id":5226279,"legacy_uploader_id":338814,"uploader":{"uploader_id":39690,"name":"Babylonian","rank":"Silver
+        Member"},"feature_details":{"feature_id":580760,"feature_type":"Movie","year":2013,"title":"Man
+        of Steel","movie_name":"2013 - Man of Steel","imdb_id":770828,"tmdb_id":49521},"url":"https://www.opensubtitles.com/en/subtitles/5226279-man-of-steel-2013-720p-bluray-x264-felony","related_links":[{"label":"All
+        subtitles for man of steel","url":"https://www.opensubtitles.com/en/movies/5226279-man-of-steel-2013-720p-bluray-x264-felony","img_url":"https://s8.opensubtitles.com/features/0/6/7/580760.jpg"}],"files":[{"file_id":960768,"cd_number":1,"file_name":"Man.Of.Steel.2013.720p.BluRay.x264-Felony.English"}],"moviehash_match":true}},{"id":"877471","type":"subtitle","attributes":{"subtitle_id":"877471","language":"en","download_count":43139,"new_download_count":1624,"hearing_impaired":false,"hd":true,"fps":23.976,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-10-16T08:26:55Z","ai_translated":false,"nb_cd":1,"slug":"man-of-steel-2013-bluray","machine_translated":false,"release":"Man
+        Of Steel 2013 - Bluray","comments":"","legacy_subtitle_id":5225826,"legacy_uploader_id":1534270,"uploader":{"uploader_id":62354,"name":"racunz2012","rank":"Gold
+        member"},"feature_details":{"feature_id":580760,"feature_type":"Movie","year":2013,"title":"Man
+        of Steel","movie_name":"2013 - Man of Steel","imdb_id":770828,"tmdb_id":49521},"url":"https://www.opensubtitles.com/en/subtitles/man-of-steel-2013-bluray","related_links":[{"label":"All
+        subtitles for man of steel","url":"https://www.opensubtitles.com/en/movies/man-of-steel-2013-bluray","img_url":"https://s4.opensubtitles.com/features/0/6/7/580760.jpg"}],"files":[{"file_id":959001,"cd_number":1,"file_name":"Man
+        Of Steel 2013 - Bluray.EN"}],"moviehash_match":true}},{"id":"877376","type":"subtitle","attributes":{"subtitle_id":"877376","language":"en","download_count":9786,"new_download_count":103,"hearing_impaired":false,"hd":true,"fps":0.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-10-16T06:52:41Z","ai_translated":false,"nb_cd":1,"slug":"manof-steel-2013-bdrip-600mb-ganool","machine_translated":false,"release":"ManOf.Steel.(2013).BDRip.600MB.Ganool","comments":"","legacy_subtitle_id":5225752,"legacy_uploader_id":1548471,"uploader":{"uploader_id":62760,"name":"Drigerray","rank":"Bronze
+        Member"},"feature_details":{"feature_id":580760,"feature_type":"Movie","year":2013,"title":"Man
+        of Steel","movie_name":"2013 - Man of Steel","imdb_id":770828,"tmdb_id":49521},"url":"https://www.opensubtitles.com/en/subtitles/manof-steel-2013-bdrip-600mb-ganool","related_links":[{"label":"All
+        subtitles for man of steel","url":"https://www.opensubtitles.com/en/movies/manof-steel-2013-bdrip-600mb-ganool","img_url":"https://s7.opensubtitles.com/features/0/6/7/580760.jpg"}],"files":[{"file_id":958900,"cd_number":1,"file_name":"ManOf.Steel.(2013).BDRip.600MB.Ganool"}],"moviehash_match":true}},{"id":"876365","type":"subtitle","attributes":{"subtitle_id":"876365","language":"en","download_count":41447,"new_download_count":545,"hearing_impaired":true,"hd":true,"fps":23.976,"votes":0,"ratings":0.0,"from_trusted":true,"foreign_parts_only":false,"upload_date":"2013-10-16T00:37:20Z","ai_translated":false,"nb_cd":1,"slug":"5225494-720p-bluray-x264-felony-color-hearing-impaired","machine_translated":false,"release":"720p.BluRay.x264-Felony
+        (COLOR Hearing Impaired)","comments":"Fix OCR, italics, overlapping, etc...
+        for all 720p/1080p BluRay","legacy_subtitle_id":5225494,"legacy_uploader_id":847082,"uploader":{"uploader_id":48068,"name":"cipry_master","rank":"Trusted
+        member"},"feature_details":{"feature_id":580760,"feature_type":"Movie","year":2013,"title":"Man
+        of Steel","movie_name":"2013 - Man of Steel","imdb_id":770828,"tmdb_id":49521},"url":"https://www.opensubtitles.com/en/subtitles/5225494-720p-bluray-x264-felony-color-hearing-impaired","related_links":[{"label":"All
+        subtitles for man of steel","url":"https://www.opensubtitles.com/en/movies/5225494-720p-bluray-x264-felony-color-hearing-impaired","img_url":"https://s2.opensubtitles.com/features/0/6/7/580760.jpg"}],"files":[{"file_id":957845,"cd_number":1,"file_name":"Man.Of.Steel.2013.720p.BluRay.x264-Felony"}],"moviehash_match":true}},{"id":"876180","type":"subtitle","attributes":{"subtitle_id":"876180","language":"en","download_count":462512,"new_download_count":17887,"hearing_impaired":false,"hd":true,"fps":23.976,"votes":3,"ratings":10.0,"from_trusted":true,"foreign_parts_only":false,"upload_date":"2013-10-16T00:37:02Z","ai_translated":false,"nb_cd":1,"slug":"5225493-720p-bluray-x264-felony-and-bdrip-xvid-nogrp","machine_translated":false,"release":"720p.BluRay.x264-Felony
+        [and BDRiP.XViD-NoGRP]","comments":"Fix OCR, italics, overlapping, etc...
+        for all 720p/1080p BluRay","legacy_subtitle_id":5225493,"legacy_uploader_id":847082,"uploader":{"uploader_id":48068,"name":"cipry_master","rank":"Trusted
+        member"},"feature_details":{"feature_id":580760,"feature_type":"Movie","year":2013,"title":"Man
+        of Steel","movie_name":"2013 - Man of Steel","imdb_id":770828,"tmdb_id":49521},"url":"https://www.opensubtitles.com/en/subtitles/5225493-720p-bluray-x264-felony-and-bdrip-xvid-nogrp","related_links":[{"label":"All
+        subtitles for man of steel","url":"https://www.opensubtitles.com/en/movies/5225493-720p-bluray-x264-felony-and-bdrip-xvid-nogrp","img_url":"https://s8.opensubtitles.com/features/0/6/7/580760.jpg"}],"files":[{"file_id":957714,"cd_number":1,"file_name":"Man.Of.Steel.2013.720p.BluRay.x264-Felony"}],"moviehash_match":true}},{"id":"874537","type":"subtitle","attributes":{"subtitle_id":"874537","language":"en","download_count":15071,"new_download_count":278,"hearing_impaired":false,"hd":true,"fps":0.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-10-15T23:33:54Z","ai_translated":false,"nb_cd":1,"slug":"man-of-steel-2013-720p-brrip-x264-ac3-undercover","machine_translated":false,"release":"Man.Of.Steel.2013.720p.BRRip.x264.AC3-UNDERCOVER","comments":"","legacy_subtitle_id":5225363,"legacy_uploader_id":1447693,"uploader":{"uploader_id":59646,"name":"Neomale","rank":"Read
+        Only Member"},"feature_details":{"feature_id":580760,"feature_type":"Movie","year":2013,"title":"Man
+        of Steel","movie_name":"2013 - Man of Steel","imdb_id":770828,"tmdb_id":49521},"url":"https://www.opensubtitles.com/en/subtitles/man-of-steel-2013-720p-brrip-x264-ac3-undercover","related_links":[{"label":"All
+        subtitles for man of steel","url":"https://www.opensubtitles.com/en/movies/man-of-steel-2013-720p-brrip-x264-ac3-undercover","img_url":"https://s9.opensubtitles.com/features/0/6/7/580760.jpg"}],"files":[{"file_id":955964,"cd_number":1,"file_name":"Man.Of.Steel.2013.720p.BRRip.x264.AC3-UNDERCOVER_eng"}],"moviehash_match":true}},{"id":"873226","type":"subtitle","attributes":{"subtitle_id":"873226","language":"en","download_count":12930,"new_download_count":145,"hearing_impaired":true,"hd":true,"fps":0.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-10-15T20:22:10Z","ai_translated":false,"nb_cd":1,"slug":"man-of-steel-2013-bdrip-x264-larceny-rarbg","machine_translated":false,"release":"Man.Of.Steel.2013.BDRip.x264-Larceny[rarbg]","comments":"","legacy_subtitle_id":5225027,"legacy_uploader_id":121929,"uploader":{"uploader_id":35815,"name":"untukforum","rank":"Gold
+        member"},"feature_details":{"feature_id":580760,"feature_type":"Movie","year":2013,"title":"Man
+        of Steel","movie_name":"2013 - Man of Steel","imdb_id":770828,"tmdb_id":49521},"url":"https://www.opensubtitles.com/en/subtitles/man-of-steel-2013-bdrip-x264-larceny-rarbg","related_links":[{"label":"All
+        subtitles for man of steel","url":"https://www.opensubtitles.com/en/movies/man-of-steel-2013-bdrip-x264-larceny-rarbg","img_url":"https://s7.opensubtitles.com/features/0/6/7/580760.jpg"}],"files":[{"file_id":954566,"cd_number":1,"file_name":"l-manofsteel"}],"moviehash_match":true}},{"id":"872093","type":"subtitle","attributes":{"subtitle_id":"872093","language":"en","download_count":146892,"new_download_count":2787,"hearing_impaired":false,"hd":true,"fps":23.976,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-10-15T19:02:17Z","ai_translated":false,"nb_cd":1,"slug":"5224905-man-of-steel-2013-bdrip-x264-larceny","machine_translated":false,"release":"Man
+        Of Steel 2013 BDRip.x264-Larceny","comments":"","legacy_subtitle_id":5224905,"legacy_uploader_id":2020399,"uploader":{"uploader_id":67314,"name":"felixmartini","rank":"Bronze
+        Member"},"feature_details":{"feature_id":580760,"feature_type":"Movie","year":2013,"title":"Man
+        of Steel","movie_name":"2013 - Man of Steel","imdb_id":770828,"tmdb_id":49521},"url":"https://www.opensubtitles.com/en/subtitles/5224905-man-of-steel-2013-bdrip-x264-larceny","related_links":[{"label":"All
+        subtitles for man of steel","url":"https://www.opensubtitles.com/en/movies/5224905-man-of-steel-2013-bdrip-x264-larceny","img_url":"https://s7.opensubtitles.com/features/0/6/7/580760.jpg"}],"files":[{"file_id":953341,"cd_number":1,"file_name":"Man
+        Of Steel 2013 BDRip.x264-Larceny"}],"moviehash_match":true}},{"id":"871951","type":"subtitle","attributes":{"subtitle_id":"871951","language":"en","download_count":23523,"new_download_count":788,"hearing_impaired":true,"hd":true,"fps":23.976,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-10-15T19:01:42Z","ai_translated":false,"nb_cd":1,"slug":"5224904-man-of-steel-2013-bdrip-x264-larceny","machine_translated":false,"release":"Man
+        Of Steel 2013 BDRip.x264-Larceny","comments":"","legacy_subtitle_id":5224904,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":580760,"feature_type":"Movie","year":2013,"title":"Man
+        of Steel","movie_name":"2013 - Man of Steel","imdb_id":770828,"tmdb_id":49521},"url":"https://www.opensubtitles.com/en/subtitles/5224904-man-of-steel-2013-bdrip-x264-larceny","related_links":[{"label":"All
+        subtitles for man of steel","url":"https://www.opensubtitles.com/en/movies/5224904-man-of-steel-2013-bdrip-x264-larceny","img_url":"https://s4.opensubtitles.com/features/0/6/7/580760.jpg"}],"files":[{"file_id":953193,"cd_number":1,"file_name":"Man
+        Of Steel 2013 BDRip.x264-Larceny.Hi"}],"moviehash_match":true}},{"id":"869742","type":"subtitle","attributes":{"subtitle_id":"869742","language":"en","download_count":130282,"new_download_count":1058,"hearing_impaired":false,"hd":false,"fps":29.97,"votes":1,"ratings":10.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-07-09T13:03:41Z","ai_translated":false,"nb_cd":1,"slug":"man-of-steel-2013-r6-line-all-version","machine_translated":false,"release":"Man.of.Steel.2013.R6.LiNE.All.Version","comments":"Total
+        98% Improved,Re-Synced,Spell Checked,Few Lines Added. Specially Thanks to
+        \"tinotpoldas\" \u0026 \"tosem\" .","legacy_subtitle_id":5079931,"legacy_uploader_id":1629008,"uploader":{"uploader_id":64860,"name":"igorrml_","rank":"Gold
+        member"},"feature_details":{"feature_id":580760,"feature_type":"Movie","year":2013,"title":"Man
+        of Steel","movie_name":"2013 - Man of Steel","imdb_id":770828,"tmdb_id":49521},"url":"https://www.opensubtitles.com/en/subtitles/man-of-steel-2013-r6-line-all-version","related_links":[{"label":"All
+        subtitles for man of steel","url":"https://www.opensubtitles.com/en/movies/man-of-steel-2013-r6-line-all-version","img_url":"https://s2.opensubtitles.com/features/0/6/7/580760.jpg"}],"files":[{"file_id":950892,"cd_number":1,"file_name":"Man.of.Steel.2013.R6.LiNE.All.Version"}],"moviehash_match":true}}]}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, Authorization, Accept, Api-Key, Content-Type, X-User-Agent
+      Access-Control-Allow-Methods:
+      - GET, HEAD, POST, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Expose-Headers:
+      - X-Auth-Token
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      CF-RAY:
+      - a54773af683b9b7d-LIS
+      Cache-Control:
+      - public, max-age=86400
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 03 Nov 2026 01:02:09 GMT
+      Last-Modified:
+      - Tue, 03 Nov 2026 01:02:09 GMT
+      NEL:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      RateLimit-Limit:
+      - '5'
+      RateLimit-Remaining:
+      - '2'
+      RateLimit-Reset:
+      - '1'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=lAE2Pkmbvl%2FuLFF3W3mnhwHDXlaOQEiSrETbnNvks9mjqFbfvMJ%2F%2FEzYA4mo5Tlz5lqk%2FZMhK1cvfgqPFDFppdprCK788YmOJ3stVDOM%2BOx6ZU9thtPMM%2BQ3gNuYhx%2Fx3x8RHLegPu8%3D"}]}'
+      Server:
+      - cloudflare
+      Server-Timing:
+      - miss, 0_TR_client_wait;dur=0, _Tw_queues;dur=0, 2_Tc_bak_connect;dur=1, 3_Tr_bak_response;dur=41
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - accept-encoding
+      Via:
+      - 1.1 kong/3.9.1
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Kong-Proxy-Latency:
+      - '2'
+      X-Kong-Request-Id:
+      - aa814f6e3f85e20538435122dd150825
+      X-Kong-Upstream-Latency:
+      - '43'
+      X-RateLimit-Limit-Second:
+      - '5'
+      X-RateLimit-Remaining-Second:
+      - '2'
+      X-Request-ID:
+      - f517ed6d-d162-4906-94ce-5d9d8899bf2b
+      X-XSS-Protection:
+      - 1; mode=block
+      cf-cache-status:
+      - EXPIRED
+      content-length:
+      - '15047'
+      x-backend-server:
+      - rb1
+      x-download-options:
+      - noopen
+      x-runtime:
+      - '0.038518'
+      x-vip:
+      - 'false'
+      x-vip-consumer:
+      - 'false'
+      x-vip-user:
+      - 'false'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, zstd
+      Api-Key:
+      - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
+      Content-Type:
+      - application/json
+      Host:
+      - api.opensubtitles.com
+      User-Agent:
+      - Subliminal v2.8
+    method: GET
+    uri: https://api.opensubtitles.com/api/v1/subtitles?languages=en&moviehash=5b8f8f4e41ccb21e&page=1&type=movie
+  response:
+    body: {}
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Expose-Headers:
+      - X-Auth-Token
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      CF-RAY:
+      - a54f87aebf22a10f-LIS
+      Cache-Control:
+      - public, max-age=86400
+      Connection:
+      - keep-alive
+      Content-Type:
+      - text/html
+      Date:
+      - Wed, 04 Nov 2026 00:33:55 GMT
+      Location:
+      - /api/v1/subtitles?languages=en&moviehash=5b8f8f4e41ccb21e&type=movie
+      NEL:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=FsZwDjZJPo31BcpXjvTX6bgtKnxXBmIRlt9nu5jWnYisSXtVjtPfQFsm06FlGwYvg4CzMGxoTQesyQCXuSRpgDk4%2FRtzLfIefVSXsrnb8peY2KyNoGHYDC6qI4y3xx0ArxleQbRgzA8%3D"}]}'
+      Server:
+      - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      X-Canonical:
+      - '1'
+      X-Content-Type-Options:
+      - nosniff
+      X-Kong-Request-Id:
+      - 6a849a0f208b486271d662588ef5d47a
+      X-Kong-Response-Latency:
+      - '1'
+      X-OS-Rule:
+      - canonical
+      cf-cache-status:
+      - MISS
+    status:
+      code: 301
+      message: Moved Permanently
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, zstd
+      Api-Key:
+      - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
+      Content-Type:
+      - application/json
+      Host:
+      - api.opensubtitles.com
+      User-Agent:
+      - Subliminal v2.8
+    method: GET
+    uri: https://api.opensubtitles.com/api/v1/subtitles?languages=en&moviehash=5b8f8f4e41ccb21e&type=movie
+  response:
+    body:
+      string: '{"total_pages":1,"total_count":11,"per_page":50,"page":1,"data":[{"id":"882182","type":"subtitle","attributes":{"subtitle_id":"882182","language":"en","download_count":10906,"new_download_count":431,"hearing_impaired":false,"hd":true,"fps":23.98,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-10-28T01:20:44Z","ai_translated":false,"nb_cd":1,"slug":"man-of-steel-2013-brrip-xvidhd-720p-npw","machine_translated":false,"release":"Man
+        of Steel 2013 BRRip XvidHD 720p-NPW","comments":"","legacy_subtitle_id":5244413,"legacy_uploader_id":429031,"uploader":{"uploader_id":41158,"name":"willygeerts","rank":"VIP
+        Member"},"feature_details":{"feature_id":580760,"feature_type":"Movie","year":2013,"title":"Man
+        of Steel","movie_name":"2013 - Man of Steel","imdb_id":770828,"tmdb_id":49521},"url":"https://www.opensubtitles.com/en/subtitles/man-of-steel-2013-brrip-xvidhd-720p-npw","related_links":[{"label":"All
+        subtitles for man of steel","url":"https://www.opensubtitles.com/en/movies/man-of-steel-2013-brrip-xvidhd-720p-npw","img_url":"https://s5.opensubtitles.com/features/0/6/7/580760.jpg"}],"files":[{"file_id":963880,"cd_number":1,"file_name":"Man
+        of Steel 2013 BRRip XvidHD 720p-NPW"}],"moviehash_match":true}},{"id":"879204","type":"subtitle","attributes":{"subtitle_id":"879204","language":"en","download_count":57902,"new_download_count":2235,"hearing_impaired":false,"hd":true,"fps":23.976,"votes":1,"ratings":10.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-10-16T17:30:21Z","ai_translated":false,"nb_cd":1,"slug":"5226279-man-of-steel-2013-720p-bluray-x264-felony","machine_translated":false,"release":"Man.Of.Steel.2013.720p.BluRay.x264-Felony","comments":"","legacy_subtitle_id":5226279,"legacy_uploader_id":338814,"uploader":{"uploader_id":39690,"name":"Babylonian","rank":"Silver
+        Member"},"feature_details":{"feature_id":580760,"feature_type":"Movie","year":2013,"title":"Man
+        of Steel","movie_name":"2013 - Man of Steel","imdb_id":770828,"tmdb_id":49521},"url":"https://www.opensubtitles.com/en/subtitles/5226279-man-of-steel-2013-720p-bluray-x264-felony","related_links":[{"label":"All
+        subtitles for man of steel","url":"https://www.opensubtitles.com/en/movies/5226279-man-of-steel-2013-720p-bluray-x264-felony","img_url":"https://s3.opensubtitles.com/features/0/6/7/580760.jpg"}],"files":[{"file_id":960768,"cd_number":1,"file_name":"Man.Of.Steel.2013.720p.BluRay.x264-Felony.English"}],"moviehash_match":true}},{"id":"877471","type":"subtitle","attributes":{"subtitle_id":"877471","language":"en","download_count":43139,"new_download_count":1624,"hearing_impaired":false,"hd":true,"fps":23.976,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-10-16T08:26:55Z","ai_translated":false,"nb_cd":1,"slug":"man-of-steel-2013-bluray","machine_translated":false,"release":"Man
+        Of Steel 2013 - Bluray","comments":"","legacy_subtitle_id":5225826,"legacy_uploader_id":1534270,"uploader":{"uploader_id":62354,"name":"racunz2012","rank":"Gold
+        member"},"feature_details":{"feature_id":580760,"feature_type":"Movie","year":2013,"title":"Man
+        of Steel","movie_name":"2013 - Man of Steel","imdb_id":770828,"tmdb_id":49521},"url":"https://www.opensubtitles.com/en/subtitles/man-of-steel-2013-bluray","related_links":[{"label":"All
+        subtitles for man of steel","url":"https://www.opensubtitles.com/en/movies/man-of-steel-2013-bluray","img_url":"https://s4.opensubtitles.com/features/0/6/7/580760.jpg"}],"files":[{"file_id":959001,"cd_number":1,"file_name":"Man
+        Of Steel 2013 - Bluray.EN"}],"moviehash_match":true}},{"id":"877376","type":"subtitle","attributes":{"subtitle_id":"877376","language":"en","download_count":9786,"new_download_count":103,"hearing_impaired":false,"hd":true,"fps":0.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-10-16T06:52:41Z","ai_translated":false,"nb_cd":1,"slug":"manof-steel-2013-bdrip-600mb-ganool","machine_translated":false,"release":"ManOf.Steel.(2013).BDRip.600MB.Ganool","comments":"","legacy_subtitle_id":5225752,"legacy_uploader_id":1548471,"uploader":{"uploader_id":62760,"name":"Drigerray","rank":"Bronze
+        Member"},"feature_details":{"feature_id":580760,"feature_type":"Movie","year":2013,"title":"Man
+        of Steel","movie_name":"2013 - Man of Steel","imdb_id":770828,"tmdb_id":49521},"url":"https://www.opensubtitles.com/en/subtitles/manof-steel-2013-bdrip-600mb-ganool","related_links":[{"label":"All
+        subtitles for man of steel","url":"https://www.opensubtitles.com/en/movies/manof-steel-2013-bdrip-600mb-ganool","img_url":"https://s2.opensubtitles.com/features/0/6/7/580760.jpg"}],"files":[{"file_id":958900,"cd_number":1,"file_name":"ManOf.Steel.(2013).BDRip.600MB.Ganool"}],"moviehash_match":true}},{"id":"876365","type":"subtitle","attributes":{"subtitle_id":"876365","language":"en","download_count":41447,"new_download_count":545,"hearing_impaired":true,"hd":true,"fps":23.976,"votes":0,"ratings":0.0,"from_trusted":true,"foreign_parts_only":false,"upload_date":"2013-10-16T00:37:20Z","ai_translated":false,"nb_cd":1,"slug":"5225494-720p-bluray-x264-felony-color-hearing-impaired","machine_translated":false,"release":"720p.BluRay.x264-Felony
+        (COLOR Hearing Impaired)","comments":"Fix OCR, italics, overlapping, etc...
+        for all 720p/1080p BluRay","legacy_subtitle_id":5225494,"legacy_uploader_id":847082,"uploader":{"uploader_id":48068,"name":"cipry_master","rank":"Trusted
+        member"},"feature_details":{"feature_id":580760,"feature_type":"Movie","year":2013,"title":"Man
+        of Steel","movie_name":"2013 - Man of Steel","imdb_id":770828,"tmdb_id":49521},"url":"https://www.opensubtitles.com/en/subtitles/5225494-720p-bluray-x264-felony-color-hearing-impaired","related_links":[{"label":"All
+        subtitles for man of steel","url":"https://www.opensubtitles.com/en/movies/5225494-720p-bluray-x264-felony-color-hearing-impaired","img_url":"https://s4.opensubtitles.com/features/0/6/7/580760.jpg"}],"files":[{"file_id":957845,"cd_number":1,"file_name":"Man.Of.Steel.2013.720p.BluRay.x264-Felony"}],"moviehash_match":true}},{"id":"876180","type":"subtitle","attributes":{"subtitle_id":"876180","language":"en","download_count":462512,"new_download_count":17908,"hearing_impaired":false,"hd":true,"fps":23.976,"votes":3,"ratings":10.0,"from_trusted":true,"foreign_parts_only":false,"upload_date":"2013-10-16T00:37:02Z","ai_translated":false,"nb_cd":1,"slug":"5225493-720p-bluray-x264-felony-and-bdrip-xvid-nogrp","machine_translated":false,"release":"720p.BluRay.x264-Felony
+        [and BDRiP.XViD-NoGRP]","comments":"Fix OCR, italics, overlapping, etc...
+        for all 720p/1080p BluRay","legacy_subtitle_id":5225493,"legacy_uploader_id":847082,"uploader":{"uploader_id":48068,"name":"cipry_master","rank":"Trusted
+        member"},"feature_details":{"feature_id":580760,"feature_type":"Movie","year":2013,"title":"Man
+        of Steel","movie_name":"2013 - Man of Steel","imdb_id":770828,"tmdb_id":49521},"url":"https://www.opensubtitles.com/en/subtitles/5225493-720p-bluray-x264-felony-and-bdrip-xvid-nogrp","related_links":[{"label":"All
+        subtitles for man of steel","url":"https://www.opensubtitles.com/en/movies/5225493-720p-bluray-x264-felony-and-bdrip-xvid-nogrp","img_url":"https://s3.opensubtitles.com/features/0/6/7/580760.jpg"}],"files":[{"file_id":957714,"cd_number":1,"file_name":"Man.Of.Steel.2013.720p.BluRay.x264-Felony"}],"moviehash_match":true}},{"id":"874537","type":"subtitle","attributes":{"subtitle_id":"874537","language":"en","download_count":15071,"new_download_count":279,"hearing_impaired":false,"hd":true,"fps":0.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-10-15T23:33:54Z","ai_translated":false,"nb_cd":1,"slug":"man-of-steel-2013-720p-brrip-x264-ac3-undercover","machine_translated":false,"release":"Man.Of.Steel.2013.720p.BRRip.x264.AC3-UNDERCOVER","comments":"","legacy_subtitle_id":5225363,"legacy_uploader_id":1447693,"uploader":{"uploader_id":59646,"name":"Neomale","rank":"Read
+        Only Member"},"feature_details":{"feature_id":580760,"feature_type":"Movie","year":2013,"title":"Man
+        of Steel","movie_name":"2013 - Man of Steel","imdb_id":770828,"tmdb_id":49521},"url":"https://www.opensubtitles.com/en/subtitles/man-of-steel-2013-720p-brrip-x264-ac3-undercover","related_links":[{"label":"All
+        subtitles for man of steel","url":"https://www.opensubtitles.com/en/movies/man-of-steel-2013-720p-brrip-x264-ac3-undercover","img_url":"https://s4.opensubtitles.com/features/0/6/7/580760.jpg"}],"files":[{"file_id":955964,"cd_number":1,"file_name":"Man.Of.Steel.2013.720p.BRRip.x264.AC3-UNDERCOVER_eng"}],"moviehash_match":true}},{"id":"873226","type":"subtitle","attributes":{"subtitle_id":"873226","language":"en","download_count":12930,"new_download_count":145,"hearing_impaired":true,"hd":true,"fps":0.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-10-15T20:22:10Z","ai_translated":false,"nb_cd":1,"slug":"man-of-steel-2013-bdrip-x264-larceny-rarbg","machine_translated":false,"release":"Man.Of.Steel.2013.BDRip.x264-Larceny[rarbg]","comments":"","legacy_subtitle_id":5225027,"legacy_uploader_id":121929,"uploader":{"uploader_id":35815,"name":"untukforum","rank":"Gold
+        member"},"feature_details":{"feature_id":580760,"feature_type":"Movie","year":2013,"title":"Man
+        of Steel","movie_name":"2013 - Man of Steel","imdb_id":770828,"tmdb_id":49521},"url":"https://www.opensubtitles.com/en/subtitles/man-of-steel-2013-bdrip-x264-larceny-rarbg","related_links":[{"label":"All
+        subtitles for man of steel","url":"https://www.opensubtitles.com/en/movies/man-of-steel-2013-bdrip-x264-larceny-rarbg","img_url":"https://s9.opensubtitles.com/features/0/6/7/580760.jpg"}],"files":[{"file_id":954566,"cd_number":1,"file_name":"l-manofsteel"}],"moviehash_match":true}},{"id":"872093","type":"subtitle","attributes":{"subtitle_id":"872093","language":"en","download_count":146892,"new_download_count":2788,"hearing_impaired":false,"hd":true,"fps":23.976,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-10-15T19:02:17Z","ai_translated":false,"nb_cd":1,"slug":"5224905-man-of-steel-2013-bdrip-x264-larceny","machine_translated":false,"release":"Man
+        Of Steel 2013 BDRip.x264-Larceny","comments":"","legacy_subtitle_id":5224905,"legacy_uploader_id":2020399,"uploader":{"uploader_id":67314,"name":"felixmartini","rank":"Bronze
+        Member"},"feature_details":{"feature_id":580760,"feature_type":"Movie","year":2013,"title":"Man
+        of Steel","movie_name":"2013 - Man of Steel","imdb_id":770828,"tmdb_id":49521},"url":"https://www.opensubtitles.com/en/subtitles/5224905-man-of-steel-2013-bdrip-x264-larceny","related_links":[{"label":"All
+        subtitles for man of steel","url":"https://www.opensubtitles.com/en/movies/5224905-man-of-steel-2013-bdrip-x264-larceny","img_url":"https://s4.opensubtitles.com/features/0/6/7/580760.jpg"}],"files":[{"file_id":953341,"cd_number":1,"file_name":"Man
+        Of Steel 2013 BDRip.x264-Larceny"}],"moviehash_match":true}},{"id":"871951","type":"subtitle","attributes":{"subtitle_id":"871951","language":"en","download_count":23523,"new_download_count":788,"hearing_impaired":true,"hd":true,"fps":23.976,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-10-15T19:01:42Z","ai_translated":false,"nb_cd":1,"slug":"5224904-man-of-steel-2013-bdrip-x264-larceny","machine_translated":false,"release":"Man
+        Of Steel 2013 BDRip.x264-Larceny","comments":"","legacy_subtitle_id":5224904,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":580760,"feature_type":"Movie","year":2013,"title":"Man
+        of Steel","movie_name":"2013 - Man of Steel","imdb_id":770828,"tmdb_id":49521},"url":"https://www.opensubtitles.com/en/subtitles/5224904-man-of-steel-2013-bdrip-x264-larceny","related_links":[{"label":"All
+        subtitles for man of steel","url":"https://www.opensubtitles.com/en/movies/5224904-man-of-steel-2013-bdrip-x264-larceny","img_url":"https://s1.opensubtitles.com/features/0/6/7/580760.jpg"}],"files":[{"file_id":953193,"cd_number":1,"file_name":"Man
+        Of Steel 2013 BDRip.x264-Larceny.Hi"}],"moviehash_match":true}},{"id":"869742","type":"subtitle","attributes":{"subtitle_id":"869742","language":"en","download_count":130282,"new_download_count":1059,"hearing_impaired":false,"hd":false,"fps":29.97,"votes":1,"ratings":10.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-07-09T13:03:41Z","ai_translated":false,"nb_cd":1,"slug":"man-of-steel-2013-r6-line-all-version","machine_translated":false,"release":"Man.of.Steel.2013.R6.LiNE.All.Version","comments":"Total
+        98% Improved,Re-Synced,Spell Checked,Few Lines Added. Specially Thanks to
+        \"tinotpoldas\" \u0026 \"tosem\" .","legacy_subtitle_id":5079931,"legacy_uploader_id":1629008,"uploader":{"uploader_id":64860,"name":"igorrml_","rank":"Gold
+        member"},"feature_details":{"feature_id":580760,"feature_type":"Movie","year":2013,"title":"Man
+        of Steel","movie_name":"2013 - Man of Steel","imdb_id":770828,"tmdb_id":49521},"url":"https://www.opensubtitles.com/en/subtitles/man-of-steel-2013-r6-line-all-version","related_links":[{"label":"All
+        subtitles for man of steel","url":"https://www.opensubtitles.com/en/movies/man-of-steel-2013-r6-line-all-version","img_url":"https://s1.opensubtitles.com/features/0/6/7/580760.jpg"}],"files":[{"file_id":950892,"cd_number":1,"file_name":"Man.of.Steel.2013.R6.LiNE.All.Version"}],"moviehash_match":true}}]}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, Authorization, Accept, Api-Key, Content-Type, X-User-Agent
+      Access-Control-Allow-Methods:
+      - GET, HEAD, POST, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Expose-Headers:
+      - X-Auth-Token
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      CF-RAY:
+      - a54f87af3fd7a10f-LIS
+      Cache-Control:
+      - public, max-age=86400
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 04 Nov 2026 00:33:55 GMT
+      Last-Modified:
+      - Wed, 04 Nov 2026 00:33:55 GMT
+      NEL:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      RateLimit-Limit:
+      - '5'
+      RateLimit-Remaining:
+      - '4'
+      RateLimit-Reset:
+      - '1'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=l8EqRivlnKl%2FF38VyaqH6JUCTdYS62%2BkD4d%2Bm2RiNsD7t6YTGS%2F3tF6Pogm7KdHnptbRDQTbL0f2P4HZgp7vl2wGMIJXs7cvtwFZXTY%2FxsR2kJgl7cj0p8nzTebPp88uDAxXXNF7aJY%3D"}]}'
+      Server:
+      - cloudflare
+      Server-Timing:
+      - miss, 0_TR_client_wait;dur=0, _Tw_queues;dur=0, 2_Tc_bak_connect;dur=1, 3_Tr_bak_response;dur=32
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - accept-encoding
+      Via:
+      - 1.1 kong/3.9.1
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Kong-Proxy-Latency:
+      - '3'
+      X-Kong-Request-Id:
+      - d188d961a2e8495c1c6b227141f4a114
+      X-Kong-Upstream-Latency:
+      - '34'
+      X-RateLimit-Limit-Second:
+      - '5'
+      X-RateLimit-Remaining-Second:
+      - '4'
+      X-Request-ID:
+      - 9f08ec2c-946e-4d7e-9440-d0f715138ff2
+      X-XSS-Protection:
+      - 1; mode=block
+      cf-cache-status:
+      - MISS
+      content-length:
+      - '13535'
+      x-backend-server:
+      - rb1
+      x-download-options:
+      - noopen
+      x-runtime:
+      - '0.029575'
+      x-vip:
+      - 'false'
+      x-vip-consumer:
+      - 'false'
+      x-vip-user:
+      - 'false'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, zstd
+      Api-Key:
+      - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
+      Content-Type:
+      - application/json
+      Host:
+      - api.opensubtitles.com
+      User-Agent:
+      - Subliminal v2.8
+    method: GET
+    uri: https://api.opensubtitles.com/api/v1/subtitles?languages=en&moviehash=5b8f8f4e41ccb21e&page=1
+  response:
+    body: {}
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Expose-Headers:
+      - X-Auth-Token
+      Age:
+      - '85690'
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      CF-RAY:
+      - a54f9fbbbcf5df91-LIS
+      Cache-Control:
+      - public, max-age=86400
+      Connection:
+      - keep-alive
+      Content-Type:
+      - text/html
+      Date:
+      - Wed, 04 Nov 2026 00:50:20 GMT
+      Location:
+      - /api/v1/subtitles?languages=en&moviehash=5b8f8f4e41ccb21e
+      NEL:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=HOhYKUgNz4AX6%2Brgezacrt%2FTc5rEH%2BnLqOg6hujwSwj6hzRGP4rGKGwyzWdQRe3dsZNPJym6WFkkMWfAM3OEUBOy8tZRY1YfqGpRiOCJwMEI8LJVdm0kR2TxWbPp5Hhuu%2BdmoaqZbGE%3D"}]}'
+      Server:
+      - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      X-Canonical:
+      - '1'
+      X-Content-Type-Options:
+      - nosniff
+      X-Kong-Request-Id:
+      - eccced19662e7b18cfa5c135a4d0962f
+      X-Kong-Response-Latency:
+      - '1'
+      X-OS-Rule:
+      - canonical
+      cf-cache-status:
+      - HIT
+    status:
+      code: 301
+      message: Moved Permanently
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, zstd
+      Api-Key:
+      - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
+      Content-Type:
+      - application/json
+      Host:
+      - api.opensubtitles.com
+      User-Agent:
+      - Subliminal v2.8
+    method: GET
+    uri: https://api.opensubtitles.com/api/v1/subtitles?languages=en&moviehash=5b8f8f4e41ccb21e
+  response:
+    body:
+      string: '{"total_pages":1,"total_count":12,"per_page":50,"page":1,"data":[{"id":"3178800","type":"subtitle","attributes":{"subtitle_id":"3178800","language":"en","download_count":215527,"new_download_count":3270,"hearing_impaired":false,"hd":true,"fps":23.976,"votes":2,"ratings":10.0,"from_trusted":true,"foreign_parts_only":false,"upload_date":"2013-11-07T04:48:10Z","ai_translated":false,"nb_cd":1,"slug":"5259348-arrow-s02e05-hdtv-x264-lol","machine_translated":false,"release":"Arrow.S02E05.HDTV.x264-LOL","comments":"sync,
+        corrected by elderman","legacy_subtitle_id":5259348,"legacy_uploader_id":1332962,"uploader":{"uploader_id":56900,"name":"elderman","rank":"translator"},"feature_details":{"feature_id":348318,"feature_type":"Episode","year":2013,"title":"League
+        of Assassins","movie_name":"Arrow - S02E05  League of Assassins","imdb_id":3128398,"tmdb_id":64139,"season_number":2,"episode_number":5,"parent_imdb_id":2193021,"parent_title":"Arrow","parent_tmdb_id":1412,"parent_feature_id":12491},"url":"https://www.opensubtitles.com/en/subtitles/5259348-arrow-s02e05-hdtv-x264-lol","related_links":[{"label":"All
+        subtitles for Tv Show Arrow","url":"https://www.opensubtitles.com/en/features/redirect/12491","img_url":"https://s6.opensubtitles.com/features/1/9/4/12491.jpg"},{"label":"All
+        subtitles for Episode league of assassins","url":"https://www.opensubtitles.com/en/features/redirect/348318","img_url":"https://s5.opensubtitles.com/features/8/1/3/348318.jpg"}],"files":[{"file_id":3249003,"cd_number":1,"file_name":"Arrow.S02E05.HDTV.x264-LOL"}],"moviehash_match":true}},{"id":"882182","type":"subtitle","attributes":{"subtitle_id":"882182","language":"en","download_count":10906,"new_download_count":431,"hearing_impaired":false,"hd":true,"fps":23.98,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-10-28T01:20:44Z","ai_translated":false,"nb_cd":1,"slug":"man-of-steel-2013-brrip-xvidhd-720p-npw","machine_translated":false,"release":"Man
+        of Steel 2013 BRRip XvidHD 720p-NPW","comments":"","legacy_subtitle_id":5244413,"legacy_uploader_id":429031,"uploader":{"uploader_id":41158,"name":"willygeerts","rank":"VIP
+        Member"},"feature_details":{"feature_id":580760,"feature_type":"Movie","year":2013,"title":"Man
+        of Steel","movie_name":"2013 - Man of Steel","imdb_id":770828,"tmdb_id":49521},"url":"https://www.opensubtitles.com/en/subtitles/man-of-steel-2013-brrip-xvidhd-720p-npw","related_links":[{"label":"All
+        subtitles for man of steel","url":"https://www.opensubtitles.com/en/movies/man-of-steel-2013-brrip-xvidhd-720p-npw","img_url":"https://s7.opensubtitles.com/features/0/6/7/580760.jpg"}],"files":[{"file_id":963880,"cd_number":1,"file_name":"Man
+        of Steel 2013 BRRip XvidHD 720p-NPW"}],"moviehash_match":true}},{"id":"879204","type":"subtitle","attributes":{"subtitle_id":"879204","language":"en","download_count":57902,"new_download_count":2231,"hearing_impaired":false,"hd":true,"fps":23.976,"votes":1,"ratings":10.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-10-16T17:30:21Z","ai_translated":false,"nb_cd":1,"slug":"5226279-man-of-steel-2013-720p-bluray-x264-felony","machine_translated":false,"release":"Man.Of.Steel.2013.720p.BluRay.x264-Felony","comments":"","legacy_subtitle_id":5226279,"legacy_uploader_id":338814,"uploader":{"uploader_id":39690,"name":"Babylonian","rank":"Silver
+        Member"},"feature_details":{"feature_id":580760,"feature_type":"Movie","year":2013,"title":"Man
+        of Steel","movie_name":"2013 - Man of Steel","imdb_id":770828,"tmdb_id":49521},"url":"https://www.opensubtitles.com/en/subtitles/5226279-man-of-steel-2013-720p-bluray-x264-felony","related_links":[{"label":"All
+        subtitles for man of steel","url":"https://www.opensubtitles.com/en/movies/5226279-man-of-steel-2013-720p-bluray-x264-felony","img_url":"https://s8.opensubtitles.com/features/0/6/7/580760.jpg"}],"files":[{"file_id":960768,"cd_number":1,"file_name":"Man.Of.Steel.2013.720p.BluRay.x264-Felony.English"}],"moviehash_match":true}},{"id":"877471","type":"subtitle","attributes":{"subtitle_id":"877471","language":"en","download_count":43139,"new_download_count":1624,"hearing_impaired":false,"hd":true,"fps":23.976,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-10-16T08:26:55Z","ai_translated":false,"nb_cd":1,"slug":"man-of-steel-2013-bluray","machine_translated":false,"release":"Man
+        Of Steel 2013 - Bluray","comments":"","legacy_subtitle_id":5225826,"legacy_uploader_id":1534270,"uploader":{"uploader_id":62354,"name":"racunz2012","rank":"Gold
+        member"},"feature_details":{"feature_id":580760,"feature_type":"Movie","year":2013,"title":"Man
+        of Steel","movie_name":"2013 - Man of Steel","imdb_id":770828,"tmdb_id":49521},"url":"https://www.opensubtitles.com/en/subtitles/man-of-steel-2013-bluray","related_links":[{"label":"All
+        subtitles for man of steel","url":"https://www.opensubtitles.com/en/movies/man-of-steel-2013-bluray","img_url":"https://s4.opensubtitles.com/features/0/6/7/580760.jpg"}],"files":[{"file_id":959001,"cd_number":1,"file_name":"Man
+        Of Steel 2013 - Bluray.EN"}],"moviehash_match":true}},{"id":"877376","type":"subtitle","attributes":{"subtitle_id":"877376","language":"en","download_count":9786,"new_download_count":103,"hearing_impaired":false,"hd":true,"fps":0.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-10-16T06:52:41Z","ai_translated":false,"nb_cd":1,"slug":"manof-steel-2013-bdrip-600mb-ganool","machine_translated":false,"release":"ManOf.Steel.(2013).BDRip.600MB.Ganool","comments":"","legacy_subtitle_id":5225752,"legacy_uploader_id":1548471,"uploader":{"uploader_id":62760,"name":"Drigerray","rank":"Bronze
+        Member"},"feature_details":{"feature_id":580760,"feature_type":"Movie","year":2013,"title":"Man
+        of Steel","movie_name":"2013 - Man of Steel","imdb_id":770828,"tmdb_id":49521},"url":"https://www.opensubtitles.com/en/subtitles/manof-steel-2013-bdrip-600mb-ganool","related_links":[{"label":"All
+        subtitles for man of steel","url":"https://www.opensubtitles.com/en/movies/manof-steel-2013-bdrip-600mb-ganool","img_url":"https://s7.opensubtitles.com/features/0/6/7/580760.jpg"}],"files":[{"file_id":958900,"cd_number":1,"file_name":"ManOf.Steel.(2013).BDRip.600MB.Ganool"}],"moviehash_match":true}},{"id":"876365","type":"subtitle","attributes":{"subtitle_id":"876365","language":"en","download_count":41447,"new_download_count":545,"hearing_impaired":true,"hd":true,"fps":23.976,"votes":0,"ratings":0.0,"from_trusted":true,"foreign_parts_only":false,"upload_date":"2013-10-16T00:37:20Z","ai_translated":false,"nb_cd":1,"slug":"5225494-720p-bluray-x264-felony-color-hearing-impaired","machine_translated":false,"release":"720p.BluRay.x264-Felony
+        (COLOR Hearing Impaired)","comments":"Fix OCR, italics, overlapping, etc...
+        for all 720p/1080p BluRay","legacy_subtitle_id":5225494,"legacy_uploader_id":847082,"uploader":{"uploader_id":48068,"name":"cipry_master","rank":"Trusted
+        member"},"feature_details":{"feature_id":580760,"feature_type":"Movie","year":2013,"title":"Man
+        of Steel","movie_name":"2013 - Man of Steel","imdb_id":770828,"tmdb_id":49521},"url":"https://www.opensubtitles.com/en/subtitles/5225494-720p-bluray-x264-felony-color-hearing-impaired","related_links":[{"label":"All
+        subtitles for man of steel","url":"https://www.opensubtitles.com/en/movies/5225494-720p-bluray-x264-felony-color-hearing-impaired","img_url":"https://s2.opensubtitles.com/features/0/6/7/580760.jpg"}],"files":[{"file_id":957845,"cd_number":1,"file_name":"Man.Of.Steel.2013.720p.BluRay.x264-Felony"}],"moviehash_match":true}},{"id":"876180","type":"subtitle","attributes":{"subtitle_id":"876180","language":"en","download_count":462512,"new_download_count":17887,"hearing_impaired":false,"hd":true,"fps":23.976,"votes":3,"ratings":10.0,"from_trusted":true,"foreign_parts_only":false,"upload_date":"2013-10-16T00:37:02Z","ai_translated":false,"nb_cd":1,"slug":"5225493-720p-bluray-x264-felony-and-bdrip-xvid-nogrp","machine_translated":false,"release":"720p.BluRay.x264-Felony
+        [and BDRiP.XViD-NoGRP]","comments":"Fix OCR, italics, overlapping, etc...
+        for all 720p/1080p BluRay","legacy_subtitle_id":5225493,"legacy_uploader_id":847082,"uploader":{"uploader_id":48068,"name":"cipry_master","rank":"Trusted
+        member"},"feature_details":{"feature_id":580760,"feature_type":"Movie","year":2013,"title":"Man
+        of Steel","movie_name":"2013 - Man of Steel","imdb_id":770828,"tmdb_id":49521},"url":"https://www.opensubtitles.com/en/subtitles/5225493-720p-bluray-x264-felony-and-bdrip-xvid-nogrp","related_links":[{"label":"All
+        subtitles for man of steel","url":"https://www.opensubtitles.com/en/movies/5225493-720p-bluray-x264-felony-and-bdrip-xvid-nogrp","img_url":"https://s8.opensubtitles.com/features/0/6/7/580760.jpg"}],"files":[{"file_id":957714,"cd_number":1,"file_name":"Man.Of.Steel.2013.720p.BluRay.x264-Felony"}],"moviehash_match":true}},{"id":"874537","type":"subtitle","attributes":{"subtitle_id":"874537","language":"en","download_count":15071,"new_download_count":278,"hearing_impaired":false,"hd":true,"fps":0.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-10-15T23:33:54Z","ai_translated":false,"nb_cd":1,"slug":"man-of-steel-2013-720p-brrip-x264-ac3-undercover","machine_translated":false,"release":"Man.Of.Steel.2013.720p.BRRip.x264.AC3-UNDERCOVER","comments":"","legacy_subtitle_id":5225363,"legacy_uploader_id":1447693,"uploader":{"uploader_id":59646,"name":"Neomale","rank":"Read
+        Only Member"},"feature_details":{"feature_id":580760,"feature_type":"Movie","year":2013,"title":"Man
+        of Steel","movie_name":"2013 - Man of Steel","imdb_id":770828,"tmdb_id":49521},"url":"https://www.opensubtitles.com/en/subtitles/man-of-steel-2013-720p-brrip-x264-ac3-undercover","related_links":[{"label":"All
+        subtitles for man of steel","url":"https://www.opensubtitles.com/en/movies/man-of-steel-2013-720p-brrip-x264-ac3-undercover","img_url":"https://s9.opensubtitles.com/features/0/6/7/580760.jpg"}],"files":[{"file_id":955964,"cd_number":1,"file_name":"Man.Of.Steel.2013.720p.BRRip.x264.AC3-UNDERCOVER_eng"}],"moviehash_match":true}},{"id":"873226","type":"subtitle","attributes":{"subtitle_id":"873226","language":"en","download_count":12930,"new_download_count":145,"hearing_impaired":true,"hd":true,"fps":0.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-10-15T20:22:10Z","ai_translated":false,"nb_cd":1,"slug":"man-of-steel-2013-bdrip-x264-larceny-rarbg","machine_translated":false,"release":"Man.Of.Steel.2013.BDRip.x264-Larceny[rarbg]","comments":"","legacy_subtitle_id":5225027,"legacy_uploader_id":121929,"uploader":{"uploader_id":35815,"name":"untukforum","rank":"Gold
+        member"},"feature_details":{"feature_id":580760,"feature_type":"Movie","year":2013,"title":"Man
+        of Steel","movie_name":"2013 - Man of Steel","imdb_id":770828,"tmdb_id":49521},"url":"https://www.opensubtitles.com/en/subtitles/man-of-steel-2013-bdrip-x264-larceny-rarbg","related_links":[{"label":"All
+        subtitles for man of steel","url":"https://www.opensubtitles.com/en/movies/man-of-steel-2013-bdrip-x264-larceny-rarbg","img_url":"https://s7.opensubtitles.com/features/0/6/7/580760.jpg"}],"files":[{"file_id":954566,"cd_number":1,"file_name":"l-manofsteel"}],"moviehash_match":true}},{"id":"872093","type":"subtitle","attributes":{"subtitle_id":"872093","language":"en","download_count":146892,"new_download_count":2787,"hearing_impaired":false,"hd":true,"fps":23.976,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-10-15T19:02:17Z","ai_translated":false,"nb_cd":1,"slug":"5224905-man-of-steel-2013-bdrip-x264-larceny","machine_translated":false,"release":"Man
+        Of Steel 2013 BDRip.x264-Larceny","comments":"","legacy_subtitle_id":5224905,"legacy_uploader_id":2020399,"uploader":{"uploader_id":67314,"name":"felixmartini","rank":"Bronze
+        Member"},"feature_details":{"feature_id":580760,"feature_type":"Movie","year":2013,"title":"Man
+        of Steel","movie_name":"2013 - Man of Steel","imdb_id":770828,"tmdb_id":49521},"url":"https://www.opensubtitles.com/en/subtitles/5224905-man-of-steel-2013-bdrip-x264-larceny","related_links":[{"label":"All
+        subtitles for man of steel","url":"https://www.opensubtitles.com/en/movies/5224905-man-of-steel-2013-bdrip-x264-larceny","img_url":"https://s7.opensubtitles.com/features/0/6/7/580760.jpg"}],"files":[{"file_id":953341,"cd_number":1,"file_name":"Man
+        Of Steel 2013 BDRip.x264-Larceny"}],"moviehash_match":true}},{"id":"871951","type":"subtitle","attributes":{"subtitle_id":"871951","language":"en","download_count":23523,"new_download_count":788,"hearing_impaired":true,"hd":true,"fps":23.976,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-10-15T19:01:42Z","ai_translated":false,"nb_cd":1,"slug":"5224904-man-of-steel-2013-bdrip-x264-larceny","machine_translated":false,"release":"Man
+        Of Steel 2013 BDRip.x264-Larceny","comments":"","legacy_subtitle_id":5224904,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":580760,"feature_type":"Movie","year":2013,"title":"Man
+        of Steel","movie_name":"2013 - Man of Steel","imdb_id":770828,"tmdb_id":49521},"url":"https://www.opensubtitles.com/en/subtitles/5224904-man-of-steel-2013-bdrip-x264-larceny","related_links":[{"label":"All
+        subtitles for man of steel","url":"https://www.opensubtitles.com/en/movies/5224904-man-of-steel-2013-bdrip-x264-larceny","img_url":"https://s4.opensubtitles.com/features/0/6/7/580760.jpg"}],"files":[{"file_id":953193,"cd_number":1,"file_name":"Man
+        Of Steel 2013 BDRip.x264-Larceny.Hi"}],"moviehash_match":true}},{"id":"869742","type":"subtitle","attributes":{"subtitle_id":"869742","language":"en","download_count":130282,"new_download_count":1058,"hearing_impaired":false,"hd":false,"fps":29.97,"votes":1,"ratings":10.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-07-09T13:03:41Z","ai_translated":false,"nb_cd":1,"slug":"man-of-steel-2013-r6-line-all-version","machine_translated":false,"release":"Man.of.Steel.2013.R6.LiNE.All.Version","comments":"Total
+        98% Improved,Re-Synced,Spell Checked,Few Lines Added. Specially Thanks to
+        \"tinotpoldas\" \u0026 \"tosem\" .","legacy_subtitle_id":5079931,"legacy_uploader_id":1629008,"uploader":{"uploader_id":64860,"name":"igorrml_","rank":"Gold
+        member"},"feature_details":{"feature_id":580760,"feature_type":"Movie","year":2013,"title":"Man
+        of Steel","movie_name":"2013 - Man of Steel","imdb_id":770828,"tmdb_id":49521},"url":"https://www.opensubtitles.com/en/subtitles/man-of-steel-2013-r6-line-all-version","related_links":[{"label":"All
+        subtitles for man of steel","url":"https://www.opensubtitles.com/en/movies/man-of-steel-2013-r6-line-all-version","img_url":"https://s2.opensubtitles.com/features/0/6/7/580760.jpg"}],"files":[{"file_id":950892,"cd_number":1,"file_name":"Man.of.Steel.2013.R6.LiNE.All.Version"}],"moviehash_match":true}}]}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, Authorization, Accept, Api-Key, Content-Type, X-User-Agent
+      Access-Control-Allow-Methods:
+      - GET, HEAD, POST, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Expose-Headers:
+      - X-Auth-Token
+      Age:
+      - '85690'
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      CF-RAY:
+      - a54f9fbbdd3fdf91-LIS
+      Cache-Control:
+      - public, max-age=86400
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 04 Nov 2026 00:50:20 GMT
+      Last-Modified:
+      - Tue, 03 Nov 2026 01:02:09 GMT
+      NEL:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      RateLimit-Limit:
+      - '5'
+      RateLimit-Remaining:
+      - '2'
+      RateLimit-Reset:
+      - '1'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=XpZeMMyWC8LSWtpNfdjozjomqfvGw7MdLQCN825Xc4zRPQR7ukmDNADB%2BYY2K4E8fFg%2FUJ3kYs1wnsEolzPMmWGXr9Wnv%2BGwg%2FtVreBq26JsdvHZfMXwKLT0WN2VJqq947NUxTL2lfQ%3D"}]}'
+      Server:
+      - cloudflare
+      Server-Timing:
+      - miss, 0_TR_client_wait;dur=0, _Tw_queues;dur=0, 2_Tc_bak_connect;dur=1, 3_Tr_bak_response;dur=41
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - accept-encoding
+      Via:
+      - 1.1 kong/3.9.1
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Kong-Proxy-Latency:
+      - '2'
+      X-Kong-Request-Id:
+      - aa814f6e3f85e20538435122dd150825
+      X-Kong-Upstream-Latency:
+      - '43'
+      X-RateLimit-Limit-Second:
+      - '5'
+      X-RateLimit-Remaining-Second:
+      - '2'
+      X-Request-ID:
+      - f517ed6d-d162-4906-94ce-5d9d8899bf2b
+      X-XSS-Protection:
+      - 1; mode=block
+      cf-cache-status:
+      - HIT
+      content-length:
+      - '15047'
+      x-backend-server:
+      - rb1
+      x-download-options:
+      - noopen
+      x-runtime:
+      - '0.038518'
+      x-vip:
+      - 'false'
+      x-vip-consumer:
+      - 'false'
+      x-vip-user:
+      - 'false'
+    status:
+      code: 200
+      message: OK
 version: 1

@@ -334,7 +334,8 @@ def options_from_managers(
 
 # Options from providers
 provider_options = {
-    name: get_parameters_from_signature(provider_manager[name].plugin) for name in provider_manager.names()
+    name: get_parameters_from_signature(provider_manager[name].plugin, exclude=('session',))
+    for name in provider_manager.names()
 }
 
 refiner_options = {

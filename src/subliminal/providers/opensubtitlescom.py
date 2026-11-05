@@ -696,13 +696,13 @@ class OpenSubtitlesComProvider(AsyncProvider):
         # Collect results
         for i, task in enumerate(tasks, start=2):
             try:
-                page = task.result()
+                page_result = task.result()
             except ProviderError:
                 # ProviderError were not raised when running the task, they can pop up here again
                 logger.warning('Error getting page %i', i)
                 continue
 
-            data.extend(page.get('data') or [])
+            data.extend(page_result.get('data') or [])
 
         return data
 

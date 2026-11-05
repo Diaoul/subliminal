@@ -806,11 +806,11 @@ def provider_manager(monkeypatch: pytest.MonkeyPatch) -> Generator[RegistrableEx
         },
     ]
 
-    ep_opensubtitlescom = mock_subtitle_provider('OpenSubtitlesCom', subtitle_pool_opensubtitlescom)
+    ep_opensubtitlescom = mock_subtitle_provider('OpenSubtitlesCom', subtitle_pool_opensubtitlescom, make_async=True)
     patched_provider_manager.register(ep_opensubtitlescom)
 
     # OpenSubtitlesComVIP, no subtitles
-    ep_opensubtitlescomvip = mock_subtitle_provider('OpenSubtitlesComVip', [])
+    ep_opensubtitlescomvip = mock_subtitle_provider('OpenSubtitlesComVip', [], make_async=True)
     patched_provider_manager.register(ep_opensubtitlescomvip)
 
     # Gestdown, subtitle pool
@@ -892,6 +892,7 @@ def provider_manager(monkeypatch: pytest.MonkeyPatch) -> Generator[RegistrableEx
         video_types=(Episode,),
         # Mock a provider with limited language support
         languages={Language('eng'), Language('fra'), Language('hun')},
+        make_async=True,
     )
     patched_provider_manager.register(ep_gestdown)
 

@@ -558,6 +558,11 @@ class AsyncProviderPool(AsyncPool[Provider | AsyncProvider]):
             logger.info('Skipping provider %r: not a valid provider for the query languages', provider)
             return ProviderResult(provider, status=ResultStatus.UNSUPPORTED_LANGUAGES, video=video, languages=languages)
 
+        # unsupported languages
+        skipped_languages = languages - provider_languages
+        if len(skipped_languages) > 0:
+            logger.warning('Provider %r has unsupported languages %r', provider, skipped_languages)
+
         logger.info('Listing subtitles with provider %r and languages %r', provider, provider_languages)
 
         async with self.semaphore:

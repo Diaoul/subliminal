@@ -568,7 +568,7 @@ class AsyncProviderPool(AsyncPool[Provider | AsyncProvider]):
             except asyncio.CancelledError:
                 # the caller is shutting down, never swallow this
                 raise
-            except (DiscardingError, asyncio.TimeoutError) as e:
+            except (TimeoutError, DiscardingError) as e:
                 handle_async_exception(e, f'Provider {provider}')
                 # discard this provider: it is misconfigured, rate limited or too slow
                 return ProviderResult(provider, status=ResultStatus.OUTAGE, video=video, languages=languages)
@@ -865,7 +865,7 @@ class AsyncRefinerPool(AsyncPool[Refiner | AsyncRefiner]):
             except asyncio.CancelledError:
                 # the caller is shutting down, never swallow this
                 raise
-            except (DiscardingError, asyncio.TimeoutError) as e:
+            except (TimeoutError, DiscardingError) as e:
                 handle_async_exception(e, f'Refiner {refiner}')
                 # discard this refiner: it is misconfigured, rate limited or too slow
                 return RefinerResult(refiner, status=ResultStatus.OUTAGE, video=video, priority=priority)

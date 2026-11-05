@@ -6,7 +6,7 @@ import contextlib
 import logging
 import time
 from collections.abc import Callable
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from functools import wraps
 from typing import TYPE_CHECKING, Any, ClassVar, cast
 
@@ -381,7 +381,7 @@ class OpenSubtitlesComProvider(Provider):
 
         # Check token is present
         if self.token_expires_at is not None and self.token is not None:
-            if datetime.now(timezone.utc) < self.token_expires_at:
+            if datetime.now(UTC) < self.token_expires_at:
                 return True
             del self.token
             self.token_expires_at = None
@@ -428,7 +428,7 @@ class OpenSubtitlesComProvider(Provider):
         region.set('oscom_token', token)
         # Set token in header
         self.token = token
-        self.token_expires_at = datetime.now(timezone.utc) + timedelta(seconds=TOKEN_EXPIRATION_TIME)
+        self.token_expires_at = datetime.now(UTC) + timedelta(seconds=TOKEN_EXPIRATION_TIME)
 
         logger.debug('Logged in')
 

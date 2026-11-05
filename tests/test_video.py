@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 import os
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from importlib.metadata import version as get_version
 from typing import TYPE_CHECKING, Any
 from unittest.mock import Mock
@@ -34,7 +34,7 @@ def test_video_exists_age_no_use_ctime(
     video_path = tmp_path / video.name
     video_path.parent.mkdir(parents=True)
     video_path.touch()
-    ts = timestamp(datetime.now(timezone.utc) - timedelta(days=3))
+    ts = timestamp(datetime.now(UTC) - timedelta(days=3))
     os.utime(video_path, (ts, ts))
     assert video.exists
     assert timedelta(days=3) <= video.age < timedelta(days=3, seconds=1)
@@ -54,7 +54,7 @@ def test_video_exists_age(movies: dict[str, Movie], tmp_path: Path, monkeypatch:
     video_path = tmp_path / video.name
     video_path.parent.mkdir(parents=True)
     video_path.touch()
-    ts = timestamp(datetime.now(timezone.utc) - timedelta(days=3))
+    ts = timestamp(datetime.now(UTC) - timedelta(days=3))
     if SUPPORTED:
         # Modify ctime on Windows
         setctime(video_path, ts)  # ty: ignore[call-non-callable]

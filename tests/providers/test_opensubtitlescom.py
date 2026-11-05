@@ -513,7 +513,7 @@ async def test_list_subtitles_episode_series_imdb_id(episodes: dict[str, Episode
     assert {subtitle.language for subtitle in subtitles} == languages
 
     # Clear external ids and find no results
-    video.external_ids.clear()  # ty: ignore[unresolved-attribute]
+    video.external_ids.clear()  # type: ignore[attr-defined]  # ty: ignore[unresolved-attribute]
     async with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
         subtitles = await provider.list_subtitles(video, languages)
     assert len({subtitle.series_title for subtitle in subtitles if subtitle.movie_kind == 'episode'}) == 0

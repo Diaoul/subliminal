@@ -2,18 +2,22 @@
 
 from __future__ import annotations
 
+import asyncio
 import contextlib
 import logging
-import time
+import sys
 from collections.abc import Callable
 from datetime import UTC, datetime, timedelta
-from functools import wraps
-from typing import TYPE_CHECKING, Any, ClassVar, cast
+from typing import TYPE_CHECKING, Any, ClassVar
 
+if sys.version_info >= (3, 12):
+    from typing import override
+else:  # pragma: no cover
+    from typing_extensions import override
+
+import aiohttp
 from babelfish import Language, language_converters  # type: ignore[import-untyped]
 from dogpile.cache.api import NO_VALUE
-from requests import Response, Session
-from requests.exceptions import RequestException
 
 from subliminal import __short_version__
 from subliminal.cache import region
@@ -31,10 +35,10 @@ from subliminal.subtitle import Subtitle
 from subliminal.utils import safely_guessit
 from subliminal.video import Episode, Movie, Video
 
-from . import Provider
+from . import AsyncProvider
 
 if TYPE_CHECKING:
-    from collections.abc import Callable, Generator, Mapping, Set
+    from collections.abc import Callable, Mapping, Set
     from typing import TypeVar
 
     C = TypeVar('C', bound=Callable)
@@ -57,6 +61,10 @@ TOKEN_EXPIRATION_TIME = timedelta(hours=24).total_seconds()
 #: Expiration time for download link
 DOWNLOAD_EXPIRATION_TIME = timedelta(hours=3).total_seconds()
 
+#: Cache key for the authentication token
+TOKEN_CACHE_KEY = 'oscom_token'  # noqa: S105
+
+
 # fmt: off
 opensubtitlescom_languages = {
     Language('por', 'BR'),
@@ -77,7 +85,7 @@ opensubtitlescom_languages = {
 
 def sanitize_id(id_: int | str | None) -> int | None:
     """Sanitize the IMDB (or other) id and transform it to a string (without leading 'tt' or zeroes)."""
-    if id_ is None:
+    if id_ is None:  # pragma: no cover
         return None
     id_ = str(id_).lower().lstrip('t')
     return int(id_)
@@ -244,7 +252,7 @@ class OpenSubtitlesComSubtitle(Subtitle):
         )
 
     @property
-    def info(self) -> str:
+    def info(self) -> str:  # pragma: no cover
         """Information about the subtitle."""
         if not self.file_name and not self.release:
             return self.id
@@ -281,7 +289,7 @@ class OpenSubtitlesComSubtitle(Subtitle):
             matches.add('imdb_id')
 
         # tmdb_id
-        if self.tmdb_match:
+        if self.tmdb_match:  # pragma: no cover
             matches.add('tmdb_id')
 
         # hash match
@@ -291,25 +299,7 @@ class OpenSubtitlesComSubtitle(Subtitle):
         return matches
 
 
-def requires_auth(func: C) -> C:
-    """Decorator for :class:`OpenSubtitlesComProvider` methods that require authentication."""
-
-    @wraps(func)
-    def wrapper(self: OpenSubtitlesComProvider, *args: Any, **kwargs: Any) -> Any:
-        if not self.check_token():
-            # token expired
-            self.login()
-
-            if not self.check_token():
-                msg = 'Cannot authenticate with username and password'
-                raise AuthenticationError(msg)
-
-        return func(self, *args, **kwargs)
-
-    return cast('C', wrapper)
-
-
-class OpenSubtitlesComProvider(Provider):
+class OpenSubtitlesComProvider(AsyncProvider):
     """OpenSubtitles.com Provider.
 
     :param str username: username
@@ -317,8 +307,15 @@ class OpenSubtitlesComProvider(Provider):
     :param str apikey: private API key
     :param int max_result_pages: maximum number of result pages to process,
         set to non-zero to search faster, although the correct match can be
-        missing. Default to 0 (unlimited).
+        missing. Set to 0 for unlimited result pages. Default to 10.
     :param int timeout: timeout in seconds. Default to 20.
+    :param bool allow_machine_translated: if False, skip machine translated subtitles. Default to False.
+    :param int max_concurrent_requests: maximum number of requests in flight for this provider.
+        Default to 5
+    :param int max_retries: maximum number of retries when hitting a 'Too Many Requests' error.
+        Default to 3
+    :param session: the :class:`aiohttp.ClientSession` to use. The pool injects its own; when
+        `None`, the provider creates and closes its own session.
 
     """
 
@@ -334,8 +331,9 @@ class OpenSubtitlesComProvider(Provider):
     apikey: str
     max_result_pages: int
     timeout: int
+    allow_machine_translated: bool
+    token: str | None
     token_expires_at: datetime | None
-    session: Session | None
 
     def __init__(
         self,
@@ -343,8 +341,12 @@ class OpenSubtitlesComProvider(Provider):
         password: str | None = None,
         *,
         apikey: str | None = None,
-        max_result_pages: int = 0,
+        max_result_pages: int = 10,
         timeout: int = 20,
+        allow_machine_translated: bool = False,
+        max_concurrent_requests: int = 5,
+        max_retries: int = 3,
+        session: aiohttp.ClientSession | None = None,
     ) -> None:
         if any((username, password)) and not all((username, password)):
             msg = 'Username and password must be specified'
@@ -355,227 +357,229 @@ class OpenSubtitlesComProvider(Provider):
         self.apikey = apikey or OPENSUBTITLESCOM_API_KEY
         self.max_result_pages = max_result_pages
         self.timeout = timeout
+        self.allow_machine_translated = allow_machine_translated
+        self.max_retries = max_retries
+        self.token = None
         self.token_expires_at = None
-        self.session = None
 
-    def initialize(self) -> None:
-        """Initialize the provider."""
-        self.session = Session()
-        self.session.headers['User-Agent'] = self.user_agent
-        self.session.headers['Api-Key'] = self.apikey
-        self.session.headers['Accept'] = '*/*'
-        self.session.headers['Content-Type'] = 'application/json'
+        self._session = session
+        self._owns_session = session is None
+        self._max_concurrent_requests = max(1, max_concurrent_requests)
+        self._semaphore: asyncio.Semaphore | None = None
+        self._login_lock: asyncio.Lock | None = None
 
-    def terminate(self) -> None:
+    @property
+    def session(self) -> aiohttp.ClientSession:
+        """The :class:`aiohttp.ClientSession` in use."""
+        if self._session is None:
+            raise NotInitializedProviderError
+        return self._session
+
+    @override
+    async def initialize(self) -> None:
+        """Initialize the provider.
+
+        No network call is made here: authentication is lazy, so a provider that ends up
+        being skipped for a given video never pays for a login.
+        """
+        self._semaphore = asyncio.Semaphore(self._max_concurrent_requests)
+        self._login_lock = asyncio.Lock()
+
+        if self._session is None:
+            self._session = aiohttp.ClientSession()
+            self._owns_session = True
+
+    @override
+    async def terminate(self) -> None:
         """Terminate the provider."""
-        if not self.session:
-            raise NotInitializedProviderError
+        # Clear token
+        self.token = None
+        self.token_expires_at = None
 
-        # logout
-        self.logout()
+        if self._owns_session and self._session is not None:
+            await self._session.close()
+            self._session = None
 
-    def check_token(self) -> bool:
-        """Check if the token is valid."""
-        if not self.session:
-            raise NotInitializedProviderError
+    # ------------------------------------------------------------------
+    # authentication
+    # ------------------------------------------------------------------
 
-        # Check token is present
-        if self.token_expires_at is not None and self.token is not None:
+    def _headers(self, *, authenticated: bool = False) -> dict[str, str]:
+        """Build the headers of a request.
+
+        The session is shared with other async providers, so headers are never stored on it.
+        """
+        headers = {
+            'User-Agent': self.user_agent,
+            'Api-Key': self.apikey,
+            'Accept': '*/*',
+            'Content-Type': 'application/json',
+        }
+        if authenticated and self.token:
+            headers['Authorization'] = f'Bearer {self.token}'
+        return headers
+
+    async def check_token(self) -> bool:
+        """Return `True` if a valid token is available, loading it from the cache if needed."""
+        if self.token is not None and self.token_expires_at is not None:
             if datetime.now(UTC) < self.token_expires_at:
                 return True
-            del self.token
+            # expired
+            self.token = None
             self.token_expires_at = None
 
-        # Check cached token
-        token = region.get('oscom_token', expiration_time=TOKEN_EXPIRATION_TIME)
+        # the dogpile region is backed by a file, do not block the event loop
+        token = await asyncio.to_thread(region.get, TOKEN_CACHE_KEY, expiration_time=TOKEN_EXPIRATION_TIME)
         if token is NO_VALUE:
             return False
 
-        # Login was already done, add token to Bearer
-        self.session.headers['Authorization'] = 'Bearer ' + str(token)
+        self.token = str(token)
+        self.token_expires_at = datetime.now(UTC) + timedelta(seconds=TOKEN_EXPIRATION_TIME)
         return True
 
-    def login(self, *, wait: bool = False) -> None:
-        """Login with the POST REST API."""
-        if not self.session:
-            raise NotInitializedProviderError
-        if not self.username or not self.password:
+    async def login(self) -> None:
+        """Log in and store the token, in the instance and in the cache."""
+        if not self.username or not self.password:  # pragma: no cover
             logger.info('Cannot log in, a username and password must be provided')
             return
 
-        if wait:
-            # Wait 1s between calls
-            time.sleep(1)
-
         logger.info('Logging in')
         data = {'username': self.username, 'password': self.password}
+        response = await self._request('POST', 'login', json=data)
 
-        try:
-            r = self.session.post(self.server_url + 'login', json=data, timeout=self.timeout)
-            r = checked(r)
-        except ProviderError:
-            # raise error
-            logger.exception('An error occurred')
-            raise
-
-        ret = r.json()
-        token = ret['token']
-        if not token:
+        token = response.get('token')
+        if not token:  # pragma: no cover
             logger.debug('Error, the authentication token is empty.')
             return
 
-        # Set cache
-        region.set('oscom_token', token)
-        # Set token in header
-        self.token = token
+        self.token = str(token)
         self.token_expires_at = datetime.now(UTC) + timedelta(seconds=TOKEN_EXPIRATION_TIME)
+        await asyncio.to_thread(region.set, TOKEN_CACHE_KEY, self.token)
 
         logger.debug('Logged in')
 
-    def logout(self) -> None:
-        """Logout by closing the Session."""
-        if not self.session:
-            raise NotInitializedProviderError
-        del self.token
-        self.session.close()
-
-    @staticmethod
-    def reset_token() -> None:
-        """Reset the authentication token from the cache."""
+    async def reset_token(self) -> None:
+        """Drop the authentication token, from the instance and from the cache."""
         logger.debug('Authentication failed: clearing cache and attempting to login.')
-        region.delete('oscom_token')
+        self.token = None
+        self.token_expires_at = None
+        await asyncio.to_thread(region.delete, TOKEN_CACHE_KEY)
 
-    @property
-    def token(self) -> str | None:
-        """Authentication token."""
-        if not self.session:
-            return None
-        if 'Authorization' not in self.session.headers:
-            return None
-        auth = str(self.session.headers['Authorization'])
-        prefix = 'Bearer '
-        if auth is None or not auth.startswith(prefix):
-            return None
-        return auth[len(prefix) :]
+    async def ensure_authenticated(self) -> None:
+        """Make sure a valid token is available, logging in if needed.
 
-    @token.setter
-    def token(self, value: str) -> None:
-        """Authentication token."""
-        if not self.session:
+        The lock makes concurrent callers wait for a single login instead of racing.
+        """
+        if await self.check_token():
             return
-        self.session.headers['Authorization'] = 'Bearer ' + str(value)
 
-    @token.deleter
-    def token(self) -> None:
-        """Authentication token."""
-        if not self.session:
-            return
-        if 'Authorization' in self.session.headers:
-            del self.session.headers['Authorization']
-
-    @requires_auth
-    def user_infos(self) -> dict[str, Any]:
-        """Return information about the user."""
-        if not self.session:
+        if self._login_lock is None:  # pragma: no cover
             raise NotInitializedProviderError
 
-        logger.debug('User infos')
+        async with self._login_lock:
+            # another coroutine may have logged in while waiting for the lock
+            if await self.check_token():  # pragma: no cover
+                return
 
-        response = self.api_get('infos/user')
-        logger.debug(response)
-        return response
+            await self.login()
 
-    def api_post(
+            if not await self.check_token():
+                msg = 'Cannot authenticate with username and password'
+                raise AuthenticationError(msg)
+
+    # ------------------------------------------------------------------
+    # HTTP
+    # ------------------------------------------------------------------
+
+    async def _request(
         self,
+        method: str,
         path: str,
-        body: Mapping[str, Any] | None = None,
         *,
-        raises: bool = True,
-    ) -> dict[str, Any]:
-        """Make a POST request to the path, with body."""
-        if not self.session:
-            raise NotInitializedProviderError
-
-        body = dict(body) if body else {}
-
-        # no need to set the headers, there are set for `self.session`
-        try:
-            r = self.session.post(self.server_url + path, json=body, timeout=self.timeout)
-            r = checked(r)
-        except ProviderError:
-            logger.exception('An error occurred')
-            if raises:
-                raise
-            return {}
-
-        return r.json()  # type: ignore[no-any-return]
-
-    def api_get(
-        self,
-        path: str,
         params: Mapping[str, Any] | None = None,
-        *,
+        json: Mapping[str, Any] | None = None,
+        authenticated: bool = False,
         raises: bool = True,
     ) -> dict[str, Any]:
-        """Make a GET request to the path, with parameters."""
-        if not self.session:
+        """Make a request to the API and return the decoded JSON body.
+
+        Retries on '429 Too Many Requests', honoring the ``Retry-After`` header, and retries
+        once on '401 Unauthorized' after a fresh login, as the cached token may be stale.
+        """
+        if self._semaphore is None:  # pragma: no cover
             raise NotInitializedProviderError
-        # sort dict
-        params = dict(sorted(params.items())) if params else {}
-        # lowercase, do not transform spaces to "+", because then they become html-encoded
-        params = {k.lower(): (v.lower() if isinstance(v, str) else v) for k, v in params.items()}
 
-        # no need to set the headers, there are set for `self.session`
-        try:
-            r = self.session.get(self.server_url + path, params=params, timeout=self.timeout)
-            r = checked(r)
-        except RequestException as error:
-            logger.debug('Request to %r failed: %s', path, error)
-            raise OpenSubtitlesComError(str(error)) from error
-        except ProviderError as error:
-            logger.debug('Request to %r failed: %s', path, error)
-            if raises:
-                raise
-            return {}
+        url = path if path.startswith('http') else self.server_url + path
 
-        return r.json()  # type: ignore[no-any-return]
+        if params:
+            # sort and lowercase, the API is picky and it keeps the cache keys stable
+            params = dict(sorted(params.items()))
+            # aiohttp does not accept None or non-string scalars in params
+            params = {
+                k.lower(): (v.lower() if isinstance(v, str) else str(v)) for k, v in params.items() if v is not None
+            }
 
-    def _search(self, **params: Any) -> Generator[dict[str, Any], None, None]:
-        page = 1
+        retried_auth = False
+        for attempt in range(self.max_retries):
+            if authenticated:
+                await self.ensure_authenticated()
 
-        while True:
-            # Extended params with page
-            ext_params = {'page': page, **params}
-            logger.info('Searching subtitles %r', ext_params)
-            # GET request and add page information
+            if attempt > 0:  # pragma: no cover
+                msg = f'Attempt #{attempt} to request url: {url}'
+                logger.debug(msg)
+
             try:
-                response = self.api_get('subtitles', ext_params)
-            # If an iteration fails after results were collected, the generator fails and the caller gets no results.
-            # To prevent that from happening, we don't treat errors as failures if some results are already collected.
-            # An error is raised only if the first page failed, or if it is a `DiscardingError`.
-            # A `DiscardingError` means the provider is unusable.
-            except DiscardingError:
-                raise
+                async with (
+                    self._semaphore,
+                    self.session.request(
+                        method,
+                        url,
+                        params=params,
+                        json=dict(json) if json is not None else None,
+                        headers=self._headers(authenticated=authenticated),
+                        timeout=aiohttp.ClientTimeout(total=self.timeout),
+                    ) as response,
+                ):
+                    if response.status == 429:
+                        delay = float(response.headers.get('Retry-After', 1))
+                        logger.info('Rate limited, waiting %.1fs before retrying', delay)
+                        await asyncio.sleep(delay)
+                        continue
+
+                    check_status(response.status, response.reason)
+                    # the API is not always honest about its content type
+                    return await response.json(content_type=None)  # type: ignore[no-any-return]
+
+            except Unauthorized:
+                if retried_auth or not authenticated:
+                    if raises:
+                        raise
+                    # pragma: no cover
+                    logger.exception('An error occurred')
+                    return {}
+                # the cached token is stale, drop it and log in again
+                retried_auth = True
+                await self.reset_token()
+                continue
+
             except ProviderError:
-                if page == 1:
+                if raises:
                     raise
-                logger.warning('Pagination stopped at page %d', page)
-                break
-            if not response or not response['data']:
-                break
-            yield from response['data']
+                # pragma: no cover
+                logger.exception('An error occurred')
+                return {}
 
-            page += 1
+        # pragma: no cover
+        msg = f'Too many retries for {method} {path}'
+        if raises:
+            raise ServiceUnavailable(msg)
+        return {}
 
-            # check that the maximum number of pages has not been exceeded
-            if self.max_result_pages > 0 and page > self.max_result_pages:
-                break
+    # ------------------------------------------------------------------
+    # search
+    # ------------------------------------------------------------------
 
-            # check if we fetched all pages already
-            if 'total_pages' not in response or page > response['total_pages']:
-                break
-
-    def _make_query(
+    def _make_criteria(
         self,
         *,
         moviehash: str | None = None,
@@ -589,189 +593,251 @@ class OpenSubtitlesComProvider(Provider):
         show_tmdb_id: str | None = None,
         year: int | None = None,
     ) -> list[dict[str, Any]]:
-        """Make a list of query parameters."""
-        # fill the search criterion
+        """Build the list of search criteria, from the most specific to the broadest."""
         criterion: dict[str, Any] = {}
+
         if moviehash:
-            criterion.update({'moviehash': moviehash})
+            criterion['moviehash'] = moviehash
 
         if imdb_id:
-            criterion.update({'imdb_id': sanitize_id(imdb_id)})
+            criterion['imdb_id'] = sanitize_id(imdb_id)
         if show_imdb_id:
-            criterion.update({'parent_imdb_id': sanitize_id(show_imdb_id)})
+            criterion['parent_imdb_id'] = sanitize_id(show_imdb_id)
 
-        if tmdb_id:
-            criterion.update({'tmdb_id': sanitize_id(tmdb_id)})
-        if show_tmdb_id:
-            criterion.update({'parent_tmdb_id': sanitize_id(show_tmdb_id)})
+        if tmdb_id:  # pragma: no cover
+            criterion['tmdb_id'] = sanitize_id(tmdb_id)
+        if show_tmdb_id:  # pragma: no cover
+            criterion['parent_tmdb_id'] = sanitize_id(show_tmdb_id)
 
-        if opensubtitles_id:
-            criterion.update({'id': opensubtitles_id})
+        if opensubtitles_id:  # pragma: no cover
+            criterion['id'] = opensubtitles_id
 
         if query:
-            criterion.update({'query': query.replace("'", '')})
+            criterion['query'] = query.replace("'", '')
 
-        # Check for None to allow season=0 and episode=0
+        # check for None to allow season=0 and episode=0
         if season is not None and episode is not None:
-            criterion.update({'season_number': season, 'episode_number': episode})
+            criterion['season_number'] = season
+            criterion['episode_number'] = episode
         if year:
-            criterion.update({'year': year})
+            criterion['year'] = year
 
-        # return a list of criteria
         if not criterion:
             msg = 'Not enough information'
             raise ValueError(msg)
 
         criteria = [criterion]
-        # Add single-term searches to the list of searches.
-        # Only if the criterion is a multi-term search.
+
+        # sometimes, multi-term searches return no result; try minimal searches also
         if len(criterion) > 1:
-            if 'id' in criterion:
-                criteria.append({'id': criterion['id']})
-            if 'imdb_id' in criterion:
-                criteria.append({'imdb_id': criterion['imdb_id']})
-            if 'parent_imdb_id' in criterion and 'season_number' in criterion and 'episode_number' in criterion:
-                criteria.append(
-                    {
-                        'parent_imdb_id': criterion['parent_imdb_id'],
-                        'season_number': criterion['season_number'],
-                        'episode_number': criterion['episode_number'],
-                    }
-                )
-            if 'tmdb_id' in criterion:
-                criteria.append({'tmdb_id': criterion['tmdb_id']})
-            if 'parent_tmdb_id' in criterion and 'season_number' in criterion and 'episode_number' in criterion:
-                criteria.append(
-                    {
-                        'parent_tmdb_id': criterion['parent_tmdb_id'],
-                        'season_number': criterion['season_number'],
-                        'episode_number': criterion['episode_number'],
-                    }
-                )
-            if 'moviehash' in criterion:
-                criteria.append({'moviehash': criterion['moviehash']})
-            if 'query' in criterion:
-                if 'season_number' in criterion and 'episode_number' in criterion:
-                    criteria.append(
-                        {
-                            'query': criterion['query'],
-                            'season_number': criterion['season_number'],
-                            'episode_number': criterion['episode_number'],
-                        }
-                    )
-                else:
-                    criteria.append({'query': criterion['query']})
+            # add single-term searches
+            for key in ('id', 'imdb_id', 'tmdb_id', 'moviehash'):
+                if key in criterion:
+                    criteria.append({key: criterion[key]})
+
+            # add single-term searches with season/episode numbers
+            if 'season_number' in criterion and 'episode_number' in criterion:
+                for key in ('parent_imdb_id', 'parent_tmdb_id', 'query'):
+                    if key in criterion:
+                        criteria.append(
+                            {
+                                key: criterion[key],
+                                'season_number': criterion['season_number'],
+                                'episode_number': criterion['episode_number'],
+                            }
+                        )
+            # add query alone
+            if 'query' in criterion:  # pragma: no branch
+                criteria.append({'query': criterion['query']})
+
+        # # Make sure the video type is set
+        # video_type = 'episode' if season is not None and episode is not None else 'movie'
+        # for crit in criteria:
+        #     crit['type'] = video_type
 
         return criteria
 
-    def query(
+    async def _search(self, **params: Any) -> list[dict[str, Any]]:
+        """Search subtitles, fetching the result pages concurrently.
+
+        The first page gives the total number of pages, the remaining ones are gathered.
+        """
+        logger.info('Searching subtitles %r', params)
+        first = await self._request('GET', 'subtitles', params={'page': 1, **params}, authenticated=False)
+
+        data: list[dict[str, Any]] = list(first.get('data') or [])
+        if not data:
+            return []
+
+        total_pages = int(first.get('total_pages', 1) or 1)
+        last_page = total_pages
+        if self.max_result_pages > 0:
+            last_page = min(last_page, self.max_result_pages)
+
+        if last_page <= 1:
+            return data
+
+        # Run async tasks
+        tasks = []
+        try:
+            async with asyncio.TaskGroup() as tg:
+                for page in range(2, last_page + 1):
+                    tasks.append(
+                        tg.create_task(self._request('GET', 'subtitles', params={'page': page, **params}, raises=True))
+                    )
+        except* asyncio.CancelledError:
+            # the caller is shutting down, never swallow this
+            raise asyncio.CancelledError from None
+
+        except* DiscardingError:
+            raise DiscardingError from None
+
+        except* ProviderError as eg:
+            # Just log the error, it is not discarding
+            logger.warning('Pagination stopped because of errors: %s', {str(e) for e in eg.exceptions})
+
+        # Collect results
+        for i, task in enumerate(tasks, start=2):
+            try:
+                page_result = task.result()
+            except ProviderError:
+                # ProviderError were not raised when running the task, they can pop up here again
+                logger.warning('Error getting page %i', i)
+                continue
+
+            data.extend(page_result.get('data') or [])
+
+        return data
+
+    @override
+    async def query(
         self,
         languages: Set[Language],
         *,
-        allow_machine_translated: bool = False,
         sort_by_download_count: bool = True,
         **kwargs: Any,
     ) -> list[OpenSubtitlesComSubtitle]:
-        """Query the server and return all the data."""
-        # fill the search criteria
-        criteria = self._make_query(**kwargs)
+        """Query the server and return all the subtitles.
 
-        subtitles: list[OpenSubtitlesComSubtitle] = []
+        The different criteria are searched concurrently, then deduplicated.
+        """
+        criteria = self._make_criteria(**kwargs)
+        language_param = ','.join(sorted(lang.opensubtitlescom for lang in languages))
 
         for criterion in criteria:
-            # add the language and query the server
-            criterion.update({'languages': ','.join(sorted(lang.opensubtitlescom for lang in languages))})
+            criterion['languages'] = language_param
 
-            imdb_match = 'imdb_id' in criterion or 'show_imdb_id' in criterion
-            tmdb_match = 'tmdb_id' in criterion or 'show_tmdb_id' in criterion
+        # Gather results: no need to handle exceptions, therefore prefer asyncio.gather to asyncio.TaskGroup
+        results = await asyncio.gather(*(self._search(**criterion) for criterion in criteria))
 
-            # loop over subtitle items
-            for response in self._search(**criterion):
-                # read single response
+        subtitles: list[OpenSubtitlesComSubtitle] = []
+        seen: set[str] = set()
+        for criterion, responses in zip(criteria, results, strict=True):
+            imdb_match = 'imdb_id' in criterion or 'parent_imdb_id' in criterion
+            tmdb_match = 'tmdb_id' in criterion or 'parent_tmdb_id' in criterion
+
+            for response in responses:
                 subtitle = self.subtitle_class.from_response(
                     response,
                     imdb_match=imdb_match,
                     tmdb_match=tmdb_match,
                 )
-
-                # Some criteria are redundant, so skip duplicates
-                # Use set for faster search
-                unique_ids = {s.id for s in subtitles}
-                if subtitle.id not in unique_ids:
-                    logger.debug('Found subtitle %r', subtitle)
-                    subtitles.append(subtitle)
+                # some criteria are redundant, skip the duplicates
+                if subtitle.id in seen:
+                    continue
+                seen.add(subtitle.id)
+                logger.debug('Found subtitle %r', subtitle)
+                subtitles.append(subtitle)
 
         # filter out the machine translated subtitles
-        if not allow_machine_translated:
-            subtitles = [sub for sub in subtitles if not sub.machine_translated]
-        # sort by download_counts
-        if sort_by_download_count:
+        if not self.allow_machine_translated:  # pragma: no branch
+            subtitles = [s for s in subtitles if not s.machine_translated]
+
+        # sort by download count
+        if sort_by_download_count:  # pragma: no branch
             subtitles = sorted(subtitles, key=lambda s: s.download_count or -1, reverse=True)
 
-        return list(subtitles)
+        return subtitles
 
-    def list_subtitles(self, video: Video, languages: Set[Language]) -> list[OpenSubtitlesComSubtitle]:
+    @override
+    async def list_subtitles(self, video: Video, languages: Set[Language]) -> list[OpenSubtitlesComSubtitle]:
         """List all the subtitles for the video."""
-        query = season = episode = show_imdb_id = show_tmdb_id = None
+        query = season = episode = None
         if isinstance(video, Episode):
             query = video.series
             season = video.season
             episode = video.episode
-            show_imdb_id = video.external_ids.get('series_imdb_id')
-            show_tmdb_id = video.external_ids.get('series_tmdb_id')
-        elif isinstance(video, Movie):
+        elif isinstance(video, Movie):  # pragma: no branch
             query = video.title
 
-        # Make sure OpenSubtitlesComVip gets the correct hash
-        hash_name = self.subtitle_class.provider_name
-
-        return self.query(
+        return await self.query(
             languages,
-            moviehash=video.hashes.get(hash_name),
+            moviehash=video.hashes.get('opensubtitles'),
             imdb_id=video.external_ids.get('imdb_id'),
-            show_imdb_id=show_imdb_id,
-            show_tmdb_id=show_tmdb_id,
+            tmdb_id=video.external_ids.get('tmdb_id'),
+            show_imdb_id=video.external_ids.get('series_imdb_id'),
+            show_tmdb_id=video.external_ids.get('series_tmdb_id'),
             query=query,
             season=season,
             episode=episode,
-            allow_machine_translated=False,
             sort_by_download_count=True,
         )
 
-    @requires_auth
-    def download_subtitle(self, subtitle: OpenSubtitlesComSubtitle) -> None:
-        """Download the content of the subtitle."""
-        if not self.session:
-            raise NotInitializedProviderError
+    # ------------------------------------------------------------------
+    # download
+    # ------------------------------------------------------------------
 
-        # get the subtitle download link
+    async def download_subtitle(self, subtitle: OpenSubtitlesComSubtitle) -> None:
+        """Download the content of the subtitle."""
         logger.info('Downloading subtitle %r', subtitle)
-        body = {'file_id': subtitle.file_id, 'file_name': subtitle.file_name, 'sub_format': self.subtitle_format}
-        r = self.api_post('download', body)
-        if any(k not in r for k in ('link', 'remaining')):
+
+        body = {
+            'file_id': subtitle.file_id,
+            'file_name': subtitle.file_name,
+            'sub_format': self.subtitle_format,
+        }
+        response = await self._request('POST', 'download', json=body, authenticated=True)
+
+        if any(k not in response for k in ('link', 'remaining')):  # pragma: no cover
+            logger.debug('Unable to download subtitle, no link returned by the provider')
             return
 
-        link = r['link']
-        remaining = int(r['remaining'])
-
-        # detect download limit exceeded
-        if remaining <= 0:
-            if 'reset_time_utc' in r:
-                logger.error('download quota exceeded, quota reset on %s UTC', r['reset_time_utc'])
+        remaining = int(response['remaining'])
+        if remaining <= 0:  # pragma: no cover
+            reset_time = response.get('reset_time_utc')
+            if reset_time:
+                logger.error('download quota exceeded, quota reset on %s UTC', reset_time)
             else:
                 logger.error('download quota exceeded')
             raise DownloadLimitReached
 
-        # download the subtitle
-        download_response = self.session.get(link, timeout=self.timeout)
-
-        if not download_response.content:
-            # Provider returns a status of 304 Not Modified with an empty content
-            # raise_for_status won't raise exception for that status code
+        content = await self._download_link(response['link'])
+        if not content:  # pragma: no cover
+            # the provider answers '304 Not Modified' with an empty body,
+            # which is not an error status
             logger.debug('Unable to download subtitle. No data returned from provider')
             return
 
-        subtitle.set_content(download_response.content)
+        subtitle.set_content(content)
+
+    async def _download_link(self, link: str) -> bytes:
+        """Fetch the subtitle content from the temporary download link.
+
+        The link points to a CDN, not to the API: no API key and no token are sent.
+        """
+        if self._semaphore is None:  # pragma: no cover
+            raise NotInitializedProviderError
+
+        async with (
+            self._semaphore,
+            self.session.get(
+                link,
+                headers={'User-Agent': self.user_agent},
+                timeout=aiohttp.ClientTimeout(total=self.timeout),
+            ) as response,
+        ):
+            check_status(response.status, response.reason)
+            return await response.read()
 
 
 class OpenSubtitlesComVipSubtitle(OpenSubtitlesComSubtitle):
@@ -829,30 +895,26 @@ class DisabledUserAgent(OpenSubtitlesComError, AuthenticationError):
     pass
 
 
-def checked(response: Response) -> Response:
-    """Check a response status before returning it.
+def check_status(status: int, reason: str | None = None) -> None:
+    """Raise the exception matching the HTTP status of an OpenSubtitles.com response.
 
-    :param response: a response from `requests` call to OpenSubtitlesCom.
-    :return: the response.
+    :param int status: the HTTP status code.
+    :param str reason: the HTTP reason phrase, used as error message.
     :raises: :class:`OpenSubtitlesComError`
-
     """
-    status_code = response.status_code
-    if status_code == 401:
-        raise Unauthorized(response.reason)
-    if status_code == 406:
+    if status == 401:  # pragma: no cover
+        raise Unauthorized(reason)
+    if status == 406:  # pragma: no cover
         raise NoSession
-    if status_code == 407:
+    if status == 407:  # pragma: no cover
         raise DownloadLimitReached
-    if status_code == 413:
+    if status == 413:  # pragma: no cover
         raise InvalidImdbid
-    if status_code == 414:
+    if status == 414:  # pragma: no cover
         raise UnknownUserAgent
-    if status_code == 415:
+    if status == 415:  # pragma: no cover
         raise DisabledUserAgent
-    if status_code == 503:
+    if status == 503:  # pragma: no cover
         raise ServiceUnavailable
-    if status_code != 200:
-        raise OpenSubtitlesComError(response.reason)
-
-    return response
+    if status != 200:
+        raise OpenSubtitlesComError(reason)

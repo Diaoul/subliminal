@@ -33,13 +33,18 @@ PASSWORD = 'subliminal'
 
 # Bug with vcrpy and aiohttp, POST body is not recorded as a str but as a dict
 def before_record_cb(request: Request) -> Request:
-    if request.body:
-        request.body = str(request.body)
+    body = request.body
+    if body:
+        if isinstance(body, bytes):
+            # Decode bytes to str
+            body = body.decode('utf-8')
+        request.body = str(body).replace("'", '"').encode('utf-8')
     return request
 
 
 vcr = VCR(
     path_transformer=lambda path: path + '.yaml',
+    before_record_request=before_record_cb,
     record_mode=os.environ.get('VCR_RECORD_MODE', 'once'),
     decode_compressed_response=True,
     match_on=['method', 'scheme', 'host', 'port', 'path', 'query', 'body'],

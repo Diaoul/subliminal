@@ -144,6 +144,9 @@ class Provider(Generic[S]):
     #: User Agent to use
     user_agent: str = f'Subliminal/{__short_version__}'
 
+    #: Policy with machine generated subtitles
+    allow_machine_generated: bool = False
+
     def __repr__(self) -> str:
         return f'<{self.__class__.__name__} [{self.video_types!r}]>'
 
@@ -297,6 +300,9 @@ class AsyncProvider(Generic[S]):
 
     #: User Agent to use
     user_agent: str = f'Subliminal/{__short_version__}'
+
+    #: Policy with machine generated subtitles
+    allow_machine_generated: bool = False
 
     def __repr__(self) -> str:
         return f'<{self.__class__.__name__} [{self.video_types!r}]>'

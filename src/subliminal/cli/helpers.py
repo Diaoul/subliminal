@@ -341,7 +341,16 @@ provider_options = {
 refiner_options = {
     name: get_parameters_from_signature(
         refiner_manager[name].plugin,
-        exclude=('video', 'kwargs', 'embedded_subtitles', 'external_subtitles', 'directory', 'providers', 'languages'),
+        exclude=(
+            'video',
+            'kwargs',
+            'embedded_subtitles',
+            'external_subtitles',
+            'directory',
+            'providers',
+            'languages',
+            'session',
+        ),
     )
     for name in refiner_manager.names()
 }

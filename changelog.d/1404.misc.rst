@@ -1,0 +1,6 @@
+Add "max_concurrency", "timeout" and "machine_generated" options to CLI
+Add a "machine_generated" (bool) attribute to Subtitle, "allow_machine_generated"
+(bool) attribute to AsyncProvider/Provider. Add a "machine_generated" (str) attribute
+to AsyncProviderPool, that takes a str value ("allow", "disallow" and "default" -
+to each provider policy) to set the "allow_machine_generated" attributes of all
+the providers.

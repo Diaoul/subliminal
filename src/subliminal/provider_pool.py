@@ -10,7 +10,7 @@ from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, field
 from enum import Enum, auto
-from typing import TYPE_CHECKING, Any, ClassVar, Generic, Protocol, TypeVar, cast, runtime_checkable
+from typing import TYPE_CHECKING, Any, ClassVar, Generic, Literal, Protocol, TypeVar, cast, runtime_checkable
 
 import aiohttp
 from babelfish import Language  # type: ignore[import-untyped]
@@ -47,6 +47,9 @@ logger = logging.getLogger(__name__)
 
 #: Default maximum number of providers queried at the same time
 DEFAULT_MAX_CONCURRENCY = 10
+
+#: Default maximum number of threads for running synchronous functions. Equals to the number of providers if set to 0.
+DEFAULT_MAX_WORKERS = 0
 
 #: Default timeout, in seconds, for a single provider operation
 DEFAULT_TIMEOUT = 20.0
@@ -234,6 +237,7 @@ class AsyncPool(Generic[T]):
     :param dict[str, Any] provider_configs: provider configuration as keyword arguments per provider name to pass
         when instantiating the :class:`~subliminal.providers.Provider`.
     :param int max_concurrency: maximum number of provider operations running at the same time.
+    :param int max_workers: maximum number of threads for running synchronous functions.
     :param (float | None) timeout: timeout in seconds for a single provider operation, None to disable.
     :param session: an existing :class:`aiohttp.ClientSession` to use. If `None`, the pool creates
         and owns one. A session passed in is never closed by the pool.
@@ -259,6 +263,9 @@ class AsyncPool(Generic[T]):
     #: Timeout in seconds for a single provider operation, None to disable
     timeout: float | None
 
+    #: Policy with listing machine generated subtitles: allow, disallow, default (to each provider default policy)
+    machine_generated: Literal['allow', 'disallow', 'default']
+
     _session: aiohttp.ClientSession | None
     _owns_session: bool
     _semaphore: asyncio.Semaphore | None
@@ -272,6 +279,7 @@ class AsyncPool(Generic[T]):
         max_concurrency: int = DEFAULT_MAX_CONCURRENCY,
         max_workers: int | None = None,
         timeout: float | None = DEFAULT_TIMEOUT,
+        machine_generated: Literal['allow', 'disallow', 'default'] = 'default',
         session: aiohttp.ClientSession | None = None,
     ) -> None:
         self._providers = list(providers) if providers is not None else self._get_default_providers()
@@ -280,6 +288,7 @@ class AsyncPool(Generic[T]):
         self.max_concurrency = max(1, max_concurrency)
         self.max_workers = max(1, max_workers or len(self._providers))
         self.timeout = parse_timeout(timeout)
+        self.machine_generated = machine_generated
 
         self._session = session
         self._owns_session = session is None
@@ -426,6 +435,8 @@ class AsyncPool(Generic[T]):
         parameters = inspect.signature(plugin).parameters
         if 'session' in parameters and 'session' not in kwargs:
             kwargs['session'] = self.session
+        if self.machine_generated != 'default' and 'allow_machine_generated' in parameters:
+            kwargs['allow_machine_generated'] = bool(self.machine_generated == 'allow')
 
         return plugin(**kwargs)  # type: ignore[no-any-return]
 
@@ -486,10 +497,20 @@ class AsyncProviderPool(AsyncPool[Provider | AsyncProvider]):
         provider_configs: Mapping[str, Any] | None = None,
         *,
         max_concurrency: int = DEFAULT_MAX_CONCURRENCY,
+        max_workers: int | None = None,
         timeout: float | None = DEFAULT_TIMEOUT,
+        machine_generated: Literal['allow', 'disallow', 'default'] = 'default',
         session: aiohttp.ClientSession | None = None,
     ) -> None:
-        super().__init__(providers, provider_configs, max_concurrency=max_concurrency, timeout=timeout, session=session)
+        super().__init__(
+            providers,
+            provider_configs,
+            max_concurrency=max_concurrency,
+            max_workers=max_workers,
+            timeout=timeout,
+            machine_generated=machine_generated,
+            session=session,
+        )
         self.discarded_providers = set()
         self.failed_providers = set()
 
@@ -781,10 +802,18 @@ class AsyncRefinerPool(AsyncPool[Refiner | AsyncRefiner]):
         check_kwargs: Mapping[str, Any] | None = None,
         *,
         max_concurrency: int = DEFAULT_MAX_CONCURRENCY,
+        max_workers: int | None = None,
         timeout: float | None = DEFAULT_TIMEOUT,
         session: aiohttp.ClientSession | None = None,
     ) -> None:
-        super().__init__(refiners, refiner_configs, max_concurrency=max_concurrency, timeout=timeout, session=session)
+        super().__init__(
+            refiners,
+            refiner_configs,
+            max_concurrency=max_concurrency,
+            max_workers=max_workers,
+            timeout=timeout,
+            session=session,
+        )
         self.check_kwargs = dict(check_kwargs) if check_kwargs is not None else {}
         self.discarded_refiners = set()
         self.failed_refiners = set()

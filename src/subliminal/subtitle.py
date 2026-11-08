@@ -177,6 +177,9 @@ class Subtitle:
     #: Whether the subtitle is embedded in the video or an external file
     embedded: bool
 
+    #: Whether the subtitle was machine generated
+    machine_generated: bool
+
     #: The (str) path of the subtitle (it should exist) or None if it not a file in the system
     subtitle_path: str | None
 
@@ -217,6 +220,7 @@ class Subtitle:
         subtitle_path: str | None = None,
         fps: float | None = None,
         embedded: bool = False,
+        machine_generated: bool = False,
         force_guess_encoding: bool = True,
         auto_fix_srt: bool = False,
     ) -> None:
@@ -233,6 +237,7 @@ class Subtitle:
         self.fps = fps
         self.subtitle_path = subtitle_path
         self.embedded = embedded
+        self.machine_generated = machine_generated
         self.force_guess_encoding = force_guess_encoding
         self.auto_fix_srt = auto_fix_srt
 

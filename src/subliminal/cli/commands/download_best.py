@@ -26,7 +26,13 @@ from subliminal import (
 from subliminal.core import ARCHIVE_EXTENSIONS, collect_video_filepaths, refine, scan_path
 from subliminal.exceptions import GuessingError
 from subliminal.extensions import get_default_providers, get_default_refiners
-from subliminal.provider_pool import AsyncProviderPool, _check_no_running_loop
+from subliminal.provider_pool import (
+    DEFAULT_MAX_CONCURRENCY,
+    DEFAULT_MAX_WORKERS,
+    DEFAULT_TIMEOUT,
+    AsyncProviderPool,
+    _check_no_running_loop,
+)
 from subliminal.utils import NameResolver, merge_extend_and_ignore_unions
 
 from ._format import AgeParamType, LanguageParamType, format_provider_errors, plural
@@ -34,6 +40,7 @@ from ._format import AgeParamType, LanguageParamType, format_provider_errors, pl
 if TYPE_CHECKING:
     from collections.abc import Sequence, Set
     from datetime import timedelta
+    from typing import Literal
 
     from babelfish import Language
 
@@ -298,9 +305,32 @@ REFINER = click.Choice(['ALL', *sorted(refiner_manager.names())])
 @click.option(
     '-w',
     '--max-workers',
+    type=click.IntRange(0, 50),
+    default=0,
+    help='Maximum number of threads to use. Default to the number of providers if set to 0.',
+)
+@click.option(
+    '--max-concurrency',
     type=click.IntRange(1, 50),
-    default=None,
-    help='Maximum number of threads to use.',
+    default=DEFAULT_MAX_CONCURRENCY,
+    help='Maximum number of asynchronous concurrent connections.',
+)
+@click.option(
+    '-t',
+    '--timeout',
+    type=click.FloatRange(min=0, clamp=True),
+    default=DEFAULT_TIMEOUT,
+    help=(
+        'General connection timeout in seconds. Set to 0 to disable. It can be overridden '
+        'to a shorter value for each provider.'
+    ),
+)
+@click.option(
+    '-ai',
+    '--machine-generated',
+    type=click.Choice(['allow', 'disallow', 'default']),
+    default='default',
+    help='Policy for listing machine generated subtitles: allow, disallow or use each provider default.',
 )
 @click.option(
     '-z/-Z',
@@ -369,6 +399,9 @@ def download(
     category_suffix: bool,
     language_format: str,
     max_workers: int,
+    max_concurrency: int,
+    timeout: float,
+    machine_generated: str,
     archives: bool,
     use_absolute_path: str,
     name: Sequence[str],
@@ -566,6 +599,10 @@ def download(
         providers=use_providers,
         provider_configs=obj['provider_configs'],
         debug=debug,
+        max_workers=max_workers,
+        max_concurrency=max_concurrency,
+        timeout=timeout,
+        machine_generated=machine_generated,
         min_score=min_score,
         subtitle_categories=subtitle_categories,
         skip_wrong_fps=skip_wrong_fps,
@@ -694,6 +731,10 @@ async def async_list_subtitles(
     provider_configs: dict[str, Any] | None = None,
     debug: bool = False,
     min_score: int = 0,
+    max_workers: int = DEFAULT_MAX_WORKERS,
+    max_concurrency: int = DEFAULT_MAX_CONCURRENCY,
+    timeout: float = DEFAULT_TIMEOUT,  # noqa: ASYNC109
+    machine_generated: Literal['allow', 'disallow', 'default'] = 'default',
     **kwargs: Any,
 ) -> dict[Video, list[Subtitle]]:
     """List subtitles from asynchronous AsyncRefinerPool."""
@@ -702,9 +743,12 @@ async def async_list_subtitles(
 
     downloaded_subtitles = defaultdict(list)
     async with AsyncProviderPool(
-        # max_workers=max_workers,
         providers=providers,
         provider_configs=provider_configs,
+        max_workers=max_workers,
+        max_concurrency=max_concurrency,
+        timeout=timeout,
+        machine_generated=machine_generated,
     ) as pp:
         with click.progressbar(
             videos,

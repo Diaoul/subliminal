@@ -123,21 +123,41 @@ def test_check_video_undefined(movies: dict[str, Movie]) -> None:
 @pytest.mark.asyncio
 async def test_provider_pool_get_keyerror() -> None:
     pool = AsyncProviderPool()
-    await pool.initialize()
-    with pytest.raises(KeyError):
-        await pool.get_provider('nwodtseg')
+    try:
+        await pool.initialize()
+        with pytest.raises(KeyError):
+            await pool.get_provider('nwodtseg')
+    finally:
+        await pool.terminate()
 
 
 @pytest.mark.asyncio
 @pytest.mark.usefixtures('_mock_providers')
 async def test_provider_pool_iter() -> None:
     pool = AsyncProviderPool()
-    await pool.initialize()
-    assert len(list(pool)) == 0
-    await pool.get_provider('tvsubtitles')
-    # test printing
-    print(await pool.get_provider('tvsubtitles'))  # noqa: T201
-    assert len(list(pool)) == 1
+    try:
+        await pool.initialize()
+        assert len(list(pool)) == 0
+        await pool.get_provider('tvsubtitles')
+        # test printing
+        print(await pool.get_provider('tvsubtitles'))  # noqa: T201
+        assert len(list(pool)) == 1
+    finally:
+        await pool.terminate()
+
+
+@pytest.mark.parametrize('allow_machine_generated', [False, True])
+@pytest.mark.asyncio
+@pytest.mark.usefixtures('_mock_providers')
+async def test_provider_pool_machine_generated(allow_machine_generated: bool) -> None:
+    value = 'allow' if allow_machine_generated else 'disallow'
+    pool = AsyncProviderPool(machine_generated=value)  # type: ignore[arg-type]
+    try:
+        await pool.initialize()
+        provider = await pool.get_provider('tvsubtitles')
+        assert provider.allow_machine_generated == allow_machine_generated
+    finally:
+        await pool.terminate()
 
 
 @pytest.mark.asyncio
@@ -149,18 +169,21 @@ async def test_provider_pool_list_subtitles_provider(
     episode = episodes['bbt_s07e05']
     languages = {Language('eng')}
     pool = AsyncProviderPool()
-    await pool.initialize()
-    provider_result = await pool.list_subtitles_provider('tvsubtitles', episode, languages)
-    assert provider_result.provider == 'tvsubtitles'
-    assert provider_result.video == episode
-    assert provider_result.languages == languages
-    assert provider_result.subtitles == ['tvsubtitles']  # type: ignore[comparison-overlap]
-    assert provider_result.ok()
-    assert not provider_result.unsupported()
-    assert not provider_result.failure()
-    assert not provider_result.outage()
-    assert provider_manager['tvsubtitles'].plugin.initialize.called  # type: ignore[attr-defined]
-    assert provider_manager['tvsubtitles'].plugin.list_subtitles.called  # type: ignore[attr-defined]
+    try:
+        await pool.initialize()
+        provider_result = await pool.list_subtitles_provider('tvsubtitles', episode, languages)
+        assert provider_result.provider == 'tvsubtitles'
+        assert provider_result.video == episode
+        assert provider_result.languages == languages
+        assert provider_result.subtitles == ['tvsubtitles']  # type: ignore[comparison-overlap]
+        assert provider_result.ok()
+        assert not provider_result.unsupported()
+        assert not provider_result.failure()
+        assert not provider_result.outage()
+        assert provider_manager['tvsubtitles'].plugin.initialize.called  # type: ignore[attr-defined]
+        assert provider_manager['tvsubtitles'].plugin.list_subtitles.called  # type: ignore[attr-defined]
+    finally:
+        await pool.terminate()
 
 
 @pytest.mark.asyncio
@@ -170,18 +193,21 @@ async def test_async_provider_pool_list_subtitles(
     provider_manager: RegistrableExtensionManager,
 ) -> None:
     pool = AsyncProviderPool()
-    await pool.initialize()
-    subtitles = await pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
-    assert sorted(subtitles) == [  # type: ignore[type-var,comparison-overlap]  # ty: ignore[invalid-argument-type]
-        'gestdown',
-        'opensubtitlescom',
-        'podnapisi',
-        'tvsubtitles',
-    ]
-    for provider in subtitles:
-        provider_s = cast('str', provider)
-        assert provider_manager[provider_s].plugin.initialize.called  # type: ignore[attr-defined]
-        assert provider_manager[provider_s].plugin.list_subtitles.called  # type: ignore[attr-defined]
+    try:
+        await pool.initialize()
+        subtitles = await pool.list_subtitles(episodes['bbt_s07e05'], {Language('eng')})
+        assert sorted(subtitles) == [  # type: ignore[type-var,comparison-overlap]  # ty: ignore[invalid-argument-type]
+            'gestdown',
+            'opensubtitlescom',
+            'podnapisi',
+            'tvsubtitles',
+        ]
+        for provider in subtitles:
+            provider_s = cast('str', provider)
+            assert provider_manager[provider_s].plugin.initialize.called  # type: ignore[attr-defined]
+            assert provider_manager[provider_s].plugin.list_subtitles.called  # type: ignore[attr-defined]
+    finally:
+        await pool.terminate()
 
 
 @pytest.mark.asyncio

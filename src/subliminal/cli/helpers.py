@@ -334,13 +334,23 @@ def options_from_managers(
 
 # Options from providers
 provider_options = {
-    name: get_parameters_from_signature(provider_manager[name].plugin) for name in provider_manager.names()
+    name: get_parameters_from_signature(provider_manager[name].plugin, exclude=('session',))
+    for name in provider_manager.names()
 }
 
 refiner_options = {
     name: get_parameters_from_signature(
         refiner_manager[name].plugin,
-        exclude=('video', 'kwargs', 'embedded_subtitles', 'external_subtitles', 'directory', 'providers', 'languages'),
+        exclude=(
+            'video',
+            'kwargs',
+            'embedded_subtitles',
+            'external_subtitles',
+            'directory',
+            'providers',
+            'languages',
+            'session',
+        ),
     )
     for name in refiner_manager.names()
 }

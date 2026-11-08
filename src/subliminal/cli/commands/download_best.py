@@ -329,7 +329,7 @@ REFINER = click.Choice(['ALL', *sorted(refiner_manager.names())])
 )
 @click.option(
     '-ai',
-    '--machine-generated-subtitles',
+    '--machine-generated',
     type=click.Choice(['allow', 'disallow', 'default']),
     default='default',
     help='Policy for listing machine generated subtitles: allow, disallow or use each provider default.',
@@ -403,7 +403,7 @@ def download(
     max_workers: int,
     max_concurrency: int,
     timeout: float,
-    machine_generated_subtitles: str,
+    machine_generated: str,
     archives: bool,
     use_absolute_path: str,
     name: Sequence[str],
@@ -604,7 +604,7 @@ def download(
         max_workers=max_workers,
         max_concurrency=max_concurrency,
         timeout=timeout,
-        machine_generated_subtitles=machine_generated_subtitles,
+        machine_generated=machine_generated,
         min_score=min_score,
         subtitle_categories=subtitle_categories,
         skip_wrong_fps=skip_wrong_fps,
@@ -736,7 +736,7 @@ async def async_list_subtitles(
     max_workers: int = DEFAULT_MAX_WORKERS,
     max_concurrency: int = DEFAULT_MAX_CONCURRENCY,
     timeout: float = DEFAULT_TIMEOUT,  # noqa: ASYNC109
-    machine_generated_subtitles: Literal['allow', 'disallow', 'default'] = 'default',
+    machine_generated: Literal['allow', 'disallow', 'default'] = 'default',
     **kwargs: Any,
 ) -> dict[Video, list[Subtitle]]:
     """List subtitles from asynchronous AsyncRefinerPool."""
@@ -750,7 +750,7 @@ async def async_list_subtitles(
         max_workers=max_workers,
         max_concurrency=max_concurrency,
         timeout=timeout,
-        machine_generated_subtitles=machine_generated_subtitles,
+        machine_generated=machine_generated,
     ) as pp:
         with click.progressbar(
             videos,

@@ -264,7 +264,7 @@ class AsyncPool(Generic[T]):
     timeout: float | None
 
     #: Policy with listing machine generated subtitles: allow, disallow, default (to each provider default policy)
-    machine_generated_subtitles: Literal['allow', 'disallow', 'default']
+    machine_generated: Literal['allow', 'disallow', 'default']
 
     _session: aiohttp.ClientSession | None
     _owns_session: bool
@@ -279,7 +279,7 @@ class AsyncPool(Generic[T]):
         max_concurrency: int = DEFAULT_MAX_CONCURRENCY,
         max_workers: int | None = None,
         timeout: float | None = DEFAULT_TIMEOUT,
-        machine_generated_subtitles: Literal['allow', 'disallow', 'default'] = 'default',
+        machine_generated: Literal['allow', 'disallow', 'default'] = 'default',
         session: aiohttp.ClientSession | None = None,
     ) -> None:
         self._providers = list(providers) if providers is not None else self._get_default_providers()
@@ -288,7 +288,7 @@ class AsyncPool(Generic[T]):
         self.max_concurrency = max(1, max_concurrency)
         self.max_workers = max(1, max_workers or len(self._providers))
         self.timeout = parse_timeout(timeout)
-        self.machine_generated_subtitles = machine_generated_subtitles
+        self.machine_generated = machine_generated
 
         self._session = session
         self._owns_session = session is None
@@ -435,8 +435,8 @@ class AsyncPool(Generic[T]):
         parameters = inspect.signature(plugin).parameters
         if 'session' in parameters and 'session' not in kwargs:
             kwargs['session'] = self.session
-        if self.machine_generated_subtitles != 'default' and 'allow_machine_generated' in parameters:
-            kwargs['allow_machine_generated'] = bool(self.machine_generated_subtitles == 'allow')
+        if self.machine_generated != 'default' and 'allow_machine_generated' in parameters:
+            kwargs['allow_machine_generated'] = bool(self.machine_generated == 'allow')
 
         return plugin(**kwargs)  # type: ignore[no-any-return]
 
@@ -499,7 +499,7 @@ class AsyncProviderPool(AsyncPool[Provider | AsyncProvider]):
         max_concurrency: int = DEFAULT_MAX_CONCURRENCY,
         max_workers: int | None = None,
         timeout: float | None = DEFAULT_TIMEOUT,
-        machine_generated_subtitles: Literal['allow', 'disallow', 'default'] = 'default',
+        machine_generated: Literal['allow', 'disallow', 'default'] = 'default',
         session: aiohttp.ClientSession | None = None,
     ) -> None:
         super().__init__(
@@ -508,7 +508,7 @@ class AsyncProviderPool(AsyncPool[Provider | AsyncProvider]):
             max_concurrency=max_concurrency,
             max_workers=max_workers,
             timeout=timeout,
-            machine_generated_subtitles=machine_generated_subtitles,
+            machine_generated=machine_generated,
             session=session,
         )
         self.discarded_providers = set()

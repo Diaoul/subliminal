@@ -155,6 +155,7 @@ class OpenSubtitlesComSubtitle(Subtitle):
         super().__init__(
             language,
             subtitle_id,
+            machine_generated=machine_generated,
             hearing_impaired=hearing_impaired,
             foreign_only=foreign_only,
             fps=fps,

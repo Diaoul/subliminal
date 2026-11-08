@@ -46,8 +46,6 @@ if TYPE_CHECKING:
 
     from subliminal import Subtitle
 
-    machine_generated_subtitles_values = Literal['allow', 'disallow', 'default']
-
 logger = logging.getLogger(__name__)
 
 

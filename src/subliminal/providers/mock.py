@@ -101,6 +101,7 @@ class _BaseMockProvider:
     subtitle_pool: list[MockSubtitle]
     is_broken: bool
     is_failed: bool
+    allow_machine_generated: bool
     delay: float
 
     def __init__(
@@ -109,6 +110,7 @@ class _BaseMockProvider:
         *,
         is_broken: bool = False,
         is_failed: bool = False,
+        allow_machine_generated: bool = True,
         delay: float = 1,
         **kwargs: Any,
     ) -> None:
@@ -118,6 +120,7 @@ class _BaseMockProvider:
             self.subtitle_pool.extend(list(subtitle_pool))
         self.is_broken = is_broken
         self.is_failed = is_failed
+        self.allow_machine_generated = allow_machine_generated
         self.delay = delay
 
     def _initialize(self) -> None:

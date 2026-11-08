@@ -116,7 +116,7 @@ class OpenSubtitlesComSubtitle(Subtitle):
     series_imdb_id: str | None
     series_tmdb_id: str | None
     download_count: int | None
-    machine_translated: bool | None
+    machine_generated: bool
     imdb_match: bool
     tmdb_match: bool
     moviehash_match: bool
@@ -129,6 +129,7 @@ class OpenSubtitlesComSubtitle(Subtitle):
         language: Language,
         subtitle_id: str,
         *,
+        machine_generated: bool = False,
         hearing_impaired: bool = False,
         foreign_only: bool = False,
         movie_kind: str | None = None,
@@ -144,7 +145,6 @@ class OpenSubtitlesComSubtitle(Subtitle):
         series_imdb_id: str | None = None,
         series_tmdb_id: str | None = None,
         download_count: int | None = None,
-        machine_translated: bool | None = None,
         fps: float | None = None,
         imdb_match: bool = False,
         tmdb_match: bool = False,
@@ -161,6 +161,7 @@ class OpenSubtitlesComSubtitle(Subtitle):
             page_link=None,
             encoding='utf-8',
         )
+        self.machine_generated = machine_generated
         self.movie_kind = movie_kind
         self.release = release
         self.movie_title = movie_title
@@ -174,7 +175,6 @@ class OpenSubtitlesComSubtitle(Subtitle):
         self.series_imdb_id = series_imdb_id
         self.series_tmdb_id = series_tmdb_id
         self.download_count = download_count
-        self.machine_translated = machine_translated
         self.imdb_match = imdb_match
         self.tmdb_match = tmdb_match
         self.moviehash_match = moviehash_match
@@ -200,11 +200,10 @@ class OpenSubtitlesComSubtitle(Subtitle):
         release = str(attributes.get('release'))
         moviehash_match = bool(attributes.get('moviehash_match', False))
         download_count = int(attributes.get('download_count'))
-        machine_translated = bool(int(attributes.get('machine_translated')))
+        machine_generated = bool(int(attributes.get('machine_translated')))
         fps: float | None = float(attributes.get('fps')) or None
         # from_trusted = bool(int(attributes.get('from_trusted')))
         # uploader_rank = str(attributes.get('uploader', {}).get("rank"))
-        # foreign_parts_only = bool(int(attributes.get('foreign_parts_only')))
 
         feature_details = attributes.get('feature_details', {})
         movie_year = int(feature_details.get('year')) if feature_details.get('year') else None
@@ -242,7 +241,7 @@ class OpenSubtitlesComSubtitle(Subtitle):
             series_imdb_id=series_imdb_id,
             series_tmdb_id=series_tmdb_id,
             download_count=download_count,
-            machine_translated=machine_translated,
+            machine_generated=machine_generated,
             fps=fps,
             imdb_match=imdb_match,
             tmdb_match=tmdb_match,
@@ -751,7 +750,7 @@ class OpenSubtitlesComProvider(AsyncProvider):
 
         # filter out the machine translated subtitles
         if not self.allow_machine_generated:  # pragma: no branch
-            subtitles = [s for s in subtitles if not s.machine_translated]
+            subtitles = [s for s in subtitles if not s.machine_generated]
 
         # sort by download count
         if sort_by_download_count:  # pragma: no branch

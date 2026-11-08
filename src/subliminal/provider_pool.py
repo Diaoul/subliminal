@@ -48,7 +48,7 @@ logger = logging.getLogger(__name__)
 #: Default maximum number of providers queried at the same time
 DEFAULT_MAX_CONCURRENCY = 10
 
-#: Default maximum number of threads for running synchronous functions. Equal to number of providers if set to 0.
+#: Default maximum number of threads for running synchronous functions. Equals to the number of providers if set to 0.
 DEFAULT_MAX_WORKERS = 0
 
 #: Default timeout, in seconds, for a single provider operation

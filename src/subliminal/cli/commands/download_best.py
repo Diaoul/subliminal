@@ -733,7 +733,7 @@ async def async_list_subtitles(
     min_score: int = 0,
     max_workers: int = DEFAULT_MAX_WORKERS,
     max_concurrency: int = DEFAULT_MAX_CONCURRENCY,
-    timeout: float = DEFAULT_TIMEOUT,  # noqa: ASYNC109
+    timeout: float = DEFAULT_TIMEOUT,
     machine_generated: Literal['allow', 'disallow', 'default'] = 'default',
     **kwargs: Any,
 ) -> dict[Video, list[Subtitle]]:

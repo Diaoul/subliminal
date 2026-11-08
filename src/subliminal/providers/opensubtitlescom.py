@@ -524,7 +524,7 @@ class OpenSubtitlesComProvider(AsyncProvider):
             if authenticated:
                 await self.ensure_authenticated()
 
-            if attempt > 0:  # pragma: no cover
+            if attempt > 0:
                 msg = f'Attempt #{attempt} to request url: {url}'
                 logger.debug(msg)
 
@@ -554,9 +554,9 @@ class OpenSubtitlesComProvider(AsyncProvider):
                 if retried_auth or not authenticated:
                     if raises:
                         raise
-                    # pragma: no cover
-                    logger.exception('An error occurred')
-                    return {}
+                    else:  # noqa: RET506  # pragma: no cover
+                        logger.exception('An error occurred')
+                        return {}
                 # the cached token is stale, drop it and log in again
                 retried_auth = True
                 await self.reset_token()
@@ -565,15 +565,14 @@ class OpenSubtitlesComProvider(AsyncProvider):
             except ProviderError:
                 if raises:
                     raise
-                # pragma: no cover
-                logger.exception('An error occurred')
-                return {}
+                else:  # noqa: RET506  # pragma: no cover
+                    logger.exception('An error occurred')
+                    return {}
 
-        # pragma: no cover
         msg = f'Too many retries for {method} {path}'
         if raises:
             raise ServiceUnavailable(msg)
-        return {}
+        return {}  # pragma: no cover
 
     # ------------------------------------------------------------------
     # search
@@ -622,7 +621,7 @@ class OpenSubtitlesComProvider(AsyncProvider):
         if year:
             criterion['year'] = year
 
-        if not criterion:
+        if not criterion:  # pragma: no cover
             msg = 'Not enough information'
             raise ValueError(msg)
 

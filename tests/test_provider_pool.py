@@ -151,7 +151,7 @@ async def test_provider_pool_iter() -> None:
 @pytest.mark.usefixtures('_mock_providers')
 async def test_provider_pool_machine_generated(allow_machine_generated: bool) -> None:
     value = 'allow' if allow_machine_generated else 'disallow'
-    pool = AsyncProviderPool(machine_generated=value)
+    pool = AsyncProviderPool(machine_generated=value)  # type: ignore[arg-type]
     try:
         await pool.initialize()
         provider = await pool.get_provider('tvsubtitles')

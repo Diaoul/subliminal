@@ -309,7 +309,7 @@ class OpenSubtitlesComProvider(AsyncProvider):
         set to non-zero to search faster, although the correct match can be
         missing. Set to 0 for unlimited result pages. Default to 10.
     :param int timeout: timeout in seconds. Default to 20.
-    :param bool allow_machine_translated: if False, skip machine translated subtitles. Default to False.
+    :param bool allow_machine_generated: if False, skip machine translated subtitles. Default to False.
     :param int max_concurrent_requests: maximum number of requests in flight for this provider.
         Default to 5
     :param int max_retries: maximum number of retries when hitting a 'Too Many Requests' error.
@@ -331,7 +331,7 @@ class OpenSubtitlesComProvider(AsyncProvider):
     apikey: str
     max_result_pages: int
     timeout: int
-    allow_machine_translated: bool
+    allow_machine_generated: bool
     token: str | None
     token_expires_at: datetime | None
 
@@ -343,7 +343,7 @@ class OpenSubtitlesComProvider(AsyncProvider):
         apikey: str | None = None,
         max_result_pages: int = 10,
         timeout: int = 20,
-        allow_machine_translated: bool = False,
+        allow_machine_generated: bool = False,
         max_concurrent_requests: int = 5,
         max_retries: int = 3,
         session: aiohttp.ClientSession | None = None,
@@ -357,7 +357,7 @@ class OpenSubtitlesComProvider(AsyncProvider):
         self.apikey = apikey or OPENSUBTITLESCOM_API_KEY
         self.max_result_pages = max_result_pages
         self.timeout = timeout
-        self.allow_machine_translated = allow_machine_translated
+        self.allow_machine_generated = allow_machine_generated
         self.max_retries = max_retries
         self.token = None
         self.token_expires_at = None
@@ -750,7 +750,7 @@ class OpenSubtitlesComProvider(AsyncProvider):
                 subtitles.append(subtitle)
 
         # filter out the machine translated subtitles
-        if not self.allow_machine_translated:  # pragma: no branch
+        if not self.allow_machine_generated:  # pragma: no branch
             subtitles = [s for s in subtitles if not s.machine_translated]
 
         # sort by download count

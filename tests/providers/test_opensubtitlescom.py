@@ -534,6 +534,33 @@ async def test_query_max_result_pages(movies: dict[str, Movie]) -> None:
 
 
 @pytest.mark.asyncio
+async def test_search_failing_page_with_requests_in_flight() -> None:
+    """Pages in flight are kept and the pages still waiting are not requested after a failure."""
+    requested: list[int] = []
+
+    @contextlib.asynccontextmanager
+    async def _request(method: str, path: str, params: dict[str, Any], **kwargs: Any) -> AsyncGenerator[MagicMock]:
+        page = int(params['page'])
+        requested.append(page)
+        kwargs = {'status': 200, 'reason': None}
+        if page == 3:
+            kwargs = {'status': 600, 'reason': 'Connection dropped'}
+        # page 3 fails while the other pages are still in flight
+        await asyncio.sleep(0.01 if page == 3 else 0.05)
+        response = MagicMock(spec=aiohttp.ClientResponse, **kwargs)
+        response.json.return_value = {'data': [{'id': page}], 'total_pages': 100}
+        yield response
+
+    async with OpenSubtitlesComProvider(USERNAME, PASSWORD, max_concurrent_requests=5) as provider:
+        with patch.object(provider._session, 'request', side_effect=_request):
+            results = list(await provider._search(query='Man of Steel'))
+
+    # the pages in flight when page 3 failed are not cancelled, the following ones are not requested
+    assert sorted(requested) == [1, 2, 3, 4, 5, 6]
+    assert sorted(result['id'] for result in results) == [1, 2, 4, 5, 6]
+
+
+@pytest.mark.asyncio
 async def test_search_keeps_results_when_a_page_fails() -> None:
     """Pagination stops at the failing page and keeps the results already found."""
 

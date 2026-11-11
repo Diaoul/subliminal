@@ -673,51 +673,43 @@ class OpenSubtitlesComProvider(AsyncProvider):
         if last_page <= 1:
             return data
 
-        # Once a page fails, the pages still waiting for their turn must not be requested:
-        # the semaphore wakes the next waiting task before the TaskGroup cancels it,
-        # so a task could otherwise send a request after the failure.
+        # No task group: cancellation is edge-triggered in asyncio, a task that is already
+        # woken up (e.g. by the semaphore) still runs one more step after a sibling failed.
+        # Instead, the pages check a shared flag right before sending their request, and
+        # report their own errors, so that nothing relies on a cancellation being delivered.
         failed = asyncio.Event()
         slots = asyncio.Semaphore(self._max_concurrent_requests)
 
-        async def fetch_page(page: int) -> dict[str, Any]:
+        async def fetch_page(page: int) -> dict[str, Any] | None:
             async with slots:
                 if failed.is_set():
-                    return {}
+                    return None
                 try:
                     return await self._request('GET', 'subtitles', params={'page': page, **params}, raises=True)
-                except (ProviderError, TimeoutError):
+                except DiscardingError:
                     failed.set()
                     raise
+                except (ProviderError, TimeoutError) as e:
+                    # Just log the error, it is not discarding: keep the pages already found
+                    failed.set()
+                    logger.warning('Pagination stopped, error getting page %i: %s', page, e)
+                    return None
 
-        # Run async tasks
-        tasks = []
+        tasks = [asyncio.create_task(fetch_page(page)) for page in range(2, last_page + 1)]
         try:
-            async with asyncio.TaskGroup() as tg:
-                for page in range(2, last_page + 1):
-                    tasks.append(tg.create_task(fetch_page(page)))
-        except* asyncio.CancelledError:
-            # the caller is shutting down, never swallow this
-            raise asyncio.CancelledError from None
+            pages = await asyncio.gather(*tasks)
+        except BaseException:
+            # a discarding error, or the caller is shutting down: never swallow it,
+            # and do not leave any page request running in the background
+            for task in tasks:
+                task.cancel()
+            await asyncio.gather(*tasks, return_exceptions=True)
+            raise
 
-        except* DiscardingError:
-            raise DiscardingError from None
+        for page_result in pages:
+            if page_result is not None:
+                data.extend(page_result.get('data') or [])
 
-        except* (ProviderError, TimeoutError) as eg:
-            errors_str = {str(e) for e in eg.exceptions}
-            # Just log the error, it is not discarding
-            logger.exception('Pagination stopped because of errors: %s', errors_str)
-
-        # Collect results
-        for i, task in enumerate(tasks, start=2):
-            try:
-                page_result = task.result()
-            except (ProviderError, TimeoutError):
-                # ProviderError and TimeoutError were not raised when running the task, they can pop up here again
-                logger.warning('Error getting page %i', i)
-                continue
-
-            data.extend(page_result.get('data') or [])
-        del tg
         return data
 
     @override

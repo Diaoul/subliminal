@@ -3,16 +3,25 @@ from __future__ import annotations
 import asyncio
 import contextlib
 import os
+from datetime import UTC, datetime, timedelta
 from typing import TYPE_CHECKING, Any
-from unittest.mock import MagicMock, patch
+from unittest.mock import AsyncMock, MagicMock, patch
 
 import aiohttp
 import pytest
 from babelfish import Language  # type: ignore[import-untyped]
 from vcr import VCR  # type: ignore[import-untyped]
 
-from subliminal.exceptions import ConfigurationError, DiscardingError
+from subliminal.cache import region
+from subliminal.exceptions import (
+    AuthenticationError,
+    ConfigurationError,
+    DiscardingError,
+    NotInitializedProviderError,
+    ServiceUnavailable,
+)
 from subliminal.providers.opensubtitlescom import (
+    TOKEN_CACHE_KEY,
     OpenSubtitlesComError,
     OpenSubtitlesComProvider,
     OpenSubtitlesComSubtitle,
@@ -251,6 +260,12 @@ def test_make_criteria_show_tmdb_id() -> None:
     assert {'type': 'episode', 'parent_tmdb_id': 1418, 'season_number': 7, 'episode_number': 5} in criteria
 
 
+def test_make_criteria_year() -> None:
+    provider = OpenSubtitlesComProvider(USERNAME, PASSWORD)
+    criteria = provider._make_criteria(query='Man of Steel', year=2013)
+    assert criteria[0] == {'type': 'movie', 'query': 'Man of Steel', 'year': 2013}
+
+
 def test_configuration_error_no_username() -> None:
     with pytest.raises(ConfigurationError):
         OpenSubtitlesComProvider(password=PASSWORD)
@@ -259,6 +274,242 @@ def test_configuration_error_no_username() -> None:
 def test_configuration_error_no_password() -> None:
     with pytest.raises(ConfigurationError):
         OpenSubtitlesComProvider(username=USERNAME)
+
+
+def test_session_not_initialized() -> None:
+    provider = OpenSubtitlesComProvider(USERNAME, PASSWORD)
+    with pytest.raises(NotInitializedProviderError):
+        provider.session  # noqa: B018
+
+
+@pytest.mark.asyncio
+async def test_given_session_is_not_closed_by_the_provider() -> None:
+    async with aiohttp.ClientSession() as session:
+        async with OpenSubtitlesComProvider(USERNAME, PASSWORD, session=session) as provider:
+            assert provider.session is session
+        assert not session.closed
+
+
+@pytest.mark.asyncio
+async def test_check_token_expired() -> None:
+    provider = OpenSubtitlesComProvider(USERNAME, PASSWORD)
+    provider.token = 'expired-token'
+    provider.token_expires_at = datetime.now(UTC) - timedelta(seconds=1)
+
+    # the cache is empty in the tests
+    assert not await provider.check_token()
+    assert provider.token is None
+    assert provider.token_expires_at is None
+
+
+@pytest.mark.asyncio
+async def test_check_token_from_cache() -> None:
+    provider = OpenSubtitlesComProvider(USERNAME, PASSWORD)
+
+    with patch.object(region, 'get', return_value='cached-token') as get:
+        assert await provider.check_token()
+    get.assert_called_once()
+    assert provider.token == 'cached-token'
+    assert provider.token_expires_at is not None
+    assert provider.token_expires_at > datetime.now(UTC)
+
+    # the token is now valid, the cache is not needed anymore
+    with patch.object(region, 'get') as get:
+        assert await provider.check_token()
+    get.assert_not_called()
+
+
+@pytest.mark.asyncio
+async def test_reset_token() -> None:
+    provider = OpenSubtitlesComProvider(USERNAME, PASSWORD)
+    provider.token = 'stale-token'
+    provider.token_expires_at = datetime.now(UTC) + timedelta(hours=1)
+
+    with patch.object(region, 'delete') as delete:
+        await provider.reset_token()
+
+    delete.assert_called_once_with(TOKEN_CACHE_KEY)
+    assert provider.token is None
+    assert provider.token_expires_at is None
+
+
+@pytest.mark.asyncio
+async def test_ensure_authenticated_valid_token_skips_login() -> None:
+    async with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
+        provider.token = 'valid-token'
+        provider.token_expires_at = datetime.now(UTC) + timedelta(hours=1)
+
+        with patch.object(provider, 'login', new_callable=AsyncMock) as login:
+            await provider.ensure_authenticated()
+
+    login.assert_not_called()
+
+
+@pytest.mark.asyncio
+async def test_ensure_authenticated_logs_in() -> None:
+    async with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
+
+        async def login() -> None:
+            provider.token = 'new-token'
+            provider.token_expires_at = datetime.now(UTC) + timedelta(hours=1)
+
+        with patch.object(provider, 'login', side_effect=login) as mock_login:
+            await provider.ensure_authenticated()
+
+        mock_login.assert_awaited_once()
+        assert provider.token == 'new-token'
+
+
+@pytest.mark.asyncio
+async def test_ensure_authenticated_login_without_token() -> None:
+    """A login that does not give a token is an authentication error."""
+    async with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
+        with (
+            patch.object(provider, 'login', new_callable=AsyncMock) as login,
+            pytest.raises(AuthenticationError),
+        ):
+            await provider.ensure_authenticated()
+
+    login.assert_awaited_once()
+
+
+@pytest.mark.asyncio
+async def test_request_unauthorized_logs_in_again_and_retries() -> None:
+    """A stale token gives a '401 Unauthorized': the token is dropped and the request is sent again."""
+    urls: list[str] = []
+
+    @contextlib.asynccontextmanager
+    async def _request(method: str, url: str, **kwargs: Any) -> AsyncGenerator[MagicMock]:
+        urls.append(url)
+        attrs: dict[str, Any] = {'status': 200, 'reason': None}
+        if len(urls) == 1:
+            attrs = {'status': 401, 'reason': 'Unauthorized'}
+        response = MagicMock(spec=aiohttp.ClientResponse, **attrs)
+        response.json.return_value = {'data': 'ok'}
+        yield response
+
+    async with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
+        with (
+            patch.object(provider._session, 'request', side_effect=_request),
+            patch.object(provider, 'ensure_authenticated', new_callable=AsyncMock) as ensure_authenticated,
+            patch.object(provider, 'reset_token', new_callable=AsyncMock) as reset_token,
+        ):
+            result = await provider._request('GET', 'subtitles', authenticated=True)
+
+    assert result == {'data': 'ok'}
+    assert len(urls) == 2
+    assert ensure_authenticated.await_count == 2
+    reset_token.assert_awaited_once()
+
+
+@pytest.mark.asyncio
+async def test_request_too_many_retries() -> None:
+    """The requests are rate limited at each attempt, until the retries are exhausted."""
+    urls: list[str] = []
+
+    @contextlib.asynccontextmanager
+    async def _request(method: str, url: str, **kwargs: Any) -> AsyncGenerator[MagicMock]:
+        urls.append(url)
+        yield MagicMock(
+            spec=aiohttp.ClientResponse,
+            status=429,
+            reason='Too Many Requests',
+            headers={'Retry-After': '0'},
+        )
+
+    async with OpenSubtitlesComProvider(USERNAME, PASSWORD, max_retries=2) as provider:
+        with (
+            patch.object(provider._session, 'request', side_effect=_request),
+            pytest.raises(ServiceUnavailable),
+        ):
+            await provider._request('GET', 'subtitles')
+
+    assert len(urls) == 2
+
+
+@pytest.mark.asyncio
+async def test_search_failing_page_with_requests_in_flight() -> None:
+    """Pages in flight are kept and the pages still waiting are not requested after a failure."""
+    requested: list[int] = []
+
+    @contextlib.asynccontextmanager
+    async def _request(method: str, path: str, params: dict[str, Any], **kwargs: Any) -> AsyncGenerator[MagicMock]:
+        page = int(params['page'])
+        requested.append(page)
+        kwargs = {'status': 200, 'reason': None}
+        if page == 3:
+            kwargs = {'status': 600, 'reason': 'Connection dropped'}
+        # page 3 fails while the other pages are still in flight
+        await asyncio.sleep(0.01 if page == 3 else 0.05)
+        response = MagicMock(spec=aiohttp.ClientResponse, **kwargs)
+        response.json.return_value = {'data': [{'id': page}], 'total_pages': 100}
+        yield response
+
+    async with OpenSubtitlesComProvider(USERNAME, PASSWORD, max_concurrent_requests=5) as provider:
+        with patch.object(provider._session, 'request', side_effect=_request):
+            results = list(await provider._search(query='Man of Steel'))
+
+    # the pages in flight when page 3 failed are not cancelled, the following ones are not requested
+    assert sorted(requested) == [1, 2, 3, 4, 5, 6]
+    assert sorted(result['id'] for result in results) == [1, 2, 4, 5, 6]
+
+
+@pytest.mark.asyncio
+async def test_search_keeps_results_when_a_page_fails() -> None:
+    """Pagination stops at the failing page and keeps the results already found."""
+
+    @contextlib.asynccontextmanager
+    async def _request(method: str, path: str, params: dict[str, Any], **kwargs: Any) -> AsyncGenerator[MagicMock]:
+        page = int(params['page'])
+        kwargs = {'status': 200, 'reason': None}
+        if page >= 3:
+            kwargs = {'status': 600, 'reason': 'Connection dropped'}
+        response = MagicMock(spec=aiohttp.ClientResponse, **kwargs)
+        response.json.return_value = {'data': [{'id': page}], 'total_pages': 100}
+        yield response
+
+    async with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
+        with patch.object(provider._session, 'request', side_effect=_request):
+            results = list(await provider._search(query='Man of Steel'))
+
+    assert [result['id'] for result in results] == [1, 2]
+
+
+@pytest.mark.asyncio
+async def test_search_cancelling_error() -> None:
+
+    @contextlib.asynccontextmanager
+    async def _request(method: str, path: str, params: dict[str, Any], **kwargs: Any) -> AsyncGenerator[MagicMock]:
+        page = int(params['page'])
+        kwargs = {'status': 200, 'reason': None}
+        if page == 3:
+            raise asyncio.CancelledError
+        response = MagicMock(spec=aiohttp.ClientResponse, **kwargs)
+        response.json.return_value = {'data': [{'id': page}], 'total_pages': 100}
+        yield response
+
+    async with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
+        with patch.object(provider._session, 'request', side_effect=_request), pytest.raises(asyncio.CancelledError):
+            list(await provider._search(query='Man of Steel'))
+
+
+@pytest.mark.asyncio
+async def test_search_discarding_error() -> None:
+    """An error that discards the provider is raised, even in the middle of the pagination."""
+
+    @contextlib.asynccontextmanager
+    async def _request(method: str, path: str, params: dict[str, Any], **kwargs: Any) -> AsyncGenerator[MagicMock]:
+        page = int(params['page'])
+        kwargs = {'status': 200, 'reason': None}
+        if page >= 3:
+            kwargs = {'status': 503, 'reason': 'Bad request'}
+        response = MagicMock(spec=aiohttp.ClientResponse, **kwargs)
+        response.json.return_value = {'data': [{'id': page}], 'total_pages': 100}
+        yield response
+
+    async with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
+        with patch.object(provider._session, 'request', side_effect=_request), pytest.raises(DiscardingError):
+            list(await provider._search(query='Man of Steel'))
 
 
 @pytest.mark.integration
@@ -531,88 +782,3 @@ async def test_query_max_result_pages(movies: dict[str, Movie]) -> None:
     async with OpenSubtitlesComProvider(USERNAME, PASSWORD, max_result_pages=1) as provider:
         subtitles = await provider.query(languages, query=query)
     assert len(subtitles) < len(all_subtitles)
-
-
-@pytest.mark.asyncio
-async def test_search_failing_page_with_requests_in_flight() -> None:
-    """Pages in flight are kept and the pages still waiting are not requested after a failure."""
-    requested: list[int] = []
-
-    @contextlib.asynccontextmanager
-    async def _request(method: str, path: str, params: dict[str, Any], **kwargs: Any) -> AsyncGenerator[MagicMock]:
-        page = int(params['page'])
-        requested.append(page)
-        kwargs = {'status': 200, 'reason': None}
-        if page == 3:
-            kwargs = {'status': 600, 'reason': 'Connection dropped'}
-        # page 3 fails while the other pages are still in flight
-        await asyncio.sleep(0.01 if page == 3 else 0.05)
-        response = MagicMock(spec=aiohttp.ClientResponse, **kwargs)
-        response.json.return_value = {'data': [{'id': page}], 'total_pages': 100}
-        yield response
-
-    async with OpenSubtitlesComProvider(USERNAME, PASSWORD, max_concurrent_requests=5) as provider:
-        with patch.object(provider._session, 'request', side_effect=_request):
-            results = list(await provider._search(query='Man of Steel'))
-
-    # the pages in flight when page 3 failed are not cancelled, the following ones are not requested
-    assert sorted(requested) == [1, 2, 3, 4, 5, 6]
-    assert sorted(result['id'] for result in results) == [1, 2, 4, 5, 6]
-
-
-@pytest.mark.asyncio
-async def test_search_keeps_results_when_a_page_fails() -> None:
-    """Pagination stops at the failing page and keeps the results already found."""
-
-    @contextlib.asynccontextmanager
-    async def _request(method: str, path: str, params: dict[str, Any], **kwargs: Any) -> AsyncGenerator[MagicMock]:
-        page = int(params['page'])
-        kwargs = {'status': 200, 'reason': None}
-        if page >= 3:
-            kwargs = {'status': 600, 'reason': 'Connection dropped'}
-        response = MagicMock(spec=aiohttp.ClientResponse, **kwargs)
-        response.json.return_value = {'data': [{'id': page}], 'total_pages': 100}
-        yield response
-
-    async with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
-        with patch.object(provider._session, 'request', side_effect=_request):
-            results = list(await provider._search(query='Man of Steel'))
-
-    assert [result['id'] for result in results] == [1, 2]
-
-
-@pytest.mark.asyncio
-async def test_search_cancelling_error() -> None:
-
-    @contextlib.asynccontextmanager
-    async def _request(method: str, path: str, params: dict[str, Any], **kwargs: Any) -> AsyncGenerator[MagicMock]:
-        page = int(params['page'])
-        kwargs = {'status': 200, 'reason': None}
-        if page == 3:
-            raise asyncio.CancelledError
-        response = MagicMock(spec=aiohttp.ClientResponse, **kwargs)
-        response.json.return_value = {'data': [{'id': page}], 'total_pages': 100}
-        yield response
-
-    async with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
-        with patch.object(provider._session, 'request', side_effect=_request), pytest.raises(asyncio.CancelledError):
-            list(await provider._search(query='Man of Steel'))
-
-
-@pytest.mark.asyncio
-async def test_search_discarding_error() -> None:
-    """An error that discards the provider is raised, even in the middle of the pagination."""
-
-    @contextlib.asynccontextmanager
-    async def _request(method: str, path: str, params: dict[str, Any], **kwargs: Any) -> AsyncGenerator[MagicMock]:
-        page = int(params['page'])
-        kwargs = {'status': 200, 'reason': None}
-        if page >= 3:
-            kwargs = {'status': 503, 'reason': 'Bad request'}
-        response = MagicMock(spec=aiohttp.ClientResponse, **kwargs)
-        response.json.return_value = {'data': [{'id': page}], 'total_pages': 100}
-        yield response
-
-    async with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
-        with patch.object(provider._session, 'request', side_effect=_request), pytest.raises(DiscardingError):
-            list(await provider._search(query='Man of Steel'))

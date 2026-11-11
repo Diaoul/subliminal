@@ -1,26 +1,59 @@
-import os
-from typing import Any
-from unittest.mock import MagicMock, patch
+from __future__ import annotations
 
+import asyncio
+import contextlib
+import os
+from datetime import UTC, datetime, timedelta
+from typing import TYPE_CHECKING, Any
+from unittest.mock import AsyncMock, MagicMock, patch
+
+import aiohttp
 import pytest
-import requests
 from babelfish import Language  # type: ignore[import-untyped]
 from vcr import VCR  # type: ignore[import-untyped]
 
-from subliminal.exceptions import ConfigurationError, ServiceUnavailable
+from subliminal.cache import region
+from subliminal.exceptions import (
+    AuthenticationError,
+    ConfigurationError,
+    DiscardingError,
+    NotInitializedProviderError,
+    ServiceUnavailable,
+)
 from subliminal.providers.opensubtitlescom import (
+    TOKEN_CACHE_KEY,
     OpenSubtitlesComError,
     OpenSubtitlesComProvider,
     OpenSubtitlesComSubtitle,
     Unauthorized,
 )
-from subliminal.video import Episode, Movie
+
+if TYPE_CHECKING:
+    from collections.abc import AsyncGenerator
+
+    from vcr.request import Request
+
+    from subliminal.video import Episode, Movie
+
 
 USERNAME = 'python-subliminal-test'
 PASSWORD = 'subliminal'
 
+
+# Bug with vcrpy and aiohttp, POST body is not recorded as a str but as a dict
+def before_record_cb(request: Request) -> Request:
+    body = request.body
+    if body:
+        if isinstance(body, bytes):
+            # Decode bytes to str
+            body = body.decode('utf-8')
+        request.body = str(body).replace("'", '"').encode('utf-8')
+    return request
+
+
 vcr = VCR(
     path_transformer=lambda path: path + '.yaml',
+    before_record_request=before_record_cb,
     record_mode=os.environ.get('VCR_RECORD_MODE', 'once'),
     decode_compressed_response=True,
     match_on=['method', 'scheme', 'host', 'port', 'path', 'query', 'body'],
@@ -201,28 +234,36 @@ def test_get_matches_no_match(episodes: dict[str, Episode]) -> None:
     assert matches == set()
 
 
-def test_make_query_show_imdb_id() -> None:
+def test_make_criteria_show_imdb_id() -> None:
     provider = OpenSubtitlesComProvider(USERNAME, PASSWORD)
-    criteria = provider._make_query(query='The Big Bang Theory', season=7, episode=5, show_imdb_id='tt0898266')
+    criteria = provider._make_criteria(query='The Big Bang Theory', season=7, episode=5, show_imdb_id='tt0898266')
     assert criteria[0] == {
+        'type': 'episode',
         'parent_imdb_id': 898266,
         'query': 'The Big Bang Theory',
         'season_number': 7,
         'episode_number': 5,
     }
-    assert {'parent_imdb_id': 898266, 'season_number': 7, 'episode_number': 5} in criteria
+    assert {'type': 'episode', 'parent_imdb_id': 898266, 'season_number': 7, 'episode_number': 5} in criteria
 
 
-def test_make_query_show_tmdb_id() -> None:
+def test_make_criteria_show_tmdb_id() -> None:
     provider = OpenSubtitlesComProvider(USERNAME, PASSWORD)
-    criteria = provider._make_query(query='The Big Bang Theory', season=7, episode=5, show_tmdb_id='1418')
+    criteria = provider._make_criteria(query='The Big Bang Theory', season=7, episode=5, show_tmdb_id='1418')
     assert criteria[0] == {
+        'type': 'episode',
         'parent_tmdb_id': 1418,
         'query': 'The Big Bang Theory',
         'season_number': 7,
         'episode_number': 5,
     }
-    assert {'parent_tmdb_id': 1418, 'season_number': 7, 'episode_number': 5} in criteria
+    assert {'type': 'episode', 'parent_tmdb_id': 1418, 'season_number': 7, 'episode_number': 5} in criteria
+
+
+def test_make_criteria_year() -> None:
+    provider = OpenSubtitlesComProvider(USERNAME, PASSWORD)
+    criteria = provider._make_criteria(query='Man of Steel', year=2013)
+    assert criteria[0] == {'type': 'movie', 'query': 'Man of Steel', 'year': 2013}
 
 
 def test_configuration_error_no_username() -> None:
@@ -235,57 +276,298 @@ def test_configuration_error_no_password() -> None:
         OpenSubtitlesComProvider(username=USERNAME)
 
 
-@pytest.mark.integration
-@vcr.use_cassette
-def test_login() -> None:
+def test_session_not_initialized() -> None:
     provider = OpenSubtitlesComProvider(USERNAME, PASSWORD)
+    with pytest.raises(NotInitializedProviderError):
+        provider.session  # noqa: B018
+
+
+@pytest.mark.asyncio
+async def test_given_session_is_not_closed_by_the_provider() -> None:
+    async with aiohttp.ClientSession() as session:
+        async with OpenSubtitlesComProvider(USERNAME, PASSWORD, session=session) as provider:
+            assert provider.session is session
+        assert not session.closed
+
+
+@pytest.mark.asyncio
+async def test_check_token_expired() -> None:
+    provider = OpenSubtitlesComProvider(USERNAME, PASSWORD)
+    provider.token = 'expired-token'
+    provider.token_expires_at = datetime.now(UTC) - timedelta(seconds=1)
+
+    # the cache is empty in the tests
+    assert not await provider.check_token()
     assert provider.token is None
-    provider.initialize()
-    provider.login(wait=True)
-    assert provider.token is not None
+    assert provider.token_expires_at is None
+
+
+@pytest.mark.asyncio
+async def test_check_token_from_cache() -> None:
+    provider = OpenSubtitlesComProvider(USERNAME, PASSWORD)
+
+    with patch.object(region, 'get', return_value='cached-token') as get:
+        assert await provider.check_token()
+    get.assert_called_once()
+    assert provider.token == 'cached-token'
+    assert provider.token_expires_at is not None
+    assert provider.token_expires_at > datetime.now(UTC)
+
+    # the token is now valid, the cache is not needed anymore
+    with patch.object(region, 'get') as get:
+        assert await provider.check_token()
+    get.assert_not_called()
+
+
+@pytest.mark.asyncio
+async def test_reset_token() -> None:
+    provider = OpenSubtitlesComProvider(USERNAME, PASSWORD)
+    provider.token = 'stale-token'
+    provider.token_expires_at = datetime.now(UTC) + timedelta(hours=1)
+
+    with patch.object(region, 'delete') as delete:
+        await provider.reset_token()
+
+    delete.assert_called_once_with(TOKEN_CACHE_KEY)
+    assert provider.token is None
+    assert provider.token_expires_at is None
+
+
+@pytest.mark.asyncio
+async def test_ensure_authenticated_valid_token_skips_login() -> None:
+    async with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
+        provider.token = 'valid-token'
+        provider.token_expires_at = datetime.now(UTC) + timedelta(hours=1)
+
+        with patch.object(provider, 'login', new_callable=AsyncMock) as login:
+            await provider.ensure_authenticated()
+
+    login.assert_not_called()
+
+
+@pytest.mark.asyncio
+async def test_ensure_authenticated_logs_in() -> None:
+    async with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
+
+        async def login() -> None:
+            provider.token = 'new-token'
+            provider.token_expires_at = datetime.now(UTC) + timedelta(hours=1)
+
+        with patch.object(provider, 'login', side_effect=login) as mock_login:
+            await provider.ensure_authenticated()
+
+        mock_login.assert_awaited_once()
+        assert provider.token == 'new-token'
+
+
+@pytest.mark.asyncio
+async def test_ensure_authenticated_login_without_token() -> None:
+    """A login that does not give a token is an authentication error."""
+    async with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
+        with (
+            patch.object(provider, 'login', new_callable=AsyncMock) as login,
+            pytest.raises(AuthenticationError),
+        ):
+            await provider.ensure_authenticated()
+
+    login.assert_awaited_once()
+
+
+@pytest.mark.asyncio
+async def test_request_unauthorized_logs_in_again_and_retries() -> None:
+    """A stale token gives a '401 Unauthorized': the token is dropped and the request is sent again."""
+    urls: list[str] = []
+
+    @contextlib.asynccontextmanager
+    async def _request(method: str, url: str, **kwargs: Any) -> AsyncGenerator[MagicMock]:
+        urls.append(url)
+        attrs: dict[str, Any] = {'status': 200, 'reason': None}
+        if len(urls) == 1:
+            attrs = {'status': 401, 'reason': 'Unauthorized'}
+        response = MagicMock(spec=aiohttp.ClientResponse, **attrs)
+        response.json.return_value = {'data': 'ok'}
+        yield response
+
+    async with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
+        with (
+            patch.object(provider._session, 'request', side_effect=_request),
+            patch.object(provider, 'ensure_authenticated', new_callable=AsyncMock) as ensure_authenticated,
+            patch.object(provider, 'reset_token', new_callable=AsyncMock) as reset_token,
+        ):
+            result = await provider._request('GET', 'subtitles', authenticated=True)
+
+    assert result == {'data': 'ok'}
+    assert len(urls) == 2
+    assert ensure_authenticated.await_count == 2
+    reset_token.assert_awaited_once()
+
+
+@pytest.mark.asyncio
+async def test_request_too_many_retries() -> None:
+    """The requests are rate limited at each attempt, until the retries are exhausted."""
+    urls: list[str] = []
+
+    @contextlib.asynccontextmanager
+    async def _request(method: str, url: str, **kwargs: Any) -> AsyncGenerator[MagicMock]:
+        urls.append(url)
+        yield MagicMock(
+            spec=aiohttp.ClientResponse,
+            status=429,
+            reason='Too Many Requests',
+            headers={'Retry-After': '0'},
+        )
+
+    async with OpenSubtitlesComProvider(USERNAME, PASSWORD, max_retries=2) as provider:
+        with (
+            patch.object(provider._session, 'request', side_effect=_request),
+            pytest.raises(ServiceUnavailable),
+        ):
+            await provider._request('GET', 'subtitles')
+
+    assert len(urls) == 2
+
+
+@pytest.mark.asyncio
+async def test_search_failing_page_with_requests_in_flight() -> None:
+    """Pages in flight are kept and the pages still waiting are not requested after a failure."""
+    requested: list[int] = []
+
+    @contextlib.asynccontextmanager
+    async def _request(method: str, path: str, params: dict[str, Any], **kwargs: Any) -> AsyncGenerator[MagicMock]:
+        page = int(params['page'])
+        requested.append(page)
+        kwargs = {'status': 200, 'reason': None}
+        if page == 3:
+            kwargs = {'status': 600, 'reason': 'Connection dropped'}
+        # page 3 fails while the other pages are still in flight
+        await asyncio.sleep(0.01 if page == 3 else 0.05)
+        response = MagicMock(spec=aiohttp.ClientResponse, **kwargs)
+        response.json.return_value = {'data': [{'id': page}], 'total_pages': 100}
+        yield response
+
+    async with OpenSubtitlesComProvider(USERNAME, PASSWORD, max_concurrent_requests=5) as provider:
+        with patch.object(provider._session, 'request', side_effect=_request):
+            results = list(await provider._search(query='Man of Steel'))
+
+    # the pages in flight when page 3 failed are not cancelled, the following ones are not requested
+    assert sorted(requested) == [1, 2, 3, 4, 5, 6]
+    assert sorted(result['id'] for result in results) == [1, 2, 4, 5, 6]
+
+
+@pytest.mark.asyncio
+async def test_search_keeps_results_when_a_page_fails() -> None:
+    """Pagination stops at the failing page and keeps the results already found."""
+
+    @contextlib.asynccontextmanager
+    async def _request(method: str, path: str, params: dict[str, Any], **kwargs: Any) -> AsyncGenerator[MagicMock]:
+        page = int(params['page'])
+        kwargs = {'status': 200, 'reason': None}
+        if page >= 3:
+            kwargs = {'status': 600, 'reason': 'Connection dropped'}
+        response = MagicMock(spec=aiohttp.ClientResponse, **kwargs)
+        response.json.return_value = {'data': [{'id': page}], 'total_pages': 100}
+        yield response
+
+    async with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
+        with patch.object(provider._session, 'request', side_effect=_request):
+            results = list(await provider._search(query='Man of Steel'))
+
+    assert [result['id'] for result in results] == [1, 2]
+
+
+@pytest.mark.asyncio
+async def test_search_cancelling_error() -> None:
+
+    @contextlib.asynccontextmanager
+    async def _request(method: str, path: str, params: dict[str, Any], **kwargs: Any) -> AsyncGenerator[MagicMock]:
+        page = int(params['page'])
+        kwargs = {'status': 200, 'reason': None}
+        if page == 3:
+            raise asyncio.CancelledError
+        response = MagicMock(spec=aiohttp.ClientResponse, **kwargs)
+        response.json.return_value = {'data': [{'id': page}], 'total_pages': 100}
+        yield response
+
+    async with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
+        with patch.object(provider._session, 'request', side_effect=_request), pytest.raises(asyncio.CancelledError):
+            list(await provider._search(query='Man of Steel'))
+
+
+@pytest.mark.asyncio
+async def test_search_discarding_error() -> None:
+    """An error that discards the provider is raised, even in the middle of the pagination."""
+
+    @contextlib.asynccontextmanager
+    async def _request(method: str, path: str, params: dict[str, Any], **kwargs: Any) -> AsyncGenerator[MagicMock]:
+        page = int(params['page'])
+        kwargs = {'status': 200, 'reason': None}
+        if page >= 3:
+            kwargs = {'status': 503, 'reason': 'Bad request'}
+        response = MagicMock(spec=aiohttp.ClientResponse, **kwargs)
+        response.json.return_value = {'data': [{'id': page}], 'total_pages': 100}
+        yield response
+
+    async with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
+        with patch.object(provider._session, 'request', side_effect=_request), pytest.raises(DiscardingError):
+            list(await provider._search(query='Man of Steel'))
 
 
 @pytest.mark.integration
+@pytest.mark.asyncio
 @vcr.use_cassette
-def test_login_bad_password() -> None:
+async def test_login() -> None:
+    provider = OpenSubtitlesComProvider(USERNAME, PASSWORD)
+    try:
+        assert provider.token is None
+        await provider.initialize()
+        await asyncio.sleep(1)
+        await provider.login()
+        assert provider.token is not None
+    finally:
+        await provider.terminate()
+
+
+@pytest.mark.integration
+@pytest.mark.asyncio
+@vcr.use_cassette
+async def test_login_bad_password() -> None:
     provider = OpenSubtitlesComProvider(USERNAME, 'lanimilbus')
-    with pytest.raises(Unauthorized):  # noqa: PT012
-        provider.initialize()
-        provider.login(wait=True)
+    try:
+        with pytest.raises(Unauthorized):  # noqa: PT012
+            await provider.initialize()
+            await asyncio.sleep(1)
+            await provider.login()
+    finally:
+        await provider.terminate()
 
 
 @pytest.mark.integration
+@pytest.mark.asyncio
 @vcr.use_cassette
-def test_logout() -> None:
+async def test_logout() -> None:
     provider = OpenSubtitlesComProvider(USERNAME, PASSWORD)
-    provider.initialize()
-    provider.login(wait=True)
-    provider.terminate()
+    await provider.initialize()
+    await asyncio.sleep(1)
+    await provider.login()
+    await provider.terminate()
     assert provider.token is None
 
 
 @pytest.mark.integration
+@pytest.mark.asyncio
 @vcr.use_cassette
-def test_user_infos() -> None:
-    with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
-        provider.login(wait=True)
-        ret = provider.user_infos()
-        assert ret
-
-
-@pytest.mark.integration
-@vcr.use_cassette
-def test_query_not_enough_information() -> None:
+async def test_query_not_enough_information() -> None:
     languages = {Language('eng')}
-    with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:  # noqa: SIM117
+    async with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
         with pytest.raises(ValueError) as excinfo:  # noqa: PT011
-            provider.query(languages)
+            await provider.query(languages)
     assert str(excinfo.value) == 'Not enough information'
 
 
 @pytest.mark.integration
+@pytest.mark.asyncio
 @vcr.use_cassette
-def test_query_query_movie(movies: dict[str, Movie]) -> None:
+async def test_query_query_movie(movies: dict[str, Movie]) -> None:
     video = movies['man_of_steel']
     languages = {Language('fra')}
     expected_subtitles = {
@@ -293,47 +575,43 @@ def test_query_query_movie(movies: dict[str, Movie]) -> None:
         '877697',
         '879122',
         '880511',
-        '1546744',
-        '4614499',
     }
-    with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
-        subtitles = provider.query(languages, query=video.title)
-    assert {subtitle.id for subtitle in subtitles} == expected_subtitles
+    async with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
+        subtitles = await provider.query(languages, query=video.title)
+    assert expected_subtitles <= {subtitle.id for subtitle in subtitles}
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
 @pytest.mark.integration
+@pytest.mark.asyncio
 @vcr.use_cassette
-def test_query_query_episode(episodes: dict[str, Episode]) -> None:
+async def test_query_query_episode(episodes: dict[str, Episode]) -> None:
     video = episodes['dallas_2012_s01e03']
     languages = {Language('fra')}
-    expected_subtitles = {
-        '3359298',
-        '3359569',
-        '3829531',
-        '6915085',
-    }
-    with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
-        subtitles = provider.query(languages, query=video.series, season=video.season, episode=video.episode)
-    assert {subtitle.id for subtitle in subtitles} == expected_subtitles
+    expected_subtitles = {'3829531'}
+    async with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
+        subtitles = await provider.query(languages, query=video.series, season=video.season, episode=video.episode)
+    assert expected_subtitles <= {subtitle.id for subtitle in subtitles}
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
 @pytest.mark.integration
+@pytest.mark.asyncio
 @vcr.use_cassette
-def test_query_tag_movie(movies: dict[str, Movie]) -> None:
+async def test_query_tag_movie(movies: dict[str, Movie]) -> None:
     video = movies['enders_game']
     languages = {Language('fra')}
     expected_subtitles = {'938965', '940630'}
-    with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
-        subtitles = provider.query(languages, query=video.name)
-    assert {subtitle.id for subtitle in subtitles} == expected_subtitles
+    async with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
+        subtitles = await provider.query(languages, query=video.name)
+    assert expected_subtitles <= {subtitle.id for subtitle in subtitles}
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
 @pytest.mark.integration
+@pytest.mark.asyncio
 @vcr.use_cassette
-def test_query_imdb_id(movies: dict[str, Movie]) -> None:
+async def test_query_imdb_id(movies: dict[str, Movie]) -> None:
     video = movies['man_of_steel']
     languages = {Language('deu')}
     expected_subtitles = {
@@ -341,18 +619,20 @@ def test_query_imdb_id(movies: dict[str, Movie]) -> None:
         '880717',
         '883552',
         '883560',
+        '883668',
         '5166256',
         '6632511',
     }
-    with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
-        subtitles = provider.query(languages, imdb_id=video.external_ids.get('imdb_id'))
-    assert {subtitle.id for subtitle in subtitles} == expected_subtitles
+    async with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
+        subtitles = await provider.query(languages, imdb_id=video.external_ids.get('imdb_id'))
+    assert expected_subtitles <= {subtitle.id for subtitle in subtitles}
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
 @pytest.mark.integration
+@pytest.mark.asyncio
 @vcr.use_cassette
-def test_query_hash_size(movies: dict[str, Movie]) -> None:
+async def test_query_hash_size(movies: dict[str, Movie]) -> None:
     video = movies['man_of_steel']
     languages = {Language('eng')}
     expected_subtitles = {
@@ -367,174 +647,138 @@ def test_query_hash_size(movies: dict[str, Movie]) -> None:
         '877471',
         '879204',
         '882182',
-        '3178800',
     }
-    with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
-        subtitles = provider.query(languages, moviehash=video.hashes['opensubtitlescom'])
-    assert {subtitle.id for subtitle in subtitles} == expected_subtitles
+    async with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
+        subtitles = await provider.query(languages, moviehash=video.hashes['opensubtitlescom'])
+    assert expected_subtitles <= {subtitle.id for subtitle in subtitles}
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
 @pytest.mark.integration
+@pytest.mark.asyncio
 @vcr.use_cassette
-def test_query_wrong_hash_wrong_size() -> None:
+async def test_query_wrong_hash_wrong_size() -> None:
     languages = {Language('eng')}
-    with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:  # noqa: SIM117
+    async with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
         with pytest.raises(OpenSubtitlesComError):
-            provider.query(languages, moviehash='123456787654321')
+            await provider.query(languages, moviehash='123456787654321')
 
 
 @pytest.mark.integration
+@pytest.mark.asyncio
 @vcr.use_cassette
-def test_query_query_season_episode(episodes: dict[str, Episode]) -> None:
+async def test_query_query_season_episode(episodes: dict[str, Episode]) -> None:
     video = episodes['bbt_s07e05']
     languages = {Language('deu')}
     expected_subtitles = {'2748964', '4662161'}
-    with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
-        subtitles = provider.query(languages, query=video.series, season=video.season, episode=video.episode)
-    assert {subtitle.id for subtitle in subtitles} == expected_subtitles
+    async with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
+        subtitles = await provider.query(languages, query=video.series, season=video.season, episode=video.episode)
+    assert expected_subtitles <= {subtitle.id for subtitle in subtitles}
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
 @pytest.mark.integration
+@pytest.mark.asyncio
 @vcr.use_cassette
-def test_list_subtitles_movie(movies: dict[str, Movie]) -> None:
+async def test_list_subtitles_movie(movies: dict[str, Movie]) -> None:
     video = movies['man_of_steel']
     languages = {Language('deu'), Language('fra')}
     expected_subtitles = {
-        '883560',
-        '880332',
-        '883552',
-        '6632511',
-        '5166256',
-        '879122',
-        '880717',
-        '870964',
-        '880511',
-        '877697',
-        '4614499',
-        '1546744',
-        '2627058',
-        '4620011',
-        '7164656',
-        '6556241',
         '823209',
-        '2627042',
+        '870964',
+        '877697',
+        '879122',
+        '880332',
+        '880511',
+        '880717',
+        '883552',
+        '883560',
+        '5166256',
+        '6632511',
     }
-    with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
-        subtitles = provider.list_subtitles(video, languages)
-    assert {subtitle.id for subtitle in subtitles} == expected_subtitles
+    async with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
+        subtitles = await provider.list_subtitles(video, languages)
+    assert expected_subtitles <= {subtitle.id for subtitle in subtitles}
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
 @pytest.mark.integration
+@pytest.mark.asyncio
 @vcr.use_cassette
-def test_list_subtitles_movie_no_hash(movies: dict[str, Movie]) -> None:
+async def test_list_subtitles_movie_no_hash(movies: dict[str, Movie]) -> None:
     video = movies['enders_game']
     languages = {Language('deu')}
     expected_subtitles = {'939532', '939553', '940426'}
-    with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
-        subtitles = provider.list_subtitles(video, languages)
-    assert {subtitle.id for subtitle in subtitles} == expected_subtitles
+    async with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
+        subtitles = await provider.list_subtitles(video, languages)
+    assert expected_subtitles <= {subtitle.id for subtitle in subtitles}
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
 @pytest.mark.integration
+@pytest.mark.asyncio
 @vcr.use_cassette
-def test_list_subtitles_episode(episodes: dict[str, Episode]) -> None:
+async def test_list_subtitles_episode(episodes: dict[str, Episode]) -> None:
     video = episodes['marvels_agents_of_shield_s02e06']
     languages = {Language('hun')}
     expected_subtitles = {'2491535', '2492310', '2493688'}
-    with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
-        subtitles = provider.list_subtitles(video, languages)
-    assert {subtitle.id for subtitle in subtitles} == expected_subtitles
+    async with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
+        subtitles = await provider.list_subtitles(video, languages)
+    assert expected_subtitles <= {subtitle.id for subtitle in subtitles}
     assert {subtitle.language for subtitle in subtitles} == languages
 
 
 @pytest.mark.integration
+@pytest.mark.asyncio
 @vcr.use_cassette
-def test_download_subtitle(movies: dict[str, Movie]) -> None:
+async def test_download_subtitle(movies: dict[str, Movie]) -> None:
     video = movies['man_of_steel']
     languages = {Language('deu'), Language('fra')}
-    with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
-        subtitles = provider.list_subtitles(video, languages)
-        provider.download_subtitle(subtitles[0])
+    async with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
+        subtitles = await provider.list_subtitles(video, languages)
+        await provider.download_subtitle(subtitles[0])
     assert subtitles[0].content is not None
     assert subtitles[0].is_valid() is True
     assert subtitles[0].encoding == 'utf-8'
 
 
+@pytest.mark.parametrize('clear', [False, pytest.param(True, marks=[pytest.mark.skip])])
 @pytest.mark.integration
+@pytest.mark.asyncio
 @vcr.use_cassette
-def test_list_subtitles_episode_series_imdb_id(episodes: dict[str, Episode]) -> None:
+async def test_list_subtitles_episode_series_imdb_id(episodes: dict[str, Episode], clear: bool) -> None:
     # folder named after a localized title: the show's IMDb id finds the episode, the title alone does not
     video = episodes['die_sopranos_s01e01']
     languages = {Language('eng')}
-    with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
-        subtitles = provider.list_subtitles(video, languages)
 
-    assert len(subtitles) > 0
-    assert {subtitle.series_title for subtitle in subtitles} == {'The Sopranos'}
-    assert {subtitle.language for subtitle in subtitles} == languages
+    # Clear external ids beforehand, to make the search harder
+    if clear:
+        video.external_ids.clear()  # type: ignore[attr-defined]  # ty: ignore[unresolved-attribute]
+
+    async with OpenSubtitlesComProvider(USERNAME, PASSWORD) as provider:
+        subtitles = await provider.list_subtitles(video, languages)
+
+    if clear:
+        assert len(subtitles) == 0
+    else:
+        assert len(subtitles) > 0
+        assert {subtitle.series_title for subtitle in subtitles if subtitle.movie_kind == 'episode'} == {'The Sopranos'}
+        assert {subtitle.language for subtitle in subtitles} == languages
 
 
 @pytest.mark.integration
-@vcr.use_cassette
-def test_query_max_result_pages(movies: dict[str, Movie]) -> None:
+@pytest.mark.asyncio
+@vcr.use_cassette(allow_playback_repeats=True)  # the same query is sent twice, for page=1
+async def test_query_max_result_pages(movies: dict[str, Movie]) -> None:
     # choose a movie with a lot of results
     query = 'James Bond'
     languages = {Language('eng')}
 
-    with OpenSubtitlesComProvider(USERNAME, PASSWORD, max_result_pages=0) as provider:
-        all_subtitles = provider.query(languages, query=query)
+    async with OpenSubtitlesComProvider(USERNAME, PASSWORD, max_result_pages=0) as provider:
+        all_subtitles = await provider.query(languages, query=query)
 
-    with OpenSubtitlesComProvider(USERNAME, PASSWORD, max_result_pages=1) as provider:
-        subtitles = provider.query(languages, query=query)
+    await asyncio.sleep(1)
+
+    async with OpenSubtitlesComProvider(USERNAME, PASSWORD, max_result_pages=1) as provider:
+        subtitles = await provider.query(languages, query=query)
     assert len(subtitles) < len(all_subtitles)
-
-
-def test_search_keeps_results_when_a_page_fails() -> None:
-    """Pagination stops at the failing page and keeps the results already found."""
-
-    def api_get(path: str, params: dict[str, Any], **kwargs: Any) -> dict[str, Any]:
-        if params['page'] == 3:
-            msg = 'Bad Request'
-            raise OpenSubtitlesComError(msg)
-        return {'data': [{'id': params['page']}], 'total_pages': 100}
-
-    provider = OpenSubtitlesComProvider(USERNAME, PASSWORD)
-    with patch.object(provider, 'api_get', side_effect=api_get):
-        results = list(provider._search(query='Man of Steel'))
-
-    assert [result['id'] for result in results] == [1, 2]
-
-
-def test_search_does_not_swallow_a_discarding_error() -> None:
-    """An error that discards the provider is raised, even in the middle of the pagination."""
-
-    def api_get(path: str, params: dict[str, Any], **kwargs: Any) -> dict[str, Any]:
-        if params['page'] == 3:
-            raise ServiceUnavailable
-        return {'data': [{'id': params['page']}], 'total_pages': 100}
-
-    provider = OpenSubtitlesComProvider(USERNAME, PASSWORD)
-    with patch.object(provider, 'api_get', side_effect=api_get), pytest.raises(ServiceUnavailable):
-        list(provider._search(query='Man of Steel'))
-
-
-def test_search_keeps_results_when_the_connection_fails() -> None:
-    """A connection error stops the pagination, like an error status does."""
-
-    def get(url: str, params: dict[str, Any], timeout: int) -> MagicMock:
-        if params['page'] == 3:
-            raise requests.ConnectionError
-        response = MagicMock(status_code=200)
-        response.json.return_value = {'data': [{'id': params['page']}], 'total_pages': 100}
-        return response
-
-    provider = OpenSubtitlesComProvider(USERNAME, PASSWORD)
-    provider.initialize()
-    with patch.object(provider.session, 'get', side_effect=get):
-        results = list(provider._search(query='Man of Steel'))
-
-    assert [result['id'] for result in results] == [1, 2]

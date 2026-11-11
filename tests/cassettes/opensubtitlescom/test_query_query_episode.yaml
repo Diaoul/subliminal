@@ -5,71 +5,62 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, zstd
       Api-Key:
       - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
-      Connection:
-      - keep-alive
       Content-Type:
       - application/json
+      Host:
+      - api.opensubtitles.com
       User-Agent:
-      - Subliminal v2.2
+      - Subliminal v2.8
     method: GET
-    uri: https://api.opensubtitles.com/api/v1/subtitles?episode_number=3&languages=fr&page=1&query=dallas&season_number=1
+    uri: https://api.opensubtitles.com/api/v1/subtitles?languages=fr&page=1&query=dallas&type=episode
   response:
-    body:
-      string: ''
+    body: {}
     headers:
       Access-Control-Allow-Origin:
       - '*'
-      CF-Cache-Status:
-      - MISS
+      Access-Control-Expose-Headers:
+      - X-Auth-Token
+      Alt-Svc:
+      - h3=":443"; ma=86400
       CF-RAY:
-      - 91189ca33e535bec-LIS
+      - a577fd5119b1e3cc-LIS
       Cache-Control:
       - public, max-age=86400
       Connection:
       - keep-alive
-      Content-Length:
-      - '0'
+      Content-Type:
+      - text/html
       Date:
-      - Thu, 13 Feb 2025 23:31:25 GMT
+      - Sun, 08 Nov 2026 22:24:43 GMT
       Location:
-      - /api/v1/subtitles?episode_number=3&languages=fr&query=dallas&season_number=1
+      - /api/v1/subtitles?languages=fr&query=dallas&type=episode
       NEL:
-      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
-      RateLimit-Limit:
-      - '5'
-      RateLimit-Remaining:
-      - '4'
-      RateLimit-Reset:
-      - '1'
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=Uk4WHQNCdW9uZzTFWFxX7QztuIxDVozYSZbgJFW8k%2Bt1kWBVayMvpEw1RQr1oToy7XRuLqal1zr6IrGNKAsiZ%2BpENo8CWNAKD6LKctVxLvuitK7F7vA08Hl%2FDLzKZQI%2FA%2F5zRn0Fq4c%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=iBaOShJoS3dGD4vzeeyKtWBro99%2FHYXOZa4l%2Bl4AVHK7w38Enpr0368AyN3NaKZM9LPUXaQoczXMrP%2ByvtpCyJzzhhUjyjMXnOxaOpnd%2BWMaZ7ZJFPxd3JlJstoYEXIEhBMJcxSq49Y%3D"}]}'
       Server:
       - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
       Strict-Transport-Security:
-      - max-age=15552000; includeSubDomains; preload
-      Vary:
-      - Accept-Encoding
-      Via:
-      - kong/3.3.0
+      - max-age=31536000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      X-Canonical:
+      - '1'
       X-Content-Type-Options:
       - nosniff
-      X-Kong-Proxy-Latency:
+      X-Kong-Request-Id:
+      - 12f0714dab595010c0203f2bb2906e59
+      X-Kong-Response-Latency:
       - '0'
-      X-Kong-Upstream-Latency:
-      - '1'
-      X-RateLimit-Limit-Second:
-      - '5'
-      X-RateLimit-Remaining-Second:
-      - '4'
-      X-Varnish:
-      - '19169182837'
-      alt-svc:
-      - h3=":443"; ma=86400
-      server-timing:
-      - cfL4;desc="?proto=TCP&rtt=3192&min_rtt=3002&rtt_var=1506&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2855&recv_bytes=921&delivery_rate=640282&cwnd=241&unsent_bytes=0&cid=c9b9bcba69e79646&ts=91&x=0"
+      X-OS-Rule:
+      - canonical
+      cf-cache-status:
+      - HIT
     status:
       code: 301
       message: Moved Permanently
@@ -79,51 +70,212 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, zstd
       Api-Key:
       - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
-      Connection:
-      - keep-alive
+      Content-Type:
+      - application/json
+      Host:
+      - api.opensubtitles.com
       User-Agent:
-      - Subliminal v2.2
+      - Subliminal v2.8
     method: GET
-    uri: https://api.opensubtitles.com/api/v1/subtitles?episode_number=3&languages=fr&query=dallas&season_number=1
+    uri: https://api.opensubtitles.com/api/v1/subtitles?languages=fr&query=dallas&type=episode
   response:
     body:
-      string: "{\"total_pages\":1,\"total_count\":4,\"per_page\":50,\"page\":1,\"data\":[{\"id\":\"6915085\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"6915085\",\"language\":\"fr\",\"download_count\":44,\"new_download_count\":15,\"hearing_impaired\":false,\"hd\":true,\"fps\":0.0,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2022-07-05T13:19:24Z\",\"file_hashes\":[\"fe95ce64ea0cd00c\"],\"ai_translated\":false,\"nb_cd\":1,\"slug\":\"space-battleship-yamato-2199-2012-03-vostfr-bdrip-1080p-flac-x265-gundamguy\",\"machine_translated\":false,\"release\":\"Space
-        Battleship Yamato 2199 (2012) - 03 VOSTFR BDrip 1080p FLAC x265-GundamGuy\",\"comments\":\"Sous-titres
-        officiels \xE9diteur.\",\"legacy_subtitle_id\":9159327,\"legacy_uploader_id\":8338908,\"uploader\":{\"uploader_id\":285788,\"name\":\"sonkun02\",\"rank\":\"Platinum
-        Member\"},\"feature_details\":{\"feature_id\":1388271,\"feature_type\":\"Episode\",\"year\":2012,\"title\":\"Escape
-        from the Jupiter Sphere\",\"movie_name\":\"Star Blazers [Space Battleship
-        Yamato] 2199 - S01E03  Escape from the Jupiter Sphere\",\"imdb_id\":3626220,\"tmdb_id\":1404349,\"season_number\":1,\"episode_number\":3,\"parent_imdb_id\":2496120,\"parent_title\":\"Star
-        Blazers [Space Battleship Yamato] 2199\",\"parent_tmdb_id\":45844,\"parent_feature_id\":13449},\"url\":\"https://www.opensubtitles.com/fr/subtitles/legacy/9159327\",\"related_links\":[{\"label\":\"All
-        subtitles for Tv Show Star Blazers [Space Battleship Yamato] 2199\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/13449\",\"img_url\":\"https://s9.opensubtitles.com/features/1/7/2/1388271.jpg\"},{\"label\":\"All
-        subtitles for Episode escape from the jupiter sphere\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/1388271\"}],\"files\":[{\"file_id\":7869617,\"cd_number\":1,\"file_name\":\"Space
-        Battleship Yamato 2199 (2012) - 03 VOSTFR BDrip 1080p FLAC x265-GundamGuy\"}]}},{\"id\":\"3829531\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"3829531\",\"language\":\"fr\",\"download_count\":683,\"new_download_count\":15,\"hearing_impaired\":false,\"hd\":false,\"fps\":23.976,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2012-06-21T16:43:26Z\",\"file_hashes\":[\"847b4f45c4eda9ee\",\"3473c8003b55fd6d\",\"ec30db211134118a\"],\"ai_translated\":false,\"nb_cd\":1,\"slug\":\"dallas-2012-01x03-the-price-you-pay-x264-lol-french-c-updated-addic7ed-com\",\"machine_translated\":false,\"release\":\"Dallas
-        (2012) - 01x03 - The Price You Pay.x264-LOL.French.C.updated.Addic7ed.com\",\"comments\":\"\",\"legacy_subtitle_id\":4581134,\"legacy_uploader_id\":0,\"uploader\":{\"uploader_id\":3282,\"name\":\"os-auto\",\"rank\":\"Application
-        Developers\"},\"feature_details\":{\"feature_id\":333010,\"feature_type\":\"Episode\",\"year\":2012,\"title\":\"The
-        Price You Pay\",\"movie_name\":\"Dallas - S01E03  The Price You Pay\",\"imdb_id\":2205526,\"tmdb_id\":851353,\"season_number\":1,\"episode_number\":3,\"parent_imdb_id\":1723760,\"parent_title\":\"Dallas\",\"parent_tmdb_id\":37759,\"parent_feature_id\":12129},\"url\":\"https://www.opensubtitles.com/fr/subtitles/legacy/4581134\",\"related_links\":[{\"label\":\"All
-        subtitles for Tv Show Dallas\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/12129\",\"img_url\":\"https://s9.opensubtitles.com/features/0/1/0/333010.jpg\"},{\"label\":\"All
-        subtitles for Episode the price you pay\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/333010\"}],\"files\":[{\"file_id\":3904804,\"cd_number\":1,\"file_name\":\"Dallas
-        (2012) - 01x03 - The Price You Pay.x264-LOL.French.C.updated.Addic7ed.com\"}]}},{\"id\":\"3359569\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"3359569\",\"language\":\"fr\",\"download_count\":216,\"new_download_count\":6,\"hearing_impaired\":false,\"hd\":true,\"fps\":23.976,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2012-02-27T08:35:01Z\",\"file_hashes\":[\"9231d615ef489f8c\"],\"ai_translated\":false,\"nb_cd\":1,\"slug\":\"the-event-s01e03-protect-them-from-the-truth-720p-bluray\",\"machine_translated\":false,\"release\":\"The
-        Event S01E03 Protect Them from the Truth 720p BluRay\",\"comments\":\"\",\"legacy_subtitle_id\":4478723,\"legacy_uploader_id\":1253306,\"uploader\":{\"uploader_id\":55203,\"name\":\"Pb8SOWOA\",\"rank\":\"bronze
-        member\"},\"feature_details\":{\"feature_id\":271191,\"feature_type\":\"Episode\",\"year\":2010,\"title\":\"Protect
-        Them from the Truth\",\"movie_name\":\"The Event - S01E03  Protect Them from
-        the Truth\",\"imdb_id\":1653551,\"tmdb_id\":769867,\"season_number\":1,\"episode_number\":3,\"parent_imdb_id\":1582459,\"parent_title\":\"The
-        Event\",\"parent_tmdb_id\":32730,\"parent_feature_id\":10757},\"url\":\"https://www.opensubtitles.com/fr/subtitles/legacy/4478723\",\"related_links\":[{\"label\":\"All
-        subtitles for Tv Show The Event\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/10757\",\"img_url\":\"https://s9.opensubtitles.com/features/1/9/1/271191.jpg\"},{\"label\":\"All
-        subtitles for Episode protect them from the truth\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/271191\"}],\"files\":[{\"file_id\":3426918,\"cd_number\":1,\"file_name\":\"The
-        Event S01E03 Protect Them from the Truth 720p BluRay\"}]}},{\"id\":\"3359298\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"3359298\",\"language\":\"fr\",\"download_count\":1238,\"new_download_count\":17,\"hearing_impaired\":false,\"hd\":true,\"fps\":23.976,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2010-10-07T05:56:07Z\",\"file_hashes\":[\"2580967d9c7d41ce\",\"4b6b5d669ca7f926\",\"f09dcaefd70d39ea\",\"86030772415f020b\"],\"ai_translated\":false,\"nb_cd\":1,\"slug\":\"the-event-1x03-protect-them-from-the-truth-hdtv-the-event-01x03-protect-them-from-the-truth\",\"machine_translated\":false,\"release\":\"The
-        Event - 1x03 - Protect Them from the Truth.HDTV.The Event - 01x03 - Protect
-        Them From the Truth\",\"comments\":\"\",\"legacy_subtitle_id\":3870905,\"legacy_uploader_id\":1168246,\"uploader\":{\"uploader_id\":53768,\"name\":\"nicocha\",\"rank\":\"bronze
-        member\"},\"feature_details\":{\"feature_id\":271191,\"feature_type\":\"Episode\",\"year\":2010,\"title\":\"Protect
-        Them from the Truth\",\"movie_name\":\"The Event - S01E03  Protect Them from
-        the Truth\",\"imdb_id\":1653551,\"tmdb_id\":769867,\"season_number\":1,\"episode_number\":3,\"parent_imdb_id\":1582459,\"parent_title\":\"The
-        Event\",\"parent_tmdb_id\":32730,\"parent_feature_id\":10757},\"url\":\"https://www.opensubtitles.com/fr/subtitles/legacy/3870905\",\"related_links\":[{\"label\":\"All
-        subtitles for Tv Show The Event\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/10757\",\"img_url\":\"https://s9.opensubtitles.com/features/1/9/1/271191.jpg\"},{\"label\":\"All
-        subtitles for Episode protect them from the truth\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/271191\"}],\"files\":[{\"file_id\":3426643,\"cd_number\":1,\"file_name\":\"The
-        Event - 1x03 - Protect Them from the Truth.HDTV.The Event - 01x03 - Protect
-        Them From the Truth\"}]}}]}"
+      string: '{"total_pages":1,"total_count":36,"per_page":50,"page":1,"data":[{"id":"3827403","type":"subtitle","attributes":{"subtitle_id":"3827403","language":"fr","download_count":518,"new_download_count":45,"hearing_impaired":false,"hd":false,"fps":0.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2014-03-14T01:02:50Z","ai_translated":false,"nb_cd":1,"slug":"dallas-2012-03x03-playing-chicken-lol-french-c-updated-addic7ed-com","machine_translated":false,"release":"Dallas
+        (2012) - 03x03 - Playing Chicken.LOL.French.C.updated.Addic7ed.com","comments":"","legacy_subtitle_id":5582728,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":333036,"feature_type":"Episode","year":2014,"title":"Playing
+        Chicken","movie_name":"Dallas - S03E03  Playing Chicken","imdb_id":3006570,"tmdb_id":972685,"season_number":3,"episode_number":3,"parent_imdb_id":1723760,"parent_title":"Dallas","parent_tmdb_id":37759,"parent_feature_id":12129},"url":"https://www.opensubtitles.com/fr/subtitles/dallas-2012-03x03-playing-chicken-lol-french-c-updated-addic7ed-com","related_links":[{"label":"All
+        subtitles for Tv Show Dallas","url":"https://www.opensubtitles.com/fr/features/redirect/12129","img_url":"https://s7.opensubtitles.com/features/9/2/1/12129.jpg"},{"label":"All
+        subtitles for Episode playing chicken","url":"https://www.opensubtitles.com/fr/features/redirect/333036","img_url":"https://s9.opensubtitles.com/features/6/3/0/333036.jpg"}],"files":[{"file_id":3902638,"cd_number":1,"file_name":"Dallas
+        (2012) - 03x03 - Playing Chicken.LOL.French.C.updated.Addic7ed.com"}]}},{"id":"3816455","type":"subtitle","attributes":{"subtitle_id":"3816455","language":"fr","download_count":295,"new_download_count":39,"hearing_impaired":false,"hd":true,"fps":0.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-06-29T19:29:00Z","ai_translated":false,"nb_cd":1,"slug":"5064924-dallas-s02e14-hdtv-x264-lol","machine_translated":false,"release":"Dallas
+        S02E14.HDTV.x264-LOL","comments":"","legacy_subtitle_id":5064924,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":333028,"feature_type":"Episode","year":2013,"title":"Guilt
+        by Association","movie_name":"Dallas - S02E14  Guilt by Association","imdb_id":2738892,"tmdb_id":851375,"season_number":2,"episode_number":14,"parent_imdb_id":1723760,"parent_title":"Dallas","parent_tmdb_id":37759,"parent_feature_id":12129},"url":"https://www.opensubtitles.com/fr/subtitles/5064924-dallas-s02e14-hdtv-x264-lol","related_links":[{"label":"All
+        subtitles for Tv Show Dallas","url":"https://www.opensubtitles.com/fr/features/redirect/12129","img_url":"https://s2.opensubtitles.com/features/9/2/1/12129.jpg"},{"label":"All
+        subtitles for Episode guilt by association","url":"https://www.opensubtitles.com/fr/features/redirect/333028","img_url":"https://s5.opensubtitles.com/features/8/2/0/333028.jpg"}],"files":[{"file_id":3891698,"cd_number":1,"file_name":"Dallas
+        S02E14.HDTV.x264-LOL-fre"}]}},{"id":"3827199","type":"subtitle","attributes":{"subtitle_id":"3827199","language":"fr","download_count":351,"new_download_count":40,"hearing_impaired":false,"hd":true,"fps":0.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-06-28T21:25:55Z","ai_translated":false,"nb_cd":1,"slug":"dallas-s02e11-hdtv-x264-lol","machine_translated":false,"release":"Dallas
+        S02E11.HDTV.x264-LOL","comments":"","legacy_subtitle_id":5063251,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":333027,"feature_type":"Episode","year":2013,"title":"Let
+        Me In","movie_name":"Dallas - S02E11  Let Me In","imdb_id":2738880,"tmdb_id":851371,"season_number":2,"episode_number":11,"parent_imdb_id":1723760,"parent_title":"Dallas","parent_tmdb_id":37759,"parent_feature_id":12129},"url":"https://www.opensubtitles.com/fr/subtitles/dallas-s02e11-hdtv-x264-lol","related_links":[{"label":"All
+        subtitles for Tv Show Dallas","url":"https://www.opensubtitles.com/fr/features/redirect/12129","img_url":"https://s3.opensubtitles.com/features/9/2/1/12129.jpg"},{"label":"All
+        subtitles for Episode let me in","url":"https://www.opensubtitles.com/fr/features/redirect/333027","img_url":"https://s5.opensubtitles.com/features/7/2/0/333027.jpg"}],"files":[{"file_id":3902446,"cd_number":1,"file_name":"Dallas
+        S02E11.HDTV.x264-LOL-fre"}]}},{"id":"3830713","type":"subtitle","attributes":{"subtitle_id":"3830713","language":"fr","download_count":457,"new_download_count":36,"hearing_impaired":false,"hd":false,"fps":23.976,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2012-07-26T16:16:25Z","ai_translated":false,"nb_cd":1,"slug":"dallas-2012-01x08-no-good-deed-x264-lol-french-hi-c-updated-addic7ed-com","machine_translated":false,"release":"Dallas
+        (2012) - 01x08 - No Good Deed.x264-LOL.French.HI.C.updated.Addic7ed.com","comments":"","legacy_subtitle_id":4625794,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":333016,"feature_type":"Episode","year":2012,"title":"No
+        Good Deed","movie_name":"Dallas - S01E08  No Good Deed","imdb_id":2208034,"tmdb_id":851359,"season_number":1,"episode_number":8,"parent_imdb_id":1723760,"parent_title":"Dallas","parent_tmdb_id":37759,"parent_feature_id":12129},"url":"https://www.opensubtitles.com/fr/subtitles/dallas-2012-01x08-no-good-deed-x264-lol-french-hi-c-updated-addic7ed-com","related_links":[{"label":"All
+        subtitles for Tv Show Dallas","url":"https://www.opensubtitles.com/fr/features/redirect/12129","img_url":"https://s4.opensubtitles.com/features/9/2/1/12129.jpg"},{"label":"All
+        subtitles for Episode no good deed","url":"https://www.opensubtitles.com/fr/features/redirect/333016","img_url":"https://s7.opensubtitles.com/features/6/1/0/333016.jpg"}],"files":[{"file_id":3906013,"cd_number":1,"file_name":"Dallas
+        (2012) - 01x08 - No Good Deed.x264-LOL.French.HI.C.updated.Addic7ed.com"}]}},{"id":"3830024","type":"subtitle","attributes":{"subtitle_id":"3830024","language":"fr","download_count":379,"new_download_count":43,"hearing_impaired":false,"hd":false,"fps":0.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2012-07-12T21:14:13Z","ai_translated":false,"nb_cd":1,"slug":"dallas-2012-01x06-the-enemy-of-my-enemy-dimension-french-hi-c-updated-addic7ed-com","machine_translated":false,"release":"Dallas
+        (2012) - 01x06 - The Enemy of My Enemy.DIMENSION.French.HI.C.updated.Addic7ed.com","comments":"","legacy_subtitle_id":4615336,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":333009,"feature_type":"Episode","year":2012,"title":"The
+        Enemy of My Enemy","movie_name":"Dallas - S01E06  The Enemy of My Enemy","imdb_id":2205560,"tmdb_id":851360,"season_number":1,"episode_number":6,"parent_imdb_id":1723760,"parent_title":"Dallas","parent_tmdb_id":37759,"parent_feature_id":12129},"url":"https://www.opensubtitles.com/fr/subtitles/dallas-2012-01x06-the-enemy-of-my-enemy-dimension-french-hi-c-updated-addic7ed-com","related_links":[{"label":"All
+        subtitles for Tv Show Dallas","url":"https://www.opensubtitles.com/fr/features/redirect/12129","img_url":"https://s9.opensubtitles.com/features/9/2/1/12129.jpg"},{"label":"All
+        subtitles for Episode the enemy of my enemy","url":"https://www.opensubtitles.com/fr/features/redirect/333009","img_url":"https://s1.opensubtitles.com/features/9/0/0/333009.jpg"}],"files":[{"file_id":3905313,"cd_number":1,"file_name":"Dallas
+        (2012) - 01x06 - The Enemy of My Enemy.DIMENSION.French.HI.C.updated.Addic7ed.com"}]}},{"id":"3829531","type":"subtitle","attributes":{"subtitle_id":"3829531","language":"fr","download_count":707,"new_download_count":32,"hearing_impaired":false,"hd":false,"fps":23.976,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2012-06-21T16:43:26Z","ai_translated":false,"nb_cd":1,"slug":"dallas-2012-01x03-the-price-you-pay-x264-lol-french-c-updated-addic7ed-com","machine_translated":false,"release":"Dallas
+        (2012) - 01x03 - The Price You Pay.x264-LOL.French.C.updated.Addic7ed.com","comments":"","legacy_subtitle_id":4581134,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":333010,"feature_type":"Episode","year":2012,"title":"The
+        Price You Pay","movie_name":"Dallas - S01E03  The Price You Pay","imdb_id":2205526,"tmdb_id":851353,"season_number":1,"episode_number":3,"parent_imdb_id":1723760,"parent_title":"Dallas","parent_tmdb_id":37759,"parent_feature_id":12129},"url":"https://www.opensubtitles.com/fr/subtitles/dallas-2012-01x03-the-price-you-pay-x264-lol-french-c-updated-addic7ed-com","related_links":[{"label":"All
+        subtitles for Tv Show Dallas","url":"https://www.opensubtitles.com/fr/features/redirect/12129","img_url":"https://s9.opensubtitles.com/features/9/2/1/12129.jpg"},{"label":"All
+        subtitles for Episode the price you pay","url":"https://www.opensubtitles.com/fr/features/redirect/333010","img_url":"https://s7.opensubtitles.com/features/0/1/0/333010.jpg"}],"files":[{"file_id":3904804,"cd_number":1,"file_name":"Dallas
+        (2012) - 01x03 - The Price You Pay.x264-LOL.French.C.updated.Addic7ed.com"}]}},{"id":"3832373","type":"subtitle","attributes":{"subtitle_id":"3832373","language":"fr","download_count":122,"new_download_count":24,"hearing_impaired":false,"hd":true,"fps":0.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2014-08-22T20:43:28Z","ai_translated":false,"nb_cd":1,"slug":"5797246-dallas-2012-s03e09-hdtv-x264-lol","machine_translated":false,"release":"Dallas.2012.S03E09.HDTV.x264-LOL","comments":"","legacy_subtitle_id":5797246,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":333070,"feature_type":"Episode","year":2014,"title":"Denial,
+        Anger, Acceptance","movie_name":"Dallas - S03E09  Denial, Anger, Acceptance","imdb_id":3059406,"tmdb_id":1002543,"season_number":3,"episode_number":9,"parent_imdb_id":1723760,"parent_title":"Dallas","parent_tmdb_id":37759,"parent_feature_id":12129},"url":"https://www.opensubtitles.com/fr/subtitles/5797246-dallas-2012-s03e09-hdtv-x264-lol","related_links":[{"label":"All
+        subtitles for Tv Show Dallas","url":"https://www.opensubtitles.com/fr/features/redirect/12129","img_url":"https://s9.opensubtitles.com/features/9/2/1/12129.jpg"},{"label":"All
+        subtitles for Episode denial, anger, acceptance","url":"https://www.opensubtitles.com/fr/features/redirect/333070","img_url":"https://s2.opensubtitles.com/features/0/7/0/333070.jpg"}],"files":[{"file_id":3907714,"cd_number":1,"file_name":"Dallas.2012.S03E09.HDTV.x264-LOL"}]}},{"id":"3831680","type":"subtitle","attributes":{"subtitle_id":"3831680","language":"fr","download_count":388,"new_download_count":38,"hearing_impaired":false,"hd":true,"fps":0.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2014-03-27T20:00:07Z","ai_translated":false,"nb_cd":1,"slug":"dallas-2012-s03e05-hdtv-xvid-fum","machine_translated":false,"release":"Dallas.2012.S03E05.HDTV.XviD-FUM","comments":"","legacy_subtitle_id":5602270,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":333048,"feature_type":"Episode","year":2014,"title":"D.T.R.","movie_name":"Dallas
+        - S03E05  D.T.R.","imdb_id":3006596,"tmdb_id":973291,"season_number":3,"episode_number":5,"parent_imdb_id":1723760,"parent_title":"Dallas","parent_tmdb_id":37759,"parent_feature_id":12129},"url":"https://www.opensubtitles.com/fr/subtitles/dallas-2012-s03e05-hdtv-xvid-fum","related_links":[{"label":"All
+        subtitles for Tv Show Dallas","url":"https://www.opensubtitles.com/fr/features/redirect/12129","img_url":"https://s4.opensubtitles.com/features/9/2/1/12129.jpg"},{"label":"All
+        subtitles for Episode d.t.r.","url":"https://www.opensubtitles.com/fr/features/redirect/333048","img_url":"https://s6.opensubtitles.com/features/8/4/0/333048.jpg"}],"files":[{"file_id":3907005,"cd_number":1,"file_name":"Dallas.2012.S03E05.HDTV.XviD-FUM"}]}},{"id":"3828380","type":"subtitle","attributes":{"subtitle_id":"3828380","language":"fr","download_count":506,"new_download_count":32,"hearing_impaired":false,"hd":false,"fps":25.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2014-03-06T00:12:47Z","ai_translated":false,"nb_cd":1,"slug":"dallas-2012-03x02-playing-chicken-lol-french-c-updated-addic7ed-com","machine_translated":false,"release":"Dallas
+        (2012) - 03x02 - Playing Chicken.LOL.French.C.updated.Addic7ed.com","comments":"","legacy_subtitle_id":5571054,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":333039,"feature_type":"Episode","year":2014,"title":"Trust
+        Me","movie_name":"Dallas - S03E02  Trust Me","imdb_id":3006602,"tmdb_id":972327,"season_number":3,"episode_number":2,"parent_imdb_id":1723760,"parent_title":"Dallas","parent_tmdb_id":37759,"parent_feature_id":12129},"url":"https://www.opensubtitles.com/fr/subtitles/dallas-2012-03x02-playing-chicken-lol-french-c-updated-addic7ed-com","related_links":[{"label":"All
+        subtitles for Tv Show Dallas","url":"https://www.opensubtitles.com/fr/features/redirect/12129","img_url":"https://s3.opensubtitles.com/features/9/2/1/12129.jpg"},{"label":"All
+        subtitles for Episode trust me","url":"https://www.opensubtitles.com/fr/features/redirect/333039","img_url":"https://s9.opensubtitles.com/features/9/3/0/333039.jpg"}],"files":[{"file_id":3903638,"cd_number":1,"file_name":"Dallas
+        (2012) - 03x02 - Playing Chicken.LOL.French.C.updated.Addic7ed.com"}]}},{"id":"3829510","type":"subtitle","attributes":{"subtitle_id":"3829510","language":"fr","download_count":515,"new_download_count":45,"hearing_impaired":false,"hd":true,"fps":0.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-06-27T18:56:18Z","ai_translated":false,"nb_cd":1,"slug":"dallas-s02e03-hdtv-x264-lol","machine_translated":false,"release":"Dallas
+        S02E03.HDTV.x264-LOL","comments":"","legacy_subtitle_id":5061713,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":333015,"feature_type":"Episode","year":2013,"title":"Sins
+        of the Father","movie_name":"Dallas - S02E03  Sins of the Father","imdb_id":2649792,"tmdb_id":851363,"season_number":2,"episode_number":3,"parent_imdb_id":1723760,"parent_title":"Dallas","parent_tmdb_id":37759,"parent_feature_id":12129},"url":"https://www.opensubtitles.com/fr/subtitles/dallas-s02e03-hdtv-x264-lol","related_links":[{"label":"All
+        subtitles for Tv Show Dallas","url":"https://www.opensubtitles.com/fr/features/redirect/12129","img_url":"https://s7.opensubtitles.com/features/9/2/1/12129.jpg"},{"label":"All
+        subtitles for Episode sins of the father","url":"https://www.opensubtitles.com/fr/features/redirect/333015","img_url":"https://s6.opensubtitles.com/features/5/1/0/333015.jpg"}],"files":[{"file_id":3904786,"cd_number":1,"file_name":"Dallas
+        S02E03.HDTV.x264-LOL-fre"}]}},{"id":"3831625","type":"subtitle","attributes":{"subtitle_id":"3831625","language":"fr","download_count":871,"new_download_count":40,"hearing_impaired":false,"hd":true,"fps":0.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-06-26T20:39:31Z","ai_translated":false,"nb_cd":1,"slug":"5060346-dallas-s02e01-hdtv-x264-lol","machine_translated":false,"release":"Dallas
+        S02E01.HDTV.x264-LOL","comments":"","legacy_subtitle_id":5060346,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":333019,"feature_type":"Episode","year":2013,"title":"Battle
+        Lines","movie_name":"Dallas - S02E01  Battle Lines","imdb_id":2288518,"tmdb_id":851361,"season_number":2,"episode_number":1,"parent_imdb_id":1723760,"parent_title":"Dallas","parent_tmdb_id":37759,"parent_feature_id":12129},"url":"https://www.opensubtitles.com/fr/subtitles/5060346-dallas-s02e01-hdtv-x264-lol","related_links":[{"label":"All
+        subtitles for Tv Show Dallas","url":"https://www.opensubtitles.com/fr/features/redirect/12129","img_url":"https://s4.opensubtitles.com/features/9/2/1/12129.jpg"},{"label":"All
+        subtitles for Episode battle lines","url":"https://www.opensubtitles.com/fr/features/redirect/333019","img_url":"https://s7.opensubtitles.com/features/9/1/0/333019.jpg"}],"files":[{"file_id":3906964,"cd_number":1,"file_name":"Dallas
+        S02E01.HDTV.x264-LOL-fre"}]}},{"id":"3825741","type":"subtitle","attributes":{"subtitle_id":"3825741","language":"fr","download_count":390,"new_download_count":30,"hearing_impaired":false,"hd":true,"fps":23.976,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-04-14T22:11:35Z","ai_translated":false,"nb_cd":1,"slug":"4932979-dallas-2012-s02e13-hdtv-x264-lol","machine_translated":false,"release":"Dallas.2012.S02E13.HDTV.x264-LOL","comments":"","legacy_subtitle_id":4932979,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":333023,"feature_type":"Episode","year":2013,"title":"Love
+        \u0026amp; Family","movie_name":"Dallas - S02E13  Love \u0026amp; Family","imdb_id":2737922,"tmdb_id":851373,"season_number":2,"episode_number":13,"parent_imdb_id":1723760,"parent_title":"Dallas","parent_tmdb_id":37759,"parent_feature_id":12129},"url":"https://www.opensubtitles.com/fr/subtitles/4932979-dallas-2012-s02e13-hdtv-x264-lol","related_links":[{"label":"All
+        subtitles for Tv Show Dallas","url":"https://www.opensubtitles.com/fr/features/redirect/12129","img_url":"https://s7.opensubtitles.com/features/9/2/1/12129.jpg"},{"label":"All
+        subtitles for Episode love \u0026 family","url":"https://www.opensubtitles.com/fr/features/redirect/333023","img_url":"https://s4.opensubtitles.com/features/3/2/0/333023.jpg"}],"files":[{"file_id":3901035,"cd_number":1,"file_name":"Dallas.2012.S02E13.HDTV.x264-LOL-fre"}]}},{"id":"3830855","type":"subtitle","attributes":{"subtitle_id":"3830855","language":"fr","download_count":437,"new_download_count":26,"hearing_impaired":false,"hd":false,"fps":0.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-04-03T22:32:25Z","ai_translated":false,"nb_cd":1,"slug":"4910664-dallas-2012-s02e10-hdtv-x264-lol","machine_translated":false,"release":"Dallas.2012.S02E10.HDTV.x264-LOL","comments":"","legacy_subtitle_id":4910664,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":333026,"feature_type":"Episode","year":2013,"title":"Guilt
+        \u0026amp; Innocence","movie_name":"Dallas - S02E10  Guilt \u0026amp; Innocence","imdb_id":2689796,"tmdb_id":851370,"season_number":2,"episode_number":10,"parent_imdb_id":1723760,"parent_title":"Dallas","parent_tmdb_id":37759,"parent_feature_id":12129},"url":"https://www.opensubtitles.com/fr/subtitles/4910664-dallas-2012-s02e10-hdtv-x264-lol","related_links":[{"label":"All
+        subtitles for Tv Show Dallas","url":"https://www.opensubtitles.com/fr/features/redirect/12129","img_url":"https://s8.opensubtitles.com/features/9/2/1/12129.jpg"},{"label":"All
+        subtitles for Episode guilt \u0026 innocence","url":"https://www.opensubtitles.com/fr/features/redirect/333026","img_url":"https://s9.opensubtitles.com/features/6/2/0/333026.jpg"}],"files":[{"file_id":3906157,"cd_number":1,"file_name":"Dallas.2012.S02E10.HDTV.x264-LOL"}]}},{"id":"3831214","type":"subtitle","attributes":{"subtitle_id":"3831214","language":"fr","download_count":325,"new_download_count":22,"hearing_impaired":false,"hd":false,"fps":0.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-03-13T22:42:22Z","ai_translated":false,"nb_cd":1,"slug":"4864425-dallas-2012-s02e06-hdtv-x264-lol","machine_translated":false,"release":"Dallas.2012.S02E06.HDTV.x264-LOL","comments":"","legacy_subtitle_id":4864425,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":333020,"feature_type":"Episode","year":2013,"title":"Blame
+        Game","movie_name":"Dallas - S02E06  Blame Game","imdb_id":2559530,"tmdb_id":851366,"season_number":2,"episode_number":6,"parent_imdb_id":1723760,"parent_title":"Dallas","parent_tmdb_id":37759,"parent_feature_id":12129},"url":"https://www.opensubtitles.com/fr/subtitles/4864425-dallas-2012-s02e06-hdtv-x264-lol","related_links":[{"label":"All
+        subtitles for Tv Show Dallas","url":"https://www.opensubtitles.com/fr/features/redirect/12129","img_url":"https://s4.opensubtitles.com/features/9/2/1/12129.jpg"},{"label":"All
+        subtitles for Episode blame game","url":"https://www.opensubtitles.com/fr/features/redirect/333020","img_url":"https://s8.opensubtitles.com/features/0/2/0/333020.jpg"}],"files":[{"file_id":3906517,"cd_number":1,"file_name":"Dallas.2012.S02E06.HDTV.x264-LOL"}]}},{"id":"3828145","type":"subtitle","attributes":{"subtitle_id":"3828145","language":"fr","download_count":381,"new_download_count":32,"hearing_impaired":false,"hd":false,"fps":0.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2012-08-13T21:20:19Z","ai_translated":false,"nb_cd":1,"slug":"dallas-2012-01x10-revelations-lol-french-hi-c-updated-addic7ed-com","machine_translated":false,"release":"Dallas
+        (2012) - 01x10 - Revelations.LOL.French.HI.C.updated.Addic7ed.com","comments":"","legacy_subtitle_id":4638778,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":333012,"feature_type":"Episode","year":2012,"title":"Revelations","movie_name":"Dallas
+        - S01E10  Revelations","imdb_id":2265292,"tmdb_id":851357,"season_number":1,"episode_number":10,"parent_imdb_id":1723760,"parent_title":"Dallas","parent_tmdb_id":37759,"parent_feature_id":12129},"url":"https://www.opensubtitles.com/fr/subtitles/dallas-2012-01x10-revelations-lol-french-hi-c-updated-addic7ed-com","related_links":[{"label":"All
+        subtitles for Tv Show Dallas","url":"https://www.opensubtitles.com/fr/features/redirect/12129","img_url":"https://s9.opensubtitles.com/features/9/2/1/12129.jpg"},{"label":"All
+        subtitles for Episode revelations","url":"https://www.opensubtitles.com/fr/features/redirect/333012","img_url":"https://s5.opensubtitles.com/features/2/1/0/333012.jpg"}],"files":[{"file_id":3903392,"cd_number":1,"file_name":"Dallas
+        (2012) - 01x10 - Revelations.LOL.French.HI.C.updated.Addic7ed.com"}]}},{"id":"3830333","type":"subtitle","attributes":{"subtitle_id":"3830333","language":"fr","download_count":469,"new_download_count":32,"hearing_impaired":false,"hd":false,"fps":23.976,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2012-07-20T15:41:44Z","ai_translated":false,"nb_cd":1,"slug":"dallas-2012-01x07-collateral-damage-x-264-lol-french-c-updated-addic7ed-com","machine_translated":false,"release":"Dallas
+        (2012) - 01x07 - Collateral damage.x.264.LOL.French.C.updated.Addic7ed.com","comments":"","legacy_subtitle_id":4621669,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":333013,"feature_type":"Episode","year":2012,"title":"Collateral
+        Damage","movie_name":"Dallas - S01E07  Collateral Damage","imdb_id":2336735,"tmdb_id":851356,"season_number":1,"episode_number":7,"parent_imdb_id":1723760,"parent_title":"Dallas","parent_tmdb_id":37759,"parent_feature_id":12129},"url":"https://www.opensubtitles.com/fr/subtitles/dallas-2012-01x07-collateral-damage-x-264-lol-french-c-updated-addic7ed-com","related_links":[{"label":"All
+        subtitles for Tv Show Dallas","url":"https://www.opensubtitles.com/fr/features/redirect/12129","img_url":"https://s5.opensubtitles.com/features/9/2/1/12129.jpg"},{"label":"All
+        subtitles for Episode collateral damage","url":"https://www.opensubtitles.com/fr/features/redirect/333013","img_url":"https://s5.opensubtitles.com/features/3/1/0/333013.jpg"}],"files":[{"file_id":3905631,"cd_number":1,"file_name":"Dallas
+        (2012) - 01x07 - Collateral damage.x.264.LOL.French.C.updated.Addic7ed.com"}]}},{"id":"3829401","type":"subtitle","attributes":{"subtitle_id":"3829401","language":"fr","download_count":603,"new_download_count":50,"hearing_impaired":false,"hd":false,"fps":0.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2012-06-28T23:27:02Z","ai_translated":false,"nb_cd":1,"slug":"dallas-2012-01x04-the-last-hurrah-x264-asap-french-hi-c-updated-addic7ed-com","machine_translated":false,"release":"Dallas
+        (2012) - 01x04 - The Last Hurrah.x264-ASAP.French.HI.C.updated.Addic7ed.com","comments":"","legacy_subtitle_id":4588257,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":333011,"feature_type":"Episode","year":2012,"title":"The
+        Last Hurrah","movie_name":"Dallas - S01E04  The Last Hurrah","imdb_id":2205544,"tmdb_id":851354,"season_number":1,"episode_number":4,"parent_imdb_id":1723760,"parent_title":"Dallas","parent_tmdb_id":37759,"parent_feature_id":12129},"url":"https://www.opensubtitles.com/fr/subtitles/dallas-2012-01x04-the-last-hurrah-x264-asap-french-hi-c-updated-addic7ed-com","related_links":[{"label":"All
+        subtitles for Tv Show Dallas","url":"https://www.opensubtitles.com/fr/features/redirect/12129","img_url":"https://s5.opensubtitles.com/features/9/2/1/12129.jpg"},{"label":"All
+        subtitles for Episode the last hurrah","url":"https://www.opensubtitles.com/fr/features/redirect/333011","img_url":"https://s1.opensubtitles.com/features/1/1/0/333011.jpg"}],"files":[{"file_id":3904678,"cd_number":1,"file_name":"Dallas
+        (2012) - 01x04 - The Last Hurrah.x264-ASAP.French.HI.C.updated.Addic7ed.com"}]}},{"id":"3832243","type":"subtitle","attributes":{"subtitle_id":"3832243","language":"fr","download_count":305,"new_download_count":21,"hearing_impaired":false,"hd":true,"fps":0.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2014-09-04T21:16:45Z","ai_translated":false,"nb_cd":1,"slug":"5812414-dallas-2012-s03e11-hdtv-x264-lol","machine_translated":false,"release":"Dallas.2012.S03E11.HDTV.x264-LOL","comments":"","legacy_subtitle_id":5812414,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":333069,"feature_type":"Episode","year":2014,"title":"Hurt","movie_name":"Dallas
+        - S03E11  Hurt","imdb_id":3059410,"tmdb_id":1002545,"season_number":3,"episode_number":11,"parent_imdb_id":1723760,"parent_title":"Dallas","parent_tmdb_id":37759,"parent_feature_id":12129},"url":"https://www.opensubtitles.com/fr/subtitles/5812414-dallas-2012-s03e11-hdtv-x264-lol","related_links":[{"label":"All
+        subtitles for Tv Show Dallas","url":"https://www.opensubtitles.com/fr/features/redirect/12129","img_url":"https://s7.opensubtitles.com/features/9/2/1/12129.jpg"},{"label":"All
+        subtitles for Episode hurt","url":"https://www.opensubtitles.com/fr/features/redirect/333069","img_url":"https://s7.opensubtitles.com/features/9/6/0/333069.jpg"}],"files":[{"file_id":3907557,"cd_number":1,"file_name":"Dallas.2012.S03E11.HDTV.x264-LOL"}]}},{"id":"3834082","type":"subtitle","attributes":{"subtitle_id":"3834082","language":"fr","download_count":259,"new_download_count":41,"hearing_impaired":false,"hd":true,"fps":0.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2014-08-30T21:58:49Z","ai_translated":false,"nb_cd":1,"slug":"5807052-dallas-2012-310-hdtv-lol","machine_translated":false,"release":"dallas.2012.310.hdtv-lol","comments":"","legacy_subtitle_id":5807052,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":333061,"feature_type":"Episode","year":2014,"title":"Dead
+        Reckoning","movie_name":"Dallas - S03E10  Dead Reckoning","imdb_id":3059404,"tmdb_id":1002544,"season_number":3,"episode_number":10,"parent_imdb_id":1723760,"parent_title":"Dallas","parent_tmdb_id":37759,"parent_feature_id":12129},"url":"https://www.opensubtitles.com/fr/subtitles/5807052-dallas-2012-310-hdtv-lol","related_links":[{"label":"All
+        subtitles for Tv Show Dallas","url":"https://www.opensubtitles.com/fr/features/redirect/12129","img_url":"https://s6.opensubtitles.com/features/9/2/1/12129.jpg"},{"label":"All
+        subtitles for Episode dead reckoning","url":"https://www.opensubtitles.com/fr/features/redirect/333061","img_url":"https://s8.opensubtitles.com/features/1/6/0/333061.jpg"}],"files":[{"file_id":3909357,"cd_number":1,"file_name":"dallas.2012.310.hdtv-lol"}]}},{"id":"3832506","type":"subtitle","attributes":{"subtitle_id":"3832506","language":"fr","download_count":307,"new_download_count":39,"hearing_impaired":false,"hd":true,"fps":0.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2014-05-13T00:25:08Z","ai_translated":false,"nb_cd":1,"slug":"5678410-dallas-2012-s03e07-hdtv-x264-lol","machine_translated":false,"release":"Dallas.2012.S03E07.HDTV.x264-LOL","comments":"","legacy_subtitle_id":5678410,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":333073,"feature_type":"Episode","year":2014,"title":"Like
+        a Bad Penny","movie_name":"Dallas - S03E07  Like a Bad Penny","imdb_id":3059398,"tmdb_id":973963,"season_number":3,"episode_number":7,"parent_imdb_id":1723760,"parent_title":"Dallas","parent_tmdb_id":37759,"parent_feature_id":12129},"url":"https://www.opensubtitles.com/fr/subtitles/5678410-dallas-2012-s03e07-hdtv-x264-lol","related_links":[{"label":"All
+        subtitles for Tv Show Dallas","url":"https://www.opensubtitles.com/fr/features/redirect/12129","img_url":"https://s4.opensubtitles.com/features/9/2/1/12129.jpg"},{"label":"All
+        subtitles for Episode like a bad penny","url":"https://www.opensubtitles.com/fr/features/redirect/333073","img_url":"https://s9.opensubtitles.com/features/3/7/0/333073.jpg"}],"files":[{"file_id":3907836,"cd_number":1,"file_name":"Dallas.2012.S03E07.HDTV.x264-LOL-fre"}]}},{"id":"3833305","type":"subtitle","attributes":{"subtitle_id":"3833305","language":"fr","download_count":427,"new_download_count":43,"hearing_impaired":false,"hd":true,"fps":0.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2014-04-02T10:30:02Z","ai_translated":false,"nb_cd":1,"slug":"dallas-2012-306-hdtv-lol","machine_translated":false,"release":"dallas.2012.306.hdtv-lol","comments":"","legacy_subtitle_id":5609699,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":333052,"feature_type":"Episode","year":2014,"title":"Like
+        Father, Like Son","movie_name":"Dallas - S03E06  Like Father, Like Son","imdb_id":3059400,"tmdb_id":973664,"season_number":3,"episode_number":6,"parent_imdb_id":1723760,"parent_title":"Dallas","parent_tmdb_id":37759,"parent_feature_id":12129},"url":"https://www.opensubtitles.com/fr/subtitles/dallas-2012-306-hdtv-lol","related_links":[{"label":"All
+        subtitles for Tv Show Dallas","url":"https://www.opensubtitles.com/fr/features/redirect/12129","img_url":"https://s8.opensubtitles.com/features/9/2/1/12129.jpg"},{"label":"All
+        subtitles for Episode like father, like son","url":"https://www.opensubtitles.com/fr/features/redirect/333052","img_url":"https://s1.opensubtitles.com/features/2/5/0/333052.jpg"}],"files":[{"file_id":3908597,"cd_number":1,"file_name":"dallas.2012.306.hdtv-lol"}]}},{"id":"2060857","type":"subtitle","attributes":{"subtitle_id":"2060857","language":"fr","download_count":360,"new_download_count":49,"hearing_impaired":false,"hd":false,"fps":0.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2014-03-29T14:16:29Z","ai_translated":false,"nb_cd":1,"slug":"dallas-2012-03x04-lifting-the-veil-lol-french-c-updated-addic7ed-com","machine_translated":false,"release":"Dallas
+        (2012) - 03x04 - Lifting the Veil.LOL.French.C.updated.Addic7ed.com","comments":"","legacy_subtitle_id":5604534,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":64417,"feature_type":"Episode","year":1979,"title":"Secrets","movie_name":"Dallas
+        - S03E04  Secrets","imdb_id":553410,"tmdb_id":1140580,"season_number":3,"episode_number":4,"parent_imdb_id":77000,"parent_title":"Dallas","parent_tmdb_id":40,"parent_feature_id":7494},"url":"https://www.opensubtitles.com/fr/subtitles/dallas-2012-03x04-lifting-the-veil-lol-french-c-updated-addic7ed-com","related_links":[{"label":"All
+        subtitles for Tv Show Dallas","url":"https://www.opensubtitles.com/fr/features/redirect/7494","img_url":"https://s3.opensubtitles.com/features/4/9/4/7494.jpg"},{"label":"All
+        subtitles for Episode secrets","url":"https://www.opensubtitles.com/fr/features/redirect/64417","img_url":"https://s9.opensubtitles.com/features/7/1/4/64417.jpg"}],"files":[{"file_id":2143693,"cd_number":1,"file_name":"Dallas
+        (2012) - 03x04 - Lifting the Veil.LOL.French.C.updated.Addic7ed.com"}]}},{"id":"3832403","type":"subtitle","attributes":{"subtitle_id":"3832403","language":"fr","download_count":576,"new_download_count":58,"hearing_impaired":false,"hd":false,"fps":25.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2014-02-26T00:17:40Z","ai_translated":false,"nb_cd":1,"slug":"dallas-2012-03x01-the-return-lol-french-c-updated-addic7ed-com","machine_translated":false,"release":"Dallas
+        (2012) - 03x01 - The Return.LOL.French.C.updated.Addic7ed.com","comments":"","legacy_subtitle_id":5559808,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":333046,"feature_type":"Episode","year":2014,"title":"The
+        Return","movie_name":"Dallas - S03E01  The Return","imdb_id":2897660,"tmdb_id":851382,"season_number":3,"episode_number":1,"parent_imdb_id":1723760,"parent_title":"Dallas","parent_tmdb_id":37759,"parent_feature_id":12129},"url":"https://www.opensubtitles.com/fr/subtitles/dallas-2012-03x01-the-return-lol-french-c-updated-addic7ed-com","related_links":[{"label":"All
+        subtitles for Tv Show Dallas","url":"https://www.opensubtitles.com/fr/features/redirect/12129","img_url":"https://s6.opensubtitles.com/features/9/2/1/12129.jpg"},{"label":"All
+        subtitles for Episode the return","url":"https://www.opensubtitles.com/fr/features/redirect/333046","img_url":"https://s4.opensubtitles.com/features/6/4/0/333046.jpg"}],"files":[{"file_id":3907681,"cd_number":1,"file_name":"Dallas
+        (2012) - 03x01 - The Return.LOL.French.C.updated.Addic7ed.com"}]}},{"id":"3827855","type":"subtitle","attributes":{"subtitle_id":"3827855","language":"fr","download_count":586,"new_download_count":27,"hearing_impaired":false,"hd":true,"fps":0.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-06-29T20:13:21Z","ai_translated":false,"nb_cd":1,"slug":"5064999-dallas-s02e15-hdtv-x264-lol","machine_translated":false,"release":"Dallas
+        S02E15.HDTV.x264-LOL","comments":"","legacy_subtitle_id":5064999,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":333029,"feature_type":"Episode","year":2013,"title":"Legacies","movie_name":"Dallas
+        - S02E15  Legacies","imdb_id":2738894,"tmdb_id":851374,"season_number":2,"episode_number":15,"parent_imdb_id":1723760,"parent_title":"Dallas","parent_tmdb_id":37759,"parent_feature_id":12129},"url":"https://www.opensubtitles.com/fr/subtitles/5064999-dallas-s02e15-hdtv-x264-lol","related_links":[{"label":"All
+        subtitles for Tv Show Dallas","url":"https://www.opensubtitles.com/fr/features/redirect/12129","img_url":"https://s2.opensubtitles.com/features/9/2/1/12129.jpg"},{"label":"All
+        subtitles for Episode legacies","url":"https://www.opensubtitles.com/fr/features/redirect/333029","img_url":"https://s6.opensubtitles.com/features/9/2/0/333029.jpg"}],"files":[{"file_id":3903096,"cd_number":1,"file_name":"Dallas
+        S02E15.HDTV.x264-LOL-fre"}]}},{"id":"3832173","type":"subtitle","attributes":{"subtitle_id":"3832173","language":"fr","download_count":316,"new_download_count":37,"hearing_impaired":false,"hd":true,"fps":0.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-06-29T17:56:53Z","ai_translated":false,"nb_cd":1,"slug":"dallas-s02e12-hdtv-x264-lol","machine_translated":false,"release":"Dallas
+        S02E12.HDTV.x264-LOL","comments":"","legacy_subtitle_id":5064695,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":333025,"feature_type":"Episode","year":2013,"title":"A
+        Call to Arms","movie_name":"Dallas - S02E12  A Call to Arms","imdb_id":2738884,"tmdb_id":851372,"season_number":2,"episode_number":12,"parent_imdb_id":1723760,"parent_title":"Dallas","parent_tmdb_id":37759,"parent_feature_id":12129},"url":"https://www.opensubtitles.com/fr/subtitles/dallas-s02e12-hdtv-x264-lol","related_links":[{"label":"All
+        subtitles for Tv Show Dallas","url":"https://www.opensubtitles.com/fr/features/redirect/12129","img_url":"https://s8.opensubtitles.com/features/9/2/1/12129.jpg"},{"label":"All
+        subtitles for Episode a call to arms","url":"https://www.opensubtitles.com/fr/features/redirect/333025","img_url":"https://s8.opensubtitles.com/features/5/2/0/333025.jpg"}],"files":[{"file_id":3907469,"cd_number":1,"file_name":"Dallas
+        S02E12.HDTV.x264-LOL"}]}},{"id":"3827567","type":"subtitle","attributes":{"subtitle_id":"3827567","language":"fr","download_count":361,"new_download_count":35,"hearing_impaired":false,"hd":true,"fps":0.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-06-27T19:39:51Z","ai_translated":false,"nb_cd":1,"slug":"dallas-s02e04-hdtv-x264-lol","machine_translated":false,"release":"Dallas
+        S02E04.HDTV.x264-LOL","comments":"","legacy_subtitle_id":5061772,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":333021,"feature_type":"Episode","year":2013,"title":"False
+        Confessions","movie_name":"Dallas - S02E04  False Confessions","imdb_id":2492970,"tmdb_id":851364,"season_number":2,"episode_number":4,"parent_imdb_id":1723760,"parent_title":"Dallas","parent_tmdb_id":37759,"parent_feature_id":12129},"url":"https://www.opensubtitles.com/fr/subtitles/dallas-s02e04-hdtv-x264-lol","related_links":[{"label":"All
+        subtitles for Tv Show Dallas","url":"https://www.opensubtitles.com/fr/features/redirect/12129","img_url":"https://s7.opensubtitles.com/features/9/2/1/12129.jpg"},{"label":"All
+        subtitles for Episode false confessions","url":"https://www.opensubtitles.com/fr/features/redirect/333021","img_url":"https://s5.opensubtitles.com/features/1/2/0/333021.jpg"}],"files":[{"file_id":3902801,"cd_number":1,"file_name":"Dallas
+        S02E04.HDTV.x264-LOL-fre"}]}},{"id":"3829211","type":"subtitle","attributes":{"subtitle_id":"3829211","language":"fr","download_count":510,"new_download_count":41,"hearing_impaired":false,"hd":true,"fps":25.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-06-27T18:10:54Z","ai_translated":false,"nb_cd":1,"slug":"dallas-s02e02-hdtv-x264-lol","machine_translated":false,"release":"Dallas
+        S02E02.HDTV.x264-LOL","comments":"","legacy_subtitle_id":5061668,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":333018,"feature_type":"Episode","year":2013,"title":"Venomous
+        Creatures","movie_name":"Dallas - S02E02  Venomous Creatures","imdb_id":2457014,"tmdb_id":851362,"season_number":2,"episode_number":2,"parent_imdb_id":1723760,"parent_title":"Dallas","parent_tmdb_id":37759,"parent_feature_id":12129},"url":"https://www.opensubtitles.com/fr/subtitles/dallas-s02e02-hdtv-x264-lol","related_links":[{"label":"All
+        subtitles for Tv Show Dallas","url":"https://www.opensubtitles.com/fr/features/redirect/12129","img_url":"https://s7.opensubtitles.com/features/9/2/1/12129.jpg"},{"label":"All
+        subtitles for Episode venomous creatures","url":"https://www.opensubtitles.com/fr/features/redirect/333018","img_url":"https://s2.opensubtitles.com/features/8/1/0/333018.jpg"}],"files":[{"file_id":3904485,"cd_number":1,"file_name":"Dallas
+        S02E02.HDTV.x264-LOL-fre"}]}},{"id":"3833853","type":"subtitle","attributes":{"subtitle_id":"3833853","language":"fr","download_count":405,"new_download_count":44,"hearing_impaired":false,"hd":false,"fps":23.976,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-03-25T17:14:30Z","ai_translated":false,"nb_cd":1,"slug":"dallas-2012-s02e09-hdtv-x264-lol-fre","machine_translated":false,"release":"Dallas.2012.S02E09.HDTV.x264-LOL-fre","comments":"","legacy_subtitle_id":4889947,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":333030,"feature_type":"Episode","year":2013,"title":"Ewings
+        Unite","movie_name":"Dallas - S02E09  Ewings Unite","imdb_id":2718126,"tmdb_id":851369,"season_number":2,"episode_number":9,"parent_imdb_id":1723760,"parent_title":"Dallas","parent_tmdb_id":37759,"parent_feature_id":12129},"url":"https://www.opensubtitles.com/fr/subtitles/dallas-2012-s02e09-hdtv-x264-lol-fre","related_links":[{"label":"All
+        subtitles for Tv Show Dallas","url":"https://www.opensubtitles.com/fr/features/redirect/12129","img_url":"https://s8.opensubtitles.com/features/9/2/1/12129.jpg"},{"label":"All
+        subtitles for Episode ewings unite","url":"https://www.opensubtitles.com/fr/features/redirect/333030","img_url":"https://s3.opensubtitles.com/features/0/3/0/333030.jpg"}],"files":[{"file_id":3909135,"cd_number":1,"file_name":"Dallas.2012.S02E09.HDTV.x264-LOL-fre"}]}},{"id":"3829046","type":"subtitle","attributes":{"subtitle_id":"3829046","language":"fr","download_count":375,"new_download_count":27,"hearing_impaired":false,"hd":false,"fps":23.976,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-03-17T15:48:18Z","ai_translated":false,"nb_cd":1,"slug":"dallas-2012-s02e08-hdtv-x264-lol-fre","machine_translated":false,"release":"Dallas.2012.S02E08.HDTV.x264-LOL-fre","comments":"","legacy_subtitle_id":4872640,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":333024,"feature_type":"Episode","year":2013,"title":"J.R.''s
+        Masterpiece","movie_name":"Dallas - S02E08  J.R.''s Masterpiece","imdb_id":2594184,"tmdb_id":851368,"season_number":2,"episode_number":8,"parent_imdb_id":1723760,"parent_title":"Dallas","parent_tmdb_id":37759,"parent_feature_id":12129},"url":"https://www.opensubtitles.com/fr/subtitles/dallas-2012-s02e08-hdtv-x264-lol-fre","related_links":[{"label":"All
+        subtitles for Tv Show Dallas","url":"https://www.opensubtitles.com/fr/features/redirect/12129","img_url":"https://s6.opensubtitles.com/features/9/2/1/12129.jpg"},{"label":"All
+        subtitles for Episode j.r.''s masterpiece","url":"https://www.opensubtitles.com/fr/features/redirect/333024","img_url":"https://s3.opensubtitles.com/features/4/2/0/333024.jpg"}],"files":[{"file_id":3904310,"cd_number":1,"file_name":"Dallas.2012.S02E08.HDTV.x264-LOL-fre"}]}},{"id":"3828876","type":"subtitle","attributes":{"subtitle_id":"3828876","language":"fr","download_count":440,"new_download_count":24,"hearing_impaired":false,"hd":false,"fps":23.976,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-03-14T15:35:37Z","ai_translated":false,"nb_cd":1,"slug":"dallas-2012-s02e07-hdtv-x264-lol-fre","machine_translated":false,"release":"Dallas.2012.S02E07.HDTV.x264-LOL-fre","comments":"","legacy_subtitle_id":4865589,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":333022,"feature_type":"Episode","year":2013,"title":"The
+        Furious and the Fast","movie_name":"Dallas - S02E07  The Furious and the Fast","imdb_id":2649810,"tmdb_id":851367,"season_number":2,"episode_number":7,"parent_imdb_id":1723760,"parent_title":"Dallas","parent_tmdb_id":37759,"parent_feature_id":12129},"url":"https://www.opensubtitles.com/fr/subtitles/dallas-2012-s02e07-hdtv-x264-lol-fre","related_links":[{"label":"All
+        subtitles for Tv Show Dallas","url":"https://www.opensubtitles.com/fr/features/redirect/12129","img_url":"https://s7.opensubtitles.com/features/9/2/1/12129.jpg"},{"label":"All
+        subtitles for Episode the furious and the fast","url":"https://www.opensubtitles.com/fr/features/redirect/333022","img_url":"https://s9.opensubtitles.com/features/2/2/0/333022.jpg"}],"files":[{"file_id":3904137,"cd_number":1,"file_name":"Dallas.2012.S02E07.HDTV.x264-LOL-fre"}]}},{"id":"3816302","type":"subtitle","attributes":{"subtitle_id":"3816302","language":"fr","download_count":439,"new_download_count":32,"hearing_impaired":false,"hd":false,"fps":23.976,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2013-02-26T11:45:08Z","ai_translated":false,"nb_cd":1,"slug":"dallas-2012-s02e05-hdtv-x264-lol-fre","machine_translated":false,"release":"Dallas.2012.S02E05.HDTV.x264-LOL-fre","comments":"","legacy_subtitle_id":4832674,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":333017,"feature_type":"Episode","year":2013,"title":"Trial
+        and Error","movie_name":"Dallas - S02E05  Trial and Error","imdb_id":2559492,"tmdb_id":851365,"season_number":2,"episode_number":5,"parent_imdb_id":1723760,"parent_title":"Dallas","parent_tmdb_id":37759,"parent_feature_id":12129},"url":"https://www.opensubtitles.com/fr/subtitles/dallas-2012-s02e05-hdtv-x264-lol-fre","related_links":[{"label":"All
+        subtitles for Tv Show Dallas","url":"https://www.opensubtitles.com/fr/features/redirect/12129","img_url":"https://s6.opensubtitles.com/features/9/2/1/12129.jpg"},{"label":"All
+        subtitles for Episode trial and error","url":"https://www.opensubtitles.com/fr/features/redirect/333017","img_url":"https://s4.opensubtitles.com/features/7/1/0/333017.jpg"}],"files":[{"file_id":3891533,"cd_number":1,"file_name":"Dallas.2012.S02E05.HDTV.x264-LOL-fre"}]}},{"id":"3828478","type":"subtitle","attributes":{"subtitle_id":"3828478","language":"fr","download_count":477,"new_download_count":27,"hearing_impaired":false,"hd":false,"fps":23.976,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2012-08-02T18:23:09Z","ai_translated":false,"nb_cd":1,"slug":"dallas-2012-01x09-family-business-x-264-lol-french-c-updated-addic7ed-com","machine_translated":false,"release":"Dallas
+        (2012) - 01x09 - Family Business.x.264.LOL.French.C.updated.Addic7ed.com","comments":"","legacy_subtitle_id":4630775,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":333014,"feature_type":"Episode","year":2012,"title":"Family
+        Business","movie_name":"Dallas - S01E09  Family Business","imdb_id":2336737,"tmdb_id":851358,"season_number":1,"episode_number":9,"parent_imdb_id":1723760,"parent_title":"Dallas","parent_tmdb_id":37759,"parent_feature_id":12129},"url":"https://www.opensubtitles.com/fr/subtitles/dallas-2012-01x09-family-business-x-264-lol-french-c-updated-addic7ed-com","related_links":[{"label":"All
+        subtitles for Tv Show Dallas","url":"https://www.opensubtitles.com/fr/features/redirect/12129","img_url":"https://s8.opensubtitles.com/features/9/2/1/12129.jpg"},{"label":"All
+        subtitles for Episode family business","url":"https://www.opensubtitles.com/fr/features/redirect/333014","img_url":"https://s6.opensubtitles.com/features/4/1/0/333014.jpg"}],"files":[{"file_id":3903735,"cd_number":1,"file_name":"Dallas
+        (2012) - 01x09 - Family Business.x.264.LOL.French.C.updated.Addic7ed.com"}]}},{"id":"3827316","type":"subtitle","attributes":{"subtitle_id":"3827316","language":"fr","download_count":831,"new_download_count":88,"hearing_impaired":true,"hd":true,"fps":23.976,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2012-07-05T23:43:07Z","ai_translated":false,"nb_cd":1,"slug":"dallas-2012-01x05-truth-and-consequences-720p-dimension-french-hi-c-updated-addic7ed-com","machine_translated":false,"release":"Dallas
+        (2012) - 01x05 - Truth and consequences.720p.Dimension.French.HI.C.updated.Addic7ed.com","comments":"","legacy_subtitle_id":4592952,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":333008,"feature_type":"Episode","year":2012,"title":"Truth
+        and Consequences","movie_name":"Dallas - S01E05  Truth and Consequences","imdb_id":2205550,"tmdb_id":851355,"season_number":1,"episode_number":5,"parent_imdb_id":1723760,"parent_title":"Dallas","parent_tmdb_id":37759,"parent_feature_id":12129},"url":"https://www.opensubtitles.com/fr/subtitles/dallas-2012-01x05-truth-and-consequences-720p-dimension-french-hi-c-updated-addic7ed-com","related_links":[{"label":"All
+        subtitles for Tv Show Dallas","url":"https://www.opensubtitles.com/fr/features/redirect/12129","img_url":"https://s4.opensubtitles.com/features/9/2/1/12129.jpg"},{"label":"All
+        subtitles for Episode truth and consequences","url":"https://www.opensubtitles.com/fr/features/redirect/333008","img_url":"https://s7.opensubtitles.com/features/8/0/0/333008.jpg"}],"files":[{"file_id":3902550,"cd_number":1,"file_name":"Dallas
+        (2012) - 01x05 - Truth and consequences.720p.Dimension.French.HI.C.updated.Addic7ed.com"}]}},{"id":"3829698","type":"subtitle","attributes":{"subtitle_id":"3829698","language":"fr","download_count":710,"new_download_count":70,"hearing_impaired":false,"hd":false,"fps":23.976,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2012-06-14T18:19:32Z","ai_translated":false,"nb_cd":1,"slug":"dallas-2012-01x02-hedging-your-bets-x264-lol-french-c-updated-addic7ed-com","machine_translated":false,"release":"Dallas
+        (2012) - 01x02 - Hedging Your Bets.x264.LOL.French.C.updated.Addic7ed.com","comments":"","legacy_subtitle_id":4576668,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":333003,"feature_type":"Episode","year":2012,"title":"Hedging
+        Your Bets","movie_name":"Dallas - S01E02  Hedging Your Bets","imdb_id":2372821,"tmdb_id":851352,"season_number":1,"episode_number":2,"parent_imdb_id":1723760,"parent_title":"Dallas","parent_tmdb_id":37759,"parent_feature_id":12129},"url":"https://www.opensubtitles.com/fr/subtitles/dallas-2012-01x02-hedging-your-bets-x264-lol-french-c-updated-addic7ed-com","related_links":[{"label":"All
+        subtitles for Tv Show Dallas","url":"https://www.opensubtitles.com/fr/features/redirect/12129","img_url":"https://s8.opensubtitles.com/features/9/2/1/12129.jpg"},{"label":"All
+        subtitles for Episode hedging your bets","url":"https://www.opensubtitles.com/fr/features/redirect/333003","img_url":"https://s6.opensubtitles.com/features/3/0/0/333003.jpg"}],"files":[{"file_id":3904980,"cd_number":1,"file_name":"Dallas
+        (2012) - 01x02 - Hedging Your Bets.x264.LOL.French.C.updated.Addic7ed.com"}]}},{"id":"3826568","type":"subtitle","attributes":{"subtitle_id":"3826568","language":"fr","download_count":1417,"new_download_count":79,"hearing_impaired":false,"hd":true,"fps":23.976,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2012-06-14T18:18:31Z","ai_translated":false,"nb_cd":1,"slug":"dallas-2012-01x01-changing-of-the-guard-x264-lol-french-c-updated-addic7ed-com","machine_translated":false,"release":"Dallas
+        (2012) - 01x01 - Changing of the Guard.x264.LOL.French.C.updated.Addic7ed.com","comments":"","legacy_subtitle_id":4576666,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":333006,"feature_type":"Episode","year":2012,"title":"Changing
+        of the Guard","movie_name":"Dallas - S01E01  Changing of the Guard","imdb_id":2366821,"tmdb_id":851351,"season_number":1,"episode_number":1,"parent_imdb_id":1723760,"parent_title":"Dallas","parent_tmdb_id":37759,"parent_feature_id":12129},"url":"https://www.opensubtitles.com/fr/subtitles/dallas-2012-01x01-changing-of-the-guard-x264-lol-french-c-updated-addic7ed-com","related_links":[{"label":"All
+        subtitles for Tv Show Dallas","url":"https://www.opensubtitles.com/fr/features/redirect/12129","img_url":"https://s6.opensubtitles.com/features/9/2/1/12129.jpg"},{"label":"All
+        subtitles for Episode changing of the guard","url":"https://www.opensubtitles.com/fr/features/redirect/333006","img_url":"https://s6.opensubtitles.com/features/6/0/0/333006.jpg"}],"files":[{"file_id":3901824,"cd_number":1,"file_name":"Dallas
+        (2012) - 01x01 - Changing of the Guard.x264.LOL.French.C.updated.Addic7ed.com"}]}},{"id":"2635753","type":"subtitle","attributes":{"subtitle_id":"2635753","language":"fr","download_count":181,"new_download_count":25,"hearing_impaired":false,"hd":false,"fps":24.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2011-01-16T12:29:50Z","ai_translated":false,"nb_cd":1,"slug":"happy-town-1x07-dallas-alice-doesn-t-live-here-anymore-webrip","machine_translated":false,"release":"Happy
+        Town - 1x07 - Dallas Alice Doesn''t Live here Anymore.WebRip","comments":"","legacy_subtitle_id":4054467,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":172791,"feature_type":"Episode","year":2010,"title":"Dallas
+        Alice Doesn''t Live Here Anymore","movie_name":"Happy Town - S01E07  Dallas
+        Alice Doesn''t Live Here Anymore","imdb_id":1509419,"tmdb_id":567715,"season_number":1,"episode_number":7,"parent_imdb_id":1379722,"parent_title":"Happy
+        Town","parent_tmdb_id":18683,"parent_feature_id":10552},"url":"https://www.opensubtitles.com/fr/subtitles/happy-town-1x07-dallas-alice-doesn-t-live-here-anymore-webrip","related_links":[{"label":"All
+        subtitles for Tv Show Happy Town","url":"https://www.opensubtitles.com/fr/features/redirect/10552","img_url":"https://s3.opensubtitles.com/features/2/5/5/10552.jpg"},{"label":"All
+        subtitles for Episode dallas alice doesn''t live here anymore","url":"https://www.opensubtitles.com/fr/features/redirect/172791","img_url":"https://s2.opensubtitles.com/features/1/9/7/172791.jpg"}],"files":[{"file_id":2710095,"cd_number":1,"file_name":"Happy
+        Town - 1x07 - Dallas Alice Doesnt Live here Anymore.WebRip"}]}}]}'
     headers:
       Access-Control-Allow-Headers:
       - Origin, Authorization, Accept, Api-Key, Content-Type, X-User-Agent
@@ -131,10 +283,12 @@ interactions:
       - GET, HEAD, POST, OPTIONS
       Access-Control-Allow-Origin:
       - '*'
-      CF-Cache-Status:
-      - MISS
+      Access-Control-Expose-Headers:
+      - X-Auth-Token
+      Alt-Svc:
+      - h3=":443"; ma=86400
       CF-RAY:
-      - 91189ca44aceedf8-LHR
+      - a577fd517a85e3cc-LIS
       Cache-Control:
       - public, max-age=86400
       Connection:
@@ -142,67 +296,67 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 13 Feb 2025 23:31:25 GMT
+      - Sun, 08 Nov 2026 22:24:43 GMT
       Last-Modified:
-      - Thu, 13 Feb 2025 23:31:25 GMT
+      - Sun, 08 Nov 2026 22:24:43 GMT
       NEL:
-      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       RateLimit-Limit:
       - '5'
       RateLimit-Remaining:
-      - '4'
+      - '3'
       RateLimit-Reset:
       - '1'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=8%2FjUaDfoTyyksLEd9v9D5OZcyUY6vf%2B4YWiBwfrdavaBidC%2FvDG8HTdlM3rPzNfAaQ5cf0k7rj4gin5%2Fm3L2weI84qVec8ehxO5hgEP5xQSUQMOc8%2Bw14sX%2FHGwuYKPlWlkVJCTwoMo%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=3vYdE%2FFudYo7VhZ2ZCPx3lCQb5L5jGJcVtv%2FFotpF%2FrplLC644CrtiCdzIUcTAZlDhi9yX5CcbQHZ%2Feixz6EkmikxMCzZNL10grpCi317PgClQtYmjnkMAzq1mmJKx2rhcKgb0iCCGs%3D"}]}'
       Server:
       - cloudflare
+      Server-Timing:
+      - miss, 0_TR_client_wait;dur=0, _Tw_queues;dur=0, 2_Tc_bak_connect;dur=2, 3_Tr_bak_response;dur=121
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
       Strict-Transport-Security:
-      - max-age=15552000; includeSubDomains; preload
+      - max-age=31536000; includeSubDomains; preload
       Transfer-Encoding:
       - chunked
       Vary:
-      - Accept-Encoding
+      - accept-encoding
       Via:
-      - kong/3.3.0
-      X-Cache-Backend:
-      - rb13
+      - 1.1 kong/3.9.1
       X-Content-Type-Options:
       - nosniff
-      X-Download-Options:
-      - noopen
       X-Frame-Options:
       - SAMEORIGIN
       X-Kong-Proxy-Latency:
-      - '1'
+      - '8'
+      X-Kong-Request-Id:
+      - 501b220c5c44b806610582698d86d56b
       X-Kong-Upstream-Latency:
-      - '24'
+      - '125'
       X-RateLimit-Limit-Second:
       - '5'
       X-RateLimit-Remaining-Second:
-      - '4'
-      X-Request-Id:
-      - 47b3e525-b4e4-4ebf-85be-1df34cfab442
-      X-Runtime:
-      - '0.022594'
-      X-Var-Cache:
-      - MISS
-      X-Via:
-      - lb1
-      X-Vip:
-      - 'false'
-      X-Vip-Consumer:
-      - 'false'
-      X-Vip-User:
-      - 'false'
+      - '3'
+      X-Request-ID:
+      - 94515b68-4b0b-4f10-8ac6-4affc66f9c6d
       X-XSS-Protection:
       - 1; mode=block
-      alt-svc:
-      - h3=":443"; ma=86400
+      cf-cache-status:
+      - HIT
       content-length:
-      - '6635'
-      server-timing:
-      - cfL4;desc="?proto=TCP&rtt=31996&min_rtt=31982&rtt_var=12003&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2856&recv_bytes=882&delivery_rate=90550&cwnd=251&unsent_bytes=0&cid=3b00da3e0f584108&ts=101&x=0"
+      - '55382'
+      x-backend-server:
+      - rb1
+      x-download-options:
+      - noopen
+      x-runtime:
+      - '0.120068'
+      x-vip:
+      - 'false'
+      x-vip-consumer:
+      - 'false'
+      x-vip-user:
+      - 'false'
     status:
       code: 200
       message: OK
@@ -212,71 +366,62 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, zstd
       Api-Key:
       - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
-      Connection:
-      - keep-alive
       Content-Type:
       - application/json
+      Host:
+      - api.opensubtitles.com
       User-Agent:
-      - Subliminal v2.2
+      - Subliminal v2.8
     method: GET
-    uri: https://api.opensubtitles.com/api/v1/subtitles?episode_number=3&languages=fr&page=1&query=dallas&season_number=1
+    uri: https://api.opensubtitles.com/api/v1/subtitles?episode_number=3&languages=fr&page=1&query=dallas&season_number=1&type=episode
   response:
-    body:
-      string: ''
+    body: {}
     headers:
       Access-Control-Allow-Origin:
       - '*'
-      CF-Cache-Status:
-      - MISS
+      Access-Control-Expose-Headers:
+      - X-Auth-Token
+      Alt-Svc:
+      - h3=":443"; ma=86400
       CF-RAY:
-      - 91189ca56ab0ef1b-LHR
+      - a577fd511922e3b4-LIS
       Cache-Control:
       - public, max-age=86400
       Connection:
       - keep-alive
-      Content-Length:
-      - '0'
+      Content-Type:
+      - text/html
       Date:
-      - Thu, 13 Feb 2025 23:31:25 GMT
+      - Sun, 08 Nov 2026 22:24:43 GMT
       Location:
-      - /api/v1/subtitles?episode_number=3&languages=fr&query=dallas&season_number=1
+      - /api/v1/subtitles?episode_number=3&languages=fr&query=dallas&season_number=1&type=episode
       NEL:
-      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
-      RateLimit-Limit:
-      - '5'
-      RateLimit-Remaining:
-      - '4'
-      RateLimit-Reset:
-      - '1'
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=D2wkT35LJmFTKU%2Fl1N4Z083MScdVRlIXmhRDWc5dqLaIKPfuV9FLRd50mVlWlJfQzPb2ll8GBo%2F%2BKFIoSDDvH1E%2FqJOkUomxRQCJRYGC33YZaO3kf8D6eQzOxJ4XvcyjwNUK32wnlrs%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=aO9jxMtnbT9TvYogxH2W1fmpW8mTIgYGa2vDsa9GwMxWZHPzui0IVHATyX1TsIIpWgmkrbWU1u%2B4kj4o%2BtGxl%2FlLmHccaahhkfPj2M94EXp1n90jRMc5knkYzl6ERkIlkEPWLlVM%2Bwk%3D"}]}'
       Server:
       - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
       Strict-Transport-Security:
-      - max-age=15552000; includeSubDomains; preload
-      Vary:
-      - Accept-Encoding
-      Via:
-      - kong/3.3.0
+      - max-age=31536000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      X-Canonical:
+      - '1'
       X-Content-Type-Options:
       - nosniff
-      X-Kong-Proxy-Latency:
+      X-Kong-Request-Id:
+      - 4008f444792e0942ad42493aee099903
+      X-Kong-Response-Latency:
       - '0'
-      X-Kong-Upstream-Latency:
-      - '0'
-      X-RateLimit-Limit-Second:
-      - '5'
-      X-RateLimit-Remaining-Second:
-      - '4'
-      X-Varnish:
-      - '19144512034'
-      alt-svc:
-      - h3=":443"; ma=86400
-      server-timing:
-      - cfL4;desc="?proto=TCP&rtt=32846&min_rtt=31884&rtt_var=12644&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2855&recv_bytes=921&delivery_rate=90829&cwnd=250&unsent_bytes=0&cid=9c2c6542f63ad85c&ts=90&x=0"
+      X-OS-Rule:
+      - canonical
+      cf-cache-status:
+      - HIT
     status:
       code: 301
       message: Moved Permanently
@@ -286,51 +431,26 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, zstd
       Api-Key:
       - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
-      Connection:
-      - keep-alive
+      Content-Type:
+      - application/json
+      Host:
+      - api.opensubtitles.com
       User-Agent:
-      - Subliminal v2.2
+      - Subliminal v2.8
     method: GET
-    uri: https://api.opensubtitles.com/api/v1/subtitles?episode_number=3&languages=fr&query=dallas&season_number=1
+    uri: https://api.opensubtitles.com/api/v1/subtitles?episode_number=3&languages=fr&query=dallas&season_number=1&type=episode
   response:
     body:
-      string: "{\"total_pages\":1,\"total_count\":4,\"per_page\":50,\"page\":1,\"data\":[{\"id\":\"6915085\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"6915085\",\"language\":\"fr\",\"download_count\":44,\"new_download_count\":15,\"hearing_impaired\":false,\"hd\":true,\"fps\":0.0,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2022-07-05T13:19:24Z\",\"file_hashes\":[\"fe95ce64ea0cd00c\"],\"ai_translated\":false,\"nb_cd\":1,\"slug\":\"space-battleship-yamato-2199-2012-03-vostfr-bdrip-1080p-flac-x265-gundamguy\",\"machine_translated\":false,\"release\":\"Space
-        Battleship Yamato 2199 (2012) - 03 VOSTFR BDrip 1080p FLAC x265-GundamGuy\",\"comments\":\"Sous-titres
-        officiels \xE9diteur.\",\"legacy_subtitle_id\":9159327,\"legacy_uploader_id\":8338908,\"uploader\":{\"uploader_id\":285788,\"name\":\"sonkun02\",\"rank\":\"Platinum
-        Member\"},\"feature_details\":{\"feature_id\":1388271,\"feature_type\":\"Episode\",\"year\":2012,\"title\":\"Escape
-        from the Jupiter Sphere\",\"movie_name\":\"Star Blazers [Space Battleship
-        Yamato] 2199 - S01E03  Escape from the Jupiter Sphere\",\"imdb_id\":3626220,\"tmdb_id\":1404349,\"season_number\":1,\"episode_number\":3,\"parent_imdb_id\":2496120,\"parent_title\":\"Star
-        Blazers [Space Battleship Yamato] 2199\",\"parent_tmdb_id\":45844,\"parent_feature_id\":13449},\"url\":\"https://www.opensubtitles.com/fr/subtitles/legacy/9159327\",\"related_links\":[{\"label\":\"All
-        subtitles for Tv Show Star Blazers [Space Battleship Yamato] 2199\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/13449\",\"img_url\":\"https://s9.opensubtitles.com/features/1/7/2/1388271.jpg\"},{\"label\":\"All
-        subtitles for Episode escape from the jupiter sphere\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/1388271\"}],\"files\":[{\"file_id\":7869617,\"cd_number\":1,\"file_name\":\"Space
-        Battleship Yamato 2199 (2012) - 03 VOSTFR BDrip 1080p FLAC x265-GundamGuy\"}]}},{\"id\":\"3829531\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"3829531\",\"language\":\"fr\",\"download_count\":683,\"new_download_count\":15,\"hearing_impaired\":false,\"hd\":false,\"fps\":23.976,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2012-06-21T16:43:26Z\",\"file_hashes\":[\"847b4f45c4eda9ee\",\"3473c8003b55fd6d\",\"ec30db211134118a\"],\"ai_translated\":false,\"nb_cd\":1,\"slug\":\"dallas-2012-01x03-the-price-you-pay-x264-lol-french-c-updated-addic7ed-com\",\"machine_translated\":false,\"release\":\"Dallas
-        (2012) - 01x03 - The Price You Pay.x264-LOL.French.C.updated.Addic7ed.com\",\"comments\":\"\",\"legacy_subtitle_id\":4581134,\"legacy_uploader_id\":0,\"uploader\":{\"uploader_id\":3282,\"name\":\"os-auto\",\"rank\":\"Application
-        Developers\"},\"feature_details\":{\"feature_id\":333010,\"feature_type\":\"Episode\",\"year\":2012,\"title\":\"The
-        Price You Pay\",\"movie_name\":\"Dallas - S01E03  The Price You Pay\",\"imdb_id\":2205526,\"tmdb_id\":851353,\"season_number\":1,\"episode_number\":3,\"parent_imdb_id\":1723760,\"parent_title\":\"Dallas\",\"parent_tmdb_id\":37759,\"parent_feature_id\":12129},\"url\":\"https://www.opensubtitles.com/fr/subtitles/legacy/4581134\",\"related_links\":[{\"label\":\"All
-        subtitles for Tv Show Dallas\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/12129\",\"img_url\":\"https://s9.opensubtitles.com/features/0/1/0/333010.jpg\"},{\"label\":\"All
-        subtitles for Episode the price you pay\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/333010\"}],\"files\":[{\"file_id\":3904804,\"cd_number\":1,\"file_name\":\"Dallas
-        (2012) - 01x03 - The Price You Pay.x264-LOL.French.C.updated.Addic7ed.com\"}]}},{\"id\":\"3359569\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"3359569\",\"language\":\"fr\",\"download_count\":216,\"new_download_count\":6,\"hearing_impaired\":false,\"hd\":true,\"fps\":23.976,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2012-02-27T08:35:01Z\",\"file_hashes\":[\"9231d615ef489f8c\"],\"ai_translated\":false,\"nb_cd\":1,\"slug\":\"the-event-s01e03-protect-them-from-the-truth-720p-bluray\",\"machine_translated\":false,\"release\":\"The
-        Event S01E03 Protect Them from the Truth 720p BluRay\",\"comments\":\"\",\"legacy_subtitle_id\":4478723,\"legacy_uploader_id\":1253306,\"uploader\":{\"uploader_id\":55203,\"name\":\"Pb8SOWOA\",\"rank\":\"bronze
-        member\"},\"feature_details\":{\"feature_id\":271191,\"feature_type\":\"Episode\",\"year\":2010,\"title\":\"Protect
-        Them from the Truth\",\"movie_name\":\"The Event - S01E03  Protect Them from
-        the Truth\",\"imdb_id\":1653551,\"tmdb_id\":769867,\"season_number\":1,\"episode_number\":3,\"parent_imdb_id\":1582459,\"parent_title\":\"The
-        Event\",\"parent_tmdb_id\":32730,\"parent_feature_id\":10757},\"url\":\"https://www.opensubtitles.com/fr/subtitles/legacy/4478723\",\"related_links\":[{\"label\":\"All
-        subtitles for Tv Show The Event\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/10757\",\"img_url\":\"https://s9.opensubtitles.com/features/1/9/1/271191.jpg\"},{\"label\":\"All
-        subtitles for Episode protect them from the truth\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/271191\"}],\"files\":[{\"file_id\":3426918,\"cd_number\":1,\"file_name\":\"The
-        Event S01E03 Protect Them from the Truth 720p BluRay\"}]}},{\"id\":\"3359298\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"3359298\",\"language\":\"fr\",\"download_count\":1238,\"new_download_count\":17,\"hearing_impaired\":false,\"hd\":true,\"fps\":23.976,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2010-10-07T05:56:07Z\",\"file_hashes\":[\"2580967d9c7d41ce\",\"4b6b5d669ca7f926\",\"f09dcaefd70d39ea\",\"86030772415f020b\"],\"ai_translated\":false,\"nb_cd\":1,\"slug\":\"the-event-1x03-protect-them-from-the-truth-hdtv-the-event-01x03-protect-them-from-the-truth\",\"machine_translated\":false,\"release\":\"The
-        Event - 1x03 - Protect Them from the Truth.HDTV.The Event - 01x03 - Protect
-        Them From the Truth\",\"comments\":\"\",\"legacy_subtitle_id\":3870905,\"legacy_uploader_id\":1168246,\"uploader\":{\"uploader_id\":53768,\"name\":\"nicocha\",\"rank\":\"bronze
-        member\"},\"feature_details\":{\"feature_id\":271191,\"feature_type\":\"Episode\",\"year\":2010,\"title\":\"Protect
-        Them from the Truth\",\"movie_name\":\"The Event - S01E03  Protect Them from
-        the Truth\",\"imdb_id\":1653551,\"tmdb_id\":769867,\"season_number\":1,\"episode_number\":3,\"parent_imdb_id\":1582459,\"parent_title\":\"The
-        Event\",\"parent_tmdb_id\":32730,\"parent_feature_id\":10757},\"url\":\"https://www.opensubtitles.com/fr/subtitles/legacy/3870905\",\"related_links\":[{\"label\":\"All
-        subtitles for Tv Show The Event\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/10757\",\"img_url\":\"https://s9.opensubtitles.com/features/1/9/1/271191.jpg\"},{\"label\":\"All
-        subtitles for Episode protect them from the truth\",\"url\":\"https://www.opensubtitles.com/fr/features/redirect/271191\"}],\"files\":[{\"file_id\":3426643,\"cd_number\":1,\"file_name\":\"The
-        Event - 1x03 - Protect Them from the Truth.HDTV.The Event - 01x03 - Protect
-        Them From the Truth\"}]}}]}"
+      string: '{"total_pages":1,"total_count":1,"per_page":50,"page":1,"data":[{"id":"3829531","type":"subtitle","attributes":{"subtitle_id":"3829531","language":"fr","download_count":707,"new_download_count":32,"hearing_impaired":false,"hd":false,"fps":23.976,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2012-06-21T16:43:26Z","ai_translated":false,"nb_cd":1,"slug":"dallas-2012-01x03-the-price-you-pay-x264-lol-french-c-updated-addic7ed-com","machine_translated":false,"release":"Dallas
+        (2012) - 01x03 - The Price You Pay.x264-LOL.French.C.updated.Addic7ed.com","comments":"","legacy_subtitle_id":4581134,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":333010,"feature_type":"Episode","year":2012,"title":"The
+        Price You Pay","movie_name":"Dallas - S01E03  The Price You Pay","imdb_id":2205526,"tmdb_id":851353,"season_number":1,"episode_number":3,"parent_imdb_id":1723760,"parent_title":"Dallas","parent_tmdb_id":37759,"parent_feature_id":12129},"url":"https://www.opensubtitles.com/fr/subtitles/dallas-2012-01x03-the-price-you-pay-x264-lol-french-c-updated-addic7ed-com","related_links":[{"label":"All
+        subtitles for Tv Show Dallas","url":"https://www.opensubtitles.com/fr/features/redirect/12129","img_url":"https://s8.opensubtitles.com/features/9/2/1/12129.jpg"},{"label":"All
+        subtitles for Episode the price you pay","url":"https://www.opensubtitles.com/fr/features/redirect/333010","img_url":"https://s4.opensubtitles.com/features/0/1/0/333010.jpg"}],"files":[{"file_id":3904804,"cd_number":1,"file_name":"Dallas
+        (2012) - 01x03 - The Price You Pay.x264-LOL.French.C.updated.Addic7ed.com"}]}}]}'
     headers:
       Access-Control-Allow-Headers:
       - Origin, Authorization, Accept, Api-Key, Content-Type, X-User-Agent
@@ -338,12 +458,12 @@ interactions:
       - GET, HEAD, POST, OPTIONS
       Access-Control-Allow-Origin:
       - '*'
-      Age:
-      - '0'
-      CF-Cache-Status:
-      - HIT
+      Access-Control-Expose-Headers:
+      - X-Auth-Token
+      Alt-Svc:
+      - h3=":443"; ma=86400
       CF-RAY:
-      - 91189ca67b77ef21-LHR
+      - a577fd517a10e3b4-LIS
       Cache-Control:
       - public, max-age=86400
       Connection:
@@ -351,11 +471,11 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 13 Feb 2025 23:31:25 GMT
+      - Sun, 08 Nov 2026 22:24:43 GMT
       Last-Modified:
-      - Thu, 13 Feb 2025 23:31:25 GMT
+      - Sun, 08 Nov 2026 22:24:43 GMT
       NEL:
-      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       RateLimit-Limit:
       - '5'
       RateLimit-Remaining:
@@ -363,55 +483,234 @@ interactions:
       RateLimit-Reset:
       - '1'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=PAHfXfKSXNtNj9EfVCrI1EXqRyUzfBsa0hgHvLXyhxIVhqce036Rapym587c1x9dPvzu3FS10L9l4VBeNJFD%2FGOMCOTF5doQ48NXiygQ2Jp8AOlaTadF%2FdfY6Krt4YHyr4RqovqVUX0%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=g%2FJrJlZmueRYFVMDBRpLGacOjoeM0nO62Ivyt9%2BRWgrMLMNpbble4ZTP3FeZzsWMZFkEWS%2BvTpQhGYsCwlYVpqQmxOyxhDt%2FeuRwwua7osLCgML8%2F3rqO3HHza7cLsQtK67XvhC65c8%3D"}]}'
       Server:
       - cloudflare
+      Server-Timing:
+      - miss, 0_TR_client_wait;dur=0, _Tw_queues;dur=0, 2_Tc_bak_connect;dur=0, 3_Tr_bak_response;dur=32
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
       Strict-Transport-Security:
-      - max-age=15552000; includeSubDomains; preload
+      - max-age=31536000; includeSubDomains; preload
       Transfer-Encoding:
       - chunked
       Vary:
-      - Accept-Encoding
+      - accept-encoding
       Via:
-      - kong/3.3.0
-      X-Cache-Backend:
-      - rb13
+      - 1.1 kong/3.9.1
       X-Content-Type-Options:
       - nosniff
-      X-Download-Options:
-      - noopen
       X-Frame-Options:
       - SAMEORIGIN
       X-Kong-Proxy-Latency:
-      - '1'
+      - '3'
+      X-Kong-Request-Id:
+      - 621d945c3b6c5e3f8b3b0b021f83db22
       X-Kong-Upstream-Latency:
-      - '24'
+      - '36'
       X-RateLimit-Limit-Second:
       - '5'
       X-RateLimit-Remaining-Second:
       - '4'
-      X-Request-Id:
-      - 47b3e525-b4e4-4ebf-85be-1df34cfab442
-      X-Runtime:
-      - '0.022594'
-      X-Var-Cache:
-      - MISS
-      X-Via:
-      - lb1
-      X-Vip:
-      - 'false'
-      X-Vip-Consumer:
-      - 'false'
-      X-Vip-User:
-      - 'false'
+      X-Request-ID:
+      - c7a919a3-9ab1-40ca-849f-7a74b908d304
       X-XSS-Protection:
       - 1; mode=block
-      alt-svc:
-      - h3=":443"; ma=86400
+      cf-cache-status:
+      - HIT
       content-length:
-      - '6635'
-      server-timing:
-      - cfL4;desc="?proto=TCP&rtt=32081&min_rtt=31986&rtt_var=12186&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2855&recv_bytes=882&delivery_rate=88424&cwnd=246&unsent_bytes=0&cid=8f87a482cffb4ec7&ts=48&x=0"
+      - '1714'
+      x-backend-server:
+      - rb13
+      x-download-options:
+      - noopen
+      x-runtime:
+      - '0.030405'
+      x-vip:
+      - 'false'
+      x-vip-consumer:
+      - 'false'
+      x-vip-user:
+      - 'false'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, zstd
+      Api-Key:
+      - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
+      Content-Type:
+      - application/json
+      Host:
+      - api.opensubtitles.com
+      User-Agent:
+      - Subliminal v2.8
+    method: GET
+    uri: https://api.opensubtitles.com/api/v1/subtitles?episode_number=3&languages=fr&page=1&query=dallas&season_number=1&type=episode
+  response:
+    body: {}
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Expose-Headers:
+      - X-Auth-Token
+      Age:
+      - '415'
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      CF-RAY:
+      - a577fd5168711491-MRS
+      Cache-Control:
+      - public, max-age=86400
+      Connection:
+      - keep-alive
+      Content-Type:
+      - text/html
+      Date:
+      - Sun, 08 Nov 2026 22:24:43 GMT
+      Location:
+      - /api/v1/subtitles?episode_number=3&languages=fr&query=dallas&season_number=1&type=episode
+      NEL:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=hOgn7TcypKklH3SS2L4W7u43NV2EOutvNTRoTqa2BowOZ8YF5VLJRcxZyVGVLHDISf9sS5PCGHrTVlg4Ex%2Fk6BqQW6fEDJzBTG4CVUzATSbZnG0TKYv%2BwdVhiqnWD4jjzZG9z7B53WQ%3D"}]}'
+      Server:
+      - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      X-Canonical:
+      - '1'
+      X-Content-Type-Options:
+      - nosniff
+      X-Kong-Request-Id:
+      - 4008f444792e0942ad42493aee099903
+      X-Kong-Response-Latency:
+      - '0'
+      X-OS-Rule:
+      - canonical
+      cf-cache-status:
+      - HIT
+    status:
+      code: 301
+      message: Moved Permanently
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate, zstd
+      Api-Key:
+      - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
+      Content-Type:
+      - application/json
+      Host:
+      - api.opensubtitles.com
+      User-Agent:
+      - Subliminal v2.8
+    method: GET
+    uri: https://api.opensubtitles.com/api/v1/subtitles?episode_number=3&languages=fr&query=dallas&season_number=1&type=episode
+  response:
+    body:
+      string: '{"total_pages":1,"total_count":1,"per_page":50,"page":1,"data":[{"id":"3829531","type":"subtitle","attributes":{"subtitle_id":"3829531","language":"fr","download_count":707,"new_download_count":32,"hearing_impaired":false,"hd":false,"fps":23.976,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2012-06-21T16:43:26Z","ai_translated":false,"nb_cd":1,"slug":"dallas-2012-01x03-the-price-you-pay-x264-lol-french-c-updated-addic7ed-com","machine_translated":false,"release":"Dallas
+        (2012) - 01x03 - The Price You Pay.x264-LOL.French.C.updated.Addic7ed.com","comments":"","legacy_subtitle_id":4581134,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
+        Developers"},"feature_details":{"feature_id":333010,"feature_type":"Episode","year":2012,"title":"The
+        Price You Pay","movie_name":"Dallas - S01E03  The Price You Pay","imdb_id":2205526,"tmdb_id":851353,"season_number":1,"episode_number":3,"parent_imdb_id":1723760,"parent_title":"Dallas","parent_tmdb_id":37759,"parent_feature_id":12129},"url":"https://www.opensubtitles.com/fr/subtitles/dallas-2012-01x03-the-price-you-pay-x264-lol-french-c-updated-addic7ed-com","related_links":[{"label":"All
+        subtitles for Tv Show Dallas","url":"https://www.opensubtitles.com/fr/features/redirect/12129","img_url":"https://s8.opensubtitles.com/features/9/2/1/12129.jpg"},{"label":"All
+        subtitles for Episode the price you pay","url":"https://www.opensubtitles.com/fr/features/redirect/333010","img_url":"https://s4.opensubtitles.com/features/0/1/0/333010.jpg"}],"files":[{"file_id":3904804,"cd_number":1,"file_name":"Dallas
+        (2012) - 01x03 - The Price You Pay.x264-LOL.French.C.updated.Addic7ed.com"}]}}]}'
+    headers:
+      Access-Control-Allow-Headers:
+      - Origin, Authorization, Accept, Api-Key, Content-Type, X-User-Agent
+      Access-Control-Allow-Methods:
+      - GET, HEAD, POST, OPTIONS
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Expose-Headers:
+      - X-Auth-Token
+      Age:
+      - '415'
+      Alt-Svc:
+      - h3=":443"; ma=86400
+      CF-RAY:
+      - a577fd51ecb994ad-LIS
+      Cache-Control:
+      - public, max-age=86400
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 08 Nov 2026 22:24:43 GMT
+      Last-Modified:
+      - Sun, 08 Nov 2026 22:24:43 GMT
+      NEL:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      RateLimit-Limit:
+      - '5'
+      RateLimit-Remaining:
+      - '4'
+      RateLimit-Reset:
+      - '1'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=tpyHatZW3UpTixx6N9EY4pclaGn%2FD4xpsWnUMNXfo00nrfMeQitOmdbT9KcoeHpxldW7AjEIibaiQ4OpDIqzKR84Z3TYusEqNRt%2BKAj6BoRl4s1bSw7RcFd4RI2ZsZXdynCkB%2FBL%2BQQ%3D"}]}'
+      Server:
+      - cloudflare
+      Server-Timing:
+      - miss, 0_TR_client_wait;dur=0, _Tw_queues;dur=0, 2_Tc_bak_connect;dur=0, 3_Tr_bak_response;dur=32
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - accept-encoding
+      Via:
+      - 1.1 kong/3.9.1
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Kong-Proxy-Latency:
+      - '3'
+      X-Kong-Request-Id:
+      - 621d945c3b6c5e3f8b3b0b021f83db22
+      X-Kong-Upstream-Latency:
+      - '36'
+      X-RateLimit-Limit-Second:
+      - '5'
+      X-RateLimit-Remaining-Second:
+      - '4'
+      X-Request-ID:
+      - c7a919a3-9ab1-40ca-849f-7a74b908d304
+      X-XSS-Protection:
+      - 1; mode=block
+      cf-cache-status:
+      - HIT
+      content-length:
+      - '1714'
+      x-backend-server:
+      - rb13
+      x-download-options:
+      - noopen
+      x-runtime:
+      - '0.030405'
+      x-vip:
+      - 'false'
+      x-vip-consumer:
+      - 'false'
+      x-vip-user:
+      - 'false'
     status:
       code: 200
       message: OK

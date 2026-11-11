@@ -5,71 +5,62 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, zstd
       Api-Key:
       - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
-      Connection:
-      - keep-alive
       Content-Type:
       - application/json
+      Host:
+      - api.opensubtitles.com
       User-Agent:
-      - Subliminal v2.2
+      - Subliminal v2.8
     method: GET
-    uri: https://api.opensubtitles.com/api/v1/subtitles?languages=fr&page=1&query=enders.game.2013.720p.bluray.x264-sparks.mkv
+    uri: https://api.opensubtitles.com/api/v1/subtitles?languages=fr&page=1&query=enders.game.2013.720p.bluray.x264-sparks.mkv&type=movie
   response:
-    body:
-      string: ''
+    body: {}
     headers:
       Access-Control-Allow-Origin:
       - '*'
-      CF-Cache-Status:
-      - MISS
+      Access-Control-Expose-Headers:
+      - X-Auth-Token
+      Alt-Svc:
+      - h3=":443"; ma=86400
       CF-RAY:
-      - 91189ca6def25bf0-LIS
+      - a577fd516f2b636c-MRS
       Cache-Control:
       - public, max-age=86400
       Connection:
       - keep-alive
-      Content-Length:
-      - '0'
+      Content-Type:
+      - text/html
       Date:
-      - Thu, 13 Feb 2025 23:31:25 GMT
+      - Sun, 08 Nov 2026 22:24:43 GMT
       Location:
-      - /api/v1/subtitles?languages=fr&query=enders.game.2013.720p.bluray.x264-sparks.mkv
+      - /api/v1/subtitles?languages=fr&query=enders.game.2013.720p.bluray.x264-sparks.mkv&type=movie
       NEL:
-      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
-      RateLimit-Limit:
-      - '5'
-      RateLimit-Remaining:
-      - '4'
-      RateLimit-Reset:
-      - '1'
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=u2RGuUdqkJ2BT6NrR%2Fky2FSNULv2nVSnwGGS0wrdKas1Xq%2FGM0p9UHEWqHb7zNa84c5QGupAHQIYOZSSjmj6z%2BBMR0dA8or1lND2m%2Bm%2F4R6E9wUW9DJMI6ebcbQ5%2BKBn%2BPGo5PvaGAQ%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=dAIlLqTZB6Gu3IvR4lMHl7NumL0S0MMHTb5rUBGE6xqtLnRpIPPcZCo4DaHHSHSPa5yakJTrah0sNbsa5vRSFIXhm9nbZYSLz6jEOWkIDkK74DhKjcc%2FhforZf9hhQaGpAWZ4BXx0WU%3D"}]}'
       Server:
       - cloudflare
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
       Strict-Transport-Security:
-      - max-age=15552000; includeSubDomains; preload
-      Vary:
-      - Accept-Encoding
-      Via:
-      - kong/3.3.0
+      - max-age=31536000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      X-Canonical:
+      - '1'
       X-Content-Type-Options:
       - nosniff
-      X-Kong-Proxy-Latency:
+      X-Kong-Request-Id:
+      - 69cbc66de017c711ffe0175eab626b18
+      X-Kong-Response-Latency:
       - '1'
-      X-Kong-Upstream-Latency:
-      - '0'
-      X-RateLimit-Limit-Second:
-      - '5'
-      X-RateLimit-Remaining-Second:
-      - '4'
-      X-Varnish:
-      - '19197559793'
-      alt-svc:
-      - h3=":443"; ma=86400
-      server-timing:
-      - cfL4;desc="?proto=TCP&rtt=3127&min_rtt=2793&rtt_var=1286&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2855&recv_bytes=926&delivery_rate=1036877&cwnd=238&unsent_bytes=0&cid=419ebf40f692f49c&ts=76&x=0"
+      X-OS-Rule:
+      - canonical
+      cf-cache-status:
+      - MISS
     status:
       code: 301
       message: Moved Permanently
@@ -79,26 +70,85 @@ interactions:
       Accept:
       - '*/*'
       Accept-Encoding:
-      - gzip, deflate
+      - gzip, deflate, zstd
       Api-Key:
       - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
-      Connection:
-      - keep-alive
+      Content-Type:
+      - application/json
+      Host:
+      - api.opensubtitles.com
       User-Agent:
-      - Subliminal v2.2
+      - Subliminal v2.8
     method: GET
-    uri: https://api.opensubtitles.com/api/v1/subtitles?languages=fr&query=enders.game.2013.720p.bluray.x264-sparks.mkv
+    uri: https://api.opensubtitles.com/api/v1/subtitles?languages=fr&query=enders.game.2013.720p.bluray.x264-sparks.mkv&type=movie
   response:
     body:
-      string: '{"total_pages":1,"total_count":2,"per_page":50,"page":1,"data":[{"id":"940630","type":"subtitle","attributes":{"subtitle_id":"940630","language":"fr","download_count":1818,"new_download_count":38,"hearing_impaired":false,"hd":false,"fps":0.0,"votes":0,"ratings":0.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2014-12-29T03:32:34Z","file_hashes":["a703b02f10ab6980"],"ai_translated":false,"nb_cd":1,"slug":"5982036-ender-s-game-2013-korsub-hdrip-xvid-no1knows","machine_translated":false,"release":"Ender''s
-        Game 2013 KORSUB HDRip XViD NO1KNOWS","comments":"","legacy_subtitle_id":5982036,"legacy_uploader_id":0,"uploader":{"uploader_id":3282,"name":"os-auto","rank":"Application
-        Developers"},"feature_details":{"feature_id":586791,"feature_type":"Movie","year":2013,"title":"Ender''s
-        Game","movie_name":"2013 - Ender''s Game","imdb_id":1731141,"tmdb_id":80274},"url":"https://www.opensubtitles.com/fr/subtitles/legacy/5982036","related_links":[{"label":"All
-        subtitles for ender''s game","url":"https://www.opensubtitles.com/fr/movies/2013-ender-s-game","img_url":"https://s9.opensubtitles.com/features/1/9/7/586791.jpg"}],"files":[{"file_id":1024868,"cd_number":1,"file_name":"Enders
-        Game 2013 KORSUB HDRip XViD NO1KNOWS-fre"}]}},{"id":"938965","type":"subtitle","attributes":{"subtitle_id":"938965","language":"fr","download_count":21803,"new_download_count":818,"hearing_impaired":false,"hd":true,"fps":23.976,"votes":1,"ratings":10.0,"from_trusted":false,"foreign_parts_only":false,"upload_date":"2014-02-09T15:28:46Z","file_hashes":["55b4d6c22174f70","81496f27c56654ec","f09474ad3d6107c5","79ff69695807059d","4ff7b661bab99895","4a1bba58364d3008","2673a61b4e77282d","310c1079b335b3b4","1e8af369c4b2536d","08e3386ec78c1fbe","5f8ba7c9ccdf7df4","73b72c64a31e8d33","f7eb074d693e9a9f","59f96a0dc10fdea6","e551be323f05cef9","a36b2add85055668","53ae6fb09a9a1a5e","00b2609e14c62b5a","b9c7cf740694ab08","67c1436d477870b7"],"ai_translated":false,"nb_cd":1,"slug":"5532921-enders-game-2013-bdrip-x264-sparks","machine_translated":false,"release":"Enders.Game.2013.BDRip.X264-SPARKS","comments":"","legacy_subtitle_id":5532921,"legacy_uploader_id":1656162,"uploader":{"uploader_id":65416,"name":"dumbojet","rank":"Bronze
-        Member"},"feature_details":{"feature_id":586791,"feature_type":"Movie","year":2013,"title":"Ender''s
-        Game","movie_name":"2013 - Ender''s Game","imdb_id":1731141,"tmdb_id":80274},"url":"https://www.opensubtitles.com/fr/subtitles/legacy/5532921","related_links":[{"label":"All
-        subtitles for ender''s game","url":"https://www.opensubtitles.com/fr/movies/2013-ender-s-game","img_url":"https://s9.opensubtitles.com/features/1/9/7/586791.jpg"}],"files":[{"file_id":1023065,"cd_number":1,"file_name":"Enders.Game.2013.BDRip.X264-SPARKS"}]}}]}'
+      string: "{\"total_pages\":1,\"total_count\":16,\"per_page\":50,\"page\":1,\"data\":[{\"id\":\"940630\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"940630\",\"language\":\"fr\",\"download_count\":1889,\"new_download_count\":141,\"hearing_impaired\":false,\"hd\":false,\"fps\":0.0,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2014-12-29T03:32:34Z\",\"ai_translated\":false,\"nb_cd\":1,\"slug\":\"5982036-ender-s-game-2013-korsub-hdrip-xvid-no1knows\",\"machine_translated\":false,\"release\":\"Ender's
+        Game 2013 KORSUB HDRip XViD NO1KNOWS\",\"comments\":\"\",\"legacy_subtitle_id\":5982036,\"legacy_uploader_id\":0,\"uploader\":{\"uploader_id\":3282,\"name\":\"os-auto\",\"rank\":\"Application
+        Developers\"},\"feature_details\":{\"feature_id\":586791,\"feature_type\":\"Movie\",\"year\":2013,\"title\":\"Ender's
+        Game\",\"movie_name\":\"2013 - Ender's Game\",\"imdb_id\":1731141,\"tmdb_id\":80274},\"url\":\"https://www.opensubtitles.com/fr/subtitles/5982036-ender-s-game-2013-korsub-hdrip-xvid-no1knows\",\"related_links\":[{\"label\":\"All
+        subtitles for ender's game\",\"url\":\"https://www.opensubtitles.com/fr/movies/5982036-ender-s-game-2013-korsub-hdrip-xvid-no1knows\",\"img_url\":\"https://s6.opensubtitles.com/features/1/9/7/586791.jpg\"}],\"files\":[{\"file_id\":1024868,\"cd_number\":1,\"file_name\":\"Enders
+        Game 2013 KORSUB HDRip XViD NO1KNOWS-fre\"}]}},{\"id\":\"938965\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"938965\",\"language\":\"fr\",\"download_count\":22225,\"new_download_count\":1913,\"hearing_impaired\":false,\"hd\":true,\"fps\":23.976,\"votes\":1,\"ratings\":10.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2014-02-09T15:28:46Z\",\"ai_translated\":false,\"nb_cd\":1,\"slug\":\"5532921-enders-game-2013-bdrip-x264-sparks\",\"machine_translated\":false,\"release\":\"Enders.Game.2013.BDRip.X264-SPARKS\",\"comments\":\"\",\"legacy_subtitle_id\":5532921,\"legacy_uploader_id\":1656162,\"uploader\":{\"uploader_id\":65416,\"name\":\"dumbojet\",\"rank\":\"Bronze
+        Member\"},\"feature_details\":{\"feature_id\":586791,\"feature_type\":\"Movie\",\"year\":2013,\"title\":\"Ender's
+        Game\",\"movie_name\":\"2013 - Ender's Game\",\"imdb_id\":1731141,\"tmdb_id\":80274},\"url\":\"https://www.opensubtitles.com/fr/subtitles/5532921-enders-game-2013-bdrip-x264-sparks\",\"related_links\":[{\"label\":\"All
+        subtitles for ender's game\",\"url\":\"https://www.opensubtitles.com/fr/movies/5532921-enders-game-2013-bdrip-x264-sparks\",\"img_url\":\"https://s8.opensubtitles.com/features/1/9/7/586791.jpg\"}],\"files\":[{\"file_id\":1023065,\"cd_number\":1,\"file_name\":\"Enders.Game.2013.BDRip.X264-SPARKS\"}]}},{\"id\":\"930308\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"930308\",\"language\":\"fr\",\"download_count\":2454,\"new_download_count\":157,\"hearing_impaired\":false,\"hd\":false,\"fps\":25.0,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2013-12-19T22:19:32Z\",\"ai_translated\":false,\"nb_cd\":1,\"slug\":\"the-starving-games-2013-sonido\",\"machine_translated\":false,\"release\":\"The.Starving.Games.2013.SONiDO\",\"comments\":\"\",\"legacy_subtitle_id\":5450171,\"legacy_uploader_id\":0,\"uploader\":{\"uploader_id\":3282,\"name\":\"os-auto\",\"rank\":\"Application
+        Developers\"},\"feature_details\":{\"feature_id\":587150,\"feature_type\":\"Movie\",\"year\":2013,\"title\":\"The
+        Starving Games\",\"movie_name\":\"2013 - The Starving Games\",\"imdb_id\":2403029,\"tmdb_id\":225703},\"url\":\"https://www.opensubtitles.com/fr/subtitles/the-starving-games-2013-sonido\",\"related_links\":[{\"label\":\"All
+        subtitles for the starving games\",\"url\":\"https://www.opensubtitles.com/fr/movies/the-starving-games-2013-sonido\",\"img_url\":\"https://s7.opensubtitles.com/features/0/5/1/587150.jpg\"}],\"files\":[{\"file_id\":1013696,\"cd_number\":1,\"file_name\":\"The.Starving.Games.2013.SONiDO\"}]}},{\"id\":\"926723\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"926723\",\"language\":\"fr\",\"download_count\":889,\"new_download_count\":77,\"hearing_impaired\":false,\"hd\":false,\"fps\":25.0,\"votes\":1,\"ratings\":7.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2013-11-11T19:05:50Z\",\"ai_translated\":false,\"nb_cd\":1,\"slug\":\"all-things-to-all-men-2013-pal-multi-dvd9-utt\",\"machine_translated\":false,\"release\":\"All.Things.To.All.Men.2013.PAL.MULTI.DVD9-UTT\",\"comments\":\"\",\"legacy_subtitle_id\":5266381,\"legacy_uploader_id\":0,\"uploader\":{\"uploader_id\":3282,\"name\":\"os-auto\",\"rank\":\"Application
+        Developers\"},\"feature_details\":{\"feature_id\":587114,\"feature_type\":\"Movie\",\"year\":2013,\"title\":\"All
+        Things To All Men\",\"movie_name\":\"2013 - All Things To All Men\",\"imdb_id\":2095568,\"tmdb_id\":183258},\"url\":\"https://www.opensubtitles.com/fr/subtitles/all-things-to-all-men-2013-pal-multi-dvd9-utt\",\"related_links\":[{\"label\":\"All
+        subtitles for all things to all men\",\"url\":\"https://www.opensubtitles.com/fr/movies/all-things-to-all-men-2013-pal-multi-dvd9-utt\",\"img_url\":\"https://s1.opensubtitles.com/features/4/1/1/587114.jpg\"}],\"files\":[{\"file_id\":1009963,\"cd_number\":1,\"file_name\":\"All.Things.To.All.Men.2013.PAL.MULTI.DVD9-UTT.Fr\"}]}},{\"id\":\"927692\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"927692\",\"language\":\"fr\",\"download_count\":330,\"new_download_count\":64,\"hearing_impaired\":false,\"hd\":true,\"fps\":23.976,\"votes\":1,\"ratings\":7.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2014-02-04T00:02:13Z\",\"ai_translated\":false,\"nb_cd\":1,\"slug\":\"all-things-to-all-men-2013-1080p-bluray-x264-yify-mp4\",\"machine_translated\":false,\"release\":\"All.Things.to.All.Men.2013.1080p.BluRay.x264.YIFY.mp4\",\"comments\":\"UTF-8,
+        23.976 fps.\",\"legacy_subtitle_id\":5524661,\"legacy_uploader_id\":1594248,\"uploader\":{\"uploader_id\":63959,\"name\":\"AjfOtMdv\",\"rank\":\"Silver
+        Member\"},\"feature_details\":{\"feature_id\":587114,\"feature_type\":\"Movie\",\"year\":2013,\"title\":\"All
+        Things To All Men\",\"movie_name\":\"2013 - All Things To All Men\",\"imdb_id\":2095568,\"tmdb_id\":183258},\"url\":\"https://www.opensubtitles.com/fr/subtitles/all-things-to-all-men-2013-1080p-bluray-x264-yify-mp4\",\"related_links\":[{\"label\":\"All
+        subtitles for all things to all men\",\"url\":\"https://www.opensubtitles.com/fr/movies/all-things-to-all-men-2013-1080p-bluray-x264-yify-mp4\",\"img_url\":\"https://s2.opensubtitles.com/features/4/1/1/587114.jpg\"}],\"files\":[{\"file_id\":1011001,\"cd_number\":1,\"file_name\":\"All
+        Things To All Men - The Deadly Game - YIFI.fre\"}]}},{\"id\":\"6534522\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"6534522\",\"language\":\"fr\",\"download_count\":63,\"new_download_count\":29,\"hearing_impaired\":false,\"hd\":false,\"fps\":0.0,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2020-03-22T06:18:22Z\",\"ai_translated\":false,\"nb_cd\":1,\"slug\":\"8137138-the-short-game-2013\",\"machine_translated\":false,\"release\":\"The
+        Short Game (2013)\",\"comments\":\"\",\"legacy_subtitle_id\":8137138,\"legacy_uploader_id\":4602712,\"uploader\":{\"uploader_id\":229296,\"name\":\"scribblemaniac\",\"rank\":\"Bronze
+        Member\"},\"feature_details\":{\"feature_id\":613894,\"feature_type\":\"Movie\",\"year\":2013,\"title\":\"The
+        Short Game\",\"movie_name\":\"2013 - The Short Game\",\"imdb_id\":2466830,\"tmdb_id\":169864},\"url\":\"https://www.opensubtitles.com/fr/subtitles/8137138-the-short-game-2013\",\"related_links\":[{\"label\":\"All
+        subtitles for the short game\",\"url\":\"https://www.opensubtitles.com/fr/movies/8137138-the-short-game-2013\",\"img_url\":\"https://s5.opensubtitles.com/features/4/9/8/613894.jpg\"}],\"files\":[{\"file_id\":7505388,\"cd_number\":1,\"file_name\":\"The
+        Short Game (2013).fr-CA\"}]}},{\"id\":\"6178171\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"6178171\",\"language\":\"fr\",\"download_count\":139,\"new_download_count\":36,\"hearing_impaired\":false,\"hd\":true,\"fps\":23.976,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2020-07-27T12:43:26Z\",\"ai_translated\":false,\"nb_cd\":1,\"slug\":\"capital-games-2013-720p-amzn-web-dl-ddp-2-0-esub-dtone\",\"machine_translated\":false,\"release\":\"Capital
+        Games (2013) 720p AMZN WEB-DL DDP 2.0 ESub - DTOne\",\"comments\":\"\",\"legacy_subtitle_id\":8299588,\"legacy_uploader_id\":6251910,\"uploader\":{\"uploader_id\":82912,\"name\":\"spamsnare_\",\"rank\":\"Gold
+        member\"},\"feature_details\":{\"feature_id\":590997,\"feature_type\":\"Movie\",\"year\":2013,\"title\":\"Capital
+        Games\",\"movie_name\":\"2013 - Capital Games\",\"imdb_id\":2494476,\"tmdb_id\":243670},\"url\":\"https://www.opensubtitles.com/fr/subtitles/capital-games-2013-720p-amzn-web-dl-ddp-2-0-esub-dtone\",\"related_links\":[{\"label\":\"All
+        subtitles for capital games\",\"url\":\"https://www.opensubtitles.com/fr/movies/capital-games-2013-720p-amzn-web-dl-ddp-2-0-esub-dtone\",\"img_url\":\"https://s6.opensubtitles.com/features/7/9/9/590997.jpg\"}],\"files\":[{\"file_id\":7108423,\"cd_number\":1,\"file_name\":\"Capital
+        games - French (2013)\"}]}},{\"id\":\"4812354\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"4812354\",\"language\":\"fr\",\"download_count\":2778,\"new_download_count\":893,\"hearing_impaired\":false,\"hd\":true,\"fps\":23.976,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2019-04-17T04:06:34Z\",\"ai_translated\":false,\"nb_cd\":1,\"slug\":\"the-hunger-games-catching-fire-2013-imax-1080p-bluray-h264-aac-rarbg\",\"machine_translated\":false,\"release\":\"The.Hunger.Games.Catching.Fire.2013.IMAX.1080p.BluRay.H264.AAC-RARBG\",\"comments\":\"\",\"legacy_subtitle_id\":7722630,\"legacy_uploader_id\":6093270,\"uploader\":{\"uploader_id\":82218,\"name\":\"gildasdd\",\"rank\":\"Gold
+        member\"},\"feature_details\":{\"feature_id\":585536,\"feature_type\":\"Movie\",\"year\":2013,\"title\":\"The
+        Hunger Games: Catching Fire\",\"movie_name\":\"2013 - Hunger Games : L'Embrasement\",\"imdb_id\":1951264,\"tmdb_id\":101299},\"url\":\"https://www.opensubtitles.com/fr/subtitles/the-hunger-games-catching-fire-2013-imax-1080p-bluray-h264-aac-rarbg\",\"related_links\":[{\"label\":\"All
+        subtitles for the hunger games: catching fire\",\"url\":\"https://www.opensubtitles.com/fr/movies/the-hunger-games-catching-fire-2013-imax-1080p-bluray-h264-aac-rarbg\",\"img_url\":\"https://s3.opensubtitles.com/features/6/3/5/585536.jpg\"}],\"files\":[{\"file_id\":4935622,\"cd_number\":1,\"file_name\":\"The.Hunger.Games.Catching.Fire.2013.IMAX.1080p.BluRay.H264.AAC-RARBG\"}]}},{\"id\":\"931709\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"931709\",\"language\":\"fr\",\"download_count\":5300,\"new_download_count\":703,\"hearing_impaired\":false,\"hd\":true,\"fps\":23.976,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2015-07-23T19:33:56Z\",\"ai_translated\":false,\"nb_cd\":1,\"slug\":\"the-hunger-games-catching-fire-2013-fra-blu-ray-1080p-avc-dts-hd-ma-7-1-wihd\",\"machine_translated\":false,\"release\":\"The.Hunger.Games.Catching.Fire.2013.FRA.Blu-ray.1080p.AVC.DTS-HD.MA.7.1-WiHD\",\"comments\":\"Resync\",\"legacy_subtitle_id\":6245472,\"legacy_uploader_id\":1484122,\"uploader\":{\"uploader_id\":60847,\"name\":\"Elgohan\",\"rank\":\"Gold
+        member\"},\"feature_details\":{\"feature_id\":585536,\"feature_type\":\"Movie\",\"year\":2013,\"title\":\"The
+        Hunger Games: Catching Fire\",\"movie_name\":\"2013 - Hunger Games : L'Embrasement\",\"imdb_id\":1951264,\"tmdb_id\":101299},\"url\":\"https://www.opensubtitles.com/fr/subtitles/the-hunger-games-catching-fire-2013-fra-blu-ray-1080p-avc-dts-hd-ma-7-1-wihd\",\"related_links\":[{\"label\":\"All
+        subtitles for the hunger games: catching fire\",\"url\":\"https://www.opensubtitles.com/fr/movies/the-hunger-games-catching-fire-2013-fra-blu-ray-1080p-avc-dts-hd-ma-7-1-wihd\",\"img_url\":\"https://s8.opensubtitles.com/features/6/3/5/585536.jpg\"}],\"files\":[{\"file_id\":1015136,\"cd_number\":1,\"file_name\":\"The.Hunger.Games.Catching.Fire.2013.FRA.Blu-ray.1080p.AVC.DTS-HD.MA.7.1-WiHD.fr\"}]}},{\"id\":\"931594\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"931594\",\"language\":\"fr\",\"download_count\":2132,\"new_download_count\":125,\"hearing_impaired\":false,\"hd\":true,\"fps\":0.0,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2015-03-14T22:26:18Z\",\"ai_translated\":false,\"nb_cd\":1,\"slug\":\"6079720-the-hunger-games-catching-fire-2013-720p-bluray-x264-amiable\",\"machine_translated\":false,\"release\":\"The.Hunger.Games.Catching.Fire.2013.720p.BluRay.X264-AMIABLE\",\"comments\":\"\",\"legacy_subtitle_id\":6079720,\"legacy_uploader_id\":0,\"uploader\":{\"uploader_id\":3282,\"name\":\"os-auto\",\"rank\":\"Application
+        Developers\"},\"feature_details\":{\"feature_id\":585536,\"feature_type\":\"Movie\",\"year\":2013,\"title\":\"The
+        Hunger Games: Catching Fire\",\"movie_name\":\"2013 - The Hunger Games: Catching
+        Fire\",\"imdb_id\":1951264,\"tmdb_id\":101299},\"url\":\"https://www.opensubtitles.com/fr/subtitles/6079720-the-hunger-games-catching-fire-2013-720p-bluray-x264-amiable\",\"related_links\":[{\"label\":\"All
+        subtitles for the hunger games: catching fire\",\"url\":\"https://www.opensubtitles.com/fr/movies/6079720-the-hunger-games-catching-fire-2013-720p-bluray-x264-amiable\",\"img_url\":\"https://s6.opensubtitles.com/features/6/3/5/585536.jpg\"}],\"files\":[{\"file_id\":1015020,\"cd_number\":1,\"file_name\":\"The.Hunger.Games.Catching.Fire.2013.720p.BluRay.X264-AMIABLE.Fr\"}]}},{\"id\":\"923518\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"923518\",\"language\":\"fr\",\"download_count\":72518,\"new_download_count\":3089,\"hearing_impaired\":false,\"hd\":true,\"fps\":23.976,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2014-01-20T11:23:23Z\",\"ai_translated\":false,\"nb_cd\":1,\"slug\":\"5500545-the-hunger-games-catching-fire-2013-imax-edition-720p-bluray-x264-publichd\",\"machine_translated\":false,\"release\":\"The
+        Hunger Games Catching Fire 2013 IMAX EDITION 720p BluRay x264-PublicHD\",\"comments\":\"Merci
+        \xE0 PizzleDaTwizzle\",\"legacy_subtitle_id\":5500545,\"legacy_uploader_id\":1460146,\"uploader\":{\"uploader_id\":60044,\"name\":\"les-tourtereaux\",\"rank\":\"Gold
+        member\"},\"feature_details\":{\"feature_id\":585536,\"feature_type\":\"Movie\",\"year\":2013,\"title\":\"The
+        Hunger Games: Catching Fire\",\"movie_name\":\"2013 - Hunger Games : L'Embrasement\",\"imdb_id\":1951264,\"tmdb_id\":101299},\"url\":\"https://www.opensubtitles.com/fr/subtitles/5500545-the-hunger-games-catching-fire-2013-imax-edition-720p-bluray-x264-publichd\",\"related_links\":[{\"label\":\"All
+        subtitles for the hunger games: catching fire\",\"url\":\"https://www.opensubtitles.com/fr/movies/5500545-the-hunger-games-catching-fire-2013-imax-edition-720p-bluray-x264-publichd\",\"img_url\":\"https://s7.opensubtitles.com/features/6/3/5/585536.jpg\"}],\"files\":[{\"file_id\":1006684,\"cd_number\":1,\"file_name\":\"The
+        Hunger Games Catching Fire 2013 IMAX EDITION 720p BluRay x264-PublicHD\"}]}},{\"id\":\"930010\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"930010\",\"language\":\"fr\",\"download_count\":3410,\"new_download_count\":336,\"hearing_impaired\":false,\"hd\":true,\"fps\":0.0,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2014-03-23T23:10:03Z\",\"ai_translated\":false,\"nb_cd\":1,\"slug\":\"the-hunger-games-catching-fire-2013-bdrip-x264-amiable-www-subsynchro-com\",\"machine_translated\":false,\"release\":\"the.hunger.games.catching.fire.2013.bdrip.x264-amiable.www.subsynchro.com\",\"comments\":\"\",\"legacy_subtitle_id\":5596810,\"legacy_uploader_id\":0,\"uploader\":{\"uploader_id\":3282,\"name\":\"os-auto\",\"rank\":\"Application
+        Developers\"},\"feature_details\":{\"feature_id\":585536,\"feature_type\":\"Movie\",\"year\":2013,\"title\":\"The
+        Hunger Games: Catching Fire\",\"movie_name\":\"2013 - Hunger Games : L'Embrasement\",\"imdb_id\":1951264,\"tmdb_id\":101299},\"url\":\"https://www.opensubtitles.com/fr/subtitles/the-hunger-games-catching-fire-2013-bdrip-x264-amiable-www-subsynchro-com\",\"related_links\":[{\"label\":\"All
+        subtitles for the hunger games: catching fire\",\"url\":\"https://www.opensubtitles.com/fr/movies/the-hunger-games-catching-fire-2013-bdrip-x264-amiable-www-subsynchro-com\",\"img_url\":\"https://s4.opensubtitles.com/features/6/3/5/585536.jpg\"}],\"files\":[{\"file_id\":1013387,\"cd_number\":1,\"file_name\":\"the.hunger.games.catching.fire.2013.bdrip.x264-amiable.www.subsynchro.com\"}]}},{\"id\":\"915214\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"915214\",\"language\":\"fr\",\"download_count\":17789,\"new_download_count\":155,\"hearing_impaired\":false,\"hd\":false,\"fps\":23.976,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2013-12-15T15:00:29Z\",\"ai_translated\":false,\"nb_cd\":1,\"slug\":\"5442919-the-hunger-games-catching-fire-2013-hdts-x264-exclusive\",\"machine_translated\":false,\"release\":\"The
+        Hunger Games Catching Fire (2013) HDTS x264 - Exclusive\",\"comments\":\"Enjoy
+        :)\",\"legacy_subtitle_id\":5442919,\"legacy_uploader_id\":1566930,\"uploader\":{\"uploader_id\":63333,\"name\":\"PizzleDaTwizzle\",\"rank\":\"Bronze
+        Member\"},\"feature_details\":{\"feature_id\":585536,\"feature_type\":\"Movie\",\"year\":2013,\"title\":\"The
+        Hunger Games: Catching Fire\",\"movie_name\":\"2013 - Hunger Games : L'Embrasement\",\"imdb_id\":1951264,\"tmdb_id\":101299},\"url\":\"https://www.opensubtitles.com/fr/subtitles/5442919-the-hunger-games-catching-fire-2013-hdts-x264-exclusive\",\"related_links\":[{\"label\":\"All
+        subtitles for the hunger games: catching fire\",\"url\":\"https://www.opensubtitles.com/fr/movies/5442919-the-hunger-games-catching-fire-2013-hdts-x264-exclusive\",\"img_url\":\"https://s3.opensubtitles.com/features/6/3/5/585536.jpg\"}],\"files\":[{\"file_id\":998155,\"cd_number\":1,\"file_name\":\"The
+        Hunger Games Catching Fire (2013) HDTS x264 - Exclusive\"}]}},{\"id\":\"9554760\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"9554760\",\"language\":\"fr\",\"download_count\":345,\"new_download_count\":672,\"hearing_impaired\":false,\"hd\":true,\"fps\":23.976,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2024-10-21T16:21:32Z\",\"ai_translated\":false,\"nb_cd\":1,\"slug\":\"the-hunger-games-catching-fire-2013-imax-multi-1080p-bluray-remux-avc-dts-hd-ma-7-1-angerfist007\",\"machine_translated\":false,\"release\":\"The.Hunger.Games.Catching.Fire.2013.IMAX.MULTi.1080p.BluRay.REMUX.AVC.DTS-HD.MA.7.1-ANGERFIST007\",\"comments\":\"02:26:32.743\\r\\nOCR,
+        Fr France\",\"legacy_subtitle_id\":12806985,\"legacy_uploader_id\":9995997,\"uploader\":{\"uploader_id\":908707,\"name\":\"epongebob\",\"rank\":\"Platinum
+        Member\"},\"feature_details\":{\"feature_id\":585536,\"feature_type\":\"Movie\",\"year\":2013,\"title\":\"The
+        Hunger Games: Catching Fire\",\"movie_name\":\"2013 - Hunger Games : L'Embrasement\",\"imdb_id\":1951264,\"tmdb_id\":101299},\"url\":\"https://www.opensubtitles.com/fr/subtitles/the-hunger-games-catching-fire-2013-imax-multi-1080p-bluray-remux-avc-dts-hd-ma-7-1-angerfist007\",\"related_links\":[{\"label\":\"All
+        subtitles for the hunger games: catching fire\",\"url\":\"https://www.opensubtitles.com/fr/movies/the-hunger-games-catching-fire-2013-imax-multi-1080p-bluray-remux-avc-dts-hd-ma-7-1-angerfist007\",\"img_url\":\"https://s9.opensubtitles.com/features/6/3/5/585536.jpg\"}],\"files\":[{\"file_id\":10467457,\"cd_number\":1,\"file_name\":\"Hunger
+        Games LEmbrasement (2013) fre\"}]}},{\"id\":\"930386\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"930386\",\"language\":\"fr\",\"download_count\":10996,\"new_download_count\":795,\"hearing_impaired\":false,\"hd\":true,\"fps\":0.0,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2014-04-09T23:26:19Z\",\"ai_translated\":false,\"nb_cd\":1,\"slug\":\"the-hunger-games-catching-fire-2013-720p-bluray-x264-amiable\",\"machine_translated\":false,\"release\":\"The.Hunger.Games.Catching.Fire.2013.720p.BluRay.X264-AMIABLE\",\"comments\":\"\",\"legacy_subtitle_id\":5620366,\"legacy_uploader_id\":0,\"uploader\":{\"uploader_id\":3282,\"name\":\"os-auto\",\"rank\":\"Application
+        Developers\"},\"feature_details\":{\"feature_id\":585536,\"feature_type\":\"Movie\",\"year\":2013,\"title\":\"The
+        Hunger Games: Catching Fire\",\"movie_name\":\"2013 - Hunger Games : L'Embrasement\",\"imdb_id\":1951264,\"tmdb_id\":101299},\"url\":\"https://www.opensubtitles.com/fr/subtitles/the-hunger-games-catching-fire-2013-720p-bluray-x264-amiable\",\"related_links\":[{\"label\":\"All
+        subtitles for the hunger games: catching fire\",\"url\":\"https://www.opensubtitles.com/fr/movies/the-hunger-games-catching-fire-2013-720p-bluray-x264-amiable\",\"img_url\":\"https://s3.opensubtitles.com/features/6/3/5/585536.jpg\"}],\"files\":[{\"file_id\":1013773,\"cd_number\":1,\"file_name\":\"The.Hunger.Games.Catching.Fire.2013.720p.BluRay.X264-AMIABLE.Fr\"}]}},{\"id\":\"3706279\",\"type\":\"subtitle\",\"attributes\":{\"subtitle_id\":\"3706279\",\"language\":\"fr\",\"download_count\":310,\"new_download_count\":34,\"hearing_impaired\":false,\"hd\":false,\"fps\":25.0,\"votes\":0,\"ratings\":0.0,\"from_trusted\":false,\"foreign_parts_only\":false,\"upload_date\":\"2015-10-07T16:25:28Z\",\"ai_translated\":false,\"nb_cd\":1,\"slug\":\"6330499-les-jeux-des-nuages-et-de-la-pluie-2013-dvdrip-xvid-utt\",\"machine_translated\":false,\"release\":\"Les.Jeux.Des.Nuages.Et.De.La.Pluie.2013.DVDRip.XviD-UTT\",\"comments\":\"\",\"legacy_subtitle_id\":6330499,\"legacy_uploader_id\":0,\"uploader\":{\"uploader_id\":3282,\"name\":\"os-auto\",\"rank\":\"Application
+        Developers\"},\"feature_details\":{\"feature_id\":600805,\"feature_type\":\"Movie\",\"year\":2013,\"title\":\"Games
+        of Clouds and Rain\",\"movie_name\":\"2013 - Games of Clouds and Rain\",\"imdb_id\":1857766,\"tmdb_id\":155888},\"url\":\"https://www.opensubtitles.com/fr/subtitles/6330499-les-jeux-des-nuages-et-de-la-pluie-2013-dvdrip-xvid-utt\",\"related_links\":[{\"label\":\"All
+        subtitles for games of clouds and rain\",\"url\":\"https://www.opensubtitles.com/fr/movies/6330499-les-jeux-des-nuages-et-de-la-pluie-2013-dvdrip-xvid-utt\",\"img_url\":\"https://s9.opensubtitles.com/features/5/0/8/600805.jpg\"}],\"files\":[{\"file_id\":3779070,\"cd_number\":1,\"file_name\":\"Les.Jeux.Des.Nuages.Et.De.La.Pluie.2013.DVDRip.XviD-UTT-fre\"}]}}]}"
     headers:
       Access-Control-Allow-Headers:
       - Origin, Authorization, Accept, Api-Key, Content-Type, X-User-Agent
@@ -106,10 +156,12 @@ interactions:
       - GET, HEAD, POST, OPTIONS
       Access-Control-Allow-Origin:
       - '*'
-      CF-Cache-Status:
-      - MISS
+      Access-Control-Expose-Headers:
+      - X-Auth-Token
+      Alt-Svc:
+      - h3=":443"; ma=86400
       CF-RAY:
-      - 91189ca7ca03ef55-LHR
+      - a577fd520875636c-MRS
       Cache-Control:
       - public, max-age=86400
       Connection:
@@ -117,11 +169,11 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Thu, 13 Feb 2025 23:31:26 GMT
+      - Sun, 08 Nov 2026 22:24:44 GMT
       Last-Modified:
-      - Thu, 13 Feb 2025 23:31:26 GMT
+      - Sun, 08 Nov 2026 22:24:44 GMT
       NEL:
-      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       RateLimit-Limit:
       - '5'
       RateLimit-Remaining:
@@ -129,55 +181,55 @@ interactions:
       RateLimit-Reset:
       - '1'
       Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=AKoCKnNvK8e3zC9Yk8fnpHD13d5Cog%2FfM4b30tVD53ko39muu9dq2av%2B%2FjdL4du3GLGWtPDdYbbhckrhFRb%2FqIx0%2FqRUSgSFy6hgjGuxPcOLMFLlJBFVqujIRPol64BjIgQ087ZTMEc%3D"}],"group":"cf-nel","max_age":604800}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=HXDxz0CbwQEZkP7WQ6PUXJVZUktn5%2B5JeOd1PBV16jL6Jc9N64vXc%2B7Atq6kQlgrsZtq3LGBETcQhsXCtTQopZ%2BI1gXppsJq7uBvs1lHCFAtPYqcruTZUstyMTBVtI2iKCl6nO0KJtA%3D"}]}'
       Server:
       - cloudflare
+      Server-Timing:
+      - miss, 0_TR_client_wait;dur=0, _Tw_queues;dur=0, 2_Tc_bak_connect;dur=1, 3_Tr_bak_response;dur=85
+      Speculation-Rules:
+      - '"/cdn-cgi/speculation"'
       Strict-Transport-Security:
-      - max-age=15552000; includeSubDomains; preload
+      - max-age=31536000; includeSubDomains; preload
       Transfer-Encoding:
       - chunked
       Vary:
-      - Accept-Encoding
+      - accept-encoding
       Via:
-      - kong/3.3.0
-      X-Cache-Backend:
-      - rb13
+      - 1.1 kong/3.9.1
       X-Content-Type-Options:
       - nosniff
-      X-Download-Options:
-      - noopen
       X-Frame-Options:
       - SAMEORIGIN
       X-Kong-Proxy-Latency:
-      - '0'
+      - '11'
+      X-Kong-Request-Id:
+      - b41a6c5aa540ec6bf69b3b5f0b66946e
       X-Kong-Upstream-Latency:
-      - '50'
+      - '95'
       X-RateLimit-Limit-Second:
       - '5'
       X-RateLimit-Remaining-Second:
       - '4'
-      X-Request-Id:
-      - b89249fc-48ca-4a10-b4d1-21ff76d515d5
-      X-Runtime:
-      - '0.048218'
-      X-Var-Cache:
-      - MISS
-      X-Via:
-      - lb1
-      X-Vip:
-      - 'false'
-      X-Vip-Consumer:
-      - 'false'
-      X-Vip-User:
-      - 'false'
+      X-Request-ID:
+      - 1bd53d65-d9d5-4bc6-af60-e7a9f8ca95bf
       X-XSS-Protection:
       - 1; mode=block
-      alt-svc:
-      - h3=":443"; ma=86400
+      cf-cache-status:
+      - MISS
       content-length:
-      - '2760'
-      server-timing:
-      - cfL4;desc="?proto=TCP&rtt=32937&min_rtt=31663&rtt_var=12783&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2854&recv_bytes=887&delivery_rate=91463&cwnd=247&unsent_bytes=0&cid=46e77d5f8ee42113&ts=128&x=0"
+      - '20935'
+      x-backend-server:
+      - rb7
+      x-download-options:
+      - noopen
+      x-runtime:
+      - '0.082610'
+      x-vip:
+      - 'false'
+      x-vip-consumer:
+      - 'false'
+      x-vip-user:
+      - 'false'
     status:
       code: 200
       message: OK

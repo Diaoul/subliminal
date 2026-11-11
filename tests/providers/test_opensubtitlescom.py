@@ -517,7 +517,7 @@ async def test_list_subtitles_episode_series_imdb_id(episodes: dict[str, Episode
 
 @pytest.mark.integration
 @pytest.mark.asyncio
-@vcr.use_cassette
+@vcr.use_cassette(allow_playback_repeats=True)  # the same query is sent twice, for page=1
 async def test_query_max_result_pages(movies: dict[str, Movie]) -> None:
     # choose a movie with a lot of results
     query = 'James Bond'

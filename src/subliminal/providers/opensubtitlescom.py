@@ -673,14 +673,28 @@ class OpenSubtitlesComProvider(AsyncProvider):
         if last_page <= 1:
             return data
 
+        # Once a page fails, the pages still waiting for their turn must not be requested:
+        # the semaphore wakes the next waiting task before the TaskGroup cancels it,
+        # so a task could otherwise send a request after the failure.
+        failed = asyncio.Event()
+        slots = asyncio.Semaphore(self._max_concurrent_requests)
+
+        async def fetch_page(page: int) -> dict[str, Any]:
+            async with slots:
+                if failed.is_set():
+                    return {}
+                try:
+                    return await self._request('GET', 'subtitles', params={'page': page, **params}, raises=True)
+                except (ProviderError, TimeoutError):
+                    failed.set()
+                    raise
+
         # Run async tasks
         tasks = []
         try:
             async with asyncio.TaskGroup() as tg:
                 for page in range(2, last_page + 1):
-                    tasks.append(
-                        tg.create_task(self._request('GET', 'subtitles', params={'page': page, **params}, raises=True))
-                    )
+                    tasks.append(tg.create_task(fetch_page(page)))
         except* asyncio.CancelledError:
             # the caller is shutting down, never swallow this
             raise asyncio.CancelledError from None

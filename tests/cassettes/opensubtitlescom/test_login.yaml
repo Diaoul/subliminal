@@ -15,7 +15,7 @@ interactions:
   response:
     body:
       string: '{"user":{"allowed_translations":1,"allowed_downloads":20,"level":"Sub
-        leecher","user_id":699022,"ext_installed":true,"vip":false},"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJFOUVnNkNvNWtscndmMmY2TTgzUkd6UWtocHo5OGRWMiIsImV4cCI6MTc5Mzk3OTk1NX0.OMLfu2HjA9C_bp8cqexBj6EdqlgdvreMPXjkpP6Uyvo","status":200,"base_url":"api.opensubtitles.com"}'
+        leecher","user_id":699022,"ext_installed":true,"vip":false},"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJKNlZVZHlOa1cwOEs5TnM0ZDhHV25DQ2ZPOWNNS211YSIsImV4cCI6MTc5NDIzMDA3OH0.2eM2r0STeimgiykY_7QYTcb12lOWh-WTJ0lzgftlAdc","status":200,"base_url":"api.opensubtitles.com"}'
     headers:
       Access-Control-Allow-Headers:
       - Origin, Authorization, Accept, Api-Key, Content-Type, X-User-Agent
@@ -28,7 +28,7 @@ interactions:
       Alt-Svc:
       - h3=":443"; ma=86400
       CF-RAY:
-      - a55fef5cd9f341f6-LIS
+      - a577fd5628977078-LIS
       Cache-Control:
       - max-age=0, private, must-revalidate, s-maxage=600
       Connection:
@@ -36,7 +36,7 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Fri, 06 Nov 2026 00:20:53 GMT
+      - Sun, 08 Nov 2026 22:24:44 GMT
       NEL:
       - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       RateLimit-Limit:
@@ -46,13 +46,13 @@ interactions:
       RateLimit-Reset:
       - '1'
       Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=QwAzCOtO2z9MwRNc55StX%2FYqBcio%2BEk2OA6kauhCjH8ghcb1nsO0CNp1cg%2FbAihlSMyLBEwlamqWp5YZMv2xMbfKTw4P5nnxAeS%2B%2B9GvJX%2B3pgdJTf1y%2FOVmjuKaGsBuxr5YK0Rg0i4%3D"}]}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=nz2t55%2F23k4Qtgi8M%2FOdYoKYJBUjW1jyrfimbkvoIjYHsMIVml8DSbuIRKx%2Fl65QntL%2Fx369b%2BP63du3jz1Ko8DmdbPCtzTd%2FEC1VauOuh5YSkB0I1%2Bg%2BoN7gZYSDDlPjmTlLy9KFvo%3D"}]}'
       Retry-After:
       - '1'
       Server:
       - cloudflare
       Server-Timing:
-      - miss, 0_TR_client_wait;dur=0, _Tw_queues;dur=0, 2_Tc_bak_connect;dur=1, 3_Tr_bak_response;dur=20
+      - miss, 0_TR_client_wait;dur=0, _Tw_queues;dur=0, 2_Tc_bak_connect;dur=0, 3_Tr_bak_response;dur=272
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains; preload
       Transfer-Encoding:
@@ -66,17 +66,17 @@ interactions:
       X-Frame-Options:
       - SAMEORIGIN
       X-Kong-Proxy-Latency:
-      - '2'
+      - '5'
       X-Kong-Request-Id:
-      - 01f29d57d4da6e382a1192361680e256
+      - 54a0df72b23c5e1e50a38b05159d1965
       X-Kong-Upstream-Latency:
-      - '25'
+      - '276'
       X-RateLimit-Limit-Second:
       - '1'
       X-RateLimit-Remaining-Second:
       - '0'
       X-Request-ID:
-      - 3af1d15f-f4bb-4f68-8c43-7fa67601ae81
+      - 6e749260-4a74-4445-8dd3-44dd9daf7ad0
       X-XSS-Protection:
       - 1; mode=block
       cf-cache-status:
@@ -88,7 +88,7 @@ interactions:
       x-download-options:
       - noopen
       x-runtime:
-      - '0.018594'
+      - '0.270257'
       x-vip-consumer:
       - 'false'
       x-vip-user:

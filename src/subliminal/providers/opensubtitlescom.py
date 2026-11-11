@@ -314,9 +314,6 @@ class OpenSubtitlesComProvider(AsyncProvider):
         Default to 5
     :param int max_retries: maximum number of retries when hitting a 'Too Many Requests' error.
         Default to 3
-    :param session: the :class:`aiohttp.ClientSession` to use. The pool injects its own; when
-        `None`, the provider creates and closes its own session.
-
     """
 
     server_url: ClassVar[str] = 'https://api.opensubtitles.com/api/v1/'
@@ -649,10 +646,10 @@ class OpenSubtitlesComProvider(AsyncProvider):
             if 'query' in criterion:  # pragma: no branch
                 criteria.append({'query': criterion['query']})
 
-        # # Make sure the video type is set
-        # video_type = 'episode' if season is not None and episode is not None else 'movie'
-        # for crit in criteria:
-        #     crit['type'] = video_type
+        # Make sure the video type is set, otherwise we get a lot of false-positives
+        video_type = 'episode' if season is not None and episode is not None else 'movie'
+        for crit in criteria:
+            crit['type'] = video_type
 
         return criteria
 
@@ -691,21 +688,22 @@ class OpenSubtitlesComProvider(AsyncProvider):
         except* DiscardingError:
             raise DiscardingError from None
 
-        except* ProviderError as eg:
+        except* (ProviderError, TimeoutError) as eg:
+            errors_str = {str(e) for e in eg.exceptions}
             # Just log the error, it is not discarding
-            logger.warning('Pagination stopped because of errors: %s', {str(e) for e in eg.exceptions})
+            logger.exception('Pagination stopped because of errors: %s', errors_str)
 
         # Collect results
         for i, task in enumerate(tasks, start=2):
             try:
                 page_result = task.result()
-            except ProviderError:
-                # ProviderError were not raised when running the task, they can pop up here again
+            except (ProviderError, TimeoutError):
+                # ProviderError and TimeoutError were not raised when running the task, they can pop up here again
                 logger.warning('Error getting page %i', i)
                 continue
 
             data.extend(page_result.get('data') or [])
-
+        del tg
         return data
 
     @override

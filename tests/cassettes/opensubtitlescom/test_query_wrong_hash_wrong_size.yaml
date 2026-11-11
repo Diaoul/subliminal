@@ -4,210 +4,6 @@ interactions:
     headers:
       Accept:
       - '*/*'
-      Accept-Encoding:
-      - gzip, deflate
-      Api-Key:
-      - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
-      Connection:
-      - keep-alive
-      Content-Type:
-      - application/json
-      User-Agent:
-      - Subliminal v2.2
-    method: GET
-    uri: https://api.opensubtitles.com/api/v1/subtitles?languages=en&moviehash=123456787654321&page=1
-  response:
-    body:
-      string: ''
-    headers:
-      Access-Control-Allow-Origin:
-      - '*'
-      CF-Cache-Status:
-      - MISS
-      CF-RAY:
-      - 91189cad7c56ed0f-LHR
-      Cache-Control:
-      - public, max-age=86400
-      Connection:
-      - keep-alive
-      Content-Length:
-      - '0'
-      Date:
-      - Thu, 13 Feb 2025 23:31:27 GMT
-      Location:
-      - /api/v1/subtitles?languages=en&moviehash=123456787654321
-      NEL:
-      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
-      RateLimit-Limit:
-      - '5'
-      RateLimit-Remaining:
-      - '4'
-      RateLimit-Reset:
-      - '1'
-      Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=kfMBxBOzBPpWvJ5GU5DFkfUBtnD3VeJQf8WoOiXeYvowmY8NxrOMzDA6LlEAvjufrWumJmDggzCca%2FNivfaqTtMrJOOG9SA7OMSEMfaJEdQSXVMHVeHEnNfdy%2BbySHi5KWa4Fq0BmJE%3D"}],"group":"cf-nel","max_age":604800}'
-      Server:
-      - cloudflare
-      Strict-Transport-Security:
-      - max-age=15552000; includeSubDomains; preload
-      Vary:
-      - Accept-Encoding
-      Via:
-      - kong/3.3.0
-      X-Content-Type-Options:
-      - nosniff
-      X-Kong-Proxy-Latency:
-      - '0'
-      X-Kong-Upstream-Latency:
-      - '1'
-      X-RateLimit-Limit-Second:
-      - '5'
-      X-RateLimit-Remaining-Second:
-      - '4'
-      X-Varnish:
-      - '19149985575'
-      alt-svc:
-      - h3=":443"; ma=86400
-      server-timing:
-      - cfL4;desc="?proto=TCP&rtt=32046&min_rtt=31959&rtt_var=12047&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2854&recv_bytes=901&delivery_rate=90616&cwnd=240&unsent_bytes=0&cid=48b51bbe70b50f95&ts=119&x=0"
-    status:
-      code: 301
-      message: Moved Permanently
-- request:
-    body: null
-    headers:
-      Accept:
-      - '*/*'
-      Accept-Encoding:
-      - gzip, deflate
-      Api-Key:
-      - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
-      Connection:
-      - keep-alive
-      User-Agent:
-      - Subliminal v2.2
-    method: GET
-    uri: https://api.opensubtitles.com/api/v1/subtitles?languages=en&moviehash=123456787654321
-  response:
-    body:
-      string: ''
-    headers:
-      Access-Control-Allow-Origin:
-      - '*'
-      CF-RAY:
-      - 91189caea99b3d94-LHR
-      Cache-Control:
-      - public, max-age=86400
-      Connection:
-      - keep-alive
-      Content-Length:
-      - '0'
-      Date:
-      - Thu, 13 Feb 2025 23:31:27 GMT
-      NEL:
-      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
-      RateLimit-Limit:
-      - '5'
-      RateLimit-Remaining:
-      - '4'
-      RateLimit-Reset:
-      - '1'
-      Report-To:
-      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=yJ8f0zbrt3VNUohWjtgPK6H34oLTRGbTdZ%2F6QcSOIL5sUsSBOKSd%2Bk3rYYlENd7Y7CIyxuwWlSORQwC3E9WmtEAwozEwlrl9qfL4M4r1AAcyVZFiv7gSX%2FE8Yx5TRjW7cel0ZxGGP5M%3D"}],"group":"cf-nel","max_age":604800}'
-      Server:
-      - cloudflare
-      Strict-Transport-Security:
-      - max-age=15552000; includeSubDomains; preload
-      Vary:
-      - Accept-Encoding
-      Via:
-      - kong/3.3.0
-      X-Content-Type-Options:
-      - nosniff
-      X-Kong-Proxy-Latency:
-      - '0'
-      X-Kong-Upstream-Latency:
-      - '0'
-      X-RateLimit-Limit-Second:
-      - '5'
-      X-RateLimit-Remaining-Second:
-      - '4'
-      X-Reason:
-      - Request parameters does not make sense, moviehash is wrong
-      X-Varnish:
-      - '19170567687'
-      alt-svc:
-      - h3=":443"; ma=86400
-      cf-cache-status:
-      - MISS
-      server-timing:
-      - cfL4;desc="?proto=TCP&rtt=32976&min_rtt=32874&rtt_var=12401&sent=4&recv=6&lost=0&retrans=0&sent_bytes=2854&recv_bytes=862&delivery_rate=88093&cwnd=251&unsent_bytes=0&cid=1d9edf4d46a3c90b&ts=94&x=0"
-    status:
-      code: 400
-      message: Bad Request
-- request:
-    body: null
-    headers:
-      Accept:
-      - '*/*'
-      Api-Key:
-      - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
-      Content-Type:
-      - application/json
-      User-Agent:
-      - Subliminal v2.8
-    method: GET
-    uri: https://api.opensubtitles.com/api/v1/subtitles?languages=en&moviehash=123456787654321&page=1
-  response:
-    body:
-      string: 'Request parameters do not make sense: moviehash must be 16 hex characters'
-    headers:
-      Access-Control-Allow-Origin:
-      - '*'
-      Access-Control-Expose-Headers:
-      - X-Auth-Token
-      Alt-Svc:
-      - h3=":443"; ma=86400
-      CF-RAY:
-      - a54773b09f9d4893-LIS
-      Cache-Control:
-      - public, max-age=86400
-      Connection:
-      - keep-alive
-      Content-Length:
-      - '73'
-      Content-Type:
-      - text/plain; charset=utf-8
-      Date:
-      - Tue, 03 Nov 2026 01:02:10 GMT
-      NEL:
-      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
-      Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=daHNkKADibEXlCgN3aA%2BeDKu9AZBJFPwCqcvpkaPBYAd3v4LiCL21rdnY6sdHkkOIL1jYko8wilCox8y9e85F%2FiHjTG0o0TefC2kXRHfeGo53P2%2BhuNjLR0Db%2B9UTiRjMoS0YPXwTHc%3D"}]}'
-      Server:
-      - cloudflare
-      Speculation-Rules:
-      - '"/cdn-cgi/speculation"'
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubDomains; preload
-      X-Content-Type-Options:
-      - nosniff
-      X-Kong-Request-Id:
-      - f36902029cc69e50f7eb3d657c6ac428
-      X-Kong-Response-Latency:
-      - '1'
-      X-OS-Rule:
-      - moviehash-invalid
-      cf-cache-status:
-      - MISS
-    status:
-      code: 400
-      message: Bad Request
-- request:
-    body: null
-    headers:
-      Accept:
-      - '*/*'
       Api-Key:
       - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
       Content-Type:
@@ -227,7 +23,7 @@ interactions:
       Alt-Svc:
       - h3=":443"; ma=86400
       CF-RAY:
-      - a54f87b06d6f2f61-LIS
+      - a577fd55fcd999f2-MRS
       Cache-Control:
       - public, max-age=86400
       Connection:
@@ -237,11 +33,11 @@ interactions:
       Content-Type:
       - text/plain; charset=utf-8
       Date:
-      - Wed, 04 Nov 2026 00:33:55 GMT
+      - Sun, 08 Nov 2026 22:24:44 GMT
       NEL:
       - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=DGYyAcaOndTqCkUbVQerdBqxC80PvOiDAboJNABV4e7oQYGA5BRHpMRXBB%2FZdJSwmFEsMxZLfb1ihda5mCzfkQPwHbpJygSqvkP0B2gmkdicos4%2BT1arSoo5oy5B8Zgx8r0xB1VcPiM%3D"}]}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=SfywFumNCKlfJLDBYLsuEaukUtPW%2BXjrF%2BqQ4TWNtrwc3vvBX%2FuaU4cH%2B736dxlWE5nv5iMYWQLB1FOz%2F%2BdzUfzv2Un6MhvWO3gudNp7h10Hnnq023Sr7dN%2FFSwHi70HPUJFjOo%2BipQ%3D"}]}'
       Server:
       - cloudflare
       Speculation-Rules:
@@ -251,73 +47,13 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       X-Kong-Request-Id:
-      - 635a0e0afd902f3ce1dc2644c5c16b37
-      X-Kong-Response-Latency:
-      - '0'
-      X-OS-Rule:
-      - moviehash-invalid
-      cf-cache-status:
-      - MISS
-    status:
-      code: 400
-      message: Bad Request
-- request:
-    body: null
-    headers:
-      Accept:
-      - '*/*'
-      Api-Key:
-      - mij33pjc3kOlup1qOKxnWWxvle2kFbMH
-      Content-Type:
-      - application/json
-      User-Agent:
-      - Subliminal v2.8
-    method: GET
-    uri: https://api.opensubtitles.com/api/v1/subtitles?languages=en&moviehash=123456787654321&page=1
-  response:
-    body:
-      string: 'Request parameters do not make sense: moviehash must be 16 hex characters'
-    headers:
-      Access-Control-Allow-Origin:
-      - '*'
-      Access-Control-Expose-Headers:
-      - X-Auth-Token
-      Age:
-      - '85690'
-      Alt-Svc:
-      - h3=":443"; ma=86400
-      CF-RAY:
-      - a54f9fbc6da9f53d-LIS
-      Cache-Control:
-      - public, max-age=86400
-      Connection:
-      - keep-alive
-      Content-Length:
-      - '73'
-      Content-Type:
-      - text/plain; charset=utf-8
-      Date:
-      - Wed, 04 Nov 2026 00:50:20 GMT
-      NEL:
-      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
-      Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=V%2BjLQ%2F6Mx%2BakgNtdAFrihtcWgooneVB0bnqsSwUChaqrwKQu0cQVm%2FCOyzSuHvNi%2FdFU7Nk7RG1wR1cYQNEgCrYMPBkNqEgY0R4UILC%2BI%2F5%2F0vLRryh71X0I6J58XT8ycWjVPzT1P50%3D"}]}'
-      Server:
-      - cloudflare
-      Speculation-Rules:
-      - '"/cdn-cgi/speculation"'
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubDomains; preload
-      X-Content-Type-Options:
-      - nosniff
-      X-Kong-Request-Id:
-      - f36902029cc69e50f7eb3d657c6ac428
+      - d064431155cf14654f551261abebe63c
       X-Kong-Response-Latency:
       - '1'
       X-OS-Rule:
       - moviehash-invalid
       cf-cache-status:
-      - HIT
+      - EXPIRED
     status:
       code: 400
       message: Bad Request

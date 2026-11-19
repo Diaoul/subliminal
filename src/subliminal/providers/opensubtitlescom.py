@@ -68,6 +68,7 @@ TOKEN_CACHE_KEY = 'oscom_token'  # noqa: S105
 # fmt: off
 opensubtitlescom_languages = {
     Language('por', 'BR'),
+    Language('por', 'PT'),
     Language('srp', 'ME'),
     Language('zho', 'TW'),
     Language('zho', 'US'),

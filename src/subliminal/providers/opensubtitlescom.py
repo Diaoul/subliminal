@@ -70,6 +70,7 @@ opensubtitlescom_languages = {
     Language('por', 'BR'),
     Language('por', 'PT'),
     Language('srp', 'ME'),
+    Language('zho', 'CN'),
     Language('zho', 'TW'),
     Language('zho', 'US'),
 } | {
